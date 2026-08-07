@@ -79,3 +79,29 @@ export interface TranscriptEntry {
   /** Editions that have a compiled PDF. */
   pdf: Edition[];
 }
+
+/**
+ * An existing edition of part of the fonds, by the mathematical community.
+ *
+ * This is the one place in the project where our data makes a claim the
+ * archive does not. Montpellier's inventory numbers folders; the editions
+ * name works — and the two vocabularies were never reconciled by anyone. None
+ * of the editors publishes a shelfmark. So the `cotes` field is *our*
+ * correspondence, and `mapping` says how far to trust it. Presenting a guess
+ * as a fact here would be worse than saying nothing: someone would cite it.
+ */
+export interface PublishedEdition {
+  id: string;
+  title: string;
+  editors: string;
+  year: string;
+  venue: string;
+  url: string;
+  /** `published` in print · `transcribed` into LaTeX · `partial` coverage. */
+  kind: 'published' | 'transcribed' | 'partial';
+  /** Folders this edition covers, as far as we can establish. */
+  cotes: string[];
+  /** How far the shelfmark correspondence can be trusted. */
+  mapping: 'certain' | 'likely' | 'unmapped';
+  note: string;
+}

@@ -1,8 +1,34 @@
 import { useMemo, useState } from 'react';
 import { Footer, Header } from './components/Frame.tsx';
 import { BOOKS } from './content/books.ts';
+import editionsRaw from './content/editions.json';
 import { COTES, GROUPS } from './content/catalogue.ts';
 import { BATCH_SIZE, batchCount, sourceUrl } from './lib/batches.ts';
+import type { PublishedEdition } from './lib/types.ts';
+
+const EDITIONS = editionsRaw as PublishedEdition[];
+
+/**
+ * Which folders already have an edition, and which edition.
+ *
+ * Built once rather than searched per row: the archive page renders 178 rows,
+ * and a linear scan inside each would be 178 × 9 comparisons for a lookup that
+ * never changes.
+ */
+const EDITION_BY_COTE = new Map<string, PublishedEdition>();
+for (const e of EDITIONS) for (const c of e.cotes) EDITION_BY_COTE.set(c, e);
+
+const KIND_STYLE: Record<PublishedEdition['kind'], string> = {
+  published: 'bg-relu-100 text-relu-700 border-relu-200',
+  transcribed: 'bg-brand-100 text-brand-700 border-brand-200',
+  partial: 'bg-encours-100 text-encours-700 border-encours-200',
+};
+
+const KIND_LABEL: Record<PublishedEdition['kind'], string> = {
+  published: 'published',
+  transcribed: 'transcribed',
+  partial: 'partly edited',
+};
 
 /**
  * The whole fonds, in Grothendieck's own filing order.
@@ -76,8 +102,18 @@ export function ArchivePage() {
               {g.cotes.map((id) => {
                 const c = COTES.find((x) => x.id === id)!;
                 const belongs = inBook.get(id);
+                const edition = EDITION_BY_COTE.get(id);
                 return (
-                  <li key={id} className="flex flex-wrap items-baseline gap-x-3 gap-y-1 px-4 py-2.5">
+                  <li
+                    key={id}
+                    /* A folder that already has an edition is marked on the
+                       row itself, not only in a badge: someone scanning 178
+                       rows for "what is left to do" needs the answer in
+                       peripheral vision, without reading a word. */
+                    className={`flex flex-wrap items-baseline gap-x-3 gap-y-1 py-2.5 pr-4 ${
+                      edition ? 'border-l-[3px] border-l-relu-500 bg-relu-50/40 pl-[13px]' : 'pl-4'
+                    }`}
+                  >
                     <span className="tabular w-24 shrink-0 text-[12px] font-semibold text-ink-700">
                       n° {c.id}
                     </span>
@@ -87,6 +123,20 @@ export function ArchivePage() {
                         <span className="ml-2 rounded-full bg-brand-50 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-brand-700">
                           {belongs}
                         </span>
+                      )}
+                      {edition && (
+                        <a
+                          href={edition.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          title={`${edition.title} — ${edition.editors}, ${edition.year}. ${edition.note}`}
+                          className={`ml-2 inline-block rounded-full border px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide transition hover:brightness-95 ${KIND_STYLE[edition.kind]}`}
+                        >
+                          {KIND_LABEL[edition.kind]} ↗
+                          {edition.mapping === 'likely' && (
+                            <span title="shelfmark correspondence is ours, not the editors'"> ?</span>
+                          )}
+                        </a>
                       )}
                     </span>
                     <span className="tabular shrink-0 text-[12px] text-ink-500">
@@ -115,6 +165,8 @@ export function ArchivePage() {
           <p className="mt-10 text-[14px] text-ink-500">Nothing matches “{query}”.</p>
         )}
 
+        <ExistingEditions />
+
         <section className="card mt-12 max-w-[52em] px-5 py-4">
           <h2 className="titre text-[17px] text-ink-900">Mirroring anything here</h2>
           <p className="mt-2 text-[13.5px] leading-relaxed text-ink-600">
@@ -129,5 +181,116 @@ export function ArchivePage() {
 
       <Footer />
     </>
+  );
+}
+
+/**
+ * What the mathematical community has already edited.
+ *
+ * Worth its own section for a practical reason: the most useful thing to know
+ * before transcribing a folder is whether someone has already done it, and
+ * done it better. Two thousand pages of Dérivateurs were transcribed into
+ * LaTeX by Matthias Künzer; redoing that by machine would be a waste of
+ * everyone's time, and the transcription here should defer to it.
+ *
+ * The awkward part is stated rather than smoothed over. Montpellier numbers
+ * folders, the editions name works, and nobody has reconciled the two — not
+ * one of these editors publishes a shelfmark. So the folder correspondence is
+ * ours, and each entry says how far it can be trusted. Where it cannot be
+ * established at all, the entry says that too instead of guessing, because a
+ * guess here is exactly the kind of thing that gets cited later as fact.
+ */
+function ExistingEditions() {
+  const mapped = EDITIONS.filter((e) => e.cotes.length > 0);
+  const unmapped = EDITIONS.filter((e) => e.cotes.length === 0);
+
+  return (
+    <section className="mt-14">
+      <h2 className="titre text-[24px] text-ink-900">Already edited</h2>
+      <p className="mt-2 max-w-[48em] text-[14px] leading-relaxed text-ink-600">
+        Parts of the fonds have been transcribed or published by mathematicians, in some cases at
+        enormous length. Those folders are marked in the list above with a green rule. Before
+        transcribing anything, look here first — where a scholarly edition exists it is better
+        than anything produced here, and should be used instead.
+      </p>
+
+      <ul className="mt-6 space-y-3">
+        {mapped.map((e) => (
+          <li key={e.id} className="card border-l-4 border-l-relu-500 px-5 py-4">
+            <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+              <h3 className="titre text-[17px] text-ink-900">
+                <a
+                  href={e.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline decoration-ink-300 underline-offset-2 hover:text-brand-700 hover:decoration-brand-400"
+                >
+                  {e.title} ↗
+                </a>
+              </h3>
+              <span
+                className={`rounded-full border px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide ${KIND_STYLE[e.kind]}`}
+              >
+                {KIND_LABEL[e.kind]}
+              </span>
+              <span className="tabular ml-auto text-[12px] text-ink-500">
+                folders {e.cotes.join(', ')}
+                {e.mapping === 'likely' && (
+                  <span className="ml-1 text-encours-700" title="Correspondence established by us, not by the editors">
+                    (our reading)
+                  </span>
+                )}
+              </span>
+            </div>
+            <p className="mt-1 text-[13px] text-ink-600">
+              {e.editors} · {e.year} · <span className="italic">{e.venue}</span>
+            </p>
+            <p className="mt-2 max-w-[46em] text-[13px] leading-relaxed text-ink-500">{e.note}</p>
+          </li>
+        ))}
+      </ul>
+
+      <h3 className="titre mt-8 text-[17px] text-ink-900">Editions we cannot place</h3>
+      <p className="mt-1.5 max-w-[48em] text-[13.5px] leading-relaxed text-ink-600">
+        These exist, and relate to material in the fonds, but no source gives a shelfmark and the
+        titles are not close enough to guess from. Listed so that nobody transcribes a folder
+        these already cover without knowing they might.
+      </p>
+      <ul className="mt-3 space-y-2">
+        {unmapped.map((e) => (
+          <li key={e.id} className="card border-l-4 border-l-ink-300 px-5 py-3">
+            <a
+              href={e.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[14px] font-medium text-ink-900 underline decoration-ink-300 underline-offset-2 hover:text-brand-700"
+            >
+              {e.title} ↗
+            </a>
+            <p className="mt-0.5 text-[12.5px] text-ink-500">
+              {e.editors}
+              {e.year !== '—' && ` · ${e.year}`} · <span className="italic">{e.venue}</span>
+            </p>
+            <p className="mt-1.5 max-w-[46em] text-[12.5px] leading-relaxed text-ink-500">{e.note}</p>
+          </li>
+        ))}
+      </ul>
+
+      <p className="mt-6 max-w-[48em] text-[12.5px] leading-relaxed text-ink-400">
+        Compiled from the{' '}
+        <a href="https://csg.igrothendieck.org/transcriptions/" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-brand-600">
+          Centre for Grothendieckian Studies transcription list
+        </a>
+        , the{' '}
+        <a href="https://webusers.imj-prg.fr/~leila.schneps/grothendieckcircle/unpubtexts.php" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-brand-600">
+          Grothendieck Circle
+        </a>{' '}
+        and{' '}
+        <a href="https://webusers.imj-prg.fr/~georges.maltsiniotis/ps.html" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-brand-600">
+          Georges Maltsiniotis' pages
+        </a>
+        . Almost certainly incomplete, and not a substitute for asking the editors.
+      </p>
+    </section>
   );
 }
