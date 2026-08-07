@@ -1,0 +1,116 @@
+@import 'tailwindcss';
+
+@theme {
+  /* Bleu d'encre : la couleur du stylo, pas celle du papier. Rampe complète —
+     une nuance utilisée mais non définie n'engendre rien, et l'élément
+     hériterait en silence. */
+  --color-brand-50: #f1f4fb;
+  --color-brand-100: #dfe6f6;
+  --color-brand-200: #c1cfee;
+  --color-brand-300: #97afe1;
+  --color-brand-400: #6b8ad0;
+  --color-brand-500: #4a6bbd;
+  --color-brand-600: #38539d;
+  --color-brand-700: #2e447f;
+  --color-brand-800: #283a68;
+  --color-brand-900: #223154;
+
+  /* Gris chauds du papier d'archive, un peu plus jaunes que ceux d'un examen :
+     les feuillets numérisés le sont en couleur, et le site les encadre. */
+  --color-ink-50: #f8f7f3;
+  --color-ink-100: #f1efe8;
+  --color-ink-200: #e4e0d5;
+  --color-ink-300: #cbc5b5;
+  --color-ink-400: #9d9787;
+  --color-ink-500: #726d5f;
+  --color-ink-600: #575348;
+  --color-ink-700: #413e36;
+  --color-ink-800: #2a2823;
+  --color-ink-900: #131210;
+
+  /* Crayon rouge de l'archiviste : ce qui alerte, jamais ce qui décore.
+     600 et 700 passent 4,5:1 sur blanc comme sur alerte-50. */
+  --color-alerte-50: #fdf4f1;
+  --color-alerte-100: #fbe3db;
+  --color-alerte-200: #f5cabd;
+  --color-alerte-500: #d9532f;
+  --color-alerte-600: #b53d1d;
+  --color-alerte-700: #8e2f16;
+
+  /* Vert de relecture : un lot confronté au fac-similé, page à page. */
+  --color-relu-50: #eef9f3;
+  --color-relu-100: #d4f0e1;
+  --color-relu-200: #a7e0c3;
+  --color-relu-500: #1ba86f;
+  --color-relu-600: #128557;
+  --color-relu-700: #0e6744;
+
+  /* Ambre du travail en cours : plus doux que l'alerte, pour qu'un œil qui
+     balaie la page ne prenne pas un lot en cours pour un problème. */
+  --color-encours-50: #fdf8ec;
+  --color-encours-100: #f9eecc;
+  --color-encours-200: #f1dc9f;
+  --color-encours-500: #c9900c;
+  --color-encours-600: #9c6d06;
+  --color-encours-700: #77530a;
+
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  /* Les titres restent en serif : le fonds est un ensemble de documents
+     écrits, et le site en est la table des matières. Pile système, aucune
+     police à télécharger. */
+  --font-serif: 'Iowan Old Style', 'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif;
+  --font-mono: 'SF Mono', ui-monospace, Menlo, Consolas, monospace;
+
+  --radius-card: 0.875rem;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-ink-50 text-ink-900 font-sans antialiased;
+  }
+
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@layer components {
+  .card {
+    @apply rounded-[var(--radius-card)] border border-ink-200 bg-white;
+    box-shadow:
+      0 1px 2px rgb(19 18 16 / 0.04),
+      0 8px 24px -14px rgb(19 18 16 / 0.14);
+  }
+
+  .titre {
+    @apply font-serif font-semibold tracking-tight;
+  }
+
+  /* Corps de texte des pages rédigées. 44 em est la longueur de ligne qui
+     reste confortable en lecture suivie — et ces pages se lisent vraiment. */
+  .prose-fonds p,
+  .prose-fonds ul,
+  .prose-fonds ol {
+    @apply mb-3.5 max-w-[44em] leading-relaxed text-ink-700;
+  }
+
+  .prose-fonds li {
+    @apply mb-1.5 ml-5 list-disc;
+  }
+
+  .prose-fonds strong {
+    @apply font-semibold text-ink-900;
+  }
+
+  .prose-fonds h3 {
+    @apply mb-2 mt-7 font-serif text-[19px] font-semibold tracking-tight text-ink-900;
+  }
+
+  .prose-fonds code {
+    @apply rounded border border-ink-200 bg-ink-50 px-1 py-0.5 font-mono text-[0.86em] text-ink-800;
+  }
+}

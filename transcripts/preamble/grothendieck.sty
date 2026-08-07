@@ -1,0 +1,116 @@
+% Le préambule commun à toutes les transcriptions du fonds Grothendieck.
+%
+% Il tient en une idée : **l'incertitude se compose, elle ne se résout pas.**
+% Une transcription qui lisse un mot douteux a détruit la seule chose pour
+% laquelle on la faisait — un lecteur doit pouvoir savoir, à chaque endroit,
+% ce qui était sur le feuillet et ce qui a été ajouté. Les six macros qui
+% suivent sont donc l'appareil critique, et non de la décoration.
+%
+% Les mêmes commandes sont reconnues par `scripts/render.mjs`, qui produit la
+% vue de lecture du site. Une macro ajoutée ici doit l'être aussi là-bas,
+% faute de quoi le rendu échouera bruyamment — ce qui est voulu : un rendu
+% silencieusement faux est pire qu'un rendu absent.
+
+\ProvidesPackage{grothendieck}[2026/08/08 Transcriptions du fonds Grothendieck]
+
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathrsfs}
+\usepackage{stmaryrd}
+% Les diagrammes commutatifs sont partout dans ce fonds : c'est la langue
+% même de la géométrie algébrique de Grothendieck, et une transcription qui
+% les rendrait en prose ne transcrirait rien.
+\usepackage{tikz-cd}
+\usepackage[french]{babel}
+\usepackage{fontspec}
+\usepackage{geometry}
+\geometry{a4paper,margin=25mm,marginparwidth=28mm}
+\usepackage{marginnote}
+\usepackage{xcolor}
+% ulem, not soul. `soul`'s \st and \ul are built on a character-by-character
+% scan that XeLaTeX's font machinery breaks: the document fails with an
+% undefined control sequence rather than degrading. ulem does the same two jobs
+% and is Unicode-engine safe. `normalem` stops it hijacking \emph, which the
+% transcriptions use for Grothendieck's own emphasis.
+\usepackage[normalem]{ulem}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=black,urlcolor=black,pdfborder={0 0 0}}
+
+% --- Métadonnées du lot -----------------------------------------------------
+% Reprises telles quelles par le script de rendu, qui les affiche en tête de
+% la vue de lecture. Elles fixent ce que le fichier prétend couvrir : sans
+% elles, une transcription flotte sans point d'attache dans un fonds de seize
+% mille feuillets.
+
+\newcommand{\folder}[1]{\gdef\grothFolder{#1}}
+\newcommand{\batch}[1]{\gdef\grothBatch{#1}}
+\newcommand{\leaves}[2]{\gdef\grothFirst{#1}\gdef\grothLast{#2}}
+\newcommand{\foldertitle}[1]{\gdef\grothFoldertitle{#1}}
+\gdef\grothFolder{?}\gdef\grothBatch{?}\gdef\grothFirst{?}\gdef\grothLast{?}\gdef\grothFoldertitle{}
+
+% --- Le résumé, en tête de document -----------------------------------------
+%
+% Il ouvre le document plutôt que de vivre à part, et ce n'est pas une
+% commodité de mise en page. Ces feuillets sont des notes de travail : personne
+% n'y entre de plain-pied, pas même un mathématicien qui n'est pas du domaine.
+% Un lecteur qui tombe sur la page 213 de la Longue Marche sans savoir ce qu'on
+% y cherche ne lit pas plus lentement — il ne lit pas du tout.
+%
+% Le résumé est donc la première chose de la page, et il est écrit pour
+% quelqu'un qui sort d'une licence : il dit de quoi il s'agit, quel problème se
+% pose, quelle idée arrive, et où cela mène. Il est en anglais simple, y
+% compris dans la transcription française, parce qu'il ne fait pas partie du
+% texte de Grothendieck et ne doit pas pouvoir être confondu avec lui.
+
+\newenvironment{summary}
+  {\begin{center}\begin{minipage}{0.88\textwidth}%
+   \small\setlength{\parskip}{0.5em}%
+   \noindent\textbf{\textsf{Before you read this}}\par\vspace{0.3em}%
+   \color{black!78}}
+  {\end{minipage}\end{center}\vspace{1.2em}\hrule\vspace{1.6em}}
+
+% --- L'appareil critique ----------------------------------------------------
+
+% Le numéro de feuillet, en marge. C'est l'ancre qui permet de régler un
+% désaccord sur une formule en regardant *un* feuillet plutôt qu'une chemise
+% de six cents. Le site s'en sert aussi pour tourner les pages du fac-similé
+% quand on fait défiler la transcription.
+\newcommand{\leaf}[1]{%
+  \marginnote{\footnotesize\color{gray!70}\textsf{#1}}%
+  \label{leaf:#1}\ignorespaces}
+
+% Illisible : on ne devine pas. Un mot inventé qui se lit comme les autres est
+% le pire résultat possible.
+\newcommand{\ill}{\textcolor{red!60!black}{[\,\ldots\,]}}
+
+% Lecture douteuse : le mot est donné, et signalé comme incertain.
+\newcommand{\uncertain}[1]{\uline{#1}}
+
+% Ajout de l'éditeur — une lettre manquante, un mot sous-entendu.
+\newcommand{\add}[1]{\textcolor{blue!50!black}{[#1]}}
+
+% Biffé par Grothendieck lui-même. Ce qu'il a rayé fait partie du document :
+% une rature dit souvent où la pensée a changé de direction.
+\newcommand{\struck}[1]{\sout{#1}}
+
+% Note du transcripteur, sur l'état matériel du feuillet.
+\newcommand{\note}[1]{\par\smallskip{\small\color{gray!60!black}\textit{[#1]}}\par\smallskip}
+
+% Note marginale de Grothendieck, distincte du corps du texte.
+\newcommand{\marginal}[1]{\par\smallskip\noindent\hspace{1em}%
+  {\small\color{gray!60!black}#1}\par\smallskip}
+
+% --- Titre ------------------------------------------------------------------
+
+\AtBeginDocument{%
+  \begin{center}
+    {\large\bfseries Fonds Alexandre Grothendieck --- cote n\textsuperscript{o}~\grothFolder}\\[2pt]
+    {\itshape\grothFoldertitle}\\[4pt]
+    {\small feuillets \grothFirst--\grothLast\ (lot \grothBatch)}\\[2pt]
+    {\footnotesize\color{gray!60!black}Transcription établie d'après le fac-similé numérisé
+     par l'Université de Montpellier.\\
+     Les lectures incertaines sont soulignées, les illisibles notées [\,\ldots\,],
+     les ajouts entre crochets.}
+  \end{center}
+  \vspace{1em}}
+
+\endinput
