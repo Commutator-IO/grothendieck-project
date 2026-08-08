@@ -58,6 +58,8 @@ export function HomePage() {
           <Figure value={1991 - 1949} label="years covered" />
         </div>
 
+        <Disclaimer />
+
         <Progress done={done} />
 
         <section className="mt-12">
@@ -210,6 +212,48 @@ export function HomePage() {
 
       <Footer />
     </>
+  );
+}
+
+/**
+ * Who made these documents, said plainly and early.
+ *
+ * High on the page rather than in a footer, because it changes how everything
+ * below it should be read. Someone who takes a transcription for a scholarly
+ * edition will cite it as one, and the way to prevent that is not a
+ * disclaimer nobody scrolls to — it is a sentence before the material.
+ *
+ * It says the model and the year because provenance is the point: in five
+ * years the interesting question about these files will be what produced them,
+ * and a page that only says "AI" will not answer it.
+ */
+function Disclaimer() {
+  return (
+    <section className="mt-8 max-w-[52em] rounded-[var(--radius-card)] border border-encours-200 bg-encours-50 px-5 py-4">
+      <p className="text-[11px] font-bold uppercase tracking-[0.1em] text-encours-700">
+        How these documents were made
+      </p>
+      <p className="mt-2 text-[13.5px] leading-relaxed text-ink-700">
+        The transcriptions and modernised readings on this site were produced by{' '}
+        <strong className="font-semibold text-ink-900">Claude Fable 5</strong>, in 2026, one
+        twenty-leaf batch at a time. Each file records the model and the date of its pass in its
+        own header.
+      </p>
+      <p className="mt-2 text-[13.5px] leading-relaxed text-ink-700">
+        <strong className="font-semibold text-ink-900">None of it is a scholarly edition, and
+        none of it has been verified by a person</strong> unless the batch says so. A machine pass
+        over seventy-year-old handwriting produces a reading — checkable against the facsimile on
+        the same screen, which is its whole value and its whole claim. Where an established
+        edition exists, it is marked on{' '}
+        <a
+          href="/archive/"
+          className="font-medium text-brand-600 underline decoration-brand-200 underline-offset-2 hover:text-brand-700"
+        >
+          the archive page
+        </a>{' '}
+        and should be used instead of anything here.
+      </p>
+    </section>
   );
 }
 

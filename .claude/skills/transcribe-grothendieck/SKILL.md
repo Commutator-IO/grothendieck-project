@@ -1,9 +1,21 @@
 ---
 name: transcribe-grothendieck
 description: Transcribes a batch of twenty handwritten leaves from the Alexandre Grothendieck fonds (University of Montpellier) into clean, mathematics-focused LaTeX with a critical apparatus — what was read, what was guessed, what is illegible. Use whenever someone asks to transcribe, decipher, read or put into LaTeX any pages of Grothendieck's manuscripts, or names a folder, a batch, or one of the notebooks (topos, motifs, Longue Marche, cahiers tardifs). Transcription only — the modernised reading has its own skill, /modernize-grothendieck, which runs on the transcription this one produces. Also covers revisions: correcting a reading, filling a skipped leaf.
+model: claude-fable-5
 ---
 
 # Transcribing a batch from the Grothendieck fonds
+
+
+**Runs on Fable 5.** The frontmatter pins it, so invoking this skill switches
+the model for the turn whatever the session was set to.
+
+Reading seventy-year-old handwriting off fourteen page images at once is
+the task this whole project turns on, and it is a sustained-visual-attention
+task before it is a mathematical one. The pass is pinned to Fable 5 so that a
+transcription's provenance is a fact about the file rather than a fact about
+whichever model happened to be selected — every batch header records the model,
+and they should all record the same one.
 
 ## What this produces
 

@@ -1,9 +1,20 @@
 ---
 name: modernize-grothendieck
 description: Produces the modernised reading of an already-transcribed batch of the Grothendieck fonds — a summary (« Résumé ») that orients a reader new to the subject, then the mathematics in current notation and current names, in French, mathematically correct as it stands, with footnotes carrying everything the transcription's critical apparatus carried. Use when someone asks to modernise, clean up, reinterpret, restate, summarise or explain a transcribed batch ("modernize folder 115", "give the modern reading", "explain this batch"), or after /transcribe-grothendieck has produced a batch-NN.fr.tex. Also covers revisions - tightening a statement, correcting a variance, rewriting a summary that assumes too much.
+model: claude-fable-5
 ---
 
 # The modernised reading of a batch
+
+
+**Runs on Fable 5.** The frontmatter pins it, so invoking this skill switches
+the model for the turn whatever the session was set to.
+
+The standard this edition is held to — correct as it stands, with the four
+failure modes checked — is a reasoning standard, and it was calibrated against
+Fable 5 on folder 115. Pinning the model keeps that calibration meaningful: a
+reading produced under a different model is not comparable to the ones already
+in the repository, and the header would say so only after the fact.
 
 ## What this produces
 
