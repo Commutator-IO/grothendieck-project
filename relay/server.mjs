@@ -61,6 +61,10 @@ const ALLOWED_ORIGINS = (process.env.ALLOWED_ORIGINS ?? 'https://grothendieck.co
 /** Only a shelfmark, and only as `<id>.pdf` — never a path, never another host. */
 const PATH = /^\/source\/([\w-]+)\.pdf$/;
 
+/** How the relay identifies itself to Montpellier. See the request below. */
+const RELAY_UA =
+  'grothendieck.commutator.io facsimile relay (+https://grothendieck.commutator.io/method/)';
+
 const server = createServer((req, res) => {
   const url = new URL(req.url ?? '/', 'http://localhost');
 
@@ -95,9 +99,23 @@ const server = createServer((req, res) => {
     {
       method: req.method,
       rejectUnauthorized: false,
-      // Only the range travels onward. Nothing identifying the reader — no
-      // cookies, no user agent, no referer — reaches Montpellier.
-      headers: req.headers.range ? { Range: req.headers.range } : {},
+      /**
+       * Nothing identifying the *reader* travels onward — no cookies, no
+       * referer, and the reader's own user agent is dropped. Only the range
+       * they asked for.
+       *
+       * But the relay names *itself*. Without this, Montpellier's logs show
+       * requests with no user agent at all, which is what a scraper looks
+       * like — the worst possible impression for something whose whole
+       * defence is that it stores nothing and would rather not exist. An
+       * archivist reading those logs can now see what the traffic is and
+       * where to complain, and the URL leads to the page explaining why a
+       * relay is needed and what would let us delete it.
+       */
+      headers: {
+        'User-Agent': RELAY_UA,
+        ...(req.headers.range ? { Range: req.headers.range } : {}),
+      },
     },
     (up) => {
       const headers = {

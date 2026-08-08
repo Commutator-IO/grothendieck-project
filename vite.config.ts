@@ -61,7 +61,14 @@ function montpellierSource(): Plugin {
       url,
       {
         rejectUnauthorized: false,
-        headers: req.headers.range ? { Range: req.headers.range } : {},
+        // Named, for the same reason the deployed relay is: a request with no
+        // user agent looks like a scraper in Montpellier's logs. The reader's
+        // own headers still do not travel — only the range.
+        headers: {
+          'User-Agent':
+            'grothendieck.commutator.io facsimile relay, dev (+https://grothendieck.commutator.io/method/)',
+          ...(req.headers.range ? { Range: req.headers.range } : {}),
+        },
       },
       (r) => {
         res.statusCode = r.statusCode ?? 502
