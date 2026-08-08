@@ -17,7 +17,7 @@ One further edition derives from it, with its own skill, run afterwards:
 
 | Skill | Produces |
 |---|---|
-| `/modernize-grothendieck` | `batch-NN.modern.tex` — an introduction, then the mathematics in current notation; French |
+| `/modernize-grothendieck` | `batch-NN.modern.tex` — a summary, then the mathematics in current notation; French |
 
 `npm run render` turns each into the reading view the site's left pane shows;
 `npm run pdf` compiles the PDFs the download buttons offer. The site has a tab

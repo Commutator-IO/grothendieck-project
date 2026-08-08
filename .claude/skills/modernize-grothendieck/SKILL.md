@@ -1,6 +1,6 @@
 ---
 name: modernize-grothendieck
-description: Produces the modernised reading of an already-transcribed batch of the Grothendieck fonds — an introduction that orients a reader new to the subject, then the mathematics in current notation and current names, in French, mathematically correct as it stands, with footnotes carrying everything the transcription's critical apparatus carried. Use when someone asks to modernise, clean up, reinterpret, restate, summarise or explain a transcribed batch ("modernize folder 115", "give the modern reading", "explain this batch"), or after /transcribe-grothendieck has produced a batch-NN.fr.tex. Also covers revisions - tightening a statement, correcting a variance, rewriting an introduction that assumes too much.
+description: Produces the modernised reading of an already-transcribed batch of the Grothendieck fonds — a summary (« Résumé ») that orients a reader new to the subject, then the mathematics in current notation and current names, in French, mathematically correct as it stands, with footnotes carrying everything the transcription's critical apparatus carried. Use when someone asks to modernise, clean up, reinterpret, restate, summarise or explain a transcribed batch ("modernize folder 115", "give the modern reading", "explain this batch"), or after /transcribe-grothendieck has produced a batch-NN.fr.tex. Also covers revisions - tightening a statement, correcting a variance, rewriting a summary that assumes too much.
 ---
 
 # The modernised reading of a batch
@@ -11,7 +11,7 @@ For a batch already transcribed by `/transcribe-grothendieck`:
 
 | File | Contents |
 |---|---|
-| `transcripts/<folder>/batch-NN.modern.tex` | An introduction, then the mathematics in today's notation and names — **in French**, like the leaves |
+| `transcripts/<folder>/batch-NN.modern.tex` | A summary, then the mathematics in today's notation and names — **in French**, like the leaves |
 
 It is an **interpretation, not a transcription**: it reorganises by argument,
 states what the manuscript leaves implicit, and reads continuously, the way a
@@ -24,11 +24,12 @@ transcription is the record. Anyone citing Grothendieck cites
 diverge, and nothing would say which is right. If there is no transcription,
 stop and say so — do not transcribe on the way through.
 
-## The introduction
+## The summary
 
-The document opens with one, before any mathematics, and it is the only part
-of the project written for someone who has not met the subject. One page,
-perhaps two. Its job is orientation, and it answers four questions in order:
+The document opens with one — `\section*{Résumé}`, before any mathematics —
+and it is the only part of the project written for someone who has not met the
+subject. One page, perhaps two. Its job is orientation, and it answers four
+questions in order:
 
 1. **De quoi ces feuillets parlent-ils**, en une phrase sans jargon ?
 2. **Quel problème** est attaqué, et pourquoi se pose-t-il ?
@@ -36,7 +37,7 @@ perhaps two. Its job is orientation, and it answers four questions in order:
    rigueur ?
 4. **Où cela mène-t-il**, et quels noms modernes chercher ensuite ?
 
-The analogy is the main instrument. Folder 115's introduction carries the
+The analogy is the main instrument. Folder 115's summary carries the
 whole of Isbell duality on two: shadows cast from the left and from the right,
 and the reflexivity of $V \to V^{**}$ in linear algebra. An analogy does not
 pretend to rigour, and should not be dressed as if it did.
@@ -55,10 +56,10 @@ arrives, what he called the attitude of listening, what understanding is. It
 needs no background at all, and it is why someone who will never do algebraic
 geometry might read these pages.
 
-No apparatus in the introduction, and no footnotes: doubts at the level of
+No apparatus in the summary, and no footnotes: doubts at the level of
 single words belong to the transcription, and anything large enough to matter
 at this altitude goes in the prose (« la datation vient des versos »). The
-introduction carries no `\leaf{}` either.
+summary carries no `\leaf{}` either.
 
 ## The standard: correct as it stands
 
@@ -136,8 +137,8 @@ arrows, and the renderer will faithfully draw whichever you write.
    organise the sections around it, not around the leaf order.
 3. Write the body, holding to the standard above. Every departure from the
    leaf gets a footnote at the point of departure.
-4. Write the introduction **last**, when you know what the batch turned out to
-   be about. Written first it describes what you expected to find.
+4. Write the summary **last**, when you know what the batch turned out to be
+   about. Written first it describes what you expected to find.
 5. `npm run render && npm run pdf && npm run manifest` — the batch becomes
    `AI-reviewed` by itself, from the file's existence; nothing is ticked by
    hand. Then read the
@@ -157,5 +158,5 @@ arrows, and the renderer will faithfully draw whichever you write.
   choice (folder 115's projection indices), choose, and footnote the choice.
 - **Write English.** The leaves are French and so is this.
 - **Name the reader's level.** Write for them; do not address them as a class.
-- **Let the introduction become an abstract.** It orients; it does not
-  compress the body into a paragraph.
+- **Let the summary become an abstract.** It orients; it does not compress
+  the body into a paragraph.

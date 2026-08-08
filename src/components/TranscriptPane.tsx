@@ -29,7 +29,7 @@ export const EDITIONS: { key: Edition; label: string; help: string }[] = [
   {
     key: 'modern',
     label: 'Modernised',
-    help: 'An interpretation in current notation, opening with an introduction to the subject.',
+    help: 'An interpretation in current notation, opening with a summary of the batch.',
   },
 ];
 

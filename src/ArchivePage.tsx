@@ -3,7 +3,7 @@ import { Footer, Header } from './components/Frame.tsx';
 import { BOOKS } from './content/books.ts';
 import editionsRaw from './content/editions.json';
 import { COTES, GROUPS } from './content/catalogue.ts';
-import { BATCH_SIZE, batchCount, sourceUrl } from './lib/batches.ts';
+import { BATCH_SIZE, batchCount, evidence, sourceUrl, useManifest } from './lib/batches.ts';
 import type { PublishedEdition } from './lib/types.ts';
 
 const EDITIONS = editionsRaw as PublishedEdition[];
@@ -44,6 +44,31 @@ const KIND_LABEL: Record<PublishedEdition['kind'], string> = {
  */
 export function ArchivePage() {
   const [query, setQuery] = useState('');
+  const manifest = useManifest();
+
+  /**
+   * How far each folder has been taken, counted from the files.
+   *
+   * The archive page is where one comes to ask "what is left", so the answer
+   * belongs on the row rather than one page away. Same two facts as the
+   * notebook lists, same colours, so the two pages can be read against each
+   * other without translating.
+   */
+  const workOn = useMemo(() => {
+    const m = new Map<string, { transcribed: number; modernised: number; batches: number }>();
+    for (const c of COTES) {
+      const batches = batchCount(c.pages);
+      const ks = Array.from({ length: batches }, (_, i) => i + 1);
+      m.set(c.id, {
+        batches,
+        transcribed: ks.filter((k) => evidence(manifest, c.id, k).transcribed).length,
+        modernised: ks.filter((k) => evidence(manifest, c.id, k).modernised).length,
+      });
+    }
+    return m;
+  }, [manifest]);
+
+  const started = [...workOn.values()].filter((w) => w.transcribed > 0).length;
 
   const inBook = useMemo(() => {
     const m = new Map<string, string>();
@@ -89,6 +114,9 @@ export function ArchivePage() {
           />
           <p className="tabular text-[12.5px] text-ink-500">
             {shown} of {COTES.length} folders
+            {started > 0 && (
+              <span className="text-relu-700"> · {started} begun</span>
+            )}
           </p>
         </div>
 
@@ -103,6 +131,7 @@ export function ArchivePage() {
                 const c = COTES.find((x) => x.id === id)!;
                 const belongs = inBook.get(id);
                 const edition = EDITION_BY_COTE.get(id);
+                const work = workOn.get(id);
                 return (
                   <li
                     key={id}
@@ -122,6 +151,26 @@ export function ArchivePage() {
                       {belongs && (
                         <span className="ml-2 rounded-full bg-brand-50 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-brand-700">
                           {belongs}
+                        </span>
+                      )}
+                      {work && work.transcribed > 0 && (
+                        <span
+                          title={`${work.transcribed} of ${work.batches} batches transcribed`}
+                          className="ml-2 whitespace-nowrap rounded-full bg-relu-100 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-relu-700"
+                        >
+                          {work.transcribed === work.batches
+                            ? 'transcribed'
+                            : `${work.transcribed}/${work.batches} transcribed`}
+                        </span>
+                      )}
+                      {work && work.modernised > 0 && (
+                        <span
+                          title={`${work.modernised} of ${work.batches} batches modernised — read again by machine, not by a person`}
+                          className="ml-1.5 whitespace-nowrap rounded-full bg-brand-100 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-brand-700"
+                        >
+                          {work.modernised === work.batches
+                            ? 'modernised'
+                            : `${work.modernised}/${work.batches} modernised`}
                         </span>
                       )}
                       {edition && (

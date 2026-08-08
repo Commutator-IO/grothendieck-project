@@ -104,7 +104,7 @@ export function MethodPage() {
               Each batch yields a <strong>transcription</strong> — Grothendieck wrote in French,
               and it stays in his language, his notation and his paragraphing — and then a{' '}
               <strong>modernised reading</strong>, the same mathematics in current notation,
-              opening with an introduction for someone who has not met the subject. Both in
+              opening with a summary for someone who has not met the subject. Both in
               French: the notions were thought in that language, and an English translation was
               one more artifact to keep in step for no gain the other two did not give.
             </p>
@@ -596,7 +596,7 @@ function Pipeline() {
             batch-NN.modern.tex
           </text>
           <text x="710" y="84" textAnchor="middle" fontSize="10.5" fill="#726d5f">
-            introduction, then the
+            summary, then the
           </text>
           <text x="710" y="97" textAnchor="middle" fontSize="10.5" fill="#726d5f">
             mathematics modernised

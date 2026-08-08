@@ -69,7 +69,7 @@ export type BookKey = 'topos' | 'motives' | 'long-march' | 'late' | 'scattered';
  *
  * Two, and the order is the order of distance from the leaf: the
  * transcription is what is on the paper; `modern` is a reading of it in
- * today's mathematics, opening with an introduction that orients someone who
+ * today's mathematics, opening with a summary that orients someone who
  * has not met the subject.
  *
  * Both are in French. Grothendieck wrote in French and the notions were

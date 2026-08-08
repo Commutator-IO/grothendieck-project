@@ -141,8 +141,8 @@ export function HomePage() {
             </p>
             <p>
               The <strong>modernised reading</strong> is the same mathematics in current notation
-              and current names, opening with an introduction that orients someone who has not met
-              the subject. It is the one document allowed to depart from the leaf, and is held to
+              and current names, opening with a summary that orients someone who has not met the
+              subject. It is the one document allowed to depart from the leaf, and is held to
               being correct as it stands: where the manuscript is loose it says what is true, and
               a footnote says what the leaf has.
             </p>
