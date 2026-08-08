@@ -167,10 +167,18 @@ In priority order:
 4. **Uncertainty is marked, not resolved.** An invented word that reads like the
    others is the worst possible outcome: nothing on the page distinguishes it
    from a sure reading. `\ill{}` and `\uncertain{}` exist so that never happens.
-5. **The language stays his.** He writes in French, with his turns of phrase,
-   his punctuation, his long sentences. Do not modernise, do not correct
-   spelling, do not break up his sentences. An obvious slip stays and is
-   flagged: `\uncertain{catégorei}\note{sic}`.
+5. **The language stays his — and so does yours.** He writes in French, with
+   his turns of phrase, his punctuation, his long sentences. Do not modernise,
+   do not correct spelling, do not break up his sentences. An obvious slip
+   stays and is flagged: `\uncertain{catégorei}\note{sic}`.
+
+   **The transcriber's own prose is French too**, not only his: `\note{}` and
+   `\marginal{}` are part of the edition a French reader reads straight
+   through, and an English note in the middle of a French transcription is a
+   seam in the one document that must not have one. This holds whatever
+   language the pass is being run in or discussed in. The whole file is
+   French; only the file's header comment, which is addressed to whoever
+   maintains the repository, is English.
 6. **What he struck out stays**, as `\struck{}`. A deletion often shows where
    the thought changed direction.
 

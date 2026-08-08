@@ -16,7 +16,10 @@ import { batchName } from './batches.ts';
  * title and body: the shelfmark, the batch and the edition are exactly what
  * one forgets to include, and exactly what makes a report actionable.
  */
-const REPO = 'https://github.com/Commutator-IO/grothendieck-project';
+export const REPO = 'https://github.com/Commutator-IO/grothendieck-project';
+
+/** Raw file host for the same repository, for downloading a skill directly. */
+export const RAW = 'https://raw.githubusercontent.com/Commutator-IO/grothendieck-project/main';
 
 export interface ReportContext {
   cote: string;

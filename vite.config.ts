@@ -116,6 +116,7 @@ export default defineConfig({
         notesDispersees: resolve(import.meta.dirname, 'notes-dispersees/index.html'),
         archive: resolve(import.meta.dirname, 'archive/index.html'),
         method: resolve(import.meta.dirname, 'method/index.html'),
+        contribute: resolve(import.meta.dirname, 'contribute/index.html'),
       },
     },
   },

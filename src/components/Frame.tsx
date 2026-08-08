@@ -12,6 +12,7 @@ import { BOOKS } from '../content/books.ts';
 const OTHER_PAGES: { path: string; label: string }[] = [
   { path: '/archive/', label: 'Whole fonds' },
   { path: '/method/', label: 'Method & progress' },
+  { path: '/contribute/', label: 'Contribute' },
 ];
 
 function isCurrent(path: string, here: string): boolean {

@@ -122,10 +122,30 @@ export function ArchivePage() {
           <p className="tabular text-[12.5px] text-ink-500">
             {shown} of {COTES.length} folders
             {started > 0 && (
-              <span className="text-relu-700"> · {started} begun</span>
+              <span className="text-brand-700"> · {started} begun</span>
             )}
           </p>
         </div>
+
+        {/* Two washes on the rows below, and neither is guessable from the
+            colour alone — so they are named once, here, rather than left to
+            a tooltip nobody hovers. */}
+        <ul className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-1.5 text-[12px] text-ink-500">
+          <li className="flex items-center gap-1.5">
+            <span
+              aria-hidden="true"
+              className="inline-block h-3.5 w-6 rounded-sm border-l-[3px] border-l-brand-400 bg-brand-50"
+            />
+            transcribed here
+          </li>
+          <li className="flex items-center gap-1.5">
+            <span
+              aria-hidden="true"
+              className="inline-block h-3.5 w-6 rounded-sm border-l-[3px] border-l-relu-500 bg-relu-50"
+            />
+            edited by the mathematical community
+          </li>
+        </ul>
 
         {visible.map((g) => (
           <section key={g.id} className="mt-9">
@@ -139,16 +159,24 @@ export function ArchivePage() {
                 const belongs = inBook.get(id);
                 const edition = EDITION_BY_COTE.get(id);
                 const work = workOn.get(id);
+                const begun = Boolean(work && work.transcribed > 0);
                 return (
                   <li
                     key={id}
-                    /* A folder that already has an edition is marked on the
-                       row itself, not only in a badge: someone scanning 178
-                       rows for "what is left to do" needs the answer in
-                       peripheral vision, without reading a word. */
+                    /* Two independent facts, two independent marks, because a
+                       folder can carry both and someone scanning 178 rows for
+                       "what is left" needs the answer in peripheral vision,
+                       without reading a word. The green rule is a scholarly
+                       edition someone else made; the ink-blue wash is our own
+                       transcription. Rule and wash rather than two rules: they
+                       compose on a row that has both. */
                     className={`flex flex-wrap items-baseline gap-x-3 gap-y-1 py-2.5 pr-4 ${
-                      edition ? 'border-l-[3px] border-l-relu-500 bg-relu-50/40 pl-[13px]' : 'pl-4'
-                    }`}
+                      edition
+                        ? 'border-l-[3px] border-l-relu-500 pl-[13px]'
+                        : begun
+                          ? 'border-l-[3px] border-l-brand-400 pl-[13px]'
+                          : 'pl-4'
+                    } ${begun ? 'bg-brand-50/70' : edition ? 'bg-relu-50/40' : ''}`}
                   >
                     <span className="tabular w-24 shrink-0 text-[12px] font-semibold text-ink-700">
                       n° {c.id}
