@@ -31,10 +31,9 @@ export function Header({ path }: { path: string }) {
     return () => document.removeEventListener('keydown', onKey);
   }, [open]);
 
-  const links = [
-    ...BOOKS.map((b) => ({ path: b.path, label: b.title })),
-    ...OTHER_PAGES,
-  ];
+  // The folded-out menu has room for the full titles; only the inline row is
+  // short of space.
+  const links = [...BOOKS.map((b) => ({ path: b.path, label: b.title })), ...OTHER_PAGES];
 
   return (
     <header className="sticky top-0 z-40 border-b border-ink-200 bg-white/93 backdrop-blur-md backdrop-saturate-150">
@@ -58,7 +57,7 @@ export function Header({ path }: { path: string }) {
                   : 'hover:bg-ink-50 hover:text-brand-700'
               }`}
             >
-              {b.title}
+              {b.navTitle ?? b.title}
             </a>
           ))}
           <span aria-hidden="true" className="mx-1.5 h-4 w-px bg-ink-200" />

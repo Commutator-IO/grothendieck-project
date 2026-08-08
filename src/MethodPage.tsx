@@ -114,6 +114,8 @@ export function MethodPage() {
           </div>
         </div>
 
+        <Contributors />
+
         <section className="mt-14 max-w-[52em]">
           <h2 className="titre text-[22px] text-ink-900">What this site does not claim</h2>
           <ul className="prose-fonds mt-3">
@@ -235,3 +237,123 @@ const BAR_COLOURS: Record<State, string> = {
   checked: 'bg-relu-500',
   skipped: 'bg-alerte-200',
 };
+
+/**
+ * The people who did the transcription work.
+ *
+ * Named here rather than in a footnote, because the scale of what they did by
+ * hand is the single most important piece of context for anything this site
+ * produces. Matthias Künzer typed two thousand pages of the Dérivateurs into
+ * LaTeX. A machine pass over the same folder would take an afternoon and be
+ * worth less. Knowing that before starting is what stops this project from
+ * duplicating decades of scholarship and calling it progress.
+ *
+ * The list is partial and says so. Attribution in this field is genuinely
+ * hard: the CSG credits many transcriptions to "Mateo Carmona et al.", and the
+ * et al. are not named anywhere we can reach.
+ */
+const CONTRIBUTORS: { name: string; url?: string; work: string }[] = [
+  {
+    name: 'Jean Malgoire',
+    work:
+      'Grothendieck\u2019s former student at Montpellier, and the reason any of this exists: ' +
+      'the archives were given to him personally, he kept them at home until 2010, and he ' +
+      'deposited them at the university. He edited the first thirty-seven sections of the Long ' +
+      'March in 1995, co-edited the D\u00e9rivateurs and the Motifs transcription, and worked ' +
+      'beside the archivists during the 2015 cataloguing \u2014 deciphering the handwriting and ' +
+      'identifying the themes that the inventory\u2019s groups now record.',
+  },
+  {
+    name: 'Georges Maltsiniotis',
+    url: 'https://webusers.imj-prg.fr/~georges.maltsiniotis/groth.html',
+    work:
+      'Editor of Pursuing Stacks \u2014 volume I published by the Soci\u00e9t\u00e9 ' +
+      'math\u00e9matique de France as Documents math\u00e9matiques 20 \u2014 and co-editor of ' +
+      'the D\u00e9rivateurs. His pages at the IMJ-PRG are where the homotopy-theoretic ' +
+      'manuscripts have been made available for two decades, together with the scholarly work ' +
+      '(Ast\u00e9risque 301, and Cisinski\u2019s 308) that made them legible as mathematics ' +
+      'rather than as documents.',
+  },
+  {
+    name: 'Matthias Künzer',
+    work:
+      'Transcribed the D\u00e9rivateurs into LaTeX \u2014 roughly two thousand manuscript pages, ' +
+      'the fullest transcription of any single folder in the fonds \u2014 and edited the ' +
+      'Grothendieck\u2013Brown correspondence. If one wants a sense of what this work costs when ' +
+      'done properly, it is this.',
+  },
+  {
+    name: 'Leila Schneps and Pierre Lochak',
+    url: 'https://webusers.imj-prg.fr/~leila.schneps/grothendieckcircle/',
+    work:
+      'The Grothendieck Circle: they edited Esquisse d\u2019un Programme with an English ' +
+      'translation in Geometric Galois Actions I (LMS Lecture Notes 242, 1997), and assembled ' +
+      'the collection of scanned and typed unpublished texts that was, for years, the only way ' +
+      'to read most of this material at all.',
+  },
+  {
+    name: 'Mateo Carmona',
+    url: 'https://csg.igrothendieck.org/transcriptions/',
+    work:
+      'Coordinator of the Centre for Grothendieckian Studies at the Istituto Grothendieck since ' +
+      '2023, and the driving force behind its transcription programme \u2014 some thirty texts ' +
+      'and forty letters, from the Vietnam lecture notes to the regular polyhedra. Much of it is ' +
+      'credited to \u201cMateo Carmona et al.\u201d, and the collaborators are not named where ' +
+      'we can see them.',
+  },
+  {
+    name: 'Hélène Rodriguez, Frédéric Troilo and Sophie Dikoff',
+    work:
+      'Not transcribers but the condition of transcription. In six months of 2015\u201316 they ' +
+      'catalogued the whole fonds, kept Grothendieck\u2019s own folder titles, proposed the ' +
+      'bracketed ones where he left none, dated folders from their versos, and numbered every ' +
+      'leaf in pencil. Every shelfmark and every date on this site is theirs.',
+  },
+];
+
+function Contributors() {
+  return (
+    <section className="mt-14 max-w-[52em]">
+      <h2 className="titre text-[22px] text-ink-900">Who did this work before us</h2>
+      <p className="prose-fonds mt-3">
+        Large parts of the fonds have already been transcribed by hand, over decades, by people
+        who knew the mathematics. Where their edition exists it is better than anything produced
+        here and should be used instead — the{' '}
+        <a
+          href="/archive/"
+          className="font-medium text-brand-600 underline decoration-brand-200 underline-offset-2 hover:text-brand-700"
+        >
+          archive page
+        </a>{' '}
+        marks which folders those are. This site is for the rest.
+      </p>
+
+      <ul className="mt-6 space-y-4">
+        {CONTRIBUTORS.map((c) => (
+          <li key={c.name} className="card px-5 py-4">
+            <h3 className="text-[15px] font-semibold text-ink-900">
+              {c.url ? (
+                <a
+                  href={c.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline decoration-ink-300 underline-offset-2 hover:text-brand-700 hover:decoration-brand-400"
+                >
+                  {c.name} ↗
+                </a>
+              ) : (
+                c.name
+              )}
+            </h3>
+            <p className="mt-1.5 text-[13.5px] leading-relaxed text-ink-600">{c.work}</p>
+          </li>
+        ))}
+      </ul>
+
+      <p className="mt-5 text-[12.5px] leading-relaxed text-ink-400">
+        Incomplete, and certainly unfair to people whose names are not published alongside the
+        work they did. Corrections are welcome.
+      </p>
+    </section>
+  );
+}

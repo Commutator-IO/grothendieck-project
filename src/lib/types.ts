@@ -38,6 +38,14 @@ export interface Book {
   key: BookKey;
   path: string;
   title: string;
+  /**
+   * A shorter label for the header, where the full title will not fit.
+   *
+   * The menu holds every notebook plus two standing pages, and at the `lg`
+   * breakpoint that is already tight: one long title pushes the row into a
+   * second line or clips it. Falls back to `title`.
+   */
+  navTitle?: string;
   /** One line: what this book is about, and why these folders. */
   subtitle: string;
   period: string;
@@ -54,7 +62,7 @@ export interface BookSection {
   cotes: string[];
 }
 
-export type BookKey = 'topos' | 'motives' | 'long-march' | 'late';
+export type BookKey = 'topos' | 'motives' | 'long-march' | 'late' | 'scattered';
 
 /** Which language and register a transcript artifact is written in. */
 export type Edition = 'fr' | 'en' | 'summary';

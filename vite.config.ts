@@ -113,6 +113,7 @@ export default defineConfig({
         motifs: resolve(import.meta.dirname, 'motifs/index.html'),
         longueMarche: resolve(import.meta.dirname, 'longue-marche/index.html'),
         tardifs: resolve(import.meta.dirname, 'tardifs/index.html'),
+        notesDispersees: resolve(import.meta.dirname, 'notes-dispersees/index.html'),
         archive: resolve(import.meta.dirname, 'archive/index.html'),
         method: resolve(import.meta.dirname, 'method/index.html'),
       },
