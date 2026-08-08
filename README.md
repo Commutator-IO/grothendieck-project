@@ -13,7 +13,7 @@ wants to *read*: folders filed by accession number, each titled with whatever
 Grothendieck had pencilled on the cover, each a single PDF of between 4 MB and
 270 MB.
 
-This site does two things the inventory cannot. It offers four ways in — four
+This site does two things the inventory cannot. It offers five ways in — five
 notebooks, each saying plainly whether its grouping is the archive's or ours.
 And it puts the LaTeX transcription of a leaf **beside the leaf itself**, so
 that scrolling the transcript turns the facsimile's pages. Every reading can be
@@ -30,9 +30,10 @@ window.
 | [`/longue-marche/`](https://grothendieck.commutator.io/longue-marche/) | **La Longue Marche** — 1,584 leaves through Galois theory, plus the Teichmüller notes around it *(the archive's grouping)* |
 | [`/tardifs/`](https://grothendieck.commutator.io/tardifs/) | **Cahiers tardifs** — *Vers une géométrie des formes* (1986) and *Dérivateurs* (1990–91) *(our grouping)* |
 | [`/archive/`](https://grothendieck.commutator.io/archive/) | All 178 folders, in Grothendieck's filing order, searchable |
+| [`/notes-dispersees/`](https://grothendieck.commutator.io/notes-dispersees/) | **Notes techniques dispersées** — the 35 folders belonging to no work, 1953–1984 *(our grouping)* |
 | [`/method/`](https://grothendieck.commutator.io/method/) | How he took notes, how transcription proceeds, what this site does not claim |
 
-Two of the four notebooks reproduce an inventory group exactly; two are ours.
+Two of the five notebooks reproduce an inventory group exactly; three are ours.
 Each says which at the head of its page, because citing "the Cahier de Topos"
 does not commit you to the same thing as citing folder 19.
 
@@ -56,8 +57,8 @@ things were measured:
 All three are enforced by the *browser* against the remote origin, and none
 applies to a request made server-side. So a relay on this origin asks for the
 file and passes the bytes straight through, verified byte-identical to the
-source. In development that is a Vite middleware; in production, a Cloudflare
-Worker.
+source. In development that is a Vite middleware; in production, a small Node
+service — see below for why it cannot be a Cloudflare Worker.
 
 **Range requests are what make it usable rather than a curiosity.** Montpellier
 honours them, and the relay forwards them: opening leaf 221 of the 204 MB
@@ -65,19 +66,26 @@ second volume of the Long March moves **256 KB in 0.2 s**, not the volume.
 
 ### The production relay
 
-`worker/source-relay.js`. A Worker cannot skip TLS verification — there is no
-`rejectUnauthorized` in the runtime, and plain HTTP just `301`s to HTTPS — but
-Cloudflare's *proxy* does not validate origin certificates in SSL/TLS mode
-**Full** (as opposed to Full strict). So the Worker fetches through a proxied
-hostname of ours pointed at Montpellier, and strips `X-Frame-Options` on the
-way back. Two dashboard steps this expects:
+[`relay/`](relay/README.md) — one file, no dependencies, nothing stored.
 
-1. A **proxied** CNAME `montpellier.commutator.io` → `grothendieck.umontpellier.fr`.
-2. A configuration rule setting SSL/TLS to **Full** (not Full strict) for that
-   hostname.
+A Cloudflare Worker cannot do this job: there is no `rejectUnauthorized` in
+that runtime, so its `fetch()` throws on the expired certificate. The usual way
+round is Cloudflare's *proxy* in SSL/TLS mode Full, which tolerates a bad origin
+certificate — but that needs the zone on Cloudflare, and `commutator.io` is on
+Google Cloud DNS.
 
-Then route the Worker at `grothendieck.commutator.io/source/*`. Until that is
-in place the deployed site cannot show facsimiles, and the pane says so plainly
+**And no DNS record can substitute, on any provider.** DNS points at addresses;
+it does not terminate TLS. A CNAME to Montpellier would send the browser
+straight there, to a certificate now both expired *and* issued for the wrong
+hostname.
+
+Node has `rejectUnauthorized`, so the relay needs no DNS arrangement at all:
+deploy the container anywhere, take the hostname the platform gives you — it
+already has a valid certificate — and set the repository variable `RELAY_URL`
+to it. Cross-origin is fine; `frame-ancestors` is what governs framing, and the
+relay sets it to this site alone.
+
+Left unset, the deployed site has no facsimiles and every batch says so plainly
 rather than offering a new tab — reading side by side is the point of the view,
 and a tab that steals the window is not a lesser version of it.
 
@@ -148,7 +156,7 @@ typesets them, so screen and PDF come from one source.
 | `scripts/catalogue.mjs` | Re-reads Montpellier's inventory into typed data |
 | `scripts/archive.mjs` | Downloads and cuts folders into batches — for transcription, not for reading |
 | `scripts/render.mjs` | LaTeX subset → the reading view, in ar5iv's stylesheet |
-| `worker/source-relay.js` | The production relay: same job as the dev middleware, on the edge |
+| `relay/server.mjs` | The production relay: same job as the dev middleware, deployable |
 | `vite.config.ts` | Also relays `/source/*.pdf` from Montpellier in dev, forwarding range requests |
 
 ### Why the transcript pane is an iframe

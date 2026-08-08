@@ -37,7 +37,23 @@ export const batchName = (k: number) => `batch-${String(k).padStart(2, '0')}`;
  * that expired on 10 December 2025. Both are enforced by the browser against
  * the remote origin, and neither applies to a request made server-side.
  */
-export const facsimileUrl = (cote: string) => `/source/${cote}.pdf`;
+export const facsimileUrl = (cote: string) => `${RELAY}/source/${cote}.pdf`;
+
+/**
+ * Where the relay lives.
+ *
+ * Empty in development, where the Vite middleware answers `/source/*` on this
+ * same origin. In production it is the deployed relay's absolute URL, supplied
+ * at build time as `VITE_RELAY` — a static host has no middleware, and the
+ * facsimile has to come from somewhere that terminates TLS on Montpellier's
+ * behalf.
+ *
+ * Cross-origin is fine here, and is why no DNS arrangement is needed: the
+ * relay sends `frame-ancestors` naming this site, which is what governs
+ * whether a document may be framed. The relay's own certificate is valid,
+ * which is the only other thing the browser insists on.
+ */
+const RELAY = (import.meta.env.VITE_RELAY ?? '').replace(/\/$/, '');
 
 /**
  * The PDF page showing a given archive leaf.
@@ -97,7 +113,7 @@ export function useFacsimileProxy(): boolean | null {
     let alive = true;
     // A one-byte range: enough to prove the proxy answers, without pulling a
     // 35 MB folder just to find out.
-    fetch('/source/26.pdf', { headers: { Range: 'bytes=0-0' } })
+    fetch(`${RELAY}/source/26.pdf`, { headers: { Range: 'bytes=0-0' } })
       .then((r) => alive && setOk(r.ok && r.headers.get('content-type') === 'application/pdf'))
       .catch(() => alive && setOk(false));
     return () => {

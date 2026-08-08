@@ -93,8 +93,14 @@ jobs:
       # unset (vite.config.ts then falls back to "/"). Without a custom domain
       # a project site lives under /<repo>/ instead, and the build would need
       # BASE_PATH: /${{ github.event.repository.name }}/
+      # VITE_RELAY points the facsimile pane at the deployed relay. Left unset,
+      # the built site has no relay and every batch shows the "not answering"
+      # panel — which is the correct state for a deployment without one, not a
+      # failure. Set it as a repository variable once the relay is up.
       - name: Build
         run: npm run build
+        env:
+          VITE_RELAY: ${{ vars.RELAY_URL }}
 
       # GitHub Pages drops the custom domain on deploy unless a CNAME file
       # sits at the root of the artifact. `public/CNAME` is copied verbatim by
