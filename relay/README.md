@@ -50,17 +50,105 @@ process**, because `rejectUnauthorized` is what gets past the expired
 certificate. Cloudflare Workers, Deno Deploy and every other V8/edge runtime
 fail on that one point, not on effort.
 
-### Render — recommended, and free
+### Render — where it actually runs
 
-`render.yaml` is a blueprint: **Render dashboard → New → Blueprint**, point it
-at this repository, deploy. Nothing to configure by hand.
+**Deployed:** `grothendieck-relay`, free plan, Frankfurt —
+`https://grothendieck-relay.onrender.com`
+([dashboard](https://dashboard.render.com/web/srv-d9ri0iv10e5c7384nnfg)).
 
-Free, no DNS of ours involved, and the hostname it hands back
-(`…onrender.com`) already has a valid certificate — which is the only property
-the browser insists on. The cost is a cold start: the service sleeps after 15
-minutes idle and takes about a minute to wake. The pane handles that by design,
-showing the "not answering" panel with a *Try again* button, so the failure is
-visible and self-correcting rather than silent.
+Free, no DNS of ours involved, and the hostname it hands back already has a
+valid certificate — the only property the browser insists on. The cost is a
+cold start: the service sleeps after 15 minutes idle and takes about a minute
+to wake. The pane handles that by design, showing the "not answering" panel
+with a *Try again* button, so the failure is visible and self-correcting rather
+than silent.
+
+#### How it was created
+
+From the CLI (`brew install render`, then `render login`). Note the
+`--repo` flag with no GitHub App installed: the repository is public, so Render
+clones it by URL. The trade-off is that pushes do not trigger a deploy
+automatically — see *Redeploying* below, which is a single command.
+
+```bash
+render workspace set "Michel's workspace" --confirm
+
+render services create \
+  --name grothendieck-relay \
+  --type web_service \
+  --runtime docker \
+  --repo https://github.com/Commutator-IO/grothendieck-project \
+  --branch main \
+  --root-directory relay \
+  --plan free \
+  --region frankfurt \
+  --health-check-path /health \
+  --env-var PORT=8080 \
+  --env-var ALLOWED_ORIGINS=https://grothendieck.commutator.io \
+  --confirm --output json
+```
+
+`render.yaml` in this directory carries the same configuration as a blueprint,
+for anyone who prefers **New → Blueprint** in the dashboard. That route needs
+Render's GitHub App installed on the organisation; the CLI route above does
+not, which is why it was used.
+
+#### Redeploying, logs, status
+
+```bash
+render deploys create srv-d9ri0iv10e5c7384nnfg --confirm   # after changing server.mjs
+render logs --resources srv-d9ri0iv10e5c7384nnfg --tail
+render services --output text --confirm
+```
+
+### When the free plan ends
+
+It will, eventually. Heroku withdrew its free dynos in 2022, Fly its free
+allowance in 2024; assuming Render is permanent would be the one mistake worth
+avoiding here. So the question is not *if* but *what breaks when it does* —
+and the answer is deliberately: very little.
+
+**Nothing runs out on its own.** The free plan gives 750 instance-hours a
+month against a month's 730, so one service can stay up continuously; the cap
+only bites if several free services share the workspace. Bandwidth is 100 GB a
+month, and range requests mean a reader consumes a few hundred kilobytes per
+page rather than a whole volume — the whole open fonds is about 28 GB, so
+ordinary reading is nowhere near it.
+
+**The failure is visible, not silent.** If the relay stops answering — plan
+withdrawn, quota exhausted, host down — `useFacsimileProxy()` gets no answer
+and the pane shows the "not answering" panel with a *Try again* button and a
+link to the tracking issue. The transcription, the diagrams and the downloads
+all keep working, and the pane header's **Source ↗** still opens the folder at
+Montpellier. The site degrades to what it was before the relay existed.
+
+**Moving hosts is one variable.** Nothing in the codebase knows where the relay
+lives: `facsimileUrl()` reads `VITE_RELAY`, which the deploy workflow fills from
+the `RELAY_URL` repository variable. To move:
+
+1. Deploy `relay/` somewhere else — it is one dependency-free file plus a
+   Dockerfile, and `PORT` and `ALLOWED_ORIGINS` are the only configuration.
+2. `gh variable set RELAY_URL --body https://<new-host>`
+3. Re-run the Pages deploy.
+
+No code change, no DNS change, no migration.
+
+Where to go, if that day comes:
+
+| Host | Cost | Note |
+|---|---|---|
+| **Fly.io** | cents/month | Scales to zero, resumes in under a second — no cold start worth the name. Rootfs storage plus $0.02/GB egress. `fly.toml` is already in this directory. |
+| **Render Starter** | $7/month | Same service, no sleep. The zero-effort option. |
+| **A small VPS** | ~$4/month | `node server.mjs` behind any TLS terminator. |
+
+Fly is the natural successor: it costs less than Render's paid plan for this
+workload and removes the cold start, and the only reason it was not chosen
+first is that it is no longer free.
+
+**How you would find out.** Nobody watches a facsimile pane. There is no
+monitoring, and a reader seeing the panel is currently the alerting system.
+A scheduled `curl` against `/health` that opens an issue on failure would fix
+that; it does not exist yet.
 
 ### fly.io
 
