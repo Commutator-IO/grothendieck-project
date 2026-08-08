@@ -16,7 +16,7 @@
  *   npm run manifest
  */
 
-import { readdir, mkdir, writeFile, stat } from 'node:fs/promises';
+import { readdir, mkdir, readFile, writeFile, stat } from 'node:fs/promises';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 import { resolve } from 'node:path';
@@ -28,9 +28,10 @@ const PUBLIC = resolve(ROOT, 'public');
 const BATCHES = resolve(ROOT, 'archives', 'batches');
 const TRANSCRIPTS = resolve(PUBLIC, 'transcripts');
 const RAW = resolve(ROOT, 'archives', 'raw');
+const STATUS = resolve(ROOT, 'transcripts', 'status.json');
 
 const BATCH_SIZE = 20;
-const EDITIONS = ['fr', 'modern', 'summary'];
+const EDITIONS = ['fr', 'modern'];
 
 async function dirs(path) {
   try {
@@ -76,7 +77,7 @@ export async function writeManifest() {
   const transcripts = {};
   for (const d of await dirs(TRANSCRIPTS)) {
     for (const f of await readdir(resolve(TRANSCRIPTS, d.name))) {
-      const m = /^batch-(\d+)\.(fr|modern|summary)\.(html|tex|pdf)$/.exec(f);
+      const m = /^batch-(\d+)\.(fr|modern)\.(html|tex|pdf)$/.exec(f);
       if (!m) continue;
       const key = `${d.name}#${Number(m[1])}`;
       const entry = (transcripts[key] ??= { html: [], tex: [], pdf: [] });
@@ -89,11 +90,32 @@ export async function writeManifest() {
     }
   }
 
+  /**
+   * The declared states, carried through from the repository.
+   *
+   * Only the three no file can prove: a pass in flight, a human comparison
+   * against the leaves, a batch decided to hold nothing. `drafted` and
+   * `reviewed` are never written down — they are read off the files above, so
+   * they cannot go stale.
+   */
+  let declared = {};
+  try {
+    declared = JSON.parse(await readFile(STATUS, 'utf8')).status ?? {};
+  } catch {
+    // No status file: nothing has been claimed, which is a legitimate state.
+  }
+
   await mkdir(PUBLIC, { recursive: true });
   await writeFile(
     resolve(PUBLIC, 'manifest.json'),
     JSON.stringify(
-      { batchSize: BATCH_SIZE, generated: new Date().toISOString(), facsimiles, transcripts },
+      {
+        batchSize: BATCH_SIZE,
+        generated: new Date().toISOString(),
+        facsimiles,
+        transcripts,
+        declared,
+      },
       null,
       2,
     ),
@@ -102,7 +124,8 @@ export async function writeManifest() {
 
   process.stdout.write(
     `\nManifest: ${Object.keys(facsimiles).length} folders mirrored, ` +
-      `${Object.keys(transcripts).length} batches transcribed → public/manifest.json\n`,
+      `${Object.keys(transcripts).length} batches transcribed, ` +
+      `${Object.keys(declared).length} declared → public/manifest.json\n`,
   );
 }
 

@@ -1,6 +1,7 @@
 import { Footer, Header } from './components/Frame.tsx';
 import { BOOKS, TOTAL_PAGES, cotesOf, pagesOf } from './content/books.ts';
 import { COTES } from './content/catalogue.ts';
+import { batchCount, transcript, useManifest } from './lib/batches.ts';
 
 /**
  * The front page: what this fonds is, and where to open it.
@@ -8,10 +9,29 @@ import { COTES } from './content/catalogue.ts';
  * The Montpellier inventory is complete and rigorous, and quite unreadable for
  * anyone who wants to *read*: 178 folders filed by accession number, each
  * titled with whatever Grothendieck had pencilled on the cover. This site does
- * not claim to replace it — it offers four ways in, and says each time where
+ * not claim to replace it — it offers five ways in, and says each time where
  * the division comes from.
  */
 export function HomePage() {
+  const manifest = useManifest();
+
+  /**
+   * What exists, counted from the manifest rather than declared.
+   *
+   * The front page should not have to be edited when a batch is finished, and
+   * a figure kept by hand is a figure that goes stale. These come from the
+   * files on the deployed site, so they are true by construction — and when
+   * they are zero, the honest thing is what the page then says.
+   */
+  const batches = COTES.flatMap((c) =>
+    Array.from({ length: batchCount(c.pages) }, (_, i) => transcript(manifest, c.id, i + 1)),
+  );
+  const done = {
+    total: batches.length,
+    transcribed: batches.filter((b) => b.html.includes('fr')).length,
+    modernised: batches.filter((b) => b.html.includes('modern')).length,
+  };
+
   return (
     <>
       <Header path="/" />
@@ -38,12 +58,14 @@ export function HomePage() {
           <Figure value={1991 - 1949} label="years covered" />
         </div>
 
+        <Progress done={done} />
+
         <section className="mt-12">
-          <h2 className="titre text-[24px] text-ink-900">Four notebooks to begin with</h2>
+          <h2 className="titre text-[24px] text-ink-900">Five notebooks to begin with</h2>
           <p className="mt-2 max-w-[46em] text-[14px] leading-relaxed text-ink-600">
-            Two of them reproduce an inventory group as it stands; two are groupings of our own,
-            and say so at the head of the page. The distinction is not fussiness: citing “the
-            Cahier de Topos” does not commit you to the same thing as citing folder 19.
+            Two reproduce an inventory group as it stands; three are groupings of our own, and
+            say so at the head of the page. The distinction is not fussiness: citing “the Cahier
+            de Topos” does not commit you to the same thing as citing folder 19.
           </p>
 
           <ul className="mt-6 grid gap-4 md:grid-cols-2">
@@ -89,7 +111,7 @@ export function HomePage() {
           </ul>
         </section>
 
-        <section className="mt-14 grid gap-6 md:grid-cols-2">
+        <section className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           <div className="prose-fonds">
             <h2 className="titre text-[22px] text-ink-900">What these leaves are</h2>
             <p className="mt-3">
@@ -106,6 +128,28 @@ export function HomePage() {
               The titles are his, pencilled on the folder; those <strong>in brackets</strong> were
               proposed by the archivists. The dates, correspondence aside, are nearly all
               inferred — from a dated verso, a numbered Bourbaki talk, an institute letterhead.
+            </p>
+          </div>
+
+          <div className="prose-fonds">
+            <h2 className="titre text-[22px] text-ink-900">What is being made of them</h2>
+            <p className="mt-3">
+              Each batch of leaves yields two documents, both in French. The{' '}
+              <strong>transcription</strong> is the leaves as written — his notation, his
+              paragraphing, and a critical apparatus that keeps what was read apart from what was
+              guessed. An illegible word stays illegible; nothing is smoothed over.
+            </p>
+            <p>
+              The <strong>modernised reading</strong> is the same mathematics in current notation
+              and current names, opening with an introduction that orients someone who has not met
+              the subject. It is the one document allowed to depart from the leaf, and is held to
+              being correct as it stands: where the manuscript is loose it says what is true, and
+              a footnote says what the leaf has.
+            </p>
+            <p>
+              Both are LaTeX, and both open in the browser — source and compiled PDF alike.
+              Whatever is transcribed is marked in the folder lists, so it is visible at a glance
+              what has been done and what has not.
             </p>
           </div>
 
@@ -133,6 +177,18 @@ export function HomePage() {
 
         <section className="card mt-12 max-w-[52em] px-5 py-4">
           <p className="text-[13.5px] leading-relaxed text-ink-600">
+            Nothing here is an edition. A machine pass over seventy-year-old handwriting
+            produces a reading, checkable against the facsimile on the same screen — that is its
+            whole value and its whole claim. Where a scholarly edition already exists, the{' '}
+            <a
+              href="/archive/"
+              className="font-medium text-brand-600 underline decoration-brand-200 underline-offset-2 hover:text-brand-700"
+            >
+              archive page
+            </a>{' '}
+            marks the folder and links to it; use that instead.
+          </p>
+          <p className="mt-3 text-[13.5px] leading-relaxed text-ink-600">
             The whole fonds — all 178 folders, in Grothendieck's own filing order — is on{' '}
             <a
               href="/archive/"
@@ -154,6 +210,72 @@ export function HomePage() {
 
       <Footer />
     </>
+  );
+}
+
+/**
+ * Where the work stands, in two numbers and a bar.
+ *
+ * Deliberately unflattering. Sixteen thousand leaves against a handful
+ * transcribed is the true ratio, and a progress bar that rounds it up to a
+ * visible sliver would be the first dishonest thing on the page. The figures
+ * are given plainly, and the fraction of the whole is spelled out in words
+ * beside them.
+ */
+function Progress({
+  done,
+}: {
+  done: { total: number; transcribed: number; modernised: number };
+}) {
+  const pct = (n: number) => (n / done.total) * 100;
+  const asWords =
+    done.transcribed === 0
+      ? 'none yet'
+      : `${((done.transcribed / done.total) * 100).toFixed(1)}% of the fonds`;
+
+  return (
+    <section className="card mt-10 max-w-[52em] px-5 py-4">
+      <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
+        <h2 className="titre text-[17px] text-ink-900">Where the work stands</h2>
+        <p className="tabular ml-auto text-[12.5px] text-ink-500">
+          {done.total.toLocaleString('en-GB')} batches of 20 leaves · {asWords}
+        </p>
+      </div>
+
+      <div className="tabular mt-3 flex flex-wrap gap-x-7 gap-y-2 text-[13.5px] text-ink-600">
+        <span>
+          <strong className="titre text-[22px] text-relu-600">{done.transcribed}</strong>{' '}
+          transcribed
+        </span>
+        <span>
+          <strong className="titre text-[22px] text-brand-600">{done.modernised}</strong>{' '}
+          modernised
+        </span>
+      </div>
+
+      {/* One bar, two segments: modernised is a subset of transcribed, so it
+          sits inside rather than beside it. */}
+      <div className="mt-3 flex h-2 overflow-hidden rounded-full bg-ink-200">
+        <span className="bg-brand-500" style={{ width: `${pct(done.modernised)}%` }} />
+        <span
+          className="bg-relu-500"
+          style={{ width: `${pct(done.transcribed - done.modernised)}%` }}
+        />
+      </div>
+
+      <p className="mt-3 text-[12.5px] leading-relaxed text-ink-500">
+        Counted from the files themselves, not from a tally kept by hand. A batch counts as
+        transcribed once its LaTeX exists, and as modernised once the modernised reading does —
+        neither claims anyone has checked it against the leaves.{' '}
+        <a
+          href="/method/"
+          className="font-medium text-brand-600 underline decoration-brand-200 underline-offset-2 hover:text-brand-700"
+        >
+          Method &amp; progress
+        </a>{' '}
+        breaks it down per notebook, with what it costs.
+      </p>
+    </section>
   );
 }
 

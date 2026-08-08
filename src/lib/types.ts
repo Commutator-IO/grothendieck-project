@@ -67,17 +67,17 @@ export type BookKey = 'topos' | 'motives' | 'long-march' | 'late' | 'scattered';
 /**
  * Which register a transcript artifact is written in.
  *
- * The order is the order of increasing distance from the leaf: the
- * transcription is what is on the paper, `modern` is a reading of it in
- * today's mathematics, and the summary does not pretend to be the text at
- * all. The tabs follow that order, so moving right is always moving further
- * from the manuscript.
+ * Two, and the order is the order of distance from the leaf: the
+ * transcription is what is on the paper; `modern` is a reading of it in
+ * today's mathematics, opening with an introduction that orients someone who
+ * has not met the subject.
  *
- * All three are in French. Grothendieck wrote in French, the notions were
- * thought in French, and a translation was a fourth artifact to keep in step
- * for no gain the other three did not already give.
+ * Both are in French. Grothendieck wrote in French and the notions were
+ * thought in French; a translation was one more artifact to keep in step for
+ * no gain, and a standalone summary was a third file saying what the
+ * modernised reading's first page now says in place.
  */
-export type Edition = 'fr' | 'modern' | 'summary';
+export type Edition = 'fr' | 'modern';
 
 /** Everything present locally, written by `npm run archive` and `npm run manifest`. */
 export interface Manifest {
@@ -88,6 +88,13 @@ export interface Manifest {
   facsimiles: Record<string, { pdfPages: number; batches: number[] }>;
   /** Transcript artifacts available under `public/transcripts/`. */
   transcripts: Record<string, TranscriptEntry>;
+  /**
+   * States that had to be declared, from `transcripts/status.json`.
+   *
+   * Keyed `<folder>#<batch>`. Only the three no file can prove; the rest are
+   * read off the files themselves.
+   */
+  declared: Record<string, 'running' | 'checked' | 'skipped'>;
 }
 
 /** Keyed by `<cote>#<batch>`. */

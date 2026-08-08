@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { BATCH_SIZE, batchRange, transcriptUrl } from '../lib/batches.ts';
 import type { Edition, TranscriptEntry } from '../lib/types.ts';
 
@@ -14,8 +14,14 @@ import type { Edition, TranscriptEntry } from '../lib/types.ts';
  * the point: what one reads on screen is typeset exactly as the compiled
  * article will be.
  *
- * The frame is same-origin, so the parent can still watch it scroll — which is
+ * The frame is same-origin, so the parent can still read its layout — which is
  * what drives the facsimile beside it.
+ *
+ * **It never scrolls itself.** A frame of fixed height inside a scrolling page
+ * makes two scroll regions, one nested in the other, and no reader should have
+ * to work out which one their wheel is about to move. So the frame is grown to
+ * the exact height of its content and the page does all the scrolling: one
+ * document, one scrollbar, the facsimile fixed beside it.
  */
 
 export const EDITIONS: { key: Edition; label: string; help: string }[] = [
@@ -23,9 +29,8 @@ export const EDITIONS: { key: Edition; label: string; help: string }[] = [
   {
     key: 'modern',
     label: 'Modernised',
-    help: 'An interpretation in current notation — readable, and further from the leaf.',
+    help: 'An interpretation in current notation, opening with an introduction to the subject.',
   },
-  { key: 'summary', label: 'Summary', help: 'The argument restated for undergraduates.' },
 ];
 
 export function TranscriptPane({
@@ -47,9 +52,41 @@ export function TranscriptPane({
   onLeaf: (leaf: number) => void;
 }) {
   const frame = useRef<HTMLIFrameElement>(null);
+  const [height, setHeight] = useState(600);
   const { first, last } = batchRange(batch, pages);
   const present = available.html.includes(edition);
   const url = transcriptUrl(cote, batch, edition, 'html');
+
+  /**
+   * The frame is grown to its content, so it never scrolls.
+   *
+   * Measured rather than guessed, and re-measured on every change: KaTeX
+   * typesets after load and the commutative diagrams are laid out after that,
+   * so the height at `load` is not the final one. A `ResizeObserver` on the
+   * document element catches all of it, and the pane's own resize handle too.
+   */
+  useEffect(() => {
+    if (!present) return;
+    const el = frame.current;
+    if (!el) return;
+
+    let observer: ResizeObserver | undefined;
+    const attachHeight = () => {
+      const doc = el.contentDocument;
+      if (!doc) return;
+      const measure = () => setHeight(doc.documentElement.scrollHeight);
+      measure();
+      observer = new ResizeObserver(measure);
+      observer.observe(doc.documentElement);
+    };
+
+    el.addEventListener('load', attachHeight);
+    if (el.contentDocument?.readyState === 'complete') attachHeight();
+    return () => {
+      el.removeEventListener('load', attachHeight);
+      observer?.disconnect();
+    };
+  }, [present, url]);
 
   /**
    * Scrolling the transcript turns the facsimile's pages.
@@ -64,6 +101,10 @@ export function TranscriptPane({
    * on entering and leaving, which on a long uninterrupted page of prose can
    * leave no marker "intersecting" at all. The topmost marker above the fold
    * is always defined, and is what a reader would themselves point at.
+   *
+   * The scroll being watched is the *page's*, since the frame no longer has
+   * one of its own. A marker's rectangle is measured inside the frame and
+   * shifted by the frame's own offset to land in page coordinates.
    */
   useEffect(() => {
     if (!present) return;
@@ -72,9 +113,8 @@ export function TranscriptPane({
 
     let detach = () => {};
     const attach = () => {
-      const win = el.contentWindow;
       const doc = el.contentDocument;
-      if (!win || !doc) return;
+      if (!doc) return;
 
       const marks = Array.from(doc.querySelectorAll<HTMLElement>('[data-leaf]'));
       if (!marks.length) return;
@@ -83,10 +123,11 @@ export function TranscriptPane({
       const report = () => {
         // A quarter down the viewport, not the very top: what one is reading
         // sits below the fold line, not on it.
-        const line = win.innerHeight * 0.25;
+        const line = window.innerHeight * 0.25;
+        const offset = el.getBoundingClientRect().top;
         let current = marks[0];
         for (const m of marks) {
-          if (m.getBoundingClientRect().top <= line) current = m;
+          if (m.getBoundingClientRect().top + offset <= line) current = m;
           else break;
         }
         const leaf = Number(current.dataset.leaf);
@@ -97,8 +138,8 @@ export function TranscriptPane({
       };
 
       report();
-      win.addEventListener('scroll', report, { passive: true });
-      detach = () => win.removeEventListener('scroll', report);
+      window.addEventListener('scroll', report, { passive: true });
+      detach = () => window.removeEventListener('scroll', report);
     };
 
     el.addEventListener('load', attach);
@@ -155,7 +196,9 @@ export function TranscriptPane({
           ref={frame}
           src={url}
           title={`Transcript of folder ${cote}, leaves ${first}–${last}`}
-          className="h-[calc(100dvh-11rem)] w-full border-0 bg-white"
+          scrolling="no"
+          style={{ height }}
+          className="w-full border-0 bg-white"
         />
       ) : (
         <MissingTranscript cote={cote} batch={batch} edition={edition} first={first} last={last} />

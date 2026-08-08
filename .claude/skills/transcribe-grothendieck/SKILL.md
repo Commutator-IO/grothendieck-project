@@ -1,6 +1,6 @@
 ---
 name: transcribe-grothendieck
-description: Transcribes a batch of twenty handwritten leaves from the Alexandre Grothendieck fonds (University of Montpellier) into clean, mathematics-focused LaTeX with a critical apparatus — what was read, what was guessed, what is illegible. Use whenever someone asks to transcribe, decipher, read or put into LaTeX any pages of Grothendieck's manuscripts, or names a folder, a batch, or one of the notebooks (topos, motifs, Longue Marche, cahiers tardifs). Transcription only — the modernised reading and the undergraduate summary have their own skills, /modernize-grothendieck and /summarize-grothendieck, which run on the transcription this one produces. Also covers revisions: correcting a reading, filling a skipped leaf.
+description: Transcribes a batch of twenty handwritten leaves from the Alexandre Grothendieck fonds (University of Montpellier) into clean, mathematics-focused LaTeX with a critical apparatus — what was read, what was guessed, what is illegible. Use whenever someone asks to transcribe, decipher, read or put into LaTeX any pages of Grothendieck's manuscripts, or names a folder, a batch, or one of the notebooks (topos, motifs, Longue Marche, cahiers tardifs). Transcription only — the modernised reading has its own skill, /modernize-grothendieck, which runs on the transcription this one produces. Also covers revisions: correcting a reading, filling a skipped leaf.
 ---
 
 # Transcribing a batch from the Grothendieck fonds
@@ -13,13 +13,11 @@ For **one batch of twenty leaves**, three LaTeX files:
 |---|---|
 | `transcripts/<folder>/batch-NN.fr.tex` | The transcription — the mathematics, leaf by leaf, in French |
 
-Two further editions derive from it, each with its own skill, to be run
-afterwards and in this order:
+One further edition derives from it, with its own skill, run afterwards:
 
 | Skill | Produces |
 |---|---|
-| `/modernize-grothendieck` | `batch-NN.modern.tex` — the mathematics in current notation, French |
-| `/summarize-grothendieck` | `batch-NN.summary.tex` — the argument for a licence-level reader, French |
+| `/modernize-grothendieck` | `batch-NN.modern.tex` — an introduction, then the mathematics in current notation; French |
 
 `npm run render` turns each into the reading view the site's left pane shows;
 `npm run pdf` compiles the PDFs the download buttons offer. The site has a tab

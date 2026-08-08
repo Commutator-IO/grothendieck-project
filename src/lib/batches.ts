@@ -126,3 +126,14 @@ export function useFacsimileProxy(): boolean | null {
 export function transcript(m: Manifest | null, cote: string, k: number) {
   return m?.transcripts?.[batchId(cote, k)] ?? { html: [], tex: [], pdf: [] };
 }
+
+/** What exists for a batch, as the state model consumes it. */
+export function evidence(m: Manifest | null, cote: string, k: number) {
+  const html = transcript(m, cote, k).html;
+  return { transcribed: html.includes('fr'), modernised: html.includes('modern') };
+}
+
+/** What was claimed for a batch in `transcripts/status.json`. */
+export function declared(m: Manifest | null, cote: string, k: number) {
+  return m?.declared?.[batchId(cote, k)];
+}

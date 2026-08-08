@@ -1,9 +1,15 @@
-import { useEffect, useState } from 'react';
 import { Footer, Header } from './components/Frame.tsx';
 import { BOOKS, cotesOf } from './content/books.ts';
 import { COTES } from './content/catalogue.ts';
-import { BATCH_SIZE, batchCount, batchRange, transcript, useManifest } from './lib/batches.ts';
-import { STATES, readProgress, shownState, type Progress, type State } from './lib/progress.ts';
+import {
+  BATCH_SIZE,
+  batchCount,
+  batchRange,
+  declared,
+  evidence,
+  useManifest,
+} from './lib/batches.ts';
+import { STATES, shownState, type State } from './lib/progress.ts';
 
 /**
  * Method, and where the transcription stands.
@@ -16,8 +22,6 @@ import { STATES, readProgress, shownState, type Progress, type State } from './l
  */
 export function MethodPage() {
   const manifest = useManifest();
-  const [progress, setProgress] = useState<Progress>({});
-  useEffect(() => setProgress(readProgress()), []);
 
   return (
     <>
@@ -34,7 +38,9 @@ export function MethodPage() {
           </p>
         </header>
 
-        <Progress4 progress={progress} manifest={manifest} />
+        <StatusSequence />
+
+        <Progress4 manifest={manifest} />
 
         <div className="mt-14 grid gap-x-10 gap-y-8 md:grid-cols-2">
           <div className="prose-fonds">
@@ -93,17 +99,19 @@ export function MethodPage() {
               carefully as leaf 2, and each file records in its header which model produced it
               and when.
             </p>
-            <h3>Three editions, one source, one language</h3>
+            <h3>Two editions, one source</h3>
             <p>
-              Each batch yields a transcription — Grothendieck wrote in French, and it stays in
-              his language, his notation and his paragraphing — then a{' '}
-              <strong>modernised reading</strong> in current notation, then a summary for a
-              licence-level reader. All three are in French: the notions were thought in that
-              language, and an English translation proved to be a fourth artifact to keep in
-              step for no gain the others did not give. Each edition has its own skill, and the
-              two derived ones work from the transcription, never from the leaf directly: two
-              independent readings of the same handwriting would diverge, and nothing would say
-              which was right.
+              Each batch yields a <strong>transcription</strong> — Grothendieck wrote in French,
+              and it stays in his language, his notation and his paragraphing — and then a{' '}
+              <strong>modernised reading</strong>, the same mathematics in current notation,
+              opening with an introduction for someone who has not met the subject. Both in
+              French: the notions were thought in that language, and an English translation was
+              one more artifact to keep in step for no gain the other two did not give.
+            </p>
+            <p>
+              The modernised reading works from the transcription, never from the leaf directly.
+              Two independent readings of the same handwriting would diverge, and nothing would
+              say which was right.
             </p>
             <p>
               The modernised reading is the one that is allowed to depart from the leaf, and it is
@@ -136,6 +144,8 @@ export function MethodPage() {
           </div>
         </div>
 
+        <Pipeline />
+
         <CostAndHorizon />
 
         <Contributors />
@@ -144,12 +154,15 @@ export function MethodPage() {
           <h2 className="titre text-[22px] text-ink-900">What this site does not claim</h2>
           <ul className="prose-fonds mt-3">
             <li>
-              <strong>Half the progress table is observed; half is claimed.</strong> Whether a
-              batch has a transcript is a fact, read from the manifest — so a transcribed batch
-              shows as <em>drafted</em> whether or not anybody ticked it. Whether someone actually
-              held that transcript against the leaves is not observable from any file, so{' '}
-              <em>checked</em> stays a declaration, kept in your browser and set by hand. The site
-              never claims a transcript is any good; only that it exists.
+              <strong>Most of the progress table is observed; the last step is claimed.</strong>{' '}
+              Which files exist is a fact, read from the manifest: a transcribed batch shows as{' '}
+              <em>drafted</em>, and one that also has a modernised reading shows as{' '}
+              <em>AI-reviewed</em> — the modernisation pass reads the transcription critically and,
+              held to being correct as it stands, catches things. It caught four on folder 115.
+              That is a review, and calling it one is accurate. It is not a <em>human</em> review,
+              which is why <em>checked</em> is separate, stays a declaration kept in your browser,
+              and means only what you meant by it. The site never claims a transcript is any good;
+              only that it exists, and that a second pass has been over it.
             </li>
             <li>
               <strong>Two of the four notebooks are our groupings.</strong> “Cahier de Topos” and
@@ -177,13 +190,7 @@ export function MethodPage() {
 }
 
 /** Progress across the four notebooks, batch by batch. */
-function Progress4({
-  progress,
-  manifest,
-}: {
-  progress: Progress;
-  manifest: ReturnType<typeof useManifest>;
-}) {
+function Progress4({ manifest }: { manifest: ReturnType<typeof useManifest> }) {
   return (
     <section className="mt-10">
       <h2 className="titre text-[22px] text-ink-900">Where it stands</h2>
@@ -205,12 +212,13 @@ function Progress4({
             todo: 0,
             running: 0,
             drafted: 0,
+            reviewed: 0,
             checked: 0,
             skipped: 0,
           };
           for (const x of batches) {
             counts[
-              shownState(progress, x.cote, x.batch, transcript(manifest, x.cote, x.batch).html.length > 0)
+              shownState(declared(manifest, x.cote, x.batch), evidence(manifest, x.cote, x.batch))
             ] += 1;
           }
           const mirrored = batches.filter((x) =>
@@ -232,7 +240,7 @@ function Progress4({
               </div>
 
               <div className="mt-2.5 flex h-2.5 overflow-hidden rounded-full bg-ink-200">
-                {(['checked', 'drafted', 'running', 'skipped'] as State[]).map((s) =>
+                {(['checked', 'reviewed', 'drafted', 'running', 'skipped'] as State[]).map((s) =>
                   counts[s] ? (
                     <span
                       key={s}
@@ -263,7 +271,8 @@ function Progress4({
 const BAR_COLOURS: Record<State, string> = {
   todo: 'bg-ink-200',
   running: 'bg-encours-500',
-  drafted: 'bg-brand-500',
+  drafted: 'bg-brand-300',
+  reviewed: 'bg-brand-600',
   checked: 'bg-relu-500',
   skipped: 'bg-alerte-200',
 };
@@ -401,7 +410,7 @@ function Contributors() {
 const PILOT = {
   /** Batches completed so far, by hand-count. */
   batchesDone: 1,
-  /** Wall-clock for the pilot batch: mirror, read, three editions, verify. */
+  /** Wall-clock for the pilot batch: mirror, read, both editions, verify. */
   hoursPerBatch: 0.7,
   /** Rough total tokens for the pilot batch, input and output together:
       fourteen page images read, three LaTeX files written, checks re-read. */
@@ -436,7 +445,7 @@ function CostAndHorizon() {
     <section className="mt-14 max-w-[52em]">
       <h2 className="titre text-[22px] text-ink-900">Cost, and the horizon</h2>
       <p className="prose-fonds mt-3">
-        One batch has been completed: folder 115, fourteen leaves, three editions, transcribed
+        One batch has been completed: folder 115, fourteen leaves, both editions, transcribed
         with Fable 5 on 8 August 2026. It cost about{' '}
         <strong>{PILOT.hoursPerBatch} h</strong> of wall-clock — mirroring, one full reading
         pass, writing the three files, compiling and checking against the facsimile — and
@@ -498,3 +507,230 @@ function CostAndHorizon() {
     </section>
   );
 }
+
+/**
+ * The pipeline, drawn.
+ *
+ * Two skills, two artifacts, and a human step that is not automated — said in
+ * prose three times over on this page, and still easier to take in at a glance.
+ * Drawn rather than described because the one thing a reader keeps needing is
+ * the *order*: which document derives from which, and at what point a claim
+ * stops being observable.
+ *
+ * Inline SVG, in the site's own palette, with the text as real text so it can
+ * be selected and read aloud. No external library: a dependency to draw four
+ * boxes would cost more than it saves.
+ */
+function Pipeline() {
+  const box = 'fill-white stroke-[#e4e0d5]';
+  return (
+    <section className="mt-12 max-w-[52em]">
+      <h2 className="titre text-[22px] text-ink-900">The pipeline</h2>
+      <p className="prose-fonds mt-3">
+        Two skills, run in order, on one batch of twenty leaves at a time. The last step is the
+        one no file can vouch for.
+      </p>
+
+      <div className="card mt-5 overflow-x-auto px-4 py-5">
+        <svg
+          viewBox="0 0 880 300"
+          className="w-full min-w-[620px]"
+          role="img"
+          aria-label="Pipeline: the facsimile is transcribed by transcribe-grothendieck into the transcription, which modernize-grothendieck turns into the modernised reading; both render to HTML and PDF; a human check is the final, unautomated step."
+          style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
+        >
+          <defs>
+            <marker id="pipehead" viewBox="0 0 10 10" refX="9" refY="5"
+              markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M0,1 L9,5 L0,9" fill="none" stroke="#726d5f" strokeWidth="1.6" />
+            </marker>
+          </defs>
+
+          {/* Source */}
+          <rect x="8" y="40" width="176" height="66" rx="8" className={box} strokeWidth="1.5" />
+          <text x="96" y="68" textAnchor="middle" fontSize="13" fontWeight="600" fill="#131210">
+            Facsimile
+          </text>
+          <text x="96" y="86" textAnchor="middle" fontSize="10.5" fill="#726d5f">
+            Montpellier, streamed
+          </text>
+          <text x="96" y="99" textAnchor="middle" fontSize="10.5" fill="#726d5f">
+            never stored
+          </text>
+
+          <line x1="188" y1="73" x2="292" y2="73" stroke="#726d5f" strokeWidth="1.3"
+            markerEnd="url(#pipehead)" />
+          <text x="240" y="60" textAnchor="middle" fontSize="9.5" fontWeight="600" fill="#38539d">
+            /transcribe
+          </text>
+          <text x="240" y="90" textAnchor="middle" fontSize="9" fill="#9d9787">
+            20 leaves/pass
+          </text>
+
+          {/* Transcription */}
+          <rect x="296" y="40" width="196" height="66" rx="8" className={box} strokeWidth="1.5" />
+          <text x="394" y="66" textAnchor="middle" fontSize="12" fontWeight="600" fill="#131210"
+            style={{ fontFamily: 'ui-monospace, Menlo, monospace' }}>
+            batch-NN.fr.tex
+          </text>
+          <text x="394" y="84" textAnchor="middle" fontSize="10.5" fill="#726d5f">
+            the transcription — apparatus,
+          </text>
+          <text x="394" y="97" textAnchor="middle" fontSize="10.5" fill="#726d5f">
+            leaf by leaf
+          </text>
+
+          <line x1="496" y1="73" x2="600" y2="73" stroke="#726d5f" strokeWidth="1.3"
+            markerEnd="url(#pipehead)" />
+          <text x="548" y="60" textAnchor="middle" fontSize="9.5" fontWeight="600" fill="#38539d">
+            /modernize
+          </text>
+          <text x="548" y="90" textAnchor="middle" fontSize="9" fill="#9d9787">
+            from the .tex
+          </text>
+
+          {/* Modernised */}
+          <rect x="604" y="40" width="212" height="66" rx="8" className={box} strokeWidth="1.5" />
+          <text x="710" y="66" textAnchor="middle" fontSize="12" fontWeight="600" fill="#131210"
+            style={{ fontFamily: 'ui-monospace, Menlo, monospace' }}>
+            batch-NN.modern.tex
+          </text>
+          <text x="710" y="84" textAnchor="middle" fontSize="10.5" fill="#726d5f">
+            introduction, then the
+          </text>
+          <text x="710" y="97" textAnchor="middle" fontSize="10.5" fill="#726d5f">
+            mathematics modernised
+          </text>
+
+          {/* States, observed */}
+          <rect x="332" y="120" width="124" height="22" rx="11" fill="#dfe6f6" />
+          <text x="394" y="135" textAnchor="middle" fontSize="10" fontWeight="700" fill="#2e447f"
+            letterSpacing="0.06em">
+            DRAFTED
+          </text>
+          <rect x="648" y="120" width="124" height="22" rx="11" fill="#c1cfee" />
+          <text x="710" y="135" textAnchor="middle" fontSize="10" fontWeight="700" fill="#283a68"
+            letterSpacing="0.06em">
+            AI-REVIEWED
+          </text>
+
+          {/* Human step, deliberately dashed */}
+          <line x1="710" y1="146" x2="710" y2="186" stroke="#9d9787" strokeWidth="1.3"
+            strokeDasharray="4 4" markerEnd="url(#pipehead)" />
+          <rect x="604" y="190" width="212" height="52" rx="8" fill="#eefaf5"
+            stroke="#a7e0c3" strokeWidth="1.5" strokeDasharray="5 4" />
+          <text x="710" y="211" textAnchor="middle" fontSize="11.5" fontWeight="600" fill="#0e6b4a">
+            CHECKED
+          </text>
+          <text x="710" y="228" textAnchor="middle" fontSize="10.5" fill="#128a5f">
+            a person, leaf by leaf — declared
+          </text>
+
+          {/* Derived outputs */}
+          <line x1="394" y1="146" x2="394" y2="186" stroke="#cbc5b5" strokeWidth="1.3"
+            markerEnd="url(#pipehead)" />
+          <rect x="8" y="190" width="484" height="52" rx="8" fill="#f8f7f3"
+            stroke="#e4e0d5" strokeWidth="1.5" />
+          <text x="250" y="211" textAnchor="middle" fontSize="11" fill="#413e36">
+            <tspan style={{ fontFamily: 'ui-monospace, Menlo, monospace' }}>npm run render</tspan>
+            {' → reading view · '}
+            <tspan style={{ fontFamily: 'ui-monospace, Menlo, monospace' }}>npm run pdf</tspan>
+            {' → PDF'}
+          </text>
+          <text x="250" y="228" textAnchor="middle" fontSize="10.5" fill="#726d5f">
+            derived from either .tex, never edited, both open in the browser
+          </text>
+
+          <text x="8" y="272" fontSize="10.5" fill="#9d9787">
+            Everything above the dashed line is observed from the files. Below it is a claim.
+          </text>
+        </svg>
+      </div>
+    </section>
+  );
+}
+
+/**
+ * The six states, in order, and where each one comes from.
+ *
+ * Worth a table rather than a paragraph because the useful question is not
+ * "what does drafted mean" but "who says so" — and the answer differs from
+ * row to row. Three are facts about files; three are somebody's word, written
+ * down in the repository where a change is a diff.
+ */
+function StatusSequence() {
+  const SOURCE: Record<State, { from: string; observed: boolean }> = {
+    todo: { from: 'Neither file exists', observed: true },
+    running: { from: 'transcripts/status.json', observed: false },
+    drafted: { from: 'batch-NN.fr.tex exists', observed: true },
+    reviewed: { from: 'batch-NN.modern.tex exists', observed: true },
+    checked: { from: 'transcripts/status.json', observed: false },
+    skipped: { from: 'transcripts/status.json', observed: false },
+  };
+
+  return (
+    <section className="mt-12 max-w-[52em]">
+      <h2 className="titre text-[22px] text-ink-900">The six states</h2>
+      <p className="prose-fonds mt-3">
+        A batch moves through these in order. Nothing here can be changed from the browser: three
+        of the six are read off the files themselves, and the other three are written in{' '}
+        <code>transcripts/status.json</code>, in the repository, where a change is a diff somebody
+        can review. A mark kept in a visitor's browser told them something nobody else could see,
+        and told them nothing from a second machine.
+      </p>
+
+      <div className="mt-5 overflow-x-auto">
+        <table className="w-full border-collapse text-[13px]">
+          <thead>
+            <tr className="border-b border-ink-200 text-left text-[11px] font-bold uppercase tracking-wide text-ink-400">
+              <th className="py-2 pr-4">State</th>
+              <th className="py-2 pr-4">Means</th>
+              <th className="py-2 pr-4">Comes from</th>
+              <th className="py-2">Kind</th>
+            </tr>
+          </thead>
+          <tbody className="text-ink-700">
+            {STATES.map((s) => (
+              <tr key={s.key} className="border-b border-ink-100 align-top">
+                <td className="py-2 pr-4">
+                  <span
+                    className={`whitespace-nowrap rounded px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide ${BADGE[s.key]}`}
+                  >
+                    {s.label}
+                  </span>
+                </td>
+                <td className="py-2 pr-4 text-[12.5px] leading-relaxed">{s.help}</td>
+                <td className="py-2 pr-4 font-mono text-[11.5px] text-ink-500">
+                  {SOURCE[s.key].from}
+                </td>
+                <td className="py-2 text-[12px]">
+                  {SOURCE[s.key].observed ? (
+                    <span className="text-relu-700">observed</span>
+                  ) : (
+                    <span className="text-encours-700">declared</span>
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <p className="mt-4 text-[12.5px] leading-relaxed text-ink-500">
+        Evidence only ever moves a batch forward. A batch marked <em>checked</em> has been through
+        a comparison the manifest cannot contradict, and one marked <em>skipped</em> records a
+        decision that a file appearing later does not undo. <em>Drafted</em> and <em>reviewed</em>
+        {' '}are never written down at all — they are read off the files, so they cannot go stale.
+      </p>
+    </section>
+  );
+}
+
+const BADGE: Record<State, string> = {
+  todo: 'bg-ink-200 text-ink-500',
+  running: 'bg-encours-200 text-encours-700',
+  drafted: 'bg-brand-100 text-brand-700',
+  reviewed: 'bg-brand-200 text-brand-800',
+  checked: 'bg-relu-200 text-relu-700',
+  skipped: 'bg-alerte-100 text-alerte-700',
+};

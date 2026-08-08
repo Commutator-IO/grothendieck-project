@@ -52,11 +52,11 @@ export function Downloads({
   }
 
   return (
-    <div className="mt-5">
+    <div className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-2">
       <p className="text-[11px] font-bold uppercase tracking-[0.1em] text-ink-400">
         Source &amp; print
       </p>
-      <ul className="mt-2 flex flex-wrap gap-2">
+      <ul className="flex flex-wrap gap-2">
         {rows.map((r) => (
           <li key={r.key} className="flex items-center gap-1.5 rounded-lg border border-ink-200 bg-white px-2.5 py-1.5">
             <span className="text-[12.5px] font-medium text-ink-700" title={r.help}>

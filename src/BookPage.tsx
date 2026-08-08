@@ -9,21 +9,13 @@ import {
   BATCH_SIZE,
   batchCount,
   batchRange,
+  declared,
+  evidence,
   transcript,
   useFacsimileProxy,
   useManifest,
 } from './lib/batches.ts';
-import {
-  STATES,
-  nextState,
-  readProgress,
-  shownState,
-  stateOf,
-  tally,
-  writeProgress,
-  type Progress,
-  type State,
-} from './lib/progress.ts';
+import { STATES, shownState, tally, type State } from './lib/progress.ts';
 import type { BookKey, Cote, Edition } from './lib/types.ts';
 
 /**
@@ -43,13 +35,6 @@ export function BookPage({ bookKey }: { bookKey: BookKey }) {
   // Null while the probe is in flight: assume the relay is there rather than
   // flashing the fallback panel for a moment on every open.
   const proxy = useFacsimileProxy();
-
-  const [progress, setProgress] = useState<Progress>({});
-  useEffect(() => setProgress(readProgress()), []);
-  const update = (p: Progress) => {
-    setProgress(p);
-    writeProgress(p);
-  };
 
   /**
    * The open batch lives in the URL fragment.
@@ -109,15 +94,19 @@ export function BookPage({ bookKey }: { bookKey: BookKey }) {
   const allBatches = cotes.flatMap((c) =>
     Array.from({ length: batchCount(c.pages) }, (_, i) => {
       const { first, last } = batchRange(i + 1, c.pages);
-      return { cote: c.id, batch: i + 1, pages: last - first + 1 };
+      return {
+        cote: c.id,
+        batch: i + 1,
+        pages: last - first + 1,
+        state: shownState(declared(manifest, c.id, i + 1), evidence(manifest, c.id, i + 1)),
+      };
     }),
   );
-  const t = tally(progress, allBatches);
+  const t = tally(allBatches);
   // Observed, not declared — the count that answers "how much of this notebook
   // actually exists in LaTeX".
-  const transcribedBatches = allBatches.filter(
-    (x) => transcript(manifest, x.cote, x.batch).html.length > 0,
-  ).length;
+  const transcribedBatches = allBatches.filter((x) => evidence(manifest, x.cote, x.batch).transcribed).length;
+  const modernisedBatches = allBatches.filter((x) => evidence(manifest, x.cote, x.batch).modernised).length;
   const group = b.inventoryGroup ? GROUPS.find((g) => g.id === b.inventoryGroup) : undefined;
 
   return (
@@ -148,19 +137,9 @@ export function BookPage({ bookKey }: { bookKey: BookKey }) {
               onClose={close}
               available={transcript(manifest, openCote.id, openBatch.batch)}
               state={shownState(
-                progress,
-                openCote.id,
-                openBatch.batch,
-                transcript(manifest, openCote.id, openBatch.batch).html.length > 0,
+                declared(manifest, openCote.id, openBatch.batch),
+                evidence(manifest, openCote.id, openBatch.batch),
               )}
-              onState={() =>
-                update({
-                  ...progress,
-                  [`${openCote.id}#${openBatch.batch}`]: nextState(
-                    stateOf(progress, openCote.id, openBatch.batch),
-                  ),
-                })
-              }
             />
           ) : (
             <>
@@ -189,6 +168,10 @@ export function BookPage({ bookKey }: { bookKey: BookKey }) {
                     <strong className="font-semibold text-relu-600">{transcribedBatches}</strong>{' '}
                     transcribed
                   </span>
+                  <span title="Batches with a modernised reading — read again by machine, counted from the manifest">
+                    <strong className="font-semibold text-brand-600">{modernisedBatches}</strong>{' '}
+                    modernised
+                  </span>
                   <span title="Batches you have compared against the leaves — a declaration, not an observation">
                     <strong className="font-semibold text-ink-800">{t.byState.checked}</strong>{' '}
                     checked
@@ -212,16 +195,7 @@ export function BookPage({ bookKey }: { bookKey: BookKey }) {
                           key={id}
                           cote={cote}
                           manifest={manifest}
-                          progress={progress}
                           onOpen={goTo}
-                          onState={(batch) =>
-                            update({
-                              ...progress,
-                              [`${cote.id}#${batch}`]: nextState(
-                                stateOf(progress, cote.id, batch),
-                              ),
-                            })
-                          }
                         />
                       );
                     })}
@@ -258,7 +232,6 @@ function Workspace({
   onClose,
   available,
   state,
-  onState,
 }: {
   cote: Cote;
   batch: number;
@@ -268,7 +241,6 @@ function Workspace({
   onClose: () => void;
   available: ReturnType<typeof transcript>;
   state: State;
-  onState: () => void;
 }) {
   const label = STATES.find((s) => s.key === state)!;
   return (
@@ -284,19 +256,22 @@ function Workspace({
         <h1 className="titre min-w-0 flex-1 truncate text-[21px] text-ink-900" title={cote.title}>
           {cote.title}
         </h1>
-        <button
-          type="button"
-          onClick={onState}
-          title={`${label.label} — ${label.help} (click to change)`}
-          className={`shrink-0 rounded-md px-2 py-1 text-[11px] font-semibold uppercase tracking-wide transition ${STATE_COLOURS[state]}`}
+        <span
+          title={label.help}
+          className={`shrink-0 rounded-md px-2 py-1 text-[11px] font-semibold uppercase tracking-wide ${STATE_COLOURS[state]}`}
         >
           {label.label}
-        </button>
+        </span>
       </div>
 
       <p className="tabular mt-1 text-[12.5px] text-ink-500">
         Cote n° {cote.id} · {cote.date || 's.d.'} · {cote.pages} leaves
       </p>
+
+      {/* Above the reading pane, not below it. The pane is as tall as the
+          transcript, so anything after it sits a screen or more down the page —
+          a row of links nobody scrolls past the whole document to find. */}
+      <Downloads cote={cote.id} batch={batch} available={available} />
 
       <TranscriptPane
         cote={cote.id}
@@ -308,9 +283,7 @@ function Workspace({
         onLeaf={onLeaf}
       />
 
-      <Downloads cote={cote.id} batch={batch} available={available} />
-
-      <p className="mt-6 max-w-[46em] text-[12.5px] leading-relaxed text-ink-500">
+      <p className="mt-4 max-w-[46em] text-[12.5px] leading-relaxed text-ink-500">
         Scrolling the transcript turns the facsimile: whichever source leaf is marked highest in
         the reading area is the one shown on the right. Use ← and → to step between batches, and
         Escape to close the facsimile.
@@ -357,24 +330,20 @@ function Provenance({
 function CoteCard({
   cote,
   manifest,
-  progress,
   onOpen,
-  onState,
 }: {
   cote: Cote;
   manifest: ReturnType<typeof useManifest>;
-  progress: Progress;
   onOpen: (cote: string, batch: number) => void;
-  onState: (batch: number) => void;
 }) {
   const count = batchCount(cote.pages);
   const [unfolded, setUnfolded] = useState(false);
   // Counted from the manifest rather than from what anyone has ticked: the
   // question "has this folder been transcribed?" has a factual answer, and it
   // should be legible without unfolding the batch list.
-  const transcribed = Array.from({ length: count }, (_, i) => i + 1).filter(
-    (k) => transcript(manifest, cote.id, k).html.length > 0,
-  ).length;
+  const ks = Array.from({ length: count }, (_, i) => i + 1);
+  const transcribed = ks.filter((k) => evidence(manifest, cote.id, k).transcribed).length;
+  const modernised = ks.filter((k) => evidence(manifest, cote.id, k).modernised).length;
 
   return (
     <li
@@ -396,14 +365,18 @@ function CoteCard({
             {cote.title}
             {transcribed > 0 && (
               <span
-                title={
-                  transcribed === count
-                    ? 'Every batch of this folder has a transcript'
-                    : `${transcribed} of ${count} batches transcribed`
-                }
+                title={`${transcribed} of ${count} batches transcribed`}
                 className="ml-2 whitespace-nowrap rounded-full bg-relu-100 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-relu-700"
               >
                 {transcribed === count ? 'transcribed' : `${transcribed}/${count} transcribed`}
+              </span>
+            )}
+            {modernised > 0 && (
+              <span
+                title={`${modernised} of ${count} batches modernised — read again by machine, not by a person`}
+                className="ml-1.5 whitespace-nowrap rounded-full bg-brand-100 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-brand-700"
+              >
+                {modernised === count ? 'modernised' : `${modernised}/${count} modernised`}
               </span>
             )}
           </p>
@@ -432,14 +405,8 @@ function CoteCard({
               key={k}
               cote={cote}
               batch={k}
-              state={shownState(
-                progress,
-                cote.id,
-                k,
-                transcript(manifest, cote.id, k).html.length > 0,
-              )}
+              state={shownState(declared(manifest, cote.id, k), evidence(manifest, cote.id, k))}
               onOpen={() => onOpen(cote.id, k)}
-              onState={() => onState(k)}
             />
           ))}
         </ol>
@@ -451,7 +418,8 @@ function CoteCard({
 const STATE_COLOURS: Record<State, string> = {
   todo: 'bg-ink-200 text-ink-500',
   running: 'bg-encours-200 text-encours-700',
-  drafted: 'bg-brand-200 text-brand-700',
+  drafted: 'bg-brand-100 text-brand-700',
+  reviewed: 'bg-brand-200 text-brand-800',
   checked: 'bg-relu-200 text-relu-700',
   skipped: 'bg-alerte-100 text-alerte-700',
 };
@@ -461,13 +429,11 @@ function BatchRow({
   batch,
   state,
   onOpen,
-  onState,
 }: {
   cote: Cote;
   batch: number;
   state: State;
   onOpen: () => void;
-  onState: () => void;
 }) {
   const { first, last } = batchRange(batch, cote.pages);
   const label = STATES.find((s) => s.key === state)!;
@@ -483,14 +449,12 @@ function BatchRow({
           ll. {first}–{last}
         </span>
       </button>
-      <button
-        type="button"
-        onClick={onState}
-        title={`${label.label} — ${label.help} (click to change)`}
-        className={`shrink-0 rounded px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide transition ${STATE_COLOURS[state]}`}
+      <span
+        title={label.help}
+        className={`shrink-0 rounded px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide ${STATE_COLOURS[state]}`}
       >
         {label.label}
-      </button>
+      </span>
     </li>
   );
 }
