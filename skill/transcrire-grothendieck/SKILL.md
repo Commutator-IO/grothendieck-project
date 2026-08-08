@@ -38,6 +38,12 @@ read more slowly — they do not read at all.
 reading degrades towards the end of the pass with nothing to signal it, and a
 transcription whose weakening point is unknown cannot be used.
 
+**Run under Fable 5, one batch per conversation.** The pass lives or dies on
+sustained visual attention to fourteen-plus page images at once; a fresh
+context per batch is what keeps leaf 18 read as carefully as leaf 2. Note the
+model and the date in the file's header comment — a disputed reading years
+later needs to know what produced it.
+
 ## Before anything: what these leaves are
 
 Everything downstream follows from this, and a transcription made without
@@ -185,9 +191,19 @@ Allowed: `\section` `\subsection` · paragraphs separated by a blank line ·
 and the matrix environments · the seven macros above.
 
 Mathematics is **not** converted: the delimiters pass through and KaTeX sets
-them in the browser, so screen and PDF come from one source. A `tikz-cd` does
-not appear in the reading view — KaTeX does not typeset it — and does appear in
-the PDF. That is a known limit, not a reason to render a diagram as prose.
+them in the browser, so screen and PDF come from one source. A `tikz-cd` is
+not typeset in the reading view — KaTeX cannot — but is not dropped either:
+it appears there as a labelled source block, and typeset in the PDF.
+
+Two layout rules for diagrams, both learned on a real batch:
+
+- **A `tikzcd` sits in its own paragraph** — blank line before and after.
+  Inline after a colon it inherits the paragraph's baseline and walks off the
+  right margin.
+- **Wide diagrams take `[column sep=small, row sep=small,
+  nodes={font=\scriptsize}]`.** A wheel of eight functor categories does not
+  fit an A4 measure at text size, and an overfull box in a transcription is
+  not a cosmetic defect: it hides content.
 
 `references/specimen.tex` shows every macro in a complete file.
 
@@ -227,7 +243,10 @@ Grothendieck's text and must not be mistakable for it.
 ### 4. Translate — from the transcription, never from the leaf
 
 `batch-NN.en.tex` derives from `batch-NN.fr.tex`. **Do not re-read the
-manuscript to translate.** Two independent readings of the same handwriting
+manuscript to translate.** Both English documents (`en`, `summary`) put
+`\selectlanguage{english}` immediately after `\begin{document}`: the shared
+preamble defaults to French typography, which puts spaces before colons —
+correct for his text, a fault in yours. Two independent readings of the same handwriting
 would diverge, and nothing would say which was right.
 
 - The apparatus macros carry over unchanged, in the same places. A word
@@ -253,6 +272,13 @@ npm run manifest    # declares the files to the site
 Then read the rendered view **beside the facsimile**, on the notebook page.
 That is precisely the gesture the site exists to allow, and it is the only
 check worth anything: scrolling the transcript turns the facsimile's pages.
+
+Two mechanical checks before the human one, because each caught a real defect
+on the first batch: the reading view must contain **zero `katex-error`
+nodes** (a formula that failed to typeset renders as red source), and the PDF
+must show **no line running past the right margin** — overfull boxes in a
+transcription hide content. Reload the browser tab before counting: a cached
+frame happily shows yesterday's rendering.
 
 ## What not to do
 

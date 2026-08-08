@@ -1,0 +1,538 @@
+% Transcription — fonds Alexandre Grothendieck, cote 115, lot 1 (feuillets 1-14).
+% Établie sur le fac-similé archives/batches/115/batch-01.pdf (miroir de
+% https://grothendieck.umontpellier.fr/115.pdf), selon la skill
+% transcrire-grothendieck. Feuillets 4, 6 et 12 : versos de listings
+% informatiques sans rapport (datés 02 JUN 82) — absents, comme il se doit.
+% Pass: Fable 5 (claude-fable-5), 2026-08-08 — first pass, unchecked against the leaves by a human.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{115}
+\batch{1}
+\leaves{1}{14}
+\foldertitle{« Correspondances » fonctorielles. Dualité des topos : notes manuscrites (s.d.)}
+
+\begin{document}
+
+\begin{summary}
+These leaves — several written across the backs of IBM job listings dated
+June 1982, which is how the archivists date the folder — pursue one question:
+how much of a category is captured by the two kinds of shadow its objects
+cast?
+
+Fix a small category $A$ and think of its objects as shapes. Each object can
+be probed from the left, by the maps arriving into it, or from the right, by
+the maps leaving it. Recording all arrivals turns an object into a
+\emph{presheaf}; Grothendieck writes $\widehat{A}$ for the category of these.
+Recording departures gives a \emph{copresheaf}, living in $A^{\vee}$. These
+are the two shadow-worlds, and both are topoi — hence the title.
+
+The first leaves set up the « functorial correspondences » : a single object
+$X$ over a product $A \times B$ acts like an integral kernel $k(x,y)$ in
+analysis, transforming shadows on $A$ into shadows on $B$ and back — the
+transforms ${}^{s}X$ and ${}^{d}X$ of leaf 3, with the pairing $X(L,M)$.
+Leaf 5 arranges eight functor categories in a wheel, all equivalent: eight
+ways of reading the same kernel, one per choice of variance.
+
+The duality itself is on leaf 7. A pairing $\Phi \star_{A} \Psi$ between
+presheaves and copresheaves gives an adjunction between $\widehat{A}$ and
+$A^{\vee}$ — each is « functions on » the other, the way a vector space $V$
+and its dual $V^{*}$ are in linear algebra. His \emph{Question} — when are
+the adjunction maps isomorphisms? — is the reflexivity question of linear
+algebra, one level up. Today this is called Isbell duality. On leaves 10--11
+he assembles triples $(H_{*}, H^{*}, \alpha)$ — a left shadow, a right
+shadow, and a composition law binding them — a construction now known as the
+Isbell envelope; and on leaf 13 he relates the self-dual core to
+$\mathrm{Kar}(A)$, the category obtained by splitting idempotents, in modern
+terms the Cauchy completion.
+
+Nothing here was published. The notes sit among the material around
+\emph{Pursuing Stacks} (1983), and the circle of ideas is now standard: the
+reader who wants today's language should look up \emph{profunctor},
+\emph{Isbell duality} and \emph{Cauchy completion}.
+\end{summary}
+
+\section*{Correspondances fonctorielles (feuillets 1 à 5)}
+
+\leaf{1}
+Titre porté à l'encre sur la chemise : « Correspondances » fonctorielles —
+Dualité des topos. \note{chemise du dossier}
+
+\leaf{2}
+Formules d'adjonction, en tête de feuillet :
+\[
+H_{A}\bigl(f^{*}(\Psi_{\varepsilon}),\ \Phi^{\varepsilon}\bigr)
+\;\simeq\;
+H_{B}\bigl(\Psi_{\varepsilon},\ f^{\varepsilon}_{!}(\Phi^{\varepsilon})\bigr)
+\]
+\note{lecture incertaine des décorations $\varepsilon$ et de la répartition
+des indices}
+\[
+H_{A}\bigl(f^{*}(b),\ a\bigr) \;\simeq\; H_{B}\bigl(b,\ f^{\varepsilon}(a)\bigr)
+= \mathrm{Hom}_{B}\bigl(b,\ f(a)\bigr),
+\qquad
+f^{\varepsilon}(a) = \varinjlim \cdots
+\]
+\note{le système d'indices de la colimite est illisible. Le reste du feuillet
+— un cercle de catégories de foncteurs et de petits diagrammes — est un
+premier état raturé de la roue du feuillet 5 ; lectures trop incertaines pour
+être transcrites}
+
+\leaf{3}
+\note{page 1 de la main de l'auteur}
+En tête, à droite : $\underline{\mathrm{Hom}}_{!}$ : sous-catégorie pleine de
+$\underline{\mathrm{Hom}}$ formée des foncteurs commutant aux
+\uncertain{limites inductives} ; $\underline{\mathrm{Hom}}^{!}$ :
+sous-catégorie pleine de $\underline{\mathrm{Hom}}$ formée des foncteurs
+commutant aux \uncertain{limites projectives}.
+
+En marge gauche : cas $B = A^{\circ}$ : d'où l'élément canonique
+$H = H_{A} \in (A \times A^{\circ})^{\wedge}$ ; \uncertain{les prolongements
+canoniques} $\widehat{A}^{\circ} \hookrightarrow A^{\vee}$, \ldots
+\note{le reste de la colonne marginale est trop raturé pour être transcrit}
+
+Le diagramme central, simplifié — l'original est un espalier d'une dizaine de
+flèches marquées $\approx$, dont plusieurs biffées :
+
+\begin{tikzcd}[column sep=small, row sep=small, nodes={font=\scriptsize}]
+\underline{\mathrm{Hom}}(B^{\circ}, \widehat{A})
+  & (A\times B)^{\wedge} \arrow[l, "\approx"'] \arrow[r, "\approx"] \arrow[d, "\approx"]
+  & \underline{\mathrm{Hom}}(A^{\circ}, \widehat{B}) \arrow[d, "\approx"] \\
+  & \underline{\mathrm{Hom}}^{!!}\bigl(\widehat{A}^{\circ} \times \widehat{B}^{\circ},\ (\mathrm{Ens})\bigr) = \mathrm{Bifais}(\widehat{A}, \widehat{B})
+  & \underline{\mathrm{Hom}}^{!}(\widehat{A}^{\circ}, \widehat{B}) \\
+  & \underline{\mathrm{Hom}}_{!}(A^{\vee}, \widehat{B}) \arrow[u, "\approx"']
+  &
+\end{tikzcd}
+
+Le dispositif systématique : $A \times B$, avec les projections
+$p_{B} : A\times B \to A$ et $p_{A} : A\times B \to B$.
+\note{l'indice de la projection nomme le facteur supprimé — c'est la seule
+lecture sous laquelle les formules qui suivent concordent entre elles}
+\[
+\underline{\mathrm{Hom}}_{A}(X,Y) \overset{\mathrm{def}}{=}
+   p_{B*}\,\underline{\mathrm{Hom}}_{A\times B}(X,Y),
+\qquad
+\underline{\mathrm{Hom}}_{B}(X,Y) \overset{\mathrm{def}}{=}
+   p_{A*}\,\underline{\mathrm{Hom}}_{A\times B}(X,Y)
+\]
+\[
+\mathrm{Hom}_{A\times B}(X,Y)
+\simeq \Gamma_{A\times B}\,\underline{\mathrm{Hom}}_{A\times B}(X,Y)
+\simeq \Gamma_{A}\,\underline{\mathrm{Hom}}_{A}(X,Y)
+\simeq \Gamma_{B}\,\underline{\mathrm{Hom}}_{B}(X,Y),
+\qquad X, Y \in (A\times B)^{\wedge}
+\]
+\[
+{}^{s}X(L) = \underline{\mathrm{Hom}}_{B}\bigl(p_{B}^{*}L,\ X\bigr)
+           = p_{A*}\,\underline{\mathrm{Hom}}\bigl(p_{B}^{*}L,\ X\bigr),
+\qquad
+{}^{d}X(M) = \underline{\mathrm{Hom}}_{A}\bigl(p_{A}^{*}M,\ X\bigr)
+           = p_{B*}\,\underline{\mathrm{Hom}}\bigl(p_{A}^{*}M,\ X\bigr)
+\]
+(en marge : $L \in \widehat{A}$, $M \in \widehat{B}$)
+\[
+X(L,M) = \mathrm{Hom}\bigl(L \boxtimes M,\ X\bigr)
+\simeq \mathrm{Hom}\bigl(L,\ {}^{d}X(M)\bigr)
+\simeq \mathrm{Hom}\bigl(M,\ {}^{s}X(L)\bigr),
+\qquad\text{où } L \boxtimes M = p_{B}^{*}L \times p_{A}^{*}M .
+\]
+
+« Ces formules sont particulièrement intéressantes pour
+$L = a \in \mathrm{Ob}\,A$, $M = b \in \mathrm{Ob}\,B$. »
+\note{lecture incertaine des deux membres de droite}
+
+« Soit $X$ ; définissons $B^{\circ} \to \widehat{A}$ (savoir
+$b \mapsto {}^{d}X(b) = \underline{\mathrm{Hom}}_{A}(p_{A}^{*}(b), X)$)
+\ldots{} on trouve $B^{\circ} \to \mathrm{Ens}$ : c'est \ill{}, qui
+s'écrit aussi $\underline{\mathrm{Hom}}_{B}(p_{B}^{*}(L), X) = {}^{s}X(L)$.
+Interprétation \uncertain{duale} pour ${}^{d}X(M)$. »
+\note{passage interligné, lecture partiellement conjecturale}
+
+« $(L,M) \mapsto L \boxtimes M : \widehat{A} \times \widehat{B} \to
+(A\times B)^{\wedge}$ est pleinement fidèle. »
+
+« le \ill{} qui est le foncteur canonique \ldots{} dit « de Yoneda » pour
+$\widehat{A} \times \widehat{B}$ »
+\[
+\underline{\mathrm{Hom}}_{A\times B}\bigl(L\boxtimes M',\ L'\boxtimes N'\bigr)
+\simeq \underline{\mathrm{Hom}}_{A}(L,L') \boxtimes
+       \underline{\mathrm{Hom}}_{B}(M',N')
+\qquad \text{p.ex.}
+\]
+\[
+\underline{\mathrm{Hom}}_{A\times B}\bigl(L\boxtimes M',\ L'\boxtimes e_{B}\bigr)
+\simeq \underline{\mathrm{Hom}}_{A}(L,L') \boxtimes e_{B}
+= p_{B}^{*}\,\underline{\mathrm{Hom}}_{A}(L,L')
+\]
+en particulier, faisant $L' = e_{A}$ : \ldots
+\note{la suite de la ligne est illisible}
+
+$\underline{\mathrm{Hom}}_{A\times B}\bigl(p_{A}^{*}(M), \cdots\bigr)
+\Leftarrow p_{B}^{*}\cdots$ (les flèches étant les flèches canoniques)
+\note{ligne partiellement illisible}
+
+Posant $X^{M} \overset{\mathrm{def}}{=}
+\underline{\mathrm{Hom}}_{A\times B}\bigl(p_{A}^{*}M,\ X\bigr)$, on trouve
+donc $(p_{B}^{*}L)^{M} \simeq p_{B}^{*}L\cdots$
+\note{fin de formule incertaine}
+
+\leaf{5}
+\note{page 2 de la main de l'auteur}
+En marge haute : $A^{\circ}, \widehat{A}^{\circ}, A^{\vee}$ ;
+$B^{\circ}, \widehat{B}^{\circ}, B^{\vee}$ ;
+$\bigl|\widehat{A}^{\circ} \times A^{\vee}\bigr| \times
+ \bigl|\widehat{B}^{\circ} \times B^{\vee}\bigr| \to \mathrm{Ens}$
+\note{décorations « (4 co) », « (6 (co)) » non élucidées}
+
+La roue des huit catégories de foncteurs autour de
+$(A\times B)^{\wedge} = \underline{\mathrm{Hom}}(A^{\circ}, B^{\circ};\,
+\mathrm{Ens})$ :
+
+\begin{tikzcd}[column sep=tiny, row sep=small, nodes={font=\scriptsize}]
+& \underline{\mathrm{Hom}}^{!!}(\widehat{A}^{\circ}\times\widehat{B}^{\circ};\ \mathrm{Ens}) \arrow[dl, "\approx"'] \arrow[dr, "\approx"] & \\
+\underline{\mathrm{Hom}}^{!}(\widehat{B}^{\circ},\widehat{A}) \arrow[d, "\approx"'] & & \underline{\mathrm{Hom}}^{!}(\widehat{A}^{\circ},\widehat{B}) \arrow[d, "\approx"] \\
+\underline{\mathrm{Hom}}(B^{\circ},\widehat{A}) \arrow[d, "\approx"'] & (A\times B)^{\wedge} & \underline{\mathrm{Hom}}(A^{\circ},\widehat{B}) \arrow[d, "\approx"] \\
+\underline{\mathrm{Hom}}_{!}(B^{\vee},\widehat{A}) \arrow[dr, "\approx"'] & & \underline{\mathrm{Hom}}_{!}(A^{\vee},\widehat{B}) \arrow[dl, "\approx"] \\
+& \underline{\mathrm{Hom}}_{!!}(A^{\vee}\times B^{\vee};\ \mathrm{Ens}) &
+\end{tikzcd}
+
+« toutes les flèches du diagramme \ldots{} sont des équivalences de
+catégories »
+\note{les quadrants de l'original sont marqués $\wedge\wedge$, $\wedge\vee$,
+$\vee\vee$, $\vee\wedge$, et les arcs extérieurs $(\widehat{A}\to)$,
+$(\widehat{B}\to)$, $(A^{\vee}\to)$, $(B^{\vee}\to)$ ; les deux nœuds de
+gauche, en partie masqués par une déchirure, sont de lecture incertaine}
+
+En bas — familles d'indices : « $I$ ens.\ d'indices, $(A_i)_{i\in I}$ famille
+de (petites) catégories. Si $I' \subset I$, on pose
+$A_{I'} = \prod_{i\in I'} A_i$. »
+\[
+I = \coprod_{j\in J} I_{j}, \qquad J = J^{+} \amalg J^{-},
+\qquad I^{+} = \coprod_{j\in J^{+}} I_{j}, \quad
+I^{-} = \coprod_{j\in J^{-}} I_{j}
+\]
+« \uncertain{Je suppose} $I$, $J$ finis pour « plus safe ». »
+\[
+\widehat{A_{I}} \;\simeq\;
+\underline{\mathrm{Hom}}^{!!}\Bigl(\prod_{j\in J^{-}} A_{I_{j}}^{\vee}\,,\
+\prod_{j'\in J^{+}} \widehat{A_{I_{j'}}}^{\circ}\,;\ \mathrm{Ens}\Bigr)
+\]
+avec des flèches $\approx$ vers
+\[
+\underline{\mathrm{Hom}}_{!}\Bigl(\prod_{j\in J^{-}} A_{I_{j}}^{\vee},\
+\widehat{A_{I^{+}}}\Bigr),
+\qquad
+\underline{\mathrm{Hom}}^{!}\Bigl(\prod_{j'\in J^{+}}
+\widehat{A_{I_{j'}}}^{\circ},\ A_{I^{-}}^{\vee}\Bigr)
+\]
+\note{variances partiellement conjecturales}
+
+\section*{La dualité entre $\widehat{A}$ et $A^{\vee}$ (feuillets 7 à 9)}
+
+\leaf{7}
+\note{page 3 de la main de l'auteur}
+\[
+\boxed{\ H_{A}(\Phi,\Psi)
+= \mathrm{Hom}_{\widehat{A}}\bigl(\Phi,\ \Psi_{A}(\Psi)\bigr)
+\simeq \mathrm{Hom}_{A^{\vee}}\bigl(\Psi,\ \varphi_{A}(\Phi)\bigr)\ }
+\]
+(en marge : $\widehat{A}^{\circ} \xrightarrow{\varphi_{A}} A^{\vee}$,
+$A^{\vee\circ} \xrightarrow{\Psi_{A}} \widehat{A}$,
+$\widehat{A} \times A^{\vee\circ} \xrightarrow{H_{A}} \mathrm{Ens}$)
+
+« i.e.\ on a $A^{\vee\circ} \rightleftarrows \widehat{A}$
+($\varphi_{A}^{\circ}$, $\Psi_{A}$), paire de foncteurs adjoints. »
+
+NB — a) le triangle
+\begin{tikzcd}[column sep=small, row sep=small]
+A^{\vee\circ} \arrow[rr, "\Psi_{A}"] & & \widehat{A} \\
+& A \arrow[ul, hook] \arrow[ur, hook'] &
+\end{tikzcd}
+est commutatif, et $\Psi_{A}$ commute aux \uncertain{limites projectives} —
+ces \uncertain{deux} conditions \uncertain{caractérisent} $\Psi_{A}$ à iso.
+unique près ; — b) de même pour
+$\widehat{A} \xrightarrow{\varphi_{A}^{\circ}} A^{\vee\circ}$ :
+« commutatif, et $\varphi_{A}^{\circ}$ commute aux \ill{} et \ill{} — et ces
+conditions : $\varphi_{A}^{\circ}$ à iso.\ unique près. »
+
+En marge gauche : \uncertain{$\varphi_{A^{\circ}} = \Psi_{A}$},
+\uncertain{$\Psi_{A^{\circ}} = \varphi_{A}$},
+\uncertain{$H_{A^{\circ}}(\Psi,\Phi) = H_{A}(\Phi,\Psi)$}
+(\uncertain{formules à vérifier}).
+
+Morphismes d'adjonction :
+\[
+\Phi \longrightarrow \Psi_{A}\,\varphi_{A}^{\circ}(\Phi)
+\ \text{dans } \widehat{A},
+\qquad
+\Psi \longrightarrow \varphi_{A}\,\Psi_{A}^{\circ}(\Psi)
+\ \text{dans } A^{\vee} ;
+\]
+« iso si $\Phi \in \mathrm{Ob}\,A$ \uncertain{ou} $\Psi \in \mathrm{Ob}\,A$ ».
+
+c)
+\[
+\boxed{\ H_{A}(a,b) = \mathrm{Hom}_{A}(a,b)\ }
+\]
+« donc $H_{A}$ prolonge $\mathrm{Hom}_{A}$, et est \uncertain{déterminé} à
+iso.\ unique près par cette propriété, plus celle que $H_{A}$ commute aux
+\uncertain{limites} \ldots »
+\[
+H_{A}(\Phi, b) \simeq \mathrm{Hom}_{\widehat{A}}(\Phi,\ b),
+\qquad
+H_{A}(a, \Psi) \simeq \mathrm{Hom}_{A^{\vee}}(\Psi,\ a)
+= \mathrm{Hom}_{A^{\vee\circ}}(a,\ \Psi)
+\]
+\note{seconde formule partiellement conjecturale}
+
+« Question : que penser des morphismes d'adjonction $\alpha_{\Phi}$,
+$\beta_{\Psi}$ ? Iso \uncertain{(oui)} seulement si $\Phi$ \uncertain{resp.}
+$\Psi$ sont représentables ? Est-ce \uncertain{que c'est} une équivalence
+faible (sans doute pas). Les foncteurs $\varphi_{A}$ et $\Psi_{A}$ sont-ils
+\ill{} ? »
+
+« Relations avec \uncertain{les contractions} : »
+\[
+\boxed{\ H^{A} :\ (\Phi,\Psi) \longmapsto \Phi \star_{A} \Psi\ ;\quad
+\widehat{A} \times A^{\vee} \longrightarrow \mathrm{Ens}\ }
+\]
+d)
+\[
+\boxed{\ H^{A}(a,b) = \mathrm{Hom}_{A}(b,a)\ }
+\]
+« et $H^{A}$ commute aux \uncertain{limites inductives}, en \uncertain{quelles}
+conditions : iso.\ unique près. »
+\[
+\boxed{\ \widehat{A} \xrightarrow{\ \sim\ }
+\underline{\mathrm{Hom}}_{!}(A^{\vee}, \mathrm{Ens}),
+\qquad
+A^{\vee} \xrightarrow{\ \sim\ }
+\underline{\mathrm{Hom}}_{!}(\widehat{A}, \mathrm{Ens})\ }
+\]
+\note{la décoration du second Hom diffère du premier — point d'exclamation
+placé autrement, lecture incertaine}
+\[
+\Phi \star a = \Phi(a), \qquad a \star \Psi = \Psi(a)
+\]
+\[
+H^{A}(\Phi,\Psi) = \varphi^{A}(\Phi)(\Psi) \simeq \Psi^{A}(\Psi)(\Phi)
+\]
+\note{le premier membre est précédé d'un symbole non élucidé}
+
+\leaf{8}
+\note{feuillet entier biffé de trois grands traits obliques}
+Multivariances :
+\[
+\Bigl(\prod_{i\in I} A_{i}\Bigr)^{\wedge},
+\qquad
+A_{1}^{\circ} \times A_{2}^{\circ} \times \cdots \times A_{n}^{\circ}
+\to \mathrm{Ens},
+\qquad
+\widehat{A_{1}}^{\circ} \times \widehat{A_{2}} \times A_{3}^{\vee}
+\times \cdots
+\]
+\note{la troisième liste de variances est partiellement illisible}
+\[
+X_{1} \otimes X_{2} \simeq \mathrm{Hom}(X_{1}^{\vee}, X_{2})
+\simeq \mathrm{Hom}(X_{2}^{\vee}, X_{1})
+\]
+\note{un membre intermédiaire, portant un 1 souligné, reste incertain}
+\[
+F(X_{1}\boxtimes X_{2})
+\simeq \underline{\mathrm{Hom}}^{!!}\bigl(F(X_{1})^{\circ},\ F(X_{2})^{\circ};\
+\mathrm{Ens}\bigr)
+\simeq \cdots
+\simeq \mathrm{Hom}\bigl(F(X_{1})^{\vee},\ F(X_{2})\bigr)
+\simeq \mathrm{Hom}\bigl(F(X_{2})^{\vee},\ F(X_{1})\bigr)
+\]
+Familles : $X_{I} = \prod_{j} X_{I_{j}}$, $I = I^{+} \amalg I^{-}$,
+\[
+F(X_{I})
+\simeq \underline{\mathrm{Hom}}^{(1)}\Bigl(\prod_{j\in J} F(X_{I_{j}})^{\circ},\
+\mathrm{Ens}\Bigr)
+\simeq \underline{\mathrm{Hom}}_{(1)}\Bigl(\prod_{j\in J}
+F(X_{I_{j}}^{\vee}),\ \mathrm{Ens}\Bigr)
+\simeq \cdots
+\]
+\[
+\cdots \simeq \underline{\mathrm{Hom}}_{!}\Bigl(\prod_{j\in J^{-}}
+F(X_{I_{j}}),\ \prod_{j'\in J^{+}} F(X_{I_{j'}})\Bigr)
+\simeq \underline{\mathrm{Hom}}^{!}\Bigl(\prod_{j'\in J^{+}}
+F(X_{I_{j'}})^{\circ},\ \prod_{j\in J^{-}} F(X_{I_{j}}^{\vee})\Bigr)
+\]
+\note{décorations ① et exposants en partie conjecturaux}
+En bas : $\mathrm{Top}(A) \xrightarrow{\varphi} X \xleftarrow{\Psi}
+\mathrm{Top}(B)$, \quad $A \to \mathrm{Pt}(X)$
+\note{trois lignes finales raturées, mêlant $\varphi_{*}(F)$,
+$F \in \mathrm{Top}(A)$, $G \in \mathrm{Ob}\,B^{\vee}$ — lecture trop
+incertaine pour être poursuivie}
+
+\leaf{9}
+\note{page 4 de la main de l'auteur ; le feuillet ne porte que ces deux
+formules, encadrées}
+\[
+\bigl\langle \Phi_{*},\ f^{\circ*}(\Psi^{*}) \bigr\rangle_{A}
+\simeq \bigl\langle f_{!}(\Phi_{*}),\ \Psi^{*} \bigr\rangle_{B},
+\qquad
+\bigl\langle f^{*}(\Psi_{*}),\ \Phi^{*} \bigr\rangle_{A}
+\simeq \bigl\langle \Psi_{*},\ f^{\circ}_{!}(\Phi^{*}) \bigr\rangle_{B}
+\]
+\note{répartition des étoiles et des ronds partiellement conjecturale}
+
+\section*{L'enveloppe $\widetilde{A}$ (feuillets 10 et 11)}
+
+\leaf{10}
+\note{page 5 de la main de l'auteur}
+« $A \hookrightarrow B$ \uncertain{pl.\ fid.}, $x \in B$ :
+\[
+H_{x} \in \widehat{A}, \quad H_{x}(a) = \mathrm{Hom}_{B}(a, x) ;
+\qquad
+H^{x} \in A^{\vee}, \quad H^{x}(a) = \mathrm{Hom}_{B}(x, a)
+\]
+\[
+H_{x}(a) \times H^{x}(b) \xrightarrow{\ \alpha_{x}\ } \mathrm{Hom}_{A}(a, b)
+\]
+ »
+\note{la flèche est la composition dans $B$ ; elle aboutit dans
+$\mathrm{Hom}_{A}$ parce que $A$ est pleine dans $B$}
+
+« Soit $\widetilde{A}$ la catégorie des triples $(H_{*}, H^{*}, \alpha)$ où
+$H_{*} \in \widehat{A}$, $H^{*} \in A^{\vee}$,
+$\alpha : H_{*}(a) \times H^{*}(b) \to \mathrm{Hom}_{A}(a,b)$ (fonctoriel).
+Les flèches $(H_{*}, H^{*}, \alpha) \xrightarrow{\varphi}
+(H'_{*}, H'^{*}, \alpha')$ étant \uncertain{formées des couples}
+$\varphi_{*} : H_{*} \to H'_{*}$ dans $\widehat{A}$,
+$\varphi^{*} : H'^{*} \to H^{*}$ dans $A^{\vee}$, tels que l'on ait :
+\[
+\alpha_{a,b}\bigl(u,\ \varphi^{*}(u')\bigr)
+= \alpha'_{a,b}\bigl(\varphi_{*}(u),\ u'\bigr)
+\]
+ »
+\note{le manuscrit exprime cette identité par un carré à variance mixte,
+$\varphi_{*}$ descendant sur le premier facteur et $\varphi^{*}$ remontant
+sur le second}
+
+« Pour un foncteur \uncertain{pl.\ fid.} $A \xrightarrow{\varphi} B$, on en
+\uncertain{déduit} un foncteur $\varphi^{\S} : B \to \widetilde{A}$,
+$x \mapsto (\varphi^{\S}_{*}(x),\ \varphi^{\S *}(x),\ \alpha_{x})$. »
+\note{décorations des deux composantes incertaines}
+
+\leaf{11}
+\note{page 6 de la main de l'auteur}
+« NB $\widetilde{A}^{\circ} \simeq \widetilde{A}$ \ldots »
+\note{fin de ligne illisible}
+« Cas où $\varphi^{\S}$ est pl.\ fidèle ? Il suffit que $f$ soit
+\uncertain{strict.\ gén.} ou \ill{} \uncertain{adjonctions}. »
+
+« Cas $A \xrightarrow{\mathrm{can}} \widehat{A}$ :
+$\varphi^{\S}(F)_{*} = F$,\quad
+$\varphi^{\S}(F)^{*}(a) = \mathrm{Hom}(F, a)$ ;\quad $\varphi^{\S}$
+\uncertain{fidèle}. »
+
+Petits diagrammes intermédiaires sur $F$, $F^{\S}$, $G$, avec $u \in F(a)$,
+$u' \in F^{\S}(b)$.
+\note{enchaînement raturé ; on y lit « $v = v' \circ \varphi_{*}$ ! » et
+« on sait que $v \circ u = v' \circ u'$ »}
+
+\struck{Considérons alors la sous-catégorie pleine de $\widetilde{A}$ formée
+des} \ill{}
+\note{passage biffé puis récrit, en grande partie illisible ; y figurent les
+chaînes $\Psi_{1}^{\circ} \to a \to \Phi \to \Psi_{2}^{\circ}$ et
+$\Phi_{1} \to \Psi \to \Phi_{2}$}
+
+$(F, G, \alpha) \simeq (F, F^{\S}, \alpha_{F})$, \qquad
+$(F, G, \alpha) \simeq (G^{\S}, G, \alpha^{G})$
+\note{lecture conjecturale des deux isomorphismes}
+
+Fonctorialité : $A \xrightarrow{f} B$ induit
+$\widetilde{f} : \widetilde{A} \to \widetilde{B}$ ; en bas du feuillet,
+encerclé :
+\begin{tikzcd}[column sep=normal, row sep=normal]
+\widehat{A} \arrow[r, hook] \arrow[d, "f_{!}"']
+  & \widetilde{A} \arrow[d, Rightarrow, "\widetilde{f}"]
+  & A^{\vee\circ} \arrow[l, hook'] \arrow[d, "f^{\circ*\circ}"] \\
+\widehat{B} \arrow[r, hook]
+  & \widetilde{B}
+  & B^{\vee\circ} \arrow[l, hook']
+\end{tikzcd}
+\note{étiquettes des flèches verticales partiellement conjecturales ; à côté,
+une colonne de paires de foncteurs adjoints — $f_{!}, f^{*}$ ;
+$f^{\circ}_{!}, f^{\circ *}$ ; \ldots{} — trop abrégée pour être restituée}
+
+\section*{Noyau autodual, recollements, coefficients (feuillets 13 et 14)}
+
+\leaf{13}
+\note{page 7 de la main de l'auteur}
+En haut :
+\[
+\widehat{A} \xrightarrow{\ \approx\ }
+\underline{\mathrm{Hom}}_{!}(A^{\vee}, \mathrm{Ens}),
+\qquad
+A^{\vee\circ} \xrightarrow{\ \approx\ }
+\underline{\mathrm{Hom}}_{\mathrm{rep}}(\widehat{A}, (\mathrm{Ens}))
+\]
+\note{l'indice du second Hom — « rep » ? — est incertain ; au-dessus des deux,
+un $\underline{\mathrm{Hom}}(A^{\vee}, (\mathrm{Ens}))$ sans décoration les
+reçoit tous deux}
+Au centre, relié à $A$ par une double flèche verticale :
+\[
+\bigl(\mathrm{Kar}(A^{\circ})\bigr)^{\circ} \;\simeq\; \mathrm{Kar}(A)
+\]
+À droite, le triangle $\varepsilon(A)$ sur $\widehat{A}$ et $A^{\vee\circ}$,
+avec
+\[
+A = \widehat{A} \cap A^{\vee\circ}
+\]
+\note{à gauche du feuillet, un $\overline{\varepsilon}(A)$ isolé, sous un
+trait de séparation}
+
+En bas, la mise en garde sur les recollements :
+« $N = M_{1} \cap M_{2}$ \uncertain{via} des flèches pl.\ fid. Alors on
+\uncertain{définit} une catégorie $\Sigma'$, \uncertain{réunion} des
+sous-catégories pleines $M'_{1}$ et $M'_{2}$, avec \uncertain{intersection}
+$N'$, et un foncteur pl.\ fid.\ $\Sigma' \to M$ (\uncertain{factorisant par}
+$M_{1} \cup M_{2}$). Mais \uncertain{même} si $M_{1}$, $M_{2}$ sont pleines
+dans $M$ (avec $N$ \ill{} dans $M$) et $M'_{1} \to M_{1}$,
+$M'_{2} \to M_{2}$ des équivalences, $M'_{1}$ et $M'_{2}$ ne sont \ill{}
+\ill{} pleines dans $\Sigma'$, et $N' \to N$ n'est pas \ill{} une
+équivalence. »
+\note{la lecture de plusieurs mots reste incertaine}
+
+\leaf{14}
+Dualité à valeurs dans une catégorie $M$ :
+\[
+\underline{\mathrm{Hom}}(A, M)
+\simeq \underline{\mathrm{Hom}}_{!}(\widehat{A}, M)
+\]
+\note{un troisième membre, aux décorations illisibles, prolonge la ligne}
+« Ex.\ $M = $ \ill{} : $\underline{\mathrm{Hom}}(B^{\circ}, M) \simeq \cdots$ »
+\note{exemple raturé}
+
+« $A = B^{\circ}$, $B = A^{\circ}$ » :
+\[
+\underline{\mathrm{Hom}}(A, M) \simeq
+\underline{\mathrm{Hom}}^{!}(\widehat{A}, M)
+\]
+« \uncertain{co}faisceaux sur $A$, ind.\ dans $M$ » ;
+\[
+\underline{\mathrm{Hom}}(B^{\circ}, M) \simeq
+\underline{\mathrm{Hom}}^{!}(\widehat{B}^{\circ}, M)
+\]
+« faisceaux sur $B$, ind.\ dans $M$ ».
+\[
+\mathcal{F}(X, M)^{\circ} \simeq \check{\mathcal{F}}(X, M^{\circ}),
+\qquad
+\bigl(\underline{\mathrm{Hom}}^{!}(A, M)\bigr)^{\circ}
+\simeq \underline{\mathrm{Hom}}_{!}(A^{\circ}, M^{\circ})
+\]
+« $\mathcal{F}(X,M)$ et $\check{\mathcal{F}}(X, M')$ \uncertain{se déduisent
+l'un de l'autre} » ;
+\[
+\mathcal{F}(X, M) \approx \check{\mathcal{F}}(X^{\circ}, M),
+\qquad
+\underline{\mathrm{Hom}}^{!}(A^{\circ}, M)
+\simeq \underline{\mathrm{Hom}}_{!}(A, M^{\circ})^{\circ}
+\]
+\note{dernières lignes aux décorations incertaines}
+
+\end{document}

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Footer, Header } from './components/Frame.tsx';
 import { BOOKS, cotesOf } from './content/books.ts';
+import { COTES } from './content/catalogue.ts';
 import { BATCH_SIZE, batchCount, batchRange, useManifest } from './lib/batches.ts';
 import { STATES, readProgress, stateOf, type Progress, type State } from './lib/progress.ts';
 
@@ -82,6 +83,16 @@ export function MethodPage() {
               the pane is the file read, and the LaTeX it produces covers those leaves and no
               others.
             </p>
+            <h3>Microbatches, and why twenty</h3>
+            <p>
+              Each pass runs on <strong>Fable 5</strong>, in a fresh context, on one batch and
+              never two. The limit is not arbitrary: past roughly twenty handwritten leaves the
+              quality of machine reading degrades towards the end of the pass, and nothing in the
+              output signals where it began to slip. A transcription whose weakening point is
+              unknown cannot be used at all — so the batch is sized to keep leaf 18 read as
+              carefully as leaf 2, and each file records in its header which model produced it
+              and when.
+            </p>
             <h3>Three editions, one source</h3>
             <p>
               Each batch yields a French transcription — Grothendieck wrote in French, and the
@@ -113,6 +124,8 @@ export function MethodPage() {
             </p>
           </div>
         </div>
+
+        <CostAndHorizon />
 
         <Contributors />
 
@@ -353,6 +366,117 @@ function Contributors() {
       <p className="mt-5 text-[12.5px] leading-relaxed text-ink-400">
         Incomplete, and certainly unfair to people whose names are not published alongside the
         work they did. Corrections are welcome.
+      </p>
+    </section>
+  );
+}
+
+/**
+ * What one batch costs, measured, and what the whole job would cost, derived.
+ *
+ * Every number here traces to the one batch actually completed — folder 115,
+ * 14 leaves, transcribed with Fable 5 on 8 August 2026 — and says so. The site
+ * cannot measure tokens or hours itself; these are declared figures from the
+ * pilot, and the honest way to present a sample of one is as a sample of one:
+ * the per-batch constants sit in this object so the next completed batch can
+ * correct them in one place.
+ */
+const PILOT = {
+  /** Batches completed so far, by hand-count. */
+  batchesDone: 1,
+  /** Wall-clock for the pilot batch: mirror, read, three editions, verify. */
+  hoursPerBatch: 0.7,
+  /** Rough total tokens for the pilot batch, input and output together:
+      fourteen page images read, three LaTeX files written, checks re-read. */
+  tokensPerBatchK: 100,
+  /** Dense continuous prose (the Long March) will run slower and heavier
+      than folder 115's formula-dominated leaves; the range reflects that. */
+  spread: 1.6,
+};
+
+function CostAndHorizon() {
+  const bookBatches = BOOKS.reduce(
+    (s, b) => s + cotesOf(b).reduce((x, c) => x + batchCount(c.pages), 0),
+    0,
+  );
+  // The whole open-access fonds, not only the notebooks.
+  const allBatches = COTES.reduce((s, c) => s + batchCount(c.pages), 0);
+
+  const hoursDone = PILOT.batchesDone * PILOT.hoursPerBatch;
+  const tokensDoneK = PILOT.batchesDone * PILOT.tokensPerBatchK;
+
+  const est = (batches: number) => ({
+    hoursLow: Math.round(batches * PILOT.hoursPerBatch),
+    hoursHigh: Math.round(batches * PILOT.hoursPerBatch * PILOT.spread),
+    tokensLowM: (batches * PILOT.tokensPerBatchK) / 1000,
+    tokensHighM: (batches * PILOT.tokensPerBatchK * PILOT.spread) / 1000,
+  });
+  const books = est(bookBatches);
+  const fonds = est(allBatches);
+  const fmtM = (m: number) => `${m >= 10 ? Math.round(m) : m.toFixed(1)} M`;
+
+  return (
+    <section className="mt-14 max-w-[52em]">
+      <h2 className="titre text-[22px] text-ink-900">Cost, and the horizon</h2>
+      <p className="prose-fonds mt-3">
+        One batch has been completed: folder 115, fourteen leaves, three editions, transcribed
+        with Fable 5 on 8 August 2026. It cost about{' '}
+        <strong>{PILOT.hoursPerBatch} h</strong> of wall-clock — mirroring, one full reading
+        pass, writing the three files, compiling and checking against the facsimile — and
+        roughly <strong>{PILOT.tokensPerBatchK}k tokens</strong> in and out, most of them the
+        fourteen page images. Everything below multiplies that single measurement, which is the
+        weakest kind of estimate there is; treat the ranges as a first anchor, to be corrected
+        by the next batches.
+      </p>
+
+      <div className="mt-5 overflow-x-auto">
+        <table className="w-full border-collapse text-[13px]">
+          <thead>
+            <tr className="border-b border-ink-200 text-left text-[11px] font-bold uppercase tracking-wide text-ink-400">
+              <th className="py-2 pr-4">Scope</th>
+              <th className="py-2 pr-4">Batches</th>
+              <th className="py-2 pr-4">Hours</th>
+              <th className="py-2">Tokens</th>
+            </tr>
+          </thead>
+          <tbody className="tabular text-ink-700">
+            <tr className="border-b border-ink-100">
+              <td className="py-2 pr-4 font-medium text-ink-900">Done so far</td>
+              <td className="py-2 pr-4">{PILOT.batchesDone}</td>
+              <td className="py-2 pr-4">{hoursDone} h</td>
+              <td className="py-2">{tokensDoneK}k</td>
+            </tr>
+            <tr className="border-b border-ink-100">
+              <td className="py-2 pr-4 font-medium text-ink-900">The five notebooks</td>
+              <td className="py-2 pr-4">{bookBatches}</td>
+              <td className="py-2 pr-4">
+                {books.hoursLow}–{books.hoursHigh} h
+              </td>
+              <td className="py-2">
+                {fmtM(books.tokensLowM)}–{fmtM(books.tokensHighM)}
+              </td>
+            </tr>
+            <tr>
+              <td className="py-2 pr-4 font-medium text-ink-900">Whole open-access fonds</td>
+              <td className="py-2 pr-4">{allBatches}</td>
+              <td className="py-2 pr-4">
+                {fonds.hoursLow}–{fonds.hoursHigh} h
+              </td>
+              <td className="py-2">
+                {fmtM(fonds.tokensLowM)}–{fmtM(fonds.tokensHighM)}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p className="mt-4 text-[12.5px] leading-relaxed text-ink-500">
+        The upper bounds assume dense continuous prose — the Long March, not folder 115's
+        formula-dominated leaves. Hours are machine-pass wall-clock only: the human
+        leaf-by-leaf check that turns <em>Drafted</em> into <em>Checked</em> is not in the
+        table, and it is the slower half of the work. Folders already edited by the community
+        (marked on the archive page) should be subtracted from any plan rather than
+        re-transcribed.
       </p>
     </section>
   );
