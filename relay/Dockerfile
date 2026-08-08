@@ -1,5 +1,6 @@
 # No dependencies, so no install step and no lockfile: the relay is one file
-# that uses only Node's standard library. Alpine keeps the image at ~60 MB.
+# that uses only Node's standard library. Measured at 228 MB, essentially all
+# of it the Node runtime — the relay's own contribution is a few kilobytes.
 FROM node:22-alpine
 WORKDIR /app
 COPY server.mjs .
