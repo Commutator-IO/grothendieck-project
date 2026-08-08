@@ -103,8 +103,8 @@ render services --output text --confirm
 
 ### When the free plan ends
 
-It will, eventually. Heroku withdrew its free dynos in 2022, Fly its free
-allowance in 2024; assuming Render is permanent would be the one mistake worth
+It will, eventually. Heroku withdrew its free dynos in 2022 and others have
+followed since; assuming Render is permanent would be the one mistake worth
 avoiding here. So the question is not *if* but *what breaks when it does* —
 and the answer is deliberately: very little.
 
@@ -137,31 +137,18 @@ Where to go, if that day comes:
 
 | Host | Cost | Note |
 |---|---|---|
-| **Fly.io** | cents/month | Scales to zero, resumes in under a second — no cold start worth the name. Rootfs storage plus $0.02/GB egress. `fly.toml` is already in this directory. |
-| **Render Starter** | $7/month | Same service, no sleep. The zero-effort option. |
-| **A small VPS** | ~$4/month | `node server.mjs` behind any TLS terminator. |
+| **Render Starter** | $7/month | The same service with no sleep. One flag, nothing else to change. |
+| **A small VPS** | ~$4/month | `node server.mjs` behind any TLS terminator. Cheapest, and the most to maintain. |
+| **Any container host** | varies | The Dockerfile is the whole contract: `PORT` and `ALLOWED_ORIGINS` in, a hostname out. |
 
-Fly is the natural successor: it costs less than Render's paid plan for this
-workload and removes the cold start, and the only reason it was not chosen
-first is that it is no longer free.
+Whichever it is, the migration is the three steps above. The relay was written
+to be disposable — one file, no dependencies, no state — precisely so that the
+host is never a decision worth agonising over.
 
 **How you would find out.** Nobody watches a facsimile pane. There is no
 monitoring, and a reader seeing the panel is currently the alerting system.
 A scheduled `curl` against `/health` that opens an issue on failure would fix
 that; it does not exist yet.
-
-### fly.io
-
-```bash
-cd relay
-fly launch --no-deploy --name grothendieck-relay
-fly deploy
-```
-
-Scales to zero between readers and resumes in under a second, so no cold start
-worth the name — but Fly ended its free allowance for new organisations on
-7 October 2024, so expect cents a month rather than nothing: the image's root
-filesystem plus $0.02/GB of egress.
 
 ### Anywhere else
 
@@ -175,9 +162,10 @@ PORT=8080 ALLOWED_ORIGINS=https://grothendieck.commutator.io node server.mjs
 ## Pointing the site at it
 
 Set a repository variable **`RELAY_URL`** (Settings → Secrets and variables →
-Actions → Variables) to the relay's origin, e.g. `https://grothendieck-relay.fly.dev`.
-The deploy workflow passes it to the build as `VITE_RELAY`. Nothing else changes;
-local `npm run dev` keeps using its own middleware and ignores the variable.
+Actions → Variables) to the relay's origin — currently
+`https://grothendieck-relay.onrender.com`. The deploy workflow passes it to the
+build as `VITE_RELAY`. Nothing else changes; local `npm run dev` keeps using its
+own middleware and ignores the variable.
 
 Left unset, the built site simply has no relay and every batch shows the "not
 answering" panel — the correct state for a deployment without one, not a
