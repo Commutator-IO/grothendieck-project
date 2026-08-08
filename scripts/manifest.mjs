@@ -113,7 +113,7 @@ export async function writeManifest() {
    * The declared states, carried through from the repository.
    *
    * Only the three no file can prove: a pass in flight, a human comparison
-   * against the leaves, a batch decided to hold nothing. `drafted` and
+   * against the pages, a batch decided to hold nothing. `drafted` and
    * `reviewed` are never written down — they are read off the files above, so
    * they cannot go stale.
    */

@@ -30,7 +30,7 @@ const SKILLS: {
   {
     name: 'transcribe-grothendieck',
     produces:
-      'the transcription — twenty leaves at a time, the mathematics in LaTeX with the critical apparatus that says which words were read and which were guessed',
+      'the transcription — twenty pages at a time, the mathematics in LaTeX with the critical apparatus that says which words were read and which were guessed',
     lines: 321,
     extra: 'references/specimen.tex',
   },
@@ -96,8 +96,8 @@ function Routes() {
       n: '1',
       title: 'Report a reading',
       cost: 'one click',
-      body: 'Every batch carries a Report a reading button, and every transcribed folder a Report link. Both open a GitHub issue with the shelfmark, the batch and the leaf you are looking at already filled in. You need a GitHub account and nothing else — not the repository, not LaTeX, not an opinion about what the word should be.',
-      href: issueUrl({ cote: '115', batch: 1, leaf: 5 }),
+      body: 'Every batch carries a Report a reading button, and every transcribed folder a Report link. Both open a GitHub issue with the shelfmark, the batch and the page you are looking at already filled in. You need a GitHub account and nothing else — not the repository, not LaTeX, not an opinion about what the word should be.',
+      href: issueUrl({ cote: '115', batch: 1, page: 5 }),
       hrefLabel: 'See what the form looks like ↗',
     },
     {
@@ -112,7 +112,7 @@ function Routes() {
       n: '3',
       title: 'Transcribe a folder',
       cost: 'an afternoon',
-      body: 'Install the three skills, mirror a folder nobody has taken, and run the two passes. Roughly an hour of machine time per twenty-leaf batch, most of it spent reading page images. The result is a draft nobody has checked — which is exactly what the rest of the site is, and it is labelled that way.',
+      body: 'Install the three skills, mirror a folder nobody has taken, and run the two passes. Roughly an hour of machine time per twenty-page batch, most of it spent reading page images. The result is a draft nobody has checked — which is exactly what the rest of the site is, and it is labelled that way.',
       href: '#skills',
       hrefLabel: 'Install the skills ↓',
     },
@@ -182,7 +182,7 @@ function Skills() {
           Both editions are written in French — including yours
         </h3>
         <p className="mt-1.5 text-[13.5px] leading-relaxed text-ink-600">
-          The leaves are in French, the notions were thought in French, and the modernised
+          The pages are in French, the notions were thought in French, and the modernised
           reading has no reason to change language. This holds whoever is running the pass: a
           contributor working in English still produces a French edition, and the skills
           enforce it. There are exactly two exceptions — the{' '}
@@ -313,7 +313,7 @@ function RunABatch() {
         than anything produced here, and re-transcribing it wastes your afternoon.
       </p>
 
-      <Code>{`npm run archive -- 19          # mirror it, cut into 20-leaf batches
+      <Code>{`npm run archive -- 19          # mirror it, cut into 20-page batches
 claude                         # then, in order:
   /transcribe-grothendieck 19, batch 1
   /modernize-grothendieck 19, batch 1
@@ -322,7 +322,7 @@ npm run dev                    # read it beside the facsimile`}</Code>
 
       <p className="prose-fonds mt-4">
         One batch per conversation, which is a real constraint and not a style preference: past
-        twenty handwritten leaves the quality of reading degrades towards the end of the pass
+        twenty handwritten pages the quality of reading degrades towards the end of the pass
         with nothing to signal it, and a transcription whose weakening point is unknown cannot
         be used.
       </p>
@@ -335,7 +335,7 @@ npm run dev                    # read it beside the facsimile`}</Code>
         </li>
         <li>
           <strong>poppler</strong> (<code>brew install poppler</code>) to mirror folders and to
-          crop leaves at 400 dpi — which is what settles a hard word, and what most of the
+          crop pages at 400 dpi — which is what settles a hard word, and what most of the
           transcription pass is actually doing.
         </li>
         <li>
@@ -384,7 +384,7 @@ gh pr create --fill`}</Code>
           <p className="mt-1.5 text-[13px] leading-relaxed text-ink-600">
             A correction to a reading is usually also a correction to the modernised reading.
             Take the two files up in the same pull request, or they drift apart — and the
-            modernised reading is the one nobody can check against a leaf.
+            modernised reading is the one nobody can check against a page.
           </p>
         </div>
       </div>
@@ -410,11 +410,11 @@ function Rules() {
     },
     {
       no: 'Correct Grothendieck.',
-      why: 'If a calculation is wrong on the leaf it is wrong in the transcription, with a note. The modernised reading is the one place where the true statement is given instead — and it footnotes what the leaf has.',
+      why: 'If a calculation is wrong on the page it is wrong in the transcription, with a note. The modernised reading is the one place where the true statement is given instead — and it footnotes what the page has.',
     },
     {
       no: 'Tick a batch as Checked without having done it.',
-      why: 'Checked means a person compared it with the facsimile leaf by leaf. It is a declaration in transcripts/status.json, reviewable in a diff, and it is the one claim on this site that no file can prove.',
+      why: 'Checked means a person compared it with the facsimile page by page. It is a declaration in transcripts/status.json, reviewable in a diff, and it is the one claim on this site that no file can prove.',
     },
     {
       no: 'Catalogue the paper.',
@@ -422,7 +422,7 @@ function Rules() {
     },
     {
       no: 'Commit a PDF, or any facsimile.',
-      why: 'Not one leaf, anywhere in the tree. The mirror is rebuilt from Montpellier on demand, and .gitignore refuses *.pdf outright.',
+      why: 'Not one page, anywhere in the tree. The mirror is rebuilt from Montpellier on demand, and .gitignore refuses *.pdf outright.',
     },
   ];
 
@@ -450,7 +450,7 @@ function Rules() {
       <div className="card mt-8 px-5 py-4">
         <h3 className="titre text-[17px] text-ink-900">If you would rather just tell us</h3>
         <p className="mt-2 text-[13.5px] leading-relaxed text-ink-600">
-          A GitHub issue in prose is a perfectly good contribution — "leaf 12 of folder 115,
+          A GitHub issue in prose is a perfectly good contribution — "page 12 of folder 115,
           the third formula reads $f_!$ and not $f_*$" is worth more than a silent doubt.
           Somebody else can make the edit.
         </p>

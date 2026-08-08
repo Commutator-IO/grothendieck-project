@@ -31,7 +31,7 @@ export function MethodPage() {
         <header className="max-w-[46em]">
           <h1 className="titre text-[34px] leading-tight text-ink-900">Method &amp; progress</h1>
           <p className="mt-3 text-[15.5px] leading-relaxed text-ink-700">
-            How these leaves are turned into LaTeX, what the process refuses to do, and how far it
+            How these pages are turned into LaTeX, what the process refuses to do, and how far it
             has got. The refusals matter more than the method: a transcription that silently
             guesses is worse than no transcription, because nothing on the page tells you which
             words were read and which were invented.
@@ -61,9 +61,9 @@ export function MethodPage() {
             <h3>Two numbering systems, sometimes three</h3>
             <p>
               Grothendieck paginated some drafts himself — the Long March runs 1 to 787 across
-              four boxes. The archivists then numbered every leaf in pencil, bottom left. The PDF
+              four boxes. The archivists then numbered every page in pencil, bottom left. The PDF
               adds a third count of its own, one page ahead of the archive's because of the
-              generated cover sheet. This site counts in archive leaves throughout, and the
+              generated cover sheet. This site counts in archive pages throughout, and the
               transcription records the author's own page number wherever it is visible.
             </p>
             <h3>Neutral sheets are part of the record</h3>
@@ -84,19 +84,19 @@ export function MethodPage() {
           <div className="prose-fonds">
             <h2 className="titre text-[22px] text-ink-900">How transcription proceeds</h2>
             <p className="mt-3">
-              One batch of {BATCH_SIZE} leaves per pass, always from the local facsimile file and
+              One batch of {BATCH_SIZE} pages per pass, always from the local facsimile file and
               never from a re-render of it. The batch is the unit end to end: the file shown in
-              the pane is the file read, and the LaTeX it produces covers those leaves and no
+              the pane is the file read, and the LaTeX it produces covers those pages and no
               others.
             </p>
             <h3>Microbatches, and why twenty</h3>
             <p>
               Each pass runs on <strong>Fable 5</strong>, in a fresh context, on one batch and
-              never two. The limit is not arbitrary: past roughly twenty handwritten leaves the
+              never two. The limit is not arbitrary: past roughly twenty handwritten pages the
               quality of machine reading degrades towards the end of the pass, and nothing in the
               output signals where it began to slip. A transcription whose weakening point is
-              unknown cannot be used at all — so the batch is sized to keep leaf 18 read as
-              carefully as leaf 2, and each file records in its header which model produced it
+              unknown cannot be used at all — so the batch is sized to keep page 18 read as
+              carefully as page 2, and each file records in its header which model produced it
               and when.
             </p>
             <h3>Two editions, one source</h3>
@@ -109,15 +109,15 @@ export function MethodPage() {
               one more artifact to keep in step for no gain the other two did not give.
             </p>
             <p>
-              The modernised reading works from the transcription, never from the leaf directly.
+              The modernised reading works from the transcription, never from the page directly.
               Two independent readings of the same handwriting would diverge, and nothing would
               say which was right.
             </p>
             <p>
-              The modernised reading is the one that is allowed to depart from the leaf, and it is
+              The modernised reading is the one that is allowed to depart from the page, and it is
               held to a different standard: <strong>correct as it stands</strong>. Where the
-              manuscript is loose or elliptical it states what is true and footnotes what the leaf
-              has. It carries no brackets and no leaf markers — it groups by argument rather than
+              manuscript is loose or elliptical it states what is true and footnotes what the page
+              has. It carries no brackets and no page markers — it groups by argument rather than
               by sheet — so the facsimile stays put while it is open. Everything the apparatus
               carried is in its footnotes instead.
             </p>
@@ -128,11 +128,11 @@ export function MethodPage() {
               is that a reader must be able to reconstruct which characters were on the page. A
               transcription that smooths over a gap has destroyed the only thing it was for.
             </p>
-            <h3>Every leaf is anchored</h3>
+            <h3>Every page is anchored</h3>
             <p>
-              The LaTeX marks each source leaf with <code>\leaf&#123;47&#125;</code>. That is what
+              The LaTeX marks each source page with <code>\page&#123;47&#125;</code>. That is what
               lets the reading view turn the facsimile as you scroll, and what lets a
-              disagreement about a formula be settled by looking at one specific leaf rather than
+              disagreement about a formula be settled by looking at one specific page rather than
               at a folder of six hundred.
             </p>
             <h3>Mathematics before prose</h3>
@@ -175,7 +175,7 @@ export function MethodPage() {
               the same screen. That is its whole value; it is not an edition.
             </li>
             <li>
-              <strong>About 10,000 leaves of the fonds are not here at all.</strong> Third-party
+              <strong>About 10,000 pages of the fonds are not here at all.</strong> Third-party
               correspondence cannot be circulated without permission, and the non-mathematical
               papers — the 1978 trial plea, the reflections — are under 5% of the fonds and not in
               open access.
@@ -346,7 +346,7 @@ const CONTRIBUTORS: { name: string; url?: string; work: string }[] = [
       'Not transcribers but the condition of transcription. In six months of 2015\u201316 they ' +
       'catalogued the whole fonds, kept Grothendieck\u2019s own folder titles, proposed the ' +
       'bracketed ones where he left none, dated folders from their versos, and numbered every ' +
-      'leaf in pencil. Every shelfmark and every date on this site is theirs.',
+      'page in pencil. Every shelfmark and every date on this site is theirs.',
   },
 ];
 
@@ -401,7 +401,7 @@ function Contributors() {
  * What one batch costs, measured, and what the whole job would cost, derived.
  *
  * Every number here traces to the one batch actually completed — folder 115,
- * 14 leaves, transcribed with Fable 5 on 8 August 2026 — and says so. The site
+ * 14 pages, transcribed with Fable 5 on 8 August 2026 — and says so. The site
  * cannot measure tokens or hours itself; these are declared figures from the
  * pilot, and the honest way to present a sample of one is as a sample of one:
  * the per-batch constants sit in this object so the next completed batch can
@@ -415,14 +415,14 @@ const PILOT = {
       then dozens of high-resolution crops for the hard hands — while the
       modernised reading works from the transcription's text alone. Figures
       are per batch, averaged over the two batches done (folder 115 ran
-      lighter, folder 161-1 — nineteen dense leaves — about twice as heavy). */
+      lighter, folder 161-1 — nineteen dense pages — about twice as heavy). */
   transcribe: { hoursPerBatch: 0.8, tokensPerBatchK: 145 },
   modernize: { hoursPerBatch: 0.3, tokensPerBatchK: 30 },
   /** Sum of the two steps — the scope table below multiplies this. */
   hoursPerBatch: 1.1,
   tokensPerBatchK: 175,
   /** Dense continuous prose (the Long March) will run slower and heavier
-      than folder 115's formula-dominated leaves; the range reflects that. */
+      than folder 115's formula-dominated pages; the range reflects that. */
   spread: 1.6,
 };
 
@@ -452,14 +452,14 @@ function CostAndHorizon() {
       <h2 className="titre text-[22px] text-ink-900">Cost, and the horizon</h2>
       <p className="prose-fonds mt-3">
         Two batches have been completed, both with Fable 5 on 8 August 2026: folder 115,
-        fourteen leaves, and folder 161-1, nineteen. Together they cost about{' '}
+        fourteen pages, and folder 161-1, nineteen. Together they cost about{' '}
         <strong>{hoursDone.toFixed(1)} h</strong> of wall-clock and roughly{' '}
         <strong>{tokensDoneK}k tokens</strong> in and out. The two steps are not comparable,
         and the split is the useful number: transcription carries almost all of it, because
         it reads page images — the batch at full page scale, then dozens of high-resolution
         crops to settle a word — while the modernised reading works from the transcription's
         text and costs a fraction as much. The second batch ran about twice the first:
-        nineteen dense leaves against fourteen, and far more close-up reading. Everything
+        nineteen dense pages against fourteen, and far more close-up reading. Everything
         below multiplies a per-batch average of two measurements, which is barely better than
         a sample of one; treat the ranges as a first anchor, to be corrected by the next
         batches.
@@ -527,8 +527,8 @@ function CostAndHorizon() {
 
       <p className="mt-4 text-[12.5px] leading-relaxed text-ink-500">
         The upper bounds assume dense continuous prose — the Long March, not folder 115's
-        formula-dominated leaves. Hours are machine-pass wall-clock only: the human
-        leaf-by-leaf check that turns <em>Drafted</em> into <em>Checked</em> is not in the
+        formula-dominated pages. Hours are machine-pass wall-clock only: the human
+        page-by-page check that turns <em>Drafted</em> into <em>Checked</em> is not in the
         table, and it is the slower half of the work. Folders already edited by the community
         (marked on the archive page) should be subtracted from any plan rather than
         re-transcribed.
@@ -556,7 +556,7 @@ function Pipeline() {
     <section className="mt-12 max-w-[52em]">
       <h2 className="titre text-[22px] text-ink-900">The pipeline</h2>
       <p className="prose-fonds mt-3">
-        Two skills, run in order, on one batch of twenty leaves at a time. The modernised
+        Two skills, run in order, on one batch of twenty pages at a time. The modernised
         reading closes its résumé with a <code className="text-[13px]">\keywords{'{}'}</code>{' '}
         line — English search terms — which the manifest extracts as the folder's tags. The
         last step is the one no file can vouch for.
@@ -595,7 +595,7 @@ function Pipeline() {
             /transcribe
           </text>
           <text x="240" y="90" textAnchor="middle" fontSize="9" fill="#9d9787">
-            20 leaves/pass
+            20 pages/pass
           </text>
 
           {/* Transcription */}
@@ -608,7 +608,7 @@ function Pipeline() {
             the transcription — apparatus,
           </text>
           <text x="394" y="97" textAnchor="middle" fontSize="10.5" fill="#726d5f">
-            leaf by leaf
+            page by page
           </text>
 
           <line x1="496" y1="73" x2="600" y2="73" stroke="#726d5f" strokeWidth="1.3"
@@ -670,7 +670,7 @@ function Pipeline() {
             CHECKED
           </text>
           <text x="710" y="228" textAnchor="middle" fontSize="10.5" fill="#128a5f">
-            a person, leaf by leaf — declared
+            a person, page by page — declared
           </text>
 
           {/* Derived outputs */}
@@ -772,10 +772,10 @@ function StatusSequence() {
 
       <p className="prose-fonds mt-4">
         The step from <em>AI-reviewed</em> to <em>checked</em> is a person reading against the
-        leaves, and readers are how it happens. Every folder that has been transcribed carries a{' '}
+        pages, and readers are how it happens. Every folder that has been transcribed carries a{' '}
         <strong className="font-semibold text-ink-800">Report</strong> button, and so does every
         open batch, beside the source links — it opens an issue on the repository with the
-        shelfmark, the batch and the leaf on screen already filled in. A disputed reading then
+        shelfmark, the batch and the page on screen already filled in. A disputed reading then
         sits in public, next to the file it disputes, which is what an apparatus is for.
       </p>
     </section>

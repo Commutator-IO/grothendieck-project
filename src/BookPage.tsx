@@ -27,7 +27,7 @@ import type { BookKey, Cote, Edition } from './lib/types.ts';
  * transcribed. Each folder unfolds into twenty-page batches, and each batch is
  * at once a PDF file, a row of progress, and the argument to a command. There
  * is no "overview" separate from the working view, because a transcription of
- * sixteen thousand leaves does not survive a site where one must mentally
+ * sixteen thousand pages does not survive a site where one must mentally
  * translate between three different divisions of the same thing.
  */
 export function BookPage({ bookKey }: { bookKey: BookKey }) {
@@ -60,7 +60,7 @@ export function BookPage({ bookKey }: { bookKey: BookKey }) {
   const goTo = (cote: string, batch: number) => {
     history.replaceState(null, '', `#${cote}/${batch}`);
     setOpen({ cote, batch });
-    setLeaf(undefined);
+    setPage(undefined);
   };
   const close = () => {
     history.replaceState(null, '', location.pathname);
@@ -70,14 +70,14 @@ export function BookPage({ bookKey }: { bookKey: BookKey }) {
   const [edition, setEdition] = useState<Edition>('fr');
 
   /**
-   * The leaf being read, reported by the transcript and consumed by the
+   * The page being read, reported by the transcript and consumed by the
    * facsimile. It is held here rather than in either pane because it is the
    * one thing the two share — and holding it above them is what keeps the
    * dependency one-directional: the transcript never learns what the facsimile
    * is showing.
    */
-  const [leaf, setLeaf] = useState<number | undefined>(undefined);
-  const onLeaf = useCallback((n: number) => setLeaf(n), []);
+  const [page, setPage] = useState<number | undefined>(undefined);
+  const onPage = useCallback((n: number) => setPage(n), []);
 
   const openCote = open ? cotes.find((c) => c.id === open.cote) : undefined;
   const openBatch: OpenBatch | null =
@@ -88,7 +88,7 @@ export function BookPage({ bookKey }: { bookKey: BookKey }) {
           date: openCote.date,
           batch: Math.min(open.batch, batchCount(openCote.pages)),
           pages: openCote.pages,
-          page: leaf,
+          page: page,
           available: proxy !== false,
         }
       : null;
@@ -135,8 +135,8 @@ export function BookPage({ bookKey }: { bookKey: BookKey }) {
               batch={openBatch.batch}
               edition={edition}
               onEdition={setEdition}
-              onLeaf={onLeaf}
-              leaf={leaf}
+              onPage={onPage}
+              page={page}
               onClose={close}
               available={transcript(manifest, openCote.id, openBatch.batch)}
               state={shownState(
@@ -161,7 +161,7 @@ export function BookPage({ bookKey }: { bookKey: BookKey }) {
                     <strong className="font-semibold text-ink-800">
                       {t.pagesTotal.toLocaleString('en-GB')}
                     </strong>{' '}
-                    leaves
+                    pages
                   </span>
                   <span>
                     <strong className="font-semibold text-ink-800">{allBatches.length}</strong>{' '}
@@ -175,7 +175,7 @@ export function BookPage({ bookKey }: { bookKey: BookKey }) {
                     <strong className="font-semibold text-brand-600">{modernisedBatches}</strong>{' '}
                     modernised
                   </span>
-                  <span title="Batches you have compared against the leaves — a declaration, not an observation">
+                  <span title="Batches you have compared against the pages — a declaration, not an observation">
                     <strong className="font-semibold text-ink-800">{t.byState.checked}</strong>{' '}
                     checked
                   </span>
@@ -231,8 +231,8 @@ function Workspace({
   batch,
   edition,
   onEdition,
-  onLeaf,
-  leaf,
+  onPage,
+  page,
   onClose,
   available,
   state,
@@ -241,9 +241,9 @@ function Workspace({
   batch: number;
   edition: Edition;
   onEdition: (e: Edition) => void;
-  onLeaf: (n: number) => void;
-  /** The leaf currently in view, so a report arrives already located. */
-  leaf?: number;
+  onPage: (n: number) => void;
+  /** The page currently in view, so a report arrives already located. */
+  page?: number;
   onClose: () => void;
   available: ReturnType<typeof transcript>;
   state: State;
@@ -271,13 +271,13 @@ function Workspace({
       </div>
 
       <p className="tabular mt-1 text-[12.5px] text-ink-500">
-        Cote n° {cote.id} · {cote.date || 's.d.'} · {cote.pages} leaves
+        Cote n° {cote.id} · {cote.date || 's.d.'} · {cote.pages} pages
       </p>
 
       {/* Above the reading pane, not below it. The pane is as tall as the
           transcript, so anything after it sits a screen or more down the page —
           a row of links nobody scrolls past the whole document to find. */}
-      <Downloads cote={cote.id} batch={batch} leaf={leaf} available={available} />
+      <Downloads cote={cote.id} batch={batch} page={page} available={available} />
 
       <TranscriptPane
         cote={cote.id}
@@ -286,11 +286,11 @@ function Workspace({
         available={available}
         edition={edition}
         onEdition={onEdition}
-        onLeaf={onLeaf}
+        onPage={onPage}
       />
 
       <p className="mt-4 max-w-[46em] text-[12.5px] leading-relaxed text-ink-500">
-        Scrolling the transcript turns the facsimile: whichever source leaf is marked highest in
+        Scrolling the transcript turns the facsimile: whichever source page is marked highest in
         the reading area is the one shown on the right. Use ← and → to step between batches, and
         Escape to close the facsimile.
       </p>
@@ -389,7 +389,7 @@ function CoteCard({
           <p className="tabular mt-1 flex flex-wrap gap-x-3 text-[12px] text-ink-500">
             <span className="font-semibold text-ink-700">Cote n° {cote.id}</span>
             <span>{cote.date || 's.d.'}</span>
-            <span>{cote.pages} leaves</span>
+            <span>{cote.pages} pages</span>
             <span>
               {count} batch{count > 1 ? 'es' : ''}
             </span>
@@ -500,7 +500,7 @@ function BatchRow({
  *
  * The panes stream Montpellier's own files, so nothing needs downloading to
  * read. A local copy is still worth having for transcription: handing a
- * twenty-leaf file to a transcriber beats handing it a 204 MB volume and a
+ * twenty-page file to a transcriber beats handing it a 204 MB volume and a
  * page range, and it is reproducible months later even if the source moves.
  */
 function MirrorCommand({ book: key }: { book: string }) {
@@ -509,7 +509,7 @@ function MirrorCommand({ book: key }: { book: string }) {
       <h2 className="titre text-[17px] text-ink-900">Mirroring, for transcription</h2>
       <p className="mt-2 text-[13.5px] leading-relaxed text-ink-600">
         Not needed to read — the panes stream the originals from Montpellier. But transcription
-        works from a local {BATCH_SIZE}-leaf file rather than a whole volume:
+        works from a local {BATCH_SIZE}-page file rather than a whole volume:
       </p>
       <code className="mt-3 block rounded-lg border border-ink-200 bg-ink-50 px-3 py-2 font-mono text-[12.5px] text-ink-900">
         npm run archive -- {key}

@@ -25,7 +25,7 @@ import type { Edition, TranscriptEntry } from '../lib/types.ts';
  */
 
 export const EDITIONS: { key: Edition; label: string; help: string }[] = [
-  { key: 'fr', label: 'Transcription', help: 'The leaves as written.' },
+  { key: 'fr', label: 'Transcription', help: 'The pages as written.' },
   {
     key: 'modern',
     label: 'Modernised',
@@ -40,7 +40,7 @@ export function TranscriptPane({
   available,
   edition,
   onEdition,
-  onLeaf,
+  onPage,
 }: {
   cote: string;
   batch: number;
@@ -48,8 +48,8 @@ export function TranscriptPane({
   available: TranscriptEntry;
   edition: Edition;
   onEdition: (e: Edition) => void;
-  /** Called with the archive leaf currently at the top of the reading area. */
-  onLeaf: (leaf: number) => void;
+  /** Called with the archive page currently at the top of the reading area. */
+  onPage: (page: number) => void;
 }) {
   const frame = useRef<HTMLIFrameElement>(null);
   const [height, setHeight] = useState(600);
@@ -91,10 +91,10 @@ export function TranscriptPane({
   /**
    * Scrolling the transcript turns the facsimile's pages.
    *
-   * The transcript marks each source leaf with `data-leaf="47"`. Whichever
-   * marker is highest in the reading area names the leaf being read, and the
+   * The transcript marks each source page with `data-page="47"`. Whichever
+   * marker is highest in the reading area names the page being read, and the
    * facsimile follows. This is the whole reason the two panes are worth having
-   * side by side: reading the transcription of leaf 47 while looking at leaf 41
+   * side by side: reading the transcription of page 47 while looking at page 41
    * is worse than useless, because the eye trusts what it is shown.
    *
    * Reading position, not intersection ratio: an `IntersectionObserver` fires
@@ -116,7 +116,7 @@ export function TranscriptPane({
       const doc = el.contentDocument;
       if (!doc) return;
 
-      const marks = Array.from(doc.querySelectorAll<HTMLElement>('[data-leaf]'));
+      const marks = Array.from(doc.querySelectorAll<HTMLElement>('[data-page]'));
       if (!marks.length) return;
 
       let last = -1;
@@ -130,10 +130,10 @@ export function TranscriptPane({
           if (m.getBoundingClientRect().top + offset <= line) current = m;
           else break;
         }
-        const leaf = Number(current.dataset.leaf);
-        if (Number.isFinite(leaf) && leaf !== last) {
-          last = leaf;
-          onLeaf(leaf);
+        const page = Number(current.dataset.page);
+        if (Number.isFinite(page) && page !== last) {
+          last = page;
+          onPage(page);
         }
       };
 
@@ -150,7 +150,7 @@ export function TranscriptPane({
       el.removeEventListener('load', attach);
       detach();
     };
-  }, [present, url, onLeaf]);
+  }, [present, url, onPage]);
 
   return (
     <section className="card mt-6 overflow-hidden">
@@ -160,7 +160,7 @@ export function TranscriptPane({
             Transcript
           </p>
           <p className="tabular text-[13px] font-medium text-ink-800">
-            Cote n° {cote} · batch {batch} · leaves {first}–{last}
+            Cote n° {cote} · batch {batch} · pages {first}–{last}
           </p>
         </div>
 
@@ -195,7 +195,7 @@ export function TranscriptPane({
           key={url}
           ref={frame}
           src={url}
-          title={`Transcript of folder ${cote}, leaves ${first}–${last}`}
+          title={`Transcript of folder ${cote}, pages ${first}–${last}`}
           scrolling="no"
           style={{ height }}
           className="w-full border-0 bg-white"
@@ -225,10 +225,10 @@ function MissingTranscript({
   return (
     <div className="flex flex-col items-start gap-3 px-6 py-10">
       <p className="text-[14px] font-semibold text-ink-800">
-        No {label} yet for leaves {first}–{last}.
+        No {label} yet for pages {first}–{last}.
       </p>
       <p className="max-w-[40em] text-[13.5px] leading-relaxed text-ink-600">
-        Work runs one batch at a time, {BATCH_SIZE} leaves per pass, through three skills in
+        Work runs one batch at a time, {BATCH_SIZE} pages per pass, through three skills in
         order:{' '}
         <code className="rounded border border-ink-200 bg-ink-50 px-1 py-0.5 font-mono text-[12px]">
           transcribe-grothendieck

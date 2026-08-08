@@ -72,7 +72,7 @@ failure.
 ## What it deliberately does not do
 
 It **stores nothing and copies nothing**. Bytes pass straight through, `Range`
-included — which is what makes a 204 MB volume usable: opening leaf 400 fetches
+included — which is what makes a 204 MB volume usable: opening page 400 fetches
 a few hundred kilobytes, not the volume.
 
 It is **not a general proxy**: only `GET`/`HEAD`, only

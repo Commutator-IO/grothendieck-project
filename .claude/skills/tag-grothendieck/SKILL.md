@@ -73,6 +73,6 @@ claim about content nobody has read.
 - **Pile on synonyms.** *Reflective subcategory* and *reflective
   localization* point the same search; pick the one the folder's own
   content argues for.
-- **Let a tag outrun the leaves.** The batch touching a topos-recognition
+- **Let a tag outrun the pages.** The batch touching a topos-recognition
   argument earns *Giraud's theorem* only if the reading actually walks
   through it; a passing mention earns nothing.

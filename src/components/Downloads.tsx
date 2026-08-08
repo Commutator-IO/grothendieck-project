@@ -28,13 +28,13 @@ import { EDITIONS } from './TranscriptPane.tsx';
 export function Downloads({
   cote,
   batch,
-  leaf,
+  page,
   available,
 }: {
   cote: string;
   batch: number;
-  /** The leaf the reader is on, so a report arrives already located. */
-  leaf?: number;
+  /** The page the reader is on, so a report arrives already located. */
+  page?: number;
   available: TranscriptEntry;
 }) {
   const rows = EDITIONS.map((e) => ({
@@ -60,10 +60,10 @@ export function Downloads({
      and a link they have to scroll to find is a link nobody uses. */
   const report = (
     <a
-      href={issueUrl({ cote, batch, leaf })}
+      href={issueUrl({ cote, batch, page })}
       target="_blank"
       rel="noopener noreferrer"
-      title="Open a prefilled issue — the shelfmark, batch and leaf come with it"
+      title="Open a prefilled issue — the shelfmark, batch and page come with it"
       className="ml-auto flex items-center gap-1.5 rounded-lg border border-ink-200 bg-white px-2.5 py-1.5 text-[12.5px] font-medium text-ink-600 transition hover:border-relu-400 hover:text-relu-700"
     >
       <svg viewBox="0 0 16 16" className="h-3.5 w-3.5" aria-hidden="true" fill="none">

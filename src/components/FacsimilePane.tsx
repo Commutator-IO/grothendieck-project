@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { batchCount, batchRange, facsimileUrl, pdfPageOfLeaf, sourceUrl } from '../lib/batches.ts';
+import { batchCount, batchRange, facsimileUrl, pdfIndexOf, sourceUrl } from '../lib/batches.ts';
 import { REPO } from '../lib/report.ts';
 
 /**
  * The facsimile, opened in a pane to the right of the transcript.
  *
- * This is the gesture of anyone transcribing: the leaf on one side, what one
+ * This is the gesture of anyone transcribing: the page on one side, what one
  * makes of it on the other. Doing it inside the page avoids the round trip
  * between tabs, which costs the reading position every time.
  *
@@ -39,7 +39,7 @@ export interface OpenBatch {
   date: string;
   /** Batch number within the folder, from 1. */
   batch: number;
-  /** Leaves in the folder, as the inventory counts them. */
+  /** Pages in the folder, as the inventory counts them. */
   pages: number;
   /** The archive page to show, when the transcript says which one is being read. */
   page?: number;
@@ -58,16 +58,16 @@ function clamp(w: number): number {
  * Firefox. Safari ignores it and opens at the first page: an acceptable
  * degradation, not a reason to do without.
  *
- * N counts in the file, which is the whole folder — so it is the archive leaf
- * plus one, for the cover sheet Montpellier prefixes. With no leaf named yet,
- * the anchor is the first leaf of the batch, which is where a reader starting
+ * N counts in the file, which is the whole folder — so it is the archive page
+ * plus one, for the cover sheet Montpellier prefixes. With no page named yet,
+ * the anchor is the first page of the batch, which is where a reader starting
  * a batch wants to be.
  */
 function address(b: OpenBatch): string {
   const url = facsimileUrl(b.cote);
   const { first, last } = batchRange(b.batch, b.pages);
-  const leaf = b.page ? Math.min(Math.max(b.page, first), last) : first;
-  return `${url}#page=${pdfPageOfLeaf(leaf)}`;
+  const page = b.page ? Math.min(Math.max(b.page, first), last) : first;
+  return `${url}#page=${pdfIndexOf(page)}`;
 }
 
 export function FacsimilePane({
@@ -106,7 +106,7 @@ export function FacsimilePane({
       const stored = Number(localStorage.getItem(WIDTH_KEY));
       if (stored >= MIN_WIDTH) set(stored);
     } catch {
-      // Default width: enough to read a scanned A4 leaf.
+      // Default width: enough to read a scanned A4 page.
     }
   }, [set]);
 
@@ -131,7 +131,7 @@ export function FacsimilePane({
   const { first, last } = batchRange(open.batch, open.pages);
 
   // Escape closes; the arrows step through batches. Those are the two gestures
-  // one makes without thinking when working through a 695-leaf folder.
+  // one makes without thinking when working through a 695-page folder.
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
@@ -290,7 +290,7 @@ export function FacsimilePane({
         <iframe
           // The key forces a remount when the address changes. Changing only
           // the `#page=` fragment does not make an already-loaded frame
-          // navigate, so the pane would stay on the previous leaf. The file is
+          // navigate, so the pane would stay on the previous page. The file is
           // local and in cache, and the value only moves at page boundaries,
           // so the remount costs little.
           key={address(open)}
@@ -313,7 +313,7 @@ export function FacsimilePane({
 /**
  * The twenty-page step, made manoeuvrable.
  *
- * A number field rather than a bare pair of arrows: on a 695-leaf folder — the
+ * A number field rather than a bare pair of arrows: on a 695-page folder — the
  * second part of the Long March runs to thirty-five batches — resuming at
  * batch 23 must not cost twenty-two clicks.
  */
@@ -372,7 +372,7 @@ function BatchBar({
       <p className="tabular ml-auto text-[12px] text-ink-500">
         {page ? (
           <>
-            leaf <strong className="font-semibold text-brand-700">{page}</strong>
+            page <strong className="font-semibold text-brand-700">{page}</strong>
             <span className="text-ink-400">
               {' '}
               of {first}–{last}

@@ -10,7 +10,7 @@ the point of publishing it.
 ## Three ways in, cheapest first
 
 **1. Report a reading — one click.** Every batch on the site has a *Report a
-reading* button that opens an issue with the shelfmark, batch and leaf already
+reading* button that opens an issue with the shelfmark, batch and page already
 filled in. You need no LaTeX, no clone, and no theory about what the word
 should be. This is the most valuable thing anyone can do here: a reader who
 spots a misread symbol is, at that moment, the only person who knows.
@@ -23,7 +23,7 @@ the reading.
 taken, run the two passes.
 
 ```bash
-npm run archive -- 19          # mirror it, cut into 20-leaf batches
+npm run archive -- 19          # mirror it, cut into 20-page batches
 claude                         # then, in order:
   /transcribe-grothendieck 19, batch 1
   /modernize-grothendieck 19, batch 1
@@ -36,7 +36,7 @@ scholarly edition, which is better than anything produced here. Folders with a
 
 ## The editions are written in French
 
-Whoever runs the pass. The leaves are French, the notions were thought in
+Whoever runs the pass. The pages are French, the notions were thought in
 French, and an English note in the middle of a French transcription is a seam
 in the one document that must not have one. The only English inside an edition
 is the `\keywords{}` line, which is a set of search keys.
@@ -52,11 +52,11 @@ If that rules a folder out for you, routes 1 and 2 need no French at all.
   doubtful stays `\uncertain{}`. An invented word that reads like the others is
   the worst possible outcome, because nothing distinguishes it from a sure
   reading.
-- **Never correct Grothendieck.** A wrong calculation on the leaf is wrong in
+- **Never correct Grothendieck.** A wrong calculation on the page is wrong in
   the transcription, with a `\note{}`. The modernised reading is the one place
-  that states what is true instead — and footnotes what the leaf has.
+  that states what is true instead — and footnotes what the page has.
 - **Never tick `checked`.** Unless you personally compared the batch with the
-  facsimile, leaf by leaf. It is a declaration in `transcripts/status.json`,
+  facsimile, page by page. It is a declaration in `transcripts/status.json`,
   and the one claim here no file can prove.
 - **Change only the source.** `public/transcripts/`, `public/manifest.json` and
   every PDF are derived and git-ignored. Never commit them.

@@ -1,6 +1,6 @@
 ---
 name: transcribe-grothendieck
-description: Transcribes a batch of twenty handwritten leaves from the Alexandre Grothendieck fonds (University of Montpellier) into clean, mathematics-focused LaTeX with a critical apparatus — what was read, what was guessed, what is illegible. Use whenever someone asks to transcribe, decipher, read or put into LaTeX any pages of Grothendieck's manuscripts, or names a folder, a batch, or one of the notebooks (topos, motifs, Longue Marche, cahiers tardifs). Transcription only — the modernised reading has its own skill, /modernize-grothendieck, which runs on the transcription this one produces. Also covers revisions: correcting a reading, filling a skipped leaf.
+description: Transcribes a batch of twenty handwritten pages from the Alexandre Grothendieck fonds (University of Montpellier) into clean, mathematics-focused LaTeX with a critical apparatus — what was read, what was guessed, what is illegible. Use whenever someone asks to transcribe, decipher, read or put into LaTeX any pages of Grothendieck's manuscripts, or names a folder, a batch, or one of the notebooks (topos, motifs, Longue Marche, cahiers tardifs). Transcription only — the modernised reading has its own skill, /modernize-grothendieck, which runs on the transcription this one produces. Also covers revisions: correcting a reading, filling a skipped page.
 model: claude-fable-5
 ---
 
@@ -19,11 +19,11 @@ and they should all record the same one.
 
 ## What this produces
 
-For **one batch of twenty leaves**, three LaTeX files:
+For **one batch of twenty pages**, three LaTeX files:
 
 | File | Contents |
 |---|---|
-| `transcripts/<folder>/batch-NN.fr.tex` | The transcription — the mathematics, leaf by leaf, in French |
+| `transcripts/<folder>/batch-NN.fr.tex` | The transcription — the mathematics, page by page, in French |
 
 One further edition derives from it, with its own skill, run afterwards:
 
@@ -47,20 +47,20 @@ and it goes. What stays is what Grothendieck was actually working on.
 **The editions stay separate, and this skill produces exactly one.** The
 transcription is the mathematics and nothing else. No summary opens it, no
 modernisation creeps into it: someone reading the transcription wants the
-leaves. The derived editions are other skills' work, done afterwards, from
+pages. The derived editions are other skills' work, done afterwards, from
 this file and never from the manuscript.
 
-**One batch per pass, never two.** Past twenty handwritten leaves the quality of
+**One batch per pass, never two.** Past twenty handwritten pages the quality of
 reading degrades towards the end of the pass with nothing to signal it, and a
 transcription whose weakening point is unknown cannot be used.
 
 **Run under Fable 5, one batch per conversation.** The pass lives or dies on
 sustained visual attention to fourteen-plus page images at once; a fresh
-context per batch is what keeps leaf 18 read as carefully as leaf 2. Note the
+context per batch is what keeps page 18 read as carefully as page 2. Note the
 model and the date in the file's header comment — a disputed reading years
 later needs to know what produced it.
 
-## Before anything: what these leaves are
+## Before anything: what these pages are
 
 Everything downstream follows from this, and a transcription made without
 knowing it will be wrong in a way that is hard to repair afterwards.
@@ -70,7 +70,7 @@ knowing it will be wrong in a way that is hard to repair afterwards.
 Grothendieck wrote for himself, day by day. He takes the same chapter up four
 times over — the four *moutures* of *Analysis situs*, June 1986, sit in one
 folder and read in sequence. He abandons a proof mid-way, picks it up thirty
-pages later, refers to a leaf by its number. **Do not smooth this out.** A
+pages later, refers to a page by its number. **Do not smooth this out.** A
 restart is not a repetition to be deleted; it is the object itself.
 
 ### The versos carry other people's paper
@@ -83,33 +83,33 @@ mathematical notes."
 
 For a mathematics-focused transcription this means, without exception:
 
-- **A leaf whose content is not the mathematics in hand is not transcribed and
+- **A page whose content is not the mathematics in hand is not transcribed and
   not described.** No inventory of what the administrative letter said. Skip it
-  — the leaf number simply does not appear.
+  — the page number simply does not appear.
 - **A page that looks illegible may be upside down.** Unrelated versos were
   scanned in whatever orientation preserved the physical object. Turn it before
   calling it illegible.
 - **A verso that *is* related** — a calculation continued on the back — is
-  transcribed like any other leaf.
+  transcribed like any other page.
 
 ### Three numbering systems overlap
 
 1. **Grothendieck's own**, where he paginated — the Long March runs 1 to 787
    across four boxes.
-2. **The archivists'**, pencilled bottom-left on every leaf. This is what the
+2. **The archivists'**, pencilled bottom-left on every page. This is what the
    inventory counts ("Cote n° 26, 10 pages") and what this project calls a
-   *leaf*.
+   *page*.
 3. **The PDF's**, one ahead, because of the cover sheet Montpellier generates.
 
-`\leaf{N}` always takes **the archivists' numbering**. Where Grothendieck's own
+`\page{N}` always takes **the archivists' numbering**. Where Grothendieck's own
 pagination is visible and useful for following a cross-reference, record it once:
-`\leaf{47}\note{author's p. 213}`.
+`\page{47}\note{author's p. 213}`.
 
 ### Almost nothing is dated
 
 Outside correspondence the inventory's dates are inferred — from a dated verso,
 a numbered Bourbaki talk, an institute letterhead. **Never invent a date.** If a
-leaf carries one, transcribe it; otherwise say nothing.
+page carries one, transcribe it; otherwise say nothing.
 
 The late notebooks are the exception, and why they are worth starting with:
 *Vers une géométrie des formes* dates nearly every chapter to the day.
@@ -122,7 +122,7 @@ he never wrote.
 
 ## The sequence
 
-### 1. Read the twenty leaves through, before writing a line
+### 1. Read the twenty pages through, before writing a line
 
 Open the facsimile with the file-reading tool — the pages render visually.
 Either source works: the batch file if the folder has been mirrored
@@ -131,7 +131,7 @@ case remember the cover sheet offset.
 
 Make one complete pass producing nothing, and note:
 
-- **Which leaves are mathematics and which are not.** The second group will not
+- **Which pages are mathematics and which are not.** The second group will not
   appear in the output at all.
 - **The notation of this batch.** Grothendieck's habits change over the years:
   a `\mathcal{C}` of 1962 is not drawn like one of 1986, he abbreviates, he
@@ -139,21 +139,21 @@ Make one complete pass producing nothing, and note:
   reduces it to initials. Fix the choices **once for the batch** and hold to
   them.
 - **The internal cross-references** — "cf. p. 12", "voir plus haut" — which
-  become `\ref{leaf:12}`.
+  become `\ref{page:12}`.
 - **What the batch is actually about.** You will need this for the summary, and
-  it is much easier to see now, with all twenty leaves in view, than after
+  it is much easier to see now, with all twenty pages in view, than after
   three hours inside the notation.
 
 ### 2. Transcribe the mathematics
 
-`\leaf{N}` at the start of each transcribed leaf, in order. Leaves that carry
-no mathematics are simply absent — no placeholder, no note. A gap in the leaf
+`\page{N}` at the start of each transcribed page, in order. Pages that carry
+no mathematics are simply absent — no placeholder, no note. A gap in the page
 numbers *is* the record that something was skipped, and it is quiet enough not
 to interrupt the reading.
 
 In priority order:
 
-1. **The mathematics is the document.** Where a leaf is too crowded to render
+1. **The mathematics is the document.** Where a page is too crowded to render
    whole — a diagram crammed into a margin, a formula overwritten three times —
    transcribe the mathematics and compress the surrounding prose, marking the
    compression with `\note{}`. The reverse is easy to produce and worthless.
@@ -186,7 +186,7 @@ In priority order:
 
 | Macro | Use |
 |---|---|
-| `\leaf{47}` | leaf 47 begins (archivists' numbering) — this is what turns the facsimile as you scroll |
+| `\page{47}` | page 47 begins (archivists' numbering) — this is what turns the facsimile as you scroll |
 | `\ill{}` | illegible — **never guessed** |
 | `\uncertain{word}` | a reading offered, and flagged as doubtful |
 | `\add{s}` | an editorial addition: a missing letter, an implied word |
@@ -240,7 +240,7 @@ asserts a commutation nobody wrote:
   `\arrow[uu, no head, "\wedge\wedge" description]`;
 - the styles `hook`, `hook'` (inclusions) and `Rightarrow`;
 - `no head`, for a line that is scaffolding rather than a functor — an axis,
-  a radius. A head the leaf does not have asserts a morphism nobody wrote;
+  a radius. A head the page does not have asserts a morphism nobody wrote;
 - `bend left=N` / `bend right=N`, for arcs. Eight rim arcs at matching bends
   are what lets a wheel of functor categories close into the circle the
   manuscript draws instead of an octagon of chords.
@@ -258,7 +258,7 @@ Two layout rules, both learned on a real batch:
   not a cosmetic defect: it hides content. (Those options affect the PDF only;
   the reading view sizes itself.)
 
-**Wheels — census before drawing.** Learned on folder 115, leaf 5, by getting
+**Wheels — census before drawing.** Learned on folder 115, page 5, by getting
 it wrong first: a circle of functor categories is almost never one ring of
 arrows. Before writing any `\arrow`, work through the facsimile at high
 resolution — `pdftoppm -png -r 400` on the folder's PDF, then crop quadrant
@@ -276,12 +276,12 @@ by quadrant with `-x -y -W -H` — and take a census:
 - **check every arrowhead one by one.** On 115 the eight rim arcs all
   converge into the four mixed three-argument forms, and one diagonal runs
   inward (a restriction) while the other three run outward (extensions).
-  The asymmetry is on the leaf, so it is in the transcription; deciding it
+  The asymmetry is on the page, so it is in the transcription; deciding it
   is an oversight is the reader's job, not ours.
 
 A first pass had reduced that wheel to eight radiating arrows and misread
 the mid-rim labels' argument lists. Every difference between that and the
-leaf was mathematical content.
+page was mathematical content.
 
 `references/specimen.tex` shows every macro in a complete file.
 
@@ -307,9 +307,9 @@ frame happily shows yesterday's rendering.
 ## What not to do
 
 - **Fill a gap.** An illegible word stays `\ill{}`. Always.
-- **Guess a date, a recipient, a reference.** If the leaf says "SGA 4 exposé 8"
+- **Guess a date, a recipient, a reference.** If the page says "SGA 4 exposé 8"
   and no more, transcribe that and do not go and open SGA 4.
-- **Correct a mathematical error.** If a calculation is wrong on the leaf, it is
+- **Correct a mathematical error.** If a calculation is wrong on the page, it is
   wrong in the transcription. Flag it with `\note{}`; do not repair it.
 - **Catalogue the paper.** No verso descriptions, no separator sheets, no
   orientation notes. That is the archive's job and the archive has done it.
@@ -324,6 +324,6 @@ A correction to a reading is also a correction to the translation: take both
 files up together, or they drift.
 
 On the notebook page a batch's state changes with a click — `Drafted` once the
-LaTeX exists, `Checked` only after leaf-by-leaf comparison. It is a
+LaTeX exists, `Checked` only after page-by-page comparison. It is a
 declaration, not an observation: the site verifies nothing. Only tick `Checked`
 if it is true.

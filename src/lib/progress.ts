@@ -14,7 +14,7 @@
  *   `drafted` and `reviewed` are never written down anywhere and cannot go
  *   stale.
  * — **Declared.** Whether a pass is in flight, whether a person has sat with
- *   the facsimile and gone leaf by leaf, whether a batch was judged to hold
+ *   the facsimile and gone page by page, whether a batch was judged to hold
  *   nothing worth transcribing — no file can show any of that. Those three
  *   live in `transcripts/status.json`, where a change is a diff somebody can
  *   review.
@@ -49,12 +49,12 @@ export const STATES: { key: State; label: string; help: string }[] = [
   {
     key: 'checked',
     label: 'Checked',
-    help: 'A person compared it with the facsimile, leaf by leaf. Declared, not observed.',
+    help: 'A person compared it with the facsimile, page by page. Declared, not observed.',
   },
   {
     key: 'skipped',
     label: 'Skipped',
-    help: 'Unrelated versos, separators, illegible leaves — nothing to transcribe. Declared.',
+    help: 'Unrelated versos, separators, illegible pages — nothing to transcribe. Declared.',
   },
 ];
 

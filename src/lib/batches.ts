@@ -7,7 +7,7 @@ import type { Edition, Manifest } from './types.ts';
  * Twenty is not a round number picked for tidiness. It is about as much as a
  * model holds in one pass before the tail of the output degrades, and about as
  * much as a person re-reads in one sitting when checking a transcription
- * against the leaf. So the same division serves both ends: what the right pane
+ * against the page. So the same division serves both ends: what the right pane
  * shows is the very file handed to the transcriber — not an extract, not a
  * re-render.
  */
@@ -29,7 +29,7 @@ export const batchName = (k: number) => `batch-${String(k).padStart(2, '0')}`;
  *
  * Not a local copy and not a cut-down extract: the same file, byte for byte,
  * fetched on demand. Montpellier honours range requests and the proxy forwards
- * them, so opening leaf 400 of a 204 MB volume costs a few hundred kilobytes
+ * them, so opening page 400 of a 204 MB volume costs a few hundred kilobytes
  * rather than the volume.
  *
  * It has to pass through this origin because the browser will not frame
@@ -56,15 +56,15 @@ export const facsimileUrl = (cote: string) => `${RELAY}/source/${cote}.pdf`;
 const RELAY = (import.meta.env.VITE_RELAY ?? '').replace(/\/$/, '');
 
 /**
- * The PDF page showing a given archive leaf.
+ * The PDF page showing a given archive page.
  *
  * Montpellier prefixes every folder with a generated cover sheet — title,
- * shelfmark, dating — which is not a leaf of Grothendieck's. The inventory
- * counts leaves without it ("Cote n° 26, 10 pages"); the file counts with it.
+ * shelfmark, dating — which is not a page of Grothendieck's. The inventory
+ * counts pages without it ("Cote n° 26, 10 pages"); the file counts with it.
  * One is therefore always one more than the other, and this is the only place
  * that knows it.
  */
-export const pdfPageOfLeaf = (leaf: number) => leaf + 1;
+export const pdfIndexOf = (page: number) => page + 1;
 
 export const transcriptUrl = (cote: string, k: number, edition: Edition, ext: string) =>
   `/transcripts/${cote}/${batchName(k)}.${edition}.${ext}`;

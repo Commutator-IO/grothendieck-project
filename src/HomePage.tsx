@@ -46,15 +46,15 @@ export function HomePage() {
           </h1>
           <p className="mt-4 text-[17px] leading-relaxed text-ink-700">
             The digitised fonds holds 178 openly accessible folders, 1949 to 1991: sixteen
-            thousand leaves of working notes, in his own hand. This site gives the full inventory,
+            thousand pages of working notes, in his own hand. This site gives the full inventory,
             and puts the transcription beside the facsimile so that every reading can be checked
-            against the leaf it came from.
+            against the page it came from.
           </p>
         </header>
 
         <div className="tabular mt-8 flex flex-wrap gap-x-8 gap-y-2 text-[14px] text-ink-600">
           <Figure value={COTES.length} label="folders in open access" />
-          <Figure value={TOTAL_PAGES} label="digitised leaves" />
+          <Figure value={TOTAL_PAGES} label="digitised pages" />
           <Figure value={1991 - 1949} label="years covered" />
         </div>
 
@@ -99,7 +99,7 @@ export function HomePage() {
                   </p>
                   <p className="tabular mt-4 flex flex-wrap gap-x-4 text-[12.5px] text-ink-500">
                     <span>{cotes.length} folders</span>
-                    <span>{pagesOf(b).toLocaleString('en-GB')} leaves</span>
+                    <span>{pagesOf(b).toLocaleString('en-GB')} pages</span>
                   </p>
                   <a
                     href={b.path}
@@ -115,7 +115,7 @@ export function HomePage() {
 
         <section className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           <div className="prose-fonds">
-            <h2 className="titre text-[22px] text-ink-900">What these leaves are</h2>
+            <h2 className="titre text-[22px] text-ink-900">What these pages are</h2>
             <p className="mt-3">
               <strong>Working notes</strong>, not finished texts. Grothendieck wrote for himself,
               day by day, taking the same chapter up four times over — the four “moutures” of{' '}
@@ -136,17 +136,17 @@ export function HomePage() {
           <div className="prose-fonds">
             <h2 className="titre text-[22px] text-ink-900">What is being made of them</h2>
             <p className="mt-3">
-              Each batch of leaves yields two documents, both in French. The{' '}
-              <strong>transcription</strong> is the leaves as written — his notation, his
+              Each batch of pages yields two documents, both in French. The{' '}
+              <strong>transcription</strong> is the pages as written — his notation, his
               paragraphing, and a critical apparatus that keeps what was read apart from what was
               guessed. An illegible word stays illegible; nothing is smoothed over.
             </p>
             <p>
               The <strong>modernised reading</strong> is the same mathematics in current notation
               and current names, opening with a summary that orients someone who has not met the
-              subject. It is the one document allowed to depart from the leaf, and is held to
+              subject. It is the one document allowed to depart from the page, and is held to
               being correct as it stands: where the manuscript is loose it says what is true, and
-              a footnote says what the leaf has.
+              a footnote says what the page has.
             </p>
             <p>
               Both are LaTeX, and both open in the browser — source and compiled PDF alike.
@@ -167,7 +167,7 @@ export function HomePage() {
             <p>
               Both restrictions apply to the browser, not to a server. So a relay on this origin
               requests the file and passes the bytes straight through — range requests included,
-              which is what lets you open leaf 400 of a 204 MB volume without waiting for the
+              which is what lets you open page 400 of a 204 MB volume without waiting for the
               volume.
             </p>
             <p>
@@ -236,7 +236,7 @@ function Disclaimer() {
       <p className="mt-2 text-[13.5px] leading-relaxed text-ink-700">
         The transcriptions and modernised readings on this site were produced by{' '}
         <strong className="font-semibold text-ink-900">Claude Fable 5</strong>, in 2026, one
-        twenty-leaf batch at a time. Each file records the model and the date of its pass in its
+        twenty-page batch at a time. Each file records the model and the date of its pass in its
         own header.
       </p>
       <p className="mt-2 text-[13.5px] leading-relaxed text-ink-700">
@@ -260,7 +260,7 @@ function Disclaimer() {
 /**
  * Where the work stands, in two numbers and a bar.
  *
- * Deliberately unflattering. Sixteen thousand leaves against a handful
+ * Deliberately unflattering. Sixteen thousand pages against a handful
  * transcribed is the true ratio, and a progress bar that rounds it up to a
  * visible sliver would be the first dishonest thing on the page. The figures
  * are given plainly, and the fraction of the whole is spelled out in words
@@ -282,7 +282,7 @@ function Progress({
       <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
         <h2 className="titre text-[17px] text-ink-900">Where the work stands</h2>
         <p className="tabular ml-auto text-[12.5px] text-ink-500">
-          {done.total.toLocaleString('en-GB')} batches of 20 leaves · {asWords}
+          {done.total.toLocaleString('en-GB')} batches of 20 pages · {asWords}
         </p>
       </div>
 
@@ -310,7 +310,7 @@ function Progress({
       <p className="mt-3 text-[12.5px] leading-relaxed text-ink-500">
         Counted from the files themselves, not from a tally kept by hand. A batch counts as
         transcribed once its LaTeX exists, and as modernised once the modernised reading does —
-        neither claims anyone has checked it against the leaves.{' '}
+        neither claims anyone has checked it against the pages.{' '}
         <a
           href="/method/"
           className="font-medium text-brand-600 underline decoration-brand-200 underline-offset-2 hover:text-brand-700"

@@ -106,7 +106,7 @@ export function Header({ path }: { path: string }) {
 }
 
 /**
- * The mark: a leaf and its verso.
+ * The mark: a sheet and its verso.
  *
  * The fonds turns on that duality — Grothendieck reused his versos, and the
  * digitisation kept them. It is the first thing one learns on opening a
@@ -131,7 +131,7 @@ export function Footer() {
           <strong className="font-semibold text-ink-700">Alexandre Grothendieck fonds</strong> at
           the University of Montpellier, given by Jean Malgoire and catalogued in 2015–2016 by
           Hélène Rodriguez and Frédéric Troilo under the direction of Sophie Dikoff. Of the fonds'
-          some 28,000 leaves, about 18,000 may be circulated: third-party correspondence cannot be,
+          some 28,000 pages, about 18,000 may be circulated: third-party correspondence cannot be,
           without permission.
         </p>
         <p className="mt-3 max-w-[52em]">

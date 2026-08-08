@@ -25,27 +25,27 @@ export interface ReportContext {
   cote: string;
   /** Absent when reporting on a whole folder rather than one batch. */
   batch?: number;
-  /** The leaf on screen, when the reader is in the reading view. */
-  leaf?: number;
+  /** The page on screen, when the reader is in the reading view. */
+  page?: number;
 }
 
-export function issueUrl({ cote, batch, leaf }: ReportContext): string {
+export function issueUrl({ cote, batch, page }: ReportContext): string {
   const where = batch ? `${cote}, ${batchName(batch)}` : `folder ${cote}`;
   const title = `[${where}] `;
 
-  // A template rather than an empty box. Naming the leaf and quoting what is
+  // A template rather than an empty box. Naming the page and quoting what is
   // written are what let anyone else check the claim without reproducing the
   // reader's whole session, and people supply them when asked and rarely
   // otherwise. The pre-filled facts are the ones the page already knows.
   const body = [
     `**Folder** cote n° ${cote}`,
     batch ? `**Batch** ${batchName(batch)}` : null,
-    `**Leaf** ${leaf ? leaf : '<which leaf?>'}`,
+    `**Page** ${page ? page : '<which page?>'}`,
     '**Edition** transcription (`.fr`) / modernised reading (`.modern`) — delete one',
     '',
     '### What the reading says',
     '',
-    '### What the leaf shows',
+    '### What the page shows',
     '',
     '### Anything else',
     '',

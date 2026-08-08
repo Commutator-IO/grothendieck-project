@@ -22,7 +22,7 @@ For a batch already transcribed by `/transcribe-grothendieck`:
 
 | File | Contents |
 |---|---|
-| `transcripts/<folder>/batch-NN.modern.tex` | A summary, then the mathematics in today's notation and names — **in French**, like the leaves |
+| `transcripts/<folder>/batch-NN.modern.tex` | A summary, then the mathematics in today's notation and names — **in French**, like the pages |
 
 It is an **interpretation, not a transcription**: it reorganises by argument,
 states what the manuscript leaves implicit, and reads continuously, the way a
@@ -70,7 +70,7 @@ geometry might read these pages.
 No apparatus in the summary, and no footnotes: doubts at the level of
 single words belong to the transcription, and anything large enough to matter
 at this altitude goes in the prose (« la datation vient des versos »). The
-summary carries no `\leaf{}` either.
+summary carries no `\page{}` either.
 
 ## The keywords
 
@@ -94,10 +94,10 @@ reading behind it would be a claim about content nobody has read.
 
 ## The standard: correct as it stands
 
-This is the one edition where fidelity to the leaf is not the highest duty.
+This is the one edition where fidelity to the page is not the highest duty.
 It is held to being **mathematically correct as written**. Where the
 manuscript is loose, elliptical or wrong, the modernised reading states what
-is *true*, and a footnote says what the leaf has. Reproducing an error
+is *true*, and a footnote says what the page has. Reproducing an error
 faithfully, in an edition whose whole promise is that it can be read as
 mathematics, launders the error through the appearance of a modern text.
 
@@ -109,7 +109,7 @@ Four failure modes, each hit on a real batch (folder 115); check for all four:
   adjunction, and is not a profunctor — calling it one is false, not loose.
   Check every functor's variance before naming what it is.
 - **Implicit hypotheses.** If a universal property needs $M$ cocomplète and
-  the leaf does not say so, say so — and footnote that it was supplied.
+  the page does not say so, say so — and footnote that it was supplied.
   A statement that is only true under a hypothesis the reader cannot see is
   not correct as it stands.
 - **Containments upgraded to equalities.** The manuscript's shorthand often
@@ -128,23 +128,23 @@ Four failure modes, each hit on a real batch (folder 115); check for all four:
 Everything it carried moves into `\footnote{}`: an uncertain reading the
 interpretation depends on, a notation he used differently, a passage that is
 missing, a convention that had to be chosen. The reader must still be able to
-tell what was on the leaf and what is ours; footnotes are simply a better
+tell what was on the page and what is ours; footnotes are simply a better
 place to say it in a text meant to be read continuously.
 
-**No `\leaf{}` markers either.** This edition groups by argument, not by
-sheet, so leaf anchors would be false — and the site deliberately keeps the
-facsimile still while it is open. Refer to leaves in prose (« le feuillet 5
+**No `\page{}` markers either.** This edition groups by argument, not by
+sheet, so page anchors would be false — and the site deliberately keeps the
+facsimile still while it is open. Refer to pages in prose (« le feuillet 5
 dispose… ») where it helps the reader find their place.
 
 ## Language and form
 
-**In French.** The leaves are in French, the notions were thought in French,
+**In French.** The pages are in French, the notions were thought in French,
 and the modernised reading has no reason to change language. Today's *names*
 are used in their French forms: dualité d'Isbell, complétion de Cauchy,
 enveloppe de Karoubi, cofin, curryfier.
 
 The document takes the shared preamble (`\input{../preamble/grothendieck}`),
-the batch metadata (`\folder`, `\batch`, `\leaves`, `\foldertitle` ending
+the batch metadata (`\folder`, `\batch`, `\pages`, `\foldertitle` ending
 « — lecture modernisée »), and the pass header comment naming the model and
 date. Structure with `\section*` and `\subsection*` following the argument.
 Stay inside the LaTeX subset of the transcribe skill — the renderer raises on
@@ -154,10 +154,10 @@ numbered notes with backlinks.
 Diagrams follow the transcribe skill's tikz-cd rules, wheels included —
 rings on a grid of odd dimensions, `no head` radii with `description`
 variance marks, rim arcs at matching bends. One liberty is this edition's
-alone: where the leaf mixes directions among arrows that are all
+alone: where the page mixes directions among arrows that are all
 equivalences (115 draws one diagonal as a restriction, inward, and three as
 extensions, outward), the modernised wheel may normalise them to one
-convention — with a footnote saying what the leaf draws and why both are
+convention — with a footnote saying what the page draws and why both are
 legitimate. Check the structure against the transcription's, node for node:
 a wheel is a census (115: eleven distinct categories, two of them drawn
 twice), and dropping a ring or an arc changes what is being asserted.
@@ -168,9 +168,9 @@ twice), and dropping a ring or an arc changes what is being asserted.
    listing every `\uncertain{}`, `\ill{}` and `\note{}` — that list is the
    skeleton of the footnotes.
 2. Identify the spine — the construction the batch is actually building — and
-   organise the sections around it, not around the leaf order.
+   organise the sections around it, not around the page order.
 3. Write the body, holding to the standard above. Every departure from the
-   leaf gets a footnote at the point of departure.
+   page gets a footnote at the point of departure.
 4. Write the summary **last**, when you know what the batch turned out to be
    about. Written first it describes what you expected to find. Close it
    with the `\keywords{}` line — the folder's tags come from nowhere else.
@@ -187,11 +187,11 @@ twice), and dropping a ring or an arc changes what is being asserted.
   transcribe skill's work; fix it there first, then re-derive.
 - **Preserve an error out of respect.** Footnote it and state the truth.
 - **Guess what an `\ill{}` hid.** If the interpretation needs the missing
-  word, say in a footnote that the leaf is illegible there and that the
+  word, say in a footnote that the page is illegible there and that the
   reconstruction is ours.
 - **Silently choose a convention.** Where the manuscript's notation forces a
   choice (folder 115's projection indices), choose, and footnote the choice.
-- **Write English.** The leaves are French and so is this. The one exception
+- **Write English.** The pages are French and so is this. The one exception
   is `\keywords{}`, which is English on purpose: search keys, not prose.
 - **Name the reader's level.** Write for them; do not address them as a class.
 - **Let the summary become an abstract.** It orients; it does not compress

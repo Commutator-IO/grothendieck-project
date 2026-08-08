@@ -1,29 +1,32 @@
-% Le préambule commun à toutes les transcriptions du fonds Grothendieck.
+% The preamble shared by every transcription in the Grothendieck fonds.
 %
-% Il tient en une idée : **l'incertitude se compose, elle ne se résout pas.**
-% Une transcription qui lisse un mot douteux a détruit la seule chose pour
-% laquelle on la faisait — un lecteur doit pouvoir savoir, à chaque endroit,
-% ce qui était sur le feuillet et ce qui a été ajouté. Les six macros qui
-% suivent sont donc l'appareil critique, et non de la décoration.
+% It rests on one idea: **uncertainty compounds, it does not resolve.** A
+% transcription that smooths over a doubtful word has destroyed the only thing
+% it was made for — a reader must be able to tell, at every point, what was on
+% the page and what was supplied. The apparatus macros below are therefore the
+% critical apparatus, not decoration.
 %
-% Les mêmes commandes sont reconnues par `scripts/render.mjs`, qui produit la
-% vue de lecture du site. Une macro ajoutée ici doit l'être aussi là-bas,
-% faute de quoi le rendu échouera bruyamment — ce qui est voulu : un rendu
-% silencieusement faux est pire qu'un rendu absent.
+% The same commands are recognised by `scripts/render.mjs`, which produces the
+% site's reading view. A macro added here must be added there too, or rendering
+% fails loudly — which is the wanted behaviour: a silently wrong rendering is
+% worse than none.
+%
+% Comments here are English, like the rest of the repository. The documents
+% this preamble sets are French, and that is deliberate: see the skills.
 
-\ProvidesPackage{grothendieck}[2026/08/08 Transcriptions du fonds Grothendieck]
+\ProvidesPackage{grothendieck}[2026/08/08 Transcriptions of the Grothendieck fonds]
 
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{mathrsfs}
 \usepackage{stmaryrd}
-% Les diagrammes commutatifs sont partout dans ce fonds : c'est la langue
-% même de la géométrie algébrique de Grothendieck, et une transcription qui
-% les rendrait en prose ne transcrirait rien.
+% Commutative diagrams are everywhere in this fonds: they are the very language
+% of Grothendieck's algebraic geometry, and a transcription that rendered them
+% as prose would be transcribing nothing.
 \usepackage{tikz-cd}
-% Français par défaut — c'est la langue des feuillets — mais l'anglais est
-% chargé aussi : la traduction et le résumé sont des documents anglais, et la
-% typographie française (espaces avant les deux-points) y serait une faute.
-% Ces documents basculent par \selectlanguage{english} en tête de corps.
+% French is the main language — the last option wins — because that is the
+% language of the pages and of both editions. English is still loaded because
+% the modernised reading's \keywords line is English, and because a term or a
+% title occasionally is; nothing calls \selectlanguage today.
 \usepackage[english,french]{babel}
 \usepackage{fontspec}
 \usepackage{geometry}
@@ -39,78 +42,81 @@
 \usepackage{hyperref}
 \hypersetup{colorlinks=true,linkcolor=black,urlcolor=black,pdfborder={0 0 0}}
 
-% --- Métadonnées du lot -----------------------------------------------------
-% Reprises telles quelles par le script de rendu, qui les affiche en tête de
-% la vue de lecture. Elles fixent ce que le fichier prétend couvrir : sans
-% elles, une transcription flotte sans point d'attache dans un fonds de seize
-% mille feuillets.
+% --- Batch metadata ---------------------------------------------------------
+% Taken as they stand by the rendering script, which shows them at the head of
+% the reading view. They fix what the file claims to cover: without them a
+% transcription floats unmoored in a fonds of sixteen thousand pages.
 
 \newcommand{\folder}[1]{\gdef\grothFolder{#1}}
 \newcommand{\batch}[1]{\gdef\grothBatch{#1}}
-\newcommand{\leaves}[2]{\gdef\grothFirst{#1}\gdef\grothLast{#2}}
+\newcommand{\pages}[2]{\gdef\grothFirst{#1}\gdef\grothLast{#2}}
 \newcommand{\foldertitle}[1]{\gdef\grothFoldertitle{#1}}
 \gdef\grothFolder{?}\gdef\grothBatch{?}\gdef\grothFirst{?}\gdef\grothLast{?}\gdef\grothFoldertitle{}
 
-% --- Le résumé --------------------------------------------------------------
+% --- The résumé -------------------------------------------------------------
 %
-% Il ouvre la lecture modernisée, sous le titre « Résumé », et il est composé
-% en petit. Ce n'est pas un ornement : c'est le seul passage du document qui
-% ne soit pas des mathématiques, et un lecteur doit pouvoir le reconnaître
-% avant de l'avoir lu — puis le sauter s'il connaît déjà le sujet, ou s'y
-% arrêter s'il ne le connaît pas. Le filet qui le suit marque la reprise du
-% corps.
+% It opens the modernised reading, under the heading « Résumé », and is set
+% small. Not an ornament: it is the one passage of the document that is not
+% mathematics, and a reader must be able to recognise it before having read it
+% — then skip it if the subject is already familiar, or stop there if it is
+% not. The rule that follows marks the resumption of the body.
 
 \newenvironment{resume}
   {\small\setlength{\parskip}{0.45em}}
   {\par\medskip\hrule\medskip}
 
-% --- Mots-clés ---------------------------------------------------------------
+% --- Keywords ---------------------------------------------------------------
 %
-% En anglais, en clôture du résumé de la lecture modernisée : le vocabulaire
-% moderne sous lequel chercher ce que les feuillets construisent. Le manifeste
-% du site (`npm run manifest`) les extrait pour étiqueter la cote entière —
-% cette ligne est la source unique des tags, il n'y a pas de fichier à côté.
+% In English, closing the modernised reading's résumé: the modern vocabulary
+% under which to search for what the pages construct. The site's manifest
+% (`npm run manifest`) extracts them to tag the whole shelfmark — this line is
+% the single source of the tags, there is no file alongside.
 \newcommand{\keywords}[1]{\par\smallskip\noindent
   {\footnotesize\textsc{Keywords} --- \textit{#1}}\par}
 
-% --- L'appareil critique ----------------------------------------------------
+% --- The critical apparatus -------------------------------------------------
 
-% Le numéro de feuillet, en marge. C'est l'ancre qui permet de régler un
-% désaccord sur une formule en regardant *un* feuillet plutôt qu'une chemise
-% de six cents. Le site s'en sert aussi pour tourner les pages du fac-similé
-% quand on fait défiler la transcription.
-\newcommand{\leaf}[1]{%
+% The page number, in the margin. This is the anchor that lets a disagreement
+% over a formula be settled by looking at *one* page rather than a folder of
+% six hundred. The site also uses it to turn the facsimile's pages as the
+% transcription is scrolled.
+%
+% "Page" is the archivists' unit, and it is a side of a sheet, not a sheet:
+% they numbered versos separately, which is why the blanks in a folder carry
+% numbers of their own.
+\newcommand{\page}[1]{%
   \marginnote{\footnotesize\color{gray!70}\textsf{#1}}%
-  \label{leaf:#1}\ignorespaces}
+  \label{page:#1}\ignorespaces}
 
-% Illisible : on ne devine pas. Un mot inventé qui se lit comme les autres est
-% le pire résultat possible.
+% Illegible: never guessed. An invented word that reads like the others is the
+% worst possible outcome.
 \newcommand{\ill}{\textcolor{red!60!black}{[\,\ldots\,]}}
 
-% Lecture douteuse : le mot est donné, et signalé comme incertain.
+% A doubtful reading: the word is given, and flagged as uncertain.
 \newcommand{\uncertain}[1]{\uline{#1}}
 
-% Ajout de l'éditeur — une lettre manquante, un mot sous-entendu.
+% An editorial addition — a missing letter, an implied word.
 \newcommand{\add}[1]{\textcolor{blue!50!black}{[#1]}}
 
-% Biffé par Grothendieck lui-même. Ce qu'il a rayé fait partie du document :
-% une rature dit souvent où la pensée a changé de direction.
+% Struck out by Grothendieck himself. What he crossed out is part of the
+% document: a deletion often shows where the thought changed direction.
 \newcommand{\struck}[1]{\sout{#1}}
 
-% Note du transcripteur, sur l'état matériel du feuillet.
+% The transcriber's note, on the state of the page.
 \newcommand{\note}[1]{\par\smallskip{\small\color{gray!60!black}\textit{[#1]}}\par\smallskip}
 
-% Note marginale de Grothendieck, distincte du corps du texte.
+% A marginal note of Grothendieck's, distinct from the body of the text.
 \newcommand{\marginal}[1]{\par\smallskip\noindent\hspace{1em}%
   {\small\color{gray!60!black}#1}\par\smallskip}
 
-% --- Titre ------------------------------------------------------------------
+% --- Title ------------------------------------------------------------------
+% The title block is French, like the documents themselves.
 
 \AtBeginDocument{%
   \begin{center}
     {\large\bfseries Fonds Alexandre Grothendieck --- cote n\textsuperscript{o}~\grothFolder}\\[2pt]
     {\itshape\grothFoldertitle}\\[4pt]
-    {\small feuillets \grothFirst--\grothLast\ (lot \grothBatch)}\\[2pt]
+    {\small pages \grothFirst--\grothLast\ (lot \grothBatch)}\\[2pt]
     {\footnotesize\color{gray!60!black}Transcription établie d'après le fac-similé numérisé
      par l'Université de Montpellier.\\
      Les lectures incertaines sont soulignées, les illisibles notées [\,\ldots\,],

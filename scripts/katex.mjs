@@ -1,17 +1,17 @@
 #!/usr/bin/env node
 /**
- * Recopie KaTeX depuis `node_modules` vers `public/vendor/katex/`.
+ * Copies KaTeX from `node_modules` into `public/vendor/katex/`.
  *
- * La transcription s'affiche dans un cadre isolé — un document à part, qui
- * porte la feuille ar5iv verbatim et ne partage rien avec le reste du site.
- * Ce cadre ne passe donc pas par Vite : il lui faut des fichiers servis tels
- * quels. Les recopier à l'installation plutôt que de les charger depuis un CDN
- * garde le site utilisable hors ligne, ce qui compte pour un travail de
- * transcription qui dure des mois.
+ * The transcript is displayed in an isolated frame — a separate document,
+ * carrying the ar5iv stylesheet verbatim and sharing nothing with the rest of
+ * the site. That frame therefore does not go through Vite: it needs files
+ * served as they are. Copying them at install time rather than loading them
+ * from a CDN keeps the site usable offline, which matters for transcription
+ * work that runs over months.
  *
- * Seules les polices réellement utilisées par KaTeX en WOFF2 sont reprises :
- * le dossier complet pèse 5 Mo en trois formats, dont deux qu'aucun navigateur
- * d'aujourd'hui ne demande.
+ * Only the fonts KaTeX actually uses, in WOFF2, are taken: the full directory
+ * runs to 5 MB across three formats, two of which no current browser asks
+ * for.
  */
 
 import { cp, mkdir, readdir } from 'node:fs/promises';

@@ -10,7 +10,7 @@ export interface Cote {
   date: string;
   /** Grothendieck's own title; in [brackets] when the archivists supplied one. */
   title: string;
-  /** Leaf count as the inventory gives it — excluding the PDF's generated cover. */
+  /** Page count as the inventory gives it — excluding the PDF's generated cover. */
   pages: number;
   depth: number;
   group: string | null;
@@ -67,7 +67,7 @@ export type BookKey = 'topos' | 'motives' | 'long-march' | 'late' | 'scattered';
 /**
  * Which register a transcript artifact is written in.
  *
- * Two, and the order is the order of distance from the leaf: the
+ * Two, and the order is the order of distance from the page: the
  * transcription is what is on the paper; `modern` is a reading of it in
  * today's mathematics, opening with a summary that orients someone who
  * has not met the subject.

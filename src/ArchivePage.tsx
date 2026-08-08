@@ -35,7 +35,7 @@ const KIND_LABEL: Record<PublishedEdition['kind'], string> = {
  *
  * The four notebooks are ways in; this page is the thing itself. It exists so
  * that nobody has to take our groupings on trust: every folder the inventory
- * lists is here, in its group, with its dating and its leaf count, whether or
+ * lists is here, in its group, with its dating and its page count, whether or
  * not this site has anything to say about it.
  *
  * The search box filters on title, shelfmark and date at once, because those
@@ -279,7 +279,7 @@ export function ArchivePage() {
         <section className="card mt-12 max-w-[52em] px-5 py-4">
           <h2 className="titre text-[17px] text-ink-900">Mirroring anything here</h2>
           <p className="mt-2 text-[13.5px] leading-relaxed text-ink-600">
-            Any folder can be pulled and cut into {BATCH_SIZE}-leaf batches, whether or not it
+            Any folder can be pulled and cut into {BATCH_SIZE}-page batches, whether or not it
             belongs to one of the four notebooks:
           </p>
           <code className="mt-3 block rounded-lg border border-ink-200 bg-ink-50 px-3 py-2 font-mono text-[12.5px] text-ink-900">
