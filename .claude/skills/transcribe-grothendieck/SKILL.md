@@ -1,5 +1,5 @@
 ---
-name: transcrire-grothendieck
+name: transcribe-grothendieck
 description: Transcribes a batch of twenty handwritten leaves from the Alexandre Grothendieck fonds (University of Montpellier) into clean, mathematics-focused LaTeX, opened by a plain-English summary written for an undergraduate maths student, plus an English translation. Use whenever someone asks to transcribe, decipher, read, clean up or put into LaTeX any pages of Grothendieck's manuscripts — "help me transcribe these pages to latex, these are maths notes from Alexander Grothendieck", "summarise them in simple English", "explain this to an undergraduate maths student" — or names a folder, a batch, or one of the notebooks (topos, motifs, Longue Marche, cahiers tardifs). Also covers revisions: correcting a reading, filling a skipped leaf, redoing a translation that came out too literal, rewriting a summary that assumes too much.
 ---
 

@@ -17,6 +17,7 @@ import {
   STATES,
   nextState,
   readProgress,
+  shownState,
   stateOf,
   tally,
   writeProgress,
@@ -112,6 +113,11 @@ export function BookPage({ bookKey }: { bookKey: BookKey }) {
     }),
   );
   const t = tally(progress, allBatches);
+  // Observed, not declared — the count that answers "how much of this notebook
+  // actually exists in LaTeX".
+  const transcribedBatches = allBatches.filter(
+    (x) => transcript(manifest, x.cote, x.batch).html.length > 0,
+  ).length;
   const group = b.inventoryGroup ? GROUPS.find((g) => g.id === b.inventoryGroup) : undefined;
 
   return (
@@ -141,7 +147,12 @@ export function BookPage({ bookKey }: { bookKey: BookKey }) {
               onLeaf={onLeaf}
               onClose={close}
               available={transcript(manifest, openCote.id, openBatch.batch)}
-              state={stateOf(progress, openCote.id, openBatch.batch)}
+              state={shownState(
+                progress,
+                openCote.id,
+                openBatch.batch,
+                transcript(manifest, openCote.id, openBatch.batch).html.length > 0,
+              )}
               onState={() =>
                 update({
                   ...progress,
@@ -174,8 +185,12 @@ export function BookPage({ bookKey }: { bookKey: BookKey }) {
                     <strong className="font-semibold text-ink-800">{allBatches.length}</strong>{' '}
                     batches of {BATCH_SIZE}
                   </span>
-                  <span>
-                    <strong className="font-semibold text-relu-600">{t.byState.checked}</strong>{' '}
+                  <span title="Batches with a transcript, counted from the manifest">
+                    <strong className="font-semibold text-relu-600">{transcribedBatches}</strong>{' '}
+                    transcribed
+                  </span>
+                  <span title="Batches you have compared against the leaves — a declaration, not an observation">
+                    <strong className="font-semibold text-ink-800">{t.byState.checked}</strong>{' '}
                     checked
                   </span>
                 </p>
@@ -196,6 +211,7 @@ export function BookPage({ bookKey }: { bookKey: BookKey }) {
                         <CoteCard
                           key={id}
                           cote={cote}
+                          manifest={manifest}
                           progress={progress}
                           onOpen={goTo}
                           onState={(batch) =>
@@ -340,20 +356,32 @@ function Provenance({
 /** A folder, unfolded into twenty-page batches. */
 function CoteCard({
   cote,
+  manifest,
   progress,
   onOpen,
   onState,
 }: {
   cote: Cote;
+  manifest: ReturnType<typeof useManifest>;
   progress: Progress;
   onOpen: (cote: string, batch: number) => void;
   onState: (batch: number) => void;
 }) {
   const count = batchCount(cote.pages);
   const [unfolded, setUnfolded] = useState(false);
+  // Counted from the manifest rather than from what anyone has ticked: the
+  // question "has this folder been transcribed?" has a factual answer, and it
+  // should be legible without unfolding the batch list.
+  const transcribed = Array.from({ length: count }, (_, i) => i + 1).filter(
+    (k) => transcript(manifest, cote.id, k).html.length > 0,
+  ).length;
 
   return (
-    <li className="card overflow-hidden">
+    <li
+      className={`card overflow-hidden ${
+        transcribed ? 'border-l-4 border-l-relu-500' : ''
+      }`}
+    >
       <div className="flex items-start gap-3 px-4 py-3">
         <button
           type="button"
@@ -364,7 +392,21 @@ function CoteCard({
           {unfolded ? '▾' : '▸'}
         </button>
         <div className="min-w-0 flex-1">
-          <p className="text-[15px] font-medium leading-snug text-ink-900">{cote.title}</p>
+          <p className="text-[15px] font-medium leading-snug text-ink-900">
+            {cote.title}
+            {transcribed > 0 && (
+              <span
+                title={
+                  transcribed === count
+                    ? 'Every batch of this folder has a transcript'
+                    : `${transcribed} of ${count} batches transcribed`
+                }
+                className="ml-2 whitespace-nowrap rounded-full bg-relu-100 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-relu-700"
+              >
+                {transcribed === count ? 'transcribed' : `${transcribed}/${count} transcribed`}
+              </span>
+            )}
+          </p>
           <p className="tabular mt-1 flex flex-wrap gap-x-3 text-[12px] text-ink-500">
             <span className="font-semibold text-ink-700">Cote n° {cote.id}</span>
             <span>{cote.date || 's.d.'}</span>
@@ -390,7 +432,12 @@ function CoteCard({
               key={k}
               cote={cote}
               batch={k}
-              state={stateOf(progress, cote.id, k)}
+              state={shownState(
+                progress,
+                cote.id,
+                k,
+                transcript(manifest, cote.id, k).html.length > 0,
+              )}
               onOpen={() => onOpen(cote.id, k)}
               onState={() => onState(k)}
             />

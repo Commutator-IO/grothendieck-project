@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { Footer, Header } from './components/Frame.tsx';
 import { BOOKS, cotesOf } from './content/books.ts';
 import { COTES } from './content/catalogue.ts';
-import { BATCH_SIZE, batchCount, batchRange, useManifest } from './lib/batches.ts';
-import { STATES, readProgress, stateOf, type Progress, type State } from './lib/progress.ts';
+import { BATCH_SIZE, batchCount, batchRange, transcript, useManifest } from './lib/batches.ts';
+import { STATES, readProgress, shownState, type Progress, type State } from './lib/progress.ts';
 
 /**
  * Method, and where the transcription stands.
@@ -133,10 +133,12 @@ export function MethodPage() {
           <h2 className="titre text-[22px] text-ink-900">What this site does not claim</h2>
           <ul className="prose-fonds mt-3">
             <li>
-              <strong>The progress table is a declaration, not an observation.</strong> Marks live
-              in your browser and are set by hand. The site does not verify that a{' '}
-              <code>.tex</code> file exists, still less that it is any good. It counts what you
-              have told it.
+              <strong>Half the progress table is observed; half is claimed.</strong> Whether a
+              batch has a transcript is a fact, read from the manifest — so a transcribed batch
+              shows as <em>drafted</em> whether or not anybody ticked it. Whether someone actually
+              held that transcript against the leaves is not observable from any file, so{' '}
+              <em>checked</em> stays a declaration, kept in your browser and set by hand. The site
+              never claims a transcript is any good; only that it exists.
             </li>
             <li>
               <strong>Two of the four notebooks are our groupings.</strong> “Cahier de Topos” and
@@ -195,7 +197,11 @@ function Progress4({
             checked: 0,
             skipped: 0,
           };
-          for (const x of batches) counts[stateOf(progress, x.cote, x.batch)] += 1;
+          for (const x of batches) {
+            counts[
+              shownState(progress, x.cote, x.batch, transcript(manifest, x.cote, x.batch).html.length > 0)
+            ] += 1;
+          }
           const mirrored = batches.filter((x) =>
             manifest?.facsimiles?.[x.cote]?.batches.includes(x.batch),
           ).length;

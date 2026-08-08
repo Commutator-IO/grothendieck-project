@@ -183,13 +183,13 @@ function MissingTranscript({
       <p className="max-w-[40em] text-[13.5px] leading-relaxed text-ink-600">
         Transcription runs one batch at a time, {BATCH_SIZE} leaves per pass, through the
         <code className="mx-1 rounded border border-ink-200 bg-ink-50 px-1 py-0.5 font-mono text-[12px]">
-          transcrire-grothendieck
+          transcribe-grothendieck
         </code>
         skill. It reads the very facsimile shown on the right and writes LaTeX, an English
         translation and an undergraduate summary side by side.
       </p>
       <code className="w-full max-w-[40em] rounded-lg border border-ink-200 bg-ink-50 px-3 py-2 font-mono text-[12.5px] text-ink-900">
-        /transcrire-grothendieck {cote} {batch}
+        /transcribe-grothendieck {cote} {batch}
       </code>
       <p className="max-w-[40em] text-[12.5px] leading-relaxed text-ink-500">
         The facsimile must be mirrored first — the skill refuses to work from anything but the

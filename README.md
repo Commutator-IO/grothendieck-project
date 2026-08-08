@@ -104,7 +104,9 @@ and git-ignored so a commit never can either.
 
 ## Transcription
 
-The [`transcrire-grothendieck`](skill/transcrire-grothendieck/SKILL.md) skill
+The [`transcribe-grothendieck`](.claude/skills/transcribe-grothendieck/SKILL.md) skill —
+installed as a project skill, so `/transcribe-grothendieck` works in this
+repository —
 transcribes one batch per pass and produces three editions of it: the French
 transcription, an English translation of that transcription, and a summary for
 a reader at undergraduate level. The translation and the summary are derived
