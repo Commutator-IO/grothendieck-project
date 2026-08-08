@@ -393,10 +393,10 @@ function BatchBar({
 /**
  * The relay is not answering.
  *
- * The facsimile is fetched through this origin because the browser will not
- * frame Montpellier directly. When that relay is missing — a static host with
- * no worker in front, or Montpellier itself down — there is nothing useful to
- * put in this pane.
+ * The facsimile is fetched through a relay because the browser will not frame
+ * Montpellier directly. When that relay does not answer — never deployed,
+ * asleep, or Montpellier itself down — there is nothing useful to put in this
+ * pane.
  *
  * Deliberately no "open in a new tab" button here. Reading side by side is the
  * point of the view; a tab that steals the window is not a lesser version of
@@ -426,8 +426,8 @@ function NoProxy({ cote }: { cote: string }) {
       </button>
       <p className="max-w-[34em] text-[12.5px] leading-relaxed text-ink-500">
         Locally, <code className="font-mono">npm run dev</code> relays it. In production it is a
-        small Node service — <code className="font-mono">relay/server.mjs</code> — which has to
-        be Node rather than an edge worker, for reasons worth reading before trying to fix this.
+        small Node service — <code className="font-mono">relay/server.mjs</code> — and it has to
+        be Node, for a reason worth reading before trying to fix this.
       </p>
       {/* The panel says what is broken; this says where the fixing is being
           done. Someone who hits this is exactly the person who might solve

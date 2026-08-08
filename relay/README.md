@@ -17,18 +17,25 @@ All three are enforced by the *browser* against the remote origin. None applies
 to a request made server-side. So a relay settles all three at once: the
 browser sees one origin, with a valid certificate, that permits framing.
 
-## Why not a Cloudflare Worker, and why no DNS change
+## Why Node, and why no DNS change
 
-A Worker **cannot** skip TLS verification — there is no `rejectUnauthorized` in
-that runtime, and its `fetch()` throws on the expired certificate. The usual
-way round is Cloudflare's *proxy* in SSL/TLS mode Full, which tolerates a bad
-origin certificate — but that needs the zone on Cloudflare, and `commutator.io`
-is on Google Cloud DNS (Squarespace).
+**Skipping verification of the expired certificate requires
+`rejectUnauthorized`**, which Node has and edge or serverless V8 runtimes do
+not — there, `fetch()` simply throws, and no configuration helps. That single
+requirement decides the hosting choice, and it rules out most of the cheapest
+options.
 
-It is worth being clear why no DNS record can substitute. **DNS points at
-addresses; it does not terminate TLS.** A CNAME from `commutator.io` to
-Montpellier would send the browser straight there, to a certificate that is now
-both expired *and* issued for the wrong hostname — strictly worse.
+It is worth being equally clear why no DNS record can substitute. **DNS points
+at addresses; it does not terminate TLS.** A CNAME from `commutator.io` to
+Montpellier sends the browser straight there, to a certificate that is now both
+expired *and* issued for the wrong hostname, with `X-Frame-Options` arriving
+untouched. Measured, not assumed — and strictly worse than having no such
+hostname at all, because a reader who clicks through the warning once caches
+the exception and stops seeing the problem.
+
+The other half of the trap: a TLS failure inside an `<iframe>` shows **no
+interstitial**. The pane just stays blank. Whatever gets a person to the PDF in
+a tab of their own does not help the reading view.
 
 Node has `rejectUnauthorized`, so this needs no DNS arrangement whatsoever:
 deploy it anywhere, take the hostname the platform gives you — it already has a
@@ -47,8 +54,8 @@ certificate is valid and that it permits this site to frame it.
 One file, no dependencies, nothing stored. Any container host works. The
 requirement is narrow and rules out most of the cheap options: **a real Node
 process**, because `rejectUnauthorized` is what gets past the expired
-certificate. Cloudflare Workers, Deno Deploy and every other V8/edge runtime
-fail on that one point, not on effort.
+certificate. Edge and serverless V8 runtimes fail on that one point, not on
+effort — so check for it before choosing a host.
 
 ### Render — where it actually runs
 

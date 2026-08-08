@@ -101,11 +101,11 @@ export function useManifest(): Manifest | null {
 /**
  * Whether this deployment can serve facsimiles at all.
  *
- * The proxy is a dev-server middleware, so it exists when running locally and
- * does not on a static host: GitHub Pages has nowhere to run it. Rather than
- * guess from the hostname — which would be wrong the moment the site sits
- * behind a worker — one cheap request settles it, and the pane says plainly
- * which situation the reader is in.
+ * In development the relay is a dev-server middleware; in production it is a
+ * separate service, which may or may not be reachable. Rather than guess from
+ * the hostname — which would be wrong the moment the deployment changes — one
+ * cheap request settles it, and the pane says plainly which situation the
+ * reader is in.
  */
 export function useFacsimileProxy(): boolean | null {
   const [ok, setOk] = useState<boolean | null>(null);

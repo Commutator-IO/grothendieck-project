@@ -16,15 +16,18 @@
  * All three bind the *browser* against the remote origin, and none applies to
  * a request made server-side.
  *
- * ## Why Node and not a Cloudflare Worker
+ * ## Why Node
  *
- * A Worker cannot skip TLS verification — there is no `rejectUnauthorized` in
- * that runtime, and its `fetch()` throws on the expired certificate. The usual
- * way round is Cloudflare's *proxy* in SSL/TLS mode Full, which tolerates a bad
- * origin certificate — but that requires the zone to be on Cloudflare, and
- * commutator.io is on Google Cloud DNS. Node has `rejectUnauthorized`, so it
- * needs no DNS arrangement whatsoever: deploy this anywhere, take the hostname
- * the platform gives you, and point the site at it.
+ * Skipping verification of the expired certificate requires
+ * `rejectUnauthorized`, which Node has and edge or serverless V8 runtimes do
+ * not — there, `fetch()` throws and no configuration helps. That one line
+ * below decides the hosting choice for this whole file.
+ *
+ * The upside is that it needs no DNS arrangement whatsoever: deploy this
+ * anywhere, take the hostname the platform gives you — it already has a valid
+ * certificate — and point the site at it. The relay does not have to live on
+ * a domain of ours, because `frame-ancestors` decides who may frame a
+ * document, not what the origin is called.
  *
  * ## What it does not do
  *

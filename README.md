@@ -58,7 +58,7 @@ All three are enforced by the *browser* against the remote origin, and none
 applies to a request made server-side. So a relay on this origin asks for the
 file and passes the bytes straight through, verified byte-identical to the
 source. In development that is a Vite middleware; in production, a small Node
-service — see below for why it cannot be a Cloudflare Worker.
+service — see below for why it has to be Node.
 
 **Range requests are what make it usable rather than a curiosity.** Montpellier
 honours them, and the relay forwards them: opening page 221 of the 204 MB
@@ -68,16 +68,17 @@ second volume of the Long March moves **256 KB in 0.2 s**, not the volume.
 
 [`relay/`](relay/README.md) — one file, no dependencies, nothing stored.
 
-A Cloudflare Worker cannot do this job: there is no `rejectUnauthorized` in
-that runtime, so its `fetch()` throws on the expired certificate. The usual way
-round is Cloudflare's *proxy* in SSL/TLS mode Full, which tolerates a bad origin
-certificate — but that needs the zone on Cloudflare, and `commutator.io` is on
-Google Cloud DNS.
+**It has to be a real Node process.** Skipping verification of the expired
+certificate needs `rejectUnauthorized`, which exists in Node and in no
+edge or serverless V8 runtime — their `fetch()` simply throws. That one
+requirement rules out most of the cheap hosting options, and it is worth
+knowing before reaching for one.
 
 **And no DNS record can substitute, on any provider.** DNS points at addresses;
 it does not terminate TLS. A CNAME to Montpellier would send the browser
 straight there, to a certificate now both expired *and* issued for the wrong
-hostname.
+hostname — and its `X-Frame-Options` would arrive untouched, so the pane would
+stay blank either way.
 
 Node has `rejectUnauthorized`, so the relay needs no DNS arrangement at all:
 deploy the container anywhere, take the hostname the platform gives you — it
