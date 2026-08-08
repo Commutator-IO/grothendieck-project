@@ -141,6 +141,20 @@ listings stamped 02 JUN 82, which is presumably how the archivists arrived at
 "[à partir de 1982]" — that belongs in a `\note{}` where it is observed, not in
 `\dating{}`, which is theirs and not ours.
 
+### The edition declares its own legal status
+
+The fonds is under copyright, and these editions are unauthorised working
+documents. Every transcription therefore carries, right after `\dating{}`:
+
+```latex
+\watermark{Édition de démonstration}
+```
+
+The preamble prints it in the title block and repeats it diagonally across
+every page of the PDF; the reading view shows the same words in its head and
+under the text. Never omit the line: a file without it claims, by silence, a
+status it does not have.
+
 ### Bracketed titles are not his
 
 In the inventory a `[bracketed]` title was supplied by the archivists because

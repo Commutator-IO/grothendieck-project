@@ -148,7 +148,19 @@ the batch metadata (`\folder`, `\batch`, `\pages`, `\dating` — copied
 unchanged from the transcription, since it is Montpellier's claim and not a
 reading — and `\foldertitle` ending
 « — lecture modernisée »), and the pass header comment naming the model and
-date. Structure with `\section*` and `\subsection*` following the argument.
+date.
+
+It also carries its own legal notice, stronger than the transcription's,
+because this edition is doubly ours — an unauthorised working document *and*
+one reader's reading:
+
+```latex
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+```
+
+The preamble prints it in the title block and diagonally across every PDF
+page; the reading view shows it too. Never omit it, and never soften the
+second line: whoever cites this file must know it interprets. Structure with `\section*` and `\subsection*` following the argument.
 Stay inside the LaTeX subset of the transcribe skill — the renderer raises on
 anything else — plus `\footnote{}`, which the reading view renders as
 numbered notes with backlinks.

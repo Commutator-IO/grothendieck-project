@@ -62,8 +62,18 @@
 % guess.
 \newcommand{\dating}[1]{\gdef\grothDating{#1}}
 
+% The legal notice, printed in the title block and repeated as a diagonal
+% watermark on every page of the PDF. The fonds is under copyright and these
+% editions are unauthorised working documents: every file must say so on its
+% face, not only in a README nobody ships with the PDF. Two wordings exist —
+% the transcription declares itself a demo edition; the modernised reading
+% declares in addition that it is one reader's interpretation of the work.
+% The skills write the line; a file without it gets no watermark, so leaving
+% it out is visible in the output rather than silent.
+\newcommand{\watermark}[1]{\gdef\grothWatermark{#1}}
+
 \gdef\grothFolder{?}\gdef\grothBatch{?}\gdef\grothFirst{?}\gdef\grothLast{?}%
-\gdef\grothFoldertitle{}\gdef\grothDating{}
+\gdef\grothFoldertitle{}\gdef\grothDating{}\gdef\grothWatermark{}
 
 % --- The résumé -------------------------------------------------------------
 %
@@ -124,6 +134,19 @@
 % --- Title ------------------------------------------------------------------
 % The title block is French, like the documents themselves.
 
+% The watermark is drawn on the shipout background so it sits under the text
+% of every page, diagonal and light enough to leave the mathematics readable.
+% tikz is already loaded (tikz-cd pulls it in); `remember picture` needs the
+% aux-file round trip, which tectonic's multiple passes provide.
+\AddToHook{shipout/background}{%
+  \ifx\grothWatermark\empty\else
+    \begin{tikzpicture}[remember picture, overlay]
+      \node[rotate=52, scale=3.4, align=center, text=gray!18,
+            font=\sffamily\bfseries]
+        at (current page.center) {\grothWatermark};
+    \end{tikzpicture}%
+  \fi}
+
 \AtBeginDocument{%
   \begin{center}
     {\large\bfseries Fonds Alexandre Grothendieck --- cote n\textsuperscript{o}~\grothFolder}\\[2pt]
@@ -131,6 +154,9 @@
     {\small pages \grothFirst--\grothLast\ (lot \grothBatch)}\\[2pt]
     \ifx\grothDating\empty\else
       {\small\color{gray!60!black}Datation de l'inventaire : \grothDating}\\[2pt]
+    \fi
+    \ifx\grothWatermark\empty\else
+      {\small\bfseries\color{red!45!gray}\grothWatermark}\\[2pt]
     \fi
     {\footnotesize\color{gray!60!black}Transcription établie d'après le fac-similé numérisé
      par l'Université de Montpellier.\\
