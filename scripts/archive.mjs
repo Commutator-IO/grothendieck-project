@@ -153,11 +153,11 @@ async function cut(cote, pdf, wanted) {
       const to = Math.min(k * BATCH_SIZE, pages);
 
       const out = await PDFDocument.create();
-      const pages = await out.copyPages(
+      const copied = await out.copyPages(
         source,
         Array.from({ length: to - from + 1 }, (_, i) => from + i),
       );
-      for (const p of pages) out.addPage(p);
+      for (const p of copied) out.addPage(p);
       await writeFile(target, await out.save());
 
       process.stdout.write(
