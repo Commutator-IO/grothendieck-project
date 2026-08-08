@@ -228,7 +228,10 @@ export function ArchivePage() {
                         <span
                           key={t}
                           title="modern vocabulary, from the modernised reading's own keywords"
-                          className="ml-1.5 whitespace-nowrap rounded-full border border-ink-200 bg-white px-1.5 py-0.5 text-[10px] font-medium lowercase tracking-wide text-ink-500"
+                          /* Case is left as the keywords line wrote it. Isbell,
+                             Picard, Lawvere, Kan and Cauchy are people, and a
+                             uniform lowercase chip renames them. */
+                          className="ml-1.5 whitespace-nowrap rounded-full border border-ink-200 bg-white px-1.5 py-0.5 text-[10px] font-medium tracking-wide text-ink-500"
                         >
                           {t}
                         </span>

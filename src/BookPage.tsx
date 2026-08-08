@@ -402,7 +402,7 @@ function CoteCard({
               {folderTags(manifest, cote.id).map((t) => (
                 <span
                   key={t}
-                  className="rounded-full border border-ink-200 bg-ink-50 px-2 py-0.5 text-[10.5px] font-medium lowercase text-ink-500"
+                  className="rounded-full border border-ink-200 bg-ink-50 px-2 py-0.5 text-[10.5px] font-medium text-ink-500"
                 >
                   {t}
                 </span>
