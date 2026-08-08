@@ -144,7 +144,9 @@ are used in their French forms: dualité d'Isbell, complétion de Cauchy,
 enveloppe de Karoubi, cofin, curryfier.
 
 The document takes the shared preamble (`\input{../preamble/grothendieck}`),
-the batch metadata (`\folder`, `\batch`, `\pages`, `\foldertitle` ending
+the batch metadata (`\folder`, `\batch`, `\pages`, `\dating` — copied
+unchanged from the transcription, since it is Montpellier's claim and not a
+reading — and `\foldertitle` ending
 « — lecture modernisée »), and the pass header comment naming the model and
 date. Structure with `\section*` and `\subsection*` following the argument.
 Stay inside the LaTeX subset of the transcribe skill — the renderer raises on

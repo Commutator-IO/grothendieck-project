@@ -114,6 +114,33 @@ page carries one, transcribe it; otherwise say nothing.
 The late notebooks are the exception, and why they are worth starting with:
 *Vers une géométrie des formes* dates nearly every chapter to the day.
 
+**Carry the inventory's dating into the file**, with `\dating{}` in the
+preamble, copied **verbatim** from `src/content/catalogue.ts` — never
+paraphrased, never converted to a year, and never inferred here:
+
+```latex
+\dating{[à partir de 1982]}
+```
+
+The square brackets are the archivists' own convention for a date they deduced
+rather than read, and reproducing them is the whole point: a reader must be
+able to tell a date Grothendieck wrote from one somebody worked out. `s.d.` is
+*sans date* and is itself information — record it rather than omitting the
+line.
+
+Where the folder has no date of its own but its inventory **group** does, say
+both, and say which is which — the group's range is weaker evidence than a
+folder's own:
+
+```latex
+\dating{s.d. — le groupe « … » (161-1 à 162-6) est daté [après 1961-vers 1977]}
+```
+
+If the pages themselves date the folder — folder 115's versos are computer
+listings stamped 02 JUN 82, which is presumably how the archivists arrived at
+"[à partir de 1982]" — that belongs in a `\note{}` where it is observed, not in
+`\dating{}`, which is theirs and not ours.
+
 ### Bracketed titles are not his
 
 In the inventory a `[bracketed]` title was supplied by the archivists because

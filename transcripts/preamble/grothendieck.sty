@@ -51,7 +51,19 @@
 \newcommand{\batch}[1]{\gdef\grothBatch{#1}}
 \newcommand{\pages}[2]{\gdef\grothFirst{#1}\gdef\grothLast{#2}}
 \newcommand{\foldertitle}[1]{\gdef\grothFoldertitle{#1}}
-\gdef\grothFolder{?}\gdef\grothBatch{?}\gdef\grothFirst{?}\gdef\grothLast{?}\gdef\grothFoldertitle{}
+
+% The dating, copied verbatim from Montpellier's inventory — never inferred
+% here. Square brackets are the archivists' own convention for a date they
+% deduced rather than read, most often from a verso, and reproducing them is
+% the point: a reader must be able to tell a date Grothendieck wrote from one
+% somebody worked out. « s.d. » is sans date, and is itself information.
+%
+% Optional, because a folder may genuinely have none — omit it rather than
+% guess.
+\newcommand{\dating}[1]{\gdef\grothDating{#1}}
+
+\gdef\grothFolder{?}\gdef\grothBatch{?}\gdef\grothFirst{?}\gdef\grothLast{?}%
+\gdef\grothFoldertitle{}\gdef\grothDating{}
 
 % --- The résumé -------------------------------------------------------------
 %
@@ -117,6 +129,9 @@
     {\large\bfseries Fonds Alexandre Grothendieck --- cote n\textsuperscript{o}~\grothFolder}\\[2pt]
     {\itshape\grothFoldertitle}\\[4pt]
     {\small pages \grothFirst--\grothLast\ (lot \grothBatch)}\\[2pt]
+    \ifx\grothDating\empty\else
+      {\small\color{gray!60!black}Datation de l'inventaire : \grothDating}\\[2pt]
+    \fi
     {\footnotesize\color{gray!60!black}Transcription établie d'après le fac-similé numérisé
      par l'Université de Montpellier.\\
      Les lectures incertaines sont soulignées, les illisibles notées [\,\ldots\,],
