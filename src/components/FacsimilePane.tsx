@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { batchCount, batchRange, facsimileUrl, pdfPageOfLeaf, sourceUrl } from '../lib/batches.ts';
+import { REPO } from '../lib/report.ts';
 
 /**
  * The facsimile, opened in a pane to the right of the transcript.
@@ -424,9 +425,22 @@ function NoProxy({ cote }: { cote: string }) {
         Try again
       </button>
       <p className="max-w-[34em] text-[12.5px] leading-relaxed text-ink-500">
-        Locally, <code className="font-mono">npm run dev</code> provides the relay. In production
-        it is a Cloudflare Worker — see <code className="font-mono">worker/source-relay.js</code>.
+        Locally, <code className="font-mono">npm run dev</code> relays it. In production it is a
+        small Node service — <code className="font-mono">relay/server.mjs</code> — which has to
+        be Node rather than an edge worker, for reasons worth reading before trying to fix this.
       </p>
+      {/* The panel says what is broken; this says where the fixing is being
+          done. Someone who hits this is exactly the person who might solve
+          it, and the issue already records both dead ends so they are not
+          re-explored. */}
+      <a
+        href={`${REPO}/issues/1`}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex items-center gap-1.5 text-[12.5px] font-medium text-brand-600 underline decoration-brand-200 underline-offset-2 transition hover:text-brand-700"
+      >
+        Follow or help with this — issue #1 ↗
+      </a>
     </div>
   );
 }
