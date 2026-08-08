@@ -1,0 +1,525 @@
+% Lecture modernisée — fonds Alexandre Grothendieck, cote 161-1, lot 1
+% (feuillets 1-19).
+%
+% Ceci est une INTERPRÉTATION, non une transcription. Elle relit les feuillets
+% dans la notation et le vocabulaire d'aujourd'hui, énonce les hypothèses que
+% le manuscrit laisse implicites, et abandonne l'appareil critique pour que les
+% mathématiques se lisent d'un trait. Tout ce que les crochets et les
+% soulignements portaient — lecture douteuse, notation qu'il employait
+% autrement, passage manquant — passe en note de bas de page.
+%
+% Elle est tenue d'être mathématiquement correcte telle qu'elle est, et non
+% seulement fidèle au feuillet. Là où le manuscrit est lâche ou fautif, c'est
+% l'énoncé vrai qui figure ici, et la note dit ce que porte le feuillet. En cas
+% de désaccord de fond, la transcription fait foi : qui cite Grothendieck doit
+% citer batch-01.fr.tex.
+%
+% Pass: Fable 5 (claude-fable-5), 2026-08-08 — première passe, non vérifiée
+% feuillet à feuillet par un humain.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{161-1}
+\batch{1}
+\leaves{1}{19}
+\foldertitle{Catégories : notes manuscrites (s.d.) — lecture modernisée}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Une chemise étiquetée « Catégories » au crayon, dix-neuf feuillets sans
+date, et quatre chantiers ouverts sur la même table : ces notes sont
+l'atelier de Grothendieck au travail sur l'outillage général des catégories
+— non pas un texte suivi, mais l'endroit où l'on vérifie que les outils
+coupent.
+
+Le premier chantier regarde ce que deux catégories se disent à travers un
+couple de foncteurs adjoints — un aller et un retour, comme deux
+dictionnaires entre deux langues. Traduire puis retraduire ne rend presque
+jamais la phrase de départ ; mais les phrases qui reviennent inchangées
+forment, de chaque côté, un noyau où les deux langues se répondent
+exactement. Les feuillets 3 à 5 isolent ces deux noyaux, montrent que
+l'aller-retour y devient une correspondance parfaite, et démontent
+entièrement le cas où traduire deux fois ne perd plus rien après le premier
+passage — ce qu'on appelle aujourd'hui une adjonction idempotente : elle
+équivaut à la donnée de deux sous-catégories privilégiées et d'une
+équivalence entre elles. Les feuillets 6 et 7 poursuivent avec une question
+de reconnaissance : peut-on retrouver la sous-catégorie privilégiée comme
+l'ensemble des objets « aveugles » aux flèches que la traduction écrase ?
+« Or c'est vrai sauf erreur… », conclut le feuillet — et c'est vrai.
+
+Le deuxième chantier (feuillets 9 à 12) attaque une gêne familière :
+multiplier un paquet fini d'objets sans choisir l'ordre des facteurs. Pour
+des nombres la question est vide ; pour des objets, chaque échange de deux
+facteurs laisse une trace, et la construction centrale — la catégorie
+$\Phi(A)$ des familles finies, qu'on appelle aujourd'hui la catégorie
+monoïdale symétrique libre — est précisément la machine qui rend ces traces
+comptables. Grothendieck y ajoute des « contractions » (apparier deux
+facteurs et les annihiler, comme un indice haut contre un indice bas en
+calcul tensoriel), puis mesure l'obstruction exacte à un produit vraiment
+sans ordre : un signe $\varepsilon(L)$ attaché à chaque objet inversible,
+qui vaut $\pm 1$ et disparaît exactement dans ce qu'il nomme les catégories
+de Picard.
+
+Le troisième chantier (feuillet 13, page 2 d'une note dont la première
+manque) prend les théories elles-mêmes pour objets : une théorie n'est pas
+une liste d'axiomes mais une catégorie, ses modèles sont des foncteurs, et
+les « constructions » qu'on peut faire dans toute théorie forment à leur
+tour une catégorie. Le feuillet est barré d'un grand trait oblique — le
+geste de qui a reporté la note ailleurs.
+
+Le dernier chantier (feuillets 15, 17, 19) est le plus proche des topos :
+si l'on connaît un foncteur sur une petite partie « dense » d'une catégorie
+— dense comme les rationnels dans les réels : tout objet est limite
+d'objets de la partie — que faut-il pour le prolonger à tout en respectant
+les limites ? Le feuillet 15 réfute d'abord une fausse piste par un
+contre-exemple de deux lignes, puis retourne la question et touche un
+théorème de reconnaissance : si le prolongement est exact, la grande
+catégorie est un topos. C'est, à une page près, le critère de Giraud.
+
+Rien n'est daté ; le ton est celui d'un carnet de questions — « demander
+Schanuel », « Est-il vrai que… ? », « Réciproque ? » — où chaque réponse
+ouvre la suivante. Les noms modernes sous lesquels chercher : adjonctions
+idempotentes et sous-catégories réflexives, localisation et objets locaux,
+catégorie monoïdale symétrique libre, catégories de Picard, théories de
+Lawvere, extensions de Kan et théorème de Giraud.
+
+\keywords{idempotent adjunction, reflective subcategory, free symmetric monoidal category, Picard category, Lawvere theory, left Kan extension}
+\end{resume}
+
+\section*{La partie fixe d'une adjonction (feuillets 3 à 5)}
+
+Soit un couple de foncteurs adjoints
+\[
+E \underset{v}{\overset{u}{\rightleftarrows}} F,
+\qquad \eta : \mathrm{id}_E \to vu, \quad \varepsilon : uv \to \mathrm{id}_F,
+\]
+$u$ adjoint à gauche de $v$.\footnote{Le manuscrit note $i$ l'unité et $j$
+la coünité ; nous écrivons $\eta$ et $\varepsilon$, et gardons ses lettres
+$u$, $v$.}
+
+\subsection*{Restriction aux sous-catégories pleines}
+
+Pour une sous-catégorie pleine $E' \subset E$ et $X, Y \in E'$,
+l'application composée
+\[
+\mathrm{Hom}_E(X, Y) \longrightarrow \mathrm{Hom}_F(uX, uY)
+\simeq \mathrm{Hom}_E(X, vuY)
+\]
+n'est autre que $\mathrm{Hom}(X, \eta_Y)$. Il en résulte aussitôt : si
+$\eta_Y$ est un isomorphisme (resp. un monomorphisme) pour tout
+$Y \in E'$, alors $u|E'$ est pleinement fidèle (resp. fidèle). En notant
+$\overline{E}'$ la clôture de $E'$ par isomorphie, on a l'équivalence
+\[
+\text{(1)} \quad u|E' \text{ pl. fidèle et } vu(E') \subset \overline{E}'
+\iff \forall\, Y \in E',\ \eta_Y : Y \xrightarrow{\ \sim\ } vu(Y),
+\]
+et, dualement, pour $F' \subset F$ pleine :
+\[
+\text{(2)} \quad v|F' \text{ pl. fidèle et } uv(F') \subset \overline{F}'
+\iff \forall\, P \in F',\ \varepsilon_P : uv(P) \xrightarrow{\ \sim\ } P.
+\]
+Le manuscrit se demande en marge si la seconde condition de (1) est
+vraiment nécessaire — « donner un exemple montrant que cette condition
+n'est pas surabondante, avec $E'$ réduit à un élément ». Elle l'est : la
+pleine fidélité de $u|E'$ ne force pas $vu$ à ramener $E'$ dans
+$\overline{E}'$.
+
+Les sous-catégories strictement pleines $E'$ vérifiant (1) et $F'$
+vérifiant (2) se correspondent bijectivement par image essentielle,
+$\alpha(E') = \overline{u(E')}$ et $\beta(F') = \overline{v(F')}$, et pour
+un couple $(E', F')$ se correspondant, les foncteurs induits
+$u' : E' \to F'$ et $v' : F' \to E'$ sont des équivalences quasi-inverses.
+
+\subsection*{Les points fixes}
+
+Posons
+\[
+E_0 = \{\, Y \in E \mid \eta_Y \text{ iso} \,\}, \qquad
+F_0 = \{\, P \in F \mid \varepsilon_P \text{ iso} \,\},
+\]
+sous-catégories strictement pleines : la plus grande $E'$ vérifiant (1), la
+plus grande $F'$ vérifiant (2). Alors
+\[
+F_0 = \overline{u(E_0)}, \qquad E_0 = \overline{v(F_0)},
+\]
+et $u$, $v$ induisent des équivalences quasi-inverses
+$E_0 \simeq F_0$.\footnote{C'est l'énoncé aujourd'hui standard sur la
+\emph{partie fixe d'une adjonction} : toute adjonction se restreint en une
+équivalence entre les objets où l'unité, resp. la coünité, est inversible.}
+
+\subsection*{Adjonctions idempotentes}
+
+Le feuillet 5 dresse la liste des conditions équivalentes suivantes — on
+dit aujourd'hui que l'adjonction est \emph{idempotente} lorsqu'elles sont
+remplies :
+
+\begin{enumerate}
+\item $\mathrm{Im}\, v \subset E_0$, et de même $\mathrm{Im}\, u \subset F_0$ ;
+\item $\eta v : v \xrightarrow{\ \sim\ } vuv$, et de même
+$\varepsilon u : uvu \xrightarrow{\ \sim\ } u$ ;\footnote{Fait aujourd'hui
+classique : chacune des quatre conditions ($\eta v$, $v\varepsilon$,
+$\varepsilon u$, $u\eta$ inversible) implique les trois autres, de sorte
+que les paires du manuscrit sont redondantes — mais l'énoncer par paires
+symétriques est plus parlant.}
+\item $\mathrm{Im}\, v \subset E_0$ et l'inclusion $E_0 \subset E$ admet un
+adjoint à gauche ; de même $\mathrm{Im}\, u \subset F_0$ et l'inclusion
+$F_0 \subset F$ admet un adjoint à droite ;
+\item $u$ se factorise en $E \xrightarrow{u_1} F_1 \xrightarrow{\beta} F$
+avec $\beta$ pleinement fidèle et $u_1$ une localisation, et $v$ se
+factorise dualement.\footnote{« Passage à catégorie des fractions » dans le
+manuscrit — c'est la localisation $E \to E[\Sigma^{-1}]$. La seconde ligne
+de cette condition est barrée sur le feuillet, avec en marge « à revoir
+pour simplifier » ; nous la retenons parce qu'elle est correcte et que le
+feuillet suivant s'en sert.}
+\end{enumerate}
+
+Sous ces conditions, l'inclusion $F_0 \subset F$ admet pour adjoint à
+droite $u_0 \circ v'$ ($v' : F \to E_0$ la corestriction de $v$), et
+l'inclusion $E_0 \subset E$ admet pour adjoint à gauche $v_0 \circ u'$
+($u' : E \to F_0$ la corestriction de $u$) : $E_0$ est
+\emph{réflexive} dans $E$, $F_0$ \emph{coréflexive} dans $F$. Les deux
+petits calculs de Hom du manuscrit sont exactement les preuves modernes.
+Et la structure complète se reconstruit : la donnée d'une adjonction
+idempotente $(u, v)$ entre $E$ et $F$ équivaut à la donnée
+\begin{itemize}
+\item d'une sous-catégorie strictement pleine réflexive $E_0 \subset E$
+(adjoint à gauche $\alpha'$ de l'inclusion $\alpha$),
+\item d'une sous-catégorie strictement pleine coréflexive $F_0 \subset F$
+(adjoint à droite $\beta'$ de l'inclusion $\beta$),
+\item d'une équivalence $E_0 \underset{v_0}{\overset{u_0}{\rightleftarrows}} F_0$,
+\end{itemize}
+en posant $u = \beta u_0 \alpha'$ et $v = \alpha v_0 \beta'$.
+
+Deux exemples dégénérés ouvrent le feuillet 6 : si $E$ est ponctuelle, $v$
+est l'unique foncteur $F \to E$, son adjoint à gauche existe si et
+seulement si $F$ a un objet initial, et cet adjoint (qui pointe l'objet
+initial) est pleinement fidèle ; dualement avec un objet final.
+
+\section*{Localisations et objets locaux (feuillets 6 et 7)}
+
+Soit $\alpha : E_1 \to E$ pleinement fidèle admettant un adjoint à gauche
+$\alpha'$ — une sous-catégorie réflexive, autrement dit — de sorte que
+$\alpha'$ est une localisation : $E_1 \simeq E[\Sigma^{-1}]$, où $\Sigma$
+est la classe des flèches que $\alpha'$ inverse. Grothendieck pose alors
+une question de descente d'adjoints : si $\beta : E_1 \to F$ est pleinement
+fidèle et si $u = \beta\alpha'$ admet un adjoint à droite, $\beta$
+en admet-il un ?
+
+Il la réduit, en supposant $\mathrm{Ob}\,F = \mathrm{Ob}\,E_1 \cup \{a\}$,
+à une question de représentabilité pure : \emph{un foncteur
+$\psi : E_1^{\circ} \to \mathrm{Ens}$ tel que $\psi \circ \alpha'$ soit
+représentable est-il représentable ?} Comme les foncteurs sur
+$E_1^{\circ}$ s'identifient aux foncteurs sur $E^{\circ}$ qui inversent
+$\Sigma$, cela devient une question de reconnaissance : si
+$\xi \in E$ est tel que $\mathrm{Hom}_E(-, \xi)$ transforme les flèches de
+$\Sigma$ en bijections — un objet \emph{$\Sigma$-local}, dirait-on
+aujourd'hui — existe-t-il $\xi_1 \in E_1$ avec
+\[
+\mathrm{Hom}_E(X, \xi) \simeq \mathrm{Hom}_{E_1}(\alpha' X, \xi_1)
+\quad (\simeq \mathrm{Hom}_E(X, \alpha\,\xi_1))
+\]
+fonctoriellement en $X$ — autrement dit, $\xi$ est-il dans l'image
+essentielle de $\alpha$ ? Le feuillet vérifie que
+\[
+(f : X \to Y) \in \Sigma \iff
+\mathrm{Hom}_E(Y, \alpha Z_1) \simeq \mathrm{Hom}_E(X, \alpha Z_1)
+\ \text{ pour tout } Z_1 \in E_1,
+\]
+et conclut : « Or c'est vrai sauf erreur… ». C'est vrai, en effet, et c'est
+aujourd'hui un lemme fondamental de la théorie des localisations
+réflexives : l'image essentielle d'une sous-catégorie réflexive est
+exactement la sous-catégorie des objets locaux pour les flèches inversées
+par le réflecteur.\footnote{La réponse à la question de départ est alors
+positive elle aussi. Le manuscrit note ce lieu des objets locaux
+$\Phi(\Sigma)$ — notation sans rapport avec le $\Phi(A)$ des feuillets
+suivants. Au passage, le feuillet 7 écrit deux fois
+$\mathrm{Hom}_{E_1}(Y, \alpha Z_1)$ là où seul $\mathrm{Hom}_E$ a un sens ;
+lapsus de plume, corrigé ici.}
+
+\section*{Le produit tensoriel sans parenthèses (feuillets 9 et 10)}
+
+Le manuscrit écrit « $\otimes$-catégorie AUC » — associative, unitaire,
+commutative — pour ce qu'on appelle aujourd'hui une \emph{catégorie
+monoïdale symétrique}.\footnote{Le vocabulaire moderne et les théorèmes de
+cohérence datent de 1963--1965 (Mac Lane, Bénabou) ; les feuillets ne sont
+pas datés, et rien n'indique s'ils précèdent ou suivent ces publications.}
+
+\subsection*{La catégorie des familles finies}
+
+Pour une catégorie $A$, soit $\Phi(A)$ la catégorie des familles finies
+d'objets de $A$ : un objet est un couple $(I, (L_i)_{i \in I})$, $I$
+ensemble fini ; un morphisme
+$(I, (L_i)) \to (J, (M_j))$ est un couple d'une bijection
+$\tau : I \xrightarrow{\sim} J$ et d'isomorphismes
+$\varphi_i : L_i \xrightarrow{\sim} M_{\tau(i)}$.\footnote{Le manuscrit ne
+prend que des \emph{isomorphismes} $\varphi_i$ : son $\Phi(A)$ est donc le
+groupoïde monoïdal symétrique libre sur le groupoïde des isomorphismes de
+$A$. La variante aujourd'hui usuelle admet des $\varphi_i$ quelconques et
+donne la catégorie monoïdale symétrique libre sur $A$ ; tout ce qui suit
+vaut pour les deux, en lisant les Hom du bon côté.} La réunion disjointe
+des familles,
+\[
+(I, (L_i)) \otimes (J, (M_j)) = (I \sqcup J,\ (L_i;\ M_j)),
+\]
+fait de $\Phi(A)$ une catégorie monoïdale symétrique : associativité par
+celle de $\sqcup$, unité la famille vide, symétrie par l'échange des deux
+cofacteurs — et tout cela sans utiliser la moindre structure sur $A$, comme
+le note le manuscrit. Le cardinal découpe $\Phi(A)$ en tranches,
+\[
+\Phi(A) = \coprod_{n \geq 0} \Phi_n(A), \qquad
+\Phi_0(A) = \{e\}, \quad \Phi_1(A) \simeq A.
+\]
+
+\textbf{Propriété universelle} (la Proposition du feuillet 9) : pour toute
+catégorie monoïdale symétrique $C$, la restriction à $\Phi_1(A) \simeq A$
+\[
+\underline{\mathrm{Hom}}^{\otimes}(\Phi(A), C) \longrightarrow
+\underline{\mathrm{Hom}}(A, C)
+\]
+est une équivalence de catégories — $\Phi(A)$ est \emph{libre}. La
+démonstration est laissée en quatre points de suspension (« Dém. …. »).
+
+\subsection*{Produits non parenthésés}
+
+Le corollaire est le vrai but : pour toute catégorie monoïdale symétrique
+$C$, il existe, à isomorphisme unique près, un unique foncteur monoïdal
+symétrique
+\[
+\pi : \Phi(C) \longrightarrow C
+\]
+qui vaut l'identité sur $\Phi_1(C)$. Pour une famille finie
+$(I, (L_i))$, l'objet $\pi((L_i))$ est \emph{le} produit tensoriel de la
+famille — défini sans choisir d'ordre ni de parenthésage. Réciproquement,
+la donnée d'un tel $\pi$, identité sur $\Phi_1(C)$ et rendant commutatif
+
+\begin{tikzcd}[column sep=small, row sep=small]
+\Phi_2(C) \arrow[r, "\pi\vert\Phi_2"] & C \\
+C \times C \arrow[u] \arrow[ur, "\otimes"'] &
+\end{tikzcd}
+
+équivaut à la donnée d'une structure monoïdale symétrique sur $C$
+prolongeant $\otimes$ : c'est la présentation \emph{non biaisée} des
+catégories monoïdales, et l'équivalence des deux présentations est
+précisément un théorème de cohérence.\footnote{Le manuscrit dit « il y a
+une vérification » ; c'est la cohérence de Mac Lane sous sa forme non
+biaisée. Noter aussi le NB du feuillet 10 : $\Phi$ est une monade —
+$\pi$ appliqué dans $\Phi(C)$ lui-même aplatit une famille de familles en
+la famille réunion disjointe.}
+
+\section*{Contractions, inverses et le signe (feuillets 11 et 12)}
+
+\subsection*{Familles à couples contractés}
+
+Le feuillet 11 enrichit $\Phi(C)$ : soit $\Phi^{c}(C)$ la catégorie des
+couples $(\xi, \gamma)$ où $\xi = (I, (L_i))$ est une famille finie et où
+$\gamma$ consiste en un ensemble $\gamma'$ (éventuellement vide) de paires
+disjointes $J = \{j', j''\} \subset I$, munies chacune d'un accouplement
+parfait
+\[
+L_{j'} \otimes L_{j''} \longrightarrow \mathbf{1}_C
+\]
+— une dualité. Deux foncteurs d'oubli
+$\mathrm{inc}, \mathrm{res} : \Phi^{c}(C) \to \Phi(C)$ gardent
+respectivement toute la famille et la seule partie non contractée, et il
+existe un morphisme canonique de foncteurs monoïdaux symétriques
+\[
+c\ :\ \pi \circ \mathrm{inc} \longrightarrow \pi \circ \mathrm{res},
+\]
+la \emph{contraction} : évaluer chaque paire appariée contre son
+accouplement, comme on contracte un indice haut contre un indice bas en
+calcul tensoriel. C'est, en substance, le calcul graphique des catégories
+monoïdales à duaux — évaluations et « ficelles » comprises, le feuillet 12
+en dessine.
+
+\subsection*{Objets inversibles et le signe $\varepsilon(L)$}
+
+Pour deux objets $L_a$, $L_b$, les deux produits $L_a \otimes L_b$ et
+$L_b \otimes L_a$ se correspondent par la symétrie ; mais si
+$L_a = L_b = L$, la symétrie devient un \emph{automorphisme} de
+$L \otimes L$, d'ordre 2, et il n'y a pas d'isomorphisme canonique entre
+$L \otimes L$ et le produit non ordonné $\pi(L, L)$ de la famille à deux
+éléments : en choisir un, c'est choisir un ordre total sur l'ensemble
+d'indices.\footnote{Pour $n$ facteurs égaux il y a a priori $n!$
+identifications de $\pi((L_i))$ avec $L^{\otimes n}$ ; le feuillet écrit
+« $L^{\otimes 2}$ » où l'on attend l'exposant $n$.}
+
+Si $L$ est \emph{inversible}, l'obstruction se mesure : la symétrie de
+$L \otimes L$ s'identifie à un élément
+\[
+\varepsilon(L) \in \mathrm{Aut}(\mathbf{1}_C), \qquad \varepsilon(L)^2 = 1,
+\]
+et le passage d'une identification $\pi(L,\dots,L) \simeq L^{\otimes n}$ à
+une autre, via une permutation $\sigma$, se fait par
+$\varepsilon(L)^{\mathrm{sign}(\sigma)}$. L'ambiguïté disparaît exactement
+quand tous les $\varepsilon(L)$ valent $1$ : les \emph{catégories de
+Picard} du manuscrit — tout objet inversible, tous les signes
+triviaux.\footnote{Ce signe est devenu un invariant central : c'est lui qui
+distingue les catégories de Picard \emph{strictes} et qui gouverne, par
+exemple, la règle de Koszul des complexes gradués, où
+$\varepsilon(L) = -1$ pour un inversible en degré impair.}
+
+Enfin, l'\emph{inverse} d'un objet inversible $L$ : un $L'$ muni d'un
+isomorphisme $L \otimes L' \simeq \mathbf{1}$ — d'où, par la symétrie, un
+isomorphisme $L' \otimes L \simeq \mathbf{1}$ ; la relation est symétrique
+et le couple $(L, L')$ peut se donner sans ordre, par un isomorphisme
+$\pi(L, L') \simeq \mathbf{1}$ sur le produit non ordonné. Le feuillet 12
+compare alors deux trivialisations de $L' \otimes L$ : celle obtenue de
+$\varphi_{L,L'} : L \otimes L' \simeq \mathbf{1}$ en composant avec la
+symétrie, $\varphi_{L',L} = \varphi_{L,L'} \circ s_{L',L}$, et celle,
+$\psi_{L',L}$, définie par l'identité triangulaire
+\[
+\varphi_{L,L'} \otimes \mathrm{id}_L = \mathrm{id}_L \otimes \psi_{L',L}
+\ :\ L \otimes L' \otimes L \longrightarrow L.
+\]
+« Relations entre $\varphi_{L',L}$ et $\psi_{L',L}$ ? » demande le
+feuillet, qui s'interrompt sur le carré de naturalité de la symétrie et
+trois colonnes de ficelles. La réponse — qu'il a visiblement en main —
+est que les deux diffèrent précisément du facteur $\varepsilon(L)$ :
+c'est la version « inverses » du signe du paragraphe précédent.
+
+\section*{Théories et leurs constructions (feuillet 13)}
+
+Un feuillet isolé — la page 2 d'une note dont la première page n'est pas
+dans la chemise, barré d'un grand trait oblique — travaille sur des
+\emph{théories} au sens catégorique : une théorie $T$ est une catégorie à
+limites finies (resp. à limites quelconques), un modèle de $T$ dans une
+catégorie $C$ à limites finies est un foncteur $T \to C$ exact à gauche, et
+$T(C)$ désigne la catégorie des modèles.\footnote{C'est le point de vue des
+\emph{théories de Lawvere} (1963) et de leurs généralisations à limites
+finies — théories essentiellement algébriques, esquisses de Ehresmann. Le
+feuillet manipule ces objets comme allant de soi, en des termes qui lui
+sont propres.} Les théories forment une 2-catégorie $\mathcal{T}$ (resp.
+$\mathcal{T}_0$), et, un ensemble $I$ étant fixé, les $I$-morphismes de
+théories en forment une autre, $\mathcal{T}^{(I)}$, avec un carré évident
+de 2-foncteurs les comparant.
+
+La notion mise en avant est celle de \emph{construction} pour une théorie
+$T$ : un morphisme de théories
+\[
+T \longrightarrow \dot{\imath},
+\]
+où $\dot{\imath}$ est la théorie de l'« ensemble de base sans structure »,
+celle dont les modèles dans $C$ redonnent $C$ : $\dot{\imath}_C = C$. Les
+constructions forment une catégorie
+\[
+\Gamma^{T} = \underline{\mathrm{Hom}}(T, \dot{\imath}),
+\]
+qui a des limites finies (resp. des limites), munie d'une évaluation
+$\Gamma^{T} \times T \to \dot{\imath}$ : pour tout modèle $\xi \in T(C)$,
+le foncteur $w \mapsto w(\xi)$, de $\Gamma^{T}$ vers $C$, commute aux
+limites en question. En langage d'aujourd'hui : $\Gamma^{T}$ est la
+catégorie des \emph{opérations naturelles} sur les modèles de $T$ — ce que
+toute structure de type $T$ sait fabriquer, uniformément en la structure —
+et l'évaluation est le premier pas vers l'adjonction
+structure--sémantique.\footnote{Le membre de droite du premier diagramme du
+feuillet, rogné par la marge, n'a pas pu être lu en entier ; la
+transcription porte le détail.}
+
+\section*{Prolongements : préfaisceaux, densité, topos (feuillets 15, 17, 19)}
+
+\subsection*{Une fausse piste réfutée (feuillet 15)}
+
+Première question : $C$ petite à limites finies,
+$\varphi : C \to \mathrm{Ens}$ exact à droite ; le prolongement
+$\overline{\varphi}(\psi) = \mathrm{Hom}(\psi, \varphi)$ aux préfaisceaux
+est-il encore exact à droite — transforme-t-il les limites projectives
+finies de préfaisceaux en limites inductives d'ensembles ? Il faudrait pour
+cela, note le feuillet, que $\varphi$ soit un objet \emph{injectif} : que
+tout morphisme $\psi \to \varphi$ s'étende le long de tout monomorphisme
+$\psi \to \psi'$. En prenant $\psi = \varphi$ et
+$\psi' = \varphi \sqcup \rho$, cela forcerait
+$\mathrm{Hom}(\rho, \varphi) \neq \emptyset$ pour tout $\rho$. « Mais c'est
+\emph{toujours} faux » : prendre pour $\rho$ un foncteur constant de valeur
+non vide et un $\varphi$ à valeur vide quelque part —
+$\mathrm{Hom}(x, \emptyset) = \emptyset$. Deux lignes, et la question est
+close.
+
+\subsection*{Le prolongement de Kan et la reconnaissance des topos}
+
+Seconde question, celle qui porte : $C$ petite à limites finies, $E$ à
+limites finies et petites colimites, $\varphi : C \to E$ exact à gauche,
+et $\overline{\varphi} : \widehat{C} \to E$ le prolongement commutant aux
+petites colimites — l'extension de Kan à gauche de $\varphi$ le long du
+plongement de Yoneda. Sous quelles conditions sur $E$ le prolongement
+$\overline{\varphi}$ est-il encore exact à gauche ? « On sait que c'est OK
+si $E$ est un topos.\footnote{C'est le théorème aujourd'hui attaché au nom
+de Diaconescu : sur un topos, l'extension de Kan d'un foncteur plat — en
+particulier exact à gauche sur un $C$ à limites finies — est exacte à
+gauche. La phrase du feuillet (« on sait que ») indique un fait déjà acquis
+dans son entourage ; les feuillets ne sont pas datés.} Réciproque ? »
+
+Et la réciproque est aussitôt esquissée : supposons $\varphi$ strictement
+générateur — l'image de $C$ engendre $E$ par colimites, de façon dense.
+Alors le foncteur $E \to \widehat{C}$, $X \mapsto \mathrm{Hom}(\varphi(-), X)$,
+est pleinement fidèle et $\overline{\varphi}$ en est l'adjoint à gauche :
+$E$ est une localisation réflexive de $\widehat{C}$. Donc si
+$\overline{\varphi}$ est exact à gauche, $E$ est une localisation exacte à
+gauche d'une catégorie de préfaisceaux — « $E$ est un topos ». C'est,
+énoncé sur une demi-page, le théorème de reconnaissance de
+Giraud.\footnote{Aux hypothèses de taille près, que le feuillet ne discute
+pas : il faut $C$ petite et $E$ à colimites petites, ce qui est supposé
+ici. Une ligne intermédiaire, « il suffit que $E$ soit un topos », est
+barrée sur le feuillet — c'est bien la réciproque qu'il visait.}
+
+\subsection*{Densité : le calcul complet (feuillets 17 et 19)}
+
+Les deux derniers feuillets font le calcul général qui sous-tend tout cela.
+Soient $C \subset E$ une sous-catégorie pleine strictement génératrice
+— \emph{dense}, dit-on aujourd'hui : tout $X \in E$ est colimite canonique
+$X = \varinjlim_{Y \in C/X} Y$ — et $F$ une catégorie à petites colimites.
+L'extension de Kan et la restriction
+\[
+\underline{\mathrm{Hom}}(C, F)
+\underset{\beta}{\overset{\alpha}{\rightleftarrows}}
+\underline{\mathrm{Hom}}(E, F),
+\qquad
+\alpha(\varphi)(X) = \varinjlim_{Y \in C/X} \varphi(Y), \quad
+\beta(\psi) = \psi|C,
+\]
+forment une adjonction, $\mathrm{Hom}(\alpha\varphi, \psi) \simeq
+\mathrm{Hom}(\varphi, \beta\psi)$, avec $\beta\alpha \simeq \mathrm{id}$ :
+$\alpha = i_!$ est pleinement fidèle, comme $i$.\footnote{L'unité
+$\beta\alpha \simeq \mathrm{id}$ utilise seulement que $C$ est pleine dans
+$E$ ; la densité stricte sert plus bas, pour
+$\alpha\beta(\psi)(X) = \varinjlim_{C/X} \psi(Y) \simeq \psi(X)$.}
+
+Quand $\psi$ commute aux petites colimites, on a
+$\alpha\beta(\psi) \simeq \psi$ puisque $X = \varinjlim_{C/X} Y$. Notant
+$\underline{\mathrm{Hom}}'(E, F)$ les foncteurs commutant aux petites
+colimites, et $\underline{\mathrm{Hom}}'(C, F)$ les $\varphi$ vérifiant la
+condition de compatibilité
+
+(*) \emph{pour tout système inductif $(Y_i)$ de $C$ dont la colimite dans
+$E$ appartient encore à $C$, $\varphi$ envoie cette colimite sur
+$\varinjlim \varphi(Y_i)$,}
+
+la restriction induit un foncteur pleinement fidèle
+\[
+\beta' : \underline{\mathrm{Hom}}'(E, F) \longrightarrow
+\underline{\mathrm{Hom}}'(C, F),
+\]
+et la question est de savoir si c'est une équivalence — c'est-à-dire si
+$\alpha$ envoie $\underline{\mathrm{Hom}}'(C, F)$ dans
+$\underline{\mathrm{Hom}}'(E, F)$. Par un système inductif double, tout se
+ramène au
+
+\textbf{Lemme.} \emph{Si $\varphi$ vérifie {\upshape(*)}, alors pour tout
+système inductif $(Y_i)$ dans $C$ ayant une colimite $Y$ dans $E$, le
+morphisme canonique $\varinjlim \varphi(Y_i) \to \alpha\varphi(Y)$ est un
+isomorphisme.}\footnote{Le feuillet écrit $\beta\varphi(Y)$ — lapsus pour
+$\alpha\varphi(Y)$, seul défini quand $Y$ n'est pas dans $C$ ; la
+transcription le signale. C'est le lemme de comparaison des colimites le
+long d'un foncteur dense, au cœur de ce qu'on appelle aujourd'hui le
+théorème de densité.}
+
+Cela revient à comparer les colimites de $\varphi$ sur les deux systèmes
+$(Y_i)$ et $C/Y \to C$, donc à la \emph{cofinalité} du foncteur
+$I \to C/Y$. « Cela est-il cofinal ? C'est vrai en tout cas si pour tout
+diagramme fini dans $C$, la colimite dans $E$ existe et est dans $C$. » Un
+point d'interrogation en marge ferme le dossier — la question de
+cofinalité, en général, reste ouverte sur ces feuillets.
+
+\end{document}

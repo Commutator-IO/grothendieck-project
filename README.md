@@ -24,7 +24,7 @@ window.
 
 | Page | Contents |
 |---|---|
-| [`/`](https://grothendieck.commutator.io/) | What the fonds is, how Grothendieck wrote, and the four notebooks |
+| [`/`](https://grothendieck.commutator.io/) | What the fonds is, how Grothendieck wrote, and the five notebooks |
 | [`/topos/`](https://grothendieck.commutator.io/topos/) | **Cahier de Topos** — folders 19, 161-3, the categorical footing, SGA 4, the late stratified topos *(our grouping)* |
 | [`/motifs/`](https://grothendieck.commutator.io/motifs/) | **Cahier de Motifs** — the inventory's *Théorie des motifs*, folders 10–18, 946 leaves *(the archive's grouping)* |
 | [`/longue-marche/`](https://grothendieck.commutator.io/longue-marche/) | **La Longue Marche** — 1,584 leaves through Galois theory, plus the Teichmüller notes around it *(the archive's grouping)* |
@@ -104,23 +104,35 @@ and git-ignored so a commit never can either.
 
 ## Transcription
 
-Three project skills, one per edition, run in order and all installed under
-`.claude/skills/`:
+Two editions, one skill each, run in order — plus a third skill for the
+folder's tags. All installed under `.claude/skills/`, all pinned to Fable 5 so
+that a batch's provenance is a fact about the file rather than about whichever
+model happened to be selected:
 
 | Skill | Produces |
 |---|---|
 | [`/transcribe-grothendieck`](.claude/skills/transcribe-grothendieck/SKILL.md) | the transcription — the leaves as written, with the critical apparatus |
-| [`/modernize-grothendieck`](.claude/skills/modernize-grothendieck/SKILL.md) | the modernised reading — current notation and names, footnotes instead of apparatus |
-| [`/summarize-grothendieck`](.claude/skills/summarize-grothendieck/SKILL.md) | the summary — one to two self-contained pages for a licence-level reader |
+| [`/modernize-grothendieck`](.claude/skills/modernize-grothendieck/SKILL.md) | the modernised reading — a résumé, then current notation and names, footnotes instead of apparatus |
+| [`/tag-grothendieck`](.claude/skills/tag-grothendieck/SKILL.md) | the folder's tags — the `\keywords{}` line closing the résumé |
 
-All three editions are in French — Grothendieck's language, and the language
-the notions were thought in. The two derived editions work from the
-transcription, never from the handwriting directly: two independent readings
-of the same hand would diverge, and nothing would say which was right.
+Both editions are in French — Grothendieck's language, and the language the
+notions were thought in. The modernised reading works from the transcription,
+never from the handwriting directly: two independent readings of the same hand
+would diverge, and nothing would say which was right.
 
 The modernised reading is the one allowed to depart from the leaf, and is held
 to being **correct as it stands**: where the manuscript is loose it states what
-is true and footnotes what the leaf has.
+is true and footnotes what the leaf has. It opens with a `Résumé` written for
+someone who has not met the subject, and closes that résumé with three to six
+English keywords — the modern vocabulary to search under. Those keywords are
+the **single source** of the folder's tags: `npm run manifest` extracts them,
+and the archive page's search matches on them. There is deliberately no tags
+file, so no tag can describe content nobody has read.
+
+Every batch also carries a **Report a reading** button, in the reading view and
+on each transcribed folder's card, opening a prefilled GitHub issue with the
+shelfmark, the batch and the leaf currently on screen. Everything here is
+first-pass machine work; corrections are the point of publishing it.
 
 ```bash
 npm run render      # transcripts/*.tex → the reading views the left pane shows
@@ -131,10 +143,18 @@ npm run manifest    # tell the site which files now exist
 The `.tex` under `transcripts/` is the source of record and the only thing
 versioned. HTML and PDF are derived, and rebuilt.
 
+**Two batches are done so far**, both under Fable 5 on 8 August 2026: folder
+115 (fourteen leaves — functorial correspondences and the duality of topoi) and
+folder 161-1 (nineteen leaves — adjoint functors, the free symmetric monoidal
+category, theories, and a half-page sketch of Giraud's theorem). Neither has
+been checked leaf by leaf by a person. `/method/` prices the two steps
+separately: transcription carries almost all the cost, because it reads page
+images; the modernised reading works from text.
+
 ### The critical apparatus is the point
 
-`transcripts/preamble/grothendieck.sty` defines seven macros, and they carry
-the whole honesty of the exercise:
+`transcripts/preamble/grothendieck.sty` defines seven macros for the
+transcription, and they carry the whole honesty of the exercise:
 
 | Macro | Meaning |
 |---|---|
@@ -155,12 +175,20 @@ Anything outside it fails loudly rather than being silently flattened.
 Mathematics is not converted at all — the delimiters pass through and KaTeX
 typesets them, so screen and PDF come from one source.
 
+Commutative diagrams are rendered in both: by `tikz-cd` in the PDF, and on
+screen by a renderer that lays the nodes out in a CSS grid, typesets each with
+KaTeX, and draws the arrows in SVG from the measured cell positions — so the
+mathematics stays selectable text rather than becoming a picture. It covers the
+documented arrow subset and **raises on anything else**, because a diagram
+rendered with an arrow missing asserts a commutation nobody wrote.
+
 ## The repository
 
 | Path | Role |
 |---|---|
 | `src/content/catalogue.ts` | The inventory — 178 folders, 22 groups — generated, never hand-edited |
-| `src/content/books.json` | The four notebooks, read by the site *and* by the mirroring script |
+| `src/content/books.json` | The five notebooks, read by the site *and* by the mirroring script |
+| `transcripts/status.json` | The three states no file can prove — `running`, `checked`, `skipped` — reviewable in a diff |
 | `src/components/FacsimilePane.tsx` | The right pane: the streamed folder PDF, resizable, page-anchored |
 | `src/components/TranscriptPane.tsx` | The left pane: the transcript in its own frame, reporting the leaf being read |
 | `scripts/catalogue.mjs` | Re-reads Montpellier's inventory into typed data |

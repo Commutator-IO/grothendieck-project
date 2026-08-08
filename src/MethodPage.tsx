@@ -409,12 +409,18 @@ function Contributors() {
  */
 const PILOT = {
   /** Batches completed so far, by hand-count. */
-  batchesDone: 1,
-  /** Wall-clock for the pilot batch: mirror, read, both editions, verify. */
-  hoursPerBatch: 0.7,
-  /** Rough total tokens for the pilot batch, input and output together:
-      fourteen page images read, three LaTeX files written, checks re-read. */
-  tokensPerBatchK: 100,
+  batchesDone: 2,
+  /** The two steps cost very differently, and the split is the useful fact:
+      transcription reads page images — the whole batch at full page scale,
+      then dozens of high-resolution crops for the hard hands — while the
+      modernised reading works from the transcription's text alone. Figures
+      are per batch, averaged over the two batches done (folder 115 ran
+      lighter, folder 161-1 — nineteen dense leaves — about twice as heavy). */
+  transcribe: { hoursPerBatch: 0.8, tokensPerBatchK: 145 },
+  modernize: { hoursPerBatch: 0.3, tokensPerBatchK: 30 },
+  /** Sum of the two steps — the scope table below multiplies this. */
+  hoursPerBatch: 1.1,
+  tokensPerBatchK: 175,
   /** Dense continuous prose (the Long March) will run slower and heavier
       than folder 115's formula-dominated leaves; the range reflects that. */
   spread: 1.6,
@@ -445,14 +451,18 @@ function CostAndHorizon() {
     <section className="mt-14 max-w-[52em]">
       <h2 className="titre text-[22px] text-ink-900">Cost, and the horizon</h2>
       <p className="prose-fonds mt-3">
-        One batch has been completed: folder 115, fourteen leaves, both editions, transcribed
-        with Fable 5 on 8 August 2026. It cost about{' '}
-        <strong>{PILOT.hoursPerBatch} h</strong> of wall-clock — mirroring, one full reading
-        pass, writing the three files, compiling and checking against the facsimile — and
-        roughly <strong>{PILOT.tokensPerBatchK}k tokens</strong> in and out, most of them the
-        fourteen page images. Everything below multiplies that single measurement, which is the
-        weakest kind of estimate there is; treat the ranges as a first anchor, to be corrected
-        by the next batches.
+        Two batches have been completed, both with Fable 5 on 8 August 2026: folder 115,
+        fourteen leaves, and folder 161-1, nineteen. Together they cost about{' '}
+        <strong>{hoursDone.toFixed(1)} h</strong> of wall-clock and roughly{' '}
+        <strong>{tokensDoneK}k tokens</strong> in and out. The two steps are not comparable,
+        and the split is the useful number: transcription carries almost all of it, because
+        it reads page images — the batch at full page scale, then dozens of high-resolution
+        crops to settle a word — while the modernised reading works from the transcription's
+        text and costs a fraction as much. The second batch ran about twice the first:
+        nineteen dense leaves against fourteen, and far more close-up reading. Everything
+        below multiplies a per-batch average of two measurements, which is barely better than
+        a sample of one; treat the ranges as a first anchor, to be corrected by the next
+        batches.
       </p>
 
       <div className="mt-5 overflow-x-auto">
@@ -466,10 +476,29 @@ function CostAndHorizon() {
             </tr>
           </thead>
           <tbody className="tabular text-ink-700">
+            {/* The two skills, priced apart, then their sum: per batch, so
+                the rows below — which are multiples of that sum — can be read
+                straight off them. */}
             <tr className="border-b border-ink-100">
-              <td className="py-2 pr-4 font-medium text-ink-900">Done so far</td>
+              <td className="py-2 pr-4 font-medium text-ink-900">
+                <code className="text-[12px]">/transcribe</code>, per batch
+              </td>
+              <td className="py-2 pr-4 text-ink-400">1</td>
+              <td className="py-2 pr-4">{PILOT.transcribe.hoursPerBatch} h</td>
+              <td className="py-2">{PILOT.transcribe.tokensPerBatchK}k</td>
+            </tr>
+            <tr className="border-b border-ink-100">
+              <td className="py-2 pr-4 font-medium text-ink-900">
+                <code className="text-[12px]">/modernize</code>, per batch
+              </td>
+              <td className="py-2 pr-4 text-ink-400">1</td>
+              <td className="py-2 pr-4">{PILOT.modernize.hoursPerBatch} h</td>
+              <td className="py-2">{PILOT.modernize.tokensPerBatchK}k</td>
+            </tr>
+            <tr className="border-b border-ink-200">
+              <td className="py-2 pr-4 font-medium text-ink-900">Done so far, both steps</td>
               <td className="py-2 pr-4">{PILOT.batchesDone}</td>
-              <td className="py-2 pr-4">{hoursDone} h</td>
+              <td className="py-2 pr-4">{hoursDone.toFixed(1)} h</td>
               <td className="py-2">{tokensDoneK}k</td>
             </tr>
             <tr className="border-b border-ink-100">

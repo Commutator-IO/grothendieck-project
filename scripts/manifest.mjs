@@ -94,7 +94,9 @@ export async function writeManifest() {
         const tex = await readFile(resolve(TRANSCRIPTS, d.name, f), 'utf8');
         for (const k of tex.matchAll(/\\keywords\{([^}]*)\}/g)) {
           const list = (tags[d.name] ??= []);
-          for (const t of k[1].split(',').map((s) => s.trim()).filter(Boolean)) {
+          // A keyword wrapped across a source line carries its newline here;
+          // collapse any whitespace run to the single space the tag means.
+          for (const t of k[1].split(',').map((s) => s.replace(/\s+/g, ' ').trim()).filter(Boolean)) {
             if (!list.includes(t)) list.push(t);
           }
         }

@@ -71,8 +71,11 @@ export function ArchivePage() {
   const started = [...workOn.values()].filter((w) => w.transcribed > 0).length;
 
   const inBook = useMemo(() => {
-    const m = new Map<string, string>();
-    for (const b of BOOKS) for (const s of b.sections) for (const id of s.cotes) m.set(id, b.title);
+    // Title for the badge, path for the way back in: a folder that has a
+    // modernised reading gets a link straight to its notebook page.
+    const m = new Map<string, { title: string; path: string }>();
+    for (const b of BOOKS)
+      for (const s of b.sections) for (const id of s.cotes) m.set(id, { title: b.title, path: b.path });
     return m;
   }, []);
 
@@ -154,7 +157,7 @@ export function ArchivePage() {
                       {c.title}
                       {belongs && (
                         <span className="ml-2 rounded-full bg-brand-50 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-brand-700">
-                          {belongs}
+                          {belongs.title}
                         </span>
                       )}
                       {work && work.transcribed > 0 && (
@@ -168,14 +171,30 @@ export function ArchivePage() {
                         </span>
                       )}
                       {work && work.modernised > 0 && (
-                        <span
-                          title={`${work.modernised} of ${work.batches} batches modernised — read again by machine, not by a person`}
-                          className="ml-1.5 whitespace-nowrap rounded-full bg-brand-100 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-brand-700"
-                        >
-                          {work.modernised === work.batches
-                            ? 'modernised'
-                            : `${work.modernised}/${work.batches} modernised`}
-                        </span>
+                        /* The chip is the way back in: a modernised folder
+                           has a reading page, so saying so and linking to it
+                           are the same gesture. Folders outside every book
+                           have nowhere to open and keep the plain chip. */
+                        belongs ? (
+                          <a
+                            href={`${belongs.path}#${id}/1`}
+                            title={`${work.modernised} of ${work.batches} batches modernised — open the reading, batch 1`}
+                            className="ml-1.5 whitespace-nowrap rounded-full bg-brand-100 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-brand-700 transition hover:bg-brand-200"
+                          >
+                            {work.modernised === work.batches
+                              ? 'modernised ↗'
+                              : `${work.modernised}/${work.batches} modernised ↗`}
+                          </a>
+                        ) : (
+                          <span
+                            title={`${work.modernised} of ${work.batches} batches modernised — read again by machine, not by a person`}
+                            className="ml-1.5 whitespace-nowrap rounded-full bg-brand-100 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-brand-700"
+                          >
+                            {work.modernised === work.batches
+                              ? 'modernised'
+                              : `${work.modernised}/${work.batches} modernised`}
+                          </span>
+                        )
                       )}
                       {folderTags(manifest, id).map((t) => (
                         <span
