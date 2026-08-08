@@ -65,15 +65,19 @@ export interface BookSection {
 export type BookKey = 'topos' | 'motives' | 'long-march' | 'late' | 'scattered';
 
 /**
- * Which language and register a transcript artifact is written in.
+ * Which register a transcript artifact is written in.
  *
- * The order is the order of increasing distance from the leaf: the French
- * transcription is what is on the paper, the English one is that in another
- * language, `modern` is a reading of it in today's mathematics, and the
- * summary does not pretend to be the text at all. The tabs follow it, so that
- * moving right is always moving further from the manuscript.
+ * The order is the order of increasing distance from the leaf: the
+ * transcription is what is on the paper, `modern` is a reading of it in
+ * today's mathematics, and the summary does not pretend to be the text at
+ * all. The tabs follow that order, so moving right is always moving further
+ * from the manuscript.
+ *
+ * All three are in French. Grothendieck wrote in French, the notions were
+ * thought in French, and a translation was a fourth artifact to keep in step
+ * for no gain the other three did not already give.
  */
-export type Edition = 'fr' | 'en' | 'modern' | 'summary';
+export type Edition = 'fr' | 'modern' | 'summary';
 
 /** Everything present locally, written by `npm run archive` and `npm run manifest`. */
 export interface Manifest {

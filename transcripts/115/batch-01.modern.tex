@@ -1,271 +1,280 @@
-% Modernised reading — Grothendieck fonds, folder 115, batch 1 (leaves 1-14).
+% Lecture modernisée — fonds Alexandre Grothendieck, cote 115, lot 1
+% (feuillets 1-14).
 %
-% This is an INTERPRETATION, not a transcription. It reads the leaves in
-% today's notation and today's names, states hypotheses the manuscript leaves
-% implicit, and drops the critical apparatus so the mathematics can be read
-% continuously. Everything the brackets and underlines used to carry — an
-% uncertain reading, a notation he used differently, a passage that is simply
-% missing — is said in a footnote instead.
+% Ceci est une INTERPRÉTATION, non une transcription. Elle relit les feuillets
+% dans la notation et le vocabulaire d'aujourd'hui, énonce les hypothèses que
+% le manuscrit laisse implicites, et abandonne l'appareil critique pour que les
+% mathématiques se lisent d'un trait. Tout ce que les crochets et les
+% soulignements portaient — lecture douteuse, notation qu'il employait
+% autrement, passage manquant — passe en note de bas de page.
 %
-% It is held to being mathematically correct as it stands, not merely faithful
-% to the leaf. Where the manuscript is loose or the reading is doubtful, the
-% statement here is the one that is true, and the footnote says what the leaf
-% actually has. Where the two disagree in substance, the transcription is the
-% record: anyone citing Grothendieck should cite batch-01.fr.tex.
+% Elle est tenue d'être mathématiquement correcte telle qu'elle est, et non
+% seulement fidèle au feuillet. Là où le manuscrit est lâche ou fautif, c'est
+% l'énoncé vrai qui figure ici, et la note dit ce que porte le feuillet. En cas
+% de désaccord de fond, la transcription fait foi : qui cite Grothendieck doit
+% citer batch-01.fr.tex.
 %
-% Pass: Fable 5 (claude-fable-5), 2026-08-08 — first pass, unchecked against
-% the leaves by a human.
+% Pass: Fable 5 (claude-fable-5), 2026-08-08 — première passe, non vérifiée
+% feuillet à feuillet par un humain.
 \documentclass[11pt,a4paper]{article}
 \input{../preamble/grothendieck}
 
 \folder{115}
 \batch{1}
 \leaves{1}{14}
-\foldertitle{« Correspondances » fonctorielles. Dualité des topos — modernised reading}
+\foldertitle{« Correspondances » fonctorielles. Dualité des topos — lecture modernisée}
 
 \begin{document}
-\selectlanguage{english}
 
-\section*{Isbell duality, as folder 115 works it out}
+\section*{La dualité d'Isbell, telle que la cote 115 l'établit}
 
-Throughout, $A$ and $B$ are small categories. Write
-$\widehat{A} = [A^{\mathrm{op}}, \mathbf{Set}]$ for presheaves and
-$A^{\vee} = [A, \mathbf{Set}]$ for copresheaves.\footnote{Grothendieck's own
-notation, stable across the folder. He writes $\mathrm{Ens}$ for
-$\mathbf{Set}$; we do not.} Both are presheaf categories — $A^{\vee} =
-\widehat{A^{\mathrm{op}}}$ — hence both are Grothendieck topoi, which is what
-the folder's title refers to. Write $y$ for the Yoneda embedding.
+Dans tout ce qui suit, $A$ et $B$ sont de petites catégories. On note
+$\widehat{A} = [A^{\mathrm{op}}, \mathbf{Ens}]$ la catégorie des préfaisceaux
+et $A^{\vee} = [A, \mathbf{Ens}]$ celle des copréfaisceaux.\footnote{Notation
+de Grothendieck lui-même, constante dans tout le dossier.} Toutes deux sont
+des catégories de préfaisceaux — $A^{\vee} = \widehat{A^{\mathrm{op}}}$ — donc
+des topos de Grothendieck : c'est à quoi renvoie le titre du dossier. On note
+$y$ le plongement de Yoneda.
 
-Two decorations recur. A subscript shriek, $\underline{\mathrm{Hom}}_{!}$,
-denotes the full subcategory of functors preserving colimits; a superscript
-one, $\underline{\mathrm{Hom}}^{!}$, those preserving limits; a doubled shriek
-the two-variable version, separately in each argument.\footnote{Leaf 3, head
-of the leaf. The manuscript says \emph{limites inductives} and \emph{limites
-projectives}, both marked as uncertain readings in the transcription; the
-equivalences that follow hold only under this assignment, which is what fixes
-it.} In current usage: cocontinuous and continuous.
+Deux décorations reviennent sans cesse. Un point d'exclamation en indice,
+$\underline{\mathrm{Hom}}_{!}$, désigne la sous-catégorie pleine des foncteurs
+commutant aux colimites ; en exposant, $\underline{\mathrm{Hom}}^{!}$, ceux
+qui commutent aux limites ; doublé, la version à deux variables, séparément en
+chaque argument.\footnote{Feuillet 3, en tête. Le manuscrit dit \emph{limites
+inductives} et \emph{limites projectives}, deux lectures que la transcription
+signale comme incertaines ; les équivalences qui suivent ne valent que sous
+cette répartition, ce qui la fixe.} En langue d'aujourd'hui : cocontinus et
+continus.
 
-\subsection*{Kernels between presheaf topoi}
+\subsection*{Noyaux entre topos de préfaisceaux}
 
-The first movement is a calculus of correspondences, on the analogy of an
-integral kernel $k(x,y)$ carrying functions on one space to functions on
-another.
+Le premier mouvement est un calcul de correspondances, sur le modèle d'un
+noyau intégral $k(x,y)$ transportant les fonctions d'un espace à un autre.
 
-Let $p_{A}, p_{B}$ be the projections off $A \times B$, and let the relative
-hom mean the pushforward of the internal hom along the projection that
-forgets the remaining variable.\footnote{The manuscript's subscripts are the
-opposite of the modern reflex: his $p_{B}$ is the projection that
-\emph{deletes} $B$, so $p_{B} : A \times B \to A$. Read the other way the
-identities on leaf 3 contradict one another. This is the one point in the
-batch where the reading turns on a convention rather than on a letterform.}
-For $X \in (A \times B)^{\wedge}$ the two transforms are
+Soient $p_{A}, p_{B}$ les projections de $A \times B$, et convenons que le hom
+relatif désigne l'image directe du hom interne le long de la projection qui
+oublie la variable restante.\footnote{Les indices du manuscrit sont l'inverse
+du réflexe moderne : son $p_{B}$ est la projection qui \emph{supprime} $B$,
+soit $p_{B} : A \times B \to A$. Lues autrement, les identités du feuillet 3
+se contredisent. C'est le seul endroit du lot où la lecture tienne à une
+convention plutôt qu'à un tracé.} Pour $X \in (A \times B)^{\wedge}$, les deux
+transformées sont
 \[
 {}^{s}X(L) = \underline{\mathrm{Hom}}_{B}(p_{B}^{*}L,\ X), \qquad
 {}^{d}X(M) = \underline{\mathrm{Hom}}_{A}(p_{A}^{*}M,\ X),
 \qquad L \in \widehat{A},\ M \in \widehat{B},
 \]
-and they are related by the single pairing
+et un unique accouplement les relie :
 \[
 X(L,M) = \mathrm{Hom}(L \boxtimes M,\ X)
 \;\cong\; \mathrm{Hom}_{\widehat{A}}\bigl(L,\ {}^{d}X(M)\bigr)
 \;\cong\; \mathrm{Hom}_{\widehat{B}}\bigl(M,\ {}^{s}X(L)\bigr),
 \qquad L \boxtimes M = p_{B}^{*}L \times p_{A}^{*}M .
 \]
-The external product $\boxtimes : \widehat{A} \times \widehat{B} \to
-(A \times B)^{\wedge}$ is fully faithful.
+Le produit externe $\boxtimes : \widehat{A} \times \widehat{B} \to (A \times
+B)^{\wedge}$ est pleinement fidèle.
 
-Note the variance, because it is the whole point of what follows. Since
+La variance mérite qu'on s'y arrête, car tout le reste en dépend. Puisque
 $(A\times B)^{\wedge} = [A^{\mathrm{op}} \times B^{\mathrm{op}},
-\mathbf{Set}]$, the kernel $X$ is contravariant in \emph{both} arguments, so
-${}^{s}X$ and ${}^{d}X$ are contravariant functors
+\mathbf{Ens}]$, le noyau $X$ est contravariant en \emph{chacun} de ses deux
+arguments ; ${}^{s}X$ et ${}^{d}X$ sont donc des foncteurs contravariants
 \[
 {}^{s}X : \widehat{A}^{\,\mathrm{op}} \longrightarrow \widehat{B},
 \qquad
 {}^{d}X : \widehat{B}^{\,\mathrm{op}} \longrightarrow \widehat{A},
 \]
-and the displayed isomorphisms make them \emph{mutually right adjoint} — an
-adjunction between $\widehat{A}^{\,\mathrm{op}}$ and $\widehat{B}$. That is a
-dual adjunction, not an ordinary one.\footnote{So $X$ is not a profunctor
-$A \nrightarrow B$: a profunctor is covariant in one variable. It is a
-two-variable presheaf, and the construction it generates is a Galois
-connection of the sort $V \mapsto V^{*}$ is for vector spaces — which is
-exactly why the folder arrives where it does.}
+et les isomorphismes ci-dessus les rendent \emph{mutuellement adjoints à
+droite} : c'est une adjonction entre $\widehat{A}^{\,\mathrm{op}}$ et
+$\widehat{B}$, autrement dit une adjonction \emph{duale} et non une adjonction
+ordinaire.\footnote{$X$ n'est donc pas un profoncteur $A \nrightarrow B$ : un
+profoncteur est covariant en une variable. C'est un préfaisceau à deux
+variables, et ce qu'il engendre est une correspondance de Galois du type
+$V \mapsto V^{*}$ — ce qui explique précisément où le dossier aboutit.}
 
-Leaf 5 arranges eight functor categories in a wheel, every arrow of which is
-an equivalence, among them
+Le feuillet 5 dispose huit catégories de foncteurs en roue, dont toutes les
+flèches sont des équivalences, parmi lesquelles
 \[
 (A\times B)^{\wedge} \;\simeq\;
 \underline{\mathrm{Hom}}(A^{\mathrm{op}}, \widehat{B}) \;\simeq\;
 \underline{\mathrm{Hom}}^{!}(\widehat{A}^{\,\mathrm{op}}, \widehat{B}) \;\simeq\;
 \underline{\mathrm{Hom}}_{!}(A^{\vee}, \widehat{B}).
 \]
-Each is a way of currying the same two-variable functor. The first is plain
-currying; the second and third extend along Yoneda, and the shriek records
-what the extension must preserve for it to be an equivalence — a functor out
-of a free (co)completion is determined by its restriction to the generators
-exactly when it preserves the (co)limits that completion adds.\footnote{The
-eight arise from choosing which variable is taken outside, and at which of
-the three levels — $A^{\mathrm{op}}$, $\widehat{A}^{\,\mathrm{op}}$,
-$A^{\vee}$ — it is presented, the extremes closing on the two-variable forms
-$\underline{\mathrm{Hom}}^{!!}$ and $\underline{\mathrm{Hom}}_{!!}$. The
-transcription marks the wheel's two left-hand nodes as uncertain, a tear
-running through that side of the leaf; they are recoverable from the symmetry,
-and are given here accordingly.} The same statement is then carried to finite
-families $(A_{i})_{i \in I}$ with $I$ split into a covariant and a
-contravariant part.
+Chacune est une manière de curryfier le même foncteur à deux variables. La
+première est la curryfication nue ; les deux suivantes prolongent le long de
+Yoneda, et le point d'exclamation enregistre ce que le prolongement doit
+préserver pour être une équivalence — un foncteur issu d'une (co)complétion
+libre est déterminé par sa restriction aux générateurs exactement lorsqu'il
+commute aux (co)limites que cette complétion ajoute.\footnote{Les huit formes
+viennent du choix de la variable mise en facteur et du niveau auquel on la
+présente — $A^{\mathrm{op}}$, $\widehat{A}^{\,\mathrm{op}}$ ou $A^{\vee}$ —
+les cas extrêmes se refermant sur les formes à deux variables
+$\underline{\mathrm{Hom}}^{!!}$ et $\underline{\mathrm{Hom}}_{!!}$. La
+transcription signale les deux nœuds de gauche de la roue comme incertains,
+une déchirure traversant ce côté du feuillet ; ils se rétablissent par
+symétrie, et c'est ainsi qu'ils sont donnés ici.} Le même énoncé est ensuite
+porté aux familles finies $(A_{i})_{i \in I}$, $I$ étant scindé en une part
+covariante et une part contravariante.
 
-\subsection*{The duality}
+\subsection*{La dualité}
 
-Everything above specialises. Take $B = A^{\mathrm{op}}$ and for the kernel
-take the hom itself, $H_{A} = \mathrm{Hom}_{A} \in (A \times
-A^{\mathrm{op}})^{\wedge}$ — the manuscript's own remark, in the left margin
-of leaf 3, that this is the canonical element of that category. The dual
-adjunction of the previous section becomes an adjunction between $\widehat{A}$
-and $(A^{\vee})^{\mathrm{op}}$, and this is Isbell duality.
+Tout ce qui précède se spécialise. Prenons $B = A^{\mathrm{op}}$ et, pour
+noyau, le hom lui-même : $H_{A} = \mathrm{Hom}_{A} \in (A \times
+A^{\mathrm{op}})^{\wedge}$ — c'est la remarque portée par Grothendieck dans la
+marge gauche du feuillet 3, que c'est là l'élément canonique de cette
+catégorie. L'adjonction duale du paragraphe précédent devient une adjonction
+entre $\widehat{A}$ et $(A^{\vee})^{\mathrm{op}}$ : c'est la dualité d'Isbell.
 
-Explicitly, its two functors are
+Explicitement, ses deux foncteurs sont
 \[
 \mathcal{O}(\Phi)(a) = \widehat{A}\bigl(\Phi,\ y a\bigr), \qquad
 \mathrm{Spec}(\Psi)(a) = A^{\vee}\bigl(\Psi,\ \mathrm{Hom}_{A}(a,-)\bigr),
 \]
-covariant and contravariant in $a$ respectively, so that $\mathcal{O}\Phi \in
-A^{\vee}$ and $\mathrm{Spec}\,\Psi \in \widehat{A}$; and
+respectivement covariant et contravariant en $a$, de sorte que
+$\mathcal{O}\Phi \in A^{\vee}$ et $\mathrm{Spec}\,\Psi \in \widehat{A}$ ; et
 \[
 H_{A}(\Phi, \Psi)
 \;\cong\; \mathrm{Hom}_{\widehat{A}}\bigl(\Phi,\ \mathrm{Spec}\,\Psi\bigr)
 \;\cong\; \mathrm{Hom}_{A^{\vee}}\bigl(\Psi,\ \mathcal{O}\Phi\bigr),
 \]
-which is $\mathcal{O} \dashv \mathrm{Spec}$ as functors $\widehat{A}
-\rightleftarrows (A^{\vee})^{\mathrm{op}}$.\footnote{The manuscript writes
-$\varphi_{A}$ for $\mathcal{O}$ and $\Psi_{A}$ for $\mathrm{Spec}$; the names
-$\mathcal{O}$ and $\mathrm{Spec}$ are later, and carry the geometric reading
-of the adjunction as functions-and-points. Nothing in the folder cites
-Isbell's work of the mid-1960s, and the construction is arrived at from the
-kernel calculus above rather than from it.}
+c'est-à-dire $\mathcal{O} \dashv \mathrm{Spec}$ comme foncteurs $\widehat{A}
+\rightleftarrows (A^{\vee})^{\mathrm{op}}$.\footnote{Le manuscrit écrit
+$\varphi_{A}$ pour $\mathcal{O}$ et $\Psi_{A}$ pour $\mathrm{Spec}$ ; les noms
+$\mathcal{O}$ et $\mathrm{Spec}$ sont postérieurs et portent la lecture
+géométrique de l'adjonction, fonctions contre points. Rien dans le dossier ne
+cite les travaux d'Isbell du milieu des années soixante : la construction naît
+ici du calcul de noyaux ci-dessus.}
 
-Each functor is determined up to unique isomorphism by two properties, and
-the manuscript states both: it restricts along $y$ to the covariant hom, and
-it carries colimits in its source to limits in its target.\footnote{The
-manuscript says $\Psi_{A}$ ``commutes with projective limits''. Read in
-$(A^{\vee})^{\mathrm{op}}$ that is the statement above: $\mathrm{Spec}$ is a
-right adjoint, so it preserves limits of $(A^{\vee})^{\mathrm{op}}$, which are
-colimits of $A^{\vee}$.} On representables the pairing is the hom:
-$H_{A}(y a, \mathrm{Hom}_{A}(b,-)) \cong \mathrm{Hom}_{A}(a,b)$, since
-$\mathcal{O}(y a) = \mathrm{Hom}_{A}(a,-)$ and Yoneda does the rest.
+Chaque foncteur est déterminé à isomorphisme unique près par deux propriétés,
+que le manuscrit énonce toutes deux : il se restreint le long de $y$ au hom
+covariant, et il transforme les colimites de sa source en limites de son
+but.\footnote{Le manuscrit dit que $\Psi_{A}$ « commute aux limites
+projectives ». Lu dans $(A^{\vee})^{\mathrm{op}}$, c'est l'énoncé ci-dessus :
+$\mathrm{Spec}$ est adjoint à droite, donc commute aux limites de
+$(A^{\vee})^{\mathrm{op}}$, qui sont les colimites de $A^{\vee}$.} Sur les
+représentables, l'accouplement redonne le hom :
+$H_{A}(y a, \mathrm{Hom}_{A}(b,-)) \cong \mathrm{Hom}_{A}(a,b)$, puisque
+$\mathcal{O}(y a) = \mathrm{Hom}_{A}(a,-)$ et que Yoneda fait le reste.
 
-The unit and counit
+L'unité et la counité
 \[
 \eta_{\Phi} : \Phi \longrightarrow \mathrm{Spec}\,\mathcal{O}\,\Phi,
 \qquad
 \varepsilon_{\Psi} : \Psi \longrightarrow \mathcal{O}\,\mathrm{Spec}\,\Psi
 \]
-are therefore isomorphisms on representables. Whether they are isomorphisms
-anywhere else is the question the folder poses and leaves open:
+sont donc des isomorphismes sur les représentables. Le sont-elles ailleurs ?
+C'est la question que le dossier pose et laisse ouverte :
 
 \begin{quote}
-Are the adjunction morphisms isomorphisms only for representables? Is it a
-weak equivalence — probably not.
+Les morphismes d'adjonction sont-ils des isomorphismes seulement pour les
+représentables ? Est-ce une équivalence faible — sans doute pas.
 \end{quote}
 
-This is the reflexivity question of linear algebra one level up. For vector
-spaces over a field, $V \to V^{**}$ is an isomorphism exactly on the
-finite-dimensional ones; here the objects at which $\eta$ is invertible are
-the \emph{reflexive}, or Isbell-self-dual, objects, and they are what the next
-section constructs.\footnote{His parenthesis ``sans doute pas'' is retained
-above; the transcription marks the words before it as an uncertain reading.}
+C'est la question de la réflexivité de l'algèbre linéaire, un cran plus haut.
+Pour les espaces vectoriels sur un corps, $V \to V^{**}$ est un isomorphisme
+exactement sur les espaces de dimension finie ; ici, les objets où $\eta$ est
+inversible sont dits \emph{réflexifs}, ou auto-duaux au sens d'Isbell, et ce
+sont eux que construit la section suivante.\footnote{Sa parenthèse « sans
+doute pas » est conservée ci-dessus ; la transcription signale les mots qui la
+précèdent comme une lecture incertaine.}
 
-Dually there is a contraction, cocontinuous in each variable,
+Dualement, il existe une contraction, cocontinue en chaque variable,
 \[
-H^{A} : \widehat{A} \times A^{\vee} \longrightarrow \mathbf{Set},
+H^{A} : \widehat{A} \times A^{\vee} \longrightarrow \mathbf{Ens},
 \qquad
 \Phi \star_{A} \Psi \;=\; \int^{a \in A} \Phi(a) \times \Psi(a),
 \]
-the coend, agreeing with the hom on representables by co-Yoneda, and it gives
+la cofin, qui coïncide avec le hom sur les représentables par le lemme de
+co-Yoneda, et qui donne
 \[
-\widehat{A} \;\simeq\; \underline{\mathrm{Hom}}_{!}(A^{\vee}, \mathbf{Set}),
+\widehat{A} \;\simeq\; \underline{\mathrm{Hom}}_{!}(A^{\vee}, \mathbf{Ens}),
 \qquad
-A^{\vee} \;\simeq\; \underline{\mathrm{Hom}}_{!}(\widehat{A}, \mathbf{Set}),
+A^{\vee} \;\simeq\; \underline{\mathrm{Hom}}_{!}(\widehat{A}, \mathbf{Ens}),
 \]
-each topos being the cocontinuous functionals on the other.\footnote{Both are
-instances of the free cocompletion property: $\widehat{A}$ is the free
-cocompletion of $A$, so cocontinuous functors out of it correspond to functors
-out of $A$. The decorations on the second differ from the first in the
-manuscript and are flagged uncertain in the transcription; they are given here
-as matching, which is what the symmetry requires.}
+chacun des deux topos étant les fonctionnelles cocontinues sur
+l'autre.\footnote{Les deux relèvent de la propriété de cocomplétion libre :
+$\widehat{A}$ est la cocomplétion libre de $A$, donc les foncteurs cocontinus
+qui en sortent correspondent aux foncteurs issus de $A$. Les décorations de la
+seconde diffèrent de celles de la première dans le manuscrit et sont signalées
+incertaines ; elles sont données ici comme concordantes, ce qu'exige la
+symétrie.}
 
-\subsection*{The envelope}
+\subsection*{L'enveloppe}
 
-Leaves 10 and 11 build what is now called the Isbell envelope. Let $A
-\hookrightarrow B$ be full and $x$ an object of $B$. The two homs $H_{x} =
-\mathrm{Hom}_{B}(-, x) \in \widehat{A}$ and $H^{x} = \mathrm{Hom}_{B}(x, -)
-\in A^{\vee}$ compose, by composition in $B$:
+Les feuillets 10 et 11 construisent ce qu'on appelle aujourd'hui l'enveloppe
+d'Isbell. Soit $A \hookrightarrow B$ pleinement fidèle et $x$ un objet de $B$.
+Les deux homs $H_{x} = \mathrm{Hom}_{B}(-, x) \in \widehat{A}$ et $H^{x} =
+\mathrm{Hom}_{B}(x, -) \in A^{\vee}$ se composent, par la composition de $B$ :
 \[
 H_{x}(a) \times H^{x}(b) \xrightarrow{\ \alpha_{x}\ } \mathrm{Hom}_{A}(a,b),
 \]
-which lands in $\mathrm{Hom}_{A}$ rather than $\mathrm{Hom}_{B}$ precisely
-because $A$ is full. Abstracting from $B$, let $\widetilde{A}$ be the category
-of triples $(H_{*}, H^{*}, \alpha)$ with $H_{*} \in \widehat{A}$, $H^{*} \in
-A^{\vee}$ and $\alpha$ natural. A morphism is a pair
+et le but est $\mathrm{Hom}_{A}$ et non $\mathrm{Hom}_{B}$ précisément parce
+que $A$ est pleine. En faisant abstraction de $B$, soit $\widetilde{A}$ la
+catégorie des triplets $(H_{*}, H^{*}, \alpha)$ avec $H_{*} \in \widehat{A}$,
+$H^{*} \in A^{\vee}$ et $\alpha$ naturel. Un morphisme est un couple
 \[
-\varphi_{*} : H_{*} \to H'_{*} \ \text{in } \widehat{A},
+\varphi_{*} : H_{*} \to H'_{*} \ \text{dans } \widehat{A},
 \qquad
-\varphi^{*} : H'^{*} \to H^{*} \ \text{in } A^{\vee},
+\varphi^{*} : H'^{*} \to H^{*} \ \text{dans } A^{\vee},
 \]
-covariant in one component and contravariant in the other, compatible with the
-pairings:
+covariant en une composante et contravariant en l'autre, compatible aux
+accouplements :
 \[
 \alpha_{a,b}\bigl(u,\ \varphi^{*}(u')\bigr)
 = \alpha'_{a,b}\bigl(\varphi_{*}(u),\ u'\bigr).
 \]
-Every full embedding $A \hookrightarrow B$ then induces $B \to \widetilde{A}$;
-the construction is functorial in $A$; and it is canonically self-dual,
-$\widetilde{A}^{\,\mathrm{op}} \simeq \widetilde{A^{\mathrm{op}}}$, the
-duality simply exchanging the two components.\footnote{The functoriality
-square closing leaf 11 has several arrow labels marked conjectural in the
-transcription; the shape is unambiguous where the labels are not.} Both
-$\widehat{A}$ and $(A^{\vee})^{\mathrm{op}}$ embed in it, by
-$\Phi \mapsto (\Phi, \mathcal{O}\Phi, \mathrm{ev})$ and dually — which is the
-sense in which $\widetilde{A}$ is where the two sides of the duality meet.
+Tout plongement plein $A \hookrightarrow B$ induit alors $B \to \widetilde{A}$ ;
+la construction est fonctorielle en $A$ ; et elle est canoniquement auto-duale,
+$\widetilde{A}^{\,\mathrm{op}} \simeq \widetilde{A^{\mathrm{op}}}$, la dualité
+échangeant simplement les deux composantes.\footnote{Le carré de fonctorialité
+qui clôt le feuillet 11 porte, dans la transcription, plusieurs étiquettes de
+flèches données comme conjecturales ; la forme, elle, ne fait pas de doute.}
+$\widehat{A}$ et $(A^{\vee})^{\mathrm{op}}$ s'y plongent tous deux, par
+$\Phi \mapsto (\Phi, \mathcal{O}\Phi, \mathrm{ev})$ et dualement — c'est en
+ce sens que $\widetilde{A}$ est le lieu où les deux versants de la dualité se
+rejoignent.
 
-Leaf 13 places the Cauchy completion at the centre. The identity
+Le feuillet 13 place la complétion de Cauchy au centre. L'identité
 \[
 \bigl(\mathrm{Kar}(A^{\mathrm{op}})\bigr)^{\mathrm{op}} \;\simeq\; \mathrm{Kar}(A)
 \]
-holds because splitting idempotents commutes with passage to the opposite, and
-for $\mathbf{Set}$-enriched categories $\mathrm{Kar}$ — the Karoubi envelope —
-\emph{is} the Cauchy completion. Retracts of representables are reflexive, so
-$\mathrm{Kar}(A)$ sits inside the self-dual part of
-$\widetilde{A}$.\footnote{The manuscript writes $A = \widehat{A} \cap
-A^{\vee\circ}$, an intersection of subcategories of different categories,
-which cannot be read literally; and equality with $\mathrm{Kar}(A)$ does not
-hold in general — the reflexive objects can be strictly more numerous. The
-containment is what is safe to assert, and is what the rest of the leaf uses.}
+tient parce que le scindage des idempotents commute au passage à l'opposée, et
+que pour des catégories enrichies sur $\mathbf{Ens}$ l'enveloppe de Karoubi
+$\mathrm{Kar}$ \emph{est} la complétion de Cauchy. Les rétractes de
+représentables sont réflexifs, donc $\mathrm{Kar}(A)$ se place dans la part
+auto-duale de $\widetilde{A}$.\footnote{Le manuscrit écrit $A = \widehat{A}
+\cap A^{\vee\circ}$, intersection de sous-catégories de catégories
+différentes, qui ne peut se lire littéralement ; et l'égalité avec
+$\mathrm{Kar}(A)$ n'a pas lieu en général — les objets réflexifs peuvent être
+strictement plus nombreux. L'inclusion est ce qu'on peut affirmer, et c'est ce
+dont la suite du feuillet se sert.}
 
-The leaf closes with a caution about gluing, worth keeping because it is a
-warning and not a step: given $N = M_{1} \cap M_{2}$ through full embeddings,
-one may form $\Sigma'$ from $M'_{1}$ and $M'_{2}$ over it, but even when
-$M'_{i} \to M_{i}$ are equivalences the images need not be full in $\Sigma'$,
-and $N' \to N$ need not be an equivalence.\footnote{Several words of this
-passage are illegible in the manuscript. The negations are legible, and they
-are what carries the warning.}
+Le feuillet s'achève sur une mise en garde à propos des recollements, qu'il
+vaut de conserver parce que c'en est une et non une étape : étant donné
+$N = M_{1} \cap M_{2}$ par des plongements pleins, on peut former $\Sigma'$ à
+partir de $M'_{1}$ et $M'_{2}$ au-dessus ; mais même si les $M'_{i} \to M_{i}$
+sont des équivalences, les images ne sont pas nécessairement pleines dans
+$\Sigma'$, ni $N' \to N$ une équivalence.\footnote{Plusieurs mots de ce
+passage sont illisibles dans le manuscrit. Les négations, elles, se lisent :
+ce sont elles qui portent l'avertissement.}
 
 \subsection*{Coefficients}
 
-The last leaf lets the duality take values in a category $M$ rather than in
-$\mathbf{Set}$. For $M$ cocomplete,
+Le dernier feuillet fait prendre à la dualité ses valeurs dans une catégorie
+$M$ plutôt que dans $\mathbf{Ens}$. Pour $M$ cocomplète,
 \[
 \underline{\mathrm{Hom}}(A, M) \;\simeq\; \underline{\mathrm{Hom}}_{!}(\widehat{A}, M),
 \]
-the universal property of $\widehat{A}$ as the free cocompletion of
-$A$;\footnote{The cocompleteness of $M$ is not stated on the leaf. Without it
-the right-hand side is not defined, so it is supplied here.} and, for
-$M$ moreover complete,
+propriété universelle de $\widehat{A}$ comme cocomplétion libre de
+$A$ ;\footnote{La cocomplétude de $M$ n'est pas énoncée sur le feuillet. Sans
+elle le membre de droite n'a pas de sens : elle est donc suppléée ici.} et,
+pour $M$ de plus complète,
 \[
 \mathcal{F}(X, M)^{\mathrm{op}} \;\simeq\; \check{\mathcal{F}}(X, M^{\mathrm{op}}),
 \]
-exchanging sheaves and cosheaves under passage to the opposite. The leaf
-breaks off there.\footnote{Its decorations are the least legible in the batch,
-and the transcription marks most of the final formulas as uncertain. They are
-given here in the only form consistent with the rest of the folder.}
+qui échange faisceaux et cofaisceaux par passage à l'opposée. Le feuillet
+s'interrompt là.\footnote{Ses décorations sont les moins lisibles du lot, et
+la transcription signale la plupart des dernières formules comme incertaines.
+Elles sont données ici sous la seule forme compatible avec le reste du
+dossier.}
 
 \end{document}

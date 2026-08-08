@@ -1,6 +1,6 @@
 ---
 name: transcribe-grothendieck
-description: Transcribes a batch of twenty handwritten leaves from the Alexandre Grothendieck fonds (University of Montpellier) into clean, mathematics-focused LaTeX, opened by a plain-English summary written for an undergraduate maths student, plus an English translation. Use whenever someone asks to transcribe, decipher, read, clean up or put into LaTeX any pages of Grothendieck's manuscripts — "help me transcribe these pages to latex, these are maths notes from Alexander Grothendieck", "summarise them in simple English", "explain this to an undergraduate maths student" — or names a folder, a batch, or one of the notebooks (topos, motifs, Longue Marche, cahiers tardifs). Also covers revisions: correcting a reading, filling a skipped leaf, redoing a translation that came out too literal, rewriting a summary that assumes too much.
+description: Transcribes a batch of twenty handwritten leaves from the Alexandre Grothendieck fonds (University of Montpellier) into clean, mathematics-focused LaTeX with a critical apparatus — what was read, what was guessed, what is illegible. Use whenever someone asks to transcribe, decipher, read or put into LaTeX any pages of Grothendieck's manuscripts, or names a folder, a batch, or one of the notebooks (topos, motifs, Longue Marche, cahiers tardifs). Transcription only — the modernised reading and the undergraduate summary have their own skills, /modernize-grothendieck and /summarize-grothendieck, which run on the transcription this one produces. Also covers revisions: correcting a reading, filling a skipped leaf.
 ---
 
 # Transcribing a batch from the Grothendieck fonds
@@ -11,10 +11,15 @@ For **one batch of twenty leaves**, three LaTeX files:
 
 | File | Contents |
 |---|---|
-| `transcripts/<folder>/batch-NN.fr.tex` | The French transcription — the mathematics, leaf by leaf |
-| `transcripts/<folder>/batch-NN.en.tex` | The English translation of that transcription |
-| `transcripts/<folder>/batch-NN.modern.tex` | A modernised reading — the mathematics in current notation |
-| `transcripts/<folder>/batch-NN.summary.tex` | The undergraduate summary, and nothing else |
+| `transcripts/<folder>/batch-NN.fr.tex` | The transcription — the mathematics, leaf by leaf, in French |
+
+Two further editions derive from it, each with its own skill, to be run
+afterwards and in this order:
+
+| Skill | Produces |
+|---|---|
+| `/modernize-grothendieck` | `batch-NN.modern.tex` — the mathematics in current notation, French |
+| `/summarize-grothendieck` | `batch-NN.summary.tex` — the argument for a licence-level reader, French |
 
 `npm run render` turns each into the reading view the site's left pane shows;
 `npm run pdf` compiles the PDFs the download buttons offer. The site has a tab
@@ -29,12 +34,11 @@ letter, where a separator sheet fell, which page was scanned upside down — is
 *not* the subject. It is noise in a document meant to be read as mathematics,
 and it goes. What stays is what Grothendieck was actually working on.
 
-**The four editions stay separate.** The transcription is the mathematics and
-nothing else; the translation is that transcription in English; the summary is
-its own document. The summary does **not** open the other two. Someone reading
-the transcription wants the leaves, and a page of plain-English framing before
-them is in the way; someone who wants the framing opens the summary, which the
-site offers as its own tab and its own download.
+**The editions stay separate, and this skill produces exactly one.** The
+transcription is the mathematics and nothing else. No summary opens it, no
+modernisation creeps into it: someone reading the transcription wants the
+leaves. The derived editions are other skills' work, done afterwards, from
+this file and never from the manuscript.
 
 **One batch per pass, never two.** Past twenty handwritten leaves the quality of
 reading degrades towards the end of the pass with nothing to signal it, and a
@@ -231,107 +235,7 @@ Two layout rules, both learned on a real batch:
 
 `references/specimen.tex` shows every macro in a complete file.
 
-### 3. Write the summary, as its own document
-
-`batch-NN.summary.tex`, in English, plain, one to two pages, wrapped in
-`\begin{summary}…\end{summary}` — which in that file is the whole body. It does
-not appear in `.fr.tex` or `.en.tex`.
-
-The reader has finished an undergraduate degree. They know groups, rings, some
-topology. They do **not** know schemes, topoi, or étale cohomology, and must
-not be assumed to.
-
-Four questions, in this order:
-
-1. **What are these twenty leaves about**, in one sentence, without jargon?
-2. **What problem** is Grothendieck trying to solve, and why does that problem
-   arise at all?
-3. **What idea** does he bring to it — by analogy where necessary, without
-   pretending to rigour?
-4. **Where does it lead** in his work, and where can the reader go next?
-
-Keep out: proofs, the critical apparatus, uncertain readings. The summary is
-not an abridged transcription but a text that stands by itself, and it carries
-**no** `\leaf{}`.
-
-One thing does belong there, and is often the most valuable: **his reflection on
-his own practice.** These notebooks are full of remarks on how a notion arrives,
-on what he called the attitude of listening, on what understanding actually is.
-They need no background at all, and they are why someone who will never do
-algebraic geometry might want to read these pages.
-
-It lives in one file only, so there is no risk of three copies drifting apart.
-It is in English whatever the language of the leaves: it is not part of
-Grothendieck's text and must not be mistakable for it.
-
-### 4. Translate — from the transcription, never from the leaf
-
-`batch-NN.en.tex` derives from `batch-NN.fr.tex`. **Do not re-read the
-manuscript to translate.** All three English documents (`en`, `modern`,
-`summary`) put
-`\selectlanguage{english}` immediately after `\begin{document}`: the shared
-preamble defaults to French typography, which puts spaces before colons —
-correct for his text, a fault in yours. Two independent readings of the same handwriting
-would diverge, and nothing would say which was right.
-
-- The apparatus macros carry over unchanged, in the same places. A word
-  illegible in French is illegible in English.
-- Mathematical terminology takes its established English form: *faisceau* →
-  *sheaf*, *champ* → *stack*, *revêtement* → *covering*, *lisse* → *smooth*,
-  *plat* → *flat*, *topos annelé* → *ringed topos*. Where in doubt, keep the
-  French in italics and flag it.
-- Terms he coined that have no equivalent — *la Longue Marche*, *Récoltes et
-  Semailles*, *dérivateur*, *mouture* — stay in French.
-- The register stays his: first person, sometimes addressing himself,
-  digressing. A translation that flattens that into impersonal mathematical
-  prose has lost what makes these notebooks worth reading.
-
-### 5. The modernised reading
-
-`batch-NN.modern.tex`, in English. Not a transcription: a reading of the
-mathematics in today's notation and today's names, continuous enough to be
-followed by someone who works in the field.
-
-**It is held to being mathematically correct as it stands.** This is the one
-edition where fidelity to the leaf is not the highest duty. Where the
-manuscript is loose, elliptical or simply wrong, the modernised reading states
-what is *true* — and a footnote says what the leaf actually has. A reading that
-faithfully reproduces an error, in an edition whose whole promise is that it
-can be read as mathematics, is worse than useless: it launders the error
-through the appearance of a modern text.
-
-Concretely, that means:
-
-- **State the hypotheses the manuscript leaves implicit.** If a universal
-  property needs $M$ cocomplete and the leaf does not say so, say so, and
-  footnote that it was supplied.
-- **Check the variances.** They are where these notes go wrong most easily and
-  where a plausible-looking modernisation does the most damage. A construction
-  contravariant in both arguments is a *dual* adjunction, not an adjunction,
-  and calling it a profunctor is simply false.
-- **Do not upgrade a containment to an equality** because the manuscript's
-  shorthand looks like one. Assert what holds; footnote the rest.
-- **Name the modern name** — Isbell duality, Cauchy completion, coend — and
-  footnote whether the manuscript could have known it. That is often the most
-  interesting thing on the page.
-
-**No square brackets, no underlines, no `\ill{}` — no apparatus at all.**
-Everything it carried moves into `\footnote{}`: an uncertain reading, a
-notation he used differently, a passage that is missing, a convention that had
-to be chosen. The reader must still be able to tell what was on the leaf and
-what is ours; footnotes are simply a better place to say it in a text meant to
-be read continuously.
-
-**No `\leaf{}` markers either.** This edition reorganises — it groups by
-argument, not by sheet — so leaf anchors would be false, and the facsimile
-pane deliberately stays put while it is open. Refer to leaves in prose
-("leaf 5 arranges…") where it helps.
-
-Derive it from the transcription and the translation, not from the manuscript,
-for the same reason the translation is: two independent readings of one hand
-diverge, and nothing says which is right.
-
-### 6. Check
+### 3. Check
 
 ```bash
 npm run render      # fails loudly if the subset was left
@@ -361,9 +265,6 @@ frame happily shows yesterday's rendering.
   orientation notes. That is the archive's job and the archive has done it.
 - **Merge two *moutures*** because they look alike. Their difference is the
   information.
-- **Write a summary that needs the transcription to make sense.** If it cannot
-  be read on its own, it is not a summary.
-- **Translate from the manuscript** instead of from the transcription.
 - **Extend the LaTeX subset without extending `scripts/render.mjs`.**
 
 ## Revising a batch

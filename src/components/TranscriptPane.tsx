@@ -19,8 +19,7 @@ import type { Edition, TranscriptEntry } from '../lib/types.ts';
  */
 
 export const EDITIONS: { key: Edition; label: string; help: string }[] = [
-  { key: 'fr', label: 'Transcription', help: 'The leaves as written, in French.' },
-  { key: 'en', label: 'English', help: 'Translation of the transcription.' },
+  { key: 'fr', label: 'Transcription', help: 'The leaves as written.' },
   {
     key: 'modern',
     label: 'Modernised',
@@ -186,12 +185,20 @@ function MissingTranscript({
         No {label} yet for leaves {first}–{last}.
       </p>
       <p className="max-w-[40em] text-[13.5px] leading-relaxed text-ink-600">
-        Transcription runs one batch at a time, {BATCH_SIZE} leaves per pass, through the
-        <code className="mx-1 rounded border border-ink-200 bg-ink-50 px-1 py-0.5 font-mono text-[12px]">
+        Work runs one batch at a time, {BATCH_SIZE} leaves per pass, through three skills in
+        order:{' '}
+        <code className="rounded border border-ink-200 bg-ink-50 px-1 py-0.5 font-mono text-[12px]">
           transcribe-grothendieck
-        </code>
-        skill. It reads the very facsimile shown on the right and writes LaTeX, an English
-        translation and an undergraduate summary side by side.
+        </code>{' '}
+        reads the very facsimile shown on the right and writes the LaTeX transcription;{' '}
+        <code className="rounded border border-ink-200 bg-ink-50 px-1 py-0.5 font-mono text-[12px]">
+          modernize-grothendieck
+        </code>{' '}
+        and{' '}
+        <code className="rounded border border-ink-200 bg-ink-50 px-1 py-0.5 font-mono text-[12px]">
+          summarize-grothendieck
+        </code>{' '}
+        derive the modernised reading and the licence-level summary from it, in French.
       </p>
       <code className="w-full max-w-[40em] rounded-lg border border-ink-200 bg-ink-50 px-3 py-2 font-mono text-[12.5px] text-ink-900">
         /transcribe-grothendieck {cote} {batch}

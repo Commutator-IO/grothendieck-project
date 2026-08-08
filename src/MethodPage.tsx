@@ -93,13 +93,15 @@ export function MethodPage() {
               carefully as leaf 2, and each file records in its header which model produced it
               and when.
             </p>
-            <h3>Four editions, one source</h3>
+            <h3>Three editions, one source, one language</h3>
             <p>
-              Each batch yields a French transcription — Grothendieck wrote in French, and it
-              stays in his language, his notation and his paragraphing — then an English
-              translation of it, then a <strong>modernised reading</strong> that puts the
-              mathematics in current notation, then a summary for a reader at undergraduate
-              level. All three derive from the transcription, never from the leaf directly: two
+              Each batch yields a transcription — Grothendieck wrote in French, and it stays in
+              his language, his notation and his paragraphing — then a{' '}
+              <strong>modernised reading</strong> in current notation, then a summary for a
+              licence-level reader. All three are in French: the notions were thought in that
+              language, and an English translation proved to be a fourth artifact to keep in
+              step for no gain the others did not give. Each edition has its own skill, and the
+              two derived ones work from the transcription, never from the leaf directly: two
               independent readings of the same handwriting would diverge, and nothing would say
               which was right.
             </p>

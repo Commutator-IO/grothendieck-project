@@ -104,20 +104,23 @@ and git-ignored so a commit never can either.
 
 ## Transcription
 
-The [`transcribe-grothendieck`](.claude/skills/transcribe-grothendieck/SKILL.md) skill —
-installed as a project skill, so `/transcribe-grothendieck` works in this
-repository —
-transcribes one batch per pass and produces four editions of it: the French
-transcription, an English translation, a **modernised reading** in current
-notation, and a summary for a reader at undergraduate level. All three
-derivatives come from the transcription and never from the handwriting
-directly — two independent readings of the same hand would diverge, and
-nothing would say which was right.
+Three project skills, one per edition, run in order and all installed under
+`.claude/skills/`:
+
+| Skill | Produces |
+|---|---|
+| [`/transcribe-grothendieck`](.claude/skills/transcribe-grothendieck/SKILL.md) | the transcription — the leaves as written, with the critical apparatus |
+| [`/modernize-grothendieck`](.claude/skills/modernize-grothendieck/SKILL.md) | the modernised reading — current notation and names, footnotes instead of apparatus |
+| [`/summarize-grothendieck`](.claude/skills/summarize-grothendieck/SKILL.md) | the summary — one to two self-contained pages for a licence-level reader |
+
+All three editions are in French — Grothendieck's language, and the language
+the notions were thought in. The two derived editions work from the
+transcription, never from the handwriting directly: two independent readings
+of the same hand would diverge, and nothing would say which was right.
 
 The modernised reading is the one allowed to depart from the leaf, and is held
 to being **correct as it stands**: where the manuscript is loose it states what
-is true and footnotes what the leaf has. It carries no bracket apparatus and no
-leaf markers — footnotes carry everything the apparatus did.
+is true and footnotes what the leaf has.
 
 ```bash
 npm run render      # transcripts/*.tex → the reading views the left pane shows
