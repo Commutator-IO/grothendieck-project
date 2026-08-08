@@ -11,9 +11,9 @@ For **one batch of twenty leaves**, three LaTeX files:
 
 | File | Contents |
 |---|---|
-| `transcripts/<folder>/batch-NN.fr.tex` | Summary, then the French transcription — the mathematics, leaf by leaf |
-| `transcripts/<folder>/batch-NN.en.tex` | Summary, then the English translation of that transcription |
-| `transcripts/<folder>/batch-NN.summary.tex` | The summary alone, standing on its own |
+| `transcripts/<folder>/batch-NN.fr.tex` | The French transcription — the mathematics, leaf by leaf |
+| `transcripts/<folder>/batch-NN.en.tex` | The English translation of that transcription |
+| `transcripts/<folder>/batch-NN.summary.tex` | The undergraduate summary, and nothing else |
 
 `npm run render` turns each into the reading view the site's left pane shows;
 `npm run pdf` compiles the PDFs the download buttons offer. The site has a tab
@@ -28,11 +28,12 @@ letter, where a separator sheet fell, which page was scanned upside down — is
 *not* the subject. It is noise in a document meant to be read as mathematics,
 and it goes. What stays is what Grothendieck was actually working on.
 
-**The summary comes first, at the top of the document.** Not an appendix, not a
-separate thing one has to go and find. These are working notes: nobody walks
-into them cold, not even a mathematician from another field. A reader landing
-on page 213 of the Long March without knowing what is being attempted does not
-read more slowly — they do not read at all.
+**The three editions stay separate.** The transcription is the mathematics and
+nothing else; the translation is that transcription in English; the summary is
+its own document. The summary does **not** open the other two. Someone reading
+the transcription wants the leaves, and a page of plain-English framing before
+them is in the way; someone who wants the framing opens the summary, which the
+site offers as its own tab and its own download.
 
 **One batch per pass, never two.** Past twenty handwritten leaves the quality of
 reading degrades towards the end of the pass with nothing to signal it, and a
@@ -229,10 +230,11 @@ Two layout rules, both learned on a real batch:
 
 `references/specimen.tex` shows every macro in a complete file.
 
-### 3. Write the summary, and put it at the top
+### 3. Write the summary, as its own document
 
-In English, plain, one to two pages, inside `\begin{summary}…\end{summary}` as
-the **first thing after `\begin{document}`** — before the first `\leaf`.
+`batch-NN.summary.tex`, in English, plain, one to two pages, wrapped in
+`\begin{summary}…\end{summary}` — which in that file is the whole body. It does
+not appear in `.fr.tex` or `.en.tex`.
 
 The reader has finished an undergraduate degree. They know groups, rings, some
 topology. They do **not** know schemes, topoi, or étale cohomology, and must
@@ -257,9 +259,8 @@ on what he called the attitude of listening, on what understanding actually is.
 They need no background at all, and they are why someone who will never do
 algebraic geometry might want to read these pages.
 
-The same summary block opens `.fr.tex` and `.en.tex`, and is the whole of
-`.summary.tex`. Write it once; do not let three versions drift apart. It stays
-in English even at the head of the French transcription — it is not part of
+It lives in one file only, so there is no risk of three copies drifting apart.
+It is in English whatever the language of the leaves: it is not part of
 Grothendieck's text and must not be mistakable for it.
 
 ### 4. Translate — from the transcription, never from the leaf

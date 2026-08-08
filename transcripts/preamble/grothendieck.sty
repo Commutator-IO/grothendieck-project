@@ -51,26 +51,24 @@
 \newcommand{\foldertitle}[1]{\gdef\grothFoldertitle{#1}}
 \gdef\grothFolder{?}\gdef\grothBatch{?}\gdef\grothFirst{?}\gdef\grothLast{?}\gdef\grothFoldertitle{}
 
-% --- Le résumé, en tête de document -----------------------------------------
+% --- Le résumé ------------------------------------------------------------
 %
-% Il ouvre le document plutôt que de vivre à part, et ce n'est pas une
-% commodité de mise en page. Ces feuillets sont des notes de travail : personne
-% n'y entre de plain-pied, pas même un mathématicien qui n'est pas du domaine.
-% Un lecteur qui tombe sur la page 213 de la Longue Marche sans savoir ce qu'on
-% y cherche ne lit pas plus lentement — il ne lit pas du tout.
+% Le résumé est un document à lui seul (`batch-NN.summary.tex`), et non le
+% préambule des deux autres. Un lecteur qui ouvre la transcription veut les
+% feuillets ; une page de mise en contexte avant eux lui fait obstacle. Celui
+% qui veut la mise en contexte ouvre le résumé, que le site propose sous son
+% propre onglet.
 %
-% Le résumé est donc la première chose de la page, et il est écrit pour
-% quelqu'un qui sort d'une licence : il dit de quoi il s'agit, quel problème se
-% pose, quelle idée arrive, et où cela mène. Il est en anglais simple, y
-% compris dans la transcription française, parce qu'il ne fait pas partie du
-% texte de Grothendieck et ne doit pas pouvoir être confondu avec lui.
+% L'environnement ne porte donc plus de bandeau : il n'annonce rien, il *est*
+% le texte. Il reste un environnement plutôt qu'un simple corps de document
+% parce que le rendu HTML s'en sert pour composer le résumé au fil du texte
+% plutôt qu'en encadré.
+%
+% Il est écrit en anglais quelle que soit la langue des feuillets : il ne fait
+% pas partie du texte de Grothendieck et ne doit pas pouvoir être confondu
+% avec lui.
 
-\newenvironment{summary}
-  {\begin{center}\begin{minipage}{0.88\textwidth}%
-   \small\setlength{\parskip}{0.5em}%
-   \noindent\textbf{\textsf{Before you read this}}\par\vspace{0.3em}%
-   \color{black!78}}
-  {\end{minipage}\end{center}\vspace{1.2em}\hrule\vspace{1.6em}}
+\newenvironment{summary}{\setlength{\parskip}{0.5em}}{}
 
 % --- L'appareil critique ----------------------------------------------------
 
