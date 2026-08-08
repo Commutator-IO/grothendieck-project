@@ -227,8 +227,15 @@ asserts a commutation nobody wrote:
 - directions built from `u` `d` `l` `r`, repeatable: `\arrow[d]`, `\arrow[rr]`,
   `\arrow[dl]`;
 - an optional quoted label, with a trailing `'` to put it on the other side:
-  `\arrow[d, "\approx"]`, `\arrow[d, "f_{!}"']`;
-- the styles `hook`, `hook'` (inclusions) and `Rightarrow`.
+  `\arrow[d, "\approx"]`, `\arrow[d, "f_{!}"']` — or ` description` after the
+  quotes to set it on the shaft itself, background knocking the line out:
+  `\arrow[uu, no head, "\wedge\wedge" description]`;
+- the styles `hook`, `hook'` (inclusions) and `Rightarrow`;
+- `no head`, for a line that is scaffolding rather than a functor — an axis,
+  a radius. A head the leaf does not have asserts a morphism nobody wrote;
+- `bend left=N` / `bend right=N`, for arcs. Eight rim arcs at matching bends
+  are what lets a wheel of functor categories close into the circle the
+  manuscript draws instead of an octagon of chords.
 
 Extending the subset means extending `scripts/render.mjs` in the same commit.
 
@@ -238,10 +245,35 @@ Two layout rules, both learned on a real batch:
   Inline after a colon it inherits the paragraph's baseline and walks off the
   right margin.
 - **Wide diagrams take `[column sep=small, row sep=small,
-  nodes={font=\scriptsize}]`.** A wheel of eight functor categories does not
+  nodes={font=\scriptsize}]`.** A wheel of eleven functor categories does not
   fit an A4 measure at text size, and an overfull box in a transcription is
   not a cosmetic defect: it hides content. (Those options affect the PDF only;
   the reading view sizes itself.)
+
+**Wheels — census before drawing.** Learned on folder 115, leaf 5, by getting
+it wrong first: a circle of functor categories is almost never one ring of
+arrows. Before writing any `\arrow`, work through the facsimile at high
+resolution — `pdftoppm -png -r 400` on the folder's PDF, then crop quadrant
+by quadrant with `-x -y -W -H` — and take a census:
+
+- **count distinct labels**, and look for repeats: on 115 the two inner
+  categories each appear twice, at the two ends of a diameter, and the
+  margin's own tally (« 6 cas », « 4 cas ») confirmed the count;
+- **separate the rings** — centre, inner ring, rim — and lay them out on a
+  grid with odd dimensions so the centre has a cell (a 7×7 held centre,
+  four inner nodes, eight rim nodes and four corner annotations);
+- **note which strokes are headless** — axes and radii are scaffolding, not
+  functors — and transcribe them `no head`, their variance marks as
+  `description` labels riding the line;
+- **check every arrowhead one by one.** On 115 the eight rim arcs all
+  converge into the four mixed three-argument forms, and one diagonal runs
+  inward (a restriction) while the other three run outward (extensions).
+  The asymmetry is on the leaf, so it is in the transcription; deciding it
+  is an oversight is the reader's job, not ours.
+
+A first pass had reduced that wheel to eight radiating arrows and misread
+the mid-rim labels' argument lists. Every difference between that and the
+leaf was mathematical content.
 
 `references/specimen.tex` shows every macro in a complete file.
 

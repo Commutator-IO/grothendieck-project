@@ -72,6 +72,26 @@ single words belong to the transcription, and anything large enough to matter
 at this altitude goes in the prose (« la datation vient des versos »). The
 summary carries no `\leaf{}` either.
 
+## The keywords
+
+The résumé closes with one line, before `\end{resume}`:
+
+```latex
+\keywords{profunctor, Isbell duality, Cauchy completion}
+```
+
+Three to six terms, **in English** — they are search keys, not prose, and
+the literature they point into is English — naming the modern vocabulary
+under which what the batch builds is known today. They are the natural
+sharpening of the résumé's fourth question (*quels noms modernes chercher
+ensuite*), so write them when the résumé is written, last.
+
+This line is the single source of the folder's tags: `npm run manifest`
+extracts every `\keywords{}` of the folder's modernised readings, unions
+them, and the archive and notebook pages show them as the folder's tags.
+There is no tags file to edit, deliberately — a tag with no modernised
+reading behind it would be a claim about content nobody has read.
+
 ## The standard: correct as it stands
 
 This is the one edition where fidelity to the leaf is not the highest duty.
@@ -131,13 +151,16 @@ Stay inside the LaTeX subset of the transcribe skill — the renderer raises on
 anything else — plus `\footnote{}`, which the reading view renders as
 numbered notes with backlinks.
 
-Diagrams follow the transcribe skill's tikz-cd rules, with one addition
-earned on folder 115: **compound directions exist** (`\arrow[ul]`,
-`\arrow[dd]`), and a radial diagram — a wheel with a centre — is drawn by
-putting every arrow on the centre cell, pointing outward. Check the
-arrowheads against what the transcription records: a wheel transcribed as
-radiating from its centre asserts different equivalences than a rim of
-arrows, and the renderer will faithfully draw whichever you write.
+Diagrams follow the transcribe skill's tikz-cd rules, wheels included —
+rings on a grid of odd dimensions, `no head` radii with `description`
+variance marks, rim arcs at matching bends. One liberty is this edition's
+alone: where the leaf mixes directions among arrows that are all
+equivalences (115 draws one diagonal as a restriction, inward, and three as
+extensions, outward), the modernised wheel may normalise them to one
+convention — with a footnote saying what the leaf draws and why both are
+legitimate. Check the structure against the transcription's, node for node:
+a wheel is a census (115: eleven distinct categories, two of them drawn
+twice), and dropping a ring or an arc changes what is being asserted.
 
 ## The sequence
 
@@ -149,7 +172,8 @@ arrows, and the renderer will faithfully draw whichever you write.
 3. Write the body, holding to the standard above. Every departure from the
    leaf gets a footnote at the point of departure.
 4. Write the summary **last**, when you know what the batch turned out to be
-   about. Written first it describes what you expected to find.
+   about. Written first it describes what you expected to find. Close it
+   with the `\keywords{}` line — the folder's tags come from nowhere else.
 5. `npm run render && npm run pdf && npm run manifest` — the batch becomes
    `AI-reviewed` by itself, from the file's existence; nothing is ticked by
    hand. Then read the
@@ -167,7 +191,8 @@ arrows, and the renderer will faithfully draw whichever you write.
   reconstruction is ours.
 - **Silently choose a convention.** Where the manuscript's notation forces a
   choice (folder 115's projection indices), choose, and footnote the choice.
-- **Write English.** The leaves are French and so is this.
+- **Write English.** The leaves are French and so is this. The one exception
+  is `\keywords{}`, which is English on purpose: search keys, not prose.
 - **Name the reader's level.** Write for them; do not address them as a class.
 - **Let the summary become an abstract.** It orients; it does not compress
   the body into a paragraph.

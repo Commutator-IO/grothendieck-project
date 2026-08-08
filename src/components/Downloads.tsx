@@ -1,4 +1,5 @@
 import { transcriptUrl } from '../lib/batches.ts';
+import { issueUrl } from '../lib/report.ts';
 import type { Edition, TranscriptEntry } from '../lib/types.ts';
 import { EDITIONS } from './TranscriptPane.tsx';
 
@@ -27,10 +28,13 @@ import { EDITIONS } from './TranscriptPane.tsx';
 export function Downloads({
   cote,
   batch,
+  leaf,
   available,
 }: {
   cote: string;
   batch: number;
+  /** The leaf the reader is on, so a report arrives already located. */
+  leaf?: number;
   available: TranscriptEntry;
 }) {
   const rows = EDITIONS.map((e) => ({
@@ -50,6 +54,26 @@ export function Downloads({
       </p>
     );
   }
+
+  /* Reporting sits in this row rather than at the foot of the transcript:
+     the moment a reader doubts a word is the moment they are looking at it,
+     and a link they have to scroll to find is a link nobody uses. */
+  const report = (
+    <a
+      href={issueUrl({ cote, batch, leaf })}
+      target="_blank"
+      rel="noopener noreferrer"
+      title="Open a prefilled issue — the shelfmark, batch and leaf come with it"
+      className="ml-auto flex items-center gap-1.5 rounded-lg border border-ink-200 bg-white px-2.5 py-1.5 text-[12.5px] font-medium text-ink-600 transition hover:border-relu-400 hover:text-relu-700"
+    >
+      <svg viewBox="0 0 16 16" className="h-3.5 w-3.5" aria-hidden="true" fill="none">
+        <circle cx="8" cy="8" r="6.4" stroke="currentColor" strokeWidth="1.4" />
+        <path d="M8 4.6v4.2" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+        <circle cx="8" cy="11.2" r="0.85" fill="currentColor" />
+      </svg>
+      Report a reading
+    </a>
+  );
 
   return (
     <div className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-2">
@@ -84,6 +108,7 @@ export function Downloads({
           </li>
         ))}
       </ul>
+      {report}
     </div>
   );
 }

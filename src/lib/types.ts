@@ -95,6 +95,14 @@ export interface Manifest {
    * read off the files themselves.
    */
   declared: Record<string, 'running' | 'checked' | 'skipped'>;
+  /**
+   * Modern-vocabulary tags per folder, extracted from the `\keywords{}` line
+   * each modernised reading carries at the end of its résumé. English on
+   * purpose — they are search keys into today's literature. A folder appears
+   * here only once something of it has been modernised: the tags have no
+   * other source, so they can never describe unread content.
+   */
+  tags?: Record<string, string[]>;
 }
 
 /** Keyed by `<cote>#<batch>`. */

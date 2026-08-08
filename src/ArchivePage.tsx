@@ -3,7 +3,7 @@ import { Footer, Header } from './components/Frame.tsx';
 import { BOOKS } from './content/books.ts';
 import editionsRaw from './content/editions.json';
 import { COTES, GROUPS } from './content/catalogue.ts';
-import { BATCH_SIZE, batchCount, evidence, sourceUrl, useManifest } from './lib/batches.ts';
+import { BATCH_SIZE, batchCount, evidence, folderTags, sourceUrl, useManifest } from './lib/batches.ts';
 import type { PublishedEdition } from './lib/types.ts';
 
 const EDITIONS = editionsRaw as PublishedEdition[];
@@ -81,7 +81,11 @@ export function ArchivePage() {
     if (!needle) return true;
     const c = COTES.find((x) => x.id === id);
     if (!c) return false;
-    return `${c.id} ${c.title} ${c.date}`.toLowerCase().includes(needle);
+    // Tags too: a reader who remembers "Isbell duality" and not a shelfmark
+    // has exactly the handle the modernised readings filed themselves under.
+    return `${c.id} ${c.title} ${c.date} ${folderTags(manifest, id).join(' ')}`
+      .toLowerCase()
+      .includes(needle);
   };
 
   const visible = GROUPS.map((g) => ({ ...g, cotes: g.cotes.filter(matches) })).filter(
@@ -173,6 +177,15 @@ export function ArchivePage() {
                             : `${work.modernised}/${work.batches} modernised`}
                         </span>
                       )}
+                      {folderTags(manifest, id).map((t) => (
+                        <span
+                          key={t}
+                          title="modern vocabulary, from the modernised reading's own keywords"
+                          className="ml-1.5 whitespace-nowrap rounded-full border border-ink-200 bg-white px-1.5 py-0.5 text-[10px] font-medium lowercase tracking-wide text-ink-500"
+                        >
+                          {t}
+                        </span>
+                      ))}
                       {edition && (
                         <a
                           href={edition.url}

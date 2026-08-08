@@ -44,8 +44,9 @@ topos — d'où le titre du dossier.
 Les premiers feuillets montent une machinerie de correspondances : un seul
 objet au-dessus d'un produit $A \times B$ agit comme un noyau intégral
 $k(x,y)$ en analyse, transportant les ombres sur $A$ en ombres sur $B$ et
-retour. Le feuillet 5 dispose huit catégories de foncteurs en roue, toutes
-équivalentes : huit lectures du même noyau, une par choix de variance.
+retour. Le feuillet 5 dispose onze catégories de foncteurs en roue — un
+cercle porté par quatre rayons — toutes équivalentes : autant de lectures du
+même noyau, une par choix de variance.
 
 La dualité elle-même est au feuillet 7, et c'est le cas particulier où l'on
 prend pour noyau le hom lui-même. Elle apparie préfaisceaux et copréfaisceaux,
@@ -61,6 +62,8 @@ Rien de tout cela n'a été publié. Ces notes voisinent avec les matériaux
 autour de \emph{Pursuing Stacks} (1983), et le cercle d'idées est aujourd'hui
 classique : les noms modernes à chercher sont \emph{profoncteur},
 \emph{dualité d'Isbell} et \emph{complétion de Cauchy}.
+
+\keywords{profunctor, Isbell duality, Cauchy completion}
 \end{resume}
 
 \section*{La dualité d'Isbell, telle que la cote 115 l'établit}
@@ -128,27 +131,47 @@ profoncteur est covariant en une variable. C'est un préfaisceau à deux
 variables, et ce qu'il engendre est une correspondance de Galois du type
 $V \mapsto V^{*}$ — ce qui explique précisément où le dossier aboutit.}
 
-Le feuillet 5 dispose huit catégories de foncteurs en roue, dont toutes les
-flèches sont des équivalences, parmi lesquelles
-\[
-(A\times B)^{\wedge} \;\simeq\;
-\underline{\mathrm{Hom}}(A^{\mathrm{op}}, \widehat{B}) \;\simeq\;
-\underline{\mathrm{Hom}}^{!}(\widehat{A}^{\,\mathrm{op}}, \widehat{B}) \;\simeq\;
-\underline{\mathrm{Hom}}_{!}(A^{\vee}, \widehat{B}).
-\]
-Chacune est une manière de curryfier le même foncteur à deux variables. La
-première est la curryfication nue ; les deux suivantes prolongent le long de
-Yoneda, et le point d'exclamation enregistre ce que le prolongement doit
-préserver pour être une équivalence — un foncteur issu d'une (co)complétion
-libre est déterminé par sa restriction aux générateurs exactement lorsqu'il
-commute aux (co)limites que cette complétion ajoute.\footnote{Les huit formes
-viennent du choix de la variable mise en facteur et du niveau auquel on la
-présente — $A^{\mathrm{op}}$, $\widehat{A}^{\,\mathrm{op}}$ ou $A^{\vee}$ —
-les cas extrêmes se refermant sur les formes à deux variables
-$\underline{\mathrm{Hom}}^{!!}$ et $\underline{\mathrm{Hom}}_{!!}$. La
-transcription signale les deux nœuds de gauche de la roue comme incertains,
-une déchirure traversant ce côté du feuillet ; ils se rétablissent par
-symétrie, et c'est ainsi qu'ils sont donnés ici.} Le même énoncé est ensuite
+Le feuillet 5 dispose onze catégories de foncteurs en roue, dont toutes les
+flèches sont des équivalences. Le centre est le noyau lui-même ; la couronne
+intérieure le curryfie nûment ; le bord le curryfie après (co)complétion,
+d'un côté ($\widehat{A}^{\,\mathrm{op}}$, $A^{\vee}$) ou des
+deux :\footnote{La marge du feuillet dénombre elle-même la roue : « 6 cas »
+pour les formes à deux arguments — trois à valeurs dans $\widehat{A}$, trois
+dans $\widehat{B}$ — et « 4 cas » pour les formes mixtes
+$\bigl|\widehat{A}^{\,\mathrm{op}} \text{ ou } A^{\vee}\bigr| \times
+\bigl|\widehat{B}^{\,\mathrm{op}} \text{ ou } B^{\vee}\bigr| \to
+\mathbf{Ens}$. Avec le centre : onze. La roue en dessine treize, les deux
+formes intérieures étant chacune écrites deux fois, aux deux bouts d'un
+diamètre — chacune curryfie vers deux bords différents.}
+
+\begin{tikzcd}[column sep=tiny, row sep=small, nodes={font=\scriptsize}]
+(\widehat{B}_{\to}) & & & & & & (\widehat{A}_{\to}) \\
+& \underline{\mathrm{Hom}}^{!}(\widehat{B}^{\,\mathrm{op}},\widehat{A}) \arrow[rr, bend left=22] \arrow[dd, bend right=22] & & \underline{\mathrm{Hom}}^{!!}(\widehat{A}^{\,\mathrm{op}},\widehat{B}^{\,\mathrm{op}};\,\mathbf{Ens}) & & \underline{\mathrm{Hom}}^{!}(\widehat{A}^{\,\mathrm{op}},\widehat{B}) \arrow[ll, bend right=22] \arrow[dd, bend left=22] & \\
+& & \underline{\mathrm{Hom}}(B^{\mathrm{op}},\widehat{A}) \arrow[ul] & & \underline{\mathrm{Hom}}(A^{\mathrm{op}},\widehat{B}) \arrow[ur] & & \\
+& \underline{\mathrm{Hom}}_{!}^{!}(A^{\vee},\widehat{B}^{\,\mathrm{op}};\,\mathbf{Ens}) & & (A\times B)^{\wedge} \arrow[ul] \arrow[ur] \arrow[dl] \arrow[dr] \arrow[uu, no head, "\wedge\wedge" description] \arrow[ll, no head, "\vee\wedge" description] \arrow[rr, no head, "\wedge\vee" description] \arrow[dd, no head, "\vee\vee" description] & & \underline{\mathrm{Hom}}^{!}_{!}(\widehat{A}^{\,\mathrm{op}},B^{\vee};\,\mathbf{Ens}) & \\
+& & \underline{\mathrm{Hom}}(A^{\mathrm{op}},\widehat{B}) \arrow[dl] & & \underline{\mathrm{Hom}}(B^{\mathrm{op}},\widehat{A}) \arrow[dr] & & \\
+& \underline{\mathrm{Hom}}_{!}(A^{\vee},\widehat{B}) \arrow[uu, bend left=22] \arrow[rr, bend right=22] & & \underline{\mathrm{Hom}}_{!!}(A^{\vee},B^{\vee};\,\mathbf{Ens}) & & \underline{\mathrm{Hom}}_{!}(B^{\vee},\widehat{A}) \arrow[uu, bend right=22] \arrow[ll, bend left=22] & \\
+(A^{\vee}_{\to}) & & & & & & (B^{\vee}_{\to})
+\end{tikzcd}
+
+Les quatre rayons sans pointe sont le repère de variance du feuillet, non
+des foncteurs : chaque quadrant fixe un choix de présentation
+($\wedge$ pour le versant préfaisceaux, $\vee$ pour les copréfaisceaux), et
+l'annotation d'angle nomme la variable mise en jeu. Les diagonales
+prolongent le long de Yoneda, et le point d'exclamation enregistre ce que le
+prolongement doit préserver pour être une équivalence — un foncteur issu
+d'une (co)complétion libre est déterminé par sa restriction aux générateurs
+exactement lorsqu'il commute aux (co)limites que cette complétion
+ajoute.\footnote{Les diagonales sont dessinées ici toutes sortantes, du
+centre vers le bord : le prolongement. Le feuillet dessine celle du quadrant
+supérieur droit en sens inverse,
+$\underline{\mathrm{Hom}}^{!}(\widehat{A}^{\,\mathrm{op}},\widehat{B}) \to
+\underline{\mathrm{Hom}}(A^{\mathrm{op}},\widehat{B})$ — la restriction,
+inverse du prolongement, tout aussi légitime puisque tout est équivalence.
+Une première lecture avait signalé les nœuds de gauche comme incertains et
+réduit la roue à huit flèches rayonnantes ; le fac-similé à haute résolution
+les lit nettement, et la transcription suit désormais le feuillet trait par
+trait.} Le même énoncé est ensuite
 porté aux familles finies $(A_{i})_{i \in I}$, $I$ étant scindé en une part
 covariante et une part contravariante.
 

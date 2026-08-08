@@ -527,16 +527,18 @@ function Pipeline() {
     <section className="mt-12 max-w-[52em]">
       <h2 className="titre text-[22px] text-ink-900">The pipeline</h2>
       <p className="prose-fonds mt-3">
-        Two skills, run in order, on one batch of twenty leaves at a time. The last step is the
-        one no file can vouch for.
+        Two skills, run in order, on one batch of twenty leaves at a time. The modernised
+        reading closes its résumé with a <code className="text-[13px]">\keywords{'{}'}</code>{' '}
+        line — English search terms — which the manifest extracts as the folder's tags. The
+        last step is the one no file can vouch for.
       </p>
 
       <div className="card mt-5 overflow-x-auto px-4 py-5">
         <svg
-          viewBox="0 0 880 300"
-          className="w-full min-w-[620px]"
+          viewBox="0 0 980 300"
+          className="w-full min-w-[680px]"
           role="img"
-          aria-label="Pipeline: the facsimile is transcribed by transcribe-grothendieck into the transcription, which modernize-grothendieck turns into the modernised reading; both render to HTML and PDF; a human check is the final, unautomated step."
+          aria-label="Pipeline: the facsimile is transcribed by transcribe-grothendieck into the transcription, which modernize-grothendieck turns into the modernised reading; its keywords line becomes the folder's tags via the manifest; both editions render to HTML and PDF; a human check is the final, unautomated step."
           style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
         >
           <defs>
@@ -600,6 +602,22 @@ function Pipeline() {
           </text>
           <text x="710" y="97" textAnchor="middle" fontSize="10.5" fill="#726d5f">
             mathematics modernised
+          </text>
+
+          {/* Tags, extracted — an output of the modernise step, not a file
+              anyone edits: the manifest reads the \keywords line back out. */}
+          <line x1="820" y1="73" x2="842" y2="73" stroke="#726d5f" strokeWidth="1.3"
+            markerEnd="url(#pipehead)" />
+          <rect x="846" y="40" width="126" height="66" rx="8" className={box} strokeWidth="1.5" />
+          <text x="909" y="64" textAnchor="middle" fontSize="12" fontWeight="600" fill="#131210">
+            folder tags
+          </text>
+          <text x="909" y="81" textAnchor="middle" fontSize="10" fill="#726d5f">
+            <tspan style={{ fontFamily: 'ui-monospace, Menlo, monospace' }}>\keywords</tspan>
+            {', read out'}
+          </text>
+          <text x="909" y="94" textAnchor="middle" fontSize="10" fill="#726d5f">
+            by npm run manifest
           </text>
 
           {/* States, observed */}
@@ -721,6 +739,15 @@ function StatusSequence() {
         a comparison the manifest cannot contradict, and one marked <em>skipped</em> records a
         decision that a file appearing later does not undo. <em>Drafted</em> and <em>reviewed</em>
         {' '}are never written down at all — they are read off the files, so they cannot go stale.
+      </p>
+
+      <p className="prose-fonds mt-4">
+        The step from <em>AI-reviewed</em> to <em>checked</em> is a person reading against the
+        leaves, and readers are how it happens. Every folder that has been transcribed carries a{' '}
+        <strong className="font-semibold text-ink-800">Report</strong> button, and so does every
+        open batch, beside the source links — it opens an issue on the repository with the
+        shelfmark, the batch and the leaf on screen already filled in. A disputed reading then
+        sits in public, next to the file it disputes, which is what an apparatus is for.
       </p>
     </section>
   );

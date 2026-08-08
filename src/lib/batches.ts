@@ -137,3 +137,12 @@ export function evidence(m: Manifest | null, cote: string, k: number) {
 export function declared(m: Manifest | null, cote: string, k: number) {
   return m?.declared?.[batchId(cote, k)];
 }
+
+/**
+ * The folder's tags — the modern English vocabulary its modernised readings
+ * filed themselves under, via their `\keywords{}` lines. Empty until
+ * something of the folder has been modernised, which is the point.
+ */
+export function folderTags(m: Manifest | null, cote: string): string[] {
+  return m?.tags?.[cote] ?? [];
+}

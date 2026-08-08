@@ -11,11 +11,13 @@ import {
   batchRange,
   declared,
   evidence,
+  folderTags,
   transcript,
   useFacsimileProxy,
   useManifest,
 } from './lib/batches.ts';
 import { STATES, shownState, tally, type State } from './lib/progress.ts';
+import { issueUrl } from './lib/report.ts';
 import type { BookKey, Cote, Edition } from './lib/types.ts';
 
 /**
@@ -134,6 +136,7 @@ export function BookPage({ bookKey }: { bookKey: BookKey }) {
               edition={edition}
               onEdition={setEdition}
               onLeaf={onLeaf}
+              leaf={leaf}
               onClose={close}
               available={transcript(manifest, openCote.id, openBatch.batch)}
               state={shownState(
@@ -229,6 +232,7 @@ function Workspace({
   edition,
   onEdition,
   onLeaf,
+  leaf,
   onClose,
   available,
   state,
@@ -238,6 +242,8 @@ function Workspace({
   edition: Edition;
   onEdition: (e: Edition) => void;
   onLeaf: (n: number) => void;
+  /** The leaf currently in view, so a report arrives already located. */
+  leaf?: number;
   onClose: () => void;
   available: ReturnType<typeof transcript>;
   state: State;
@@ -271,7 +277,7 @@ function Workspace({
       {/* Above the reading pane, not below it. The pane is as tall as the
           transcript, so anything after it sits a screen or more down the page —
           a row of links nobody scrolls past the whole document to find. */}
-      <Downloads cote={cote.id} batch={batch} available={available} />
+      <Downloads cote={cote.id} batch={batch} leaf={leaf} available={available} />
 
       <TranscriptPane
         cote={cote.id}
@@ -388,14 +394,44 @@ function CoteCard({
               {count} batch{count > 1 ? 'es' : ''}
             </span>
           </p>
+          {folderTags(manifest, cote.id).length > 0 && (
+            /* The modern vocabulary the folder's own modernised readings
+               filed themselves under — extracted from their \keywords lines,
+               never typed here. */
+            <p className="mt-1.5 flex flex-wrap gap-1.5">
+              {folderTags(manifest, cote.id).map((t) => (
+                <span
+                  key={t}
+                  className="rounded-full border border-ink-200 bg-ink-50 px-2 py-0.5 text-[10.5px] font-medium lowercase text-ink-500"
+                >
+                  {t}
+                </span>
+              ))}
+            </p>
+          )}
         </div>
-        <button
-          type="button"
-          onClick={() => onOpen(cote.id, 1)}
-          className="mt-0.5 shrink-0 rounded-lg border border-ink-200 px-2.5 py-1 text-[12px] font-medium text-ink-600 transition hover:border-brand-500 hover:text-brand-700"
-        >
-          Open
-        </button>
+        <div className="mt-0.5 flex shrink-0 items-center gap-1.5">
+          {/* Only where something has been transcribed: an issue against a
+              folder nobody has read yet would have nothing to be about. */}
+          {transcribed > 0 && (
+            <a
+              href={issueUrl({ cote: cote.id })}
+              target="_blank"
+              rel="noopener noreferrer"
+              title={`Report a problem with the reading of cote n° ${cote.id}`}
+              className="rounded-lg border border-ink-200 px-2 py-1 text-[12px] font-medium text-ink-500 transition hover:border-relu-400 hover:text-relu-700"
+            >
+              Report
+            </a>
+          )}
+          <button
+            type="button"
+            onClick={() => onOpen(cote.id, 1)}
+            className="rounded-lg border border-ink-200 px-2.5 py-1 text-[12px] font-medium text-ink-600 transition hover:border-brand-500 hover:text-brand-700"
+          >
+            Open
+          </button>
+        </div>
       </div>
 
       {unfolded && (

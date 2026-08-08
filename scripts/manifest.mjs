@@ -75,6 +75,14 @@ export async function writeManifest() {
    * row offers only the `.tex`.
    */
   const transcripts = {};
+  /**
+   * Folder tags come out of the modernised readings themselves: the
+   * `\keywords{...}` line each one carries at the end of its résumé. There is
+   * deliberately no tags file to edit — a tag with no modernised reading
+   * behind it would be a claim about content nobody has read yet. Several
+   * batches of one folder union their keywords.
+   */
+  const tags = {};
   for (const d of await dirs(TRANSCRIPTS)) {
     for (const f of await readdir(resolve(TRANSCRIPTS, d.name))) {
       const m = /^batch-(\d+)\.(fr|modern)\.(html|tex|pdf)$/.exec(f);
@@ -82,6 +90,15 @@ export async function writeManifest() {
       const key = `${d.name}#${Number(m[1])}`;
       const entry = (transcripts[key] ??= { html: [], tex: [], pdf: [] });
       if (!entry[m[3]].includes(m[2])) entry[m[3]].push(m[2]);
+      if (m[2] === 'modern' && m[3] === 'tex') {
+        const tex = await readFile(resolve(TRANSCRIPTS, d.name, f), 'utf8');
+        for (const k of tex.matchAll(/\\keywords\{([^}]*)\}/g)) {
+          const list = (tags[d.name] ??= []);
+          for (const t of k[1].split(',').map((s) => s.trim()).filter(Boolean)) {
+            if (!list.includes(t)) list.push(t);
+          }
+        }
+      }
     }
   }
   for (const entry of Object.values(transcripts)) {
@@ -114,6 +131,7 @@ export async function writeManifest() {
         generated: new Date().toISOString(),
         facsimiles,
         transcripts,
+        tags,
         declared,
       },
       null,
