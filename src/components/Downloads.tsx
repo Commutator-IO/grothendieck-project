@@ -3,7 +3,7 @@ import type { Edition, TranscriptEntry } from '../lib/types.ts';
 import { EDITIONS } from './TranscriptPane.tsx';
 
 /**
- * The three editions of a batch, in source and in print.
+ * Every edition of a batch, in source and in print.
  *
  * A transcript that can only be read on this site is a transcript one cannot
  * use. The `.tex` is the artifact that matters — it is what gets cited,
@@ -13,7 +13,15 @@ import { EDITIONS } from './TranscriptPane.tsx';
  * the person who wants the undergraduate summary are almost never the same
  * person.
  *
- * Buttons appear only for files that exist. A download that 404s teaches the
+ * **These open rather than download.** Wanting to glance at a formula is far
+ * commoner than wanting a file on disk, and a click that silently drops
+ * something in Downloads answers the rarer question. The PDF opens in the
+ * browser's own viewer; the `.tex` opens in a page that displays it, because
+ * a static host labels `.tex` as `application/x-tex` and every browser saves
+ * that instead of showing it. The raw file is one link away inside, for
+ * whoever actually wants it.
+ *
+ * Buttons appear only for files that exist. A link that 404s teaches the
  * reader to distrust every other button on the page.
  */
 export function Downloads({
@@ -34,7 +42,7 @@ export function Downloads({
   if (!rows.length) {
     return (
       <p className="mt-4 text-[12.5px] leading-relaxed text-ink-500">
-        Nothing to download for this batch yet — the skill writes the LaTeX, and{' '}
+        Nothing to open for this batch yet — the skill writes the LaTeX, and{' '}
         <code className="rounded border border-ink-200 bg-ink-50 px-1 py-0.5 font-mono text-[11.5px]">
           npm run pdf
         </code>{' '}
@@ -45,7 +53,9 @@ export function Downloads({
 
   return (
     <div className="mt-5">
-      <p className="text-[11px] font-bold uppercase tracking-[0.1em] text-ink-400">Downloads</p>
+      <p className="text-[11px] font-bold uppercase tracking-[0.1em] text-ink-400">
+        Source &amp; print
+      </p>
       <ul className="mt-2 flex flex-wrap gap-2">
         {rows.map((r) => (
           <li key={r.key} className="flex items-center gap-1.5 rounded-lg border border-ink-200 bg-white px-2.5 py-1.5">
@@ -56,8 +66,15 @@ export function Downloads({
               r[ext] ? (
                 <a
                   key={ext}
-                  href={transcriptUrl(cote, batch, r.key as Edition, ext)}
-                  download
+                  // The source opens through its wrapper page; the PDF opens
+                  // in the browser's viewer. Neither downloads.
+                  href={
+                    transcriptUrl(cote, batch, r.key as Edition, ext) +
+                    (ext === 'tex' ? '.html' : '')
+                  }
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title={`Open the ${r.label.toLowerCase()} ${ext.toUpperCase()} in a new tab`}
                   className="rounded-md bg-ink-100 px-1.5 py-0.5 font-mono text-[11px] font-semibold uppercase text-ink-600 transition hover:bg-brand-100 hover:text-brand-700"
                 >
                   {ext}

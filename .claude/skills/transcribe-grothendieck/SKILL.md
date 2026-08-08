@@ -13,6 +13,7 @@ For **one batch of twenty leaves**, three LaTeX files:
 |---|---|
 | `transcripts/<folder>/batch-NN.fr.tex` | The French transcription — the mathematics, leaf by leaf |
 | `transcripts/<folder>/batch-NN.en.tex` | The English translation of that transcription |
+| `transcripts/<folder>/batch-NN.modern.tex` | A modernised reading — the mathematics in current notation |
 | `transcripts/<folder>/batch-NN.summary.tex` | The undergraduate summary, and nothing else |
 
 `npm run render` turns each into the reading view the site's left pane shows;
@@ -28,7 +29,7 @@ letter, where a separator sheet fell, which page was scanned upside down — is
 *not* the subject. It is noise in a document meant to be read as mathematics,
 and it goes. What stays is what Grothendieck was actually working on.
 
-**The three editions stay separate.** The transcription is the mathematics and
+**The four editions stay separate.** The transcription is the mathematics and
 nothing else; the translation is that transcription in English; the summary is
 its own document. The summary does **not** open the other two. Someone reading
 the transcription wants the leaves, and a page of plain-English framing before
@@ -266,7 +267,8 @@ Grothendieck's text and must not be mistakable for it.
 ### 4. Translate — from the transcription, never from the leaf
 
 `batch-NN.en.tex` derives from `batch-NN.fr.tex`. **Do not re-read the
-manuscript to translate.** Both English documents (`en`, `summary`) put
+manuscript to translate.** All three English documents (`en`, `modern`,
+`summary`) put
 `\selectlanguage{english}` immediately after `\begin{document}`: the shared
 preamble defaults to French typography, which puts spaces before colons —
 correct for his text, a fault in yours. Two independent readings of the same handwriting
@@ -284,7 +286,52 @@ would diverge, and nothing would say which was right.
   digressing. A translation that flattens that into impersonal mathematical
   prose has lost what makes these notebooks worth reading.
 
-### 5. Check
+### 5. The modernised reading
+
+`batch-NN.modern.tex`, in English. Not a transcription: a reading of the
+mathematics in today's notation and today's names, continuous enough to be
+followed by someone who works in the field.
+
+**It is held to being mathematically correct as it stands.** This is the one
+edition where fidelity to the leaf is not the highest duty. Where the
+manuscript is loose, elliptical or simply wrong, the modernised reading states
+what is *true* — and a footnote says what the leaf actually has. A reading that
+faithfully reproduces an error, in an edition whose whole promise is that it
+can be read as mathematics, is worse than useless: it launders the error
+through the appearance of a modern text.
+
+Concretely, that means:
+
+- **State the hypotheses the manuscript leaves implicit.** If a universal
+  property needs $M$ cocomplete and the leaf does not say so, say so, and
+  footnote that it was supplied.
+- **Check the variances.** They are where these notes go wrong most easily and
+  where a plausible-looking modernisation does the most damage. A construction
+  contravariant in both arguments is a *dual* adjunction, not an adjunction,
+  and calling it a profunctor is simply false.
+- **Do not upgrade a containment to an equality** because the manuscript's
+  shorthand looks like one. Assert what holds; footnote the rest.
+- **Name the modern name** — Isbell duality, Cauchy completion, coend — and
+  footnote whether the manuscript could have known it. That is often the most
+  interesting thing on the page.
+
+**No square brackets, no underlines, no `\ill{}` — no apparatus at all.**
+Everything it carried moves into `\footnote{}`: an uncertain reading, a
+notation he used differently, a passage that is missing, a convention that had
+to be chosen. The reader must still be able to tell what was on the leaf and
+what is ours; footnotes are simply a better place to say it in a text meant to
+be read continuously.
+
+**No `\leaf{}` markers either.** This edition reorganises — it groups by
+argument, not by sheet — so leaf anchors would be false, and the facsimile
+pane deliberately stays put while it is open. Refer to leaves in prose
+("leaf 5 arranges…") where it helps.
+
+Derive it from the transcription and the translation, not from the manuscript,
+for the same reason the translation is: two independent readings of one hand
+diverge, and nothing says which is right.
+
+### 6. Check
 
 ```bash
 npm run render      # fails loudly if the subset was left

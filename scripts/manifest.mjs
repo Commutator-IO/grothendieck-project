@@ -30,7 +30,7 @@ const TRANSCRIPTS = resolve(PUBLIC, 'transcripts');
 const RAW = resolve(ROOT, 'archives', 'raw');
 
 const BATCH_SIZE = 20;
-const EDITIONS = ['fr', 'en', 'summary'];
+const EDITIONS = ['fr', 'en', 'modern', 'summary'];
 
 async function dirs(path) {
   try {
@@ -76,7 +76,7 @@ export async function writeManifest() {
   const transcripts = {};
   for (const d of await dirs(TRANSCRIPTS)) {
     for (const f of await readdir(resolve(TRANSCRIPTS, d.name))) {
-      const m = /^batch-(\d+)\.(fr|en|summary)\.(html|tex|pdf)$/.exec(f);
+      const m = /^batch-(\d+)\.(fr|en|modern|summary)\.(html|tex|pdf)$/.exec(f);
       if (!m) continue;
       const key = `${d.name}#${Number(m[1])}`;
       const entry = (transcripts[key] ??= { html: [], tex: [], pdf: [] });

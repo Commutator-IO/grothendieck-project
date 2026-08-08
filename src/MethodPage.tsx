@@ -93,14 +93,23 @@ export function MethodPage() {
               carefully as leaf 2, and each file records in its header which model produced it
               and when.
             </p>
-            <h3>Three editions, one source</h3>
+            <h3>Four editions, one source</h3>
             <p>
-              Each batch yields a French transcription — Grothendieck wrote in French, and the
-              transcription stays in his language, his notation and his paragraphing — then an
-              English translation of it, then a summary that restates the argument for a reader at
-              undergraduate level. The translation and the summary are derived from the
-              transcription, never from the leaf directly: two independent readings of the same
-              handwriting would diverge, and nothing would say which was right.
+              Each batch yields a French transcription — Grothendieck wrote in French, and it
+              stays in his language, his notation and his paragraphing — then an English
+              translation of it, then a <strong>modernised reading</strong> that puts the
+              mathematics in current notation, then a summary for a reader at undergraduate
+              level. All three derive from the transcription, never from the leaf directly: two
+              independent readings of the same handwriting would diverge, and nothing would say
+              which was right.
+            </p>
+            <p>
+              The modernised reading is the one that is allowed to depart from the leaf, and it is
+              held to a different standard: <strong>correct as it stands</strong>. Where the
+              manuscript is loose or elliptical it states what is true and footnotes what the leaf
+              has. It carries no brackets and no leaf markers — it groups by argument rather than
+              by sheet — so the facsimile stays put while it is open. Everything the apparatus
+              carried is in its footnotes instead.
             </p>
             <h3>Uncertainty is marked, not resolved</h3>
             <p>

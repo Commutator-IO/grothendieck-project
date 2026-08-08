@@ -21,6 +21,11 @@ import type { Edition, TranscriptEntry } from '../lib/types.ts';
 export const EDITIONS: { key: Edition; label: string; help: string }[] = [
   { key: 'fr', label: 'Transcription', help: 'The leaves as written, in French.' },
   { key: 'en', label: 'English', help: 'Translation of the transcription.' },
+  {
+    key: 'modern',
+    label: 'Modernised',
+    help: 'An interpretation in current notation — readable, and further from the leaf.',
+  },
   { key: 'summary', label: 'Summary', help: 'The argument restated for undergraduates.' },
 ];
 

@@ -64,8 +64,16 @@ export interface BookSection {
 
 export type BookKey = 'topos' | 'motives' | 'long-march' | 'late' | 'scattered';
 
-/** Which language and register a transcript artifact is written in. */
-export type Edition = 'fr' | 'en' | 'summary';
+/**
+ * Which language and register a transcript artifact is written in.
+ *
+ * The order is the order of increasing distance from the leaf: the French
+ * transcription is what is on the paper, the English one is that in another
+ * language, `modern` is a reading of it in today's mathematics, and the
+ * summary does not pretend to be the text at all. The tabs follow it, so that
+ * moving right is always moving further from the manuscript.
+ */
+export type Edition = 'fr' | 'en' | 'modern' | 'summary';
 
 /** Everything present locally, written by `npm run archive` and `npm run manifest`. */
 export interface Manifest {

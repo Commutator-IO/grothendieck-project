@@ -107,12 +107,17 @@ and git-ignored so a commit never can either.
 The [`transcribe-grothendieck`](.claude/skills/transcribe-grothendieck/SKILL.md) skill —
 installed as a project skill, so `/transcribe-grothendieck` works in this
 repository —
-transcribes one batch per pass and produces three editions of it: the French
-transcription, an English translation of that transcription, and a summary for
-a reader at undergraduate level. The translation and the summary are derived
-from the transcription and never from the handwriting directly — two
-independent readings of the same hand would diverge, and nothing would say
-which was right.
+transcribes one batch per pass and produces four editions of it: the French
+transcription, an English translation, a **modernised reading** in current
+notation, and a summary for a reader at undergraduate level. All three
+derivatives come from the transcription and never from the handwriting
+directly — two independent readings of the same hand would diverge, and
+nothing would say which was right.
+
+The modernised reading is the one allowed to depart from the leaf, and is held
+to being **correct as it stands**: where the manuscript is loose it states what
+is true and footnotes what the leaf has. It carries no bracket apparatus and no
+leaf markers — footnotes carry everything the apparatus did.
 
 ```bash
 npm run render      # transcripts/*.tex → the reading views the left pane shows
