@@ -1,0 +1,39 @@
+# Render blueprint for the facsimile relay.
+#
+# Render is the recommended host, and the reason is narrow: this needs a real
+# Node process, because `https.request(..., { rejectUnauthorized: false })` is
+# the one thing that gets past Montpellier's expired certificate, and no edge
+# runtime offers it. Render's free plan runs the Dockerfile as it stands, gives
+# a hostname that already has a valid certificate, and needs no DNS of ours —
+# which matters, because commutator.io is on Google Cloud DNS and moving the
+# zone to put a proxy in front would put the domain's email in the blast radius
+# of a facsimile pane.
+#
+# The free plan's cost is a cold start: the service sleeps after 15 minutes idle
+# and takes about a minute to wake. The pane already handles that — it shows the
+# "not answering" panel with a Try again button — so the failure is visible and
+# self-correcting rather than silent. Upgrading to a paid instance, or pinging
+# /health on a schedule, removes it.
+#
+# Deploy: Render dashboard → New → Blueprint → point at this repository.
+# Then set RELAY_URL (repository variable) to the https://…onrender.com origin.
+
+services:
+  - type: web
+    name: grothendieck-relay
+    runtime: docker
+    plan: free
+    region: frankfurt
+    rootDir: relay
+    dockerfilePath: ./Dockerfile
+    # The relay holds nothing between requests, so a restart costs nothing and
+    # any instance can serve any reader.
+    healthCheckPath: /health
+    envVars:
+      - key: PORT
+        value: 8080
+      # Who may frame the relayed PDF. This is the whole difference between
+      # relaying a request the reader's browser would have made and standing up
+      # a public mirror of someone else's archive.
+      - key: ALLOWED_ORIGINS
+        value: https://grothendieck.commutator.io

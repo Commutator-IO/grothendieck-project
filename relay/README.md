@@ -36,9 +36,31 @@ valid certificate — and point the site at it. Cross-origin is fine, because
 `frame-ancestors` is what decides who may frame a document, and the relay sets
 it.
 
+**That last point is worth stating plainly, because it is easy to lose:** the
+relay does not need to live on `commutator.io`, or on any domain of ours. A
+bare `…onrender.com` hostname works exactly as well as `facsimile.commutator.io`
+would. Nothing about the pane cares what the origin is called — only that its
+certificate is valid and that it permits this site to frame it.
+
 ## Deploying
 
-One file, no dependencies, nothing stored. Any container host works.
+One file, no dependencies, nothing stored. Any container host works. The
+requirement is narrow and rules out most of the cheap options: **a real Node
+process**, because `rejectUnauthorized` is what gets past the expired
+certificate. Cloudflare Workers, Deno Deploy and every other V8/edge runtime
+fail on that one point, not on effort.
+
+### Render — recommended, and free
+
+`render.yaml` is a blueprint: **Render dashboard → New → Blueprint**, point it
+at this repository, deploy. Nothing to configure by hand.
+
+Free, no DNS of ours involved, and the hostname it hands back
+(`…onrender.com`) already has a valid certificate — which is the only property
+the browser insists on. The cost is a cold start: the service sleeps after 15
+minutes idle and takes about a minute to wake. The pane handles that by design,
+showing the "not answering" panel with a *Try again* button, so the failure is
+visible and self-correcting rather than silent.
 
 ### fly.io
 
@@ -48,11 +70,15 @@ fly launch --no-deploy --name grothendieck-relay
 fly deploy
 ```
 
-Scales to zero between readers; a suspended machine resumes in under a second.
+Scales to zero between readers and resumes in under a second, so no cold start
+worth the name — but Fly ended its free allowance for new organisations on
+7 October 2024, so expect cents a month rather than nothing: the image's root
+filesystem plus $0.02/GB of egress.
 
 ### Anywhere else
 
-Render, Railway, a VPS — point them at the `Dockerfile`, or just run it:
+Railway, a VPS, anything that runs a container — point it at the `Dockerfile`,
+or just run it:
 
 ```bash
 PORT=8080 ALLOWED_ORIGINS=https://grothendieck.commutator.io node server.mjs
