@@ -187,15 +187,36 @@ outside makes rendering fail loudly, which is the wanted behaviour.
 
 Allowed: `\section` `\subsection` · paragraphs separated by a blank line ·
 `\emph` `\textbf` `\textit` `\texttt` · `itemize` `enumerate` `quote` ·
-`summary` · `$…$` `\(…\)` `\[…\]` `equation` `align` `gather` `cases` `array`
-and the matrix environments · the seven macros above.
+`summary` · `tikzcd` (arrow syntax below) · `$…$` `\(…\)` `\[…\]` `equation`
+`align` `gather` `cases` `array` and the matrix environments · the seven macros
+above.
+
+Apparatus macros may contain mathematics — `\note{the $\varphi_{*}$ here is
+struck}` is the common case, not the exotic one, and the renderer matches
+braces to allow it.
 
 Mathematics is **not** converted: the delimiters pass through and KaTeX sets
-them in the browser, so screen and PDF come from one source. A `tikz-cd` is
-not typeset in the reading view — KaTeX cannot — but is not dropped either:
-it appears there as a labelled source block, and typeset in the PDF.
+them in the browser, so screen and PDF come from one source.
 
-Two layout rules for diagrams, both learned on a real batch:
+**Commutative diagrams are rendered in both.** In the PDF, by `tikz-cd`. In the
+reading view, by a renderer that lays the nodes out in a CSS grid, typesets
+each with KaTeX, and draws the arrows in SVG from the measured cell positions —
+so the mathematics stays selectable text rather than becoming a picture. The
+LaTeX source stays available under a fold beneath each diagram.
+
+That renderer covers exactly the arrow syntax below, and **raises on anything
+else** rather than dropping it — a diagram rendered with an arrow missing
+asserts a commutation nobody wrote:
+
+- directions built from `u` `d` `l` `r`, repeatable: `\arrow[d]`, `\arrow[rr]`,
+  `\arrow[dl]`;
+- an optional quoted label, with a trailing `'` to put it on the other side:
+  `\arrow[d, "\approx"]`, `\arrow[d, "f_{!}"']`;
+- the styles `hook`, `hook'` (inclusions) and `Rightarrow`.
+
+Extending the subset means extending `scripts/render.mjs` in the same commit.
+
+Two layout rules, both learned on a real batch:
 
 - **A `tikzcd` sits in its own paragraph** — blank line before and after.
   Inline after a colon it inherits the paragraph's baseline and walks off the
@@ -203,7 +224,8 @@ Two layout rules for diagrams, both learned on a real batch:
 - **Wide diagrams take `[column sep=small, row sep=small,
   nodes={font=\scriptsize}]`.** A wheel of eight functor categories does not
   fit an A4 measure at text size, and an overfull box in a transcription is
-  not a cosmetic defect: it hides content.
+  not a cosmetic defect: it hides content. (Those options affect the PDF only;
+  the reading view sizes itself.)
 
 `references/specimen.tex` shows every macro in a complete file.
 
