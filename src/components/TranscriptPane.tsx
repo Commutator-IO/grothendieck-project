@@ -303,6 +303,12 @@ function MissingTranscript({
         The facsimile must be mirrored first — the skill refuses to work from anything but the
         local batch file.
       </p>
+      <a
+        href="/contribute/"
+        className="text-[12.5px] font-medium text-brand-600 underline decoration-brand-200 underline-offset-2 transition hover:text-brand-700"
+      >
+        Want to help? See how to install the skills and open a pull request.
+      </a>
     </div>
   );
 }
