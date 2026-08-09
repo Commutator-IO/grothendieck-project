@@ -131,10 +131,25 @@ missing, a convention that had to be chosen. The reader must still be able to
 tell what was on the page and what is ours; footnotes are simply a better
 place to say it in a text meant to be read continuously.
 
-**No `\page{}` markers either.** This edition groups by argument, not by
-sheet, so page anchors would be false — and the site deliberately keeps the
-facsimile still while it is open. Refer to pages in prose (« le feuillet 5
-dispose… ») where it helps the reader find their place.
+**No `\page{}` markers — but `\pagerange{first}{last}` at each section.**
+This edition groups by argument, not by sheet, so no single page of the
+source lines up with one paragraph of it: a page-by-page anchor the way the
+transcription has one would be false. What is true, and worth having, is
+coarser — which facsimile pages a section as a whole is drawn from. Place
+`\pagerange{first}{last}` as the very first thing in the same block as each
+`\section*{}`/`\subsection*{}` that opens over new pages, no blank line
+between, exactly where `\page{}` would sit in the transcription. It drives
+the same scrolling: the facsimile jumps to the section's first page once,
+when the section comes into view, and holds there until the next marker
+does — not a claim that every sentence in between is on that page, only that
+the section as a whole is. Ground every range in the transcription's own
+`\page{}` markers and the section's actual content before writing it down;
+guessing from a heading is how a reader ends up looking at the wrong page.
+
+Where a section already states its range in prose in the title (« La partie
+fixe d'une adjonction (pages 3 à 5) ») — keep doing that too, for a reader
+without the facsimile pane open at all. `\pagerange{}` is the separate,
+machine-readable anchor behind it, not a replacement for it.
 
 ## Language and form
 
@@ -163,7 +178,7 @@ page; the reading view shows it too. Never omit it, and never soften the
 second line: whoever cites this file must know it interprets. Structure with `\section*` and `\subsection*` following the argument.
 Stay inside the LaTeX subset of the transcribe skill — the renderer raises on
 anything else — plus `\footnote{}`, which the reading view renders as
-numbered notes with backlinks.
+numbered notes with backlinks, and `\pagerange{}{}`, described above.
 
 Diagrams follow the transcribe skill's tikz-cd rules, wheels included —
 rings on a grid of odd dimensions, `no head` radii with `description`
