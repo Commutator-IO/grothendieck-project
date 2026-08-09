@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { BOOKS } from '../content/books.ts';
-import { warmRelay } from '../lib/batches.ts';
 
 /**
  * Header and footer, shared by every page.
@@ -23,13 +22,6 @@ function isCurrent(path: string, here: string): boolean {
 
 export function Header({ path }: { path: string }) {
   const [open, setOpen] = useState(false);
-
-  // Every page carries this header, and any of them may lead to a batch being
-  // opened — so this is the one place that reaches every reader early enough
-  // to matter. See warmRelay's own comment for why.
-  useEffect(() => {
-    warmRelay();
-  }, []);
 
   // Escape closes the folded-out menu. On a tablet it opens by tap rather than
   // hover, so without this there is no way out of it.

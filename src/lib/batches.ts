@@ -98,45 +98,28 @@ export function useManifest(): Manifest | null {
   return m;
 }
 
+/** Whether the pane may mount a frame against the relay yet. */
+export type RelayState = 'waking' | 'ready' | 'absent';
+
 /**
- * Whether this deployment can serve facsimiles at all.
+ * Whether this deployment can serve facsimiles — and, by the same request,
+ * what wakes the relay.
  *
  * In development the relay is a dev-server middleware; in production it is a
  * separate service, which may or may not be reachable. Rather than guess from
  * the hostname — which would be wrong the moment the deployment changes — one
  * cheap request settles it, and the pane says plainly which situation the
  * reader is in.
- */
-/**
- * Wakes the relay before a reader has asked for a facsimile at all.
  *
- * The deployed relay spins down after inactivity, and the next request pays a
- * 30-50s cold start — during which its host answers with its own loading
- * page instead of proxying through. The facsimile pane loads the PDF in an
- * `<iframe>`, so that loading page renders inside the pane rather than
- * failing quietly, which is worse than the delay itself.
+ * That request is also the head start. A deployed relay spins down when idle
+ * and pays a 30-50s cold start on the next call, so something has to knock
+ * before a reader picks a folder. This hook runs when the notebook page
+ * mounts — while its inventory is still being read — which is early enough,
+ * and it is the only page a facsimile can be opened from.
  *
- * `Header` calls this once, from every page, since any of them may lead to a
- * batch being opened. It is a fire-and-forget hit on `/health` — cheapest
- * route the relay has, no request to Montpellier behind it — not the
- * availability probe `useFacsimileProxy` already makes, which stays where it
- * is because it also gates the pane's UI and belongs to the page that shows
- * it. This one only buys the relay a head start; nothing reads its result.
+ * There was a second, dedicated knock on `/health` from every page's header.
+ * It is gone — one request, on the one page a facsimile can be opened from.
  */
-export function warmRelay() {
-  if (!RELAY) return; // dev: the Vite middleware needs no waking
-  // `no-cors`: nothing here reads the answer, and /health sends no CORS
-  // headers, so a plain fetch would log a policy error on every page load —
-  // noise that reads like a fault. An opaque response is exactly enough: the
-  // request still reaches the host, which is the whole point.
-  fetch(`${RELAY}/health`, { mode: 'no-cors' }).catch(() => {
-    // Nothing to do here: a reader who goes on to open a batch gets the real
-    // state from useFacsimileProxy.
-  });
-}
-
-/** Whether the pane may mount a frame against the relay yet. */
-export type RelayState = 'waking' | 'ready' | 'absent';
 
 export function useFacsimileProxy(): RelayState {
   const [state, setState] = useState<RelayState>('waking');
@@ -146,19 +129,47 @@ export function useFacsimileProxy(): RelayState {
     let tries = 0;
 
     /**
-     * Answering is not the test — answering *with a PDF* is.
+     * Answering is not the test — answering *as the relay* is.
      *
-     * A relay asleep on a free tier does not refuse the connection: its host
-     * accepts it and serves its own start-up page, with a perfectly good
-     * status and `text/html`. Read as "up", that page is what the pane would
-     * then frame. So the probe keeps asking until the bytes are a PDF, and
-     * only gives up after the cold start has had longer than it takes.
+     * An instance asleep on a free tier does not refuse the connection: its
+     * host accepts it and serves a start-up page, with a perfectly good status
+     * and `text/html`. Read as "up", that page is what the pane would then
+     * frame. Both routes below therefore check what came back, not merely that
+     * something did, and `no-store` keeps a cached answer from reporting a
+     * sleeping instance as awake.
      */
+    let blocked = false;
     const probe = async () => {
+      // `/health` first: the relay answers it alone, with nothing asked of
+      // Montpellier, so an arrival on this page costs them nothing.
+      if (!blocked) {
+        try {
+          const r = await fetch(`${RELAY}/health`, { cache: 'no-store' });
+          if (r.ok && (r.headers.get('content-type') ?? '').startsWith('text/plain')) {
+            if (alive) setState('ready');
+            return;
+          }
+        } catch {
+          /**
+           * Content blockers cancel this one outright
+           * (`ERR_BLOCKED_BY_CLIENT`) — a third-party call to a route named
+           * "health" is a plausible telemetry beacon, and no amount of
+           * innocence at our end changes how it reads. Noted once, so the
+           * fallback below carries the rest of the round rather than adding a
+           * refused request to the console every five seconds.
+           */
+          blocked = true;
+        }
+      }
+
       try {
-        // A one-byte range: enough to prove the proxy answers, without pulling
-        // a 35 MB folder just to find out.
-        const r = await fetch(`${RELAY}/source/26.pdf`, { headers: { Range: 'bytes=0-0' } });
+        // The fallback costs Montpellier one byte — a range request rather
+        // than the 35 MB folder — and it is unmistakably a fetch of content,
+        // which is what gets it past the blockers that stop /health.
+        const r = await fetch(`${RELAY}/source/26.pdf`, {
+          headers: { Range: 'bytes=0-0' },
+          cache: 'no-store',
+        });
         if (r.ok && r.headers.get('content-type') === 'application/pdf') {
           if (alive) setState('ready');
           return;
@@ -166,6 +177,7 @@ export function useFacsimileProxy(): RelayState {
       } catch {
         // Unreachable this time round, which a waking host also looks like.
       }
+
       if (!alive) return;
       if (++tries >= 12) return setState('absent');
       timer = setTimeout(probe, 5000);

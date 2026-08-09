@@ -72,7 +72,24 @@ const server = createServer((req, res) => {
   const url = new URL(req.url ?? '/', 'http://localhost');
 
   if (url.pathname === '/health') {
-    res.writeHead(200, { 'Content-Type': 'text/plain' });
+    res.writeHead(200, {
+      'Content-Type': 'text/plain',
+      /**
+       * Readable from anywhere, and never cached.
+       *
+       * The site probes this before framing anything: it is the one route
+       * answered by the relay alone, with no request to Montpellier behind
+       * it, so it is what a reader's arrival should knock on. That only works
+       * if the browser may read the answer — hence the header, which gives
+       * away nothing but the word "ok" — and if the answer is fresh, since a
+       * cached "ok" would report a sleeping instance as awake.
+       *
+       * Reading it also distinguishes the relay from its host: an instance
+       * still starting up is answered for by the platform, in HTML.
+       */
+      'Access-Control-Allow-Origin': '*',
+      'Cache-Control': 'no-store',
+    });
     return res.end('ok\n');
   }
 
