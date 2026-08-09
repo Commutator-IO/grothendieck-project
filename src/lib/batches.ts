@@ -107,6 +107,30 @@ export function useManifest(): Manifest | null {
  * cheap request settles it, and the pane says plainly which situation the
  * reader is in.
  */
+/**
+ * Wakes the relay before a reader has asked for a facsimile at all.
+ *
+ * The deployed relay spins down after inactivity, and the next request pays a
+ * 30-50s cold start — during which its host answers with its own loading
+ * page instead of proxying through. The facsimile pane loads the PDF in an
+ * `<iframe>`, so that loading page renders inside the pane rather than
+ * failing quietly, which is worse than the delay itself.
+ *
+ * `Header` calls this once, from every page, since any of them may lead to a
+ * batch being opened. It is a fire-and-forget hit on `/health` — cheapest
+ * route the relay has, no request to Montpellier behind it — not the
+ * availability probe `useFacsimileProxy` already makes, which stays where it
+ * is because it also gates the pane's UI and belongs to the page that shows
+ * it. This one only buys the relay a head start; nothing reads its result.
+ */
+export function warmRelay() {
+  if (!RELAY) return; // dev: the Vite middleware needs no waking
+  fetch(`${RELAY}/health`).catch(() => {
+    // Nothing to do here: a reader who goes on to open a batch gets the real
+    // state from useFacsimileProxy.
+  });
+}
+
 export function useFacsimileProxy(): boolean | null {
   const [ok, setOk] = useState<boolean | null>(null);
   useEffect(() => {
