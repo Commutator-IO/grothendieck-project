@@ -70,6 +70,30 @@ function address(b: OpenBatch): string {
   return `${url}#page=${pdfIndexOf(page)}`;
 }
 
+/**
+ * The iframe's target, held back until the reader stops moving.
+ *
+ * `onPage` fires on every `\page{}`/`\pagerange{}` marker the transcript
+ * scrolls past, and the frame below remounts on every distinct target —
+ * necessary, since changing only `#page=` does not make an already-loaded
+ * frame navigate. But a fast scroll crosses several markers a second, and
+ * each remount is a fresh request to the relay; the ones the scroll outruns
+ * are aborted mid-flight rather than never sent; measured on a batch of
+ * fourteen sections, one screen's worth of scrolling fired nine of them. This
+ * turns "one request per marker passed" into "one request once scrolling
+ * stops" — the marker text and page count above still update immediately,
+ * only the frame itself waits.
+ */
+function useSettledAddress(open: OpenBatch, delay = 350): string {
+  const target = address(open);
+  const [settled, setSettled] = useState(target);
+  useEffect(() => {
+    const t = setTimeout(() => setSettled(target), delay);
+    return () => clearTimeout(t);
+  }, [target, delay]);
+  return settled;
+}
+
 export function FacsimilePane({
   open,
   onClose,
@@ -79,6 +103,7 @@ export function FacsimilePane({
   onClose: () => void;
   onBatch: (batch: number) => void;
 }) {
+  const src = useSettledAddress(open);
   const [width, setWidth] = useState(DEFAULT_WIDTH);
   // Two representations of one value, on purpose: state drives the render, the
   // ref lets the event handlers read the current width without being
@@ -288,13 +313,13 @@ export function FacsimilePane({
 
       {open.available ? (
         <iframe
-          // The key forces a remount when the address changes. Changing only
+          // The key forces a remount when the address changes — changing only
           // the `#page=` fragment does not make an already-loaded frame
-          // navigate, so the pane would stay on the previous page. The file is
-          // local and in cache, and the value only moves at page boundaries,
-          // so the remount costs little.
-          key={address(open)}
-          src={address(open)}
+          // navigate, so the pane would stay on the previous page. `src` is
+          // the settled address, not the live one: see useSettledAddress for
+          // why remounting on every marker a scroll passes is not cheap.
+          key={src}
+          src={src}
           title={`Folder ${open.cote}, pages ${first} to ${last}`}
           className={`min-h-0 flex-1 border-0 bg-ink-100 ${isDragging ? 'pointer-events-none' : ''}`}
         />
