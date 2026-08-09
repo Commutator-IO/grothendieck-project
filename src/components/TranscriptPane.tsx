@@ -89,40 +89,6 @@ export function TranscriptPane({
   }, [present, url]);
 
   /**
-   * The watermark, read off the loaded document and drawn fixed to the
-   * outer page instead of to the frame.
-   *
-   * The rendered HTML carries its own diagonal watermark, `position: fixed`
-   * to whatever document it is the body of — correct for a reader who opens
-   * the file on its own, where that document is what scrolls. Here it is
-   * not: the frame is grown to its full content height and the *page*
-   * scrolls past it, so a watermark fixed to the frame's own viewport is
-   * fixed to a document many screens tall, and shows only near its vertical
-   * centre rather than on every screenful, which was the whole point of it.
-   * The frame's own copy is hidden and this pane draws an equivalent one,
-   * `position: sticky` to the page that actually scrolls — reading the same
-   * words off the document rather than declaring them a second time.
-   */
-  const [watermark, setWatermark] = useState<string | null>(null);
-  useEffect(() => {
-    if (!present) return;
-    const el = frame.current;
-    if (!el) return;
-
-    const attach = () => {
-      const doc = el.contentDocument;
-      if (!doc) return;
-      setWatermark(doc.querySelector('.tr-demo')?.textContent?.trim() || null);
-      const diag = doc.querySelector<HTMLElement>('.tr-demo-diag');
-      if (diag) diag.style.display = 'none';
-    };
-
-    el.addEventListener('load', attach);
-    if (el.contentDocument?.readyState === 'complete') attach();
-    return () => el.removeEventListener('load', attach);
-  }, [present, url]);
-
-  /**
    * Scrolling the transcript turns the facsimile's pages.
    *
    * The transcript marks each source page with `data-page="47"`. Whichever
@@ -225,34 +191,20 @@ export function TranscriptPane({
       </header>
 
       {present ? (
-        <div className="relative">
-          {watermark && (
-            // `margin-bottom: -100vh` keeps this box from pushing the frame
-            // down by its own height — it exists only to give `sticky`
-            // something a viewport tall to stick within, not to occupy space.
-            <div
-              aria-hidden="true"
-              className="pointer-events-none sticky top-0 z-10 flex select-none items-center justify-center overflow-hidden"
-              style={{ height: '100vh', marginBottom: '-100vh' }}
-            >
-              <span
-                className="whitespace-nowrap text-center text-[2.6rem] font-extrabold tracking-wide"
-                style={{ transform: 'rotate(-30deg)', color: 'rgba(90,80,60,.05)' }}
-              >
-                {watermark}
-              </span>
-            </div>
-          )}
-          <iframe
-            key={url}
-            ref={frame}
-            src={url}
-            title={`Transcript of folder ${cote}, pages ${first}–${last}`}
-            scrolling="no"
-            style={{ height }}
-            className="w-full border-0 bg-white"
-          />
-        </div>
+        // The legal notice is the document's own, tiled down its whole height
+        // by the renderer — not drawn here. A copy in this pane had to be
+        // `position: sticky`, and sticky resolves against the nearest scroll
+        // container, which is this card's `overflow-hidden`: it never scrolls,
+        // so the mark sat at the top of the transcript and slid away with it.
+        <iframe
+          key={url}
+          ref={frame}
+          src={url}
+          title={`Transcript of folder ${cote}, pages ${first}–${last}`}
+          scrolling="no"
+          style={{ height }}
+          className="w-full border-0 bg-white"
+        />
       ) : (
         <MissingTranscript cote={cote} batch={batch} edition={edition} first={first} last={last} />
       )}
