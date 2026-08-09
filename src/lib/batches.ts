@@ -125,26 +125,59 @@ export function useManifest(): Manifest | null {
  */
 export function warmRelay() {
   if (!RELAY) return; // dev: the Vite middleware needs no waking
-  fetch(`${RELAY}/health`).catch(() => {
+  // `no-cors`: nothing here reads the answer, and /health sends no CORS
+  // headers, so a plain fetch would log a policy error on every page load —
+  // noise that reads like a fault. An opaque response is exactly enough: the
+  // request still reaches the host, which is the whole point.
+  fetch(`${RELAY}/health`, { mode: 'no-cors' }).catch(() => {
     // Nothing to do here: a reader who goes on to open a batch gets the real
     // state from useFacsimileProxy.
   });
 }
 
-export function useFacsimileProxy(): boolean | null {
-  const [ok, setOk] = useState<boolean | null>(null);
+/** Whether the pane may mount a frame against the relay yet. */
+export type RelayState = 'waking' | 'ready' | 'absent';
+
+export function useFacsimileProxy(): RelayState {
+  const [state, setState] = useState<RelayState>('waking');
   useEffect(() => {
     let alive = true;
-    // A one-byte range: enough to prove the proxy answers, without pulling a
-    // 35 MB folder just to find out.
-    fetch(`${RELAY}/source/26.pdf`, { headers: { Range: 'bytes=0-0' } })
-      .then((r) => alive && setOk(r.ok && r.headers.get('content-type') === 'application/pdf'))
-      .catch(() => alive && setOk(false));
+    let timer: ReturnType<typeof setTimeout>;
+    let tries = 0;
+
+    /**
+     * Answering is not the test — answering *with a PDF* is.
+     *
+     * A relay asleep on a free tier does not refuse the connection: its host
+     * accepts it and serves its own start-up page, with a perfectly good
+     * status and `text/html`. Read as "up", that page is what the pane would
+     * then frame. So the probe keeps asking until the bytes are a PDF, and
+     * only gives up after the cold start has had longer than it takes.
+     */
+    const probe = async () => {
+      try {
+        // A one-byte range: enough to prove the proxy answers, without pulling
+        // a 35 MB folder just to find out.
+        const r = await fetch(`${RELAY}/source/26.pdf`, { headers: { Range: 'bytes=0-0' } });
+        if (r.ok && r.headers.get('content-type') === 'application/pdf') {
+          if (alive) setState('ready');
+          return;
+        }
+      } catch {
+        // Unreachable this time round, which a waking host also looks like.
+      }
+      if (!alive) return;
+      if (++tries >= 12) return setState('absent');
+      timer = setTimeout(probe, 5000);
+    };
+
+    probe();
     return () => {
       alive = false;
+      clearTimeout(timer);
     };
   }, []);
-  return ok;
+  return state;
 }
 
 export function transcript(m: Manifest | null, cote: string, k: number) {

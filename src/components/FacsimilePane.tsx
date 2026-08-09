@@ -1,5 +1,12 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { batchCount, batchRange, facsimileUrl, pdfIndexOf, sourceUrl } from '../lib/batches.ts';
+import {
+  batchCount,
+  batchRange,
+  facsimileUrl,
+  pdfIndexOf,
+  sourceUrl,
+  type RelayState,
+} from '../lib/batches.ts';
 import { REPO } from '../lib/report.ts';
 
 /**
@@ -43,8 +50,8 @@ export interface OpenBatch {
   pages: number;
   /** The archive page to show, when the transcript says which one is being read. */
   page?: number;
-  /** False when this deployment has no proxy to fetch Montpellier through. */
-  available: boolean;
+  /** Whether the relay is up yet — the frame waits rather than racing it. */
+  relay: RelayState;
 }
 
 function clamp(w: number): number {
@@ -311,7 +318,11 @@ export function FacsimilePane({
         onBatch={onBatch}
       />
 
-      {open.available ? (
+      {/* The frame is mounted only once the relay has answered with a PDF.
+          Pointed at a relay still starting up, it would frame the host's own
+          start-up page — a stranger's loading screen inside the reading
+          workspace, which is worse than saying plainly that we are waiting. */}
+      {open.relay === 'ready' ? (
         <iframe
           // The key forces a remount when the address changes — changing only
           // the `#page=` fragment does not make an already-loaded frame
@@ -323,6 +334,8 @@ export function FacsimilePane({
           title={`Folder ${open.cote}, pages ${first} to ${last}`}
           className={`min-h-0 flex-1 border-0 bg-ink-100 ${isDragging ? 'pointer-events-none' : ''}`}
         />
+      ) : open.relay === 'waking' ? (
+        <Waking cote={open.cote} />
       ) : (
         <NoProxy cote={open.cote} />
       )}
@@ -429,6 +442,36 @@ function BatchBar({
  * the header, where it belongs, and this panel says what is broken instead of
  * offering a worse way to work.
  */
+/**
+ * The relay is starting up, and the pane says so in its own words.
+ *
+ * The wait is real — a free instance spins down when idle and takes the best
+ * part of a minute to come back — so the honest thing is to name it and say
+ * why, rather than to show a spinner or, worse, whatever page the host serves
+ * meanwhile. The reader is given the folder at Montpellier in the meantime:
+ * the wait is ours, and it should not be theirs if they are in a hurry.
+ */
+function Waking({ cote }: { cote: string }) {
+  return (
+    <div className="flex min-h-0 flex-1 flex-col items-start gap-3 overflow-auto bg-ink-100 px-6 py-8">
+      <p className="text-[13px] font-semibold text-ink-800">Waking the facsimile relay…</p>
+      <p className="max-w-[34em] text-[13px] leading-relaxed text-ink-600">
+        The scans are streamed from Montpellier through a small relay, which sleeps when nobody
+        is reading and takes up to a minute to start. The scan appears here by itself once it
+        answers — nothing to click.
+      </p>
+      <a
+        href={sourceUrl(cote)}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-[12.5px] font-medium text-brand-600 underline decoration-brand-200 underline-offset-2 transition hover:text-brand-700"
+      >
+        Folder {cote} at Montpellier, in a new tab ↗
+      </a>
+    </div>
+  );
+}
+
 function NoProxy({ cote }: { cote: string }) {
   return (
     <div className="flex min-h-0 flex-1 flex-col items-start gap-3 overflow-auto bg-ink-100 px-6 py-8">

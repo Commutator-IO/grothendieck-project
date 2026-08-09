@@ -34,8 +34,9 @@ export function BookPage({ bookKey }: { bookKey: BookKey }) {
   const b = book(bookKey);
   const cotes = useMemo(() => cotesOf(b), [b]);
   const manifest = useManifest();
-  // Null while the probe is in flight: assume the relay is there rather than
-  // flashing the fallback panel for a moment on every open.
+  // Probed once here, on the page, rather than when a batch opens: by the
+  // time a reader has picked one the answer is usually in, and a relay that
+  // had to be woken has been waking all the while.
   const proxy = useFacsimileProxy();
 
   /**
@@ -89,7 +90,7 @@ export function BookPage({ bookKey }: { bookKey: BookKey }) {
           batch: Math.min(open.batch, batchCount(openCote.pages)),
           pages: openCote.pages,
           page: page,
-          available: proxy !== false,
+          relay: proxy,
         }
       : null;
 
