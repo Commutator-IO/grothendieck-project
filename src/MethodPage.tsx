@@ -1,3 +1,4 @@
+import { H2, H3, LI, P, useHashTarget } from './components/Anchors.tsx';
 import { Footer, Header } from './components/Frame.tsx';
 import { BOOKS, cotesOf } from './content/books.ts';
 import { COTES } from './content/catalogue.ts';
@@ -22,6 +23,7 @@ import { STATES, shownState, type State } from './lib/progress.ts';
  */
 export function MethodPage() {
   const manifest = useManifest();
+  useHashTarget();
 
   return (
     <>
@@ -30,11 +32,15 @@ export function MethodPage() {
       <main className="mx-auto max-w-6xl px-5 py-10">
         <header className="max-w-[46em]">
           <h1 className="titre text-[34px] leading-tight text-ink-900">Method &amp; progress</h1>
-          <p className="mt-3 text-[15.5px] leading-relaxed text-ink-700">
+          <P id="intro" className="mt-3 text-[15.5px] leading-relaxed text-ink-700">
             How these pages are turned into LaTeX, what the process refuses to do, and how far it
             has got. The refusals matter more than the method: a transcription that silently
             guesses is worse than no transcription, because nothing on the page tells you which
             words were read and which were invented.
+          </P>
+          <p className="mt-2 text-[12.5px] text-ink-400">
+            Every paragraph below has its own address: hover one and the mark in the margin copies
+            a link straight to it.
           </p>
         </header>
 
@@ -44,53 +50,53 @@ export function MethodPage() {
 
         <div className="mt-14 grid gap-x-10 gap-y-8 md:grid-cols-2">
           <div className="prose-fonds">
-            <h2 className="titre text-[22px] text-ink-900">How Grothendieck wrote</h2>
-            <p className="mt-3">
+            <H2 id="how-he-wrote">How Grothendieck wrote</H2>
+            <P id="how-he-wrote-working-notes" className="mt-3">
               Everything downstream follows from this, so it is worth stating plainly. These are
               not fair copies. They are working notes, written for one reader, and the archive's
               own description of the fonds names the traits that make them hard:
-            </p>
-            <h3>Versos carry other people's paper</h3>
-            <p>
+            </P>
+            <H3 id="versos">Versos carry other people's paper</H3>
+            <P id="versos-unrelated">
               He wrote on the back of whatever was to hand — letters from the university
               administration, offprints, Bourbaki seminar notes, typescripts his secretary had
               returned. The digitisation kept the versos, and they are frequently unrelated to the
               recto. They were also scanned in whatever orientation preserved the physical
               object, so an unrelated verso often appears upside down.
-            </p>
-            <h3>Two numbering systems, sometimes three</h3>
-            <p>
+            </P>
+            <H3 id="numbering">Two numbering systems, sometimes three</H3>
+            <P id="numbering-archive-pages">
               Grothendieck paginated some drafts himself — the Long March runs 1 to 787 across
               four boxes. The archivists then numbered every page in pencil, bottom left. The PDF
               adds a third count of its own, one page ahead of the archive's because of the
               generated cover sheet. This site counts in archive pages throughout, and the
               transcription records the author's own page number wherever it is visible.
-            </p>
-            <h3>Neutral sheets are part of the record</h3>
-            <p>
+            </P>
+            <H3 id="neutral-sheets">Neutral sheets are part of the record</H3>
+            <P id="neutral-sheets-not-artefacts">
               Where staples or paper clips once held a bundle together, the archivists inserted a
               blank separator and scanned it. A blank page in the facsimile is therefore
               information about the original grouping, not an artefact to be dropped.
-            </p>
-            <h3>Dates are mostly inferred</h3>
-            <p>
+            </P>
+            <H3 id="dating">Dates are mostly inferred</H3>
+            <P id="dating-from-versos">
               Outside correspondence, almost nothing is dated. The ranges in the inventory come
               from versos: a letter of 1980 on the back places the folder at 1980 or later. The
               late notebooks are the exception, and the reason they are worth starting with —{' '}
               <em>Vers une géométrie des formes</em> dates nearly every chapter to the day.
-            </p>
+            </P>
           </div>
 
           <div className="prose-fonds">
-            <h2 className="titre text-[22px] text-ink-900">How transcription proceeds</h2>
-            <p className="mt-3">
+            <H2 id="how-it-proceeds">How transcription proceeds</H2>
+            <P id="the-batch-is-the-unit" className="mt-3">
               One batch of {BATCH_SIZE} pages per pass, always from the local facsimile file and
               never from a re-render of it. The batch is the unit end to end: the file shown in
               the pane is the file read, and the LaTeX it produces covers those pages and no
               others.
-            </p>
-            <h3>Microbatches, and why twenty</h3>
-            <p>
+            </P>
+            <H3 id="microbatches">Microbatches, and why twenty</H3>
+            <P id="why-twenty">
               Each pass runs on <strong>Fable 5</strong>, in a fresh context, on one batch and
               never two. The limit is not arbitrary: past roughly twenty handwritten pages the
               quality of machine reading degrades towards the end of the pass, and nothing in the
@@ -98,49 +104,49 @@ export function MethodPage() {
               unknown cannot be used at all — so the batch is sized to keep page 18 read as
               carefully as page 2, and each file records in its header which model produced it
               and when.
-            </p>
-            <h3>Two editions, one source</h3>
-            <p>
+            </P>
+            <H3 id="two-editions">Two editions, one source</H3>
+            <P id="two-editions-both-french">
               Each batch yields a <strong>transcription</strong> — Grothendieck wrote in French,
               and it stays in his language, his notation and his paragraphing — and then a{' '}
               <strong>modernised reading</strong>, the same mathematics in current notation,
               opening with a summary for someone who has not met the subject. Both in
               French: the notions were thought in that language, and an English translation was
               one more artifact to keep in step for no gain the other two did not give.
-            </p>
-            <p>
+            </P>
+            <P id="modern-reads-the-transcription">
               The modernised reading works from the transcription, never from the page directly.
               Two independent readings of the same handwriting would diverge, and nothing would
               say which was right.
-            </p>
-            <p>
+            </P>
+            <P id="modern-correct-as-it-stands">
               The modernised reading is the one that is allowed to depart from the page, and it is
               held to a different standard: <strong>correct as it stands</strong>. Where the
               manuscript is loose or elliptical it states what is true and footnotes what the page
               has. It carries no brackets and no page markers — it groups by argument rather than
               by sheet — so the facsimile stays put while it is open. Everything the apparatus
               carried is in its footnotes instead.
-            </p>
-            <h3>Uncertainty is marked, not resolved</h3>
-            <p>
+            </P>
+            <H3 id="uncertainty">Uncertainty is marked, not resolved</H3>
+            <P id="uncertainty-reconstructible">
               An unreadable word is <code>\ill&#123;&#125;</code>, a doubtful reading is{' '}
               <code>\uncertain&#123;…&#125;</code>, an editorial addition is bracketed. The rule
               is that a reader must be able to reconstruct which characters were on the page. A
               transcription that smooths over a gap has destroyed the only thing it was for.
-            </p>
-            <h3>Every page is anchored</h3>
-            <p>
+            </P>
+            <H3 id="page-anchors">Every page is anchored</H3>
+            <P id="page-anchors-turn-the-facsimile">
               The LaTeX marks each source page with <code>\page&#123;47&#125;</code>. That is what
               lets the reading view turn the facsimile as you scroll, and what lets a
               disagreement about a formula be settled by looking at one specific page rather than
               at a folder of six hundred.
-            </p>
-            <h3>Mathematics before prose</h3>
-            <p>
+            </P>
+            <H3 id="mathematics-first">Mathematics before prose</H3>
+            <P id="mathematics-first-prose-summarised">
               Where the two compete — a diagram crammed into a margin, a formula overwritten three
               times — the mathematics is transcribed and the surrounding prose is summarised, with
               the omission marked. The reverse is easy to produce and worthless.
-            </p>
+            </P>
           </div>
         </div>
 
@@ -151,9 +157,9 @@ export function MethodPage() {
         <Contributors />
 
         <section className="mt-14 max-w-[52em]">
-          <h2 className="titre text-[22px] text-ink-900">What this site does not claim</h2>
+          <H2 id="not-claimed">What this site does not claim</H2>
           <ul className="prose-fonds mt-3">
-            <li>
+            <LI id="not-claimed-observed-vs-declared">
               <strong>Most of the progress table is observed; the last step is claimed.</strong>{' '}
               Which files exist is a fact, read from the manifest: a transcribed batch shows as{' '}
               <em>drafted</em>, and one that also has a modernised reading shows as{' '}
@@ -163,23 +169,23 @@ export function MethodPage() {
               which is why <em>checked</em> is separate, stays a declaration kept in your browser,
               and means only what you meant by it. The site never claims a transcript is any good;
               only that it exists, and that a second pass has been over it.
-            </li>
-            <li>
+            </LI>
+            <LI id="not-claimed-our-groupings">
               <strong>Two of the four notebooks are our groupings.</strong> “Cahier de Topos” and
               “Cahiers tardifs” do not exist in the inventory; each says so at the head of its
               page. “Cahier de Motifs” and “La Longue Marche” reproduce inventory groups exactly.
-            </li>
-            <li>
+            </LI>
+            <LI id="not-claimed-authoritative">
               <strong>No transcription is authoritative.</strong> A machine pass over
               seventy-year-old handwriting produces a reading, checkable against the facsimile on
               the same screen. That is its whole value; it is not an edition.
-            </li>
-            <li>
+            </LI>
+            <LI id="not-claimed-whole-fonds">
               <strong>About 10,000 pages of the fonds are not here at all.</strong> Third-party
               correspondence cannot be circulated without permission, and the non-mathematical
               papers — the 1978 trial plea, the reflections — are under 5% of the fonds and not in
               open access.
-            </li>
+            </LI>
           </ul>
         </section>
       </main>
@@ -193,11 +199,11 @@ export function MethodPage() {
 function Progress4({ manifest }: { manifest: ReturnType<typeof useManifest> }) {
   return (
     <section className="mt-10">
-      <h2 className="titre text-[22px] text-ink-900">Where it stands</h2>
-      <p className="mt-2 max-w-[46em] text-[13.5px] leading-relaxed text-ink-600">
+      <H2 id="where-it-stands">Where it stands</H2>
+      <P id="where-it-stands-bars" className="mt-2 max-w-[46em] text-[13.5px] leading-relaxed text-ink-600">
         One bar per notebook. The grey portion is untouched, and the coloured portions are the
         states you have marked on the notebook pages.
-      </p>
+      </P>
 
       <ul className="mt-6 space-y-5">
         {BOOKS.map((b) => {
@@ -353,8 +359,8 @@ const CONTRIBUTORS: { name: string; url?: string; work: string }[] = [
 function Contributors() {
   return (
     <section className="mt-14 max-w-[52em]">
-      <h2 className="titre text-[22px] text-ink-900">Who did this work before us</h2>
-      <p className="prose-fonds mt-3">
+      <H2 id="before-us">Who did this work before us</H2>
+      <P id="before-us-use-theirs" className="prose-fonds mt-3">
         Large parts of the fonds have already been transcribed by hand, over decades, by people
         who knew the mathematics. Where their edition exists it is better than anything produced
         here and should be used instead — the{' '}
@@ -365,7 +371,7 @@ function Contributors() {
           archive page
         </a>{' '}
         marks which folders those are. This site is for the rest.
-      </p>
+      </P>
 
       <ul className="mt-6 space-y-4">
         {CONTRIBUTORS.map((c) => (
@@ -389,10 +395,10 @@ function Contributors() {
         ))}
       </ul>
 
-      <p className="mt-5 text-[12.5px] leading-relaxed text-ink-400">
+      <P id="before-us-incomplete" className="mt-5 text-[12.5px] leading-relaxed text-ink-400">
         Incomplete, and certainly unfair to people whose names are not published alongside the
         work they did. Corrections are welcome.
-      </p>
+      </P>
     </section>
   );
 }
@@ -449,8 +455,8 @@ function CostAndHorizon() {
 
   return (
     <section className="mt-14 max-w-[52em]">
-      <h2 className="titre text-[22px] text-ink-900">Cost, and the horizon</h2>
-      <p className="prose-fonds mt-3">
+      <H2 id="cost">Cost, and the horizon</H2>
+      <P id="cost-measured" className="prose-fonds mt-3">
         Two batches have been completed, both with Fable 5 on 8 August 2026: folder 115,
         fourteen pages, and folder 161-1, nineteen. Together they cost about{' '}
         <strong>{hoursDone.toFixed(1)} h</strong> of wall-clock and roughly{' '}
@@ -463,7 +469,7 @@ function CostAndHorizon() {
         below multiplies a per-batch average of two measurements, which is barely better than
         a sample of one; treat the ranges as a first anchor, to be corrected by the next
         batches.
-      </p>
+      </P>
 
       <div className="mt-5 overflow-x-auto">
         <table className="w-full border-collapse text-[13px]">
@@ -525,14 +531,14 @@ function CostAndHorizon() {
         </table>
       </div>
 
-      <p className="mt-4 text-[12.5px] leading-relaxed text-ink-500">
+      <P id="cost-caveats" className="mt-4 text-[12.5px] leading-relaxed text-ink-500">
         The upper bounds assume dense continuous prose — the Long March, not folder 115's
         formula-dominated pages. Hours are machine-pass wall-clock only: the human
         page-by-page check that turns <em>Drafted</em> into <em>Checked</em> is not in the
         table, and it is the slower half of the work. Folders already edited by the community
         (marked on the archive page) should be subtracted from any plan rather than
         re-transcribed.
-      </p>
+      </P>
     </section>
   );
 }
@@ -554,13 +560,13 @@ function Pipeline() {
   const box = 'fill-white stroke-[#e4e0d5]';
   return (
     <section className="mt-12 max-w-[52em]">
-      <h2 className="titre text-[22px] text-ink-900">The pipeline</h2>
-      <p className="prose-fonds mt-3">
+      <H2 id="pipeline">The pipeline</H2>
+      <P id="pipeline-two-skills" className="prose-fonds mt-3">
         Two skills, run in order, on one batch of twenty pages at a time. The modernised
         reading closes its résumé with a <code className="text-[13px]">\keywords{'{}'}</code>{' '}
         line — English search terms — which the manifest extracts as the folder's tags. The
         last step is the one no file can vouch for.
-      </p>
+      </P>
 
       <div className="card mt-5 overflow-x-auto px-4 py-5">
         <svg
@@ -717,14 +723,14 @@ function StatusSequence() {
 
   return (
     <section className="mt-12 max-w-[52em]">
-      <h2 className="titre text-[22px] text-ink-900">The six states</h2>
-      <p className="prose-fonds mt-3">
+      <H2 id="six-states">The six states</H2>
+      <P id="six-states-in-the-repository" className="prose-fonds mt-3">
         A batch moves through these in order. Nothing here can be changed from the browser: three
         of the six are read off the files themselves, and the other three are written in{' '}
         <code>transcripts/status.json</code>, in the repository, where a change is a diff somebody
         can review. A mark kept in a visitor's browser told them something nobody else could see,
         and told them nothing from a second machine.
-      </p>
+      </P>
 
       <div className="mt-5 overflow-x-auto">
         <table className="w-full border-collapse text-[13px]">
@@ -763,21 +769,21 @@ function StatusSequence() {
         </table>
       </div>
 
-      <p className="mt-4 text-[12.5px] leading-relaxed text-ink-500">
+      <P id="six-states-monotonic" className="mt-4 text-[12.5px] leading-relaxed text-ink-500">
         Evidence only ever moves a batch forward. A batch marked <em>checked</em> has been through
         a comparison the manifest cannot contradict, and one marked <em>skipped</em> records a
         decision that a file appearing later does not undo. <em>Drafted</em> and <em>reviewed</em>
         {' '}are never written down at all — they are read off the files, so they cannot go stale.
-      </p>
+      </P>
 
-      <p className="prose-fonds mt-4">
+      <P id="six-states-report" className="prose-fonds mt-4">
         The step from <em>AI-reviewed</em> to <em>checked</em> is a person reading against the
         pages, and readers are how it happens. Every folder that has been transcribed carries a{' '}
         <strong className="font-semibold text-ink-800">Report</strong> button, and so does every
         open batch, beside the source links — it opens an issue on the repository with the
         shelfmark, the batch and the page on screen already filled in. A disputed reading then
         sits in public, next to the file it disputes, which is what an apparatus is for.
-      </p>
+      </P>
     </section>
   );
 }

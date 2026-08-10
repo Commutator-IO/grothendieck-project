@@ -112,4 +112,41 @@
   .prose-fonds code {
     @apply rounded border border-ink-200 bg-ink-50 px-1 py-0.5 font-mono text-[0.86em] text-ink-800;
   }
+
+  /* A passage one can link to. The margin mark is positioned against this, and
+     the scroll offset clears the sticky header — without it, following a link
+     lands the paragraph underneath the header, which reads as a broken link. */
+  .anchored {
+    @apply relative scroll-mt-20;
+  }
+
+  /* Arriving on a link, one has to be shown *which* passage was meant: the
+     scroll position alone is ambiguous by a paragraph either way. The halo is
+     drawn with a spread shadow rather than padding, so marking a paragraph
+     does not move the ones below it. */
+  .anchored:target {
+    background-color: var(--color-brand-50);
+    border-radius: 2px;
+    box-shadow: 0 0 0 0.4rem var(--color-brand-50);
+  }
+
+  /* Out of the way until wanted. Forty-four marks showing at once would read as
+     decoration on a page that is mostly argument. */
+  .anchor-mark {
+    opacity: 0;
+  }
+
+  .anchored:hover > .anchor-mark,
+  .anchored:target > .anchor-mark,
+  .anchor-mark:focus-visible {
+    opacity: 1;
+  }
+
+  /* A touch screen has no hover to reveal them with, so there they stay
+     visible — faintly, which is the most a phone's 20px margin affords. */
+  @media (hover: none) {
+    .anchor-mark {
+      opacity: 0.45;
+    }
+  }
 }
