@@ -138,7 +138,11 @@ export function Footer() {
           This site neither hosts nor redistributes the fonds. It gives the inventory, and reads
           the files one has downloaded from Montpellier oneself.
         </p>
-        <p className="mt-4">
+        {/* The source on one side, whose site this is on the other. The arrow
+            marks a reference one leaves for; the way back to commutator.io
+            carries none, and opens in this tab, because it is a return rather
+            than a citation. */}
+        <p className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1">
           <a
             href="https://grothendieck.umontpellier.fr/"
             target="_blank"
@@ -147,6 +151,19 @@ export function Footer() {
           >
             grothendieck.umontpellier.fr ↗
           </a>
+          <span aria-hidden="true" className="text-ink-300">
+            ·
+          </span>
+          <span>
+            A{' '}
+            <a
+              href="https://www.commutator.io"
+              className="font-medium text-brand-600 underline decoration-brand-200 underline-offset-2 hover:text-brand-700"
+            >
+              Commutator
+            </a>{' '}
+            project
+          </span>
         </p>
       </div>
     </footer>
