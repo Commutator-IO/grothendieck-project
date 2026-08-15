@@ -97,8 +97,11 @@ export function MethodPage() {
             </P>
             <H3 id="microbatches">Microbatches, and why twenty</H3>
             <P id="why-twenty">
-              Each pass runs on <strong>Fable 5</strong>, in a fresh context, on one batch and
-              never two. The limit is not arbitrary: past roughly twenty handwritten pages the
+              Each pass runs on <strong>Fable 5</strong> — or, since August 2026 and for the
+              standing question of whether it reads a hard hand better, on{' '}
+              <strong>Opus 5</strong>; on nothing else, and the file's header says which — in a
+              fresh context, on one batch and never two. The limit is not arbitrary: past
+              roughly twenty handwritten pages the
               quality of machine reading degrades towards the end of the pass, and nothing in the
               output signals where it began to slip. A transcription whose weakening point is
               unknown cannot be used at all — so the batch is sized to keep page 18 read as
@@ -406,27 +409,39 @@ function Contributors() {
 /**
  * What one batch costs, measured, and what the whole job would cost, derived.
  *
- * Every number here traces to the one batch actually completed — folder 115,
- * 14 pages, transcribed with Fable 5 on 8 August 2026 — and says so. The site
- * cannot measure tokens or hours itself; these are declared figures from the
- * pilot, and the honest way to present a sample of one is as a sample of one:
- * the per-batch constants sit in this object so the next completed batch can
- * correct them in one place.
+ * These are no longer declared figures. Every assistant message in a pass
+ * records its own token usage, so summing them over the window of a pass is
+ * arithmetic rather than estimation, and the numbers below are read off the
+ * five batches actually completed — folders 115, 161-1 and the three of 135.
+ *
+ * What the measurement makes visible is the thing every estimate here missed
+ * by two orders of magnitude: almost nothing is *written*, almost everything
+ * is *re-read*. A pass holds twenty page images and its own growing draft in
+ * context and sends the lot again at every step, so a transcription that
+ * writes 230k tokens moves some 26M to produce them. The two are given apart
+ * because they price apart — cached context is billed at a fraction of fresh
+ * input, and output at several times it — and quoting one number for both is
+ * how the earlier figure came to be wrong.
  */
 const PILOT = {
-  /** Batches completed so far, by hand-count. */
-  batchesDone: 2,
-  /** The two steps cost very differently, and the split is the useful fact:
-      transcription reads page images — the whole batch at full page scale,
-      then dozens of high-resolution crops for the hard hands — while the
-      modernised reading works from the transcription's text alone. Figures
-      are per batch, averaged over the two batches done (folder 115 ran
-      lighter, folder 161-1 — nineteen dense pages — about twice as heavy). */
-  transcribe: { hoursPerBatch: 0.8, tokensPerBatchK: 145 },
-  modernize: { hoursPerBatch: 0.3, tokensPerBatchK: 30 },
+  /** Transcribed so far, by hand-count: 115#1, 161-1#1, and 135#1–3. */
+  batchesTranscribed: 5,
+  /** Of those, modernised: 115#1 and 161-1#1. */
+  batchesModernised: 2,
+  /** Per batch. `contextM` is every token the pass sent or received, cache
+      reads included; `writtenK` is output alone; hours are model-active time,
+      gaps over five minutes dropped. Transcription is the mean of the five
+      passes — the two most recent, folder 135's dense twenty-page batches,
+      ran heavier at 40M and 340k, and are the better guide for a hard hand.
+      Modernisation is one clean measurement (161-1, under the skill): it
+      works from the transcription's text alone and never opens an image,
+      which is the whole of the difference. */
+  transcribe: { hoursPerBatch: 0.3, contextM: 26, writtenK: 230 },
+  modernize: { hoursPerBatch: 0.15, contextM: 9, writtenK: 60 },
   /** Sum of the two steps — the scope table below multiplies this. */
-  hoursPerBatch: 1.1,
-  tokensPerBatchK: 175,
+  hoursPerBatch: 0.45,
+  contextM: 35,
+  writtenK: 290,
   /** Dense continuous prose (the Long March) will run slower and heavier
       than folder 115's formula-dominated pages; the range reflects that. */
   spread: 1.6,
@@ -440,35 +455,61 @@ function CostAndHorizon() {
   // The whole open-access fonds, not only the notebooks.
   const allBatches = COTES.reduce((s, c) => s + batchCount(c.pages), 0);
 
-  const hoursDone = PILOT.batchesDone * PILOT.hoursPerBatch;
-  const tokensDoneK = PILOT.batchesDone * PILOT.tokensPerBatchK;
+  const hoursDone =
+    PILOT.batchesTranscribed * PILOT.transcribe.hoursPerBatch +
+    PILOT.batchesModernised * PILOT.modernize.hoursPerBatch;
+  const contextDoneM =
+    PILOT.batchesTranscribed * PILOT.transcribe.contextM +
+    PILOT.batchesModernised * PILOT.modernize.contextM;
+  const writtenDoneK =
+    PILOT.batchesTranscribed * PILOT.transcribe.writtenK +
+    PILOT.batchesModernised * PILOT.modernize.writtenK;
 
   const est = (batches: number) => ({
     hoursLow: Math.round(batches * PILOT.hoursPerBatch),
     hoursHigh: Math.round(batches * PILOT.hoursPerBatch * PILOT.spread),
-    tokensLowM: (batches * PILOT.tokensPerBatchK) / 1000,
-    tokensHighM: (batches * PILOT.tokensPerBatchK * PILOT.spread) / 1000,
+    contextLowM: batches * PILOT.contextM,
+    contextHighM: batches * PILOT.contextM * PILOT.spread,
+    writtenLowM: (batches * PILOT.writtenK) / 1000,
+    writtenHighM: (batches * PILOT.writtenK * PILOT.spread) / 1000,
   });
   const books = est(bookBatches);
   const fonds = est(allBatches);
-  const fmtM = (m: number) => `${m >= 10 ? Math.round(m) : m.toFixed(1)} M`;
+  const fmtM = (m: number) => (m >= 1000 ? `${(m / 1000).toFixed(1)} B` : `${Math.round(m)} M`);
+  const fmtSmallM = (m: number) => `${m >= 10 ? Math.round(m) : m.toFixed(1)} M`;
 
   return (
     <section className="mt-14 max-w-[52em]">
       <H2 id="cost">Cost, and the horizon</H2>
       <P id="cost-measured" className="prose-fonds mt-3">
-        Two batches have been completed, both with Fable 5 on 8 August 2026: folder 115,
-        fourteen pages, and folder 161-1, nineteen. Together they cost about{' '}
-        <strong>{hoursDone.toFixed(1)} h</strong> of wall-clock and roughly{' '}
-        <strong>{tokensDoneK}k tokens</strong> in and out. The two steps are not comparable,
-        and the split is the useful number: transcription carries almost all of it, because
-        it reads page images — the batch at full page scale, then dozens of high-resolution
-        crops to settle a word — while the modernised reading works from the transcription's
-        text and costs a fraction as much. The second batch ran about twice the first:
-        nineteen dense pages against fourteen, and far more close-up reading. Everything
-        below multiplies a per-batch average of two measurements, which is barely better than
-        a sample of one; treat the ranges as a first anchor, to be corrected by the next
-        batches.
+        <strong>{PILOT.batchesTranscribed} batches</strong> have been transcribed — folder
+        115, fourteen pages; folder 161-1, nineteen; and the three batches of folder 135,
+        fifty-eight pages, which completes that folder — of which{' '}
+        <strong>{PILOT.batchesModernised}</strong> also have their modernised reading.
+        Together they took about <strong>{hoursDone.toFixed(1)} h</strong> of model-active
+        time, moved <strong>{fmtM(contextDoneM)} tokens</strong> of context and wrote{' '}
+        <strong>{fmtSmallM(writtenDoneK / 1000)}</strong>.
+      </P>
+      <P id="cost-context-vs-written" className="prose-fonds mt-3">
+        Those last two numbers are the same work counted twice, and keeping them apart is the
+        point. A pass holds twenty page images and its own growing draft in context and sends
+        the lot again at every step, so it <em>re-reads</em> roughly a hundred times what it{' '}
+        <em>writes</em>. Context is billed at a fraction of fresh input and output at several
+        times it, so the two columns below do not add up to anything and should not be added:
+        the left one says how big the job is, the right one says how much of it is the
+        document. An earlier version of this page quoted a single figure of 175k tokens per
+        batch. It was a declared estimate, never measured, and it was wrong by two orders of
+        magnitude — the numbers here are read off the session transcripts of the passes
+        themselves.
+      </P>
+      <P id="cost-split" className="prose-fonds mt-3">
+        The split between the two steps is the other useful fact: transcription carries
+        almost all of the cost, because it reads page images — the batch at full page scale,
+        then dozens of high-resolution crops to settle a word — while the modernised reading
+        works from the transcription's text and never opens an image. Folder 135's batches
+        ran heaviest, at about 40 M each: twenty dense pages, two hands, and a manuscript
+        half in English. Treat the ranges below as a first anchor, to be corrected by the
+        next batches.
       </P>
 
       <div className="mt-5 overflow-x-auto">
@@ -478,7 +519,8 @@ function CostAndHorizon() {
               <th className="py-2 pr-4">Scope</th>
               <th className="py-2 pr-4">Batches</th>
               <th className="py-2 pr-4">Hours</th>
-              <th className="py-2">Tokens</th>
+              <th className="py-2 pr-4">Context read</th>
+              <th className="py-2">Written</th>
             </tr>
           </thead>
           <tbody className="tabular text-ink-700">
@@ -491,7 +533,8 @@ function CostAndHorizon() {
               </td>
               <td className="py-2 pr-4 text-ink-400">1</td>
               <td className="py-2 pr-4">{PILOT.transcribe.hoursPerBatch} h</td>
-              <td className="py-2">{PILOT.transcribe.tokensPerBatchK}k</td>
+              <td className="py-2 pr-4">{PILOT.transcribe.contextM} M</td>
+              <td className="py-2">{PILOT.transcribe.writtenK}k</td>
             </tr>
             <tr className="border-b border-ink-100">
               <td className="py-2 pr-4 font-medium text-ink-900">
@@ -499,13 +542,20 @@ function CostAndHorizon() {
               </td>
               <td className="py-2 pr-4 text-ink-400">1</td>
               <td className="py-2 pr-4">{PILOT.modernize.hoursPerBatch} h</td>
-              <td className="py-2">{PILOT.modernize.tokensPerBatchK}k</td>
+              <td className="py-2 pr-4">{PILOT.modernize.contextM} M</td>
+              <td className="py-2">{PILOT.modernize.writtenK}k</td>
             </tr>
             <tr className="border-b border-ink-200">
-              <td className="py-2 pr-4 font-medium text-ink-900">Done so far, both steps</td>
-              <td className="py-2 pr-4">{PILOT.batchesDone}</td>
+              <td className="py-2 pr-4 font-medium text-ink-900">
+                Done so far
+                <span className="block text-[11.5px] font-normal text-ink-400">
+                  {PILOT.batchesTranscribed} transcribed, {PILOT.batchesModernised} modernised
+                </span>
+              </td>
+              <td className="py-2 pr-4">{PILOT.batchesTranscribed}</td>
               <td className="py-2 pr-4">{hoursDone.toFixed(1)} h</td>
-              <td className="py-2">{tokensDoneK}k</td>
+              <td className="py-2 pr-4">{fmtM(contextDoneM)}</td>
+              <td className="py-2">{fmtSmallM(writtenDoneK / 1000)}</td>
             </tr>
             <tr className="border-b border-ink-100">
               <td className="py-2 pr-4 font-medium text-ink-900">The five notebooks</td>
@@ -513,8 +563,11 @@ function CostAndHorizon() {
               <td className="py-2 pr-4">
                 {books.hoursLow}–{books.hoursHigh} h
               </td>
+              <td className="py-2 pr-4">
+                {fmtM(books.contextLowM)}–{fmtM(books.contextHighM)}
+              </td>
               <td className="py-2">
-                {fmtM(books.tokensLowM)}–{fmtM(books.tokensHighM)}
+                {fmtSmallM(books.writtenLowM)}–{fmtSmallM(books.writtenHighM)}
               </td>
             </tr>
             <tr>
@@ -523,8 +576,11 @@ function CostAndHorizon() {
               <td className="py-2 pr-4">
                 {fonds.hoursLow}–{fonds.hoursHigh} h
               </td>
+              <td className="py-2 pr-4">
+                {fmtM(fonds.contextLowM)}–{fmtM(fonds.contextHighM)}
+              </td>
               <td className="py-2">
-                {fmtM(fonds.tokensLowM)}–{fmtM(fonds.tokensHighM)}
+                {fmtSmallM(fonds.writtenLowM)}–{fmtSmallM(fonds.writtenHighM)}
               </td>
             </tr>
           </tbody>
@@ -533,11 +589,13 @@ function CostAndHorizon() {
 
       <P id="cost-caveats" className="mt-4 text-[12.5px] leading-relaxed text-ink-500">
         The upper bounds assume dense continuous prose — the Long March, not folder 115's
-        formula-dominated pages. Hours are machine-pass wall-clock only: the human
-        page-by-page check that turns <em>Drafted</em> into <em>Checked</em> is not in the
-        table, and it is the slower half of the work. Folders already edited by the community
-        (marked on the archive page) should be subtracted from any plan rather than
-        re-transcribed.
+        formula-dominated pages. Hours are model-active time, measured between consecutive
+        messages of a pass with gaps over five minutes dropped; the human page-by-page check
+        that turns <em>Drafted</em> into <em>Checked</em> is not in the table at all, and it
+        is the slower half of the work. Per-pass figures are read off conversation windows, so
+        each carries a little of the exchange around it — they are measurements with a margin,
+        not meter readings. Folders already edited by the community (marked on the archive
+        page) should be subtracted from any plan rather than re-transcribed.
       </P>
     </section>
   );

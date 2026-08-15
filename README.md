@@ -106,8 +106,11 @@ and git-ignored so a commit never can either.
 ## Transcription
 
 Two editions, one skill each, run in order — plus a third skill for the
-folder's tags. All installed under `.claude/skills/`, all pinned to Fable 5 so
-that a batch's provenance is a fact about the file rather than about whichever
+folder's tags. All installed under `.claude/skills/`. Modernisation and tagging
+pin Fable 5 in their frontmatter; transcription no longer does, so that Opus 5
+can be measured against it on a hard hand — it accepts those two models, refuses
+any other, and records in each file's header the one that read the pages, so
+that a batch's provenance stays a fact about the file rather than about whichever
 model happened to be selected:
 
 | Skill | Produces |
@@ -144,13 +147,18 @@ npm run manifest    # tell the site which files now exist
 The `.tex` under `transcripts/` is the source of record and the only thing
 versioned. HTML and PDF are derived, and rebuilt.
 
-**Two batches are done so far**, both under Fable 5 on 8 August 2026: folder
-115 (fourteen pages — functorial correspondences and the duality of topoi) and
+**Five batches are transcribed so far**, all under Fable 5: folder 115
+(fourteen pages — functorial correspondences and the duality of topoi) and
 folder 161-1 (nineteen pages — adjoint functors, the free symmetric monoidal
-category, theories, and a half-page sketch of Giraud's theorem). Neither has
-been checked page by page by a person. `/method/` prices the two steps
-separately: transcription carries almost all the cost, because it reads page
-images; the modernised reading works from text.
+category, theories, and a half-page sketch of Giraud's theorem) on 8 August
+2026, then the three batches of folder 135 (fifty-eight pages, the whole folder
+— Gr-categories, their classification by a class in $H^3$, and the Picard
+envelope; the last thirteen pages are a manuscript in English) on 9 and 15
+August. Two of the five also have their modernised reading: 161-1 under Fable 5,
+115 under Opus 5. None has been checked page by page by a person. `/method/`
+prices the two steps separately, from the passes themselves: transcription
+carries almost all the cost, because it reads page images; the modernised
+reading works from text.
 
 ### The critical apparatus is the point
 
