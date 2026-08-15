@@ -1,21 +1,41 @@
 ---
 name: transcribe-grothendieck
 description: Transcribes a batch of twenty handwritten pages from the Alexandre Grothendieck fonds (University of Montpellier) into clean, mathematics-focused LaTeX with a critical apparatus — what was read, what was guessed, what is illegible. Use whenever someone asks to transcribe, decipher, read or put into LaTeX any pages of Grothendieck's manuscripts, or names a folder, a batch, or one of the notebooks (topos, motifs, Longue Marche, cahiers tardifs). Transcription only — the modernised reading has its own skill, /modernize-grothendieck, which runs on the transcription this one produces. Also covers revisions — correcting a reading, filling a skipped page.
-model: claude-fable-5
 ---
 
 # Transcribing a batch from the Grothendieck fonds
 
 
-**Runs on Fable 5.** The frontmatter pins it, so invoking this skill switches
-the model for the turn whatever the session was set to.
+**Runs on Fable 5 or Opus 5, and on nothing else.** The frontmatter used to
+pin Fable 5, which made the choice automatic; the pin is gone so that Opus 5
+can be measured against it. What replaces it is a check you make yourself,
+before reading a single page:
 
-Reading seventy-year-old handwriting off fourteen page images at once is
-the task this whole project turns on, and it is a sustained-visual-attention
-task before it is a mathematical one. The pass is pinned to Fable 5 so that a
-transcription's provenance is a fact about the file rather than a fact about
-whichever model happened to be selected — every batch header records the model,
-and they should all record the same one.
+- **Fable 5 (`claude-fable-5`)** — the default, and what every batch in the
+  repository was produced with. Choose it unless there is a reason not to.
+- **Opus 5 (`claude-opus-5`)** — permitted, for the standing question of
+  whether it reads a hard hand better and at what cost.
+- **Anything else** — stop, say which model the session is on, and do not
+  transcribe. A pass on a model nobody chose produces a file whose provenance
+  is an accident, and the fonds is not the place to discover that later.
+
+Reading seventy-year-old handwriting off fourteen page images at once is the
+task this whole project turns on, and it is a sustained-visual-attention task
+before it is a mathematical one. That is why the model is worth naming rather
+than inheriting: **the header comment must record the model actually used**, in
+the form the existing files use — `% Pass: Opus 5 (claude-opus-5), <date> —
+first pass, unchecked against the pages by a human.` Report the model in the
+closing message too, so the choice is visible without opening the file.
+
+**Comparing the two.** A run made to compare models re-transcribes a batch that
+already has a transcription, and it must not overwrite it: work on a git branch
+(`git switch -c opus-135-2` before writing) so the two readings can be diffed
+and one of them discarded. Only a batch with no transcription yet is written
+straight to `main`. What such a comparison is for is a judgement of reading
+quality — disagreements over a doubtful word, an illegible passage one model
+guessed and the other flagged, a diagram one drew and the other described — set
+against what the pass cost. Say both, plainly, and do not declare a winner from
+a single batch.
 
 ## What this produces
 
@@ -54,11 +74,12 @@ this file and never from the manuscript.
 reading degrades towards the end of the pass with nothing to signal it, and a
 transcription whose weakening point is unknown cannot be used.
 
-**Run under Fable 5, one batch per conversation.** The pass lives or dies on
-sustained visual attention to fourteen-plus page images at once; a fresh
-context per batch is what keeps page 18 read as carefully as page 2. Note the
-model and the date in the file's header comment — a disputed reading years
-later needs to know what produced it.
+**One batch per conversation, under one of the two permitted models.** The pass
+lives or dies on sustained visual attention to fourteen-plus page images at
+once; a fresh context per batch is what keeps page 18 read as carefully as page
+2. Note the model and the date in the file's header comment — a disputed
+reading years later needs to know what produced it, and now that two models are
+allowed the header is the only place that says which one read the page.
 
 ## Before anything: what these pages are
 

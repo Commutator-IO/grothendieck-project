@@ -169,9 +169,11 @@ function Skills() {
         >
           Claude Code
         </a>
-        , and each pins <code>model: claude-fable-5</code> in its frontmatter, so a batch's
-        provenance is a fact about the file rather than about whichever model happened to be
-        selected that day.
+        . The modernisation and tagging skills pin <code>model: claude-fable-5</code> in their
+        frontmatter; transcription no longer does, so that Opus 5 can be measured against it —
+        it accepts those two models and refuses to run on any other, and every file records in
+        its header the model that produced it. Provenance is a fact about the file, not about
+        whichever model happened to be selected that day.
       </p>
 
       {/* Said here rather than left to the skills' own text: a contributor
