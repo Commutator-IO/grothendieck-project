@@ -299,6 +299,14 @@ function parseArrow(spec) {
       arrow.style = 'none';
       continue;
     }
+    // A broken shaft is the manuscript's way of saying "not yet constructed":
+    // in folder 151 the two arrows that close the van Kampen square are drawn
+    // as dotted lines, because they are precisely what the theorem is to
+    // supply. Drawn solid, the diagram would assert what the page is asking.
+    if (part === 'dashed' || part === 'dotted') {
+      arrow.dashed = true;
+      continue;
+    }
     // Positive bend curves to the left of the direction of travel, as in
     // tikz. Rim arcs drawn with matched bends are what lets a wheel of
     // functor categories read as the circle the manuscript draws.
@@ -946,6 +954,7 @@ function drawDiagram(cd) {
       l.setAttribute('y2', p2.y + ux * off);
       l.setAttribute('stroke', 'currentColor');
       l.setAttribute('stroke-width', '1');
+      if (a.dashed) l.setAttribute('stroke-dasharray', '3 3');
       svg.appendChild(l);
       return l;
     }
@@ -959,6 +968,7 @@ function drawDiagram(cd) {
       p.setAttribute('fill', 'none');
       p.setAttribute('stroke', 'currentColor');
       p.setAttribute('stroke-width', '1');
+      if (a.dashed) p.setAttribute('stroke-dasharray', '3 3');
       svg.appendChild(p);
       return p;
     }

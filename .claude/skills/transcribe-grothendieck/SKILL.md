@@ -303,6 +303,11 @@ asserts a commutation nobody wrote:
 - the styles `hook`, `hook'` (inclusions) and `Rightarrow`;
 - `no head`, for a line that is scaffolding rather than a functor — an axis,
   a radius. A head the page does not have asserts a morphism nobody wrote;
+- `dashed` (`dotted` is accepted as a synonym), for a shaft the page draws
+  broken. A dotted arrow is not decoration: it marks the arrow the argument
+  is *about to construct* — in folder 151 the two arrows closing the van
+  Kampen square are dotted, and drawn solid they would assert the very thing
+  the page is asking;
 - `bend left=N` / `bend right=N`, for arcs. Eight rim arcs at matching bends
   are what lets a wheel of functor categories close into the circle the
   manuscript draws instead of an octagon of chords.

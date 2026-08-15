@@ -1,0 +1,704 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 151, batch 2 (pages 21-40).
+% Established from the facsimile archives/batches/151/batch-02.pdf (a mirror of
+% https://grothendieck.umontpellier.fr/151.pdf), per the skill
+% transcribe-grothendieck.
+%
+% Page 25 is blank — absent. Every other page of the batch carries the
+% mathematics and is transcribed.
+%
+% The batch holds two pieces of writing. Pages 21-24 are numbered 4 to 7 by the
+% author in a circle at the head of the page: they continue, without a break,
+% the series numbered 1 to 3 that closed batch 1 (pages 16, 18, 19), and the
+% coordinate calculation of page 20 — d(x,y) = (x,y,y), rho^2 d(x,y) = (y,x,y) —
+% is resumed on page 21 in the same terms. Pages 26-40 are the text
+% « Structures stratifiées » itself, whose table of contents opened batch 1 on
+% page 1; it runs continuously, and the author numbers his sheets 1 to 8 at the
+% head of alternate archivist pages (26, 28, 30, 32, 34, 36, 38, 40), each sheet
+% being written on both sides. The batch stops mid-sentence at the foot of
+% page 40 — the text goes on into the next batch.
+%
+% Two diagrams, (8) and the first (23), draw the two arrows that close the
+% square as dotted lines: those arrows are what the van Kampen assertion is to
+% supply, and drawing them solid would assert what the page is asking. The
+% renderer's tikz-cd subset was extended with `dashed` in the same commit.
+%
+% On uncertainty: \uncertain{} marks a reading that carries mathematical weight
+% and that we do not hold to be sure; \ill marks what we do not read at all.
+% Function words whose sense is forced by the sentence — a « où », a « donc » —
+% are given plainly. The pages numbered 4 to 7 are working sheets, written over,
+% boxed and cancelled; there the notes say where we have compressed.
+%
+% The dating is the inventory's own and spans the group's range; the notes
+% themselves carry no date.
+%
+% Pass: Opus 5 (claude-opus-5), 2026-08-15 — first pass, unchecked against the pages by a human.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{151}
+\batch{2}
+\pages{21}{40}
+\dating{[à partir de 1981-à partir de 1990]}
+\watermark{Édition de démonstration}
+\foldertitle{Topos stratifié (1981) : notes manuscrites (s.d.).}
+
+\begin{document}
+
+\section*{Le système $X_1, X_2, X_3$ — suite}
+
+\note{Les quatre pages qui suivent sont numérotées 4 à 7 par l'auteur, dans un
+cercle en haut de page : elles poursuivent sans coupure la série numérotée 1 à
+3 du lot précédent. Ce sont des feuilles de travail, où les relations sont
+écrites, encadrées, biffées et reprises. Nous transcrivons les systèmes de
+relations et les phrases sans reproduire chaque reprise ; là où un fragment est
+recouvert au point de ne plus se lire, il est noté.}
+
+\page{21}
+\[
+  \mathfrak{S}_2 = \{1,\sigma\}, \qquad
+  \mathfrak{S}_3 = \{1,\rho,\rho^2,\sigma_1,\sigma_2,\sigma_3\},
+\]
+\[
+  \sigma_i^2 = 1, \qquad
+  \bigl[\ \rho^3 = 1, \quad
+  \rho\,\sigma_i\,\rho^{-1} = \sigma_{i+1} \quad (\sigma_4 = \sigma_1)\ \bigr].
+\]
+
+\begin{tikzcd}[column sep=large]
+X_1 & X_2 \arrow[r, "d", bend left=18] & X_3 \arrow[l, "p", bend left=18]
+\end{tikzcd}
+
+avec $X_1 = \{e_1\}$, $e_2 \in X_2$, $e_3 \in X_3$, et $\sigma e_2 = e_2$.
+
+Les opérations sont données en coordonnées :
+
+\[
+  d(x,y) = (x,y,y), \qquad
+  \rho\,d(x,y) = (y,y,x), \qquad
+  \rho^2 d(x,y) = (y,x,y),
+\]
+\[
+  p(x,y,z) = (x,y),
+\]
+\[
+  \rho(x,y,z) = (y,z,x), \qquad \rho^2(x,y,z) = (z,x,y),
+\]
+\[
+  \sigma_1(x,y,z) = (x,z,y), \qquad
+  \sigma_2(x,y,z) = (z,y,x), \qquad
+  \sigma_3(x,y,z) = (y,x,z).
+\]
+
+Les relations encadrées :
+
+\[
+  \boxed{p\,d = \mathrm{id}_{X_2}}, \qquad
+  \boxed{p\,\rho\,d = e}, \qquad
+  \boxed{p\,\rho^2 d = \sigma},
+\]
+\[
+  \boxed{\sigma_1 d = d}, \qquad \boxed{p\,\sigma_3 = \sigma\,p},
+\]
+
+où $e$ est l'application constante de valeur $e_2$.
+
+\note{La seconde relation encadrée ne s'accorde pas aux formules en
+coordonnées portées plus haut sur la même page : $p\rho d(x,y) = (y,y)$, qui
+n'est pas constant. Nous transcrivons l'une et l'autre telles quelles ; la
+page ne tranche pas.}
+
+\[
+  \mathfrak{S}_3 = \{1,\sigma_1\}\cdot\{1,\rho,\rho^2\}
+                 = \{1,\rho,\rho^2\}\cdot\{1,\sigma_1\}.
+\]
+
+$d(X_2) \subset X_3$, et l'on cherche quand deux éléments $\rho^i d(\xi)$ et
+$\rho^{i'} d(\xi')$ coïncident : cela revient à $i \equiv i' \pmod 3$ et
+$\xi = \xi'$, ou bien $\xi = \xi' = e_2$. Posant $d(\xi') = \rho^j d(\xi)$ :
+
+\[
+  \begin{cases}
+    \text{si } j = 0 : & \xi' = \xi \\
+    \text{si } j = 1 : & \xi' = p\,\rho\,d(\xi) = e_2 \\
+    \text{si } j = 2 : & \xi' = p\,\rho^2 d(\xi) = \sigma\xi
+  \end{cases}
+\]
+
+et dans le cas $j = 1$, $d(\xi') = d(e_2) = e_3$, donc
+$\xi = p\,d(\xi) = p\,e_3 = e_2$, donc $\xi = \xi' = e_2$. En regard :
+$d\sigma(\xi) = \rho^2 d(\xi)$, $d(\xi) = \rho\,d\sigma(\xi)$, d'où
+$\xi = p\,\rho\,d\sigma(\xi) = e_2$ et $\xi' = e_2$.
+
+\note{Cette discussion de cas occupe la moitié basse de la page, écrite deux
+fois, la seconde par-dessus la première, avec plusieurs lignes biffées ; nous
+donnons la chaîne complète et laissons les reprises. Un exposant de $\rho$ y
+est raturé au point de ne plus se lire.}
+
+\page{22}
+Ainsi, le sous-$\mathfrak{S}_3$-ens. $X'_3$ de $X_3$ engendré par $d(X_2)$ a
+une unique orbite à 1 élément, savoir $\{e_3\} = \{d\,e_2\}$, toutes les autres
+orbites sont d'ordre 3 (dans le \ill), et elles sont en corr. biunivoque avec
+les éléments de $X_2 \setminus \{e_2\} = X^{*}_2$. Comme
+$\mathfrak{S}_3$-ens. $X'_3$ s'écrit conséquemment
+
+\[
+  X'_3 \simeq \{e_3\} \amalg
+    \bigl(\mathfrak{S}_3 \wedge_{\{1,\sigma_1\}} X^{*}_2\bigr),
+\]
+
+où $\{1,\sigma_1\}$ opère trivialement sur $X^{*}_2$. On pose
+
+\[
+  X^{*}_3 \overset{\text{déf}}{=} X_3 \setminus
+    \underbrace{X'_3}_{\mathfrak{S}_3\cdot d(X_2)}
+\]
+
+comme $\mathfrak{S}_3$-ens., et l'application induite par $p$
+
+\begin{tikzcd}[column sep=large]
+X^{*}_3 \arrow[r, "p^{*} = p|X^{*}_3"] & X_2
+\end{tikzcd}
+
+satisfont à : $\boxed{p^{*}\sigma_3 = \sigma\,p^{*}}$.
+
+\marginal{\ill}
+
+\note{Le bas de la page gauche porte, écrit en diagonale sur cinq lignes, un
+paragraphe où reviennent $X'_3$ et un renvoi $(*)$ ; il est trop recouvert
+pour être lu et nous ne le devinons pas.}
+
+\[
+  X_3 \xrightarrow{\ (p,\,p\rho)\ } X_2 \times X_2 \quad \text{épi} :
+\]
+
+pour $\xi, \eta \in X_2$, $\exists\,\alpha \in X_3$ avec $p\alpha = \xi$,
+$p\rho\alpha = \eta$, où l'on note $p(x,y,z) = (x,y)$ et
+$p'(x,y,z) = (y,z) = p\rho(x,y,z)$.
+
+\page{23}
+« Quelle est la partie de $X_2 \times X_2$ qui provient de $X'_3$ ? »
+
+\begin{enumerate}
+  \item[a)] $(p,p\rho)(e_3) = (e_2,e_2)$
+  \item[b)] $\displaystyle (p,p\rho)\,\rho^i d(\xi) =
+    \begin{cases}
+      (\xi, e_2) & \text{si } i = 0 \\
+      (e_2, \sigma\xi) & \text{si } i = 1 \\
+      (\sigma\xi, \xi) & \text{si } i = 2
+    \end{cases}$
+    \quad $i \in \mathbb{Z}/3\mathbb{Z}$, $\xi \in X^{*}_2 = X_2\setminus\{e_2\}$.
+\end{enumerate}
+
+Donc on trouve les éléments de
+
+\[
+  \underbrace{(X_2 \times \{e_2\})}_{\Sigma_1} \cup
+  \underbrace{(\{e_2\} \times X_2)}_{\Sigma_2} \cup \Delta'
+\]
+
+où $\Delta'$ est l'image de $X_2 \xrightarrow{\ \delta'\ } X_2 \times X_2$,
+$\delta' = (\sigma, \mathrm{id}_{X_2})$.
+
+NB Cette partie $\Sigma$ de $X_2 \times X_2$ est la réunion des $\Sigma_1$,
+$\Sigma_2$, $\Delta'$, dont l'intersection deux à deux (et prise des trois) est
+égale à $\{(e_2,e_2)\}$.
+
+Quand est-ce qu'on a $\Sigma = X_2 \times X_2$ ? On a
+$X_2 \times X_2 \setminus (\Sigma_1 \cup \Sigma_2) = X^{*}_2 \times X^{*}_2$,
+donc il est \ill\ que $X^{*}_2 \to X^{*}_2 \times X^{*}_2$ soit surj., i.e. que
+pour $\xi, \eta \in X^{*}_2$, on ait tjs $\eta = \sigma\xi$. Cela signifie
+qu'on est dans l'un des 2 cas suivants :
+
+\begin{enumerate}
+  \item[a)] $X^{*}_2 = \varnothing$ i.e. $X_2 = \{e_2\}$
+  \item[b)] $X^{*}_2$ de cardinal 1 (donc $\sigma$ y opère trivialement)
+    \marginal{i.e. $X_2$ de cardinal 2 (et $\sigma$ y opère trivialement)}
+\end{enumerate}
+
+[Si $X^{*}_2$ est de cardinal $\geq 2$, alors s'il y a une seule orbite sous
+$\sigma$, celle-ci est de cardinal 2, et pour $\xi \in X^{*}_2$,
+$(\xi,\xi) \notin \mathrm{Im}\,\delta'$ i.e. $\xi \neq \sigma\xi$ ; ou s'il y a
+au moins deux orbites, on prend $\xi, \eta$ dans deux orbites différentes et on
+a bien $\eta \neq \sigma\xi$.]
+
+\page{24}
+Supposons donc $X_2$ de cardinal 2, et $X_3 = X'_3$
+\quad ($X_2 = \{e_2, \xi\}$), donc
+
+\[
+  X_3 = \{e_3\} \amalg \{d\xi,\ \rho\,d\xi,\ \rho^2 d\xi\}.
+\]
+
+Considérons les deux carrés, avec
+$\delta_1 = d = \bigl((x,y) \mapsto (x,y,y)\bigr)$ et
+$\delta_3 = \bigl((x,y) \mapsto (x,x,y)\bigr)$ :
+
+\begin{tikzcd}[column sep=small, row sep=small]
+X_3 \arrow[r, "\delta_1"] & X_2 \arrow[d, "\delta_0"] \\
+X_2 \arrow[u, "\delta_3"] \arrow[r, "\delta_0"'] & X_1 = \{e_1\}
+\end{tikzcd}
+\qquad
+\begin{tikzcd}[column sep=small, row sep=small]
+X_2 & X_3 \arrow[l, "p = \mathrm{pr}_2"'] \\
+X_1 = \{e_1\} \arrow[u, "\kappa_1"] & X_2 \arrow[l, "p_1"] \arrow[u, "\kappa'_2"']
+\end{tikzcd}
+
+sont-ils cartésiens ? On a $\delta_3(x,y) = (x,x,y)$, et
+$d\sigma(x,y) = d(y,x) = (y,x,x) = \rho^2\delta_3(x,y)$, i.e.
+
+\[
+  \delta_3 = \rho^{\ill}\,d\sigma .
+\]
+
+\note{L'exposant de $\rho$ est raturé et ne se lit plus. Les carrés sont
+étiquetés $(*)$ et $(**)$ dans la marge gauche.}
+
+Dans un cas où l'on suppose seulement $\mathrm{card}\,X_1 = 1$ i.e.
+$X_1 = \{e_1\}$ : quand a-t-on, pour $\xi, \xi' \in X_2$,
+$d(\xi) = \rho^{\ill}\,d\sigma(\xi')$ ? Si $\xi' = e_2$, alors
+$\xi = \xi'' = e_2$ et c'est bien le cas. Reste la question
+
+\[
+  p^{-1}(e_2) \overset{?}{=} \delta_3(X_2)
+    \quad \bigl[\ = \rho\,d\sigma(X_2) = \rho\,d(X_2)\ \bigr],
+\]
+
+l'inclusion $\supset$ étant acquise a priori, et $X_3 = X'_3
+\overset{\text{déf}}{=} \mathfrak{S}_3 \cdot d(X_2)$.
+
+$2^{\circ}$\ \ $\xi \in X'_3 \setminus \{e_3\}$ : il s'agit de prouver que
+$\xi \in \rho\,d(X_2)$. On a $p(\xi) = e_2$, et $\xi = \rho^i d(\eta)$ avec
+$\eta \in X^{*}_2$ et $i \in \{0,1,2\}$, et
+
+\[
+  p\xi = \begin{cases}
+    \eta \ (\neq e_2) & \text{si } i = 0 \\
+    \sigma\eta \ (\neq e_2) & \text{si } i = 2
+  \end{cases}
+\]
+
+donc $p\xi = e_2 \implies i = 1$, \emph{qed}.
+
+\note{La moitié basse de cette page est un enchaînement d'essais raturés qui
+reprennent trois fois la même vérification ; nous n'en gardons que la chaîne
+qui aboutit, celle que l'auteur clôt par « qed ».}
+
+\section*{Structures stratifiées}
+
+\note{Ce qui suit est le texte annoncé par le sommaire ouvrant le lot
+précédent. Il est d'une seule venue, et l'auteur numérote ses feuillets 1 à 8
+en haut de page : le numéro paraît une page sur deux, le verso poursuivant le
+recto sans le porter.}
+
+\page{26}
+\note{Feuillet 1 de l'auteur.}
+
+\textbf{Structures stratifiées.}
+
+1. La situation la plus élémentaire, en un sens qui apparaîtra, sera la
+suivante. On se donne des espaces (disons ! \ill\ en attendant qu'on se décide
+sur les topos \ldots)
+
+\[
+  (1) \qquad Y \hookrightarrow X
+\]
+
+$Y$ fermé dans $X$. On suppose que la « structure normale » de $X$ le long de
+$Y$ soit loc. triviale, i.e. que pour tout $y \in Y$, existe un voisinage
+ouvert $X'$ de $y$ et un espace $Z$ pointé par $z$, et un diagramme commutatif
+(2) (où $Y' = Y \cap X'$)
+
+\begin{tikzcd}[column sep=large]
+Y' \arrow[r, hook] \arrow[d, "\mathrm{can}\,\wr"'] & X' \arrow[d, "\wr"] \\
+Y'\times\{z\} \arrow[r, hook, "\mathrm{id}_{Y'} \times i_{z,Z}"'] & Y'\times Z
+\end{tikzcd}
+
+où $X' \simeq Y'\times Z$ est un homéomorphisme. On considère alors le
+voisinage tubulaire (« infinitésimal ») de $Y$ dans $X$, soit
+
+\[
+  (3) \qquad Y \hookrightarrow \mathcal{V}_{Y,X} \hookrightarrow X ,
+\]
+
+dont il faudra donner une définition \page{27} techniquement souple.
+
+Si $X$ est \struck{un espace} un espace paracompact, on pourra prendre (à titre
+provisoire !) pour $\mathcal{V}_{Y,X}$ le « germe d'espace » de $X$ autour de
+$Y$ — qui est \ill\ un topos, sav. la $\varprojlim$ topologique des voisinages
+ouverts de $Y$ dans $X$.
+
+Intuitivement, $\mathcal{V}_{Y,X} \hookrightarrow X$ a les propriétés d'un
+ouvert, et $Y \hookrightarrow \mathcal{V}_{Y,X}$ celles d'une immersion fermée,
+et (3) constitue une factorisation canonique de (1). L'hypothèse de locale
+trivialité normale implique (moyennant des conditions de « modération »
+ensemblistes) une équivalence d'homotopie
+
+\[
+  (4) \qquad Y \xrightarrow{\ \text{équiv. d'homotopie}\ } \mathcal{V}_{Y,X}.
+\]
+
+\marginal{L'intuition \ill\ $\mathcal{V}_{Y,X}$ et $Y$ \ill\ équivalents \ill\
+(indépendamment de \ill\ de locale trivialité).}
+
+Supposons \ill\ $Y$ et $X - Y = X^{*}$ \struck{des} variétés, et
+$Z^{*} = Z \setminus \{z\}$ une variété (moyennant des hyp. de modération,
+l'hyp. sur $Z$ devrait être une conséquence de la première hypothèse), alors
+que $z$ est un pt singulier de $Z$, i.e. $X$ est « singulier le long de $Y$ ».
+Il est naturel alors de vouloir reconstituer $X$ en termes des variétés $Y$ et
+$X^{*}$, \page{28} jouant le rôle de « pièces de construction »
+élémentaires. Ceci amène à introduire
+
+\[
+  (5) \qquad \mathcal{V}^{*}_{Y,X} \overset{\text{déf}}{=}
+    \mathcal{V}_{Y,X} \cap X^{*} = \mathcal{V}_{Y,X} \setminus Y
+    \qquad (X^{*} = X \setminus Y),
+\]
+
+et le diagramme (6)
+
+\begin{tikzcd}[column sep=large]
+\mathcal{V}^{*}_{Y,X} \arrow[r, "\text{bouchage de trous le long de } Y"] \arrow[d] & \mathcal{V}_{Y,X} \arrow[d] \\
+X^{*} \arrow[r] & X
+\end{tikzcd}
+
+Je vais regarder (indépendamment de toute hypothèse — de locale trivialité
+normale, — de lissité de $X^{*}$ et $Y$) $X$ comme obtenu par
+\emph{recollement} de $\mathcal{V}_{Y,X}$ et de $X^{*}$ suivant leur
+intersection $\mathcal{V}^{*}_{Y,X}$, ou (en termes plus techniques) comme la
+somme amalgamée, comme espace ou topos \uncertain{limite} du diagramme (7)
+
+\begin{tikzcd}[column sep=small, row sep=small]
+\mathcal{V}^{*}_{Y,X} \arrow[r, hook] \arrow[d] & \mathcal{V}_{Y,X} \\
+X^{*} &
+\end{tikzcd}
+
+\page{29}
+Si on dispose d'une théorie suffisamment souple des types d'homotopie, on
+devrait pouvoir en déduire le type d'homotopie de $X$ comme « somme
+amalgamée » des types d'homotopie des trois \struck{types} « \ill\ »
+$\mathcal{V}^{*}_{Y,X}$, $\mathcal{V}_{Y,X}$ et $X^{*}$ (dont les deux premiers
+sont des êtres « infinitésimaux »). Par exemple, on doit avoir pour les espaces
+déduits en « tuant les $\Pi_i$ pour $i \geq 2$ » — donc, essentiellement, pour
+les groupoïdes fondamentaux, un « théorème de van Kampen », qui s'exprime par
+le fait que le diagramme des groupoïdes fondamentaux (8)
+
+\begin{tikzcd}[column sep=large, nodes={font=\scriptsize}]
+\Pi_1\mathcal{V}^{*}_{Y,X} \arrow[r, "p"] \arrow[d, "i"'] & \Pi_1\mathcal{V}_{Y,X}\ (\simeq \Pi_1 Y) \arrow[d, dashed] \\
+\Pi_1 X^{*} \arrow[r, dashed] & (\Pi_1 X)
+\end{tikzcd}
+
+\note{Les deux flèches qui ferment ce carré sont pointillées sur la page, et
+les deux termes de droite mis entre parenthèses : c'est ce que l'énoncé de van
+Kampen doit fournir, non ce qu'on tient déjà.}
+
+\page{30}
+\note{Feuillet 3 de l'auteur.}
+
+est cocartésien — ou encore, si $Y$, $X$, $X^{*}$ sont connexes, et qu'on
+choisisse un « pt base » de $\Pi_1\mathcal{V}^{*}_{Y,X}$ (i.e. par définition,
+un rev. universel de $\mathcal{V}^{*}_{Y,X}$) (d'où pts bases de
+$\Pi_1\mathcal{V}_{Y,X}$, $\Pi_1 X^{*}$, $\Pi_1 X$), qu'on a un isom. can. des
+groupes fondamentaux
+
+\[
+  (9) \qquad \Pi_1(X) \simeq \Pi_1(X^{*})
+    \wedge_{\Pi_1\mathcal{V}^{*}_{Y,X}}
+    \underbrace{\Pi_1(\mathcal{V}_{Y,X})}_{\simeq\ \Pi_1(Y)} ,
+\]
+
+où $\Pi_1(\mathcal{V}_{Y,X})$ est isom. extérieurement à $\Pi_1(Y)$.
+
+Pour expliciter $\Pi_1(X)$ en termes des données « élémentaires » $\Pi_1(Y)$ et
+$\Pi_1(X^{*})$, il \uncertain{vaudrait} \struck{encore} à expliciter la
+structure de $\Pi_1(\mathcal{V}^{*}_{Y,X})$, qui s'envoie dans l'un et dans
+l'autre, donnant lieu justement au diagramme (10)
+
+\begin{tikzcd}[column sep=small, row sep=small]
+\Pi_1(\mathcal{V}^{*}_{Y,X}) \arrow[r] \arrow[d] & \Pi_1(Y) \\
+\Pi_1(X^{*}) &
+\end{tikzcd}
+
+\marginal{cette flèche définie mod. des choix \ill\ (pt base de $Y$ \ill).}
+
+qui exprime (8). C'est là que l'hypothèse \page{31} de
+\emph{locale trivialité normale} a un rôle à jouer (celle de lissité \ill\
+devenant techniquement inutile, son rôle était plutôt de nature heuristique
+\ldots). On doit se débrouiller, dans ce cas, pour démontrer que les propriétés
+homotopiques de l'inclusion
+$\mathcal{V}^{*}_{Y,X} \hookrightarrow \mathcal{V}_{Y,X}$ sont celles d'une
+\emph{fibration localement triviale de fibre $\mathcal{V}^{*}_{z,Z}$} :
+
+\[
+  (11) \qquad \mathcal{V}^{*}_{Y,X} \longrightarrow \mathcal{V}_{Y,X}
+\]
+
+est une « fibration homotopique » de fibre $\mathcal{V}^{*}_{z,X}$, de base
+$Y \xrightarrow{\ \simeq\ \text{homot.}\ } \mathcal{V}_{Y,X}$ — et c'est cela
+qui devrait servir, dans le contexte topologique (p. ex. celui des schémas sur
+le typ. étale) de \emph{définition} de la « locale trivialité normale » de
+l'inclusion $Y \hookrightarrow X$.
+
+\note{La fibre est écrite $\mathcal{V}^{*}_{z,Z}$ dans la phrase soulignée et
+$\mathcal{V}^{*}_{z,X}$ dans (11), deux lignes plus bas. Nous donnons chaque
+occurrence telle qu'elle est portée.}
+
+(Bien sûr, dans le contexte schématique, il faudra de plus travailler avec des
+\struck{types} \ill\ types d'homotopie profinis, et même « localiser » ces types
+d'homotopie \page{32} en l'un des nbs premiers qui sont distincts des
+caractéristiques résiduelles qui interviennent, \ill\ que dans ce contexte
+modifié on peut prouver des théorèmes qu'il faut \struck{de trivialité}, cf
+Artin-Mazur \ldots).
+
+On aura en particulier une suite exacte d'homotopie \struck{\ill}
+(choisissant un « pt base » dans un sens \ill\ de la fibre \ill\
+$\mathcal{V}^{*}_{z,Z}$) :
+
+\[
+  (12) \qquad \cdots \to \Pi_i(\mathcal{V}^{*}_{z,Z})
+    \to \Pi_i(\mathcal{V}^{*}_{Y,X}) \to \Pi_i(Y)
+    \to \Pi_{i-1}(\mathcal{V}^{*}_{z,Z}) \to \cdots ,
+\]
+
+qui nous intéressera surtout en basses dimensions (13)
+
+\begin{tikzcd}[column sep=small, row sep=small, nodes={font=\scriptsize}]
+\Pi_2(Y) \arrow[r] & \Pi_1(\mathcal{V}^{*}_{z,Z}) \arrow[r] & \Pi_1(\mathcal{V}^{*}_{Y,X}) \arrow[r] & \Pi_1(Y) \arrow[r] & \Pi_0(\mathcal{V}^{*}_{z,Z}) \arrow[d] \\
+& & & & \Pi_0(\mathcal{V}^{*}_{Y,X}) \arrow[d] \\
+& & & & \Pi_0(Y)
+\end{tikzcd}
+
+\note{Une accolade réunit sous (13) les termes
+$\Pi_1(\mathcal{V}^{*}_{Y,X}) \to \Pi_1(Y)$, avec la mention « qui intervient
+dans (10) ».}
+
+Si on suppose p. ex. que $z$ est \uncertain{déconnectant} vers $Z$ localement,
+i.e. que la « fibre » $\mathcal{V}^{*}_{z,Z}$ est connexe (ou encore, que $Y$
+est \uncertain{déconnectant} dans $X$ (loc.)), alors
+$\Pi_1(\mathcal{V}^{*}_{Y,X})$ est une \emph{extension} de $\Pi_1(Y)$ par un
+quotient de $\Pi_1(\mathcal{V}^{*}_{z,Z})$ \page{33} (savoir le quotient
+par l'image de $\Pi_2(Y)$), et $=$ par $\Pi_1(\mathcal{V}^{*}_{z,Z})$
+lui-même si $\Pi_2(Y)$ est nul.
+
+Si on suppose pour simplifier que
+$\Pi_2(Y) \to \Pi_1(\mathcal{V}^{*}_{z,Z})$ est nul, on trouve donc un
+diagramme (14) qui précise (10)
+
+\begin{tikzcd}[column sep=small, row sep=small, nodes={font=\scriptsize}]
+1 \arrow[r] & \Pi_1(\mathcal{V}^{*}_{z,Z}) \arrow[r] & \Pi_1(\mathcal{V}^{*}_{Y,X}) \arrow[r] \arrow[d] & \Pi_1(Y) \arrow[r] & 1 \\
+& & \Pi_1(X^{*}) & &
+\end{tikzcd}
+
+où la ligne horizontale est exacte.
+
+\note{Deux noms sont portés sous cette suite : « ($I$ ``inertie'') » sous
+$\Pi_1(\mathcal{V}^{*}_{z,Z})$, et « ($D$ ``décomposition'') » à droite de la
+flèche verticale. Nous rapportons la place qu'ils occupent sans décider à quel
+terme le second se rapporte.}
+
+Un cas intéressant est celui où les « pièces de construction » qui
+interviennent, savoir $Y$, $X^{*}$ et $\mathcal{V}^{*}_{z,Z}$, sont des espaces
+« $K(\pi,1)$ », i.e.
+
+\[
+  (15) \qquad \Pi_i(Y),\ \Pi_i(X^{*}),\ \Pi_i(\mathcal{V}^{*}_{z,Z})
+    \text{ nuls pour } i \geq 2 ,
+\]
+
+alors on en déduit qu'il en est de même pour $\mathcal{V}^{*}_{Y,X}$ (et bien
+sûr pour $\mathcal{V}_{Y,X} \simeq_{\text{homot.}} Y$).
+
+Si on a la « théorie souple des \emph{liens} des types d'homotopie » à laquelle
+je faisais \page{34} \note{Feuillet 5 de l'auteur.} allusion, on devrait
+pouvoir exprimer alors \emph{le type d'homotopie} de $X$ (et non seulement les
+$\Pi_i$) en termes du diagramme des groupoïdes 8, — ou, ce qui revient au
+même, du diagramme de groupes (10).
+
+En tout cas, il est clair (indépendamment de toute hypothèse de nullité de
+certains $\Pi_i$, ou de locale trivialité normale) comment reconstruire, en
+termes du diagramme 8, la catégorie $\mathfrak{F}$ dans la cat. des faisceaux
+sur $X$, \struck{dont} formée des $F$ tels que l'on ait
+
+\[
+  (16) \qquad F|X^{*} \text{ et } F|Y \text{ localement triviaux} ,
+\]
+
+Cette catégorie $\mathfrak{F}$ est équivalente en effet à celle des systèmes
+
+\[
+  (17) \qquad (E_{X^{*}},\ E_{Y,X}\,;\ \varphi)
+\]
+
+En regard de (17), et biffé : \struck{(en un rev. étale de $X^{*}$)}, le mot
+« étale » étant réécrit au-dessus.
+
+où $E_{X^{*}}$ est un système local sur $\Pi_1 X^{*}$, $E_{Y,X}$ un syst. local
+sur $\Pi_1\mathcal{V}_{Y,X}$ ($\simeq \Pi_1 Y$) (donc un rev. ét. de $Y$) et
+enfin un hom. de syst. locaux sur $\Pi_1\mathcal{V}^{*}_{Y,X}$
+
+\page{35}
+\[
+  (18) \qquad \varphi \colon p^{*}(E_{Y,X}) \longrightarrow i^{*}(E_{X^{*}}) .
+\]
+
+En termes des diagrammes de groupes
+
+(1\ill) Quand les trois groupoïdes composants de (8) sont connexes, i.e. $Y$,
+$X^{*}$ et $\mathcal{V}^{*}_{Y,X}$ connexes, on peut aussi redéfinir en
+considérant $E_{X^{*}}$ comme un ens. sur lequel $\Pi_1(X^{*})$ opère,
+$E_{Y,X}$ un ens. sur lequel $\Pi_1(Y)$ opère, et $p^{*}(E_{Y,X})$ et
+$i^{*}(E_{X^{*}})$ dans (18) comme étant ces mêmes ensembles, comme
+$\Pi_1(\mathcal{V}^{*}_{Y,X})$-ensembles par restriction des opérateurs.
+
+\marginal{NB dans \uncertain{(14)} \ill}
+
+\note{Une note de sept lignes, écrite en travers dans la marge gauche et
+numérotée (18 bis), y reprend $E_{Y,X}$, $E_{X^{*}}$, $\Pi_1(Y)$ et $I$ ; elle
+est trop recouverte pour être lue au-delà de ces termes.}
+
+Un cas particulièrement typique pour la géométrie algébrique, est celui où $X$
+est une surface top. et où $Y$ est réduit à un pt $a$, donc
+$\mathcal{V}_{Y,a} = D_a$, \emph{disque} (infinitésimal) (ouvert) de $a$, et
+$\mathcal{V}^{*}_{Y,a} = D^{*}_a$, disque épointé (inf.) autour de $a$, de
+sorte qu'on trouve le diagramme \page{36} (19)
+
+\begin{tikzcd}[column sep=small, row sep=small]
+D^{*}_a \arrow[r, hook, "\text{« bouchage de trou en } a\text{ »}"] \arrow[d] & D_a \\
+X^{*} = X \setminus \{a\} &
+\end{tikzcd}
+
+Ici le diagramme (10) se réduit à (20)
+
+\begin{tikzcd}[column sep=small, row sep=small]
+\mathbb{Z}_{a,X} \arrow[r] \arrow[d] & \{1\} \\
+\Pi_1(X^{*}) &
+\end{tikzcd}
+
+où $\mathbb{Z}_{a,X}$ ($\simeq \mathbb{Z}$) est le « module d'orientation » de
+$X$ en $a$, dont les deux gén. correspondent aux deux orientations de $X$ en
+$a$. L'homom. vertical de (20) est l'homom. qui définit la structure « locale
+en $a$ » du groupe fondamental $X^{*}$. Le cas le plus simple est celui où
+
+\[
+  (21) \qquad \begin{cases} X = \mathbb{C} \text{ plan complexe} \\ a = \{0\} \end{cases}
+\]
+
+d'où
+
+\begin{tikzcd}[column sep=small, row sep=small]
+D^{*}_0 \arrow[r] \arrow[d] & D_0 \\
+\mathbb{C}^{*} &
+\end{tikzcd}
+
+dont le produit avec lui-même un nb arbitraire de fois, donne les
+« modèles-types » des stratifications associées aux diviseurs à croisements
+normaux (dans les \page{37} domaines analytiques complexes).
+
+Ici $X = \mathbb{C}$ est topologiquement trivial, ce qui peut s'exprimer ainsi
+par le fait que son type d'homotopie est complètement décrit par celui des
+types $\mathfrak{F}$ des systèmes (17). En effet, on aura
+
+\[
+  (22) \qquad \mathfrak{F} \simeq \widehat{C}
+\]
+
+où $C$ est le cas qui est \marginal{où dans le diagramme (19)
+$D \Rightarrow \Pi_1(\mathcal{V}^{*}_{Y,X}) \simeq \Pi_1(X^{*})$ iso}
+défini comme la catégorie dont l'un des objets est l'unique \ill\ de (18), et
+dont les flèches sont, en plus des flèches de ces trois groupoïdes, les
+flèches d'un objet $a$ de $A = \Pi_1\mathcal{V}^{*}_{Y,X}$ vers un objet $b$
+de $B = \Pi_1(\mathcal{V}_{Y,X})$ ou de $C = \Pi_1(X^{*})$, définies comme
+étant les flèches
+
+\[
+  p^{*}(a) \longrightarrow b \ \text{ dans } B
+  \qquad (\text{resp. } i^{*}(a) \longrightarrow c \ \text{ dans } C).
+\]
+
+\note{Les deux premiers tiers de cette page sont recouverts de longues ratures
+horizontales et de deux traits obliques ; le texte que nous donnons est ce qui
+subsiste sous elles, et la phrase qui définit $C$ y est reprise deux fois. Nous
+ne reproduisons pas la première version, entièrement biffée.}
+
+Dans le cas \struck{actuel} présent, les groupoïdes $A$, $B$, $C$ et les
+morphismes entre eux \page{38} \note{Feuillet 7 de l'auteur.} où
+$I = D$ est le groupe des auto. de $a$, et où les seules autres flèches, à part
+les $\gamma \in D$ et l'identité de $b$, est une flèche $a \to b$ (de sorte que
+$b$ est objet final de $C$). Comme $C$ admet un objet final, $\widehat{C}$ est
+(comme aussi $\mathfrak{F}$) de type d'homotopie trivial, ce qui signifie bien
+que $\mathfrak{F}$ — le type d'homotopie de \ill\ $X = \mathbb{C}$.
+
+Prenons maintenant le cas où $X$ est le compactifié $\mathbb{P}^1_{\mathbb{C}}$
+de $\mathbb{C}$ par un pt à l'infini, disons
+
+\[
+  \begin{cases}
+    X = \mathbb{P}^1_{\mathbb{C}} \simeq S^2 \\
+    Y = \{\infty\} \\
+    X^{*} = \mathbb{C}
+  \end{cases}
+\]
+
+le diagramme (7) devient (23)
+
+\begin{tikzcd}[column sep=small, row sep=small]
+D^{*}_{\infty} \arrow[r, hook] \arrow[d] & D_{\infty} \arrow[d, dashed] \\
+\mathbb{C} \arrow[r, dashed] & \mathbb{P}^1_{\mathbb{C}} \simeq S^2
+\end{tikzcd}
+
+dont la somme amalgamée est $S^2$, dont le type d'homotopie n'a rien de
+trivial ! Le \struck{type} $\mathfrak{F}$ se décrit maintenant à l'aide du
+diagramme correspondant sur les $\Pi_1$, savoir \page{39} (23)
+
+\begin{tikzcd}[column sep=small, row sep=small]
+\mathbb{Z} \arrow[r] \arrow[d] & 1 \\
+1 &
+\end{tikzcd}
+
+\note{L'auteur donne à ce diagramme le numéro (23), déjà porté par celui de la
+page précédente.}
+
+on a maintenant une équivalence de types
+
+\[
+  \mathfrak{F} \simeq \widehat{C} ,
+\]
+
+où $C$ est la catégorie ${\cdot} \to {\cdot}$, qui a un objet final — donc
+$\mathfrak{F}$ est encore \emph{homotopiquement trivial}, alors que celle
+\ill\ $X$ \emph{ne l'est pas} ! Pourtant les pièces de construction
+$\{\infty\}$, $X^{*} \simeq \mathbb{C}$, et
+$\mathcal{V}^{*}_{z,Z} \simeq D^{*}_{\infty}$ sont bel et bien des $K(\pi,1)$ —
+(les deux premières sont contractiles !). Cela montre que le type
+$\mathfrak{F}$, qui en principe semblait « tenir compte » des $\Pi_1$ des
+« pièces de construction » $Y$, $X^{*}$, $\mathcal{V}^{*}_{Y,X}$ voisines, ne
+donne pas le type d'homotopie de $X$, même si les « morceaux » sont des
+$K(\pi,1)$ — en \uncertain{d'autres termes} le morphisme canonique
+
+\[
+  (24) \qquad X \longrightarrow \mathfrak{F}
+\]
+
+n'est pas une équivalence d'homotopie.
+
+\page{40}
+\note{Feuillet 8 de l'auteur.}
+
+J'avais craint un moment, par cet exemple, que le type \struck{\ill}
+d'homotopie de $X$ ne pouvait pas (sous les hypothèses $K(\pi,1)$ faites) se
+récupérer à partir de ceux de $X^{*}$, $Y$, $\mathcal{V}^{*}_{Y,X}$ et du
+diagramme (7), i.e. du diagramme (8) ou (10). Mais je me suis convaincu ensuite
+que cette crainte n'était pas fondée, ou si : le type $\mathfrak{F}$ n'est pas
+suffisant, lui, pour exprimer le type d'homotopie \ill.
+
+Essayons en effet, dans le cas qui nous occupe — le cas de la division
+cellulaire la plus simple de $S^2$, (qui est en même temps le cas le plus
+\struck{simple} élémentaire d'un diviseur sur une courbe alg.
+\uncertain{complexe} !) — de récupérer le $H^2(X, A)$ ($A$ un groupe abélien,
+disons) à partir du diagramme (23). J'interprète $H^2(X,A)$ comme classifiant
+les \emph{gerbes} sur $X$ liées par $A$ — et je constate que pour
+\struck{de telles} gerbes, sur des types \ill\ une théorie des « \ill\ »
+
+\note{Le texte s'arrête ici, au bas de la page, en milieu de phrase : il se
+poursuit sur le feuillet suivant, hors de ce lot.}
+
+\end{document}
