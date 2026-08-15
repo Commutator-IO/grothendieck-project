@@ -1,0 +1,836 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 151, batch 3 (pages 41-60).
+% Established from the facsimile archives/batches/151/batch-03.pdf (a mirror of
+% https://grothendieck.umontpellier.fr/151.pdf), per the skill
+% transcribe-grothendieck.
+%
+% Every one of the twenty pages carries the mathematics; none is skipped. The
+% text « Structures stratifiées » runs on without a break from batch 2, which
+% stopped mid-sentence at the foot of page 40; page 41 completes that sentence.
+% The author numbers his sheets 9 to 18 at the head of the odd archivist pages
+% (42, 44, 46, ..., 60), each sheet written on both sides — the continuation of
+% the series 1 to 8 that batch 2 carried.
+%
+% The batch contains three movements. Pages 41-43 close the discussion of
+% gerbes on the sphere begun in batch 2 and end on the programme this whole
+% text serves: the homotopy type of a stratified space whose pieces are
+% K(pi,1)'s. Pages 44-55 are section 2, « Stratifications globales :
+% formalisme 1/2 simplicial (sans tubes) », which builds the semi-simplicial
+% space X_{Delta_*} attached to a locally finite family of closed subspaces
+% and asks when X can be recovered from it. Pages 56-60 open section 3,
+% « Stratifications globales : introduction des tubes », whose equation
+% numbering restarts at (1).
+%
+% The author writes « 1/2 simplicial » as a fraction on pages 44, 47 and 50,
+% and spells « semi-simpliciale » out on pages 48 and 55; both are kept as
+% written. He also writes « Quand aux » for « Quant aux » on page 49 — kept,
+% unflagged, since it is orthography and not mathematics.
+%
+% On uncertainty: \uncertain{} marks a reading that carries mathematical weight
+% and that we do not hold to be sure; \ill marks what we do not read at all.
+% Function words whose sense is forced by the sentence — a « où », a « donc » —
+% are given plainly. Pages 54 and 58 carry long marginal notes written
+% diagonally, several times reworked; we give what reads and say so. Pages 58
+% and 60 are written over so heavily in places that we transcribe the skeleton
+% of the argument and mark the compression.
+%
+% The dating is the inventory's own and spans the group's range; the notes
+% themselves carry no date.
+%
+% Pass: Opus 5 (claude-opus-5), 2026-08-15 — first pass, unchecked against the pages by a human.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{151}
+\batch{3}
+\pages{41}{60}
+\dating{[à partir de 1981-à partir de 1990]}
+\watermark{Édition de démonstration}
+\foldertitle{Topos stratifié (1981) : notes manuscrites (s.d.).}
+
+\begin{document}
+
+\section*{Gerbes sur une somme amalgamée — fin}
+
+\page{41}
+\ldots uns « évidents », qui ici dit que la donnée d'une gerbe $\mathcal{G}_X$
+sur $X$ revient : celle des gerbes $\mathcal{G}_{X^{*}}$ sur $X^{*}$ et
+$\mathcal{G}_{Y,X}$ sur $\mathcal{V}_{Y,X}$, et d'une \struck{iso.}
+équivalence de \struck{telles} gerbes
+
+\[
+  (24) \qquad
+  \mathcal{G}_{Y,X}\bigl|\,\mathcal{V}^{*}_{Y,X}
+  \;\simeq\;
+  \mathcal{G}_{X^{*}}\bigl|\,\mathcal{V}^{*}_{Y,X} .
+\]
+
+Or sur un $K(\pi,1)$, une $A$-gerbe s'interprète canoniquement comme une
+extension de $\pi$ par $A$. Donc la donnée d'une gerbe sur $X$
+\struck{$S^{2}$} revient : celle \struck{\ill} de deux extensions, l'une de
+$\pi_1(Y)$ par $A$, l'autre de $\pi_1(X^{*})$ par $A$, et d'un isom. entre les
+deux extensions de $D$ par $A$ qui s'en déduisent \ill\ (une description
+modulo \ill\ que les « pièces » $Y$, $X^{*}$, $\mathcal{V}^{*}_{Y,X}$ sont
+connexes, et que leur $\pi_2$ est nul).
+
+\marginal{$D \to \pi_1(Y)$, $D \to \pi_1(X^{*})$.}
+
+\page{42}
+Dans le cas élémentaire de $S^{2}$ \add{de (23)}, on trouve donc que la donnée
+d'une gerbe sur $S^{2}$ équivaut : celle d'un automorphisme de l'extension
+triviale de $\mathbb{Z}$ par $A$, donc : un élément de
+$\mathrm{Hom}(\mathbb{Z}, A) \simeq A$, d'où la valeur correcte
+
+\[
+  (25) \qquad H^{2}(S^{2}, A) \;\simeq\; A ,
+\]
+
+un magnifique succès ! Sans aller plus loin dans \struck{des} les
+vérifications, c'est un \ill\ que l'intuition qu'il y a une théorie des
+\struck{limites inductives} $\varinjlim$ de types d'homotopie (ou un
+théorème ; le cas \uncertain{Kampen}, disant que le type d'homotopie d'une
+$\varinjlim$ de topos (topos « usuels ») est la $\varinjlim$ des types
+d'homotopie), est bien correcte. En principe, pour
+
+\page{43}
+des « espaces stratifiés » (en un sens qui va être précisé plus bas) dont les
+« pièces » sont des $K(\pi,1)$, tels les espaces modulaires de Teichmüller et
+leurs compactifiés, et leurs sous-espaces et voisinages tubulaires \ill,
+qu'on peut leur \uncertain{associer} \uncertain{quasi} : leur stratification
+canonique, le type d'homotopie doit pouvoir s'exprimer en termes d'un système
+inductif convenable (le plus souvent : ens. d'indices fini) de groupoïdes
+fondamentaux des dites pièces.
+
+Il me semble d'ailleurs, réflexion faite, que cette théorie « d'intégration »
+des types d'homotopie, que naguère je voyais comme un lien au grand yoga des
+relations entre structures homotopiques (ou catégories, sur un topos disons)
+et les \ill\ groupoïdes, est en fait relativement triviale, et justiciable
+sans doute de techniques d'explicitation des plus standard. Je me réserve d'y
+revenir là-dessus par la suite.
+
+\section*{2. Stratifications globales : formalisme $\tfrac{1}{2}$ simplicial (sans tubes)}
+
+\page{44}
+Pour simplifier, je vais me placer sur un espace topologique $X$ — par la
+suite $X$ deviendra un topos quelconque. Les constructions qui suivent,
+relatives à une « stratification globale », seront « faisceautisées » sur $X$
+par le \uncertain{lecteur}, de la façon habituelle — ce qui amènera \add{alors}
+à imposer des conditions supplémentaires de connexité et de locale connexité,
+qui pour le moment ne sont pas nécessaires. De même, il n'y a pas lieu pour le
+moment de s'encombrer d'hypothèses de locale trivialité usuelle des
+plongements d'espaces.
+
+Soit $I$ un ensemble ordonné, \struck{\ill}
+
+\[
+  (1) \qquad (X_i)_{i \in I}, \qquad X_i \subset X
+\]
+
+une famille de \struck{parties} sous-espaces de $X$. On suppose
+
+\[
+  (1') \qquad
+  \begin{cases}
+    \text{a) Les } X_i \text{ fermés, la famille } (X_i) \text{ localement finie.} \\
+    \text{b) } i \leq j \implies X_i \subset X_j .
+  \end{cases}
+\]
+
+Posant
+
+\[
+  (2) \qquad
+  X_{\Delta_0} \;=\; \coprod_{i \in I} X_i
+  \;=\; \bigl\{ (x,i) \in X \times I \ \big|\ x \in X_i \bigr\}
+\]
+
+on a un morphisme canonique
+
+\page{45}
+\[
+  (3) \qquad X_{\Delta_0} \longrightarrow X
+\]
+
+et l'hypothèse a) signifie que ce morphisme \struck{\ill} est \emph{fini} —
+i.e. propre séparé et à fibres finies. C'est aussi une immersion locale.
+
+On introduit une partie fermée
+
+\[
+  (4) \qquad
+  X_{\Delta_1} \;\subset\; X_{\Delta_0} \times X_{\Delta_0}
+  \;=\; \coprod_{(i,j) \in I \times I} X_i \times X_j ,
+\]
+\[
+  \phantom{(4)} \qquad
+  X_{\Delta_1} \underset{\text{déf}}{=} \coprod_{i \leq j} \Gamma_{i,j}
+\]
+
+\[
+  (5) \qquad
+  \Gamma_{ij} \subset X_i \times X_j \quad
+  \text{« graphe de l'inclusion } X_i \hookrightarrow X_j \text{ ».}
+\]
+
+On voit alors que les deux projections du diagramme (6)
+
+\begin{tikzcd}[column sep=large, row sep=small]
+& X_{\Delta_1} \arrow[dl, "\sigma"'] \arrow[dr, "b"] & \\
+X_{\Delta_0} & & X_{\Delta_0}
+\end{tikzcd}
+
+ont respectivement les propriétés suivantes :
+
+\[
+  (7) \qquad
+  \begin{cases}
+    \text{a) } X_{\Delta_1} \xrightarrow{\ \sigma\ } X_{\Delta_0}
+      \text{ est un revêtement étale} \\
+    \qquad (\text{sur chaque pièce } X_i)
+      \text{ — en fait constant,} \\
+    \qquad \text{de fibre égale à } I_i = \{ j \in I \mid j \geq i \}, \\
+    \qquad \text{donc rev. fini si les } I_i \text{ sont finis} \\
+    \text{b) } X_{\Delta_1} \xrightarrow{\ b\ } X_{\Delta_0}
+      \text{ est une immersion locale.}
+  \end{cases}
+\]
+
+\page{46}
+Par ailleurs $X_{\Delta_1}$ est le graphe d'une relation d'ordre sur
+$X_{\Delta_0} = \{ (x,i) \in X \times I \mid x \in X_i \}$, avec
+
+\[
+  (8) \qquad (x,i) \leq (y,j) \iff x = y, \quad i \leq j
+\]
+
+i.e. c'est la relation d'ordre induite par l'ordre produit de $X \times I$,
+$X$ étant \struck{\ill} muni de l'ordre discret. Par suite, le couple
+$\bigl( X_{\Delta_0},\ X_{\Delta_1} \subset X_{\Delta_0} \times X_{\Delta_0}
+\bigr)$ peut être regardé comme un « objet ordonné de la catégorie des espaces
+topologiques » — d'où une catégorie dans la catégorie des espaces
+topologiques, ayant $X_{\Delta_0}$ comme objet des objets, $X_{\Delta_1}$
+comme objet des flèches, $\sigma$ et $b$ de (6) comme morphismes source et
+but, et la composition des flèches étant le morphisme (9)
+
+\begin{tikzcd}[column sep=large, row sep=small, nodes={font=\scriptsize}]
+X_{\Delta_2} \underset{\text{déf}}{=} (X_{\Delta_1}, b) \times_{X_{\Delta_0}} (X_{\Delta_1}, \sigma) \arrow[r] \arrow[d, hook] & X_{\Delta_1} \arrow[d, hook] \\
+X_{\Delta_0} \times X_{\Delta_0} \times X_{\Delta_0} & X_{\Delta_0} \times X_{\Delta_0}
+\end{tikzcd}
+
+induit par la projection $(x,y,z) \mapsto (x,z)$. Plus généralement, on
+introduit en
+
+\page{47}
+termes de (6) les produits fibrés multiples de $X_{\Delta_1}$ sur
+$X_{\Delta_0}$, pour $r \in \mathbb{N}$
+
+\[
+  (10) \qquad
+  \begin{cases}
+    X_{\Delta_r} = \bigl\{ (x_0, \ldots, x_r) \in X_{\Delta_0}^{\,r+1}
+      \ \big|\ x_0 \leq \cdots x_r \bigr\} \\[2pt]
+    \phantom{X_{\Delta_r}} \simeq \bigl\{ (x, i_0, \ldots, i_r)
+      \in X \times I^{\,r+1} \ \big| \\
+    \qquad\qquad x \in X_{i_0},\ i_0 \leq \cdots \leq i_r \bigr\} \\[2pt]
+    \phantom{X_{\Delta_r}} \simeq \coprod_{i_{*} \in I(\Delta_r)} X_{i_{*}} \\[2pt]
+    \phantom{X_{\Delta_r}} \simeq \coprod_{i_0 \in I} X_{i_0} \times I_i(\Delta_{r-1})
+  \end{cases}
+\]
+
+où
+
+\[
+  (11) \qquad
+  \begin{cases}
+    I(\Delta_r) = \mathrm{Hom}_{\text{ens. ord.}}(\Delta_r, I) \\[2pt]
+    X_{i_{*}} = X_{i_0, i_1, \ldots, i_r} \underset{\text{déf}}{=} X_{i_0}
+      \quad \text{si } i_{*} \in I(\Delta_r) .
+  \end{cases}
+\]
+
+\marginal{$I(\Delta_r)$ : ens. des drapeaux de longueur $r$ de $I$.}
+
+Donc on peut considérer, soit
+$X_{\Delta_r} \subset X_{\Delta_0}^{\,r+1}$, soit
+$X_{\Delta_r} \subset X \times I^{\,r+1}$.
+
+L'homomorphisme « de composition » (9) permet alors, de façon bien connue, de
+considérer les $X_{\Delta_r}$ comme étant les composantes d'un espace
+$\tfrac{1}{2}$ simplicial
+
+\[
+  (12) \qquad X_{\Delta_{*}} = (X_{\Delta_r})_{r \geq 0}
+\]
+
+d'où l'application $\tfrac{1}{2}$ simpliciale
+
+\[
+  (13) \qquad \alpha^{*} : X_{\Delta_r} \longrightarrow X_{\Delta_{r'}}
+\]
+
+associée à une application croissante
+
+\page{48}
+\[
+  (14) \qquad \alpha : \Delta_{r'} \longrightarrow \Delta_r
+\]
+
+est donnée par
+
+\[
+  \alpha^{*}(x, i_{*}) = \bigl( x,\ \alpha^{*}(i_{*}) \bigr),
+  \qquad \alpha^{*}(i_{*}) \underset{\text{déf}}{=} i_{*} \circ \alpha
+\]
+
+i.e. elle est induite par la structure semi-simpliciale produit dans le
+deuxième membre de
+
+\[
+  (15) \qquad X_{\Delta_{*}} \subset X \times I_{\Delta_{*}} .
+\]
+
+\textbf{Remarques.} a) Toutes ces constructions se généralisent \ill\ où on
+remplacerait \add{l'ens. ordonné} $I$ par une catégorie $\mathcal{C}$, et
+l'application $X \mapsto X_i$ par un foncteur $\mathcal{C} \to$ catégorie des
+parties fermées de $X$ et de leurs inclusions.
+
+b) Si on part d'une famille $(X_i)_{i \in I}$, \add{$I$ un ens.} sans plus, on
+peut introduire ad hoc une relation d'ordre dans $I$ par \struck{\ill}
+
+\[
+  i \leq j \iff X_i \subseteq X_j .
+\]
+
+Mais dans la présentation adoptée, il n'est pas nécessaire de supposer que
+\add{(l'appl. croissante)} $I \to$ ens. des parties fermées de $X$ soit
+injective, et encore moins que ce soit un plongement d'ens. ordonnés, i.e. que
+l'on ait
+
+\[
+  X_i \subseteq X_j \implies i \leq j
+\]
+
+qui est une réciproque de (1' b)).
+
+\page{49}
+On a
+
+\[
+  (16) \qquad
+  \begin{cases}
+    \text{a) si } \alpha : \Delta_{r'} \to \Delta_r
+      \text{ est tel que } \alpha(0) = 0, \text{ alors} \\
+    \qquad X_{\Delta_r} \xrightarrow{\ \alpha^{*}\ } X_{\Delta_{r'}}
+      \text{ est un morphisme de rev. étale} \\
+    \qquad \text{(en particulier } X_{\Delta_r} \to X_{\Delta_0}, \\
+    \qquad\quad (x_0, \ldots, x_r) \mapsto x_0
+      \text{ ou } (x, i_0, \ldots, i_r) \mapsto x, \\
+    \qquad\quad \text{est un morphisme de rev. étale).}
+  \end{cases}
+\]
+
+En fait, la \struck{fibre de} restriction de $X_{\Delta_r}$ au dessus du
+composant $X_{i'_{*}}$ (de $X_{\Delta_{r'}}$), où
+$i'_{*} = \{ i'_0 \leq \cdots \leq i'_{r'} \}$, \struck{\ill} s'identifie à un
+rev. étale constant, de fibre type l'ens. des drapeaux $i_{*}$ de $I$, de type
+$\Delta_r$, qui s'envoient sur $i'_{*}$ par $\alpha^{*}$ :
+
+\[
+  (17) \qquad
+  \alpha^{*-1}\bigl(
+    \underbrace{X_{i'_{*}}}_{\textstyle = X_{i'_0} \times \{i'_{*}\}}
+  \bigr)
+  \;\simeq\;
+  X_{i'_{*}} \times
+  \bigl\{ i_{*} \in I_{\Delta_r} \ \big|\ \alpha^{*}(i_{*}) = i'_{*} \bigr\} .
+\]
+
+Quand aux applications semi-simpliciales générales (13) (sans condition
+$\alpha(0) = 0$ sur $\alpha$) on peut dire seulement qu'elles sont des immer.
+locales. En fait, tous les $X_{\Delta_r}$ sont au dessus de $X$,
+\uncertain{dont}
+
+\[
+  (18) \qquad X_{\Delta_r} \longrightarrow X \quad \text{imm. locale.}
+\]
+
+\page{50}
+\textbf{NB} On aurait intérêt à éliminer les \struck{\ill} « redondances », en
+se bornant dans la définition de $X_{\Delta_r} \subset X \times I_{\Delta_r}$
+aux drapeaux « non dégénérés » \struck{de} $\subseteq I_{\Delta_r}$, i.e. aux
+suites strictement croissantes. Cela oblige alors à se restreindre aux
+\add{appl.} $\tfrac{1}{2}$ simpliciales relatives : \struck{des}
+$\alpha : \Delta_{r'} \to \Delta_r$ qui sont strictement croissants. La
+définition de $X_{\Delta_0}$ n'est pas changée, tandis que $X_{\Delta_1}$ se
+trouve remplacé par $X'_{\Delta_1}$ disjoint de
+$X_{\Delta_0} \times X_{\Delta_0}$.
+
+\medskip
+
+\textbf{Reconstitution de $X$ à partir du syst. $\tfrac{1}{2}$ simplicial
+$X_{\Delta_{*}}$.} Considérons d'abord le diagramme (19)
+
+\begin{tikzcd}[column sep=small, row sep=small]
+& X_{\Delta_1} \arrow[dl, "\sigma"'] \arrow[dr, "b"] & \\
+X_{\Delta_0} \arrow[dr, dashed] & & X_{\Delta_0} \arrow[dl, dashed] \\
+& X &
+\end{tikzcd}
+
+je voudrais qu'il soit cocartésien, i.e. qu'on récupère $X$ comme une somme
+amalgamée
+
+\[
+  (20) \qquad X \;\simeq\; X_{\Delta_0} \amalg_{X_{\Delta_1}} X_{\Delta_0} .
+\]
+
+\page{51}
+Pour ceci, il faut supposer, en plus des conditions a) b) de (1'), les
+conditions
+
+\[
+  (21) \qquad
+  \begin{cases}
+    \text{c) } X = \bigcup X_i \\[2pt]
+    \text{d) } \forall (i,j) \in I \times I, \ \text{on a}\ \
+      X_i \cap X_j = \bigcup_{\substack{k \in I \\ k \leq i,\ k \leq j}} X_k ,
+  \end{cases}
+\]
+
+qui \uncertain{expriment} trivialement la relation (20), \struck{\ill} de
+façon « formelle » :
+
+\medskip
+
+\textbf{Proposition.} Sous les conditions a) b) c) d) de (1')(21),
+l'application canonique
+
+\[
+  (22) \qquad
+  \varinjlim X_{\Delta_{*}}
+  \ \bigl( X_{\Delta_0} \leftleftarrows X_{\Delta_1} \Lleftarrow X_{\Delta_2} \cdots \bigr)
+  \ \xrightarrow{\ \sim\ } \ X
+\]
+
+est un homéomorphisme.
+
+\medskip
+
+Cette proposition est valable aussi sur les deux variantes (drapeaux
+quelconques, ou \struck{dé}généré\struck{s}) pour les \struck{espaces de}
+drapeaux $X_{\Delta_r}$.
+
+\medskip
+
+\textbf{Corollaire.} Soit
+$\bigl( X_{\Delta_0},\ X_{\Delta_1} \subset X_{\Delta_0} \times X_{\Delta_0}
+\bigr)$ un espace topologique ordonné, \struck{\ill}
+
+\note{La fin de l'énoncé du corollaire est entièrement recouverte de ratures
+et de reprises ; l'hypothèse est reprise au propre en tête de la page
+suivante, sous le numéro (23), et c'est cette rédaction-là que nous
+transcrivons.}
+
+\page{52}
+On suppose
+
+\[
+  (23) \qquad
+  \begin{cases}
+    \text{a) } X_{\Delta_1} \text{ est un sous-espace top. fermé} \\
+    \qquad \text{de } X_{\Delta_0} \times X_{\Delta_0}
+      \text{ (avec la top. induite)} \\[2pt]
+    \text{b) } \forall (i,j) \in I \times I,\
+      \Gamma_{ij} \underset{\text{déf}}{=}
+      X_{\Delta_1} \cap (X_i \times X_j) \\
+    \qquad \text{est ou bien vide, ou bien le graphe} \\
+    \qquad \text{d'une immersion fermée } X_i \hookrightarrow X_j .
+  \end{cases}
+\]
+
+Donc $X_{\Delta_1} \xrightarrow{\ \sigma\ } X_{\Delta_0}$ est un morphisme de
+rev. \add{étale} (constant), \struck{et alors} et
+$X_{\Delta_1} \xrightarrow{\ b\ } X_{\Delta_0}$ une imm. locale \ill.
+
+Alors la relation $(i \leq j) \underset{\text{déf}}{\iff} \Gamma_{ij} \neq
+\emptyset$ est une relation d'ordre sur $I$, \struck{\ill} et les $X_i$ (avec
+les $X_i \to X_j$ de b)) forment un système inductif d'espaces topologiques,
+indexé par $I$, aux morphismes de transition des immer. fermées ; et la donnée
+de l'espace \add{top.} ordonné $X_{\Delta_0}$, \struck{ainsi} avec la
+partition ensembliste de $X_{\Delta_0}$, revenant : la donnée d'un tel syst.
+inductif, \struck{indexé par un ens. ordonné $I$}.
+
+\struck{Supposons} Supposons de plus, pour nous mettre à l'aise, que $I$ est
+fini, et que les $\mathrm{Inf}$ de deux éléments y existent — alors (\ill)
+
+\[
+  X = \varinjlim_{i \in I} X_i
+  \ \simeq\ X_{\Delta_0} / (X_{\Delta_1} \rightrightarrows)
+\]
+
+et les $X_i \hookrightarrow X$ sont des immer. fermées de \ill
+
+\page{53}
+\textbf{Question.} Dans 21) d), faudrait-il renforcer la condition en
+
+\[
+  (24) \qquad
+  \begin{cases}
+    \forall\, i,j \in I, \quad i \wedge j \underset{\text{déf}}{=}
+      \mathrm{Inf}(i,j) \text{ existe, et} \\[2pt]
+    X_{i \wedge j} = X_i \cap X_j
+  \end{cases}
+  \qquad ?
+\]
+
+Il n'est pas clair qu'il le faille, car cela éliminerait, \add{ne serait-ce}
+au point de vue local, des stratifications comme celles déduites du cercle
+(quatre strates $A$, $B$, $\{a\}$, $\{b\}$, avec
+$A \cap B = \{a\} \cup \{b\}$) comme dessiné, ou en prenant le cône dessus,
+\struck{\ill} d'origine $o$, d'où une stratification locale en $o$, à cinq
+strates (dont $o$) : où deux strates connexes ont une intersection disconnexe
+— faut-il l'éliminer pour autant ? \struck{\ill} \struck{\ill} Il ne semble
+pas. La suite le montrera bien !
+
+\note{Le dessin porté dans la marge est un cercle coupé en deux arcs $A$ et
+$B$ par les deux points $a$ et $b$, puis le cône de sommet $o$ tracé sur ce
+cercle, les deux génératrices $oa$ et $ob$ marquées.}
+
+Pour tout $x \in X$, considérons \add{l'ens. $I_x \subset I$} \struck{des}
+$i \in I$ tels que $X_i \ni x$ — il y en a un nb fini \struck{\ill} (par
+(1' a))), et l'ens. de ces $I$ est filtrant décroissant par (21 d)), donc il y
+a un plus petit $i \in I_x$ \struck{tel que}, soit $i(x)$ :
+
+\[
+  (25) \qquad i(x) = \text{plus petit des } i \in I
+  \text{ tels que } x \in X_i .
+\]
+
+Soit d'autre part, pour tout $i \in I$
+
+\page{54}
+\[
+  (26) \qquad
+  \begin{cases}
+    \dot{X}_i \underset{\text{déf}}{=} \bigcup_{j < i} X_j
+      \quad (\text{fermé de } X_i) \\[2pt]
+    X_i^{*} \underset{\text{déf}}{=} X_i \smallsetminus \dot{X}_i
+      \quad (\text{ouvert de } X_i) .
+  \end{cases}
+\]
+
+\marginal{NB On n'exclut pas que dans (26) des $X_i$ soient $= \emptyset$, ni
+\ill\ $X_i \neq \emptyset$ \ill\ i.e. remplacer $I$ par les \ill\ telles que
+$X_i^{*} \neq \emptyset$ \struck{distincts} \ill\ et les
+$(X_i)_{i \in I'}$ \ill}
+
+\note{Ce NB est écrit en diagonale dans la marge de gauche, sur une dizaine de
+lignes serrées et plusieurs fois reprises ; nous n'en donnons que ce qui se
+lit. Il y est question de restreindre $I$ au sous-ensemble $I'$ des indices
+pour lesquels $X_i^{*} \neq \emptyset$.}
+
+\textbf{Proposition.} Les $X_i^{*}$ ($i \in I$) sont mutuellement disjoints,
+et leur réunion est $X$. Si $x \in X$, $i(x)$ est aussi l'unique $i \in I$ tel
+que $x \in X_i^{*}$.
+
+\textbf{Dém.} Soit $x \in X_i^{*} \cap X_j^{*}$ ($i,j \in I$, $i \neq j$),
+\struck{alors} $x \in X_i \cap X_j$, donc $\exists\, k \leq i,j$ \struck{\ill}
+avec $x \in X_k$. Si on avait $k = i$ on aurait $i \leq j$ donc $i < j$,
+absurde car $x \in X_j^{*} = X_j \smallsetminus \dot{X}_j$. \struck{\ill} On a
+$k < i$, donc $x \in \dot{X}_i \supset X_k$, ce qui contredit
+$x \in X_i^{*}$. Donc les $X_i^{*}$ sont mutuellement disjoints. D'ailleurs
+$x \in X_{i(x)}^{*}$ \ill\ trivial par définition de $i(x)$, d'où la prop.
+
+\note{Le signe entre $\dot{X}_i$ et $X_k$ est tracé d'un seul trait oblique ;
+nous lisons l'inclusion que demande l'argument.}
+
+On posera
+
+\[
+  (27) \qquad
+  \begin{cases}
+    \dot{X}_{\Delta_0} = \coprod_{i \in I} \dot{X}_i \\[2pt]
+    X^{*}_{\Delta_0} = X_{\Delta_0} \smallsetminus \dot{X}_{\Delta_0}
+      = \coprod_{i \in I} X_i^{*}
+  \end{cases}
+\]
+
+puis \struck{plus} plus généralement
+
+\[
+  (28) \qquad
+  \begin{cases}
+    \dot{X}_{\Delta_r} = \text{image inverse de } \dot{X}_{\Delta_0}
+      \text{ par } \sigma_r : X_{\Delta_r} \to X_{\Delta_0} \\
+    \qquad (\text{fermé de } X_{\Delta_r}) \\[2pt]
+    X^{*}_{\Delta_r} = X_{\Delta_r} \smallsetminus \dot{X}_{\Delta_r}
+      = \text{image inverse de } X^{*}_{\Delta_0} \text{ par } \sigma_r \\
+    \qquad (\text{ouvert de } X_{\Delta_r}) .
+  \end{cases}
+\]
+
+\page{55}
+Si $\alpha : \Delta_{r'} \to \Delta_r$, $\alpha(0) = 0$, alors
+
+\[
+  (29) \qquad
+  \alpha^{*} : X_{\Delta_r} \longrightarrow X_{\Delta_{r'}} \quad (\text{étale})
+\]
+
+satisfait
+
+\[
+  \alpha^{*}\bigl( X^{*}_{\Delta_{r'}} \bigr) = X^{*}_{\Delta_r},
+  \qquad \text{i.e.} \qquad
+  \alpha^{*}\bigl( \dot{X}_{\Delta_{r'}} \bigr) = \dot{X}_{\Delta_r} .
+\]
+
+\struck{Dans les} \textbf{NB} « Moralement », $X^{*}_{\Delta_r}$ représente
+une sorte de partie « non singulière » de $X_{\Delta_r}$,
+$\dot{X}_{\Delta_r}$ la partie singulière ou « bord ». On fera attention que
+les $\dot{X}_{\Delta_r}$ ne forment pas un espace semi-simplicial.
+
+Pourtant, notre propos est, dans une certaine mesure, de reconstituer $X$ à
+partir des « strates \ill\ » $X_i^{*}$ dans $X$, dans l'esprit du n\textsuperscript{o} 1
+(où il y a deux strates $X_0 = Y$ et $X_1 = X$, \struck{\ill}
+($Y \subset X$ inclusion fermée), et on \ill\ donc $Y = Y^{*}$,
+$X^{*} = X \smallsetminus Y$ comme dans les notations du loc. cit., où il y
+avait lieu d'introduire $\mathcal{V}_{Y,X}$.
+
+\section*{3. Stratifications globales : introduction des tubes}
+
+\page{56}
+On garde les notations précédentes.
+
+Pour tout couple $(i \leq j) \in I \times I$, considérons
+
+\[
+  (1) \qquad
+  \overline{\mathcal{V}}_{i,j} = \mathcal{V}_{X_i, X_j}
+  \qquad (\text{voisinage tubulaire de } X_i \text{ dans } X_j)
+\]
+
+(cf \ill), et posons
+
+\[
+  (2) \qquad
+  \dot{\mathcal{V}}_{i,j}
+  = \overline{\mathcal{V}}_{ij} \cap \bigl( R^{*}_{i,j} \bigr)
+  = \overline{\mathcal{V}}_{ij} \cap R_i
+\]
+
+\note{Le membre du milieu de (2) est précédé d'un premier essai entièrement
+biffé ; le dernier membre s'arrête à $R_i$ au bord de la feuille.}
+
+où on pose, pour $i,j \in I$
+
+\[
+  (3) \qquad
+  R^{*}_{i,j} = \Biggl(\ \bigcup_{\substack{k \in I \text{ tels que} \\ X_k \not\supset X_i}} X_k \Biggr) \cap X_j .
+\]
+
+\marginal{NB On a aussi $X_k \subset X_j$ :
+$(3\text{bis})$\quad
+$R_{ij} = \bigcup_{\substack{k < j \\ \text{tels que } X_k \cap X_i \neq X_i}} X_k$.}
+
+\marginal{$R_i$ partie fermée de $X$.}
+
+On notera qu'on a \struck{\ill}
+
+\[
+  (4) \qquad
+  R^{*}_{i,j} \cap X_i = R_{ij} \cap X_i = \dot{X}_i .
+\]
+
+En effet, si $X_k \not\supset X_i$, i.e. $X_k \cap X_i \subsetneq X_i$, comme
+$X_k \cap X_i = \bigcup_{\ell \leq k,i} X_\ell$, on voit que
+\struck{\ill} $\ell \leq k,i$ implique $X_\ell \subsetneq X_i$, d'où
+$\ell < i$ et $X_\ell \subset \dot{X}_i$, donc
+$X_k \cap X_i \subset \dot{X}_i$, d'où $R_i \cap X_i \subset \dot{X}_i$ —
+l'inclusion en sens inverse étant triviale.
+
+\page{57}
+On posera enfin
+
+\[
+  (5) \qquad
+  \mathcal{V}_{ij}
+  = \overline{\mathcal{V}}_{ij} \smallsetminus \dot{\mathcal{V}}_{ij}
+  = \overline{\mathcal{V}}_{ij} - \overline{\mathcal{V}}_{ij} \cap R_{ij}
+\]
+
+qui est donc un espace infinitésimal autour de
+
+\[
+  (6) \qquad \mathcal{V}_{ij} \cap X_i = X_i^{*} .
+\]
+
+Je poserai enfin
+
+\[
+  (7) \qquad
+  \mathcal{V}^{*}_{ij}
+  = \mathcal{V}_{ij} \smallsetminus \bigcup_{k < j} X_k \cap \overline{\mathcal{V}}_{ij}
+  = \overline{\mathcal{V}}_{ij} \smallsetminus \dot{X}_j
+  = \mathcal{V}_{ij} \cap X_j^{*} \subset \mathcal{V}_{i,j} .
+\]
+
+Notons que pour $i = j$, on trouve
+
+\[
+  (8) \qquad
+  \overline{\mathcal{V}}_{ii} = X_i , \qquad
+  \dot{\mathcal{V}}_{i,i} = \dot{X}_i , \qquad
+  \mathcal{V}_{i,i} = \mathcal{V}^{*}_{i,i} = X_i^{*} .
+\]
+
+Nos « pierres » de construction, dans une première étape, vont être les
+$\mathcal{V}^{*}_{i,j}$, $\mathcal{V}_{ij}$ avec les inclusions incidentes (9)
+
+\begin{tikzcd}[column sep=large, row sep=small]
+& X_i^{*} \arrow[d, "\text{« âme »}"] \\
+\mathcal{V}^{*}_{ij} \arrow[r] \arrow[d] & \mathcal{V}_{i,j} \\
+X_j^{*} &
+\end{tikzcd}
+
+ces pierres comprenant les $X_i^{*}$ comme
+
+\page{58}
+cas particulier, en faisant $i = j$.
+
+À vrai dire, je vois maintenant que ces fameuses pierres telles quelles sont
+\uncertain{des côtés mal taillées} — elles sont trop \uncertain{générales},
+\ill\ pas assez pour contenir les morceaux
+
+\[
+  \mathcal{V}^{\,d'_{*}}_{d_{*},\, d''_{*}}
+  \;\simeq\;
+  \widetilde{N}_{d_{*};\,(d'_0,\, d''_0)} \bigl|\ D^{*}_{d_{*}}
+\]
+
+de (Str$_{\infty}$ p.~84) — trop en un sens, que l'on peut s'en tirer avec des
+« pierres » plus petites \ill\ certaines des précédentes, correspondant aux
+cas $i \leq j$ où $j$ est un successeur de $i$ (i.e. $\nexists\, k$ avec
+$i < k < j$).
+
+Ces pierres sont \struck{particulières} diverses \ill\ un \ill\ sens \ill\
+pour des hypothèses de lissité et de locale trivialité normales (ou
+« équisingularité ») convenables de type standard. Cet énoncé \ill\ réalistes
+p.~ex. pour une variété alg. complexe, \add{une stratification par} des
+sous-variétés alg. complexes fermées : $\mathcal{V}^{*}_{i,j}$
+\struck{est} homéomorphe : un fibré sur $X_i^{*}$ (qui est une variété
+topologique), à fibre une variété topologique (et
+$Z^{*}_{ij} = Z_{ij}$ vis à vis \ill) : \uncertain{cylindre ouvert}
+$\mathbb{R} \times C_{ij}$, où $C_{ij}$ est une variété top. compacte.
+
+\marginal{NB Mais ce dessin (dans le domaine réel) donne une situation
+\uncertain{peu} vraisemblable — puisque \ill\ « $k > V$ » \ldots\ et \ill\
+devrait \ill}
+
+\note{Cette page est entièrement reprise entre les lignes et dans les marges ;
+nous en transcrivons le fil de l'argument, en marquant par \ill\ les mots
+recouverts. Le NB de la marge gauche est écrit en diagonale et accompagné d'un
+croquis à main levée où se lisent $X_i$, $X_i^{*}$, $R_{ij}$ et $C_{ij}$.}
+
+(NB $\mathcal{V}_{i,j}$ serait homéomorphe : un fibré en cônes sur $C_{ij}$
+\ldots). Quand $j$ n'est pas un successeur de $i$, alors $C_{ij}$ sera encore
+une variété, mais non compacte. Quand
+
+\page{59}
+aux espaces \uncertain{globaux} \ill, \struck{$\mathcal{V}_{ij}$} plus
+généraux que les $\mathcal{V}^{*}_{ij}$ (et les $\mathcal{V}_{ij}$), ce sont
+les suivants : on considère
+
+\[
+  i \leq j \leq k \qquad \text{d'où} \qquad X_i \subset X_j \subset X_k
+\]
+
+on prend
+
+\[
+  (10) \qquad
+  \mathcal{V}^{\,j}_{i,k} \underset{\text{déf}}{=}
+  \overline{\mathcal{V}}_{X_i, X_k} \smallsetminus
+  \bigl( R_{j,k} \cup S_{j,k} \bigr)
+\]
+
+i.e. $R_{j,k}$ est défini dans (3)(3bis), et
+
+\[
+  (11) \qquad
+  S_{j,k} \underset{\text{déf}}{=}
+  \bigcup_{\substack{\ell \in I \\ \text{avec } j \leq \ell \leq k}} X_\ell
+\]
+
+\marginal{NB $S_{j,k} = \emptyset$ si $j = k$ ; $S_{j,k} = X_j$ si $k$ est un
+successeur \ill.}
+
+(On a, en comparant avec (3bis), une partition de l'ens.
+$I^{(k)} \underset{\text{déf}}{=} \{ \ell \in I \mid \ell \leq k \}$ en deux
+parties
+
+\[
+  I^{(k)'} = \bigl\{ \ell \in I^{(k)} \ \big|\ X_\ell \not\supset X_j \bigr\}
+  \quad \text{et}
+\]
+\[
+  I^{(k)''} = \bigl\{ \ell \in I^{(k)} \ \big|\ X_\ell \supset X_j \bigr\},
+\]
+
+de sorte que
+
+\[
+  (12) \qquad
+  \begin{cases}
+    R_{j,k} = \bigcup_{\ell \in I^{(k)'}} X_\ell \\[2pt]
+    S_{j,k} = \bigcup_{\ell \in I^{(k)''}} X_\ell
+  \end{cases}
+  \qquad
+  \begin{aligned}
+    &\text{Donc } R_{j,k} \cup S_{j,k} = \dot{X}_k \\
+    &(\text{avec } R_{j,k} \cap S_{j,k} = \dot{X}_i) .
+  \end{aligned}
+\]
+
+\struck{\ill} On a donc
+
+\[
+  (13) \qquad
+  \mathcal{V}^{\,i}_{i,k} = \mathcal{V}^{*}_{i,k} , \qquad
+  \mathcal{V}^{\,k}_{i,k} = \mathcal{V}_{i,k} ,
+\]
+\[
+  \phantom{(13)} \qquad
+  \mathcal{V}^{\,i}_{i,i} = \mathcal{V}_{i,i} = \mathcal{V}^{*}_{i,i}
+  \ \ \text{d'où} \ = X_i^{*} .
+\]
+
+$\mathcal{V}^{\,j}_{i,k}$ a encore tendance à être une \ill\ homéomorphes (ou
+du moins, homotopes, ou homéomorphes en un sens \struck{faible} de germes, ce
+qu'il faudrait dégager \ldots) : un fibré loc. trivial de base $X_i^{*}$ —
+mais comme on voit déjà dans le cas
+$\mathcal{V}^{\,k}_{i,k} = \mathcal{V}_{i,k}$ : la fibre pourrait être
+singulière. Dans le cas de $\mathcal{V}^{\,k}_{i,k}$,
+
+\page{60}
+avec $k$ successeur de $i$, il s'agit de singularité isolée, mais dans le cas
+des $\mathcal{V}^{\,k}_{i,k}$ généraux, on peut trouver des singularités de
+type arbitraire — bien sûr en fibre (prendre $X_i = X_i^{*}$ réduit à un pt !)
+— ce qui diminue l'intérêt, dans le cas de stratifications
+\struck{\ill} \add{ne soit pas} générales, des $\mathcal{V}^{\,j}_{i,k}$
+généraux comme « pierres ». Les
+$\mathcal{V}^{\,j}_{i,k} = \mathcal{V}^{*}_{i,k}$ sont déjà plus
+intéressants, car \struck{\ill} c'est essentiellement un \ill\ de $X_k^{*}$,
+dans une singularité — ce qui s'exprime par le fait qu'on l'obtient comme
+fibré sur $X_i^{*}$ non singulier, à fibre non singulière
+$\mathcal{V}^{*}_{z,\, Z_{i,k}}$ \ldots
+
+Donc nous allons dans la suite \uncertain{systématiquement} essayer
+d'exprimer les \ill\ avec les $X_i^{*}$ et les \struck{$\mathcal{V}_{ij}$}
+$\mathcal{V}^{*}_{i,j}$, $\mathcal{V}_{i,j}$ « élémentaires » ($j$ successeur
+de $i$), puis voir si certaines expressions peuvent prendre une forme plus
+sympathique en \struck{les $X_i^{*}$ et} utilisant aussi les
+$\mathcal{V}_{i,j}$, $\mathcal{V}^{*}_{i,j}$ \ill\ $i \leq j$ \ill\ plus — et
+dans un \struck{dernier} temps seulement, peut-être (eu égard aux cas des
+diviseurs : croisements normaux) voir comment les $\mathcal{V}^{\,j}_{i,k}$
+s'insèrent dans ce formalisme.
+
+\end{document}
