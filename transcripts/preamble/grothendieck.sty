@@ -39,6 +39,12 @@
 % and is Unicode-engine safe. `normalem` stops it hijacking \emph, which the
 % transcriptions use for Grothendieck's own emphasis.
 \usepackage[normalem]{ulem}
+% ulem sets each underlined word in a box TeX can neither hyphenate nor break
+% after, so a paragraph dense in \uncertain{} readings can reach a state where
+% no legal breakpoint exists and a line runs a fraction of a point past the
+% measure. \emergencystretch lets TeX loosen such a paragraph on a third pass
+% instead of overrunning — an overfull line in a transcription hides content.
+\setlength{\emergencystretch}{3em}
 \usepackage{hyperref}
 \hypersetup{colorlinks=true,linkcolor=black,urlcolor=black,pdfborder={0 0 0}}
 
