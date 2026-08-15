@@ -235,9 +235,11 @@ function Disclaimer() {
       </p>
       <p className="mt-2 text-[13.5px] leading-relaxed text-ink-700">
         The transcriptions and modernised readings on this site were produced by{' '}
-        <strong className="font-semibold text-ink-900">Claude Fable 5</strong>, in 2026, one
+        <strong className="font-semibold text-ink-900">Claude Fable 5</strong> — with one
+        exception, folder 115's modernised reading, which is{' '}
+        <strong className="font-semibold text-ink-900">Claude Opus 5</strong>'s — in 2026, one
         twenty-page batch at a time. Each file records the model and the date of its pass in its
-        own header.
+        own header, and that header is the authority, not this sentence.
       </p>
       <p className="mt-2 text-[13.5px] leading-relaxed text-ink-700">
         <strong className="font-semibold text-ink-900">None of it is a scholarly edition, and
