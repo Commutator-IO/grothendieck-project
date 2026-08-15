@@ -461,7 +461,12 @@ function expandBraced(text) {
 
 /** Inline macros with no argument, applied to already-escaped text. */
 const INLINE = [
-  [/\\ill\{\}/g, '<span class="tr-ill" title="illegible">[…]</span>'],
+  // `\ill` takes no argument, so both `\ill{}` and a bare `\ill` are valid
+  // LaTeX and both compile into the PDF. Matching only the braced form let a
+  // bare one survive as literal text in the reading view, so screen and PDF
+  // disagreed about which words were read — the one thing this apparatus
+  // exists to state. The negative lookahead keeps `\illsomething` out.
+  [/\\ill\{\}|\\ill(?![a-zA-Z])/g, '<span class="tr-ill" title="illegible">[…]</span>'],
   // `\ldots{}` is as common as `\ldots` — the braces exist to stop TeX
   // eating the following space, and must not survive into the page.
   [/\\ldots(\{\})?/g, '…'],
@@ -815,6 +820,16 @@ ${html}
 // executed by then, so KaTeX is certainly present, and the order of the two
 // passes below is guaranteed. Nodes must be typeset before arrows are drawn —
 // arrow geometry is read off the laid-out cells.
+// The critical apparatus reaches inside the mathematics: an illegible
+// exponent, a term of a sequence that cannot be read. The prose expansion
+// above never sees those — they sit between the math delimiters, which pass
+// through untouched — so KaTeX has to know the macro too, or a gap in the
+// reading comes out as the literal word "\\ill" on screen while the PDF prints
+// the marker. Screen and PDF must agree about which words were read.
+var TR_MACROS = {
+  '\\\\ill': '\\\\textcolor{#b53d1d}{[\\\\ldots]}',
+};
+
 document.addEventListener('DOMContentLoaded', function () {
   renderMathInElement(document.body, {
     delimiters: [
@@ -822,6 +837,7 @@ document.addEventListener('DOMContentLoaded', function () {
       { left: '\\\\(', right: '\\\\)', display: false },
     ],
     throwOnError: false,
+    macros: TR_MACROS,
   });
   drawDiagrams();
 });
@@ -850,7 +866,7 @@ function drawDiagram(cd) {
   // Typeset the nodes once. On a redraw they are already done.
   cd.querySelectorAll('.tr-cd-node').forEach(function (n) {
     if (!n.dataset.done) {
-      katex.render(n.dataset.tex || '', n, { throwOnError: false, displayMode: false });
+      katex.render(n.dataset.tex || '', n, { throwOnError: false, displayMode: false, macros: TR_MACROS });
       n.dataset.done = '1';
     }
     nodes[n.dataset.r + ',' + n.dataset.c] = n;
@@ -989,7 +1005,7 @@ function drawDiagram(cd) {
       span.style.left = mx - uy * off + 'px';
       span.style.top = my + ux * off + 'px';
       grid.appendChild(span);
-      katex.render(a.label, span, { throwOnError: false });
+      katex.render(a.label, span, { throwOnError: false, macros: TR_MACROS });
     }
   });
 }
