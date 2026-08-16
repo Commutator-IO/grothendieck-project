@@ -93,7 +93,25 @@ async function main() {
       // after every batch.
       if ((await mtime(pdf)) > (await mtime(src))) continue;
 
-      try {
+      /**
+       * Twice, and the first failure is not reported.
+       *
+       * Tectonic populates its font cache *during* a compile, and the very
+       * first document it is ever asked for on a cold cache dies before it can
+       * use what it has just fetched:
+       *
+       *     ! Font TU/lmr/m/n/12=[lmroman12-regular] ... not loadable:
+       *       Metric (TFM) file or installed font not found.
+       *
+       * The identical command then succeeds, because the fonts are there. On a
+       * developer's machine the cache is warm and this is never seen; in CI it
+       * cost exactly one PDF per run — whichever document sorts first, which is
+       * why `115.modern.pdf` was the one missing from the site while the
+       * fourteen compiled after it were fine. Retrying is the whole fix: a
+       * document that is genuinely broken fails both times and is reported
+       * then, with the engine's own words.
+       */
+      const compile = async () => {
         if (engine === 'tectonic') {
           // Tectonic reruns to convergence on its own, so the two-pass dance
           // below is unnecessary — and it halts on error by default.
@@ -109,12 +127,25 @@ async function main() {
             ]);
           }
         }
+      };
+
+      try {
+        try {
+          await compile();
+        } catch {
+          await compile();
+        }
         await copyFile(resolve(WORK, basename(file, '.tex') + '.pdf'), pdf);
         built += 1;
         process.stdout.write(`  ${folder}/${basename(pdf)}\n`);
       } catch (e) {
-        const log = /(?:^|\n)(!.*)/.exec(e.stdout ?? '')?.[1] ?? e.message;
-        process.stderr.write(`  ⚠ ${folder}/${file}: ${log.slice(0, 200)}\n`);
+        // Both engines put the `!` line on stdout and the summary on stderr,
+        // and `execFile` puts neither in `e.message` — which is why this line
+        // used to report nothing but the command it had just run, truncated
+        // mid-path. Read both streams, and keep enough of them to act on.
+        const out = `${e.stdout ?? ''}\n${e.stderr ?? ''}`;
+        const log = /(?:^|\n)(!.*(?:\n.*){0,2})/.exec(out)?.[1] ?? e.stderr ?? e.message;
+        process.stderr.write(`  ⚠ ${folder}/${file}: ${log.trim().slice(0, 400)}\n`);
       }
     }
   }
