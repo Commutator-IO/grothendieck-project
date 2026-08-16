@@ -31,14 +31,14 @@ const SKILLS: {
     name: 'transcribe-grothendieck',
     produces:
       'the transcription — twenty pages at a time, the mathematics in LaTeX with the critical apparatus that says which words were read and which were guessed',
-    lines: 321,
+    lines: 399,
     extra: 'references/specimen.tex',
   },
   {
     name: 'modernize-grothendieck',
     produces:
-      'the modernised reading — a résumé for someone new to the subject, then the mathematics in current notation and current names, held to being correct as it stands',
-    lines: 198,
+      'the modernised reading — a folder at a time: a résumé for someone new to the subject, then the mathematics in current notation and current names, held to being correct as it stands',
+    lines: 317,
   },
   {
     name: 'tag-grothendieck',
@@ -169,11 +169,13 @@ function Skills() {
         >
           Claude Code
         </a>
-        . The modernisation and tagging skills pin <code>model: claude-fable-5</code> in their
-        frontmatter; transcription no longer does, so that Opus 5 can be measured against it —
-        it accepts those two models and refuses to run on any other, and every file records in
-        its header the model that produced it. Provenance is a fact about the file, not about
-        whichever model happened to be selected that day.
+        . Each pins its model in its frontmatter, or says which it accepts. Modernisation pins{' '}
+        <code>model: claude-opus-5</code> — the reading it is calibrated against, folder 115's,
+        was made on Opus 5 — and tagging pins <code>model: claude-fable-5</code>. Transcription
+        pins nothing, so that the two can be measured against each other: it accepts Fable 5 and
+        Opus 5 and refuses to run on any other. Every file records in its header the model that
+        produced it. Provenance is a fact about the file, not about whichever model happened to
+        be selected that day.
       </p>
 
       {/* Said here rather than left to the skills' own text: a contributor
@@ -317,16 +319,26 @@ function RunABatch() {
 
       <Code>{`npm run archive -- 19          # mirror it, cut into 20-page batches
 claude                         # then, in order:
-  /transcribe-grothendieck 19, batch 1
-  /modernize-grothendieck 19, batch 1
+  /transcribe-grothendieck 19, batch 1     # one batch per conversation
+  /transcribe-grothendieck 19, batch 2     # …until the folder is done
+  /modernize-grothendieck 19               # then the folder, taken whole
 npm run render && npm run pdf && npm run manifest
 npm run dev                    # read it beside the facsimile`}</Code>
 
       <p className="prose-fonds mt-4">
-        One batch per conversation, which is a real constraint and not a style preference: past
-        twenty handwritten pages the quality of reading degrades towards the end of the pass
-        with nothing to signal it, and a transcription whose weakening point is unknown cannot
-        be used.
+        One batch per conversation for the transcription, which is a real constraint and not a
+        style preference: past twenty handwritten pages the quality of reading degrades towards
+        the end of the pass with nothing to signal it, and a transcription whose weakening point
+        is unknown cannot be used.
+      </p>
+
+      <p className="prose-fonds mt-3">
+        The modernised reading goes the other way and takes the folder whole. It reads the
+        transcriptions, not the handwriting, so the twenty-page ceiling does not apply — and its
+        job is to make an argument run continuously, which Grothendieck's arguments do not stop
+        at page 20 to let it do. Modernised batch by batch, a construction that spans three
+        batches gets restated three times by three passes that never saw each other. It still
+        writes one file per batch, so each stays beside the facsimile pages it covers.
       </p>
 
       <h3 className="titre mt-6 text-[17px] text-ink-900">What you need installed</h3>

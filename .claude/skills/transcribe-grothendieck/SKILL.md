@@ -45,11 +45,14 @@ For **one batch of twenty pages**, three LaTeX files:
 |---|---|
 | `transcripts/<folder>/batch-NN.fr.tex` | The transcription — the mathematics, page by page, in French |
 
-One further edition derives from it, with its own skill, run afterwards:
+One further edition derives from it, with its own skill, run afterwards — and
+**per folder, not per batch**: it reads typed LaTeX rather than handwriting, so
+it has no twenty-page ceiling, and the argument it restates runs across the
+batch boundaries. Run it once the folder's batches are transcribed.
 
 | Skill | Produces |
 |---|---|
-| `/modernize-grothendieck` | `batch-NN.modern.tex` — a summary, then the mathematics in current notation; French |
+| `/modernize-grothendieck <folder>` | `batch-NN.modern.tex` for every batch of the folder — a summary, then the mathematics in current notation; French |
 
 `npm run render` turns each into the reading view the site's left pane shows;
 `npm run pdf` compiles the PDFs the download buttons offer. The site has a tab
