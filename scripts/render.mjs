@@ -482,6 +482,13 @@ const INLINE = [
   [/\s*\\fg\{?\}?/g, ' »'],
   // Control space and the spacing macros: real spaces here, not literals.
   [/\\[ ,;:!]/g, ' '],
+  // A backslash at end of line is the same control space: TeX turns the
+  // newline into a space token, so `\ill\` wrapping onto the next line means
+  // exactly what `\ill\ ` means mid-line. Left unmatched it printed a literal
+  // backslash into the reading view while the PDF printed nothing — screen and
+  // PDF disagreeing about the apparatus, which is the one thing they may not
+  // do. The lookbehind keeps `\\` (an explicit line break) out of it.
+  [/(?<!\\)\\(?=\r?\n)/g, ' '],
   [/\\q?quad/g, '  '],
   [/\\%/g, '%'],
   [/\\&amp;/g, '&amp;'],
