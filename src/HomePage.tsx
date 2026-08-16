@@ -234,12 +234,14 @@ function Disclaimer() {
         How these documents were made
       </p>
       <p className="mt-2 text-[13.5px] leading-relaxed text-ink-700">
-        The transcriptions and modernised readings on this site were produced by{' '}
-        <strong className="font-semibold text-ink-900">Claude Fable 5</strong> — with one
-        exception, folder 115's modernised reading, which is{' '}
-        <strong className="font-semibold text-ink-900">Claude Opus 5</strong>'s — in 2026, one
-        twenty-page batch at a time. Each file records the model and the date of its pass in its
-        own header, and that header is the authority, not this sentence.
+        The transcriptions and modernised readings on this site were produced in 2026 by{' '}
+        <strong className="font-semibold text-ink-900">Claude Fable 5</strong> and{' '}
+        <strong className="font-semibold text-ink-900">Claude Opus 5</strong>, a folder at a
+        time, the transcriptions twenty pages at a time. Which model made which file is not a
+        detail we keep a tally of here — <strong className="font-semibold text-ink-900">each
+        file records the model and the date of its pass in its own header, and that header is
+        the authority</strong>, not this sentence. A disputed reading years from now needs to
+        know what produced it, and the file is the only place that cannot drift.
       </p>
       <p className="mt-2 text-[13.5px] leading-relaxed text-ink-700">
         <strong className="font-semibold text-ink-900">None of it is a scholarly edition, and
