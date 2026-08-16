@@ -2,6 +2,7 @@ import { Footer, Header } from './components/Frame.tsx';
 import { FINDINGS } from './content/findings.ts';
 import { BY_ID } from './content/catalogue.ts';
 import type { Finding } from './lib/types.ts';
+import { notation } from './lib/notation.tsx';
 
 /**
  * What the readings turned up that the inventory does not record.
@@ -71,18 +72,18 @@ function Row({ n }: { n: Finding }) {
         <span className="text-[10px] uppercase tracking-wide text-ink-400">{KIND[n.kind]}</span>
       </div>
 
-      <p className="mt-2.5 text-[15px] leading-relaxed text-ink-900">{n.claim}</p>
+      <p className="mt-2.5 text-[15px] leading-relaxed text-ink-900">{notation(n.claim)}</p>
 
       <dl className="mt-3 grid gap-2 text-[13px] leading-relaxed sm:grid-cols-[8.5rem_1fr]">
         <dt className="text-ink-400">What it rests on</dt>
-        <dd className="text-ink-700">{n.basis}</dd>
+        <dd className="text-ink-700">{notation(n.basis)}</dd>
 
         {/* Printed even when null. A reader has to be able to tell "the page
             carries this alone" from "nobody said", and an absent row says the
             second while meaning the first. */}
         <dt className="text-ink-400">Ours, not his</dt>
         <dd className={n.ours ? 'text-ink-700' : 'text-ink-400'}>
-          {n.ours ?? 'Nothing — the page carries the statement alone.'}
+          {n.ours ? notation(n.ours) : 'Nothing — the page carries the statement alone.'}
         </dd>
 
         <dt className="text-ink-400">Searched</dt>
@@ -90,7 +91,7 @@ function Row({ n }: { n: Finding }) {
           {n.literature.length ? (
             <ul className="space-y-0.5">
               {n.literature.map((l) => (
-                <li key={l}>{l}</li>
+                <li key={l}>{notation(l)}</li>
               ))}
             </ul>
           ) : (
@@ -99,7 +100,7 @@ function Row({ n }: { n: Finding }) {
         </dd>
 
         <dt className="text-ink-400">What would settle it</dt>
-        <dd className="text-ink-700">{n.settle}</dd>
+        <dd className="text-ink-700">{notation(n.settle)}</dd>
       </dl>
 
       {cote && (
