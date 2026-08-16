@@ -1,0 +1,297 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 162-6, pages 1-5.
+%
+% This is an INTERPRETATION, not a transcription. Everything the critical
+% apparatus carried moves into footnotes; the mathematics is restated so that it
+% is correct as it stands. In any dispute of substance the transcription
+% governs: whoever cites Grothendieck must cite batch-01.fr.tex.
+%
+% Pass: Opus 5 (claude-opus-5), 2026-08-16 — first pass, unchecked against the
+% pages by a human. The folder was read whole; it holds one batch, pages 1-5.
+%
+% The single largest departure from the page is recorded in the first footnote
+% of the body: the cards write the gamma factors without their minus signs, and
+% as written the functional equation they belong to does not hold. The correct
+% normalisation is given and the page's own form is footnoted. This is exactly
+% the case the standard is for — reproducing the sign as written, in an edition
+% that presents itself as readable mathematics, would launder the slip.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{162-6}
+\pages{1}{5}
+\dating{s.d. — le groupe « Dossiers rassemblés par Grothendieck sur différentes thématiques » (161-1 à 162-6) est daté [après 1961-vers 1977]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{[Documents isolés] : notes manuscrites (s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Cinq petites cartes au crayon, écrites en travers. L'inventaire les appelle
+« documents isolés » et ne dit rien de plus, ce qui donne à penser qu'elles
+n'ont pas de sujet. Elles en ont un, et un seul.
+
+Le sujet est celui-ci. À une variété algébrique on associe une fonction d'une
+variable complexe --- sa fonction $L$ --- qui encode combien de points elle a
+modulo chaque nombre premier. C'est un objet analytique construit à partir d'un
+objet arithmétique, et tout son intérêt vient de ce qu'il possède une
+\emph{équation fonctionnelle} : une symétrie qui relie sa valeur en $s$ à sa
+valeur en $w+1-s$, comme une figure symétrique par rapport à une droite. Mais
+cette symétrie n'apparaît qu'à une condition : il faut ajouter au produit, à
+côté d'un facteur pour chaque nombre premier, un facteur de plus. Un facteur
+qui ne correspond à aucun nombre premier, et qu'on appelle par convention le
+facteur « à l'infini ».
+
+Ce facteur manquant est le sujet de ces cartes. Il n'est pas arbitraire : on
+sait quelle forme il doit avoir --- un produit de fonctions $\Gamma$ d'Euler ---
+et toute la question est de savoir avec quels exposants. La réponse, et c'est
+elle que la première carte écrit, est que les exposants se lisent sur les
+nombres de Hodge de la variété, c'est-à-dire sur la façon dont sa cohomologie se
+décompose. L'arithmétique de la place à l'infini est ainsi dictée par la
+géométrie complexe, et par rien d'autre.
+
+Les quatre cartes suivantes explorent la structure qui rend cette recette
+naturelle. On y trouve le groupe de Weil réel --- un groupe qui n'est pas
+$\mathrm{Gal}(\mathbb{C}/\mathbb{R})$ mais une extension de celui-ci par
+$\mathbb{C}^{*}$, et dont l'élément $\sigma$ vérifie $\sigma^{2} = -1$ et non
+$\sigma^{2} = 1$ ---, puis un groupe algébrique $S_{E}$ attaché à un corps de
+nombres $E$, à travers lequel se factorisent les caractères de Hecke de type
+$A_{0}$, et son rapport au groupe des classes d'idèles.
+
+Ces cartes ne démontrent rien. Ce sont des aide-mémoire : quelqu'un qui sait
+déjà ce dont il s'agit note les quatre ou cinq formules qui lui serviront de
+prises. Leur intérêt est de montrer quelles prises exactement il a choisies.
+
+\keywords{archimedean local factor, Hodge structure, Weil group, Serre group, Hecke character of type A0, functional equation}
+\end{resume}
+
+\pagerange{1}{1}
+\section*{Les deux facteurs $\Gamma$ de base}
+
+On pose, pour $s \in \mathbb{C}$,
+\[
+\gamma_{\mathbb{R}}(s) = \pi^{-s/2}\,\Gamma\!\left(\frac{s}{2}\right),
+\qquad
+\gamma_{\mathbb{C}}(s) = 2\,(2\pi)^{-s}\,\Gamma(s).
+\]
+
+Ce sont les deux facteurs locaux archimédiens élémentaires : le premier est
+celui de la place réelle, le second celui de la place complexe.\footnote{Les
+deux cartes écrivent les exposants \emph{sans le signe moins} : on y lit
+$\pi^{s/2}$ et $(2\pi)^{s}$. Écrite ainsi, la fonction $\gamma_{\mathbb{R}}$ ne
+décroît pas dans les bandes verticales et l'équation fonctionnelle qu'elle sert
+à établir ne tient pas ; on donne donc la normalisation correcte, et cette note
+dit ce que porte la page. La constante multiplicative de $\gamma_{\mathbb{C}}$
+est également ambiguë sur la carte, qui écrit $\tfrac{1}{2}$ suivi d'un symbole
+tracé puis barré et devenu illisible ; la valeur $2$ donnée ici est celle qui
+rend vraie la relation de duplication rappelée plus bas, et elle est donc
+imposée par le reste de la page plutôt que lue sur elle.}
+
+Ils ne sont pas indépendants. La relation
+\[
+\gamma_{\mathbb{R}}(s)\,\gamma_{\mathbb{R}}(s+1) = \gamma_{\mathbb{C}}(s),
+\]
+qui est la formule de duplication de Legendre pour $\Gamma$ mise sous cette
+forme, est écrite telle quelle sur la quatrième carte. C'est elle qui permet de
+passer d'une écriture à l'autre, et c'est pourquoi la recette qui suit peut
+s'exprimer indifféremment avec l'un ou l'autre des deux facteurs dans la partie
+de poids pair.
+
+\pagerange{1}{1}
+\section*{Le facteur à l'infini d'une structure de Hodge}
+
+Soit $H$ une structure de Hodge pure de poids $n$, de nombres de Hodge
+$h^{p,q}$. On veut lui attacher un facteur $\Gamma$, et la recette dépend de la
+place.
+
+\subsection*{Place complexe}
+
+Le cas complexe est le plus simple, parce qu'il n'y a aucune involution à
+prendre en compte :
+\[
+\prod_{p,q} \gamma_{\mathbb{C}}\bigl(s - \inf(p,q)\bigr)^{h^{p,q}}.
+\]
+Chaque classe de bidegré $(p,q)$ contribue un facteur, décalé de
+$\inf(p,q)$ --- c'est-à-dire du plus petit des deux indices, et non de leur
+somme ni de leur différence.
+
+\subsection*{Place réelle}
+
+Le cas réel diffère sur un seul point, mais ce point est l'essentiel. Une
+structure de Hodge définie sur $\mathbb{R}$ porte une involution $F$ --- le
+Frobenius à l'infini, c'est-à-dire la conjugaison complexe agissant sur les
+points de la variété --- et cette involution échange $H^{p,q}$ et $H^{q,p}$.
+
+Hors de la diagonale, elle apparie donc $(p,q)$ et $(q,p)$, et les deux
+ensemble donnent un unique facteur complexe. D'où la première moitié de la
+recette, où le produit ne court que sur $p < q$ :
+\[
+\prod_{p<q} \gamma_{\mathbb{C}}(s-p)^{h^{p,q}}.
+\]
+
+Sur la diagonale $p = q$, en revanche, $F$ agit à l'intérieur de $H^{p,p}$, et
+il faut décomposer cet espace selon les deux valeurs propres possibles. La page
+pose $n = 2p$ et écrit la règle sous la forme d'un système : on note
+$h_{p}^{+}$ la dimension du sous-espace où $F$ agit par $(-1)^{p}$, et
+$h_{p}^{-}$ celle du sous-espace où $F$ agit par $-(-1)^{p}$.\footnote{Le signe
+devant $(-1)^{p}$ dans la seconde ligne est surchargé sur la carte et un signe
+y a été entouré puis abandonné ; la transcription le signale. La convention
+retenue ici --- le décalage de la normalisation par $(-1)^{p}$ plutôt que par
+$+1$ --- est celle qui rend les deux lignes cohérentes avec le décalage
+$s - p$ du produit précédent.} La contribution de la diagonale est alors
+\[
+\gamma_{\mathbb{R}}(s-p)^{h_{p}^{+}}\;\gamma_{\mathbb{R}}(s-p+1)^{h_{p}^{-}}.
+\]
+
+Ce qui distingue les deux valeurs propres n'est donc pas la nature du facteur
+--- c'est $\gamma_{\mathbb{R}}$ dans les deux cas --- mais un décalage d'une
+unité dans l'argument. C'est là toute la finesse de la recette, et la raison
+pour laquelle elle ne se devine pas.
+
+\pagerange{2}{2}
+\section*{Le groupe de Weil réel}
+
+La deuxième carte pose le cadre dans lequel ces facteurs deviennent naturels.
+Le groupe de Weil de $\mathbb{R}$ est
+\[
+W_{\mathbb{R}} = \mathbb{C}^{*} \cup \sigma\,\mathbb{C}^{*},
+\qquad
+\sigma z \sigma^{-1} = \bar{z},
+\qquad
+\sigma^{2} = -1 .
+\]
+
+Il faut s'arrêter sur la dernière relation, qui est le point de toute la
+construction. Si l'on avait $\sigma^{2} = 1$, le groupe serait le produit
+semi-direct $\mathbb{C}^{*} \rtimes \mathbb{Z}/2$, et il n'apporterait rien de
+plus que le groupe de Galois. Avec $\sigma^{2} = -1$, on obtient au contraire
+une extension non scindée
+\[
+1 \longrightarrow \mathbb{C}^{*} \longrightarrow W_{\mathbb{R}}
+\longrightarrow \mathbb{Z}/2 \longrightarrow 1 ,
+\]
+et c'est cette extension, et non le quotient, qui a les représentations
+voulues.\footnote{Le $-1$ est entouré sur la carte, ce qui est la manière dont
+Grothendieck marque ailleurs dans le fonds ce qu'il ne veut pas voir passer
+inaperçu.} La carte justifie que cette extension existe et qu'elle est
+essentiellement unique en calculant le groupe qui les classe :
+\[
+H^{2}(\mathbb{Z}/2, \mathbb{C}^{*}) = \mathbb{Z}/2 .
+\]
+Deux classes, donc : l'extension triviale et celle-ci.\footnote{L'action de
+$\mathbb{Z}/2$ sur $\mathbb{C}^{*}$ est ici la conjugaison, comme le dit la
+relation $\sigma z\sigma^{-1} = \bar{z}$ écrite juste au-dessus ; la carte ne le
+répète pas dans la notation du $H^{2}$, et c'est nous qui l'explicitons. Le
+calcul n'a pas la même valeur pour l'action triviale.}
+
+La suite de la carte esquisse ce que devient une structure de Hodge sous ce
+groupe --- on y lit $H(D(E), \mathbb{R})$, un $\sigma$ répété, la condition
+$\sigma^{2} = +1$, et un $S$ --- mais l'écriture y devient très rapide et la
+dernière ligne est coupée par le bord de la feuille.\footnote{La transcription
+signale la coupure : il subsiste un $c_{\mathbb{R}}$, un signe de produit
+tensoriel et un signe d'égalité. On ne restitue pas la fin, et l'on ne se sert
+pas de cette ligne dans ce qui précède.} Ce qu'elle indique est la
+correspondance, désormais classique, entre structures de Hodge réelles et
+représentations de $W_{\mathbb{R}}$ ; la carte ne l'énonce pas et nous ne la
+mettons pas dans sa bouche.
+
+\pagerange{3}{5}
+\section*{Le groupe $S_{E}$ et les classes d'idèles}
+
+Les trois dernières cartes changent de terrain. Il ne s'agit plus d'une place,
+mais d'un corps de nombres $E$ et du groupe algébrique par lequel passent ses
+caractères de Hecke algébriques.
+
+\subsection*{La norme}
+
+La troisième carte définit une flèche
+\[
+N : S_{E} \longrightarrow S_{\mathbb{Q}} \longrightarrow \mathbb{G}_{m},
+\qquad
+(x, (y_{\alpha})) \longmapsto x \cdot \prod_{\alpha \neq \infty}
+\lVert y_{\alpha}\rVert \cdot \prod_{\alpha = \infty}
+\mathrm{sign}(y_{\alpha}) .
+\]
+La dissymétrie de la formule est son contenu : aux places finies on prend la
+valeur absolue, à la place infinie on ne prend que le signe. Elle est ensuite
+composée dans la chaîne
+\[
+C(E) \longrightarrow S_{E}(\mathbb{A}) \longrightarrow S_{E}(\mathbb{R})
+\longrightarrow \mathbb{R}^{*},
+\]
+où $C(E)$ est le groupe des classes d'idèles, et la carte note sous cette
+composée, souligné deux fois, le symbole $\lVert x\rVert$ : c'est donc la norme
+adélique qu'on retrouve au bout.
+
+En bas de la carte, isolée sous un trait, une seule remarque :
+\[
+(-1 \neq \lVert -1 \rVert).
+\]
+Elle n'est pas anodine. Elle dit que la flèche construite n'est pas la valeur
+absolue : elle garde le signe là où la valeur absolue le perd, et c'est
+précisément cet écart qui laisse place au facteur $\gamma_{\mathbb{R}}$ décalé
+d'une unité rencontré plus haut.\footnote{Le rapprochement entre cette remarque
+et la règle de la place réelle est le nôtre. Les cartes sont contiguës dans le
+dossier et parlent du même objet, mais aucune ne renvoie explicitement à
+l'autre.}
+
+\subsection*{Le diagramme}
+
+La cinquième carte rassemble le tout en un diagramme, sous un $E/\mathbb{Q}$
+encadré :
+
+\begin{tikzcd}[column sep=small, row sep=small, nodes={font=\scriptsize}]
+& & & \mathbb{G}_{m}\\
+E^{*} \arrow[r] & \left(\prod_{E/\mathbb{Q}} \mathbb{G}_{m}\right)\big/U \times I(E)/I^{\circ}(E) \arrow[rr] & & S_{E} \arrow[u, "N"]\\
+E^{*} \arrow[r] \arrow[u, no head] & I(E) \times I(E)/I^{\circ}(E) \arrow[rr] & & S_{E}(\mathbb{A})\\
+E^{*} \arrow[rr] \arrow[u, no head] & & I(E) \arrow[r] & C(E) \arrow[u]
+\end{tikzcd}
+
+Les trois lignes se lisent de bas en haut comme un raffinement progressif. En
+bas, la construction ordinaire du groupe des classes d'idèles : $E^{*}$ se
+plonge dans le groupe des idèles $I(E)$, et le quotient est $C(E)$. Au milieu,
+on adjoint le groupe des classes de rayon $I(E)/I^{\circ}(E)$, ce qui donne les
+points adéliques de $S_{E}$. En haut, la restriction des scalaires
+$\prod_{E/\mathbb{Q}}\mathbb{G}_{m}$ remplace les idèles et l'on atteint $S_{E}$
+lui-même, sur lequel la norme $N$ de la carte précédente est
+définie.\footnote{Les trois traits verticaux de la colonne de gauche sont, sur
+la page, des doubles barres d'égalité : c'est le même $E^{*}$ aux trois lignes.
+On les rend ici par des liaisons sans tête, la syntaxe des diagrammes de cette
+édition n'ayant pas de barre d'égalité. Le $S_{E}(\mathbb{Q})$ que la carte
+écrit au-dessus de $S_{E}(\mathbb{A})$ est barré et n'est pas reporté ; deux
+flèches obliques numérotées 1 et 2 courent entre la deuxième et la troisième
+ligne sans origine assurée, et ne le sont pas non plus.}
+
+Sous un trait, en bas de la carte, une flèche $S_{E} \to \mathbb{G}$ est écrite
+puis barrée, et remplacée par $S_{E} \to \mathbb{G}_{m}$ --- la norme, donc,
+reprise une dernière fois. La suite sort de la carte.\footnote{On y distingue
+un $h$ et une parenthèse ouvrante suivie d'un $E$ ; ce pourrait être un nombre
+de classes, mais la restitution serait la nôtre et on ne la propose pas.}
+
+\pagerange{1}{5}
+\section*{Ce que les cinq cartes font ensemble}
+
+Prises séparément, ce sont cinq notes sans énoncé. Prises ensemble, elles
+dessinent un aller-retour.
+
+D'un côté, la géométrie : une variété, sa cohomologie, ses nombres de Hodge,
+et la recette qui en tire le facteur à l'infini. De l'autre, l'arithmétique :
+un corps de nombres, ses idèles, et le groupe $S_{E}$ qui gouverne ses
+caractères. Entre les deux, le groupe de Weil, qui a la particularité d'avoir
+les deux natures --- ses représentations sont du côté arithmétique, et ce
+qu'elles classent est du côté de Hodge.
+
+La dernière carte du dossier, la quatrième, écrit d'ailleurs le seul énoncé de
+compatibilité de tout l'ensemble :
+\[
+L_{v}(M \otimes T, s) = L_{v}(M)(s \pm 1),
+\]
+où $T$ est l'objet de Tate. Elle dit que tordre un motif par $T$ revient à
+translater sa fonction $L$ d'une unité --- et le $\pm$ n'est pas une hésitation
+sur le fait, mais sur la convention de signe adoptée pour le
+twist.\footnote{Cette lecture du $\pm$ est la nôtre. La carte l'écrit sans
+commentaire, et l'on pourrait aussi bien y voir une hésitation sur la
+normalisation de $T$ lui-même. Aucune autre carte du dossier ne tranche.}
+
+\end{document}

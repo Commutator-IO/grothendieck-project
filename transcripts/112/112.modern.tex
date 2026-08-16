@@ -1,0 +1,242 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 112, pages 1-4.
+%
+% This is an INTERPRETATION, not a transcription. Everything the critical
+% apparatus carried moves into footnotes. In any dispute of substance the
+% transcription governs: whoever cites Grothendieck must cite batch-01.fr.tex.
+%
+% Pass: Opus 5 (claude-opus-5), 2026-08-16 — first pass, unchecked against the
+% pages by a human. The folder was read whole; it holds one batch, pages 1-4.
+%
+% This is the folder whose transcription carries the heaviest apparatus of the
+% eight read in this pass, and that governs what this reading may do. Where the
+% page is illegible the reading says so and stops; it does not complete a
+% definition from what the surrounding notation makes plausible. Two of the three
+% numbered questions are therefore given with a gap in them, which is the honest
+% state of the document.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{112}
+\pages{1}{4}
+\dating{s.d.}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Linéarisation : notes manuscrites (s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Quatre feuilles de listing d'ordinateur, écrites en travers du papier, d'une
+écriture très petite et très rapide, avec les colonnes imprimées qui
+transparaissent sous chaque ligne. Un seul mot en tête, à l'encre :
+\emph{Linéarisation}.
+
+Le mot désigne un procédé et non un objet. En voici le principe, dans un cas
+familier. Un espace topologique est un objet compliqué et il n'y a aucune raison
+qu'on sache le manipuler. Mais on sait lui associer ses groupes d'homologie, qui
+sont des objets d'algèbre linéaire --- des groupes abéliens, ou des espaces
+vectoriels --- et sur lesquels on sait tout faire. On a linéarisé : troqué un
+objet dont on ne sait rien contre un objet dont on sait tout, en acceptant de
+perdre au passage une partie de l'information.
+
+Toute la question est alors de savoir ce qu'on a perdu. Et c'est là que ces
+pages travaillent. Elles se placent non pas sur les espaces mais sur les
+préfaisceaux sur une petite catégorie $A$ --- ce qui est le cadre général où
+Grothendieck situe l'homotopie ---, et elles cherchent à isoler les préfaisceaux
+pour lesquels la linéarisation ne perd \emph{rien}. Il les appelle les objets
+\emph{lisses}. Symétriquement, elles cherchent ceux pour lesquels elle perd
+tout : les objets \emph{négligeables}.
+
+Une fois ces deux classes définies, trois questions sont posées, et elles ont
+toutes la même forme : est-ce que la restriction aux objets lisses fait de la
+linéarisation une équivalence ? Est-ce qu'elle préserve les groupes
+d'extensions ? Le programme est celui de la correspondance de Dold--Kan --- qui,
+sur les ensembles simpliciaux, identifie exactement les objets simpliciaux
+abéliens et les complexes de chaînes --- transporté sur une catégorie $A$
+quelconque. La page le dit d'ailleurs sans détour : \emph{OK pour $A =
+\Delta$}, et la vraie question est de savoir jusqu'où l'on peut s'éloigner de
+$\Delta$.
+
+Ce dossier est le plus difficile à lire du groupe auquel il appartient, et
+cette lecture le dit plutôt que de le masquer : plusieurs des définitions qu'il
+pose ont, à leur endroit décisif, un mot qui ne se lit pas.
+
+\keywords{linearization, Dold-Kan correspondence, smooth object, derived category of presheaves, chain complex with twisted coefficients}
+\end{resume}
+
+\pagerange{1}{2}
+\section*{Le cadre et les deux définitions}
+
+Soit $A$ une petite catégorie et $\hat{A}_{\mathrm{ab}}$ la catégorie des
+préfaisceaux abéliens sur $A$. On y prend un objet $L$.
+
+Deux constructions sont supposées connues et ne sont pas rappelées sur la page.
+La première est l'intégrale $\int_{A} L$, qui est la manière dont ces notes
+notent une colimite --- le sens du signe est fixé par le contexte, non par une
+définition. La seconde est un produit noté $*$, qui est une convolution : la
+page écrit $L^{(a)} * L^{A^{\circ}}$ là où elle vient d'écrire
+$\int_{A} L^{(a)}$, ce qui identifie les deux.\footnote{Aucune de ces deux
+notations n'est définie dans le dossier. Le rapprochement entre l'intégrale et
+la convolution est celui que la page fait elle-même, par une double barre
+d'égalité entre les deux lignes ; ce que chacune signifie séparément reste
+implicite. On ne les définit pas ici : ce serait leur donner un contenu que le
+dossier n'a pas.}
+
+\subsection*{Lisse}
+
+On dit que $L$ est \emph{lisse} si, pour toute flèche $a \to b$ de $A$, la
+flèche naturelle
+\[
+\int_{A_{a}} L_{a} \longrightarrow \int_{A_{b}} L_{b}
+\]
+est un isomorphisme. Les deux membres sont ensuite réécrits, par une chaîne
+d'égalités que la page pose verticalement :
+\[
+\int_{A_{a}} L_{a} = \int_{A} L^{(a)} = L^{(a)} * L^{A^{\circ}},
+\qquad
+\int_{A_{b}} L_{b} = \int_{A} L^{(b)} = L^{(b)} * L^{A^{\circ}}.
+\]
+
+La condition est donc : la valeur de la convolution ne dépend pas du point où
+on la prend.\footnote{Le mot qui qualifie la flèche est écrit très vite et n'est
+pas assuré : la transcription le laisse en blanc. Ce pourrait être
+« isomorphisme » ou « quasi-isomorphisme », et la différence n'est pas anodine
+--- dans un cadre dérivé c'est la seconde qui est la bonne notion. On a retenu
+la première parce que c'est celle qui rend la définition la plus faible, donc
+la classe des objets lisses la plus large, et parce que rien sur la page
+n'impose l'autre ; le choix est le nôtre et il est signalé.} Une lecture
+possible, et qui est celle que le mot \emph{lisse} suggère, est que la classe
+ainsi définie est celle des préfaisceaux « localement constants » du point de
+vue de la linéarisation : ceux dont la linéarisation ne varie pas le long des
+flèches de $A$.\footnote{Cette glose est la nôtre. Le mot « lisse » est de lui ;
+son rapprochement avec la constance locale ne l'est pas, et le dossier ne le
+justifie nulle part.}
+
+\subsection*{Négligeable}
+
+La seconde définition est l'exact complément de la première, et c'est celle qui
+souffre le plus de l'état de la page : on dit que $L$ est \emph{négligeable} si
+$L^{b}$ vérifie une condition qui n'est pas lisible.\footnote{La ligne est
+écrite par-dessus une portion particulièrement chargée du listing imprimé et
+deux mots y disparaissent. La ligne suivante --- « c'est-à-dire si » --- reprend
+la même chose sous une forme intégrale, mais s'achève elle aussi sur un membre
+illisible. La définition est donc, dans cette édition, incomplète des deux
+côtés ; on ne la complète pas.}
+
+Ce que la page fournit ensuite est l'objet sur lequel tout repose : on pose
+\[
+L^{b} = \bigl(a \mapsto L^{(a)} \otimes \ldots \bigr)
+\qquad\text{dans } D_{\bullet}(\hat{B}_{\mathrm{ab}}),
+\]
+et l'on note que c'est un complexe de chaînes à coefficients
+tordus.\footnote{Le second facteur du produit tensoriel n'est pas lisible, non
+plus que l'adjectif qui qualifie le complexe ; la torsion des coefficients,
+elle, est écrite et lisible. C'est le point important : $L^{b}$ n'est pas un
+complexe à coefficients constants, et c'est ce qui empêche de traiter la
+linéarisation comme une simple homologie.}
+
+On note enfin $\mathrm{Lisse}_{\mathbb{Z}}(A)$ la sous-catégorie pleine de
+$\hat{A}_{\mathrm{ab}}$ formée des objets lisses.
+
+\pagerange{2}{2}
+\section*{Les trois questions}
+
+\subsection*{(1) Une équivalence ?}
+
+La première question est la principale :
+\[
+W_{y}^{-1}\,\mathrm{Lisse}_{\mathbb{Z}}(A) \longrightarrow
+D^{\bullet}_{lc}(\hat{B}_{\mathrm{ab}})
+\]
+est-ce une \emph{équivalence de catégories} ?\footnote{Le mot est souligné sur
+la page. L'indice $lc$ se lit clairement au feuillet suivant, où il reparaît
+deux fois ; il se développe vraisemblablement en « localement constant », ce qui
+serait cohérent avec le sens donné plus haut à \emph{lisse}, mais la page ne le
+développe jamais.}
+
+Ce que cette flèche fait est ceci : elle prend les objets lisses, inverse une
+classe de flèches, et compare le résultat à une catégorie dérivée. C'est
+exactement la forme de la correspondance de Dold--Kan, et la page le dit
+elle-même en donnant sa propre portée :
+
+\begin{quote}
+OK pour $A = \Delta$ ; OK pour $A = \Delta_{/X}$, où $X \in
+\mathrm{Ob}\,\hat{\Delta}$ ?
+\end{quote}
+
+Le premier cas est affirmé, le second est demandé. Autrement dit : la
+correspondance est acquise sur la catégorie des simplexes, et la question est de
+savoir si elle survit au passage aux catégories de tranches --- premier pas hors
+de $\Delta$, et le plus modeste qu'on puisse faire.\footnote{Une note écrite en
+regard, à demi lisible, rappelle que la construction se fait « comme
+$M_{\bullet} \mapsto M^{b}$ », c'est-à-dire par le foncteur qui a été défini
+plus haut. Un mot de cette note est illisible.}
+
+\subsection*{(2) Les extensions}
+
+Si $L$ et $M$ sont dans $\mathrm{Lisse}_{\mathbb{Z}}(A)$, a-t-on
+\[
+\mathrm{Ext}^{i}_{\mathbb{Z}_{A}}(L, M) \longrightarrow
+\mathrm{Ext}^{i}_{\mathbb{Z}_{B}}(L^{b}, M^{b}) \;?
+\]
+
+C'est la question 1 rendue quantitative : une équivalence de catégories induit
+des isomorphismes sur les groupes d'extensions, et vérifier ces derniers est le
+moyen usuel d'attaquer la première. Deux remarques l'accompagnent entre
+crochets. La première demande si cela vaudrait \emph{sans} supposer $L$ et $M$
+lisses --- c'est-à-dire si l'hypothèse de lissité est nécessaire ou seulement
+commode. La seconde, écrite plus haut, note que
+$D_{\bullet}(\mathrm{Ab}) \cong \mathrm{Hot}_{ab}$ lorsque $A$ est
+asphérique.\footnote{Cette dernière est le cas dégénéré qui sert de contrôle :
+quand $A$ est asphérique, la catégorie dérivée des groupes abéliens est
+équivalente à la catégorie homotopique abélienne, et la question 1 y est donc
+triviale. Que ce contrôle soit noté juste à côté de la question générale
+n'est pas indifférent.}
+
+\subsection*{(3)}
+
+La troisième question commence --- « supposons $L$ lisse » --- et sa suite n'est
+pas lisible.\footnote{Elle est écrite en bas de feuillet, sur la portion la plus
+sombre du listing. On ne restitue rien.}
+
+\pagerange{3}{3}
+\section*{Les trois programmes}
+
+Le troisième feuillet reprend le tout sous une forme plus ordonnée. Il pose
+d'abord la correspondance
+\[
+L_{\bullet} \longmapsto \varphi(L_{\bullet}),
+\qquad
+H_{i}(L_{\bullet}) \simeq H_{i}\,\varphi(L_{\bullet}),
+\]
+c'est-à-dire : le foncteur $\varphi$ préserve l'homologie.\footnote{Un
+caractère se glisse entre $H_{i}$ et $\varphi$ dans le second membre et n'est
+pas identifié ; il pourrait s'agir d'un signe de composition. On le laisse de
+côté, ce qui donne l'énoncé le plus simple compatible avec la ligne.} C'est la
+condition minimale pour qu'une linéarisation mérite son nom.
+
+Trois programmes sont ensuite listés :
+
+\begin{itemize}
+\item[A)] $D^{b}_{lc}(\hat{A}_{k})$, etc.
+\item[B)] $D^{-}_{lc}(\hat{A}_{h}) \rightleftarrows D^{-}_{lc}(\hat{B}_{h})$,
+avec le mot \emph{équivalence} souligné --- c'est la question 1, reposée avec
+des catégories dérivées bornées d'un côté seulement.\footnote{Une note ajoute :
+« NB : on a $D^{-}(\hat{A}_{k}) \to D^{-}(\hat{B}_{h})$ », suivie d'un membre
+illisible. Les indices $k$ et $h$ alternent d'une ligne à l'autre sans que la
+page dise s'ils désignent la même chose ; on les reproduit tels quels plutôt
+que de les uniformiser.}
+\item[C)] Les objets \emph{lisses} de $\hat{A}_{k}$, dans un cadre annoncé comme
+plus général, avec une notation $\hat{A}_{k\text{-lisse}}$ substituée à un
+$\mathrm{Lisse}_{k}$ barré, et un $W$ isolé.
+\end{itemize}
+
+Ce changement de notation --- un indice à la place d'un nom --- est le seul
+signe, dans tout le dossier, d'un travail de mise au propre. Il n'a pas
+abouti : le quatrième feuillet reprend les mêmes matières sans les mener plus
+loin, et rien n'y forme un énoncé qu'on puisse détacher.\footnote{On ne le
+découpe donc pas en propositions qu'il ne porte pas. C'est le seul feuillet
+écrit du dossier dont cette lecture ne tire rien.}
+
+\end{document}
