@@ -47,12 +47,23 @@ export function BookPage({ bookKey }: { bookKey: BookKey }) {
    * notebook or pastes into a message when noting where to resume, and it is
    * what the transcription skill cites in the header of the file it produces.
    * State living only in React would not be shareable.
+   *
+   * A third segment may name the edition — `#66/1/modern` opens the modernised
+   * reading rather than the transcription. It is optional and omitted by every
+   * link the notebook writes itself, so the short form stays the one people
+   * copy; what needs it is a link arriving from elsewhere, where saying "this
+   * folder has a modernised reading" and landing the reader on the
+   * transcription tab would be a broken promise.
    */
   const [open, setOpen] = useState<{ cote: string; batch: number } | null>(null);
+  const [edition, setEdition] = useState<Edition>('fr');
   useEffect(() => {
     const readHash = () => {
-      const m = /^#([\w-]+)\/(\d+)$/.exec(location.hash);
-      setOpen(m ? { cote: m[1], batch: Number(m[2]) } : null);
+      const h = /^#([\w-]+)\/(\d+)(?:\/(fr|modern))?$/.exec(location.hash);
+      setOpen(h ? { cote: h[1], batch: Number(h[2]) } : null);
+      // Only when the fragment says so: leaving it alone otherwise is what
+      // keeps the toggle where the reader put it as they move between batches.
+      if (h?.[3]) setEdition(h[3] as Edition);
     };
     readHash();
     addEventListener('hashchange', readHash);
@@ -68,8 +79,6 @@ export function BookPage({ bookKey }: { bookKey: BookKey }) {
     history.replaceState(null, '', location.pathname);
     setOpen(null);
   };
-
-  const [edition, setEdition] = useState<Edition>('fr');
 
   /**
    * The page being read, reported by the transcript and consumed by the

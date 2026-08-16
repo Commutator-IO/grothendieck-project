@@ -3,7 +3,15 @@ import { Footer, Header } from './components/Frame.tsx';
 import { BOOKS } from './content/books.ts';
 import editionsRaw from './content/editions.json';
 import { COTES, GROUPS } from './content/catalogue.ts';
-import { BATCH_SIZE, batchCount, evidence, folderTags, sourceUrl, useManifest } from './lib/batches.ts';
+import {
+  BATCH_SIZE,
+  batchCount,
+  editionUrl,
+  evidence,
+  folderTags,
+  sourceUrl,
+  useManifest,
+} from './lib/batches.ts';
 import type { PublishedEdition } from './lib/types.ts';
 
 const EDITIONS = editionsRaw as PublishedEdition[];
@@ -188,41 +196,46 @@ export function ArchivePage() {
                           {belongs.title}
                         </span>
                       )}
+                      {/* Both chips are the way back in. A chip that states a
+                          folder has been transcribed, and cannot be clicked to
+                          read the transcription, makes the reader hunt for
+                          something the page already knows the address of.
+                          Where the folder sits in one of the books, the link
+                          goes to the notebook — facsimile beside text, the
+                          reading this site is for — and names the edition in
+                          the fragment so the toggle arrives already on the
+                          right tab. The 100-odd folders outside every book have
+                          no notebook page, and fall back to the standalone
+                          reading view the renderer writes for each edition. */}
                       {work && work.transcribed > 0 && (
-                        <span
-                          title={`${work.transcribed} of ${work.batches} batches transcribed`}
-                          className="ml-2 whitespace-nowrap rounded-full bg-relu-100 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-relu-700"
+                        <a
+                          href={
+                            belongs
+                              ? `${belongs.path}#${id}/1/fr`
+                              : editionUrl(manifest, id, 1, 'fr', 'html')
+                          }
+                          title={`${work.transcribed} of ${work.batches} batches transcribed — open the transcription, batch 1`}
+                          className="ml-2 whitespace-nowrap rounded-full bg-relu-100 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-relu-700 transition hover:bg-relu-200"
                         >
                           {work.transcribed === work.batches
-                            ? 'transcribed'
-                            : `${work.transcribed}/${work.batches} transcribed`}
-                        </span>
+                            ? 'transcribed ↗'
+                            : `${work.transcribed}/${work.batches} transcribed ↗`}
+                        </a>
                       )}
                       {work && work.modernised > 0 && (
-                        /* The chip is the way back in: a modernised folder
-                           has a reading page, so saying so and linking to it
-                           are the same gesture. Folders outside every book
-                           have nowhere to open and keep the plain chip. */
-                        belongs ? (
-                          <a
-                            href={`${belongs.path}#${id}/1`}
-                            title={`${work.modernised} of ${work.batches} batches modernised — open the reading, batch 1`}
-                            className="ml-1.5 whitespace-nowrap rounded-full bg-brand-100 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-brand-700 transition hover:bg-brand-200"
-                          >
-                            {work.modernised === work.batches
-                              ? 'modernised ↗'
-                              : `${work.modernised}/${work.batches} modernised ↗`}
-                          </a>
-                        ) : (
-                          <span
-                            title={`${work.modernised} of ${work.batches} batches modernised — read again by machine, not by a person`}
-                            className="ml-1.5 whitespace-nowrap rounded-full bg-brand-100 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-brand-700"
-                          >
-                            {work.modernised === work.batches
-                              ? 'modernised'
-                              : `${work.modernised}/${work.batches} modernised`}
-                          </span>
-                        )
+                        <a
+                          href={
+                            belongs
+                              ? `${belongs.path}#${id}/1/modern`
+                              : editionUrl(manifest, id, 1, 'modern', 'html')
+                          }
+                          title={`${work.modernised} of ${work.batches} batches modernised — open the reading, batch 1. Read again by machine, not by a person`}
+                          className="ml-1.5 whitespace-nowrap rounded-full bg-brand-100 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-brand-700 transition hover:bg-brand-200"
+                        >
+                          {work.modernised === work.batches
+                            ? 'modernised ↗'
+                            : `${work.modernised}/${work.batches} modernised ↗`}
+                        </a>
                       )}
                       {folderTags(manifest, id).map((t) => (
                         <span
