@@ -144,6 +144,17 @@ export function MethodPage() {
               pass then writes one file per batch, which is what keeps each one beside the
               facsimile pages it covers.
             </P>
+            <P id="modern-folder-whole-in-practice">
+              Folder 151 is the first read under that scope, and what it bought is specific
+              enough to record. The conventions governing its pages 2 to 8 are only written
+              down on page 21, in the next batch: read back from there, two relations that
+              look wrong turn out to be wrong in a nameable way. A disagreement the
+              transcription flagged on page 21 — a boxed relation against the coordinates on
+              the same page — resolves once both regimes are in view. And a definition on page
+              59 had to be corrected by one index, because the two identities the page draws
+              from it three lines later are false as written and true after. None of the three
+              is visible to a pass that sees twenty pages.
+            </P>
             <P id="modern-correct-as-it-stands">
               The modernised reading is the one that is allowed to depart from the page, and it is
               held to a different standard: <strong>correct as it stands</strong>. Where the
@@ -446,10 +457,14 @@ function Contributors() {
  * how the earlier figure came to be wrong.
  */
 const PILOT = {
-  /** Transcribed so far, by hand-count: 115#1, 161-1#1, and 135#1–3. */
-  batchesTranscribed: 5,
-  /** Of those, modernised: 115#1 and 161-1#1. */
-  batchesModernised: 2,
+  /** Transcribed so far, counted off `public/manifest.json` and excluding the
+      specimen: 115#1, 135#1–3, 151#1–4, 161-1#1, 161-3#1–3. */
+  batchesTranscribed: 12,
+  /** All twelve now have a modernised reading covering them. Four folders
+      carry it as one file for the whole folder (115, 135, 161-1, 161-3);
+      folder 151 carries one file per batch, written in a single pass over the
+      folder — the layout the skill now specifies. */
+  batchesModernised: 12,
   /** Per batch. `contextM` is every token the pass sent or received, cache
       reads included; `writtenK` is output alone; hours are model-active time,
       gaps over five minutes dropped. Transcription is the mean of the five
@@ -504,10 +519,10 @@ function CostAndHorizon() {
     <section className="mt-14 max-w-[52em]">
       <H2 id="cost">Cost, and the horizon</H2>
       <P id="cost-measured" className="prose-fonds mt-3">
-        <strong>{PILOT.batchesTranscribed} batches</strong> have been transcribed — folder
-        115, fourteen pages; folder 161-1, nineteen; and the three batches of folder 135,
-        fifty-eight pages, which completes that folder — of which{' '}
-        <strong>{PILOT.batchesModernised}</strong> also have their modernised reading.
+        <strong>{PILOT.batchesTranscribed} batches</strong> have been transcribed, across five
+        folders taken end to end — 115, fourteen pages; 161-1, nineteen; 135, fifty-eight;
+        161-3, fifty-four; and 151, seventy-four — and all{' '}
+        <strong>{PILOT.batchesModernised}</strong> now have their modernised reading.
         Together they took about <strong>{hoursDone.toFixed(1)} h</strong> of model-active
         time, moved <strong>{fmtM(contextDoneM)} tokens</strong> of context and wrote{' '}
         <strong>{fmtSmallM(writtenDoneK / 1000)}</strong>.
