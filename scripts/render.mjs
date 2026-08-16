@@ -1089,18 +1089,22 @@ async function main() {
     await mkdir(resolve(OUT, folder), { recursive: true });
 
     for (const file of files) {
-      // `batch-NN` covers twenty pages; `folder` covers the shelfmark whole.
-      // The second exists because the modernised reading's unit is the folder
-      // — its argument runs across the batch boundaries — and a reading of
-      // folder 161-3 filed as "batch 1" would claim to be a third of itself.
-      const m = /^(?:batch-(\d+)|folder)\.(fr|modern)\.tex$/.exec(file);
-      if (!m) {
+      // Two units, two namings. `batch-NN` covers twenty pages; the shelfmark
+      // itself — `161-3.modern.tex` — covers the folder whole, because the
+      // modernised reading's argument runs across the batch boundaries and a
+      // reading of folder 161-3 filed as "batch 1" would claim to be a third
+      // of itself. The folder-wide name repeats the shelfmark rather than
+      // saying `folder`, so that a file downloaded on its own still says which
+      // folder it is; requiring it to equal the directory keeps the two from
+      // drifting apart unnoticed.
+      const m = /^(?:batch-(\d+)|(.+?))\.(fr|modern)\.tex$/.exec(file);
+      if (!m || (m[2] !== undefined && m[2] !== folder)) {
         process.stderr.write(`  ⚠ ${folder}/${file}: name outside the convention, skipped\n`);
         continue;
       }
       const tex = await readFile(resolve(SOURCE, folder, file), 'utf8');
       try {
-        const html = render(tex, m[2]);
+        const html = render(tex, m[3]);
         await writeFile(resolve(OUT, folder, basename(file, '.tex') + '.html'), html, 'utf8');
         // The source travels with its rendering. `.tex` is the artifact that
         // matters — it is what gets cited, corrected and folded into a larger
@@ -1114,7 +1118,7 @@ async function main() {
         // who actually wants the download.
         await writeFile(
           resolve(OUT, folder, `${file}.html`),
-          sourcePage(tex, file, m[2]),
+          sourcePage(tex, file, m[3]),
           'utf8',
         );
         n += 1;

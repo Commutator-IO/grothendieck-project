@@ -78,7 +78,7 @@ export async function writeManifest() {
   /**
    * Readings whose unit is the folder, not the batch.
    *
-   * `folder.modern.tex` covers a shelfmark entire. Filing it under `#1` — the
+   * `161-3.modern.tex` covers a shelfmark entire. Filing it under `#1` — the
    * only batch key its old name `batch-01.modern.tex` could produce — made the
    * archive page report folder 161-3 as "1/3 modernised" when all 54 of its
    * pages had been read, and left the Modernised toggle dead on batches 2 and
@@ -96,14 +96,15 @@ export async function writeManifest() {
   const tags = {};
   for (const d of await dirs(TRANSCRIPTS)) {
     for (const f of await readdir(resolve(TRANSCRIPTS, d.name))) {
-      const m = /^(?:batch-(\d+)|folder)\.(fr|modern)\.(html|tex|pdf)$/.exec(f);
-      if (!m) continue;
-      // m[1] is undefined for `folder.*`, which is how the two are told apart.
+      const m = /^(?:batch-(\d+)|(.+?))\.(fr|modern)\.(html|tex|pdf)$/.exec(f);
+      // m[1] is set for `batch-NN.*`; m[2] for the folder-wide file, which must
+      // be named for the folder it sits in — anything else is not ours.
+      if (!m || (m[2] !== undefined && m[2] !== d.name)) continue;
       const entry = m[1]
         ? (transcripts[`${d.name}#${Number(m[1])}`] ??= { html: [], tex: [], pdf: [] })
         : (folders[d.name] ??= { html: [], tex: [], pdf: [] });
-      if (!entry[m[3]].includes(m[2])) entry[m[3]].push(m[2]);
-      if (m[2] === 'modern' && m[3] === 'tex') {
+      if (!entry[m[4]].includes(m[3])) entry[m[4]].push(m[3]);
+      if (m[3] === 'modern' && m[4] === 'tex') {
         const tex = await readFile(resolve(TRANSCRIPTS, d.name, f), 'utf8');
         for (const k of tex.matchAll(/\\keywords\{([^}]*)\}/g)) {
           const list = (tags[d.name] ??= []);

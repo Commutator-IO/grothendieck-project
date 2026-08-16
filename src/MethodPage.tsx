@@ -711,7 +711,7 @@ function Pipeline() {
           <rect x="604" y="40" width="212" height="66" rx="8" className={box} strokeWidth="1.5" />
           <text x="710" y="66" textAnchor="middle" fontSize="12" fontWeight="600" fill="#131210"
             style={{ fontFamily: 'ui-monospace, Menlo, monospace' }}>
-            folder.modern.tex
+            &lt;cote&gt;.modern.tex
           </text>
           <text x="710" y="84" textAnchor="middle" fontSize="10.5" fill="#726d5f">
             summary, then the
@@ -797,7 +797,7 @@ function StatusSequence() {
     todo: { from: 'Neither file exists', observed: true },
     running: { from: 'transcripts/status.json', observed: false },
     drafted: { from: 'batch-NN.fr.tex exists', observed: true },
-    reviewed: { from: 'folder.modern.tex exists', observed: true },
+    reviewed: { from: '<cote>.modern.tex exists', observed: true },
     checked: { from: 'transcripts/status.json', observed: false },
     skipped: { from: 'transcripts/status.json', observed: false },
   };

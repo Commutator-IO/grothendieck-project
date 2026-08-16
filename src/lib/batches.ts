@@ -72,13 +72,17 @@ export const transcriptUrl = (cote: string, k: number, edition: Edition, ext: st
 /**
  * The same, for an edition whose unit is the folder rather than the batch.
  *
- * `folder.modern.tex` covers a shelfmark entire. It was once written as
+ * `161-3.modern.tex` covers a shelfmark entire. It was once written as
  * `batch-01.modern.tex`, which was the wrong name for it in a way that showed:
  * a reading of all 54 pages of folder 161-3 was reported as "1/3 modernised",
  * and its Modernised toggle was dead on the two batches it also covered.
+ *
+ * The name repeats the shelfmark rather than saying `folder`, because these
+ * files are offered as downloads: `folder.modern.pdf` in someone's downloads
+ * directory says nothing about which of 178 folders it holds.
  */
 export const folderTranscriptUrl = (cote: string, edition: Edition, ext: string) =>
-  `/transcripts/${cote}/folder.${edition}.${ext}`;
+  `/transcripts/${cote}/${cote}.${edition}.${ext}`;
 
 /** The folder-wide artifacts, if this shelfmark has any. */
 export const folderEntry = (m: Manifest | null, cote: string): TranscriptEntry | undefined =>
