@@ -1,0 +1,575 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 151, batch 3
+% (pages 41-60).
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried — a doubtful
+% reading, a notation he used differently, a missing passage — moves into a
+% footnote.
+%
+% It is held to being mathematically correct as it stands, not merely faithful
+% to the page. Where the manuscript is loose or mistaken, the true statement is
+% what appears here, and the footnote says what the page has. In any dispute of
+% substance the transcription governs: whoever cites Grothendieck must cite
+% batch-03.fr.tex.
+%
+% Scope: the folder was read WHOLE before any of this was written — all four
+% batches, pages 1-74, in one pass — and one file is written per batch, this
+% being the third. Two places depend on that: the reading of the mixed tubes
+% V^j_{i,k} on page 59, which is corrected here against the use the last batch
+% makes of them; and the reason section 2's colimit is stated as strict rather
+% than homotopical, which only the last batch's gluing theorem makes visible.
+%
+% Pass: Opus 5 (claude-opus-5), 2026-08-16 — first pass, unchecked against the
+% pages by a human.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{151}
+\batch{3}
+\pages{41}{60}
+\dating{[à partir de 1981-à partir de 1990]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Topos stratifié (1981) : notes manuscrites (s.d.) — lecture modernisée}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Le lot précédent laissait le texte au milieu d'une phrase, et devant un échec :
+la sphère, découpée en un point et un plan, n'était pas retrouvée par la donnée
+des groupes fondamentaux de ses morceaux. Ces vingt pages commencent par
+réparer cela, puis quittent le cas de deux morceaux pour le cas général.
+
+La réparation tient en trois pages et elle est jolie. Le groupe fondamental est
+un invariant de dimension~1 ; ce qui manquait est un cran plus haut, et il y a
+un objet qui l'habite : la \emph{gerbe}. Une gerbe est à un groupe abélien $A$
+ce qu'un fibré en droites est à ses fonctions de transition, un cran plus haut ;
+et sur un espace dont les morceaux sont des $K(\pi,1)$, se donner une gerbe
+revient à se donner deux extensions de groupes et un isomorphisme entre ce
+qu'elles induisent sur la jointure. Sur la sphère, le compte est immédiat : il
+reste un automorphisme de l'extension triviale de $\mathbb{Z}$ par $A$, donc un
+élément de $A$, et l'on retrouve $H^{2}(S^{2},A) \simeq A$ — « un magnifique
+succès ! », écrit-il. Ce que le niveau des groupes fondamentaux perdait, le
+niveau des gerbes le retrouve.
+
+Le reste du lot construit le cadre général. Les morceaux ne sont plus deux mais
+une famille $(X_{i})$ de parties fermées, indexée par un ensemble ordonné $I$,
+la relation $i \leq j$ voulant dire $X_{i} \subset X_{j}$. À cette famille est
+attaché un objet combinatoire : l'ensemble $X_{\Delta_{r}}$ des \emph{drapeaux},
+c'est-à-dire des points $x$ munis d'une chaîne croissante $i_{0} \leq \cdots \leq
+i_{r}$ d'indices dont le premier contient $x$. Ces ensembles s'organisent en un
+espace simplicial, et la première proposition dit que l'espace tout entier se
+retrouve à partir d'eux : $X$ est la limite inductive du système.
+
+C'est vrai — et insuffisant, pour la raison que la sphère a déjà montrée. La
+limite inductive en question est une limite d'espaces, pas de types d'homotopie,
+et les $X_{i}$ sont fermés les uns dans les autres : entre deux morceaux
+voisins, il n'y a rien qu'un bord, et un bord ne dit pas comment l'un s'approche
+de l'autre. C'est exactement pourquoi la troisième section, qui s'ouvre à la page
+56, remplace les fermés $X_{i}$ par les \emph{tubes} $\mathcal{V}_{i,j}$ : des
+voisinages, et non des bords. Toute la fin du lot est la mise en place de ce
+vocabulaire — la strate $X_{i}^{*}$, le tube $\mathcal{V}_{i,j}$, le tube épointé
+$\mathcal{V}^{*}_{i,j}$, et une famille de tubes mixtes qui interpolent entre les
+deux.
+
+Deux passages valent d'être lus pour eux-mêmes. Le premier est une question, à
+la page 53 : faut-il exiger que l'intersection de deux morceaux soit encore un
+morceau ? Il répond non, en dessinant un cercle coupé en deux arcs par deux
+points — deux morceaux connexes dont l'intersection ne l'est pas — et conclut :
+« faut-il l'éliminer pour autant ? Il ne semble pas. La suite le montrera bien ! »
+Le second est une remarque sur sa propre pratique, page 43 : la théorie
+d'« intégration » des types d'homotopie qu'il appelle de ses vœux, et qu'il
+voyait naguère comme un lien au grand yoga des relations entre structures
+homotopiques et groupoïdes, lui paraît, réflexion faite, « relativement triviale,
+et justiciable sans doute de techniques d'explicitation des plus standard ». Le
+jugement est juste : c'est la théorie des colimites homotopiques, et elle
+existait déjà.
+
+\keywords{gerbe, poset-stratified space, simplicial space, homotopy colimit, conical stratification, link of a stratum}
+\end{resume}
+
+\pagerange{41}{43}
+\section*{Les gerbes, ou ce que le niveau $\Pi_{1}$ laissait échapper}
+
+La phrase interrompue au bas de la page 40 se termine ici, et elle énonce un
+principe de recollement d'un cran plus haut que celui des systèmes locaux : la
+donnée d'une gerbe $\mathcal{G}_{X}$ sur $X$ équivaut à celle d'une gerbe
+$\mathcal{G}_{X^{*}}$ sur $X^{*}$, d'une gerbe $\mathcal{G}_{Y,X}$ sur le tube
+$\mathcal{V}_{Y,X}$, et d'une équivalence entre leurs restrictions au tube
+épointé :
+\[
+  \mathcal{G}_{Y,X}\bigl|\,\mathcal{V}^{*}_{Y,X} \;\simeq\;
+  \mathcal{G}_{X^{*}}\bigl|\,\mathcal{V}^{*}_{Y,X}.
+\]
+C'est le même schéma de recollement que pour les faisceaux constructibles, avec
+des gerbes à la place des systèmes locaux — et, comme il s'agit d'une
+équivalence entre objets d'une $2$-catégorie et non d'une égalité, c'est
+précisément là que loge l'information que la troncation en dimension~1 avait
+perdue.
+
+Sur un $K(\pi,1)$, une $A$-gerbe s'interprète canoniquement comme une extension
+de $\pi$ par $A$.\footnote{Pour $A$ abélien et le lien donné, les $A$-gerbes sur
+$K(\pi,1)$ sont classées par $H^{2}(\pi,A)$, qui classe aussi les extensions de
+$\pi$ par $A$ ; l'énoncé du manuscrit est celui-là. Il suppose, comme il le dit,
+les pièces connexes et de $\pi_{2}$ nul.} Se donner une gerbe sur $X$ revient
+donc à se donner deux extensions — l'une de $\pi_{1}(Y)$ par $A$, l'autre de
+$\pi_{1}(X^{*})$ par $A$ — et un isomorphisme entre les deux extensions de $D$
+par $A$ qu'elles induisent, $D = \pi_{1}(\mathcal{V}^{*}_{Y,X})$ étant le groupe
+de décomposition, muni de ses deux flèches vers $\pi_{1}(Y)$ et
+$\pi_{1}(X^{*})$.
+
+\subsection*{Le calcul sur la sphère}
+
+Reprenons $X = S^{2}$, $Y = \{\infty\}$, $X^{*} = \mathbb{C}$, où $D \simeq
+\mathbb{Z}$ et où les deux groupes fondamentaux $\pi_{1}(Y)$ et
+$\pi_{1}(X^{*})$ sont triviaux. Les deux extensions sont alors triviales, et il
+ne reste rien à choisir que l'isomorphisme entre les deux extensions triviales
+de $\mathbb{Z}$ par $A$ qu'elles induisent — c'est-à-dire un automorphisme de
+l'extension triviale, c'est-à-dire un élément de
+$\mathrm{Hom}(\mathbb{Z},A) \simeq A$. D'où
+\[
+  H^{2}(S^{2}, A) \;\simeq\; A,
+\]
+la valeur correcte.\footnote{L'interprétation de $H^{2}(X,A)$ comme classifiant
+les gerbes liées par $A$ est celle de Giraud (1971), à qui le manuscrit ne
+renvoie pas ici. Ce que le calcul établit n'est pas la valeur de
+$H^{2}(S^{2},A)$, qui est connue, mais que le schéma de recollement la donne :
+c'est un test du programme, non un résultat sur la sphère.}
+
+Ce succès vaut confirmation de l'intuition d'ensemble : il y a une théorie des
+$\varinjlim$ de types d'homotopie, et le type d'homotopie d'une limite inductive
+de topos est la limite inductive des types d'homotopie. Pour des espaces
+stratifiés dont les pièces sont des $K(\pi,1)$ — l'exemple visé étant les espaces
+de modules de Teichmüller, leurs compactifiés et leurs voisinages tubulaires —
+le type d'homotopie doit s'exprimer en termes d'un système inductif convenable,
+le plus souvent fini, des groupoïdes fondamentaux des pièces. C'est le programme
+que sert tout le reste du dossier.\footnote{« Cette théorie d'intégration des
+types d'homotopie […] est en fait relativement triviale, et justiciable sans
+doute de techniques d'explicitation des plus standard », écrit-il, en ajoutant
+qu'il se réserve d'y revenir. Le jugement est exact et l'outil existait : les
+colimites homotopiques de Bousfield--Kan (1972), et le théorème de Thomason
+(1979) identifiant la colimite homotopique d'un diagramme de catégories à la
+construction de Grothendieck, sont l'un et l'autre antérieurs à ces pages.}
+
+\pagerange{44}{49}
+\section*{2. Stratifications globales : le formalisme $\tfrac{1}{2}$ simplicial, sans tubes}
+
+On quitte le cas de deux morceaux. Le cadre est un espace topologique $X$ — plus
+tard, un topos quelconque — et une famille de sous-espaces indexée par un
+ensemble ordonné $I$ :
+\[
+  (X_{i})_{i \in I}, \qquad X_{i} \subset X,
+\]
+soumise à deux conditions :
+
+\begin{itemize}
+\item a) les $X_{i}$ sont fermés et la famille est localement finie ;
+\item b) $i \leq j \implies X_{i} \subset X_{j}$.
+\end{itemize}
+
+Aucune hypothèse de trivialité locale n'est faite, et les conditions de connexité
+et de locale connexité qu'exigera la faisceautisation sur $X$ sont
+délibérément différées.
+
+\subsection*{Drapeaux}
+
+On pose
+\[
+  X_{\Delta_{0}} = \coprod_{i \in I} X_{i}
+  = \bigl\{ (x,i) \in X \times I \ \big|\ x \in X_{i} \bigr\},
+\]
+et la condition a) dit exactement que le morphisme canonique
+$X_{\Delta_{0}} \to X$ est \emph{fini} — propre, séparé, à fibres finies ; c'est
+aussi une immersion locale. On introduit ensuite la partie fermée
+\[
+  X_{\Delta_{1}} = \coprod_{i \leq j} \Gamma_{i,j}
+  \;\subset\; X_{\Delta_{0}} \times X_{\Delta_{0}},
+  \qquad \Gamma_{i,j} \subset X_{i} \times X_{j}
+  \text{ le graphe de } X_{i} \hookrightarrow X_{j},
+\]
+qui n'est autre que le graphe d'une relation d'ordre sur $X_{\Delta_{0}}$ :
+\[
+  (x,i) \leq (y,j) \iff x = y \text{ et } i \leq j,
+\]
+soit l'ordre induit par l'ordre produit de $X \times I$, $X$ étant muni de
+l'ordre discret. Le couple $(X_{\Delta_{0}}, X_{\Delta_{1}})$ est donc un
+\emph{objet ordonné de la catégorie des espaces topologiques} : une catégorie
+interne, d'objet des objets $X_{\Delta_{0}}$, d'objet des flèches
+$X_{\Delta_{1}}$, de source $\sigma$, de but $b$, et de composition
+\[
+  X_{\Delta_{2}} = (X_{\Delta_{1}},b) \times_{X_{\Delta_{0}}}
+  (X_{\Delta_{1}},\sigma) \longrightarrow X_{\Delta_{1}},
+  \qquad (x,y,z) \mapsto (x,z).
+\]
+
+Les deux projections ne jouent pas le même rôle, et la dissymétrie est le fait
+technique central de la section :
+
+\begin{itemize}
+\item $\sigma \colon X_{\Delta_{1}} \to X_{\Delta_{0}}$ est un revêtement étale,
+et même constant au-dessus de chaque $X_{i}$, de fibre
+$I_{i} = \{ j \in I \mid j \geq i \}$ — donc fini si les $I_{i}$ le sont ;
+\item $b \colon X_{\Delta_{1}} \to X_{\Delta_{0}}$ n'est qu'une immersion locale.
+\end{itemize}
+
+En degré quelconque, les produits fibrés itérés donnent les drapeaux :
+\[
+  \begin{aligned}
+    X_{\Delta_{r}}
+      &= \bigl\{ (x_{0},\ldots,x_{r}) \in X_{\Delta_{0}}^{\,r+1}
+        \ \big|\ x_{0} \leq \cdots \leq x_{r} \bigr\} \\
+      &\simeq \bigl\{ (x, i_{0},\ldots,i_{r}) \ \big|\
+        x \in X_{i_{0}},\ i_{0} \leq \cdots \leq i_{r} \bigr\} \\
+      &\simeq \coprod_{i_{*} \in I(\Delta_{r})} X_{i_{0}},
+  \end{aligned}
+\]
+où $I(\Delta_{r}) = \mathrm{Hom}_{\text{ens. ord.}}(\Delta_{r}, I)$ est
+l'ensemble des drapeaux de longueur $r$ de $I$. Autrement dit :
+$X_{\Delta_{*}}$ est le \emph{nerf} de l'objet ordonné, et il se plonge dans le
+produit $X \times I_{\Delta_{*}}$, dont il hérite sa structure simpliciale :
+une application croissante $\alpha \colon \Delta_{r'} \to \Delta_{r}$ induit
+\[
+  \alpha^{*} \colon X_{\Delta_{r}} \longrightarrow X_{\Delta_{r'}},
+  \qquad \alpha^{*}(x,i_{*}) = (x,\ i_{*} \circ \alpha).
+\]
+
+Deux remarques du manuscrit méritent d'être conservées. D'abord, tout se
+généralise en remplaçant l'ensemble ordonné $I$ par une catégorie
+$\mathcal{C}$ et la famille par un foncteur de $\mathcal{C}$ vers les parties
+fermées de $X$. Ensuite, si l'on part d'une famille sans ordre, on peut toujours
+poser $i \leq j \iff X_{i} \subseteq X_{j}$ ; mais la présentation adoptée
+n'exige ni que $i \mapsto X_{i}$ soit injective, ni que ce soit un plongement
+d'ensembles ordonnés — la réciproque de b) n'est pas requise. C'est une liberté
+délibérée, et la section~4 dira pourquoi : elle est ce qui permet de prendre des
+images inverses sans avoir à jeter les indices devenus vides.
+
+\subsection*{Ce qui est étale, ce qui ne l'est pas}
+
+La dissymétrie entre $\sigma$ et $b$ se propage à tous les degrés. Si
+$\alpha \colon \Delta_{r'} \to \Delta_{r}$ vérifie $\alpha(0) = 0$, alors
+$\alpha^{*}$ est un morphisme de revêtements étales au-dessus de $X$ ; en
+particulier $X_{\Delta_{r}} \to X_{\Delta_{0}}$, $(x,i_{0},\ldots,i_{r}) \mapsto
+(x,i_{0})$, en est un. Plus précisément, au-dessus du composant $X_{i'_{*}}$ de
+$X_{\Delta_{r'}}$, le revêtement est constant de fibre l'ensemble des drapeaux
+de type $\Delta_{r}$ qui s'envoient sur $i'_{*}$ :
+\[
+  \alpha^{*-1}\bigl(X_{i'_{*}}\bigr) \;\simeq\;
+  X_{i'_{*}} \times \bigl\{ i_{*} \in I(\Delta_{r})
+    \ \big|\ i_{*} \circ \alpha = i'_{*} \bigr\}.
+\]
+Sans la condition $\alpha(0) = 0$, on ne peut affirmer que des immersions
+locales — et de même $X_{\Delta_{r}} \to X$ n'est jamais qu'une immersion
+locale.\footnote{La raison de la condition $\alpha(0) = 0$ est que le composant
+d'un drapeau ne dépend que de son \emph{premier} indice, $X_{i_{*}} = X_{i_{0}}$ ;
+une application croissante qui préserve le $0$ ne touche donc pas à l'espace,
+seulement à la combinatoire, et c'est ce qui rend $\alpha^{*}$ étale.}
+
+Le manuscrit note enfin qu'on aurait intérêt à éliminer les redondances en se
+bornant aux drapeaux \emph{non dégénérés}, c'est-à-dire aux suites strictement
+croissantes, ce qui oblige à ne garder que les $\alpha$ strictement croissantes.
+C'est la variante semi-simpliciale, et c'est ce que l'auteur appelle
+« $\tfrac{1}{2}$ simplicial ».\footnote{Le manuscrit écrit tantôt
+« $\tfrac{1}{2}$ simplicial », tantôt « semi-simplicial », pour le même objet.
+L'usage d'aujourd'hui distingue : \emph{simplicial} pour le système avec toutes
+les applications croissantes, \emph{semi-simplicial} pour la variante à
+applications strictement croissantes, qui est celle de son NB de la page 50. Les
+deux sont ici en présence, et le texte passe de l'une à l'autre sans le dire.}
+
+\pagerange{50}{53}
+\section*{Reconstituer $X$}
+
+La question posée est celle de savoir si le diagramme
+
+\begin{tikzcd}[column sep=large, row sep=small]
+& X_{\Delta_{1}} \arrow[dl, "\sigma"'] \arrow[dr, "b"] & \\
+X_{\Delta_{0}} \arrow[dr, dashed] & & X_{\Delta_{0}} \arrow[dl, dashed] \\
+& X &
+\end{tikzcd}
+
+est cocartésien, c'est-à-dire si $X \simeq X_{\Delta_{0}}
+\amalg_{X_{\Delta_{1}}} X_{\Delta_{0}}$. Il y faut deux conditions de plus :
+
+\begin{itemize}
+\item c) $X = \bigcup_{i} X_{i}$ ;
+\item d) pour tous $i,j$, \ $X_{i} \cap X_{j} = \bigcup_{k \leq i,\ k \leq j} X_{k}$.
+\end{itemize}
+
+\textbf{Proposition.} Sous a), b), c), d), l'application canonique
+\[
+  \varinjlim X_{\Delta_{*}} \xrightarrow{\ \sim\ } X
+\]
+est un homéomorphisme — et l'énoncé vaut pour les deux variantes, drapeaux
+quelconques ou drapeaux non dégénérés.
+
+Le corollaire donne la réciproque, et c'est lui qui fait de la construction une
+équivalence de données. Soit $(X_{\Delta_{0}}, X_{\Delta_{1}})$ un espace
+topologique ordonné tel que $X_{\Delta_{1}}$ soit fermé dans le produit et que,
+pour tous $i,j$, la trace $\Gamma_{i,j} = X_{\Delta_{1}} \cap (X_{i} \times
+X_{j})$ soit vide ou le graphe d'une immersion fermée $X_{i} \hookrightarrow
+X_{j}$. Alors $\sigma$ est un revêtement étale constant, $b$ une immersion
+locale, la relation $i \leq j \iff \Gamma_{i,j} \neq \emptyset$ est un ordre sur
+$I$, et les $X_{i}$ forment un système inductif d'espaces topologiques à
+morphismes de transition des immersions fermées. Si de plus $I$ est fini et
+stable par bornes inférieures,
+\[
+  X = \varinjlim_{i \in I} X_{i} \;\simeq\;
+  X_{\Delta_{0}} / \bigl(X_{\Delta_{1}} \rightrightarrows\bigr),
+\]
+les $X_{i} \hookrightarrow X$ étant des immersions fermées.
+
+\subsection*{Une limite inductive stricte, et pourquoi elle ne suffira pas}
+
+Cette proposition est vraie et n'est pas ce qu'il faudra. La limite inductive
+qu'elle exhibe est une limite d'\emph{espaces} : le quotient de
+$\coprod_{i} X_{i}$ par la relation d'équivalence engendrée par les inclusions,
+c'est-à-dire $\varinjlim_{i \in I} X_{i}$. Elle redonne $X$ comme espace, ce qui
+est exact ; mais elle ne dit rien de son type d'homotopie, parce que les
+$X_{i}$ sont \emph{fermés} les uns dans les autres. Entre deux morceaux voisins,
+la seule chose que ce diagramme enregistre est un bord — et un bord ne dit pas
+comment l'un s'approche de l'autre, comme la sphère l'a déjà montré à la section
+précédente.
+
+C'est exactement pour cela que la section~3 remplacera les fermés $X_{i}$ par
+des \emph{tubes}, qui sont des voisinages. La limite inductive stricte restera
+la même ; la limite inductive homotopique, elle, deviendra la bonne.\footnote{La
+distinction n'est pas faite sur la page, et le manuscrit n'a pas de mot pour
+elle : il écrit $\varinjlim$ dans les deux cas, et parle de « somme amalgamée des
+types d'homotopie » quand il veut le second. La théorie qui les sépare — les
+colimites homotopiques — lui est contemporaine ; il la nomme lui-même, page 43,
+comme la chose qui lui manque et qu'il tient pour standard.}
+
+\subsection*{Faut-il que les intersections soient des morceaux ?}
+
+La condition d) demande que $X_{i} \cap X_{j}$ soit \emph{réunion} des $X_{k}$
+en dessous. Faut-il exiger davantage — que la borne inférieure $i \wedge j$
+existe et que $X_{i \wedge j} = X_{i} \cap X_{j}$ ?
+
+Le manuscrit répond non, et son contre-exemple est un dessin. Prenez le cercle,
+coupé en deux arcs $A$ et $B$ par deux points $a$ et $b$ : quatre strates,
+$A \cap B = \{a\} \cup \{b\}$, deux strates connexes dont l'intersection ne l'est
+pas. Prenez-en le cône, de sommet $o$ : une stratification locale en $o$ à cinq
+strates. « Faut-il l'éliminer pour autant ? Il ne semble pas. La suite le
+montrera bien ! » — et il a raison, car ce sont précisément les stratifications
+de ce type qui se présentent dans la nature.
+
+\pagerange{53}{55}
+\section*{Les strates}
+
+Les $X_{i}$ ne sont pas les morceaux : ils sont les fermés dont les morceaux sont
+les différences. Pour tout $x \in X$, l'ensemble $I_{x} = \{ i \in I \mid x \in
+X_{i}\}$ est fini par a), et filtrant décroissant par d) ; il a donc un plus
+petit élément
+\[
+  i(x) = \text{le plus petit } i \in I \text{ tel que } x \in X_{i}.
+\]
+Et pour tout $i$ on pose
+\[
+  \dot{X}_{i} = \bigcup_{j < i} X_{j} \quad (\text{fermé de } X_{i}),
+  \qquad
+  X_{i}^{*} = X_{i} \smallsetminus \dot{X}_{i} \quad (\text{ouvert de } X_{i}).
+\]
+
+\textbf{Proposition.} Les $X_{i}^{*}$ sont deux à deux disjoints, leur réunion
+est $X$, et $i(x)$ est l'unique indice $i$ tel que $x \in X_{i}^{*}$.
+
+\emph{Démonstration.} Soient $i \neq j$ et $x \in X_{i}^{*} \cap X_{j}^{*}$.
+Alors $x \in X_{i} \cap X_{j}$, donc par d) il existe $k \leq i,j$ avec
+$x \in X_{k}$. Si $k = i$, alors $i \leq j$, donc $i < j$, et $x \in \dot{X}_{j}$,
+ce qui contredit $x \in X_{j}^{*}$. Donc $k < i$, d'où $X_{k} \subset \dot{X}_{i}$
+et $x \in \dot{X}_{i}$, ce qui contredit $x \in X_{i}^{*}$. La réunion est $X$ et
+l'unicité est immédiate par définition de $i(x)$.\footnote{Le signe entre
+$\dot{X}_{i}$ et $X_{k}$ est tracé d'un seul trait oblique sur la page et la
+transcription hésite ; c'est l'inclusion $X_{k} \subset \dot{X}_{i}$ que
+l'argument demande, et c'est elle qui est écrite ici.}
+
+La conséquence à retenir, et que le manuscrit n'énonce pas sous cette forme,
+est que $x \mapsto i(x)$ est une application \emph{continue} de $X$ vers $I$
+muni de la topologie d'Alexandrov : les parties ouvertes de $I$ y sont les
+parties croissantes, et l'image inverse d'une partie décroissante
+$\{ j \mid j \leq i \}$ est précisément $X_{i}$, qui est fermé. C'est la
+définition moderne d'un espace stratifié par un ensemble ordonné, et elle est ici
+entièrement contenue dans les conditions a) à d).\footnote{Cette formulation —
+une stratification est un morphisme continu vers un poset alexandrovien — est
+celle qui a cours depuis Lurie ; elle est postérieure de trente ans à ces pages.
+Ce qui est ici n'est pas la définition mais son contenu : la partition en
+strates, l'existence de $i(x)$, et le fait que les $X_{i}$ sont les images
+inverses des parties décroissantes. La section~4 ajoutera la moitié qui manque,
+en montrant que $I' \mapsto X_{I'}$ commute aux réunions et aux intersections.}
+
+Les mêmes définitions se propagent aux drapeaux :
+\[
+  \dot{X}_{\Delta_{0}} = \coprod_{i} \dot{X}_{i}, \qquad
+  X^{*}_{\Delta_{0}} = X_{\Delta_{0}} \smallsetminus \dot{X}_{\Delta_{0}}
+  = \coprod_{i} X_{i}^{*},
+\]
+et en degré $r$ par image inverse le long de
+$\sigma_{r} \colon X_{\Delta_{r}} \to X_{\Delta_{0}}$, ce qui fait de
+$\dot{X}_{\Delta_{r}}$ un fermé et de $X^{*}_{\Delta_{r}}$ un ouvert de
+$X_{\Delta_{r}}$. Les applications $\alpha^{*}$ avec $\alpha(0) = 0$ respectent
+la partition. En revanche — et l'avertissement est de l'auteur — les
+$\dot{X}_{\Delta_{r}}$ ne forment pas un espace semi-simplicial : seule la moitié
+des applications les préserve.
+
+« Moralement », dit-il, $X^{*}_{\Delta_{r}}$ est la partie non singulière de
+$X_{\Delta_{r}}$ et $\dot{X}_{\Delta_{r}}$ son bord. Le propos reste, dans
+l'esprit de la section~1, de reconstituer $X$ à partir des strates $X_{i}^{*}$ —
+la section~1 étant le cas où $I$ a deux éléments, $X_{0} = Y$ et $X_{1} = X$,
+avec $Y = Y^{*}$ et $X^{*} = X \smallsetminus Y$, et où il avait fallu
+introduire $\mathcal{V}_{Y,X}$.
+
+\pagerange{56}{60}
+\section*{3. Stratifications globales : introduction des tubes}
+
+C'est le mot « il avait fallu » qui commande la section suivante. Pour tout
+couple $i \leq j$ on pose
+\[
+  \overline{\mathcal{V}}_{i,j} = \mathcal{V}_{X_{i},X_{j}}
+  \qquad (\text{voisinage tubulaire de } X_{i} \text{ dans } X_{j}),
+\]
+au sens laissé programmatique par la section~1, et l'on découpe dedans. Le
+découpage se fait avec une seule partie fermée auxiliaire :
+\[
+  R_{i,j} = \bigcup \bigl\{ X_{k} \ \big|\ k < j,\ X_{k} \not\supset X_{i} \bigr\},
+\]
+la réunion des morceaux de $X_{j}$ qui ne contiennent pas $X_{i}$ — ceux qui
+« ne voient pas » la strate depuis laquelle on
+regarde.\footnote{Le manuscrit écrit cette partie de deux façons, $R^{*}_{i,j} =
+\bigl(\bigcup_{X_{k} \not\supset X_{i}} X_{k}\bigr) \cap X_{j}$ et
+$R_{i,j} = \bigcup_{k<j,\ X_{k} \cap X_{i} \neq X_{i}} X_{k}$, et emploie parfois
+$R_{i}$ sans second indice pour la réunion non tronquée, qu'il note fermée dans
+$X$. Les trois écritures désignent la même chose à la troncation près, et nous
+n'en gardons qu'une.}
+
+Le fait qui rend le découpage utilisable est le suivant, et il est démontré sur
+la page :
+\[
+  R_{i,j} \cap X_{i} = \dot{X}_{i}.
+\]
+En effet, si $X_{k} \not\supset X_{i}$, l'intersection $X_{k} \cap X_{i}$ est,
+par la condition d), la réunion des $X_{\ell}$ avec $\ell \leq k,i$ ; chacun de
+ces $X_{\ell}$ est strictement contenu dans $X_{i}$, donc $\ell < i$ et
+$X_{\ell} \subset \dot{X}_{i}$. L'inclusion inverse est triviale.
+
+\subsection*{Trois espaces, et ce qu'ils valent}
+
+On pose alors
+\[
+  \mathcal{V}_{i,j} = \overline{\mathcal{V}}_{i,j} \smallsetminus R_{i,j},
+  \qquad
+  \mathcal{V}^{*}_{i,j} = \overline{\mathcal{V}}_{i,j} \smallsetminus \dot{X}_{j}
+  = \mathcal{V}_{i,j} \cap X_{j}^{*},
+\]
+la seconde égalité valant parce que $R_{i,j} \subset \dot{X}_{j}$. Et
+l'identité ci-dessus donne
+\[
+  \mathcal{V}_{i,j} \cap X_{i} = X_{i}^{*} :
+\]
+$\mathcal{V}_{i,j}$ est un espace infinitésimal autour de la \emph{strate}
+$X_{i}^{*}$, et non autour du fermé $X_{i}$. C'est le gain de tout le découpage.
+Pour $i = j$ tout se dégénère proprement :
+\[
+  \overline{\mathcal{V}}_{i,i} = X_{i}, \qquad
+  \mathcal{V}_{i,i} = \mathcal{V}^{*}_{i,i} = X_{i}^{*},
+\]
+de sorte que les strates elles-mêmes sont des cas particuliers des tubes.
+
+Les pierres de construction sont donc les $\mathcal{V}_{i,j}$ et
+$\mathcal{V}^{*}_{i,j}$, avec les inclusions incidentes :
+
+\begin{tikzcd}[column sep=large, row sep=small]
+& X_{i}^{*} \arrow[d, "\text{âme}"] \\
+\mathcal{V}^{*}_{i,j} \arrow[r] \arrow[d] & \mathcal{V}_{i,j} \\
+X_{j}^{*} &
+\end{tikzcd}
+
+$X_{i}^{*}$ étant l'\emph{âme} du tube : le mot est de l'auteur, et il est le
+bon, puisque c'est la section sur laquelle le tube se rétracte.
+
+\subsection*{La géométrie du tube}
+
+Sous des hypothèses de lissité et de trivialité normale locale — pour une variété
+algébrique complexe stratifiée par des sous-variétés fermées, par exemple — les
+tubes prennent une forme précise, et c'est cette forme qui justifie qu'on les ait
+préférés aux fermés. Le tube épointé $\mathcal{V}^{*}_{i,j}$ est un fibré
+localement trivial sur $X_{i}^{*}$, de fibre un cylindre ouvert
+$\mathbb{R} \times C_{i,j}$ où $C_{i,j}$ est une variété topologique compacte ;
+et $\mathcal{V}_{i,j}$ est le fibré en cônes correspondant, de fibre le cône sur
+$C_{i,j}$. Quand $j$ n'est pas un successeur de $i$, $C_{i,j}$ est encore une
+variété, mais non compacte.\footnote{$C_{i,j}$ est ce qu'on appelle aujourd'hui
+le \emph{lien} de la strate $X_{i}^{*}$ dans $X_{j}$, et la description « voisinage
+$=$ fibré en cônes sur le lien » est la définition d'une stratification
+\emph{conique}. La chose était disponible : les stratifications de
+Thom (1969) et Mather (1970) ont exactement cette propriété, et Siebenmann (1972)
+en a fait une définition. Le manuscrit ne cite personne et présente la propriété
+comme une conséquence attendue de la trivialité normale locale.}
+
+L'auteur juge alors ses pierres mal taillées : trop générales d'un côté, pas
+assez de l'autre pour contenir les morceaux dont il aurait besoin, et il renvoie
+à un autre de ses textes.\footnote{Le renvoi est à « Str$_{\infty}$, p.~84 »,
+avec une formule $\mathcal{V}^{\,d'_{*}}_{d_{*},d''_{*}} \simeq
+\widetilde{N}_{d_{*};(d'_{0},d''_{0})}|\,D^{*}_{d_{*}}$ dont aucun des symboles
+n'est défini dans ce dossier. Nous n'identifions pas le texte visé.} La
+restriction qu'il retient est de se borner aux couples $i \leq j$ où $j$ est un
+\emph{successeur} de $i$ — c'est-à-dire où il n'existe aucun $k$ avec
+$i < k < j$. Ce sont ces pierres-là, dites élémentaires, dont le lot suivant
+fera le diagramme $\widetilde{I}$.
+
+\subsection*{Les tubes mixtes}
+
+Reste une famille intermédiaire, qui interpole entre $\mathcal{V}^{*}_{i,k}$ et
+$\mathcal{V}_{i,k}$. Étant donné $i \leq j \leq k$, on pose
+\[
+  S_{j,k} = \bigcup \bigl\{ X_{\ell} \ \big|\ \ell < k,\ X_{\ell} \supset X_{j} \bigr\},
+  \qquad
+  \mathcal{V}^{\,j}_{i,k}
+  = \overline{\mathcal{V}}_{i,k} \smallsetminus \bigl( R_{i,k} \cup S_{j,k} \bigr).
+\]
+Les deux parties $R_{j,k}$ et $S_{j,k}$ répondent à la partition de
+$\{\ell \in I \mid \ell < k\}$ selon que $X_{\ell}$ contient ou non $X_{j}$, de
+sorte que $R_{j,k} \cup S_{j,k} = \dot{X}_{k}$. Comme $i \leq j$ entraîne
+$R_{i,k} \subset R_{j,k}$, on a bien $R_{i,k} \cup S_{j,k} \subset \dot{X}_{k}$,
+et la famille est croissante en $j$ :
+\[
+  \mathcal{V}^{*}_{i,k} \;\subset\; \mathcal{V}^{\,j}_{i,k}
+  \;\subset\; \mathcal{V}_{i,k},
+  \qquad
+  \mathcal{V}^{\,i}_{i,k} = \mathcal{V}^{*}_{i,k}, \qquad
+  \mathcal{V}^{\,k}_{i,k} = \mathcal{V}_{i,k},
+\]
+les deux valeurs extrêmes venant de $R_{i,k} \cup S_{i,k} = \dot{X}_{k}$ d'une
+part, de $S_{k,k} = \emptyset$ de l'autre. On retrouve pour $i = j = k$ la strate
+$X_{i}^{*}$.\footnote{La page écrit $R_{j,k}$ là où nous écrivons $R_{i,k}$, et
+c'est le seul endroit de la section où nous nous écartons d'elle. Avec
+$R_{j,k}$, la réunion $R_{j,k} \cup S_{j,k}$ vaut $\dot{X}_{k}$ pour \emph{tout}
+$j$, la famille $\mathcal{V}^{\,j}_{i,k}$ est constante et égale à
+$\mathcal{V}^{*}_{i,k}$, et les deux identités que la page énonce juste en
+dessous sont fausses. Avec $R_{i,k}$, elles sont vraies toutes les deux, la
+famille interpole comme annoncé, et la note de marge — $S_{j,k} = \emptyset$ si
+$j = k$, $S_{j,k} = X_{j}$ si $k$ est un successeur de $j$ — est exacte. La
+correction est donc dictée par les énoncés que la page elle-même en tire. Le
+manuscrit ajoute que $R_{j,k} \cap S_{j,k} = \dot{X}_{i}$ ; le membre de gauche
+ne dépend pas de $i$, donc l'égalité ne peut se lire telle quelle, et nous ne
+l'affirmons pas — ce que l'identité démontrée plus haut donne, c'est
+$R_{j,k} \cap X_{j} = \dot{X}_{j}$.}
+
+Le tube mixte $\mathcal{V}^{\,j}_{i,k}$ tend lui aussi à être un fibré localement
+trivial de base $X_{i}^{*}$, mais sa fibre peut être singulière : dans le cas
+$\mathcal{V}^{\,k}_{i,k} = \mathcal{V}_{i,k}$ avec $k$ successeur de $i$, la
+singularité est isolée ; en général elle peut être de type arbitraire — il suffit
+de prendre $X_{i} = X_{i}^{*}$ réduit à un point pour la mettre tout entière dans
+la fibre. C'est ce qui diminue l'intérêt des tubes mixtes comme pierres, et
+c'est pourquoi le programme annoncé à la fin de la section est celui-ci :
+exprimer tout avec les $X_{i}^{*}$ et les tubes élémentaires
+$\mathcal{V}_{i,j}$, $\mathcal{V}^{*}_{i,j}$ ($j$ successeur de $i$) ; voir
+ensuite si certaines expressions se simplifient en admettant tous les
+$i \leq j$ ; et seulement en dernier lieu, en vue du cas des diviseurs à
+croisements normaux, voir comment les $\mathcal{V}^{\,j}_{i,k}$ s'insèrent dans
+ce formalisme.
+
+C'est ce programme que le dernier lot exécute, dans l'ordre annoncé, et qu'il
+laisse inachevé à sa troisième étape.
+
+\end{document}

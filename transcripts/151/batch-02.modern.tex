@@ -1,0 +1,562 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 151, batch 2
+% (pages 21-40).
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried — a doubtful
+% reading, a notation he used differently, a missing passage — moves into a
+% footnote.
+%
+% It is held to being mathematically correct as it stands, not merely faithful
+% to the page. Where the manuscript is loose or mistaken, the true statement is
+% what appears here, and the footnote says what the page has. In any dispute of
+% substance the transcription governs: whoever cites Grothendieck must cite
+% batch-02.fr.tex.
+%
+% Scope: the folder was read WHOLE before any of this was written — all four
+% batches, pages 1-74, in one pass — and one file is written per batch, this
+% being the second. The batch stops mid-sentence at the foot of page 40; the
+% sentence is completed on page 41, in batch 3, and what it was going to say is
+% known here because the whole folder was read first.
+%
+% Pass: Opus 5 (claude-opus-5), 2026-08-16 — first pass, unchecked against the
+% pages by a human.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{151}
+\batch{2}
+\pages{21}{40}
+\dating{[à partir de 1981-à partir de 1990]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Topos stratifié (1981) : notes manuscrites (s.d.) — lecture modernisée}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Le dossier poursuit une question : un espace découpé en morceaux — une surface
+et les courbes qu'elle porte, une variété et son lieu singulier — est-il
+déterminé par ses morceaux et par la façon dont chacun s'approche des autres ?
+Le texte « Structures stratifiées », dont le sommaire ouvrait le lot précédent,
+commence ici, à la page 26, et il commence par le cas le plus simple : deux
+morceaux seulement. Un fermé $Y$ dans un espace $X$, et ce qui reste,
+$X^{*} = X \setminus Y$.
+
+L'obstacle est immédiat et vaut d'être vu sur un dessin. Un cône, sa pointe, et
+le reste : la pointe est fermée, le reste est ouvert, leur intersection est
+vide, et rien dans ces deux données ne dit que le cône se referme. Il faut donc
+enregistrer, en plus des deux morceaux, la manière dont l'un s'approche de
+l'autre. C'est ce que fait le \emph{tube} $\mathcal{V}_{Y,X}$ — un voisinage
+infinitésimal de $Y$ dans $X$, qui se rétracte sur $Y$ — et son \emph{tube
+épointé} $\mathcal{V}^{*}_{Y,X}$, ce qu'il en reste quand on ôte $Y$. Ces deux
+espaces, avec $Y$ et $X^{*}$, sont les seuls dont le texte se servira, ici et
+partout dans la suite du dossier.
+
+L'espace est alors recollé : $X$ est la somme amalgamée de $\mathcal{V}_{Y,X}$
+et de $X^{*}$ le long de $\mathcal{V}^{*}_{Y,X}$. De là, un théorème de van
+Kampen — le groupe fondamental de $X$ est le produit amalgamé de ceux de $Y$ et
+de $X^{*}$ au-dessus de celui du tube épointé —, une suite exacte d'homotopie où
+apparaissent deux groupes que Grothendieck baptise, en empruntant à
+l'arithmétique, \emph{inertie} et \emph{décomposition}, et une description des
+faisceaux qui sont localement constants sur chaque morceau : ce sont des
+triplets, un système local de chaque côté et un morphisme de comparaison entre
+eux au-dessus du tube épointé.
+
+Puis le piège, et il occupe les trois dernières pages. Tout ce qui précède ne
+retient des morceaux que leur groupe fondamental. Est-ce assez pour retrouver le
+type d'homotopie de $X$ ? Grothendieck prend l'exemple le plus simple qu'on
+puisse imaginer — la sphère $\mathbb{P}^{1}_{\mathbb{C}}$, c'est-à-dire le plan
+complexe plus un point à l'infini, dont les morceaux sont un point, un plan et
+un cercle, tous les trois aussi simples que possible — et trouve que la donnée
+obtenue est \emph{homotopiquement triviale}, alors que la sphère ne l'est pas.
+Le niveau du groupe fondamental ne suffit donc pas, et le texte s'arrête au
+milieu de la phrase qui va dire pourquoi : il faut monter d'un cran, jusqu'aux
+gerbes. La suite est au lot suivant.
+
+Il vaut la peine de noter comment il traverse ce moment : « J'avais craint un
+moment, par cet exemple, que le type d'homotopie de $X$ ne pouvait pas se
+récupérer […]. Mais je me suis convaincu ensuite que cette crainte n'était pas
+fondée. » Ce qui échoue n'est pas le programme, c'est un invariant trop grossier,
+et la distinction est faite en une ligne.
+
+Les cinq premières pages du lot n'appartiennent pas à ce texte : elles achèvent
+les feuilles de calcul du lot précédent, sur un système à trois étages muni des
+permutations des coordonnées, et elles y apportent une réponse complète dans le
+cas pointé.
+
+\keywords{van Kampen theorem, tubular neighbourhood, homotopy pushout, constructible sheaf, exit-path category}
+\end{resume}
+
+\pagerange{21}{24}
+\section*{Le système à trois étages : le cas pointé, achevé}
+
+Les quatre feuilles numérotées 4 à 7 par l'auteur poursuivent, sans coupure, le
+calcul des pages 2 à 8 et 16 à 20. Le système est celui de deux ensembles reliés
+par un couple section-rétraction,
+\[
+  d \colon E_{1} \longrightarrow E_{2}, \qquad
+  p \colon E_{2} \longrightarrow E_{1}, \qquad p\,d = \mathrm{id}_{E_{1}},
+\]
+avec $\mathfrak{S}_{2} = \{1,\sigma\}$ opérant sur $E_{1}$, $\mathfrak{S}_{3}$
+sur $E_{2}$, un point marqué $e_{1} \in E_{1}$ fixé par $\sigma$, et
+$e_{2} = d(e_{1})$.\footnote{L'auteur écrit ici $X_{2}$ et $X_{3}$ pour $E_{1}$
+et $E_{2}$, et $X_{1} = \{e_{1}\}$ pour le point ; ces $X$ n'ont aucun rapport
+avec les $X_{i}$ de « Structures stratifiées », qui commencent cinq pages plus
+loin. Nous gardons la numérotation par degré, $E_{n}$, dans tout le dossier.}
+C'est la page 21 qui donne enfin les conventions en coordonnées, valables pour
+tout le dossier :
+\[
+  d(x,y) = (x,y,y), \qquad p(x,y,z) = (x,y), \qquad
+  \rho(x,y,z) = (y,z,x),
+\]
+\[
+  \sigma_{1}(x,y,z) = (x,z,y), \qquad \sigma_{2}(x,y,z) = (z,y,x), \qquad
+  \sigma_{3}(x,y,z) = (y,x,z),
+\]
+chaque $\sigma_{i}$ étant donc la transposition qui \emph{fixe} la $i$-ième
+lettre.
+
+\subsection*{Une contradiction apparente, et sa levée}
+
+La page encadre trois relations,
+\[
+  p\,d = \mathrm{id}_{E_{1}}, \qquad p\,\rho\,d = e, \qquad
+  p\,\rho^{2}d = \sigma,
+\]
+où $e$ désigne l'application constante de valeur $e_{1}$ ; et deux relations
+d'équivariance, $\sigma_{1}d = d$ et $p\,\sigma_{3} = \sigma\,p$. La seconde
+paraît démentie par les coordonnées de la même page, qui donnent
+$p\,\rho\,d(x,y) = (y,y)$, lequel n'est pas constant.
+
+Il n'y a pas de contradiction, et la levée est instructive. Dans le modèle en
+coordonnées, $E_{n} = F^{n+1}$ pour un ensemble $F$, on a $(y,y) =
+\delta_{0}p_{1}(x,y)$ : c'est la diagonale, non une constante. La relation
+générale, valable sans hypothèse, est
+\[
+  p\,\rho\,d = \delta_{0}\,p_{1},
+\]
+et elle ne devient $p\,\rho\,d = e$ que sous l'hypothèse posée en tête de page,
+$E_{0}$ réduit à un point — auquel cas $\delta_{0}p_{1}$ se factorise par un
+point et est bien constante. Les deux écritures de la page appartiennent à deux
+régimes : les coordonnées au modèle général, les relations encadrées au cas
+pointé.\footnote{La transcription signale le désaccord et ne le tranche pas,
+comme il se doit. C'est ici, où l'on peut écrire les deux régimes côte à côte,
+qu'il se tranche. La même remarque vaut pour la troisième page du lot
+précédent, où $p_{12}\rho\delta_{1} = \delta_{0}p_{0}$ est écrit dans le cas
+général et « application constante » dans le cas pointé.}
+
+\subsection*{Le sous-système engendré par $d(E_{1})$}
+
+Soit $E'_{2}$ le sous-$\mathfrak{S}_{3}$-ensemble de $E_{2}$ engendré par
+$d(E_{1})$. Le stabilisateur de $d(\xi)$ est $\{1,\sigma_{1}\}$ pour tout
+$\xi \neq e_{1}$, et $\mathfrak{S}_{3}$ tout entier pour $\xi = e_{1}$ ; d'où
+une orbite ponctuelle et des orbites à trois éléments, en bijection avec
+$E^{*}_{1} = E_{1} \setminus \{e_{1}\}$ :
+\[
+  E'_{2} \;\simeq\; \{e_{2}\} \;\amalg\;
+  \bigl(\mathfrak{S}_{3} \wedge_{\{1,\sigma_{1}\}} E^{*}_{1}\bigr),
+\]
+c'est-à-dire l'ensemble induit de $E^{*}_{1}$, muni de l'action triviale de
+$\{1,\sigma_{1}\}$, à $\mathfrak{S}_{3}$.\footnote{Le symbole $\wedge$ est celui
+de l'auteur pour l'induction ; il l'emploie aussi, quelques pages plus loin, pour
+le produit amalgamé de groupes. Ce sont deux opérations différentes sous un même
+signe, et nous ne conservons le signe que là où le manuscrit l'écrit.} On pose
+alors $E^{*}_{2} = E_{2} \setminus E'_{2}$, sur lequel la restriction
+$p^{*}$ de $p$ satisfait encore $p^{*}\sigma_{3} = \sigma\,p^{*}$.
+
+\subsection*{Quand $E_{2}$ recouvre-t-il $E_{1} \times E_{1}$ ?}
+
+La question posée est celle de la surjectivité de
+$(p,\ p\rho) \colon E_{2} \to E_{1} \times E_{1}$ — la même condition de
+concaténation que le lot précédent rencontrait sous la forme $(**)$. Sur
+$E'_{2}$ l'image se calcule exactement :
+\[
+  (p, p\rho)(e_{2}) = (e_{1},e_{1}), \qquad
+  (p, p\rho)\bigl(\rho^{i}d(\xi)\bigr) =
+  \begin{cases}
+    (\xi,\ e_{1}) & i = 0, \\
+    (e_{1},\ \sigma\xi) & i = 1, \\
+    (\sigma\xi,\ \xi) & i = 2,
+  \end{cases}
+\]
+pour $\xi \in E^{*}_{1}$. L'image est donc
+$\Sigma = \Sigma_{1} \cup \Sigma_{2} \cup \Delta'$, où $\Sigma_{1} = E_{1}
+\times \{e_{1}\}$, $\Sigma_{2} = \{e_{1}\} \times E_{1}$ et $\Delta'$ est
+l'image de $\delta' = (\sigma, \mathrm{id})$ ; les trois se coupent deux à deux,
+et toutes trois ensemble, en le seul point $(e_{1},e_{1})$.
+
+D'où la réponse, complète : $\Sigma = E_{1} \times E_{1}$ si et seulement si
+$E_{1}$ a au plus deux éléments. En effet le complémentaire de
+$\Sigma_{1} \cup \Sigma_{2}$ est $E^{*}_{1} \times E^{*}_{1}$, et il faut que
+$\xi \mapsto (\sigma\xi,\xi)$ y soit surjectif, c'est-à-dire que
+$\eta = \sigma\xi$ pour tous $\xi,\eta \in E^{*}_{1}$ ; si $E^{*}_{1}$ avait au
+moins deux éléments, deux orbites distinctes sous $\sigma$, ou une orbite à deux
+éléments, fourniraient un contre-exemple.
+
+\subsection*{Le carré cartésien}
+
+Il reste alors à examiner le cas $E_{1} = \{e_{1},\xi\}$, où $E_{2} = E'_{2}$ a
+quatre éléments. La question est de savoir si le carré
+\begin{tikzcd}[column sep=large, row sep=small]
+E_{1} & E_{2} \arrow[l, "p"'] \\
+E_{0} \arrow[u] & E_{1} \arrow[l] \arrow[u, "\delta_{3}"']
+\end{tikzcd}
+est cartésien, c'est-à-dire si $p^{-1}(e_{1}) = \delta_{3}(E_{1})$. L'inclusion
+$\supset$ est acquise ; l'autre se vérifie sur la classification ci-dessus. Un
+élément de $E'_{2}$ distinct de $e_{2}$ s'écrit $\rho^{i}d(\eta)$ avec
+$\eta \neq e_{1}$, et $p$ y vaut $\eta$ si $i = 0$, $\sigma\eta$ si $i = 2$ —
+tous deux distincts de $e_{1}$. Donc $p(\zeta) = e_{1}$ force $i = 1$, et
+$\rho\,d(E_{1}) = \delta_{3}(E_{1})$ : le carré est bien cartésien.
+
+L'identification $\delta_{3} = \rho\,d\sigma$ qui sert ici est écrite sur la
+page avec l'exposant de $\rho$ raturé ; le calcul la donne sans ambiguïté,
+puisque $d\sigma(x,y) = (y,x,x)$ et $\rho(y,x,x) = (x,x,y) =
+\delta_{3}(x,y)$.\footnote{C'est le seul endroit du dossier où un exposant
+illisible se laisse restituer par le calcul plutôt que deviné. La transcription
+laisse le trou ; nous le comblons, et disons ici par quoi.}
+
+\pagerange{26}{29}
+\section*{1. La situation type : un fermé dans un espace}
+
+Le texte annoncé par le sommaire de la page 1 commence ici. La donnée est
+\[
+  Y \hookrightarrow X, \qquad Y \text{ fermé dans } X,
+  \qquad X^{*} = X \setminus Y,
+\]
+des espaces topologiques, avec l'avertissement qu'il faudra plus tard les
+remplacer par des topos.
+
+\subsection*{Trivialité normale locale}
+
+L'hypothèse posée est que la « structure normale » de $X$ le long de $Y$ soit
+localement triviale : pour tout $y \in Y$, il existe un voisinage ouvert $X'$ de
+$y$ dans $X$, un espace $Z$ pointé par $z$, et un homéomorphisme
+$X' \simeq Y' \times Z$ (où $Y' = Y \cap X'$) échangeant l'inclusion
+$Y' \hookrightarrow X'$ et $Y' \times \{z\} \hookrightarrow Y' \times Z$ :
+
+\begin{tikzcd}[column sep=large]
+Y' \arrow[r, hook] \arrow[d] & X' \arrow[d] \\
+Y'\times\{z\} \arrow[r, hook] & Y'\times Z
+\end{tikzcd}
+
+L'espace $Z$ est le modèle transverse, et $z$ y est le point singulier : si $Y$
+et $X^{*}$ sont des variétés, $Z \setminus \{z\}$ en est une aussi, et $X$ est
+« singulier le long de $Y$ ».
+
+\subsection*{Le tube}
+
+On introduit une factorisation canonique de l'inclusion,
+\[
+  Y \hookrightarrow \mathcal{V}_{Y,X} \hookrightarrow X,
+\]
+où $\mathcal{V}_{Y,X}$ est le \emph{voisinage tubulaire} — un objet
+infinitésimal, dont le manuscrit dit qu'il faudra donner une définition
+techniquement souple, et dont il propose, pour $X$ paracompact, le germe de $X$
+autour de $Y$ : la limite projective, comme topos, des voisinages ouverts de $Y$
+dans $X$.\footnote{Le manuscrit dit que ce germe « est un topos », ce qui est
+exact au sens où la limite projective d'un système de topos ouverts en est un ;
+c'est aussi ce qui rend la notion utilisable dans le contexte étale, où il n'y a
+pas de voisinage ouvert assez petit. La construction reste à cet endroit
+programmatique, et le texte y insiste.}
+
+Les deux inclusions ont des comportements opposés, qui sont exactement ce dont
+on se servira : $\mathcal{V}_{Y,X} \hookrightarrow X$ a les propriétés d'un
+ouvert, et $Y \hookrightarrow \mathcal{V}_{Y,X}$ celles d'une immersion fermée.
+Sous les hypothèses de trivialité normale locale — et des conditions de
+modération ensemblistes, que le manuscrit invoque sans les
+détailler\footnote{Elles sont indispensables : sans elles, le système des
+voisinages ouverts peut n'être cofinal dans aucun système raisonnable et la
+rétraction n'existe pas. Le texte le sait et l'écrit en marge : l'intuition est
+que $\mathcal{V}_{Y,X}$ et $Y$ sont homotopiquement équivalents indépendamment de
+la trivialité locale.} — on a une équivalence d'homotopie
+\[
+  Y \xrightarrow{\ \sim\ } \mathcal{V}_{Y,X}.
+\]
+
+Le tube épointé est ce qu'il reste quand on ôte $Y$ :
+\[
+  \mathcal{V}^{*}_{Y,X} = \mathcal{V}_{Y,X} \cap X^{*}
+  = \mathcal{V}_{Y,X} \setminus Y,
+\]
+et le carré des quatre espaces s'écrit, la flèche du haut étant ce que le
+manuscrit appelle joliment le « bouchage de trous le long de $Y$ » :
+
+\begin{tikzcd}[column sep=large]
+\mathcal{V}^{*}_{Y,X} \arrow[r, hook] \arrow[d, hook] & \mathcal{V}_{Y,X} \arrow[d, hook] \\
+X^{*} \arrow[r, hook] & X
+\end{tikzcd}
+
+\subsection*{$X$ comme somme amalgamée}
+
+L'assertion, posée indépendamment de toute hypothèse de trivialité ou de
+lissité, est que $X$ s'obtient par recollement de $\mathcal{V}_{Y,X}$ et de
+$X^{*}$ le long de $\mathcal{V}^{*}_{Y,X}$ : c'est la somme amalgamée du
+diagramme
+\[
+  X^{*} \longleftarrow \mathcal{V}^{*}_{Y,X} \hookrightarrow \mathcal{V}_{Y,X}.
+\]
+Au niveau des espaces, l'énoncé est vrai et élémentaire dès que le tube est
+remplacé par un vrai voisinage ouvert : si $U$ est un ouvert contenant $Y$,
+alors $\{U, X^{*}\}$ est un recouvrement ouvert de $X$, $U \cap X^{*} = U
+\setminus Y$, et tout espace est la somme amalgamée de deux ouverts le long de
+leur intersection.\footnote{C'est l'hypothèse que le manuscrit ne formule pas et
+qui donne à l'énoncé son contenu : la somme amalgamée est prise dans les
+espaces, pour le recouvrement ouvert $\{U,X^{*}\}$, et le passage au germe
+$\mathcal{V}_{Y,X}$ est un passage à la limite sur $U$. C'est aussi la raison
+pour laquelle il tient à ce que $\mathcal{V}_{Y,X} \hookrightarrow X$ « ait les
+propriétés d'un ouvert ».} Ce que le manuscrit veut, et qui demande beaucoup
+plus, est la version homotopique : que le type d'homotopie de $X$ soit la somme
+amalgamée \emph{homotopique} des types d'homotopie des trois autres.
+
+\pagerange{29}{33}
+\section*{Van Kampen, et la fibration du tube épointé}
+
+\subsection*{Le carré cocartésien de groupoïdes}
+
+Le premier étage du programme est celui des groupoïdes fondamentaux. Le carré
+
+\begin{tikzcd}[column sep=large]
+\Pi_{1}\mathcal{V}^{*}_{Y,X} \arrow[r, "p"] \arrow[d, "i"'] & \Pi_{1}\mathcal{V}_{Y,X} \arrow[d, dashed] \\
+\Pi_{1}X^{*} \arrow[r, dashed] & \Pi_{1}X
+\end{tikzcd}
+
+doit être cocartésien.\footnote{Les deux flèches qui le ferment sont dessinées
+en pointillé sur la page, et les deux termes de droite mis entre parenthèses :
+c'est ce que l'énoncé doit fournir, non ce qu'on tient déjà. Nous conservons le
+pointillé, qui porte cette distinction.} C'est le théorème de van Kampen sous sa
+forme groupoïdale, celle qui n'exige ni connexité ni choix de point base : pour
+un recouvrement ouvert par deux pièces, le groupoïde fondamental du tout est la
+somme amalgamée des groupoïdes fondamentaux des pièces au-dessus de celui de
+l'intersection.\footnote{La forme groupoïdale est due à R.~Brown (1967) ; elle
+est antérieure à ces pages, et c'est précisément elle qui rend l'énoncé
+utilisable ici, où $\mathcal{V}^{*}_{Y,X}$ n'a aucune raison d'être connexe. Le
+manuscrit passe ensuite à la forme pointée, qui suppose $Y$, $X$, $X^{*}$
+connexes et un point base choisi — un revêtement universel de
+$\mathcal{V}^{*}_{Y,X}$, dit-il, ce qui est en effet la bonne façon de pointer
+un groupoïde.}
+
+Sous ces hypothèses de connexité, l'énoncé prend la forme pointée
+\[
+  \Pi_{1}(X) \;\simeq\;
+  \Pi_{1}(X^{*}) \ast_{\Pi_{1}\mathcal{V}^{*}_{Y,X}} \Pi_{1}(\mathcal{V}_{Y,X}),
+  \qquad \Pi_{1}(\mathcal{V}_{Y,X}) \simeq \Pi_{1}(Y),
+\]
+un produit amalgamé de groupes. Tout revient donc à expliciter
+$\Pi_{1}(\mathcal{V}^{*}_{Y,X})$ et ses deux images, c'est-à-dire le diagramme
+
+\begin{tikzcd}[column sep=large, row sep=small]
+\Pi_{1}(\mathcal{V}^{*}_{Y,X}) \arrow[r] \arrow[d] & \Pi_{1}(Y) \\
+\Pi_{1}(X^{*}) &
+\end{tikzcd}
+
+\subsection*{Ce que sert la trivialité normale locale}
+
+C'est ici, et seulement ici, que l'hypothèse de trivialité normale locale
+travaille : elle doit fournir que l'inclusion
+$\mathcal{V}^{*}_{Y,X} \hookrightarrow \mathcal{V}_{Y,X}$ se comporte comme une
+\emph{fibration homotopique}, de base $Y \simeq \mathcal{V}_{Y,X}$ et de fibre
+le modèle transverse épointé $\mathcal{V}^{*}_{z,Z}$ — le \emph{lien} de la
+strate, en langue d'aujourd'hui. Le manuscrit propose de faire de cette
+propriété la \emph{définition} de la trivialité normale locale dans les
+contextes où la formulation naïve n'a pas de sens, celui des schémas pour la
+topologie étale au premier chef ; l'hypothèse de lissité devient alors
+techniquement inutile et n'était qu'heuristique.\footnote{La fibre est écrite
+$\mathcal{V}^{*}_{z,Z}$ dans la phrase et $\mathcal{V}^{*}_{z,X}$ dans la
+formule deux lignes plus bas. C'est $Z$, le modèle transverse, qui est le bon :
+$z$ n'est pas un point de $X$. Dans le contexte schématique, ajoute-t-il, il
+faudra travailler avec des types d'homotopie profinis et les localiser hors des
+caractéristiques résiduelles, comme chez Artin--Mazur.}
+
+D'où la suite exacte d'homotopie de la fibration,
+\[
+  \cdots \to \Pi_{i}(\mathcal{V}^{*}_{z,Z}) \to
+  \Pi_{i}(\mathcal{V}^{*}_{Y,X}) \to \Pi_{i}(Y) \to
+  \Pi_{i-1}(\mathcal{V}^{*}_{z,Z}) \to \cdots
+\]
+qui n'intéresse qu'en basses dimensions. Si la fibre $\mathcal{V}^{*}_{z,Z}$ est
+connexe, la flèche $\Pi_{1}(\mathcal{V}^{*}_{Y,X}) \to \Pi_{1}(Y)$ est
+surjective et $\Pi_{1}(\mathcal{V}^{*}_{Y,X})$ est une extension de $\Pi_{1}(Y)$
+par le quotient de $\Pi_{1}(\mathcal{V}^{*}_{z,Z})$ par l'image de
+$\Pi_{2}(Y)$ — donc par $\Pi_{1}(\mathcal{V}^{*}_{z,Z})$ lui-même si
+$\Pi_{2}(Y)$ est nul.\footnote{L'hypothèse est écrite sur la page sous la forme
+« si $z$ est déconnectant dans $Z$ localement, i.e. si la fibre
+$\mathcal{V}^{*}_{z,Z}$ est connexe » ; le mot est signalé comme lecture
+incertaine par la transcription, et il dit en français le contraire de la glose
+qui le suit — un point qui déconnecte laisse un lien \emph{non} connexe, comme
+un hyperplan dans $\mathbb{R}^{n}$. C'est la glose qui porte l'argument, et
+c'est elle que nous retenons : la fibre est supposée connexe.}
+
+Lorsque de plus $\Pi_{2}(Y) \to \Pi_{1}(\mathcal{V}^{*}_{z,Z})$ est nulle, on
+obtient une extension
+\[
+  1 \longrightarrow \Pi_{1}(\mathcal{V}^{*}_{z,Z}) \longrightarrow
+  \Pi_{1}(\mathcal{V}^{*}_{Y,X}) \longrightarrow \Pi_{1}(Y)
+  \longrightarrow 1,
+\]
+accompagnée de la flèche $\Pi_{1}(\mathcal{V}^{*}_{Y,X}) \to \Pi_{1}(X^{*})$.
+Grothendieck baptise le sous-groupe de gauche \emph{inertie} $I$ et le groupe du
+milieu \emph{décomposition} $D$ : les noms sont ceux de la théorie des nombres,
+et l'analogie est exacte — l'inertie est la monodromie locale autour de la
+strate, la décomposition tout ce que le tube épointé
+voit.\footnote{Le manuscrit porte les deux noms sous la suite sans dire
+explicitement auquel des termes le second se rapporte ; la transcription le
+signale. Le rapprochement avec le groupe de décomposition d'une place fixe la
+lecture : $D$ est le groupe fondamental du tube épointé, $I$ le noyau de sa
+surjection sur celui de la strate.}
+
+Un cas est distingué, et c'est celui dont tout le dossier se sert : celui où les
+pièces $Y$, $X^{*}$, $\mathcal{V}^{*}_{z,Z}$ sont des $K(\pi,1)$, c'est-à-dire
+ont tous leurs $\Pi_{i}$ nuls pour $i \geq 2$. La suite exacte montre alors
+qu'il en est de même de $\mathcal{V}^{*}_{Y,X}$, et bien sûr de
+$\mathcal{V}_{Y,X} \simeq Y$.
+
+\pagerange{34}{37}
+\section*{Les faisceaux constructibles : la catégorie $\mathfrak{F}$}
+
+Indépendamment de toute hypothèse de nullité ou de trivialité locale, une chose
+se reconstruit à partir du seul carré de groupoïdes : la catégorie
+$\mathfrak{F}$ des faisceaux $F$ sur $X$ tels que $F|X^{*}$ et $F|Y$ soient
+localement constants. Ce sont les faisceaux qu'on appelle aujourd'hui
+\emph{constructibles} pour la stratification à deux strates.
+
+Cette catégorie est équivalente à celle des triplets
+\[
+  \bigl(E_{X^{*}},\ E_{Y,X}\,;\ \varphi\bigr),
+\]
+où $E_{X^{*}}$ est un système local sur $\Pi_{1}X^{*}$, $E_{Y,X}$ un système
+local sur $\Pi_{1}\mathcal{V}_{Y,X} \simeq \Pi_{1}Y$ — c'est-à-dire un
+revêtement étale de $Y$ —, et où $\varphi$ est un morphisme de systèmes locaux
+sur $\Pi_{1}\mathcal{V}^{*}_{Y,X}$ :
+\[
+  \varphi \colon p^{*}(E_{Y,X}) \longrightarrow i^{*}(E_{X^{*}}).
+\]
+Lorsque les trois groupoïdes sont connexes, cela se dit sans groupoïdes :
+$E_{X^{*}}$ est un ensemble à opérateurs $\Pi_{1}(X^{*})$, $E_{Y,X}$ un
+ensemble à opérateurs $\Pi_{1}(Y)$, et $\varphi$ une application entre eux
+compatible aux opérations restreintes à $\Pi_{1}(\mathcal{V}^{*}_{Y,X})$.
+
+Le manuscrit en tire que $\mathfrak{F}$ est un topos de préfaisceaux,
+\[
+  \mathfrak{F} \;\simeq\; \widehat{\mathcal{C}},
+\]
+sur une catégorie $\mathcal{C}$ fabriquée en collant les trois groupoïdes : ses
+flèches sont celles des trois groupoïdes, plus, d'un objet $a$ de
+$A = \Pi_{1}\mathcal{V}^{*}_{Y,X}$ vers un objet $b$ de
+$B = \Pi_{1}\mathcal{V}_{Y,X}$ ou $c$ de $C = \Pi_{1}X^{*}$, les flèches
+$p^{*}(a) \to b$ de $B$, respectivement $i^{*}(a) \to c$ de $C$. C'est le
+\emph{collage} des deux foncteurs — le cographe du profoncteur de spécialisation
+— et c'est, en langue d'aujourd'hui, la troncation en dimension~1 de la
+\emph{catégorie des chemins sortants} de l'espace
+stratifié.\footnote{La page 37 est recouverte de deux tiers de ratures et la
+phrase qui définit $\mathcal{C}$ y est reprise deux fois, avec un mot illisible
+au point critique. Nous ne prétendons pas restituer la définition mot pour mot ;
+ce qui est sûr, et ce dont les deux calculs qui suivent se servent, est que
+$\mathcal{C}$ est obtenue en collant $B$ et $C$ le long de $A$, et que
+$\mathfrak{F}$ en est les préfaisceaux.}
+
+\subsection*{Le plan complexe}
+
+Le cas typique pour la géométrie algébrique est celui d'une surface topologique
+$X$ et d'un point $Y = \{a\}$ : le tube est le disque infinitésimal $D_{a}$, le
+tube épointé le disque épointé $D^{*}_{a}$, et le diagramme des $\Pi_{1}$ se
+réduit à
+
+\begin{tikzcd}[column sep=large, row sep=small]
+\mathbb{Z}_{a,X} \arrow[r] \arrow[d] & \{1\} \\
+\Pi_{1}(X^{*}) &
+\end{tikzcd}
+
+où $\mathbb{Z}_{a,X} \simeq \mathbb{Z}$ est le module d'orientation de $X$ en
+$a$, dont les deux générateurs correspondent aux deux orientations, et où la
+flèche verticale est celle qui définit la structure locale en $a$ du groupe
+fondamental de $X^{*}$. Le produit d'un nombre arbitraire de copies de ce modèle
+donne les modèles-types des stratifications associées aux diviseurs à croisements
+normaux.
+
+Pour $X = \mathbb{C}$ et $a = 0$, la flèche $A \to C$ est un isomorphisme
+$\Pi_{1}(D^{*}_{0}) \simeq \Pi_{1}(\mathbb{C}^{*})$ : la catégorie
+$\mathcal{C}$ se réduit à deux objets, $\mathrm{Aut}(a) = \mathbb{Z}$ et une
+seule flèche $a \to b$, de sorte que $b$ y est objet final. Une catégorie à
+objet final a un nerf contractile ; donc $\widehat{\mathcal{C}}$, et avec lui
+$\mathfrak{F}$, est de type d'homotopie trivial — ce qui est bien le type
+d'homotopie de $X = \mathbb{C}$.
+
+\pagerange{37}{40}
+\section*{La sphère, ou pourquoi le niveau $\Pi_{1}$ ne suffit pas}
+
+Prenons maintenant le compactifié :
+\[
+  X = \mathbb{P}^{1}_{\mathbb{C}} \simeq S^{2}, \qquad
+  Y = \{\infty\}, \qquad X^{*} = \mathbb{C}.
+\]
+Le carré de recollement est
+
+\begin{tikzcd}[column sep=large]
+D^{*}_{\infty} \arrow[r, hook] \arrow[d] & D_{\infty} \arrow[d, dashed] \\
+\mathbb{C} \arrow[r, dashed] & \mathbb{P}^{1}_{\mathbb{C}} \simeq S^{2}
+\end{tikzcd}
+
+et sa somme amalgamée est bien $S^{2}$, dont le type d'homotopie n'a rien de
+trivial. Le diagramme correspondant sur les $\Pi_{1}$, lui, est
+
+\begin{tikzcd}[column sep=large, row sep=small]
+\mathbb{Z} \arrow[r] \arrow[d] & 1 \\
+1 &
+\end{tikzcd}
+
+et la catégorie $\mathcal{C}$ qui en sort est la catégorie
+${\cdot} \to {\cdot}$, à deux objets et une flèche. Elle a un objet final, donc
+$\mathfrak{F} \simeq \widehat{\mathcal{C}}$ est \emph{encore homotopiquement
+trivial}, alors que $X$ ne l'est pas — et les pièces de construction
+$\{\infty\}$, $\mathbb{C}$, $D^{*}_{\infty}$ sont pourtant toutes des
+$K(\pi,1)$, les deux premières étant même contractiles. Le morphisme canonique
+\[
+  X \longrightarrow \mathfrak{F}
+\]
+n'est donc pas une équivalence d'homotopie.
+
+\subsection*{Ce que la troncation a perdu}
+
+Le diagnostic se dit en une phrase aujourd'hui, et il vaut la peine de le dire,
+parce qu'il montre que rien n'était faux dans la construction — seulement trop
+grossier. La catégorie des chemins sortants de $\mathbb{P}^{1}$ stratifié par
+$\{\infty\}$ a deux objets, et l'espace des chemins allant de $\infty$ vers le
+stratum ouvert est le lien, $D^{*}_{\infty} \simeq S^{1}$. L'espace classifiant
+de cette catégorie \emph{à homotopie près} est la somme amalgamée homotopique
+$\ast \leftarrow S^{1} \to \ast$, c'est-à-dire $S^{2}$ : rien n'est perdu.
+Tronquer en dimension~1, c'est remplacer cet espace de chemins $S^{1}$ par son
+$\pi_{0}$, un point — d'où la flèche unique $a \to b$ de $\mathcal{C}$, d'où
+l'objet final, d'où la contractilité. C'est exactement ce cran-là que le calcul
+de la page 39 met en évidence.\footnote{La formulation moderne — faisceaux
+constructibles contre représentations de la catégorie des chemins sortants,
+et espace classifiant de celle-ci contre type d'homotopie de l'espace — est
+postérieure de plus de vingt ans à ces pages (MacPherson, Treumann, Lurie,
+Ayala--Francis--Tanaka). Ce que ces trois pages contiennent est l'observation qui
+la rend nécessaire : la troncation en dimension~1 ne suffit pas, et la
+raison n'est pas que les pièces soient compliquées, puisqu'elles sont ici les
+plus simples possibles.}
+
+Le manuscrit tire lui-même la bonne conclusion, et c'est sur cette phrase que le
+lot s'achève :
+
+\begin{quote}
+J'avais craint un moment, par cet exemple, que le type d'homotopie de $X$ ne
+pouvait pas se récupérer à partir de ceux de $X^{*}$, $Y$,
+$\mathcal{V}^{*}_{Y,X}$ et du diagramme de recollement. Mais je me suis
+convaincu ensuite que cette crainte n'était pas fondée : le type $\mathfrak{F}$
+n'est pas suffisant, lui, pour exprimer le type d'homotopie.
+\end{quote}
+
+Ce qui échoue est un invariant, non le programme. Reste à trouver l'invariant
+qui marche, et l'essai commence aussitôt, sur le cas de $S^{2}$ : récupérer
+$H^{2}(X,A)$ en interprétant cette cohomologie comme classifiant les
+\emph{gerbes} sur $X$ liées par $A$. La phrase s'interrompt au bas de la page
+40 ; elle se termine à la page 41, dans le lot suivant, et le calcul
+réussit.\footnote{Le texte s'arrête au milieu d'une phrase, en bas de feuillet.
+Ce que la phrase allait dire n'est pas deviné ici : il est lu à la page 41, qui
+la complète.}
+
+\end{document}
