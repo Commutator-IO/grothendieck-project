@@ -1,0 +1,637 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 151, batch 4 (pages 61-74).
+% Established from the facsimile archives/batches/151/batch-04.pdf (a mirror of
+% https://grothendieck.umontpellier.fr/151.pdf), per the skill
+% transcribe-grothendieck.
+%
+% This is the last batch of the folder and it is fourteen pages, not twenty:
+% the PDF holds 75 pages, one of them Montpellier's cover sheet, so the
+% archivists' numbering stops at 74. All fourteen carry the mathematics; none
+% is skipped.
+%
+% The author numbers his sheets 19 to 25 at the head of pages 62, 64, 66, 68,
+% 69, 71, 73 — continuing the series batch 3 carried to 18. The parity of the
+% numbered side flips between sheets 22 and 23 (page 68 carries 22, page 69
+% carries 23), so from page 69 on the number stands at the head of the odd
+% pages. This matters for one cross-reference: on page 71 he sends the reader
+% to « le th. énoncé p. 22 », which is the theorem of recollement stated on
+% archivists' page 68.
+%
+% The batch falls in two parts. Pages 61-68 finish section 3, « Stratifications
+% globales : introduction des tubes » — the fundamental diagram (17), the
+% census of which inclusions actually hold between the elementary pieces
+% X_i^*, V^*_{ij}, V_{ij}, the diagram Ĩ built on the ordered set I with its
+% three types of arrow, worked examples for Delta_r and for two small posets,
+% the dimension function d : I -> Z, and on page 68 a first statement of the
+% « Th. de recollement des tubes ». Pages 69-74 open section 4, « Topos
+% canoniques associés à une stratification globale », whose equation numbering
+% restarts: A) general inverse images, B) the case of an X_{I'} attached to a
+% crible I' of I, C) the V^{I'''}_{I',I''}, which the folder breaks off in the
+% middle of.
+%
+% Two heavily reworked passages are transcribed as skeletons and marked as
+% such with \note: the struck paragraph on page 68, crossed through with two
+% long diagonal strokes, and the opening of page 70, which a long diagonal
+% marginal note runs across. Pages 61, 68, 70 and 71 carry marginal notes
+% written diagonally up the left edge; where they do not read we say so rather
+% than offering a reading.
+%
+% On uncertainty: \ill marks what we do not read; \uncertain marks a reading
+% that carries mathematical weight and that we do not hold to be sure.
+% Function words whose sense is forced by the sentence are given plainly.
+%
+% Two numbering decisions worth recording. The three inclusion types displayed
+% on page 63 carry manuscript labels we cannot read, so they are given
+% unnumbered and a \note says so. The block of axioms opening section 4 on page
+% 69 is read as (1) — the glyph would also admit (11), but the equations that
+% follow it run (2) to (11) across pages 69-71, and page 71's « qui vient de
+% (1 d) » points back to its part d).
+%
+% The dating is the inventory's own; the notes themselves carry no date.
+%
+% Pass: Opus 5 (claude-opus-5), 2026-08-16 — first pass, unchecked against the pages by a human.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{151}
+\batch{4}
+\pages{61}{74}
+\dating{[à partir de 1981-à partir de 1990]}
+\watermark{Édition de démonstration}
+\foldertitle{Topos stratifié (1981) : notes manuscrites (s.d.).}
+
+\begin{document}
+
+\section*{Introduction des tubes — suite}
+
+\page{61}
+Posons déjà
+
+\[
+  (14) \qquad
+  \begin{cases}
+    \mathcal{V}_{\Delta_1} = \coprod\limits_{\substack{(i,j) \in I^2 \\ i \leq j}}
+      \mathcal{V}_{i,j} \\[10pt]
+    \mathcal{V}^{*}_{\Delta_1}
+      = \coprod\limits_{\substack{(i,j) \in I^2 \\ i \leq j}} \mathcal{V}^{*}_{i,j}
+      \qquad \subset \mathcal{V}_{\Delta_1}
+  \end{cases}
+\]
+
+\note{la seconde ligne s'ouvre sur un « $\mathcal{V}$ » biffé ; le $\subset$
+porte « ouvert » écrit dessous}
+
+on a donc
+
+\[
+  (15)
+\]
+
+\begin{tikzcd}
+  \mathcal{V}^{*}_{\Delta_1} \arrow[r, hook] \arrow[d]
+    & \mathcal{V}_{\Delta_1} \arrow[d, dashed]
+    & X^{*}_{\Delta_0} \arrow[l] \arrow[dl, dashed] \\
+  X^{*}_{\Delta_0} & X &
+\end{tikzcd}
+
+\struck{\ill} qui reflètent les diagrammes
+
+\[
+  (17)
+\]
+
+\begin{tikzcd}
+  \mathcal{V}^{*}_{i,j} \arrow[r] \arrow[d]
+    & \mathcal{V}_{i,j} \arrow[d, dashed]
+    & X^{*}_{i} \arrow[l] \arrow[dl, dashed] \\
+  X^{*}_{j} & X &
+\end{tikzcd}
+
+\marginal{NB Le \ill}\note{la note marginale, écrite en diagonale au bas à
+gauche, accompagne un petit diagramme ordonné — un sommet d'où partent deux
+traits, l'un vers un sommet qui en domine un troisième ; nous ne la relions pas
+avec certitude au texte}
+
+\struck{Notons} Finalement, on n'est pas sûr que les notations $(14)$ soient
+bien utiles — du fait \struck{\ill} que le carré dans $(15)$ n'a rien de
+cocartésien, car le diagramme en trait plein, qui est le diagramme « sous-
+
+\page{62}\note{p. 19 de l'auteur}
+jacent » des diagrammes $(17)$, définit une \emph{limite} qui se reproduit dans
+\ill\ comme espace topologique, a peu de chances d'être homéo. à $X$ (p.ex. si
+$X$ connexe \ldots) !
+
+Les $\mathcal{V}^{\,j}_{i,k}$ sont des germes de sous-espaces de $X$, dont les
+seuls \struck{relations d\ill} \struck{morphismes} canoniques entre eux sont
+les morphismes d'inclusion — à quelle condition a-t-on
+
+\[
+  (18) \qquad \mathcal{V}^{\,j}_{i,k} \subset \mathcal{V}^{\,j'}_{i',k'}
+\]
+\[
+  (19) \qquad i \leq j \leq k , \qquad i' \leq j' \leq k'
+\]
+
+donnés ? Question \ill\ il \ill\ pour les espaces élémentaires
+
+\[
+  X_i^{*} , \quad \mathcal{V}^{*}_{i,j} , \quad \mathcal{V}_{i,j}
+  \qquad (j \text{ successeur de } i) \ ?
+\]
+
+\struck{Cela} Je vais \struck{\ill} supposer pour simplifier
+\[
+  \begin{cases}
+    X_i^{*} \neq \emptyset \\
+    X_i \subset X_j \Rightarrow i \leq j
+  \end{cases}
+\]
+— car sinon on aurait $X_i^{*} = \emptyset$ (justifie \ldots) Il n'y a donc pas
+de relations d'inclusion entre les $X_i^{*}$ pour des indices distincts.
+\emph{Si} \struck{pour} $\mathcal{V}_{i,j} \subset \mathcal{V}_{i',j'}$,
+prenons deux « pts » \struck{des $X''$} \ill\ genres d'après, il faut avoir
+$X_i^{*} \subset X_{i'}^{*}$ d'où $i = i'$ ; \ill\ chose de \ill\ que les
+\uncertain{$j$ le long des $X_i^{*}$} déterminent $X_j$ ($j$ successeur de $i$)
+\ill\ bien voisinages \ill\ $\mathcal{V}$) \ill\ déjà $j$ ce qui est \ill\ devra
+avoir aussi $j = j'$. De même, on voit que si
+$\mathcal{V}^{*}_{i,j} \subset \mathcal{V}^{*}_{i',j'}$, \ill\ un des pts
+d'adhérence, \struck{\ill} ce qui met $\overline{X_i^{*}}$ et $X_{i'}$ \ill\
+\struck{$X_{i'}$ et $X_{i'}$}, sont en relation d'inclusion,
+
+\note{la page est ici surchargée de reprises ; nous donnons le fil de
+l'argument et laissons en \ill\ ce qui ne se lit pas}
+
+\page{63}
+dans le cas (raisonnable) où $\overline{X_i^{*}} = X_i$ $\forall i$ ; on \ill\
+donc $i \leq i'$. \struck{Dans le cas} \ill\ les cas $i = i'$, on voit comme
+tout à l'heure que \ill\ (« raisonnable ») $j = j'$. Mais le cas $i < i'$
+est-il possible ? Comme
+$\emptyset \neq \mathcal{V}^{*}_{i,j} \subset X_j^{*}$,
+$\mathcal{V}^{*}_{i',j'} \subset X_{j'}^{*}$, on doit avoir
+$X_j^{*} \cap X_{j'}^{*} \neq \emptyset$ donc $j = j'$ si l'on avait \ill\
+(ci !)
+
+\begin{tikzcd}[column sep=small, row sep=small, nodes={font=\scriptsize}]
+  & i' \arrow[r, no head] & j' & & X_{i'} \arrow[r, no head] & X_{j'} \\
+  i \arrow[ur, no head] \arrow[dr, no head] & & & X_i \arrow[ur, no head] \arrow[dr, no head] & & \\
+  & j & & & X_j &
+\end{tikzcd}
+
+donc $i \leq i' < j = j'$ et par suite $i' = i$ puisque $j$ successeur de $i$.
+
+On voit de même que les seuls morphismes d'inclusion d'un $X_i^{*}$ dans un des
+autres types est
+
+\[
+  X_i^{*} \longrightarrow \mathcal{V}_{i,j}
+  \qquad (\text{dans les cas « raisonnables »})
+\]
+
+\struck{il n'y a pas de \ill\ morphismes d'un $\mathcal{V}_{i,j}$ dans un des
+autres types}, \struck{et $\mathcal{V}_{i,j}$} enfin que le seul morphisme d'un
+$\mathcal{V}^{*}_{i,j}$ dans un des autres types est
+
+\[
+  \mathcal{V}^{*}_{i,j} \longrightarrow X_j^{*}
+\]
+\[
+  \mathcal{V}^{*}_{i,j} \longrightarrow \mathcal{V}_{i,j}
+\]
+
+\note{les trois inclusions portent au manuscrit des numéros que nous ne lisons
+pas}
+
+en définitive, il n'y a plus lieu d'envisager d'autres morphismes entre ces
+types — pièces \struck{élémentaires}.
+
+\page{64}\note{p. 20 de l'auteur}
+Ce \struck{sont} aussi les \struck{diagrammes} flèches en traits pleins des
+diagrammes fondamentaux $(17)$.
+
+Avec l'ens ordonné $I$, fabriquons donc un \struck{ens. ordonné}
+\emph{diagramme} dont les sommets sont \struck{considérés \ill} \ill\ des
+symboles $[i]$, $[i,j]$, $[i,j]^{*}$, où $i,j \in I$, $j$ successeur de $i$.
+
+Les flèches du diagramme sont de trois types, qui sont toutes décrites dans
+
+\[
+  (19)
+\]
+
+\begin{tikzcd}
+  {[i,j]}^{*} \arrow[r] \arrow[d] & {[i,j]} & i^{*} \arrow[l] \\
+  {[j]}^{*} & &
+\end{tikzcd}
+
+Désignons par $\widetilde{I}$ ce diagramme, dont l'ens. des sommets
+\struck{s'identifie à} \struck{\ill} \marginal{en cardinal} card
+$I + 2\mathcal{V}$, \struck{\ill} où $\mathcal{V}$ \marginal{card} est l'ens.
+des drapeaux $(i<j)$ « élémentaires », \marginal{i.e. tels que $j$ soit
+successeur de $i$} et de \ill\ des flèches est $3\mathcal{V}$. Si $I$ contient
+exactement deux éléments $i,j$ avec $i<j$, \marginal{si $I \simeq \Delta_1$} (ce
+diagramme est celui de $(19)$). Si $I = \Delta_r = (0,1,\ldots,r)$, on trouve
+(en explicitant maintenant les symboles par les $X_i^{*}$,
+$\mathcal{V}^{*}_{ij}$, $\mathcal{V}_{ij}$ qu'ils désignent) le diagramme
+
+\page{65}
+\struck{\ill}\note{la page s'ouvre sur un début de tracé rayé, puis sur une
+première mise en place du même escalier, portée en haut à droite et annotée
+« NB on \ill » ; nous ne donnons que la version au net}
+
+\[
+  (20) \qquad \widetilde{\Delta}_n
+\]
+
+\begin{tikzcd}[column sep=small, row sep=small, nodes={font=\scriptsize}]
+  X_0^{*} \arrow[r] & \mathcal{V}_{0,1} & \mathcal{V}^{*}_{0,1} \arrow[l] \arrow[d] & & & & & & \\
+  & & X_1^{*} \arrow[r] & \mathcal{V}_{1,2} & \mathcal{V}^{*}_{1,2} \arrow[l] \arrow[d] & & & & \\
+  & & & & X_2^{*} \arrow[r] & \mathcal{V}_{2,3} & \mathcal{V}^{*}_{2,3} \arrow[l] \arrow[d] & & \\
+  & & & & & & X_3^{*} & & \\
+  & & & & & & \cdots \arrow[d] & & \\
+  & & & & & & X^{*}_{n-1} \arrow[r] & \mathcal{V}_{n-1,n} & \mathcal{V}^{*}_{n-1,n} \arrow[l] \arrow[d] \\
+  & & & & & & & & X_n^{*}
+\end{tikzcd}
+
+Si $I$ est le diagramme $a \leftarrow \bullet \rightarrow b$, on trouve
+
+\[
+  (21)
+\]
+
+\begin{tikzcd}[column sep=small, nodes={font=\scriptsize}]
+  \mathcal{V}^{*}_{0,b} \arrow[r] \arrow[d] & \mathcal{V}_{0,b}
+    & X_0^{*} \arrow[l] \arrow[r] & \mathcal{V}_{0,a}
+    & \mathcal{V}^{*}_{0,a} \arrow[l] \arrow[d] \\
+  X_b^{*} & & & & X_a^{*}
+\end{tikzcd}
+
+Si $I$ est le diagramme $a \rightarrow c \leftarrow b$, on trouve
+
+\[
+  (22)
+\]
+
+\begin{tikzcd}
+  X_a^{*} \arrow[d] & & X_b^{*} \arrow[d] \\
+  \mathcal{V}_{a,c} & & \mathcal{V}_{b,c} \\
+  \mathcal{V}^{*}_{a,c} \arrow[u] \arrow[r] & X_c^{*} & \mathcal{V}^{*}_{b,c} \arrow[u] \arrow[l]
+\end{tikzcd}
+
+etc.
+
+\struck{La première chose qu'il faudrait \ill\ préciser est le} Supposons qu'on
+dispose sur $I$ d'une fonction à valeurs entières
+
+\page{66}\note{p. 21 de l'auteur}
+\[
+  (23) \qquad I \xrightarrow{\ d\ } \mathbb{Z}
+  \qquad \Bigl( \text{i.e.} \quad I = \coprod_m I_m \Bigr)
+\]
+
+jouant le rôle d'une fonction dimension (on \ill\ une présentation en quelque
+sorte \ill\ avec une fonction type codimension), satisfaisant la condition
+
+\[
+  (24) \qquad \text{si } i,j \in I ,\ i \leq j ,\
+  \text{ alors } d(j) = d(i)+1 \iff j \text{ succes. de } i
+\]
+
+\note{« $I$ » est suivi d'un $\emptyset$ biffé}
+
+Posons alors, pour $m, n \in \mathbb{Z}$
+
+\[
+  (25) \qquad
+  \begin{cases}
+    X_m^{*} = \coprod\limits_{i \in I_m} X_i^{*} \\[10pt]
+    \mathcal{V}_{m,m+1} = \coprod\limits_{\substack{(i,j) \in I \times I \\
+      i \leq j ,\ d(i)=m ,\ d(j)=m+1}} \mathcal{V}_{i,j} \\[16pt]
+    \mathcal{V}^{*}_{m,m+1} = \coprod\limits_{i,j \text{ comme dessus}}
+      \mathcal{V}^{*}_{i,j}
+  \end{cases}
+\]
+
+de sorte qu'on a les diagrammes
+
+\[
+  (26) \qquad (\mathrm{Diag})_m
+\]
+
+\begin{tikzcd}
+  X_m^{*} \arrow[r] & \mathcal{V}_{m,m+1} & \mathcal{V}^{*}_{m,m+1} \arrow[l] \arrow[d] \\
+  & & X^{*}_{m+1}
+\end{tikzcd}
+
+s'enchaînant dans un diagramme comme
+
+Enfin en principe, mais que nous \struck{\ill} c'est-à-dire \ill\ forme
+\struck{$d(I)d$} \ill\ simplifier $I$ fini, et en n'écrivant pas les
+\struck{parties du diagramme} \struck{\ill} correspondant à des \struck{\ill}
+sommets occupés par des espaces vides :
+
+\note{les deux dernières lignes de la page sont reprises trois fois et
+biffées ; nous n'en donnons que ce qui se lit}
+
+\page{67}
+Dans le cas d'une fonction \emph{codimension} ($\underline{d(j) = j-1}$ si $j$
+succ. de $i$), on \struck{pourra} considérera des $\mathcal{V}_{d,d-1}$,
+$\mathcal{V}^{*}_{d,d-1}$ au lieu des $\mathcal{V}_{d,d+1}$,
+$\mathcal{V}^{*}_{d,d+1}$, et le diagramme prend la forme
+
+\note{le manuscrit écrit bien « $j-1$ » ; le parallèle avec $(24)$ demanderait
+« $d(i)-1$ »}
+
+\struck{(27)} (cas d'une fonction codimension)
+
+\[
+  (27)
+\]
+
+\begin{tikzcd}[column sep=small, row sep=small, nodes={font=\scriptsize}]
+  X_n^{*} \arrow[r] & \mathcal{V}_{n,n-1} & \mathcal{V}^{*}_{n,n-1} \arrow[l] \arrow[d] & & & & \\
+  & & X^{*}_{n-1} \arrow[r] & \mathcal{V}_{n-1,n-2} & \mathcal{V}^{*}_{n-1,n-2} \arrow[l] \arrow[d] & & \\
+  & & & & X^{*}_{n-2} & & \\
+  & & & & \cdots \arrow[d] & & \\
+  & & & & X_1^{*} \arrow[r] & \mathcal{V}_{1,0} & \mathcal{V}^{*}_{1,0} \arrow[l] \arrow[d] \\
+  & & & & & & X_0^{*}
+\end{tikzcd}
+
+\page{68}\note{p. 22 de l'auteur — c'est la page que la référence « le th.
+énoncé p. 22 » de la page 71 désigne}
+\textbf{Th. de recollement des tubes} (première version) Considérons le
+diagramme de type $\widetilde{I}$, formé par les $X_i^{*}$,
+$\mathcal{V}^{*}_{i,j}$, $\mathcal{V}_{i,j}$ ($i,j \in I$, $j$ successeur de
+$i$) et les trois types de flèches \marginal{précédents} y figurant (en trait
+plein) \struck{explicités} et indiqué\add{s} dans $(17)$. Alors $X$ s'identifie
+\struck{au topos} à la \ill\ de ce type.
+
+\marginal{pour que ce soit précis, \ill\ formes \ill\ $X$ \ill\ déterminé par
+$\mathrm{Top}(X)$ \ldots}\note{note marginale écrite en diagonale le long du
+bord gauche, reprise plusieurs fois ; nous n'en donnons que ce qui se lit}
+
+\struck{Faute de disposer de définitions \ill\ pour les voisinages tubulaires,
+je vais faire une démonstration, lorsqu'on \ill\ en remplaçant
+$\mathcal{V}_{i,j}$ par des \marginal{vrais} \ill\ des
+$\mathcal{V}_{i,j} \setminus R_{i,j} \cap \mathcal{V}_{i,j}$, où $X_j$, de
+façon que $\mathcal{V}_{i,j}$ est un voisinage de $X_i$ dans $X_j$, et qu'on
+pose $\mathcal{V}^{*}_{i,j} = \mathcal{V}_{i,j} \setminus X_i^{*}$.
+\struck{Alors}}
+
+\note{tout ce paragraphe est barré de deux longs traits diagonaux ; nous en
+donnons le squelette}
+
+\struck{démonstration} On va en donner une \ill\ heuristique ci-dessous. Mais
+avant de le faire, et vu la généralisation, on va \ill\ un énoncé qui permet
+d'exprimer ci-\ill\ les « topos canoniques » associés à ce \ill\ en termes
+\ill\ de type $\widetilde{I}$ formé des topos élémentaires.
+
+\section*{4. Topos canoniques associés à une stratification globale}
+
+\page{69}\note{p. 23 de l'auteur}
+On va montrer comment, à une situation stratifiée donnée, on peut en associer
+d'autres.
+
+\medskip
+
+A) \emph{Images inverses générales.} Rappelons les axiomes utilisés jusqu'à
+présent :
+
+\[
+  (1) \qquad
+  \begin{cases}
+    \text{a)} & X_i \text{ fermés},\ (X_i)_{i \in I} \text{ loc. fini} \\
+    \text{b)} & i \leq j \Rightarrow X_i \subset X_j \\
+    \text{c)} & X = \bigcup X_i \\
+    \text{d)} & \forall i,j \in I ,\ \ldots \quad
+      X_i \cap X_j = \bigcup\limits_{k \leq i,j} X_k
+  \end{cases}
+\]
+
+Notons que pour tout $X'$ au-dessus de $X$, la famille des
+
+\[
+  (2) \qquad X_i' \overset{\text{déf}}{=} X_i \times_X X'
+\]
+
+\note{le signe $=$ est suivi d'un mot biffé que nous ne lisons pas}
+
+satisfait les \ill\ mêmes conditions.
+
+D'ailleurs le système $\tfrac{1}{2}$ simpl. des $X_{\Delta_r}$ — comme image
+inverse \ill\ des $X'_{\Delta_r}$, défini par les $X_i'$, \struck{Ain}si on a
+
+\[
+  (3) \qquad
+  \begin{cases}
+    X'_{\Delta_r} \simeq X_{\Delta_r} \times_X X' \\
+    X'^{\,*}_{\Delta_r} \simeq X^{*}_{\Delta_r} \times_X X' \\
+    \dot{X}'_{\Delta_r} = \dot{X}_{\Delta_r} \times_X X'
+  \end{cases}
+\]
+
+\page{70}
+\marginal{NB} Nous appliquerons ces \ill\ surtout au cas où $X'$ est un ouvert
+de $X$. C'est pour pouvoir prendre de telles images inverses \ill, qu'il
+n'\ill\ pas été commode \ill, de supposer les $X_i$ ou les $X_i^{*}$ non-vides,
+\struck{ou encore} que $I \mapsto X_i$ est un plongement d'ens ordonnés
+$I \hookrightarrow \mathcal{P}(X)$.
+
+Lorsque $X' \to X$ est une immersion locale \struck{mais pas} (\ill\ n'est une
+immersion ouverte !) alors \ill\ \struck{la définition} les images inverses
+\struck{\ill} \ill\ fournies de $X$ comment : la formation des voisinages
+tubulaires d\add{e} une telle partie dans une entière. Notons
+
+\note{le haut de cette page est traversé par une longue note marginale
+diagonale, plusieurs fois reprise, qui recouvre le texte ; nous en donnons le
+fil et laissons en \ill\ ce qu'elle rend illisible}
+
+d'ailleurs que pour $i \leq j$, on aura (sous l'hyp. d'ailleurs que $X' \to X$
+soit une immersion locale)
+
+\[
+  (4) \qquad
+  \begin{cases}
+    R'_{ij} = R_{ij} \times_X X' \\
+    S'_{ij} = S_{ij} \times_X X'
+  \end{cases}
+\]
+
+d'où, en le cas d'une immersion locale \marginal{propre}, des iso
+
+\[
+  (5) \qquad
+  \begin{cases}
+    \mathcal{V}'_{i,j} \simeq \mathcal{V}_{i,j} \times_X X' \\
+    \mathcal{V}'^{\,*}_{i,j} \simeq \mathcal{V}^{*}_{i,j} \times_X X'
+  \end{cases}
+  \qquad i \leq j
+\]
+
+\page{71}\note{p. 24 de l'auteur}
+et plus généralement
+
+\[
+  (6) \qquad \mathcal{V}'^{\,j}_{i,k} \simeq \mathcal{V}^{\,j}_{i,k} \times_X X' ,
+\]
+
+\ill.
+
+Ceci montre en particulier que la démonstration du th. de recollement, i.e. du
+th. énoncé p. 22, est une \ill\ question \emph{locale} sur $X$ — ce qui permet
+p.ex. \ill\ vides — on \ill\ si \emph{$I$ est fini}.
+
+\marginal{\ill}\note{la marge gauche porte ici une longue note diagonale et un
+appel de note $\circledast$ ; ni l'une ni l'autre ne se lisent}
+
+\struck{Considérons p.ex. le cas où $X' = $}
+
+\medskip
+
+B) \emph{Cas d'un $X_{I'}$.} \struck{Soit} Soit $I'$ une partie de $I$ telle que
+
+\[
+  (7) \qquad i \leq j \in I' \implies i \in I'
+\]
+
+et soit
+
+\[
+  (8) \qquad X_{I'} = \bigcup_{i \in I'} X_i \qquad (\text{partie fermée de } X)
+\]
+
+\[
+  (9) \qquad \text{On a bien sûr } I' \subset I'' \implies X_{I'} \subset X_{I''} ,
+  \text{ plus gén.!}
+\]
+\[
+  (10) \qquad X_{I' \cup I''} = X_{I'} \cup X_{I''}
+  \qquad \text{plus gén.}
+  \begin{cases}
+    X_{\cup I'_\alpha} = \bigcup\limits_\alpha X_{I'_\alpha} \\
+    \text{avec } X_\emptyset = \emptyset
+  \end{cases}
+\]
+
+et aussi
+
+\[
+  (11) \qquad X_{I' \cap I''} = X_{I'} \cap X_{I''}
+  \qquad (\text{donc } X_I = X)
+\]
+
+qui vient de $(1\ \mathrm{d})$. Dans ces formules,
+
+\page{72}
+$I'$, $I''$, les $I'_\alpha$ sont des parties de $I$ satisfaisant $(7)$ (des
+\emph{cribles} de $I$)
+
+Si dans A) on prend $X' = X$, il est plus commode de travailler avec la
+stratification de $X'$ définie par les $X_i$ avec $i \in I'$ — il est clair que
+les conditions $(1)$ \struck{relatives} : $X' = X_{I'}$ sont satisfaites. Les
+« parties cribles » de $X'$ pour cette stratification, on \ill\ celles induites
+au sens général des espaces au-dessus de $X$, sont les mêmes — ou surtout les
+traces \marginal{au} \struck{induites} sur $X' = X_{I'}$ des parties-cribles de
+l'espace stratifié $X$.
+
+Ici, les espaces élémentaires pour la stratification de type $I'$ de
+$X' = X_{I'}$, sont les espaces
+
+\[
+  (12) \qquad X_i^{*} ,\ \mathcal{V}^{*}_{ij} ,\ \mathcal{V}_{ij}
+  \quad \text{pour } i,j \in I' .
+\]
+
+\struck{Combinant les deux opérations, on a p.ex. une stratification pour la
+\ill\ $\mathcal{U}'$ d'un $X' = X_{I'}$, on a les espaces \struck{élémentaires}
+associés, qui sont donc les}
+
+\[
+  (13) \qquad \mathcal{U}' \cap X_i^{*} ,\
+  \mathcal{U}' \cap \mathcal{V}^{*}_{ij} ,\
+  \mathcal{U} \cap \mathcal{V}_{ij} \qquad (i,j \in I')
+\]
+
+\note{ce dernier paragraphe et la formule $(13)$ sont barrés d'une grande
+croix ; la formule est donnée ici sans rature, la rature portant sur le bloc
+entier}
+
+\page{73}\note{p. 25 de l'auteur}
+Revenons pour un instant à $X$, et considérons l'ens \struck{des} $I_0$ des
+$i \in I$ tels que $X_i = \emptyset$. C'est un crible, et on a
+$X_i^{*} = \emptyset$, $\mathcal{V}^{*}_{ij} = \mathcal{V}_{ij} = \emptyset$ si
+$i \in I_0$. Donc négligeant les espaces vides, on voit que le diagramme de
+type $\widetilde{I}$ défini par l'espace stratifié $X$ ne change pas quand on
+\ill\ son \ill\ $I$ par $I \setminus I_0$, ou plus gén. par
+$I \setminus I'_0$, où $I'_0 \subset I_0$ \ill\ est un crible, \ill\ ce qui
+donne lieu : un diagramme $\widetilde{I \setminus I'_0}$ qui est
+\emph{contenu} dans $\widetilde{I}$ (cela est vrai pour \emph{tout} crible de
+$I$).
+
+Si p.ex. on a deux cribles
+
+\[
+  (14) \qquad I'' \subset I' \subset I
+\]
+
+d'où
+
+\[
+  (15) \qquad X_{I''} \subset X_{I'} \quad \text{et} \quad
+  \mathcal{U}_{I',I''} \overset{\text{déf}}{=} X_{I'} \setminus X_{I''} ,
+\]
+
+on peut \struck{\ill} (et on a) sur $\mathcal{U}_{I',I''}$ regarder plutôt la
+\struck{filtration} stratification de type $I' \setminus I''$, définie par les
+\struck{$X_{i'} \setminus X_{i'} \cap X_{I''}$ ($i' \in I'$) et}
+
+\[
+  (16) \qquad
+  X_{i',\, \mathcal{U}_{I',I''}}
+  = X_{i'} \setminus X_{i'} \cap X_{I''} \subset \mathcal{U}_{I',I''}
+\]
+
+dont les topos élémentaires sont donc les $X_{i'}^{*}$
+($i' \in I' \setminus I''$) et des $\mathcal{V}^{*}_{i,j',X'}$,
+$\mathcal{V}_{i,j',X'}$
+
+\page{74}
+associés aux couples $(i',j')$ avec $i' \in I' \setminus I''$, $j'$ successeur
+de $i'$. On a
+
+\[
+  (17)
+\]
+
+\begin{tikzcd}
+  \mathcal{V}_{i',j',X'} \arrow[r, hook] & \mathcal{V}_{i',j'} \\
+  \mathcal{V}^{*}_{i',j',X'} \arrow[r, hook] \arrow[u, hook]
+    & \mathcal{V}^{*}_{i',j'} \arrow[u, hook]
+\end{tikzcd}
+
+mais il n'est pas clair en général que ce soient \struck{des}
+\marginal{seulement} (des) équivalences d'homotopie \ldots
+
+\struck{Donc} il faut mieux ne pas trop s'\ill\ quand il s'agit de comparer les
+constructions sur un $X_{I'}$, et sur un
+$\mathcal{U}_{I',I''} = X_{I'} \setminus X_{I''}$.
+
+Je vais en disposer par la suite des \struck{\ill} plus particulières ou qui se
+\ill\ pour ce s'introduisent ainsi sur un ouvert $\mathcal{U}_{I',I''} \ldots$
+
+\medskip
+
+C) \emph{Les $\mathcal{V}^{\,I'''}_{I',I''}$.} On se donne trois cribles
+
+\[
+  (18) \qquad
+  \begin{array}{c} I' \\ I''' \end{array} \subset I'' \subset I ,
+\]
+
+d'où
+
+\[
+  (19) \qquad
+  \begin{array}{c} X_{I'} \\ X_{I'''} \end{array}
+  \subset X_{I''} \hookrightarrow X_I = X
+\]
+
+\end{document}
