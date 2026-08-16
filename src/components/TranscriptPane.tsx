@@ -1,5 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
-import { BATCH_SIZE, batchRange, transcriptUrl } from '../lib/batches.ts';
+import {
+  BATCH_SIZE,
+  batchRange,
+  folderTranscription,
+  transcriptUrl,
+  useManifest,
+} from '../lib/batches.ts';
 import type { Edition, TranscriptEntry } from '../lib/types.ts';
 
 /**
@@ -56,6 +62,10 @@ export function TranscriptPane({
   const { first, last } = batchRange(batch, pages);
   const present = available.html.includes(edition);
   const url = transcriptUrl(cote, batch, edition, 'html');
+  // Folder-wide, not batch-wide: the modernised edition's precondition is that
+  // every batch of the folder is transcribed, so an empty Modernised tab has to
+  // report on the folder even though the reader is looking at one batch of it.
+  const folder = folderTranscription(useManifest(), cote, pages);
 
   /**
    * The frame is grown to its content, so it never scrolls.
@@ -212,7 +222,7 @@ export function TranscriptPane({
           edition={edition}
           first={first}
           last={last}
-          available={available}
+          folder={folder}
         />
       )}
     </section>
@@ -242,17 +252,16 @@ function MissingTranscript({
   edition,
   first,
   last,
-  available,
+  folder,
 }: {
   cote: string;
   batch: number;
   edition: Edition;
   first: number;
   last: number;
-  available: TranscriptEntry;
+  folder: ReturnType<typeof folderTranscription>;
 }) {
   const label = EDITIONS.find((e) => e.key === edition)!.label.toLowerCase();
-  const transcribed = available.html.includes('fr');
 
   return (
     <div className="flex flex-col items-start gap-3 px-6 py-10">
@@ -269,14 +278,44 @@ function MissingTranscript({
             takes the folder whole rather than one batch: the argument it restates runs across
             the batch boundaries.
           </p>
-          <code className="w-full max-w-[40em] rounded-lg border border-ink-200 bg-ink-50 px-3 py-2 font-mono text-[12.5px] text-ink-900">
-            /modernize-grothendieck {cote}
-          </code>
-          <p className="max-w-[40em] text-[12.5px] leading-relaxed text-ink-500">
-            {transcribed
-              ? 'The transcription of these pages exists, so this edition can be derived from it.'
-              : 'These pages have no transcription yet — run /transcribe-grothendieck first, batch by batch. The skill refuses to read the facsimile itself.'}
-          </p>
+
+          {/* Which command to put in the box is the whole question here. Offering
+              the modernisation command to a folder that is not fully transcribed
+              offers a command that will refuse — so when the folder is not ready,
+              the box holds the step that actually comes next. */}
+          {folder.complete ? (
+            <>
+              <code className="w-full max-w-[40em] rounded-lg border border-ink-200 bg-ink-50 px-3 py-2 font-mono text-[12.5px] text-ink-900">
+                /modernize-grothendieck {cote}
+              </code>
+              <p className="max-w-[40em] text-[12.5px] leading-relaxed text-ink-500">
+                All {folder.total} {folder.total === 1 ? 'batch' : 'batches'} of this folder are
+                transcribed, so one pass writes the modernised reading for every one of them.
+              </p>
+            </>
+          ) : (
+            <>
+              <p className="max-w-[40em] text-[13.5px] leading-relaxed text-ink-600">
+                <strong className="font-semibold text-ink-800">
+                  It cannot run on this folder yet.
+                </strong>{' '}
+                Because it takes the folder whole, it needs every batch transcribed first —{' '}
+                {folder.done} of {folder.total} {folder.total === 1 ? 'is' : 'are'} done, and{' '}
+                {folder.missing.length === 1
+                  ? `batch ${folder.missing[0]} is missing`
+                  : `batches ${folder.missing.slice(0, -1).join(', ')} and ${folder.missing.at(-1)} are missing`}
+                . A reading made without them would guess where the argument was going.
+              </p>
+              <code className="w-full max-w-[40em] rounded-lg border border-ink-200 bg-ink-50 px-3 py-2 font-mono text-[12.5px] text-ink-900">
+                /transcribe-grothendieck {cote}, batch {folder.missing[0]}
+              </code>
+              <p className="max-w-[40em] text-[12.5px] leading-relaxed text-ink-500">
+                One batch per conversation, until the folder is done. Then{' '}
+                <code className="font-mono">/modernize-grothendieck {cote}</code> in a single
+                pass.
+              </p>
+            </>
+          )}
         </>
       ) : (
         <>

@@ -136,17 +136,20 @@ export function HomePage() {
           <div className="prose-fonds">
             <h2 className="titre text-[22px] text-ink-900">What is being made of them</h2>
             <p className="mt-3">
-              Each batch of pages yields two documents, both in French. The{' '}
+              Every folder yields two documents per batch of pages, both in French. The{' '}
               <strong>transcription</strong> is the pages as written — his notation, his
               paragraphing, and a critical apparatus that keeps what was read apart from what was
-              guessed. An illegible word stays illegible; nothing is smoothed over.
+              guessed. An illegible word stays illegible; nothing is smoothed over. It is made
+              twenty pages at a time, which is as far as one pass of reading handwriting carries.
             </p>
             <p>
               The <strong>modernised reading</strong> is the same mathematics in current notation
               and current names, opening with a summary that orients someone who has not met the
               subject. It is the one document allowed to depart from the page, and is held to
               being correct as it stands: where the manuscript is loose it says what is true, and
-              a footnote says what the page has.
+              a footnote says what the page has. It is made only once the whole folder has been
+              transcribed, and in a single pass over all of it: its job is to make an argument
+              run continuously, and Grothendieck's arguments do not stop where the batches do.
             </p>
             <p>
               Both are LaTeX, and both open in the browser — source and compiled PDF alike.

@@ -91,14 +91,15 @@ export function MethodPage() {
             <H2 id="how-it-proceeds">How transcription proceeds</H2>
             <P id="the-batch-is-the-unit" className="mt-3">
               One batch of {BATCH_SIZE} pages per pass, always from the local facsimile file and
-              never from a re-render of it. The batch is the unit end to end: the file shown in
-              the pane is the file read, and the LaTeX it produces covers those pages and no
-              others.
+              never from a re-render of it. The batch is the unit of transcription: the file
+              shown in the pane is the file read, and the LaTeX it produces covers those pages
+              and no others. It is not the unit of the modernised reading, which takes the folder
+              whole — the difference is set out below.
             </P>
             <H3 id="microbatches">Microbatches, and why twenty</H3>
             <P id="why-twenty">
-              Each pass runs on <strong>Fable 5</strong> — or, since August 2026 and for the
-              standing question of whether it reads a hard hand better, on{' '}
+              Each transcription pass runs on <strong>Fable 5</strong> — or, since August 2026
+              and for the standing question of whether it reads a hard hand better, on{' '}
               <strong>Opus 5</strong>; on nothing else, and the file's header says which — in a
               fresh context, on one batch and never two. The limit is not arbitrary: past
               roughly twenty handwritten pages the
@@ -108,10 +109,18 @@ export function MethodPage() {
               carefully as page 2, and each file records in its header which model produced it
               and when.
             </P>
+            <P id="derived-editions-pin-opus">
+              The two derived passes — the modernised reading and the folder's tags — pin{' '}
+              <strong>Opus 5</strong> instead of leaving the choice open. They are not reading
+              handwriting, so there is nothing to compare; what they need is to be comparable
+              with each other and with the reading they are calibrated against. A folder's tags
+              are the same judgement as its résumé, sharpened, so the same reader makes both.
+            </P>
             <H3 id="two-editions">Two editions, one source</H3>
             <P id="two-editions-both-french">
               Each batch yields a <strong>transcription</strong> — Grothendieck wrote in French,
-              and it stays in his language, his notation and his paragraphing — and then a{' '}
+              and it stays in his language, his notation and his paragraphing — and each folder,
+              once every batch of it is transcribed, yields a{' '}
               <strong>modernised reading</strong>, the same mathematics in current notation,
               opening with a summary for someone who has not met the subject. Both in
               French: the notions were thought in that language, and an English translation was
@@ -121,6 +130,19 @@ export function MethodPage() {
               The modernised reading works from the transcription, never from the page directly.
               Two independent readings of the same handwriting would diverge, and nothing would
               say which was right.
+            </P>
+            <P id="modern-takes-the-folder-whole">
+              It also works on the <strong>whole folder at once</strong>, which is the one place
+              the two editions part company. Twenty pages is the transcription's ceiling because
+              that is as far as one pass of reading handwriting carries. The modernised reading
+              reads typed LaTeX, so it has no such ceiling — and it has the opposite need, since
+              its job is to make an argument run continuously and the arguments do not stop at
+              page 20. Folder 151's semi-simplicial formalism opens on page 44 and is still being
+              built on page 74. Modernised batch by batch it would be restated three times by
+              three passes that never saw each other, each guessing where it was going. So the
+              folder has to be transcribed end to end before the second pass can start, and the
+              pass then writes one file per batch, which is what keeps each one beside the
+              facsimile pages it covers.
             </P>
             <P id="modern-correct-as-it-stands">
               The modernised reading is the one that is allowed to depart from the page, and it is
@@ -620,10 +642,11 @@ function Pipeline() {
     <section className="mt-12 max-w-[52em]">
       <H2 id="pipeline">The pipeline</H2>
       <P id="pipeline-two-skills" className="prose-fonds mt-3">
-        Two skills, run in order, on one batch of twenty pages at a time. The modernised
-        reading closes its résumé with a <code className="text-[13px]">\keywords{'{}'}</code>{' '}
-        line — English search terms — which the manifest extracts as the folder's tags. The
-        last step is the one no file can vouch for.
+        Two skills, run in order — the first on one batch of twenty pages at a time, the second
+        on the folder once every batch of it is transcribed. The modernised reading closes its
+        résumé with a <code className="text-[13px]">\keywords{'{}'}</code> line — English search
+        terms — which the manifest extracts as the folder's tags. The last step is the one no
+        file can vouch for.
       </P>
 
       <div className="card mt-5 overflow-x-auto px-4 py-5">
@@ -631,7 +654,7 @@ function Pipeline() {
           viewBox="0 0 980 300"
           className="w-full min-w-[680px]"
           role="img"
-          aria-label="Pipeline: the facsimile is transcribed by transcribe-grothendieck into the transcription, which modernize-grothendieck turns into the modernised reading; its keywords line becomes the folder's tags via the manifest; both editions render to HTML and PDF; a human check is the final, unautomated step."
+          aria-label="Pipeline: the facsimile is transcribed by transcribe-grothendieck into the transcription, twenty pages per pass; once the whole folder is transcribed, modernize-grothendieck turns it into the modernised reading in a single pass over the folder; its keywords line becomes the folder's tags via the manifest; both editions render to HTML and PDF; a human check is the final, unautomated step."
           style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
         >
           <defs>
@@ -681,7 +704,7 @@ function Pipeline() {
             /modernize
           </text>
           <text x="548" y="90" textAnchor="middle" fontSize="9" fill="#9d9787">
-            from the .tex
+            whole folder/pass
           </text>
 
           {/* Modernised */}

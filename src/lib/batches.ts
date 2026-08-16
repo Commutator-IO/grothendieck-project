@@ -202,6 +202,24 @@ export function evidence(m: Manifest | null, cote: string, k: number) {
   return { transcribed: html.includes('fr'), modernised: html.includes('modern') };
 }
 
+/**
+ * How far the folder's transcription has got.
+ *
+ * This exists because the two editions have different units. A transcription
+ * is per batch, so "is it there" is a question about the batch in front of
+ * you. The modernised reading takes the folder whole — its argument runs
+ * across the batch boundaries — so "can it be made yet" is never a question
+ * about one batch, and answering it from the batch in view would tell a reader
+ * looking at batch 1 that everything is ready when batch 3 is what is holding
+ * it up.
+ */
+export function folderTranscription(m: Manifest | null, cote: string, pages: number) {
+  const total = batchCount(pages);
+  const missing: number[] = [];
+  for (let k = 1; k <= total; k++) if (!evidence(m, cote, k).transcribed) missing.push(k);
+  return { total, missing, done: total - missing.length, complete: missing.length === 0 };
+}
+
 /** What was claimed for a batch in `transcripts/status.json`. */
 export function declared(m: Manifest | null, cote: string, k: number) {
   return m?.declared?.[batchId(cote, k)];
