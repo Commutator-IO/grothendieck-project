@@ -12,6 +12,7 @@ import { BOOKS } from '../content/books.ts';
 const OTHER_PAGES: { path: string; label: string }[] = [
   { path: '/archive/', label: 'Whole fonds' },
   { path: '/method/', label: 'Method & progress' },
+  { path: '/novelties/', label: 'Novelties' },
   { path: '/contribute/', label: 'Contribute' },
 ];
 

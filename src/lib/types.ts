@@ -150,3 +150,48 @@ export interface PublishedEdition {
   mapping: 'certain' | 'likely' | 'unmapped';
   note: string;
 }
+
+/**
+ * A candidate novelty: something a folder establishes that may not stand in
+ * the published literature.
+ *
+ * The central point of the shape is that a novelty is a claim about the
+ * *literature*, never about Grothendieck. The manuscript can be read; the
+ * literature can only be searched, and never exhausted. So every entry carries
+ * what was searched (`literature`) and how far it got (`status`), and none of
+ * them may say who was first — almost nothing in the fonds is dated, and the
+ * inventory's « [vers 1963-1973] » is an archivist's guess from a verso.
+ *
+ * `ours` is the field that keeps the edition honest. The modernised reading
+ * supplies hypotheses the page leaves implicit and completes steps it skips;
+ * where it did, the novelty is partly ours and not the manuscript's, and
+ * hiding that would be claiming a novelty for a sentence nobody wrote.
+ */
+export interface Novelty {
+  id: string;
+  cote: string;
+  /** The pages the claim rests on, as the inventory numbers them. */
+  pages: string;
+  /**
+   * `mathematical` claims are about the literature and carry the real risk;
+   * `codicological` ones are about this object — leaves bound out of order,
+   * two manuscripts interleaved — and can be settled by looking.
+   */
+  kind: 'mathematical' | 'codicological';
+  /** One sentence: what the folder establishes. */
+  claim: string;
+  /** What in the folder supports it. */
+  basis: string;
+  /** What the edition supplied rather than the page — null when the page carries it alone. */
+  ours: string | null;
+  /** Sources actually searched, by name and section. Empty means nobody looked. */
+  literature: string[];
+  /**
+   * `unsearched` nobody looked it up · `candidate` searched, not found ·
+   * `matched` found in the literature, kept as a killed candidate ·
+   * `confirmed` a person checked it. Only a person may set the last.
+   */
+  status: 'unsearched' | 'candidate' | 'matched' | 'confirmed';
+  /** The one check that would decide it. */
+  settle: string;
+}
