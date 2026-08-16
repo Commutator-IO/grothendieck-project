@@ -192,4 +192,192 @@ export const FINDINGS: Finding[] = [
     settle:
       'Look for the missing leaf elsewhere in the fonds — the run is numbered in Grothendieck’s hand, so a stray page carrying his 6 would close it.',
   },
+  {
+    id: '48-chapter-number-discrepancy',
+    cote: '48',
+    pages: '1–2',
+    kind: 'codicological',
+    claim:
+      'The folder’s cover and its contents disagree on which chapter of EGA the plan is for: the cover reads « Plan EGA VII », the first page of the plan itself « EGA Chap. VI ».',
+    basis:
+      'Page 1 is otherwise blank and carries only the title, in ink at the top right, the numeral boxed above and below; three strokes, read at 900 dpi, give VII. Page 2 opens « EGA Chap. VI » followed by the chapter title « Schémas en groupes et torseurs ». Both are in ink and both are legible. Nothing elsewhere in the folder reconciles them, and the inventory silently follows the cover.',
+    ours:
+      'Nothing of the reading is at stake. The modernised reading states the discrepancy and declines to resolve it; the \\dating{} and \\foldertitle{} fields keep Montpellier’s « VII », since those reproduce the inventory’s claim rather than ours.',
+    literature: [
+      'Transcription 48, batch 1 (batch-01.fr.tex), pages 1 and 2',
+      'Catalogue entry for cote 48 in src/content/catalogue.ts, which reads « Plan EGA VII »',
+    ],
+    status: 'candidate',
+    settle:
+      'A person reads the two numerals against the facsimile at high resolution and decides whether either is a slip. If both stand, the question becomes which EGA numbering each belongs to, and that is answered from the other plan folders (26 for EGA VI, 35 for SGA 7) rather than from this one.',
+  },
+  {
+    id: '48-typescript-leaves-reversed',
+    cote: '48',
+    pages: '3, 5',
+    kind: 'codicological',
+    claim:
+      'Two leaves of an SGA typescript filed in this folder are ordered against their own pagination: the archivists’ page 5 carries the typescript’s (29) and the archivists’ page 3 its (30), so the demonstration reads 5 before 3.',
+    basis:
+      'Page 5 states Théorème 7.9 — the anti-equivalence between geometric points over X and fibre functors on the étale topos — and opens part a), pleine fidélité, with the fibre functor written as a filtered colimit. Page 3 continues with the comparison of (*) and (**) and opens part b), surjectivité essentielle, at 7.9.1. Each carries its own page number at the top right, (29) and (30) respectively. Neither leaf belongs to the plan the folder is named for.',
+    ours:
+      'The reading gives the two leaves in the order of their argument and says so; the transcription gives them in the archivists’ order, which is correct for a transcription. The page ranges of that section run 5 to 3 for this reason.',
+    literature: ['Transcription 48, batch 1 (batch-01.fr.tex), pages 3 and 5'],
+    status: 'candidate',
+    settle:
+      'A person checks the two numerals on the facsimile, and checks whether the leaves are rectos of one sheet — in which case the order is an accident of scanning rather than of filing. Identifying which SGA 4 exposé the typescript belongs to would also place the (29)/(30) pagination, which this entry does not attempt.',
+  },
+  {
+    id: '66-two-ink-layers',
+    cote: '66',
+    pages: '1–4',
+    kind: 'codicological',
+    claim:
+      'Folder 66 is a two-layer document: a list of twenty-eight thesis subjects dated 1964 in the author’s own hand, annotated later in a different ink with what became of several of them, the annotations naming work that postdates 1964.',
+    basis:
+      'The date is boxed at the top left of page 1 and is autograph, which is rare in this fonds — the inventory’s datings are almost all deductions from versos. The left margins carry short notes in another ink: « commencé par Raynaud » at subject 12, « résolu par Raynaud » at 17, « contre-exemple de Artin » at 16, « travail Saavedra en train » at 22, « faux, cf Mumford » at 25, and at subject 13 a note referring to « les résultats d’approximation d’Artin ». The last two name work later than the list itself.',
+    ours:
+      'The separation into two layers is the reading’s, inferred from the ink and the position of the notes; the transcription records the notes as marginalia without dating them.',
+    literature: [
+      'Transcription 66, batch 1 (batch-01.fr.tex), pages 1–4, marginal notes',
+      'Modernised reading 66 (66.modern.tex), sections on subjects 12–17 and 22–25',
+    ],
+    status: 'candidate',
+    settle:
+      'A person compares the inks under the facsimile and dates the two works the margins name — Artin’s approximation results and Mumford’s on rational equivalence of zero-cycles — which together give a terminus post quem for the annotation layer. Note what this dates: the annotations, not the list.',
+  },
+  {
+    id: '66-subject-22-commissioned',
+    cote: '66',
+    pages: '3',
+    kind: 'codicological',
+    claim:
+      'The margin of subject 22 records that the tannakian subject — the structure of rigid tensor abelian categories, framed on the page as « préliminaire algébrique à la théorie des motifs » — was assigned and under way at the time the annotation was made.',
+    basis:
+      'Subject 22 asks for the structure of abelian categories with a ± rigid tensor product, in terms of linear representations of proalgebraic groups and of representations of gerbes, and calls itself an algebraic preliminary to the theory of motives. Its margin reads « travail Saavedra en train ». Subject 28, the last of the list, asks separately for the construction of an abstract theory of motives over schemes of finite type over Z.',
+    ours:
+      'The identification of subject 22 with what is now called a tannakian category is the reading’s, and rests on the two terms of the equivalence being written on the page rather than on any name it uses; the page names neither the notion nor a thesis.',
+    literature: [
+      'Transcription 66, batch 1 (batch-01.fr.tex), page 3, subject 22 and its margin',
+      'Lending register 162-1, which records four sets of tannakian and Hodge material against the same name',
+    ],
+    status: 'unsearched',
+    settle:
+      'A person dates the annotation layer (see the entry above) and compares it with the date of the thesis. This entry says only what the margin says — that the work was commissioned and in progress — and deliberately makes no claim about who arrived at anything first, which these undated pages could not support.',
+  },
+  {
+    id: '35-exposes-reassigned',
+    cote: '35',
+    pages: '1, 3',
+    kind: 'codicological',
+    claim:
+      'The folder records the reassignment of individual SGA 7 exposés, with speakers’ names struck through and replaced in the margins and, at one bibliography entry, the author’s own name struck and another written above it.',
+    basis:
+      'Page 1 is a typescript table of exposés I to IX with a hand-added column of names in the left margin, most reading « Gr. ». Three lines depart from that: exposé V carries a circled « Mme Raynaud ? », the renumbered exposé carries one Raynaud written over another that is struck, and exposé VI carries a struck « Rim » with, in the title itself, the German parenthesis « ist bei Deligne ». At page 3, bibliography entry [19], « Grothendieck, A. » is struck and « Deligne » written above.',
+    ours:
+      'Nothing. The strikings and the substitutions are on the pages; the reading only groups them.',
+    literature: ['Transcription 35, batch 1 (batch-01.fr.tex), pages 1 and 3'],
+    status: 'candidate',
+    settle:
+      'A person reads the margin names against the facsimile — one of them, the civility or forename of the Raynaud written above the struck one, is marked uncertain in the transcription and the two Raynauds of that period are distinct people — and compares the assignments with the authorship of the published volumes.',
+  },
+  {
+    id: '35-dependency-graphs-redrawn',
+    cote: '35',
+    pages: '5',
+    kind: 'codicological',
+    claim:
+      'The last leaf carries three dependency graphs of the SGA 7 exposés, the first cancelled by four crossed strokes and replaced by two below it that split the seminar in two — one headed « Théorèmes qualitatifs », a branching tree, the other « Théorèmes quantitatifs », a near-linear chain.',
+    basis:
+      'The cancelled graph spans the upper half of the leaf and mixes both bodies of material. The two replacements are drawn beneath a rule: in the qualitative graph exposé I is a source with four outgoing arrows and IX a sink, with two parallel chains (II–IV and VI–VIII) converging on it; in the quantitative graph XI to XVI descend in sequence with a single branch through XIV, XVII and XVIII. The difference in shape is the content: several routes to one result on one side, one calculation in order on the other.',
+    ours:
+      'The two replacement graphs are transcribed arrow by arrow; the cancelled one is deliberately not redrawn, because its arrowheads run under the strokes and a dependency graph missing an arrow asserts an order nobody wrote. One arrow of the qualitative graph, between IX and V, carries its head against the direction of every other arrival on IX, and is transcribed in the direction the page draws rather than normalised.',
+    literature: ['Transcription 35, batch 1 (batch-01.fr.tex), page 5'],
+    status: 'unsearched',
+    settle:
+      'A person checks the arrowheads against the facsimile, in particular the reversed one, and compares the two graphs with the dependency structure of the published SGA 7 volumes. Whether the qualitative/quantitative split survives into print is the question this entry raises and does not answer.',
+  },
+  {
+    id: '162-6-single-subject',
+    cote: '162-6',
+    pages: '1–5',
+    kind: 'codicological',
+    claim:
+      'The folder the inventory calls « [Documents isolés] », and whose contents it does not describe, is five cards on one subject: the archimedean local factor of an L-function and the structures around it.',
+    basis:
+      'Card 1 gives the two elementary gamma factors and the recipe reading the exponents of a Hodge structure’s local factor off its Hodge numbers, split at the diagonal by the infinite Frobenius. Card 2 gives the real Weil group with σ² = −1 and the computation H²(Z/2, C*) = Z/2 that classifies that extension. Card 3 gives the norm on S_E and its relation to the idele class group; card 5 the diagram tying E*, I(E), C(E), S_E and S_E(A) together; card 4 the two compatibilities — the Tate twist shifting the argument by one, and the duplication relation between the two gamma factors.',
+    ours:
+      'The subject is the reading’s to name: no card carries a title and none refers to another. The ordering is the archivists’, and the reading keeps it rather than rearranging the cards to suit the argument.',
+    literature: ['Transcription 162-6, batch 1 (batch-01.fr.tex), pages 1–5'],
+    status: 'candidate',
+    settle:
+      'A person reads the five cards together and decides whether the coherence is real or imposed. Note that a title supplied by an archivist for an undescribed folder is the weakest kind of evidence about its contents, which is what makes this worth recording; the mathematics on the cards is standard and no part of this entry claims otherwise.',
+  },
+  {
+    id: '162-1-date-precedes-inventory',
+    cote: '162-1',
+    pages: '2, 5',
+    kind: 'codicological',
+    claim:
+      'The lending register carries an entry dated 10.I.66, earlier than the « [à partir de 1967] » the inventory assigns the folder, and the only other date in its nine pages is a letter of 21.9.67 mentioned in an entry.',
+    basis:
+      'Page 2 dates one entry, two letters concerning Atiyah–Adams, to 10.I.66. Page 5 records among the items lent a letter to Hartshorne of 21.9.67, on cohomological dimension of algebraic varieties. No other date appears on the nine pages, and nothing in the folder explains how the inventory arrived at its lower bound.',
+    ours:
+      'The observation is the transcription’s. The \\dating{} field keeps Montpellier’s « [à partir de 1967] » and its group range, since that field reproduces the inventory’s claim and not ours.',
+    literature: ['Transcription 162-1, batch 1 (batch-01.fr.tex), pages 2 and 5'],
+    status: 'candidate',
+    settle:
+      'A person checks both dates against the facsimile. The 10.I.66 sits in an entry that is struck through and partly illegible, which is exactly the kind of reading this register makes unsafe, so the entry should not be relied on until it has been looked at.',
+  },
+  {
+    id: '108-dated-from-unrelated-verso',
+    cote: '108',
+    pages: '3',
+    kind: 'codicological',
+    claim:
+      'The « [à partir de 1973] » the inventory gives folder 108 appears to come from a letter of 4 January 1973 on the verso of one leaf, which has nothing to do with the questions written on the recto.',
+    basis:
+      'The mathematical writing occupies the top half of page 3 and stops; the verso carries a private letter of that date and a printed page on an unrelated subject. Nothing on any of the five pages is dated by the author, and the questions themselves — on modelizers, test categories and contractors — carry no internal indication of when they were written.',
+    ours:
+      'The inference from the verso to the inventory’s bound is the reading’s, and it is an inference: the archivists do not say what they dated the folder from. The transcription notes the verso once, at the page where it occurs, and does not describe it further.',
+    literature: ['Transcription 108, batch 1 (batch-01.fr.tex), page 3 and its note'],
+    status: 'candidate',
+    settle:
+      'A person checks the letter’s date on the facsimile and considers what it dates: the leaf, and only the leaf. A reused sheet gives a lower bound for the writing on it and none at all for the writing on the other four.',
+  },
+  {
+    id: '112-listing-paper-undated',
+    cote: '112',
+    pages: '1–4',
+    kind: 'codicological',
+    claim:
+      'Folder 112 is written on computer listing paper of the same kind that dates folder 115, yet the inventory leaves 112 « s.d. » and dates 115 « [à partir de 1982] ».',
+    basis:
+      'All four leaves of 112 are continuous-feed listing paper, written across the printed columns, which show through every line and are what makes the folder so hard to read. Folder 115 is on listing paper too, and its listings carry a printed date of 02 JUN 82, which is the evident basis for its dating. No date has been read on 112’s listings.',
+    ours:
+      'The comparison between the two folders is the reading’s; neither transcription claims it. 112’s \\dating{} field keeps the inventory’s « s.d. ».',
+    literature: [
+      'Transcription 112, batch 1 (batch-01.fr.tex), header and pages 1–4',
+      'Transcription 115, batch 1 (batch-01.fr.tex), header, which records listings dated 02 JUN 82',
+    ],
+    status: 'unsearched',
+    settle:
+      'A transcription pass over 112’s four leaves looking specifically for a printed date or job number in the listing, and a comparison of the stock and column layout with 115’s. If the stock matches and a date is found, 112’s « s.d. » can be narrowed; if the listings differ, this entry should be dropped. Note that the paper dates the leaf and not the mathematics on it.',
+  },
+  {
+    id: '108-delta-op-not-test',
+    cote: '108',
+    pages: '2',
+    kind: 'mathematical',
+    claim:
+      'The folder records a negative answer to whether Δ° is a test category, written as a bare underlined « non » with no argument and no definition of the notion on the page.',
+    basis:
+      'Question 6 of the list reads « Is the category Δ° a test category, or not? » and is answered « no », underlined, on the same line — the only one of the seventeen questions that carries its own answer. The list nowhere defines modelizer or test category, and gives neither proof nor counterexample. The question continues with a row of cubical and simplicial variants, one of whose symbols the transcription declines to name.',
+    ours:
+      'Nothing is supplied. The reading states the answer and explicitly declines to reconstruct an argument for it, since a counterexample invented here would be the edition’s and not the page’s.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Establish first which definition of test category is in play, since the page uses the term without defining it and the notion was still moving; then check the answer against the definitive treatments of test categories and modelizers. Until the definition is fixed the statement is not yet in a form that can be looked up, which is why this entry is unsearched rather than a candidate.',
+  },
 ];
