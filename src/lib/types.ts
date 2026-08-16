@@ -89,6 +89,16 @@ export interface Manifest {
   /** Transcript artifacts available under `public/transcripts/`. */
   transcripts: Record<string, TranscriptEntry>;
   /**
+   * Artifacts whose unit is the folder rather than the batch, keyed by cote.
+   *
+   * The modernised reading takes the folder whole — that is the unit its
+   * argument runs in, and folder 161-3's threads cross the batch boundaries in
+   * both directions — so it is written as one `folder.modern.tex` covering
+   * every page. It applies to every batch of its folder, and the reading panes
+   * offer it against whichever batch is open.
+   */
+  folders?: Record<string, TranscriptEntry>;
+  /**
    * States that had to be declared, from `transcripts/status.json`.
    *
    * Keyed `<folder>#<batch>`. Only the three no file can prove; the rest are

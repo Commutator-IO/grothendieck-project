@@ -1,7 +1,7 @@
 import { Footer, Header } from './components/Frame.tsx';
 import { BOOKS, TOTAL_PAGES, cotesOf, pagesOf } from './content/books.ts';
 import { COTES } from './content/catalogue.ts';
-import { batchCount, transcript, useManifest } from './lib/batches.ts';
+import { availableFor, batchCount, useManifest } from './lib/batches.ts';
 
 /**
  * The front page: what this fonds is, and where to open it.
@@ -23,8 +23,12 @@ export function HomePage() {
    * files on the deployed site, so they are true by construction — and when
    * they are zero, the honest thing is what the page then says.
    */
+  // `availableFor`, not `transcript`: the modernised reading is one file for
+  // the whole folder, so it appears in the folder's own row rather than in any
+  // batch's. Counting batch rows alone reported zero modernised batches while
+  // three folders had been read end to end.
   const batches = COTES.flatMap((c) =>
-    Array.from({ length: batchCount(c.pages) }, (_, i) => transcript(manifest, c.id, i + 1)),
+    Array.from({ length: batchCount(c.pages) }, (_, i) => availableFor(manifest, c.id, i + 1)),
   );
   const done = {
     total: batches.length,

@@ -1,4 +1,4 @@
-import { transcriptUrl } from '../lib/batches.ts';
+import { editionUrl, useManifest } from '../lib/batches.ts';
 import { issueUrl } from '../lib/report.ts';
 import type { Edition, TranscriptEntry } from '../lib/types.ts';
 import { EDITIONS } from './TranscriptPane.tsx';
@@ -37,6 +37,7 @@ export function Downloads({
   page?: number;
   available: TranscriptEntry;
 }) {
+  const manifest = useManifest();
   const rows = EDITIONS.map((e) => ({
     ...e,
     tex: available.tex.includes(e.key),
@@ -93,7 +94,7 @@ export function Downloads({
                   // The source opens through its wrapper page; the PDF opens
                   // in the browser's viewer. Neither downloads.
                   href={
-                    transcriptUrl(cote, batch, r.key as Edition, ext) +
+                    editionUrl(manifest, cote, batch, r.key as Edition, ext) +
                     (ext === 'tex' ? '.html' : '')
                   }
                   target="_blank"

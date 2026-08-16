@@ -76,6 +76,17 @@ export async function writeManifest() {
    */
   const transcripts = {};
   /**
+   * Readings whose unit is the folder, not the batch.
+   *
+   * `folder.modern.tex` covers a shelfmark entire. Filing it under `#1` — the
+   * only batch key its old name `batch-01.modern.tex` could produce — made the
+   * archive page report folder 161-3 as "1/3 modernised" when all 54 of its
+   * pages had been read, and left the Modernised toggle dead on batches 2 and
+   * 3. Keyed by folder, it can be offered against every batch of that folder,
+   * which is what it actually covers.
+   */
+  const folders = {};
+  /**
    * Folder tags come out of the modernised readings themselves: the
    * `\keywords{...}` line each one carries at the end of its résumé. There is
    * deliberately no tags file to edit — a tag with no modernised reading
@@ -85,10 +96,12 @@ export async function writeManifest() {
   const tags = {};
   for (const d of await dirs(TRANSCRIPTS)) {
     for (const f of await readdir(resolve(TRANSCRIPTS, d.name))) {
-      const m = /^batch-(\d+)\.(fr|modern)\.(html|tex|pdf)$/.exec(f);
+      const m = /^(?:batch-(\d+)|folder)\.(fr|modern)\.(html|tex|pdf)$/.exec(f);
       if (!m) continue;
-      const key = `${d.name}#${Number(m[1])}`;
-      const entry = (transcripts[key] ??= { html: [], tex: [], pdf: [] });
+      // m[1] is undefined for `folder.*`, which is how the two are told apart.
+      const entry = m[1]
+        ? (transcripts[`${d.name}#${Number(m[1])}`] ??= { html: [], tex: [], pdf: [] })
+        : (folders[d.name] ??= { html: [], tex: [], pdf: [] });
       if (!entry[m[3]].includes(m[2])) entry[m[3]].push(m[2]);
       if (m[2] === 'modern' && m[3] === 'tex') {
         const tex = await readFile(resolve(TRANSCRIPTS, d.name, f), 'utf8');
@@ -103,7 +116,7 @@ export async function writeManifest() {
       }
     }
   }
-  for (const entry of Object.values(transcripts)) {
+  for (const entry of [...Object.values(transcripts), ...Object.values(folders)]) {
     for (const ext of ['html', 'tex', 'pdf']) {
       entry[ext].sort((a, b) => EDITIONS.indexOf(a) - EDITIONS.indexOf(b));
     }
@@ -133,6 +146,7 @@ export async function writeManifest() {
         generated: new Date().toISOString(),
         facsimiles,
         transcripts,
+        folders,
         tags,
         declared,
       },
@@ -145,6 +159,7 @@ export async function writeManifest() {
   process.stdout.write(
     `\nManifest: ${Object.keys(facsimiles).length} folders mirrored, ` +
       `${Object.keys(transcripts).length} batches transcribed, ` +
+      `${Object.keys(folders).length} folders read whole, ` +
       `${Object.keys(declared).length} declared → public/manifest.json\n`,
   );
 }

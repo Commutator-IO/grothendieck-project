@@ -3,7 +3,7 @@ import {
   BATCH_SIZE,
   batchRange,
   folderTranscription,
-  transcriptUrl,
+  editionUrl,
   useManifest,
 } from '../lib/batches.ts';
 import type { Edition, TranscriptEntry } from '../lib/types.ts';
@@ -61,11 +61,15 @@ export function TranscriptPane({
   const [height, setHeight] = useState(600);
   const { first, last } = batchRange(batch, pages);
   const present = available.html.includes(edition);
-  const url = transcriptUrl(cote, batch, edition, 'html');
+  const manifest = useManifest();
+  // The modernised reading is one file for the whole folder, so every batch of
+  // that folder opens the same document; a per-batch URL would 404 on batches
+  // 2 and 3. `editionUrl` picks whichever file actually covers these pages.
+  const url = editionUrl(manifest, cote, batch, edition, 'html');
   // Folder-wide, not batch-wide: the modernised edition's precondition is that
   // every batch of the folder is transcribed, so an empty Modernised tab has to
   // report on the folder even though the reader is looking at one batch of it.
-  const folder = folderTranscription(useManifest(), cote, pages);
+  const folder = folderTranscription(manifest, cote, pages);
 
   /**
    * The frame is grown to its content, so it never scrolls.

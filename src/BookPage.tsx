@@ -12,7 +12,8 @@ import {
   declared,
   evidence,
   folderTags,
-  transcript,
+  availableFor,
+  servedByFolder,
   useFacsimileProxy,
   useManifest,
 } from './lib/batches.ts';
@@ -90,6 +91,9 @@ export function BookPage({ bookKey }: { bookKey: BookKey }) {
           batch: Math.min(open.batch, batchCount(openCote.pages)),
           pages: openCote.pages,
           page: page,
+          // The modernised reading is one document for the folder, so its page
+          // markers may name any page of it, not only this batch's twenty.
+          wholeFolder: servedByFolder(manifest, openCote.id, edition, 'html'),
           relay: proxy,
         }
       : null;
@@ -139,7 +143,7 @@ export function BookPage({ bookKey }: { bookKey: BookKey }) {
               onPage={onPage}
               page={page}
               onClose={close}
-              available={transcript(manifest, openCote.id, openBatch.batch)}
+              available={availableFor(manifest, openCote.id, openBatch.batch)}
               state={shownState(
                 declared(manifest, openCote.id, openBatch.batch),
                 evidence(manifest, openCote.id, openBatch.batch),
@@ -246,7 +250,7 @@ function Workspace({
   /** The page currently in view, so a report arrives already located. */
   page?: number;
   onClose: () => void;
-  available: ReturnType<typeof transcript>;
+  available: ReturnType<typeof availableFor>;
   state: State;
 }) {
   const label = STATES.find((s) => s.key === state)!;

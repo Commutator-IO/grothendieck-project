@@ -817,7 +817,7 @@ function render(tex, edition) {
 </head>
 <body>
 <article class="ltx_document">
-<p class="tr-head">Cote n° ${meta.folder} · batch ${meta.batch} · pages ${meta.first}–${meta.last}
+<p class="tr-head">Cote n° ${meta.folder}${meta.batch ? ` · batch ${meta.batch}` : ''} · pages ${meta.first}–${meta.last}
  · ${name}${meta.title ? ` · ${escapeHtml(meta.title)}` : ''}${
    meta.dating
      ? `<br><span class="tr-dating">Datation de l’inventaire : ${escapeHtml(meta.dating)}</span>`
@@ -1089,7 +1089,11 @@ async function main() {
     await mkdir(resolve(OUT, folder), { recursive: true });
 
     for (const file of files) {
-      const m = /^batch-(\d+)\.(fr|modern)\.tex$/.exec(file);
+      // `batch-NN` covers twenty pages; `folder` covers the shelfmark whole.
+      // The second exists because the modernised reading's unit is the folder
+      // — its argument runs across the batch boundaries — and a reading of
+      // folder 161-3 filed as "batch 1" would claim to be a third of itself.
+      const m = /^(?:batch-(\d+)|folder)\.(fr|modern)\.tex$/.exec(file);
       if (!m) {
         process.stderr.write(`  ⚠ ${folder}/${file}: name outside the convention, skipped\n`);
         continue;

@@ -50,6 +50,16 @@ export interface OpenBatch {
   pages: number;
   /** The archive page to show, when the transcript says which one is being read. */
   page?: number;
+  /**
+   * Whether the reading open on the left covers the whole folder.
+   *
+   * The modernised reading does: one file for every page of the shelfmark. Its
+   * `\pagerange{}` markers therefore run past the end of the batch whose number
+   * is in `batch`, and clamping them to that batch pinned the facsimile at
+   * page 20 while pages 21-54 were being read — the two panes showing different
+   * parts of the folder, which is the one thing they may not do.
+   */
+  wholeFolder?: boolean;
   /** Whether the relay is up yet — the frame waits rather than racing it. */
   relay: RelayState;
 }
@@ -72,7 +82,12 @@ function clamp(w: number): number {
  */
 function address(b: OpenBatch): string {
   const url = facsimileUrl(b.cote);
-  const { first, last } = batchRange(b.batch, b.pages);
+  // The window a page marker may name: the batch normally, the whole folder
+  // when the reading open on the left is itself folder-wide. The file behind
+  // this frame is the folder either way, so widening the clamp is all it takes.
+  const { first, last } = b.wholeFolder
+    ? { first: 1, last: b.pages }
+    : batchRange(b.batch, b.pages);
   const page = b.page ? Math.min(Math.max(b.page, first), last) : first;
   return `${url}#page=${pdfIndexOf(page)}`;
 }

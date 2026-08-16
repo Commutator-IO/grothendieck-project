@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import type { Edition, Manifest } from './types.ts';
+import type { Edition, Manifest, TranscriptEntry } from './types.ts';
 
 /**
  * The twenty-page batch, shared by the reading panes and by the skill.
@@ -68,6 +68,74 @@ export const pdfIndexOf = (page: number) => page + 1;
 
 export const transcriptUrl = (cote: string, k: number, edition: Edition, ext: string) =>
   `/transcripts/${cote}/${batchName(k)}.${edition}.${ext}`;
+
+/**
+ * The same, for an edition whose unit is the folder rather than the batch.
+ *
+ * `folder.modern.tex` covers a shelfmark entire. It was once written as
+ * `batch-01.modern.tex`, which was the wrong name for it in a way that showed:
+ * a reading of all 54 pages of folder 161-3 was reported as "1/3 modernised",
+ * and its Modernised toggle was dead on the two batches it also covered.
+ */
+export const folderTranscriptUrl = (cote: string, edition: Edition, ext: string) =>
+  `/transcripts/${cote}/folder.${edition}.${ext}`;
+
+/** The folder-wide artifacts, if this shelfmark has any. */
+export const folderEntry = (m: Manifest | null, cote: string): TranscriptEntry | undefined =>
+  m?.folders?.[cote];
+
+/** Whether a given edition of a batch is served by the folder-wide file. */
+export function servedByFolder(
+  m: Manifest | null,
+  cote: string,
+  edition: Edition,
+  ext: 'html' | 'tex' | 'pdf',
+): boolean {
+  return (folderEntry(m, cote)?.[ext] ?? []).includes(edition);
+}
+
+/**
+ * Where a batch's edition actually lives.
+ *
+ * The folder-wide file wins when it exists, because it is the one that covers
+ * the pages in view; the per-batch file is the fallback. Every link to a
+ * reading view or a download goes through here, so the two namings cannot
+ * drift apart.
+ */
+export function editionUrl(
+  m: Manifest | null,
+  cote: string,
+  k: number,
+  edition: Edition,
+  ext: 'html' | 'tex' | 'pdf',
+): string {
+  return servedByFolder(m, cote, edition, ext)
+    ? folderTranscriptUrl(cote, edition, ext)
+    : transcriptUrl(cote, k, edition, ext);
+}
+
+/**
+ * Every edition available for a batch, counting the folder-wide ones.
+ *
+ * A batch of folder 161-3 has its own `fr` transcription and no `modern` file
+ * of its own; the folder's reading supplies that. Merging the two is what lets
+ * the toggle be live on all three batches.
+ */
+export function availableFor(
+  m: Manifest | null,
+  cote: string,
+  k: number,
+): TranscriptEntry {
+  const own = transcript(m, cote, k);
+  const whole = folderEntry(m, cote);
+  if (!whole) return own;
+  const merge = (a: Edition[], b: Edition[]) => [...new Set([...a, ...b])];
+  return {
+    html: merge(own.html, whole.html),
+    tex: merge(own.tex, whole.tex),
+    pdf: merge(own.pdf, whole.pdf),
+  };
+}
 
 /** The original PDF at Montpellier — offered as a fallback, never in a frame. */
 export const sourceUrl = (cote: string) => `https://grothendieck.umontpellier.fr/${cote}.pdf`;
@@ -198,7 +266,9 @@ export function transcript(m: Manifest | null, cote: string, k: number) {
 
 /** What exists for a batch, as the state model consumes it. */
 export function evidence(m: Manifest | null, cote: string, k: number) {
-  const html = transcript(m, cote, k).html;
+  // The folder-wide reading counts for every batch it covers. Reading only the
+  // batch's own row is what made a fully modernised folder report "1/3".
+  const html = availableFor(m, cote, k).html;
   return { transcribed: html.includes('fr'), modernised: html.includes('modern') };
 }
 

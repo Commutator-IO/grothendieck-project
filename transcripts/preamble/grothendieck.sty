@@ -54,6 +54,10 @@
 % transcription floats unmoored in a fonds of sixteen thousand pages.
 
 \newcommand{\folder}[1]{\gdef\grothFolder{#1}}
+% The batch, when the file covers one. A modernised reading may instead take
+% the whole folder — the unit its argument actually runs in — and then there is
+% no batch to name: leaving \batch out drops the « (lot N) » from the title
+% block rather than printing a number that would be false.
 \newcommand{\batch}[1]{\gdef\grothBatch{#1}}
 \newcommand{\pages}[2]{\gdef\grothFirst{#1}\gdef\grothLast{#2}}
 \newcommand{\foldertitle}[1]{\gdef\grothFoldertitle{#1}}
@@ -78,7 +82,7 @@
 % it out is visible in the output rather than silent.
 \newcommand{\watermark}[1]{\gdef\grothWatermark{#1}}
 
-\gdef\grothFolder{?}\gdef\grothBatch{?}\gdef\grothFirst{?}\gdef\grothLast{?}%
+\gdef\grothFolder{?}\gdef\grothBatch{}\gdef\grothFirst{?}\gdef\grothLast{?}%
 \gdef\grothFoldertitle{}\gdef\grothDating{}\gdef\grothWatermark{}
 
 % --- The résumé -------------------------------------------------------------
@@ -169,7 +173,8 @@
   \begin{center}
     {\large\bfseries Fonds Alexandre Grothendieck --- cote n\textsuperscript{o}~\grothFolder}\\[2pt]
     {\itshape\grothFoldertitle}\\[4pt]
-    {\small pages \grothFirst--\grothLast\ (lot \grothBatch)}\\[2pt]
+    {\small pages \grothFirst--\grothLast
+      \ifx\grothBatch\empty\else\ (lot \grothBatch)\fi}\\[2pt]
     \ifx\grothDating\empty\else
       {\small\color{gray!60!black}Datation de l'inventaire : \grothDating}\\[2pt]
     \fi
