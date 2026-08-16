@@ -44,7 +44,7 @@ const SKILLS: {
     name: 'tag-grothendieck',
     produces:
       "the folder's tags — three to six English keywords closing the résumé, which the manifest extracts and the archive search matches on",
-    lines: 78,
+    lines: 83,
   },
 ];
 
@@ -169,13 +169,14 @@ function Skills() {
         >
           Claude Code
         </a>
-        . Each pins its model in its frontmatter, or says which it accepts. Modernisation pins{' '}
-        <code>model: claude-opus-5</code> — the reading it is calibrated against, folder 115's,
-        was made on Opus 5 — and tagging pins <code>model: claude-fable-5</code>. Transcription
-        pins nothing, so that the two can be measured against each other: it accepts Fable 5 and
-        Opus 5 and refuses to run on any other. Every file records in its header the model that
-        produced it. Provenance is a fact about the file, not about whichever model happened to
-        be selected that day.
+        . Each pins its model in its frontmatter, or says which it accepts. Modernisation and
+        tagging both pin <code>model: claude-opus-5</code> — the reading they are calibrated
+        against, folder 115's, was made on Opus 5, and a folder's tags are the same judgement as
+        its résumé, so they are made by the same reader. Transcription pins nothing, so that the
+        two models can be measured against each other: it accepts Fable 5 and Opus 5 and refuses
+        to run on any other. Every file records in its header the model that produced it.
+        Provenance is a fact about the file, not about whichever model happened to be selected
+        that day.
       </p>
 
       {/* Said here rather than left to the skills' own text: a contributor

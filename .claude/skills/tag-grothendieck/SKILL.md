@@ -1,14 +1,19 @@
 ---
 name: tag-grothendieck
 description: Writes or refreshes a folder's modern English keywords — the \keywords{} line closing the résumé of each modernised reading, which npm run manifest extracts as the folder's tags on the archive and notebook pages. Use when someone asks to tag a folder ("tag folder 115", "add keywords", "refresh the tags", "extract modern keywords"), when a modernised reading predates the keywords convention and has no \keywords line, or when a revision of the reading has made the existing tags stale. Tags only — it edits the \keywords line and nothing else in the file; rewriting the reading itself is /modernize-grothendieck's work.
-model: claude-fable-5
+model: claude-opus-5
 ---
 
 # Tagging a folder with its modern vocabulary
 
-**Runs on Fable 5**, like the two editions — the tags are a mathematical
-judgement about what the batch builds, made by the same reader that made the
-modernised reading, and pinned for the same reason: comparability.
+**Runs on Opus 5**, like `/modernize-grothendieck` — and that is the point of
+the pin rather than a coincidence of taste. A tag is not a label applied to a
+finished text from outside; it is the same mathematical judgement the résumé's
+fourth question already made (*quels noms modernes chercher ensuite*), written
+in its sharpest form. Tagging on a different model than wrote the reading means
+a second reader silently overruling the first about what the folder is, in the
+one place a search will find it — and nothing in the file would record that it
+happened. Same reader, same judgement, comparable across folders.
 
 ## What a tag is
 
