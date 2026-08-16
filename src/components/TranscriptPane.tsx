@@ -206,55 +206,95 @@ export function TranscriptPane({
           className="w-full border-0 bg-white"
         />
       ) : (
-        <MissingTranscript cote={cote} batch={batch} edition={edition} first={first} last={last} />
+        <MissingTranscript
+          cote={cote}
+          batch={batch}
+          edition={edition}
+          first={first}
+          last={last}
+          available={available}
+        />
       )}
     </section>
   );
 }
 
-/** No transcript yet: say what produces one, and with which command. */
+const Skill = ({ children }: { children: string }) => (
+  <code className="rounded border border-ink-200 bg-ink-50 px-1 py-0.5 font-mono text-[12px]">
+    {children}
+  </code>
+);
+
+/**
+ * No transcript yet: say what produces one, and with which command.
+ *
+ * The two editions are not made the same way, and the message says so rather
+ * than describing one pipeline for both. The transcription is cut to batches
+ * because reading twenty handwritten pages is as far as one pass carries;
+ * the modernised reading takes the folder whole, since its job is to make an
+ * argument run continuously and a batch boundary is not where an argument
+ * ends. So the command offered here carries a batch number in one case and
+ * only the shelfmark in the other.
+ */
 function MissingTranscript({
   cote,
   batch,
   edition,
   first,
   last,
+  available,
 }: {
   cote: string;
   batch: number;
   edition: Edition;
   first: number;
   last: number;
+  available: TranscriptEntry;
 }) {
   const label = EDITIONS.find((e) => e.key === edition)!.label.toLowerCase();
+  const transcribed = available.html.includes('fr');
+
   return (
     <div className="flex flex-col items-start gap-3 px-6 py-10">
       <p className="text-[14px] font-semibold text-ink-800">
         No {label} yet for pages {first}–{last}.
       </p>
-      <p className="max-w-[40em] text-[13.5px] leading-relaxed text-ink-600">
-        Work runs one batch at a time, {BATCH_SIZE} pages per pass, through three skills in
-        order:{' '}
-        <code className="rounded border border-ink-200 bg-ink-50 px-1 py-0.5 font-mono text-[12px]">
-          transcribe-grothendieck
-        </code>{' '}
-        reads the very facsimile shown on the right and writes the LaTeX transcription;{' '}
-        <code className="rounded border border-ink-200 bg-ink-50 px-1 py-0.5 font-mono text-[12px]">
-          modernize-grothendieck
-        </code>{' '}
-        and{' '}
-        <code className="rounded border border-ink-200 bg-ink-50 px-1 py-0.5 font-mono text-[12px]">
-          summarize-grothendieck
-        </code>{' '}
-        derive the modernised reading and the licence-level summary from it, in French.
-      </p>
-      <code className="w-full max-w-[40em] rounded-lg border border-ink-200 bg-ink-50 px-3 py-2 font-mono text-[12.5px] text-ink-900">
-        /transcribe-grothendieck {cote} {batch}
-      </code>
-      <p className="max-w-[40em] text-[12.5px] leading-relaxed text-ink-500">
-        The facsimile must be mirrored first — the skill refuses to work from anything but the
-        local batch file.
-      </p>
+
+      {edition === 'modern' ? (
+        <>
+          <p className="max-w-[40em] text-[13.5px] leading-relaxed text-ink-600">
+            <Skill>modernize-grothendieck</Skill> derives this edition — a « Résumé » that
+            orients a reader new to the subject, then the mathematics in current notation and
+            current names, in French. It reads the transcription, never the facsimile, and it
+            takes the folder whole rather than one batch: the argument it restates runs across
+            the batch boundaries.
+          </p>
+          <code className="w-full max-w-[40em] rounded-lg border border-ink-200 bg-ink-50 px-3 py-2 font-mono text-[12.5px] text-ink-900">
+            /modernize-grothendieck {cote}
+          </code>
+          <p className="max-w-[40em] text-[12.5px] leading-relaxed text-ink-500">
+            {transcribed
+              ? 'The transcription of these pages exists, so this edition can be derived from it.'
+              : 'These pages have no transcription yet — run /transcribe-grothendieck first, batch by batch. The skill refuses to read the facsimile itself.'}
+          </p>
+        </>
+      ) : (
+        <>
+          <p className="max-w-[40em] text-[13.5px] leading-relaxed text-ink-600">
+            <Skill>transcribe-grothendieck</Skill> reads the very facsimile shown on the right
+            and writes the LaTeX transcription. It works one batch at a time, {BATCH_SIZE} pages
+            per pass — past that the quality of reading falls away with nothing to signal it.
+          </p>
+          <code className="w-full max-w-[40em] rounded-lg border border-ink-200 bg-ink-50 px-3 py-2 font-mono text-[12.5px] text-ink-900">
+            /transcribe-grothendieck {cote} {batch}
+          </code>
+          <p className="max-w-[40em] text-[12.5px] leading-relaxed text-ink-500">
+            The facsimile must be mirrored first — the skill refuses to work from anything but
+            the local batch file.
+          </p>
+        </>
+      )}
+
       <a
         href="/contribute/"
         className="text-[12.5px] font-medium text-brand-600 underline decoration-brand-200 underline-offset-2 transition hover:text-brand-700"
