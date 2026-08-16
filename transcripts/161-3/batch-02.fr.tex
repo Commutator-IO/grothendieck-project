@@ -1,0 +1,880 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 161-3, batch 2 (pages 21-40).
+% Established from the facsimile archives/batches/161-3/batch-02.pdf (a mirror of
+% https://grothendieck.umontpellier.fr/161-3.pdf), per the skill
+% transcribe-grothendieck. Pages 22, 27, 29 and 33 are blank — absent.
+% Pass: Opus 5 (claude-opus-5), 2026-08-16 — first pass, unchecked against the pages by a human.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{161-3}
+\batch{2}
+\pages{21}{40}
+\dating{[vers 1963-1973]}
+\watermark{Édition de démonstration}
+\foldertitle{Topos : notes manuscrites (s.d.)}
+
+\begin{document}
+
+\page{21}
+et soit $F \xrightarrow{f} G$ dans $\widehat{C}$, bicouvrant, prouvons que
+$\widehat{u}_{0}(F) \xrightarrow{\widehat{u}_{0}(f)} \widehat{u}_{0}(G)$ est
+\struck{bicouvrant} un isom. On a \ldots
+\note{la page s'arrête là ; la ligne suivante est entièrement raturée. C'est la
+fin de la question laissée ouverte au bas de la p.~20}
+
+\section*{Espaces essentiels et ensembles ordonnés}
+
+\page{23}
+$X$ un ensemble
+
+\begin{enumerate}
+\item[a)] $\mathcal{T}(X)$ l'ens. des topologies sur $X$, $\underline{\omega}(X)$
+l'ens. des préordres sur $X$
+\[
+\alpha_{X} : \mathcal{T}(X) \longrightarrow \underline{\omega}(X), \qquad
+\beta_{X} : \mathcal{T}(X) \longleftarrow \underline{\omega}(X)
+\]
+$\alpha$ et $\beta$ fonctoriels en l'ensemble $X$ (pour images inverses de top.
+resp. de relations d'ordre)
+
+$\bullet$ à $T \in \mathcal{T}(X)$ on associe (déf.) la relation $\alpha_{X}(T)$ :
+\[
+y \underset{T}{\leq} x \iff x \in \overline{\{y\}}
+\]
+
+$\bullet$ à la relation $\omega$ $(\leq)$ est associé $T$ :
+\[
+\struck{\mathrm{Fer}}\ \mathrm{Ouv}(T) = \{\, U \subset X \mid (x \in U,\ x \leq y)
+\Rightarrow y \in U \,\}
+\]
+$=$ réunions quelconques d'ensembles de la forme
+$O_{x} = [x,\rightarrow[\ = \{ y \in X \mid y \underset{\omega}{\geq} x\}$
+\[
+\mathrm{Fer}(T) = \{\, Z \subset X \mid (x \in Z,\ y \leq x) \Rightarrow y \in Z \,\}
+\]
+
+\item[b)] Soit $f : X \to X'$ une application,
+\struck{$X$ muni de $(T,\omega)$, $X'$ de \ill{}}
+
+si $X, X'$ sont des espaces top. et si $f$ est \struck{continue}, $f$ est
+croissante
+
+si $X, X'$ sont préordonnés et si $f$ est croissante, $f$ est continue
+
+\item[c)] \struck{\ill{}} D'où foncteurs
+
+\begin{tikzcd}
+(\mathrm{Esp}) \arrow[r, bend right=20, "\alpha"'] & (\text{Préord})
+\arrow[l, bend right=20, "\beta"']
+\end{tikzcd}
+\note{sur la page les deux flèches sont superposées, $\beta$ au-dessus allant
+vers $(\mathrm{Esp})$ et $\alpha$ au-dessous allant vers
+$(\text{Préord})$}
+
+\item[c)] \struck{\ill{}} Soit $T \in \mathcal{T}(X)$, montrer que tout ouvert de
+$X$ est stable par générisation (resp. tout fermé de $X$ stable par
+spécialisation), i.e. ouvert pour $\alpha_{X}(T)$, i.e.
+\[
+T \leq \beta_{X}\alpha_{X}(T)
+\]
+i.e. une application continue
+\[
+\beta\alpha(X) \longrightarrow X
+\]
+dont l'application sous-jacente est l'identité, d'où un homomorphisme fonctoriel
+\[
+\beta\alpha \xrightarrow{\ \rho\ } \mathrm{id}_{(\mathrm{Esp})}
+\]
+\note{le second alinéa de la page porte lui aussi la lettre c), la première ayant
+été biffée puis récrite}
+
+Soit $\omega \in \underline{\omega}(X)$, \struck{\ill{}} $T = \beta_{X}(\omega)$,
+alors $x \in \overline{\{y\}}$ ssi \ill{} $y$, i.e. ssi $y \geq x$, le plus petit
+ouvert $O_{x}$ contenant $x$ contient $y$, ce qui donne
+\[
+\alpha_{X}\beta_{X}(\omega) = \omega
+\]
+i.e. un isomorphisme
+\[
+X \xrightarrow[\ \sigma\ ]{\ \sim\ } \alpha\beta(X)
+\]
+tel que l'application ensembliste sous-jacente soit l'identité, d'où
+\[
+\mathrm{id}_{(\text{Préord})} \xrightarrow[\ \sigma\ ]{\ \sim\ } \alpha\beta
+\]
+
+\item[d)] Montrer que $\rho$ et $\sigma$ sont des morphismes d'adjonction,
+\ill{} établissant pour $X \in \mathrm{Ob}(\mathrm{Esp})$,
+$I \in \mathrm{Ob}(\text{Préord})$
+\end{enumerate}
+
+\page{24}
+une bijection
+\[
+(*) \qquad \operatorname{Hom}_{\mathrm{Esp}}(\beta I, X) \simeq
+\operatorname{Hom}_{\text{Préord}}(I, \alpha X)
+\]
+
+\marginal{car le foncteur $(\mathrm{Esp}) \to (\text{Préord})$ commute
+aux $\varprojlim$, le foncteur $\beta$ aux $\varinjlim$. Mais de plus $\beta$ est
+exact à gauche : sur $X \times Y$ la top. associée au préordre produit est le
+produit des topologies. (Mais $\beta$ ne commute pas aux produits quelconques,
+i.e. un produit d'espaces topologiques essentiels \ill{} essentiel.
+Contre-exemple \ill{})}
+\note{ce bloc est porté en diagonale dans la marge gauche, et la question qu'il
+laisse ouverte est reprise à la p.~28}
+
+En effet, une application $I \xrightarrow{f} X$ est croissante ssi elle est
+continue ($X$ étant muni de la relation d'ordre $\alpha_{X}(T_{X})$, $I$ de la
+topologie $\beta_{I}\omega_{I}$). En effet, si $f$ est continue, on sait qu'elle
+est croissante pour les \ill{} $\alpha_{X}(T_{X})$ \ill{} ; \struck{si $f$ est
+croissante} l'image inverse d'une partie de $X$ \ill{} $\beta_{X}\alpha_{X}(T_{X})$
+est ouverte dans $I$, mais toute partie de $X$ (si muni de
+$\beta_{X}\alpha_{X}(T_{X})$) \ill{}, donc a fortiori.
+\note{le raisonnement est ici surchargé de repentirs ; seule la charpente est
+lisible}
+
+\begin{enumerate}
+\item[e)] \textbf{Corollaire.} Le foncteur
+\[
+\beta : (\text{Préord}) \longrightarrow (\mathrm{Esp})
+\]
+est pleinement fidèle. Son image essentielle est formée des espaces
+$(X, T_{X})$ pour lesquels $T_{X} \in \beta_{X}(\underline{\omega}(X))$ ; ce sont
+\struck{celles} les espaces topologiques pour lesquels tout point $x \in X$ a un
+plus petit voisinage ouvert $O_{x}$. [C'est évidemment nécessaire ; il faut
+prouver que c'est suffisant, i.e. que
+\[
+O_{x} = \{ y \in X \mid y \underset{T}{\leq} x \}.
+\]
+Mais \struck{\ill{}} notons que $x \in O_{y}$ \ill{} (on cherche le plus petit
+voisinage ouvert de $x$) ; $x \in \overline{\{y\}}$ signifie évidemment \ill{}
+$O_{x} \ni y$, ok.]
+\marginal{NB Les topologies obtenues sont aussi celles pour lesquelles toute
+intersection d'ouverts est ouverte [NB ce n'est pas stable par \ill{}]}
+
+\item[f)] Soit \struck{\ill{}} $X, T$, alors $X$ est \uncertain{sobre}
+$(\overline{\{x\}} = \overline{\{y\}} \Rightarrow x = y)$ ssi le préordre
+$\omega(T)$ est un ordre. \struck{\ill{}}
+
+\item[g)] \struck{Soit $X$ muni d'un préordre, puis la topologie associée.
+Désignons \ill{}} Soit $X$ muni d'un préordre, $\underline{X}$ la catégorie
+associée à $X$ ordonné
+$\bigl( \operatorname{Hom}(x,y) = \{\emptyset$ si $x \not\leq y$ ;
+$\{e\}$ si $x \leq y\} \bigr)$, i.e.
+$\operatorname{Hom}(x,y) \neq \emptyset$ ssi $O_{y} \supseteq O_{x}$. Montrer que
+le foncteur $F \mapsto (x \mapsto F(O_{x}))$ de $\mathrm{Top}(X)$ dans
+$\widehat{\underline{X}}$ est une équivalence de cat.
+\[
+\mathrm{Top}(X) \simeq \widehat{\underline{X}}
+\]
+On identifie les $a \subset X$ à des sommes \ill{} des $e_{\underline{X}}^{\wedge}$,
+et les cribles de $X$ (i.e. les ouverts de $X$) à des sous-objets de
+$e_{\underline{X}}^{\wedge}$, i.e. \ill{}
+\end{enumerate}
+
+\page{25}
+\begin{enumerate}
+\item[g)] $X$ muni d'une topologie $T$ déduite d'un préordre $\omega$ [dans
+laquelle les ouverts \ill{} les voisinages, sont de la forme $O_{x}$, $x \in X$].
+$X$ est irréductible ssi deux ouverts non vides ont une intersection non vide,
+i.e. pour $x, y \in X$, $O_{x} \cap O_{y} \neq \emptyset$, i.e.
+$\forall x,y \in X$, $\exists z \in X$ avec $z \leq x$, $z \leq y$, i.e. $X$ est
+\emph{cofiltrant}. En conclure que les fermés irréductibles de $X$ sont les
+parties $Y$ de $X$ telles que
+\begin{enumerate}
+\item[a)] $y \in Y$, $y' \leq y \Rightarrow y' \in Y$ \quad ($Y$ fermé)
+\item[b)] $\forall x,y \in Y$, $\exists z \in Y$, tel que $z \leq x$, $z \leq y$.
+\end{enumerate}
+\note{cette lettre g) est la seconde de la suite : la p.~24 en portait déjà une,
+celle qui introduit $\underline{X}$ et à laquelle renvoie le h) ci-dessous}
+
+\item[h)] $X$ comme dans g), $\underline{X}$ la catégorie associée à la relation
+de préordre, car $\operatorname{Hom}_{\underline{X}}(x,y) \leq 1$,
+$\operatorname{Hom}_{\underline{X}}(x,y) \neq \emptyset \Rightarrow x \leq y
+\iff y \in \overline{\{x\}}$.
+
+Considérons le foncteur $\mathrm{Top}(X) \to \widehat{\underline{X}}$,
+$F \mapsto (x \mapsto F(O_{x}))$. Prouver que ce foncteur est une équivalence
+\[
+\mathrm{Top}(X) \simeq \widehat{\underline{X}}
+\]
+Dorénavant on identifie [\struck{si} $X$ précisant i.e. \emph{ordonné}] $X$ à un
+ensemble de sous-objets de l'objet final de
+$\widehat{\underline{X}} = \mathrm{Top}(X)$ [\struck{cribles} \ill{} des topos],
+et de \ill{} par la \ill{} de $X$, \ill{} les sous-objets de
+$e_{\underline{X}}$ \ill{} aux ouverts des topos.
+
+Interpréter
+\[
+\mathrm{Points}(\widehat{\underline{X}}) \simeq \mathrm{Pro}(\underline{X})
+\qquad (\ill{}\ \mathrm{ind}),
+\]
+en identifiant les pro-objets de $\underline{X}$ aux sous-ensembles ordonnés $Y$
+de $X$ satisfaisant les conditions a) b) de g), \struck{et} la structure de
+catégorie provenant de la relation d'ordre entre parties de $X$ \emph{opposée} à
+la relation d'inclusion. Soit \struck{$\mathrm{Pro}(X)$} $\widetilde{X}$
+l'ensemble ordonné ainsi construit. L'application
+\[
+x \longmapsto \overline{\{x\}} = \{ y \in X \mid y \geq x \}
+\]
+est une application $X \to \widetilde{X}$, qui s'identifie à l'application
+canonique de $X$ dans l'espace sobre associé, ou à
+$\underline{X} \to \mathrm{Pro}(\underline{X})$ (foncteur canonique).
+
+\item[i)] Conditions équivalentes
+\begin{enumerate}
+\item[$\alpha$)] $X \to \widetilde{X}$ surjective
+\item[$\beta$)] Toute partie fermée cofiltrante de $X$ a un plus petit élément.
+\end{enumerate}
+\end{enumerate}
+
+\page{26}
+\begin{enumerate}
+\item[$\gamma$)] \struck{$T_{0}$} $X$ est \struck{(pour sa relation d'ordre)}
+artinien, i.e. toute \struck{famille} suite décroissante d'éléments est
+stationnaire.
+\item[$\delta$)] $\widetilde{X}$ est essentiel (i.e. chaque
+\uncertain{point} de $X$ est essentiel)
+\end{enumerate}
+\marginal{en fait, $\operatorname{Im}(X \to \widetilde{X})$ est l'ens. des
+\ill{} ess. de $\widetilde{X}$ !}
+
+\begin{enumerate}
+\item[j)] Soit $E$ un topos. Conditions équivalentes
+\begin{enumerate}
+\item[$\alpha$)] $E$ \struck{n'est} est équivalent à un $\mathrm{Top}(X)$ et à un
+$\widehat{C}$
+\item[$\beta$)] $E$ équiv. à $\mathrm{Top}(X)$, $X$ espace essentiel
+\item[$\gamma$)] $E$ équiv. à $\widehat{I}$, $I$ ens. ordonné
+\item[$\delta$)] $E$ engendré par les sous-objets de l'objet final, et a
+suffisamment de points essentiels
+\end{enumerate}
+[On dit alors que $E$ est un espace top. \emph{essentiel}.]
+\end{enumerate}
+
+Prouver que si $C$ est une catégorie, $\widehat{C}$ satisfait aux conditions
+précédentes ssi $C$ est préordonnée.
+
+Prouver que si $X$ est un espace top., $\mathrm{Top}(X)$ satisfait aux conditions
+précédentes ssi l'ens. des $x \in X$ qui sont essentiels est très dense.
+
+\struck{\ill{}} On a des équivalences de $2$-catégories
+\[
+(\text{topos spatiaux essentiels}) \approx (\text{Préord})
+\ \struck{\text{ensembles ordonn\'es}}\ \approx (\mathrm{Esp.\ ess.})
+\]
+[NB. Si $X$ est essentiel on le \ill{} à partir de $E = \mathrm{Top}(X)$, comme
+\ill{} $\mathrm{Points}(E)$.]
+
+\page{28}
+\struck{$\gamma$} commute aux $\inf$ finis ?
+\[
+\gamma(X \times Y) = \alpha(X) \wedge \beta(Y) = 1_{\sigma}
+\]
+\begin{align*}
+\gamma(W \cap W') &= \sup_{U \times V \subset W \cap W'} \alpha(U) \wedge \beta(V)
+= \sup_{\substack{U \times V \subset W \\ U' \times V' \subset W'}}
+\alpha(U \cap U') \wedge \beta(V \cap V') \\
+&= \sup_{U \times V \subset W} \alpha(U)\beta(V) \wedge
+\sup_{U' \times V' \subset W'} \alpha(U')\beta(V') \\
+&= \gamma(W) \wedge \gamma(W')
+\end{align*}
+
+$X \times Y$
+
+\begin{tikzcd}[column sep=large]
+O_{X} \arrow[r, "{U \mapsto (U,V)}"] & O_{X} \times O_{Y}
+\arrow[r, "{(U,V) \mapsto U \times V}"] & \underline{O}_{X \times Y} \\
+O_{Y} \arrow[ur, "{V \mapsto (X,V)}"'] & &
+\end{tikzcd}
+
+\marginal{$\sigma$ \ill{} et $\sup$ quelconques, et $\inf$ finis distributifs
+par rapport aux $\sup$ quelc.}
+\marginal{$\operatorname{Hom}'$ \ill{} i.e. \ill{} commutant aux $\sup$
+quelconques et $\inf$ finis}
+
+\[
+u \longmapsto \alpha, \beta \qquad
+\operatorname{Hom}'(\underline{O}_{X \times Y}, \sigma) \longrightarrow
+\operatorname{Hom}'(O_{X}, \sigma) \times \operatorname{Hom}'(O_{Y}, \sigma)
+\]
+injectif (car $u \in \operatorname{Hom}'(\underline{O}_{X \times Y}, \sigma)$ est
+connu dès que l'on connaît $u(U \times V) = \alpha(U) \wedge \beta(V)$, $\gamma$
+étant \ill{}, puisque tout $W \in \underline{O}_{X \times Y}$ est sup de tels
+$U \times V$).
+
+Est-ce bijectif ? soit $\alpha : O_{X} \to \sigma$, $\beta : O_{Y} \to \sigma$,
+posons
+\[
+\gamma(W) = \sup_{\substack{U \in O_{X},\ V \in O_{Y} \\ U \times V \subset W}}
+\alpha(U) \wedge \beta(V)
+\]
+(c'est une application croissante
+$\underline{O}_{X \times Y} \to \sigma$). \quad OBS $X \neq \emptyset$,
+$Y \neq \emptyset$
+
+$\alpha(X' \times Y) = ?$ Notons que si $Y \neq \emptyset$, alors
+$U \times V \subset X' \times Y$ ssi $U \subset X'$, donc le sup est
+\struck{égal} $\sup \alpha(U) \wedge \beta(V) = \alpha(X')$, où
+$X' \in \mathrm{Ouv}(X)$.
+
+\note{la moitié supérieure droite de la feuille porte un calcul sans rapport avec
+ce qui précède — quaternions et formules de duplication trigonométriques,
+$z = e^{i\theta}$, $u = a + bi + cj$, $a^{2}+b^{2}+c^{2}=1$ — qui n'est pas
+transcrit ici}
+
+\section*{Lemme sur les modules localement libres et les algèbres d'Azumaya}
+
+\page{30}
+\textbf{Lemme.} $E$ un topos \struck{annelé} localement annelé (dans les deux
+cas)
+
+\begin{itemize}
+\item $C$ catégorie des couples $(\mathcal{E}, \mathcal{G})$ de modules loc.
+libres de t.f. partout $\neq 0$
+\item $C'$ \rule{2em}{0.4pt} quadruples $(A, \mathcal{E}, \mathcal{F}, \varphi)$,
+avec
+$A$ Algèbre sur $E$ loc. isom. à une Alg. de matrices ; $\mathcal{E}, \mathcal{F}$
+Mod. loc. lib. de t.f. ; $\varphi$ un isom.
+$A \otimes \underline{\operatorname{End}}(\mathcal{E}) \simeq
+\underline{\operatorname{End}}(\mathcal{F})$
+\end{itemize}
+\marginal{$A$, $\mathcal{E}$, $\mathcal{F}$ partout $\neq 0$}
+
+$F : C \to C'$ le foncteur
+\[
+F : (\mathcal{G}, \mathcal{E}) \longmapsto
+\underline{\operatorname{End}}(\mathcal{G}),\ \mathcal{E},\
+\mathcal{G} \otimes \mathcal{E},\ \varphi_{\mathcal{G},\mathcal{E}}
+\]
+où $\varphi_{\mathcal{E},\mathcal{G}}$ est l'isom. canonique
+$\underline{\operatorname{End}}(\mathcal{G}) \otimes
+\underline{\operatorname{End}}(\mathcal{E}) \simeq
+\underline{\operatorname{End}}(\mathcal{G} \otimes \mathcal{E})$.
+
+Alors $F$ est une équivalence.
+
+\emph{Dém.} $F$ provient d'un hom. de champs $\underline{C} \to \underline{C}'$,
+et il suffit de prouver que celui-ci est une équivalence. Or, si
+$\mathcal{G}, \mathcal{E}$ (resp. $A, \mathcal{E}, \mathcal{F}$ tous de rang
+$\geq 0$) sont des entiers $> 0$, soit $\underline{C}_{g,e}$ le sous-champ de
+$\underline{C}$ formé des $\mathcal{E}, \mathcal{G}$ tels que
+$\operatorname{rang}\mathcal{E} = e$, $\operatorname{rang}\mathcal{G} = g$
+(resp. $\underline{C}'_{a,e,f}$ le sous-champ de $\underline{C}'$ formé des
+quadruples pour lesquels $A$ de rang $a^{2}$, $\mathcal{E}$ de rang $e$,
+$\mathcal{F}$ de rang $f$). On a
+\[
+\underline{C} \simeq \coprod_{g,e} \underline{C}_{g,e} \qquad
+\underline{C}' \simeq \coprod_{a,e,f} \underline{C}'_{a,e,f}
+\]
+(somme de champs) et $F$ induit
+\[
+F_{g,e} : \underline{C}_{g,e} \longrightarrow \underline{C}'_{g^{2},e,\ill{}}
+\]
+on est donc ramené à prouver que les $F_{g,e}$ sont des équivalences.
+
+Notons \struck{$\underline{C}_{g,e}$ est une gerbe (liée par
+$Gl(e) \times Gl(g) = \operatorname{Aut}(\mathcal{G})$)} \struck{\ill{}}
+\note{les deux lignes qui suivent sont entièrement biffées ; c'est le mot
+« gerbe » qui est abandonné}
+
+\struck{En effet, $\underline{C}_{g,e}$ loc. \ill{} a un \ill{}} En effet, c'est
+essentiellement un champ en groupoïdes, donc reste à prouver que deux objets sont
+loc. isom. On peut supposer $A = A'$, $\mathcal{E} = \mathcal{E}'$,
+$\mathcal{F} = \mathcal{F}'$. On considère deux isom.
+\[
+\varphi, \varphi' : A \otimes \underline{\operatorname{End}}(\mathcal{E})
+\rightrightarrows \underline{\operatorname{End}}(\mathcal{F})
+\]
+Ils diffèrent par un automorphisme \struck{intérieur} de
+$\underline{\operatorname{End}}(\mathcal{F})$, d'où un automorphisme de
+$\mathcal{F}$ qui est (localement) intérieur, donc on \ill{}. \struck{De plus}
+
+Pour terminer la démonstration, il reste à prouver que $F_{g,e}$ induit
+$\operatorname{Aut}(\xi) \xrightarrow{\alpha} \operatorname{Aut}(\varphi(\xi))$
+pour \ill{} un isom. Or $\xi = (\mathcal{G}, \mathcal{E})$,
+$\xi' = \underline{\operatorname{End}}(\mathcal{G}), \mathcal{E},
+\mathcal{G} \otimes \mathcal{E}, \varphi_{\mathcal{G},\mathcal{E}} :
+\underline{\operatorname{End}}(\mathcal{G}) \otimes
+\underline{\operatorname{End}}(\mathcal{E}) \simeq
+\underline{\operatorname{End}}(\mathcal{G} \otimes \mathcal{E})$, et si $u, v$ est
+un automorphisme de $\xi$, $F(u,v)$ est l'automorphisme
+$\underline{\operatorname{End}}(u), v, u \otimes v$, donc si $F(u,v)$ est connu,
+$v$ est connu et $u \otimes v$ est connu, d'où facilement (comme $\mathcal{E}$
+partout $\neq 0$) $u$ connu, donc $\alpha$ injectif. Soit maintenant
+$\tau = (\lambda, v, w)$ un automorphisme
+
+\page{31}
+\note{page au crayon, restée à l'état d'esquisse ; on n'en transcrit que ce qui
+est formé}
+
+\begin{tikzcd}
+C^{1} \arrow[r] & C^{2} \arrow[r] & C^{3} \arrow[r] & C^{4}
+\end{tikzcd}
+
+$C = \underline{\operatorname{Hom}}(K, K')$
+
+\[
+\mathrm{TORS}^{1}_{U}(X, \Pi) \simeq H^{1}(X, \Pi)
+\]
+
+\begin{tikzcd}[column sep=small, row sep=small, nodes={font=\scriptsize}]
+{[C^{0}]} \arrow[r] & C^{0} \times Z^{1} \arrow[d, bend right=20]
+\arrow[d, bend left=20] & \\
+& Z^{1} \arrow[r] & C^{1} \times Z^{2} \arrow[d, bend right=20]
+\arrow[d, bend left=20] \\
+& \operatorname{Aut}(0) \arrow[u] & 0 \to Z^{2}
+\end{tikzcd}
+
+\[
+T^{n} = \mathrm{TORS}^{n}_{U}(X ; \Pi) \rightleftarrows
+\uncertain{H\!I\!I^{n}}(X, \Pi) \implies \pi_{0}(T^{n}) \simeq H^{n}(X, \Pi)
+\]
+\[
+\mathrm{TORS}^{1}_{U}(X, \Pi) \xrightarrow{\ \sim\ } \uncertain{H\!I^{1}}(X, \Pi)
+\]
+
+\begin{tikzcd}[column sep=small, row sep=small]
+E_{\bullet} \arrow[d, bend right=20] \arrow[d, bend left=20] &
+\Pi \times E \arrow[d, bend right=20] \arrow[d, bend left=20] & \Pi \arrow[d] \\
+E_{1} \arrow[d, bend right=20] \arrow[d, bend left=20] & E \arrow[d] & 1 \\
+E_{0} \arrow[d] & X & \\
+X & &
+\end{tikzcd}
+
+\page{32}
+de $\xi'$, donc $\lambda$ un automorphisme de
+$\underline{\operatorname{End}}(\mathcal{G})$, $v$ de $\mathcal{E}$, $w$ de
+$\mathcal{G} \otimes \mathcal{E}$, avec commutativité de
+
+\begin{tikzcd}[column sep=large]
+\underline{\operatorname{End}}(\mathcal{G}) \otimes
+\underline{\operatorname{End}}(\mathcal{E})
+\arrow[r, "\varphi_{\mathcal{G},\mathcal{E}}"]
+\arrow[d, "\lambda \otimes \underline{\operatorname{End}}(v)"'] &
+\underline{\operatorname{End}}(\mathcal{G} \otimes \mathcal{E})
+\arrow[d, "\underline{\operatorname{End}}(w)"] \\
+\underline{\operatorname{End}}(\mathcal{G}) \otimes
+\underline{\operatorname{End}}(\mathcal{E})
+\arrow[r, "\varphi_{\mathcal{G},\mathcal{E}}"] &
+\underline{\operatorname{End}}(\mathcal{G} \otimes \mathcal{E})
+\end{tikzcd}
+
+On sait qu'il suffit de voir que loc. il provient d'un (unique) automorphisme de
+$\xi$, qui sera de la forme $(u,v)$, $u$ un automorphisme de $\mathcal{G}$, donc
+on doit prouver
+\[
+\lambda \simeq \underline{\operatorname{End}}(u), \qquad w = u \otimes v
+\]
+Or on sait que loc. $\lambda$ est \struck{\ill{}} intérieur, i.e. qu'il existe
+loc. $u$ tel que $\lambda = \underline{\operatorname{End}}(u)$. Reste \ill{} en
+remplaçant \ill{} par $F(u,v)^{-1}$, on peut supposer que $\lambda = \mathrm{id}$.
+Donc on doit a
+\[
+\varphi \circ (\mathrm{id} \otimes \underline{\operatorname{End}}(v)) \simeq
+\underline{\operatorname{End}}(w) \circ \varphi,
+\]
+et on doit prouver qu'il existe [loc.] une section $u$ de \ill{} telle que
+$w = \ill{}\,(\mathrm{id} \otimes v)$, i.e.
+$w = \mathrm{id}_{\mathcal{G}} \otimes v$ \ill{}
+
+\struck{prenant la même image
+$1_{g} \otimes \underline{\operatorname{End}}(\mathcal{E}) \to
+\underline{\operatorname{End}}(\mathcal{G}) \otimes
+\underline{\operatorname{End}}(\mathcal{E})$}, la commutativité
+\struck{partielle} donne
+\[
+\underline{\operatorname{End}}(w)(\mathrm{id}_{g} \otimes X) =
+\mathrm{id}_{g} \otimes \underline{\operatorname{End}}(v)(X) \qquad
+\text{pour } X \in \Gamma\,\underline{\operatorname{End}}(\mathcal{E})
+\]
+\[
+w(\mathrm{id}_{g} \otimes X)w^{-1} = \mathrm{id}_{g} \otimes vXv^{-1}
+\]
+\ill{} s'écrit que pour tout end. $X$ de $\mathcal{G}$, $Y$ de $\mathcal{E}$,
+\ill{}
+\note{la fin de la page est trop surchargée pour être suivie ; l'argument
+s'arrête ici}
+
+\section*{Notes de cours : topos et espaces sobres}
+
+\page{34}
+\emph{Recall}: direct and inverse images, fiber functor as inverse images, direct
+images of \struck{sheaves with} algebraic structures (versus inverse images)
+(defined by finite $\varprojlim$ and by $\varinjlim$) / case of an étale
+morphism: its base change \ill{} side $\mathrm{Top}(X)$.
+
+Examples: field, integral domain. Example: product of epimorphisms not an
+epimorphism.
+
+\marginal{sheaf of \ill{} ordered \ill{}. Examples. Constant sheaves.
+\struck{Sheaves} $\underline{\operatorname{Hom}}(F,G)$ and $\beta(F)$. Their
+intrinsic character. $\beta(F) \simeq \underline{\operatorname{Hom}}(F, \beta(\ill{}))$.
+$\mathrm{Top}(X) \simeq$ \ill{} functors \ill{} which commute with $\varprojlim$}
+
+\struck{The abstract} category $T(X)$ embodies all topological information
+workable for $X$:
+\begin{enumerate}
+\item[a)] the notion of \struck{sheaves} with alg. structures --- $X$ can be
+reconstructed from $T(X)$.
+\item[b)] The notion of \emph{stack} over $X$ depends on $T(X)$ alone (up to
+equivalence)
+\item[c)] Connexity of $X$ ; \struck{\ill{}} cohomology and homotopy
+\item[d)] Relation \struck{invariants} between $\pi_{1}$ and covering spaces of
+$X$ \quad (cf. SGA 4 V and Artin \& Mazur)
+\item[e)] Non commutative \struck{homological} algebra: $H^{1}(\ ,\ )$
+\item[f)] Other examples: local connectedness ; total disconnectedness,
+\struck{quasi}-compactness \ldots
+\item[g)] Operations on spaces (sums, amalgamated sums) and properties of the
+continuous maps reflected by operations on topoi.
+\end{enumerate}
+
+The « reasonable » spaces $X$ can be recovered from $\mathrm{Top}(X)$, and so can
+the continuous maps.
+
+$\mathrm{Fib}(E)$ (isomorphism classes of \emph{generalized} fiber functors) on a
+topos space. It corresponds to the set $\widetilde{X}$ of all closed irred.
+subsets of $X$, with the obvious topology, and
+
+NB $\mathrm{Fib}(E)$ is rigid if $E = \mathrm{Top}(X)$,
+\struck{$X \to \mathrm{Fib}(E)$}
+
+$X \to \mathrm{Fib}(E)$ can be identified with $x \mapsto \overline{\{x\}}$. The
+topology of $X$ is the inverse image topology.
+
+map injective $\iff \overline{\{x\}} = \overline{\{y\}} \Rightarrow x = y$ (i.e.
+separation axiom that $x \neq y$ implies that either $x$ or $y$ has a
+neighbourhood not containing the other)
+
+map surjective $\iff$ every closed irred. subset of $X$ has a generic point
+
+\struck{so-called} map bijective $\iff x \mapsto \overline{\{x\}}$ is a bijective
+map onto $\widetilde{X}$ : \quad $X$ \emph{sober}
+
+[$X \to \widetilde{X}$ can be viewed as being the universal map of $X$ into a
+sober space, $X \mapsto \widetilde{X}$ the left adjoint of the inclusion
+$(\mathrm{Sp\ sob}) \longrightarrow (\mathrm{Sp})$
+\[
+\operatorname{Hom}_{\mathrm{Sp\ sob}}(X, i(Z)) \simeq
+\operatorname{Hom}_{\mathrm{Sp}}(\widetilde{X}, Z)
+\]
+Then $X \to \widetilde{X}$ commutes with arbitrary $\varprojlim$ \ldots]
+\note{les deux indices de catégorie sont portés dans cet ordre sur la page, alors
+que l'adjonction énoncée juste avant les échangerait ; on n'y touche pas}
+
+\marginal{\ill{} $\mathrm{Top}(X) \simeq \mathrm{Top}(\widetilde{X})$,
+$\mathrm{Fib}(\mathrm{Top}(X))$, \ill{} it is a \ill{} bijective, it is done
+\ill{}}
+
+\page{35}
+\note{la page porte, de la main de Grothendieck, le numéro 1 ; les pages 37 et 39
+portent 3 et \ill{} et poursuivent la même suite}
+
+$T$ espèce de structure « définie par $\varprojlim$ finies » (resp. quelc.) sur
+famille d'ens. de base $(E_{i})_{i \in I}$ \quad ($I$ ens. donné)
+
+Pour toute catégorie $C$ avec $\varprojlim$ finies (resp. quelconques) on a donc
+\[
+\text{« famille d'objets de } C \text{ sous-jacente »} \qquad
+T(C) \xrightarrow{\ \varphi^{T}_{C}\ } C^{I}
+\]
+foncteur allant de la catégorie des « structures d'espèce $T$ dans $C$ » vers
+$C^{I}$. Pour tout foncteur
+\[
+u : C \longrightarrow C'
+\]
+commutant aux $\varprojlim$ finies (resp. quelc.) on a de plus
+$T(C) \xrightarrow{T(u)} T(C')$, rendant commutatif le diagramme
+
+\begin{tikzcd}
+T(C) \arrow[r, "T(u)"] \arrow[d, "\varphi^{T}_{C}"'] & T(C')
+\arrow[d, "\varphi^{T}_{C'}"] \\
+C^{I} \arrow[r, "u^{I}"'] & C'^{I}
+\end{tikzcd}
+
+On a $T(\mathrm{id}_{C}) = \mathrm{id}_{T(C)}$, $T(vu) = T(v)T(u)$, donc $T$ est
+un foncteur de $L_{0} = (\mathrm{Cat}\ \varprojlim \text{ finies})$ (resp.
+$L = (\mathrm{Cat}\ \varprojlim)$) dans $\mathrm{Cat}$, d'où \struck{on} une
+catégorie \ill{}-fibrée $\mathcal{T}$ \ill{}, muni d'un \struck{foncteur} \ill{}
+de $T$ dans $\mathcal{T}_{I} : C \mapsto C^{I}$,
+\[
+\varphi^{T} : \mathcal{T} \longrightarrow \mathcal{T}_{I}
+\]
+Soit $T'$ une autre « espèce de structure », alors on définit
+\[
+\underline{\operatorname{Hom}}_{L}(T, T') =
+\underline{\operatorname{Hom}}_{L_{0}}(\mathcal{T}_{L_{0}}, \mathcal{T}'_{L_{0}})
+\]
+\[
+\bigl[\ \operatorname{resp.}\ \underline{\operatorname{Hom}}_{L}(T, T') =
+\underline{\operatorname{Hom}}_{L_{0}}(\mathcal{T}_{L_{0}},
+\mathcal{T}'_{L_{0}}) \ \bigr]
+\]
+et si $I = I'$
+\[
+\underline{\operatorname{Hom}}_{L}(I ; T, T') = \text{catégorie des hom. de }
+\mathcal{T}_{L_{0}} \text{ dans } \mathcal{T}'_{L_{0}}
+\]
+munis d'une donnée de compatibilité $\alpha$ entre $\varphi^{T}$ et
+$\varphi^{T'}$ à valeurs dans $\mathcal{T}_{I}$.
+
+\note{la variante « resp. » annoncée entre crochets au bas de la page est laissée
+en blanc}
+
+\page{36}
+in other words, $X$ and $\widetilde{X}$ have the same sheaf theory. For all
+(most!) practical purposes, $X$ can be replaced with $\widetilde{X}$.
+
+We have a map
+\[
+\operatorname{Hom}_{\mathrm{Sp}}(X, Y) \longrightarrow
+\operatorname{Hom}\mathrm{top}(\mathrm{Top}(X), \mathrm{Top}(Y))
+\qquad (\text{isom classes})
+\]
+it is bijective if $Y$ is sober. In fact, the category
+$\underline{\operatorname{Hom}}\mathrm{top}(\mathrm{Top}(X), \mathrm{Top}(Y))$ is
+\struck{discrete} rigid, associated to an order relation on
+$\operatorname{Hom}\mathrm{top}(\mathrm{Top}(X), \mathrm{Top}(Y))$
+(specialisation).
+
+\medskip
+
+\textbf{The notion of a topos.} \quad (gener.) « topology » $=$ study of topoi.
+
+(Why it is a natural and useful generalisation of the notion of topological
+space?
+\begin{enumerate}
+\item[a)] It is the natural setting for most « algebraic » (and non algebraic)
+structures.
+\item[b)] As such, it allows to construct classifying topoi for such structures
+(possibly all): algebra $=$ topology!
+\item[c)] It is stable under a variety of operations that in many cases do not
+make sense in the category of topological spaces:
+$*$ generalized notion of passing to quotient (by wild equivalence relations,
+which would give pathological quotients within top. spaces)
+$*$ clutching together of pieces à la Artin
+\item[d)] They arise in various questions of geometry \struck{as modular} topoi
+\item[e)] They provide the most convenient set-up for all topics involving
+systematically passing to quotients.
+\item[f)] They give the ultimate outcome for [the intuitive notion of]
+localization
+\item[g)] They are technical tools for various cohomology theories in algebraic
+geometry.
+\end{enumerate}
+
+\textbf{Examples of topoi} \quad $\mathrm{Top}(X)$, $\mathrm{Top}(X, G)$,
+$\widehat{C}$ ; for instance $B_{G}$ ($G$ discrete) ;
+$\mathrm{Top}(X)$, $B_{G}$, $H^{*}(G, -)$
+
+\page{37}
+\note{page numérotée 3 de la main de Grothendieck}
+
+Si $T$ est donné avec $I$, on a une application canonique
+\[
+I \longrightarrow \mathrm{Ob}\,\Gamma^{T}_{\varphi} \qquad
+(\text{resp. } I \to \mathrm{Ob}\,\Gamma^{T}_{\varphi_{0}})
+\]
+On a, si $T$ est de $\varprojlim$, un foncteur
+\[
+\Gamma^{T} \longrightarrow \Gamma_{0}^{T}
+\]
+(En particulier \ill{} pour $T' = \tau$) et on a commutativité dans
+
+\begin{tikzcd}
+\mathrm{Ob}\,\Gamma^{T} \arrow[rr] & & \mathrm{Ob}\,\Gamma_{0}^{T} \\
+& I \arrow[ul] \arrow[ur] &
+\end{tikzcd}
+
+\struck{Supposons}
+
+\textbf{Ex.} Supposons qu'il existe un
+$\beta^{T} \in (\mathrm{Cat}\ \varprojlim)$ (resp.
+$\beta_{0}^{T} \in (\mathrm{Cat}\ \varprojlim)$) telle que $T$ (resp. $T_{0}$)
+soit \struck{défini} $2$-représentable par cet objet :
+\[
+T(C) \simeq \underline{\operatorname{Hom}}_{\varprojlim}(\beta^{T}, C) \qquad
+C \in \mathrm{Ob}(\mathrm{Cat}\ \varprojlim)
+\]
+\[
+\bigl(\ T(C) \simeq \underline{\operatorname{Hom}}_{\varprojlim}(\beta_{0}, C)
+\qquad C \in \mathrm{Ob}(\mathrm{Cat}\ \varprojlim)\ \bigr)
+\]
+Alors
+\begin{enumerate}
+\item[a)] $\beta$ ($\beta_{0}$) est défini à équivalence près,
+\struck{défini} unique à isom. unique près
+\item[b)] Pour toute catégorie \uncertain{$2$-cofibrée} $\mathcal{F}$ sur
+$(\mathrm{Cat}\ \varprojlim)$ (resp. $(\mathrm{Cat}\ \varprojlim)$) on a une
+équiv. can.
+\[
+\underline{\operatorname{Hom}}(T, \mathcal{F}) \simeq \mathcal{F}(\beta)
+\]
+\[
+\bigl(\ \underline{\operatorname{Hom}}_{0}(T, \mathcal{F}) \simeq
+\mathcal{F}(\beta_{0})\ \bigr)
+\]
+\end{enumerate}
+en particulier, si $\mathcal{F}$ est défini par $T'$ on a
+\[
+\underline{\operatorname{Hom}}(T, T') \simeq T'(\beta)
+\]
+\[
+\bigl(\ \underline{\operatorname{Hom}}_{0}(T, T') \simeq T'(\beta_{0})\ \bigr)
+\]
+et en particulier, faisant $T' = i^{\text{struct}}$, on a $T'(\beta) = \beta$
+($T'(\beta_{0}) = \beta_{0}$), on trouve
+\[
+\beta = \underline{\operatorname{Hom}}(T, i) = \Gamma^{T}
+\]
+\[
+\bigl(\ \beta_{0} = \underline{\operatorname{Hom}}_{0}(T, i_{0}) =
+\Gamma_{0}^{T}\ \bigr)
+\]
+
+\page{38}
+\textbf{Complements on relations between $X$ and $\mathrm{Top}(X)$}
+
+\begin{enumerate}
+\item[a)] Specialisations \struck{and} morphisms between fiber functors
+
+If $x \in \overline{\{y\}}$, then we have a functorial homomorphism
+$F_{x} \to F_{y}$ ($F \in \mathrm{Ob}\,\mathrm{Top}(X)$) because the
+neighbourhoods of $y$ contain $x$. Thus \struck{\ill{}} we get
+\[
+\mathrm{Cat}\bigl(X \text{ ordered by } x \leq y \text{ iff }
+x \in \overline{\{y\}}\bigr) \longrightarrow \mathrm{Fib}(\mathrm{Top}(X))
+\]
+
+\textbf{Proposition.} $\operatorname{Hom}(\xi_{x}, \xi_{y}) =
+\{\emptyset$ if $x \not\leq y$ ; reduced to the specialisation hom. otherwise$\}$,
+i.e. the previous functor is \emph{fully faithful}.
+
+\textbf{Corollary.} If $X$ sober (\struck{and only} more generally if
+$X \to \widetilde{X}$ surjective, \ldots) then (and only then \ldots) the
+previous functor is an equivalence. [Assume $X$ \struck{\ill{}} for simplicity]
+
+\item[b)] $\mathrm{Cat}\text{-}\underline{\operatorname{Hom}}(X, Y)$ ordered by
+$f \leq g$ iff $\forall x \in X$, $f(x) \in \overline{\{g(x)\}}$
+\[
+\downarrow
+\]
+\[
+\underline{\operatorname{Hom}}(\mathrm{Top}(Y), \mathrm{Top}(X))
+\]
+\emph{fully faithful} \struck{\ill{}}. If $Y$ is ordered it is essentially
+\ill{} consists of the $f^{*}$'s that are left exact and commute with
+$\varprojlim$, and \struck{\ill{}}
+\end{enumerate}
+
+\marginal{NB in the case \ill{} of the \ill{} $2$-category \ill{} we get lots of
+fiber functors \ill{} we obtain « certain topoi » \ill{}}
+
+\medskip
+
+\textbf{Topos.}
+\begin{enumerate}
+\item[1)] \textbf{Definition}
+\begin{enumerate}
+\item[a)] Through certain properties $+$ generators (for instance a) b) c) d))
+\item[$*$] Many sets of equivalent \struck{axioms} properties possible. What is
+it \struck{\ill{}} that governs us will \ill{}, whatever those properties \ldots\
+comes up?
+
+The original definition was in terms of categories of \struck{filtered}
+(generalized sheaves) or categories \ill{} satisfying \ill{} the categories
+\struck{\ill{}} $O_{X}$. We cannot express it now, but we can express
+\item[b)] $E \xrightarrow[f_{*}]{\text{fully faithful}}$ some $\widehat{C}$,
+$C$ « small », with a left adjoint $f^{*}$ which is \emph{left exact}.
+\end{enumerate}
+\end{enumerate}
+
+\page{39}
+\note{feuillet relié à l'envers dans le dossier ; il poursuit la suite numérotée
+des pages 35 et 37}
+
+Considérons l'espèce de structure « anneau (commutatif) », soit $T$. On sait
+qu'elle est définie en termes de $\varprojlim$ finies, soit
+$\lambda_{0} = (\text{ensemble fini}, \ill{})$ le type de structure
+correspondant. On se propose donc d'étudier, dans plus tard, tout $\lambda$ type
+tel que $\lambda_{0} \to \lambda$ (les $\lambda$-catégories \ill{} des produits
+finis, les $\lambda$-foncteurs y commutent) : il définit un $\lambda$-type
+$T_{\lambda}$. On se propose, pour divers $\lambda$, d'étudier l'existence
+\emph{et l'unicité} d'un sous-type plein $T^{*}_{\lambda}$
+($T^{*}_{\lambda}(C) \to T_{\lambda}(C)$ pl. fidèle pour tout $C$) de telle façon
+que pour $C = (\mathrm{Ens})$, $T^{*}_{\lambda}(C)$ soit la sous-catégorie pleine
+de $T_{\lambda}(C) = $ cat. des anneaux (comm. unifères) qui sont des
+\emph{corps} (commutatifs).
+
+[On sait que l'unicité est acquise si $\lambda(\lambda_{1}, \lambda_{2} =
+\emptyset)$]
+\begin{enumerate}
+\item[a)] si $\lambda = \lambda_{0}$, il n'existe pas une telle
+$T_{\lambda}$. En effet, si $\lambda = (\lambda_{1}, \lambda_{2} = \emptyset)$,
+$\lambda$ formé de $\varinjlim$ \ill{} finis, alors $T_{\lambda}$ est
+$\lambda$-représentable par la $\lambda$-catégorie $R^{\lambda}_{T}$ qui est la
+sous-catégorie pleine $S^{T}_{\lambda}$ de $\mathrm{Ann}$ engendrée (par les
+$\varinjlim$ de type $\lambda$) par $\mathbb{Z}[T]$ (l'objet libre engendré par
+$1$ élément). Les sous-\struck{catégories} types pleins de $T_{\lambda}$
+\struck{sont les} correspondent aux catégories de fractions de
+$S^{T}_{\lambda}$ par des ens. de flèches $M$ stables par composition, et par
+$\varinjlim$ de type $\lambda$. (On aura cat. \struck{quotient} de fractions
+analogue pour $S^{T}_{\lambda}$ pour des ens. $M$ de flèches stables par
+$\varinjlim$ de type $\lambda$.) Ici, les flèches en question sont \struck{\ill{}}
+telles \struck{\ill{}} des flèches $u : A \to B$ dans
+$S^{T}_{\lambda}$ ($\subset \mathrm{Ann}$) telles que pour tout corps
+$k \in \mathrm{Ob}(\mathrm{Ann})$, la flèche
+$\operatorname{Hom}(B, k) \to \operatorname{Hom}(A, k)$ soit
+\emph{bijective} [ou encore que les morphismes de schémas affines
+$u' : X \to \struck{Y}$ définis par $u$ soient tels que $X(k) \simeq Y(k)$ pour
+tout corps $k$. On sait que cela signifie que $u$ est \struck{bijective} et
+définit des ext. résiduelles triviales]. \struck{\ill{}} Cet ens. de flèches est
+évidemment stable par composition et par $\varinjlim$ (resp. $\varprojlim$) de
+type $\lambda$. (Serait vrai pour toute sous-catégorie de $(\mathrm{Ann})$.)
+\end{enumerate}
+
+\page{40}
+(We can take for $C$ any subcategory of $E$ which is \emph{generating} $E$, in
+the sense earlier explained, and take $E \xrightarrow{f_{*}} \widehat{C}$ by
+\struck{associating to each} $f_{*}(X) = (A \mapsto \operatorname{Hom}(A, X))$ ;
+to say that this functor is \emph{conservative} means that $C$ is generating, and
+this \struck{does imply} is equivalent with $f_{*}$ fully faithful, and implies
+the existence of the left adjoint $f^{*}$ \ldots)
+
+\textbf{Generators.} Useful in various contexts: existence of adjoints
+(Cartesian, or otherwise) \struck{\ill{}} ; together with generators, existence
+of cogenerators, and technically the fact that \struck{functors} contravariant
+functors to Sets $(S \to)$ that transform $\varinjlim$ ($\varprojlim$) into
+$\varprojlim$ are representable.
+
+NB Recall that a topos has cohomotopy and homotopy invariants.
+
+\textbf{Examples}
+\begin{itemize}
+\item $\mathrm{Top}(X)$ : $\mathrm{Top}(\emptyset)$ empty topos ;
+$\mathrm{Top}(1)$ point (or final) topos.
+\item $\mathrm{Top}(X, G)$ : $\mathrm{Top}(X, e) = \mathrm{Top}(X)$ ;
+$\mathrm{Top}(*, G) = B_{G}$. $H^{i}(B_{G}, \ ) = H^{i}(G, \ )$
+
+Here fiber functor of $B_{G}$ is forgetful functor. It has automorphisms
+\ill{}, and it \ill{} generalizes $B_{G}$.
+\item $\widehat{C}$ (from algebra)
+\item $C^{\circ} \xrightarrow{\text{fully faithful}} \mathrm{Fib}(\widehat{C})$
+\quad [we can prove this is even $\mathrm{Ind}(C^{\circ}) \simeq
+\mathrm{Fib}(\widehat{C})$]
+\end{itemize}
+
+\textbf{Question.} Can we have an equivalence
+$\widehat{C} \simeq \mathrm{Top}(X)$ \struck{\ill{}} ? It would suffice that $C$
+is an ordered category, \struck{\ill{}} and that $X$ has \ill{} which have a
+smallest neighbourhood (« essential points ») --- they would be
+\struck{everywhere} dense --- $C$ could be interpreted as contained in the set of
+\ill{} of $X$ with the \ill{} \ill{} relation \ill{} we can then take
+$X = \mathrm{Ind}(C)$ (dual to $C$ \ldots\ of decreasing families) and a
+\ill{} the topology \ill{}
+
+\marginal{\ill{} \ill{} it is \ill{}, and their \ill{} that
+\ill{} $\Rightarrow$ different \ill{} $\Rightarrow$ fully faithful. We will
+\ill{} that \ill{} categories \ill{} equivalent \ill{} topos \ill{}}
+
+\end{document}

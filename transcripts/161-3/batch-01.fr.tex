@@ -1,0 +1,866 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 161-3, batch 1 (pages 1-20).
+% Established from the facsimile archives/batches/161-3/batch-01.pdf (a mirror of
+% https://grothendieck.umontpellier.fr/161-3.pdf), per the skill
+% transcribe-grothendieck. Pages 2, 13 and 16 are blank — absent.
+% Pass: Opus 5 (claude-opus-5), 2026-08-16 — first pass, unchecked against the pages by a human.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{161-3}
+\batch{1}
+\pages{1}{20}
+\dating{[vers 1963-1973]}
+\watermark{Édition de démonstration}
+\foldertitle{Topos : notes manuscrites (s.d.)}
+
+\begin{document}
+
+\page{1}
+Titre porté au crayon sur l'onglet de la chemise : « Topos ».
+\note{chemise du dossier}
+
+\section*{Produits de topos}
+
+\page{3}
+$\Pi(E,F) \simeq$ faisceaux sur $E$ à valeurs dans $F$, i.e. foncteurs
+$E^{\circ} \to F$ \struck{\ill{}} aux $\varprojlim$, i.e. qui ont un adjoint à
+gauche
+
+$\simeq$ faisceaux sur $F$ à valeurs dans $E$, i.e. foncteurs $F^{\circ} \to E$
+commutant aux $\varprojlim$, i.e. qui ont un adjoint à g.
+
+$\simeq$ foncteurs $E^{\circ} \times F^{\circ} \to (\mathrm{Ens})$ qui
+\struck{\ill{}} en \emph{chaque variable} aux $\varprojlim$ quelc.
+\note{le mot biffé n'est remplacé par aucun autre}
+
+\marginal{si $E \simeq \widetilde{C}$}
+$\simeq$ faisceaux sur $C$ à valeurs dans $F$, i.e. foncteurs
+$\varphi : C^{\circ} \to F$ tels que pour tout $R \to X$ couvrant dans $C$, on a
+$\varphi(X) \xrightarrow{\sim} \varprojlim_{C/R} \varphi(Z)$, i.e. tels que
+$\forall\, y \in F$, $X \mapsto \operatorname{Hom}_{F}(\varphi(X), y)$ \ill{}
+sur $C$ est un faisceau, (i.e. \struck{\ill{}} foncteurs
+$\varphi^{\circ} : C \to F^{\circ}$ qui sont « continus » [i.e. se prolongent en
+foncteurs $\widetilde{C} \to F^{\circ}$ commutant aux $\varprojlim$ [quelc.]])
+
+\marginal{si $F \simeq \widetilde{D}$}
+$\simeq$ faisceaux sur $D$ à valeurs dans $E$, i.e. foncteurs
+$\psi : D^{\circ} \to E$ tels que \ill{}, i.e. foncteurs « continus »
+$\psi^{\circ} : D \to E^{\circ}$
+
+$\simeq$ foncteurs $C^{\circ} \times D^{\circ} \to (\mathrm{Ens})$ qui sont des
+« bifaisceaux » i.e. tels que ce soient des faisceaux séparément en chaque
+variable.
+
+\struck{\ill{} $E \to E'$, $v : F \to F'$ \ill{}}
+
+\textbf{Prop. 1} \quad $\Pi(E,F)$ est un topos.
+
+On peut supposer $E = \widetilde{C}$, $F = \widetilde{D}$, $C$ et $D$ petites
+stables par $\varprojlim$ finies.
+
+a) Cas des topologies discrètes : $\Pi(\widehat{C}, \widehat{D}) \simeq
+\widehat{C \times D}$ : c'est un topos.
+
+b) Plus généralement, $\Pi(\widehat{C}, \widetilde{D}) \simeq
+\operatorname{Hom}(C^{\circ}, \widetilde{D})$ est un topos, \struck{de même}
+$\Pi(\widetilde{C}, \widehat{D}) \simeq \operatorname{Hom}(D^{\circ},
+\widetilde{C})$.
+
+\struck{Et} L'inclusion naturelle $\Pi(\widehat{C}, \widetilde{D})
+\hookrightarrow \Pi(\widehat{C}, \widehat{D})$ (qui à $\varphi$ associe
+$i_{D} \circ \varphi$, où $i_{D} : \widetilde{D} \to \widehat{D}$ est
+l'inclusion) est le foncteur image directe pour un morphisme de topos, dont le
+foncteur image inverse $\Pi(\widehat{C}, \widehat{D}) \to \Pi(\widehat{C},
+\widetilde{D})$ est donné par $\varphi \mapsto a_{D} \circ \varphi$, où
+$a_{D} : \widehat{D} \to \widetilde{D}$ est l'adjoint à g. de $i_{D}$.
+
+Donc $\Pi(\widehat{C}, \widetilde{D})$ est un sous-topos
+(\uncertain{str. pleine}) dans $\Pi(\widehat{C}, \widehat{D})$, et par la raison
+symétrique $\Pi(\widetilde{C}, \widehat{D})$ aussi. Mais $\Pi(\widetilde{C},
+\widetilde{D})$ est l'intersection de ces deux, donc c'est un sous-topos de
+$\Pi(\widehat{C}, \widehat{D})$
+
+\page{4}
+— a fortiori un topos.
+
+\struck{\ill{}}
+
+On va définir, pour deux morphismes de topos
+\[
+u : E \longrightarrow E', \qquad v : F \longrightarrow F'
+\]
+un morphisme de topos
+\[
+\Pi(u,v) : \Pi(E,F) \longrightarrow \Pi(E',F')
+\]
+dont l'interprétation intrinsèque symbolique est ainsi, en termes des
+« bifaisceaux » $E^{\circ} \times F^{\circ} \to (\mathrm{Ens})$, et
+$E'^{\circ} \times F'^{\circ} \to (\mathrm{Ens})$,
+
+\struck{\ill{}}
+\[
+\Pi(u,v)_{*}(\varphi)(X',Y') = \varphi(u^{*}X', v^{*}Y')
+\qquad : \Pi(E,F) \longrightarrow \Pi(E',F')
+\]
+\[
+\Pi(u,v)^{*}(\varphi)(X,Y) \overset{?}{=}
+\]
+
+Pour prouver que \struck{\ill{}} le foncteur précédent est associé à un
+morphisme de topos, nous sommes ramenés, en le factorisant en
+\[
+\Pi(E,F) \longrightarrow \Pi(E,F') \longrightarrow \Pi(E',F')
+\]
+au cas où l'un des deux morphismes $u$, $v$ est l'identité ; soit $u$, d'où à
+étudier
+\[
+\Pi(\mathrm{id}_{E}, v)_{*} : \Pi(E,F) \longrightarrow \Pi(E,F')
+\]
+On peut supposer $v : F \to F'$ défini par un morphisme de sites
+$v_{0}^{*} : C' \to C$, $C$, $C'$ stables par \struck{\ill{}} $\varprojlim$
+finies, \uncertain{munis d'une} top. moins fine que la top. can. Donc on a
+\struck{\ill{}} un diagramme \struck{commutatif} de topos
+
+\struck{$F \xrightarrow{\ \widetilde{v}_{0}\ } F'$}
+
+\begin{tikzcd}
+\widetilde{C} = F \arrow[r, "\widetilde{v}_{0}"] \arrow[d, hook] & \widetilde{C}' = F' \arrow[d, hook] \\
+\widehat{C} \arrow[r, "\widehat{v}_{0}"] & \widehat{C}'
+\end{tikzcd}
+
+et par suite un diagramme. $E = \widetilde{C}$, et on a alors
+$\Pi(\mathrm{id}_{E}, v)_{*}$ s'inscrit dans un diagramme commutatif
+
+\begin{tikzcd}[column sep=small, row sep=small, nodes={font=\scriptsize}]
+\Pi(\widetilde{C}, F) \arrow[r, "{\Pi(\mathrm{id}_{\widetilde{C}}, v)_{*}}"] \arrow[d, "{\Pi(i_{C}, \mathrm{id}_{F})_{*}}"'] & \Pi(\widetilde{C}, F') \arrow[d, "{\Pi(i_{C}, \mathrm{id}_{F'})_{*}}"] \\
+\Pi(\widehat{C}, F) \arrow[r, "{\Pi(\mathrm{id}_{\widehat{C}}, v)_{*}}"'] & \Pi(\widehat{C}, F')
+\end{tikzcd}
+
+\page{5}
+Nous avons déjà \struck{\ill{}} dans le \uncertain{dessin} de (prop. 1) vérifié
+que les flèches verticales sont des inclusions de sous-topos [inclusion d'un
+sous-topos intersection dans un des facteurs] donc pour prouver que
+$\Pi(\mathrm{id}_{\widetilde{C}}, v)_{*}$ est \struck{\ill{}} le foncteur
+\uncertain{adjoint} pour un morphisme de topos, il suffit de vérifier qu'il en
+est ainsi de $\Pi(\mathrm{id}_{\widehat{C}}, F')_{*}$. En effet,
+\note{le second argument de $\Pi(-,-)$ est partout ailleurs un morphisme ; la
+page porte bien $F'$}
+
+On aura alors un morphisme de topos
+\[
+\Pi(\widetilde{C}, F) \longrightarrow \Pi(\widehat{C}, F') ,
+\qquad\text{et}
+\]
+\note{une flèche oblique, sous la précédente, la fait passer par
+$\Pi(\widehat{C}, F)$}
+
+on voit (en vérifiant sur les foncteurs images directs) qu'il se factorise par
+le sous-topos $\Pi(\widetilde{C}, F')$, le foncteur image directe associé au
+morphisme de \ill{} topos obtenu $\Pi(\widetilde{C}, F) \to
+\Pi(\widetilde{C}, F')$ étant $\Pi(\mathrm{id}_{\widetilde{C}}, v)_{*}$.
+\note{une large tache d'encre couvre ici trois demi-lignes}
+
+Or $\Pi(\mathrm{id}_{\widehat{C}}, \ill{})$ s'identifie au foncteur
+\[
+\operatorname{Hom}(C, F) \longrightarrow \operatorname{Hom}(C, F')
+\]
+défini par \struck{\ill{}} $\varphi \mapsto v_{*} \circ \varphi$ [car la
+bijection associée à $\varphi$ est $\varphi(X,Y) \to
+\operatorname{Hom}_{F}(Y, \varphi(X))$, qui se transforme par
+$\operatorname{Hom}(X,Y') \to \operatorname{Hom}_{F}(v^{*}Y', \varphi(X))
+\simeq \operatorname{Hom}_{F'}(Y', (v_{*}\varphi)(X))$, et pour
+$\varphi' = v_{*}\varphi : C \to F'$, c'est bien la bijection sur
+$C \times F'$ associée à $\varphi'$], dont l'adjoint à droite est
+$\varphi \mapsto v^{*} \circ \varphi$, et celui-ci est bien exact à g. cqfd.
+\note{c'est l'adjoint à gauche de $\varphi \mapsto v_{*}\circ\varphi$ que
+demande la suite ; la page porte « droite »}
+
+Prenons $v : F \to P$ (topos ponctuel $\simeq \widehat{e}$, $e$ catégorie
+\uncertain{finale}) et notant que $\Pi(E,P) \cong E$, on déduit un morphisme
+can.
+\[
+\Pi(E,F) \longrightarrow E
+\]
+et on trouve de même un morphisme can. de topos
+\[
+\Pi(E,F) \longrightarrow F
+\]
+d'où un morphisme de topos
+\[
+\Pi(E,F) \longrightarrow E \times_{\mathrm{top}} F
+\]
+évidemment 2-fonctoriel en $E$, $F$. On veut prouver que c'est une
+\struck{\ill{}} équivalence, i.e. que $\Pi(E,F)$ « est » un 2-produit des
+
+\page{6}
+topos $E$, $F$. On suppose comme dans la dém. de prop. 1 $E = \widetilde{C}$,
+$F = \widetilde{D}$, \struck{donc} on a vu que \ill{}
+\[
+\Pi(E,F) = \Pi(\widetilde{C}, \widetilde{D}) = \struck{\ill{}}\;
+\Pi(\widetilde{C}, \widehat{D}) \cap \Pi(\widehat{C}, \widetilde{D})
+\]
+(intersection des sous-topos de $\Pi(\widehat{C}, \widehat{D}) \simeq
+\widehat{C \times D}$)
+
+et il est clair que les deux foncteurs $\Pi(\widetilde{C}, \widehat{D})$ et
+$\Pi(\widehat{C}, \widetilde{D})$ sont les images inverses des sous-topos
+$\widetilde{C} \subset \widehat{C}$ resp. $\widetilde{D} \subset \widehat{D}$
+par les « projections » $\Pi(\widehat{C}, \widehat{D}) \to \widehat{C}$ resp.
+$\Pi(\widehat{C}, \widehat{D}) \to \widehat{D}$. Cela nous ramène à
+\uncertain{savoir} prouver que $\Pi(\widehat{C}, \widehat{D})$ est un
+2-produit des topos $\widehat{C}$, $\widehat{D}$. Or pour un topos
+\struck{$E$}$X$, on a
+\begin{align}
+\operatorname{Hom}_{\mathrm{top}}(X, \widehat{C}) &\cong \operatorname{Hom}'(C, X)^{\circ} \nonumber\\
+\operatorname{Hom}_{\mathrm{top}}(X, \widehat{D}) &\cong \operatorname{Hom}'(D, X)^{\circ} \nonumber
+\end{align}
+où le $\operatorname{Hom}'$ désigne les foncteurs exacts à g. [NB \ill{}
+suppose $C$ et $D$ stables par $\varprojlim$ finies], donc on a
+\begin{align}
+\operatorname{Hom}_{\mathrm{top}}(X, \widehat{C}) \times \operatorname{Hom}_{\mathrm{top}}(X, \widehat{D})
+&\cong \bigl[\operatorname{Hom}'(C,X) \times \operatorname{Hom}'(D,X)\bigr]^{\circ} \nonumber\\
+&\cong \bigl(\operatorname{Hom}'(C \times D, X)\bigr)^{\circ} \nonumber\\
+&\cong \operatorname{Hom}_{\mathrm{top}}(X, \widehat{C \times D}) \nonumber
+\end{align}
+cqfd
+
+[si $C$ et $D$ sont stables par $\varprojlim$ finies, \struck{il} $C$ en est de
+même de $C \times D$ (Attention, \ill{} des variables, non pas \ill{} les
+variables séparément) et les foncteurs exacts à g. $C \times D
+\xrightarrow{\ \sim\ } X$ [$X$ une catégorie quelc.] correspondant aux
+\struck{deux} couples de foncteurs exacts à gauche $C \xrightarrow{\ u\ } X$,
+$D \xrightarrow{\ v\ } X$, et leurs associés \struck{\ill{}} $(a,b) \mapsto
+u(a) \times v(b)$, et à $w$ les foncteurs $a \mapsto w(a, e_{D})$, $b \mapsto
+w(e_{C}, b)$
+
+\page{7}
+a) $\widehat{C} \times \widehat{C}' \simeq \widehat{C \times C'}$
+
+$C$, $C'$ petites catégories avec $\varprojlim$ finies
+
+Plus généralement, si on a une famille de catégories $C_{i}$ petites avec
+$\varprojlim$ finies, soit $\Pi' C_{i} \subset \Pi C_{i}$ la sous-catégorie
+\struck{\ill{}} pleine produit formée des systèmes $(x_{i})_{i \in I}$
+($x_{i} \in \operatorname{Ob} C_{i}$) tel que $x_{i} \simeq e_{C_{i}}$ pour
+presque tout $i$, alors
+\[
+\prod_{i} \widehat{C_{i}} \;\approx\; \widehat{{\textstyle\prod}' C_{i}}
+\]
+
+\marginal{$\varphi, \varphi'$ exacts à gauche ; $C \xrightarrow{\varphi} X$,
+$C' \xrightarrow{\varphi'} X$ ($X$ catégorie aux $\varprojlim$ finies) se
+factorisent en $C \xrightarrow{i_{1}} C \times C' \xrightarrow{f} X$,
+$C' \xrightarrow{i_{2}} C \times C'$, où $i_{1}(x) = (x, e_{C'})$,
+$i_{2}(x') = (e_{C}, x')$, par $f(x,x') \simeq \varphi(x) \times \varphi'(x')$ ;
+$f(\varprojlim(x_{i}, x'_{i})) = f(\varprojlim x_{i}, \varprojlim x'_{i}) =
+\varphi(\varprojlim x_{i}) \times \varphi'(\varprojlim x'_{i}) =
+\varprojlim_{i} \varphi(x_{i}) \times \varprojlim_{i} \varphi'(x'_{i}) =
+\varprojlim_{i} (\varphi(x_{i}) \times \varphi'(x'_{i}))$ OK}
+
+b) Soient $E_{i}$ des topos ($i \in I$), $E'_{i} \underset{\alpha_{i}}{\subset}
+E_{i}$ sous-topos, \ill{} 2-produit strict
+
+Supposons $E = \prod_{i}^{\mathrm{top}} E_{i} \xrightarrow{\ \mathrm{pr}_{i}\ }
+E_{i}$ existe
+
+Soit pour tout $i$, $F_{i} \subset E$ le sous-topos
+$\mathrm{pr}_{i}^{-1}(E'_{i})$
+
+Soit $E' = \bigcap F_{i}$ le sous-topos intersection
+
+Donc on a $E' \xrightarrow{\ \mathrm{pr}'_{i}\ } E'_{i}$, $E' \simeq
+\prod^{\mathrm{top}} E'_{i}$
+
+Ceci fait de $E'$ un 2-produit des $E'_{i}$
+
+\begin{tikzcd}[column sep=small, row sep=small, nodes={font=\scriptsize}]
+\prod_{i} \operatorname{Hom}_{\mathrm{top}}(X, E'_{i}) \arrow[r, hook, "\alpha"'] & \prod_{i} \operatorname{Hom}_{\mathrm{top}}(X, E_{i}) \\
+& \operatorname{Hom}_{\mathrm{top}}(X, E) \arrow[u, "\beta"']
+\end{tikzcd}
+\note{la flèche horizontale porte « pl. fid. », la verticale un « $\simeq$ »}
+
+\page{8}
+L'image \add{essentielle} \struck{par} $\alpha$ est la sous-catégorie
+\add{str.} pleine de $\prod_{i} \operatorname{Hom}_{\mathrm{top}}(X, E_{i})$
+formée des systèmes $(f_{i} : X \to E_{i})$ tel que pour tout $i$, $f_{i}$ se
+factorise par $E'_{i}$ ; \ill{} \struck{\ill{}} par $\beta$, et correspond
+\ill{} la s.-cat. pleine de $\operatorname{Hom}_{\mathrm{top}}(X, E)$ formée des
+$f : X \to E$ tel que $\forall i$, $\mathrm{pr}_{i} \circ f$ se factorise par
+$E'_{i}$, i.e. tel que $\forall i$, $f$ se factorise par $F_{i}$, i.e. tels que
+\uncertain{$X$} se factorise par $F$. Donc
+\[
+\prod_{i} \operatorname{Hom}_{\mathrm{top}}(X, E'_{i}) \;\cong\;
+\operatorname{Hom}_{\mathrm{top}}(X, F).
+\]
+\note{la page écrit $F$ là où le sous-topos intersection a été noté $E'$ à la
+page précédente}
+
+\textbf{Corollaire de a) et b)} : Le 2-produit d'une famille de topos existe
+tjrs.
+
+Pour avoir la $\varprojlim^{\mathrm{top}}$ d'un topos fibré, il faut
+$\mathcal{F} \to I$, $\mathcal{F}_{j} \xrightarrow{\ f^{*}\ } \mathcal{F}_{i}$,
+$j \xleftarrow{\ f\ } i$ :
+\[
+\varprojlim_{i} \operatorname{Hom}_{\mathrm{top}}(X, \mathcal{F}_{i})
+\;\simeq\;
+\varprojlim_{i} \operatorname{Hom}'(\mathcal{F}_{i}, X)
+\;\simeq\; \ill{}
+\]
+
+$(E_{i})_{i \in I}$ pseudo \struck{syst.} projectif de topos,
+$\mathcal{F}_{1} \rightrightarrows \mathcal{F}_{2} \rightrightarrows
+\mathcal{F}_{3}$ :
+\[
+\varprojlim_{i}^{\mathrm{top}} E_{i} \longrightarrow
+\prod_{i \in \operatorname{Ob} I} E_{i} \rightrightarrows
+\prod_{\alpha \in \mathrm{Fl}_{1} I} E_{b(\alpha)} \rightrightarrows
+\prod_{(\alpha,\beta) \in \mathrm{Fl}_{2}(I)} E_{b(\beta)}
+\]
+les flèches étant $\mathrm{pr}_{s(\alpha)}$, $\mathrm{pr}_{s(\beta)}$ et
+$E_{s(\alpha)} \to E_{b(\alpha)}$.
+\note{tout ce bas de page est barré de deux longues diagonales ; le troisième
+terme porte trois flèches et non deux}
+
+\page{9}
+$X$, $Y$ deux espaces topologiques, considérons $\operatorname{Top}(X)
+\overset{2}{\times}_{\mathrm{top}} \operatorname{Top}(Y)$ et
+$\operatorname{Top}(X \times Y)$ (on vérifie facilement que ce dernier ne
+dépend que de $\operatorname{Top}(X)$ et de $\operatorname{Top}(Y)$, i.e. des
+\struck{\ill{}} espaces \uncertain{sobres} associés à $X$ et $Y$) d'où un
+morphisme canonique de topos
+\[
+\struck{\text{Prop.}} \quad (*) \qquad
+\boxed{\;\operatorname{Top}(X \times Y) \longrightarrow \operatorname{Top}(X)
+\overset{2}{\times}_{\mathrm{top}} \operatorname{Top}(Y)\;}
+\]
+et on veut des conditions pour que ce soit une équivalence.
+
+\marginal{$\mathcal{O}_{X} =$ cat. des ouverts de $X$}
+
+Or on voit que $\operatorname{Top}(X \times Y) = \widetilde{\mathcal{O}_{X}
+\times \mathcal{O}_{Y}}$, \struck{où} la topologie à mettre sur
+$\mathcal{O}_{X} \times \mathcal{O}_{Y}$ est la « topologie produit » $\pi$,
+i.e. celle pour laquelle les faisceaux sont les foncteurs contravariants
+$(\mathcal{O}_{X} \overset{2}{\times} \mathcal{O}_{Y})^{\circ} \to
+(\mathrm{Ens})$ qui sont des faisceaux \emph{séparément}. \struck{Il} Il y a
+aussi la topologie $\pi'$ \struck{\ill{}} « induite » par la précédente
+$X \times Y$ en utilisant l'injection (supposons $X \neq \emptyset$ et
+$Y \neq \emptyset$) $\mathcal{O}_{X} \times \mathcal{O}_{Y} \subset
+\mathcal{O}_{X \times Y}$. Il est clair que tout faisceau pour cette topologie
+(faisceau sur $X \times Y$) est un bifaisceau \struck{\ill{}} donc la 2e top.
+$\pi'$ est plus fine que $\pi$. On voit déjà que \struck{\ill{}} le
+morphisme (*) est un \emph{plongement de topos}, et \struck{\ill{}} est ramené
+à voir si ce plongement est une équivalence, i.e. $\pi = \pi'$. Donc on est
+ramené à voir si tout recouvrement pour $\pi'$ $U \times V$
+($U \in \mathcal{O}_{X}$, $V \in \mathcal{O}_{Y}$) par des $U_{i} \times V_{i}$
+[i.e. rec. ensembliste dans $X \times Y$] est un rec. pour $\pi$, i.e.
+\struck{si} si
+\[
+\bigcup_{i} U_{i} \times V_{i} = U \times V \implies
+\operatorname*{Sup}_{i} U_{i} \times V_{i} = U \times V
+\]
+le Sup étant pris dans l'\uncertain{ensemble} des sous-objets de
+$U \times V$ \ill{} le topos $\widetilde{\mathcal{O}_{X} \times
+\mathcal{O}_{Y}}$ (top. $\pi$).
+
+\textbf{Proposition} Pour qu'il en soit ainsi, il suffit que tout
+\struck{\ill{}} point de $U$ (ou de $V$) admette un voisinage (\ill{})
+quasi-compact
+
+\textbf{Corollaire} \struck{Si} tous points de $X$ (ou de $Y$) admettant un
+syst. fond. de voisinages qui sont quasi-compacts, alors (*) est une
+équivalence.
+
+\marginal{NB les $U \times V$ ($U \in \mathcal{O}_{X}$, $V \in
+\mathcal{O}_{Y}$) forment une base de la top. de $X \times Y$}
+
+\marginal{NB comme $\operatorname{Top}(X \times Y)$ \ill{}
+$\operatorname{Top}(X) \overset{2}{\times}_{\mathrm{top}}
+\operatorname{Top}(Y)$ \ill{}}
+
+\note{une longue note marginale, écrite en diagonale le long de toute la marge
+de gauche et recoupant les deux précédentes, reste en grande partie illisible}
+
+\page{10}
+\textbf{Dém.} Pour tout $x \in X$, soit $U_{x}$ un voisinage
+\uncertain{quasi-compact}. Donc $\forall\, y \in Y$ il existe
+$I_{x,y} \subset I$, $I_{x,y}$ partie finie, telle que \struck{\ill{}}
+$U_{x} \times \{y\}$ soit recouvert par les $U_{i} \times V_{i}$
+($i \in I_{x,y}$). Soit $V_{x,y}$ l'intersection \struck{\ill{}} des $V_{i}$,
+$V_{x,y} = \bigcap_{i \in I_{x,y}} V_{i}$, donc on a
+\[
+\begin{cases}
+\mathring{U}_{x} = U'_{x} \subset \bigcup_{i \in I_{x,y}} U_{i}, \\
+V_{i} \supset V_{x,y} \text{ pour } i \in I_{x,y}
+\end{cases}
+\]
+Donc
+\[
+S \overset{\text{déf}}{=} \operatorname*{Sup}_{i \in I}(U_{i} \times V_{i})
+\;\geqslant\; \operatorname*{Sup}_{i \in I_{x,y}}(U_{i} \times V_{i})
+\;\geqslant\; \Bigl(\operatorname*{Sup}_{i \in I_{x,y}} U_{i}\Bigr) \times V_{x,y}
+\;\geqslant\; U'_{x} \times V_{x,y}
+\]
+donc comme ceci est vrai pour tout $y$, on a
+\[
+S \geqslant \operatorname*{Sup}_{y} \mathring{U}'_{x} \times V_{x,y}
+= \mathring{U}'_{x} \times \operatorname*{Sup}_{y} V_{x,y}
+= \mathring{U}'_{x} \times V
+\]
+d'où
+\[
+S \geqslant \operatorname*{Sup}_{x} (\mathring{U}'_{x} \times V)
+= \Bigl(\operatorname*{Sup}_{x} \mathring{U}'_{x}\Bigr) \times V
+= U \times V
+\]
+cqfd.
+
+\textbf{Réciproquement} Supposons que $X$ (ou $Y$) ne contienne pas de parties
+\uncertain{loc. fermées} non vides dont aucun point n'ait de voisinage
+\add{relatif} quasi-compact. Je dis qu'\struck{alors} a) est une équivalence.
+
+Considérons en effet les ouverts $U'$ dans \struck{$U$} tels que $S \geqslant
+U' \times V$ ; il suffit de prouver que $U$ en est parmi. Or la
+\struck{\ill{}} \ill{} ouverts, en est un $=$ \uncertain{sup}, donc il y a un
+plus grand ouvert \ill{} $=$ \uncertain{sup} [N.B. $\emptyset$ en est un !]
+
+Prouvons $U' = U$. \struck{Soit $Z$} Sinon, la partie loc. fermée $Z$ de
+\struck{$U$} \struck{\ill{}} non vide, doit avoir un $x \in Z$ ayant un
+voisinage relatif $T_{x} \subset Z$ quasi-compact. Soit $U'' \subset U$ un
+ouvert contenant $x$ tel que $U'' \cap Z \subset T$. \struck{Donc} Il existe
+$\forall\, y \in Y$ une partie finie $I_{y}$ de $I$ telle que
+\[
+T \times \{y\} \subset \bigcup_{i \in I_{y}} U_{i} \times V_{i},
+\qquad\text{et pour } V_{y} = \bigcap_{i \in I_{y}} V_{i},
+\quad \struck{\ill{}}
+\]
+\struck{$T \times V_{y} \subset \bigcup_{i \in I} U_{i} \times V_{i}$ donc}
+$T \subset \bigcup_{i \in I_{y}} U_{i}$, $i \in I_{y} \implies V_{i} \supset
+V_{y}$ donc on a
+\[
+S \geqslant \operatorname*{Sup}_{i \in I_{y}}(U_{i} \times V_{i})
+\geqslant \operatorname*{Sup}_{i \in I_{y}} U_{i} \times V_{y}
+\geqslant \Bigl(\operatorname*{Sup}_{i \in I_{y}} U_{i}\Bigr) \times V_{y}
+\]
+Mais on sait déjà que $S \geqslant U' \times V \geqslant U' \times V_{y}$ donc
+\[
+S \geqslant \operatorname*{Sup}(U'_{i}, U_{i}\ i \in I_{y}) \times V_{y}
+\geqslant (U' \cup U'') \times V_{y}
+\]
+
+\page{11}
+Comme ceci est vrai pour tout $y$, on a
+\[
+S \geqslant \operatorname*{Sup}_{y}\bigl((U' \cup U'') \times V_{y}\bigr)
+= (U' \cup U'') \times \operatorname*{Sup}_{y} V_{y}
+= (U' \cup U'') \times V
+\]
+contredisant au caractère maximal de $U'$, OK.
+
+\subsection*{Cas de produits \struck{infinis} d'une famille quelconque de topos}
+
+On trouve que si tous les facteurs sauf \struck{un seul} \add{au plus} sont
+tels que tout pt ait un système fond. de voisinages (\uncertain{q-s vois.
+ouverts}) quasi-compacts, et si tous sauf au plus un seul, ont \struck{\ill{}}
+voisinages quasi-compacts, alors
+\[
+\operatorname{Top}\Bigl(\prod_{i \in I} X_{i}\Bigr) \longrightarrow
+\prod_{i}^{(2)}{}_{(\mathrm{top})} \operatorname{Top}(X_{i})
+\]
+est une équivalence de topos.
+
+C'est essentiellement le même argument, travaillant sur la cat. produit
+\struck{restreint} $\prod' \mathcal{O}_{X_{i}}$ (familles des
+$(U_{i})_{i \in I}$, $U_{i} \in \mathcal{O}_{X_{i}}$ \ill{} $U_{i}$ ;
+$U_{i} = X_{i}$ (\struck{\ill{}} pour \add{presque} tout \ill{} de
+$\mathcal{O}_{X_{i}}$) pour presque tout $i$) et la « topologie produit » sur ce
+produit.
+
+Dans le cas où $I$ est fini, c'est un corollaire immédiat de ce qui précède.
+Dans le cas général, on a $I = \varinjlim_{\alpha} J_{\alpha}$ ($J_{\alpha}$
+parties finies de $I$) d'où
+\begin{align}
+\prod_{i}^{\mathrm{top}} \operatorname{Top}(X_{i})
+&\cong \varprojlim_{\alpha}{}^{\mathrm{top}}
+   \Bigl(\prod_{i \in J_{\alpha}} \operatorname{Top}(X_{i})\Bigr) \nonumber\\
+&\cong \varprojlim_{\alpha}{}^{\mathrm{top}}
+   \Bigl(\operatorname{Top}\bigl({\textstyle\prod_{i \in J_{\alpha}}} X_{i}\bigr)\Bigr)
+   \qquad\Bigl[{\textstyle\prod_{i \in J_{\alpha}}} X_{i} = Z_{\alpha}\Bigr] \nonumber\\
+&\approx \Bigl(\underbrace{\varinjlim_{\alpha} \mathcal{O}_{Z_{\alpha}}}_{\mathcal{O}'_{Z}}\Bigr)^{\sim} \nonumber
+\end{align}
+
+$\mathcal{O}'_{Z}$ est la catégorie des ouverts de $Z$ \add{$= \prod X_{i}$}
+(qui sont images inverses \struck{des} d'ouverts de produits finis
+$\prod_{i \in J_{\alpha}} X_{i} = Z_{\alpha}$. Ils la forment \struck{une}
+alors la topologie \ill{} (\struck{$\varprojlim$}, qui définit \ill{} le
+foncteur précédent, mais aussi la top. plus fine $\pi'$ provenant de la top. de
+$Z$. Si tous les $X_{i}$ sauf un nb fini sont quasi-compacts [les autres étant
+ce qu'ils veulent] on trouve par un argument analogue \add{à dessus} que les
+top. sont
+
+\page{12}
+$W \in \mathcal{O}'_{Z}$, donc de la forme $U \times Z'_{\alpha}$, les mêmes.
+\struck{Soit en effet} ($U$ un ouvert de $Z_{\alpha}$, et $Z'_{\alpha} =
+\prod_{i \in I - J_{\alpha}} X_{i}$, \struck{\ill{}} (d'où $Z = Z_{\alpha}
+\times Z'_{\alpha}$), et soient $(V_{\lambda})_{\lambda \in \Lambda}$,
+$V_{\lambda} \in \mathcal{O}'_{Z}$, avec $W \subset \bigcup_{\lambda}
+V_{\lambda}$ \ill{} prouvons qu'il \struck{\ill{}}
+$\operatorname*{Sup}_{\lambda} W \geqslant U \times Z'_{\alpha}$.
+\struck{\ill{}} $J_{\alpha}$ \ill{} pour les $X_{i}$ ($i \in I - J_{\alpha}$)
+soient \ill{} quelconques, alors $Z'_{\alpha}$ est quasi-compact.
+\note{deux taches d'encre couvrent la fin de deux lignes de ce paragraphe}
+
+$\forall\, z \in \struck{\ill{}} W$, $\{z\} \times Z'_{\alpha}$ est recouvert
+par un nb fini de $V_{\lambda}$, disons pour $\lambda \in \Lambda_{z}$, donc
+$\exists$ \struck{\ill{}} $J_{\beta(z)} \supset J_{\alpha}$ tel que chaque
+$V_{\lambda}$ ($\lambda \in \Lambda_{z}$) de la forme $V'_{\lambda} \times
+Z'_{\beta(z)}$, avec $V'_{\lambda} \subset \mathcal{O}_{Z_{\beta(z)}}$.
+\struck{\ill{}} Comme $\{z\} \times Z'_{\alpha} \subset \bigcup(V'_{\lambda}
+\times Z'_{\beta(z)})$, cela \struck{\ill{}} signifie
+\[
+\{z\} \times \prod_{i \in J_{\beta(z)} - J_{\alpha}} X_{i} \subset
+\bigcup_{\lambda \in \Lambda_{z}} V'_{\lambda} ,
+\]
+donc il existe un voisinage ouvert $U_{z} \ni z$ dans $Z_{\alpha}$ tel que
+$U_{z} \times Z'_{\alpha} \subset \bigcup_{\lambda \in \Lambda_{z}}
+V_{\lambda}$. Mais alors \struck{\ill{}} on aura l'inclusion
+\[
+U_{z} \times \prod_{i \in J_{\beta(z)} - J_{\alpha}} X_{i} \subset
+\bigcup_{\lambda \in \Lambda_{z}} V'_{\lambda}
+\]
+d'où
+\[
+S \overset{\text{déf}}{=} \operatorname*{Sup}_{\lambda \in \Lambda}(V_{\lambda})
+\geqslant \operatorname*{Sup}_{\lambda \in \Lambda_{z}} V_{\lambda}
+\geqslant U_{z} \times Z'_{\alpha} .
+\]
+Comme ceci est vrai pour tout $z$, \struck{\ill{}}
+\[
+S \geqslant \operatorname*{Sup}_{z}\bigl(U_{z} \times Z'_{\alpha}\bigr)
+= \Bigl(\operatorname*{Sup}_{z \in Z} U_{z}\Bigr) \times Z'_{\alpha}
+= W \times Z'_{\alpha} ,
+\]
+cqfd.
+
+\subsection*{Contre-exemples pour des produits infinis}
+
+Prenons $X_{i}$ discret pour tout $i$, on aura
+\[
+\prod_{i \in I} \operatorname{Top}(X_{i}) =
+\Bigl(\underbrace{\varinjlim_{\alpha} \mathcal{O}_{Z_{\alpha}}}_{\mathcal{O}'_{Z}}\Bigr)^{\sim} ,
+\]
+munie par la top.
+
+\page{14}
+$\pi$ de $\mathcal{O}'_{Z}$ ainsi que la topologie déduite de la top. produit
+sur $Z = \struck{\prod X_{i}} = \varprojlim_{\alpha} Z_{\alpha}$ (si $I$ infini
+et les $X_{i}$ ne sont pas presque tous finis). \struck{\ill{}} On a une
+famille fond. de voisinages \struck{\ill{}} de $Z$ par un objet de
+$\mathcal{O}'$ en associant à tt $z = (x_{i})_{i \in I} \in Z$ une partie finie
+$J(z)$ de $J$, \struck{telle} \add{très}
+\[
+\struck{\ill{}\ W(z) =} \qquad
+V_{z} = \{\, z' \in Z \mid z'_{i} = z_{i} \text{ si } i \in J - J(z) \,\} .
+\]
+\struck{La question est de voir si tous ces $(V_{z})_{z \in Z}$} \add{pas} rec.
+pour $\pi$, ou encore
+\note{la page s'arrête ici ; le reste du feuillet est vierge, et un « ? » est
+porté en marge}
+
+\section*{$\varprojlim$ filtrantes de topos essentiels $\widehat{C}$}
+
+\page{15}
+On est intéressé aux $\varprojlim$ pour un topos fibré, i.e. les fibres sont
+des topos $\widehat{C}$ ($C$ \struck{\ill{}} \add{arbitr.}) et les morphismes
+de transition \struck{$f : \widehat{C}' \to \widehat{C}$} \struck{sont}
+essentiels, i.e. associés à des foncteurs
+\[
+f_{0} : C \longrightarrow C'
+\]
+Il est \struck{\ill{}} \struck{que alors} $\mathcal{X} =
+\varprojlim^{\mathrm{top}} \widehat{C_{i}}$ soit un topos essentiel et ses
+projections $\mathcal{X} \to \widehat{C_{i}}$ des morphismes essentiels.
+
+Mais pour le calcul commode de $\mathcal{X}$ on va supposer que les
+$\widehat{f}_{ij} : \widehat{C_{j}} \to \widehat{C_{i}}$ \struck{\ill{}}
+(associés aux $f_{ij} : C_{j} \to C_{i}$) soient ess., i.e. des morph. de sites
+donnés par des foncteurs
+\[
+g_{ji} : C_{i} \longrightarrow C_{j}
+\]
+(i.e. induits par $\widehat{f}_{ij}^{*}$ i.e. précis, et adjoints à
+\emph{droite} des $f_{ij}$).
+
+On trouve alors
+\[
+\mathcal{X} = \varprojlim_{i, \widehat{f}_{ij}}{}^{\mathrm{top}} \widehat{C_{i}}
+\;\simeq\; \Bigl(\operatorname*{colim}_{i, g_{ij}} C_{i}\Bigr)^{\wedge}
+\]
+et les morphismes $\mathcal{X} \xrightarrow{\ \mathrm{pr}_{i}\ }
+\widehat{C_{i}}$ sont associés aux morphismes de sites donnés par le foncteur
+can.
+\[
+C_{i} \xrightarrow{\ \alpha_{i}\ } C = \operatorname*{colim} C_{j} ,
+\]
+donc pour $F \in \widehat{C} = \mathcal{X}$, \ill{}
+\[
+\mathrm{pr}_{i*}(F) = F \circ \alpha_{i} ,
+\qquad\text{et pour } G \in \widehat{C_{i}} \ \ill{}
+\]
+\[
+\mathrm{pr}_{i}^{*}(G) =
+\]
+\note{la formule reste inachevée ; la page s'arrête ici}
+
+\section*{Foncteurs sur un topos $\widetilde{C}$ commutant aux $\varinjlim$}
+
+\page{17}
+Soient $C$ un $U$-site, $E$ une catégorie aux petites $\varinjlim$,
+considérons les catégories
+\[
+\operatorname{Hom}'(\widetilde{C}, E)
+\qquad
+\operatorname{Hom}(C, E)
+\]
+et soit $\operatorname{Hom}'(\widetilde{C},E)$ \struck{désigner} la
+sous-catégorie pleine de $\operatorname{Hom}$ formée des foncteurs qui
+commutent aux petites $\varinjlim$. On va définir des foncteurs
+
+\begin{tikzcd}
+\operatorname{Hom}(\widetilde{C}, E) \arrow[r, bend left=20, "\alpha"] & \operatorname{Hom}(C,E) \arrow[l, bend left=20, "\beta"]
+\end{tikzcd}
+
+en posant
+\begin{align}
+\alpha(u) &= u \circ \varepsilon_{C} \nonumber\\
+\beta(u_{0}) &= \Bigl[F \mapsto \varinjlim_{C/F} u_{0}(X)\Bigr] \nonumber
+\end{align}
+($\varepsilon_{C} : C \to \widetilde{C}$ le foncteur canonique ; $=
+\widehat{\beta} \mid \widetilde{C}$, i.e. $\widehat{\beta} : \widehat{C} \to E$
+est le prolongement can. de $\beta$ défini par commutation aux $\varinjlim$)
+
+Soit $u \in \operatorname{Ob} \operatorname{Hom}(\widetilde{C},E)$, on a un hom
+\[
+i_{u} : \beta\alpha(u) \longrightarrow u
+\]
+donné par $\forall\, F \in \operatorname{Ob} \widetilde{C}$ par
+\[
+i_{u}(F) : \bigl(\beta(\alpha(u))\bigr)(F)
+= \varinjlim_{C/F} u(\varepsilon_{C}(X)) \longrightarrow u(F)
+\]
+\marginal{$C \xrightarrow{j_{0}} \widehat{C}$, $\widetilde{C}
+\xrightarrow{i_{0}} \widehat{C}$, $a : \widehat{C} \to \widetilde{C}$ ;
+$\varepsilon_{C} = a j_{0}$}
+\marginal{déduit de l'isom. can. $\varinjlim_{C/F} (\varepsilon_{C}) X
+\xrightarrow{\sim} F$ en appliquant $u$}
+
+On trouve que l'homom. $i_{u}(F)$ est bien fonctoriel en $F$, d'où $i_{u}$, et
+que $i_{u}$ est fonctoriel en $u$, d'où
+\[
+\boxed{\;\beta\alpha \xrightarrow{\ i\ } \mathrm{id}_{\operatorname{Hom}(\widetilde{C},E)}\;}
+\]
+
+Notons tout de suite que \struck{\ill{}} $i_{u} : \beta\alpha(u) \to u$ est un
+isom. sss $u : \widetilde{C} \to E$ commute aux $\varinjlim$ du type
+$\varinjlim_{C/F} X \xrightarrow{\sim} F$ ($F \in \operatorname{Ob}
+\widetilde{C}$), \struck{\ill{}} \add{donc que} $u \in \operatorname{Ob}
+\operatorname{Hom}'(\widetilde{C}, E)$.
+
+Soit $u_{0} \in \operatorname{Hom}(C,E)$, on va définir
+\[
+j_{u_{0}} : \struck{\ill{}}\; u_{0} \longrightarrow \alpha\beta(u_{0})
+\]
+\struck{\ill{}} \add{donné} pour $Z \in \operatorname{Ob} C$, par
+\[
+j_{u_{0}}(Z) : \quad u_{0}(Z) \longrightarrow
+\bigl(\alpha(\beta(u_{0}))\bigr)(Z)
+= \beta(u_{0})(\varepsilon_{C}(Z))
+= \varinjlim_{C/\varepsilon_{C}(Z)} u_{0}(X)
+\]
+en notant que $(Z, \text{morphisme can. de } Z \text{ dans }
+\varepsilon_{C}(Z))$ est un objet de $C/\varepsilon_{C}(Z)$, soit $X_{0}$, et
+par suite $u_{0}(X_{0}) = u_{0}(Z)$ s'envoie dans la $\varinjlim$.
+
+\page{18}
+On vérifie que cette application est fonctorielle en $Z$, donc définit
+$j_{u_{0}} : u_{0} \to \alpha\beta(u_{0})$, et que cette dernière est
+fonctorielle en $u_{0}$, d'où un hom. de foncteurs
+\[
+\boxed{\;j : \mathrm{id}_{\operatorname{Hom}(C,E)} \longrightarrow \alpha\beta\;}
+\]
+\struck{Signalons} Notons tout de suite que pour \struck{que} ce dernier,
+$j_{u_{0}} : u_{0} \to \alpha\beta(u_{0})$, soit un isom. sss
+\struck{\ill{}} $\forall\, Z \in \operatorname{Ob} C$,
+\[
+u_{0}(Z) \longrightarrow \varinjlim_{C/\varepsilon_{C}(Z)} u_{0}(X)
+\]
+est un isom, ou encore sss pour tout tel $Z$ et $\xi \in \operatorname{Ob} E$,
+la flèche déduite de la précédente en appliquant $\operatorname{Hom}(-, \xi)$
+est bijective, i.e.
+\[
+\varprojlim_{C/\varepsilon_{C}(Z)} \operatorname{Hom}(u_{0}(X), \xi)
+\longrightarrow \operatorname{Hom}(u_{0}(Z), \xi)
+\quad\text{bijective.}
+\]
+On sait \struck{\ill{}},
+\[
+u'_{0} : E \longrightarrow \widehat{C}
+\]
+le foncteur défini par
+\[
+u'_{0}(\xi)(Y) = \operatorname{Hom}(u_{0}(Y), \xi)
+\]
+de sorte que l'application précédente devient, posant $P = u'_{0}(\xi)$ :
+\[
+\varprojlim_{C/\varepsilon_{C}(Z)} P(X) \longrightarrow P(Z)
+\qquad\text{un isom.}
+\]
+\struck{\ill{}} Cette condition est vide si $\varepsilon_{C}$ est pl. fidèle
+i.e. la top. de $C$ est moins fine que la top. canonique (car alors
+$C/\varepsilon_{C}(Z) \simeq C/Z$ admet $Z$ comme objet final).
+
+On va prouver que $i$, $j$ sont des homom. d'adjonction associés pour les
+foncteurs $\alpha$ et $\beta$. [Ce qui prouve que $\alpha$ et $\beta$
+\struck{induisent} \struck{établissent} des équivalences entre les
+sous-catégories \add{str. pleines} de $\operatorname{Hom}(\widetilde{C},E)$ et
+$\operatorname{Hom}(C,E)$ qu'on a décrites au préal. On \struck{\ill{}}
+\struck{\ill{}} (on a induit un foncteur pl. fidèle
+\[
+\operatorname{Hom}'(\widetilde{C}, E) \longrightarrow \operatorname{Hom}(C,E)
+\]
+dont l'image essentielle est formée des \struck{\ill{}} $u_{0} : C \to E$
+satisfaisant la condition ci-dessus, et telle que $\beta(u_{0}) \in
+\operatorname{Hom}'(\widetilde{C}, E)$ — condition qu'on remplacera par une
+autre plus simple]
+
+\page{19}
+$C$ un $U$-site, $E$ catégorie où les petites $\varinjlim$ sont repr.
+Déterminer les foncteurs
+\[
+u : \widetilde{C} \longrightarrow E
+\]
+commutant aux $\varinjlim$ (petites) ? Comme \ill{}
+\[
+u \circ \varepsilon_{C} = u_{0} , \qquad u_{0} : C \longrightarrow E
+\]
+\marginal{$C \xrightarrow{\varepsilon_{C}} \widetilde{C} \xrightarrow{u} E$, le
+composé étant $u_{0}$}
+car pour $F \in \widetilde{C}$, on a un isom. fonctoriel en $F$
+\[
+F = \varinjlim_{C/F} \varepsilon_{C}(X)
+\]
+d'où
+\[
+u(F) = \varinjlim_{C/F} u_{0}(X) .
+\]
+De façon précise, on trouve un foncteur $u \mapsto u \circ \varepsilon_{C}$
+\[
+a : \operatorname{Hom}'(\widetilde{C}, E) \longrightarrow \operatorname{Hom}(C,E)
+\]
+qui est pl. fid., le signe $\operatorname{Hom}'$ désignant les foncteurs
+commutant aux petites $\varinjlim$. En fait, on a un foncteur
+« prolongement à $\widetilde{C}$ »
+\[
+\beta : \operatorname{Hom}(C,E) \longrightarrow \operatorname{Hom}(C,E)
+\]
+\note{le but devrait être $\operatorname{Hom}(\widetilde{C},E)$ ; la page écrit
+$C$ des deux côtés}
+défini par
+\[
+\beta(u_{0}) = F \mapsto \varinjlim_{C/F} u_{0}(X)
+\]
+et on a un isom. canonique
+\[
+\beta \circ \alpha \simeq i
+\qquad (\text{inclusion de } \operatorname{Hom}'(\widetilde{C},E)
+\hookrightarrow \operatorname{Hom}(\widetilde{C},E))
+\]
+Mais il n'est pas clair que $\forall\, u_{0} : C \to E$, $\beta(u_{0})$ soit
+dans $\operatorname{Hom}'$. À vrai dire, $\beta(u_{0})$ est induit par
+$\widehat{\beta}(u_{0}) : \widehat{C} \to E$ défini de la $=$ façon, et on sait
+que $\widehat{\beta}(u_{0})$ commute aux $\varinjlim$, on a donc
+
+\begin{tikzcd}
+\operatorname{Hom}(C,E) \arrow[r, bend left=20, "\widehat{\beta}"] & \operatorname{Hom}'(\widehat{C}, E) \arrow[l, bend left=20, "\widehat{\alpha}"]
+\end{tikzcd}
+
+(cf. rappel plus bas). Identifions, dorénavant (une double équivalence)
+$\operatorname{Hom}(C,E)$ à $\operatorname{Hom}'(\widehat{C},E)$, alors
+$\alpha$ et $\beta$ deviennent des foncteurs $\alpha'$, $\beta'$
+\begin{align}
+\operatorname{Hom}'(\widetilde{C}, E) &\xrightarrow{\ \alpha'\ } \operatorname{Hom}'(\widehat{C}, E) \nonumber\\
+\operatorname{Hom}'(\widehat{C}, E) &\xrightarrow{\ \beta'\ } \operatorname{Hom}(\widetilde{C}, E) \nonumber
+\end{align}
+
+\page{20}
+qui s'explicitent ainsi : soit ($a : \widehat{C} \to \widetilde{C}$ le foncteur
+« faisceau associé »), donc $\varepsilon_{C} = a\, i_{C}$ ($i_{C} : C \to
+\widehat{C}$) donc pour $u \in \operatorname{Hom}'(\widetilde{C},E)$,
+$u \circ \varepsilon_{C} = (ua)\, i_{C}$, donc (\struck{\ill{}} que $a$, donc
+$ua$, commute aux petites $\varinjlim$)
+\[
+\alpha'(u) = u \circ a
+\]
+\struck{Donc} D'autre part, on \ill{} que pour $v \in
+\operatorname{Hom}'(\widehat{C}, E)$ (correspondant à $u_{0} : C \to E$)
+\[
+\beta'(v) = v \circ j_{a} = v \mid \widetilde{C}
+\qquad (\text{où } j : \widetilde{C} \to \widehat{C} \text{ est l'inclusion})
+\]
+On a bien
+\[
+\beta'\alpha'(u) = u \circ a \mid \widetilde{C} \simeq u
+\]
+Le fait que $\alpha'$ soit pl. fidèle provient du fait que $\widetilde{C}$ est,
+moyennant $a$, une catégorie de quotients de $\widehat{C}$, de sorte que
+$\operatorname{Hom}(\widetilde{C},E)$ (sans $'$) s'identifie à la
+sous-catégorie pleine de $\operatorname{Hom}(\widehat{C},E)$ formée des
+foncteurs $F$ qui sont tels que
+\[
+\struck{\ill{}}\quad u \in \mathrm{Fl}\,\widehat{C},\ a(u) \text{ inversible}
+\implies F(u) \text{ inversible.}
+\]
+Est-il vrai que dans cette identification, les foncteurs qui commutent aux
+$\varinjlim$ petites se correspondent ? Il vaut à voir que si $\mathcal{U} :
+\widetilde{C} \to E$ est tel que $\mathcal{U} \circ a$ commute aux
+$\varinjlim$, \ill{} on aura $\mathcal{U} = (\mathcal{U} \circ a)\, i$, et si
+\ill{} $X_{\alpha}$ de $\widetilde{C}$,
+$\varinjlim_{\alpha}^{\widetilde{C}} X_{\alpha} =
+a\bigl(\varinjlim_{\alpha}^{\widehat{C}} X_{\alpha}\bigr)$, donc
+\[
+\mathcal{U}\Bigl(\varinjlim_{\alpha}{}^{\widetilde{C}} X_{\alpha}\Bigr)
+= \mathcal{U}\, a \Bigl(\varinjlim_{\alpha}{}^{\widehat{C}} X_{\alpha}\Bigr)
+= (\mathcal{U}a)\Bigl(\varinjlim_{\alpha} X_{\alpha}\Bigr)
+= \varinjlim_{\alpha} (\mathcal{U} \circ a)(X_{\alpha})
+= \varinjlim_{\alpha} \mathcal{U}(X_{\alpha})
+\]
+O.K.
+
+Donc on trouve que $\alpha'$ induit
+\[
+\operatorname{Hom}'(\widetilde{C}, E) \xrightarrow{\ \simeq\ }
+\text{sous-catégorie pleine de } \operatorname{Hom}(\widehat{C}, E)
+\]
+formée des foncteurs qui a) commutent aux $\varinjlim$ petites, b)
+transforment les morphismes « bicouvrants » de $\widehat{C}$ (i.e. tels que
+$a(u)$ inv.) en isom.
+
+Donc on cherche
+\[
+\operatorname{Hom}'(\widetilde{C}, E) \xrightarrow[\ \simeq\ ]{\ \alpha_{0}\ }
+\struck{\ill{}} \text{ sous-catégorie pleine de } \operatorname{Hom}(C, \struck{\widetilde{E}}\,E)
+\]
+formée des $u_{0} : C \to E$ tels que $\widehat{u}_{0} : \widehat{C} \to E$
+transforme les morphismes « bicouvrants » en isom.
+
+Mais cette condition implique que tt famille couvrante $X_{\alpha} \to X$ de
+$\widetilde{C}$ (a fortiori d'une \struck{famille} famille épimorphique de
+$\widetilde{C}$) soit transformée en famille épimorphique de $E$. Cela
+est-il suffisant ? Supposons cette condition remplie,
+
+\marginal{non}
+\note{ce « non » est porté au crayon en bas de page, et répond à la question
+qui précède}
+
+\end{document}
