@@ -1,6 +1,6 @@
 ---
 name: find-novelty
-description: Reads a folder's modernised reading and its transcriptions and proposes candidate novelties — statements the folder establishes that may not stand in the published literature — each written as a claim about the literature rather than about Grothendieck, with what was searched, what part of it is the edition's own, and what would settle it. Writes them into src/content/novelties.ts, which the site's Novelties tab renders. Use when someone asks what is new in a folder, what these notes have that the literature does not, to look for a refinement or an unpublished result, or to re-check candidates already listed. Never asserts priority.
+description: Reads a folder's modernised reading and its transcriptions and proposes candidate findings — statements the folder establishes that may not stand in the published literature — each written as a claim about the literature rather than about Grothendieck, with what was searched, what part of it is the edition's own, and what would settle it. Writes them into src/content/findings.ts, which the site's Findings tab renders. Use when someone asks what is new in a folder, what these notes have that the literature does not, to look for a refinement or an unpublished result, or to re-check candidates already listed. Never asserts priority.
 model: claude-opus-5
 ---
 
@@ -101,8 +101,8 @@ rather than written up:
 
 ## The entry
 
-Entries live in `src/content/novelties.ts`, typed by `Novelty` in
-`src/lib/types.ts`, and the site's Novelties tab renders them. One object per
+Entries live in `src/content/findings.ts`, typed by `Finding` in
+`src/lib/types.ts`, and the site's Findings tab renders them. One object per
 candidate:
 
 | field | what it holds |
@@ -117,9 +117,9 @@ candidate:
 | `status` | `candidate` · `unsearched` · `matched` · `confirmed` |
 | `settle` | the one check that would decide it |
 
-`codicological` findings — leaves bound out of order, two manuscripts
+`codicological` entries — leaves bound out of order, two manuscripts
 interleaved, a sentence continued on a page that is not in the folder — are
-novelties in the same sense and carry less risk, because they are claims about
+findings in the same sense and carry less risk, because they are claims about
 this object rather than about the literature. They still get a `status`: what
 was checked against the facsimile, and what was not.
 

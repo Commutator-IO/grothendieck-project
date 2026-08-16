@@ -1,8 +1,8 @@
-import type { Novelty } from '../lib/types.ts';
+import type { Finding } from '../lib/types.ts';
 
 /**
- * Candidate novelties, written by `/find-novelty` and rendered by the
- * Novelties tab.
+ * Candidate findings, written by `/find-novelty` and rendered by the
+ * Findings tab.
  *
  * Kept as data rather than prose because every one of these is a claim with a
  * status, and prose hides a status. The rule the skill enforces, and the
@@ -17,7 +17,7 @@ import type { Novelty } from '../lib/types.ts';
  * spending a day on it, and it is the evidence that this list is pruned rather
  * than grown.
  */
-export const NOVELTIES: Novelty[] = [
+export const FINDINGS: Finding[] = [
   {
     id: '161-3-product-converse',
     cote: '161-3',

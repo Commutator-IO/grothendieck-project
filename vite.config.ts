@@ -124,7 +124,7 @@ export default defineConfig({
         archive: resolve(import.meta.dirname, 'archive/index.html'),
         method: resolve(import.meta.dirname, 'method/index.html'),
         contribute: resolve(import.meta.dirname, 'contribute/index.html'),
-        novelties: resolve(import.meta.dirname, 'novelties/index.html'),
+        findings: resolve(import.meta.dirname, 'findings/index.html'),
       },
     },
   },

@@ -1,7 +1,7 @@
 import { Footer, Header } from './components/Frame.tsx';
-import { NOVELTIES } from './content/novelties.ts';
+import { FINDINGS } from './content/findings.ts';
 import { BY_ID } from './content/catalogue.ts';
-import type { Novelty } from './lib/types.ts';
+import type { Finding } from './lib/types.ts';
 
 /**
  * What the readings turned up that the inventory does not record.
@@ -22,7 +22,7 @@ import type { Novelty } from './lib/types.ts';
  */
 
 const STATUS: Record<
-  Novelty['status'],
+  Finding['status'],
   { label: string; help: string; className: string }
 > = {
   unsearched: {
@@ -47,12 +47,12 @@ const STATUS: Record<
   },
 };
 
-const KIND: Record<Novelty['kind'], string> = {
+const KIND: Record<Finding['kind'], string> = {
   mathematical: 'about the literature',
   codicological: 'about the object',
 };
 
-function Row({ n }: { n: Novelty }) {
+function Row({ n }: { n: Finding }) {
   const s = STATUS[n.status];
   const cote = BY_ID.get(n.cote);
   return (
@@ -111,13 +111,13 @@ function Row({ n }: { n: Novelty }) {
   );
 }
 
-export function NoveltiesPage() {
-  const open = NOVELTIES.filter((n) => n.status !== 'matched');
-  const closed = NOVELTIES.filter((n) => n.status === 'matched');
+export function FindingsPage() {
+  const open = FINDINGS.filter((n) => n.status !== 'matched');
+  const closed = FINDINGS.filter((n) => n.status === 'matched');
 
   return (
     <>
-      <Header path="/novelties/" />
+      <Header path="/findings/" />
 
       <main className="mx-auto max-w-4xl px-5 py-12">
         <header className="max-w-[46em]">

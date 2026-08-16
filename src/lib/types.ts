@@ -167,7 +167,7 @@ export interface PublishedEdition {
  * where it did, the novelty is partly ours and not the manuscript's, and
  * hiding that would be claiming a novelty for a sentence nobody wrote.
  */
-export interface Novelty {
+export interface Finding {
   id: string;
   cote: string;
   /** The pages the claim rests on, as the inventory numbers them. */
