@@ -330,8 +330,8 @@ const BAR_COLOURS: Record<State, string> = {
  * duplicating decades of scholarship and calling it progress.
  *
  * The list is partial and says so. Attribution in this field is genuinely
- * hard: the CSG credits many transcriptions to "Mateo Carmona et al.", and the
- * et al. are not named anywhere we can reach.
+ * hard: a transcription is often credited to one name and an unnamed "et al.",
+ * and the collaborators are not reachable from anything published.
  */
 const CONTRIBUTORS: { name: string; url?: string; work: string }[] = [
   {
@@ -371,16 +371,6 @@ const CONTRIBUTORS: { name: string; url?: string; work: string }[] = [
       'translation in Geometric Galois Actions I (LMS Lecture Notes 242, 1997), and assembled ' +
       'the collection of scanned and typed unpublished texts that was, for years, the only way ' +
       'to read most of this material at all.',
-  },
-  {
-    name: 'Mateo Carmona',
-    url: 'https://csg.igrothendieck.org/transcriptions/',
-    work:
-      'Coordinator of the Centre for Grothendieckian Studies at the Istituto Grothendieck since ' +
-      '2023, and the driving force behind its transcription programme \u2014 some thirty texts ' +
-      'and forty letters, from the Vietnam lecture notes to the regular polyhedra. Much of it is ' +
-      'credited to \u201cMateo Carmona et al.\u201d, and the collaborators are not named where ' +
-      'we can see them.',
   },
   {
     name: 'Hélène Rodriguez, Frédéric Troilo and Sophie Dikoff',

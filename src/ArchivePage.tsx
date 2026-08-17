@@ -461,10 +461,6 @@ function ExistingEditions() {
 
       <p className="mt-6 max-w-[48em] text-[12.5px] leading-relaxed text-ink-400">
         Compiled from the{' '}
-        <a href="https://csg.igrothendieck.org/transcriptions/" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-brand-600">
-          Centre for Grothendieckian Studies transcription list
-        </a>
-        , the{' '}
         <a href="https://webusers.imj-prg.fr/~leila.schneps/grothendieckcircle/unpubtexts.php" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-brand-600">
           Grothendieck Circle
         </a>{' '}
