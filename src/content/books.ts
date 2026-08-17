@@ -89,9 +89,26 @@ export const EDITED_COTES: Cote[] = COTES.filter((c) => EDITED.has(c.id));
  * folders nobody has opened. Driven by `inProgress` in books.json, so finishing
  * a notebook is an edit to the data.
  */
-export const IN_PROGRESS: ReadonlySet<string> = new Set(
-  BOOKS.filter((b) => b.inProgress).flatMap((b) => b.sections.flatMap((s) => s.cotes)),
-);
+/**
+ * Folders in hand one at a time, outside any notebook marked `inProgress`.
+ *
+ * The notebook flag covers a whole thread being read through; this covers the
+ * folders picked up singly, which do not share a notebook — these five sit
+ * across the Cahiers tardifs, the Long March and the Notes techniques
+ * dispersées. Expressing them as a notebook flag would mean claiming three
+ * whole notebooks are in hand, which is false and would paint two hundred
+ * pages the wrong colour.
+ *
+ * Kept as a plain list because that is what it is: the work actually started,
+ * edited as it starts and finishes. A folder here that later gets transcribed
+ * needs no removal — the transcription outranks it.
+ */
+const IN_PROGRESS_FOLDERS = ['156-2', '141', '158', '159', '160'];
+
+export const IN_PROGRESS: ReadonlySet<string> = new Set([
+  ...BOOKS.filter((b) => b.inProgress).flatMap((b) => b.sections.flatMap((s) => s.cotes)),
+  ...IN_PROGRESS_FOLDERS,
+]);
 
 /** Whether this book hides `id`, and therefore why. */
 export const hiddenBy = (b: Book, id: string) => (b.excludeEdited ? EDITED.get(id) : undefined);
