@@ -45,9 +45,37 @@
 
 import { createServer } from 'node:http';
 import { request as httpsRequest } from 'node:https';
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 
 const PORT = Number(process.env.PORT ?? 8787);
 const UPSTREAM = 'https://grothendieck.umontpellier.fr/';
+
+/**
+ * The community editions, by slug — generated from `editions.json`.
+ *
+ * A second upstream, and a different case from Montpellier's. Montpellier
+ * serves its own scans over an expired certificate and forbids framing; the
+ * relay exists because a reader's browser cannot make a request the reader is
+ * plainly entitled to make. These are scholarly editions on academic web
+ * servers, one of which sets `X-Frame-Options` deliberately.
+ *
+ * So the terms are narrower. Only files named in `editions.json` — never a
+ * pattern over a hostname, which would make this an open proxy for two
+ * university servers. Nothing is stored. The site shows the editors' names
+ * above every one of these documents and links to the original beside it, and
+ * the relay names itself in its user agent so that anyone reading their logs
+ * can see what the traffic is and stop it if they would rather it stopped.
+ */
+const EDITIONS = (() => {
+  try {
+    return JSON.parse(readFileSync(resolve(import.meta.dirname, 'allowed.json'), 'utf8'));
+  } catch {
+    // A relay without the file still serves facsimiles; it simply offers no
+    // community editions. Better than refusing to start.
+    return {};
+  }
+})();
 
 /**
  * Who may embed the relay's responses.
@@ -63,6 +91,9 @@ const ALLOWED_ORIGINS = (process.env.ALLOWED_ORIGINS ?? 'https://grothendieck.co
 
 /** Only a shelfmark, and only as `<id>.pdf` — never a path, never another host. */
 const PATH = /^\/source\/([\w-]+)\.pdf$/;
+
+/** A community document, by the slug `allowed.json` keys it under. */
+const EDITION_PATH = /^\/edition\/([\w.-]+)\.pdf$/;
 
 /** How the relay identifies itself to Montpellier. See the request below. */
 const RELAY_UA =
@@ -93,8 +124,10 @@ const server = createServer((req, res) => {
     return res.end('ok\n');
   }
 
-  const m = PATH.exec(decodeURIComponent(url.pathname));
-  if (!m) {
+  const path = decodeURIComponent(url.pathname);
+  const m = PATH.exec(path);
+  const e = EDITION_PATH.exec(path);
+  if (!m && !e) {
     res.writeHead(404, { 'Content-Type': 'text/plain' });
     return res.end('Not found\n');
   }
@@ -104,7 +137,16 @@ const server = createServer((req, res) => {
     return res.end('Method not allowed\n');
   }
 
-  const target = `${UPSTREAM}${m[1]}.pdf`;
+  // The slug is looked up, never interpolated into a URL: an unknown one is a
+  // 404 here rather than a request to somewhere unintended.
+  const target = m ? `${UPSTREAM}${m[1]}.pdf` : EDITIONS[e[1]];
+  if (!target) {
+    res.writeHead(404, { 'Content-Type': 'text/plain' });
+    return res.end(`No such edition document: ${e[1]}\n`);
+  }
+  // Only Montpellier's certificate is the expired one. Everything else must
+  // verify normally, and an exception granted per upstream keeps it that way.
+  const skipTls = Boolean(m);
 
   /**
    * `rejectUnauthorized: false` for this upstream and this upstream only.
@@ -118,7 +160,7 @@ const server = createServer((req, res) => {
     target,
     {
       method: req.method,
-      rejectUnauthorized: false,
+      rejectUnauthorized: !skipTls,
       /**
        * Nothing identifying the *reader* travels onward — no cookies, no
        * referer, and the reader's own user agent is dropped. Only the range

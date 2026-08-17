@@ -1,6 +1,7 @@
 import { defineConfig, type Plugin } from 'vite'
 import { request } from 'node:https'
 import { resolve } from 'node:path'
+import allowedEditions from './relay/allowed.json'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 
@@ -35,13 +36,26 @@ function montpellierSource(): Plugin {
   const UPSTREAM = 'https://grothendieck.umontpellier.fr/'
 
   const serve = (req: any, res: any, next: () => void) => {
-    const m = /^\/source\/([\w-]+)\.pdf$/.exec(decodeURIComponent((req.url ?? '').split('?')[0]))
-    if (!m) return next()
+    const path = decodeURIComponent((req.url ?? '').split('?')[0])
+    const m = /^\/source\/([\w-]+)\.pdf$/.exec(path)
+    // The community editions, keyed by slug in `relay/allowed.json`, which is
+    // generated from editions.json. Same route as the deployed relay so that
+    // what works in development is what ships.
+    const e = /^\/edition\/([\w.-]+)\.pdf$/.exec(path)
+    if (!m && !e) return next()
 
     // Only a shelfmark, and only ever as `<id>.pdf`. The pattern excludes
     // slashes and dots, so no request can be steered off this host or up the
-    // path — this middleware must not become an open proxy.
-    const url = `${UPSTREAM}${m[1]}.pdf`
+    // path — this middleware must not become an open proxy. A community
+    // document is looked up rather than interpolated, for the same reason.
+    const url = m
+      ? `${UPSTREAM}${m[1]}.pdf`
+      : (allowedEditions as Record<string, string>)[e![1]]
+    if (!url) {
+      res.statusCode = 404
+      res.setHeader('Content-Type', 'text/plain; charset=utf-8')
+      return res.end(`No such edition document: ${e![1]}\n`)
+    }
 
     /**
      * `https.request` rather than `fetch`, for two reasons that both bite.
@@ -60,7 +74,9 @@ function montpellierSource(): Plugin {
     const upstream = request(
       url,
       {
-        rejectUnauthorized: false,
+        // Only Montpellier's certificate has expired; the edition hosts must
+        // verify normally.
+        rejectUnauthorized: !m,
         // Named, for the same reason the deployed relay is: a request with no
         // user agent looks like a scraper in Montpellier's logs. The reader's
         // own headers still do not travel — only the range.
