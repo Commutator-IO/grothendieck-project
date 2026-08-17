@@ -1,8 +1,7 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Footer, Header } from './components/Frame.tsx';
-import { Downloads } from './components/Downloads.tsx';
-import { FacsimilePane, type OpenBatch } from './components/FacsimilePane.tsx';
-import { TranscriptPane } from './components/TranscriptPane.tsx';
+import { FacsimilePane } from './components/FacsimilePane.tsx';
+import { Reader, STATE_COLOURS, useReader } from './components/Reader.tsx';
 import { book, cotesOf } from './content/books.ts';
 import { GROUPS } from './content/catalogue.ts';
 import {
@@ -12,14 +11,11 @@ import {
   declared,
   evidence,
   folderTags,
-  availableFor,
-  servedByFolder,
-  useFacsimileProxy,
   useManifest,
 } from './lib/batches.ts';
 import { STATES, shownState, tally, type State } from './lib/progress.ts';
 import { issueUrl } from './lib/report.ts';
-import type { BookKey, Cote, Edition } from './lib/types.ts';
+import type { BookKey, Cote } from './lib/types.ts';
 
 /**
  * A book: its inventory, and — once a batch is open — a two-pane workspace.
@@ -34,78 +30,8 @@ import type { BookKey, Cote, Edition } from './lib/types.ts';
 export function BookPage({ bookKey }: { bookKey: BookKey }) {
   const b = book(bookKey);
   const cotes = useMemo(() => cotesOf(b), [b]);
-  const manifest = useManifest();
-  // Probed once here, on the page, rather than when a batch opens: by the
-  // time a reader has picked one the answer is usually in, and a relay that
-  // had to be woken has been waking all the while.
-  const proxy = useFacsimileProxy();
-
-  /**
-   * The open batch lives in the URL fragment.
-   *
-   * `#19/3` names the third batch of folder 19. That is what one writes in a
-   * notebook or pastes into a message when noting where to resume, and it is
-   * what the transcription skill cites in the header of the file it produces.
-   * State living only in React would not be shareable.
-   *
-   * A third segment may name the edition — `#66/1/modern` opens the modernised
-   * reading rather than the transcription. It is optional and omitted by every
-   * link the notebook writes itself, so the short form stays the one people
-   * copy; what needs it is a link arriving from elsewhere, where saying "this
-   * folder has a modernised reading" and landing the reader on the
-   * transcription tab would be a broken promise.
-   */
-  const [open, setOpen] = useState<{ cote: string; batch: number } | null>(null);
-  const [edition, setEdition] = useState<Edition>('fr');
-  useEffect(() => {
-    const readHash = () => {
-      const h = /^#([\w-]+)\/(\d+)(?:\/(fr|modern))?$/.exec(location.hash);
-      setOpen(h ? { cote: h[1], batch: Number(h[2]) } : null);
-      // Only when the fragment says so: leaving it alone otherwise is what
-      // keeps the toggle where the reader put it as they move between batches.
-      if (h?.[3]) setEdition(h[3] as Edition);
-    };
-    readHash();
-    addEventListener('hashchange', readHash);
-    return () => removeEventListener('hashchange', readHash);
-  }, []);
-
-  const goTo = (cote: string, batch: number) => {
-    history.replaceState(null, '', `#${cote}/${batch}`);
-    setOpen({ cote, batch });
-    setPage(undefined);
-  };
-  const close = () => {
-    history.replaceState(null, '', location.pathname);
-    setOpen(null);
-  };
-
-  /**
-   * The page being read, reported by the transcript and consumed by the
-   * facsimile. It is held here rather than in either pane because it is the
-   * one thing the two share — and holding it above them is what keeps the
-   * dependency one-directional: the transcript never learns what the facsimile
-   * is showing.
-   */
-  const [page, setPage] = useState<number | undefined>(undefined);
-  const onPage = useCallback((n: number) => setPage(n), []);
-
-  const openCote = open ? cotes.find((c) => c.id === open.cote) : undefined;
-  const openBatch: OpenBatch | null =
-    open && openCote
-      ? {
-          cote: openCote.id,
-          title: openCote.title,
-          date: openCote.date,
-          batch: Math.min(open.batch, batchCount(openCote.pages)),
-          pages: openCote.pages,
-          page: page,
-          // The modernised reading is one document for the folder, so its page
-          // markers may name any page of it, not only this batch's twenty.
-          wholeFolder: servedByFolder(manifest, openCote.id, edition, 'html'),
-          relay: proxy,
-        }
-      : null;
+  const { manifest, openCote, openBatch, edition, setEdition, page, onPage, goTo, close } =
+    useReader(cotes);
 
   const allBatches = cotes.flatMap((c) =>
     Array.from({ length: batchCount(c.pages) }, (_, i) => {
@@ -144,7 +70,7 @@ export function BookPage({ bookKey }: { bookKey: BookKey }) {
 
         <main className="mx-auto max-w-6xl px-5 py-10">
           {openBatch && openCote ? (
-            <Workspace
+            <Reader
               cote={openCote}
               batch={openBatch.batch}
               edition={edition}
@@ -152,7 +78,7 @@ export function BookPage({ bookKey }: { bookKey: BookKey }) {
               onPage={onPage}
               page={page}
               onClose={close}
-              available={availableFor(manifest, openCote.id, openBatch.batch)}
+              backLabel="Inventory"
               state={shownState(
                 declared(manifest, openCote.id, openBatch.batch),
                 evidence(manifest, openCote.id, openBatch.batch),
@@ -240,78 +166,6 @@ export function BookPage({ bookKey }: { bookKey: BookKey }) {
 }
 
 /** The two-pane workspace: transcript left, facsimile right. */
-function Workspace({
-  cote,
-  batch,
-  edition,
-  onEdition,
-  onPage,
-  page,
-  onClose,
-  available,
-  state,
-}: {
-  cote: Cote;
-  batch: number;
-  edition: Edition;
-  onEdition: (e: Edition) => void;
-  onPage: (n: number) => void;
-  /** The page currently in view, so a report arrives already located. */
-  page?: number;
-  onClose: () => void;
-  available: ReturnType<typeof availableFor>;
-  state: State;
-}) {
-  const label = STATES.find((s) => s.key === state)!;
-  return (
-    <>
-      <div className="flex flex-wrap items-baseline gap-3">
-        <button
-          type="button"
-          onClick={onClose}
-          className="rounded-lg border border-ink-200 px-2.5 py-1 text-[12.5px] font-medium text-ink-600 transition hover:border-brand-500 hover:text-brand-700"
-        >
-          ← Inventory
-        </button>
-        <h1 className="titre min-w-0 flex-1 truncate text-[21px] text-ink-900" title={cote.title}>
-          {cote.title}
-        </h1>
-        <span
-          title={label.help}
-          className={`shrink-0 rounded-md px-2 py-1 text-[11px] font-semibold uppercase tracking-wide ${STATE_COLOURS[state]}`}
-        >
-          {label.label}
-        </span>
-      </div>
-
-      <p className="tabular mt-1 text-[12.5px] text-ink-500">
-        Cote n° {cote.id} · {cote.date || 's.d.'} · {cote.pages} pages
-      </p>
-
-      {/* Above the reading pane, not below it. The pane is as tall as the
-          transcript, so anything after it sits a screen or more down the page —
-          a row of links nobody scrolls past the whole document to find. */}
-      <Downloads cote={cote.id} batch={batch} page={page} available={available} />
-
-      <TranscriptPane
-        cote={cote.id}
-        batch={batch}
-        pages={cote.pages}
-        available={available}
-        edition={edition}
-        onEdition={onEdition}
-        onPage={onPage}
-      />
-
-      <p className="mt-4 max-w-[46em] text-[12.5px] leading-relaxed text-ink-500">
-        Scrolling the transcript turns the facsimile: whichever source page is marked highest in
-        the reading area is the one shown on the right. Use ← and → to step between batches, and
-        Escape to close the facsimile.
-      </p>
-    </>
-  );
-}
-
 /**
  * Where this grouping comes from.
  *
@@ -464,15 +318,6 @@ function CoteCard({
     </li>
   );
 }
-
-const STATE_COLOURS: Record<State, string> = {
-  todo: 'bg-ink-200 text-ink-500',
-  running: 'bg-encours-200 text-encours-700',
-  drafted: 'bg-brand-100 text-brand-700',
-  reviewed: 'bg-brand-200 text-brand-800',
-  checked: 'bg-relu-200 text-relu-700',
-  skipped: 'bg-alerte-100 text-alerte-700',
-};
 
 function BatchRow({
   cote,

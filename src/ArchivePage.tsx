@@ -1,17 +1,19 @@
 import { useMemo, useState } from 'react';
 import { Footer, Header } from './components/Frame.tsx';
+import { FacsimilePane } from './components/FacsimilePane.tsx';
+import { Reader, useReader } from './components/Reader.tsx';
 import { BOOKS } from './content/books.ts';
 import editionsRaw from './content/editions.json';
 import { COTES, GROUPS } from './content/catalogue.ts';
 import {
   BATCH_SIZE,
   batchCount,
-  editionUrl,
+  declared,
   evidence,
   folderTags,
   sourceUrl,
-  useManifest,
 } from './lib/batches.ts';
+import { shownState } from './lib/progress.ts';
 import type { PublishedEdition } from './lib/types.ts';
 
 const EDITIONS = editionsRaw as PublishedEdition[];
@@ -52,7 +54,8 @@ const KIND_LABEL: Record<PublishedEdition['kind'], string> = {
  */
 export function ArchivePage() {
   const [query, setQuery] = useState('');
-  const manifest = useManifest();
+  const { manifest, openCote, openBatch, edition, setEdition, page, onPage, goTo, close } =
+    useReader(COTES);
 
   /**
    * How far each folder has been taken, counted from the files.
@@ -106,205 +109,247 @@ export function ArchivePage() {
 
   return (
     <>
-      <Header path="/archive/" />
+      {/* The content shifts rather than sliding under the pane, header
+          included — the same arrangement the notebooks use, and for the same
+          reason: a list half-hidden by the facsimile would defeat the point.
+          Gated on `lg:` exactly as the pane is, since below that breakpoint
+          the facsimile is not rendered at all. */}
+      <div
+        className={`transition-[padding] duration-150 ${
+          openBatch ? 'lg:pr-[var(--pane,0px)]' : ''
+        }`}
+      >
+        <Header path="/archive/" />
 
-      <main className="mx-auto max-w-6xl px-5 py-10">
-        <header className="max-w-[48em]">
-          <h1 className="titre text-[34px] leading-tight text-ink-900">The whole fonds</h1>
-          <p className="mt-3 text-[15.5px] leading-relaxed text-ink-700">
-            All {COTES.length} folders in open access, in the twenty-two groups the archivists
-            recorded, in Grothendieck's filing order. Titles in [brackets] were supplied by the
-            archivists; the rest are his, pencilled on the folder. Datings outside correspondence
-            are nearly all inferred, most often from a verso.
-          </p>
-        </header>
-
-        <div className="mt-6 flex flex-wrap items-center gap-3">
-          <input
-            type="search"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search a title, a shelfmark, a year…"
-            className="w-full max-w-md rounded-lg border border-ink-200 bg-white px-3 py-2 text-[14px] text-ink-900 placeholder:text-ink-400 focus:border-brand-500 focus:outline-none"
-          />
-          <p className="tabular text-[12.5px] text-ink-500">
-            {shown} of {COTES.length} folders
-            {started > 0 && (
-              <span className="text-brand-700"> · {started} begun</span>
-            )}
-          </p>
-        </div>
-
-        {/* Two washes on the rows below, and neither is guessable from the
-            colour alone — so they are named once, here, rather than left to
-            a tooltip nobody hovers. */}
-        <ul className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-1.5 text-[12px] text-ink-500">
-          <li className="flex items-center gap-1.5">
-            <span
-              aria-hidden="true"
-              className="inline-block h-3.5 w-6 rounded-sm border-l-[3px] border-l-brand-400 bg-brand-50"
+        <main className="mx-auto max-w-6xl px-5 py-10">
+          {openBatch && openCote ? (
+            <Reader
+              cote={openCote}
+              batch={openBatch.batch}
+              edition={edition}
+              onEdition={setEdition}
+              onPage={onPage}
+              page={page}
+              onClose={close}
+              backLabel="All folders"
+              state={shownState(
+                declared(manifest, openCote.id, openBatch.batch),
+                evidence(manifest, openCote.id, openBatch.batch),
+              )}
             />
-            transcribed here
-          </li>
-          <li className="flex items-center gap-1.5">
-            <span
-              aria-hidden="true"
-              className="inline-block h-3.5 w-6 rounded-sm border-l-[3px] border-l-relu-500 bg-relu-50"
-            />
-            edited by the mathematical community
-          </li>
-        </ul>
+          ) : (
+            <>
+              <header className="max-w-[48em]">
+                <h1 className="titre text-[34px] leading-tight text-ink-900">The whole fonds</h1>
+                <p className="mt-3 text-[15.5px] leading-relaxed text-ink-700">
+                  All {COTES.length} folders in open access, in the twenty-two groups the archivists
+                  recorded, in Grothendieck's filing order. Titles in [brackets] were supplied by the
+                  archivists; the rest are his, pencilled on the folder. Datings outside correspondence
+                  are nearly all inferred, most often from a verso.
+                </p>
+              </header>
 
-        {visible.map((g) => (
-          <section key={g.id} className="mt-9">
-            <h2 className="titre text-[19px] text-ink-900">{g.title}</h2>
-            <p className="tabular mt-0.5 text-[12px] text-ink-500">
-              folders {g.id.replace(/-/g, ' to ')} {g.date && `· ${g.date}`}
-            </p>
-            <ul className="mt-3 divide-y divide-ink-100 overflow-hidden rounded-[var(--radius-card)] border border-ink-200 bg-white">
-              {g.cotes.map((id) => {
-                const c = COTES.find((x) => x.id === id)!;
-                const belongs = inBook.get(id);
-                const edition = EDITION_BY_COTE.get(id);
-                const work = workOn.get(id);
-                const begun = Boolean(work && work.transcribed > 0);
-                return (
-                  <li
-                    key={id}
-                    /* Two independent facts, two independent marks, because a
-                       folder can carry both and someone scanning 178 rows for
-                       "what is left" needs the answer in peripheral vision,
-                       without reading a word. The green rule is a scholarly
-                       edition someone else made; the ink-blue wash is our own
-                       transcription. Rule and wash rather than two rules: they
-                       compose on a row that has both. */
-                    className={`flex flex-wrap items-baseline gap-x-3 gap-y-1 py-2.5 pr-4 ${
-                      edition
-                        ? 'border-l-[3px] border-l-relu-500 pl-[13px]'
-                        : begun
-                          ? 'border-l-[3px] border-l-brand-400 pl-[13px]'
-                          : 'pl-4'
-                    } ${begun ? 'bg-brand-50/70' : edition ? 'bg-relu-50/40' : ''}`}
-                  >
-                    <span className="tabular w-24 shrink-0 text-[12px] font-semibold text-ink-700">
-                      n° {c.id}
-                    </span>
-                    <span className="min-w-0 flex-1 text-[13.5px] leading-snug text-ink-800">
-                      {c.title}
-                      {belongs && (
-                        <span className="ml-2 rounded-full bg-brand-50 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-brand-700">
-                          {belongs.title}
-                        </span>
-                      )}
-                      {/* Both chips are the way back in. A chip that states a
-                          folder has been transcribed, and cannot be clicked to
-                          read the transcription, makes the reader hunt for
-                          something the page already knows the address of.
-                          Where the folder sits in one of the books, the link
-                          goes to the notebook — facsimile beside text, the
-                          reading this site is for — and names the edition in
-                          the fragment so the toggle arrives already on the
-                          right tab. The 100-odd folders outside every book have
-                          no notebook page, and fall back to the standalone
-                          reading view the renderer writes for each edition. */}
-                      {work && work.transcribed > 0 && (
-                        <a
-                          href={
-                            belongs
-                              ? `${belongs.path}#${id}/1/fr`
-                              : editionUrl(manifest, id, 1, 'fr', 'html')
-                          }
-                          title={`${work.transcribed} of ${work.batches} batches transcribed — open the transcription, batch 1`}
-                          className="ml-2 whitespace-nowrap rounded-full bg-relu-100 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-relu-700 transition hover:bg-relu-200"
+              <div className="mt-6 flex flex-wrap items-center gap-3">
+                <input
+                  type="search"
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  placeholder="Search a title, a shelfmark, a year…"
+                  className="w-full max-w-md rounded-lg border border-ink-200 bg-white px-3 py-2 text-[14px] text-ink-900 placeholder:text-ink-400 focus:border-brand-500 focus:outline-none"
+                />
+                <p className="tabular text-[12.5px] text-ink-500">
+                  {shown} of {COTES.length} folders
+                  {started > 0 && (
+                    <span className="text-brand-700"> · {started} begun</span>
+                  )}
+                </p>
+              </div>
+
+              {/* Two washes on the rows below, and neither is guessable from the
+                  colour alone — so they are named once, here, rather than left to
+                  a tooltip nobody hovers. */}
+              <ul className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-1.5 text-[12px] text-ink-500">
+                <li className="flex items-center gap-1.5">
+                  <span
+                    aria-hidden="true"
+                    className="inline-block h-3.5 w-6 rounded-sm border-l-[3px] border-l-brand-400 bg-brand-50"
+                  />
+                  transcribed here
+                </li>
+                <li className="flex items-center gap-1.5">
+                  <span
+                    aria-hidden="true"
+                    className="inline-block h-3.5 w-6 rounded-sm border-l-[3px] border-l-relu-500 bg-relu-50"
+                  />
+                  edited by the mathematical community
+                </li>
+              </ul>
+
+              {visible.map((g) => (
+                <section key={g.id} className="mt-9">
+                  <h2 className="titre text-[19px] text-ink-900">{g.title}</h2>
+                  <p className="tabular mt-0.5 text-[12px] text-ink-500">
+                    folders {g.id.replace(/-/g, ' to ')} {g.date && `· ${g.date}`}
+                  </p>
+                  <ul className="mt-3 divide-y divide-ink-100 overflow-hidden rounded-[var(--radius-card)] border border-ink-200 bg-white">
+                    {g.cotes.map((id) => {
+                      const c = COTES.find((x) => x.id === id)!;
+                      const belongs = inBook.get(id);
+                      const published = EDITION_BY_COTE.get(id);
+                      const work = workOn.get(id);
+                      const begun = Boolean(work && work.transcribed > 0);
+                      return (
+                        <li
+                          key={id}
+                          /* Two independent facts, two independent marks, because a
+                             folder can carry both and someone scanning 178 rows for
+                             "what is left" needs the answer in peripheral vision,
+                             without reading a word. The green rule is a scholarly
+                             edition someone else made; the ink-blue wash is our own
+                             transcription. Rule and wash rather than two rules: they
+                             compose on a row that has both. */
+                          className={`flex flex-wrap items-baseline gap-x-3 gap-y-1 py-2.5 pr-4 ${
+                            published
+                              ? 'border-l-[3px] border-l-relu-500 pl-[13px]'
+                              : begun
+                                ? 'border-l-[3px] border-l-brand-400 pl-[13px]'
+                                : 'pl-4'
+                          } ${begun ? 'bg-brand-50/70' : published ? 'bg-relu-50/40' : ''}`}
                         >
-                          {work.transcribed === work.batches
-                            ? 'transcribed ↗'
-                            : `${work.transcribed}/${work.batches} transcribed ↗`}
-                        </a>
-                      )}
-                      {work && work.modernised > 0 && (
-                        <a
-                          href={
-                            belongs
-                              ? `${belongs.path}#${id}/1/modern`
-                              : editionUrl(manifest, id, 1, 'modern', 'html')
-                          }
-                          title={`${work.modernised} of ${work.batches} batches modernised — open the reading, batch 1. Read again by machine, not by a person`}
-                          className="ml-1.5 whitespace-nowrap rounded-full bg-brand-100 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-brand-700 transition hover:bg-brand-200"
-                        >
-                          {work.modernised === work.batches
-                            ? 'modernised ↗'
-                            : `${work.modernised}/${work.batches} modernised ↗`}
-                        </a>
-                      )}
-                      {folderTags(manifest, id).map((t) => (
-                        <span
-                          key={t}
-                          title="modern vocabulary, from the modernised reading's own keywords"
-                          /* Case is left as the keywords line wrote it. Isbell,
-                             Picard, Lawvere, Kan and Cauchy are people, and a
-                             uniform lowercase chip renames them. */
-                          className="ml-1.5 whitespace-nowrap rounded-full border border-ink-200 bg-white px-1.5 py-0.5 text-[10px] font-medium tracking-wide text-ink-500"
-                        >
-                          {t}
-                        </span>
-                      ))}
-                      {edition && (
-                        <a
-                          href={edition.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          title={`${edition.title} — ${edition.editors}, ${edition.year}. ${edition.note}`}
-                          className={`ml-2 inline-block rounded-full border px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide transition hover:brightness-95 ${KIND_STYLE[edition.kind]}`}
-                        >
-                          {KIND_LABEL[edition.kind]} ↗
-                          {edition.mapping === 'likely' && (
-                            <span title="shelfmark correspondence is ours, not the editors'"> ?</span>
-                          )}
-                        </a>
-                      )}
-                    </span>
-                    <span className="tabular shrink-0 text-[12px] text-ink-500">
-                      {c.date || 's.d.'}
-                    </span>
-                    <span className="tabular w-28 shrink-0 text-right text-[12px] text-ink-500">
-                      {c.pages} ll. · {batchCount(c.pages)} b.
-                    </span>
-                    <a
-                      href={sourceUrl(c.id)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      title="The PDF at Montpellier (expired certificate: the browser will warn)"
-                      className="shrink-0 text-[12px] font-medium text-brand-600 hover:text-brand-700"
-                    >
-                      PDF ↗
-                    </a>
-                  </li>
-                );
-              })}
-            </ul>
-          </section>
-        ))}
+                          <span className="tabular w-24 shrink-0 text-[12px] font-semibold text-ink-700">
+                            n° {c.id}
+                          </span>
+                          <span className="min-w-0 flex-1 text-[13.5px] leading-snug text-ink-800">
+                            {/* The title opens the reader. Every folder does, whether
+                                or not anything has been transcribed: with no
+                                transcript the left pane says so and the facsimile is
+                                still there to read, which is the state 165 of these
+                                178 folders are in and the reason the archive needed
+                                the reader more than the notebooks did. */}
+                            <button
+                              type="button"
+                              onClick={() => goTo(id, 1)}
+                              title={`Open folder ${id} beside its pages`}
+                              className="text-left underline decoration-ink-200 underline-offset-2 transition hover:text-brand-700 hover:decoration-brand-400"
+                            >
+                              {c.title}
+                            </button>
+                            {belongs && (
+                              <span className="ml-2 rounded-full bg-brand-50 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-brand-700">
+                                {belongs.title}
+                              </span>
+                            )}
+                            {/* The chips open the same reader, on the edition they
+                                name. They used to leave the page — to a notebook for
+                                the folders that had one, to a bare reading view for
+                                the rest — which meant the archive could state that a
+                                folder was transcribed but never show it beside its
+                                pages. Naming the edition matters: a chip saying
+                                "modernised" that opened the transcription tab would
+                                be a broken promise. */}
+                            {work && work.transcribed > 0 && (
+                              <button
+                                type="button"
+                                onClick={() => goTo(id, 1, 'fr')}
+                                title={`${work.transcribed} of ${work.batches} batches transcribed — open the transcription beside the pages`}
+                                className="ml-2 whitespace-nowrap rounded-full bg-relu-100 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-relu-700 transition hover:bg-relu-200"
+                              >
+                                {work.transcribed === work.batches
+                                  ? 'transcribed'
+                                  : `${work.transcribed}/${work.batches} transcribed`}
+                              </button>
+                            )}
+                            {work && work.modernised > 0 && (
+                              <button
+                                type="button"
+                                onClick={() => goTo(id, 1, 'modern')}
+                                title={`${work.modernised} of ${work.batches} batches modernised — open the reading beside the pages. Read again by machine, not by a person`}
+                                className="ml-1.5 whitespace-nowrap rounded-full bg-brand-100 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-brand-700 transition hover:bg-brand-200"
+                              >
+                                {work.modernised === work.batches
+                                  ? 'modernised'
+                                  : `${work.modernised}/${work.batches} modernised`}
+                              </button>
+                            )}
+                            {folderTags(manifest, id).map((t) => (
+                              <span
+                                key={t}
+                                title="modern vocabulary, from the modernised reading's own keywords"
+                                /* Case is left as the keywords line wrote it. Isbell,
+                                   Picard, Lawvere, Kan and Cauchy are people, and a
+                                   uniform lowercase chip renames them. */
+                                className="ml-1.5 whitespace-nowrap rounded-full border border-ink-200 bg-white px-1.5 py-0.5 text-[10px] font-medium tracking-wide text-ink-500"
+                              >
+                                {t}
+                              </span>
+                            ))}
+                            {published && (
+                              <a
+                                href={published.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                title={`${published.title} — ${published.editors}, ${published.year}. ${published.note}`}
+                                className={`ml-2 inline-block rounded-full border px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide transition hover:brightness-95 ${KIND_STYLE[published.kind]}`}
+                              >
+                                {KIND_LABEL[published.kind]} ↗
+                                {published.mapping === 'likely' && (
+                                  <span title="shelfmark correspondence is ours, not the editors'"> ?</span>
+                                )}
+                              </a>
+                            )}
+                          </span>
+                          <span className="tabular shrink-0 text-[12px] text-ink-500">
+                            {c.date || 's.d.'}
+                          </span>
+                          <span className="tabular w-28 shrink-0 text-right text-[12px] text-ink-500">
+                            {c.pages} ll. · {batchCount(c.pages)} b.
+                          </span>
+                          <a
+                            href={sourceUrl(c.id)}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            title="The PDF at Montpellier (expired certificate: the browser will warn)"
+                            className="shrink-0 text-[12px] font-medium text-brand-600 hover:text-brand-700"
+                          >
+                            PDF ↗
+                          </a>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </section>
+              ))}
 
-        {!visible.length && (
-          <p className="mt-10 text-[14px] text-ink-500">Nothing matches “{query}”.</p>
-        )}
+              {!visible.length && (
+                <p className="mt-10 text-[14px] text-ink-500">Nothing matches “{query}”.</p>
+              )}
 
-        <ExistingEditions />
+              <ExistingEditions />
 
-        <section className="card mt-12 max-w-[52em] px-5 py-4">
-          <h2 className="titre text-[17px] text-ink-900">Mirroring anything here</h2>
-          <p className="mt-2 text-[13.5px] leading-relaxed text-ink-600">
-            Any folder can be pulled and cut into {BATCH_SIZE}-page batches, whether or not it
-            belongs to one of the four notebooks:
-          </p>
-          <code className="mt-3 block rounded-lg border border-ink-200 bg-ink-50 px-3 py-2 font-mono text-[12.5px] text-ink-900">
-            npm run archive -- 63 91 161-3
-          </code>
-        </section>
-      </main>
+              <section className="card mt-12 max-w-[52em] px-5 py-4">
+                <h2 className="titre text-[17px] text-ink-900">Mirroring anything here</h2>
+                <p className="mt-2 text-[13.5px] leading-relaxed text-ink-600">
+                  Any folder can be pulled and cut into {BATCH_SIZE}-page batches, whether or not it
+                  belongs to one of the four notebooks:
+                </p>
+                <code className="mt-3 block rounded-lg border border-ink-200 bg-ink-50 px-3 py-2 font-mono text-[12.5px] text-ink-900">
+                  npm run archive -- 63 91 161-3
+                </code>
+              </section>
+            </>
+          )}
+        </main>
 
-      <Footer />
+        <Footer />
+      </div>
+
+      {openBatch && (
+        <FacsimilePane
+          open={openBatch}
+          onClose={close}
+          onBatch={(n) => goTo(openBatch.cote, n)}
+        />
+      )}
     </>
   );
 }
