@@ -79,6 +79,20 @@ export const UNEDITED: Cote[] = COTES.filter((c) => !EDITED.has(c.id));
 /** Its complement, for the sentence that has to name what was set aside. */
 export const EDITED_COTES: Cote[] = COTES.filter((c) => EDITED.has(c.id));
 
+/**
+ * Folders inside a notebook that is being worked through now.
+ *
+ * Not a claim that any page of them is transcribed — that is read off the
+ * files, and most of these have nothing yet. It is the weaker and still useful
+ * fact that they are spoken for: someone is going through this notebook, and
+ * the whole-fonds figure should not paint them the same colour as the hundred
+ * folders nobody has opened. Driven by `inProgress` in books.json, so finishing
+ * a notebook is an edit to the data.
+ */
+export const IN_PROGRESS: ReadonlySet<string> = new Set(
+  BOOKS.filter((b) => b.inProgress).flatMap((b) => b.sections.flatMap((s) => s.cotes)),
+);
+
 /** Whether this book hides `id`, and therefore why. */
 export const hiddenBy = (b: Book, id: string) => (b.excludeEdited ? EDITED.get(id) : undefined);
 

@@ -64,6 +64,17 @@ export interface Book {
    * default.
    */
   excludeEdited?: boolean;
+  /**
+   * This notebook is the one being worked through now.
+   *
+   * A folder inside it has not been transcribed yet — that is read off the
+   * files — but it is not untouched either: it is spoken for, and the whole
+   * fonds figure says so rather than colouring it like the hundred folders
+   * nobody has opened. Set on the two notebooks currently in hand and cleared
+   * when they are done, which is a one-line edit here rather than a change to
+   * any component.
+   */
+  inProgress?: boolean;
   sections: BookSection[];
 }
 

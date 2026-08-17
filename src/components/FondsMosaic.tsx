@@ -1,13 +1,29 @@
 import { useMemo, useState } from 'react';
 import { BY_ID, COTES, GROUPS } from '../content/catalogue.ts';
+import { IN_PROGRESS } from '../content/books.ts';
 import { batchCount } from '../lib/batches.ts';
 import type { Cote } from '../lib/types.ts';
 
 /** Status of a folder in one word, which is what the mosaic colours. */
-type FolderState = 'here' | 'community' | 'untouched';
+type FolderState = 'here' | 'inProgress' | 'community' | 'untouched';
 
-const folderState = (transcribedHere: boolean, hasEdition: boolean): FolderState =>
-  transcribedHere ? 'here' : hasEdition ? 'community' : 'untouched';
+/**
+ * Our own status first, then everybody else's.
+ *
+ * `inProgress` outranks `community` deliberately. The figure is called "where
+ * the work is" and the work it means is this project's: a folder being read now
+ * is more use to a reader of this page than the fact that it also has an
+ * edition — and for folder 12, the only one where the two collide, that edition
+ * is not published anywhere one can open it.
+ */
+const folderState = (id: string, transcribedHere: boolean, hasEdition: boolean): FolderState =>
+  transcribedHere
+    ? 'here'
+    : IN_PROGRESS.has(id)
+      ? 'inProgress'
+      : hasEdition
+        ? 'community'
+        : 'untouched';
 
 /**
  * The fonds by area, as a wall of blocks.
@@ -41,6 +57,7 @@ interface Cell {
 
 const FILL: Record<FolderState, string> = {
   here: 'var(--color-brand-500)',
+  inProgress: 'var(--color-encours-500)',
   community: 'var(--color-relu-500)',
   untouched: 'var(--color-ink-100)',
 };
@@ -48,12 +65,14 @@ const FILL: Record<FolderState, string> = {
 /** Ink that survives on each fill — the untouched blocks are nearly white. */
 const INK: Record<FolderState, string> = {
   here: '#ffffff',
+  inProgress: '#3a2a02',
   community: '#ffffff',
   untouched: 'var(--color-ink-600)',
 };
 
 const LABEL: Record<FolderState, string> = {
   here: 'transcribed here',
+  inProgress: 'being read now',
   community: 'edited by the community',
   untouched: 'untouched',
 };
@@ -188,7 +207,7 @@ export function FondsMosaic({
       const cells: Cell[] = ordered.map((c, k) => {
         return {
           cote: c,
-          state: folderState(transcribedHere(c.id), hasEdition(c.id)),
+          state: folderState(c.id, transcribedHere(c.id), hasEdition(c.id)),
           batches: batchCount(c.pages),
           x: inner.x + boxes[k].x,
           y: inner.y + boxes[k].y,
@@ -216,7 +235,7 @@ export function FondsMosaic({
       {/* Only the states actually on this wall. A key for a colour that never
           appears sends the eye hunting for it. */}
       <ul className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-1.5 text-[12px] text-ink-500">
-        {(['here', 'community', 'untouched'] as FolderState[])
+        {(['here', 'inProgress', 'community', 'untouched'] as FolderState[])
           .filter((s) => cells.some((c) => c.state === s))
           .map((s) => (
             <li key={s} className="flex items-center gap-1.5">
