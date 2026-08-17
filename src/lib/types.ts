@@ -52,6 +52,18 @@ export interface Book {
   inventoryGroup: string | null;
   /** What was kept and on whose authority — printed at the top of the page. */
   rationale: string;
+  /**
+   * Drop the folders a scholarly edition already covers.
+   *
+   * Set where a notebook would otherwise spend most of its length on material
+   * someone else has transcribed properly. The folders stay in `sections` —
+   * they belong to the thread, and deleting them would be a claim that they do
+   * not — but they are not listed, not counted, and not openable from the
+   * notebook; the section says instead which edition holds them. Without the
+   * flag a notebook lists everything, which is the default and stays the
+   * default.
+   */
+  excludeEdited?: boolean;
   sections: BookSection[];
 }
 

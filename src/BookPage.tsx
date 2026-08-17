@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 import { Footer, Header } from './components/Frame.tsx';
 import { FacsimilePane } from './components/FacsimilePane.tsx';
 import { Reader, STATE_COLOURS, useReader } from './components/Reader.tsx';
-import { book, cotesOf } from './content/books.ts';
+import { book, cotesOf, excludedOf, hiddenBy } from './content/books.ts';
 import { GROUPS } from './content/catalogue.ts';
 import {
   BATCH_SIZE,
@@ -15,7 +15,7 @@ import {
 } from './lib/batches.ts';
 import { STATES, shownState, tally, type State } from './lib/progress.ts';
 import { issueUrl } from './lib/report.ts';
-import type { BookKey, Cote } from './lib/types.ts';
+import type { BookKey, Cote, PublishedEdition } from './lib/types.ts';
 
 /**
  * A book: its inventory, and — once a batch is open — a two-pane workspace.
@@ -124,27 +124,38 @@ export function BookPage({ bookKey }: { bookKey: BookKey }) {
 
               <Provenance book={b} group={group?.title} />
 
-              {b.sections.map((s) => (
-                <section key={s.title} className="mt-9">
-                  <h2 className="titre text-[21px] text-ink-900">{s.title}</h2>
-                  <p className="mt-1.5 max-w-[46em] text-[13.5px] leading-relaxed text-ink-600">
-                    {s.intro}
-                  </p>
-                  <ul className="mt-4 space-y-2.5">
-                    {s.cotes.map((id) => {
-                      const cote = cotes.find((c) => c.id === id)!;
-                      return (
-                        <CoteCard
-                          key={id}
-                          cote={cote}
-                          manifest={manifest}
-                          onOpen={goTo}
-                        />
-                      );
-                    })}
-                  </ul>
-                </section>
-              ))}
+              {b.sections.map((s) => {
+                const excluded = excludedOf(b, s);
+                const kept = s.cotes.filter((id) => !hiddenBy(b, id));
+                return (
+                  <section key={s.title} className="mt-9">
+                    <h2 className="titre text-[21px] text-ink-900">{s.title}</h2>
+                    <p className="mt-1.5 max-w-[46em] text-[13.5px] leading-relaxed text-ink-600">
+                      {s.intro}
+                    </p>
+                    {/* Said where it happens, not once at the top. A reader who
+                        comes for the Dérivateurs arrives at this heading, and
+                        this is where they must be told the folders are not
+                        below and where they are instead. */}
+                    {excluded.length > 0 && <Excluded items={excluded} />}
+                    {kept.length > 0 && (
+                      <ul className="mt-4 space-y-2.5">
+                        {kept.map((id) => {
+                          const cote = cotes.find((c) => c.id === id)!;
+                          return (
+                            <CoteCard
+                              key={id}
+                              cote={cote}
+                              manifest={manifest}
+                              onOpen={goTo}
+                            />
+                          );
+                        })}
+                      </ul>
+                    )}
+                  </section>
+                );
+              })}
 
               <MirrorCommand book={b.key} />
             </>
@@ -162,6 +173,52 @@ export function BookPage({ bookKey }: { bookKey: BookKey }) {
         />
       )}
     </>
+  );
+}
+
+/**
+ * A section whose folders are already edited, and are therefore not listed.
+ *
+ * The folders are named rather than silently dropped. A notebook that simply
+ * omitted 2,135 leaves would be making, by silence, the claim that they are not
+ * part of the thread — and they are; that is why they are in `sections` at all.
+ * What is said here is narrower and true: someone else has transcribed them,
+ * and this project has nothing to add.
+ */
+function Excluded({ items }: { items: { cote: Cote; edition: PublishedEdition }[] }) {
+  const pages = items.reduce((s, x) => s + x.cote.pages, 0);
+  const e = items[0].edition;
+  return (
+    <div className="mt-4 rounded-[var(--radius-card)] border border-relu-200 bg-relu-50/60 p-4">
+      <p className="text-[13.5px] leading-relaxed text-ink-700">
+        Not listed here:{' '}
+        <span className="tabular font-semibold text-ink-900">
+          {items.map((x) => `n° ${x.cote.id}`).join(', ')}
+        </span>{' '}
+        — {pages.toLocaleString('en-GB')} pages, already transcribed by{' '}
+        {e.editors}.
+      </p>
+      <p className="mt-1.5 text-[12.5px] leading-relaxed text-ink-600">
+        This project transcribes what nobody has edited. Where a scholarly edition exists it is the
+        one to read, and duplicating it would be work spent twice on pages that are already
+        readable.{' '}
+        <a
+          href={e.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline decoration-relu-300 underline-offset-2 hover:text-relu-700"
+        >
+          {e.title} ↗
+        </a>
+      </p>
+      <p className="mt-1.5 text-[12px] leading-relaxed text-ink-400">
+        The folders remain in the fonds and can be opened beside their pages from{' '}
+        <a href="/archive/" className="underline underline-offset-2 hover:text-brand-600">
+          the whole fonds
+        </a>
+        , which lists every folder whether or not anyone has edited it.
+      </p>
+    </div>
   );
 }
 

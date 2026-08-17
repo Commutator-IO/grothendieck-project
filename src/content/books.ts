@@ -1,6 +1,9 @@
 import raw from './books.json';
+import editionsRaw from './editions.json';
 import { BY_ID, COTES } from './catalogue.ts';
-import type { Book, BookKey, Cote } from '../lib/types.ts';
+import type { Book, BookKey, BookSection, Cote, PublishedEdition } from '../lib/types.ts';
+
+const EDITIONS = editionsRaw as PublishedEdition[];
 
 /**
  * The four books, read back from the JSON the mirroring script also reads.
@@ -19,15 +22,50 @@ export function book(key: BookKey): Book {
   return b;
 }
 
-/** A book's folders, in section order. */
+/**
+ * Folders a scholarly edition already covers, and which edition.
+ *
+ * Read off `editions.json`, which is the site's one record of who has edited
+ * what. A folder appears here whatever the edition's kind: a published volume,
+ * a community transcription and a partial edition all mean the same thing for
+ * the purpose this serves — someone else has done the work, at a standard this
+ * project does not claim to match.
+ */
+const EDITED = new Map<string, PublishedEdition>();
+for (const e of EDITIONS) for (const c of e.cotes) EDITED.set(c, e);
+
+export const editionOf = (id: string) => EDITED.get(id);
+
+/** Whether this book hides `id`, and therefore why. */
+export const hiddenBy = (b: Book, id: string) => (b.excludeEdited ? EDITED.get(id) : undefined);
+
+/**
+ * A book's folders, in section order.
+ *
+ * Honours `excludeEdited`, so that every count drawn from this — the notebook's
+ * header, its card on the home page, the method page's arithmetic — agrees with
+ * what the notebook actually lists. A page claiming 2,135 pages it does not
+ * show would be worse than either choice made cleanly.
+ */
 export function cotesOf(b: Book): Cote[] {
   return b.sections.flatMap((s) =>
-    s.cotes.map((id) => {
-      const c = BY_ID.get(id);
-      if (!c) throw new Error(`Folder ${id} cited by “${b.title}” but absent from the inventory.`);
-      return c;
-    }),
+    s.cotes
+      .filter((id) => !hiddenBy(b, id))
+      .map((id) => {
+        const c = BY_ID.get(id);
+        if (!c) throw new Error(`Folder ${id} cited by “${b.title}” but absent from the inventory.`);
+        return c;
+      }),
   );
+}
+
+/** What a book leaves out, per section, so the page can say so where it happens. */
+export function excludedOf(b: Book, s: BookSection): { cote: Cote; edition: PublishedEdition }[] {
+  return s.cotes.flatMap((id) => {
+    const e = hiddenBy(b, id);
+    const c = BY_ID.get(id);
+    return e && c ? [{ cote: c, edition: e }] : [];
+  });
 }
 
 export const pagesOf = (b: Book) => cotesOf(b).reduce((s, c) => s + c.pages, 0);
