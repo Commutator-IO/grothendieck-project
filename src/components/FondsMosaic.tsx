@@ -313,7 +313,7 @@ export function FondsMosaic({
             {hover.cote.title}
             <br />
             <span className="tabular">
-              {hover.cote.pages} pages · {hover.batches} {hover.batches === 1 ? 'pass' : 'passes'}
+              {hover.cote.pages} pages · {hover.batches} {hover.batches === 1 ? 'batch' : 'batches'}
             </span>
           </p>
         ) : (
