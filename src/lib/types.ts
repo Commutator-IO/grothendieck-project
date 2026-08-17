@@ -113,6 +113,15 @@ export interface Manifest {
    * other source, so they can never describe unread content.
    */
   tags?: Record<string, string[]>;
+  /**
+   * Pages actually transcribed per folder, counted from the `\page{N}` marks.
+   *
+   * Always at most the inventory's page count, and usually below it: a page
+   * carrying no mathematics is skipped, and the gap in the numbering is the
+   * only record that it was. The ratio of the two is what lets the archive page
+   * say how much of an unopened folder is likely to be readable at all.
+   */
+  read?: Record<string, number>;
 }
 
 /** Keyed by `<cote>#<batch>`. */

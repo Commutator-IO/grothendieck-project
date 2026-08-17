@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { Footer, Header } from './components/Frame.tsx';
 import { FacsimilePane } from './components/FacsimilePane.tsx';
+import { FondsMosaic } from './components/FondsMosaic.tsx';
 import { Reader, useReader } from './components/Reader.tsx';
 import { BOOKS } from './content/books.ts';
 import editionsRaw from './content/editions.json';
@@ -184,6 +185,18 @@ export function ArchivePage() {
                   edited by the mathematical community
                 </li>
               </ul>
+
+              {/* Only when nothing is being searched: the wall is a view of the
+                  whole, and a wall of three blocks would answer a question
+                  nobody asked. */}
+              {!needle && (
+                <FondsMosaic
+                  manifest={manifest}
+                  transcribedHere={(id) => (workOn.get(id)?.transcribed ?? 0) > 0}
+                  hasEdition={(id) => EDITION_BY_COTE.has(id)}
+                  onOpen={(id) => goTo(id, 1)}
+                />
+              )}
 
               {visible.map((g) => (
                 <section key={g.id} className="mt-9">

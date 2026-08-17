@@ -94,6 +94,19 @@ export async function writeManifest() {
    * batches of one folder union their keywords.
    */
   const tags = {};
+  /**
+   * How many pages of each folder a transcription actually carries.
+   *
+   * Counted from the `\page{N}` marks, which are the archivists' numbering, so
+   * this is directly comparable with the inventory's page count. The two differ
+   * because a page carrying no mathematics — an administrative verso, a blank,
+   * a separator — is skipped rather than transcribed, and the gap in the
+   * numbering is the only record of it. The ratio is the one measurement this
+   * project has of how much of a folder is actually readable content, and the
+   * archive page uses it to say what a folder is likely to yield before anyone
+   * opens it.
+   */
+  const read = {};
   for (const d of await dirs(TRANSCRIPTS)) {
     for (const f of await readdir(resolve(TRANSCRIPTS, d.name))) {
       const m = /^(?:batch-(\d+)|(.+?))\.(fr|modern)\.(html|tex|pdf)$/.exec(f);
@@ -104,6 +117,11 @@ export async function writeManifest() {
         ? (transcripts[`${d.name}#${Number(m[1])}`] ??= { html: [], tex: [], pdf: [] })
         : (folders[d.name] ??= { html: [], tex: [], pdf: [] });
       if (!entry[m[4]].includes(m[3])) entry[m[4]].push(m[3]);
+      if (m[3] === 'fr' && m[4] === 'tex') {
+        const tex = await readFile(resolve(TRANSCRIPTS, d.name, f), 'utf8');
+        const seen = (read[d.name] ??= new Set());
+        for (const p of tex.matchAll(/\\page\{(\d+)\}/g)) seen.add(Number(p[1]));
+      }
       if (m[3] === 'modern' && m[4] === 'tex') {
         const tex = await readFile(resolve(TRANSCRIPTS, d.name, f), 'utf8');
         for (const k of tex.matchAll(/\\keywords\{([^}]*)\}/g)) {
@@ -149,6 +167,7 @@ export async function writeManifest() {
         transcripts,
         folders,
         tags,
+        read: Object.fromEntries(Object.entries(read).map(([k, v]) => [k, v.size])),
         declared,
       },
       null,
