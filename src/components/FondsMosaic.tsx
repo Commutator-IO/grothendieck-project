@@ -1,9 +1,13 @@
 import { useMemo, useState } from 'react';
 import { BY_ID, COTES, GROUPS } from '../content/catalogue.ts';
 import { batchCount } from '../lib/batches.ts';
-import { folderState, predictYield } from '../lib/yield.ts';
-import type { FolderState } from '../lib/yield.ts';
-import type { Cote, Manifest } from '../lib/types.ts';
+import type { Cote } from '../lib/types.ts';
+
+/** Status of a folder in one word, which is what the mosaic colours. */
+type FolderState = 'here' | 'community' | 'untouched';
+
+const folderState = (transcribedHere: boolean, hasEdition: boolean): FolderState =>
+  transcribedHere ? 'here' : hasEdition ? 'community' : 'untouched';
 
 /**
  * The fonds by area, as a wall of blocks.
@@ -17,9 +21,8 @@ import type { Cote, Manifest } from '../lib/types.ts';
  * Mondrian rather than a plain treemap because the grammar fits what is being
  * said. Flat blocks of one colour each, separated by heavy black rules, no
  * gradients and no shading: a folder is transcribed or it is not, and there is
- * nothing continuous to express. The one continuous quantity — how much of a
- * folder is likely to be readable at all — is drawn as a block inside the
- * block, which is the composition's own idiom rather than an imposition on it.
+ * nothing continuous to express. Blocks within blocks carry the one structure
+ * there is — the inventory's groups — rather than a second quantity.
  *
  * Colours are the site's, not Mondrian's primaries: blue already means "ours"
  * and green "someone else's" on the rows below, and breaking that to reach for
@@ -29,10 +32,6 @@ import type { Cote, Manifest } from '../lib/types.ts';
 interface Cell {
   cote: Cote;
   state: FolderState;
-  /** Transcribable share, measured where a transcription exists. */
-  rate: number;
-  measured: boolean;
-  reason: string;
   batches: number;
   x: number;
   y: number;
@@ -59,6 +58,9 @@ const LABEL: Record<FolderState, string> = {
   untouched: 'untouched',
 };
 
+/** Canvas height, in the same units as the width of 100. */
+const CANVAS_H = 74;
+
 /**
  * Squarified treemap (Bruls, Huizing, van Wijk).
  *
@@ -67,9 +69,6 @@ const LABEL: Record<FolderState, string> = {
  * pixels wide, and a block nobody can point at conveys nothing. Aspect ratios
  * here stay close to 1, which is also what makes the wall look like a wall.
  */
-/** Canvas height, in the same units as the width of 100. */
-const CANVAS_H = 74;
-
 function squarify(values: number[], width: number, height: number) {
   const total = values.reduce((s, v) => s + v, 0);
   const scaled = values.map((v) => (v / total) * width * height);
@@ -129,18 +128,15 @@ function squarify(values: number[], width: number, height: number) {
 }
 
 export function FondsMosaic({
-  manifest,
   transcribedHere,
   hasEdition,
   onOpen,
 }: {
-  manifest: Manifest | null;
   transcribedHere: (id: string) => boolean;
   hasEdition: (id: string) => boolean;
   onOpen: (id: string) => void;
 }) {
   const [hover, setHover] = useState<Cell | null>(null);
-  const [showYield, setShowYield] = useState(true);
 
   /**
    * The whole fonds, nested: a box per inventory group, its folders inside.
@@ -190,13 +186,9 @@ export function FondsMosaic({
         inner.h,
       );
       const cells: Cell[] = ordered.map((c, k) => {
-        const y = predictYield(c, manifest);
         return {
           cote: c,
           state: folderState(transcribedHere(c.id), hasEdition(c.id)),
-          rate: y.rate,
-          measured: y.basis === 'measured',
-          reason: y.reason,
           batches: batchCount(c.pages),
           x: inner.x + boxes[k].x,
           y: inner.y + boxes[k].y,
@@ -206,36 +198,19 @@ export function FondsMosaic({
       });
       return { ...x, box, strip, cells };
     });
-  }, [manifest, transcribedHere, hasEdition]);
+  }, [transcribedHere, hasEdition]);
 
   const cells = groups.flatMap((g) => g.cells);
   const allPages = COTES.reduce((s, c) => s + c.pages, 0);
 
   return (
     <section className="mt-8">
-      <div className="flex flex-wrap items-baseline justify-between gap-3">
-        <h2 className="titre text-[19px] text-ink-900">Where the work is</h2>
-        <button
-          type="button"
-          onClick={() => setShowYield((v) => !v)}
-          className="rounded-md border border-ink-200 bg-white px-2.5 py-1 text-[12px] text-ink-600 transition hover:border-brand-400 hover:text-brand-700"
-        >
-          {showYield ? 'Hide the unreadable share' : 'Show the unreadable share'}
-        </button>
-      </div>
+      <h2 className="titre text-[19px] text-ink-900">Where the work is</h2>
       <p className="mt-2 max-w-[52em] text-[13px] leading-relaxed text-ink-600">
         All {cells.length} folders, {allPages.toLocaleString()} pages, each block sized by its page
         count and nested inside the inventory group it belongs to — the archivists' own division,
         which is the only structure this fonds has. Colour is what has been done to a folder, not
         what is in it.
-        {showYield && (
-          <>
-            {' '}
-            The pale band across the top of each block is the share of its pages that is expected to
-            carry no mathematics — administrative versos, blanks, returned typescript — and so will
-            never be transcribed. Measured where a transcription exists, estimated everywhere else.
-          </>
-        )}
       </p>
 
       {/* Only the states actually on this wall. A key for a colour that never
@@ -314,20 +289,6 @@ export function FondsMosaic({
               }}
             >
               <span className="relative block h-full w-full" style={{ background: FILL[c.state] }}>
-                {/* The block within the block: pages the folder is not expected
-                    to yield. Drawn from the top so the coloured remainder still
-                    sits on the baseline and stays comparable across neighbours. */}
-                {showYield && c.rate < 0.999 && (
-                  <span
-                    aria-hidden="true"
-                    className="absolute inset-x-0 top-0 block"
-                    style={{
-                      height: `${(1 - c.rate) * 100}%`,
-                      background: 'var(--color-ink-50)',
-                      borderBottom: c.measured ? '1px solid #131210' : '1px dashed #575348',
-                    }}
-                  />
-                )}
                 {big && (
                   <span
                     className="tabular absolute bottom-[2px] left-1 text-[9px] font-semibold leading-none"
@@ -352,11 +313,7 @@ export function FondsMosaic({
             {hover.cote.title}
             <br />
             <span className="tabular">
-              {hover.cote.pages} pages · {hover.batches} {hover.batches === 1 ? 'pass' : 'passes'} ·{' '}
-              {Math.round(hover.rate * 100)}% expected to carry mathematics
-            </span>{' '}
-            <span className="text-ink-500">
-              ({hover.measured ? 'measured' : 'estimated'}: {hover.reason})
+              {hover.cote.pages} pages · {hover.batches} {hover.batches === 1 ? 'pass' : 'passes'}
             </span>
           </p>
         ) : (

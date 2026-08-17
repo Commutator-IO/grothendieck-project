@@ -191,7 +191,6 @@ export function ArchivePage() {
                   nobody asked. */}
               {!needle && (
                 <FondsMosaic
-                  manifest={manifest}
                   transcribedHere={(id) => (workOn.get(id)?.transcribed ?? 0) > 0}
                   hasEdition={(id) => EDITION_BY_COTE.has(id)}
                   onOpen={(id) => goTo(id, 1)}
