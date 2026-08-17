@@ -66,13 +66,20 @@ export function TranscriptPane({
   // a browser will embed. Not a file this repository holds, so it is not in
   // the manifest and cannot be looked up there.
   const community = documentsFor(cote);
-  const isCommunity = edition === 'community';
-  const present = isCommunity ? community.length > 0 : available.html.includes(edition);
+  // Guarded on the documents existing, not merely on the fragment asking: a
+  // bookmarked `#119/1/community` outlives the edition it named, and the pane
+  // must fall back to the normal view rather than destructure an empty list.
+  const isCommunity = edition === 'community' && community.length > 0;
+  // Which of *our* editions the non-community path is showing. A fragment
+  // asking for a community edition that no longer exists lands on the
+  // transcription, which is the tab a reader would have opened anyway.
+  const view: Edition = edition === 'community' ? 'fr' : edition;
+  const present = isCommunity || available.html.includes(view);
   const manifest = useManifest();
   // The modernised reading is one file for the whole folder, so every batch of
   // that folder opens the same document; a per-batch URL would 404 on batches
   // 2 and 3. `editionUrl` picks whichever file actually covers these pages.
-  const url = isCommunity ? '' : editionUrl(manifest, cote, batch, edition, 'html');
+  const url = isCommunity ? '' : editionUrl(manifest, cote, batch, view, 'html');
   // Folder-wide, not batch-wide: the modernised edition's precondition is that
   // every batch of the folder is transcribed, so an empty Modernised tab has to
   // report on the folder even though the reader is looking at one batch of it.
@@ -251,7 +258,7 @@ export function TranscriptPane({
         <MissingTranscript
           cote={cote}
           batch={batch}
-          edition={edition}
+          edition={view}
           first={first}
           last={last}
           folder={folder}
