@@ -7,7 +7,7 @@ import {
   editionUrl,
   useManifest,
 } from '../lib/batches.ts';
-import { documentsFor } from '../content/books.ts';
+import { documentsFor, editionOf } from '../content/books.ts';
 import type { Edition, PaneView, TranscriptEntry } from '../lib/types.ts';
 
 /**
@@ -425,6 +425,11 @@ function MissingTranscript({
   onEdition: (e: PaneView) => void;
 }) {
   const label = EDITIONS.find((e) => e.key === edition)!.label.toLowerCase();
+  // The folder's scholarly edition, whether or not a file of it can be opened
+  // here. `community` holds the openable documents; this holds the fact that
+  // an edition exists at all, which is the half that matters to a reader
+  // looking at an empty pane.
+  const published = editionOf(cote);
 
   return (
     <div className="flex flex-col items-start gap-3 px-6 py-10">
@@ -435,7 +440,7 @@ function MissingTranscript({
       {/* Somebody else has, and saying so here is the point: this panel is
           where a reader concludes the folder is unread, and for twenty-four
           folders that conclusion would be wrong. */}
-      {community.length > 0 && (
+      {community.length > 0 ? (
         <p className="max-w-[40em] rounded-[var(--radius-card)] border border-relu-200 bg-relu-50/60 px-4 py-3 text-[13.5px] leading-relaxed text-ink-700">
           {community.length === 1 ? 'A transcription of this folder exists' : `${community.length} transcriptions of this folder exist`}
           , made by {community[0].edition.editors}.{' '}
@@ -448,6 +453,29 @@ function MissingTranscript({
           </button>
           .
         </p>
+      ) : (
+        // An edition with no file this pane can open — a printed volume, or a
+        // page of links rather than a document. The link is then worth what the
+        // pane would have been: what a reader must not carry away is the
+        // impression that nobody has read the folder, which is exactly what
+        // this panel otherwise says.
+        published && (
+          <p className="max-w-[40em] rounded-[var(--radius-card)] border border-relu-200 bg-relu-50/60 px-4 py-3 text-[13.5px] leading-relaxed text-ink-700">
+            This folder has been edited by {published.editors} —{' '}
+            <a
+              href={published.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-relu-700 underline decoration-relu-300 underline-offset-2 hover:text-relu-600"
+            >
+              {published.title} ↗
+            </a>
+            .{' '}
+            {published.kind === 'published'
+              ? 'It is a printed volume, so it cannot be shown beside the pages here.'
+              : 'No file of it is published in a form this pane can open, so the link is all there is.'}
+          </p>
+        )
       )}
 
       {edition === 'modern' ? (
