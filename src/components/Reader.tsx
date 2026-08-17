@@ -9,8 +9,9 @@ import {
   useFacsimileProxy,
   useManifest,
 } from '../lib/batches.ts';
+import { documentsFor } from '../content/books.ts';
 import { STATES, type State } from '../lib/progress.ts';
-import type { Cote, Edition } from '../lib/types.ts';
+import type { Cote, PaneView } from '../lib/types.ts';
 
 /**
  * The two-pane reader, shared by the notebooks and the archive.
@@ -61,24 +62,24 @@ export function useReader(cotes: Cote[]) {
   const proxy = useFacsimileProxy();
 
   const [open, setOpen] = useState<{ cote: string; batch: number } | null>(null);
-  const [edition, setEdition] = useState<Edition>('fr');
+  const [edition, setEdition] = useState<PaneView>('fr');
   const [page, setPage] = useState<number | undefined>(undefined);
   const onPage = useCallback((n: number) => setPage(n), []);
 
   useEffect(() => {
     const readHash = () => {
-      const h = /^#([\w-]+)\/(\d+)(?:\/(fr|modern))?$/.exec(location.hash);
+      const h = /^#([\w-]+)\/(\d+)(?:\/(fr|modern|community))?$/.exec(location.hash);
       setOpen(h ? { cote: h[1], batch: Number(h[2]) } : null);
       // Only when the fragment says so: leaving it alone otherwise is what
       // keeps the toggle where the reader put it as they move between batches.
-      if (h?.[3]) setEdition(h[3] as Edition);
+      if (h?.[3]) setEdition(h[3] as PaneView);
     };
     readHash();
     addEventListener('hashchange', readHash);
     return () => removeEventListener('hashchange', readHash);
   }, []);
 
-  const goTo = useCallback((cote: string, batch: number, ed?: Edition) => {
+  const goTo = useCallback((cote: string, batch: number, ed?: PaneView) => {
     history.replaceState(null, '', `#${cote}/${batch}${ed ? `/${ed}` : ''}`);
     setOpen({ cote, batch });
     if (ed) setEdition(ed);
@@ -89,6 +90,29 @@ export function useReader(cotes: Cote[]) {
     history.replaceState(null, '', location.pathname);
     setOpen(null);
   }, []);
+
+  /**
+   * Open on whatever this folder actually has.
+   *
+   * `fr` is the right default for a folder this project has transcribed, and
+   * the wrong one for the folders it has not: 157-1 opened on an empty
+   * Transcription tab reading "no transcription yet", while the Dérivateurs
+   * chapters covering those very pages sat behind a tab the reader had no
+   * reason to press. The pane was telling the truth and giving the wrong
+   * impression, which is the worst combination available.
+   *
+   * So when neither of our editions exists for the batch in view and somebody
+   * else's does, the community one is what opens. Only ever as a default —
+   * an explicit `/fr` in the fragment, or a press on the tab, is left alone,
+   * which is why this watches the batch rather than the edition.
+   */
+  useEffect(() => {
+    if (!open) return;
+    if (/^#[\w-]+\/\d+\/(fr|modern|community)$/.test(location.hash)) return;
+    const mine = availableFor(manifest, open.cote, open.batch);
+    if (mine.html.length === 0 && documentsFor(open.cote).length > 0) setEdition('community');
+    else setEdition('fr');
+  }, [open, manifest]);
 
   const openCote = open ? cotes.find((c) => c.id === open.cote) : undefined;
   const openBatch: OpenBatch | null =
@@ -102,7 +126,13 @@ export function useReader(cotes: Cote[]) {
           page,
           // The modernised reading is one document for the folder, so its page
           // markers may name any page of it, not only this batch's twenty.
-          wholeFolder: servedByFolder(manifest, openCote.id, edition, 'html'),
+          // A community edition is somebody else's PDF on somebody else's
+          // server: it carries no page markers this page can read, so it never
+          // widens the facsimile's range.
+          wholeFolder:
+            edition === 'community'
+              ? false
+              : servedByFolder(manifest, openCote.id, edition, 'html'),
           relay: proxy,
         }
       : null;
@@ -124,8 +154,8 @@ export function Reader({
 }: {
   cote: Cote;
   batch: number;
-  edition: Edition;
-  onEdition: (e: Edition) => void;
+  edition: PaneView;
+  onEdition: (e: PaneView) => void;
   onPage: (n: number) => void;
   /** The page currently in view, so a report arrives already located. */
   page?: number;

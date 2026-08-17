@@ -91,6 +91,61 @@ export type BookKey = 'topos' | 'motives' | 'long-march' | 'late' | 'scattered';
  */
 export type Edition = 'fr' | 'modern';
 
+/**
+ * What the left pane is showing.
+ *
+ * `Edition` is the register one of *our* files is written in, and it stays two
+ * because it names a file this repository holds. `community` is not a file we
+ * hold at all — it is somebody else's transcription, fetched from their server
+ * and shown in the same pane so it can be read against the same facsimile. The
+ * distinction is worth a separate type: nothing that reasons about the manifest
+ * should ever be handed `community` and try to look it up.
+ */
+export type PaneView = Edition | 'community';
+
+/**
+ * One document of a scholarly edition, and the folder it transcribes.
+ *
+ * An edition is a work; a document is a file. The two are not in bijection with
+ * folders in either direction — the Dérivateurs are nineteen chapter PDFs
+ * across five folders, and several editions have no downloadable document at
+ * all. Recording the file rather than only the landing page is what lets the
+ * reader put their pages beside the facsimile instead of merely linking out to
+ * them.
+ *
+ * `url` must be a document that can be framed: these are third-party servers,
+ * and one sending `X-Frame-Options` would give the reader a blank pane. Check
+ * before adding.
+ */
+export interface EditionDocument {
+  /** The folder this document transcribes. */
+  cote: string;
+  /** What the editors call it — a chapter, usually. */
+  title: string;
+  url: string;
+  /**
+   * Typeset pages, measured — not the folder's page count.
+   *
+   * The two are compared by `npm run check-editions`, and the ratio is a check
+   * on *scope*, never on fidelity: typesetting compresses a manuscript, and a
+   * document may transcribe part of a folder rather than the whole of it. A
+   * low ratio means narrow. Only a ratio above the folder's own page count
+   * suggests the mapping is wrong.
+   */
+  pages?: number;
+  /**
+   * Whether the host lets this file be embedded. Defaults to true.
+   *
+   * `false` where the server sends `X-Frame-Options` or a CSP `frame-ancestors`
+   * — Maltsiniotis' does, for all nineteen Dérivateurs chapters. Such a
+   * document is offered as a link rather than in the pane, because an iframe
+   * the browser refuses to fill renders as blank white and looks like a bug in
+   * this site rather than a policy of theirs. Kept honest by
+   * `npm run check-editions`, which re-reads the headers.
+   */
+  framable?: boolean;
+}
+
 /** Everything present locally, written by `npm run archive` and `npm run manifest`. */
 export interface Manifest {
   /** Pages per batch; twenty, because that is one transcription pass. */
@@ -170,6 +225,15 @@ export interface PublishedEdition {
   /** How far the shelfmark correspondence can be trusted. */
   mapping: 'certain' | 'likely' | 'unmapped';
   note: string;
+  /**
+   * The edition's own files, where they exist and can be framed.
+   *
+   * Absent for an edition that is a printed book, or whose pages are not
+   * online in a form a browser will embed. An edition with no `documents` is
+   * still an edition; it simply cannot be read beside the facsimile here, and
+   * the pane says so rather than pretending the link is the same thing.
+   */
+  documents?: EditionDocument[];
 }
 
 /**

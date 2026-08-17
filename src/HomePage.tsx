@@ -1,5 +1,5 @@
 import { Footer, Header } from './components/Frame.tsx';
-import { BOOKS, TOTAL_PAGES, cotesOf, pagesOf } from './content/books.ts';
+import { BOOKS, EDITED_COTES, TOTAL_PAGES, UNEDITED, cotesOf, pagesOf } from './content/books.ts';
 import { COTES } from './content/catalogue.ts';
 import { availableFor, batchCount, useManifest } from './lib/batches.ts';
 
@@ -27,13 +27,24 @@ export function HomePage() {
   // the whole folder, so it appears in the folder's own row rather than in any
   // batch's. Counting batch rows alone reported zero modernised batches while
   // three folders had been read end to end.
-  const batches = COTES.flatMap((c) =>
+  //
+  // Counted over UNEDITED, not over the whole fonds: 24 folders are already
+  // transcribed by mathematicians, and re-doing them would be waste rather
+  // than progress, so they are not work outstanding and do not belong in the
+  // denominator. What that costs in honesty is paid back below, where the
+  // figure against all 884 batches is given beside it.
+  const batches = UNEDITED.flatMap((c) =>
     Array.from({ length: batchCount(c.pages) }, (_, i) => availableFor(manifest, c.id, i + 1)),
   );
   const done = {
     total: batches.length,
     transcribed: batches.filter((b) => b.html.includes('fr')).length,
     modernised: batches.filter((b) => b.html.includes('modern')).length,
+  };
+  const setAside = {
+    folders: EDITED_COTES.length,
+    pages: EDITED_COTES.reduce((s, c) => s + c.pages, 0),
+    batches: EDITED_COTES.reduce((s, c) => s + batchCount(c.pages), 0),
   };
 
   return (
@@ -64,7 +75,7 @@ export function HomePage() {
 
         <Disclaimer />
 
-        <Progress done={done} />
+        <Progress done={done} setAside={setAside} />
 
         <section className="mt-12">
           <h2 className="titre text-[24px] text-ink-900">Five notebooks to begin with</h2>
@@ -271,22 +282,28 @@ function Disclaimer() {
 /**
  * Where the work stands, in two numbers and a bar.
  *
- * Deliberately unflattering. Sixteen thousand pages against a handful
- * transcribed is the true ratio, and a progress bar that rounds it up to a
- * visible sliver would be the first dishonest thing on the page. The figures
- * are given plainly, and the fraction of the whole is spelled out in words
- * beside them.
+ * Deliberately unflattering, and the denominator is where that is decided.
+ * It counts the folders nobody has edited — the work this project is for —
+ * rather than the whole fonds, because a folder Maltsiniotis has transcribed
+ * is not work outstanding. But narrowing a denominator flatters a ratio for
+ * free, so the figure against the whole fonds is printed beside it and the
+ * pages set aside are named. Ten thousand pages against a handful transcribed
+ * is still the true ratio, and a bar that rounded it up to a visible sliver
+ * would be the first dishonest thing on the page.
  */
 function Progress({
   done,
+  setAside,
 }: {
   done: { total: number; transcribed: number; modernised: number };
+  setAside: { folders: number; pages: number; batches: number };
 }) {
   const pct = (n: number) => (n / done.total) * 100;
+  const whole = done.total + setAside.batches;
   const asWords =
     done.transcribed === 0
       ? 'none yet'
-      : `${((done.transcribed / done.total) * 100).toFixed(1)}% of the fonds`;
+      : `${((done.transcribed / done.total) * 100).toFixed(1)}% of it`;
 
   return (
     <section className="card mt-10 max-w-[52em] px-5 py-4">
@@ -296,6 +313,10 @@ function Progress({
           {done.total.toLocaleString('en-GB')} batches of 20 pages · {asWords}
         </p>
       </div>
+
+      <p className="mt-1 text-[12.5px] leading-relaxed text-ink-500">
+        Counted against what nobody has edited, not against the whole fonds.
+      </p>
 
       <div className="tabular mt-3 flex flex-wrap gap-x-7 gap-y-2 text-[13.5px] text-ink-600">
         <span>
@@ -317,6 +338,28 @@ function Progress({
           style={{ width: `${pct(done.transcribed - done.modernised)}%` }}
         />
       </div>
+
+      {/* The concession, in full, immediately under the bar. Whoever reads the
+          percentage must be able to reach the unflattering one without leaving
+          the paragraph. */}
+      <p className="mt-3 text-[12.5px] leading-relaxed text-ink-500">
+        <strong className="font-semibold text-ink-700">
+          {setAside.batches} batches are set aside as already edited
+        </strong>{' '}
+        — {setAside.pages.toLocaleString('en-GB')} pages in {setAside.folders} folders, among them
+        the Dérivateurs, the Long March, Pursuing Stacks and Esquisse d'un programme, all
+        transcribed by mathematicians. Re-doing them would be waste, not progress, so they are not
+        counted as work outstanding. Against the whole fonds — all{' '}
+        {whole.toLocaleString('en-GB')} batches — the figure above would be{' '}
+        {((done.transcribed / whole) * 100).toFixed(1)}%.{' '}
+        <a
+          href="/archive/"
+          className="font-medium text-brand-600 underline decoration-brand-200 underline-offset-2 hover:text-brand-700"
+        >
+          Which folders they are
+        </a>
+        .
+      </p>
 
       <p className="mt-3 text-[12.5px] leading-relaxed text-ink-500">
         Counted from the files themselves, not from a tally kept by hand. A batch counts as

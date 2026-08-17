@@ -40,6 +40,26 @@ export const batchName = (k: number) => `batch-${String(k).padStart(2, '0')}`;
 export const facsimileUrl = (cote: string) => `${RELAY}/source/${cote}.pdf`;
 
 /**
+ * A community edition's own file, streamed through this origin.
+ *
+ * The same mechanism as the facsimile, for the same reason and on narrower
+ * terms. Maltsiniotis' server sends `X-Frame-Options: SAMEORIGIN`, so the
+ * nineteen Dérivateurs chapters cannot be framed directly; relayed, they can
+ * be read against the pages they transcribe, which is the only reason this
+ * exists.
+ *
+ * The relay will fetch a document only if `editions.json` names it —
+ * `relay/allowed.json` is generated from it — so this is not a proxy for the
+ * hosts involved, only for the files the site already links to. Nothing is
+ * stored, the editors are named above every document, and the original is
+ * linked beside it.
+ *
+ * `slug` is the PDF's basename, which is what `allowed.json` keys on.
+ */
+export const editionDocUrl = (url: string) =>
+  `${RELAY}/edition/${url.split('/').pop()}`;
+
+/**
  * Where the relay lives.
  *
  * Empty in development, where the Vite middleware answers `/source/*` on this

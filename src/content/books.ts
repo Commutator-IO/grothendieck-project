@@ -1,7 +1,14 @@
 import raw from './books.json';
 import editionsRaw from './editions.json';
 import { BY_ID, COTES } from './catalogue.ts';
-import type { Book, BookKey, BookSection, Cote, PublishedEdition } from '../lib/types.ts';
+import type {
+  Book,
+  BookKey,
+  BookSection,
+  Cote,
+  EditionDocument,
+  PublishedEdition,
+} from '../lib/types.ts';
 
 const EDITIONS = editionsRaw as PublishedEdition[];
 
@@ -35,6 +42,42 @@ const EDITED = new Map<string, PublishedEdition>();
 for (const e of EDITIONS) for (const c of e.cotes) EDITED.set(c, e);
 
 export const editionOf = (id: string) => EDITED.get(id);
+
+/**
+ * The scholarly documents that transcribe a given folder, with their edition.
+ *
+ * Empty for most folders, and empty too for a folder whose edition is a
+ * printed book or a page of links rather than a file — an edition without
+ * `documents` is not a lesser edition, it is one whose pages this site cannot
+ * put beside the facsimile. The pane distinguishes the two cases rather than
+ * showing an empty frame for either.
+ */
+export function documentsFor(cote: string): { doc: EditionDocument; edition: PublishedEdition }[] {
+  return EDITIONS.flatMap((e) =>
+    (e.documents ?? []).filter((d) => d.cote === cote).map((doc) => ({ doc, edition: e })),
+  );
+}
+
+/**
+ * The folders no scholarly edition covers — the work this project is actually
+ * for, and the honest denominator for a progress figure.
+ *
+ * Counting against all 178 folders measures the fonds; counting against these
+ * measures the job. The two differ by 24 folders and 5,822 pages — the
+ * Dérivateurs, the Long March, Pursuing Stacks, Esquisse d'un programme and a
+ * handful more — which are already transcribed to a standard this project does
+ * not claim to match, and which it would be waste rather than progress to do
+ * again.
+ *
+ * Anything shown against this denominator has to show the other one too. A
+ * ratio improves whenever its denominator shrinks, and a page that quietly
+ * swapped 884 batches for 582 would be reporting a change in bookkeeping as
+ * though it were work done.
+ */
+export const UNEDITED: Cote[] = COTES.filter((c) => !EDITED.has(c.id));
+
+/** Its complement, for the sentence that has to name what was set aside. */
+export const EDITED_COTES: Cote[] = COTES.filter((c) => EDITED.has(c.id));
 
 /** Whether this book hides `id`, and therefore why. */
 export const hiddenBy = (b: Book, id: string) => (b.excludeEdited ? EDITED.get(id) : undefined);

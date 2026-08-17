@@ -3,10 +3,12 @@ import {
   BATCH_SIZE,
   batchRange,
   folderTranscription,
+  editionDocUrl,
   editionUrl,
   useManifest,
 } from '../lib/batches.ts';
-import type { Edition, TranscriptEntry } from '../lib/types.ts';
+import { documentsFor } from '../content/books.ts';
+import type { Edition, PaneView, TranscriptEntry } from '../lib/types.ts';
 
 /**
  * The transcript, rendered from LaTeX, in the left pane.
@@ -52,20 +54,25 @@ export function TranscriptPane({
   batch: number;
   pages: number;
   available: TranscriptEntry;
-  edition: Edition;
-  onEdition: (e: Edition) => void;
+  edition: PaneView;
+  onEdition: (e: PaneView) => void;
   /** Called with the archive page currently at the top of the reading area. */
   onPage: (page: number) => void;
 }) {
   const frame = useRef<HTMLIFrameElement>(null);
   const [height, setHeight] = useState(600);
   const { first, last } = batchRange(batch, pages);
-  const present = available.html.includes(edition);
+  // Somebody else's transcription of this folder, if one is online in a form
+  // a browser will embed. Not a file this repository holds, so it is not in
+  // the manifest and cannot be looked up there.
+  const community = documentsFor(cote);
+  const isCommunity = edition === 'community';
+  const present = isCommunity ? community.length > 0 : available.html.includes(edition);
   const manifest = useManifest();
   // The modernised reading is one file for the whole folder, so every batch of
   // that folder opens the same document; a per-batch URL would 404 on batches
   // 2 and 3. `editionUrl` picks whichever file actually covers these pages.
-  const url = editionUrl(manifest, cote, batch, edition, 'html');
+  const url = isCommunity ? '' : editionUrl(manifest, cote, batch, edition, 'html');
   // Folder-wide, not batch-wide: the modernised edition's precondition is that
   // every batch of the folder is transcribed, so an empty Modernised tab has to
   // report on the folder even though the reader is looking at one batch of it.
@@ -80,7 +87,7 @@ export function TranscriptPane({
    * document element catches all of it, and the pane's own resize handle too.
    */
   useEffect(() => {
-    if (!present) return;
+    if (!present || isCommunity) return;
     const el = frame.current;
     if (!el) return;
 
@@ -100,7 +107,7 @@ export function TranscriptPane({
       el.removeEventListener('load', attachHeight);
       observer?.disconnect();
     };
-  }, [present, url]);
+  }, [present, isCommunity, url]);
 
   /**
    * Scrolling the transcript turns the facsimile's pages.
@@ -121,7 +128,7 @@ export function TranscriptPane({
    * shifted by the frame's own offset to land in page coordinates.
    */
   useEffect(() => {
-    if (!present) return;
+    if (!present || isCommunity) return;
     const el = frame.current;
     if (!el) return;
 
@@ -164,7 +171,7 @@ export function TranscriptPane({
       el.removeEventListener('load', attach);
       detach();
     };
-  }, [present, url, onPage]);
+  }, [present, isCommunity, url, onPage]);
 
   return (
     <section className="card mt-6 overflow-hidden">
@@ -201,10 +208,31 @@ export function TranscriptPane({
               )}
             </button>
           ))}
+          {/* Offered only where there is something to show. A dead tab on 154
+              of 178 folders would be worse than no tab: it would suggest the
+              site is missing an edition rather than that none exists. */}
+          {community.length > 0 && (
+            <button
+              type="button"
+              role="tab"
+              aria-selected={isCommunity}
+              title={`${community[0].edition.editors} — read their transcription against the same pages.`}
+              onClick={() => onEdition('community')}
+              className={`rounded-md px-2.5 py-1 text-[12px] font-medium transition ${
+                isCommunity
+                  ? 'bg-white text-ink-900 shadow-[0_1px_3px_rgb(19_18_16/.12)]'
+                  : 'text-relu-600 hover:text-relu-700'
+              }`}
+            >
+              Community
+            </button>
+          )}
         </div>
       </header>
 
-      {present ? (
+      {isCommunity ? (
+        <CommunityPane docs={community} cote={cote} facsimilePages={pages} />
+      ) : present ? (
         // The legal notice is the document's own, tiled down its whole height
         // by the renderer — not drawn here. A copy in this pane had to be
         // `position: sticky`, and sticky resolves against the nearest scroll
@@ -227,9 +255,129 @@ export function TranscriptPane({
           first={first}
           last={last}
           folder={folder}
+          community={community}
+          onEdition={onEdition}
         />
       )}
     </section>
+  );
+}
+
+/**
+ * Somebody else's transcription, in the same pane, against the same pages.
+ *
+ * The value is comparison. A reading of this fonds made by a machine is worth
+ * exactly what it can be checked against, and for the folders an edition
+ * covers there is something far better to check it against than nothing: a
+ * transcription made by mathematicians, against the pages it was made from.
+ *
+ * Two things it cannot do, both said on the page rather than left to be
+ * discovered. It is a PDF on a third-party server, so scrolling it does not
+ * turn the facsimile — the frame is cross-origin and its scroll position is
+ * unreadable from here, by the browser's design and not by ours. And a chapter
+ * of an edition is not a batch of twenty pages: the correspondence between the
+ * two panes is at the level of the folder, not the page.
+ */
+function CommunityPane({
+  docs,
+  cote,
+  facsimilePages,
+}: {
+  docs: ReturnType<typeof documentsFor>;
+  cote: string;
+  /** The inventory's sheet count, for the coverage line. */
+  facsimilePages: number;
+}) {
+  const [i, setI] = useState(0);
+  const { doc, edition } = docs[Math.min(i, docs.length - 1)];
+
+  return (
+    <div>
+      <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 border-b border-ink-200 bg-relu-50/60 px-4 py-2.5">
+        <p className="text-[12.5px] text-ink-700">
+          <span className="font-semibold text-ink-900">{edition.title}</span> · {edition.editors}
+          {edition.year !== '—' && ` · ${edition.year}`}
+        </p>
+        <a
+          href={doc.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="ml-auto text-[12px] font-medium text-relu-700 underline decoration-relu-300 underline-offset-2 hover:text-relu-600"
+        >
+          Open this file at the source ↗
+        </a>
+      </div>
+
+      {/* Their division, not ours. The Dérivateurs are nineteen chapters over
+          five folders and folder 75 carries two separate transcriptions, so a
+          folder can hold several of their documents and the reader has to be
+          able to say which. */}
+      {docs.length > 1 && (
+        <div className="flex flex-wrap gap-1.5 border-b border-ink-200 bg-ink-50 px-4 py-2">
+          {docs.map((d, n) => (
+            <button
+              key={d.doc.url}
+              type="button"
+              onClick={() => setI(n)}
+              className={`rounded-md px-2 py-1 text-[11.5px] font-medium transition ${
+                n === Math.min(i, docs.length - 1)
+                  ? 'bg-white text-ink-900 shadow-[0_1px_3px_rgb(19_18_16/.12)]'
+                  : 'text-ink-500 hover:text-ink-800'
+              }`}
+            >
+              {d.doc.title}
+            </button>
+          ))}
+        </div>
+      )}
+
+      {/* Relayed when the host forbids framing, direct otherwise. The relay
+          fetches only files editions.json names, stores nothing, and forwards
+          Range — the same arrangement the facsimile uses, and the reason a
+          chapter of 200 pages opens rather than downloads. */}
+      <iframe
+        key={doc.url}
+        src={doc.framable === false ? editionDocUrl(doc.url) : doc.url}
+        title={`${doc.title} — ${edition.editors}`}
+        className="h-[75vh] w-full border-0 bg-white"
+      />
+
+      <p className="border-t border-ink-200 bg-ink-50 px-4 py-2.5 text-[12px] leading-relaxed text-ink-500">
+        {doc.framable === false ? (
+          <>
+            {new URL(doc.url).hostname} forbids other sites from framing its files, so this one is
+            fetched by a relay and streamed through — nothing is stored or copied, and the file is{' '}
+            <a
+              href={doc.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline decoration-ink-300 underline-offset-2 hover:text-relu-700"
+            >
+              theirs at the source
+            </a>
+            .
+          </>
+        ) : (
+          <>
+            Served from {new URL(doc.url).hostname}, not copied here. Scrolling it does not turn the
+            facsimile — the file is on another origin and a browser will not let this page read its
+            position — so the two panes are aligned at the folder, not the page.
+          </>
+        )}{' '}
+        {doc.pages && facsimilePages ? (
+          <>
+            <strong className="font-semibold text-ink-700">
+              {doc.pages} typeset pages against {facsimilePages} scanned sheets
+            </strong>{' '}
+            in folder n° {cote}. That ratio measures how much of the folder this document covers,
+            not how well: typesetting compresses a manuscript, and most of these transcribe one
+            piece of a folder rather than the whole of it.
+          </>
+        ) : (
+          <>Their divisions do not follow the archive's batches of twenty; use the batch bar.</>
+        )}
+      </p>
+    </div>
   );
 }
 
@@ -257,6 +405,8 @@ function MissingTranscript({
   first,
   last,
   folder,
+  community,
+  onEdition,
 }: {
   cote: string;
   batch: number;
@@ -264,6 +414,8 @@ function MissingTranscript({
   first: number;
   last: number;
   folder: ReturnType<typeof folderTranscription>;
+  community: ReturnType<typeof documentsFor>;
+  onEdition: (e: PaneView) => void;
 }) {
   const label = EDITIONS.find((e) => e.key === edition)!.label.toLowerCase();
 
@@ -272,6 +424,24 @@ function MissingTranscript({
       <p className="text-[14px] font-semibold text-ink-800">
         No {label} yet for pages {first}–{last}.
       </p>
+
+      {/* Somebody else has, and saying so here is the point: this panel is
+          where a reader concludes the folder is unread, and for twenty-four
+          folders that conclusion would be wrong. */}
+      {community.length > 0 && (
+        <p className="max-w-[40em] rounded-[var(--radius-card)] border border-relu-200 bg-relu-50/60 px-4 py-3 text-[13.5px] leading-relaxed text-ink-700">
+          {community.length === 1 ? 'A transcription of this folder exists' : `${community.length} transcriptions of this folder exist`}
+          , made by {community[0].edition.editors}.{' '}
+          <button
+            type="button"
+            onClick={() => onEdition('community')}
+            className="font-medium text-relu-700 underline decoration-relu-300 underline-offset-2 hover:text-relu-600"
+          >
+            Read {community.length === 1 ? 'it' : 'them'} against these pages
+          </button>
+          .
+        </p>
+      )}
 
       {edition === 'modern' ? (
         <>
