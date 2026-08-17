@@ -1,4 +1,3 @@
-import { batchCount } from './batches.ts';
 import type { Cote, Manifest } from './types.ts';
 
 /**
@@ -90,55 +89,10 @@ export function predictYield(c: Cote, manifest: Manifest | null): Yield {
 }
 
 /** Status of a folder in one word, which is what the mosaic colours. */
-export type FolderState = 'here' | 'community' | 'priority' | 'untouched';
+export type FolderState = 'here' | 'community' | 'untouched';
 
-/**
- * Which unopened folders are worth opening next, and why.
- *
- * Straight out of the two issues that worked the arithmetic — #12 on the
- * folders that fit one pass, #15 on the ones that need ten or more. Neither
- * concluded that any group can be finished; both concluded that a handful of
- * short folders move a group a long way for very little. Those are what this
- * marks, and the reason travels with the mark so nobody has to take it on
- * trust.
- *
- * Deliberately not a ranking of interest. Size and position in a group are the
- * only axes here; whether a folder holds anything worth reading is exactly what
- * no one knows until it is read.
- */
-export const PRIORITY: Record<string, string> = {
-  // 150-151 « Espaces stratifiés »: three short passes, 32 pages, take the
-  // group from 1/6 to 4/6 and leave it two folders from done. Best ratio in
-  // the fonds.
-  '153': 'one pass · takes Espaces stratifiés to 4 of 6',
-  '155': 'one pass · takes Espaces stratifiés to 4 of 6',
-  '152': 'one pass · takes Espaces stratifiés to 4 of 6',
-  // 103-118 « Autour de Pursuing stacks »: the group this site is deepest in,
-  // and the one whose remainder is smallest. 114 is done; these sit beside it.
-  '116': 'one pass · beside 114 and 115, already read',
-  '113': 'one pass · Pursuing stacks years',
-  '104': 'one pass · Pursuing stacks years',
-  '106': 'one pass · Pursuing stacks years',
-  // 45-54 « Variétés abéliennes »: six one-batch folders, more than any group
-  // but 103-118.
-  '54': 'one pass · six short folders open this group',
-  '49': 'one pass · six short folders open this group',
-  '47': 'one pass · six short folders open this group',
-  '50': 'one pass · six short folders open this group',
-  '52': 'one pass · six short folders open this group',
-  '55': 'one pass · six short folders open this group',
-};
-
-export function folderState(
-  c: Cote,
-  transcribedHere: boolean,
-  hasEdition: boolean,
-): FolderState {
+export function folderState(transcribedHere: boolean, hasEdition: boolean): FolderState {
   if (transcribedHere) return 'here';
   if (hasEdition) return 'community';
-  if (PRIORITY[c.id]) return 'priority';
   return 'untouched';
 }
-
-/** Batches a folder still needs, given what is transcribed. */
-export const batchesLeft = (c: Cote, done: number) => Math.max(0, batchCount(c.pages) - done);
