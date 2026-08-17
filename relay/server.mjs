@@ -70,9 +70,13 @@ const UPSTREAM = 'https://grothendieck.umontpellier.fr/';
 const EDITIONS = (() => {
   try {
     return JSON.parse(readFileSync(resolve(import.meta.dirname, 'allowed.json'), 'utf8'));
-  } catch {
-    // A relay without the file still serves facsimiles; it simply offers no
-    // community editions. Better than refusing to start.
+  } catch (e) {
+    // A relay without the file still serves facsimiles, so it starts — but it
+    // says so at the top of the log rather than answering 404 to every
+    // /edition request and leaving an operator to guess. This is not a
+    // hypothetical: the file was once left out of the Docker image, and the
+    // silent empty table is how that reached production.
+    process.stderr.write(`relay: no allowed.json (${e.code ?? e.message}) — no community editions will be served\n`);
     return {};
   }
 })();
@@ -142,7 +146,14 @@ const server = createServer((req, res) => {
   const target = m ? `${UPSTREAM}${m[1]}.pdf` : EDITIONS[e[1]];
   if (!target) {
     res.writeHead(404, { 'Content-Type': 'text/plain' });
-    return res.end(`No such edition document: ${e[1]}\n`);
+    // Distinguish "this slug is not on the list" from "there is no list",
+    // which are the same 404 to a reader and quite different to whoever has
+    // to fix it.
+    return res.end(
+      Object.keys(EDITIONS).length === 0
+        ? 'No community editions are configured on this relay (allowed.json missing).\n'
+        : `No such edition document: ${e[1]}\n`,
+    );
   }
   // Only Montpellier's certificate is the expired one. Everything else must
   // verify normally, and an exception granted per upstream keeps it that way.
@@ -215,6 +226,7 @@ const server = createServer((req, res) => {
 server.listen(PORT, '0.0.0.0', () => {
   process.stdout.write(
     `Facsimile relay on :${PORT}\n  upstream  ${UPSTREAM}\n` +
+      `  editions  ${Object.keys(EDITIONS).length} documents\n` +
       `  framable by  ${ALLOWED_ORIGINS.join(', ')}\n`,
   );
 });
