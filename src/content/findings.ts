@@ -32,7 +32,7 @@ export const FINDINGS: Finding[] = [
     literature: [],
     status: 'unsearched',
     settle:
-      'Check whether this dévissage hypothesis, rather than local or core-compactness, appears in Johnstone (Stone Spaces II.4, Elephant C1.1 and C4.1) or in Isbell’s papers on locale products. If it is there, mark matched. An external review of the folder (Kimi, shared conversation of 2026-08, covering 115, 161-1 and 161-3) judged the folder to contain no new theorems and its results « published in SGA 4 or standard by the 1970s », but named no source for this claim in particular, so the status is unchanged and the check below still stands.',
+      'Check whether this dévissage hypothesis, rather than local or core-compactness, appears in Johnstone (Stone Spaces II.4, Elephant C1.1 and C4.1) or in Isbell’s papers on locale products. If it is there, mark matched. An external review of the folder (Kimi, shared conversation of 2026-08) singles this proof out as one of the folder’s three strongest items and reports finding no such self-contained argument in the standard texts. That is a reason to search, not a search: the status stays unsearched until someone reads Johnstone with the page open.',
   },
   {
     id: '161-3-infinite-product-criterion',
@@ -47,7 +47,7 @@ export const FINDINGS: Finding[] = [
     literature: [],
     status: 'unsearched',
     settle:
-      'Compare with the standard statement that a product of locales is spatial when almost all factors are compact and the rest locally compact, and check whether the two-clause form is a genuine weakening or a restatement. An external review of the folder (Kimi, shared conversation of 2026-08, covering 115, 161-1 and 161-3) judged the folder to contain no new theorems and its results « published in SGA 4 or standard by the 1970s », but named no source for this claim in particular, so the status is unchanged and the check below still stands.',
+      'Compare with the standard statement that a product of locales is spatial when almost all factors are compact and the rest locally compact, and check whether the two-clause form is a genuine weakening or a restatement. An external review of the folder (Kimi, shared conversation of 2026-08) compares the two-clause form directly with Johnstone’s « locally compact + compact » and calls the extra precision debatable — possibly novel, possibly implicit in the standard proof. That is the sharpest statement of the question so far and it is still the question, so the status is unchanged.',
   },
   {
     id: '161-3-fields-partition',
@@ -544,5 +544,114 @@ export const FINDINGS: Finding[] = [
     status: 'matched',
     settle:
       'Settled: this is Giraud’s criterion in its localisation form, and the forward implication is standard. Kept as a killed candidate because the interest is the compression — half a page, obtained as a converse — and because the folder is undated, so nothing here bears on when it was written relative to the published statement. An external review of the folder (Kimi, shared conversation of 2026-08) called it « Giraud’s recognition theorem written down as a conjecture before it became a theorem »; that inference needs a date the folder does not carry.',
+  },
+  {
+    id: '161-3-locale-spatiality-suprema-proof',
+    cote: '161-3',
+    pages: '9–14',
+    kind: 'mathematical',
+    claim:
+      'The spatiality of the product locale is proved here in three passages to the supremum, a complete self-contained argument in the lattice of subobjects rather than the route the standard texts take.',
+    basis:
+      'Pages 9–14 identify Top(X × Y) and Top(X) ×_top Top(Y) as sheaves on the same site O_X × O_Y for two distinct topologies — the product topology π, whose sheaves are the bifaisceaux, and the topology π′ induced from X × Y — and close the gap between them in three passages to the supremum, X × Y being a supremum of rectangles.',
+    ours:
+      'The reading states the non-emptiness of X and Y that makes O_X × O_Y ⊂ O_{X×Y} injective where the page assumes it in passing, and names the two topologies, which the page distinguishes without labelling.',
+    literature: [
+      'Johnstone, Stone Spaces (1982), II — spatiality of locale products',
+    ],
+    status: 'unsearched',
+    settle:
+      'Read the three-suprema argument against the proof in Stone Spaces and against Isbell’s papers on locale products, and decide whether it is the same argument in other clothes or a distinct one. The claim here is about a proof, not a theorem: the theorem is certainly published, and what would make this row a finding is that the argument is not. An external review (Kimi, shared conversation of 2026-08) names it one of the three strongest items in the folders it read.',
+  },
+  {
+    id: '161-3-two-product-by-intersection',
+    cote: '161-3',
+    pages: '3–8',
+    kind: 'mathematical',
+    claim:
+      'The 2-product of topoi is obtained by exhibiting Π(C̃, D̃) as the intersection, inside the presheaf topos on C × D, of the inverse images of the two sub-topoi C̃ ⊂ Ĉ and D̃ ⊂ D̂ — an intersection-of-sub-topoi argument rather than the site-based or fibred route.',
+    basis:
+      'Pages 3–8 define Π(E,F) as the functors E^op → F commuting with limits, show a bifaisceau is one that is a sheaf in each variable separately, and conclude by the fact that sub-topoi of a topos correspond to topologies finer than the given one, form a complete lattice, and that intersection corresponds to the supremum of topologies. The 2-universal property follows, with the corollary that arbitrary families have a 2-product.',
+    ours:
+      'The reading supplies the lattice statement about sub-topoi and topologies that the page leans on without stating, and names the result as the 2-product in the 2-category of topoi.',
+    literature: [
+      'SGA 4, exposé IV — products of topoi',
+    ],
+    status: 'unsearched',
+    settle:
+      'Compare with the construction in SGA 4 IV and with the later treatments of 2-limits of topoi, and establish whether the intersection argument appears anywhere in print. Like the row above, the claim is about the route and not the theorem.',
+  },
+  {
+    id: '115-isbell-duality-derived-from-kernels',
+    cote: '115',
+    pages: '3–7',
+    kind: 'mathematical',
+    claim:
+      'Isbell duality is obtained here as a specialisation of a general kernel transform — set B = A^op and take the hom itself as kernel — rather than from duality theory, and nothing in the folder cites Isbell.',
+    basis:
+      'Pages 3 to 5 build the transform attached to a kernel X ∈ (A × B)^, pages 6 and 7 specialise it to H_A = Hom_A ∈ (A × A^op)^, which the margin of page 3 already marks as the canonical element of that category, and the adjunction O ⊣ Spec falls out. The names O and Spec are not the manuscript’s: it writes φ_A and Ψ_A.',
+    ours:
+      'The reading supplies the names O and Spec and the geometric reading — functions against points — that goes with them, and states that nothing in the folder cites Isbell.',
+    literature: [
+      'J. R. Isbell, Small subcategories and completeness, Math. Systems Theory (1968)',
+      'Isbell, Structure of categories (1966)',
+    ],
+    status: 'unsearched',
+    settle:
+      'Establish whether any published account derives the duality this way — as one instance of a two-variable kernel calculus — rather than directly. The duality itself is Isbell’s and is not in question; what is in question is whether this derivation exists in print.',
+  },
+  {
+    id: '161-1-contractions-string-calculus',
+    cote: '161-1',
+    pages: '11–12',
+    kind: 'mathematical',
+    claim:
+      'The free symmetric monoidal category on A is extended by « contractions » — pairings L′_j ⊗ L″_j → 1 evaluated against each other — giving a diagrammatic calculus for monoidal categories with duals, with the strings drawn in the margin of page 12.',
+    basis:
+      'Pages 11 and 12 add to Φ(A) the operation of evaluating each paired factor against its partner, and page 12 draws the « ficelles » that record which factor is paired with which.',
+    ours:
+      'The reading names the construction a calculus for monoidal categories with duals; the page draws it and does not name it.',
+    literature: [
+      'Joyal–Street, The geometry of tensor calculus I, Adv. Math. (1991)',
+    ],
+    status: 'unsearched',
+    settle:
+      'Compare the marginal strings with the string-diagram calculus as it was eventually published, and decide whether this is the same device or a private notation that resembles it. Note that the folder is undated, so this row cannot become a statement about who drew such diagrams first, whatever the comparison shows.',
+  },
+  {
+    id: '161-1-epsilon-sign-obstruction',
+    cote: '161-1',
+    pages: '9–12',
+    kind: 'mathematical',
+    claim:
+      'The obstruction to an unordered tensor product of invertible objects is isolated as a single sign ε(L) ∈ Aut(1_C) with ε(L)² = 1: re-identifying along a permutation σ multiplies by ε(L)^{sign(σ)}, and the ambiguity vanishes exactly when ε(L) = 1.',
+    basis:
+      'Pages 9 to 12 construct Φ(A), the free symmetric monoidal category on A, and then examine what happens when two factors of a family are the same invertible object L: the symmetry becomes an automorphism of L ⊗ L of order two, which is ε(L).',
+    ours: null,
+    literature: [
+      'Deligne, La formule de dualité globale, SGA 4 XVIII, and the Picard-category literature — the sign as the commutativity constraint',
+      'Transcription 135 — the graded lines with the Koszul sign rule as the smallest non-strict Picard category',
+    ],
+    status: 'matched',
+    settle:
+      'Settled: ε(L) is the commutativity constraint of a Picard category, the Koszul sign rule is its standard example, and folder 135 works exactly that example. Kept as a killed candidate, and as the link between the two folders — the sign isolated abstractly in 161-1 is the sign computed concretely in 135.',
+  },
+  {
+    id: '161-1-idempotent-adjunction-decomposition',
+    cote: '161-1',
+    pages: '3–5',
+    kind: 'mathematical',
+    claim:
+      'An adjunction restricts to an equivalence between the full subcategories E₀ and F₀ where unit and counit are invertible, and an idempotent adjunction is exactly the data of a reflective subcategory, a coreflective subcategory, and an equivalence between them.',
+    basis:
+      'Pages 3 to 5 define E₀ and F₀ by invertibility of η and ε, prove the equivalence, and note that each of the four conditions ηv, vε, εu, uη invertible implies the other three.',
+    ours:
+      'The reading states the four-conditions equivalence as a classical fact; the page uses it without proving it.',
+    literature: [
+      'Borceux, Handbook of Categorical Algebra I, §3.4 and §4.2 — reflective subcategories and idempotent adjunctions',
+    ],
+    status: 'matched',
+    settle:
+      'Settled: this is the standard fixed-point decomposition of an adjunction. Kept as a killed candidate.',
   },
 ];
