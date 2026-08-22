@@ -82,7 +82,7 @@ export const FINDINGS: Finding[] = [
     literature: [],
     status: 'unsearched',
     settle:
-      'Check whether the epimorphism form of flatness appears as a definition of hypercovering for a general index category, rather than only as the "covering flat" condition in Diaconescu-type theorems. Sources to try: SGA 4 V appendix and Artin–Mazur (simplicial hypercoverings); Dugger–Hollander–Isaksen, Hypercovers and simplicial presheaves (2004); Kondô–Yasuda and Shulman on covering-flat functors. If a category-indexed notion with this axiom is there, mark matched.',
+      'Check whether the epimorphism form of flatness appears as a definition of hypercovering for a general index category, rather than only as the "covering flat" condition in Diaconescu-type theorems. Sources to try: SGA 4 V appendix and Artin–Mazur (simplicial hypercoverings); Dugger–Hollander–Isaksen, Hypercovers and simplicial presheaves (2004); Kondô–Yasuda and Shulman on covering-flat functors. If a category-indexed notion with this axiom is there, mark matched. An external review of the folder (Kimi, shared conversation of 2026-08) reads the displayed condition as covering flatness — flatness relative to the topology — standing in for Diaconescu flatness when A has no finite limits. That names the shelf to search rather than settling anything.',
   },
   {
     id: '151-tube-gluing-covering-pairs',
@@ -653,5 +653,56 @@ export const FINDINGS: Finding[] = [
     status: 'matched',
     settle:
       'Settled: this is the standard fixed-point decomposition of an adjunction. Kept as a killed candidate.',
+  },
+  {
+    id: '114-total-asphericity-independent-of-localizer',
+    cote: '114',
+    pages: '3–5',
+    kind: 'mathematical',
+    claim:
+      'Total asphericity does not depend on the basic localizer: for a small category A, being totally W∞-aspherical, being totally W-aspherical for any basic localizer W, and being non-empty with a × b 0-connected in Â for all objects a, b are all equivalent.',
+    basis:
+      'Proposition 4 states the three conditions and the proof turns on the sandwich W∞ ⊆ W ⊆ W₀ that every basic localizer satisfies, total asphericity being easier to obtain the larger the class of equivalences. The page stops at « namely » where W₀ should be named.',
+    ours:
+      'W₀ is identified in the reading as the maximal basic localizer, the one given by π₀-bijections — the only coherent reading, and flagged as the edition’s and not the page’s. The minimality of W∞, which the proposition needs and the page assumes, is attributed to Cisinski (2004) rather than to Grothendieck.',
+    literature: [
+      'D.-C. Cisinski, Le localisateur fondamental minimal, Cah. Topol. Géom. Différ. Catég. (2004)',
+      'Cisinski, Les préfaisceaux comme modèles des types d’homotopie, Astérisque 308 (2006)',
+    ],
+    status: 'unsearched',
+    settle:
+      'Look up total asphericity in Astérisque 308 and establish whether the localizer-independence is stated there in this form, and whether the elementary criterion (iii) — a × b 0-connected — is the one used. The minimality of W∞ is settled and published; what is not checked is whether Proposition 4 itself is. An external review (Kimi, shared conversation of 2026-08) calls it the folder’s sharpest result but names no source for it.',
+  },
+  {
+    id: '151-pi1-too-coarse-for-the-sphere',
+    cote: '151',
+    pages: '61–63',
+    kind: 'mathematical',
+    claim:
+      'The Π₁ level of the stratified formalism is shown to be too coarse by computing it on P¹_C ≃ S², where the amalgamated sum of the tube diagram is homotopically trivial although the sphere is not; raising the level by one, to the gerbe, recovers H²(S², A) ≃ A.',
+    basis:
+      'The folder tests the gluing formalism on the stratification of P¹_C by a point, a plane and a circle, obtains a trivial answer at the level of the fundamental group, and repairs it over three pages by moving up a level.',
+    ours:
+      'Nothing of the computation. The reading states that what fails is an invariant and not the programme, which is how the page itself puts it in a single line.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Establish whether the failure of the 1-truncated gluing datum on a stratified sphere, and its repair by a 2-level datum, is stated anywhere in the stratified-homotopy literature — exit-path categories, conically stratified spaces, and the higher van Kampen theorems are where to look. The mathematics is certainly known; whether this diagnosis-and-repair is written down is not.',
+  },
+  {
+    id: '112-linearization-beyond-the-simplex',
+    cote: '112',
+    pages: '1–4',
+    kind: 'mathematical',
+    claim:
+      'The folder asks how far the Dold–Kan correspondence survives away from Δ: for a small category A, whether restricting to the « smooth » abelian presheaves — those along which linearisation does not vary — gives an equivalence with a derived category of locally constant complexes, the obstruction being that L_b carries twisted and not constant coefficients.',
+    basis:
+      'Pages 1 to 4 define smoothness by asking that the map induced by every arrow a → b of A be invertible, pose the equivalence question in several forms, and note the twisting of the coefficients of L_b.',
+    ours:
+      'The gloss on « lisse » as local constancy is the edition’s, chosen as the widest class the page allows; the definition of « négligeable » is left incomplete because the page is illegible on both sides of it, and the second factor of the tensor product is not legible either.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Check the generalised Dold–Kan literature — Dold–Puppe, and the later work on Kan extensions of the correspondence along functors out of Δ — for a statement of this equivalence over a general small category. Note that this row rests on a folder the transcription reports as partly illegible, so the claim may not be recoverable in the form stated.',
   },
 ];
