@@ -335,7 +335,29 @@ function parseArrow(spec) {
   return arrow;
 }
 
+// tikz-cd's named separations, in the reading view's units. The defaults are
+// what the grid used before any diagram declared a separation, so a diagram
+// that says nothing is laid out exactly as it was. A diagram that does say
+// something said it for the PDF's sake — three arrows sharing one gap need
+// the room — and the screen has the same crowding to answer.
+const CD_SEP = {
+  tiny: 0.25, scriptsize: 0.4, small: 0.55, normal: 1, large: 1.5, huge: 2.1,
+};
+
+function cdGap(opts, key, base) {
+  const m = new RegExp(`${key}\\s+sep\\s*=\\s*([a-z]+)`).exec(opts || '');
+  const f = m ? CD_SEP[m[1]] : undefined;
+  if (m && f === undefined) {
+    throw new Error(
+      `unsupported tikz-cd "${key} sep=${m[1]}" — extend CD_SEP in ` +
+        'scripts/render.mjs, or use one of ' + Object.keys(CD_SEP).join(', '),
+    );
+  }
+  return (base * (f ?? 1)).toFixed(2);
+}
+
 function renderDiagram(raw) {
+  const opts = (/^\\begin\{tikzcd\}(\[[^\]]*\])/.exec(raw) || [])[1] || '';
   const body = raw
     .replace(/^\\begin\{tikzcd\}(\[[^\]]*\])?/, '')
     .replace(/\\end\{tikzcd\}$/, '')
@@ -408,7 +430,9 @@ function renderDiagram(raw) {
   return (
     `<span class="tr-cd" data-cols="${cols}" ` +
     `data-arrows="${escapeAttr(JSON.stringify(arrows))}">` +
-    `<span class="tr-cd-grid" style="grid-template-columns:repeat(${cols},auto)">${nodes}</span>` +
+    `<span class="tr-cd-grid" style="grid-template-columns:repeat(${cols},auto);` +
+    `column-gap:${cdGap(opts, 'column', 3.4)}rem;row-gap:${cdGap(opts, 'row', 2.6)}rem">` +
+    `${nodes}</span>` +
     `<svg class="tr-cd-svg" aria-hidden="true"></svg>` +
     // The source stays available underneath, folded away. A reader who
     // doubts an arrow can check it against what was transcribed without
@@ -916,6 +940,12 @@ function drawDiagram(cd) {
   var svg = cd.querySelector('.tr-cd-svg');
   var nodes = {};
 
+  // Cleared before measuring: the padding added at the end of the last pass
+  // is what we are about to recompute, and leaving it in would make the box
+  // grow a little further on every redraw.
+  cd.style.paddingTop = '0px';
+  cd.style.paddingBottom = '0px';
+
   // Typeset the nodes once. On a redraw they are already done.
   cd.querySelectorAll('.tr-cd-node').forEach(function (n) {
     if (!n.dataset.done) {
@@ -1054,15 +1084,49 @@ function drawDiagram(cd) {
       // at t = 1/2, not the chord's. A description label sits on the shaft
       // (offset zero, background knocking out the line); the others hang
       // beside it, on the side the apostrophe picked.
+      // tikz's unprimed side is "left of travel" in its own y-up frame, which
+      // on screen — y running down — is the normal (uy, -ux), not (-uy, ux):
+      // a label above a rightward arrow, and to the page-right of a downward
+      // one. The offset below is applied along (-uy, ux), so the unprimed
+      // case takes the negative sign. Getting this backwards put every label
+      // on the wrong side of its arrow, and screen and PDF then disagreed
+      // about which arrow a name belonged to.
       var mx = ctrl ? (p1.x + 2 * ctrl.x + p2.x) / 4 : (p1.x + p2.x) / 2;
       var my = ctrl ? (p1.y + 2 * ctrl.y + p2.y) / 4 : (p1.y + p2.y) / 2;
-      var off = a.desc ? 0 : a.flip ? -13 : 13;
+      var off = a.desc ? 0 : a.flip ? 13 : -13;
       span.style.left = mx - uy * off + 'px';
       span.style.top = my + ux * off + 'px';
       grid.appendChild(span);
       katex.render(a.label, span, { throwOnError: false, macros: TR_MACROS });
     }
   });
+
+  // A deep bend and the label riding it reach well outside the node grid,
+  // and the box clips: overflow-x:auto, which wide diagrams need, forces
+  // overflow-y to auto with it. Measure what sticks out above and below and
+  // pad the box by that much. Unpadded, the six functors of a recollement
+  // lose four of their six names — and a diagram missing a name is worse
+  // than no diagram, because nothing on screen says a name is missing.
+  var gh = grid.offsetHeight;
+  var over = 0;
+  var under = 0;
+  function span_(top, bottom) {
+    if (-top > over) over = -top;
+    if (bottom - gh > under) under = bottom - gh;
+  }
+  grid.querySelectorAll('.tr-cd-label').forEach(function (l) {
+    // The label is centred on its anchor by a translate(-50%, -50%), so its
+    // painted box is half a line above and below what offsetTop reports.
+    var h = l.offsetHeight;
+    span_(l.offsetTop - h / 2, l.offsetTop + h / 2);
+  });
+  svg.querySelectorAll('path').forEach(function (p) {
+    var b;
+    try { b = p.getBBox(); } catch (_) { return; }
+    span_(b.y, b.y + b.height);
+  });
+  if (over > 0) cd.style.paddingTop = Math.ceil(over) + 'px';
+  if (under > 0) cd.style.paddingBottom = Math.ceil(under) + 'px';
 }
 </script>
 </body>
