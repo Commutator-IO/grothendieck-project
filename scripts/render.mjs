@@ -445,6 +445,7 @@ const BRACED = [
   ['textit', (a) => `<em class="ltx_emph">${a}</em>`],
   ['textbf', (a) => `<strong class="ltx_text ltx_font_bold">${a}</strong>`],
   ['texttt', (a) => `<code class="ltx_text ltx_font_typewriter">${a}</code>`],
+  ['textsuperscript', (a) => `<sup>${a}</sup>`],
   ['selectlanguage', () => ''],
 ];
 
@@ -465,6 +466,20 @@ function expandBraced(text) {
     }
   }
   return out;
+}
+
+/** Reads a leading `[...]` off an \item body, matching brackets. */
+function takeBracketed(text) {
+  if (text[0] !== '[') return null;
+  let depth = 0;
+  for (let i = 0; i < text.length; i++) {
+    if (text[i] === '[') depth++;
+    else if (text[i] === ']') {
+      depth--;
+      if (depth === 0) return { arg: text.slice(1, i), rest: text.slice(i + 1) };
+    }
+  }
+  return null;
 }
 
 /** Inline macros with no argument, applied to already-escaped text. */
@@ -543,12 +558,24 @@ function renderBlock(block) {
   const list = /^\\begin\{(itemize|enumerate)\}([\s\S]*)\\end\{\1\}$/.exec(block.trim());
   if (list) {
     const tag = list[1] === 'itemize' ? 'ul' : 'ol';
+    let tagged = false;
     const items = list[2]
       .split(/\\item\b/)
       .slice(1)
-      .map((i) => `<li class="ltx_item">${inline(i.trim())}</li>`)
+      .map((i) => {
+        // \item[(i)] — his own numbering. Where a list carries one, it
+        // replaces the automatic marker rather than sitting beside it.
+        const body = i.trim();
+        const label = takeBracketed(body);
+        if (!label) return `<li class="ltx_item">${inline(body)}</li>`;
+        tagged = true;
+        return `<li class="ltx_item ltx_item_tagged">`
+          + `<span class="ltx_tag">${inline(label.arg)}</span>`
+          + `${inline(label.rest.trim())}</li>`;
+      })
       .join('\n');
-    return `${prefix}<${tag} class="ltx_itemize">${items}</${tag}>`;
+    const cls = tagged ? 'ltx_itemize ltx_itemize_tagged' : 'ltx_itemize';
+    return `${prefix}<${tag} class="${cls}">${items}</${tag}>`;
   }
 
   const resume = /^\\begin\{resume\}([\s\S]*)\\end\{resume\}$/.exec(block.trim());
@@ -765,6 +792,10 @@ function render(tex, edition) {
   .tr-struck { text-decoration: line-through; color: #9d9787; }
   .tr-note, .tr-marginal { display: block; margin: .4rem 0; padding-left: .7rem;
              border-left: 2px solid var(--rule); font-size: .88em; color: var(--ink3); }
+  /* A list whose items carry his own labels prints those and nothing else.
+     The hanging position of the tag is ar5iv's (it pulls .ltx_tag back by the
+     list's default 2.5rem padding), so nothing here may touch that padding. */
+  .ltx_itemize_tagged { list-style: none; }
   .ltx_Math.ltx_display { display: block; margin: .9rem 0; text-align: center; }
   /* Commutative diagrams: a grid of KaTeX nodes with an SVG arrow layer over
      it. The gaps are what the arrows are drawn in, so they are generous. */
@@ -843,6 +874,13 @@ ${html}
 // the marker. Screen and PDF must agree about which words were read.
 var TR_MACROS = {
   '\\\\ill': '\\\\textcolor{#b53d1d}{[\\\\ldots]}',
+  // The other three apparatus macros reach math too — he strikes a single
+  // symbol, doubts a single operator — and KaTeX drops what it does not know
+  // *silently*, so without these the strike simply disappears on screen while
+  // the PDF prints it. Same rule as \\ill: screen and PDF must agree.
+  '\\\\struck': '\\\\sout{#1}',
+  '\\\\uncertain': '\\\\underline{#1}',
+  '\\\\add': '\\\\textcolor{#38539d}{[#1]}',
 };
 
 document.addEventListener('DOMContentLoaded', function () {
