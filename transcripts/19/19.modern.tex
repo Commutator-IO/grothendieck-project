@@ -1,0 +1,2387 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 19, pages 1-95.
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried — a doubtful
+% reading, a notation he used differently, a missing passage — moves into a
+% footnote.
+%
+% It is held to being mathematically correct as it stands, not merely faithful
+% to the page. Where the manuscript is loose or mistaken, the true statement is
+% what appears here, and the footnote says what the page has. In any dispute of
+% substance the transcription governs: whoever cites Grothendieck must cite the
+% batch-NN.fr.tex files.
+%
+% Scope: the folder was read WHOLE before any of this was written — all five
+% batches, pages 1-95, in one pass — and it is written as ONE file for the
+% whole shelfmark, which is this project's layout: `19.modern.tex` covers the
+% five batches of transcription, exactly as 108.modern.tex, 115.modern.tex and
+% 161-3.modern.tex cover theirs.
+%
+% One notation is fixed here for the whole folder and held to throughout, in
+% the "Conventions" section: unit, counit and comultiplication get modern
+% letters, because the manuscript's own letters are NOT consistent from one
+% bundle to the next (alpha and beta are swapped between pages 3 and 70).
+%
+% Four corrections are substantive rather than cosmetic, and each is footnoted
+% where it occurs:
+%   - h_B is covariant in B, not contravariant as page 14 says;
+%   - the equivalence of page 15 needs the generator U to be small projective;
+%     with a bare generator one gets Gabriel-Popescu, not an equivalence;
+%   - page 60 gives i* a kernel of i_! where the symmetry requires j_*;
+%   - page 70 says "g adjoint à gauche de f" where its own arrows say otherwise.
+%
+% One convention is chosen openly rather than silently, at the head of the
+% recollement section: Grothendieck's i is the OPEN immersion and his j the
+% CLOSED one, the exact reverse of today's usage. His letters are kept, so that
+% this reading can be laid beside the transcription formula by formula.
+%
+% Pass: Opus 5 (claude-opus-5), 2026-08-22 — first pass, unchecked against the
+% pages by a human.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{19}
+\pages{1}{95}
+\dating{[à partir de 1958-1973]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Topos : notes manuscrites (s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+La chemise porte deux mots de l'inventaire : « Topos, notes manuscrites ».
+Dedans, neuf liasses qui n'ont pas l'air d'aller ensemble — des coalgèbres, de
+la cohomologie relative, des notes de rédaction pour un exposé de SGA 4, des
+catégories de fractions, un théorème de recollement, une liste de questions
+sans réponses, des catégories fibrées. Ce n'est pas un texte : c'est un dossier
+de travail. Mais une seule question le traverse d'un bout à l'autre, et il vaut
+la peine de l'avoir en tête avant d'ouvrir n'importe laquelle de ses pages.
+
+Voici cette question. Presque toutes les constructions des mathématiques
+\emph{oublient} quelque chose. D'un groupe on ne retient que l'ensemble
+sous-jacent ; d'un faisceau sur un espace, sa restriction à un ouvert ; d'un
+module sur un anneau, le même module vu sur un sous-anneau. Chaque fois, on a
+un procédé $f$ qui va d'une collection d'objets riches vers une collection
+d'objets plus pauvres, et chaque fois on perd de l'information. Combien
+exactement ? Et surtout : ce qui a été perdu peut-il être \emph{rangé quelque
+part}, sous une forme telle qu'à partir de l'objet pauvre et de ce rangement on
+reconstitue l'objet riche, exactement et sans reste ?
+
+L'image juste est celle du recollement. Pour connaître une fonction sur un
+espace, il suffit de la connaître sur chaque morceau d'un recouvrement, à
+condition de savoir en plus que les valeurs coïncident sur les recouvrements
+deux à deux : ces conditions de coïncidence sont la « donnée de recollement »,
+et sans elles les morceaux ne se recollent pas. Le pari du dossier est que
+cette situation-là est universelle. Dès que le procédé $f$ admet un
+\emph{adjoint} $g$ — un procédé qui, à un objet pauvre, associe le meilleur
+objet riche qui s'envoie dessus —, le composé $\varphi = fg$ mesure, sur les
+objets pauvres eux-mêmes, ce que la remontée puis la redescente font subir. Et
+une « donnée de recollement » sur un objet $X$ n'est rien d'autre qu'une flèche
+$X \to \varphi(X)$ obéissant à deux règles de compatibilité. Grothendieck
+appelle ces objets-avec-flèche des \emph{tapis cartésiens} ; on dit aujourd'hui
+des \emph{coalgèbres}.
+
+Le théorème qui ouvre le dossier dit quand le recollement est effectif : quand
+la catégorie des coalgèbres est, à équivalence près, la catégorie riche de
+départ. Deux conditions suffisent, et elles sont nécessaires — que $f$ ne
+déclare isomorphes que des objets qui le sont déjà, et qu'il respecte assez de
+noyaux. C'est le théorème de comonadicité, celui qu'on appelle aujourd'hui
+théorème de Beck ; la page en porte le nom.
+
+Tout le reste met ce mécanisme à l'épreuve, sur des objets de plus en plus
+gros, et c'est ce qui donne au dossier son unité.
+
+Il sert d'abord à fabriquer des résolutions — la \emph{construction standard}
+de Godement, où l'on itère $\varphi$ pour obtenir un objet cosimplicial, dont
+tout l'intérêt est d'être trivial du côté où il a été construit. Il sert
+ensuite à faire de l'algèbre homologique \emph{relative} : on décrète exactes
+non pas toutes les suites exactes, mais celles que $f$ scinde, et toute la
+théorie des foncteurs dérivés se refait avec cette notion-là. Les objets
+injectifs relatifs se reconnaissent alors sans peine — ce sont exactement les
+facteurs directs des objets $T(N)$ — et le foncteur $C^{0}$ de Godement, celui
+qui à un faisceau associe le produit de ses fibres, apparaît comme un cas
+particulier de la construction générale.
+
+Il sert à \emph{localiser}, c'est-à-dire à rendre inversible une famille de
+flèches, et à reconnaître les objets que la localisation ne bouge pas : c'est
+la théorie de Gabriel, et le dossier en donne les conditions d'existence du
+foncteur section. Il sert à \emph{recoller} un ouvert et son fermé
+complémentaire — le théorème que la chemise attribue à Michael Artin et Pierre
+Cartier, et dont sort le tableau de six foncteurs qu'on appelle aujourd'hui un
+recollement. Il sert à dire ce qu'est un \emph{foncteur d'oubli de structure} :
+un foncteur fidèle et transportable, ce qui se lit entièrement sur ses fibres,
+et l'on retrouve au passage que se donner une catégorie au-dessus de $B$ à
+fibres discrètes revient à se donner un préfaisceau sur $B$. Il sert enfin à
+décrire une \emph{famille} de catégories paramétrée par une autre — les
+catégories fibrées, sur lesquelles le dossier s'achève, et dont le topos total
+se calcule comme la catégorie des sections cartésiennes, c'est-à-dire des
+familles recollées.
+
+Deux liasses font exception et sont d'une autre nature : des notes de rédaction
+pour les exposés IX et XII de SGA 4, sur les faisceaux constructibles et la
+pureté. Elles sont écrites vite, très petit, et une grande part de leur prose
+de liaison est illisible ; on n'a pas cherché à la rendre lisible, et les
+silences sont dits comme tels. Une chose y vaut d'être vue malgré tout : le
+geste qui y revient — ramener une propriété de tous les objets à une propriété
+d'une famille génératrice, puis dévisser — est le réflexe central du dossier et
+ne dépend pas du sujet.
+
+On ne trouvera nulle part ici de rédaction. On trouve un homme qui pose ses
+questions par écrit, qui numérote, qui raye, qui écrit « faux en général ! »
+dans la marge en face de sa propre proposition, et qui laisse en fin de dossier
+onze problèmes ouverts avec, en regard de deux d'entre eux, un « O.K. » et un
+« non » notés plus tard, d'une autre encre. C'est un état de travail, et il est
+donné tel quel.
+
+\keywords{comonad, Beck comonadicity theorem, coalgebra, standard resolution, Gabriel-Popescu theorem, relative homological algebra, allowable class, effaceable functor, constructible sheaf, cohomological dévissage, Chow's lemma, Gabriel localization, quotient category, localizing subcategory, recollement, Artin gluing, torsion theory, six-functor formalism, extra degeneracy, discrete fibration, category of elements, adjoint string, transport of structure, fibred site, total topos, cartesian section, pseudofunctor, opfibration, 2-limit}
+\end{resume}
+\pagerange{3}{3}
+\section*{Conventions, valables pour tout le dossier}
+
+Les lettres changent d'une liasse à l'autre : ce que la page 3 note $\beta$, la
+page 70 le note $\alpha$, et inversement. On fixe donc ici une notation, et on
+s'y tient dans les cinq lectures modernisées de ce dossier.\footnote{Le
+dictionnaire est le suivant. Page 3 : $\beta$ est l'unité, $\alpha$ la coünité,
+$\lambda$ la comultiplication. Page 13 : $\phi$ est l'unité de la monade
+$E = GF$ et $\lambda$ sa multiplication ; $\phi'$ et $\lambda'$ sont la coünité
+et la comultiplication de la comonade $E' = FG$. Page 70 : $\alpha$ est
+l'unité, $\beta$ la coünité, $\lambda$ la comultiplication — soit l'échange de
+$\alpha$ et $\beta$ par rapport à la page 3. C'est parce que les lettres du
+manuscrit ne sont pas cohérentes d'une liasse à l'autre qu'on ne les a pas
+reprises.}
+
+Une \emph{adjonction} $f \dashv g$ est la donnée de deux foncteurs
+$f : A \to B$ et $g : B \to A$ et d'une bijection
+\[
+  \mathrm{Hom}_{B}\bigl( f(Y), X \bigr) \;\simeq\;
+  \mathrm{Hom}_{A}\bigl( Y, g(X) \bigr) ,
+\]
+naturelle en $Y$ et $X$ ; on dit que $f$ est adjoint à gauche et $g$ adjoint à
+droite. Elle équivaut à la donnée de deux transformations naturelles, l'unité
+$\eta : \mathrm{id}_{A} \to gf$ et la coünité
+$\varepsilon : fg \to \mathrm{id}_{B}$, soumises aux deux identités
+triangulaires.
+
+Le composé $\varphi = fg : B \to B$ est alors une \emph{comonade} : il vient
+avec la coünité $\varepsilon : \varphi \to \mathrm{id}_{B}$ et une
+comultiplication
+\[
+  \delta \;=\; f * \eta * g \;:\; \varphi \longrightarrow \varphi^{2} ,
+\]
+et ces deux flèches satisfont deux axiomes, un axiome de coünité et un axiome
+de coassociativité, exprimés par la commutation de
+
+\begin{tikzcd}[column sep=large]
+\varphi \arrow[r, "\delta"] \arrow[rr, bend right=32, "\mathrm{id}_{\varphi}"'] &
+\varphi^{2} \arrow[r, bend left=18, "\varphi * \varepsilon"] \arrow[r, bend right=18, "\varepsilon * \varphi"'] &
+\varphi
+\end{tikzcd}
+
+\begin{tikzcd}[column sep=large]
+\varphi \arrow[r, "\delta"] &
+\varphi^{2} \arrow[r, bend left=18, "\varphi * \delta"] \arrow[r, bend right=18, "\delta * \varphi"'] &
+\varphi^{3}
+\end{tikzcd}
+
+Ce sont les \emph{conditions de Godement}, du nom sous lequel le manuscrit les
+cite.\footnote{Elles apparaissent dans la \emph{Topologie algébrique et théorie
+des faisceaux} de Godement, 1958, attachées à la « construction standard ». Le
+mot \emph{comonade} et la théorie générale sont postérieurs ; le manuscrit ne
+les emploie pas.} Symétriquement, $\psi = gf : A \to A$ est une \emph{monade},
+d'unité $\eta$ et de multiplication $\mu = g * \varepsilon * f$.
+
+\pagerange{3}{4}
+\section*{« Tapis cartésiens » : la comonade d'une adjonction (pages 1 à 11)}
+
+Le premier texte du dossier occupe les pages 3 à 11 ; la chemise, page 1, lui
+donne son titre et donne aussi celui du texte suivant.
+
+\subsection*{Les coalgèbres}
+
+Soit $\varphi$ une comonade sur $B$, de coünité $\varepsilon$ et de
+comultiplication $\delta$. Une \emph{$\varphi$-coalgèbre} est un couple
+$(X, u)$ formé d'un objet $X$ de $B$ et d'une flèche
+\[
+  u : X \longrightarrow \varphi(X)
+\]
+telle que les deux diagrammes suivants commutent :
+
+\begin{tikzcd}[column sep=large]
+X \arrow[r, "u"] & \varphi(X) \arrow[r, "\varepsilon(X)"] & X
+\end{tikzcd}
+
+\begin{tikzcd}[column sep=large]
+X \arrow[r, "u"] &
+\varphi(X) \arrow[r, bend left=18, "\varphi(u)"] \arrow[r, bend right=18, "\delta(X)"'] &
+\varphi^{2}(X)
+\end{tikzcd}
+
+soit $\varepsilon(X) \circ u = \mathrm{id}_{X}$ (coünité) et
+$\delta(X) \circ u = \varphi(u) \circ u$ (coassociativité). Les morphismes de
+coalgèbres sont les flèches de $B$ compatibles avec les $u$. On note
+$\varphi\text{-}\mathbf{Coalg}$ cette catégorie ; le manuscrit la note
+$K(\varphi, \alpha, \lambda)$ et appelle ses objets des \emph{tapis
+cartésiens}. C'est la catégorie de co-Eilenberg--Moore de la
+comonade.\footnote{Le manuscrit nomme Eilenberg--Moore une seule fois, page 19,
+et à propos de la situation duale. La définition ci-dessus ne fait intervenir
+ni la coünité ni la coassociativité de $\varphi$ : le manuscrit le remarque
+explicitement page 4, entre parenthèses et avec un point d'exclamation. Ces
+axiomes ne servent qu'à partir du moment où l'on veut construire l'adjoint $g$.}
+
+Lorsque $\varphi = fg$ provient d'une adjonction $f \dashv g$, un objet $Y$ de
+$A$ donne canoniquement une coalgèbre, à savoir $f(Y)$ munie de
+\[
+  f(Y) \xrightarrow{\;f * \eta\;} fgf(Y) = \varphi\bigl( f(Y) \bigr) ,
+\]
+et ceci est fonctoriel. On obtient le \emph{foncteur de comparaison}
+\[
+  h : A \longrightarrow \varphi\text{-}\mathbf{Coalg} .
+\]
+Toute la question est de savoir quand $h$ est une équivalence : c'est-à-dire
+quand la donnée d'un objet de $A$ équivaut à celle d'un objet de $B$ muni d'une
+donnée de recollement.
+
+\pagerange{4}{4}
+\subsection*{Le théorème de comonadicité}
+
+\textbf{Théorème.} Soit $f \dashv g$ une adjonction, $\varphi = fg$, et $h$ le
+foncteur de comparaison.
+
+\begin{enumerate}
+\item[a)] Si les noyaux de doubles flèches existent dans $A$ et si $f$ y
+commute, alors $h$ est essentiellement surjectif.
+\item[b)] $h$ est une équivalence si et seulement si $f$ est
+\emph{conservatif} — il ne rend isomorphe que ce qui l'était déjà — et si, pour
+toute double flèche $(u,v)$ de $A$ telle que $\mathrm{Ker}\bigl(f(u),
+f(v)\bigr)$ existe, $\mathrm{Ker}(u,v)$ existe et $f$ y commute.
+\end{enumerate}
+
+La restriction portée en marge — il suffit de considérer les doubles flèches
+$(u,v)$ dont l'image par $f$ a un noyau — est la condition que le manuscrit
+appelle \emph{condition C}, et c'est elle qui fait la force de l'énoncé : on ne
+demande rien de $A$ en général, seulement de ce que $f$ voit déjà. C'est le
+théorème de comonadicité de Beck, sous sa forme précise.\footnote{La page porte
+un nom propre entre parenthèses après « Théorème 1.12 », que la transcription
+lit « Beck » sans certitude. La forme monadique du théorème est celle de la
+thèse de Jon Beck (1967) ; la forme comonadique, qui est celle-ci, s'en déduit
+par dualité. Les doubles flèches dont $f$ voit le noyau sont, dans le
+vocabulaire d'aujourd'hui, les paires $f$-scindées.}
+
+\pagerange{4}{6}
+\subsection*{La réciproque : reconstruire l'adjonction}
+
+Partons cette fois d'une comonade $(\varphi, \varepsilon, \delta)$ sur $B$,
+sans supposer qu'elle provienne de quoi que ce soit. Posons
+$A = \varphi\text{-}\mathbf{Coalg}$ et soit $f : A \to B$ le foncteur d'oubli,
+$(X, u) \mapsto X$. On définit
+\[
+  g : B \longrightarrow A , \qquad
+  g(X) = \bigl( \varphi(X),\; \delta(X) \bigr) ,
+\]
+et c'est ici, et seulement ici, que la coassociativité sert : elle dit
+exactement que $\delta(X)$ est une structure de coalgèbre sur $\varphi(X)$. On
+a alors, par construction,
+\[
+  fg = \varphi .
+\]
+
+Que $f$ soit adjoint à gauche de $g$ se vérifie à la main. Dans un sens, la
+coünité $\varepsilon$ fournit
+\[
+  \mathrm{Hom}_{A}\bigl( (X,u), g(Y) \bigr) \longrightarrow
+  \mathrm{Hom}_{B}(X, Y) , \qquad w \longmapsto \varepsilon(Y) \circ f(w) ;
+\]
+dans l'autre, on construit l'unité $\eta : \mathrm{id}_{A} \to gf$ en associant
+à une coalgèbre $(X,u)$ le carré
+
+\begin{tikzcd}
+X \arrow[r, "u"] \arrow[d, "u"'] & \varphi(X) \arrow[d, "\varphi(u)"] \\
+\varphi(X) \arrow[r, "\delta(X)"'] & \varphi^{2}(X)
+\end{tikzcd}
+
+dont la commutation est précisément l'axiome de coassociativité de la
+coalgèbre : c'est donc bien un morphisme de coalgèbres
+$(X,u) \to gf(X,u) = \bigl( \varphi(X), \delta(X) \bigr)$. Les deux
+applications sont inverses l'une de l'autre — l'une des deux identités
+triangulaires résulte de l'axiome de coünité de $\varphi$, l'autre de l'axiome
+de coünité de la coalgèbre — et l'on retrouve $(\varphi, \varepsilon, \delta)$
+par le procédé du paragraphe précédent.
+
+\textbf{Conclusion.} Pour $B$ fixée, se donner une catégorie $A$ et une
+adjonction $f \dashv g$ entre $A$ et $B$, avec $f$ conservatif et satisfaisant
+à la condition C, revient essentiellement à se donner une comonade
+$(\varphi, \varepsilon, \delta)$ sur $B$.\footnote{Le manuscrit écrit ici « la
+donnée d'un foncteur $g$ dans $B$, avec les données de Godement $\alpha$,
+$\lambda$ » ; c'est $\varphi$, endofoncteur de $B$, qu'il faut lire, et non
+l'adjoint $g$, qui n'a plus de sens une fois $A$ oubliée.}
+
+\pagerange{6}{6}
+\subsection*{Exactitude, et le cas des topos}
+
+Une comonade transporte des propriétés d'exactitude de $B$ à
+$\varphi\text{-}\mathbf{Coalg}$, mais pas symétriquement, et c'est un point que
+la page énonce trop vite.
+
+Le foncteur d'oubli $f$ \emph{crée} toutes les limites inductives qui existent
+dans $B$ : une limite inductive de coalgèbres se calcule en oubliant les
+structures, et la structure sur la limite s'en déduit sans hypothèse. Pour les
+limites projectives il faut une condition, et c'est $\varphi$ qui la porte :
+si $\varphi$ commute aux limites projectives d'un type donné, alors ces
+limites existent dans $\varphi\text{-}\mathbf{Coalg}$ et $f$ y
+commute.\footnote{La page énonce deux propriétés, a) et b), toutes deux avec
+$\varprojlim$. L'une des deux doit se lire $\varinjlim$ : les limites
+inductives passent sans condition, les limites projectives réclament que
+$\varphi$ y commute. C'est du reste ce qu'exige le théorème sur les topos qui
+suit, où l'exactitude à gauche de $\varphi$ est précisément l'hypothèse.}
+
+\textbf{Théorème.} Supposons $B$ un topos, et $\varphi$ exact à gauche. Alors
+$\varphi\text{-}\mathbf{Coalg}$ est un topos, et le foncteur d'oubli $f$ est
+l'image inverse $f_{0}^{*}$ d'un morphisme de topos
+$f_{0} : B \to \varphi\text{-}\mathbf{Coalg}$, morphisme qui est surjectif.
+Pour que $f_{0}$ soit \emph{essentiel}, il faut et il suffit que $\varphi$
+commute aux limites projectives quelconques, c'est-à-dire — $\varphi$ étant
+déjà exact à gauche — aux produits infinis.\footnote{La page écrit
+« accessible (i.e.\ conservatif) » là où on a écrit « surjectif ». Un morphisme
+de topos est une surjection exactement quand son image inverse est fidèle, ce
+qui pour un foncteur exact entre topos équivaut à la conservativité : la
+parenthèse de la page est donc juste, et c'est le mot qu'elle qualifie qui
+n'est pas celui d'aujourd'hui. Un morphisme est dit \emph{essentiel} lorsque
+son image inverse admet elle-même un adjoint à gauche ; la page suppose
+d'ailleurs explicitement que $\varphi$ a un adjoint à gauche.}
+
+C'est l'énoncé qui justifie le titre du dossier : les comonades exactes à
+gauche sur un topos sont exactement ses surjections, et la théorie des tapis
+cartésiens est, pour un topos, une théorie de la descente.
+
+\pagerange{7}{11}
+\subsection*{Une base produit : la matrice des $\varphi_{ji}$}
+
+Le reste du texte examine ce que devient tout ceci quand
+$B = \prod_{i \in I} B_{i}$. Le foncteur $f$ est alors une famille
+$f_{i} : A \to B_{i}$, l'adjoint $g$ une famille $g_{i} : B_{i} \to A$ avec
+$g\bigl( (X_{i}) \bigr) = \prod_{i} g_{i}(X_{i})$, et la comonade $\varphi$ se
+décompose. En posant
+\[
+  \varphi_{ji} \;=\; f_{j} g_{i} \;:\; B_{i} \longrightarrow B_{j}
+\]
+et en supposant que les $f_{j}$ commutent aux produits indexés par $I$ — ce qui
+est automatique si $I$ est fini, ou si les $f_{j}$ sont exacts — on obtient
+\[
+  \mathrm{pr}_{j}\, \varphi\bigl( (X_{i}) \bigr)
+  \;=\; \prod_{i \in I} \varphi_{ji}(X_{i}) .
+\]
+La comonade devient donc une \emph{matrice} de foncteurs $\varphi_{ji}$, et sa
+structure se réécrit en une famille de flèches
+\[
+  \lambda_{kji} \;:\; \varphi_{ki} \longrightarrow \varphi_{kj}\varphi_{ji} ,
+\]
+qui n'est autre que $f_{k} g_{i} \to f_{k}\, g_{j} f_{j}\, g_{i}$, obtenue en
+insérant l'unité $\mathrm{id} \to g_{j} f_{j}$ au milieu. Les axiomes de
+coünité et de coassociativité se traduisent en relations entre les
+$\lambda_{kji}$, que le manuscrit renonce à écrire. Il observe seulement que
+pour $i = j = k$ on retrouve la comultiplication de $\varphi_{i}$, et que les
+cas où deux des trois indices coïncident sont dégénérés : ne restent que le cas
+des trois indices distincts et le cas $i = k \neq j$, qui donne
+\[
+  \mathrm{id}_{B_{i}} \longrightarrow \varphi_{ij}\, \varphi_{ji}
+  \qquad (i \neq j) .
+\]
+
+\medskip
+
+\textbf{Deux facteurs.} Le cas $B = B' \times B''$ est traité en détail, sous
+l'hypothèse que $g'$ et $g''$ sont pleinement fidèles, c'est-à-dire que
+$f'g' \simeq \mathrm{id}_{B'}$ et $f''g'' \simeq \mathrm{id}_{B''}$. Il ne
+reste alors, de toute la matrice, que deux foncteurs croisés
+\[
+  \varphi' : B'' \longrightarrow B' , \qquad
+  \varphi'' : B' \longrightarrow B''
+\]
+et deux flèches
+\[
+  \lambda' : \mathrm{id}_{B'} \longrightarrow \varphi' \varphi'' , \qquad
+  \lambda'' : \mathrm{id}_{B''} \longrightarrow \varphi'' \varphi' ,
+\]
+avec $\varphi(X', X'') = \bigl( X' \times \varphi'(X''),\ \varphi''(X') \times
+X'' \bigr)$.
+
+La catégorie $A$ s'explicite alors complètement : ses objets sont les
+quadruplets $(X', X'', u', u'')$ où
+\[
+  u' : X' \longrightarrow \varphi'(X'') , \qquad
+  u'' : X'' \longrightarrow \varphi''(X') ,
+\]
+soumis à la commutation des deux triangles
+
+\begin{tikzcd}[column sep=large]
+X' \arrow[r, "u'"] \arrow[rr, bend right=30, "\lambda'(X')"'] &
+\varphi'(X'') \arrow[r, "\varphi'(u'')"] & \varphi'\varphi''(X')
+\end{tikzcd}
+
+\begin{tikzcd}[column sep=large]
+X'' \arrow[r, "u''"] \arrow[rr, bend right=30, "\lambda''(X'')"'] &
+\varphi''(X') \arrow[r, "\varphi''(u')"] & \varphi''\varphi'(X'')
+\end{tikzcd}
+
+l'axiome de coünité étant, lui, automatiquement satisfait par la forme même de
+$\varphi$.\footnote{Le manuscrit dit « il semble qu'on trouve » : le calcul qui
+mène à ces deux triangles est mené sur trois lignes puis biffé, et n'est pas
+récrit.}
+
+\medskip
+
+\textbf{Le cas dégénéré.} Si $\varphi'\varphi''$ et $\varphi''\varphi'$ sont
+constants de valeur l'objet final, les deux triangles sont vides de contenu et
+$A$ est simplement la catégorie des quadruplets, sans condition. Les deux
+foncteurs $g'$, $g''$ s'écrivent alors explicitement, et leurs images
+essentielles se reconnaissent par une condition d'une simplicité frappante :
+\[
+  \text{image essentielle de } g' : u'' \text{ est un isomorphisme} ,
+  \qquad
+  \text{image essentielle de } g'' : u' \text{ est un isomorphisme} .
+\]
+Leur intersection est donc formée des quadruplets où $u'$ \emph{et} $u''$ sont
+inversibles, et cette sous-catégorie est équivalente à la sous-catégorie pleine
+de $B'$ formée des $X'$ pour lesquels $\lambda'(X')$ est un isomorphisme. La
+page en tire trois conditions équivalentes, dont la teneur est que cette
+intersection se réduit à un point si et seulement si $\lambda'$, ou de façon
+équivalente $\lambda''$, n'est inversible que sur l'objet
+trivial.\footnote{L'adjectif que la page emploie pour la catégorie
+intersection est d'une lecture incertaine — la transcription le donne comme
+« ponctuelle ». Le sens est en tout cas celui d'une catégorie réduite à un
+objet et à son identité.}
+
+\pagerange{13}{20}
+\section*{Résolutions standard et cohomologie relative (pages 13 à 20)}
+
+Le second texte du dossier commence page 13 et se poursuit jusqu'à la page 27,
+donc au-delà de ce lot. Il applique le mécanisme précédent à l'algèbre
+homologique.
+
+\pagerange{13}{13}
+\subsection*{La construction standard}
+
+Soit $F \dashv G$ une adjonction, $F : C \to C'$ et $G : C' \to C$. On a donc
+d'un côté la monade $E = GF$ sur $C$, avec son unité
+$\eta : \mathrm{id}_{C} \to E$ et sa multiplication $E^{2} \to E$, et de
+l'autre la comonade $E' = FG$ sur $C'$.
+
+Itérer $E$ produit un objet cosimplicial coaugmenté dans la catégorie des
+endofoncteurs de $C$ :
+\[
+  X \longrightarrow E(X) \rightrightarrows E^{2}(X)
+  \Rrightarrow E^{3}(X) \longrightarrow \cdots
+\]
+dont le terme de degré $n$ est $E^{n+1}$, les cofaces sont obtenues en
+insérant l'unité aux $n+2$ places possibles, et les codégénérescences en
+appliquant la multiplication.\footnote{La page dit « objet simplicial » et
+« augmentation $X \to \widehat{E}(X)$ » ; les flèches qu'elle écrit vont dans
+le sens croissant et partent de $X$, ce qui décrit un objet \emph{cosimplicial
+coaugmenté}. L'auteur se corrige lui-même page 70, où il biffe
+« cosimpliciale » pour écrire « co-semi-simpliciale ». C'est la
+\emph{construction standard} de Godement, la résolution bar d'aujourd'hui.} La
+comonade $E'$ donne de même, sur $C'$, un objet simplicial augmenté.
+
+Deux faits en découlent, et ce sont eux qui font l'intérêt de la construction :
+pour $X'$ dans $C'$, le complexe $\widehat{E}\bigl( G(X') \bigr)$ est
+contractile, et pour $X$ dans $C$, $F(X) \to F\bigl( \widehat{E}(X) \bigr)$ est
+une équivalence d'homotopie. Autrement dit, la résolution devient triviale dès
+qu'on la regarde du côté où elle a été construite. La raison est une
+\emph{dégénérescence supplémentaire}, et le manuscrit l'énonce sous une forme
+plus générale : si un foncteur $T : C \to D$ est muni d'un
+$h : T \circ E \to T$ tel que $h \circ (T * \eta) = \mathrm{id}_{T}$, alors
+$T\widehat{E}(X)$ est contractile pour tout $X$.
+
+L'application visée est immédiate : si $C$ et $C'$ sont abéliennes, $F$ et $G$
+additifs, et si $F$ est exact et fidèle, alors $\widehat{E}(X)$ est une
+résolution de $X$. La page s'arrête au milieu de la phrase
+suivante.\footnote{Elle s'interrompt sur « 2. Si $\Gamma$ est un foncteur » ;
+la suite n'est pas au dossier. Le texte reprend page 14 sous un autre titre.}
+
+\pagerange{14}{15}
+\subsection*{Représentabilité : des $h_{B}$ aux $R$-modules}
+
+Le texte reprend, sous le titre « Cohomologie relative », par une question
+préalable : reconnaître, parmi tous les foncteurs, ceux de la forme
+$A \mapsto \mathrm{Hom}(A, B)$.
+
+Soit $C$ une catégorie et, pour $B$ dans $C$, soit $h_{B}$ le foncteur
+$A \mapsto \mathrm{Hom}(A, B)$. Il est contravariant en $A$ et \emph{covariant}
+en $B$,\footnote{La page écrit « contravariant en $B$ » ; c'est un lapsus, et
+la formule qu'elle écrit à la ligne suivante — $\mathrm{Hom}(B,B') \to
+\mathrm{Hom}(h_{B}, h_{B'})$, dans ce sens — dit bien la covariance.} et le
+lemme de Yoneda donne
+\[
+  \mathrm{Hom}(B, B') \;\xrightarrow{\ \sim\ }\;
+  \mathrm{Hom}\bigl( h_{B}, h_{B'} \bigr) ,
+\]
+la bijection réciproque s'obtenant en évaluant une transformation naturelle sur
+l'identité de $B$. Le foncteur $B \mapsto h_{B}$ identifie donc $C$ à une
+sous-catégorie pleine de la catégorie des foncteurs $C^{\circ} \to
+\mathbf{Ab}$,\footnote{La capitale cursive qui désigne la catégorie but n'a pas
+pu être lue ; le contexte — « si $C$ est additive », « homomorphismes
+additifs » — impose les groupes abéliens.} additifs si $C$ l'est.
+
+Supposons maintenant que $C$ soit une catégorie de Grothendieck : abélienne,
+vérifiant AB\,3), 4), 5), et munie d'un générateur $U$. Posons
+$R = \mathrm{End}_{C}(U)$ et, pour un foncteur $h$ transformant limites
+inductives en limites projectives, $M(h) = h(U)$, qui est un $R$-module à
+droite. Le manuscrit affirme alors que
+\[
+  \mathrm{Hom}(h, h') \;\xrightarrow{\ \sim\ }\;
+  \mathrm{Hom}_{R^{\circ}}\bigl( M(h), M(h') \bigr) ,
+\]
+puis, définissant en sens inverse $M \mapsto M \otimes_{R} U$, que les deux
+foncteurs sont quasi-inverses, de sorte que les foncteurs envisagés sont
+« essentiellement les $h_{B}$ ».
+
+Cet énoncé n'est correct que sous une hypothèse que la page ne formule pas.
+L'énoncé vrai est le suivant. Le foncteur $\mathrm{Hom}_{C}(U, -) : C \to
+\mathbf{Mod}_{R}$ est pleinement fidèle, et son adjoint à gauche $- \otimes_{R}
+U$ est exact : c'est le théorème de Gabriel--Popescu, et il présente $C$ comme
+une \emph{localisation} de $\mathbf{Mod}_{R}$, non comme
+$\mathbf{Mod}_{R}$.\footnote{Gabriel--Popescu, 1964. Le manuscrit invoque
+$\mathrm{Hom}_{C}(U, M \otimes_{R} U) \simeq M$ comme « bien connu » ; cette
+formule vaut pour tout $M$ exactement quand $U$ est petit et projectif. La
+page, qui ne suppose que « générateur », affirme donc une équivalence là où
+seul un plongement pleinement fidèle est acquis.} Pour que ce soit une
+équivalence, il faut et il suffit que $U$ soit un générateur \emph{projectif}
+et petit, et l'on retombe alors sur le théorème de Morita.
+
+C'est cette différence qui explique le mot « essentiellement » de la page, et
+le « détails laissés au lecteur » qui le précède.
+
+\pagerange{16}{17}
+\subsection*{Le couple $(S,T)$ : unité et coünité}
+
+Soient $C$ et $C'$ deux catégories additives et $S : C \to C'$ un foncteur
+additif. On suppose que pour tout $X$ de $C'$ le foncteur
+$A \mapsto \mathrm{Hom}_{C'}\bigl( S(A), X \bigr)$ est représentable, et de
+façon fonctorielle en $X$ : on a donc un foncteur $T : C' \to C$ et une
+bijection naturelle
+\[
+  \mathrm{Hom}_{C'}\bigl( S(A), X \bigr) \;\simeq\;
+  \mathrm{Hom}_{C}\bigl( A, T(X) \bigr) .
+\]
+Autrement dit $S \dashv T$. La condition de représentabilité est satisfaite
+notamment lorsque $C$ et $C'$ vérifient AB\,3), 4), 5), que $C$ a un
+générateur, et que $S$ est exact à droite — c'est le paragraphe précédent qui
+le fournit.\footnote{La marge de la page 16 porte : « il faudrait des
+conditions de représentabilité ». Sous la forme donnée ici, ces conditions sont
+celles du théorème d'existence d'un adjoint pour un foncteur cocontinu depuis
+une catégorie de Grothendieck.}
+
+De l'adjonction viennent l'unité et la coünité,
+\[
+  \eta : \mathrm{id}_{C} \longrightarrow TS , \qquad
+  \varepsilon : ST \longrightarrow \mathrm{id}_{C'} ,
+\]
+obtenues comme d'ordinaire en évaluant la bijection sur des identités. Les deux
+identités triangulaires prennent ici une lecture géométrique que la page
+souligne : le composé
+\[
+  S(A) \xrightarrow{\;S(\eta_{A})\;} STS(A)
+  \xrightarrow{\;\varepsilon_{S(A)}\;} S(A)
+\]
+est l'identité, ce qui fait de $S(A)$ un \emph{facteur direct} de $STS(A)$, la
+rétraction étant $\varepsilon$ ; et symétriquement $T(X)$ est facteur direct de
+$TST(X)$. C'est cette scission-là, et rien d'autre, qui sera le moteur de tout
+ce qui suit.
+
+Enfin, $\eta$ est un monomorphisme en chaque objet si et seulement si les
+applications $\mathrm{Hom}_{C}(A,B) \to \mathrm{Hom}_{C'}\bigl( S(A), S(B)
+\bigr)$ sont injectives, c'est-à-dire si et seulement si $S$ est fidèle.
+
+\pagerange{18}{20}
+\subsection*{Suites $S$-exactes et objets $S$-injectifs}
+
+On peut maintenant refaire l'algèbre homologique en ne tenant pour exactes que
+les suites que $S$ scinde. C'est l'algèbre homologique \emph{relative}.
+
+Une suite courte $0 \to A' \to A \to A'' \to 0$ de $C$ est dite
+\emph{$S$-exacte} si son image par $S$ est exacte \emph{et scindée}. Un objet
+$M$ de $C$ est dit \emph{$S$-injectif} si $\mathrm{Hom}(-, M)$ transforme toute
+suite $S$-exacte en une suite exacte courte de groupes abéliens.\footnote{Cette
+classe de suites est ce qu'on appelle aujourd'hui une \emph{classe propre}, ou
+classe admissible, de suites exactes ; l'algèbre homologique qu'on bâtit dessus
+est celle de Hochschild (1956) et d'Eilenberg--Moore (1965). Le manuscrit ne
+cite ni l'un ni l'autre.}
+
+\textbf{Premier exemple.} Tout objet de la forme $T(X)$ est $S$-injectif, car
+pour un tel $M$ la suite en jeu est simplement l'image par $\mathrm{Hom}(S(-),
+X)$ de la suite $S$-exacte, donc exacte par scission.
+
+\textbf{Deuxième exemple.} Supposons $S$ exact à droite et fidèle. Alors, pour
+tout $A$, la suite
+\[
+  0 \longrightarrow A \xrightarrow{\;\eta_{A}\;} TS(A) \longrightarrow Z(A)
+  \longrightarrow 0 , \qquad Z(A) = \mathrm{coker}\,\eta_{A} ,
+\]
+est $S$-exacte : son image par $S$ est exacte parce que $S$ est exact à droite,
+et elle est scindée par la rétraction $\varepsilon_{S(A)}$ construite plus
+haut.
+
+De ces deux exemples sort la caractérisation qui organise la suite du texte :
+\emph{un objet est $S$-injectif si et seulement si $\eta$ l'identifie à un
+facteur direct de $TS(M)$}. En effet, s'il en est ainsi, il est facteur direct
+d'un $T(X)$, donc $S$-injectif par le premier exemple ; et réciproquement, un
+objet $S$-injectif rend scindée la suite $S$-exacte qui lui est attachée par le
+second.\footnote{La page renvoie ici, entre crochets, « aux faits de nature
+\ldots{} de la catégorie Eilenberg--Moore ». C'est la seule mention du nom dans
+le dossier, et elle est juste : la description des $S$-injectifs comme facteurs
+directs des $T(X)$ est le pendant, pour la classe propre, de la description des
+objets libres d'une catégorie d'algèbres.}
+
+\medskip
+
+\textbf{Quand une suite $S$-exacte est-elle exacte ?} Si $S$ est exact et
+fidèle, les deux notions coïncident. La raison est brève : $S$ étant exact,
+$S\bigl( \mathrm{Ker}\,v / \mathrm{Im}\,u \bigr) = \mathrm{Ker}\,S(v) /
+\mathrm{Im}\,S(u)$, et $S$ étant fidèle, le premier membre est nul si et
+seulement si $\mathrm{Ker}\,v / \mathrm{Im}\,u$ l'est.\footnote{Le passage est
+récrit trois fois sur les pages 19 et 20, et fortement biffé ; le haut de la
+page 20 est barré en croix. Seule la version portée en interligne se lit d'un
+bout à l'autre, et c'est elle qui est donnée ici.}
+
+Le lot s'achève sur la définition de la résolution canonique. En posant
+$C^{0} = TS$, puis
+\[
+  C^{1}(A) = C^{0}(A) / \mathrm{Im}\,A , \qquad
+  C^{i}(A) = C^{0}\Bigl( C^{i-1}(A) / \mathrm{Im}\bigl( C^{i-2}(A) \bigr)
+  \Bigr) \quad (i \geqslant 2) ,
+\]
+on obtient une $S$-résolution de $A$, fonctorielle en $A$, dont tous les termes
+sont $S$-injectifs. C'est elle qui servira, dans le lot suivant, à définir les
+foncteurs dérivés relatifs.
+\pagerange{21}{27}
+\section*{Cohomologie relative : la fin de la théorie (pages 21 à 27)}
+
+On reprend la situation du lot précédent : deux catégories abéliennes $C$,
+$C'$, un foncteur additif $S : C \to C'$ admettant un adjoint à droite $T$,
+d'unité $\eta : \mathrm{id}_{C} \to TS$ et de coünité
+$\varepsilon : ST \to \mathrm{id}_{C'}$. Une suite courte de $C$ est
+$S$-exacte lorsque son image par $S$ est exacte et scindée ; un objet est
+$S$-injectif lorsque $\mathrm{Hom}(-, M)$ transforme toute suite $S$-exacte en
+suite exacte. À partir d'ici, et comme la marge de la page 23 le note une fois
+pour toutes, $S$ est supposé exact et fidèle.\footnote{Le manuscrit note
+$\widetilde{A}$ pour $S(A)$ et « $\sim$-exact », « $\sim$-injectif » pour
+$S$-exact, $S$-injectif ; on a uniformisé.}
+
+\pagerange{21}{21}
+\subsection*{Quand les foncteurs dérivés relatifs sont les foncteurs dérivés}
+
+Soit $\Gamma : C \to D$ un foncteur, et $R_{S}^{\bullet}\Gamma$ les foncteurs
+dérivés calculés sur les $S$-résolutions. La question est de savoir quand ils
+coïncident avec les $R^{\bullet}\Gamma$ ordinaires — donc, en premier lieu,
+quand $R_{S}^{\bullet}\Gamma$ est bien un foncteur cohomologique, c'est-à-dire
+quand une suite courte lui donne une suite exacte longue.
+
+Trois conditions suffisent :
+
+\begin{enumerate}
+\item[(i)] $\eta_{A} : A \to C^{0}(A)$ est un monomorphisme ;
+\item[(ii)] $S$ et $T$ sont exacts — donc $C^{0} = TS$ l'est, donc
+$\Gamma C^{\bullet}$ aussi ;
+\item[(iii)] pour toute suite courte $0 \to A' \to A \to A'' \to 0$ de $C$, la
+suite
+\[
+  0 \longrightarrow \Gamma\bigl( C^{0}(A') \bigr) \longrightarrow
+  \Gamma\bigl( C^{0}(A) \bigr) \longrightarrow
+  \Gamma\bigl( C^{0}(A'') \bigr) \longrightarrow 0
+\]
+est exacte.
+\end{enumerate}
+
+Il suffit d'ailleurs, pour (iii), que le foncteur composé $\Gamma T$ soit
+exact. Sous ces conditions $R_{S}^{\bullet}\Gamma$ est un foncteur
+cohomologique et, en degré $0$, coïncide avec $R^{0}\Gamma = \Gamma$ dès que
+$\Gamma$ est exact à gauche.\footnote{Une demi-page est ici récrite trois fois
+puis biffée d'un trait ; seul le résultat, $R_{S}^{0}\Gamma = \Gamma =
+R^{0}\Gamma$, se lit. La condition (i) est ce que la page appelle ailleurs
+l'injectivité de $\eta$, équivalente à la fidélité de $S$.}
+
+\pagerange{22}{23}
+\subsection*{Les $S$-injectifs sont les facteurs directs des $T(N)$}
+
+La caractérisation esquissée à la fin du lot précédent est ici établie.
+
+D'un côté, tout objet $T(N)$ est $S$-injectif : appliquer $\mathrm{Hom}(-,
+T(N))$ à une suite $S$-exacte revient, par adjonction, à lui appliquer
+$\mathrm{Hom}\bigl( S(-), N \bigr)$, ce qui donne une suite exacte puisque la
+suite image est scindée. La réciproque de cette observation est utile aussi :
+si une suite courte devient exacte après $\mathrm{Hom}(-, T(N))$ pour tout $N$,
+alors elle est $S$-exacte.
+
+De l'autre côté, pour tout $X$ de $C$ la suite
+\[
+  \Sigma_{X} : \quad
+  0 \longrightarrow X \xrightarrow{\;\eta_{X}\;} T\bigl( S(X) \bigr)
+  \longrightarrow X^{*} \longrightarrow 0 ,
+  \qquad X^{*} = \mathrm{coker}\,\eta_{X} ,
+\]
+est $S$-exacte, canoniquement scindée par la coünité.
+
+Il suffit alors de faire $X = M$ : si $M$ est tel que $\mathrm{Hom}(-, M)$ rend
+exacte toute suite de la forme $\Sigma_{X}$, alors en particulier
+$\Sigma_{M}$ est scindée, donc $M$ est facteur direct de $T\bigl( S(M)
+\bigr)$ ; celui-ci étant $S$-injectif, $M$ l'est aussi. D'où :
+
+\textbf{Les objets $S$-injectifs sont exactement les facteurs directs des
+objets $T(N)$.}\footnote{La page écrit « les objets injectifs sont exactement
+les facteurs directs des objets $T(M)$ » ; c'est de $S$-injectivité qu'il
+s'agit, la page entière étant relative. Le haut de la page 23, biffé en croix,
+est une première rédaction du même argument.}
+
+\pagerange{23}{25}
+\subsection*{Morphismes effaçants, complexes droits, résolution canonique}
+
+Trois notions se mettent en place, dont la troisième est le but.
+
+\medskip
+
+\textbf{$S$-résolution.} Une $S$-résolution de $A$ est une résolution
+$A \to X^{\bullet}$ munie, dans le complexe augmenté image par $S$, de
+scissions — c'est-à-dire de scissions des suites exactes
+\[
+  0 \longrightarrow S\bigl( Z^{i}(X^{\bullet}) \bigr) \longrightarrow
+  S(X^{i}) \longrightarrow S\bigl( Z^{i+1}(X^{\bullet}) \bigr)
+  \longrightarrow 0 \qquad (i \geqslant 0) .
+\]
+Ce sont ces scissions, et non le complexe seul, qui font la résolution.
+
+\medskip
+
+\textbf{Morphisme effaçant.} Un morphisme $\eta : X \to Y$ est dit
+\emph{effaçant} si l'image de $\mathrm{Hom}\bigl( S(A), S(X) \bigr)$ dans
+$\mathrm{Hom}\bigl( S(A), S(Y) \bigr)$ est toujours contenue dans l'image de
+$\mathrm{Hom}(A, Y)$. Par adjonction cela revient à dire que $T(\eta) : T(X)
+\to T(Y)$ se factorise par $Y$ :
+\[
+  T(X) \longrightarrow Y \xrightarrow{\;\eta_{Y}\;} T(Y) .
+\]
+La classe des morphismes effaçants est stable par composition à gauche par
+n'importe quoi, et l'unité $\eta_{M} : M \to T(M)$ est toujours
+effaçante.\footnote{C'est la notion d'\emph{effaçabilité} de Grothendieck, ici
+transposée à la classe propre : un foncteur dérivé s'annule sur les objets que
+les morphismes effaçants effacent. Le mot « effaçant » est celui de la page.}
+
+\medskip
+
+\textbf{Complexe droit.} Un \emph{$t$-complexe droit} sur $B$ est un complexe
+$B \to Y^{\bullet}$ muni de morphismes $t : T(B) \to Y^{0}$ et
+$T(Y^{i}) \to Y^{i+1}$ rendant commutatifs les triangles évidents, autrement
+dit d'une factorisation de chaque différentielle à travers $T$.
+
+Ces trois notions servent ensemble à un unique énoncé, qui est le principe
+d'acyclicité de toute la théorie : \emph{une $S$-résolution s'envoie
+canoniquement dans tout $t$-complexe droit, au-dessus d'un morphisme donné des
+augmentations.} La construction est une récurrence, et elle est instructive :
+connaissant $\bar{u}^{n} : X^{n} \to Y^{n}$, la scission $s^{n+1}$ de la
+résolution fournit $X^{n+1} \to T(Y^{n})$, et la structure $t$ du but fournit
+$T(Y^{n}) \to Y^{n+1}$ ; on pose
+\[
+  \bar{u}^{n+1} \;=\; t^{n} \circ T(\bar{u}^{n}) \circ s'^{\,n+1} .
+\]
+Les scissions servent à monter, la structure $t$ à redescendre.
+
+\medskip
+
+\textbf{La résolution canonique.} Elle s'obtient en itérant $C^{0} = TS$ sur
+les conoyaux successifs :
+\[
+  C^{n+1}(A) \;=\; T\Bigl( S\bigl( C^{n}(A) / \mathrm{Im}\,C^{n-1}(A) \bigr)
+  \Bigr) , \qquad C^{-1}(A) = A .
+\]
+C'est un $t$-complexe droit, c'est une $S$-résolution, et c'est un foncteur en
+$A$ : le morphisme $C^{\bullet}(A) \to C^{\bullet}(B)$ attaché à $A \to B$ est
+exactement celui que l'énoncé précédent produit. Les foncteurs dérivés relatifs
+se calculent donc sur elle, sans choix.
+
+\pagerange{26}{27}
+\subsection*{Trois exemples}
+
+\textbf{1. Restriction des scalaires.} Soient $U$ un anneau, $V$ un
+sous-anneau, et $S : \mathbf{Mod}_{U} \to \mathbf{Mod}_{V}$ la restriction des
+scalaires. Elle est exacte et fidèle. Son adjoint à droite est
+$T(B) = \mathrm{Hom}_{V}(U, B)$, la coünité étant l'évaluation en $1$ :
+\[
+  \mathrm{Hom}_{V}\bigl( S(A), B \bigr) \;\simeq\;
+  \mathrm{Hom}_{U}\bigl( A, \mathrm{Hom}_{V}(U, B) \bigr) .
+\]
+Les suites $S$-exactes sont celles qui se scindent sur $V$, et les $U$-modules
+$S$-injectifs sont les facteurs directs des $\mathrm{Hom}_{V}(U, B)$. C'est
+l'algèbre homologique relative des extensions d'anneaux, celle de
+Hochschild.\footnote{Hochschild, \emph{Relative homological algebra}, 1956. Le
+manuscrit ne le nomme pas.}
+
+\textbf{2. L'autre côté.} La même restriction des scalaires admet aussi un
+adjoint à \emph{gauche}, $A \mapsto U \otimes_{V} A$, et l'on se retrouve dans
+la situation duale : les objets $S$-projectifs sont les facteurs directs des
+$U \otimes_{V} A$, avec l'unité $a \mapsto 1 \otimes a$, qui est
+$V$-linéaire, et la coünité $u \otimes a \mapsto ua$, qui est $U$-linéaire et
+surjective.
+
+\textbf{3. Le foncteur de Godement.} Soit $C$ la catégorie des faisceaux de
+$\mathcal{O}$-modules sur un espace $X$, et $\widetilde{C} = \prod_{x \in X}
+\mathbf{Mod}_{\mathcal{O}_{x}}$ le produit des catégories de modules sur les
+fibres. Le foncteur $S$ qui à un faisceau associe la famille de ses fibres est
+exact et fidèle, et son adjoint à droite est le foncteur qui à une famille
+associe le faisceau des sections discontinues. Le composé $TS$ est exactement
+le foncteur $C^{0}$ de Godement, et la résolution canonique ci-dessus est la
+résolution flasque canonique.
+
+C'est le troisième exemple qui explique le titre du texte, et l'ordre dans
+lequel il a été écrit : la construction générale est l'abstraction de ce
+cas-là.
+
+\pagerange{28}{40}
+\section*{Notes pour SGA 4, exposé IX (pages 28 à 40)}
+
+Une chemise, page 28, porte « Remarques » et « SGA 4 IX ». Ce qui suit n'est
+pas une rédaction de l'exposé mais un cahier de préparation : plan, énoncés en
+sténographie, dépendances. Les feuillets ne sont d'ailleurs pas dans l'ordre de
+lecture — la page 37 se poursuit page 39, et la page 38 porte la proposition
+dont la page 36 tire le corollaire.
+
+Le sujet de l'exposé est la \emph{constructibilité} : parmi les faisceaux
+étales sur un schéma, reconnaître ceux qui sont localement constants à fibres
+finies sur les morceaux d'une stratification finie. C'est la classe de
+faisceaux sur laquelle les théorèmes de finitude de la cohomologie étale
+peuvent être espérés.
+
+\pagerange{30}{30}
+\subsection*{Le plan, et les huit conditions de constructibilité}
+
+L'exposé est prévu en trois numéros : sorite des faisceaux de torsion,
+faisceaux localement constants, faisceaux constructibles. Le second numéro doit
+donner les propriétés d'exactitude de la notion.
+
+Le cœur de la page est une liste de huit conditions, présentées comme
+équivalentes, dont voici celles que la lecture soutient :
+
+\begin{enumerate}
+\item[(i)] l'image inverse de $F$ sur $X^{\mathrm{red}}$ est localement
+constante à fibres finies ;
+\item[(ii)] il existe $f : X' \to X$ localement de présentation finie et
+surjectif tel que $f^{*}(F)$ soit localement constant à fibres finies ;
+\item[(iii)] $X$ étant quasi-compact et quasi-séparé, il existe une partition
+finie de $X$ en localement fermés constructibles $X_{i}$ telle que
+$F|_{X_{i}}$ soit localement constant à fibres finies ;
+\item[(iv)] $X$ étant quasi-compact et quasi-séparé, $F$ est le noyau d'une
+double flèche $F_{1} \rightrightarrows F_{0}$ entre faisceaux d'un type que la
+page ne livre pas ;
+\item[(v)] $X$ étant quasi-compact et quasi-séparé, une condition portant sur
+les faisceaux représentables par des schémas étales de présentation finie sur
+$X$ ;
+\item[(vi)] $X$ étant quasi-compact et quasi-séparé, $F$ admet une filtration
+finie à quotients de la forme $i_{!}(G)$, avec $i : Y \to X$ une immersion
+constructible ;
+\item[(vii)] une variante de (vi) faisant intervenir les $p_{*}(G_{X'})$ pour
+$X'$ fini de présentation finie sur $X$ ;
+\item[(viii)] pour $A = \mathbf{Z}$, faisceaux de torsion, $X$ quasi-compact
+quasi-séparé : $F$ est réunion de facteurs directs de faisceaux filtrés par des
+$p_{*}\bigl( i_{!}(\mathbf{Z}/n\mathbf{Z})_{U} \bigr)$, où $p : X' \to X$ est
+fini, $U$ un ouvert de $X'$ et $i$ son immersion.
+\end{enumerate}
+
+Les conditions (iv), (v) et (vii) sont trop lacunaires pour être rétablies, et
+on ne les a pas rétablies.\footnote{Les marques d'illisibilité y sont
+littérales : la page est écrite très petit et très vite. Ce qui est donné
+ci-dessus est ce que la transcription soutient, et rien de plus. La marge porte
+en outre une note de rédaction : penser aussi aux faisceaux de $A$-modules et à
+la $A$-constructibilité, et commencer la rédaction par la $\mathbf{Q}$- et la
+$\Delta$-constructibilité.}
+
+Suivent, en sténographie, les rubriques restantes : la définition des
+constructibles de type fini ; la stabilité par limites inductives et
+projectives, qui exige que $A$ soit noethérien ; la stabilité par facteurs
+directs dans le cas noethérien ; la stabilité par image directe ; et la
+stabilité par morphisme fini ou quasi-fini.
+
+\pagerange{31}{31}
+\subsection*{Pureté}
+
+\textbf{Proposition.} Soit $X$ un préschéma localement noethérien régulier.
+Les conditions suivantes sont équivalentes :
+
+\begin{enumerate}
+\item[(i)] pour tout sous-préschéma régulier $Y$ de $X$ et tout sous-préschéma
+régulier fermé $Z$ de $Y$, purement de codimension $d$, on a
+$H^{i}_{Z}(A_{Y}) = 0$ pour $i \neq 2d$ ;
+\item[(ii)] la même chose pour $d = 1$ ;
+\item[(iii)] la même chose lorsque $Z$ est un diviseur.
+\end{enumerate}
+
+L'implication $(i) \Rightarrow (ii)$ est triviale ; $(ii) \Rightarrow (i)$ se
+fait par dévissage sur la codimension, en se ramenant au cas $d = 1$ où
+$H^{2}_{Z}(A_{Y})$ est localement isomorphe à $A_{Z}$. C'est le théorème de
+pureté cohomologique absolue, sous la forme d'une équivalence entre l'énoncé
+général et le cas des diviseurs.\footnote{La page biffe, dans (i), la clause
+« $H^{2d}_{Z}(A_{Y})$ localement isomorphe à $A_{Y}$ » : c'est
+$A_{Z}$ qui est en jeu, et c'est bien $A_{Z}$ qu'elle écrit plus bas dans la
+démonstration. La démonstration de $(iii) \Rightarrow (ii)$ n'est pas
+lisible.}
+
+\pagerange{32}{32}
+\subsection*{La suite du plan, et le Leitfaden}
+
+Trois propositions sont annoncées, en sténographie : écrire un faisceau
+quelconque comme limite inductive, comparer un constructible à une limite
+inductive de constructibles, et comparer les constructibles sur une limite
+projective de préschémas (proposition e) ; caractériser la constructibilité par
+la locale constance et deux autres propriétés (proposition f) ; caractériser
+les faisceaux localement constants en $A$-modules (proposition g). L'exposé
+doit se terminer par ce qui est propre aux courbes.
+
+La numérotation des paragraphes est ensuite arrêtée — torseurs et faisceaux de
+torsion constructibles, complexes de faisceaux, Kummer et Artin--Schreier,
+dimension cohomologique des courbes algébriques — puis corrigée sur place :
+une accolade et une flèche intervertissent les numéros 4 et 5.
+
+La page porte enfin un \emph{Leitfaden}, c'est-à-dire l'arbre des dépendances
+entre numéros :
+
+\begin{tikzcd}[column sep=small, row sep=small, nodes={font=\scriptsize}]
+ & 1 \arrow[d, no head] & \\
+ & 2 \arrow[dl, no head] \arrow[d, no head] \arrow[dr, no head] & \\
+5 & 3 \arrow[d, no head] & 6 \arrow[d, no head] \\
+ & 4 & 7
+\end{tikzcd}
+
+\footnote{La page en porte deux croquis ; le premier, surchargé puis biffé, ne
+se lit pas. Celui-ci est le second. Les traits sont sans pointe sur la page :
+ce sont des dépendances, non des morphismes.}
+
+\pagerange{33}{33}
+\subsection*{Un critère sur les fibres géométriques}
+
+\textbf{Énoncé.} Soient $f : X \to Y$ un morphisme, $Y$ localement noethérien,
+$F$ un faisceau de $\ell$-torsion sur $Y$, et
+$\xi \in H^{n}\bigl( X, f^{*}(F) \bigr)$. Pour que $\xi$ provienne de
+$H^{n}(Y, F)$, il faut et il suffit que pour tout $y \in Y$ la classe induite
+$\xi_{\bar{y}} \in H^{n}(X_{\bar{y}}, F_{\bar{y}})$ sur la fibre géométrique
+soit nulle.
+
+\textbf{Corollaire.} $f$ étant propre et acyclique en degrés $< n$, pour qu'il
+soit \emph{globalement} acyclique pour $\ell$ il faut et il suffit que ses
+fibres géométriques le soient.
+
+La démonstration part de l'hypothèse d'acyclicité en degrés intermédiaires,
+\[
+  R^{q} f_{*}\bigl( f^{*}(F) \bigr) = 0 \quad (0 < q \leqslant n-1) ,
+  \qquad R^{0} f_{*}\bigl( f^{*}(G) \bigr) \simeq G ,
+\]
+d'où, par la suite spectrale de Leray, la suite exacte
+\[
+  \cdots \longrightarrow H^{n}(Y, F) \longrightarrow H^{n}(X, f^{*}F)
+  \longrightarrow H^{0}\bigl( Y, R^{n} f_{*}(f^{*}F) \bigr) ,
+\]
+qui ramène l'énoncé à ceci : une section de $R^{n} f_{*}\bigl( f^{*}(F)
+\bigr)$ nulle sur chaque fibre géométrique est nulle. C'est vrai parce que les
+fibres du faisceau $R^{n}f_{*}$ se calculent sur les fibres géométriques. La
+page s'arrête sur « on est ramené ».\footnote{Une note de la page signale
+qu'il faut supposer $n \geqslant 1$, le cas $n = 0$ demandant un énoncé
+séparé.}
+
+\pagerange{35}{37}
+\subsection*{Comparer deux foncteurs cohomologiques}
+
+C'est le lemme technique de l'exposé XII 6.2, et le seul endroit de la liasse
+où l'argument est écrit en entier.
+
+Soient $T^{\bullet}$ et $T'^{\bullet}$ deux foncteurs cohomologiques et
+$\varphi^{\bullet} : T^{\bullet} \to T'^{\bullet}$ un morphisme. À une suite
+exacte courte $0 \to A \to B \to C \to 0$ correspond l'échelle à cinq termes
+
+\begin{tikzcd}[column sep=small, row sep=small, nodes={font=\scriptsize}]
+T^{i-1}(B) \arrow[r] \arrow[d] & T^{i-1}(C) \arrow[r] \arrow[d] &
+T^{i}(A) \arrow[r] \arrow[d] & T^{i}(B) \arrow[r] \arrow[d] &
+T^{i}(C) \arrow[d] \\
+T'^{i-1}(B) \arrow[r] & T'^{i-1}(C) \arrow[r] & T'^{i}(A) \arrow[r] &
+T'^{i}(B) \arrow[r] & T'^{i}(C)
+\end{tikzcd}
+
+\footnote{Le quatrième terme de la ligne du haut est d'une lecture douteuse :
+la transcription y lit plutôt $\varphi^{i}(B)$, mais c'est $T^{i}(B)$
+qu'exige la suite exacte longue, et c'est ce qui est écrit ici.} et le lemme
+des cinq, sous ses diverses formes, donne les quatre variantes que la page
+énumère :
+
+\begin{enumerate}
+\item[a)] si $\varphi^{i}$ est un isomorphisme pour $i \leqslant n-1$ et un
+monomorphisme pour $i = n$, et si $\varphi^{n}$ est un isomorphisme sur une
+famille de cogénérateurs, alors $\varphi^{n}$ est un isomorphisme partout ;
+\item[b)] si $\varphi^{i}$ est un isomorphisme pour $i \leqslant n$ et
+$\varphi^{n+1}$ un monomorphisme sur une famille de cogénérateurs, alors
+$\varphi^{n+1}$ est un monomorphisme partout ;
+\item[c)] si les $\varphi^{i}$ sont des épimorphismes, $\varphi^{n+1}$ est un
+monomorphisme dès que $T'^{n+1}$ est effaçable ;
+\item[c$'$)] si les $T'^{i}$ sont effaçables pour $i > i_{0}$ et $\varphi^{i}$
+épimorphe pour $i \leqslant n$, alors $\varphi^{i}$ est un isomorphisme pour
+$i \leqslant n$ et un épimorphisme en degré $n+1$.
+\end{enumerate}
+
+Le point de méthode vient ensuite, et c'est lui qui vaut la peine. Grothendieck
+donne un nom aux deux propriétés d'un objet $A$ qui reviennent :
+\[
+  I_{n}(A) : \ \varphi^{i}(A) \text{ isomorphisme pour } i \leqslant n ;
+  \qquad
+  J_{n}(A) : \ \varphi^{i}(A) \text{ isomorphisme pour } i < n,
+  \text{ monomorphisme en } i = n .
+\]
+Elles s'enchaînent : $I_{n} \Rightarrow J_{n}$ ; $I_{n}$ pour tout $A$ plus
+$J_{n}$ sur une famille donne $J_{n}$ pour tout $A$ ; $J_{n}$ pour tout $A$
+plus $I_{n+1}$ sur une famille donne $I_{n+1}$ pour tout $A$. D'où la
+conclusion : \emph{pour vérifier $I_{n}$ ou $J_{n}$ partout, il suffit de le
+vérifier en degrés $\leqslant n$ sur une famille de générateurs.} C'est le
+dévissage sous sa forme nue, et c'est le geste que la liasse entière
+répète.\footnote{La page 37 se poursuit page 39 ; elle s'interrompt sur une
+remarque, en partie illisible, disant que dans les questions de dimension
+cohomologique il faut « démouler » la question et chercher des conditions pour
+qu'un $T^{i}$ soit nul pour tout argument. C'est ce que la page 39 fait.}
+
+\pagerange{36}{38}
+\subsection*{Une classe de morphismes, et le lemme de Chow}
+
+La proposition est page 38, son corollaire page 36 ; on les rétablit dans
+l'ordre.
+
+\textbf{Proposition.} Soit $M$ un ensemble de morphismes de préschémas
+localement noethériens. On suppose :
+
+\begin{enumerate}
+\item[a)] l'appartenance à $M$ est locale sur la base ;
+\item[b)] $M$ est stable par composition ;
+\item[c)] si $g : \mathbf{P}^{r}_{Y} \to Y$ est la projection canonique,
+$X' = \mathbf{P}^{1}_{Y} \times \mathbf{P}^{r-1}_{Y}$ muni du morphisme
+birationnel bien connu $f : X' \to X = \mathbf{P}^{r}_{Y}$, et si $gf \in M$,
+alors $g \in M$ ;
+\item[d)] si $f$ est une immersion fermée, $gf$ simple et $gf \in M$, alors
+$g \in M$ ; en outre $\mathbf{P}^{i}_{Y} \to Y$ et $\mathrm{id}_{Y}$ sont dans
+$M$.
+\end{enumerate}
+
+Alors tout morphisme projectif et simple $f : X \to Y$ est dans
+$M$.\footnote{La condition d) est portée sur la page avec une conclusion
+« $gf \in M$ » qui répète l'hypothèse ; c'est $g \in M$ qu'il faut lire, sans
+quoi la condition est vide et la récurrence qui suit ne dit rien.}
+
+La démonstration est une récurrence sur $r$ : a), b), c) donnent que les
+$\mathbf{P}^{r}_{Y} \to Y$ sont dans $M$, et d) descend de là à tout
+sous-préschéma fermé simple de $\mathbf{P}^{r}_{Y}$, donc à tout projectif
+simple.
+
+\textbf{Corollaire.} Ajoutons la condition suivante :
+
+\begin{enumerate}
+\item[c$'$)] soient $X' \xrightarrow{f} X \xrightarrow{g} Y$ des morphismes
+propres, $X_{0}$ un sous-préschéma fermé de $X$, $U = X - X_{0}$ et
+$U' = f^{-1}(U)$. Si $U' \to U$ est un isomorphisme et si $X_{0} \to Y$ et
+$gf : X' \to Y$ sont dans $M$, alors $g \in M$.\footnote{La page conclut
+« alors $f \in M$ » ; c'est $g$ que l'argument produit et que la suite emploie
+— $f$ est le morphisme birationnel de dévissage, il n'a pas à être dans $M$.}
+\end{enumerate}
+
+Alors tout morphisme \emph{propre} est dans $M$. En effet c$'$) implique c),
+donc tout projectif est dans $M$ ; et le lemme de Chow, qui domine tout
+morphisme propre par un morphisme projectif birationnel au-dessus d'un ouvert
+dense, permet de dévisser le cas propre sur le cas projectif au moyen de
+c$'$).
+
+Cette proposition n'est pas de la géométrie : c'est un critère formel, et il
+sert chaque fois qu'on veut établir une propriété pour tous les morphismes
+propres sans les regarder.
+
+\pagerange{39}{40}
+\subsection*{Dévissage des faisceaux de $\ell$-torsion constructibles}
+
+La page 39 achève la page 37 et applique le principe.
+
+Deux énoncés d'abord, qui disent quels dévissages une annulation supporte : si
+$T^{i}(B) = 0$ alors $T^{i}(A) = 0$ pour tout facteur direct $A$ de $B$ ; et si
+$A$ a une filtration finie dont les quotients $A_{\alpha}$ vérifient
+$T^{i}(A_{\alpha}) = 0$, alors $T^{i}(A) = 0$.
+
+De là, pour un foncteur cohomologique sur les faisceaux de $\ell$-torsion
+\emph{constructibles} sur $X$, il suffit de vérifier l'annulation sur les
+faisceaux de la forme
+\[
+  i_{!}\Bigl( p_{*}\bigl( (\mathbf{Z}/n\mathbf{Z})_{Y'} \bigr) \Bigr)
+  \;=\; q_{*}\, j_{!}\bigl( (\mathbf{Z}/n\mathbf{Z})_{Y'} \bigr) ,
+\]
+où $Y$ est un sous-préschéma constructible de $X$, $Y'$ un revêtement étale
+fini de $Y$ de degré constant, et où le carré
+
+\begin{tikzcd}
+Y' \arrow[r, hook] \arrow[d, "p"'] & X' \arrow[d, "q"] \\
+Y \arrow[r, hook, "i"'] & X
+\end{tikzcd}
+
+est celui des morphismes canoniques. Autrement dit : toute sous-catégorie
+pleine des faisceaux de $\ell$-torsion constructibles, stable par facteurs
+directs et par extension et contenant ces faisceaux-là, est la catégorie
+entière. Et si l'on veut de plus la stabilité par sous-objet — c'est-à-dire une
+sous-catégorie \emph{épaisse} — il suffit alors de vérifier que les
+$q_{*}\bigl( (\mathbf{Z}/n\mathbf{Z})_{X'} \bigr)$ y sont, pour $X'$ fini sur
+$X$, et l'on peut prendre $X'$ intègre, voire intègre normalisé si $X$ est
+noethérien séparé.
+
+La page 40, entièrement barrée en croix, esquisse un calcul de $R\,h^{!}$ pour
+une composée $X_{0} \xrightarrow{g} Y \xrightarrow{j} X$ ; elle est trop
+lacunaire pour être rendue.\footnote{Chacun des deux termes de la seule formule
+lisible y est suspendu, par un signe $\wr$, à une seconde ligne illisible. On
+ne l'a pas reconstituée.}
+\pagerange{41}{42}
+\section*{Deux feuillets sur SGA 4, exposé XII (pages 41 et 42)}
+
+La page 41 est un crayon très pâle, illisible d'un bout à l'autre par larges
+plages ; ce qu'on en tire est une remarque de rédaction, non un énoncé. Elle
+dit que dans l'exposé XII les hypothèses de quasi-compacité et de
+quasi-séparation servent moins qu'il n'y paraît : pour l'équivalence des
+conditions de 6.5 entre elles, et dans le lemme 6.7, on peut s'en passer,
+sauf pour un point de passage à la limite sur les faisceaux de
+$\mathbf{Z}/n\mathbf{Z}$-modules, dont l'auteur pense d'ailleurs qu'il est
+inutile lui aussi.\footnote{Le reste de la page — sur ce que devient
+l'existence dans une sous-catégorie, et sur un renvoi à XIV 5.2 — n'est pas
+lisible et n'a pas été reconstitué.}
+
+La page 42 est un feuillet dactylographié de l'exposé, dont la partie (iii) est
+barrée de deux traits. Au bas, de la main de l'auteur, l'instruction pour la
+refaire : adapter la démonstration de XII 8.3 (iii), ou se ramener au cas où
+$\pi_{0}$ est \emph{surjectif} en remplaçant $\overline{X}$ par
+$\overline{X} \amalg Y$.\footnote{Le symbole que la transcription lit
+$\pi_{0}$ est d'une lecture incertaine.}
+
+\pagerange{43}{53}
+\section*{Foncteurs localisants et catégories de fractions (pages 43 à 53)}
+
+La chemise, page 43, porte le titre. Les feuillets ne sont pas dans l'ordre :
+la page 44 porte les numéros 3) et 4), la page 45 les numéros 2) et 1). On les
+rétablit ici dans l'ordre logique.
+
+Le cadre est le suivant. $A$ est une catégorie abélienne, $C \subset A$ une
+sous-catégorie \emph{épaisse} — pleine, et stable par sous-objets, quotients et
+extensions — et $T : A \to A/C$ le foncteur de passage au quotient. Les flèches
+que $T$ rend inversibles sont les \emph{$C$-isomorphismes} : celles dont le
+noyau et le conoyau sont dans $C$. La question est l'existence d'un adjoint à
+droite $S$ de $T$, appelé \emph{foncteur section}.
+
+\pagerange{44}{45}
+\subsection*{Le foncteur section et les objets $C$-fermés}
+
+Trois listes de conditions équivalentes, dont la seconde est la plus utile.
+
+\medskip
+
+\textbf{Les objets que la localisation voit fidèlement.} Soit $T \dashv S$ une
+adjonction quelconque et $x$ un objet de $A$. Si $S$ est pleinement fidèle, les
+conditions suivantes sont équivalentes :
+
+\begin{enumerate}
+\item[a)] $x$ est isomorphe à un objet de la forme $S(y)$ ;
+\item[b)] l'unité $x \to ST(x)$ est un isomorphisme ;
+\item[c)] pour tout $x'$, l'application
+$\mathrm{Hom}(x', x) \to \mathrm{Hom}(Tx', Tx)$ est bijective.
+\end{enumerate}
+
+L'implication b) $\Rightarrow$ a) ne demande rien de $S$ ; c'est la réciproque
+qui a besoin de la pleine fidélité. On dit alors que $x$ est \emph{$C$-fermé},
+ou \emph{local}, ou \emph{libre au-dessus de $Tx$} — les trois mots sont dans
+le dossier.
+
+\medskip
+
+\textbf{Quand $S$ est-il pleinement fidèle ?} Pour une adjonction $T \dashv S$
+quelconque, il y a équivalence entre :
+
+\begin{enumerate}
+\item[a)] $S$ est pleinement fidèle ;
+\item[b)] la coünité $TS \to \mathrm{id}$ est un isomorphisme ;
+\item[c)] $T$ est un foncteur de passage au quotient, c'est-à-dire : en notant
+$M$ l'ensemble des flèches de $A$ que $T$ rend inversibles, le foncteur induit
+$A[M^{-1}] \to B$ est une équivalence.
+\end{enumerate}
+
+C'est la caractérisation d'une \emph{localisation réflexive} : une adjonction
+dont la coünité est inversible, autrement dit une monade idempotente
+$\Lambda = ST$.\footnote{Le manuscrit ne prononce pas le mot ; il écrit
+$Lx$ pour $ST x$ page 45, et $\Lambda$ page 46.}
+
+\medskip
+
+\textbf{L'existence du foncteur section.} Enfin, dans le cas $B = A/C$, les
+conditions suivantes sur $C$ sont équivalentes :
+
+\begin{enumerate}
+\item[a)] $T$ admet un adjoint à droite $S$ ;
+\item[b)] tout $x$ de $A$ a un plus grand sous-objet appartenant à $C$, et si
+ce sous-objet est nul, $x$ se plonge dans un objet $C$-fermé ;
+\item[c)] tout $x$ de $A$ admet un $C$-isomorphisme $x \to \widetilde{x}$ vers
+un objet $C$-fermé.
+\end{enumerate}
+
+Ce $\widetilde{x}$ est alors unique à isomorphisme unique près, et n'est autre
+que $ST(x)$.
+
+\pagerange{46}{47}
+\subsection*{Deux sous-catégories localisantes emboîtées}
+
+On se donne maintenant $C$ une catégorie de Grothendieck — abélienne, à limites
+inductives exactes, avec générateurs — et deux sous-catégories
+$C'' \subset C' \subset C$ \emph{localisantes}, c'est-à-dire épaisses et
+stables par limites inductives.
+
+À chacune est attaché un foncteur de torsion :
+\[
+  \Gamma'(F) = \text{le plus grand sous-objet de } F \text{ appartenant à }
+  C' , \qquad \Gamma''(F) = \text{de même pour } C'' ,
+\]
+et l'on pose $(\Gamma'/\Gamma'')(F) = \Gamma'(F)/\Gamma''(F)$. Ces foncteurs se
+définissent aussi comme adjoints à droite des inclusions, ce que la marge de la
+page 46 note : $\Gamma' = i'^{\,!}$, $\Gamma'' = i''^{\,!}$.\footnote{C'est la
+notation que le manuscrit se recommande à lui-même en marge, et c'est celle
+qu'on emploiera plus bas, page 48. Elle a l'avantage de rendre l'adjonction
+visible : $\mathrm{Hom}_{C}\bigl( i'_{*}(x'), x \bigr) \simeq
+\mathrm{Hom}_{C'}\bigl( x', i'^{\,!}(x) \bigr)$.}
+
+D'autre part, la localisation de $C'$ le long de $C''$ donne
+$T : C' \to C'/C''$ avec son foncteur section $S$, d'où
+$\Lambda = ST : C' \to C'$ et l'unité $\mathrm{id}_{C'} \to \Lambda$. Cette
+dernière est caractérisée par deux propriétés : $x' \to \Lambda(x')$ est un
+$C''$-isomorphisme, et $\Lambda(x')$ est $C''$-fermé.
+
+\textbf{Lemme.} $\Gamma'$, $\Gamma''$ et $\Lambda$ existent, et $\Gamma'$
+commute aux sous-objets : si $x \hookrightarrow y$, le plus grand sous-objet de
+$x$ dans $C''$ est $x \cap y''$, où $y''$ est celui de $y$. D'où un
+monomorphisme naturel
+\[
+  \Gamma'(x)/\Gamma''(x) \hookrightarrow
+  R^{0}(\Gamma'/\Gamma'')(x) .
+\]
+
+Vient alors la question, et elle est intéressante parce que l'auteur y répond
+lui-même, dans la marge, par la négative. Le morphisme naturel
+\[
+  R^{0}(\Gamma'/\Gamma'')(x) \longrightarrow \Lambda\,\Gamma'(x)
+\]
+— qui existe parce que $\Lambda\Gamma'$ est exact à gauche — est-il un
+isomorphisme ? \textbf{Non, pas en général.} Il l'est lorsque les objets
+injectifs de $C''$ sont encore injectifs dans $C$.\footnote{La page porte
+« \textbf{Prop.} C'est là un isom.\ (?) », et en marge, d'une autre encre :
+« Faux en général ! OK si les injectifs de $C''$ sont injectifs dans $C$. »
+On a écrit l'énoncé corrigé. C'est exactement l'hypothèse qui reparaît page 48
+sous le numéro (i), et le lien n'est pas fortuit : c'est la même condition qui
+gouverne tout ce qui suit.}
+
+Sous cette hypothèse, on obtient : $R^{0}(\Gamma'/\Gamma'')(x)$ est
+$C''$-fermé, et $\Gamma'(x)/\Gamma''(x) \to R^{0}(\Gamma'/\Gamma'')(x)$ est un
+$C''$-isomorphisme. Et sans hypothèse aucune, si $x$ est injectif, alors
+$\Gamma'(x)/\Gamma''(x)$ est déjà $C''$-fermé.
+
+\pagerange{48}{50}
+\subsection*{Quand le quotient conserve les injectifs}
+
+Cinq conditions sont mises en regard, pour une sous-catégorie localisante $C$
+d'une catégorie abélienne $A$, avec $i_{*} : C \to A$ l'inclusion et
+$i^{!}$ son adjoint à droite :
+
+\begin{enumerate}
+\item[(i)] $i_{*}$ transforme les injectifs en injectifs ;
+\item[(ii)] pour tout injectif $x$ de $A$, le plus grand sous-objet de $x$
+appartenant à $C$ est encore injectif dans $A$ ;
+\item[(iii)] pour tout objet de $C$, une enveloppe injective dans $A$ est dans
+$C$ — autrement dit $C$ est stable par enveloppes injectives ;
+\item[(iv)] le morphisme naturel $R^{0}\bigl( \mathrm{id}/i_{*}i^{!} \bigr) \to
+ST$ est un isomorphisme, c'est-à-dire : pour $x$ injectif dans $A$, le quotient
+$x/i_{*}i^{!}(x)$ est $C$-fermé ;
+\item[(v)] $T : A \to A/C$ transforme les injectifs en injectifs.
+\end{enumerate}
+
+Le lemme qui les relie est celui de la page 50 : \emph{si $x$ est dans $C$ et
+$\overline{x}$ une enveloppe injective de $x$ dans $A$, alors
+$i^{!}(\overline{x})$ est une enveloppe injective de $x$ dans $C$} ; d'où
+que tout injectif de $C$ est, à isomorphisme près, de la forme $i^{!}(y)$ avec
+$y$ injectif dans $A$.
+
+De là (i) $\Leftrightarrow$ (ii) $\Leftrightarrow$ (iii). La première
+implication tient à ce que $i^{!}$, adjoint à droite d'un foncteur exact,
+conserve les injectifs. La seconde se lit sur l'enveloppe : $i_{*}i^{!}
+(\overline{x})$ est un objet de $C$ contenant $x$ et extension essentielle de
+$x$, donc son enveloppe injective dans $C$ ; si (ii) vaut, il est injectif dans
+$A$, ce qui est (iii). Enfin (ii) $\Rightarrow$ (iv), parce que
+$i_{*}i^{!}(x)$ est $C$-fermé dans $x$ lorsque $x$ est
+injectif.\footnote{Le manuscrit écrit, dans (iv), « $x/x'$ est $C''$-fermé »,
+avec le double prime des pages précédentes, alors que la page n'a introduit que
+$C$ ; on a écrit $C$-fermé. Les implications (iv) $\Rightarrow$ (v) et le
+retour ne sont pas sur les pages conservées.}
+
+\pagerange{52}{53}
+\subsection*{L'existence du foncteur section, d'après Gabriel}
+
+Les pages 52 et 53 reprennent la liste des conditions de $C$-fermeture, dans le
+cadre général d'une catégorie de fractions, et en donnent une cinquième forme :
+$x$ est dans l'image essentielle de $S$, c'est-à-dire isomorphe à un objet
+$S(z)$.\footnote{La page écrit ici « isomorphe à un objet de la forme $Tz$ » ;
+c'est $Sz$, l'image essentielle de $S$ étant en jeu, et c'est ce que la ligne
+précédente annonce.} Dans le cas abélien, la condition prend la forme
+concrète : tout sous-objet de $x$ appartenant à $C$ est nul, et $x$ est facteur
+direct dans tout $y \supset x$ tel que $y/x$ soit dans $C$.
+
+\textbf{Corollaire 1.} Pour que l'adjoint $S$ existe, il faut et il suffit que
+tout $x$ de $A$ admette une flèche $x \to x'$ telle que $Tx \to Tx'$ soit un
+isomorphisme et que $x'$ soit $C$-fermé.
+
+\textbf{Corollaire 2 (Gabriel).} Dans le cas $A$ abélienne, $B = A/C$ avec $C$
+épaisse, $S$ existe si et seulement si :
+
+\begin{enumerate}
+\item[a)] tout $x$ de $A$ admet un plus grand sous-objet appartenant à
+$C$ ;\footnote{La page écrit « $\forall x \in \mathrm{Ob}\,C$ » ; c'est
+$\mathrm{Ob}\,A$ qu'il faut lire, la condition étant vide sinon.}
+\item[b)] si ce sous-objet est nul, $x$ se plonge dans un objet $C$-fermé.
+\end{enumerate}
+
+Et lorsque $C$ est stable par limites inductives — la condition a) étant alors
+automatique — le foncteur $T$ transforme les injectifs en
+injectifs.\footnote{C'est le corollaire 3 de Gabriel, auquel les pages 47, 48
+et 50 renvoient. Gabriel, \emph{Des catégories abéliennes}, 1962. La condition
+a) est ce qu'on appelle aujourd'hui l'existence d'une théorie de torsion
+héréditaire attachée à $C$.}
+
+\pagerange{54}{60}
+\section*{Le théorème de recollement d'Artin et Cartier (pages 54 à 60)}
+
+La chemise, page 54, porte : « Théorèmes de descente de M. Artin --
+P. Cartier », et un pointage d'archiviste de onze pages, qui déborde ce lot :
+le texte se poursuit jusqu'à la page 68.
+
+\medskip
+
+\noindent\textbf{Une convention, à lire avant les formules.} Le manuscrit
+prend, pour son exemple directeur, un espace $X$, un ouvert $U$ et le fermé
+complémentaire $Y = X - U$, et il nomme
+\[
+  i \;\longleftrightarrow\; \text{l'ouvert } U , \qquad
+  j \;\longleftrightarrow\; \text{le fermé } Y .
+\]
+\emph{C'est l'inverse exact de l'usage d'aujourd'hui}, où $j$ désigne l'ouvert
+et $i$ le fermé. On a gardé ses lettres, pour que cette lecture puisse être
+posée à côté de la transcription formule par formule ; le lecteur qui vient de
+la littérature moderne doit donc échanger les deux lettres, et non pas les
+lire.\footnote{Le choix est délibéré et il n'y en a pas de bon. Renommer aurait
+donné des formules d'apparence familière et de sens inverse, ce qui est le pire
+des deux dangers. La cohérence interne du manuscrit, elle, est parfaite : avec
+son $j$ fermé, $j_{!} = j_{*}$, et avec son $i$ ouvert, $i^{*} = i^{!}$, ce que
+la page 58 écrit en toutes lettres.}
+
+\pagerange{56}{57}
+\subsection*{Les quatre conditions et la catégorie des triples}
+
+Soient $C$, $C'$, $C''$ trois catégories et
+\[
+  f^{*} = (i^{*}, j^{*}) : C \longrightarrow C' \times C'' = D
+\]
+un foncteur. On suppose que $i^{*}$ et $j^{*}$ ont des adjoints à droite
+$i_{*}$, $j_{*}$ ; alors $f^{*}$ en a un aussi, à savoir
+$f_{*}(G,H) = i_{*}(G) \times j_{*}(H)$, comme le montre le calcul immédiat
+\[
+  \mathrm{Hom}\bigl( F, f_{*}(G,H) \bigr) \simeq
+  \mathrm{Hom}(i^{*}F, G) \times \mathrm{Hom}(j^{*}F, H) \simeq
+  \mathrm{Hom}\bigl( f^{*}F, (G,H) \bigr) .
+\]
+
+On pose $\varphi = j^{*} i_{*} : C' \to C''$ — le foncteur qui, d'un objet sur
+l'ouvert, produit son « bord » sur le fermé — et l'on suppose de plus :
+
+\begin{enumerate}
+\item[(a)] $i_{*}$ et $j_{*}$ sont pleinement fidèles, c'est-à-dire
+$i^{*}i_{*} \simeq \mathrm{id}$ et $j^{*}j_{*} \simeq \mathrm{id}$ ;
+\item[(b)] $i^{*}j_{*}(H)$ est l'objet final de $C'$ pour tout $H$ — ce qui
+dit que ce qui vit sur le fermé ne se voit pas sur l'ouvert ;
+\item[(c)] les noyaux et conoyaux existent dans $C$, et $f^{*}$ y commute ;
+\item[(d)] $f^{*}$ est conservatif : si $i^{*}\lambda$ et $j^{*}\lambda$ sont
+des isomorphismes, $\lambda$ en est un.
+\end{enumerate}
+
+\textbf{Théorème (M. Artin -- P. Cartier).} Sous ces conditions, le foncteur
+naturel
+\[
+  C \longrightarrow K
+\]
+est une \emph{équivalence de catégories}, où $K$ est la catégorie des triples
+$(G, H, u)$ avec $G$ dans $C'$, $H$ dans $C''$ et
+$u \in \mathrm{Hom}\bigl( H, \varphi(G) \bigr)$.
+
+C'est le même mécanisme que dans tout le dossier : $f^{*}$ perd de
+l'information, $\varphi$ mesure ce qui a été perdu, et un objet de $C$ est un
+objet de $C' \times C''$ muni d'une donnée de recollement. La condition (b) est
+ce qui rend la donnée de recollement aussi simple qu'une seule flèche : elle
+force $f^{*}f_{*}(G,H) \simeq \bigl( G, \varphi(G) \times H \bigr)$, et les
+recollements possibles sont alors paramétrés par un $u : H \to \varphi(G)$
+arbitraire.\footnote{Dans le cas abélien, où la page se placera dès la page 58,
+l'objet final est $0$ et la condition (b) s'écrit $i^{*}j_{*} = 0$. La page 57
+donne l'exemple qui a tout dicté : $C$ les faisceaux sur $X$, $C'$ les
+faisceaux sur l'ouvert $U$, $C''$ les faisceaux sur le fermé $Y$. Le nom
+\emph{recollement}, et l'axiomatisation qu'on lui donne aujourd'hui, sont de
+Beĭlinson, Bernstein et Deligne, 1982 ; le manuscrit ne dispose que du nom de
+« théorème de descente » et de l'attribution qu'il porte en chemise.}
+
+La page ajoute une condition d$'$) équivalente à (d), et c'est la forme sous
+laquelle on énonce d'ordinaire le recollement : pour tout $F$ de $C$, le carré
+
+\begin{tikzcd}
+F \arrow[r] \arrow[d] & i_{*} i^{*} F \arrow[d] \\
+j_{*} j^{*} F \arrow[r] & j_{*}\bigl( \varphi(i^{*}F) \bigr)
+\end{tikzcd}
+
+est cartésien. Un objet est donc bien le produit fibré de ses deux
+restrictions au-dessus de leur comparaison.
+
+\pagerange{58}{58}
+\subsection*{Les six foncteurs}
+
+On passe ici aux catégories abéliennes et aux foncteurs additifs, et le tableau
+se complète : chacun des deux foncteurs $i^{*}$ et $j_{*}$ acquiert un adjoint
+du côté qui lui manquait.
+
+\begin{tikzcd}[column sep=huge]
+C'' \arrow[r, "j_{*}" description] &
+C \arrow[l, bend right=45, "j^{*}"'] \arrow[l, bend left=45, "j^{!}"]
+  \arrow[r, "i^{*}" description] &
+C' \arrow[l, bend right=45, "i_{!}"'] \arrow[l, bend left=45, "i_{*}"]
+\end{tikzcd}
+
+avec les quatre adjonctions
+\[
+  i_{!} \dashv i^{*} \dashv i_{*} , \qquad j^{*} \dashv j_{*} \dashv j^{!} .
+\]
+Les exactitudes sont celles qu'on attend : $j_{!} = j_{*}$, $j^{*}$,
+$i^{*} = i^{!}$ et $i_{!}$ sont exacts ; $j^{!}$ et $i_{*}$ sont seulement
+exacts à gauche, comme adjoints à droite. Le foncteur de comparaison
+$\varphi = j^{*}i_{*} : C' \to C''$ est exact à gauche.
+
+Les quatre annulations croisées
+\[
+  i^{*} j_{*} = 0 , \qquad j^{!} i_{*} = 0 , \qquad
+  j^{*} i_{!} = 0 , \qquad j^{!} i_{!} = 0
+\]
+disent que l'ouvert et le fermé ne se voient pas l'un l'autre. Et les quatre
+composés $C \to C$ portent leurs noms géométriques :
+\[
+  j_{*}j^{!}F = \Gamma_{Y}F , \quad j_{*}j^{*}F = F^{Y} , \quad
+  i_{*}i^{*}F = \Gamma_{U}F , \quad i_{!}i^{*}F = F^{U} ,
+\]
+soit les sections à support dans le fermé, la restriction au fermé prolongée,
+les sections sur l'ouvert, et le prolongement par zéro depuis l'ouvert.
+
+\pagerange{58}{60}
+\subsection*{Quand $j^{*}$ est exact}
+
+C'est la question sur laquelle le texte s'installe, et elle occupe le reste du
+lot.
+
+\textbf{Proposition 1.} Partons de $C'' \xrightarrow{j_{*}} C
+\xrightarrow{i^{*}} C'$, avec $j_{*}$ pleinement fidèle, $i^{*}$ un passage au
+quotient exact — donc $i^{*}j_{*} = 0$ — et $j_{*} \simeq \mathrm{Ker}\,i^{*}$.
+Alors :
+
+\begin{enumerate}
+\item[(i)] si $i_{!}$ existe, alors $j^{*}$ existe, on a la suite exacte
+\[
+  i_{!} i^{*} F \longrightarrow F \longrightarrow j_{*} j^{*} F
+  \longrightarrow 0 ,
+\]
+et $j^{*}j_{*} \simeq \mathrm{id}_{C''}$, $i^{*}i_{!} \simeq \mathrm{id}_{C'}$,
+$j^{*}i_{!} = 0$ ;
+\item[(i bis)] dualement, si $i_{*}$ existe, alors $j^{!}$ existe, on a
+\[
+  0 \longrightarrow j_{*} j^{!} F \longrightarrow F \longrightarrow
+  i_{*} i^{*} F ,
+\]
+et $j^{!}j_{*} \simeq \mathrm{id}_{C''}$, $i^{*}i_{*} \simeq \mathrm{id}_{C'}$,
+$j^{!}i_{*} = 0$.
+\end{enumerate}
+
+Noter qu'en général on ne peut pas compléter ces suites par des zéros aux
+extrémités manquantes : c'est précisément l'objet du corollaire qui
+suit.\footnote{La marge porte une question restée sans réponse sur la page :
+si $j^{*}$ existe, $i_{!}$ existe-t-il ? Elle est reprise page 62, en anglais,
+et laissée ouverte là aussi.}
+
+\medskip
+
+\textbf{Corollaire 1.} Sous les conditions de la proposition 1, et en supposant
+$i_{!}$ existant, les conditions suivantes sont équivalentes :
+
+\begin{enumerate}
+\item[a)] $j^{*}$ est exact et $i_{!} \simeq \mathrm{Ker}\,j^{*}$ ;
+\item[b)] $i_{!}$ a une image essentielle épaisse ;
+\item[c)] $i_{!}i^{*}(F) \to F$ est un monomorphisme pour tout $F$,
+c'est-à-dire la suite
+\[
+  0 \longrightarrow \underbrace{i_{!} i^{*} F}_{F^{U}} \longrightarrow F
+  \longrightarrow \underbrace{j_{*} j^{*} F}_{F^{Y}} \longrightarrow 0
+\]
+est exacte ;
+\item[d)] $j^{*}$ est exact.
+\end{enumerate}
+
+La démonstration est un cycle. a) $\Rightarrow$ b) est immédiat. Pour
+b) $\Rightarrow$ c), soit $N$ le noyau de $i_{!}i^{*}F \to F$ ; appliquant
+$i^{*}$, qui est exact, et utilisant $i^{*}i_{!}i^{*}F \simeq i^{*}F$, on
+trouve $i^{*}(N) = 0$ ; mais b) donne $N = i_{!}(M)$, et
+$i^{*}i_{!}(M) = 0$ entraîne $M = 0$ puisque $i^{*}$ est un passage au
+quotient, donc $N = 0$.
+
+Pour d) $\Rightarrow$ b), on empile trois copies de la suite de (i) pour une
+suite exacte $F \to F' \to F''$ et l'on tire, de l'injectivité de
+$i_{!}i^{*}F'' \to F''$, que $j_{*}j^{*}F \to j_{*}j^{*}F'$ est injectif, donc
+$j^{*}$ exact — il l'était déjà à droite. Puis on identifie l'image de $i_{!}$
+au noyau de $j^{*}$ : si $F = i_{!}G$, alors $i_{!}i^{*}F \to F$ est un
+isomorphisme, donc $j_{*}j^{*}F = 0$ ; et réciproquement $j^{*}F = 0$ force
+$i_{!}i^{*}F \simeq F$.
+
+Enfin d) $\Rightarrow$ c) : avec $N$ comme ci-dessus, $j^{*}N \to
+j^{*}i_{!}i^{*}F = 0$ donne $j^{*}N = 0$, et $i^{*}N = 0$ comme plus haut ; le
+premier force $N = j_{*}M$ et le second $M = 0$.
+
+\medskip
+
+\textbf{Deux remarques, et une symétrie qui va se briser.} Les conditions
+ci-dessus ne résultent pas de la seule exactitude de $i_{!}$ : la localisation
+des modules en fournit le contre-exemple.\footnote{Le contre-exemple est écrit
+page 65, dans le lot suivant : $A$ un anneau de valuation discrète, $S =
+\{\pi\}$, $C''$ les modules tués par une puissance de $\pi$, $C' = C_{S^{-1}A}$
+et $i^{*}$ la localisation.} Et la situation duale n'est pas vérifiée dans les
+cas visés : $j^{!}$ ne sera pas exact, l'image de $i_{*}$ ne sera pas épaisse,
+$F \to i_{*}i^{*}F$ ne sera pas surjectif.
+
+Sous les conditions équivalentes du corollaire, en revanche, il y a une
+symétrie remarquable entre $C'$ et $C''^{\circ}$. La situation réduite
+
+\begin{tikzcd}[column sep=huge]
+C'' \arrow[r, "j_{*}" description] &
+C \arrow[l, bend right=35, "j^{*}"'] \arrow[r, "i^{*}" description] &
+C' \arrow[l, bend right=35, "i_{!}"']
+\end{tikzcd}
+
+vérifie en effet : $i^{*}$ est un passage au quotient exact de noyau $j_{*}$ ;
+$j^{*}$ est un passage au quotient exact de noyau $i_{!}$ ; $j^{*} \dashv
+j_{*}$ et $i_{!} \dashv i^{*}$.\footnote{La page écrit, pour la première de ces
+trois lignes, « $i^{*}$ passage au quotient exact de noyau $i_{!}$ ». C'est
+$j_{*}$ : le noyau de la restriction à l'ouvert est formé de ce qui est porté
+par le fermé. La transcription signale déjà que la symétrie annoncée l'exige.}
+De façon précise, la situation obtenue en passant aux catégories opposées,
+
+\begin{tikzcd}[column sep=huge]
+C'^{\circ} \arrow[r, "i_{!}^{\circ}" description] &
+C^{\circ} \arrow[l, bend right=35, "i^{*\circ}"'] \arrow[r, "j^{*\circ}" description] &
+C''^{\circ} \arrow[l, bend right=35, "j_{*}^{\circ}"']
+\end{tikzcd}
+
+satisfait aux hypothèses de départ. La dernière phrase du lot est un
+avertissement : « Cette symétrie va être détruite dans ce qui suit. » Le lot
+suivant le vérifie.
+\pagerange{61}{68}
+\section*{Recollement : la suite (pages 61 à 68)}
+
+On garde la convention du lot précédent : dans ce texte, $i$ est l'immersion de
+l'\emph{ouvert} et $j$ celle du \emph{fermé}, ce qui est l'inverse de l'usage
+d'aujourd'hui. L'auteur numérote lui-même ces pages 5, 5\,bis, 5\,ter, 6, dans
+la suite commencée page 56, et il passe à l'anglais de la page 62 à la page
+67.\footnote{Le changement de langue est sans signification apparente : il
+survient au milieu d'un raisonnement et cesse de même. La transcription garde
+l'anglais ; cette lecture-ci est en français d'un bout à l'autre, comme le
+reste du dossier.}
+
+\pagerange{61}{63}
+\subsection*{Le corollaire 2, et sa réciproque}
+
+\textbf{Corollaire 2.} Sous les conditions de la proposition 1, les conditions
+suivantes sont équivalentes :
+
+\begin{enumerate}
+\item[a)] $j^{*}$ existe et est exact ;
+\item[b)] $i_{!}$ existe et a une image essentielle épaisse ;
+\item[b$'$)] $i_{!}$ existe et $i_{!}i^{*}F \to F$ est un monomorphisme pour
+tout $F$.
+\end{enumerate}
+
+Dans ce cas $i_{!} = \mathrm{Ker}\,j^{*}$, $j^{*} = \mathrm{Coker}\,i_{!}$, et
+$i_{!}$ est exact. La réciproque est fausse, et la page le souligne : il ne
+\emph{suffit} pas que $j^{*}$ et $i_{!}$ existent avec $i_{!}$
+exact.\footnote{Une phrase insérée entre les lignes, commençant par « néc. »,
+n'a pas pu être lue ; une autre, « néc.\ pl.\ fid. », est portée sous la
+condition a).}
+
+L'implication qui reste, b) $\Rightarrow$ a), est établie page 62 par une
+construction directe, et elle mérite d'être vue parce qu'elle produit $i_{!}$
+au lieu de le supposer. On définit
+\[
+  \tau(F) = \mathrm{Ker}\bigl( F \longrightarrow j_{*}j^{*}F \bigr) .
+\]
+Comme $j^{*}$ est exact et $j_{*}$ pleinement fidèle, $\tau$ est un foncteur
+exact, nul sur les objets de la forme $j_{*}H$. Il se factorise donc par
+$i^{*}$, et l'on obtient
+\[
+  \tau(F) \simeq i_{!}\bigl( i^{*}F \bigr)
+\]
+avec un foncteur bien défini $i_{!} : C' \to C$.\footnote{La page écrit
+$i_{!} : C'' \to C$, ici comme aux pages suivantes ; c'est $C' \to C$, $i_{!}$
+étant adjoint à gauche de $i^{*} : C \to C'$. La transcription porte déjà le
+« sic ».} Reste à vérifier l'adjonction $\mathrm{Hom}(i_{!}G, F) \simeq
+\mathrm{Hom}(G, i^{*}F)$, ce qui, $j_{*}j^{*}F$ étant le plus grand quotient de
+$F$ à support dans le fermé et $\mathrm{Im}\,j_{*} = \mathrm{Ker}\,i^{*}$,
+résulte de la construction même de la catégorie quotient.
+
+Reste la question, posée deux fois dans le dossier et laissée ouverte : l'existence
+de $j^{*}$, exact ou non, entraîne-t-elle celle de $i_{!}$ ?
+
+\pagerange{63}{66}
+\subsection*{Une deuxième généralisation, et le contre-exemple}
+
+La page 63 dresse le tableau des annulations et des identifications :
+\[
+  \begin{array}{lll}
+    j^{*} i_{!} = 0 & i_{!} = \mathrm{Ker}\,j^{*} &
+      j^{*} = \mathrm{Coker}\,i_{!} \\[2pt]
+    i^{*} j_{*} = 0 & j_{*} = \mathrm{Ker}\,i^{*} &
+      i^{*} = \mathrm{Coker}\,j_{*}
+  \end{array}
+\]
+puis pose une deuxième généralisation, portant cette fois sur la paire
+$(i^{*}, i_{!})$ plutôt que sur $(j_{*}, j^{*})$, avec trois variantes
+formellement distinctes de la condition d'épaisseur : image épaisse,
+$i_{!}i^{*}F \to F$ injectif, $i_{!} = \mathrm{Ker}\,j^{*}$. La situation
+entière, note-t-il, est contenue dans la seule suite exacte
+\[
+  0 \longrightarrow i_{!} i^{*} F \longrightarrow F \longrightarrow
+  j_{*} j^{*} F \longrightarrow 0 .
+\]
+
+La page 64 énumère, dans le cas où $i_{*}$ existe aussi, trois conditions qui
+s'entraînent : $j^{!}$ exact, $i_{*}$ exact, $\varphi = j^{*}i_{*}$
+exact.\footnote{Les implications sont portées par des flèches doubles dont le
+sens n'est pas toujours net sur la page ; on les a laissées telles, comme une
+chaîne. La page porte en outre, sous b), deux conséquences : l'épaisseur d'un
+noyau et la surjectivité de $F \to i_{*}i^{*}F$.}
+
+\medskip
+
+\textbf{Le contre-exemple.} La page 65 pose la question qui achève la symétrie
+du lot précédent : suffit-il que $i_{!}$ soit exact ? La réponse est
+\emph{non}, et le contre-exemple est le suivant. Soit $A$ un anneau de
+valuation discrète d'uniformisante $\pi$, et $S = \{\pi^{n}\}$. Prenons pour
+$C$ les $A$-modules, pour $C''$ ceux qui sont tués par une puissance de $\pi$,
+pour $C'$ les $S^{-1}A$-modules, pour $i^{*}$ la localisation et pour $i_{*}$
+la restriction des scalaires. Alors $i_{*}$ est exact, mais l'adjoint de
+l'autre côté ne l'est pas.
+
+C'est la vérification annoncée à la dernière ligne du lot précédent : la
+symétrie entre l'ouvert et le fermé, valable au niveau des axiomes, se brise
+dès qu'on demande de l'exactitude.
+
+\medskip
+
+\textbf{Les quatre types de situation.} La page 66 les recense, et c'est le
+résumé le plus net de tout ce texte :
+
+\begin{itemize}
+\item un foncteur exact $i^{*}$, qui est un passage au quotient, et qui a deux
+adjoints $i_{!}$, $i_{*}$ dont l'un est exact et pleinement fidèle à image
+épaisse ;
+\item un foncteur exact $j_{*}$, pleinement fidèle à image épaisse, qui a deux
+adjoints $j^{*}$, $j^{!}$ dont l'un, $j^{*}$, est exact et est un passage au
+quotient ;
+\item les situations mixtes, mêlant $i^{*}$, $i_{*}$, $j^{*}$, $j_{*}$ ;
+\item les foncteurs seulement exacts à gauche.
+\end{itemize}
+
+Et l'énoncé qui les relie : partant de $i_{*}$ pleinement fidèle et $i^{*}$
+passage au quotient, il y a équivalence entre — a) $i^{*}$ a un second adjoint
+$i_{!}$ à image épaisse ; b) $i^{*}$ est exact, du type $C \to C/j_{*}C''$
+pour une sous-catégorie épaisse $C''$, et $j^{*}$ existe et est exact ;
+c) la situation est celle, « standard », que définit un foncteur exact
+$\varphi$. La construction de $j^{*}$ à partir de a) est immédiate :
+\[
+  j^{*}F = \mathrm{Coker}\bigl( i_{!} i^{*} F \longrightarrow F \bigr) .
+\]
+
+\pagerange{67}{68}
+\subsection*{Les douze foncteurs, et les limites}
+
+La page 67 fait le compte. Dans la situation
+
+\begin{tikzcd}[column sep=huge]
+C'' \arrow[r, bend left=25, "j_{*}"] &
+C \arrow[l, bend left=25, "j^{*}"] \arrow[r, bend left=25, "i^{*}"] &
+C' \arrow[l, bend left=25, "i_{!}"]
+\end{tikzcd}
+
+on dispose de deux suites exactes,
+\[
+  0 \longrightarrow F_{U} \longrightarrow F \longrightarrow F^{Y}
+  \longrightarrow 0 , \qquad
+  0 \longrightarrow \Gamma_{Y}F \longrightarrow F \longrightarrow \Gamma_{U}F ,
+\]
+la première bâtie sur les $f_{!}f^{*}$, la seconde sur les $f_{*}f^{!}$, pour
+$f = i$ et $f = j$. Et de douze foncteurs en tout : les six de base
+$j_{*}, j^{*}, j^{!}$ et $i^{*}, i_{!}, i_{*}$ ; les quatre composés
+$C \to C$, soit $i_{!}i^{*}$, $i_{*}i^{*}$, $j_{*}j^{*}$, $j_{*}j^{!}$ ; le
+foncteur de comparaison $\varphi = j^{*}i_{*} : C' \to C''$ ; et son prolongé
+$j_{*}\varphi : C' \to C$.
+
+La page 68 revient au français et clôt sur les limites projectives. La paire
+$(i^{*}, j^{*})$ y commute, et il suffit, pour que
+$\varprojlim_{k}(G_{k}, H_{k}, u_{k})$ existe dans la catégorie des triples,
+que $\varprojlim G_{k}$ et $\varprojlim H_{k}$ existent dans $C'$ et $C''$. Le
+mot de la fin est une comparaison : pour les propriétés d'existence, la paire
+$(i^{*}, j^{*})$ est « aussi bonne que » le seul foncteur
+$\varphi : C' \to C''$ — si $\varphi$ commute aux limites projectives finies,
+ou quelconques, et si ces limites existent dans $C'$ et $C''$, alors elles
+existent dans $C$ et la paire y commute.
+
+\pagerange{70}{70}
+\section*{L'objet co-semi-simplicial d'une adjonction (page 70)}
+
+Une feuille isolée, numérotée 1 dans un cercle, qui reprend la construction
+standard de la page 13 et démontre ce que cette page-là avait seulement
+annoncé.
+
+Soit une adjonction $f \dashv g$ avec $f : A \to B$, d'unité
+$\eta : \mathrm{id}_{A} \to gf$ et de coünité
+$\varepsilon : fg \to \mathrm{id}_{B}$, et soit $\varphi = fg$ la comonade
+associée, de comultiplication $\delta = f * \eta * g$.\footnote{La page écrit
+« $g$ adjoint à \emph{gauche} de $f$ », le mot étant récrit par-dessus un
+autre. Les deux flèches qu'elle écrit à la ligne suivante disent l'inverse :
+avec $\mathrm{id}_{A} \to gf$ et $fg \to \mathrm{id}_{B}$, c'est $f$ qui est
+adjoint à gauche et $g$ adjoint à droite. La page 3, qui met en place la même
+situation, écrit « droite » — également par-dessus un mot raturé. On a suivi
+les formules.}
+
+\medskip
+
+\textbf{La construction.} Pour tout $X$ de $B$, les itérées $\varphi^{n+1}(X)$
+forment un objet co-semi-simplicial $\Phi^{\bullet}(X)$, de terme
+$\Phi^{n}(X) = \varphi^{n+1}(X)$, dont les cofaces
+$\varphi^{n+1} \to \varphi^{n+2}$ sont les $n+1$ insertions de la
+comultiplication,
+\[
+  \varphi^{k} * \delta * \varphi^{n-k} \qquad (0 \leqslant k \leqslant n) .
+\]
+\footnote{Le premier diagramme de la page porte, sur les deux flèches
+$\varphi \rightrightarrows \varphi^{2}$, les étiquettes $\varphi * \beta$ et
+$\beta * \varphi$, où $\beta$ est la coünité. Elles ne peuvent pas être justes
+dans ce sens-là : la coünité fait descendre $\varphi^{2}$ sur $\varphi$. Ce
+sont les insertions de $\lambda = \delta$ qui font monter, et c'est bien
+$\lambda$ que le dernier diagramme de la page porte sur la même paire de
+flèches. Le NB de la page confirme la lecture donnée ici : « les opérations de
+dégénérescence n'utilisent que $\beta$ » — les codégénérescences, absentes d'un
+objet co-semi-simplicial, sont celles qui emploient la coünité.}
+
+\medskip
+
+\textbf{Le seul fait qui compte.} La construction n'a d'intérêt que par sa
+trivialité du bon côté. Pour tout $Y$ de $A$, l'objet $X = f(Y)$ porte une
+coaugmentation
+\[
+  f(Y) \longrightarrow \Phi^{\bullet}\bigl( f(Y) \bigr) ,
+\]
+et cette coaugmentation est une \emph{équivalence d'homotopie}. L'homotopie
+contractante est donnée par une seule flèche, l'unité poussée par $f$ :
+\[
+  f \xrightarrow{\;f * \eta\;} \varphi f = fgf .
+\]
+C'est ce qu'on appelle aujourd'hui une \emph{dégénérescence supplémentaire} :
+un objet coaugmenté qui en possède une est contractile, sans autre
+vérification. Il n'y a pas de coaugmentation pour un $X$ quelconque, et la page
+le dit entre parenthèses : il faut $X \simeq f(Y)$.
+
+\medskip
+
+\textbf{Le retour à la page 3.} La page se termine en demandant quels sont, pour
+$X$ quelconque, les morphismes d'objets co-semi-simpliciaux
+$X \to \Phi^{\bullet}(X)$. La réponse est une flèche $u : X \to \varphi(X)$
+rendant commutatif
+
+\begin{tikzcd}[column sep=large]
+X \arrow[r, "u"] &
+\varphi(X) \arrow[r, bend left=18, "\varphi(u)"] \arrow[r, bend right=18, "\delta"'] &
+\varphi^{2}(X)
+\end{tikzcd}
+
+c'est-à-dire exactement une structure de coalgèbre sur $X$, la condition étant
+mot pour mot celle de la page 3. Le dossier revient à son point de départ : un
+tapis cartésien, c'est une manière de coaugmenter la construction standard.
+
+\pagerange{71}{75}
+\section*{Fidélité : ce qu'est un foncteur d'oubli (pages 71 à 75)}
+
+La chemise, page 71, porte un mot : « Fidélité ». Le texte tient en un titre,
+qu'il faut lire comme une définition en attente : \emph{les foncteurs fidèles
+transportables comme foncteurs d'oubli de structures}.
+
+\medskip
+
+\textbf{Le problème.} On dit couramment qu'un groupe est un ensemble muni d'une
+structure, et que le foncteur qui envoie un groupe sur son ensemble sous-jacent
+« oublie » cette structure. La question est de savoir quelle propriété d'un
+foncteur $p : E \to B$ fait de lui un oubli de structure, sans supposer connue
+à l'avance la notion de structure.
+
+\medskip
+
+\textbf{Transportabilité.} $p$ est dit \emph{transportable} lorsque le foncteur
+induit $E \times_{B} B^{\mathrm{is}} \to B^{\mathrm{is}}$ est une fibration, où
+$B^{\mathrm{is}}$ est le sous-groupoïde maximal de $B$. Cela revient à dire
+qu'un isomorphisme $b \xrightarrow{\sim} b'$ de la base se relève : une
+structure sur $b$ se transporte le long de lui. C'est le \emph{transport de
+structure} au sens naïf, et tout foncteur est isomorphe à un foncteur
+transportable.\footnote{Le premier tiers de la page 72 est récrit deux fois et
+presque entièrement biffé ; ne subsistent que les énoncés. La page ajoute que
+deux foncteurs transportables isomorphes $p, p' : E \to B$ sont reliés par une
+auto-équivalence de $E$ isomorphe à l'identité, ce qui est la forme précise de
+l'unicité du transport.}
+
+\medskip
+
+\textbf{Ce que les fibres disent.} Ce sont les deux énoncés qui font la liasse.
+Soit $p$ une fibration.
+
+\begin{itemize}
+\item $p$ est \emph{fidèle} si et seulement si les catégories fibres $E_{b}$
+sont des ensembles préordonnés — au plus une flèche entre deux objets.
+\item $p$ est \emph{conservatif} si et seulement si les catégories fibres sont
+des groupoïdes.
+\item Donc $p$ est fidèle et conservatif si et seulement si les fibres sont
+\emph{discrètes}, c'est-à-dire des ensembles nus.
+\end{itemize}
+
+\footnote{Le manuscrit énonce ces équivalences pour $p$ seulement
+\emph{transportable}, et dit « catégories ordonnées » là où on a écrit
+« préordonnées ». Un sens ne demande rien : $p$ fidèle force chaque fibre à
+être un préordre, puisque toutes ses flèches ont même image. L'autre sens
+demande de pouvoir factoriser une flèche quelconque par une flèche cartésienne,
+donc que $p$ soit une fibration ; c'est l'hypothèse qu'on a explicitée. Quant à
+l'antisymétrie, l'auteur y revient lui-même au bas de la page 74 : les fibres
+sont en général préordonnées et non ordonnées, et il faut les réduire.}
+
+\medskip
+
+\textbf{Le théorème.} Pour un foncteur $p : E \to B$, les conditions suivantes
+sont équivalentes :
+
+\begin{enumerate}
+\item[a)] $p$ est une fibration, fidèle et conservative ;
+\item[b)] $p$ est une fibration à fibres discrètes ;
+\item[c)] pour tout objet $X$ de $E$, le foncteur induit
+$E_{/X} \to B_{/p(X)}$ est une équivalence ;
+\item[d)] il existe un préfaisceau $F$ sur $B$ et une $B$-équivalence
+$E \approx B_{/F}$.
+\end{enumerate}
+
+C'est le théorème des \emph{fibrations discrètes} : une catégorie au-dessus de
+$B$ dont la projection est une fibration à fibres discrètes n'est rien d'autre
+que la catégorie des éléments d'un préfaisceau.\footnote{$B_{/F}$ désigne la
+catégorie des éléments de $F$ : objets les couples $(b, s)$ avec $s \in F(b)$,
+flèches celles de $B$ compatibles. C'est le cas discret de la construction de
+Grothendieck. La marge de la page 74 pose la question — « la deuxième condition
+de c) signifie que $p$ est fibrant à fibres discrètes ? » — et la réponse est
+oui.}
+
+Et la conclusion, qui est la définition cherchée : \emph{les foncteurs d'oubli
+de structure sont les foncteurs transportables et fidèles.} On n'a pas besoin
+de la conservativité : les fibres sont alors préordonnées, non discrètes, et
+c'est bien ce qu'on veut — sur un même objet de $B$, deux structures peuvent
+être comparables sans être égales.
+
+\medskip
+
+\textbf{La reconstruction.} Partant d'un foncteur fidèle transportable, on
+définit sur $B^{\mathrm{is}}$
+\[
+  b \longmapsto \text{classes d'isomorphie de } E_{b}
+  = \text{« structures d'espèce } p \text{ sur } b \text{ »} ,
+\]
+et $E$ se reconstitue à équivalence près : un objet de $E$ est un objet de $B$
+muni d'une structure d'espèce $p$. Mais le foncteur
+$E^{\mathrm{is}} \to B^{\mathrm{is}}$ ne suffit pas à retrouver $E$ elle-même.
+Pour cela il faut que $p$ soit une fibration, et définir sur $B$ la notion de
+structure image inverse le long d'une flèche $b \to c$, ce qui donne un
+foncteur
+\[
+  \Sigma : B^{\circ} \longrightarrow (\text{ens.\ ordonnés}) .
+\]
+La connaissance de $\Sigma$ détermine $E$ à équivalence près.\footnote{C'est la
+version « à fibres préordonnées » du théorème précédent : les fibrations
+fidèles sur $B$ correspondent aux préfaisceaux d'ensembles ordonnés, comme les
+fibrations discrètes correspondent aux préfaisceaux d'ensembles. La page ajoute
+qu'à isomorphisme près, et non seulement à équivalence près, il faut une
+condition supplémentaire que la lecture ne rend pas.}
+
+\pagerange{76}{80}
+\section*{Questions sur les topos (pages 76 à 80)}
+
+La chemise, page 76, porte : « Morphismes et comorphismes — Liste Problèmes ».
+Ce qui suit est une liste de onze questions, adressée à quelqu'un — la première
+ligne porte « (Pour M\textsuperscript{lle} \ldots{} ?) ». Quatre feuillets au
+crayon, très surchargés ; ce sont les plus difficiles du lot, et plusieurs
+questions ne se laissent lire qu'en partie. On donne celles qui se
+tiennent.\footnote{Les marges portent, d'une encre différente, des réponses
+venues plus tard : un « O.K.\ pour immersions ouvertes » en face de la question
+1, un « non » en face de la question 7, un « Il n'est ni l'un ni l'autre » en
+face de la question 2. C'est le seul endroit du dossier où l'on voie l'auteur
+revenir sur ses propres questions.}
+
+\begin{enumerate}
+\item[1)] Définir et étudier les \emph{immersions} de topos. Les caractériser
+par la pleine fidélité de $f_{*}$, c'est-à-dire par
+$f^{*}f_{*} \simeq \mathrm{id}$ — condition qui fait de $f^{*}$ quelque chose
+de voisin d'un passage au quotient. Dans quelle mesure une immersion détermine
+l'ouvert ou le fermé qui lui donne naissance ? Si deux immersions ont même
+« lieu », l'équivalence qui les identifie est-elle unique à isomorphisme unique
+près ? Caractériser les immersions \emph{ouvertes} — par le fait que $f^{*}$
+commute aux limites projectives quelconques, en plus de la pleine fidélité de
+$f_{*}$ — et les immersions \emph{fermées} — par une condition de
+surjectivité de $F \to f_{*}f^{*}F$.
+
+\item[2)] Étudier les morphismes tels que $f^{*}$ admette un adjoint à gauche
+$f_{!}$. Le cas $U \to U_{/S}$ est-il typique ? \emph{Non} : la marge répond
+qu'il n'est ni l'un ni l'autre, et recommande de regarder plutôt la commutation
+aux limites.\footnote{Un morphisme dont l'image inverse admet un adjoint à
+gauche est ce qu'on appelle aujourd'hui un morphisme \emph{essentiel}. La
+question rejoint celle du théorème de la page 6, dans le premier lot, où
+l'essentialité est caractérisée par la commutation de $\varphi$ aux produits
+infinis.}
+
+\item[3)] Étudier le cas où $f^{*}$ est pleinement fidèle, et celui où $f^{*}$
+commute aux limites projectives \emph{finies}.
+
+\item[4)] Étudier le cas où $f_{*}$ est pleinement fidèle.
+
+\item[5)] Notion de morphisme \emph{dominant} de topos, définie par
+$f_{*}(\emptyset) = \emptyset$. Lien avec la conservativité de $f^{*}$. Que
+dire du cas où $f_{*}$ est conservatif ?
+
+\item[6)] Caractériser les foncteurs exacts $U \to V$ qui proviennent d'un
+morphisme — c'est-à-dire donner une forme intrinsèque au théorème de Cartier et
+Artin.\footnote{La page renvoie à Deligne. C'est la question de reconnaître,
+parmi les foncteurs exacts entre topos, ceux qui sont des images inverses ; le
+théorème de recollement des pages 54 à 68 en est le cas particulier de deux
+morceaux.}
+
+\item[7)] Les morphismes de $\mathcal{U}$-topos forment une
+$\mathcal{U}$-catégorie : les $\mathrm{Hom}$ sont petits. L'ensemble des
+classes d'isomorphie de tels morphismes est-il petit lui aussi ? La marge
+répond : \emph{non}.
+
+\item[8)] Théorie de l'adjonction
+
+\begin{tikzcd}[column sep=huge]
+(\mathrm{Top}) \arrow[r] &
+(\mathrm{Cat}) \arrow[l, bend left=30, "C \mapsto \widehat{C}"]
+\end{tikzcd}
+
+entre topos et catégories, et étude des topos dont les $H^{i}$ sont finis.
+
+\item[9)] Définir les \emph{catégories fibrées de topos}, et décrire la
+situation dans certains cas.\footnote{C'est la question à laquelle le lot
+suivant est consacré : les pages 82 à 95 traitent des catégories fibrées, des
+sites fibrés et du topos total.}
+
+\item[10)] Catégories fibrées et champs essentiellement représentables.
+
+\item[11)] La chaîne
+
+\begin{tikzcd}[column sep=huge]
+(\mathrm{Ens.}) \arrow[r] &
+(\mathrm{Esp.}) \arrow[r] &
+(\mathrm{Top}) \arrow[ll, bend left=30]
+\end{tikzcd}
+
+et, en marge, l'indication : 2-adjoint du foncteur \emph{fibres}.
+\end{enumerate}
+
+\medskip
+
+\textbf{Les chaînes d'adjoints.} La page 79, entièrement barrée, cherche un
+exemple de foncteur qui soit à la fois adjoint à gauche et adjoint à droite du
+même foncteur, et propose une petite catégorie explicite à deux objets $e$, $a$
+et trois flèches non triviales $u : e \to a$, $v : a \to e$, $w = vu$, soumises
+à $uv = \mathrm{id}_{e}$, $uw = u$, $wv = v$ — la composition n'étant pas
+entièrement déterminée par ces relations, puisqu'il reste à décider ce que vaut
+$w^{2}$.
+
+La page 80 énonce alors le résultat positif. Étant donné une chaîne de
+foncteurs adjoints successifs, on peut la prolonger indéfiniment vers le bas en
+notant $f_{!}, f^{*}, f_{*}, f^{!}, \ldots$ les adjoints itérés :
+
+\begin{tikzcd}[column sep=small, row sep=small, nodes={font=\scriptsize}]
+f_{!} & f^{*} \arrow[d, no head] & f_{*} \arrow[d, no head] &
+  f^{!} \arrow[d, no head] & f_{?} \arrow[d, no head] \\
+& g_{!} & g^{*} \arrow[d, no head] & g_{*} \arrow[d, no head] &
+  g^{!} \arrow[d, no head] \\
+& & h_{!} & h^{*} & h_{*}
+\end{tikzcd}
+
+\textbf{Proposition.} Soit $\mathcal{U}$ un univers contenant un ensemble
+infini. Pour tout $n$, il existe deux $\mathcal{U}$-topos $E$ et $F$ de la
+forme $\widehat{C}$, $\widehat{C'}$ avec $C$, $C'$ \emph{petites}, et $n$
+foncteurs $f_{1}, \ldots, f_{n}$ alternativement de $E$ dans $F$ et de $F$ dans
+$E$, chacun adjoint à droite du précédent, dont aucun n'est pleinement
+fidèle.\footnote{L'énoncé est très lacunaire sur la page — la clause « dont
+aucun n'est pl.\ fid. » est une insertion interlinéaire, et le rôle du composé
+$g = f_{1}\cdots f_{n}$ n'est pas lisible. On a donné ce que la page
+soutient. Une telle suite est ce qu'on appelle aujourd'hui une \emph{chaîne
+d'adjoints} de longueur $n$.}
+
+\textbf{Question.} Peut-on trouver une suite infinie dans les deux directions ?
+Il suffirait de trouver $f$ et $g$ tels que $g$ soit à la fois adjoint à gauche
+et adjoint à droite de $f$.
+
+La phrase s'arrête là, au milieu ; elle se termine page 81, dans le lot
+suivant.
+\pagerange{81}{81}
+\section*{Questions sur les topos : la fin (page 81)}
+
+Six lignes, qui achèvent la phrase interrompue au bas de la page 80. La
+question était : peut-on prolonger indéfiniment, dans les deux sens, une chaîne
+de foncteurs adjoints successifs ? Il suffirait pour cela de disposer de $f$ et
+$g$ tels que $g$ soit à la fois adjoint à gauche et adjoint à droite de $f$.
+
+L'ébauche de réponse passe par une description d'un type d'objets : des couples
+formés d'un ensemble $A$ muni d'une involution $w$, et d'une rétraction du
+quotient $A/w$ sur la partie fixe $A^{w} \subset A/w$. Le foncteur $f$ associe
+alors, à un ensemble $E$, le triple $(E, \mathrm{id}_{E}, E, \mathrm{id}_{E})$.
+
+C'est tout ce que la page soutient. Ni la construction ni la conclusion ne sont
+lisibles, et on ne les a pas reconstituées.\footnote{Trois mots de ces six
+lignes sont illisibles, dont le nom même de l'objet que $f$ produit. La
+question elle-même reste donc ouverte sur la page. Une chaîne d'adjoints
+infinie dans les deux sens est en fait impossible dans des situations très
+générales — mais le dire ici serait prêter à l'auteur une réponse que sa page
+n'a pas.}
+
+\pagerange{82}{95}
+\section*{Catégories fibrées (pages 82 à 95)}
+
+Une chemise, page 82, porte le titre et un pointage d'archiviste de vingt-deux
+pages ; les feuillets conservés n'en comptent que treize, dont deux versos
+vierges. Trois textes suivent, chacun sous un titre de la main de l'auteur.
+
+\medskip
+
+\noindent\textbf{Rappel des définitions.} Soit $p : E \to B$ un foncteur. Une
+flèche $\xi \to \eta$ de $E$ est \emph{cartésienne} si elle est universelle
+parmi celles qui se projettent de la même façon ; $p$ est une \emph{fibration},
+ou est \emph{fibrante}, si toute flèche $x \to y$ de $B$ et tout $\eta$ au-dessus
+de $y$ admettent un relèvement cartésien. On note $E_{b}$ la fibre au-dessus de
+$b$, et $f^{*} : E_{y} \to E_{x}$ le foncteur de transport attaché à
+$f : x \to y$. Dualement, $p$ est \emph{cofibrante} si $p^{\circ}$ est
+fibrante, et le transport va alors dans l'autre sens, $f_{*} : E_{x} \to
+E_{y}$.
+
+\pagerange{83}{84}
+\subsection*{Sites fibrés et topos total}
+
+Soit $E \to B$ une catégorie fibrée dont chaque fibre $E_{b}$ est munie d'une
+topologie, les foncteurs de transport $f^{*}$ étant des morphismes de sites.
+On munit alors $E$ de la topologie la moins fine rendant continus tous les
+foncteurs $E_{b} \to E$ ; les familles couvrantes sont celles que décrit SGA 4
+IV 3.2.\footnote{La page renvoie à « IV 3.2 » sans plus.}
+
+Supposons $B$ et $E$ dans un univers $\mathcal{U}$. Le but est de calculer le
+topos $\widetilde{E}$ des faisceaux sur $E$ à partir des topos $\widetilde{E}_{b}$
+des fibres. Le premier pas consiste à plonger chaque fibre dans son topos,
+c'est-à-dire à fabriquer une nouvelle catégorie fibrée $\overline{E}$ dont les
+fibres sont les $\widetilde{E}_{b}$ : un morphisme de $F \in \overline{E}_{x}$
+vers $G \in \overline{E}_{y}$ au-dessus de $f : x \to y$ est un morphisme
+\[
+  F \longrightarrow f^{*}(G) \quad \text{dans } \widetilde{E}_{x} ,
+\]
+où l'on note encore $f^{*}$ le prolongement du transport aux
+topos.\footnote{Le prolongement existe parce que $f^{*}$ est un morphisme de
+sites : il induit un morphisme de topos, dont l'image inverse prolonge $f^{*}$.
+La page ne le dit pas.}
+
+\medskip
+
+\textbf{La formule.} Le topos total s'écrit alors comme une catégorie de
+sections :
+\[
+  \widetilde{E}^{\circ} \;\simeq\;
+  \underline{\Gamma}^{\,\text{vert-cart}}
+  \bigl( B,\; X \mapsto (\overline{E})^{\circ}_{p(X)/X} \bigr) ,
+\]
+l'exposant « vert-cart » signifiant qu'on se borne aux sections cartésiennes
+au-dessus des flèches verticales. Par associativité des sections, le second
+membre se réécrit
+\[
+  \underline{\Gamma}\Bigl( B,\; x \mapsto
+  \underline{\Gamma}^{\,\mathrm{cart}}\bigl( E_{x},\;
+  X \mapsto (\overline{E}_{x})^{\circ}_{/X} \bigr) \Bigr) ,
+\]
+le foncteur intérieur n'étant autre que $\widetilde{E}^{\circ}_{x}$, d'où
+enfin
+\[
+  \widetilde{E} \;\simeq\;
+  \underline{\Gamma}\bigl( B, \overline{E}^{\Delta} \bigr)^{\circ} ,
+\]
+où $\overline{E}^{\Delta}$ se déduit de $\overline{E}$ par une opération sur
+les fibres.\footnote{L'opération est illisible : le mot qui la nomme est
+inséré au-dessus d'un mot biffé, et la transcription le donne comme
+« groupoïdes » sans certitude. Une première formule, encadrée puis barrée sur
+la page, proposait $\widetilde{E} \simeq \varprojlim_{X}(E_{p(X)})_{/X} =
+\varprojlim_{x} E_{x}$ ; c'est elle que la version ci-dessus corrige, et la
+correction porte précisément sur le fait qu'il faut des sections cartésiennes,
+non une limite projective naïve.}
+
+Le contenu, une fois les formules mises de côté, est celui-ci : \emph{un
+faisceau sur la catégorie totale est une famille de faisceaux, un par fibre,
+compatibles aux transports.} C'est la définition du topos total d'un site
+fibré, et c'est la dernière apparition, dans le dossier, du motif « objet
+global = famille locale + donnée de recollement ».
+
+\pagerange{86}{88}
+\subsection*{Sections et sections cartésiennes : les adjoints}
+
+Le deuxième texte porte, encadré en haut de la page 86, le titre :
+« Catégories $\underline{\Gamma}$ et $\varprojlim$ ».
+
+\medskip
+
+\noindent\textbf{Une notation à retenir.} Sur ces pages, et contrairement à
+l'usage d'aujourd'hui, l'indice $*$ marque un adjoint à \emph{gauche} et
+l'indice $+$ un adjoint à \emph{droite}. Les deux figurent côte à côte page 86,
+et la page 87 conclut sur $F^{c}_{+}$ après avoir conclu sur $F^{c}_{*}$ ; la
+distinction est donc voulue, et il faut la lire.\footnote{On a gardé les
+indices de l'auteur, la page en dépendant. Le lecteur venu de la littérature
+moderne, où $(-)_{*}$ est presque toujours un adjoint à droite, doit s'en
+défier ici.}
+
+\medskip
+
+Pour une catégorie fibrée $E \to B$, on dispose de deux catégories : celle des
+sections quelconques, notée $\underline{\Gamma}(E/B)$, et celle des sections
+\emph{cartésiennes}, notée $\varprojlim E/B$ — ce sont les familles
+compatibles aux transports, et c'est bien une limite projective, au sens
+2-catégorique.\footnote{Aujourd'hui on écrit plutôt
+$\lim_{B^{\circ}} E_{\bullet}$ ou $\mathrm{Cart}_{B}(B, E)$ ; la notation
+$\varprojlim E/B$ du manuscrit dit la même chose.} L'inclusion
+\[
+  i : \varprojlim E/B \lhook\joinrel\longrightarrow \underline{\Gamma}(E/B)
+\]
+et un changement de base $B' \to B$ donnent le carré
+
+\begin{tikzcd}
+& \varprojlim E/B \arrow[r, hook, "i"] \arrow[d, "F^{*}_{c}"'] &
+\underline{\Gamma}(E/B) \arrow[d, "F^{*}"] \\
+X' \in B & \varprojlim E'/B' \arrow[r, hook, "i'"] &
+\underline{\Gamma}(E'/B')
+\end{tikzcd}
+
+et toute la question est de savoir quand $F^{*}_{c}$, le changement de base
+restreint aux sections cartésiennes, admet un adjoint.
+
+\medskip
+
+\textbf{Les deux calculs.} Ils tiennent en trois lignes chacun, et ils sont
+symétriques. Du côté gauche,
+\[
+  \mathrm{Hom}\bigl( X', F^{*}_{c}(Y) \bigr)
+  = \mathrm{Hom}\bigl( i'(X'), F^{*}(i(Y)) \bigr)
+  = \mathrm{Hom}\bigl( F_{*} i'(X'), i(Y) \bigr)
+  = \mathrm{Hom}\bigl( i_{*} F_{*} i'(X'), Y \bigr) ,
+\]
+ce qui identifie $F^{c}_{*} = i_{*} F_{*} i'$ ; du côté droit,
+\[
+  \mathrm{Hom}\bigl( F^{*}_{c}(Y), X' \bigr)
+  = \mathrm{Hom}\bigl( F^{*}(i(Y)), i'(X') \bigr)
+  = \mathrm{Hom}\bigl( i(Y), F_{+} i'(X') \bigr)
+  = \mathrm{Hom}\bigl( Y, i_{+} F_{+} i'(X') \bigr) ,
+\]
+ce qui identifie $F^{c}_{+} = i_{+} F_{+} i'$. D'où les deux énoncés :
+
+\begin{enumerate}
+\item[\textbf{①}] Si $i$ admet un adjoint à gauche $i_{*}$ et $F^{*}$ un
+adjoint à gauche $F_{*}$ — ce qui a lieu par exemple si $E$ est assez cofibrée
+sur $B$ et si les « petites » limites projectives existent dans les fibres —
+alors $F^{*}_{c}$ admet un adjoint à gauche $F^{c}_{*}$.
+\item[\textbf{②}] Si $i$ admet un adjoint à droite $i_{+}$ et $F^{*}$ un
+adjoint à droite $F_{+}$ — par exemple si les petites limites projectives
+existent dans les fibres de $E/B$ — alors $F^{*}_{c}$ admet un adjoint à droite
+$F^{c}_{+}$.
+\end{enumerate}
+
+\medskip
+
+\textbf{③ Proposition.} Supposons que pour tout $b$ de $B$ la limite inductive
+\[
+  \varinjlim_{c \in \mathrm{Ob}\,{}^{b}\!/B} f^{*}\bigl( X(c) \bigr)
+\]
+existe dans $E_{b}$, et qu'elle commute à tous les changements de base
+$u^{*}$. Alors l'adjoint à gauche du foncteur d'inclusion existe, et il est
+donné par cette formule même :
+\[
+  \dot{F}^{\varepsilon}_{*}(X)(b)
+  = \varinjlim_{x \in \mathrm{Ob}\,{}^{b}\!/B} f^{*}\bigl( X(x) \bigr) .
+\]
+Autrement dit : \emph{pour rendre cartésienne une section quelconque, on
+recolle fibre à fibre, par une limite inductive sur les objets au-dessus de
+$b$.}\footnote{Le nom du foncteur porte sur la page un point et un exposant
+qu'on n'a pas su lire ; on a gardé la graphie de la transcription. La page
+écrit par ailleurs le but de l'inclusion $\underline{\Gamma}(B/E)$, alors que
+partout ailleurs elle écrit $\underline{\Gamma}(E/B)$. Le dernier tiers de la
+page 87, une dizaine de lignes et une note marginale encadrée, est barré d'un
+long trait diagonal et reste illisible.}
+
+\medskip
+
+\textbf{Deux corollaires} (page 88). Le premier : si de plus les $b_{*}$
+existent — par exemple si $p$ est aussi cofibrant et si les petites sommes
+existent dans les fibres —, alors les « foncteurs fibres »
+$b^{*}_{c} : \varprojlim E/B \to E_{b}$ admettent chacun un adjoint à gauche
+$b^{c}_{*}$.
+
+Le second concerne les générateurs, et c'est celui qui sert. Si
+$\underline{\Gamma}(E/B)$ a une famille de générateurs stricts
+$(X_{\lambda})$, alors les $i(X_{\lambda})$ en forment une pour $\varprojlim
+E/B$. En particulier, si $p$ est cofibrant et si chaque fibre $E_{b}$ a des
+petites sommes et une petite famille de générateurs stricts, alors $\varprojlim
+E/B$ en a une aussi, obtenue en réunissant celles des fibres :
+\[
+  \bigcup_{b \in \mathrm{Ob}\,B} b^{c}_{*}\bigl( \mathcal{G}_{b} \bigr) ,
+\]
+où $\mathcal{G}_{b}$ est un système de générateurs stricts de
+$E_{b}$.\footnote{La page écrit « en prenant pour la \ldots{} $E_{b}$ des gén.\
+stricts de $E_{b}$ » ; le membre de phrase est incomplet, mais la formule
+finale ne laisse pas de doute sur ce qui est réuni.}
+
+\pagerange{89}{92}
+\subsection*{Générateurs, cogénérateurs, et quand $\varprojlim E/B$ est un topos}
+
+Quatre pages au crayon, lourdement surchargées, dont la transcription est plus
+lacunaire que pleine. On donne ce qui est établi, et on s'arrête là.
+
+\medskip
+
+Le fil est celui-ci. Pour obtenir un système de générateurs de
+$\varprojlim E/B$, il faut passer par l'adjoint à gauche $i_{*}$ de
+l'inclusion, et non par l'inclusion elle-même : si $(X_{\lambda})$ engendre
+$\underline{\Gamma}(E/B)$, la bijection
+\[
+  \mathrm{Hom}_{\underline{\Gamma}}\bigl( X_{\lambda}, i(Y) \bigr)
+  \simeq \mathrm{Hom}\bigl( i_{*}(X_{\lambda}), Y \bigr)
+\]
+montre que ce sont les $i_{*}(X_{\lambda})$ qui engendrent en bas. Pour des
+\emph{co}générateurs, c'est-à-dire des générateurs de la catégorie opposée,
+c'est l'adjoint de l'autre côté qu'il faut, et la page 90 en tire une condition
+suffisante : que cet adjoint existe et qu'il y ait un petit système de
+générateurs dans $\underline{\Gamma}(E^{\Delta}/B)$ — ce qui a lieu, par
+exemple, si les petites limites projectives existent dans les fibres, si les
+foncteurs de transport y commutent, et si les fibres ont de petits ensembles de
+cogénérateurs.
+
+\medskip
+
+Les pages 91 et 92 posent la question finale : quand $\varprojlim E/B$ est-elle
+un $\mathcal{U}$-topos ? Le principe est un transfert : si un type de limite
+est représentable dans chaque fibre et si les transports y commutent, alors ce
+type de limite est représentable dans $\varprojlim E/B$ et les foncteurs fibres
+y commutent. On en déduit que si les fibres sont préadditives, additives ou
+abéliennes — et si les transports respectent ces structures —, il en va de même
+de $\varprojlim E/B$. Reste, pour conclure au topos, deux conditions
+supplémentaires : que la catégorie soit une $\mathcal{U}$-catégorie, ce qui
+tient à la petitesse de $B$, et qu'elle possède une petite famille de
+générateurs, ce que le corollaire de la page 88 fournit.\footnote{Les pages 91
+et 92 poursuivent en discutant ce que coûte l'hypothèse de cofibration et le
+rôle des adjoints $f_{!}$, mais elles sont illisibles par larges plages : leurs
+interlignes sont plus denses que leurs lignes. La page 92 s'achève sur un aveu
+— le calcul en général est « un peu fastidieux ». On n'a rien reconstitué de ce
+qui manque.}
+
+\pagerange{94}{95}
+\subsection*{Dualité : fibré et cofibré}
+
+Le dernier texte porte, encadré en haut de la page 94 : « Dualité pour
+catégories fibrées et cofibrées ». Il tient en deux pages et il est clair d'un
+bout à l'autre.
+
+\medskip
+
+\textbf{Les deux notions.} Soit $p : E \to B$.
+
+\begin{enumerate}
+\item[1)] $p$ est \emph{fibrante} si, pour toute flèche $f : x \to y$ de $B$,
+un foncteur de transport $f^{*} : E_{y} \to E_{x}$ est défini, avec
+transitivité essentielle, par l'identité
+\[
+  \mathrm{Hom}_{f}(X, Y) \simeq
+  \mathrm{Hom}_{\mathrm{id}_{x}}\bigl( X, f^{*}(Y) \bigr) .
+\]
+De telles données reviennent à un pseudo-foncteur $F : B^{\circ} \to
+(\mathrm{Cat})$.
+\item[2)] $p$ est \emph{cofibrante}, c'est-à-dire $p^{\circ}$ fibrante, si pour
+toute flèche $f : x \to y$ un foncteur $f_{*} : E_{x} \to E_{y}$ est défini,
+avec transitivité essentielle, par
+\[
+  \mathrm{Hom}_{f}(X, Y) \simeq
+  \mathrm{Hom}_{\mathrm{id}_{y}}\bigl( f_{*}(X), Y \bigr) .
+\]
+\footnote{Le second membre est d'une lecture douteuse sur la page ; la
+transcription le donne comme $\mathrm{Hom}\,\varphi_{p}(X', Y)$. C'est la
+symétrie avec 1) qui impose la forme écrite ici, et c'est elle que la suite du
+texte emploie.}
+De telles données reviennent à un pseudo-foncteur $F : B \to (\mathrm{Cat})$.
+\end{enumerate}
+
+\medskip
+
+\textbf{Le lien.} C'est l'énoncé qui fait la page, et il est purement
+adjonctif.
+
+\begin{itemize}
+\item Si $p$ est fibrante : pour une flèche $f$ donnée, $f_{*}$ existe si et
+seulement si $f^{*}$ admet un adjoint à gauche. Donc $p$ est cofibrante si et
+seulement si \emph{tous} les $f^{*}$ admettent un adjoint à gauche.
+\item Si $p$ est cofibrante : pour une flèche $f$ donnée, $f^{*}$ existe si et
+seulement si $f_{*}$ admet un adjoint à droite. Donc $p$ est fibrante si et
+seulement si tous les $f_{*}$ admettent un adjoint à droite.
+\end{itemize}
+
+Une catégorie à la fois fibrée et cofibrée est donc exactement une famille de
+catégories dont tous les transports vont par paires adjointes. C'est le même
+énoncé que celui qui ouvre le dossier, à quatre-vingt-dix pages de distance :
+tout se lit sur les adjonctions.
+
+\medskip
+
+\textbf{L'avertissement final.} La \emph{catégorie opposée relative} d'une
+catégorie fibrée $p : E \to B$ — celle qu'on obtient en retournant chaque
+fibre — n'est définie qu'à équivalence près. C'est une autre catégorie fibrée,
+associée au pseudo-foncteur
+\[
+  F^{\mathrm{opp}} : B \longrightarrow (\mathrm{Cat}) , \qquad
+  F^{\mathrm{opp}}(a) = F(a)^{\circ} , \qquad
+  F^{\mathrm{opp}}(f) = F(f)^{\circ} .
+\]
+Il n'est pas évident, note l'auteur, qu'on puisse en donner une description
+intrinsèque, qui évite le recours au pseudo-foncteur. Et pour que
+$(E/B)^{\mathrm{opp}}$ soit à son tour cofibrée, il faut et il suffit que les
+$f^{*}$ admettent des adjoints à \emph{droite} — condition qui n'est autre que
+celle pour que $E/B$ soit cofibrée.
+
+La dernière phrase du dossier est celle-ci, et elle est soulignée sur la page :
+\emph{à retenir que ce pseudo-foncteur définit deux catégories fibrées bien
+distinctes sur $B$.}\footnote{La variance est ce qui les distingue : un même
+$F$ peut être lu comme pseudo-foncteur sur $B^{\circ}$, donnant une fibration,
+ou sur $B$, donnant une cofibration, et les deux catégories totales n'ont
+aucune raison de coïncider. C'est la confusion contre laquelle l'auteur met en
+garde, et c'est la note sur laquelle les quatre-vingt-quinze pages
+s'arrêtent.}
+
+\end{document}
