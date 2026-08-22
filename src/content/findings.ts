@@ -32,7 +32,7 @@ export const FINDINGS: Finding[] = [
     literature: [],
     status: 'unsearched',
     settle:
-      'Check whether this dévissage hypothesis, rather than local or core-compactness, appears in Johnstone (Stone Spaces II.4, Elephant C1.1 and C4.1) or in Isbell’s papers on locale products. If it is there, mark matched.',
+      'Check whether this dévissage hypothesis, rather than local or core-compactness, appears in Johnstone (Stone Spaces II.4, Elephant C1.1 and C4.1) or in Isbell’s papers on locale products. If it is there, mark matched. An external review of the folder (Kimi, shared conversation of 2026-08, covering 115, 161-1 and 161-3) judged the folder to contain no new theorems and its results « published in SGA 4 or standard by the 1970s », but named no source for this claim in particular, so the status is unchanged and the check below still stands.',
   },
   {
     id: '161-3-infinite-product-criterion',
@@ -47,7 +47,7 @@ export const FINDINGS: Finding[] = [
     literature: [],
     status: 'unsearched',
     settle:
-      'Compare with the standard statement that a product of locales is spatial when almost all factors are compact and the rest locally compact, and check whether the two-clause form is a genuine weakening or a restatement.',
+      'Compare with the standard statement that a product of locales is spatial when almost all factors are compact and the rest locally compact, and check whether the two-clause form is a genuine weakening or a restatement. An external review of the folder (Kimi, shared conversation of 2026-08, covering 115, 161-1 and 161-3) judged the folder to contain no new theorems and its results « published in SGA 4 or standard by the 1970s », but named no source for this claim in particular, so the status is unchanged and the check below still stands.',
   },
   {
     id: '161-3-fields-partition',
@@ -379,5 +379,62 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Establish first which definition of test category is in play, since the page uses the term without defining it and the notion was still moving; then check the answer against the definitive treatments of test categories and modelizers. Until the definition is fixed the statement is not yet in a form that can be looked up, which is why this entry is unsearched rather than a candidate.',
+  },
+  {
+    id: '115-wheel-eleven-curryings',
+    cote: '115',
+    pages: '5',
+    kind: 'mathematical',
+    claim:
+      'A presheaf kernel X ∈ (A × B)^ is displayed as eleven functor categories in a wheel, all arrows equivalences: the kernel at the centre, the bare curryings on an inner ring, and the curryings after free (co)completion on the rim, one node per choice of variance in each argument.',
+    basis:
+      'Page 5 draws the wheel and its own margin tallies it — « 6 cas » for the two-argument forms, « 4 cas » for the mixed ones — which with the centre gives eleven, the two inner forms each appearing twice at the ends of a diameter. The exclamation marks on the rim record what an extension along Yoneda must preserve to be an equivalence.',
+    ours:
+      'The reading supplies the census that makes the count come out: separating centre, inner ring and rim, reading the four headless radii as a variance frame rather than as functors, and following the one inward diagonal the page draws against the other three. A first pass had reduced the wheel to eight radiating arrows.',
+    literature: [
+      'J. Bénabou, Les distributeurs (1973) — profunctors as two-variable presheaves and their curryings',
+      'Kelly, Basic Concepts of Enriched Category Theory, ch. 4 — free cocompletion and extension along Yoneda',
+    ],
+    status: 'matched',
+    settle:
+      'Settled as mathematics: every node of the wheel is a standard currying of a profunctor, and the equivalences are the universal property of free (co)completion. What is not standard is the display — eleven presentations of one kernel laid out by variance — and that is a matter of exposition, not of theorem. An external review of the folder (Kimi, shared conversation of 2026-08, covering 115, 161-1 and 161-3) reached the same verdict independently, calling the perspective the folder’s contribution and the machinery known.',
+  },
+  {
+    id: '115-isbell-reflexivity-left-open',
+    cote: '115',
+    pages: '7',
+    kind: 'mathematical',
+    claim:
+      'The folder isolates the reflexivity question for Isbell duality — whether the unit and counit are isomorphisms only on representables — and answers it « sans doute pas », without proof.',
+    basis:
+      'Page 7 specialises the two-variable kernel to B = A^op with the hom as kernel, obtaining the adjunction between Â and (A^∨)^op, notes that unit and counit are isomorphisms on representables by Yoneda, and then asks whether they are so anywhere else. The answer on the page is a parenthesis, not an argument.',
+    ours:
+      'Nothing of the answer. The reading names the objects where η is invertible as the reflexive ones and links them to the envelope constructed on pages 10–13, which the page does not do in so many words; the transcription flags the words preceding « sans doute pas » as an uncertain reading.',
+    literature: [
+      'J. R. Isbell, Structure of categories, Bull. AMS 72 (1966) — the adjunction and its fixed objects',
+      'Isbell, Adequate subcategories (1960) — the representables as the first reflexive objects',
+    ],
+    status: 'matched',
+    settle:
+      'Settled: reflexive objects strictly exceed the representables in general, so the folder’s « sans doute pas » is right and is the known answer. Kept as a killed candidate because the interest is that the question is posed and left open here, not that it is new.',
+  },
+  {
+    id: '115-isbell-envelope-self-dual',
+    cote: '115',
+    pages: '10–13',
+    kind: 'mathematical',
+    claim:
+      'The triples (H_*, H^*, α) with compatible pairing form a canonically self-dual completion Ã, into which both Â and (A^∨)^op embed, and inside whose self-dual part the Karoubi envelope of A sits — as an inclusion, not an equality.',
+    basis:
+      'Pages 10 and 11 build the triples out of a full embedding A ↪ B, show every full embedding induces B → Ã, and give the self-duality Ã^op ≃ (A^op)~ exchanging the two components. Page 13 places Cauchy completion at the centre and observes that retracts of representables are reflexive.',
+    ours:
+      'Two corrections the page does not carry. The manuscript writes A = Â ∩ A^∨°, an intersection of subcategories of different categories, which cannot be read literally; and equality with Kar(A) does not hold in general, reflexive objects being possibly strictly more numerous. The reading asserts only the inclusion, which is what the rest of the page uses.',
+    literature: [
+      'J. R. Isbell, Structure of categories (1966) — the construction now called the Isbell envelope',
+      'Borceux, Handbook of Categorical Algebra I, §6.5 — Karoubi envelope as Cauchy completion for Ens-enriched categories',
+    ],
+    status: 'matched',
+    settle:
+      'Settled: this is the Isbell envelope, and the Kar(A) ⊂ reflexives inclusion is the standard statement. The external review named above independently flagged the same two literal impossibilities the reading corrects, which is evidence about the edition rather than about the mathematics.',
   },
 ];

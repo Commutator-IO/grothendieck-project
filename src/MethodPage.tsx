@@ -109,6 +109,24 @@ export function MethodPage() {
               carefully as page 2, and each file records in its header which model produced it
               and when.
             </P>
+            <H3 id="typescripts">Typescripts are not handwriting</H3>
+            <P id="typescripts-read-faster">
+              A good part of the fonds is typed rather than written: carbons and photocopies of
+              carbons, annotated by hand in the margins. Thirty-nine folders — some four thousand
+              pages, counting the mixed ones whole — carry a typescript, and the seven volumes of
+              <em>À la poursuite des champs</em> are typed throughout. These read far faster and
+              far more surely than a hand of 1962, because the letterforms are regular and the
+              only real difficulty is the overtyped strikeout and the symbol the machine did not
+              carry — arrows, Greek capitals, square brackets — left as a gap on the page.
+            </P>
+            <P id="typescripts-ceiling-is-for-handwriting">
+              This does not move the twenty-page ceiling, which is a limit on sustained visual
+              attention to handwriting and is kept for every batch so that the batches remain
+              comparable. What it does change is where a pass is worth spending: a typed folder
+              yields a usable transcription for a fraction of the effort, and its handwritten
+              marginalia — which is the part that carries the mathematics being reconsidered —
+              is short enough to read with the care the whole page would otherwise consume.
+            </P>
             <P id="derived-editions-pin-opus">
               The two derived passes — the modernised reading and the folder's tags — pin{' '}
               <strong>Opus 5</strong> instead of leaving the choice open. They are not reading
