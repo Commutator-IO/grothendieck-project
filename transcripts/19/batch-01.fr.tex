@@ -1,0 +1,866 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 19, batch 1 (pages 1-20).
+% Established from the facsimile archives/batches/19/batch-01.pdf (a mirror of
+% https://grothendieck.umontpellier.fr/19.pdf), per the skill
+% transcribe-grothendieck.
+%
+% Pages 2 and 12 are blank versos — absent.
+%
+% The batch holds two distinct pieces, and the folder cover (page 1) names both:
+% "Résolutions standards et foncteurs adjoints" and "Tapis cartésiens", with an
+% archivist's pencilled tally "9p + 14p" beside them. The tally matches what is
+% here. Pages 3-11 are the nine sheets of "Tapis cartésiens", numbered 1) 2) 3)
+% by the author: the comonad φ = fg attached to an adjoint pair, Godement's
+% conditions, the category K(φ,α,λ) of coalgebras, a monadicity theorem, and the
+% case B = ∏ B_i worked down to two factors. Pages 13-20 open the second piece —
+% one sheet headed "Résolutions standard et théories relatives", then a text
+% headed "Cohomologie relative" and numbered 1., 2., 3. — Yoneda, S-exactness,
+% S-injectives, a canonical S-resolution. Fourteen pages of it would run to page
+% 26, i.e. past this batch and into batch 2.
+%
+% The dating is the inventory's own, for the whole shelfmark; nothing on these
+% pages carries a date.
+%
+% Pass: Opus 5 (claude-opus-5), 2026-08-22 — first pass, unchecked against the pages by a human.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{19}
+\batch{1}
+\pages{1}{20}
+\dating{[à partir de 1958-1973]}
+\watermark{Édition de démonstration}
+\foldertitle{Topos : notes manuscrites (s.d.)}
+
+\begin{document}
+
+\section*{Tapis cartésiens (pages 1 à 11)}
+
+\page{1}
+Titre porté à l'encre sur la chemise : « Résolutions standards et foncteurs
+adjoints » ; au-dessous, « Tapis \uncertain{cartésiens} ».
+\note{les deux titres correspondent aux deux textes du lot : « Tapis
+cartésiens » occupe les pages 3 à 11, l'autre commence page 13}
+
+\subsection*{1) Le foncteur $\varphi = fg$ et la catégorie $K(\varphi,\alpha,\lambda)$}
+
+\page{3}
+\emph{Tapis \uncertain{cartésiens}}
+
+1) \quad
+\begin{tikzcd}
+A \arrow[r, bend left=20, "f"] & B \arrow[l, bend left=20, "g"]
+\end{tikzcd}
+\quad $g$ adjoint : \uncertain{droite} de $f$, d'où morphismes d'adjonction
+\note{le mot « droite » est écrit par-dessus un premier mot raturé}
+\[
+  \mathrm{id}_{A} \xrightarrow{\ \beta\ } gf , \qquad
+  fg \xrightarrow{\ \alpha\ } \mathrm{id}_{B}
+  \tag{1.1}
+\]
+On pose
+\[
+  \varphi = fg : B \longrightarrow B
+  \tag{1.2}
+\]
+On a donc
+\[
+  \varphi \xrightarrow{\ \alpha\ } \mathrm{id}_{B} , \qquad
+  \varphi \xrightarrow{\ \lambda\ } \varphi^{2}
+  \tag{1.3}
+\]
+i.e.
+\[
+  \lambda : fg \longrightarrow fgfg , \qquad \lambda = f * \beta * g
+  \tag{1.4}
+\]
+Alors $\varphi$ satisfait aux \emph{conditions de Godement} :
+
+(1.5) \quad (unitarité)
+
+\begin{tikzcd}
+\varphi \arrow[r, "\lambda"] \arrow[rr, bend right=35, "\mathrm{id}_{\varphi}"'] & \varphi^{2} \arrow[r, bend left=18, "\varphi*\alpha"] \arrow[r, bend right=18, "\alpha*\varphi"'] & \varphi
+\end{tikzcd}
+
+commutatif : $(\varphi * \alpha) \circ \lambda = \mathrm{id}_{\varphi}$.
+
+(1.6) \quad (associativité)
+
+\begin{tikzcd}
+\varphi \arrow[r, "\lambda"] & \varphi^{2} \arrow[r, bend left=18, "\varphi*\lambda"] \arrow[r, bend right=18, "\lambda*\varphi"'] & \varphi^{3}
+\end{tikzcd}
+
+commutatif : $(\varphi * \lambda) \circ \lambda = (\lambda * \varphi) \circ \lambda$.
+
+On définit la catégorie
+\[
+  K = K(\varphi, \alpha, \lambda)
+  \tag{1.7}
+\]
+comme formée des couples
+\[
+  (X, u) \qquad X \in \mathrm{Ob}\, B, \quad u : X \longrightarrow \varphi(X)
+  \tag{1.8}
+\]
+satisfaisant les conditions de commutativité
+
+(1.10) \quad
+\begin{tikzcd}
+X \arrow[r, "u"] & \varphi(X) \arrow[r, bend left=18, "\varphi(u)"] \arrow[r, bend right=18, "\lambda(X)"'] & \varphi^{2}(X)
+\end{tikzcd}
+\quad $\lambda \circ u = \varphi(u) \circ u$ \quad (associativité)
+
+(1.9) \quad
+\begin{tikzcd}
+X \arrow[r, "u"] & \varphi(X) \arrow[r, "\alpha(X)"] & X
+\end{tikzcd}
+\quad $\alpha(X) \circ u = \mathrm{id}_{X}$ \quad (unitarité)
+
+\note{l'auteur porte (1.10) en tête et (1.9) au-dessous, les chiffres surchargés ;
+c'est bien à (1.10) que renvoie la page 5}
+
+On obtient un foncteur naturel
+\[
+  h : A \longrightarrow K(\varphi, \alpha, \lambda)
+  \tag{1.11}
+\]
+par $Y \mapsto \bigl( f(Y),\ f(Y) \xrightarrow{\ f*\beta\ } \varphi f(Y) = fgf(Y) \bigr)$.
+
+\marginal{vérifier compatibilités (1.9)}
+
+\page{4}
+\textbf{Théorème 1.12} (\uncertain{Beck}).
+\struck{Supposons que} a) Si dans $A$ les $\mathrm{Ker}$ de doubles flèches
+existent, et \struck{pour} \add{si} $f$ y commute $(\dagger)$, alors 1.11 est
+essentiellement surjectif. b) Pour que $h$ soit une équivalence
+[i.e. soit \struck{de plus fidèle} \add{pleinement fidèle}], il faut et il
+suffit que $f$ soit \emph{conservatif}, et que pour toute double flèche $(u,v)$
+de $A$ telle que $\mathrm{Ker}(f(u), f(v))$ existe, $\mathrm{Ker}(u,v)$ existe
+et $f$ y commute.
+
+\marginal{$(\dagger)$ il suffit de regarder les doubles flèches $u, v$ de $A$
+telles que $\mathrm{Ker}(f(u), f(v))$ existe \quad (condition C)}
+
+\marginal{\ill{} auxiliaires a), on établissant que $h$ est une
+\uncertain{équivalence} \ill{}}
+\note{seconde note marginale, écrite en biais et en grande partie illisible}
+
+\subsection*{2) La réciproque : de $(\varphi,\alpha,\lambda)$ au couple adjoint}
+
+2) Partons d'une catégorie $B$, avec un foncteur
+\[
+  \varphi : B \longrightarrow B
+  \tag{2.1}
+\]
+\struck{satisfaisant les conditions (1.5),} et des liaisons
+\[
+  \varphi \xrightarrow{\ \alpha\ } \mathrm{id}_{B} , \qquad
+  \varphi \xrightarrow{\ \lambda\ } \varphi^{2}
+  \tag{2.2}
+\]
+satisfaisant les conditions (1.5), (1.6). On peut alors (= sans ces
+restrictions (1.5) et (1.6)\,!) définir une catégorie
+\[
+  A = K(\varphi, \alpha, \lambda)
+  \tag{2.3}
+\]
+comme ci-dessus. Soit
+\[
+  A \xrightarrow{\ f\ } B
+  \tag{2.4}
+\]
+le foncteur \struck{d'oubli} canonique $(X, u) \mapsto X$.
+
+\struck{Question. Quand $f$ admet-il un adjoint à droite $g$, de telle façon
+que \ill{} que $fg$ \ill{}}
+
+On définit un foncteur
+\[
+  g : B \longrightarrow A
+  \tag{2.5}
+\]
+par
+\[
+  g(X) = \bigl( \varphi(X),\ \varphi(X) \xrightarrow{\ \lambda(X)\ } \varphi^{2}(X) \bigr)
+  \tag{2.6}
+\]
+[la condition (1.6) assurant qu'on tombe bien dans $K(\varphi,\alpha,\lambda)$\,!].
+
+\struck{$\mathrm{Hom}_{A}((X,u), g(Y)) \simeq \mathrm{Hom}_{B}(f(X,u), Y)$ \ill{}}
+
+\[
+  fg = \varphi
+  \tag{2.7}
+\]
+
+\page{5}
+Considérons donc
+\[
+  fg \xrightarrow{\ \alpha\ } \mathrm{id}
+  \tag{2.8}
+\]
+ce qui fournit un homomorphisme d'adjonction
+\[
+  \alpha' : \mathrm{Hom}_{A}(X, g(Y)) \longrightarrow \mathrm{Hom}_{B}(f(X), Y) ,
+  \qquad w \mapsto \alpha \circ f(w)
+  \tag{2.9}
+\]
+\struck{$v \mapsto \alpha \circ f(v)$} \quad (2.9$'$)
+
+On va définir aussi
+\[
+  \beta : \mathrm{id}_{K} \longrightarrow gf
+  \tag{2.10}
+\]
+en prenant, pour $Y = (X, u)$ dans $K$,
+
+\begin{tikzcd}
+X \arrow[r, "u"] \arrow[d, "u"'] & \varphi(X) \arrow[d, dashed, "\varphi(u)"] \\
+\varphi(X) \arrow[r, "\lambda(X)"'] & \varphi^{2}(X)
+\end{tikzcd}
+
+\note{la colonne de gauche est $Y$, celle de droite $gf(Y)$}
+
+la commutativité étant assurée par la condition (1.10) ; on a donc bien un
+morphisme de $K$. On a aussi un homomorphisme d'adjonction en sens inverse
+\[
+  \beta' : \mathrm{Hom}_{B}(f(X), Y) \longrightarrow \mathrm{Hom}_{A}(X, g(Y)) ,
+  \qquad w \mapsto g(w) \circ \beta(X)
+  \tag{2.11}
+\]
+On vérifie que ces homomorphismes sont inverses l'un de l'autre. En effet
+$\beta' \alpha' = \mathrm{id}$ résulte formellement de (1.5), et
+$\alpha' \beta' = \mathrm{id}$ résulte de (1.9).
+
+\struck{\ill{}}
+\note{suit un calcul de six lignes entièrement biffé}
+
+Donc $f$ et $g$ sont adjoints l'un de l'autre, et retrouvant bien sûr
+$(\varphi, \alpha, \lambda)$ via \uncertain{le procédé} du n\textsuperscript{o}~1.
+
+\page{6}
+\textbf{Conclusion.} La donnée (pour $B$ fixé) d'une catégorie $A$, et d'un
+couple de foncteurs adjoints $f, g$, $A \rightleftarrows B$, avec $f$
+conservatif et \struck{commutant aux noyaux de doubles flèches} satisfaisant à
+la condition C de 1.12, est essentiellement équivalente à la donnée d'un
+foncteur $g$ dans $B$, avec les données de Godement $\alpha$, $\lambda$.
+
+\struck{Corollaire. $f$ pleinement fidèle $\Leftrightarrow$ $\alpha * \varphi$
+\ill{} $\Leftrightarrow$ $\lambda$ isom.}
+
+\emph{Compléments sur propriétés d'exactitude.}
+
+a) Pour tout type de $\varprojlim$ qui sont représentables dans $B$, les
+$\varprojlim$ de ce type sont représentables dans $A$, et le foncteur $f$ y
+commute ; \struck{si et seulement si $f$ y commute.}
+
+b) Pour tout type de $\varprojlim$ qui est représentable dans $B$, \ill{} est
+représentable dans $A$, et $f$ y commute.
+
+c) Pour toute propriété d'exactitude de $B$, \struck{faisant intervenir} des
+types de commutation de $\varprojlim_{J}$ \struck{de type I} avec des types de
+$\varinjlim$ ou quelconques dans $B$, \ill{} la même propriété d'exactitude est
+vraie dans $A$.
+\note{ligne très surchargée ; la lecture des indices reste incertaine}
+
+\struck{d) Supposons que $B$ soit une catégorie \ill{}}
+
+\textbf{Théorème.} Supposons $B$ un topos. Alors $A$ est un topos et $f$ est de
+la forme $f_{0}^{*}$ pour un morphisme de topos $f_{0} : B \to A$ \add{accessible}
+(i.e. conservatif) sss $\varphi$ \struck{commute aux \ill{}} est exact à gauche.
+Pour que $f_{0}$ soit \emph{essentiel}, il faut et il suffit que $\varphi$
+commute aux $\varprojlim$ quelconques, i.e. aux produits infinis. (On suppose
+que $\varphi$ a un adjoint à gauche $\psi$.)
+
+\subsection*{3) Le cas $B = \prod_{i} B_{i}$}
+
+\page{7}
+3) Supposons
+\[
+  B = \prod_{i \in I} B_{i}
+  \tag{3.1}
+\]
+Donc $f$ est donné par une famille de
+\[
+  f_{i} : A \longrightarrow B_{i}
+  \tag{3.2}
+\]
+et $g$ par une famille de
+\[
+  g_{i} : B_{i} \longrightarrow A ,
+  \tag{3.3}
+\]
+\[
+  g\bigl( (X_{i})_{i \in I} \bigr) = \prod_{i \in I} g_{i}(X_{i})
+  \tag{3.4}
+\]
+Le composé $\varphi = fg$ est alors un foncteur
+$\varphi : \prod_{i} B_{i} \to \prod_{i} B_{i}$, et est connu quand on connaît
+les $\mathrm{pr}_{j}\, \varphi : \prod_{i} B_{i} \to B_{j}$. On trouve
+\[
+  \mathrm{pr}_{j}\, \varphi\bigl( (X_{i}) \bigr)
+  = f_{j}\Bigl( \prod_{i \in I} g_{i}(X_{i}) \Bigr) .
+  \tag{3.5}
+\]
+Soit
+\[
+  \varphi_{ji} \overset{\text{déf}}{=} f_{j} g_{i} : B_{i} \longrightarrow B_{j}
+  \tag{3.6}
+\]
+et supposons que les $f_{j}$ commutent aux produits de type $I$ (p. ex. $f_{j}$
+exacts ; ou $I$ fini). On a alors
+\[
+  \mathrm{pr}_{j}\, \varphi\bigl( (X_{i}) \bigr)
+  = \prod_{i \in I} \varphi_{ji}(X_{i})
+  \tag{3.6}
+\]
+\note{l'auteur écrit deux fois (3.6)}
+
+et les données de $\alpha$, $\lambda$ deviennent celles de
+\[
+  \prod_{i} \varphi_{ki}(X_{i}) \xrightarrow{\ \bar{\alpha}_{k}\ } X_{k}
+  \tag{3.7}
+\]
+\[
+  \prod_{i} \varphi_{ki}(X_{i}) \xrightarrow{\ \bar{\lambda}_{k}\ }
+  \prod_{i,j} \varphi_{kj} \varphi_{ji}(X_{i})
+  \tag{3.8}
+\]
+i.e.
+\[
+  \prod_{\alpha} \varphi_{k\alpha}(X_{\alpha})
+  \xrightarrow{\ \bar{\lambda}_{k,j,i}\ } \varphi_{kj} \varphi_{ji}(X_{i})
+\]
+
+\page{8}
+qui s'expliciteront en termes des $\varphi_{ji} = f_{j} g_{i}$, et des
+$\bar{\alpha}_{i}$, $\bar{\lambda}_{i}$ correspondants, ainsi
+\[
+  \left\{
+  \begin{array}{l}
+    \bar{\alpha}_{k} = \alpha_{k}(X_{k}) \circ \mathrm{pr}_{k} \\[2pt]
+    \bar{\lambda}_{k,j,i} = \lambda_{kji}(X_{i}) \circ \mathrm{pr}_{i}
+  \end{array}
+  \right.
+  \tag{3.9}
+\]
+\[
+  \lambda_{kji} : \varphi_{ki} \longrightarrow \varphi_{kj} \circ \varphi_{ji}
+  \tag{3.10}
+\]
+
+\begin{tikzcd}[column sep=small, row sep=small, nodes={font=\scriptsize}]
+\varphi_{ki} \arrow[r, "\lambda_{kji}"] \arrow[d, no head] & \varphi_{kj}\varphi_{ji} \arrow[d, no head] \\
+f_{k} g_{i} & f_{k}\, g_{j} f_{j}\, g_{i}
+\end{tikzcd}
+
+\note{la flèche provient du morphisme d'adjonction $\mathrm{id} \to g_{j} f_{j}$,
+que l'auteur indique par une flèche verticale sous $g_{j} f_{j}$}
+
+Les $(\varphi_{ji}, \lambda_{kji})$ sont reliées par des conditions exprimant
+(1.5), (1.6), que nous n'expliciterons pas.
+
+\marginal{pour $i = j = k$, $\lambda_{kji}$ n'est autre que $\lambda_{i}$}
+
+[Le cas le plus intéressant est celui où les \struck{$\varphi$}
+\add{$\alpha_{i}$} sont des isomorphismes (i.e. les $g_{i}$ pleinement
+fidèles). Dans ce cas, \struck{\ill{}} on peut supposer
+$\varphi_{i} = \mathrm{id}_{B_{i}}$,
+$\alpha_{i} = \mathrm{id}_{\mathrm{id}_{B_{i}}}$, $\lambda_{i} = \mathrm{id}$.]
+
+Les conditions (1.) \struck{les} dans les cas où deux des $i, j, k$ sont égaux,
+avec $i = j$ ou $j = k$, \uncertain{ne montrent que} l'un des $\lambda_{kji}$
+est l'identité, \ill{} de $\varphi_{kj} \varphi_{ji}$.
+\note{ligne très surchargée ; le verbe reste douteux}
+
+Il reste donc à examiner les cas (3.11) : a) \struck{$i$, $j$, $k$ deux à deux
+différents} ; b) $i = k \neq j$, d'où
+\[
+  \mathrm{id}_{B_{i}} \longrightarrow \varphi_{ij} \circ \varphi_{ji}
+  \qquad (i \neq j)
+\]
+
+\page{9}
+Prenons le cas
+\[
+  B = B' \times B'' , \quad f = (f', f'') , \quad
+  g(X', X'') = g'(X') \times g''(X'')
+  \tag{3.12}
+\]
+Supposons $f' g' \simeq \mathrm{id}_{B'}$, $f'' g'' \simeq \mathrm{id}_{B''}$
+(i.e. $g'$, $g''$ pleinement fidèles), donc $\varphi$ est \struck{connue}
+\add{connu} quand on connaît
+\[
+  \varphi'' : B' \longrightarrow B'' , \qquad
+  \varphi' : B'' \longrightarrow B'
+  \tag{3.13}
+\]
+et la donnée des \struck{$\alpha$} $\lambda_{kji}$ devient celle de
+
+\struck{$X' \times \varphi'(X'') \to X'$ , $\varphi''(X') \times X'' \to X''$}
+
+\struck{$X' \to \varphi' \varphi''(X')$ , $X'' \to \varphi'' \varphi'(X'')$}
+
+\note{deux blocs numérotés puis biffés en croix ; l'auteur y compte les cas
+$(i,j,k)$ — « dont \struck{sept} 6 \struck{sont triviaux} » — avant de retenir
+les seuls cas non triviaux ci-dessous}
+
+il reste donc les données
+\[
+  \left\{
+  \begin{array}{l}
+    \mathrm{id}_{B'} \xrightarrow{\ \lambda'\ } \varphi' \varphi'' \\[2pt]
+    \mathrm{id}_{B''} \xrightarrow{\ \lambda''\ } \varphi'' \varphi'
+  \end{array}
+  \right.
+  \tag{3.14}
+\]
+Il faudrait \struck{\ill{}} expliciter dans ce cas les conditions (1.5) et (1.6),
+qui portent sur
+\[
+  \varphi(X', X'') = \bigl( X' \times \varphi'(X'') ,\ \varphi''(X') \times X'' \bigr)
+\]
+et sur $\varphi^{2}(X', X'')$.
+\note{le calcul est mené sur trois lignes puis biffé ; il aboutit aux relations
+$\varphi'' * \lambda' = \lambda'' * \varphi''$ et
+$\lambda' * \varphi' = \varphi' * \lambda''$, elles aussi biffées}
+
+Explicitons la \struck{catégorie} $A$ en termes de $\varphi'$, $\varphi''$,
+$\lambda'$, $\lambda''$. Elle a pour objets les quadruplets
+$(X', X'', u', u'')$ où
+\[
+  X' \xrightarrow{\ u'\ } \varphi'(X'') , \qquad
+  X'' \xrightarrow{\ u''\ } \varphi''(X')
+  \tag{3.15}
+\]
+
+\page{10}
+(définissant \struck{\ill{}}
+$X' \xrightarrow{(\mathrm{id}_{X'},\, u')} X' \times \varphi'(X'')$,
+$X'' \xrightarrow{(\mathrm{id}_{X''},\, u'')} X'' \times \varphi''(X')$, ce qui
+exprime déjà (1.9)) soumis à la condition de commutativité de (1.10)
+\[
+  (X', X'') \xrightarrow{\ u\ }
+  \bigl( X' \times \varphi'(X'') ,\ X'' \times \varphi''(X') \bigr)
+  \rightrightarrows \varphi^{2}(X', X'')
+\]
+les deux flèches étant $\varphi(u)$ et $\lambda$, i.e. via $u'$, $u''$ d'une
+part et via $\lambda'$, $\lambda''$ de l'autre. Il semble qu'on trouve la
+commutativité des diagrammes :
+
+(3.16)
+
+\begin{tikzcd}
+X' \arrow[r, "u'"] \arrow[rr, bend right=30, "\lambda'(X')"'] & \varphi'(X'') \arrow[r, "\varphi'(u'')"] & \varphi'\varphi''(X')
+\end{tikzcd}
+
+\begin{tikzcd}
+X'' \arrow[r, "u''"] \arrow[rr, bend right=30, "\lambda''(X'')"'] & \varphi''(X') \arrow[r, "\varphi''(u')"] & \varphi''\varphi'(X'')
+\end{tikzcd}
+
+\textbf{Exemple.} Si $\varphi'' \varphi'$ et $\varphi' \varphi''$ sont des
+foncteurs constants de valeurs un objet final de $B'$ resp. $B''$, les
+conditions 3.16 ci-dessus sont vides, et on trouve pour $A$ la catégorie des
+objets
+\[
+  \bigl( X', X'',\ X' \xrightarrow{\ u'\ } \varphi'(X'') ,\
+  X'' \xrightarrow{\ u''\ } \varphi''(X') \bigr)
+\]
+$f'$ et $f''$ étant $\mapsto X'$ et $\mapsto X''$, et
+\[
+  \left\{
+  \begin{array}{l}
+    g'(X') = \bigl( X',\ \varphi''(X'),\
+      X' \xrightarrow{\lambda'(X')} \varphi'\varphi''(X') ,\
+      \varphi''(X') \xrightarrow{\mathrm{id}} \varphi''(X') \bigr) \\[3pt]
+    g''(X'') = \bigl( \varphi'(X''),\ X'',\
+      \varphi'(X'') \xrightarrow{\mathrm{id}} \varphi'(X'') ,\
+      X'' \xrightarrow{\lambda''(X'')} \varphi''\varphi'(X'') \bigr)
+  \end{array}
+  \right.
+  \tag{3.17}
+\]
+\[
+  \left\{
+  \begin{array}{l}
+    \text{Image essentielle de } g' : u'' \text{ est un isomorphisme} \\[2pt]
+    \text{Image essentielle de } g'' : u' \text{ est un isomorphisme}
+  \end{array}
+  \right.
+  \tag{3.18}
+\]
+
+\page{11}
+L'auteur écrit le morphisme d'adjonction $\beta'$ colonne par colonne :
+\[
+  \begin{array}{ccl}
+    X & = & \bigl( X', X'',\ X' \xrightarrow{u'} \varphi'(X'') ,\
+      X'' \xrightarrow{u''} \varphi''(X') \bigr) \\[4pt]
+    \downarrow \beta' & & \\[4pt]
+    g' f'(X) & = & \bigl( X',\ \varphi''(X'),\
+      X' \xrightarrow{\lambda'(X')} \varphi'\varphi''(X') ,\
+      \varphi''(X') \xrightarrow{\mathrm{id}} \varphi''(X') \bigr)
+  \end{array}
+  \tag{3.20}
+\]
+les composantes de $\beta'$ étant $\mathrm{id}$, $u''$, puis $\mathrm{id}$,
+$\varphi'(u'')$ et $u''$, $\mathrm{id}$ ; et $\beta''$ analogue.
+\marginal{adjonction}
+\note{l'auteur passe de (3.18) à (3.20) sans écrire de (3.19)}
+
+[Question. Quand $\beta'$ est-il un épimorphisme pour tout $X$ ? Cela
+\struck{signifie} implique, moyennant des conditions d'exactitude
+\uncertain{à droite} standard sur $\varphi'$, $\varphi''$, que
+$u'' : X'' \to \varphi''(X')$ est un épimorphisme.]
+
+L'intersection des images essentielles de $g'$ et de $g''$ est formée des
+$(X', X'', u', u'')$ pour lesquels $u'$ et $u''$ sont deux isomorphismes.
+\struck{Cette catégorie} Cette sous-catégorie, image commune de $g'$ et $g''$,
+est équivalente à la sous-catégorie pleine de $B'$ formée des $X'$ tels que
+$\lambda'(X')$ soit un isomorphisme.
+
+(3.21) \quad Conditions équivalentes :
+
+(i) $g'_{\mathrm{ess}}(B') \cap g''_{\mathrm{ess}}(B'')$ est une catégorie
+\uncertain{ponctuelle} ;
+
+(ii) la sous-catégorie pleine de $B'$ formée des $X'$ tels que
+$\lambda'(X')$ soit un isomorphisme est \uncertain{ponctuelle} ;
+
+(ii bis) idem pour $\lambda''$.
+
+\section*{Résolutions standard et cohomologie relative (pages 13 à 20)}
+
+\subsection*{Résolutions standard et théories relatives}
+
+\page{13}
+\emph{Résolutions standard et théories relatives.}
+
+\begin{tikzcd}
+C \arrow[r, bend left=20, "F"] & C' \arrow[l, bend left=20, "G"]
+\end{tikzcd}
+\qquad
+$\mathrm{Hom}\bigl( F(X), X' \bigr) \simeq \mathrm{Hom}\bigl( X, G(X') \bigr)$
+
+Posons $E = GF : C \to C$, d'où
+\[
+  \phi : \mathrm{id}_{C} = E^{0} \longrightarrow E , \qquad
+  \lambda : E^{2} \longrightarrow E
+\]
+satisfaisant les relations de Godement, d'où un objet simplicial $\widehat{E}$
+dans $\mathrm{Hom}(C, C)$ : $\widehat{E}_{n} = E^{n+1}$, et augmentation
+$X \to \widehat{E}(X)$. (On devrait donner une interprétation naturelle par
+théorie de la descente.)
+
+On pose de même $E' = FG : C' \to C'$, d'où
+\[
+  \phi' : E' \longrightarrow \mathrm{id}_{C'} = E'^{0} , \qquad
+  \lambda' : E' \longrightarrow E'^{2}
+\]
+satisfaisant aux relations de Godement, d'où un objet simplicial
+$\widehat{E}'$ dans $\mathrm{Hom}(C', C')$ : $\widehat{E}'_{n} = E'^{n+1}$.
+
+Notons les \struck{isomorphismes simpliciaux}
+\begin{enumerate}
+  \item $G(X') \simeq \widehat{E}\bigl( G(X') \bigr)$ \quad pour
+        $X' \in \mathrm{Ob}\, C'$ ;
+  \item $F(X) \simeq F\bigl( \widehat{E}(X) \bigr)$ \quad pour
+        $X \in \mathrm{Ob}\, C$.
+\end{enumerate}
+La dernière \ill{} un foncteur $T : C \to D$ et un homomorphisme fonctoriel
+$h : T \circ E \to T$ tel que $h \circ (T * \phi) = \mathrm{id}_{T}$ ; alors
+$T \widehat{E}(X) \simeq 0$ pour tout $X \in \mathrm{Ob}\, C$ [cf. Godement].
+Les formules (i) se vérifient sans doute \struck{de même} par des formules
+explicites.
+
+\textbf{Application.} Supposons $C$, $C'$ abéliennes, $F$, $G$ additifs,
+\struck{\ill{}}
+\begin{enumerate}
+  \item Si $F$ est exact et fidèle, alors $\widehat{E}(X)$ \ill{} une
+        résolution de $X$ pour tout $X$.
+  \item Si $\Gamma$ est un foncteur
+\end{enumerate}
+\note{la page s'arrête ici, en pleine phrase}
+
+\subsection*{Cohomologie relative. 1. Caractérisation des foncteurs $A \mapsto \mathrm{Hom}(A,B)$}
+
+\page{14}
+\emph{Cohomologie relative} (un cas spécial).
+\note{titre porté au crayon de couleur en tête de page}
+
+1. \emph{Caractérisation des foncteurs $A \to \mathrm{Hom}(A, B)$.}
+
+Soit $C$ une catégorie. Pour tout $B \in C$, soit $h_{B}$ le foncteur de $C$
+dans les ensembles tel que
+\[
+  h_{B}(A) = \mathrm{Hom}(A, B) .
+\]
+$h_{B}$ est un foncteur, contravariant en $B$, à valeurs dans la catégorie des
+foncteurs $C \to E$, et on a
+\[
+  \alpha : \mathrm{Hom}(B, B') \xrightarrow{\ \sim\ }
+  \mathrm{Hom}_{C}(h_{B}, h_{B'})
+\]
+[en effet, on obtient le foncteur inverse $\beta$ en associant à
+$u \in \mathrm{Hom}_{C}(h_{B}, h_{B'})$ l'élément $\beta(u)$ de
+$\mathrm{Hom}_{C}(B, B')$ image par $u_{B}$ de l'élément neutre de
+$h_{B}(B) = \mathrm{Hom}_{C}(B, B)$ dans
+$h_{B'}(B) = \mathrm{Hom}_{C}(B, B')$].
+
+Si $C$ est additive, alors $h_{B}$ est additif [exact à gauche], et le foncteur
+$B \mapsto h_{B}$ est additif (exact à gauche), et l'isomorphisme $\alpha$ est
+valable en se limitant aux homomorphismes additifs. Ainsi $B \mapsto h_{B}$
+permet d'« identifier » $C$ à une sous-catégorie de la catégorie
+$\mathrm{Fonc.\,add.}(C^{\circ},\ $\uncertain{$\mathcal{Y}$}$)$.
+\note{la catégorie but est notée d'une capitale cursive que la lecture ne
+tranche pas ; elle revient plus bas et page 15}
+
+Supposons que $C$ ait un générateur $U$, et \struck{\ill{}} satisfasse AB~3),
+4), 5). \struck{Le foncteur} $h_{B}$ transforme limites inductives en limites
+projectives, et dans ce cas quelconques. \ill{}
+
+Si $h$, $h'$ sont deux foncteurs (contravariants) $C^{\circ} \to {}$%
+\uncertain{$\mathcal{Y}$} \ill{} transformant limites inductives
+
+\page{15}
+en projectives, on \ill{} posant
+\[
+  M(h) = h(U) ,
+\]
+on a
+\[
+  \alpha' : \mathrm{Hom}(h, h') \xrightarrow{\ \sim\ }
+  \mathrm{Hom}_{R^{\circ}}\bigl( M(h), M(h') \bigr)
+\]
+où $R = \mathrm{Hom}_{C}(U, U)$, $R^{\circ} = $ anneau inverse de $R$.
+
+Pour le voir, on définit un homomorphisme
+\[
+  \beta : \mathrm{Hom}_{R^{\circ}}\bigl( M(h), M(h') \bigr)
+  \longrightarrow \mathrm{Hom}(h, h')
+\]
+[détails laissés au lecteur]. Donc le foncteur $h \mapsto M(h)$ identifie la
+catégorie des foncteurs \struck{\ill{}} envisagés à une sous-catégorie de
+$\mathrm{Mod}_{R^{\circ}}$ ($R$-modules à droite).
+
+On va définir un foncteur « inverse » $M \mapsto h_{M}$ de
+$\mathrm{Mod}_{R^{\circ}}$ dans la catégorie de foncteurs envisagée ;
+définissons le foncteur $T'' : \mathrm{Mod}_{R^{\circ}} \to C$, ou plus
+simplement
+\[
+  T''(M) = M \otimes_{R} U .
+\]
+On va montrer que $T' T''$ est isomorphe à l'identité, donc $T''$ et $T'$ sont
+des « équivalences ». On doit donc montrer que
+\[
+  \left\{
+  \begin{array}{l}
+    \mathrm{Hom}_{C}(U,\ M \otimes_{R} U) \simeq M \\[2pt]
+    \text{si } R = \mathrm{Hom}_{C}(U, U) , \quad M \in \mathrm{Mod}_{R^{\circ}}
+  \end{array}
+  \right.
+\]
+ce qui est bien connu, à cause de \ill{}. Ainsi, les foncteurs
+\struck{covariants} \add{contravariants} \add{exacts} à valeurs
+$C \to {}$\uncertain{$\mathcal{Y}$}, transformant les limites inductives en
+limites projectives, sont essentiellement les $h_{B}$.
+\marginal{les $h_{B}$}
+
+\subsection*{2. Le couple $(S, T)$ et les morphismes $\varphi$, $\psi$}
+
+\page{16}
+2. Soient $C$, $C'$ deux catégories \struck{abéliennes} \add{additives},
+$S : C \to C'$ un foncteur additif de $C$ dans $C'$. On suppose que pour tout
+\struck{$A \in C$} $X \in C'$, le foncteur
+$A \mapsto \mathrm{Hom}_{C'}\bigl( S(A), X \bigr)$ est un foncteur du type
+\struck{$\mathrm{Hom}(A,$} $h_{B}$ (i.e. $B$ dépend de $X$, mais de façon
+fonctorielle), donc on aura
+\[
+  \mathrm{Hom}_{C'}\bigl( S(A), X \bigr) \simeq
+  \mathrm{Hom}_{C}\bigl( A, T(X) \bigr)
+  \tag{1}
+\]
+où $T : C' \to C$ est un foncteur covariant exact : [foncteur de $C'^{\circ}$
+dans $C$]. Cette condition est \struck{\ill{}} satisfaite notamment si $C$ et
+$C'$ vérifient AB~3), 4), 5), et $C$ a un générateur, et si de plus
+\struck{\ill{}} $S$ est un foncteur exact à droite (donc
+$A \mapsto \mathrm{Hom}_{C'}(S(A), X)$ est exact à gauche).
+
+\marginal{il faudrait des conditions de représentabilité \ill{}}
+
+En particulier, si $X = S(B)$, on aura
+\[
+  \mathrm{Hom}_{C}(A, B) \longrightarrow
+  \mathrm{Hom}_{C'}\bigl( S(A), S(B) \bigr) \simeq
+  \mathrm{Hom}_{C}\bigl( A, TS(B) \bigr)
+  \tag{2}
+\]
+Donc, faisant $A = B$, on trouve un élément canonique
+\[
+  \varphi(A) \in \mathrm{Hom}_{C}\bigl( A, TS(A) \bigr) , \quad \text{i.e.}
+  \tag{3}
+\]
+\[
+  \varphi : \mathrm{id}_{C} \longrightarrow TS
+  \tag{3 bis}
+\]
+D'autre part, on \struck{a} tire de (1), faisant $A = T(Y)$,
+\[
+  \mathrm{Hom}_{C'}\bigl( ST(Y), X \bigr) \simeq
+  \mathrm{Hom}_{C}\bigl( T(Y), T(X) \bigr)
+  \tag{4}
+\]
+et en particulier, faisant $X = Y$, on trouve un élément canonique
+\[
+  \psi(X) \in \mathrm{Hom}_{C'}\bigl( ST(X), X \bigr) , \quad \text{i.e.}
+  \tag{5}
+\]
+\[
+  \psi : ST \longrightarrow \mathrm{id}_{C'}
+  \tag{5 bis}
+\]
+
+\page{17}
+Considérons, pour $A \in C$, $\varphi(A) : A \to TS(A)$, d'où
+$S(\varphi(A)) : S(A) \to STS(A)$ ; d'autre part, on a un morphisme
+$(ST)(SA) \xrightarrow{\psi(SA)} SA$. Ceci dit, on a le composé
+
+\begin{tikzcd}
+S(A) \arrow[r, "S(\varphi(A))"] \arrow[rr, bend right=30, "\text{identité}"'] & S(TS(A)) = (ST)(S(A)) \arrow[r, "\psi(S(A))"] & S(A)
+\end{tikzcd}
+
+ou, en d'autres termes, $S(A)$ s'identifie par $S(\varphi(A))$ à un facteur
+direct de $(ST)(S(A))$, la projection naturelle étant $\psi(S(A))$. De même,
+on a le diagramme commutatif
+
+\begin{tikzcd}
+T(X) \arrow[r, "\varphi(T(X))"] \arrow[rr, bend right=30, "\text{identité}"'] & T(ST(X)) = (TS)(T(X)) \arrow[r, "T(\psi(X))"] & T(X)
+\end{tikzcd}
+
+qui identifie $T(X)$ à un facteur direct de $(TS)(T(X))$.
+
+Pour que l'homomorphisme fonctoriel $\varphi : \mathrm{id}_{C} \to TS$ soit
+injectif (i.e. les $\varphi(A) : A \to TS(A)$ injectifs), il faut et il suffit
+que les homomorphismes
+\[
+  S(A,B) : \mathrm{Hom}_{C}(A,B) \longrightarrow
+  \mathrm{Hom}_{C'}\bigl( S(A), S(B) \bigr)
+\]
+soient injectifs ; ce qui équivaut aussi à ce que le foncteur $S$ soit
+\struck{\ill{}} « \uncertain{injectif} ». Cela résulte de la commutativité de
+
+\begin{tikzcd}[column sep=small, nodes={font=\scriptsize}]
+\mathrm{Hom}_{C}(A,B) \arrow[r] \arrow[rr, bend right=30] & \mathrm{Hom}_{C'}\bigl( S(A), S(B) \bigr) & \mathrm{Hom}_{C}\bigl( A, TS(B) \bigr) \arrow[l, "\simeq"']
+\end{tikzcd}
+
+\subsection*{3. Suites $S$-exactes, objets $S$-injectifs}
+
+\page{18}
+3) Une suite
+\[
+  0 \longrightarrow A' \longrightarrow A \longrightarrow A'' \longrightarrow 0
+  \tag{1}
+\]
+dans $C$ est dite \emph{$S$-exacte} si la suite
+\[
+  0 \longrightarrow S(A') \longrightarrow S(A) \longrightarrow S(A'')
+  \longrightarrow 0
+  \tag{1 bis}
+\]
+est exacte et se scinde. Un objet $M \in C$ est dit \emph{$S$-injectif} si,
+pour toute suite $S$-exacte (1), la suite
+\[
+  0 \longrightarrow \mathrm{Hom}(A'', M) \longrightarrow \mathrm{Hom}(A, M)
+  \longrightarrow \mathrm{Hom}(A', M) \longrightarrow 0
+  \tag{2}
+\]
+est exacte.
+
+\textbf{Exemples.} (i) $M = T(X)$, car alors la suite (2) s'écrit
+\[
+  0 \longrightarrow \mathrm{Hom}\bigl( S(A''), X \bigr) \longrightarrow
+  \mathrm{Hom}\bigl( S(A), X \bigr) \longrightarrow
+  \mathrm{Hom}\bigl( S(A'), X \bigr) \longrightarrow 0
+  \tag{2 bis}
+\]
+[D'ailleurs, si (1) est telle que pour tout objet $S$-injectif $M$
+\struck{\ill{}} de la forme $M = T(X)$ la suite (2) est exacte, alors (1) est
+$S$-exacte, car faisant \ill{} $X$ dans (1 bis) exacte ; (2 bis) sera exacte
+pour \struck{\ill{}} $X = S(A')$.]
+\note{le raisonnement entre crochets est deux fois repris et biffé}
+
+(ii) Supposons $S$ exact \add{à droite} et « fidèle » \struck{en ce sens que}
+$S(u) = 0 \Rightarrow u = 0$. Soit $A \in C$ ; on dit que la suite
+\[
+  \Sigma(A) : \quad 0 \longrightarrow A \longrightarrow TS(A)
+  \longrightarrow Z(A) \longrightarrow 0
+  \tag{3}
+\]
+(où $Z(X) = \mathrm{coker}\,\bigl( X \to TS(X) \bigr)$) est $S$-exacte. En
+effet, elle se transforme par $S$
+
+\page{19}
+en
+\[
+  0 \longrightarrow S(A) \longrightarrow STS(A) \longrightarrow SZ(X)
+  \longrightarrow 0
+\]
+elle est exacte car \ill{} $STS(A)$ et $SZ(X)$ puisque $S$ est exact à droite,
+et \ill{} elle est scindée, ce qui \ill{} explicite une rétraction construite
+plus haut de $S(A) \to S(TS)(A) = (ST)S(A)$.
+
+[Soit $M \in C$ tel que, pour toute suite $S$-exacte de la forme $\Sigma(A)$,
+la suite $\mathrm{Hom}\bigl( \Sigma(A), M \bigr)$ soit exacte :
+\[
+  0 \longrightarrow \mathrm{Hom}\bigl( Z(A), M \bigr) \longrightarrow
+  \mathrm{Hom}\bigl( TS(A), M \bigr) \longrightarrow
+  \mathrm{Hom}(A, M) \longrightarrow 0
+\]
+Alors $M$ est $S$-injectif. En effet, on fait $M = A$, et on trouve que
+$A \to TS(A)$ identifie $A$ à un \emph{facteur direct} de $TS(A) = T(X)$
+($X = S(A)$). Or $T(X)$ est $S$-injectif en vertu de (i), donc tout facteur
+direct l'est, donc $A$ l'est. Ce qui \struck{$\Rightarrow$} donne que
+$M$ est $S$-injectif $\Longleftrightarrow$ $M \to TS(M)$ \ill{} identifie $M$ à
+un facteur direct (cf. les faits de nature \ill{} de la catégorie
+Eilenberg--Moore).]
+
+\textbf{Remarque.} \ill{} \struck{pour que le foncteur $S$ soit exact}
+\add{lorsque $S$ exact} \struck{i.e. $\varphi$ est injectif} et que
+$S(u) = 0$ implique $u = 0$, alors une suite $S$-exacte est exacte. En effet,
+si $\Sigma : A \xrightarrow{u} Q \xrightarrow{v} R$ et $S(v) \circ S(u) = 0$,
+donc $S(v \circ u) = 0$, alors
+\note{la remarque est réécrite trois fois et fortement biffée ; seule la
+version portée en interligne se lit d'un bout à l'autre}
+
+\page{20}
+\struck{\ill{}}
+\note{le haut de la page — un diagramme
+$0 \to \mathrm{Hom}(B,A') \to \mathrm{Hom}(B,A) \to \mathrm{Hom}(B,A'') \to 0$
+au-dessus de sa suite image par $S$, et une demi-page de commentaire — est
+biffé en croix}
+
+\ldots $v u = 0$, et on aura
+\[
+  S\bigl( \mathrm{Ker}\, v / \mathrm{Im}\, u \bigr) =
+  \mathrm{Ker}\, S(v) / \mathrm{Im}\, S(u)
+\]
+et le \struck{des} premier membre est nul si et seulement si
+$\mathrm{Ker}\, v / \mathrm{Im}\, u$ est nul, i.e. une suite $\Sigma$ est
+exacte si et seulement si $S\Sigma$ l'est.
+
+Nous avons maintenant ce qu'il faut
+
+[catégories de « suites exactes » $\Longleftrightarrow$ catégories
+d'« \ill{} »]
+
+pour faire une théorie « \uncertain{véritable} » des foncteurs dérivés
+$C \to D$, où $D$ est une \emph{véritable} catégorie abélienne. De plus,
+définition des foncteurs $C^{0} = TS = C$ :
+\[
+  C^{1}(A) = C^{0}(A) / \mathrm{Im}\, A , \qquad
+  C^{i}(A) = C^{0}\Bigl( C^{i-1}(A) / \mathrm{Im}\bigl( C^{i-2}(A) \bigr) \Bigr)
+  \quad \text{pour } i \geqslant 2
+\]
+\marginal{($S$-injectifs)}
+qui donnent une $S$-résolution canonique (fonctorielle) de $A \in C$
+
+\end{document}
