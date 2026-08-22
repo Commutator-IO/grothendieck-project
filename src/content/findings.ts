@@ -437,4 +437,112 @@ export const FINDINGS: Finding[] = [
     settle:
       'Settled: this is the Isbell envelope, and the Kar(A) ⊂ reflexives inclusion is the standard statement. The external review named above independently flagged the same two literal impossibilities the reading corrects, which is evidence about the edition rather than about the mathematics.',
   },
+  {
+    id: '19-comonad-matrix-product-base',
+    cote: '19',
+    pages: '7–11',
+    kind: 'mathematical',
+    claim:
+      'For an adjoint pair over a product base B = ∏ Bᵢ, the comonad φ = fg decomposes into a matrix φ_ji = f_j g_i : Bᵢ → B_j whose comultiplication becomes a family λ_kji : φ_ki → φ_kj φ_ji; for two factors with g′, g″ fully faithful the whole matrix collapses to two crossed functors φ′ : B″ → B′, φ″ : B′ → B″ and two units λ′, λ″.',
+    basis:
+      'Pages 7–11 set φ_ji = f_j g_i, obtain pr_j φ((Xᵢ)) = ∏ᵢ φ_ji(Xᵢ) under the assumption that the f_j commute with I-indexed products, and build λ_kji by inserting the unit id → g_j f_j in the middle of f_k g_i. The manuscript declines to write the coassociativity relations out, noting only that i = j = k gives back the comultiplication of φᵢ and that the cases with two coinciding indices are degenerate.',
+    ours:
+      'The finiteness/exactness proviso that makes pr_j φ = ∏ φ_ji hold is stated in the reading where the page leaves it implicit. The collapse to two crossed functors is the page’s own, worked there in detail.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Look for the matrix decomposition of a comonad over a product base in the standard treatments — Barr–Wells, Toposes Triples and Theories ch. 3; Mac Lane CWM VI; and the descent literature, where the two-factor crossed form is closest to a gluing datum. An external review of the folder (Kimi, shared conversation of 2026-08) said it did not recognise this presentation in the standard texts, which is a reason to look rather than a result: nobody has yet searched.',
+  },
+  {
+    id: '19-comonadicity-dating-cannot-support-precedence',
+    cote: '19',
+    pages: '3–6',
+    kind: 'codicological',
+    claim:
+      'Nothing in the folder dates the comonadicity pages relative to Beck’s 1967 thesis: the inventory’s « [à partir de 1958-1973] » is an archivist’s range that straddles 1967, and no leaf of the batch carries a date.',
+    basis:
+      'The transcription of batch 1 records that the dating is the inventory’s own, for the whole shelfmark, and that nothing on these pages carries a date. The comonadicity statement occupies pages 3–6, inside a folder whose announced range opens nine years before Beck and closes six years after.',
+    ours:
+      'The reading names the theorem as Beck’s and says the monadic form is the 1967 thesis and the comonadic form its dual; the transcription flags the name « Beck » on the page itself as an uncertain reading. Neither claims a date for the leaves.',
+    literature: [
+      'J. Beck, Triples, algebras and cohomology, Columbia thesis (1967)',
+      'Transcription 19, batch 1 (batch-01.fr.tex), header and pages 3–6',
+    ],
+    status: 'candidate',
+    settle:
+      'Only physical evidence would settle it — a dated verso, an institute letterhead, a numbered seminar reference among these particular leaves. Recorded because an external review of the folder (Kimi, shared conversation of 2026-08) read the inventory range as evidence that these pages precede Beck, which it cannot be: the range is a deduction about the shelfmark, not a reading of these leaves. This entry exists to stop the next reader making the same step. Whatever is found, priority is not a claim this project makes.',
+  },
+  {
+    id: '19-adjoint-chains-length-n',
+    cote: '19',
+    pages: '79–80',
+    kind: 'mathematical',
+    claim:
+      'For every n there exist presheaf topoi carrying a chain of n successive adjoint functors, none of them fully faithful; whether such a chain can be continued indefinitely in both directions is left open on the page.',
+    basis:
+      'Page 79 is struck through entirely — an attempt at the two-sided question — and page 80 states the positive result, that a chain of successive adjoints can be extended indefinitely downwards. The two-sided question is posed and not answered there.',
+    ours:
+      'The reading notes that an infinite chain in both directions is in fact impossible in general, and is explicit that this answer is not Grothendieck’s and is not on the page.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Check the length-n construction against the literature on adjoint strings — where chains of length four and beyond on presheaf categories are classical — and establish whether the « none fully faithful » clause is what makes the statement non-trivial. The two-sided impossibility should be given its actual source rather than left as the reading’s aside.',
+  },
+  {
+    id: '19-faithful-transportable-is-forgetful',
+    cote: '19',
+    pages: '71–75',
+    kind: 'mathematical',
+    claim:
+      'A functor p : E → B is a forgetful functor of structure exactly when it is faithful and transportable — equivalently a fibration with preordered fibres; if it is moreover conservative the fibres are discrete and E is the category of elements of a presheaf on B.',
+    basis:
+      'Pages 71–75 define transportability by asking that E ×_B B^is → B^is be a fibration, note that every functor is isomorphic to a transportable one, and then read the answer off the fibres. The discrete case is identified with the category of elements.',
+    ours:
+      'The reading replaces the page’s « catégories ordonnées » by « préordonnées », antisymmetry not being automatic, and reconstructs the statements from a first third of page 72 that is rewritten twice and almost entirely struck out.',
+    literature: [
+      'Adámek–Herrlich–Strecker, Abstract and Concrete Categories, ch. 5 — concrete categories and transport of structure',
+      'SGA 1, exposé VI — fibred categories, and the category of elements of a presheaf as the discrete case',
+    ],
+    status: 'matched',
+    settle:
+      'Settled: this is the standard characterisation of concrete categories over B, and the discrete case is the Grothendieck construction. Kept as a killed candidate — the interest is the formulation, which answers « what makes a functor a forgetting of structure » without presupposing what a structure is.',
+  },
+  {
+    id: '135-sinh-theorem-classification',
+    cote: '135',
+    pages: '39–44, 46–58',
+    kind: 'mathematical',
+    claim:
+      'A Gr-category is classified up to equivalence by π₀, π₁ and a class k(C) ∈ H³(π₀, π₁), the map C ↦ k(C) being a bijection onto H³(M,N) for fixed type (M,N) — Sinh’s theorem — with the folder carrying it in Hoàng Xuân Sính’s own typescript alongside Grothendieck’s notes.',
+    basis:
+      'The theorem is stated on page 41 in the typescript presented by Henri Cartan, and again on page 50 in the thirteen-page English manuscript outlining the thesis in three chapters; Grothendieck’s handwritten notes occupy pages 2–37.',
+    ours:
+      'The reading identifies a Picard category with a connective spectrum truncated in degree 1 and k(C) with its first Postnikov invariant, which the folder does not say in those terms.',
+    literature: [
+      'Hoàng Xuân Sính, Gr-catégories, thèse, Université Paris VII (1975)',
+      'Sinh’s theorem as it stands in the modern literature on 2-groups and Picard groupoids',
+    ],
+    status: 'matched',
+    settle:
+      'Settled as mathematics: this is Sinh’s theorem, published in her thesis, and the folder is the working material behind it rather than an independent source for it. What the folder holds that the thesis does not is Grothendieck’s side of the work — including the closing page on non-commutative homological algebra, which is a programme and not a theorem, and is therefore not a candidate here.',
+  },
+  {
+    id: '161-1-giraud-recognition-half-page',
+    cote: '161-1',
+    pages: '15',
+    kind: 'mathematical',
+    claim:
+      'The folder derives the topos recognition criterion in half a page, as the converse to a fact it treats as already known: if φ : C → E is left exact and strictly generating, then E → Ĉ is fully faithful with the Kan extension φ̄ as left adjoint, so left exactness of φ̄ makes E a left-exact localisation of a presheaf category.',
+    basis:
+      'Page 15 poses the question « on sait que c’est OK si E est un topos. Réciproque ? » and sketches the converse immediately. An intermediate line, « il suffit que E soit un topos », is struck out on the page — it is the converse he is after. Pages 17–19 then do the general density computation the argument rests on, with α = i_! fully faithful and βα ≃ id.',
+    ours:
+      'The size hypotheses the page does not discuss — C small, E with small colimits — are stated in the reading, and the forward direction is named as the theorem now attached to Diaconescu, which the page does not name.',
+    literature: [
+      'J. Giraud, Analysis situs, Séminaire Bourbaki 256 (1963) and SGA 4 IV — the recognition theorem',
+      'R. Diaconescu (1975) — left exactness of the Kan extension of a flat functor',
+    ],
+    status: 'matched',
+    settle:
+      'Settled: this is Giraud’s criterion in its localisation form, and the forward implication is standard. Kept as a killed candidate because the interest is the compression — half a page, obtained as a converse — and because the folder is undated, so nothing here bears on when it was written relative to the published statement. An external review of the folder (Kimi, shared conversation of 2026-08) called it « Giraud’s recognition theorem written down as a conjecture before it became a theorem »; that inference needs a date the folder does not carry.',
+  },
 ];
