@@ -466,13 +466,14 @@ function Contributors() {
  */
 const PILOT = {
   /** Transcribed so far, counted off `public/manifest.json` and excluding the
-      specimen: 115#1, 135#1–3, 151#1–4, 161-1#1, 161-3#1–3. */
-  batchesTranscribed: 12,
-  /** All twelve now have a modernised reading covering them. Four folders
-      carry it as one file for the whole folder (115, 135, 161-1, 161-3);
-      folder 151 carries one file per batch, written in a single pass over the
-      folder — the layout the skill now specifies. */
-  batchesModernised: 12,
+      specimen: seventeen folders — 19#1–5, 29#1, 35#1, 48#1, 66#1, 108#1,
+      112#1, 114#1, 115#1, 135#1–3, 139#1, 151#1–4, 161-1#1, 161-3#1–3,
+      162-1#1, 162-6#1. */
+  batchesTranscribed: 27,
+  /** All but two — folders 139 and 29 have a transcription and no modernised
+      reading yet. The reading is written per folder, taken whole, and covers
+      every batch of it. */
+  batchesModernised: 25,
   /** Per batch. `contextM` is every token the pass sent or received, cache
       reads included; `writtenK` is output alone; hours are model-active time,
       gaps over five minutes dropped. Transcription is the mean of the five
@@ -482,6 +483,11 @@ const PILOT = {
       works from the transcription's text alone and never opens an image,
       which is the whole of the difference. */
   transcribe: { hoursPerBatch: 0.3, contextM: 26, writtenK: 230 },
+  /** One typed batch, measured the same way: folder 29#1, cut at the render
+      and PDF check before the session went on to other work. It is the
+      cheapest transcription measured so far, and the reason is in the crops,
+      not in the twenty page images — see the paragraph below. */
+  transcribeTyped: { hoursPerBatch: 0.3, contextM: 15, writtenK: 105 },
   modernize: { hoursPerBatch: 0.15, contextM: 9, writtenK: 60 },
   /** Sum of the two steps — the scope table below multiplies this. */
   hoursPerBatch: 0.45,
@@ -527,13 +533,15 @@ function CostAndHorizon() {
     <section className="mt-14 max-w-[52em]">
       <H2 id="cost">Cost, and the horizon</H2>
       <P id="cost-measured" className="prose-fonds mt-3">
-        <strong>{PILOT.batchesTranscribed} batches</strong> have been transcribed, across five
-        folders taken end to end — 115, fourteen pages; 161-1, nineteen; 135, fifty-eight;
-        161-3, fifty-four; and 151, seventy-four — and all{' '}
-        <strong>{PILOT.batchesModernised}</strong> now have their modernised reading.
-        Together they took about <strong>{hoursDone.toFixed(1)} h</strong> of model-active
-        time, moved <strong>{fmtM(contextDoneM)} tokens</strong> of context and wrote{' '}
-        <strong>{fmtSmallM(writtenDoneK / 1000)}</strong>.
+        <strong>{PILOT.batchesTranscribed} batches</strong> have been transcribed, across
+        seventeen folders taken end to end, and <strong>{PILOT.batchesModernised}</strong> of
+        them have their modernised reading — folders 139 and 29 are transcribed and not yet
+        read. At the per-batch means below that comes to about{' '}
+        <strong>{hoursDone.toFixed(1)} h</strong> of model-active time,{' '}
+        <strong>{fmtM(contextDoneM)} tokens</strong> of context and{' '}
+        <strong>{fmtSmallM(writtenDoneK / 1000)}</strong> written. That total is the batch
+        count times a measured mean, not a sum over every pass: seven passes have been
+        metered end to end, and the rest are assumed to resemble them.
       </P>
       <P id="cost-context-vs-written" className="prose-fonds mt-3">
         Those last two numbers are the same work counted twice, and keeping them apart is the
@@ -555,6 +563,27 @@ function CostAndHorizon() {
         ran heaviest, at about 40 M each: twenty dense pages, two hands, and a manuscript
         half in English. Treat the ranges below as a first anchor, to be corrected by the
         next batches.
+      </P>
+      <P id="cost-typed" className="prose-fonds mt-3">
+        Typed pages are the cheapest in the fonds, and now measured rather than supposed.
+        Folder 29's first batch — nine typed pages of a 1967 sketch on ramification data,
+        alongside eleven of correspondence — moved{' '}
+        <strong>{PILOT.transcribeTyped.contextM} M</strong> and wrote{' '}
+        <strong>{PILOT.transcribeTyped.writtenK}k</strong>, against{' '}
+        {PILOT.transcribe.contextM} M for the handwritten mean and 40 M for folder 135. The
+        saving is not in the twenty page images, which are loaded and re-sent whatever is on
+        them: it is in the <em>crops</em>. Settling a word in a hand of 1962 takes dozens of
+        high-resolution re-reads of the same leaf, quadrant by quadrant, and each one is
+        another image in context; a typed line is settled at first sight, and the crops that
+        remain go to the overtyped strikeouts and the handwritten marginalia. Thirty-nine
+        folders carry a typescript, which is why they are worth taking first.
+      </P>
+      <P id="cost-typed-not-projected" className="prose-fonds mt-3">
+        The projections below are <em>not</em> re-based on that figure. Only seven of those
+        thirty-nine folders are typescript alone; the rest pair a typescript with manuscript
+        notes or letters, and the typed fraction of a mixed folder is unknown until someone
+        opens it. So the ranges keep the handwritten mean, and the typed measurement is best
+        read as a floor — what a batch costs when the reading is easy.
       </P>
 
       <div className="mt-5 overflow-x-auto">
@@ -583,6 +612,18 @@ function CostAndHorizon() {
             </tr>
             <tr className="border-b border-ink-100">
               <td className="py-2 pr-4 font-medium text-ink-900">
+                <code className="text-[12px]">/transcribe</code>, typed batch
+                <span className="block text-[11.5px] font-normal text-ink-400">
+                  one measurement, folder 29#1
+                </span>
+              </td>
+              <td className="py-2 pr-4 text-ink-400">1</td>
+              <td className="py-2 pr-4">{PILOT.transcribeTyped.hoursPerBatch} h</td>
+              <td className="py-2 pr-4">{PILOT.transcribeTyped.contextM} M</td>
+              <td className="py-2">{PILOT.transcribeTyped.writtenK}k</td>
+            </tr>
+            <tr className="border-b border-ink-100">
+              <td className="py-2 pr-4 font-medium text-ink-900">
                 <code className="text-[12px]">/modernize</code>, per batch
               </td>
               <td className="py-2 pr-4 text-ink-400">1</td>
@@ -595,6 +636,7 @@ function CostAndHorizon() {
                 Done so far
                 <span className="block text-[11.5px] font-normal text-ink-400">
                   {PILOT.batchesTranscribed} transcribed, {PILOT.batchesModernised} modernised
+                  — count × measured mean
                 </span>
               </td>
               <td className="py-2 pr-4">{PILOT.batchesTranscribed}</td>
@@ -639,7 +681,9 @@ function CostAndHorizon() {
         that turns <em>Drafted</em> into <em>Checked</em> is not in the table at all, and it
         is the slower half of the work. Per-pass figures are read off conversation windows, so
         each carries a little of the exchange around it — they are measurements with a margin,
-        not meter readings. Folders already edited by the community (marked on the archive
+        not meter readings. Folder 29's typed figure was cut at the render and PDF check,
+        before that session went on to other work, so it excludes what followed and includes
+        the whole of the reading. Folders already edited by the community (marked on the archive
         page) should be subtracted from any plan rather than re-transcribed.
       </P>
     </section>
