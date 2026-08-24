@@ -1,0 +1,517 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 134-1, pages
+% 1-6 (the whole folder; pages 1 and 2 are the cover and a blank leaf, so the
+% mathematics is pages 3 to 6).
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried — a doubtful
+% reading, a notation he used differently, a missing passage — moves into a
+% footnote.
+%
+% It is held to being mathematically correct as it stands, not merely faithful
+% to the page. Where the manuscript is loose or elliptical, the true statement
+% is what appears here, and the footnote says what the page has. In any dispute
+% of substance the transcription governs: whoever cites Grothendieck must cite
+% batch-01.fr.tex.
+%
+% Scope: a SINGLE document for the whole folder, the convention every reading
+% in this repository follows. The shelfmark holds one batch, so pages 1-6 are
+% the folder entire and no part of it is read in another file. The folder was
+% read whole — all six pages of batch-01.fr.tex — before any of this was
+% written.
+%
+% Four departures from the page are worth naming here, because they are what a
+% reader would otherwise trip on.
+%
+% 1. The letter never defines E'(M,N). It says only what E'(M,N) is supposed to
+%    express, heuristically — the strict 2-Picard stack made of not-necessarily
+%    -strict Picard stacks. A modernised reading cannot leave the principal
+%    object undefined, so a definition is supplied: E'(M,N) is the truncated
+%    mapping spectrum computed over the sphere rather than over Z. That
+%    definition is ours, it is flagged as ours, and everything the letter
+%    asserts about E' is then a theorem rather than a heuristic.
+%
+% 2. Page 4 says E'(M,N) has "les invariants H^i ... ceux de E(M,N) en degré
+%    i+2". Read literally that is false — the right-hand side vanishes for
+%    i > 0. What the triangle gives is: H^i(E') = H^i(E) for i <= 1, and in
+%    degree 2 the exact sequence (S). The correct statement is what appears
+%    below, with the page's own in a footnote.
+%
+% 3. The direction of the triangle's arrows is what makes (S) come out rather
+%    than a different four-term sequence, and it is checked here rather than
+%    copied: the map runs from E to E', the forgetful map from Z-linear to
+%    sphere-linear, and the third term is its cofibre.
+%
+% 4. The obstruction group. The page says the obstruction lies in
+%    Ext^3(X; M, N). What the triangle gives is the hypercohomology group
+%    H^3(X, E(M,N)), which INJECTS into Ext^3(X; M, N) — a subgroup, not the
+%    whole. The finer statement is given, with the page's in a footnote.
+%
+% Pass: Opus 5 (claude-opus-5), 2026-08-24 — first pass, unchecked against the
+% transcription by a human.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{134-1}
+\pages{1}{6}
+\dating{1974-1984}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Lettres Breen 75,76 [correspondance avec Larry Breen, Pierre Deligne et Daniel Quillen] : lettres et copies de lettre (1974-1976, 1984) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Ce dossier contient une seule lettre, de quatre pages, écrite de Lodève et
+adressée à Pierre Deligne. Grothendieck y demande si une petite chose qu'il
+vient de remarquer est connue. La chose est celle-ci : lorsqu'on remplace,
+dans un groupe commutatif, l'égalité par un isomorphisme qu'il faut choisir,
+il reste exactement un invariant de plus qu'on ne l'attendait, et cet
+invariant est un signe.
+
+Voici d'où il vient. Dans un groupe commutatif, $xy$ et $yx$ sont le même
+élément et il n'y a rien à dire. Supposons maintenant que les « éléments »
+soient les objets d'une catégorie et que l'égalité ait été remplacée par
+l'isomorphisme : il faut alors se donner, pour chaque couple d'objets, un
+isomorphisme précis $c_{x,y}$ de $x \otimes y$ sur $y \otimes x$. Prenons-le
+avec $y = x$. On obtient un automorphisme de $x \otimes x$, et rien n'oblige
+cet automorphisme à être l'identité ; le seul axiome disponible, qui dit
+qu'échanger deux fois ne fait rien, oblige seulement son carré à valoir
+l'identité. Cet automorphisme est donc d'ordre au plus $2$, et il n'est pas
+toujours trivial : en algèbre graduée, échanger une droite de degré impair
+avec elle-même donne $-1$, et c'est toute la règle des signes.
+
+On veut classer ces objets. Deux invariants sont évidents : le groupe $M$ des
+objets à isomorphisme près, et le groupe $N$ des automorphismes de l'objet
+unité. La question est de savoir ce qu'il y a d'autre, et elle a deux
+réponses selon qu'on interdit ou qu'on autorise le signe. Si on l'interdit
+--- on dit alors que l'objet est \emph{strict} --- la réponse était connue :
+c'est un groupe $\mathrm{Ext}^2(M,N)$, l'analogue en un cran plus haut de la
+classification des extensions de groupes par une classe de cohomologie. Si on
+l'autorise, il faut ajouter le signe, c'est-à-dire un homomorphisme de $M$
+dans les éléments d'ordre $2$ de $N$.
+
+L'idée de la lettre est de mettre les deux réponses dans un même objet. À
+$M$ et $N$ elle associe deux complexes : l'un, $E(M,N)$, dont la cohomologie
+en degré $2$ classe les objets stricts ; l'autre, $E'(M,N)$, dont la
+cohomologie en degré $2$ classe tous les objets. Elle affirme qu'ils sont
+reliés par un triangle distingué dont le troisième terme est le signe tout
+seul, placé exactement en degré $2$. On en tire une suite exacte courte $(S)$
+qui dit : classer un objet quelconque, c'est classer un objet strict et
+choisir un signe --- ni plus, ni moins. C'est la même forme qu'une suite de
+coefficients universels, et elle joue le même rôle : elle mesure d'un seul
+coup ce qu'on perd en travaillant dans le monde plus rigide.
+
+Grothendieck dit ensuite savoir démontrer que tout signe se réalise
+effectivement, ce qui n'a rien d'évident : l'obstruction vit a priori dans un groupe de cohomologie de degré $3$, et un argument « universel » la tue. Il termine par
+un exemple qui est la raison d'être de tout le reste : lorsque $M$ et $N$ sont
+les groupes $K^{0}$ et $K^{1}$ d'un anneau, le signe est l'échange de deux
+copies d'un même module, c'est-à-dire une matrice de permutation de
+déterminant $-1$ --- de sorte que la K-théorie fournit, gratuitement, une
+section canonique de la suite $(S)$.
+
+Où cela mène-t-il ? Une catégorie de Picard est aujourd'hui la même chose
+qu'un spectre n'ayant que deux groupes d'homotopie, en degrés $0$ et $1$ ; le
+signe est la multiplication par l'élément $\eta$ de la sphère, et la classe
+$\mathrm{Ext}^2$ est le premier invariant de Postnikov. Le triangle de la
+lettre est alors la comparaison entre « linéaire sur les entiers » et
+« linéaire sur la sphère », dont le premier écart est exactement d'ordre $2$.
+La question finale de la lettre --- y a-t-il des variantes supérieures ? ---
+reçoit dans ce langage une réponse de principe : oui, une par étage de la
+tour de Postnikov de la sphère. Les noms à chercher sont \emph{champ de
+Picard}, \emph{type d'homotopie stable}, \emph{invariant de Postnikov},
+\emph{carré de Steenrod $Sq^{2}$}.
+
+Reste la manière. La chose n'arrive pas au terme d'un programme : elle arrive
+parce qu'il prépare, faute de mieux, un petit séminaire d'algèbre sur la thèse
+de Hoàng Xuân Sính, et qu'en la transposant dans le langage des champs il
+« tombe sur le truc suivant ». La lettre est entièrement faite d'hésitations
+calibrées --- « qui pour l'instant reste heuristique », « sauf erreur », « ce
+qui pour moi ne fait guère de doute » --- et le mot « splittée », écrit puis
+barré, est remplacé par un énoncé plus faible et exact. Elle ne conclut pas :
+elle demande. Et dans la marge de la première page, d'une autre main, Deligne
+la fait suivre à Larry Breen avec ce mot : « j'imagine que tu sais ce que le
+maître demande, mais n'ai pu néanmoins lui répondre ».
+
+\keywords{Picard stack, stable homotopy 1-type, Postnikov invariant, eta multiplication, sphere spectrum, algebraic K-theory}
+\end{resume}
+
+\pagerange{3}{3}
+\section*{La lettre et son occasion (page 3)}
+
+La lettre est datée « Lodève le 27 », le mois et l'année ayant été
+surchargés puis perdus à la photocopie.\footnote{Le dossier est intitulé
+« Lettres Breen 75, 76 » et l'inventaire date l'ensemble de 1974-1984. La
+thèse de Hoàng Xuân Sính, dont la lettre parle au futur comme d'un sujet de
+séminaire, a été soutenue en 1975. Ces trois indications sont compatibles avec
+1975 ou 1976 ; aucune ne date la lettre, et cette lecture ne la date pas. Les
+feuillets portent par ailleurs 60 à 64 au crayon de l'archiviste --- c'est la
+numérotation de la cote 134 prise entière --- tandis que les numéros employés
+ici, 1 à 6, sont ceux de la partie 134-1.}
+
+Son occasion est un contretemps d'enseignement : n'ayant peut-être pas de
+cours de premier cycle à assurer, Grothendieck envisage de faire à la place un
+petit séminaire d'algèbre sur « les fourbis de Mme Sinh », c'est-à-dire sur la
+thèse de Hoàng Xuân Sính, éventuellement transposés dans le langage des
+champs.\footnote{Le tapuscrit de cette thèse et les notes qui l'accompagnent
+forment le dossier 135 du même fonds. La phrase où il explique pourquoi il
+est libre de son trimestre est en partie illisible sur la page ; seul le
+projet de séminaire est assuré.} C'est en la transposant qu'il rencontre ce
+que la lettre expose, et qu'il présente d'emblée comme heuristique.
+
+La marge gauche de cette même page porte, à la verticale et d'une autre main,
+un mot de Pierre Deligne à Larry Breen : il fait suivre la lettre, dit
+imaginer que Breen sait ce que « le maître » demande, et avoue n'avoir pu lui
+répondre. Le dossier est donc l'exemplaire de Breen.
+
+\pagerange{3}{5}
+\section*{Champs de Picard épinglés par deux faisceaux (pages 3 à 5)}
+
+Fixons un topos $X$. Un \emph{champ de Picard} sur $X$ est un champ en
+groupoïdes $P$ muni d'une loi $\otimes : P \times P \to P$, d'une contrainte
+d'associativité et d'une contrainte de commutativité
+$c_{x,y} : x \otimes y \xrightarrow{\ \sim\ } y \otimes x$ vérifiant les
+axiomes de cohérence, tel que $P$ soit localement non vide et que
+$x \mapsto x \otimes y$ soit une équivalence pour tout $y$.\footnote{C'est la
+définition de Deligne, SGA 4, Exposé XVIII, 1.4. La lettre l'emploie sans la
+rappeler, ce qui est normal entre les deux correspondants ; elle est rappelée
+ici parce que tout ce qui suit en dépend, et notamment la clause de symétrie
+$c_{y,x} \circ c_{x,y} = \mathrm{id}$, qui est ce qui fait de l'invariant
+$\sigma$ un élément d'ordre $2$.}
+
+Un tel champ a deux invariants immédiats :
+\[ \pi_0(P) = \text{faisceau des classes d'objets}, \qquad
+   \pi_1(P) = \underline{\mathrm{Aut}}(0). \]
+Pour tout objet $y$, la translation par $y$ identifie canoniquement
+$\underline{\mathrm{Aut}}(y)$ à $\pi_1(P)$, de sorte que $\pi_1(P)$ mesure les
+automorphismes de n'importe quel objet.
+
+Soient maintenant $M$ et $N$ deux faisceaux abéliens sur $X$. Dire qu'un champ
+de Picard $P$ est \emph{épinglé} par $M$ et $N$, c'est le donner avec deux
+isomorphismes $\pi_0(P) \simeq M$ et $\pi_1(P) \simeq N$ ; les équivalences
+entre tels objets sont celles qui respectent les épinglages.\footnote{Le mot
+« épinglé » est celui de la lettre ; il n'y est pas défini. La définition
+ci-dessus est la seule sous laquelle les énoncés de la lettre sont vrais :
+sans les isomorphismes, les classes d'équivalence ne formeraient pas un
+$\mathrm{Ext}^2$ mais un quotient de celui-ci par l'action des automorphismes
+de $M$ et de $N$.}
+
+\subsection*{L'invariant de symétrie}
+
+Soit $P$ un champ de Picard et $L$ une section de $P$ au-dessus d'un objet $U$
+de $X$. La contrainte de commutativité prise en $y = x = L$ donne un
+automorphisme
+\[ c_{L,L} \in \underline{\mathrm{Aut}}(L \otimes L) \simeq \pi_1(P) . \]
+L'axiome de symétrie donne $c_{L,L}^{\,2} = \mathrm{id}$, et l'axiome
+d'associativité (l'hexagone) donne
+$c_{L \otimes L', L \otimes L'} = c_{L,L} \cdot c_{L',L'}$, puisque les deux
+termes croisés $c_{L,L'}$ et $c_{L',L}$ sont inverses l'un de l'autre. Cet
+invariant ne dépend donc que de la classe de $L$ dans $\pi_0(P)$, il est
+additif, et il est tué par $2$ : c'est un homomorphisme
+\[ \sigma(P) \,:\, M \longrightarrow {}_2 N , \]
+où ${}_2 N$ désigne le sous-faisceau des sections de $N$ tuées par
+$2$.\footnote{Page 5 : « $\sigma$ étant l'invariant associé à toute section
+$L$ d'un champ de Picard, la symétrie de $L \otimes L$, interprétée comme
+section de ${}_2N$ ». Le calcul qui montre que c'est un homomorphisme n'est
+pas sur la page ; il est classique et donné ici pour que l'énoncé de $(S)$ ait
+un sens. On notera l'identification $\underline{\mathrm{Hom}}(M, {}_2N) =
+\underline{\mathrm{Hom}}(M/2M, N)$, dont on se servira plus bas : un
+homomorphisme à valeurs dans ${}_2N$ est exactement un homomorphisme qui se
+factorise par $M/2M$.}
+
+Un champ de Picard est dit \emph{strict} lorsque $c_{x,x} = \mathrm{id}$ pour
+tout $x$. Vu ce qui précède, cela équivaut à $\sigma(P) = 0$. Le signe est
+donc \emph{le} défaut de stricte commutativité, et c'est le seul.
+
+\subsection*{Les deux classifications}
+
+Le cas strict est le cas connu. Le théorème de Deligne identifie la
+$2$-catégorie des champs de Picard stricts sur $X$ à la catégorie dérivée
+$D^{[-1,0]}(X)$, un champ $P$ correspondant à un complexe $K$ avec
+$H^{-1}(K) = \pi_1(P)$ et $H^{0}(K) = \pi_0(P)$.\footnote{SGA 4, Exposé
+XVIII, 1.4.15. Le séminaire a paru en 1972-1973, donc avant la lettre, et cet
+exposé est de Deligne lui-même : c'est le destinataire qui avait démontré le
+résultat, ce qui explique que la lettre le tienne pour acquis sans le nommer.} Un tel
+complexe épinglé par $M$ et $N$ est un dévissage
+$N[1] \to K \to M \xrightarrow{\,k\,} N[2]$, entièrement déterminé par sa
+classe $k$, d'où la classification par
+\[ \underline{\mathrm{Ext}}^2(M,N) . \]
+
+Le cas général est celui que la lettre veut atteindre. Grothendieck introduit
+d'abord le complexe qui porte le cas strict,
+\[ E(M,N) \;=\; \tau_{\leq 2} \, R\underline{\mathrm{Hom}}(M,N) , \qquad
+   \underline{H}^i\bigl(E(M,N)\bigr) =
+   \begin{cases}
+     \underline{\mathrm{Ext}}^i(M,N) & 0 \leq i \leq 2, \\
+     0 & \text{sinon,}
+   \end{cases} \]
+puis pose l'existence d'un second complexe $E'(M,N)$ dont le
+$\underline{H}^2$, noté $P(M,N)$, est le faisceau des classes d'équivalence de
+champs de Picard \emph{non nécessairement stricts} épinglés par $M$ et
+$N$.\footnote{Plus précisément : $P(M,N)$ est le faisceau associé au
+préfaisceau $U \mapsto \{\text{champs de Picard sur } X/U \text{ épinglés par
+} M, N\}/\!\simeq$. La lettre dit « le faisceau des données à équivalence près
+des champs de Picard épinglés par $M$, $N$ » ; la faisceautisation est
+implicite et elle est nécessaire, la formation des classes d'équivalence
+n'étant pas de nature locale.}
+
+La lettre ne définit pas $E'(M,N)$ : elle dit seulement ce qu'il doit
+exprimer, à savoir le $2$-champ de Picard strict formé des $1$-champs de
+Picard non nécessairement stricts, « en admettant que la théorie pour les
+$1$-champs de Picard stricts s'étend aux $2$-champs de Picard stricts (ce qui
+pour moi ne fait guère de doute) ». Cette lecture en donne une définition,
+qui est la nôtre, et sous laquelle tout ce que la lettre affirme devient
+démontrable :
+\[ E'(M,N) \;=\; \tau_{\leq 2} \, R\underline{\mathrm{Hom}}_{\mathbb{S}}(HM, HN), \]
+le complexe de morphismes calculé dans les faisceaux de spectres sur $X$,
+c'est-à-dire au-dessus de la sphère $\mathbb{S}$ et non plus au-dessus de
+$\mathbb{Z}$.\footnote{Cette définition est la nôtre, et elle est anachronique
+au sens où le langage n'était pas disponible sous cette forme. Ce qu'elle
+formalise ne l'est pas : un champ de Picard sur $X$ est la même chose qu'un
+faisceau de spectres connectifs tronqué en degré $1$, les champs stricts
+étant ceux qui sont des modules sur $H\mathbb{Z}$. La justification qu'elle
+donne à $(T)$ est exposée à la section suivante. Le lecteur qui préfère s'en
+tenir à la lettre peut lire $E'(M,N)$ comme un objet caractérisé par
+$\underline{H}^2(E') = P(M,N)$ et par le triangle $(T)$ lui-même, ce qui est
+exactement le statut heuristique que la lettre lui donne.}
+
+\pagerange{3}{4}
+\section*{Le triangle $(T)$ (pages 3 et 4)}
+
+Le morphisme d'oubli, qui à un champ de Picard strict associe le champ de
+Picard sous-jacent --- ou, dans le langage ci-dessus, qui à une application
+$H\mathbb{Z}$-linéaire associe l'application $\mathbb{S}$-linéaire
+sous-jacente --- fournit une flèche $E(M,N) \to E'(M,N)$. La lettre affirme
+qu'elle s'insère dans un triangle distingué canonique
+\begin{tikzcd}
+& \underline{\mathrm{Hom}}(M, {}_2 N)[-2] \arrow[dl, "{[1]}"] & \\
+E(M, N) \arrow[rr] & & E'(M, N) \arrow[ul]
+\end{tikzcd}
+\[ (T) \qquad E(M,N) \longrightarrow E'(M,N) \longrightarrow
+   \underline{\mathrm{Hom}}(M, {}_2 N)[-2] \xrightarrow{\ [1]\ } \]
+
+Le sens des flèches n'est pas indifférent, et il est ici celui de la page : la
+flèche part de $E$ et non de $E'$.\footnote{C'est ce sens, et lui seul, qui
+produit la suite $(S)$. Pris à l'envers, le même triangle donnerait la suite à
+quatre termes $\underline{\mathrm{Ext}}^1 \to \underline{\mathrm{Hom}}(M,{}_2N)
+\to \underline{H}^2(E') \to \underline{\mathrm{Ext}}^2 \to 0$, qui n'est pas
+ce que la page écrit et qui ne dit pas ce que la page veut dire. La page
+dessine le triangle sans indiquer le décalage sur la flèche de retour ; le
+« $[1]$ » porté ci-dessus est le nôtre.}
+
+\subsection*{Pourquoi il est vrai}
+
+Le calcul, dans le langage de la définition adoptée, tient en trois lignes.
+Comme $HN$ est un module sur $H\mathbb{Z}$, l'adjonction donne
+\[ R\underline{\mathrm{Hom}}_{\mathbb{S}}(HM, HN) \;=\;
+   R\underline{\mathrm{Hom}}_{H\mathbb{Z}}(H\mathbb{Z} \wedge HM, HN), \]
+et la flèche $E \to E'$ est la restriction le long du morphisme d'action
+$\mu : H\mathbb{Z} \wedge HM \to HM$, qui est bien $H\mathbb{Z}$-linéaire. Il
+suffit donc de connaître la fibre de $\mu$. Les groupes d'homotopie de
+$H\mathbb{Z} \wedge HM$ se calculent à partir de l'homologie entière du
+spectre d'Eilenberg--MacLane, $H_*(H\mathbb{Z};\mathbb{Z}) = \mathbb{Z}, 0,
+\mathbb{Z}/2, \ldots$ en degrés $0, 1, 2$ : on trouve
+\[ \pi_0 = M, \qquad \pi_1 = 0, \qquad \pi_2 = M/2M , \]
+de sorte que la fibre de $\mu$ est, en degrés $\leq 2$, le spectre
+$\Sigma^2 H(M/2M)$. En appliquant
+$R\underline{\mathrm{Hom}}_{H\mathbb{Z}}(-, HN)$ et en tronquant, le troisième
+terme du triangle devient
+\[ \tau_{\leq 2} \, R\underline{\mathrm{Hom}}(M/2M, N)[-2] \;=\;
+   \underline{\mathrm{Hom}}(M/2M, N)[-2] \;=\;
+   \underline{\mathrm{Hom}}(M, {}_2 N)[-2] . \]
+C'est $(T)$.\footnote{On notera au passage pourquoi $(S)$ n'est pas
+manifestement scindée. Le morphisme d'unité $HM \to H\mathbb{Z} \wedge HM$
+scinde $\mu$, mais il n'est pas $H\mathbb{Z}$-linéaire : la structure de
+module de la source est celle de $HM$, celle du but celle du facteur de
+gauche, et elles ne coïncident pas. Sur le topos ponctuel le scindage existe
+tout de même, tout complexe de groupes abéliens étant somme de ses
+cohomologies ; c'est ce qui rend la question intéressante sur un topos
+général, où les faisceaux abéliens ne forment pas une catégorie héréditaire.}
+
+\pagerange{4}{4}
+\section*{La suite exacte $(S)$ (page 4)}
+
+Écrivons la suite exacte longue de cohomologie de $(T)$. Le troisième terme
+n'a de cohomologie qu'en degré $2$, où elle vaut
+$\underline{\mathrm{Hom}}(M, {}_2N)$. Il vient donc, pour $i \leq 1$,
+\[ \underline{H}^0(E') = \underline{\mathrm{Hom}}(M,N), \qquad
+   \underline{H}^1(E') = \underline{\mathrm{Ext}}^1(M,N), \]
+et en degré $2$ la suite exacte
+\[ (S) \qquad 0 \longrightarrow \underline{\mathrm{Ext}}^2(M,N)
+   \longrightarrow \underbrace{\underline{H}^2\bigl(E'(M,N)\bigr)}_{P(M,N)}
+   \xrightarrow{\ \sigma\ } \underline{\mathrm{Hom}}(M, {}_2 N)
+   \longrightarrow 0 . \]
+L'exactitude à droite est gratuite, et c'est la troncature qui la donne :
+$\underline{H}^3(E) = 0$ parce que $E$ est tronqué en degré
+$2$.\footnote{Telle que la transcription la lit, la page 4 dit que
+$E'(M,N)$ « est un complexe dont les invariants $\underline{H}^i$ sont ceux de
+$E(M,N)$ en degré $i+2$ ». Pris à la lettre cela affirmerait
+$\underline{H}^i(E') = \underline{H}^{i+2}(E)$, ce qui est faux : le membre de
+droite est nul dès que $i > 0$. L'énoncé exact est celui donné ci-dessus, et
+c'est manifestement celui que la suite de la page emploie, puisqu'elle enchaîne
+aussitôt sur $(S)$.}
+
+La lecture est celle-ci, et c'est tout le contenu de la lettre : classer un
+champ de Picard épinglé par $M$ et $N$, c'est classer un champ strict --- une
+classe dans $\underline{\mathrm{Ext}}^2(M,N)$ --- et choisir un signe. Rien
+d'autre ne se cache entre les deux.
+
+Grothendieck ajoute que $(S)$ « se construit en tout cas canoniquement à la
+main », indépendamment de $(T)$ : le terme médian est le faisceau des champs
+de Picard épinglés à équivalence près, la flèche $\sigma$ est l'invariant de
+symétrie construit plus haut, l'injectivité à gauche est la caractérisation
+des champs stricts par $\sigma = 0$, et la surjectivité à droite est l'énoncé
+de la section suivante. Cette construction directe ne suppose rien de la
+théorie des $2$-champs ; c'est ce qui rend la lettre solide là même où elle se
+dit heuristique.\footnote{La page 5 porte, barré, le mot « catégories »,
+corrigé en « champs » : la distinction entre les deux --- une catégorie
+monoïdale, et un champ dont les sections locales forment de telles catégories
+--- est précisément ce qui donne à $(S)$ son terme $\underline{\mathrm{Ext}}^2$
+plutôt qu'un $\mathrm{Ext}^2$ global.}
+
+\pagerange{5}{5}
+\section*{Tout signe se réalise, et l'obstruction (page 5)}
+
+L'exactitude de $(S)$ comme suite de faisceaux ne dit pas que ses sections se
+relèvent : une suite exacte courte de faisceaux abéliens n'est pas exacte sur
+les sections. Grothendieck énonce le relèvement séparément, et sous sa forme
+la plus forte :
+
+\begin{quote}
+\textbf{Énoncé (page 5).} Tout homomorphisme $M \to {}_2N$ provient d'un champ
+de Picard épinglé par $M$ et $N$. Par fonctorialité en $X$, il en va de même
+au-dessus de tout objet $U$ de $X$ : toute section de
+$\underline{\mathrm{Hom}}(M, {}_2N)$ sur $U$ se relève en une section de
+$P(M,N)$ sur $U$, et même en un élément de l'hypercohomologie
+$\mathbb{H}^2\bigl(U, E'(M,N)\bigr)$.
+\end{quote}
+
+La dernière précision est la bonne, et c'est celle qu'il appelle « il y a
+mieux en fait » : un élément de $\mathbb{H}^2(U, E')$ est un champ de Picard
+véritable sur $U$, alors qu'une section de $P(M,N)$ n'est qu'une donnée locale
+recollée à équivalence près.
+
+L'obstruction se lit sur la suite exacte longue d'hypercohomologie de $(T)$ :
+\[ \mathbb{H}^2\bigl(U, E'(M,N)\bigr) \longrightarrow
+   \mathrm{Hom}_U(M, {}_2N) \xrightarrow{\ \partial\ }
+   \mathbb{H}^3\bigl(U, E(M,N)\bigr), \]
+et $\mathbb{H}^3(U, E(M,N))$ s'injecte dans $\mathrm{Ext}^3(U; M,
+N)$.\footnote{La page dit « a priori l'obstruction est dans
+$\mathrm{Ext}^3(X;M,N)$ », en notant $\mathrm{Ext}^n(X;-,-)$ le $\mathrm{Ext}$
+global, par opposition au $\underline{\mathrm{Ext}}^n$ faisceautique. C'est
+correct mais un peu large : le groupe où vit réellement l'obstruction est
+$\mathbb{H}^3(X, \tau_{\leq 2} R\underline{\mathrm{Hom}}(M,N))$, qui s'injecte
+dans $\mathrm{Ext}^3(X;M,N)$, le tronqué supérieur $\tau_{\geq 3}$ n'ayant
+pas d'hypercohomologie en degré $2$. La précision est la nôtre.} L'énoncé revient donc à
+la nullité de $\partial$, que Grothendieck attribue à « un argument
+universel » sans le donner.\footnote{Le mot « universel » est entre guillemets
+sur la page, et rien de plus n'y figure. La reconstruction naturelle, qui est
+la nôtre, consiste à ramener l'énoncé au cas où $M$ est libre. Là le champ
+cherché se fabrique à la main : on prend le champ scindé $M \times BN$, dont la
+contrainte d'associativité est triviale, et on lui donne pour contrainte de
+commutativité une forme biadditive antisymétrique $b$ définie sur une base
+$(e_i)$ de $M$ par $b(e_i,e_i) = q(e_i)$ et $b(e_i,e_j) = 0$ pour $i \neq j$.
+Sa diagonale vaut bien $q$ --- les valeurs étant d'ordre $2$, $m_i^2$ et $m_i$
+y coïncident --- donc $\sigma$ vaut $q$ ; le cas général s'en déduit par une
+résolution. Nous ne prétendons
+pas que ce soit l'argument qu'il avait en tête.}
+
+Il en tire enfin la formulation qu'il retient, et qui est notablement plus
+prudente que celle qu'il avait commencé à écrire : la suite $(S)$ est « bien
+proche d'être scindée » --- l'extension admet une section \emph{ensembliste},
+au sens où toute section du troisième terme se relève --- sans qu'il soit
+affirmé qu'elle se scinde comme suite de faisceaux abéliens.\footnote{Le mot
+« splittée » est écrit puis barré sur la page. La prudence est justifiée : le
+relèvement de toutes les sections au-dessus de tout objet est strictement plus
+faible qu'un scindage additif, et l'on a vu plus haut pourquoi le scindage
+évident échoue sur un topos général.}
+
+\pagerange{6}{6}
+\section*{L'exemple : $K^0$ et $K^1$ (page 6)}
+
+Soit $A$ un anneau sur $X$, et soit considéré le champ additif des
+$A$-modules projectifs, muni de la somme directe. Prenons pour $M$ et $N$ les
+faisceaux $K^0$ et $K^1$ qui lui sont associés. Alors « le raisonnement de Mme Sinh »
+fournit un champ de Picard épinglé par $M$ et $N$, d'où une section canonique
+du terme médian $P(M,N)$ de $(S)$.\footnote{C'est le contenu du dossier 135 :
+l'enveloppe de Picard --- aujourd'hui : la complétion en groupe --- du champ
+additif des modules projectifs a pour invariants $K^0$ et $K^1$. La lettre
+écrit « $L \otimes L$ » pour la loi monoïdale générique ; ici cette loi est la
+somme directe, et c'est $L \oplus L$ qu'il faut lire dans ce paragraphe.}
+
+L'invariant de symétrie de ce champ se calcule, et il vaut la peine de
+l'écrire parce qu'il est complètement explicite. Pour $L$ un module projectif,
+$c_{L,L}$ est l'automorphisme d'échange de $L \oplus L$, c'est-à-dire la
+matrice de permutation $\left(\begin{smallmatrix} 0 & 1 \\ 1 &
+0\end{smallmatrix}\right)$ par blocs. Sa classe dans $K^1$ est celle de
+$-1$ : pour $L$ de rang $r$, l'échange est un produit de $r$ transpositions,
+donc de déterminant $(-1)^r$. Autrement dit
+\[ \sigma \,:\, K^0 \longrightarrow {}_2 K^1, \qquad
+   x \longmapsto \{-1\} \cdot x . \]
+Dans le langage des spectres, c'est la multiplication par l'élément $\eta$ de
+$\pi_1(\mathbb{S})$, dont l'image dans $K^1$ est précisément $\{-1\}$. La
+K-théorie ne fournit donc pas seulement une section de $(S)$ : elle fournit
+\emph{la} section universelle, celle que porte la sphère.\footnote{Cette
+identification est la nôtre. La lettre s'arrête à l'existence de la section
+canonique et n'en calcule pas $\sigma$. Le calcul par la matrice d'échange
+est élémentaire ; l'énoncé « $\eta$ s'envoie sur $\{-1\}$ » est un fait
+standard de K-théorie algébrique, postérieur en tout cas à la mise en forme
+de la lettre.}
+
+Grothendieck note enfin que tout ce qui précède a « les fonctorialités
+évidentes en $M$, $N$, $X$ ».
+
+\pagerange{6}{6}
+\section*{La question, et ce qu'on en sait aujourd'hui (page 6)}
+
+La lettre s'achève sur ce pour quoi elle est écrite :
+
+\begin{quote}
+Le triangle exact $(T)$ et la suite exacte $(S)$ sont-ils connus par les
+compétents (Quillen, Breen, Illusie…) ? Connaissent-ils des variantes
+« supérieures » ? Un principe « géométrique » pour les obtenir pourrait être
+via des $n$-champs de Picard non nécessairement stricts.
+\end{quote}
+
+Le vocabulaire d'aujourd'hui permet de dire où se rangent ces deux
+questions, sans rien dire de qui savait quoi et quand.\footnote{Cette lecture
+ne répond pas à la question posée, qui est une question de fait sur l'état des
+connaissances vers 1975 et que les seuls documents du dossier ne tranchent
+pas. Elle se borne à nommer les objets. On ne trouvera pas non plus ici
+d'affirmation sur l'antériorité : la lettre demande si la chose est connue,
+ce qui est le contraire d'une revendication.}
+
+Un champ de Picard sur $X$ est un faisceau de spectres connectifs tronqué en
+degré $1$ ; ses invariants sont $\pi_0 = M$, $\pi_1 = N$, et sa classification
+est celle des tours de Postnikov à deux étages, le premier invariant vivant
+dans le groupe des opérations stables de degré $2$ de $M$ vers $N$. Ce groupe
+est exactement le $\underline{H}^2(E')$ de la lettre. Les champs stricts sont
+ceux qui sont des modules sur $H\mathbb{Z}$, et leur classification par
+$\underline{\mathrm{Ext}}^2$ est le théorème de Deligne. Le triangle $(T)$ est
+alors la comparaison entre les deux linéarités, $\mathbb{Z}$ et
+$\mathbb{S}$ ; l'écart, en degré $2$, est le dual du carré de Steenrod
+$Sq^{2}$, et c'est la multiplication par $\eta$.
+
+Quant aux « variantes supérieures », la réponse de principe est oui, et elle
+est celle que Grothendieck devine en écrivant « via des $n$-champs de Picard
+non nécessairement stricts » : un $n$-champ de Picard est un faisceau de
+spectres connectifs tronqué en degré $n$, les stricts sont les
+$H\mathbb{Z}$-modules, et la comparaison générale entre
+$R\underline{\mathrm{Hom}}_{\mathbb{S}}$ et
+$R\underline{\mathrm{Hom}}_{H\mathbb{Z}}$ est gouvernée par l'homologie
+entière de $H\mathbb{Z}$ tout entière. Le triangle $(T)$ est le premier étage
+de cette tour --- celui que produit $H_2(H\mathbb{Z};\mathbb{Z}) =
+\mathbb{Z}/2$ --- et il y en a un par degré au-dessus. C'est la tour de
+Postnikov de la sphère qui organise l'ensemble, et le « principe géométrique »
+demandé est là.\footnote{Les noms modernes à chercher sont : catégorie ou
+champ de Picard, type d'homotopie stable de dimension $1$, invariant de
+Postnikov, opérations cohomologiques stables, $\eta$, $Sq^2$, et pour la
+version faisceautique les travaux de Larry Breen --- l'un des trois
+« compétents » nommés dans la question --- sur les gerbes et les $2$-gerbes.
+Aucune de ces références ne figure sur la page, et rien n'indique que
+Grothendieck ait connu sous ce nom l'une quelconque d'entre elles ; la mise en
+correspondance est la nôtre.}
+
+\end{document}
