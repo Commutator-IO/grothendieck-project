@@ -705,4 +705,156 @@ export const FINDINGS: Finding[] = [
     settle:
       'Check the generalised Dold–Kan literature — Dold–Puppe, and the later work on Kan extensions of the correspondence along functors out of Δ — for a statement of this equivalence over a general small category. Note that this row rests on a folder the transcription reports as partly illegible, so the claim may not be recoverable in the form stated.',
   },
+  {
+    id: '29-ramification-domain-axioms',
+    cote: '29',
+    pages: '190–193',
+    kind: 'mathematical',
+    claim:
+      'A « domaine de ramification » is axiomatised as a stack of multigaloisian categories over Ét(S) together with a continuous « geometric realisation » r into relative schemes, subject to four axioms R1–R4; and, given R1, R3 and R4, axiom R2 — that direct subobjects of X correspond bijectively to open-and-closed parts of r(X) — is equivalent to r being faithful.',
+    basis:
+      'Page 190 gives the definition and the four axioms; page 191 proves that the r-surjective families are the covering families of a topology and that base change is continuous. The equivalence R2 ⟺ r faithful is the proposition of page 193, which turns on r(X′ ∩ X″) = r(X′) ∩ r(X″) and on reducing to an inclusion X″ = X′ ⊔ X₁.',
+    ours:
+      'The reading separates the 1967 « donnée de ramification » (C, s) from this (R, r), which the folder gives nearly the same name; and it states the R2 ⟺ faithfulness proposition as an equivalence, which the page does but only in the direction « r fidèle ⟹ R2 ».',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Three of R1–R4 read cleanly; R4 carries three \\ill{} in its statement and is not fully recoverable, and page 193 is cancelled by long diagonals, so the equivalence rests on a page its author struck. Any search should therefore first settle what R4 says, which is /transcribe-grothendieck’s work and not this skill’s. Then compare with the modern axiomatisations of a Galois category without a fibre functor (finite limits, disjoint distributive coproducts, an effective descent morphism to the terminal object with a finite decomposition property) and with the stack-theoretic treatments of tame coverings — Kerz–Schmidt, Generators and relations for the étale fundamental group, arXiv math/0703139, which reduces statements about open varieties to proper stacks by Abhyankar’s lemma. An orienting web search found the axiomatisation of Galois categories without a fibre functor, and the stack-theoretic treatment of tame π₁, but no axiomatisation of a stack of such categories carrying a realisation functor. That is a reason to look, not a search of the sources.',
+  },
+  {
+    id: '29-domram-morphisms-fully-faithful',
+    cote: '29',
+    pages: '197',
+    kind: 'mathematical',
+    claim:
+      'The ramification domains over S form a 2-category in which every homomorphism is necessarily fully faithful: for (R, r) defined by a scheme Z with a finite group G of operators, Hom((R,r),(R′,r′)) is equivalent to the category of pairs (P′, α) with P′ a galoisian object of R′_S of group G and α a G-isomorphism r′(P′) ≃ Z.',
+    basis:
+      'Proposition 6 of page 197 establishes the equivalence, and the corollary drawn from it states that in any homomorphism (φ, λ) of ramification domains φ is necessarily fully faithful. A second corollary describes Hom, when (R′,r′) is defined by (Z′,G′), as the principal coverings P′ of Z′ of group G with a compatible G′-action and an isomorphism P′/G′ ≃ Z.',
+    ours:
+      'Nothing of the statement. The reading draws the consequence in prose — that a ramification domain maps into another only as a subdomain — which the page leaves implicit in the word « nécessairement ».',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'A rigidity statement of this shape — no non-trivial collapsing morphism between such objects — should be checked against the 2-categorical literature on stacks of Galois covers: Ramified Galois covers via monoidal functors (Transformation Groups 2016, arXiv 1507.05309) and Stacks of ramified Galois covers (arXiv 1307.1116) are where an equivalent statement would sit. Neither surfaced in an orienting search, which is not the same as their not containing it.',
+  },
+  {
+    id: '29-degree-n-as-primitive',
+    cote: '29',
+    pages: '212, 214',
+    kind: 'mathematical',
+    claim:
+      'The « degree n » of a morphism can be taken as primitive data on a category rather than derived from a fibre functor: six conditions on a class of degree-n morphisms — base change, finite additivity, isomorphisms of degree 1, a decomposition Y = ∐ₙ Yₙ with X ×_Y Yₙ → Yₙ of degree n, effective descent for degree ≥ 1, and emptiness in degree 0 — determine the notion uniquely, and it then coincides with « trivialised by a morphism of universal effective descent ».',
+    basis:
+      'The six conditions are item (3) of the inserted « feuille 1 bis » (page 212); the uniqueness is the Conclusion of page 214, proved by induction on n through the diagonal of X ×_Y X, which is a universal direct summand, giving X′ ≃ Y′ ⊔ X′₁ with X′₁ → Y′ of degree n−1.',
+    ours:
+      'The reading names what the axiomatisation is for — saying that a covering has n sheets without having points to count — and observes that condition d′) makes the degree a decomposition of the base rather than a number. Neither gloss is on the page.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Item (3) and the Conclusion read cleanly, but items (2) and (1) of the same sheet are largely illegible — « Tous les monomorphismes […] […] un […] » and « Existence des lim← finies […] » — so the four conditions A(iv) are not recoverable as a list and only the degree axioms themselves can be claimed. Compare with the fibre-functor-free axiomatisation of a Galois category, where the decomposition property already appears as part of the definition rather than as data: if the two coincide this is a match. An orienting web search located that axiomatisation but not the degree-as-primitive form nor the uniqueness statement.',
+  },
+  {
+    id: '29-formal-tame-pi1-self-intersection',
+    cote: '29',
+    pages: '87–97',
+    kind: 'mathematical',
+    claim:
+      'For a regular formal scheme 𝔛 whose special fibre X_o is a component of a normal crossings divisor D, the tame fundamental group π₁ᵗ(𝔛/D) is a central extension of π₁ᵗ(X_o/D′_o) by a quotient of μ^∞, and the class of that extension is the Chern class of the self-intersection of X_o in 𝔛; for X_o = P¹_k with D′_o empty the extension is μ_n(k) with n the prime-to-p part of the degree of X_o · X_o.',
+    basis:
+      'Lemme 1 (page 87) kills H¹ of the universal tame covering, which makes the Hochschild–Serre sequence usable in low degree; Lemme 2 (page 89) identifies ρ(α) with σ(β) for β the class of the normal bundle; page 93 relieves the obstruction using that the kernel of Pic(X_m) → Pic(X_o) is uniquely n-divisible; page 95 concludes through the Kummer theorem for 𝔛/D, and page 97 works the two examples.',
+    ours:
+      'The reading supplies the reason page 93 omits — n is invertible on X_o and the kernel is filtered by cohomology of O_{X_o}-modules — and separates the class of a line bundle in H¹(G_m) from its Chern class in H²(μ_n), which pages 89 and 95 write in the two different groups without comment.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Check the log-geometric literature on degenerations — Kato–Nakayama, and the computation of the tame or log fundamental group of the germ of a normal crossings degeneration — for a statement identifying the extension class with the self-intersection. The P¹ case, giving cyclic monodromy of order the prime-to-p part of the self-intersection degree, is the sharp form to look for and is what a cyclic quotient singularity would predict. Pages 91 and 93 are the faintest of the run and much of their connective prose is illegible, so what can be claimed is the two lemmas and the two examples, not the passage between them.',
+  },
+  {
+    id: '29-fundamental-group-scheme-via-torsors',
+    cote: '29',
+    pages: '124–129, 136–142',
+    kind: 'mathematical',
+    claim:
+      'The fundamental group scheme — the pro-object classifying pointed torsors under finite group schemes, infinitesimal part included — is obtained by strict pro-representability of the pointed-torsor functor alone, with no Tannakian input, and computed on an abelian variety as lim← ₙX, Cartier-dual to the ind-algebraic lim→ ₙX*.',
+    basis:
+      'The letter to Serre of 18 October 1959 (pages 124–129) sets the conditions (i)–(vi), proves Z(S,a;G) commutes with products and with kernels of pairs, and derives the filtered projective system from the minimal couples; the handwritten pages 136–142 prove the injectivity of u ↦ u_*(α) on which the uniqueness of the transition morphisms rests, and construct π₁^C(S,ξ) from the same two formal properties.',
+    ours:
+      'The reading identifies the letter’s Z(S,a;G), the feuilles anciennes’ ℨ and the π¹(S,ξ;G) of pages 164–169 as one functor under three notations, which no single page states; and it corrects page 137’s ×_G G′ to ×_{G′} G, the extension of the structure group.',
+    literature: [
+      'M. V. Nori, On the representations of the fundamental group (Compositio Math. 33, 1976) and The fundamental group-scheme (Proc. Indian Acad. Sci. 91, 1982) — the second construction, by the filtered category of pointed torsors under finite group schemes, is this route',
+      'C. Gasbarri, on the fundamental group scheme of an integral scheme over a connected Dedekind base as the projective limit of the finite flat group schemes occurring in pointed torsors',
+    ],
+    status: 'matched',
+    settle:
+      'Killed. The published literature already credits the conjecture that such a group scheme exists to Grothendieck, and Nori gave two constructions, the second of which is exactly this one: the category of pointed torsors under finite group schemes is filtered, and the group scheme is the projective limit of the groups occurring in it — a statement the literature records as equivalent to the existence of the fundamental group scheme. The abelian-variety computation and its Cartier duality are Nori’s theorem. Kept as a killed candidate. One residue is not killed and is worth a separate look: the letter works over a base scheme S merely reduced, connected and pointed, with an auxiliary category G and an exact functor F, rather than over a field or a Dedekind base — whether the construction has been carried out at that generality is a different question from the one settled here. Nothing in this row is a claim about who was first; the folder is undated apart from the letter itself.',
+  },
+  {
+    id: '29-kummer-gerbe-root-stack',
+    cote: '29',
+    pages: '199–200',
+    kind: 'mathematical',
+    claim:
+      'The tame coverings of a pair (S, D) are constructed as the finite étale coverings of the stack associated to the gerbe whose objects over S′ are the families of equations of the D_i and whose morphisms are the families ξ with b_i = a_i ξ_i^{n_i} — an abelian μ_n-gerbe whose obstruction to a global section is the cohomology class of the D_i.',
+    basis:
+      'Example 2 of page 200 defines the groupoid, identifies the automorphism group of an object as μ_n, and states the obstruction: « L’existence d’une section dépend de la nullité d’un élément de H²(X, μ_n), qui n’est autre, comme on devine, que la classe de cohomologie des D_i ». Example 1 is the trivial-gerbe case with global equations, and the two « bis » examples take the limit over n.',
+    ours:
+      'The reading names the object and separates the two exponents of H, which the page writes in one hand that does not distinguish 1 from the roman numeral; the class of a line bundle is in H¹(G_m) and its Chern class in H²(μ_n).',
+    literature: [
+      'C. Cadman, Using stacks to impose tangency conditions on curves (2007), and Abramovich–Graber–Vistoli — the root stack construction',
+      'Abramovich–Olsson–Vistoli, Tame stacks in positive characteristic (Ann. Inst. Fourier 58, 2008)',
+      'Biswas–Borne, Tamely ramified torsors and parabolic bundles',
+      'Kerz–Schmidt, Generators and relations for the étale fundamental group (arXiv math/0703139) — tame π₁ by reduction to proper stacks',
+    ],
+    status: 'matched',
+    settle:
+      'Killed as an object: this is the root stack of the divisors D_i with multiplicities n_i, its inertia gerbe, and its obstruction class, all of which are in the sources listed, and the identification of tame coverings of a pair with étale coverings of that stack is standard. Kept as a killed candidate so that the next reader does not spend a day on it. What is NOT killed by this row is the axiomatisation those examples instantiate, which is filed separately as 29-ramification-domain-axioms.',
+  },
+  {
+    id: '29-h1-five-classes-infinite-group',
+    cote: '29',
+    pages: '170–171',
+    kind: 'mathematical',
+    claim:
+      'For a discrete and possibly infinite group G, the classification of G-torsors is compared across five classes of covering families — fppf quasi-compact, finite type, quasi-finite, finite principal, finite étale principal — with H¹_{C₃} ≃ H¹_{C₂} in general, H¹_{C₂} ≃ H¹_{C₁} over a Dedekind ring, H¹_{C_i} ≃ H¹(V̂/V, −) for i = 1,2,3 over a complete discrete valuation ring with algebraically closed residue field, and H¹_{C₅} ≃ H¹_{C₄} ≃ H¹_{C₃} together with H¹_{C_i}(V,−) ≃ H¹_{C_i}(k,−) over a complete local ring.',
+    basis:
+      'Pages 170 and 171 define H¹_C(S,G) = lim→_{T/S} H¹(π₀(K_{T/S}), G), list the five classes, observe that for G finite every comparison map is bijective and the whole apparatus collapses to Hom(π₁(S,a),G)/int(G), and then state the four comparisons above. These two pages are written out fair and carry only five \\ill{} between them, which makes them the most legible support of any row for this cote.',
+    ours:
+      'The reading supplies the reason the finite case collapses — G_T is then affine over T and fpqc descent for affine morphisms is effective — which the page asserts without argument, and which is what makes the infinite case the only one with content.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Compare with the pro-étale fundamental group of Bhatt–Scholze (2015) and with the enlarged fundamental group of SGA 3 X, both of which classify locally constant objects with infinite fibres, and check whether the four comparison statements across these five classes are recorded anywhere in that form. The complete-local statement H¹_{C_i}(V,−) ≃ H¹_{C_i}(k,−) is the one most likely to be standard and is the place to start.',
+  },
+  {
+    id: '29-inertia-matrix-determinant',
+    cote: '29',
+    pages: '120',
+    kind: 'mathematical',
+    claim:
+      'For a morphism between strictly local regular schemes with normal crossings divisors, the map on tame inertia is given by the matrix N of multiplicities in f*(Ē_{c′}) = Σ_c n_{c,c′} D̄_c, and N is an isomorphism if and only if card C = card C′ and the ordinary integer det N is ± a power of the residue characteristic — in which case the inertia subgroups of H at y are exactly the conjugates of the images of those of G at x.',
+    basis:
+      'Number 4 of the typescript « Comportement fonctoriel des groupes d’inertie » (page 120) draws the commuting square between G_ξ → H_y and the map N on ∏_{ℓ≠p} Z_ℓ(1)^C, with the canonical epimorphisms of (3.1) as the vertical arrows, and states the criterion.',
+    ours:
+      'Nothing of the statement; the typescript is legible throughout. The reading supplies the one-line reason the criterion takes that form — N must be invertible over ∏_{ℓ≠p} Z_ℓ, so det N must be prime to every ℓ ≠ p, so a power of p up to sign — which the page does not give.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'This is the condition for a morphism of log schemes with normal crossings log structure to induce an isomorphism on the Kummer-étale inertia, and it should be checked against the log-geometric literature on Kummer morphisms and log blow-ups (Kato, Illusie, Nakayama) before being treated as anything but a restatement. The determinant condition, rather than the invertibility of N over the ring, is the form to look for.',
+  },
+  {
+    id: '29-order-not-chronology',
+    cote: '29',
+    pages: '1–11, 124–129, 141–160, 188–216',
+    kind: 'codicological',
+    claim:
+      'The shelfmark’s pagination is not its order of composition: the 1967 exchange with Murre is bound out of chronological order within itself, the earliest dated piece in the folder — a letter to Serre of 18 October 1959 — sits at page 124, and the synthesis the folder builds towards is undated and at the end, so a reader following the argument must cross the pagination in both directions.',
+    basis:
+      'The letters date themselves. The archive order of pages 1–11 is: Murre 16 May 1967 (pages 2–3), Murre 29 March 1967 (4–5), Grothendieck’s undated reply (7–8), Grothendieck 29 April 1967 (9–11) — that is, the last letter of the exchange first. The 1959 letter is at pages 124–129, the chemise « Compléments SGA / 1960 » covers pages 144–160, the 1969 exchange is at pages 77–85, and the domaines de ramification run at 188–216 carries no date at all. Grothendieck paginates six of his own runs and restarts each time — I–VI (46–57), 1–4 (60–63), A–L (65–76), 1–6 (87–97), 1–10 then 11–16 (190–206), and 1–6 with inserted 1 bis and 1 ter (208–216) — so his own numbers, not the archivists’, are what a cross-reference such as « cf. p. 12 » follows.',
+    ours:
+      'The reconstruction of the 1967 sequence is the transcription’s, from the datelines and from Murre’s reference to the enclosed sketch; the six paginations are recorded batch by batch in the transcription headers. The modernised reading states the consequence — that the argument and the pagination cross — which no single page can.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Checkable directly against the facsimile: read the four datelines of pages 2, 4 and 9 and the undated reply at 7, and confirm the six self-paginations in the top corners. Nothing here depends on the literature. What is not established, and is not claimed, is any date for the undated runs: the inventory’s « 1959-1969 » is its own and covers the shelfmark whole.',
+  },
 ];
