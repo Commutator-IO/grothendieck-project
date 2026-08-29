@@ -76,6 +76,7 @@ Half of how he writes, and what most defeats a reader coming to the hand cold.
 | `N.B.` | nota bene | opens an aside, often the honest one |
 | `Ex.` | exemple | |
 | `s.d.` | sans date | the archivists', not his |
+| `½` | semi- | `½cosimplicial` = *semi-cosimplicial*; folder 29 pp. 184-185 |
 
 ---
 
@@ -111,6 +112,12 @@ When a stroke will not resolve, read the argument, not the letters.
   read off the argument.
 - **`ʒ` / `𝔷`.** A curly figure-3 for a group he does not otherwise name
   (folder 29 p. 176). Transcribe as `\mathfrak{z}` and note it once.
+- **His `s` can be read as a `2`.** Folder 29 pages 184-185 write « foncteur
+  ½cosimplicial » in a hand that reads "½co2-indicat" — the `s` of *-simplicial*
+  taken for a 2, and the `½` not yet recognised as *semi-*. What settled it was
+  not the ink but the diagram the word names, $F^0 \rightrightarrows F^1
+  \Rrightarrow F^2$: coface maps and no degeneracies is exactly a
+  semi-cosimplicial object. Read the argument, not the letters.
 - **Doubled indices.** He often writes the same index as both subscript and
   superscript (`X_1^1`, `K_2^2`, folder 29 p. 180). Transcribe as written.
 - **`\mathcal{C}` changes shape across the decades.** Fix the reading once per
