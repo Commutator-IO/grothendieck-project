@@ -1,0 +1,606 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 29, batch 9 (pages 161-180).
+% Established from the facsimile archives/batches/29/batch-09.pdf (a mirror of
+% https://grothendieck.umontpellier.fr/29.pdf), per the skill
+% transcribe-grothendieck.
+%
+% Pass: Opus 5 (claude-opus-5), 2026-08-29 — first pass, unchecked against the
+% pages by a human.
+%
+% Sixteen of the twenty pages are transcribed. Four are not:
+%
+%   - page 163, an otherwise blank sheet inscribed top right, in his hand,
+%     « <struck>Le Groupe</struck> / Progroupe fondamental / pour les
+%     revêtements infinis principaux »;
+%   - page 172, the same, inscribed « Plan »;
+%   - page 174, the same, inscribed « Π₂ »;
+%   - page 177, the same, inscribed « π₀, π₁ et formalisme simplicial
+%     (Revêtements infinis) ».
+%
+% All four are wrappers naming the run that follows them, exactly as page 143
+% of batch 8, page 123 of batch 7 and page 111 of batch 6; they get no \page{},
+% and their words are carried into the section headings instead, where they are
+% marked as his.
+%
+% The batch falls into six runs, and they are legible in very unequal degrees.
+%
+%   Pages 161-162 — the image of π₁(X) in π₁(Y) for f : X → Y proper dominant
+%     with Y normal, and the nodal counter-example that shows normality cannot
+%     be dropped. Fluent hand, mostly readable.
+%   Pages 164-169 — the run the wrapper of page 163 names: the functor
+%     π ↦ π¹(S,ξ;π) on principal homogeneous fibrations, its left exactness,
+%     the descending filtration of structural groups one may restrict to, and
+%     the strict pro-representability that follows. This is the hardest hand in
+%     the folder so far: the formulas carry, the connective prose very often
+%     does not, and the apparatus says so rather than inventing. The lower
+%     third of page 166 is struck through with diagonal strokes and nothing in
+%     it can be read.
+%   Pages 170-171 — H¹_C(S,G) = lim H¹(T/S,G) for a discrete group G, the five
+%     classes C₁ … C₅ of covering families, and the comparisons over a Dedekind
+%     ring, a complete discrete valuation ring, a complete local ring. Written
+%     out fair and almost entirely legible.
+%   Page 173 — the plan in seven sections for the two base-change theorems.
+%   Pages 175-176 — π₂ : the Hochschild–Serre computation of π²(X,G) against
+%     the tower of coverings, and the exact sequence its edge maps give.
+%   Pages 178-180 — the proposition on strict pro-representability of
+%     G ↦ π¹(S'/S,ξ;G) for a submersive S' → S, the note recording what he does
+%     not know about effectivity, and the simplicial diagram translating
+%     descent data on E_{X₀} into cocycles on π₀.
+%
+% The dating is the inventory's own, for the whole shelfmark.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{29}
+\batch{9}
+\pages{161}{180}
+\dating{1959-1969}
+\watermark{Édition de démonstration}
+\foldertitle{Groupe fondamental [Autour de SGA 4 et SGA 7] : lettres (1959, 1967, 1969), tapuscrits et copies de tapuscrit annotés (s.d.), notes manuscrites (s.d.)}
+
+\begin{document}
+
+\section*{L'image de $\pi_1(X)$ dans $\pi_1(Y)$, et le rôle de la normalité (pages 161 et 162)}
+
+\page{161}
+
+Soit $f : X \to Y$ un morphisme \marginal{propre} \uncertain{dominant}, $Y$
+\emph{normal} connexe \marginal{(loc. noeth.)}.
+
+Alors $\pi_1(X) \to \pi_1(Y)$ a un \uncertain{conoyau} fini (ou plutôt,
+\ill{} le cas \uncertain{où} $f$ est \uncertain{génériquement} \ill{} sur $Y$,
+et \uncertain{montre} que $\pi_1(\uncertain{y}) \to \pi_1(Y)$ est
+\uncertain{surjectif}, --- on est ramené au cas où $Y = \mathrm{Spec}(K)$.
+
+On voit \ill{} qu'on peut supposer $X$ \ill{} sur $k$, et
+\ill{} [remplaçant $K$ par une extension \uncertain{séparable} finie
+convenable $K'$, et \uncertain{désignant} \uncertain{par} $X'$ \ill{}
+\uncertain{ses composantes irréductibles} \ill{}, \ill{} un
+\uncertain{composant connexe} de $X'$]. Mais alors $\pi_1(X) \to \pi_1(Y)$ est
+\ill{}
+
+\emph{N.B.} Si $Y$ n'est pas \emph{normal}, le th. est faux,
+\struck{si} p. ex. $X$ est le normalisé de $Y$. Ex. $Y$ courbe
+\uncertain{sur un} $k$ \uncertain{alg. clos}, avec pt double ordinaire, $X'$
+son normalisé. Alors on a $\pi_1(X) = 0$, $\pi_1(Y) = \widehat{\mathbb{Z}}$
+\uncertain{privé de sa $p$-composante}.
+
+On voit \uncertain{facilement} que dans le \uncertain{dernier} cas \ill{}, on
+ne peut pas former $\underline{\mathrm{Hom}}_Y(X, Y \sqcup Y)$ [car si
+\struck{un pt} $\overline{y}$ \ill{} de $Y$, et $y'$, $y''$ deux pts
+géométriques de \ill{} au-dessus, alors qu'il \ill{}].
+
+Supposons maintenant \ill{} $f : X \to Y$ \emph{universellement ouvert}
+[p. ex. $Y$ normale] je crois qu'on
+
+\page{162}
+
+pour \struck{des} \ill{} contenus dans $X_1$ étale sur $X$.
+P.-ê. plutôt :
+
+\begin{tikzcd}[column sep=small, row sep=small]
+& X \arrow[d] \\
+S & T \arrow[l]
+\end{tikzcd}
+
+\note{le diagramme est encadré sur la page et porte au-dessus de lui la
+mention $f_{*}(X_1)$ ; c'est tout ce que la page ajoute}
+
+\section*{Progroupe fondamental pour les revêtements infinis principaux : le foncteur $\pi \mapsto \pi^1(S,\xi;\pi)$ (pages 164 à 169)}
+
+\note{le feuillet qui ouvre la suite --- page 163, par ailleurs nu --- porte de
+sa main, en haut à droite : « \struck{Le Groupe} Progroupe fondamental pour les
+revêtements infinis principaux ». Le titre de cette section en vient}
+
+\page{164}
+
+Le $\widetilde{\pi}_1(S,\xi)$, $S$ préschéma connexe, $\xi$ pt géom.
+
+Pour tout groupe $\pi$, soit
+\[
+  \pi^1(S,\xi;\pi)
+\]
+l'ens. \ill{}, à isom. près, de \struck{esp.} \marginal{fibrés} principaux
+homogènes sur $S$, de groupe structural $\pi$, \uncertain{ponctués} au dessus
+de $\xi$.
+
+\begin{itemize}
+\item[$\alpha$)] $\pi \rightsquigarrow \pi^1(S,\xi;\pi)$ est \emph{exact à
+gauche}.
+\end{itemize}
+
+En effet
+
+\begin{itemize}
+\item[a)] Commute aux produits finis --- c'est trivial.
+\item[b)] Transforme \uncertain{une injection} $\pi \to \pi'$ en
+\uncertain{une injection}.
+\end{itemize}
+
+En effet, \ill{} : \ill{} \ill{} un isom.
+$P_1' \xrightarrow{\ u'\ } P_2'$ de deux $\pi'$-fibrés \ill{}, il existe
+\ill{} un et un seul tel isom. qui \ill{} applique
+$\xi_1' \mapsto \xi_2'$. Si donc $P_1'$ et $P_2'$ sont \uncertain{munis} de
+$P_1$, $P_2$ deux
+\[
+  \begin{cases} P_i \subset P_i' \\ \xi_i = \xi_i' \end{cases}
+\]
+\ill{} \struck{applique} \ill{} $u : P_1 \to P_2$. En effet,
+\struck{\ill{}}
+
+\page{165}
+
+\struck{\ill{}} $P_i$ se déduit de $P_i'$ par une \emph{section} de
+$P_i'/\pi$ \uncertain{pointée} par $\xi_i'$. Si elle \uncertain{existe}, il ne
+peut y en avoir qu'une seule telle section.
+
+\begin{itemize}
+\item[c)] Si $\pi \to \pi' \rightrightarrows \pi''$ est \emph{exacte}, alors
+\struck{\ill{}} $\varphi(\pi) \to \varphi(\pi') \rightrightarrows
+\varphi(\pi'')$ \uncertain{aussi}.
+\end{itemize}
+
+Je \struck{veux} \uncertain{vais} \ill{} que si $P'$ est \ill{} $\pi'$,
+\ill{} tel que \ill{} les deux \ill{} est \uncertain{muni} de $\xi'$,
+\ill{} un isom.
+\[
+  P' \times_{\pi_1}(\pi'', \varphi_1) \xrightarrow{\ u\ }
+  P' \times_{\pi_1}(\pi'', \varphi_2)
+\]
+alors on peut \ill{} le groupe structural. Or soit $Q$ le
+\uncertain{sous-schéma} de $P$ des \uncertain{coïncidences} de $u_1$ et $u_2$.
+
+\marginal{$\pi \to \pi' \rightrightarrows \pi''$, et $P' \xrightarrow{i_1}
+P_1''$, $P' \xrightarrow{i_2} P_2''$, avec $u : P_1'' \to P_2''$}
+
+\ill{} ouvert et fermé, contient $\xi'$, est stable par $\pi$, donc lui
+correspond un \uncertain{sous-préschéma} ouvert et fermé $S'$ de $P'/\pi$ :
+le \ill{} ouvert et fermé \marginal{ensemblistement} [donc
+\uncertain{fidèlement} plat et quasi-compact \ill{}]. De plus, on voit
+\uncertain{que} les \struck{\ill{}} fibrés géom. de $S' \to S$ \ill{}
+portent un tel ; donc \ill{}
+
+\page{166}
+
+Supposons \struck{$S$} $S$ loc. noeth. \emph{ou} $\pi$ artinien (condition des
+chaînes descendantes)].
+
+\begin{itemize}
+\item[d)] \ill{} $c \in \varphi(\pi)$ \ill{} provient \ill{} d'un élément
+\uncertain{minimal} $c' \in \varphi(\pi')$.
+\end{itemize}
+
+En effet, si $c$ correspond à $(P,\xi)$, \uncertain{considérons} \ill{} et à
+$(P'', y'')$ [pour $\pi'' \subset \pi$]. Considérons
+\[
+  P/\pi' \cap \pi'' \longrightarrow P/\pi' \times P/\pi''
+\]
+\marginal{$\pi/\pi' \cap \pi'' \to \pi/\pi' \times \pi/\pi''$}
+c'est une immersion ouverte et fermée, il \ill{} la deuxième \ill{}
+\ill{} un pt $(y',y'')$ est dans l'image, \ill{}
+
+\ill{} en particulier \ill{}. Donc on peut restreindre le groupe structural
+à $\pi' \cap \pi''$. Donc les groupes auxquels on peut restreindre forment un
+\ill{} filtrant \emph{décroissant} $\pi_i$, \ill{} des $P_i \subset P$
+\ill{}
+
+\struck{\ill{}}
+
+\note{le dernier tiers de la page est biffé de plusieurs traits diagonaux ;
+rien ne s'en laisse lire}
+
+\page{167}
+
+principal homogène sous $\pi' = \bigcap \pi_i$. On voit ici que la question est
+locale sur $S$ [et \ill{} \uncertain{fini}] donc on \uncertain{peut supposer}
+$S$ \ill{}. Mais \ill{}
+
+\marginal{$P^0 \leftarrow P$ au-dessus de $S' \to S$}
+
+il faut $S^{(0)}$ de type fini sur $\mathbb{Z}$, et $(P^{(0)}, \xi^{(0)})$
+principal homogène sous \ill{} qui donne $P$ par extension \ill{} [et
+\ill{} par $P$ est trivialisé par $S' \to S$ \ill{}]. On voit qu'on
+\uncertain{peut supposer} $S$ \uncertain{noethérien}.
+
+\struck{Alors les} l'on tire \uncertain{un meilleur résultat} : on regarde le
+\uncertain{composant} connexe $P^0$ de $\xi$ dans $P$ [\struck{exact}
+\uncertain{qui est ouvert} et \emph{fermé}, car $P$ est loc.
+\uncertain{noeth.} donc loc. connexe]. Je dis que $P^0 \to S$ est
+\emph{surjectif}. Comme l'image \ill{}, \uncertain{plus généralement} elle
+est fermée, on est ramené au cas d'un \uncertain{anneau de valuation},
+\uncertain{disons} \uncertain{complet} : \ill{} que si $P$ est \ill{}
+\ill{} sur $S$
+
+\page{168}
+
+\emph{Application.} Une relation étale est dite à \emph{groupe structural}
+$\pi$, \struck{$\pi$, faisceau $F$, \ill{}} \ill{} \struck{dans un schéma en
+$\underline{\mathrm{Aut}}_S(T)$}, qui \ill{} donne un \uncertain{revêtement
+principal} de $T$ \ill{} et une \ill{} $\pi_S$ \uncertain{principal} de
+\ill{}
+\[
+  \underline{\mathrm{Isom}}_S(E_S, T).
+\]
+Si $S$ est \uncertain{connexe} \uncertain{muni d'un} pt géom. $\xi$, il vient
+\ill{} $=$ \ill{} \uncertain{donner} un $T$ \ill{} \ill{} telle
+structure, ou de se donner des opérations \struck{continues} de
+$\widetilde{\pi}_1(S,\xi)$ \struck{\ill{}} sur $F$ !
+
+\ill{} donner $\widetilde{\pi}_1(S,\rho) \longrightarrow \struck{\ill{}}\pi$.
+
+\emph{Exemple} \uncertain{Schémas en groupes commutatifs}, \ill{} torsion sur
+$S$, \struck{à fibres \ill{}} \uncertain{à génération} finie sur $S$,
+correspondant aux $(\widetilde{\pi}_1(S,\xi))$-Modules \uncertain{admissibles}
+\struck{de présentation} qui sont des $\mathbb{Z}$-modules de type fini
+\ill{}
+
+\page{169}
+
+\ill{} de groupes \ill{} \emph{$\pi_S$}, donc \ill{} la \emph{composante
+connexe} $P^0$ est surjective sur $S$. \ill{}, \ill{} $P$ est
+\emph{trivial} !
+
+En effet, comme $P^{(0)} \subset \bigcap P^{(i)}$ \ill{}, on voit que
+$\bigcap$ pris \ill{} \ill{} de gpes fin\ill{} \struck{\ill{}}
+\struck{finie} \marginal{chacun} des $P^{(i)}$ est une \uncertain{réunion} de
+\uncertain{composantes connexes} de $P$, il \ill{} de l'\uncertain{intersection},
+\ill{} $P'$, \ill{} $P^0$.
+
+Elle est \emph{stable} sous $\pi'$, et \ill{} \uncertain{ensemble} (car
+\ill{} \ill{} fibres \uncertain{géométriques}, et \ill{} que
+$P_s' \neq \emptyset$]. \ill{} $P'$ est \ill{} fibré principal homogène
+sous $\pi'$. cqfd.
+
+\marginal{\ill{} $\widetilde{\pi}_1(S,\xi)$ \ill{}}
+
+\emph{Conséquence} Si $\pi$ varie dans \struck{la} \uncertain{une}
+\uncertain{catégorie} \ill{} des gpes artiniens, \struck{\ill{}}
+\uncertain{stable} par \uncertain{produits finis} et \uncertain{sous-groupes},
+\ill{} si $\pi$ varie \ill{} \ill{} \uncertain{opérations}, \ill{}
+\ill{} le foncteur
+\[
+  \pi \longmapsto \pi^1(S,\xi;\pi)
+\]
+est \emph{strictement pro-représentable}.
+
+\section*{Groupe fondamental : revêtements infinis ; les cinq classes $C_1, \ldots, C_5$ (pages 170 et 171)}
+
+\page{170}
+
+\emph{Groupe fondamental} : (Revêtements infinis)
+
+$S$ préschéma. Pour tout groupe discret $G$, on définit
+\[
+  H^1_{\mathcal{C}}(S,G) = \varinjlim_{T/S} H^1(T/S, G)
+\]
+\note{la ligne qui suit « $T/S$ » sous le signe de limite est biffée et ne se
+laisse pas lire}
+où
+\[
+  H^1(T/S, G) = H^1(K_{T/S}, G) = H^1(\pi_0(K_{T/S}), G)
+\]
+et où $\mathcal{C}$ est une catégorie de $S$-préschémas.
+
+\marginal{élucider ici les questions de \uncertain{fonctorialité} \ill{}}
+
+Les cas les plus importants sont les suivants :
+
+\begin{itemize}
+\item[(i)] $C_1$ \quad $S$-préschémas fid. plats quasi-compacts
+\struck{\ill{}}.
+\item[(ii)] $C_2$ \quad ————— de type fini
+\item[(iii)] $C_3$ \quad ————— quasi-finis
+\item[(iv)] $C_4$ \quad ————— finis \uncertain{principaux}
+\item[(v)] $C_5$ \quad ————— \struck{étales} finis, étales
+\uncertain{principaux}
+\end{itemize}
+
+On a donc $H^1_{C_i}(\struck{P}S, G) \hookrightarrow H^1_{C_j}(S,G)$ \ill{}
+application injective canonique. Si $G$ est \emph{fini}, alors \ill{}, les
+hom. sont bijectifs, et $H^1(S,G)$ est l'ensemble des \uncertain{classes}
+(à isom. près) \uncertain{de} revêtements étales principaux de groupe $G$,
+donc $\simeq \mathrm{Hom}(\pi_1(S,a), G)/\mathrm{int}(G)$. Notre
+\uncertain{intérêt} ici \uncertain{est} \ill{} le cas $G$ \emph{infini}.
+Notons en passant
+\[
+  H^1_{C_3} \simeq H^1_{C_2}
+\]
+
+\page{171}
+
+et si $S$ est le spectre d'un anneau de Dedekind
+\[
+  H^1_{C_2} \xrightarrow{\ \sim\ } H^1_{C_1}
+\]
+[d'où dans ce cas $H^1_{C_3} \simeq H^1_{C_2} \simeq H^1_{C_1}$]. Si $S$ est le
+spectre d'un anneau \struck{local complet} \marginal{de valuation} discrète à
+corps résiduel alg. clos, on aura de \uncertain{même}
+\[
+  H^1_{C_i} \simeq H^1(\widehat{V}/V, -) \qquad \text{pour } i = 1,2,3
+\]
+\note{entre $H^1_{C_i}$ et le signe $\simeq$ la page porte un caractère isolé
+qui ne se laisse pas identifier ; l'indice du $H^1$ de droite est biffé}
+
+Si $S$ est le spectre d'un anneau local \emph{complet} $V$, alors
+\struck{\ill{}}
+\[
+  H^1_{C_5} \simeq H^1_{C_4} \simeq H^1_{C_3} \quad (\simeq H^1_{C_2})
+\]
+et on aura de plus
+\[
+  H^1_{C_i}(V,-) \simeq H^1_{C_i}(k, -) \qquad (i = 2,3,4,5)
+\]
+\note{sous le $k$ la page porte « corps résiduel »}
+
+\section*{Plan en sept sections pour les deux théorèmes de changement de base (page 173)}
+
+\note{le feuillet qui ouvre la suite --- page 172, par ailleurs nu --- porte de
+sa main, en haut à droite : « Plan »}
+
+\page{173}
+
+\emph{Groupe fondamental}
+
+\begin{itemize}
+\item[I] \struck{Théorème de comparaison \ill{}} \marginal{Premier} th. de
+changement de base pour $\pi_1$ (ou th. de comparaison)
+\item[II] Deuxième th. de changement de base pour $\pi_1$
+\end{itemize}
+
+\begin{enumerate}
+\item Morphismes $(-1)$-connexes et $0$-connexes
+\item Morphismes locaux $(-1)$-connexes et $0$-connexes.
+\item \struck{Une} Caractérisation des morphismes locaux ou globaux
+$i$-connexes ($i = 0,1$).
+\item \struck{Le} Deuxième théorème de \struck{comparaison}
+\marginal{du chgt de base pour $\pi_1$ :} énoncés et corollaires \ldots
+\item \struck{\ill{}}, \struck{et} Démonstration des théorèmes.
+\item Généralisation à l'aide de la résolution des singularités.
+\item Application : la dimension cohomologique de certains corps \ldots
+\end{enumerate}
+
+\section*{$\pi_2$ : la suite exacte de Hochschild--Serre contre la tour des revêtements (pages 175 et 176)}
+
+\note{le feuillet qui ouvre la suite --- page 174, par ailleurs nu --- porte de
+sa main, en haut à droite : « $\Pi_2$ »}
+
+\page{175}
+
+\begin{tikzcd}[column sep=small, row sep=small, nodes={font=\scriptsize}]
+\widetilde{\widetilde{X}}{}^i \arrow[d] & \\
+\widetilde{X}^i \arrow[d] & \widetilde{X} \arrow[d, no head] \\
+X^i \arrow[r] & X
+\end{tikzcd}
+
+\note{sur la page la colonne de gauche est prise dans une accolade portant
+$\widetilde{\pi}$ à gauche et, à droite, une mention à deux étages où se lisent
+$\widehat{\widetilde{\pi}}$ et $\widetilde{\pi} = \pi$}
+
+\[
+  \pi^{\mathrm{I}}(X,G) \simeq H^2(\check{X},G) \simeq \varinjlim H^2(X_i,G)
+  \simeq \varinjlim H^2(\widetilde{X}_i,G)
+\]
+\note{l'exposant du premier terme est tracé comme un « I » ; plus bas sur la
+même page il écrit $\pi^2$}
+
+\marginal{$\widetilde{\pi}/H_i = \pi_i$}
+
+\[
+  H^*(\widetilde{X}_i,G) \Longleftarrow E_2^{p,q} = H^p(H_i, H^q(\widetilde{X},G))
+\]
+\[
+  \struck{\ill{}} H^*(\widetilde{X},G) \Longleftarrow E^{p,q} =
+  \varinjlim_i H^p(H_i, H^q(\widetilde{X},G))
+\]
+
+\[
+  \cdots \to \varinjlim H^2(H_i,G) \to \pi^2(X,G) \to
+  \varinjlim_i \pi^2(\widetilde{X}_i,G)^{H_i} \to \varinjlim H^3(H_i,G)
+\]
+\note{sous le troisième terme la page porte $\pi^2(X^k,G)$, sous le quatrième
+$H^3(\widetilde{X},G)$ ; à gauche et à droite deux termes sont entourés, et
+au-dessus de la suite est esquissé le premier quadrant $(p,q)$ de la suite
+spectrale}
+
+\marginal{$\pi_2(X) \to G$}
+
+\[
+  H^*(X^k,G) \Longleftarrow H
+\]
+\[
+  \mathrm{Ker}\,\bigl(\pi^2(X,G) \to \pi^2(X^k,G)\bigr) \simeq
+  \varinjlim_i H^2(H_i,G)
+\]
+\[
+  \mathrm{Coker}\,(\text{id}) \simeq \mathrm{Ker}\Bigl(\varinjlim H^3(H_i,G)
+  \longrightarrow H^3(\widetilde{X},G)\Bigr)
+\]
+
+\page{176}
+
+\begin{tikzcd}[column sep=small, row sep=small, nodes={font=\scriptsize}]
+X \arrow[d] & X' \arrow[l] \arrow[d] & X'' \arrow[l, bend left=12]
+  \arrow[l, bend right=12] \arrow[d] \\
+Y & Y' \arrow[l] & Y'' \arrow[l, bend left=12] \arrow[l, bend right=12]
+\end{tikzcd}
+
+\note{au-dessus de $X'$ et de $X''$ la page porte $Z'$ et
+$Z_1'' \simeq Z_2''$ ; sous $Y'$ un double trait la relie à $X$, et sous $Y''$
+une flèche monte de $\widetilde{X}''$}
+
+\[
+  \pi_1(\overline{F}) \to \pi_1(X) \to \pi_1(Y) \to e
+\]
+\note{de $\pi_1(\overline{F})$ part une flèche vers $G$, et de $\pi_1(X)$ une
+flèche pointillée vers le même $G$}
+
+\[
+  \pi_1(Y) \longrightarrow G^{\pi_1(X)}
+\]
+\[
+  H^1(\pi_1(X), G) \longrightarrow H^1(\pi_1(\overline{F}), G)^{\pi_1(Y)}
+\]
+\[
+  H^1\bigl(\pi_1(Y), G^{\pi_1(\overline{F})}\bigr) =
+  H^1(\pi_1(Y), \mathfrak{z})
+\]
+\note{la flèche va du second $H^1$ vers le premier}
+
+\[
+  \pi_2(Y) \longrightarrow \mathfrak{z} \qquad H^1(\pi_1(\overline{F}), G)
+\]
+\[
+  \pi_1(Y') \longrightarrow \mathfrak{z}
+\]
+\[
+  H^1\bigl(Y'/Y, \mathrm{Hom}(\pi_1(\overline{F}), \mathfrak{z})\bigr) = 0
+\]
+\note{au-dessus de $\mathrm{Hom}$ la page porte un $H^1$ biffé}
+
+\begin{tikzcd}[column sep=small, row sep=small, nodes={font=\scriptsize}]
+\pi_1(Y) & \pi_1(Y') \arrow[l] & \pi_1(Y'') \arrow[l, bend left=12]
+  \arrow[l, bend right=12] \arrow[d] & \pi_1(Y''') \arrow[l, bend left=18]
+  \arrow[l] \arrow[l, bend right=18] \\
+& & \mathfrak{z} &
+\end{tikzcd}
+
+\section*{$\pi_0$, $\pi_1$ et formalisme simplicial (revêtements infinis) (pages 178 à 180)}
+
+\note{le feuillet qui ouvre la suite --- page 177, par ailleurs nu --- porte de
+sa main, en haut à droite : « $\pi_0$, $\pi_1$ et formalisme simplicial
+(Revêtements infinis) ». Le titre de cette section en vient}
+
+\page{178}
+
+\emph{Proposition} $S$ un préschéma \emph{connexe}, \struck{\ill{}}
+$S'$ un préschéma sur $S$ tel que $S' \to S$ soit \emph{submersif}
+[p. ex. fid. plat et quasi-compact, ou propre surjectif], $S''$, $S'''$ les
+carrés, cubes fibrés.
+
+On suppose que $S'$ est \emph{somme} de préschémas \emph{connexes} (i.e. ses
+composantes connexes sont ouvertes, i.e. $\pi_0(S')$ discret)
+\struck{et l'ens. des composantes connexes de $S'$ \ill{}}
+
+Soit $\xi$ un pt [géométrique] de $S$. Alors pour un groupe \struck{discret}
+$G$ variable, le foncteur
+\[
+  G \rightsquigarrow \pi^1(S'/S, \xi; G)
+\]
+\struck{contravariant} [où $\pi^1(S'/S,\xi;G)$ désigne \marginal{l'ens. des
+classes} \ill{} \uncertain{à isom.} près, de données de descente
+\uncertain{sur $G_{S'}$} relatives à $S' \to S$, ponctuées au $\xi$] est
+strict. pro-représentable :
+\[
+  \pi^1(S'/S, \xi; G) = \varinjlim \mathrm{Hom}(\pi_i, G)
+\]
+
+Si $\pi_0(S'')$ est \marginal{quasi-}\emph{compact}, i.e. les fonctions loc.
+constantes sur $\pi_0(S'')$ \ill{} \uncertain{à valeurs finies} dans des
+ensembles, --- p. ex. si $S''$ quasi-compact] \struck{\ill{}}
+\struck{\ill{}} alors les $\pi_i$ sont de type fini.
+
+Si $S''$ a un nb fini \marginal{$''$} de composantes connexes, alors le
+foncteur précédent est \uncertain{représentable} : \struck{\ill{}}
+\[
+  \pi^1(S'/S, \xi; G) \simeq \mathrm{Hom}(\pi_1(S'/S, \xi), G)
+\]
+avec $\pi_1(S'/S,\xi)$ \marginal{groupe discret} \struck{\ill{}} de type
+fini. \ill{} si \ill{} des composantes connexes de $S'$ est
+\uncertain{finie}, et \ill{} fini, et \struck{\ill{}} alors
+$\pi_1(S'/S;\xi)$ est \uncertain{engendré} par $n''$ \uncertain{générateurs}.
+
+\page{179}
+
+\emph{Enfin}, considérons le \struck{\ill{}} foncteur
+\[
+  G \rightsquigarrow \pi^1_{\mathrm{eff}}(S'/S, \xi; G)
+\]
+correspondant aux \struck{\ill{}} données de descente \emph{effectives}
+ponctuées sur $\xi$. \struck{\ill{}}
+
+Ce foncteur est également \emph{pro-représentable} [par un système projectif de
+quotients des $\pi_i$].
+
+\emph{N.B.} J'ignore, --- si $S,S',S''$ noethériens, \ill{} dernier foncteur
+est $=$ \emph{représentable}, à fortiori (comme $\pi^1(S'/S,\xi;G)$ est repr.
+dans ce cas) j'ignore si dans ce cas $\pi^1 = \pi^1_{\mathrm{eff}}$, i.e.
+\emph{toute} donnée de descente sur $G_{S'}$ est \emph{effective} \ill{}
+C'est vrai cependant \struck{\ill{}} \uncertain{hypothèse} sur $S''$, $S$ et
+$S'$ \ill{} et si loc. noeth.] si \struck{\ill{}} dans $G_i$ \ill{}
+intersection de sous-gpes \ill{} d'indice fini \ldots
+
+\marginal{Pb \uncertain{intér.} pour l'affirmative [ \ill{} et
+$S' \to S$ \uncertain{fid. plat quasi-compact} ]}
+
+\page{180}
+
+\begin{tikzcd}[column sep=small, row sep=small, nodes={font=\scriptsize}]
+Y & X_0^0 \arrow[l, dashed] & X_1^1 \arrow[l, bend left=12]
+  \arrow[l, bend right=12] & X_2^2 \arrow[l, bend left=20] \arrow[l]
+  \arrow[l, bend right=20] \\
+\xi \arrow[u] & X_0^{\xi} \arrow[l] \arrow[u] & X_1^{\xi}
+  \arrow[l, bend left=12] \arrow[l, bend right=12] \arrow[u] & X_2^{\xi}
+  \arrow[l, bend left=20] \arrow[l] \arrow[l, bend right=20] \arrow[u] \\
+& K_0^0 & K_1^1 \arrow[l, bend left=12] \arrow[l, bend right=12] & K_2^2
+  \arrow[l, bend left=20] \arrow[l] \arrow[l, bend right=20] \\
+& k_0^0 \arrow[u, "i_0"] & k_1^1 \arrow[l] \arrow[u, "i_1"] & k_2^2
+  \arrow[l, bend left=12] \arrow[l, bend right=12] \arrow[u, "i_2"]
+\end{tikzcd}
+
+\[
+  K_i^{\xi} = \pi_0(X_i^{\xi})
+\]
+
+$\pi_0(K) = {}$ \ill{} \ldots $K^0 = e$, et au-dessous
+$\pi_0(k) = {}$ « \ill{} » \ldots $k^0 = e$.
+
+\note{les deux lignes sont reliées par une flèche montante ; ce qui sépare
+chaque signe d'égalité de sa conclusion ne se laisse pas lire}
+
+Données de descente sur $E_{X_0}$ $\simeq$ Données de descente sur $E_{K_0}$
+\uncertain{relatives} à $(\cdots)$
+
+$\simeq$ applications \struck{\ill{}} ensemblistes $f : K_1 \to G$ telles que
+\[
+  f(p_1(\xi)) = f(p_0(q_2))\, f(p_2(q_1)) \qquad \text{pour tt } \xi \in K
+\]
+Équivalence de telles :
+\[
+  h(p_1(\xi))\, f(\xi)\, h(p_0 q_1)^{-1} \simeq f(\xi)
+\]
+
+\emph{Données de descente ponctuées} sur $E_{K_0}$
+
+$\simeq$ applications ensemblistes $f : K_1 \to G$ telles que
+\[
+  \begin{cases}
+    f(i_1(q)) = \struck{1}\, e_G & \text{pour tt } q \in k_1 \\
+    \struck{\ill{}}\quad f \circ p_1 = (f \circ p_0)(f \circ p_2) &
+  \end{cases}
+\]
+Équivalence de telles :
+\[
+  h(p_1 q)\, f(q)\, h(p_0 q)^{-1} \simeq f(q)
+\]
+\uncertain{Si} $h(i_0(q)) = 1$ pour tt $i_0$.
+
+\end{document}
