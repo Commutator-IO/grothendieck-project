@@ -1,0 +1,676 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 29, batch 7 (pages 121-140).
+% Established from the facsimile archives/batches/29/batch-07.pdf (a mirror of
+% https://grothendieck.umontpellier.fr/29.pdf), per the skill
+% transcribe-grothendieck.
+%
+% Pass: Opus 5 (claude-opus-5), 2026-08-29 — first pass, unchecked against the
+% pages by a human.
+%
+% Fifteen of the twenty pages are transcribed. Five are not:
+%
+%   - page 123, an empty folder cover inscribed, in his hand, « "Vrai" groupe
+%     fondamental [feuilles anciennes] ». It is the wrapper of the run of
+%     handwritten sheets that closes the batch, and names it; as a separator
+%     sheet it gets no \page{}, exactly as page 111 of batch 6;
+%   - pages 131, 133 and 135, three sheets of an English typescript on
+%     k-structures on vector spaces (fields of definition, Proposition 1 on
+%     k(W), a section "5. Conjugates"), paginated I-6, I-5, I-4 — i.e. in
+%     descending order, since the handwritten pages 130, 132 and 134 are
+%     written on their backs. They carry nothing in his hand, which is the
+%     criterion batches 5 and 6 used for typed versos: kept when annotated,
+%     skipped when not. Page 131 is scanned upside down for the same reason.
+%
+% Page 139 is kept although it carries a single line. That line — "Soit
+% (R, λ) le produit fibré de (P, ξ) et (P', ξ') sur (Q, η)" — is the sentence
+% page 140 restarts and this time carries through: the page is an abandoned
+% attempt, and its abandonment is the record of where the argument was
+% re-founded.
+%
+% The batch falls into three runs.
+%
+% Pages 121-122 finish the SGA 7 typescript on the functorial behaviour of
+% inertia groups that batch 6 broke off inside its § 5. They carry the
+% argument to its point: for x̄ varying in a component D_i of the regular
+% locus of D of characteristic ≠ ℓ, the inertia homomorphism Z_ℓ(1)(x̄) → G
+% is well defined up to conjugation as soon as the Tate sheaf Z_ℓ(1) is
+% trivial on D(ℓ), and the classes so obtained are compatible with a morphism
+% f : X → Y of the kind studied in the earlier numbers.
+%
+% Pages 124-129 are a six-page typed letter to Serre, dated 18.X.1959, on the
+% "infinitesimal" part of the fundamental group. It is the theoretical heart
+% of the batch. Grothendieck sets up an auxiliary category C, a category G of
+% C-groups closed under products, kernels of pairs and images, with descending
+% chain condition, and an exact functor F from G to group schemes over S; the
+% set Z(S, a; G) of pointed principal homogeneous bundles of group F(G) is
+% then a functor on G commuting with products and with kernels of pairs, and
+% the minimal couples (G, z) form a filtered projective system whose limit
+% he writes π₁^G(S, a) — over a base field, π₁(S/k, a), "le groupe
+% proalgébrique (mais avec partie infinitésimale) fondamental du k-schéma S".
+% He conjectures the exactness relating π₁(X), the inverse image of π₁(Y) and
+% the fundamental groups of the fibres of a proper morphism with f_*(O_X) =
+% O_Y, computes π₁(X/k) = lim← ₙX for an abelian variety, notes the Cartier
+% duality with the ind-algebraic limit of the ₙX*, and closes with the
+% timetable of the multiplodocus.
+%
+% Pages 130 to 140 are the handwritten sheets the folder cover calls "feuilles
+% anciennes". They are earlier or parallel workings of the same theory, in his
+% own hand and with his own notation: the ℨ of these pages is the Z(S, a; G)
+% of the letter. They are hard reading — faint ink, heavy deletion, several
+% restarts — and the apparatus here is correspondingly heavy. Page 130 sets up
+% the functor F_G(T) of pointed principal bundles on X_T; page 132 lists five
+% conditions (i)-(v) on a functor F on (Sch)/S guaranteeing representability by
+% an étale separated quasi-finite S-scheme; page 134 states a gluing lemma for
+% a compatible family of X(s) over the local rings; pages 136-140 define the
+% admissible S-groups by the exact sequence e → U → G → Γ → e and prove, twice
+% over, that u ↦ u_*(α) is injective on Hom^gr_S(G, G') when α is minimal.
+%
+% Notation held for the batch: Z_ℓ(1) underlined as he types it, as in batch 6;
+% the categories of the letter kept underlined (C, G) as typed; the gothic ℨ of
+% the handwritten pages set as \mathfrak{Z} and flagged once against the
+% letter's Z(S, a; G).
+
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{29}
+\batch{7}
+\pages{121}{140}
+\dating{1959-1969}
+\watermark{Édition de démonstration}
+\foldertitle{Groupe fondamental [Autour de SGA 4 et SGA 7] : lettres (1959, 1967, 1969), tapuscrits et copies de tapuscrit annotés (s.d.), notes manuscrites (s.d.)}
+
+\begin{document}
+
+\section*{Groupes d'inertie : classes de conjugaison d'homomorphismes de $\underline{Z}_{\ell}(1)$ (pages 121 à 122)}
+
+\page{121}
+
+$X$ (donc \struck{et} $X$ est régulier en les points de son support),
+\struck{$U = f^{-1}(V) = X - \operatorname{supp} D$}
+\marginal{(Condition de transversalité)}
+
+\begin{enumerate}
+\item[b)] $\operatorname{supp} E$ est irréductible, et il est régulier en les
+points de $f(\operatorname{supp} D) = \operatorname{supp} E \cap f(X)$ (donc $Y$
+est régulier en ses points).
+\end{enumerate}
+
+Alors pour tout $x \in \operatorname{supp} D$, \struck{les images des} les
+sous-groupes d'inertie de $G$ en $x$ sont comme images par $\varphi : G \to H$
+des sous-groupes de $H$ qui sont des sous-groupes d'inertie de $H$
+relativement au point maximal de $\operatorname{supp} E$. Par suite, pour toute
+représentation linéaire de $G$ (dans un module $M$ sur quelque anneau)
+\struck{\ill{}} qui veut bien se factoriser par une représentation linéaire de
+$H$, les images dans $\operatorname{Aut}(M)$ des sous-groupes d'inertie
+\struck{dans} de $G$ relatifs aux divers points de $\operatorname{supp} D$ (ou
+encore, relatifs aux diverses composantes irréductibles de $\operatorname{supp}
+D$, cela revient au même en vertu de 3) sont conjugués dans
+$\operatorname{Aut}(M)$. \marginal{Remords au n\textsuperscript{o} 3, 4.}
+
+\struck{Application} On peut demander \struck{du} un résultat plus précis, en
+considérant pour tout $\xi$ comme ci-dessus (au dessus d'un point géométrique
+$\bar{x}$ de $\operatorname{supp} D$) l'homomorphisme correspondant
+
+\[ \underline{Z}_{\ell}(1)(\bar{x}) \to G \]
+
+dont l'image est le sous-groupe d'inertie correspondant, et en se demandant
+comment cet homomorphisme varie avec le choix de $\xi$ et de $\bar{x}$. Pour
+$\xi$ variable, la variation se fait évidemment modulo composition avec les
+automorphismes intérieurs de $G$, \struck{Pour donner un sens à la question}
+donc pour $\bar{x}$ fixé, on trouve une classe de conjugaison d'homomorphismes
+
+\[ \underline{Z}_{\ell}(1)(\bar{x}) \to G. \]
+
+\struck{pour} \add{Étudions} la variation de cet homomorphisme, pour $\bar{x}$
+variable dans une composante \struck{de la} \add{$D_{i}$ de} l'ensemble des
+points réguliers de $D$ \add{à car.\ $\neq \ell$} ; d'après ce qu'on a vu au
+n\textsuperscript{o} 3, on passe d'un tel homomorphisme à un autre en composant
+avec un quelconque des isomorphismes $\underline{Z}_{\ell}(1)(\bar{x}) \to
+\underline{Z}_{\ell}(1)(\bar{x}')$ associé à une classe de chemins de $\bar{x}$
+à $\bar{x}'$. Si cet \uncertain{isomorphe}\note{sic ; lire
+« isomorphisme »} ne dépend pas du choix de cette classe de chemins, i.e.\ si
+\struck{l'action du groupe fondamental} le faisceau $\ell$-adique de Tate
+$\underline{Z}_{\ell}(1)$ sur $D(\ell)$ est trivial (ce qui se voit déjà sur la
+
+\page{122}
+
+restriction dudit faisceau au \struck{corps résiduel} point générique de
+$D_{i}$), alors on peut identifier entre eux tous les groupes
+$\underline{Z}_{\ell}(1)(\bar{x})$ envisagés à un même groupe
+$\underline{Z}_{\ell}(1)(D_{i})$ (qu'on peut interpréter comme groupe des
+sections de $\underline{Z}_{\ell}(1)$ sur $D_{i}$ ou sur le point générique de
+$D_{i}$), et on trouve une classe \add{de conjugaison} \struck{bien déterminée}
+d'homomorphismes
+
+\[ \underline{Z}_{\ell}(1)(D_{i}) \to G. \]
+
+(On trouve un résultat analogue pour les homomorphismes de produits de groupes
+$\underline{Z}_{\ell}(1)$ envisagés dans le n\textsuperscript{o} 3.) Bien
+entendu, si $\underline{Z}_{\ell}(1)$ est trivial sur l'ouvert \add{$X_{\ell}$}
+des points de $X$ \struck{lorsque l'on a un $f : X \to Y$ comme aux
+n\textsuperscript{os} \ill{}} de car.\ $\neq \ell$, et si ce dernier est
+connexe, on peut identifier les groupes $\underline{Z}_{\ell}(1)(D_{i})$ au
+même groupe $\underline{Z}_{\ell}(1)(X_{\ell})$, \struck{si on} soit
+$\underline{Z}_{\ell}(1)$, et on trouve \struck{un homomorphisme dans} pour
+chaque $i$ une \struck{classe} classe de conjugaison d'homomorphismes
+$\underline{Z}_{\ell}(1) \to G$. En général, celles-ci \struck{sont} peuvent
+être distinctes pour des $i$ distincts, bien entendu. Mais relativement à un
+morphisme $f : X \to Y$ comme dans les n\textsuperscript{os} 2, 4, la formation
+des classes \add{de conjugaison} \struck{précédentes} d'homomorphismes
+\add{ci-dessus} a un caractère fonctoriel évident, que le lecteur explicitera
+lui-même s'il en a besoin.
+
+\section*{Lettre à Serre : la partie « infinitésimale » du groupe fondamental (pages 124 à 129)}
+
+\page{124}
+
+\uncertain{Vallocin}\note{le nom de lieu est lu sans certitude}, 18.X.1959
+
+Mon cher Serre,
+
+Tate m'a écrit de son côté \struck{\ill{}} sur ses histoires de courbes
+elliptiques, et pour me demander si j'avais des idées sur une définition
+globale des variétés analytiques sur des corps valués complets. Je dois avouer
+que je n'ai pas du tout compris pourquoi ses résultats suggèreraient
+l'existence d'une telle définition, et suis encore sceptique. Je n'ai pas non
+plus l'impression d'avoir rien compris à son théorème, qui \struck{\ill{}} ne
+fait que exhiber par des formules brutales un certain isomorphisme de groupes
+analytiques ; \struck{\ill{}} on conçoit que d'autres formules tout aussi
+explicites en donneraient un autre pas plus mauvais (sauf preuve du contraire !)
+
+J'ai réfléchi un petit peu à la partie ``infinitésimale'' du groupe
+fondamental, juste assez pour me convaincre que ça existe et est raisonnable.
+Voici un contexte (certainement insuffisant d'ailleurs) où ça marche. On a un
+schéma $S$ \add{(connexe)} (par exemple un schéma algébrique sur un corps $k$),
+une catégorie auxiliaire $\underline{C}$ (par exemple la catégorie des schémas
+algébriques finis sur $k$), une catégorie \struck{\ill{}} $\underline{G}$ dont
+les objets sont des $\underline{C}$-groupes, et les morphismes des morphismes
+de $\underline{C}$-groupes (par exemple les groupes algébriques finis sur $k$).
+On suppose que dans $\underline{C}$ les produits fibrés existent, et que
+$\underline{G}$ satisfait aux conditions suivantes :
+
+\begin{enumerate}
+\item[(i)] $\underline{G}$ est stable par produits, et si $u, v : G \to G'$
+sont des morphismes dans $\underline{G}$, alors le noyau du couple $(u,v)$
+i.e.\ le sous-groupe \struck{\ill{}} maximum de $G$ où $u$, $v$ coïncident ---
+qui existe, car s'exprime par un produit fibré --- est dans $\underline{G}$.
+\item[(ii)] Si $u : G \to G'$ est un morphisme dans $\underline{G}$,
+\struck{\ill{}} le groupe image existe, est isomorphe à un quotient de $G$
+comme il se doit, et est dans $\underline{G}$.
+\item[(iii)] Toute suite décroissante de sous-groupes \struck{\ill{}} $\in
+\underline{G}$ d'un $G \in \underline{G}$ est stationnaire.
+\end{enumerate}
+
+On suppose donné de plus un foncteur covariant \struck{\ill{}} $F$ de
+$\underline{G}$ dans les \struck{groupes} schémas en groupes sur $S$ (par
+exemple $G \to S \times_{k} G$), et on suppose :
+
+\begin{enumerate}
+\item[(iv)] Le foncteur $F$ commute aux produits, \add{aux} noyaux de couples
+de morphismes, images (on pourra dire que $F$ est ``exact'').
+\item[(v)] Si $H$ est \struck{\ill{}} de la forme $F(G)$ ($G \in
+\underline{G}$) alors $H$ \add{est ``spécial'' i.e.} admet une suite exacte
+\end{enumerate}
+
+\page{125}
+
+de schémas en groupes finis et plats sur $S$
+
+\[ e \to H_{\mathrm{inf}} \to H \to H_{\mathrm{sép}} \to e \]
+
+où $H_{\mathrm{inf}}$ est purement infinitésimal (i.e.\ la projection
+$H_{\mathrm{inf}} \to S$ est géométriquement injectif) et où
+$H_{\mathrm{sép}}$ est non ramifié sur $S$. (Dans le cas d'un corps de base
+$k$, une telle suite exacte est déduite d'une suite exacte analogue pour un
+groupe algébrique fini $G$ sur $k$ ; d'ailleurs si $k$ est parfait, cette suite
+splitte canoniquement, car $G_{\mathrm{réd}}$ est \add{alors} un sous-groupe de
+$G$, isomorphe à $G_{\mathrm{sép}}$ par la projection $G \to
+G_{\mathrm{sép}}$. Faire attention cependant que $G_{\mathrm{réd}}$ va opérer
+sur $G_{\mathrm{inf}}$, on aura seulement un produit semi-direct.) Enfin
+\struck{\ill{}}
+
+\begin{enumerate}
+\item[(vi)] $S$ est réduit.
+\end{enumerate}
+
+Les conditions (v) et (vi) ont une sale gueule, et sont essentiellement
+provisoires. Elles servent à \struck{assurer la validité} \add{causer} du
+
+\textbf{Lemme.} Soit $H$ comme dans (v), $S$ comme dans (vi), $P$ un fibré
+principal homogène sous $H$, $Q$ un autre, $u$, $v$ deux isomorphismes de $P$
+dans $Q$ transformant un ``point \struck{\ill{}} \add{marqué}'' donné en un
+autre donné, alors $u = v$.
+
+(On est ramené, en tordant $H$, au cas où $P$ est trivial, et alors cela
+résulte du fait suivant : une section de $Q$ est un isomorphisme de $S$ sur une
+composante connexe de $Q_{\mathrm{réd}}$.)
+
+Remarque néanmoins que les conditions (i) à (vi) n'excluent pas des groupes
+structuraux tordus (relativement à un corps de base $k$).
+
+Soit maintenant $a$ un ``point marqué'' de $S$ (i.e.\ une extension
+algébriquement close du corps résiduel d'un $s \in S$). Pour tout $G \in
+\underline{G}$, on désigne par $Z(S, a ; G)$ ou simplement $Z(G)$ l'ensemble
+des classes (à isomorphisme près) de fibrés principaux homogènes sur $S$, de
+groupe $F(G)$, munis d'un point marqué au dessus de $a$. Évidemment $Z(G)$ est
+un foncteur de $\underline{G}$ dans la catégorie des ensembles. Ce foncteur
+satisfait aux conditions suivantes :
+
+\begin{enumerate}
+\item[1)] Il commute aux produits (\struck{\ill{}} car $F$ y commute).
+\item[2)] Il commute aux noyaux de couples, en d'autres termes si $G'' \to G
+\rightrightarrows G'$ est exact dans $\underline{G}$, alors $Z(G'') \to Z(G)
+\rightrightarrows Z(G')$ est exacte, i.e.\ $Z(G'')$ s'identifie à l'ensemble
+des éléments de $Z(G)$ dont l'image dans $Z(G')$ par $Z(u)$ et $Z(v)$ est la
+même. (Ceci résulte de l'exactitude de $F$, et du lemme.)
+\end{enumerate}
+
+\page{126}
+
+De ces deux propriétés résulte formellement qu'on peut trouver un système
+projectif \add{filtrant} $(G_{i})_{i \in I}$ dans $\underline{G}$, avec des
+morphismes $G_{i} \to G_{j}$ qui sont des épimorphismes dans $\underline{C}$,
+``essentiellement unique'' dans un sens facile à préciser, tel que
+\struck{\ill{}} l'on ait un isomorphisme fonctoriel
+
+\[ Z(G) = \varinjlim \operatorname{Hom}_{\underline{G}}(G_{i}, G) \]
+
+C'est ce système projectif (pris modulo une équivalence qui intuitivement
+signifie qu'on a passé à la limite projective des $G_{i}$) qui peut être noté
+$\pi_{1}^{\underline{G}}(S, a)$ et joue le rôle d'un groupe fondamental de $S$
+en $a$ (relativement à la catégorie $\underline{G}$ de groupes, munie du
+foncteur $F$). Dans le cas \struck{\ill{}} d'un corps de base $k$,
+$\underline{G}$ étant la catégorie des groupes algébriques finis sur $k$, on
+pourra écrire $\pi_{1}(S/k, a)$, c'est le groupe proalgébrique (mais avec
+partie infinitésimale) fondamental du $k$-schéma $S$. \marginal{à tout}
+Lorsque $k$ est parfait, la décomposition d'un groupe algébrique fini en partie
+infinitésimale et partie réduite montre que le groupe fondamental est produit
+semi-direct de sa partie réduite ou séparable \struck{\ill{}} (qui correspond à
+un groupe compact discontinu ordinaire, sur lequel le groupe fondamental
+ordinaire de $k$ --- i.e.\ le groupe de Galois de $\bar{k}$ sur $k$ --- opère),
+par sa partie infinitésimale, \struck{\ill{}} qui elle ne dépend d'ailleurs
+plus du choix du point base $a$ de $S$. \marginal{(lorsque $a$ \ill{}
+automatiquement une \ill{})} Noter que la partie séparable du groupe
+fondamental peut se réconstituer facilement à l'aide du groupe fondamental
+ordinaire de $S$ et de son homomorphisme naturel dans
+$\operatorname{Gal}(\bar{k}/k)$. (\add{mais} Il est ``plus grand'' que le
+groupe fondamental ordinaire, parceque il correspond à la classification de
+revêtements principaux de groupe structural non seulement un groupe fini
+ordinaire, mais un groupe \struck{\ill{}} fini et séparable sur $k$ (i.e.\ un
+groupe fini ordinaire sur lequel on fait opérer
+$\operatorname{Gal}(\bar{k}/k)$ de façon non nécessairement triviale).)
+\struck{\ill{}} J'avoue que si $k$ n'est pas algébriquement clos, le groupe
+fondamental ci-dessus n'est \struck{peut-être} \add{sans doute} pas le bon ; on
+devrait sans doute prendre le groupe fondamental de $S \times_{k} \bar{k}$, qui
+est un groupe proalgébrique défini sur $\bar{k}$, noter qu'il est muni d'une
+donnée de descente de $\bar{k}$ à $k$ et est par suite défini en réalité sur
+$k$ ; \struck{avec cette définition, si $S = \operatorname{Spec}(k)$, la
+\ill{} partie séparable du groupe fondamental de $S$ (relativement à la
+ponctuation de $S$ définie par une \ill{} clôture algébrique $\bar{k}$ de
+$k$) n'est autre que}
+
+\page{127}
+
+\struck{$\operatorname{Gal}(\bar{k}/k)$, mais où on fait opérer
+$\operatorname{Gal}(\bar{k}/k)$ par automorphismes intérieurs. Ainsi, \ill{}
+le groupe des points rationnels sur $k$ du groupe fondamental de
+$\operatorname{Spec}(k)$ s'identifie au centre de
+$\operatorname{Gal}(\bar{k}/k)$.}
+
+Voici comment on voit l'existence du système projectif $(G_{i})$. Un couple
+$(G, z)$, avec $G \in \underline{G}$ et $z \in Z(G)$, est dit \emph{minimal} si
+on ne peut trouver un sous-groupe $G' \subset G$ de $G$, \struck{\ill{}} $\neq
+G$, tel que $z$ soit \struck{dans} de la forme $Z(i)(z')$, avec $z' \in Z(G')$
+et $i : G' \to G$ l'injection. \struck{\ill{}} On dit qu'un couple $(G, z)$ est
+\emph{majoré} par un couple $(G', z')$ si on peut trouver un homomorphisme
+$G' \xrightarrow{\;u\;} G$ tel que $z = Z(u)(z')$. Il résulte de (iii) que tout
+couple $(G, z)$ est majoré par un couple minimal, et de la propriété 2) de $Z$
+que si $(G', z')$ est minimal et domine $(G, z)$, alors il existe
+\emph{un seul} $u : G' \to G$ tel que $z = Z(u)(z')$. De ceci résulte que les
+couples $(G, z)$ minimaux forment un système projectif pour la relation de
+domination, d'ailleurs filtrant (car $(G, z)$ et $(G', z')$ sont dominés par
+$(G \times G', (z, z'))$ lui-même dominé par un $(G'', z'')$ minimal), c'est le
+système cherché. On peut si on veut choisir un couple $(G, z)$ dans tout
+système de couples \add{minimaux} isomorphes, de \struck{\ill{}} telle façon
+que l'ensemble d'indices \struck{\ill{}} $I$ devient ordonné et non seulement
+préordonné. (N.B. Ce genre de raisonnements formels est aussi celui qui sert en
+théorie des \struck{\ill{}} modules \ldots)
+
+Je ne sais encore comment devrait être formulée la suite exacte d'homotopie,
+pour bien faire l'inclusion dans le groupe fondamental d'une partie
+infinitésimale devrait donner une théorie satisfaisante du comportement du
+groupe fondamental par spécialisation. J'espère que si $f : X \to Y$ est un
+morphisme propre et séparable à fibres absolument connexes i.e.\ tel que
+$f_{*}(\mathcal{O}_{X}) = \mathcal{O}_{Y}$, $X$ étant muni \struck{\ill{}}
+d'une section sur $Y$ qui détermine des points-base sur les fibres
+\marginal{(pour simplifier)}, alors les groupes fondamentaux \emph{totaux} des
+fibres de $X$ forment sur $Y$ un pro-schéma en groupes \add{filtrant}, de façon
+précise qu'on peut trouver un système projectif \add{$\pi_{1}(X/Y, s)$}
+$(G_{i})_{i \in I}$ de schémas en groupes $G_{i}$ `spéciaux' sur $Y$, avec des
+homomorphismes $G_{i} \to G_{j}$ qui soient des épimorphismes de $Y$-schémas
+(i.e.\ correspondant à un homomorphisme injectif de faisceaux cohérents sur
+$Y$), de telle façon que les groupes fondamentaux totaux des fibres de $X$
+\struck{\ill{}} déduisent dudit pro-schéma en groupes par simple
+spécialisation. (C'est en tous cas ce que semble indiquer le cas où $X$ est un
+schéma abélien sur $Y$, cf.\ plus bas.)
+
+\page{128}
+
+Lorsqu'il n'y a pas de corps de base, il n'est pas clair cependant comment et à
+quels groupes fondamentaux \struck{\ill{}} pour $X$, $Y$ on peut rattacher
+\struck{\ill{}} les groupes fondamentaux des fibres, pour tenir lieu de suite
+exacte d'homotopie. S'il y a un corps de base, une \add{conjecture}
+\struck{\ill{}} de départ serait que \struck{l'image inverse par $f$ de}
+$\pi_{1}(X/Y)$ \add{$\pi_{1}(X)$}, le pro-schéma en groupes sur $X$ qui
+définit le système local des groupes fondamentaux \struck{\ill{}} de $X$ en ses
+divers points, et \struck{enfin} l'image inverse par $f$ du pro-schéma en
+groupes analogue \add{$\pi_{1}(Y)$} sur $Y$, sont reliés par une suite exacte
+\struck{(qui serait définie d'ailleurs indépendamment de l'existence d'une
+section de $X$ sur $Y$, car le premier \ill{} pro-schéma en groupes nommé (sur
+$X$) serait défini en tous cas). Si $Y$ est le spectre d'un anneau local
+complet, notamment un anneau de valuation discrète, on devrait pouvoir s'y
+mettre.} Il y a de la joie en perspective pour les groupes
+d'homotopie supérieurs \ldots
+
+Il n'est pas dit que la conjecture envisagée soit plus difficile à démontrer
+que la partie déjà connue pour les groupes fondamentaux ordinaires. Elle
+impliquerait que pour des schémas complets $X$, $Y$ au dessus d'un corps alg
+clos $k$, on a $\pi_{1}(X \times Y/k) = \pi_{1}(X/k) \times \pi_{1}(Y/k)$.
+Utilisant tes raisonnements, on en conclut que si $X$ est une variété abélienne
+sur $k$, alors $\pi_{1}(X/k)$ est abélien, et qu'un revêtement principal
+minimal $X'$ de $X$ est une variété abélienne isogène à $X$. On en déduit
+
+\[ \pi_{1}(X/k) = \varprojlim {}_{n}X \]
+
+où ${}_{n}X$ est le noyau (avec sa partie infinitésimale aussi, bien sûr) de la
+multiplication par $n$, l'homomorphisme de ${}_{mn}X$ dans ${}_{n}X$ étant
+induit par la multiplication par $m$. (Utilisant Cartier, ce groupe fondamental
+est dual, au sens de Cartier, au groupe ind-algébrique limite inductive des
+${}_{n}X^{*}$, où $X^{*}$ est la variété duale de $X$.)
+
+Prenant la $p$-composante de ce groupe fondamental, on trouve ce qui, pour le
+nombre premier $p$, doit jouer le rôle du module de Weil. Il est hors de doute
+(et Cartier doit l'avoir fait) qu'il est possible d'associer \struck{\ill{}}
+fonctoriellement à un groupe proalgébrique infinitésimal abélien un module sur
+l'anneau de Witt, et \struck{\ill{}} qu'il \add{soit} facile de vérifier qu'en
+l'occurence ce module se décompose en les trois morceaux que tu connais bien
+(correspondants aux trois types principaux de groupes algébriques
+\add{abéliens}), \struck{\ill{}} On trouve ainsi
+
+\page{129}
+
+pour ton théorème une formulation plus naturelle (qui devrait \struck{\ill{}}
+fournir une démonstration uniforme, sans distinction du cas $\ell \neq p$ et
+$\ell = p$), de même qu'on voit en même temps que ta somme abracadabrante se
+comporte bien quand on fait varier $X$ dans une famille, i.e.\ si $X$ est
+\struck{\ill{}} un schéma abélien sur $Y$ (car alors les ${}_{n}X$ seront
+d'excellents schémas en groupes finis et plats sur $Y$, dont on peut prendre
+formellement la limite projective \ldots).
+
+J'espère arriver dans l'année prochaine à une théorie satisfaisante du groupe
+fondamental, \struck{\ill{}} et achever la rédaction des Chapitres IV, V, VI,
+VII (ce dernier étant le groupe fondamental), en même temps que des catégories.
+Dans deux ans résidus, dualité, intersections, Chern, Riemann-Roch. Dans trois
+ans cohomologie de Weil, et un peu d'homotopie si Dieu veut. Et entre-temps, je
+ne sais quand, le grand théorème d'existence avec Picard etc, un peu de courbes
+algébriques, \add{les schémas abéliens.} Sauf difficultés imprévues ou
+enlisement, le multiplodoque devrait être fini d'ici 3 ans, ou 4 au maximum. On
+pourra commencer à faire de la géométrie algébrique !
+
+Bien à toi,
+
+\section*{Le foncteur des fibrés principaux pointés au-dessus de $X/S$ (page 130)}
+
+\page{130}
+
+$X$ \ill{} muni d'une section $\uncertain{\sigma_{1}}$ ; $f$ propre plat,
+$f_{*}(\mathcal{O}_{X}) = \mathcal{O}_{S}$ \emph{universellement}.
+
+\begin{tikzcd}
+X \arrow[d, "f"] \\
+S
+\end{tikzcd}
+
+$G$ désignera un groupe \struck{\ill{}} fini et \struck{séparable}
+\uncertain{étale} sur $S$ [le cas important \ill{} celui \ill{} $G = S \times
+\Gamma$].
+
+$F_{G}(T) = $ ens.\ des classes d'isomorphie \ill{} de fibrés principaux
+homogènes sur $X_{T}$, de groupe $G_{T} \times_{T} X_{T} = (G \times_{S}
+X_{T})$, munis d'une section \ill{} le long de $\sigma_{T}$, i.e.\
+$\sigma_{T}^{*}(X') \simeq G_{T}$.
+
+N.B. \ill{} automorphismes d'un tel fibré \ill{} \marginal{$= $ pour $G$
+commutatif, les \ill{}}
+
+Le foncteur $F_{G}(T)$ en $T$ \ill{} est-il représentable ? Si oui, le \ill{}
+qui le représente est étale sur $S$, et \ill{} \marginal{(11.4) \quad 6.4}
+
+Notons que le foncteur $F_{G}$ \ill{} est compatible \ill{} et à la descente
+pour les morphismes fid.\ plats \ill{} et quasi-compacts.
+
+\struck{\ill{}} \quad $G$ \quad $H^{1}(X, G)$ \quad $G$ \quad $G$
+\uncertain{tordu}\note{fragment isolé, sans lien explicite avec ce qui
+précède}
+
+\section*{Un critère de représentabilité par un schéma en groupes étale (page 132)}
+
+\page{132}
+
+$S$ préschéma loc.\ noethérien. $F$ foncteur $(\mathrm{Sch})_{/S} \to
+(\mathrm{Ens})$.
+
+\begin{enumerate}
+\item[(i)] $F$ compatible aux limites inductives d'anneaux.
+\item[(ii)] $F$ compatible aux descentes fidèlement plates quasi-compactes
+\add{et localisation}.
+\item[(iii)] Si $A$ anneau local noethérien \emph{complet} sur $S$, corps
+résiduel $k$, alors $F(A) \simeq F(k)$.
+\item[(iv)] $F$ séparé.
+\item[(v)] Pour tout corps $k$ sur $S$, $F(k)$ est fini, et si $k'$ est une
+ext.\ alg.\ sép.\ de $k$, \struck{\ill{}} alg.\ clos, $F(k) \to F(k')$ est
+bijectif.
+\end{enumerate}
+
+Alors $F$ représentable par un \struck{\ill{}} \ill{} étale \struck{et gpe}
+séparé quasi-fini sur $S$.
+
+\struck{Démonstration.}
+
+Supposons $S$ le spectre d'un anneau local complet $A$, à corps résiduel alg.\
+clos, \struck{\ill{}} de dim.\ \ill{}, et \ill{} sur un $S_{1} = S - y$ le
+foncteur $F$ soit représentable par \uncertain{$M_{1}$}. \struck{\ill{}}
+
+$\xi_{i}$ \struck{\ill{}} $(i \in I)$ \struck{$\in k$}, éléments de $F(k)$, ils
+proviennent d'éléments $\xi_{i} \in F(A)$ bien déterminés, en vertu de (iii) ;
+leur restriction $\xi'_{i} = \xi_{i} \mid S_{1} \in F(S_{1})$, ils
+correspondent à des \ill{}\note{la page s'arrête ici, la suite manque}
+
+\section*{Recollement des $X(s)$ : lemme d'existence (page 134)}
+
+\page{134}
+
+\textbf{Lemme.} Soit $S$ un préschéma loc.\ noethérien, et pour tout $s \in S$,
+soit \struck{\ill{}} $X(s)$ un préschéma quasi-fini étale séparé sur
+$\operatorname{Spec}(\mathcal{O}_{s})$, et pour $t \in S$, $s \in \bar{t}$,
+soit $\varphi_{st} : X(t) \to X(s)$ rendant commutatif le diagramme ci-contre.
+
+\begin{tikzcd}
+X(s) \arrow[d] & X(t) \arrow[l, "\varphi_{st}"'] \arrow[d] \\
+\operatorname{Spec}(\mathcal{O}_{s}) & \operatorname{Spec}(\mathcal{O}_{t}) \arrow[l]
+\end{tikzcd}
+
+(les $\varphi_{st}$ \ill{} de transitivité) $\varphi_{st}\varphi_{tu} =
+\varphi_{su}$. Alors il existe un préschéma \add{quasi-fini séparé} étale sur
+$S$, soit $X$, et des isomorphismes
+
+\[ \varphi_{s} : X \times_{S} \operatorname{Spec}(\mathcal{O}_{s})
+\xrightarrow{\;\sim\;} X(s), \]
+
+rendant commutatifs \add{des} diagrammes \ill{}. $X$ est unique à isomorphisme
+unique près.
+
+Ce dernier fait résulte d'un énoncé plus général sur la catégorie des
+préschémas de type fini sur $S$, qui donne un foncteur pleinement fidèle. Je ne
+suis pas \ill{} de mon raisonnement \ill{} $S$ \uncertain{affine}, ou même
+\uncertain{noethérien}. \ill{} pour \ill{} on regarde l'énoncé \ill{} pour les
+sous-préschémas fermés de $S$ $\neq S$.
+
+\marginal{\ill{} pour tout $s \in S$, il existe une \uncertain{réalisation}
+\ill{} $X(s)$ sur un voisinage ouvert $U$ de $s$ \ill{} :}
+
+\begin{tikzcd}[column sep=small, row sep=small, nodes={font=\scriptsize}]
+X(s) \arrow[d] & X \arrow[l] \arrow[d] & X \times_{U} \operatorname{Spec}(\mathcal{O}_{t}) \arrow[l] \arrow[d] \arrow[r, dashed] & X(t) \\
+\operatorname{Spec}(\mathcal{O}_{s}) \arrow[r] & U & \operatorname{Spec}(\mathcal{O}_{t}) \arrow[l] &
+\end{tikzcd}
+
+\section*{Groupes admissibles et couples minimaux (pages 136 à 140)}
+
+\page{136}
+
+Soit $S$ un schéma \emph{réduit connexe}.
+
+On considère des schémas en groupes, finis et plats sur $S$, soit $G$, pour
+lesquels \ill{} une suite exacte
+
+\[ e \to U \to G \to \Gamma \to e \]
+
+i.e.\ la projection $U \to S$ est plat, fini, \struck{et} et géométriquement
+\struck{\ill{} homomorphisme} injectif, et si $\Gamma \to S$ est plat, fini,
+séparable. Alors le sous-$S$-groupe $U$ de $G$ est déterminé de façon unique
+[pour cette question, l'hypothèse « $S$ réduit » est-elle nécessaire ?].
+\marginal{Groupes admissibles ($S$ réduit ?)}
+
+On \struck{va} \add{veut} étudier des fibrés principaux $P$ sous de tels
+$S$-groupes. On suppose $S$ pointé par $a \in \uncertain{S}$, et on considère
+les $P$ munis d'une structure pointée.
+
+\textbf{Proposition.} \struck{\ill{}} Soit $S' \to S$ un morphisme
+\struck{\ill{}}, $G$ un $S$-groupe fini. \add{Si $G \times_{S} S'$ est
+admissible, $G$ \uncertain{aussi} ;} \struck{\ill{}} \add{la réciproque est
+vraie si $S' \to S$ est fidèlement plat.}
+
+\uncertain{Direct est trivial.} Réciproque résulte du \ill{} théorème de
+\ill{} et unicité.
+
+\page{137}
+
+\textbf{Corollaire.} Supposons $G$ admissible, et $P$ un fibré principal sous
+$G$. Alors $\operatorname{Aut}(P)$, considéré comme $S$-groupe, est admissible.
+
+\textbf{Proposition 2.} Soit $(P, \xi)$ un fibré principal \emph{pointé} sous
+un $S$-groupe admissible $G$. Alors $\operatorname{Aut}(P, \xi)$ est réduit à
+l'identité.
+
+Ça résulte, moyennant le corollaire précédent, de \ill{}
+
+\struck{Lemme} \textbf{Proposition 3.} Deux sections d'un \struck{\ill{}}
+\add{préschéma} $P$ (\struck{admissible sur $S$}) \add{réduit connexe} qui
+\ill{} en un pt, sont identiques. [De façon plus précise, si $s$ est une
+section de $P/S$, il existe un sous-préschéma fermé $Q$ de $P$, tel que
+$Q_{\mathrm{réd}} \to S$ soit un isom., et l'isomorphisme réciproque induit par
+$s$.]
+
+Un $(P, \xi)$ \struck{est dit} (relatif à $G$ admissible) est dit
+\emph{minimal} si on ne peut trouver de sous-groupe admissible $G'$ de $G$, et
+$(P', \xi')$ relatif à $G'$, t.q.
+
+\[ (P, \xi) \simeq (P', \xi') \times_{G} G'. \]
+
+\note{les deux groupes en indice et en facteur du produit sont lus comme ici ;
+l'extension du groupe structural, du $G'$-fibré $(P',\xi')$ au $G$-fibré
+$(P,\xi)$, demanderait $\times_{G'} G$ --- rapprocher de $(P,\xi) \times_{G}
+(G' \times G')$ des pages 138 et 140, où l'indice est bien le groupe du fibré}
+
+\page{138}
+
+\struck{\ill{}} Soit $\mathfrak{Z}^{*}(a ; G) = $ ens.\ des classes d'isom.\ de
+$G$-fibrés principaux \struck{\ill{}} pointés au-dessus de $a$. C'est un
+\struck{\ill{}} covariant en le $S$-groupe admissible $G$.
+\note{le $\mathfrak{Z}$ de ces feuillets est le $Z(S, a ; G)$ de la lettre des
+pages 124 à 129}
+
+\textbf{Proposition 4.} Si $\alpha \in \mathfrak{Z}(a, G)$ est \emph{minimal},
+alors $u \mapsto u_{*}(\alpha)$ de $\operatorname{Hom}^{\mathrm{gr}}_{S}(G,
+G')$ dans \struck{$\mathfrak{Z}$} $\mathfrak{Z}(a ; G')$ est \emph{injective}.
+
+Soient en effet $u, v : G \to G'$ t.q.\ $u\alpha = v\alpha$. Soit $(P, \xi)$ de
+classe $\alpha$, $(P', \xi')$ de classe $u\alpha = v\alpha$, $(u,v) : G \to G' \times G'$ (pris sur $S$)\note{l'indice du produit
+$G' \times G'$ porte une rature}, d'où $(P, \xi) \times_{G} (G'
+\times G')$, soit $(Q, \eta)$ ; par hypothèse, il y a un \ill{} compatible avec
+les prolongations, et avec \add{la diagonale} $G' \to G' \times G'$ : $(P',
+\xi') \to (P, \xi) \times_{G} (G' \times G')$, d'où un diagramme
+
+\begin{tikzcd}
+(P, \xi) \arrow[r] & (Q, \eta) \\
+& (P', \xi') \arrow[u]
+\end{tikzcd}
+
+\begin{tikzcd}
+G \arrow[r, "{(u,v)}"] & G' \times G' \\
+& G' \arrow[u]
+\end{tikzcd}
+
+\page{139}
+
+Soit $(R, \lambda)$ le produit fibré de $(P, \xi)$ et $(P', \xi')$ sur $(Q,
+\eta)$,\note{la page s'arrête sur cette ligne ; l'argument est repris depuis le
+début à la page 140}
+
+\page{140}
+
+$S$ préschéma connexe réduit
+
+\struck{$\mathcal{C}$ une catégorie auxiliaire} \struck{$\mathcal{G}$ une
+sous-catégorie pleine de $\mathrm{Gr}(\mathcal{C})$}
+
+$\mathcal{C}$ une catégorie de $S$-groupes \emph{finis} et \emph{plats}.
+$\mathcal{C}$ stable par \emph{produits}, \struck{et} par \emph{noyaux}
+\struck{\ill{}} de couples de morphismes, par \emph{images}. Les $G \in
+\mathcal{C}$ sont \emph{admissibles}.
+
+$S$ \ill{} pointé par $a$.
+
+Si $G \in \mathcal{C}$, on pose $\mathfrak{Z}(G) = \mathfrak{Z}(S, a ; G) = $
+classes de fibrés principaux \ill{} $a$-pointés de groupe $G$.
+
+Éléments \emph{minimaux} de $\mathfrak{Z}(G)$.
+
+\textbf{Proposition 4.} Soit $\alpha \in \mathfrak{Z}(G)$ minimal. Alors $u
+\mapsto u_{*}(\alpha)$ de $\operatorname{Hom}^{\mathrm{gr}}_{S}(G, G')$ dans
+$\mathfrak{Z}(G')$ est \emph{injectif}. [$G$, $G' \in \mathcal{C}$.]
+
+$u, v \in \operatorname{Hom}^{\mathrm{gr}}_{S}(G, G')$ tels que
+\struck{\ill{}} $u_{*}(\alpha) = v_{*}(\alpha)$. $(P, \xi)$ de classe $\alpha$,
+$(P', \xi')$ de classe $u_{*}(\alpha) = v_{*}(\alpha)$, $(u,v) : G \to G'
+\times G'$, et
+
+\[ (Q, \eta) = (P, \xi) \times_{G} (G' \times G') = [(P, \xi) \times_{u} G']
+\times [(P, \xi) \times_{v} G'] \]
+
+Par hypothèse, il y a un hom.\ $(P', \xi') \to (Q, \eta)$ (d'ailleurs unique)
+compatible avec $G' \to G' \times G'$ (diagonale).
+
+\begin{tikzcd}
+G \arrow[r, "{(u,v)}"] & G' \times G' \\
+H \arrow[u] \arrow[r] & G' \arrow[u]
+\end{tikzcd}
+
+\begin{tikzcd}
+(P, \xi) \arrow[r] & (Q, \eta) \\
+(R, \lambda) \arrow[u] \arrow[r] & (P', \xi') \arrow[u]
+\end{tikzcd}
+
+\note{dans le diagramme de gauche, chacune des lettres $G$, $G'$, $H$ porte un
+trait horizontal que la page n'explique pas ; il n'est pas reproduit ici}
+
+Soit $(R, \lambda)$ le produit fibré de $(P, \xi)$ et $(P', \xi')$ sur $(Q,
+\eta)$. \struck{\ill{}} Soit $H$ le noyau de $G \rightrightarrows G'$ ; \ill{}
+$(R, \lambda)$ est un fibré principal \emph{de groupe} $H$ \ill{}
+\uncertain{et la minimalité de $(P, \xi)$} \ill{} donne $H = G$, d'où $u = v$.
+En effet, il suffit de le montrer \struck{localement} en faisant l'extension de
+base $(S_{1}, a_{1}) \to (S, a)$, ce qui amène à remplacer \ill{}
+
+\marginal{$S \leftarrow S_{1}$, $g \mapsto g$ ; $u(g) = g'$, $v(g) = g_{1} g'$, $u(g) = g_{1}'^{-1} v(g)$}
+
+\end{document}
