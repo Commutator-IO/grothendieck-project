@@ -194,6 +194,28 @@ Either source works: the batch file if the folder has been mirrored
 (`npm run archive -- <folder> --batches N`), or the folder's own PDF, in which
 case remember the cover sheet offset.
 
+Then cut the batch into readable tiles, once, before reading a word:
+
+```bash
+npm run tiles -- <folder> <batch>
+```
+
+This writes `archives/tiles/<folder>/p<page>/` — the sheet whole, six
+overlapping tiles at 700 dpi, the left margin turned upright, and `tiles.json`
+carrying the rectangles so a doubtful word can be re-cropped tighter without
+working out coordinates by hand. It exists because it was measured: folder 29
+batch 9 cost about ninety hand-chosen `pdftoppm` crops for sixteen pages, and
+choosing crop rectangles is not reading.
+
+Read `references/hand.md` in the same breath. It carries what earlier passes
+learned about the hand — his shorthand, the strokes that mislead, the glyphs
+that are genuinely ambiguous — so that this pass does not derive it again at
+the cost of the attention it was meant to save. `references/lexicon.md`
+(regenerate with `npm run lexicon`) counts his vocabulary and notation across
+every transcription so far. **Both narrow a field of candidates and neither
+settles a reading**: where the page will not support what they suggest, the
+page wins and `\ill{}` stands.
+
 Make one complete pass producing nothing, and note:
 
 - **Which pages are mathematics and which are not.** The second group will not
@@ -354,6 +376,9 @@ the mid-rim labels' argument lists. Every difference between that and the
 page was mathematical content.
 
 `references/specimen.tex` shows every macro in a complete file.
+`references/hand.md` is the guide to the handwriting; `references/lexicon.md`
+is generated from the transcriptions by `npm run lexicon` and should be
+regenerated when a batch is added.
 
 ### 3. Check
 
