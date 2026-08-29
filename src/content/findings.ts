@@ -857,4 +857,85 @@ export const FINDINGS: Finding[] = [
     settle:
       'Checkable directly against the facsimile: read the four datelines of pages 2, 4 and 9 and the undated reply at 7, and confirm the six self-paginations in the top corners. Nothing here depends on the literature. What is not established, and is not claimed, is any date for the undated runs: the inventory’s « 1959-1969 » is its own and covers the shelfmark whole.',
   },
+  {
+    id: '54-universal-extension-de-rham-dual',
+    cote: '54',
+    pages: '2, 4',
+    kind: 'mathematical',
+    claim:
+      'The folder computes the Lie algebra of the universal vector extension of an abelian variety A as the de Rham cohomology H¹_dR(B) of the dual, identifies the resulting extension of tangent spaces with the Hodge filtration of B, and deduces the duality of H¹_dR(A) and H¹_dR(B) by transposition.',
+    basis:
+      'Page 2 classifies extensions of A by a vector group V as Hom(H¹(A,𝒪_A)^∨, V), takes the universal one at V = t_B^∨, passes to tangent spaces to get 0 → ť_B → t_E → t_A → 0, asserts that this sequence is S_B and that it is the transpose of S_A, and boxes the conclusion. Page 4 carries the same statement to every degree through the exterior algebra on the degree-1 part.',
+    ours:
+      'Three things. S_A and S_B are used on the page and defined nowhere; the reading supplies the identification with the Hodge filtration sequences, which is the only reading under which both assertions made about them hold. The caron of ť_B is read as the linear dual, a convention the page does not state. And the sentence introducing the universal extension is reworked twice on the leaf with two words illegible between the states, so the prose framing the construction — not the formulas — is partly the edition’s.',
+    literature: [
+      'B. Mazur and W. Messing, Universal Extensions and One Dimensional Crystalline Cohomology, LNM 370 (1974) — §I, the universal extension and its Lie algebra',
+      'W. Messing, The Crystals Associated to Barsotti–Tate Groups, LNM 264 (1972)',
+      'D. Mumford, Abelian Varieties, §13 (the dual abelian variety and Ext by G_a)',
+      'Transcription 54, batch 1 (batch-01.fr.tex), pages 2 and 4',
+    ],
+    status: 'matched',
+    settle:
+      'Settled: the identification of Lie E(A) with H¹_dR(B), the comparison of the vector-extension filtration with the Hodge filtration, and the resulting duality are the content of Mazur–Messing. Kept as a killed candidate because it is the entry a reader of this folder will most want to open, and because the tempting next step — reading the inventory’s deduced « [à partir de 1971] » as evidence of precedence — is the one thing this folder cannot support. See 54-dating-cannot-support-precedence.',
+  },
+  {
+    id: '54-frobenius-kernels-orthogonal',
+    cote: '54',
+    pages: '4, 6',
+    kind: 'mathematical',
+    claim:
+      'In characteristic p the folder asserts that ker F_A ⊂ A[p] and ker F_B ⊂ B[p] are orthogonal to each other for the Weil pairing, and that A[p] is the canonical extension of D(ker F_B) by ker F_A.',
+    basis:
+      'Page 4 fixes ker F_A = gr(t_A) inside A[p], corrects its rank from p^2d to p^d in the author’s own hand, and states the orthogonality as a claim — « Je dis que » — with no argument. Page 6 draws the Frobenius and Verschiebung rows as two transposed sequences and writes the exact sequence 0 → Gr(t_A) → A[p] → D(Gr(t_B)) → 0, calling A[p] the canonical extension of D(F^B) by F^A.',
+    ours:
+      'The two-line verification is the edition’s: for H ⊆ A[p] the annihilator is D(A[p]/H), the factorisation p = VF gives A[p]/ker F_A ≅ ker V_A, and Cartier duality exchanges F and V, so (ker F_A)^⊥ = D(ker V_A) = ker F_B. The page asserts the orthogonality and proves nothing. The third node of the diagram’s top row is written as a bare V-shaped stroke and is read as A by symmetry with the row below; the transcription flags it.',
+    literature: [
+      'D. Mumford, Abelian Varieties, §15 (the Weil pairing, and the duality of Frobenius and Verschiebung)',
+      'T. Oda, The first de Rham cohomology group and Dieudonné modules, Ann. Sci. ÉNS 2 (1969)',
+      'W. C. Waterhouse, Introduction to Affine Group Schemes, ch. 2 (Cartier duality)',
+      'Transcription 54, batch 1 (batch-01.fr.tex), pages 4 and 6',
+    ],
+    status: 'matched',
+    settle:
+      'Settled: that D(ker F_A) = ker V_B and hence that the Frobenius kernels of A and of its dual are exact mutual annihilators is standard, and the exact sequence is the usual filtration of A[p]. Kept because it is the only result the folder states without proving, which makes it look like a candidate, and because the parallel the folder draws between this sequence and the universal vector extension — which it poses as a question and leaves on two question marks — is answered by the crystalline comparison, not by anything on these leaves.',
+  },
+  {
+    id: '54-dating-cannot-support-precedence',
+    cote: '54',
+    pages: '1–7',
+    kind: 'codicological',
+    claim:
+      'Nothing in the folder dates these leaves: the inventory’s « [à partir de 1971] » is the archivists’ deduction for the shelfmark, the folder’s own title records it as « s.d. », and no leaf of the batch carries a date.',
+    basis:
+      'The transcription records that no page of the folder bears a date. The inventory title is « Dualité en cohomologie des V. A [variétés abéliennes] : notes manuscrites (s.d.) » — sans date on the archive’s own reading — while the catalogue entry carries the bracketed range « [à partir de 1971] », the brackets being the archivists’ convention for a date deduced rather than read. The two versos that could have dated the folder do not: the flatness typescript of pages 3 and 5 is undated, and the Bourbaki typescript of page 7 carries an internal document number but no year the transcription records.',
+    ours:
+      'Nothing of the dating, which is copied verbatim from the inventory into both editions. The reading names Mazur–Messing (1974), Oda (1969) and Raynaud–Gruson (1971) as the places the folder’s material now sits, and in each case footnotes that the concordance of subjects is not evidence about order.',
+    literature: [
+      'Montpellier inventory, cote 54 (title and dating, both reproduced in src/content/catalogue.ts)',
+      'Transcription 54, batch 1 (batch-01.fr.tex), all pages',
+    ],
+    status: 'candidate',
+    settle:
+      'Only physical evidence would settle it — a dated verso, a letterhead, or an identification of the Bourbaki typescript on page 7, whose internal number would place that sheet and therefore give a terminus for the leaf whose recto it is. This entry exists to stop the next reader treating « [à partir de 1971] » as a reading of these leaves: it is a deduction about the shelfmark. Whatever is found, priority is not a claim this project makes, about anyone.',
+  },
+  {
+    id: '54-flatness-typescript-fragment',
+    cote: '54',
+    pages: '3, 5',
+    kind: 'codicological',
+    claim:
+      'Pages 3 and 5 are two leaves of a typescript on flatness that does not otherwise survive in this folder, and its Proposition 4.1 cannot be evaluated from them: the statement as the leaves carry it, after the author’s own correction, admits a counterexample, so hypotheses standing elsewhere in the lost document are load-bearing.',
+    basis:
+      'The typed Proposition 4.1 supposes I nilpotent and concludes that M is free or flat over A; the author strikes « nilpotent » in ink and rewrites the conclusion as: for all n, M ⊗_A A/I^(n+1) is free (resp. flat) over A/I^(n+1). Taken with only the hypotheses printed on the leaf, that fails: A = ℤ, I = (p), the one-member family A_1 = ℚ (so the intersection of the kernels of A → A_i is 0), M = ℤ/p. Then M ⊗ A/I = ℤ/p is free of rank 1 over ℤ/p and M ⊗ ℚ = 0 is free of rank 0 over ℚ, but M ⊗ ℤ/p² = ℤ/p is not free over ℤ/p². A joint faithful flatness condition on the family — which ℚ alone fails — would kill the example, and is the kind of standing hypothesis a typescript states once and early.',
+    ours:
+      'The counterexample is the edition’s; the leaves carry the statement and no proof of the corrected form, the typed argument below it treating the nilpotent case the author has just removed. The modernised reading reports the corrected statement without certifying it, and this entry says why.',
+    literature: [
+      'Transcription 54, batch 1 (batch-01.fr.tex), pages 3 and 5',
+      'A. Grothendieck, EGA IV, §11 (critères de platitude) — the family the typescript’s numbering suggests, not yet collated against it',
+      'M. Raynaud and L. Gruson, Critères de platitude et de projectivité, Invent. Math. 13 (1971) — for the flattening stratification of page 5',
+    ],
+    status: 'candidate',
+    settle:
+      'Identify the typescript. If it is a draft of a published section, its standing hypotheses settle the question at once and this entry becomes matched. Two internal clues are available without leaving the fonds: the leaves cite « Prop. A » in a typed correction over a struck reference to 4.1, and page 5’s heading « Corollaire 4.1. ter » is renamed « Proposition A » in ink, so the document had at least the statements 4.1, 4.1 bis, 4.1 ter and 4.1 quater and was being restructured while it was typed. A search of the neighbouring shelfmarks of the group « 45-54 » for the missing leaves would be the next step.',
+  },
 ];
