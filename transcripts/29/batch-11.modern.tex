@@ -1,0 +1,746 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 29, batch 11
+% (pages 201-216). Last batch of the shelfmark.
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried moves into a
+% footnote. In any dispute of substance the transcription governs: whoever
+% cites Grothendieck must cite batch-11.fr.tex.
+%
+% Scope: the folder was read WHOLE before any of this was written — all eleven
+% batches, pages 1-216, in one pass — and one file was then written per batch.
+% This file is where the folder closes on itself, and the closure is only
+% visible at folder scope: the pair (C, s) of pages 201-203, presented here as
+% a « famille génératrice » of the champ R, IS the donnée de ramification of
+% 1967; the cartesian sections of page 202 ARE the revêtements de type R of
+% page 13; the formula of page 203 IS the colimit-of-limits of page 13; and
+% the frames construction of page 209 IS Serre's proof of page 152. Each
+% junction is named where it occurs.
+%
+% Departures from the page, each footnoted where it occurs:
+%   - the equivalence of page 203 is CONDITIONAL: full faithfulness of alpha is
+%     proved on pages 203-206, essential surjectivity is announced on page 206
+%     and the proof does not follow. The reading says so and does not assert
+%     the equivalence;
+%   - page 213's dimension bound is written >= n - card(E)d where its own
+%     equality case requires n - (card E - 1)d;
+%   - page 213 labels two of its three partition lines « en 3 » where one must
+%     be « en 1 ». Left as the page has it, and flagged.
+%
+% Pass: Opus 5 (claude-opus-5), 2026-08-29 — first pass, unchecked against the
+% pages by a human.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{29}
+\batch{11}
+\pages{201}{216}
+\dating{1959-1969}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Groupe fondamental [Autour de SGA 4 et SGA 7] — lecture modernisée}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Ces seize pages ferment le carton, et elles le ferment sur lui-même.
+
+La première moitié reprend la question laissée ouverte au lot précédent. On a
+maintenant un \emph{domaine de ramification} : un champ au-dessus du site
+étale, avec sa réalisation géométrique. Comment le décrire ? En le
+\emph{présentant} : on se donne une famille d'objets qui l'engendre, et l'on
+demande si le champ se reconstitue à partir d'elle. Grothendieck écarte d'abord
+la présentation naïve --- par des schémas à opérateurs $(Z_{i}, G_{i})$ --- avec
+un jugement qui vaut d'être retenu : « la formulation de telles données est
+pénible et finalement peu utile ». Il lui préfère une catégorie de modèles $C$
+au-dessus du site étale et un foncteur $\varphi : C \to R$, et il pose
+$s = r\varphi$.
+
+Il faut s'arrêter là un instant, parce que le carton vient de boucler. Le
+couple $(C, s)$ est \emph{exactement} la « donnée de ramification » que le
+tapuscrit de 1967 posait à sa page 12, deux cents pages plus tôt. Les
+« sections cartésiennes » que la page 202 construit sont \emph{exactement} les
+revêtements de type $\mathcal{R}$ de la page 13. Et la formule que la page 203
+vise --- une limite inductive sur les cribles de limites projectives sur chaque
+crible --- est \emph{exactement} celle qui définissait
+$\mathrm{Rev}^{\mathcal{R}}(S)$. Ce qui était en 1967 une \emph{définition}
+posée est devenu ici un \emph{théorème de présentation} : la donnée de 1967
+n'était pas l'objet, c'était une présentation de l'objet, et le carton l'aura
+mis dix ans à le démontrer.
+
+Le mot \emph{démontrer} est trop fort, et il faut le dire : la démonstration
+est faite à moitié. Que le foncteur soit pleinement fidèle occupe quatre pages,
+et l'argument est joli --- il repose sur le fait qu'un objet subordonné à un
+modèle est recouvert par les images de ses sections, ce qui permet de remplacer
+un objet quelconque par le modèle lui-même. Puis la page 206 écrit « Prouvons
+que $\alpha$ est essentiellement surjectif », et la démonstration ne suit pas.
+La suite est d'un autre sujet.
+
+La seconde moitié est le plus lisible de tout le carton, écrit au net à l'encre
+bleue, et c'est l'axiomatique des \emph{catégories multigaloisiennes} --- ce
+mot que la page 30 employait déjà en 1967 comme s'il allait de soi. Une
+catégorie galoisienne, c'est celle des ensembles finis où opère un groupe
+profini. Une catégorie multigaloisienne, c'est la même chose avec
+\emph{plusieurs} composantes : un produit de catégories galoisiennes, une par
+composante connexe de l'objet final --- donc un \emph{groupoïde} et non un
+groupe. Trois caractérisations sont données, et la première est la plus
+frappante : ce sont les objets localement constants finis d'un topos. Les six
+axiomes G0 à G5 en donnent la version élémentaire, et Grothendieck note du
+dernier qu'il le soupçonne redondant, sans le démontrer.
+
+Deux feuillets insérés font autre chose et méritent d'être signalés : ils
+axiomatisent directement la notion de \emph{morphisme de degré $n$} --- ce que
+veut dire, sans jamais compter de points, qu'un revêtement a $n$ feuillets ---
+et démontrent qu'une telle notion, si elle existe, est unique.
+
+Le carton s'arrête sur une proposition sans démonstration, à la moitié d'une
+page.
+
+\keywords{multigaloisian category, Galois topos, fundamental groupoid, generating family, degree of a morphism}
+\end{resume}
+
+\pagerange{201}{202}
+\section*{Familles génératrices, et la donnée de 1967 retrouvée (pages 201 et 202)}
+
+Grothendieck pagine cette suite 11 à 16, à la suite du 1--10 du lot précédent.
+
+\subsection*{Ce qu'est une famille génératrice}
+
+Soit $(R, r)$ un domaine de ramification sur $S$. Une famille d'objets
+$X_{i}/S_{i}$ de $R$, avec $S_{i} \in \mathrm{Et}(S)$, est dite
+\emph{génératrice} si, pour tout objet $X$ de $R$ sur un $S'$, les $S''$ étales
+sur $S'$ pour lesquels il existe un $i$, un morphisme $S'' \to S_{i}$ et une
+subordination de $X_{S''}$ à $X_{i,S''}$, recouvrent $S'$.
+
+En clair : \emph{tout revêtement est localement subordonné à un des
+générateurs}. C'est la même condition que le crible couvrant de 1967, dite du
+côté du champ.
+
+\subsection*{Le refus de la présentation naïve}
+
+On pourrait vouloir reconstituer $(R, r)$ à partir des seuls
+$(Z_{i}, G_{i}) = (r(X_{i}), \operatorname{Aut}(X_{i}))$, en précisant les
+compatibilités. Grothendieck écarte ce parti, et son jugement mérite d'être
+retenu tel quel : « la formulation de telles données est \emph{pénible et
+finalement peu utile} ».\footnote{La phrase de la page se défait entre « Si de
+plus » et « les $Z_{i}$, $G_{i}$ doivent permettre » ; ce qui se lit est le
+projet et son abandon. C'est le troisième refus de ce genre dans le carton,
+après le « voile pudique » de la page 27 et le « pénible » implicite des cinq
+conditions a) à e) de la page 32 --- et les trois portent sur le même objet :
+l'explicitation en coordonnées de ce qui se dit sans coordonnées.}
+
+\subsection*{Le couple $(C, s)$, et où le carton se referme}
+
+Il lui préfère d'associer à $R$ une catégorie $C$ sur $\mathrm{Et}(S)$ et un
+foncteur
+\[
+  \varphi : C \longrightarrow R ,
+\]
+dit \emph{générateur} si les $\varphi(M)$ forment une famille génératrice ---
+c'est-à-dire si, pour tout $X \in R$ sur $S'$, les $S''$ étales sur $S'$ tels
+que $X_{S''}$ soit subordonné à un objet de $C_{S''}$ recouvrent $S'$. Et il
+pose
+\[
+  s \;=\; r\varphi \;:\; C \longrightarrow \mathrm{Fl}_{S} ,
+\]
+en annonçant qu'on peut alors, à équivalence près, reconstituer $(R, r)$ en
+termes de $(C, s)$ --- et de même les $(R_{S'}, r_{S'})$, avec toutes les
+fonctorialités.
+
+\begin{quote}
+\textbf{Le couple $(C, s)$ est la donnée de ramification de 1967.} Le tapuscrit
+de la page 12 posait : « une donnée de ramification sur $S$ est un couple
+$(\mathcal{C}, s)$, où $\mathcal{C}$ est une catégorie fibrée sur
+$\mathrm{Et}(S)$ et $s : \mathcal{C} \to \mathrm{Fl}_{S}$ un foncteur
+cartésien ». C'est le même couple, avec le même nom pour le second membre. Ce
+qui a changé est son statut : en 1967 c'était la donnée dont on \emph{déduisait}
+la catégorie ; ici c'est une \emph{présentation} de la catégorie, qui existe
+d'abord, et dont on demande si elle la détermine.
+\end{quote}
+
+\subsection*{Les sections cartésiennes}
+
+Soit $X$ un objet de $R_{S}$, et $C_{X}$ la sous-catégorie pleine de $C$ formée
+des objets $M$ sur un $S'$ tels que $X_{S'}$ soit subordonné à $\varphi(M)$ et
+que $\varphi(M) \to X_{S'}$ soit un épimorphisme. Pour un tel $M$,
+\[
+  r\bigl(X_{S'} \times \varphi(M)\bigr) \longrightarrow r\varphi(M) = s(M)
+\]
+est un \emph{revêtement étale}. Donc
+\[
+  M \longmapsto r\bigl(X \times_{S'} \varphi(M)\bigr) \big/ s(M)
+\]
+donne une \emph{section cartésienne} de la catégorie fibrée des revêtements
+étales relatifs, tirée en arrière sur $C_{X}$ par
+$C_{X} \xrightarrow{\ s\ } \mathrm{Fl}_{S}$.
+
+\begin{quote}
+\textbf{Ce sont les revêtements de type $\mathcal{R}$ de 1967.} La page 13 du
+carton posait : « on appellera revêtement de type $\mathcal{R}$ de $S$ une
+section cartésienne de $\mathcal{D}$ sur $\mathcal{C}$ », $\mathcal{D}$ étant
+l'image inverse par $s$ de la catégorie fibrée des revêtements étales finis.
+C'est mot pour mot la même construction, dans l'autre sens : là on partait de
+$\mathcal{C}$ pour \emph{fabriquer} les sections cartésiennes, ici on part d'un
+objet $X$ du champ pour lui \emph{associer} une section cartésienne.
+\end{quote}
+
+\subsection*{Les sous-catégories $R_{S}^{C_{0}}$}
+
+Pour un crible \emph{admissible} $C_{0}$ de $C$, soit $R_{S}^{C_{0}}$ la
+sous-catégorie \emph{pleine} de $R_{S}$ formée des objets $X$ tels que, pour
+tout $S' \in \mathrm{Et}(S)$, $X_{S'}$ soit localement subordonné à \emph{tout}
+objet de $C_{0}$ sur $S'$. C'est une sous-catégorie multigaloisienne de
+$R_{S}$, stable par limites projectives et par sommes directes, et l'on
+dispose d'un foncteur
+\[
+  (\ast) \qquad
+  \alpha : R_{S}^{C_{0}} \longrightarrow
+  \varprojlim_{C_{0}} \bigl(\mathcal{E}\,|\,C_{0}\bigr) ,
+\]
+$\mathcal{E}$ désignant la catégorie fibrée des revêtements étales
+relatifs.\footnote{Le symbole que la page emploie pour cette catégorie fibrée
+est un E de fantaisie qu'elle ne nomme nulle part ; la transcription le rend
+$\mathcal{E}$ partout où il paraît, et cette lecture fait de même. C'est le
+$\mathcal{D}$ de la page 12, pris au-dessus de $C_{0}$.}
+
+\pagerange{203}{206}
+\section*{$\alpha$ est pleinement fidèle ; et la suite manque (pages 203 à 206)}
+
+\subsection*{La formule visée}
+
+Faisons parcourir à $C_{0}$ les cribles admissibles de $C$, et supposons la
+catégorie fibrée $C$ \emph{localement filtrante} --- ce qui entraîne que
+l'intersection de deux cribles couvrants est couvrante. Alors les
+$R_{S}^{C_{0}}$ forment une famille \emph{filtrante} de sous-catégories
+multigaloisiennes pleines de $R_{S}$, de réunion $R_{S}$. Donc, si les
+$\alpha_{0}$ sont des \emph{équivalences}, on aura
+\[
+  R_{S} \;\simeq\; \varinjlim_{C_{0}} \; \varprojlim_{C_{0}}
+  \bigl(\mathcal{E}\,|\,C_{0}\bigr) ,
+\]
+formule qui explicite $R_{S}$ en termes de $(C, s)$.
+
+\begin{quote}
+\textbf{C'est la formule de 1967.} La page 13 du carton posait
+$\mathrm{Rev}^{\mathcal{R}}(S) = \varinjlim_{\mathcal{C}_{0}}
+\mathrm{Rev}^{\mathcal{R}}_{\mathcal{C}_{0}}(S)$, où
+$\mathrm{Rev}^{\mathcal{R}}_{\mathcal{C}_{0}}(S)$ était la catégorie des
+sections cartésiennes au-dessus de $\mathcal{C}_{0}$, c'est-à-dire précisément
+$\varprojlim_{\mathcal{C}_{0}}$. Une limite inductive sur les cribles, de
+limites projectives sur chaque crible : c'est la même formule, aux deux
+extrémités du carton. Et les deux hypothèses (H1) et (H2) que la lecture du lot
+1 avait dû isoler --- la pleine fidélité des foncteurs de transition,
+l'existence de $r$ --- sont maintenant \emph{ce qu'il s'agit de démontrer}.
+\end{quote}
+
+Et l'on annonce que pour cela il suffit que $\varphi$ soit \emph{pleinement
+fidèle}.
+
+\subsection*{Ce qui est facile}
+
+$\alpha$ est un foncteur exact de catégories multigaloisiennes ; il suffit donc,
+pour la fidélité, de voir que
+\[
+  \alpha(X) = \varnothing \;\Longrightarrow\; X = \varnothing .
+\]
+C'est immédiat : la question est locale sur le site étale, il existe un
+$M \in C_{0,S}$, et
+$r(\varphi(M) \times X) = \varnothing$ entraîne
+$\varphi(M) \times X = \varnothing$ par la proposition 2 de la page 192.
+
+\subsection*{Ce qui demande du travail : la pleine fidélité}
+
+Soit $X \in R_{S}^{C_{0}}$ et $Z = \alpha(X) = Z_{1} \sqcup Z_{2}$ ; il faut
+montrer que cette décomposition provient d'une décomposition de $X$.
+
+La question est locale sur $S$ ; on peut donc supposer qu'il existe
+$M \in C_{S}$ avec $\varphi(M) \to e$ épimorphique. Considérons
+\[
+  r\bigl(X \times \varphi(M)\bigr) \;=\; \alpha(X)(M) \;=\; Z(M)
+  \longrightarrow r(\varphi(M)) = s(M) .
+\]
+Il se coupe en $Z_{1}(M) \sqcup Z_{2}(M)$, donc \emph{par l'axiome R2}
+$X \times \varphi(M)$ se coupe en $X_{1} \sqcup X_{2}$.
+
+Reste à montrer que cette décomposition provient d'une décomposition de $X$ :
+c'est-à-dire que pour tout objet $T$ de $R_{S}^{C_{0}}$ et deux morphismes
+$T \rightrightarrows \varphi(M)$, les deux images inverses de $X_{1}$
+coïncident.
+
+\begin{tikzcd}[column sep=small, row sep=small]
+T \arrow[d, bend left=12] \arrow[d, bend right=12]
+  & X \times T \arrow[d, bend left=12] \arrow[d, bend right=12] & \\
+\varphi(M) \arrow[d]
+  & X \times \varphi(M) \arrow[l, no head] \arrow[r] \arrow[d] & X_1 \\
+e & X \arrow[l, no head] &
+\end{tikzcd}
+
+L'argument est le suivant, et c'est le morceau de bravoure du lot.
+
+Le morphisme $T \times \varphi(M) \to \varphi(M)$ est un épimorphisme. Or
+$T \times \varphi(M)$, étant subordonné à $\varphi(M)$, est \emph{constant par
+morceaux} sur $\varphi(M)$ ; et un objet constant par morceaux et épimorphique
+est \emph{recouvert}, pour la topologie canonique, par les images des
+\emph{sections} $w$ de $T \times \varphi(M)$ sur $\varphi(M)$. On peut donc
+remplacer le couple $T \rightrightarrows \varphi(M)$ d'abord par les composés
+\[
+  T \times \varphi(M) \xrightarrow{\ \mathrm{pr}_{1}\ } T
+  \rightrightarrows \varphi(M)
+\]
+--- ce qui est licite, $\varphi(M) \to e$ étant un épimorphisme --- puis par
+les composés $\varphi(M) \xrightarrow{\ w\ } T \times \varphi(M) \to \cdots$.
+\emph{On est ainsi ramené au cas $T = \varphi(M)$.} Mais alors, $\varphi$ étant
+pleinement fidèle, les deux flèches $M \rightrightarrows M$ sont identiques.
+
+Le mécanisme mérite d'être nommé : \emph{quand tout objet est localement
+constant sur un modèle, on peut remplacer un objet quelconque par le modèle
+lui-même, parce que les sections le recouvrent}. C'est exactement pour cela que
+la subordination avait été définie.
+
+On obtient donc une décomposition
+\[
+  X \;=\; X_{1} \sqcup X_{2}
+\]
+uniquement déterminée par la condition $Z_{1} = \alpha(X_{1})$. Il reste à voir
+qu'elle ne dépend pas du choix de $M$ : c'est ce que fait la fin de la page 205
+et la page 206, en localisant sur $S$ et en utilisant que $C$ est localement
+filtrante.\footnote{Cette dernière partie est, sur la page 205, accolée à
+gauche et barrée de deux longues diagonales ; elle se lit par endroits et par
+endroits non. Le principe --- comparer les décompositions définies par $M$ et
+par $M'$ en passant à un $M''$ qui les majore, ce que la filtration locale
+fournit --- est ce que les phrases portantes autorisent ; le détail ne l'est
+pas, et il n'est pas reconstruit ici.}
+
+\subsection*{Et la suite manque}
+
+La page 206 se termine sur une seule ligne :
+
+\begin{quote}
+Prouvons que $\alpha$ est \emph{essentiellement surjectif}.
+\end{quote}
+
+\emph{La démonstration ne suit pas.} La page s'arrête là et la suite du carton
+est d'un autre sujet.
+
+Il faut donc dire ce qui est acquis et ce qui ne l'est pas. Est acquise la
+pleine fidélité de $\alpha$ --- $R_{S}^{C_{0}}$ s'envoie fidèlement et
+pleinement dans la limite projective. N'est pas acquise l'essentielle
+surjectivité, donc \emph{l'équivalence annoncée à la page 203 reste
+conditionnelle}, et avec elle la reconstitution de $(R, r)$ à partir de
+$(C, s)$. La boucle que le carton ferme --- de la donnée de 1967 au champ, et
+du champ à la donnée --- est fermée dans un sens et pas dans l'autre.
+
+\pagerange{208}{209}
+\section*{Catégories multigaloisiennes : les conditions A et B (pages 208 et 209)}
+
+À partir d'ici et jusqu'à la fin, le texte est écrit au net, à l'encre bleue,
+et se lit presque de bout en bout --- à la différence de tout ce qui précède
+dans ce carton. Grothendieck pagine 1 à 4, insère deux feuillets « 1 bis » et
+« 1 ter », puis 5 et 6.
+
+\subsection*{A) Ce que c'est}
+
+Soit $\mathcal{U}$ un univers et $C$ une catégorie. Les conditions suivantes
+sont équivalentes.
+
+\begin{enumerate}
+  \item[(i)] Il existe un $\mathcal{U}$-topos $\mathcal{T}$ et une équivalence
+    $C \simeq \mathcal{T}_{\mathrm{cf}}$, où $\mathcal{T}_{\mathrm{cf}}$ est la
+    sous-catégorie pleine des objets \emph{localement constants
+    finis}.\footnote{L'indice est « cf », et c'est Grothendieck lui-même qui le
+    glose à la ligne au-dessus : « constants finis ». La transcription le
+    signale ; c'est cette glose, et non le tracé, qui fixe la lecture.}
+  \item[(ii)] $C$ est une $\mathcal{U}$-catégorie dont l'ensemble des classes
+    d'isomorphie d'objets est $\mathcal{U}$-petit, et il existe sur $C$ une
+    topologie --- moins fine que la topologie canonique --- telle que
+    $C \to \tilde{C}$ induise une équivalence
+    $C \xrightarrow{\ \sim\ } \tilde{C}_{\mathrm{cf}}$.
+  \item[(ii bis)] La même chose, en prenant la topologie \emph{la plus fine de
+    la descente effective universelle}.
+  \item[(iii)] Pour tout objet $X$ de $C$, les objets $S$ tels que $X_{S}$ soit
+    \emph{constant fini} sur $S$ forment une famille de descente effective
+    universelle.
+  \item[(iv)] Quatre conditions, portées sur un feuillet inséré (page 212).
+\end{enumerate}
+
+La condition (i) est la définition conceptuelle : \emph{une catégorie
+multigaloisienne est la catégorie des systèmes locaux finis d'un topos}. La
+condition (iii) est la définition opératoire : \emph{tout objet devient
+constant après un changement de base convenable}. Que les deux coïncident est
+tout le contenu de A.
+
+\subsection*{B) Le cas multigaloisien proprement dit}
+
+Les conditions suivantes sont équivalentes.
+
+\begin{enumerate}
+  \item[(i)] $C$ satisfait aux conditions de A), et son objet final est somme
+    \emph{effective universelle} d'objets connexes.
+  \item[(ii)] $C$ satisfait aux axiomes \textbf{G0} à \textbf{G5} ci-dessous.
+  \item[(iii)] $C$ est équivalente à une catégorie produit
+    $\prod_{i \in I} C_{i}$, les $C_{i}$ étant \emph{galoisiennes}.
+\end{enumerate}
+
+Avec la note qui explique le mot : \emph{les $C_{i}$ correspondent aux
+composantes connexes $e_{i}$ de l'objet final} ; et la donnée d'une équivalence
+$C_{i} \simeq C(\pi_{i})$ avec la catégorie des ensembles finis à opérateurs
+d'un groupe profini $\pi_{i}$ correspond à la donnée d'un \emph{foncteur fibre}
+de $C_{/e_{i}}$, c'est-à-dire d'un « revêtement universel » de $e_{i}$.
+
+\begin{quote}
+Voilà ce que « multigaloisien » veut dire, et c'est la réponse à une question
+que le carton posait à sa page 30, en 1967, en employant le mot sans le
+définir. Une catégorie galoisienne est celle des ensembles finis sur lesquels
+opère \emph{un} groupe profini ; elle exige que l'objet final soit connexe. Une
+catégorie multigaloisienne est un \emph{produit} de catégories galoisiennes,
+une par composante connexe de l'objet final : elle correspond donc non à un
+groupe mais à un \emph{groupoïde} profini, et c'est ce qu'il faut quand on ne
+veut pas supposer la base connexe. C'est exactement ce qui manquait au
+paragraphe 2 du tapuscrit de 1967, dont le groupe
+$\pi_{1}^{\mathcal{R}}(S,s)$ n'existait que sous une hypothèse de connexité du
+site.
+\end{quote}
+
+\subsection*{Les axiomes G0 à G5}
+
+\begin{itemize}
+\item[\textbf{G0}] $C$ est une $\mathcal{U}$-catégorie, et l'ensemble des
+  classes d'isomorphie d'objets est $\mathcal{U}$-petit.
+\item[\textbf{G1}] Existence des limites projectives \emph{finies} et des
+  sommes \emph{finies}.
+\item[\textbf{G2}] Les relations d'équivalence sont \emph{effectives}, et les
+  épimorphismes sont universels.
+\item[\textbf{G3}] Tout morphisme $X \to Y$ se factorise en un
+  \emph{épimorphisme} suivi d'un \emph{isomorphisme sur un facteur direct}.
+\item[\textbf{G4}] L'objet final est somme \emph{effective universelle}
+  d'objets connexes.
+\item[\textbf{G5}] Soit $f : X \to Y$ avec $X$ et $Y$ connexes. Alors il existe
+  un entier $N$ tel que, pour tout $Y' \to Y$ non vide, \dots\footnote{L'énoncé
+  de G5 est le seul de la liste que la page laisse incomplet : la conclusion
+  est biffée et réécrite, et la transcription ne la lit pas. Ce qu'il vise se
+  déduit de l'usage : c'est une borne uniforme sur le nombre de composantes
+  connexes de $X \times_{Y} Y'$, c'est-à-dire une condition de \emph{degré
+  borné} qui interdit à un morphisme entre objets connexes de se scinder
+  indéfiniment. La page 211 revient dessus, et pour en dire qu'elle le soupçonne
+  redondant.}
+\end{itemize}
+
+L'axiome \textbf{G3} est le seul de la liste qui ait traversé tout le carton :
+c'est la propriété que la page 24, en 1967, obtenait comme un \emph{théorème}
+sur $\mathrm{Rev}^{\mathcal{R}}(S)$ --- « tout morphisme de la catégorie se
+factorise en le produit d'un épimorphisme et d'un monomorphisme \dots\ tout
+monomorphisme est un isomorphisme avec un sommande direct » --- et c'est
+l'axiome G3 de SGA 1, exposé V.
+
+\pagerange{209}{211}
+\section*{Les démonstrations, et un axiome soupçonné (pages 209 à 211)}
+
+\subsection*{Démonstration de A : le revêtement des repères, une seconde fois}
+
+Les implications (iii) $\Rightarrow$ (ii bis) $\Rightarrow$ (ii) $\Rightarrow$
+(i) sont triviales. Pour (i) $\Rightarrow$ (iii) :
+
+Soit $X \in \mathcal{T}_{\mathrm{cf}}$. L'objet final de $\mathcal{T}$ est somme
+d'objets $e_{i}$ ($i \in \mathbb{N}$) au-dessus desquels $X|e_{i}$ est de rang
+$i$. Posons alors
+\[
+  P_{i} \;=\; \mathbf{Isom}_{e_{i}}\bigl([1,i]_{e_{i}},\ X\bigr) ,
+\]
+le faisceau des identifications de $X$ avec l'ensemble constant à $i$ éléments.
+C'est un objet de $\mathcal{T}_{\mathrm{cf}}$, l'application
+$P_{i} \to e_{i}$ est un épimorphisme --- autrement dit $P_{i}$ est un
+\emph{torseur sous $(\mathfrak{S}_{i})_{e_{i}}$} --- et
+\[
+  X_{P_{i}} \;\simeq\; [1, i]_{P_{i}} .
+\]
+Les $P_{i} \to e$ forment donc une famille de descente effective universelle
+pour $\mathcal{T}$, donc aussi pour $\mathcal{T}_{\mathrm{cf}}$, qui est stable
+par limites projectives et inductives finies.
+
+\begin{quote}
+\textbf{C'est la démonstration de Serre, page 152 du carton.} Là, $X \to Y$
+était un morphisme fini étale de rang $n$, et $P$ le complémentaire de la
+diagonale dans $X^{n}$ --- c'est-à-dire le schéma des $n$-uplets de points deux
+à deux distincts, ou encore le schéma des identifications de la fibre avec
+$I_{n}$ ---, torseur sous $\mathfrak{S}_{n}$. Ici, $\mathbf{Isom}([1,i], X)$
+est le même objet, écrit dans un topos quelconque. Le carton contient donc la
+construction dans son cas géométrique et dans sa forme abstraite, à
+soixante pages de distance, et l'attribution à Serre est portée sur la
+première.
+\end{quote}
+
+\subsection*{Démonstration de B, et l'axiome G5}
+
+Les conditions A(ii) impliquent aisément G0, G1, G2, G3. Pour G4, il faut
+prouver que pour tout $X \in C$ les $S_{i} \to e$ tels que $X_{S_{i}}$ soit
+constant fini recouvrent $e$ pour la topologie de la descente effective ;
+cela s'obtient en utilisant G2 et G4, en sommant sur les composantes connexes
+$e_{i}$ de l'objet final.
+
+Puis l'énoncé de récurrence : si $X \to Y$ est tel que $Y$ soit non vide et $X$
+connexe, alors il existe $Y' \to Y$ de descente effective universelle avec
+$X_{Y'} \simeq [1,n]_{Y'}$ ; on procède par récurrence sur le rang, et c'est
+là que G5 sert.
+
+\textbf{Remarque.} Grothendieck note qu'il soupçonne \textbf{G5} d'être
+\emph{redondant}, c'est-à-dire conséquence des autres axiomes, et indique ce
+qu'il faudrait pour le montrer : pour toute composante connexe $e_{i}$ de
+l'objet final, l'existence d'un foncteur exact
+\[
+  F : C \longrightarrow (\text{Ens.\ finis}) \qquad \text{tel que}
+  \qquad F(e_{i}) \neq \varnothing .
+\]
+Il ne le démontre pas.\footnote{C'est le second axiome que le carton
+soupçonne de trop, après celui de la page 157 --- « $F(X) = \varnothing
+\Rightarrow X = 0$ » --- qui, lui, était biffé parce que \emph{démontré}
+redondant, conséquence de Gal 5. Ici le soupçon reste un soupçon. Une bonne
+partie de la page 211 est barrée de longues diagonales et ne se lit que par
+fragments ; ce qui précède est ce que les phrases portantes autorisent.}
+
+\pagerange{212}{214}
+\section*{Compter les feuillets sans compter de points : les morphismes de degré $n$ (pages 212 et 214)}
+
+Deux feuillets insérés, que Grothendieck numérote « 1 bis » et « 1 ter » dans
+un cercle, portent les quatre conditions que la page 208 annonçait sous A(iv).
+Elles sont numérotées à rebours --- (3), (2), (1), (0) --- chaque chiffre
+cerclé.
+
+Ce qu'elles font mérite d'être dit avant d'être lu : elles axiomatisent
+directement la notion de \emph{morphisme de degré $n$}. Dire qu'un revêtement a
+$n$ feuillets suppose d'ordinaire qu'on compte les points d'une fibre ; ici, il
+n'y a pas de points, et il faut donc dire ce qu'un degré est par ses
+propriétés seules.
+
+\begin{itemize}
+\item[\textbf{(3)}] Pour tout objet non vide, on se donne, pour chaque $n$, une
+  classe de « morphismes de degré $n$ », telle que :
+  \begin{enumerate}
+    \item[a)] elle soit stable par changement de base ;
+    \item[b)] elle soit \emph{additive} pour les sommes finies ;
+    \item[c)] un isomorphisme soit de degré 1 ;
+    \item[d')] pour tout $f : X \to Y$, $Y$ soit somme directe disjointe
+      effective universelle $Y = \coprod_{n \in \mathbb{N}} Y_{n}$ avec
+      $X_{n} = X \times_{Y} Y_{n} \to Y_{n}$ de degré $n$ ;
+    \item[d)] si $f$ est de degré $n \geqslant 1$, $f$ soit un morphisme de
+      descente \emph{effective} --- donc universelle, grâce à a) ;
+    \item[e)] si $f$ est de degré $0$, alors $X = \varnothing$, et $f$ soit un
+      isomorphisme sur un \emph{sommande direct universel}.
+  \end{enumerate}
+\item[\textbf{(2)}] Tous les monomorphismes sont d'un type prescrit.
+\item[\textbf{(1)}] Existence des limites projectives \emph{finies}.
+\item[\textbf{(0)}] $C$ est une $\mathcal{U}$-catégorie et ses classes
+  d'isomorphie forment un ensemble $\mathcal{U}$-petit.
+\end{itemize}
+
+La condition d') est celle qui fait tout le travail : elle dit que le degré
+n'est pas un nombre attaché au morphisme, mais une \emph{décomposition de la
+base}. C'est la traduction exacte, sans points, du fait qu'un morphisme fini
+étale a un rang localement constant.
+
+\subsection*{La récurrence}
+
+De ces conditions on déduit A(iii) : pour $X$ donné, les $S \to e$ tels que
+$X_{S}$ soit constant fini forment une famille de descente effective
+universelle. On se ramène, par a) et d'), au cas d'un $X \to Y$ de degré $n$.
+Si $n = 0$ on conclut par 3 e), $X$ étant vide et $Y \to Y$ convenant. Si
+$n > 0$, on procède par récurrence, l'énoncé étant supposé acquis pour les
+entiers $< n$ :
+
+Utilisant 3 d), posons $X' = X \times_{Y} X$ au-dessus de $Y' = X$ :
+
+\begin{tikzcd}[column sep=small, row sep=small]
+X \arrow[d] & X \times_Y X = X' \arrow[l] \arrow[d] \\
+Y & X = Y' \arrow[l, no head]
+\end{tikzcd}
+
+La \emph{diagonale} $\Delta_{X,Y}$ existe par (1), et par (2) c'est un
+isomorphisme sur un sommande direct universel : donc
+$X' \simeq Y' \sqcup X'_{1}$. Par 3 a), $X' \to Y'$ est de degré $n$ ; par 3 c),
+$Y' \to Y'$ est de degré 1 ; donc par additivité, $X'_{1} \to Y'$ est de degré
+$n - 1$. L'hypothèse de récurrence fournit alors une famille
+$Y''_{s} \to Y'$ de descente effective universelle qui trivialise $X'_{1}$ ;
+et comme $X' \simeq Y' \sqcup X'_{1}$ \emph{universellement},
+\[
+  X'' \;=\; X \times_{Y} Y'' \;\simeq\; Y'' \sqcup
+  \underbrace{\bigl(X'_{1} \times_{Y'} Y''\bigr)}_{\textstyle
+  Y'' \times [1, n-1]} \;=\; Y'' \times [1, n] .
+\]
+Et $Y'' \to Y$ est de descente effective universelle comme composé de deux
+tels.
+
+\subsection*{L'unicité}
+
+\textbf{Conclusion.} Dans les conditions de A(iv), la notion de « morphisme de
+degré $n$ » est \emph{uniquement déterminée}, et elle équivaut à : il existe
+$Y' \to Y$ épimorphisme effectif universel, et de descente effective, avec
+\[
+  X \times_{Y} Y' \;\simeq\; [1, n]_{Y'} .
+\]
+
+C'est-à-dire : \emph{un morphisme est de degré $n$ s'il devient l'ensemble
+constant à $n$ éléments après un changement de base convenable}, et cette
+définition-là est forcée. On ne pouvait pas la prendre pour définition dès le
+départ --- il aurait fallu savoir que « $n$ éléments » a un sens --- et c'est
+pour cela que les six propriétés a) à e) sont posées d'abord.
+
+Une \emph{explicitation} accompagne : pour vérifier qu'un $f$ est un morphisme
+de descente effective, il suffit de savoir que c'est un épimorphisme effectif
+universel, et que les relations d'équivalence sont effectives universelles.
+
+\begin{tikzcd}[column sep=small, row sep=small]
+Z'' \arrow[d]
+  & Z \arrow[l, dashed] \arrow[d]
+  & D \arrow[l, bend left=12] \arrow[l, bend right=12] \arrow[d] \\
+Y & X \arrow[l]
+  & X \times_Y X \arrow[l, bend left=12] \arrow[l, bend right=12]
+\end{tikzcd}
+
+\pagerange{213}{213}
+\section*{Un feuillet d'un autre sujet : puissances fibrées et partitions (page 213)}
+
+Une feuille en travers, sans numéro de sa main, barrée de deux longues
+diagonales, et sans continuité avec ce qui l'entoure. Elle est transcrite à son
+rang et lue ici de même.
+
+Soit $f : X \to Y$ et $E$ un ensemble fini ; soit $X^{E}$ la puissance fibrée
+de $X$ au-dessus de $Y$ indexée par $E$. À toute partition $P$ de $E$ est
+associée une \emph{immersion fermée}
+
+\begin{tikzcd}[column sep=large]
+X^P \arrow[r, hook, "\alpha_P"] & X^E
+\end{tikzcd}
+
+--- celle qui identifie les coordonnées à l'intérieur de chaque bloc --- et
+l'on a la décomposition disjointe
+\[
+  X^{E} \;=\; \bigcup_{P} \alpha_{P}\bigl((X^{P})^{\ast}\bigr) ,
+\]
+où $(X^{P})^{\ast}$ est la partie ouverte des points à coordonnées deux à deux
+distinctes. De même, pour la petite diagonale de $Y$,
+\[
+  (f^{E})^{-1}\bigl(\Delta_{y}^{(E)}\bigr) \;=\;
+  \bigcup_{P} \alpha_{P}(F_{P}) \qquad \text{(réunion disjointe)} ,
+\]
+les morceaux étant de dimension
+\[
+  n - (\operatorname{card} P - 1)\, d \;\geqslant\;
+  n - (\operatorname{card} E - 1)\, d ,
+\]
+avec égalité pour la seule partition maximale
+$P_{0}$.\footnote{La page écrit la minoration sous la forme
+$\geqslant n - \operatorname{card}(E)\,d$, ce qui est vrai mais non optimal et
+incompatible avec le cas d'égalité qu'elle énonce dans la même phrase : pour
+$P = P_{0}$, la partition en $\operatorname{card} E$ blocs, la formule donne
+$n - (\operatorname{card} E - 1)d$. C'est cette borne qui est écrite ici. Les
+lettres $n$ et $d$ ne sont pas définies sur la page ; le cas travaillé
+ci-dessous les fixe : $n = \dim X$ et $d$ la dimension relative de $f$.}
+
+\subsection*{Le cas $\operatorname{card} E = 3$}
+
+Les partitions de $E$ à trois éléments sont : celle en un bloc (la petite
+diagonale), les trois en deux blocs, et celle en trois blocs. D'où
+\[
+  (f^{3})^{-1}\bigl(\Delta_{y}^{(3)}\bigr) \;=\;
+  \underset{n - 2d}{F_{3}} \;\cup\;
+  \underset{n - d}{\bigcup_{1 \leqslant i < j \leqslant 3} \alpha_{ij}(F_{2})}
+  \;\cup\; \underset{n}{\Delta_{X}^{(3)}} ,
+\]
+les dimensions notées étant les dimensions « génériques ». Le cas numérique
+travaillé sur la page est $\dim X = 3$, $\dim Y = 4$, avec
+$\dim F_{3} = 1$ et $\dim \alpha_{ij}(F_{2}) = 2$ --- ce qui donne $n = 3$ et
+$d = 1$.\footnote{La page numérote deux de ses trois lignes de partitions
+« en 3 », là où l'une des deux doit porter « en 1 » : c'est la partition en un
+seul bloc, qui donne la petite diagonale. Le chiffre est écrit deux fois de la
+même main ; la transcription le conserve avec un \emph{sic}, et cette lecture
+donne les trois lignes dans leur ordre correct.}
+
+\textbf{N.B.} Si $f$ est convenable, $\overline{F}_{3} \cap
+\Delta_{X}^{(3)} = \varnothing$ et
+$\overline{\alpha_{ij}(F_{2})} \cap \Delta_{X}^{(3)} = \varnothing$. Mais la
+question que la page pose et laisse ouverte est celle des intersections
+croisées :
+\[
+  \overline{F}_{3} \cap \overline{\alpha_{ij}(F_{2})} ,
+  \qquad
+  \overline{F}_{3} \cap \alpha_{ij}(\overline{F}_{2}) \;?
+\]
+
+\pagerange{215}{216}
+\section*{Le cas galoisien, et la dernière proposition (pages 215 et 216)}
+
+\subsection*{C) Le cas galoisien}
+
+Conditions équivalentes, définissant les catégories \emph{galoisiennes} :
+
+\begin{enumerate}
+  \item[(i)] Comme A(i), avec l'objet final de $\mathcal{T}$ \emph{connexe}.
+  \item[] \textbf{(ii), (ii bis), (iii), (iv)} Comme dans A, en supposant de
+    plus l'objet final de $C$ connexe.
+  \item[(v)] Les axiomes \textbf{G0}, \textbf{G1}, \textbf{G2}, \textbf{G3},
+    et de plus : il existe un foncteur
+    \[
+      F : C \longrightarrow (\text{Ens.\ fini})
+    \]
+    \emph{conservatif} et \emph{exact} --- respectant les limites projectives
+    finies et commutant aux sommes finies.
+  \item[(vi)] Il existe un \emph{groupe profini} $\pi$ et une équivalence
+    $C \simeq C(\pi)$.
+\end{enumerate}
+
+C'est la liste de SGA 1, exposé V, dans sa forme définitive : les axiomes de la
+catégorie, l'existence d'un foncteur fibre exact et conservatif, et la
+conclusion --- la catégorie est celle des ensembles finis à opérateurs d'un
+groupe profini. La différence avec B tient en un mot : ici l'objet final est
+connexe, et le groupoïde se réduit à un groupe.
+
+Il faut mesurer ce que le carton vient de faire. La liste Gal 1 à Gal 6 de la
+page 157 exigeait la décomposition en composantes connexes comme un axiome ;
+la liste G0 à G5 de la page 209 la déduit ; et la condition (v) ci-dessus
+remplace toute la machinerie par une seule hypothèse d'existence, celle du
+foncteur fibre. Trois états de la même axiomatique, dans un seul carton, et
+c'est le dernier qui est passé dans SGA 1.
+
+\subsection*{La proposition finale}
+
+\textbf{Proposition.} Soit $u : C \to C'$ un foncteur \emph{exact}, $C$ et
+$C'$ multigaloisiennes. Alors :
+
+\begin{enumerate}
+  \item[(i)] $u$ est \emph{fidèle} $\Longleftrightarrow$ $u$ est
+    \emph{conservatif} $\Longleftrightarrow$ pour tout objet $X$ de $C$,
+    $u(X) = \varnothing$ entraîne $X = \varnothing$.
+  \item[(ii)] $u$ est \emph{pleinement fidèle} $\Longleftrightarrow$ pour tout
+    objet $X$ de $C$, $u$ induit une \emph{bijection} de l'ensemble des
+    sous-objets de $X$ sur l'ensemble des sous-objets de $u(X)$.
+  \item[(iii)] $u$ est une \emph{équivalence} $\Longleftrightarrow$ $u$ est
+    pleinement fidèle et tout objet de $C'$ est \emph{subordonné} à un objet de
+    l'image.
+\end{enumerate}
+
+C'est sur cette proposition, dont la démonstration ne suit pas, que la cote
+s'arrête ; la moitié inférieure de la page est nue.
+
+\begin{quote}
+\textbf{Ce que dit cette dernière page, et pourquoi elle est à sa place.} Ce
+sont les critères sous lesquels les axiomes du domaine de ramification ont été
+choisis, page 190, cent trente pages plus tôt dans le même carton. L'axiome
+\textbf{R2} --- « l'application $X' \mapsto r(X')$ est une bijection de
+l'ensemble des sous-objets directs de $X$ sur l'ensemble des parties ouvertes
+et fermées de $r(X)$ » --- est le critère (ii). La proposition 2 de la page
+192 --- « $X = \varnothing$ si et seulement si $r(X) = \varnothing$ » --- est
+le critère (i). Et le critère (iii), la subordination, est le mot même sur
+lequel toute la théorie des familles génératrices est bâtie aux pages 201 à
+206.
+
+La réalisation géométrique $r$ n'est pas un foncteur entre catégories
+multigaloisiennes --- son but est la catégorie des schémas --- de sorte que la
+proposition ne s'y applique pas littéralement. Mais c'est bien elle qui donne
+aux axiomes R1 et R2 leur raison d'être : ils demandent de $r$ exactement les
+propriétés qui, entre catégories multigaloisiennes, caractérisent la fidélité
+et la pleine fidélité. Le carton s'achève donc sur les raisons de son propre
+point de départ.
+\end{quote}
+
+\end{document}

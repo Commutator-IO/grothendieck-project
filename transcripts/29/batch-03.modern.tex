@@ -1,0 +1,470 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 29, batch 3
+% (pages 41-60).
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried moves into a
+% footnote. In any dispute of substance the transcription governs: whoever
+% cites Grothendieck must cite batch-03.fr.tex.
+%
+% Scope: the folder was read WHOLE before any of this was written — all eleven
+% batches, pages 1-216, in one pass — and one file was then written per batch.
+%
+% This is the hardest batch of the first half. The run of pages 46-57 is fast
+% pencil at 228 ppi and the transcription leaves a great deal of it illegible:
+% the STATEMENTS carry, the sentences joining them very often do not. This
+% reading states what the statements say and does not invent the joins. Where a
+% statement is itself incomplete on the page, it is given incomplete and the
+% footnote says so — that is the honest reading of those sheets.
+%
+% Departures from the page, each footnoted where it occurs:
+%   - page 41's middle row is not a condition on coefficients (every family
+%     satisfies it); it records the ring, not a completion;
+%   - Lemme 2's hypothesis « universellement japonais » is weaker than what the
+%     modern statement of the finiteness theorem for f_* assumes;
+%   - the run is called a finiteness theorem for pi_1 and never mentions pi_1
+%     after its title: the bridge, stated here, is that H^1(X,G) is finite for
+%     every finite G exactly when pi_1(X) is topologically of finite type.
+%
+% Pass: Opus 5 (claude-opus-5), 2026-08-29 — first pass, unchecked against the
+% pages by a human.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{29}
+\batch{3}
+\pages{41}{60}
+\dating{1959-1969}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Groupe fondamental [Autour de SGA 4 et SGA 7] — lecture modernisée}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Le lot précédent s'achevait sur une chemise nouvelle, « Finitude (Pbs et
+conjectures) », et sur trois énoncés : le groupe fondamental d'un schéma propre
+est engendré par un nombre fini d'éléments ; celui d'un schéma de type fini
+l'est encore si l'on ne regarde que la partie première à la caractéristique ;
+et de même pour la partie modérée. Ces pages sont le programme qui devait les
+démontrer.
+
+Ce que le programme demande vaut d'être dit sans formules. Un groupe
+fondamental est un objet infini : il enregistre \emph{tous} les revêtements à
+la fois. Demander qu'il soit « topologiquement de type fini », c'est demander
+qu'un nombre fini de tours suffise à engendrer tous les autres --- que la
+variété, si compliquée soit-elle, n'ait qu'un nombre fini de manières
+essentiellement différentes d'être parcourue. Sur les nombres complexes, cela
+résulte du fait qu'une variété algébrique se triangule avec un nombre fini de
+morceaux ; en caractéristique $p$, il n'y a pas de triangulation, et l'énoncé
+est un théorème à trouver.
+
+La méthode de ces pages est de le transformer en un énoncé fini. Un revêtement
+principal de groupe $G$ n'est rien d'autre qu'un élément de $H^{1}(X, G)$ ;
+et un groupe profini est topologiquement de type fini exactement lorsqu'il n'a
+qu'un nombre fini de sous-groupes ouverts de chaque indice. Donc : \emph{le
+groupe fondamental de $X$ est de type fini si et seulement si $H^{1}(X,G)$ est
+fini pour tout groupe fini $G$}. C'est pourquoi la suite de pages intitulée
+« Th.\ de finitude relatif pour $\pi_{1}$ » ne parle plus de $\pi_{1}$ après
+son titre : elle démontre trois lemmes sur $H^{1}$, et les assemble en une
+proposition principale qui ramène le cas général au cas d'un schéma affine
+lisse au-dessus d'un ouvert dense d'une base intègre.
+
+Le premier de ces lemmes est le plus intéressant, et c'est celui qu'on
+réutiliserait aujourd'hui : si deux revêtements deviennent isomorphes au-dessus
+du point générique \emph{géométrique} de la base, ils le deviennent déjà
+au-dessus d'un revêtement fini étale de la base. Autrement dit,
+l'isomorphisme, qui semblait n'exister qu'après extension à une clôture
+algébrique, est en réalité défini sur une extension finie séparable. La note en
+marge --- « ne pas confondre avec les résultats de SGA X, où on prend une fibre
+générique \emph{vraie} » --- indique exactement où est la finesse.
+
+Deux feuillets, chacun barré d'un long trait de crayon, font autre chose :
+ils construisent la catégorie des modules cohérents d'un schéma formel
+\emph{modulo} un sous-schéma de définition, comme une catégorie de fractions,
+et trouvent qu'elle est celle du complémentaire. C'est le premier passage du
+carton sur les schémas formels, et le lot 5 y reviendra pour de bon.
+
+Les noms modernes à chercher sont \emph{théorème de finitude}, \emph{faisceau
+constructible}, \emph{catégorie quotient de Serre}, \emph{théorème d'existence
+de Grothendieck}, et pour le premier lemme, \emph{schéma des isomorphismes}.
+
+\keywords{finiteness of the fundamental group, nonabelian H1, constructible sheaf, Serre quotient category, Grothendieck existence theorem}
+\end{resume}
+
+\pagerange{41}{42}
+\section*{Deux complétions d'un croisement normal, et le groupe fondamental local (pages 41 et 42)}
+
+\subsection*{Le feuillet de calcul}
+
+Soit $A$ un anneau noethérien, $x, y \in A$, tels que $A/x$ et $A/y$ soient
+réguliers intègres de dimension 1, et supposons $A$ complet pour la topologie
+définie par $xy$. C'est le modèle local d'un croisement normal : deux branches
+régulières se coupant en un point.
+
+On dispose alors de trois complétions,
+\[
+  \hat{A}^{(x)} \;=\; k[y][[x]] , \qquad
+  \hat{A}^{(y)} \;=\; k[x][[y]] , \qquad
+  \hat{A}^{(x,y)} \;=\; k[[x,y]] ,
+\]
+et $A$ s'envoie dans les deux premières, qui s'envoient toutes deux dans la
+troisième. En termes de la région d'indices $(\alpha, \beta)$ des séries
+$\sum a_{\alpha\beta}\, x^{\alpha} y^{\beta}$, que la marge de la page
+dessine : $\hat{A}^{(x)}$ n'autorise, pour chaque $\alpha$ borné, qu'un nombre
+fini de $\beta$ ; $\hat{A}^{(y)}$ l'inverse ; et $\hat{A}^{(x,y)}$ tout.
+Le croquis à l'encre, deux axes $\alpha$ et $\beta$ coupés par une courbe,
+figure exactement le découpage de cette région.\footnote{La ligne médiane de la
+page décrit $A$ par « seul un nombre fini des $a_{\alpha\beta}$, pour
+$\alpha + \beta \leqslant N$ donné, sont non nuls ». Ce n'est pas une
+condition : il n'y a qu'un nombre fini de couples $(\alpha,\beta)$ avec
+$\alpha+\beta \leqslant N$. La ligne enregistre l'anneau $A$ lui-même, entre
+les deux complétions, et non une condition qui le caractériserait. Le feuillet
+est par ailleurs traversé de traits de crayon gras et d'un griffonnage qui
+recouvrent une partie de l'écriture, et l'hypothèse b) elle-même --- le mot
+porté en interligne au-dessus de « complet » --- reste indéterminée.}
+
+C'est la situation locale que la page 106 dessinera --- deux branches et le
+petit disque $Z = \operatorname{Spec}\hat{\mathcal{O}}_{X,a}$ autour de leur
+croisement --- et celle que les pages 87 à 97 traiteront le long d'une fibre
+spéciale.
+
+\subsection*{Invariance birationnelle, et le groupe fondamental local}
+
+La page 42 achève la liste des conjectures ouverte page 40. Son point c) est
+l'\emph{invariance birationnelle de la ramification modérée}, marqué « Prouvé »
+en marge : c'est ce qui donne un sens au problème, puisqu'il permet ensuite
+de procéder par normalisation et par Bertini pour se ramener à une courbe munie
+d'un diviseur à croisements normaux, où l'on conclut.
+
+Puis s'ouvre une deuxième question, locale cette fois. Soit $X$ un schéma
+noethérien --- complet, ou strictement local et « bon » --- et $U$ un ouvert.
+On conjecture :
+
+\begin{enumerate}
+  \item[a)] $\pi^{t}_{1}(U)$ topologiquement de type fini ;
+  \item[b)] $\pi'_{1}(U)$ de présentation finie.
+\end{enumerate}
+
+Par la résolution des singularités et l'invariance birationnelle du cas a), on
+doit s'en tirer en se ramenant aux énoncés globaux de la page 40. Et pour a),
+par descente on se ramène au cas $X$ normal, puis par section hyperplane ---
+du moins si $U = X$ privé de l'origine --- au cas $\dim X = 2$, où l'on dispose
+du théorème d'Abhyankar.
+
+En marge, deux notes qui sont des notes à soi-même : « vérifier si c'est
+\emph{nécessaire} », et « cela doit marcher \dots ».
+
+\pagerange{43}{45}
+\section*{Un schéma formel modulo un sous-schéma de définition (pages 43 et 45)}
+
+Deux feuillets, chacun barré d'un long trait de crayon, construisent deux
+catégories quotient. Ils sont hors du fil des conjectures et ils annoncent le
+lot 5.
+
+Soit $\mathfrak{X}$ un préschéma formel localement noethérien et
+$\mathfrak{X}_{0} = V(\mathcal{J})$ un sous-schéma de définition.
+
+\subsection*{Les modules cohérents}
+
+Soit $\mathrm{Coh}(\mathfrak{X})$ la catégorie des modules cohérents sur
+$\mathfrak{X}$, et $\mathfrak{S}$ l'ensemble des flèches $u$ dont le noyau et
+le conoyau sont tués par une puissance de $\mathcal{J}$. Cet ensemble admet un
+calcul de fractions, et l'on pose
+\[
+  \mathrm{Coh}(\mathfrak{X}/\mathfrak{X}_{0}) \;=\;
+  \mathrm{Coh}(\mathfrak{X})\bigl[\mathfrak{S}^{-1}\bigr] .
+\]
+En pratique --- c'est la remarque de la page --- on prend la sous-catégorie
+épaisse des modules cohérents tués par une puissance de $\mathcal{J}$ et l'on
+passe au quotient par elle.\footnote{C'est-à-dire, dans le vocabulaire
+d'aujourd'hui, le quotient de Serre de $\mathrm{Coh}(\mathfrak{X})$ par la
+sous-catégorie de Serre des modules $\mathcal{J}$-de torsion. Le folio 19 du
+même fonds contient la théorie générale de ces quotients, sous le nom de
+Gabriel ; ici c'est le cas particulier qui sert.}
+
+\subsection*{L'exemple, et ce qu'il calcule}
+
+Soit $X$ propre sur $Y = \operatorname{Spec} A$, $A$ noethérien séparé et
+complet pour un idéal $I$, $Y_{0} = V(I)$, $X_{0} = X \times_{Y} Y_{0}$, et
+$\mathfrak{X}$ le complété formel de $X$ le long de $X_{0}$. Le théorème
+d'existence donne une équivalence
+$\mathrm{Coh}(X) \xrightarrow{\ \sim\ } \mathrm{Coh}(\mathfrak{X})$, compatible
+avec les sous-catégories des modules à support dans $X_{0}$ :
+
+\begin{tikzcd}
+\mathrm{Coh}(\mathfrak{X}) & \mathrm{Coh}(X) \arrow[l, "\approx"'] \\
+\mathrm{Coh}(\mathfrak{X})_{\mathrm{nilp}} \arrow[u] & \mathrm{Coh}(X)_{\mathrm{nilp}} \arrow[u]
+\end{tikzcd}
+
+d'où, en passant aux quotients,
+\[
+  \mathrm{Coh}(\mathfrak{X}/\mathfrak{X}_{0}) \;\approx\;
+  \mathrm{Coh}(X - X_{0}) .
+\]
+C'est le point d'exclamation de la page : ce qui reste du schéma formel une
+fois qu'on a divisé par ce qui vit sur la fibre spéciale, c'est le
+\emph{complémentaire} de cette fibre.
+
+\subsection*{Les revêtements}
+
+La même construction se fait avec les revêtements. Soit $R(\mathfrak{X})$ la
+catégorie des préschémas formels finis sur $\mathfrak{X}$, et disons qu'un
+$u : \mathfrak{X}' \to \mathfrak{X}''$ est un \emph{isomorphisme modulo
+$\mathfrak{X}_{0}$} si l'homomorphisme d'algèbres correspondant
+$\mathcal{A}'' \to \mathcal{A}'$ en est un au sens précédent. On vérifie qu'on
+obtient un calcul de fractions à droite, et l'on note
+$R(\mathfrak{X}/\mathfrak{X}_{0})$ la catégorie quotient.
+
+Sur le même exemple, le théorème de comparaison donne
+$R(\mathfrak{X}) \approx R(X)$, donc
+\[
+  R(\mathfrak{X}/\mathfrak{X}_{0}) \;\approx\; R(X/X_{0}) \;\approx\;
+  R(X - X_{0}) ,
+\]
+avec, en marge, « à vérifier » : c'est le second isomorphisme qui n'est pas
+formel, et la page indique qu'il faudrait passer par le \emph{Main Theorem}
+global. Cette question --- \emph{quand un revêtement formel est-il
+algébrisable} --- est exactement celle que Murre et Grothendieck traiteront en
+1969 sous le nom de théorème de Mumford, aux pages 77 à 85 du même
+carton.\footnote{Les deux feuillets sont barrés chacun d'un long trait de
+crayon. La biffure porte sur la page entière et non sur telle ou telle ligne ;
+ce que le trait signifie --- abandon, ou report ailleurs --- n'est pas dit, et
+cette lecture ne le devine pas.}
+
+\pagerange{44}{44}
+\section*{Finitude en famille (page 44)}
+
+Un troisième point de la chemise, sous le titre « Théorèmes de finitude et
+simultanéité », et marqué « c'est fait » en marge. La question est de savoir
+comment les groupes fondamentaux des fibres d'un morphisme de type fini
+dépendent du point de la base, et l'on veut des énoncés du type
+\emph{constructibilité}. Trois formes, calquées sur a), b), c) de la page 40 :
+
+\begin{enumerate}
+  \item[a)] majoration \emph{uniforme} du $\pi_{1}(X_{\bar{s}})$ dans les cas
+    de finitude, pour $X/S$ propre ;
+  \item[b)] majoration uniforme pour les $\pi'_{1}(X_{\bar{s}})$, ou mieux :
+    \emph{la structure de $\pi'_{1}(X_{\bar{s}})$ est fonction constructible de
+    $s$} ;
+  \item[c)] majoration uniforme pour les $\pi^{t}_{1}(X_{\bar{s}})$.
+\end{enumerate}
+
+Et l'estimation : « il semble que les méthodes qui résoudront 1) résoudront
+également 3) ». La forme b) --- la constructibilité, et non seulement une
+borne --- est la plus forte des trois, et c'est celle que le lemme 1 ci-dessous
+prépare.
+
+\pagerange{46}{57}
+\section*{« Théorème de finitude relatif pour $\pi_{1}$ » (pages 46 à 57)}
+
+Une suite de six feuillets que Grothendieck pagine lui-même I à VI. Elle est
+écrite vite et lourdement raturée ; les énoncés se lisent, les phrases qui les
+relient souvent pas. Ce qui suit est ce que les énoncés disent.
+
+\subsection*{Le pont entre $H^{1}$ et $\pi_{1}$}
+
+Il n'est pas écrit sur les pages et il faut l'avoir en tête pour les lire. Pour
+$X$ connexe pointé en $x$ et $G$ un groupe fini, l'ensemble $H^{1}(X,G)$ des
+classes de revêtements principaux de groupe $G$ s'identifie à
+\[
+  \operatorname{Hom}_{\mathrm{cont}}\bigl(\pi_{1}(X,x),\, G\bigr) \big/
+  \operatorname{int}(G) .
+\]
+Or un groupe profini est topologiquement de type fini si et seulement s'il n'a,
+pour chaque entier $n$, qu'un nombre fini de sous-groupes ouverts d'indice $n$.
+Donc : \emph{$\pi_{1}(X,x)$ est topologiquement de type fini si et seulement si
+$H^{1}(X,G)$ est fini pour tout groupe fini $G$}. C'est pourquoi la suite,
+intitulée « théorème de finitude pour $\pi_{1}$ », ne parle que de $H^{1}$.
+
+\subsection*{Lemme 1 : un isomorphisme générique géométrique descend}
+
+Soit $f : X \to Y$ un morphisme de préschémas localement noethériens, $Y$
+intègre de point générique $y$, et soient $X'$, $X''$ deux schémas sur $X$ tels
+que $X'_{\bar{y}}$ et $X''_{\bar{y}}$ soient isomorphes au-dessus de
+$k(\bar{y})$. Alors il existe un revêtement fini étale $Y_{1}$ de $Y$ tel que
+$X' \times_{Y} Y_{1}$ et $X'' \times_{Y} Y_{1}$ soient isomorphes au-dessus de
+$X_{Y_{1}}$.
+
+Plus précisément : si $\bar{u} : X'_{\bar{y}} \to X''_{\bar{y}}$ est donné et
+si $K_{1}$ est la plus petite sous-extension de $k(\bar{y})$ sur laquelle il
+est défini, alors $K_{1}$ est \emph{étale} sur $Y$, et sur le $Y_{1}$
+correspondant $\bar{u}$ provient d'un morphisme
+$X' \times_{Y} Y_{1} \to X'' \times_{Y} Y_{1}$.
+
+La démonstration introduit $\underline{\mathrm{Hom}}_{X}(X', X'')$ --- ou son
+sous-schéma des isomorphismes --- pour se ramener au cas $X' = X$, puis invoque
+SGA IX 6.2 pour identifier la fibre en $y$ et conclure par un argument de
+profondeur.\footnote{Le corps du raisonnement, aux pages 47 et 49, est presque
+entièrement illisible à la définition du fac-similé et la transcription le dit.
+Ce qui est restitué ici est ce que les phrases portantes autorisent : le
+schéma des morphismes, la réduction à $X' = X$, le renvoi à SGA IX 6.2, et
+l'isomorphisme final $X_{1} \approx Z$. Aucune étape n'est reconstruite.}
+
+Deux notes accompagnent le lemme, et elles valent l'énoncé. La première rappelle
+la suite exacte d'homotopie
+\[
+  \pi_{1}(X_{\bar{y}}, \xi) \longrightarrow \pi_{1}(X, \xi) \longrightarrow
+  \pi_{1}(Y, \zeta) \longrightarrow 0 ,
+\]
+que le lemme généralise. La seconde avertit : « ne pas confondre avec les
+résultats de SGA X, où on prend une fibre générique \emph{vraie} » --- et où il
+faut alors supposer $f$ propre. C'est bien la fibre générique
+\emph{géométrique} qui intervient ici, et c'est ce qui rend l'énoncé utile en
+famille : il dit que l'isomorphisme, qui semblait n'exister qu'après passage à
+une clôture algébrique, est déjà défini sur une extension finie séparable.
+
+\subsection*{Lemme 2 : constructibilité de $f_{*}$}
+
+Soit $f : X \to Y$ de type fini, $Y$ localement noethérien et universellement
+japonais. Alors, pour tout faisceau d'ensembles constructible $F$ sur $X$,
+$f_{*}(F)$ est constructible.
+
+La marge dit « standard », et le lemme n'est pas démontré.\footnote{L'énoncé
+moderne correspondant --- la constructibilité de $R f_{*}$ pour $f$ de type
+fini --- se démontre sous l'hypothèse que les schémas soient \emph{excellents}
+(le théorème de finitude de Deligne, SGA 4$\frac{1}{2}$). « Universellement
+japonais » est la condition de Nagata, plus faible : elle ne porte que sur la
+finitude des clôtures intégrales. La lecture retient l'hypothèse de la page et
+signale l'écart plutôt que de la corriger, parce que l'usage qui en est fait
+ci-dessous --- le lemme 3 --- ne demande que le cas noethérien.}
+
+\subsection*{Lemme 3 : $H^{1}$ le long d'une partition}
+
+Soit $X$ un schéma connexe noethérien, $(X_{i})$ une partition finie de $X$ en
+parties localement fermées, et $G$ un groupe fini. Alors l'application
+\[
+  H^{1}(X, G) \longrightarrow \prod_{i} H^{1}(X_{i}, G)
+\]
+est à \emph{fibres finies}. En particulier, si $H^{1}(X_{i}, G)$ est fini pour
+tout $i$, il en est de même de $H^{1}(X, G)$ --- « kif kif », dit la
+page.\footnote{Les deux mots sont bien ceux de la page. Ils reviennent au
+folio 152 du même carton (« Kif -- kif », pour dire que deux conditions d'une
+proposition disent la même chose) et à la page 190 (« grâce à R1 c'est Kif
+Kif »). C'est une locution de travail, non une notation.}
+
+La démonstration passe par la théorie du recollement des faisceaux étales, en
+utilisant le lemme 2, et par le fait suivant : si $F$ et $G$ sont des faisceaux
+étales constructibles sur $X$ noethérien, alors $\operatorname{Hom}(F, G)$ est
+un ensemble fini.
+
+\subsection*{La proposition principale}
+
+Soit $S$ un schéma noethérien universellement japonais et $G$ un groupe fini.
+Quatre conditions sont mises en regard, dont la page ne laisse lire que la
+forme.\footnote{Les conditions (i) à (iv) des pages 53 et 55 sont écrites en
+abrégé et lourdement raturées ; la transcription en laisse une part importante
+illisible, et notamment les quantificateurs de (ii) et de (iii) et une partie
+de (iv). Ce qui suit est la forme des quatre conditions, non leur énoncé
+complet ; le lecteur qui en a besoin doit aller à la transcription et, de là, à
+la page.}
+
+\begin{enumerate}
+  \item[(i)] Pour tout $X$ de type fini sur $S$, $H^{1}(X, G)$ est fini.
+  \item[(ii)] La même chose, restreinte aux $X$ affines lisses de type fini
+    au-dessus d'un ouvert dense $S'$ d'un sous-schéma affine intègre non vide
+    $S_{0}$ de $S$, à fibres géométriques connexes non vides.
+  \item[(iii)] La même chose affaiblie : pour de tels $S'$, $X$, et tout ouvert
+    non vide $U$ de $X$, il existe un ouvert non vide $U'$ de $U$ tel que
+    $H^{1}(U', G)$ soit fini.
+  \item[(iv)] Une condition en deux moitiés : a) une condition fibre à fibre,
+    pour $s \in S$ et $\bar{X}$ connexe de type fini sur $s$ ; b) une condition
+    sur la base seule, la finitude de $H^{1}(S', H)$ pour $S'$ comme en (ii) et
+    $H$ un groupe auxiliaire. Lorsque $H$ est commutatif on peut affaiblir b)
+    en y remplaçant $H$ par $G$.
+\end{enumerate}
+
+De la démonstration, une seule phrase se lit, et elle suffit à répartir le
+travail : \emph{(ii) et (iii) résultent aussitôt du lemme 3 ; c'est pour (iv)
+qu'il faut le lemme 1}. Le lemme 3 fait le découpage, le lemme 1 fait le
+passage de la fibre géométrique générique à la base.
+
+\subsection*{Les deux corollaires}
+
+\textbf{Corollaire 1.} Supposons $G$ d'ordre premier aux caractéristiques
+résiduelles. Supposons que pour tout sous-schéma affine intègre non vide
+$S_{0}$ de $S$, tout ouvert dense $S'$ de $S_{0}$ et tout sous-groupe $H$ de
+$G \times G$, l'ensemble $H^{1}(S', H)$ soit fini. Alors $H^{1}(X, G)$ est fini
+pour tout $X$ de type fini sur $S$.
+
+C'est le passage par $G \times G$ qui mérite l'attention : le lemme 1
+\emph{compare deux} revêtements, et les couples qu'il fait intervenir ont pour
+groupe structural un sous-groupe de $G \times G$. La condition sur la base est
+donc plus forte que celle qu'on croirait avoir à imposer.
+
+\textbf{Corollaire 2.} Deux conditions équivalentes : la finitude de
+$H^{1}(X, G)$ pour tout $X$ de type fini et tout $G$ premier aux
+caractéristiques résiduelles, et la même chose restreinte comme en
+(ii).\footnote{L'énoncé du corollaire 2 est en grande partie illisible sur la
+page 55, de même que la note qui le suit ; seule la structure --- deux
+conditions dont la seconde est la restriction de la première --- se laisse
+lire.}
+
+\subsection*{La récurrence sur la dimension}
+
+La page 57 esquisse comment ce qui précède se démontrerait. Récurrence sur
+$\dim X$. Par le lemme 3, on se ramène au cas connexe. Si $\dim X = 1$, $X$ est
+lisse, et c'est facile : réduction au cas d'Abhyankar, avec un lemme de
+Serre--Lang. Si $\dim X \geqslant 2$, on construit une fibration \emph{lisse}
+$X \to Y$ avec $\dim Y < \dim X$, et l'on conclut par l'hypothèse de
+récurrence.\footnote{C'est la fin de la suite paginée I à VI, et la page 57 est
+la plus abîmée du lot ; la marge porte « finir si le \dots », et la remarque
+finale n'est pas lisible. La suite reprend au lot 4, pages 61 à 63, avec les
+deux corollaires sur les produits.}
+
+\pagerange{59}{60}
+\section*{« $\pi_{1}$ et $\mathrm{Pic}^{\tau}$ birationnels » : la première page (pages 59 et 60)}
+
+Une chemise nouvelle s'ouvre, dont le lot 4 contient la suite. Sa première
+page --- Grothendieck la numérote 1 --- porte un théorème et sa démonstration
+par récurrence sur la dimension.
+
+\textbf{Théorème.} Soit $X$ un préschéma algébrique sur un corps $k$
+algébriquement clos. Alors $\pi'_{1}(X)$, limite projective des quotients
+discrets de $\pi_{1}(X)$ d'ordre premier à $p$, est topologiquement de type
+fini.
+
+La démonstration procède par réductions successives.
+
+Grâce au théorème de van Kampen on peut supposer $X$ affine, puis affine et
+\emph{normal} : sinon, on considère $X' \to X$ un revêtement convenable et le
+diagramme $X' \times_{X} X' \rightrightarrows X' \to X$, et $\pi_{1}(X)$ est
+engendré par $\pi'_{1}(X')$ et par un nombre fini de générateurs correspondant
+aux composantes irréductibles de $X' \times_{X} X'$.
+
+Si $\dim X = 0$, c'est trivial. Si $\dim X = 1$, la théorie de la
+spécialisation du groupe fondamental ramène à la caractéristique zéro, où l'on
+conclut par voie transcendante.
+
+Si $\dim X \geqslant 2$, on considère un revêtement
+$\bar{X}^{n} \to \mathbf{P}^{r}_{k}$ et un sous-espace linéaire $L^{r-n+1}$
+défini sur une extension algébriquement close $K$ de $k$, et l'on pose
+\[
+  C \;=\; \bar{X}^{n} \times_{\mathbf{P}^{r}_{k}} L^{r-n+1} ,
+\]
+courbe normale sur $K$, « générique ». On montre alors que
+\[
+  \pi_{1}(C) \longrightarrow \pi_{1}(X)
+\]
+est \emph{surjectif}, d'où la surjectivité de $\pi'_{1}(C) \to \pi'_{1}(X)$, ce
+qui conclut puisque le cas des courbes est acquis.
+
+C'est le théorème de Bertini de Zariski qui fournit cette surjectivité, et le
+lot 4 l'énonce et le démontre à la page 66.
+
+\subsection*{La question, et un mot anglais}
+
+La page se termine sur une question, qui est celle vers laquelle tout le
+dossier des finitudes tend. Soit $X$ normale complète et $Y \subset X$ fermé.
+Le quotient de $\pi_{1}(X - Y)$ par le sous-groupe engendré par les groupes
+d'inertie \emph{sauvages} aux composantes de codimension 1 de $Y$ est-il
+topologiquement de type fini ?\footnote{Le mot \emph{wild} est en anglais sur
+la page, et il y reste : c'est la partie $p$-primaire de l'inertie, celle
+qu'aucune extension modérée ne contrôle, et le carton n'a pas de mot français
+pour elle. C'est exactement ce que les énoncés a), b), c) de la page 40
+cherchaient à écarter en passant à $\pi'_{1}$ ou à $\pi^{t}_{1}$ ; la question
+demande si on peut le faire sans jeter le reste.}
+
+\end{document}

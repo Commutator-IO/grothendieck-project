@@ -1,0 +1,569 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 29, batch 5
+% (pages 81-100).
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried moves into a
+% footnote. In any dispute of substance the transcription governs: whoever
+% cites Grothendieck must cite batch-05.fr.tex.
+%
+% Scope: the folder was read WHOLE before any of this was written — all eleven
+% batches, pages 1-216, in one pass — and one file was then written per batch.
+% The one observation this file could not have made batch by batch is the
+% central one: the theorem of page 89 (the extension class is the Chern class
+% of the self-intersection), the programme of page 100 (the same for a general
+% family of divisors), the redraft of page 102, and the parenthesis of page 200
+% (the obstruction to a section of the Kummer gerbe is the class of the D_i)
+% are FOUR statements of one theorem, spread over a hundred and ten pages.
+%
+% Departures from the page, each footnoted where it occurs:
+%   - page 89 puts the class of a line bundle in H^1(X_o, mu) where page 95
+%     puts the same class in H^2; the two are related by the Kummer sequence
+%     and both writings are recorded;
+%   - page 93 asserts that the kernel of Pic(X_m) -> Pic(X_o) is uniquely
+%     n-divisible without saying why. The reason — n is invertible on X_o and
+%     the kernel is filtered by cohomology of O_{X_o}-modules — is supplied;
+%   - page 97 asserts mu^infty = 0 for X_o = Spec Z without saying why. The
+%     reason is supplied.
+%
+% Pass: Opus 5 (claude-opus-5), 2026-08-29 — first pass, unchecked against the
+% pages by a human.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{29}
+\batch{5}
+\pages{81}{100}
+\dating{1959-1969}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Groupe fondamental [Autour de SGA 4 et SGA 7] — lecture modernisée}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Le cœur de ce lot est un calcul, et il faut savoir d'avance ce qu'il calcule.
+
+Imaginez une famille de courbes qui dégénère : au-dessus d'un petit disque, une
+courbe lisse pour chaque point sauf le centre, où elle se casse. Ce qui
+intéresse, c'est ce que la famille fait quand on fait le tour du centre sans
+jamais y passer : les points de la courbe reviennent permutés, et cette
+permutation --- la \emph{monodromie} --- est le seul invariant qui distingue
+une dégénérescence d'une autre. La question de ces pages est : de quoi
+dépend-elle exactement ?
+
+La réponse est d'une netteté remarquable, et elle tient en une phrase : elle
+dépend de la manière dont la fibre centrale se coupe elle-même. Une courbe
+plongée dans une surface a un nombre d'auto-intersection, entier, qui mesure
+comment elle se déplace dans la surface qui la contient ; c'est le même entier
+qui gouverne la monodromie. Le lemme 2 de la page 89 le dit exactement : la
+classe de l'extension de groupes fondamentaux est \emph{la classe de Chern de
+l'auto-intersection de la fibre spéciale}. Et l'exemple final le rend
+palpable : si la fibre centrale est une droite projective d'auto-intersection
+$-d$, alors la monodromie modérée est le groupe des racines $n$-ièmes de
+l'unité, $n$ étant la partie de $d$ première à la caractéristique.
+
+Ce théorème n'est pas isolé dans le carton. La page 100 le pose en programme
+pour une famille quelconque de diviseurs, la page 102 le rédige en corollaire,
+et la page 200 --- deux cents pages plus loin, dans une chemise qui n'a plus
+rien à voir --- le retrouve sous une autre forme : l'obstruction à trancher une
+racine $n$-ième d'un diviseur est la classe de ce diviseur. C'est la même
+identité écrite quatre fois. Il n'y a pas dans ce carton de théorème plus
+souvent réénoncé, et il faut voir dans cette insistance ce qu'elle est : la
+reconnaissance progressive que le nombre d'auto-intersection et la monodromie
+sont deux noms d'une seule quantité.
+
+Trois feuillets encadrent le calcul et méritent d'être lus. Les notes de
+lecture de Grothendieck sur le texte de Murre --- en anglais, chapitre par
+chapitre --- contiennent une ligne qui, à cette distance, se lit comme un
+programme : « Appl.\ descent for tamely ramified coverings ? At least one would
+like to have a \emph{champ} on $\mathrm{Et}(S)$ ! ». C'est mot pour mot ce que
+les pages 190 et suivantes construiront. Et deux feuillets de son propre
+tapuscrit portent, corrigée à la main, la phrase qui baptise l'\emph{extension
+de Raynaud}.
+
+Les noms modernes à chercher sont \emph{suite exacte de spécialisation},
+\emph{dégénérescence semi-stable}, \emph{fibré normal}, \emph{théorie de
+Kummer} et --- pour ce que les notes de lecture appellent de leurs vœux ---
+\emph{champ}.
+
+\keywords{specialization exact sequence, log smooth degeneration, self-intersection, Chern class of a divisor, Raynaud extension}
+\end{resume}
+
+\pagerange{81}{85}
+\section*{Notes de lecture, et l'appel d'un champ (pages 81, 83 et 85)}
+
+Trois feuillets, en anglais, notent chapitre par chapitre ce que Grothendieck
+veut voir changer dans le texte de Murre --- celui que la lettre du 30 avril
+1969, page 78, accompagnait. Ce sont des notes de travail, faites de renvois et
+de phrases coupées, et il n'y a pas lieu de les paraphraser toutes. Six items,
+qui disent chacun quelque chose.
+
+\begin{itemize}
+  \item \emph{Se restreindre aux morphismes adiques.} L'ambiguïté sur ce qu'est
+    un point d'un schéma formel est jugée « quite general » --- et le chapitre
+    IV se voit prescrire d'\emph{introduire les points géométriques} de
+    $\mathcal{X}$, plutôt que de raisonner sur
+    $\operatorname{Spec}(\mathcal{O}_{\mathcal{X},s})$.
+  \item \emph{Le chapitre III ne sert qu'à un énoncé.} « whole ch.\ III seems
+    used only to get 3.5.8 ». Et il faudrait y ajouter deux choses : une
+    interprétation topologique de $\pi_{1}^{D}$, et une section sur le cas où
+    les diviseurs \emph{ont des équations} --- « This should make the situation
+    much clearer ! ». C'est le cas particulier a) du lot 1, et c'est en effet
+    celui où la donnée kummérienne se décrit sans détour.
+  \item \emph{Le champ.} « Appl.\ descent for tamely ramified coverings ? At
+    least one would like to have a \emph{champ} on
+    $\mathrm{Et}(S)$ ! »\footnote{Le mot est en français dans ces notes
+    anglaises, comme il l'est dans le tapuscrit de 1967 (page 22 : « qui est
+    même un champ »). C'est exactement l'objet que les pages 190 à 200 de ce
+    même carton définiront sous le nom de \emph{domaine de ramification} : un
+    champ sur $\mathrm{Et}(S)$, muni d'une réalisation géométrique. Le carton
+    ne date ni ces notes ni ces pages, et cette lecture n'en tire aucune
+    chronologie ; le vœu et sa réalisation sont l'un et l'autre dans le même
+    carton, à cent pages de distance.}
+  \item \emph{La normalité est un artifice.} « Normality-assumption unnatural
+    (formal normality, as formal schemes\dots) ». C'est le même reproche qu'il
+    faisait à Murre en 1967 (page 8 : « I am convinced that these assumptions
+    are anyhow artificial »), et que Murre lui retourne dans ses commentaires
+    (page 79 : la normalité n'est peut-être pas stable par localisation étale).
+  \item \emph{Où est le lemme d'Abhyankar ?} La question est posée deux fois,
+    page 81 et en marge de la page 83 : « yoga Abhyankar lemma to be used ».
+    C'est la reconnaissance que le résultat qui, dans le cas des croisements
+    normaux, transforme la structure en propriété, n'a pas trouvé sa place dans
+    la rédaction formelle.
+  \item \emph{Le dernier item, page 85, est le plus concret}, et c'est un
+    diagnostic de rédaction : ce que le chapitre X démontre longuement revient
+    à montrer qu'un revêtement de $S$ est modéré relativement à $D_{1}, D_{2}$
+    si et seulement si ses restrictions à $S_{1}$, $S_{2}$ le sont ---
+    « \emph{should be trivial} with the conditions considered ! ».
+\end{itemize}
+
+\subsection*{Deux feuillets de son propre tapuscrit : l'extension de Raynaud}
+
+Les pages 82 et 84 sont deux feuillets d'un tapuscrit français à lui, dans le
+désordre --- ses pages 74 et 69 ---, portant des corrections de sa main. Ils
+n'ont pas de rapport direct avec ce qui précède, mais l'un d'eux baptise un
+objet, et le baptême est fait à la main sur la page.
+
+La page 84 démontre que, dans le cas favorable où le schéma formel abélien
+$\hat{B}$ est algébrisable et où $T_{o}$ est isotrivial, on trouve un schéma en
+groupes $A^{\sharp}$ sur $S$, extension canonique
+\[
+  0 \longrightarrow T \longrightarrow A^{\sharp} \longrightarrow B
+  \longrightarrow 0
+\]
+du schéma abélien $B$ par le tore $T$ qui relève $T_{o}$, caractérisée à
+isomorphisme unique près par le fait de donner un système cohérent
+d'isomorphismes d'extensions $A^{\sharp}_{n} \simeq A_{n}$, c'est-à-dire un
+isomorphisme de schémas formels en groupes
+$(A^{\sharp})^{\wedge} \simeq \hat{A}$ respectant les structures d'extension.
+Elle dépend fonctoriellement de $A$ et sa formation commute au changement de
+base.
+
+La phrase centrale a été refaite à la main, et le carton conserve les deux
+états : le tapuscrit annonçait « une extension canonique du schéma abélien $B$
+\dots\ que nous appellerons l'\emph{extension de Raynaud} associée à $A$ », et
+l'insertion manuscrite substitue « un schéma en groupes $A^{\sharp}$ sur $S$
+appelé le \emph{groupe de Raynaud} associé au schéma en groupes $A$ sur
+$S_{o}$ ». Le nom se déplace de l'extension à l'objet, sur la
+page.\footnote{La page 82 --- sa page 74, donc postérieure dans le texte ---
+porte le lemme qui sert : les extensions de $\underline{\mathbb{Z}}$ par
+$G^{o\sharp}$ correspondent aux torseurs sous
+$H = \underline{\mathrm{Hom}}(\underline{\mathbb{Z}}, G^{o\sharp})$, et,
+$H$ étant fini localement libre sur $S$, la catégorie des torseurs sous $H$
+équivaut par complétion formelle à celle des systèmes cohérents de torseurs
+sous les $H_{n}$. La transcription signale que le caractère lu
+$\underline{\mathbb{Z}}$ est douteux ; la lecture qui suit n'en dépend pas.}
+
+\pagerange{86}{86}
+\section*{Images inverses et voisinages infinitésimaux (page 86)}
+
+Un feuillet d'une écriture très fine, sur un papier que traverse le tapuscrit
+du verso ; la plus grande partie n'en est pas lisible et cette lecture n'y
+supplée pas. Ce qui s'en dégage est une question, non un énoncé : l'image
+inverse d'un module quasi-cohérent est quasi-cohérente, celle d'un module plat
+est plate, et il faut vérifier que cela respecte la notion voulue ; puis, si
+$X' \to X \times_{S} S'$ est non ramifié, il en va de même du morphisme induit
+sur les espaces tangents, et l'on peut passer aux voisinages infinitésimaux de
+tous ordres.
+
+\begin{tikzcd}
+X \times_{S} S' \arrow[r] \arrow[d] & X \arrow[d] \\
+S' \arrow[r] & S
+\end{tikzcd}
+
+Le cube au crayon dont ce carré n'est qu'une face n'est pas reproduit : la
+transcription en donne la raison, qui est la bonne --- le dessiner reviendrait
+à affirmer ce qu'on n'a pas lu.
+
+\pagerange{87}{89}
+\section*{Le $\pi_{1}$ modéré d'un schéma formel le long de sa fibre spéciale (pages 87 et 89)}
+
+Voici le calcul. Grothendieck pagine cette suite 1 à 6.
+
+\subsection*{La situation}
+
+Soit $\mathcal{X}$ un schéma formel régulier connexe, $X_{o} = \mathcal{X}_{o}$
+un diviseur régulier --- la fibre spéciale ---, et
+\[
+  D \;=\; \bigcup_{i=0}^{n} D_{i}
+\]
+un diviseur à croisements normaux, les $D_{i}$ réguliers irréductibles, avec
+$D_{o} = X_{o}$. On pose $D' = \sum_{i \neq 0} D_{i}$, on note $D'_{o}$ le
+diviseur induit sur $X_{o}$, et $\mathcal{U} = \mathcal{X} - D_{o}$.
+
+Il faut avoir en tête le dessin que la marge de la page porte : $D_{o} = X_{o}$
+horizontal, coupé transversalement par $D_{1}$ et $D_{2}$, et le point de base
+$\bar{\xi}_{o}$ sur $X_{o}$ en dehors des croisements.
+
+\subsection*{La suite exacte}
+
+Elle est double, et la seconde ligne dévisse le noyau de la première :
+\[
+  e \longrightarrow I_{o} \longrightarrow
+  \pi_{1}^{t}(\mathcal{X}/D, \bar{\xi}_{1}) \longrightarrow
+  \pi_{1}^{t}(X_{o}/D'_{o}, \bar{\xi}_{o}) \longrightarrow e ,
+\]
+\[
+  \mu^{\infty}_{X_{o},\,\mathrm{mod}}(\bar{\xi}_{o}) \longrightarrow
+  I_{o} \longrightarrow 0 ,
+\]
+où $\mu^{\infty}_{X_{o},\,\mathrm{mod}} = \varprojlim_{n} \mu_{n}$, la limite
+étant prise sur les $n$ \emph{inversibles dans $\mathcal{O}_{X_{o}}$} --- donc,
+si $p$ est la caractéristique de $X_{o}$, un groupe isomorphe à
+$\prod_{\ell \neq p} \mathbb{Z}_{\ell}$ après choix d'une
+orientation.\footnote{Le manuscrit écrit l'indice \emph{tame} en anglais ; il
+est rendu ici \emph{mod}, pour \emph{modéré}, conformément à l'usage du reste
+du carton. La restriction aux $n$ inversibles sur $X_{o}$ est portée en marge
+de la page 87 et elle est essentielle : c'est elle qui fait de
+$\mu^{\infty}$ un objet \emph{modéré}, et c'est elle qui, à l'exemple II
+ci-dessous, l'annulera sur $\operatorname{Spec}\mathbb{Z}$.}
+
+Le terme $\pi_{1}^{t}(X_{o}/D'_{o})$ s'identifie à $\pi_{1}^{t}(\mathcal{U})$
+et à $\pi_{1}^{t}(\mathcal{X}/D')$ : c'est le théorème de spécialisation, écrit
+à la volée sous la suite. Autrement dit : \emph{ôter la fibre spéciale ne change
+pas le groupe fondamental modéré}, et tout le contenu du calcul est dans
+l'extension par $I_{o}$, qui est la monodromie autour de cette fibre.
+
+L'extension est \emph{centrale} et donc déterminée par une classe
+\[
+  \alpha \;\in\; H^{2}\bigl(\pi_{1}^{t}(\mathcal{U}),\, I_{o}\bigr) ,
+\]
+une fois choisie une orientation de $I_{o}$ via celles de
+$\pi_{1}^{t}(\mathcal{U})$.
+
+\subsection*{Lemme 1 : le revêtement universel modéré n'a pas de $H^{1}$}
+
+\textbf{Lemme 1.} Soit $\tilde{\mathcal{U}}^{t}$ le revêtement universel de
+$\mathcal{U}$ défini par $\pi_{1}^{t}$. Alors
+$H^{1}(\tilde{\mathcal{U}}^{t}, \mathcal{J}) = 0$ pour $\mathcal{J}$ constant,
+premier aux caractéristiques considérées.
+
+C'est ce qui rend la suite spectrale de Hochschild--Serre utilisable en bas
+degré : elle donne alors
+\[
+  0 \to H^{2}\bigl(\pi_{1}^{t}(\mathcal{U}), I\bigr)
+  \xrightarrow{\ \rho\ } H^{2}(\mathcal{U}, I) \to
+  H^{2}(\tilde{\mathcal{U}}^{t}, I)^{\pi_{1}^{t}} \to
+  H^{3}\bigl(\pi_{1}^{t}, I\bigr) ,
+\]
+de sorte que $\alpha$ est connu dès qu'on connaît $\rho(\alpha)$ et qu'on sait
+que son image plus loin est nulle. Et, toujours par le lemme 1 --- c'est
+l'argument de Hurewicz ---,
+\[
+  H^{2}(\tilde{\mathcal{U}}^{t}, I)^{\pi_{1}^{t}} \;=\;
+  \operatorname{Hom}\bigl(\pi_{2}(\tilde{\mathcal{U}}^{t}), I\bigr)^{\pi_{1}^{t}}
+  \;=\; \operatorname{Hom}\bigl(\pi_{2}^{t}(\mathcal{U}), I\bigr)^{\pi_{1}^{t}} .
+\]
+C'est pourquoi $\pi_{2}$ apparaît ici : il mesure exactement ce qui empêche la
+classe $\alpha$ d'être lue sur $H^{2}$ de $\mathcal{U}$.\footnote{Le
+$\pi_{2}$ dont il s'agit est celui que la page 104 définit, dans le lot 6 :
+pour $X$ simplement connexe, $M \rightsquigarrow H^{2}(X,M)$ est exact donc
+pro-représentable, et $\pi_{2}(X) $ est l'objet qui le pro-représente ; dans le
+cas général on prend le revêtement universel. C'est le $\pi_{2}$ de l'homotopie
+étale, systématisé par Artin et Mazur en 1969 ; le carton l'utilise ici comme
+un objet acquis.}
+
+\subsection*{Lemme 2 : la classe est celle de l'auto-intersection}
+
+\textbf{Lemme 2.} Soit $i : X_{o} \to \mathcal{X}$ l'inclusion et soit $\beta$
+la classe de l'auto-intersection de $X_{o}$ dans $\mathcal{X}$, c'est-à-dire la
+classe du fibré normal
+\[
+  \mathcal{L}_{X_{o}/\mathcal{X}} \;\simeq\; i^{*}\bigl(\mathcal{O}(X_{o})\bigr)
+\]
+dans $\mathrm{Pic}(X_{o}) = H^{1}(X_{o}, \mathbb{G}_{m})$. Soit
+$\sigma : H^{1}(X_{o}, \mathbb{G}_{m}) \to H^{2}(\mathcal{U}, I)$
+l'homomorphisme canonique --- image de Kummer suivie de restriction. Alors
+\[
+  \rho(\alpha) \;=\; \sigma(\beta) .
+\]
+
+\emph{C'est le théorème.} Il dit que la monodromie modérée autour de la fibre
+spéciale est déterminée par le fibré normal de cette fibre --- c'est-à-dire par
+son nombre d'auto-intersection, si $X_{o}$ est une courbe dans une
+surface.\footnote{La page 89 écrit « $\beta \in H^{1}(X_{o}, \mu)$ », la page
+95 « $\alpha \in H^{2}(X_{o}, \mu^{\infty}_{X_{o},\mathrm{tame}})$ » pour la
+même quantité. Les deux écritures sont correctes et différentes : la classe
+d'un fibré en droites est dans $H^{1}(\mathbb{G}_{m}) = \mathrm{Pic}$, sa
+classe de Chern dans $H^{2}(\mu_{n})$, et la suite de Kummer
+$1 \to \mu_{n} \to \mathbb{G}_{m} \to \mathbb{G}_{m} \to 1$ envoie la première
+sur la seconde. La lecture ci-dessus fait la distinction que les deux pages ne
+font pas.}
+
+Grothendieck ajoute la réserve qu'il faut : cela détermine l'extension
+\emph{sous réserve} de contrôler le passage de $I$ à $\mu$, c'est-à-dire de
+savoir que $\mu_{o} \to I_{o}$ ne perd rien sur l'image de
+$\pi_{2}^{t}(\mathcal{U})$. Il pose $I'_{o} = \mu_{o}/\operatorname{Im}
+\pi_{2}^{t}(\mathcal{U})$ et observe que l'image de $\beta$ tombe alors dans
+\[
+  \ker\Bigl(H^{2}(\mathcal{U}, I'_{o}) \to
+  H^{2}(\tilde{\mathcal{U}}^{t}, I'_{o})\Bigr) \;\simeq\;
+  H^{2}\bigl(\pi_{1}^{t}, I'_{o}\bigr) ,
+\]
+donc définit bien une extension.
+
+\pagerange{91}{93}
+\section*{Le cas où la classe s'annule : Picard formel (pages 91 et 93)}
+
+Les pages 91 et 93 sont écrites d'une plume très fine sur un papier fortement
+traversé par le tapuscrit du verso, et une bonne part n'en est pas lisible.
+L'articulation est néanmoins claire, et le calcul du milieu de la page 93 est
+complet.
+
+Il s'agit du cas où la classe $\beta$ est dans le noyau de
+$H^{2}(\mathcal{X}, \mu) \to H^{2}(\mathcal{U}, \mathcal{J}_{o})$. Supposons
+$\mathcal{J}_{o} \simeq \mu_{n}$ avec $n$ inversible sur $X_{o}$. L'hypothèse
+dit alors que l'image de
+$\beta_{o} \in \mathrm{Pic}(X_{o}) = H^{1}(X_{o}, \mathbb{G}_{m})$ dans
+$H^{2}(X_{o}, \mu_{n})$ est nulle, c'est-à-dire que
+\[
+  \beta_{o} \;=\; n\gamma_{o} \;+\; \sum_{i} \lambda_{i}\,\beta_{o}^{i} ,
+\]
+où les $\beta^{i}$ sont les classes des autres composantes du diviseur.
+
+Il faut relever cette relation de $X_{o}$ à $\mathcal{X}$, et c'est ici que le
+schéma formel travaille. Soit $X_{m}$ le $m$-ième voisinage infinitésimal de
+$X_{o}$. Alors :
+
+\begin{quote}
+le noyau de $\mathrm{Pic}(X_{m}) \to \mathrm{Pic}(X_{o})$ est \emph{uniquement
+divisible par $n$}.
+\end{quote}
+
+La raison, que la page ne donne pas, est immédiate et vaut d'être écrite : ce
+noyau est filtré par les $H^{1}(X_{o}, \mathcal{I}^{k}/\mathcal{I}^{k+1})$, qui
+sont des groupes de cohomologie de $\mathcal{O}_{X_{o}}$-modules ; et la
+multiplication par $n$ est bijective sur un $\mathcal{O}_{X_{o}}$-module
+puisque $n$ est inversible dans $\mathcal{O}_{X_{o}}$.\footnote{C'est
+exactement l'endroit où l'hypothèse de \emph{modération} paie : la restriction
+« $n$ inversible sur $X_{o}$ » de la page 87, qui semblait n'être qu'une
+définition, est ce qui rend ce noyau uniquement divisible et permet le
+relèvement. Sans elle, tout le raisonnement s'arrête ici. La page l'assène
+(« on voit que le noyau \dots\ est toujours uniquement divisible par $n$ »)
+sans la relier à sa définition.}
+
+Il en va donc de même du noyau de
+\[
+  \mathrm{Pic}(\mathcal{X}) \;=\; \varprojlim_{m} \mathrm{Pic}(X_{m})
+  \longrightarrow \mathrm{Pic}(X_{o}) ,
+\]
+d'où la surjectivité de ${}_{n}\mathrm{Pic}(\mathcal{X})$ sur la $n$-torsion du
+quotient, et l'existence d'un $\gamma \in \mathrm{Pic}(\mathcal{X})$ relevant
+$\gamma_{o}$, avec
+\[
+  \beta \;=\; n\gamma + \sum_{i} a_{i}\beta_{i}
+  \qquad \text{dans } \mathrm{Pic}(\mathcal{X}) .
+\]
+
+\pagerange{95}{97}
+\section*{Le théorème, et deux exemples (pages 95 et 97)}
+
+\subsection*{L'énoncé}
+
+Une fois obtenue une relation $n\gamma = \sum_{i} c_{i}\beta_{i}$ sur
+$\mathcal{X}$, on applique le \emph{théorème de Kummer} pour $\mathcal{X}/D$ :
+il fournit un revêtement de $\mathcal{X}$, modéré le long de $D_{o}$, galoisien
+de groupe $\mathcal{J}_{o} \simeq \mu_{n}$, trivial au-dessus de $X_{o}$. On
+obtient ainsi la suite exacte complète
+\[
+  \pi_{2}^{t}(X_{o}/D'_{o}, \bar{\xi}_{o}) \to
+  \mu^{\infty}_{X_{o},\,\mathrm{mod}}(\bar{\xi}_{o}) \to
+  \pi_{1}^{t}(\mathcal{X}/D, \bar{\xi}_{1}) \to
+  \pi_{1}^{t}(X_{o}/D'_{o}, \bar{\xi}_{o}) \to 0 ,
+\]
+et la conclusion :
+
+\begin{quote}
+$\pi_{1}^{t}(\mathcal{X}/D, \bar{\xi}_{1})$, comme extension de
+$\pi_{1}^{t}(X_{o}/D'_{o}, \bar{\xi}_{o})$, est connu \emph{entièrement} en
+termes de $X_{o}/D'_{o}$ et de la classe
+$\alpha \in H^{2}\bigl(X_{o}, \mu^{\infty}_{X_{o},\,\mathrm{mod}}\bigr)$,
+qui est l'auto-intersection de $X_{o}$ dans $\mathcal{X}$.
+\end{quote}
+
+\subsection*{Exemple I : une courbe sur un corps algébriquement clos}
+
+Soit $X_{o}$ une courbe sur $k$ algébriquement clos. Alors
+$\pi_{2}^{t}(X_{o} - D'_{o}) = 0$ \emph{sauf} si $X_{o} \simeq
+\mathbb{P}^{1}_{k}$ et $D'_{o} = \varnothing$, auquel cas
+$\pi_{2}^{t}(X_{o}) = \mu^{\infty}_{X_{o},\,\mathrm{mod}}$. Deux cas, donc, et
+ils sont opposés.
+
+\begin{enumerate}
+  \item[1)] Si $X_{o} - D'_{o} \neq \mathbb{P}^{1}_{k}$ : alors
+    $\pi_{1}^{t}(\mathcal{X}/D, \bar{\xi}_{1})$ est une extension
+    \emph{triviale} de $\pi_{1}^{t}(X_{o} - D_{o}, \bar{\xi}_{o})$ par
+    $\mu^{\infty}_{\mathrm{mod}}(\bar{\xi}_{o})$. La monodromie et le groupe
+    fondamental de la fibre se séparent, et il n'y a rien à calculer.
+  \item[2)] Si $X_{o} - D'_{o} = \mathbb{P}^{1}_{k}$, c'est-à-dire
+    $X_{o} = \mathbb{P}^{1}_{k}$ et $D'_{o} = \varnothing$ : alors
+    \[
+      \pi_{1}^{t}(\mathcal{X}/D, \bar{\xi}_{1}) \;\simeq\; \mu_{n}(k) ,
+    \]
+    où $n$ est la partie première à $p = \operatorname{car} k$ du degré de
+    l'auto-intersection $X_{o} \cdot X_{o}$ dans $\mathcal{X}$.
+\end{enumerate}
+
+Le second cas est celui qu'il faut retenir, et c'est le plus concret du carton.
+Une droite projective d'auto-intersection $-d$ dans une surface fibrée a, pour
+groupe fondamental modéré de son voisinage formel épointé, le groupe des
+racines $n$-ièmes de l'unité, $n$ étant la partie de $d$ première à la
+caractéristique. La monodromie est cyclique d'ordre $d$ : c'est ce que l'on
+attend d'une singularité quotient cyclique, et le calcul le rend.
+
+\subsection*{Exemple II : les entiers}
+
+\begin{enumerate}
+  \item[a)] $X_{o} = \operatorname{Spec}\mathbb{Z}$. Alors
+    $\mu^{\infty}_{\mathrm{mod},\,X_{o}} = 0$, donc
+    \[
+      \pi_{1}^{t}(\mathcal{X}/D, \bar{\xi}_{1}) \;\simeq\;
+      \pi_{1}^{t}(X_{o}/D'_{o}, \bar{\xi}_{o}) :
+    \]
+    il n'y a pas de monodromie du tout.\footnote{La page l'affirme sans dire
+    pourquoi, et la raison est la définition même : $\mu^{\infty}_{\mathrm{mod}}$
+    est la limite des $\mu_{n}$ pour $n$ \emph{inversible dans}
+    $\mathcal{O}_{X_{o}}$ ; sur $\operatorname{Spec}\mathbb{Z}$, aucun entier
+    $n > 1$ n'est inversible, et la limite est prise sur la seule valeur
+    $n = 1$. C'est l'exemple qui montre le mieux ce que « modéré » interdit.}
+    Si $D'_{o} = \varnothing$, on trouve $0$ --- c'est le théorème de
+    Minkowski : $\mathbb{Q}$ n'a pas d'extension non ramifiée. Si
+    $D'_{o} \neq \varnothing$, la partie abélienne se calcule par la théorie du
+    corps de classes et vaut
+    \[
+      \prod_{\ell \in D'_{o}} (\mathbb{Z}/\ell\mathbb{Z})^{*} ,
+    \]
+    les extensions abéliennes de $\mathbb{Q}$ modérément ramifiées en les seuls
+    $\ell \in D'_{o}$ étant les sous-corps de
+    $\mathbb{Q}(\zeta_{\prod \ell})$. Il ajoute que le groupe entier doit être
+    fini par dévissage, et pose une question qu'il laisse ouverte sur les
+    corps de nombres modérément ramifiés sur $\mathbb{Q}$.
+  \item[b)] $X_{o} = \operatorname{Spec}\mathbb{Z} - S$, avec
+    $S \neq \varnothing$. Alors
+    \[
+      \mu^{\infty}_{\mathrm{mod},\,X_{o}} \;=\;
+      \prod_{\ell \in S} \mu^{\infty}(\ell)_{X_{o}} ,
+    \]
+    puisque les $n$ inversibles sur $\mathbb{Z}[1/S]$ sont exactement ceux dont
+    les facteurs premiers sont dans $S$. Et la page se termine sur une
+    question, à laquelle rien ne répond : « Mais $\pi_{2}^{t}(X_{o}/D'_{o})$
+    ??? ».
+\end{enumerate}
+
+\pagerange{99}{100}
+\section*{Abhyankar semi-global, et la même classe une deuxième fois (pages 99 et 100)}
+
+Deux feuillets non paginés ouvrent une question nouvelle, et le second
+réénonce, sous forme de programme, le théorème qu'on vient de démontrer.
+
+\subsection*{Une version semi-globale du résultat d'Abhyankar}
+
+Soit $X$ un schéma localement noethérien connexe et $D = \sum D_{i}$ un
+diviseur à croisements normaux à composantes régulières. Supposons
+$Z = \bigcap_{i} D_{i} \neq \varnothing$ et le couple $(X, Z)$
+\emph{hensélien}. Posons $\mathcal{U} = X - D$ et soit $\xi$ un point
+géométrique de $\mathcal{U}$. Alors :
+
+\begin{enumerate}
+  \item[a)] $\mathcal{U}$ est connexe, et
+    $\pi_{1}(\mathcal{U})_{\mathrm{mod}} \to \pi_{1}(X)$ est surjectif ;
+  \item[b)] pour chaque $D_{i}$, le groupe d'inertie relatif à $D_{i}$ est un
+    sous-groupe distingué \emph{commutatif} $I_{i}$ de
+    $\pi_{1}(\mathcal{U})_{\mathrm{mod}}$, et l'on a un épimorphisme canonique
+    \[
+      \prod_{\ell} T_{\ell}(\Omega^{*}) \longrightarrow I_{i} ,
+    \]
+    le produit étant pris sur les $\ell$ distincts de la caractéristique en
+    $D_{i}$ ;
+  \item[c)] les $I_{i}$ commutent entre eux, et leur \emph{produit} est le
+    noyau de
+    $\pi_{1}(\mathcal{U}, \xi)_{\mathrm{mod}} \to \pi_{1}(X, \xi)$.
+\end{enumerate}
+
+L'énoncé a) est immédiat. Pour b), l'invariance des $D_{i}$ dans un revêtement
+modérément ramifié $X'$ de $X$ est de nature étale locale et $X'$ est connexe
+donc irréductible, ce qui identifie $I_{i}$ ; le fait qu'il soit quotient du
+produit des modules de Tate est le calcul local classique. Pour c), la
+commutation des $I_{i}$ est locale en un point du
+croisement.\footnote{Cette description --- le groupe fondamental modéré du
+complémentaire d'un diviseur à croisements normaux dans un couple hensélien
+est une extension de $\pi_{1}(X)$ par un produit de modules de Tate, un par
+composante --- est le calcul qui, en géométrie logarithmique, donne le groupe
+fondamental \emph{log}-étale d'un point logarithmique. Le carton en fait ici
+une « version semi-globale du résultat d'Abhyankar » ; c'est le même énoncé.}
+
+\subsection*{Le programme kummérien : la classe, une deuxième fois}
+
+La page 100 reprend, pour un $X$ quelconque, ce que le lemme 2 démontrait pour
+un schéma formel.
+
+Soient $X$ un schéma, $(D_{i})_{1 \leqslant i \leqslant r}$ des diviseurs de
+Cartier $\geqslant 0$, $(n_{i})$ des entiers $\geqslant 1$,
+$\mu_{\underline{n}} = \prod_{i} \mu_{n_{i}}$ sur $X$, $\Gamma$ un schéma en
+groupes, et une extension de groupes sur $X$
+\[
+  1 \longrightarrow \mu_{\underline{n}} \longrightarrow G \longrightarrow
+  \Gamma \longrightarrow 1 .
+\]
+Donnons-nous $X' \to \tilde{X}_{1} \to X$ avec $G$ opérant sur $\tilde{X}_{1}$,
+$\mu_{\underline{n}}$ y opérant trivialement, de sorte que $\tilde{X}_{1}$
+devienne un \emph{torseur} sous $\Gamma$ ; et $X'$ kummérien au-dessus de
+$\tilde{X}_{1}$ relativement aux $D_{i}$, c'est-à-dire
+\[
+  X' \;=\; \operatorname{Spec}
+  \mathcal{O}_{\tilde{X}}[T_{1}, \dots, T_{r}]\,\big/\,
+  \bigl(T_{1}^{n_{1}} - a_{1},\ \dots,\ T_{r}^{n_{r}} - a_{r}\bigr) .
+\]
+L'extension $G$ de $\Gamma$ par $\mu_{\underline{n}}$ définit une classe
+$\alpha \in H^{2}(B_{\Gamma}, \mu_{\underline{n}})$, et le torseur
+$\tilde{X}$ fournit un homomorphisme
+\[
+  \varphi : H^{2}(B_{\Gamma}, \mu_{\underline{n}}) \longrightarrow
+  H^{2}(X, \mu_{\underline{n}}) \;\simeq\;
+  \prod_{i} H^{2}(X, \mu_{n_{i}}) .
+\]
+
+\begin{quote}
+\textbf{Ce qu'on veut prouver.} Si $\varphi(\alpha) = (\xi_{i})_{1 \leqslant i
+\leqslant r}$, alors
+\[
+  \xi_{i} \;=\; c\bigl(\mathcal{O}_{X}(D_{i})\bigr) \pmod{n_{i}} .
+\]
+\end{quote}
+
+C'est le lemme 2 de la page 89, écrit sans schéma formel : \emph{la classe de
+l'extension d'inertie est la classe de Chern du diviseur}. La page 102, dans le
+lot 6, en donne une rédaction en corollaire ; et la page 200, tout à la fin du
+carton, l'écrit une quatrième fois, pour la gerbe des racines
+$\underline{n}$-ièmes des $D_{i}$ : « L'existence d'une section dépend de la
+nullité d'un élément de $H^{2}(X, \mu_{\underline{n}})$, qui n'est autre,
+comme on devine, que la classe de cohomologie des $D_{i}$ ». Quatre énoncés,
+cent dix pages, une seule identité.
+
+La page se clôt sur une ligne qui indique où cela devait aller : « Variantes
+\dots\ formelle, ou \dots\ loc.\ annelés ».
+
+\end{document}

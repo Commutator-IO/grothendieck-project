@@ -1,0 +1,607 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 29, batch 1
+% (pages 1-20).
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried — a doubtful
+% reading, a notation he used differently, a missing passage — moves into a
+% footnote.
+%
+% It is held to being mathematically correct as it stands, not merely faithful
+% to the page. Where the manuscript is loose or mistaken, the true statement is
+% what appears here, and the footnote says what the page has. In any dispute of
+% substance the transcription governs: whoever cites Grothendieck must cite
+% batch-01.fr.tex.
+%
+% Scope: the folder was read WHOLE before any of this was written — all eleven
+% batches, pages 1-216, in one pass — and one file was then written per batch,
+% which is the layout the site reads. What this file knew when it was written
+% is the whole shelfmark, and it uses that: the divisibility correction below
+% is settled by pages 2 and 37, and the notation is the folder's, not this
+% batch's.
+%
+% Notation fixed here and held for the eleven files: Et(S) for the étale site,
+% Fl_S for the fibred category of relative schemes, calligraphic R = (C, s) for
+% the 1967 *donnée de ramification*, Rev^R(S) always with the exponent (the
+% typescript writes both Rev^R and Rev_R), r for the geometric realisation.
+% The roman (R, r) of pages 190-216 is a DIFFERENT object — the champ itself,
+% not an auxiliary datum — and batch 10's reading says so at the point where
+% the two meet.
+%
+% Three departures from the page, each footnoted where it occurs:
+%   - page 20's « n' >= n » is the divisibility order, not the product order:
+%     Murre queries it on page 2 and Grothendieck confirms it on page 37;
+%   - page 13's full faithfulness of the transition functors is a standing
+%     HYPOTHESIS on the examples, not a proposition;
+%   - page 18 writes f : X -> X' where its own objects are Z, Z'.
+%
+% Pass: Opus 5 (claude-opus-5), 2026-08-29 — first pass, unchecked against the
+% pages by a human.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{29}
+\batch{1}
+\pages{1}{20}
+\dating{1959-1969}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Groupe fondamental [Autour de SGA 4 et SGA 7] — lecture modernisée}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Ces pages ouvrent un dossier de deux cent seize feuillets qui, de 1959 à 1969,
+tourne autour d'une seule question : \emph{qu'est-ce qu'un revêtement, en
+géométrie algébrique, quand on autorise la ramification} ?
+
+Le mot revêtement vient de la topologie. Au-dessus d'un espace, on en dispose
+un autre, qui le recouvre en plusieurs exemplaires, sans jamais se déchirer ni
+se coller : un escalier en colimaçon au-dessus d'une cour circulaire, qui monte
+d'un étage à chaque tour. Toute l'information est dans la façon dont les
+étages se permutent quand on fait le tour ; c'est ce qu'on appelle la
+monodromie, et le groupe fondamental n'est rien d'autre que le registre de
+toutes les monodromies possibles.
+
+La difficulté commence quand on bouche le trou. Rebouchez le puits central de
+la cour : l'escalier, prolongé, retombe sur un simple plancher, et le nombre
+de tours n'est plus lisible sur le résultat. C'est exactement la situation d'un
+revêtement ramifié : deux données très différentes ont la même
+\emph{réalisation géométrique}, et cette réalisation ne les détermine pas. Un
+revêtement modérément ramifié n'est donc pas un revêtement qui satisfait une
+\emph{propriété} : c'est un revêtement muni d'une \emph{structure}
+supplémentaire. Les onze premières pages du dossier sont le procès-verbal de
+cette découverte, faite à deux : Jean-Pierre Murre, qui rédigeait pour SGA 1
+l'exposé sur le groupe fondamental modéré, écrit qu'il ne voit pas d'où la
+structure pourrait venir ; Grothendieck lui répond que ses propres notes
+étaient fautives, énumère cinq énoncés faux, et propose de tout reprendre.
+
+Ce que la reprise apporte est le geste central du dossier, et il vaut d'être
+énoncé sans jargon : \emph{cesser d'étudier l'objet, étudier la catégorie des
+objets}. Un revêtement isolé ne dit pas de quel type de ramification il
+provient ; mais la collection de tous les revêtements d'un type donné, avec ses
+sommes, ses produits et ses quotients, en dit assez pour reconstituer un
+groupe. C'est le principe de la théorie de Galois — un corps ne se connaît pas
+tout seul, il se connaît par ses extensions — transposé aux schémas, puis
+poussé jusqu'au bout : la « donnée de ramification » que ces pages définissent
+n'est qu'un échafaudage, et le dossier passera dix ans à l'ôter.
+
+Il l'ôtera pour de bon : ses dernières pages remplacent l'échafaudage par un
+\emph{champ de catégories multigaloisiennes} au-dessus du site étale, ce que
+Grothendieck appelle un domaine de ramification, et dont les exemples
+kummériens sont ce qu'on nomme aujourd'hui des champs de racines. Entre les
+deux, le dossier fait autre chose encore : une lettre à Serre du 18 octobre
+1959, au milieu du carton, définit le groupe fondamental des revêtements
+\emph{infinitésimaux} — un groupe qui n'a qu'un point et qui n'est pas trivial
+pour autant.
+
+L'ordre du carton n'est pas celui de la pensée : 1959 est à la page 124, 1967
+au début, et la synthèse à la fin sans date. Les noms modernes à chercher
+ensuite sont \emph{groupe fondamental modéré}, \emph{champ}, \emph{champ des
+racines}, et \emph{géométrie logarithmique}.
+
+\keywords{tame fundamental group, ramification datum, fibred category, Kummer covering, cartesian section}
+\end{resume}
+
+\pagerange{1}{11}
+\section*{Ce que Murre n'arrivait pas à voir (pages 1 à 11)}
+
+La chemise porte, de la main de Grothendieck, deux mots : « Tame
+ramification ». Dessous, quatre lettres de 1967, que le carton range dans le
+désordre. Remises dans l'ordre où elles ont été écrites, elles racontent une
+histoire complète.
+
+\subsection*{29 mars 1967 : Murre envoie le manuscrit}
+
+Murre rédige, pour le séminaire de 1960--61, l'exposé sur le groupe fondamental
+modéré. Il envoie son manuscrit et sa propre liste de doutes : il a supposé
+plus tôt que nécessaire l'existence des quotients ; il hésite sur le mot
+\emph{covering}, qui traduit \emph{revêtement} mais entre en collision avec le
+« recouvrement » d'une topologie ; il n'a pas trouvé de démonstration plus
+simple pour deux de ses lemmes ; et il juge insatisfaisant, sans savoir
+l'amender, l'énoncé de son théorème 9.4.
+
+\subsection*{La réponse : cinq énoncés faux, et un diagnostic}
+
+Grothendieck répond que les erreurs sont les siennes --- ses notes étaient trop
+sommaires --- et il en donne la liste. La première est un contre-exemple, et
+c'est le seul endroit du lot où il calcule.
+
+Soit $S$ un schéma, $b$ une section de $\mathcal{O}_{S}$, $n \geqslant 1$
+inversible sur $S$, et posons $a = b^{n}$. Soit
+\[
+  Y' \;=\; \operatorname{Spec} \mathcal{O}_{S}[T]/(T^{n} - a) ,
+\]
+revêtement kummérien élémentaire, principal sous $H' = \mu_{n}$. Prenons pour
+$H$ le groupe unité et $Y = S$.\footnote{Le tapuscrit écrit $Y\,T/(T^{n}-a)$ :
+la machine ne portait pas de crochets, et $Y[T]/(T^{n}-a)$ est ce qu'il faut
+lire. La transcription le signale ; c'est le premier des blancs mécaniques de
+ce carbone, dont les flèches et les lettres grecques sont dans le même cas.}
+Un morphisme de $Y$ dans $Y'$ compatible avec l'inclusion $H \to H'$ est
+simplement une section de $Y'$ au-dessus de $S$ : elle existe, $T \mapsto b$.
+Or $H \to H'$ n'est pas surjectif dès que $n > 1$. L'énoncé 1.16 des notes de
+Murre --- qu'un tel morphisme force $H \to H'$ à être surjectif --- est donc
+faux, et avec lui 3.6, puis les démonstrations de 3.7 et 3.8 qui s'en
+servaient.
+
+Le théorème 6.4 (le théorème d'Abhyankar) n'est correct, sous la forme donnée,
+que si les diviseurs $D_{i}$ sont réguliers ; Grothendieck avertit au passage
+que \emph{les groupes d'inertie ne sont déterminés qu'à automorphisme intérieur
+près}, ce qui est la raison de la panne, et propose de remplacer la famille
+$(D_{i})$ par un unique diviseur $D$ à croisements normaux, en demandant que
+les revêtements soient modérément ramifiés localement pour la topologie étale
+le long des composantes irréductibles locales de $D$. C'est la notion qu'il
+appellera page 21 « modérément ramifié \emph{au sens large} », et c'est elle,
+dit-il, qui convient au paragraphe 9.
+
+La démonstration de 7.1 achoppe, elle, sur un point de principe : même pour
+$D = 0$ elle aurait à faire intervenir des revêtements étales connexes
+\emph{non galoisiens}. D'où le diagnostic, qui est l'origine de tout le reste :
+\emph{il faut une notion de ramification modérée pour les revêtements non
+galoisiens}, et les hypothèses de normalité et de réduction dont les notes se
+servent sont artificielles.
+
+\subsection*{29 avril 1967 : le plan en six paragraphes}
+
+La lettre suivante accompagne l'esquisse que reproduisent les pages 12 à 20, et
+propose de refondre les cinq premiers paragraphes de l'exposé en six :
+revêtements kummériens relatifs à une famille de sections ; données de
+ramification ; propriétés de la catégorie des revêtements de type
+$\mathcal{R}$ et le groupe $\pi_{1}^{\mathcal{R}}(S,\;)$ ; fonctorialités ;
+revêtements galoisiens de type $\mathcal{R}$ ; théorème d'Abhyankar pour les
+diviseurs à croisements normaux.
+
+Trois observations de cette lettre valent d'être retenues, parce que les pages
+suivantes s'en servent sans y revenir.
+
+D'abord, une remarque de régularité : si $A$ est un anneau local régulier,
+$(x_{i})_{1 \leqslant i \leqslant r}$ une partie d'un système régulier de
+paramètres et $(n_{i})$ des entiers $\geqslant 1$ \emph{non nécessairement
+premiers à la caractéristique résiduelle}, alors
+\[
+  B \;=\; A[T_{1},\dots,T_{r}]\,/\,(T_{1}^{\,n_{1}} - x_{1},\ \dots,\
+  T_{r}^{\,n_{r}} - x_{r})
+\]
+est encore régulier. C'est ce qui permet de ne pas regarder les
+caractéristiques résiduelles des points non maximaux des $D_{i}$ : il en
+résulte \emph{a posteriori} que si, en tout point maximal $s$ de chaque
+$D_{i}$, le groupe d'inertie est d'ordre premier à la caractéristique de
+$k(s)$, alors il l'est automatiquement en toute spécialisation de $s$ ---
+énoncé vide sauf si $s$ est de caractéristique nulle.
+
+Ensuite, une remarque de méthode : les démonstrations des paragraphes 7 et 8
+« marchent pour n'importe quel type de données de ramification », pourvu qu'on
+dispose d'un énoncé du type de son lemme 7.2. C'est la première indication que
+la généralité coûte moins qu'elle ne rapporte, et c'est l'argument qu'il
+opposera à Murre quand celui-ci proposera de se restreindre au cas kummérien.
+
+Enfin, la lecture correcte des groupes de 10.2 et 10.3 : ce sont
+$\pi_{1}(U,\;)$ et son plus grand quotient premier à $p$, et les théorèmes
+devraient être énoncés en ces termes.
+
+\subsection*{16 mai 1967 : Murre ne voit toujours pas}
+
+La dernière lettre --- placée en tête du carton, écrite en dernier --- est la
+plus utile pour lire l'esquisse, parce qu'elle pose deux questions dont les
+réponses fixent des définitions que l'esquisse laisse incomplètes.
+
+Murre demande si son intuition est juste : \emph{au lieu de donner directement
+le revêtement $r(X)$ de $S$, on donne le comportement du revêtement au-dessus
+d'autres revêtements, les $s(M)$, qui sont d'un type particulier} ; le
+comportement au-dessus de tous les $s(M)$ ensemble en dit plus que $r(X)$
+seul. C'est exactement cela, et c'est la meilleure phrase du lot pour dire ce
+qu'est une donnée de ramification.
+
+Il demande ensuite --- et c'est une lacune réelle --- si, dans la définition
+d'un revêtement galoisien de type $\mathcal{R}$, on ne doit pas exiger que
+l'action du groupe de Galois $G$ \emph{commute} à celle du groupe
+d'automorphismes que les modèles $s(M)$ portent déjà. Grothendieck le confirme,
+mais dans la lettre d'accompagnement, à la page 36 : la définition de la page
+30 est incomplète telle qu'elle est écrite, et cette lecture-ci l'a complétée
+là où elle se trouve.\footnote{La condition manquante est énoncée page 36 :
+« the action of $G$ commutes to étale localization on $S$ \emph{and} to the
+action of the groups of automorphisms given on the various $Z$'s ». Elle ne
+figure pas au paragraphe 4 des pages 30 à 31, qui définit la notion. Le lot 2
+de cette édition la porte à sa place.}
+
+Il relève enfin, dans le cas kummérien, que la condition
+$\underline{n}' \geqslant \underline{n}$ devrait s'écrire
+$\underline{n}' = \underline{m} \cdot \underline{n}$. Grothendieck répond page
+37 : « when I wrote $n' \geqslant n$, I meant of course the order relation of
+divisibility ». La lecture ci-dessous écrit donc la divisibilité.
+
+\pagerange{12}{14}
+\section*{La donnée de ramification (pages 12 à 14)}
+
+Soit $S$ un schéma et $\mathrm{Et}(S)$ son site étale. Une \emph{donnée de
+ramification} sur $S$ est un couple
+\[
+  \mathcal{R} \;=\; (\mathcal{C},\, s)
+\]
+formé d'une catégorie fibrée $p : \mathcal{C} \to \mathrm{Et}(S)$ et d'un
+foncteur cartésien
+\[
+  s : \mathcal{C} \longrightarrow \mathrm{Fl}_{S} ,
+\]
+où $\mathrm{Fl}_{S}$ est la catégorie fibrée sur $\mathrm{Et}(S)$ dont la fibre
+en $S'$ est la catégorie des schémas relatifs sur $S'$.\footnote{Le tapuscrit
+souligne les catégories : $\underline{C}$, $\underline{s}$, $\underline{Et}_S$,
+$\underline{Fl}_S$, $\underline{R}$. Le soulignement est ici abandonné, comme
+partout dans cette édition ; il ne portait aucune information que la casse ne
+porte.} On ne suppose pas que $\mathcal{C}$ soit un \emph{champ} : ni les
+objets ni les morphismes ne se recollent nécessairement. On ne suppose pas non
+plus $s$ fidèle, encore moins pleinement fidèle --- et c'est le point de toute
+l'affaire.
+
+Un objet $M$ de la fibre $\mathcal{C}_{S'}$ s'appelle un \emph{modèle de
+ramification}, et le $S'$-schéma $s(M)$ sa \emph{réalisation géométrique}. Dans
+tous les exemples qui suivent, les $s(M)$ sont finis sur $S'$.
+
+Composant $s$ avec le foncteur source, on obtient un foncteur
+$\mathcal{C} \to (\mathrm{Sch})$, et l'on peut tirer en arrière le long de lui
+la catégorie fibrée des schémas finis étales : on obtient une catégorie fibrée
+$\mathcal{D}$ sur $\mathcal{C}$, dont la fibre en $M$ est la catégorie des
+revêtements étales finis de $s(M)$.
+
+\subsection*{Les revêtements de type $\mathcal{R}$}
+
+Un \emph{crible couvrant} de $\mathcal{C}$ est une sous-catégorie pleine
+$\mathcal{C}_{0}$ qui est un crible --- si l'extrémité d'une flèche est dans
+$\mathcal{C}_{0}$, son origine y est --- et telle que les $p(M)$, pour $M$
+parcourant $\mathcal{C}_{0}$, recouvrent $S$. Pour un tel crible, on pose
+\[
+  \mathrm{Rev}^{\mathcal{R}}_{\mathcal{C}_{0}}(S) \;=\;
+  \text{catégorie des sections cartésiennes de } \mathcal{D}
+  \text{ au-dessus de } \mathcal{C}_{0} ,
+\]
+et l'on définit la \emph{catégorie des revêtements de $S$ de type
+$\mathcal{R}$} comme la limite inductive de ces catégories suivant les
+restrictions :
+\[
+  \mathrm{Rev}^{\mathcal{R}}(S) \;=\;
+  \varinjlim_{\mathcal{C}_{0}} \mathrm{Rev}^{\mathcal{R}}_{\mathcal{C}_{0}}(S) .
+\]
+Concrètement, un revêtement de type $\mathcal{R}$ est la donnée, pour chaque
+modèle $M$ d'un crible couvrant, d'un revêtement étale fini $X(M)$ de $s(M)$,
+et, pour chaque flèche $M' \to M$, d'un isomorphisme
+$X(M') \simeq X(M) \times_{s(M)} s(M')$, ces isomorphismes se composant.
+C'est la traduction exacte de la phrase de Murre : on ne donne pas le
+revêtement, on donne son comportement au-dessus de tous les
+modèles.\footnote{Le tapuscrit écrit tantôt
+$\mathrm{Rev}^{\underline{R}}$, tantôt $\mathrm{Rev}_{\underline{R}}$, pour le
+même objet, et parfois dans la même phrase (pages 13 et 14). L'exposant est
+retenu ici pour tout le carton.}
+
+Deux hypothèses accompagnent la définition, et il importe de les voir comme des
+hypothèses.\footnote{Le tapuscrit écrit « Signalons que dans tous les cas que
+nous aurons à utiliser, les foncteurs de transition \dots\ sont pleinement
+fidèles », puis « Nous supposerons que \dots ». Ce sont bien deux conditions
+posées sur les exemples, non deux propositions : la première est fausse pour
+une donnée quelconque, et l'identification des
+$\mathrm{Rev}^{\mathcal{R}}_{\mathcal{C}_{0}}(S)$ à des sous-catégories pleines
+en dépend.}
+
+\begin{enumerate}
+  \item[(H1)] Les foncteurs de restriction
+    $\mathrm{Rev}^{\mathcal{R}}_{\mathcal{C}_{0}}(S) \to
+    \mathrm{Rev}^{\mathcal{R}}_{\mathcal{C}'_{0}}(S)$ sont pleinement fidèles.
+    Alors les $\mathrm{Rev}^{\mathcal{R}}_{\mathcal{C}_{0}}(S)$ s'identifient,
+    à équivalence près, à des sous-catégories pleines de
+    $\mathrm{Rev}^{\mathcal{R}}(S)$, qui les épuise.
+  \item[(H2)] Pour tout crible $\mathcal{C}_{0}$ et tout objet $X$ de
+    $\mathrm{Rev}^{\mathcal{R}}_{\mathcal{C}_{0}}(S)$, le foncteur composé
+    $\mathcal{C}_{0} \xrightarrow{\ X\ } \mathcal{D} \to (\mathrm{Sch})_{/S}$
+    admet une limite inductive dans $(\mathrm{Sch})_{/S}$, notée $r(X)$, et
+    cette limite ne change pas quand on restreint $X$ à un crible plus petit.
+\end{enumerate}
+
+Sous (H2) les $r$ partiels se raccordent en un unique foncteur
+\[
+  r : \mathrm{Rev}^{\mathcal{R}}(S) \longrightarrow (\mathrm{Sch})_{/S} ,
+\]
+la \emph{réalisation géométrique}. Les deux hypothèses sont vérifiées dans les
+trois exemples ci-dessous, « de généralité croissante ».
+
+Dans les cas qui intéressent, $r$ sera \emph{fidèle} sans être pleinement
+fidèle. C'est là toute la mise : un revêtement de type $\mathcal{R}$ n'est pas
+déterminé par sa réalisation géométrique, et il faut donc distinguer
+soigneusement les deux. Quand $r$ est fidèle, on peut décrire
+$\mathrm{Rev}^{\mathcal{R}}(S)$ comme la catégorie des « revêtements de $S$
+munis d'une structure de type $\mathcal{R}$ », une telle structure sur un
+revêtement $X$ étant la donnée d'une classe d'isomorphie d'objets
+$X' \in \mathrm{Rev}^{\mathcal{R}}(S)$ et d'un isomorphisme
+$r(X') \simeq X$.\footnote{La remarque est page 15, avec l'aveu qu'elle
+« aurait dû figurer avant l'exemple ». Elle est remontée ici, où elle éclaire
+la définition qu'elle commente.}
+
+\pagerange{14}{16}
+\section*{Exemple 1 : un revêtement à opérateurs (pages 14 à 16)}
+
+C'est l'exemple à garder en tête, et Grothendieck le dira lui-même page 34 :
+« the basic example in order to understand the idea is example 1 ».
+
+Donnons-nous un $S$-schéma $Z$ muni d'une action à droite d'un groupe fini $G$
+par $S$-automorphismes. Soit $\mathcal{C}_{0}$ la catégorie à un objet dont le
+monoïde des endomorphismes est $G$, et prenons
+$\mathcal{C} = \mathrm{Et}(S) \times \mathcal{C}_{0}$. Se donner un foncteur
+cartésien de $\mathcal{C}$ dans une catégorie fibrée sur $\mathrm{Et}(S)$
+revient à se donner un objet de la fibre au-dessus de $S$ muni d'une action de
+$G$ ; le couple $(Z, G)$ fournit donc bien un $s$.
+
+On trouve aussitôt une équivalence entre $\mathrm{Rev}^{\mathcal{R}}(S)$ et la
+catégorie des revêtements étales finis $Z' \to Z$ munis d'une action à droite
+de $G$ au-dessus de celle de $G$ sur $Z$ ; et la réalisation géométrique
+existe si et seulement si le quotient $Z'/G$
+existe, auquel cas $r(Z') = Z'/G$. Il suffit pour cela que toute orbite de $G$
+dans $Z$ soit contenue dans un ouvert affine --- en particulier, il suffit que
+$Z$ soit affine sur $S$, ce qui sera le cas puisque $Z$ sera un revêtement de
+$S$.
+
+\subsection*{Le sens intuitif}
+
+En première approximation, les objets de $\mathrm{Rev}^{\mathcal{R}}(S)$ sont
+les revêtements de $S$ qui \emph{deviennent étales} au-dessus du revêtement
+ramifié donné $Z$. C'est ce qui donne son sens au mot « donnée de
+ramification » : $Z$ est le patron de ramification que l'on s'autorise, et l'on
+regarde tout ce qui n'est pas pire que lui.
+
+Grothendieck le dit une seconde fois, page 34, dans le langage des corps de
+fonctions, et cette formulation-là est la plus parlante. Supposons $S$ intègre
+normal de corps de fonctions $K$, et $Z$ le normalisé de $S$ dans une extension
+galoisienne finie $L$ de $K$. Un revêtement $S'$ de $S$, connexe, correspond à
+une extension $K'$ de $K$. Dire que $S'$ n'a pas de ramification pire que
+$Z/S$, c'est dire que l'image inverse normalisée de $S'$ au-dessus de $Z$ est
+étale ; et lorsque $S$ est strictement local, cela revient tout simplement à
+dire que \emph{$K'$ est isomorphe à une sous-extension de $L$}. La notion est
+de nature locale pour la topologie étale, de sorte qu'on peut toujours se
+ramener au cas strictement local, où elle est aussi simple que cela.
+
+Alors, par transport de structure, $G$ opère sur $S'$, et l'on retrouve $S'$ à
+partir du $G$-revêtement $Z'$ de $Z$ comme $S' = Z'/G$.
+
+\subsection*{Quand $r$ est fidèle, quand il est pleinement fidèle}
+
+Soit $U$ un ouvert de $S$ tel que $V = Z|U$ soit un revêtement principal de
+groupe $G$, et supposons que toute partie ouverte et fermée de $Z$ stable par
+$G$ et contenant $V$ soit égale à $Z$ --- c'est le cas si $V$ est dense dans
+$Z$.
+
+\begin{enumerate}
+  \item[(a)] Alors $r$ est \emph{fidèle}. En effet le foncteur de restriction
+    $Z' \mapsto Z'|V$, des $G$-revêtements étales de $Z$ dans ceux de $V$, est
+    fidèle ; et le foncteur $Z'_{V} \mapsto Z'_{V}/G$, des $G$-revêtements
+    étales de $V$ dans les revêtements étales de $U$, est une
+    \emph{équivalence} par descente le long du revêtement principal
+    $V \to U$ --- \emph{a fortiori} fidèle.
+  \item[(b)] Si de plus $V$ est dense dans $Z$ et $Z$ est \emph{normal}, alors
+    $Z' \mapsto Z'|V$ est pleinement fidèle, donc $r$ l'est aussi. Dans ce cas
+    $\mathrm{Rev}^{\mathcal{R}}(S)$ est équivalente à une sous-catégorie
+    \emph{pleine} de la catégorie des revêtements normaux de $S$ : ceux qui
+    sont étales au-dessus de $U$ et dont toute composante irréductible domine
+    une composante irréductible de $S$ rencontrant $U$.
+\end{enumerate}
+
+L'énoncé (b) est une équivalence sur une sous-catégorie pleine, non une
+égalité : la sous-catégorie n'est pas décrite par une propriété fermée des
+revêtements, et c'est précisément le théorème d'Abhyankar qui, dans le cas des
+croisements normaux, la décrira ainsi.\footnote{Page 21 : « Le théorème
+d'Abhyankar permet de caractériser ces revêtements par la condition d'être
+étales sur $S - \operatorname{supp} D$, normaux en les points au-dessus de
+$\operatorname{supp} D$ \dots ». C'est-à-dire : dans ce cas particulier, et
+dans celui-là seulement, la structure devient une propriété. Voir le lot 2.}
+
+Signalons enfin ce que la page 35 ajoute et qui n'est pas dans l'esquisse :
+toutes les hypothèses de normalité sont \emph{superflues} pour la théorie
+générale des revêtements étales de $(Z,G)$, qui a toutes les propriétés de
+celle des revêtements étales d'un schéma, et est décrite par un groupe profini
+--- extension de $G$ par $\pi_{1}(Z)$. Les hypothèses de normalité ne servent
+qu'à assurer la pleine fidélité de $Z' \mapsto Z'/G$.
+
+\pagerange{16}{18}
+\section*{Exemple 2 : un système projectif de modèles (pages 16 à 18)}
+
+Variante immédiate. Au lieu d'un seul couple $(Z, G)$, on se donne un système
+projectif $(Z_{i}, G_{i})_{i \in I}$ de tels couples, $I$ ordonné filtrant. Le
+système projectif des $G_{i}$ définit une catégorie fibrée $\mathcal{C}_{0}$
+sur la catégorie associée à $I$, et l'on prend
+$\mathcal{C} = \mathrm{Et}(S) \times \mathcal{C}_{0}$. Alors
+\[
+  \mathrm{Rev}^{\mathcal{R}}(S) \;\simeq\;
+  \varinjlim_{i} \mathrm{Rev}^{\mathcal{R}_{i}}(S) ,
+\]
+limite inductive des catégories définies séparément par chaque $(Z_{i},G_{i})$.
+
+Le cas intéressant est celui où les foncteurs de transition --- qui sont des
+images inverses de revêtements étales à opérateurs --- sont pleinement fidèles,
+de sorte que les $\mathrm{Rev}^{\mathcal{R}_{i}}(S)$ s'identifient à des
+sous-catégories pleines qui épuisent la limite : c'est l'hypothèse (H1) sur cet
+exemple. Il en est ainsi lorsque les morphismes de transition
+$(Z_{i}, G_{i}) \to (Z_{j}, G_{j})$ sont tels que $G_{i} \to G_{j}$ soit
+surjectif et que $Z_{i} \to Z_{j}$ induise un isomorphisme
+$Z_{j} \simeq Z_{i}/N_{ij}$, $N_{ij}$ étant le noyau de $G_{i} \to G_{j}$. En
+effet, tout revêtement étale $Z'_{j}$ de $Z_{j}$ vérifie alors
+$Z'_{j} \simeq Z'_{i}/N_{ij}$, où $Z'_{i}$ est l'image inverse de $Z'_{j}$
+sur $Z_{i}$.
+
+La motivation est page 35 et elle est concrète : dans les applications on ne
+dispose pas d'un seul modèle de ramification, mais d'une infinité --- tous les
+$Z^{n}_{a}$ pour $a$ fixé et $n$ variable --- et la condition qu'on veut
+imposer à un revêtement est d'avoir une ramification qui ne soit pire que celle
+de \emph{l'un} des modèles.
+
+\pagerange{18}{19}
+\section*{Exemple 3, dans ses deux moutures (pages 18 et 19)}
+
+L'exemple 3 est retapé, et le carton conserve les deux états. Ils ne sont pas
+fusionnés ici : leur différence est la trace du travail, et elle va toujours
+dans le même sens --- vers l'élimination d'une donnée arbitraire.
+
+La situation qu'ils veulent couvrir est celle de la page 35 : les modèles de
+ramification ne sont pas définis globalement --- dans le cas kummérien, les
+diviseurs peuvent n'être pas principaux --- mais seulement localement, avec des
+conditions de compatibilité disant que la restriction d'un modèle donné sur $U$
+à $U \cap V$ n'a pas de ramification pire que celle d'un modèle donné sur $V$.
+
+\subsection*{Première mouture : par une factorisation de $s$}
+
+On suppose que $s$ se factorise
+\[
+  \mathcal{C} \xrightarrow{\ s'\ } \mathrm{Flop}_{S} \longrightarrow
+  \mathrm{Fl}_{S} ,
+\]
+où $\mathrm{Flop}_{S}$ est la catégorie fibrée des schémas relatifs munis d'un
+groupe fini d'opérateurs à droite, le second foncteur étant l'oubli des
+opérations. Les morphismes de $\mathrm{Flop}_{S}$ sont les couples $(f, u)$ où
+$f : Z \to Z'$ est un $S$-morphisme et $u : G_{S} \to G'_{S}$ un morphisme
+\emph{localement constant, pas nécessairement constant}, de schémas en
+groupes sur $S$, compatibles au sens évident.\footnote{Le tapuscrit écrit
+« $f : X \to X'$ » là où ses propres objets sont $Z$ et $Z'$ ; c'est une faute
+de frappe, non un changement d'objet, et elle est corrigée ici. La
+transcription la conserve, comme elle doit.} La liberté laissée à $u$ est ce
+qui permettra, au cas kummérien, de faire varier le groupe des racines de
+l'unité d'un ouvert étale à l'autre.
+
+On suppose alors deux choses. Pour toute flèche $M' \to M$ dans un
+$\mathcal{C}_{S'}$, si $s(M') = (Z', G')$ et $s(M) = (Z,G)$, la flèche induit
+un isomorphisme $Z \simeq Z'/H$, où $H$ est le noyau de $G'_{S} \to G_{S}$.
+Et pour tout objet $M$, posant $s(M) = (Z,G)$, on se donne un homomorphisme
+$G \to \operatorname{Aut}(M)$ tel que l'image $\bar{g}$ de $g$ vérifie
+$s(\bar{g}) = (g_{Z}, \operatorname{int}(g))$, tout endomorphisme de $M$ étant
+localement de cette forme ; le tout compatible aux images inverses et aux
+flèches de $\mathcal{C}_{S'}$.
+
+C'est cet homomorphisme $G \to \operatorname{Aut}(M)$ qui est la donnée
+artificielle, et la seconde mouture s'en débarrasse.
+
+\subsection*{Seconde mouture : par les groupes d'automorphismes}
+
+On suppose maintenant, sur $\mathcal{R} = (\mathcal{C}, s)$ seule :
+
+\begin{enumerate}
+  \item[(1)] pour tout $S' \in \mathrm{Et}(S)$ et tout
+    $M \in \mathcal{C}_{S'}$, le groupe $G = \operatorname{Aut}(M)$ est fini ;
+  \item[(2)] pour toute flèche $M' \to M$ de $\mathcal{C}_{S'}$, il existe un
+    unique morphisme de groupes $G' = \operatorname{Aut}(M') \to
+    G = \operatorname{Aut}(M)$ rendant $M' \to M$ équivariant ; et si $H$ en est
+    le noyau, $s(M') \to s(M)$ induit un isomorphisme
+    $s(M')/H \simeq s(M)$ ;\footnote{Le sens de ce morphisme est fixé par deux
+    flèches à l'encre portées au verso de la feuille (page 17) :
+    $G' \to G$ au-dessus de $M' \to M$. Sans elles la phrase du recto est
+    ambiguë. C'est le seul endroit du lot où un verso décide d'une lecture.}
+  \item[(3)] deux morphismes de $M'$ dans $M$ se déduisent l'un de l'autre par
+    composition avec un élément de $G$ ;
+  \item[(4)] deux objets $M$, $M'$ de $\mathcal{C}_{S'}$ sont localement
+    majorés : il existe une famille surjective de morphismes étales
+    $S'_{i} \to S'$ telle que $M_{S'_{i}}$ et $M'_{S'_{i}}$ soient tous deux
+    majorés par un même objet $M''_{i}$ de $\mathcal{C}_{S'_{i}}$.
+\end{enumerate}
+
+Sous ces conditions, la théorie de la descente montre que la réalisation
+géométrique $r : \mathrm{Rev}^{\mathcal{R}}(S) \to (\mathrm{Sch})_{/S}$ est
+définie, et à valeurs dans les revêtements de $S$ dès que les $s(M)$ en sont
+--- il suffirait même, pour appliquer la descente, que les $s(M)$ soient
+affines sur $S'$. Et les critères de fidélité et de pleine fidélité de
+l'exemple 1 se transposent : il suffit que chaque
+$\bigl(s(M), \operatorname{Aut}(M)\bigr)$ satisfasse, sur son $S'$, les
+conditions que $(Z,G)$ y satisfaisait.
+
+La condition (4) est celle qui fait le travail de recollement : c'est elle qui
+dit que les modèles locaux, donnés sur des ouverts étales différents, sont
+comparables. Le paragraphe des « Remarques » de la page 32 remplacera ces
+conditions par cinq conditions a) à e) portant sur $\mathcal{R}$ seule, où la
+donnée de $s$ elle-même a fondu ; c'est le troisième état de l'exemple 3, et il
+est lu au lot 2.
+
+\pagerange{19}{20}
+\section*{Le cas kummérien (pages 19 et 20)}
+
+Soit $(D_{i})_{i \in I}$ une famille de diviseurs de Cartier sur $S$. Pour
+$S'$ étale sur $S$, on prend pour $\mathcal{C}_{S'}$ la catégorie dont les
+objets sont les quadruples
+\[
+  M = (\underline{a},\, \underline{n},\, G,\, u) ,
+\]
+où $\underline{a} = (a_{i})_{i \in I}$ est une famille d'équations des
+$D_{i\,S'}$, $\underline{n} = (n_{i})_{i \in I}$ une famille d'entiers
+$\geqslant 1$ premiers aux caractéristiques résiduelles de $S'$, $G$ un groupe
+fini, et $u : G_{S'} \xrightarrow{\ \sim\ } \mu_{\underline{n},\,S'}$ un
+isomorphisme de schémas en groupes.
+
+Les morphismes sont donnés par
+\[
+  \operatorname{Hom}_{S'}(M', M) \;=\;
+  \begin{cases}
+    \bigl\{\, \underline{b} = (b_{i})_{i \in I} \ :\
+      \underline{b}^{\,\underline{n}} =
+      \underline{a}'\,\underline{a}^{-1} \,\bigr\}
+      & \text{si } \underline{n} \ \text{divise}\ \underline{n}' , \\[2pt]
+    \varnothing & \text{sinon} ,
+  \end{cases}
+\]
+la divisibilité s'entendant composante par composante.\footnote{Le tapuscrit
+écrit « sauf si $\underline{n}' \geqslant \underline{n}$ ». Murre relève page 2
+qu'il faudrait $\underline{n}' = \underline{m}\cdot\underline{n}$, et
+Grothendieck répond page 37 : « when I wrote $n' \geqslant n$, I meant of
+course the order relation of divisibility ». Le carton corrige donc lui-même,
+à quarante pages de distance ; c'est la divisibilité qui est écrite ici.}
+
+Le foncteur cartésien associe à $M$ le \emph{revêtement kummérien élémentaire}
+\[
+  Z^{\underline{n}}_{\underline{a}} \;=\;
+  \operatorname{Spec} \mathcal{O}_{S'}[T_{i}\,;\ i \in I]\,/\,
+  (T_{i}^{\,n_{i}} - a_{i}) ,
+\]
+considéré comme revêtement à groupe d'opérateurs $G$ grâce à
+$u : G \simeq \mu_{\underline{n}}$. On vérifie qu'on est alors dans les
+conditions de l'exemple 3.
+
+Le foncteur $r$ est \emph{fidèle} ; il est \emph{pleinement fidèle} lorsque
+$S$ est localement noethérien, normal aux points des
+$\operatorname{supp} D_{i}$, les $D_{i}$ réduits, et toute composante
+irréductible d'un $D_{i}$ distincte de toute composante d'un $D_{j}$ pour
+$j \neq i$.
+
+Le groupe $G$ et l'isomorphisme $u$ sont ici encore des données arbitraires :
+Murre demande page 2 si les objets ne sont pas plutôt les couples
+$(\underline{a}, \underline{n})$ avec $G(M) = \mu_{\underline{n}}$, et
+Grothendieck le confirme page 37. La présentation intrinsèque de la page 33
+permet en effet de « se dispenser d'introduire aussi des isomorphismes
+$u : G_{S'} \to \mu_{\underline{n},\,S'}$ », et l'objet se réduit au couple
+$(\underline{a}, \underline{n})$. C'est l'état auquel le carton reviendra vingt
+fois ; sous cette forme, la catégorie fibrée $\mathcal{C}$ est un groupoïde,
+et son champ associé est une \emph{gerbe} sous $\mu_{\underline{n}}$ --- ce que
+la page 200 dira explicitement, et ce qu'on appelle aujourd'hui le champ des
+racines $\sqrt[\underline{n}]{\underline{D}/S}$.\footnote{Aucun de ces mots
+n'est disponible en 1967 : les gerbes sont de Giraud (1971), et les champs des
+racines de Cadman et d'Abramovich--Graber--Vistoli (années 2000). L'objet, lui,
+est ici, avec sa classe d'obstruction dans $H^{2}$ ; voir la lecture du lot 10,
+qui l'écrit là où Grothendieck l'écrit.}
+
+Le lot 2 continue le tapuscrit à la page 21, avec le second cas kummérien
+--- celui d'un diviseur $D$ à croisements normaux dont les composantes ne sont
+définies que localement pour la topologie étale --- et c'est là que le mot
+« modérément ramifié au sens large » est prononcé.
+
+\end{document}
