@@ -1,6 +1,6 @@
 ---
 name: modernize-grothendieck
-description: Produces the modernised reading of an already-transcribed folder of the Grothendieck fonds — taken whole, all its batches in one pass — a summary (« Résumé ») that orients a reader new to the subject, then the mathematics in current notation and current names, in French, mathematically correct as it stands, with footnotes carrying everything the transcription's critical apparatus carried. Use when someone asks to modernise, clean up, reinterpret, restate, summarise or explain a transcribed folder ("modernize folder 115", "give the modern reading", "explain these pages"), or after /transcribe-grothendieck has transcribed a folder's batches. Also covers revisions - tightening a statement, correcting a variance, rewriting a summary that assumes too much.
+description: Produces the modernised reading of an already-transcribed folder of the Grothendieck fonds — taken whole, all its batches in one pass, as a single document for the shelfmark — a summary (« Résumé ») that orients a reader new to the subject, then the mathematics in current notation and current names, in French, mathematically correct as it stands, with footnotes carrying everything the transcription's critical apparatus carried. Use when someone asks to modernise, clean up, reinterpret, restate, summarise or explain a transcribed folder ("modernize folder 115", "give the modern reading", "explain these pages"), or after /transcribe-grothendieck has transcribed a folder's batches. Also covers revisions - tightening a statement, correcting a variance, rewriting a summary that assumes too much.
 model: claude-opus-5
 ---
 
@@ -36,21 +36,34 @@ So the skill is invoked once per folder:
 /modernize-grothendieck 151
 ```
 
-and it writes, in that one pass, one file per batch — the layout the site
-reads:
+and it writes, in that one pass, **one file for the whole shelfmark**:
 
 | File | Contents |
 |---|---|
-| `transcripts/<folder>/batch-NN.modern.tex` | for **every** batch NN of the folder: a summary, then the mathematics in today's notation and names — **in French**, like the pages |
+| `transcripts/<folder>/<folder>.modern.tex` | one summary, then the mathematics in today's notation and names — **in French**, like the pages |
 
-One file per batch is not a leftover: the reading view puts each edition beside
-the facsimile pages it covers, and a single folder-wide document could not be
-put beside anything. What changes is not the output layout but what the writer
-knew — the whole folder — when each file was written.
+One file, not one per batch, and the reason is the same reason the unit is the
+folder. An argument that runs from page 24 to page 190 has to be *written* in
+one place to be *read* in one place: split across eleven files, folder 29's
+two best observations — that the question its 1967 typescript poses at page 24
+is answered at page 190, and that the pair `(C, s)` it defines at page 12 comes
+back at page 201 as a presentation of the object it approximated — had to be
+asserted eleven times and could be read nowhere. Every other folder of this
+project is a single file; 29 was merged into one after being written the other
+way, and the merge is what made those two facts sayable once.
 
-A batch range may be given (`/modernize-grothendieck 151 3-4`) when only part
-of a folder is being revised. Even then, **read the folder's transcriptions
-whole first**; only the writing is narrowed.
+The site is built for this and not merely tolerant of it. `scripts/manifest.mjs`
+keys folder-wide readings by folder rather than by batch, and says why in its
+own comment: filed under `#1` — the only batch key a `batch-01.modern.tex`
+could produce — a folder-wide reading made the archive page report 161-3 as
+"1/3 modernised" when all 54 of its pages had been read, and left the
+Modernised toggle dead on batches 2 and 3. Keyed by folder, the one file is
+offered against *every* batch of the folder, which is what it actually covers.
+
+**A batch range is not an output unit.** `/modernize-grothendieck 151 3-4` may
+be given when only part of a folder is being revised; it narrows what gets
+rewritten inside the one file, never what gets written. And even then, **read
+the folder's transcriptions whole first**.
 
 It is an **interpretation, not a transcription**: it reorganises by argument,
 states what the manuscript leaves implicit, and reads continuously, the way a
@@ -71,22 +84,21 @@ will not say so.
 
 ## The summary
 
-**Every batch's file opens with one** — `\section*{Résumé}`, before any
-mathematics — and it is the only part of the project written for someone who
-has not met the subject. One page, perhaps two.
+**The file opens with one** — `\section*{Résumé}`, before any mathematics —
+and it is the only part of the project written for someone who has not met the
+subject. One page, perhaps two. **One per folder**, not one per batch: there
+is one document, so there is one summary, and it orients over the whole
+shelfmark — what the folder is about, where its argument is going, what it
+will have built by the last page.
 
-The folder being the unit changes what these summaries say to each other. The
-**first batch's** résumé orients over the whole folder: what the folder is
-about, where its argument is going, what it will have built by the last page.
-Each **later batch's** résumé is shorter, and does one thing the batch-by-batch
-version could not — it situates that batch inside the folder's argument: what
-has been established, what this stretch adds, what is still open. It does not
-re-narrate the folder from the start, and it does not pretend the reader
-arrived here first.
-
-A reader may open any batch directly, so no résumé may depend on having read
-another. Situating is not the same as continuing: one sentence recalling what
-the construction is costs nothing and is what makes the file stand alone.
+For a folder of any size, follow the résumé with a short section that lays out
+the **spine and the conventions** — the stations of the argument with their
+page ranges, the notation fixed for the whole document, and what the folder
+announces but never establishes. Folder 19 does this under « Conventions,
+valables pour tout le dossier » and folder 29 under « Le fil du dossier, et
+l'ordre des feuillets ». It is what replaces the orientation that per-batch
+summaries used to repeat, and on a two-hundred-page folder it is the only
+navigation a reader has.
 
 Its job is orientation, and it answers four questions in order:
 
@@ -109,7 +121,7 @@ No sentence names the reader's level, no heading says « pour la licence » or
 else, and a reader who needs the orientation will take it without being told
 they needed it.
 
-One thing belongs here whenever the batch offers it, and it is often the most
+One thing belongs here whenever the folder offers it, and it is often the most
 valuable: **Grothendieck's reflection on his own practice** — how a notion
 arrives, what he called the attitude of listening, what understanding is. It
 needs no background at all, and it is why someone who will never do algebraic
@@ -128,16 +140,18 @@ The résumé closes with one line, before `\end{resume}`:
 \keywords{profunctor, Isbell duality, Cauchy completion}
 ```
 
-Three to six terms, **in English** — they are search keys, not prose, and
-the literature they point into is English — naming the modern vocabulary
-under which what that batch builds is known today. They are the natural
-sharpening of the résumé's fourth question (*quels noms modernes chercher
-ensuite*), so write them when the résumé is written, last.
+**In English** — they are search keys, not prose, and the literature they
+point into is English — naming the modern vocabulary under which what the
+folder builds is known today. They are the natural sharpening of the résumé's
+fourth question (*quels noms modernes chercher ensuite*), so write them when
+the résumé is written, last.
 
-Each batch carries its own line, and the folder being written in one pass is
-what makes them worth having separately: they should partition the folder's
-vocabulary rather than repeat it. A term already earned by batch 1 is not
-re-listed by batch 3 unless batch 3 is where it is actually built.
+**One line for the folder**, since there is one file. Three to six terms for a
+small shelfmark; a two-hundred-page folder will carry many more — 29 carries
+fifty-five — but the discipline is the same one that a per-batch list used to
+enforce by construction: **partition the folder's vocabulary rather than repeat
+it**. A term earned by the opening sections is not re-listed for a later one,
+and no term goes in that some section does not actually build.
 
 This line is the single source of the folder's tags: `npm run manifest`
 extracts every `\keywords{}` of the folder's modernised readings, unions
@@ -154,7 +168,7 @@ is *true*, and a footnote says what the page has. Reproducing an error
 faithfully, in an edition whose whole promise is that it can be read as
 mathematics, launders the error through the appearance of a modern text.
 
-Four failure modes, each hit on a real batch (folder 115); check for all four:
+Four failure modes, each hit on a real folder (115); check for all four:
 
 - **Variances.** These notes are about two-sided constructions, and variance
   is where a plausible-looking modernisation does the most damage. A kernel
@@ -211,16 +225,28 @@ and the modernised reading has no reason to change language. Today's *names*
 are used in their French forms: dualité d'Isbell, complétion de Cauchy,
 enveloppe de Karoubi, cofin, curryfier.
 
-Each document takes the shared preamble (`\input{../preamble/grothendieck}`),
-its own batch metadata (`\folder`, `\batch`, `\pages`, `\dating` — copied
-unchanged from that batch's transcription, since it is Montpellier's claim and
-not a reading — and `\foldertitle` ending
-« — lecture modernisée »), and the pass header comment naming the model and
-date. The header says `Opus 5 (claude-opus-5)` because the frontmatter pins it;
-if the session is somehow on another model, stop rather than write a header
-that is true only of the pin. Say in the header that the folder was read whole,
-and which batches the pass covered — a later reader cannot otherwise tell a
-file written with the folder in view from one written before that was the rule.
+The document takes the shared preamble (`\input{../preamble/grothendieck}`)
+and the folder's metadata:
+
+- `\folder` — the shelfmark;
+- `\pages{first}{last}` — the **whole** span, first page of the first batch to
+  last of the last;
+- `\dating` — copied unchanged from the transcriptions, since it is
+  Montpellier's claim and not a reading;
+- `\foldertitle` — the inventory's title, ending
+  « — lecture modernisée du dossier entier »;
+- **no `\batch`.** The preamble is built for this: with `\batch` absent it
+  drops the « (lot N) » from the title block rather than printing a number
+  that would be false. A `\batch` line in this edition is a bug, and it is
+  also what makes the manifest file the reading under `#N` instead of under
+  the folder.
+
+Then the pass header comment, naming the model and date. It says
+`Opus 5 (claude-opus-5)` because the frontmatter pins it; if the session is
+somehow on another model, stop rather than write a header that is true only of
+the pin. Use the header for what a reader cannot get from the body: the
+notation fixed for the folder, the substantive departures from the pages with
+their page numbers, and anything the folder announces and never establishes.
 
 It also carries its own legal notice, stronger than the transcription's,
 because this edition is doubly ours — an unauthorised working document *and*
@@ -250,8 +276,8 @@ twice), and dropping a ring or an arc changes what is being asserted.
 
 ## The sequence
 
-**Read the folder before writing any of it.** Steps 1 and 2 run once, over
-every batch; steps 3 to 5 run per batch, in order, and step 6 once at the end.
+**Read the folder before writing any of it.** Every step runs once, over the
+whole shelfmark — there is one document, so there is one pass.
 
 1. Read **every** `transcripts/<folder>/batch-NN.fr.tex`, in order, in full,
    twice: once for the mathematics, once listing every `\uncertain{}`,
@@ -259,37 +285,54 @@ every batch; steps 3 to 5 run per batch, in order, and step 6 once at the end.
    the transcriptions' header comments too: they record what the reader of the
    hand found hard, which is where this edition is most likely to go wrong.
 2. Identify the **folder's spine** — the construction the folder as a whole is
-   building — and only then decide where each batch sits on it. Write the plan
-   down before writing prose: for each batch, what it contributes to the spine
-   and what it may therefore assume. This is the step the batch-by-batch
-   version could not do, and skipping it wastes the folder-wide read.
+   building — and only then decide where each stretch of pages sits on it.
+   Write the plan down before writing prose: what each stretch contributes to
+   the spine and what it may therefore assume. Skipping this wastes the
+   folder-wide read, and it is what the spine section after the résumé is
+   written from.
    A construction that outlives a batch boundary gets **one** name, one
-   notation and one convention for the whole folder, fixed here; changing
-   notation mid-folder is the failure this scope exists to prevent.
+   notation and one convention for the whole document, fixed here; changing
+   notation mid-folder is the failure this scope exists to prevent. Where two
+   objects of the folder share a name — folder 29 calls both its 1967
+   auxiliary datum and its late champ a « donnée/domaine de ramification » —
+   fix the distinction here and state it in the spine section, because a
+   reader meeting the second will otherwise read it as the first.
    Where the folder restarts on itself — the *moutures* of one chapter — say
    so on the spine and keep them distinct. A restart is not a repetition to be
    merged; that difference is content.
-3. Write each batch's body, in batch order, holding to the standard above.
-   Every departure from the page gets a footnote at the point of departure.
-   Where a batch continues a construction begun earlier, cite the earlier
-   batch's section rather than restating it — but recall in one sentence what
-   the construction is, so the file still stands alone.
-4. Write each batch's summary **last within that batch**, when you know what
-   it turned out to be about. Written first it describes what you expected to
-   find. Batch 1's orients over the folder; later ones situate. Close each with
-   its `\keywords{}` line — the folder's tags come from nowhere else.
-5. Before leaving a batch, check it against the plan from step 2: is the
-   notation the folder's, are the promises batch 1's résumé made still ones
-   this folder keeps? If a later batch forces a change, **go back and fix the
-   earlier files** — that is the whole point of one pass over the folder, and
-   the cost of not doing it is an edition that contradicts itself.
-6. `npm run render && npm run pdf && npm run manifest` — each batch becomes
-   `AI-reviewed` by itself, from the file's existence; nothing is ticked by
-   hand. Then read **every** rendered view with zero `katex-error` nodes and
-   every PDF with no overfull lines, beside its transcription — not beside the
-   facsimile; the transcription is this edition's source. Report which batches
-   the pass covered and, if the folder was only partly transcribed, which it
-   could not.
+3. Write the body, in page order, holding to the standard above. Every
+   departure from the page gets a footnote at the point of departure. Where a
+   construction begun earlier is continued, **cite the earlier section by its
+   pages** — « la donnée kummérienne des pages 19 et 20 » — and recall in one
+   sentence what it is. Never cite a batch: the batch is a unit of
+   transcription and has no existence in this document.
+4. Write the summary **last**, when you know what the folder turned out to be
+   about. Written first it describes what you expected to find. Close it with
+   the `\keywords{}` line — the folder's tags come from nowhere else.
+5. Before finishing, re-read against the plan from step 2: is the notation the
+   folder's throughout, are the promises the résumé makes ones the document
+   keeps, does every section the spine names exist? A late section that forces
+   a change means **going back and fixing the earlier ones** — cheap in one
+   file, and the reason the scope is what it is.
+6. `npm run render && npm run pdf && npm run manifest` — the folder becomes
+   `AI-reviewed` from the file's existence; nothing is ticked by hand. Confirm
+   the manifest keys the reading **by folder** and not under `#1`: the count
+   of folders "read whole" should go up by one, and no batch entry should
+   carry a `modern` edition. Then read the rendered view with zero
+   `katex-error` nodes and the PDF with no overfull lines, beside the
+   transcriptions — not beside the facsimile; the transcription is this
+   edition's source.
+
+   Two checks worth running on a long folder, both cheap and both of which
+   caught something real on 29: every transcribed `\page{N}` should fall
+   inside some `\pagerange{}`, and every named result of the transcriptions
+   (Lemme, Proposition, Corollaire, Exemple, Remarque) should be reachable in
+   the reading. The second is what surfaces a statement the folder announces
+   and never makes — an absence this edition is supposed to record, not step
+   over.
+
+   Report what the pass covered and, if the folder was only partly
+   transcribed, what it could not.
 
 ## What not to do
 
@@ -306,12 +349,22 @@ every batch; steps 3 to 5 run per batch, in order, and step 6 once at the end.
 - **Name the reader's level.** Write for them; do not address them as a class.
 - **Let the summary become an abstract.** It orients; it does not compress
   the body into a paragraph.
-- **Write one batch without having read the folder.** The scope is the whole
-  point: a reading of batch 3 made blind to batch 4 guesses where the
-  construction was going, and guesses wrong often enough to matter.
-- **Merge the folder into one file.** The unit of *reading* is the folder; the
-  unit of *output* stays `batch-NN.modern.tex`, because the site puts each file
-  beside the facsimile pages it covers.
-- **Let batch 1's résumé swallow the folder.** It orients over the folder in a
-  page; it does not become the folder's article, leaving the later résumés
-  nothing to say.
+- **Start writing before having read the folder.** The scope is the whole
+  point: a section written blind to the pages after it guesses where the
+  construction was going, and guesses wrong often enough to matter. On folder
+  29 the last thirty pages answer a question the first forty ask; written in
+  page order without having read to the end, neither half can say so.
+- **Split the folder across one file per batch.** The unit of reading and the
+  unit of output are both the folder. The manifest keys folder-wide readings by
+  folder and offers them against every batch, so nothing is lost beside the
+  facsimile — and an argument that crosses a batch boundary can be written once
+  instead of being asserted at each crossing.
+- **Let the résumé swallow the folder.** It orients in a page, perhaps two; it
+  does not become the folder's article. On a long shelfmark the temptation is
+  real, because there is now only one summary and everything wants to go in it.
+  What the résumé cannot hold goes in the spine section under it, or in the
+  body where it belongs.
+- **Write a section that cites a batch.** Batches are units of transcription.
+  In this document a cross-reference is to pages — « le théorème des pages 87 à
+  97 » — because that is what a reader of the facsimile can follow and what
+  survives a re-batching of the transcription.
