@@ -80,6 +80,17 @@ jobs:
       - name: Compile transcript PDFs
         run: npm run pdf || true
 
+      # Advisory, not a gate — `|| true` for the same reason the step above has
+      # it. `npm run verify` reports three things: a transcript that left the
+      # LaTeX subset, a formula that will render as red source in the reading
+      # view, and a line running past the right margin in the PDF. All three are
+      # real defects and the last one hides content, but there are transcripts in
+      # the tree that fail today, and turning this red would stop the site
+      # deploying over a batch nobody is currently working on. It runs so the
+      # report is in the log; make it blocking once the tree is clean.
+      - name: Verify the editions (advisory)
+        run: npm run verify || true
+
       # `npm run build` chains `npm run manifest`, `tsc -b` and `vite build`,
       # so type errors fail this step.
       #

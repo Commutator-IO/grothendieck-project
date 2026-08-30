@@ -30,6 +30,32 @@ const ROOT = resolve(import.meta.dirname, '..');
 const SOURCE = resolve(ROOT, 'transcripts');
 const OUT = resolve(ROOT, 'public', 'transcripts');
 
+/**
+ * The apparatus macros KaTeX must know, and the one definition of them.
+ *
+ * The critical apparatus reaches inside the mathematics: an illegible
+ * exponent, a term of a sequence that cannot be read. The prose expansion this
+ * script performs never sees those — they sit between the math delimiters,
+ * which pass through untouched — so KaTeX has to know the macro too, or a gap
+ * in the reading comes out as the literal word `\\ill` on screen while the PDF
+ * prints the marker. Screen and PDF must agree about which words were read.
+ *
+ * The other three reach math for the same reason — he strikes a single symbol,
+ * doubts a single operator — and KaTeX drops what it does not know *silently*,
+ * so without these the strike simply disappears on screen while the PDF prints
+ * it.
+ *
+ * Exported because `scripts/verify.mjs` typesets every fragment of a rendered
+ * page in Node to prove it will not fail in the browser, and a check run with
+ * a different macro table would prove nothing about the page a reader opens.
+ */
+export const TR_MACROS = {
+  '\\ill': '\\textcolor{#b53d1d}{[\\ldots]}',
+  '\\struck': '\\sout{#1}',
+  '\\uncertain': '\\underline{#1}',
+  '\\add': '\\textcolor{#38539d}{[#1]}',
+};
+
 const EDITION_LABELS = {
   fr: { lang: 'fr', name: 'Transcription' },
   modern: { lang: 'fr', name: 'Lecture modernisée' },
@@ -890,22 +916,11 @@ ${html}
 // executed by then, so KaTeX is certainly present, and the order of the two
 // passes below is guaranteed. Nodes must be typeset before arrows are drawn —
 // arrow geometry is read off the laid-out cells.
-// The critical apparatus reaches inside the mathematics: an illegible
-// exponent, a term of a sequence that cannot be read. The prose expansion
-// above never sees those — they sit between the math delimiters, which pass
-// through untouched — so KaTeX has to know the macro too, or a gap in the
-// reading comes out as the literal word "\\ill" on screen while the PDF prints
-// the marker. Screen and PDF must agree about which words were read.
-var TR_MACROS = {
-  '\\\\ill': '\\\\textcolor{#b53d1d}{[\\\\ldots]}',
-  // The other three apparatus macros reach math too — he strikes a single
-  // symbol, doubts a single operator — and KaTeX drops what it does not know
-  // *silently*, so without these the strike simply disappears on screen while
-  // the PDF prints it. Same rule as \\ill: screen and PDF must agree.
-  '\\\\struck': '\\\\sout{#1}',
-  '\\\\uncertain': '\\\\underline{#1}',
-  '\\\\add': '\\\\textcolor{#38539d}{[#1]}',
-};
+// The apparatus macros, emitted from the exported TR_MACROS so that
+// npm run verify typesets the page with exactly what the browser will use
+// rather than with a second copy of it. Why they are needed at all: see the
+// definition in this file's module scope.
+var TR_MACROS = ${JSON.stringify(TR_MACROS)};
 
 document.addEventListener('DOMContentLoaded', function () {
   renderMathInElement(document.body, {
@@ -1233,7 +1248,11 @@ async function main() {
   process.stdout.write(`${n} reading views → public/transcripts/\n`);
 }
 
-main().catch((e) => {
-  process.stderr.write(`${e.message}\n`);
-  process.exit(1);
-});
+// Importable for TR_MACROS alone — `scripts/verify.mjs` needs the macro table
+// the page will use, and must not re-render the site to get it.
+if (import.meta.url === `file://${process.argv[1]}`) {
+  main().catch((e) => {
+    process.stderr.write(`${e.message}\n`);
+    process.exit(1);
+  });
+}

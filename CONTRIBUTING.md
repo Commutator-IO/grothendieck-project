@@ -70,8 +70,20 @@ If that rules a folder out for you, routes 1 and 2 need no French at all.
 ## Before you open the pull request
 
 ```bash
-npm run lint && npm run render && npm run pdf
+npm run lint && npm run verify
 ```
+
+`npm run verify` renders, typesets every formula the reading view will hand to
+KaTeX, and compiles the PDFs to check that no line runs past the right margin —
+the three checks that used to be a habit at the end of a transcription. Give it
+a folder, or a folder and a batch, to check only what you touched:
+
+```bash
+npm run verify -- 115 1
+```
+
+An overfull box is not cosmetic here: the overflow is content, and it is
+invisible in the file people download.
 
 CI runs the same on your branch. Nothing deploys from a pull request; only
 `main` does.

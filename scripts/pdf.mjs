@@ -66,6 +66,19 @@ async function main() {
   }
 
   const only = process.argv.slice(2).filter((a) => !a.startsWith('--'));
+  /*
+   * `--force` recompiles a document whose PDF is already newer than its
+   * source. `npm run verify` needs it: the overfull-box check reads the
+   * engine's log, and a skipped compile leaves no log to read — which would
+   * let the check report a clean margin it never looked at.
+   */
+  const force = process.argv.includes('--force');
+  /*
+   * The work directory is scratch and is normally swept at the end. `--keep`
+   * leaves it, because the engine's log is the only evidence there is that a
+   * line does not run past the right margin, and `npm run verify` reads it.
+   */
+  const keep = process.argv.includes('--keep');
   let folders = [];
   try {
     folders = (await readdir(SOURCE, { withFileTypes: true }))
@@ -91,7 +104,7 @@ async function main() {
       // Recompiling an unchanged transcript costs seconds each and produces a
       // byte-identical file; skipping is what makes `npm run pdf` safe to run
       // after every batch.
-      if ((await mtime(pdf)) > (await mtime(src))) continue;
+      if (!force && (await mtime(pdf)) > (await mtime(src))) continue;
 
       /**
        * Twice, and the first failure is not reported.
@@ -150,7 +163,7 @@ async function main() {
     }
   }
 
-  await rm(WORK, { recursive: true, force: true });
+  if (!keep) await rm(WORK, { recursive: true, force: true });
   process.stdout.write(`${built} PDFs compiled with ${engine}.\n`);
   await writeManifest();
 }

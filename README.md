@@ -191,6 +191,47 @@ mathematics stays selectable text rather than becoming a picture. It covers the
 documented arrow subset and **raises on anything else**, because a diagram
 rendered with an arrow missing asserts a commutation nobody wrote.
 
+### Running a pass without a human
+
+A batch is normally transcribed by a person sitting in front of Claude Code,
+one batch per conversation. That is how the method was established — the skills
+were written by watching passes fail — and it does not reach 884 batches.
+
+```bash
+npm run headless -- transcribe 115 1      # one batch
+npm run headless -- modernize 115         # one folder
+npm run usage                             # what the passes so far cost
+npm run verify -- 115 1                   # the three gates, as code
+```
+
+`npm run headless` is **Claude Code as a library**, not a reimplementation of
+it. The [Claude Agent SDK](https://code.claude.com/docs/en/agent-sdk) supplies
+the harness — the loop, the file and shell tools — and discovers
+`.claude/skills/` from the filesystem exactly as the CLI does, so
+`/transcribe-grothendieck 115 1` dispatches the same `SKILL.md` a person
+dispatches by typing the same thing. There is no second copy of the method to
+keep in step with the first, which is the whole reason for doing it this way: a
+headless edition produced from a paraphrase of the skill would not be the same
+edition, and nothing in the file would say so.
+
+What the script adds is what the missing person was doing. A `PreToolUse`
+guard refuses the few commands nobody should reach for unattended — `git
+commit` and `git push` among them, so that a failed check comes back into the
+loop instead of going quietly into the history. `npm run verify` is then run
+against what the pass wrote, and its report handed back into the same session
+to be fixed. And every round's token usage is recorded under `archives/usage/`,
+in the shape `npm run usage` reports for the interactive passes, so the two can
+be compared.
+
+Unattended runs want `ANTHROPIC_API_KEY` in the environment rather than a
+stored login: an OAuth session expires mid-pass, which is the costly place to
+find out.
+
+**None of this says the reading is right.** The gates prove the file is
+well-formed, never that a word matches the page — and a fluent wrong word is
+the one failure this edition has no mechanical defence against. A headless
+transcription is a draft nobody has read, and its header comment says so.
+
 ## The repository
 
 | Path | Role |
@@ -203,6 +244,9 @@ rendered with an arrow missing asserts a commutation nobody wrote.
 | `scripts/catalogue.mjs` | Re-reads Montpellier's inventory into typed data |
 | `scripts/archive.mjs` | Downloads and cuts folders into batches — for transcription, not for reading |
 | `scripts/render.mjs` | LaTeX subset → the reading view, in ar5iv's stylesheet |
+| `scripts/verify.mjs` | The three gates as code: it renders, every formula typesets, no overfull box |
+| `scripts/headless.mjs` | A pass with no human in front of it, running the same skills through the Agent SDK |
+| `scripts/usage.mjs` | What a pass cost, read back off the sessions that produced the editions |
 | `relay/server.mjs` | The production relay: same job as the dev middleware, deployable |
 | `vite.config.ts` | Also relays `/source/*.pdf` from Montpellier in dev, forwarding range requests |
 
