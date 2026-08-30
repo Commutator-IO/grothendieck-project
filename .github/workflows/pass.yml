@@ -92,11 +92,14 @@ jobs:
             exit 1
           }
 
-      # Not `--omit=optional`, unlike the deploy workflow: the Agent SDK is the
-      # optional dependency, and it is the whole point here. npm resolves the
-      # linux-x64 Claude Code binary automatically from the per-platform
-      # packages, so there is nothing to install by hand.
       - run: npm ci
+
+      # The Agent SDK is not a dependency of the package — see the comment in
+      # scripts/headless.mjs — so a pass asks for it by name. npm resolves the
+      # linux-x64 Claude Code binary automatically from the per-platform
+      # packages, so there is nothing to choose here.
+      - name: Install the Agent SDK
+        run: npm install --no-save @anthropic-ai/claude-agent-sdk
 
       # `npm run tiles` and `npm run archive` shell out to pdftoppm and
       # pdfinfo. Installed explicitly rather than assumed present on the image.

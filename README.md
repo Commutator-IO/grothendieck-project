@@ -198,11 +198,16 @@ one batch per conversation. That is how the method was established — the skill
 were written by watching passes fail — and it does not reach 884 batches.
 
 ```bash
+npm install --no-save @anthropic-ai/claude-agent-sdk   # not a dependency; see below
 npm run headless -- transcribe 115 1      # one batch
 npm run headless -- modernize 115         # one folder
 npm run usage                             # what the passes so far cost
 npm run verify -- 115 1                   # the three gates, as code
 ```
+
+The SDK is asked for by name rather than declared as a dependency: it ships a
+per-platform Claude Code binary of 188 MB, and everything else here is a static
+site that has no use for it.
 
 `npm run headless` is **Claude Code as a library**, not a reimplementation of
 it. The [Claude Agent SDK](https://code.claude.com/docs/en/agent-sdk) supplies

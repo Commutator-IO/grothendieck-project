@@ -36,11 +36,13 @@ jobs:
       # transcript reading views load. It is not versioned, so this step is
       # what puts it in the artifact.
       #
-      # `--omit=optional` skips the Claude Agent SDK, which `npm run headless`
-      # needs and a site build does not. It ships a per-platform Claude Code
-      # binary — 188 MB — and downloading that to build a static page cost this
-      # job a minute and a half for nothing.
-      - run: npm ci --omit=optional
+      # The Claude Agent SDK is deliberately *not* a dependency of this
+      # package — `npm run headless` asks you to install it, because it ships a
+      # per-platform Claude Code binary of 188 MB and a static site build has
+      # no use for it. `--omit=optional` was the first attempt at that and was
+      # wrong: oxlint distributes its own native binding as an optional
+      # dependency too, so omitting the class took the linter with it.
+      - run: npm ci
 
       # `--deny-warnings` is essential: without it oxlint reports warnings but
       # exits with code 0, so this step could never fail.

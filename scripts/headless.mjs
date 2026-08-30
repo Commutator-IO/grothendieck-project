@@ -76,7 +76,6 @@
  * own header comment will say.
  */
 
-import { query } from '@anthropic-ai/claude-agent-sdk';
 import { mkdir, readdir, writeFile } from 'node:fs/promises';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
@@ -84,6 +83,32 @@ import { resolve } from 'node:path';
 
 const exec = promisify(execFile);
 const ROOT = resolve(import.meta.dirname, '..');
+
+/**
+ * Imported at run time, and deliberately not a dependency of this package.
+ *
+ * The SDK ships a per-platform Claude Code binary — 188 MB — and every other
+ * thing in this repository is a static site that has no use for it. Declared
+ * as a dependency it lands in every `npm ci`, including the one that builds
+ * the site, which cost the deploy a minute and a half of downloading a
+ * language model harness to render HTML. Declared as an *optional* dependency
+ * and omitted with `--omit=optional` it also came out — along with oxlint's
+ * native binding, which is optional in exactly the same way, and the linter
+ * stopped working. So it is asked for by name, by whoever wants to run a pass.
+ */
+let query;
+try {
+  ({ query } = await import('@anthropic-ai/claude-agent-sdk'));
+} catch {
+  console.error(
+    'The Claude Agent SDK is not installed.\n\n' +
+      '  It is what makes a headless pass run the same skills an interactive one runs,\n' +
+      '  and it is kept out of this package\'s dependencies because it ships a 188 MB\n' +
+      '  Claude Code binary that a site build has no use for:\n\n' +
+      '      npm install --no-save @anthropic-ai/claude-agent-sdk\n',
+  );
+  process.exit(4);
+}
 
 /** The two steps the issue is about, and the skill each dispatches. */
 const STEPS = {
