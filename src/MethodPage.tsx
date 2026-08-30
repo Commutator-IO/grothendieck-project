@@ -453,7 +453,10 @@ function Contributors() {
  * These are no longer declared figures. Every assistant message in a pass
  * records its own token usage, so summing them over the window of a pass is
  * arithmetic rather than estimation, and the numbers below are read off the
- * five batches actually completed — folders 115, 161-1 and the three of 135.
+ * batches actually completed. The per-batch figures below are still those of
+ * the first five passes — folders 115, 161-1 and the three of 135 — which are
+ * the ones whose token usage was summed; the batch counts above have since
+ * moved and the costs have not been re-measured.
  *
  * What the measurement makes visible is the thing every estimate here missed
  * by two orders of magnitude: almost nothing is *written*, almost everything
@@ -466,14 +469,16 @@ function Contributors() {
  */
 const PILOT = {
   /** Transcribed so far, counted off `public/manifest.json` and excluding the
-      specimen: seventeen folders — 19#1–5, 29#1, 35#1, 48#1, 66#1, 108#1,
-      112#1, 114#1, 115#1, 135#1–3, 139#1, 151#1–4, 161-1#1, 161-3#1–3,
-      162-1#1, 162-6#1. */
-  batchesTranscribed: 27,
-  /** All but two — folders 139 and 29 have a transcription and no modernised
-      reading yet. The reading is written per folder, taken whole, and covers
-      every batch of it. */
-  batchesModernised: 25,
+      specimen: twenty-two folders, 618 pages — 19#1–5, 29#1–11, 35#1, 42#1,
+      44#1, 48#1, 49#1, 54#1, 66#1, 108#1, 112#1, 114#1, 115#1, 125#1,
+      134-1#1, 135#1–3, 139#1, 151#1–4, 161-1#1, 161-3#1–3, 162-1#1,
+      162-6#1. */
+  batchesTranscribed: 43,
+  /** All but one — folder 139 has a transcription and no modernised reading,
+      and deliberately: it is two photographs of a medal and there is no
+      mathematics to restate. The reading is written per folder, taken whole,
+      and covers every batch of it. */
+  batchesModernised: 42,
   /** Per batch. `contextM` is every token the pass sent or received, cache
       reads included; `writtenK` is output alone; hours are model-active time,
       gaps over five minutes dropped. Transcription is the mean of the five

@@ -107,11 +107,11 @@ and git-ignored so a commit never can either.
 
 Two editions, one skill each, run in order — plus a third skill for the
 folder's tags. All installed under `.claude/skills/`. Modernisation and tagging
-pin Fable 5 in their frontmatter; transcription no longer does, so that Opus 5
-can be measured against it on a hard hand — it accepts those two models, refuses
-any other, and records in each file's header the one that read the pages, so
-that a batch's provenance stays a fact about the file rather than about whichever
-model happened to be selected:
+pin Opus 5 in their frontmatter. Transcription used to pin Fable 5 and no
+longer pins anything, so that Opus 5 can be measured against it on a hard
+hand — it accepts those two models, refuses any other, and records in each
+file's header the one that read the pages, so that a batch's provenance stays a
+fact about the file rather than about whichever model happened to be selected:
 
 | Skill | Produces |
 |---|---|
@@ -127,8 +127,9 @@ would diverge, and nothing would say which was right.
 The modernised reading is the one allowed to depart from the page, and is held
 to being **correct as it stands**: where the manuscript is loose it states what
 is true and footnotes what the page has. It opens with a `Résumé` written for
-someone who has not met the subject, and closes that résumé with three to six
-English keywords — the modern vocabulary to search under. Those keywords are
+someone who has not met the subject, and closes that résumé with a line of
+English keywords — the modern vocabulary to search under, three to six terms
+for a short folder and many more for a long one. Those keywords are
 the **single source** of the folder's tags: `npm run manifest` extracts them,
 and the archive page's search matches on them. There is deliberately no tags
 file, so no tag can describe content nobody has read.
@@ -147,18 +148,26 @@ npm run manifest    # tell the site which files now exist
 The `.tex` under `transcripts/` is the source of record and the only thing
 versioned. HTML and PDF are derived, and rebuilt.
 
-**Five batches are transcribed so far**, all under Fable 5: folder 115
-(fourteen pages — functorial correspondences and the duality of topoi) and
-folder 161-1 (nineteen pages — adjoint functors, the free symmetric monoidal
-category, theories, and a half-page sketch of Giraud's theorem) on 8 August
-2026, then the three batches of folder 135 (fifty-eight pages, the whole folder
-— Gr-categories, their classification by a class in $H^3$, and the Picard
-envelope; the last thirteen pages are a manuscript in English) on 9 and 15
-August. Two of the five also have their modernised reading: 161-1 under Fable 5,
-115 under Opus 5. None has been checked page by page by a person. `/method/`
-prices the two steps separately, from the passes themselves: transcription
-carries almost all the cost, because it reads page images; the modernised
-reading works from text.
+**Forty-three batches are transcribed so far — twenty-two folders, 618 pages.**
+The first five ran under Fable 5: folder 115 (fourteen pages — functorial
+correspondences and the duality of topoi) and folder 161-1 (nineteen pages —
+adjoint functors, the free symmetric monoidal category, theories, and a
+half-page sketch of Giraud's theorem) on 8 August 2026, then the three batches
+of folder 135 (fifty-eight pages, the whole folder — Gr-categories, their
+classification by a class in $H^3$, and the Picard envelope; the last thirteen
+pages are a manuscript in English) on 9 and 15 August. Everything since has run
+under Opus 5, including the four long folders — 19 (five batches), 29 (eleven),
+151 (four) and 161-3 (three) — and the run of one-batch folders that
+[issue #12](https://github.com/Commutator-IO/grothendieck-project/issues/12)
+tracks.
+
+**Twenty-one of the twenty-two folders also have their modernised reading**,
+covering 42 of the 43 batches. The exception is folder 139, and deliberately:
+it is two photographs of the Prix Émile Picard medal, and a modernised reading
+would be a file that reads nothing. None of it has been checked page by page by
+a person. `/method/` prices the two steps separately, from the passes
+themselves: transcription carries almost all the cost, because it reads page
+images; the modernised reading works from text.
 
 ### The critical apparatus is the point
 
