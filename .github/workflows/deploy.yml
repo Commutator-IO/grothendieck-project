@@ -35,7 +35,12 @@ jobs:
       # `postinstall` vendors KaTeX into public/vendor/katex/, which the
       # transcript reading views load. It is not versioned, so this step is
       # what puts it in the artifact.
-      - run: npm ci
+      #
+      # `--omit=optional` skips the Claude Agent SDK, which `npm run headless`
+      # needs and a site build does not. It ships a per-platform Claude Code
+      # binary — 188 MB — and downloading that to build a static page cost this
+      # job a minute and a half for nothing.
+      - run: npm ci --omit=optional
 
       # `--deny-warnings` is essential: without it oxlint reports warnings but
       # exits with code 0, so this step could never fail.
@@ -74,21 +79,22 @@ jobs:
           path: ~/.cache/Tectonic
           key: tectonic-${{ runner.os }}-v1
 
+      # This compiles the PDFs *and* checks them, which is why there is no
+      # separate `npm run pdf` step: verify runs the compiler itself, and
+      # running both compiled every document twice.
+      #
       # A transcript that fails to compile must not take the deploy with it:
       # the site is still worth publishing with one PDF missing, and the
-      # manifest simply will not list that edition.
-      - name: Compile transcript PDFs
-        run: npm run pdf || true
-
-      # Advisory, not a gate — `|| true` for the same reason the step above has
-      # it. `npm run verify` reports three things: a transcript that left the
-      # LaTeX subset, a formula that will render as red source in the reading
-      # view, and a line running past the right margin in the PDF. All three are
-      # real defects and the last one hides content, but there are transcripts in
-      # the tree that fail today, and turning this red would stop the site
-      # deploying over a batch nobody is currently working on. It runs so the
-      # report is in the log; make it blocking once the tree is clean.
-      - name: Verify the editions (advisory)
+      # manifest simply will not list that edition. Hence `|| true` — and it
+      # covers the checks as well, deliberately. `npm run verify` reports three
+      # things: a transcript that left the LaTeX subset, a formula that will
+      # render as red source in the reading view, and a line running past the
+      # right margin in the PDF. All three are real defects and the last hides
+      # content, but there are transcripts in the tree that fail today, and
+      # turning this red would stop the site deploying over a batch nobody is
+      # working on. It runs so the report is in the log; make it blocking once
+      # the tree is clean.
+      - name: Compile and verify the editions (advisory)
         run: npm run verify || true
 
       # `npm run build` chains `npm run manifest`, `tsc -b` and `vite build`,

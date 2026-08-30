@@ -251,6 +251,31 @@ working directory was wrong is expensive. The cheapest *real* pass is
 exercises the same loop — skill dispatch, file write, gates, meter — in a
 handful of turns.
 
+### And in the cloud
+
+`.github/workflows/pass.yml` runs one pass on a GitHub runner and opens a
+**draft** pull request with what it wrote. It is `workflow_dispatch` only —
+nothing fires it on a push or a schedule, because every run spends real money —
+and it takes a budget as an input.
+
+It needs one repository secret, `ANTHROPIC_API_KEY`, and the point of the key
+rather than a token is exactly independence: the run belongs to an API account
+with its own spend limit, not to whoever happens to be logged in. Set a
+workspace spend limit in the Anthropic Console as the real backstop; the
+`budget` input stops one pass, not a month of them.
+
+Three things the first cloud run has to find out, and none of them is settled:
+
+- **Whether it fits in six hours.** That is the cap on a GitHub-hosted job, and
+  an interactive transcription ran one to five. Close to the ceiling, not
+  comfortably under it.
+- **Whether a gapless loop is cheaper.** 69% of an interactive pass's cost is
+  cache *writes*, plausibly because a one-hour cache entry expires in the gaps
+  where a person is thinking. A runner does not stop. The meter is uploaded as
+  an artifact of every run, so this is answerable rather than arguable.
+- **Whether the reading holds up.** It opens a *draft* PR, and it should stay a
+  draft until someone has read it beside the facsimile.
+
 **None of this says the reading is right.** The gates prove the file is
 well-formed, never that a word matches the page — and a fluent wrong word is
 the one failure this edition has no mechanical defence against. A headless
