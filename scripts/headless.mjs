@@ -6,6 +6,7 @@
  *   npm run headless -- modernize 115           one folder
  *   npm run headless -- transcribe 29 9 --model claude-fable-5
  *   npm run headless -- transcribe 115 1 --dry  what would be sent, and nothing else
+ *   npm run headless -- smoke                   one turn, to prove the chain works
  *
  * Issue #2 proposed two ways to do this: call the Messages API and rebuild the
  * agent loop around it, or hand the work to Managed Agents. Both start by
@@ -43,6 +44,27 @@
  *   of their cost on cache writes, much of it plausibly the one-hour cache
  *   expiring in the gaps where a person was thinking. A loop that does not
  *   stop should not pay that, and this is where it will show.
+ *
+ * ## Paying for it
+ *
+ * The SDK spawns Claude Code, which resolves credentials the way the CLI does:
+ * `ANTHROPIC_API_KEY` from the environment, otherwise the login this machine
+ * holds. So there are two ways to run a pass, and the difference is who is
+ * billed rather than what happens:
+ *
+ * — **A Claude subscription** — `claude auth login`, or `claude setup-token`
+ *   for a long-lived one to put in CI. The pass then draws on the same quota
+ *   an interactive pass draws on, and no API invoice is raised. This is how to
+ *   try it without opening a billing account, and it is what every batch in
+ *   this repository was produced under. (Anthropic's SDK terms cover using
+ *   your own subscription for your own work; they do not permit shipping a
+ *   *product* to other people on subscription auth.)
+ * — **An API key** — what an unattended run wants, because a subscription
+ *   login expires and it expires mid-pass rather than before it.
+ *
+ * Either way, start with `--smoke`: one turn, a few hundred tokens, and it
+ * proves the whole chain — credentials, skill discovery, the result shape the
+ * meter reads — before a hundred-turn pass discovers a problem three hours in.
  *
  * ## What it does not settle
  *
@@ -95,9 +117,22 @@ const has = (name) => values[name] === true;
 
 const [step, folder, batch] = positional;
 
-if (!STEPS[step] || !folder) {
+/**
+ * `--smoke`, or `smoke` as the step: one turn, no tools, nothing written.
+ *
+ * A transcription is thirty-one million input tokens over a hundred-odd
+ * turns. Finding out at turn 3 that the login expired, or that no skill was
+ * discovered because the working directory was wrong, is worth a few hundred
+ * tokens to learn first — and it is the check to run in CI, where what wants
+ * proving is that the pipeline still authenticates, not that it can read
+ * Grothendieck's hand.
+ */
+const smoke = has('smoke') || step === 'smoke';
+
+if (!smoke && (!STEPS[step] || !folder)) {
   console.error(
     'Usage: npm run headless -- <transcribe|modernize|tag|findings> <folder> [batch]\n' +
+      '       npm run headless -- smoke   one turn, to prove credentials and skill discovery\n' +
       '       --model <id>    claude-opus-5 (default) or claude-fable-5; nothing else\n' +
       '       --rounds <n>    verification rounds before giving up (default 3)\n' +
       '       --turns <n>     hard ceiling on agentic turns (default 400)\n' +
@@ -122,17 +157,18 @@ if (!PERMITTED.includes(model)) {
 }
 
 const rounds = Number(flag('rounds', 3));
-const maxTurns = Number(flag('turns', 400));
+const maxTurns = smoke ? 1 : Number(flag('turns', 400));
 const budget = values.budget ? Number(values.budget) : undefined;
 
-const { skill, unit } = STEPS[step];
-if (unit === 'batch' && !batch) {
+const { skill, unit } = smoke ? { skill: null, unit: null } : STEPS[step];
+if (!smoke && unit === 'batch' && !batch) {
   console.error(`/${skill} works one batch at a time — give the batch number.`);
   process.exit(2);
 }
 
-const target = unit === 'batch' ? `${folder} ${batch}` : folder;
-const prompt = `/${skill} ${target}`;
+const prompt = smoke
+  ? 'Reply with the single word OK. Do not use any tool.'
+  : `/${skill} ${unit === 'batch' ? `${folder} ${batch}` : folder}`;
 
 /* ------------------------------------------------------------- the session */
 
@@ -210,7 +246,7 @@ if (has('dry')) {
 
 /* ----------------------------------------------------------------- the run */
 
-const meter = { step, folder, batch: batch ?? null, model, started: new Date().toISOString(), rounds: [] };
+const meter = { step: smoke ? 'smoke' : step, folder: smoke ? null : folder, batch: batch ?? null, model, started: new Date().toISOString(), rounds: [] };
 
 /**
  * The credentials the child process will look for.
@@ -223,14 +259,21 @@ const meter = { step, folder, batch: batch ?? null, model, started: new Date().t
  */
 function authAdvice(message) {
   if (!/authenticat|OAuth|credential|401/i.test(message)) return null;
+  if (process.env.ANTHROPIC_API_KEY) {
+    return 'The pass could not authenticate. ANTHROPIC_API_KEY is set, so the key itself is\nbeing refused — check that it is current.\n';
+  }
   return (
-    'The pass could not authenticate.\n\n' +
-    (process.env.ANTHROPIC_API_KEY
-      ? '  ANTHROPIC_API_KEY is set, so the key itself is being refused — check that it is current.\n'
-      : '  ANTHROPIC_API_KEY is not set, and the stored OAuth session is expired or absent.\n' +
-        '  Either export a key, or run `claude` once interactively to refresh the login.\n' +
-        '  For anything unattended — CI, a batch of folders overnight — use the key: an\n' +
-        '  OAuth session expires mid-pass, which is the costly place to discover it.\n')
+    'The pass could not authenticate: no ANTHROPIC_API_KEY, and no usable login.\n\n' +
+    '  Two ways to pay for a pass, and they differ only in who is billed.\n\n' +
+    '  On a Claude subscription — no API invoice, drawing on the same quota an\n' +
+    '  interactive pass draws on, which is what every batch here was produced under:\n\n' +
+    '      claude auth login          # then run this again\n' +
+    '      claude setup-token         # a long-lived token instead, for CI\n\n' +
+    '  On the API, which is what an unattended run wants — a subscription login\n' +
+    '  expires, and it expires mid-pass rather than before it:\n\n' +
+    '      export ANTHROPIC_API_KEY=...\n\n' +
+    '  Either way, run `npm run headless -- smoke` first: one turn, a few hundred\n' +
+    '  tokens, and it says whether the chain works before a long pass finds out.\n'
   );
 }
 
@@ -304,12 +347,18 @@ async function verify() {
   }
 }
 
-console.log(`\n${prompt}  ·  ${model}  ·  up to ${maxTurns} turns, ${rounds} verification round(s)\n`);
+console.log(
+  smoke
+    ? `\nsmoke test  ·  ${model}  ·  one turn, no tools, nothing written\n`
+    : `\n${prompt}  ·  ${model}  ·  up to ${maxTurns} turns, ${rounds} verification round(s)\n`,
+);
 
 let round = await pass(prompt);
-let report = await verify();
 
-for (let n = 1; n <= rounds && !report.ok; n += 1) {
+/* A smoke test writes nothing, so there is nothing for the gates to check. */
+let report = smoke ? { ok: !round.error } : await verify();
+
+for (let n = 1; n <= rounds && !report.ok && !smoke; n += 1) {
   console.log(`\n  gates failed — round ${n} of ${rounds}, handed back into the same session\n`);
   const complaint =
     'The verification gates failed on what you just wrote. Fix the transcription — the ' +
@@ -343,11 +392,27 @@ meter.ok = report.ok;
 meter.finished = new Date().toISOString();
 
 await mkdir(resolve(ROOT, 'archives', 'usage'), { recursive: true });
-const slug = `${step}-${folder}${batch ? `-batch-${String(batch).padStart(2, '0')}` : ''}-${model}`;
+const slug = smoke
+  ? `smoke-${model}`
+  : `${step}-${folder}${batch ? `-batch-${String(batch).padStart(2, '0')}` : ''}-${model}`;
 const meterPath = resolve(ROOT, 'archives', 'usage', `${slug}.json`);
 await writeFile(meterPath, JSON.stringify(meter, null, 1), 'utf8');
 
 const M = (n) => `${(n / 1e6).toFixed(2)}M`;
+
+if (smoke) {
+  console.log(
+    `\n  ${report.ok ? '✓' : '✗'} the chain works: credentials accepted, skills discovered, ` +
+      `the result carried usage the meter could read.\n` +
+      `  ${(total.tokens.output / 1e3).toFixed(1)}k output, estimated $${total.costUSD.toFixed(4)}\n` +
+      `  meter → ${meterPath.replace(`${ROOT}/`, '')}\n\n` +
+      `  Now try a real pass. The cheapest is a tagging run — it rewrites one \\keywords\n` +
+      `  line, so it exercises the same loop in a handful of turns rather than a hundred:\n\n` +
+      `      npm run headless -- tag 115\n`,
+  );
+  process.exit(report.ok ? 0 : 1);
+}
+
 console.log(
   `\n  ${report.ok ? '✓ gates pass' : '✗ gates still failing'} after ${meter.rounds.length} round(s), ${total.turns} turns\n` +
     `  ${M(total.tokens.cacheWrite)} cache writes · ${M(total.tokens.cacheRead)} cache reads · ` +

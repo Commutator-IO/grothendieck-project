@@ -223,9 +223,33 @@ to be fixed. And every round's token usage is recorded under `archives/usage/`,
 in the shape `npm run usage` reports for the interactive passes, so the two can
 be compared.
 
-Unattended runs want `ANTHROPIC_API_KEY` in the environment rather than a
-stored login: an OAuth session expires mid-pass, which is the costly place to
-find out.
+### Trying it without an API bill
+
+The SDK spawns Claude Code, which resolves credentials the way the CLI does. So
+a pass can be paid for two ways, and they differ only in who is billed:
+
+```bash
+claude auth login                   # a Claude subscription — no API invoice
+claude setup-token                  # the same, as a long-lived token for CI
+export ANTHROPIC_API_KEY=...        # the API, which is what unattended runs want
+npm run headless -- smoke           # one turn: does the chain work?
+```
+
+On a subscription the pass draws on the same quota an interactive pass draws
+on, which is what every batch in this repository was produced under. (Anthropic's
+SDK terms cover using your own subscription for your own work; they do not
+permit shipping a *product* to other people on subscription auth.) For anything
+unattended, use the key — a subscription login expires, and it expires mid-pass
+rather than before it.
+
+`npm run headless -- smoke` is one turn with no tools and nothing written, a
+few hundred tokens, and it reports whether credentials were accepted and which
+skills were discovered. Run it before a real pass: a transcription is 31.5M
+input tokens over a hundred-odd turns, and finding out at turn 3 that the
+working directory was wrong is expensive. The cheapest *real* pass is
+`npm run headless -- tag 115`, which rewrites one `\keywords` line and so
+exercises the same loop — skill dispatch, file write, gates, meter — in a
+handful of turns.
 
 **None of this says the reading is right.** The gates prove the file is
 well-formed, never that a word matches the page — and a fluent wrong word is
