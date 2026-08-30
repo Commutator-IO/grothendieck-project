@@ -7,9 +7,23 @@
 # where those come from). It is started by hand, with a budget, or not at all.
 #
 # What it produces is a branch and a pull request, never a commit on `main`.
-# That is the same rule the runner's own guard enforces on the agent: a pass
-# leaves its work where a person can read it beside the facsimile. The workflow
-# opens the PR because the agent may not.
+#
+# The agent never commits anything. `scripts/headless.mjs` installs a
+# PreToolUse hook that refuses `git commit` and `git push` from the agent's own
+# Bash tool, so all a pass does is write files into the runner's working tree —
+# ordinary Write and Edit calls, nothing special. The staging, the commit and
+# the push all happen in the step below, after `query()` has returned: a
+# different process, not subject to the hook, running with the job's
+# `contents: write` permission. The split is the point. The agent produces a
+# draft; deciding that a draft belongs in the history is somebody else's act.
+#
+# One consequence worth knowing: a push made with `GITHUB_TOKEN` deliberately
+# does not trigger further workflow runs, so the draft pull request opened here
+# arrives *without* the deploy workflow's checks having run on it. Push a commit
+# to the branch yourself, or close and reopen the PR, and they run. Wiring a
+# personal access token in would make them run unattended, and would also mean
+# an unattended pass could trigger a deploy — which is a trade to make
+# deliberately, not by default.
 #
 # Requires one repository secret, `ANTHROPIC_API_KEY`. The point of the key
 # rather than a `claude setup-token` is independence: the run belongs to an API
@@ -154,8 +168,33 @@ jobs:
           BRANCH="pass/$STEP-$FOLDER${BATCH:+-$BATCH}-$RUN_ID"
           git switch -c "$BRANCH"
 
-          # Only the editions. Nothing under public/, no PDFs, no mirror.
-          git add transcripts/ src/content/findings.ts 2>/dev/null || true
+          # Only the editions, named explicitly rather than `git add -A`.
+          #
+          # The derived material is gitignored already — public/transcripts/,
+          # every PDF, the archives/ mirror — so `-A` would mostly work, and
+          # "mostly" is the wrong standard for deciding what enters the
+          # history unattended. These four paths are what a pass legitimately
+          # writes: the editions themselves, the three states no file can
+          # prove, the findings the novelty skill appends, and the lexicon,
+          # which `npm run lexicon` regenerates from every transcription and
+          # which is versioned — it was missing from this list, and a pass that
+          # regenerated it would have had that thrown away without a word.
+          git add -- \
+            transcripts/ \
+            src/content/findings.ts \
+            .claude/skills/transcribe-grothendieck/references/lexicon.md \
+            .claude/skills/transcribe-grothendieck/references/lexicon.json \
+            2>/dev/null || true
+
+          # Anything else the pass touched is reported rather than dropped in
+          # silence. A file changed and not carried is a thing somebody needs
+          # to know about, whichever way it should have gone.
+          LEFT="$(git status --porcelain --untracked-files=normal | grep -v '^[AMD] ' || true)"
+          if [ -n "$LEFT" ]; then
+            echo "::warning::the pass also changed files that were not carried into the pull request"
+            echo "$LEFT"
+          fi
+
           git diff --cached --quiet && { echo "The pass wrote nothing — no pull request."; exit 0; }
 
           git commit -m "$LABEL: a headless pass, unchecked against the pages" \
