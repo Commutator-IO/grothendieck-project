@@ -256,30 +256,40 @@ working directory was wrong is expensive. The cheapest *real* pass is
 exercises the same loop — skill dispatch, file write, gates, meter — in a
 handful of turns.
 
-### And in the cloud
+### Somewhere other than a laptop
 
-`.github/workflows/pass.yml` runs one pass on a GitHub runner and opens a
-**draft** pull request with what it wrote. It is `workflow_dispatch` only —
-nothing fires it on a push or a schedule, because every run spends real money —
-and it takes a budget as an input.
+The runner is an ordinary Node script and does not care where it runs. Where it
+runs, though, is a choice between two things that do not currently combine.
 
-It needs one repository secret, `ANTHROPIC_API_KEY`, and the point of the key
-rather than a token is exactly independence: the run belongs to an API account
-with its own spend limit, not to whoever happens to be logged in. Set a
-workspace spend limit in the Anthropic Console as the real backstop; the
-`budget` input stops one pass, not a month of them.
+**Watching it happen** means one of Anthropic's two surfaces, and both refuse an
+API key by documented design — [Claude Code on the
+web](https://code.claude.com/docs/en/claude-code-on-the-web) shares an account's
+rate limits and needs a claude.ai sign-in, and [Remote
+Control](https://code.claude.com/docs/en/remote-control) says plainly that API
+keys are not supported. What they give in exchange is exactly the right shape
+for the experiment that has to happen first:
 
-Three things the first cloud run has to find out, and none of them is settled:
+```bash
+claude --cloud "/transcribe-grothendieck 115 1"
+```
 
-- **Whether it fits in six hours.** That is the cap on a GitHub-hosted job, and
-  an interactive transcription ran one to five. Close to the ceiling, not
-  comfortably under it.
-- **Whether a gapless loop is cheaper.** 69% of an interactive pass's cost is
-  cache *writes*, plausibly because a one-hour cache entry expires in the gaps
-  where a person is thinking. A runner does not stop. The meter is uploaded as
-  an artifact of every run, so this is answerable rather than arguable.
-- **Whether the reading holds up.** It opens a *draft* PR, and it should stay a
-  draft until someone has read it beside the facsimile.
+launched from a checkout, run on an Anthropic VM, watched from claude.ai/code or
+the phone, and it clones the GitHub remote at the current branch — so push
+before starting one. It picks up `.claude/skills/` the same way everything else
+here does.
+
+**Paying for it separately** means an API key, and therefore no Anthropic
+progress view: a VM you control, `nohup` or `tmux`, progress from the log and
+`archives/usage/*.json`, spend from the Console's usage dashboard and a
+workspace spend limit. `--budget` stops one pass; only the workspace limit stops
+a month of them.
+
+The first of those settles the question the second one needs answered, which is
+the order to do them in. **69% of an interactive pass's cost is cache
+*writes*,** plausibly because a one-hour cache entry expires in the gaps where a
+person is thinking. A loop does not stop. Whether that share collapses is the
+difference between roughly $47,000 for the fonds and a good deal less, and one
+metered pass says which.
 
 **None of this says the reading is right.** The gates prove the file is
 well-formed, never that a word matches the page — and a fluent wrong word is
