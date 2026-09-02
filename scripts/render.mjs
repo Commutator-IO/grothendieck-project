@@ -904,7 +904,13 @@ var TR_MACROS = {
   // the PDF prints it. Same rule as \\ill: screen and PDF must agree.
   '\\\\struck': '\\\\sout{#1}',
   '\\\\uncertain': '\\\\underline{#1}',
-  '\\\\add': '\\\\textcolor{#38539d}{[#1]}',
+  // The colour goes through \\addcolour rather than sitting in \\add's body.
+  // KaTeX counts the #N in a macro body to infer how many arguments it takes,
+  // and #38539d reads as parameter 3: \\add came out a three-argument macro
+  // and threw at expansion, killing every diagram on the page. \\ill escapes
+  // this only because #b is not a digit.
+  '\\\\addcolour': '#38539d',
+  '\\\\add': '\\\\textcolor{\\\\addcolour}{[#1]}',
 };
 
 document.addEventListener('DOMContentLoaded', function () {
