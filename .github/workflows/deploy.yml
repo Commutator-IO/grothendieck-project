@@ -35,6 +35,13 @@ jobs:
       # `postinstall` vendors KaTeX into public/vendor/katex/, which the
       # transcript reading views load. It is not versioned, so this step is
       # what puts it in the artifact.
+      #
+      # The Claude Agent SDK is deliberately *not* a dependency of this
+      # package — `npm run headless` asks you to install it, because it ships a
+      # per-platform Claude Code binary of 188 MB and a static site build has
+      # no use for it. `--omit=optional` was the first attempt at that and was
+      # wrong: oxlint distributes its own native binding as an optional
+      # dependency too, so omitting the class took the linter with it.
       - run: npm ci
 
       # `--deny-warnings` is essential: without it oxlint reports warnings but
@@ -74,11 +81,23 @@ jobs:
           path: ~/.cache/Tectonic
           key: tectonic-${{ runner.os }}-v1
 
+      # This compiles the PDFs *and* checks them, which is why there is no
+      # separate `npm run pdf` step: verify runs the compiler itself, and
+      # running both compiled every document twice.
+      #
       # A transcript that fails to compile must not take the deploy with it:
       # the site is still worth publishing with one PDF missing, and the
-      # manifest simply will not list that edition.
-      - name: Compile transcript PDFs
-        run: npm run pdf || true
+      # manifest simply will not list that edition. Hence `|| true` — and it
+      # covers the checks as well, deliberately. `npm run verify` reports three
+      # things: a transcript that left the LaTeX subset, a formula that will
+      # render as red source in the reading view, and a line running past the
+      # right margin in the PDF. All three are real defects and the last hides
+      # content, but there are transcripts in the tree that fail today, and
+      # turning this red would stop the site deploying over a batch nobody is
+      # working on. It runs so the report is in the log; make it blocking once
+      # the tree is clean.
+      - name: Compile and verify the editions (advisory)
+        run: npm run verify || true
 
       # `npm run build` chains `npm run manifest`, `tsc -b` and `vite build`,
       # so type errors fail this step.
