@@ -1,21 +1,33 @@
 ---
 name: modernize-grothendieck
 description: Produces the modernised reading of an already-transcribed folder of the Grothendieck fonds — taken whole, all its batches in one pass, as a single document for the shelfmark — a summary (« Résumé ») that orients a reader new to the subject, then the mathematics in current notation and current names, in French, mathematically correct as it stands, with footnotes carrying everything the transcription's critical apparatus carried. Use when someone asks to modernise, clean up, reinterpret, restate, summarise or explain a transcribed folder ("modernize folder 115", "give the modern reading", "explain these pages"), or after /transcribe-grothendieck has transcribed a folder's batches. Also covers revisions - tightening a statement, correcting a variance, rewriting a summary that assumes too much.
-model: claude-opus-5
 ---
 
 # The modernised reading of a folder
 
 
-**Runs on Opus 5.** The frontmatter pins it, so invoking this skill switches
-the model for the turn whatever the session was set to.
+**Runs on Fable 5.1 or Opus 5, and on nothing else.** The frontmatter used to
+pin Opus 5, which made the choice automatic; the pin is gone since 2026-09-03,
+when Fable 5.1 was admitted, and what replaces it is a check you make yourself
+before reading a line of the transcription:
 
+- **Fable 5.1 (`claude-fable-5-1`)** — permitted, and the default for a
+  session already running on it.
+- **Opus 5 (`claude-opus-5`)** — permitted; what every reading in the
+  repository before 2026-09-03 was produced with.
+- **Anything else** — stop, say which model the session is on, and do not
+  write. A reading on a model nobody chose has a provenance nobody can vouch
+  for.
+
+One thing the pin used to carry has to be said plainly now that it is gone.
 The standard this edition is held to — correct as it stands, with the four
 failure modes checked — is a reasoning standard, and folder 115's reading is
 what it was calibrated against. That reading was made on Opus 5, and its
-header says so. Pinning the same model keeps the calibration meaningful: a
-reading produced under a different one is not comparable to the reference, and
-the header would say so only after the fact.
+header says so. A reading made on Fable 5.1 is held to the same standard but
+is **not measured against that reference**: the two models were never
+compared on this task, and nothing in this repository says how they differ.
+The header records which one ran, and that is the only claim the file makes
+about it.
 
 ## What this produces
 
@@ -241,10 +253,12 @@ and the folder's metadata:
   also what makes the manifest file the reading under `#N` instead of under
   the folder.
 
-Then the pass header comment, naming the model and date. It says
-`Opus 5 (claude-opus-5)` because the frontmatter pins it; if the session is
-somehow on another model, stop rather than write a header that is true only of
-the pin. Use the header for what a reader cannot get from the body: the
+Then the pass header comment, naming the model and date, in the form the
+existing files use — `% Pass: Fable 5.1 (claude-fable-5-1), <date> — first
+pass, unchecked against the pages by a human.` — with the model that actually
+ran, never the one a reference reading was made on. If the session is on a
+model the list above does not admit, stop rather than write a header for it.
+Use the header for what a reader cannot get from the body: the
 notation fixed for the folder, the substantive departures from the pages with
 their page numbers, and anything the folder announces and never establishes.
 

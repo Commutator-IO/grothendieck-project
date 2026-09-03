@@ -1,0 +1,775 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 26, pages 1-10.
+%
+% This is an INTERPRETATION, not a transcription. Everything the critical
+% apparatus carried moves into footnotes. In any dispute of substance the
+% transcription governs: whoever cites Grothendieck must cite batch-01.fr.tex.
+%
+% Pass: Fable 5.1 (claude-fable-5-1), 2026-09-03 — first pass, unchecked against
+% the pages by a human. The folder was read whole; it holds one batch, pages
+% 1-10, of which pages 1 and 9 are wrappers and pages 3 and 5 a cancelled
+% typescript on the versos of the plan sheets. This is the first modernised
+% reading in the repository not made on Opus 5; the skill admitted Fable 5.1 on
+% 2026-09-03 and says the two are not measured against each other.
+%
+% Notation fixed for the whole document. The manuscript writes each functor
+% three times on a line — doubly underlined for the functor on schemes over S,
+% singly underlined for the sheaf on a given S', bare for the set of sections.
+% The reading keeps one notation, the modern one: Quot_{F/X/S}, Hilb_{X/S},
+% Pic_{X/S} and so on are functors (sheaves) on the category of S-schemes, and
+% their value at S' is the set written without decoration; the sheaf on S' is
+% named only when the page's argument needs it. The Weil restriction he writes
+% as a product sign with Y/S beneath is written Res_{Y/S}. His "module"
+% Prod_{X/S} F of page 8 — the object M |-> H^0(X, F (x) M) is dual to — is
+% written Q(F), which is the letter EGA III 7.7.6 gives it. A prime denotes
+% base change to S' throughout, as on the page.
+%
+% Substantive departures from the pages, each footnoted where it occurs:
+% — page 10, j): the transcription first read "Th. du cône"; a tighter crop
+%   reads "carré", the theorem of the square, and the transcription was
+%   corrected before this reading was made.
+% — page 2 § 11 and page 4 § 22 write the letter under the restriction symbol
+%   as an X overwritten; the reading takes Y, as the Notations sheet does, and
+%   says so once.
+% — page 8 defines a module by Hom(Prod F, M) = H^0(F (x) M), which is Q(F),
+%   then writes V(Prod F) = Res_{X/S} V(F) = Hom_{X/S}(F, O_X) with a "?" and
+%   "Notation opportune ???". As written the first equality is false: V(Q(F))
+%   represents the sections of F, not the linear forms on it; the two lines
+%   hold for Q(F^vee), the module of the page's own last block with G = O_X.
+%   The reading states the true form and footnotes the page's, and says why
+%   he hesitated: one symbol serves him for a functor and for the module
+%   representing it, and Q(F) and Q(F^vee) are both contravariant in F.
+% — the "Div" functor of page 8 has its name scribbled out three times; the
+%   reading calls it the functor of relative effective Cartier divisors, the
+%   only functor this line can be, and footnotes that the name is ours.
+%
+% What the folder announces and never establishes: everything, in a sense —
+% it is a plan. Specifically: the paragraph of part B that is boxed and then
+% struck ("Propriétés générales des foncteurs et propriétés de permanence"),
+% which comes back as § 10; the word "excellent" for functors and morphisms at
+% § 10, defined nowhere; the "cas Greenberg" of § 11; the meaning of the
+% twelve letters A to L of page 7, of which only L is glossed ("Appendice:
+% Pbs ouverts"); and the last word of the margin beside f) on page 10.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{26}
+\pages{1}{10}
+\dating{[après 1967]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{EGA VI. Plans, notations, problèmes ouverts : notes manuscrites (s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Ce dossier est la table des matières d'un livre qui n'a jamais été écrit, et
+la liste de ce qu'il aurait fallu savoir pour l'écrire.
+
+Le livre est l'un des chapitres annoncés des \emph{Éléments de géométrie
+algébrique}, celui que le plan de 1960 intitule « Technique de descente.
+Méthodes générales de construction de schémas ». Les quatre premiers
+chapitres ont paru ; celui-ci est resté à l'état de plan, et le plan est ce
+que l'on lit ici : vingt-deux paragraphes en quatre parties, une feuille de
+notations, une page de problèmes ouverts.
+
+Le problème qui organise tout est celui de la \emph{construction}. La
+géométrie algébrique fabrique sans cesse des espaces nouveaux à partir
+d'espaces donnés : l'espace de toutes les sous-variétés d'une variété, celui
+de tous ses fibrés en droites, le quotient d'une variété par un groupe qui
+agit sur elle. Chacun de ces espaces est d'abord défini par ce qu'il doit
+\emph{paramétrer} — on sait dire ce que sont ses points, et ce que sont ses
+familles de points — avant que l'on sache s'il existe. La méthode que le
+dossier suppose acquise, et qui est la sienne, consiste à prendre cette
+description au sérieux : un espace \emph{est} la règle qui associe à chaque
+base $S'$ l'ensemble des familles paramétrées par $S'$, et construire
+l'espace, c'est prouver que cette règle est celle d'un schéma. On dit alors
+que le foncteur est \emph{représentable}.
+
+L'analogie la plus proche est celle des nombres. On sait décrire $\sqrt 2$ —
+c'est le nombre dont le carré est $2$ — bien avant de savoir s'il y a un tel
+nombre ; la construction des réels est la preuve qu'il y en a un, et une fois
+faite, on ne manipule plus que la description. Ici de même : les paragraphes
+du plan sont des théorèmes d'existence, et les notations de la page 8 fixent
+les descriptions dont on prouvera qu'elles ont un objet.
+
+Deux familles de méthodes se partagent le plan. Les méthodes
+\emph{projectives}, qui construisent l'espace de Hilbert et l'espace de
+Picard d'une variété plongée dans un espace projectif, en tirant parti du
+plongement ; les méthodes \emph{non projectives}, qui n'en disposent pas et
+approchent l'espace cherché par ses infinitésimaux, en montrant d'abord qu'il
+existe « formellement » — c'est la pro-représentabilité — puis en
+l'assemblant. Entre les deux, une partie « mixte ». Devant tout cela, la
+partie A dit comment redescendre : quand un objet construit après changement
+de base provient d'un objet sur la base — c'est la \emph{descente} — et quand
+un quotient existe.
+
+La page des problèmes ouverts est la plus lisible aujourd'hui, parce que
+presque chacun a reçu une réponse, et que les réponses ont des noms : les
+espaces algébriques d'Artin pour Hilbert et Picard sans hypothèse projective,
+les quotients de Mumford, les fibrés stables de Mumford, Narasimhan et
+Seshadri, les théorèmes de Raynaud sur les schémas abéliens. Un des problèmes
+est marqué « OK par Raynaud », un autre « Oui », un autre « problème mal
+posé ? » — celui des fibrés sur la droite projective, dont il avait lui-même
+donné la classification dix ans plus tôt, et dont il voit ici qu'elle ne fait
+pas un espace de modules.
+
+Deux lignes disent quelque chose de sa manière. La « Recommandation
+importante » de la page 6 demande de remplacer partout où c'est possible
+l'hypothèse technique sous laquelle la descente est démontrée par le seul mot
+« couvrant » : énoncer au niveau de généralité où la preuve marche, et non à
+celui où on l'a d'abord trouvée. Et la page des problèmes distingue ceux qui
+manquent de réponse de celui qui manque de question.
+
+\keywords{EGA VI, descent, faithfully flat descent, quotient by an equivalence relation, representable functor, functor of points, Hilbert scheme, Quot scheme, Picard scheme, relative Picard functor, Weil restriction, functor of sections, pro-representability, bounded family, geometric invariant theory, Matsumura--Oort theorem, algebraic space, fibre functor, point of a topos, étale topos, strict henselisation, theorem of the square, dual abelian scheme}
+\end{resume}
+
+\pagerange{1}{10}
+\section*{Le dossier, son ordre, et les conventions}
+
+Le dossier tient en dix pages, dont deux chemises. La première porte de sa
+main « V », souligné, puis « Plan » et « Notations » ; la seconde,
+« Problèmes ouverts ».\footnote{La chemise dit V ; l'inventaire de
+Montpellier classe le dossier sous « EGA VI ». Le plan annoncé en tête d'EGA I
+(1960) donne pour chapitre V les « Procédés élémentaires de construction de
+schémas » et pour chapitre VI la « Technique de descente. Méthodes générales de
+construction de schémas », dont le contenu du dossier — descente, quotients,
+Hilbert, Picard — est manifestement celui-là. Le chiffre de la chemise est
+peut-être celui d'une renumérotation intermédiaire ; la note de la page 4 qui
+renvoie « au besoin dans V » désigne en tout cas le chapitre même que le plan
+décrit, et non un autre.} Entre les deux, trois choses distinctes :
+
+\begin{itemize}
+  \item \emph{Le plan} (pages 2 et 4) : quatre parties A) à D), vingt-deux
+  paragraphes, dont les numéros sont en cours de redistribution — plusieurs
+  sont surchargés, un est biffé, un autre porte « Après § 12 ?? ». Il se
+  termine par une liste de ce qui « manque », c'est-à-dire de ce que ce
+  chapitre suppose traité dans trois autres : les schémas en groupes, Picard,
+  le groupe fondamental.
+  \item \emph{Trois feuilles de travail} : une recommandation de rédaction et
+  une question sur les relations d'équivalence (page 6) ; une liste de sept
+  théorèmes, biffée en entier, sous laquelle un diagramme de douze lettres
+  (page 7) ; la feuille des notations (page 8), qui fixe une douzaine de
+  foncteurs et le formalisme qui les relie.
+  \item \emph{Les problèmes-types à résoudre} (page 10), dix items a) à j),
+  avec dans la marge les paragraphes du plan qui en dépendent et, trois fois,
+  l'état de la question.
+\end{itemize}
+
+Les versos des deux feuilles du plan (pages 3 et 5) portent autre chose : une
+dactylographie de sa main, paginée 31 et 32 par la machine, biffée d'un trait
+diagonal et réemployée comme papier. Elle traite des foncteurs fibres du topos
+étale et n'a aucun rapport avec le plan ; elle est lue en dernier, pour
+elle-même.
+
+\subsection*{L'ordre de lecture}
+
+Le plan se lit dans l'ordre des pages. Pour la dactylographie l'ordre des
+archivistes est l'inverse de celui du texte : la page 5 (sa page 31) précède
+la page 3 (sa page 32), et le paragraphe 7.9.3 ouvert au bas de l'une se
+poursuit en haut de l'autre. La lecture suit le texte.
+
+\subsection*{Les conventions, fixées ici pour tout ce qui suit}
+
+$S$ est un schéma de base, $X$, $Y$ des $S$-schémas, $F$, $G$ des
+$\mathcal{O}_X$-modules quasi-cohérents, $M$ un $\mathcal{O}_S$-module. Un
+prime désigne le changement de base à un $S$-schéma $S'$ : $X' = X \times_S
+S'$, $F' = F \otimes_{\mathcal{O}_S} \mathcal{O}_{S'}$. C'est la convention de
+la page 8, et elle est tenue partout.
+
+Un \emph{foncteur sur $S$} est un foncteur contravariant de la catégorie
+$\mathbf{Sch}_{/S}$ des $S$-schémas vers les ensembles ; tout schéma $Z$ sur
+$S$ en définit un, $S' \mapsto \mathrm{Hom}_S(S', Z)$, et le foncteur est dit
+\emph{représentable} quand il est de cette forme. Le manuscrit écrit chaque
+foncteur trois fois sur sa ligne : doublement souligné pour le foncteur sur
+$S$, simplement souligné pour le faisceau sur un $S'$ donné, sans soulignement
+pour l'ensemble de ses sections.\footnote{Deux flèches de sa main sur la page
+8, « préfaisceau » et « faisceau », désignent les occurrences simplement
+soulignées des lignes Prépic et Prépic$'$ ; c'est ce qui fixe le sens du
+soulignement simple. Le double soulignement des objets représentables est
+l'usage de FGA et de SGA 3.} La lecture ne garde qu'une notation : le
+foncteur, sans décoration, et sa valeur en $S'$ comme un ensemble. Le faisceau
+sur $S'$ n'est nommé que lorsque l'argument en a besoin.
+
+La \emph{restriction de Weil} d'un $Y$-schéma $X$ le long de $Y \to S$, que
+la page écrit $\prod_{Y/S} X/Y$, est écrite $\mathrm{Res}_{Y/S}(X)$ : c'est le
+foncteur $S' \mapsto \mathrm{Hom}_{Y'}(Y', X')$ des sections de $X' \to Y'$.
+Le « module » $\prod_{X/S} F$ de la page 8 est écrit $Q(F)$ ; sa définition
+est donnée en son lieu.
+
+\subsection*{Ce que le dossier annonce et n'établit pas}
+
+Un plan n'établit rien, et ce dossier ne contient pas une démonstration. Ce
+qu'il laisse en outre sans définition : le mot « excellent » appliqué aux
+foncteurs et aux morphismes du § 10 ; le « cas Greenberg » du § 11 ; la
+signification des lettres A à K du diagramme de la page 7, dont seule L est
+glosée ; et le dernier mot de la marge qui accompagne f) sur la page 10, que
+la transcription n'a pas lu.
+
+\pagerange{2}{4}
+\section*{Le plan en quatre parties (feuillets 2 et 4)}
+
+\subsection*{A) Descente et passage au quotient}
+
+Le chapitre s'ouvre sur ce qu'il faut savoir pour redescendre. La
+\emph{descente fidèlement plate} (§ 1) est l'énoncé suivant : si $S' \to S$
+est fidèlement plat et quasi-compact, se donner un objet sur $S$ — un
+module quasi-cohérent, un schéma affine, un schéma quasi-projectif muni de
+son plongement — revient à se donner un objet sur $S'$ et une \emph{donnée de
+descente}, c'est-à-dire un isomorphisme entre ses deux images réciproques sur
+$S' \times_S S'$ vérifiant une condition de cocycle sur le produit
+triple.\footnote{C'est le théorème de SGA 1 VIII, dans sa forme de 1959-1960 ;
+le plan de 1960 le destinait précisément à EGA VI.} Le § 2, qu'il propose
+d'intervertir avec le premier, pose les \emph{topologies} sur
+$\mathbf{Sch}_{/S}$ et les propriétés générales des foncteurs sur cette
+catégorie : ce qu'est un faisceau pour une telle topologie, et le fait que
+tout foncteur représentable en est un pour la topologie fidèlement plate
+quasi-compacte — c'est la descente elle-même, dite dans ce langage, et c'est
+pourquoi l'ordre des deux paragraphes hésite.\footnote{La ligne du § 2 est
+réécrite par-dessus une première rédaction biffée, « Passage aux quotients »,
+et porte en marge « Intervertir 1 et 2 ?? ». La lecture prend le second
+état.}
+
+Le \emph{passage au quotient} vient en deux temps, plat (§ 3) puis non plat
+(§ 5), et de même la descente (§ 4). Le cas plat est celui où la relation
+d'équivalence $R \rightrightarrows X$ est plate sur $X$ : le quotient existe
+alors comme faisceau, et la question est de savoir quand il est un schéma.
+Le cas non plat, pour la descente, est illustré par deux applications
+nommées : le \emph{théorème de Ramanujam--Samuel} généralisé, et un
+\emph{lemme de Hironaka} appliqué à la platitude d'une relation
+schématique.\footnote{Les deux noms sont de sa main ; le second groupe de mots
+est d'une lecture douteuse, « d'une relation schématique ». Le théorème de
+Ramanujam--Samuel est celui d'EGA IV 21.14 sur les diviseurs d'un schéma
+normal fibré ; le lemme de Hironaka est celui d'EGA IV sur les morphismes
+plats à fibres géométriquement réduites. Aucun des deux n'est énoncé ici.}
+Le § 6 étend la descente aux schémas relatifs étales et, entre crochets et
+avec deux points d'interrogation, aux faisceaux étales.
+
+\subsection*{B) Méthodes non projectives de construction}
+
+Le titre lui-même est le résultat d'une correction : « Propriétés générales
+des foncteurs sur $\mathbf{Sch}_{/S}$ » est biffé, « Méthodes non
+projectives » écrit dessous, et « de construction » ajouté d'un
+trait.\footnote{Vient ensuite une ligne encadrée puis biffée, numérotée d'un
+paragraphe lui-même biffé : « Propriétés générales des foncteurs et
+propriétés de permanence ». Elle revient plus bas comme § 10.} Ce que la
+partie contient, dans l'ordre où la numérotation corrigée le laisse
+lire :
+
+\begin{itemize}
+  \item § 7, la \emph{proreprésentabilité} et ses variantes : un foncteur
+  sur les anneaux artiniens locaux qui n'est pas représentable peut l'être
+  par un pro-objet, c'est-à-dire par une limite projective de schémas — de
+  fait par un anneau local complet. C'est la représentabilité
+  « formelle », et c'est l'instrument de toute la partie.\footnote{L'énoncé de
+  référence est celui de l'exposé 195 de Bourbaki (FGA, 1960), sous le nom
+  de « théorème de proreprésentabilité » ; le critère moderne est celui de
+  Schlessinger (1968).}
+  \item § 9, les \emph{invariants différentiels tangents et normaux} d'un
+  foncteur : l'espace tangent $F(S[\varepsilon])$ en un point, et le
+  faisceau normal d'un sous-schéma, qui sont ce qu'un foncteur donne à voir
+  avant qu'on sache s'il est représentable.\footnote{Le numéro est un 8
+  surchargé en 9 ; « tangents et normaux » remplace un mot biffé.}
+  \item § 10, les propriétés générales des foncteurs et leurs propriétés de
+  \emph{permanence} — ce qui se conserve par changement de base, par limite
+  projective filtrante, par descente —, avec dans la marge « foncteurs
+  excellents sur $S$ ; morphismes excellents ?? ».\footnote{Le mot n'est pas
+  défini dans le dossier, et rien ne dit qu'il ait le sens des anneaux
+  excellents d'EGA IV 7.8. La ligne porte « Après § 12 ?? ».}
+  \item § 11, les \emph{représentabilités élémentaires} du type
+  $\mathrm{Res}_{Y/S}(X)$ : la restriction de Weil d'un $Y$-schéma affine, ou
+  quasi-projectif, le long d'un morphisme fini et plat $Y \to S$ est
+  représentable ; il renvoie pour cela à SGA 3, exposés VIII (§ 6) et XI
+  (6.8), et mentionne le « cas Greenberg ».\footnote{La lettre sous le
+  signe de restriction est un X surchargé ; la lecture prend Y, comme sur la
+  feuille des notations où la même surcharge se lit. Le foncteur de Greenberg
+  est la restriction de Weil le long des vecteurs de Witt tronqués, et c'est
+  le seul sens que « cas Greenberg » puisse avoir ici.}
+  \item § 8, la \emph{construction de modules cohérents} : c'est le
+  $Q(F)$ de la page 8, le module cohérent sur $S$ qui représente le foncteur
+  $M \mapsto H^0(X, F \otimes M)$.\footnote{Le numéro est surchargé et se lit
+  8 ; sa place dans la liste, après le § 11, est celle de la page.}
+  \item § 12, les foncteurs \emph{représentables par des morphismes
+  localement de présentation finie} — ce qui, pour un foncteur, se lit sur sa
+  commutation aux limites inductives filtrantes d'anneaux.\footnote{Un mot
+  biffé, « Représentabilité », est remplacé par « Foncteurs ». Le critère est
+  celui d'EGA IV 8.14.2.}
+  \item § 13, les applications : des théorèmes de représentabilité
+  \emph{relatifs}, y compris pour les foncteurs étales.
+\end{itemize}
+
+\subsection*{C) Méthodes projectives de construction}
+
+Ce sont les constructions de FGA. Les \emph{familles limitées} (§ 14) — une
+famille de faisceaux cohérents sur les fibres d'un schéma projectif est
+limitée si elle est contenue dans une famille algébrique paramétrée par un
+schéma de type fini — sont le lemme de finitude qui rend les espaces de
+Hilbert de type fini.\footnote{Le mot est d'une lecture douteuse, « limitées » ;
+c'est le terme des exposés 221 et 232 de FGA.} Viennent les foncteurs et
+schémas de \emph{Hilbert} (§ 15), avec leurs applications aux quotients ; les
+foncteurs et schémas de \emph{Picard} (§ 16), « théorèmes d'existence
+projectifs exclusivement », et le cas de groupes structuraux affines
+commutatifs plus généraux que $\mathbb{G}_m$ — c'est-à-dire $H^1(X, G)$ pour
+$G$ commutatif affine, dont Pic est le cas $G =
+\mathbb{G}_m$\footnote{Trois mots de cette parenthèse sont d'une lecture
+douteuse : « groupes structuraux affines » et « généraux ».} ; les variantes
+de Picard (§ 17) ; les applications aux courbes (§ 18) ; le formalisme des
+\emph{normes} (§ 18 encore, la numérotation ne se suivant plus) ; et les
+invariants multiprojectifs de Mumford (§ 20), c'est-à-dire la théorie des
+invariants de points dans un produit d'espaces projectifs, que Mumford venait
+de mettre au service des modules.\footnote{« multiprojectifs » est d'une
+lecture douteuse. Les numéros de la colonne § 16 à § 20 sont surchargés et la
+lecture les transcrit tels qu'ils se lisent ; le référence est \emph{Geometric
+Invariant Theory} (1965).}
+
+\subsection*{D) Méthodes mixtes de construction}
+
+Deux paragraphes. Les cas de représentabilité de $\mathrm{Pic}$, de sa
+composante neutre $\mathrm{Pic}^{\circ}$ et de $\mathrm{Pic}^{\tau}$, la
+réunion des composantes de torsion (§ 21), « y compris le cas de Mumford
+utilisant § 20 » ; et les cas de représentabilité des foncteurs
+$\mathrm{Res}_{Y/S}(X)$ et semblables (§ 22), « théorèmes du type
+Matsumura » — la représentabilité des foncteurs d'automorphismes et de
+morphismes de schémas projectifs par un schéma en groupes localement de type
+fini, obtenue par Matsumura et Oort au moyen du schéma de
+Hilbert.\footnote{Le numéro du § 21 est un 20 surchargé. Le théorème de
+Matsumura--Oort est de 1967, ce qui est cohérent avec la datation de
+l'inventaire, « [après 1967] ».}
+
+\subsection*{Ce qui est supposé connu, et ce qui manque}
+
+Une note isolée entre deux traits pose que tous les généralités fondamentales
+— topologies, descente, faisceaux, quotient — sont supposées connues, et
+rappelées au besoin dans le chapitre même.\footnote{« rappelés » et le « V »
+qui suit sont d'une lecture douteuse.} Puis, sous le mot « Manquent », ce que
+ce chapitre laisse à trois autres :
+
+\begin{itemize}
+  \item au chapitre sur les \emph{schémas en groupes} : les théorèmes relatifs
+  aux variétés abéliennes ; les théorèmes de finitude sur Picard et l'étude
+  qualitative générale des schémas de Picard, critère de lissité de Mumford
+  compris ;
+  \item au chapitre sur \emph{Picard} : l'étude du Picard d'un schéma
+  projectif en termes d'un pinceau de sections hyperplanes, et les théorèmes
+  du genre « certaines équivalences » ;\footnote{Les deux derniers mots sont
+  d'une lecture douteuse.}
+  \item au chapitre sur $\pi_1$ : les formulations de la descente en termes du
+  groupe fondamental, van Kampen compris.
+\end{itemize}
+
+Les trois chapitres sont ceux que le plan de 1960 numérote VII, VIII et IX, ou
+leurs successeurs ; ce que le § 21 appelle « le cas de Mumford » est la
+construction du schéma de Picard des courbes par la théorie des invariants.
+
+\pagerange{6}{6}
+\section*{Couvrant plutôt que fidèlement plat, et les relations d'équivalence en pièces détachées (feuillet 6)}
+
+La feuille porte deux choses. D'abord, sous le titre « Recommandation
+importante » :
+
+\begin{quote}
+Partout où c'est possible, remplacer « fidèlement plat quasi-compact » par
+« couvrant ».
+\end{quote}
+
+C'est une décision de rédaction, et elle porte loin. Les théorèmes de
+descente sont démontrés pour un morphisme $S' \to S$ fidèlement plat et
+quasi-compact ; mais ce que la preuve utilise n'est pas la platitude, c'est
+que $S' \to S$ soit un \emph{recouvrement} pour la topologie dans laquelle on
+travaille, c'est-à-dire que les foncteurs en jeu soient des faisceaux pour
+elle. Énoncer la descente pour un morphisme « couvrant » — un morphisme qui
+est un recouvrement à lui seul — c'est la rendre vraie pour toute topologie
+à la fois, la fidèlement plate quasi-compacte n'en étant qu'une, et c'est
+séparer ce que le théorème dit de ce qui le fait marcher.\footnote{Le mot
+« couvrant » est celui de SGA 3 IV et de SGA 4 II : un morphisme est couvrant
+pour une topologie s'il engendre, à lui seul, un crible couvrant. La
+recommandation revient à formuler la descente dans le langage des sites du
+§ 2, et non plus dans celui de SGA 1.}
+
+Ensuite, une question : « (pré)-relations d'équivalence en pièces
+détachées !? », et un diagramme entouré,
+\[
+  (R_0^{i}) \leftleftarrows (R_1^{ij}) .
+\]
+La lecture est celle-ci. Une relation d'équivalence sur $X$ est une paire
+$R_1 \rightrightarrows R_0 = X$ ; la donner « en pièces détachées », c'est
+donner $R_0$ par morceaux $R_0^{i}$ — un recouvrement de $X$ — et $R_1$ par
+les morceaux $R_1^{ij}$ qui relient le $i$-ième au $j$-ième, avec les deux
+projections de $R_1^{ij}$ vers $R_0^{i}$ et $R_0^{j}$. C'est exactement ce
+qu'est un atlas : un espace quotient présenté par des cartes et par les
+changements de cartes. Le point d'exclamation et le point d'interrogation
+sont les siens.\footnote{La page ne donne que le diagramme, et la lecture est
+la nôtre. Des deux flèches, seule l'inférieure porte une pointe lisible, et
+un signe biffé précède la formule. Le quotient d'un tel atlas est ce qu'Artin
+appellera en 1969 un espace algébrique, quand les $R_0^{i}$ sont affines et
+les projections étales.}
+
+\pagerange{7}{7}
+\section*{La liste biffée et le diagramme des douze lettres (feuillet 7)}
+
+La page est biffée en entier par quatre longs traits, et ses cinq premières
+lignes une seconde fois. Ce qu'elle porte est une liste de théorèmes, sans
+numéros :
+
+\begin{enumerate}
+  \item le théorème de \emph{finitude} pour les schémas de Hilbert — chaque
+  $\mathrm{Hilb}^{P}$, à polynôme de Hilbert fixé, est projectif ;
+  \item le théorème de \emph{Matsusaka} pour les automorphismes d'une variété
+  polarisée — le groupe des automorphismes conservant une polarisation est de
+  type fini ;
+  \item le théorème de la « courbe générique » pour Picard — le Picard d'une
+  variété se lit sur celui d'une section hyperplane générique ;
+  \item le schéma de Hilbert d'une courbe sur $S$, et le Picard des courbes
+  sur $S$, avec entre crochets « diviseur $\Theta$ » ;
+  \item le Picard d'un schéma propre non projectif sur un corps ;
+  \item le Picard d'un $S$-schéma projectif à fibres réductibles, par exemple
+  d'une courbe sur $S$.
+\end{enumerate}
+
+Les deux derniers sont ceux qui n'étaient pas acquis. Le premier a été
+établi par Murre (1964) pour un schéma propre sur un corps ; le second est le
+sujet de la « Spécialisation du foncteur de Picard » de Raynaud (1970), où
+l'on voit précisément que, pour une courbe sur un anneau de valuation
+discrète à fibre spéciale réductible, le foncteur de Picard n'est pas
+représentable sans correction.\footnote{Les dates sont celles de la
+littérature ; rien sur la page ne dit lesquels de ces théorèmes il tenait pour
+faits. Un mot biffé suit « courbe » à la ligne 4.}
+
+Sous la liste, un diagramme de douze lettres, $A$ à $L$, sans autre légende :
+
+\begin{tikzcd}[column sep=small, row sep=large]
+  A \arrow[r] & B \arrow[d] \arrow[drr] & C \arrow[dl] \arrow[dr] & D \arrow[dr] \arrow[rr, bend left=25] & E \arrow[d] & J & K \\
+  & H \arrow[dr] & & G \arrow[dl] & F \arrow[l] & & \\
+  & & I & & & &
+\end{tikzcd}
+
+Puis, sous un trait, « $L$ — Appendice : problèmes ouverts ». C'est la seule
+lettre glosée, et elle dit ce que sont les autres : les parties d'un plan
+plus grand que le chapitre, dont $L$ est l'appendice, et dont les flèches
+sont les dépendances — $G$ reçoit $B$, $C$ et $F$, $I$ reçoit $H$ et $G$, $D$
+mène à $F$ et par-dessus $E$ à $J$ ; $K$ ne dépend de rien et rien ne dépend
+de lui.\footnote{Lecture nôtre : la page ne nomme pas les lettres. Le
+diagramme distingue trois flèches épaisses, $B \to G$, $C \to G$ et $D \to F$,
+d'une flèche ondulée $A \to B$ et de flèches fines ; la lecture n'en tire
+rien.}
+
+\pagerange{8}{8}
+\section*{Les notations : douze foncteurs et leur mode d'emploi (feuillet 8)}
+
+La feuille fixe, pour tout le chapitre, les foncteurs qu'il s'agit de
+construire, en donnant pour chacun sa valeur en un $S$-schéma $S'$. Dans la
+marge droite, une colonne de lettres dit ce qui varie : $F$ pour Quot, $X$
+pour tous les suivants jusqu'à Imm, $Y$ pour la restriction de Weil, $X$ pour
+les Picard, $G$ pour le dernier bloc.
+
+\subsection*{De Quot à Imm}
+
+Pour $F$ quasi-cohérent sur $X$ et $X$ sur $S$ :
+\begin{align*}
+  \mathrm{Quot}_{F/X/S}(S') &= \mathrm{Quot}(F'/X'/S') , \\
+  \mathrm{Hilb}_{X/S}(S') &= \mathrm{Hilb}(X'/S') = \mathrm{Quot}_{\mathcal{O}_X/X/S}(S') , \\
+  \mathrm{Div}_{X/S}(S') &= \mathrm{Div}(X'/S') .
+\end{align*}
+Le premier est l'ensemble des quotients de $F'$ plats sur $S'$ ; le second,
+celui des sous-schémas fermés de $X'$ plats sur $S'$, qui est le cas $F =
+\mathcal{O}_X$, comme la ligne le dit ; le troisième, celui des diviseurs de
+Cartier effectifs relatifs de $X'/S'$.\footnote{La page écrit « Div » suivi,
+trois fois, de lettres gribouillées jusqu'à l'illisible ; le nom du foncteur
+est le nôtre, et c'est le seul que cette ligne puisse porter : le sous-foncteur
+de Hilb des sous-schémas qui sont des diviseurs de Cartier relatifs.} Puis,
+pour $X$ et $Y$ sur $S$ :
+\begin{align*}
+  \mathrm{Hom}_S(X, Y)(S') &= \mathrm{Hom}_{S'}(X', Y') = \mathrm{Hom}_S(X \times_S S', Y) , \\
+  \mathrm{Isom}_S(X, Y)(S') &= \mathrm{Isom}_{S'}(X', Y') , \\
+  \mathrm{Aut}_S(X)(S') &= \mathrm{Aut}_{S'}(X') , \\
+  \mathrm{Imm}_S(X, Y)(S') &= \mathrm{Imm}_{S'}(X', Y') ,
+\end{align*}
+le dernier étant l'ensemble des immersions de $X'$ dans $Y'$. Chacun est un
+faisceau pour la topologie fidèlement plate quasi-compacte, par descente ;
+leur représentabilité, quand $X$ est projectif et plat sur $S$ et $Y$
+quasi-projectif, est le théorème « du type Matsumura » du § 22, obtenu en
+plongeant $\mathrm{Hom}$ dans le schéma de Hilbert de $X \times_S Y$ par le
+graphe.
+
+\subsection*{La restriction de Weil, et les sections}
+
+Pour $Y$ sur $S$ et $X$ sur $Y$, la ligne suivante définit
+\[
+  \mathrm{Res}_{Y/S}(X)(S') = \Gamma_{Y'/S'}(X'/Y') = \Gamma(X'/Y') ,
+\]
+l'ensemble des sections de $X' \to Y'$ ; et, en marge, écrit la même chose
+comme $\Gamma_{Y/S}(X/Y) = H^{0}_{Y/S}(X/Y)$ : le foncteur des sections est
+un $H^0$ relatif.\footnote{Sous le signe de restriction, une accolade et le
+mot « ou », puis la seconde écriture à la marge gauche ; un mot biffé précède
+$\underline{\Gamma}_{Y'/S'}$ dans le membre du milieu. Les deux barres de
+fraction de la ligne marginale sont repassées d'un trait épais, et la lettre
+sous le signe de restriction est un X surchargé en Y.} La notation $H^0$ est
+celle qui annonce le bloc suivant : les $H^{i}_{X/S}$ sont les images directes
+supérieures $R^{i}f_{*}$ de $f : X \to S$, vues comme foncteurs sur $S$.
+
+\subsection*{Les trois Picard}
+
+C'est la ligne la plus travaillée de la feuille. Il y a trois foncteurs, et
+la page en dit la différence par deux flèches, « préfaisceau » et
+« faisceau » :
+\begin{align*}
+  \text{Prépic}_{X/S}(S') &= \mathrm{Pic}(X') = H^{1}(X', \mathcal{O}_{X'}^{*}) , \\
+  \text{Prépic}'_{X/S}(S') &= \Gamma\bigl(S', R^{1}f'_{*}\mathcal{O}_{X'}^{*}\bigr) , \\
+  \mathrm{Pic}_{X/S} &= \widetilde{\text{Prépic}}_{X/S} .
+\end{align*}
+Le premier est le foncteur de Picard \emph{naïf} : le groupe de Picard de
+$X'$ lui-même. Le second est sa faisceautisation pour la topologie de Zariski
+de $S'$ : les sections du faisceau $R^{1}f'_{*}\mathcal{O}^{*}$ sur $S'$,
+c'est-à-dire les classes de fibrés en droites sur $X'$ localement sur $S'$.
+Le troisième est le faisceau associé au premier pour la topologie du § 2 —
+fidèlement plate quasi-compacte, ou étale —, et c'est lui seul qui a une
+chance d'être représentable, parce qu'un foncteur représentable est un
+faisceau.\footnote{La page écrit le troisième comme
+$\underline{\mathrm{Pic}}_{X/S}(S') = \Gamma(S', \underline{\mathrm{Pic}}_{X'/S'})
+= \mathrm{Pic}(X'/S')$, puis $= \widetilde{\text{Prépic}}_{X/S}(S')$,
+le tilde couvrant « Prépic » ; la première ligne portait à la suite une
+égalité « $= H^1(\ldots) = \Gamma(S', H^1_{\ldots})$ » recouverte de hachures,
+et « $= H^1(X', \mathcal{O}_{X'}^{*})$ » réécrit au-dessus. Ce sont, à la
+lettre, les trois foncteurs $\mathrm{Pic}_{(X/S)}$, $\mathrm{Pic}_{(X/S)(\mathrm{zar})}$
+et $\mathrm{Pic}_{(X/S)(\mathrm{\acute{e}t})}$ de l'exposé de Kleiman
+(\emph{The Picard scheme}, 2005), qui suit FGA 232.} Le passage du second au
+troisième est ce qui fait apparaître les classes de fibrés qui n'existent
+que localement sur $S'$ pour une topologie plus fine, et c'est sur lui que
+portent les théorèmes de comparaison : les trois coïncident dès que $f$ admet
+une section et que $f_{*}\mathcal{O}_X = \mathcal{O}_S$ universellement.
+
+\subsection*{Le module $Q(F)$, et le formalisme $\mathrm{Hom}$ et $V$}
+
+Le dernier bloc, numéroté « 2. », fixe un formalisme pour les modules. Soit
+$f : X \to S$ propre, $F$ cohérent sur $X$ et plat sur $S$. Le foncteur $M
+\mapsto H^{0}(X, F \otimes_{\mathcal{O}_S} M)$, sur les $\mathcal{O}_S$-modules,
+est représentable : il existe un $\mathcal{O}_S$-module cohérent $Q(F)$,
+\emph{contravariant en $F$}, avec
+\[
+  \mathrm{Hom}_{\mathcal{O}_S}\bigl(Q(F), M\bigr) = H^{0}\bigl(X, F \otimes_{\mathcal{O}_S} M\bigr) ,
+  \qquad
+  \underline{\mathrm{Hom}}_{\mathcal{O}_S}\bigl(Q(F), M\bigr) = f_{*}\bigl(F \otimes_{\mathcal{O}_S} M\bigr) ,
+\]
+la seconde égalité étant la première, faisceau par faisceau sur $S$, et
+$Q(F)$ commutant au changement de base.\footnote{C'est le module $Q$ d'EGA
+III 7.7.6, où $F$ est supposé plat sur $S$ ; l'hypothèse n'est pas sur la page
+et la lecture la fournit. « contravariant en F » est écrit au-dessus des deux
+membres de gauche, avec une accolade. Le manuscrit écrit $Q(F)$ comme
+$\prod_{X/S} \underline{F}$, du même signe que la restriction de Weil.} Soit
+$V(E) = \mathrm{Spec}\,\mathrm{Sym}(E)$ le fibré vectoriel associé à un
+module $E$, dont les $S'$-points sont $\mathrm{Hom}_{\mathcal{O}_{S'}}(E', \mathcal{O}_{S'})$.
+Les deux lignes suivantes de la page affirment que $V$ commute à $Q$ et à la
+restriction de Weil, et identifient le résultat :
+\[
+  V\bigl(Q(F)\bigr) = \mathrm{Res}_{X/S}\bigl(V(F)\bigr) = \mathrm{Hom}_{X/S}(F, \mathcal{O}_X) ,
+\]
+où le dernier membre est le foncteur $S' \mapsto \mathrm{Hom}_{\mathcal{O}_{X'}}(F', \mathcal{O}_{X'})$.
+
+La seconde égalité est vraie, et immédiate : les $S'$-points de
+$\mathrm{Res}_{X/S}(V(F))$ sont les $X'$-points de $V(F)$, c'est-à-dire
+$\mathrm{Hom}_{\mathcal{O}_{X'}}(F', \mathcal{O}_{X'})$. La première ne l'est pas
+telle qu'elle est écrite. Par la propriété universelle de $Q$ et sa
+commutation au changement de base, les $S'$-points de $V(Q(F))$ sont
+$\mathrm{Hom}_{\mathcal{O}_{S'}}(Q(F'), \mathcal{O}_{S'}) = H^{0}(X', F')$ : le
+fibré $V(Q(F))$ représente le foncteur des sections de $F$, et non celui des
+formes linéaires sur $F$. Ce que les deux lignes disent de vrai est
+\[
+  V\bigl(Q(F^{\vee})\bigr) = \mathrm{Res}_{X/S}\bigl(V(F)\bigr) = \mathrm{Hom}_{X/S}(F, \mathcal{O}_X) ,
+  \qquad F^{\vee} = \mathcal{H}om_{\mathcal{O}_X}(F, \mathcal{O}_X) ,
+\]
+pour $F$ localement libre : c'est le module de la ligne (i) appliqué au dual,
+et c'est la lecture que le bas de la page impose.\footnote{La page écrit la
+troisième égalité entourée, précédée d'un « ? », et suivie dans la marge de
+« Notation opportune ??? » ; la ligne qui suit, «
+$\mathrm{Hom}_{X/S}(F,G)(S') = \Gamma(S', \ldots) = \mathrm{Hom}_{\mathcal{O}_{X'}}(F', G')$ »,
+est encadrée puis biffée de hachures, et un second départ au-dessus l'est
+aussi. Ce qui l'arrête est double : le même symbole $\mathrm{Hom}_{X/S}(F, G)$
+lui sert pour un foncteur et pour le module qui le représente, et le
+$\prod_{X/S} F$ défini par (i) est $Q(F)$ là où (ii) et (iii) demandent
+$Q(F^{\vee})$ — les deux sont contravariants en $F$, et se distinguent par
+une dualité que la notation ne montre pas. La lecture affirme ce qui est
+vrai et laisse à la page son point d'interrogation.}
+
+La feuille se termine par le cas général de deux modules, où
+$\mathrm{Hom}_{X/S}(F, G)$ est le module cohérent sur $S$ tel que
+\begin{align*}
+  \mathrm{Hom}_{\mathcal{O}_S}\bigl(\mathrm{Hom}_{X/S}(F, G), M\bigr)
+    &= \mathrm{Hom}_{\mathcal{O}_X}\bigl(F, G \otimes_{\mathcal{O}_S} M\bigr) , \\
+  \mathrm{Hom}_{\mathcal{O}_{S'}}\bigl(\mathrm{Hom}_{X/S}(F, G) \otimes_{\mathcal{O}_S} \mathcal{O}_{S'}, \mathcal{O}_{S'}\bigr)
+    &= \mathrm{Hom}_{\mathcal{O}_{X'}}(F', G') ,
+\end{align*}
+et de même faisceau par faisceau sur $S$. Ce module est
+$Q(\mathcal{H}om_{\mathcal{O}_X}(F, G))$ ; il existe pour $F$ et $G$ cohérents,
+$G$ plat sur $S$ et $f$ propre, et la seconde ligne dit que le fibré
+vectoriel $V$ de ce module représente le foncteur $S' \mapsto
+\mathrm{Hom}_{\mathcal{O}_{X'}}(F', G')$ — c'est le théorème d'EGA III 7.7.8,
+et, pour $G = \mathcal{O}_X$, la forme vraie des deux lignes
+précédentes.\footnote{La page écrit trois lignes, deux à gauche dans une
+accolade, la troisième à droite ; l'indice $\mathcal{O}_X$ de la première
+est suivi d'un pâté, et dans la troisième l'indice $X/S$ du dernier
+$\mathrm{Hom}$ est barré d'un trait — la même hésitation de notation que plus
+haut. L'hypothèse de platitude de $G$ n'est pas sur la page ; elle est
+nécessaire à la commutation au changement de base qui fait la seconde ligne.}
+
+\pagerange{10}{10}
+\section*{Les problèmes-types à résoudre (feuillet 10)}
+
+Dix problèmes, lettrés a) à j), séparés en quatre groupes par des traits.
+Dans la marge, entourés, les paragraphes du plan qui en dépendent, et trois
+fois une réponse. La lecture donne pour chacun ce que la page dit, puis ce
+qu'il est devenu.
+
+\begin{enumerate}
+  \item[a)] \emph{Anneaux de définition pour des structures sans
+  automorphismes} (§ 7). Une structure algébrique définie sur une extension
+  et sans automorphisme non trivial descend-elle à un plus petit anneau,
+  canoniquement ? C'est la question du corps de définition, et la
+  proreprésentabilité est l'instrument qui la traite : quand le foncteur des
+  déformations est proreprésentable et les automorphismes triviaux, l'anneau
+  qui le proreprésente est l'anneau de définition cherché. Encadré d'un trait
+  épais.
+  \item[b)] \emph{Hilbert et Picard sans hypothèse projective} (§§ 20, 21 ;
+  chapitre VI), avec « résultats partiels ». Puis : le \emph{dual d'un schéma
+  abélien non projectif}, marqué « OK par Raynaud ».\footnote{« Dual » est
+  d'une lecture douteuse ; l'existence du schéma abélien dual sans hypothèse
+  projective est le théorème de Raynaud de \emph{Faisceaux amples sur les
+  schémas en groupes et les espaces homogènes} (1970), et c'est ce qui
+  justifie la lecture. Le premier problème a été résolu par Artin en 1969,
+  Hilbert et Picard d'un schéma propre plat existant comme espaces
+  algébriques ; « résultats partiels » est l'état d'avant.}
+  \item[c)] \emph{Passage au quotient sans hypothèse de platitude} (§§ 3, 4).
+  Encadré d'un trait épais. C'est le problème des quotients par une relation
+  d'équivalence non plate, résolu pour les relations finies par Keel et Mori
+  en 1997, et dont le cas général est celui des champs.
+  \item[d)] \emph{Passage aux quotients par $\mathrm{GL}_n$ opérant « sans
+  point fixe »}, avec « Mumford » en marge, relié aux items d) et e) : le
+  quotient d'un schéma par une action libre du groupe linéaire. C'est la
+  question à laquelle la théorie géométrique des invariants répond pour les
+  points stables, et Artin pour les actions libres, le quotient existant alors
+  comme espace algébrique.
+  \item[e)] \emph{Modules de variétés plus ou moins quelconques}, et le cas des
+  schémas abéliens. Le second est le résultat central de Mumford (1965) ; le
+  premier est ce que les champs algébriques formalisent.
+  \item[f)] \emph{Classification des fibrés principaux} sur $X/Y$ à groupe
+  affine $G$ sur $Y$, en distinguant $G$ commutatif — c'est $H^1(X, G)$, un
+  Picard généralisé, et le § 16 — de $G$ non commutatif. En marge :
+  « Mumford--Seshadri--Narasimhan pour fibrés vectoriels ; cas fini :
+  \ldots ».\footnote{Le dernier mot de la marge n'a pas été lu ; « pour » est
+  d'une lecture douteuse. Les noms sont ceux des fibrés stables sur une courbe
+  (Mumford 1963, Narasimhan et Seshadri 1965). Un « § 17 », entouré, est relié
+  d'un trait à la ligne « $G$ commutatif » et à g).}
+  \item[g)] Le cas particulier $G$ fini : les revêtements galoisiens de
+  groupe donné.
+  \item[h)] Le cas particulier $X = \mathbb{P}^{1}_{Y}$, $G = \mathrm{GL}(n)$,
+  avec en marge « Pb mal posé ? ». Les fibrés vectoriels sur la droite
+  projective sur un corps sont classés — c'est son théorème de 1957, tout
+  fibré est somme de $\mathcal{O}(a_i)$ — mais en famille sur $Y$ le type de
+  scindage saute par spécialisation, et le foncteur des fibrés n'est pas
+  séparé : il n'y a pas d'espace de modules au sens où la question le
+  demande. Le point d'interrogation est le sien, et la réponse est oui.
+  \item[i)] \emph{Les modules formels d'une variété abélienne sont-ils simples
+  sur l'anneau de base ?} (chapitre VI), avec « Oui » entouré. Le foncteur
+  des déformations d'une variété abélienne est formellement lisse : ses
+  obstructions sont nulles, et l'anneau qui le proreprésente est un anneau de
+  séries formelles en $g^2$ variables.\footnote{« l'anneau de base » est
+  d'une lecture douteuse, et un mot biffé précède « sont-ils » ; « simples »
+  est souligné. La lissité des déformations d'une variété abélienne est due à
+  Grothendieck lui-même et à Mumford, la démonstration publiée étant celle de
+  Oort (1971).}
+  \item[j)] Le \emph{théorème du carré} dans le cas non projectif. Encadré
+  d'un trait épais. Pour un schéma abélien $A/S$ le théorème du carré —
+  $t_{x+y}^{*}L \otimes L \simeq t_x^{*}L \otimes t_y^{*}L$ — se démontre par
+  le théorème du cube, dont la preuve classique passe par un plongement
+  projectif ; sans lui, c'est encore Raynaud (1970) qui l'obtient.\footnote{La
+  transcription avait d'abord lu « cône » ; une reprise du feuillet lit
+  « carré », et la transcription a été corrigée avant cette lecture. Un
+  théorème « du cône » n'aurait ici aucun sens.}
+\end{enumerate}
+
+\pagerange{3}{5}
+\section*{Le verso : les foncteurs fibres du topos étale (feuillets 5 et 3)}
+
+Les versos des deux feuilles du plan portent deux pages dactylographiées,
+numérotées 31 et 32, d'un texte sans rapport avec le chapitre : la fin d'une
+démonstration et deux remarques sur les \emph{foncteurs fibres} d'un topos,
+c'est-à-dire ses points. Le texte est celui du n° 7.9 de l'exposé VIII de
+SGA 4, où il est établi que tout point du topos étale d'un schéma provient
+d'un point géométrique.\footnote{L'identification est la nôtre, faite sur la
+numérotation 7.9.1 à 7.9.3 et sur le contenu ; les deux pages sont biffées
+d'un trait diagonal, ce qui est le sort d'un brouillon dont la version
+suivante existe.} La lecture suit l'ordre du texte, page 5 puis page 3.
+
+\subsection*{Un foncteur fibre est une limite inductive d'évaluations}
+
+Soit $C$ un site où les limites projectives finies existent, $\widetilde{C}$
+son topos, $\varphi : \widetilde{C} \to \mathbf{Ens}$ un foncteur fibre — un
+foncteur exact à gauche commutant aux limites inductives. On lui associe la
+catégorie $C_\varphi$ des couples $(Y, \xi)$ avec $Y$ objet de $C$ et $\xi \in
+\varphi(Y)$, un morphisme $(Y, \xi) \to (Y_1, \xi_1)$ étant un morphisme $Y
+\to Y_1$ qui envoie $\xi$ sur $\xi_1$. Ce sont les \emph{voisinages} du point.
+La page établit que l'homomorphisme évident
+\[
+  (\ast) \qquad \varinjlim_{(Y, \xi) \in C_\varphi^{\circ}} \mathrm{Hom}(Y, -) \longrightarrow \varphi
+\]
+est un isomorphisme.\footnote{Le texte écrit $\check{Y}$ pour le foncteur
+$F \mapsto F(Y) = \mathrm{Hom}(Y, F)$ et $\widetilde{Y}$ pour le faisceau
+associé à $Y$ ; la lecture n'écrit que $Y$, le site étale étant sous-canonique.}
+L'homomorphisme existe parce que
+\[
+  \mathrm{Hom}\Bigl(\varinjlim_{C_\varphi^{\circ}} \mathrm{Hom}(Y, -),\, \varphi\Bigr)
+  = \varprojlim_{C_\varphi} \mathrm{Hom}\bigl(\mathrm{Hom}(Y, -), \varphi\bigr)
+  = \varprojlim_{C_\varphi} \varphi(Y)
+\]
+par Yoneda, et que le second membre possède l'élément canonique qui associe
+à $(Y, \xi)$ l'élément $\xi$. C'est un isomorphisme pour trois raisons,
+données dans l'ordre : les limites projectives finies existent dans $C$ et
+$\varphi$ y commute, donc elles existent dans $C_\varphi$, donc
+$C_\varphi^{\circ}$ est pseudo-filtrante et la limite inductive de $(\ast)$
+est exacte à gauche ; tout faisceau est limite inductive de représentables ;
+et $\varphi$ commute aux limites inductives. Un foncteur fibre est donc
+\emph{pro-représentable}, par le pro-objet de ses voisinages — c'est la forme
+que prend ici la proreprésentabilité du § 7 du plan.
+
+\subsection*{Les points d'un topos localisé}
+
+Remarque 7.9.2. Si $E$ est un topos et $Y$ un objet de $E$, les foncteurs
+fibres du topos localisé $E_{/Y}$ sont les couples $(\varphi, \xi)$ d'un
+foncteur fibre $\varphi$ de $E$ et d'un élément $\xi \in \varphi(Y)$. Dans un
+sens : à $\psi : E_{/Y} \to \mathbf{Ens}$ on associe $\varphi(Z) = \psi(Z
+\times Y)$, et $\xi$ est l'image de l'unique élément de $\psi(Y)$ — $Y$ est
+l'objet final de $E_{/Y}$ — par la diagonale $Y \to Y \times Y$.
+
+\subsection*{Les points du topos étale sont les points géométriques}
+
+Soit $X$ un schéma et $\varphi$ un foncteur fibre de son topos étale
+$\widetilde{X}_{\text{ét}}$. Restreint aux ouverts du topos — qui sont les
+ouverts $U$ de $X$ —, $\varphi$ donne une application $\varphi_0 :
+\mathcal{U}(X) \to \{0, 1\}$, valant $1$ si $\varphi(U)$ est non vide,
+commutant aux sup quelconques et aux inf finis. Parce que tout fermé
+irréductible de $X$ a un unique point générique — $X$ est \emph{sobre} —,
+une telle application est donnée par un unique point $x \in X$ : $\varphi(U)
+\neq \emptyset$ si et seulement si $x \in U$.\footnote{Le texte écrit « sss »
+pour « si et seulement si ». Deux mots biffés, et quatre coquilles de frappe
+— « réduit un point », « génerique », « defini », « précéde » —, sont
+laissés à la transcription.} Pour un faisceau $F$ quelconque, son image dans
+le faisceau final est un ouvert $U$, et $\varphi(F) \to \varphi(U)$ est
+surjectif ; donc $\varphi(F) \neq \emptyset$ si et seulement si $x \in U$.
+
+Soit alors $C_\varphi$ la catégorie des couples $(X', \xi)$, $X'$ étale sur
+$X$ et $\xi \in \varphi(X')$ ; on a vu en 7.9.1 qu'elle est pseudo-filtrante
+et connexe. Par 7.9.2 et ce qui précède appliqué à $X'$, chaque $(X', \xi)$
+détermine un point $x' \in X'$, tel que pour $X'' \to X'$ étale, $\xi$ est
+dans l'image de $\varphi(X'') \to \varphi(X')$ si et seulement si $x'$ est
+dans l'image de $X''$. La limite projective des $X'$ suivant $C_\varphi$
+existe donc — les $X'$ sont affines à partir d'un certain rang — et c'est un
+\emph{localisé strict} $Z$ de $X$, le spectre d'un hensélisé strict de
+$\mathcal{O}_{X,x}$ ; il correspond à un point géométrique $\bar\xi$ de $X$ au-dessus
+de $x$, et $\varphi$ est le foncteur fibre en $\bar\xi$, $F \mapsto
+F_{\bar\xi}$.\footnote{Le dernier symbole de la page 3 est un glyphe manuscrit
+épais, indexé $\xi$, que la transcription lit avec doute comme
+$\mathcal{E}_\xi$ ; la lecture l'écrit $F \mapsto F_{\bar\xi}$, ce que le
+raisonnement impose quel que soit le signe. L'énoncé est SGA 4 VIII 7.9 : la
+catégorie des points de $X_{\text{ét}}$ est équivalente à celle des points
+géométriques de $X$, les morphismes étant les spécialisations.}
+
+\end{document}
