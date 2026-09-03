@@ -1,0 +1,961 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 47, pages 1-10.
+%
+% This is an INTERPRETATION, not a transcription. Everything the critical
+% apparatus carried moves into footnotes. In any dispute of substance the
+% transcription governs: whoever cites Grothendieck must cite batch-01.fr.tex.
+%
+% Pass: Fable 5.1 (claude-fable-5-1), 2026-09-03 — first pass, unchecked against
+% the pages by a human. The folder was read whole; it holds one batch, pages
+% 1-10, of which page 1 is a cover sheet in his hand and pages 2-10 one
+% continuous run of mathematics. The skill admitted Fable 5.1 on 2026-09-03 and
+% says the two permitted models are not measured against each other.
+%
+% Notation fixed for the whole document. Derived functors are written without
+% his blackboard R and L: pr_{2*}, f^* denote the derived functors on
+% D_parf, and (x) the derived tensor product, as is now usual; the one place
+% where an underived operation is meant (tensoring with a line bundle) is the
+% same either way. The Pontrjagin product is F * G = m_*(F ⊠ G), with m the
+% group law and ⊠ the external tensor product over S. The Weil sheaf — the
+% Poincaré bundle, in today's name — on A x B is L or W as on the page; the
+% sheaf on B x A obtained by swapping the factors is written L^s (his
+% superscript s before the L). The top exterior power he writes with a hat is
+% written Λ^n; t_A is the Lie algebra of A (the tangent sheaf along the zero
+% section, a vector bundle on S), τ_A = Λ^n t_A its determinant, and
+% ω_A = Λ^n t_A^∨ = τ_A^{-1}. His "Cw" with a raised dot and subscript Q, read
+% as glyphs by the transcription, is the Chow ring: CH^·(A)_Q throughout.
+%
+% Substantive departures from the pages, each footnoted where it occurs:
+% — page 8: the expansion of the total Chern class c(φ_L(cl L)) = (1 - D'/χ)^χ
+%   carries χ^{k-1} in the denominator of the k-th term, and the divisibility
+%   line under it χ^{k-2}; the Chern character line two lines above, which is
+%   what the formula is expanded from, forces χ^k. The reading takes χ^k.
+% — page 8: the sign in the relation between the polarisation δ of L and the
+%   polarisation δ' of det Φ_L(L) is read with doubt on the page and depends
+%   on how A is identified with the dual of B; the reading gives the relation
+%   in Mukai's normalisation, where the composite is +χ(δ).
+% — page 10, remark 4: the duality formula is written without the symmetry
+%   s_A; as written it fails on a skyscraper e_s. The reading inserts s_A^*.
+% — page 10, remark 3: the second Chow formula carries a single Todd class
+%   T = Todd(t_A) where the derivation from the page's own (*) gives
+%   Todd(t_A)·Todd(t_B); the two agree over a field, which is Kleiman's case.
+% — page 4: "il suffit de définir un isom. Φ_{sL}Φ_L = id" is the page's
+%   shorthand for the functor announced in the theorem, s_A^* ⊗ τ_A[-n], which
+%   is what the computation that follows produces.
+%
+% What the folder announces and never establishes: Lemma 2 (Mumford) is
+% admitted, not proved; the last step of Lemma 1 — the compatibility check at
+% points of the zero section — ends in dots; the marginal generalisations of
+% Proposition 1 to group schemes and to torsors are stated and not pursued; the
+% question whether the Chern-class formulas of remark 2 hold modulo torsion is
+% left open (with a question mark of his own), as is the claim that Kleiman's
+% formulas miss a sign.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{47}
+\pages{1}{10}
+\dating{s.d. — le groupe « Variétés abéliennes » (45 à 56) est daté 1961-1973}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Produit de convolution sur les VA et transformation de Fourier dans les VA : notes manuscrites (s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Ces neuf feuillets construisent une transformation de Fourier pour les
+variétés abéliennes, et démontrent qu'elle s'inverse.
+
+La transformation de Fourier ordinaire prend une fonction sur la droite
+réelle et la décompose en ondes : à chaque fréquence $\xi$ elle associe
+l'intégrale de $f(x)e^{-ix\xi}$. Elle doit ses vertus à deux faits. Le
+premier est qu'elle échange deux opérations de nature différente : le
+\emph{produit de convolution} $f * g$, qui mélange deux fonctions en
+déplaçant l'une le long de l'autre, devient le produit ordinaire
+$\hat f \cdot \hat g$. Le second est qu'elle s'inverse : appliquée deux fois
+elle rend la fonction de départ, retournée, $f(-x)$, à une constante près.
+
+Une variété abélienne est un espace algébrique compact muni d'une addition —
+la généralisation en toute dimension d'une courbe elliptique, dont on sait
+additionner les points. Elle a une \emph{duale} $B$, qui paramètre ses
+fibrés en droites de degré zéro : un point $b$ de $B$ est un fibré $L_b$ sur
+$A$, et l'ensemble de ces fibrés forme un fibré en droites universel $L$ sur
+le produit $A \times B$, le faisceau de Weil, aujourd'hui le fibré de
+Poincaré. C'est lui qui tient le rôle de l'exponentielle $e^{-ix\xi}$ : un
+« point » $b$ de la duale est une fréquence, et $L_b$ l'onde correspondante.
+Les « fonctions » à transformer ne sont pas des fonctions mais des
+\emph{faisceaux}, ou plus exactement des complexes de faisceaux ; et
+l'intégrale est remplacée par la cohomologie le long des fibres. La
+transformation est donc $\Phi_L(F) = pr_{2*}(pr_1^{*}F \otimes L)$ : on tire
+$F$ sur $A \times B$, on le multiplie par l'onde universelle, on intègre le
+long de $A$.
+
+Les deux vertus subsistent, et ce sont les deux résultats du dossier. La
+proposition 1 dit que $\Phi_L$ transforme le produit de convolution des
+faisceaux — le \emph{produit de Pontrjagin}, obtenu en poussant $F \boxtimes G$
+le long de l'addition $A \times A \to A$ — en produit tensoriel. Le théorème
+dit que, si l'on transforme de $A$ vers $B$ puis de $B$ vers $A$ avec le
+même noyau, on retrouve le faisceau de départ retourné par la symétrie
+$a \mapsto -a$, décalé de $n$ degrés et tordu par un fibré en droites
+canonique sur la base : le déterminant de l'algèbre de Lie. En particulier
+$\Phi_L$ est une équivalence de catégories. La preuve ramène tout à un calcul,
+la cohomologie du fibré de Poincaré le long de l'une des projections, qui se
+concentre en un point : le lemme d'annulation de Mumford — un fibré de degré
+zéro non trivial n'a aucune cohomologie — est admis, et le reste se déduit.
+
+Les remarques qui suivent tirent les conséquences. Le rang et la
+caractéristique d'Euler s'échangent ; les faisceaux ponctuels deviennent des
+fibrés en droites, et les fibrés en droites de degré zéro des faisceaux
+ponctuels. La transformée d'un fibré en droites de caractéristique $\chi$ se
+comporte, heuristiquement, comme $\chi$ copies d'une racine $\chi$-ième d'un
+fibré sur la duale, ce dont il tire une formule pour ses classes de Chern et
+une conjecture de divisibilité. Enfin, en passant aux classes de cycles par le
+théorème de Riemann--Roch, il obtient une transformation de Fourier sur
+l'anneau de Chow rationnel, échangeant encore convolution et produit — au
+signe $(-1)^n$ près, dont il note que les formules publiées par Kleiman l'ont
+omis.
+
+Tout est écrit sur une base quelconque, pour des \emph{schémas abéliens},
+c'est-à-dire des familles de variétés abéliennes ; c'est ce qui fait
+apparaître la torsion par le déterminant de l'algèbre de Lie et les classes de
+Todd des remarques finales, qui disparaissent sur un corps. Ce qui reste
+alors est, à la lettre, le théorème d'inversion de Mukai (1981) et la
+transformation de Fourier de Beauville sur l'anneau de Chow (1983). Le
+dossier, non daté, cite les \emph{Dix exposés sur la cohomologie des schémas}
+de 1968 ; il leur est donc postérieur, et antérieur d'une dizaine d'années au
+moins à ces deux articles, qu'il ne cite évidemment pas.
+
+\keywords{Fourier-Mukai transform, abelian scheme, dual abelian scheme, Poincaré bundle, Pontrjagin product, derived category of perfect complexes, Mukai inversion theorem, Mumford vanishing theorem, theorem of the square, Künneth formula, composition of kernels, Grothendieck-Riemann-Roch, Todd class, Chern character, Fourier transform on Chow groups, Néron-Severi group, polarisation, determinant of cohomology, Grothendieck duality, contragredient automorphism}
+\end{resume}
+
+\pagerange{1}{10}
+\section*{Le fil du dossier, et les conventions}
+
+Le dossier tient en dix feuillets. Le premier est une chemise qui porte, de
+sa main, le titre que l'inventaire reproduit : « Produit de convolution sur
+les VA et transformation de Fourier dans les VA », où VA abrège variétés
+abéliennes. Les neuf autres sont une suite continue à l'encre bleue,
+paginée 2 à 10 par les archivistes, sans un feuillet blanc ni une page
+sautée. Le fil est celui-ci :
+
+\begin{itemize}
+  \item \emph{pages 2 et 3} : la définition du foncteur $\Phi_L$ et la
+  proposition 1, qui échange convolution et produit tensoriel ; la
+  démonstration ramène au faisceau de Weil et n'emploie que le changement de
+  base, la formule de projection, le théorème du carré et Künneth ;
+  \item \emph{pages 3 à 5} : le théorème d'inversion — d'abord écrit
+  « Proposition 2 », et cité ainsi dans la suite —, son corollaire, et sa
+  démonstration, qui calcule le noyau du foncteur composé et le ramène,
+  par le lemme 1 et son corollaire, à la cohomologie du faisceau de Weil ;
+  \item \emph{pages 6 et 7} : le lemme 2, d'annulation, attribué à Mumford et
+  admis, et la déduction du lemme 1 à partir de lui, dont la dernière
+  vérification est laissée en pointillé ;
+  \item \emph{pages 7 à 10} : cinq remarques — images des faisceaux
+  élémentaires et échange du rang et de la caractéristique d'Euler ; l'image
+  d'un faisceau inversible, ses classes de Chern et une question de
+  divisibilité ; la version dans l'anneau de Chow, par Riemann--Roch ;
+  la dualité ; le transport de structure.
+\end{itemize}
+
+\subsection*{Les conventions, fixées ici pour tout ce qui suit}
+
+$S$ est un schéma quelconque, $A$ et $B$ des schémas abéliens sur $S$ de
+dimension relative $n$, $g_A \colon A \to S$ le morphisme structural,
+$e_A \colon S \to A$ la section nulle, $m_A \colon A \times_S A \to A$
+l'addition (le manuscrit écrit $\pi$ ou $\pi_A$), $s_A \colon A \to A$ la
+symétrie $a \mapsto -a$. Tous les produits sont pris sur $S$, et l'indice est
+omis quand il n'y a pas d'ambiguïté.
+
+$D_{\mathrm{parf}}(A)$ est la catégorie dérivée des complexes parfaits sur
+$A$. Tous les foncteurs $f^{*}$, $f_{*}$, $\otimes$ sont \emph{dérivés} ; le
+manuscrit les affuble d'un $\mathbb{R}$ ou d'un $\mathbb{L}$ et d'un $L$ sur
+le signe $\otimes$ et sur le signe $*$, que la lecture omet, l'usage ayant
+changé.\footnote{Une note marginale de la page 4 dit qu'il est « inutile de
+se borner aux complexes parfaits » et propose $D^{b}_{\mathrm{qcoh}}$ ; la
+lecture reste dans $D_{\mathrm{parf}}$, où tous les foncteurs employés
+(images directes par des morphismes propres et lisses, images réciproques,
+produits tensoriels) préservent la perfection sans hypothèse
+supplémentaire.} Pour $F$ sur $A$ et $G$ sur $A'$, le produit tensoriel
+externe est $F \boxtimes G = pr_1^{*}F \otimes pr_2^{*}G$ sur $A \times A'$ ;
+le manuscrit l'écrit $F \otimes_S G$.
+
+Le \emph{produit de Pontrjagin} de $F, G \in D_{\mathrm{parf}}(A)$ est
+\[
+  F * G = m_{A*}(F \boxtimes G).
+\]
+Il est associatif et commutatif à isomorphisme canonique près, et le
+faisceau $e_{A*}\mathcal{O}_S$ — écrit $e_A$ — en est l'unité ; pour une
+section $s$ de $A$, le faisceau $e_s = s_{*}\mathcal{O}_S$ vérifie
+$e_s * F = t_{s*}F$, translaté de $F$ par $s$.
+
+Le \emph{schéma abélien dual} de $A$ est $A^{*}$ ; le \emph{faisceau de
+Weil} sur $A \times A^{*}$ — aujourd'hui le \emph{fibré de Poincaré} — est le
+module inversible universel, trivialisé le long de $e_A \times A^{*}$ et de
+$A \times e_{A^{*}}$ (\emph{birigidifié}), dont la restriction à $A \times
+\{b\}$ est le fibré algébriquement équivalent à zéro que le point $b$
+représente. Un module inversible birigidifié $L$ sur $A \times B$
+\emph{définit une dualité} entre $A$ et $B$ si l'homomorphisme
+$\varphi \colon A \to B^{*}$ qu'il induit est un isomorphisme ; $L$ est alors
+le faisceau de Weil transporté par $\varphi$, et le dossier écrit
+indifféremment $L$ ou $W$. Le module sur $B \times A$ déduit de $L$ par
+l'échange des facteurs est ${}^{s}L$.
+
+Le \emph{noyau} $L$ étant fixé, la \emph{transformation de Fourier} du dossier
+est
+\[
+  \Phi_L \colon D_{\mathrm{parf}}(A) \longrightarrow D_{\mathrm{parf}}(B),
+  \qquad
+  \Phi_L(F) = pr_{2*}\bigl(pr_1^{*}F \otimes L\bigr),
+\]
+et $\varphi_L \colon K(A) \to K(B)$ l'application qu'elle induit sur les
+groupes de Grothendieck des complexes parfaits. C'est ce que la littérature
+appelle depuis 1981 la \emph{transformation de Fourier--Mukai} de noyau
+$L$.\footnote{S. Mukai, \emph{Duality between $D(X)$ and $D(\hat X)$ with its
+application to Picard sheaves}, Nagoya Math.\ J.\ 81 (1981), sur un corps ;
+la version sur une base quelconque, avec la torsion par le déterminant de
+l'algèbre de Lie qu'on trouvera au théorème, est celle des traitements
+relatifs ultérieurs, par exemple G.~Laumon, \emph{Transformation de Fourier
+généralisée} (1996). Le dossier ne pouvait citer ni l'un ni l'autre ; ce
+qu'il cite, ce sont les \emph{Dix exposés} de 1968 et « les résultats de
+Mumford », c'est-à-dire les \emph{Abelian varieties} de 1970 ou le cours qui
+les a précédées.}
+
+Enfin $t_A = e_A^{*}T_{A/S}$ est l'\emph{algèbre de Lie} de $A$, un module
+localement libre de rang $n$ sur $S$ — le manuscrit dit « faisceau tangent le
+long de la section nulle » —, $\tau_A = \Lambda^{n}t_A$ son déterminant et
+$\omega_A = \Lambda^{n}t_A^{\vee} = \tau_A^{-1}$.\footnote{Le manuscrit note
+la puissance extérieure maximale $\hat\Lambda$, avec un accent, puis
+$\hat\Lambda^{n}$ ; il pose $\tau_A \simeq \hat\Lambda\, t_A$ et
+$\omega_A = \hat\Lambda\, t_A^{\vee}$. Ces modules sur $S$ sont tirés sur $A$
+ou sur $B$ sans changement de notation.} L'anneau de Chow rationnel est
+$\mathrm{CH}^{\cdot}(A)_{\mathbf{Q}}$.\footnote{Le manuscrit écrit un groupe
+« Cw » — un $C$, une lettre basse, un point en exposant et l'indice
+$\mathbf{Q}$ — que la transcription rend par les glyphes lus. La page 10
+l'oppose à une « théorie cohomologique », et les formules qui l'emploient
+sont celles de l'anneau de Chow à coefficients rationnels ; c'est ainsi que
+la lecture l'écrit.}
+
+\subsection*{Ce que le dossier annonce et n'établit pas}
+
+Le lemme 2, d'annulation, est attribué à Mumford et admis. La démonstration
+du lemme 1 s'arrête, à la page 7, sur une « vérification de compatibilité »
+en pointillé. La note marginale de la page 2 esquisse deux généralisations de
+la proposition 1 — aux schémas en groupes munis d'un module $L$
+multiplicatif, et aux torseurs — sans les poursuivre. La question de la page
+8, si les formules de classes de Chern valent modulo torsion, porte son point
+d'interrogation. Enfin, l'affirmation que Kleiman « n'a pas tenu compte des
+facteurs $(-1)^n$ » est la sienne, et la lecture la rapporte sans l'avoir
+vérifiée sur le texte de Kleiman.
+
+\pagerange{2}{3}
+\section*{La transformation échange convolution et produit tensoriel (pages 2 et 3)}
+
+\subsection*{L'énoncé}
+
+La proposition 1 est énoncée dans une généralité plus grande que celle du
+théorème : le noyau n'est pas encore le faisceau de Weil, mais une famille
+quelconque de fibrés de degré zéro.
+
+\textbf{Proposition 1.} Soient $S$ un schéma, $A$ un schéma abélien sur $S$,
+$X$ un $S$-schéma, et $L$ un module inversible sur $A \times_S X$, trivial
+le long de $e_A \times_S X$, et tel que pour tout point $x$ de $X$,
+d'image $s$ dans $S$, le fibré $L_x$ sur la fibre $A_x = A_s \otimes_{k(s)}
+k(x)$ soit algébriquement équivalent à zéro. Alors le foncteur
+\[
+  \Phi_L \colon D_{\mathrm{parf}}(A) \longrightarrow D_{\mathrm{parf}}(X),
+  \qquad \Phi_L(F) = pr_{2*}\bigl(pr_1^{*}F \otimes L\bigr)
+\]
+transforme le produit de Pontrjagin en produit tensoriel : on a un
+isomorphisme de foncteurs triangulés
+\[
+  \Phi_L(F * G) \;\simeq\; \Phi_L(F) \otimes \Phi_L(G)
+  \qquad (F, G \in D_{\mathrm{parf}}(A)),
+\]
+et par suite $\varphi_L \colon K(A) \to K(X)$ est un homomorphisme d'anneaux
+de $(K(A), *)$ vers $(K(X), \cdot)$.\footnote{La page énonce d'abord la
+version en $K$-théorie — « $\varphi_L$ transforme produit de Pontrjagin en
+produit ordinaire » — puis « plus précisément » l'isomorphisme de foncteurs.
+La première rédaction, biffée, parlait d'une « application additive » avant
+que le foncteur ne soit nommé. Une note marginale, écrite en biais et
+partiellement illisible, indique deux généralisations : à un schéma en
+groupes $A$ quelconque muni d'un $L$ \emph{multiplicatif}, c'est-à-dire tel
+que $(m \times \mathrm{id}_X)^{*}L \simeq pr_{13}^{*}L \otimes pr_{23}^{*}L$ —
+c'est la seule propriété de $L$ que la démonstration utilise —, et à des
+complexes sur des torseurs $P$, $Q$, $R$ sous $A$ munis d'une loi
+$P \times Q \to R$, avec trois noyaux $L$, $L'$, $L''$ liés par la relation
+analogue. Ni l'une ni l'autre n'est développée.}
+
+\subsection*{La réduction au faisceau de Weil}
+
+Le noyau se transporte par changement de base : pour un $S$-morphisme
+$f \colon X' \to X$ et $L' = (\mathrm{id}_A \times f)^{*}L$, on a
+$\Phi_{L'} \simeq f^{*} \circ \Phi_L$, puisque $pr_2 \colon A \times X \to X$
+est propre et plat et que l'image directe dérivée commute alors à tout
+changement de base ; comme $f^{*}$ commute au produit tensoriel, l'énoncé
+pour $(A, X, L)$ entraîne l'énoncé pour $(A, X', L')$.
+
+Or l'hypothèse faite sur $L$ — trivial le long de la section nulle,
+algébriquement équivalent à zéro fibre par fibre — dit exactement que $L$ est
+l'image réciproque du faisceau de Weil $L_0$ sur $A \times B$, $B = A^{*}$,
+par un unique $S$-morphisme $X \to B$ : c'est la propriété universelle du
+schéma abélien dual.\footnote{La page dit « l'hypothèse sur $L$ implique que
+$L$ est $\simeq$ l'image inverse de $L_0$ par un morphisme $X \to B$ ». La
+trivialisation le long de $e_A \times X$ est ce qui fixe l'isomorphisme et non
+seulement la classe ; c'est pourquoi elle figure dans l'hypothèse.} On est
+donc ramené au cas $X = B$, $L = L_0$, et c'est dans ce cas que la
+démonstration est écrite.
+
+\subsection*{La démonstration}
+
+Elle repose sur quatre outils, tous formels sauf le troisième : le
+changement de base pour les images directes le long d'un carré cartésien
+dont une flèche est plate, la formule de projection, le \emph{théorème du
+carré}, et la formule de Künneth. Les deux diagrammes de la page 3 fixent les
+noms :
+\[
+\begin{tikzcd}[column sep=small]
+A \times A \arrow[d, "m"'] & A \times A \times B \arrow[l, "pr_{12}"'] \arrow[d, "m \times \mathrm{id}_B"] \arrow[dr, "pr_3"] & \\
+A & A \times B \arrow[l, "pr_1"] \arrow[r, "pr_2"'] & B
+\end{tikzcd}
+\qquad
+\begin{tikzcd}[column sep=small]
+A \times A \times B \arrow[r, "pr_3"] \arrow[d, "f"'] & B \arrow[d, "\Delta_B"] \\
+A \times A \times B \times B \arrow[r, "pr_{34}"] & B \times B
+\end{tikzcd}
+\]
+où le carré de gauche du premier diagramme est cartésien, et
+$f = \mathrm{id}_{A \times A} \times \Delta_B$ rend le second
+cartésien.\footnote{Le second diagramme de la page porte aussi une flèche
+$pr'_{12}$ de $A \times A \times B \times B$ vers $A \times A$ et une flèche
+courbe $pr_{12}$ ; elles servent à nommer les projections de la formule
+ci-dessous et sont omises du dessin.} Les projections
+$pr'_{12}, pr'_{13}, pr'_{24}$ sont celles de $A \times A \times B \times B$,
+et $pr_{13} = pr_1 \times \mathrm{id}_B$, $pr_{23} = pr_2 \times
+\mathrm{id}_B$ celles de $A \times A \times B$ vers $A \times B$.
+
+Le \emph{théorème du carré}, sous la forme où il sert ici, dit que le
+faisceau de Weil est multiplicatif dans la variable $A$ :
+\[
+  (m \times \mathrm{id}_B)^{*}L \;\simeq\; pr_{13}^{*}L \otimes pr_{23}^{*}L
+  \quad \text{sur } A \times A \times B.
+\]
+Restreint à $A \times A \times \{b\}$ c'est l'énoncé $m^{*}L_b \simeq
+pr_1^{*}L_b \otimes pr_2^{*}L_b$ qui caractérise les fibrés algébriquement
+équivalents à zéro ; l'isomorphisme est fixé, et global, par la
+birigidification.\footnote{La page écrit « th.\ des carrés ». C'est le
+théorème du carré de Weil, dans la forme que lui donne Mumford
+(\emph{Abelian varieties}, § 6 et § 8) : $L$ est dans $\mathrm{Pic}^{0}$ si
+et seulement si $m^{*}L \simeq L \boxtimes L$. Dans le langage d'aujourd'hui,
+la formule dit que le fibré de Poincaré est une \emph{biextension} de
+$(A, B)$ par $\mathbf{G}_m$ ; le mot est de SGA 7, postérieur à Weil et
+peut-être à ces pages.}
+
+Soient alors $F, G \in D_{\mathrm{parf}}(A)$. Par définition, puis par
+changement de base le long du carré cartésien de gauche, formule de
+projection et transitivité $pr_2 \circ (m \times \mathrm{id}_B) = pr_3$ :
+\begin{align*}
+  \Phi_L(F * G)
+  &= pr_{2*}\bigl(pr_1^{*}\, m_{*}(F \boxtimes G) \otimes L\bigr) \\
+  &\simeq pr_{2*}\bigl((m \times \mathrm{id}_B)_{*}\, pr_{12}^{*}(F \boxtimes G) \otimes L\bigr) \\
+  &\simeq pr_{2*}(m \times \mathrm{id}_B)_{*}\bigl(pr_{12}^{*}(F \boxtimes G) \otimes (m \times \mathrm{id}_B)^{*}L\bigr) \\
+  &\simeq pr_{3*}\bigl(pr_{12}^{*}(F \boxtimes G) \otimes (m \times \mathrm{id}_B)^{*}L\bigr).
+\end{align*}
+Le théorème du carré remplace le dernier facteur par
+$pr_{13}^{*}L \otimes pr_{23}^{*}L$, et l'on réorganise les quatre facteurs
+sur $A \times A \times B \times B$ : le complexe
+$pr_{12}^{*}(F \boxtimes G) \otimes pr_{13}^{*}L \otimes pr_{23}^{*}L$ est
+l'image réciproque par $f$ de
+\[
+  pr^{\prime *}_{12}(F \boxtimes G) \otimes pr^{\prime *}_{13}L \otimes pr^{\prime *}_{24}L
+  \;\simeq\;
+  pr^{\prime *}_{13}(pr_1^{*}F \otimes L) \otimes pr^{\prime *}_{24}(pr_1^{*}G \otimes L),
+\]
+la seconde égalité n'étant qu'une réassociation du produit tensoriel : le
+premier facteur ne dépend que des coordonnées $1$ et $3$, le second que des
+coordonnées $2$ et $4$. Le changement de base le long du second carré, puis
+Künneth, donnent
+\begin{align*}
+  \Phi_L(F * G)
+  &\simeq pr_{3*}\, f^{*}\bigl(pr^{\prime *}_{13}(pr_1^{*}F \otimes L) \otimes pr^{\prime *}_{24}(pr_1^{*}G \otimes L)\bigr) \\
+  &\simeq \Delta_B^{*}\, pr_{34*}\bigl(pr^{\prime *}_{13}(pr_1^{*}F \otimes L) \otimes pr^{\prime *}_{24}(pr_1^{*}G \otimes L)\bigr) \\
+  &\simeq \Delta_B^{*}\bigl(pr_{2*}(pr_1^{*}F \otimes L) \boxtimes pr_{2*}(pr_1^{*}G \otimes L)\bigr) \\
+  &= \Delta_B^{*}\bigl(\Phi_L(F) \boxtimes \Phi_L(G)\bigr)
+  \;\simeq\; \Phi_L(F) \otimes \Phi_L(G),
+\end{align*}
+ce qui est la proposition.\footnote{Sur la page, le « $\otimes L$ » de la
+première ligne a d'abord été oublié et ajouté au-dessus, et l'avant-dernière
+formule contient une parenthèse vide, $\mathbb{L}f^{*}(\quad)$, qu'un trait
+relie à l'expression soulignée deux lignes plus haut ; la lecture l'a
+remplie. La formule de Künneth utilisée est celle des complexes parfaits sur
+un produit fibré de morphismes propres et plats, $pr_{34*}(P \boxtimes Q)
+\simeq pr_{2*}P \boxtimes pr_{2*}Q$, qui résulte elle-même du changement de
+base et de la formule de projection.}
+
+\pagerange{3}{4}
+\section*{Le théorème d'inversion (pages 3 et 4)}
+
+\subsection*{L'énoncé}
+
+Le noyau est désormais un module inversible définissant une dualité entre
+$A$ et $B$ ; on transforme de $A$ vers $B$ avec $L$, puis de $B$ vers $A$
+avec ${}^{s}L$.
+
+\textbf{Théorème.} Soient $A$, $B$ deux schémas abéliens sur $S$ de
+dimension relative $n$ et $L$ un module inversible birigidifié sur
+$A \times B$ définissant une dualité entre $A$ et $B$. Le foncteur composé
+\[
+  D_{\mathrm{parf}}(A) \xrightarrow{\;\Phi_L\;} D_{\mathrm{parf}}(B)
+  \xrightarrow{\;\Phi_{{}^{s}L}\;} D_{\mathrm{parf}}(A)
+\]
+est canoniquement isomorphe à
+\[
+  F \longmapsto s_A^{*}F \otimes \tau_A\,[-n],
+\]
+où $s_A^{*} \simeq s_{A*}$ est la symétrie et $\tau_A = \Lambda^{n}t_A$ le
+déterminant de l'algèbre de Lie de $A$, tiré de $S$ ; et l'on a un
+isomorphisme canonique $\tau_A \simeq \tau_B$. En particulier $\Phi_L$ et
+$s_A^{*}\Phi_{{}^{s}L}$ sont des équivalences de catégories triangulées, et
+sur les groupes de Grothendieck le composé
+$K(A) \xrightarrow{\varphi_L} K(B) \xrightarrow{\varphi_{{}^{s}L}} K(A)$
+est $(-1)^n\, \tau_A \cdot s_A^{*}$, de sorte que $\varphi_L$ et
+$(-1)^n\,\omega_A \cdot s_A^{*}\varphi_{{}^{s}L}$ sont des isomorphismes
+inverses l'un de l'autre.\footnote{L'énoncé s'appelait « Proposition 2 » et le
+mot est biffé pour « Théorème » ; la suite du dossier continue de dire
+« prop.\ 2 », et la lecture dit « le théorème ». La page énonce d'abord la
+version en $K$-théorie, « le composé est $(-1)^n s_A^{*}$ », où la classe de
+$\tau_A$ est sous-entendue — sur $S$ local, ou dès que $\tau_A$ est trivial,
+elle vaut $1$ — puis, « plus précisément », le foncteur, avec la torsion. La
+lecture met la torsion dans les deux. Sur un corps, $\tau_A$ est trivial et
+l'énoncé est le théorème d'inversion de Mukai : $\Phi_{\hat P} \circ \Phi_P
+\simeq (-1)^{*}[-g]$. L'isomorphisme $\tau_A \simeq \tau_B$ — le
+déterminant de l'algèbre de Lie d'un schéma abélien est celui de son dual —
+est affirmé sur la page sous la forme $\tau_A \simeq \hat\Lambda\, t_A
+\simeq \hat\Lambda\, t_B$ ; il résulte du lemme 1 ci-dessous, appliqué aux
+deux projections du faisceau de Weil, voir la note à ce lemme.}
+
+\subsection*{Le corollaire : le produit tensoriel devient une convolution}
+
+Appliquons la proposition 1 au noyau ${}^{s}L$ et aux complexes $\Phi_L(F)$,
+$\Phi_L(G)$ sur $B$, puis le théorème deux fois :
+\[
+  \Phi_{{}^{s}L}\bigl(\Phi_L(F) * \Phi_L(G)\bigr)
+  \simeq \Phi_{{}^{s}L}\Phi_L(F) \otimes \Phi_{{}^{s}L}\Phi_L(G)
+  \simeq s_A^{*}(F \otimes G) \otimes \tau_A^{2}\,[-2n]
+  \simeq \Phi_{{}^{s}L}\Phi_L(F \otimes G) \otimes \tau_A\,[-n].
+\]
+Comme $\Phi_{{}^{s}L}$ est une équivalence et commute au produit tensoriel
+par un module tiré de $S$ et aux décalages, il vient :
+
+\textbf{Corollaire.} Sous les hypothèses du théorème,
+\[
+  \Phi_L(F \otimes G) \;\simeq\; \bigl(\Phi_L(F) * \Phi_L(G)\bigr) \otimes \omega_A\,[n],
+\]
+ou, ce qui revient au même, le foncteur $F \mapsto \Phi_L(F \otimes
+\omega_A[n]) \simeq \Phi_L(F) \otimes \omega_A[n]$ transforme le produit
+tensoriel en produit de Pontrjagin. Sur les groupes de Grothendieck :
+$\varphi_L(xy) = (-1)^n\,\omega_A\,\bigl(\varphi_L(x) * \varphi_L(y)\bigr)$.\footnote{Le début de l'énoncé est largement remanié sur la page ; on y lit
+encore, biffés, un $\Phi_L^{\omega_A[n]}$, « $\overset{L}{\otimes}$ en
+$\overset{L}{*}$ » et « $x \mapsto (-1)^n\,\mathrm{cl}\,\omega_A\,
+\varphi_L(x)$ », et, non biffé, la formulation par $F \mapsto \Phi_L(F
+\otimes \omega_A[n])$ que la lecture reprend. La page n'écrit pas la
+déduction ; celle donnée ici est la seule que les deux énoncés précédents
+permettent, et c'est aussi celle de Mukai (1981, 3.7). Dans la numérotation de
+la page ce corollaire est « Corollaire 2 », le chiffre étant douteux.}
+
+\pagerange{4}{5}
+\section*{La démonstration du théorème : le noyau du composé (pages 4 et 5)}
+
+\subsection*{Le composé de deux transformations à noyau}
+
+Le composé de deux foncteurs à noyau est un foncteur à noyau, et son noyau
+s'obtient en composant les noyaux. Ici
+$\Phi_{{}^{s}L} \circ \Phi_L$ est de la forme
+$F \mapsto pr_{2*}\bigl(pr_1^{*}F \otimes M\bigr)$ avec
+\[
+  M = pr_{13*}\bigl(pr_{12}^{*}L \otimes pr_{23}^{*}\,{}^{s}L\bigr)
+  \;\in\; D_{\mathrm{parf}}(A \times A),
+\]
+les projections étant celles de $A \times B \times A$.\footnote{La page
+écrit « $M \in D_{\mathrm{parf}}(A)$ » et nomme en marge l'espace
+$A \times B \times A$ ; le noyau vit sur $A \times A$. Elle dit aussi qu'il
+« suffit de définir un isomorphisme $\Phi_{{}^{s}L}\Phi_L =
+\mathrm{id}_{D_{\mathrm{parf}}(A)}$ » ; c'est un raccourci pour le foncteur
+annoncé, $s_A^{*}(-) \otimes \tau_A[-n]$, qui est ce que le calcul produit.}
+Il s'agit donc de calculer $M$, et l'on va voir que c'est le faisceau
+structural du graphe de la symétrie, décalé et tordu.
+
+\subsection*{Le noyau comme image réciproque du faisceau de Weil}
+
+Posons $C = A \times A$ et identifions $A \times B \times A$ à $C \times B$.
+Le module inversible $N = pr_{12}^{*}L \otimes pr_{23}^{*}\,{}^{s}L$ sur
+$C \times B$ a pour fibre en $((a, a'), b)$ le produit $L_{(a,b)} \otimes
+L_{(a',b)}$ ; il est birigidifié de façon canonique et correspond donc à un
+homomorphisme $\Psi \colon C \to B^{*}$, à savoir
+\[
+  \Psi = \varphi \circ m_A \colon A \times A \longrightarrow A \longrightarrow B^{*},
+\]
+où $\varphi \colon A \xrightarrow{\;\sim\;} B^{*}$ est l'isomorphisme défini
+par $L$ : $\Psi$ est l'homomorphisme dont les deux composantes sont
+$\varphi$.\footnote{« deux » est ajouté en interligne sur la page. Que $N$
+corresponde à $\varphi \circ m_A$ est le théorème du carré de la section
+précédente lu dans l'autre variable : $L_{(a,b)} \otimes L_{(a',b)} \simeq
+L_{(a+a',\,b)}$.} Le carré
+\[
+\begin{tikzcd}
+C \times B \arrow[r, "\Psi \times \mathrm{id}_B"] \arrow[d, "pr_1"'] & B^{*} \times B \arrow[d, "pr'_1"] \\
+C \arrow[r, "\Psi"] & B^{*}
+\end{tikzcd}
+\]
+est cartésien, et $N \simeq (\Psi \times \mathrm{id}_B)^{*}W_B$, où $W_B$
+est le faisceau de Weil sur $B^{*} \times B$ ; par changement de base,
+\[
+  M = pr_{1*}(N) \;\simeq\; \Psi^{*}\bigl(pr'_{1*}W_B\bigr).
+\]
+La projection est ici celle sur le premier facteur.\footnote{La ligne de la page écrit $pr_2$, $pr'_2$ là où le diagramme, le
+lemme et le corollaire qui suivent ont $pr_1$, $pr'_1$ : c'est la projection
+sur le premier facteur qui est en cause, et la lecture la nomme ainsi
+partout.} Tout est ainsi ramené à un calcul universel, la cohomologie du
+faisceau de Weil le long d'une projection, qui fait l'objet du lemme 1.
+
+\subsection*{Le lemme 1 et son corollaire}
+
+\textbf{Lemme 1.} Soient $B$ un schéma abélien sur $S$ de dimension relative
+$n$, $W$ le faisceau de Weil sur $B^{*} \times_S B$, $p \colon B^{*} \times_S
+B \to B^{*}$ la première projection et $e \colon S \to B^{*}$ la section
+nulle. On a un isomorphisme canonique
+\[
+  p_{*}W \;\simeq\; e_{*}\bigl(\tau_{B^{*}}\bigr)[-n],
+  \qquad \tau_{B^{*}} = \Lambda^{n}t_{B^{*}},
+\]
+c'est-à-dire $p_{*}W \simeq e_{*}(\omega_{B^{*}}^{-1})[-n]$.\footnote{La
+seconde forme est la note marginale de la page : « $\simeq e_{*}(\omega^{-1})$
+où $\omega = \det(\Omega^{1}_{B^{*}/S})$ », le $\det$ étant douteux. Sur un
+corps c'est le lemme central de Mukai (1981, § 2) : $p_{*}P \simeq
+k(\hat 0)[-g]$. Le même calcul fait le long de la seconde projection donne
+$e_{B*}(\tau_B)[-n]$ sur $B$, et les cohomologies totales
+$R\Gamma(B^{*} \times B, W)$ calculées des deux façons sont $\tau_{B^{*}}[-n]$
+et $\tau_B[-n]$ : d'où $\tau_{B^{*}} \simeq \tau_B$, l'isomorphisme que le
+théorème affirme. La démonstration du lemme est aux pages 6 et 7.}
+
+\textbf{Corollaire.} Soient $C$, $B$ des schémas abéliens sur $S$, $N$ un
+module inversible birigidifié sur $C \times_S B$ et $\Psi \colon C \to B^{*}$
+l'homomorphisme correspondant. Alors
+\[
+  pr_{1*}N \;\simeq\; \Psi^{*}\bigl(e_{*}\tau_{B^{*}}\bigr)[-n].
+\]
+En particulier, si $\Psi$ est un épimorphisme, donc plat, et si $K =
+\operatorname{Ker}\Psi$, le sous-schéma en groupes $K$ de $C$ est plat et de
+présentation finie sur $S$, son faisceau structural est un module parfait sur
+$C$, et
+\[
+  pr_{1*}N \;\simeq\; \mathcal{O}_K \otimes \tau_{B^{*}}\,[-n].
+\]
+C'est le lemme 1 tiré en arrière par $\Psi$.\footnote{Les symboles entre la parenthèse et le $[-n]$ de la première formule
+sont surchargés sur la page et lus avec doute ; le lemme 1 ne laisse qu'une
+lecture possible. Pour la seconde : $\Psi$ étant plat, $\Psi^{*}e_{*}
+\mathcal{O}_S$ est le faisceau structural de la fibre de $\Psi$ au-dessus de
+la section nulle, qui est $K$, et $\Psi^{*}$ d'un module tiré de $S$ est ce
+module. Que $\mathcal{O}_K$ soit parfait sur $C$ tient à ce que $K$ est plat
+sur $S$ et $C$ lisse sur $S$ ; la page hésite — « défini », puis
+« $\mathcal{O}_K$ », biffés — avant d'écrire « parfait », lu avec doute.}
+
+\subsection*{Fin de la démonstration}
+
+Dans le cas du théorème, $C = A \times A$ et $\Psi = \varphi \circ m_A$ avec
+$\varphi$ un isomorphisme ; $\Psi$ est donc un épimorphisme plat, et son noyau
+$K$ est le noyau de l'addition $m_A \colon A \times A \to A$, l'antidiagonale
+$\{(a, -a)\}$, c'est-à-dire le \emph{graphe de la symétrie} $s_A$. Le
+corollaire donne
+\[
+  M \;\simeq\; \mathcal{O}_{\Gamma_{s_A}} \otimes \tau_{B^{*}}\,[-n],
+\]
+et un foncteur à noyau $\mathcal{O}_{\Gamma_u}$, graphe d'un automorphisme
+$u$, est $u_{*}$ ; ici $s_{A*} = s_A^{*}$. Enfin $\tau_{B^{*}} \simeq \tau_A$
+par l'isomorphisme $\varphi$. Le théorème est donc démontré modulo le
+lemme 1.\footnote{La page écrit « $\varphi \colon A \simeq C^{*}$ », la
+lettre étant nette ; l'argument demande $B^{*}$, et c'est ce que la lecture
+écrit. La conclusion est marquée « modulo dém.\ du Lemme 1 », lu avec doute.}
+
+\pagerange{6}{7}
+\section*{Le lemme d'annulation de Mumford et la cohomologie du faisceau de Weil (pages 6 et 7)}
+
+\subsection*{Le lemme admis}
+
+\textbf{Lemme 2 (Mumford).} Soient $B$ une variété abélienne sur un corps
+algébriquement clos $k$ et $L$ un module inversible sur $B$ algébriquement
+équivalent à zéro et non isomorphe à $\mathcal{O}_B$. Alors $H^{i}(B, L) = 0$
+pour tout $i$.\footnote{La page écrit $H^{i}(X, L)$, la lettre $X$ pour $B$.
+Un encadré entièrement biffé et le début d'une démonstration, biffé aussi —
+« l'assertion sur les $H^{0}$ est triviale, et il reste à prouver que
+$H^{i}(X, L) = 0$ » — précèdent la décision d'admettre le lemme. C'est le
+théorème d'annulation de Mumford, \emph{Abelian varieties} (1970), § 8, dont
+la démonstration est en quelques lignes : si $H^{i}(L) \neq 0$ pour un $i$
+minimal, la factorisation $m^{*}L \simeq L \boxtimes L$ et Künneth donnent
+$H^{i}(L) \simeq H^{0}(L) \otimes H^{i}(L)$, donc $H^{0}(L) \neq 0$, ce qui
+force $L \simeq \mathcal{O}_B$ pour un fibré de degré zéro.}
+
+« Nous allons ici admettre le lemme 2 », écrit-il, et montrer comment on en
+déduit le lemme 1. L'énoncé est sur un corps ; il s'applique fibre à fibre,
+et c'est ce qui permet de localiser.
+
+\subsection*{La déduction du lemme 1}
+
+On revient à $p \colon B^{*} \times_S B \to B^{*}$ et au faisceau de Weil $W$.
+On écrit $e$ pour $e_{B^{*}}$, $g \colon B \to S$ pour le morphisme
+structural et $e' = e \times \mathrm{id}_B \colon B \to B^{*} \times B$ ;
+le carré
+\[
+\begin{tikzcd}
+B^{*} \times_S B \arrow[d, "p"'] & B \arrow[l, "e'"'] \arrow[d, "g"] \\
+B^{*} & S \arrow[l, "e"]
+\end{tikzcd}
+\]
+est cartésien, et $e^{\prime *}W \simeq \mathcal{O}_B$ par la rigidification.
+
+\emph{Le support.} Pour un point $b$ de $B^{*}$ hors de la section nulle, la
+restriction de $W$ à la fibre $B_b$ est un fibré algébriquement équivalent à
+zéro et non trivial ; par le lemme 2, appliqué après extension à une clôture
+algébrique, toute sa cohomologie est nulle, et comme $p$ est propre et plat
+la restriction dérivée de $p_{*}W$ en $b$ est nulle. Le complexe parfait
+$p_{*}W$ est donc concentré sur la section nulle $e(S)$.
+
+\emph{L'homomorphisme.} Comme $p$ a des fibres de dimension $n$, les
+$R^{i}p_{*}W$ sont nuls pour $i > n$, et $p_{*}W$ s'envoie canoniquement sur
+son dernier faisceau de cohomologie, $R^{n}p_{*}W\,[-n]$. Définir un
+homomorphisme
+\[
+  p_{*}W \longrightarrow e_{*}(\mathcal{O}_S) \otimes_{\mathcal{O}_S} \tau_{B^{*}}\,[-n]
+\]
+revient donc à définir $R^{n}p_{*}W \to e_{*}\tau_{B^{*}}$, c'est-à-dire, par
+adjonction, $e^{*}R^{n}p_{*}W \to \tau_{B^{*}}$. Or, par changement de base
+le long du carré ci-dessus et parce que $e^{\prime *}W \simeq \mathcal{O}_B$,
+\[
+  e^{*}R^{n}p_{*}W \;\simeq\; R^{n}g_{*}(\mathcal{O}_B),
+\]
+et l'on sait que
+\[
+  R^{n}g_{*}(\mathcal{O}_B) \;\simeq\; \Lambda^{n}R^{1}g_{*}(\mathcal{O}_B)
+  \;\simeq\; \Lambda^{n}t_{B^{*}} = \tau_{B^{*}},
+\]
+puisque $R^{1}g_{*}\mathcal{O}_B$ est l'algèbre de Lie du schéma abélien dual
+$B^{*}$ et que la cohomologie de $\mathcal{O}_B$ est l'algèbre extérieure sur
+son $H^{1}$.\footnote{Ce sont deux résultats de la théorie du schéma de
+Picard : $\mathrm{Lie}(B^{*}) = R^{1}g_{*}\mathcal{O}_B$, et $R^{\cdot}
+g_{*}\mathcal{O}_B \simeq \Lambda^{\cdot}R^{1}g_{*}\mathcal{O}_B$, qui pour un
+schéma abélien vaut sur toute base (Mumford, § 13, ou Berthelot--Breen--Messing
+pour la version relative). La page dit « on sait que l'on a un isom
+canonique » et ne cite rien. Les deux $\otimes_S$ qui précèdent $\tau_{B^{*}}$
+dans les formules de la page sont biffés.} On prend pour
+$e^{*}R^{n}p_{*}W \to \tau_{B^{*}}$ l'isomorphisme identique ainsi obtenu.
+
+\emph{L'isomorphisme.} « Je dis que l'homomorphisme précédent est un
+isomorphisme. » Il suffit de le vérifier après restriction dérivée $i_b^{*}$
+en tout point $b$ de $B^{*}$ — un morphisme de complexes parfaits qui est un
+isomorphisme en chaque point l'est.\footnote{La page invoque une « histoire
+de \ldots-cylindres », le premier mot illisible : le cône du morphisme est un
+complexe parfait dont toutes les restrictions ponctuelles sont nulles, donc
+nul, par le lemme de Nakayama appliqué à son dernier faisceau de cohomologie
+non nul.} Aux points hors de $e(S)$, les deux membres sont nuls par le
+lemme 2. En un point de $e(S)$, on se ramène par changement de base au cas où
+$S$ est le spectre d'un corps algébriquement clos, et il reste « une
+vérification de compatibilité », que la page laisse en pointillé.\footnote{Le
+manuscrit s'arrête ici : « \ldots\ldots ». Ce qu'il reste à voir est que le
+morphisme $p_{*}W \to k(0)[-n]$, sur une variété abélienne, est un
+isomorphisme — autrement dit que $R^{n}p_{*}W$ est de longueur $1$ en $0$ et
+non seulement supporté en $0$. C'est le contenu du lemme de Mukai (1981,
+§ 2), qui l'obtient par dualité de Grothendieck et par le calcul de la
+caractéristique d'Euler de $W$ sur $B^{*} \times B$ ; la lecture ne comble pas
+le pointillé et se contente de dire que l'énoncé est vrai.}
+
+\pagerange{7}{8}
+\section*{Remarques 1 et 2 : les images élémentaires, et la transformée d'un faisceau inversible (pages 7 et 8)}
+
+\subsection*{Remarque 1 : faisceaux ponctuels, fibrés de degré zéro, rang et caractéristique d'Euler}
+
+Les hypothèses sont celles du théorème. Pour une section $s$ de $A$ on écrit
+$e_s = s_{*}\mathcal{O}_S$, et $L_s = L|_{s \times B}$ le fibré
+algébriquement équivalent à zéro sur $B$ que $s$ représente ; de même
+$L_t = L|_{A \times t}$ pour une section $t$ de $B$.
+
+\emph{a)} $\Phi_L(e_A) \simeq \mathcal{O}_B$ et $\Phi_L(e_s) \simeq L_s$ :
+c'est la définition, puisque $pr_1^{*}e_s \otimes L$ est $L$ restreint à
+$s \times B$. Comme $e_s * F$ est le translaté $t_{s*}F$, la proposition 1
+donne
+\[
+  \Phi_L(t_{s*}F) \;\simeq\; L_s \otimes \Phi_L(F) :
+\]
+la translation devient la multiplication par un fibré de degré zéro.
+
+\emph{b)} $\Phi_L(L_t) \simeq e_{-t} \otimes \tau_A\,[-n]$, ou encore
+$\Phi_L(L_t \otimes \omega_A[n]) \simeq e_{-t}$ : la multiplication par un
+fibré de degré zéro devient une translation, et le fibré trivial va sur le
+faisceau ponctuel de l'origine. En effet, par le théorème du carré dans la
+variable $B$, $pr_1^{*}L_t \otimes L \simeq (\mathrm{id}_A \times t_t)^{*}L$
+où $t_t$ est la translation par $t$, de sorte que $\Phi_L(L_t) \simeq
+t_t^{*}\,pr_{2*}L$, et $pr_{2*}L \simeq e_{B*}(\tau_B)[-n]$ par le lemme 1 ;
+le translaté par $t$ du faisceau ponctuel de l'origine est celui de $-t$. De
+même,
+\[
+  \Phi_L(F \otimes L_t) \;\simeq\; \Phi_L(F) * e_{-t}.
+\]
+La page hésite sur l'énoncé.\footnote{La page écrit d'abord « $\omega_A[n]$ en \ldots », biffé, avant de
+fixer l'énoncé ; la lettre qui désigne le schéma dont $t$ est une section est
+formée comme un $D$ et lue $B$. Ce sont les formules (3.1) de Mukai.}
+
+\emph{c)} Notons $\varepsilon_A(F)$ le rang de la restriction dérivée
+$e_A^{*}F$ à l'origine et $\chi_A(F)$ le rang de $g_{A*}F$, tous deux dans
+$H^{0}(S, \mathbf{Z})$. Alors
+\[
+  \varepsilon_B(\Phi_L(F)) = \chi_A(F),
+  \qquad
+  \chi_B(\Phi_L(F)) = (-1)^n\,\varepsilon_A(F) :
+\]
+le rang à l'origine de la transformée est la caractéristique d'Euler, et la
+caractéristique d'Euler de la transformée est le rang à l'origine, au signe
+$(-1)^n$ près. La première égalité est le changement de base $e_B^{*}pr_{2*}
+\simeq g_{A*}(\mathrm{id} \times e_B)^{*}$ et la rigidification ; la seconde
+est $g_{B*}\Phi_L(F) \simeq g_{A*}(F \otimes pr_{1*}L) \simeq g_{A*}(F
+\otimes e_{A*}\tau_A)[-n] \simeq e_A^{*}F \otimes \tau_A[-n]$, par le
+lemme 1.\footnote{La définition de $\varepsilon$ est en marge et illisible,
+sauf la mention « égalité dans $H^{0}(S, \mathbf{Z})$ » ; celle donnée ici
+est la seule qui rende les deux égalités vraies, et elle est la nôtre.}
+
+\subsection*{Remarque 2 : le déterminant de la transformée, et l'heuristique de la racine $\chi$-ième}
+
+Le composé $\det \circ \Phi_L$ — le déterminant du complexe parfait
+$\Phi_L(M)$ pour $M$ inversible sur $A$ — commute au changement de base et
+définit donc un homomorphisme de foncteurs de Picard
+\[
+  \varphi \colon \underline{\mathrm{Pic}}_{A/S} \longrightarrow \underline{\mathrm{Pic}}_{B/S}.
+\]
+Soit $\lambda$ une section de $\underline{\mathrm{Pic}}_{A/S}$, de classe
+$\delta$ dans le groupe de Néron--Severi $\underline{NS}_{A/S}$, définissant
+un faisceau inversible que l'on notera encore $L$ sur $A$ ; soit $\chi =
+\chi(\delta) \in H^{0}(S, \mathbf{Z})$ sa caractéristique d'Euler, supposée
+partout non nulle. Alors $\varphi(\lambda)$ définit un faisceau inversible
+$L'^{-1}$ sur $B$, de classe $-\delta'$ dans $NS(B/S)$, où $\delta'$ est
+déterminée par $\delta$ par la relation
+\[
+  \tilde\delta' \circ \tilde\delta = \chi(\delta)\,\mathrm{id}_A,
+\]
+$\tilde\delta \colon A \to B$ et $\tilde\delta' \colon B \to A$ désignant les
+homomorphismes associés aux polarisations.\footnote{La page écrit
+$\tilde\delta'\tilde\delta = -\chi(\delta)\,\mathrm{id}_A$, et à côté une
+ligne lue avec doute, « compatible avec $-(-\tilde\delta') = \tilde\delta'$ »,
+qui suggère qu'il hésite sur le signe. Le signe dépend de la façon dont $A$
+est identifié au dual de $B$ par $L$. Dans la normalisation de Mukai, où
+$\varphi_L(a) = t_a^{*}L \otimes L^{-1}$ et où le fibré de Poincaré $P$ a
+pour restriction à $A \times \{\alpha\}$ le fibré $P_\alpha$, sa proposition
+3.11 donne $\varphi_L^{*}\det\Phi(L) \simeq L^{-\chi}$, d'où, $\varphi_L$
+étant symétrique, $\varphi_{L'} \circ \varphi_L = \chi\,\mathrm{id}_A$ pour
+$L' = \det\Phi(L)^{-1}$ : c'est la relation écrite ici, avec le signe $+$. La
+lecture ne prétend pas que la page ait tort, seulement qu'elle a un autre
+signe dans une autre convention, non explicitée.}
+
+On peut se proposer de « calculer » la classe $\varphi_L(\mathrm{cl}\,L)$ dans
+$K(B)$ en fonction des invariants de $\varphi(\lambda)$. Heuristiquement,
+\[
+  \varphi_L(\mathrm{cl}\,L) \;=\; \chi \cdot \text{« } L'^{-1/\chi} \text{ »} :
+\]
+la transformée d'un faisceau inversible de caractéristique $\chi$ se comporte
+comme $\chi$ copies d'une racine $\chi$-ième de $L'^{-1}$. L'exposant est
+entre guillemets sur la page, et l'heuristique est devenue un théorème :
+$\Phi_L(L)$ est, à un décalage près, un fibré vectoriel de rang $|\chi|$ dont
+l'image réciproque par $\tilde\delta$ est $\chi$ copies de $L^{-1}$, et
+$\tilde\delta^{*}L' \simeq L^{\chi}$.\footnote{Mukai (1981), 3.11 : pour $L$
+non dégénéré d'indice $i$, $\Phi(L)$ est concentré en degré $i$, et
+$\varphi_L^{*}\Phi(L) \simeq H^{i}(A, L) \otimes L^{-1}$. Une note marginale
+de la page dit « indépendant des résultats de Mumford » ; on comprend que
+l'heuristique ne dépend pas du lemme 2 admis.}
+
+Au niveau du caractère de Chern, l'heuristique s'écrit
+\[
+  \mathrm{ch}\,\varphi_L(\mathrm{cl}\,L)
+  = \chi \exp\Bigl(-\frac{D'}{\chi}\Bigr)
+  = \chi - D' + \frac{1}{2\chi}D'^{2} - \frac{1}{3!\,\chi^{2}}D'^{3} + \cdots
+  + (-1)^n\frac{1}{n!\,\chi^{n-1}}D'^{n},
+\]
+où $D' \in \mathrm{CH}^{1}(B)_{\mathbf{Q}}$ est la classe de $L'$, et au
+niveau de la classe de Chern totale
+\[
+  c\bigl(\varphi_L(\mathrm{cl}\,L)\bigr)
+  = \Bigl(1 - \frac{D'}{\chi}\Bigr)^{\chi}
+  = \sum_{k=0}^{n} (-1)^{k}\binom{\chi}{k}\frac{D'^{k}}{\chi^{k}}
+  = 1 - D' + \frac{\chi(\chi-1)}{2\,\chi^{2}}D'^{2} - \cdots,
+\]
+la puissance $\chi$-ième étant développée par la formule du
+binôme.\footnote{La page développe $(1 - D'/\chi)^{\chi}$ avec
+$\chi^{k-1}$ au dénominateur du terme de degré $k$ — « $\frac{\chi(\chi-1)}
+{2\chi}D'^{2}$ », « $\frac{\chi(\chi-1)(\chi-2)}{3!\,\chi^{2}}D'^{3}$ » —,
+ce qui n'est pas le développement de ce qu'elle écrit à gauche, et ce qui
+contredit la ligne du caractère de Chern : avec $c_1 = -D'$ et $c_2 =
+\frac{\chi-1}{2}D'^{2}$ on aurait $\mathrm{ch}_2 = \frac{2-\chi}{2}D'^{2}$
+au lieu de $\frac{1}{2\chi}D'^{2}$. La lecture prend $\chi^{k}$, qui est ce que
+la ligne du $\mathrm{ch}$ et l'heuristique de la racine $\chi$-ième imposent
+toutes deux. L'argument de $\varphi_L$ est surchargé sur la page dans les deux
+formules.}
+
+« Ces formules sont-elles bien vraies mod torsion ? » demande la page, avec
+un point d'interrogation en marge. Elles sont vraies au moins sur un corps
+algébriquement clos modulo équivalence homologique, où elles se lisent dans
+la cohomologie. Elles donneraient alors des propriétés de divisibilité de
+$\delta'$ : pour tout $k$,
+\[
+  \binom{\chi}{k}\frac{\delta'^{k}}{\chi^{k}}
+  = \frac{\chi(\chi-1)\cdots(\chi-k+1)}{k!\,\chi^{k}}\,\delta'^{k}
+\]
+est « entier », c'est-à-dire provient d'un cycle à coefficients
+entiers.\footnote{La page écrit $\chi^{k-2}$ au dénominateur, exposant qui
+hérite du glissement de la formule précédente et s'en écarte encore d'un
+cran ; la lecture écrit ce que l'intégralité des classes de Chern de
+$\Phi_L(L)$ donne. La question « mod torsion » a aujourd'hui une réponse
+positive sur un corps algébriquement clos : $\Phi_L(L)$ est un fibré, sa
+classe de Chern totale est entière, son image réciproque par $\tilde\delta$
+est $(1 - D)^{\chi}$ par le théorème de Mukai cité plus haut, et l'image
+réciproque par une isogénie est injective sur l'anneau de Chow rationnel ;
+l'égalité $c(\Phi_L(L)) = (1 - D'/\chi)^{\chi}$ vaut donc dans
+$\mathrm{CH}^{\cdot}(B)_{\mathbf{Q}}$, et la divisibilité avec elle. Une
+parenthèse de la page, « donc le $\neq$ car.\ $h$ », est lue avec doute et
+n'est pas interprétée.}
+
+\pagerange{9}{10}
+\section*{Remarque 3 : la transformation de Fourier sur l'anneau de Chow (pages 9 et 10)}
+
+On passe des complexes aux cycles par le théorème de Riemann--Roch de
+Grothendieck, appliqué aux morphismes $m_A \colon A \times A \to A$ et
+$pr_2 \colon A \times B \to B$. Ces deux morphismes sont lisses, et leur
+fibré tangent relatif est tiré de $S$ : c'est $t_A$, l'algèbre de Lie. Leur
+classe de Todd relative est donc la même classe
+\[
+  T = \mathrm{Todd}(t_A) \in \mathrm{CH}^{\cdot}(S)_{\mathbf{Q}},
+\]
+tirée sur $A$ ou sur $B$, et elle vaut $1$ dès que $t_A$ est trivial, par
+exemple si $S$ est local — ou un corps.\footnote{La page dit « $\mathrm{Todd}
+\,t_A = 1$, p.\ ex.\ si $t_A$ est trivial, p.\ ex.\ $S$ local ». Sur $A \times
+A$ le fibré tangent est $pr_1^{*}T_A \oplus pr_2^{*}T_A$, chaque terme tiré de
+$t_A$ ; le noyau de $dm_A$ est isomorphe à $t_A$ tiré de $S$.}
+
+\emph{Le produit de Pontrjagin et le caractère de Chern.} Pour $x, y \in
+K(A)$, Riemann--Roch pour $m_A$ donne
+\[
+  (*) \qquad \mathrm{ch}(x * y) = \bigl(\mathrm{ch}(x) * \mathrm{ch}(y)\bigr)\,T,
+\]
+où le produit de Pontrjagin des classes de cycles est $a * b = m_{A*}(a
+\boxtimes b)$ ; en particulier $\mathrm{ch}$ est multiplicatif pour $*$ si
+$T = 1$.
+
+\emph{La transformation de Fourier des cycles.} Soit $D \in \mathrm{CH}^{1}(A
+\times B)$ la classe de $L$, et
+\[
+  \Psi_D = \varphi_{\exp D} \colon
+  \mathrm{CH}^{\cdot}(A)_{\mathbf{Q}} \longrightarrow \mathrm{CH}^{\cdot}(B)_{\mathbf{Q}},
+  \qquad
+  \Psi_D(a) = pr_{2*}\bigl(pr_1^{*}a \cdot \exp D\bigr).
+\]
+Riemann--Roch pour $pr_2$ donne alors, pour tout $x \in K(A)$,
+\[
+  \mathrm{ch}\,\varphi_L(x) = \Psi_D(\mathrm{ch}\,x)\,T .
+\]
+C'est la transformation de Fourier de l'anneau de Chow d'une variété
+abélienne, telle que Beauville l'a définie et étudiée en 1983 à la suite de
+Mukai ; la version cohomologique est de Lieberman (1968), et c'est elle que
+Kleiman expose dans les \emph{Dix exposés}.\footnote{A.~Beauville,
+\emph{Quelques remarques sur la transformation de Fourier dans l'anneau de
+Chow d'une variété abélienne}, 1983 ; D.~Lieberman, \emph{Numerical and
+homological equivalence of algebraic cycles on Hodge manifolds}, 1968 ;
+S.~Kleiman, \emph{Algebraic cycles and the Weil conjectures}, dans \emph{Dix
+exposés sur la cohomologie des schémas}, 1968. La page écrit « 10 Exposés
+\ldots ». Le dossier, qui cite ce volume, lui est postérieur ; le nom
+$\Psi_D$ et la définition par $\exp D$ sont les siens.}
+
+\emph{Les deux formules.} Posons $a = \mathrm{ch}\,x$, $b = \mathrm{ch}\,y$.
+En appliquant $\mathrm{ch}$ à la proposition 1, $\varphi_L(x * y) =
+\varphi_L(x)\,\varphi_L(y)$, on trouve $\Psi_D(\mathrm{ch}(x * y))\,T =
+\Psi_D(a)\,T\cdot\Psi_D(b)\,T$, puis, par $(*)$ et parce que $\Psi_D$ est
+linéaire sur $\mathrm{CH}^{\cdot}(S)_{\mathbf{Q}}$, $\Psi_D(a * b)\,T^{2} =
+\Psi_D(a)\,\Psi_D(b)\,T^{2}$ ; $T$ étant inversible,
+\[
+  \Psi_D(a * b) = \Psi_D(a)\,\Psi_D(b),
+\]
+sur toute base.\footnote{Une première rédaction de ce calcul, encadrée et
+barrée d'une diagonale sur la page 9, part de $x * y = \mathrm{ch}(a * b)
+T^{-1}$ et confond un instant $x$ et $\mathrm{ch}\,x$ ; la seconde, reprise
+au-dessous, est celle donnée ici.} De même, en appliquant $\mathrm{ch}$ au
+corollaire du théorème, $\varphi_L(xy) = (-1)^n\,\omega_A\,(\varphi_L(x) *
+\varphi_L(y))$, et $(*)$ cette fois sur $B$ :
+\[
+  \Psi_D(ab) = (-1)^n\,\bigl(\Psi_D(a) * \Psi_D(b)\bigr)\;
+  \mathrm{Todd}(t_A)\,\mathrm{Todd}(t_B)\,\mathrm{ch}(\omega_A).
+\]
+C'est ici que la lecture s'écarte de la page.\footnote{La page écrit un seul facteur $T$, avec « $T = \mathrm{Todd}(t_A)$,
+$\omega_A = \hat\Lambda\,t_A^{\vee}$ » en accolade. Le calcul qu'elle fait
+emploie $(*)$ pour le produit de Pontrjagin sur $B$, dont la classe de Todd
+est $\mathrm{Todd}(t_B)$ ; il reste, après simplification par un $T$,
+$\mathrm{Todd}(t_A)\,\mathrm{Todd}(t_B)\,\mathrm{ch}(\omega_A)$. Le terme de
+degré $1$ de ce produit est $\frac{1}{2}c_1(t_A) + \frac{1}{2}c_1(t_B) -
+c_1(t_A) = 0$, puisque $\tau_A \simeq \tau_B$ ; le produit vaut $1$ dès que
+$S$ est local. Une note marginale, partiellement illisible, dit que $a, b \in
+\mathrm{CH}^{\cdot}(A)_{\mathbf{Q}}$ et que « les formules \ldots dès que
+\ldots ».} Sur un corps, les deux formules se réduisent à
+\[
+  \Psi_D(a * b) = \Psi_D(a)\,\Psi_D(b),
+  \qquad
+  \Psi_D(ab) = (-1)^n\,\Psi_D(a) * \Psi_D(b) :
+\]
+« ce sont les formules affirmées par Kleiman dans \emph{Dix exposés}, sur un
+corps algébriquement clos et en travaillant avec une théorie cohomologique
+plutôt qu'avec $\mathrm{CH}_{\mathbf{Q}}$ — à cela près que Kleiman n'a pas
+tenu compte des facteurs $(-1)^n$ ! »\footnote{Le point d'exclamation est le
+sien. Les formules avec le signe sont celles de Beauville (1983),
+proposition 3 : $\mathcal{F}(x * y) = \mathcal{F}(x)\cdot\mathcal{F}(y)$ et
+$\mathcal{F}(x \cdot y) = (-1)^g\,\mathcal{F}(x) * \mathcal{F}(y)$. Que
+Kleiman ait omis le signe est l'affirmation de la page ; la lecture ne l'a
+pas vérifiée.}
+
+\section*{Remarques 4 et 5 : dualité et transport de structure (page 10)}
+
+\subsection*{Remarque 4 : la transformée du dual}
+
+Le morphisme $pr_2 \colon A \times B \to B$ est propre et lisse de dimension
+relative $n$, de faisceau dualisant relatif $pr_1^{*}\omega_A[n]$ ; le
+théorème de dualité donne donc, pour $F \in D_{\mathrm{parf}}(A)$ et
+$F^{\vee}$ son dual,
+\[
+  \Phi_L(F)^{\vee} \;\simeq\; pr_{2*}\bigl(pr_1^{*}F^{\vee} \otimes L^{-1} \otimes pr_1^{*}\omega_A[n]\bigr)
+  = \Phi_{L^{-1}}\bigl(F^{\vee} \otimes \omega_A[n]\bigr),
+\]
+et comme $L^{-1} \simeq (s_A \times \mathrm{id}_B)^{*}L$,
+\[
+  \Phi_L(F)^{\vee} \;\simeq\; \Phi_L\bigl(s_A^{*}F^{\vee} \otimes \omega_A[n]\bigr)
+  \;\simeq\; s_B^{*}\,\Phi_L\bigl(F^{\vee} \otimes \omega_A[n]\bigr).
+\]
+Sur les groupes de Grothendieck :
+$\varphi_L(x)^{\vee} = (-1)^n\,\omega_A\,\varphi_L(s_A^{*}x^{\vee})$.\footnote{La page écrit $\Phi_L(\check F \otimes \omega_A[n]) \simeq
+\Phi_L(F)^{\vee}$ et $\varphi_L(x)^{\vee} = (-1)^n\,\omega_A\,
+\varphi_L(\check x)$, sans la symétrie. Telle quelle la formule est fausse :
+pour $F = e_s$, on a $\Phi_L(e_s)^{\vee} = L_s^{-1} = L_{-s}$, tandis que
+$e_s^{\vee} \otimes \omega_A[n] \simeq e_s$ a pour transformée $L_s$. Le
+dualisant de $L$ étant $L^{-1}$ et non $L$, la symétrie est nécessaire ; par
+la remarque 5 elle peut être portée sur $A$ ou sur $B$. C'est la formule
+(3.8) de Mukai, $\Phi(F^{\vee}) \simeq (-1)^{*}\Phi(F)^{\vee}[g]$. La lecture
+corrige et signale.}
+
+\subsection*{Remarque 5 : transport de structure}
+
+Soit $u$ un automorphisme du schéma abélien $A$, et $u'$ l'automorphisme
+\emph{contragrédient} de $B$, c'est-à-dire l'inverse du transposé de $u$,
+caractérisé par $(u \times u')^{*}L \simeq L$. Par transport de structure,
+\[
+  \Phi_L(u_{*}F) \;\simeq\; u'_{*}\,\Phi_L(F),
+\]
+puisque $pr_1^{*}u_{*}F \otimes L \simeq (u \times \mathrm{id}_B)_{*}
+\bigl(pr_1^{*}F \otimes (\mathrm{id}_A \times u'^{-1})^{*}L\bigr)$. En
+particulier, $u = s_A$ ayant pour contragrédient $s_B$, la transformation
+commute à la symétrie : $\Phi_L(s_A^{*}F) \simeq s_B^{*}\Phi_L(F)$. « Kif-kif
+pour $\varphi_L$. »\footnote{La page écrit $\Phi_L(u.F) \simeq
+u'.\Phi_L(F)$, le point désignant l'action ; elle ne dit pas lequel de $u^{*}$
+ou $u_{*}$, qui sont inverses l'un de l'autre, et la lecture a choisi
+$u_{*}$, ce qui fixe $u'$ comme l'inverse du transposé. Avec $u^{*}$ des deux
+côtés la formule vaut également, pour le même $u'$.}
+
+\end{document}
