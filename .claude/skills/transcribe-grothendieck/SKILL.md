@@ -6,15 +6,19 @@ description: Transcribes a batch of twenty handwritten pages from the Alexandre 
 # Transcribing a batch from the Grothendieck fonds
 
 
-**Runs on Fable 5 or Opus 5, and on nothing else.** The frontmatter used to
-pin Fable 5, which made the choice automatic; the pin is gone so that Opus 5
-can be measured against it. What replaces it is a check you make yourself,
-before reading a single page:
+**Runs on Fable 5.1, Fable 5 or Opus 5, and on nothing else.** The
+frontmatter used to pin Fable 5, which made the choice automatic; the pin is
+gone so that the models can be measured against one another. What replaces it
+is a check you make yourself, before reading a single page:
 
-- **Fable 5 (`claude-fable-5`)** — the default, and what every batch in the
-  repository was produced with. Choose it unless there is a reason not to.
+- **Fable 5.1 (`claude-fable-5-1`)** — the default since 2026-09-03, when it
+  was admitted; the successor to Fable 5. Choose it unless there is a reason
+  not to.
+- **Fable 5 (`claude-fable-5`)** — permitted; what the earliest batches in the
+  repository were produced with.
 - **Opus 5 (`claude-opus-5`)** — permitted, for the standing question of
-  whether it reads a hard hand better and at what cost.
+  whether it reads a hard hand better and at what cost; most batches so far
+  were produced with it.
 - **Anything else** — stop, say which model the session is on, and do not
   transcribe. A pass on a model nobody chose produces a file whose provenance
   is an accident, and the fonds is not the place to discover that later.
@@ -23,11 +27,11 @@ Reading seventy-year-old handwriting off fourteen page images at once is the
 task this whole project turns on, and it is a sustained-visual-attention task
 before it is a mathematical one. That is why the model is worth naming rather
 than inheriting: **the header comment must record the model actually used**, in
-the form the existing files use — `% Pass: Opus 5 (claude-opus-5), <date> —
-first pass, unchecked against the pages by a human.` Report the model in the
+the form the existing files use — `% Pass: Fable 5.1 (claude-fable-5-1),
+<date> — first pass, unchecked against the pages by a human.` Report the model in the
 closing message too, so the choice is visible without opening the file.
 
-**Comparing the two.** A run made to compare models re-transcribes a batch that
+**Comparing models.** A run made to compare models re-transcribes a batch that
 already has a transcription, and it must not overwrite it: work on a git branch
 (`git switch -c opus-135-2` before writing) so the two readings can be diffed
 and one of them discarded. Only a batch with no transcription yet is written
