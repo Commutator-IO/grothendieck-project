@@ -938,4 +938,62 @@ export const FINDINGS: Finding[] = [
     settle:
       'Identify the typescript. If it is a draft of a published section, its standing hypotheses settle the question at once and this entry becomes matched. Two internal clues are available without leaving the fonds: the leaves cite « Prop. A » in a typed correction over a struck reference to 4.1, and page 5’s heading « Corollaire 4.1. ter » is renamed « Proposition A » in ink, so the document had at least the statements 4.1, 4.1 bis, 4.1 ter and 4.1 quater and was being restructured while it was typed. A search of the neighbouring shelfmarks of the group « 45-54 » for the missing leaves would be the next step.',
   },
+  {
+    id: '26-sga4-viii-79-draft',
+    cote: '26',
+    pages: '3, 5',
+    kind: 'codicological',
+    claim:
+      'Pages 3 and 5 are a typescript of SGA 4 VIII 7.9.1–7.9.3 in a state earlier than the published text, and they differ from it at two points: the folder reads « préschéma » where the published text reads « schéma », and the folder’s displayed equivalence reads « φ(U) ≠ ∅ ⇔ x ∈ U » where the Orgogozo re-edition prints « φ(U) = ∅ ⇔ x ∈ U », which is false as printed.',
+    basis:
+      'The two leaves, paginated 31 and 32 by the machine and struck through with one diagonal, carry 7.9.1 (a fibre functor is the filtered colimit of its neighbourhoods), 7.9.2 (fibre functors of a localised topos) and 7.9.3 (every point of the étale topos is a geometric point), in wording that tracks the published exposé sentence by sentence. At the close of 7.9.3 the folder has « le préschéma lim des X′ … existe et est un localisé strict Z de X », the published text « le schéma lim des X′ … ». The transcription notes that the final s of « les préschémas » was overtyped, so the word is the typist’s own and not a slip. Since EGA renamed préschéma to schéma in its 1971 second edition, the folder’s wording is the earlier of the two.',
+    ours:
+      'The identification with SGA 4 VIII 7.9 is the edition’s: the leaves carry no title, only the internal numbering 7.9.1 to 7.9.3, and the modernised reading proposed the match on that numbering and the content. The comparison recorded here was then made against the Orgogozo re-edition, which is what the second half of the claim rests on.',
+    literature: [
+      'Transcription 26, batch 1 (batch-01.fr.tex), pages 3 and 5',
+      'SGA 4, Exposé VIII (Foncteurs fibres, supports, étude cohomologique des morphismes finis), §7.9.1–7.9.3, in the re-edition by F. Orgogozo (normalesup.org/~forgogozo/SGA4/08), consulted directly',
+    ],
+    status: 'candidate',
+    settle:
+      'Collate the two leaves against the 1972 Lecture Notes in Mathematics 270 printing, which was not consulted here. That decides both halves at once: whether « préschéma » stood in the first printing, and whether the « = ∅ » is a misprint of the re-edition or is inherited from 1972. If it is inherited, the folder’s leaves carry the correct form of a line that has been wrong in print since.',
+  },
+  {
+    id: '26-wrapper-numbered-v',
+    cote: '26',
+    pages: '1',
+    kind: 'codicological',
+    claim:
+      'The folder’s own wrapper numbers the chapter V, not VI: the inventory’s title « EGA VI » is the archivists’ identification of the contents, not a reading of the leaf.',
+    basis:
+      'Page 1 is a brown wrapper carrying, in ink in the top right corner, an underlined « V » and beneath it « Plan » and « Notations », and nothing else. The note isolated on page 4 refers the reader for the general material to a chapter it writes with the same underlined V. The contents — descent, quotients, Hilbert, Picard, methods of construction — are those the plan printed in EGA I (1960) assigns to chapter VI, « Technique de descente. Méthodes générales de construction de schémas », chapter V there being « Procédés élémentaires de construction de schémas ».',
+    ours:
+      'The discrepancy is on the leaf; what the edition supplies is the comparison with the 1960 plan, and the observation that the folder’s two uses of V are consistent with each other.',
+    literature: [
+      'Transcription 26, batch 1 (batch-01.fr.tex), pages 1 and 4',
+      'Catalogue entry for shelfmark 26 in src/content/catalogue.ts, which follows the Montpellier inventory',
+      'A. Grothendieck and J. Dieudonné, EGA I (Publ. Math. IHÉS 4, 1960), the plan of the treatise printed in the introduction',
+    ],
+    status: 'candidate',
+    settle:
+      'Whether the fonds holds another folder whose wrapper numbers a chapter, and how those numbers line up with the 1960 plan. If a second wrapper shows the same shift by one, the folder is witness to an intermediate renumbering of the treatise rather than to a slip.',
+  },
+  {
+    id: '26-later-annotation-campaign',
+    cote: '26',
+    pages: '10',
+    kind: 'codicological',
+    claim:
+      'The answers in the margin of the open-problems list were added in a later campaign than the list itself, so the folder records two moments and the inventory’s single date « [après 1967] » covers only the earlier.',
+    basis:
+      'The list is written in one hand and one ink; the marginal material beside it is not. « OK par Raynaud » is boxed, « Oui » is circled, and the « VI » of the two « Chap VI » references is gone over in felt-tip, a medium used nowhere else on the leaf. The answers respond to the items rather than accompanying them: item b) asks for Hilbert and Picard without a projective hypothesis and is marked with partial results, then the dual of a non-projective abelian scheme is marked done.',
+    ours:
+      'The reading of the marginal word attached to the Raynaud note is uncertain in the transcription — « Dual » is given under reserve — so the identification of which theorem is being marked off is the edition’s inference from the line above it, which is not in doubt.',
+    literature: [
+      'Transcription 26, batch 1 (batch-01.fr.tex), page 10',
+      'M. Raynaud, Faisceaux amples sur les schémas en groupes et les espaces homogènes, Lecture Notes in Mathematics 119 (1970) — the published form of the result the margin appears to mark off, not collated against the leaf',
+    ],
+    status: 'unsearched',
+    settle:
+      'This cannot be settled by a publication date. Raynaud was Grothendieck’s student and the result circulated before it was printed, so the margin bears no terminus of its own. What would settle it is the leaf: whether the felt-tip and the boxed and circled marks form one campaign, and whether the same medium appears on dated material elsewhere in the fonds.',
+  },
 ];

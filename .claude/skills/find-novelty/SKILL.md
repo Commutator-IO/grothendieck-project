@@ -1,18 +1,22 @@
 ---
 name: find-novelty
 description: Reads a folder's modernised reading and its transcriptions and proposes candidate findings — statements the folder establishes that may not stand in the published literature — each written as a claim about the literature rather than about Grothendieck, with what was searched, what part of it is the edition's own, and what would settle it. Writes them into src/content/findings.ts, which the site's Findings tab renders. Use when someone asks what is new in a folder, what these notes have that the literature does not, to look for a refinement or an unpublished result, or to re-check candidates already listed. Never asserts priority.
-model: claude-opus-5
 ---
 
 # Looking for what is not in the literature
 
-**Runs on Opus 5**, like the reading it works from. The judgement here is the
-same one the modernised reading makes when it names a modern theorem and
-footnotes whether the manuscript could have known it — sharpened, and pointed
-at the gap instead of the match. A different model at this step would be a
-second reader silently disagreeing with the first about what the folder says,
-in the one place where the disagreement becomes a claim about other people's
-work.
+**Runs on the model that wrote the folder's modernised reading** — Fable 5.1
+or Opus 5, whichever that file's `% Pass:` header names, and on nothing else.
+The frontmatter used to pin Opus 5, when every reading was made on it; the pin
+went on 2026-09-03 with those of `/modernize-grothendieck` and
+`/tag-grothendieck`, and what replaces it is a check you make yourself: open
+the reading, read its header, stop if the session is on a different model. The
+judgement here is the same one the modernised reading makes when it names a
+modern theorem and footnotes whether the manuscript could have known it —
+sharpened, and pointed at the gap instead of the match. A different model at
+this step would be a second reader silently disagreeing with the first about
+what the folder says, in the one place where the disagreement becomes a claim
+about other people's work.
 
 ## The thing this skill is for, and the thing it must not do
 
