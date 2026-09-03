@@ -1,0 +1,606 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 47, batch 1 (pages 1-10).
+% Established from the facsimile archives/batches/47/batch-01.pdf (a mirror of
+% https://grothendieck.umontpellier.fr/47.pdf), per the skill
+% transcribe-grothendieck. The folder is ten pages and this is its only batch.
+%
+% Page 1 is a cover sheet carrying, in his hand, the title the inventory
+% reproduces — "Produit de convolution sur les VA et transformation de Fourier
+% dans les VA" — and nothing else: it takes no \page{} and its words open the
+% file as the section heading. Pages 2 to 10 are one continuous run in blue
+% ink, paginated 2-10 by the archivists only, and every one of them is
+% mathematics; no page is skipped.
+%
+% What the run is: a Fourier transform for abelian schemes over an arbitrary
+% base, stated on the derived category of perfect complexes. Proposition 1 (pp.
+% 2-3) proves that the kernel transform Phi_L exchanges Pontrjagin convolution
+% and tensor product, by base change, projection formula and the theorem of
+% the cube. The theorem of pp. 3-4 states that Phi_{sL} composed with Phi_L is
+% (-1)^n s_A^* up to a twist tau_A[-n], hence an equivalence; its proof (pp.
+% 4-5) reduces the kernel to a pushforward of the Weil sheaf, computed by Lemma
+% 1, which pp. 6-7 deduce from a vanishing lemma he attributes to Mumford and
+% admits. Remarks 1-5 (pp. 7-10) give the images of skyscrapers and degree-zero
+% line bundles, rank and Euler characteristic, a heuristic formula for the
+% Chern classes of the transform of a line bundle with the divisibility it
+% would imply, the Chow-theoretic version via Riemann-Roch (with a Todd class
+% correction and a sign (-1)^n he says Kleiman's "Dix exposés" formulas
+% missed), duality and transport of structure.
+%
+% Notation fixed for the batch: his blackboard R and L for derived functors
+% are \mathbb{R}, \mathbb{L}; the L over * and over \otimes for the derived
+% operations is \overset{L}{*}, \overset{L}{\otimes}; the hat on Lambda (top
+% exterior power) is \hat\Lambda, once noted; the sheaf on B x A deduced from
+% L by swapping factors, which he writes with a superscript s before L, is
+% {}^{s}L. A group he writes "Cw" — with a raised dot, and subscript Q — on
+% pages 8-10 is transcribed as the glyphs read, \mathrm{Cw}, and flagged
+% uncertain at its first occurrence: it is where the Chow ring would stand.
+%
+% The hand is fast; the formulas carry throughout and most of the prose does,
+% but the margins of pages 2 and 4 are written slanting up the left edge and
+% are only partly legible, and several passages are reworked with the earlier
+% attempts struck. Those are transcribed as \struck{} where they can be read.
+%
+% Pass: Fable 5.1 (claude-fable-5-1), 2026-09-03 — first pass, unchecked against the pages by a human.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{47}
+\batch{1}
+\pages{1}{10}
+\dating{s.d. — le groupe « Variétés abéliennes » (45 à 56) est daté 1961-1973}
+\watermark{Édition de démonstration}
+\foldertitle{Produit de convolution sur les VA et transformation de Fourier dans les VA : notes manuscrites (s.d.)}
+
+\begin{document}
+
+\section*{Produit de convolution sur les VA et transformation de Fourier dans les VA}
+
+\note{titre de sa main sur le premier feuillet, qui ne porte rien d'autre et
+ne reçoit donc pas de \texttt{page} ; « VA » abrège variétés abéliennes. Les
+neuf feuillets qui suivent forment une suite continue}
+
+\page{2}
+
+\textbf{Proposition 1.} Soient $S$ un schéma, $A$ un schéma abélien sur $S$,
+$X$ un schéma sur $S$, $L$ un \struck{\ill{}} faisceau inversible sur
+\struck{\ill{}} $A \times_S X$, \struck{Considérons l'homomorphisme} trivial
+sur $e_A \times_S X$, et tel que \struck{pour tout \ill{}} pour tt $x \in X$,
+le faisceau $L_x$ sur $A_x = A_s \otimes_{k(s)} k(x)$ (où $s$ est
+\uncertain{l'image} de $x$) soit alg.\ équivalent à zéro. Considérons
+l'application
+\[
+  \varphi_L \colon K^{\cdot}(A) \longrightarrow K^{\cdot}(X)
+\]
+définie par \struck{l'application additive} le foncteur de catégories
+triangulées $\Phi \colon D_{\mathrm{parf}}(A) \to D_{\mathrm{parf}}(X)$
+\[
+  \Phi_L(F) = \mathbb{R}pr_{2*}\bigl(\mathbb{L}pr_1^{*}(F) \otimes L\bigr)
+\]
+Alors $\varphi_L$ transforme produit de Pontrjagin $*$ en produit ordinaire.
+Plus précisément, on a un isomorphisme de foncteurs de catégories triangulées
+\[
+  \Phi_L\bigl(F \overset{L}{*} G\bigr) \;\simeq\;
+  \Phi_L(F) \overset{L}{\otimes} \Phi_L(G)
+  \qquad (F, G \in \mathrm{Ob}\, D_{\mathrm{parf}}(A)).
+\]
+
+\marginal{peut se généraliser au cas $A$ un schéma en groupes, $L$ sur
+$A \times_S X$ satisfaisant à
+$(\pi \times \mathrm{id}_X)^{*}(L) \simeq pr_{13}^{*}(L) \otimes pr_{23}^{*}(L)$,
+et $F$ et $G$ sur $A$ \ill{} $\in \mathrm{Ob}\, D^{b}_{\mathrm{qcoh}}(A)$
+\ill{} ; on peut aussi généraliser au cas \ill{} concernant des complexes sur
+des $C$-torseurs, $P \times Q \to R$, \uncertain{$C \times Q \to C$}, \ill{}
+et des faisceaux $L$, $L'$, $L''$ sur $R \times X$, $P \times X$, $Q \times X$
+\ill{} tels que
+$(\pi \times \mathrm{id}_X)^{*}(L) \simeq pr_{13}^{*}(L')\, pr_{23}^{*}(L'')$}
+
+\note{la note marginale court en biais le long du bord gauche du feuillet,
+en deux blocs ; entre les deux, plusieurs lignes ne se laissent pas lire}
+
+Si le th.\ est démontré dans la situation donnée, il en résulte qu'il est vrai
+\uncertain{aussi} dans la situation $(A, X', L')$ qui s'en déduit par image
+inverse à l'aide d'un $S$-morphisme $f \colon X' \to X$, car
+$\Phi_{L'} \simeq \mathbb{L}f^{*}(\Phi_L)$, et $\mathbb{L}f^{*}$ commute à
+$\overset{L}{\otimes}$. Soient donc $B$ le schéma abélien dual de $A$, et
+$L_0$ le faisceau de Weil sur $A \times_S B$. Alors l'hypothèse sur $L$
+implique que $L$ est $\simeq$ l'image inverse de $L_0$ par un morphisme
+$X \to B$. Donc on est ramené au cas $X = B$, $L = L_0$. \struck{On} Or on a
+des isom.\ fonctoriels
+\[
+  (*) \qquad F \overset{L}{*} G = \mathbb{R}\pi_{*}\bigl(F \overset{L}{\otimes}_S G\bigr)
+  \quad \text{et}
+\]
+
+\page{3}
+
+\begin{tikzcd}[column sep=small]
+A \times A \arrow[d, "\pi"'] & A \times_S A \times_S B \arrow[l, "pr_{12}"'] \arrow[d, "\pi \times \mathrm{id}_B"] \arrow[dr, "pr_3"] & \\
+A & A \times_S B \arrow[l, "pr_1"] \arrow[r, "pr_2"'] & B
+\end{tikzcd}
+
+\note{« cart » est inscrit dans le carré de gauche}
+
+\begin{tikzcd}[column sep=small]
+A \times_S A \times_S B \arrow[r, "pr_3"] \arrow[d, "f"'] \arrow[dd, bend right=70, "pr_{12}"'] & B \arrow[d, "\Delta_B"] \\
+A \times_S A \times_S B \times_S B \arrow[r, "pr_{34}"] \arrow[d, "pr'_{12}"] & B \times_S B \\
+A \times_S A &
+\end{tikzcd}
+
+\note{« cart » est inscrit dans le carré ; la flèche verticale $f$ porte sur
+la page $\mathrm{id}_{A \times A} \times \Delta_B = f$}
+
+\begin{align*}
+\Phi\bigl(F \overset{L}{*} G\bigr)
+  &\underset{\text{déf}}{\simeq}
+    \mathbb{R}pr_{2*}\bigl(\mathbb{L}pr_1^{*}(F \overset{L}{*} G) \otimes L\bigr)
+  \underset{(*)}{=}
+    \mathbb{R}pr_{2*}\bigl(\mathbb{L}pr_1^{*}(\pi_{*}(F \overset{L}{\otimes}_S G)) \otimes L\bigr) \\
+  &\underset{\text{chgt. de base}}{\simeq}
+    \mathbb{R}pr_{2*}\bigl(\mathbb{R}(\pi \times \mathrm{id}_B)_{*}(\mathbb{L}pr_{12}^{*}(F \overset{L}{\otimes}_S G)) \otimes L\bigr) \\
+  &\underset{\text{formule de proj.}}{\simeq}
+    \mathbb{R}pr_{2*}\bigl(\mathbb{R}(\pi \times \mathrm{id}_B)_{*}(\mathbb{L}pr_{12}^{*}(F \overset{L}{\otimes}_S G) \\
+  &\hphantom{\underset{\text{formule de proj.}}{\simeq}\mathbb{R}pr_{2*}\bigl(}
+    \otimes (\pi \times \mathrm{id}_B)^{*}(L))\bigr) \\
+  &\underset{\text{transit.}}{\simeq}
+    \mathbb{R}pr_{3*}\bigl(\mathbb{L}pr_{12}^{*}(F \overset{L}{\otimes}_S G) \otimes (\pi \times \mathrm{id}_B)^{*}(L)\bigr)
+\end{align*}
+
+\note{le « $\otimes L$ » de la première ligne est ajouté au-dessus, oublié
+d'abord}
+
+Or on a (th.\ des carrés) un isom.\ can.
+\[
+  (\pi \times \mathrm{id}_B)^{*}(L) \simeq pr_{13}^{*}(L)\, pr_{23}^{*}(L)
+\]
+où $pr_{13}, pr_{23} \colon A \times A \times B \to A \times B$ sont
+respectivement $pr_1 \times \mathrm{id}_B$ et $pr_2 \times \mathrm{id}_B$. On
+en conclut
+\[
+  \mathbb{L}pr_{12}^{*}(F \overset{L}{\otimes}_S G) \otimes (\pi \times \mathrm{id}_B)^{*}(L)
+  \;\simeq\;
+  \mathbb{L}f^{*}\bigl(pr^{\prime *}_{12}(F \overset{L}{\otimes}_S G) \otimes pr^{\prime *}_{13}(L) \otimes pr^{\prime *}_{24}(L)\bigr)
+\]
+où $pr'_{13}$, $pr'_{24}$ sont les deux projections
+$A \times_S A \times_S B \times_S B \to A \times_S B$. On a d'ailleurs
+\struck{on a} (\uncertain{ass.\ du $\otimes$})
+\[
+  pr^{\prime *}_{12}(F \overset{L}{\otimes}_S G) \otimes pr^{\prime *}_{13}(L) \otimes pr^{\prime *}_{24}(L)
+  \;\simeq\;
+  pr^{\prime *}_{13}(F \otimes L) \overset{L}{\otimes} pr^{\prime *}_{24}(G \otimes L)
+\]
+et on en conclut
+\begin{align*}
+\Phi\bigl(F \overset{L}{*} G\bigr)
+  &\simeq \mathbb{R}pr_{3*}\bigl(\mathbb{L}f^{*}(\quad)\bigr)
+  \underset{\text{chgt. de base}}{\simeq}
+    \mathbb{L}\Delta_B^{*}\Bigl(\mathbb{R}pr_{34*}\bigl(pr^{\prime *}_{13}(F \otimes_S L) \overset{L}{\otimes} pr^{\prime *}_{24}(G \otimes_S L)\bigr)\Bigr) \\
+  &\underset{\text{Künneth}}{\simeq}
+    \mathbb{L}\Delta_B^{*}\bigl(\mathbb{R}pr_{2*}(F \otimes L) \overset{L}{\otimes}_S \mathbb{R}pr_{2*}(G \otimes L)\bigr) \\
+  &\underset{\text{déf}}{\simeq}
+    \mathbb{L}\Delta_B^{*}\bigl(\Phi(F) \overset{L}{\otimes}_S \Phi(G)\bigr)
+  \simeq \Phi(F) \overset{L}{\otimes} \Phi(G)
+\end{align*}
+cqfd.
+
+\note{les parenthèses vides de $\mathbb{L}f^{*}(\quad)$ sont sur la page : un
+trait les relie à l'expression soulignée deux lignes plus haut}
+
+\textbf{Théorème \struck{Proposition 2}.} Soient $A$, $B$ deux schémas
+abéliens sur $S$, de dim relative $n$, $L$ un Module inversible birigidifié
+sur $A \times B$, définissant une dualité entre $A$ et $B$.
+\struck{Considérons} Alors le composé \struck{des trans\ill{}}
+\[
+  K(A) \xrightarrow{\;\varphi_L\;} K(B) \xrightarrow{\;\varphi_{{}^{s}L}\;} K(A)
+\]
+est $(-1)^n s_A^{*}$ (où $s_A$ est la symétrie de $A$) (donc, par exemple,
+$\varphi_L$ et $(-1)^n s_A^{*} \varphi_{{}^{s}L}$ sont des isomorphismes
+inverses l'un de l'autre).
+
+\note{« de dim relative $n$ » est ajouté en interligne ; ${}^{s}L$ est le
+faisceau sur $B \times A$ déduit de $L$ par la symétrie des facteurs ; le
+$(-1)^n$ de la dernière parenthèse est ajouté au-dessus de la ligne. La suite
+cite cet énoncé comme « prop.\ 2 »}
+
+\page{4}
+
+Plus précisément, le foncteur composé
+\[
+  D_{\mathrm{parf}}(A) \xrightarrow{\;\Phi_L\;} D_{\mathrm{parf}}(B)
+  \xrightarrow{\;\Phi_{{}^{s}L}\;} D_{\mathrm{parf}}(A)
+\]
+est \struck{isomorphe au foncteur} can.\ isomorphe au foncteur
+$\mathbb{L}s_A^{*} \simeq \mathbb{R}s_{A*}$ suivi de $\tau_A[-n]$,
+\struck{\ill{}} où $\tau_A \simeq \hat\Lambda\, t_A \simeq \hat\Lambda\, t_B$
+\struck{respectivement}. Donc $\Phi_L$ et $\mathbb{L}s_A^{*}\Phi_{{}^{s}L}$
+($= \mathbb{R}s_{A*}\Phi_{{}^{s}L}$) \struck{\ill{}} sont des équivalences
+des catégories triangulées de $D_{\mathrm{parf}}(A)$ et $D_{\mathrm{parf}}(B)$.
+
+\note{$\hat\Lambda$ : le $\Lambda$ porte un accent, remplacé plus bas
+(p.\ 6) par un $n$ ; c'est la puissance extérieure maximale. $t_A$ est le
+faisceau tangent de $A$ le long de la section nulle, cf.\ p.\ 6}
+
+\marginal{inutile de se borner aux complexes parfaits, prendre \ill{}
+p.\ ex.\ dans $D^{b}_{\mathrm{qcoh}}$ \struck{\ill{}}}
+
+\struck{\ill{}}
+
+\note{un mot encerclé et biffé, en haut à droite, ne se lit pas}
+
+\textbf{Corollaire \uncertain{2}.} \struck{\ill{}} $\Phi_L$ transforme
+produit ordinaire en produit de convolution :
+\[
+  \Phi_L\bigl(F \overset{L}{\otimes} G\bigr) \otimes \omega_A[n]
+  \;\simeq\;
+  \bigl[\Phi_L(F) \otimes \omega_A[n]\bigr] * \bigl[\Phi_L(G) \otimes \omega_A[n]\bigr]
+\]
+i.e.
+\[
+  \Phi_L\bigl(F \overset{L}{\otimes} G\bigr)
+  \;\simeq\;
+  \bigl[\Phi_L(F) * \Phi_L(G)\bigr] \otimes \omega_A[n].
+\]
+
+\note{le début de l'énoncé est remanié et largement biffé ; on lit encore,
+biffés, « $\Phi_L^{\omega_A[n]}$ », « $\overset{L}{\otimes}$ en
+$\overset{L}{*}$ » et « $x \mapsto (-1)^n\, \mathrm{cl}\,\omega_A\,
+\varphi_L(x)$ », et, non biffé, en interligne au-dessus, « $F \mapsto
+\Phi_L(F \otimes \omega_A[n]) \simeq \Phi_L(F) \otimes \omega_A[n]$
+transforme »}
+
+Prouvons la prop.\ 2. Il suffit de définir un isom.\
+$\Phi_{{}^{s}L} \cdot \Phi_L = \mathrm{id}_{D_{\mathrm{parf}}(A)}$. Or le
+composé des foncteurs est de la forme
+$F \mapsto \mathbb{R}pr_{2*}\bigl(pr_1^{*}(F) \overset{L}{\otimes} M\bigr)$,
+où $M \in D_{\mathrm{parf}}(A)$ est donné par
+\[
+  M = \mathbb{R}pr_{13*}\bigl(pr_{12}^{*}(L)\, pr_{23}^{*}({}^{s}L)\bigr)
+\]
+
+\marginal{$A \times B \times A$}
+
+\note{« $D_{\mathrm{parf}}(A)$ » est ce qui est écrit ; le noyau $M$ vit sur
+$A \times A$. La note marginale nomme l'espace des projections}
+
+Il faut donc calculer ce $\mathbb{R}pr_{13*}$, et pour ceci, posons
+$C = A \times A$, et considérons l'isom.\ $A \times B \times A \simeq$
+\struck{\ill{}} $C \times B$. Le module inversible
+$N = pr_{12}^{*}(L)\, pr_{23}^{*}({}^{s}L)$ sur $C \times B$ est
+\struck{\ill{}} birigidifié de façon canonique, et correspond à un
+homomorphisme $C \xrightarrow{\;\Psi\;} B^{*}$, qui n'est autre que l'hom.\
+de $A \times A$ dans $B^{*}$ dont les deux composantes sont égales à
+$\varphi \colon A \to B$ (l'hom.\ de $A$ dans $B^{*}$ défini par $L$).
+
+\note{« deux » est ajouté en interligne}
+
+\page{5}
+
+\begin{tikzcd}
+C \times_S B \arrow[r, "\Psi \times \mathrm{id}_B"] \arrow[d, "pr_1"'] & B^{*} \times_S B \arrow[d, "pr'_1"] \\
+C \arrow[r, "\Psi"] & B^{*}
+\end{tikzcd}
+
+\note{« cart » dans le carré ; le second facteur du coin supérieur droit
+porte un astérisque biffé}
+
+Ceci dit, on aura \struck{$\mathbb{R}pr_{2*}(N)$}
+$N \simeq (\Psi \times \mathrm{id}_B)^{*}(W_B)$ ($W_B$ le Module de Weil sur
+$B \times_S B^{*}$), d'où
+\[
+  \mathbb{R}pr_{2*}(N) \simeq \mathbb{R}pr_{2*}(\Psi \times \mathrm{id}_B)^{*}(W_B)
+  \underset{\text{chgt de base}}{\simeq}
+  \mathbb{L}\Psi^{*}\bigl(\mathbb{R}pr'_{2*}(W_B)\bigr).
+\]
+
+\note{la ligne écrit $pr_2$, $pr'_2$ là où le diagramme et le corollaire
+ci-dessous ont $pr_1$, $pr'_1$}
+
+\textbf{Lemme 1.} Soient $B$ un schéma abélien sur $S$, de dim.\ relative $n$,
+$W$ le faisceau de Weil sur $B^{*} \times_S B$,
+$p \colon B^{*} \times_S B \to B^{*}$ la projection. Alors
+\[
+  \mathbb{R}p_{*}(W) \simeq e_{*}\bigl(\struck{\ill{}}\; \tau_{B^{*}}[-n]\bigr)
+\]
+($\tau_{B^{*}} = \hat\Lambda^{n}\, t_{B^{*}}$, $t_{B^{*}}$ le faisceau
+tangent à $B^{*}$ le long de la section $0$) (isom.\ canonique).
+
+\note{« de dim.\ relative $n$ » est ajouté en interligne, relié par une
+accolade ; les astérisques des deux $B$ de l'énoncé sont retouchés, un ajouté,
+un biffé, et la lecture $B^{*} \times_S B$ suit le diagramme}
+
+\marginal{$\simeq e_{*}(\omega^{-1})$ où
+$\omega = \uncertain{\det{}^{*}}(\Omega^{1}_{B^{*}/S})$}
+
+On en conclut
+
+\textbf{Corollaire.} Soient $C$, $B$ schémas abéliens sur $S$, $N$ un Module
+inversible birigidifié sur $C \times_S B$, $\Psi \colon C \to B^{*}$ l'hom.\
+correspondant. Alors on a
+\[
+  \mathbb{R}pr_{1*}(N) \simeq \mathbb{L}\Psi^{*}\bigl(\uncertain{e_{*}\tau_{B^{*}}}[-n]\bigr)
+\]
+
+\note{les symboles entre la parenthèse et $[-n]$ sont surchargés et ne se
+lisent qu'avec doute}
+
+En particulier, si $\Psi$ est un épimorphisme, \struck{donc} plat, et si
+$K = \operatorname{Ker}\Psi$, donc $K$ est un sous-schéma en groupes de $C$
+plat et de prés.\ finie sur $S$ donc \struck{défini} \struck{$\mathcal{O}_K$
+\ill{}} \uncertain{parfait} sur $C$, et on a
+\[
+  \mathbb{R}pr_{1*}(N) \simeq \mathcal{O}_K[-n] \otimes_S \tau_{B^{*}}
+\]
+
+Dans le cas qui nous occupe, $C = A \times A$, \struck{\ill{}},
+$\varphi \colon A \simeq \uncertain{C^{*}}$, et \struck{\ill{}} par suite $K$
+est l'antidiagonale de $A \times_S A$, noyau de
+$\pi_A \colon A \times_S A \to A$, qui est le graphe de la symétrie $s_A$ de
+$A$. Donc \struck{\ill{}} \uncertain{modulo dém.\ du} Lemme 1.
+
+\note{la lettre lue $C^{*}$ est nette ; l'argument demande $B^{*}$}
+
+\page{6}
+
+Démonstration du Lemme 1. Il sera une conséquence du
+
+\textbf{Lemme 2 (Mumford).} Soit $B$ schéma abélien sur un corps (alg.\ clos)
+$k$, et $L$ un Module inv.\ sur $B$ alg.\ équivalent à zéro, \struck{Alors}
+et non isomorphe à $\mathcal{O}_B$. Alors on a
+\[
+  H^{i}(X, L) = 0 \quad \text{pour tout } i
+\]
+
+\note{« $X$ » est ce qui est écrit, pour $B$. Suit un encadré entièrement
+biffé, où l'on distingue $H^{0}(X, L) = 0$, $k$, $L \simeq \mathcal{O}$}
+
+\struck{Démonstration du Lemme 2. L'assertion sur les $H^{0}$ est triviale,
+et il reste à prouver que $H^{i}(X, L) = 0$ \ill{}}
+
+Nous allons ici admettre le lemme 2, et nous montrons comment on
+\struck{conclut} déduit le lemme 1. Nous voyons déjà grâce \uncertain{au}
+lemme 2 que $\mathbb{R}p_{*}(W)$ est concentré sur la section unité de
+$B^{*}$. Nous allons définir un homomorphisme canonique (on écrit
+$e_{B^{*}} = e$)
+\[
+  \mathbb{R}p_{*}(W) \longrightarrow \struck{\ill{}}\; e_{*}(\mathcal{O}_S) \otimes_{\mathcal{O}_S} \tau_{B^{*}}[-n]
+\]
+(comme \ill{}, \ill{} $R^{i}p_{*}(W) = 0$ si $i > n$) ou, ce qui revient au
+même, un homomorphisme canonique
+\[
+  R^{n}p_{*}(W) \longrightarrow \struck{\otimes_S}\; \tau_{B^{*}}
+\]
+ou encore un hom.
+\[
+  \struck{e_{B}}\; e^{*}\bigl(R^{n}p_{*}(W)\bigr) \longrightarrow \struck{\otimes_S}\; \tau_{B^{*}}
+\]
+
+\begin{tikzcd}
+B^{*} \times_S B \arrow[d, "p"'] & B \arrow[l, "e'"'] \arrow[d, "g"] \\
+B^{*} & S \arrow[l, "e"]
+\end{tikzcd}
+
+Or on a \ill{} (formule de changement de base, comme
+$e^{\prime *}(W) \simeq \mathcal{O}_B$, et \struck{\ill{}}) définissant un
+hom.
+\[
+  R^{n}g_{*}(\mathcal{O}_B) \longrightarrow \struck{\otimes_S}\; \tau_{B^{*}}
+\]
+Or on sait que l'on a un isom canonique
+\[
+  R^{n}g_{*}(\mathcal{O}_B) \simeq \hat\Lambda\, R^{1}g_{*}(\mathcal{O}_B) \simeq \hat\Lambda^{n}\, t_{B^{*}}
+\]
+où $t_{B^{*}}$ est le faisceau tangent de $B^{*}$ le long de $e$. On prend
+alors \struck{\ill{}} l'hom identique $\hat\Lambda^{n}\, t_{B^{*}} \simeq \tau_{B^{*}}$.
+
+\page{7}
+
+Ceci posé, je dis que l'homomorphisme précédent
+\[
+  \mathbb{R}p_{*}(W) \longrightarrow e_{*}(\mathcal{O}_S) \otimes \tau_{B^{*}}[-n]
+\]
+est un isomorphisme. Il suffit pour ceci de prouver que l'homomorphisme
+induit \struck{pour les} en tout point \struck{$x$} $b \in B^{*}$ par
+$\mathbb{L}i_b^{*}$ est un isomorphisme (histoire de \ill{}-cylindres
+\ldots). En les points $b \in B^{*} - e(S)$, ce n'est autre que le lemme 2.
+En un point \struck{$b \in e$} \uncertain{$b$ de} $e(S)$, on est ramené au
+cas où $S$ est le spectre d'un corps algébriquement clos, à faire une
+vérification de compatibilité \ldots\ldots
+
+\textbf{Remarques} 1) a) $\Phi_L$ transforme $e_A$ en $1_B$, $e_s$ ($s$
+section de $A/S$) en $L_s$ (faisceau inv.\ alg.\ $\simeq 0$ sur $B$ rel
+$/S$), donc $e_s * F$ en $L_s \otimes \Phi_L(F)$.
+
+b) $\Phi_L$ transforme \struck{$\omega_A[n]$ en \ill{}, $\omega_A[n]$} $L_t$
+($t$ section de \uncertain{$B$} sur $S$) en $\tau[-n]\, e_{-t}$, i.e.\
+$L_t\, \omega[n]$ en $e_{-t}$, \struck{donc} $F \otimes L_t$ \struck{\ill{}}
+en $\bigl[\Phi_L(F) * e_{-t}\bigr]$ \struck{\ill{}}.
+
+\note{la lettre lue $B$ est formée comme un $D$, ici comme p.\ 5 dans
+$W_B$ ; $e_A$, $e_s$, $e_{-t}$ sont les faisceaux structuraux des sections
+correspondantes}
+
+c) $\varepsilon_B(\Phi_L(F)) = \chi_A(F)$,
+$\chi_B(\Phi_L(F)) = (-1)^n\, \varepsilon_A(F)$.
+
+\marginal{$\varepsilon = $ \ill{} ; égalité dans $H^{0}(S, \mathbf{Z})$}
+
+2) $\det{}^{*} \circ \Phi_L$ définit un homomorphisme
+\[
+  \varphi \colon \underline{\mathrm{Pic}}_{A/S} \longrightarrow \underline{\mathrm{Pic}}_{B/S}
+\]
+qui, pour toute section \struck{\ill{}} $\delta$ de $\underline{NS}_{A/S}$,
+définit un \ill{}
+\[
+  \underline{\mathrm{Pic}}^{\delta}_{A/S} \longrightarrow \underline{\mathrm{Pic}}^{-\delta'}_{B/S}
+\]
+compatible avec \uncertain{$-(-\tilde\delta{}') = \tilde\delta{}'$}
+
+\page{8}
+
+si $\delta' \in \underline{NS}_{B/S}(S)$ été défini comme \ill{}
+constitué par ailleurs, par
+\[
+  \tilde\delta{}'\, \tilde\delta = -\chi(\delta)\, \mathrm{id}_A
+\]
+\ldots\ldots
+
+On peut se proposer, pour une section $\lambda$ de $\underline{\mathrm{Pic}}_{A/S}$,
+définissant $L$ faisceau inv.\ sur $A$, de « calculer » la classe dans $K(B)$
+de $\varphi_L(\struck{\ill{}}\, \mathrm{cl}(L))$ en termes des invariants de
+la section $\varphi(\lambda)$ de $\underline{\mathrm{Pic}}_{B/S}$, définissant
+un faisceau inversible $L'^{-1}$ sur $B$ (de classe $-\delta'$ dans
+$NS(B/S)$ si $\delta$ \uncertain{est la classe de} $\lambda$ dans $NS(A/S)$).
+Heuristiquement, \struck{\ill{}} devrait avoir (pour $\chi(\delta) \neq 0$
+partout sur $S$)
+\[
+  \varphi_L(\mathrm{cl}(L)) = \chi\; \struck{\ill{}}\; L'^{-1/\chi}
+  \qquad \text{où } \chi = \chi(\delta) \in H^{0}(S, \mathbf{Z}).
+\]
+
+\marginal{indépendant des résultats de Mumford}
+
+\note{« devrait avoir » est ajouté au-dessus de la ligne, relié à la place
+d'un mot biffé ; l'exposant $-1/\chi$ est entre guillemets sur la page}
+
+Au niveau du $\mathrm{ch}_B$, ceci s'écrit
+\[
+  \mathrm{ch}\, \varphi_L(\uncertain{\mathrm{cl}(L)}) = \chi \exp\Bigl(-\frac{D'}{\chi}\Bigr)
+  = \chi - D' + \frac{1}{2\chi} D'^{2} - \frac{1}{3!\,\chi^{2}} D'^{3} \ldots
+  + (-1)^n \frac{1}{n!\,\chi^{n-1}} D'^{n},
+\]
+et au niveau des classes de Chern \struck{\ill{}}
+\begin{align*}
+  c(\varphi_L(\uncertain{\mathrm{cl}(L)})) &= \Bigl(1 - \frac{D'}{\chi}\Bigr)^{\chi}
+  = 1 - D' + \frac{\chi(\chi-1)}{2\chi} D'^{2} - \frac{\chi(\chi-1)(\chi-2)}{3!\,\chi^{2}} D'^{3} + \cdots \\
+  &\qquad + (-1)^n \frac{\chi(\chi-1)\cdots(\chi-n+1)}{n!\,\chi^{n-1}} D'^{n}.
+\end{align*}
+
+\marginal{$D' \in \uncertain{\mathrm{Cw}^{1}}$ défini par $L'$}
+
+\note{« Cw » est la lecture des glyphes, ici et pp.\ 9-10 : un $C$, une lettre
+basse à deux jambages, un point en exposant et l'indice $\mathbf{Q}$ ; c'est
+la place de l'anneau de Chow, que la p.\ 10 oppose à une « théorie
+cohomologique ». L'argument de $\varphi_L$ dans les deux formules est
+surchargé}
+
+? Ces formules sont-elles bien vraies mod torsion ? Elles sont vraies au moins
+sur un corps alg.\ clos, mod équivalence homologique (\uncertain{donc le}
+$\neq$ \uncertain{car.\ $h$}). Ceci donnerait des propriétés de divisibilité
+intéressantes de $\delta'$ : à savoir
+\[
+  \struck{\ill{}}\; \frac{\chi(\chi-1)\cdots(\chi-k+1)}{k!\,\chi^{k-2}}\, \delta'^{k}
+\]
+est « entier », i.e.\ provient d'un cycle à coeff.\ entiers.
+
+\note{le point d'interrogation ouvrant le paragraphe est le sien, en marge ;
+« équivalence homologique » est souligné deux fois ; la dernière parenthèse
+ne se lit qu'avec doute}
+
+\page{9}
+
+3) On vérifie (par R.R.\ pour $A \times A \xrightarrow{\;\pi_A\;} A$) que
+l'on a sur $A$
+\[
+  (*) \qquad \mathrm{ch}(x * y) = \mathrm{ch}(x) * \mathrm{ch}(y)\; \mathrm{Todd}(t_A)
+\]
+(donc, \ill{} : $\mathrm{ch}(x * y) = \mathrm{ch}(x) * \mathrm{ch}(y)$ si
+$\mathrm{Todd}\, t_A = 1$, p.\ ex.\ si $t_A$ est trivial, p.\ ex.\ $S$
+local).
+
+Considérons d'autre part l'élément $D$ de $\mathrm{Cw}^{1}(A \times A)$
+défini par $L$, et considérons \struck{le} $\exp D$, d'où
+\[
+  \Psi_D = \varphi_{\exp D} \colon \mathrm{Cw}^{\cdot}(A)_{\mathbf{Q}} \longrightarrow \mathrm{Cw}^{\cdot}(B)_{\mathbf{Q}}.
+\]
+
+\note{« $\exp D$ » est écrit au-dessus de « l'élément », relié par un trait}
+
+\struck{Alors \ill{} On a donc, par prop.\ 1 : $\Psi_D(xy) = \Psi_D(x)\Psi_D(y)$.
+On veut utiliser prop.\ 2 pour calculer $\Psi_D(a * b)$. On a, si
+$a = \mathrm{ch}\, x$, $b = \mathrm{ch}\, y$ : $x * y = \mathrm{ch}\, a *
+\mathrm{ch}\, b = \mathrm{ch}(a * b)\, T^{-1}$ ($T = \mathrm{Todd}(t_A)$),
+d'où $\Psi_D(x * y) = \Psi_D(\mathrm{ch}(a * b)\, T^{-1})$}
+
+\note{tout le bloc est encadré d'un trait à gauche et barré d'une diagonale ;
+c'est une première rédaction, reprise ci-dessous}
+
+\struck{Si on a} \ill{}, par RR pour $A \times_S B \to B$ :
+\[
+  \mathrm{ch}(\varphi_L(x)) = \Psi_D(\mathrm{ch}(x))\, T \qquad (T = \mathrm{Todd}\, t_A)
+\]
+\struck{Supposons \ill{}} Posons $a = \mathrm{ch}\, x$, $b = \mathrm{ch}\, y$,
+et transformons \ill{}
+\[
+  \varphi_L(x * y) = \varphi_L(x)\, \varphi_L(y) \qquad \text{(prop 1)}
+\]
+par $\mathrm{ch}$, on trouve
+\[
+  \Psi_D(\mathrm{ch}(x * y))\, T = \Psi_D(\mathrm{ch}\, x)\, T\; \Psi_D(\mathrm{ch}\, y)\, T
+\]
+d'où, \struck{\ill{}} grâce à $(*)$ :
+\[
+  \Psi_D(\struck{\ill{}}\; \mathrm{ch}\, x * \mathrm{ch}\, y)\, T\, \struck{T^{2}}
+  = \Psi_D(\mathrm{ch}\, x)\, \Psi_D(\mathrm{ch}\, y)\, T^{2}
+\]
+i.e.
+\[
+  \Psi_D(a * b) = \Psi_D(a)\, \Psi_D(b)
+\]
+
+\note{la dernière formule est encadrée ; « $(*)$ » est écrit au-dessus du
+facteur biffé de la précédente}
+
+\page{10}
+
+De même, on a (prop.\ 2, cor.)
+\[
+  \varphi_L(xy) = \bigl(\varphi_L(x) * \varphi_L(y)\bigr)\; \struck{\ill{}}\; (-1)^n \omega_A
+\]
+d'où en appliquant $\mathrm{ch}$ et $(*)$
+\[
+  \Psi_D(\mathrm{ch}(xy)) = \struck{\ill{}}\; \Psi_D(\mathrm{ch}\, x) * \Psi_D(\mathrm{ch}\, y)\bigr)\, T\, (-1)^n\, \struck{\exp}\; \mathrm{ch}\, \omega_A
+\]
+donc comme $\mathrm{ch}(xy) = \mathrm{ch}\, x\; \mathrm{ch}\, y$
+\[
+  \Psi_D(ab) = \Psi_D(a) * \Psi_D(b)\, (-1)^n\, T\, \mathrm{ch}\, \omega_A
+  \qquad
+  \begin{cases}
+    T = \mathrm{Todd}(t_A) \\
+    \omega_A = \hat\Lambda\, t_A^{\vee}
+  \end{cases}
+\]
+
+\note{la formule est encadrée ; la parenthèse ouvrante manque à la ligne
+précédente, comme sur la page}
+
+\marginal{$a, b \in \mathrm{Cw}^{\cdot}(A)_{\mathbf{Q}}$ ; les formules \ill{}
+dès que \ill{}}
+
+Ce sont les formules (\struck{\ill{}} \ill{} \uncertain{affirmations}) par
+Kleiman dans « 10 Exposés \ldots », sur un corps alg.\ clos et en travaillant
+avec une théorie \uncertain{cohomologique} plutôt qu'avec
+$\mathrm{Cw}_{\mathbf{Q}}$, --- à cela près que Kleiman n'a pas tenu compte
+des facteurs $(-1)^n$ !
+
+4) Il résulte de (\uncertain{th.\ de dualité pour} $A \times_S B \to B$) qu'on
+a un \uncertain{isom.}\ fonctoriel
+\[
+  \Phi_L\bigl(\check F \otimes \omega_A[n]\bigr) \simeq \Phi_L(F)^{\vee}
+\]
+i.e.
+\[
+  \Phi_L(F)^{\vee} \simeq \Phi_L\bigl(\check F \otimes \omega_A[n]\bigr)
+\]
+\uncertain{Donc pour les} \ill{} virtuels, ceci s'écrit
+\[
+  \varphi_L(x)^{\vee} = (-1)^n\, \omega_A\, \varphi_L(\check x)
+\]
+
+\note{la seconde formule est encadrée}
+
+5) Bien sûr, si $u$ est un automorphisme de $A$ et $u'$ l'automorphisme
+contragrédient de $B$, on a par transport de structure un isom.\ canonique
+\[
+  \Phi_L(u.F) \simeq u'.\Phi_L(F)
+\]
+En particulier, $\Phi_L$ commute à la symétrie $s_A$. Kif-kif pour $\varphi_L$.
+
+\end{document}
