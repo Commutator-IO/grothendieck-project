@@ -1,0 +1,995 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 161-2, batch 5 (pages 81-100).
+% Established from the facsimile archives/batches/161-2/batch-05.pdf (a mirror of
+% https://grothendieck.umontpellier.fr/161-2.pdf), per the skill
+% transcribe-grothendieck. Pages 88 and 96 are blank and absent. Three runs:
+% pp. 81-87, white lined sheets continuing batch 4 — the adjunction
+% Thé_Δ ⇄ Δ, 2-representability, the step-by-step category B'_T of
+% "explicit constructions" (a)-(d''), and the transfinite construction of R
+% from a generating family; p. 89, a half-sheet on λ-categories and the
+% heading « 9. Relation avec analyseurs de Lazard »; pp. 90-91, two
+% « dictionnaires » laid out as tables (types / λ-categories / topoi with
+% enough essential points), transcribed row by row as labelled lists;
+% pp. 92-95, a fast draft on whether « corps » is a structure definable by
+% limits, the universal field as the structure sheaf of the Zariski topos;
+% pp. 97-100, a fair copy he paginated ①-④, « λ-types » — Cat_λ, T_λ,
+% R_T^λ, λ-representability, Définition 5.1 and Question 5.1. The dictionaries
+% and pp. 92-95 carry many \ill{}: the hand there is a palimpsest.
+% Pass: Fable 5.1 (claude-fable-5-1), 2026-09-04 — first pass, unchecked against the pages by a human.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{161-2}
+\batch{5}
+\pages{81}{100}
+\dating{[vers 1963-1973]}
+\watermark{Édition de démonstration}
+\foldertitle{Algèbre universelle [ou catégories] : notes manuscrites (s.d.)}
+
+\begin{document}
+
+\page{81}
+\note{la page est écrite sur deux colonnes ; la colonne de gauche d'abord}
+
+\begin{tikzcd}[column sep=large]
+  \text{Thé}_{\Delta} \arrow[r, bend left=20, "\rho"] & \Delta \arrow[l, bend left=20, "\sigma"']
+\end{tikzcd}
+\note{sous $\sigma$ : « 2 fidèle »}
+
+\[
+  \sigma(R) = (C \mapsto \mathrm{Hom}(R, C))
+\]
+On a $\mathrm{Hom}(\sigma(R), T) \simeq T(R)$, en particulier
+$\mathrm{Hom}(\sigma(R), \tau) \simeq \tau(R) = R$ \note{sous
+$\mathrm{Hom}(\sigma(R), \tau)$, relié par un double trait :
+$\rho\sigma(R)$}, donc $\rho\sigma(R) \simeq R$ et $\sigma$ est 2 fidèle
+[\uncertain{général} dans tout 2-cat.]
+
+\note{colonne de droite} $\rho(T) = B_{T}$ cat. des constructions sur $T$
+$= \mathrm{Hom}(T, \tau)$. On demande que $\rho(T) \in \mathrm{Ob}\,\Delta$
+pour tout $T$, et que si $T \to T'$, alors $\mathrm{Hom}(T', \tau) \to
+\mathrm{Hom}(T, \tau)$ \note{sous le membre de gauche : $\rho(T')$} soit
+une flèche de $\Delta$. \underline{NB}\ $\rho$ défini en termes des
+2-foncteurs $\Delta \xrightarrow{\ \tau\ } (\mathrm{Cat})$ i.e. la
+2-catégorie cofibrée « fonctorielle » $\tau$ sur $\Delta$\ldots
+
+\struck{$\mathrm{Hom}_{\Delta}(R, R') \simeq$}
+\[
+  \mathrm{Hom}(\sigma(R), T) \longrightarrow
+  \mathrm{Hom}_{\Delta}(\rho(T), R) = (\sigma(\rho(T)))(R)
+\]
+\note{au-dessus du membre de gauche, relié par une flèche : $\approx T(R)$ ;
+sous le $R$ final, par un double trait : $\rho\sigma(R)$ ; en regard à
+droite, sous une accolade marquée $\Delta$ : $T(R) \times \rho(T) \to R$}
+est-ce une équivalence ? Réponse : pour $\forall R$ ssi $T$ 2-repr. par
+$\rho(T)$.
+
+$\sigma\rho(T) \to T$ \note{encerclé : « can. à isom. canonique près »}
+$\mathrm{Hom}(\sigma\rho(T), T) \simeq T(\rho(T))$, peut-on décrire un
+objet à isom. unique près dans $T(\rho(T))$ ??
+
+\note{encadré :} $T \to \sigma\rho(T)$.
+
+\struck{C'est le morphisme universel des $I$ objets pour \ill{}. Théorème
+$X$ 2-repr\ill{} \ill{}, on $\mathrm{Hom}(T, \sigma(R)) \to$ \ill{}}
+\note{un bloc de quatre lignes en bas de page, encadré puis biffé en
+diagonale}
+
+\page{82}
+$\Delta$ ($\in \mathrm{Cat}_{d}$) $\subset \mathrm{Cat}$.
+
+\marginal{en haut à droite : Question des générateurs de
+$(\mathrm{Cat}_{\Delta})$. On ne \uncertain{se soucie} pas que les objets
+généraux de $\Delta$ en aient, mais ceux qui définissent des théories
+algébriques, oui\ldots}
+
+\begin{enumerate}
+  \item[(1)] Pour $I \in \mathrm{Ob}(\mathrm{Cat})$ ($I$ petit ?), le
+    2-foncteur \struck{\ill{}} $C \mapsto \mathrm{Hom}_{\mathrm{Cat}}(I, C)$
+    est 2-représentable [l'objet qui le 2-représente, soit $\tilde{I}$, est
+    « la » $\Delta$-enveloppe de $C$] \note{sic ; lire sans doute $I$}
+    (voir $\Delta$-enveloppe de $C$ ?) :
+    \[
+      \mathrm{Hom}_{\mathrm{Cat}}(I, C) \simeq \mathrm{Hom}_{\Delta}(\tilde{I}, C)
+    \]
+    (i.e. l'inclusion $\Delta \to \mathrm{Cat}$ admet un 2-adjoint à
+    gauche) \struck{Pour \ill{}} $I \mapsto \tilde{I}$ est un 2-foncteur
+    $(\mathrm{Cat}) \to \Delta$.
+  \item[(2)] Pour $J \in \mathrm{Ob}\,\Delta$ et $\Sigma \subset
+    \mathrm{Fl}(J)$ ($\Sigma$ petit), le 2-foncteur $C \mapsto
+    \mathrm{Hom}_{\Delta}(J, C; \Sigma) = $ sous-catégorie pleine de
+    $\mathrm{Hom}_{\Delta}(J, C)$ formée des $u : J \to C$ tels que
+    $u(\alpha)$ inv. pour tt $\alpha \in \Sigma$, est 2-représentable (par
+    une catégorie notée $J^{-1}_{\Sigma}$ ou $J\Sigma^{-1}$).
+\end{enumerate}
+
+\underline{Conséquence} : Existence de 2-limites inductives dans $\Delta$,
+pour un pseudo-foncteur $I \to \Delta$, $i \mapsto A_{i}$.
+
+Soit en effet $D = \varinjlim_{i, (\mathrm{Cat})} A_{i}$ \add{dans
+$(\mathrm{Cat})$}, avec $\alpha_{i} : A_{i} \to D$ dans $(\mathrm{Cat})$,
+\struck{des tels pour} \add{pour $C \in \mathrm{Ob}\,\Delta$}
+\[
+  \mathrm{Hom}_{\mathrm{Cat}}(D, C) \xrightarrow{\ \approx\ }
+  \varprojlim \mathrm{Hom}_{\mathrm{Cat}}(A_{i}, C)
+\]
+\note{sous le membre de gauche : $L(C)$ ; au-dessus du membre de droite :
+« dans Cat »} \struck{dans \ill{}} « est » les sous-catégories pleines des
+\struck{Hom} $\mathrm{Hom}_{\mathrm{Cat}}(D, C)$ \struck{\ill{}
+$\varprojlim \mathrm{Hom}_{\Delta}(A_{i}, C)$)} des $D \xrightarrow{u} C$
+tels que $\forall i$, $u \circ \alpha_{i} : A_{i} \to C$ est dans
+$\mathrm{Hom}_{\Delta}(A_{i}, C)$, \struck{\ill{}} ou encore la
+sous-catégorie des $\mathrm{Hom}_{\Delta}(\tilde{D}, C)$ \add{des
+$\tilde{u} : \tilde{D} \to C$} tels que pour $\forall i$, \ill{} soit
+$\tilde{u} \circ \tilde{\alpha}_{i} \in \mathrm{Ob}\,\mathrm{Hom}_{\Delta}
+(A_{i}, C)$, \ill{} où $\tilde{\alpha}_{i}$ est le composé $A_{i}
+\xrightarrow{\alpha_{i}} D \xrightarrow{\mathrm{can}} \tilde{D}$. Or les
+conditions
+
+\page{83}
+\add{« $\tilde{u} \circ \tilde{\alpha}_{i}$ sont $\Delta$-foncteurs »}
+s'expriment par la condition de rendre inversibles certaines flèches
+$\Sigma$ de $\tilde{D}$ [\uncertain{du moins} si \ill{} les
+$\Delta$-foncteurs sont définis par des prop. de commutation à certains
+types de $\varprojlim$ qui existent dans toutes les cat. éléments de
+$\Delta$]. Il n'est pas clair qu'on puisse se ramener au cas $\Sigma$
+petit (si les $A_{i}$ ne sont pas petits\ldots), ce qui n'est guère le cas
+que si les \uncertain{types} de diagrammes $d'$, $d''$ par rapport
+auxquels on veut prendre des $\varprojlim$ et $\varinjlim$ et y commuter
+sont petits) ; donc il faut alors travailler avec des sous-catégories
+« génératrices » petites, en un sens convenable\ldots
+
+\underline{NB}\ construction des 2-limites dans $(\mathrm{Cat})$ : elle est
+faite dans SGA 4 VI en prenant la catégorie totale de la 2-catégorie
+cofibrée envisagée et en rendant inversibles les morphismes cartésiens.
+
+\note{un trait horizontal sépare ce qui suit}
+
+\underline{« Théorie » $T$ sur $\Delta$} : 2-catégorie cofibrée sur $\Delta$
+i.e. 2-pseudofoncteur $\Delta \xrightarrow{\ T\ } \mathrm{Cat}$. Ils forment
+une 2-catégorie $\text{Thé}(\Delta)$. Dedans, on a $\tau \in
+\mathrm{Ob}\,\text{Thé}(\Delta)$, $\tau(C) = C$. On pose
+$\mathrm{Hom}(T, \tau) = B_{T}$ catégorie des constructions \struck{des
+\ill{}}. \underline{NB}\ Si $T$ est 2-représenté par $R \in
+\mathrm{Ob}\,\Delta$, $T(C) \simeq \mathrm{Hom}_{\Delta}(R, C)$, alors on a
+\add{Équiv.} pour $\forall$ Théorie $T'$ sur $\Delta$
+\[
+  \mathrm{Hom}(T, T') \simeq T'(R) ;
+\]
+en particulier $B_{T} = \mathrm{Hom}(T, \tau) \simeq \tau(R) = R$,
+
+\page{84}
+ce qui explique en particulier que $B_{T} \in \mathrm{Ob}\,\Delta$ (si
+$\Delta$ est défini par des propriétés d'exactitude, cela est clair, car
+dans $B_{T} = \mathrm{Hom}(T, \tau)$ les $\varprojlim$ du type $d'$, $d''$
+se construisent argument par argument). Mais il y a un « grain de sel »,
+c'est qu'il n'est pas clair que $B_{T}$ soit une $\mathcal{U}$-catégorie.
+\uncertain{La description de $B_{T}$ qui est la plus brutale} ; on va
+définir pas à pas une catégorie $B'_{T}$ de « constructions explicites »
+(sic) pour une \struck{catégorie} \add{théorie} algébrique $T$, pourvu
+\ill{} on construit cette notion de théorie algébrique. Mais on \ill{}
+\uncertain{aussi} que $B'_{T} \in \mathrm{Ob}\,\Delta$.
+
+\marginal{en marge gauche, au niveau de a) : il faut aussi préciser les
+axiomes des types « flèches rendues égales » (ceci \uncertain{ne résulte}
+pas des précédents si on suppose p. ex. $d' = d'' = \emptyset$) ;
+encerclé au-dessous : \uncertain{égalité} de flèches}
+
+\marginal{en travers de la marge gauche, en diagonale, une note de sept
+lignes dont seuls des fragments se lisent : \ill{} d'axiomes : \ill{}
+de \ill{}, dans l'\ill{} on fait \ill{} objets de base, mais on peut
+\ill{} aussi \ill{} (d) \ill{}}
+
+\begin{enumerate}
+  \item[a)] \underline{Structure vide sur $I$ objets} : correspond à
+    \struck{\ill{}} la « théorie » $\tau^{I}$. Elle est représentable par
+    \struck{la catégorie discrète $I$} \struck{Les objets de $\tilde{I}$
+    sont sans doute obtenus} la $\Delta$-enveloppe \struck{$\tilde{I}$} de
+    la catégorie discrète $I$. On pose $B'_{\tau^{I}} = \tilde{I}$. On peut
+    expliciter $\tilde{I}$ (si $\Delta$ défini par ex. \uncertain{par des
+    cond. d'exactitude}) en \struck{\ill{}} prenant $\varprojlim$ de type
+    $d$ à partir des objets $i$, et des \uncertain{nouvelles} flèches
+    grâce aux axiomes d'exactitude ou inverses des \ill{} d'exactitudes
+    \struck{\ill{}} \note{une ligne biffée}
+  \item[b)] \underline{Structure déduite d'une structure $T$} (avec cat.
+    des constructions explicites $B'_{T}$) \underline{en ajoutant}
+    \struck{en ajoutant des flèches $\Sigma$} \add{des axiomes} : « un
+    ensemble $\Sigma$ de flèches de $B'_{T}$ doivent être rendues
+    inversibles » : $B'_{T'} = B'_{T}\Sigma^{-1}$ (dans $\Delta$).
+    \underline{NB}\ Si \struck{on} $T$ est 2-rep. par $R$, alors $B'_{T}
+    \simeq R$, \struck{donc $B'_{T'} \simeq R'$ \ill{} $T'$ rep. par $R'$
+    \ill{}} \note{deux lignes biffées} \underline{Re NB}\ Si on a
+    foncteur fidèle $T \to \tau^{I}$, le composé $T' \to T \to \tau^{I}$
+    aussi.
+  \item[c)] \underline{Structure déduite d'une structure $T$} (($T' \to
+    T$ pl. fid.)) \underline{en ajoutant des flèches} (nouvelles
+    données) : \struck{$\forall x, y \in B'_{T}$, un $H_{x,y}$} On
+    \uncertain{se donne} $H$ un ensemble d'indices, et $H \to
+    \mathrm{Ob}\,B'_{T} \times \mathrm{Ob}\,B'_{T}$, $h \mapsto s(h)$,
+    $h \mapsto b(h)$, et on pose $T'(C) = $ catégorie des objets $x$ de
+    $T(C)$, munis d'une « opération » $\varphi$ \add{de} $H$ dans
+    $\mathrm{Fl}(C)$ telle que $\forall h \in H$, $\varphi(h) : s(h)(x)
+    \to b(h)(x)$.
+    \marginal{en marge droite : NB On n'introduit pas de nouveaux objets,
+    \ill{} \ill{} aussi dans une structure objet de base et un ensemble
+    d'\ill{} !}
+\end{enumerate}
+
+\page{85}
+$B'_{T'}$ est obtenu à partir de $B'_{T}$ en rajoutant les flèches $H$ —
+d'où catégorie, pas néc. $\in \Delta$ — \struck{\ill{}} $(B'_{T}, H, s,
+b)$ (enveloppe d'un type de diagramme) et, en prenant la
+$\Delta$-enveloppe, soit $B'^{0}_{T'}$ (au sens $\Delta$), en y « rendant
+inv. » les flèches qui expriment que le composé $B_{T} \to B'^{0}_{T'}
+\to C$ est un $\Delta$-foncteur. \note{sous la première flèche : « foncteur
+can (pas néc. un $\Delta$-foncteur) » ; sous la seconde :
+« $\Delta$-foncteur »}
+
+\underline{NB}\ Si $T$ rep. par \struck{$R$, alors} \add{$R$} et $B'_{T}
+\simeq R$, alors $T'$ est rep. par $B'_{T'}$ \struck{rep. par $R'$ déduit
+de $R = H_{R}$} ($= H$, $s_{R}$, $b_{R}$, où $s_{R}$, $b_{R}$ déduits de
+$s$, $b : H \to \mathrm{Ob}\,B'_{T}$ en comp. avec \ill{}).
+\underline{Re NB}\ $T' \to T$ fidèle, donc si on a un foncteur fidèle
+$T \to \tau^{I}$, le composé aussi.
+
+\begin{enumerate}
+  \item[d)] [composition de structures] Si on a des théories
+    $T_{\alpha}$, avec $B'_{T_{\alpha}}$, alors la théorie $T = \prod
+    T_{\alpha}$ : $C \mapsto \prod T_{\alpha}(C)$ est une structure
+    \uncertain{algébrique} ; $B'_{T} = $ 2-\uncertain{Somme} des
+    $B'_{T_{\alpha}}$ dans $\Delta$. \underline{NB}\ Si les $T_{\alpha}$
+    rep. par les $B'_{T_{\alpha}}$, alors $T$ rep. par $B'_{T}$.
+    \underline{Re NB}\ Si $T_{\alpha} \to \tau^{I_{\alpha}}$ fidèles,
+    alors $T \to \tau^{I}$ fidèle, où $I = \bigsqcup I_{\alpha}$.
+    \marginal{en marge droite : \ill{} insuffisant}
+\end{enumerate}
+
+Si on préfère ne pas changer en cours de route des objets de base, on
+peut vouloir se restreindre aux compositions de structures avec objets de
+base fixés :
+
+\begin{enumerate}
+  \item[d')] Si on a des théories $T_{\alpha}$ \struck{fidèles sur
+    $\tau^{I}$} $\varphi_{\alpha} : T_{\alpha} \to \tau^{I}$, alors le
+    produit 2-fibré des $T_{\alpha}$ sur $\tau^{I}$,
+    \[
+      T'(C) = \prod^{(2)}_{\alpha, C^{I}} T_{\alpha}(C)
+    \]
+    \struck{(fidèle sur \ill{})}. On pose $B'_{T'} = $ \struck{\ill{}}
+    somme amalgamée des $B'_{T_{\alpha}}$ sur $B'_{\tau^{I}} = \tilde{I}$.
+    \underline{NB}\ Si les $T_{\alpha}$ rep. par les $B'_{T_{\alpha}}$,
+    $T$ l'est par $B_{T}$. \underline{Re NB}\ \ill{} \ill{} $T_{\alpha}
+    \to \tau^{I}$ fidèles, alors $T' \to \tau^{I}$ est fidèle.
+\end{enumerate}
+
+\page{86}
+On peut passer à l'autre extrême :
+
+\begin{enumerate}
+  \item[d'')] $\varprojlim$ de théories (sans conditions
+    particulières)\ldots\ $\leftarrow$ Il suffirait de le postuler pour
+    une cat. d'indices bien ordonnée\ldots
+\end{enumerate}
+
+\underline{Remarque 1}\ On ne \uncertain{rencontre} à aucun moment des
+théories 2-représentables par $B_{T}$, où $B_{T} = R$ \struck{admet une
+petite \ill{}} \uncertain{n'admet pas une} sous-catégorie génératrice
+« \uncertain{faite} » par $I \to \mathrm{Ob}\,R$, i.e. telle que
+$\forall C \in \mathrm{Ob}\,\Delta$, $\mathrm{Hom}_{\Delta}(R, C) \to$
+\struck{Hom} $C^{I}$ fidèle. \struck{Remarque}
+
+\underline{Remarque 2}\ Soit réciproquement $R \in \mathrm{Ob}\,\Delta$,
+avec $\Delta$-générateurs $I \to \mathrm{Ob}\,R$. On va prouver
+\struck{que \ill{} Soit Munissons} \struck{$T_{0}$ rep. par $R_{0} =
+\tilde{I}$}
+
+\begin{enumerate}
+  \item[1°)] $R$ petite. On prend $I = \mathrm{Ob}\,R$, ou
+    \uncertain{plutôt} \ill{}, $T_{0} = \tau^{I}$ ; $B'_{T_{0}} =
+    \tilde{I} = R_{0}$. On prend ensuite $H = \mathrm{Fl}(R)$, qui va
+    \uncertain{dans} $\mathrm{Ob}\,R_{0} \times \mathrm{Ob}\,R_{0}$
+    \note{au-dessus : $I \times I$} par le composé $H \to \mathrm{Ob}\,R
+    \times \mathrm{Ob}\,R \to \mathrm{Ob}\,R_{0} \times \mathrm{Ob}\,R_{0}$,
+    d'où $T_{1}$, $R_{1}$ avec $R_{0} \to R_{1}$, $T_{1} \to T_{0}$
+    \struck{fid} \note{en marge, verticalement : $I \to R_{0}$}. On
+    exprime ensuite que les composition des flèches de $R$ deviennent la
+    comp. des flèches des $R_{1}$ i.e. l'application « préfoncteur »
+    $R \to R_{1}$ devient un foncteur. On trouve ainsi $T_{2}$, $R_{2}$,
+    $R_{1} \to R_{2}$, où $R_{2} = \tilde{R}$ ($T_{2}(C) \simeq
+    \mathrm{Hom}_{\mathrm{Cat}}(R, C)$). On exprime enfin que les foncteurs
+    $R \to R_{2}$ devient un $\Delta$-foncteur, [i.e. commutent à
+    certains types de $\varprojlim$] en écrivant que certaines flèches de
+    $R_{2}$ deviennent inversibles, d'où $T_{3}$, $R_{3}$, $R_{3} = R$.
+    [\underline{NB}\ On a appliqué 1 fois par a), une fois par c), deux
+    fois par b), et pas \uncertain{du tout} d).]
+    \marginal{en marge gauche, en diagonale, deux notes dont seuls des
+    fragments se lisent : \ill{} $(\mathrm{Cat}_{d})$ \ill{} $I$ petit
+    \ill{} $\mathrm{Hom}(J, C)$ \ill{} $\varprojlim$ \ill{} théorie
+    \ill{} — et : on utilise ici \ill{} $\Delta$-foncteurs \ill{} il
+    faut inversibles \ill{} les $(\mathrm{Cat}_{d})$ \ill{} 3.) Soit
+    $C \in \mathrm{Ob}\,\Delta$, $C^{I}$ \ill{} fid. \ill{}}
+  \item[2°)] $R$ quelconque, mais avec $I \to \mathrm{Ob}\,R$
+    « générateurs », plus \uncertain{précisément} : Soit $\rho_{0}$ la
+    sous-catégorie pleine de $R$ engendrée par $I$. On a
+    \[
+      \mathrm{Hom}_{\Delta}(R, C) \xrightarrow{\ \text{fid}\ }
+      \mathrm{Hom}_{\mathrm{Cat}}(\rho_{0}, C) \simeq
+      \mathrm{Hom}_{\Delta}(\tilde{\rho}_{0}, R)
+    \]
+    \note{sic pour le dernier $R$, où l'on attend $C$ ; sous une accolade
+    au-dessous : « Théorie \uncertain{$\rho_{0}$} »}
+\end{enumerate}
+
+\page{87}
+\struck{et prenant} $\tilde{\rho}_{0}$ Considérons $R_{0} = \tilde{\rho}_{0}
+\to R$ et les flèches qui deviennent des isom., soit $\Sigma$, \ill{}
+$\tilde{\rho}_{0}\Sigma^{-1}$. Soit \struck{\ill{}} $\rho_{1} = R_{0}
+\Sigma^{-1}$ \note{au-dessus : $R_{1} = \rho_{1}$}. Alors
+($\mathrm{Hom}_{\mathrm{Cat}}(R_{0}\Sigma^{-1}, C) \simeq
+\mathrm{Hom}_{\Delta}(R_{1}, C)$ \ill{} 2° ?). $R_{1} \to R$. On construit
+une suite transfinie de catégories $R_{\alpha} \in \Delta$, et des
+$R_{\alpha} \to R$ ; toutes les théories $\sigma(R_{\alpha})$ sont
+algébriques (le passage aux \struck{lim} ordinaux limites se faisant par
+le critère d ; ou d' !, au choix). On \ill{} \struck{\ill{}} (dans Cat)
+\note{une ligne biffée}
+
+\marginal{en marge gauche : je ne sais s'il est 2-fidèle ?? pl. fidèle}
+
+\begin{enumerate}
+  \item[4°)] Soit $R \in \mathrm{Ob}\,\Delta$, et $I \xrightarrow{u} R$
+    un foncteur \struck{\ill{}} (tel que $\forall C \in \mathrm{Ob}\,
+    \Delta$, le foncteur $\mathrm{Hom}_{\Delta}(R, C) \to
+    \mathrm{Hom}_{\Delta}(R', C)$ fidèle \struck{\ill{}} (un ens. dit
+    générateur) \note{au-dessus, une correction : « foncteurs
+    $\Delta$- » \ill{}}. Construisons, \uncertain{par une récurrence
+    transfinie}, de catégories $R_{\alpha} \in \mathrm{Ob}\,\Delta$
+    \note{au-dessous : $\rho_{\alpha} \in \mathrm{Ob}(\mathrm{Cat})$} tel
+    que les morphismes de transition $R_{\alpha} \to R_{\beta}$ sont des
+    $\Delta$-foncteurs, et \struck{les morphismes — foncteurs} \ill{}
+    \ill{} dans $R$ par des $u_{\alpha} : R_{\alpha} \to R$ ($u_{\alpha}
+    \in \mathrm{Fl}(\Delta)$) \note{au-dessus : $u_{\alpha} : \rho_{\alpha}
+    \to R$}, en posant $R_{0} = (\tilde{I}$, \struck{\ill{}} $u_{0} :
+    \tilde{I} \to R$ prolongeant $u)$, $\rho_{0} = R_{0}$, $R_{\alpha+1}$
+    déduit de $R_{\alpha} \to R$ en définissant $\Sigma_{\alpha} = $ ens
+    des flèches de $R_{\alpha}$ qui deviennent inv. dans $R$,
+    $R_{\alpha+1} = R_{\alpha}\Sigma^{-1}$ \note{au-dessous :
+    $\rho_{\alpha+1}$} (au sens de $\Delta$), $R_{\lim \alpha_{i}} =
+    \varinjlim_{\Delta} R_{\alpha_{i}}$ (dans l'univers $\mathcal{U}$).
+    \marginal{en marge gauche, en diagonale : \uncertain{pourquoi} \ill{}
+    $R_{\alpha+1} = $ \ill{} petit \ill{} $\rho_{\alpha+1}$ \ill{}
+    inversibles $R_{\alpha}\Sigma^{-1}$ dans $R$ \ill{} (sous-cat. pleine
+    de $R$) ; $\rho_{\alpha+1} \to R_{\alpha+1} \to \rho_{\alpha+2} \to
+    R_{\alpha+2}$}
+\end{enumerate}
+
+Alors pour $\alpha$ assez grand (dans l'univers $\mathcal{U}$) on a
+$R_{\alpha} \xrightarrow{\ \sim\ } R$. \underline{NB}\ Pour un ordinal
+limite, on veut que $\rho R_{\alpha} \to R$ soit conservatif ? Si les
+$\Delta$-foncteurs \struck{\ill{}} commutent aux noyaux ($=$
+\uncertain{quot.} et cok.) \struck{dans le cas \ill{}} (i.e.), cela
+implique que les foncteurs $R_{\alpha}$ sont \struck{pl. fid} fidèles,
+donc les $R_{\alpha}$ sont des sous-catégories. Pour $\forall$ condition
+$c$, si $\alpha$ est plus élevé que $c$, $R_{\alpha}$ est stable sous les
+limites du type $\delta' \in d'$ ou $\delta'' \in d''$ pour
+$\mathrm{card}(\delta')$, $\mathrm{card}(\delta'') \leqslant c$. Donc si
+$d'$ et $d''$ sont petits
+\marginal{en bas de page, en diagonale : on doit pouvoir prouver \ill{}
+fidèle \ill{} la question que \ill{} pour \ill{} : ça \ill{}, \ill{}
+vrai \ill{}, si non grand \ill{}}
+\note{la phrase reste inachevée ; la p. 88 est blanche}
+
+\page{89}
+\note{demi-feuillet}
+$\lambda$ ens de diagrammes finis
+
+$R \in \mathrm{Cat}_{\lambda}$ \struck{\ill{}}
+
+\[
+  \Sigma = R^{\circ}, \qquad S = \mathrm{Hom}_{\lambda}(R, (\mathrm{Ens}))
+  \subset \hat{\Sigma} \qquad\qquad
+  \Sigma \subset S \subset \widehat{R^{\circ}} = \hat{\Sigma}
+\]
+
+\begin{enumerate}
+  \item[a)] $S$ admet des $\varinjlim$ quelconques
+  \item[b)] $S$ est « engendré » par ses objets « de type fini » [objets
+    $X$ tels que $\mathrm{Hom}(X, -)$ commute aux $\varinjlim$ filtrantes]
+    i.e. si $S_{0}$ est la sous-catégorie pl. de $S$ formée de ces
+    objets, alors $S \to \hat{S}_{0}$ \note{sous la flèche : « commutent
+    aux $\varprojlim$ quelc. et aux $\varinjlim$ filtrantes »} est
+    conservatif [ou même pl. fidèle ?] [ou fidèle]
+  \item[c)] $\Sigma \subset S_{0}$ et $\Sigma$ engendre $S_{0}$ par
+    $\varinjlim$ finies (resp. engendre $S$ par $\varinjlim$ quelc.)
+  \item[d)] Plus précisément, $S_{0}$ est la catégorie stable par
+    $\varinjlim$ finies enveloppe de la $\lambda$-catégorie
+    \struck{$\Sigma$}, et $S$ est la $\varinjlim$-catégorie enveloppe de
+    la \uncertain{$\varinjlim_{0}$}-catégorie $S_{0}$.
+\end{enumerate}
+
+\section{9. Relation avec « analyseurs » de \uncertain{Lazard}}
+\note{de sa main, seule ligne d'un feuillet blanc photographié avec le
+demi-feuillet de la p. 89 ; le nom se lit « Lazare »}
+
+\page{90}
+\note{deux « dictionnaires » disposés en tableaux ; le premier sur deux
+colonnes, le second sur cinq colonnes qui se poursuivent p. 91. Chaque
+ligne du tableau est rendue par une liste dont les étiquettes nomment les
+colonnes : [T] type, [R] $\lambda$-catégorie, [S] $\lambda^{\circ}$-catégorie,
+[$\tau$] catégorie $\tau$, [B] topos}
+
+\underline{Dictionnaire pour $\lambda$ quelc} $[= (\lambda_{1},
+\lambda_{2})]$
+
+\begin{enumerate}
+  \item[{[T]}] \struck{$\lambda$-théories, types} Morphisme de
+    \struck{structures} types $T_{\lambda} \to T'_{\lambda}$
+  \item[{[R]}] $\lambda$-catégorie \struck{avec} admettant (petite) famille
+    $\lambda$-génératrice ; $\lambda$-foncteurs $R^{\sharp} \to R$
+    \note{le signe en exposant, ici et plus bas, se lit $\sharp$}
+\end{enumerate}
+
+\begin{enumerate}
+  \item[{[T]}] Morphisme pleinement fidèle \struck{\ill{}} Sous-théorie
+    pleine $T'_{\lambda} \subset T_{\lambda}$
+  \item[{[R]}] $\lambda$-foncteur de localisation $R^{\sharp} \to R'$ (p.
+    r. à un ens. de flèches) \struck{\ill{}} ; Ens des flèches de
+    $R^{\sharp}$ stable par composition, et par $\lambda$-limites
+\end{enumerate}
+
+\begin{enumerate}
+  \item[{[T]}] Morphisme fidèle $T'_{\lambda} \to T_{\lambda}$ [« structure
+    plus riche »]
+  \item[{[R]}] $\lambda$-foncteur $f : R \to R'$ tel que $f$
+    $\lambda$-engendre $R'$ (épimorphisme ?)
+\end{enumerate}
+
+\begin{enumerate}
+  \item[{[T]}] $\lambda$-\struck{structures} \add{types} avec famille
+    d'objets de base \struck{\ill{}} $(E_{i})_{i \in I}$
+  \item[{[R]}] $\lambda$-catégorie $R$ avec famille d'objets $I \to
+    \mathrm{Ob}\,R$ qui $\lambda$-engendre $R$
+\end{enumerate}
+
+\begin{enumerate}
+  \item[{[T]}] $\varprojlim$ de $\lambda$-théories
+  \item[{[R]}] $\varinjlim^{(\lambda)}$ de $\lambda$-catégories
+\end{enumerate}
+
+\underline{Dictionnaire} [multiple] $\lambda = (\lambda_{1}, \emptyset)$
+
+\begin{enumerate}
+  \item[{[T]}] $\lambda$-type $T$ ; $T(C) = \mathrm{Hom}_{\lambda}(R, C) =
+    \mathrm{Hom}_{\lambda^{\circ}}(S^{\circ}, C) = $ \struck{$\mathrm{Hom}
+    (S, C)$} (si $C$ admet $\varprojlim$ quelc.) $= $ sous-catégorie
+    pleine de $\mathrm{Hom}(C^{\circ}, \tau)$ formée des foncteurs $u :
+    C^{\circ} \to \tau$ commutant aux \ill{} $\mathrm{Hom}(x, -)$, $x \in
+    \mathrm{Ob}\,S$, \ill{} représentables $= \mathrm{Hom}_{\mathrm{top}}
+    (C, B)^{\circ}$ (si $C$ est un topos
+  \item[{[R]}] $\lambda$-catégorie $R$ \struck{\ill{}} admettant petite
+    famille $\lambda$-génératrice ; $R = S^{\circ} = \mathrm{Pt\,ess}(B)$
+    \note{entre parenthèses au-dessous : $\mathrm{Cat}$ \ill{}} $= $
+    \struck{\ill{}} \ill{} \uncertain{ponctuels} \ill{} du topos $B$
+  \item[{[S]}] $S$ ($= R^{\circ}$) $\lambda^{\circ}$-catégorie \add{avec}
+    petite famille $\lambda^{\circ}$-génératrice ; $S = R^{\circ} =
+    \mathrm{Pt\,ess}(B)$
+  \item[{[$\tau$]}] Catégorie $\tau$ avec $\varinjlim$ filtrantes (et
+    $\varprojlim$ quelc.) munie d'une sous-catégorie génératrice $S$
+    (pour foncteurs cons.) [et même pl. fid.] stable par $\lambda^{\circ}$
+    \struck{lim} limites, formée d'objets $A$ de prés. finie (i.e.
+    $\mathrm{Hom}(A, -)$ commute aux $\varinjlim$ filtrantes) ; $\tau =
+    \mathrm{Hom}_{\lambda}(R, \mathrm{Ens}) = T(\mathrm{Ens})$ ; $S =
+    \mathrm{Hom}_{\lambda^{\circ}}(S^{\circ}, \mathrm{Ens})$ ($=
+    \mathrm{Ind}(S)$ si $\lambda_{1} = $ tous les diagrammes finis) ;
+    $\tau = \mathrm{Pt}(B)^{\circ}$ ; $S = \mathrm{Pt\,ess}(B)^{\circ}$ ;
+    (plutôt les diagrammes filtrants \ill{}) $B = $ topos classifiant pour
+    $T$
+  \item[{[B]}] \struck{\ill{}} \note{trois lignes biffées} Topos $B$
+    ayant suffisamment de pts essentiels, et dont la cat. des pts ess.
+    est stable par $\varinjlim$ \ill{} ; $B = \hat{R} = \mathrm{Hom}(S,
+    \mathrm{Ens})$ \struck{\ill{}} ($= \mathrm{Hom}(\tau, \mathrm{Ens})$
+    si $\lambda_{1} = $ ts les diagr. finis
+\end{enumerate}
+
+\begin{enumerate}
+  \item[{[T]}] morphisme $T' \to T$
+  \item[{[R]}] $\lambda$-foncteur $R^{\sharp} \to R'$
+  \item[{[S]}] $\lambda^{\circ}$-foncteur $S \to S'$
+  \item[{[$\tau$]}] foncteurs $\tau^{\sharp} \to \tau$ \ill{}
+    \struck{\ill{} $\varinjlim$ finies dans \ill{}} \note{un bloc biffé}
+    $\varinjlim$ quelconques (\uncertain{donc} ayant un adjoint \ill{})
+    dont l'adjoint envoie $S$ dans $S'$ ; ou : foncteurs $\tau \to \tau'$
+    commutant aux $\varinjlim$ quelc. et envoyant $S$ dans $S'$
+  \item[{[B]}] Morphisme de topos $B' \xrightarrow{f} B$ \ill{} $f^{*}$
+    transforme objets ponctuels en objets ponctuels [déduit par
+    localisation des $B$ par rapport à un ens. de flèches des $R \subset
+    B$ \ill{} objets ponctuels]
+\end{enumerate}
+
+\page{91}
+\begin{enumerate}
+  \item[{[T]}] morphisme pl. fidèle $T' \to T$
+  \item[{[R]}] $\lambda$-foncteur de localisation $R^{\sharp} \to R'$
+  \item[{[S]}] $\lambda^{\circ}$-foncteur de localisation $S \to S'$
+  \item[{[$\tau$]}] foncteur $\tau' \to \tau$ \ill{} pl. fidèle (ou
+    foncteur $\tau \to \tau'$ \ill{} de localisation)
+  \item[{[B]}] Morphisme de topos $B' \to B$ \ill{} qui est un plongement
+    i.e. $f_{*} : B' \to B$ pl. fid.
+\end{enumerate}
+
+\begin{enumerate}
+  \item[{[T]}] sous-théorie pleine des $T_{\lambda}$
+  \item[{[R]}] Ens des flèches $M$ des $R$ stable par comp. et par
+    $\varinjlim$ type $\lambda$
+  \item[{[S]}] Ens des flèches $M'$ de $S'$ stable par comp. et par
+    $\varprojlim$ type $\lambda^{\circ}$
+  \item[{[$\tau$]}] Sous-catégorie pleine \uncertain{stable} par limites
+    projectives \ill{} qui est telle que $\tau' = $ ens des objets $X$ de
+    $\tau$ tels que pour \ill{} \struck{\ill{}} avec $\mathrm{Hom}(u, X)$
+    bij. pour tous $Y \in \mathrm{Ob}\,\tau'$, on ait $\mathrm{Hom}(u, X)$
+    bijectif
+  \item[{[B]}] Sous-topos $B'$ de $B$ tel que, si $f : B' \to B$ est le
+    plongement, $f^{*}$ transforme objets ponctuels en objets ponctuels
+\end{enumerate}
+
+\begin{enumerate}
+  \item[{[T]}] \struck{\ill{}} morphisme fidèle de théories $T' \to T$
+  \item[{[R]}] $R \to R'$ $\lambda$-engendre $R'$
+  \item[{[S]}] $S \to S'$ $\lambda$-engendre $S'$
+  \item[{[$\tau$]}] $\tau' \to \tau$ fidèle (ou plutôt ??) ou $\tau \to
+    \tau'$ $\lambda$-engendre $S'$ \ill{} induit $S \to S'$ quasi-\ill{}
+  \item[{[B]}] $f^{*} : B' \to B$ est fidèle \note{l'exposant de $f$ est
+    douteux}
+\end{enumerate}
+
+\begin{enumerate}
+  \item[{[T]}] $\varprojlim$ de $\lambda$-types $T_{i}$
+  \item[{[R]}] $\varinjlim$ de $\lambda$-cat. $R_{i}$
+  \item[{[S]}] $\varinjlim$ de $\lambda^{\circ}$-cat $S_{i}$
+  \item[{[$\tau$]}] $\varprojlim$ de \struck{\ill{}} catégories $\tau_{i}$
+    (au moins \ill{} des \ill{} ; mais \ill{} si $\lambda_{1} = $ tous
+    les d. finis \ill{})
+  \item[{[B]}] $\varprojlim$ des topos
+\end{enumerate}
+
+\page{92}
+\note{brouillon rapide, écrit sur deux colonnes qui se répondent ; les
+raccords entre colonnes sont incertains}
+
+\struck{\ill{}} \note{un alinéa biffé} Soit $T$ l'espèce des structures
+« anneau » \note{au-dessus : (anneau — \ill{})}, $T^{\circ}$ l'espèce des
+structure « corps ». Celle des \uncertain{unions} n'est pas définissable
+par $\varprojlim$ (car la catégorie des corps (\uncertain{canoniquement})
+n'est pas stable par $\varprojlim$, pas $=$ par produits (\ill{})).
+\uncertain{Les} sous-types pleins \ill{} sont définissables par
+$\varprojlim$ et le plus petit qui \ill{} \struck{admettent par la
+sous-catégorie $\tau'$ des \ill{}} \ill{} $\tau'$ de $\tau$ \ill{} :
+$C \in \mathrm{Ob}\,\tau' \Longrightarrow \forall$ Hom. $A \to B$ des
+$(\mathrm{Ens})$ tel que $X = h(B) \to Y = h(A)$ soit bijectif : cad. si
+\ill{} \uncertain{doubles} triviales, $\mathrm{Hom}(B, C) \to
+\mathrm{Hom}(A, C)$ bijectif.
+
+\uncertain{Chaque} tel $C$ \ill{} [$\mathrm{Spec}\,C$ \struck{compact}
+\ill{}, \ill{} locaux \ill{} corps) et les $C$ \ill{} l'hom. divisant
+$/((xy-1)x, (xy-1)y)$ \ill{} en $x$ : [le réciproque \ill{} la catégorie
+des $\tau'$ pseudocorps \ill{} est bijectif \ill{} $C$ est \struck{\ill{}}
+\uncertain{pseudocorps} \struck{\ill{}} $C$ réduit \struck{$\Longrightarrow$}
+les anneaux locaux des $C$ des \ill{} qui transforment $\mathbb{Z}[H] \to
+\mathbb{Z}[t, t^{-1}] \times \mathbb{Z} \simeq \mathbb{Z}[x, y]$ \ill{}
+transforme (\ill{} $(t, 0)$ resp. et \ill{}) réciproque qui est
+\uncertain{nôtre}, — donc \ill{} $\Longrightarrow$ alors des \ill{}
+
+[Mais le structure \struck{\ill{}} par $\varprojlim$ et $\varinjlim$,
+catégories satisfaisant \ill{} convenables ?] Le sous-objet (commun) d'un
+catégorie \ill{} par $\varprojlim$ ou par $\varprojlim$ \ill{} premier
+cas, on est ramené dans $R$ \ill{} corps peut elle se définir des
+\uncertain{univers} dans des conditions d'exactitude \ill{} $A^{*}$ (des
+éléments inversibles) d'un catégorie $A$ \note{le $A$ est encerclé}, peut-elle se définir
+en $\varprojlim$ et $\varinjlim$) ? Dans le \ill{} revenir au cas \add{où}
+l'objet $R = (\mathrm{Ann})^{\circ}$ [$= (\mathrm{Sch\,aff})$] qui est
+l'objet $\mathbb{Z}[t]$.
+
+\page{93}
+de $R$. \struck{\ill{}} objet dans $R$ est un \struck{objet} \ill{}
+(Sch.aff), en fait $\mathbb{Z}[t, t^{-1}]$ \add{sous-objet dans}
+$\mathbb{Z}[t, t^{-1}] = \mathbb{Z}[x, y]/(xy - 1)$. Donc OK.
+\struck{\ill{}} \ill{} ou $\varprojlim$ finies \ill{} Ceci dit, en \ill{}
+par un objet $A$ \ill{} Un morphisme \struck{\ill{}} $A^{*} \to A$, où
+\ill{} est l'objet final. On pourra dire que $A$ (dans une catégorie
+\struck{quelconque} avec $\varprojlim$ finies) est un objet corps si ce
+morphisme est un isom.
+
+Plaçons nous p. ex. dans le topos universel \struck{\ill{}} $\hat{R}$
+\ill{} ($R \simeq \mathrm{Sch\,aff}$) L'objet anneau $O = E'_{\mathbb{Z}}
+= \mathrm{Sp}(\mathbb{Z}[t])$. Il faut donc rendre inversible la flèche
+\struck{\ill{}} $O^{*} \to O$ (ce n'est pas (dans $R$, $D \to O$) [i.e.
+le \ill{}] n'est pas une flèche dans $R$ !) (dans $\hat{R}$, resp dans
+\ill{}) de la flèche \ill{} ; \uncertain{voit} que cela implique \ill{}
+
+\struck{$X \to Y$ dans $R$ qui \ill{} devient un \ill{} classifiant $B'$
+\ill{} ($X \in \hat{R}$ \ill{}) que \ill{} $f$ \ill{} $X \sqcup (V(f))
+\to X$ dont \ill{} un $f$ \ill{} $X \xrightarrow{f} O = E'_{\mathbb{Z}}$
+\ill{} quotients de $R$ par les \ill{} (qui \ill{} les $\varprojlim$)
+$\to$ la catégorie ; qui est un morphisme \ill{} ext. résiduelles
+triviales \ill{} dans le nouveau topos \ill{} $X \in \hat{R}$ et $f \in
+\Gamma(X, O_{X})$, est dans un \ill{} précédents par objet \ill{} Or la
+catégorie \ill{} (par $\varprojlim$ des flèches \ill{} maintenant \ill{}
+stable par \ill{} complet}
+\note{toute la moitié inférieure de la page, sur les deux colonnes, est
+cancellée par de longs traits diagonaux ; ce qui s'en lit est donné
+ci-dessus}
+
+\page{94}
+\struck{qui sont \ill{} monoïdes \ill{} des relations de v.f. sur
+$\mathbb{Z}$ ; Ce \ill{} la catégorie des \ill{} des relations \ill{} ;
+qu'il \ill{} schémas $\mathbb{Z}$] \ill{} dans \ill{} que $B' = \hat{R'}$
+\ill{} Ainsi, $B'$ — \ill{} une factorisation}
+\note{bloc de sept lignes en haut de page, encadré et cancellé en
+diagonale}
+
+\begin{tikzcd}
+  e \sqcup O^{*} \arrow[r, "\varphi"] \arrow[d, "j"'] & O \\
+  D \arrow[ur, "i"'] &
+\end{tikzcd}
+
+rendre $\varphi$ inversible revient à rendre $D$ inversible (car un
+\struck{\ill{}} isomorphisme dans un topos est un \ill{} \struck{\ill{}}
+Passons d'abord \uncertain{rendus} les morphismes $i$ (qui sont dans $R$)
+inversibles, \ill{} si $R'$ est \struck{\ill{}} la catégorie des
+\uncertain{fractions} de $R$ [i.e. la catégorie des \ill{} associés à des
+relations de v.f. sur $\mathbb{Z}$], — \ill{} le topos $\hat{R'}$ (Corps ?
+\ill{} pseudo-corps). Il faut ensuite rendre $e \sqcup O^{\alpha} \to O$
+\note{l'exposant se lit $\alpha$} un monomorphisme i.e. $e \cap O^{*}
+\subset R \to R'$ est le \struck{\ill{}} vide ; \ill{} crible \ill{} des
+\ill{} foncteurs $(\mathrm{Ens})$ \ill{} ; idées, représent\ill{} donc il
+faut rendre \ill{} \struck{\ill{}} dont $f$
+\[
+  \varepsilon(X) =
+  \begin{cases}
+    \emptyset & \text{si } X \neq \emptyset \\
+    \{e\} & \text{si } X = \emptyset
+  \end{cases}
+\]
+$\emptyset \to \varepsilon$ \note{au-dessus de la flèche : $\hat{R'}$} un
+\ill{}
+
+On trouve : si $C$ est une catégorie avec $\varprojlim$ finies et
+$\varinjlim$ quelconques (\uncertain{réflex.} — il faut \ill{} des sommes
+finies ?) \struck{\ill{}} \ill{} les $\varinjlim$ finies, voire des sommes
+\ill{} \struck{\ill{}} \ill{} les « corps » dans $C$ correspondent aux
+foncteurs $F : R' \to C$ qui \struck{\ill{}} \ill{} commutant aux \ill{}
+\uncertain{exacts à gauche} et aux \uncertain{sommes} \ill{}
+\marginal{en marge gauche : \uncertain{bien préciser} \ill{} ; plus bas :
+\ill{} des \ill{} \uncertain{pointes} \ill{}}
+
+\page{95}
+la catégorie $C$ avec $\varprojlim$ ($\varinjlim$ quelc.) universelles
+pour ceci est la catégorie des faisceaux sur $R'$ pour la top. de Zariski
+($=$ foncteurs contravariants $R \to \mathrm{Ens}$ $+$ \ill{} qui
+transforment sommes en produits \ill{}) c'est un topos $\circledast$ Le
+corps universel est le faisceau structural sur ce topos\ldots
+
+\note{un trait horizontal} \ill{} précédente avec anneaux intègres. Soit
+$O' \subset O$ le sous-type « qui opère régulièrement sur $O$ », ($O'
+\supset O^{*}$) est-il définissable par $\varprojlim$ et $\varinjlim$ ?
+Comment \ill{} \struck{\ill{}} ? Si \uncertain{Sch.ff} \ill{} est \ill{}
+\struck{\ill{}} \ill{} que \ill{} \ill{} \struck{\ill{}} \note{quatre
+lignes dont la moitié est biffée}
+
+Dans le cas des \ill{} universel d'un topos, $O \in \hat{R}$, $O'(X)$ est
+le sous-\ill{} ens des $f \in A$ tels que $f$ soit \ill{} par $A$ \ill{}
+$A \to A'$ ; $A = O(X)$ \ill{} des \ill{} régulières, et les
+\uncertain{restes} \ill{} par $A \to A'$ $A$ \ill{} il n'est pas \ill{}
+\ill{} $f \notin M$ pour $M \in \mathrm{Max}\,A$, donc $O' = O^{*}$ ! Or
+sur $\hat{R}$ est un anneau \ill{} par voie \ill{} qu'un tel \ill{}
+\ill{} c'est un corps, donc $O'_{p} = O^{*}_{p}$ i.e. $A' = A^{*}$ !
+\note{la p. 96 est blanche}
+
+\page{97}
+\note{author's p. ① ; feuillets paginés ① à ④ de sa main, jusqu'à la p.
+100, d'une écriture posée ; les alinéas sont numérotés dans des carrés}
+
+\begin{enumerate}
+  \item[{[1]}] Soit
+    \begin{equation}
+      \lambda = (\overleftarrow{\lambda}, \overrightarrow{\lambda})
+      \tag{1.1}
+    \end{equation}
+    un couple, où $\overleftarrow{\lambda}$ et $\overrightarrow{\lambda}$
+    sont des ens. de diagrammes de l'Univers fixé $\mathcal{U}$. On veut
+    préciser la notion des « structures algébriques définies
+    \struck{par les} à l'aide des $\varprojlim$ de type
+    $\overleftarrow{\lambda}$, de $\varinjlim$ de type
+    $\overrightarrow{\lambda}$ » (ou $\lambda$-types \struck{\ill{}}).
+    \begin{equation}
+      (\mathrm{Cat}_{\lambda}) = \text{2-catégorie}
+      \tag{1.2}
+    \end{equation}
+    \note{suivi d'une accolade ouvrant sur trois lignes :}
+    \begin{itemize}
+      \item objets $=$ catégories \struck{\ill{}} ayant $\varinjlim$
+        type $\overrightarrow{\lambda}$, $\varprojlim$ type
+        $\overleftarrow{\lambda}$ $= \lambda$-catégories
+      \item morphismes : foncteurs commutant aux $\varprojlim$ et
+        $\varinjlim$ \add{des} type\add{s} \ill{} : ces
+        $\lambda$-foncteurs
+      \item morphismes de morphismes : comme dans $(\mathrm{Cat})$
+    \end{itemize}
+    [de sorte que $\mathrm{Cat}_{\lambda} \hookrightarrow (\mathrm{Cat})$
+    est \uncertain{1}-fidèle] Si $T$ est une espèce de
+    \struck{structure} $\lambda$-type, i.e. une \struck{\ill{}} \ill{}
+    pour $C \in \mathrm{Ob}\,\mathrm{Cat}_{\lambda}$ \struck{les} la
+    catégorie $T(C)$ des structures de type $T$ dans $C$, et on trouve
+    ainsi une catégorie cofibrée sur $\mathrm{Cat}_{\lambda}$, soit
+    $T_{\lambda}$
+    \begin{equation}
+      T_{\lambda} \text{ cat. cofibrée sur } \mathrm{Cat}_{\lambda}
+      \tag{1.3}
+    \end{equation}
+    Si $T'$ est une autre \struck{structure} $\lambda$-type, on pose
+    \begin{equation}
+      \mathrm{Hom}_{\lambda}(T, T') =
+      \mathrm{Hom}_{\mathrm{fib\ sur\ }(\mathrm{Cat}_{\lambda})}
+      (T_{\lambda}, T'_{\lambda})
+      \tag{1.4}
+    \end{equation}
+    et on voit que les $\lambda$-types forment une (2-cat)
+    \begin{equation}
+      (\lambda\text{-types}) \xrightarrow{\ \text{2-fidèle}\ }
+      \text{2-Cofib}(\mathrm{Cat}_{\lambda})
+      \tag{1.5}
+    \end{equation}
+    \note{la flèche est un crochet d'inclusion}
+  \item[{[2]}] Si on se donne $T$ avec « $T$ structure sur $I$ objets de
+    base », on introduit la théorie $\tau^{I}$ (structure vide sur $I$
+    \uncertain{ens.} de base) donnant \uncertain{lieu} à la catégorie
+    cofibrée sur $(\mathrm{Cat}_{\lambda})$ \uncertain{donnée} par les
+    \begin{equation}
+      \tau^{I}(C) = C^{I}
+      \tag{2.1}
+    \end{equation}
+    et on trouve \struck{des} \add{pour tt $C$ un} \struck{\ill{}}
+    foncteur canonique « système des objets de base » \note{à droite,
+    entre crochets : et \ill{} transposition}
+    \begin{equation}
+      T_{\lambda}(C) \xrightarrow{\ b^{C,T}_{\lambda}\ } C^{I}
+      \qquad [\text{foncteur 0-fidèle}]
+      \tag{2.2}
+    \end{equation}
+    définissant pour $C$ variable (0-fidèle)
+    \begin{equation}
+      b^{T}_{\lambda} : T_{\lambda} \longrightarrow \tau^{I}
+      \tag{2.3}
+    \end{equation}
+\end{enumerate}
+
+\page{98}
+\note{author's p. ②}
+On définit, si $T'$ est de $=$ relatif à $I$
+\begin{equation}
+  \mathrm{Hom}_{\lambda}(I; T, T') = \text{catégorie des}
+  \left(\text{morphismes } u : T_{\lambda} \to T'_{\lambda}
+  \ \struck{\text{avec}}\ \text{isom. de } \struck{\text{commutation}}\ \alpha\right)
+  \tag{2.4}
+\end{equation}
+\note{au-dessus, en petit : « couples $(u, \alpha)$, avec\ldots »}
+
+\begin{tikzcd}
+  T_{\lambda} \arrow[rr, "u"] \arrow[dr, "b^{T}_{\lambda}"'] & &
+  T'_{\lambda} \arrow[dl, "b^{T'}_{\lambda}"] \\
+  & \tau^{I} &
+\end{tikzcd}
+
+On a une \struck{foncteur} 2-cat.
+\begin{equation}
+  (\lambda\text{-}I\text{-types}) \hookrightarrow
+  \text{Cat 2-cofib}(\mathrm{Cat}_{\lambda})/\tau^{I}
+  \tag{2.5}
+\end{equation}
+et un 2-foncteur
+\begin{equation}
+  (\lambda\text{-}I\text{-types}) \longrightarrow (\lambda\text{-types})
+  \tag{2.6}
+\end{equation}
+\note{relié par un trait à (2.6) :} qui est \ill{}-fidèle.
+
+\begin{enumerate}
+  \item[{[3]}] Si $I$ est réduit à un élément, $\tau^{I}$ est noté
+    $\tau$, donc
+    \begin{equation}
+      \tau(C) = C
+      \tag{3.1}
+    \end{equation}
+    \struck{\ill{} catégorie} On pose
+    \begin{equation}
+      \mathrm{Hom}_{\lambda}(T, \tau) \simeq R^{\lambda}_{T}
+      \qquad \struck{(\text{ou } R_{T}(\ldots))}
+      \tag{3.2}
+    \end{equation}
+    \underline{cat. des $\lambda$-constructions} pour $T$. On
+    \struck{\ill{}} ne sait pas à priori si $R^{\lambda}_{T}$ est une
+    $\mathcal{U}$-catégorie. Mais c'est une \struck{\ill{}}
+    $\lambda$-catégorie, et les $\lambda$-limites se calculent
+    « argument par argument », donc pour toute $C \in
+    \mathrm{Ob}\,\mathrm{Cat}_{\lambda}$ et $\xi \in T(C)$, le foncteur
+    \begin{equation}
+      \xi^{\lambda} : R^{\lambda}_{T} \longrightarrow C
+      \tag{3.3}
+    \end{equation}
+    \note{au-dessus de (3.3) : « On. (pour définir (3.3)) »}
+    \struck{\ill{}} est un $\lambda$-foncteur.
+    \begin{equation}
+      R^{\lambda}_{T} \times T(C) \longrightarrow C
+      \qquad \struck{\ill{}} \qquad
+      \text{pour } C \in \mathrm{Ob}\,\mathrm{Cat}_{\lambda}
+      \tag{3.4}
+    \end{equation}
+    i.e.
+    \begin{equation}
+      R^{\lambda}_{T} \longrightarrow \mathrm{Hom}(T(C), C)
+      \tag{3.5}
+    \end{equation}
+    \note{(3.5) est écrit au-dessus d'une ligne biffée : « Notons les
+    foncteurs \ill{} (définissant 3.\ill{}, \ill{} » ; le numéro (3.5)
+    est repris deux lignes plus bas} (qui est un $\lambda$-foncteur)
+    Bien entendu, la catégorie $R^{\lambda}_{T}$ dépend de $I$ des
+    $\lambda$-\uncertain{foncteurs} \ill{} quand $I$ est donné avec $T$,
+    on a
+    \begin{equation}
+      I \longrightarrow \mathrm{Ob}\,R^{\lambda}_{T}
+      \qquad (\text{fonctoriel en } T \in \mathrm{Ob}(\lambda\text{-}I\text{-types}))
+      \tag{3.5}
+    \end{equation}
+    \note{un mot encerclé et biffé devant la parenthèse}
+    \marginal{en marge gauche, verticalement : Notons aussi, de
+    \ill{}, \ill{} (3.7) $T(C) \to$ \ill{} ; (3.8) \ill{} les
+    \uncertain{foncteurs} \ill{} $(R^{\lambda}_{T}, C)$ \ill{},
+    $\mathrm{Hom}((\mathrm{Cat}_{\lambda} \ldots) R^{\lambda}$ \ill{}
+    définis \ill{} $\mathrm{Hom}_{\lambda}(R^{\lambda}_{T}, C)$ \ill{}
+    $T(C)$ \ill{} $\mathrm{Hom}(R^{\lambda}, C)$ \ill{}}
+  \item[{[4]}] \underline{Théories $\lambda$-représentables} \struck{(3.4)}
+    \struck{\ill{}} \note{« Vu\ill{} redonnons (2.2), et dont la donnée
+    équivaut à (2.3) i.e. (2.2) pour tt $C$ » : deux lignes écrites en
+    petit entre l'alinéa [3] et le titre de [4]} On dit que $T$ est
+    $\lambda$-représentable si \struck{la catégorie} la catégorie
+    2-cofibrée $T_{\lambda}$ sur $(\mathrm{Cat}_{\lambda})$ est 2-repr.,
+    l'objet $R_{T}$ qui la représente est appelé
+    \underline{catégorie \uncertain{$\lambda$-modelaire}} de $T$ :
+    \struck{\ill{}}
+    \begin{equation}
+      T(C) \cong \mathrm{Hom}_{\lambda}(R_{T}, C)
+      \tag{4.1}
+    \end{equation}
+    via une \struck{objet} $T$-structure $\lambda$-universelle
+    \begin{equation}
+      \xi^{\lambda}_{T} \in T(R_{T})
+      \tag{4.2}
+    \end{equation}
+    \marginal{en marge gauche, en diagonale : (qui \ill{} dans la cat.
+    2-cofibrée \ill{} $(\mathrm{Cat}_{\lambda})$ \ill{} 2-représentable
+    \ill{} $R^{\lambda}_{T}$ \ill{})}
+\end{enumerate}
+
+\page{99}
+\note{author's p. ③}
+On sait que $R_{T}$ est défini à équivalence près (unique à isom. unique
+près), et que pour toute catégorie cofibrée $\mathcal{F}$ sur
+$(\mathrm{Cat}_{\lambda})$, on a une équivalence de catégories (unique à
+isom. unique près)
+\begin{equation}
+  \mathrm{Hom}_{\mathrm{fib}/(\mathrm{Cat}_{\lambda})}(T_{\lambda}, \mathcal{F})
+  \cong \mathcal{F}(R_{T})
+  \tag{4.3}
+\end{equation}
+Faisant $\mathcal{F} = T'_{\lambda}$, on trouve
+\begin{equation}
+  \mathrm{Hom}_{\lambda}(T, T') \cong T'(R_{T})
+  \qquad (\text{unique à isom. unique près})
+  \tag{4.4}
+\end{equation}
+\note{l'indice de Hom, d'abord « fib.Cat », est biffé et remplacé par
+$\lambda$} et faisant en particulier $T' = \tau$, on trouve
+\begin{equation}
+  \struck{(4.5)}\qquad
+  \mathrm{Hom}_{\lambda}(T, \tau) \cong \tau(R_{T}) = R_{T}
+\end{equation}
+\note{sous le membre de gauche, relié par un trait : « défn
+$R^{\lambda}_{T}$ » ; à droite : « d'où »}
+\begin{equation}
+  R_{T} = R^{\lambda}_{T} \quad (\text{catégorie des } \lambda\text{-constructions})
+  \tag{4.5}
+\end{equation}
+\struck{\ill{} (\ill{} près) \ill{} (3.8). Faisant \ill{}} \note{deux
+lignes biffées} Donc, dans le cas envisagé ici, la cat. des
+$\lambda$-constructions est une $\mathcal{U}$-cat.
+
+Faisant $C = (\mathrm{Ens})$ dans (4.1), on trouve
+\begin{equation}
+  T(\mathrm{Ens}) \cong \mathrm{Hom}_{\lambda}(R^{\lambda}_{T}, (\mathrm{Ens}))
+  \quad \struck{\cong (R^{\lambda}_{T})^{\circ} \ldots}
+  \tag{4.6}
+\end{equation}
+[Si $T$ n'est pas $\lambda$-représentable, on a seulement \ill{} (mod
+équivalence), \ill{}] \note{la ligne est cancellée d'un trait ondulé}
+
+\begin{enumerate}
+  \item[{[5]}] Je \uncertain{veux} préciser quelles sont les catégories
+    (cofibrées sur $\mathrm{Cat}_{\lambda}$ (resp. munies d'un hom dans
+    \uncertain{$\lambda^{I}$}) \note{sic ; on attend $\tau^{I}$}) qui
+    proviennent des « théories de \uncertain{type de structures} »
+    \note{au-dessus : relatifs à $\lambda$} — donc \uncertain{explicites}
+    une définition de la cat. ($\lambda$-types) (1.5) \struck{précises}
+    On va d'abord \struck{\ill{}} \add{préciser} un $I$ et regarder les
+    $\lambda$-types sur $I$. On va préciser \uncertain{les} règles de
+    formation :
+    \marginal{en marge gauche : On introduit $S^{\lambda}_{T,I} \subset
+    R^{\lambda}_{T}$ (la sous-catégorie pleine engendrée par \ill{}
+    $\lambda$-\uncertain{lim} des $I$ \ill{})}
+    \begin{enumerate}
+      \item[a)] (structure vide) On a, pour $I \in \mathcal{U}$,
+        \struck{\ill{}} $\tau^{I} \in \mathrm{Ob}(\lambda\text{-}I\text{-types})$
+      \item[b)] (Rajouter des axiomes) (\ill{}) si $T$ est un
+        ($\lambda$-type) sur $I$, et \uncertain{$A$} une partie de
+        $\mathrm{Fl}(S^{\lambda}_{T,I})$ ($\subset \mathrm{Fl}
+        (R^{\lambda}_{T})$), alors la sous-catégorie 2-cofibrée
+        \add{pleine} $T'_{A}(C)$ \struck{$\subset$} ($C \in
+        \mathrm{Ob}\,\mathrm{Cat}_{\lambda}$) \ill{} formée des $\xi \in
+        T(C)$ tels que (3.3) transforme $A$ en des isom, est un
+        $\lambda$-$I$-type.
+    \end{enumerate}
+    \underline{NB}\ peut-être faut-il aussi se donner \ill{}
+    d'égalisation des couples de flèches\ldots\ \note{en bas à gauche :
+    « \ill{} 2 possibilités \ill{}\ldots »}
+\end{enumerate}
+
+\page{100}
+\note{author's p. ④}
+\begin{enumerate}
+  \item[c)] (Rajouter des données — flèches) Si $T$ est un
+    $\lambda$-Type \add{sur $I$} et si on se donne \struck{\ill{}} $B$ et
+    une application
+    \[
+      B \xrightarrow{\ \alpha\ } \mathrm{Ob}\,S^{\lambda}_{T,I} \times
+      \mathrm{Ob}\,S^{\lambda}_{T,I}
+    \]
+    \struck{\ill{}} [\uncertain{donc} avec des familles $B_{\rho,\sigma}$
+    d'ens disjoints \ill{}, indexés par les couples d'objets de
+    $S^{\lambda}_{T,I}$], alors la catégorie cofibrée sur
+    $(\mathrm{Cat}_{\lambda})$ suivante est un $\lambda$-$I$-type :
+    $T_{B,\alpha}(C) = $ \struck{$\prod_{\rho,\sigma}
+    \mathrm{Hom}_{C}(\ldots)$} catégorie des
+    \[
+      \begin{cases}
+        \text{couples } (\xi, (u_{\rho,\sigma})_{\rho,\sigma \in
+        \mathrm{Ob}\,S^{\lambda}_{T,I}}) \\
+        \text{avec } \xi \in \mathrm{Ob}\,T(C) \text{ et }
+        u_{\rho,\sigma} \in \mathrm{Hom}_{C}(\rho(\xi), \sigma(\xi)) \\
+        (\forall \rho, \sigma \in \mathrm{Ob}\,S^{\lambda}_{T,I})
+      \end{cases}
+    \]
+  \item[d)] \struck{\ill{}} (Composition de structures) Si on a une
+    famille $(T_{j})_{j \in J}$ de $\lambda$-types sur $I$, $J$ petit,
+    \struck{\ill{}} alors la catégorie cofibrée sur
+    $(\mathrm{Cat}_{\lambda})$ suivante est un $\lambda$-$I$-type :
+    \[
+      \struck{\prod}\ \prod_{I}((T_{j})_{j \in J})(C) =
+      \text{produit } \uncertain{\text{2-}}\text{fibré des } T_{j}(C)
+      \text{ sur } C^{I}
+    \]
+\end{enumerate}
+
+\underline{Définition 5.1}\ La 2-catégorie des $\lambda$-$I$-types est,
+par définition, la sous-2-catégorie 2-pleine de \struck{Cat}
+$\text{2-Cofib}(\mathrm{Cat}_{\lambda})/\tau^{I}$ \struck{cat. déf.} la
+plus petite qui soit stable par les op. a) b) c) d).
+
+\underline{NB}\ On peut en donner une construction transfinie.
+
+\underline{Question 5.1}\ \struck{La 2-catégorie} Les \struck{catégories}
+$I$-cat. cofibrées sur $(\mathrm{Cat}_{\lambda})$ qui sont des
+$\lambda$-$I$-types sont-elles exactement celles qui sont
+$\lambda$-représentables par un $R^{\lambda}_{T} \in
+\mathrm{Ob}\,\mathrm{Cat}_{\lambda}$, munies d'un $I \to
+\mathrm{Ob}\,R^{\lambda}_{T}$ tel que \struck{\ill{} $\mathrm{Ob}\,R$}
+\ill{} $\mathrm{Ob}\,R$ soit la plus petite partie de $\mathrm{Ob}\,R$
+\ill{} \uncertain{stable} \ill{} les $\lambda$-limites.
+
+\end{document}
