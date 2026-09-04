@@ -1,0 +1,625 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 161-2, batch 6 (pages 101-111).
+% Established from the facsimile archives/batches/161-2/batch-06.pdf (a mirror of
+% https://grothendieck.umontpellier.fr/161-2.pdf), per the skill
+% transcribe-grothendieck. The folder's last eleven pages. Pages 107 and 110
+% are blank and absent. Three runs: pp. 101-106, the end of the fair copy he
+% paginated ⑤-⑩ (①-④ are pp. 97-100 of batch 5) — the questions a')-d') on
+% λ-generation, λ-variable (η_{λλ'}), duality, and §8, structures defined by
+% projective limits: the 2-cartesian squares (8.2.3), (8.2.5), (8.2.10), the
+% functor α : T(Ĉ) → Hom(C°, S_T), R° ⊂ S ⊂ \hat{R°}, and a summary that
+% stops mid-sentence; pp. 108-109, a faint pencil sheet on the classifying
+% topos Ĉ = B_T, the universal structure O_B, f^*(O_B) and the pull-back of a
+% stack, with T(Ens) = Ind(C°) and Pro(C) ≃ T(Ens)°; p. 111, a squared sheet
+% headed « Topos modulaire pour des structures algébriques sur objets d'un
+% topos fixé X », the 2-fibre product B ×_{B_I} X. The pencil pages and p. 111
+% carry many \ill{}: the formulas pass, the connective prose often does not.
+% Pass: Fable 5.1 (claude-fable-5-1), 2026-09-04 — first pass, unchecked against the pages by a human.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{161-2}
+\batch{6}
+\pages{101}{111}
+\dating{[vers 1963-1973]}
+\watermark{Édition de démonstration}
+\foldertitle{Algèbre universelle [ou catégories] : notes manuscrites (s.d.)}
+
+\begin{document}
+
+\page{101}
+\note{author's p. ⑤ ; la copie paginée ①--④ du lot précédent (pp. 97--100)
+se poursuit ici jusqu'à ⑩ (p. 106) ; les alinéas 6, 7, 8 sont numérotés
+dans des carrés}
+
+\underline{5.4.}\ L'essentiel \struck{\ill{}} se décompose en les questions
+
+\begin{itemize}
+  \item[a')] $\tau^{I}$ est-il représentable par une catégorie $R_{I}$
+    (la $\lambda$-catégorie libre engendrée par $I$ objets) qui soit
+    $\lambda$-engendrée (au sens de (5.3)) par
+    \uncertain{$\mathrm{Im}(I \to \mathrm{Ob}\,R_{I})$} ?
+  \item[b')] Soient $R \in \mathrm{Ob}\,(\mathrm{Cat}_{\lambda})$ \note{un mot biffé entre $\mathrm{Ob}$ et la parenthèse},
+    $A \in \mathrm{Fl}\,R$. Y a-t-il une $\lambda$-catégorie $R_{A}$
+    \add{$\in \mathrm{Ob}\,\mathrm{Cat}_{\lambda}$} « universelle » pour
+    rendre inversibles les flèches $\in A$, et $R_{A}$ est-il
+    $\lambda$-engendré par \uncertain{$\mathrm{Im}\,R$} ?
+    \marginal{cf. note \uncertain{avant} b)}
+  \item[\uncertain{c'})] \note{l'encre se lit plutôt « b'' »} Soit
+    $R \in \mathrm{Ob}(\mathrm{Cat}_{\lambda})$, $B$ un \struck{\ill{}}
+    petit ensemble, et $\alpha : B \to \mathrm{Ob}\,R
+    \times \mathrm{Ob}\,R$. \struck{\ill{}} Y a-t-il une $\lambda$-cat.
+    $R' = R_{B,\alpha} \in \mathrm{Ob}\,\mathrm{Cat}_{\lambda}$
+    universelle \struck{\ill{}} munie d'un $\lambda$-foncteur
+    $R \xrightarrow{\ i\ } R'$ et d'applications $B \to
+    \mathrm{Fl}\,R'$ \note{un mot biffé devant $\mathrm{Fl}\,R'$} telle que le composé avec $\mathrm{Fl}\,R' \to
+    \mathrm{Ob}\,R' \times \mathrm{Ob}\,R'$ soit le composé de $\alpha$
+    avec $\mathrm{Ob}\,i \times \mathrm{Ob}\,i$. De plus, $R'$ est-il
+    $\lambda$-engendré par \uncertain{$\mathrm{Im}\,i$} ?
+  \item[d')] Soient $(R_{j})_{j \in J}$ une petite famille d'objets de
+    $(\mathrm{Cat}_{\lambda})$, munies d'applications $I
+    \xrightarrow{\ \varphi_{j}\ } \mathrm{Ob}\,R_{j}$. Y a-t-il une
+    solution au pb universel d'envoyer les $R_{j}
+    \xrightarrow{\ \psi_{j}\ } R$, $R \in \mathrm{Ob}\,\mathrm{Cat}_{\lambda}$,
+    avec \struck{des applications} \add{un} \uncertain{syst. transitif d'}
+    isomorphismes entre les \struck{\ill{}} $\psi_{j} \circ \varphi_{j}$
+    ($I$ considéré comme cat. discrète\ldots), et $R$ est-il
+    $\lambda$-engendré par la réunion des images des $\psi_{j}$ ?
+\end{itemize}
+
+\ill{} \uncertain{envie} des preuves \underline{5.5.}\ Soit $S \subset
+\mathrm{Ob}\,R$, $R \in \mathrm{Ob}\,C_{\lambda}$ \note{$C_{\lambda}$ ici
+et deux fois plus bas, abréviation manifeste de
+$\mathrm{Cat}_{\lambda}$}, supposons que $\forall R' \in \mathrm{Ob}\,
+C_{\lambda}$, et $F, G \in \mathrm{Hom}_{\lambda}(R, R')$,
+\[
+  \mathrm{Hom}(F, G) \longrightarrow \prod_{s \in S}
+  \mathrm{Hom}(F(s), G(s))
+\]
+est injectif. Alors $R$ est-il $\lambda$-engendré par $S$ ? (la
+réciproque étant évidemment vraie\ldots)
+
+\page{102}
+\note{author's p. ⑥}
+
+\underline{5.6.}\ Partons de $R \in \mathrm{Ob}\,\mathrm{Cat}_{\lambda}$,
+avec $I \xrightarrow{\ \varphi\ } \mathrm{Ob}\,R$ tels que $R$ soit
+$\lambda$-engendré par $I$. Considérons la cat. 2-\struck{\ill{}}fibrée
+$T$ sur $(\mathrm{Cat}_{\lambda})$ définie par $R$, et \ill{}
+\uncertain{supplémentaire} $T \xrightarrow{\ \varphi\ } \tau^{I}$ déduit
+de $\varphi$. \uncertain{Prouver}, que $(T, \varphi)$ est un
+$\lambda$-$I$-type ? (Il faut peut-être renforcer la notion de
+sous-catégorie $\lambda$-engendrée, en tenant compte des flèches, pas
+seulement des objets\ldots ?)
+
+\underline{5.7.}\ Si on laisse tomber $I$, une \struck{\ill{}} catégorie
+2-cofibrée $T$ sur $(\mathrm{Cat}_{\lambda})$ est un $\lambda$-type, si
+c'est un $\lambda$-$I$-type pour \add{$I$ et} $\varphi : T \to \tau^{I}$
+convenables. Ceci signifie donc (si \ill{} \uncertain{ce qui précède}
+\ill{}) que $T$ est $\lambda$-représentable par un $R \in
+\mathrm{Ob}(\mathrm{Cat}_{\lambda})$, \uncertain{i.e.}
+$\mathrm{Ob}\,R$ admet une petite partie qui soit $\lambda$-génératrice
+(en un sens convenable à dégager).
+\marginal{Question \ill{} \uncertain{diagrammes finis}, dans un $R \in
+\mathrm{Ob}\,\mathrm{Cat}_{\lambda}$ \ill{} d'un $I \to \mathrm{Ob}\,R$
+\ill{} \uncertain{type} \ill{} catégorie ?}
+\note{la note marginale est écrite en diagonale, sur une dizaine de
+lignes, et reste en grande partie illisible ; seuls les symboles
+passent}
+
+\textbf{[6]} \underline{$\lambda$-variable}. On devrait trouver (pour
+$\lambda \subset \lambda'$) un 2-foncteur
+\begin{equation}
+  (\lambda\text{-types}) \xrightarrow{\ \eta_{\lambda\lambda'}\ }
+  (\lambda'\text{-types})
+  \tag{6.1}
+\end{equation}
+\note{à droite, entre parenthèses : $\eta_{\lambda,\lambda'}(T_{\lambda})(C)
+= T_{\lambda}(C)$ si $C \in \mathrm{Ob}\,\mathrm{Cat}_{\lambda'}$
+($\subset \mathrm{Ob}\,\mathrm{Cat}_{\lambda}$)}
+qui correspondent à un 2-foncteur
+\begin{equation}
+  (\mathrm{Cat}_{\lambda}) \xrightarrow{\ \eta_{\lambda\lambda'}\ }
+  (\mathrm{Cat}_{\lambda'})
+  \tag{6.2}
+\end{equation}
+\note{le symbole sur la flèche de (6.2) porte peut-être un accent}
+« $\lambda'$-catégories \uncertain{analysantes} ». Il faudrait donner
+des conditions moyennant lesquelles (6.1) est pl. fidèle. [\underline{Ex}
+\struck{\ill{}} $\varprojlim$ finies, $\lambda' = \varprojlim$ quelc.
+($\bar{\eta}(C) = \mathrm{Pro}(C)$ ?) ; $\lambda = \varinjlim$ finies,
+$\lambda' = \varinjlim$ quelc. ($\bar{\eta}(C) = \mathrm{Ind}(C)$ ?)]
+
+\note{en marge : « ! \textbar\textbar »} $\eta_{\lambda,\lambda'}$
+est-il \struck{\ill{}} pl.\ fidèle, i.e.\ $\mathrm{Hom}_{\lambda}(T_{1},
+T_{2}) \to \mathrm{Hom}_{\lambda'}(T_{1}, T_{2})$ est-il \ill{} une
+équivalence pour $T_{1}$ et $T_{2}$ des $\lambda$-types ? Sans doute
+faux, mais \ill{} pl.\ fidèle si $\overrightarrow{\lambda} = \emptyset$.
+
+\textbf{[7]} \underline{Dualité} : \underline{Opposé} d'un « type »
+$\lambda = (\overleftarrow{\lambda}, \overrightarrow{\lambda})$ : on
+échange les types de diagrammes utilisés pour les $\varprojlim$
+\add{et} $\varinjlim$. Alors pour tt $\lambda$-type $T_{\lambda}$, on
+définit un $\lambda^{\circ}$-type $T^{\circ}_{\lambda}$ \ill{}
+\begin{equation}
+  T^{\circ}_{\lambda}(C) \cong T_{\lambda}(C^{\circ})^{\circ}
+  \tag{7.1}
+\end{equation}
+\note{les indices $\lambda$ de (7.1), ici et en haut de la page suivante,
+sont surchargés}
+
+\page{103}
+\note{author's p. ⑦}
+i.e.\ on a une équivalence de Cat. 2-cofibrées
+\begin{equation}
+  T^{\circ}_{\lambda} \cong (T_{\lambda})^{\circ} \circ (\ldots)
+  \tag{7.1}
+\end{equation}
+\note{le dernier facteur, entre parenthèses, est indistinct ; on lit
+peut-être « pass. à l'opp. » ; au-dessous, un numéro (7.2) biffé}
+On trouve ainsi une 2-équivalence
+\begin{equation}
+  (\lambda\text{-types}) \cong (\lambda^{\circ}\text{-types})
+  \tag{7.3}
+\end{equation}
+(et kif kif avec $I$
+\begin{equation}
+  (\lambda\text{-}I\text{-types}) \cong
+  (\lambda^{\circ}\text{-}I\text{-types})\ )
+  \tag{7.4}
+\end{equation}
+compatible, via les cat. représentatives, --
+\begin{equation}
+  (\mathrm{Cat}_{\lambda}) \cong (\mathrm{Cat}_{\lambda^{\circ}}),
+  \qquad C \longmapsto C^{\circ}
+  \tag{7.6}
+\end{equation}
+\note{le numéro est surchargé, 5 ou 6}
+
+\textbf{[8]} Cas où $\overrightarrow{\lambda} = \emptyset$ (structures
+définies via $\varprojlim$). $T$ désignera une $\lambda$-structure.
+
+\underline{8.1.}\ Pour tout $C \in \mathrm{Ob}\,\mathrm{Cat}_{\lambda}$,
+les \struck{limites} $\varprojlim$ de type $\lambda$ existent dans
+$T(C)$ ; plus généralement, \struck{les lim} \add{pour} tout type $d$
+\struck{\ill{}} \add{de} $\varprojlim$ qui existent dans $C$ existent
+aussi dans $T(C)$. [Écrire $T(C) \cong \mathrm{Hom}_{\lambda}(R_{T}, C)$
+et noter que \struck{\ill{}} l'hyp.\ sur $C$ implique que
+$\mathrm{Hom}(R_{T}, C)$ \note{au-dessus : « se calculant
+\uncertain{argument par argument} »} \struck{\ill{}} a des
+$\varprojlim$ de type $d$, et que \struck{\ill{}} $\mathrm{Hom}_{\lambda}
+(R_{T}, C)$ \ill{} par \uncertain{icelles} $\varprojlim$.] De plus, pour
+tt $\xi \in R_{T}$, \struck{\ill{}} \uncertain{$\Gamma_{C}$}\,$: T(C) \to
+C$ commute aux $\varprojlim$ de type $d$.
+
+\underline{8.1.1.}\ Plus généralement ($\lambda$ quelconque, sans néc.\
+$\overrightarrow{\lambda} = \emptyset$). Si \add{$C \in
+\mathrm{Ob}\,\mathrm{Cat}_{\lambda}$ et si} \struck{\ill{}} $d$ est un
+type de diagrammes tel que
+\begin{itemize}
+  \item[a)] $C$ admet des $\varprojlim$ de type $d$ (p.ex.\ $d \in
+    \overleftarrow{\lambda}$)
+  \item[b)] dans $C$, les $\varprojlim$ de type $d$ commutent aux
+    $\varinjlim$ de type $\in \overrightarrow{\lambda}$
+\end{itemize}
+Alors \struck{\ill{}} $T(C)$ admet des $\varprojlim$ de type $d$, et
+\struck{\ill{}} icelles $T(C) \simeq \mathrm{Hom}_{\lambda}(R^{\lambda}_{T},
+C)$ \struck{\ill{}} se calculent « argument par argument ». \add{Pour}
+tout\add{e} \struck{\ill{}} construction $\rho$ rel.\ à $T$, le foncteur
+correspondant
+\[
+  \rho : T(C) \longrightarrow C
+\]
+\marginal{de plus si $C'$ est \ill{} et \ill{} $C \to C'$ commute aux
+$\varprojlim$ de type $d$, alors \struck{$T(C) \to T(C')$} \ill{}
+$T(C) \to T(C')$ \ill{} ; kif-kif si $T \to T'$, $T(C) \to T'(C)$
+\ill{} commute aux \ill{} de type $d$ \ill{}}
+\note{note marginale en diagonale au bas de la page, en partie
+illisible ; la phrase « le foncteur correspondant $\rho$ » se poursuit
+en haut de la page suivante}
+
+\page{104}
+\note{author's p. ⑧}
+commute aux $\varprojlim$ de type $d$. Bien sûr, on a un énoncé dual
+pour les $\varinjlim$.
+
+\underline{8.2.}\ \marginal{(remarque)} Notons que pour \struck{\ill{}}
+quelconque \struck{\ill{}} \add{et un $\lambda$-type $T$,} il est vrai
+que pour tt $\lambda$-foncteurs \note{en insertion, entre accolades :
+« pl. fid. (fid.) les foncteurs »}
+\begin{equation}
+  i : C \longrightarrow C'
+  \tag{8.2.1}
+\end{equation}
+\begin{equation}
+  T(i) : T(C) \longrightarrow T(C')
+  \tag{8.2.2}
+\end{equation}
+\struck{\ill{}} \add{est} pl.\ fidèle (fid.). Si $T$ est muni de $b :
+T \to \tau^{I}$ (« base ») \underline{fidèle}, i.e.\ $R =
+R^{\lambda}_{T}$ \note{au-dessus : « qui 2-représente $T$ »} est muni
+de $\varphi : I \to \mathrm{Ob}\,R$ \note{l'indice de $R$ est biffé}, alors
+\struck{le carré} dans le cas pl.\ fidèle
+
+\begin{tikzcd}
+  T(C) \arrow[r] \arrow[d] & T(C') \arrow[d] \\
+  C^{I} \arrow[r, hook] & C'^{I}
+\end{tikzcd}
+
+\note{numéroté (8.2.3)} est 2-cartésien [Ceci signifie aussi, en termes
+de $R$, que la \uncertain{ss}-catégorie pleine des
+$\mathrm{Hom}_{\lambda}(R, C)$ de $\mathrm{Hom}_{\lambda}(R, C')$
+\struck{s'identifie aux} \add{est formée des} foncteurs $R
+\xrightarrow{\ \xi\ } C'$ tels que $\xi(\varphi(i)) \in C$ pour tt $i
+\in I$ : en effet, comme $I$ $\lambda$-engendre $R$, il s'ensuit que
+$\xi$ (qui commute aux $\varprojlim$ de type $\lambda$)
+\uncertain{envoie} $R$ dans l'image \uncertain{essentielle} \add{de}
+$C$.] \note{en insertion, sur deux lignes serrées :} En termes imagés,
+\ill{} où $(E_{i})_{i \in I}$ est une famille d'objets de $C$, « il
+revient au même » de se donner \marginal{dessus une structure d'espèce
+$T$ sur les $E_{i}$ \ill{} et une \ill{} sur les images \ill{}}
+\note{la fin de la phrase court dans la marge gauche, en partie
+illisible}
+
+Appliquant ceci, pour $C \in \mathrm{Ob}\,\mathrm{Cat}_{\lambda}$, au
+plongement canonique
+\begin{equation}
+  i : C \hookrightarrow \hat{C}
+  \tag{8.2.4}
+\end{equation}
+\note{à droite, souligné d'un trait ondulé : « qui est un
+$\lambda$-foncteur si $\lambda = (\overleftarrow{\lambda},
+\emptyset)$ ; »} on trouve le foncteur
+
+\begin{tikzcd}
+  T(C) \arrow[r] \arrow[d] & T(\hat{C}) \arrow[d] \\
+  C^{I} \arrow[r] & \hat{C}^{I}
+\end{tikzcd}
+
+\note{numéroté (8.2.5) ; à droite : « (2-cartésien) », puis, entouré :
+« On suppose $\overrightarrow{\lambda} = \emptyset$ »}
+\struck{Or supposons ici \ill{} $\hat{C}$ \ill{} $\mathrm{Ob}\,
+\mathrm{Cat}_{\lambda}$ \ill{} catégorie \ill{} i.e.\ que $\hat{C}$
+\ill{} si $C$ est $\mathcal{U}$-petite \ill{} Dans $T(\hat{C})$ \ill{}
+$X \in$} Considérons le foncteur contravariant canonique de $\hat{C}$
+dans $\mathrm{Hom}(\hat{C}, (\mathrm{Ens}))$, \struck{\ill{}} \add{sa}
+restriction à $C$ \struck{\ill{}} moyennant $i$ est un foncteur
+canonique $C^{\circ} \to \mathrm{Hom}_{\lambda}(\hat{C},
+(\mathrm{Ens}))$, et qui s'en va en \struck{\ill{}} fait dans la
+\struck{$\hat{C}$} ss-catégorie pleine des foncteurs qui commutent
+\struck{\ill{}} à tt type \add{« petit »} de lim (ind ou proj), donc en
+particulier
+\begin{equation}
+  C^{\circ} \longrightarrow \mathrm{Hom}_{\lambda}(\hat{C},
+  (\mathrm{Ens})), \qquad X \longmapsto (F \mapsto F(X))
+  \tag{8.2.6}
+\end{equation}
+D'où on a \ill{}
+\[
+  \mathrm{Hom}_{\lambda}(\hat{C}, (\mathrm{Ens})) \longrightarrow
+  \mathrm{Hom}(T(\hat{C}), T((\mathrm{Ens})))
+\]
+\note{les deux $T$ du membre de droite portent un indice biffé}
+\marginal{\underline{NB} L'hyp.\ « $\hat{C}$ une
+$\mathcal{U}$-catégorie » \ill{} est \uncertain{essentielle} pour la
+\uncertain{représentabilité} \ill{} (8.2.\uncertain{9}) \ill{} $C$
+\ill{} \uncertain{catégorie} \ill{} $T(\hat{C})$ \ill{} de
+\uncertain{l'« absolu »} \ill{}}
+\marginal{on suppose \ill{} des univers \ill{} $\lambda$ quelc.}
+\note{deux notes marginales à gauche, la première longue et en grande
+partie illisible ; leur place dans le texte n'est pas marquée}
+
+\page{105}
+\note{author's p. ⑨}
+d'où en composant avec (8.2.6) un foncteur canonique
+\begin{equation}
+  C^{\circ} \longrightarrow \mathrm{Hom}(T(\hat{C}), T(\mathrm{Ens}))
+  \tag{8.2.7}
+\end{equation}
+ou, de façon équivalente, un foncteur canonique
+\begin{equation}
+  T(\hat{C}) \xrightarrow{\ \alpha\ \approx\ } \mathrm{Hom}(C^{\circ},
+  S_{T}) \qquad \text{où } S_{T} = T(\mathrm{Ens})
+  \tag{8.2.8}
+\end{equation}
+\note{le second argument de $\mathrm{Hom}$ a d'abord été écrit
+$(\mathrm{Ens})$, biffé}
+Si on a un ensemble d'indices des bases pour $T$, on aura un carré
+commutatif
+
+\begin{tikzcd}[column sep=large]
+  T(\hat{C}) \arrow[r, "\alpha\ \approx"] \arrow[d, "b_{\hat{C}}"'] &
+  \mathrm{Hom}(C^{\circ}, S_{T})
+  \arrow[d, "{\mathrm{Hom}(C^{\circ},\, b_{(\mathrm{Ens})})}"] \\
+  \hat{C}^{I} \arrow[r, "\cong"'] & \mathrm{Hom}(C^{\circ},
+  (\mathrm{Ens}))^{I}
+\end{tikzcd}
+
+\note{numéroté (8.2.9)}
+\marginal{$\mathrm{Hom}_{\lambda}(R, \hat{C}) \cong \mathrm{Hom}(R
+\times C^{\circ}, (\mathrm{Ens})) \cong \mathrm{Hom}(C^{\circ},
+\mathrm{Hom}_{\lambda}(R, (\mathrm{Ens})))$}
+\note{formule encadrée dans la marge gauche ; l'indice du $\mathrm{Hom}$
+extérieur et son premier argument sont surchargés, et un renvoi
+« (8.2.8) » est écrit sous le dernier terme}
+le foncteur \struck{\ill{}} $\alpha$ est tjs une équivalence,
+\struck{donc} \add{si $\overrightarrow{\lambda} = \emptyset$}
+\struck{\ill{}} \add{le} carré 2-cartésien
+
+\begin{tikzcd}[column sep=large]
+  T(C) \arrow[r, hook] \arrow[d, "b_{C}"'] & \mathrm{Hom}(C^{\circ},
+  S_{T}) \arrow[d, "{\varphi \mapsto (b_{i,\mathrm{Ens}} \circ
+  \varphi)_{i \in I}}"] \\
+  C^{I} \arrow[r, hook] & \hat{C}^{I}
+\end{tikzcd}
+
+\note{numéroté (8.2.10) ; à droite : « (2-cartésien \ill{}) »,
+« ($\overrightarrow{\lambda} = \emptyset$) », le reste raturé ; dans la
+marge gauche, entouré : $\overrightarrow{\lambda} = \emptyset$}
+
+Ou, en termes imagés : \add{Se} donner une structure d'espèce $T$
+\add{dans $C$} revient kif-kif \add{à la} \ill{} dans $\hat{C}$, i.e.\
+à la donnée, pour $(E_{i}) \in \mathrm{Ob}\,C^{I}$, d'une
+\struck{\ill{}} structure d'espèce $T$ sur le \struck{\ill{}}
+\add{foncteur} variant fonctoriellement avec \ill{} \struck{\ill{}}
+variant : la donnée, \struck{pour chaque} \add{fonctoriellement}
+\struck{la donnée} pour tt $Z \in \mathrm{Ob}\,C$ d'une \struck{\ill{}}
+\add{structure d'espèce $T$ sur} $\big(E_{i}(Z)\big)_{i \in Z} =
+\big(\mathrm{Hom}(Z, E_{i})\big)_{i \in I}$ \note{sic : « $i \in Z$ »
+au premier indice} \struck{\ill{}} avec $Z$.
+\note{le passage est écrit sur deux colonnes avec des insertions
+interlinéaires ; l'ordre de lecture est reconstitué}
+
+Lorsque $\alpha$ est une \struck{\ill{}} équivalence, \note{en
+insertion : « (pour tt $C$ tel que \ill{} $\mathcal{U}$-catégorie) »}
+\struck{alors} \struck{structure} $T(C)$ est connu (à équivalence
+près (\ldots)) lorsque l'on connaît
+\begin{equation}
+  \begin{cases}
+    S = S_{T} = T(\mathrm{Ens}), \text{ avec les foncteurs} \\
+    \beta_{i} : S_{T} \longrightarrow (\mathrm{Ens})
+  \end{cases}
+  \tag{8.2.11}
+\end{equation}
+\note{à droite des accolades : « $\beta = b_{\mathrm{Ens}}$ », l'indice
+surchargé}
+comme la sous-catégorie pleine des $\mathrm{Hom}(C^{\circ}, S_{T})$
+formée des $\varphi : C^{\circ} \to S_{T}$ tels que les
+\uncertain{$\beta_{i} \circ \varphi$} soient représentables.
+
+\underline{8.2.12.}\ Si on veut une car.\ intrinsèque, on peut dire
+aussi que c'est la sous-catégorie pleine des $\varphi : C^{\circ} \to
+S_{T}$ tels que $\beta_{\mathrm{Ens}} \circ \varphi$
+\struck{représentables} \add{représentable} pour tt $\beta \in
+R^{\lambda}_{T}$. Notons que le foncteur
+\begin{equation}
+  \beta \longmapsto \beta_{\mathrm{Ens}} : R = R^{\lambda}_{T}
+  \longrightarrow \mathrm{Hom}(S_{T}, (\mathrm{Ens})) =
+  \widehat{S^{\circ}_{T}}
+  \tag{8.2.13}
+\end{equation}
+\note{sous le premier argument de $\mathrm{Hom}$, relié par un double
+trait : « $S_{T}$ » ; le membre de droite est suivi d'un numéro
+surchargé, (8.2.15) ou (8.2.13)}
+est aussi le foncteur évident
+\begin{equation}
+  R \longrightarrow \mathrm{Hom}(\mathrm{Hom}_{\lambda}(R, \mathrm{Ens}),
+  (\mathrm{Ens}))
+  \tag{8.2.14}
+\end{equation}
+Or, si on considère $S = \mathrm{Hom}_{\lambda}(R, (\mathrm{Ens}))$
+comme ss-catégorie pleine de $\widehat{R^{\circ}}$, \underline{celle-ci
+contient $R^{\circ}$} (\add{identifié à} la cat.\ des foncteurs
+représentables de $R$ dans $(\mathrm{Ens})$) donc \ldots\
+\struck{\ill{}} $\widehat{R^{\circ}}$,
+
+\page{106}
+\note{author's p. ⑩}
+\begin{equation}
+  R^{\circ} \subset S \subset \widehat{R^{\circ}}
+  \tag{8.2.15}
+\end{equation}
+\struck{\ill{}} et le foncteur
+\[
+  \pi : R \times S \longrightarrow (\mathrm{Ens})
+\]
+est donné par
+\begin{equation}
+  \pi(c, \xi) = \xi(c) =
+  \mathrm{Hom}_{\widehat{R^{\circ}}}(c, \xi) = \mathrm{Hom}_{S}(c, \xi)
+  \tag{8.2.16}
+\end{equation}
+i.e.\ \struck{\ill{}} \add{(8.2.13) est} \note{au-dessous, en petit et
+biffé : « l'opposé »} des foncteurs \struck{foncteur} \add{le}
+composé des deux foncteurs pleinement fidèles
+\begin{equation}
+  R \hookrightarrow S^{\circ}
+  \hookrightarrow \widehat{S^{\circ}} =
+  \mathrm{Hom}(S, (\mathrm{Ens}))
+  \tag{8.2.17}
+\end{equation}
+\note{après le signe $=$ de (8.2.16), un terme biffé ; dans (8.2.17) le premier terme porte un exposant $\circ$ surchargé, sans doute
+biffé ; sous la première flèche : « (8.2.15) »}
+donc est pl.\ fidèle. Ainsi $R$ est connu \add{à équiv.\ près} quand on
+connaît \uncertain{son image} \add{dans} $\widehat{S^{\circ}}$ \ill{}
+\struck{\ill{}}.
+
+Pour résumer, si $T$ est un $\lambda$-type ($\overrightarrow{\lambda}
+= \emptyset$), alors $S = T(\mathrm{Ens})$ est muni d'une
+sous-catégorie \struck{\ill{}} pleine $\Sigma \subset S$, formée des
+$\varphi \in \mathrm{Ob}\,S$ tels que pour tout $C \in \mathrm{Ob}\,
+\mathrm{Cat}_{\lambda}$ et tout \struck{\ill{}}
+\uncertain{$\xi \in C_{\lambda}$} \note{on attendrait $\xi \in T(C)$},
+\struck{\ill{}} \add{exprimant un} \struck{\ill{}} foncteur
+\[
+  \widetilde{\xi} : C^{\circ} \longrightarrow S, \qquad x \longmapsto
+  \mathrm{Hom}(x, \xi)
+\]
+le foncteur composé avec $\mathrm{Hom}_{S}(\varphi, -)$ soit
+représentable \note{un terme biffé dans le second argument} :
+\[
+  x \longmapsto \mathrm{Hom}_{S}(\varphi, \mathrm{Hom}(x, \xi))
+\]
+$\Sigma$ est stable dans $S$ par $\varinjlim$ \add{(inductives)} de
+type $\in \lambda$ \note{« de type $\in \lambda$ » est peut-être
+biffé} [car $C$ est stable dans $\hat{C}$ par $\varprojlim$ de type
+$d$, $\forall C \in \mathrm{Ob}\,\mathrm{Cat}_{\lambda}$] et pour tt $C$
+comme dessus, on a des foncteurs \note{au-dessus : « comme
+$\lambda$-foncteurs »}
+\[
+  \Sigma^{\circ} \longrightarrow \underline{\mathrm{Hom}}(T(C), C),
+  \qquad T(C) \longrightarrow \mathrm{Hom}_{\lambda}(\Sigma^{\circ}, C)
+\]
+On voit alors que l'on trouve ainsi une
+\note{la phrase s'arrête là ; le reste de la page est blanc, et la
+copie paginée ①--⑩ se termine ici}
+\page{108}
+\note{feuillet au crayon, d'une autre main de plume que la copie ①--⑩ ;
+deux ajouts à l'encre bleue sont signalés ; les notations $B_{T}$,
+$O_{B}$, $T(\mathrm{Ens})$ sont celles des pp. 97--106}
+Soit $C$ une catégorie ess.\ petite avec $\varprojlim$ finies, $T$
+l'espèce de structures que $C$ définit, $\hat{C} = B_{T} = B$ le topos
+classifiant, $O_{B}$ la structure universelle dans $B$ (s'identifiant
+à l'inclusion $C \to \hat{C}$). $E$ un topos.
+\[
+  O_{E} \in \mathrm{Ob}\,T(E) \simeq \mathrm{Ob}\,\mathrm{Hom}_{sex}(C, E)
+  \ni f_{0}
+\]
+\note{sous $O_{E}$, une double flèche verticale $\Updownarrow$ menant
+à la ligne suivante ; à droite, à l'encre bleue : « le morphisme
+correspondant »}
+\[
+  f : E \longrightarrow B_{T}
+\]
+\note{devant $f$, un symbole raturé}
+\struck{$\xi$ la structure} donc
+\[
+  O_{E} \simeq f^{*}_{T}(O_{B}) \qquad f_{0} = f^{*} \mid C
+\]
+$U \in \mathrm{Ob}\,E$, $X \in \mathrm{Ob}\,B$ (p.ex.\ $X \in
+\mathrm{Ob}\,C$), on définit une \struck{bijection} \add{application}
+\begin{equation}
+  \mathrm{Hom}_{E}(U, f^{*}X) \longrightarrow
+  \mathrm{Hom}(O_{B}(X), O_{E}(U))
+  \tag{1}
+\end{equation}
+\note{la flèche porte un signe raturé ; sous le membre de droite, à
+l'encre bleue : $T(\mathrm{Ens}) = \mathrm{Ind}(C^{\circ})$}
+Où $O_{E}(U) \in T(\mathrm{Ens})$ est l'image de $O_{E} \in T(E)$ par le
+foncteur $Z \mapsto \mathrm{Hom}_{E}(U, Z) : E \to (\mathrm{Ens})$ (qui
+commute aux $\varprojlim$) et où on définit de $=$ $O_{B}(X)$ dans
+$\hat{C}$. En effet, on a
+\[
+  \mathrm{Hom}_{E}(U, f^{*}(X)) \longrightarrow
+  \mathrm{Hom}_{T(\mathrm{Ens})}(O_{E}(f^{*}(X)), O_{E}(U))
+  \longrightarrow \mathrm{Hom}_{T(\mathrm{Ens})}(O_{B}(X), O_{E}(U))
+\]
+car on a un morphisme de $T(\mathrm{Ens})$
+\[
+  O_{B}(X) \longrightarrow O_{E}(f^{*}(X))
+\]
+\note{au bas de la page, un schéma sur deux lignes :}
+\begin{gather*}
+  C \longrightarrow \hat{C} \xrightarrow{\ h_{X}\ } (\mathrm{Ens}),
+  \qquad Y \longmapsto \mathrm{Hom}_{C}(X, Y) =
+  \mathrm{Hom}_{C^{\circ}}(Y, X) \\
+  \to \mathrm{Hom}_{\hat{C}}(X, Y)
+  \to \mathrm{Hom}_{E}(f^{*}(X), f^{*}(Y))
+\end{gather*}
+\note{au-dessous, biffé : $f_{0} \to E \xrightarrow{h_{f^{*}(X)}}$,
+$Y \mapsto \mathrm{Hom}_{E}(\ldots, f_{0}(Y))$, le premier argument
+raturé}
+
+\page{109}
+Prouver que si $X \in \mathrm{Ob}\,C$, l'application précédente est
+une bijection. D'ailleurs, le 2ème membre s'exprime comme
+$\mathrm{Hom}_{\mathrm{Ind}(C^{\circ})}(X^{\circ}, O_{E}(U))$ pour $U$
+fixé ; la catégorie des couples $(X^{\circ}, \xi)$ ($\xi \in
+\mathrm{Hom}(X^{\circ}, O_{E}(U))$) est la catégorie d'indices naturelle
+définissant \uncertain{l'Ind-objet} $O_{E}(U)$ de
+$\mathrm{Ind}(C^{\circ})$\ldots
+\[
+  O_{B}(X) : C \longrightarrow (\mathrm{Ens}), \qquad
+  Y \longmapsto \mathrm{Hom}_{C}(X, Y) = \mathrm{Hom}_{C^{\circ}}(Y, X)
+\]
+\[
+  O_{E}(U) : \qquad\qquad
+  Y \longmapsto \mathrm{Hom}_{E}(U, f_{0}(Y))
+\]
+\note{le premier argument du dernier $\mathrm{Hom}$ est surchargé}
+\[
+  \mathrm{Hom}(O_{B}(X), O_{E}(U)) = O_{E}(U)(X) =
+  \mathrm{Hom}_{E}(U, f_{0}(X))
+\]
+
+On va en profiter pour calculer $f^{*}(\mathcal{F})$, i.e.\
+\uncertain{$\mathcal{F}$ un champ sur $B$}. Il revient au même de
+\add{se} donner la restriction de $\mathcal{F}$ à \ill{} \ill{} $C$,
+i.e.\ des données \ill{} une catégorie fibrée sur $C$. [\underline{NB}
+si on a un sous-topos \add{$B'$} de $B = \hat{C}$, correspondant à une
+topologie $\tau$ sur $C$, et à une sous-espèce de structure $T'$ de
+$T$, alors si on \ill{} \uncertain{de cette espèce} i.e.\ \add{que}
+$f$ \uncertain{se factorise} \add{par} $B'$ i.e.\ que $f_{0}$ est
+continu \uncertain{pour} $\tau$, alors la donnée d'un champ
+\add{$\mathcal{F}'$} sur $B'$ revient \struck{\ill{}} \add{à} la
+donnée d'un champ $\mathcal{F}_{0}$ sur $B$ muni de \ill{} \ill{} de
+$\tau$, et \ill{} \uncertain{notes} \ill{} \add{$f'^{*}$}$(\mathcal{F}')$
+en termes de $f_{0}$ et $\mathcal{F}'$)] \struck{\ill{} que la
+catégorie fibrée} On \struck{trouve que} \add{commence par le}
+\uncertain{foncteur} \ill{} \note{à droite, sur la ligne : « \ill{}
+un \uncertain{Foncteur} \uncertain{fibré} sur »} \struck{\ill{}}
+$\mathcal{F}_{0}$ \add{le foncteur} \ill{} $\mathrm{Pro}(C) \simeq
+T(\mathrm{Ens})^{\circ}$, \struck{\ill{}} \ill{} $\mathcal{F}_{0}$,
+donc $\mathcal{F}_{0}(O_{E}(U))$ est défini [mais covariant en l'objet
+$(\ )\in T(\mathrm{Ens})$]. Pour $U$ variable, $U \mapsto
+\mathcal{F}_{0}(O_{E}(U))$ donne donc une catégorie fibrée sur $U$
+[i\ldots\ image inverse de $\mathcal{F}_{0}$ par $O_{E} : E^{\circ} \to
+T(\mathrm{Ens}) \cong \mathrm{Pro}(C)^{\circ}$] On prend le
+\struck{catégorie} champ associé.
+\note{page au crayon très pâle : la moitié des mots de liaison est
+perdue, les formules passent}
+
+\page{111}
+\note{feuillet quadrillé à spirale, à l'encre ; titre souligné}
+Topos modulaire pour des structures algébriques
+\struck{\ill{}} sur objets \uncertain{variés} d'un topos fixé
+\struck{\ill{}} $X$
+
+On peut se donner \struck{\ill{}} des objets $E_{i} \in X$, $i \in I$,
+et \struck{\ill{}} une espèce de structure $T$ avec topos modulaire $B$,
+\struck{sur objets} avec données « objets de base » corresp.-dants : des
+$b_{i} \in B$, $i \in I$. On s'intéresse aux, pour tt topos $X'$ sur
+$X$, (aussi \uncertain{comme} images inverses des $E_{i}$ les $E'_{i}$)
+\add{des} structures d'espèce $T$ \struck{dans} $X'$ \struck{que} (i.e.\
+morphismes $f : X' \to B$) \struck{tels que} avec $f^{*}(b_{i}) \simeq
+E'_{i}$. La catégorie de ces objets sur un topos $X'$ fixé, pour $X'
+\to X$ et $X' \to B$ variables, est le produit 2-fibré de
+$\underline{\mathrm{Hom}}_{\mathrm{Top}}(X', X)$ et
+$\underline{\mathrm{Hom}}_{\mathrm{Top}}(X', B)$ sur
+$\underline{\mathrm{Hom}}_{\mathrm{Top}}(X', B_{I})$. Donc on doit avoir
+un \uncertain{produit} \uncertain{$B \times_{B_{I}} X$} dans la
+2-catégorie $(\mathrm{Top})$
+
+\begin{tikzcd}
+  B \arrow[dr, "b"'] & & X \arrow[dl] \\
+  & \widehat{(\mathrm{Ens}_{f})^{\circ}}{}^{I} = B_{I} &
+\end{tikzcd}
+
+\note{à droite du diagramme : « 2-fibre $B \times_{B_{I}} X$ »} (On
+n'a pas encore \uncertain{prouvé} que cela marche.) \struck{\ill{}}
+\struck{Cela doit donc \ill{}} supposons qu'il s'agisse plutôt
+\add{$T$} d'une \struck{$\varprojlim$ finies} \add{structure définie
+par $\varprojlim$ finies}, avec cat.\ modulaire $R$ (donc $B =
+\hat{R}$, $I \to \mathrm{Ob}\,R$) Donc on s'intéresse aux foncteurs
+exacts à g.\ $R \to X'$ transformant les $r_{i}$ en les $E'_{i}$. Soit
+\struck{$\mathcal{S}$} \struck{la catégorie} \add{le champ sur $X$} des
+\ill{} \struck{catégorie} formée des structures $(X', (E'_{i}))$
+\add{et les foncteurs induits} \struck{i.e.\ des foncts ex\ldots}
+\add{avec} $f : R \to X'$ \add{avec} $f(r_{i}) \simeq E'_{i}$ donnés, et
+\struck{soit} \add{soit} $\underline{I}_{X}$ le champ \struck{sous la}
+\add{la} \uncertain{fibre} \add{(en topos)} des \struck{$B$}.
+\marginal{champ en cat.\ \ill{} (associé aux cat.\ \ill{})}
+\note{note marginale en diagonale, au bas à gauche, barrée d'un
+trait ; les insertions interlinéaires de ce feuillet sont nombreuses
+et l'ordre de lecture est reconstitué}
+
+\end{document}
