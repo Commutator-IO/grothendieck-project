@@ -109,13 +109,13 @@ export async function writeManifest() {
   const read = {};
   for (const d of await dirs(TRANSCRIPTS)) {
     for (const f of await readdir(resolve(TRANSCRIPTS, d.name))) {
-      const m = /^(?:batch-(\d+)|(.+?))\.(fr|modern)\.(html|tex|pdf)$/.exec(f);
+      const m = /^(?:batch-(\d+)|(.+?))\.(fr|modern)\.(html|tex|pdf|xml)$/.exec(f);
       // m[1] is set for `batch-NN.*`; m[2] for the folder-wide file, which must
       // be named for the folder it sits in — anything else is not ours.
       if (!m || (m[2] !== undefined && m[2] !== d.name)) continue;
       const entry = m[1]
-        ? (transcripts[`${d.name}#${Number(m[1])}`] ??= { html: [], tex: [], pdf: [] })
-        : (folders[d.name] ??= { html: [], tex: [], pdf: [] });
+        ? (transcripts[`${d.name}#${Number(m[1])}`] ??= { html: [], tex: [], pdf: [], xml: [] })
+        : (folders[d.name] ??= { html: [], tex: [], pdf: [], xml: [] });
       if (!entry[m[4]].includes(m[3])) entry[m[4]].push(m[3]);
       if (m[3] === 'fr' && m[4] === 'tex') {
         const tex = await readFile(resolve(TRANSCRIPTS, d.name, f), 'utf8');
@@ -136,7 +136,7 @@ export async function writeManifest() {
     }
   }
   for (const entry of [...Object.values(transcripts), ...Object.values(folders)]) {
-    for (const ext of ['html', 'tex', 'pdf']) {
+    for (const ext of ['html', 'tex', 'pdf', 'xml']) {
       entry[ext].sort((a, b) => EDITIONS.indexOf(a) - EDITIONS.indexOf(b));
     }
   }

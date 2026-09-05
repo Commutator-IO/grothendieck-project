@@ -42,7 +42,10 @@ export function Downloads({
     ...e,
     tex: available.tex.includes(e.key),
     pdf: available.pdf.includes(e.key),
-  })).filter((r) => r.tex || r.pdf);
+    // The TEI export, derived from the `.tex` by `npm run tei`. Only the
+    // transcription has one: it is the edition whose apparatus TEI encodes.
+    xml: (available.xml ?? []).includes(e.key),
+  })).filter((r) => r.tex || r.pdf || r.xml);
 
   if (!rows.length) {
     return (
@@ -87,22 +90,27 @@ export function Downloads({
             <span className="text-[12.5px] font-medium text-ink-700" title={r.help}>
               {r.label}
             </span>
-            {(['tex', 'pdf'] as const).map((ext) =>
+            {(['tex', 'pdf', 'xml'] as const).map((ext) =>
               r[ext] ? (
                 <a
                   key={ext}
                   // The source opens through its wrapper page; the PDF opens
-                  // in the browser's viewer. Neither downloads.
+                  // in the browser's viewer; the TEI opens as XML, which every
+                  // browser displays as a tree. None downloads.
                   href={
                     editionUrl(manifest, cote, batch, r.key as Edition, ext) +
                     (ext === 'tex' ? '.html' : '')
                   }
                   target="_blank"
                   rel="noopener noreferrer"
-                  title={`Open the ${r.label.toLowerCase()} ${ext.toUpperCase()} in a new tab`}
+                  title={
+                    ext === 'xml'
+                      ? `Open the ${r.label.toLowerCase()} as TEI P5 (XML) in a new tab — the same apparatus, in the archives' interchange format`
+                      : `Open the ${r.label.toLowerCase()} ${ext.toUpperCase()} in a new tab`
+                  }
                   className="rounded-md bg-ink-100 px-1.5 py-0.5 font-mono text-[11px] font-semibold uppercase text-ink-600 transition hover:bg-brand-100 hover:text-brand-700"
                 >
-                  {ext}
+                  {ext === 'xml' ? 'tei' : ext}
                 </a>
               ) : null,
             )}

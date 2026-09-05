@@ -210,6 +210,12 @@ export interface TranscriptEntry {
   tex: Edition[];
   /** Editions that have a compiled PDF. */
   pdf: Edition[];
+  /**
+   * Editions that have a TEI export (`.xml`), derived from the `.tex` by
+   * `npm run tei`. Only the transcription has one today. Optional because a
+   * manifest written before the export existed does not carry the key.
+   */
+  xml?: Edition[];
 }
 
 /**

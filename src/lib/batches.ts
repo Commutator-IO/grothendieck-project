@@ -113,7 +113,7 @@ export function servedByFolder(
   m: Manifest | null,
   cote: string,
   edition: Edition,
-  ext: 'html' | 'tex' | 'pdf',
+  ext: 'html' | 'tex' | 'pdf' | 'xml',
 ): boolean {
   return (folderEntry(m, cote)?.[ext] ?? []).includes(edition);
 }
@@ -131,7 +131,7 @@ export function editionUrl(
   cote: string,
   k: number,
   edition: Edition,
-  ext: 'html' | 'tex' | 'pdf',
+  ext: 'html' | 'tex' | 'pdf' | 'xml',
 ): string {
   return servedByFolder(m, cote, edition, ext)
     ? folderTranscriptUrl(cote, edition, ext)
@@ -158,6 +158,7 @@ export function availableFor(
     html: merge(own.html, whole.html),
     tex: merge(own.tex, whole.tex),
     pdf: merge(own.pdf, whole.pdf),
+    xml: merge(own.xml ?? [], whole.xml ?? []),
   };
 }
 
@@ -285,7 +286,7 @@ export function useFacsimileProxy(): RelayState {
 }
 
 export function transcript(m: Manifest | null, cote: string, k: number) {
-  return m?.transcripts?.[batchId(cote, k)] ?? { html: [], tex: [], pdf: [] };
+  return m?.transcripts?.[batchId(cote, k)] ?? { html: [], tex: [], pdf: [], xml: [] };
 }
 
 /** What exists for a batch, as the state model consumes it. */
