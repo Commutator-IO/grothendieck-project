@@ -1,0 +1,3266 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 161-2
+% (pages 1-111, the whole folder).
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried — a doubtful
+% reading, a notation he used differently, a missing passage — moves into a
+% footnote.
+%
+% It is held to being mathematically correct as it stands, not merely faithful
+% to the page. Where the manuscript is loose or mistaken, the true statement is
+% what appears here, and the footnote says what the page has. In any dispute of
+% substance the transcription governs: whoever cites Grothendieck must cite
+% batch-0{1,...,6}.fr.tex.
+%
+% Pass: Fable 5.1 (claude-fable-5-1), 2026-09-05 — first pass, unchecked against
+% the pages by a human. The folder was read whole, all six batches (pages
+% 1-111) together, and this is a SINGLE document for the whole folder. The
+% notation fixed for the document: Δ (or Cat_λ) for the 2-category of
+% categories with limits of the prescribed types; T for a theory (« type »,
+% « espèce de structure »), T(C) its models in C, R (= R_T, B_T) the small
+% category representing it (« catégorie modelante », his « modelaire »,
+% « modulaire »), S = T(Ens) its set-models, Σ = R° ⊂ S the representable
+% ones, B = R̂ the classifying topos; in the ring notebook R is the category
+% of affine schemes of finite type over Z, which is the same R for the theory
+% of rings, and X_P the classifying subtopos of a ring property P. Substantive
+% departures from the pages, each footnoted where it occurs: the well-poweredness
+% hypothesis supplied to the SAFT-type representability claims (pp. 71-72, 74);
+% a reflective subcategory is closed under limits, against p. 73; the six
+% subtopoi of p. 24 are not a classification; the exponent n restored in the
+% cones D_n of p. 42; the source of the descent equivalence on p. 34; the
+% « i ∈ Z » and « ξ ∈ C_λ » slips of pp. 105-106. Announced and never
+% established: « Pb 1 » and « Pb 2 » are named from p. 3 on and never stated;
+% the operation K of the envelope theorem is enumerated (pp. 4-8, 27-28) and
+% never written; Σ ≃ R° (pp. 68, 106) is asserted; X_car ≃ R̂_car (p. 49) is
+% asserted; § 9 « Relation avec analyseurs de Lazard » (p. 89) has no text;
+% the fair copy ①-⑩ stops mid-sentence on p. 106.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{161-2}
+\pages{1}{111}
+\dating{[vers 1963-1973]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Algèbre universelle [ou catégories] : notes manuscrites (s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Une chemise dont l'onglet porte, de sa main, « Algèbre universelle », et
+que l'inventaire hésite à ranger sous « catégories » : cent onze pages sans
+date, où l'on reconnaît quatre ou cinq campagnes d'écriture — des feuillets
+lignés de brouillon, un cahier à spirale quadrillé, des feuillets jaunis
+d'une autre plume, et pour finir une copie au net paginée de ① à ⑩. Ce ne
+sont pas des notes de lecture ; c'est une théorie en train de se faire, et
+qui se refait quatre fois.
+
+De quoi s'agit-il ? L'algèbre universelle, au sens classique, étudie ce que
+les structures algébriques — groupes, anneaux, modules, treillis — ont en
+commun : chacune est donnée par des opérations et des axiomes, et l'on peut
+raisonner sur « une structure quelconque » sans dire laquelle. La question
+de ces pages est la version que ce mot prend chez quelqu'un qui vient de
+passer dix ans à faire de la géométrie \emph{dans} des catégories : que
+veut dire « une structure algébrique dans une catégorie $C$ » — un groupe
+dans les faisceaux sur un espace, un anneau dans un topos —, et qu'est-ce
+qu'une \emph{espèce} de structure, prise indépendamment de la catégorie où
+on la réalise ?
+
+L'idée qui arrive est d'une simplicité qui la rend difficile à voir. Une
+espèce de structure est une \emph{recette} : elle demande certaines
+limites — des produits pour écrire une loi de composition, des égalisateurs
+pour écrire un axiome — et c'est tout. La recette elle-même est une petite
+catégorie $R$, celle des « constructions » que l'on peut faire à partir
+d'une structure de l'espèce ; un plat, c'est-à-dire une structure dans $C$,
+est un foncteur $R \to C$ qui respecte les limites en jeu. Toute l'algèbre
+universelle tient alors dans un dictionnaire, que le dossier écrit
+littéralement sous forme de tables (pages 90 et 91) : aux espèces de
+structures correspondent les catégories $R$, aux sous-espèces les
+localisations de $R$, aux structures « plus riches » les foncteurs qui
+engendrent, aux limites d'espèces les limites inductives de catégories.
+
+Deux faits font de ce dictionnaire autre chose qu'un changement de
+vocabulaire, et les pages les découvrent l'un après l'autre. Le premier :
+\emph{les modèles déterminent la théorie}. Si l'on connaît la catégorie $S$
+de toutes les structures ensemblistes de l'espèce — tous les groupes, avec
+leurs homomorphismes —, on retrouve la recette $R$ à l'intérieur de $S$,
+comme la sous-catégorie des structures « de présentation finie », celles
+que l'on peut décrire par un nombre fini de générateurs et de relations
+(pages 77 et 78). La théorie n'est donc pas un choix de présentation : elle
+est une propriété de ses modèles. Le second : \emph{il existe un modèle
+universel}. Pour chaque espèce il y a un topos — une catégorie de faisceaux
+sur un site convenable — qui contient une structure de l'espèce, et telle
+que toute structure de l'espèce, dans n'importe quel topos, s'en déduise par
+une unique image inverse. C'est le \emph{topos classifiant} de l'espèce, et
+le cahier à spirale en fait la liste pour les anneaux : le topos des
+préfaisceaux sur les schémas affines classifie les anneaux, le topos de
+Zariski les anneaux locaux, le topos étale les anneaux strictement
+locaux, et ainsi de suite pour vingt-deux propriétés, réduit, intègre,
+corps, corps algébriquement clos, de caractéristique donnée. L'anneau
+« universel » y est le faisceau structural, et l'on peut lire l'ensemble du
+cahier comme la réponse à une seule question : \emph{quel est le corps
+universel} — et pourquoi n'est-il pas un anneau universel comme les
+autres, parce que « être un corps » demande une disjonction, « nul ou
+inversible », que les limites seules ne savent pas dire (pages 92 à 95).
+
+Ces pages ne citent presque personne — Lazard pour ses « analyseurs »,
+Lawvere une fois, Schanuel pour une idée, et SGA 4 pour tout le reste. Ce
+qu'elles construisent porte aujourd'hui d'autres noms : les théories de
+Lawvere et les esquisses d'Ehresmann pour les recettes, les catégories
+localement présentables et la dualité de Gabriel--Ulmer pour « les modèles
+déterminent la théorie », les topos classifiants et la logique géométrique
+pour le modèle universel. Toutes ces théories datent des années 1963 à
+1977, c'est-à-dire de la fourchette que l'inventaire propose pour le
+dossier ; la lecture qui suit dit, à chaque endroit, ce que la page
+établit, ce qu'elle affirme sans preuve, et où la littérature l'a
+retrouvé.
+
+Ce qui tient lieu de conclusion, page 80, est une liste des cas à traiter,
+et la phrase : « Je m'attends à des ennuis (de sortie de l'Univers) ». Le
+mot revient : le « grain de sel » de la page 84, « on n'a pas encore prouvé
+que cela marche » de la page 111. La copie au net s'arrête au milieu d'une
+phrase. C'est un dossier où l'on voit, à la lettre, une notion arriver et
+se stabiliser — quatre énoncés successifs du même théorème d'enveloppe,
+pages 3, 15, 26 et 97 —, et où la prudence sur la taille des objets n'est
+pas une manie mais le lieu exact où le problème résiste.
+
+\keywords{universal algebra, sketch, essentially algebraic theory, Lawvere theory, locally presentable category, accessible category, Gabriel–Ulmer duality, dense functor, free completion, transfinite construction, classifying topos, geometric theory, cartesian theory, coherent topos, enough points, subtopos, Zariski topos, local ring, von Neumann regular ring, generic field, fibre product of topoi, monadicity, descent, orthogonality}
+\end{resume}
+
+\pagerange{3}{3}
+\section*{Le fil du dossier, et les conventions}
+
+Le dossier n'est pas relié dans l'ordre de sa composition, mais ses
+campagnes se distinguent au papier et à la plume, et l'argument, lui, est
+un. Voici ses stations, dans l'ordre des feuillets.
+
+\begin{itemize}
+\item \textbf{Pages 3 à 15.} Le \emph{théorème de la $\Delta$-enveloppe} :
+une petite catégorie munie de cônes se complète librement en une catégorie
+ayant des limites de types prescrits ; démonstration par récurrence
+transfinie ; extension aux conditions d'exactitude ; une typologie de
+celles-ci. Repris pages 26 à 31 sous sa forme la plus générale.
+\item \textbf{Pages 17 à 24.} Le cas des \emph{topos} : une théorie à
+limites finies a pour modèle universel un topos de préfaisceaux, ses
+sous-théories sont les sous-topos, et un objet d'une 2-catégorie de « bons
+topos » représente une théorie constructible si et seulement s'il est un
+topos de Grothendieck (Théorème 4). Produits fibrés et limites transfinies
+de topos. Le topos classifiant d'un objet.
+\item \textbf{Pages 33 et 34.} Deux feuilles de travail : théories de
+Lawvere, monadicité, descente.
+\item \textbf{Pages 36 à 50.} Le \emph{cahier des anneaux} : vingt-deux
+propriétés d'anneaux et le sous-topos du classifiant qui les classifie ;
+la question des points ; le recollement de deux sous-topos.
+\item \textbf{Pages 51 et 52.} Quelles propriétés de modules et d'algèbres
+sont « typiques » (géométriques).
+\item \textbf{Pages 54 à 61.} L'outillage : \emph{catégories accessibles}
+d'après SGA 4 I § 9, foncteurs strictement générateurs, et la
+caractérisation des catégories localement présentables.
+\item \textbf{Pages 62 à 68.} « Compléments » : théories sur $\Delta$,
+constructibilité, changement de $\Delta$, limites dans $T(C)$, et le
+passage aux préfaisceaux $R^{\circ} \subset S \subset \widehat{R^{\circ}}$.
+\item \textbf{Pages 69 à 80.} « Exemples » : les théories définies par des
+limites — toutes les limites, les limites d'un type $d'$, les limites
+finies — et pour ces dernières la dualité complète entre théories et
+catégories de modèles. La liste des cas à traiter.
+\item \textbf{Pages 81 à 87.} L'adjonction entre théories et catégories,
+la catégorie des constructions $B_{T}$, sa construction explicite pas à
+pas, et la réciproque : toute catégorie à générateurs est classifiante.
+\item \textbf{Pages 89 à 91.} Les \emph{dictionnaires}.
+\item \textbf{Pages 92 à 95.} Le \emph{corps universel}.
+\item \textbf{Pages 97 à 106.} La \emph{copie au net} ① à ⑩ :
+$\lambda$-types, représentabilité, règles de formation, dualité, et le
+cas des limites projectives.
+\item \textbf{Pages 108 à 111.} Le classifiant depuis le topos : image
+inverse de la structure universelle, image inverse d'un champ, et le topos
+modulaire relatif.
+\end{itemize}
+
+\textbf{Conventions, valables pour tout le document.} $\Delta$, ou
+$\mathrm{Cat}_{\lambda}$ dans la copie au net, est la 2-catégorie des
+catégories possédant les limites de types prescrits $d = (d', d'')$ (resp.
+$\lambda = (\overleftarrow{\lambda}, \overrightarrow{\lambda})$), avec les
+foncteurs qui y commutent. Une \emph{théorie} (le manuscrit dit aussi
+\emph{type}, \emph{espèce de structure}) est un 2-foncteur $T : \Delta \to
+\mathrm{Cat}$, $T(C)$ étant la catégorie des structures de l'espèce dans
+$C$ ; elle est \emph{représentable} par $R \in \mathrm{Ob}\,\Delta$ si $T(C)
+\simeq \underline{\mathrm{Hom}}_{\Delta}(R, C)$, et $R$ — que le manuscrit
+note $R$, $R_{T}$, $R^{\lambda}_{T}$, $B_{T}$, et nomme « catégorie des
+constructions », « modelaire », « modulaire », « classifiante » selon les
+feuillets — est appelé ici sa \emph{catégorie modelante}. Elle est
+\emph{algébrique} (\emph{constructible}) si elle s'obtient de la structure
+vide sur des objets de base par des ajouts de flèches, des égalités et des
+inversions, éventuellement transfinis. $S = T(\mathrm{Ens})$ est sa catégorie
+de modèles ensemblistes, $\Sigma = R^{\circ} \subset S$ la sous-catégorie
+des modèles représentables, et, pour une théorie à limites finies, $B =
+\widehat{R}$ son topos classifiant. Le \emph{topos} est toujours un topos
+de Grothendieck, sauf dans « bon topos » (page 17), où la condition de
+taille est omise. Dans le cahier des anneaux, $R$ désigne la catégorie des
+schémas affines de type fini sur $\mathbb{Z}$ : c'est la catégorie
+modelante de la théorie des anneaux, et il n'y a donc pas conflit de
+notation ; $A$ y est l'anneau universel, $X_{P}$ le sous-topos classifiant
+la propriété $P$, $\widetilde{R}_{\mathrm{top}}$ les faisceaux pour une
+topologie. « Pb 1 » et « Pb 2 » désignent la $\Delta$-enveloppe d'une
+catégorie et la localisation dans $\Delta$ ; ils sont nommés dès la page 3
+et jamais énoncés, et le sens retenu est justifié à cet endroit. Le
+2-foncteur $R \mapsto T_{R}$ est contravariant : un morphisme de théories
+$T' \to T$ est un $\Delta$-foncteur $R \to R'$, et le foncteur d'oubli
+$T'(\mathrm{Ens}) \to T(\mathrm{Ens})$ va dans le sens de $T' \to T$.
+
+\textbf{Ce que le dossier annonce et n'établit pas.} L'opération $K$ de la
+construction transfinie est énumérée par ses propriétés (pages 4 à 8, 27
+et 28) et jamais écrite ; le renvoi (*) de la page 31 s'arrête après trois
+lignes. L'équivalence $\Sigma \simeq R^{\circ}$ entre les modèles
+« représentables en toute construction » et la catégorie modelante est
+affirmée (pages 68 et 106) et démontrée seulement pour les limites finies
+(page 77). L'identification $X_{\mathrm{car}} \simeq \widehat{R_{\mathrm{car}}}$
+(page 49) est posée sans preuve. Le § 9, « Relation avec analyseurs de
+Lazard », n'a qu'un titre. Le point (4) de la page 68 et le crochet de la
+page 66 sont abandonnés après quelques mots, et la copie au net s'arrête
+page 106 au milieu de sa dernière phrase. Enfin les « six sous-topos » de
+la page 24 ne sont pas tous les sous-topos du classifiant d'un objet, et
+la note le dit.
+\pagerange{3}{15}
+\section*{Le théorème de la $\Delta$-enveloppe (pages 3 à 15, reprise pages 26 à 31)}
+
+\pagerange{3}{3}
+\subsection*{Le cadre}
+
+On fixe un couple $d = (d', d'')$ de petits ensembles de \emph{types de
+diagrammes} : chaque élément de $d'$ (resp. $d''$) est une petite catégorie
+d'indices, et l'on demandera les limites projectives (resp. inductives)
+indexées par ces catégories. On note $\Delta = \Delta_{d}$ la 2-catégorie
+dont les objets sont les catégories possédant les limites projectives de
+type $d'$ et les limites inductives de type $d''$, dont les 1-flèches sont
+les foncteurs commutant à ces limites (les \emph{$\Delta$-foncteurs}), et
+dont les 2-flèches sont les transformations naturelles.\footnote{Le
+manuscrit écrit « la catégorie des catégories ayant des $\lim$ de type $d$,
+avec foncteurs y commutant ». Que $\Delta$ soit une 2-catégorie et non une
+catégorie est constant dans tout le dossier — toutes les propriétés
+universelles y sont énoncées « à équivalence près » — et nous le disons
+d'emblée.}
+
+Une catégorie $C$ étant donnée, un \emph{paquet de cônes} $\delta =
+(\delta', \delta'')$ sur $C$ est un petit ensemble de cônes projectifs
+$(x \to x_{\alpha})_{\alpha}$ de type $\in d'$ et de cônes inductifs de
+type $\in d''$. Un foncteur $u : C \to E$ vers un objet $E$ de $\Delta$
+est \emph{$\delta$-exact} s'il envoie chaque cône de $\delta$ sur un cône
+limite de $E$. On note $\underline{\mathrm{Hom}}_{\delta}(C, E)$ la
+sous-catégorie pleine de $\underline{\mathrm{Hom}}(C, E)$ formée des
+foncteurs $\delta$-exacts, et $\underline{\mathrm{Hom}}_{\Delta,\delta}(C,E)$
+la même chose lorsque $C$ est déjà un objet de $\Delta$ et que l'on
+demande de plus que $u$ soit un $\Delta$-foncteur.
+
+En langage d'aujourd'hui, le couple $(C, \delta)$ est une \emph{esquisse}
+(une esquisse à limites projectives et inductives, au sens d'Ehresmann),
+et le théorème qui suit est l'existence de la catégorie
+\emph{$\Delta$-libre engendrée par l'esquisse}.\footnote{Ehresmann
+introduit les esquisses en 1966--1968 ; la notion est dans l'air à la date
+que l'inventaire propose pour ces feuillets, et rien ici ne la cite. Le mot
+« enveloppe » est celui du manuscrit, et nous le gardons partout.}
+
+\pagerange{3}{3}
+\subsection*{L'énoncé}
+
+\textbf{Théorème.} \emph{Soient $d$, $\Delta = \Delta_{d}$ comme ci-dessus,
+$C$ une catégorie essentiellement petite et $\delta$ un paquet de cônes sur
+$C$. Il existe un objet $\overline{C}_{\delta}$ de $\Delta$ et un foncteur
+$i : C \to \overline{C}_{\delta}$ tels que}
+\begin{enumerate}
+\item[a)] \emph{$i$ est $\delta$-exact ;}
+\item[b)] \emph{pour tout $E \in \mathrm{Ob}\,\Delta$, le foncteur
+$\varphi \mapsto \varphi \circ i$ induit une équivalence de catégories}
+\[
+\underline{\mathrm{Hom}}_{\Delta,\, i(\delta)}(\overline{C}_{\delta}, E)
+\;\xrightarrow{\ \approx\ }\;
+\underline{\mathrm{Hom}}_{\delta}(C, E).
+\]
+\end{enumerate}
+\emph{Autrement dit, $(\overline{C}_{\delta}, i)$ est un objet 2-initial de
+la 2-catégorie des objets $E$ de $\Delta$ munis d'un foncteur $\delta$-exact
+$C \to E$. De plus $\overline{C}_{\delta}$ est essentiellement
+petite.}\footnote{La petitesse est essentielle et elle tient à ce que $d$ est
+un \emph{ensemble} de types : la construction s'arrête à un ordinal
+$\omega$ dont le cardinal majore les cardinaux des catégories d'indices en
+jeu. Si l'on admettait tous les petits diagrammes, la conclusion serait
+fausse : la complétion libre d'une petite catégorie par toutes les petites
+limites projectives n'est pas petite (celle de la catégorie ponctuelle par
+les produits quelconques est $(\mathrm{Ens})^{\circ}$). Le manuscrit y
+revient page 76 : « supposons $d'$ petit, alors une $R$ admettant une petite
+sous-catégorie $d'$-cogénératrice est petite ». Dans l'exemple des pages 70
+à 73, où toutes les limites sont admises, l'enveloppe est
+$\widehat{I^{\circ}}{}^{\circ}$ et n'est pas petite ; voir ci-dessous.}
+
+Le \emph{N.B.} de la page 3 dit ce que l'énoncé unifie : le « problème 1 »
+(pas de cônes du tout, $\delta' = \delta'' = \emptyset$ : la
+$\Delta$-enveloppe d'une catégorie nue) et le « problème 2 » ($C$ déjà dans
+$\Delta$, et $\delta$ formé des cônes limites de $C$ auxquels on adjoint des
+flèches $(x \to y)$ d'un ensemble $\Sigma$ vues comme cônes à un seul
+sommet : c'est la localisation $C\Sigma^{-1}$ prise dans $\Delta$). Ces deux
+problèmes sont nommés dès ici et jamais énoncés dans le dossier ; nous les
+prenons dans ce sens, qui est le seul compatible avec toutes leurs
+occurrences.\footnote{« Pb 1 » et « Pb 2 » reviennent pages 17, 19, 20, 69
+à 75. Le problème 1 est l'adjonction $\mathrm{Cat} \rightleftarrows \Delta$
+de la page 82 ; le problème 2 est la représentabilité du 2-foncteur
+$C \mapsto \underline{\mathrm{Hom}}_{\Delta}(J, C; \Sigma)$ de la même
+page.}
+
+\pagerange{3}{6}
+\subsection*{La construction transfinie}
+
+La démonstration est une récurrence transfinie qui est devenue la méthode
+standard pour ce genre d'énoncé.\footnote{La forme générale en est donnée
+par Kelly, \emph{A unified treatment of transfinite constructions} (1980) ;
+la construction ici est celle-là, pour un cas particulier, écrite une
+douzaine d'années plus tôt.} On construit une suite transfinie de petites
+catégories sous $C$, chacune munie d'un paquet de cônes :
+\[
+\begin{cases}
+(C_{0}, \delta_{0}) = (C, \delta), \\
+(C_{i+1}, \delta_{i+1}) = K(C_{i}, \delta_{i}), \qquad
+\tau_{i} : C_{i} \to C_{i+1}, \\
+C_{i} = \varinjlim_{j < i} C_{j} \ \text{(limite dans } \mathrm{Cat}),
+\quad \delta_{i} = \bigcup_{j<i} \mathrm{Im}\,\delta_{j}
+\ \text{ si $i$ est un ordinal limite,}
+\end{cases}
+\]
+où $K$ est une « opération » à expliciter, et l'on note $\alpha_{i} : C \to
+C_{i}$. L'opération $K$ doit avoir quatre propriétés, énoncées page 4 pour
+le pas $C_{i} \to C_{i+1}$ :
+
+\begin{enumerate}
+\item[a)] $\tau_{i}$ est \emph{$\delta_{i}$-préexact}, ce qui signifie deux
+choses pour chaque cône projectif $(x \to x_{\alpha}) \in \delta'_{i}$ (et
+dualement pour les cônes inductifs) : deux flèches $u, v : z \rightrightarrows
+x$ égalisées par toutes les projections deviennent égales dans $C_{i+1}$ ;
+et toute famille compatible $(z \to x_{\alpha})_{\alpha}$ se factorise, dans
+$C_{i+1}$, par $\tau_{i}(x)$ ;
+\item[b)] tout diagramme de type $d'$ (resp. $d''$) de $C_{i}$ acquiert dans
+$C_{i+1}$ un cône qui appartient à $\delta'_{i+1}$ (resp. $\delta''_{i+1}$) ;
+\item[c)] $\delta_{i+1}$ est formé de l'image de $\delta_{i}$ et des cônes
+ajoutés en b) ;
+\item[d)] pour tout $E \in \mathrm{Ob}\,\Delta$, $\varphi \mapsto \varphi
+\circ \tau_{i}$ induit une équivalence
+$\underline{\mathrm{Hom}}_{\delta_{i+1}}(C_{i+1}, E) \to
+\underline{\mathrm{Hom}}_{\delta_{i}}(C_{i}, E)$.
+\end{enumerate}
+
+De d) on tire par récurrence l'équivalence $(d^{*})$ :
+$\underline{\mathrm{Hom}}_{\delta_{i}}(C_{i}, E) \simeq
+\underline{\mathrm{Hom}}_{\delta}(C, E)$ pour tout $i$. Il reste à trouver
+un ordinal $\omega$ tel que $C_{\omega} \in \mathrm{Ob}\,\Delta$, que
+$\alpha_{\omega}$ soit $\delta$-exact, et que
+$\underline{\mathrm{Hom}}_{\delta_{\omega}}(C_{\omega}, E)$ soit exactement
+$\underline{\mathrm{Hom}}_{\Delta,\,\alpha_{\omega}(\delta)}(C_{\omega}, E)$.
+On prend un cardinal $\pi$ strictement plus grand que le nombre de flèches
+de toute catégorie d'indices en jeu (celles des types $d'$, $d''$ et celles
+des cônes de $\delta$), et $\omega$ le plus petit ordinal de cardinal
+$\geqslant \pi$ ; alors tout $j < \omega$ est « grand devant » ces
+cardinaux, ce qui donne :
+\[
+(*) \qquad \forall j < \omega,\quad C_{j} \to C_{\omega}
+\ \text{est } \delta_{j}\text{-exact},
+\]
+d'où $C_{\omega} \in \mathrm{Ob}\,\Delta$ (par $(*)$ et b)) et
+\[
+(**) \qquad \delta_{\omega} = (\text{cônes limites de types $d'$, $d''$
+de } C_{\omega}) \cup \alpha_{\omega}(\delta),
+\]
+qui est le point 3\textsuperscript{o}.\footnote{La page 5 dit de $(*)$ :
+« cela résulte aisément de a) et c) et de la grandeur de $\omega$ », avec
+en marge « détailler la démonstration ». L'argument attendu : un diagramme
+de type $\Theta$ dans $C_{\omega}$ ne fait intervenir que
+$\mathrm{card}\,\mathrm{Fl}\,\Theta < \pi$ flèches, donc provient d'un
+$C_{j}$, $j < \omega$, et son cône limite y a été ajouté au pas suivant ;
+la même remarque de « grandeur » est refaite, complètement cette fois, page
+29. Nous ne la redonnons pas ici.}
+
+Tout revient donc à construire $K$. Elle est composée de six opérations
+élémentaires, trois pour les cônes projectifs ($\rho = \rho_{3}\rho_{2}
+\rho_{1}$) et trois pour les cônes inductifs ($\sigma = \sigma_{3}\sigma_{2}
+\sigma_{1}$), chacune « faisant environ la moitié du boulot » :
+\begin{itemize}
+\item $\rho_{1}$ : prendre l'enveloppe de $C$ dans $\Delta'' =
+\Delta_{(\emptyset, d'')}$ — on ajoute librement les limites inductives de
+type $d''$ — et ajouter à $\delta''$ tous les cônes de type $d''$ ainsi
+créés ; cela assure b'') ;
+\item $\rho_{2}$ : égaliser, pour chaque cône projectif $(x \to
+x_{\alpha}) \in \delta''_{1}$, les couples de flèches $z \rightrightarrows
+x$ que toutes les projections égalisent ; cela assure $a'_{1}$) ;
+\item $\rho_{3}$ : ajouter, pour chaque cône projectif de $\delta''_{2}$ et
+chaque famille compatible $(z \to x_{\alpha})$, une flèche $z \to x$ la
+factorisant ; cela assure $a'_{2}$) ;\footnote{Les indices sont ceux du
+manuscrit : la page 5 fait porter $\rho_{2}$ et $\rho_{3}$ sur $\delta''$
+alors que $a'_{1}$, $a'_{2}$ concernent $d'$ (la page 4 écrit d'ailleurs
+$d'_{i}$). Il y a une hésitation de notation entre « prime » et « seconde »
+d'un feuillet à l'autre, sans conséquence : les trois opérations $\rho$
+traitent les cônes projectifs et les trois $\sigma$, « définies de façon
+analogue », les cônes inductifs.}
+\item $\sigma_{1}, \sigma_{2}, \sigma_{3}$ : les mêmes, avec les rôles de
+$d'$ et $d''$ échangés.
+\end{itemize}
+Chaque opération conserve c) et d) — c'est la vérification à faire, notée
+en marge — et $K = \sigma\rho$ a les propriétés a) à d).
+
+Le \emph{N.B.} de la page 6 mérite d'être retenu : l'ordre des six
+opérations est indifférent, « on pourrait prendre $K' = \sigma_{1}\rho_{3}
+\sigma_{2}\rho_{1}\rho_{2}\sigma_{3}$ ! », et la seule chose qui ait un sens
+intrinsèque est la limite des itérés transfinis. C'est exactement ce que la
+théorie ultérieure des constructions transfinies formalise : le point fixe
+ne dépend pas de la présentation choisie de l'opération.
+
+\pagerange{6}{9}
+\subsection*{Conditions d'exactitude : la 2-catégorie $\Delta_{f}$}
+
+Les pages 6 à 9 étendent l'énoncé à des conditions plus fines que
+l'existence de limites. On se donne, pour $i = 0, 1, 2$, des familles
+$f^{(i)} = (f^{(i)}_{\lambda})$ de $\Delta$-foncteurs entre petits objets de
+$\Delta$, $f^{(i)}_{\lambda} : R^{(i)}_{\lambda} \to R'^{(i)}_{\lambda}$, et
+l'on définit $\Delta_{f}$ comme la sous-2-catégorie pleine de $\Delta$
+formée des $E$ tels que, pour tout $\varphi$ de la famille, le foncteur
+$u \mapsto u \circ \varphi$, de $\underline{\mathrm{Hom}}_{\Delta}(R', E)$
+vers $\underline{\mathrm{Hom}}_{\Delta}(R, E)$, soit
+\begin{itemize}
+\item[$a_{0}$)] surjectif sur les Hom si $\varphi$ est un $f^{0}_{\lambda}$ ;
+\item[$a_{1}$)] injectif sur les Hom (fidèle) si $\varphi$ est un
+$f^{1}_{\lambda}$ ;
+\item[$a_{2}$)] essentiellement surjectif si $\varphi$ est un
+$f^{2}_{\lambda}$.\footnote{La page 6 laisse la condition $a_{2}$) en
+blanc ; nous la remplissons par la troisième composante d'une équivalence,
+qui est ce que les propriétés $a_{2}$) de la page 7 (existence d'un $u'$
+avec $\tau_{i} \circ u \simeq u' \circ \varphi$) construisent. Pour
+$a_{1}$) la page écrit « bijectifs », biffé en « injectifs », et nous
+suivons la correction. Ainsi $f^{1}$ impose la fidélité, $f^{0}$ et $f^{1}$
+ensemble la pleine fidélité, les trois l'équivalence — c'est le
+découpage que la Remarque de la page 13 nomme a), b), c).}
+\end{itemize}
+
+\textbf{Théorème.} \emph{Sous les hypothèses du théorème précédent, il
+existe un $\Delta$-foncteur $\delta$-exact $C \to \overline{C}$ avec
+$\overline{C} \in \mathrm{Ob}\,\Delta_{f}$, 2-universel pour ces
+propriétés, et $\overline{C}$ est essentiellement petite.}
+
+La démonstration suit le même schéma. Grâce au premier théorème on peut
+supposer $C \in \mathrm{Ob}\,\Delta$ et $\delta$ formé de tous les cônes
+limites de types $d'$, $d''$, de sorte que
+$\underline{\mathrm{Hom}}_{\delta}(C, E) =
+\underline{\mathrm{Hom}}_{\Delta,\delta}(C, E)$. On itère alors une
+opération $K$ à valeurs dans $\Delta$, dont le pas $\tau_{i} : C_{i} \to
+C_{i+1}$ doit :
+\begin{enumerate}
+\item[$a_{0}$)] pour $\varphi : R \to R'$ dans la famille et deux
+transformations $\lambda, \mu : u' \to v'$ entre foncteurs $R' \to C_{i}$,
+identifier $\tau_{i} * \lambda$ et $\tau_{i} * \mu$ dès que $\lambda *
+\varphi = \mu * \varphi$ ;
+\item[$a_{1}$)] pour $\varphi$ parmi les $f^{1}$, $f^{2}$, relever toute
+transformation $\lambda' : u'\varphi \to v'\varphi$ en une transformation
+$\lambda : \tau_{i} u' \to \tau_{i} v'$ avec $\lambda * \varphi = \tau_{i} *
+\lambda'$ ;
+\item[$a_{2}$)] pour $\varphi$ parmi les $f^{2}$, prolonger tout $u : R \to
+C_{i}$ en un $u' : R' \to C_{i+1}$ avec $\tau_{i} \circ u \simeq u' \circ
+\varphi$ ;
+\item[b)] être $\delta_{i}$-exact ;
+\item[c)] induire, pour $E \in \mathrm{Ob}\,\Delta_{f}$, une équivalence
+$\underline{\mathrm{Hom}}_{\Delta,\delta_{i+1}}(C_{i+1}, E) \simeq
+\underline{\mathrm{Hom}}_{\Delta,\delta_{i}}(C_{i}, E)$.
+\end{enumerate}
+Le cardinal $\pi$ majore maintenant aussi les $\mathrm{card}\,\mathrm{Fl}\,
+R$, $\mathrm{card}\,\mathrm{Fl}\,R'$ des sources et buts de la famille $f$,
+et pour $\omega$ le plus petit ordinal de cardinal $\pi$, $C_{\omega}$ est
+dans $\Delta_{f}$ : un foncteur $R \to C_{\omega}$ se factorise par un
+$C_{j}$, $j < \omega$, et les propriétés $a_{0}$)--$a_{2}$) au pas suivant
+donnent la surjectivité, la fidélité, la surjectivité essentielle
+voulues.\footnote{Ce second théorème donne, à titre d'exemple, les enveloppes
+dans les 2-catégories de catégories \emph{avec conditions d'exactitude} —
+celles où l'on demande que certaines limites en commutent à d'autres. Le
+cas emblématique est celui des topos : les conditions de Giraud sont des
+conditions de ce type, et c'est ainsi que la page 17 lira « $\Delta$ = bons
+topos ». La page 9 s'arrête sur « il reste donc à faire la construction de
+$K(C, \delta)$ » : cette construction n'est pas écrite, ni ici ni dans la
+reprise des pages 26 à 31, qui ne fait que l'énumérer (propriétés
+$e_{0}$), $e_{1}$), $e_{2}$)).}
+
+\pagerange{10}{14}
+\subsection*{Une typologie des conditions d'exactitude}
+
+Les pages 10 à 14 recommencent, sous le même titre, pour classer les
+conditions que l'on peut vouloir imposer et voir lesquelles suffisent. Sur
+une catégorie $C$, on distingue :
+\begin{enumerate}
+\item[a)] l'existence inconditionnelle de certaines limites (les types
+$d = (d', d'')$) ;
+\item[b)] l'existence \emph{conditionnelle} : on se donne un diagramme
+$\Theta$ muni de sous-diagrammes $\Theta'_{i} \to \Theta$, $\Theta''_{j} \to
+\Theta$, et l'on demande que pour tout $\Theta \to C$ les limites des
+restrictions aux $\Theta'_{i}$ et $\Theta''_{j}$ existent (par exemple :
+les produits fibrés existent dès que la somme amalgamée existe) ;
+\item[c)] l'exactitude de cônes : un paquet $(\delta, \lambda)$ étant donné,
+tout foncteur $\delta$-exact doit être $\lambda$-exact ;
+\item[d)] la forme la plus générale : un foncteur $\varphi : \Theta \to
+\overline{\Theta}$ entre catégories munies de paquets $\delta$,
+$\overline{\delta}$, et le foncteur de restriction
+\[
+\varphi^{*}_{C} : \underline{\mathrm{Hom}}(\overline{\Theta}, C)
+\longrightarrow \underline{\mathrm{Hom}}(\Theta, C),
+\]
+dont on peut demander qu'il envoie $\underline{\mathrm{Hom}}_{\overline
+{\delta}}$ dans $\underline{\mathrm{Hom}}_{\delta}$ (i), qu'il y soit fidèle
+(i'), surjectif sur les Hom (ii), ou essentiellement surjectif (ii').
+\end{enumerate}
+La page 11 observe que (i) est une condition d'\emph{existence de flèches}
+et (ii') une condition d'\emph{existence d'objets et de diagrammes}, et
+retient finalement deux types de conditions qui permettent d'exprimer les
+autres :
+\[
+1^{\circ})\ \ \mathrm{Im}\bigl(\varphi^{*}_{C} \mid
+\underline{\mathrm{Hom}}_{\overline{\delta}}\bigr) \subset
+\underline{\mathrm{Hom}}_{\delta}, \qquad
+2^{\circ})\ \ \mathrm{Im}\bigl(\varphi^{*}_{C} \mid
+\underline{\mathrm{Hom}}_{\overline{\delta}}\bigr) \supset
+\underline{\mathrm{Hom}}_{\delta},
+\]
+la première impliquant les conditions d'exactitude habituelles, la seconde
+les conditions d'existence (y compris conditionnelle) de limites.
+
+Pour les \emph{foncteurs} $F : C \to C'$, on se donne des triplets
+$(\Theta, \delta, \lambda)$ et l'on dit que $F$ est $\rho$-exact si pour tout
+$u : \Theta \to C$ qui est $\lambda$-exact, $F \circ u$ l'est. La page 12
+vérifie ce qui fait de cette classe $\Sigma_{\rho} \subset
+\mathrm{Fl}(\mathrm{Cat})$ une bonne classe de flèches : stable par
+isomorphisme, contenant les équivalences, stable par composition, et stable
+par intersection. Symétriquement, un couple $\sigma = (\sigma_{1},
+\sigma_{2})$ de familles de quadruplets $(R, \delta, \overline{R},
+\overline{\delta}, \varphi)$ définit une classe d'objets $\Delta_{\sigma}
+\subset \mathrm{Ob}(\mathrm{Cat})$ par les conditions $1^{\circ}$) pour
+$\sigma_{1}$ et $2^{\circ}$) pour $\sigma_{2}$ ; elle est stable par
+équivalence et par intersection. La 2-catégorie $\Delta_{\sigma,\rho}$ a
+pour objets $\Delta_{\sigma}$ et pour flèches $\Sigma_{\rho}$.\footnote{Le
+manuscrit demande, page 12, que les foncteurs identiques soient dans
+$\Sigma_{\rho}$, ce qui impose de se restreindre aux $C$ où tout $\Theta
+\to C$ $\delta$-exact est $\lambda$-exact — c'est pourquoi les objets sont
+contraints par $\sigma$ et les flèches par $\rho$ séparément. La
+\emph{Remarque} de la page 13 demande si la sous-2-catégorie $\Delta_{0}
+\subset \Delta$ définie par la fidélité, la pleine fidélité ou
+l'équivalence de $\varphi^{*}$ est « distinguée » ; la question est laissée
+ouverte, et la page 14 ne fait que redresser les données (a), (b), (c) avec
+lesquelles la reprise de la page 26 travaillera.}
+
+C'est cette typologie qui est la vraie nouveauté des feuillets : la
+définition d'une classe de catégories par des propriétés de
+\emph{restriction le long de foncteurs entre esquisses} recouvre à la fois
+les conditions d'existence et les conditions d'exactitude, et c'est sous
+cette forme que le théorème sera réénoncé.
+
+\pagerange{26}{31}
+\subsection*{La reprise générale : $\Delta_{\sigma,\rho}$ (pages 26 à 31)}
+
+La page 26 reprend le théorème depuis le début sous la forme la plus
+générale du dossier. On se donne
+\begin{enumerate}
+\item[1)] un ensemble $\sigma$ de couples $(S, \lambda)$, $S$ une petite
+catégorie et $\lambda = (\lambda', \lambda'')$ un petit paquet de cônes de
+$S$ ;
+\item[2)] un ensemble $\rho$ de systèmes $(R_{1}, \delta_{1}, R_{2},
+\delta_{2}, \varphi)$, avec $\varphi : R_{2} \to R_{1}$ un foncteur entre
+petites catégories munies de paquets, tel que $\varphi(\delta_{2}) \subset
+\delta_{1}$ ;
+\end{enumerate}
+et $\Delta = \Delta_{\sigma,\rho}$ est la sous-2-catégorie de $\mathrm{Cat}$
+dont les objets $E$ vérifient $a_{1}$) pour tout $(S, \lambda) \in \sigma$
+et tout $u : S \to E$, les limites des cônes de $u(\lambda)$ existent, et
+$a_{2}$) pour tout système de $\rho$, $u \mapsto u \circ \varphi$ induit une
+équivalence $\underline{\mathrm{Hom}}_{\delta_{1}}(R_{1}, E) \simeq
+\underline{\mathrm{Hom}}_{\delta_{2}}(R_{2}, E)$ ; et dont les flèches $E \to
+E'$ sont les foncteurs qui envoient tout $u : S \to E$ $\lambda$-exact sur
+un foncteur $\lambda$-exact. On suppose (A) que tout est petit, et (B) que
+les $(R_{i}, \delta_{i})$ des systèmes de $\rho$ figurent dans
+$\sigma$.\footnote{Les esquisses « mixtes » — existence de limites par
+$\sigma$, exactitude et existence conditionnelle par $\rho$ — sont
+exactement les \emph{esquisses} de la littérature ultérieure, et la
+2-catégorie $\Delta_{\sigma,\rho}$ est celle des catégories qui les
+« réalisent ». La condition (B) dit que les catégories d'où partent les
+conditions d'exactitude sont elles-mêmes soumises aux conditions
+d'existence ; sans elle les propriétés $e_{0}$)--$e_{2}$) ne se
+propageraient pas.}
+
+\textbf{Théorème.} \emph{Pour $C$ essentiellement petite munie d'un petit
+paquet $\delta$, il existe $C' \in \mathrm{Ob}\,\Delta$ et $i : C \to C'$
+$\delta$-exact, 2-universels : pour tout $E \in \mathrm{Ob}\,\Delta$,}
+\[
+\underline{\mathrm{Hom}}_{\Delta,\, i(\delta)}(C', E)
+\;\xrightarrow{\ \approx\ }\;
+\underline{\mathrm{Hom}}_{\mathrm{Cat},\,\delta}(C, E),
+\]
+\emph{et $C'$ est essentiellement petite.}
+
+La démonstration (pages 27 à 30) est celle des pages 3 à 5, mise au net.
+La construction $K$, indépendante de $i$, doit vérifier :
+\begin{enumerate}
+\item[a)] l'équivalence $\underline{\mathrm{Hom}}_{\delta_{i+1}}(C_{i+1}, E)
+\to \underline{\mathrm{Hom}}_{\delta_{i}}(C_{i}, E)$ ;
+\item[b)] $\tau_{i}(\delta_{i}) \subset \delta_{i+1} \subset
+\tau_{i}(\delta_{i}) \cup \bigcup_{(S,\lambda) \in \sigma} \bigcup_{u : S
+\to C_{i+1}} u(\lambda)$ ;
+\item[c)] $\tau_{i}$ est préexact pour $\delta_{i}$ ;
+\item[d)] pour $(S, \lambda) \in \sigma$ et $u : S \to C_{i}$, il existe un
+foncteur $\overline{v} : \overline{S} \to C_{i+1}$, avec $\overline{v}
+\beta = \tau_{i} u$ et $\overline{v}(\overline{\lambda}) \subset
+\delta_{i+1}$, où $\beta : (S, \lambda) \to (\overline{S},
+\overline{\lambda})$ est obtenu en \emph{dédoublant les sommets des cônes
+critiques} (voir ci-dessous) ;
+\item[$e_{0}$)--$e_{2}$)] les trois propriétés de la page 7, relatives aux
+systèmes de $\rho$ : identification des 2-flèches, relèvement des
+2-flèches, prolongement des foncteurs.
+\end{enumerate}
+De a) et b) suivent par récurrence (1) $\underline{\mathrm{Hom}}_{\delta_{i}}
+(C_{i}, E) \simeq \underline{\mathrm{Hom}}_{\delta}(C, E)$ et (2)
+$\alpha_{i}(\delta) \subset \delta_{i} \subset \alpha_{i}(\delta) \cup
+\bigcup \tau_{ij} u(\lambda)$. Pour $\omega$ un ordinal limite grand devant
+le cardinal $\Pi$ qui majore toutes les catégories d'indices, on prouve
+successivement (3) que $\tau_{\omega,i} : C_{i} \to C_{\omega}$ est
+$\delta_{i}$-exact — c'est c) et la grandeur de $\omega$, en toutes lettres
+cette fois —, puis $A_{1}$) et $A_{2}$) (par d) et par e) respectivement),
+et enfin 4) : tout $u : S \to C_{\omega}$ $\lambda$-exact se factorise à
+isomorphisme près par un $u_{i} : S \to C_{i}$ avec $u_{i}(\lambda) \subset
+\delta_{i}$. Le point 4) est le seul délicat, et la page 30 le démontre par
+le dédoublement.
+
+\textbf{Le dédoublement des sommets} (page 31). À $(S, \lambda)$ on associe
+$(\overline{S}, \overline{\lambda})$ en ajoutant, pour chaque cône $c : (x
+\to x_{\alpha})_{\alpha}$ de $\lambda'$, un nouvel objet $\overline{x}_{c}$,
+une flèche $i_{c} : x \to \overline{x}_{c}$ et des flèches $q_{\alpha} :
+\overline{x}_{c} \to x_{\alpha}$ avec $q_{\alpha} i_{c} = p_{\alpha}$ ; et
+dualement pour $\lambda''$ :
+
+\begin{tikzcd}[column sep=small, row sep=small]
+& x_{1} & \\
+x \arrow[r, "i_{c}"] \arrow[ur, bend left=20, "p_{1}"] \arrow[dr, bend right=20, "p_{3}"'] & \overline{x}_{c} \arrow[u, "q_{1}"] \arrow[r, "q_{2}"] \arrow[d, "q_{3}"'] & x_{2} \\
+& x_{3} &
+\end{tikzcd}
+
+Le paquet $\overline{\lambda}$ est formé des cônes de sommet $\overline
+{x}_{c}$. Alors, pour tout $E \in \mathrm{Ob}\,\Delta$, tout foncteur $u :
+S \to E$ se prolonge de façon unique en un $\overline{u} : \overline{S} \to
+E$ qui soit $\overline{\lambda}$-exact (on envoie $\overline{x}_{c}$ sur la
+limite du diagramme $u(x_{\alpha})$), et $u$ est $\lambda$-exact si et
+seulement si $\overline{u}(i_{c})$ est un isomorphisme pour tout $c$. C'est
+la réduction, aujourd'hui classique, de l'exactitude d'un cône à
+l'\emph{inversibilité d'une flèche de comparaison} ; elle ramène le point 4)
+à la propriété d) et à un argument de cardinalité sur les $\bar{u}_{j}
+(i_{c})$.\footnote{La page 30 se termine par « cqfd », mais deux renvois
+notés (*) et (**) restaient à écrire ; la page 31 écrit (**), le
+dédoublement, et commence (*), la définition du foncteur $\delta$-préexact,
+qui s'arrête après trois lignes. La reprise est donc complète pour tout ce
+qui concerne l'ordinal $\omega$ et laisse à l'état d'énoncé, comme la
+première version, l'opération $K$ elle-même. L'existence de $K$ n'est pas
+en doute — les six opérations des pages 5--6 et leurs analogues pour
+$e_{0}$)--$e_{2}$) la fournissent — mais elle n'est écrite nulle part dans
+le dossier.}
+
+\pagerange{17}{24}
+\section*{Théories algébriques et topos classifiants (pages 17 à 24)}
+
+\pagerange{17}{17}
+\subsection*{Le topos enveloppe d'une catégorie à limites finies}
+
+Le feuillet 17 applique ce qui précède au cas qui intéresse le dossier
+entier. On prend $\Delta_{0}$ = les catégories à limites projectives
+finies, avec les foncteurs exacts à gauche ; et $\Delta$ = les « bons
+topos », c'est-à-dire les catégories satisfaisant aux conditions
+d'exactitude de Giraud (limites projectives finies, sommes disjointes
+universelles, relations d'équivalence effectives universelles), avec pour
+flèches les foncteurs exacts à gauche commutant aux limites inductives —
+les foncteurs image inverse.\footnote{Le manuscrit écrit « $\Delta$ = bons
+topos (conditions $\supset$ b) c) de Giraud), foncteurs commutant aux
+$\varprojlim$ et exacts à g. ». Le mot « bon » signale que la condition de
+\emph{taille} de Giraud — l'existence d'une petite famille génératrice —
+n'est pas demandée : $\Delta$ contient des catégories qui ne sont pas des
+topos de Grothendieck, et c'est précisément ce qui donne son contenu au
+Théorème 4) ci-dessous. Nous appellerons « topos » un topos de Grothendieck
+et « objet de $\Delta$ » un bon topos.}
+
+Une \emph{théorie algébrique} $T_{0}$ relative à $\Delta_{0}$ est
+représentée par une petite catégorie $C \in \mathrm{Ob}\,\Delta_{0}$ :
+$T_{0}(E) = \underline{\mathrm{Hom}}_{\Delta_{0}}(C, E)$ pour $E \in
+\Delta_{0}$. Pour $E \in \mathrm{Ob}\,\Delta$ on a alors
+\[
+T_{0}(E) = \underline{\mathrm{Hom}}_{\Delta_{0}}(C, E)
+\;\xrightarrow{\ \approx\ }\;
+\underline{\mathrm{Hom}}_{\Delta}(\widehat{C}, E)
+\;\simeq\; \underline{\mathrm{Hom}}_{\mathrm{top}}(E, \widehat{C})^{\circ}
+\quad (\text{si $E$ est un topos}),
+\]
+où $\widehat{C}$ est la catégorie des préfaisceaux sur $C$. C'est le
+théorème de Diaconescu sous sa forme la plus simple : un foncteur exact à
+gauche $C \to E$ se prolonge de façon unique en un foncteur image inverse
+$\widehat{C} \to E$, et les morphismes de topos $E \to \widehat{C}$
+correspondent aux foncteurs plats $C \to E$, qui sont ici les foncteurs
+exacts à gauche puisque $C$ a les limites finies.\footnote{Diaconescu,
+\emph{Change of base for toposes with generators} (1975), postérieur à la
+fourchette de l'inventaire ; le cas des préfaisceaux sur une catégorie à
+limites finies est dans SGA 4 IV 4.9.4. L'énoncé « $\widehat{C}$ est la
+$\Delta_{0} \to \Delta$-enveloppe de $C$ », qui fait de Diaconescu un cas
+particulier du théorème d'enveloppe, est la façon propre au dossier de le
+voir. Le passage à l'opposé dans $\underline{\mathrm{Hom}}_{\mathrm{top}}
+(E, \widehat{C})^{\circ}$ est une convention : un morphisme de topos $f \to
+g$ est une transformation $f^{*} \to g^{*}$, ou $g^{*} \to f^{*}$ selon
+l'auteur, et le manuscrit prend la seconde.} Ainsi $\widehat{C}$ est le
+\emph{topos classifiant} de la théorie $T_{0}$, et le passage $\Delta_{0}
+\to \Delta$ est le passage d'une théorie « à limites finies » à sa
+réalisation dans les topos.
+
+Les deux problèmes suivent. \emph{Problème 1} : la $\Delta_{0}$-enveloppe
+d'une petite catégorie $I$ est la sous-catégorie pleine $\rho_{\Delta_{0}}(I)
+\subset \underline{\mathrm{Hom}}(I, \mathrm{Ens})^{\circ}$ engendrée par $I$
+sous les limites finies — les foncteurs « de présentation finie » —, et sa
+$\Delta$-enveloppe est $\widehat{\rho_{\Delta_{0}}(I)}$. \emph{Problème 2} :
+une sous-théorie d'une $\Delta$-théorie représentable par un topos $R$
+correspond à un sous-topos. Précisément, $\Sigma$ étant un ensemble de
+flèches de $R$, on considère $E \mapsto \underline{\mathrm{Hom}}_{\Delta,
+\Sigma}(R, E)$ (les images inverses rendant inversibles les flèches de
+$\Sigma$) ; on sature $\Sigma$ par les trois conditions ST1 (deux des trois
+flèches d'un triangle commutatif), ST2 (stabilité par changement de base),
+ST3 (nature locale) de SGA 4 I 9.1.1, d'où $\Sigma'$, et $R' = R\Sigma'^{-1}$
+est un sous-topos de $R$ avec
+\[
+\underline{\mathrm{Hom}}_{\Delta,\Sigma}(R, E) \;\xrightarrow{\ \approx\ }\;
+\underline{\mathrm{Hom}}_{\Delta}(R', E) ;
+\]
+tout sous-topos s'obtient ainsi, et si $R \simeq \widehat{C}$ les
+sous-topos correspondent aux topologies $T'$ sur $C$.\footnote{Ce sont les
+« sous-topos $R'$ comme catégories de fractions » de SGA 4 IV 9 ; le
+renvoi à I 9.1.1 est celui du manuscrit. La page 18 ajoute qu'un sous-topos
+donné se décrit toujours par un \emph{petit} ensemble $\Sigma$ : on prend
+$C \subset R$ petite génératrice et les familles couvrantes de $C$ pour
+$T'$.} Un sous-topos donné se décrit par un petit $\Sigma$ ; et la page 18
+« corrige » : si $T_{R}$ est algébrique, la sous-théorie $T_{R'}$ l'est
+aussi, déduite par un petit ensemble d'axiomes. Un plongement de théories
+$T_{R'} \to T_{R}$ (i.e. $T_{R'}(E) \to T_{R}(E)$ pleinement fidèle pour tout
+$E$) correspond à un morphisme $R \to R'$ de $\Delta$ tel que
+$\underline{\mathrm{Hom}}_{\Delta}(R', E) \to \underline{\mathrm{Hom}}_{
+\Delta}(R, E)$ soit pleinement fidèle pour tout $E$ : c'est la
+caractérisation des plongements de topos $R' \to R$.
+
+\pagerange{18}{22}
+\subsection*{Le théorème : théories algébriques et topos}
+
+\textbf{Théorème 4.} \emph{a) Un objet $R$ de $\Delta$ représente une théorie
+algébrique si et seulement si $R$ est un topos, c'est-à-dire admet une
+petite sous-catégorie génératrice. b) Soient $I$ un ensemble, $R \in
+\mathrm{Ob}\,\Delta$ et $b : I \to R$ une famille d'objets. Alors $b$ est
+basique pour $T_{R}$ si et seulement si la sous-catégorie pleine de $R$
+engendrée par les produits finis d'objets de $b(I)$ est strictement
+génératrice.}\footnote{« Algébrique » n'est pas défini sur ces feuillets ;
+le sens, constant dans le dossier (pages 62--63, 71, 84--87), est
+\emph{constructible} : une théorie est algébrique si elle s'obtient à
+partir de la structure vide sur des objets de base par une suite,
+éventuellement transfinie, de trois opérations — ajouter des flèches,
+imposer des égalités, imposer des conditions d'exactitude —, ce qui est
+exactement la présentation d'une \emph{théorie géométrique} par des
+axiomes. « Basique » signifie que la donnée d'une $T$-structure sur $E$
+détermine fidèlement la famille de ses objets de base, i.e. que $T_{R}(E)
+\to E^{I}$ est fidèle (page 86, Remarque 1). Le théorème 4 a) est ainsi
+l'énoncé « tout topos de Grothendieck est le topos classifiant d'une
+théorie géométrique, et réciproquement », qui sera publié par Joyal et
+Wraith puis Makkai et Reyes (1977) ; le manuscrit le sait par construction,
+puisque « topos » y signifie « objet de $\Delta$ à petit générateur ». La
+condition b) est dans le même esprit : un générateur strict donne les
+sortes et les opérations.}
+
+La démonstration (pages 18 à 22), dans le sens « suffisance », construit la
+théorie représentée par $(R, b)$ en trois pas, qui sont ceux de toute
+présentation :
+\begin{enumerate}
+\item[$1^{\circ}$)] la structure vide sur des objets de base $(X_{i})_{i \in
+I}$, représentée par le topos $R_{0} = \widehat{J_{0}}$, $J_{0} =
+\rho_{\Delta_{0}}(I)$ (problème 1 ; $R_{0}$ est le topos des ensembles
+$I$-multisimpliciaux, le classifiant de $I$ objets) ;\footnote{Pour $I$
+réduit à un point, $\widehat{J_{0}}$ est le topos des foncteurs sur les
+ensembles finis, le \emph{classifiant d'un objet} (\emph{object
+classifier}). « Ensembles $I$-multisimpliciaux » est le nom du manuscrit,
+avec un $\omega$ ajouté au-dessus : les objets de $J_{0}$ sont les produits
+finis d'objets de base, et un préfaisceau sur $J_{0}$ est une famille
+d'ensembles multi-indexée.}
+\item[$2^{\circ}$)] on ajoute des flèches : $J_{1}$ est la sous-catégorie
+pleine de $R$ engendrée par $b(I)$ et ses produits finis, et $R_{1} =
+\rho_{\Delta}(J_{1})$ ;
+\item[$3^{\circ}$)] on met les axiomes d'égalité entre composés, en vertu de
+$R$, d'où $R_{2}$ et $T_{R_{2}}(E) \simeq \underline{\mathrm{Hom}}(J_{1},
+E)$, et $T_{R} \to T_{R_{2}}$ est pleinement fidèle ;
+\item[$4^{\circ}$)] on ajoute les axiomes explicites qui expriment la
+continuité des foncteurs $J_{1} \to E$ : transformer les cônes inductifs
+exacts de $R$ et les familles couvrantes en cônes exacts et familles
+couvrantes.
+\end{enumerate}
+On obtient $I \to R_{0} \to R_{1} \to R_{2} \to R_{3} \simeq R$, les
+morphismes $R_{1} \to R_{2} \to R_{3}$ étant des localisations (le
+schéma de la page 22 les note « loc »), et $\widehat{J_{1}} \to R$ est un
+foncteur de localisation. Le \emph{N.B.} de la page 19 condense $3^{\circ}$
+et $4^{\circ}$ en un seul pas : trois pas minimum, objets, flèches (aux
+produits finis), axiomes sur les flèches. Le \emph{Re N.B.} de la page 20
+donne le raccourci si l'on veut seulement qu'un topos soit « algébrique » :
+choisir $C$ petite à limites finies avec $R \simeq \widehat{C}$, prendre la
+théorie $T^{\Delta_{0}}_{C}$ représentée par $\widehat{C}$, et ajouter les
+axiomes de continuité. C'est le mode d'emploi, aujourd'hui standard, pour
+présenter un topos $\widetilde{C}$ comme classifiant : la théorie « à
+limites finies » de $C$, plus les axiomes de recouvrement.
+
+La \emph{nécessité} (page 20) demande trois lemmes de construction, tous
+ramenés au théorème d'enveloppe : a) la structure vide sur $I$ est
+représentée par $\widehat{\widetilde{I}}$, $\widetilde{I} = \rho_{\Delta_{0}}
+(I)$, et $\widetilde{I}$ $\Delta$-engendre $\widehat{\widetilde{I}}$ « en
+deux pas » (produits, puis limites inductives quelconques) ; b) mettre des
+axiomes sur $T_{R}$ est le problème 2 ; c) ajouter un petit ensemble $H$ de
+flèches revient à un \emph{produit 2-fibré de théories}
+\[
+T' \simeq T_{R} \times^{(2)}_{T_{I}} T_{C},
+\]
+où $C$ est la catégorie libre engendrée par les objets de base et les
+flèches de $H$, $T_{C}(E) = \underline{\mathrm{Hom}}_{\mathrm{Cat}}(C, E)$ et
+$T_{I}$ de même. Comme $T_{C}$ et $T_{I}$ sont représentables (problème
+1), il faut savoir que \emph{les produits 2-fibrés de topos existent} —
+ce que la page 21 démontre — et d) que les \emph{2-limites inductives
+transfinies de topos} existent (page 22).
+
+\pagerange{21}{22}
+\subsection*{Produits 2-fibrés de topos et passage à la limite}
+
+Pour $f^{*} : T \to R$ et $g^{*} : T \to S$ deux images inverses, on
+choisit de petites sous-catégories génératrices $T_{0}$, $R_{0}$, $S_{0}$
+avec $f^{*}(T_{0}) \subset R_{0}$, $g^{*}(T_{0}) \subset S_{0}$, et $U_{0}$ la
+2-somme amalgamée de $R_{0}$ et $S_{0}$ sous $T_{0}$ dans $\mathrm{Cat}$, de
+sorte que $\underline{\mathrm{Hom}}(U_{0}, E) \simeq \underline{\mathrm{Hom}}
+(R_{0}, E) \times^{2}_{\underline{\mathrm{Hom}}(T_{0}, E)}
+\underline{\mathrm{Hom}}(S_{0}, E)$. Si $R_{0}$, $S_{0}$ sont stables par
+limites finies, la condition qu'un $h : U_{0} \to E$ provienne de
+$\underline{\mathrm{Hom}}_{\Delta}(R, E) \times^{2}_{\underline{\mathrm{Hom}}
+_{\Delta}(T,E)} \underline{\mathrm{Hom}}_{\Delta}(S, E)$ s'exprime par des
+axiomes d'exactitude et de continuité sur $h$ ; la théorie $T_{R}
+\times^{(2)}_{T_{T}} T_{S}$ est donc une sous-théorie pleine de
+$T_{\rho_{\Delta}(U_{0})}$, et par le problème 2 elle est représentée par
+un \emph{sous-topos} de $\rho_{\Delta}(U_{0})$ : le produit 2-fibré
+$R \times^{2}_{T} S$ existe dans $(\mathrm{Top})$, et c'est une 2-limite
+amalgamée $R \amalg_{T} S$ dans $\Delta$.\footnote{C'est l'existence des
+produits fibrés de topos, SGA 4 IV 8.2 ; le manuscrit dit « cette
+construction est $\pm$ connue, redonnons-en une autre ». La sienne, par la
+somme amalgamée des sous-catégories génératrices puis passage au
+sous-topos, est celle que l'on donne aujourd'hui en logique catégorique :
+le produit fibré de topos classifiants classifie la « somme amalgamée » des
+théories. Il note en passant que si $T_{0} \to S_{0}$ est surjectif sur les
+objets alors $R \to R \amalg_{T} S$ a une image génératrice.}
+
+Le passage à la limite transfinie (page 22) est le point où la méthode
+tire sur sa taille : une 2-limite inductive transfinie de topos dans
+$\Delta$ est un topos, pourvu que l'on choisisse des petites catégories
+génératrices stables par les morphismes de transition — « par exemple à
+l'aide des filtrations cardinales, mais c'est un mauvais moyen » — et que
+l'on prenne $C = \varinjlim_{\alpha} C_{\alpha}$ dans $\mathrm{Cat}$, la
+limite étant un sous-topos de $\widehat{C}$ ; l'énoncé utile est que si
+$J \to R_{\alpha}$ engendre $R_{\alpha}$ pour tout $\alpha$, alors $J \to R$
+engendre $R$. La page reporte le schéma des trois pas, avec en marge l'idée
+qui gouverne les feuillets 81 à 87 : « $R$ apparaît comme une catégorie de
+fractions de $\widehat{J_{1}}$, i.e. $J_{1}$ est l'\emph{analyseur} libre
+sur $I$ engendré par les flèches induites par $R$ ».\footnote{Le mot
+« analyseur » est celui de Lazard (\emph{Lois de groupes et analyseurs},
+1955) ; il revient dans le titre de la page 89, « Relation avec analyseurs
+de Lazard », qui reste sans texte. Un analyseur est, en substance, une
+théorie algébrique présentée par ses opérations $n$-aires ; la catégorie
+$J_{1}$ des produits finis d'objets de base avec les flèches de $R$ est
+exactement la \emph{théorie de Lawvere} de la structure, et c'est le
+rapprochement que le dossier fait sans le nom de Lawvere, dont la thèse
+date de 1963.}
+
+\pagerange{23}{24}
+\subsection*{Deux feuillets d'exemples : le topos d'un objet}
+
+La page 23 note d'abord ce que ces théories ont en commun : $T(E) \simeq
+\underline{\mathrm{Hom}}_{\mathrm{top}}(E, R)^{\circ} \simeq
+\underline{\mathrm{Hom}}_{\Delta}(R, E)$ est stable par limites inductives
+filtrantes — les conditions sur les structures « convergent » — et
+$T_{R}(\mathrm{Ens}) \simeq \underline{\mathrm{Pt}}(R)$ est la catégorie des
+points du topos $R$.\footnote{Le manuscrit écrit $\underline{\mathrm{Pt}}
+(R)^{\circ} \simeq \underline{\mathrm{Fib}}(R)$ ; l'opposé est la même
+convention de sens des 2-flèches que ci-dessus, et $\underline{\mathrm{Fib}}$,
+les foncteurs fibres, est un autre nom des points.} La \emph{Question} qui
+suit est la bonne : si $T(E)$ a des limites projectives finies pour tout
+$E$, et si les $T(E) \to T(E')$ y commutent, $T$ est-elle la restriction à
+$\Delta$ d'une théorie algébrique sur $\Delta_{0}$, i.e. $R \simeq
+\widehat{C}$ avec $C$ stable par limites finies ? C'est la question de
+savoir quand un topos classifiant est un topos de préfaisceaux, i.e. quand
+une théorie géométrique est équivalente à une théorie \emph{cartésienne}
+(à limites finies) ; les pages 77 et 78 y répondront pour les théories
+définies par des limites, et la réponse générale est la même : lorsque les
+modèles ont assez d'objets de présentation finie.
+
+Le second feuillet prend $R = \widehat{C}$ avec $C$ la catégorie opposée
+aux ensembles finis, de sorte que $R = \underline{\mathrm{Hom}}(\mathrm{Ens}_{f},
+\mathrm{Ens})$ est le \emph{topos classifiant d'un objet} : ses points sont
+les ensembles, et un morphisme $E \to R$ est un objet de
+$E$.\footnote{Le manuscrit écrit « $C$ = catégorie opposée aux ens. finis,
+donc $R$ = ens. semi-simpliciaux », avec une note marginale « pts à les
+$\Delta_{n}$ » ; les deux descriptions ne coïncident pas (les ensembles
+simpliciaux sont les préfaisceaux sur les ordinaux finis, dont les points
+ne sont pas les ensembles), et tout ce qui suit sur la page — les points
+« de p. f. » $\mathbb{N}$, les sous-topos décrits par la structure $X$ —
+est vrai du classifiant d'un objet et faux des ensembles simpliciaux. Nous
+lisons donc $C = (\mathrm{Ens}_{f})^{\circ}$, comme la page l'écrit, et
+nous rattachons « $\Delta_{0}$, $\Delta_{1}$ » aux ensembles à $0$ et $1$
+éléments.} On cherche ses sous-topos, « classés par leurs points » : le
+feuillet en trouve six, rangés en un treillis,
+
+\begin{tikzcd}[column sep=small, row sep=small, nodes={font=\scriptsize}]
+& R & & \\
+R^{+} \arrow[ur, no head] & & V \arrow[ul, no head] & \\
+& R^{+} \wedge V = \varphi_{1} \arrow[ul, no head] \arrow[ur, no head] & & \overline{(\varphi_{0})} \arrow[ul, no head] \\
+& & \emptyset \arrow[ul, no head] \arrow[ur, no head] &
+\end{tikzcd}
+
+où $R^{+}$ classifie les objets $X$ tels que $X \to e$ soit épimorphique
+(les objets « habités »), $V$ ceux tels que $X \to e$ soit un
+monomorphisme (les sous-objets de l'objet final : $V$ représente $E
+\mapsto \mathcal{P}(e_{E})$), $\varphi_{1} = R^{+} \wedge V$ le point
+« $X \simeq e$ », $\overline{(\varphi_{0})}$ le point « $X = \emptyset$ »,
+et $\emptyset$ le topos vide. $V$ est un sous-topos fermé qui n'est pas
+ouvert ; $V$ et $\varphi_{1}$ ne sont pas des complémentaires mais ont
+pour « complémentaires faibles » $\emptyset$ et $\varphi_{0}$.\footnote{Ces six
+sous-topos sont corrects, mais ils ne sont pas tous les sous-topos de $R$,
+et le « en résumé : 6 sous-topos » de la page 24 ne doit pas être lu comme
+une classification. Les sous-topos du classifiant d'un objet correspondent
+aux théories géométriques quotients de la théorie d'un objet, et la
+condition « $X$ a au plus $n$ éléments », qui s'écrit $\top \vdash
+\bigvee_{i<j} x_{i} = x_{j}$ pour $n+1$ variables, est géométrique : elle
+définit pour chaque $n$ un sous-topos dont les points sont les ensembles de
+cardinal $\leqslant n$, et qui n'est pas dans la liste. Le feuillet
+restreint sa recherche, comme le dit son titre, aux sous-topos
+\emph{ouverts} et à leurs fermés complémentaires, et aux intersections de
+ceux-ci ; pour ceux-là la liste est plausible. La mention « $V$ n'est ni
+ouvert ni \ldots » est la sienne, illisible ensuite.}
+
+Le feuillet se ferme sur une liste de questions — les topos classifiants
+et sous-topos pour les structures « $f : X \to Y$ sans plus », « $f : X \to
+X$ » (c'est $B_{\mathbb{N}}$, le classifiant du monoïde libre à un
+générateur), « $e \to X$ », « $X \times Y \to Z$ », « $X \times X \to X$
+(!) », « $X \times X \rightrightarrows X$ (!!) » — qui sont, chacune, le
+classifiant d'une signature sans axiomes. La marque d'insistance sur les
+deux dernières est justifiée : le classifiant d'une loi de composition
+binaire sans axiome, et celui d'un couple de lois, sont les premiers cas où
+la question des sous-topos rejoint l'algèbre universelle proprement dite.
+
+\pagerange{33}{34}
+\section*{Deux feuilles de travail : théories de Lawvere, monades, descente (pages 33 et 34)}
+
+Deux feuillets sans ordre linéaire, en anglais et en français, notent ce
+que la littérature du moment offre au projet. Le premier pose une
+\emph{théorie de Lawvere} $\mathcal{L}$ — une petite catégorie dont les
+objets sont les puissances $n = \mathbb{1}^{n}$ d'un objet $\mathbb{1}$ —
+et l'adjonction entre les modèles $\underline{\mathrm{Hom}}'(\mathcal{L}^{\circ},
+\mathrm{ENS})$ (foncteurs conservant les produits) et les algèbres
+$\mathrm{Alg}(\mathfrak{T})$ d'une monade ; il note les propriétés de
+l'objet $P$ qui rend $\mathrm{Hom}(P, -)$ un bon foncteur fibre (puissances
+$P_{I} = \coprod_{I} P$, relations d'équivalence effectives, $f : X \to Y$
+effectif si et seulement si $\mathrm{Hom}(P, X) \to \mathrm{Hom}(P, Y)$
+est surjectif, produits fibrés), et enfin le \emph{théorème de
+monadicité} : un foncteur $U : A \to B$ admettant un adjoint à gauche $F$
+est monadique ($A \simeq \mathrm{Alg}(\mathbb{T})$, $\mathbb{T} = UF$) si
+$U$ est conservatif et si $A$ a et $U$ préserve les coégalisateurs des
+paires réflexives — le critère de Beck, dont les noms de Beck, Barr et
+Linton sont notés au bas de la feuille.\footnote{Le mot du manuscrit est
+\emph{tripleable}, terme de l'époque (une « triple » est une monade), et
+les trois noms sont peu nets. Le critère de Beck date de 1967 ; Linton,
+\emph{Some aspects of equational categories} (1966), Barr, \emph{Coequalizers
+and free triples} (1970). Le second point du critère, laissé illisible,
+est nécessairement celui-là. C'est le seul endroit du dossier où le nom de
+Lawvere est écrit, et il désigne la notion que les pages 18--22 et 84--87
+construisent sous le nom d'analyseur.}
+
+Le second feuillet est le \emph{critère de descente} pour un morphisme de
+topos $f : B \to B'$, d'image inverse $f^{*} : B' \to B$. On forme la
+comonade $\pi = f^{*}f_{*}$ sur $B$, exacte à gauche et accessible, la
+catégorie $B_{\pi}$ de ses coalgèbres, et le foncteur de comparaison $B'
+\to B_{\pi}$, $X \mapsto f^{*}X$. Le théorème est que ce foncteur est une
+équivalence dès que $f^{*}$ est conservatif : c'est le théorème de Beck
+appliqué à l'adjonction $f^{*} \dashv f_{*}$, la seconde condition du
+critère — que $f^{*}$ préserve les noyaux de couples coréflexifs — étant
+acquise parce que $f^{*}$ est exact à gauche. Un morphisme de topos dont
+l'image inverse est conservative est donc un morphisme de descente
+effective.\footnote{Le manuscrit hésite sur la définition : « $f$
+conservatif $\Leftarrow$ (déf) $f^{*}$ fidèle ($=$ conservatif) — les
+deux ». Pour un foncteur exact à gauche entre topos, fidèle et conservatif
+sont équivalents, ce qui justifie le « $=$ ». Il écrit ensuite $\mathrm{CoAlg}
+(B, \pi) = B_{\pi}$, « $B \to B_{\pi}$ conservatif » (le mot « fidèle »
+biffé), et « $B_{\pi} \xrightarrow{\simeq} B$ (th) » : la source de
+l'équivalence doit être $B'$ et non $B$, comme le croquis, qui place
+$B_{\pi}$ entre $B$ et $B'$, le montre ; nous avons corrigé. C'est le
+théorème de descente pour les morphismes surjectifs de topos, qui sera
+énoncé sous cette forme par Joyal et Tierney (1984) ; l'adjonction
+$\underline{\mathrm{Hom}}_{\mathrm{Ens}}(f^{*}X, Y) \simeq
+\underline{\mathrm{Hom}}_{G}(X, f_{*}Y)$ avec $f_{*}(Y) =
+\underline{\mathrm{Hom}}(G, Y)$, notée au bas du feuillet, est l'exemple
+du point canonique $(\mathrm{Ens}) \to BG$ du topos des $G$-ensembles,
+dont l'image inverse est le foncteur d'oubli : les coalgèbres de la
+comonade $Y \mapsto \underline{\mathrm{Hom}}(G, Y)$ sur les ensembles sont
+les $G$-ensembles, et c'est le cas le plus simple du théorème.} Le dernier alinéa dit l'usage prévu :
+un topos $B$ étant donné, on cherche un topos $B'$ ayant assez de points
+et un morphisme $B \to B'$ auquel appliquer le critère, avec le croquis
+$C \subset \widehat{C}$. C'est l'amorce d'une question constante dans le
+cahier des anneaux : un sous-topos « a-t-il assez de points », auquel cas
+ses propriétés se vérifient sur les modèles ensemblistes.
+\pagerange{36}{50}
+\section*{Le cahier des axiomes d'anneaux et de leurs topos classifiants (pages 36 à 50)}
+
+\pagerange{36}{38}
+\subsection*{Le dispositif}
+
+Un cahier à spirale, quadrillé, fait fonctionner la machine des pages 17 à
+22 sur l'exemple qui la justifie : les anneaux commutatifs et leurs
+propriétés. Les conventions sont fixées une fois pour toutes :
+\begin{itemize}
+\item $R$ est la catégorie des schémas affines de type fini sur
+$\mathbb{Z}$, opposée à celle des algèbres de type fini sur $\mathbb{Z}$ ;
+elle a les limites projectives finies ;
+\item $X_{\mathrm{ann}} = \widehat{R}$ est le \emph{topos classifiant des
+anneaux} : un anneau $A$ d'un topos $\varepsilon$ est un foncteur exact à
+gauche $R \to \varepsilon$, $X \mapsto X(A)$, i.e. un morphisme de topos
+$\varepsilon \to \widehat{R}$ ; les anneaux ensemblistes sont les points de
+$\widehat{R}$, et $T(\mathrm{Ens}) = \mathrm{Ind}(R^{\circ})$ est la catégorie
+des anneaux, limite inductive filtrante de ses sous-anneaux de type
+fini ;\footnote{C'est le cas $C = R$ de l'équivalence $T_{0}(E) \simeq
+\underline{\mathrm{Hom}}_{\mathrm{top}}(E, \widehat{C})^{\circ}$ de la page 17.
+La formule $T(\mathrm{Ens}) = \mathrm{Ind}(C^{\circ})$ est écrite, à
+l'encre bleue, page 108 ; celle du cahier est $\tau = \mathrm{Ind}(S)$
+(page 90). L'objet « anneau universel » est $A = \mathrm{Spec}\,
+\mathbb{Z}[t]$, que la page 93 note $O = E'_{\mathbb{Z}} = \mathrm{Sp}
+(\mathbb{Z}[t])$.}
+\item pour une propriété $P$ d'anneaux, $X_{P} \subset X_{\mathrm{ann}}$ est
+le sous-topos classifiant les anneaux ayant la propriété $P$, et l'on
+cherche à l'écrire comme $\widetilde{R}_{\mathrm{top}\,P}$, catégorie des
+faisceaux sur $R$ pour une topologie « $\mathrm{top}\,P$ », ou, mieux,
+comme $\widehat{R_{P}}$, préfaisceaux sur une catégorie $R_{P}$ déduite de
+$R$ par localisation.
+\end{itemize}
+
+Le principe qui donne les topologies est énoncé une fois, page 38, au cas
+« anneau local », et appliqué partout : un axiome de la forme « pour toute
+section $f$ de $A$ sur $U$, telle famille de $U$ est couvrante » se vérifie
+sur le \emph{cas universel} $U = A$, $f$ = la section identique, et la
+famille couvrante universelle engendre la topologie. Le sous-topos $X_{P}$
+est alors $\widetilde{R}_{\mathrm{top}\,P}$, et $P$ est vérifiée par $A$
+dans $\varepsilon$ si et seulement si le morphisme $\varepsilon \to
+\widehat{R}$ se factorise par $\widetilde{R}_{\mathrm{top}\,P}$, i.e. si le
+foncteur $X \mapsto X(A)$ transforme familles couvrantes en familles
+épimorphiques.\footnote{C'est le mécanisme général : le topos des
+faisceaux sur $(R, J)$ classifie les foncteurs exacts à gauche
+\emph{$J$-continus} $R \to \varepsilon$ (Diaconescu). Lorsque $R$ est
+l'opposé des anneaux de présentation finie, un tel foncteur est un anneau
+$A$ et la continuité dit exactement que $X'(A) \to X(A)$ est surjectif pour
+$X' \to X$ couvrant. Chaque ligne du cahier est donc une \emph{définition}
+de la topologie par la propriété, et l'énoncé $X_{P} \simeq \widetilde{R}
+_{\mathrm{top}\,P}$ y est tautologique ; le contenu est dans
+l'identification de la topologie à une topologie connue, ou du sous-topos à
+un topos de préfaisceaux.}
+
+Une carte des implications ouvre le cahier (page 36) : local $\Rightarrow$
+anneau $\Leftarrow$ réduit $\Leftarrow$ intègre $\Leftarrow$ corps
+$\Rightarrow$ pseudo-corps $\Rightarrow$ réduit et à spectre compact ;
+strictement local $\Rightarrow$ local.\footnote{Le feuillet dessine aussi
+une flèche de « spectre compact » vers « anneau réduit », que la
+transcription rend dans ce sens ; l'implication est fausse (un anneau
+local artinien non réduit a un spectre réduit à un point), et nous ne la
+reportons pas. Le second réseau du feuillet, illisible, redistribue les
+mêmes noms avec quelques autres : spectre connexe, spectre irréductible,
+intègre normal, régulier, ultra local, complet.}
+
+\pagerange{37}{37}
+\subsection*{Sous-topos ouverts du classifiant}
+
+La page 37 rappelle comment les sous-topos ouverts de $B = \widehat{R}$ se
+lisent en termes de structures. Un ouvert de $B$ est un sous-objet $S$ de
+l'objet final $e_{B}$, i.e. un crible $C_{R}$ de $R$ ; le sous-topos ouvert
+correspondant est $B' = B_{/S} \xrightarrow{i} B$, avec $i_{!}(\mathbb{1}
+_{B'}) = S$, et il classifie la sous-structure $T'$ de $T = T_{B}$ définie
+par
+\[
+T'(\varepsilon) = \{\, f : \varepsilon \to B \mid f^{*}(S) \simeq
+e_{\varepsilon} \,\},
+\]
+c'est-à-dire les anneaux $A$ tels que la « condition ouverte » $S$ soit
+vérifiée partout. Les exemples 16) de la page 43 ($n$ inversible, $n =
+0$) sont de ce type.
+
+\pagerange{38}{43}
+\subsection*{La liste}
+
+Nous donnons les vingt-deux articles dans l'ordre du cahier, avec pour
+chacun l'axiome, le cas universel, et le topos classifiant proposé.
+
+\begin{enumerate}
+\item[1)] \emph{Anneau} (commutatif unitaire) : $X_{\mathrm{ann}} =
+\widehat{R}$.
+
+\item[2)] \emph{Anneau local} : pour toute section $f$ de $A$ sur $U$, $U$
+est réunion des ouverts $U_{f}$ et $U_{1-f}$ ; cas universel $U = A$, $f$
+la diagonale. $X_{\mathrm{anloc}} = \widetilde{R}_{\mathrm{zar}}$, le
+\emph{topos de Zariski}.\footnote{C'est le théorème de Hakim, \emph{Topos
+annelés et schémas relatifs} (1972) : le gros topos de Zariski classifie
+les anneaux locaux. La date de l'inventaire ne permet pas de dire si le
+cahier lui est antérieur ; il ne cite personne. La formulation par le
+recouvrement $\{U_{f}, U_{1-f}\}$ du cas universel est celle qui rend
+l'énoncé évident : l'axiome des anneaux locaux dit précisément que $f$ ou
+$1-f$ est inversible localement.}
+
+\item[4)] \emph{Anneau strictement local} : local, et tout revêtement étale
+surjectif $U' \to U$ a localement une section. Cas universel $U =
+\mathbb{A}^{n}$, $U' = \mathrm{Spec}(\mathcal{O}_{\mathbb{A}^{n}}[T]/(F))_{F'}$
+avec $F(T) = T^{n} + a_{1}T^{n-1} + \cdots + a_{n}$ le polynôme unitaire
+universel. $X_{\mathrm{anstrloc}} = \widetilde{R}_{\mathrm{et}}$, le topos
+étale.\footnote{Anneaux strictement henséliens ; c'est aussi dans Hakim, et
+c'est le théorème que Wraith reprendra (\emph{Generic Galois theory of local
+rings}, 1979). Le cas universel donné — les revêtements étales standards
+définis par un polynôme unitaire et sa dérivée — est exactement le
+« étale local » de SGA 1.}
+
+\item[3)] \emph{Anneau local hensélien} : $X_{\mathrm{anlochen}} =
+\widetilde{R}_{\mathrm{hen}}$, pour la topologie où $(X_{i} \to X)$ est
+couvrante si et seulement si $X_{i}(A) \to X(A)$ est surjectif pour tout
+anneau local hensélien $A$. La définition est ici tautologique ; le cas
+universel est celui de 4) sans la condition de séparabilité.
+
+\item[5)] \emph{Anneau ultralocal} : tout recouvrement fppf $X' \to X$ de
+$R$ induit une surjection $X'(A) \to X(A)$. $X_{\mathrm{anultloc}} =
+\widetilde{R}_{\mathrm{fppf}}$, cas universel $U = \mathbb{A}^{n}$, $U' =
+\mathrm{Spec}\,\mathcal{O}_{\mathbb{A}^{n}}[T]/(F)$. Le mot est du cahier
+et n'a pas de nom reçu ; la \emph{Question} posée (tout anneau de type
+fini a-t-il une $\mathcal{O}$-algèbre ultralocale qui soit limite
+inductive d'algèbres fidèlement plates de type fini ?) demande si le topos
+fppf a assez de points, et reste ouverte sur la page.\footnote{Elle a une
+réponse positive, comme tout topos cohérent (Deligne, SGA 4 VI 9) — le
+topos fppf sur $R$ est cohérent, ses recouvrements étant finis. Mais la
+description des points comme « anneaux ultralocaux » ne les identifie à
+aucune classe classique : un corps algébriquement clos est ultralocal
+(article 15), un anneau strictement hensélien ne l'est pas en général.}
+
+\item[6)] \emph{Anneau réduit} : $\mathcal{O}_{A} \simeq \varinjlim_{n}
+\mathrm{Ker}(x \mapsto x^{n})$ ; cas universel : les $V(f^{n}) \to V(f)$.
+$X_{\mathrm{red}} \simeq \widetilde{R}_{\mathrm{topred}} \simeq
+\widehat{R_{\mathrm{red}}}$, où topred est la topologie où $(X_{i} \to Y)$
+est couvrante si l'une des $X_{i}$ a une section sur $Y_{\mathrm{red}}$, et
+$R_{\mathrm{red}}$ la catégorie des schémas réduits de $R$, qui est aussi
+la catégorie de fractions de $R$ pour les immersions $X_{\mathrm{red}} \to
+X$.\footnote{L'égalité $X_{\mathrm{red}} \simeq \widehat{R_{\mathrm{red}}}$
+est le fait que « réduit » est une théorie \emph{cartésienne} (l'axiome
+$x^{n} = 0 \Rightarrow x = 0$ est une implication entre équations, sans
+disjonction ni existentiel), dont le classifiant est donc un topos de
+préfaisceaux, sur l'opposé des anneaux réduits de présentation finie. Que
+$R_{\mathrm{red}}$ ait des limites finies — non induites par $R$ : le
+produit fibré de deux schémas réduits n'est pas réduit — vient de ce que
+$X \mapsto X_{\mathrm{red}}$ est adjoint à droite de l'inclusion. Le
+\emph{N.B.} de la page 38 s'en inquiète (« $X_{\mathrm{red}}$ peut être
+\ldots, ce qui se voit sur $R_{\mathrm{red}}$ \ldots\ des lim. finies ») ;
+c'est bien la remarque à faire.}
+
+\item[7)] \emph{Anneau intègre} : a) le morphisme $u : A \amalg A \to D$
+vers le produit fibré $D = \{(x,y) : xy = 0\}$ est un épimorphisme
+($xy = 0$ implique $x = 0$ ou $y = 0$, localement) ; b) $\mathrm{Ker}(0_{A},
+1_{A} : e \rightrightarrows A) = \emptyset$ ($0 \neq 1$). $X_{\mathrm{int}}
+\simeq \widetilde{R}_{\mathrm{topint}}$, topint étant la topologie où
+$(X_{i} \to Y)$ est couvrante si, pour toute composante irréductible
+$Y_{\alpha}$ de $Y$ munie de sa structure réduite, l'une des $X_{i}$ a une
+section au-dessus de $Y_{\alpha}$. Les faisceaux sont les $F \in
+\widehat{R}$ tels que $F(X) \to \prod_{i} F(X_{i}) \rightrightarrows
+\prod_{i,j} F(X_{i} \times_{X} X_{j})$ soit exacte pour la famille des
+composantes irréductibles.\footnote{Ici une disjonction apparaît, et le
+classifiant n'est plus un topos de préfaisceaux : « intègre » est une
+théorie \emph{cohérente}. La topologie décrite est la traduction de la
+disjonction : recouvrir $\mathrm{Spec}\,A$ par les $V(x)$ et $V(y)$
+lorsque $xy = 0$.}
+
+\item[8)] \emph{Anneau irréductible} : $A_{\mathrm{red}}$ est intègre ; la
+condition s'écrit avec le nilradical $N$ comme en 7), et donne
+$X_{\mathrm{irr}} \simeq \widetilde{R}_{\mathrm{topirr}}$, la topologie où
+$(X_{i} \to X)$ est couvrante si pour toute composante irréductible $Y$ de
+$X$ l'une des $X_{i}$ a une section sur $Y_{\mathrm{red}}$. Le \emph{N.B.}
+qui suit est le premier signal de la limite de la méthode : \emph{cette
+topologie n'est pas quasi-compacte} — un schéma à une infinité de
+composantes irréductibles a des recouvrements sans sous-recouvrement
+fini —, de sorte que $X_{\mathrm{irr}}$ n'est pas un topos
+cohérent.\footnote{Un schéma affine de type fini sur $\mathbb{Z}$ est
+noethérien et n'a qu'un nombre fini de composantes irréductibles ; la
+non-quasi-compacité vient des recouvrements par des familles infinies
+$(X_{i})$ dont chaque composante ne rencontre qu'un nombre fini. La
+remarque est juste et elle est importante : l'énoncé « irréductible »,
+$\forall f, g\ (fg \text{ nilpotent} \Rightarrow f \text{ nilpotent} \vee
+g \text{ nilpotent})$, est géométrique mais non cohérent, à cause de la
+disjonction infinie cachée dans « nilpotent ».}
+
+\item[10)] \emph{Anneau compact}, i.e. à spectre compact (Hausdorff) :
+pour toute section $f$, il existe un unique idempotent $e$ tel que $ef$
+soit inversible dans $eA$ et $(1-e)f$ nilpotent. Cas universel : pour
+chaque $n$, soit $D_{n} \subset A \times A \times A$ le lieu des $(g, f, e)$
+avec $e^{2} = e$, $f^{n}(1-e) = 0$, $g(1-e) = 0$, $f^{n}g = e$ ; la
+projection $D_{n} \to A$ sur $f$ est un monomorphisme ($e$ et $g$ sont
+déterminés par $f$), et la condition est que la famille $(D_{n} \to
+A)_{n}$ soit couvrante.\footnote{La page 42 écrit les équations de $D_{n}$
+sans l'exposant $n$, qui est pourtant ce qui distingue $D_{n}$ de $D_{1}$ ;
+la ligne suivante, qui fait couvrir $A$ par les $D_{n}$, exige la
+puissance, et nous l'avons rétablie.} $X_{\mathrm{cpct}} \simeq
+\widetilde{R}_{\mathrm{top\,cpct}}$ : $(X_{i} \to X)$ couvrante si
+$X_{i}(\mathcal{O}) \to X(\mathcal{O})$ est surjectif pour tout anneau
+artinien local $\mathcal{O}$. Marge : « topologie non cohérente ! A-t-elle
+assez de points ?? », et « encore un topos non cohérent (bien que sous-topos
+d'un topos cohérent) ».\footnote{Les articles 9) et 10) portent les numéros
+du cahier ; la numérotation y est reprise deux fois (le 12) de la page 41
+devient le 13) de la page 42). « Spectre compact » signifie spectre de
+dimension zéro, i.e. anneau dont tout premier est maximal ; la condition
+donnée est la caractérisation par les idempotents, et la « quantification
+sur $n$ » (le $f^{n}$ nilpotent) est ce qui rend la théorie non cohérente,
+comme en 8).}
+
+\item[11)] \emph{Corps} : $A^{*} \amalg e \to A$ (l'inclusion des
+inversibles et la section nulle) est épimorphique — tout élément est
+inversible ou nul. $X_{\mathrm{corps}} \simeq \widetilde{R}_{\mathrm{top\,
+corps}}$, la topologie où les familles couvrantes sont celles qui ont des
+sections sur chaque fibre.\footnote{Le cahier écrit « $A^{*} \amalg A$ »,
+avec pour seconde flèche $0_{A}$ ; la page 94 écrit $e \sqcup O^{*} \to O$,
+qui est ce que le sens exige, et nous suivons la page 94. L'axiome
+$\forall x\ (x = 0 \vee \exists y\ xy = 1)$ est cohérent ; avec « $0 \neq
+1$ » c'est la théorie géométrique des corps, dont le classifiant est le
+topos des faisceaux sur les anneaux de présentation finie pour la
+topologie engendrée par les recouvrements $\{\mathrm{Spec}\,A_{f},
+\mathrm{Spec}\,A/f\} \to \mathrm{Spec}\,A$ — c'est ce que « sections sur
+chaque fibre » veut dire. Les pages 92 à 95 y reviennent longuement.}
+
+\item[12)--13)] \emph{Corps} $=$ compact et intègre $=$ pseudo-corps intègre
+$=$ pseudo-corps local, et \emph{pseudo-corps} $=$ anneau compact réduit :
+pour toute section $f$, $A \xrightarrow{\sim} A_{f} \times A/fA$, i.e. il
+existe un unique idempotent $e$ avec $ef$ inversible dans $eA$ et $(1-e)f =
+0$ ; le cas universel dit que $i_{1} : D_{1} \hookrightarrow A$ est un
+isomorphisme. $X_{\mathrm{ps.corps}} \simeq \widetilde{R}_{\mathrm{top\,ps\,
+corps}} \simeq \widehat{R_{\mathrm{cons}}}$, où $R_{\mathrm{cons}}$ est la
+catégorie des « schémas compacts réduits associés aux schémas de type fini
+sur $\mathbb{Z}$ », localisée de $R$ pour les flèches à extensions
+résiduelles triviales.\footnote{Un pseudo-corps est un anneau
+\emph{absolument plat}, ou \emph{régulier au sens de von Neumann} : tout
+$x$ s'écrit $x = x^{2}y$. La condition $A \simeq A_{f} \times A/fA$ pour
+tout $f$ en est une caractérisation, et l'unicité de l'idempotent en fait
+une théorie cartésienne, d'où le classifiant en préfaisceaux
+$\widehat{R_{\mathrm{cons}}}$. La catégorie $R_{\mathrm{cons}}$ est
+vraisemblablement l'opposée de celle des anneaux absolument plats de
+présentation finie ; l'« anneau absolument plat universel » $T(A)$
+associé à un anneau $A$, dont le spectre est $\mathrm{Spec}\,A$ muni de la
+topologie constructible, est l'objet de la thèse de J.-P. Olivier
+(Montpellier, 1970--71), et le nom « cons » y renvoie. Le cahier ne cite
+pas Olivier.}
+
+\item[14)] \emph{Corps séparablement clos} $=$ corps strictement hensélien :
+$X \simeq \widetilde{R}_{\mathrm{top\,corps\,sépclos}} \simeq
+\widetilde{(R_{\mathrm{cons}})}_{\mathrm{et}}$, faisceaux sur $R_{\mathrm{cons}}$
+pour la topologie étale.
+
+\item[15)] \emph{Corps algébriquement clos} $=$ corps ultralocal : $X \simeq
+\widetilde{(R_{\mathrm{cons}})}_{\mathrm{fppf}}$, la topologie fppf sur
+$R_{\mathrm{cons}}$ étant celle des familles finies surjectives.\footnote{Le
+classifiant des corps algébriquement clos est un exemple classique de la
+logique catégorique (Makkai--Reyes 1977, Johnstone) ; sa description
+comme faisceaux sur les anneaux absolument plats de présentation finie
+pour les familles finies surjectives est, à la lettre près, celle qui y
+est donnée.}
+
+\item[16)] \emph{Anneaux annulés par $n$}, \emph{où $n$ est inversible},
+\emph{$\Lambda$-algèbres} : trois sous-topos \emph{ouverts}. Pour $n1_{A} =
+0$ : $X_{\mathbb{Z}/n} \simeq \widetilde{R}_{\mathrm{top}\,n\text{-tors}}
+\simeq \widehat{R_{\mathbb{Z}/n}}$, $R_{\mathbb{Z}/n}$ la sous-catégorie
+pleine des $\mathbb{Z}/n$-schémas ; pour $n$ inversible, de même avec
+$\mathbb{Z}[1/n]$. Plus généralement (pages 43 à 45), soit $S \to e_{R}$
+un monomorphisme de $\mathrm{Pro}\,R$, i.e. un épimorphisme d'anneaux
+$\mathbb{Z} \to \Lambda$ ; les $\Lambda$-algèbres de $\varepsilon$ sont les
+anneaux $A$ dont la structure de $\Lambda$-algèbre existe, et elle est
+alors unique ; $R_{/S} \subset R$ est la sous-catégorie pleine des schémas
+qui sont des $\Lambda$-schémas, avec $X \mapsto X \times S$ pour adjoint,
+et
+\[
+X_{\Lambda\text{-alg}} \simeq \widetilde{R}_{\Lambda\text{-top}} \simeq
+\widehat{R_{\Lambda}} = \widehat{R_{/S}},
+\]
+sous-topos ouvert de $\widehat{R}$ défini par $S$. Exemples : $X_{\mathbb{Z}
+/n}$, $X_{\mathrm{car}\,p}$, $X_{\mathbb{Z}[1/n]}$, et $X_{\mathbb{Q}} =
+X_{\mathrm{car}\,0} = \bigcap_{n \geqslant 2} X_{\mathbb{Z}[1/n]}$.\footnote{
+$\mathbb{Z} \to \Lambda$ épimorphique signifie que $\Lambda$ est un
+quotient d'un localisé de $\mathbb{Z}$, i.e. $\mathbb{Z}/n$, $\mathbb{Z}
+[1/n]$, $\mathbb{Q}$ ou leurs produits finis ; c'est ce que le cahier
+nomme « mono $S \to e_{R}$ dans $\mathrm{Pro}\,R$ ». L'unicité de la
+structure de $\Lambda$-algèbre est un cas particulier du fait qu'un
+épimorphisme d'anneaux $\mathbb{Z} \to \Lambda$ rend $\Lambda \otimes_{
+\mathbb{Z}} \Lambda \to \Lambda$ bijectif.} La page 45 traite le cas d'une
+famille filtrante décroissante $S_{\alpha}$ de sous-objets de $e_{R}$ : la
+sous-structure $\bigcap_{\alpha} T_{S_{\alpha}}$ est classifiée par $\bigcap
+_{\alpha} \widehat{R_{/S_{\alpha}}} = \widetilde{\varprojlim_{\alpha}
+R_{/S_{\alpha}}}$, la catégorie $\varprojlim_{\alpha} R_{/S_{\alpha}}$
+étant une catégorie de fractions de $R$ pour les flèches $i$ telles que $i
+\times S$ soit inversible ; c'est le cas de $X_{\mathbb{Q}}$, qui est un
+sous-topos non ouvert, intersection d'ouverts.
+
+\item[17)--19)] \emph{Anneau parfait de caractéristique $p$} ($p1_{A} = 0$
+et $x \mapsto x^{p}$ bijectif) : $X_{p\text{-parf}} \simeq \widehat{R_{p\text{-parf}}}$,
+$R_{p\,\mathrm{parf}}$ la catégorie des clôtures parfaites des schémas de
+type fini sur $\mathbb{F}_{p}$ ; \emph{compact parfait} et \emph{corps
+parfait}, en croisant avec 13) et 11).\footnote{Le passage à la clôture
+parfaite $X \mapsto X_{\mathrm{parf}}$ est adjoint à l'inclusion des schémas
+parfaits, comme la réduction en 6) ; « parfait » est cartésien
+($\forall x\, \exists! y\ y^{p} = x$), d'où le classifiant en préfaisceaux.
+Le \emph{N.B.} « parfait $\Rightarrow$ réduit » est immédiat : Frobenius
+étant injectif, $x^{p} = 0$ entraîne $x = 0$.}
+\end{enumerate}
+
+\pagerange{46}{49}
+\subsection*{Caractéristique, et le recollement de deux sous-topos}
+
+L'article 20), \emph{anneau à caractéristique} (localement, $A$ est de
+caractéristique $p > 0$ ou de caractéristique $0$), est celui où la
+méthode achoppe et où le cahier fait sa meilleure observation. La
+condition s'écrit : la famille
+\[
+\bigl\{\, V(p \cdot 1_{A}) \hookrightarrow e_{\varepsilon}\ (p \text{
+premier}),\quad \textstyle\bigcap_{n \geqslant 1} (e_{\varepsilon})_{n1_{A}}
+\hookrightarrow e_{\varepsilon} \,\bigr\}
+\]
+est épimorphique, et le second membre est une \emph{intersection infinie}
+de sous-objets : « donc ne donne pas l'existence d'un topos classifiant »,
+c'est-à-dire pas par la voie ouverte (les conditions ouvertes de la page
+37). Ce que l'on peut dire est que $\varepsilon \to \widehat{R}$ se factorise
+localement sur $\varepsilon$ par la « réunion » $V = X_{\mathrm{car} > 0}$
+des sous-topos ouverts $\widehat{R_{\mathbb{Z}/p}}$ et par le sous-topos $W =
+X_{\mathbb{Q}}$, qui n'est pas ouvert. On pose $X_{\mathrm{car}} =
+\widetilde{R}_{\mathrm{top.car}}$, où « top car » est la borne inférieure
+des « top car $p$ » : $(X_{i} \to X)$ est couvrante si pour tout $p$ il
+existe $i(p)$ tel que $(X_{i(p)})_{p} \to X_{p}$ ait une section. C'est un
+\emph{topos non cohérent} : les familles $(X_{p} \to X)_{p}$ sont
+couvrantes et, si $X_{\mathbb{Q}} \neq \emptyset$, n'ont pas de
+sous-famille finie couvrante.\footnote{La théorie « $A$ a une
+caractéristique » s'écrit $\top \vdash \bigvee_{p} (p = 0) \vee
+\bigwedge_{n} (n \text{ inversible})$ ; la conjonction infinie n'est pas
+géométrique, et c'est ce que le cahier constate en disant que
+l'intersection $\bigcap_{n}$ ne donne pas de condition ouverte. Le
+sous-topos $\sup(V, W)$ existe néanmoins, comme borne supérieure de deux
+sous-topos, et $X_{\mathrm{car}}$ est ce sup ; la question est de le
+décrire.}
+
+Le problème général est alors posé (pages 47 et 48) : $B$ un topos, $V$ et
+$W$ deux sous-topos, décrire le sous-topos $Z = \sup(V, W)$ classifiant les
+structures qui sont \emph{localement} de type $V$ ou de type $W$. On
+cherche $Z$ muni de deux ouverts $Z' = Z_{/e'}$, $Z'' = Z_{/e''}$ avec $Z' \subset
+V$, $Z'' \subset W$ et $e_{Z} = \sup(e', e'')$ ; alors $Z' = Z \cap V$ est un
+ouvert de $V$ et $Z''$ un ouvert de $W$, et la condition nécessaire et
+suffisante trouvée page 48 est qu'il existe un ouvert $Z'$ de $V$ et un
+ouvert $Z''$ de $W$ tels que $Z'' \wedge V$ soit un ouvert de $V$, $Z' \wedge
+W$ un ouvert de $W$, et
+\[
+V = \sup(Z', Z'' \wedge V), \qquad W = \sup(Z'', Z' \wedge W) ;
+\]
+$Z$ s'obtient alors en \emph{recollant} $Z'$ et $Z''$ le long de leur
+intersection. Dans le cas $B = \widehat{R}$, $V = X_{\mathrm{car} > 0}$, $W =
+X_{\mathrm{car}\,0}$, la condition est satisfaite, $V \wedge W$ étant l'ouvert
+correspondant à l'anneau nul : « donc OK ».\footnote{C'est le recollement
+de topos le long d'un ouvert commun, i.e. la construction du topos
+classifiant d'une théorie « locale » à partir de ceux de ses deux
+branches ; les pages 47--48 sont de brouillon et l'énoncé ci-dessus est
+notre mise en forme de ce que la page 48 conclut. Le point délicat, que
+le cahier voit, est que $W = X_{\mathbb{Q}}$ n'est pas ouvert dans $B$ mais
+que $V \wedge W$ (le lieu où $p = 0$ et $p$ inversible, i.e. l'anneau nul)
+l'est.} La page 49 conclut par une description en préfaisceaux :
+\[
+X_{\mathrm{car}} \simeq \widehat{R_{\mathrm{car}}},
+\]
+$R_{\mathrm{car}}$ étant la « somme amalgamée » sous le schéma vide des
+catégories $R_{p}$ de schémas de type fini sur les corps premiers,
+$\mathbb{Q}$ compris.\footnote{Cette dernière identification est énoncée
+sans démonstration, et elle demande une précaution que le cahier ne prend
+pas : les schémas de type fini sur $\mathbb{Q}$ ne sont pas dans $R$ (ils
+sont dans $\mathrm{Pro}\,R$, comme $X_{\mathbb{Q}} = \bigcap_{n}
+X_{\mathbb{Z}[1/n]}$ le dit page 44). La catégorie $R_{\mathrm{car}}$ n'a
+pas d'objet final — $\mathrm{Spec}\,\mathbb{F}_{p}$ et $\mathrm{Spec}\,
+\mathbb{Q}$ n'ont pas de produit non vide — et ses foncteurs plats vers
+les ensembles sont les anneaux de caractéristique $p$ ou $0$, l'anneau nul
+excepté, ce qui est bien la description voulue des points ; que
+$\widehat{R_{\mathrm{car}}}$ soit le sous-topos $\sup(V, W)$ de
+$\widehat{R}$ est plausible et non établi ici.}
+
+Les articles 21) et 22) élargissent. 21) : reprendre 1) à 19) au-dessus
+d'un sous-topos $Z(p)$ de $\widehat{R}$ pour chaque caractéristique, et
+recoller. 22) \emph{Anneaux quasi-connexes de rang $\leqslant n$} : le
+spectre a au plus $n$ composantes connexes, i.e. localement $A \simeq A_{1}
+\times \cdots \times A_{n}$ avec les $A_{i}$ connexes, i.e. il existe
+localement des idempotents orthogonaux $e_{1}, \ldots, e_{n}$ de somme $1$
+avec $A/\sum_{j \neq i} e_{j}A$ connexe. On forme le sous-objet $\Pi_{n}
+\subset A^{n}$ des tels $n$-uples, et pour chaque $j$ le plus grand
+sous-objet $\Pi_{n,j}$ sur lequel $A_{j}$ est connexe ; la condition est que
+$\Pi'_{n} = \bigcap_{j} \Pi_{n,j} \to e_{\varepsilon}$ soit épimorphique. La
+page 50 note que la formation de $\Pi_{n,j}$ ne commute pas visiblement aux
+changements de topos de base, « donc il n'est pas clair qu'on a un topos
+modérateur », et propose la structure plus riche — un $\mathfrak{S}_{n}$-torseur
+$P$ et une décomposition de $A_{P}$ en $n$ facteurs connexes — pour
+laquelle la classification est claire.\footnote{« Connexe » ($e^{2} = e
+\Rightarrow e = 0 \vee e = 1$, avec $0 \neq 1$) est cohérent, et « au plus
+$n$ composantes » aussi ($\bigvee_{i} e_{i} = 0$ pour $n+1$ idempotents
+orthogonaux) ; ces théories ont donc des topos classifiants, sous-topos de
+$\widehat{R}$ (Makkai--Reyes). Ce que la page 50 voit juste est la
+différence entre la théorie \emph{avec} la décomposition pour structure —
+dont le classifiant est le produit fibré de $n$ copies du classifiant des
+anneaux connexes, muni de son action de $\mathfrak{S}_{n}$ — et la théorie
+qui l'affirme seulement par un existentiel, dont le classifiant est le
+quotient de la première par $\mathfrak{S}_{n}$. Le « pseudo-torseur des
+choix » qu'elle décrit est le lien entre les deux.}
+
+\pagerange{41}{41}
+\subsection*{La question des points}
+
+Le \emph{N.B.} de la page 41 formule la contrainte qui pèse sur tout le
+cahier : les sous-topos 1) à 11) ont des points — ils sont même définis par
+leurs points, puisque chacun a été défini par une condition sur les
+modèles ensemblistes —, mais il n'est pas clair qu'une \emph{intersection}
+de plusieurs d'entre eux en ait assez ; pour vérifier que deux
+intersections coïncident, ou s'incluent, il ne suffit donc pas de le
+vérifier sur les structures ensemblistes, « sauf si on vérifie à chaque
+fois que les intersections précédentes ont assez de points ! ». C'est la
+raison des marges « topologie non cohérente, a-t-elle assez de points ?? »
+des articles 8) et 10).\footnote{Le théorème de Deligne (SGA 4 VI 9, 1972)
+dit qu'un topos cohérent a assez de points ; il règle tous les articles
+cohérents, et les intersections finies de sous-topos cohérents d'un topos
+cohérent, qui sont cohérentes. Il ne règle pas 8), 10) et 20), qui ne le
+sont pas, et pour lesquels la question reste, sur ces pages, ouverte.
+Elle l'est toujours en général : un topos non cohérent peut n'avoir aucun
+point.}
+
+\pagerange{51}{52}
+\section*{Propriétés typiques (pages 51 et 52)}
+
+Deux feuillets de questions demandent, pour des propriétés de modules et
+d'algèbres, si elles sont \emph{typiques} — le mot du manuscrit pour :
+définissables par un sous-topos du classifiant, ce qui exige d'être stable
+par limites inductives filtrantes et par changement de topos.\footnote{En
+termes d'aujourd'hui, une propriété typique est une propriété
+\emph{géométrique} : exprimable par une formule de logique géométrique
+(conjonctions finies, disjonctions quelconques, existentiels), qui sont
+exactement celles que préservent les images inverses des morphismes de
+topos. La stabilité par limites filtrantes en est la trace sur les points.}
+Les réponses :
+\begin{itemize}
+\item $M$ \emph{plat} est typique : $N \mapsto M \otimes N$ exact se ramène à
+l'injectivité de $(\sum f_{i}A) \otimes M \to M$ pour toute famille finie de
+sections, et il suffit de l'exiger pour les sections universelles $t_{i}$
+sur $U_{n} = A^{n}$.\footnote{C'est le critère de platitude par les
+relations linéaires (Bourbaki, Lazard), et il est bien géométrique.}
+\item $M$ \emph{fidèlement plat} : « est-ce typique ? », encerclé ; la
+condition $M \otimes N \neq 0$ pour tout $N \neq 0$ n'est pas de la forme
+voulue.
+\item Algèbres de type fini, de présentation finie, lisses, étales, nettes :
+\emph{pas typiques} ; radicielles (monomorphiques), plates, entières,
+formellement nettes : oui ; surjectives : « ?! ».
+\item Modules localement libres, libres, projectifs, de type fini, de
+présentation finie, monogènes : les trois derniers « ne passent pas à la
+limite inductive filtrante, donc pas typiques ».
+\end{itemize}
+Un encadré démontre que $M$ \emph{inversible} ($M \otimes N \simeq A$ pour un
+$N$) entraîne $M$ de type fini : $M = \varinjlim M_{i}$ sur ses sous-modules
+de type fini, $M \otimes N = \varinjlim M_{i} \otimes N$ et $M_{i} \otimes N
+\subset A$ par platitude, donc l'un des $M_{i} \otimes N$ est $A$ et $M_{i} =
+M$. Mais « $M$ inversible » n'est pas exprimable par limites inductives et ne
+commute pas au changement de base, à cause du foncteur $\underline{\mathrm{Hom}}$ ;
+la propriété typique voisine est « localement libre de rang un », dont le
+classifiant est le topos $X_{\mathrm{mod}} = \widehat{\mathrm{Mod}_{\mathrm{pf}}
+^{\circ}}$ des modules de présentation finie sur les algèbres de
+présentation finie, restreint par une condition ouverte.\footnote{Le
+manuscrit écrit $X_{\mathrm{mod}} = \widehat{\mathrm{Mod}^{\circ}_{\mathrm{pf}}}$
+pour le classifiant des couples (anneau, module), qui est une théorie
+cartésienne ; la fin de la phrase est nôtre. Les feuillets sont une liste
+de questions et n'affirment rien de plus que ce qui est reporté ici.}
+
+\pagerange{54}{61}
+\section*{Catégories accessibles (pages 54 à 61)}
+
+\pagerange{54}{55}
+\subsection*{Le relevé}
+
+Des feuillets jaunis, d'une autre plume, recopient et complètent les
+énoncés de SGA 4, exposé I, § 8 et § 9 — les renvois numérotés en marge
+(8.7.5, 8.9.5, 8.13.2, 9.1--9.3, 9.6, 9.12, 9.16, 9.22) sont ceux de
+l'exposé — sur les \emph{catégories accessibles}. C'est l'outillage des
+sections « Exemples » et « Compléments » : la catégorie $S = T(\mathrm{Ens})$
+des modèles d'une théorie y sera reconnue comme une catégorie de ce type,
+et c'est ce qui permettra de reconstruire la théorie à partir de ses
+modèles.\footnote{Ces notions sont celles que Gabriel et Ulmer publient en
+1971 (\emph{Lokal präsentierbare Kategorien}) sous le nom de catégories
+\emph{localement présentables}, et que Makkai et Paré généraliseront en
+1989 (catégories \emph{accessibles}). Le relevé n'utilise que SGA 4 ; la
+terminologie de l'exposé I — « accessible » pour ce que Gabriel--Ulmer
+appellent présentable — est conservée ici, et le dernier corollaire des
+pages 60--61 est, mot pour mot, la caractérisation de Gabriel--Ulmer.}
+
+Les définitions : un ensemble ordonné filtrant est \emph{grand devant}
+$\pi$ si toute partie de cardinal $\leqslant \pi$ est majorée ; une
+catégorie satisfait $L_{\pi}$ si les limites inductives indexées par de tels
+ensembles y existent ; un objet $X$ est \emph{$\pi$-accessible} si
+$\mathrm{Hom}(X, -)$ commute à ces limites ; une catégorie $E$ est
+\emph{$\pi$-accessible} si elle satisfait $L_{\pi}$ et admet une petite
+sous-catégorie strictement génératrice formée d'objets $\pi$-accessibles,
+et \emph{accessible} s'il existe un tel $\pi$. Pour $\mathcal{C}$ petite,
+$\mathrm{Ind}_{\pi}(\mathcal{C})$ est la sous-catégorie pleine de
+$\mathrm{Ind}(\mathcal{C})$ des ind-objets indexés par des ensembles
+ordonnés grands devant $\pi$, et $E_{\pi}$ la sous-catégorie pleine des
+objets $\pi$-accessibles de $E$.
+
+\textbf{Théorème.} \emph{Pour une catégorie $E$, sont équivalentes : a) $E$
+est $\pi$-accessible ; b) $E$ est équivalente à $\mathrm{Ind}_{\pi}
+(\mathcal{C})$, $\mathcal{C}$ petite ; c) $E_{\pi}$ est équivalente à une
+petite catégorie et strictement génératrice. Sous ces conditions,
+$E_{\pi'} \simeq \mathrm{Ind}_{\pi}(E_{\pi})_{\pi'}$ pour $\pi' \geqslant \pi$,
+et les $E_{\pi'}$ forment une filtration cardinale de $E$.}
+
+Les corollaires : un foncteur $f : E \to F$ entre catégories accessibles est
+accessible si et seulement si $f \simeq \mathrm{Ind}_{\pi}(f_{\pi})$ pour un
+$\pi$, si et seulement s'il est dans l'image essentielle de
+$\underline{\mathrm{Hom}}(\mathcal{C}, F) \to \underline{\mathrm{Hom}}(E, F)$
+pour une petite $\mathcal{C} \subset E$ ; pour $E$ $\pi$-accessible et $F$
+satisfaisant $L_{\pi}$, $\underline{\mathrm{Hom}}(E, F)_{\pi} \simeq
+\underline{\mathrm{Hom}}(E_{\pi}, F)$ ; pour $\mathcal{C}$ accessible, les
+foncteurs $\mathcal{C} \to (\mathrm{Ens})$ exacts à gauche et accessibles
+sont pro-représentables, et un foncteur $f : \mathcal{C} \to \mathcal{C}'$
+admet un adjoint à gauche si et seulement s'il commute aux petites limites
+projectives et est accessible ; enfin limites projectives et sections d'une
+catégorie fibrée en catégories accessibles sur une petite base sont
+accessibles (9.22).\footnote{Ce dernier énoncé — stabilité de
+l'accessibilité par limites projectives — sera le théorème central de
+Makkai--Paré ; le b) de la page 54, sur les limites inductives, est marqué
+« à vérifier ». Le \emph{théorème d'adjonction} (« $f$ admet un adjoint à
+gauche ssi il commute aux limites et est accessible ») est la forme que
+prend, dans ce cadre, le théorème du foncteur adjoint, et c'est celle que
+les pages 58 et 72 utiliseront.}
+
+\pagerange{55}{55}
+\subsection*{Accessibilité et générateurs}
+
+La page 55 ajoute une \emph{Proposition} de stabilité — pour $F$
+satisfaisant $L_{\pi}$, $\underline{\mathrm{Hom}}(E, F)_{\pi}$ est stable
+par les petites limites inductives représentables dans $F$, et, si $F$ est
+$\pi$-accessible, par les limites de type $I$ avec $\mathrm{card}\,I
+\leqslant \pi$ — et une \emph{réciproque partielle} : une catégorie $E$
+satisfaisant $L$, stable par noyaux de doubles flèches à foncteur $\mathrm{Ker}$
+accessible et par produits fibrés, et admettant une petite sous-catégorie
+génératrice par épimorphismes stricts universels, est accessible. D'où le
+\textbf{Corollaire} : \emph{une catégorie $E$ stable par petites limites
+inductives est accessible si et seulement si elle admet une petite
+sous-catégorie génératrice par épimorphismes stricts universels et si le
+foncteur noyau sur ses doubles flèches est accessible.} Exemples : les
+topos ; toute catégorie à limites filtrantes exactes et petit générateur.
+Contre-exemples : $(\mathrm{Ens})^{\circ}$ et $(\mathrm{Ab})^{\circ}$ ne
+sont pas accessibles, parce que leurs foncteurs noyau ne commutent pas
+aux limites inductives grandes devant $\pi$ (une limite inductive
+d'épimorphismes n'est pas nécessairement un épimorphisme dans ces
+catégories).\footnote{L'argument est le bon, et le fait est vrai : une
+catégorie accessible complète est localement présentable, et $(\mathrm{Ens})$
+ne peut être à la fois localement présentable et co-localement
+présentable sans être un ensemble préordonné (Gabriel--Ulmer). Le
+manuscrit l'obtient directement.}
+
+\pagerange{56}{56}
+\subsection*{Foncteurs strictement générateurs}
+
+La page 56 est un énoncé complet, sous forme de liste, sur un foncteur
+$\varphi : \mathcal{C} \to E$ d'une petite catégorie. Il définit
+$\hat{\varphi} : E \to \widehat{\mathcal{C}}$, $X \mapsto \mathrm{Hom}_{E}
+(\varphi(-), X)$, et, si $E$ a des petites limites inductives, $\bar{\varphi}
+: \widehat{\mathcal{C}} \to E$, $F \mapsto \varinjlim_{\mathcal{C}_{/F}}
+\varphi$, adjoint à gauche de $\hat\varphi$. Sont équivalentes :
+\begin{enumerate}
+\item[a)] pour tout $X$, $\varinjlim_{\mathcal{C}_{/X}} \varphi(Y)
+\xrightarrow{\sim} X$ ;
+\item[b)] $\hat\varphi$ est pleinement fidèle ;
+\end{enumerate}
+et l'on dit alors que $\varphi$ est \emph{strictement générateur}.
+Conditions équivalentes sous hypothèses : b') si $E$ est cocomplète,
+$\bar\varphi$ est un foncteur de localisation ; c') si $E$ a les limites
+filtrantes et les $\mathcal{C}_{/X}$ sont filtrantes (par exemple
+$\mathcal{C}$ à limites finies et $\varphi$ exact à gauche), $\mathrm{Ind}
+(\mathcal{C}) \to E$ est une localisation ; c) si $\hat\varphi$ prend ses
+valeurs dans $\mathrm{Ind}(\mathcal{C})$, le foncteur ${}^{i}\varphi : E \to
+\mathrm{Ind}(\mathcal{C})$ est pleinement fidèle ; d) si $\varphi$ a un
+adjoint $\psi$, $\psi$ est pleinement fidèle ; e) si $\varphi$ est
+pleinement fidèle, $\varphi(\mathcal{C})$ engendre par épimorphismes
+stricts ; f) pour toute $F$ cocomplète, la restriction $\underline{\mathrm{Hom}}'
+(E, F) \to \underline{\mathrm{Hom}}(\mathcal{C}, F)$ des foncteurs
+cocontinus est pleinement fidèle ; g) si $\mathcal{C}$ a les limites
+inductives finies et $\varphi$ y commute et est pleinement fidèle, cette
+restriction identifie $\underline{\mathrm{Hom}}'(E, F)$ aux foncteurs
+$\mathcal{C} \to F$ commutant aux limites inductives finies ; h) si $E$ est
+un topos, $\mathcal{C}$ stable par limites finies et $\varphi$ exact à
+gauche, $\varphi$ définit $E$ comme \emph{sous-topos} de
+$\widehat{\mathcal{C}}$.\footnote{Un foncteur strictement générateur est ce
+qu'on appelle aujourd'hui un foncteur \emph{dense} ; $\hat\varphi$ est son
+nerf, $\bar\varphi$ sa réalisation. Le point h) est la version « site » :
+un topos muni d'une petite sous-catégorie dense stable par limites finies
+est un sous-topos du topos des préfaisceaux sur elle, avec pour inclusion
+le nerf et pour réflecteur exact à gauche la réalisation. Toutes ces
+équivalences sont correctes ; e) demande la stricte épimorphicité
+\emph{universelle} pour la réciproque, ce que la page 55 précise.}
+
+\pagerange{58}{58}
+\subsection*{Cocomplète à générateur dense : la question de l'accessibilité}
+
+La page 58 caractérise les catégories $E$ vérifiant l'une des conditions
+équivalentes : a) $E$ est cocomplète et admet une petite sous-catégorie
+pleine strictement génératrice ; a') $E$ est cocomplète et il existe
+$\varphi : \mathcal{C} \to E$ strictement générateur, $\mathcal{C}$
+petite ; a'') il existe une petite $\mathcal{C}$ et un foncteur pleinement
+fidèle $E \to \widehat{\mathcal{C}}$ admettant un adjoint à gauche. Dans une
+telle catégorie tout foncteur contravariant vers $(\mathrm{Ens})$ qui
+transforme les petites limites inductives en limites projectives est
+représentable, donc $E$ a les petites limites projectives, et dans a'') le
+foncteur $E \to \widehat{\mathcal{C}}$ y commute ; si de plus $E$ est
+accessible, un foncteur $E \to \widehat{\mathcal{C}}$ a un adjoint à gauche
+si et seulement s'il est accessible et commute aux petites limites
+projectives.\footnote{L'assertion de représentabilité est vraie, mais pour
+une raison qui n'est pas sur la page : une catégorie cocomplète à petite
+sous-catégorie dense est \emph{totale} (Street--Walters 1978, Kelly 1986),
+et une catégorie totale est « compacte » au sens d'Isbell, i.e. y
+représente tout foncteur $E^{\circ} \to (\mathrm{Ens})$ transformant les
+colimites en limites. La page l'énonce entre crochets, comme un fait
+connu.} La \emph{Question} : une telle catégorie est-elle accessible ? Il
+faut et suffit que $E \to \widehat{\mathcal{C}}$ soit accessible, i.e. que
+$E$ soit stable dans $\widehat{\mathcal{C}}$ par les limites filtrantes
+grandes devant un cardinal $\pi$. La marge propose $(\mathrm{Ens})^{\circ}$
+comme contre-exemple.\footnote{Que $(\mathrm{Ens})^{\circ}$ ne soit pas
+accessible est acquis (page 55). Qu'elle satisfasse a), i.e. que $(\mathrm{Ens})$
+ait une petite sous-catégorie \emph{codense}, dépend de considérations de
+théorie des ensembles (existence de cardinaux mesurables) que la page ne
+soulève pas ; le contre-exemple est donc conditionnel, et la question,
+sous la forme « a) implique-t-il accessible ? », a une réponse négative
+que ce contre-exemple ne suffit pas à établir.} Suivent les \emph{exemples}
+qui motivent le tout — a) les topos et leurs opposés, b) $T(\mathrm{Ens})$
+pour $T$ une structure algébrique définissable par petites limites
+projectives, c) $T(\mathcal{C})$ pour $\mathcal{C}$ accessible — et deux
+\emph{conséquences} : un morphisme de structures $T \to T'$ donne un
+foncteur accessible $T(\mathcal{C}) \to T'(\mathcal{C})$ commutant aux
+petites limites projectives, qui a donc un adjoint à gauche (\emph{les
+structures $T'$-$T$-libres}) ; et un foncteur accessible $\mathcal{C} \to
+\mathcal{C}'$ commutant aux limites donne de même $T(\mathcal{C}) \to
+T(\mathcal{C}')$ avec adjoint à gauche. À prouver, enfin : pour
+$\mathcal{C}$, $\mathcal{C}'$ accessibles, la catégorie
+$\underline{\mathrm{Hom}}^{*}(\mathcal{C}^{\circ} \times \mathcal{C}'^{\circ},
+\mathrm{Ens})$ des bifoncteurs commutant aux limites en chaque variable
+est accessible, et c'est $T_{\mathcal{C}^{\circ}}T_{\mathcal{C}'^{\circ}}
+(\mathcal{D}) \simeq T_{\mathcal{C}'^{\circ}}T_{\mathcal{C}^{\circ}}(\mathcal{D})$,
+théorie « définie par $(\mathcal{C} \times \mathcal{C}')^{\circ}$ »,
+universelle pour les couplages commutant aux limites en chaque
+argument.\footnote{C'est le produit tensoriel de théories, et sa
+commutativité ; la première conséquence est le théorème d'existence des
+foncteurs « libres » entre catégories d'algèbres (Gabriel--Ulmer, et déjà
+Freyd 1964 par le théorème du foncteur adjoint). Le point b) des
+exemples — $T(\mathrm{Ens})$ est accessible pour $T$ définie par petites
+limites — est l'énoncé qui fait de toute catégorie de modèles d'une
+esquisse à limites une catégorie localement présentable.}
+
+\pagerange{59}{61}
+\subsection*{Le lemme sur $\mathrm{Ind}_{\pi}(\mathcal{C})$, et la caractérisation}
+
+\textbf{Lemme.} \emph{Soient $\mathcal{C}$ petite, $\pi$ un cardinal, $E =
+\mathrm{Ind}_{\pi}(\mathcal{C})$. Alors (i) $E$ satisfait $L_{\pi}$, et
+l'inclusion $E \to \mathrm{Ind}(\mathcal{C})$ est $\pi$-accessible ; (ii) les
+objets $\pi$-accessibles de $E$ sont les facteurs directs d'objets de
+$\mathcal{C}$, de sorte que $E_{\pi}$ est l'enveloppe karoubienne de
+$\mathcal{C}$, et $E_{\pi} = \mathcal{C}$ si $\mathcal{C}$ est karoubienne ;
+(iii) $\mathcal{C}$ est strictement génératrice dans $E$ ; (iv) pour tout
+$X$, $\mathcal{C}_{/X}$ est filtrante et grande devant $\pi$.}
+\emph{Réciproquement, une $\mathcal{U}$-catégorie $E$ est équivalente à un
+$\mathrm{Ind}_{\pi}(\mathcal{C})$ dès que : (i) $E$ satisfait $L_{\pi}$ ;
+(ii) $E_{\pi}$ est petite et strictement génératrice ; (iii) pour tout $X$,
+$E_{\pi/X}$ est filtrante et grande devant $\pi$ — et (iii) résulte de
+(i), (ii) si $E$ est cocomplète.}
+
+Puis les \emph{filtrations cardinales} : pour $\pi' \geqslant \pi$,
+$\mathrm{Fil}^{\pi'}(E) = \mathrm{Ind}_{\pi}(\mathcal{C})_{\pi'}$ est formé
+des ind-objets indexés par des $I$ grands devant $\pi$ et admettant une
+partie cofinale de cardinal $\leqslant \pi'$ ; a) $\mathrm{Fil}^{\pi'}(E)
+\subset E_{\pi'}$ ; b) si $\pi' = 2^{c}$ avec $c \geqslant \pi$, il y a
+égalité ; c) si $E$ est cocomplète, les $\mathrm{Fil}^{\pi'}(E)$ forment
+une filtration cardinale ; d) $E \simeq \mathrm{Ind}(E_{\pi'})$. La page 60
+démontre l'axiome c) des filtrations cardinales pour les
+$\mathrm{Fil}^{\pi'}$ (tout $X = \varinjlim_{I} X_{i}$ est la limite des
+$X_{I'} = \varinjlim_{I'} X_{i}$ sur les parties filtrantes $I' \subset I$
+de cardinal $\leqslant \pi'$, l'ensemble $J$ de ces parties étant filtrant
+et grand devant $\pi'$), et la page 61, la démonstration du
+\textbf{Corollaire} : \emph{une $\mathcal{U}$-catégorie cocomplète $E$ est
+équivalente à un $\mathrm{Ind}_{\pi}(\mathcal{C})$, $\mathcal{C}$ petite, si
+et seulement si elle admet une petite sous-catégorie strictement
+génératrice formée d'objets accessibles. « Ce sont ces $E$ qu'il faudrait
+appeler accessibles. »}\footnote{Ce sont, exactement, les catégories
+\emph{localement présentables} de Gabriel et Ulmer, et l'énoncé est leur
+théorème de caractérisation ; la démonstration de la page 61 (tout objet
+$\pi$-accessible est facteur direct d'une $\varinjlim_{I} Y_{i}$ de
+cardinal $\leqslant \pi$, puis $F^{\pi} = E_{\pi}$ par SGA 4 I 9.9) est
+celle qui deviendra standard. La dernière phrase, sur le nom, dit que
+l'exposé I de SGA 4 avait pris « accessible » pour une notion plus faible ;
+la terminologie moderne a suivi le manuscrit sans le savoir, en réservant
+« accessible » au cas non cocomplet (Makkai--Paré) et « localement
+présentable » à celui-ci.}
+\pagerange{62}{68}
+\section*{Compléments : théories sur $\Delta$, et le passage aux préfaisceaux (pages 62 à 68)}
+
+Les feuillets « Compléments » (titre de sa main, page 62) reprennent le
+projet des pages 17 à 22 au niveau de généralité des pages 26 à 31 : $\Delta$
+est une 2-catégorie de catégories à limites de type $d = (d', d'')$, une
+\emph{théorie} sur $\Delta$ est un 2-foncteur $T : \Delta \to \mathrm{Cat}$,
+elle est \emph{2-représentable} s'il existe $R \in \mathrm{Ob}\,\Delta$ avec
+$T(C) \simeq \underline{\mathrm{Hom}}_{\Delta}(R, C)$, et $T_{R}$ désigne la
+théorie représentée par $R$.\footnote{La définition précise — une théorie
+est une catégorie 2-cofibrée sur $\Delta$ — est donnée page 83 ; nous
+l'utilisons dès ici. Dans toute la suite « $R$ représente $T$ » signifie
+cela, et « la catégorie classifiante » de $T$ désigne $R$, ce que la page
+78 nomme ainsi et la page 111 « catégorie modulaire ».}
+
+\pagerange{62}{63}
+\subsection*{Caractériser les familles d'objets de base}
+
+\emph{Problème (1).} Pour $R \in \mathrm{Ob}\,\Delta$ et $I \to R$ une famille
+d'objets, caractériser la situation où $I$ est une famille d'objets de base
+pour une théorie \emph{algébrique} $T_{R}$. La réponse constructive : $R$
+est l'aboutissement d'une suite transfinie $(R_{\alpha})$ de catégories sur
+$R$, pseudo-système inductif dans $\Delta$, avec $R_{0} = I$, $R_{\alpha+1}$
+déduit de $R_{\alpha}$ soit en rendant inversible un petit ensemble de
+flèches, soit en égalisant des couples de flèches, soit en ajoutant un
+petit ensemble de flèches, et $R_{\alpha} = \varinjlim_{\beta < \alpha}
+R_{\beta}$ aux ordinaux limites. Deux \emph{N.B.} précisent : (1) la
+question ne se pose vraiment que si $(d', d'')$ n'est pas petit, mais même
+alors la construction transfinie a un sens, pourvu qu'on admette dans la
+définition récurrente des limites indexées par des ensembles bien
+ordonnés ; (2) si $\widetilde{I}$ est la petite sous-catégorie pleine de $R$
+engendrée par $I$ et par les sources et buts des flèches ajoutées, il est
+plausible que $\underline{\mathrm{Hom}}_{\Delta}(R, C) \to
+\underline{\mathrm{Hom}}_{\mathrm{Cat}}(\widetilde{I}, C) = T_{\widetilde{I}}
+(C)$ soit pleinement fidèle, de sorte que $T_{R}$ se déduise de la théorie
+algébrique $T_{\widetilde{I}}$ « en rajoutant seulement des axiomes » —
+peut-être pas en une fois, mais par une construction transfinie. D'où deux
+énoncés candidats pour « $T_{R}$ est algébrique » : 1) $R$ se déduit de
+$\widetilde{J}$, $J$ petite, en rendant inversibles les flèches d'un
+ensemble $\Sigma$ et en égalisant les couples d'un ensemble $\Sigma'$ ;
+2) il existe un pseudo-système inductif transfini $(R_{\alpha})$ dans
+$\Delta$ avec $R_{0} = \widetilde{J}$, chaque pas rendant inversibles et
+égalisant de petits ensembles, et $R_{\alpha} = R$ pour $\alpha$ assez
+grand dans l'univers.\footnote{Les trois opérations sont celles de toute
+présentation d'une théorie : sortes (les objets de $I$), opérations (les
+flèches ajoutées), axiomes (égalités et inversibilités, ces dernières
+codant les conditions d'exactitude par le dédoublement de la page 31).
+L'énoncé 1) « en une fois » sera établi pour $\Delta$ à limites de type
+$d'$ petit aux pages 74 à 76 (le « Cor Main ») ; l'énoncé 2) est la
+définition que les pages 81 à 87 adopteront.}
+
+\pagerange{63}{64}
+\subsection*{Conditions intrinsèques, conditions à la Schanuel, changement de $\Delta$}
+
+\emph{Problème (2).} Conditionner les théories algébriques par des
+propriétés intrinsèques plutôt que par la constructibilité. La seule
+condition nécessaire visible : $T$ commute aux 2-limites projectives de
+$\Delta$, en particulier transforme les foncteurs pleinement fidèles
+(resp. fidèles) en foncteurs pleinement fidèles (resp. fidèles), et
+$T(\underline{\mathrm{Hom}}_{\mathrm{Cat}}(J, C)) \simeq \underline{\mathrm{Hom}}_{
+\mathrm{Cat}}(J, T(C))$ ; « probablement pas suffisante ».\footnote{La page
+écrit le membre de gauche sans $T$ ; la formule complète est celle de la
+page 65, encadrée. La question de caractériser intrinsèquement les
+2-foncteurs représentables est celle que la théorie des esquisses résout
+par la notion d'\emph{accessibilité} du foncteur ; le manuscrit ne dispose
+que de la commutation aux 2-limites, qui ne suffit pas en effet.}
+
+\emph{Problème (3).} Conditions d'exactitude \emph{généralisées}, « comme
+suggérées par Schanuel » : on se donne $\rho \to \sigma$ dans $R$ — un
+morphisme entre petites catégories de $\Delta$ — et l'on demande sur $C$
+que $\underline{\mathrm{Hom}}_{\Delta}(\sigma, C) \to \underline{\mathrm{Hom}}
+_{\Delta}(\rho, C)$ soit une équivalence, ou pleinement fidèle, ou fidèle.
+Cela inclut l'égalisation de flèches, et les remarques sur l'existence
+des limites restent valables.\footnote{C'est la forme d) de la typologie
+des pages 10 à 14, désormais attribuée : Schanuel, dont l'idée d'imposer
+la bijectivité de $\mathrm{Hom}(\sigma, -) \to \mathrm{Hom}(\rho, -)$ est
+la notion d'\emph{orthogonalité} de la théorie ultérieure (Freyd--Kelly
+1972). C'est la seule attribution d'idée du dossier, avec Lazard et
+Lawvere.}
+
+\emph{Problème (4).} Changement de $\Delta \subset \Delta'$. Le diagramme de
+la page 64 place les théories $\mathrm{Th}_{\Delta}$, les théories
+algébriques $\mathrm{Thal}_{\Delta}$ et les catégories $\Delta_{\mathrm{al}}$
+qui les représentent, avec la restriction $\mathrm{Th}_{\Delta'} \to
+\mathrm{Th}_{\Delta}$ en haut et la $\Delta'$-enveloppe $\rho_{\Delta',
+\Delta} : \Delta \to \Delta'$ en bas, les verticales étant les
+2-équivalences $\mathrm{Thal} \simeq \Delta_{\mathrm{al}}$ :
+
+\begin{tikzcd}[column sep=small, row sep=small]
+\mathrm{Th}_{\Delta'} \arrow[rr, "\text{restriction}"] \arrow[d] & & \mathrm{Th}_{\Delta} \arrow[d] \\
+\mathrm{Thal}_{\Delta'} \arrow[rr, "\text{restr.}"] \arrow[d, no head, "\wr" description] & & \mathrm{Thal}_{\Delta} \arrow[d, no head, "\wr" description] \\
+\Delta'_{\mathrm{al}} \arrow[rr] & & \Delta_{\mathrm{al}}
+\end{tikzcd}
+
+La flèche du bas est l'enveloppe $\rho_{\Delta',\Delta} : \Delta' \to
+\Delta$, et elle va \emph{dans le même sens} que la restriction : si $T'$
+est représentée par $R' \in \Delta'$, sa restriction à $\Delta$ est
+représentée par la $\Delta$-enveloppe de $R'$, puisque
+$\underline{\mathrm{Hom}}_{\Delta'}(R', C) \simeq \underline{\mathrm{Hom}}_{\Delta}
+(\rho(R'), C)$ pour $C \in \mathrm{Ob}\,\Delta$. Le cube dessiné à droite
+est le même diagramme avec les inclusions $\mathrm{Thal} \subset \mathrm{Th}$
+et $\Delta_{\mathrm{al}} \subset \Delta$ en profondeur.\footnote{La page 64
+ne comporte que le diagramme, son cube, et la ligne « 2-foncteur d'où
+$\Delta'$-enveloppe, défini ainsi : $\Delta' \to \Delta$,
+$\rho_{\Delta',\Delta}$ ». Ici $\Delta \subset \Delta'$ signifie que
+$\Delta$ exige plus de limites que $\Delta'$, comme $\Delta_{1} \subset
+\Delta_{0}$ page 74. Le contenu de la question — quand la restriction
+est-elle pleinement fidèle, quelle est son image — est donné aux pages 77
+et 78 pour $\Delta_{1} \subset \Delta_{0}$ et repris page 102
+($\lambda$-variable).}
+
+\pagerange{65}{65}
+\subsection*{Limites dans $T(C)$, et le carré 2-cartésien}
+
+\textbf{Proposition.} \emph{Soit $T = T_{R}$ 2-représentable, et $\delta$ un
+type de diagrammes tel que a) les limites projectives de type $\delta$
+existent dans $C$, b) elles y commutent aux limites inductives de type
+$d''$. Alors les limites projectives de type $\delta$ existent dans $T(C)
+\simeq \underline{\mathrm{Hom}}_{\Delta}(R, C)$ et se calculent « argument
+par argument » : les foncteurs construction $r_{c} : T(C) \to C$, $\xi
+\mapsto \xi(c)$, y commutent. Un morphisme de théories $T \to T'$ induit
+$T(C) \to T'(C)$ commutant à ces limites, et un $\Delta$-foncteur $C \to C'$
+vers une $C'$ satisfaisant les mêmes hypothèses induit $T(C) \to T(C')$ de
+même.}
+
+La preuve est celle qu'on attend : une limite de type $\delta$ de
+foncteurs $R \to C$ se calcule dans $\underline{\mathrm{Hom}}(R, C)$
+argument par argument, et le foncteur limite commute aux limites de type
+$d'$ (toujours) et aux limites inductives de type $d''$ (par b)), donc reste
+un $\Delta$-foncteur. Conséquences : pour $J$ petite,
+$\underline{\mathrm{Hom}}_{\mathrm{Cat}}(J, C)$ est dans $\Delta$ et
+\[
+\boxed{\ T_{R}\bigl(\underline{\mathrm{Hom}}_{\mathrm{Cat}}(J, C)\bigr)
+\simeq \underline{\mathrm{Hom}}_{\mathrm{Cat}}\bigl(J, T_{R}(C)\bigr)\ } ;
+\]
+en particulier, si $(\mathrm{Ens}) \in \mathrm{Ob}\,\Delta$, avec $J^{\circ}$ :
+\[
+T_{R}(\widehat{J}) \simeq \underline{\mathrm{Hom}}(J^{\circ}, T_{R}(\mathrm{Ens})).
+\]
+Si $C \to C'$ est un $\Delta$-foncteur pleinement fidèle (resp. fidèle),
+$T(C) \to T(C')$ l'est aussi ; et si $T \to T'$ est associé à $R' \to R$
+« $\Delta$-générateur » — la sous-catégorie pleine de $R$ dans $\Delta$
+engendrée par l'image de $R'$ est $R$ —, alors le carré
+
+\begin{tikzcd}
+T(C) \arrow[r, hook] \arrow[d] & T(C') \arrow[d] \\
+T'(C) \arrow[r, hook] & T'(C')
+\end{tikzcd}
+
+est 2-cartésien : une $T$-structure sur $C'$ dont la $T'$-structure
+sous-jacente provient de $C$ provient de $C$.\footnote{Le cas
+particulier annoncé page 66 — $T' = \tau^{I}$, la structure vide sur $I$
+objets — n'est pas écrit ; c'est le carré (8.2.3) de la page 104, et la
+raison en est donnée là : un $\Delta$-foncteur $R \to C'$ dont les valeurs
+sur une famille $\Delta$-génératrice sont dans $C$ est à valeurs dans $C$,
+puisque $C \subset C'$ est stable par les limites en jeu. La proposition
+sur les limites dans $T(C)$ est la remarque, aujourd'hui banale, que la
+catégorie des modèles d'une théorie à limites dans $C$ a les limites que
+$C$ a, calculées sur les objets sous-jacents ; la condition b) est ce qui
+la rend vraie pour une théorie à limites \emph{inductives} aussi.}
+
+\pagerange{67}{68}
+\subsection*{Théories définies par limites projectives : $R^{\circ} \subset S \subset \widehat{R^{\circ}}$}
+
+Le point (4), $d'' = \emptyset$ — les structures définies seulement par des
+limites projectives —, réunit les « faits particuliers » qui gouverneront
+la suite du dossier. Dans ce cas :
+
+$1^{\circ}$) les $T(C)$ ont toutes les limites projectives que $C$ a, et
+tous les foncteurs $T(C) \to T(C')$, $T(C) \to T'(C)$, $T(C) \to C$ y
+commutent ;
+
+$2^{\circ}$) $C \to \widehat{C}$ est un $\Delta$-foncteur, donc, si
+$(\mathrm{Ens}) \in \mathrm{Ob}\,\Delta$ et $T = T_{R}$,
+\[
+T_{R}(C) \longrightarrow T_{R}(\widehat{C}) \simeq
+\underline{\mathrm{Hom}}_{\mathrm{Cat}}(C^{\circ}, S), \qquad S = T_{R}(\mathrm{Ens}),
+\]
+est pleinement fidèle et identifie $T_{R}(C)$ à la sous-catégorie pleine
+des $\varphi : C^{\circ} \to S$ tels que, pour toute construction $r \in R$
+et le foncteur $\tilde{r} : S \to (\mathrm{Ens})$ qu'elle définit, $\tilde{r}
+\circ \varphi : C^{\circ} \to (\mathrm{Ens})$ soit représentable ; et il
+suffit de l'exiger pour une famille $(r_{i})$ qui $\Delta$-engendre $R$,
+i.e. le carré
+
+\begin{tikzcd}[column sep=small]
+T(C) \arrow[r] \arrow[d] & \underline{\mathrm{Hom}}_{\mathrm{Cat}}(C^{\circ}, S) \arrow[d, "\varphi \mapsto (\tilde{r}_{i} \circ \varphi)"] \\
+C^{I} \arrow[r] & \underline{\mathrm{Hom}}_{\mathrm{Cat}}(C^{\circ}, (\mathrm{Ens}))^{I}
+\end{tikzcd}
+
+est 2-cartésien. \emph{Donc $T$ est connu, à équivalence près, quand on
+connaît $S$ et les $\tilde{r}_{i} : S \to (\mathrm{Ens})$}, ou, de façon plus
+intrinsèque, l'image de $R$ dans $\underline{\mathrm{Hom}}(S, \mathrm{Ens}) =
+\widehat{S^{\circ}}$.\footnote{C'est le théorème par lequel une théorie à
+limites projectives est déterminée par sa catégorie de modèles
+ensemblistes $S$ : un modèle dans $C$ est un foncteur $C^{\circ} \to S$
+« représentable en chaque construction ». La version pour les limites
+finies est la dualité de Gabriel--Ulmer, et c'est la forme que la page 72
+lui donnera ; celle-ci, pour $d'$ quelconque, ne demande que le
+plongement de Yoneda et l'échange des limites.}
+
+$3^{\circ}$) $S \simeq \underline{\mathrm{Hom}}_{\Delta}(R, \mathrm{Ens})
+\subset \widehat{R^{\circ}}$, et cette sous-catégorie \emph{contient}
+$R^{\circ}$, parce que les foncteurs représentables covariants $\mathrm{Hom}
+(r, -)$ commutent aux limites projectives :
+\[
+\boxed{\ R^{\circ} \xrightarrow{\ \partial\ } S\ }, \qquad
+\tilde{r} = \mathrm{Hom}_{S}(\partial r, -) : S \to (\mathrm{Ens}),
+\]
+le foncteur associé à la construction $r$ étant celui que $\partial r$
+représente \emph{dans} $S$. Ainsi $R$ est connu quand on connaît $S$ et
+l'image de $R$ dans $\widehat{S^{\circ}}$, car $R \to \widehat{S^{\circ}}$
+est le composé de deux foncteurs pleinement fidèles $R \xrightarrow{
+\partial^{\circ}} S^{\circ} \to \widehat{S^{\circ}}$. La sous-catégorie
+pleine $\Sigma \approx R^{\circ}$ de $S$ se décrit intrinsèquement : elle
+est formée des $\varphi \in \mathrm{Ob}\,S$ tels que, pour tout $C \in
+\mathrm{Ob}\,\Delta$ et tout $\xi \in T(C)$ définissant $\tilde\xi :
+C^{\circ} \to S$, le foncteur $x \mapsto \mathrm{Hom}_{S}(\varphi,
+\tilde\xi(x))$ soit représentable ; $\Sigma$ est stable dans $S$ par
+limites \emph{inductives} de type $d'$, et il y a une équivalence
+explicite $\Sigma^{\circ} \simeq R$.\footnote{Que $R^{\circ} \subset \Sigma$
+est clair : pour $\varphi = \partial r$, $\mathrm{Hom}_{S}(\partial r,
+\tilde\xi(x)) = \tilde\xi(x)(r) = \mathrm{Hom}_{C}(x, \xi(r))$ est
+représenté par $\xi(r)$. L'inclusion inverse est affirmée sans
+démonstration, et le point $4^{\circ}$), qui l'abordait, s'arrête page 68
+après trois lignes barrées. Pour $d'$ = les diagrammes finis, la page 77
+la démontrera par une autre voie : $\Sigma$ est alors la sous-catégorie des
+objets de présentation finie de $S$. La page 106 reprendra la description
+mot pour mot. La stabilité de $\Sigma$ par limites inductives de type $d'$
+vient de ce que $R$ a les limites projectives de type $d'$ et que $\partial$
+les transforme en limites inductives de $S$ — ce qui se vérifie sur les
+Hom : $\mathrm{Hom}_{S}(\partial(\varprojlim r_{i}), F) = F(\varprojlim
+r_{i}) = \varprojlim F(r_{i})$ puisque $F$ commute aux limites.}
+
+\pagerange{69}{80}
+\section*{Exemples : les théories définies par des limites (pages 69 à 80)}
+
+\pagerange{69}{69}
+\subsection*{Trois cas triviaux}
+
+(1) $d' = d'' = \emptyset$, $\Delta = \mathrm{Cat}$ : les problèmes 1 et 2
+ont des solutions évidentes, les théories algébriques sont exactement les
+théories représentées par des \emph{petites} catégories, et les $I \to R$
+basiques sont les applications surjectives sur les objets. (2) Avec une
+condition d'exactitude, par exemple $\Delta$ = les groupoïdes : le
+problème 1 est le groupoïde fondamental d'une catégorie (rendre toutes les
+flèches inversibles), le problème 2 est trivial, et le reste comme en (1) ;
+la condition s'écrit avec $\rho = [a \xrightarrow{u} b]$, « on rend $u$
+inversible ». (3) $\Delta$ = les catégories (pré)ordonnées : $\rho = [a
+\rightrightarrows b]$, « on rend $u$ égal à $v$ ».\footnote{Les deux
+exemples montrent que « condition d'exactitude » couvre, dans le
+vocabulaire du dossier, toute condition de la forme « $\mathrm{Hom}(\sigma,
+C) \to \mathrm{Hom}(\rho, C)$ est une équivalence » ; les groupoïdes et les
+préordres sont les deux cas extrêmes.}
+
+\pagerange{70}{73}
+\subsection*{Toutes les limites projectives : $\Delta_{1}$}
+
+Le cas $d'$ = tous les petits diagrammes, $d'' = \emptyset$, sans condition
+d'exactitude ; notons $\Delta_{1}$ cette 2-catégorie.\footnote{La page 70
+écrit « $d''$ = tous les petits diagrammes, $d'' = \emptyset$ », lapsus
+pour $d'$ ; la page 74 nomme $\Delta_{1}$ cette 2-catégorie, et nous
+adoptons ce nom dès ici. Les objets de $\Delta_{1}$ sont les catégories
+complètes, ses flèches les foncteurs continus.}
+
+\emph{Problème 1.} Pour $I$ petite et $C \in \mathrm{Ob}\,\Delta_{1}$,
+\[
+\underline{\mathrm{Hom}}(I, C) \simeq \underline{\mathrm{Hom}}(I^{\circ},
+C^{\circ})^{\circ} \simeq \underline{\mathrm{Hom}}_{\Delta_{1}^{\circ}}
+(\widehat{I^{\circ}}, C^{\circ})^{\circ} \simeq \underline{\mathrm{Hom}}_{
+\Delta_{1}}(\widehat{I^{\circ}}{}^{\circ}, C),
+\]
+donc la $\Delta_{1}$-enveloppe de $I$ est $\widetilde{I} =
+\widehat{I^{\circ}}{}^{\circ}$, l'opposé d'un topos de préfaisceaux, et $I
+\to \widetilde{I}$ fait des objets de $I$ une famille
+\emph{cogénératrice}.\footnote{C'est la propriété universelle du topos de
+préfaisceaux $\widehat{I^{\circ}}$ comme complétion libre de $I^{\circ}$ par
+les petites limites inductives, dualisée. L'enveloppe n'est pas petite, et
+c'est la raison de la restriction « $d$ petit » du théorème des pages 3
+et 27.}
+
+\emph{Problème 2.} $C \in \mathrm{Ob}\,\Delta_{1}$, $\Sigma \subset \mathrm{Fl}
+\,C$ petit : rendre inversibles les flèches de $\Sigma$ dans $\Delta_{1}$.
+On peut supposer que $\Sigma$ contient les isomorphismes, est stable par
+composition, et vérifie « $vu \in \Sigma$, $v \in \Sigma \Rightarrow u \in
+\Sigma$ » ; alors $\Sigma$ admet un calcul de fractions, les limites
+projectives de $C$ existent dans $C\Sigma^{-1}$ et $C \to C\Sigma^{-1}$ y
+commute, pourvu qu'on suppose aussi $\Sigma$ stable par produits infinis de
+morphismes, ce qui règle les produits ; reste à vérifier que $C\Sigma^{-1}$
+est une $\mathcal{U}$-catégorie. Si $I$ est cogénératrice par
+monomorphismes stricts dans $C$, elle l'est encore dans $C\Sigma^{-1}$ ; et
+la limite inductive $R$ dans $\Delta_{1}$ d'un pseudo-système filtrant
+$(R_{\alpha})$ à cogénérateurs $I \to R_{\alpha}$ admet encore $I$ pour
+cogénérateur, parce que $R$ s'obtient de $\varinjlim^{\mathrm{Cat}}
+R_{\alpha}$ en rendant inversibles des flèches — « mais attention : le fait
+d'être strictement cogénérateur n'est pas transitif ».
+
+\textbf{Théorème.} \emph{Les théories algébriques pour $\Delta_{1}$ sont
+celles qui sont 2-représentables par des $R \in \mathrm{Ob}\,\Delta_{1}$
+admettant une petite famille strictement cogénératrice. Pour que $\rho : I
+\to R$ soit basique, il faut et suffit que ses images soient strictement
+$\Delta_{1}$-cogénératrices.}
+
+La nécessité est claire par ce qui précède ; pour la suffisance, soit
+$I'$ la sous-catégorie pleine de $R$ d'objets $\rho(I)$ : $T_{\widetilde{I}'}$
+est algébrique de base $I$, et $\widetilde{I}' \to R$ est surjectif sur
+les objets (essentiellement) et sur les Hom, de sorte que $R$ se déduit
+de $\widetilde{I}'$ en rendant inversibles certaines flèches. Les
+\emph{Remarques} : (1) la construction se fait en quatre étapes, objets de
+base, flèches, égalités, inversibilités, et 3\textsuperscript{o}--4\textsuperscript{o}
+se condensent en une catégorie de fractions ; (2) les quotients $R'$ de $R$
+dans $\Delta_{1}$ par inversion de flèches correspondent bijectivement aux
+ensembles $\Sigma$ de flèches stables par composition, par changement de
+base, contenant les isomorphismes, et stables par produits quelconques ;
+(3) si $R$ a une petite famille cogénératrice, alors
+\[
+\underline{\mathrm{Hom}}_{\Delta_{1}}(R, \mathrm{Ens}) \simeq R^{\circ} :
+\]
+les foncteurs $R \to (\mathrm{Ens})$ commutant aux limites sont les
+représentables ; donc, pour $T = T_{R}$ et $S = T(\mathrm{Ens})$, on a $R =
+S^{\circ}$.\footnote{C'est le théorème du foncteur adjoint spécial, qui
+demande, outre la complétude et la petite famille cogénératrice, que $R$
+soit \emph{bien puissante} (que les sous-objets d'un objet forment un
+ensemble) — hypothèse que la page ne mentionne pas et sans laquelle
+l'énoncé est faux. Elle est satisfaite dans tous les cas que le dossier
+considère : $R = S^{\circ}$ avec $S$ localement présentable ou $S$ un
+topos. La remarque (2) est correcte telle quelle, et c'est la description
+des localisations d'une catégorie complète par ses « classes de flèches
+saturées ».}
+
+\textbf{Corollaire.} \emph{Le 2-foncteur $T \mapsto T(\mathrm{Ens})$ est une
+2-équivalence entre les théories définissables par limites projectives
+quelconques, sans axiome d'exactitude, et les $\mathcal{U}$-catégories $S$
+possédant les petites limites projectives et une petite famille d'objets
+génératrice par épimorphismes stricts, i.e. telle que $S \to
+\widehat{I^{\circ}}$ soit conservatif. La donnée d'une base de $T$ équivaut
+à celle d'une famille cogénératrice de $S$. Pour tout $C \in \mathrm{Ob}\,
+\Delta_{1}$,}
+\[
+T(C) \simeq \underline{\mathrm{Hom}}_{\Delta_{1}}(S^{\circ}, C),
+\]
+\emph{les foncteurs $S^{\circ} \to C$ continus s'interprétant comme les
+foncteurs $S^{\circ} \times C^{\circ} \to (\mathrm{Ens})$ représentables en
+chaque argument, ou comme les foncteurs $C^{\circ} \to S$ tels que pour tout
+$Y \in S$ le composé avec $\mathrm{Hom}_{S}(Y, -)$ soit
+représentable.}\footnote{La page écrit « $S$ avec $\varprojlim$ quelc. » ;
+mais $S = R^{\circ}$ est l'opposée d'une catégorie \emph{complète}, donc
+$S$ est \emph{cocomplète}, et c'est la remarque (4) de la page 72 qui le
+dit aussitôt (« $R$ a aussi des $\varinjlim$ quelconques »). Les deux se
+concilient : $S = \underline{\mathrm{Hom}}_{\Delta_{1}}(R, \mathrm{Ens})$ a
+les limites projectives calculées argument par argument, et les limites
+inductives de $R$. « Génératrice par épimorphismes stricts » est la
+condition duale de « cogénératrice par monomorphismes stricts » du
+théorème ; avec la bonne puissance implicite, ce corollaire est le
+dictionnaire de la page 90 pour $\lambda$ = toutes les limites. Un
+exemple non trivial de telle $S$ : les espaces compacts, opposée des
+$C^{*}$-algèbres commutatives, qui n'est pas localement présentable —
+signe que ce cas $\Delta_{1}$ déborde le cadre des esquisses petites.}
+
+(5) Un foncteur $\varphi : R \to R'$ entre catégories complètes dont la
+source a une petite famille cogénératrice est un $\Delta_{1}$-foncteur
+si et seulement s'il admet un adjoint à gauche $\psi$ ; il est un
+« plongement », i.e. correspond à une sous-théorie pleine $T' = T_{R'}
+\subset T = T_{R}$, si et seulement si $\psi$ est pleinement fidèle. En
+termes de $S = R^{\circ}$ et $S' = R'^{\circ}$ : les sous-théories pleines
+de $T$ correspondent aux sous-catégories pleines $S' \subset S$, complètes,
+dont le foncteur d'inclusion $i = \varphi^{\circ}$ admet un adjoint à
+gauche $j = \psi^{\circ}$,
+\[
+\mathrm{Hom}_{S}(x, i(y')) \simeq \mathrm{Hom}_{S'}(jx, y') ;
+\]
+ce sont les sous-catégories \emph{réflexives}, et elles sont
+nécessairement stables par limites projectives dans $S$.\footnote{La page
+73 écrit « admettant des $\varprojlim$ quelconques (mais pas
+nécessairement stables par lesdites) » ; c'est inexact : le foncteur
+d'inclusion $i$, adjoint à droite, commute à toutes les limites
+projectives, de sorte que la limite dans $S'$ d'un diagramme de $S'$ est
+aussi sa limite dans $S$. Une sous-catégorie pleine réflexive est toujours
+stable par limites. Nous avons corrigé. La contravariance est celle du
+foncteur $R \mapsto T_{R}$ : à $\varphi : R \to R'$ correspond $T_{R'} \to
+T_{R}$, et $\varphi^{\circ} : S \to S'$ est le foncteur « structure libre »
+tandis que $\psi^{\circ} : S' \to S$ est le foncteur d'oubli.} Le passage
+$S' \to S$ « structure libre définie par une $S$-structure » n'a pas
+d'analogue pour $C$ quelconque : en général on ne peut définir de foncteur
+$T(C) \to T'(C)$ redonnant $j$ pour $C = \mathrm{Ens}$, sauf si $C$ est un
+topos et si $T$, $T'$ sont définies par limites finies. Enfin
+(\emph{N.B.}, page 73) : \emph{la 2-catégorie des théories algébriques pour
+$\Delta_{1}$ est 2-équivalente à celle des catégories $S$ possédant les
+petites limites projectives et une petite sous-catégorie strictement
+génératrice, avec pour morphismes les foncteurs commutant aux limites
+projectives}, un morphisme $T' \to T$ correspondant au foncteur d'oubli
+$T'(\mathrm{Ens}) \to T(\mathrm{Ens})$.\footnote{« Mais, en renversant les
+flèches pour les morphismes ? », demande la page. La réponse est non : à $T' \to T$
+correspond $S' \to S$ dans le même sens, le foncteur d'oubli. La
+2-équivalence est covariante sur ces morphismes et c'est
+$R \mapsto T_{R}$ qui est contravariant.}
+
+\pagerange{74}{76}
+\subsection*{Limites de type $d'$ : enveloppes et théorème}
+
+Le cas $d'$ quelconque, $d'' = \emptyset$, sans condition d'exactitude ;
+$d'_{0}$ = tous les diagrammes finis, $d'_{1}$ = tous les petits diagrammes,
+et $\Delta \supset \Delta_{0} \supset \Delta_{1}$ les 2-catégories
+correspondantes.\footnote{Ordre des inclusions : plus il y a de limites
+exigées, moins il y a de catégories. $\Delta_{0}$ est ainsi la 2-catégorie
+des catégories à limites finies de la page 17.}
+
+\emph{Problème 1.} La $\Delta$-enveloppe $\rho_{\Delta}(I)$ d'une petite
+catégorie $I$ : soit $\overline{I} = \widehat{I^{\circ}}{}^{\circ}$ sa
+$\Delta_{1}$-enveloppe, dans laquelle $I$ se plonge pleinement fidèlement,
+et $\widetilde{I}$ la plus petite sous-catégorie strictement pleine de
+$\overline{I}$ contenant $I$ et stable par limites projectives de type
+$d'$. Alors $\widetilde{I}$ est la $\Delta$-enveloppe. Il faut pour cela
+le \emph{problème 1'}, ou problème auxiliaire : pour $C \in \mathrm{Ob}\,
+\Delta$, le foncteur canonique de $C$ dans sa $\Delta \to \Delta_{1}$
+enveloppe $\rho(C)$ est pleinement fidèle. Or
+\[
+\rho(C) = \underline{\mathrm{Hom}}_{\Delta}(C, \mathrm{Ens})^{\circ} =
+T_{C}(\mathrm{Ens})^{\circ},
+\]
+le foncteur $C \to \rho(C)$ associant à tout objet le foncteur covariant
+qu'il représente — d'où la pleine fidélité, par Yoneda — et l'on vérifie
+la propriété universelle par $\underline{\mathrm{Hom}}_{\Delta_{1}}(\rho(C),
+D) \simeq \underline{\mathrm{Hom}}_{\Delta}(C, D)$. Alors les foncteurs
+$I \to C$ correspondent aux $\Delta_{1}$-foncteurs $\overline{\psi} :
+\overline{I} \to \rho(C)$ envoyant $I$ dans l'image essentielle de $C$, qui
+envoient $\widetilde{I}$ dans $C$, d'où la restriction
+$\underline{\mathrm{Hom}}_{\Delta}(\widetilde{I}, C) \to \underline{\mathrm{Hom}}
+(I, C)$ et son inverse.\footnote{La démonstration est celle des
+« complétions libres par une classe de limites » : plonger dans la
+complétion par toutes les limites et prendre la clôture. Elle est correcte
+sous la réserve, que la page fait, que $\widetilde{I}$ soit stable par les
+limites de type $d'$ ; la page 74 signale que si $d'$ n'est pas stable par
+sous-diagrammes il faut prendre la clôture « transfiniment au besoin ».
+L'identification $\rho(C) = \underline{\mathrm{Hom}}_{\Delta}(C,
+\mathrm{Ens})^{\circ}$ demande, comme en (3) ci-dessus, que $\rho(C)$ soit
+une $\mathcal{U}$-catégorie, ce qui est le cas pour $C$ petite.}
+
+\emph{Problème 2.} Pour $C \in \Delta$ et $\Sigma$ un ensemble de flèches
+(et de couples de flèches à égaliser), soit $\rho(C, \Sigma)$ la
+$\Delta_{1}$-catégorie de fractions de $\rho(C)$ définie par $\Sigma$, et
+$C'$ la plus petite $\Delta$-sous-catégorie strictement pleine de $\rho(C,
+\Sigma)$ contenant l'image de $C$, i.e. contenant $C\Sigma^{-1}$ ; alors
+$\underline{\mathrm{Hom}}_{\Delta,\Sigma}(C, D) \simeq \underline{\mathrm{Hom}}
+_{\Delta}(C', D)$, la pleine fidélité de la restriction résultant de ce
+que $C'$ se déduit de $C\Sigma^{-1}$ en ajoutant transfiniment des limites
+de type $d'$. \emph{N.B.} : dans les deux cas la catégorie résultante se
+déduit de $I$ (resp. $C\Sigma^{-1}$) en rajoutant des limites de type
+$d'$, d'où :
+
+\textbf{Théorème.} \emph{Les théories algébriques de type $\Delta$ sont
+celles qui sont 2-représentées par des $R \in \mathrm{Ob}\,\Delta$ ayant une
+petite sous-catégorie $d'$-génératrice, i.e. telle que $R$ soit la réunion
+d'une suite transfinie de sous-catégories strictement pleines déduites
+l'une de l'autre en rajoutant des limites de type $d'$. Un foncteur $I \to
+R$, $I$ discret, est basique si et seulement s'il est $d'$-cogénérateur.}
+
+La page 76 ramène le second énoncé au premier comme pour $\Delta_{1}$ :
+$I' \subset R$ la sous-catégorie pleine d'objets $I$, $T_{R} \to
+T_{\widetilde{I}'}$ pleinement fidèle, et si $d'$ satisfait aux conditions
+de stabilité on trouve un $\Delta$-foncteur pleinement fidèle et
+essentiellement surjectif $\widetilde{I}'\Sigma^{-1} \to R$, d'où le
+\textbf{Corollaire principal} : \emph{on peut construire les théories
+algébriques pour $\Delta$ en trois pas, comme pour $\Delta_{1}$ : une
+catégorie $I'$ ayant $I$ pour ensemble d'objets (pas $1^{\circ}$ et
+$2^{\circ}$), et une catégorie de fractions de $\widetilde{I}'$ (pas
+$3^{\circ}$)}, la conclusion valant par exemple si $d'$ est formé de
+diagrammes discrets stable par sous-diagrammes, ou de tous les diagrammes
+finis ; pour un $d'$ général « il semble qu'il faille une construction
+récurrente transfinie ». \emph{Question} : si $d'$ est petit, une $R$ à
+petite sous-catégorie $d'$-cogénératrice est petite.\footnote{C'est
+l'énoncé « toute théorie à limites de type $d'$ se présente en un pas par
+une esquisse » pour $d'$ petit, i.e. l'équivalence entre théories
+constructibles et esquisses petites, et la réponse à la question de la
+page 62. La \emph{Question} finale répond à la note de la page 3 sur la
+petitesse : si $d'$ est petit, la clôture transfinie d'une petite
+catégorie sous les limites de type $d'$ est petite, par le même argument
+d'ordinal $\omega$.}
+
+\pagerange{77}{78}
+\subsection*{Limites finies : $R$, $T$, $S$, $\Sigma$ se déterminent mutuellement}
+
+Le cas $d'$ = les diagrammes finis, $d'' = \emptyset$, sans condition
+d'exactitude, est celui de la page 17 et il est ici résolu complètement.
+Comme $d'$ est petit, les $R \in \mathrm{Ob}\,\Delta_{0}$ qui représentent
+des théories algébriques sont les catégories essentiellement petites à
+limites finies. Étant donnés
+\begin{quote}
+$T$ une théorie algébrique pour $\Delta_{0}$ ; \\
+$R \in \mathrm{Ob}\,\Delta_{0}$ qui la représente ; \\
+$S = T(\mathrm{Ens}) = \underline{\mathrm{Hom}}_{\mathrm{lex}}(R, \mathrm{Ens})$ ; \\
+$\Sigma \subset S$ la sous-catégorie pleine des structures représentables,
+\end{quote}
+tout se détermine mutuellement :
+\begin{align*}
+R \ \text{donne}\quad & T = T_{R} : C \mapsto \underline{\mathrm{Hom}}_{\mathrm{lex}}(R, C),
+\quad S = \underline{\mathrm{Hom}}_{\mathrm{lex}}(R, \mathrm{Ens}),
+\quad \Sigma \simeq R^{\circ} \subset S ; \\
+\Sigma \ \text{donne}\quad & R = \Sigma^{\circ},
+\quad T : C \mapsto \underline{\mathrm{Hom}}_{\mathrm{lex}}(\Sigma^{\circ}, C),
+\quad S = \underline{\mathrm{Hom}}_{\mathrm{lex}}(\Sigma^{\circ}, \mathrm{Ens}) \supset \Sigma ;
+\end{align*}
+et $S$ se déduit de $\Sigma$ par le
+
+\textbf{Lemme.} \emph{Le foncteur d'inclusion $\Sigma \to S$ induit une
+équivalence $\mathrm{Ind}(\Sigma) \xrightarrow{\ \approx\ } S$.}
+
+En effet $\Sigma \to S$ est universel pour les foncteurs exacts à gauche
+$\Sigma \to D$ vers une $D$ à limites inductives filtrantes ; or $\mathrm{Ind}
+(\Sigma)$ a les limites filtrantes et les limites projectives finies, $\Sigma
+\to \mathrm{Ind}(\Sigma)$ y commute (SGA 4 I 8.9.5), et les foncteurs
+exacts $\Sigma \to D$ correspondent aux foncteurs $\mathrm{Ind}(\Sigma) \to
+D$ commutant aux limites filtrantes et aux limites finies — la nécessité
+est triviale, et pour la suffisance $\mathrm{Ind}(\Sigma) \to \mathrm{Ind}(D)
+\to D$ est exact (SGA 4 I 8.9.8).
+
+\textbf{Corollaire.} \emph{Pour $X \in S$, on a $X \in \Sigma$ si et seulement
+si $\mathrm{Hom}_{S}(X, -)$ commute aux limites inductives filtrantes.}
+
+Nécessaire par construction des Hom dans $\mathrm{Ind}$ ; suffisant parce
+que $X = \varinjlim X_{i}$ avec $X_{i} \in \Sigma$, filtrante, et que
+l'identité de $X$ se factorise alors par un $X_{i}$, de sorte que $X$ est
+un facteur direct de $X_{i}$, donc dans $\Sigma$, qui est stable par
+noyaux.\footnote{« Donc stable (c'est un noyau) » : un facteur direct est
+le coégalisateur de l'identité et de l'idempotent, et $\Sigma = R^{\circ}$
+a les limites inductives finies parce que $R$ a les limites finies. Une
+catégorie à coégalisateurs est karoubienne ; il n'y a donc pas ici
+d'écart entre $R^{\circ}$ et son enveloppe karoubienne, contrairement à ce
+qui se produirait pour une esquisse à produits finis seulement (page 78,
+\emph{Question}). L'ensemble lemme + corollaire est la \emph{dualité de
+Gabriel--Ulmer} (1971) : les petites catégories à limites finies
+correspondent, par $R \mapsto \underline{\mathrm{Hom}}_{\mathrm{lex}}(R,
+\mathrm{Ens})$ et $S \mapsto (S_{\mathrm{pf}})^{\circ}$, aux catégories
+localement finiment présentables. Les renvois marginaux — SGA 4 I 8.7.5,
+8.9.5, 8.7.3, 8.9.8, 8.7.8 — disent d'où le manuscrit tire chaque pas.}
+
+\emph{Donc $\Sigma$ se reconstitue à partir de $S$ comme la sous-catégorie
+pleine des objets « de présentation finie »} :
+\begin{align*}
+S \ \text{donne}\quad & \Sigma = S_{\mathrm{pf}} \subset S, \quad R = \Sigma^{\circ},
+\quad T : C \mapsto \underline{\mathrm{Hom}}_{\mathrm{lex}}(S_{\mathrm{pf}}{}^{\circ}, C) ; \\
+T \ \text{donne}\quad & S = T(\mathrm{Ens}), \quad \Sigma = T(\mathrm{Ens})_{\mathrm{pf}},
+\quad R = \Sigma^{\circ}.
+\end{align*}
+
+\textbf{Corollaire.} \emph{Pour qu'une $\Delta_{1}$-théorie $T$ (par
+limites projectives quelconques) provienne d'une théorie définissable par
+limites finies, il faut et suffit que $S = T(\mathrm{Ens})$ soit strictement
+engendrée par la sous-catégorie pleine de ses objets de présentation
+finie, ou encore que $S \to \widehat{\Sigma}$ soit pleinement fidèle ; alors
+$\Sigma^{\circ}$ est la catégorie classifiante de la théorie sur $\Delta_{0}$
+qui donne naissance à $T$.}
+
+\textbf{Corollaire.} \emph{Le 2-foncteur de restriction des théories
+algébriques sur $\Delta_{0}$ aux théories sur $\Delta_{1}$ est pleinement
+fidèle, et son image essentielle est formée des morphismes $T_{1} \to
+T'_{1}$ tels que $S = T(\mathrm{Ens}) \to S' = T'(\mathrm{Ens})$ transforme
+objets de présentation finie en objets de présentation finie — « on
+pourrait les appeler les morphismes de présentation finie, ou cohérents,
+de théories ».}\footnote{Ces deux corollaires sont la réponse à la
+\emph{Question} de la page 23 : une théorie est « à limites finies » si et
+seulement si ses modèles ensemblistes forment une catégorie localement
+finiment présentable ; et un morphisme entre théories à limites finies est
+un foncteur d'oubli entre catégories LFP qui préserve la présentation
+finie, i.e. dont l'adjoint à gauche envoie $\Sigma$ dans $\Sigma'$ — ce
+que le dictionnaire de la page 90 écrira « foncteurs $\tau \to \tau'$
+commutant aux $\varinjlim$ quelconques et envoyant $S$ dans $S'$ ».
+« Cohérent » est le bon mot : dans le vocabulaire des topos, un morphisme
+de topos classifiants est cohérent lorsqu'il préserve les objets de
+présentation finie, et c'est ici le même énoncé. Le manuscrit écrit
+« $\mathbf{1}$-fidèle », dont le sens dans le dossier (page 97 : $\mathrm{Cat}
+_{\lambda} \hookrightarrow \mathrm{Cat}$ est 1-fidèle) est « pleinement
+fidèle sur les 1-flèches, et sur les 2-flèches » ; nous disons pleinement
+fidèle.}
+
+\emph{Question} (page 78) : pour $d'$ = les diagrammes finis
+\emph{discrets} (produits finis), $R$ petite à produits finis, $\Sigma =
+R^{\circ} \subset S = \underline{\mathrm{Hom}}_{\mathrm{prod}}(R, \mathrm{Ens})$ ;
+on a $\Sigma \subset S_{\mathrm{pf}} = \Sigma_{0}$ et $S_{\mathrm{pf}} \simeq
+\rho_{\Delta,\Delta_{0}}(\Sigma)$, et la question de retrouver $S$ à partir
+de $\Sigma$ se ramène à celle d'une catégorie $\Sigma_{0} \in \Delta_{0}$
+munie d'une sous-catégorie pleine $\Sigma$ stable par sommes
+finies.\footnote{C'est le cas des théories de Lawvere, où $S$ est la
+catégorie des algèbres, $\Sigma$ celle des algèbres \emph{libres} de type
+fini, et $S_{\mathrm{pf}}$ celle des algèbres de présentation finie, qui
+est la clôture de $\Sigma$ par coégalisateurs. La question est celle de
+reconnaître, dans $S_{\mathrm{pf}}$, les objets libres ; elle n'a pas de
+réponse intrinsèque en général (une catégorie LFP peut être la catégorie
+des algèbres de plusieurs théories de Lawvere non équivalentes), et la
+page la laisse ouverte.}
+
+\pagerange{80}{80}
+\subsection*{La liste des cas à traiter}
+
+Le feuillet 80 dresse la liste des 2-catégories $\Delta$ pour lesquelles
+le programme devrait être mené : (1) limites finies, foncteurs exacts ;
+(1') limites de type $d'$ ; (1'') préordres à inf finis ; (2) limites
+finies et colimites finies, foncteurs exacts ; (2') prétopos ; (2'')
+catégories semi-additives ; (2''') additives ; (2'''') abéliennes ; (3)
+$(\mathrm{Cat}_{d})$ avec $(d', d'')$ petits ; (4) limites finies et limites
+filtrantes exactes ; (4'') préordres à inf finis, sup quelconques
+distributifs ; (4') limites finies, colimites quelconques, sommes
+disjointes universelles, limites filtrantes exactes ; (5) limites et
+colimites quelconques ; (5') topos ; (6') topos essentiels ($\simeq
+\widehat{C}$, ayant assez de points essentiels) avec les morphismes
+essentiels. « Je m'attends à des ennuis (de sortie de l'Univers) avec (6)
+et (6') ».\footnote{La liste est le programme de la logique catégorique
+des années qui suivent : (1) théories cartésiennes, (2) régulières, (2')
+cohérentes, (4') géométriques et leurs classifiants (5'), (2'')--(2'''')
+les théories additives. Les cas (4) et (4') sont ceux où les
+« catégories accessibles » des pages 54 à 61 interviennent ; (6') est le
+cas des topos de préfaisceaux, i.e. des théories à limites finies, et
+l'« ennui » prévu est celui de la page 84 : la catégorie des constructions
+$B_{T}$ n'est pas visiblement une $\mathcal{U}$-catégorie.}
+
+\pagerange{81}{87}
+\section*{L'adjonction entre théories et catégories, et les constructions explicites (pages 81 à 87)}
+
+\pagerange{81}{83}
+\subsection*{$\sigma \dashv \rho$}
+
+Soit $\text{Thé}_{\Delta}$ la 2-catégorie des théories sur $\Delta$ — les
+catégories 2-cofibrées sur $\Delta$, i.e. les pseudo-foncteurs $T : \Delta
+\to \mathrm{Cat}$ — et $\tau$ la théorie identique, $\tau(C) = C$. Deux
+2-foncteurs :
+\[
+\sigma : \Delta \to \text{Thé}_{\Delta}, \quad \sigma(R) = \underline{\mathrm{Hom}}
+_{\Delta}(R, -) ; \qquad
+\rho : \text{Thé}_{\Delta} \to \Delta, \quad \rho(T) = B_{T} = \underline{\mathrm{Hom}}
+(T, \tau),
+\]
+$B_{T}$ étant la \emph{catégorie des constructions} de $T$ : un objet en
+est une façon de fabriquer, fonctoriellement en $C$ et en la structure, un
+objet de $C$ à partir d'une $T$-structure sur $C$. On a
+$\underline{\mathrm{Hom}}(\sigma(R), T) \simeq T(R)$ (Yoneda pour les
+2-foncteurs), en particulier $\rho\sigma(R) = \underline{\mathrm{Hom}}(\sigma
+(R), \tau) \simeq \tau(R) = R$ : $\sigma$ est 2-pleinement fidèle. La
+question est de savoir quand
+\[
+\underline{\mathrm{Hom}}(\sigma(R), T) \longrightarrow \underline{\mathrm{Hom}}
+_{\Delta}(\rho(T), R) = \sigma(\rho(T))(R)
+\]
+est une équivalence : \emph{pour tout $R$ si et seulement si $T$ est
+2-représentable par $\rho(T)$}. Le morphisme d'unité $T \to \sigma\rho(T)$
+est l'objet universel, et l'on demande si l'on peut décrire un objet
+canonique de $T(\rho(T))$, i.e. la $T$-structure universelle sur la
+catégorie des constructions.\footnote{C'est l'adjonction, aujourd'hui
+classique, entre une théorie et sa « catégorie syntaxique » : pour une
+théorie représentable, $B_{T} = R$ et la structure universelle est
+l'identité de $R$, vue comme objet de $T(R) = \underline{\mathrm{Hom}}_{
+\Delta}(R, R)$. Le manuscrit ajoute que $\rho(T) \in \mathrm{Ob}\,\Delta$
+lorsque $\Delta$ est défini par des propriétés d'exactitude, puisque les
+limites dans $\underline{\mathrm{Hom}}(T, \tau)$ se calculent argument par
+argument, mais qu'il n'est pas clair que $B_{T}$ soit une
+$\mathcal{U}$-catégorie — c'est le « grain de sel » de la page 84, et la
+raison d'être des constructions explicites qui suivent.}
+
+La page 82 énonce les deux propriétés de $\Delta$ dont tout dépend :
+(1) pour $I$ petite, $C \mapsto \underline{\mathrm{Hom}}_{\mathrm{Cat}}(I, C)$
+est 2-représentable par la $\Delta$-enveloppe $\widetilde{I}$ — l'inclusion
+$\Delta \to \mathrm{Cat}$ a un 2-adjoint à gauche — ; (2) pour $J \in
+\mathrm{Ob}\,\Delta$ et $\Sigma \subset \mathrm{Fl}(J)$ petit, $C \mapsto
+\underline{\mathrm{Hom}}_{\Delta}(J, C ; \Sigma)$ est 2-représentable par
+$J\Sigma^{-1}$. \emph{Conséquence} : les 2-limites inductives existent
+dans $\Delta$. Pour un pseudo-foncteur $i \mapsto A_{i}$, soit $D =
+\varinjlim A_{i}$ dans $\mathrm{Cat}$ ; alors $\underline{\mathrm{Hom}}_{
+\mathrm{Cat}}(D, C) \simeq \varprojlim \underline{\mathrm{Hom}}_{\mathrm{Cat}}
+(A_{i}, C)$, et la 2-limite dans $\Delta$ est le sous-2-foncteur des
+$\tilde{u} : \widetilde{D} \to C$ tels que chaque $\tilde{u} \circ
+\tilde\alpha_{i}$ soit un $\Delta$-foncteur, condition qui s'exprime en
+rendant inversibles certaines flèches $\Sigma$ de $\widetilde{D}$ — du
+moins si les $\Delta$-foncteurs sont définis par commutation à des limites
+qui existent dans toutes les catégories de $\Delta$ ; et il faut que
+$\Sigma$ soit petit, ce qui n'est garanti que si $d'$, $d''$ sont petits,
+sinon il faut travailler avec des sous-catégories génératrices
+petites.\footnote{« Construction des 2-limites dans $(\mathrm{Cat})$ : faite
+dans SGA 4 VI en prenant la catégorie totale de la 2-catégorie cofibrée
+et en rendant inversibles les morphismes cartésiens » — le renvoi est à
+SGA 4 VI 6.}
+
+\pagerange{83}{85}
+\subsection*{Les constructions explicites $B'_{T}$}
+
+Puisque $B_{T}$ n'est pas visiblement petite, on définit pas à pas une
+catégorie $B'_{T}$ de \emph{constructions explicites} pour toute théorie
+algébrique $T$ — la construction accompagnant la définition récurrente des
+théories algébriques —, et l'on montre en même temps que $B'_{T} \in
+\mathrm{Ob}\,\Delta$ et que $B'_{T}$ représente $T$ lorsque $T$ est
+représentable.
+\begin{enumerate}
+\item[a)] \emph{Structure vide sur $I$ objets} : la théorie $\tau^{I}$,
+$\tau^{I}(C) = C^{I}$, représentée par la $\Delta$-enveloppe $\widetilde{I}$
+de la catégorie discrète $I$ ; $B'_{\tau^{I}} = \widetilde{I}$, que l'on
+explicite en prenant les limites de type $d$ à partir des objets $i$ et les
+nouvelles flèches que les axiomes d'exactitude imposent.
+\item[b)] \emph{Ajouter des axiomes} : un ensemble $\Sigma$ de flèches de
+$B'_{T}$ à rendre inversibles ; $B'_{T'} = B'_{T}\Sigma^{-1}$ dans $\Delta$.
+Si $T$ est représentée par $R$ et $B'_{T} \simeq R$, alors $T'$ est
+représentée par $B'_{T'}$ ; et si $T \to \tau^{I}$ est fidèle, $T' \to T
+\to \tau^{I}$ aussi.\footnote{La marge demande de « préciser aussi les
+axiomes du type flèches rendues égales », qui ne résultent pas des
+inversions si $d' = d'' = \emptyset$ ; dans le cas général une égalité
+$u = v$ s'impose en rendant inversible la flèche de l'égalisateur, comme
+le dédoublement de la page 31 le fait pour les cônes.}
+\item[c)] \emph{Ajouter des flèches} : un ensemble $H$ muni de $s, b : H
+\to \mathrm{Ob}\,B'_{T}$ ; $T'(C)$ est la catégorie des $x \in T(C)$ munis
+d'une famille $\varphi(h) : s(h)(x) \to b(h)(x)$, $h \in H$. Alors $B'_{T'}$
+s'obtient de $B'_{T}$ en ajoutant librement les flèches $H$ (une catégorie
+qui n'est pas dans $\Delta$), en prenant la $\Delta$-enveloppe $B'^{0}_{T'}$,
+puis en rendant inversibles les flèches qui expriment que $B'_{T} \to
+B'^{0}_{T'}$ est un $\Delta$-foncteur. Si $T$ est représentée par $R \simeq
+B'_{T}$, $T'$ l'est par $B'_{T'}$ ; $T' \to T$ est fidèle.
+\item[d)] \emph{Composer des structures} : $T = \prod T_{\alpha}$ est
+algébrique et $B'_{T}$ est la 2-somme des $B'_{T_{\alpha}}$ dans $\Delta$ ;
+d') à objets de base fixés, le produit 2-fibré $T'(C) = \prod^{(2)}_{\alpha,
+C^{I}} T_{\alpha}(C)$ des $T_{\alpha}$ au-dessus de $\tau^{I}$, avec pour
+$B'_{T'}$ la somme amalgamée des $B'_{T_{\alpha}}$ sous $\widetilde{I}$ ;
+d'') limites projectives de théories, « il suffirait de le postuler pour
+une catégorie d'indices bien ordonnée ».
+\end{enumerate}
+
+\emph{Remarque 1} : on ne rencontre ainsi que des théories représentées par
+des $B_{T} = R$ munis d'une famille génératrice « fidèle » $I \to \mathrm{Ob}
+\,R$, i.e. telle que $\underline{\mathrm{Hom}}_{\Delta}(R, C) \to C^{I}$ soit
+fidèle pour tout $C$.
+
+\pagerange{86}{87}
+\subsection*{Réciproque : d'une catégorie à générateurs à une théorie}
+
+\emph{Remarque 2}. Soit réciproquement $R \in \mathrm{Ob}\,\Delta$ avec des
+$\Delta$-générateurs $I \to \mathrm{Ob}\,R$.
+
+$1^{\circ}$) $R$ petite. On prend $I = \mathrm{Ob}\,R$, $T_{0} = \tau^{I}$,
+$R_{0} = \widetilde{I}$ ; puis $H = \mathrm{Fl}(R)$ envoyé dans $\mathrm{Ob}\,
+R_{0} \times \mathrm{Ob}\,R_{0}$, d'où $T_{1}$, $R_{1}$ ; puis on exprime que
+la composition de $R$ devient celle de $R_{1}$, i.e. que l'application
+« préfoncteur » $R \to R_{1}$ est un foncteur, d'où $T_{2}$, $R_{2} =
+\widetilde{R}$ avec $T_{2}(C) \simeq \underline{\mathrm{Hom}}_{\mathrm{Cat}}
+(R, C)$ ; enfin on exprime que $R \to R_{2}$ est un $\Delta$-foncteur en
+rendant inversibles certaines flèches de $R_{2}$, d'où $T_{3}$ et $R_{3} =
+R$. « On a appliqué une fois a), une fois c), deux fois b), et pas du tout
+d). »
+
+$2^{\circ}$) $R$ quelconque avec $I \to \mathrm{Ob}\,R$ générateurs. Soit
+$\rho_{0}$ la sous-catégorie pleine engendrée par $I$, de sorte que
+$\underline{\mathrm{Hom}}_{\Delta}(R, C) \to \underline{\mathrm{Hom}}_{\mathrm{Cat}}
+(\rho_{0}, C) \simeq \underline{\mathrm{Hom}}_{\Delta}(\tilde\rho_{0}, C)$ est
+fidèle ; on considère $R_{0} = \tilde\rho_{0} \to R$, les flèches $\Sigma$
+qui deviennent inversibles, $R_{1} = R_{0}\Sigma^{-1}$, et on construit une
+suite transfinie $R_{\alpha} \to R$ dans $\Delta$ dont toutes les théories
+$\sigma(R_{\alpha})$ sont algébriques, le passage aux ordinaux limites se
+faisant par d) ou d').
+
+$4^{\circ}$) Précisément (page 87) : pour $R \in \mathrm{Ob}\,\Delta$ et $u : I
+\to R$ un ensemble générateur, i.e. tel que $\underline{\mathrm{Hom}}_{\Delta}
+(R, C) \to \underline{\mathrm{Hom}}_{\Delta}(\widetilde{I}, C)$ soit fidèle
+pour tout $C$, on pose $R_{0} = \widetilde{I}$ avec $u_{0} : \widetilde{I}
+\to R$ prolongeant $u$, $\Sigma_{\alpha}$ = les flèches de $R_{\alpha}$
+qui deviennent inversibles dans $R$, $R_{\alpha+1} = R_{\alpha}
+\Sigma_{\alpha}^{-1}$ au sens de $\Delta$, et $R_{\lim} = \varinjlim_{\Delta}
+R_{\alpha}$ ; alors, \emph{pour $\alpha$ assez grand dans l'univers,
+$R_{\alpha} \xrightarrow{\sim} R$}. Aux ordinaux limites on veut que $R_{\alpha}
+\to R$ soit conservatif ; si les $\Delta$-foncteurs commutent aux noyaux
+et conoyaux, les $R_{\alpha} \to R$ sont fidèles et les $R_{\alpha}$ sont des
+sous-catégories ; pour tout cardinal $c$, si $\alpha$ est plus élevé que
+$c$, $R_{\alpha}$ est stable sous les limites de types $\delta' \in d'$,
+$\delta'' \in d''$ de cardinal $\leqslant c$ ; « donc si $d'$ et $d''$ sont
+petits » — la phrase reste inachevée, et la marge dit ce qu'elle
+concluait : la construction aboutit et $R$ est
+algébrique.\footnote{C'est le théorème 4 a) de la page 18, généralisé de
+« bons topos » à un $\Delta$ quelconque à types petits : \emph{un objet de
+$\Delta$ à petite famille génératrice est la catégorie classifiante d'une
+théorie algébrique}, et la démonstration est la construction transfinie
+de la page 62. Les deux marges — « je ne sais s'il est 2-fidèle ??
+pleinement fidèle », « on doit pouvoir prouver \ldots\ fidèle \ldots\ si
+non grand \ldots » — sont sur le point qui manque : la conservativité aux
+ordinaux limites. Dans le cas des théories à limites finies elle est
+automatique et la conclusion est le théorème de la page 75.}
+
+\pagerange{89}{91}
+\section*{Les dictionnaires (pages 89 à 91)}
+
+\pagerange{89}{89}
+\subsection*{$\lambda$ fini : ce que $S$ retient de $R$}
+
+Un demi-feuillet fixe, pour $\lambda$ un ensemble de diagrammes finis et
+$R \in \mathrm{Cat}_{\lambda}$, les inclusions
+\[
+\Sigma = R^{\circ} \subset S = \underline{\mathrm{Hom}}_{\lambda}(R, \mathrm{Ens})
+\subset \widehat{R^{\circ}} = \widehat{\Sigma}
+\]
+et les propriétés de $S$ : a) $S$ a les limites inductives quelconques ;
+b) $S$ est « engendrée » par ses objets de type fini — ceux dont
+$\mathrm{Hom}(X, -)$ commute aux limites filtrantes —, i.e. $S \to
+\widehat{S_{0}}$ est conservatif, ou même pleinement fidèle, $S_{0}$ étant
+la sous-catégorie pleine de ces objets ; c) $\Sigma \subset S_{0}$ et $\Sigma$
+engendre $S_{0}$ par limites inductives finies, et $S$ par limites
+inductives quelconques ; d) plus précisément $S_{0}$ est l'enveloppe de la
+$\lambda$-catégorie $\Sigma$ sous les colimites finies, et $S$ l'enveloppe
+de $S_{0}$ sous les colimites quelconques.\footnote{Pour $\lambda$ = tous
+les diagrammes finis, c'est la page 77 : $S_{0} = \Sigma$, $S = \mathrm{Ind}
+(\Sigma)$. Pour $\lambda$ plus petit (produits finis, par exemple),
+$\Sigma \subsetneq S_{0}$ et d) est la description de $S$ comme
+$\mathrm{Ind}$ de la clôture de $\Sigma$ par colimites finies, ce qui est
+correct, avec la réserve que « objets de type fini » devrait ici se lire
+« de présentation finie » — le manuscrit emploie l'un pour l'autre.} Le
+titre qui suit, « 9. Relation avec analyseurs de Lazard », n'a pas de
+texte.
+
+\pagerange{90}{91}
+\subsection*{$\lambda$ quelconque, puis $\lambda = (\lambda_{1}, \emptyset)$}
+
+Le \emph{Dictionnaire pour $\lambda$ quelconque} met en regard les types
+(théories) et les $\lambda$-catégories qui les représentent :
+
+\begin{itemize}
+\item un \emph{type} $T_{\lambda}$ $\longleftrightarrow$ une $\lambda$-catégorie
+$R$ admettant une petite famille $\lambda$-génératrice ; un morphisme de
+types $T_{\lambda} \to T'_{\lambda}$ $\longleftrightarrow$ un $\lambda$-foncteur
+$R' \to R$ ;
+\item un morphisme \emph{pleinement fidèle} (sous-théorie pleine $T' \subset
+T$) $\longleftrightarrow$ un $\lambda$-foncteur de \emph{localisation} $R \to R'$
+par rapport à un ensemble de flèches de $R$ stable par composition et par
+$\lambda$-limites ;
+\item un morphisme \emph{fidèle} $T' \to T$ (« structure plus riche »)
+$\longleftrightarrow$ un $\lambda$-foncteur $f : R \to R'$ qui $\lambda$-engendre
+$R'$ (« épimorphisme ? ») ;
+\item un $\lambda$-type avec famille d'objets de base $(E_{i})_{i \in I}$
+$\longleftrightarrow$ une $\lambda$-catégorie $R$ avec $I \to \mathrm{Ob}\,R$
+qui $\lambda$-engendre $R$ ;
+\item une limite projective de $\lambda$-théories $\longleftrightarrow$ une
+limite inductive de $\lambda$-catégories.
+\end{itemize}
+
+Le \emph{Dictionnaire} pour $\lambda = (\lambda_{1}, \emptyset)$ — limites
+projectives seulement — a cinq colonnes, et c'est le résumé le plus dense
+du dossier ; nous le donnons ligne par ligne, avec pour colonnes le type
+$T$, la $\lambda$-catégorie $R$, la $\lambda^{\circ}$-catégorie $S$, la
+catégorie $\tau$ des modèles ensemblistes, et le topos $B$.
+
+\emph{Les objets.} $T$ un $\lambda$-type, $T(C) = \underline{\mathrm{Hom}}_{
+\lambda}(R, C) = \underline{\mathrm{Hom}}_{\lambda^{\circ}}(S^{\circ}, C)$, égal
+à la sous-catégorie pleine de $\underline{\mathrm{Hom}}(C^{\circ}, \tau)$ des
+foncteurs $u$ tels que les $\mathrm{Hom}(x, u(-))$, $x \in \mathrm{Ob}\,S$,
+soient représentables, et à $\underline{\mathrm{Hom}}_{\mathrm{top}}(C, B)^{\circ}$
+si $C$ est un topos. $R$ une $\lambda$-catégorie à petite famille
+$\lambda$-génératrice ; $R = S^{\circ} = \mathrm{Pt\,ess}(B)$, la catégorie
+des points essentiels du topos $B$. $S = R^{\circ}$, $\lambda^{\circ}$-catégorie
+à petite famille $\lambda^{\circ}$-génératrice. $\tau$ une catégorie à
+limites filtrantes (et limites projectives quelconques) munie d'une
+sous-catégorie génératrice $S$ pour les foncteurs conservatifs, stable par
+$\lambda^{\circ}$-limites, formée d'objets de présentation finie ; $\tau =
+\underline{\mathrm{Hom}}_{\lambda}(R, \mathrm{Ens}) = T(\mathrm{Ens})$, $= \mathrm{Ind}
+(S)$ si $\lambda_{1}$ est tous les diagrammes finis ; $\tau = \mathrm{Pt}
+(B)$, $S = \mathrm{Pt\,ess}(B)$. $B$ un topos ayant suffisamment de points
+essentiels et dont la catégorie des points essentiels est stable par
+limites ; $B = \widehat{R} = \underline{\mathrm{Hom}}(S, \mathrm{Ens})$, le
+topos classifiant de $T$.\footnote{Un point essentiel d'un topos $B$ est un
+point $p$ dont l'image inverse $p^{*}$ a un adjoint à gauche $p_{!}$ ; pour
+$B = \widehat{R}$, les points sont les foncteurs plats $R \to \mathrm{Ens}$
+(ici les $\lambda$-foncteurs, i.e. $\tau$), et les points essentiels sont
+les points représentables $\mathrm{Hom}(r, -)$, qui forment la
+sous-catégorie $\Sigma = R^{\circ} \subset S = \tau$ de la page 89 ; c'est
+elle que les colonnes $R$ et $S$ nomment, l'une $R$ et l'autre $R^{\circ}$,
+à la convention près sur le sens des 2-flèches, qui porte les « $\circ$ »
+de $\mathrm{Pt}(B)^{\circ}$ et $\mathrm{Pt\,ess}(B)^{\circ}$. Nous les
+omettons, et nous lisons partout « la catégorie des points essentiels est
+$\Sigma$, opposée de $R$ ». La colonne $\tau$ décrit une catégorie
+localement présentable par sa sous-catégorie dense de présentables, et
+« $\tau = \mathrm{Pt}(B)$ » est le théorème de Diaconescu vu depuis les
+modèles.}
+
+\emph{Les morphismes.} Un morphisme $T' \to T$ $\longleftrightarrow$ un
+$\lambda$-foncteur $R \to R'$ $\longleftrightarrow$ un $\lambda^{\circ}$-foncteur
+$S \to S'$ $\longleftrightarrow$ un foncteur $\tau \to \tau'$ commutant aux
+limites inductives quelconques et envoyant $S$ dans $S'$ (ou son adjoint
+à droite $\tau' \to \tau$) $\longleftrightarrow$ un morphisme de topos $B' \to
+B$ dont l'image inverse transforme objets ponctuels (représentables) en
+objets ponctuels, déduit par localisation de $B$ par rapport à un ensemble
+de flèches de $R \subset B$.
+
+\emph{Pleinement fidèle} $T' \to T$ $\longleftrightarrow$ localisation $R
+\to R'$ $\longleftrightarrow$ localisation $S \to S'$ $\longleftrightarrow$
+$\tau' \to \tau$ pleinement fidèle $\longleftrightarrow$ $B' \to B$ un
+plongement, i.e. $f_{*}$ pleinement fidèle.
+
+\emph{Sous-théorie pleine} $\longleftrightarrow$ ensemble $M$ de flèches de
+$R$ stable par composition et par $\lambda$-limites $\longleftrightarrow$
+ensemble de flèches de $S$ stable par composition et $\lambda^{\circ}$-limites
+$\longleftrightarrow$ sous-catégorie pleine $\tau'$ de $\tau$ stable par
+limites projectives, formée des $X$ tels que $\mathrm{Hom}(u, X)$ soit
+bijectif pour les $u$ que les objets de $\tau'$ rendent bijectifs
+$\longleftrightarrow$ sous-topos $B'$ de $B$ dont le plongement $f$ a une
+image inverse préservant les objets ponctuels.\footnote{C'est le
+\emph{Problème 2} de la page 17 dans toutes ses colonnes, et, colonne
+$\tau$, la description des sous-catégories réflexives par
+\emph{orthogonalité} : $\tau'$ est l'ensemble des objets orthogonaux à
+une classe de flèches, ce qui est la forme moderne des « axiomes ».}
+
+\emph{Fidèle} $T' \to T$ $\longleftrightarrow$ $R \to R'$ $\lambda$-engendre
+$R'$ $\longleftrightarrow$ $S \to S'$ $\lambda^{\circ}$-engendre $S'$
+$\longleftrightarrow$ $\tau' \to \tau$ fidèle $\longleftrightarrow$ $f^{*} :
+B \to B'$ fidèle.
+
+\emph{Limites projectives} de $\lambda$-types $\longleftrightarrow$ limites
+inductives de $\lambda$-catégories $\longleftrightarrow$ limites inductives
+de $\lambda^{\circ}$-catégories $\longleftrightarrow$ limites projectives des
+$\tau_{i}$ $\longleftrightarrow$ limites projectives des topos.\footnote{Le
+dictionnaire ne démontre rien ; il enregistre les pages 62 à 78 sous forme
+de table, et il est correct dans toutes ses cases à deux réserves près :
+la colonne $\tau$ de la ligne « fidèle » porte un « (ou plutôt ??) »
+qui est le sien, et la ligne « limites projectives des $\tau_{i}$ » n'est
+vraie, comme il le note, que « si $\lambda_{1}$ = tous les diagrammes
+finis », i.e. quand la limite des catégories LFP est LFP, ce qui est un
+théorème (Makkai--Paré) et non une évidence.}
+\pagerange{92}{95}
+\section*{Le corps universel (pages 92 à 95)}
+
+Un brouillon rapide, sur deux colonnes, prend l'exemple qui met la
+distinction « limites projectives / limites inductives » à l'épreuve. Soit
+$T$ l'espèce de structure « anneau » et $T^{\circ}$ celle de « corps ». La
+seconde n'est pas définissable par limites projectives : la catégorie des
+corps n'est pas stable par produits. Les sous-types \emph{pleins} d'un
+type définissable par limites projectives le sont encore, et sont donnés
+par une sous-catégorie pleine $\tau'$ de $\tau = T(\mathrm{Ens})$ décrite par
+orthogonalité — $C \in \tau'$ si et seulement si, pour tout homomorphisme
+$A \to B$ que les objets de $\tau'$ rendent bijectif, $\mathrm{Hom}(B, C)
+\to \mathrm{Hom}(A, C)$ est bijectif ; mais « corps » n'est pas un sous-type
+plein de « anneau ».\footnote{Le début de la page 92 est le plus abîmé du
+dossier ; la ligne sur les « pseudo-corps » et l'homomorphisme
+$\mathbb{Z}[H] \to \mathbb{Z}[t, t^{-1}] \times \mathbb{Z}$, dont la moitié
+est illisible, prépare ce qui suit : le plus petit sous-type plein de
+« anneau » contenant les corps est celui des anneaux \emph{réduits} (page
+41, article 11), et la sous-catégorie pleine des pseudo-corps est
+l'orthogonale décrite ici. Nous ne reconstruisons pas la ligne.} Peut-on
+définir le sous-objet $A^{*}$ des éléments inversibles d'un anneau $A$ par
+limites projectives et inductives ? Oui : dans $R = (\mathrm{Ann})^{\circ} =
+(\mathrm{Sch\,aff})$, l'anneau universel est l'objet $\mathbb{Z}[t]$, et
+$A^{*}$ correspond au sous-objet $\mathbb{Z}[t, t^{-1}] = \mathbb{Z}[x,y]/
+(xy - 1)$, qui est une limite projective finie. Pour $A$ un objet anneau
+d'une catégorie à limites finies, on a donc un morphisme $e \sqcup A^{*}
+\to A$ — la section nulle et l'inclusion des inversibles —, et \emph{on
+dira que $A$ est un corps si ce morphisme est un isomorphisme}.
+
+Plaçons-nous dans le topos universel $\widehat{R}$, avec l'objet anneau $O
+= \mathrm{Sp}(\mathbb{Z}[t])$. Il faut rendre inversible la flèche $\varphi
+: e \sqcup O^{*} \to O$ — qui n'est pas une flèche de $R$, mais de
+$\widehat{R}$ — ; elle se factorise
+
+\begin{tikzcd}
+e \sqcup O^{*} \arrow[r, "\varphi"] \arrow[d, "j"'] & O \\
+D \arrow[ur, "i"'] &
+\end{tikzcd}
+
+où $i : D \to O$ est dans $R$, et rendre $\varphi$ inversible revient à
+rendre $i$ et $j$ inversibles. On rend d'abord inversibles les morphismes
+$i$ (qui sont dans $R$) : $R'$ est la catégorie de fractions de $R$
+correspondante, et $\widehat{R'}$ classifie les pseudo-corps. Il faut
+ensuite rendre $e \sqcup O^{*} \to O$ un monomorphisme, i.e. $e \cap O^{*}$
+vide, ce qui rend le préfaisceau $\varepsilon$ ($\varepsilon(X) = \{e\}$ si
+$X = \emptyset$, vide sinon) égal à $\emptyset$. On trouve : \emph{si $C$
+est une catégorie à limites projectives finies et limites inductives
+quelconques, les corps dans $C$ correspondent aux foncteurs $F : R' \to C$
+exacts à gauche et commutant aux sommes} ; \emph{la catégorie $C$
+universelle pour cela est la catégorie des faisceaux sur $R'$ pour la
+topologie de Zariski — c'est un topos —, et le corps universel est le
+faisceau structural sur ce topos}.\footnote{C'est la description
+du \emph{topos classifiant des corps}, qui n'est pas un topos de
+préfaisceaux : la disjonction « $x = 0$ ou $x$ inversible » se traduit en
+demandant que $\mathrm{Spec}\,A$ soit recouvert par $V(f)$ et $D(f)$ pour
+tout $f$, ce qui est la topologie de la page 41 (article 11, « sections
+sur chaque fibre »), et la condition « $0 \neq 1$ » en demandant que le
+schéma vide soit couvert par la famille vide. Le manuscrit passe par les
+pseudo-corps (rendre $D \to O$ inversible, i.e. $A \simeq A_{f} \times
+A/f$ pour tout $f$), ce qui est correct : un corps est un anneau
+absolument plat local, ou, comme la page 41 le dit, « pseudo-corps
+local ». Le mot « Zariski » pour la topologie sur $R'$ est le sien ; sur
+la catégorie $R'$ des schémas absolument plats les recouvrements de
+Zariski sont les recouvrements $\{V(f), D(f)\}$, et c'est bien ce qu'il
+faut. « Le corps universel est le faisceau structural » : l'anneau
+générique du topos classifiant est un corps au sens interne, énoncé qui
+est aujourd'hui le premier exemple de la théorie (Johnstone, Wraith).}
+
+La page 95 pose ensuite, pour les anneaux intègres, la question du
+sous-type $O' \subset O$ des éléments « qui opèrent régulièrement sur $O$ »
+(les non-diviseurs de zéro), avec $O' \supset O^{*}$ : est-il définissable
+par limites projectives et inductives ? Dans le cas universel, $O'(X)$ est
+l'ensemble des $f \in A = O(X)$ qui sont réguliers après toute extension
+$A \to A'$, ce qui force $f \notin M$ pour tout idéal maximal $M$, donc
+$O' = O^{*}$ ; et sur $\widehat{R}$ l'anneau universel est localement un
+corps, donc $O'_{p} = O^{*}_{p}$, i.e. $A' = A^{*}$.\footnote{La conclusion
+est exacte pour la raison qu'il indique : un élément régulier
+\emph{universellement} — après tout changement de base — est inversible,
+car son image dans le corps résiduel d'un idéal maximal doit être non
+nulle. Le sous-type des non-diviseurs de zéro tout court n'est pas
+géométrique (il n'est pas stable par changement de base), et c'est la
+réponse à la question posée.}
+
+\pagerange{97}{106}
+\section*{$\lambda$-types : la copie au net (pages 97 à 106)}
+
+Dix feuillets paginés de ① à ⑩, d'une écriture posée, sont l'état le plus
+achevé du dossier : la définition des théories relatives à un couple de
+types de limites, la représentabilité, la définition récurrente des
+théories algébriques, et, pour les théories définies par limites
+projectives, la reconstruction de la théorie à partir de ses modèles. Les
+alinéas sont numérotés [1] à [8] et les formules (1.1) à (8.2.17) ; nous
+gardons ces numéros.
+
+\pagerange{97}{97}
+\subsection*{[1] $\lambda$-catégories et $\lambda$-types}
+
+Soit $\lambda = (\overleftarrow{\lambda}, \overrightarrow{\lambda})$ un
+couple d'ensembles de diagrammes de l'univers fixé $\mathcal{U}$ (1.1). La
+2-catégorie $(\mathrm{Cat}_{\lambda})$ (1.2) a pour objets les
+\emph{$\lambda$-catégories} — celles qui ont les limites projectives de
+type $\overleftarrow{\lambda}$ et les limites inductives de type
+$\overrightarrow{\lambda}$ —, pour 1-flèches les \emph{$\lambda$-foncteurs},
+qui y commutent, et pour 2-flèches les transformations naturelles ; ainsi
+$\mathrm{Cat}_{\lambda} \hookrightarrow \mathrm{Cat}$ est pleinement fidèle
+sur les 2-flèches. Un \emph{$\lambda$-type} $T$ est une espèce de structure
+qui, à toute $\lambda$-catégorie $C$, associe la catégorie $T(C)$ des
+structures de type $T$ dans $C$, fonctoriellement en $C$ : une catégorie
+cofibrée $T_{\lambda}$ sur $\mathrm{Cat}_{\lambda}$ (1.3). Les morphismes
+sont ceux des catégories cofibrées,
+\begin{equation}
+\mathrm{Hom}_{\lambda}(T, T') = \mathrm{Hom}_{\mathrm{cofib}/(\mathrm{Cat}_{
+\lambda})}(T_{\lambda}, T'_{\lambda}), \tag{1.4}
+\end{equation}
+et les $\lambda$-types forment une 2-catégorie $(\lambda\text{-types})
+\hookrightarrow \text{2-Cofib}(\mathrm{Cat}_{\lambda})$ (1.5), 2-pleinement
+fidèle.\footnote{$\mathrm{Cat}_{\lambda}$ est la $\Delta$ des pages
+précédentes avec $d = \lambda$, et $T_{\lambda}$ est la « théorie sur
+$\Delta$ » de la page 83 ; la copie au net remplace $\Delta$ par
+$\mathrm{Cat}_{\lambda}$ et « théorie » par « type » — nous suivons la
+copie dans cette section et renvoyons, pour les mêmes objets, aux pages 62
+à 87 par leurs numéros. Le « 1-fidèle » de (1.5) et de « $\mathrm{Cat}_{
+\lambda} \hookrightarrow \mathrm{Cat}$ » désigne un 2-foncteur pleinement
+fidèle sur les 2-flèches (une sous-2-catégorie « 2-pleine », mais non
+pleine sur les 1-flèches) ; cette lecture est celle que les usages
+ultérieurs — « 2-fidèle » pour la 2-catégorie des $\lambda$-types dans
+les cofibrées, page 97 — imposent.}
+
+\pagerange{97}{98}
+\subsection*{[2] Objets de base ; $\lambda$-$I$-types}
+
+Si $T$ est « une structure sur $I$ objets de base », on introduit le type
+$\tau^{I}$ de la structure vide sur $I$ objets, $\tau^{I}(C) = C^{I}$
+(2.1), et le foncteur canonique « système des objets de base »
+\begin{equation}
+b^{C,T}_{\lambda} : T_{\lambda}(C) \longrightarrow C^{I}, \tag{2.2}
+\end{equation}
+fidèle, définissant pour $C$ variable un morphisme fidèle $b^{T}_{\lambda}
+: T_{\lambda} \to \tau^{I}$ (2.3).\footnote{« Foncteur 0-fidèle » dans le
+manuscrit : fidèle sur les 1-flèches, sans rien demander des objets. Que
+la structure détermine \emph{fidèlement} les objets de base est ce que
+« objets de base » veut dire ; c'est la Remarque 1 de la page 86.} Pour
+$T$, $T'$ deux types relatifs à $I$, on pose
+\begin{equation}
+\mathrm{Hom}_{\lambda}(I ; T, T') = \text{catégorie des couples } (u, \alpha),
+\tag{2.4}
+\end{equation}
+$u : T_{\lambda} \to T'_{\lambda}$ un morphisme et $\alpha$ un isomorphisme
+$b^{T'} \circ u \simeq b^{T}$ :
+
+\begin{tikzcd}
+T_{\lambda} \arrow[rr, "u"] \arrow[dr, "b^{T}_{\lambda}"'] & & T'_{\lambda} \arrow[dl, "b^{T'}_{\lambda}"] \\
+& \tau^{I} &
+\end{tikzcd}
+
+d'où la 2-catégorie $(\lambda\text{-}I\text{-types}) \hookrightarrow
+\text{2-Cofib}(\mathrm{Cat}_{\lambda})/\tau^{I}$ (2.5) et le 2-foncteur d'oubli
+$(\lambda\text{-}I\text{-types}) \to (\lambda\text{-types})$ (2.6), qui est
+fidèle.
+
+\pagerange{98}{99}
+\subsection*{[3] Constructions ; [4] représentabilité}
+
+Si $I$ est réduit à un point, $\tau^{I} = \tau$, $\tau(C) = C$ (3.1), et
+l'on pose
+\begin{equation}
+R^{\lambda}_{T} = \mathrm{Hom}_{\lambda}(T, \tau), \tag{3.2}
+\end{equation}
+la \emph{catégorie des $\lambda$-constructions} pour $T$. On ne sait pas a
+priori si c'est une $\mathcal{U}$-catégorie ; mais c'est une
+$\lambda$-catégorie, les $\lambda$-limites s'y calculant « argument par
+argument », et pour toute $C$ et tout $\xi \in T(C)$ le foncteur
+d'évaluation
+\begin{equation}
+\xi^{\lambda} : R^{\lambda}_{T} \longrightarrow C, \qquad \rho \mapsto \rho(\xi),
+\tag{3.3}
+\end{equation}
+est un $\lambda$-foncteur ; on a donc un accouplement $R^{\lambda}_{T} \times
+T(C) \to C$ (3.4), i.e. un $\lambda$-foncteur $R^{\lambda}_{T} \to \underline{
+\mathrm{Hom}}(T(C), C)$ (3.5). Si $T$ est donné avec $I$, on a de plus $I
+\to \mathrm{Ob}\,R^{\lambda}_{T}$, fonctoriel en $T$ (3.6) : chaque objet de
+base est une construction.\footnote{Le manuscrit numérote (3.5) deux
+formules, la seconde étant notre (3.6) ; nous renumérotons. La catégorie
+des constructions est ce que la page 81 note $B_{T}$ ; une construction
+est un « terme » de la théorie, un moyen de fabriquer un objet de $C$ à
+partir de toute $T$-structure sur $C$, et $\xi^{\lambda}$ est son
+évaluation. La marge gauche de la page 98 annonce des formules (3.7) et
+(3.8) — le foncteur $T(C) \to \underline{\mathrm{Hom}}_{\lambda}(R^{\lambda}_{T},
+C)$ transposé de (3.4) — qui sont celles de [4].}
+
+\textbf{Définition.} \emph{$T$ est $\lambda$-représentable si la catégorie
+cofibrée $T_{\lambda}$ est 2-représentable ; l'objet $R_{T}$ qui la
+représente est la \emph{catégorie $\lambda$-modelante} de $T$ :}
+\begin{equation}
+T(C) \cong \mathrm{Hom}_{\lambda}(R_{T}, C) \tag{4.1}
+\end{equation}
+\emph{via une $T$-structure $\lambda$-universelle $\xi^{\lambda}_{T} \in
+T(R_{T})$ (4.2).}\footnote{Le manuscrit écrit « catégorie
+$\lambda$-modelaire » ; la page 111 dira « topos modulaire » et
+« catégorie modulaire ». Nous disons \emph{modelante} ici et \emph{topos
+classifiant} plus loin, en signalant chaque fois le mot du manuscrit ;
+c'est la catégorie que la littérature appelle \emph{syntaxique} ou
+\emph{classifiante}.}
+
+$R_{T}$ est défini à équivalence près, unique à isomorphisme unique près,
+et pour toute catégorie cofibrée $\mathcal{F}$ sur $\mathrm{Cat}_{\lambda}$,
+\begin{equation}
+\mathrm{Hom}_{\mathrm{cofib}}(T_{\lambda}, \mathcal{F}) \cong \mathcal{F}(R_{T})
+\tag{4.3}
+\end{equation}
+(Yoneda) ; d'où $\mathrm{Hom}_{\lambda}(T, T') \cong T'(R_{T})$ (4.4), et
+pour $T' = \tau$ :
+\begin{equation}
+R^{\lambda}_{T} = \mathrm{Hom}_{\lambda}(T, \tau) \cong \tau(R_{T}) = R_{T}.
+\tag{4.5}
+\end{equation}
+\emph{Donc, pour un type représentable, la catégorie des constructions est
+la catégorie modelante, et c'est une $\mathcal{U}$-catégorie.} Pour $C =
+(\mathrm{Ens})$ :
+\begin{equation}
+T(\mathrm{Ens}) \cong \mathrm{Hom}_{\lambda}(R^{\lambda}_{T}, \mathrm{Ens}).
+\tag{4.6}
+\end{equation}
+
+\pagerange{99}{101}
+\subsection*{[5] Les règles de formation, et les questions}
+
+On veut caractériser les catégories cofibrées sur $\mathrm{Cat}_{\lambda}$
+(munies d'un morphisme dans $\tau^{I}$) qui proviennent de « théories de
+types de structures », i.e. donner une définition de $(\lambda\text{-types})$
+autre que (1.5). On introduit $S^{\lambda}_{T,I} \subset R^{\lambda}_{T}$, la
+sous-catégorie pleine engendrée par les objets de base sous les
+$\lambda$-limites, et les règles :
+\begin{enumerate}
+\item[a)] (structure vide) $\tau^{I} \in \mathrm{Ob}(\lambda\text{-}I\text{-types})$
+pour $I \in \mathcal{U}$ ;
+\item[b)] (ajouter des axiomes) si $T$ est un $\lambda$-$I$-type et $A
+\subset \mathrm{Fl}(S^{\lambda}_{T,I})$, la sous-catégorie cofibrée pleine
+$T'_{A}$ des $\xi \in T(C)$ tels que $\xi^{\lambda}$ (3.3) transforme les
+flèches de $A$ en isomorphismes est un $\lambda$-$I$-type ;
+\item[c)] (ajouter des données) si $T$ est un $\lambda$-$I$-type et $\alpha
+: B \to \mathrm{Ob}\,S^{\lambda}_{T,I} \times \mathrm{Ob}\,S^{\lambda}_{T,I}$,
+la catégorie cofibrée $T_{B,\alpha}$ des couples $(\xi, (u_{\beta})_{\beta
+\in B})$, $\xi \in T(C)$ et $u_{\beta} \in \mathrm{Hom}_{C}(\rho(\xi),
+\sigma(\xi))$ pour $\alpha(\beta) = (\rho, \sigma)$, est un
+$\lambda$-$I$-type ;
+\item[d)] (composition) si $(T_{j})_{j \in J}$ est une petite famille de
+$\lambda$-$I$-types, le produit 2-fibré des $T_{j}(C)$ sur $C^{I}$ est un
+$\lambda$-$I$-type.
+\end{enumerate}
+Un \emph{N.B.} demande s'il faut aussi une règle d'égalisation de couples
+de flèches.
+
+\textbf{Définition 5.1.} \emph{La 2-catégorie des $\lambda$-$I$-types est la
+plus petite sous-2-catégorie 2-pleine de $\text{2-Cofib}(\mathrm{Cat}_{
+\lambda})/\tau^{I}$ stable par les opérations a) b) c) d). On peut en donner
+une construction transfinie.}\footnote{C'est la définition « par
+présentation » des théories : sortes, opérations, axiomes, produits
+fibrés ; b) code les axiomes par l'inversibilité d'une flèche entre
+constructions, ce qui, avec le dédoublement des sommets (page 31),
+couvre les égalités et les conditions d'exactitude — la question du
+\emph{N.B.} a donc une réponse positive, que la page 84 avait déjà donnée
+en marge. L'ensemble a)--d) est ce que la théorie des esquisses formalise
+en une fois : un $\lambda$-$I$-type est une esquisse petite à limites de
+types $\lambda$, et ses modèles dans $C$ sont $T(C)$.}
+
+\textbf{Question 5.1.} \emph{Les $\lambda$-$I$-types sont-ils exactement les
+catégories cofibrées $\lambda$-représentables par un $R^{\lambda}_{T} \in
+\mathrm{Ob}\,\mathrm{Cat}_{\lambda}$ muni d'un $I \to \mathrm{Ob}\,R^{\lambda}_{T}$
+tel que $\mathrm{Ob}\,R$ soit la plus petite partie stable par les
+$\lambda$-limites et contenant $I$ ?}
+
+Le paragraphe 5.4 décompose la question en quatre problèmes de
+constructions universelles dans $\mathrm{Cat}_{\lambda}$, chacun avec une
+question de $\lambda$-engendrement :
+\begin{itemize}
+\item[a')] $\tau^{I}$ est-il représentable par une $\lambda$-catégorie
+libre $R_{I}$ sur $I$ objets, $\lambda$-engendrée par l'image de $I$ ?
+\item[b')] pour $R \in \mathrm{Cat}_{\lambda}$ et $A \subset \mathrm{Fl}\,R$,
+existe-t-il $R_{A}$ universelle rendant inversibles les flèches de $A$, et
+est-elle $\lambda$-engendrée par l'image de $R$ ?
+\item[c')] pour $\alpha : B \to \mathrm{Ob}\,R \times \mathrm{Ob}\,R$,
+existe-t-il $R_{B,\alpha}$ universelle munie de $i : R \to R_{B,\alpha}$ et
+de flèches indexées par $B$ entre les $i(\rho)$, $i(\sigma)$, et est-elle
+$\lambda$-engendrée par l'image de $i$ ?
+\item[d')] pour une petite famille $(R_{j})$ munie de $I \to \mathrm{Ob}\,
+R_{j}$, existe-t-il une somme amalgamée $R$ sous $I$ dans $\mathrm{Cat}_{
+\lambda}$, avec un système transitif d'isomorphismes entre les images de
+$I$, $\lambda$-engendrée par la réunion des images des $R_{j}$ ?
+\end{itemize}
+Les existences sont acquises par le théorème d'enveloppe des pages 3 et
+27, et seuls les $\lambda$-engendrements sont en question — c'est
+l'« essentiel » de 5.4.\footnote{Ce sont, dans l'ordre, les problèmes 1,
+2, « ajouter des flèches » et « composition » des pages 82--85 ; la
+question de l'engendrement est celle de savoir si la clôture transfinie
+sous les $\lambda$-limites de l'image de $I$ est toute la catégorie
+construite, ce qui est vrai par construction lorsque $\lambda$ est petit
+(page 76, \emph{Question}).} Le paragraphe 5.5 propose un critère de
+$\lambda$-engendrement par fidélité : si $S \subset \mathrm{Ob}\,R$ est tel
+que, pour toute $\lambda$-catégorie $R'$ et tous $\lambda$-foncteurs $F, G :
+R \to R'$, $\mathrm{Hom}(F, G) \to \prod_{s \in S} \mathrm{Hom}(F(s), G(s))$
+soit injectif, $R$ est-elle $\lambda$-engendrée par $S$ ? La réciproque
+est évidente.\footnote{La réponse est négative en général : « $S$
+détecte les 2-flèches » est strictement plus faible que « $S$ engendre
+par $\lambda$-limites » — la première propriété ne voit pas les
+facteurs directs, par exemple —, et 5.6 en tire la conséquence qu'il
+faut « peut-être renforcer la notion de sous-catégorie
+$\lambda$-engendrée, en tenant compte des flèches, pas seulement des
+objets ».} Les paragraphes 5.6 et 5.7 posent la réciproque de la question
+5.1 : si $R$ est $\lambda$-engendrée par $I$, la catégorie cofibrée qu'elle
+définit, munie de $T \to \tau^{I}$, est-elle un $\lambda$-$I$-type ? Et,
+$I$ omis, un $\lambda$-type est un $\lambda$-$I$-type pour $I$ et $\varphi$
+convenables, i.e. une catégorie cofibrée $\lambda$-représentable par un $R$
+dont les objets admettent une petite partie $\lambda$-génératrice « en un
+sens convenable à dégager ».
+
+\pagerange{102}{103}
+\subsection*{[6] $\lambda$ variable ; [7] dualité}
+
+Pour $\lambda \subset \lambda'$ (plus de limites exigées), on a un
+2-foncteur de restriction
+\begin{equation}
+\eta_{\lambda\lambda'} : (\lambda\text{-types}) \longrightarrow
+(\lambda'\text{-types}), \qquad \eta(T_{\lambda})(C) = T_{\lambda}(C)
+\ \text{pour } C \in \mathrm{Ob}\,\mathrm{Cat}_{\lambda'} \subset \mathrm{Ob}\,
+\mathrm{Cat}_{\lambda}, \tag{6.1}
+\end{equation}
+qui correspond, sur les catégories modelantes, à l'enveloppe
+$\mathrm{Cat}_{\lambda} \to \mathrm{Cat}_{\lambda'}$ (6.2), la
+« $\lambda'$-catégorie enveloppe ». Exemples : pour $\lambda$ = limites
+projectives finies et $\lambda'$ = limites projectives quelconques,
+l'enveloppe est $C \mapsto \mathrm{Pro}(C)$ ; pour les limites inductives,
+$C \mapsto \mathrm{Ind}(C)$. Il faudrait des conditions sous lesquelles
+(6.1) est pleinement fidèle : $\mathrm{Hom}_{\lambda}(T_{1}, T_{2}) \to
+\mathrm{Hom}_{\lambda'}(T_{1}, T_{2})$ est-il une équivalence ? « Sans doute
+faux » en général, « mais pleinement fidèle si $\overrightarrow{\lambda} =
+\emptyset$ ».\footnote{Pour $\lambda = $ limites finies, $\lambda' = $
+toutes les limites, c'est le second corollaire de la page 78 :
+pleinement fidèle, d'image les morphismes cohérents. La réserve
+« $\overrightarrow{\lambda} = \emptyset$ » est justifiée : dès qu'il y a
+des limites inductives dans $\lambda$, l'enveloppe $\mathrm{Cat}_{\lambda}
+\to \mathrm{Cat}_{\lambda'}$ ne conserve plus les catégories modelantes
+« à générateurs près », et la restriction perd des morphismes. Le
+manuscrit nomme les $\lambda'$-catégories enveloppes « analysantes »,
+mot que nous lisons sous réserve.}
+
+\emph{Dualité.} L'opposé d'un type $\lambda$ échange $\overleftarrow{\lambda}$
+et $\overrightarrow{\lambda}$ ; à tout $\lambda$-type $T$ on associe le
+$\lambda^{\circ}$-type $T^{\circ}$,
+\begin{equation}
+T^{\circ}(C) = T(C^{\circ})^{\circ}, \tag{7.1}
+\end{equation}
+i.e. $T^{\circ}_{\lambda^{\circ}} \cong (T_{\lambda})^{\circ}$ composé avec
+le passage à l'opposé $\mathrm{Cat}_{\lambda^{\circ}} \simeq \mathrm{Cat}_{
+\lambda}$ ; d'où des 2-équivalences $(\lambda\text{-types}) \cong
+(\lambda^{\circ}\text{-types})$ (7.3), de même avec $I$ (7.4), compatibles
+avec $C \mapsto C^{\circ}$ sur les catégories modelantes
+(7.6).\footnote{C'est pourquoi tout ce qui suit sur $\overrightarrow{\lambda}
+= \emptyset$ vaut aussi pour $\overleftarrow{\lambda} = \emptyset$, « bien
+sûr, on a un énoncé dual pour les $\varinjlim$ » (page 104). La
+numérotation saute (7.2) et (7.5), biffés sur la page.}
+
+\pagerange{103}{104}
+\subsection*{[8] Structures définies par limites projectives : limites, pleine fidélité, carrés 2-cartésiens}
+
+On suppose désormais $\overrightarrow{\lambda} = \emptyset$, et $T$
+désigne un $\lambda$-type.
+
+\textbf{8.1.} \emph{Pour toute $\lambda$-catégorie $C$, les limites
+projectives de type $\lambda$ existent dans $T(C)$, et plus généralement
+les limites projectives de tout type $d$ qui existent dans $C$ ; les
+foncteurs construction $T(C) \to C$ y commutent.} Écrire $T(C) \cong
+\mathrm{Hom}_{\lambda}(R_{T}, C)$ ; les limites de type $d$ de foncteurs $R_{T}
+\to C$ se calculent argument par argument dans $\mathrm{Hom}(R_{T}, C)$, et
+les $\lambda$-foncteurs y sont stables parce que les limites commutent aux
+limites. \textbf{8.1.1.} \emph{Plus généralement, pour $\lambda$ quelconque :
+si $C$ admet les limites projectives de type $d$ et si celles-ci
+commutent dans $C$ aux limites inductives de type $\overrightarrow{\lambda}$,
+alors $T(C)$ admet les limites projectives de type $d$, calculées argument
+par argument, et toute construction $\rho : T(C) \to C$ y commute ; de
+même $T(C) \to T(C')$ pour $C \to C'$ commutant à ces limites, et $T(C) \to
+T'(C)$ pour $T \to T'$.} C'est la proposition de la page 65, au net.
+
+\textbf{8.2.} \emph{Pour tout $\lambda$-type $T$ et tout $\lambda$-foncteur
+pleinement fidèle (resp. fidèle) $i : C \to C'$ (8.2.1), $T(i) : T(C) \to
+T(C')$ (8.2.2) est pleinement fidèle (resp. fidèle). Si de plus $T$ est
+muni d'une base fidèle $b : T \to \tau^{I}$, i.e. si $R = R^{\lambda}_{T}$ est
+muni de $\varphi : I \to \mathrm{Ob}\,R$ qui le $\lambda$-engendre, alors,
+dans le cas pleinement fidèle, le carré}
+
+\begin{tikzcd}
+T(C) \arrow[r] \arrow[d] & T(C') \arrow[d] \\
+C^{I} \arrow[r, hook] & C'^{I}
+\end{tikzcd}
+
+\emph{(8.2.3) est 2-cartésien.} En termes de $R$ : la sous-catégorie pleine
+$\mathrm{Hom}_{\lambda}(R, C)$ de $\mathrm{Hom}_{\lambda}(R, C')$ est formée des
+$\xi : R \to C'$ tels que $\xi(\varphi(i)) \in C$ pour tout $i \in I$ — car
+$I$ $\lambda$-engendre $R$ et $\xi$ commute aux $\lambda$-limites, donc
+envoie tout $R$ dans l'image essentielle de $C$, qui est stable par ces
+limites. « En termes imagés » : pour une famille $(E_{i})$ d'objets de $C$,
+il revient au même de se donner dessus une structure d'espèce $T$ dans $C$
+ou sur leurs images dans $C'$.
+
+Appliquons ceci au plongement de Yoneda $i : C \hookrightarrow \widehat{C}$
+(8.2.4), qui est un $\lambda$-foncteur puisque $\overrightarrow{\lambda} =
+\emptyset$ : le carré
+
+\begin{tikzcd}
+T(C) \arrow[r] \arrow[d] & T(\widehat{C}) \arrow[d] \\
+C^{I} \arrow[r] & \widehat{C}^{I}
+\end{tikzcd}
+
+\emph{(8.2.5) est 2-cartésien.} Puis, le foncteur contravariant canonique de
+$\widehat{C}$ dans $\mathrm{Hom}(\widehat{C}, \mathrm{Ens})$ restreint à $C$
+donne $C^{\circ} \to \mathrm{Hom}_{\lambda}(\widehat{C}, \mathrm{Ens})$, $X
+\mapsto (F \mapsto F(X))$ (8.2.6), à valeurs dans les foncteurs commutant à
+tout type « petit » de limites ; d'où, en composant avec $\mathrm{Hom}_{
+\lambda}(\widehat{C}, \mathrm{Ens}) \to \mathrm{Hom}(T(\widehat{C}),
+T(\mathrm{Ens}))$, un foncteur canonique $C^{\circ} \to \mathrm{Hom}(T(\widehat{C}),
+T(\mathrm{Ens}))$ (8.2.7), ou, ce qui revient au même,
+\begin{equation}
+\alpha : T(\widehat{C}) \xrightarrow{\ \approx\ } \mathrm{Hom}(C^{\circ}, S_{T}),
+\qquad S_{T} = T(\mathrm{Ens}). \tag{8.2.8}
+\end{equation}
+\emph{Le foncteur $\alpha$ est toujours une équivalence} : $\mathrm{Hom}_{
+\lambda}(R, \widehat{C}) \cong \mathrm{Hom}(R \times C^{\circ}, \mathrm{Ens})
+\cong \mathrm{Hom}(C^{\circ}, \mathrm{Hom}_{\lambda}(R, \mathrm{Ens}))$, les
+limites de type $\lambda$ dans $\widehat{C}$ se calculant argument par
+argument (formule encadrée en marge de la page 105).\footnote{Le
+manuscrit fait précéder l'assertion de deux hypothèses de taille —
+« l'hypothèse « $\widehat{C}$ une $\mathcal{U}$-catégorie » est
+essentielle » (marge de la page 104), « pour tout $C$ tel que
+$\widehat{C}$ soit une $\mathcal{U}$-catégorie » (page 105) —, et d'un
+alinéa biffé qui les discutait ; elles sont satisfaites pour $C$
+essentiellement petite, ce que nous supposons. L'équivalence (8.2.8) est
+la formule $T_{R}(\widehat{J}) \simeq \mathrm{Hom}(J^{\circ}, T_{R}(\mathrm{Ens}))$
+de la page 65.} Si $T$ a un ensemble $I$ d'objets de base, on a un carré
+commutatif (8.2.9)
+
+\begin{tikzcd}[column sep=large]
+T(\widehat{C}) \arrow[r, "\alpha"] \arrow[d, "b_{\widehat{C}}"'] & \mathrm{Hom}(C^{\circ}, S_{T}) \arrow[d, "{\mathrm{Hom}(C^{\circ},\, b_{\mathrm{Ens}})}"] \\
+\widehat{C}^{I} \arrow[r, "\cong"'] & \mathrm{Hom}(C^{\circ}, \mathrm{Ens})^{I}
+\end{tikzcd}
+
+et par (8.2.5) \emph{le carré}
+
+\begin{tikzcd}[column sep=large]
+T(C) \arrow[r, hook] \arrow[d, "b_{C}"'] & \mathrm{Hom}(C^{\circ}, S_{T}) \arrow[d, "{\varphi \mapsto (\beta_{i} \circ \varphi)_{i \in I}}"] \\
+C^{I} \arrow[r, hook] & \widehat{C}^{I}
+\end{tikzcd}
+
+\emph{(8.2.10) est 2-cartésien}, $\beta_{i} = b_{i,\mathrm{Ens}} : S_{T} \to
+\mathrm{Ens}$ étant les foncteurs « $i$-ème objet de base ». En termes
+imagés : se donner une structure d'espèce $T$ sur $(E_{i}) \in C^{I}$
+revient à se donner, fonctoriellement en $Z \in \mathrm{Ob}\,C$, une
+structure d'espèce $T$ sur la famille d'ensembles $(\mathrm{Hom}(Z,
+E_{i}))_{i \in I}$.\footnote{C'est la « définition par les points » d'une
+structure algébrique dans une catégorie : un groupe dans $C$ est un objet
+$G$ avec une structure de groupe sur chaque $\mathrm{Hom}(Z, G)$,
+naturelle en $Z$. L'énoncé (8.2.10) dit exactement quand une telle donnée
+provient de $C$ : quand les objets sous-jacents sont représentables ; et
+sa forme générale, pour toute théorie à limites projectives, est ce que la
+page 67 avait déjà établi. Le manuscrit écrit l'indice « $i \in Z$ » au
+lieu de « $i \in I$ » dans la première famille.} \emph{Donc, lorsque
+$\alpha$ est une équivalence, $T(C)$ est connu à équivalence près quand on
+connaît}
+\begin{equation}
+S = S_{T} = T(\mathrm{Ens}) \quad \text{avec les foncteurs} \quad
+\beta_{i} : S_{T} \to \mathrm{Ens}, \tag{8.2.11}
+\end{equation}
+\emph{comme la sous-catégorie pleine de $\mathrm{Hom}(C^{\circ}, S_{T})$ des
+$\varphi$ tels que les $\beta_{i} \circ \varphi$ soient représentables.}
+
+\pagerange{105}{106}
+\subsection*{8.2.12 : reconstruire $R$ à partir de $S$}
+
+Intrinsèquement, c'est la sous-catégorie pleine des $\varphi : C^{\circ} \to
+S_{T}$ tels que $\beta_{\mathrm{Ens}} \circ \varphi$ soit représentable pour
+\emph{toute} construction $\beta \in R^{\lambda}_{T}$. Le foncteur
+\begin{equation}
+\beta \longmapsto \beta_{\mathrm{Ens}} : R = R^{\lambda}_{T} \longrightarrow
+\mathrm{Hom}(S_{T}, \mathrm{Ens}) = \widehat{S^{\circ}_{T}} \tag{8.2.13}
+\end{equation}
+est le foncteur évident $R \to \mathrm{Hom}(\mathrm{Hom}_{\lambda}(R,
+\mathrm{Ens}), \mathrm{Ens})$ (8.2.14). Or $S = \mathrm{Hom}_{\lambda}(R,
+\mathrm{Ens})$, sous-catégorie pleine de $\widehat{R^{\circ}}$, \emph{contient
+$R^{\circ}$}, identifié aux foncteurs représentables de $R$ dans $\mathrm{Ens}$,
+qui commutent aux limites :
+\begin{equation}
+R^{\circ} \subset S \subset \widehat{R^{\circ}}, \tag{8.2.15}
+\end{equation}
+et l'accouplement $\pi : R \times S \to \mathrm{Ens}$ est
+\begin{equation}
+\pi(c, \xi) = \xi(c) = \mathrm{Hom}_{\widehat{R^{\circ}}}(c, \xi) =
+\mathrm{Hom}_{S}(c, \xi), \tag{8.2.16}
+\end{equation}
+de sorte que (8.2.13) est le composé de deux foncteurs pleinement fidèles
+\begin{equation}
+R \hookrightarrow S^{\circ} \hookrightarrow
+\widehat{S^{\circ}} = \mathrm{Hom}(S, \mathrm{Ens}), \tag{8.2.17}
+\end{equation}
+le premier étant (8.2.15), le second Yoneda ; donc (8.2.13) est pleinement
+fidèle. \emph{Ainsi $R$ est connu, à équivalence près, quand on connaît $S$
+et l'image de $R$ dans $\widehat{S^{\circ}}$.}
+
+\textbf{Pour résumer.} \emph{Si $T$ est un $\lambda$-type avec
+$\overrightarrow{\lambda} = \emptyset$, alors $S = T(\mathrm{Ens})$ est muni
+d'une sous-catégorie pleine $\Sigma \subset S$, formée des $\varphi \in
+\mathrm{Ob}\,S$ tels que pour toute $\lambda$-catégorie $C$ et tout $\xi \in
+T(C)$, définissant $\tilde\xi : C^{\circ} \to S$, $x \mapsto \mathrm{Hom}(x,
+\xi)$, le foncteur composé $x \mapsto \mathrm{Hom}_{S}(\varphi, \tilde\xi(x))$
+soit représentable ; $\Sigma$ est stable dans $S$ par limites inductives
+de type $\lambda$, parce que $C$ est stable dans $\widehat{C}$ par limites
+projectives ; et pour toute $C$ on a des $\lambda$-foncteurs $\Sigma^{\circ}
+\to \underline{\mathrm{Hom}}(T(C), C)$ et $T(C) \to \mathrm{Hom}_{\lambda}(
+\Sigma^{\circ}, C)$.} La phrase suivante — « on voit alors que l'on trouve
+ainsi une \ldots » — s'arrête là, et la copie au net avec
+elle.\footnote{Le manuscrit écrit « tout $\xi \in C_{\lambda}$ » là où le
+sens exige $\xi \in T(C)$, ce que la page 68 écrit ; nous avons rétabli.
+Ce que la phrase interrompue allait dire est la page 68 : une équivalence
+$\Sigma^{\circ} \simeq R$, i.e. \emph{la catégorie modelante se retrouve
+dans les modèles ensemblistes comme la sous-catégorie des objets
+« représentables en toute construction »}. Pour $\lambda$ = limites
+finies c'est $\Sigma = S_{\mathrm{pf}}$ et la dualité de Gabriel--Ulmer
+(page 77) ; en général $R^{\circ} \subset \Sigma$ est clair (page 68, note)
+et l'égalité est ce que la copie n'a pas eu le temps d'écrire. La
+stabilité de $\Sigma$ par limites inductives de type $\lambda$ est celle de
+la page 68, avec la même démonstration.}
+
+\pagerange{108}{111}
+\section*{Topos classifiant, structure universelle, topos modulaire (pages 108 à 111)}
+
+\pagerange{108}{109}
+\subsection*{L'image inverse de la structure universelle}
+
+Un feuillet au crayon reprend, pour les théories à limites finies, la
+question de la page 17 depuis le topos. Soit $C$ une catégorie
+essentiellement petite à limites projectives finies, $T$ l'espèce de
+structures que $C$ définit, $\widehat{C} = B_{T} = B$ le topos classifiant,
+$O_{B}$ la structure universelle dans $B$ — le foncteur d'inclusion $C \to
+\widehat{C}$, vu comme objet de $T(B) = \mathrm{Hom}_{\mathrm{lex}}(C, B)$ —, et
+$E$ un topos. Une $T$-structure $O_{E} \in T(E) \simeq \mathrm{Hom}_{
+\mathrm{lex}}(C, E)$, $O_{E} = f_{0}$, correspond à un morphisme de topos $f :
+E \to B_{T}$, et
+\[
+O_{E} \simeq f^{*}(O_{B}), \qquad f_{0} = f^{*} \mid C.
+\]
+Pour $U \in \mathrm{Ob}\,E$ et $X \in \mathrm{Ob}\,B$, on définit une
+application
+\begin{equation}
+\mathrm{Hom}_{E}(U, f^{*}X) \longrightarrow \mathrm{Hom}_{T(\mathrm{Ens})}
+(O_{B}(X), O_{E}(U)), \tag{1}
+\end{equation}
+où $O_{E}(U) \in T(\mathrm{Ens})$ est l'image de $O_{E}$ par le foncteur exact
+à gauche $Z \mapsto \mathrm{Hom}_{E}(U, Z)$, et $O_{B}(X)$ de même dans
+$\widehat{C}$ : on a $\mathrm{Hom}_{E}(U, f^{*}X) \to \mathrm{Hom}(O_{E}(f^{*}X),
+O_{E}(U)) \to \mathrm{Hom}(O_{B}(X), O_{E}(U))$, la seconde flèche par le
+morphisme $O_{B}(X) \to O_{E}(f^{*}X)$ de $T(\mathrm{Ens})$ ; ici $T(\mathrm{Ens})
+= \mathrm{Ind}(C^{\circ})$. \emph{Pour $X \in \mathrm{Ob}\,C$, (1) est une
+bijection} : le second membre est $\mathrm{Hom}_{\mathrm{Ind}(C^{\circ})}(X,
+O_{E}(U))$, et
+\begin{gather*}
+O_{B}(X) = \mathrm{Hom}_{C}(X, -), \qquad O_{E}(U) = \bigl(Y \mapsto
+\mathrm{Hom}_{E}(U, f_{0}(Y))\bigr), \\
+\mathrm{Hom}(O_{B}(X), O_{E}(U)) = O_{E}(U)(X) = \mathrm{Hom}_{E}(U, f_{0}(X)),
+\end{gather*}
+par Yoneda, ce qui est bien $\mathrm{Hom}_{E}(U, f^{*}X)$.\footnote{C'est la
+description explicite de l'image inverse par un morphisme de topos vers
+un topos de préfaisceaux : $f^{*}(X)$ pour $X$ représentable est $f_{0}(X)$,
+et pour $X$ quelconque une limite inductive de tels. L'énoncé « Prouver que
+si $X \in \mathrm{Ob}\,C$, l'application précédente est une bijection » est
+posé, et la ligne qui suit le prouve. La formule $T(\mathrm{Ens}) =
+\mathrm{Ind}(C^{\circ})$, ajoutée à l'encre bleue, et $\mathrm{Pro}(C) \simeq
+T(\mathrm{Ens})^{\circ}$ plus bas, sont le cas des limites finies de (8.2.15)
+et de la page 77.}
+
+On en profite pour calculer $f^{*}(\mathcal{F})$ pour $\mathcal{F}$ un champ
+sur $B$. Il revient au même de se donner $\mathcal{F}$ ou sa restriction
+à $C$, une catégorie fibrée sur $C$ (avec des données de descente que la
+page laisse en blanc). Si $B' \subset B$ est un sous-topos, correspondant
+à une topologie $\tau$ sur $C$ et à une sous-espèce $T'$ de $T$, et si
+$O_{E}$ est de cette espèce, i.e. $f$ se factorise par $B'$, i.e. $f_{0}$
+est continu pour $\tau$, alors un champ $\mathcal{F}'$ sur $B'$ est un
+champ $\mathcal{F}_{0}$ sur $B$ satisfaisant une condition relative à
+$\tau$, et $f'^{*}(\mathcal{F}')$ se calcule en termes de $f_{0}$ et
+$\mathcal{F}'$. On commence par prolonger $\mathcal{F}_{0}$, catégorie fibrée
+sur $C$, à $\mathrm{Pro}(C) \simeq T(\mathrm{Ens})^{\circ}$ ; alors
+$\mathcal{F}_{0}(O_{E}(U))$ est défini, covariant en l'objet $O_{E}(U) \in
+T(\mathrm{Ens})$ ; pour $U$ variable, $U \mapsto \mathcal{F}_{0}(O_{E}(U))$ est
+une catégorie fibrée sur $E$, image inverse de $\mathcal{F}_{0}$ par $O_{E} :
+E^{\circ} \to T(\mathrm{Ens}) \cong \mathrm{Pro}(C)^{\circ}$, et $f^{*}
+(\mathcal{F})$ est le champ associé.\footnote{Le feuillet est au crayon,
+très pâle, et la moitié des mots de liaison est perdue ; ce paragraphe est
+la reconstruction de son argument, et il est correct : l'image inverse
+d'un champ sur un topos de préfaisceaux se calcule en prolongeant sa
+restriction à $C$ aux pro-objets (par limites projectives, ce que
+« covariant en l'objet de $T(\mathrm{Ens})$ » désigne), en composant avec
+le foncteur $U \mapsto O_{E}(U)$, et en prenant le champ associé. C'est le
+cas $\mathrm{Cat}$-valué de (8.2.10).}
+
+\pagerange{111}{111}
+\subsection*{Topos modulaire pour des structures sur objets d'un topos fixé}
+
+Un feuillet quadrillé, sous le titre « Topos modulaire pour des structures
+algébriques sur objets variés d'un topos fixé $X$ », pose le problème
+relatif. On se donne des objets $E_{i} \in X$, $i \in I$, et une espèce de
+structure $T$ de topos classifiant $B$ muni de ses objets de base $b_{i}
+\in B$. On s'intéresse, pour tout topos $X'$ sur $X$, aux structures
+d'espèce $T$ dans $X'$ — les morphismes $f : X' \to B$ — dont les objets de
+base sont les images inverses $E'_{i}$ des $E_{i}$ : $f^{*}(b_{i}) \simeq
+E'_{i}$. La catégorie de ces objets pour $X'$ fixé, $X' \to X$ et $X' \to B$
+variables, est le produit 2-fibré de $\underline{\mathrm{Hom}}_{\mathrm{Top}}(X',
+X)$ et $\underline{\mathrm{Hom}}_{\mathrm{Top}}(X', B)$ au-dessus de $\underline{
+\mathrm{Hom}}_{\mathrm{Top}}(X', B_{I})$ ; \emph{le topos modulaire cherché est
+donc le produit 2-fibré $B \times_{B_{I}} X$ dans la 2-catégorie des
+topos},
+
+\begin{tikzcd}
+B \arrow[dr, "b"'] & & X \arrow[dl, "(E_{i})"] \\
+& B_{I} = \widehat{(\mathrm{Ens}_{f})^{\circ}}{}^{I} &
+\end{tikzcd}
+
+$B_{I}$ étant le classifiant de $I$ objets, « on n'a pas encore prouvé que
+cela marche ».\footnote{Cela marche : les produits fibrés de topos
+existent (page 21, SGA 4 IV 8.2), et $B \times_{B_{I}} X$ classifie
+exactement les $T$-structures sur $X'$ dont les objets de base sont les
+$E'_{i}$ — c'est l'exemple type de ce que le produit fibré de classifiants
+classifie. Le mot « modulaire » du titre, et « catégorie modulaire » à la
+ligne suivante, est celui que la page 98 écrit « modelaire » : le topos
+des modèles.} Dans le cas où $T$ est définie par limites finies, de
+catégorie modelante $R$ avec $B = \widehat{R}$ et $I \to \mathrm{Ob}\,R$, on
+s'intéresse aux foncteurs exacts à gauche $R \to X'$ transformant les
+$r_{i}$ en les $E'_{i}$ ; soit $\mathcal{S}$ le champ sur $X$ des structures
+$(X', (E'_{i}), f : R \to X')$ avec $f(r_{i}) \simeq E'_{i}$, et $\underline{I}
+_{X}$ le champ dont c'est la fibre — la page s'arrête sur cette
+définition, avec en marge, barré, « champ en catégories associé aux
+catégories \ldots ».\footnote{Le programme est celui des \emph{topos
+modulaires} — au sens de : topos des modules d'une structure — relatifs à
+une base, qui est la forme que prendra, chez Hakim, la construction des
+schémas relatifs à un topos annelé, et, en logique catégorique, la
+notion de topos classifiant \emph{relatif}. Le dossier s'arrête au moment
+où la question est posée dans les bons termes.}
+
+\end{document}
