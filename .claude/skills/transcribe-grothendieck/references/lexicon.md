@@ -2,7 +2,7 @@
 
 # His lexicon, counted from the transcriptions
 
-Built from **52 batch files across 26 folders, 661 transcribed pages**, by `scripts/lexicon.mjs`. Words appearing fewer than 3 times are omitted here; `lexicon.json` carries the full counts.
+Built from **53 batch files across 27 folders, 680 transcribed pages**, by `scripts/lexicon.mjs`. Words appearing fewer than 3 times are omitted here; `lexicon.json` carries the full counts.
 
 > **This is a witness to vocabulary, not to ink.** It is derived from first-pass
 > machine transcriptions, **none of which has been checked against the leaves by
@@ -32,15 +32,15 @@ Grothendieck's. Grammar words of both languages are filtered; the rest stands.
 | foncteur | 340 | quotient | 41 | pt | 26 |
 | cas | 261 | théorème | 41 | somme | 26 |
 | type | 230 | topologie | 41 | utilisant | 26 |
-| d'un | 221 | donné | 40 | application | 25 |
+| d'un | 223 | donné | 40 | application | 25 |
 | foncteurs | 216 | faisceau | 40 | associé | 25 |
 | topos | 201 | alg | 39 | d'ailleurs | 25 |
 | catégories | 163 | descente | 39 | d'exactitude | 25 |
 | conditions | 155 | forme | 39 | démonstration | 25 |
-| deux | 151 | finie | 38 | doit | 25 |
-| c'est | 147 | image | 38 | donner | 25 |
-| fidèle | 136 | images | 38 | existence | 25 |
-| flèches | 133 | propriétés | 38 | galois | 25 |
+| deux | 151 | propriétés | 39 | doit | 25 |
+| c'est | 147 | finie | 38 | donner | 25 |
+| fidèle | 136 | image | 38 | existence | 25 |
+| flèches | 133 | images | 38 | galois | 25 |
 | morphisme | 126 | sens | 38 | inverses | 25 |
 | fini | 121 | correspondant | 37 | iv | 25 |
 | d'une | 119 | étales | 37 | lieu | 25 |
@@ -87,20 +87,20 @@ Grothendieck's. Grammar words of both languages are filtered; the rest stands.
 | étale | 67 | commutant | 32 | signifie | 22 |
 | base | 66 | cônes | 32 | str | 22 |
 | prouver | 66 | covering | 32 | suivant | 22 |
-| gauche | 65 | est-il | 32 | axiomes | 21 |
-| n'est | 65 | supposer | 32 | clos | 21 |
-| ex | 64 | composition | 31 | cohomologie | 21 |
-| considérons | 63 | familles | 31 | correspondent | 21 |
-| corps | 63 | flèche | 31 | couples | 21 |
-| défini | 63 | l'ens | 31 | diviseur | 21 |
-| point | 63 | part | 31 | factorise | 21 |
-| schéma | 63 | prop | 31 | ij | 21 |
-| stable | 62 | quand | 31 | irréductible | 21 |
-| commute | 61 | restriction | 31 | revient | 21 |
-| définit | 60 | sait | 31 | sections | 21 |
-| finis | 60 | trivial | 31 | together | 21 |
-| faut | 58 | case | 30 | used | 21 |
-| suffit | 58 | classe | 30 | anneaux | 20 |
+| gauche | 65 | est-il | 32 | anneaux | 21 |
+| n'est | 65 | supposer | 32 | axiomes | 21 |
+| ex | 64 | composition | 31 | clos | 21 |
+| considérons | 63 | familles | 31 | cohomologie | 21 |
+| corps | 63 | flèche | 31 | correspondent | 21 |
+| défini | 63 | l'ens | 31 | couples | 21 |
+| point | 63 | part | 31 | diviseur | 21 |
+| schéma | 63 | prop | 31 | factorise | 21 |
+| stable | 62 | quand | 31 | ij | 21 |
+| commute | 61 | restriction | 31 | irréductible | 21 |
+| définit | 60 | sait | 31 | revient | 21 |
+| finis | 60 | trivial | 31 | sections | 21 |
+| faut | 58 | case | 30 | together | 21 |
+| suffit | 58 | classe | 30 | used | 21 |
 | schémas | 57 | dessus | 30 | auc | 20 |
 | droite | 56 | etc | 30 | clair | 20 |
 | ouvert | 56 | ind | 30 | direct | 20 |
@@ -173,9 +173,9 @@ Half of how he writes, and what most defeats a reader coming to the hand cold.
 | prop. | 21 | i. | 7 | diag. | 3 |
 | g. | 20 | V. | 7 | eff. | 3 |
 | p. ex. | 20 | A. | 6 | ici. | 3 |
-| etc. | 18 | épim. | 6 | isom. can. | 3 |
-| pl. fid. | 18 | es. | 6 | it. | 3 |
-| s. | 18 | est. | 6 | loc. isom. | 3 |
+| s. | 19 | épim. | 6 | isom. can. | 3 |
+| etc. | 18 | es. | 6 | it. | 3 |
+| pl. fid. | 18 | est. | 6 | loc. isom. | 3 |
 | le. | 17 | gén. | 6 | mas. | 3 |
 | p.ex. | 16 | loc. cit. | 6 | mb. | 3 |
 | str. | 16 | orème. | 6 | même. | 3 |
@@ -193,46 +193,46 @@ Macros counted inside mathematics — what the notation of this fonds actually c
 
 | macro | n | macro | n | macro | n |
 |---|---|---|---|---|---|
-| \mathrm | 2659 | \tau | 185 | \rightrightarrows | 50 |
-| \arrow | 1355 | \Sigma | 182 | \cdots | 48 |
-| \to | 1266 | \emph | 157 | \approx | 46 |
-| \underline | 1066 | \emptyset | 137 | \geqslant | 45 |
-| \in | 964 | \mapsto | 137 | \Rightarrow | 45 |
-| \mathcal | 750 | \forall | 135 | \textbf | 45 |
-| \varphi | 736 | \varepsilon | 121 | \hookrightarrow | 44 |
-| \alpha | 713 | \tilde | 119 | \exists | 43 |
-| \otimes | 634 | \mathfrak | 118 | \bigcup | 42 |
-| \times | 631 | \overline | 118 | \Longrightarrow | 42 |
-| \lambda | 628 | \Phi | 118 | \cdot | 41 |
-| \pi | 618 | \sim | 118 | \leqslant | 41 |
-| \text | 522 | \item | 117 | \dim | 39 |
-| \Delta | 520 | \omega | 101 | \cong | 38 |
-| \longrightarrow | 486 | \prod | 95 | \partial | 36 |
-| \simeq | 485 | \tag | 95 | \boxed | 35 |
-| \qquad | 480 | \ldots | 94 | \underset | 35 |
-| \circ | 476 | \Omega | 92 | \chi | 34 |
-| \begin | 475 | \page | 90 | \longmapsto | 34 |
-| \end | 475 | \scriptsize | 89 | \supset | 34 |
-| \delta | 464 | \leq | 82 | \underbrace | 33 |
-| \xi | 406 | \neq | 79 | \big | 32 |
-| \xrightarrow | 386 | \psi | 77 | \colon | 30 |
-| \bar | 340 | \cap | 75 | \cup | 30 |
-| \operatorname | 299 | \check | 75 | \dot | 30 |
-| \mathbb | 294 | \mathbf | 75 | \longleftarrow | 30 |
-| \widehat | 290 | \Lambda | 73 | \eta | 28 |
-| \hat | 282 | \mu | 73 | \infty | 28 |
-| \beta | 276 | \Psi | 63 | \coprod | 27 |
-| \bigl | 258 | \overset | 62 | \frac | 24 |
-| \bigr | 254 | \Theta | 61 | \leftarrow | 24 |
-| \sigma | 247 | \left | 58 | \bullet | 23 |
-| \varprojlim | 245 | \right | 58 | \mid | 23 |
-| \Gamma | 241 | \wedge | 57 | \setminus | 21 |
-| \widetilde | 233 | \geq | 56 | \phi | 19 |
-| \rho | 224 | \vee | 55 | \sum | 19 |
-| \subset | 217 | \gamma | 54 | \sup | 19 |
-| \varinjlim | 210 | \ell | 52 | \bigcap | 18 |
-| \Pi | 200 | \Bigl | 51 | \iff | 17 |
-| \quad | 185 | \Bigr | 50 | \Longleftrightarrow | 17 |
+| \mathrm | 2659 | \quad | 189 | \rightrightarrows | 50 |
+| \arrow | 1355 | \tau | 185 | \cdots | 48 |
+| \to | 1270 | \Sigma | 182 | \approx | 46 |
+| \underline | 1067 | \emptyset | 137 | \geqslant | 45 |
+| \in | 967 | \mapsto | 137 | \Rightarrow | 45 |
+| \varphi | 785 | \forall | 135 | \textbf | 45 |
+| \mathcal | 751 | \item | 122 | \hookrightarrow | 44 |
+| \alpha | 722 | \varepsilon | 121 | \exists | 43 |
+| \otimes | 634 | \Phi | 119 | \bigcup | 42 |
+| \lambda | 633 | \tilde | 119 | \Longrightarrow | 42 |
+| \times | 631 | \mathfrak | 118 | \cdot | 41 |
+| \pi | 618 | \overline | 118 | \leqslant | 41 |
+| \text | 559 | \sim | 118 | \infty | 40 |
+| \Delta | 535 | \omega | 114 | \dim | 39 |
+| \qquad | 519 | \page | 108 | \boxed | 38 |
+| \longrightarrow | 486 | \leq | 102 | \cong | 38 |
+| \simeq | 485 | \prod | 95 | \partial | 36 |
+| \begin | 481 | \tag | 95 | \int | 35 |
+| \end | 481 | \ldots | 94 | \underset | 35 |
+| \circ | 478 | \Omega | 92 | \chi | 34 |
+| \delta | 464 | \scriptsize | 89 | \longmapsto | 34 |
+| \xi | 406 | \mu | 79 | \supset | 34 |
+| \xrightarrow | 386 | \neq | 79 | \underbrace | 33 |
+| \bar | 340 | \psi | 77 | \big | 32 |
+| \operatorname | 299 | \cap | 75 | \colon | 30 |
+| \mathbb | 294 | \check | 75 | \cup | 30 |
+| \widehat | 290 | \mathbf | 75 | \dot | 30 |
+| \hat | 282 | \Lambda | 73 | \longleftarrow | 30 |
+| \beta | 276 | \Psi | 68 | \eta | 28 |
+| \bigl | 259 | \overset | 62 | \sup | 28 |
+| \bigr | 255 | \Theta | 61 | \coprod | 27 |
+| \sigma | 247 | \geq | 60 | \frac | 24 |
+| \varprojlim | 245 | \left | 59 | \leftarrow | 24 |
+| \Gamma | 241 | \right | 59 | \bullet | 23 |
+| \widetilde | 233 | \wedge | 57 | \mid | 23 |
+| \rho | 224 | \vee | 55 | \setminus | 21 |
+| \subset | 219 | \Bigl | 54 | \langle | 19 |
+| \varinjlim | 210 | \gamma | 54 | \phi | 19 |
+| \emph | 200 | \Bigr | 53 | \rangle | 19 |
+| \Pi | 200 | \ell | 52 | \sum | 19 |
 
 ## Read only as doubtful, never plainly
 
@@ -242,6 +242,14 @@ candidate list is a reason to look harder at the page, not a reason to accept it
 
 | word | n | word | n | word | n |
 |---|---|---|---|---|---|
-| détail | 3 | cl | 2 | duals | 2 |
-| beck | 2 | contractions | 2 | injection | 2 |
-| cancelé | 2 | déconnectant | 2 | vgr | 2 |
+| pólya | 15 | banach | 2 | duals | 2 |
+| sommable | 6 | beck | 2 | hermitienne | 2 |
+| décroissantes | 5 | borné | 2 | injection | 2 |
+| bilatère | 4 | bornées | 2 | involutif | 2 |
+| convexe | 4 | cancelé | 2 | involutive | 2 |
+| trace | 4 | cl | 2 | normique | 2 |
+| détail | 3 | compactes | 2 | positives | 2 |
+| hermitien | 3 | contractions | 2 | semi-finie | 2 |
+| positif | 3 | croissantes | 2 | sous-algèbre | 2 |
+| spectralement | 3 | déconnectant | 2 | translations | 2 |
+| adhérence | 2 | demi-espaces | 2 | vgr | 2 |
