@@ -469,16 +469,16 @@ function Contributors() {
  */
 const PILOT = {
   /** Transcribed so far, counted off `public/manifest.json` and excluding the
-      specimen: twenty-two folders, 618 pages — 19#1–5, 29#1–11, 35#1, 42#1,
-      44#1, 48#1, 49#1, 54#1, 66#1, 108#1, 112#1, 114#1, 115#1, 125#1,
-      134-1#1, 135#1–3, 139#1, 151#1–4, 161-1#1, 161-3#1–3, 162-1#1,
-      162-6#1. */
-  batchesTranscribed: 43,
+      specimen: twenty-six folders, 661 pages — 19#1–5, 26#1, 29#1–11, 35#1,
+      42#1, 44#1, 47#1, 48#1, 49#1, 50#1, 54#1, 66#1, 108#1, 112#1, 114#1,
+      115#1, 125#1, 134-1#1, 135#1–3, 139#1, 151#1–4, 161-1#1, 161-2#1–6,
+      161-3#1–3, 162-1#1, 162-6#1. */
+  batchesTranscribed: 52,
   /** All but one — folder 139 has a transcription and no modernised reading,
       and deliberately: it is two photographs of a medal and there is no
       mathematics to restate. The reading is written per folder, taken whole,
       and covers every batch of it. */
-  batchesModernised: 42,
+  batchesModernised: 51,
   /** Per batch. `contextM` is every token the pass sent or received, cache
       reads included; `writtenK` is output alone; hours are model-active time,
       gaps over five minutes dropped. Transcription is the mean of the five

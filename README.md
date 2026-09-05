@@ -148,21 +148,24 @@ npm run manifest    # tell the site which files now exist
 The `.tex` under `transcripts/` is the source of record and the only thing
 versioned. HTML and PDF are derived, and rebuilt.
 
-**Forty-three batches are transcribed so far — twenty-two folders, 618 pages.**
+**Fifty-two batches are transcribed so far — twenty-six folders, 661 pages.**
 The first five ran under Fable 5: folder 115 (fourteen pages — functorial
 correspondences and the duality of topoi) and folder 161-1 (nineteen pages —
 adjoint functors, the free symmetric monoidal category, theories, and a
 half-page sketch of Giraud's theorem) on 8 August 2026, then the three batches
 of folder 135 (fifty-eight pages, the whole folder — Gr-categories, their
 classification by a class in $H^3$, and the Picard envelope; the last thirteen
-pages are a manuscript in English) on 9 and 15 August. Everything since has run
+pages are a manuscript in English) on 9 and 15 August. Most of the rest ran
 under Opus 5, including the four long folders — 19 (five batches), 29 (eleven),
 151 (four) and 161-3 (three) — and the run of one-batch folders that
 [issue #12](https://github.com/Commutator-IO/grothendieck-project/issues/12)
-tracks.
+tracks. Since 3 September 2026 Fable 5.1 is admitted alongside Opus 5, and has
+read folders 26 and 47 and batches 3 to 6 of folder 161-2 (111 pages — the
+Δ-envelope theorem, the classifying topoi of ring axioms, Gabriel–Ulmer
+duality, λ-types); each file's header names the model that read it.
 
-**Twenty-one of the twenty-two folders also have their modernised reading**,
-covering 42 of the 43 batches. The exception is folder 139, and deliberately:
+**Twenty-five of the twenty-six folders also have their modernised reading**,
+covering 51 of the 52 batches. The exception is folder 139, and deliberately:
 it is two photographs of the Prix Émile Picard medal, and a modernised reading
 would be a file that reads nothing. None of it has been checked page by page by
 a person. `/method/` prices the two steps separately, from the passes
