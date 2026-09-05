@@ -50,6 +50,12 @@ jobs:
       - name: Render transcripts
         run: npm run render
 
+      # The TEI export is derived from the same .tex, for the same reason: a
+      # committed XML would drift from its source. It needs nothing beyond
+      # Node; xmllint, when the runner has it, checks well-formedness.
+      - name: Export TEI
+        run: npm run tei
+
       # The download PDFs are *built*, not stored.
       #
       # They are derived from transcripts/*.tex, so committing them would put

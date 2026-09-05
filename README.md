@@ -142,11 +142,40 @@ first-pass machine work; corrections are the point of publishing it.
 ```bash
 npm run render      # transcripts/*.tex → the reading views the left pane shows
 npm run pdf         # → the PDFs the download buttons offer
+npm run tei         # → a TEI P5 file per transcription, for archives and deposits
 npm run manifest    # tell the site which files now exist
 ```
 
 The `.tex` under `transcripts/` is the source of record and the only thing
-versioned. HTML and PDF are derived, and rebuilt.
+versioned. HTML, PDF and TEI are derived, and rebuilt.
+
+### The TEI export
+
+`npm run tei` writes `batch-NN.fr.xml` beside each transcription's HTML and
+PDF, and the download row offers it as **TEI**. It is produced from the `.tex`
+alone, mechanically, and re-reads no page: the seven apparatus macros map one
+to one onto TEI's own elements — `\ill{}` to `<gap reason="illegible"/>`,
+`\uncertain{}` to `<unclear>`, `\add{}` to `<supplied>`, `\struck{}` to
+`<del>`, `\note{}` to an editorial `<note>`, `\marginal{}` to an authorial one
+in the margin, `\page{}` to `<pb>` with a `facs` link into Montpellier's PDF at
+the right offset. Mathematics travels untouched as TeX inside `<formula>`;
+commutative diagrams as `tikz-cd` inside `<figure>`. The header carries what
+the file's comment carries — the model that read the pages, the date, the
+« Édition de démonstration » status, the shelfmark and the inventory's dating —
+as structured statements, so a file deposited in HAL or Nakala keeps its
+provenance without this site. The export holds the transcription's line of
+not being a diplomatic edition: it encodes what the macros encode and nothing
+about the paper.
+
+Every file is checked well-formed with `xmllint` when it is installed. To
+validate against the TEI schema itself, fetch `tei_all.rng` once from
+tei-c.org and run:
+
+```bash
+for x in public/transcripts/*/batch-*.fr.xml; do xmllint --noout --relaxng tei_all.rng "$x"; done
+```
+
+On 5 September 2026 all 53 files validated.
 
 **Fifty-two batches are transcribed so far — twenty-six folders, 661 pages.**
 The first five ran under Fable 5: folder 115 (fourteen pages — functorial
