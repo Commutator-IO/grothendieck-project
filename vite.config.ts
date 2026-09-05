@@ -1,6 +1,5 @@
 import { defineConfig, type Plugin } from 'vite'
 import { request } from 'node:https'
-import { createReadStream, statSync } from 'node:fs'
 import { resolve } from 'node:path'
 import allowedEditions from './relay/allowed.json'
 import react from '@vitejs/plugin-react'
@@ -44,47 +43,6 @@ function montpellierSource(): Plugin {
     // what works in development is what ships.
     const e = /^\/edition\/([\w.-]+)\.pdf$/.exec(path)
     if (!m && !e) return next()
-
-    // A folder mirrored by `npm run archive` sits in `archives/raw/<id>.pdf`
-    // (gitignored). When it is there, serve it: Montpellier is down often
-    // enough that reading a transcript beside its facsimile cannot depend on
-    // it, and the mirror is byte for byte the file upstream would send. Range
-    // is honoured for the same reason it is forwarded below — the viewer
-    // seeks, and a full 84 MB stream per page turn is unusable. The pattern
-    // above admits only `<id>.pdf`, so this cannot read outside that folder.
-    if (m) {
-      const file = resolve(import.meta.dirname, 'archives/raw', `${m[1]}.pdf`)
-      let size = -1
-      try {
-        size = statSync(file).size
-      } catch {
-        // Not mirrored: fall through to upstream.
-      }
-      if (size >= 0) {
-        const range = /^bytes=(\d*)-(\d*)$/.exec(req.headers.range ?? '')
-        let start = 0
-        let end = size - 1
-        if (range && (range[1] || range[2])) {
-          start = range[1] ? Number(range[1]) : Math.max(0, size - Number(range[2]))
-          end = range[1] && range[2] ? Math.min(Number(range[2]), size - 1) : end
-          if (start > end || start >= size) {
-            res.statusCode = 416
-            res.setHeader('Content-Range', `bytes */${size}`)
-            return res.end()
-          }
-          res.statusCode = 206
-          res.setHeader('Content-Range', `bytes ${start}-${end}/${size}`)
-        } else {
-          res.statusCode = 200
-        }
-        res.setHeader('Content-Type', 'application/pdf')
-        res.setHeader('Accept-Ranges', 'bytes')
-        res.setHeader('Content-Length', String(end - start + 1))
-        res.setHeader('Cache-Control', 'public, max-age=86400')
-        if (req.method === 'HEAD') return res.end()
-        return createReadStream(file, { start, end }).pipe(res)
-      }
-    }
 
     // Only a shelfmark, and only ever as `<id>.pdf`. The pattern excludes
     // slashes and dots, so no request can be steered off this host or up the
