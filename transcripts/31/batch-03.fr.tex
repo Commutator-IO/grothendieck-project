@@ -1,0 +1,702 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 31, batch 3 (pages 41-60).
+% Established from the facsimile archives/batches/31/batch-03.pdf (a mirror of
+% https://grothendieck.umontpellier.fr/31.pdf), per the skill
+% transcribe-grothendieck.
+%
+% Pass: Opus 5 (claude-opus-5), 2026-09-11 — first pass, unchecked against
+% the pages by a human.
+%
+% The batch holds three runs. The third is opened by a cover sheet inscribed
+% in his hand (page 53), which becomes the section heading and carries no
+% \page{}; page 60 is a loose scrap on a different subject and is given its
+% own heading.
+%
+%   Pages 41-44 — ink, fair on 41-43, a fast hand on 44: a proposition on a
+%     ring B with a finite group G of automorphisms, A = B^G, the trace
+%     Tr_G b = Σ_{g∈G} gb, and the equivalence of a) A = Tr_G B, a') 1 ∈
+%     Tr_G B, b) Ĥ(G,M) = 0 for every (G,B)-module M, b(q) the same in one
+%     degree; then the relative form for G' ⊂ G with A' = B^{G'} and the
+%     transfer t(G,G'), the reduction b'(q) ⟺ b'(0), and the statement that
+%     when 1 = Tr_{G/G'} φ for some φ ∈ Hom_{G'}(M,M) the transfer is onto
+%     and the corestriction injective with image the stable elements
+%     Ĥ(G',M)^G — « Ceci contient le Th. sur les groupes de Sylow ». Page 43
+%     applies this to a local ring O with decomposition group G_d and
+%     inertia G_i, and closes with the comparison square between Ĥ(G,M),
+%     Ĥ(G_i,M)^{G/G_i}, Ĥ(G_d,M)^{G/G_d} and Ĥ(G_d, M_{m_0}). Page 44,
+%     cancelled by two long diagonals, is class field theory: the two exact
+%     sequences for G_k and G_k^0, their S-versions, and the lemma that an
+%     extension of a local field is unramified iff N_{L/k} U_L = U_k.
+%   Pages 46-51 — ink, a fast draft: a Proposition giving four equivalent
+%     conditions on a field k and an integer n for the vanishing of H^i(k,G)
+%     above n — for commutative algebraic groups, for finite groups, and for
+%     the groups of units of separable commutative algebras — with the
+%     implication diagram and the dévissages (unipotent/semi-simple, the
+%     ℓ-adic filtration, characteristic 0 against characteristic p, the
+%     passage to the torsion subgroup U of G and H^i(g,U) = lim H^i(g, _nU)).
+%     Page 49 proves c) ⟹ b') through A = k̄(Γ), the norm N_{A/k} and the
+%     subgroup G_1 of elements of norm 1. Pages 50-51 are two lemmas: a field
+%     of transcendence degree 1 over an algebraically closed field is
+%     quasi-algebraically closed, with the corollaries for Ĥ^i(K,G_m) and
+%     H^i(K,Γ) and the Artin–Schreier sequence for the p-part; then Lemme 2,
+%     raising n by one on passing to an extension of transcendence degree 1
+%     through the spectral sequence of e → G' → G → G'' → e, and the
+%     corollary H^i(K,Γ) = 0 for i > n for a function field of dimension n.
+%   Pages 54-59 — ink (59 in pencil), a fast draft under the cover sheet of
+%     page 53: does an injective sheaf restrict to an acyclic sheaf on a
+%     closed subspace? « Réponse négative. » Four examples build the
+%     counter-examples — an irreducible space with two closed points, a
+%     circle meeting a line, two lines crossing at a point, two irreducible
+%     curves meeting in two points a and b with the Mayer–Vietoris sequence
+%     H^0(Y_1) × H^0(Y_2) → H^0(Y_{12}) → H^1(Y,F_Y) → 0 and the section
+%     (0,1) ∈ F_a × F_b that does not come from a global one — and page 58
+%     lifts the last to a Y of dimension 2 by cutting X with a plane. Page 59
+%     is a Proposition listing (i), (i bis), (ii), (ii bis), (iii) on the
+%     vanishing of H^i(U,F) and of the Čech groups of a covering, with the
+%     implications and the Leray spectral sequence.
+%   Page 60 — pencil, a scrap: an N.B. on k → K, the condition k ⊂ ℓ(K^p)
+%     for δ(L/K, k/ℓ) = 0, the example L = K(x) with x^p ∈ K and x^p ∉
+%     ℓ(K^p), the map Ω^1_{K/k} ⊗_K L → Ω^1_{L/k}, and a boxed inclusion
+%     K''_∞ ⊂ K_∞(K_0'^p).
+%
+% Page 45 is blank and page 52 an empty folder cover; both are absent.
+%
+% The dating is the inventory's own, for the whole shelfmark.
+
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{31}
+\batch{3}
+\pages{41}{60}
+\dating{[1963-1973]}
+\watermark{Édition de démonstration}
+\foldertitle{SGA A [SGA 4] (Résidus de rédaction) : notes manuscrites (s.d.)}
+
+\begin{document}
+
+\section*{Groupes finis d'automorphismes, trace et cohomologie de Tate (pages 41 à 44)}
+
+\page{41}
+Soit $B$ un anneau avec unité et un groupe fini $G$ d'automorphismes,
+$A = B^{G}$. On pose $\operatorname{Tr}_{G} b = \sum_{g \in G} gb$.
+Conditions équivalentes \note{Une parenthèse de deux lignes suit l'énoncé,
+qui définit $\varphi$ comme l'action de $B$ sur un module et
+$\operatorname{Tr}_{G} : B \to A$ ; elle est en grande partie
+\ill{}.}
+\begin{itemize}
+\item[a)] $A = \operatorname{Tr}_{G} B$
+\item[a$'$)] $1 \in \operatorname{Tr}_{G} B$
+\item[b)] pour tout $(G,B)$-module $M$, $\hat{H}(G,M) = 0$
+\item[b(q))] pour tout $(G,B)$-module $M$, $\hat{H}^{q}(G,M) = 0$
+\end{itemize}
+
+\textbf{Démonstration} : a) $\Rightarrow$ a$'$) trivial. a$'$) $\Rightarrow$
+b) : \ill{} on désigne par $\varphi_{M}(b)$ l'homothétie dans $M$ définie
+par $b \in B$, on a $g\,\varphi_{M}(b)\,g^{-1} = \varphi_{M}(gb)$, d'où
+\[
+\varphi_{M}(\operatorname{Tr}_{G} b) = \operatorname{Tr}_{G}\varphi_{M}(b),
+\]
+d'où le
+
+\textbf{Corollaire} : Si $\lambda \in \operatorname{Tr}_{G} B$,
+l'homothétie $\lambda$ dans $\hat{H}(G,M)$ est nulle
+\note{Une incise suit, largement \ill{}, qui observe que la condition est
+aussi nécessaire, en prenant $M = B$ ; c'est elle qui donne
+a$'$) $\Rightarrow$ b).}
+
+b) $\Rightarrow$ b(q) trivial. On a b(q) $\Rightarrow$ b(q$+1$) car on a la
+suite exacte
+\[
+0 \to M \to M \otimes_{\mathbb{Z}} \mathbb{Z}(G) \to N \to 0,
+\qquad m \mapsto \sum_{g} m \otimes g,
+\]
+où la structure de $B$-module est définie par $\lambda(m \otimes g) =
+\lambda m \otimes g$, et la structure de $G$-module par $g'(m \otimes g) =
+g'm \otimes g'g$ ; alors $g'(\lambda[m \otimes g]) = (g'\lambda)(g'[m
+\otimes g])$ car $g'(\lambda m \otimes g) = g'(\lambda m) \otimes g'g$ et
+$(g'\lambda)(g'm \otimes g'g) = (g'\lambda)(g'm) \otimes g'g$,
+c'est-à-dire $g'(\lambda m) = (g'\lambda)(g'm)$. \ill{} puisque
+$\hat{H}(G, M \otimes_{\mathbb{Z}} \mathbb{Z}(G)) = 0$, on a
+$\hat{H}^{q+1}(G,M) = \hat{H}^{q}(G,N) = 0$. \ill{}
+
+\textbf{Corollaire} Supposons $B$ \struck{intègre et intégralement clos},
+\marginal{$A$ local.} les conditions de la proposition sont vérifiées si
+l'indice de ramification $e$ de $B$ sur $A$ ($=$ ordre du groupe d'inertie)
+\struck{\ill{}} est inversible dans $A$, i.e. \ill{}
+\struck{$A/\mathfrak{m}(A)$}
+\note{Les trois dernières lignes sont biffées et reprises ; seul « est
+inversible dans $A$ » se lit avec certitude.}
+
+\marginal{\ill{} le corollaire \ill{} --- Comment voir ça ?}
+
+\page{42}
+Avec les conditions et la proposition générale, soit $G' \subset G$, et soit
+$A' = B^{G'}$, $A \subset A' \subset B$. Conditions équivalentes
+\begin{itemize}
+\item[a)] $\operatorname{Tr}_{G/G'} A' = A$
+\item[a$'$)] $1 \in \operatorname{Tr}_{G/G'} A'$
+\item[b)] pour tout $(G,B)$-module $M$, $t(G,G') : \hat{H}(G',M) \to
+\hat{H}(G,M)$ est \struck{injectif} \struck{bijectif} surjectif
+\item[b$'$)] \ill{}
+\item[b(q))] \ill{}
+\item[b$'$(q))] \ill{}
+\end{itemize}
+\note{Les quatre dernières conditions ne sont pas rédigées : b$'$), b(q) et
+b$'$(q) ne sont que nommées, les énoncés restant à écrire.}
+
+a) $\Leftrightarrow$ a$'$) trivial. a$'$) $\Rightarrow$ b) car on a
+$t(G,G')\varphi(b) = \varphi(t(G,G')b)$ pour $b \in A'$, d'où si
+$t(G,G')b = 1$, $t(G,G')\varphi(b) = 1$, d'où b) d'après un lemme général.
+
+\begin{tikzcd}
+\text{b} \arrow[r, Rightarrow] \arrow[d, Rightarrow] & \text{b}' \arrow[d, Rightarrow] \\
+\text{b}(q) \arrow[r, Rightarrow] & \text{b}'(q)
+\end{tikzcd}
+
+De plus on voit de la même façon que b$'$(q) $\Rightarrow$ b$'$(q$+1$) et
+b$'$(q) $\Rightarrow$ b$'$(q$-1$), donc b$'$(q) $\Leftrightarrow$ b$'$(0).
+Appliquant b$'$(0) à $M = B$, on trouve que
+\[
+A'/\operatorname{Tr}_{G'} B \longrightarrow A/\operatorname{Tr}_{G} B
+\]
+est surjectif, i.e. que l'on a
+$1 \in \operatorname{Tr}_{G} B + \operatorname{Tr}_{G/G'} A' =
+\operatorname{Tr}_{G/G'} A'$.
+\note{La flèche est écrite de droite à gauche sur la page ; elle est ici
+rétablie dans le sens de la lecture.}
+
+Reste à prouver : Soient $G' \subset G$ ($G$ fini), soit $M$ un $G$-module
+tel que $1 \in \operatorname{Hom}_{\mathbb{Z}}(M,M)$ soit de la forme
+$1 = \operatorname{Tr}_{G/G'}\varphi$ \struck{\ill{}} ($\varphi \in
+\operatorname{Hom}_{G'}(M,M)$) ; alors
+\[
+\operatorname{Tr}_{G/G'} : \hat{H}(G',M) \to \hat{H}(G,M)
+\ \text{est surjective},
+\]
+\[
+\operatorname{Tr}_{G'/G} : \hat{H}(G,M) \to \hat{H}(G',M)
+\ \text{est \uncertain{injective}},
+\]
+d'image \ill{} l'ensemble des éléments de $\hat{H}(G',M)$ qui sont
+« stables », c'est-à-dire $\hat{H}(G',M)^{G}$.
+\note{La seconde flèche est également écrite de droite à gauche.}
+
+(Ceci contient le Th.\ sur les groupes de Sylow, \struck{\ill{}} \ill{} en
+se plaçant dans la catégorie des groupes \ill{}, mais \ill{} les groupes de
+torsion, où par ex.\ \ill{} \ill{}
+$\operatorname{Tr}_{G'/G' \cap {}^{g}G'} \ill{}
+\operatorname{Tr}_{{}^{g}G'/G' \cap {}^{g}G'}$ \ill{})
+
+\marginal{On peut l'\ill{} en prenant $G' = G_{i}$, mais aussi pour $G'$ un
+sous-groupe de Sylow $H$ pour $p$, où $p$ est la caractéristique de $k$. On
+a \ill{} : itération. On \ill{} $(\mathcal{O}'^{H}/\operatorname{Tr}_{H}
+\mathcal{O}')^{G}$, donc d'abord $M = B$, \ill{} : détermination de
+$\mathcal{O}'^{H}/\operatorname{Tr}_{H}\mathcal{O}'$ pour une
+\struck{\ill{}} $p$-extension.}
+
+\page{43}
+1) Soit $G$ un groupe fini d'automorphismes d'un anneau \uncertain{local}
+$\mathcal{O}$. $G$ est transitif sur les idéaux maximaux $\mathfrak{m}$,
+soit $G_{d}$ le stabilisateur de $\mathfrak{m}_{0}$, et $G_{i} \subset
+G_{d}$ le noyau \ill{} de $G_{d}$, formé des automorphismes qui induisent
+l'identité sur $\mathcal{O}/\mathfrak{m}$.
+
+Soit, en conditions
+\begin{itemize}
+\item[a)] Il existe $x \in \mathcal{O}^{G_{i}}$ tel que
+$\operatorname{T}_{G/G_{i}} x = 1$. Donc pour tout $G$-$\mathcal{O}$-module
+$M$, on a
+\[
+\hat{H}(G,M) = \hat{H}(G_{i},M)^{G/G_{i}} .
+\]
+Donc pour qu'on ait $1 \in \operatorname{T}_{G}\mathcal{O}$, i.e.
+$\hat{H}(G,M) = 0$ pour tout $M$, il faut et il suffit que
+$[G_{i} : e]$ ne soit pas multiple de la caractéristique $p$ de
+$\mathcal{O}/\mathfrak{m}$.
+\item[b)] Si $G_{i} = \{e\}$, on a $H^{1}(G, \mathcal{O}^{*}) = \{e\}$.
+\end{itemize}
+
+Plus généralement, quel que soit $G_{i}$, l'homomorphisme naturel
+$H^{1}(G, \mathcal{O}^{*}) \to H^{1}(G_{i},
+(\mathcal{O}/\mathfrak{m})^{*})$ est \uncertain{bijectif} (?). Ceci
+\ill{} dans le cas de $GL(n,\mathcal{O})$ --- le \ill{}
+
+(Dans a), en tout \ill{}
+\[
+\overline{\hat{H}(G,M)} = \hat{H}(G,\bar{M})
+= \hat{H}\Bigl(G, \bigoplus_{s \in G/G_{d}} s\,\bar{M}_{\mathfrak{m}_{0}}\Bigr)
+= \hat{H}(G_{d}, \bar{M}_{\mathfrak{m}_{0}})
+= \overline{\hat{H}(G_{d}, M_{\mathfrak{m}_{0}})}\,.
+\]
+\marginal{\uncertain{justification} pour Zariski ; il y a donc \ill{} hyp.\
+\ill{} : finie ??}
+
+Considérons donc le diagramme :
+
+\begin{tikzcd}[column sep=small, row sep=small, nodes={font=\scriptsize}]
+\hat{H}(G,M) \arrow[r, "\sim"] \arrow[d, "?"'] &
+\hat{H}(G_{i},M)^{G/G_{i}} \arrow[r, "\alpha"] &
+\hat{H}(G_{i}, M_{\mathfrak{m}_{0}})^{G_{d}/G_{i}} \\
+\hat{H}(G_{d},M)^{G/G_{d}} \arrow[r, "\beta"'] &
+\hat{H}(G_{d}, M_{\mathfrak{m}_{0}}) \arrow[r, "\sim"'] &
+\hat{H}(G_{d},M)_{\mathcal{O}_{d} - \mathfrak{m} \cap \mathcal{O}_{d}}
+\arrow[u, "?"']
+\end{tikzcd}
+
+\marginal{$\alpha$ et $\beta$ sont injectifs, à images denses ; on passe aux
+\ill{} !}
+
+\marginal{\ill{} de dim ?, $\mathcal{O} \to$ \ill{} $\hat{H}(G,M)$ ?
+\ill{}}
+
+\page{44}
+\note{Toute la page est barrée de deux longues diagonales qui se croisent.}
+\[
+0 \to G_{k}^{0} \to G_{k} \to \mathfrak{P}_{k} \to 0
+\]
+\note{Sous $G_{k}$ : « extension abélienne \ill{} maximale » ; sous
+$\mathfrak{P}_{k}$ : « extension non ramifiée maximale ». Le second groupe
+est écrit d'un $P$ barré ; la lecture $\mathfrak{P}_{k}$ est conventionnelle.}
+\[
+0 \to \mathbb{Z}_{2}^{r_{1}} \to G_{k}^{0} \to
+\mathcal{U}_{K}^{0}/\operatorname{Im} E \to 0
+\]
+\note{Sous $\mathcal{U}_{K}^{0}$ : « idèles unités \ill{} » ; sous
+$\operatorname{Im} E$ : « idèles unités \ill{} principaux ».}
+
+\textbf{N.B.} $G_{k}/\mathbb{Z}_{2}^{r_{1}}$ \uncertain{pourrait} être un
+groupe dont la définition ne fait plus intervenir \ill{} que le groupe de
+Galois de l'extension abélienne non ramifiée \ill{} maximale (i.e. qui est
+\uncertain{complètement décomposée} au-dessus de toutes les places réelles
+de $k$) --- soit de façon générale, $S$ un ensemble \uncertain{fini} de
+places, finies ou infinies réelles, alors le groupe de Galois de
+l'extension abélienne non ramifiée hors $S$ maximale, soit $G_{k}^{S}$,
+\[
+0 \to G_{k}^{0,S} \to G_{k}^{S} \to \mathfrak{P}_{k} \to 0
+\]
+\[
+0 \to \mathbb{Z}_{2}^{S_{\infty}} \Big/ \bigcap_{k}
+\operatorname{Im}\bigl(E^{(S,k)}\bigr)
+\to G_{k}^{0,S} \to \mathcal{U}_{K}^{S,0}/\operatorname{Im} E \to 0
+\]
+\note{Sous la seconde suite, au crayon : « ceci n'est \ill{} intéressant
+$\overline{S^{\infty}}$ ??? $\mathbb{Z}_{2}$ ».}
+
+Ceci résulte du lemme : Pour qu'une extension \struck{abélienne} $L$
+\struck{\ill{}} d'un corps local \struck{\ill{}} $K$ soit non ramifiée, il
+faut et il suffit que $N_{L/k}\mathcal{U}_{L} = \mathcal{U}_{k}$, ou
+$N_{L/k} L^{*} \supset \mathcal{U}_{k}$.
+
+\section*{Une proposition sur $H^{i}(k,G)$ et deux lemmes sur les corps de fonctions (pages 46 à 51)}
+
+\page{46}
+\textbf{Proposition} Soit $k$ un corps, $n$ un entier. Conditions
+équivalentes :
+\begin{itemize}
+\item[a)] $H^{i}(k,G) = 0$ pour $i > n$ et tout groupe alg.\ commutatif $G$
+défini$/k$
+\item[b)] $H^{i}(k,\Gamma) = 0$ \struck{\ill{}} pour $\Gamma$ fini défini$/k$
+\item[b$'$)] $H^{i}(k,\Gamma) = 0$ pour $i > n$ et \struck{tout groupe fini
+qui est \ill{}} \add{(fini)} \ill{} \struck{\ill{}} sur un corps
+$\mathbb{Z}/\ell$, donc le \ill{} $\mathbb{V}/k$ qui est (ou un groupe
+abélien) \uncertain{irréductiblement} \ill{}
+\item[c)] $H^{i}(k,G) = 0$ pour $i > n$ et tout p.-g.\ alg.\ commutatif $G$
+défini$/k$ \struck{\ill{}} devenant isomorphe à un groupe \struck{\ill{}}
+sur la clôture galoisienne de $k$, $(\mathbb{G}_{m})^{n}$ \ill{} ---
+chaque fois que $G$ est le groupe des éléments inversibles d'une algèbre
+\add{(commut.)} séparable \struck{\ill{}} déf$/k$
+\item[c$'$)] $H^{i}(k,G) \ne 0$ pour $i > n$, \ill{}
+\end{itemize}
+\note{L'énoncé est un brouillon rapide : b$'$) et c) sont écrits par-dessus
+des versions biffées, et la prose qui les relie est en grande partie
+perdue.}
+
+\textbf{Démonstration.}
+
+\begin{tikzcd}[column sep=small, row sep=small, nodes={font=\scriptsize}]
+& \text{a} \arrow[dl, Rightarrow] \arrow[dr, Rightarrow] & \\
+\text{b} \arrow[d, Rightarrow] & & \text{c} \\
+\text{b}' & &
+\end{tikzcd}
+
+Prouverons c) $\Rightarrow$ b$'$) et b$'$) $\Rightarrow$ b), ce qui
+achèvera la démonstration.
+
+b$'$) $\Rightarrow$ b) : \struck{\ill{}} comme on voit par un
+\struck{rapport} \add{dévissage} d'abord de $\Gamma$ \struck{\ill{}}
+\add{commutatif}, dévissage immédiat en considérant la filtration
+\[
+\Gamma \supset \ell\Gamma \supset \ell^{2}\Gamma \supset \cdots
+\supset \ell^{k}\Gamma = 0 ,
+\]
+\ill{} par $\ell$, i.e. \ill{} \struck{\ill{}}
+
+b) $\Rightarrow$ a) : En effet, \struck{Considérons} \ill{} Considérons
+\ill{} le plus grand \ill{} groupe unipotent de $G$, qui est défini sur
+$k$, \ill{} de sorte que
+\[
+0 \to G_{u} \to G \to G/G_{u} \to 0 .
+\]
+
+\page{47}
+Cela nous ramène au cas où $G$ est soit \uncertain{complet}, soit
+\uncertain{linéaire}. Dans le deuxième \struck{\ill{}} cas,
+\struck{\ill{}} on a $G = G_{u} \times G_{ss}$ (décomposition en partie
+semi-simple et unipotente) et cette décomposition est définie sur $k$. Donc
+on peut se ramener au cas où $G$ est soit unipotent, soit
+\struck{semi-simple} \ill{} d'éléments semi-simples, soit commutatif
+\ill{} complet. Dans les deux derniers cas, soit $\mathcal{U}$ \ill{} le
+sous-groupe des éléments d'ordre fini de $G = G^{\bar{k}}$ ; alors le
+groupe $G/\mathcal{U}$ est un \ill{}
+
+\marginal{ici c'est faux : le \ill{} inductive \ill{} commutatif}
+
+\ill{} $G_{0}$ (comp.\ connexe de $e$) \ill{} variété abélienne, et c'est
+un th.\ de Weil pour \ill{} (i.e. $G \simeq \bar{k}^{*n}$) \ill{}
+\struck{\ill{}} $G \simeq G_{0} + G/G_{0}$, \ill{} un quotient de
+$\mathbb{V}/k$, d'où \ill{} $G/G_{0}$ \ill{}
+
+\ill{} on voit que $G/\mathcal{U}$ s'identifie au quotient de $G_{0}$ par
+$\mathcal{U} \cap G_{0}$, donc \ill{} est divisible. Donc
+$H^{i}(\mathfrak{g}, G/\mathcal{U}) = 0$, \struck{tandis que} d'où pour
+$i > 0$
+\[
+H^{i}(\mathfrak{g}, G) \simeq H^{i}(\mathfrak{g}, \mathcal{U})
+\quad \text{pour } i \geq 1
+\]
+\note{$\mathfrak{g}$ désigne ici le groupe de Galois ; il est écrit d'un
+$g$ à longue hampe, et la page passe de $H^{i}(k,-)$ à
+$H^{i}(\mathfrak{g},-)$ sans le dire.}
+
+(comme \ill{} pour $G \to G/\mathcal{U}$ est surjectif \ill{}) \ill{}
+$\mathcal{U}$, le \ill{}-groupe de $\mathcal{U}$ formé des éléments
+d'ordre premier \ill{}. On a
+\[
+H^{i}(\mathfrak{g}, \mathcal{U}) = \varinjlim_{n}
+H^{i}(\mathfrak{g}, {}_{n}\mathcal{U})
+\]
+
+\page{48}
+et lorsque $i > n$, les \struck{deux} $H^{i}(\mathfrak{g},
+{}_{n}\mathcal{U})$ sont nuls (car ${}_{n}\mathcal{U}$ est fini) ---
+d'après b), d'où résulte notre assertion.
+
+\ill{} $G$ un groupe linéaire unipotent commutatif, on distingue deux cas :
+
+1$^{\circ}$) Caractéristique nulle. Alors $G$ \struck{est} $\simeq
+\bar{k}^{n}$ sur $\bar{k}$, donc aussi sur $k$ (car $H^{1}(k, Gl(n)) = 0$).
+Et \struck{comme} $H^{i}(k, \mathbb{G}_{a}) = 0$ pour $i > 0$, l'assertion
+est valable.
+
+2$^{\circ}$) Car.\ $p \ne 0$. Alors on a la filtration
+\[
+G \supset pG \supset \cdots \supset p^{\ell}G = 0 .
+\]
+On \ill{} ramener au cas \add{i.e. où} $pG = 0$ (car chaque $p^{i}G$ est
+\emph{défini sur $k$}). Mais, on sait \ill{} alors $\mathbb{G}_{a} \simeq
+\bar{k}^{n}$ sur $\bar{k}$, donc \ill{} aussi sur $k$ (car
+$H^{1}(k, Gl(n)) = 0$), et on \ill{} comme dans 1$^{\circ}$.
+
+Supposons que $k$ soit quelconque \ill{}
+\note{La page s'arrête sur cette phrase, laissée en suspens.}
+
+\page{49}
+c) $\Rightarrow$ b$'$) : Soit en effet $\Gamma$ un groupe comme dans
+b$'$) ; supposons d'abord $\ell \ne p$. \struck{Il suffit} \add{\ill{} dans
+la clôture \ill{} de $\Gamma$ \ill{} évidente.} Soit $A = \bar{k}(\Gamma)$
+\struck{l'algèbre} \add{une algèbre} \ill{} \add{c'est une algèbre déf$/k$,
+commutative} et \struck{semi-simple} séparable (car $[\Gamma : e]$ est
+premier à $p$), donc \ill{} on a $H^{i}(k,G) = 0$ si $i > n$, $G$
+désignant le groupe des éléments inversibles de $A$. Soit $G_{1}$ le
+sous-groupe de $G$ formé des $x \in G$ tels que $N_{A/k}\,x = 1$
+(i.e. \struck{soit} $N_{A/k}\,x = $ dét.\ de la translation à gauche par
+$x$ dans $A$) ; c'est un sous-groupe défini sur $k$ (noyau de
+l'homomorphisme $N_{A/k} : G \to \bar{k}^{*}$, qui est déf$/k$).
+
+Comme $\Gamma \to \ill{}$ \ill{} $\mathbb{V}$-module, \add{et comme
+$\Gamma \subset G$} il est visible \add{que} \struck{\ill{}} l'on a
+$\Gamma \subset G_{1}$, i.e. $\Gamma \cap G_{1} = \struck{\ill{}}
+\{e\}$, et on vérifie facilement que \ill{} (distinguer le cas $\ell$
+premier impair, et le cas $\ell = 2$ ; \ill{} dans ce dernier cas \ill{}
+et $N_{A/k}\,\xi = \pm 1$ si $\xi \in \Gamma$).
+
+Comme $\ell\Gamma \struck{\ill{}} = \{0\}$, \ill{} enfin $\Gamma \subset
+G_{1}$. Il est d'ailleurs visible que $\Gamma \to \ill{} G_{1}$. Le noyau
+\ill{} de l'hom.\ $G_{1} \xrightarrow{\ \ell\ } G_{1}$ \ill{} d'ordre
+$\ell^{n_{1}}$, i.e. $n_{1} = n - 1$ \ill{}
+\note{La fin de la page est une suite de calculs rapides dont la prose ne
+se lit pas.}
+
+\page{50}
+\textbf{Lemme 1} Soit $k$ un corps algébriquement clos, $K$ une extension
+de type fini, de degré de transcendance $1$, de $k$. Alors $K$ est
+\struck{\ill{}} quasi-algébriquement clos.
+
+\textbf{Corollaire 1} $\hat{H}^{i}(K, \mathbb{G}_{m}) = 0$ pour tout $i$.
+
+En effet, $K$ est un corps \ill{} galoisienne $K'$, \ill{} quasi-alg.\
+clos, donc \struck{\ill{}} le corollaire est bien connu.
+
+\textbf{Corollaire 2} $H^{i}(K,\Gamma) = 0$ \struck{pour $i > 0$} pour
+$i > 1$ et \ill{} $\Gamma$ d'ordre fini, i.e. $G_{K}$ opère trivialement.
+
+Soit \add{une} \struck{\ill{}} clôture galoisienne de $K$, $\tilde{K}$.
+\struck{\ill{}}
+
+\note{Suit un bloc encadré, écrit très vite, dont voici ce qui se lit :
+$\mathcal{U} \subset \tilde{K}^{*}$ le sous-groupe des racines de l'unité
+dans $\tilde{K}$ ; alors $\tilde{K}^{*}/\mathcal{U}$ est uniquement
+divisible si \ill{} ; d'où \ill{} ; $\hat{H}^{i}(K, \ill{})
+\xrightarrow{\sim} \hat{H}^{i}(K, \mathbb{G}_{m})$ \ill{} mod $p$
+« isomorphismes ? » ; le deuxième est nul, donc le premier \ill{}.}
+
+Plus généralement \ill{} la caractéristique, alors
+$\tilde{K} \xrightarrow{\,x \mapsto x^{n}\,} \tilde{K}$ \ill{} est un
+épimorphisme de noyau $\simeq \mathbb{Z}/n$, donc la suite exacte de
+cohomologie \ill{} on a donc $H^{i}(K, \mathbb{Z}/n) = 0$. Reste \ill{}
+$H^{i}(K, \mathbb{Z}/p) = 0$ si $i > 1$ : \ill{} on \ill{}
+\[
+0 \to \mathbb{Z}/p \to \tilde{K} \xrightarrow{\ \wp\ } \tilde{K} \to 0 .
+\]
+
+\page{51}
+\textbf{Lemme 2} Soit $k$ un corps, \add{$\Gamma$ (?)} \struck{\ill{}}
+tel que $H^{i}(k',\Gamma) = 0$ pour toute extension $k'$ \add{\ill{}} de
+type fini de $k$, $i > n$. \struck{Soit $K$ une extension de degré de
+transcendance $\le 1$.} Alors $H^{i}(K,\Gamma) = 0$ pour $i > n+1$.
+
+\begin{tikzcd}[column sep=small, row sep=small, nodes={font=\scriptsize}]
+k' = \tilde{k}k & k \arrow[l] \\
+K \arrow[u] & \tilde{k}K \arrow[l] \arrow[r, "G'"] & \tilde{K}K
+\end{tikzcd}
+\note{Le diagramme de la page est un croquis d'extensions ; il est ici
+redressé, et les groupes $G$, $G'$, $G''$ y sont portés le long des
+flèches auxquelles ils correspondent.}
+
+d'où une suite exacte
+\[
+e \to G' \to G \to G'' \to e ,
+\]
+d'où une suite spectrale
+\[
+H^{i}\bigl(G'', H^{j}(G',\Gamma)\bigr) \Longrightarrow H^{*}(G,\Gamma).
+\]
+
+Or $H^{j}(G',\Gamma) = 0$ si $j > 1$ en vertu du lemme 1, et d'autre part
+$H^{i}\bigl(G'', H^{j}(G',\Gamma)\bigr) = 0$ si $i > n$, en
+\struck{$G''$ étant \ill{}} \ill{} d'après \struck{fini de
+l'hypothèse}. D'où \struck{\ill{}} $H^{*}(G,\Gamma) = 0$ si $* > n+1$,
+cqfd.
+
+\textbf{Corollaire} Soit $K$ un \struck{\ill{}} corps de fonctions
+algébriques sur un corps alg\add{ébriquement} clos $k$,
+$\deg\operatorname{tr}_{k} K = n$. Alors $H^{i}(K,\Gamma) = 0$ pour
+$i > n$ et \add{d'ordre fini} tel que \ill{} $\Gamma$, i.e. $G_{K}$ opère
+trivialement.
+
+\section*{Th.\ fondamentale des morphismes propres [Changement de base] : Théorème d'échange --- Questions marginales (pages 54 à 59)}
+
+\note{Le titre est celui de la page 53, un feuillet de couverture inscrit
+de sa main et par ailleurs vierge, qui ne reçoit donc pas de numéro de page
+propre. Une ligne biffée le précède, illisible.}
+
+\page{54}
+\textbf{Question} $X$ espace topologique, $Y$ fermé de $X$, $F$ faisceau
+\struck{injectif} sur $X$, a-t-on
+\[
+H^{i}(Y, F|Y) = 0 \quad \text{pour } i > 0
+\]
+\[
+\bigl[H^{i}(V, F|V) = 0 \ \text{pour tout \ill{} voisinage } V
+\text{ de } Y,\ i > 0\bigr].
+\]
+Réponse négative.
+
+Tout d'abord, il n'est pas vrai que pour un faisceau $F$ sur $X$ injectif,
+l'homomorphisme
+\[
+\varinjlim_{U \supset Y} H^{0}(U,F) \longrightarrow H^{0}(Y,F)
+\]
+soit \uncertain{surjectif}, i.e. qu'une section \ill{} se prolonge à un
+voisinage [i.e. si $X$ \ill{} $2^{\circ}$ $F$ est \ill{} injectif].
+
+\textbf{Ex 1} $X$ espace irréductible, $Y$ fermé de \ill{} deux points
+fermés distincts $a$, $b$ ; $F$ faisceau des \ill{}, la section de $F|Y$
+qui vaut $0$ en $a$, la valeur $1$ en $b$, ne se prolonge pas
+\struck{à un voisinage} \ill{} $X$, car \ill{} contient un $U$ de $a$
+\ill{} un voisinage $V$ de $b$, et $U \cap V \ne \emptyset$, absurde.
+
+\textbf{Ex 2} $X = \overline{M}$ \ill{} une courbe algébrique, $Y$ \ill{}
+irréductible, \add{\ill{}} \struck{\ill{}}, mais \ill{} par exemple une
+\ill{} $H^{0}$ \ill{} de Zariski.
+\note{La fin de l'exemple 2 est un brouillon rapide dont la prose ne porte
+plus.}
+
+\page{55}
+\note{La page ouvre sur une figure : un cercle, coupé par une droite $Y$ en
+deux points $a$ et $b$ ; l'ensemble est $X$.}
+
+Considérons $X_{1} = $ cercle de la figure, et le faisceau $F_{1}$
+\add{sur $X$} \struck{\ill{}} induit dans $\mathbb{Q}$, soit $F$ son image
+sur $X$. La section \ill{} prolonge une section \ill{} elle \ill{} enfin
+sur $Y \cap X_{1}$ à $X_{1}$, c'est en général impossible \ill{}
+
+\textbf{Ex 3} Un faisceau injectif \struck{\ill{}}
+\note{L'exemple 3 est barré de plusieurs longs traits horizontaux. On y
+distingue les exemples 1 et 2 rappelés, $F|Y$, $X$, $Y$, et un
+$\mathbb{Q}$ ; le reste ne se lit pas.}
+
+On ne s'en tire pas \ill{} $Y$ \ill{} un compact irréductible [i.e. \ill{}
+le faisceau irréductible n'est \ill{} de type fini \ill{}]. \ill{} $Y$ le
+voisinage \ill{} $V$ \ill{}, sur $X$ irréd.
+
+Mais prenons pour $Y$ $Y_{1}$ et $Y_{2}$ deux \ill{} \ill{}
+
+\page{56}
+\note{Une figure ouvre la page : deux droites $Y_{1}$ et $Y_{2}$ se
+coupant en un point $a$, accolées par une accolade portant $Y$.}
+
+Soit $F$ le faisceau \struck{\ill{}} des \ill{} \ill{} dans $\mathbb{Q}$,
+et $Y' = Y - \{a\}$ ; considérons la section de $F|Y'$ qui vaut $0$ sur
+$Y'_{1}$, $1$ sur $Y'_{2}$ ; \ill{} \ill{} un $U$ de $a$, et un \ill{}
+$\mathbb{Q}$ qui \ill{} voisinage de $Y_{1}$ ($Y_{2}$), absurde car \ill{}
+\ill{} !
+
+\note{Suit un bloc entièrement barré, sur lequel se lisent
+$Y'_{1}$ ($Y'_{2}$) induisant $0$ (1), puis, plus bas, la suite}
+\[
+\struck{F_{Y} \to \textstyle\coprod_{i} F_{Y_{i}} \to G \to \ill{}}
+\]
+\[
+\struck{H^{0}(Y_{2}, F_{Y_{i}}) \to H^{1}(Y,G) \to H^{1}(Y, F_{Y}) = 0}
+\]
+\note{avec, dans la marge du bloc, « remarquer que $H^{1}(Y, F_{Y_{i}}) =
+0$ ».}
+
+\page{57}
+\textbf{Exemple 4} Donnons un contre-exemple à la seconde question en \ill{} : $Y$ \ill{} \ill{} dans une courbe irréductible,
+$Y_{1}$, $Y_{2}$ irréductibles se coupant en deux points $a$, $b$, le $X$
+irréductible. $F$ est le faisceau des \ill{} de $X$ dans $\mathbb{Q}$. On a
+\[
+H^{0}(Y_{1}, F_{1}) \times H^{0}(Y_{2}, F_{Y_{2}}) \to
+H^{0}(Y_{12}, F_{12}) \to H^{1}(Y, F_{Y}) \to 0
+\]
+\[
+[\,F_{i} = F_{Y_{i}},\quad F_{12} = F_{Y_{12}}\,]
+\]
+\note{La page ouvre sur une figure : deux ovales $Y_{1}$ et $Y_{2}$ qui se
+recoupent, leurs deux points communs marqués $a$ et $b$.}
+
+\struck{\ill{}} $F_{a} \times F_{b}$ dans le premier \ill{} \ill{} car
+\[
+H^{0}(Y_{12}, F_{12}) = F_{a} \times F_{b}
+\]
+\ill{} $f_{1} - f_{2}$, i.e. $f_{i} \in H^{0}(Y_{i}, F_{i})$. Or
+$(0,1) \in F_{a} \times F_{b}$ \ill{} \ill{} $\mathcal{U}$.
+
+En effet, si on avait une \ill{} $f_{1}$, $f_{2}$ \ill{}
+\note{Suit un bloc barré où l'on distingue $\varphi_{1}, \varphi_{2} \in
+\Gamma(U,F)$, $f_{ix} = \varphi_{ix}$ et $f_{ix} = \varphi'_{ix}$, puis
+$\varphi'_{2} - \varphi'_{1} = 1$ ; la prose entre les formules est
+perdue.}
+
+\page{58}
+$x \in U \cap U' \cap Y_{1}$, donc dans un voisinage $W_{1}$ de
+$U \cap U' \cap Y_{1}$, et $\varphi_{2x} = \varphi'_{2x}\ (= f_{2x})$ pour
+$x$ \ill{} ; \struck{i.e. $\varphi_{1x} = \varphi$} pour $x \in U \cap U'
+\cap Y_{2}$, donc
+\[
+\varphi_{1x} = \varphi'_{1x} + 1 \quad \text{pour } x \in U \cap U'
+\cap Y_{2},
+\]
+\ill{} pour $x$ dans un voisinage $W_{2}$ de $U \cap U' \cap Y_{2}$. Donc
+si $x \in W_{1} \cap W_{2}$, \ill{}, et
+\[
+\varphi_{1x} = \varphi'_{1x} + 1, \qquad \varphi_{1x} = \varphi'_{2x},
+\]
+i.e. $0 = 1$, absurde [compte tenu \ill{} $W_{1} \cap W_{2} \ne
+\emptyset$, $X$ étant irréductible].
+
+Utilisant \ill{} exemple, on trouve un exemple avec $Y$ \emph{irréd.}
+(de \emph{dim 2} \ill{}), \ill{} ceci, dans $X$ \ill{} $X_{1}$ plan
+(dim 2) qui, considérant un $X_{1}$ plan \ill{} recoupe $Y$ suivant $2$
+\ill{}
+\[
+Y_{1} = X_{1} \cap Y .
+\]
+\note{Deux figures accompagnent le passage : un parallélogramme portant
+$Y$, et deux ovales qui se recoupent.}
+
+On prend alors le faisceau $F$ \ill{} sur $X$ \ill{} des \ill{} de $X_{1}$
+dans $\mathbb{Q}$.
+
+\page{59}
+\note{Page au crayon, d'une écriture rapide ; les conditions sont
+numérotées mais leurs énoncés ne sont écrits qu'à demi.}
+
+\textbf{Proposition} $F$ faisceau abélien sur \ill{} $V$ \ill{} tout $V$
+(ordinaire) $X$. Conditions :
+\begin{itemize}
+\item[(i)] \ill{}
+\item[(i bis)] Pour tout ouvert $U$ de $X$, $H^{i}(U,F) = 0$
+\item[(ii)] Pour tout ouvert $U$ de $X$, $H^{i}(U,F) = 0$ pour $i > 0$
+\item[(iii)] Pour tous ouverts $U$, $V$ de $F$ \add{[pour $X$ noeth.]}
+\end{itemize}
+\[
+H^{1}\bigl(C(U,V); F\bigr) = H^{0}(U \cap V, F) \big/
+\operatorname{Im}\bigl(H^{0}(U,F) \times H^{0}(V,F)\bigr)
+\]
+\begin{itemize}
+\item[(ii bis)] Pour tout \uncertain{recouvrement} $U$ et tout
+recouvrement $\underline{\mathcal{U}} = (\mathcal{U}_{i})$ de
+$\mathcal{U}$, \ill{} $H^{i}(\underline{\mathcal{U}}, F) = 0$ pour $i > 0$.
+\end{itemize}
+
+(i bis) $\Rightarrow$ (ii bis) par suite spectrale de Leray, et bien connu
+(petit argument de Cartan \ill{} immédiat)
+
+(i bis) $\Rightarrow$ (i) trivial
+
+(ii bis) $\Rightarrow$ (ii) trivial
+
+(i) $\Leftrightarrow$ (ii) car $H^{1}(U \cap V, F) \subset
+H^{1}(U \cup V, F)$, d'où \ill{} ; pour (ii) $\Rightarrow$ (i), \ill{} en
+considérant $\xi \in H^{1}(U,F)$ \add{(N.B. $X$ \ill{})} \ill{}
+$U' \subset U$ \ill{} $\xi$ soit nul, \ill{} dis que $U' = U$, \ill{}
+
+\section*{N.B. : $N_{L/K}$ et la condition $k \subset \ell(K^{p})$ (page 60)}
+
+\page{60}
+\note{Feuillet au crayon, sans rapport apparent avec ce qui précède, barré
+de deux longs traits obliques.}
+
+\textbf{N.B.} $k \to K$ \ill{}, \ill{} \ill{} que toute extension $L$ de
+\ill{} (ou finie) de $K$, \ill{} $N_{L/K}$
+\[
+\delta(L/K,\ k/\ell) = 0 \quad \text{i.e.}
+\]
+$k$ soit $\ell$-\ill{} \ill{} $L/K$, il faut et il suffit que
+\[
+k \subset \ell(K^{p}) \qquad \text{i.e.} \quad k(K^{p}) \subset
+\ell(K^{p})
+\]
+\ill{}
+\[
+K \to L = K(x), \qquad x^{p} \in K,\quad x^{p} \notin \ell(K^{p})
+\]
+\[
+N_{L/K/k} = 0, \qquad N_{L/K/\ell} \simeq L, \qquad N_{L/K}
+\]
+\[
+\Omega^{1}_{K/k} \otimes_{K} L \longrightarrow \Omega^{1}_{L/k}
+\]
+\[
+K_{0} \ \big| \ K \qquad k(K_{0}^{p}) \subset K_{0}^{p}
+\]
+\struck{$k \subset$} \struck{$K_{\infty}$ \ill{}} $k$
+\[
+\boxed{\ K''_{\infty} \subset K_{\infty}(K_{0}'^{p})\ }
+\]
+\struck{$K_{\infty}(\ill{}) \subset$} \ill{}
+
+\end{document}
