@@ -1,0 +1,2695 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 1, pages 1-149.
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried — a doubtful
+% reading, a notation he used differently, a missing passage — moves into a
+% footnote.
+%
+% It is held to being mathematically correct as it stands, not merely faithful
+% to the page. Where the manuscript is loose or mistaken, the true statement is
+% what appears here, and the footnote says what the page has. In any dispute of
+% substance the transcription governs: whoever cites Grothendieck must cite the
+% batch-NN.fr.tex files.
+%
+% Scope: the folder was read WHOLE before any of this was written — all eight
+% batches, pages 1-149, in one pass — and it is written as ONE file for the
+% whole shelfmark, as 19.modern.tex and 29.modern.tex are for theirs.
+%
+% Notation fixed for the whole folder, in the "Conventions" section: s_n(u)
+% for the singular values (his ρ_n(u), r_ν(A)); S_p(E,F) for the Schatten
+% classes (his L^p, L^{(1)}, L^{(2)}, 𝓛^p(H)); "opérateur à trace" everywhere
+% he writes "opérateur de Fredholm", which in 1953 meant nuclear; M, τ,
+% 𝔞, 𝔟 for his 𝒜, T, a, b; his φ_f, Φ_f, Ψ_f, Δ_f kept.
+%
+% Substantive departures from the pages, each footnoted where it occurs:
+%   - page 7: the two formulas for φ_f(t∓0) have their ≤ and < swapped; the
+%     page 26 version is the right way round and is what is given;
+%   - page 28: "Δ(A) < ∞ ⟺ B ∈ a" holds only as ⇐ (counterexample given);
+%   - page 30: Prop. 9 is stated with τ(E) ≤ t and one projector; it needs
+%     τ(E) = t and, for non-normal A, a pair of equivalent projectors — the
+%     proof of Théorème 1 (page 31) is rewritten with that form;
+%   - page 90: Th. 3 needs f increasing (hypothesis a), not b) as its proof
+%     says; b) holds only in finite dimension;
+%   - page 147: the last step of the lemma integrates n(r)/r down to 0,
+%     which diverges; the argument is repaired by a split at δ;
+%   - page 148: P_n(u) carries the sign (−1)^k the page omits, and 2) is not
+%     proved by "decreasing terms" but by the lemma; 1) is restricted to
+%     normal u, the only case the lemma covers;
+%   - page 96: an inclusion between ℓ_{N'} and ℓ_{N''} is reversed.
+%
+% Announced and never established: the plan's « N° 7, autres inégalités »
+% (page 2); the marginal « ② Dual de 𝓛^p ; réflexivité » of page 126 (done for
+% general Schatten norms at pages 98-104, not in that theorem); the
+% inventory's « lettre (1953) », which no transcribed page identifies.
+%
+% Chronology, argued in the spine section from the pages themselves: pages
+% 123-149 predate pages 37-104 (page 129 knows only an analytic proof of
+% Σ|λ_i|^p ≤ Σ s_i^p, page 88 has it from Weyl's lemma); pages 106-118 serve
+% the cancelled proof of page 79.
+%
+% Pass: Fable 5.1 (claude-fable-5-1), 2026-09-10 — first pass, unchecked
+% against the pages by a human.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{1}
+\pages{1}{149}
+\dating{1953}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Analyse fonctionnelle : notes manuscrites (s.d.), lettre (1953) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Le carton porte un mot de l'inventaire, « analyse fonctionnelle », et une
+date, 1953. Dedans, cent quarante-neuf pages qui tournent toutes autour
+d'une même idée, simple à dire : mesurer la taille d'un opérateur non par
+un seul nombre, sa norme, mais par toute une suite de nombres, et savoir ce
+que cette suite fait quand on ajoute deux opérateurs ou qu'on les compose.
+
+Voici l'image. Un opérateur $u$ sur un espace de Hilbert --- disons une
+matrice infinie --- est \emph{compact} s'il écrase presque tout : il existe
+une suite décroissante $s_1(u) \geq s_2(u) \geq \cdots$, tendant vers zéro,
+telle que $u$ se décompose en une somme de « rangs un » de tailles $s_1$,
+$s_2$, \dots\ Ce sont ses \emph{valeurs singulières}. Elles disent combien
+de dimensions $u$ retient vraiment, et à quel prix : $s_1$ est la norme,
+$\sum s_i$ est la trace de $|u|$, $\sum s_i^2$ est la norme de
+Hilbert--Schmidt. Toute fonction raisonnable de la suite est une manière
+de mesurer $u$, et les classes d'opérateurs ainsi définies --- les classes
+de Schatten, $\sum s_i^p < \infty$ --- sont pour les opérateurs ce que les
+espaces $\ell^p$ sont pour les suites.
+
+Le problème est que les valeurs singulières se comportent mal. Celles de
+$u + v$ ne sont pas des fonctions simples de celles de $u$ et de $v$, ni
+celles de $uv$. Ce qui reste vrai, et c'est la découverte de Weyl en 1949,
+c'est une \emph{comparaison en moyenne} : les sommes partielles $s_1 +
+\cdots + s_n$ de $u + v$ sont majorées par celles de $u$ plus celles de $v$,
+et les produits partiels $s_1 \cdots s_n$ de $uv$ par ceux de $u$ fois
+ceux de $v$. Et il y a un lemme, dû à Hardy, Littlewood et Pólya, qui dit
+qu'une comparaison en moyenne suffit à comparer toute quantité convexe et
+symétrique. Mettez les deux bout à bout : toute norme raisonnable sur les
+valeurs singulières donne une norme sur les opérateurs, avec l'inégalité
+triangulaire, l'inégalité de Hölder, la dualité. C'est la théorie de
+Schatten, refaite en dix pages, aux pages 81 à 104.
+
+Le dossier ne s'arrête pas là, et c'est ce qui le rend intéressant. Il
+contient deux versions de la même théorie, et la plus ancienne, aux pages
+123 à 149, ne connaît pas encore le lemme de Weyl. Elle passe par une
+autre route, celle du \emph{déterminant} : pour un opérateur à trace,
+$\det(1 + zu)$ est une fonction entière de $z$, dont les zéros sont les
+inverses des valeurs propres et dont la croissance mesure les valeurs
+singulières. Toute la théorie des fonctions entières --- factorisation de
+Weierstrass et de Hadamard, genre, ordre, formule de Jensen --- est alors
+disponible, et le carton la rappelle aux pages 106 à 118 pour s'en servir.
+Ce détour donne plus que la théorie de Schatten : il atteint les
+\emph{classes pour $p < 1$}, qui ne sont plus des espaces normés, et il y
+démontre l'inégalité $\sum s_i(u+v)^p \leq \sum s_i(u)^p + \sum s_i(v)^p$
+et l'inégalité de Hölder pour tous les exposants. Il démontre aussi, en
+passant, que le déterminant est bien le produit $\prod(1 + \lambda_i)$ des
+valeurs propres, ce qui est la formule de la trace ; et une inégalité,
+$\det(1 + |u + v|) \leq \det(1 + |u|)\det(1 + |v|)$, que la littérature
+date de 1975.
+
+Il y a une troisième couche, la plus ambitieuse, aux pages 6 à 35 : refaire
+tout cela dans une \emph{algèbre de von Neumann} munie d'une trace, là où
+il n'y a plus de suite de valeurs singulières parce que les projecteurs
+n'ont plus une dimension entière mais une trace réelle. La suite devient
+une fonction décroissante $\varphi_A(t)$ sur $]0,\infty[$, le
+\emph{réarrangement} de $A$, et le lemme de Weyl devient une inégalité
+entre intégrales. On y trouve le déterminant de Fuglede et Kadison, une
+inégalité $\Delta_{AB}(t) \leq \Delta_A(t)\Delta_B(t)$ sur des déterminants
+partiels, et l'inégalité de Hölder non commutative, en trois lignes. Ce
+sont les nombres singuliers généralisés de Fack et Kosaki, et les espaces
+$L^p$ non commutatifs, tels qu'on les écrit depuis les années 1980.
+
+Trois feuillets à part, pages 3 à 5, identifient les multiplicateurs d'une
+$C^{*}$-algèbre dans son bidual à ceux qu'elle a dans n'importe quelle
+représentation ; deux pages, 119 à 121, étudient une fonction holomorphe
+sur $\ell^1$ qui converge partout mais n'est bornée sur aucune boule de
+rayon un.
+
+Le ton est celui d'un cahier de travail. « Je ne connais qu'une méthode
+analytique », écrit-il d'une inégalité qu'une page plus jeune du même
+carton obtient en deux lignes ; « c'est une inégalité remarquable, mais
+n'est pas celle que nous cherchons », d'une étape qui s'avère être la
+bonne ; « est-ce utile ? » et « pas d'importance » en marge de deux
+corollaires. Et, sous un trait au crayon, une question sur les valeurs
+propres et les valeurs singulières que le texte ne tranche pas, et que
+cette lecture tranche en note. Les noms à chercher ensuite sont ceux de
+Weyl, Ky Fan et Horn pour les inégalités, de Schatten pour les classes,
+de Fuglede--Kadison et Fack--Kosaki pour les algèbres de von Neumann, et
+de la théorie de Fredholm pour le déterminant.
+
+\keywords{singular values, Schatten--von Neumann classes, symmetric gauge function, unitarily invariant norm, Ky Fan maximum principle, Ky Fan inequalities, Weyl majorant theorem, Horn inequality, Hardy--Littlewood--Pólya majorization, decreasing rearrangement, rearrangement-invariant functional, Krein--Šmulian theorem, Hölder inequality for Schatten classes, quasi-normed operator ideal, McCarthy--Rotfel'd inequality, Seiler--Simon determinant inequality, Fredholm determinant, Fredholm minor, Lidskii trace formula, exterior power, antisymmetric Fock space, Hadamard inequality, Hilbert tensor product, Hilbert--Schmidt operator, trace class, Schatten duality, Köthe dual, generalized singular numbers, Fuglede--Kadison determinant, semifinite trace, noncommutative $L^p$ space, von Neumann trace inequality, multiplier algebra, idealizer, entire function of genus zero, Hadamard factorization, exponent of convergence, Jensen formula, Gâteaux holomorphy, radius of boundedness, Kadec--Klee property, Birman--Koplienko--Solomyak inequality, Mirsky inequality}
+\end{resume}
+
+\section*{Le fil du dossier, et les conventions}
+
+Cent quarante-neuf pages, huit lots de transcription, au moins quatre
+papiers et trois encres : le carton n'est pas un texte mais un chantier, et
+il faut dire d'abord ce qu'il construit, dans quel ordre il le construit, et
+avec quels mots.
+
+\pagerange{2}{2}
+\subsection*{Les stations}
+
+\begin{itemize}
+  \item \textbf{Page 2} --- le plan, de sa main, en sept numéros :
+    réarrangements de fonctions, fonctions de Weyl, inégalités, mesures
+    spectrales d'un opérateur, compléments sur le déterminant, les
+    inégalités pour $AB$, autres inégalités.
+  \item \textbf{Pages 3 à 5} --- un fragment étranger au plan, sur les
+    multiplicateurs d'une $C^{*}$-algèbre dans son bidual.
+  \item \textbf{Pages 6 à 35} --- les numéros 1 à 6 du plan : réarrangements
+    décroissants de fonctions, fonctions de Pólya et de Weyl, inégalités de
+    majoration, puis tout cela transporté dans une algèbre de von Neumann
+    munie d'une trace --- réarrangement spectral d'un opérateur, déterminant,
+    inégalité $\Delta_{AB}(t) \leq \Delta_A(t)\,\Delta_B(t)$ et ses
+    conséquences ; une seconde mouture des propositions clefs aux pages 34
+    et 35.
+  \item \textbf{Pages 37 à 41} --- des « Préliminaires » sur les opérateurs
+    compacts d'un espace de Hilbert : décomposition polaire, valeurs
+    singulières, inégalités de Ky Fan, opérateurs à trace, dual des
+    opérateurs compacts.
+  \item \textbf{Pages 43 à 57} --- « 2. Produits tensoriels hilbertiens » :
+    l'espace conjugué, $E \mathbin{\hat\otimes}_2 F$, les opérateurs de
+    Hilbert--Schmidt et les opérateurs à trace, leurs normes et leur dualité.
+  \item \textbf{Pages 58 à 69} --- « 3. Produits extérieurs hilbertiens » :
+    $\Lambda^n E$ comme espace de Hilbert, l'inégalité de Hadamard, les
+    puissances extérieures d'un opérateur, et les inégalités de Weyl
+    $|\lambda_1 \cdots \lambda_n| \leq s_1 \cdots s_n$ et de Horn
+    $\prod_{i \leq n} s_i(uv) \leq \prod_{i \leq n} s_i(u)\,s_i(v)$.
+  \item \textbf{Pages 70 à 79} --- « Puissances extérieures d'opérateurs de
+    Fredholm » en deux états, la mise au net (70 à 73) et son brouillon (76 à
+    79) : $\det(1+zu) = \prod(1+z\lambda_i)$, la formule de trace
+    $\operatorname{Tr} u = \sum \lambda_i$, et les inégalités
+    $\det(1+r|u+v|) \leq \det(1+r|u|)\det(1+r|v|)$. Entre les deux, aux pages
+    74 et 75, la sous-additivité de $\sum f(s_i)$ et une question ; page 80,
+    une feuille sur les fonctions convexes.
+  \item \textbf{Pages 81 à 92} --- « 4. Inégalités de convexité » : le lemme
+    de majoration de Weyl et ses trois théorèmes de convexité dans l'espace
+    de Hilbert, dont l'inégalité de Hölder et l'inégalité triangulaire des
+    normes de Schatten.
+  \item \textbf{Pages 93 à 104} --- « 5. Classes remarquables d'opérateurs »
+    et « Espaces de Schatten » : normes symétriques, espaces $\ell^N$ et
+    $\ell_N$, norme polaire, dualité, puis les classes
+    $\mathcal{S}^N(E,F)$ et $\mathcal{S}_N(E,F)$ et le théorème récapitulatif
+    en cinq points.
+  \item \textbf{Pages 106 à 118} --- des rappels sur les fonctions entières :
+    Weierstrass, Hadamard--Borel, genre et ordre, exposant de convergence,
+    fonction de comptage des zéros et formule de Jensen.
+  \item \textbf{Pages 119 à 121} --- « Sur une certaine fonction holomorphe
+    sur l'espace de Banach $\ell^1$ ».
+  \item \textbf{Pages 123 à 125} --- cinq corollaires encadrés, jusqu'à
+    $\det(1+|A+B|) \leq \det(1+|A|)\det(1+|B|)$.
+  \item \textbf{Pages 126 à 139} --- un « Théorème » sur les classes
+    $\mathcal{S}_p(H)$ pour $0 < p \leq \infty$, et sa démonstration
+    analytique complète.
+  \item \textbf{Pages 141 à 147} --- la convergence dans $\mathcal{S}_p$ :
+    critère pour les suites d'hermitiens, continuité de $A \mapsto |A|^r$,
+    un lemme sur les petites valeurs singulières, et des questions.
+  \item \textbf{Pages 148 et 149} --- l'opérateur $R(u) = \det(1+u)\,(1+u)^{-1}$
+    et ses bornes.
+\end{itemize}
+
+\subsection*{L'ordre du carton n'est pas celui de l'écriture}
+
+Trois indices, pris dans les pages elles-mêmes, fixent une chronologie que
+la cote ne respecte pas. Page 129, pour l'inégalité $\sum |\lambda_i|^p \leq
+\sum s_i^p$, il écrit « je ne connais qu'une méthode analytique », et en donne
+une par les zéros de $\det(1 - zA)$ ; page 88, la même inégalité est un
+corollaire en deux lignes du lemme de Weyl. Page 93, il annonce « un exposé de
+la théorie de Schatten, simplifié par les inégalités de convexité de Weyl ».
+Page 132, il note qu'une preuve directe de l'inégalité de Hölder « suffirait
+pour démontrer directement, comme nous le verrons plus bas, la formule (6)
+dans le cas général », et les pages 81 à 92 sont ce « plus bas ». Les pages
+123 à 149 sont donc l'état ancien, celui d'avant le lemme de Weyl ; les pages
+37 à 104 l'état récent ; et les rappels sur les fonctions entières des pages
+106 à 118 servent la démonstration de la page 79. Cette lecture suit l'ordre
+des pages, mais dit à chaque fois lequel des deux états on lit.
+
+\subsection*{Les conventions, valables pour tout le dossier}
+
+$E$, $F$, $G$, $H$ sont des espaces de Hilbert complexes ; $L(E,F)$ les
+opérateurs bornés, $L_0(E,F)$ les compacts. Pour $u$ compact, $|u| = (u^{*}u)^{1/2}$
+et $s_1(u) \geq s_2(u) \geq \cdots$ sont ses \emph{valeurs singulières}, les
+valeurs propres de $|u|$ rangées en décroissant, répétées selon leur
+multiplicité.\footnote{Le dossier les note $\rho_n(u)$ des pages 37 à 104 et
+$r_\nu(A)$ aux pages 146 et 147 ; on écrit $s_n$, qui est l'usage. Les
+valeurs propres $\lambda_i(u)$ sont rangées par modules décroissants, avec
+leur multiplicité algébrique.} $\mathcal{S}_p(E,F)$, $0 < p \leq \infty$, est la classe
+des $u$ compacts avec $\|u\|_p = (\sum s_i(u)^p)^{1/p} < \infty$, et
+$S_p(u) = \|u\|_p^p$ ; $\mathcal{S}_\infty = L_0$ avec la norme
+d'opérateur.\footnote{Ses notations : $L^p(E,F)$, $L^{(1)}$, $L^{(2)}$ aux
+pages 37 à 104, $\mathcal{L}^p(H)$ aux pages 126 à 147. Les
+$\mathcal{S}_p$ sont les classes de Schatten--von Neumann ; le nom vient de
+Schatten (1950) et de von Neumann (1937), que la page 93 nomme.}
+Un point de vocabulaire domine tout : ce que ces pages appellent
+\emph{opérateur de Fredholm}, c'est un opérateur \emph{à trace}, un élément
+de $\mathcal{S}_1$ --- l'opérateur pour lequel le déterminant de Fredholm
+$\det(1+zu)$ a un sens. Ce n'est pas l'opérateur « de Fredholm » de la
+théorie de l'indice, et on écrit ici \emph{à trace} partout.\footnote{L'usage
+est celui de sa thèse et de \emph{La théorie de Fredholm} (1956), où
+« application de Fredholm » désigne une application nucléaire. Les renvois du
+dossier à « Chap.\ 1, § 2, n° 2 » et « Introduction, 2, formule (8) » (pages
+63, 64, 76, 77) visent un texte qui n'est pas dans le carton ; la structure
+annoncée est celle de ce mémoire, sans qu'on puisse l'affirmer.}
+$\operatorname{Tr}$ est la trace, $\det(1+u) = \prod (1+\lambda_i(u))$ le
+déterminant de Fredholm, $\alpha_n(u)$ le coefficient de $z^n$ dans
+$\det(1+zu)$, et $\Lambda^n u$ la puissance extérieure.
+
+Pour les fonctions (pages 6 à 17) : $(M,m)$ est un espace mesuré,
+$\varphi_f$ le \emph{réarrangement décroissant} d'une fonction mesurable
+positive $f$ --- ce que l'on note aujourd'hui $f^{*}$ ---, et
+$\Phi_f(t) = \int_0^t \varphi_f$, $\Psi_f(t) = \int_0^t \log\varphi_f$,
+$\Delta_f = \exp\Psi_f$. Ces lettres sont celles du dossier et on les garde,
+parce que les mêmes reviennent pour les opérateurs.
+
+Pour les algèbres (pages 18 à 35) : $\mathcal{M}$ est une algèbre de von
+Neumann, $\tau$ une trace normale, semi-finie et fidèle sur $\mathcal{M}^{+}$,
+$\mathfrak{a}$ son idéal de définition, $\mathfrak{b}$ l'adhérence en norme de
+$\mathfrak{a}$, $\mathcal{P}$ l'ensemble des projecteurs de
+$\mathcal{M}$.\footnote{Il écrit $\mathcal{A}$, $T$, $\underline{a}$,
+$\underline{b}$ ; « idéal de définition » est le mot de Dixmier (1953), dont
+ces pages prennent la théorie des traces.} Le \emph{réarrangement spectral}
+$\varphi_A$ d'un $A \in \mathfrak{b}$ est ce que l'on appelle depuis
+Fack et Kosaki (1986) la fonction $t \mapsto \mu_t(A)$ des \emph{nombres
+singuliers généralisés} ; $\Delta_A(t) = \exp\int_0^t \log\varphi_{|A|}$ et
+$\Delta(A) = \Delta_A(\tau(1))$ est le déterminant de Fuglede--Kadison
+(1952).
+
+Deux choses annoncées ne sont pas dans le carton. Le plan de la page 2
+promet un « N° 7, autres inégalités » qui n'existe nulle part. Et la page
+126 annonce en marge « ② Dual de $\mathcal{L}^p$ ; réflexivité » sans que ce
+point soit traité dans ce théorème-là ; il l'est, pour les normes de
+Schatten générales, aux pages 98 à 104. L'inventaire mentionne enfin une
+« lettre (1953) » : aucune page transcrite ne porte d'adresse ni de signature,
+et cette lecture ne désigne pas laquelle serait la lettre.
+
+\pagerange{3}{5}
+\section*{Les multiplicateurs d'une $C^{*}$-algèbre (pages 3 à 5)}
+
+Trois pages pliées, d'une encre à part, qui ne tiennent au reste que par le
+sujet des algèbres d'opérateurs. Soit $C$ une $C^{*}$-algèbre et $C''$ son
+bidual, muni de sa structure d'algèbre de von Neumann enveloppante ; $C$ s'y
+plonge. Un endomorphisme linéaire continu $T$ de $C$ qui commute aux
+translations à droite, $T(xy) = T(x)\,y$, a un bitransposé $T''$ qui commute
+aux mêmes translations sur $C''$, donc est de la forme $x \mapsto ux$ pour un
+$u \in C''$ ; ces $u$ forment l'algèbre $\Gamma_g$ des $u \in C''$ tels que
+$uC \subset C$, et $T \mapsto u$ est un isomorphisme d'algèbres normées de
+l'algèbre de ces endomorphismes sur $\Gamma_g$.\footnote{Ce sont les
+\emph{multiplicateurs à gauche} de $C$. La page dit « permutables aux
+translations à gauche » et écrit $T(xy) = T(x)y$, qui est la commutation aux
+translations à droite ; on suit la formule. La prose de ces trois pages est
+en grande partie perdue, les formules non.} Soit $\Gamma$ l'ensemble des
+$u \in C''$ tels que $uC \subset C$ et $Cu \subset C$ : c'est une
+sous-$C^{*}$-algèbre de $C''$, l'algèbre des \emph{multiplicateurs} de $C$,
+$M(C)$ en notation d'aujourd'hui.
+
+\emph{Théorème.} Soit $R$ une algèbre de von Neumann contenant $C$ comme
+sous-algèbre faiblement dense, et $\Gamma_1$ l'ensemble des $x \in R$ tels
+que $xC \subset C$ et $Cx \subset C$. Alors $\Gamma_1$ et $\Gamma$ sont
+canoniquement isomorphes.
+
+Voici les deux applications. Pour $u \in \Gamma_1$, la translation
+$x \mapsto ux$ est un endomorphisme de $C$ commutant aux translations à
+droite, donc définit $\varphi(u) \in \Gamma_g$ ; comme $u^{*} \in \Gamma_1$
+aussi, $\varphi(u) \in \Gamma$, et $\varphi$ est un morphisme d'algèbres
+involutives. On a $\varphi(u) = \lim ux = \lim xu$ au sens faible, $x$
+parcourant une unité approchée de $C$, soit
+$\langle \varphi(u), f\rangle = \lim \langle ux, f\rangle$ pour $f \in C'$.
+Dans l'autre sens, $C$ étant faiblement dense dans $R$, l'inclusion se
+prolonge en un morphisme normal $\psi : C'' \to R$, et $\psi(\Gamma) \subset
+\Gamma_1$ ; le prédual $R_{*}$ s'identifie à une partie de $C'$ par
+restriction. Alors $\psi\varphi = 1$ sur $\Gamma_1$ : pour $u \in \Gamma_1$,
+$v = \varphi(u)$ et $f \in R_{*}$, $\langle \psi v, f\rangle = \langle v,
+f|_C\rangle = \langle u, f\rangle$. Et $\varphi\psi = 1$ sur $\Gamma$ : il
+suffit qu'un $x \in \Gamma$ avec $\psi(x) = 0$ soit nul, or pour $y \in C$
+on a $xy \in C$, donc $xy = \psi(xy) = \psi(x)\,y = 0$, et $x = 0$ puisque
+$C$ a une unité approchée. Donc $\varphi$ est un isomorphisme de $\Gamma_1$
+sur $\Gamma$, d'inverse $\psi$.\footnote{C'est l'identification de $M(C)$ au
+\emph{idéaliseur} de $C$ dans toute représentation fidèle non dégénérée ---
+énoncé standard depuis Busby (1968) et Johnson (1964) sur les
+centralisateurs, et que l'on trouve dans Pedersen, \emph{$C^{*}$-algebras
+and their automorphism groups}, 3.12. Rien n'indique que ces pages aient été
+publiées.}
+
+\pagerange{6}{10}
+\section*{Réarrangements décroissants et déterminant d'une fonction (pages 6 à 10)}
+
+C'est le « N° 1 » du plan. Soit $f$ une fonction mesurable complexe sur
+$(M,m)$. On dit que $f$ \emph{admet une mesure spectrale} si l'image de $m$
+par $f$ est une mesure de Radon sur $\mathbf{C}^{*} = \mathbf{C} \smallsetminus
+\{0\}$, autrement dit si $|f|^{-1}([a,b])$ est de mesure finie pour
+$0 < a < b$ ; cette mesure est notée $\mu_f$, et
+\[
+  \langle \alpha, \mu_f\rangle = \int_M \alpha\circ f\, dm
+\]
+pour $\alpha$ continue à support compact dans $\mathbf{C}^{*}$. Elle est
+positive, portée par $\mathbf{R}^{*}$ si $f$ est réelle, par
+$\mathbf{R}^{*}_{+}$ si $f$ est positive. Deux fonctions, sur deux espaces
+mesurés, sont \emph{spectralement équivalentes} --- on dit aujourd'hui
+\emph{équimesurables} --- si elles ont même mesure spectrale.
+
+\emph{Proposition 1.} Une fonction positive décroissante $\varphi$ sur
+$\mathbf{R}^{*}_{+}$ admet une mesure spectrale si et seulement si elle tend
+vers $0$ à l'infini, et alors $\int_1^\infty d\mu_\varphi < \infty$.
+Réciproquement, toute mesure positive $\mu$ sur $\mathbf{R}^{*}_{+}$ avec
+$\int_1^\infty d\mu < \infty$ est la mesure spectrale d'une fonction positive
+décroissante et d'une seule, à un ensemble négligeable près : celle qui
+vérifie, pour presque tout $t$,
+\[
+  t = \int_{\varphi(t)}^{\infty} d\mu(s),
+\]
+c'est-à-dire l'inverse généralisée de $s \mapsto \mu(]s,\infty[)$.
+
+\emph{Corollaire.} Une fonction mesurable positive $f$ sur $M$ est
+équimesurable à une fonction décroissante sur $\mathbf{R}^{*}_{+}$ si et
+seulement si $f^{-1}([a,\infty[)$ est de mesure finie pour tout $a > 0$ ;
+cette fonction décroissante est alors unique, c'est le \emph{réarrangement
+décroissant} $\varphi_f$ de $f$, et deux telles fonctions sont équimesurables
+si et seulement si elles ont même réarrangement. On a, en identifiant une
+partie mesurable $E$ à sa fonction caractéristique,
+\[
+  \varphi_f(t{-}0) = \inf_{m(E) < t} \|(1-E)f\|_\infty, \qquad
+  \varphi_f(t{+}0) = \inf_{m(E) \leq t} \|(1-E)f\|_\infty .
+\]
+\footnote{La page 7 écrit ces deux formules avec $\leq$ pour la limite à
+gauche et $<$ pour la limite à droite, le premier signe étant surchargé
+d'après la transcription. C'est l'inverse : l'infimum sur les $E$ de mesure
+$< t$ porte sur moins d'ensembles, donc est le plus grand des deux, donc
+est la limite à gauche. La page 26 écrit la formule pour les opérateurs avec
+le signe strict et la limite à gauche, ce qui est cohérent avec ce qu'on
+donne ici.}
+De là les règles, pour $f$, $g$ positives admettant un réarrangement :
+$\varphi_f \leq \varphi_g$ si $f \leq g$ ; $\varphi_{\lambda f} =
+\lambda\varphi_f$ pour $\lambda \geq 0$ ; $\varphi_{\alpha(f)} =
+\alpha(\varphi_f)$ pour $\alpha$ croissante sur $\mathbf{R}_{+}$ nulle en
+$0$, en particulier $\varphi_{f^\alpha} = \varphi_f^\alpha$ ;
+$\varphi_{f+g} \leq \varphi_f + \varphi_g$ ; $\varphi_{fg} \leq
+\varphi_f\varphi_g$.\footnote{Les deux dernières se lisent au sens de la
+\emph{sous-majorisation} : $\int_0^t \varphi_{f+g} \leq \int_0^t
+(\varphi_f + \varphi_g)$ pour tout $t$, et de même en produit logarithmique
+pour $fg$. Ponctuellement, $\varphi_{f+g}(t) \leq \varphi_f(t) + \varphi_g(t)$
+est faux --- $f$ et $g$ indicatrices d'ensembles disjoints de même mesure $1$
+donnent $\varphi_{f+g} = 1$ sur $]0,2[$ et $\varphi_f + \varphi_g = 0$ sur
+$]1,2[$ --- et c'est bien sous forme intégrée que la page 7 les utilise
+ensuite (formules (10) et (11)). Le passage qui les commente est en grande
+partie illisible.} Une bulle marginale note ce qui justifie tout : $\int_M
+f\,dm = \int_0^\infty \varphi_f(t)\,dt$, et de même pour toute fonction
+symétrique de $f$, $N_p(f) = N_p(\varphi_f)$.
+
+Supposons $\varphi_f$ sommable au voisinage de $0$, ce qui revient à
+$\int^\infty s\,d\mu_f(s) < \infty$, et posons
+\[
+  \Phi_f(t) = \int_0^t \varphi_f(s)\,ds, \qquad
+  \Psi_f(t) = \int_0^t \log\varphi_f(s)\,ds, \qquad
+  \Delta_f(t) = \exp\Psi_f(t) .
+\]
+$\Phi_f$ est continue, croissante et concave. $\Psi_f$ a un sens dès que
+$\log f$ est sommable sur $\{f \geq 1\}$ ; elle est concave, à valeurs dans
+$[-\infty, +\infty[$, et vaut $-\infty$ à partir de $t_0 = m(\{f \neq 0\})$ si
+celui-ci est fini. $\Delta_f$ est continue, croissante puis nulle à partir de
+$t_0$. Les règles ci-dessus donnent les inégalités correspondantes, dont les
+plus importantes sont
+\[
+  \Psi_{fg} \leq \Psi_f + \Psi_g, \qquad \Delta_{fg} \leq \Delta_f\,\Delta_g .
+\]
+Pour une fonction mesurable quelconque on pose enfin
+\[
+  \Delta(f) = \Delta_{|f|}(m(M)) = \exp\int_M \log|f|\,dm,
+\]
+qui existe, avec $0 \leq \Delta(f) < \infty$, dès que $\log|f|$ est sommable
+sur $\{|f| > 1\}$ ; $\Delta$ a les propriétés d'un module de déterminant,
+$\Delta(fg) = \Delta(f)\Delta(g)$ et $\Delta(1) = 1$.\footnote{C'est la
+moyenne géométrique de $|f|$, le déterminant de Fuglede--Kadison de l'algèbre
+commutative $L^\infty(M)$ : la page 27 le transportera tel quel dans une
+algèbre de von Neumann.} Si $m(M) < \infty$ et $f \geq 0$, on a
+$\varphi_{1+f} = 1 + \varphi_f$ sur $]0, m(M)[$, ce qui permet de définir
+$\Delta_{1+f}(t) = \exp\int_0^t \log(1+\varphi_f)$ dès que $\Phi_f$ existe,
+avec $\Delta_{1+f}(m(M)) = \Delta(1+f)$.
+
+Pour une fonction \emph{réelle} $f$ sur un $M$ de mesure finie, la même
+proposition 1 --- appliquée à $\mu_f$ sur $\mathbf{R}^{*}$, qui porte la masse
+totale $m(M)$ --- donne une fonction décroissante $\varphi_f$ et une seule sur
+$]0, m(M)[$ équimesurable à $f$, encore appelée réarrangement décroissant.
+Le résultat suivant est classique :
+
+\emph{Proposition 2} (Hardy--Littlewood). Pour $f$, $g$ réelles mesurables
+sur $M$ de mesure finie, telles que $fg$ soit sommable,
+\[
+  \int_M fg\,dm \leq \int_0^{m(M)} \varphi_f\,\varphi_g\,ds .
+\]
+\footnote{La page ajoute, d'une lecture incertaine, que la sommabilité de
+$\varphi_f\varphi_g$ est requise, ce qui est bien la condition pour que le
+second membre soit fini ; l'inégalité vaut dans $]-\infty,+\infty]$ sans
+elle.}
+
+\pagerange{11}{15}
+\section*{Fonctions de Pólya et fonctions de Weyl (pages 11 à 15)}
+
+Le « N° 2 » construit les fonctionnelles pour lesquelles les réarrangements
+sont la bonne variable. Soit $I = ]0,\omega[$ avec $0 < \omega \leq \infty$,
+et $K^\infty(I)$ l'espace des fonctions mesurables bornées à support de
+mesure finie dans $I$.
+
+\emph{Définition 1.} Une \emph{fonction de Pólya} sur $I$ est une fonction
+$P : K^\infty(I) \to \mathbf{R}$ telle que
+\begin{itemize}
+  \item[$P_1$)] $P$ est \emph{symétrique} : $P(f) = P(g)$ si $f$ et $g$ sont
+    équimesurables ;
+  \item[$P_2$)] $P$ est convexe ;
+  \item[$P_3$)] pour tout $K \subset I$ de mesure finie et toute suite
+    bornée $(f_i)$ dans $L^\infty(K)$ convergeant en mesure vers $f$, on a
+    $P(f) \leq \liminf P(f_i)$.
+\end{itemize}
+En fait $P_3$ équivaut à la condition apparemment plus forte $P_3'$ : $P$ est
+semi-continue inférieurement pour la topologie faible $\sigma(L^\infty(K),
+L^1(K))$ sur les parties bornées de $L^\infty(K)$. Car pour tout $a$
+l'ensemble convexe $A = \{f \in L^\infty(K) : P(f) \leq a\}$ est, par $P_3$,
+fermé pour la convergence en mesure sur les boules de $L^\infty(K)$, donc
+fermé pour la norme de $L^1(K)$ sur ces boules ; or un convexe de
+$L^\infty(K) = (L^1(K))'$ dont l'intersection avec chaque boule est fermée
+pour la norme de $L^1$ --- \emph{a fortiori} pour $\sigma(L^\infty, L^1)$ ---
+est faiblement fermé.\footnote{C'est le théorème de Krein--Šmulian, que la
+page 11 invoque en citant, dans un passage biffé, « Bourbaki » et
+« Dieudonné » ; le nom moderne est fourni ici.} Une fonction sur
+$K^\infty(]0,\infty[)$ est de Pólya si et seulement si sa restriction à chaque
+$L^\infty(]0,\omega[)$, $\omega < \infty$, l'est.
+
+\emph{Définition 2.} Une \emph{fonction de Weyl} sur les fonctions positives
+de $K^\infty(I)$ est une fonction $W$ telle que $f \mapsto W(e^{f})$ soit
+une fonction de Pólya. Les fonctions de Weyl et les fonctions de Pólya se
+correspondent donc par $W(g) = P(\log g)$, $P(f) = W(e^f)$.\footnote{Ces
+deux noms sont les siens et ne sont pas passés dans l'usage. Une fonction de
+Pólya est une fonctionnelle convexe, \emph{invariante par réarrangement} et
+semi-continue ; les fonctions de Weyl sont leurs transformées par le
+logarithme, celles que le lemme de Weyl de la page 81 fait comparer par les
+produits partiels plutôt que par les sommes partielles.}
+
+\emph{Représentation.} Soit $K \subset I$ de mesure finie et $P$ une fonction
+de Pólya sur $L^\infty(K)$. L'épigraphe $\{(\lambda, f) : \lambda \geq P(f)\}$
+est convexe ($P_2$) et fermé ($P_3'$) dans $\mathbf{R} \times L^\infty(K)$
+pour la topologie faible, donc, par Hahn--Banach, intersection des
+demi-espaces fermés qui le contiennent : $P(f) = \sup_i (L_i(f) + a_i)$ avec
+$L_i \in L^1(K)$ et $a_i \in \mathbf{R}$. Par $P_1$, $P(f) \geq L_i(g) + a_i$
+pour toute $g$ équimesurable à $f$, et le supremum de $\int L_i g$ sur ces
+$g$ est $\int \varphi_{L_i}\varphi_f$ par la proposition 2 --- le
+sup étant atteint --- d'où, en posant $\varphi_i = \varphi_{L_i}$,
+\[
+  P(f) = \sup_{i \in I}\Bigl( a_i + \int_0^{\omega} \varphi_i\,\varphi_f \Bigr),
+\]
+les $\varphi_i$ étant des fonctions décroissantes sommables sur $]0, |K|]$.
+Réciproquement toute fonction de cette forme est de Pólya, et elle est
+croissante si les $\varphi_i$ sont positives. On peut prendre les $\varphi_i$
+nulles sur $[|K|, \infty[$, et la formule s'écrit $P(f) = P^{*}(\varphi_f)$ où
+$P^{*}(\varphi) = \sup_i (a_i + \int_0^\infty \varphi_i\varphi)$ est une
+fonction de Pólya sur $\mathbf{R}^{*}_{+}$.\footnote{En langage
+d'aujourd'hui : une fonctionnelle convexe s.c.i.\ invariante par
+réarrangement est le sup des fonctionnelles affines invariantes par
+réarrangement, et celles-ci sont données par le produit scalaire des
+réarrangements. C'est l'argument qui, pour les normes, donne la
+représentation d'une norme invariante par réarrangement par sa norme duale
+(Lorentz, Luxemburg) ; ces pages le font sans le nommer, et deux ans avant
+Lorentz, mais rien n'y renvoie à une publication.}
+
+\emph{Exemples de fonctions de Weyl.} Soit $\alpha$ une fonction sur
+$\mathbf{R}_{+}$, nulle en $0$, telle que $s \mapsto \alpha(e^s)$ soit
+convexe. Alors $W_\alpha(f) = \int_0^\omega \alpha(\varphi_f)$ est une
+fonction de Weyl, croissante si et seulement si $\alpha$ l'est. Pour
+$\alpha_p(s) = s^p$, $0 < p < \infty$, on trouve $W_{\alpha_p}(f) = \int
+|f|^p = N_p(f)^p$. Une fonction de Weyl croissante sur les fonctions
+positives de $K^\infty$ s'étend à toute fonction mesurable positive $f$ sur
+un espace mesuré quelconque par $W(f) = \sup\{W(\varphi_g) : 0 \leq g \leq f,\ g \in K^\infty\}$, et l'on a $W(f) = W(\varphi_f)$, $W(f) = W(\varphi_{|f|})$
+pour $f$ complexe.
+
+\pagerange{16}{17}
+\section*{Les inégalités de majoration (pages 16 et 17)}
+
+Le « N° 3 » est court, et il contient la moitié de tout ce qui suit. Soit
+$0 < \omega < \infty$.
+
+\emph{Proposition 4.} Soient $f$, $g$ décroissantes et localement sommables
+sur $]0,\omega[$ telles que
+\[
+  \int_0^t f \leq \int_0^t g \qquad \text{pour } 0 \leq t \leq \omega .
+\]
+Alors $P(f) \leq P(g)$ pour toute fonction de Pólya \emph{croissante} $P$ sur
+$L^\infty(]0,\omega[)$. (La réciproque est triviale : pour tout $t$,
+$f \mapsto \int_0^t \varphi_f$ est une fonction de Pólya croissante.)
+
+Par la représentation du numéro 2, il suffit de prouver $\int_0^\omega f\varphi
+\leq \int_0^\omega g\varphi$ pour $\varphi$ positive, décroissante et sommable,
+ce qui résulte de l'hypothèse par intégration par parties : avec
+$F(t) = \int_0^t f$,
+\[
+  \int_0^\omega f\varphi = \varphi(\omega)F(\omega) + \int_0^\omega F\,(-d\varphi),
+\]
+et les deux termes croissent avec $F$ puisque $\varphi(\omega) \geq 0$ et
+$-d\varphi \geq 0$.
+
+\emph{Remarque.} Si de plus $\int_0^\omega f = \int_0^\omega g$, le premier
+terme est le même pour $f$ et $g$ et l'on n'a plus besoin de $\varphi \geq 0$ :
+la proposition vaut alors pour toute fonction de Pólya, croissante ou
+non.\footnote{C'est le théorème de Hardy, Littlewood et Pólya sur la
+majorisation, en dimension infinie : $f \prec_w g$ (sous-majorisation faible)
+entraîne $\Phi(f) \leq \Phi(g)$ pour $\Phi$ convexe, symétrique et
+croissante, et $f \prec g$ (majorisation) l'entraîne pour $\Phi$ convexe
+symétrique. La page 81 en redonnera la version finie, attribuée à Weyl.}
+
+\emph{Corollaire 1.} Soient $f$, $g$ positives sur $M$ telles que
+$\Delta_f(t) \leq \Delta_g(t) < \infty$ pour $0 \leq t \leq \omega$. Alors
+$W(f) \leq W(g)$ pour toute fonction de Weyl croissante $W$ sur les fonctions
+positives de $K^\infty(]0,\omega[)$. On se ramène à $M = ]0,\omega[$ et à
+$f = \varphi_f$, $g = \varphi_g$, puis on applique la proposition 4 à
+$\log f$, $\log g$ et à la fonction de Pólya croissante $h \mapsto W(e^h)$.
+
+\pagerange{18}{27}
+\section*{Réarrangement spectral d'un opérateur dans une algèbre de von Neumann (pages 18 à 27)}
+
+Le « N° 4 » transporte le numéro 1 dans une algèbre de von Neumann
+$\mathcal{M}$ munie d'une trace $\tau$ normale, semi-finie et fidèle : une
+fonction $\tau : \mathcal{M}^{+} \to [0,+\infty]$, additive, positivement
+homogène, invariante par les unitaires, telle que $\tau(\sup A_i) = \sup
+\tau(A_i)$ pour toute famille filtrante croissante majorée, telle que tout
+$A > 0$ majore un $B > 0$ avec $\tau(B) < \infty$, et telle que $\tau(A) = 0$
+entraîne $A = 0$. Les $A \geq 0$ avec $\tau(A) < \infty$ forment le cône
+positif d'un idéal bilatère involutif $\mathfrak{a}$, sur lequel $\tau$ se
+prolonge en une forme linéaire vérifiant $\tau(AB) = \tau(BA)$ pour
+$A \in \mathfrak{a}$, $B \in \mathcal{M}$. On note $\mathfrak{b}$
+l'adhérence en norme de $\mathfrak{a}$ ; c'est un idéal bilatère involutif
+fermé, égal à $\mathcal{M}$ si et seulement si $\tau$ est finie.\footnote{La
+page 19, biffée, est reprise page 20. Pour $\mathcal{M} = L(H)$ et $\tau$ la
+trace usuelle, $\mathfrak{a}$ est $\mathcal{S}_1$ et $\mathfrak{b}$ les
+opérateurs compacts : tout ce numéro est la théorie des valeurs singulières,
+écrite sans hypothèse de type.}
+
+\emph{Proposition 1.} Un projecteur de $\mathfrak{b}$ est dans $\mathfrak{a}$.
+Si $\mathcal{C} = C_0(M)$ est une sous-algèbre commutative involutive de
+$\mathfrak{b}$, alors $K(M) \subset \mathfrak{a}$, où $K(M)$ désigne les
+fonctions continues à support compact.
+
+Pour la première assertion, si $E = \lim A_i$ en norme avec $A_i \in
+\mathfrak{a}$, on a $E = \lim A_i^{*}A_i = \lim E A_i^{*} A_i E$, donc $E$ est
+limite de $D_i \in \mathfrak{a}$ avec $0 \leq D_i \leq E$ ; dès que
+$\|E - D_i\| \leq \frac12$ on a $E \leq 2D_i$, donc $E \in \mathfrak{a}$.
+Pour la seconde, une $f \in K^{+}(M)$ est majorée par la fonction
+caractéristique d'un compact $K$, elle-même majorée par une $g \in K^{+}(M)$ ;
+l'opérateur $U_{1_K}$ de multiplication par $1_K$ est un projecteur, majoré
+par $U_g \in \mathfrak{b}$, donc dans $\mathfrak{b}$, donc dans
+$\mathfrak{a}$, et $U_f \leq \|f\|_\infty U_{1_K}$ est dans $\mathfrak{a}$.
+Page 21, la fin de la démonstration établit que si $\mathcal{C}$ est
+commutative \emph{maximale} dans $\mathfrak{b}$, le commutant de $\mathcal{C}$
+dans $E\mathcal{M}E$, pour $E = U_{1_K}$, se réduit à $\mathcal{C}(K)$.
+
+\emph{Corollaire 1.} Si $\mathcal{C} = C_0(M)$ est une sous-algèbre
+commutative maximale de $\mathfrak{b}$, la trace induit une mesure positive
+$\mu$ sur $M$ : $f \in C_0(M)$ est dans $\mathfrak{a}$ si et seulement si $f$
+est $\mu$-intégrable, et alors $\tau(f) = \int f\,d\mu$.
+
+\emph{Corollaire 2.} Si $A$ est un opérateur normal de $\mathfrak{b}$ et $f$
+une fonction continue bornée sur $\mathbf{C}$, nulle au voisinage de $0$,
+alors $f(A) \in \mathfrak{a}$.
+
+Soit maintenant $A$ normal dans $\mathfrak{b}$. Il est contenu dans une
+sous-algèbre commutative involutive maximale $C_0(M)$ de $\mathfrak{b}$,
+comme fonction $f$ sur $M$ ; la mesure spectrale $\mu_f$ de $f$ pour la
+mesure $\mu$ du corollaire 1 existe et ne dépend pas de $\mathcal{C}$, car
+\[
+  \langle \varphi, \mu_f\rangle = \int_M \varphi\circ f\,d\mu = \tau(\varphi(A))
+  \qquad (\varphi \in K(\mathbf{C}^{*})) .
+\]
+On l'appelle \emph{mesure spectrale de $A$} et on la note $\mu_A$ ; sa masse
+est finie si et seulement si $A \in \mathfrak{a}$, et alors
+$\int z^n\,d\mu_A(z) = \tau(A^n)$ pour $n \geq 1$. Si $A \geq 0$, la fonction
+décroissante $\varphi_A$ sur $\mathbf{R}^{*}_{+}$ de mesure spectrale $\mu_A$
+est le \emph{réarrangement spectral} de $A$ ; on a $\|\varphi_A\|_\infty =
+\|A\|$, et pour $A \in \mathfrak{b}$ quelconque on pose $\varphi_{|A|}$, puis
+\[
+  \Phi_A(t) = \int_0^t \varphi_A, \qquad
+  \Psi_A(t) = \int_0^t \log\varphi_A, \qquad
+  \Delta_A(t) = \exp\int_0^t \log\varphi_{|A|}(s)\,ds,
+\]
+et, si $\omega = \tau(1) < \infty$, $\Delta(A) = \Delta_A(\omega)$, avec
+$0 \leq \Delta(A) < \infty$.\footnote{$\varphi_A(t) = \mu_t(A)$ de Fack et
+Kosaki : $\mu_t(A) = \inf\{\|A(1-E)\| : E \in \mathcal{P},\ \tau(E) \leq t\}$,
+et c'est la proposition 6 ci-dessous, trente ans plus tôt et pour les
+seuls $A \in \mathfrak{b}$. Pour $\mathcal{M} = L(H)$, $\varphi_A$ est la
+fonction en escalier $t \mapsto s_{\lceil t\rceil}(A)$.}
+
+Les pages 23 à 25, en grande partie biffées et reprises, remarquent qu'un
+point $t \in M$ de masse $\mu(\{t\}) > 0$ définit un projecteur minimal
+$E = U_{1_{\{t\}}}$ de $\mathcal{M}$, que $\mathcal{M}$ se décompose alors en
+une somme directe dont le facteur porté par $E$ est de type I avec $\tau$
+proportionnelle à la trace usuelle, et que, inversement, une algèbre à trace
+finie fidèle se plonge dans une algèbre continue en posant $\tau(f) =
+\int_0^1 \tau(f(s))\,ds$ sur $L^\infty([0,1]) \mathbin{\bar\otimes}
+\mathcal{M}$ ; le réarrangement d'un $A \in \mathcal{M}$ est le même dans
+l'une et dans l'autre. C'est l'« astuce » que la page 34 nommera, et qui
+permet de supposer la trace continue.\footnote{La prose de ces trois pages
+est presque entièrement perdue ; on n'en retient que ce que les formules et
+la page 34 confirment.}
+
+\emph{Proposition 6.} Pour $A \in \mathfrak{b}^{+}$ et $t > 0$,
+\[
+  \varphi_A(t{-}0) = \inf_{\substack{E \in \mathcal{P}\\ \tau(E) < t}}
+  \ \sup_{x \in (1-E)H,\ \|x\| \leq 1} (Ax, x)
+  = \inf_{\substack{E \in \mathcal{P}\\ \tau(E) < t}} \|(1-E)A(1-E)\| .
+\]
+Prenant $E$ dans une sous-algèbre commutative maximale $C_0(M)$ contenant
+$A$, les projecteurs sont des fonctions caractéristiques et la formule (4)
+du numéro 1 donne l'inégalité $\geq$ ; et pour tout projecteur $E$ de
+$\mathcal{M}$ avec $\tau(E) < t$, si $F$ est le projecteur spectral de $A$
+sur $[\varphi_A(t{-}0), \infty[$, on a $\tau(F) \geq t > \tau(E)$, donc
+$(1-E)H \cap FH \neq 0$ et le sup est $\geq \varphi_A(t{-}0)$.\footnote{Ce
+second argument est celui de la page 34 (seconde mouture) : deux projecteurs
+$E$, $F$ avec $\tau(E) < \tau(F)$ ne peuvent avoir $FH \cap (1-E)H = 0$, car
+$F \ominus (F \wedge (1-E)) \sim E \ominus (E \wedge (1-F))$ donnerait
+$F \prec E$. La page 26 ne donne que la première moitié.}
+
+\emph{Corollaire 1.} Pour $A \in \mathfrak{b}$ quelconque,
+$\varphi_{|A|}(t{-}0) = \inf_{\tau(E) < t} \|A(1-E)\|$.
+
+\emph{Corollaire 2.} Pour $A \in \mathfrak{b}$, $B \in \mathcal{M}$ :
+$\varphi_{|BA|} \leq \|B\|\,\varphi_{|A|}$ et $\varphi_{|AB|} \leq
+\|B\|\,\varphi_{|A|}$.
+
+\emph{Corollaire 3.} $\varphi_A$ est fonction croissante de
+$A \in \mathfrak{b}^{+}$.
+
+\emph{Corollaire 4.} Les fonctions $A \mapsto \varphi_{|A|}(t{-}0)$ sont
+semi-continues supérieurement sur $\mathfrak{b}$ pour la topologie de la
+norme.\footnote{La fin de l'énoncé est perdue au bord de la page ; la
+topologie est celle que l'infimum de normes rend évidente.}
+
+\emph{Proposition 7.} Pour $A \in \mathfrak{b}$, $\mu_{|A|} = \mu_{|A^{*}|}$,
+c'est-à-dire $\varphi_{|A|} = \varphi_{|A^{*}|}$, et par suite $\Phi_{|A|} =
+\Phi_{|A^{*}|}$, $\Psi_{|A|} = \Psi_{|A^{*}|}$, $\Delta_A = \Delta_{A^{*}}$.
+Il suffit de voir $\mu_{A^{*}A} = \mu_{AA^{*}}$, et par continuité de le voir
+pour $A \in \mathfrak{a}$ ; les deux mesures sont alors, hors de $0$, de
+masse finie et à support dans $[0,\|A\|^2]$, donc déterminées par leurs
+moments $\int x^p\,d\mu$, $p \geq 1$ entier, et $\tau((A^{*}A)^p) =
+\tau((AA^{*})^p)$ résulte de $\tau(RS) = \tau(SR)$.
+
+\pagerange{27}{32}
+\section*{Le déterminant (pages 27 à 32)}
+
+C'est le « N° 6 » de la page 27, le « N° 5 » du plan. Pour $A = \lambda 1 + B$
+avec $B \in \mathfrak{b}$, on définit $\varphi_{|A|}$ par la formule du
+corollaire 1 de la proposition 6, et
+\[
+  \Delta(A) = \exp\int_0^{\tau(1)} \log\varphi_{|A|}(s)\,ds \in [0, +\infty] .
+\]
+\footnote{La page définit d'abord $\Delta$ sur $\mathfrak{b}$, puis sur les
+$\lambda 1 + B$, notés $\tilde{\mathfrak{b}}$ ; pour $\lambda \neq 0$ et
+$\tau(1) = \infty$ la mesure spectrale de $|A|$ n'est plus de Radon sur
+$\mathbf{R}^{*}_{+}$, et c'est la caractérisation par les projecteurs qui
+donne un sens à $\varphi_{|A|}$. Ce choix est le nôtre.}
+a) Si $\tau$ est finie, $\Delta(A)$ est défini pour tout $A \in \mathcal{M}$,
+et $\Delta(\lambda A) = |\lambda|^{\tau(1)}\Delta(A)$ : c'est le déterminant
+de Fuglede et Kadison.
+b) Si $\tau$ est semi-finie et non finie, pour $A = \lambda 1 + B$ avec
+$B \in \mathfrak{b}$ hermitien et $A \geq 0$ : $\Delta(A) = 0$ si
+$|\lambda| < 1$, $\Delta(A) = +\infty$ si $|\lambda| > 1$, et si
+$|\lambda| = 1$ on a $0 \leq \Delta(A) < \infty$ dès que $B \in
+\mathfrak{a}$.\footnote{La page 28 écrit dans ce dernier cas « $\Delta(A) <
++\infty \Longleftrightarrow B \in \mathfrak{a}$ ». L'implication réciproque
+est fausse : dans $L(H)$ avec $H$ de dimension infinie, $A = 1 - \frac12 E$
+pour un projecteur $E$ de rang et de corang infinis a $\varphi_{|A|} \equiv
+1$, donc $\Delta(A) = 1$, et $B = -\frac12 E$ n'est pas à trace. Elle est
+vraie si $B \geq 0$, puisqu'alors $\varphi_{|1+B|} = 1 + \varphi_B$ et
+$\log(1+\varphi_B)$ est sommable si et seulement si $\varphi_B$ l'est.}
+Seules importent donc les valeurs de $\Delta$ sur $1 + \mathfrak{a}$.
+
+\emph{Proposition 8.} Pour $A$, $B \in 1 + \mathfrak{a}$ :
+\[
+  \Delta(A) = \Delta(A^{*}), \qquad \Delta(AB) = \Delta(A)\,\Delta(B), \qquad
+  \Delta(1) = 1 .
+\]
+Seule la seconde demande une démonstration. Par continuité on peut
+supposer qu'il existe un projecteur $E \in \mathfrak{a}$ avec $A - 1$,
+$B - 1 \in E\mathcal{M}E$, et l'on est ramené à l'algèbre
+$\mathcal{M}_E = E\mathcal{M}E$, d'unité $E$, munie de la trace finie
+$\tau_E$ induite ; pour $A \in \mathcal{M}_E$, on note $\Delta^{E}(A)$ son
+déterminant relatif à $\mathcal{M}_E$, et l'on a $\Delta(1 + A) =
+\Delta^{E}(1_E + A)$. Le cas d'une trace finie est celui de Fuglede et
+Kadison.\footnote{Le manuscrit ne cite pas Fuglede et Kadison (1952), dont
+la multiplicativité en trace finie est le théorème principal ; la page 29
+commence une démonstration directe par $\Delta(A)^2 = \Delta(AA^{*})$, la
+biffe, et la page 30 la remplace par les déterminants relatifs qui suivent.
+Le passage de $1 + \mathfrak{a}$ au cas fini « par raison de continuité »
+demande la semi-continuité de $A \mapsto \Delta(A)$, qui n'est pas écrite ;
+elle résulte du corollaire 4 de la proposition 6.}
+
+\emph{Déterminants relatifs.} Supposons la trace finie. Soient $X$, $Y$ deux
+projecteurs équivalents de $\mathcal{M}$, $U \in \mathcal{M}$ une isométrie
+partielle avec $U^{*}U = X$, $UU^{*} = Y$, et $A \in \mathcal{M}$ tel que
+$AX(H) \subset Y(H)$, soit $\sigma(AX) \leq Y$ avec $\sigma$ le support à
+gauche. On pose
+\[
+  \Delta^{X,Y}(A) = \Delta^{X}(U^{*}AX) = \Delta^{Y}(YAU^{*}),
+\]
+qui ne dépend pas du choix de $U$, deux tels $U$ différant par un unitaire
+de $\mathcal{M}_X$. Si $Z$ est un projecteur équivalent à $Y$ et $B \in
+\mathcal{M}$ avec $\sigma(BY) \leq Z$, on a
+\[
+  \Delta^{X,Z}(BA) = \Delta^{X,Y}(A)\,\Delta^{Y,Z}(B) .
+\]
+
+\emph{Proposition 9.} Soit $A \in \mathfrak{b}$ et $t = \tau(E_0)$ pour un
+projecteur $E_0$. Alors
+\[
+  \Delta_A(t) = \sup_{\substack{E \simeq F\\ \tau(E) = t}} \Delta^{E,F}(FAE),
+\]
+et le sup est atteint ; si $A$ est normal, on peut se borner aux
+$\Delta^{E}(EAE)$.\footnote{La page 30 écrit $\Delta_A(t) = \sup_{\tau(E)
+\leq t} \Delta^{E}(EAE)$ pour $A \in \mathfrak{b}$ quelconque, et la
+démontre « par diagonalisation ». Deux corrections. D'abord $\tau(E) = t$ et
+non $\leq t$ : pour $A = \frac12 1$ en trace finie, $\Delta_A(t) = 2^{-t}$
+décroît, tandis que le sup sur $\tau(E) \leq t$ vaut $1$ ; la page 31 elle-même
+prend $t = \tau(E)$. Ensuite, la formule avec un seul projecteur exige $A$
+normal : pour $A = e_{12}$ dans $M_2(\mathbf{C})$, $\Delta_A(1) = 1$ alors
+que $|\langle Av, v\rangle| \leq \frac12$ pour tout vecteur unitaire $v$,
+donc $\Delta^{E}(EAE) \leq \frac12$ pour tout projecteur de rang $1$. Avec
+deux projecteurs équivalents on a l'égalité en général : si $A = U|A|$ et $E$
+est le projecteur spectral de $|A|$ sur ses $t$ premières valeurs, $F =
+UEU^{*}$ donne $\Delta^{E,F}(FAE) = \Delta^{E}(E|A|E) = \Delta_A(t)$. C'est
+cette forme qu'exige la démonstration du théorème 1.}
+L'inégalité $\leq$ est l'égalité qu'on vient de dire. L'inégalité $\geq$ est
+le corollaire suivant, car $\varphi_{|EU^{*}AE|} \leq \varphi_{|A|}$ par le
+corollaire 2 de la proposition 6, appliqué deux fois.
+
+\emph{Corollaire.} Si $E \simeq F$, $\tau(E) = t$ et $A \in \mathcal{M}$,
+alors $\Delta^{E,F}(FAE) \leq \Delta_A(t)$.
+
+\emph{Théorème 1.} Pour $A$, $B \in \mathfrak{b}$ et $t \geq 0$,
+\[
+  \Delta_{AB}(t) \leq \Delta_A(t)\,\Delta_B(t) .
+\]
+Les deux membres étant fonctions semi-continues de $A$ et $B$, on peut
+supposer la trace finie et $t = \tau(E)$. Par la proposition 9,
+$\Delta_{AB}(t) = \sup \Delta^{E,G}(GABE)$ sur les couples $E \simeq G$ de
+trace $t$ ; soit $F$ un projecteur équivalent à $E$ majorant $\sigma(BE)$,
+$A' = GAF$, $B' = FBE$, de sorte que $GABE = A'B'$ et, par la
+multiplicativité relative,
+\[
+  \Delta^{E,G}(GABE) = \Delta^{E,F}(FBE)\,\Delta^{F,G}(GAF)
+  \leq \Delta_B(t)\,\Delta_A(t)
+\]
+par le corollaire.\footnote{C'est l'inégalité de Horn $\prod_{i \leq n}
+s_i(AB) \leq \prod_{i \leq n} s_i(A)\,s_i(B)$ (1950), sous forme intégrée et
+dans une algèbre de von Neumann semi-finie quelconque, où elle est due à
+Fack (1982) et Fack--Kosaki (1986). Telle qu'elle est écrite page 31, la
+démonstration passe par la proposition 9 à un seul projecteur appliquée au
+produit $AB$, non normal ; on l'a réécrite avec les couples de projecteurs
+équivalents, ce qui est exactement ce que la fin de la page 31 et la page 32
+manipulent. Pour $t$ hors de $\tau(\mathcal{P})$ --- en type I, entre deux
+entiers --- l'énoncé reste vrai par la caractérisation de Fack--Kosaki, mais
+l'argument des pages ne le couvre pas.}
+
+\pagerange{32}{33}
+\section*{Les inégalités fondamentales (pages 32 et 33)}
+
+Le théorème 1 s'écrit aussi $\Delta_{\varphi_{|AB|}} \leq
+\Delta_{\varphi_{|A|}\varphi_{|B|}}$, puisque $\Delta_{fg} = \Delta_f\Delta_g$
+pour deux fonctions décroissantes sur $\mathbf{R}^{*}_{+}$. Par le
+corollaire 1 du numéro 3 :
+
+\emph{Théorème 2.} Si $A$, $B \in \mathfrak{b}$ et si $W$ est une fonction de
+Weyl croissante sur $K^\infty(]0,\tau(1)])$, alors
+\[
+  W(AB) \leq W(\varphi_{|A|}\,\varphi_{|B|}),
+\]
+où $W(AB)$ désigne $W(\varphi_{|AB|})$.
+
+\emph{Corollaire 1.} Pour $t \geq 0$, $\int_0^t \varphi_{|AB|} \leq \int_0^t
+\varphi_{|A|}\varphi_{|B|}$ ; en particulier
+\[
+  \int_0^\infty \varphi_{|AB|} \leq \int_0^\infty \varphi_{|A|}\,\varphi_{|B|},
+  \qquad\text{d'où}\qquad
+  |\tau(AB)| \leq \tau(|AB|) = \int \varphi_{|AB|} \leq \int \varphi_{|A|}\varphi_{|B|} .
+\]
+La plupart des inégalités importantes sont des conséquences immédiates de
+la première.\footnote{C'est l'inégalité de trace de von Neumann (1937),
+$|\operatorname{Tr} AB| \leq \sum s_i(A)s_i(B)$, dans une algèbre semi-finie ;
+Fack--Kosaki, théorème 4.2.}
+
+\emph{Corollaire 2} (Hölder pour les opérateurs). Pour $p$, $q$, $r > 0$ avec
+$\frac1p + \frac1q = \frac1r$, et $\|A\|_r = \tau(|A|^r)^{1/r}$ :
+$\|AB\|_r \leq \|A\|_p\,\|B\|_q$. Car $W(f) = \int |f|^r$ est une fonction de
+Weyl croissante, d'où $\tau(|AB|^r) \leq \int (\varphi_{|A|}\varphi_{|B|})^r$,
+et l'inégalité de Hölder classique majore le second membre.\footnote{Pour
+$r < 1$ et $p$, $q$ quelconques, ce qui est remarquable : c'est le théorème
+de la page 126, obtenu ici en trois lignes, et dans une algèbre de von Neumann
+semi-finie.}
+
+\emph{Corollaire 3.} Pour $A \in \mathfrak{b}$,
+\[
+  \Phi_{|A|}(t) = \sup\bigl\{ |\tau(BA)| : B \in \mathcal{M},\ \|B\| \leq 1,\   \tau(\sigma(B)) \leq t \bigr\} .
+\]
+L'inégalité $\geq$ : si $E = \sigma(B)$, $\varphi_{|B|} = \varphi_{|EB|} \leq
+\varphi_E$, et par le corollaire 1, $|\tau(BA)| \leq \int \varphi_E
+\varphi_{|A|} = \int_0^t \varphi_{|A|}$. L'inégalité $\leq$ : si $A = U|A|$,
+il existe un projecteur $E$ commutant à $|A|$, de trace $t$, avec
+$\tau(E|A|) = \Phi_{|A|}(t)$, et $B = EU^{*}$ convient.\footnote{C'est le
+principe du maximum de Ky Fan (1951), $\sum_{i \leq n} s_i(A) = \sup
+|\operatorname{Tr} BA|$ sur les $B$ de norme $\leq 1$ et de rang $\leq n$,
+que la page 39 énonce dans $L(H)$. Le projecteur $E$ de trace exactement
+$t$ existe si $t \in \tau(\mathcal{P})$ ; sinon on prend le sup.}
+
+\emph{Corollaire 4.} Les fonctions $A \mapsto \Phi_{|A|}(t)$ sont
+sous-additives sur $\mathfrak{b}$ : $\Phi_{|A+B|} \leq \Phi_{|A|} +
+\Phi_{|B|}$. Elles sont des sup de semi-normes par le corollaire 3.
+
+\pagerange{34}{35}
+\section*{Seconde mouture (pages 34 et 35)}
+
+Deux feuillets plus petits reprennent les propositions 6 et 7 et la
+proposition 9, sous les numéros 1, 2 et une proposition sans numéro, avec
+la trace supposée \emph{continue} --- c'est l'« astuce » de la page 34 : on
+peut toujours s'y ramener par $L^\infty([0,1]) \mathbin{\bar\otimes}
+\mathcal{M}$. On y trouve, sous cette hypothèse, $\varphi_A(t{+}0)$ à la place
+de $\varphi_A(t{-}0)$ dans la proposition 6,\footnote{Avec la trace continue,
+$\inf_{\tau(E) < t}$ et $\inf_{\tau(E) \leq t}$ diffèrent encore --- l'exemple
+$A = \frac12 1 + \frac12 E$ le montre --- de sorte que le « $t + 0$ » de la
+page 34, en face du signe strict, est la même inversion qu'à la page 7. On
+garde la limite à gauche.} l'argument par les projecteurs équivalents
+rapporté plus haut, les corollaires 1 à 3 et 5, et en marge un
+\emph{corollaire 4} : $\varphi_{\alpha(A)} = \alpha(\varphi_A)$ pour $\alpha$
+croissante, $\varphi_{|1+A|} \leq 1 + \varphi_{|A|}$, $\varphi_{1+|A|} = 1 +
+\varphi_{|A|}$. Puis, avec la notation $\Delta_t(A)$ pour $\Delta_A(t)$ :
+\[
+  \Delta_t(A) = \sup_{\tau(E) = t} \Delta^{E}(EAE) \quad (A \geq 0), \qquad
+  \Delta_t(1 + |A|) = \sup_{\substack{\tau(\sigma(B)) \leq t\\ \|B\| \leq 1}}
+  \Delta^{E}\bigl(1_E + BAE\bigr) \quad (E = \sigma(B)),
+\]
+la seconde formule étant celle de la page 35 lue avec les corrections de la
+proposition 9.\footnote{La page écrit $\operatorname{Tr}|B| < t$ sous le
+sup, « $BAB$ » avec le dernier facteur noirci, et la première formule pour
+$A$ quelconque avec $\operatorname{Tr} E < t$. On lit le dernier facteur
+comme $E$ : l'inégalité $\Delta^{E}(1_E + BAE) \leq \Delta_t(1+|A|)$ résulte
+de $\varphi_{|E + BAE|} \leq 1 + \varphi_{|BAE|} \leq 1 + \varphi_{|A|}$
+sur $]0, \tau(E)[$, l'intégrande étant positive ; et si $A = U|A|$ et $E$ est
+un projecteur spectral de $|A|$ de trace $t$, $B = EU^{*}$ donne
+$BAE = E|A|E$ et l'égalité. Ici le sup sur $\tau(E) \leq t$ est légitime,
+$\Delta_t(1+|A|)$ croissant avec $t$.} Elle est ce que la page 32 appelle « corollaire prop.\ 9 ».
+
+\pagerange{37}{41}
+\section*{Préliminaires sur les opérateurs compacts (pages 37 à 41)}
+
+Quatre feuillets jaunis, encadrés au crayon rouge, qui rappellent ce que
+tout le reste suppose ; le second porte « II ». Les pages 43 à 104 en sont
+la rédaction. Si $E$ est un espace de Hilbert, son conjugué $\bar{E}$ l'est
+et $E' = \bar{E}$. Les opérateurs compacts sont les limites en norme
+d'opérateurs de rang fini. L'adjoint $u^{*} : F \to E$ de $u : E \to F$
+vérifie $\|u^{*}u\| = \|u\|^2$. Un hermitien compact se diagonalise, $u =
+\sum \lambda_i\, \bar{e}_i \otimes e_i$ avec $\lambda_i$ réels tendant vers
+$0$ et $(e_i)$ orthonormal, et $u \geq 0$ si et seulement si tous les
+$\lambda_i \geq 0$.
+
+\emph{Décomposition polaire.} Pour $u : E \to F$ on pose $|u| =
+(u^{*}u)^{1/2} \geq 0$ dans $E$ ; comme $\|\,|u|x\| = \|ux\|$, il existe une
+isométrie partielle $U : E \to F$ et une isométrie partielle $V : F \to E$
+telles que
+\[
+  u = U|u|, \qquad |u| = Vu, \qquad \|U\| \leq 1,\ \|V\| \leq 1,
+\]
+et en particulier $\|u\| = \|\,|u|\,\|$. Si $u$ est compact, $|u| = \sum
+s_i\,\bar{e}_i \otimes e_i$ avec $s_i > 0$, et $u = \sum s_i\,\bar{e}_i
+\otimes f_i$ où $f_i = Ue_i$ est orthonormal ; réciproquement une telle
+écriture donne $|u|$, $u^{*} = \sum s_i\,\bar{f}_i \otimes e_i$ et
+$|u^{*}| = \sum s_i\,\bar{f}_i \otimes f_i$, de sorte que $|u|$ et $|u^{*}|$
+ont les mêmes valeurs propres.\footnote{C'est la décomposition de Schmidt ;
+la fin de la page 37 est perdue dans une déchirure.}
+
+\emph{Valeurs singulières.} Pour $u$ compact, $s_n(u) = \lambda_n(|u|)$, suite
+décroissante positive ; $|\lambda_1(u)| \leq s_1(u) = \|u\|$ et $s_n(u) =
+s_n(u^{*})$. Pour $h \geq 0$ compact, le principe du minimax donne
+\[
+  s_n(h) = \inf_{\dim E_{n-1} = n-1}\ \sup_{x \perp E_{n-1},\ \|x\| \leq 1} (hx, x),
+  \qquad
+  s_n(u) = \inf_{\dim E_{n-1} = n-1}\ \sup_{x \perp E_{n-1},\ \|x\| \leq 1} \|ux\|,
+\]
+d'où $s_n(uv) \leq \|u\|\,s_n(v)$, $s_n(uv) \leq \|v\|\,s_n(u)$, et $s_n(h)$
+croît avec l'hermitien positif $h$. Puis les \emph{inégalités de Ky Fan},
+que la page 143 démontre :
+\[
+  s_{m+n-1}(AB) \leq s_m(A)\,s_n(B), \qquad
+  s_{m+n-1}(A+B) \leq s_m(A) + s_n(B) .
+\]
+\footnote{Ky Fan, 1951 ; la page 38 porte le nom dans une lecture incertaine,
+et un point d'interrogation rouge en marge. Voir la page 143 pour la
+démonstration et la correction d'un signe.}
+
+\emph{Opérateurs à trace.} $u \in \mathcal{S}_1(E,F)$ si et seulement si
+$\sum s_i(u) < \infty$, et alors $\|u\|_1 = \sum s_i(u)$ ; si $u$ est à trace,
+$|u|$ l'est et $\|u\|_1 = \|\,|u|\,\|_1 = \operatorname{Tr}|u|$ ;
+$|\operatorname{Tr} u| \leq \sum s_i(u)$. Pour $u$ compact,
+\[
+  \sum_{i=1}^n s_i(u) = \sup\bigl\{ |\operatorname{Tr} v_n u| : v_n \in L(F,E),\   \|v_n\| \leq 1,\ \operatorname{rang} v_n \leq n \bigr\},
+\]
+le sup étant atteint pour $v_n = \sum_{j \leq n} \bar{f}_j \otimes e_j$, et
+pour un projecteur hermitien de rang $n$ si $u$ est hermitien positif. D'où,
+pour $u$, $v$ compacts, $\sum_{i \leq n} s_i(u+v) \leq \sum_{i \leq n}
+(s_i(u) + s_i(v))$, $\|u+v\|_1 \leq \|u\|_1 + \|v\|_1$, et $\sum s_i$ est une
+norme sur $\mathcal{S}_1$. Enfin la définition des classes $\mathcal{S}_p(E,F)$
+par $\|u\|_p = (\sum s_i(u)^p)^{1/p}$ et $S_p(u) = \sum s_i(u)^p$, avec les
+cas $p = 1$ et $p = \infty$.
+
+\emph{Dual des opérateurs compacts.} Le dual de $L_0(E,F)$ s'identifie
+isométriquement à $\mathcal{S}_1(F,E)$ par $\langle u, v\rangle =
+\operatorname{Tr} vu$. Que l'application $\mathcal{S}_1(F,E) \to
+(L_0(E,F))'$ soit isométrique résulte de la formule précédente ; qu'elle
+soit surjective : une forme continue $\Phi$ sur $L_0(E,F)$ définit par
+$(x', y) \mapsto \Phi(x' \otimes y)$ une forme bilinéaire continue sur
+$E' \times F$, donc un $v \in L(F,E)$ avec $\Phi(u) = \operatorname{Tr} vu$
+pour $u$ de rang fini, et $|\operatorname{Tr} vu| \leq M\|u\|$ ; par
+décomposition polaire on se ramène à $v = w \geq 0$ dans $L(E)$, puis $w$
+est compact --- sinon $w$ serait inversible sur un sous-espace stable de
+dimension infinie, ce qui contredit la borne --- et $w = \sum s_i\,
+\bar{e}_i \otimes e_i$ avec $u = \sum_{i \leq n} \bar{e}_i \otimes e_i$ donne
+$\sum_{i \leq n} s_i \leq M$.\footnote{Schatten (1946, 1950). La page 41
+écrit $v = Ww$ avec $w = (vv^{*})^{1/2}$, ce qui est la décomposition polaire
+à gauche ; et l'isométrie est vérifiée avec « $u = \sum_1^n \rho_i \bar{e}_i
+\otimes f_i$ », un $\rho_i$ de trop que la transcription signale. Une
+« méthode plus élémentaire » pour $\mathcal{S}_p$ et $\mathcal{S}_q$ est
+esquissée en trois mots et ne se lit pas.}
+
+\pagerange{43}{57}
+\section*{Produits tensoriels hilbertiens (pages 43 à 57)}
+
+Le numéro 2 d'un chapitre dont le numéro 1, « Rappels et notations.
+Opérateurs de Fredholm », n'est qu'une ligne de plan. Il est, dit
+l'interligne de la page 43, « vraiment classique », et on le résume.
+
+\emph{L'espace conjugué.} Pour $E$ un espace de Banach complexe, $\bar{E}$
+est le même groupe additif avec la loi $(\lambda, x) \mapsto \bar\lambda x$ ;
+l'identité $E \to \bar{E}$ est antilinéaire, et $\bar{\bar{E}} = E$. Une
+application sesquilinéaire $E \times F \to G$ est une application bilinéaire
+$E \times \bar{F} \to G$, donc une application linéaire $E \otimes \bar{F}
+\to G$, et $L(E, \bar{F}) = \overline{L(E,F)}$. On a canoniquement
+$\overline{E \otimes F} = \bar{E} \otimes \bar{F}$. Si $E$ est préhilbertien,
+$(\bar{x}, \bar{y}) = (y, x)$ fait de $\bar{E}$ un espace préhilbertien de
+même norme, et si $E$ est de Hilbert, $y \mapsto (\,\cdot\,, y)$ est une
+bijection antilinéaire isométrique de $E$ sur $E'$, soit
+\[
+  E' = \bar{E} \qquad (E \text{ espace de Hilbert}).
+\]
+
+\emph{Le produit tensoriel hilbertien.} Sur $E \otimes F$, la forme
+sesquilinéaire $(x_1 \otimes y_1, x_2 \otimes y_2) = (x_1, x_2)(y_1, y_2)$ est
+définie positive : sur $E_0 \otimes F_0$ pour $E_0$, $F_0$ de dimension finie,
+les $e_i \otimes f_j$ formés de bases orthonormales sont orthonormaux, et
+$E \otimes F$ est réunion de ces sous-espaces. Le complété $E
+\mathbin{\hat\otimes}_2 F$ est le \emph{produit tensoriel hilbertien}.
+
+\emph{Proposition 1.} Si $(e_i)$ et $(f_j)$ sont des bases hilbertiennes de
+$E$ et $F$, $(e_i \otimes f_j)$ est une base hilbertienne de $E
+\mathbin{\hat\otimes}_2 F$. De plus $\|x \otimes y\|_2 = \|x\|\,\|y\|$, et
+$\overline{E \mathbin{\hat\otimes}_2 F} = \bar{E} \mathbin{\hat\otimes}_2 \bar{F}$.
+
+\emph{Théorème 1.} Pour $\mu$ une mesure positive sur un espace localement
+compact et $E$ un espace de Hilbert, $L^2(\mu) \mathbin{\hat\otimes}_2 E =
+L^2_E(\mu)$, l'espace des fonctions de carré intégrable à valeurs dans $E$,
+avec $(f, g) = \int (f(t), g(t))\,d\mu(t)$ : l'application $\varphi \otimes a
+\mapsto \varphi\,a$ conserve les produits scalaires et a une image dense.
+\emph{Corollaire 1} : $\ell^2(I) \mathbin{\hat\otimes}_2 E = \ell^2_E(I)$.
+\emph{Corollaire 2} : $L^2(\mu) \mathbin{\hat\otimes}_2 L^2(\nu) = L^2(\mu
+\otimes \nu)$, puisque $L^2(\mu \otimes \nu) = L^2_{L^2(\nu)}(\mu)$.
+
+\emph{Opérateurs de Hilbert--Schmidt.} L'application $(\bar{a} \otimes b)\,x =
+(x, a)\,b$ identifie $\bar{E} \otimes F$ aux opérateurs de rang fini de $E$
+dans $F$, et pour $u \in \bar{E} \otimes F$ on a $(ux, y) = (u, \bar{x}
+\otimes y)$, donc $|(ux, y)| \leq \|u\|_2\,\|x\|\,\|y\|$ : l'application
+$\bar{E} \mathbin{\hat\otimes}_2 F \to L(E,F)$ est continue de norme $\leq 1$,
+et injective, car dans des bases hilbertiennes elle envoie une matrice de
+carré sommable sur l'opérateur qu'elle définit.
+
+\emph{Définition 2.} Un \emph{opérateur de Hilbert--Schmidt} de $E$ dans $F$
+est un opérateur défini par un élément de $\bar{E} \mathbin{\hat\otimes}_2 F$ ;
+leur espace, muni de cette structure hilbertienne, est noté
+$\mathcal{S}_2(E,F)$, et $\|u\|_2 = (\sum_{i,j} |u_{ij}|^2)^{1/2}$ dans des
+bases hilbertiennes. On a $\|u\| \leq \|u\|_2$, et ces opérateurs sont
+compacts.
+
+\emph{Théorème 2.} Si $u \in \mathcal{S}_2(E,F)$ et $A \in L(F,G)$, alors
+$Au \in \mathcal{S}_2(E,G)$ et $\|Au\|_2 \leq \|A\|\,\|u\|_2$, et de même
+pour $uA$ ; $u \in \mathcal{S}_2(E,F)$ si et seulement si $u^{*} \in
+\mathcal{S}_2(F,E)$, et $\|u\|_2 = \|u^{*}\|_2$.
+
+\emph{Théorème 3.} $u$ est de Hilbert--Schmidt si et seulement si $\sum
+s_i(u)^2 < \infty$, et alors $\|u\|_2 = \|u^{*}\|_2 = (\sum s_i(u)^2)^{1/2}$ ;
+en particulier $u \in \mathcal{S}_2$ si et seulement si $u^{*}u \in
+\mathcal{S}_1$, et $\|u\|_2 = \sqrt{\operatorname{Tr} u^{*}u} =
+\sqrt{\|u^{*}u\|_1}$. La démonstration passe par $u = Uh$, $h = Vu$ avec
+$h = |u|$ et $U$, $V$ des isométries partielles, puis diagonalise $h$.
+
+\emph{Théorème 3 bis.} Pour $u \in L(E,F)$ : $u$ est à trace si et seulement
+si $|u| = \sqrt{u^{*}u}$ l'est, si et seulement si $\sum s_i(u) < \infty$, et
+alors
+\[
+  \|u\|_1 = \|\,|u|\,\|_1 = \sum s_i(u) = \operatorname{Tr}\sqrt{u^{*}u}
+  = \operatorname{Tr}\sqrt{uu^{*}} .
+\]
+\footnote{La page 54 numérote ce théorème « 3 » comme le précédent ; on le
+distingue. Sa démonstration suppose connue une norme $\|u\|_1$ sur les
+opérateurs à trace pour laquelle $\|uA\|_1 \leq \|u\|_1\|A\|$ et
+$|\operatorname{Tr} u| \leq \|u\|_1$ : c'est la norme nucléaire du numéro 1
+absent, et $\sum_{i \leq n} s_i = \operatorname{Tr} p_n h \leq \|p_n h\|_1
+\leq \|h\|_1$ en découle. Que $\sqrt{u^{*}u}$ et $\sqrt{uu^{*}}$ aient les
+mêmes valeurs propres est vérifié sur $u = \sum s_i\,\bar{a}_i \otimes b_i$.}
+\emph{Corollaire 1} : les opérateurs à trace de $E$ dans $F$ sont exactement
+les $u = \sum s_i\,\bar{a}_i \otimes b_i$ avec $(a_i)$, $(b_i)$ orthonormaux
+et $(s_i)$ positive sommable, et alors $\|u\|_1 = \sum s_i$.
+\emph{Corollaire 2} : $\|u\|_1 = \sup_{\|A\| \leq 1} |\operatorname{Tr} Au|$
+sur $A \in L(F,E)$.
+
+\emph{Théorème 4.} Si $u \in \mathcal{S}_2(E,F)$ et $v \in \mathcal{S}_2(F,G)$,
+alors $vu \in \mathcal{S}_1(E,G)$ et $\|vu\|_1 \leq \|v\|_2\,\|u\|_2$ ; et pour
+$u$, $v \in \mathcal{S}_2(E,F)$,
+\[
+  (u, v) = \operatorname{Tr} uv^{*} = \operatorname{Tr} v^{*}u .
+\]
+Par continuité on se ramène aux rangs finis ; alors $|\operatorname{Tr} Avu|
+\leq \|Av\|_2\|u\|_2 \leq \|A\|\,\|v\|_2\|u\|_2$ pour $\|A\| \leq 1$ donne la
+première formule par le corollaire 2, et la seconde se vérifie sur
+$u = \bar{a} \otimes b$, $v = \bar{a}' \otimes b'$, où $v^{*}u = (b, b')\,\bar{a}
+\otimes a'$ et $\operatorname{Tr} v^{*}u = (a', a)(b, b') = (u, v)$.
+\emph{Corollaire 1} : $u \in L(E,F)$ est de Hilbert--Schmidt si et seulement
+si $vu$ est à trace pour tout $v \in \mathcal{S}_2(F,E)$, et alors $\|u\|_2 =
+\sup_{\|v\|_2 \leq 1} |\operatorname{Tr} vu|$ ; la réciproque passe par le
+théorème du graphe fermé, qui rend $v \mapsto vu$ continue de
+$\mathcal{S}_2(F,E)$ dans $\mathcal{S}_1(E)$, donc $w \mapsto
+\operatorname{Tr} w^{*}u$ continue sur $\bar{E} \mathbin{\hat\otimes}_2 F$,
+donc représentée par un $u_0$, qui coïncide avec $u$.
+\emph{Corollaire 2} : $u \in L(E)$ est à trace si et seulement si $u = vw$
+avec $v$, $w \in \mathcal{S}_2(E)$, et l'on peut prendre $\|v\|_2 = \|w\|_2 =
+\sqrt{\|u\|_1}$, en écrivant $u = U W^2$ avec $W = \sqrt{|u|}$ et $v = UW$.
+
+\pagerange{58}{69}
+\section*{Produits extérieurs hilbertiens (pages 58 à 69)}
+
+Le numéro 3, « Applications : des inégalités diverses ». Le produit tensoriel
+hilbertien de $n$ espaces $E_1, \ldots, E_n$ est défini par récurrence, avec
+$(a_1 \otimes \cdots \otimes a_n, b_1 \otimes \cdots \otimes b_n) = \prod (a_i,
+b_i)$ et pour base hilbertienne les $e^1_{\alpha_1} \otimes \cdots \otimes
+e^n_{\alpha_n}$ ; il est associatif, et pour $u_i \in L(E_i, F_i)$ on a
+$\|u_1 \otimes \cdots \otimes u_n\| \leq \prod \|u_i\|$, qu'on ramène par
+associativité au cas de deux facteurs et d'un seul $u_i \neq 1$, où c'est le
+théorème 2 du numéro 2 sous l'identification $E_1 \mathbin{\hat\otimes}_2 E_2
+= \mathcal{S}_2(\bar{E}_1, E_2)$.
+
+Sur $\bigotimes^n_2 E$, l'antisymétriseur
+\[
+  a_n = \frac{1}{n!} \sum_{\sigma \in \mathfrak{S}_n} \varepsilon_\sigma\,\sigma
+\]
+est un projecteur hermitien, l'adjoint de $\sigma$ étant $\sigma^{-1}$.
+
+\emph{Définition.} La \emph{puissance extérieure hilbertienne} $\Lambda^n_2 E$
+est l'image de $a_n$, munie du produit scalaire de $\bigotimes^n_2 E$
+multiplié par $n!$. La puissance extérieure algébrique $\Lambda^n E$ s'y
+plonge comme sous-espace dense, et sur les multivecteurs décomposables
+\[
+  (a_1 \wedge \cdots \wedge a_n,\ b_1 \wedge \cdots \wedge b_n)
+  = n!\,(a_n A, a_n B) = \sum_\sigma \varepsilon_\sigma \prod_i (a_i, b_{\sigma i})
+  = \det\bigl((a_i, b_j)\bigr) .
+\]
+\footnote{Avec $A = a_1 \otimes \cdots \otimes a_n$, $B = b_1 \otimes \cdots
+\otimes b_n$. Le facteur $n!$ est le choix qui fait de $\{e_J\}$ une base
+orthonormale ; sans lui, $\|e_{i_1} \wedge \cdots \wedge e_{i_n}\| =
+(n!)^{-1/2}$. C'est la convention de l'espace de Fock antisymétrique.}
+
+\emph{Proposition.} Il existe sur $\Lambda E \times \Lambda E$ une unique
+forme hermitienne définie positive satisfaisant à cette formule, et son
+complété est $\Lambda_2 E$. Si $(e_i)_{i \in I}$ est une base hilbertienne de
+$E$, $I$ totalement ordonné, les $e_J = e_{i_1} \wedge \cdots \wedge e_{i_n}$,
+$J = \{i_1 < \cdots < i_n\}$, forment une base hilbertienne de $\Lambda_2 E$.
+En particulier
+\[
+  \|a_1 \wedge \cdots \wedge a_n\| = \det\bigl((a_i, a_j)\bigr)^{1/2}
+  \leq \|a_1\| \cdots \|a_n\|,
+\]
+l'inégalité venant, si $a_i = \sum_j a_{ij} e_j$ et $A = (a_{ij})$, de
+$\det((a_i, a_j)) = \det AA^{*} = |\det A|^2$ et du choix d'une base où $A$
+est triangulaire ; ce qui donne l'\emph{inégalité de Hadamard}
+$|\det A| \leq \prod_i \|a_i\|$, et le \emph{corollaire 1} :
+$|\det((a_i, b_j))| \leq \prod_i \|a_i\|\,\|b_i\|$, par Cauchy--Schwarz.
+Ce corollaire montre que la constante $K_n$ de la théorie générale vaut au
+plus $1$ dans l'espace de Hilbert.\footnote{Renvoi à « Chap.\ 1, § 2, n° 2,
+prop.\ 1 » : dans \emph{La théorie de Fredholm}, la constante qui borne
+$|\det((\langle x_i, x'_j\rangle))|$ par $\prod \|x_i\|\|x'_j\|$ dans un
+espace de Banach quelconque. Ces pages ne la définissent pas.}
+
+\emph{Puissances extérieures d'opérateurs.} Pour $u_1, \ldots, u_n \in L(E,F)$,
+le produit extérieur $u_1 \wedge \cdots \wedge u_n : \Lambda^n E \to \Lambda^n
+F$ s'écrit $n!\,\varphi_n\,(u_1 \otimes \cdots \otimes u_n)\,a_n$, avec
+$\varphi_n$ la projection de $\bigotimes^n F$ sur $\Lambda^n F$ ; comme
+$a_n/\sqrt{n!}$ est une isométrie de $\Lambda_2 E$ dans $\bigotimes^n_2 E$ et
+$\sqrt{n!}\,\varphi_n$ de norme $\leq 1$, on a
+\[
+  \|u_1 \wedge \cdots \wedge u_n\| \leq \|u_1\| \cdots \|u_n\|,
+\]
+et $u_1 \wedge \cdots \wedge u_n$ se prolonge à $\Lambda^n_2 E \to \Lambda^n_2
+F$. Il est symétrique en les $u_i$, et l'on note $\Lambda^n u = u \wedge
+\cdots \wedge u$, $\Lambda u$ son action sur $\Lambda_2 E$ tout entier.
+Alors
+\begin{gather*}
+  (\Lambda v)(\Lambda u) = \Lambda(vu), \qquad
+  (u_1 \wedge \cdots \wedge u_n)^{*} = u_1^{*} \wedge \cdots \wedge u_n^{*}, \\
+  (\Lambda u)^{*} = \Lambda(u^{*}), \qquad
+  (\Lambda h)^\alpha = \Lambda(h^\alpha)\quad (h \geq 0,\ \alpha > 0),
+\end{gather*}
+la seconde par $((\Lambda u)\,a_1 \wedge \cdots \wedge a_n, b_1 \wedge \cdots
+\wedge b_n) = \det((ua_i, b_j)) = \det((a_i, u^{*}b_j))$, la troisième pour
+$\alpha = 1/n$ par unicité de la racine positive, puis pour $\alpha$
+rationnel, puis par continuité de $\alpha \mapsto h^\alpha$.
+
+\emph{Proposition 1.} Résumé : $u_1 \wedge \cdots \wedge u_n$ est continue de
+$\Lambda^n_2 E$ dans $\Lambda^n_2 F$, de norme $\leq \prod \|u_i\|$ ; $u
+\mapsto \Lambda u$ de $L(E)$ dans $L(\Lambda_2 E)$ est multiplicative,
+commute à l'involution, envoie les positifs sur des positifs et commute aux
+puissances $h \mapsto h^\alpha$.
+
+\emph{Proposition 2.} Soit $u$ compact dans $E$ et $(\lambda_i)$ la suite de
+ses valeurs propres non nulles, avec multiplicités algébriques. Les valeurs
+propres non nulles de $\Lambda^n u$ sur $\Lambda^n_2 E$, avec leurs
+multiplicités, sont les produits $\lambda_{i_1} \cdots \lambda_{i_n}$,
+$i_1 < \cdots < i_n$. Par continuité de $u \mapsto \Lambda u$ on se ramène
+aux $u$ de rang fini ; alors $E = E_0 \oplus E_1$ avec $E_0$ de dimension
+finie stable par $u$ et $u(E_1) = 0$, $\Lambda^n_2 E = \bigoplus_{p+q=n}
+\Lambda^p_2 E_0 \otimes \Lambda^q_2 E_1$, $\Lambda^n u$ s'annule sur les
+termes $q > 0$ et agit sur $\Lambda^n E_0$, où c'est l'algèbre linéaire
+d'une matrice triangulaire.\footnote{Le passage à la limite demande que les
+valeurs propres non nulles dépendent continûment de $u$ avec leurs
+multiplicités, ce qui est vrai pour les opérateurs compacts (continuité des
+projecteurs de Riesz) ; la page 66 le dit par « base hilbertienne
+convenable » dans un bloc biffé.}
+
+\emph{Corollaire 1.} Pour $u$ compact :
+\begin{gather*}
+  \lambda_1(u) \cdots \lambda_n(u) = \lambda_1(\Lambda^n u), \qquad
+  s_1(u) \cdots s_n(u) = \|\Lambda^n u\| = s_1(\Lambda^n u), \\
+  |\lambda_1(u) \cdots \lambda_n(u)| \leq s_1(u) \cdots s_n(u),
+\end{gather*}
+la seconde parce que $|\Lambda^n u| = ((\Lambda^n u)^{*}\Lambda^n u)^{1/2} =
+\Lambda^n |u|$ a pour plus grande valeur propre $s_1 \cdots s_n$, et la
+troisième par $|\lambda_1(w)| \leq s_1(w)$ appliqué à $w = \Lambda^n u$.
+
+\emph{Corollaire 3.} Pour $u \in L_0(E,F)$, $v \in L_0(F,G)$ et tout $n$,
+\[
+  s_1(vu) \cdots s_n(vu) \leq \bigl(s_1(u)\,s_1(v)\bigr) \cdots \bigl(s_n(u)\,s_n(v)\bigr),
+\]
+car le premier membre est $\|\Lambda^n(vu)\| = \|(\Lambda^n v)(\Lambda^n u)\|
+\leq \|\Lambda^n v\|\,\|\Lambda^n u\|$. L'idée est due à H.\ Weyl, dit la
+page 69.\footnote{Les inégalités du corollaire 1 sont celles de Weyl (1949) ;
+celle du corollaire 3 est de Horn (1950), qui l'obtient par la même méthode
+des puissances extérieures. Il n'y a pas de corollaire 2 visible, et la
+page 69 écrit $\rho_i(uv)$ là où $w = vu$ ; on a suivi $w$.}
+
+\pagerange{70}{73}
+\section*{Puissances extérieures d'opérateurs à trace, mise au net (pages 70 à 73)}
+
+Une rédaction sur feuilles blanches, numérotée à partir de (1) ; les pages
+76 à 79 en sont le brouillon, et l'on y renvoie pour les démonstrations
+qu'elle omet.
+
+\emph{Proposition 1.} Pour $u_1, \ldots, u_n \in \mathcal{S}_1(E,F)$,
+$u_1 \wedge \cdots \wedge u_n$ est à trace et
+\[
+  \|u_1 \wedge \cdots \wedge u_n\|_1 \leq \frac{1}{n!}\,\|u_1\|_1 \cdots \|u_n\|_1 .
+\]
+Par linéarité il suffit de prendre $u_i = \bar{b}_i \otimes a_i$ avec
+$\|a_i\|, \|b_i\| \leq 1$ ; alors $u_1 \wedge \cdots \wedge u_n = \frac{1}{n!}
+\,\overline{(b_1 \wedge \cdots \wedge b_n)} \otimes (a_1 \wedge \cdots \wedge
+a_n)$, de norme trace $\leq \frac{1}{n!}\|b_1 \wedge \cdots \wedge b_n\|\,
+\|a_1 \wedge \cdots \wedge a_n\| \leq \frac{1}{n!}$ par Hadamard.
+
+\emph{Corollaire 1.} $\alpha_n(u_1, \ldots, u_n) = \operatorname{Tr}(u_1 \wedge
+\cdots \wedge u_n)$, et $\alpha_n(u) = \operatorname{Tr}\Lambda^n u$ : les
+coefficients du déterminant de Fredholm sont les traces des puissances
+extérieures. \emph{Corollaire 2} : $|\alpha_n(u_1, \ldots, u_n)| \leq
+\frac{1}{n!}\prod \|u_i\|_1$ et $|\alpha_n(u)| \leq \frac{1}{n!}\|u\|_1^n$.
+\emph{Corollaire 3} :
+\[
+  |\alpha_n(u)| \leq \alpha_n(|u|) = \|\Lambda^n u\|_1 \leq \frac{1}{n!}\,\|u\|_1^n,
+\]
+car $\alpha_n(|u|) = \operatorname{Tr}\Lambda^n|u| = \operatorname{Tr}|\Lambda^n u|$.
+\emph{Corollaire 4} : $|\det(1+u)| \leq \det(1+|u|)$, et plus généralement
+$|\det(1+zu)| \leq \det(1+|z|\,|u|)$.
+
+\emph{Théorème 1.} Pour $u \in \mathcal{S}_1(E)$, la suite $(\lambda_i(u))$ est
+sommable et $\det(1+zu)$ est une fonction entière de genre zéro :
+\[
+  \det(1+zu) = \prod_i \bigl(1 + z\lambda_i(u)\bigr) ;
+\]
+de façon équivalente, $\alpha_n(u) = \sum_{i_1 < \cdots < i_n} \lambda_{i_1}
+\cdots \lambda_{i_n}$, et en particulier
+\[
+  \operatorname{Tr} u = \sum_i \lambda_i(u),
+\]
+d'où l'on retrouve la formule pour $\alpha_n$ en l'appliquant à
+$\Lambda^n u$. De même $\alpha_n(|u|) = \|\Lambda^n u\|_1 = \sum_{i_1 <
+\cdots < i_n} s_{i_1} \cdots s_{i_n}$.\footnote{C'est le théorème de la
+trace, publié par Lidskii en 1959 ; Grothendieck l'établit dans
+\emph{La théorie de Fredholm} (1956) pour les espaces de Hilbert, et la
+démonstration de ces pages, biffée page 79 et complétée par la proposition
+de la page 110, est la sienne : les coefficients $\alpha_n(u)$ sont majorés
+par ceux de $\det(1+z|u|)$, fonction de genre zéro, les zéros $-1/\lambda_i$
+vérifient $\sum |\lambda_i| < \infty$ par Weyl, donc $\det(1+zu)$ est de
+genre zéro et vaut $\prod(1+z\lambda_i)$. L'ordre des pages cache que la
+démonstration existe ; la remarque des pages 106 à 111 la rend visible.}
+
+\emph{Proposition 2.} Pour $u$, $v \in \mathcal{S}_1$ et $p$, $q \geq 0$, en
+notant $(\Lambda^p u) \wedge (\Lambda^q v)$ le produit extérieur de $p$
+copies de $u$ et $q$ de $v$,
+\[
+  \|(\Lambda^p u) \wedge (\Lambda^q v)\|_1 \leq \frac{p!\,q!}{(p+q)!}\,
+  \|\Lambda^p u\|_1\,\|\Lambda^q v\|_1
+  = \frac{p!\,q!}{(p+q)!}\,\alpha_p(|u|)\,\alpha_q(|v|) .
+\]
+Avec $u = \sum \rho_i\,\bar{b}_i \otimes a_i$ et $v = \sum \sigma_j\,\bar{d}_j
+\otimes c_j$ (décompositions de Schmidt), la multilinéarité et
+l'antisymétrie donnent
+\[
+  (\Lambda^p u) \wedge (\Lambda^q v) = \frac{p!\,q!}{(p+q)!}
+  \sum_{\substack{i_1 < \cdots < i_p\\ j_1 < \cdots < j_q}}
+  \rho_{i_1} \cdots \rho_{i_p}\,\sigma_{j_1} \cdots \sigma_{j_q}\;
+  \overline{(b_{i_1} \wedge \cdots \wedge d_{j_q})} \otimes
+  (a_{i_1} \wedge \cdots \wedge c_{j_q}),
+\]
+et chaque terme est de norme trace $\leq 1$ par Hadamard.\footnote{La page
+71 écrit le facteur $\frac{1}{(p+q)!}$ devant la somme et fait apparaître
+$p!\,q!$ à la ligne suivante ; le compte est le même.}
+
+\emph{Corollaire 2.} Pour tout $n$,
+\[
+  \alpha_n(|u+v|) \leq \sum_{p=0}^{n} \alpha_p(|u|)\,\alpha_{n-p}(|v|) ,
+\]
+car $\alpha_n(|u+v|) = \|\Lambda^n(u+v)\|_1$ et $\Lambda^n(u+v) =
+\sum_p \binom{n}{p}\,(\Lambda^p u) \wedge (\Lambda^{n-p} v)$.
+
+\emph{Corollaire 1.} Pour $r \geq 0$,
+\begin{gather*}
+  \det(1 + r|u+v|) \leq \det(1 + r|u|)\,\det(1 + r|v|), \qquad\text{i.e.} \\
+  \prod_i (1 + r s_i(u+v)) \leq \prod_i (1 + r s_i(u)) \prod_i (1 + r s_i(v)) .
+\end{gather*}
+\footnote{La page 71 énonce ce corollaire avant le corollaire 2 qui le
+démontre coefficient par coefficient. L'inégalité est celle que la
+littérature attribue à Seiler et Simon (1975), qui la déduisent du théorème
+de Rotfel'd (1967) ; elle est ici, avec sa démonstration par les
+puissances extérieures, dans un carton daté 1953. Rien n'indique que ces
+pages aient circulé, et cette lecture n'affirme rien sur ce qui a été
+publié.}
+
+\emph{Théorème 2.} Pour $u$, $v$ compacts, $r \geq 0$ et tout $n$,
+\[
+  \prod_{i=1}^{n} \bigl(1 + r s_i(u+v)\bigr) \leq
+  \prod_{i=1}^{n} \bigl(1 + r s_i(u)\bigr)\prod_{i=1}^{n} \bigl(1 + r s_i(v)\bigr),
+\]
+et plus précisément, avec $\sigma_n^m(w) = \sum_{1 \leq i_1 < \cdots < i_m
+\leq n} s_{i_1}(w) \cdots s_{i_m}(w)$, pour $0 \leq m \leq n$ :
+\[
+  \sigma_n^m(u+v) \leq \sum_{p=0}^{m} \sigma_n^p(u)\,\sigma_n^{m-p}(v) .
+\]
+
+\emph{Proposition 3.} Pour $u$ compact et $m \leq n$,
+\[
+  \sigma_n^m(u) = \sup\bigl\{ |\alpha_m(v_n u)| : v_n \in L(F,E),\ \|v_n\| \leq 1,\   \operatorname{rang} v_n \leq n \bigr\} = \sup_{v_n} \alpha_m(|v_n u|) .
+\]
+Pour $\leq$ : si $u = \sum s_i\,\bar{e}_i \otimes f_i$, $v_n = \sum_{i \leq n}
+\bar{f}_i \otimes e_i$ donne $v_n u = \sum_{i \leq n} s_i\,\bar{e}_i \otimes
+e_i$ et $\alpha_m(v_n u) = \sigma_n^m(u)$. Pour $\geq$ : $s_i(v_n u) \leq
+s_i(u)$ et $v_n u$ est de rang $\leq n$, donc $|\alpha_m(v_n u)| \leq
+\alpha_m(|v_n u|) = \sigma_n^m(v_n u) \leq \sigma_n^m(u)$.
+\emph{Proposition 4} : $\prod_{i \leq n}(1 + s_i(u)) = \sup_{v_n}
+\det(1 + v_n u)$ sur les mêmes $v_n$.
+
+La démonstration du théorème 2 : pour $w \in L(F,E)$ de norme $\leq 1$ et de
+rang $\leq n$, le corollaire 2 donne $|\alpha_m(w(u+v))| \leq
+\sum_p \alpha_p(|wu|)\,\alpha_{m-p}(|wv|) \leq \sum_p \sigma_n^p(u)\,
+\sigma_n^{m-p}(v)$, et l'on prend le sup en $w$ par la proposition 3. La page
+73 juge ce système d'inégalités « les plus fortes possibles » majorant les
+$s_i(u+v)$ en fonction des $s_i(u)$ et $s_i(v)$.\footnote{Elles sont, pour
+$f(s) = \log(1 + rs)$, l'inégalité $\sum_{i \leq n} f(s_i(u+v)) \leq
+\sum_{i \leq n} f(s_i(u)) + f(s_i(v))$ que Rotfel'd (1967) et Thompson (1976)
+établissent pour toute $f$ concave croissante nulle en $0$ ; les pages 74
+et 75 vont exactement dans cette direction.}
+
+\pagerange{74}{75}
+\section*{Sous-additivité des fonctions des valeurs singulières (pages 74 et 75)}
+
+Deux feuilles brunes d'une autre plume tirent du théorème 2 ce qu'il donne
+pour d'autres fonctions que $\log(1+rs)$. Écrivons-le
+\[
+  \sum_{i \leq n} \log(1 + r s_i(u+v)) \leq \sum_{i \leq n} \log(1 + r s_i(u))
+  + \sum_{i \leq n} \log(1 + r s_i(v)) \qquad (r \geq 0) .
+\]
+Si $\varphi$ est une fonction positive décroissante sur $\mathbf{R}^{*}_{+}$,
+et si $A \leq B$ sont deux fonctions croissantes nulles en $0$, alors
+$\int \varphi(r)\,dA(r) \leq \int \varphi(r)\,dB(r)$, par intégration par
+parties : $\int \varphi\,dA = [\varphi A] + \int A\,(-d\varphi)$ et les deux
+termes croissent avec $A$. Appliquée à $A(r) = \sum_{i \leq n} \log(1 +
+r s_i(u+v))$ et $B$ le second membre, cela donne, en posant
+\[
+  f_\varphi(\rho) = \int_0^{\infty} \frac{\varphi(r)}{\frac{1}{\rho} + r}\,dr
+  = \int_0^{\infty} \varphi(s/\rho)\,\frac{ds}{1+s}
+  \quad\text{et}\quad
+  S^n_\varphi(w) = \sum_{i \leq n} f_\varphi(s_i(w)),
+\]
+l'inégalité $S^n_\varphi(u+v) \leq S^n_\varphi(u) + S^n_\varphi(v)$, puisque
+$dA(r) = \sum_i \frac{s_i}{1 + r s_i}\,dr$.\footnote{La page 74 écrit
+$A'(r) = \sum r/(1 + r\rho_i)$, coquille pour $\sum \rho_i/(1 + r\rho_i)$,
+que la transcription note.} Le cas le plus important est $\varphi(r) =
+r^{-p}$, $0 < p < 1$, où $f_\varphi(\rho) = \rho^p \int_0^\infty
+\frac{s^{-p}}{1+s}\,ds = \frac{\pi}{\sin \pi p}\,\rho^p$ ; d'où, avec
+$S^{(n)}_p(u) = \sum_{i \leq n} s_i(u)^p$,
+\[
+  S^{(n)}_p(u+v) \leq S^{(n)}_p(u) + S^{(n)}_p(v), \qquad
+  S_p(u+v) \leq S_p(u) + S_p(v) \qquad (0 < p < 1) .
+\]
+\emph{Remarque} : pour $p \geq 1$ ce n'est pas la bonne inégalité, qui est
+celle de Weyl (la norme). \emph{Question} : trouver toutes les fonctions $f$
+d'une variable positive telles que $f^{(n)}(u) = \sum_{i \leq n} f(s_i(u))$
+soit sous-additive pour tout $n$ ; il suffit que $f^{(\infty)}$ le
+soit.\footnote{Toute fonction concave croissante nulle en $0$ convient :
+c'est le théorème de Rotfel'd (1967) et Thompson (1976), dont les
+$f_\varphi$ de la page 74 --- mélanges des noyaux concaves $\rho \mapsto
+\rho/(1 + r\rho)$ --- sont un cas particulier. La sous-additivité de $f$
+elle-même est nécessaire ($n = 1$, $u$ et $v$ multiples d'un même projecteur
+de rang un). La réponse de la page 75, « arbitraire », est illisible au-delà
+de ce mot.} La sous-additivité de $S_p$ pour $p \leq
+1$ reparaîtra, avec une autre preuve, à la page 129.
+
+\pagerange{76}{79}
+\section*{Le premier état de la mise au net (pages 76 à 79)}
+
+Feuilles brunes portant, au crayon rouge, « Mettre 1 : n° 2 et cor.\ n° --- »,
+et la numérotation (13) à (23) d'un texte plus long. La proposition 3 y est
+la proposition 1 des pages 70 ; les corollaires 1 et 2 y sont ceux de la
+mise au net, avec la précision que, pour $u$ à trace ou de Hilbert--Schmidt,
+\[
+  \|\Lambda^n u\|_1 = \alpha_n(|u|) = \alpha_n\bigl(\sqrt{u^{*}u}\bigr), \qquad
+  \|\Lambda^n u\|_2 = \sqrt{\alpha_n(u^{*}u)},
+\]
+la première parce que $((\Lambda^n u)^{*}\Lambda^n u)^{1/2} = \Lambda^n |u|$,
+la seconde parce que $(\Lambda^n u)^{*}\Lambda^n u = \Lambda^n(u^{*}u)$ est à
+trace si $u^{*}u$ l'est. Le corollaire 4 est $|\alpha_n(u)| \leq
+\alpha_n(|u|)$ --- les coefficients de $\det(1+zu)$ sont majorés en module
+par ceux de $\det(1+z|u|)$ --- et le corollaire 5 est $|\det(1+zu)| \leq
+\det(1 + |z|\,|u|)$.
+
+\emph{Théorème 2.} Pour $u$ à trace dans $H$, $\det(1+u) = \prod_i (1 +
+\lambda_i)$, et $\det(1+zu) = \prod(1 + z\lambda_i)$ est de genre zéro ;
+en marge, $\alpha_n(u) = \sum_{i_1 < \cdots < i_n} \lambda_{i_1} \cdots
+\lambda_{i_n}$ et $\operatorname{Tr} u = \sum \lambda_i(u)$. La démonstration
+des pages 78 et 79 est barrée de deux traits obliques et se lit par bribes :
+$\sum |\lambda_i| \leq \|u\|_1$ par les inégalités de Weyl ; les zéros de
+$\det(1 - zu)$ ; ses coefficients majorés par ceux d'une fonction de genre
+zéro ; et, pour la formule des coefficients dans le cas diagonalisable,
+$u = \sum \lambda_i\,\bar{e}_i \otimes e_i$ et $\alpha_n(u) = \sum
+\lambda_{i_1} \cdots \lambda_{i_n}\,\alpha_n(\bar{e}_{i_1} \otimes e_{i_1},
+\ldots)$ où seuls comptent les indices distincts.\footnote{La page 79
+écrit « $|z_1 \cdots z_n| = |\operatorname{Tr} pu| \leq \|u\|_1$ » pour une
+somme ; la transcription le note. Ce que la démonstration barrée cherche,
+c'est la proposition de la page 110, qui la complète : voir plus bas.}
+
+\pagerange{80}{80}
+\section*{Une feuille sur les fonctions convexes (page 80)}
+
+Soit $f$ convexe sur un ouvert convexe $U$ et $G_f = \{(x,y) : x \in U,\ y
+\geq f(x)\}$ son épigraphe. Par un point $(a, f(a))$ passe un hyperplan
+$H$ ne rencontrant pas l'intérieur de $G_f$ ; il n'est pas vertical, donc
+d'équation $y = L_a(x)$ avec $L_a$ affine, et $f(x) \geq L_a(x)$ sur $U$
+avec égalité en $a$. Ainsi
+\[
+  f(x) = \sup_a L_a(x) .
+\]
+Si de plus $f$ est croissante en chacune de ses variables, les coefficients
+$c_i$ de $L_a$ sont $\geq 0$ : sinon, $L_a$ décroissant en $x_1$ au voisinage
+de $a_1$ tandis que $f$ croît, on aurait $L_a > f$ d'un côté. C'est
+l'ingrédient de la page 82.
+
+\pagerange{81}{92}
+\section*{Le lemme de Weyl et les trois théorèmes de convexité (pages 81 à 92)}
+
+Le numéro 4, « Inégalités de convexité et classes remarquables d'opérateurs,
+compléments ». Tout y descend d'un lemme que la page 81 attribue à H.\ Weyl
+et qui est, sous sa forme additive, le théorème de majoration de Hardy,
+Littlewood et Pólya.
+
+\emph{Théorème 1, 1°} (lemme fondamental). Soient $(\alpha_i)_{i \leq n}$ et
+$(\beta_i)_{i \leq n}$ deux suites réelles, la première décroissante, telles
+que
+\[
+  \alpha_1 + \cdots + \alpha_m \leq \beta_1 + \cdots + \beta_m \qquad
+  (m = 1, \ldots, n),
+\]
+et $\varphi$ une fonction convexe symétrique sur $\mathbf{R}^n$. Si a)
+$\varphi$ est croissante en chaque variable, ou si b) $\sum \alpha_i = \sum
+\beta_i$, alors
+\[
+  \varphi(\alpha_1, \ldots, \alpha_n) \leq \varphi(\beta_1, \ldots, \beta_n) .
+\]
+\footnote{La page 81 dit la \emph{deuxième} suite décroissante, en deux mots
+d'une lecture incertaine ; l'hypothèse porte sur la première, et la
+démonstration l'utilise ainsi. L'hypothèse sur $(\beta_i)$ est superflue :
+ses sommes partielles réordonnées en décroissant sont plus grandes. Sans
+la décroissance de $(\alpha_i)$ l'énoncé est faux : $\alpha = (0, 2)$,
+$\beta = (1, 1)$, $\varphi = \max$.}
+Démonstration. Une fonction convexe sur $\mathbf{R}^n$ est continue et son
+épigraphe est un convexe fermé, donc $\varphi = \sup_k L_k$ pour des
+fonctions affines $L_k(t) = \sum a_i t_i + b$ ; si $\varphi$ est croissante,
+on peut prendre tous les $a_i \geq 0$, car un $a_i < 0$ donnerait $L_k(t) \to
++\infty$ quand $t_i \to -\infty$ alors que $\varphi(t)$ reste bornée. Si
+$\varphi$ est symétrique, $\sigma L_k \leq \varphi$ pour toute permutation
+$\sigma$, donc $\varphi = \sup_k \sup_\sigma \sigma L_k$, et il suffit de
+prouver, pour une $L$ fixée,
+\[
+  \sup_\sigma (\sigma L)(\alpha) \leq \sup_\sigma (\sigma L)(\beta) .
+\]
+On peut supposer $b = 0$. Le sup de gauche est atteint quand les $a_i$ sont
+rangés en décroissant en face des $\alpha_i$ décroissants (inégalité de
+réarrangement), et l'on est ramené à $\sum a_i\alpha_i \leq \sum a_i\beta_i$
+pour $a_1 \geq \cdots \geq a_n$. Or, par sommation d'Abel,
+\[
+  \sum a_i\alpha_i = (a_1 - a_2)\,\alpha_1 + (a_2 - a_3)(\alpha_1 + \alpha_2)
+  + \cdots + (a_{n-1} - a_n)(\alpha_1 + \cdots + \alpha_{n-1})
+  + a_n(\alpha_1 + \cdots + \alpha_n),
+\]
+et de même pour $\beta$ ; les $n-1$ premiers coefficients sont $\geq 0$ et
+multiplient des sommes partielles majorées, et le dernier terme est majoré
+soit parce que $a_n \geq 0$ (cas a), soit parce que les sommes totales sont
+égales (cas b).
+
+\emph{Théorème 1, 2°} (forme multiplicative). Soit $f(\rho_1, \ldots,
+\rho_n)$ une fonction des $\rho_i > 0$ telle que $f(e^{t_1}, \ldots, e^{t_n})$
+soit convexe et symétrique. Soient $\rho_1 \geq \cdots \geq \rho_n \geq 0$ et
+$\sigma_1, \ldots, \sigma_n \geq 0$ avec
+\[
+  \rho_1 \cdots \rho_m \leq \sigma_1 \cdots \sigma_m \qquad (m = 1, \ldots, n) .
+\]
+Si a) $f$ est croissante en chaque variable, définie et continue pour
+$\rho_i \geq 0$, ou si b) $\rho_1 \cdots \rho_n = \sigma_1 \cdots \sigma_n
+\neq 0$, alors $f(\rho) \leq f(\sigma)$. Pour des $\rho_i$, $\sigma_i > 0$
+c'est le 1° avec $\alpha_i = \log\rho_i$, $\beta_i = \log\sigma_i$ ; dans le
+cas a) on atteint les suites ayant des zéros en approchant $(\rho_i),
+(\sigma_i)$ par des suites admissibles strictement positives --- les pages 81
+et 82 y reviennent deux fois, encadrent et barrent leur premier essai.
+\footnote{La symétrie de $f$ n'est pas dans l'énoncé de la page 81 et
+figure en interligne page 90 ; elle est nécessaire, et supposée ici.}
+
+\emph{Corollaire 1a.} Sous les conditions du 2°, b), on a aussi
+$f(1/\rho_1, \ldots, 1/\rho_n) \leq f(1/\sigma_1, \ldots, 1/\sigma_n)$ : de
+$\rho_1 \cdots \rho_n = \sigma_1 \cdots \sigma_n$ on tire $\rho_M \cdots
+\rho_n \geq \sigma_M \cdots \sigma_n$ pour tout $M$, donc les suites
+$(1/\rho_n, \ldots, 1/\rho_1)$ et $(1/\sigma_n, \ldots, 1/\sigma_1)$
+satisfont encore aux hypothèses.
+
+\emph{Remarque.} Si deux suites satisfont aux hypothèses du 1° (resp.\ du
+2°), leurs $k$ premiers termes y satisfont aussi pour $1 \leq k \leq n$, et
+l'inégalité vaut pour les fonctions de $k$ variables.
+
+\emph{Exemples.} Si $f$ est convexe croissante des $\rho_i$, alors $f\circ
+\exp$ est convexe, comme sup de fonctions $\sum a_i e^{t_i} + b$ avec
+$a_i \geq 0$. Si $f(\rho)$ est une fonction d'une variable avec $f\circ\exp$
+convexe, $\sum f(\rho_i)$ satisfait aux conditions du 2°, b), et à celles de
+a) si de plus $f$ est croissante et continue en $0$ ; d'où
+\[
+  \sum_{i=1}^{n} f(\rho_i) \leq \sum_{i=1}^{n} f(\sigma_i), \qquad\text{et sous a)}\qquad
+  \sum_{i=1}^{k} f(\rho_i) \leq \sum_{i=1}^{k} f(\sigma_i)\quad (k \leq n) .
+\]
+Pour $f(\rho) = \rho^p$ : $\sum \rho_i^p \leq \sum \sigma_i^p$ pour $p$ réel
+sous b), et pour tout $k$ si $p \geq 0$. Enfin toute \emph{norme}
+symétrique $N$ sur $\mathbf{R}^n$ avec $N(x) = N(|x|)$, croissante sur
+l'orthant positif --- une norme de Schatten, dira le numéro 5 --- satisfait
+aux conditions du 2°, a), d'où $N(\rho) \leq N(\sigma)$ et $N(\rho_1,
+\ldots, \rho_k) \leq N(\sigma_1, \ldots, \sigma_k)$.
+
+\emph{Théorème 2} (premier théorème de convexité dans les espaces de
+Hilbert). Soit $u$ un opérateur compact dans un espace de Hilbert et $f$
+une fonction de $n$ variables $\geq 0$, symétrique, croissante en chacune,
+continue, avec $f\circ\exp$ convexe. Alors
+\[
+  f(|\lambda_1|, \ldots, |\lambda_n|) \leq f(s_1, \ldots, s_n),
+\]
+par le théorème 1, 2°, a), et l'inégalité $|\lambda_1 \cdots \lambda_m| \leq
+s_1 \cdots s_m$ du numéro 3.
+
+\emph{Corollaire 1.} Si $f$ est croissante sur $\mathbf{R}_{+}$, continue,
+avec $f\circ\exp$ convexe : $\sum_{i \leq k} f(|\lambda_i|) \leq \sum_{i
+\leq k} f(s_i)$ pour tout $k$, et $\sum_i f(|\lambda_i|) \leq \sum_i f(s_i)$,
+la première somme convergeant si la seconde converge.
+\emph{Corollaire 2.} Pour $p > 0$, $\sum_{i \leq k} |\lambda_i|^p \leq
+\sum_{i \leq k} s_i^p$ et $\sum_i |\lambda_i|^p \leq \sum_i s_i^p = \|u\|_p^p$.
+\emph{Corollaire 3.} Si $u$ est à trace (resp.\ de Hilbert--Schmidt), la
+suite des valeurs propres est sommable (resp.\ de carré sommable), avec
+$\sum |\lambda_i| \leq \|u\|_1$ (resp.\ $(\sum |\lambda_i|^2)^{1/2} \leq
+\|u\|_2$).\footnote{Weyl, 1949 ; le corollaire 3 est ce que la page 129,
+antérieure, ne savait obtenir que « par voie analytique ».}
+\emph{Corollaire 4.} En dimension finie $n$, si $f\circ\exp$ est convexe et
+symétrique sans être croissante, l'inégalité $f(|\lambda|) \leq f(s)$ vaut
+encore pourvu que $u$ soit inversible ou que $f$ soit définie et continue
+sur l'orthant fermé : c'est le cas b), grâce à
+\[
+  |\lambda_1 \cdots \lambda_n| = |\det u| = s_1 \cdots s_n,
+\]
+puisque $(s_1 \cdots s_n)^2 = \det(u^{*}u) = |\det u|^2$.
+\emph{Corollaire 5.} Pour $N$ une norme de Schatten sur $\mathbf{R}^k$,
+$k \leq \dim E$ : $N(|\lambda_1|, \ldots, |\lambda_k|) \leq N(s_1, \ldots,
+s_k)$ ; et si $N$ est une norme de Schatten sur $\mathbf{R}^{(\mathbf{N})}$
+--- l'espace des suites à support fini ---, prolongée par $N(\xi) = \lim_n
+N(\xi_1, \ldots, \xi_n, 0, \ldots)$, alors $N((|\lambda_i|)) \leq N((s_i))$.
+
+\emph{Théorème 3} (deuxième théorème de convexité). Soient $u \in L_0(E,F)$,
+$v \in L_0(F,G)$ et $f$ comme au théorème 2. Alors
+\[
+  f\bigl(s_1(vu), \ldots, s_n(vu)\bigr) \leq
+  f\bigl(s_1(v)s_1(u), \ldots, s_n(v)s_n(u)\bigr),
+\]
+par le théorème 1, 2°, a), et l'inégalité de Horn du numéro 3.\footnote{La
+page 90 énonce $f$ sans monotonie, ajoute en interligne « symétrique et
+croissante », et sa démonstration renvoie à l'hypothèse b) du théorème 1,
+qui exigerait $\prod_{i \leq n} s_i(vu) = \prod_{i \leq n} s_i(v)s_i(u)$ ---
+vrai en dimension finie $n$ (corollaire 4 ci-dessous), faux en général. Pour
+$u$, $v$ compacts quelconques c'est l'hypothèse a) qu'il faut, et la
+monotonie de $f$ ; c'est ce qu'on a écrit.}
+\emph{Corollaire 1.} Pour $f$ continue croissante sur $\mathbf{R}_{+}$ avec
+$f\circ\exp$ convexe, $\sum_{i \leq n} f(s_i(vu)) \leq \sum_{i \leq n}
+f(s_i(v)s_i(u))$ pour tout $n$, et de même pour les sommes infinies. Un
+feuillet collé page 90 en donne le sens : les $s_i(vu)$ sont majorés, au
+sens des fonctions de Weyl, par ce qu'ils seraient si $u$ et $v$ étaient
+les multiplications par $(s_i(u))$ et $(s_i(v))$ dans $\ell^2$.
+\emph{Corollaire 2} (« inégalité de Hölder pour opérateurs »). Pour
+$\frac1p + \frac1q = \frac1s$, $p, q, s > 0$, et tout $n$,
+\[
+  \Bigl(\sum_{i \leq n} s_i(vu)^s\Bigr)^{1/s} \leq
+  \Bigl(\sum_{i \leq n} s_i(u)^p\Bigr)^{1/p}\Bigl(\sum_{i \leq n} s_i(v)^q\Bigr)^{1/q},
+  \qquad\text{d'où}\qquad
+  \|vu\|_s \leq \|u\|_p\,\|v\|_q,
+\]
+en prenant $f(\rho) = \rho^s$ dans le corollaire 1 puis l'inégalité de
+Hölder ordinaire. Le cas le plus important est $s = 1$ : $\|vu\|_1 \leq
+\|u\|_p\|v\|_{p'}$ pour $\frac1p + \frac1{p'} = 1$.
+\emph{Corollaire 3} (en marge). $|\operatorname{Tr} vu| \leq \sum_i
+s_i(u)\,s_i(v)$, par $f(s) = s$ et $|\operatorname{Tr} w| \leq \sum
+s_i(w)$.\footnote{L'inégalité de trace de von Neumann (1937), obtenue ici
+comme cas $f(s) = s$ du corollaire 1.}
+\emph{Corollaire 4} (feuillet collé). En dimension finie $n$, si $f\circ\exp$
+est convexe et symétrique, et si $u$ et $v$ sont inversibles ou $f$ continue
+sur l'orthant fermé, $f(s(vu)) \leq f(s(u)s(v))$, grâce à $\prod s_i(vu) =
+\prod s_i(u)s_i(v)$, les deux membres valant $|\det(vu)|$ et $|\det u|\,|\det
+v|$. Un crayon en marge demande : « Est-ce utile ? »
+
+\emph{Théorème 4} (troisième théorème de convexité). Pour $u$, $v \in
+L_0(E,F)$ et $\varphi$ convexe, symétrique et croissante de $n$ variables
+$\geq 0$,
+\[
+  \varphi\bigl(s_1(u+v), \ldots, s_n(u+v)\bigr) \leq
+  \varphi\bigl(s_1(u) + s_1(v), \ldots, s_n(u) + s_n(v)\bigr),
+\]
+cas particulier du théorème 1, 1°, a), et de $\sum_{i \leq m} s_i(u+v) \leq
+\sum_{i \leq m} (s_i(u) + s_i(v))$ du numéro 1.\footnote{Ky Fan (1951). Un
+corollaire $\sum \varphi(s_i(u+v)) \leq \sum \varphi(s_i(u) + s_i(v))$ est
+écrit, encadré et barré ; il est vrai pour $\varphi$ convexe croissante.}
+
+\emph{Corollaire 1.} Soit $N$ une norme de Schatten sur $\mathbf{R}^n$ et,
+pour $u$ compact, $\|u\|_N = N(s_1(u), \ldots, s_n(u))$. Alors
+\[
+  \|u + v\|_N \leq \|u\|_N + \|v\|_N,
+\]
+car $N(s(u+v)) \leq N(s(u) + s(v)) \leq N(s(u)) + N(s(v))$.\footnote{Avec
+$\|\lambda u\|_N = |\lambda|\,\|u\|_N$, biffé sur la page : $u \mapsto
+\|u\|_N$ est une norme sur les compacts de rang $\leq n$. C'est le théorème
+de von Neumann (1937) sur les normes unitairement invariantes.}
+\emph{Corollaire 2.} Pour $1 \leq p \leq \infty$ et tout $n$,
+$(\sum_{i \leq n} s_i(u+v)^p)^{1/p} \leq (\sum_{i \leq n} s_i(u)^p)^{1/p} +
+(\sum_{i \leq n} s_i(v)^p)^{1/p}$, d'où
+\[
+  \|u + v\|_p \leq \|u\|_p + \|v\|_p .
+\]
+
+\pagerange{93}{100}
+\section*{Classes remarquables d'opérateurs (pages 93 à 100)}
+
+Le numéro 5 est « un exposé de la théorie de Schatten, simplifié par les
+inégalités de convexité de Weyl, en y apportant quelques compléments ».
+
+\emph{Définition 1.} Une norme $N$ sur $\mathbf{R}^n$ est une \emph{norme de
+Schatten} si elle est symétrique, si $N(x_1, \ldots, x_n) = N(|x_1|, \ldots,
+|x_n|)$, si elle est croissante sur l'orthant positif, et si $N(1, 0, \ldots,
+0) = 1$.\footnote{Ce sont les \emph{fonctions de jauge symétriques} de von
+Neumann (1937) et Schatten, les \emph{fonctions normantes symétriques} de
+Gohberg et Krein. La monotonie sur l'orthant est en fait conséquence des
+deux premières conditions pour une norme ; la page la met dans la
+définition.} Une norme sur $\mathbf{R}^{(\mathbf{N})}$ est de Schatten si
+elle induit une norme de Schatten sur chaque $\mathbf{R}^n$. Exemples : les
+$N_p(x) = (\sum |x_i|^p)^{1/p}$, $1 \leq p < \infty$, et $N_\infty(x) =
+\sup |x_i|$. Toute norme de Schatten $N_0$ sur $\mathbf{R}^n$ est induite
+par une norme de Schatten sur $\mathbf{R}^{(\mathbf{N})}$, par exemple
+$N(x) = N_0(x^{*}_1, \ldots, x^{*}_n)$ où $x^{*}$ est la suite des $|x_i|$
+rangée en décroissant ; la seule chose à vérifier est l'inégalité
+triangulaire, et elle résulte du corollaire 1 du théorème 4, $x$ étant vu
+comme l'opérateur de multiplication par $x$ dans $\ell^2$. Il y a donc une
+infinité continue de normes de Schatten sur $\mathbf{R}^{(\mathbf{N})}$
+équivalentes à la norme de $c_0$.
+
+\emph{Les espaces $\ell^N$ et $\ell_N$.} Pour $N$ une norme de Schatten sur
+$\mathbf{R}^{(\mathbf{N})}$ et $x$ une suite complexe, posons $|x|_n =
+(|x_1|, \ldots, |x_n|, 0, \ldots)$ et
+\[
+  N(x) = \lim_n N(|x|_n) \in [0, +\infty] .
+\]
+On a $N(\lambda x) = |\lambda| N(x)$ et $N(x+y) \leq N(x) + N(y)$, car
+$|x+y|_n \leq |x|_n + |y|_n$ et $N$ croît sur l'orthant. Soit $\ell^N$
+l'espace des $x$ avec $N(x) < \infty$ : $N$ est une norme sur $\ell^N$. Si
+$N' \leq N''$, alors $\ell^{N''} \subset \ell^{N'}$ avec injection de norme
+$\leq 1$ ; comme toute norme de Schatten est comprise entre $N_\infty$ et
+$N_1$,
+\[
+  \ell^1 \subset \ell^N \subset \ell^\infty,
+\]
+les injections étant de norme $\leq 1$. On a de plus, pour toute suite
+$(x^k)$ dans $\ell^N$ avec $\sum_k N(x^k) < \infty$, la sous-additivité
+dénombrable $N(\sum_k x^k) \leq \sum_k N(x^k)$, où la série converge dans
+$\ell^\infty$ ; et il en résulte que $\ell^N$ est \emph{complet}, une série
+normalement convergente convergeant vers sa somme dans $\ell^\infty$ puis,
+par cette inégalité appliquée aux restes, dans $\ell^N$.
+
+Soit $\ell_N$ l'adhérence de $\mathbf{R}^{(\mathbf{N})}$ dans $\ell^N$,
+c'est-à-dire le complété de $\mathbf{C}^{(\mathbf{N})}$ pour $N$. Si $N' \leq
+N''$, $\ell_{N''} \subset \ell_{N'}$,\footnote{La page 96 écrit
+l'inclusion dans l'autre sens, ce que la transcription note ; le sens est
+celui des $\ell^N$, l'adhérence d'un sous-espace dans le plus petit espace
+étant contenue dans son adhérence dans le plus grand.} et
+\[
+  \ell^1 \subset \ell_N \subset c_0,
+\]
+les espaces $\ell_N$ pour $N_1$ et $N_\infty$ étant $\ell^1$ et $c_0$. Une
+formule $\ell_N = \ell^N \cap c_0$ est écrite, numérotée (9), puis barrée ;
+elle est fausse en général.\footnote{Pour $N = N_\infty$ elle est vraie ;
+pour une norme de Lorentz ou d'Orlicz elle ne l'est pas : $\ell_N$ est le
+sous-espace des $x \in \ell^N$ dont les queues tendent vers zéro pour $N$,
+ce que la page 98 dira exactement. La proposition 1 annoncée page 96 n'a
+pas d'énoncé lisible ; d'après le plan de la page 101, c'est : $\ell_N
+\subset c_0$ strictement, sauf si $N$ est équivalente à $N_\infty$.}
+
+\emph{La norme polaire.} $\mathbf{R}^{(\mathbf{N})}$ est en dualité avec
+lui-même par $\langle x, y\rangle = \sum x_i y_i$, et toute norme $N$ y a
+une \emph{norme polaire}
+\[
+  N^{\circ}(y) = \sup_{N(x) \leq 1} |\langle x, y\rangle| ,
+\]
+avec $(N^{\circ})^{\circ} = N$ ; si $N$ est de Schatten, $N^{\circ}$ l'est.
+Pour $x \in \ell^N$, $y \in \ell^{N^{\circ}}$ on a $\sum |x_i y_i| \leq N(x)\,
+N^{\circ}(y)$, d'où un accouplement naturel entre $\ell^N$ et
+$\ell^{N^{\circ}}$, et :
+
+\emph{Le dual de $\ell_N$ est $\ell^{N^{\circ}}$}, avec sa norme, pour cet
+accouplement. Une forme linéaire continue $X'$ sur $\ell_N$ se restreint
+à $\ell^1$, donc est donnée par un $x' \in \ell^\infty$ ; alors
+$N^{\circ}(|x'|_n) \leq \|X'\|$ pour tout $n$, donc $N^{\circ}(x') \leq
+\|X'\|$. En général le dual de $\ell^N$ n'est pas $\ell^{N^{\circ}}$, car
+$\ell_N$ n'est pas dense dans $\ell^N$ ; exemple $N = N_\infty$.\footnote{C'est
+le dual de Köthe d'un espace de suites symétrique ; Schatten (1950), et
+pour la « dualité $\ell_N$--$\ell^{N^{\circ}}$ » la théorie des espaces
+de suites symétriques de Garling. Le passage de $\ell^\infty$ à
+$N^{\circ}(x') \leq \|X'\|$ utilise que $N^{\circ}(|x'|_n)$ se calcule sur
+$\mathbf{R}^n \subset \ell_N$.}
+
+\emph{Proposition.} $\ell_N$ est réflexif si et seulement si $\ell_N = \ell^N$
+et $\ell_{N^{\circ}} = \ell^{N^{\circ}}$. Si $\ell_N$ est réflexif, son bidual
+$(\ell^{N^{\circ}})'$, qui contient $\ell^N$ isométriquement par
+l'accouplement, est $\ell_N$, d'où $\ell_N = \ell^N$ ; et $\ell^{N^{\circ}}$,
+dual d'un réflexif, est réflexif, d'où de même $\ell_{N^{\circ}} =
+\ell^{N^{\circ}}$. Réciproquement, sous ces deux égalités, le dual de $\ell_N$
+est $\ell_{N^{\circ}}$ et le dual de celui-ci est $\ell_N$, par l'accouplement
+canonique.\footnote{La page 97 se reproche une « démonstration circulaire
+de l'équivalence des 4 conditions », biffe quatre lignes, et en donne une
+autre ; celle-ci est la sienne, mise au propre. Elle utilise $(N^{\circ})^{\circ}
+= N$, écrit en marge de la page 96.}
+
+\emph{Les classes $\mathcal{S}^N(E,F)$.} Soit $N$ une norme de Schatten sur
+$\mathbf{R}^{(\mathbf{N})}$, non équivalente à $N_\infty$, et $E$, $F$ deux
+espaces de Hilbert. On note $\mathcal{S}^N(E,F)$ le sous-espace de $L_0(E,F)$
+des $u$ tels que $(s_i(u)) \in \ell^N$, et
+\[
+  N(u) = N\bigl((s_i(u))\bigr) < \infty .
+\]
+C'est une norme : $N(u+v) = \lim_n N(|s(u+v)|_n) \leq \lim_n \bigl(N(|s(u)|_n)
++ N(|s(v)|_n)\bigr)$ par le corollaire 1 du théorème 4. Soit
+$\mathcal{S}_N(E,F)$ le sous-espace des $u$ avec $(s_i(u)) \in \ell_N$ ;
+c'est l'adhérence de $\bar{E} \otimes F$ dans $\mathcal{S}^N(E,F)$, puisque
+$u = \sum s_i\,\bar{e}_i \otimes f_i$ est limite de ses sommes partielles
+exactement quand $N(s_{n+1}, s_{n+2}, \ldots) \to 0$, ce qui caractérise
+$\ell_N$ dans $\ell^N$.
+
+\emph{Multiplicativité.} Si $N$, $N'$, $N''$ sont des normes de Schatten
+avec $N(xy) \leq N'(x)\,N''(y)$ sur $\mathbf{R}^{(\mathbf{N})}$, la même
+inégalité vaut sur $\ell^{N'} \times \ell^{N''}$, et pour $u \in
+\mathcal{S}^{N'}(E,F)$, $v \in \mathcal{S}^{N''}(F,G)$ on a $vu \in
+\mathcal{S}^{N}(E,G)$ avec
+\[
+  N(vu) \leq N'(u)\,N''(v),
+\]
+par le corollaire 1 du théorème 3 appliqué à la norme $N$. En particulier,
+pour les normes polaires, $\|vu\|_1 \leq N(u)\,N^{\circ}(v)$ ; et $N(u^{*}) =
+N(u)$, $N(vu) \leq \|v\|\,N(u)$, $N(uv) \leq \|v\|\,N(u)$, par $s_i(vu) \leq
+\|v\| s_i(u)$.
+
+\emph{Le dual de $\mathcal{S}_N(E,F)$ est $\mathcal{S}^{N^{\circ}}(F,E)$}, par
+$\langle u, v\rangle = \operatorname{Tr} vu$. Le dual de $\mathcal{S}_N(E,F)$
+s'identifie à un sous-espace du dual de $\mathcal{S}_{N_1}(E,F) =
+\mathcal{S}_1(E,F)$, donc de $L(F,E)$ ; ce sous-espace contient
+$\mathcal{S}^{N^{\circ}}(F,E)$, isométriquement par l'inégalité précédente.
+Réciproquement, soit $v \in L(F,E)$ tel que $|\operatorname{Tr} vu| \leq
+M\,N(u)$ pour $u$ de rang fini. Par $v = U|v|$, $|v| = Vv$, on se ramène à
+$F = E$ et $v \geq 0$ ; pour tout projecteur $P$ de rang fini de la
+décomposition spectrale de $v$, $v = \sum \rho_i\,\bar{e}_i \otimes e_i$, les
+$u$ diagonaux dans la base $(e_i)$ montrent que $(\rho_i)$ définit une forme
+continue sur $\ell_N$, donc $(\rho_i) \in (\ell_N)' = \ell^{N^{\circ}}$, ce
+qui est la conclusion.\footnote{Le bloc de la page 98 qui énonce cette
+dualité est encadré et barré, puis repris page 99 avec un point
+d'interrogation rouge sur la dernière ligne ; la page 102 la réécrit sans
+le « $\circ$ » ni l'ordre $(F,E)$ ; le théorème 1 de la page 104 la donne
+sous la forme ci-dessus, qui est la bonne. L'argument de la page 99 est
+elliptique après « $v \geq 0$ » ; on l'a complété. C'est le théorème de
+dualité de Schatten (1950).}
+
+\emph{Corollaire 1.} $u \in \mathcal{S}^N(E,F)$ si et seulement si $|u| \in
+\mathcal{S}^N(E)$, et $N(u) = N(|u|)$ ; de même pour $\mathcal{S}_N$.
+\emph{Corollaire 2.} Si $u = h + ik$ avec $h$, $k$ hermitiens, $u \in
+\mathcal{S}^N(E)$ si et seulement si $h$, $k \in \mathcal{S}^N(E)$, et de
+même pour $\mathcal{S}_N$.
+
+\emph{Remarque} (caractérisation axiomatique). Soit $p$ une norme sur
+$\bar{E} \otimes F$, $E$ et $F$ de dimension infinie, telle que a) $p(VuU) =
+p(u)$ pour $U$, $V$ unitaires, et b) $p(\bar{x} \otimes y) = \|x\|\,\|y\|$.
+Pour $(e_i)$, $(f_i)$ orthonormaux infinis, $(\lambda_i) \mapsto p(\sum
+\lambda_i\,\bar{e}_i \otimes f_i)$ est sur $\mathbf{R}^{(\mathbf{N})}$ une
+norme symétrique (par a), normalisée (par b), fonction de $(|\lambda_i|)$
+(par a), donc une norme de Schatten $N$, et $p(u) = N(u)$ sur $\bar{E}
+\otimes F$ par a). Ce sont donc les normes $N(u)$ sur les opérateurs de rang
+fini.\footnote{Le théorème de von Neumann sur les normes unitairement
+invariantes, en dimension infinie. L'axiome b) y est plus fort qu'il ne
+faut : $p(\bar{x} \otimes y) = 1$ pour $x$, $y$ unitaires suffit.}
+
+\pagerange{101}{104}
+\section*{Espaces de Schatten : le théorème récapitulatif (pages 101 à 104)}
+
+Deux pages de plan, puis un « Théorème 1 » en cinq points dont les formules
+(18) à (27) continuent la numérotation du numéro 5. Le plan ajoute au
+numéro 5 : $N(x)$ est fonction croissante de $|x|$ ; $\ell_N \subsetneq c_0$
+sauf si $N \sim N_\infty$ ; $(N_p)^{\circ} = N_{p'}$ et l'on retrouve la
+réflexivité des $\ell^p$, $1 < p < \infty$ ; $\mathcal{S}^N(E,F) \subset
+L_0(E,F)$ si $N \not\sim N_\infty$, car si $|u|$ n'était pas compact il aurait
+un projecteur spectral $P$ de rang infini sur lequel $|u| \geq \varepsilon
+> 0$, et $v = |u|^{-1}P$, hermitien borné, donnerait $v|u| = P \in
+\mathcal{S}^N$, donc $(1, 1, \ldots) \in \ell^N$ et
+$N \sim N_\infty$ ; $\mathcal{S}^{N_p} = \mathcal{S}_p$ et, pour $p < \infty$,
+$\mathcal{S}_{N_p} = \mathcal{S}_p$ ; les corollaires 1 et 2 sur $|u|$ et
+$h + ik$ ; et la remarque que $\ell^N$ se plonge isométriquement dans
+$\mathcal{S}^N(E,F)$ par $(\lambda_i) \mapsto \sum \lambda_i\,\bar{e}_i
+\otimes f_i$ quand $E$ et $F$ sont de dimension infinie.
+
+\emph{Théorème 1.} Soit $N$ une norme de Schatten sur $\mathbf{R}^{(\mathbf{N})}$
+et $E$, $F$ deux espaces de Hilbert. Pour $u \in L_0(E,F)$ posons $N(u) =
+N((s_i(u)))$, et pour $u \in L(E,F)$
+\[
+  N(u) = \sup\bigl\{ |\operatorname{Tr} vu| : v \in \bar{F} \otimes E,\ N^{\circ}(v)
+  \leq 1 \bigr\} ;
+\]
+les deux expressions coïncident sur $L_0(E,F)$.\footnote{Sur les compacts,
+c'est la dualité $\ell_{N^{\circ}}$--$\ell^{N}$ jointe à l'inégalité de trace
+de von Neumann ; la seconde définition étend $N$ à tout $L(E,F)$, où elle
+vaut $+\infty$ hors de $\mathcal{S}^N$ dès que $N \not\sim N_\infty$.}
+
+1. Soit $\mathcal{S}^N(E,F)$ le sous-espace des $u \in L(E,F)$ avec $N(u) <
+\infty$ : $N$ en fait un espace de Banach. Un $u$ compact y est si et
+seulement si $(s_i(u)) \in \ell^N$. L'adhérence $\mathcal{S}_N(E,F)$ de
+$\bar{E} \otimes F$ dans $\mathcal{S}^N(E,F)$ est l'ensemble des $u$ compacts
+avec $(s_i(u)) \in \ell_N$.
+
+2. $N(u) = N(u^{*})$, donc $u \in \mathcal{S}^N(E,F)$ si et seulement si
+$u^{*} \in \mathcal{S}^N(F,E)$, et de même pour $\mathcal{S}_N$ ; et pour
+$u \in L(E,F)$, $v \in L(F,G)$, $N(vu) \leq \|v\|\,N(u)$ et $N(vu) \leq
+\|u\|\,N(v)$.\footnote{La page 103 écrit les deux inégalités avec les rôles
+de $u$ et $v$ échangés d'une à l'autre, et un point d'interrogation rouge en
+marge ; ce sont les deux inégalités du plan de la page 101.} Sur les
+hermitiens positifs compacts, $N(u)$ est fonction croissante de $u$.
+
+3. Si $N(xy) \leq N'(x)\,N''(y)$ sur $\mathbf{R}^{(\mathbf{N})}$, alors pour
+$u \in L(E,F)$, $v \in L(F,G)$ : $N(vu) \leq N'(u)\,N''(v)$ ; donc $u \in
+\mathcal{S}^{N'}(E,F)$ et $v \in \mathcal{S}^{N''}(F,G)$ entraînent $vu \in
+\mathcal{S}^N(E,G)$, et $vu \in \mathcal{S}_N(E,G)$ si de plus $u \in
+\mathcal{S}_{N'}$ ou $v \in \mathcal{S}_{N''}$. En particulier $\|vu\|_1 \leq
+N(u)\,N^{\circ}(v)$ pour $u \in L(E,F)$, $v \in L(F,E)$, et $|\operatorname{Tr}
+vu| \leq N(u)\,N^{\circ}(v)$ pour $u \in \mathcal{S}^N(E,F)$, $v \in
+\mathcal{S}^{N^{\circ}}(F,E)$. La démonstration pour $u$, $v$ non compacts
+passe par $N(u) = \lim N(pup)$ sur les projecteurs $p$ de rang fini croissant
+vers $1$, puis par le deuxième théorème de convexité en dimension finie.
+
+4. Par l'accouplement $\langle u, v\rangle = \operatorname{Tr} vu$, le dual de
+$\mathcal{S}_N(E,F)$ s'identifie à $\mathcal{S}^{N^{\circ}}(F,E)$. Si $E$ et
+$F$ sont de dimension infinie, les conditions suivantes sont équivalentes :
+a) $\mathcal{S}_N(E,F)$ est réflexif ; b) $\mathcal{S}^N(E,F)$ est réflexif ;
+c) $\ell_N$ est réflexif ; d) $\ell^N$ est réflexif ; e) $\ell_{N^{\circ}}$
+est réflexif ; f) $\ell^{N^{\circ}}$ est réflexif ; g) $\mathcal{S}_N(E,F) =
+\mathcal{S}^N(E,F)$ et $\mathcal{S}_{N^{\circ}}(F,E) = \mathcal{S}^{N^{\circ}}(F,E)$.
+Car $\ell^N$ (resp.\ $\ell_N$) est un sous-espace fermé de
+$\mathcal{S}^N(E,F)$ (resp.\ $\mathcal{S}_N(E,F)$), et un sous-espace fermé
+d'un réflexif est réflexif ; $\ell_N$ réflexif donne $\ell_N = \ell^N$ et
+$\ell_{N^{\circ}} = \ell^{N^{\circ}}$ par la proposition de la page 97, donc
+$\mathcal{S}_N = \mathcal{S}^N$ et de même pour $N^{\circ}$, donc le dual de
+$\mathcal{S}_N(E,F)$ est $\mathcal{S}_{N^{\circ}}(F,E)$ et le dual de celui-ci
+est $\mathcal{S}_N(E,F)$, qui est réflexif.\footnote{La liste de la page 104
+est remaniée, avec deux « d) » ; l'ordre et la lettre g) sont de cette
+lecture. Sans l'hypothèse de dimension infinie les $\ell$ ne se plongent pas
+et l'implication de $\mathcal{S}$ vers $\ell$ tombe ; l'implication de
+$N$ réflexive vers $\mathcal{S}_N(E,F)$ réflexif reste vraie (corollaire 2 de
+la page 102).} \emph{Corollaire} : pour $1 < p < \infty$, $\mathcal{S}_p(E,F)$
+est réflexif, de dual $\mathcal{S}_{p'}(F,E)$.
+
+5. Pour $u$ compact, $N((\lambda_i(u))) \leq N(u)$, et $u \in
+\mathcal{S}^N(E,F)$ entraîne $(\lambda_i(u)) \in \ell^N$ : c'est le
+corollaire 5 du premier théorème de convexité.
+
+\pagerange{106}{111}
+\section*{Fonctions entières : factorisation, genre, ordre (pages 106 à 111)}
+
+D'autres feuillets, d'une écriture posée, sur du papier dont le verso
+imprimé transparaît. Ce sont des rappels, et ils servent à une chose : la
+démonstration du théorème 1 de la page 70, que la proposition de la page
+110 achève.
+
+\emph{Théorème 1} (Weierstrass). Soit $f$ entière avec $f(0) \neq 0$ et
+$(a_n)$ la suite de ses zéros rangés par modules croissants. Il existe des
+entiers $p_n \geq 0$ et une fonction entière $g$ tels que
+\[
+  f(z) = e^{g(z)} \prod_n \Bigl(1 - \frac{z}{a_n}\Bigr)
+  \exp\Bigl(\frac{z}{a_n} + \frac{z^2}{2a_n^2} + \cdots + \frac{z^{p_n}}{p_n a_n^{p_n}}\Bigr),
+\]
+le produit convergeant absolument et uniformément sur tout borné ; toute
+suite $(p_n)$ avec $\sum_n |r/a_n|^{p_n + 1} < \infty$ pour tout $r$ convient,
+et si $\sum 1/|a_n|^{k+1} < \infty$ on peut prendre $p_n = k$ pour tout $n$.
+
+\emph{Genre.} Si $\sum 1/|a_n|^{k+1} < \infty$ pour un $k$, le plus petit
+étant $k$, et si dans cette représentation $g$ est un polynôme de degré $r$,
+le \emph{genre} de $f$ est $\max(r, k)$. Genre zéro signifie $f(z) = C
+\prod_n (1 - z/a_n)$ avec $\sum 1/|a_n| < \infty$.
+
+\emph{Ordre.} Avec $M(r) = \sup_{|z| = r} |f(z)|$, l'\emph{ordre} de $f$ est
+$\omega = \limsup \frac{\log\log M(r)}{\log r} \in [0, +\infty]$, borne
+inférieure des $\sigma$ tels que $M(r) \leq e^{r^\sigma}$ pour $r$ grand.
+
+\emph{Théorème 2} (Hadamard--Borel). Si $\omega < \infty$, alors
+$\sum' 1/|a_n|^{\omega + \varepsilon} < \infty$ pour tout $\varepsilon > 0$,
+la somme portant sur les zéros non nuls, et $f(z) = e^{P(z)}\prod_n (1 -
+z/a_n)\exp(\cdots + z^p/(p a_n^p))$ avec $p \leq \omega$ et $P$ polynôme de
+degré $\leq \omega$ : le genre est $\leq$ l'ordre. \emph{Corollaire} : si
+$\omega < 1$, $f$ est de genre zéro. \emph{Remarque} : inversement l'ordre
+est $\leq$ genre $+ 1$, d'où $\omega - 1 \leq g \leq \omega$, et $g$ est
+déterminé par $\omega$ sauf si $\omega$ est entier. Exemples : $e^{z^\omega}$
+est d'ordre et de genre $\omega$ ; $\prod (1 - z/n^\alpha)$, $\alpha > 1$,
+est d'ordre $1/\alpha$ et de genre zéro. L'ordre d'un produit ou d'une somme
+est au plus le maximum des ordres, de sorte que les fonctions d'ordre $<
+\rho$ (resp.\ $\leq \rho$) forment une algèbre.
+
+\emph{Théorème 3} (Hadamard). Pour $f(z) = \sum c_n z^n$, l'ordre se lit sur
+les coefficients ; la page 109 s'interrompt au bord du feuillet après
+« si $n^\alpha\sqrt[n]{|c_n|} \to 0$ ».\footnote{L'énoncé complet : $\omega =
+\limsup \frac{n\log n}{-\log|c_n|}$. Ce que la suite utilise est le cas
+limite : une fonction de genre zéro vérifie $|f(z)| \leq C_\varepsilon
+e^{\varepsilon|z|}$ pour tout $\varepsilon > 0$ (elle est d'ordre $\leq 1$ et
+de type minimal), ce que la page 110 invoque comme connu.}
+
+\emph{Proposition.} Soit $f$ entière dont les coefficients sont majorés en
+module par ceux d'une fonction $h$ de genre zéro à coefficients positifs,
+et dont les zéros non nuls $z_i$ vérifient $\sum 1/|z_i| < \infty$. Alors $f$
+est de genre zéro.
+
+Démonstration. On peut supposer $h(z) = K\prod (1 + \alpha_i z)$ avec
+$\alpha_i \geq 0$ sommables ; alors $|f(z)| \leq h(|z|) \leq C_\varepsilon
+e^{\varepsilon |z|}$ pour tout $\varepsilon$, $f$ est d'ordre $\leq 1$ et,
+par Hadamard--Borel et l'hypothèse sur les zéros, $f(z) = e^{\alpha + \beta
+z} z^m \prod_i (1 - z/z_i)$. Il faut voir $\beta = 0$. Sinon, quitte à
+remplacer $f(z)$ par $f(\theta z)$ avec $\theta = \bar\beta/|\beta|$, on a
+$\beta > 0$. Posons $g(z) = z^m\prod_i (1 - z/z_i)$, de genre zéro, donc
+$|g(z)| \leq K' e^{(a/3)|z|}$ pour tout $a > 0$ et $K'$ dépendant de $a$. Sur
+le secteur $|\arg z| \leq \theta$ avec $\pi/3 < \theta < \pi/2$, on a
+$\operatorname{Re} z \geq c|z|$ avec $c > 0$, donc $|f(z)| \geq K e^{\beta c
+|z|}\,|g(z)|$, et avec $\varepsilon < \beta c$ il vient $|g(z)| \leq K
+e^{-a|z|}$ sur ce secteur, $a = \beta c - \varepsilon > 0$. Soit $\omega =
+e^{2i\pi/3}$ et $G(z) = g(z)\,g(\omega z)\,g(\omega^2 z)$ : pour tout $z$,
+l'un des trois points $z$, $\omega z$, $\omega^2 z$ est dans le secteur,
+puisque $\theta > \pi/3$, et
+\[
+  |G(z)| \leq \bigl(K e^{-a|z|}\bigr)\bigl(K' e^{\frac{a}{3}|z|}\bigr)^2
+  = K'' e^{-\frac{a}{3}|z|} .
+\]
+$G$ est donc bornée, donc constante ; mais $G(z) = z^{3m}\prod_i (1 -
+z^3/z_i^3)$, ce qui force $m = 0$ et l'absence de zéros : $g$ est constante,
+$f(z) = Ce^{\beta z}$, incompatible avec $|f(z)| \leq C_\varepsilon
+e^{\varepsilon|z|}$ pour $\varepsilon < \beta$.\footnote{Le second angle de la
+page 111 est serré en bout de ligne et lu $\pi/2$ ; c'est ce que l'argument
+demande, et le croquis en marge --- un disque coupé en trois secteurs par
+trois rayons --- est celui de $G$. La fin de la démonstration est écrite de
+bas en haut dans la marge.}
+
+\pagerange{112}{118}
+\section*{Exposant de convergence, fonction de comptage (pages 112 à 118)}
+
+Soit $(\alpha_n)$ une suite décroissante de nombres positifs tendant vers
+zéro. Soit $\rho$ la borne inférieure des $s > 0$ tels que $\alpha_n =
+O(n^{-1/s})$, et $\sigma$ celle des $s > 0$ tels que $\sum \alpha_n^s <
+\infty$ --- l'\emph{exposant de convergence} ; on a aussi $1/\rho = \limsup
+\frac{\log(1/\alpha_n)}{\log n}$. Le critère de Riemann donne $\sigma \leq
+\rho$, et l'on a $\rho \leq \sigma$, par le
+
+\emph{Lemme.} Si $\sum \alpha_n^s < \infty$ et $(\alpha_n)$ décroît, alors
+$\alpha_n = o(n^{-1/s})$. On se ramène à $s = 1$ ; si l'on avait
+$\alpha_{n_i} \geq 1/n_i$ le long d'une suite strictement croissante
+$(n_i)$, alors $\alpha_{n_{i-1}+1} + \cdots + \alpha_{n_i} \geq (n_i -
+n_{i-1})/n_i =: \varepsilon_i$ avec $\sum \varepsilon_i < \infty$, et $n_i =
+n_{i-1}/(1 - \varepsilon_i) = \cdots = n_0/\prod_{k \leq i}(1 - \varepsilon_k)$
+serait bornée.
+
+Si $\sum \alpha_i < \infty$ et $f(z) = \prod (1 + \alpha_i z)$, alors $\rho$
+est aussi l'ordre de $f$. On sait $\rho \leq$ ordre ; pour l'inégalité
+inverse il suffit du cas $\alpha_n = n^{-\beta}$, $\beta > 1$, et d'y
+prouver ordre $\leq 1/\beta$ : on coupe $f(r) = \prod_{n \leq \nu}(1 +
+r/n^\beta)\prod_{n > \nu}(1 + r/n^\beta)$, le second facteur est $\leq
+\exp(r\sum_{n > \nu} n^{-\beta}) \leq \exp\bigl(r\,\nu^{1-\beta}/(\beta -
+1)\bigr)$, d'ordre $\leq 1/\beta$ en $r$ si $\nu = [r^{1/\beta}] + 1$, et le
+premier est $\leq (1+r)^\nu = e^{\nu\log(1+r)}$, d'ordre $\leq 1/\beta$
+aussi.\footnote{C'est le théorème de Borel : l'ordre d'un produit canonique
+de genre zéro est l'exposant de convergence de ses zéros.} Si $f(z) =
+\prod(1 + \lambda_i z)$ est de genre zéro et $F(z) = \prod(1 + |\lambda_i|z)$,
+$f$ et $F$ ont même ordre, puisque ordre de $f \leq$ ordre de $F$ = ordre de
+la suite $(|\lambda_i|) \leq$ ordre de $f$ par Hadamard.\footnote{La page
+114 écrit « de genre 1 » et souligne le mot ; avec $\sum|\lambda_i| < \infty$
+c'est le genre zéro qui est en jeu, et c'est ce que la conclusion utilise.}
+On peut donc parler de l'\emph{ordre} d'un ensemble dénombrable de nombres
+complexes, borne inférieure des $s > 0$ avec $\sum |z_i|^s < \infty$ ; une
+suite à décroissance rapide est une suite d'ordre zéro. Suivent trois
+lignes sur l'ordre d'une suite dans un espace de Banach et d'une partie
+bornée, puis dix lignes de crayon effacé.\footnote{Ces trois lignes ---
+« deux définitions suivant qu'on prend la sommabilité ou la sommabilité
+absolue », et l'ordre d'une partie bornée comme borne inférieure des $s$
+tels qu'elle soit contenue dans l'enveloppe convexe fermée d'une suite
+d'ordre $s$ --- sont la première apparition, dans ce carton, des idées de
+\emph{Produits tensoriels topologiques} sur les suites d'ordre $s$ ; on
+ne les développe pas.}
+
+\emph{La fonction de comptage.} Soit $(r_\nu)$ une suite croissante de
+nombres $> 0$ tendant vers l'infini et $n(r)$ le nombre des $\nu$ avec
+$r_\nu \leq r$. Pour $0 \leq a \leq b < \infty$ et $\alpha > 0$, l'intégrale
+de Stieltjes $\int_a^b r^{-\alpha}\,dn(r)$ donne
+\[
+  \sum_{a < r_\nu < b} \frac{1}{r_\nu^\alpha}
+  = \frac{n(b-0)}{b^\alpha} - \frac{n(a+0)}{a^\alpha}
+  + \alpha\int_a^b \frac{n(r)\,dr}{r^{\alpha+1}} .
+\]
+\emph{Proposition.} $\sum_\nu r_\nu^{-\alpha} < \infty$ si et seulement si
+$\int_0^\infty n(r)\,r^{-\alpha-1}\,dr < \infty$ ; alors $n(r)/r^\alpha \to 0$
+et
+\[
+  \sum_{r_\nu > a} \frac{1}{r_\nu^\alpha} = -\frac{n(a+0)}{a^\alpha}
+  + \alpha\int_a^\infty \frac{n(r)\,dr}{r^{\alpha+1}} .
+\]
+Le sens direct vient de la formule avec $a = 0$ ; réciproquement, si
+l'intégrale converge, $n(b_i)/b_i^\alpha$ est borné le long d'une suite
+$b_i \to \infty$, d'où la convergence de la série ; et $n(r)/r^\alpha \to 0$,
+sinon $n(b_i) - n(b_{i-1}) \geq \varepsilon b_i^\alpha - M b_{i-1}^\alpha$ le
+long d'une suite qu'on peut choisir avec $M(b_{i-1}/b_i)^\alpha \leq
+\varepsilon/2$, et les tranches $\sum_{b_{i-1} < r_\nu \leq b_i}
+r_\nu^{-\alpha}$ resteraient $\geq \varepsilon/2$. Plus généralement, pour
+$\lambda$ décroissante, continûment dérivable et tendant vers zéro :
+\begin{gather*}
+  \sum_\nu \lambda(r_\nu) < \infty \iff \int_0^\infty n(r)\,(-\lambda'(r))\,dr < \infty, \\
+  \sum_{r_\nu > a} \lambda(r_\nu) = -\lambda(a)\,n(a+0) + \int_a^\infty n(r)\,(-\lambda'(r))\,dr,
+\end{gather*}
+et alors $\lambda(r)\,n(r) \to 0$.
+
+Si les $r_\nu$ sont les modules des zéros d'une fonction entière $f$, le
+principe de l'argument donne $2\pi\,n(r) = \int_0^{2\pi} \frac{f'}{f}(re^{i\varphi})\,
+re^{i\varphi}\,d\varphi$, et, en intégrant contre $r\mu(r)$ puis en prenant
+les parties réelles,
+\[
+  \int_a^b n(r)\,\mu(r)\,dr = \bigl[r\mu(r)\,V(r)\bigr]_a^b - \int_a^b V(r)\,d(r\mu(r)),
+  \qquad V(r) = \frac{1}{2\pi}\int_0^{2\pi} \log|f(re^{i\varphi})|\,d\varphi,
+\]
+pour $\mu$ continûment dérivable ; avec $\mu = -\lambda'$,
+\[
+  \sum_{a < r_\nu < b} \lambda(r_\nu) = \lambda(b)\,n(b-0) - \lambda(a)\,n(a+0)
+  + \bigl[r\mu(r)\,V(r)\bigr]_a^b + \int_a^b V(r)\,d(r\lambda'(r)),
+\]
+et si $r^2\mu(r) \to 0$ en $0$ et $|f(0)| = 1$, la formule vaut avec $a = 0$
+et sans le terme en $a$. Comme $V(r) \leq \log M(r)$, on obtient une
+majoration de $\int_a^b n(r)\mu(r)\,dr$ par $M(r)$.\footnote{C'est la
+formule de Jensen, $\int_0^r n(t)\,dt/t = V(r) - \log|f(0)|$, intégrée
+contre $\mu$. La page 118 écrit $|V(r)| \leq M(r)$ pour $V(r) \leq \log
+M(r)$, ce que la transcription note. Ces formules sont exactement celles
+que la page 130 invoque comme « majoration classique » pour $\sum
+|\lambda_i|^p$, et que la page 146 réutilise.}
+
+\pagerange{119}{121}
+\section*{Une fonction holomorphe sur $\ell^1$ (pages 119 à 121)}
+
+Pour $\lambda = (\lambda_i) \in \ell^1$ et $n \geq 0$, soit
+\[
+  \alpha_n(\lambda) = \sum_{i_1 < \cdots < i_n} \lambda_{i_1} \cdots \lambda_{i_n},
+  \qquad |\alpha_n(\lambda)| \leq \frac{\|\lambda\|_1^n}{n!} ;
+\]
+ce sont les coefficients de la fonction entière de genre zéro $f(z) =
+\prod(1 + \lambda_i z)$, et l'on obtient ainsi les coefficients de toutes
+les fonctions entières de genre zéro valant $1$ en $0$.
+
+\emph{Proposition.} Pour tout $\lambda \in \ell^1$ la série $S(\lambda) =
+\sum_{n \geq 0} n!\,\alpha_n(\lambda)$ converge absolument. La fonction $S$
+est holomorphe au voisinage de $0$, de rayon de convergence égal à $1$, et
+sa restriction à toute droite est entière.
+
+\emph{Corollaire.} Pour tout $\lambda \in \ell^1$, $\sqrt[n]{|\alpha_n(\lambda)|}
+= o(1/n)$ ; autrement dit les coefficients d'une fonction entière de genre
+zéro s'écrivent $\alpha_n = \varepsilon_n^n/n!$ avec $\varepsilon_n \to 0$. Car
+$\sqrt[n]{n!\,|\alpha_n(\lambda)|} \to 0$ exprime que $\sum n!\,\alpha_n(\lambda)
+z^n = \sum n!\,\alpha_n(\lambda z)$ converge pour tout $z$, et
+$\sqrt[n]{n!} \sim n/e$ (Stirling).\footnote{En termes classiques : une
+fonction de genre zéro est de type minimal pour l'ordre $1$, et le type
+d'une fonction d'ordre $1$ est $\limsup (n/e)\,|c_n|^{1/n}$.}
+
+Démonstration. On peut supposer les $\lambda_i > 0$ et décroissants. Soit
+$f(z) = \prod(1 + \lambda_i z) = \sum \alpha_n z^n$. Par l'inégalité de Cauchy,
+$\alpha_n \leq M(R)/R^n$ avec $M(R) = f(R) = \prod(1 + \lambda_i R)$, et
+$\prod_{i \geq n+2}(1 + \lambda_i R) \leq e^{\rho_{n+1}R}$ où $\rho_{n+1} =
+\sum_{k \geq n+2}\lambda_k$. Avec $R = (n+1)/\rho_{n+1}$ :
+\[
+  \alpha_n \leq \prod_{k=1}^{n+1}\Bigl(\frac{\rho_{n+1}}{n+1} + \lambda_k\Bigr) e^{n+1}
+  \leq \prod_{k=1}^{n+1}\Bigl(\frac{\rho_k}{k} + \lambda_k\Bigr) e^{n+1} .
+\]
+Or $\lambda_k = o(1/k)$ (lemme de la page 112) et $\rho_k/k = o(1/k)$, donc
+$\rho_k/k + \lambda_k \leq \varepsilon_k/k$ avec $\varepsilon_k \to 0$, et
+\[
+  n!\,\alpha_n \leq \frac{\varepsilon_1 \cdots \varepsilon_{n+1}}{n+1}\,e^{n+1},
+  \qquad
+  \sqrt[n]{n!\,\alpha_n} \to 0 ;
+\]
+la série converge absolument.\footnote{Les indices et exposants des pages
+120 et 121 oscillent entre $n$ et $n+1$ ; on a suivi $R = (n+1)/\rho_{n+1}$,
+qui donne $n+1$ facteurs.} Ensuite $S$ est holomorphe près de $0$ puisque
+$|\alpha_n(\lambda)| \leq \|\lambda\|_1^n$ ; mieux, la forme $n$-linéaire
+symétrique associée à $\alpha_n$ est
+\[
+  \alpha_n(\lambda^{(1)}, \ldots, \lambda^{(n)}) = \frac{1}{n!}
+  \sum_{i_1, \ldots, i_n \text{ distincts}} \lambda^{(1)}_{i_1} \cdots \lambda^{(n)}_{i_n},
+\]
+de norme $\leq 1/n!$, donc $\|n!\,\alpha_n\| \leq 1$ et le rayon $R_0$ de la
+série de Taylor de $S$ en $0$ est $\geq 1$. Enfin, pour $a^{(m)} \in \ell^1$
+valant $1/m$ sur les $m$ premiers indices et $0$ ailleurs, $\|a^{(m)}\|_1 = 1$
+et
+\[
+  n!\,\alpha_n(a^{(m)}) = \frac{m(m-1)\cdots(m-n+1)}{m^n}
+  = \Bigl(1 - \frac{1}{m}\Bigr)\cdots\Bigl(1 - \frac{n-1}{m}\Bigr) \to 1
+  \quad (m \to \infty),
+\]
+donc $S(a^{(m)}) \to \infty$ : $S$ n'est pas bornée sur la boule unité, le
+rayon est $\leq 1$, et $R_0 = R_1 = 1$.\footnote{$R_1$ est, dans les termes
+d'aujourd'hui, le \emph{rayon de bornitude} de $S$ en $0$ (Dineen) ; la
+proposition dit que $S$ est G-holomorphe sur $\ell^1$ tout entier, holomorphe
+au sens de Fréchet sur la boule unité ouverte, et non bornée sur cette
+boule --- l'exemple type de la distinction entre les deux rayons. On peut
+ajouter que $S(\lambda) = \int_0^\infty e^{-t}\prod_i(1 + \lambda_i t)\,dt$,
+transformée de Laplace du produit canonique, ce qui rend la convergence
+évidente à partir du type minimal ; la page ne le dit pas.}
+
+\pagerange{123}{125}
+\section*{Le déterminant d'une somme (pages 123 à 125)}
+
+Trois feuillets d'une main plus lente, antérieurs à la mise au net de la
+page 70, dont ils sont la source. La page 123 s'ouvre au milieu d'un
+énoncé : pour $u_1, \ldots, u_n$ à trace, en notant $|u|' = |u^{*}|$,
+\[
+  \|u_1 \wedge \cdots \wedge u_n\|_1^2 \leq \alpha_n(|u_1|, \ldots, |u_n|)\;
+  \alpha_n(|u_1|', \ldots, |u_n|'), \qquad
+  |\alpha_n(u_1, \ldots, u_n)| \leq \alpha_n(|u_1|, \ldots, |u_n|) .
+\]
+Avec $u_i = \sum_\alpha \lambda^{(i)}_\alpha\,\bar{a}^{(i)}_\alpha \otimes
+b^{(i)}_\alpha$ (Schmidt), on a $|u_i| = \sum \lambda^{(i)}_\alpha\,
+\bar{a}^{(i)}_\alpha \otimes a^{(i)}_\alpha$, $|u_i|' = \sum \lambda^{(i)}_\alpha\,
+\bar{b}^{(i)}_\alpha \otimes b^{(i)}_\alpha$, et
+\[
+  u_1 \wedge \cdots \wedge u_n = \frac{1}{n!}\sum_{\alpha_1, \ldots, \alpha_n}
+  \lambda^{(1)}_{\alpha_1} \cdots \lambda^{(n)}_{\alpha_n}\,
+  \overline{(a^{(1)}_{\alpha_1} \wedge \cdots \wedge a^{(n)}_{\alpha_n})} \otimes
+  (b^{(1)}_{\alpha_1} \wedge \cdots \wedge b^{(n)}_{\alpha_n}),
+\]
+d'où $\|u_1 \wedge \cdots \wedge u_n\|_1 \leq \frac{1}{n!}\sum \prod
+\lambda\,\|a_{\alpha_1} \wedge \cdots\|\,\|b_{\alpha_1} \wedge \cdots\|$,
+tandis que $\alpha_n(|u_1|, \ldots, |u_n|) = \frac{1}{n!}\sum \prod\lambda\,
+\|a_{\alpha_1} \wedge \cdots\|^2$ et de même avec les $b$ ; c'est
+Cauchy--Schwarz.
+
+\emph{Corollaire 1.} $|\alpha_n(u_1, \ldots, u_n)| \leq \|u_1 \wedge \cdots
+\wedge u_n\|_1 \leq \frac12\bigl(\alpha_n(|u_1|, \ldots, |u_n|) +
+\alpha_n(|u_1|', \ldots, |u_n|')\bigr)$.
+\emph{Corollaire 2.} $|\alpha_n(A+B)|^2 \leq \alpha_n(|A| + |B|)\;
+\alpha_n(|A|' + |B|')$ : on développe $\alpha_n(A+B) = \sum_k \binom{n}{k}
+\alpha_n(A, \ldots, A, B, \ldots, B)$, on majore chaque terme par la racine
+du produit des deux $\alpha_n$ correspondants, et Cauchy--Schwarz sur la
+somme en $k$ refait les deux $\alpha_n(|A| + |B|)$ et $\alpha_n(|A|' +
+|B|')$.
+\emph{Corollaire 3.} $|\det(1 + A + B)| \leq \frac12\bigl(\det(1 + |A| + |B|)
++ \det(1 + |A|' + |B|')\bigr)$.
+\emph{Corollaire 4.} $|\det(1 + A + B)| \leq \det(1 + |A|)\,\det(1 + |B|)$.
+Il suffit, par le corollaire 3 et $\det(1 + |A|) = \det(1 + |A|')$, de le
+prouver pour $A = H$ et $B = K$ hermitiens positifs ; alors $1 + H + K =
+(1 + H)\bigl(1 + (1+H)^{-1}K\bigr)$, donc $\det(1 + H + K) = \det(1 + H)\,
+\det(1 + H'K)$ avec $H' = (1+H)^{-1}$ hermitien positif de norme $\leq 1$, et
+il reste $\det(1 + H'K) \leq \det(1 + K)$, soit $\alpha_n(H'K) \leq
+\alpha_n(K)$ pour tout $n$, ce qui résulte de $\Lambda^n(H'K) =
+(\Lambda^n H')(\Lambda^n K)$ et $\|\Lambda^n(H'K)\|_1 \leq \|\Lambda^n H'\|\,
+\|\Lambda^n K\|_1 \leq \|K\|_1$-type, avec $\|\Lambda^n H'\| \leq \|H'\|^n
+\leq 1$.\footnote{La page 124 écrit $\det(1 + H + K) = \det(1 + L)(1 +
+K/(1+L))$ avec une lettre $R$ ou $H$ que la suite note $L$ et $H = 1/(1+L)$ ;
+on a renommé pour ne pas donner deux sens à $H$. Le corollaire 4 vaut sans
+$A$, $B$ hermitiens parce que $|\det(1+A+B)| \leq \det(1 + |A+B|)$ n'est
+pas utilisé : c'est le corollaire 3 qui fait le passage.}
+\emph{Corollaire 5.} $\det(1 + |A + B|) \leq \det(1 + |A|)\,\det(1 + |B|)$.
+Il contient le précédent, puisque $|\det(1 + A + B)| \leq \det(1 + |A + B|)$,
+et il en résulte : $|A + B| = U(A + B)$ pour une isométrie partielle $U$,
+et par le corollaire 4, $\det(1 + UA + UB) \leq \det(1 + |UA|)\det(1 + |UB|)$
+avec $|UA| = |A|$ sur le support, donc $\det(1 + |UA|) \leq \det(1 +
+|A|)$.\footnote{Le feuillet collé de la page 125 écrit « $U$ unitaire » et
+$|UA| = U|A|U^{-1}$, ce qui suppose $U$ unitaire ; pour une isométrie
+partielle $|UA| = (A^{*}U^{*}UA)^{1/2} \leq |A|$, ce qui suffit. Le
+corollaire 5 est l'inégalité de Seiler--Simon (1975) déjà rencontrée à la
+page 71 ; les deux démonstrations sont différentes.}
+
+\pagerange{126}{131}
+\section*{Le théorème sur les classes $\mathcal{S}_p(H)$, $0 < p \leq \infty$ (pages 126 à 131)}
+
+Quatorze pages d'un seul tenant, l'état ancien de la théorie, avant le
+lemme de Weyl : un énoncé en trois points et sa démonstration, numérotée
+(1) à (14).
+
+\emph{Théorème.} 1) Pour $0 < p \leq \infty$, $\mathcal{S}_p(H)$ est un idéal
+bilatère de $L(H)$, stable par $A \mapsto A^{*}$ :
+\[
+  \|A\|_p = \|A^{*}\|_p, \qquad \|BA\|_p \leq \|B\|\,\|A\|_p, \qquad
+  \|AB\|_p \leq \|B\|\,\|A\|_p \qquad (A \in \mathcal{S}_p(H),\ B \in L(H)) .
+\]
+Si $1 \leq p \leq \infty$, $\|\cdot\|_p$ est une norme sur $\mathcal{S}_p(H)$ :
+$\|A + B\|_p \leq \|A\|_p + \|B\|_p$, et $\mathcal{S}_p(H)$ est complet. Si
+$0 < p \leq 1$, $S_p(A) = \|A\|_p^p$ vérifie
+\[
+  S_p(A + B) \leq S_p(A) + S_p(B),
+\]
+et pour la distance invariante $S_p(A - B)$, $\mathcal{S}_p(H)$ est un espace
+vectoriel topologique métrisable complet, non localement convexe si $p < 1$
+et $\dim H = \infty$.
+2) Si $A \in \mathcal{S}_p(H)$, $0 < p < \infty$, la suite $(\lambda_i)$ de
+ses valeurs propres est de puissance $p$-ième sommable et
+\[
+  \sum |\lambda_i|^p \leq S_p(A) .
+\]
+$S_p$ et $\|\cdot\|_p$ sont croissantes sur les hermitiens positifs : $0 \leq
+H \leq K$ entraîne $S_p(H) \leq S_p(K)$.
+3) Si $0 < p, q, r \leq \infty$ et $\frac1p + \frac1q \geq \frac1r$, alors
+$A \in \mathcal{S}_p(H)$, $B \in \mathcal{S}_q(H)$ entraînent $AB \in
+\mathcal{S}_r(H)$ et
+\[
+  \|AB\|_r \leq \|A\|_p\,\|B\|_q .
+\]
+\footnote{Les trois points sont aujourd'hui classiques : pour $p \geq 1$,
+Schatten et von Neumann ; pour $p < 1$, la sous-additivité de $S_p$ et
+l'inégalité de Hölder sont attribuées à McCarthy (1967) et Rotfel'd (1967),
+l'inégalité de Weyl du point 2 à Weyl (1949). Tout est ici démontré, par
+une méthode qui n'est celle d'aucun de ces auteurs. Les quatre lignes de
+crayon en tête de la page 126 --- « le déterminant de Fredholm »,
+« notation $\mathcal{L}_0$ », « sont connues » --- et la marge « ② Dual de
+$\mathcal{L}^p$ ; réflexivité » annoncent un second théorème qui n'est pas
+ici.}
+
+\emph{Démonstration de 1).} La première formule est évidente, $|A|$ et
+$|A^{*}|$ ayant les mêmes valeurs propres. La seconde est un cas particulier
+de 3), mais se prouve directement : si $(k_i)$ et $(h_i)$ sont les valeurs
+propres décroissantes de $|BA|$ et $|A|$, $k_i \leq \|B\|\,h_i$ pour tout $i$.
+L'inégalité triangulaire pour $p \geq 1$ se déduit de 3), démontré
+indépendamment : si $\frac1p + \frac1{p'} = 1$ et $\|B\|_{p'} \leq 1$, alors
+$\|AB\|_1 \leq \|A\|_p$, donc $|\operatorname{Tr} AB| \leq \|A\|_p$ ; et
+l'inégalité $\sup_{\|B\|_{p'} \leq 1} |\operatorname{Tr} AB| \leq \|A\|_p$
+est une égalité, car avec $U$ isométrie partielle telle que $UA = |A|$ et,
+par Hölder classique sur la décomposition spectrale de $|A|$, un hermitien
+positif $H \in \mathcal{S}_{p'}$ de norme $\leq 1$ avec $\operatorname{Tr}(H|A|)
+= \|A\|_p$, l'opérateur $B = HU$ a $\|B\|_{p'} \leq 1$ et $\operatorname{Tr}
+AB = \operatorname{Tr}(HUA) = \|A\|_p$. Ainsi
+\[
+  \|A\|_p = \sup_{\|B\|_{p'} \leq 1} |\operatorname{Tr} AB| \qquad (1 \leq p \leq \infty),
+\]
+sup de semi-normes, donc semi-norme.\footnote{La page 128 écrit
+$\operatorname{Tr}(HUA)$ puis « $B = UA$ » ou « $HU$ » ; c'est $HU$ que
+l'argument demande, et $\operatorname{Tr}(A\,HU) = \operatorname{Tr}(HUA)$
+par cyclicité.} Une telle démonstration n'est plus praticable pour $p < 1$,
+et l'on prouve la sous-additivité de $S_p$ « par voie analytique », grâce
+au
+
+\emph{Lemme 1.} Soit $(\alpha_i)$ une suite de nombres $\geq 0$, $0 < p <
+1$, et $f(z) = \prod_i (1 + \alpha_i z)$. Alors
+\[
+  \sum_i \alpha_i^p = \frac{p\sin\pi p}{\pi}\int_0^\infty \frac{\log f(v)}{v^{1+p}}\,dv,
+\]
+les deux membres étant simultanément finis ou infinis.\footnote{Non démontré
+sur la page ; c'est le calcul $\int_0^\infty \log(1 + \alpha v)\,v^{-1-p}\,dv
+= \alpha^p\int_0^\infty \log(1+s)\,s^{-1-p}\,ds = \frac{\alpha^p}{p}
+\int_0^\infty \frac{ds}{(1+s)s^p} = \frac{\alpha^p}{p}\,\frac{\pi}{\sin\pi p}$,
+sommé sur $i$ par convergence monotone.}
+
+\emph{Corollaire.} Pour $A \in \mathcal{S}_1(H)$, soit $M_A(v) = \sup_{|z| =
+v} |\det(1 + zA)|$. Pour $0 < p < 1$,
+\[
+  S_p(A) = \frac{p\sin\pi p}{\pi}\int_0^\infty \frac{\log M_{|A|}(v)}{v^{1+p}}\,dv,
+\]
+en prenant $f(z) = \det(1 + z|A|)$, dont $M_{|A|}(v) = f(v)$.
+
+Pour la sous-additivité : $S_p(A + B) = S_p(|A + B|)$ est donné par cette
+intégrale, et $M_{|A+B|}(v) = \det(1 + v|A + B|) \leq \det(1 + v|A|)\det(1 +
+v|B|) = M_{|A|}(v)\,M_{|B|}(v)$ par le corollaire 5 de la page 124 ; on
+intègre et l'on réapplique le corollaire à $A$ et $B$.\footnote{C'est,
+mot pour mot, la déduction de l'inégalité de McCarthy--Rotfel'd à partir de
+l'inégalité de Seiler--Simon --- dans l'ordre inverse de la littérature, qui
+déduit la seconde de la première. Pour $A$, $B \notin \mathcal{S}_1$ le
+corollaire s'applique par troncature.} Les assertions topologiques sont des
+conséquences faciles des formules.
+
+\emph{Démonstration de 2).} « Je ne connais qu'une méthode analytique. »
+Pour $A$ compact et $0 < p < \infty$, posons $s_p(A) = \sum |\lambda_i|^p$ ;
+on a $s_p(A) = s_{p/n}(A^n)$ pour tout entier $n > 0$. Si $p < 1$, la
+majoration classique des inverses des modules des zéros de la fonction
+entière $\det(1 - zA)$ --- ce sont les $1/\lambda_i$ --- par la formule de
+Jensen donne
+\[
+  s_p(A) \leq p^2\int_0^\infty \frac{\log M_A(r)}{r^{p+1}}\,dr
+  \leq p^2\int_0^\infty \frac{\log M_{|A|}(v)}{v^{p+1}}\,dv
+  = \frac{p\pi}{\sin p\pi}\,S_p(A),
+\]
+puisque $M_A \leq M_{|A|}$ par $|\det(1 + zA)| \leq \det(1 + |z||A|)$, et par
+le corollaire.\footnote{La « majoration classique » est celle des pages 115
+à 118 : $\sum r_\nu^{-p} = p\int n(r)\,r^{-p-1}\,dr$, et $\int_0^r n(t)\,dt/t
+\leq \log M(r)$ par Jensen, d'où le facteur $p^2$ après une seconde
+intégration par parties.} Le facteur $\frac{p\pi}{\sin p\pi}$ est $> 1$ mais
+tend vers $1$ quand $p \to 0$. Pour $p$ quelconque, soit $n$ avec $p/n < 1$ :
+\[
+  s_p(A) = s_{p/n}(A^n) \leq \frac{\frac{p}{n}\pi}{\sin\frac{p}{n}\pi}\,
+  S_{p/n}(A^n) \leq \frac{\frac{p}{n}\pi}{\sin\frac{p}{n}\pi}\,S_p(A),
+\]
+car $\|A^n\|_{p/n} \leq \|A\|_p^n$ par 3) généralisé à $n$ facteurs, soit
+$S_{p/n}(A^n) \leq S_p(A)$ ; et $n \to \infty$ donne l'inégalité. La
+monotonie sur les positifs vient de ce que $0 \leq H \leq K$ entraîne
+$\lambda_i(H) \leq \lambda_i(K)$ pour tout $i$, par la caractérisation
+extrémale de Fischer.
+
+\pagerange{132}{135}
+\section*{Hölder pour les exposants dyadiques, et le lemme (pages 132 à 135)}
+
+\emph{Démonstration de 3).} C'est la plus difficile. On commence par une
+preuve directe et très simple du cas $p, q \geq 1$, $r = 1$ --- qui
+s'applique sans changement à une trace au sens de von Neumann sur une
+algèbre auto-adjointe, les opérateurs « de puissance $p$-ième sommable »
+étant les $A$ avec $\tau(|A|^p) < \infty$.\footnote{Ce que la page 33
+réalise en trois lignes, dans le second état.} On prouve d'abord, pour
+$2^n$ opérateurs compacts $A_1, \ldots, A_{2^n}$, $n \geq 1$,
+\[
+  \|A_1 A_2 \cdots A_{2^n}\|_1 \leq \|A_1\|_{2^n}\,\|A_2\|_{2^n} \cdots \|A_{2^n}\|_{2^n},
+\]
+par récurrence sur $n$ : pour $n = 1$ c'est $\|A_1A_2\|_1 \leq
+\|A_1\|_2\|A_2\|_2$ ; ensuite, groupant les facteurs deux par deux et
+appliquant l'hypothèse aux $2^{n-1}$ produits, on est ramené à $\|AB\|_{2^{n-1}}
+\leq \|A\|_{2^n}\|B\|_{2^n}$. Or
+\[
+  \|AB\|_{2^{n-1}}^{2^{n-1}} = \operatorname{Tr}\bigl[(ABB^{*}A^{*})^{2^{n-2}}\bigr]
+  = \operatorname{Tr} C = \operatorname{Tr} C', \qquad
+  C' = (A^{*}A)(BB^{*})(A^{*}A)\cdots(BB^{*}),
+\]
+$C'$ ayant $2^{n-1}$ facteurs, obtenu par cyclicité ; et par l'hypothèse
+de récurrence, $|\operatorname{Tr} C'| \leq \|C'\|_1 \leq \bigl(\|A^{*}A\|_{2^{n-1}}
+\|BB^{*}\|_{2^{n-1}}\bigr)^{2^{n-2}} = (\|A\|_{2^n}\|B\|_{2^n})^{2^{n-1}}$,
+puisque $\|A^{*}A\|_{2^{n-1}} = \|A\|_{2^n}^2$. Une note de bas de page
+observe que ce résultat suffirait à démontrer directement la formule 3) dans
+le cas général.
+
+Soient $\frac1p + \frac1q = 1$, $A \in \mathcal{S}_p$, $B \in \mathcal{S}_q$,
+qu'on peut supposer de rang fini. Écrivons $A = UH$, $B = KV$ avec $U$, $V$
+partiellement isométriques, et pour $\alpha + \beta = 2^n$, $h = H^{1/\alpha}$,
+$k = K^{1/\beta}$ : $AB = Uh^\alpha k^\beta V$ et
+\[
+  \|AB\|_1 \leq \|h^\alpha k^\beta\|_1 \leq \|h\|_{2^n}^\alpha\,\|k\|_{2^n}^\beta
+  = (\operatorname{Tr} H^{\lambda})^{1/\lambda}(\operatorname{Tr} K^{\mu})^{1/\mu},
+  \qquad \lambda = \frac{2^n}{\alpha},\ \mu = \frac{2^n}{\beta},
+\]
+$\frac1\lambda + \frac1\mu = 1$. L'inégalité vaut pour tous les couples
+d'exposants conjugués dont les inverses sont des multiples de $2^{-n}$, et
+par densité et continuité de $p \mapsto \|H\|_p$ pour tous : $\|AB\|_1 \leq
+\|A\|_p\|B\|_q$. Une note interlinéaire ajoute la généralisation $\|A_1
+\cdots A_n\|_1 \leq \prod \|A_i\|_{p_i}$ si $\sum 1/p_i = 1$, par le même
+argument avec $n$ exposants dyadiques.\footnote{La page 134 invoque « Lemme
+1 » pour la formule à $2^n$ facteurs, qui n'a pas de numéro ; et elle écrit
+$(\operatorname{Tr} H^{p'})^{1/p'}$ pour $K$. On a corrigé les lettres. La
+réduction au rang fini n'est pas justifiée ; elle se fait par troncature
+spectrale, $\|AB\|_1$ étant limite croissante des $\|P_nAB Q_n\|_1$.} On en
+conclut, pour $p \geq 1$, la formule de dualité $\|A\|_p = \sup_{\|B\|_{p'}
+\leq 1} |\operatorname{Tr} AB|$ et l'inégalité triangulaire.
+
+\emph{Lemme 2.} Soient $A$, $B \in \mathcal{S}_{2m}(H)$, $H = A^{*}A$, $K =
+B^{*}B$, $L = (AB)^{*}(AB)$, et $m$, $n$ des entiers $\geq 1$. Alors $L^m$,
+$H^m$, $K^m$ sont à trace et
+\[
+  \alpha_n(L^m) \leq \alpha_n(H^m)\,\alpha_n(K^m) .
+\]
+En remplaçant $A$, $B$ par $\Lambda^n A$, $\Lambda^n B$ --- ce qui remplace
+$H$, $K$, $L$ par $\Lambda^n H$, $\Lambda^n K$, $\Lambda^n L$ et $\alpha_n$
+par $\operatorname{Tr}$ --- on est ramené à $n = 1$ :
+\[
+  \operatorname{Tr}\bigl[(ABB^{*}A^{*})^m\bigr] \leq
+  \bigl(\|A^{*}A\|_m\bigr)^m\bigl(\|B^{*}B\|_m\bigr)^m
+  = \operatorname{Tr}(H^m)\,\operatorname{Tr}(K^m) .
+\]
+Or le premier membre est la trace du produit de $2m$ facteurs $(A^{*}A)(BB^{*})
+\cdots(BB^{*})$, majorée par sa norme trace, donc par $\bigl(\|A^{*}A\|_{2m}
+\|BB^{*}\|_{2m}\bigr)^m$ par Hölder à $2m$ facteurs, et $\|A^{*}A\|_{2m} \leq
+\|A^{*}A\|_m$, $\|BB^{*}\|_{2m} = \|B^{*}B\|_{2m} \leq \|B^{*}B\|_m$.
+
+\pagerange{136}{139}
+\section*{Hölder en toute généralité (pages 136 à 139)}
+
+Soient $A \in \mathcal{S}_p$, $B \in \mathcal{S}_q$ avec $\frac1p + \frac1q
+\geq \frac1r$, $p$ et $q$ finis --- sinon c'est 1) --- et même $\frac1p +
+\frac1q = \frac1r$, puisque $\|A\|_r$ décroît avec $r$. Soit $m$ un entier
+avec $p, q \leq 2m$, et $L = (AB)^{*}(AB)$, $H = A^{*}A$, $K = B^{*}B$ ; alors
+$r \leq m$ et $S_r(AB) = S_{r/2}(L) = S_{r/2m}(L^m)$, de sorte que, avec
+$\lambda(x) = \pi/\sin\pi x$ et le corollaire du lemme 1,
+\[
+  S_r(AB) = \frac{r/2m}{\lambda(r/2m)}\int_0^\infty
+  \frac{\log M_{L^m}(\rho)}{\rho^{1 + r/2m}}\,d\rho .
+\]
+Or $M_{L^m}(\rho) = \sum_n \alpha_n(L^m)\rho^n \leq \sum_n \alpha_n(H^m)\,
+\alpha_n(K^m)\,\rho^n$ par le lemme 2, et avec $\frac{r}{p} + \frac{r}{q} = 1$,
+\[
+  \sum_n \alpha_n(H^m)\alpha_n(K^m)\rho^{n\frac rp + n\frac rq}
+  \leq \Bigl(\sum_n \alpha_n(H^m)\rho^{n\frac rp}\Bigr)\Bigl(\sum_n \alpha_n(K^m)\rho^{n\frac rq}\Bigr)
+  = M_{H^m}(\rho^{r/p})\,M_{K^m}(\rho^{r/q}),
+\]
+d'où
+\[
+  \frac{\lambda(r/2m)}{r/2m}\,S_r(AB) \leq
+  \int_0^\infty \frac{\log M_{H^m}(\rho^{r/p})}{\rho^{1 + r/2m}}\,d\rho
+  + \int_0^\infty \frac{\log M_{K^m}(\rho^{r/q})}{\rho^{1 + r/2m}}\,d\rho .
+\]
+Le changement de variable $\sigma = \rho^{r/p}$, $\frac{d\rho}{\rho} =
+\frac{p}{r}\frac{d\sigma}{\sigma}$, transforme la première intégrale en
+$\frac{p}{r}\int_0^\infty \log M_{H^m}(\sigma)\,\sigma^{-1-p/2m}\,d\sigma =
+\frac{p}{r}\,\frac{\lambda(p/2m)}{p/2m}\,S_{p/2m}(H^m) = \frac{\lambda(p/2m)}{r/2m}
+\,S_p(A)$, et de même pour la seconde ; donc
+\begin{gather*}
+  \lambda(r/2m)\,S_r(AB) \leq \lambda(p/2m)\,S_p(A) + \lambda(q/2m)\,S_q(B),
+  \qquad\text{soit} \\
+  S_r(AB) \leq \frac{\sin\pi\frac{r}{2m}}{\sin\pi\frac{p}{2m}}\,S_p(A)
+  + \frac{\sin\pi\frac{r}{2m}}{\sin\pi\frac{q}{2m}}\,S_q(B),
+\end{gather*}
+ce qui donne déjà la finitude de $S_r(AB)$. Faisant $m \to \infty$ :
+\[
+  S_r(AB) \leq \frac{r}{p}\,S_p(A) + \frac{r}{q}\,S_q(B) .
+\]
+« C'est une inégalité remarquable, mais n'est pas celle que nous
+cherchons. » On y remplace $A$ par $\lambda A$ et $B$ par $\mu B$, $\lambda,
+\mu \geq 0$ :
+\[
+  (\lambda\mu)^r S_r(AB) \leq \frac{\lambda^p}{p}\,S_p(A) + \frac{\mu^q}{q}\,S_q(B),
+\]
+et avec $a = S_p(A)$, $b = S_q(B)$, $c = S_r(AB)$, $x = \lambda^p$, $y =
+\mu^q$, $\alpha = r/p$, $\beta = r/q$, $\alpha + \beta = 1$ :
+\[
+  c \leq \inf_{x, y \geq 0} \frac{\alpha a x + \beta b y}{x^\alpha y^\beta}
+  = \inf_{x^\alpha y^\beta = 1} (\alpha a x + \beta b y) .
+\]
+L'infimum est atteint, et au point critique $ax = by$, d'où $x = (b/a)^\beta$
+et le minimum $ax = a^\alpha b^\beta$. Donc $S_r(AB) \leq S_p(A)^{r/p}
+S_q(B)^{r/q}$, c'est-à-dire $\|AB\|_r \leq \|A\|_p\|B\|_q$, ce qui achève la
+démonstration.\footnote{C'est l'inégalité de Young pondérée, $\alpha a x +
+\beta b y \geq a^\alpha b^\beta x^\alpha y^\beta$, obtenue par un multiplicateur
+de Lagrange. La note interlinéaire de la page 137 relève que l'inégalité
+intermédiaire donne déjà $S_r(AB) < \infty$, c'est-à-dire l'appartenance
+$AB \in \mathcal{S}_r$.}
+
+\pagerange{141}{142}
+\section*{Convergence dans $\mathcal{S}_p$ (pages 141 et 142)}
+
+\emph{Proposition.} Pour qu'une suite $(H_i)$ d'hermitiens de
+$\mathcal{S}_p(H)$, $0 < p < \infty$, converge vers $H_0 \in \mathcal{S}_p(H)$,
+il faut et il suffit que
+1°) $\|H_i\|_p \to \|H_0\|_p$, ou seulement $\limsup \|H_i\|_p \leq
+\|H_0\|_p$ ;
+2°) pour tout $\lambda \neq 0$ du spectre de $H_0$ et tout $\alpha > 0$ tel
+que $[\lambda - \alpha, \lambda + \alpha]$ ne contienne pas d'autre valeur
+spectrale de $H_0$ et que $\lambda \pm \alpha$ ne soient dans le spectre
+d'aucun $H_i$, le projecteur spectral $h_i$ de $H_i$ sur cet intervalle
+finit par avoir la dimension de celui de $H_0$, $h_0$, et $h_i \to h_0$ ---
+la topologie n'a pas à être précisée, toutes coïncidant sur les projecteurs
+de rang fini borné.\footnote{L'énoncé est correct : nécessité par la
+convergence en norme et la continuité des projecteurs de Riesz ;
+suffisance parce que, pour $\delta > 0$, les valeurs propres de $H_i$ dans
+les intervalles autour des $\lambda$ avec $|\lambda| > \delta$ convergent
+vers celles de $H_0$ avec leurs vecteurs propres, tandis que 1°) force la
+somme des $|\mu|^p$ sur les autres valeurs propres de $H_i$ à tendre vers
+$\sum_{|\lambda| \leq \delta} |\lambda|^p$, petite ; la sous-additivité de
+$S_p$ conclut. La page écrit « tout $\lambda$ du spectre » ; pour $\lambda =
+0$ l'intervalle n'est pas isolé, et c'est 1°) qui en tient lieu.}
+
+\emph{Corollaire 1.} $H_i \to H_0$ dans $\mathcal{S}_p$ si et seulement si
+$\|H_i\|_p \to \|H_0\|_p$ et $H_i \to H_0$ en norme d'opérateur.
+\emph{Corollaire 2.} $A \mapsto |A|^r$ est continue de $\mathcal{S}_p$ dans
+$\mathcal{S}_{p/r}$, comme composée de $A \mapsto A^{*}A$, continue de
+$\mathcal{S}_p$ dans $\mathcal{S}_{p/2}$ par Hölder, et de $H \mapsto H^{r/2}$
+sur le cône positif de $\mathcal{S}_{p/2}$, qui vérifie les deux conditions
+de la proposition : la première trivialement, la seconde parce que les
+projecteurs spectraux de $H^{r/2}$ sont ceux de $H$.
+
+\emph{Remarque 1.} Si $1 \leq p \leq 2$, une suite d'hermitiens de
+$\mathcal{S}_p$ converge dès qu'elle converge faiblement avec convergence
+des normes. Est-ce vrai pour tout $p < \infty$ ? Uniforme convexité de
+$\mathcal{S}_p$ ?\footnote{Oui, pour $1 < p < \infty$ : $\mathcal{S}_p$ est
+uniformément convexe (McCarthy 1967, inégalités de Clarkson--McCarthy),
+donc a la propriété de Kadec--Klee que demande la remarque ; pour $p = 1$,
+$\mathcal{S}_1$ a encore la propriété de Kadec--Klee (Arazy 1981) sans être
+uniformément convexe.}
+\emph{Remarque 2.} Pour $H$, $K$ hermitiens positifs, $S_p(|H^r - K^r|^{1/r})$
+est-elle fonction croissante de $r$ ? Il suffirait de le savoir pour $r <
+1$, et cela donnerait
+\[
+  \bigl\|\,|H^r - K^r|^{1/r}\,\bigr\| \leq \|H - K\| ,
+\]
+et une précision notable du corollaire 1.\footnote{La réponse est oui pour
+$0 < r \leq 1$ : $\|\,|H^r - K^r|\,\|_{p/r} \leq \|\,|H - K|^r\,\|_{p/r}$, soit
+$S_{p/r}(H^r - K^r) \leq S_p(H - K)$, est l'inégalité de Birman, Koplienko et
+Solomyak (1975), valable pour toute norme unitairement invariante ; la
+monotonie en $r$ sur $]0, 1]$ s'en déduit en l'appliquant à $H^{r'}$,
+$K^{r'}$. L'inégalité en norme d'opérateur, $\|H^r - K^r\| \leq \|H -
+K\|^r$, est celle de Powers et Størmer (1970) pour $r = 1/2$ et de
+Kittaneh en général.}
+
+\pagerange{143}{147}
+\section*{Les inégalités de Ky Fan, et les petites valeurs singulières (pages 143 à 147)}
+
+\emph{Les deux inégalités.} Pour $u : E \to F$, $v : F \to G$ compacts entre
+espaces de Hilbert,
+\[
+  s_{m+n-1}(vu) \leq s_m(v)\,s_n(u), \qquad s_{m+n-1}(u+v) \leq s_m(u) + s_n(v) .
+\]
+Par le minimax, $s_k(w) = \inf_{\dim E_{k-1} = k-1}\sup_{x \perp E_{k-1}, \|x\|
+\leq 1}\|wx\|$. Soit $E_{n-1} \subset E$ réalisant $s_n(u)$ et $F_{m-1}
+\subset F$ réalisant $s_m(v)$, et $H = u^{*}(F_{m-1})$. Pour $x \perp H$ et
+$x \perp E_{n-1}$ on a $ux \perp F_{m-1}$, donc $\|vux\| \leq s_m(v)\|ux\|
+\leq s_m(v)s_n(u)\|x\|$ ; et $H + E_{n-1}$ est de dimension $\leq m + n - 2$,
+d'où la première inégalité. La seconde : pour $x \perp E_{n-1} + F_{m-1}$
+--- ici $v : E \to F$ aussi, et $F_{m-1} \subset E$ réalise $s_m(v)$ ---,
+$\|(u+v)x\| \leq (s_n(u) + s_m(v))\|x\|$.\footnote{La page 143 écrit
+« $\operatorname{codim} H \wedge E_{n-1} \geq \operatorname{cod} H +
+\operatorname{cod} E_{n-1}$ » là où l'argument demande $\leq$, et un $\bar{u}$
+pour $u^{*}$ ; la transcription note les deux. Ce sont les inégalités de
+Ky Fan (1951), que la page 38 cite.}
+
+Sous un trait, une question au crayon : peut-on avoir $\limsup
+|\lambda_i(u)|/s_i(u) = +\infty$ ? Une majoration $|\lambda_i(u)| \leq
+s_{i/2}(u)$ « ou analogue » lui paraît invraisemblable.\footnote{Elle l'est.
+Sur $\mathbf{C}^n$, le décalage cyclique pondéré $e_i \mapsto w_i e_{i+1}$,
+$e_n \mapsto w_n e_1$, a pour valeurs singulières les $w_i$ et pour valeurs
+propres les $n$ racines $n$-ièmes de $w_1 \cdots w_n$, toutes de module
+$(w_1 \cdots w_n)^{1/n}$ ; avec $w = (1, \varepsilon, \varepsilon)$, $|\lambda_3|
+= \varepsilon^{2/3} > s_2 = \varepsilon$, ce qui exclut $|\lambda_i| \leq
+s_{\lceil i/2\rceil}$ ; et une somme directe de tels blocs, de tailles
+croissantes et d'échelles décroissantes, donne $\limsup |\lambda_i|/s_i =
++\infty$ avec $u$ compact. Ce que Weyl laisse, et qui est optimal, ce sont
+les majorations des sommes et des produits partiels.}
+
+Les pages 144 et 145, au crayon pâle, reprennent la proposition pour un
+espace de Banach $E$ --- si $u_i \to u$ dans $L_0(E)$, les spectres et les
+projecteurs spectraux convergent --- et le corollaire 2 sous la forme
+$u \mapsto |u|^r$ continue de $\mathcal{S}_p(E,F)$ dans $\mathcal{S}_{p/r}(E)$,
+avec une question : $\sigma \mapsto \sigma^{r/2}$ est-elle continue de
+$L(E)^{+}$ dans $L(E)$, et avec quelles inégalités précises ?\footnote{Oui :
+c'est la continuité de $\sigma \mapsto \sigma^{s}$ pour $0 < s < 1$ sur le cône
+positif, en norme d'opérateur, conséquence de l'inégalité de Powers--Størmer
+citée à la remarque 2 ; en 1953 le calcul fonctionnel continu la donne
+sur les bornés.} Un \emph{corollaire 2} affirme que pour $0 < p \leq 1$
+une suite d'hermitiens $u_i \to u$ converge dans $\mathcal{S}_p(E)$ dès
+qu'elle converge faiblement et que les normes convergent ; la page 145
+demande dans quels cas $\mathcal{S}_p(E,F)$ est uniformément convexe pour
+$0 < p < \infty$ --- « pas d'importance » ---, ramène la continuité de
+$H \mapsto H^r$ au cas $0 < r < 1$, et reformule la remarque 2 : prouver que
+$S_{p/r}(H^r - K^r) = S_p(|H^r - K^r|^{1/r})$ croît avec $r$, pour $p$
+quelconque ou déjà pour $p = 1$.\footnote{Ce corollaire 2 pour $p \leq 1$ est
+douteux tel quel : la convergence faible et celle des quasi-normes ne
+donnent pas la convergence en norme d'opérateur, et l'énoncé de la page 141
+demande cette dernière. Pour $p < 1$, $\mathcal{S}_p$ n'est pas localement
+convexe et la question de la convexité uniforme n'a pas de sens ; la page
+le dit à sa façon.}
+
+\emph{Théorème.} Si $A_i \to A$ dans $\mathcal{S}_p(H)$, alors la suite des
+valeurs singulières $\hat{A}_i = (s_\nu(A_i))_\nu$ converge vers $\hat{A}$
+dans $\ell^p$.\footnote{Ni $\hat{A}$ ni l'espace $\Sigma_p$ de la page ne
+sont définis ; on les lit ainsi. Pour $p \geq 1$ c'est l'inégalité de
+Mirsky (1960), $\|(s_\nu(A) - s_\nu(B))\|_N \leq \|A - B\|_N$ pour toute
+norme unitairement invariante ; pour $p < 1$ l'inégalité $\sum |s_\nu(A) -
+s_\nu(B)|^p \leq S_p(A - B)$ est vraie aussi, et le lemme ci-dessous est ce
+qui en tient lieu ici.} Cela résulte du
+
+\emph{Lemme.} Pour tout $\varepsilon > 0$ il existe $\rho > 0$ et $i_0$ tels
+que $\sum_{s_\nu(A_i) \leq \rho} s_\nu(A_i)^p \leq \varepsilon$ pour $i \geq
+i_0$.
+
+Soit $\omega$ la fonction convexe égale à $e^{pt}$ pour $t \leq \log\rho$ et
+à sa tangente au-delà, $\omega(t) = \rho^p\bigl(1 + p(t - \log\rho)\bigr)$ ;
+la majorisation de Weyl donne $\sum_\nu \omega(\log s_\nu(A_i)) \leq \sum_\nu
+\omega(\log s_\nu(|A_i|))$, ce qui permet de supposer $A_i \geq 0$, et
+$\sum_\nu \omega(\log s_\nu)$ se lit
+\[
+  \sum_{s_\nu \leq \rho} s_\nu^p + \rho^p\sum_{s_\nu > \rho} \log\Bigl(e\,\frac{s_\nu^p}{\rho^p}\Bigr) .
+\]
+\footnote{« $\log e(x)^p$ » est sa façon d'écrire $\log(e\,x^p)$, ce que la
+première expression de $\omega$ confirme. La réduction à $A_i \geq 0$ est
+la ligne la moins lisible de la page ; l'inégalité entre les sommes pour
+$A_i$ et $|A_i|$ est en fait une égalité, $s_\nu(A_i) = s_\nu(|A_i|)$, et le
+lemme se démontre tel quel pour $A_i$ quelconques.} Il suffit alors de
+montrer :
+a) $\rho^p\sum_{s_\nu > \rho} \log(e\,s_\nu^p/\rho^p) \to 0$ quand $\rho \to 0$,
+pour la suite fixe $(s_\nu) = \hat{A}$ ; b) $\sum_{s_\nu(A_i) \leq \rho}
+s_\nu(A_i)^p \to \sum_{s_\nu \leq \rho} s_\nu^p$ quand $i \to \infty$, à $\rho$
+fixé.
+
+\emph{Preuve de a).} Soit $n(r)$ le nombre des $\nu$ avec $s_\nu > r$ ; par
+l'intégration de Stieltjes des pages 115 et 116, avec $g(r) = \log(e\,r^p/
+\rho^p)$, $g(\rho) = 1$, $g'(r) = p/r$ :
+\[
+  \rho^p\sum_{s_\nu > \rho} \log\Bigl(e\,\frac{s_\nu^p}{\rho^p}\Bigr)
+  = \rho^p\Bigl[-n(r)\,g(r)\Bigr]_{\rho+0}^{\infty} + p\rho^p\int_\rho^\infty \frac{n(r)}{r}\,dr
+  = \rho^p\,n(\rho) + p\rho^p\int_\rho^{s_1} \frac{n(r)}{r}\,dr .
+\]
+Comme $\sum s_\nu^p < \infty$, on sait que $\rho^p n(\rho) \to 0$ et que
+$\int_0^\infty n(r)\,r^{-1-p}\,dr < \infty$. Pour le second terme, on coupe
+en $\delta$ : sur $[\rho, \delta]$, $\rho^p/r \leq (\rho\delta)^p\,r^{-1-p}$,
+donc $\rho^p\int_\rho^\delta n(r)\,dr/r \leq (\rho\delta)^p\int_0^\infty n(r)\,
+r^{-1-p}\,dr \to 0$ ; sur $[\delta, s_1]$, $\rho^p\int_\delta^{s_1} n(r)\,dr/r
+\leq \rho^p\,n(\delta)\log(s_1/\delta) \to 0$.\footnote{La page 147 écrit
+« $p\rho^p\int_\rho^\infty n(r)/r\,dr < p\rho^p\int_0^\infty n(r)/r\,dr \to 0$ »,
+ce qui supposerait $\int_0 n(r)\,dr/r$ fini ; or $n(r) \to \infty$ quand $r \to
+0$ dès que $A$ est de rang infini, et l'intégrale diverge. La coupure en
+$\delta$ répare l'argument sans en changer l'idée. Un bloc de quatre lignes,
+barré, tentait une autre voie par $\sum \|A_{i+1} - A_i\|_p < \infty$.}
+
+\emph{Preuve de b).} On a
+\[
+  \sum_{s_\nu(A_i) \leq \rho} s_\nu(A_i)^p = S_p(A_i) - \sum_{s_\nu(A_i) > \rho} s_\nu(A_i)^p
+  \longrightarrow S_p(A) - \sum_{s_\nu > \rho} s_\nu^p = \sum_{s_\nu \leq \rho} s_\nu^p,
+\]
+pour $\rho$ hors de l'ensemble des $s_\nu$, puisque $S_p(A_i) \to S_p(A)$ et
+que les $s_\nu(A_i)$ en nombre fini au-dessus de $\rho$ convergent vers les
+$s_\nu$ par convergence en norme ; il suffit alors de prendre $\rho$ avec
+$\sum_{s_\nu \leq \rho} s_\nu^p < \varepsilon$, puis $i$ assez grand. Le
+théorème en résulte : les $s_\nu(A_i)$ convergent terme à terme vers les
+$s_\nu$, et les queues sont uniformément petites dans $\ell^p$.
+
+\pagerange{148}{149}
+\section*{L'opérateur $R(u) = \det(1+u)\,(1+u)^{-1}$ (pages 148 et 149)}
+
+Deux pages d'une écriture serrée, à l'encre, sur un opérateur $u$ à trace.
+Posons
+\[
+  P_n(u) = \sum_{k=0}^{n} (-1)^k\,\alpha_{n-k}(u)\,u^k, \qquad
+  R(u) = \sum_{k \geq 0} P_k(u) = \frac{\det(1+u)}{1+u},
+\]
+la dernière égalité lorsque $-1$ n'est pas valeur propre ; et en général
+$(1+u)^{-1} = 1 - u\,R(u)/\det(1+u)$. La série des $P_k$ converge en norme
+par le corollaire ci-dessous.\footnote{La page 148 écrit $P_n(u) = \sum
+\alpha_{n-k}(u)\,u^k$ sans le signe $(-1)^k$, et son lemme calcule $\sum_k
+u^{n-k}\alpha_k(u)(-1)^k$ avec le signe. C'est le signe qui est juste :
+$\det(1+zu)(1+zu)^{-1} = \sum_j \alpha_j z^j\sum_k (-1)^k z^k u^k$ a pour
+coefficient de $z^n$ la somme alternée, et pour $u$ scalaire $\lambda$ en
+dimension $1$, $P_1 = \alpha_1 - u = 0$ et $R = 1 = \det(1+u)/(1+u)$, tandis
+que sans le signe on aurait $R = 1 + 2\lambda + 2\lambda^2 + \cdots$. En
+dimension finie $R(u)$ est la matrice adjointe de $1 + u$.}
+
+\emph{Lemme.} Si $u = \sum_i \lambda_i\,e_i \otimes e_i'$ est diagonalisable,
+avec $(e_i)$ une base et $(e_i')$ la base duale, alors $P_n(u) = \sum_i
+p_i(u)\,e_i \otimes e_i'$ où
+\[
+  p_i(u) = \sum_{I \not\ni i,\ |I| = n} \prod_{j \in I} \lambda_j
+\]
+est la $n$-ième fonction symétrique élémentaire des $\lambda_j$, $j \neq i$.
+On le voit en calculant successivement $u^n - \alpha_1 u^{n-1}$, $u^n -
+\alpha_1 u^{n-1} + \alpha_2 u^{n-2}$, et par récurrence.
+
+\emph{Théorème.} 1) $|P_n(u)| \leq P_n(|u|)$ et $|R(u)| \leq R(|u|)$ pour $u$
+normal, au sens des valeurs propres sur une base commune ; en particulier
+$P_n(u) \geq 0$ et $R(u) \geq 0$ si $u \geq 0$. 2) Si $u \geq 0$, $0 \leq
+P_n(u) \leq \alpha_n(u)\cdot 1$ et $0 \leq R(u) \leq \det(1+u)$, puisque
+$p_i(u)$ est une somme partielle de $\alpha_n(u) = \sum_{|I| = n}\prod_I
+\lambda_j$.\footnote{La page 148 justifie 2) en disant que les termes
+$\alpha_{n-k}(u)\,u^k$ forment « une suite décroissante d'hermitiens », ce
+qui est faux --- pour $\lambda = (10, 1)$ et $n = 2$, $\alpha_2 = 10 <
+\lambda_1\alpha_1 = 110$ --- ; c'est la somme alternée qui est comprise
+entre $0$ et son premier terme, par le lemme. Le point 1) est énoncé pour
+$u$ à trace quelconque, et « devient évident » par le lemme, qui ne
+couvre que le cas diagonalisable ; on l'a restreint aux $u$ normaux, où
+$|u|$ se diagonalise dans la même base.}
+
+\emph{Corollaire.} Pour $u$ à trace,
+\[
+  \|R(u)\| \leq \det(1 + |u|) \leq e^{\|u\|_1}, \qquad
+  \|P_n(u)\| \leq \alpha_n(|u|) \leq \frac{\|u\|_1^n}{n!} .
+\]
+\footnote{La page les écrit avec un membre intermédiaire $\|R(|u|)\|$,
+$\|P_n(|u|)\|$, qui suppose le point 1) pour $u$ quelconque, non démontré
+ici. Les deux inégalités sont vraies sans lui : ce sont les estimations
+classiques du premier mineur de Fredholm, $\|\det(1+zu)\,(1+zu)^{-1}\| \leq
+\det(1 + |z|\,|u|)$ coefficient par coefficient, qu'on trouve, par les
+puissances extérieures, dans Simon, \emph{Trace ideals}, chapitre 5 ; et
+$\det(1+|u|) = \prod(1 + s_i) \leq e^{\sum s_i}$.}
+
+\emph{Remarque.} Les valeurs propres de $R(u)$ sont les $p_i = \prod_{j
+\neq i}(1 + \lambda_j) = \det(1+u)/(1 + \lambda_i)$, d'où $|p_i| \leq
+\det(1 + |u|)$, ce qui redonne une partie du corollaire ; mais comme il y a
+des $\lambda_i$ arbitrairement petits, il y a des $p_i$ arbitrairement
+voisins de $\det(1+u)$, et
+\[
+  \|R(u)\| \geq |\det(1+u)| ,
+\]
+avec égalité pour $u \geq 0$ : l'estimation du corollaire est donc exacte
+sur les positifs.\footnote{En dimension infinie, $0$ est valeur spectrale de
+$u$ et $\det(1+u)$ est valeur spectrale de $R(u)$, ce qui donne
+l'inégalité même si $u$ est de rang fini. C'est le dernier feuillet écrit du
+carton.}
+
+\end{document}
