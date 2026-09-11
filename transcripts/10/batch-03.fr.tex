@@ -1,0 +1,1213 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 10, batch 3 (pages 41-60).
+% Established from the facsimile archives/batches/10/batch-03.pdf (a mirror of
+% https://grothendieck.umontpellier.fr/10.pdf), per the skill
+% transcribe-grothendieck.
+%
+% Pass: Opus 5 (claude-opus-5), 2026-09-11 — first pass, unchecked against the
+% pages by a human.
+%
+% The batch holds two typescripts, neither of them his, both corrected in his
+% hand.
+%
+% Pages 41-57 continue the typescript begun page 32 and broken off mid-word at
+% the foot of page 40. Page 41 closes n° 10.16; page 42 opens « 11. —
+% Préschémas en groupes affines », which runs to the last written line of the
+% batch:
+%
+%   42-44 the affine algebra A(X) = f_*(O_X); Lemme 11.1 on when
+%         A(X) ⊗ A(Y) → A(X ×_S Y) is an isomorphism, with a margin note of his
+%         calling the formula false; Corollaire 11.2, the functor
+%         X ↝ Spec A(X) commuting with finite products; Définition 11.3 of the
+%         affine envelope G_af; 11.4 on Hom_{O_S}(V(F), V(E)); Proposition 11.5
+%         and its proof, where his hand restores Lazard's theorem in its true
+%         form — every flat module is a filtered colimit of free modules of
+%         finite type — against a typed statement that had it backwards.
+%   45-46 11.6, the two axioms of an operation of G on E written both
+%         geometrically (two diagrams in θ) and coalgebraically ((CM1), (CM2)
+%         in ρ), and the bijection between operations of G and of G_af; the
+%         induced operation on a stable submodule; Lemme 11.8 for A free with
+%         basis (φ_i); Proposition 11.9.
+%   47-51 Corollaire 11.10 (E is the filtered union of its finite-type stable
+%         submodules) with Remarque 11.10.1 crediting J.P. Serre and replacing
+%         a reference to a seminar by the Publ. Math. paper; then Proposition
+%         11.11 — affine ⟺ quasi-affine ⟺ faithful action on a quasi-affine
+%         scheme ⟺ on a vector space ⟺ closed subgroup of some Gl(n) — first
+%         drafted page 47 and cancelled there, restated page 48 with five
+%         conditions, proved through Aut(V_i), the projective limit G' = lim G_i
+%         and Lemme 11.11.1; Remarque 11.11.1 records what Raynaud showed over
+%         a regular base of dimension ≤ 1; Lemme 11.12 and Proposition 11.13,
+%         G as a projective limit of affine groups of finite type with
+%         faithfully flat transition morphisms.
+%   52-57 Lemme 11.14 (u faithfully flat ⟺ u° injective); Définitions 11.15,
+%         semi-invariant vectors, their weight and associated character — the
+%         word « poids » moved by hand onto « invariant » and its old
+%         definition struck; Théorème 11.16 (Chevalley), H as the stabiliser of
+%         a line of semi-invariants in Λ^d V; Théorème 11.17 (Chevalley), the
+%         fpqc quotient G/H is affine, proved first for G algebraic and then in
+%         general by limits; and Corollaire 11.18 on subgroups of a
+%         diagonalisable group, cancelled by loops.
+%
+% Page 55 is the one leaf of the batch entirely in his hand: it supplies the
+% algebraically closed case of 11.17 that page 56 asks for by a large circled
+% « VOIR CI CONTRE » set against the struck reference to Chevalley. It runs
+% through (Ker ρ)_red = H, then G/H affine by G/G° and G°/H ∩ G°; three N.B.
+% follow, cancelled by diagonals, one of them noting that the reference to
+% « BIBLE » is a corollary of 11.16.
+%
+% Pages 59-60 are a second typescript, on other paper and from another
+% machine, and are the only leaves of the batch on the subject of the folder:
+% a tannakian category over k of diagonalisable band D(Γ) is classified by
+% ξ ∈ H²(k,G) ≃ Hom(Γ, Br(k)), i.e. by u : Γ → Br(k); the category is
+% Γ-graded, the homogeneous objects are isotypic, d(i) is the order of u(i),
+% K(M) ⊂ Z[Γ] is the set of Σ n_i e^i with n_i ≡ 0 mod d(i), and End(M_i) is
+% the division algebra of invariant u(i). Page 60 reconstructs M from the
+% Azumaya algebras A_i by a sub-additive category on N^(I), its Karoubian
+% envelope, and the inversion of the L_i = det E_i, with two margin notes of
+% his — « attention à contrainte de commutativité » and « A expliciter ! ».
+%
+% The letter M of those two pages is inked by hand throughout, the machine
+% not having it. Insertions are \add{}, deletions \struck{}, his margin notes
+% \marginal{}; typing instructions to the typist (« pas à la ligne ») are
+% omitted. The cancelled runs of pages 49-51 and the crosses of page 50 are
+% recorded where they fall.
+%
+% Page 58, the blank verso of page 59 where only its frappe shows through, is
+% absent.
+%
+% The dating is the inventory's own, for the whole shelfmark.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{10}
+\batch{3}
+\pages{41}{60}
+\dating{[à partir de 1958]}
+\watermark{Édition de démonstration}
+\foldertitle{Catégories tensorielles : notes manuscrites (s.d.), tapuscrits (s.d.)}
+
+\begin{document}
+
+\section*{Préschémas en groupes affines (pages 41 à 57)}
+
+\note{Suite du tapuscrit ouvert page 32 et interrompu au bas de la page 40 :
+même machine, même papier, mêmes corrections à la main (crayon et encre
+bleue). La page 41 achève le n\textsuperscript{o} 10.16 commencé au lot
+précédent ; la page 42 ouvre un paragraphe nouveau, « 11. — Préschémas en
+groupes affines », qui court jusqu'à la page 57. Dans tout ce paragraphe
+$\mathcal{A}(X) = f_{*}(\mathcal{O}_{X})$, $\mathbb{V}$ et $\mathbb{W}$ sont
+les foncteurs en modules attachés à un Module quasi-cohérent,
+$\mathcal{H}om$ le foncteur des morphismes de $S$-foncteurs, et
+$\mathrm{S}(\mathcal{F})$ l'Algèbre symétrique ; les lettres rondes de la
+machine sont rendues par les rondes correspondantes. Ses insertions sont
+données entre crochets, ses suppressions barrées, ses notes marginales en
+retrait. La machine écorche « biunivoque » à plusieurs reprises et la main
+le rétablit chaque fois ; ces corrections ne sont pas relevées une à une.}
+
+\page{41}
+\note{Fin du n\textsuperscript{o} 10.16, dont l'énoncé commence au bas de la
+page 40 : « … soient $j \in I$, $G_{j}$ un $S_{j}$-grou- ».}
+
+pe de présentation finie, $H_{j}$ un $S_{j}$-préschéma de présentation
+finie à groupe d'opérateurs $G_{j}$. Pour que $H = H_{j} \times_{S_{j}} S$
+soit un $S$-préschéma en espaces homogènes sous \struck{\ill{}} $G$ (resp.
+un fibré principal homogène sous \struck{\ill{}} $G$) pour la
+\emph{topologie fidèlement plate localement de présentation finie}, il faut
+et il suffit qu'il existe un indice $i \in I$, $i \geqslant j$, tel que
+$H_{i} = H_{j} \times_{S_{j}} S_{i}$ soit un $S_{i}$-préschéma en espaces
+homogènes sous \struck{\ill{}} $G_{i}$ (resp. un fibré principal homogène
+sous $G_{i}$).
+
+\marginal{$G = G_{j} \times_{S_{j}} S$ \quad ; \quad $G_{i} = G_{j} \times_{S_{j}} S_{i}$}
+\note{Les deux définitions marginales sont de sa main, accolées chacune à la
+ligne où le symbole tapé a été biffé.}
+
+Compte tenu de (10.14) et de (EGA IV 8.8.2, 8.8.3 et 8.10.5),
+\struck{\ill{}} l'énoncé résulte de la propriété concernant les morphismes
+\struck{\ill{}}\add{couvrants} pour la topologie fppf rappelée en (10.0).
+
+\page{42}
+\textbf{11. — Préschémas en groupes affines.}
+
+\textbf{11.0.} — Notations : soient $S$ un préschéma, $X$ un $S$-préschéma,
+$f : X \to S$ le morphisme structural ; on pose
+$\mathcal{A}(X) = f_{*}(\mathcal{O}_{X})$.
+
+\textbf{Lemme 11.1.} — Soient $X$ et $Y$ deux $S$-préschémas quasi-compacts
+et quasi-séparés sur $S$, $f : X \to S$ et $g : Y \to S$ les morphismes
+structuraux. Alors l'homomorphisme canonique
+\[
+\varphi : \mathcal{A}(X) \otimes_{\mathcal{O}_{S}} \mathcal{A}(Y)
+\longrightarrow \mathcal{A}(X \times_{S} Y)
+\]
+est un isomorphisme dans chacun des cas suivants :
+\begin{itemize}
+\item[a)] $f$ et $g$ sont affines
+\item[b)] $f$ ou $g$ est plat et affine
+\item[c)] $g$ est plat et $f_{*}(\mathcal{O}_{X})$ est un
+$\mathcal{O}_{S}$-Module plat.
+\end{itemize}
+
+\marginal{\uncertain{fausse} formule}
+\marginal{$f_{*}(\mathcal{O}_{X})$}
+\note{Deux notes de sa main, chacune entourée, en regard de la formule et de
+la condition c). La première met en cause la formule affichée ; le premier
+mot n'est pas assuré.}
+
+Dans le cas b), on peut supposer que c'est $g$ qui est plat et affine.
+Posons $S' = \operatorname{Spec} \mathcal{A}(X)$, $Y' = Y \times_{S} S'$,
+$g' = g \times_{S} S'$ et notons $v$ le morphisme $S' \to S$. Alors $Y$ est
+quasi-compact et quasi-séparé sur $S$, et, ou bien $S'$ est plat sur $S$
+(cas c) d'après (EGA III (1.4.15.5)), ou bien $g$ est affine (cas a) et
+b)). Alors (EGA III 1.4.15 et IV 1.2.7 ou II 1.5.2), on a :
+\[
+g'_{*}(\mathcal{O}_{Y'}) = v^{*} g_{*}(\mathcal{O}_{Y})
+= \mathcal{A}(Y) \otimes_{\mathcal{O}_{S}} \mathcal{O}_{S'} .
+\]
+
+D'après (EGA II 1.2.7), $f$ se factorise à travers $v$ au moyen d'un
+morphisme $p : G \to S'$, et on a : $X \times_{S} Y = X \times_{S'} Y'$ et
+$p_{*}(\mathcal{O}_{X}) = \mathcal{O}_{S'}$. Puisque $v$ et $f$ sont
+quasi-compacts et quasi-séparés, \struck{\ill{}} il en est de même de $p$
+(EGA IV 1.2.2 et 1.2.4). \add{Ou} bien $Y$ est plat sur $S$ (cas b) et c))
+et alors $Y'$ est plat sur $S'$, ou bien $X$ est affine sur $S$ (cas a)),
+et alors $p$ est un isomorphisme. Dans le premier cas, on peut de nouveau
+appliquer (EGA III 1.4.15 et IV 1.2.7), et dans les deux cas, on trouve :
+\struck{\ill{}}
+\[
+p'_{*}(\mathcal{O}_{X \times_{S} Y}) = g'^{*} p_{*}(\mathcal{O}_{X})
+= g'^{*}(\mathcal{O}_{S'}) = \mathcal{O}_{Y'} ,
+\]
+\add{où $p' = p \times_{S'} Y'$.}
+\note{Le morphisme est tapé $p : G \to S'$ ; c'est $X$ que l'argument
+demande. La définition de $p'$ est ajoutée de sa main en bout de ligne.}
+
+D'où :
+\[
+\mathcal{A}(X \times_{S} Y) = v_{*} g'_{*} p'_{*}(\mathcal{O}_{X \times_{S} Y})
+= v_{*} g'_{*}(\mathcal{O}_{Y'})
+= v_{*}(\mathcal{A}(Y) \otimes_{\mathcal{O}_{S}} \mathcal{O}_{S'})
+= \mathcal{A}(Y) \otimes_{\mathcal{O}_{S}} \mathcal{A}(X)
+\]
+d'après (EGA II 1.4.7).
+
+\textbf{Corollaire 11.2.} — On définit un foncteur
+$X \rightsquigarrow \operatorname{Spec} \mathcal{A}(X)$ de la
+sous-catégorie pleine de $\mathrm{Sch}_{/S}$ des $X$-préschémas plats
+quasi-compacts et quasi-séparés sur $S$ tels que $\mathcal{A}(X)$ soit un
+$\mathcal{O}_{S}$-Module plat, dans celle des $S$-préschémas plats et
+affines sur $S$. Ce foncteur commute aux produits finis, donc transforme
+$S$-groupes en $S$-groupes.
+\note{« des $X$-préschémas » est tapé ainsi, pour « des $S$-préschémas ».}
+
+\page{43}
+\textbf{Définition 11.3.} — Etant donné un $S$-groupe $G$ plat,
+quasi-compact et quasi-séparé sur $S$, tel que $\mathcal{A}(G)$ soit plat
+sur $\mathcal{O}_{S}$, nous noterons $G_{\mathrm{af}}$, et nous appellerons
+\emph{enveloppe affine} de $G$ le $S$-groupe
+$G_{\mathrm{af}} = \operatorname{Spec} \mathcal{A}(G)$.
+
+\textbf{11.4.} — Etant donnés deux $\mathcal{O}_{S}$-Modules $\mathcal{E}$
+et $\mathcal{F}$ quasi-cohérents, notons
+$\mathcal{H}om_{S}(\mathbb{V}(\mathcal{F}), \mathbb{V}(\mathcal{E}))$ le
+$S$-foncteur des morphismes de $S$-foncteurs de $\mathbb{V}(\mathcal{F})$
+dans $\mathbb{V}(\mathcal{E})$, et
+$\mathcal{H}om_{\mathcal{O}_{S}}(\mathbb{V}(\mathcal{F}), \mathbb{V}(\mathcal{E}))$
+le sous-$S$-foncteur de
+$\mathcal{H}om_{S}(\mathbb{V}(\mathcal{F}), \mathbb{V}(\mathcal{E}))$ formé
+des $\mathcal{O}_{S}$-homomorphismes de $\mathcal{O}_{S}$-foncteurs en
+modules (cf. Exp. I). Alors
+$\mathcal{H}om_{\mathcal{O}_{S}}(\mathbb{V}(\mathcal{F}), \mathbb{V}(\mathcal{E}))(T)$
+est en correspondance biunivoque canonique avec \struck{\ill{}}
+$\operatorname{Hom}_{\mathcal{O}_{S}\text{-Mod.}}
+(\mathcal{E} \otimes_{\mathcal{O}_{S}} \mathcal{O}_{T},
+\mathcal{F} \otimes_{\mathcal{O}_{S}} \mathcal{O}_{T})$, \add{i.e.
+$\mathcal{H}om_{\mathcal{O}_{S}}(\mathbb{V}(\mathcal{F}), \mathbb{V}(\mathcal{E}))
+\simeq
+\mathcal{H}om_{\mathcal{O}_{S}}(\mathbb{W}(\mathcal{E}), \mathbb{W}(\mathcal{F}))$.}
+
+Soit $X$ un $S$-préschéma. Alors l'ensemble des morphismes de $S$-foncteurs
+de $X$ dans
+$\mathcal{H}om_{S}($\struck{\ill{}}$\mathbb{V}(\mathcal{F}), \mathbb{V}(\mathcal{E}))$
+est en correspondance biunivoque avec
+$\operatorname{Hom}_{S}(X \times_{S} \mathbb{V}(\mathcal{F}), \mathbb{V}(\mathcal{E}))$,
+donc l'ensemble des morphismes de $S$-foncteurs de $X$ dans
+$\mathcal{H}om_{\mathcal{O}_{S}}(\mathbb{V}(\mathcal{F}), \mathbb{V}(\mathcal{E}))$
+est en correspondance biunivoque avec un sous-ensemble de
+$\operatorname{Hom}_{S}(X \times_{S} \mathbb{V}(\mathcal{F}), \mathbb{V}(\mathcal{E}))
+= \operatorname{Hom}_{\mathcal{O}_{S}\text{-Mod.}}
+(\mathcal{E}, \mathcal{A}(X \times_{S} \mathbb{V}(\mathcal{F})))$
+(EGA II 1.7.13).
+
+\textbf{Proposition 11.5.} — Soient $X$ un $S$-préschéma quasi-compact
+quasi-séparé sur $S$, $f : X \to S$ le morphisme structural, $\mathcal{E}$
+et $\mathcal{F}$ deux $\mathcal{O}_{S}$-Modules quasi-cohérents. On suppose
+vérifiée l'une des deux conditions suivantes :
+\begin{itemize}
+\item[a)] $f$ est affine
+\item[b)] $\mathcal{F}$ est plat sur $\mathcal{O}_{S}$.
+\end{itemize}
+Alors :
+\begin{itemize}
+\item[i)] l'homomorphisme canonique
+$\varphi : \mathcal{A}(X) \otimes_{\mathcal{O}_{S}} \mathrm{S}(\mathcal{F})
+\longrightarrow \mathcal{A}(X \times_{S} \mathbb{V}(\mathcal{F}))$ est un
+isomorphisme (où $\mathrm{S}(\mathcal{F})$ désigne l'Algèbre symétrique de
+$\mathcal{F}$).
+\item[ii)] l'ensemble des morphismes de $S$-foncteurs de $X$ dans
+$\mathcal{H}om_{\mathcal{O}_{S}}(\mathbb{V}(\mathcal{F}), \mathbb{V}(\mathcal{E}))$
+est en correspondance biunivoque avec
+$\operatorname{Hom}_{\mathcal{O}_{S}\text{-Mod.}}
+(\mathcal{E}, \mathcal{A}(X) \otimes \mathcal{F})$.
+\end{itemize}
+
+\marginal{$S$}
+\note{Une lettre $S$ entourée, de sa main, en regard de i) — l'Algèbre
+symétrique, que la machine note d'une $S$ ronde.}
+
+Pour montrer i), d'après (11.1, a) et b)), il suffit de montrer que si
+$\mathcal{F}$ est plat sur $\mathcal{O}_{S}$, \struck{\ill{}} alors
+$\mathbb{V}(\mathcal{F})$ est plat sur $S$. D'après (EGA III 1.4.15.5),
+
+\page{44}
+il suffit de voir que si $\mathcal{F}$ est plat sur $\mathcal{O}_{S}$,
+\add{il en est de même de $\mathrm{S}(\mathcal{F})$,} ce qui
+\struck{résulte des définitions (EGA II 1.7.1), compte tenu d'}\add{est un
+corollaire d'}un resultat dû à Daniel \textbf{Lazard}, suivant lequel
+tout\struck{e limite inductive de modules plats est un} module plat
+\add{sur un anneau est une limite inductive filtrante de modules libres de
+type fini.}
+\note{La correction rétablit le théorème de Lazard dans sa forme exacte :
+la machine avait tapé « toute limite inductive de modules plats est un
+module plat ».}
+
+\struck{Remarquons de plus que
+$\mathcal{A}(X) \otimes_{\mathcal{O}_{S}} \mathrm{S}\mathcal{F}
+= \mathrm{S}(\mathcal{A}(X) \otimes_{\mathcal{O}_{S}} \mathcal{F})$
+d'après (EGA II 1.1.2), ce qui montre que l'homomorphisme canonique
+$\mathcal{A}(X) \otimes_{\mathcal{O}_{S}} \mathcal{F} \to
+\mathcal{A}(X) \otimes_{\mathcal{O}_{S}} \mathrm{S}\mathcal{F}$ est
+injectif.}
+\note{Ces deux lignes sont biffées par une suite de diagonales et closes
+d'une croix.}
+
+Montrons maintenant ii). Soit $\alpha$ un morphisme de $S$-foncteurs de $X$
+dans
+$\mathcal{H}om_{\mathcal{O}_{S}}(\mathbb{V}(\mathcal{F}),$
+$\mathbb{V}(\mathcal{E}))$ ;
+il lui correspond un homomorphisme $\rho$ de $\mathcal{O}_{S}$-Modules de
+$\mathcal{E}$ dans
+$\mathcal{A}(X \times_{S} \mathbb{V}(\mathcal{F}))
+= \mathcal{A}(X) \otimes_{\mathcal{O}_{S}} \mathrm{S}(\mathcal{F})$ tel que
+si $\rho$ est une $S$-section de $X$, l'homomorphisme
+\[
+(\mathcal{A}(\eta) \otimes \mathrm{id}_{\mathrm{S}\mathcal{F}}) \circ \rho :
+\mathcal{E} \longrightarrow
+\mathcal{O}_{S} \otimes_{\mathcal{O}_{S}} \mathrm{S}\mathcal{F}
+= \mathrm{S}\mathcal{F}
+\]
+corresponde à $\alpha(\eta)$.
+
+\marginal{$\eta = ?$}
+\note{Note de sa main, à l'encre bleue et entourée, en regard de cette
+ligne : la $S$-section est tapée $\rho$, alors que c'est $\eta$ qu'elle
+doit être — $\rho$ désigne déjà l'homomorphisme.}
+
+Mais puisque $\alpha(\eta) \in{}$ \struck{\ill{}}
+$\mathcal{H}om_{\mathcal{O}_{S}}(\mathbb{V}(\mathcal{F}), \mathbb{V}(\mathcal{E}))(S)$,
+$\mathcal{A}(\eta) \otimes \mathrm{id}_{\mathrm{S}\mathcal{F}}$ se
+factorise à travers l'homomorphisme canonique injectif
+$\mathcal{F} \to \mathrm{S}\mathcal{F}$. On a donc, pour chaque
+$S$-section $\eta$ de $X$, un diagramme commutatif :
+
+\begin{tikzcd}[column sep=large]
+\mathcal{E} \arrow[r, "\rho"] \arrow[d] &
+  \mathcal{A}(X) \otimes \mathrm{S}\mathcal{F} \arrow[d]
+  \arrow[dl, "\mathcal{A}(\eta) \otimes \mathrm{id}"] \\
+\mathrm{S}\mathcal{F} & \mathcal{F} \arrow[l]
+\end{tikzcd}
+
+\note{Le diagramme est tracé à la main dans l'intervalle laissé par la
+machine.}
+
+ce qui montre que $\rho$ se factorise à travers l'homomorphisme canonique
+injectif
+$\mathcal{A}(X) \otimes_{\mathcal{O}_{S}} \mathcal{F} \longrightarrow
+\mathcal{A}(X) \otimes_{\mathcal{O}_{S}} \mathrm{S}\mathcal{F}$, donc
+$\rho$ peut être considéré comme un homomorphisme de
+$\mathcal{O}_{S}$-Modules de $\mathcal{E}$ dans
+$\mathcal{A}(X) \otimes_{\mathcal{O}_{S}} \mathcal{F}$.
+
+Réciproquement, soit
+$\rho \in \operatorname{Hom}_{\mathcal{O}_{S}\text{-Mod.}}
+(\mathcal{E}, \mathcal{A}(X) \otimes_{\mathcal{O}_{S}} \mathcal{F})
+\subset \operatorname{Hom}_{\mathcal{O}_{S}\text{-Mod}}
+(\mathcal{E}, \mathcal{A}(X \times_{S} \mathbb{V}(\mathcal{F})))$ ; il lui
+correspond un morphisme $\alpha$ de $X$ dans
+$\mathcal{H}om_{S}(\mathbb{V}(\mathcal{F}), \mathbb{V}(\mathcal{E}))$.
+Pour tout $S$-préschéma $T$ et toute $T$-section $\eta$ de
+$X \times_{S} T$, $\alpha(\eta)$ correspond à
+$\mathcal{A}(\eta) \otimes
+\mathrm{id}_{\mathrm{S}\mathcal{F} \otimes \mathcal{O}_{T}}$,
+homomorphisme de
+$\mathcal{E} \otimes_{\mathcal{O}_{S}} \mathcal{O}_{T}$ dans
+$\mathcal{F} \otimes_{\mathcal{O}_{S}} \mathcal{O}_{T}$, donc
+$\alpha(\eta) \in
+\mathcal{H}om_{\mathcal{O}_{S}}(\mathbb{V}(\mathcal{F}), \mathbb{V}(\mathcal{E}))(T)$,
+ce qui montre que $\alpha$ est un morphisme de $X$ dans
+$\mathcal{H}om_{\mathcal{O}_{S}}(\mathbb{V}(\mathcal{E}), \mathbb{V}(\mathcal{F}))$,
+ce qui prouve ii).
+\note{Le dernier $\mathcal{H}om$ est tapé avec ses deux arguments
+intervertis.}
+
+\struck{\ill{}}
+\note{Les trois dernières lignes de la page — l'énoncé d'un résultat sur un
+$S$-groupe plat quasi-compact et quasi-séparé, un $\mathcal{O}_{S}$-Module
+quasi-cohérent et plat, et des applications — sont annulées à la machine
+lettre par lettre, puis barrées d'un long trait ; elles ne sont plus
+lisibles.}
+
+\page{45}
+\textbf{11.6.} — Soient $G$ un $S$-groupe plat quasi-compact et
+quasi-séparé sur $S$, tel que $\mathcal{A}(G)$ soit un
+$\mathcal{O}_{S}$-Module plat $\mathcal{A}$, et $\mathcal{E}$ un
+$\mathcal{O}_{S}$-Module quasi-cohérent et plat.
+\struck{Nous dirons qu'}\add{Notons qu'}un morphisme de $S$-foncteurs de
+$G$ dans
+\add{$\operatorname{End}_{\mathcal{O}_{S}}(\mathbb{W}(\mathcal{E}))$}
+\struck{\ill{}} $\simeq
+\mathcal{H}om_{\mathcal{O}_{S}}(\mathbb{V}(\mathcal{E}), \mathbb{V}(\mathcal{E}))$
+définit une \emph{opération} de $G$ sur $\mathcal{E}$, si \add{et seulement
+si} le morphisme correspondant
+$\theta : G \times_{S} \mathbb{V}(\mathcal{E}) \longrightarrow
+\mathbb{V}(\mathcal{E})$ vérifie les deux conditions suivantes :
+
+1\textsuperscript{o}) si $\mu : G \times_{S} G \longrightarrow G$ désigne le
+morphisme structural, le diagramme
+
+\begin{tikzcd}[column sep=large]
+G \times_{S} G \times_{S} \mathbb{V}(\mathcal{E})
+  \arrow[r, "\mathrm{id}_{G} \times \theta"]
+  \arrow[d, "\mu \times \mathrm{id}_{\mathbb{V}(\mathcal{E})}"'] &
+G \times_{S} \mathbb{V}(\mathcal{E}) \arrow[d, "\theta"] \\
+G \times_{S} \mathbb{V}(\mathcal{E}) \arrow[r, "\theta"'] &
+\mathbb{V}(\mathcal{E})
+\end{tikzcd}
+
+est commutatif.
+
+2\textsuperscript{o}) si $\varepsilon : S \to G$ est la section unité de
+$G$, le diagramme
+
+\begin{tikzcd}[column sep=small, row sep=small]
+S \times_{S} \mathbb{V}(\mathcal{E})
+  \arrow[rr, "\varepsilon \times \mathrm{id}_{\mathbb{V}(\mathcal{E})}"] & &
+G \times_{S} \mathbb{V}(\mathcal{E}) \arrow[dl, "\theta"] \\
+ & \mathbb{V}(\mathcal{E}) \arrow[ul, "\simeq"] &
+\end{tikzcd}
+
+est commutatif.
+
+Il revient au même de dire que le morphisme
+$\rho :$ \add{$\mathcal{E} \to$} $\mathcal{A}(G) \otimes_{\mathcal{O}_{S}} \mathcal{E}$
+déduit de $\theta$ vérifie les deux axiomes suivants :
+
+\marginal{$\mathcal{E} \to \mathcal{A}(G) \otimes \mathcal{E}$}
+\note{La source du morphisme, omise par la machine, est rétablie deux fois
+de sa main : au-dessus de la ligne et en marge de gauche.}
+
+(CM1) Si $\Delta : \mathcal{A} \longrightarrow \mathcal{A} \otimes
+\mathcal{A} = \mathcal{A}(G \times_{S} G)$ est l'homomorphisme
+$\mathcal{A}(\theta)$, le diagramme
+
+\begin{tikzcd}[column sep=large]
+\mathcal{A} \otimes \mathcal{A} \otimes \mathcal{A} &
+\mathcal{A} \otimes \mathcal{E}
+  \arrow[l, "\mathrm{id}_{\mathcal{A}} \otimes \rho"'] \\
+\mathcal{A} \otimes \mathcal{E}
+  \arrow[u, "\Delta \otimes \mathrm{id}_{\mathcal{E}}"] &
+\mathcal{A} \arrow[l, "\rho"'] \arrow[u, "\rho"']
+\end{tikzcd}
+
+est commutatif.
+
+\note{Le troisième facteur du sommet supérieur gauche et le sommet
+inférieur droit sont écrits $\mathcal{A}$ sur la page, là où l'axiome
+demande $\mathcal{E}$ ; la lettre n'est pas distinguée de son $\mathcal{E}$
+avec certitude. L'homomorphisme $\Delta$ est celui de $\mu$, et non de
+$\theta$ comme le porte la ligne.}
+
+(CM2) Si $\eta : \mathcal{A} \longrightarrow \mathcal{O}_{S}$ est
+l'homomorphisme $\mathcal{A}(\varepsilon)$, le diagramme
+
+\begin{tikzcd}[column sep=small, row sep=small]
+\mathcal{O}_{S} \otimes \mathcal{E} & &
+\mathcal{A} \otimes \mathcal{E}
+  \arrow[ll, "\eta \otimes \mathrm{id}_{\mathcal{E}}"'] \\
+ & \mathcal{E} \arrow[ul, "\simeq"] \arrow[ur, "\rho"'] &
+\end{tikzcd}
+
+est commutatif.
+
+Il revient au même de dire que le morphisme
+$\theta_{\mathrm{af}} : G_{\mathrm{af}} \times_{S} \mathbb{V}(\mathcal{E})
+\longrightarrow \mathbb{V}(\mathcal{E})$ correspondant à $\rho$ définit une
+opération de $G_{\mathrm{af}}$ sur $\mathcal{E}$ \struck{\ill{}}
+\add{(comparer I 4.2)}.
+
+Par conséquent, il y a correspondance biunivoque entre opérations de $G$
+sur $\mathcal{E}$ et opérations de $G_{\mathrm{af}}$ sur $\mathcal{E}$.
+
+\textbf{Lemme 11.7.} — Soient $G$ un $S$-groupe quasi-compact et
+quasi-séparé sur $S$, \add{plat et} tel que $\mathcal{A}(G)$ soit
+
+\page{46}
+un $\mathcal{O}_{S}$-Module plat $\mathcal{A}$, et $\mathcal{E}$ un
+$\mathcal{O}_{S}$-Module quasi-cohérent. On suppose soit que $G$ est affine
+\add{sur $S$}, soit que \struck{$G$} et $\mathcal{E}$ \struck{soit} plats
+sur $S$. Soit $\rho : \mathcal{E} \to \mathcal{A} \otimes \mathcal{E}$ un
+homomorphisme définissant une opération de $G$ sur $\mathcal{E}$. Soit
+$\mathcal{E}_{0}$ un sous-$\mathcal{O}_{S}$-Module quasi-cohérent de
+$\mathcal{E}$ tel que l'homomorphisme
+$\mathcal{E}_{0} \to \mathcal{A} \otimes \mathcal{E}$ déduit de $\rho$ se
+factorise à travers l'homomorphisme canonique \add{(injectif, \ill{} on
+fait que $\mathcal{A}$ est plat !)}
+$\mathcal{A} \otimes \mathcal{E}_{0} \longrightarrow
+\mathcal{A} \otimes \mathcal{E}$ au moyen de l'homomorphisme
+$\rho_{0} : \mathcal{E}_{0} \longrightarrow
+\mathcal{A} \otimes \mathcal{E}_{0}$. Alors $\rho_{0}$ définit une
+opération de $G$ sur $\mathcal{E}_{0}$, qu'on appellera \emph{opération
+induite} sur $\mathcal{E}_{0}$ par $\rho$, et on dira que
+$\mathcal{E}_{0}$ est \emph{stable} sous $\rho$.
+\note{L'incise entre parenthèses est de sa main ; le mot qui l'ouvre après
+« injectif, » n'est pas lu.}
+
+Cela résulte immédiatement des définitions et de (11.6). On remarquera
+cependant qu'en général l'application canonique
+$\mathbb{W}(\mathcal{E}_{0}) \longrightarrow \mathbb{W}(\mathcal{E})$
+n'est pas injective.
+
+\textbf{Lemme 11.8.} — Soient $G$ un $S$-groupe quasi-séparé et
+quasi-compact sur $S$ tel que $\mathcal{A}(G)$ soit un
+$\mathcal{O}_{S}$-Module \struck{\ill{}} libre $\mathcal{A}$ de base
+$(\varphi_{i})$, $\mathcal{E}$ un $\mathcal{O}_{S}$-Module quasi-cohérent.
+On suppose soit que $G$ est affine \add{sur $S$}, soit que $G$ et
+$\mathcal{E}$ sont plats sur $S$. Soit
+$\rho : \mathcal{E} \to \mathcal{A} \otimes \mathcal{E}$ un homomorphisme
+définissant une opération de $G$ sur $\mathcal{E}$, et soit
+$x \in \Gamma(S, \mathcal{E})$. Posons
+$\rho(x) = \sum \varphi_{i} \otimes x_{i}$, où les
+$x_{i} \in \Gamma(S, \mathcal{E})$ sont bien déterminés par cette
+relation). Alors le sous-module \add{$\mathcal{F}$} de $\mathcal{E}$
+engendré par les $x_{i}$ est stable sous $\rho$, quasi-cohérent et de type
+fini sur $\mathcal{O}_{S}$, et $x \in \Gamma(S, \mathcal{F})$.
+\note{La parenthèse fermante après « cette relation » est sans ouvrante ;
+telle quelle. La fin de l'énoncé — « quasi-cohérent et de type fini… » —
+est retapée au-dessus d'un membre de phrase biffé.}
+
+\struck{Soit $\mathcal{F}$ le sous-module de $\mathcal{E}$ engendré par les
+$x_{i}$.} Il est clair que $\mathcal{F}$ est quasi-cohérent et de type
+fini. L'axiome (CM1) montre que
+$\sum \Delta(\varphi_{i}) \otimes x_{i}
+= \sum \varphi_{i} \otimes \rho(x_{i})$ ; d'autre part,
+$\Delta(\varphi_{i}) = \sum \varphi_{j} \otimes a_{ij}$, d'où
+$\sum \varphi_{j} \otimes a_{ij} \otimes x_{i}
+= \sum \varphi_{i} \otimes \rho(x_{i})$, d'où, puisque les $\varphi_{i}$
+forment une base de $\mathcal{A}$,
+$\rho(x_{i}) = \sum a_{ji} \otimes x_{j}$, où
+$a_{ji} \in \Gamma(S, \mathcal{A})$, ce qui montre que
+$\rho(\mathcal{F}) \subset \mathcal{A} \otimes \mathcal{F}$, donc
+$\mathcal{F}$ est stable sous $\rho$. Enfin l'axiome (CM2) montre que
+$x = \sum_{i} \eta(\varphi_{i})\, x_{i} \in \Gamma(S, \mathcal{F})$.
+\note{Dans $\rho(x_{i}) = \sum a_{ji} \otimes x_{j}$, l'indice du dernier
+$x$ est surfrappé sur la page ; c'est $j$ que la sommation demande.}
+
+\textbf{Proposition 11.9.} — Soit $G$ un $S$-groupe quasi-compact
+quasi-séparé sur $S$ tel que $\mathcal{A} = \mathcal{A}(G)$ devienne
+localement libre après extension fidèlement plate quasi-compacte de la base
+$S$ (ce qui est le cas \add{par exemple} lorsque $G$ est un groupe
+réductif, comme nous le verrons dans \struck{\ill{}} XXV), et soit
+$\mathcal{E}$ un $\mathcal{O}_{S}$-\struck{Module} quasi-cohérent. On
+suppose soit que $G$ est affine \add{sur $S$}, soit que $G$ et
+$\mathcal{E}$ sont plats sur $S$. Soit
+$\rho : \mathcal{E} \longrightarrow \mathcal{A} \otimes \mathcal{E}$ un
+homomorphisme définissant une opération de $G$ sur $\mathcal{E}$.
+
+\page{47}
+Alors, pour tout sous-$\mathcal{O}_{S}$-Module quasi-cohérent
+$\mathcal{F}$ de $\mathcal{E}$ il existe un plus petit
+sous-$\mathcal{O}_{S}$-Module quasi-cohérent $\overline{\mathcal{F}}$ de
+$\mathcal{E}$ contenant $\mathcal{F}$ qui soit stable sous $\rho$. Lorsque
+$\mathcal{F}$ est de type \struck{\ill{}} fini, il en est de même de
+$\overline{\mathcal{F}}$.
+
+\marginal{Sa formation commute à toute extension de la base $S' \to S$}
+
+On se ramène aisément \add{par descente fidèlement plate} au cas où
+$\mathcal{A}$ est un $\mathcal{O}_{S}$-Module libre, auquel cas la
+proposition est conséquence du lemme 11.8.
+
+\textbf{Corollaire 11.10.} — \struck{Soit}\add{Soient} $S$ un
+\struck{pré}schéma \struck{affine}, $G$ un $S$-groupe quasi-séparé
+\add{et} quasi-compact sur $S$, tel que $\mathcal{A}(G)$ devienne
+\struck{\ill{}} localement libre après extension fidèlement plate
+quasi-compacte de la base $S$, et soit $\mathcal{E}$ un
+$\mathcal{O}_{S}$-Module quasi-cohérent. On suppose soit que $G$ est
+affine sur $S$, soit que $G$ et $\mathcal{E}$ sont plats sur $S$. \add{On
+se donne une opération de $G$ sur $\mathcal{E}$.} Alors $\mathcal{E}$ est
+limite inductive d'une famille filtrante croissante de
+sous-$\mathcal{O}_{S}$-Modules quasi-cohérents de type fini de
+$\mathcal{E}$ stables sous $G$.
+\note{Une main a récrit au-dessus de la ligne « quasi-compact et
+quasi-séparé », dans l'autre ordre.}
+
+C'est une conséquence immédiate de (11.9) car $\mathcal{E}$ est
+\struck{engendré par ses}\add{limite inductive de ses} sections (EGA I
+1.4.1) \struck{et car l'ensemble des sous-$\mathcal{O}_{S}$-Modules
+quasi-cohérents de type fini de $\mathcal{E}$ stables sous $G$ est stable
+par engendrement.} \add{sous-Modules quasi-cohérents de type fini (EGA I
+9.4.9., IV 1.7.7.)}
+
+\textbf{Remarque 11.10.1.} J.P. Serre a remarqué que dans 11.9. (donc
+aussi dans 11.10) il suffisait de supposer que pour toute ouvert affine
+$U$ de $S$, il existe un morphisme fidèlement plat $U' \to U$, avec $U'$
+affine d'anneau $A'$, tel que $\mathcal{E} \otimes_{U} U'$ soit défini par
+un $A'$-module projectif (pas nécessairement libre). De plus, lorsque $S$
+est localement noéthérien régulier et de dimension 1, cette hypothèse peut
+être remplacée par la seule hypothèse que $G$ soit plat sur $S$ (ce qui
+implique que $\mathcal{A}(G)$ est plat) ; voir à ce sujet \struck{un
+exposé de Serre dans SGA \add{6} (1966/67).} \add{\textsuperscript{1}
+J.-P. Serre, Sur les Groupes de Grothendieck des schémas en groupes
+réductifs déployés, Pub. Math. n\textsuperscript{o} \uncertain{34},
+p. 37--52.}
+
+\textbf{Proposition 11.11.} — Soient $k$ un corps, $G$ un \struck{corps}
+$k$-groupe algébrique. Pour que $G$ soit affine, il faut et il suffit
+qu'il existe un espace vectoriel de dimension finie $V$, et une immersion
+fermée de $G$ dans $\underline{\mathrm{GL}}_{k}(V)$ qui soit un morphisme
+de $k$-groupes.
+
+S'il existe un espace vectoriel $V$ de dimension finie et une immersion
+fermée $u : G \to \underline{\mathrm{GL}}_{k}(V)$ puisque
+$\underline{\mathrm{GL}}_{k}(V)$ est affine (Exp. I, 4.5), il en est de
+même de $G$ (EGA I 4.2.3).
+
+Réciproquement, supposons $G$ affine. Notons $A$ l'algèbre de $G$. Puisque
+$G$ opère sur lui-même par translations à gauche, il opère aussi sur $A$,
+cette opération se traduisant par l'application \struck{diagonal}
+diagonale $\Delta : A \longrightarrow A \otimes_{k} A$. D'après (11.10),
+$A$ (en tant qu'espace vectoriel) est réunion d'une famille filtrante
+croissante $(V_{i})_{i \in I}$ de sous-espaces vectoriels de dimension
+finie stables sous $G$. \struck{\ill{}}
+
+\note{De la Proposition 11.11 au bas de la page, le texte est annulé par
+de longues diagonales : l'énoncé est repris page 48 sous une autre forme,
+à cinq conditions équivalentes. Les deux dernières lignes sont en outre
+annulées à la machine lettre par lettre et ne sont plus lisibles.}
+
+\page{48}
+\textbf{Proposition 11.11.} — Soit \struck{un $k$ un corps}, $G$ un
+\struck{schéma en} groupe\struck{s} \struck{quasi-compact}
+\add{algébrique sur le} \struck{sur} \add{corps} $k$. Les conditions
+suivantes sont équivalentes :
+\begin{itemize}
+\item[(i)] $G$ est affine.
+\item[(ii)] $G$ est quasi-affine.
+\item[(iii)] On peut faire opérer $G$ fidèlement sur un \add{$k$-}schéma
+quasi-affine.
+\item[(iv)] On peut faire opérer $G$ fidèlement sur un vectoriel sur $k$
+(pas nécessairement de dimension finie).
+\item[(v)] \struck{\ill{}} $G$ est isomorphe à un sous-groupe fermé d'un
+groupe $\mathrm{Gl}(n)_{k}$.
+\end{itemize}
+\note{L'énoncé corrigé se lit : « Soit $G$ un groupe algébrique sur le
+corps $k$. » Le membre biffé qui ouvre (v) est illisible sous la
+rature.}
+
+\emph{Démonstration.} On a (i) $\Rightarrow$ (ii) trivialement, et (ii)
+$\Rightarrow$ (iii), car $G$ opère fidèlement sur lui-même par
+translations à gauche. On a (iii) $\Rightarrow$ (iv) car si $G$ opère
+\struck{\ill{}} sur $X$ quasi-compact et quasi-séparé sur $k$, il opère
+aussi sur le vectoriel $\Gamma(X, \underline{\mathcal{O}}_{X})$, grâce au
+fait que la formation de $f_{*}(\underline{\mathcal{O}}_{X})$
+($f : X \to \operatorname{Spec} k$ le morphisme structural) commute à tout
+changement de base $S \to \operatorname{Spec} k$ (EGA IV 1.7.12) ; donc il
+opère sur l'enveloppe affine
+$X' = \operatorname{Spec}(\Gamma(X, \underline{\mathcal{O}}_{X}))$, et le
+morphisme canonique $X \to X'$ est évidemment compatible avec l'action de
+$G$ ; ceci dit, si $X$ est quasi-affine i.e. $X \to X'$ est une immersion
+ouverte, et si $G$ opère fidèlement sur $X$, il opère fidèlement sur $X'$,
+ou ce qui revient au même, sur le vectoriel
+$V = \Gamma(X, \underline{\mathcal{O}}_{X})$, ce qui prouve l'implication
+(iii) $\Rightarrow$ (iv).
+\note{La condition sous laquelle $G$ opère est retapée au-dessus de la
+ligne annulée, qui portait « fidèlement sur $X$ quasi-affine sur $k$,
+alors $G$ opère fidèlement sur l'enveloppe affine
+$X' = \operatorname{Spec}(\dots)$ ».}
+
+Supposons maintenant \struck{\ill{}}\add{(iv), i.e.} que $G$ opère
+fidèlement sur le vectoriel $V$. Alors, en vertu de 11.10, $V$ est limite
+inductive de sous-espaces vectoriels $V_{i}$ de dimension finie, stables
+sous l'action de $G$. Si $K_{i}$ est le noyau de l'action induite de $G$
+sur $V_{i}$, i.e. de $G \to \underline{\mathrm{Aut}}_{V_{i}}$, alors
+$K_{i}$ est un sous-schéma fermé de $G$, et l'hypothèse que $G$ opère
+fidèlement s'exprime aussitôt par le fait que \struck{\ill{}}
+l'intersection des $K_{i}$ est le sous-groupe unité de $G$. Comme $G$ est
+noethé-
+
+\page{49}
+rien, il s'ensuit que l'un des $K_{i}$ est déjà réduit au groupe unité,
+donc que $G \to \underline{\mathrm{Aut}}_{V_{i}}$ est un monomorphisme.
+C'est donc une immersion fermée en vertu de (1.4.2), ce qui prouve que
+(iv) $\Rightarrow$ (v). Comme (v) $\Rightarrow$ (i) trivialement, cela
+prouve 11.11 pour $G$ de type fini.
+
+Prenons maintenant le cas général, où il reste à prouver que (iv)
+$\Rightarrow$ (i). Avec les notations de la démonstration précédente, soit
+$G_{i}$ le \struck{sous-groupe}\add{plus petit} sous-groupe fermé de
+$\mathrm{Aut}(V_{i})$ par lequel \add{peut} se factoriser
+$G \to \underline{\mathrm{Aut}}_{V_{i}}$ \struck{existe} (un tel groupe
+existe, \struck{puisque} comme intersection de tous ceux par lesquels se
+factorise $G \to{}$ \struck{\ill{}} $\underline{\mathrm{Aut}}_{V_{i}}$). Si
+$V_{j} \supset V_{i}$, on voit alors tout de suite que $G_{j}$ invarie
+$V_{i}$, et que le morphisme correspondant
+$G_{j} \to \underline{\mathrm{Aut}}_{V_{i}}$ se factorise par $G_{i}$. De
+cette façon, les $G_{i}$ forment un système projectif de groupes affines
+sur $k$, et on a un morphisme naturel
+$G \longrightarrow G' = \varprojlim G_{i}$, où $G'$ est lui-même un groupe
+affine (EGA IV 8.2.3). L'hypothèse que $G$ opère \emph{fidèlement} sur $V$
+s'exprime alors par le fait que $G \to G'$ est un monomorphisme. On a donc
+trouvé un monomorphisme de $G$ dans un schéma affine, ce qui implique que
+le schéma quasi-compact \add{et séparé} $G$ est quasi-affine, i.e. que son
+faisceau structural est ample, en vertu de EGA IV 18.12.17. En d'autres
+termes, posant $H = \operatorname{Spec} \Gamma(G, \underline{\mathcal{O}}_{G})$,
+le morphisme canonique $G \to H$ est une immersion ouverte. Notons
+maintenant que $H$ est de façon naturelle un schéma en groupes, et
+$G \to H$ un homomorphisme de groupes, grâce à 11.2. Cet homomorphisme est
+évidemment dominant, il reste à prouver que c'est un isomorphisme, ce qui
+résulte \struck{\ill{}} du lemme suivant :
+
+\textbf{Lemme 11.11.1.} — Soient \struck{H}\add{G} un schéma en groupes
+sur un corps \add{$k$} \struck{\ill{}}. Alors tout sous-schéma en groupes
+ouvert \add{$G$} de $H$ est aussi fermé.
+
+Il revient au même de dire que l'ensemble $H - G$ est ouvert, i.e. est un
+voisinage de chacun de ses points $x$. Or, toute extension de corps $k'/k$
+définissant un morphisme $\operatorname{Spec} k' \to \operatorname{Spec} k$
+qui est universellement
+
+\note{La page est traversée de deux longues diagonales qui se croisent ;
+le texte reste lisible d'un bout à l'autre et la démonstration se poursuit
+page 50.}
+
+\page{50}
+ouvert (EGA IV 2.4.9), il \struck{nous} suffit de prouver qu'il existe une
+telle extension $k'$ et un point $x'$ de $H' = H \otimes_{k} k'$ au dessus
+de $x$, tels que $H' - G'$ soit un voisinage de $x'$. Or \struck{il}
+suffira de prendre \struck{\ill{}} $k' = k(x)$, de sorte que $G'$ admet un
+point $x'$ rationnel sur $k'$ au dessus de $x$. Alors l'ouvert dans $H'$
+translaté de $G'$ par $x'$ contient $x'$ et est contenu dans $H' - G'$,
+\struck{\ill{}} qui est donc un voisinage de $x'$, ce qui achève la
+démonstration de 11.11.
+
+\textbf{Remarque 11.11.1.} \struck{Monsieur} M. Raynaud nous signale qu'on
+peut généraliser 11.11 au cas d'un schéma en groupes quasi-compact et
+quasi-séparé $G$ sur un schéma \add{$S$ localement noethérien} régulier de
+dimension $\leqslant 1$, en supposant de plus $G$ \emph{plat} sur $S$. On a
+alors équivalence des conditions suivantes :
+\begin{itemize}
+\item[(i)] $G$ est affine sur $S$.
+\item[(ii)] $G$ est quasi-affine sur $S$.
+\item[(iii)] On peut faire opérer $G$ fidèlement sur un $S$-schéma
+quasi-affine.
+\item[(iv)] On peut faire opérer $G$ fidèlement sur un Module
+quasi-cohérent plat sur $S$.
+\item[(v)] (Si $G$ est de type fini sur $S$ \add{et $S$ noethérien}) $G$
+est isomorphe à un sous-groupe fermé d'un $\underline{\mathrm{Aut}}_{V}$,
+où $V$ est un Module localement libre de type fini sur $S$.
+\end{itemize}
+
+\textbf{Remarque 11.11.2.} Avec les notations de la démonstration
+précédente, on voit facilement (une fois qu'on sait que $G$ est affine) que
+l'homomorphisme $G \to G' = \varprojlim G_{i}$ est un isomorphisme, ce qui
+donne pour $G$ un théorème de structure, qui sera \struck{repris}
+\add{prouvé} par une autre méthode dans 11.13.
+
+\note{Deux croix, de la même main que celles de la page 49, annulent ici le
+premier paragraphe et la Remarque 11.11.2 ; le texte reste lisible. Un long
+crochet de marge relie les deux Remarques.}
+
+\page{51}
+Notons $\varphi_{i} : G \longrightarrow \underline{\mathrm{GL}}_{k}(V_{i})$
+le morphisme déterminé par l'opération de $G$ sur $V_{i}$, et
+$\varphi : G \to \underline{\mathrm{GL}}_{k}(A)$ le morphisme déterminé par
+l'opération de $G$ sur $A$. Alors, puisque $A$ est réunion des $V_{i}$,
+$\operatorname{Ker} \varphi$ est \uncertain{intrésection} des
+$\operatorname{Ker} \varphi_{i}$ ; or $\operatorname{Ker} \varphi$ est le
+$k$-groupe unité ; puisque $G$ est noethérien, il existe $i \in I$ tel que
+$\operatorname{Ker} \varphi_{i}$ soit le $k$-groupe unité, ce qui implique
+(I 1.4.2) que $\varphi_{i}$ est une immersion fermée, c.q.f.d.
+\note{« intrésection » est tapé ainsi. Ce paragraphe est annulé par les
+mêmes diagonales que les pages 49 et 50 ; il achève la démonstration du cas
+général, que la Remarque 11.11.2 renvoie à 11.13.}
+
+\textbf{Lemme 11.12.} — Soient $k$ un corps, $G$ un $k$-groupe
+quasi-compact. Posons $A = \mathcal{A}(G)$. Etant donné $x \in A$, il
+existe \struck{un sous-$k$-espace vectoriel de dimension finie} une
+sous-$k$-algèbre de type fini $V$ de $A$ tel que $x \in V$, que
+$\Delta(V) \subset V \otimes_{k} V$ et $u(V) \subset V$, où $u$ désigne
+l'involution de $A$ correspondant à la symétrie de $G$.
+
+D'après (11.3), on peut remplacer $G$ par $G_{\mathrm{af}}$, donc on peut
+supposer $G$ affine.
+
+Soit $(\varphi_{i})$ une base de $A$. Alors
+$\Delta(x) = \sum \varphi_{i} \otimes a_{i}$ et
+$\Delta(\varphi_{i}) = \sum \varphi_{j} \otimes b_{ji}$ ; l'axiome (HA1) de
+(Exp. I 4.2) montre que
+$\sum \varphi_{i} \otimes \Delta(a_{i})
+= \sum \Delta(\varphi_{i}) \otimes a_{i}$, d'où
+$\Delta(a_{i}) = \sum b_{ij} \otimes a_{j}$.
+
+Soit alors $V$ la \struck{sous-espace vectoriel} sous-$k$-algèbre de $A$
+engendrée par les $b_{ij}$ et les $u(b_{ij})$. Il est clair que $V$ est une
+$k$-algèbre de type fini. L'axiome (HA1) montre aussi que
+\[
+\sum \Delta(\varphi_{j}) \otimes b_{ji}
+= \sum \varphi_{j} \otimes \Delta(b_{ji}) ,
+\]
+et on en déduit que $\Delta(b_{ij}) = \sum b_{ik} \otimes b_{kj}$ et que
+$\Delta(u(b_{ij})) = \sum u(b_{kj}) \otimes u(b_{ik})$. Puisque $\Delta$
+est un homomorphisme d'algèbres, on en déduit que
+$\Delta(V) \subset V \otimes_{k} V$ et $u(V) \subset V$. Enfin l'axiome
+(HA2) de (Exp. I 4.2) montre que $a_{i} = \sum \eta(a_{j})\, b_{ij}$ et que
+$x = \sum \eta(\varphi_{i})\, a_{i}$, si bien que $x \in V$.
+
+\textbf{Proposition 11.13.} — \struck{\ill{}} Soient $k$ un corps et $G$ un
+$k$-groupe affine d'algèbre $A$. Alors $G$ est limite projective d'un
+système filtrant croissant de $k$-groupes affines de type fini, dont les
+morphismes de transition sont fidèlement plats.
+
+Comme l'ensemble des sous-$k$-algèbres de type fini de $A$ stables par
+$\Delta$ et $u$ est stable par engendrement, $A$ est limite inductive d'une
+famille filtrante croissante $(B_{i})_{i \in I}$ de sous-$k$-algèbres de
+type fini stables par $\Delta$ et $u$. Alors, \uncertain{cahque} algèbre
+$B_{i}$, munie de l'homomorphisme
+$B_{i} \longrightarrow B_{i} \otimes_{k} B_{i}$ déduit de $\Delta$ et de la
+restriction de $u$ à $B_{i}$ est munie d'une structure d'hyperalgèbre
+associative augmentée involutive, donc (Exp. I 4.2) est la $k$-algèbre d'un
+$k$-groupe affine $G_{i}$, de type fini sur $k$. Enfin, puisque
+$A = \varinjlim V_{i}$,
+\note{Les deux corrections de cette page — « une sous-$k$-algèbre de type
+fini » pour « un sous-$k$-espace vectoriel de dimension finie », et
+« sous-$k$-algèbre » pour « sous-espace vectoriel » — sont retapées à la
+machine au-dessus des membres annulés. Dans la dernière ligne, la limite
+est celle des $B_{i}$ ; la page écrit $V_{i}$.}
+
+\page{52}
+$G = \varprojlim G_{i}$ (EGA IV 8.2.3). \struck{\ill{}} les morphismes de
+transition sont \uncertain{fidèlemnet} plats d'après le lemme suivant :
+
+\textbf{Lemme 11.14.} — Soient $k$ un corps, $G$ et $H$ deux $k$-groupes
+affines de type fini, $u : G \to H$ un morphisme de $k$-groupes, et
+$u^{\mathrm{o}} : B \to A$ l'homomorphisme de $k$-algèbres correspondant.
+Pour que $u$ soit fidèlement plat, il faut et il suffit que
+$u^{\mathrm{o}}$ soit injectif.
+
+la condition est évidemment nécessaire (EGA IV 2.2.3 et
+$\mathrm{O}_{\mathrm{IV}}$ 6.6.1). Montrons qu'elle est suffisante. Posons
+$K = \operatorname{Ker} u$. Alors $G/K$ est un $k$-groupe \add{de type
+fini} (Exp. $\mathrm{VI}_{\mathrm{A}}$ 5.2), et $u$ se factorise en
+$G \xrightarrow{\ p\ } G/K \xrightarrow{\ v\ } H$, où $p$ est fidèlement
+plat (Exp. $\mathrm{VI}_{\mathrm{A}}$ 3.2) et où $v$ est un monomorphisme
+de $k$-groupes de type fini, donc une immersion fermée (1.4.2). Puisque $H$
+est un schéma affine, et que $v$ est une immersion fermée, $G/K$ est un
+schéma affine (EGA I 4.2.3), et, si on note $C$ l'algèbre de $G/K$,
+l'homomorphisme $v^{\mathrm{o}} : B \to C$ est surjectif (loc. cit.) Or,
+puisque $u^{\mathrm{o}}$ est injectif, et que
+$u^{\mathrm{o}} = p^{\mathrm{o}} \circ v^{\mathrm{o}}$, $v^{\mathrm{o}}$
+est aussi injectif : c'est un isomorphisme, donc $v$ est un isomorphisme,
+et, puisque $p$ est fidèlement plat, il en est de même de $u$.
+
+\textbf{Définitions 11.15.} — Etant donné un corps $k$, un $k$-espace
+vectoriel $V$, un $k$-groupe $G$ opérant sur $V$, et un vecteur
+$v \in V$, on dit que $v$ est \emph{semi-invariant} sous $G$ si le
+sous-espace vectoriel \add{$k.v$} \struck{est} stable sous $G$. Notons $A$
+l'algèbre de $G$, et $\rho : V \to A \otimes_{k} V$ l'application linéaire
+qui définit l'opération de $G$ sur $V$. Dire que $v$ est semi-invariant
+sous $G$ revient à dire \struck{\ill{}} qu'il existe $\lambda \in A$ tel
+que, pour tout $w \in kv$, $\rho(w) = \lambda \otimes w$. Lorsque
+$v \neq 0$, l'élément $\lambda \in A$ est bien déterminé par cette
+relation, on l'appellera \struck{invariant}\add{poids} de l'élément
+semi-invariant $v$.
+
+\struck{D'autre part, $v$ s'interprète comme un élément du bidual de $V$,
+donc comme une section de $\mathbb{V}(V)$ ; notons
+$\varphi : G \times \mathbb{V}(V) \to \mathbb{V}(V)$ le morphisme
+définissant l'opération de $G$ sur $V$.} Dire que $v$ est semi-invariant
+\struck{\ill{}} d'invariant $\lambda$ revient à dire que
+$\varphi(g, v) = \lambda(g)\, v$ pour tout $g \in G(k)$, où
+\struck{\ill{}} \add{$\lambda : G \to \underline{\mathbb{G}}_{m,k}$} est le
+morphisme défini par $\lambda$. On voit donc que $\lambda$
+\struck{correspond à}\add{est} un caractère \struck{$\chi$} de $G$, appelé
+\emph{caractère associé} à l'élément semi-invariant $v$. \struck{Enfin nous
+appellerons poids de l'élément semi-invariant $v$ le poids du caractère
+$\chi$ associé à $v$.}
+\note{« fidèlemnet » est tapé ainsi. La dernière phrase, qui définissait le
+\emph{poids}, est biffée parce que le mot a été reporté plus haut, sur
+« invariant ».}
+
+\page{53}
+\textbf{Théorème 11.16.} — (Chevalley) Soient $k$ un corps, $G$ un
+$k$-groupe algébrique affine, $H$ un sous-préschéma en groupes fermé de
+$G$. Alors il existe un nombre fini d'éléments $a_{i}$ linéairement
+indépendants de l'algèbre $A$ de $G$, tels que $H$ soit le plus grand
+sous-préschéma en groupes fermé de $G$ sous lequel les $a_{i}$ soient
+semi-invariants ; on peut de plus supposer que tous les $a_{i}$ ont même
+\struck{caractère associé (donc même} poids\struck{)} sous $H$.
+
+Rappelons que, puisque $G$ est affine, il en est de même de $H$ (Exp. I
+4.2.3). Soit $A$ (resp. $B$) l'algèbre de $G$ (resp. $H$) ; d'après (EGA I
+4.2.3, il existe un idéal $I$ de $A$ tel que $B$ soit isomorphe à $A/I$.
+Puisque $G$ opère sur lui-même par translations à gauche, il opère aussi
+sur $A$, cette opération se traduisant par l'application diagonale
+$\Delta : A \longrightarrow A \otimes_{k} A$ (Exp. I 4.2 et 4.7.2).
+Puisque $G$ est de type fini sur $k$, $A$ est de type fini sur $k$, donc
+$I$ admet un système fini de générateurs $(g_{1}, \dots, g_{r})$. Il
+résulte de (11.9) qu'il existe un sous-espace vectoriel $V$ de dimension
+finie de $A$ \struck{\ill{}} stable sous $G$, et contenant chacun des
+$g_{i}$.
+
+Posons alors $W = V \cap I$, c'est un espace vectoriel sur $k$ de dimension
+finie, dont nous noterons $d$ la dimension. Puisque $V$ contient tous les
+$g_{i}$, $W$ engendre \struck{l'algèbre}\add{l'idéal} $I$.
+
+Notons $p : A \longrightarrow A/I = B$ l'application canonique, et
+$q = p \otimes \mathrm{id}_{A} : A \otimes_{k} A \longrightarrow
+(A/I) \otimes_{k} A$. Alors l'action de $H$ sur $A$ est déterminée par
+$q \circ \Delta : A \longrightarrow B \otimes_{k} A$. Puisque $H$ est un
+sous-préschéma en groupes de $G$, l'application diagonale
+\[
+A/I \to (A/I) \otimes_{k} (A/I)
+= ((A/I) \otimes_{k} A) / ((A/I) \otimes_{k} I)
+\]
+se déduit de $q \circ \Delta$ par passage au quotient, ce qui montre que
+$(q \circ \Delta)(I) \subset (A/I) \otimes_{k} I$, autrement dit, $I$ est
+stable sous $H$. Puisque $V$ est stable sous $G$, donc sous $H$, on voit
+que $W$ est stable sous $H$.
+
+Posons $E = \bigwedge^{d} V$, soit $(w_{1}, \dots, w_{d})$ une base de $W$
+sur $k$, et soit $(e_{o}, \dots, e_{n})$ une base de $E$ sur $k$ contenant
+$e_{o} = w_{1} \wedge \dots \wedge w_{d}$. L'opération de $G$ sur $V$
+détermine canoniquement une opération de $G$ sur $\bigwedge^{d} V$, qui
+définit une application linéaire $\rho : E \to A \otimes_{k} E$. Posons
+$\rho(e_{i}) = \sum a^{i}_{j} \otimes e_{j}$, et
+$a_{i} = a^{o}_{i}$. Puisque $W$ est stable sous $H$, si on pose
+$\sigma = (p \otimes \mathrm{id}_{E}) \circ \rho : E \longrightarrow
+(A/I) \otimes_{k} E$, il est clair que $\sigma(e_{o})$ est proportionnel à
+$e_{o}$, autrement dit, pour $1 \leqslant i \leqslant n$, on a
+$a_{i} \in I$. L'axiome (CM1) de (Exp. I 4.7.2) appliqué à
+
+\page{54}
+$\rho(e_{o}) = \sum a_{i} \otimes e_{i}$ montre que
+$\sum \Delta(a_{i}) \otimes e_{i} = \sum a_{i} \otimes \rho(e_{i})
+= \sum a_{i} \otimes a^{i}_{j} \otimes e_{j}$, d'où on déduit que
+$\Delta(a_{i}) = a_{o} \otimes a_{i} + \sum_{j \geqslant 1}
+a_{j} \otimes a^{j}_{i}$ ; donc, puisque pour $j \geqslant 1$,
+$a_{j} \in I$, on voit que
+$q \circ \Delta(a_{i}) = p(a_{o}) \otimes a_{i}$, si bien que pour
+$1 \leqslant i \leqslant n$, $a_{i}$ est semi-invariant sous $H$
+\struck{\ill{}} \struck{d'invariant}\add{de poids} $p(a_{o})$, indépendant
+de $i$ ; \struck{donc tous les $a_{i}$ sont semi-invariants sous $H$ de
+même caractère associé, donc de même poids. Enfin} \add{Extrayons} du
+système $(a_{1}, \dots, a_{n})$, \struck{on peut extraire} un système
+maximal de vecteurs linéairement indépendants, dont on peut supposer qu'il
+se note $(a_{1}, \dots, a_{m})$. \add{Alors les $a_{i}$, $i = 1, \dots m$
+sont linéairement indépendants, semi-invariants sous $H$, et de même
+poids.}
+
+Réciproquement, soit $H'$ un sous-préschéma en groupes fermé de $G$ sous
+lequel chacun des $a_{i}$ ($1 \leqslant i \leqslant m$) est semi-invariant.
+\add{Montrons que $H' = H$.} Il existe de même un idéal $I'$ de $A$ tel que
+l'algèbre $B'$ de $H'$ soit isomorphe à $A/I'$ ; notons
+$p' : A \to A/I'$ l'application canonique, et
+$q' = p' \otimes \mathrm{id}_{A}$.
+
+Par hypothèse, pour $1 \leqslant i \leqslant m$, il existe
+$\lambda_{i} \in B'$ tel que
+$q' \circ \Delta(a_{i}) = \sum p'(a_{j}) \otimes a^{j}_{i}
+= \lambda_{i} \otimes a_{i}$.
+
+Or l'axiome (CM2) de (Exp. I 4.7.2) montre que
+$e_{i} = \sum \eta(a^{i}_{j})\, e_{j}$, donc que
+$\eta(a^{i}_{j}) = \delta_{ij}$ (symbole de Kronecker) ; l'égalité
+$\sum p'(a_{j}) \otimes \eta(a^{i}_{j}) = \lambda_{i} \otimes \eta(a_{i})$
+s'écrit donc $p'(a_{i}) = 0$ pour $1 \leqslant i \leqslant m$, car
+$\eta(a_{i}) = \eta(a^{o}_{i}) = 0$ pour $1 \leqslant i \leqslant m$ ; par
+conséquent, on a $a_{i} \in I'$ pour $1 \leqslant i \leqslant m$, si bien
+que $a_{i} \in I'$ pour $1 \leqslant i \leqslant n$. Donc, si on pose
+$\sigma' = (p' \otimes \mathrm{id}_{E}) \circ \Delta$,
+$\sigma'(e_{o}) = \sum p'(a_{i}) \otimes e_{i}$ est proportionnel à
+$e_{o}$, de sorte que
+$q' \circ \Delta(W) \subset A/I' \otimes_{k} W$, autrement dit que $W$ est
+stable sous $H'$. Puisque $W$ engendre \add{l'idéal} $I$, $I$ est stable
+sous $H'$, donc
+$q' \circ \Delta(I) \subset (A/I') \otimes_{k} I$, et
+$q' \circ \Delta$ définit par passage au quotient une application linéaire
+\[
+A/I \longrightarrow (A/I') \otimes_{k} (A/I)
+= ((A/I') \otimes_{k} A) / ((A/I') \otimes_{k} I)
+\]
+donc \struck{\ill{}} la restriction à $H' \times H$ du morphisme de
+multiplication de $G$ se factorise à travers $H$, ce qui implique que $H'$
+est \struck{\ill{}} un sous-préschéma en groupes de $H$, c.q.f.d.
+\note{La ligne « la restriction à $H' \times H$… » est retapée
+au-dessus d'une ligne annulée à la machine et devenue illisible.}
+
+\textbf{Théorème 11.17 (Chevalley).} — Soient $k$ un corps, $G$ un
+$k$-groupe affine (non nécessairement algébrique), et $H$ un
+sous-préschéma en groupes fermé de $G$ \emph{invariant} dans $G$ ; alors le
+faisceau quotient (pour la topologie fpqc) $G/H$ est représentable par un
+$k$-groupe \emph{affine}.
+
+\marginal{Il doit exister une référence ici. Exp. $\mathrm{VI}_{\mathrm{A}}$ \ill{}}
+\note{Note au crayon, écrite dans la marge de gauche le feuillet tourné ;
+une seconde ligne, plus pâle, n'est pas lue.}
+
+\emph{Premier cas} : Supposons d'abord $G$ algébrique. D'après (Exp.
+$\mathrm{VI}_{\mathrm{A}}$ 3.2), le conoyau $K$ de l'injection
+$H \to G$ existe, \struck{et} le morphisme canonique
+$p : G \longrightarrow K$ est \struck{fidèlement plat, et quasi-compact,
+puisque $G$ est de type fini sur $k$, et que $K$, qui est muni d'une
+structure de $k$-groupe (Exp. $\mathrm{VI}_{\mathrm{A}}$ 5.2) est séparé
+sur $k$ (Exp. $\mathrm{VI}_{\mathrm{A}}$ 0.2). Donc $p$ est} couvrant pour
+la topologie fpqc, si bien \struck{(Exp. IV 4.4.3)} \add{et} \struck{que}
+$K$ représente le faisceau quotient $G/H$ pour la topologie fpqc ;
+
+\page{55}
+\note{Feuillet entièrement de sa main, au crayon : c'est le « \textbf{VOIR CI
+CONTRE} » que la page 56 porte entouré, à la place du renvoi biffé à
+Chevalley. Il donne le cas où $k$ est algébriquement clos.}
+
+Supposons d'abord $k$ algébriquement clos, $G$ réduit et connexe et $H$
+réduit. D'après (\emph{BIBLE} \struck{\ill{}} \add{Exp 4, cor. du
+th. 1}), il existe une représentation linéaire de dimension finie
+$\rho : G \longrightarrow \mathrm{GL}(V)$ telle que
+$(\operatorname{Ker} \rho)_{\mathrm{red}} = H$. Par 11.11,
+$G/\operatorname{Ker} \rho$ est affine, donc
+$(G/H)/(\operatorname{Ker} \rho/H)$ est affine, donc aussi $G/H$, le groupe
+$\operatorname{Ker} \rho/H$ étant fini.
+
+Si $k$ est algébriquement clos, et $G$ et $H$ réduits, alors
+$(G/H)/(G^{\mathrm{o}}/H \cap G^{\mathrm{o}})$ est fini, \add{comme
+quotient de $G/G^{\mathrm{o}}$, et}
+$G^{\mathrm{o}}/H \cap G^{\mathrm{o}}$ est affine, donc $G/H$ est affine.
+
+\struck{N.B. 1) le th. entraîne que si $G$ est affine algébrique et $H$
+invariant, il existe une rep. linéaire de dim. finie
+$\rho : G \longrightarrow \mathrm{GL}(V)$ telle que
+$H = \operatorname{Ker} \rho$.}
+
+\struck{2) La réf. à BIBLE est un corollaire de 11.16, la démonstration est
+facile mais un peu longue.}
+
+\struck{3) Dans la réf. à BIBLE, supposer $G$ connexe, car la dém. de BIBLE
+est \ill{} dans le cas général.}
+\note{Les trois N.B. sont annulés par un faisceau de diagonales, puis le
+bloc entier encadré d'un trait. Le mot qui qualifie la démonstration de
+BIBLE au 3) n'est pas lu.}
+
+\page{56}
+il s'agit donc de montrer que $K$ est affine.
+
+\struck{Le théorème est connu dans le cas où $k$ est algébriquement clos,
+et où $G$ et $H$ sont réduits (Chevalley} \add{Supposons d'abord}
+\marginal{\textbf{VOIR CI CONTRE}}
+\note{« \textbf{VOIR CI CONTRE} » est écrit en grand et entouré : c'est la
+page 55, qui remplace le renvoi biffé.}
+
+Dans le cas où $k$ est algébriquement clos, et $G$ et $H$ quelconques,
+\struck{\ill{}}, $(G \times_{k} H)_{\mathrm{red}}$ est isomorphe à
+$(G_{\mathrm{red}}) \times_{k} (H_{\mathrm{red}})$, donc
+$(G_{\mathrm{red}})/(H_{\mathrm{red}})$ est isomorphe à
+$(G/H)_{\mathrm{red}}$. Puisque $(G_{\mathrm{red}})/H_{\mathrm{red}}$ est
+affine, il en est de même de $G/H$ (EGA I 5.1.10), car, puisque $G/H$ est
+de type fini sur $k$, son nilradical est nilpotent.
+
+Dans le cas où $k$ est quelconque,
+$G \otimes_{k} \bar{k} \,/\, H \otimes_{k} \bar{k}$ est isomorphe à
+$(G/H) \otimes_{k} \bar{k}$ (9.2 v)), donc puisque le premier est affine,
+il en est de même du second, donc $G/H$ est affine \add{(réf.)}.
+
+\emph{Deuxième cas} : Cas général. D'après (11.13), l'algèbre $A$ de $G$
+est limite inductive d'une famille filtrante croissante
+$(A_{i})_{i \in I}$ de sous-algèbres de type fini de $A$ stables par
+l'application diagonale et l'involution. D'après
+(\struck{Exp.}\add{EGA} I 4.2.3), $H$ est affine, et si on note $B$
+l'algèbre de $H$, l'homomorphisme $A \longrightarrow B$ déduit de
+l'injection $H \longrightarrow G$ est surjectif. Posons
+$I = \operatorname{Ker}(A \to B)$, $I_{i} = I \cap A_{i}$ et
+$B_{i} = A_{i}/I_{i}$ ; puisque la structure d'hyperalgèbre associative
+augmentée involutive de $A$ passe au quotient à travers $I$, on vérifie
+aisément que celle de $A_{i}$ passe au quotient à travers $I_{i}$, si bien
+que $B_{i}$ est l'algèbre d'un $k$-groupe affine de type fini $H_{i}$ ; il
+est clair que $B = \varinjlim B_{i}$. D'après (EGA I 4.2.3), $H_{i}$ est
+isomorphe à un sous-préschéma en \uncertain{goupes} fermé de $G_{i}$.
+D'après (6.7) le fait que $H$ soit invariant dans $G$ s'exprime en disant
+qu'un certain morphisme $H \times_{k} G \longrightarrow G$ se factorise à
+travers l'injection $H \to G$, autrement dit que l'homomorphisme
+correspondant $A \longrightarrow B \otimes_{k} A$ se factorise à travers
+l'homomorphisme canonique $A \longrightarrow B$ ; on vérifie aisément que
+l'homomorphisme $A_{i} \longrightarrow B_{i} \otimes_{k} A_{i}$ défini de
+manière analogue se factorise à travers $A_{i} \longrightarrow B_{i}$, donc
+que $H_{i}$ est invariant dans $G_{i}$. D'après ce qui a été vu
+précédemment, $G_{i}$ étant de type fini sur $k$, $G_{i}/H_{i}$ est
+représentable par un $k$-groupe affine $K_{i}$, dont nous noterons $C_{i}$
+l'algèbre. Posons alors $C = \varinjlim C_{i}$, et soit
+$K = \varprojlim K_{i}$ le $k$-préschéma affine d'algèbre $K$ (EGA IV
+8.2.3).
+\note{« goupes » est tapé ainsi. La dernière ligne écrit « d'algèbre $K$ » ;
+c'est $C$ que la construction donne.}
+
+Montrons que $K$ représente $G/H$ ; pour cela, il suffit de vérifier que
+\struck{le diagramme} $H \times_{k} G \rightrightarrows G \times_{K} G$
+\struck{est cartésien}, et que le morphisme $G \to K$ est couvrant pour la
+topologie fpqc. (\struck{Exp.} IV 4.4.3). Or, \struck{chacun des
+diagrammes} \add{pour chaque $i$, on a}
+$H_{i} \times_{k} G_{i} \rightrightarrows G_{i} \times_{K_{i}} G_{i}$,
+\struck{étant cartésien} \add{donc} il en est de même du \add{morphisme}
+diagramme obtenu en passant à la limite projective ; enfin chacun des
+morphismes
+\marginal{est-ce défini ?}
+\note{Note au crayon dans la marge de gauche, le feuillet tourné.}
+
+\page{57}
+$G_{i} \longrightarrow K_{i}$ est fidèlement plat (9.2 (xi)), autrement dit
+$C_{i}$ est fidèlement plat sur $A_{i}$ ; puisque
+$A = \varinjlim A_{i}$ et $C = \varinjlim C_{i}$, on en déduit que $C$ est
+fidèlement plat sur $A$, \struck{(cf. Bourbaki, Alg. Comm. \ill{})} si bien
+que $G \longrightarrow K$ est un morphisme fidèlement plat. Puisque ce
+morphisme est affine, il est quasi-compact, donc couvrant pour la topologie
+fpqc, c.q.f.d.
+
+\struck{\textbf{Corollaire 11.18.} — Soient $k$ un corps, $G = D(M)$ un
+groupe diagonalisable sur $k$ (I 4.4), \struck{H un sous-groupe de} avec
+$M$ un $\mathbb{Z}$-module de type fini, $H$ un sous-groupe algébrique de
+$G$. Alors $H$ est également diagonalisable.}
+\note{Le Corollaire est annulé par une suite de larges boucles au crayon.
+C'est la dernière ligne écrite du tapuscrit : le reste du feuillet est
+blanc.}
+
+\section*{Catégorie tannakienne de lien un groupe diagonalisable (pages 59
+et 60)}
+
+\note{Deux feuillets d'un tapuscrit étranger au précédent — autre papier,
+autre frappe — corrigés de sa main. Ce sont les seules pages du lot qui
+touchent aux catégories tannakiennes, c'est-à-dire au sujet du carton. La
+lettre $\mathcal{M}$, que la machine n'avait pas, est encrée à la main
+partout. La page 58, verso blanc de la page 59, où seule transparaît la
+frappe de celle-ci, est absente.}
+
+\page{59}
+\emph{Catégorie tannakienne} (sur un corps $k$) \emph{de \struck{\ill{}} lien un groupe diagonalisable} $G = D(\Gamma)$
+\add{$\Longleftarrow$} ($\mathcal{M}$ semi-simple, et pour tout objet
+simple (ou isotypique) $S$ de $\mathcal{M}$, de rang $d(S)$,
+$\operatorname{End}(S)$ est de rang $d(S)^{2}$).
+
+Soit $\mathcal{M}$ cette catégorie. Elle est définie à équivalence près
+(respectant structures et contraintes) par un élément \add{$\xi$} de
+$H^{2}(k, G)$. On a d'autre part
+\[
+H^{2}(k, G) \simeq \operatorname{Hom}(\Gamma, \mathrm{Br}(k)) ,
+\]
+donc $\mathcal{M}$ est définie essentiellement par l'homomorphisme
+\struck{\ill{}}
+\[
+\add{\xi}\, u : \Gamma \longrightarrow \mathrm{Br}(k) .
+\]
+
+\struck{Pour tout} La catégorie $\mathcal{M}$ est graduée de type $\Gamma$,
+les objets homogènes de type $\Gamma$ sont \add{les objets} isotypiques,
+donc pour tout $i \in \Gamma$, il y a exactement un objet simple, à
+isomorphisme près, $E_{i}$, \struck{de} homogène de degré $i$. (Il semble
+que ce soit une deuxième caractérisation des catégories tannakiennes de
+lien $D(\Gamma)$, \add{$\Longleftrightarrow$ le produit de deux
+isotypiques \ill{} isotypique}) Le degré de cet élément est égal à l'ordre
+\add{$d(i)$} de $u(i)$ dans $\mathrm{Br}(k)$. Donc l'anneau
+$K(\mathcal{M})$ est donné par
+\[
+K(\mathcal{M}) \subset \underline{\mathbb{Z}}[\Gamma] ,
+\]
+\[
+\sum n_{i} e^{i} \in K(\mathcal{M}) \iff n_{i} \equiv 0 \ (d(i))
+\quad \text{pour tout } i \in \Gamma
+\]
+La base canonique de $K(\mathcal{M})$ formée par les objets simples étant
+formée des $d(i) e^{i}$. Si $M_{i}$ est l'objet simple de \struck{poids}
+degré $i$, alors $\operatorname{End}(M_{i})$ est le corps gauche
+\struck{\ill{}} de centre $k$ dont l'invariant dans $\mathrm{Br}(k)$ est
+$u(i)$.
+
+\struck{En termes d'un système de générateurs (\ill{}$_{i})_{i \in I}$ de
+$\Gamma$, \struck{et} (d'un système d'objets \struck{simples $M_{i}$ de
+type} isotypiques degré $i$) et des}
+\note{Membre annulé d'un trait ondulé ; deux incises tapées au-dessous,
+« i.e. $G = \mathbb{G}_{m}^{I}$ » et « i.e. de $\xi$ », sont accolées de sa
+main.}
+
+Si $\Gamma = \mathbb{Z}^{(I)}$, la donnée de $u$ revient à la donnée
+d'éléments $\xi_{i} \in \mathrm{Br}(k)$. Choisissant pour tout $i$ un objet
+isotypique non nul de degré $i$, soit $E_{i}$, et désignant par
+$A_{i} = \operatorname{End}(M_{i})$ l'algèbre d'\uncertain{Azumaya}
+\add{de classe $\xi_{i}$,} associée, on reconstitue (à équivalence unique
+près respectant tout)
+
+\page{60}
+$\mathcal{M}$ en termes de la famille des $A_{i}$ \struck{\ill{}} comme
+suite. On considère d'abord la catégories sous-additive
+\struck{engendrée} ayant comme objets les éléments $\gamma$ de
+$\underline{\mathbb{N}}^{(I)}$, ($\underline{\gamma} =
+(\gamma_{i})_{i \in I}$ étant interprété comme
+$\bigotimes E_{i}^{\gamma_{i}}$), \struck{ou} avec
+$\operatorname{Hom}(\underline{\gamma}, \underline{\gamma}') = 0$ si
+$\underline{\gamma} \neq \underline{\gamma}'$ et
+$= \bigotimes_{i} A_{i}^{\otimes \gamma_{i}}$ si
+$\underline{\gamma} = \underline{\gamma}'$, la composition des morphismes
+évidentes. On définit de façon évidente le foncteur $\otimes$ (addition de
+$\underline{\mathbb{N}}^{(I)}$ sur les objets, produit tensoriel sur les
+homomorphismes) et ses contraintes, de façon que l'on trouve une
+sous-$\otimes$-catégorie.
+
+\marginal{attention à contrainte de commutativité}
+
+Son enveloppe Karoubienne est une \add{$\otimes$-}catégorie abélienne, qui
+s'identifie à la sous-catégorie pleine de $\mathcal{M}$ formée des éléments
+dont les composantes homogènes non nulles sont à degrés
+$\in \underline{\mathbb{N}}^{(I)}$, \add{et à un foncteur fibre sur
+$\bar{k}$.} D'autre part, pour tout $i$, si $A_{i}$ est de
+\add{rang}\struck{degré} $d_{i}^{2}$ (donc $E_{i}$ de rang $d_{i}$), soit
+$L_{i} = \det E_{i} = \bigwedge^{d_{i}} E_{i}$, (où $E_{i}$ désigne
+l'objet de la catégorie construite correspondant à \struck{\ill{}}
+$i$-ème élément de la base canonique de
+$\underline{\mathbb{Z}}^{(I)}$, soit $l_{i} \dots$), c'est un objet
+préinversible (\add{$x \to$} $\otimes L_{i}$ est pleinement fidèle) et en
+inversant les $L_{i}$, on trouve (à \struck{équ} équivalence près
+respectant tout) la catégorie $\mathcal{M}$.
+\note{Dans $\det E_{i}$, les deux lettres qui suivent le signe $=$ sont
+surfrappées et reprises à la main ; l'exposant $d_{i}$ est écrit au-dessus.
+Le $\bar{k}$ de l'insertion est repris, entouré, dans la marge de gauche.}
+
+Quand $\Gamma$ n'est pas libre, on trouve une construction analogue en
+termes d'un système de générateurs \add{convenable}
+$(\gamma_{i})_{i \in I}$, mais en « rendant \struck{de plus} égaux à
+$1^{x}$ » de plus certains éléments. Ces constructions sont bien adaptées
+pour décrire les $\otimes$-foncteurs de $\mathcal{M}$ dans une
+\struck{\ill{}} catégorie tannakienne, et pour décrire le changement de
+base. (Pour cette dernière raison notamment, il aurait été maladroit dans
+le cas général de prendre les $M_{i}$ simples …). Attention, dans la
+description des $\otimes$-foncteurs en question, de tenir compte des
+contraintes, notamment de celle de commutativité ; il semble qu'il doive
+revenir au même d'exiger que le rang est conservé …
+
+\marginal{A expliciter !}
+
+\end{document}
