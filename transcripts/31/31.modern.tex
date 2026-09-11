@@ -1,0 +1,1373 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 31, pages 1-100.
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried — a doubtful
+% reading, a notation he used differently, a missing passage — moves into a
+% footnote.
+%
+% It is held to being mathematically correct as it stands, not merely faithful
+% to the page. Where the manuscript is loose or mistaken, the true statement is
+% what appears here, and the footnote says what the page has. In any dispute of
+% substance the transcription governs: whoever cites Grothendieck must cite the
+% batch-NN.fr.tex files.
+%
+% Scope: the folder was read WHOLE before any of this was written — all five
+% batches, pages 1-100, in one pass — and it is written as ONE file for the
+% whole shelfmark. The folder's sixth batch is a single leaf, page 101, which
+% continues the foreign typescript of page 99 (Bourbaki, Algèbre commutative,
+% chap. VII, n° 339, on the essential valuations of a Krull ring) and carries
+% nothing in his hand; it has no transcription and nothing here reads it.
+%
+% The spine: the folder is the workshop of ONE question — how high can the
+% cohomology of a scheme climb, and in particular does it stop at the dimension
+% for an affine scheme. That is Artin's affine vanishing theorem, and page 76
+% (Lemme 3) is where the folder reaches it. Everything else is either an input
+% to that (the cohomological dimension of fields, pages 2-8, 19-22, 46-51), a
+% tool for it (Čech against derived functors, 24-30; the trace, 41-44; the
+% negative answer about injective sheaves, 54-61), a refinement of it (the
+% function phi, 64-70; the two induction rungs, 73-80; the conjectures, 81-84),
+% or a consequence drawn from it (Lefschetz, 89-90; local asphericity, 92-98).
+%
+% One notation is fixed here for the whole folder and held to throughout, in
+% the "Conventions" section: the folder's E^d_k and Y[t_1,…,t_r] are written
+% A^d_k and A^r_Y, and « préschéma » is written « schéma », since the manuscript
+% predates the change of vocabulary in EGA.
+%
+% Four departures from the pages are substantive rather than cosmetic, and each
+% is footnoted where it occurs:
+%   - page 73's Théorème 1 is stated for « X = Spec A » with A strictly local,
+%     which would make it vacuous (a strictly local scheme has no higher
+%     cohomology at all); the reading says so and does not repair the statement,
+%     which the leaf does not determine;
+%   - page 50's Corollaire 2 is stated for a finite group with trivial action;
+%     the argument gives it for every finite Galois module, and the reading
+%     states the stronger true form;
+%   - page 28's conditions (ii) and (iii) carry a range of indices overwritten
+%     on the leaf and doubtful; the reading gives the range the proof uses and
+%     footnotes the ambiguity rather than choosing silently;
+%   - page 6 writes H^i(k, prod_{k'/k} G') ≃ H^i(k,G) where Shapiro's lemma
+%     requires H^i(k',G'); the reading writes the latter.
+%
+% Pass: Opus 5 (claude-opus-5), 2026-09-11 — first pass, unchecked against the
+% pages by a human.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{31}
+\pages{1}{100}
+\dating{[1963-1973]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{SGA A [SGA 4] (Résidus de rédaction) : notes manuscrites (s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+La chemise porte, de la main des archivistes, « SGA A [SGA 4] (Résidus de
+rédaction) ». Résidus : ce qui reste sur la table quand un traité est parti
+chez le dactylographe. Cent pages, écrites au dos de lettres et de tapuscrits,
+qui n'ont pas l'air d'un texte et n'en sont pas un. Mais une seule question les
+traverse, et il vaut la peine de l'avoir en tête avant d'en ouvrir une.
+
+Voici cette question. À un espace, on sait associer une suite de groupes
+$H^0, H^1, H^2, \dots$ qui comptent ses trous : $H^0$ ses morceaux, $H^1$ ses
+lacets qui ne se remplissent pas, $H^2$ ses cavités, et ainsi de suite. Pour un
+espace ordinaire cette suite s'arrête, et elle s'arrête au rang qui mesure la
+taille de l'espace : une surface n'a pas de $H^3$, il n'y a pas de place pour
+une cavité de dimension trois dans un objet qui n'en a que deux. C'est une
+évidence tant qu'on travaille avec des espaces ordinaires, et l'on cesse d'y
+penser.
+
+Or vers 1960 on venait de construire, pour les objets de la géométrie
+algébrique, une cohomologie neuve — la cohomologie étale — faite pour compter
+des trous que la topologie de Zariski ne voyait pas. Neuve, elle n'avait
+aucune des évidences des anciennes. Rien ne disait où sa suite s'arrêtait, ni
+même qu'elle s'arrêtât. Et tout en dépendait : les théorèmes de finitude, les
+suites spectrales, les conjectures de Weil que la théorie était faite pour
+attaquer, tous demandent un rang au-delà duquel il n'y a plus rien. Le nombre
+qui répond s'appelle la \emph{dimension cohomologique}, et ce dossier est
+l'atelier où on le cerne.
+
+L'idée qui arrive tient dans une remarque sur les espaces ordinaires. Un plan
+tout entier n'a aucun trou : il se rétracte sur un point. Une sphère en a un,
+mais il suffit de lui ôter un point — de la rendre \emph{ouverte} — pour qu'il
+disparaisse. En géométrie algébrique, les objets « ouverts » de cette sorte
+s'appellent les schémas affines, et l'analogie suggère qu'ils devraient être
+cohomologiquement pauvres : non pas sans trous, mais avec beaucoup moins que
+leur taille n'autoriserait. Le pari du dossier est précis : \emph{un schéma
+affine de dimension $n$ sur un corps séparablement clos n'a pas de cohomologie
+au-delà du rang $n$}. C'est le théorème d'annulation d'Artin, et la page 76 est
+l'endroit où le dossier y arrive.
+
+La stratégie pour l'atteindre est celle dont Grothendieck a fait une méthode.
+On ne prouve pas le théorème sur l'objet : on le fait descendre le long d'une
+fibration jusqu'à des objets sans épaisseur. Un espace affine de dimension $d$
+se projette sur un espace affine de dimension $d-1$, les fibres sont des
+droites ; si l'on sait ce que vaut la cohomologie des fibres, une suite
+spectrale recolle et l'on a gagné un cran. Descendue jusqu'au bout, la question
+n'est plus sur des schémas mais sur des \emph{corps} — le plus simple des
+objets géométriques, un point sans épaisseur — et c'est là que le dossier passe
+le plus clair de son temps. Combien de cohomologie a un corps ? La réponse
+dépend de son arithmétique et non de sa géométrie, et elle est tantôt facile
+(un corps de fonctions d'une variable sur un corps algébriquement clos en a
+très peu), tantôt féroce : un corps où $-1$ n'est pas une somme de carrés — les
+nombres réels, par exemple — en a infiniment, à tous les rangs, pour toujours.
+Cette dernière pathologie occupe deux pages du dossier, et elle explique
+pourquoi tant d'énoncés portent « $\ell$ premier à la caractéristique » ou « $k$
+séparablement clos » : ce ne sont pas des précautions d'écriture, ce sont les
+endroits où la théorie casse.
+
+Le dossier n'est pas une démonstration ; c'est un chantier, et il faut le lire
+comme tel. Des énoncés y sont écrits trois fois de suite, chaque version
+raturant la précédente. Des preuves s'arrêtent au milieu d'une phrase. Une
+question posée dans une marge — « cette restriction est-elle essentielle
+??? » — reste sans réponse trente pages plus loin. C'est peut-être ce que ces
+feuillets ont de plus rare : non pas les théorèmes, qu'on trouvera rédigés
+ailleurs, mais la trace de ce que c'est que de ne pas encore savoir, et de le
+noter dans la marge plutôt que de passer outre.
+
+Pour aller plus loin, les noms d'aujourd'hui : théorème d'annulation d'Artin,
+dimension cohomologique d'un corps, théorème de Tsen, corps $C_1$, cohomologie
+de Tate, lemme d'Abhyankar, acyclicité locale des morphismes lisses.
+
+\keywords{cohomological dimension, étale cohomology, Artin vanishing theorem,
+affine scheme, Galois cohomology, cohomological dimension of fields, Tsen's
+theorem, quasi-algebraically closed field, formally real field, Artin--Schreier
+theory, fppf topology, finite group scheme, group of multiplicative type,
+isotriviality, Tate cohomology, transfer, Sylow subgroup, inertia group,
+decomposition group, Čech cohomology, Leray spectral sequence, injective sheaf,
+flasque sheaf, Mayer--Vietoris, constructible sheaf, dévissage, Gysin sequence,
+weak Lefschetz theorem, hyperplane section, Tate twist, local acyclicity, smooth
+morphism, specialisation, Abhyankar's lemma, purity, simplicial action,
+asphericity}
+\end{resume}
+
+\pagerange{1}{100}
+\section*{Le fil du dossier, et les conventions}
+
+\subsection*{Les stations}
+
+Le dossier n'est pas ordonné, mais il est orienté. Voici ses stations, dans
+l'ordre où le lecteur les rencontrera, et ce que chacune apporte à la question
+centrale.
+
+\begin{itemize}
+\item \textbf{La dimension cohomologique d'un corps} — pages 2 à 8 (en
+caractéristique $p$, pour la topologie fppf), 19 à 22 (les corps réels, où
+elle est infinie), 46 à 51 (les corps de fonctions, où elle vaut la
+dimension). C'est le socle : tout le reste s'y ramène par fibration.
+\item \textbf{Les outils, et un contre-exemple} — pages 24 à 30 (quand les
+groupes de Čech calculent la vraie cohomologie), 41 à 44 (comment une trace
+inversible annule une cohomologie), 54 à 61 (pourquoi un faisceau injectif ne
+reste pas acyclique sur un fermé : la réponse est \emph{non}, et c'est une
+obstruction à la méthode évidente), 34 à 38 (asphéricité et torsion), 10 à 16
+(un module dont un quotient cesse d'être de type fini).
+\item \textbf{La dimension cohomologique des schémas affines} — pages 64 à 70
+(la fonction $\varphi$, qui remplace un entier par une fonction sur les points),
+73 à 80 (les deux théorèmes de finitude et leur récurrence croisée, dont sort
+l'annulation d'Artin à la page 76), 81 à 84 (les conjectures qui restent).
+\item \textbf{Deux conséquences géométriques} — pages 89 et 90 (Lefschetz
+faible, qui \emph{consomme} l'annulation affine), 92 à 98 (la spécialisation et
+l'asphéricité locale des morphismes lisses).
+\item \textbf{Les feuillets de tapuscrit corrigés} — pages 11 à 17, 25 à 27,
+71, 83 à 87. Ils ne sont pas de ce dossier-ci : ce sont des épreuves d'autres
+exposés, sur les groupes de type multiplicatif et sur la complétion formelle,
+qu'il a corrigées à la plume et dont il a utilisé les dos pour écrire le reste.
+On les donne parce qu'ils portent sa main, et à part parce qu'ils ne sont pas
+sur le même sujet.
+\end{itemize}
+
+Deux fils secondaires traversent le dossier sans s'y raccorder : un feuillet au
+crayon sur les normes et l'imperfection (page 60) et une note sur une suite
+spectrale (page 100). Ils sont donnés pour eux-mêmes à la fin.
+
+\subsection*{Les conventions}
+
+\emph{Schémas.} Le manuscrit dit « préschéma » là où l'on dit aujourd'hui
+« schéma » ; il est antérieur au changement de vocabulaire d'EGA, où
+« schéma » désignait encore le cas séparé. On écrit « schéma ».
+
+\emph{Espaces affines.} Le manuscrit écrit $E^d_k$ pour l'espace affine de
+dimension $d$ sur $k$, et $Y[t_1, \dots, t_r]$ pour l'espace affine relatif de
+dimension $r$ sur $Y$. On écrit $\mathbf{A}^d_k$ et $\mathbf{A}^r_Y$.
+
+\emph{Le nombre $\operatorname{cd}$.} Pour un schéma $X$ et un nombre premier
+$\ell$, $\operatorname{cd}_{\ell}(X)$ est le plus petit $n$ tel que
+$H^i(X,F) = 0$ pour $i > n$ et tout faisceau étale de $\ell$-torsion $F$ ; pour
+un corps $k$, $\operatorname{cd}_{\ell}(k)$ est celui de son groupe de Galois
+absolu. Sauf mention contraire $\ell$ est inversible sur le schéma considéré :
+c'est l'hypothèse sans laquelle rien de ce qui suit ne vaut.\footnote{Le dossier
+l'écrit tantôt « $\ell$ premier à la car.\ résiduelle », tantôt
+« $\ell \cdot 1_X$ inversible », tantôt pas du tout. Aux endroits où elle est
+omise mais nécessaire, la présente lecture la rétablit sans le signaler à
+chaque fois.} Les pages 2 à 8 font exception et travaillent au contraire
+\emph{en} la caractéristique, pour la topologie fppf ; on y revient là.
+
+\emph{Cohomologie de Tate.} $\widehat{H}^q(G,M)$ désigne, pour $G$ fini, les
+groupes de Tate, définis pour tout $q \in \mathbf{Z}$ ; $\widehat{H}(G,M) = 0$
+sans exposant signifie : pour tout $q$.
+
+\subsection*{Ce que le dossier annonce et n'établit pas}
+
+Un chantier laisse des chantiers. Ceux-ci sont nommés ici une fois pour toutes,
+pour qu'on ne les cherche pas dans le corps de la lecture :
+
+\begin{itemize}
+\item le Lemme 3 de la page 8, sur
+$\operatorname{cd}^{\mathrm{add}}_p(k)$, s'arrête sur « se dévisse en groupes
+$\alpha_p$ » et n'est pas démontré ;
+\item à la page 42, les conditions b$'$), b($q$) et b$'$($q$) sont nommées et
+leurs énoncés jamais écrits ;
+\item la page 48 s'interrompt sur « Supposons que $k$ soit quelconque » ;
+\item la démonstration du Th.\ 3 de la page 38 s'arrête à sa première ligne ;
+\item le feuillet de tapuscrit de la page 25 casse au milieu du mot « à
+l'aide » ;
+\item la récurrence sur $r$ ouverte à la page 80 n'est pas conduite ;
+\item la conjecture 1 bis) de la page 84 est écrite trois fois, chaque version
+raturant la précédente, et n'est pas arrêtée ;
+\item la Question marginale de la page 69 et celle de la page 22 (« cette
+restriction est-elle essentielle ??? ») restent ouvertes dans le dossier.
+\end{itemize}
+
+\pagerange{2}{8}
+\section*{La dimension cohomologique d'un corps}
+
+\subsection*{En la caractéristique, pour la topologie fppf (pages 2 à 8)}
+
+Les premières pages posent la question dans le cas où elle est le plus rétive :
+$k$ un corps de caractéristique $p > 0$, et l'on veut borner la cohomologie à
+coefficients de $p$-torsion. La cohomologie étale y est aveugle — un
+$p$-groupe infinitésimal n'a pas de points étales — et il faut travailler dans
+la topologie fidèlement plate de présentation finie.
+
+On note $\operatorname{cd}^{!}_p(k)$ la dimension cohomologique calculée avec
+les $k$-schémas en groupes commutatifs \emph{finis} d'ordre une puissance de
+$p$. Tout tel groupe $G$ se dévisse en trois étages
+\[
+G' \subset G'' \subset G, \qquad G'' = G^{\circ},
+\]
+où $G/G''$ est étale, $G'$ est infinitésimal de type multiplicatif, et
+$G''/G'$ infinitésimal de type additif. D'où :
+
+\textbf{Lemme 1.} $\operatorname{cd}^{!}_p(k) \leqslant n$ si et seulement si
+$H^i(k,G) = 0$ pour $i > n$ pour les $G$ de chacun des trois types : étale,
+infinitésimal de type multiplicatif, infinitésimal de type
+additif.\footnote{C'est le dévissage qui structure toute la suite. La page
+l'écrit avec les abréviations « t.m.\ » et « add », et les trois dimensions
+partielles $\operatorname{cd}^{\text{ét}}_p$,
+$\operatorname{cd}^{\mathrm{t.m.}}_p$, $\operatorname{cd}^{\mathrm{add}}_p$.}
+
+Le cas étale se règle d'un mot : $\operatorname{cd}^{\text{ét}}_p(k)$ vaut $0$
+ou $1$ selon que $k$ n'a pas, ou a, une extension séparable finie de degré
+divisible par $p$.
+
+Le cas multiplicatif occupe les pages 4 à 8. Un groupe infinitésimal de type
+multiplicatif est le dual d'un groupe fini étale, lequel est quotient d'un
+module galoisien libre de type fini sur $\mathbf{Z}$ ; dualement, $G$ se plonge
+dans un tore, et l'on a une suite exacte
+\[
+0 \longrightarrow G \longrightarrow T \longrightarrow T' \longrightarrow 0
+\]
+avec $T$, $T'$ des tores. D'où :
+
+\textbf{Lemme 2.} $\operatorname{cd}^{\mathrm{t.m.}}_p(k) \leqslant n$ si et
+seulement si, pour tout tore $T$ sur $k$, la composante $p$-primaire
+$H^i(k,T)(p)$ est nulle pour $i > n$ et $p$-divisible pour $i = n$.
+De façon équivalente, pour toute extension séparable finie $k'$ de $k$ :
+$H^i(k', \mathbf{G}_m) = 0$ pour $i > n$, et $H^n(k', \mathbf{G}_m)$ est
+$p$-divisible.
+
+La nécessité se lit sur la suite de Kummer
+$0 \to {}_pT \to T \xrightarrow{p} T \to 0$. Pour la suffisance, on descend à
+une extension $k'$ de degré premier à $p$ : par le lemme de
+Shapiro,\footnote{La page écrit $H^i(k, \prod_{k'/k} G') \simeq H^i(k,G)$ ;
+l'énoncé de Shapiro donne $H^i(k, \prod_{k'/k} G') \simeq H^i(k', G')$, et
+c'est ce dont l'argument a besoin. La lecture écrit la forme correcte.}
+\[
+H^i\Bigl(k, \prod\nolimits_{k'/k} G'\Bigr) \simeq H^i(k', G'),
+\]
+l'homomorphisme $\prod_{k'/k} G_{k'} \to G$ est un épimorphisme, et le
+transfert permet de conclure sur $G$ dès qu'on conclut sur $G_{k'}$. On est
+ainsi ramené au cas où $G$ est scindé par une $p$-extension, donc se dévisse en
+copies de $\mu_p$, et tout revient à $H^{n+1}(\mu_p) = 0$, qui se lit sur
+$0 \to \mu_p \to \mathbf{G}_m \to \mathbf{G}_m \to 0$.
+
+Reste le cas additif, dont la page annonce la réponse sans la démontrer :
+
+\textbf{Lemme 3.} $\operatorname{cd}^{\mathrm{add}}_p(k)$ vaut $0$ si $k$ est
+parfait, $1$ sinon.\footnote{La démonstration s'arrête sur « tout groupe
+infinitésimal additif se dévisse en groupes $\alpha_p$ » — la première ligne.
+L'énoncé est celui de la page ; la présente lecture ne le certifie pas.}
+
+\pagerange{19}{22}
+\subsection*{Les corps réels, où la dimension est infinie (pages 19 à 22)}
+
+Deux pages, écrites au net sous le titre « Théorèmes de M.\ Artin », enregistrent
+la pathologie qui gouverne tout le reste du dossier : il existe des corps dont
+la dimension cohomologique en $2$ est infinie, et l'on sait exactement
+lesquels.
+
+\textbf{Théorème 1.} Soit $K$ une extension de type fini de $\mathbf{Q}$. Les
+conditions suivantes sont équivalentes :
+\begin{enumerate}
+\item[(i)] $-1$ est une somme de carrés dans $K$ ;
+\item[(i bis)] $K$ n'admet aucune structure de corps ordonné ;
+\item[(i ter)] $K$ n'est isomorphe à aucun sous-corps de $\mathbf{R}$ ;
+\item[(ii)] il existe un modèle $X$ de $K$ sans point réel lisse ;
+\item[(ii bis)] $\dim X(\mathbf{R}) < \deg\operatorname{tr} K/\mathbf{Q}$,
+la dimension étant la dimension topologique ;
+\item[(ii ter)] $X(\mathbf{R})$ est rare dans $X_{\mathbf{C}}$ ;
+\item[(ii quater)] si $X$ est lisse sur $\mathbf{Q}$, $X(\mathbf{R}) =
+\emptyset$ ;
+\item[(iii)] $\operatorname{cd}_2(K) < +\infty$.
+\end{enumerate}
+
+L'équivalence des quatre premières est le théorème d'Artin--Schreier : un corps
+est ordonnable si et seulement si $-1$ n'y est pas somme de carrés. Ce qui est
+neuf est le raccord avec (iii) : un corps ordonnable a un élément d'ordre $2$
+dans son groupe de Galois absolu — la conjugaison complexe d'une clôture
+réelle — et un groupe profini ayant de la torsion a une dimension cohomologique
+infinie.\footnote{Le dossier écrit « Théorèmes de M.\ Artin », c'est-à-dire
+Michael Artin, son collaborateur de SGA 4 ; le cœur purement corporel de
+l'énoncé est cependant classique et remonte à Artin et Schreier, et
+l'observation sur la torsion et la dimension cohomologique est de Serre. La
+lecture ne tranche pas la question d'attribution et se borne à nommer les
+résultats.}
+
+\textbf{Corollaire 1.} Soit $X$ un schéma de type fini sur $\mathbf{Z}$. Sont
+équivalents : $X(\mathbf{R}) = \emptyset$ ; $\operatorname{cd}_2(X) < +\infty$ ;
+$\operatorname{cd}_2(X_{\mathbf{Q}}) < +\infty$. Et alors
+\[
+\operatorname{cd}(X) < 2\dim X + 1, \qquad
+\operatorname{cd}(X_{\mathbf{Q}}) \leqslant 2\dim X_{\mathbf{Q}} + 2, \qquad
+\operatorname{cd}(X_{\mathbf{R}}) \leqslant 2\dim X.
+\]
+
+\textbf{Corollaire 3.} Pour $X$ de type fini sur $\mathbf{R}$, la finitude de
+$\operatorname{cd}_2(X)$ équivaut encore à $X(\mathbf{R}) = \emptyset$, et l'on
+a alors, pour tout faisceau étale $F$,
+\[
+H^i(X,F) \simeq H^i\bigl(X(\mathbf{C})/(\mathbf{Z}/2\mathbf{Z}),\, F\bigr)
+\]
+— la cohomologie ordinaire du quotient de l'espace des points complexes par la
+conjugaison — et $\operatorname{cd}_2(X) \leqslant 2\dim X$.
+
+Vient ensuite l'énoncé qui servira au dossier tout entier, et qui dit combien
+de cohomologie on gagne en montant en degré de transcendance :
+
+\textbf{Théorème 2.} Soient $k$ un corps et $r$ un nombre premier. Sont
+équivalents :
+\begin{enumerate}
+\item[(i)] pour toute extension de type fini $k'$ de $k$,
+$\operatorname{cd}_r(k') = \operatorname{cd}_r(k) + \deg\operatorname{tr}
+k'/k$ ;
+\item[(i bis)] la même égalité pour la seule extension
+$k' = k(\sqrt{-1})$ ;
+\item[(iii)] on n'est pas dans le cas d'exception : $k$ ordonnable (donc de
+caractéristique $0$), $r = 2$, et $\operatorname{cd}_2(k(\sqrt{-1})) <
++\infty$.
+\end{enumerate}
+La marge énumère les cas où la condition est acquise sans avoir à la vérifier :
+$\operatorname{car} k > 0$ ; $r \neq 2$ ; $-1$ somme de carrés dans $k$ ;
+$\operatorname{cd}_2 k(\sqrt{-1}) < +\infty$.\footnote{La condition (ii) de la
+page — l'existence d'un sous-corps $k_0$ de type fini sur le corps premier avec
+$\operatorname{cd}_r(k_0)$ fini — est écrite avec un $k'$ là où le sens demande
+$k$, et n'est pas reprise ici.}
+
+\textbf{Corollaire.} Soit $A$ un anneau local noethérien intègre, de corps des
+fractions $K$ et de corps résiduel $k$. Alors, pour tout premier $r$,
+\[
+\operatorname{cd}_r(K) \geqslant \operatorname{cd}_r(k) + \dim A,
+\]
+à deux exceptions possibles près : $r$ égale la caractéristique de $K$ ; ou
+bien $r = 2$ et il existe $x \in \operatorname{Spec}(A)$ dont le corps résiduel
+$k(x)$ est ordonnable avec $\operatorname{cd}_2 k(x)(\sqrt{-1})$ fini. La marge
+donne l'exemple qui montre que le second cas se produit :
+$A = \mathbf{R}[X,Y]/(X^2+Y^2)$ localisé. Si $A$ est caténaire et
+universellement japonais, l'exception se précise : c'est $k$ lui-même qui doit
+être réel. Si $A$ est régulier, elle disparaît et l'inégalité vaut sans
+réserve.
+
+Et, dans la marge, en travers : \emph{cette restriction est-elle essentielle
+???} Le dossier ne répond pas.
+
+\pagerange{46}{51}
+\subsection*{Les corps de fonctions, où la dimension vaut la dimension (pages 46 à 51)}
+
+Quinze pages plus loin, le dossier reprend la même question par l'autre bout, du
+côté où la réponse est bonne. La Proposition de la page 46 caractérise
+l'annulation de la cohomologie galoisienne au-delà d'un rang $n$ par quatre
+conditions de plus en plus maniables : elle vaut pour tous les groupes
+algébriques commutatifs si et seulement si elle vaut pour les groupes finis, si
+et seulement si elle vaut pour les groupes des éléments inversibles des
+algèbres commutatives séparables.\footnote{L'énoncé de la page 46 est un
+brouillon rapide : les conditions b$'$) et c) sont écrites par-dessus des
+versions biffées et la prose qui les relie est en grande partie perdue. La
+lecture donne la charpente — quatre conditions, et le circuit d'implications
+a) $\Rightarrow$ b), a) $\Rightarrow$ c), c) $\Rightarrow$ b$'$),
+b$'$) $\Rightarrow$ b) — et ne reconstitue pas les énoncés que le feuillet ne
+porte plus.}
+
+Les dévissages qui la démontrent sont instructifs et tiennent en trois gestes.
+Pour passer des groupes finis à tous les groupes algébriques commutatifs : on
+sépare la partie unipotente, on utilise que la décomposition en parties
+semi-simple et unipotente est définie sur $k$, et l'on se ramène à trois cas —
+unipotent, à éléments semi-simples, commutatif complet. Dans les deux derniers,
+on passe au sous-groupe $\mathcal{U}$ des éléments d'ordre fini : le quotient
+$G/\mathcal{U}$ est divisible, donc sans cohomologie, d'où
+$H^i(\mathfrak{g}, G) \simeq H^i(\mathfrak{g}, \mathcal{U})$ pour $i \geqslant
+1$, et $\mathcal{U}$ est réunion filtrante de ses sous-groupes finis
+${}_n\mathcal{U}$, où l'hypothèse s'applique.\footnote{La page passe sans
+prévenir de $H^i(k,-)$ à $H^i(\mathfrak{g},-)$, $\mathfrak{g}$ désignant le
+groupe de Galois absolu ; on a gardé la distinction. Une note marginale de sa
+main, à cet endroit, dit : « ici c'est faux », sans qu'on puisse établir à
+quelle ligne elle se rapporte.} Pour le cas unipotent, on distingue la
+caractéristique nulle — où $G \simeq \mathbf{G}_a^n$ déjà sur $k$, car
+$H^1(k, \mathrm{GL}(n)) = 0$ — et la caractéristique $p$, où la filtration
+$G \supset pG \supset \cdots$ a tous ses crans définis sur $k$ et ramène à
+$pG = 0$.
+
+Puis les deux lemmes qui donnent la réponse pour les corps de fonctions.
+
+\textbf{Lemme 1 (Tsen).} Soient $k$ algébriquement clos et $K$ une extension de
+type fini de $k$, de degré de transcendance $1$. Alors $K$ est
+quasi-algébriquement clos : toute forme homogène de degré $d$ en plus de $d$
+variables y a un zéro non trivial.
+
+\textbf{Corollaire 1.} $H^i(K, \mathbf{G}_m) = 0$ pour $i \geqslant 1$. En
+particulier le groupe de Brauer de $K$ est nul.\footnote{La page écrit
+$\widehat{H}^i(K, \mathbf{G}_m) = 0$ « pour tout $i$ », en cohomologie de Tate.
+Pour un groupe profini les groupes de Tate en degré $\geqslant 1$ coïncident
+avec les groupes ordinaires, et c'est de cette forme que la suite se sert ; le
+degré $0$ n'est pas nul en général. La lecture écrit donc l'énoncé en degrés
+$\geqslant 1$.}
+
+\textbf{Corollaire 2.} $H^i(K, \Gamma) = 0$ pour $i > 1$ et tout module
+galoisien fini $\Gamma$ ; autrement dit
+$\operatorname{cd}(K) \leqslant 1$.\footnote{La page énonce le corollaire pour
+$\Gamma$ fini à action triviale. L'argument qu'elle donne — la surjectivité de
+$x \mapsto x^n$ sur $\widetilde{K}^{*}$ pour $n$ premier à la caractéristique,
+et la suite d'Artin--Schreier
+$0 \to \mathbf{Z}/p \to \widetilde{K} \xrightarrow{\wp} \widetilde{K} \to 0$
+pour la partie $p$ — donne la majoration $\operatorname{cd}(K) \leqslant 1$,
+d'où l'annulation pour \emph{tout} module galoisien fini. La lecture énonce
+cette forme, qui est celle dont le Lemme 2 a besoin.}
+
+\textbf{Lemme 2.} Soit $k$ un corps tel que $H^i(k', \Gamma) = 0$ pour $i > n$
+et toute extension de type fini $k'$ de $k$. Alors $H^i(K, \Gamma) = 0$ pour
+$i > n+1$ dès que $K$ est de degré de transcendance $\leqslant 1$ sur $k$.
+
+La démonstration est le mécanisme même de tout le dossier, dans sa forme la plus
+simple. On intercale entre $k$ et $K$ le composé avec une clôture algébrique,
+d'où une suite exacte de groupes de Galois
+\[
+e \longrightarrow G' \longrightarrow G \longrightarrow G'' \longrightarrow e
+\]
+et sa suite spectrale
+$H^i\bigl(G'', H^j(G', \Gamma)\bigr) \Rightarrow H^{*}(G, \Gamma)$. Le Lemme 1
+tue les $j > 1$ ; l'hypothèse tue les $i > n$ ; il ne reste rien au-dessus de
+$n+1$.
+
+\textbf{Corollaire.} Si $K$ est un corps de fonctions algébriques de dimension
+$n$ sur un corps algébriquement clos, $\operatorname{cd}(K) \leqslant n$.
+
+C'est le socle annoncé. Il dit que, du côté géométrique, un corps se comporte
+comme sa dimension le laisse espérer ; toute la difficulté restante est de
+passer d'un corps à un schéma.
+
+\pagerange{24}{30}
+\section*{Les outils, et un contre-exemple}
+
+\subsection*{Le lemme de Cartan : quand Čech suffit (pages 24 à 30)}
+
+Pour calculer une cohomologie il faut une résolution injective, qu'on n'a
+jamais. Ce qu'on a, ce sont des recouvrements et les groupes de Čech qu'ils
+produisent, calculables à la main. La question de savoir quand les seconds
+donnent la première est donc préalable à tout, et le dossier la règle sous un
+nom que Grothendieck lui donne lui-même — le lemme de Cartan.
+
+Soient $T$ un site, $F$ un faisceau abélien sur $T$, $n$ un entier, et
+$\mathcal{M}$ une classe d'objets de $T$ satisfaisant deux conditions :
+$\mathcal{M}$ est stable par produits fibrés, et pour tout $S \in \mathcal{M}$
+les recouvrements de $S$ par des objets de $\mathcal{M}$ sont cofinaux parmi
+tous les recouvrements de $S$.
+
+\textbf{Lemme de Cartan.} Sous ces conditions, les énoncés suivants sont
+équivalents, chacun pour $0 < i \leqslant n$ :
+\begin{enumerate}
+\item[(i)] $H^i(S,F) = 0$ pour tout $S \in \mathcal{M}$ ;
+\item[(ii)] $\check{H}^i(\mathcal{U},F) = 0$ pour tout $S \in \mathcal{M}$ et
+tout recouvrement $\mathcal{U}$ de $S$ par des objets de $\mathcal{M}$ ;
+\item[(iii)] $\varinjlim_{\mathcal{U}} \check{H}^i(\mathcal{U},F) = 0$,
+la limite portant sur ces mêmes recouvrements.
+\end{enumerate}
+
+Tout passe par une seule suite spectrale, celle qui compare Čech au foncteur
+dérivé :
+\[
+E_2^{pq} = \check{H}^p\bigl(\mathcal{U}, \mathcal{H}^q(F)\bigr)
+\Longrightarrow H^{p+q}(S,F),
+\]
+où $\mathcal{H}^q(F)$ est le préfaisceau $U \mapsto H^q(U,F)$. Sous (i) les
+lignes $0 < q \leqslant n$ sont nulles, d'où $\check{H}^i(\mathcal{U},F)
+\simeq H^i(S,F)$ pour $i \leqslant n$ et donc (ii) ; (ii) $\Rightarrow$ (iii)
+est trivial ; et (iii) $\Rightarrow$ (i) se fait par récurrence sur $n$, en
+observant qu'à l'étape $n$ l'hypothèse de récurrence annule les colonnes
+$0 < q < n$, l'hypothèse (iii) la ligne $q = 0$ pour $0 < p \leqslant n$, et la
+définition d'un faisceau la colonne $p = 0$ pour $q > 0$ : il ne reste aucun
+terme sur la diagonale $p+q = n$.\footnote{La page accompagne l'argument d'un
+croquis du plan $(p,q)$ où l'on voit la diagonale ne rencontrer aucune croix ;
+c'est la figure qui porte la démonstration, et elle n'a pas d'autre contenu que
+ce décompte.}
+
+La page 28 pousse plus loin et demande non plus l'annulation mais
+l'\emph{identification} : quand a-t-on
+$\varinjlim_{\mathcal{U}} \check{H}^i(\mathcal{U},F) \simeq H^i(S,F)$ pour
+$i \leqslant n$ ? On introduit pour cela le préfaisceau
+\[
+\overline{H}^q(F)(T) = \varinjlim_{\mathcal{V}}
+\check{H}^q(\mathcal{V}, F),
+\]
+$\mathcal{V}$ parcourant les recouvrements de $T$ par des objets de
+$\mathcal{M}$ — autrement dit la version « déjà passée à la limite » de
+$\mathcal{H}^q(F)$. La condition suffisante est l'annulation de
+$\varinjlim_{\mathcal{U}} \check{H}^p(\mathcal{U}, \mathcal{H}^q(F))$, et de
+même avec $\overline{H}^q(F)$, pour $q > 0$ et $p+q \leqslant
+n$.\footnote{L'intervalle d'indices est, sur le feuillet, réécrit par-dessus
+lui-même : on lit « $p < q \leqslant n$ » là où une version biffée portait
+« $0 < q \leqslant n$ », et une troisième ligne, biffée aussi, porte
+« $p + q \leqslant n-1$ ». La lecture donne l'intervalle dont la démonstration
+de la page 30 se sert effectivement — $q > 0$ et $p+q \leqslant n$ — et signale
+que le feuillet ne le fixe pas.} Deux variantes au niveau des cochaînes, (iii
+bis) et (iii ter), disent la même chose de façon vérifiable : toute cochaîne de
+$C^p(\mathcal{U}, \mathcal{H}^q(F))$ s'annule sur un raffinement.
+
+La page 30 démontre le circuit, de nouveau par récurrence sur $n$ et de nouveau
+sur la même suite spectrale, et le referme par un diagramme :
+
+\begin{tikzcd}[column sep=small, row sep=small]
+\text{(ii)} \arrow[d, Rightarrow] \arrow[dr, Rightarrow] & & \text{(iii bis)} \arrow[ll, Rightarrow] \arrow[d, Rightarrow] \\
+\text{(i)} & \text{(iii)} \arrow[l, Rightarrow] & \text{(iii ter)} \arrow[l, Rightarrow]
+\end{tikzcd}
+
+\pagerange{41}{44}
+\subsection*{La trace, ou comment tuer une cohomologie (pages 41 à 44)}
+
+Le deuxième outil est un principe d'une simplicité désarmante, et c'est lui qui
+justifie toutes les hypothèses « $\ell$ premier à » du dossier.
+
+Soient $B$ un anneau unitaire, $G$ un groupe fini d'automorphismes de $B$, et
+$A = B^G$. On pose $\operatorname{Tr}_G b = \sum_{g \in G} gb$.
+
+\textbf{Proposition.} Sont équivalents :
+\begin{itemize}
+\item[a)] $A = \operatorname{Tr}_G B$ ;
+\item[a$'$)] $1 \in \operatorname{Tr}_G B$ ;
+\item[b)] $\widehat{H}(G,M) = 0$ pour tout $(G,B)$-module $M$ ;
+\item[b($q$))] la même annulation en un seul degré $q$.
+\end{itemize}
+
+Le ressort est une ligne. Si $\varphi_M(b)$ désigne l'homothétie de rapport $b$
+dans $M$, on a $g\,\varphi_M(b)\,g^{-1} = \varphi_M(gb)$, donc
+$\varphi_M(\operatorname{Tr}_G b) = \operatorname{Tr}_G \varphi_M(b)$ ; et une
+homothétie dont le rapport est une trace agit par zéro sur la cohomologie de
+Tate. Si donc $1$ est une trace, l'identité de $\widehat{H}(G,M)$ est nulle, et
+le groupe l'est aussi. Le passage d'un degré au suivant se fait sur la suite
+exacte
+\[
+0 \longrightarrow M \longrightarrow M \otimes_{\mathbf{Z}} \mathbf{Z}[G]
+\longrightarrow N \longrightarrow 0, \qquad m \longmapsto \sum_g m \otimes g,
+\]
+dont le terme du milieu est induit, donc de cohomologie de Tate nulle : d'où
+$\widehat{H}^{q+1}(G,M) \simeq \widehat{H}^{q}(G,N)$ et la récurrence dans les
+deux sens.
+
+La page 42 en donne la forme relative, pour $G' \subset G$ et $A' = B^{G'}$,
+avec le transfert $t(G,G')$. Et elle énonce le théorème dont tout le reste
+descend :
+
+\textbf{Théorème.} Soient $G$ fini, $G' \subset G$, et $M$ un $G$-module tel
+que l'identité de $M$ s'écrive $1 = \operatorname{Tr}_{G/G'}\varphi$ pour un
+$\varphi \in \operatorname{Hom}_{G'}(M,M)$. Alors le transfert
+$\widehat{H}(G',M) \to \widehat{H}(G,M)$ est surjectif, la restriction
+$\widehat{H}(G,M) \to \widehat{H}(G',M)$ est injective, et son image est le
+sous-groupe des éléments stables $\widehat{H}(G',M)^{G}$.
+
+Suit, entre parenthèses et de sa main : « Ceci contient le Th.\ sur les groupes
+de Sylow ». C'est exact — en prenant pour $G'$ un $p$-Sylow, l'indice $[G:G']$
+est premier à $p$ et l'hypothèse est acquise sur la composante $p$-primaire.
+La marge indique l'autre application visée : prendre $G' = G_i$, le groupe
+d'inertie.
+
+C'est ce que fait la page 43. Soit $G$ un groupe fini d'automorphismes d'un
+anneau local $\mathcal{O}$, transitif sur les idéaux maximaux ; soient $G_d$ le
+groupe de décomposition de $\mathfrak{m}_0$ et $G_i \subset G_d$ le groupe
+d'inertie, noyau de l'action sur le corps résiduel. S'il existe
+$x \in \mathcal{O}^{G_i}$ avec $\operatorname{Tr}_{G/G_i} x = 1$, alors pour
+tout module $M$
+\[
+\widehat{H}(G,M) = \widehat{H}(G_i,M)^{G/G_i},
+\]
+et $\widehat{H}(G,M) = 0$ pour tout $M$ si et seulement si l'ordre de $G_i$
+n'est pas divisible par la caractéristique résiduelle $p$. C'est l'énoncé
+classique : \emph{une extension modérément ramifiée est cohomologiquement
+triviale}. En particulier, si $G_i$ est trivial — extension non ramifiée —
+$H^1(G, \mathcal{O}^{*}) = \{e\}$.
+
+La page se ferme sur un carré de comparaison entre $\widehat{H}(G,M)$,
+$\widehat{H}(G_i,M)^{G/G_i}$, $\widehat{H}(G_d,M)^{G/G_d}$ et
+$\widehat{H}(G_d, M_{\mathfrak{m}_0})$, dont deux flèches sont annotées en
+marge : « injectifs, à images denses ». Et, à côté du corollaire :
+\emph{Comment voir ça ?}
+
+\pagerange{54}{61}
+\subsection*{Un faisceau injectif ne reste pas acyclique sur un fermé (pages 54 à 61)}
+
+Voici la page où le dossier essuie un refus, et c'est l'une des plus utiles.
+
+La méthode évidente pour calculer la cohomologie d'un fermé $Y \subset X$ est
+de prendre une résolution injective sur $X$ et de la restreindre. Elle marche
+si la restriction d'un injectif est acyclique. La page 54 pose la question :
+$X$ un espace topologique, $Y$ un fermé, $F$ un faisceau injectif sur $X$, a-t-on
+$H^i(Y, F|Y) = 0$ pour $i > 0$ ?
+
+\emph{Réponse négative.}
+
+La raison de fond est formelle et vaut la peine d'être dite, car la page la
+laisse implicite. Pour une immersion fermée $i : Y \to X$, l'image directe
+$i_{*}$ est exacte et admet $i^{-1}$ pour adjoint à gauche ; c'est pourquoi
+$i_{*}$ préserve les injectifs. Mais $i^{-1}$ n'a pas d'adjoint à gauche exact
+— l'extension par zéro est adjointe à gauche de $i^{-1}$ pour une immersion
+\emph{ouverte}, pas fermée — et rien ne fait donc de $i^{-1}F$ un injectif, ni
+même un acyclique.
+
+Le dossier ne raisonne pas ainsi : il construit. Et il commence par montrer que
+la chose casse déjà au degré $0$.
+
+\textbf{Exemple 1.} Soit $X$ un espace irréductible et $Y = \{a,b\}$ un fermé
+formé de deux points fermés distincts. Alors $Y$ est discret, et une section de
+$F|Y$ vaut $0$ en $a$ et $1$ en $b$ sans provenir d'aucune section sur un
+voisinage de $Y$ : car un tel voisinage contiendrait un ouvert autour de $a$ et
+un ouvert autour de $b$, et dans un espace irréductible deux ouverts non vides
+se rencontrent. L'homomorphisme
+\[
+\varinjlim_{U \supset Y} H^0(U,F) \longrightarrow H^0(Y, F|Y)
+\]
+n'est donc pas surjectif, quelque injectif que soit $F$.\footnote{C'est le point
+précis où l'intuition venue des espaces séparés trompe : pour $Y$ compact dans
+un espace raisonnable, les sections de $i^{-1}F$ sur $Y$ \emph{sont} la limite
+inductive des sections sur les voisinages. La topologie de Zariski n'est pas de
+ce genre, et l'irréductibilité est exactement ce qui casse l'énoncé.}
+
+\textbf{Exemples 2 et 3} varient le motif — un cercle coupé par une droite en
+deux points, puis deux droites se coupant en un point, avec le faisceau des
+fonctions à valeurs dans $\mathbf{Q}$ — et montrent que passer à un $Y$
+irréductible ne suffit pas à sauver la situation.
+
+\textbf{Exemple 4} donne enfin le contre-exemple à la question elle-même. Soit
+$Y = Y_1 \cup Y_2$, réunion de deux courbes irréductibles se coupant en deux
+points $a$ et $b$, dans un $X$ irréductible ; $F$ le faisceau des fonctions de
+$X$ dans $\mathbf{Q}$. La suite de Mayer--Vietoris donne
+\[
+H^0(Y_1, F_1) \times H^0(Y_2, F_2) \longrightarrow H^0(Y_{12}, F_{12})
+\longrightarrow H^1(Y, F|Y) \longrightarrow 0
+\]
+avec $H^0(Y_{12}, F_{12}) = F_a \times F_b$. L'élément $(0,1)$ ne provient pas
+du terme de gauche : s'il en provenait, deux sections $\varphi_1, \varphi_2$
+coïncideraient au voisinage de $a$ et différeraient de $1$ au voisinage de $b$,
+et les deux voisinages se rencontrent puisque $X$ est irréductible — d'où
+$0 = 1$. Donc $H^1(Y, F|Y) \neq 0$ pour un $F$ injectif, ce qu'il fallait
+produire. La page 58 relève l'exemple en dimension $2$, avec un $Y$ irréductible,
+en coupant $X$ par un plan qui recoupe $Y$ en deux composantes.
+
+La Proposition des pages 59 et 61 tire la morale positive : pour un faisceau
+abélien $F$ sur un espace noethérien, l'annulation de $H^i(U,F)$ pour tout
+ouvert $U$ et tout $i > 0$, l'annulation des groupes de Čech de tout
+recouvrement, et la flasquité sont équivalentes.\footnote{Les conditions de la
+page 59 sont numérotées (i), (i bis), (ii), (ii bis), (iii) et leurs énoncés
+n'y sont écrits qu'à demi ; la présente lecture ne restitue que celles que la
+page porte en clair et que la démonstration de la page 61 utilise.} La dernière
+implication est celle que la page 61 achève : on plonge $F$ dans un flasque
+$C^0$, l'hypothèse fait de la suite une suite exacte de flasques, donc $C^1$
+est flasque comme $C^0$, donc la résolution calcule la cohomologie, et les
+$H^i(U,F)$ s'annulent au-delà du premier cran par décalage.
+
+\pagerange{34}{38}
+\subsection*{Asphéricité et torsion (pages 34 à 38)}
+
+Cinq feuillets à l'encre bleue, d'une main qui n'est pas la sienne et sous
+l'en-tête « GRÖTHENDIECK. », enregistrent un résultat d'un genre différent : il
+n'y est question ni de schémas ni de cohomologie étale, mais de groupes opérant
+sur des ensembles simpliciaux. Il est là parce qu'il fournit le mécanisme par
+lequel un quotient par un groupe fini ne fait apparaître que de la torsion
+contrôlée — le même mécanisme, au fond, que la trace de la page 41.
+
+\textbf{Théorème 1.} Soient $E$ un ensemble simplicial connexe, $G$ un groupe
+discret opérant sur $E$ par transformations simpliciales, $B = E/G$ le quotient
+et $p : E \to B$ la projection. Alors l'image de
+$p_{*} : \pi_1(E) \to \pi_1(B)$ est distinguée, et
+\[
+\pi_1(B)/\operatorname{im} p_{*} \simeq G/S,
+\]
+où $S$ est le sous-groupe distingué de $G$ engendré par les stabilisateurs des
+sommets ; $E/S$ est le revêtement de $B$ correspondant à
+$\operatorname{im} p_{*}$.
+
+La démonstration construit directement l'isomorphisme : un $g \in G$ étant
+donné, on choisit un chemin de $x_0$ à $g x_0$, sa projection est un lacet de
+$B$, et sa classe modulo $\operatorname{im}\pi_1(E)$ ne dépend pas du chemin.
+L'application $\chi$ ainsi obtenue est surjective (les chemins se relèvent,
+Lemme 1), multiplicative, et son noyau est exactement $S$.
+
+\textbf{Théorème 2.} Si $G$ est fini d'ordre $n$, l'image de
+$H_{*}(E) \to H_{*}(B)$ contient tous les éléments divisibles par $n$.
+
+La preuve tient en une formule : pour un cycle $\zeta = \sum a_i \sigma_i$ de
+$B$, on relève chaque simplexe et l'on moyenne sur le groupe ; le cycle
+$\theta = \sum_{g,i} g\,a_i \tau_i$ de $E$ se projette sur $n\zeta$. C'est
+encore la trace, sous un autre habit.
+
+\textbf{Théorème 3.} Si $E$ est contractile et $S$ fini d'ordre $n$, alors pour
+$i > 1$ tout élément de $\pi_i(B)$ est d'ordre divisant une puissance de
+$n$.\footnote{La démonstration s'arrête à sa deuxième ligne : $E/S$ est le
+revêtement universel de $B$ par le Théorème 1, donc $\pi_i(B) = \pi_i(E/S)$, et
+l'on veut conclure par le Théorème 2 sur les $H_i(E/S)$. Le feuillet s'arrête
+là.}
+
+\pagerange{10}{16}
+\subsection*{Un module dont un quotient cesse d'être de type fini (pages 10 à 16)}
+
+Quatre feuillets, écrits au dos du tapuscrit, construisent un contre-exemple de
+finitude. Il n'appartient pas à la ligne principale mais il en éclaire les
+précautions : les théorèmes d'annulation du dossier portent tous sur des
+faisceaux constructibles ou noethériens, et voici ce qui arrive sans cette
+hypothèse.
+
+Soient $A$ un anneau, $f \in A$ un élément $A$-régulier, $g \in A$ un élément
+$B$-régulier où $B = A/fA$, avec $B/gB \neq 0$ — par exemple $A$ local régulier
+de dimension $2$ et $(f,g)$ un système de paramètres. On construit un
+$A$-module $M$ tel que
+\begin{enumerate}
+\item[(i)] $M = \bigcup_{n} {}_{f^n}M$ avec
+${}_{f^{n+1}}M/{}_{f^n}M \simeq B$ — donc $M$ est de $f$-torsion, à support
+dans $V(f)$, et ses crans successifs sont aussi petits qu'on veut ;
+\item[(ii)] $M/fM \simeq (B/gB)^{(\mathbf{N})}$ — donc $M/fM$ n'est pas de type
+fini.
+\end{enumerate}
+
+La construction est une récurrence sur des extensions. On pose $E_{n+1}$ égale
+à l'image directe (le \emph{pushout}) de la suite
+$0 \to A \xrightarrow{f} A \to A/fA \to 0$ le long de l'homomorphisme
+$A \to E_n$ défini par un élément $\xi_n \in E_n$ :
+
+\begin{tikzcd}[column sep=small, row sep=small]
+0 \arrow[r] & A \arrow[r, "f"] \arrow[d, "\xi_n"'] & A \arrow[r] \arrow[d] & A/fA \arrow[r] \arrow[d, no head, "\|" description] & 0 \\
+0 \arrow[r] & E_n \arrow[r] & E_{n+1} \arrow[r] & A/fA \arrow[r] & 0
+\end{tikzcd}
+
+L'extension ne dépend que de $\xi_n$ modulo $fE_n$, et tout le calcul consiste à
+choisir $\xi_n = (g,0)$ — c'est le $g$ injecté à chaque cran qui fait grossir
+le quotient — puis à vérifier les trois conditions de récurrence :
+$f^n E_n = 0$ ; ${}_{f^{k+1}}E_n/{}_{f^k}E_n \simeq B$ ; et
+$E_n/fE_n \simeq B \times (B/gB)^{n-1}$. La vérification de la troisième est le
+calcul qui porte tout :
+\[
+E_{n+1}/fE_{n+1} \simeq
+\bigl([B \times (B/gB)^{n-1}] \times B\bigr) \big/ B(g,0,0)
+\simeq B \times (B/gB)^{n}.
+\]
+On pose $M = \varinjlim E_n$, et le quotient $M/fM$ est la somme directe
+infinie annoncée.\footnote{La prose des pages 12, 14 et 16 est écrite très vite
+et en grande partie perdue ; les formules, elles, passent. La lecture donne la
+construction et le calcul, et ne reconstitue pas les liaisons.}
+
+\pagerange{64}{70}
+\section*{La dimension cohomologique des schémas affines}
+
+\subsection*{Faisceaux élémentaires et la fonction $\varphi$ (pages 64 à 70)}
+
+On arrive au cœur. Les pages 64 à 70, annoncées par une chemise portant de sa
+main « cd des affines », introduisent le dispositif qui remplace un \emph{entier}
+par une \emph{fonction sur les points} — et c'est ce raffinement qui rend la
+récurrence possible.
+
+Le point de départ est un dévissage. Appelons \emph{$\ell$-élémentaire} un
+faisceau de la forme $i_{*}(G)_{U,X}$, où $x$ est un point de $X$,
+$i : \operatorname{Spec} k(x) \to X$ l'immersion canonique, $G$ un faisceau fini
+de $\ell$-torsion, et $U$ un ouvert de $Y = \overline{\{x\}}$ ; il est dit
+\emph{strictement} élémentaire lorsque $G$ est étale sur $U$ et $U$ unibranche.
+
+\textbf{Proposition.} Tout faisceau de $\ell$-torsion noethérien sur un schéma
+noethérien $X$ admet une suite de composition finie dont les quotients sont
+strictement élémentaires.
+
+C'est le dévissage des faisceaux constructibles, et il ramène toute question
+d'annulation à ces briques-là. D'où :
+
+\textbf{Corollaire 1.} $\operatorname{cd}_{\ell}(X) \leqslant n$ si et seulement
+si, pour tout fermé intègre $Y \subset X$, tout fermé $Z \subset Y$, tout point
+$x$ et tout faisceau fini de $\ell$-torsion $G$ sur $\operatorname{Spec} k(x)$ :
+\begin{itemize}
+\item[a)] $H^n(Y, i_{*}G) \to H^n(Z, i_{*}G|Z)$ est surjectif,
+\item[b)] $H^{n+1}(Y, i_{*}G) = 0$.
+\end{itemize}
+Une variante (ii bis) remplace l'immersion par un morphisme fini $Y \to X$ avec
+$Y$ intègre unibranche ; et un Corollaire 1 bis dit la même chose pour la
+cohomologie à support dans un fermé $T$.
+
+Vient alors le raffinement. On remplace l'entier $n$ par une fonction
+$\varphi : X \to \mathbf{N}$, et l'on pose pour toute partie fermée $Y$
+\[
+\varphi(Y) = \operatorname*{Sup}_{x \in Y} \varphi(x)
+= \operatorname*{Max}_{x \text{ maximal dans } Y} \varphi(x),
+\]
+la seconde égalité étant ce qui rend la fonction maniable : elle ne se lit qu'aux
+points maximaux. Le Corollaire 2 transporte le critère précédent mot pour mot,
+avec $\varphi(Y)$ à la place de $n$.
+
+Le théorème que tout cela prépare est celui-ci :
+
+\textbf{Proposition (page 66).} Soit $\varphi$ une fonction sur $X$ telle que
+\begin{itemize}
+\item[a)] $\varphi(x) \geqslant \operatorname{cd}_{\ell}(k(x))$ pour tout
+$x \in X$ ;
+\item[b)] pour toute spécialisation $y \in \overline{\{x\}}$ avec $y \neq x$,
+\[
+\varphi(y) < \varphi(x) - \operatorname{cd}_{\ell}
+\bigl(\mathcal{O}_{X,\bar{y}} \otimes k(x)\bigr),
+\]
+$\mathcal{O}_{X,\bar{y}}$ désignant l'hensélisé strict.
+\end{itemize}
+Alors, pour tout faisceau $F$ de $\ell$-torsion,
+$H^i(X,F) = 0$ dès que $i > \varphi(F) =
+\operatorname*{Sup}_{x \in \operatorname{Supp} F} \varphi(x)$.
+
+Il faut lire ces deux conditions pour ce qu'elles sont. La première dit que
+$\varphi$ majore ce que les corps résiduels apportent déjà — c'est le socle
+établi plus haut. La seconde est une condition de \emph{décroissance stricte le
+long des spécialisations}, et le terme qu'on retranche est exactement la
+cohomologie de l'anneau local strict relatif $K_{\bar{y}} =
+\mathcal{O}_{X,\bar{y}} \otimes k(x)$ : en descendant d'un point à une de ses
+spécialisations, $\varphi$ doit perdre au moins ce que la fibre peut faire
+remonter.
+
+La démonstration est une récurrence noethérienne. On se ramène à
+$F = g_{*}(G)$ avec $g : \overline{\{x\}} \to X$, on écrit la suite spectrale
+\[
+E_2^{pq} = H^p\bigl(X, R^q g_{*}(G)\bigr) \Longrightarrow
+H^{p+q}\bigl(\overline{\{x\}}, G\bigr),
+\]
+et tout tient dans une majoration, encadrée sur la page :
+\[
+\varphi\bigl(R^q g_{*}(G)\bigr) \leqslant \varphi(x) - q.
+\]
+Elle s'obtient en calculant la fibre $R^q g_{*}(G)_{\bar{y}} =
+H^q(K_{\bar{y}}, G)$, qui est nulle dès que $q > \operatorname{cd}_{\ell}
+(K_{\bar{y}})$, et en reportant dans la condition b). L'hypothèse de récurrence
+donne alors $E_2^{pq} = 0$ pour $p + q > \varphi(x)$, et il ne reste rien
+au-dessus.
+
+La page 68 note au passage la façon dont $\varphi$ se comporte le long d'un
+morphisme de type fini $f : X \to Y$ : pour $x \in X$ et $y = f(x)$,
+\[
+\varphi(x) \leqslant \varphi(y) + 2\deg\operatorname{tr}\bigl(k(x)/k(y)\bigr).
+\]
+Le facteur $2$ est celui du Théorème 2 de la page 21 : chaque degré de
+transcendance coûte deux crans de dimension cohomologique, pas un.
+
+\textbf{Corollaire (page 69).} Supposons que partout
+$\operatorname{cd}_{\ell} K_{x,\bar{y}} \leqslant \dim \mathcal{O}_{X,\bar{y}}$.
+Alors la fonction
+\[
+\varphi(x) = \operatorname*{Sup}_{y \in \overline{\{x\}}}
+\Bigl(\operatorname{cd}_{\ell}\bigl(k(y)\bigr)
++ 2\dim \mathcal{O}_{\overline{\{x\}},y}\Bigr)
+\]
+satisfait a) et b), on a pour toute partie fermée $Y$ la même formule avec
+$\mathcal{O}_{Y,y}$, et $\operatorname{cd}_{\ell}(X) \leqslant \varphi(X)$.
+
+La page en donne quatre domaines d'application : les schémas algébriques et plus
+généralement les schémas de type fini ; les corps de nombres ; le spectre d'un
+anneau strictement local ; les schémas affines de dimension $1$.
+
+Et dans la marge, encadrée, la question qui reste :
+
+\begin{quote}
+Soit $A$ local noethérien hensélien intègre, de corps des fractions $K$ et de
+corps résiduel $k$ avec $\operatorname{cd}_{\ell}(k) < +\infty$. A-t-on
+$\operatorname{cd}_{\ell} K \geqslant \dim A + \operatorname{cd}_{\ell} k$ ?
+\end{quote}
+
+C'est la réciproque du Corollaire de la page 22, et le dossier ne la tranche
+pas.
+
+\pagerange{73}{80}
+\subsection*{Les deux rungs de la récurrence, et le théorème d'Artin (pages 73 à 80)}
+
+Huit pages écrites à toute vitesse, dont la prose de liaison est en grande partie
+perdue et dont les énoncés, eux, passent. Elles portent la démonstration
+proprement dite, et son architecture est une \emph{récurrence croisée} entre
+deux familles d'énoncés.
+
+Les deux familles sont indexées par un entier $n$, et le dossier les note
+$1_n$ et $2_n$ (puis $1'_n$, $2'_n$ pour les variantes restreintes aux schémas
+de type fini sur un corps) :
+
+\textbf{Énoncé $1_n$.} Pour $A$ strictement local noethérien de dimension $n$ et
+$F$ un faisceau de $\ell$-torsion « nul en codimension $< m$ » — c'est-à-dire
+tel que $x \in \operatorname{Supp} F$ entraîne
+$\dim \mathcal{O}_{X,x} \geqslant m$ — on a $H^i(X,F) = 0$ pour
+$i > n+1-m$.\footnote{Tel que la page l'écrit, avec $X = \operatorname{Spec} A$,
+l'énoncé est vide : le spectre d'un anneau strictement hensélien n'a aucune
+cohomologie supérieure, et les conséquences que la page en tire —
+$\operatorname{cd}_{\ell}(X) \leqslant n+1$, et
+$\operatorname{cd}_{\ell}(Z) \leqslant n+1-\operatorname{codim}(Z,X)$ pour $Z$
+fermé — sont alors vraies mais sans contenu. L'argument du Lemme 1, qui
+travaille sur un sous-schéma $S \subset X$ et sur $\mathbf{P}^1_Y$, montre que
+l'objet visé est un ouvert de $\operatorname{Spec} A$ ou un schéma de type fini
+au-dessus de lui ; le feuillet ne permet pas de dire lequel, et la présente
+lecture ne le répare pas.}
+
+\textbf{Énoncé $2_n$.} Pour $A$ local noethérien de dimension $n$, $f \in A$ et
+$X = \operatorname{Spec} A$, on a $\operatorname{cd}_{\ell}(X_f) \leqslant n$,
+pour tout $\ell$ premier à la caractéristique résiduelle.
+
+Puis les trois lemmes qui les relient.
+
+\textbf{Lemme 1.} $2_{n'}$ pour tout $n' \leqslant n+1$ entraîne $1_n$.
+
+La démonstration est un joli tour. Pour $Y \subset X$ fermé de codimension $m$,
+on compactifie dans $\bar{X} = \mathbf{P}^1_Y$ ; on pose $T = \bar{S} - S$, qui
+est strictement local ; et l'on écrit la suite longue reliant $H^i(\bar{S},F)$,
+$H^i(S,F)$ et $H^{i+1}_T(\bar{S},F)$. Le premier terme se calcule sur la fibre
+spéciale, $H^i(\mathbf{P}^1_k, F_0)$, nul dès $i \geqslant 3$ ; le troisième
+tombe sous l'hypothèse $2_{n'}$, appliquée avec $n' = n+1-m$. Il reste à
+vérifier que la dimension de $\bar{S}_x$ ne dépasse pas $n+1-m$, ce que donne
+l'inégalité
+\[
+\dim \bar{S}_x + \operatorname{codim}\bigl(\bar{S}_x, \bar{X}_x\bigr)
+\leqslant \dim \bar{X}_x = n+1
+\]
+et le fait que la codimension y est $\geqslant m$.
+
+\textbf{Lemme 2.} $1'_n$ et $2'_{n+1}$ entraînent $2'_{n+2}$.
+
+On plonge $A$ dans une algèbre de séries $k\langle x_1, \dots, x_{n+2}\rangle$,
+on fibre $\operatorname{Spec}$ de celle-ci sur
+$\operatorname{Spec} k\langle x_1, \dots, x_{n+1}\rangle$ — une fibration de
+dimension relative $1$ — et l'on applique $1'_n$ aux fibres pour conclure que
+$R^q f_{*}(F)$ est nul en codimension $< q-1$. La suite spectrale donne alors
+\[
+H^p\bigl(U, R^q f_{*}(F)\bigr) \neq 0 \Longrightarrow
+p \leqslant n+1-(q-1), \quad \text{soit } p+q \leqslant n+2,
+\]
+d'où l'annulation voulue.
+
+\textbf{Lemme 3.} $1'_n$ entraîne : pour $X$ affine de type fini sur un corps
+séparablement clos $k$, de dimension de Krull $d \leqslant n+1$,
+\[
+\operatorname{cd}_{\ell}(X) \leqslant \dim X.
+\]
+
+\emph{C'est le théorème d'annulation d'Artin}, et c'est le sommet du dossier.
+La démonstration est celle qui a été annoncée dans le résumé, et elle tient en
+quatre lignes une fois les lemmes en place. Récurrence sur $d$ ; le cas
+$d \leqslant 0$ est trivial ; on se ramène à $X = \mathbf{A}^d_k$ ; on fibre
+\[
+\mathbf{A}^d_k \xrightarrow{\ f\ } \mathbf{A}^{d-1}_k
+\]
+avec des fibres de dimension $1$ ; l'hypothèse $1'_n$ appliquée aux fibres donne
+que $R^q f_{*}(F)$ est nul en codimension $\leqslant q-1$ ; et l'hypothèse de
+récurrence en dimension $d-1$ donne
+\[
+H^p\bigl(Y, R^q f_{*}(F)\bigr) \neq 0 \Longrightarrow p \leqslant n-(q-1),
+\quad \text{soit } p+q \leqslant n+1 .
+\]
+Tous les $E_2^{pq}$ hors de ce cône sont nuls, et la conclusion tombe.
+
+Les pages 77 à 80 poursuivent vers une forme relative, sur une base strictement
+locale plutôt que sur un corps :
+
+\textbf{Théorème (page 79).} Soient $A$ strictement local, $Y =
+\operatorname{Spec} A$, $Y' = Y - \{\text{point fermé}\}$, $X$ affine de type
+fini sur $Y$, et $X' = X \times_Y Y'$. Alors
+\[
+\operatorname{cd}_{\ell}(X) \leqslant \operatorname{Sup}
+\bigl[\,2\dim X_0,\ 2\dim X' + 1\,\bigr],
+\]
+$X_0$ désignant la fibre spéciale.\footnote{La page écrit d'abord
+« Question », puis biffe le mot et le remplace par « Théorème » — la trace, dans
+l'encre, du moment où il a cessé de douter.} Une note marginale ajoute le cas
+qui intéresse : si $X$ est intègre et domine $Y$, on trouve
+$\operatorname{cd}(X) \leqslant \dim Y + d$, où $d$ est la dimension de la fibre
+générique.
+
+La page 80 ouvre la récurrence sur $r$ qui devrait établir ce dernier point, en
+plongeant $X$ dans $\mathbf{A}^r_Y$ et en comparant les codimensions selon que
+$X$ rencontre ou non la fibre spéciale. Elle ne la conduit pas à son terme.
+
+\pagerange{81}{84}
+\subsection*{Ce qui reste conjectural (pages 81 à 84)}
+
+Trois pages enregistrent l'état de la question une fois les théorèmes acquis :
+ce qu'on voudrait, ce qu'on sait faux, et ce qu'on ne sait pas.
+
+\textbf{Ce qu'on voudrait.} Pour $X$ noethérien affine, en posant
+\[
+n = \operatorname*{Sup}_{x \in X}\bigl[\operatorname{cd}_{\ell}(k(x))
++ \dim \mathcal{O}_{X,x}\bigr],
+\]
+a-t-on $\operatorname{cd}_{\ell}(X) \leqslant n$ ? C'est la forme la plus
+naturelle du théorème d'Artin sur une base quelconque.
+
+\textbf{Ce qu'on sait faux.} La page 81 se clôt sur un contre-exemple — un $X$
+pour lequel $n = 2$ alors que $\operatorname{cd}(X) = 3$.\footnote{Les
+conditions de l'exemple sont perdues : la ligne qui les porte est raturée et
+réécrite, et seul le décompte final se lit. La lecture enregistre que le
+dossier tient la majoration naïve pour fausse, sans pouvoir dire sur quel
+exemple.}
+
+\textbf{Le cas arithmétique.} La page 82 traite à part les schémas affines sur
+$\mathbf{Z}$, qui sont le cas où la base a elle-même de la cohomologie. Pour
+$f : X \to S = \operatorname{Spec}(\mathbf{Z})$ avec $\ell$ inversible sur $X$,
+on écrit la suite spectrale de Leray et l'on sépare deux majorations : au point
+générique de $S$, $R^q f_{*}(F)$ est nul pour $q > d$ ; en un point fermé, pour
+$q > 1+d$. Le décompte des trois zones — $q > 1+d$ ; $q = 1+d$, où le faisceau
+est concentré sur les points fermés et donc $p \leqslant 1$ ; $q \leqslant d$,
+où $p \leqslant 2$ — donne
+\[
+\operatorname{cd}_{\ell}(X) \leqslant d + 2 = \dim X + 1 .
+\]
+Le $+1$ est le prix de l'arithmétique : $\operatorname{Spec}(\mathbf{Z})$ se
+comporte comme une courbe de plus.
+
+\textbf{Les conjectures de la page 84.} Sous le titre « Conjectures sur la
+cohomologie des schémas affines », pour $X$ affine intègre et $\ell$ premier :
+\begin{enumerate}
+\item[$1^{\circ}$)] si $\ell$ est inversible sur $X$,
+$\operatorname{cd}_{\ell}(X) \leqslant \operatorname{cd}_{\ell}(k(x))$, avec en
+marge la question de savoir si c'est une égalité ;
+\item[$2^{\circ}$)] si $\ell$ n'est ni inversible ni nilpotent,
+\[
+\operatorname{cd}_{\ell}(X) \leqslant
+\operatorname{Sup}\bigl(\operatorname{cd}_{\ell}(k(x)),\ \nu(V(\ell)) + 3\bigr),
+\]
+où, pour un schéma $Z$ de caractéristique $\ell$, $\nu(Z)$ est le supremum des
+$\nu(k(z))$ aux points maximaux, et où $\nu(k)$ est le \emph{degré
+d'imperfection} de $k$, défini par $\ell^{\nu(k)} = [k : k^{\ell}]$ ;
+\item[$4^{\circ}$)] pour $A$ local hensélien intègre de caractéristique
+résiduelle $\ell$ et de corps des fractions de caractéristique $0$, et $U$
+ouvert dans $\operatorname{Spec} A$,
+\[
+\operatorname{cd}_{\ell}(U) \leqslant \dim A + \nu(k)
++ \operatorname{cd}_{\ell}(k).
+\]
+\end{enumerate}
+
+L'invariant $\nu$ mérite d'être remarqué : en caractéristique $\ell$, ce n'est
+plus la dimension qui gouverne mais le défaut de perfection du corps de base, et
+c'est lui qui remplace le degré de transcendance dans les majorations. Une
+conjecture intermédiaire, numérotée 1 bis), est écrite trois fois sur la page,
+chaque version raturant la précédente ; elle n'est pas arrêtée.
+
+Une note de sa main, portée sur un feuillet voisin, donne le seul cas où la
+difficulté se dissipe : \emph{pour les bons anneaux locaux henséliens de
+caractéristique résiduelle nulle, tout se simplifie grâce à Artin} — c'est-à-dire
+grâce au théorème d'approximation.
+
+\pagerange{89}{90}
+\section*{Deux conséquences géométriques}
+
+\subsection*{Lefschetz faible, qui consomme l'annulation affine (pages 89 et 90)}
+
+Deux pages écrites au net montrent à quoi sert le théorème qu'on vient
+d'établir, et c'est l'endroit du dossier où la mécanique se voit le mieux.
+
+Soient $X$ projectif régulier sur un corps séparablement clos $k$, de dimension
+$n$ ; $Y$ une section hyperplane régulière ; $F$ un faisceau de $\ell$-torsion
+localement constant sur $X$, avec $\ell$ premier à la caractéristique de $k$.
+Posons $U = X - Y$ — qui est \emph{affine}, puisque complémentaire d'une section
+hyperplane. La suite exacte de cohomologie à support, avec l'isomorphisme de
+Gysin $H^i_Y(X,F) \simeq H^{i-2}(Y, F_Y \otimes \check{T}_{\ell})$, s'écrit :
+
+\begin{tikzcd}[column sep=small, row sep=small, nodes={font=\scriptsize}]
+H^{i-1}(U,F) \arrow[r] & H^{i}_{Y}(X,F) \arrow[r] \arrow[d, no head, "\wr"] & H^{i}(X,F) \arrow[r] & H^{i}(U,F) \arrow[r] & H^{i+1}_{Y}(X,F) \arrow[d, no head, "\wr"] \\
+ & H^{i-2}(Y, F_{Y} \otimes \check{T}_{\ell}) & & & H^{i-1}(Y, F_{Y} \otimes \check{T}_{\ell})
+\end{tikzcd}
+
+Et l'on y injecte le théorème d'annulation : $H^i(U,F) = 0$ pour $i > n$,
+puisque $U$ est affine de dimension $n$. Deux termes de la suite disparaissent
+donc au-delà du rang $n$, et il reste :
+
+\textbf{Théorème de Lefschetz.} L'application
+$H^{i-2}(Y, F_Y \otimes \check{T}_{\ell}) \to H^{i}(X,F)$ est surjective pour
+$i \geqslant n+1$ et bijective pour $i \geqslant n+2$.
+
+\textbf{Corollaire 1.} Si $X$ est connexe régulier de dimension $n$,
+$H^{2n}(X, \mu_N^{\otimes n}) \simeq \mathbf{Z}/N\mathbf{Z}$ pour tout $N$
+premier à la caractéristique. La démonstration est une récurrence sur $n$ :
+comme $2n \geqslant n+2$ dès $n \geqslant 2$, le théorème s'applique et donne
+\[
+H^{2n}(X, \mu_N^{\otimes n}) \simeq
+H^{2n-2}(Y, \mu_N^{\otimes n} \otimes \check{T}) =
+H^{2n-2}(Y, \mu_N^{\otimes (n-1)}),
+\]
+le twist et son dual se compensant d'un cran.
+
+\textbf{Corollaire 2.} L'application de restriction $H^j(X,F) \to H^j(Y,F)$ est
+injective pour $j \leqslant n-1$ et bijective pour $j \leqslant n-2$.
+
+C'est la forme sous laquelle le théorème de Lefschetz faible est cité
+aujourd'hui, et l'on voit ici qu'il n'est pas un théorème indépendant : c'est
+l'annulation sur l'ouvert affine $U$, lue à travers la suite de Gysin. Le
+dossier ne le dit pas en ces termes, mais son organisation le montre — c'est
+pourquoi ces deux pages suivent immédiatement les conjectures affines.
+
+\pagerange{92}{98}
+\subsection*{Spécialisation et asphéricité locale (pages 92 à 98)}
+
+La dernière suite du dossier, annoncée par une chemise de sa main portant
+« Théorème de Spécialisation : Corollaire », vise un résultat d'une autre
+nature : non plus une borne sur la cohomologie, mais un énoncé disant qu'un
+morphisme lisse ne crée pas de revêtements. Les feuillets sont écrits très vite
+et leur prose est en grande partie perdue ; les énoncés et les formules passent,
+et c'est d'eux que la lecture rend compte.
+
+\textbf{Lemme 1 (une pureté).} Soient $A$ local noethérien, quotient d'un anneau
+régulier, $t \in \mathfrak{m}_A$ un élément $A$-régulier tel que le complété
+$t$-adique soit normal, et $\dim A \geqslant 3$. Soit $B$ une extension finie
+normale de $A$ telle que $B/tB$ soit étale sur $A/tA$ hors de l'origine. Alors
+$B$ est étale sur $A$ hors de l'origine.
+
+La démonstration passe par $X' = \operatorname{Spec} A - \{a\}$ et l'ouvert $U$
+de $X'$ où $B$ est étale : l'hypothèse donne
+$(X' - U) \cap V(t) \subset \{a\}$, donc $\dim(X' - U) \leqslant 1$, et il
+s'agit de prolonger un revêtement étale de $U$ à $X'$ tout entier. Ce qui
+l'autorise est la condition de profondeur aux points de $X' - U$, où
+$\dim \mathcal{O}_{X,x} \geqslant 2$ — c'est le mécanisme de la pureté de
+Zariski--Nagata, et une note au crayon en marge le nomme : « condition des
+chaînes ».
+
+\textbf{Lemme 2.} Soient $f : X \to Y$ lisse à fibres de dimension $1$, $s$ une
+section de $X$ sur $Y$ avec $Y$ intègre et $X$ normal, et $X' \to X$ un
+revêtement galoisien de groupe $\Gamma$ d'ordre premier aux caractéristiques
+résiduelles de $Y$. On y considère l'image réciproque $s^{-1}(X')$ — la trace du
+revêtement sur la section — et le complémentaire $X - f(Z)$ de l'image d'un
+fermé.\footnote{L'énoncé complet du Lemme 2 n'est pas récupérable : la page est
+un palimpseste dont seules les données et deux objets se lisent. La lecture
+donne ce que le feuillet porte.}
+
+\textbf{Lemme 3 (Abhyankar).} Soient $A$ régulier local de dimension $2$,
+$(x,y)$ un système régulier de paramètres, et $B$ une extension normale de $A$
+qui est (i) galoisienne d'ordre premier à la caractéristique résiduelle, (ii)
+d'indice de ramification constant le long de $V(x)$, (iii) non ramifiée en
+dehors. La page l'accompagne d'un croquis — deux diamètres $V(x)$ et $V(y)$ se
+coupant au point fermé — et la page 96 donne la conclusion sous forme
+explicite : avec $\Gamma = \mathbf{Z}/n\mathbf{Z}$ et $B$ intègre,
+\[
+B \simeq A[T]/(T^n - x), \qquad
+B \otimes_A A' = A'[T]/(T^n - x') \quad \text{pour } A' = A/yA,
+\]
+$x'$ étant l'image de $x$. C'est le lemme d'Abhyankar, que la page nomme
+elle-même : un revêtement modérément ramifié le long d'un diviseur à
+croisements normaux est, localement, une extension de Kummer.
+
+Ces trois lemmes en place, la page 96 énonce le théorème :
+
+\textbf{Théorème.} Un morphisme lisse $f : X \to Y$ est localement
+$1$-asphérique pour les groupes finis d'ordre premier aux caractéristiques
+résiduelles de $Y$.
+
+La démonstration se ramène à $Y$ noethérien, puis, par fibration, au cas de la
+dimension relative $1$ — où les trois lemmes s'appliquent. C'est le noyau de ce
+qu'on appelle aujourd'hui l'\emph{acyclicité locale des morphismes lisses}, dont
+le théorème de changement de base par un morphisme lisse est la forme
+cohomologique ; le titre de la chemise, « Théorème de Spécialisation », nomme la
+même chose du côté des fibres.
+
+Les applications de la page 97 sont trois, et la troisième explique pourquoi le
+résultat était voulu : la constance locale des $R^i f_{*}(F)$ pour $f$ lisse
+propre ; l'invariance $H^i(X,F) \xrightarrow{\ \sim\ } H^i(X',F')$ par extension
+séparable du corps de base ; et le cas d'un $Y$ lisse dans un $X$ lisse sur une
+base.
+
+La page 98 se clôt sur un Corollaire qui met en regard trois familles de
+faisceaux — $R^i h_{!}(F'|V)$, $R^i h_{*}(F|V)$ et $R^i g_{*}(F'|Y)$, où
+$Y \subset X$ est fermé, $V = X - Y$ son complémentaire ouvert, et
+$F' = \mathcal{H}om(F, I_{X/S})$ — et demande leur constance locale
+simultanée.\footnote{Les conditions sont numérotées (i), (ii), (iii) sur la
+page, dans cet ordre-là : (ii) d'abord, puis (i) reliée à elle par une
+accolade, puis (iii). La prose qui devait dire ce qu'elles ont d'équivalent est
+perdue.}
+
+\pagerange{11}{17}
+\section*{Les feuillets de tapuscrit corrigés}
+
+Onze feuillets du dossier ne sont pas de sa main : ce sont des épreuves
+dactylographiées d'autres exposés, qu'il a corrigées à la plume et dont il a
+retourné les dos pour y écrire ce qui précède. Ils ne portent pas sur la
+dimension cohomologique et ne sont donnés ici ni pour leur contenu propre — on
+le trouvera rédigé dans SGA — ni comme pièces d'archive, mais parce que les
+corrections sont de lui et que les corrections sont des mathématiques.
+
+\subsection*{Groupes de type multiplicatif : l'isotrivialité (pages 11 à 17)}
+
+Quatre feuillets numérotés 27 à 30 par le dactylographe et rangés à rebours dans
+la chemise, portant les énoncés 5.9 à 5.16 d'un exposé sur les groupes de type
+multiplicatif. Ils courent vers un seul théorème :
+
+\textbf{Théorème 5.16.} Sur un schéma localement noethérien \emph{normal}, tout
+groupe de type multiplicatif de type fini est \emph{isotrivial} — c'est-à-dire
+devient diagonalisable après un revêtement fini étale surjectif.
+
+Le chemin passe par l'anti-équivalence entre groupes de type multiplicatif de
+type fini et groupes constants tordus à engendrement fini (Corollaire 5.9), par
+la représentabilité de $\underline{\operatorname{Isom}}$ par un ouvert-fermé de
+$\underline{\operatorname{Hom}}$ (Corollaire 5.10), et par un critère
+d'isotrivialité en trois conditions (Proposition 5.11) dont l'équivalence
+complète demande que la base soit localement noethérienne. Deux lemmes
+techniques portent l'ensemble : tout sous-schéma fermé quasi-compact d'un
+schéma constant tordu est fini (Lemme 5.12) ; et sur une base localement
+noethérienne connexe, une partie ouverte et fermée d'un schéma constant tordu
+quasi-isotrivial dont \emph{une} fibre est finie est finie tout entière (Lemme
+5.13). La Remarque 5.15 note que l'hypothèse de normalité peut être affaiblie
+en « géométriquement unibranche ».
+
+Les corrections de sa main sont nombreuses et de deux sortes. Les unes sont des
+renumérotations en chaîne — le chiffre des unités repassé à l'encre, 5.8 devenu
+5.9, 5.9 devenu 5.10, sur les quatre feuillets — avec les références mises à
+jour. Les autres sont mathématiques : « somme disjointe de » devient « réunion
+de » dans la condition (ii) de 5.11, ce qui n'est pas la même chose ;
+« quasi-compacts » remplace la condition de type fini dans le Lemme 5.12 ; et
+l'énoncé du Lemme 5.13 voit ses $R$ changés en $P$ et $Z$ pour distinguer le
+schéma de la partie ouverte et fermée qu'on y considère — distinction que le
+tapuscrit confondait et sans laquelle l'énoncé n'a pas de sens.\footnote{La
+démonstration de 5.14, sur le même feuillet, garde le $R$ du tapuscrit là où
+l'énoncé porte $P$ corrigé : la correction n'a pas été propagée. La
+transcription le note ; la lecture le signale et n'harmonise pas.}
+
+\pagerange{25}{27}
+\subsection*{Complétion formelle, et les schémas de Picard non propres (pages 25 et 27)}
+
+Deux feuillets d'un tapuscrit sur la complétion formelle le long d'un fermé,
+corrigés de sa main — les accents circonflexes des complétés et les flèches que
+la machine ne portait pas sont ajoutés à l'encre.
+
+Le Théorème 2.1 donne un critère de cohérence et de Mittag-Leffler : si le
+$\mathcal{S}$-module gradué $\mathcal{K}^i = R^i f_{*}(\operatorname{gr}_
+{\mathcal{J}}(\mathcal{F}))$ est de type fini pour $i = n-1, n, n+1$, alors
+$R^n f_{*}(F)$ est cohérent, l'homomorphisme de comparaison est un isomorphisme
+topologique, et le système projectif des $R^n f_{*}(F_k)$ vérifie la condition
+de Mittag-Leffler uniforme. Le Théorème 2.2 traite le cas d'un anneau adique
+noethérien dont l'idéal de définition est principal.
+
+Le plus intéressant est la Remarque 5.11, où il annonce un programme. Sous des
+hypothèses de pureté et de parafactorialité sur les anneaux locaux des fibres
+géométriques, les foncteurs de complétion devraient être des équivalences — sur
+les revêtements étales, sur les modules inversibles. Et il ajoute :
+
+\begin{quote}
+Utilisant des résultats récents de \textsc{Murre}, il est probable que l'on doit
+pouvoir en déduire des théorèmes d'existence des schémas de Picard pour certains
+schémas algébriques \emph{non propres}. De façon générale, l'élimination
+d'hypothèses de propreté dans divers théorèmes d'existence, notamment de
+représentabilité de foncteurs comme les foncteurs de Hilbert, ou de Picard etc,
+à l'aide
+\end{quote}
+
+Le feuillet s'arrête là, au milieu de la phrase, et la suite n'est pas dans le
+dossier.
+
+\pagerange{71}{71}
+\subsection*{Quotients par un groupe de type multiplicatif (page 71)}
+
+Un feuillet isolé, du même exposé que les précédents, sur l'existence du
+quotient $Y = X/G$ pour $G$ de type multiplicatif : il est affine sur la base,
+et hérite des conditions de finitude de $X$. Le Corollaire 2.4 en tire que le
+morphisme graphe $X \times_S G \to X \times_S X$ est une immersion fermée, et
+qu'il en va de même de $g \mapsto s \cdot g$ pour toute section $s$. Le
+Corollaire 2.5 conclut : un monomorphisme $u : G \to H$ de schémas en groupes,
+avec $G$ de type multiplicatif et $H$ affine, est une immersion fermée, le
+quotient $H/G$ existe et est affine, et $H$ est un fibré principal homogène sur
+lui.
+
+\pagerange{83}{87}
+\subsection*{Cohomologie de Hochschild et densité schématique (pages 83 à 87)}
+
+Trois feuillets du même tapuscrit, barrés de longues diagonales, dont les
+lettres de groupe et plusieurs indices sont encrés à la main là où la machine
+avait laissé des blancs.
+
+\textbf{Théorème 3.1.} Pour $S$ affine, $G$ un $S$-groupe de type multiplicatif
+et $F$ un faisceau quasi-cohérent sur lequel $G$ opère, la cohomologie de
+Hochschild s'annule : $H^i(G,F) = 0$ pour $i > 0$.
+
+La démonstration est un modèle de descente. La cohomologie de Hochschild se
+calcule par un complexe explicite de $A$-modules dont la formation commute au
+changement de base ; pour $A'$ plat sur $A$, on a donc
+$H^i(G',F') = H^i(G,F) \otimes_A A'$ ; pour $A'$ fidèlement plat, l'annulation
+descend ; et cela ramène au cas diagonalisable, qui est acquis.
+
+\textbf{Théorème 3.2.} Sur une base affine, deux homomorphismes $u, v : H \to G$
+vers un groupe de type multiplicatif qui coïncident modulo un idéal de carré nul
+sont conjugués : il existe $g \in G(S)$ avec $v = \operatorname{int}(g) \circ u$
+et $g_0 = e$. C'est un énoncé de relèvement infinitésimal, et il découle de 3.1.
+
+\textbf{Corollaire 4.6.} Soit $X$ un $S$-schéma plat et $U$ un ouvert de $X$ tel
+que $U_s$ soit schématiquement dense dans $X_s$ pour tout $s \in S$. Si $X$ est
+localement noethérien, ou bien si $X$ est localement de présentation finie sur
+$S$ avec $U$ rétrocompact dans $X$, alors $U$ est schématiquement dense dans $X$.
+
+La démonstration est une belle application du « procédé breveté » de descente
+noethérienne : on écrit $A$ comme limite inductive de ses sous-$\mathbf{Z}$-
+algèbres de type fini, on descend $X$ et $U$ à un niveau $i$, et l'on observe
+que l'ensemble $E_i$ des points où la densité schématique a lieu est
+\emph{constructible} — parce que la condition revient à ce que $U_{i,s}$ contienne
+les points associés du faisceau structural de $X_{i,s}$. Comme la condition est
+invariante par extension du corps de base, l'image réciproque de $E_i$ est tout
+$S$, donc $E_j$ est tout $S_j$ pour un $j$ assez grand.
+
+Les pages 87 portent trois énoncés supplémentaires numérotés 4.7 et 4.9, plus
+une Remarque 4.9 ; les corps en sont en grande partie effacés sous les
+diagonales d'annulation.\footnote{Les deux corollaires portent le même numéro
+4.9 sur le feuillet, et le chiffre du premier (4.7) est réencré par-dessus la
+frappe. La transcription les donne tels quels ; la lecture ne les régularise pas
+davantage.}
+
+\pagerange{60}{60}
+\section*{Deux fragments}
+
+\subsection*{Normes et degré d'imperfection (page 60)}
+
+Un feuillet au crayon, barré de deux traits, sans rapport apparent avec ce qui
+l'entoure. Il porte une condition sur une extension de corps $k \to K$ : pour
+que l'invariant $\delta(L/K, k/\ell)$ s'annule pour toute extension $L$ de $K$,
+il faut et il suffit que
+\[
+k \subset \ell(K^p), \quad \text{soit } k(K^p) \subset \ell(K^p),
+\]
+et l'exemple qui montre la nécessité — $L = K(x)$ avec $x^p \in K$ et
+$x^p \notin \ell(K^p)$ — accompagné de l'application
+$\Omega^1_{K/k} \otimes_K L \to \Omega^1_{L/k}$ qui mesure le défaut. C'est le
+même cercle d'idées que l'invariant $\nu$ de la page 84 : en caractéristique
+$p$, ce qui compte n'est pas la dimension mais le défaut de perfection.
+
+\pagerange{100}{100}
+\subsection*{Une suite spectrale (page 100)}
+
+Une note de sa main sur le dos d'un feuillet dactylographié étranger, qui pose,
+pour une immersion ouverte $i : V \to X$ de complémentaire fermé et $g$ le
+morphisme structural, la suite spectrale
+\[
+R^p g_{*}\bigl(R^q i_{*}(G)\bigr) \Longrightarrow R^{*} h_{*}(G)
+\]
+reliant les images directes supérieures le long de $h : V \to S$ à celles prises
+en deux temps.\footnote{Les deux exposants sont écrits $i$ tous les deux sur le
+feuillet ; la lecture les distingue en $p$ et $q$, ce que le sens exige. Le
+reste de la note n'est pas lisible.} C'est l'outil dont le Corollaire de la
+page 98 a besoin, et il est probable que la note s'y rapporte.
+
+\end{document}
