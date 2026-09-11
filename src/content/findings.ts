@@ -1115,4 +1115,87 @@ export const FINDINGS: Finding[] = [
     settle:
       'Find « ring with irreducible spectrum » or « zero-dimensional ring » treated as a geometric theory with its classifying topos (Johnstone 1977 treats dimension of rings in a topos; the Elephant’s D3 examples), and whether non-coherence or the existence of points is stated there.',
   },
+  {
+    id: '31-phi-specialisation-criterion',
+    cote: '31',
+    pages: '64–70',
+    kind: 'mathematical',
+    claim:
+      'A function φ on the points of a noetherian scheme bounds étale cohomological dimension as soon as it satisfies two purely local conditions — φ(x) ≥ cd_ℓ(k(x)) at every point, and φ(y) < φ(x) − cd_ℓ(O_{X,ȳ} ⊗ k(x)) at every proper specialisation — giving H^i(X,F) = 0 above sup over the support of φ, for every ℓ-torsion sheaf F.',
+    basis:
+      'Page 66 states the two conditions and the conclusion; pages 66–67 prove it by noetherian induction, reducing to F = g_*(G) on the closure of a point and running the spectral sequence H^p(X, R^q g_*(G)) against the boxed estimate φ(R^q g_*(G)) ≤ φ(x) − q, itself read off R^q g_*(G)_ȳ = H^q(K_ȳ, G) and its vanishing above cd_ℓ(K_ȳ). Page 69 exhibits a φ satisfying both conditions — φ(x) = sup over y in the closure of x of (cd_ℓ k(y) + 2 dim O_{x̄,y}) — under the hypothesis cd_ℓ K_{x,ȳ} ≤ dim O_{X,ȳ}, and concludes cd_ℓ(X) ≤ φ(X).',
+    ours:
+      'The reading names the two conditions (a floor at the residue fields, a strict decrease along specialisations) and says why the subtracted term is the one it is; the statements, the proof and the boxed estimate are the page’s. What the entry does not rest on: the prose around condition b) on page 66 is largely illegible, and a marginal note of his queries that very condition. The displayed formula it turns on is clean.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Open SGA 4 Exposé X (M. Artin, « Dimension cohomologique : premiers résultats »), §§2–3, and Exposé XVIII, and check whether the criterion is stated in this two-condition form for an arbitrary φ, or only through the particular functions it gets applied to. If the general form is there, mark matched with the reference.',
+  },
+  {
+    id: '31-imperfection-bound-conjectures',
+    cote: '31',
+    pages: '84',
+    kind: 'mathematical',
+    claim:
+      'Where ℓ is the residue characteristic, the folder conjectures that the bound on the cohomological dimension of an affine scheme is governed by the degree of imperfection ν(k), defined by ℓ^ν(k) = [k : k^ℓ], rather than by the dimension: cd_ℓ(X) ≤ sup(cd_ℓ k(x), ν(V(ℓ)) + 3), and cd_ℓ(U) ≤ dim A + ν(k) + cd_ℓ(k) for U open in the spectrum of a henselian local domain of residue characteristic ℓ whose fraction field has characteristic 0.',
+    basis:
+      'Page 84, headed « Conjectures sur la cohomologie des schémas affines », states 1°), 2°) and 4°), and defines ν(Z) for a scheme of characteristic ℓ as the supremum of ν(k(z)) over its maximal points. Page 60, a pencil leaf otherwise unconnected to the folder, works with the same invariant through the condition k ⊂ ℓ(K^p).',
+    ours:
+      'Nothing: the statements are the page’s and are labelled conjectures there. The entry claims that the folder states them, not that they hold — the constant 3 in 2°) is unexplained on the leaf. The intermediate conjecture 1 bis) is written three times over, each pass cancelling the last, and is not recoverable; nothing here rests on it.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Check whether bounds of this shape — cd_ℓ in characteristic ℓ controlled by the degree of imperfection rather than the dimension — appear in SGA 4 Exposé X §5, or in the later literature on p-cohomological dimension in characteristic p (Kato, Gabber). A source that states either inequality, or refutes it, settles this entry.',
+  },
+  {
+    id: '31-local-ring-cd-lower-bound',
+    cote: '31',
+    pages: '22',
+    kind: 'mathematical',
+    claim:
+      'For a noetherian local domain A with fraction field K and residue field k, cd_r(K) ≥ cd_r(k) + dim A for every prime r, with exactly two possible exceptions: r is the characteristic of K, or r = 2 and some point of Spec A has an orderable residue field k(x) with cd_2 k(x)(√−1) finite — the second exception disappearing when A is regular, and refining to « k itself real » when A is catenary and universally japanese.',
+    basis:
+      'Page 22 states the inequality, the two-item exception list, the refinement under the catenary hypothesis, and the disappearance of the exception for A regular. The margin carries the example that keeps the second exception alive: A = R[X,Y]/(X²+Y²), localised — a real domain whose only real point is the origin.',
+    ours:
+      'Nothing substantive; the reading restates the page. The first clause of item b) is struck through on the leaf and rewritten, and the transcription marks the cancelled version; the entry rests on the surviving clause, which is legible.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Compare with Serre, Cohomologie galoisienne II §4.2, which gives cd_p(K) ≤ cd_p(k) + tr.deg for fields rather than this lower bound for a local ring, and with SGA 4 Exposé X. His own margin — « cette restriction est-elle essentielle ??? » — records that the sharpness of the exception list was open to him; showing the list is or is not sharp settles the entry either way.',
+  },
+  {
+    id: '31-torsion-module-leaves-out-of-order',
+    cote: '31',
+    pages: '10, 12, 14, 16',
+    kind: 'codicological',
+    claim:
+      'The four leaves carrying the construction of an f-torsion module whose quotient M/fM is not of finite type are bound out of the order in which their text runs: the argument goes 10 → 14 → 12 → 16, not 10 → 12 → 14 → 16.',
+    basis:
+      'Page 14 ends on « Le premier résulte de (a_n) et f·A/fA = 0 », opening the verification of the three induction hypotheses (a_{n+1}), (b_{n+1}), (c_{n+1}); page 12 opens on « la deuxième … voulue » and carries out the second of the three. The transcription gives the pages in text order and records the break at the foot of page 14.',
+    ours:
+      'The ordering is the transcription’s, arrived at from the broken sentence; the folder’s pagination is untouched, and the modernised reading follows the transcription.',
+    literature: ['Transcription 31, batch 1 (batch-01.fr.tex), header and pages 10, 12, 14, 16'],
+    status: 'candidate',
+    settle:
+      'A person checks on the facsimile that the foot of page 14 and the head of page 12 join, and whether 10–11, 12–13, 14–15, 16–17 are recto/verso pairs of single leaves — in which case the disorder belongs to the stack of typescript he wrote on, not to the binding.',
+  },
+  {
+    id: '31-typescript-runs-reversed',
+    cote: '31',
+    pages: '11–17, 25, 27, 83–87, 99, 101',
+    kind: 'codicological',
+    claim:
+      'Three of the folder’s four typescript runs are bound in reverse of their own pagination and the fourth is not: pages 11 to 17 carry the typist’s leaves 30, 29, 28, 27; page 27 precedes page 25 in text order; pages 99 and 101 carry « VII – 9 – » and « VII – 7 – » of one Bourbaki draft, n° 339; while pages 83, 85, 87 run 3.1, 4.6, 4.7 forwards.',
+    basis:
+      'The typist’s leaf numbers stand on the leaves of pages 11 to 17, and the internal numbering 5.9 to 5.16 runs continuously from page 17 back to page 11; the text of page 27 continues on page 25; the typed headers « VII – 9 – » and « VII – 7 – » stand on pages 99 and 101 respectively, both above « n°339 »; and the statements 3.1, 3.2, 4.6, 4.7 run forwards across pages 83, 85 and 87.',
+    ours:
+      'Nothing: the observation is the transcriptions’, which give each run in text order and say so in their headers. The headers of pages 99 and 101 were read directly from the facsimile for this entry, those two leaves having no transcription — they carry nothing in his hand.',
+    literature: [
+      'Transcription 31, batches 1, 2 and 5 (batch-01, batch-02, batch-05.fr.tex), headers and the typescript sections',
+      'Facsimile 31, pages 99 and 101 (typed headers only)',
+    ],
+    status: 'candidate',
+    settle:
+      'A person checks the typist’s leaf numbers on the facsimile of pages 11 to 17 and the two headers on pages 99 and 101. Whether the reversal belongs to the stack, the binding or the scan is not determined by the pages. Separately: the typescripts of pages 11–17, 71 and 83–87 are, by content and by their internal references (Exp VIII, Exp IX, SGA VIII 2.1), leaves of the seminar on group schemes and not of SGA 4; matching their numbering against the published volume would confirm that identification and situate the leaves within its redaction.',
+  },
 ];
