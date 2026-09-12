@@ -228,7 +228,8 @@ function dropMathBack(html, held) {
  *
  * The parser covers the subset the skill permits, and no more: directions from
  * `u`/`d`/`l`/`r` (repeatable, as in `rr`), an optional quoted label with `'`
- * for the far side, and the `hook`, `hook'` and `Rightarrow` styles. Anything
+ * for the far side, and the `hook`, `hook'`, `two heads` and `Rightarrow`
+ * styles. Anything
  * outside that raises rather than being silently dropped — a diagram rendered
  * with an arrow missing asserts a commutation that was never written.
  */
@@ -290,6 +291,15 @@ function parseArrow(spec) {
     }
     if (part === 'Rightarrow') {
       arrow.style = 'double';
+      continue;
+    }
+    // Two chevrons, tikz-cd's epimorphism. Paired with `hook'` it is how he
+    // writes a map factored through its image — folder 113 page 2 runs
+    // alpha_i ->> alpha'_i <-< alpha_{i+1} the whole length of a ladder, and
+    // a single head there would flatten an epi-mono factorisation into an
+    // unremarkable arrow.
+    if (part === 'two heads') {
+      arrow.twoHeads = true;
       continue;
     }
     // A headless line is not an arrow at all — Grothendieck's wheels carry
@@ -969,6 +979,11 @@ function drawDiagram(cd) {
     '<defs><marker id="cdhead" viewBox="0 0 10 10" refX="9" refY="5" ' +
     'markerWidth="7" markerHeight="7" orient="auto-start-reverse">' +
     '<path d="M0,1 L9,5 L0,9" fill="none" stroke="currentColor" stroke-width="1.4"/>' +
+    '</marker>' +
+    '<marker id="cdhead2" viewBox="0 0 14 10" refX="13" refY="5" ' +
+    'markerWidth="10" markerHeight="7" orient="auto-start-reverse">' +
+    '<path d="M4,1 L13,5 L4,9" fill="none" stroke="currentColor" stroke-width="1.4"/>' +
+    '<path d="M0,1 L9,5 L0,9" fill="none" stroke="currentColor" stroke-width="1.4"/>' +
     '</marker></defs>';
   cd.querySelectorAll('.tr-cd-label').forEach(function (l) { l.remove(); });
 
@@ -1054,15 +1069,16 @@ function drawDiagram(cd) {
       return p;
     }
 
+    var head = a.twoHeads ? 'url(#cdhead2)' : 'url(#cdhead)';
     if (a.style === 'double') {
       line(1.6);
-      line(-1.6).setAttribute('marker-end', 'url(#cdhead)');
+      line(-1.6).setAttribute('marker-end', head);
     } else if (a.style === 'none') {
       if (ctrl) curve();
       else line(0);
     } else {
       var main = ctrl ? curve() : line(0);
-      main.setAttribute('marker-end', 'url(#cdhead)');
+      main.setAttribute('marker-end', head);
       if (a.style === 'hook') {
         // The hooked tail of a monomorphism. A half-circle at the start,
         // curling to the side the apostrophe selects.

@@ -329,7 +329,9 @@ asserts a commutation nobody wrote:
   `\arrow[d, "\approx"]`, `\arrow[d, "f_{!}"']` — or ` description` after the
   quotes to set it on the shaft itself, background knocking the line out:
   `\arrow[uu, no head, "\wedge\wedge" description]`;
-- the styles `hook`, `hook'` (inclusions) and `Rightarrow`;
+- the styles `hook`, `hook'` (inclusions), `two heads` (the double chevron of
+  an epimorphism — paired with `hook'` it is how he writes a map factored
+  through its image) and `Rightarrow`;
 - `no head`, for a line that is scaffolding rather than a functor — an axis,
   a radius. A head the page does not have asserts a morphism nobody wrote;
 - `dashed` (`dotted` is accepted as a synonym), for a shaft the page draws

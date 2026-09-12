@@ -1,0 +1,635 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 113, batch 1 (pages 1-12).
+% Established from the facsimile archives/batches/113/batch-01.pdf (a mirror of
+% https://grothendieck.umontpellier.fr/113.pdf), per the skill
+% transcribe-grothendieck. The folder is twelve pages and this is its only
+% batch.
+%
+% Eight of the twelve leaves are transcribed. Page 1 is an otherwise blank
+% computer listing carrying two things in his hand: the single word
+% « Abelianization » in the top right corner, and the number 377 in the top
+% left. It is a cover, so it takes no \page marker and its word becomes the
+% first section title; it is also where the inventory's title comes from, which
+% is therefore his and not the archivists'. Page 2 is the other face of that
+% leaf and is written landscape: it carries mathematics, and it is transcribed
+% at its rank, but the question it treats is not the one the rest of the folder
+% treats — it is about semi-simplicial MM-fibrés, submersions and an integral
+% over a small category I, and nothing on it mentions abelianisation or
+% k-additive categories. Pages 3, 5, 7, 9 and 11 are the run proper, in ink,
+% carrying his own pagination — a circled 1 to 5 in the top right corner — so
+% that run is continuous and complete. Page 12 is the reverse of page 11: a
+% listing of the same run in whose two free margins he wrote, and it continues
+% page 11 directly, so it is transcribed at its rank. Pages 4, 6, 8 and 10 are
+% listings of that run with nothing of his on them and are skipped; the gaps in
+% the page numbers are the record.
+%
+% The run of pages 3 to 12 is one construction taken in five steps, under a
+% heading of his own boxed at the head of page 3: « (x) dans Cat », the tensor
+% product of categories. Page 3 sets up P^k = Hom_Z(P°, Ab) for a small
+% k-additive P, identifies Kar P with the projectives of P^k, and asks which
+% abelian categories are of the form P^k — the answer being the abelian topoi
+% with enough projectives, with a 2-functor (Add_k) --> (Top ab alg_k) written
+% out and its morphisms described as the f_! commuting with colimits. Page 5
+% carries the adjunction Hom_{k!}(P^k, M) ~ Hom_k(P, M) over into the two
+% operations of P and Q = P° on P^k_M, and then defines P (x)_k Q by its
+% 2-universal property Hom_k(P (x)_k Q, M) ~ Bil_k(P, Q; M), with the explicit
+% construction by finite families and the two facts worth keeping. Page 7
+% embeds P (x)_k Q in Bil_k(P°, Q°; Ab_k) by a (x)_k b |--> Hom(-,a) (x) Hom(-,b),
+% and gives the first two applications: P^k_M and its dual are again
+% k-abelian topoi, both computed as (P (x)_k Q)^k; and (P (x)_k Q)^k plays the
+% role of the tensor product of the topoi P^k and Q^k. Page 9 proves that by
+% currying, and opens the third application, the functor P^k (x)_k M -->
+% Hom_k(P°, M) = P^k_M, shown fully faithful. Page 11 gives the two formulas
+% that make L (x)_k x manageable — its convolution with L' and its Hom out of
+% it — with the corollary that it is projective when both factors are, and
+% closes on a question about P^k_M having enough projectives. Page 12 carries
+% that question further: the derived F (x)^L_k L' by projective resolutions,
+% then a list of four hypotheses on a k-additive abelian N (the fourth naming
+% the projectives « k-plats ») and, in the other margin, the two propositions
+% those hypotheses are meant to yield.
+%
+% Notation, fixed once for the whole batch. He draws two capital P's and two
+% capital Q's: a plain one for the small k-additive category and a looped,
+% script one for the abelian topos; the script pair is set here as \mathcal{P}
+% and \mathcal{Q}, and \mathcal{P}_M abbreviates P^k_M. He abbreviates
+% « stable » as « st.bl. » — read as « stable » throughout, which is the
+% hypothesis every one of those isomorphisms needs. Duality is a small v set
+% high to the right, distinct from his degree sign, and is set here as an
+% exponent \vee. The sign « = » stands for the word « même » on pages 7 and 11,
+% as it does in folder 116. On page 12 the convolution that page 11 writes *_k
+% is drawn as an asterisk inside a circle, set here as \circledast; the circled
+% star of page 9 is an equation label and not that operation.
+%
+% Readings flagged and not settled: the two letters before « Proj » on page 3,
+% read « Ul »; the struck word or two after « Pour » on the same page; the word
+% opening the second family on page 5, and the noun after « d'une » on page 7;
+% the underlined abbreviation closing page 9, read « Can. » for « canonique »;
+% and, on page 2, the word qualifying f in the factorisation g f, read
+% « submersion » on the strength of the label « subm » that runs all over that
+% leaf. Page 2's central web of M(...)'s exists twice, a first version cancelled
+% in black and in red ink immediately to the left of the version transcribed
+% here; the cancelled one is not given.
+%
+% The versos date the folder: the listings of pages 2 and 12 are stamped
+% 16 SEP 82, and page 12's footer announces the machine's shutdown for Friday
+% 17 September. That is presumably how the archivists arrived at
+% « [à partir de 1982] », though nothing says so.
+%
+% Pass: Opus 5 (claude-opus-5), 2026-09-13 — first pass, unchecked against the pages by a human.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{113}
+\batch{1}
+\pages{1}{12}
+\dating{[à partir de 1982]}
+\watermark{Édition de démonstration}
+\foldertitle{Abelianization : notes manuscrites (s.d.)}
+
+\begin{document}
+
+\section{Abelianization}
+
+\note{ce mot est de lui : il est seul, en haut à droite d'un listage d'ordinateur
+par ailleurs vierge, à la page 1. Le feuillet ne portant que cela, il ne reçoit
+pas de marque de page ; c'est de là que vient le titre de l'inventaire, qui est
+donc de lui et non des archivistes. Le coin supérieur gauche du même feuillet
+porte, de sa main, le nombre 377}
+
+\section{Au dos du feuillet de titre : systèmes et MM-fibrés semi-simpliciaux}
+
+\note{ce titre est de l'édition. Le feuillet n'en porte pas, et la question
+qu'il traite n'est pas celle des feuillets 3 à 12 : il n'y est question ni
+d'abélianisation ni de catégories $k$-additives. Il est écrit en travers, le
+feuillet tourné d'un quart de tour}
+
+\page{2}
+
+\begin{tikzcd}[column sep=small, row sep=small, nodes={font=\scriptsize}]
+\alpha \arrow[r, two heads] \arrow[d, "\xi"'] & \beta \arrow[d, dashed] & \gamma \arrow[l, hook'] \arrow[d, "\eta"] \\
+X \arrow[r, two heads] & Y & Z \arrow[l, hook']
+\end{tikzcd}
+
+\begin{tikzcd}[column sep=small, row sep=small, nodes={font=\scriptsize}]
+\alpha_0 \arrow[r, two heads] \arrow[d, "\xi_0"'] & \alpha'_0 \arrow[d, dashed, "\xi'_0"'] & \alpha_1 \arrow[l, hook'] \arrow[r] \arrow[d, "\xi_1"'] & \alpha_2 \arrow[r] \arrow[d, "\xi_2"'] & \cdots \arrow[r] & \alpha_{n-1} \arrow[r, two heads] \arrow[d, "\xi_{n-1}"'] & \alpha'_{n-1} \arrow[d, dashed, "\xi'_{n-1}"'] & \alpha_n \arrow[l, hook'] \arrow[d, "\xi_n"] \\
+X_0 \arrow[r, two heads] & X'_0 & X_1 \arrow[l, hook'] \arrow[r] & X_2 \arrow[r] & \cdots \arrow[r] & X_{n-1} \arrow[r, two heads] & X'_{n-1} & X_n \arrow[l, hook']
+\end{tikzcd}
+
+\note{le feuillet porte en outre, entre les deux lignes de ce diagramme, une
+série de flèches obliques portant les étiquettes $\eta_0, \eta_1, \dots,
+\eta_{n-1}$ ; l'encombrement ne permet pas d'en séparer les extrémités et elles
+ne sont pas tracées ici. Une accolade coiffe la ligne du haut, portant $u$ ;
+une autre passe sous celle du bas, portant $v$}
+
+Les syst.\ $(\xi'_0, \xi_{n-1})$ tels que $\xi'_{n-1} u = v \xi'_0$
+
+\[
+f \longmapsto \struck{\ill{}} \quad \struck{multibundle} \quad \text{MM-fibré} \quad M_1
+\]
+
+$M \longrightarrow$ \struck{foncteur} des syst.\ $\xi$.
+
+\[
+M \longrightarrow M_1
+\]
+
+\note{cette flèche, comme presque toutes celles de la page, porte l'étiquette
+soulignée « subm »}
+
+\[
+M(\eta_0, \xi_{n-1}) \longrightarrow M(\xi'_0, \xi_n)
+\]
+
+\[
+M\bigl(\xi'_0, \ill{}\, \eta_{n-1}, \xi'_{n-1}\bigr) \qquad M(\eta_0, \eta_{n-1})
+\]
+
+\[
+M(\eta_0, \eta_1, \dots, \eta_{n-1})
+\]
+
+Puis, à droite :
+
+\[
+M\bigl(\xi_0, \xi'_0, \xi_1 \cdots \eta_{n-1}, \xi_{n-1}, \xi_n\bigr)
+\;\simeq\; M(\xi_0, \xi_1, \dots, \xi_n)
+\]
+\[
+M\bigl(\xi'_0, \xi_1, \xi_2 \cdots \xi_{n-1}, \xi'_n\bigr)
+\longrightarrow \prod M(\eta_i, \xi_{i+1}, \eta_{i+1})
+\qquad \text{si } i \leqslant n-2
+\]
+\[
+M\bigl(\xi'_0, \eta_0, \eta_1, \dots, \eta_{n-1}, \xi'_n\bigr)
+\longrightarrow \prod M(\eta_i, \eta_{i+1})
+\qquad \text{à } i \leqslant n-2
+\]
+\[
+M(\eta_0, \eta_{n-1}) \longleftarrow M(\eta_0, \eta_1, \dots, \eta_{n-1})
+\qquad \text{subm } (\uncertain{mieux})
+\]
+
+\note{les listes d'indices de ces quatre lignes sont écrites très vite et leurs
+apostrophes ne se séparent pas toutes ; elles sont données telles qu'elles se
+lisent. Les flèches verticales entre elles portent « subm », l'une d'elles
+« exact ». Immédiatement à gauche de ce bloc s'en trouve une première version,
+biffée en noir puis en rouge, qui n'est pas transcrite}
+
+Pour que $\int_I X(i)$ ne fasse pas sortir des MM-fibrés semi-simpliciaux, il
+suffit que
+
+\begin{itemize}
+  \item[a)] Nerf.$(I)$ asphériques i.e.\ $I$ asphériques
+  \item[b)] Chaque $X(i)$ transforme op.\ bord $d_i : \Delta_{n-1} \to \Delta_n$
+    en submersions,
+  \item[c)] $\forall\, u \in \mathrm{Fl}(I)$, $u : i \to j$,
+    $X(u) : X(i) \to X(j)$ se factorise en $g f$, \ill{} $f$
+    \uncertain{submersion}, $g$ mono.
+\end{itemize}
+
+\note{le coin inférieur droit du feuillet reprend le premier diagramme, sous la
+forme $\alpha \twoheadrightarrow \beta \hookleftarrow \gamma$ au-dessus de
+$X \twoheadrightarrow Y \hookleftarrow Z$, avec $\eta_0$ et $\eta_1$ pour
+flèches verticales extrêmes ; les flèches du milieu y sont biffées}
+
+\section{$\otimes$ dans Cat}
+
+\note{ce titre est de lui : il est encadré au crayon en haut du feuillet 3. Les
+feuillets 3, 5, 7, 9 et 11 portent en outre sa pagination propre, un chiffre
+cerclé de 1 à 5 dans le coin supérieur droit}
+
+\page{3}
+
+$P$ petite catégorie $k$-additive
+
+\[
+P^{k} \;\underset{\text{déf}}{=}\; \operatorname{Hom}_{\mathbb{Z}}(P^{\circ}, Ab)
+\;\simeq\; \operatorname{Hom}_k(P^{\circ}, Ab_k)
+\]
+
+(ne dépend pas du choix de la str.\ $k$-additive)
+
+$P \hookrightarrow P^{k}$ inclusion additive pl.\ fid., d'où
+
+\[
+\operatorname{Kar} P \longrightarrow P^{k} \quad \text{qui induit équivalence}
+\]
+
+\marginal{N.B.\ $P \to \operatorname{Kar} P$ induit
+$(\operatorname{Kar} P)^{k} \overset{\sim}{\to} P^{k}$}
+
+\[
+\operatorname{Kar} P \;\approx\; \uncertain{\mathrm{Ul}}\operatorname{Proj}(P^{k})
+\]
+
+\note{les deux lettres qui précèdent « Proj » sont lues « Ul » et ne sont pas
+identifiées ; elles reparaissent plus bas sur le même feuillet}
+
+Soit \struck{$P$} $\mathcal{P}$ catégorie \add{$k$-additive}, pour qu'elle soit
+\add{$\approx$ cat.} de la forme $P^{k}$, avec $P$ \struck{additive}
+$k$-additive, il f.\ et s.\ que
+
+\begin{itemize}
+  \item[a)] $\mathcal{P}$ soit un topos abélien, i.e.\ cat.\ abélienne, stable
+    par petites $\varinjlim$ filtrantes, celles-ci étant exactes, et admettant
+    une petite sous-cat.\ génératrice
+  \item[b)] $\mathcal{P}$ a assez de projectifs.
+\end{itemize}
+
+\struck{\ill{}} et alors $\mathcal{P}$ on a \ill{} une $k$-équivalence
+$\mathcal{P} \simeq P^{k}$, avec $P$ $k$-add.
+
+\note{un mot ou deux sont biffés après « Pour », et « et alors » est écrit
+au-dessus de la biffure ; ni l'un ni l'autre ne se lisent}
+
+(\ill{} --- on peut prendre
+$P = \uncertain{\mathrm{Ul}}\operatorname{Proj}(\mathcal{P})$).
+
+\begin{tikzcd}[column sep=small, row sep=small, nodes={font=\scriptsize}]
+(\mathrm{Add}_k) \arrow[r, "2\text{-ess. surj.}"] \arrow[d, "\operatorname{Kar}"'] & (\mathrm{Top\ ab}\ \ill{}_{\,k}) \\
+(\mathrm{AddKar}_k) \arrow[ur, "3\text{-fid.}"']
+\end{tikzcd}
+
+\note{sous l'étiquette de la flèche horizontale, une seconde étiquette est
+biffée, dont on lit le « 2 » initial. Le mot que porte le but, entre « ab » et
+l'indice $k$, est repassé plusieurs fois et ne se lit pas ; la ligne qui suit
+l'écrit « alg. »}
+
+morphismes de topos $k$-abéliens alg.\ sont les
+$f_{!} : \mathcal{P} \longrightarrow \mathcal{Q}$ commutant aux $\varinjlim$
+telles que $f^{*}$ \struck{commut} ($=$ adjoint à droite) commutant aux
+$\varinjlim$, i.e.\ admettant adjoint à droite $f_{*}$.
+
+Soit $L \in \operatorname{Ob} P^{k}$, alors
+$L \simeq \varinjlim_{P/L} a$
+
+\[
+\operatorname{Hom}_{k!}(P^{k}, M) \overset{\sim}{\longrightarrow}
+\operatorname{Hom}_k(P, M)
+\qquad \text{si $M$ $k$-additive \uncertain{stable} par $\varinjlim$}
+\]
+
+\note{il abrège « stable » en « st.bl. » ; c'est la lecture retenue partout
+ci-dessous, et c'est l'hypothèse dont chacun de ces isomorphismes a besoin}
+
+\struck{$\operatorname{Hom}_{\mathbb{Z}!}(P^{k}, Ab) \simeq
+\operatorname{Hom}_{\mathbb{Z}}(P, Ab)$}
+
+\[
+\operatorname{Hom}_{k!}(P^{k\circ}, M) \overset{\sim}{\longrightarrow}
+\operatorname{Hom}_k(P^{\circ}, M)
+\qquad \text{si $M$ $k$-additive stable par $\varprojlim$}
+\]
+
+soit $Q = P^{\circ}$ :
+
+\[
+\operatorname{Hom}_{k!}(Q^{k\circ}, M) \simeq \operatorname{Hom}_k(P, M)
+\]
+
+\page{5}
+
+\[
+\underbrace{\operatorname{Hom}^{!}_{k}(Q^{k\circ}, M)}_{\textstyle \mathcal{Q}_M}
+\;\simeq\;
+\underbrace{\operatorname{Hom}_{k!}(P^{k}, M)}_{\textstyle \mathcal{P}_M}
+\qquad \text{si $M$ $k$-add.\ stable pour les deux types de lim}
+\]
+
+Sur $\mathcal{P}_{M} \overset{\sim}{\longrightarrow}
+\operatorname{Hom}_k(P^{\circ}, M)$ :
+
+\begin{itemize}
+  \item $\mathcal{Q} = \mathcal{P}^{\vee}$ opère par
+    $(F, L') \mapsto F *_k L'$
+  \item $\mathcal{P}$ opère par $(L, F) \mapsto \operatorname{Hom}_k(L, F)$
+\end{itemize}
+
+\note{l'exposant de $\mathcal{P}$ dans « $\mathcal{P}_M$ » est un $k$ biffé. La
+marque de dualité est un petit $v$ placé haut et à droite, distinct de son signe
+de degré $\circ$}
+
+\[
+\mathcal{P}^{k}_{M} \times Q^{k} \longrightarrow M,
+\qquad
+\mathcal{P}_M \times Q \longrightarrow M,
+\qquad
+P \times \mathcal{P}^{\dagger}_{M} \longrightarrow M,
+\qquad
+P^{k} \times P^{k}_{M}
+\]
+
+\note{ces quatre couples de facteurs sont écrits en colonne à droite des deux
+lignes précédentes, comme un rappel des variances ; le signe porté par le
+troisième ne se lit pas}
+
+\uncertain{On} :
+\[
+(F *_k L')^{\circ} \;\simeq\; \struck{\ill{}}\ \operatorname{Hom}_k(L', F^{\circ}),
+\qquad
+\bigl(\operatorname{Hom}_k(L, F)\bigr)^{\circ} \;\simeq\; F^{\circ} * L
+\]
+
+\note{sous les membres de la première de ces deux formules il écrit $P, M$ et
+$Q, M^{\circ}$, pour dire où chacun vit}
+
+\note{un mot biffé, illisible, ouvre la seconde moitié du feuillet ; un trait
+horizontal la sépare de ce qui précède}
+
+Soient $P$, $Q$ $k$-additives, on définit $P \otimes_k Q$ et
+$P \times Q \to P \otimes_k Q$ $k$-biadditive de façon 2-universelle :
+
+\[
+\operatorname{Hom}_k(P \otimes_k Q, M) \;\simeq\; \operatorname{Bil}_k(P, Q; M)
+\qquad \text{tout $M$ $k$-additive}
+\]
+
+Construction explicite par familles finies d'objets de $P \times Q$ :
+
+\[
+\zeta = \bigoplus_{i \in I} a_i \otimes_k b_i ,
+\qquad \ill{},\ \text{pour } \zeta' = \bigoplus_{j \in J} a'_j \otimes_k b'_j ,
+\]
+\[
+\operatorname{Hom}(\zeta, \zeta') = \prod_{I \times J}
+\operatorname{Hom}(a_i, a'_j) \otimes_k \operatorname{Hom}(b_i, b'_j)
+\]
+
+\textbf{À retenir}
+
+\begin{itemize}
+  \item[a)] Si $P$, $Q$ petites, $P \otimes_k Q$ est petite
+  \item[b)] $\operatorname{Hom}_{P \otimes_k Q}(a \otimes_k b, a' \otimes_k b')
+    \overset{\sim}{\longleftarrow}
+    \operatorname{Hom}_P(a, a') \otimes_k \operatorname{Hom}_Q(b, b')$
+\end{itemize}
+
+On en conclut que le foncteur \add{can.} (pl.\ fid.\,!)
+
+\note{« can » est inséré au-dessus de la ligne ; la phrase s'arrête là}
+
+\page{7}
+
+\[
+P \otimes_k Q \;\hookrightarrow\; (P \otimes_k Q)^{k} \;\simeq\;
+\struck{\operatorname{Bil}}\ \operatorname{Bil}_k(P^{\circ}, Q^{\circ}; (Ab_k))
+\]
+
+est donné par
+
+\[
+(*) \qquad a \otimes_k b \;\longmapsto\;
+\bigl((x, y) \mapsto \operatorname{Hom}_P(x, a) \otimes_k
+\operatorname{Hom}_Q(y, b)\bigr)
+\]
+
+ce qui donne une construction d'une \uncertain{variante} de $P \otimes_k Q$
+comme la sous-cat.\ pleine de $\operatorname{Bil}_k(P^{\circ}, Q^{\circ}; Ab_k)$
+formée des sommes finies de foncteurs de la forme $(*)$ (i.e.\ la cat.\ str.\
+pleine correspondante)
+
+\marginal{de l'existence de $P \otimes_k Q$, et du fait qu'elles petites si
+$P$, $Q$ le sont}
+
+\textbf{Application 1.} Soit $M \simeq Q^{k}$ un topos $k$-abélien alg.,
+$M^{\vee} \simeq Q^{\circ k}$ « le » topos $k$-abélien alg.\ dual. Considérons
+$P^{k}_{M}$ et $P^{\circ k}_{M^{\vee}}$ ($\simeq \mathcal{P}_M$ et
+$(\mathcal{P}^{\circ})_{M^{\vee}}$), ce sont des deux topos $k$-abéliens alg.,
+de $=$ \add{même}
+
+\note{il écrit le signe « $=$ » pour le mot « même », ici et au feuillet 11}
+
+En effet,
+\[
+\begin{aligned}
+P^{k}_{M} &= \operatorname{Hom}_k\bigl(P^{\circ},
+   \operatorname{Hom}_k(Q^{\circ}, Ab_k)\bigr) \\
+ &\simeq \operatorname{Hom}_k(P^{\circ} \otimes_k Q^{\circ}, Ab_k) \\
+ &\simeq \operatorname{Hom}_k\bigl((P \otimes_k Q)^{\circ}, Ab_k\bigr)
+   = (P \otimes_k Q)^{k}
+\end{aligned}
+\]
+\[
+\begin{aligned}
+P^{\circ k}_{M^{\vee}} &\simeq \operatorname{Hom}_k\bigl(
+   (P^{\circ} \otimes_k Q^{\circ})^{\circ}, Ab_k\bigr) \\
+ &\simeq \operatorname{Hom}_k(P \otimes_k Q, Ab_k) = (P \otimes_k Q)^{\circ k}
+\end{aligned}
+\]
+
+\textbf{Appl.\ 2.}
+\[
+\operatorname{Bil}_{k!!}(P^{k}, Q^{k}; M) \;\simeq\;
+\struck{\operatorname{Hom}}\ \operatorname{Hom}_{k!}\bigl((P \otimes_k Q)^{k}, M\bigr)
+\]
+\[
+\bigl(\simeq \operatorname{Bil}_k(P, Q; M) \text{ si $M$ $k$-add.\ avec }
+\varinjlim\bigr)
+\]
+
+\note{le $P$ du membre de droite porte un exposant $k$ biffé. Un point
+d'interrogation est posé sous cet énoncé}
+
+i.e.\ $(P \otimes_k Q)^{k}$ joue le rôle du prod.\ tens.\ des topos
+$k$-abéliens $P^{k}$, $Q^{k}$, parmi les cat.\ $k$-additives stables par
+$\varinjlim$
+
+\page{9}
+
+\emph{Dém.}
+\[
+\begin{aligned}
+\operatorname{Bil}_{k!!}(P^{k}, Q^{k}; M)
+ &\simeq \operatorname{Hom}_{k!}\bigl(P^{k},
+    \underbrace{\operatorname{Hom}_{k!}(Q^{k}, M)}_{\textstyle
+    \operatorname{Hom}_k(Q, M)}\bigr) \\
+ &\simeq \operatorname{Hom}_k\bigl(P, \operatorname{Hom}_k(Q, M)\bigr) \\
+ &\simeq \operatorname{Hom}_k(P \otimes_k Q, M)
+    \overset{\sim}{\longleftarrow}
+    \operatorname{Hom}_{k!}\bigl((P \otimes_k Q)^{k}, M\bigr)
+\end{aligned}
+\]
+
+Dualement
+\[
+\operatorname{Bil}_{k!!}(P^{k\circ}, Q^{k\circ}; M) \;\simeq\;
+\struck{\operatorname{Hom}}\ \operatorname{Hom}_{k!}\bigl(
+(P \otimes_k Q)^{k\circ}, M\bigr)
+\]
+
+\note{ici encore le $P$ intérieur porte un exposant $k$ biffé}
+
+\textbf{Appl.\ 3.} Soit $M$ $k$-additive stable par $\varinjlim$, on a
+
+\[
+(\circledast) \qquad
+P^{k} \otimes_k M \longrightarrow \operatorname{Hom}_k(P^{\circ}, M) = P^{k}_{M}
+\]
+\[
+L \otimes_k x \;\longmapsto\; \bigl(a \mapsto L(a) \otimes_k x\bigr)
+= \widetilde{x} \circ L
+\]
+
+\note{le renvoi est une étoile inscrite dans un cercle, à distinguer de
+l'astérisque nu du feuillet 7}
+
+\[
+P^{\circ} \overset{L}{\longrightarrow} Ab_k
+\overset{\widetilde{x}}{\longrightarrow} M ,
+\qquad \operatorname{Hom}_{k!}(Ab_k, M) \simeq M
+\]
+
+Ce foncteur $(\circledast)$ est pl.\ fidèle. En effet, \struck{comparons}.
+
+\begin{tikzcd}[column sep=small, row sep=small, nodes={font=\scriptsize}]
+M \arrow[r, "\text{pl. fid.}"] & M^{k} \\
+\operatorname{Hom}_k(P^{\circ}, M) \arrow[r, "\text{pl. fid.}"] & \operatorname{Hom}_k(P^{\circ}, M^{k}) \arrow[d, "\text{pl. fid.}"] \\
+& \operatorname{Hom}_k(P^{k\circ}, M^{k}) \\
+& \operatorname{Bil}_k(P^{k} \times M^{\circ}, Ab_k)
+\end{tikzcd}
+
+\note{la troisième et la quatrième ligne sont reliées par un double trait
+d'égalité, non par une flèche. À droite du diagramme il écrit : « attention, il
+faut passer à un univers plus gros » ; et, contre la flèche verticale,
+« NB $M^{k}$ st.\ $k$.\ par $\varprojlim$ ». Une première version de la
+première ligne, biffée, portait
+$\operatorname{Hom}_k(P^{\circ}, M) \to \operatorname{Hom}^{!}_{k}(P^{k\circ}, \ill{})$}
+
+\[
+P^{k} \otimes_k M \dashrightarrow \operatorname{Bil}_k(P^{k} \times M^{\circ}, Ab_k)
+\qquad \text{pl.\ fid.\,?}
+\]
+
+\uncertain{Can.} connu pour être pl.\ fidèle
+
+\note{trois jambages, lu « Can. » pour « canonique » ; « Com. » n'est pas exclu.
+La flèche qui porte cette remarque est tracée en pointillé, et une seconde, en
+pointillé également, monte vers le haut du diagramme}
+
+\page{11}
+
+On identifie\add{ra} parfois $L \otimes_k x$ à son image dans
+$\operatorname{Hom}_k(P^{\circ}, M) = P^{k}_{M}$
+
+\textbf{Ex.} $M = Q^{k}$, donc $P^{k}_{M} \simeq (P \otimes_k Q)^{k}$, donc
+$(\circledast)$ devient
+
+\[
+P^{k} \otimes_k Q^{k} \longrightarrow (P \otimes_k Q)^{k}
+\simeq \operatorname{Bil}_k(P, Q; Ab_k)
+\qquad \text{pl.\ fid.}
+\]
+\[
+F \otimes_k G \;\longmapsto\; \bigl((a,b) \mapsto F(a) \otimes_k G(b)\bigr)
+\]
+
+\note{sous « pl.\ fid. » une première étiquette, biffée, disait la même chose}
+
+(On (cas dual, $=$ \add{même} si l'on \ill{} des variances $F$ : à \ill{} dans
+$P$, $G$ dans $Q$, engendrant \struck{$\operatorname{Hom}$} $P^{k}_{M}$)
+
+\textbf{Formule.} $L \in P^{k}$, $x \in M$ donc $L \otimes_k x \in P^{k}_{M}$ ;
+$L' \in P^{\circ k}$.
+
+\[
+(L \otimes_k x) *_k L' \;\simeq\;
+\underbrace{(L *_k L')}_{\textstyle \in Ab_k} \otimes_k x
+\]
+
+\note{il suffit de le vérifier pour $L \in \uncertain{P^{(a)}}$,
+$L' \in \uncertain{P^{(b^{\circ})}}$ --- sous chacun des deux il pose un signe
+$\|$ suivi de « $a$ » et de « $b^{\circ}$ », identifiant $L$ et $L'$ aux objets
+dont ils sont les images ; les deux membres \ill{} $x$ fonctoriellement
+$\simeq$ à \struck{\ill{}} $\operatorname{Hom}(\uncertain{b}, a) \otimes_k x$,
+le premier argument de ce $\operatorname{Hom}$ étant repassé plusieurs fois}
+
+Soit $F \in P^{k}_{M}$, alors
+\[
+\operatorname{Hom}_{P^{k}_{M}}(L \otimes_k x, F)
+\;\simeq\; \operatorname{Hom}_M\bigl(x, \operatorname{Hom}_k(L, F)\bigr)
+\;\simeq\; \operatorname{Hom}_{P^{k}}\bigl(L, \operatorname{Hom}_M(x, F)\bigr)
+\]
+où, par définition,
+\[
+\operatorname{Hom}_M(x, F) : \quad a \longmapsto
+\operatorname{Hom}_M\bigl(x, F(a)\bigr)
+\]
+
+\marginal{si $L = a \in P$, \uncertain{on trouve}
+$\operatorname{Hom}_M(x, F(a))$ pour les 2 derniers membres}
+
+\note{cette remarque est écrite en biais, à environ 45°, le long du bord gauche
+du feuillet}
+
+\textbf{Cor.} Si $L \in \operatorname{Proj}(P^{k})$,
+$x \in \operatorname{Proj}(M)$, alors
+$L \otimes_k x \in \operatorname{Proj}(P^{k}_{M})$.
+
+\textbf{Question.} Si $M$ $k$-add.\ stable par $\varinjlim$, et a assez de
+projectifs, alors $P^{k}_{M}$ a assez de projectifs\add{ $F$}, et ceux-ci
+annulent les $\operatorname{Tor}_i(L, F)$ ($L \in P^{k}$).
+
+\note{le $F$ est inséré au-dessus de « projectifs », par un signe de renvoi}
+
+\page{12}
+
+De plus, on peut alors définir $F \circledast^{L}_{k} L'$ par résolutions proj.\
+en $F$, comme $F \circledast_k L'$ --- un quasi-\uncertain{isom.} $L' \to L''$
+définit un quasi-isom.\ $F \circledast_k L' \to F \circledast_k L''$.
+
+\note{le signe de cette opération est un astérisque inscrit dans un cercle ;
+c'est le produit que le feuillet 11 écrit $*_k$ sans le cercle}
+
+Quand \ill{} et une \ill{} \ill{} pour les objets de $Q$ ainsi que pour
+celles-ci \ill{}
+
+\note{ces deux lignes sont écrites très pâle, entre deux traits ondulés qui
+séparent ce bloc du suivant ; elles ne se lisent pas}
+
+$N$ $k$-additive abélienne :
+
+\begin{itemize}
+  \item[a)] stable par petites sommes
+  \item[b)] Une petite \ill{} de \ill{} \ill{} mono
+  \item[c)] Tout objet de $N$ \ill{} quotient d'un projectif
+  \item[d)] \add{Pour} tout objet projectif $x$ de $N$, \ill{} est
+    « $k$-plat », i.e.\ (le foncteur
+    \[
+    Ab_k \longrightarrow N, \qquad M \longmapsto M \otimes_k a
+    \]
+    transforme mono en mono)
+\end{itemize}
+
+\note{« $k$-plat » est souligné et mis entre guillemets par lui ; c'est son nom
+pour cette condition. Il écrit $a$ dans la formule là où la ligne parle de $x$,
+et ce désaccord n'est pas réparé ici}
+
+Dans l'autre marge du même feuillet :
+
+Soit $N$ cat.\ $k$-additive abélienne stable par petites sommes.
+
+\begin{itemize}
+  \item[a)] Si dans $N$ tout objet est quotient d'un projectif, alors dans
+    $P^{k}_{N}$ tout objet $F$ est quotient d'une somme
+    $\Phi = \bigoplus_{a \in \operatorname{Ob} P} a \otimes_k x_a$, les $x_a$
+    projectifs, et un tel $\Phi$ est projectif.
+  \item[b)] Si de plus, \add{pour} tout objet projectif \struck{\ill{}} $x$ de
+    $N$, le foncteur correspondant
+    \[
+    Ab_k \longrightarrow N, \qquad M \longmapsto M \otimes_k a
+    \]
+    est exact (i.e.\ transforme mono en mono), alors \struck{\ill{}} pour tout
+    objet projectif $\Phi$ de $P^{k}_{N}$, le foncteur
+    \[
+    Q^{k} \longrightarrow N, \qquad L' \longmapsto \Phi *_k L'
+    \]
+    est exact --- et par suite $F \circledast^{L}_{k} L'$ peut être calculé ---
+    redéfini par résolutions projectives $L'_i$ de $L'$\,! relativement
+    projectives, et $F_i$ de $F$. \struck{De plus} \struck{$\ill{} \Phi
+    \circledast_k L'$}
+\end{itemize}
+
+\note{ici encore la formule écrit $a$ là où la ligne parle de $x$. « relativement
+projectives » est écrit sous la ligne, et la dernière ligne du feuillet est
+barrée d'un long trait}
+
+\end{document}
