@@ -1,0 +1,637 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 155, pages 1-10.
+%
+% This is an INTERPRETATION, not a transcription. Everything the critical
+% apparatus carried moves into footnotes. In any dispute of substance the
+% transcription governs: whoever cites Grothendieck must cite batch-01.fr.tex.
+%
+% Pass: Opus 5 (claude-opus-5), 2026-09-12 — first pass, unchecked against the
+% pages by a human. The folder was read whole; it holds one batch, and of its
+% ten leaves the five odd-numbered ones are his and are transcribed. The five
+% even ones are unrelated paper and carry nothing of his.
+%
+% What the folder is. Five leaves, his own pagination 1 to 5, one argument:
+% how to read off, from the algebra that a tensor category and a fibre functor
+% over a FINITE EXTENSION k'/k produce, the fact that every object of the
+% category has a dual. Page 1 states the dictionary (category + fibre functor
+% <--> a commutative k'-algebra U with augmentation, plus an associative
+% multiplication on A = U-dual); page 3 runs it on the smallest example, where
+% U = k' tensor_k k' and A = End_k(k'), and then poses the folder's question;
+% pages 5 to 9 attempt the answer and get as far as the antipode and the
+% evaluation, breaking off mid-line on the last leaf.
+%
+% Notation fixed for the whole document. k a field, k'/k a finite extension.
+% C is the tensor category, F : C --> Mod_f(k') the fibre functor (he writes F
+% on page 1 and F' from page 5 on; one functor, written F' throughout here,
+% and the reading says so). U is the commutative k'-algebra with augmentation
+% epsilon, A = U-check = Hom_{k'}(U, k') the dual pro-object. A_g and A_d are
+% A as a left and as a right module over itself (his "gauche"/"droite"). D is
+% the duality of C, M-check^{(k')} the k'-linear dual. J = Ker(k' tensor_k k'
+% --> k'), script-J the ideal it generates in A tensor-hat_k A, J-tilde the
+% idealiser of that ideal.
+%
+% Three homonymies of the pages, fixed here and stated on the spine:
+% — A is U-dual on page 1 and in the computation of page 3; but in the question
+%   at the foot of page 3 the letter A carries an index and a gloss "= A
+%   tensor_k k'", and there names the base change, an algebra over k' tensor_k
+%   k'. The reading writes A_{k'} for that one.
+% — D is the duality of the category on pages 5 and 7, and D_{k'}(A) in the
+%   margin of page 5 is the k'-linear dual of A.
+% — the two J-glyphs of page 1, which the leaf separates only by a tilde.
+%
+% Substantive departures from the pages, each footnoted where it occurs:
+% — page 1, article 2°), qualifies the structure carried by A with a word the
+%   transcription flags as doubtful and reads "commutative et associative".
+%   Commutativity is excluded by the folder's own example on page 3, where
+%   A = End_k(k') is a matrix algebra; the reading says "associative, d'unite
+%   epsilon" and footnotes the page.
+% — page 1 writes the comultiplication as A --> A tensor-hat_{k'} A and then
+%   says its values lie in J-tilde/script-J. The second statement corrects the
+%   first: A tensor-hat_{k'} A is not a ring, and the reading says why.
+% — page 5 strikes "bimodule" and asks for a module structure on U over
+%   A tensor A; a bimodule is a module over A tensor A-opposite, which is what
+%   the next line of the same page (End_A(U) = A-opposite) in fact produces.
+% — page 3's condition that the base-change functor be faithful does not hold
+%   for an arbitrary module over k' tensor_k k'; the reading states what is
+%   true and says what the condition must therefore be asking.
+%
+% Modern names given here and footnoted as ours: catégorie tannakienne, non
+% neutre; foncteur fibre; groupoïde affine agissant transitivement sur Spec k';
+% algébroïde de Hopf; antipode; produit de Takeuchi; objet dualisant; descente
+% galoisienne; équivalence de Morita; Skolem-Noether. The leaves carry none of
+% these words.
+%
+% What the folder announces and never establishes: the intrinsic conditions on
+% C it sets out to find; the answer to its own "? ? ?" (does rigidity plus
+% k = End(1_C) suffice); the verification of the last compatibility, begun on
+% page 9 and abandoned mid-line; and the converse direction — that an antipode
+% gives back rigidity — which the pages never state.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{155}
+\pages{1}{10}
+\dating{[à partir de 1984]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{[Rigidité de catégories tensorielles ?] : notes manuscrites (s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+D'un groupe on connaît d'ordinaire les éléments. On peut aussi le connaître
+autrement : par la liste de ses représentations linéaires — les manières de le
+faire agir sur un espace vectoriel — et par la loi qui dit comment deux
+représentations s'en combinent en une troisième. Le fait remarquable, et
+ancien, est que cette seconde description suffit : le groupe se reconstruit à
+partir d'elle. C'est le théorème de Tannaka pour les groupes compacts, et c'est
+l'idée que ces feuillets appliquent ailleurs.
+
+Ailleurs, parce qu'une difficulté s'ajoute dès qu'on travaille sur un corps
+$k$ qui n'est pas algébriquement clos. Il arrive que les objets d'une famille
+n'aient pas de description linéaire visible sur $k$, et qu'ils en acquièrent
+une dès qu'on s'autorise une extension finie $k'$ de $k$ — comme un fibré qui
+n'est trivial qu'au-dessus d'un revêtement, et pas au-dessus de l'espace
+lui-même. On peut alors « voir » les objets, mais seulement après ce
+changement de base, et ce qu'on reconstruit au bout du compte n'est plus un
+groupe : c'est un objet à deux pattes, qui relie deux points de vue sur le
+même objet plutôt que d'agir en un seul — un \emph{groupoïde}.
+
+Le dossier est le brouillon du dictionnaire correspondant. D'un côté une
+catégorie $C$ d'objets abstraits, munie d'un produit tensoriel et d'un
+foncteur $F$ qui à chaque objet associe un espace vectoriel sur $k'$ ; de
+l'autre une algèbre $A$ dont les modules sont exactement les objets de $C$, et
+une comultiplication sur $A$ qui code le produit tensoriel. La première page
+écrit ce dictionnaire en deux articles et deux conditions. La troisième le fait
+tourner sur le plus petit exemple possible, celui où $C$ est la catégorie des
+espaces vectoriels sur $k$ eux-mêmes et où $F$ est l'extension des scalaires :
+on trouve $A = \operatorname{End}_{k}(k')$, l'algèbre de toutes les
+applications $k$-linéaires de $k'$ dans lui-même — l'objet même dont la théorie
+de la descente a besoin.
+
+La question que le dossier pose alors est celle de son titre. Dans un groupe,
+tout élément a un inverse. Du côté des représentations, cet inverse se voit
+autrement : il dit que toute représentation a une \emph{duale}, et que
+l'accouplement entre une représentation et sa duale est lui-même compatible à
+tout le reste. Une catégorie où chaque objet a un dual de cette sorte est dite
+\emph{rigide}. La question est : la rigidité de $C$, qui est une propriété
+interne, purement catégorique, correspond à quelle propriété de l'algèbre $A$ ?
+La réponse que les feuillets dégagent est que la rigidité fournit sur $A$ une
+opération qui renverse les produits — $ab$ devient $\check{b}\check{a}$ — et
+c'est exactement la trace, dans le dictionnaire, du passage à l'inverse dans un
+groupe. Le nom moderne de cette opération est \emph{antipode}.
+
+Deux choses méritent d'être signalées au lecteur qui suivra le détail. La
+première est un accident propre à l'extension : $A$ n'est pas commutative, et
+le corps $k'$ n'est pas central dedans — il y agit de deux manières, par la
+gauche et par la droite, et les deux ne coïncident pas. Il s'ensuit que l'objet
+qu'on voudrait écrire $A \otimes_{k'} A$ n'est pas une algèbre du tout, et
+qu'il faut lui substituer un sous-quotient. La première page fabrique ce
+sous-quotient à la main, sans lui donner de nom ; c'est ce que la théorie
+appellera plus tard le produit de Takeuchi.
+
+La seconde est la manière dont le dossier travaille. Il ne démontre presque
+rien. Il pose un dictionnaire, le vérifie sur un exemple, énonce ce qu'il
+faudrait, écrit trois points d'interrogation là où il ne sait pas, se donne un
+programme à l'impératif — « Exprimer la rigidité de $C$ ! » — et s'arrête au
+milieu d'une ligne quand la vérification qui reste devient une affaire de
+calcul. Ce sont cinq feuillets d'orientation, pas un texte ; leur intérêt est
+de montrer sous quelle forme une théorie se présente à quelqu'un avant d'être
+écrite.
+
+\keywords{tannakian category, non-neutral tannakian category, fibre functor, affine groupoid scheme, Hopf algebroid, antipode, rigidity, dualizable object, Takeuchi product, idealizer, Galois descent, Morita equivalence, pseudo-compact algebra, coefficient algebra, separable extension}
+\end{resume}
+
+\pagerange{1}{9}
+\section*{Le fil du dossier, et les conventions}
+
+Cinq feuillets, paginés de sa main de 1 à 5, qui sont les pages 1, 3, 5, 7 et 9
+de l'inventaire\footnote{Les cinq feuillets intercalaires sont du papier
+étranger — un contrat d'édition, trois pièces administratives de l'USTL et de
+Paul Valéry, une circulaire — et ne portent rien de sa main. Leur seul usage
+ici est de dater : ils sont de 1984, ce qui est la datation retenue par les
+archivistes.}. L'argument ne s'interrompt pas d'un feuillet à l'autre et se
+lit en cinq stations :
+
+\begin{itemize}
+\item \textbf{page 1} : le dictionnaire. Ce que c'est que se donner une
+catégorie tensorielle sur $k$ et un foncteur fibre à valeurs dans les
+$k'$-espaces vectoriels de dimension finie, en termes d'une algèbre.
+\item \textbf{page 3, première moitié} : l'exemple de la descente,
+$C = \operatorname{Mod}_{f}(k)$ et $F = -\otimes_{k} k'$, où le dictionnaire
+donne $U = k' \otimes_{k} k'$ et $A = \operatorname{End}_{k}(k')$.
+\item \textbf{page 3, seconde moitié} : la question du dossier, en deux
+morceaux — une condition technique d'exactitude et de fidélité, et la question
+de fond : la rigidité suffit-elle ?
+\item \textbf{page 5} : la rigidité mise sous forme représentable. Le foncteur
+de dualité est un $\operatorname{Hom}_{A}(-, I)$, l'objet dualisant $I$ est
+$U$ lui-même, et la structure supplémentaire que cela exige sur $U$ équivaut à
+un anti-isomorphisme de $A$.
+\item \textbf{pages 7 et 9} : le calcul du dual, $F'(D(M)) = \check{M}^{(k')}$,
+puis la compatibilité qui reste — que l'accouplement d'évaluation soit un
+morphisme de $C$ — réduite au cas $M = A$, et abandonnée en cours de ligne.
+\end{itemize}
+
+\subsection*{Notation}
+
+$k$ est un corps, $k'/k$ une extension finie. $C$ est une $\otimes$-catégorie
+$k$-linéaire, associative, commutative et unifère\footnote{Le manuscrit abrège
+cette liste d'adjectifs en trois lettres liées, que la transcription lit
+« ACU » et signale comme incertaine ; l'abréviation n'est développée nulle part
+dans le dossier. Elle est en usage dans la littérature tannakienne de ces
+années-là, et c'est ce qui décide la lecture.}, et $F' : C \to
+\operatorname{Mod}_{f}(k')$ le foncteur fibre : $k$-linéaire, exact, fidèle,
+compatible au produit tensoriel\footnote{La page 1 l'appelle $F$ et les pages 5
+à 9 l'appellent $F'$ ; c'est le même foncteur, et il est noté $F'$ partout
+ici.}.
+
+$U$ est une $k'$-algèbre commutative munie d'une augmentation $\varepsilon : U
+\to k'$, et
+\[
+A \;=\; \check{U} \;=\; \operatorname{Hom}_{k'}(U, k')
+\]
+son dual, pris comme pro-objet de $\operatorname{Mod}_{f}(k')$ : $U$ est la
+réunion filtrante de ses sous-espaces de dimension finie, $A$ la limite
+projective de leurs duaux, c'est-à-dire une algèbre linéairement topologisée.
+$A_{g}$ et $A_{d}$ désignent $A$ vue comme module à gauche, resp. à droite, sur
+elle-même — les indices sont de lui. $D$ est la dualité de $C$ et
+$\check{M}^{(k')} = \operatorname{Hom}_{k'}(M, k')$ le dual $k'$-linéaire.
+Enfin
+\[
+J \;=\; \operatorname{Ker}(k' \otimes_{k} k' \to k'),
+\qquad
+\mathcal{J} \;=\; J\cdot(A \mathbin{\hat{\otimes}}_{k} A),
+\qquad
+\widetilde{\mathcal{J}} \;=\; \{\lambda \mid \lambda\mathcal{J} \subset
+\mathcal{J}\}.
+\]
+
+\subsection*{Trois homonymies}
+
+Elles rendent les feuillets illisibles pris ligne à ligne, et elles sont
+levées une fois pour toutes ici.
+
+\emph{La lettre $A$.} Elle désigne $\check{U}$ page 1 et dans le calcul de la
+page 3. Mais dans la question posée au bas de la page 3 elle porte un indice et
+une glose interlinéaire « $= A \otimes_{k} k'$ » : là, elle nomme le changement
+de base, qui est une algèbre sur $k' \otimes_{k} k'$ et non sur $k'$. Cette
+lecture l'écrit $A_{k'}$.
+
+\emph{La lettre $D$.} C'est la dualité de la catégorie pages 5 et 7 ; le
+$D_{k'}(A)$ de la note marginale de la page 5 est le dual $k'$-linéaire de $A$,
+donc $U$.
+
+\emph{Les deux $J$.} Le feuillet ne les distingue que par un tilde. $J$ est un
+idéal de $k' \otimes_{k} k'$, $\mathcal{J}$ l'idéal qu'il engendre dans
+$A \mathbin{\hat{\otimes}}_{k} A$, $\widetilde{\mathcal{J}}$ l'idéalisateur de
+ce dernier ; la distinction typographique est de l'éditeur.
+
+\pagerange{1}{1}
+\section*{I. Le dictionnaire (page 1)}
+
+La page énonce une équivalence de données. D'un côté :
+
+\begin{itemize}
+\item une $\otimes$-catégorie $C$ sur $k$, et un $\otimes$-foncteur
+$k$-linéaire exact et fidèle $F' : C \to \operatorname{Mod}_{f}(k')$.
+\end{itemize}
+
+De l'autre :
+
+\begin{enumerate}
+\item[1\textsuperscript{o})] un schéma affine $G' = \operatorname{Spec} U$ sur
+$k'$ muni d'une section, c'est-à-dire une $k'$-algèbre commutative $U$ munie
+d'une augmentation $\varepsilon : U \to k'$ ;
+\item[2\textsuperscript{o})] sur le pro-objet $A = \check{U}$, une
+multiplication associative admettant $\varepsilon$ pour
+unité\footnote{L'adjectif que la page accole ici est porté sous une rature et
+la transcription le lit, en le signalant comme douteux, « commutative et
+associative ». La commutativité est exclue par l'exemple du dossier lui-même
+deux feuillets plus loin, où $A = \operatorname{End}_{k}(k')$ est une algèbre
+de matrices ; et elle rendrait vide la difficulté que la page résout à sa
+dernière ligne. La lecture retient donc l'associativité et l'unité, qui sont
+ce dont la suite se sert.} ;
+\end{enumerate}
+
+soumis à deux conditions de multiplicativité, qui font l'objet de la section
+suivante.
+
+Ce qui est dit là, sans être dit, est ceci : $C$ est la catégorie des
+$A$-modules de dimension finie sur lesquels $A$ opère continûment, $F'$ est le
+foncteur d'oubli qui ne retient que le $k'$-espace vectoriel sous-jacent, et
+c'est la multiplication de $A$ — l'article 2\textsuperscript{o}) — qui porte
+toute cette partie-là de la structure. La comultiplication de $U$, dont la
+multiplication de $A$ est la transposée, est la loi de composition du futur
+groupoïde ; l'augmentation $\varepsilon$ en est l'unité\footnote{Cette moitié
+du dictionnaire — une catégorie $k$-linéaire équivaut à une algèbre
+linéairement topologisée ayant assez de représentations de dimension finie, ses
+objets étant les modules permis — est construite en toutes lettres de sa main
+ailleurs dans le fonds, aux pages 156 à 179 du dossier 10. Les feuillets d'ici
+la supposent acquise et n'en refont rien.}.
+
+Le produit tensoriel de $C$, lui, n'est pas dans la multiplication de $A$ : il
+est dans la \emph{co}multiplication
+\[
+\Delta_{A} : A \longrightarrow A \mathbin{\hat{\otimes}} A,
+\]
+qui est la transposée de la multiplication de $U$ — laquelle est donnée
+gratuitement par 1\textsuperscript{o}), puisque $U$ est une algèbre. C'est
+pourquoi la page n'a pas à la postuler : elle a seulement à demander qu'elle
+soit compatible au reste, et c'est la condition (ii).
+
+En langage d'aujourd'hui, la donnée $(U, \varepsilon, A)$ est un
+\emph{algébroïde de Hopf} — ou, du côté géométrique, un groupoïde affine
+au-dessus de $\operatorname{Spec} k'$, agissant transitivement sur
+$\operatorname{Spec} k'$ — moins son antipode, qui est précisément ce que les
+pages 5 à 9 vont chercher\footnote{Les noms sont de nous. Ni « groupoïde », ni
+« algébroïde de Hopf », ni « antipode » ne figurent sur ces feuillets, qui ne
+citent d'ailleurs personne. Le traitement publié du cas où le foncteur fibre
+n'existe que sur une extension est celui de Deligne, \emph{Catégories
+tannakiennes} (1990), postérieur de plusieurs années à la datation du dossier ;
+le cas neutre, où $k' = k$ et où le groupoïde est un groupe, est chez Saavedra
+Rivano (1972) et Deligne--Milne (1982).}.
+
+\pagerange{1}{1}
+\section*{II. Les deux conditions, et pourquoi $A \mathbin{\hat{\otimes}}_{k'} A$ ne convient pas (page 1)}
+
+\emph{Condition (i).} L'application $k' \to A$, $\lambda \mapsto
+\lambda\varepsilon$, est multiplicative : l'unité de $A$ est $\varepsilon$, et
+$k'$ s'envoie dans $A$ par un morphisme d'algèbres\footnote{Une note
+interlinéaire, écrite d'une main plus rapide et en partie illisible, précise
+que la multiplicativité s'entend « pour la structure de pro-anneau de $A$ ». La
+lecture la reproduit dans ce sens.}.
+
+\emph{Condition (ii).} La comultiplication $\Delta_{A}$, transposée de la
+multiplication de $U$, est multiplicative — c'est-à-dire un morphisme
+d'algèbres. C'est l'axiome de bigèbre, et c'est lui qui fait du produit
+tensoriel de deux $A$-modules un $A$-module.
+
+Reste à savoir dans quoi $\Delta_{A}$ prend ses valeurs, et c'est ici que la
+page fait le travail intéressant. Elle écrit d'abord la flèche comme allant
+dans $A \mathbin{\hat{\otimes}}_{k'} A$, puis se corrige aussitôt : les valeurs
+sont dans
+\[
+\widetilde{\mathcal{J}}/\mathcal{J} \;\subset\;
+\bigl(A \mathbin{\hat{\otimes}}_{k} A\bigr)\big/\mathcal{J},
+\qquad
+\mathcal{J} = J\cdot\bigl(A \mathbin{\hat{\otimes}}_{k} A\bigr),
+\quad
+J = \operatorname{Ker}(k' \otimes_{k} k' \to k'),
+\]
+et l'application $A \to \widetilde{\mathcal{J}}/\mathcal{J}$ est un morphisme
+d'anneaux.
+
+La correction est nécessaire, et voici pourquoi\footnote{La page ne donne pas
+cette raison ; elle écrit les deux formules l'une après l'autre. L'explication
+est de nous, mais la formule est d'elle, et c'est la formule qui est juste.}.
+$A$ n'est pas commutative et $k'$ n'y est pas central : le corps opère sur $A$
+de deux manières, celle qui vient de la structure de $k'$-algèbre de $U$ et
+celle qui vient de la seconde patte du groupoïde, et ces deux actions ne
+coïncident pas. Or le produit tensoriel $B \otimes_{R} B$ de deux copies d'un
+anneau $B$ au-dessus d'un anneau $R$ n'est un anneau que si $R$ est central
+dans $B$. Ici il ne l'est pas, et $A \mathbin{\hat{\otimes}}_{k'} A$ — qui
+n'est autre que le quotient $(A \mathbin{\hat{\otimes}}_{k} A)/\mathcal{J}$ —
+n'est qu'un module. Passer à l'idéalisateur $\widetilde{\mathcal{J}}$, c'est
+prendre le plus grand sous-anneau de $A \mathbin{\hat{\otimes}}_{k} A$ dans
+lequel $\mathcal{J}$ soit un idéal bilatère ; le quotient
+$\widetilde{\mathcal{J}}/\mathcal{J}$ est alors un anneau, et c'est le seul
+endroit où l'énoncé « $\Delta_{A}$ est multiplicative » ait un sens.
+
+C'est, au dual près, le \emph{produit de Takeuchi} des algébroïdes de
+Hopf\footnote{Takeuchi, \emph{Groups of algebras over $A \otimes \bar{A}$}
+(1977), introduit pour la même raison le sous-anneau
+$B \times_{R} B \subset B \otimes_{R} B$ formé des tenseurs qui commutent aux
+deux actions de $R$. Le nom est de nous ; la page construit l'objet et ne le
+nomme pas.}. La même difficulté reparaît, vue de l'autre côté, dans la note
+marginale de la page 3 : la transposée $U \to U \otimes_{k} U$ de la
+multiplication de $A$ n'y respecte pas les unités, et il le note
+lui-même — « $\Delta_{U}(1) \neq 1$ en général ».
+
+\pagerange{3}{3}
+\section*{III. L'exemple : la descente de $k'$ à $k$ (page 3)}
+
+Le plus petit cas est celui où l'on ne gagne rien à changer de base :
+\[
+C = \operatorname{Mod}_{f}(k),
+\qquad
+F' : M \longmapsto M \otimes_{k} k'.
+\]
+Le dictionnaire donne alors
+\[
+U = k' \otimes_{k} k',
+\qquad
+A = \check{U} = \operatorname{Hom}_{k'}(k' \otimes_{k} k', k')
+\;\simeq\; k' \otimes_{k} \check{k}'
+\;\simeq\; \operatorname{End}_{k}(k'),
+\]
+avec pour augmentation la multiplication $k' \otimes_{k} k' \to k'$.
+
+Géométriquement, $\operatorname{Spec}(k' \otimes_{k} k')$ est le
+\emph{groupoïde des paires} de $\operatorname{Spec} k'$ au-dessus de
+$\operatorname{Spec} k$ : deux pattes, qui sont les deux projections, et une
+composition qui recolle. Ses représentations sont exactement les données de
+descente, et la catégorie de ces données est $\operatorname{Mod}_{f}(k)$ : on
+retrouve $C$, ce qui est la descente galoisienne\footnote{Le nom est de nous.
+La page se contente du calcul et de la remarque que les structures d'anneaux y
+sont « les habituelles ».}.
+
+Du côté de l'algèbre le même fait se lit autrement, et plus brutalement :
+$\operatorname{End}_{k}(k')$ est une algèbre de matrices $M_{n}(k)$,
+$n = [k' : k]$, donc Morita-équivalente à $k$, et ses modules de dimension
+finie sont les $k$-espaces vectoriels de dimension finie. C'est bien $C$ qu'on
+récupère, et on le récupère sans hypothèse de séparabilité : l'isomorphisme
+$\operatorname{End}_{k}(k') \simeq M_{n}(k)$ ne demande que la finitude.
+
+Ce petit exemple porte déjà tout ce que la page 1 avait de surprenant. $A$ y
+est non commutative dès que $[k':k] > 1$, et $k'$ n'y est pas central : il s'y
+plonge de deux manières, par la source et par le but, exactement les deux
+actions qui rendaient nécessaire l'idéalisateur.
+
+\pagerange{3}{3}
+\section*{IV. La question du dossier (page 3)}
+
+Un long trait sépare le calcul de ce qui suit, et ce qui suit est ouvert par un
+crochet. Il tient en deux morceaux.
+
+\emph{Premier morceau, technique.} On demande que le foncteur de changement de
+base le long de la diagonale,
+\[
+M' \longmapsto M' \otimes_{k' \otimes_{k} k'} k',
+\]
+soit exact et fidèle sur les $A_{k'}$-modules de type fini, où
+$A_{k'} = A \otimes_{k} k'$ est une algèbre sur $k' \otimes_{k} k'$. Il note
+lui-même, entre parenthèses : « OK si $k'/k$ étale ».
+
+C'est juste pour l'exactitude, et pour la raison suivante : $k'/k$ séparable
+équivaut à $k' \otimes_{k} k'$ réduite, donc étale sur $k'$, donc produit de
+corps ; $k'$ y est alors un facteur direct, donc plat, et le changement de base
+est exact. Pour $k'/k$ non séparable, $k' \otimes_{k} k'$ est locale à
+nilpotents et l'exactitude tombe\footnote{La page écrit « étale » là où
+« séparable » suffirait : les deux conditions sont la même ici, la première
+portant sur $k' \otimes_{k} k'$ et la seconde sur $k'/k$.}. La fidélité, en
+revanche, est fausse telle quelle : dès que $k' \otimes_{k} k' \simeq k' \times
+R$ avec $R \neq 0$, un module concentré sur le facteur $R$ est tué par le
+foncteur. Ce que la condition demande réellement, c'est donc que les modules
+provenant de $C$ soient concentrés sur la composante diagonale — et c'est
+précisément le genre d'énoncé que la question suivante cherche à obtenir de $C$
+seule\footnote{La distinction est de nous : la page demande « exact et
+fidèle » sans restreindre la classe de modules.}.
+
+\emph{Second morceau, de fond.} Quelles conditions \emph{intrinsèques} sur $C$
+— l'insertion interlinéaire dit « intrinsèques », et c'est le mot qui compte —
+garantissent tout cela ? Et il écrit la candidate, suivie de trois points
+d'interrogation :
+\begin{quote}
+Suffit-il que $C$ soit \textbf{rigide}, et que $k \overset{\sim}{\to}
+\operatorname{End}_{C}(1_{C})$ ? ? ?
+\end{quote}
+puis, doublement souligné, en dernière ligne du feuillet :
+\begin{quote}
+\textbf{Exprimer la rigidité de $C$ !}
+\end{quote}
+
+La réponse, telle que la théorie l'a donnée depuis, est : non, pas en
+général — et il manque exactement une condition numérique. Une catégorie
+tensorielle rigide, abélienne, $k$-linéaire, avec $\operatorname{End}(1) = k$,
+admet un foncteur fibre sur une extension de $k$ si et seulement si, en
+caractéristique nulle, la dimension de chacun de ses objets est un entier
+$\geq 0$ ; et elle est alors la catégorie des représentations d'un groupoïde
+affine du type que la page 1 décrit. En caractéristique positive la question
+reste ouverte\footnote{C'est le théorème de Deligne, \emph{Catégories
+tannakiennes} (1990), § 7 pour le critère de dimension et § 1 pour la
+reconstruction par un groupoïde ; les contre-exemples sont les catégories
+d'interpolation, où les dimensions ne sont pas entières. La réponse est de
+nous, elle est postérieure au dossier, et rien sur ces feuillets ne l'annonce :
+ils posent la question et la laissent ouverte.}.
+
+Les deux pages qui suivent ne traitent pas de cette question-là. Elles
+traitent de l'autre moitié du programme : \emph{étant} donnée la rigidité, que
+devient-elle dans l'algèbre $A$ ?
+
+\pagerange{5}{5}
+\section*{V. La rigidité représentée : l'objet dualisant est $U$ (page 5)}
+
+Le feuillet s'ouvre sur un titre de sa main, souligné : \emph{Rigidité}.
+
+Soit $M \mapsto \check{M} = D(M)$ la dualité de $C$. Elle est compatible au
+foncteur fibre, c'est une équivalence de catégories — donc exacte —, et il en
+tire qu'elle est continue à droite, c'est-à-dire qu'elle transforme les limites
+inductives en limites projectives. Un tel foncteur contravariant est
+représentable : il existe un objet $I$ tel que
+\[
+D(M) \;\simeq\; \operatorname{Hom}_{A}(M, I).
+\]
+Reste à identifier $I$, et il suffit pour cela d'évaluer en $M = A$ :
+\[
+I \;=\; D(A) \;\simeq\; \check{A}_{g} \;=\; U.
+\]
+L'objet dualisant est donc $U$ lui-même — le dual du module régulier, que le
+dictionnaire de la page 1 avait placé du côté « fonctions » et qui revient ici
+du côté « objets »\footnote{La page porte, sous le signe d'isomorphisme, la
+mention « compatibilité avec $F'$ », qui est ce qui autorise l'identification :
+c'est parce que la dualité commute au foncteur fibre que le représentant se
+calcule sur le module régulier.}.
+
+Mais $U$ n'est pour l'instant qu'un module à droite : l'opération de $A$ qu'on
+y lit vient, par transposition, de la multiplication à droite de $A$ sur
+elle-même. Pour que $\operatorname{Hom}_{A}(M, U)$ soit encore un objet de $C$,
+il faut que $U$ porte en plus une opération à gauche, commutant à celle-là. Il
+faut donc faire de $U$ un \emph{bimodule}\footnote{La page écrit « une
+structure de \emph{bimodule} module sur $A \otimes A$ », en biffant le premier
+mot. L'algèbre qui classe les bimodules est $A \otimes_{k} A^{\circ}$, avec
+l'opposée en second facteur, et c'est bien elle qui intervient : la ligne
+suivante de la même page le montre, puisqu'elle produit $A^{\circ}$ et non $A$.
+La lecture rétablit l'opposée.}.
+
+\pagerange{5}{5}
+\section*{VI. Ce que cette structure vaut : un anti-isomorphisme de $A$ (page 5)}
+
+La structure supplémentaire cherchée se calcule d'un mot, parce que les
+endomorphismes du module régulier sont connus :
+\[
+\operatorname{End}_{A}(U) \;\simeq\;
+\operatorname{End}_{A}(A_{d})^{\circ} \;\simeq\; A^{\circ}.
+\]
+Se donner l'opération à gauche revient donc à se donner un morphisme
+\[
+A \longrightarrow A^{\circ},
+\qquad a \longmapsto \check{a},
+\]
+c'est-à-dire un \emph{anti}-morphisme de $A$ dans elle-même : une application
+qui renverse les produits : l'image de $ab$ est $\check{b}\,\check{a}$. Comme la
+dualité est une équivalence et que son carré est isomorphe à l'identité, cet
+anti-morphisme est bijectif et involutif\footnote{La page écrit « donc il faut
+un donné $A \to A^{\circ}$ », avec « $a : a \mapsto \check{a}$ » au-dessus de
+la flèche, et n'en dit pas plus ; l'involutivité, qui vient de $D^{2} \simeq
+\operatorname{id}$, est ajoutée ici.}.
+
+C'est l'\emph{antipode}. Dans le dictionnaire, la multiplication de $A$ est la
+composition du groupoïde, la comultiplication est le produit tensoriel, et
+cette involution qui renverse les produits est le passage à l'inverse : c'est
+ce que la rigidité de $C$ devient une fois traduite. Le mot est de nous ; la
+chose est sur la page\footnote{Pour une bigèbre de dimension finie l'énoncé
+correspondant est classique : la catégorie de ses comodules de dimension finie
+est rigide si et seulement si la bigèbre admet un antipode, c'est-à-dire est
+une algèbre de Hopf. Le dossier démontre une moitié de cet énoncé — rigidité
+$\Rightarrow$ antipode — dans le cadre plus large où la base est $k'$ et non
+$k$ ; il n'énonce pas la réciproque.}.
+
+On peut vérifier l'énoncé sur l'exemple de la page 3, ce que le dossier ne fait
+pas. Là, le groupoïde est celui des paires et son inversion échange les deux
+projections, donc échange les deux facteurs de $U = k' \otimes_{k} k'$ ; la
+transposée de cet échange est un anti-automorphisme de $A =
+\operatorname{End}_{k}(k')$, c'est-à-dire, par Skolem--Noether, la transposition
+composée avec un automorphisme intérieur. L'inverse du groupoïde des paires est
+bien la transposition des matrices.
+
+\pagerange{7}{7}
+\section*{VII. Le calcul du dual : $F'(D(M)) = \check{M}^{(k')}$ (page 7)}
+
+Le feuillet suivant vérifie que la dualité ainsi obtenue est la bonne,
+c'est-à-dire que le foncteur fibre l'envoie sur la dualité des espaces
+vectoriels. Le calcul est une adjonction, écrite en trois lignes :
+\begin{align*}
+D(M) &\;=\; \operatorname{Hom}_{A}(M, U_{g})
+\;=\; \operatorname{Hom}_{A}\bigl(M_{g},\,
+\operatorname{Hom}_{k'}(A_{g}, k')\bigr) \\
+&\;\simeq\; \operatorname{Hom}_{k'}\bigl(A_{d} \otimes_{A} M,\, k'\bigr).
+\end{align*}
+La page écrit le terme du milieu sous sa forme explicite : les formes
+$k'$-bilinéaires $\varphi : A_{g} \times M_{g} \to k'$ telles que
+\[
+\varphi(\lambda u, x) = \lambda\,\varphi(u,x),
+\qquad
+\varphi(u\cdot v, x) = \varphi(u, v.x),
+\]
+$\lambda$ dans $k'$, $u$ dans $A$, $x$ dans $M$ — ce qui est exactement la
+description des éléments du $\operatorname{Hom}$ adjoint.
+
+Il reste à contracter, et c'est immédiat :
+\[
+A_{d} \otimes_{A} M \;\simeq\; M,
+\qquad
+x \longmapsto 1 \otimes x,
+\qquad
+\lambda(1 \otimes x) = \lambda \otimes x = 1 \otimes \lambda x,
+\]
+la seconde ligne étant la vérification que l'isomorphisme est $k'$-linéaire
+pour la structure de $k'$-module venue de $A_{d}$. D'où la conclusion du
+feuillet :
+\[
+F'\bigl(D(M)\bigr) \;=\; \check{M}^{(k')}.
+\]
+Le foncteur fibre envoie le dual catégorique sur le dual linéaire : c'est
+l'énoncé, en une formule, qu'il est un $\otimes$-foncteur \emph{rigide}. Et
+c'est l'anti-morphisme $a \mapsto \check{a}$ de la page précédente qui munit
+$\check{M}^{(k')}$ de sa structure de $A$-module — la seule manière de faire
+opérer $A$ sur un dual étant de renverser l'ordre des produits\footnote{La page
+le dit en une demi-ligne dont deux mots sont illisibles ; le sens n'est pas en
+doute, puisque c'est à cela que servait l'antipode.}.
+
+\pagerange{7}{9}
+\section*{VIII. La compatibilité qui reste, et l'arrêt (pages 7 et 9)}
+
+Une chose n'est pas encore acquise. On sait maintenant que $F'(D(M))$ est le
+dual linéaire de $F'(M)$, donc qu'il existe un accouplement d'évaluation
+\[
+F'(M) \otimes_{k'} F'\bigl(D(M)\bigr) \longrightarrow k' = F'(1_{C}).
+\]
+Mais rien ne dit encore que cet accouplement \emph{provienne} d'un morphisme de
+$C$
+\[
+M \otimes D(M) \longrightarrow 1_{C},
+\]
+et sans cela la dualité obtenue n'est pas la dualité de la catégorie : elle
+n'en est que l'ombre après application du foncteur fibre. La condition à
+vérifier est que l'évaluation soit $A$-linéaire pour l'opération diagonale,
+celle que donne la comultiplication $\Delta_{A}$ de la page 1.
+
+La page 9 pose le problème sous cette forme et le réduit aussitôt au cas du
+module régulier : il suffit de le prouver pour $M = A$, c'est-à-dire pour
+l'accouplement canonique
+\[
+A^{k'} \otimes_{k'} U \longrightarrow k'.
+\]
+Puis la ligne suivante commence, « $A \otimes$ », et s'arrête. Le reste du
+feuillet est blanc, et c'est le dernier feuillet de mathématiques du
+dossier\footnote{La réduction à $M = A$ est licite parce que les deux membres
+sont additifs en $M$ et que tout objet est quotient de sommes de copies du
+module régulier ; la page ne le justifie pas.}.
+
+L'équation qui restait à écrire porte, aujourd'hui, un nom : c'est l'axiome de
+l'antipode,
+\[
+\textstyle\sum \check{a}_{(1)}\,a_{(2)} \;=\; \varepsilon(a),
+\]
+qui dit exactement que l'évaluation est un morphisme de comodules. Le dossier
+s'arrête au seuil de cette vérification\footnote{L'écriture en notation de
+Sweedler et le nom d'axiome de l'antipode sont de nous ; la page n'écrit ni
+l'une ni l'autre. Ce qu'elle écrit, l'accouplement canonique sur le module
+régulier, est le cas particulier dont cet axiome est la forme générale.}.
+
+\pagerange{3}{9}
+\section*{IX. Ce que le dossier laisse ouvert}
+
+Quatre choses, et il vaut mieux les dire que les laisser deviner.
+
+\emph{Les conditions intrinsèques.} C'est l'objet déclaré de la recherche au
+bas de la page 3 — « on cherche conditions intrinsèques sur $C$ » — et aucune
+n'est trouvée. Les feuillets font le chemin inverse : ils supposent la rigidité
+et regardent ce qu'elle donne.
+
+\emph{Les trois points d'interrogation.} La suffisance de « rigide, et $k
+\overset{\sim}{\to} \operatorname{End}_{C}(1_{C})$ » est posée et laissée en
+suspens. La réponse moderne, rappelée plus haut, est négative sans une
+condition de dimension, en caractéristique nulle ; en caractéristique positive
+elle n'est pas connue.
+
+\emph{La dernière vérification.} Elle est réduite au module régulier et
+abandonnée en cours de ligne.
+
+\emph{La réciproque.} Que l'existence d'un antipode redonne la rigidité — la
+moitié facile et la seule qui ferait du critère un critère — n'est ni énoncée
+ni utilisée. Le programme du titre, « exprimer la rigidité de $C$ », est donc
+tenu dans un sens seulement : la rigidité est traduite, elle n'est pas
+caractérisée.
+
+\end{document}
