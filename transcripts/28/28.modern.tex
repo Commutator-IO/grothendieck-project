@@ -1,0 +1,837 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 28, pages 1-10.
+%
+% This is an INTERPRETATION, not a transcription. Everything the critical
+% apparatus carried moves into footnotes. In any dispute of substance the
+% transcription governs: whoever cites Grothendieck must cite batch-01.fr.tex.
+%
+% Pass: Opus 5 (claude-opus-5), 2026-09-12 — first pass, unchecked against the
+% pages by a human. The folder was read whole; it holds one batch, pages 1-10,
+% every page transcribed.
+%
+% What the folder is. Ten leaves in his hand, in two runs headed by him
+% "Demazure 5.1.1970" (pages 1-5) and "Demazure 12.2.70" (pages 6-10). One
+% subject throughout: the connected algebraic subgroups of the Cremona group
+% Cr_{n,k} that contain a split torus of dimension n. The first run builds the
+% language (pseudo-morphisms, the group functors Psaut and Baut, rigidified and
+% pseudo-transitive pseudo-operations) and gets the conjugacy of the maximal
+% split tori; the second extracts, from a rational retraction f : G --> T, a
+% root datum (R, rho) and shows it classifies. The last page axiomatises the
+% datum under the name "systeme d'Enriques".
+%
+% Notation fixed for the whole document. T is a split torus of dimension n,
+% M = X^*(T) its characters and M^* = X_*(T) its cocharacters, <,> the pairing.
+% R subset M is the set of roots, rho : R --> M^* the map alpha |--> rho_alpha,
+% normalised by <rho_alpha, alpha> = 1 (the pages' convention, kept). R_s =
+% R inter (-R). U_alpha is the root subgroup, x_alpha : G_a --> U_alpha its
+% parametrisation, g^alpha = Lie U_alpha. Cr_{n,k} = Bir(P^n_k). The circle in
+% Aut_k(K)^o and Der_k(K)^o is read as the opposite group and the opposite Lie
+% algebra, and the reading says why.
+%
+% Substantive departures from the pages, each footnoted where it occurs:
+% — page 1's corollary says the groups have "structure reductive de type A_n";
+%   the three groups of the list have reductive parts of types A_1 x A_1, A_2
+%   and A_1, so the reading says "de type A" and footnotes the page.
+% — page 1 writes Cr_{n,k} = Baut_k(k[t_1,...,t_n]); the reading writes the
+%   function field and says the two agree.
+% — page 4's corollary 5 has an illegible word for what the maximal tori are
+%   their own; the reading supplies "centraliseurs", which is what page 6 uses.
+% — page 7 sends the Levi decomposition to SGA 3 XXVI; the general theorem is
+%   characteristic zero, and the reading says on what the decomposition rests
+%   here instead.
+% — page 9's proposition writes "lambda alpha + mu beta subset R"; read "in R".
+% — page 10's axiom 5) uses an n it does not introduce; the reading supplies
+%   n = -<rho_alpha, beta> from page 9 and footnotes the supply.
+% — the marginal "NB ce W^* opere trivialement [...] sur T !" of page 8 is
+%   partly illegible and, as it stands, contradicts the reflection formula
+%   three lines above it; the reading records it and does not use it.
+%
+% Modern names given here and footnoted as ours: variete torique, eventail,
+% racine de Demazure, donnee radicielle, coracine, decomposition de Levi,
+% formule de commutation de Chevalley, theoreme 90 de Hilbert, rationalite
+% stable and the Zariski cancellation problem. The leaves carry no fan and no
+% cone: what they carry is the root datum alone.
+%
+% What the folder announces and never establishes: the existence theorem of
+% page 10 (one line, no proof); the classification promised by the "Pb." of
+% page 4 is reduced to the datum but the varieties X are never exhibited; the
+% struck proposition on curves at the head of page 2; and the criterion of
+% page 4 for d = 3, which the pages leave open and the modern literature has
+% since closed negatively.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{28}
+\pages{1}{10}
+\dating{[vers 1970]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{[Groupes algébriques (SGA 3)] : notes manuscrites (s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+On peut déformer le plan en remplaçant les coordonnées par des fractions
+rationnelles : $(x, y) \mapsto (1/x,\, y/x)$ en est un exemple. Une telle règle
+n'est pas définie partout — elle échoue là où un dénominateur s'annule — mais
+elle est définie sur presque tout le plan, elle s'y inverse, et deux règles de
+cette sorte se composent. Elles forment donc un groupe, le \emph{groupe de
+Cremona} de la dimension considérée. C'est un objet énorme, et d'une espèce
+inhabituelle : à partir de la dimension 2 il n'est pas un groupe algébrique,
+c'est-à-dire qu'on ne peut pas ranger ses éléments dans une variété de
+dimension finie. Le problème de ces feuillets est de savoir ce qu'il contient
+de maniable : quels sont les groupes algébriques qui s'y plongent ?
+
+En dimension 2 la réponse était connue depuis la fin du XIXe
+siècle. Un groupe algébrique connexe agissant sur le plan par transformations
+de Cremona agit en fait, après un changement de coordonnées rationnel, par de
+vrais automorphismes d'une surface très simple : le plan projectif, le produit
+de deux droites projectives, ou l'une des surfaces réglées de Hirzebruch. Trois
+familles, et leurs groupes d'automorphismes se lisent immédiatement. C'est le
+théorème d'Enriques, et il ouvre la première page du dossier.
+
+En dimension quelconque on ne sait pas faire cela. La stratégie du dossier est
+de renoncer à tout classer et de fixer d'abord la partie la plus visible du
+groupe cherché : le \emph{tore}. Les transformations $(t_1, \ldots, t_n)
+\mapsto (\lambda_1 t_1, \ldots, \lambda_n t_n)$, où les $\lambda_i$ sont des
+scalaires inversibles, forment un groupe $T$ de dimension $n$ à l'intérieur du
+groupe de Cremona ; on montre d'abord qu'il y est maximal, et surtout que tous
+les groupes de cette sorte y sont conjugués, de sorte qu'en fixer un ne perd
+rien. La question devient : quels groupes algébriques contiennent $T$ ?
+
+La réponse est une combinatoire finie, et elle a la forme d'un objet que
+l'algèbre connaissait déjà. Pour les groupes réductifs — $\mathrm{GL}_n$, les
+groupes orthogonaux, les groupes de Lie compacts — on sait depuis Killing et
+Cartan que tout est encodé par un système de racines : une famille finie de
+caractères du tore, symétrique, avec pour chacun une coracine. Ici on trouve le
+même squelette, mais cassé en deux endroits, et c'est cette cassure qui est le
+contenu. Les racines $\alpha$ ne viennent plus nécessairement par paires
+$\pm\alpha$ ; et plusieurs racines peuvent partager la même coracine. La partie
+symétrique — les $\alpha$ dont l'opposé est encore une racine — reste un
+système de racines ordinaire et donne la partie réductive du groupe ; tout le
+reste donne des groupes unipotents. Cinq axiomes, écrits sur la dernière page,
+disent exactement ce qu'il faut, et l'on affirme que tout tel système provient
+d'un groupe et le détermine à conjugaison près.
+
+Ce que ces feuillets construisent porte aujourd'hui un nom qu'ils n'emploient
+pas. Une variété munie d'une action fidèle d'un tore de sa dimension, avec une
+orbite dense, est une \emph{variété torique} ; les groupes que le dossier
+classe sont exactement les groupes d'automorphismes de telles variétés, et les
+caractères $\alpha$ y sont ce qu'on appelle les \emph{racines de Demazure}. Le
+dictionnaire complet passe par un objet combinatoire — l'éventail, la
+collection de cônes qui recolle les cartes de la variété — dont ces pages ne
+disent pas un mot : elles gardent la donnée radicielle seule. Un lecteur qui
+voudra continuer cherchera sous les noms de variété torique, d'éventail, de
+racine de Demazure, et, du côté des questions laissées ouvertes ici, sous celui
+de rationalité stable.
+
+Une dernière chose sur ce que sont ces feuillets. Ce ne sont pas des notes de
+recherche : chacune des deux moitiés s'ouvre sur un nom et une date de sa main,
+« Demazure 5.1.1970 » et « Demazure 12.2.70 ». Ce sont des notes prises en
+écoutant, avec ce que cela suppose de vitesse et d'ellipse — les énoncés
+passent, les démonstrations non — et c'est aussi ce qui en fait un objet rare :
+on y voit une théorie au moment où elle est exposée pour la première fois, et
+non telle qu'elle sera rédigée.
+
+\keywords{Cremona group, toric variety, Demazure root, root datum, maximal torus, birational automorphism group, rational group action, Hirzebruch surface, Enriques classification, minimal rational surface, stable rationality, Zariski cancellation problem, Levi decomposition, Chevalley commutator formula, coroot, Weyl group}
+\end{resume}
+
+\pagerange{1}{10}
+\section*{Le fil du dossier, et les conventions}
+
+Le dossier va d'un théorème connu à une axiomatique, en dix pages, et il vaut
+mieux avoir les stations en tête avant d'entrer dans le détail.
+
+\begin{itemize}
+  \item \emph{Page 1.} Le théorème d'Enriques en dimension 2, ses quatre
+    corollaires, et l'annonce du programme en dimension $n$. Puis les
+    définitions : pseudo-morphismes, pseudo-isomorphismes, les foncteurs en
+    groupes $\mathrm{Psaut}$ et $\mathrm{Baut}$, et $\mathrm{Cr}_{n,k}$ comme
+    l'un d'eux.
+  \item \emph{Pages 2 et 3.} Les pseudo-opérations : axiomes, noyau,
+    rigidification par le schéma des stabilisateurs, pseudo-transitivité.
+  \item \emph{Pages 3 et 4.} Les tores : un tore qui pseudo-opère de façon
+    rigidifiée opère librement, d'où $\dim T \leq \dim X$, la caractérisation
+    de la rationalité, et la conjugaison des tores déployés de dimension $n$
+    dans $\mathrm{Cr}_{n,k}$, avec $N(T)/T \simeq \mathrm{Aut}_{\mathrm{gp}}(T)$.
+  \item \emph{Page 4.} Un critère, équivalent à un énoncé de rationalité
+    stable, pour qu'un tore de dimension $d$ soit contenu dans un tore maximal.
+    Puis le problème : classer les $G$ contenant $T$.
+  \item \emph{Pages 4 et 5.} La donnée qui va tout porter : une rétraction
+    rationnelle $f : G \dashrightarrow T$, et trois axiomes sur elle.
+  \item \emph{Page 6.} Le cas du rang un, où apparaît le couple $(x_\alpha,
+    \rho_\alpha)$ avec $\langle \rho_\alpha, \alpha \rangle = 1$ ; puis la
+    décomposition de $\mathfrak{g}$.
+  \item \emph{Pages 6 et 7.} La réduction à $\mathrm{PGL}(2)$, qui donne
+    l'existence et l'unicité de ce couple pour chaque racine, et la
+    décomposition de Levi.
+  \item \emph{Pages 7 et 8.} L'homomorphisme $\varphi_\alpha : \mathrm{GL}(2)
+    \to G$ quand $\alpha$ et $-\alpha$ sont racines, la coracine, le groupe de
+    Weyl $W^*$.
+  \item \emph{Pages 8 et 9.} Quand deux groupes radiciels commutent, les trois
+    cas que cela laisse, les constantes de structure et le théorème de
+    conjugaison.
+  \item \emph{Page 10.} Les cinq axiomes du « système d'Enriques » et le
+    théorème d'existence.
+\end{itemize}
+
+\emph{Notations, valables pour tout le document.} $k$ est un corps, $T$ un tore
+déployé de dimension $n$, $M = X^*(T)$ son groupe de caractères et $M^* =
+X_*(T)$ celui de ses sous-groupes à un paramètre, $\langle\,,\rangle : M^*
+\times M \to \mathbf{Z}$ la dualité. $R \subset M$ désigne l'ensemble des
+racines, $\rho : R \to M^*$ l'application $\alpha \mapsto \rho_\alpha$, et l'on
+garde la normalisation des feuillets, $\langle \rho_\alpha, \alpha \rangle =
+1$. On pose $R_s = R \cap (-R)$. Pour $\alpha \in R$, $U_\alpha$ est le
+sous-groupe radiciel, $x_\alpha : \mathbf{G}_a \xrightarrow{\ \sim\ } U_\alpha$
+sa paramétrisation et $\mathfrak{g}^\alpha = \mathrm{Lie}\,U_\alpha$. Enfin
+$\mathrm{Cr}_{n,k}$ est le groupe de Cremona, c'est-à-dire le groupe des
+transformations birationnelles de $\mathbf{P}^n_k$.
+
+\emph{Une convention de signe.} Le petit cercle des formules
+$\mathrm{Psaut}_k(K)(k) \simeq \mathrm{Aut}_k(K)^\circ$ et
+$\mathrm{Lie}(\mathrm{Baut}_k(K)) \simeq \mathrm{Der}_k(K)^\circ$ de la page 1
+est lu ici comme le passage au groupe opposé, respectivement à l'algèbre de Lie
+opposée.\footnote{C'est la seule lecture qui rende les deux formules vraies à
+la fois : une algèbre de Lie n'a pas de composante neutre, ce qui exclut
+l'autre sens usuel du cercle, et l'anti-isomorphisme est forcé par la
+contravariance de $X \mapsto k(X)$ — composer deux applications birationnelles
+revient à composer les inclusions de corps dans l'ordre inverse.}
+
+\pagerange{1}{1}
+\section*{I. Le théorème d'Enriques, et ce qu'il donne à généraliser (page 1)}
+
+Les surfaces rationnelles minimales sur un corps algébriquement clos sont le
+plan projectif $\mathbf{P}^2$, la quadrique $\mathbf{P}^1 \times \mathbf{P}^1$,
+et les surfaces de Hirzebruch $F_n = \mathbf{P}(\mathcal{O} \oplus
+\mathcal{O}(n))$ pour $n \geq 2$ ; $F_0$ est la quadrique et $F_1$ le plan
+éclaté en un point, ce qui est la raison pour laquelle la liste commence à
+$2$.\footnote{La page écrit la liste avec « $n \geq 2$ » — le chiffre est
+surchargé — puis, en regard, les deux identifications $F_0 = \mathbf{P}_1
+\times \mathbf{P}_1$ et $F_1 = \mathbf{P}_2$ éclaté, qui expliquent
+l'exclusion.} Leurs groupes d'automorphismes connexes sont
+\[
+  \mathrm{Aut}^\circ(\mathbf{P}^1 \times \mathbf{P}^1) = \mathrm{PGL}_2 \times
+    \mathrm{PGL}_2, \qquad
+  \mathrm{Aut}^\circ(\mathbf{P}^2) = \mathrm{PGL}_3,
+\]
+\[
+  \mathrm{Aut}^\circ(F_n) = H^0\bigl(\mathbf{P}^1, \mathcal{O}(n)\bigr)
+    \rtimes \bigl(\mathrm{GL}_2/\mu_n\bigr).
+\]
+Cette dernière écriture appelle une remarque.\footnote{La page écrit ce dernier groupe sous la forme
+$(\mathrm{GL}(2)\cdot\Gamma(\mathcal{O}(n)))/\mu_n$, en surcharge sur une
+première rédaction. Le produit est semi-direct, le facteur additif
+$H^0(\mathbf{P}^1, \mathcal{O}(n))$ étant normal, et c'est sous cette forme
+qu'on l'écrit ici.}
+
+\emph{Théorème (Enriques).} Tout sous-groupe algébrique linéaire connexe de
+$\mathrm{Cr}_2$ est contenu, à conjugaison près, dans l'un des précédents.
+
+\emph{Corollaire.} Ces groupes ont quatre propriétés que le dossier retient
+comme le cahier des charges de la généralisation : leur partie réductive est de
+type $A$ ;\footnote{La page écrit « structure réductive de type $A_n$ ». Les
+trois groupes de la liste ont pour parties réductives $\mathrm{PGL}_2 \times
+\mathrm{PGL}_2$, $\mathrm{PGL}_3$ et $\mathrm{GL}_2/\mu_n$, de types
+respectifs $A_1 \times A_1$, $A_2$ et $A_1$ : le type est bien de série $A$
+mais l'indice n'est pas $n$, et la lecture écrit « de type $A$ ».} ils sont
+définis sur $\mathbf{Z}$ ; ce sont des groupes d'automorphismes de variétés
+projectives très simples, sur lesquelles ils opèrent avec une orbite ouverte ;
+et ils contiennent un tore de rang $2$, c'est-à-dire de la dimension de la
+surface.
+
+C'est ce dernier trait que le dossier prend pour fil. Le programme est annoncé
+sur la même page : généraliser à la dimension $n$, les difficultés étant liées
+aux tores maximaux, et se restreindre pour cela aux sous-groupes de rang
+maximum.\footnote{Le mot désignant ces sous-groupes est de lecture douteuse sur
+la page ; le sens est fixé par tout ce qui suit.}
+
+\pagerange{1}{2}
+\section*{II. Applications birationnelles en famille : $\mathrm{Psaut}$ et $\mathrm{Baut}$ (pages 1 et 2)}
+
+Tout le dossier travaille en famille, sur une base $S$, et la première tâche
+est de donner un sens fonctoriel à « application birationnelle ».
+
+Soit $X$ lisse et séparé sur $S$. Un \emph{pseudo-morphisme} $X \dashrightarrow
+Y$ est une classe d'équivalence de morphismes $U \to Y$ définis sur un ouvert
+$U \subset X$ dense dans les fibres, deux tels étant identifiés s'ils
+coïncident sur un ouvert plus petit encore dense ; un
+\emph{pseudo-isomorphisme} est un pseudo-morphisme inversible, c'est-à-dire une
+application birationnelle relative.\footnote{La page accompagne ces deux mots
+d'une parenthèse dont les lettres se lisent « bel » suivies de « /S » ; on ne
+la résout pas ici, et rien de la suite n'en dépend.} D'où deux foncteurs en
+groupes sur les $S$-schémas :
+\[
+  \mathrm{Psaut}_S(X), \qquad \mathrm{Baut}_S(X),
+\]
+les pseudo-automorphismes de $X$, et les automorphismes birationnels. Le groupe
+de Cremona en est un cas :
+\[
+  \mathrm{Cr}_{n,k} = \mathrm{Baut}_k\bigl(k(t_1, \ldots, t_n)\bigr),
+\]
+les transformations birationnelles de $\mathbf{P}^n_k$ n'étant autres que les
+$k$-automorphismes de son corps de fonctions.\footnote{La page écrit
+$\mathrm{Baut}_k(k[t_1,\ldots,t_n])$, avec l'anneau de polynômes.
+L'espace affine et l'espace projectif ont même corps de fonctions, donc même
+groupe d'automorphismes birationnels : les deux écritures désignent le même
+objet, et la lecture prend celle qui le dit sans détour.} Sur les points
+rationnels et sur les algèbres de Lie, la contravariance du passage au corps
+des fonctions donne
+\[
+  \mathrm{Psaut}_k(K)(k) \simeq \mathrm{Aut}_k(K)^\circ, \qquad
+  \mathrm{Lie}\bigl(\mathrm{Baut}_k(K)\bigr) \simeq \mathrm{Der}_k(K)^\circ,
+\]
+le cercle désignant le passage à l'opposé.
+
+Ces foncteurs ne sont pas représentables en général — c'est même là toute la
+difficulté du sujet — et la question utile est de savoir ce qu'un morphisme
+depuis un groupe algébrique peut faire. Deux énoncés y répondent.
+
+\emph{Proposition.} La section unité de $\mathrm{Baut}_S(X)$ est une immersion
+fermée dans chacun des deux cas suivants : $S$ artinien ; les fibres de $X$
+irréductibles.\footnote{La page ajoute « (géom.) » au-dessous, appelé par un
+signe d'insertion : il faut lire les fibres géométriquement irréductibles.}
+
+\emph{Corollaire.} Si $G$ est un schéma en groupes et $G \to
+\mathrm{Baut}_S(X)$ un homomorphisme, le noyau est un sous-schéma en groupes
+fermé.\footnote{La fin de l'énoncé de la page est en partie illisible ; ce qui
+en reste, « le noyau est un [...] groupe fermé », est ce qu'on écrit ici, et
+c'est aussi ce que la proposition précédente donne, le noyau étant l'image
+réciproque de la section unité.}
+
+\emph{Lemme.} Si $X$ est une courbe lisse et propre sur $k$, tout homomorphisme
+d'un schéma en groupes vers $\mathrm{Baut}_k(X)$ se factorise par
+$\mathrm{Aut}_k(X)$ : une application birationnelle entre courbes lisses
+propres est un isomorphisme. C'est ce lemme, et lui seul, qui permettra plus
+loin de remplacer un quotient de dimension $1$ par un sous-groupe de
+$\mathrm{PGL}(2)$.
+
+\pagerange{2}{3}
+\section*{III. Pseudo-opérations : axiomes, noyau, rigidification (pages 2 et 3)}
+
+Soit $G$ un schéma en groupes lisse de type fini sur $k$ et $X$ un schéma. Une
+\emph{pseudo-opération} de $G$ sur $X$ est un pseudo-morphisme
+\[
+  \varphi : G \times X \dashrightarrow X,
+\]
+d'ouvert de définition $U \subset G \times X$, soumis à deux axiomes : les deux
+projections issues de $U$ sont dominantes (PO 1), et $\varphi$ est associative
+(PO 2), au sens où le carré
+
+\begin{tikzcd}[column sep=large]
+G \times G \times X \arrow[r, "m \times X"] \arrow[d, "G \times \varphi"'] & G \times X \arrow[d, "\varphi"] \\
+G \times X \arrow[r, dashed] & X
+\end{tikzcd}
+
+commute en tant que diagramme de pseudo-morphismes.\footnote{L'étiquette de la
+flèche du haut est de lecture douteuse sur la page ; c'est la multiplication de
+$G$, notée ici $m$.} Sur les points, cela se lit : pour $g, h \in G(S)$ et $x
+\in X(S)$, si $h \cdot x$ est défini et $g(h \cdot x)$ aussi, alors $gh \cdot
+x$ est défini et vaut $g(h\,x)$.
+
+Il existe alors un sous-groupe distingué fermé $N \subset G$, le noyau, tel que
+$G/N$ se plonge dans $\mathrm{Baut}_k(X)$.
+
+\emph{Rigidification.} Considérons le pseudo-morphisme $G \times X
+\dashrightarrow X \times X$, $(g,x) \mapsto (\varphi(g,x), x)$, et l'image
+réciproque $F$ de la diagonale :
+
+\begin{tikzcd}
+G \times X \arrow[r, dashed] & X \times X \\
+U \arrow[u, hook] & \\
+F \arrow[u, hook] \arrow[r] & X \arrow[uu]
+\end{tikzcd}
+
+$F$ est le schéma des stabilisateurs. L'opération est dite \emph{rigidifiée}
+lorsque $F \to X$ est fidèlement plat.
+
+\emph{Proposition.} Si l'opération est rigidifiée, $F_X$ est un sous-schéma en
+groupes de $G_X = G \times X$ au-dessus de $X$.
+
+\emph{Corollaire.} Le noyau $N$ est le plus grand sous-schéma en groupes
+constant de $F_X$ : un élément agit trivialement exactement s'il stabilise tous
+les points.
+
+\emph{Pseudo-transitivité.} L'opération est dite pseudo-transitive lorsque $G
+\times X \to X \times X$ est dominant ; pour une opération véritable cela
+signifie qu'il y a une orbite dense, et une seule.
+
+\emph{Proposition.} Si $G$ est pseudo-transitif sur $X$, alors $X$ est
+pseudo-isomorphe à un espace homogène.
+
+\pagerange{3}{4}
+\section*{IV. Les tores maximaux du groupe de Cremona (pages 3 et 4)}
+
+Tout ce qui précède sert à établir le fait suivant, qui est le premier résultat
+substantiel du dossier.
+
+\emph{Proposition.} Soit $T$ un tore déployé pseudo-opérant de façon rigidifiée
+sur $X$ irréductible. Alors $F = e \times X$.
+
+Autrement dit un tore qui pseudo-opère de façon rigidifiée opère librement :
+les stabilisateurs sont triviaux. Trois corollaires en découlent, tous
+géométriques.
+
+\emph{Corollaire 1.} $\dim T \leq \dim X$, avec égalité si et seulement si
+l'opération est pseudo-transitive.
+
+\emph{Corollaire 2.} Si $\dim T = \dim X$, alors $X$ est pseudo-isomorphe à
+$T$.
+
+\emph{Corollaire 3.} Pour $X$ irréductible de dimension $n$, les conditions
+suivantes sont équivalentes : $X$ est rationnelle ; $\mathrm{Psaut}(X) \simeq
+\mathrm{Cr}_{n,k}$ ; $\mathrm{Psaut}(X)$ contient un tore de dimension $n$.
+
+La dernière équivalence est exactement l'énoncé, dans le vocabulaire
+d'aujourd'hui, qu'\emph{une variété torique est rationnelle} : une action
+fidèle d'un tore déployé de la dimension de la variété, avec orbite dense,
+force la rationalité.\footnote{Le nom de variété torique est le nôtre ; il
+n'est pas sur les feuillets, qui n'ont pas de mot pour l'objet et le décrivent
+par ses propriétés.}
+
+Vient alors la série qui donne son titre à la section, page 4 :
+
+\emph{Corollaire 4.} Les tores déployés de dimension $n$ de $\mathrm{Cr}_{n,k}$
+sont conjugués.
+
+\emph{Corollaire 5.} Ils sont maximaux, égaux à leur propre
+centraliseur,\footnote{Le mot est illisible sur la page. On écrit
+« centraliseur » : c'est ce que la page 6 emploiera, sous la forme $T =
+\mathrm{Cent}_G T$, et c'est ce dont la suite a besoin.} leur normalisateur est
+lisse, et
+\[
+  N(T)/T \;\simeq\; \mathrm{Aut}_{\mathrm{gp}}(T) \;\simeq\;
+  \mathrm{GL}_n(\mathbf{Z}).
+\]
+
+\emph{Corollaire 6.} $T$ est un tore maximal de $\mathrm{Cr}_{n,k}$.
+
+Le corollaire 4 est ce qui autorise toute la suite : puisque les tores déployés
+de dimension maximale sont conjugués, en fixer un ne restreint rien. On notera
+que l'hypothèse « déployé » est employée partout et n'est pas décorative — la
+conjugaison passe par le corollaire 2, donc par une trivialisation de torseur
+qui n'est disponible que pour les tores déployés.\footnote{C'est le théorème 90
+de Hilbert sous sa forme $H^1(K, \mathbf{G}_m^d) = 0$ ; le nom est le nôtre, la
+page ne le cite pas.}
+
+\emph{Proposition.} $T$ déployé, $X$ irréductible, la pseudo-opération étant
+pseudo-fidèle : alors $X$ est pseudo-isomorphe à $T \times Y$, avec $Y$
+irréductible quelconque.
+
+C'est la forme birationnelle du quotient par un tore : une action fidèle rend
+la variété birationnelle au produit du tore par un quotient
+rationnel.\footnote{On la trouve aujourd'hui sous le nom de « lemme sans nom »,
+et l'existence du quotient rationnel sous celui de théorème de Rosenlicht ; ces
+noms sont les nôtres. La trivialité du torseur, ici encore, tient au caractère
+déployé de $T$.}
+
+\pagerange{4}{4}
+\section*{V. Un critère de rationalité stable (page 4)}
+
+De la proposition précédente, la page tire un critère pour qu'un tore de
+dimension $d$ soit contenu dans un tore maximal, et ce critère est un énoncé
+de théorie des corps.
+
+\emph{Corollaire 1.} Soit $0 \leq d \leq n$. Les conditions suivantes sont
+équivalentes : (a) toute image de $\mathbf{G}_m^d$ dans $\mathrm{Cr}_{n,k}$ est
+contenue dans un tore maximal ; (b) pour toute extension $K/k$ de degré de
+transcendance $d$, si $K(t_1, \ldots, t_{n-d})$ est pure sur $k$, alors $K$ est
+pure sur $k$.\footnote{Les deux membres sont en partie illisibles sur la page ;
+ce qu'on en lit est « $\mathrm{Im}\,\mathbf{G}_m^d \subset \mathrm{Cr}_{n,k}$
+[...] contenu dans un [...] » et « [...] extension $K/k$ de deg. tr. $d$, et
+$K[t_1,\ldots,t_{n-d}]$ pure, [...] pure (« Lüroth ») ». La forme donnée ici
+est la nôtre ; elle est celle que la proposition précédente produit, le corps
+$K$ étant le corps des fonctions du quotient $Y$.}
+
+La condition (b) est ce qu'on appelle aujourd'hui la question de la
+\emph{rationalité stable} : un corps qui devient pur après adjonction de
+variables était-il déjà pur ?\footnote{Sous sa forme géométrique, le problème
+de l'annulation de Zariski ; les deux noms sont les nôtres.} La page en donne
+l'état des connaissances de 1970, sous forme d'une note entre crochets : le cas
+$d = 0$ est trivial ; $d = 1$ est le théorème de Lüroth ; $d = 2$ vaut en
+caractéristique nulle par le critère de Castelnuovo — la page écrit « car.
+nulle » en regard, et la restriction n'est pas de précaution, il existe en
+caractéristique positive des surfaces unirationnelles non rationnelles ; $d =
+n$ est trivial sur un corps algébriquement clos. D'où la conclusion de la page :
+le critère « marche si $n \leq 3$ ».
+
+Le premier cas ouvert est donc $d = 3$, et il a été tranché depuis, par la
+négative : il existe des variétés de dimension $3$ stablement rationnelles et
+non rationnelles.\footnote{Beauville, Colliot-Thélène, Sansuc et
+Swinnerton-Dyer, 1985. La conséquence pour (a) — qu'il existe, pour $n \geq 4$,
+un tore de dimension $3$ dans $\mathrm{Cr}_{n,k}$ qui n'est contenu dans aucun
+tore maximal — est notre lecture de l'équivalence de la page, non un énoncé du
+dossier.}
+
+\pagerange{4}{5}
+\section*{VI. Le problème, et la rétraction $f$ (pages 4 et 5)}
+
+Le problème est posé sur la page 4 : \emph{classer les groupes algébriques
+lisses $G \subset \mathrm{Cr}_{n,k}$ contenant un tore déployé de dimension
+$n$.} Ce que la page appelle aussitôt après le \emph{théorème de structure}
+en fixe le cadre : le tore $T$ étant fixé une fois pour toutes, on cherche les
+$G$ tels que
+\[
+  T \subset G \subset \mathrm{Baut}(T),
+\]
+l'opération de $G$ étant transitive ; ce qu'on veut au bout est un espace
+homogène $X$ sous $G$, de dimension $n$, sur lequel $T$ opère fidèlement avec
+une orbite ouverte — c'est-à-dire, dans le vocabulaire d'aujourd'hui, une
+variété torique dont $G$ est le groupe d'automorphismes.
+
+La donnée qui va porter toute la théorie est écrite sur la page 5. On dispose
+d'un sous-groupe $H \subset G$ tel que la multiplication
+\[
+  T \times H \longrightarrow G
+\]
+soit une immersion ouverte — la grosse cellule — et que l'intersection des
+conjugués de $H$ soit réduite à l'élément neutre ; et d'un pseudo-morphisme
+\[
+  f : G \dashrightarrow T,
+\]
+qui est la projection sur le facteur $T$ dans cette cellule. Les axiomes qu'on
+lui impose sont trois :
+
+\begin{enumerate}
+  \item[1)] $f(gg') = f\bigl(g\,f(g')\bigr)$, les deux membres étant définis
+    simultanément ;
+  \item[2)] $f$ est définie en tout point de $T$ et y induit l'identité ;
+  \item[3)] si $f(gt) = f(g't)$ pour tout $t$ où les deux membres sont
+    définis, alors $g = g'$.\footnote{La condition portant sur les $t$ est en
+    partie illisible sur la page ; la quantification donnée ici est celle qui
+    fait de 3) un axiome de séparation, seul usage qui en soit fait ensuite.}
+\end{enumerate}
+
+D'où, immédiatement, l'équivariance à gauche : $f(tg) = t\,f(g)$.
+
+C'est ce $f$, et non l'espace $X$, qui sera l'objet manipulé jusqu'à la fin du
+dossier. On peut le voir comme une carte du groupe autour de son tore, et les
+trois axiomes comme ce qu'il faut pour que cette carte détermine le groupe.
+
+\pagerange{6}{6}
+\section*{VII. Le rang un, et la naissance du couple $(\alpha, \rho_\alpha)$ (page 6)}
+
+La seconde séance commence par une remarque de souplesse : on peut restreindre
+l'étude à un $G' = \mathrm{Cent}_G(Q)$, où $Q$ est un sous-tore de $T$, et l'on
+peut passer au quotient par un sous-tore central $Z \subset T$, les trois
+axiomes restant vérifiés — « il faut un peu d'attention pour le troisième ».
+
+Puis le cas décisif : $\dim G - \dim T = 1$. Alors $G$ n'est pas commutatif —
+sinon $T$ serait central, ce qu'il n'est pas dès que $T \neq G$ — et $G$ est
+produit semi-direct
+\[
+  G = T \cdot G_u, \qquad G_u \simeq \mathbf{G}_a .
+\]
+
+\emph{Proposition.} Il existe un unique couple
+\[
+  x_\alpha : \mathbf{G}_a \xrightarrow{\ \sim\ } U, \qquad
+  \rho_\alpha : \mathbf{G}_m \longrightarrow T
+\]
+tel que
+\[
+  t\,x_\alpha(\lambda)\,t^{-1} = x_\alpha\bigl(\alpha(t)\,\lambda\bigr),
+  \qquad
+  f\bigl(x_\alpha(\lambda)\bigr) = \rho_\alpha(1+\lambda),
+\]
+où $\alpha \in M$ est le caractère par lequel $T$ agit sur $U$ ; la seconde
+formule n'a de sens que là où $1 + \lambda$ est inversible, ce qui est
+précisément le domaine de définition de $f$ le long de $U$. On en tire les deux
+relations qui gouvernent tout le reste :
+\[
+  \langle \rho_\alpha, \alpha \rangle = 1, \qquad
+  H = x_\alpha(1)\, T\, x_\alpha(-1).
+\]
+La seconde est suivie d'un « (?) » de sa main.\footnote{Le point
+d'interrogation est sur la page, en marge de la formule ; on le laisse tel
+quel, la formule n'étant pas utilisée ensuite.} Inversement, la donnée de
+$\alpha$ et $\rho_\alpha$ vérifiant $\langle \alpha, \rho_\alpha \rangle = 1$
+reconstitue le groupe.
+
+Le couple $(\alpha, \rho_\alpha)$ soumis à $\langle \rho_\alpha, \alpha \rangle
+= 1$ est l'objet central du dossier, et c'est celui que la théorie appelle
+aujourd'hui une \emph{racine de Demazure} : $\rho_\alpha$, vu dans le réseau
+des cocaractères, est le générateur primitif d'un rayon de l'éventail de la
+variété, et $\alpha$ un caractère qui vaut $1$ contre ce rayon et reste négatif
+ou nul contre les autres.\footnote{Le nom, comme la notion d'éventail, est le
+nôtre : les feuillets ne portent ni cône, ni éventail, et la condition de
+négativité contre les autres rayons y apparaît sous la forme équivalente du
+corollaire 1 de la page 9, $\langle \rho_\alpha, \beta \rangle \leq 0$. La
+normalisation de signe est celle des pages ; une partie de la littérature
+écrit $-1$.}
+
+\emph{Le cas général.} Pour $T \subset G$ quelconque, l'algèbre de Lie se
+décompose sous l'action adjointe de $T$ :
+\[
+  \mathfrak{g} = \mathfrak{g}_0 \oplus \bigoplus_{\alpha \in R}
+    \mathfrak{g}^\alpha, \qquad R \subset M \text{ fini},
+\]
+avec $\mathfrak{g}_0 = \mathrm{Lie}\,T$, ce qui traduit $T =
+\mathrm{Cent}_G(T)$, et $\dim \mathfrak{g}^\alpha = 1$.
+
+\pagerange{6}{7}
+\section*{VIII. La réduction à $\mathrm{PGL}(2)$ (pages 6 et 7)}
+
+Comment passer du rang un au rang quelconque : en fabriquant, pour chaque
+caractère, un quotient de dimension $1$.
+
+Soit $\chi : T \to \mathbf{G}_m$ un caractère, $T_\chi = (\ker \chi)^\circ$ et
+$Z_\chi = \mathrm{Cent}_G(T_\chi)$. Le quotient $Z_\chi/T_\chi$ a pour tore
+maximal $T/T_\chi$, de dimension $1$, et opère birationnellement et fidèlement
+sur une courbe rationnelle ; par le lemme de la page 2, il s'y plonge comme
+groupe d'automorphismes :
+\[
+  Z_\chi/T_\chi \hookrightarrow \mathrm{Aut}(\mathbf{P}^1) = \mathrm{PGL}(2).
+\]
+Restent quatre possibilités, selon le sous-groupe de $\mathrm{PGL}(2)$
+contenant le tore maximal que l'on rencontre : le tore maximal lui-même, et
+alors $Z_\chi = T$ ; son normalisateur, et alors $Z_\chi/T$ est d'ordre $2$ ;
+un Borel, et alors $\dim Z_\chi/T = 1$ ; ou $\mathrm{PGL}(2)$ tout
+entier.\footnote{La page range ces quatre cas en colonne, avec en regard du
+dernier un encadré partiellement illisible. La lecture « d'ordre $2$ » pour le
+second est la nôtre : la page écrit « de rang 2 », et c'est le groupe des
+composantes du normalisateur qui est d'ordre deux, son rang étant $1$.}
+
+\emph{Conclusion.} Supposons $\chi \in R$. Les deux premiers cas sont exclus,
+et l'on obtient :
+
+\emph{(1)} $\dim \mathfrak{g}_\alpha = 1$, et il existe un unique
+\[
+  x_\alpha : \mathbf{G}_a \longrightarrow Z_\chi \subset G, \qquad
+  x_\alpha(\mathbf{G}_a) = U_\alpha, \quad
+  \mathrm{Lie}(U_\alpha) = \mathfrak{g}_\alpha,
+\]
+avec $t\,x_\alpha(\lambda)\,t^{-1} = x_\alpha(\alpha(t)\lambda)$, et un unique
+$\rho_\alpha : \mathbf{G}_m \to T$ avec $f(x_\alpha(\lambda)) =
+\rho_\alpha(1+\lambda)$ et $\langle \rho_\alpha, \alpha \rangle = 1$. Enfin
+\[
+  \mathrm{Lie}\,Z_\chi = \mathfrak{g}_0 \oplus
+    \bigoplus_{\beta \in \mathbf{Q}\chi \,\cap\, R} \mathfrak{g}^\beta .
+\]
+
+\emph{(2)} Si $\lambda\alpha \in R$ avec $\lambda \neq 1$, alors $\lambda =
+-1$ : les seuls multiples d'une racine qui soient des racines sont
+$\pm\alpha$.\footnote{La page adjoint à cet énoncé une référence dont la
+lecture est douteuse. La conclusion, elle, est celle qu'on écrit : le système
+est réduit.} Lorsque $-\alpha \in R$, on obtient les deux sous-groupes de Borel
+contenant $T$, à savoir $T\,U_\alpha$ et $T\,U_{-\alpha}$.
+
+\emph{Décomposition de Levi.} $G^\circ = L \cdot U$ avec $L \supset T$
+réductif, et les racines de $L$ sont exactement les $\alpha \in R$ tels que
+$-\alpha \in R$, c'est-à-dire $R_s$.\footnote{Une double barre en marge, suivie
+d'une flèche, porte « SGA 3 XXVI » doublement souligné : c'est sa référence, et
+elle est de lui. Le théorème général d'existence d'un facteur de Levi est un
+théorème de caractéristique nulle et tombe en défaut en caractéristique
+positive ; ici la décomposition ne repose pas sur lui, mais sur la donnée
+radicielle elle-même — on prend pour $L$ le sous-groupe engendré par $T$ et les
+$U_\alpha$ avec $\alpha \in R_s$, et pour $U$ celui qu'engendrent les
+$U_\alpha$ avec $-\alpha \notin R$. C'est notre façon de lire l'énoncé de la
+page, qui ne précise pas la caractéristique.}
+
+\pagerange{7}{8}
+\section*{IX. $\mathrm{GL}(2)$, coracines, groupe de Weyl (pages 7 et 8)}
+
+\emph{Corollaire.} Si $G$ est connexe, $G^\circ$ est engendré par $T$ et les
+$U_\alpha$, et $f$ est entièrement déterminée par la connaissance des
+$x_\alpha$ et des $\rho_\alpha$.\footnote{La page porte, entre parenthèses
+après « $T$ », deux mots dont la lecture la plus vraisemblable est « groupe
+abélien » ; ils ne sont pas utilisés ici. L'insertion « si $G$ connexe » est
+de sa main, au-dessus de la ligne.}
+
+\emph{Théorème.} Si $\alpha$ et $-\alpha$ sont racines, il existe un
+homomorphisme $\varphi_\alpha : \mathrm{GL}(2) \to G$ tel que
+\[
+  \varphi_\alpha \begin{pmatrix} 1 & \lambda \\ 0 & 1 \end{pmatrix}
+    = x_\alpha(\lambda), \qquad
+  \varphi_\alpha \begin{pmatrix} 1 & 0 \\ \lambda & 1 \end{pmatrix}
+    = x_{-\alpha}(\lambda),
+\]
+\[
+  \varphi_\alpha \begin{pmatrix} \mu & 0 \\ 0 & 1 \end{pmatrix}
+    = \rho_\alpha(\mu), \qquad
+  \varphi_\alpha \begin{pmatrix} 1 & 0 \\ 0 & \mu \end{pmatrix}
+    = \rho_{-\alpha}(\mu),
+\]
+et tel que $f$ et l'action de $T$ se lisent sur les matrices :
+\[
+  f\left(\varphi_\alpha \begin{pmatrix} a & b \\ c & d \end{pmatrix}\right)
+    = \rho_\alpha(a+b)\,\rho_{-\alpha}(c+d),
+\]
+\[
+  \varphi_\alpha \begin{pmatrix} a & b \\ c & d \end{pmatrix} \cdot t
+    = t \cdot \rho_\alpha\!\left(a + \frac{b}{\alpha(t)}\right)
+      \rho_{-\alpha}\bigl(c\,\alpha(t) + d\bigr).
+\]
+
+C'est $\mathrm{GL}(2)$ et non $\mathrm{SL}(2)$ qui intervient, et la raison est
+que les deux cocaractères $\rho_\alpha$ et $\rho_{-\alpha}$ sont ici des
+données séparées : c'est leur \emph{différence} qui joue le rôle de la
+coracine.
+
+\emph{Observation.} L'élément de Weyl
+\[
+  w_\alpha = \varphi_\alpha \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}
+\]
+agit sur $T$ par la réflexion
+\[
+  s_\alpha(t) = t\;\alpha^{*}\bigl(\alpha(t)\bigr)^{-1}, \qquad
+  \alpha^{*} = \rho_\alpha - \rho_{-\alpha},
+\]
+et $\alpha^*$ est ce que la page nomme, sous la formule, la
+\emph{coracine}.\footnote{Le mot est de lui, écrit au-dessous et relié par un
+trait.}
+
+\emph{Le groupe de Weyl.} Avec $M = X^*(T)$, le système de racines de $L$ est
+le triplet $\{M,\, R_s,\, \alpha \mapsto \rho_\alpha - \rho_{-\alpha}\}$, où
+$R_s = R \cap (-R)$, et
+\[
+  N_{G^\circ}(T) = T \cdot W^{*},
+\]
+$W^*$ étant engendré par les $w_\alpha$, $\alpha \in R_s$. Il opère sur $R$, et
+\[
+  \rho_{s_\alpha(\beta)} = s_\alpha(\rho_\beta), \qquad
+  \mathrm{int}(w_\alpha)\,x_\beta = x_{s_\alpha(\beta)} .
+\]
+Une note de marge, ici, ne se laisse pas concilier avec ce qui
+précède.\footnote{La marge droite de la page porte, de sa main : « NB Ce $W^*$ opère
+trivialement [...] sur $T$ ! », avec un membre illisible entre parenthèses. Tel
+qu'il se lit, l'énoncé contredit la formule de réflexion écrite trois lignes
+plus haut, qui donne à $s_\alpha$ une action non triviale dès que $\alpha \neq
+0$ ; on le consigne sans l'utiliser, le mot manquant portant probablement sur
+un quotient ou sur une partie de $T$ que la page ne nomme pas.}
+
+\pagerange{8}{9}
+\section*{X. Commutation, constantes de structure, conjugaison (pages 8 et 9)}
+
+\emph{Proposition.} Pour $\alpha, \beta \in R$, les groupes $U_\alpha$ et
+$U_\beta$ commutent si et seulement si
+\[
+  \rho_\alpha = \rho_\beta \quad \text{ou} \quad
+  \langle \rho_\alpha, \beta \rangle = \langle \rho_\beta, \alpha \rangle = 0.
+\]
+
+\emph{Corollaire 1.} $\rho_\alpha \neq \rho_\beta \Longrightarrow \langle
+\rho_\alpha, \beta \rangle \leq 0$.
+
+\emph{Corollaire 2.} Si $\langle \rho_\alpha, \beta \rangle < 0$ et $\langle
+\rho_\beta, \alpha \rangle < 0$, alors $\alpha + \beta = 0$.
+
+Trois cas subsistent donc pour un couple de racines : (a) $\rho_\alpha =
+\rho_\beta$, les deux racines pointant le même rayon ; (b) $\alpha + \beta =
+0$, le cas semi-simple ; (c) à l'ordre près des deux racines,
+\[
+  \langle \rho_\alpha, \beta \rangle = -n \leq 0, \qquad
+  \langle \rho_\beta, \alpha \rangle = 0 .
+\]
+
+\emph{Proposition (cas (c)).} Dans ce cas :
+
+\begin{enumerate}
+  \item[1)] si $\lambda\alpha + \mu\beta \in R$ avec $\lambda, \mu \in
+    \mathbf{N}$, alors $\lambda\alpha + \mu\beta$ vaut $\alpha$ ou $\beta +
+    i\alpha$ pour un $i$ borné ;\footnote{La page écrit « $\lambda\alpha +
+    \mu\beta \subset R$ » ; on lit l'appartenance. La borne sur $i$ est
+    illisible ; c'est $i \leq n$, comme le montre l'article suivant.}
+  \item[2)] $\beta + i\alpha \in R$, et $\rho_{\beta+i\alpha} = \rho_\beta$,
+    dès que $\binom{n}{i} \neq 0$ dans $k$, pour $0 \leq i \leq n$ ;
+  \item[3)] et l'on a la formule de commutation
+    \[
+      x_\alpha(\lambda)\,x_\beta(\mu)\,x_\alpha(-\lambda)
+        = \prod_i x_{\beta+i\alpha}\!\left(\pm \binom{n}{i}\,
+          \lambda^{i}\,\mu\right).
+    \]
+\end{enumerate}
+
+C'est la formule de commutation de Chevalley, et la condition sur les
+coefficients binomiaux est ce qui en fait, ici, un énoncé sensible à la
+caractéristique : en caractéristique nulle tous les $\binom{n}{i}$ sont non
+nuls et la chaîne $\beta, \beta+\alpha, \ldots, \beta+n\alpha$ est entièrement
+faite de racines ; en caractéristique $p$ elle se troue.\footnote{Le nom est le
+nôtre. Le dossier n'énonce pas d'hypothèse sur la caractéristique et n'en a pas
+besoin : la condition binomiale l'incorpore.}
+
+Au niveau infinitésimal :
+\[
+  [X_\alpha, X_\beta] = \bigl(\langle \rho_\alpha, \beta \rangle -
+    \langle \rho_\beta, \alpha \rangle\bigr)\, X_{\alpha+\beta}
+  \quad \text{si } \alpha + \beta \neq 0, \qquad
+  [X_\alpha, X_{-\alpha}] = \rho_\alpha - \rho_{-\alpha} = \alpha^{*},
+\]
+et la page souligne que toutes les formules ont leurs coefficients dans
+$\mathbf{Z}$ : la théorie est définie sur $\mathbf{Z}$, ce qui est la seconde
+des quatre propriétés relevées page 1 sur la liste d'Enriques.
+
+\emph{Théorème de conjugaison.} Deux sous-groupes connexes $G, G' \supset T$ de
+$\mathrm{Cr}_{n,k}$ ayant mêmes $R$ et $\rho$ sont conjugués dans
+$\mathrm{Cr}_{n,k}$.
+
+C'est le théorème d'unicité de la théorie, et il a exactement la forme du
+théorème d'isomorphisme des groupes réductifs : la donnée radicielle détermine
+le groupe. Traduit sur les variétés, il dit que l'éventail détermine la variété
+torique.\footnote{Là encore le nom est le nôtre. La fin de l'énoncé, sur la
+page, se perd dans des points de suspension.}
+
+\pagerange{10}{10}
+\section*{XI. Les systèmes d'Enriques (page 10)}
+
+La dernière page recueille tout ce qui précède en une définition. Un
+\emph{système d'Enriques} est la donnée de deux réseaux en dualité $M$ et
+$M^*$, d'une partie $R \subset M$ et d'une application $\rho : R \to M^*$
+soumises à cinq axiomes :
+
+\begin{enumerate}
+  \item[1)] $R$ est fini ;
+  \item[2)] $\langle \rho_\alpha, \alpha \rangle = 1$ pour tout $\alpha \in R$ ;
+  \item[3)] $\rho_\alpha \neq \rho_\beta \Longrightarrow \langle \rho_\alpha,
+    \beta \rangle \leq 0$ ;
+  \item[4)] $\langle \rho_\alpha, \beta \rangle < 0$ et $\langle \rho_\beta,
+    \alpha \rangle < 0 \Longrightarrow \alpha + \beta = 0$ ;
+  \item[5)] si $\rho_\alpha \neq \rho_\beta$ et $\langle \rho_\beta, \alpha
+    \rangle = 0$, alors $\beta + i\alpha \in R$ dès que $\binom{n}{i} \neq 0$
+    dans $k$, pour $0 \leq i \leq n$, où $n = -\langle \rho_\alpha, \beta
+    \rangle$.\footnote{L'entier $n$ n'est pas introduit sur la page, qui
+    l'emploie tel quel ; on le reprend du cas (c) de la page 9, où il est posé
+    par $\langle \rho_\alpha, \beta \rangle = -n$. Sans cette précision l'axiome
+    n'a pas de sens, et c'est notre ajout.}
+\end{enumerate}
+
+\emph{Théorème d'existence.} Tout système d'Enriques provient d'un groupe :
+« on trouve tous les syst. d'Enriques ». La page s'arrête sur cette
+ligne.\footnote{L'énoncé est écrit en une ligne, sans démonstration ni
+indication de démonstration. Joint au théorème de conjugaison de la page 9, il
+donne la classification annoncée : les sous-groupes algébriques connexes de
+rang maximum de $\mathrm{Cr}_{n,k}$, à conjugaison près, sont en bijection avec
+les systèmes d'Enriques.}
+
+Il vaut la peine de mesurer l'écart avec la donnée radicielle d'un groupe
+réductif, car c'est lui qui contient toute la nouveauté. Là-bas on a $(X^*,
+X_*, R, R^\vee)$ avec $R$ symétrique et $\alpha \mapsto \alpha^\vee$ injective.
+Ici deux choses tombent : $R$ n'est pas symétrique — c'est ce que l'axiome 4)
+autorise en n'imposant $\alpha + \beta = 0$ que sous une double négativité — et
+$\rho$ n'est pas injective, plusieurs racines pouvant partager le même
+$\rho_\alpha$, ce qui est le cas (a) de la page 9. La partie symétrique $R_s =
+R \cap (-R)$ redonne un système de racines ordinaire, celui du facteur de Levi ;
+tout le reste produit des groupes unipotents. Un groupe réductif est le cas
+particulier $R = R_s$.
+
+\section*{XII. Ce que le dossier annonce et n'établit pas}
+
+Quatre choses, qu'il vaut mieux consigner que laisser croire acquises.
+
+Le théorème d'existence de la page 10 est écrit en une ligne et n'est pas
+démontré ; c'est pourtant la moitié de la classification.
+
+Le problème posé page 4 demandait de classer les groupes ; ce que le dossier
+livre est la donnée combinatoire qui les classe. Les variétés $X$ elles-mêmes —
+celles sur lesquelles ces groupes opèrent, et dont l'existence est le contenu
+géométrique de l'affaire — ne sont construites nulle part dans ces dix pages,
+et l'objet qui les construirait, l'éventail, n'y figure pas.
+
+La proposition sur les courbes irréductibles propres, en tête de la page 2, est
+biffée en entier et remplacée par le lemme qui la suit ; ce qu'elle disait
+n'est pas repris.
+
+Enfin le critère de la page 4 est laissé ouvert au premier cas non trivial, $d
+= 3$, et l'on a dit plus haut comment la question s'est close depuis, par la
+négative.
+
+\end{document}
