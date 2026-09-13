@@ -228,8 +228,8 @@ function dropMathBack(html, held) {
  *
  * The parser covers the subset the skill permits, and no more: directions from
  * `u`/`d`/`l`/`r` (repeatable, as in `rr`), an optional quoted label with `'`
- * for the far side, and the `hook`, `hook'`, `two heads` and `Rightarrow`
- * styles. Anything
+ * for the far side, and the `hook`, `hook'`, `two heads`, `leftrightarrow` and
+ * `Rightarrow` styles. Anything
  * outside that raises rather than being silently dropped — a diagram rendered
  * with an arrow missing asserts a commutation that was never written.
  */
@@ -300,6 +300,14 @@ function parseArrow(spec) {
     // unremarkable arrow.
     if (part === 'two heads') {
       arrow.twoHeads = true;
+      continue;
+    }
+    // A head at both ends: folder 89 page 11 joins Tors(V) to the two
+    // products of Tors(D_i) by double-headed strokes marked ≈ — equivalences
+    // of categories, drawn without a direction. One head would pick a
+    // functor the page does not pick.
+    if (part === 'leftrightarrow') {
+      arrow.bothEnds = true;
       continue;
     }
     // A headless line is not an arrow at all — Grothendieck's wheels carry
@@ -1079,6 +1087,7 @@ function drawDiagram(cd) {
     } else {
       var main = ctrl ? curve() : line(0);
       main.setAttribute('marker-end', head);
+      if (a.bothEnds) main.setAttribute('marker-start', head);
       if (a.style === 'hook') {
         // The hooked tail of a monomorphism. A half-circle at the start,
         // curling to the side the apostrophe selects.

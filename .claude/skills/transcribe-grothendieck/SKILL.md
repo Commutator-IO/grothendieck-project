@@ -332,6 +332,9 @@ asserts a commutation nobody wrote:
 - the styles `hook`, `hook'` (inclusions), `two heads` (the double chevron of
   an epimorphism — paired with `hook'` it is how he writes a map factored
   through its image) and `Rightarrow`;
+- `leftrightarrow`, a head at both ends — an equivalence drawn without a
+  direction (folder 89 page 11); one head would choose a functor the page
+  does not choose;
 - `no head`, for a line that is scaffolding rather than a functor — an axis,
   a radius. A head the page does not have asserts a morphism nobody wrote;
 - `dashed` (`dotted` is accepted as a synonym), for a shaft the page draws

@@ -1,0 +1,854 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 89, batch 1 (pages 1-20).
+% Established from the facsimile archives/batches/89/batch-01.pdf (a mirror of
+% https://grothendieck.umontpellier.fr/89.pdf), per the skill
+% transcribe-grothendieck. The folder is twenty pages and this is its only
+% batch.
+%
+% Nineteen of the twenty leaves are transcribed. Page 1 is a cover carrying
+% only « les ensembles 3-3 » in pencil; it takes no \page marker and its words
+% become the section heading. The inventory brackets both halves of its title,
+% but « Ensembles 3-3 » is his (the cover) and « hexagone combinatoire » is his
+% too (page 2, first line). There is no pagination of his own; the runs are
+% followed by his roman numerals I (page 2) and II (page 9) and, for the last
+% two leaves, by their subject.
+%
+% Four runs. Pages 2-8 (« I »): a combinatorial hexagon H = (S, A, R) amounts
+% to an orientation omega_H, a set Delta of three diagonals and a pair T of
+% inscribed triangles, with S = Delta x T; the groupoid of combinatorial
+% hexagons is equivalent to Ens_3 x Ens_2 (his margin). He then studies a
+% six-element set with a (3,3)-partition and a transitive system of isos
+% between the orientations omega_{S_i}: its automorphism group G has order 36;
+% a subordinate hexagonal structure is an « antipodisme » sigma; the three
+% antipodismes generate G' ≅ S_I, presented by sigma^2 = sigma'^2 =
+% (sigma sigma')^3 = 1; G' acts trivially on the Gamma_omega-torsor T = wedge
+% S_i, so G/G' (order 6) acts on it. Pages 7-8 restart with the full
+% automorphism group (order 72) of a (3,3)-partitioned set, whose involutive
+% splittings S' form a set of six elements surjecting 3-to-1 onto T' = wedge
+% omega_{S_i}; a hexagon is a pair (S, R) with a point of S'. The run breaks
+% off mid-sentence. Pages 9-14 (« II »): a plane V over F_3 has four lines;
+% a pair T of them and the complementary pair T' give two decompositions of V
+% and of any V-torsor P (nine points) as a product of two three-point sets —
+% two pairs of « orthogonal » (3,3,3)-partitions; hence an equivalence (8)
+% between (3,3)-partitioned six-element sets with bijections omega_{P_i} ≅
+% D_i^* indexed by T and by T', quasi-inverse to itself under T <-> T';
+% combinatorial squares Q correspond to planes over F_3 with a pair of lines
+% (9)-(10), the complementary pair gives the dual square DQ, and alpha_Q
+% alpha_{DQ} = -id = V(a_Q), the antipodism of Q (13). Pages 15-18: for V
+% free of rank 2 over a ring Lambda, the aim is to recover V from P(V)^! with
+% the torsors T_x = D_x^*, omega_V = det(V)^*, the disjointness relation and
+% the isomorphisms T_x wedge T_y ≅ omega_V; for u, v, w pairwise disjoint,
+% u + v + w = 0 iff u wedge v = v wedge w = w wedge u, which gives addition on
+% disjoint pairs; the statement is for a field, and the list of properties
+% needed breaks off after a). Pages 19-20, a different run in a faster hand:
+% combinatorial polygons from three points of view (ordered set S u A, edges
+% A in P_2(S), a pair of opposite circular orders), orientations of edges and
+% contours, and a theorem: a polygon has exactly two orientations, each
+% determining a unique bijection f_omega sending s along its outgoing edge.
+%
+% Reading hazards fixed once here. « syst. trans. d'isom. » is his; « ens. »,
+% « iso », « autom. », « corr. », « quelc. » are abbreviations kept as
+% written. He writes ∧ for the contracted product of torsors, sometimes with
+% the group underneath (wedge_{±1}); it is kept. His underlining is set in
+% bold. The circled tall S of the symmetric group is set \mathfrak{S}; the
+% script G of page 7 is \mathcal{G}; « Tors » is set \mathbf{Tors}. Page 11's
+% double-headed ≈ strokes needed a `leftrightarrow` arrow option, added to
+% scripts/render.mjs in the same commit. Pages 4 (a fan-shaped marginal note
+% at some sixty degrees), 17 (two slanted marginal notes) and 20 (a slanted
+% margin with a long elbowed connector, three cancelled lines) are the worst
+% of the hand; what they will not support is left \ill{}.
+%
+% Readings flagged and not settled: « structure unisignée » opening page 4;
+% « inverseurs » on page 4; the reading of the term closing page 5; « plan »
+% on page 9 (struck, with nothing substituted); « carré » on page 13, a
+% underlined word that could pass for « couvé », settled by the diagonals;
+% the numeral of (12) on page 14, written as (11); « torseur » on page 15;
+% « automorphismes » in c) on page 20.
+%
+% Pass: Opus 5 (claude-opus-5), 2026-09-13 — first pass, unchecked against the pages by a human.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{89}
+\batch{1}
+\pages{1}{20}
+\dating{s.d. — le groupe « Géométrie et topologie combinatoire » (69 à 102) est daté 1976-[vers 1986]}
+\watermark{Édition de démonstration}
+\foldertitle{[Hexagone] combinatoire. [Ensembles 3-3] : notes manuscrites (s.d.)}
+
+\begin{document}
+\section{Les ensembles 3-3}
+
+\note{ces mots sont de sa main : « les ensembles 3-3 », au crayon, occupent
+seuls le haut du feuillet de couverture (page 1), qui ne porte rien d'autre et
+ne reçoit donc pas de marqueur de page. L'inventaire les reprend entre
+crochets, « [Ensembles 3-3] » ; « [Hexagone] combinatoire » vient de la
+première ligne de la page 2}
+
+\subsection{I}
+
+\page{2}
+
+Soit $H = (S, A, R)$ un hexagone combinatoire\note{un hexagone régulier est
+dessiné dans la marge gauche, ses six sommets marqués d'un point, avec en
+pointillés ses diagonales et ses deux triangles inscrits}. Il lui correspond
+
+\begin{itemize}
+  \item[a)] $\omega_H \in \mathrm{Ens}_2$ l'une des deux orientations,
+  \item[b)] un torseur $S$ sous
+    \struck{$\mathbf{Z}/6\mathbf{Z} \wedge \omega_H \simeq \mathbf{Z}/3\mathbf{Z} \wedge \omega_H$}
+    \[
+      \mathbf{Z}/6\mathbf{Z} \wedge \omega_H \simeq
+      (\mathbf{Z}/3\mathbf{Z} \wedge \omega_H) \times
+      \underbrace{(\mathbf{Z}/2\mathbf{Z} \wedge \omega_H)}_{\mathbf{Z}/2\mathbf{Z}}
+    \]
+\end{itemize}
+
+ce qui revient \uncertain{au même}\note{les deux mots sont écrits par un signe
+« $=$ »}, une paire de deux torseurs :
+
+\marginal{Le groupoïde des hexagones combinatoires \uncertain{est} équivalent
+à la catégorie $(\mathrm{Ens}_3) \times (\mathrm{Ens}_2)$}
+
+\begin{itemize}
+  \item[b$_1$)] un torseur sous $(\mathbf{Z}/3\mathbf{Z} \wedge \omega_H)$ i.e.
+    un \struck{tri} élément
+    \[
+      \begin{cases}
+        \Delta \in \mathrm{Ens}_3 & \text{avec iso} \\
+        \omega_\Delta \simeq \omega_H
+      \end{cases}
+    \]
+    \marginal{\textbf{NB} a) et b$_1$) équivaut à : la donnée de
+    $\Delta \in \mathrm{Ens}_3$}
+  \item[b$_2$)] un ens. $T$ à deux éléments.
+\end{itemize}
+
+Alors $\Delta$ s'interprète comme l'un des \struck{deux} trois diagonales de
+$H$, et $T$ comme l'un des deux triangles inscrits. On récupère $H$ par un
+iso. can.
+\[
+  S \simeq \Delta \times T
+\]
+(un \ill{} est connu quand on connaît les triangles inscrits et les diagonales
+qu'il détermine, et inversement, \uncertain{ceux-ci pouvant} être donnés
+arbitrairement ---)
+
+Notons que cette décomposition implique
+\[
+  S \simeq \coprod_{i \in T} S_i \qquad \text{avec}\quad
+  \begin{array}{l} \operatorname{card} T = 2 \\
+  \operatorname{card} S_i = 3 \quad \forall\, i \in T \end{array}
+\]
+
+\page{3}
+
+en posant
+\[
+  S_i = \Delta \times \{i\},
+\]
+et on a un iso. canonique $\omega_{S_i} \simeq \omega_\Delta$ pour
+$\forall\, i \in T$, d'où
+\[
+  \bigwedge_{i \in T} \omega_{S_i} \simeq \mathbf{1}.
+  \quad (\text{torseur } \uncertain{\text{neutre}} \text{ sous } \mathbf{Z}/2\mathbf{Z})
+\]
+
+Considérons la structure \struck{donnée} sur un ens $S$ de card $6$ donnée par
+une partition
+\[
+  S = \coprod_{i \in T} S_i
+\]
+du type $(3,3)$, et un \struck{isom.} \add{syst. trans. d'}isom. entre les
+$\omega_{S_i}$\note{« syst. trans. d' » est écrit au-dessus du mot biffé}, i.e.
+un isom
+\[
+  (\mathrm{A}) \qquad \bigwedge_{i \in T} \omega_{S_i} \simeq \mathbf{1}.
+\]
+
+\struck{Considérons les} Le groupe des automorph. de cette structure est
+d'ordre $36$ (car en effet
+
+\begin{tikzcd}
+1 \arrow[r] & G' \arrow[r] \arrow[d] & G \arrow[r] & \mathfrak{S}_T \arrow[r] \arrow[d, no head, "\shortparallel" description] & 1 \\
+ & \prod_{i \in T} \mathfrak{S}_{S_i} \arrow[d, "\prod_{i \in T} \mathrm{sg}_i"] & & \mathbf{Z}/2\mathbf{Z} & \\
+ & \mathbf{Z}/2\mathbf{Z} \arrow[d] & & & \\
+ & 1 & & &
+\end{tikzcd}
+
+)\note{un court trait vertical est tracé au-dessus de $G'$, sans
+terme au bout ; le $\prod$ est écrit par-dessus un premier signe}
+
+\struck{La sous-groupe} Une structure hexagonale subordonnée : il
+
+\page{4}
+
+\uncertain{structure unisignée} équivaut à la donnée de l'\textbf{antipodisme}
+correspondant $\sigma = \sigma_H$ : cette structure $H$, qui
+\struck{\ill{}} \add{est} un autom. \add{involutif} de la structure
+\uncertain{unisignée}, induisant la transposition sur $T$ i.e. échangeant
+entre eux les $S_i$ --- il y a exactement \ill{} correspondant \ill{} le choix
+d'un $i \in T$ aux trois isom
+\[
+  S_i \simeq S_j \qquad (j \in T,\ j \neq i)
+\]
+« \uncertain{inverseurs} d'orientations » i.e. rendant
+$\omega_{S_i} \simeq \omega_{S_j}$ l'iso. donné grâce à (A). \struck{Soit}
+
+\note{« involutif » est inséré au-dessus de la ligne ; le mot biffé après
+« qui » est surchargé d'un « est »}
+
+\marginal{\struck{en effet, \ill{} il \ill{} exactement 2 \ill{}} il faut
+exiger de plus que \ill{} trivialise \ill{} \uncertain{commutant aux} \ill{}
+$\omega_{S_i}$ ($i \in T$)) ; il y en a trois \ill{} possibilités \ill{} qui
+induisent \ill{} des $\omega$, ils correspondent aux éléments \ill{} des
+$\bigwedge_{i \in T} S_i$ (par unicité) \ill{}
+$\Gamma\omega = \mathbf{Z}/3\mathbf{Z} \wedge_I \omega$ \ill{}}
+
+\note{cette note marginale est écrite en éventail, en biais à une soixantaine
+de degrés, sur toute la moitié supérieure de la marge gauche, et chevauche le
+début des lignes du corps ; seuls des fragments s'en lisent. Ses trois
+premières lignes sont barrées}
+
+Mais l'ens $G_H$ des autom. de $H = H_\sigma$ est le centralisateur de
+$\sigma$ \add{$= Z(\sigma)$} --- $G_H$ (est d'indice $3$ dans $G$,
+\uncertain{et en particulier le groupe normalisateur}) il est non distingué,
+ses trois conjugués correspondent aux trois conjugués de $\sigma$, qui sont
+les trois « antipodismes » de $G$, correspondant aux trois structures
+hexagonales subordonnées : la structure « trihexagonale » unisignée.
+
+\note{« $= Z(\sigma)$ » est écrit au-dessus de la ligne, et « et en
+particulier le groupe normalisateur » dans l'interligne suivant, rattaché par
+un trait au mot « distingué »}
+
+Considérons le $2$-groupe (invariant) $V$\note{un $G'$ est écrit au-dessus du
+$V$} de $G$ engendré par l'ens. $I$ des trois anti-
+
+\page{5}
+
+podismes $\sigma_i$, on vérifie que pour
+\[
+  I = \{i, j, k\}
+\]
+on a
+\[
+  \sigma_k = \sigma_i \sigma_j \sigma_i
+\]
+donc (puisqu'on peut exiger les faire en permutation circulaire), donc
+\[
+  \sigma_i = \sigma_j \sigma_k \sigma_j = \sigma_j (\sigma_i \sigma_j \sigma_i) \sigma_j
+  \qquad \text{i.e.} \qquad
+  (\sigma_i \sigma_j)^3 = 1
+\]
+
+\struck{On constate que $G'$ est le sous-groupe présenté} $G'$ opérant sur
+$I$ donne un iso \struck{par}
+\[
+  \struck{\sigma_i^2 = 1 \quad (i \in I)}
+\]
+\[
+  G' \xrightarrow{\ \sim\ } \mathfrak{S}_I
+\]
+où $\sigma_i$ correspond à la transposition de $I$ d'indice $i$ --- $G'$ est
+présenté par les gén. $\sigma_i$ \add{$(i \in I)$} et les \add{$3 + 6 = 9$}
+relations
+\[
+  \sigma_i^2 = 1 \qquad \sigma_k = \sigma_i \sigma_j \sigma_i
+  \qquad (\text{si } I = \{i, j, k\})
+\]
+\note{« $G'$ opérant sur » est écrit au-dessus de la ligne biffée ; « $(i \in
+I)$ » et « $3 + 6 = 9$ » sont insérés au-dessus de la ligne et rattachés par
+des traits}
+i.e. encore (pour $i, j \in I$ fixés, $i \neq j$), posant
+$\sigma = \sigma_i$, $\sigma' = \sigma_j$)
+\[
+  \struck{\sigma_i^2 = \sigma_j^2 =} \qquad
+  \sigma^2 = \sigma'^2 = (\sigma\sigma')^3 = 1 .
+\]
+
+Quel est le groupe quotient $G/G'$ (d'ordre $6$) ? Notons que les
+\add{données} \struck{\ill{}} de $(S_i)_{i \in T}$
+\note{« données » est écrit au-dessus du mot biffé ; la lecture
+$(S_i)_{i \in T}$ du dernier terme, en bout de ligne, n'est pas sûre}
+
+\page{6}
+
+et de $\bigwedge_{i \in T} \omega_{S_i} = \mathbf{1}$ équivaut à la donnée d'un
+ens. à deux éléments $\omega$ (l'orientation « commune » des $\omega_{S_i}$
+identifiés par le syst. transitif d'iso
+$\bigwedge_{i \in T} \omega_{S_i} \simeq \mathbf{1}$) et une famille de
+\textbf{torseurs} $S_i$ ($i \in T$) sous
+$\mathbf{Z}/3\mathbf{Z} \wedge_{\pm 1} \omega = \Gamma_\omega$.
+Considérons alors le \add{$\Gamma_\omega$-}torseur :
+\[
+  \mathsf{T} = \struck{\prod_{i \in T}} \bigwedge_{i \in T} S_i
+\]
+alors $G$ opère sur $(\Gamma_\omega, \mathsf{T})$, je dis que $G'$ y opère
+trivialement. En effet, un antipodisme $\sigma$ induisant
+$S_i \overset{u}{\simeq} S_j$ et $S_j \overset{u^{-1}}{\simeq} S_i$ induit
+\[
+  S_i \wedge S_j \xrightarrow{\ \sim\ } S_j \wedge S_i
+  \overset{\text{sym}}{\simeq} S_i \wedge S_j
+  \qquad (x \wedge y \mapsto (u^{-1} y \wedge u x))
+\]
+\struck{On a $ux$} Fixons $a \in S_i$, posons $ua = b \in S_j$, on a
+\[
+  x = \gamma a, \quad y = \gamma' b
+\]
+donc pour $\gamma, \gamma' \in \Gamma_\omega$
+\[
+  \sigma(\underbrace{\gamma a \wedge \gamma' b}_{\gamma\gamma'\, a \wedge b})
+  = (\underbrace{u^{-1} \gamma' b}_{\gamma' a}) \wedge (\underbrace{u \gamma a}_{\gamma b})
+  = \struck{\gamma\gamma'}\ \gamma' a \wedge \gamma b
+  = \underset{}{\gamma'\gamma\, a \wedge b}
+\]
+\note{le $\sigma$ en tête de la formule est écrit en surcharge d'un autre
+signe}
+
+\struck{Ainsi} Ainsi $G/G'$ opère dans \struck{\ill{}} $(\Gamma_\omega,
+\mathsf{T})$. Mais $\mathsf{T}$ se réalise \struck{comme} \add{canonique} l'un
+des \add{$3$} \uncertain{automorph.} involutifs \struck{$\alpha_\psi$} de
+$S = \coprod_{i \in T} S_i$ tels que $\alpha$ induise la transposition de $T$
+\textbf{et} de $\omega$, et on vérifie que \uncertain{$\alpha_t$ conjugue
+$\alpha_{j'}$ en $\alpha_{j''}$} (en fait \ill{} l'a déjà fait \ldots)
+\note{« canonique » est écrit au-dessus de « comme », biffé ; le « $3$ » est
+inséré au-dessus de la ligne}
+
+\page{7}
+
+\note{la page s'ouvre sur un double trait horizontal, de sa main, au milieu
+de la ligne de tête}
+
+Soit $S$ \struck{de} cardinal $6$ muni d'une partition\note{un $R$ est écrit
+au-dessus de « partition »} du type $(3,3)$, $T$ l'ens de ses deux classes,
+$S_i$ ($i \in T$) ses deux classes. Soit $\mathcal{G}$ le groupe des automorph.
+de $S$, donc
+
+\begin{tikzcd}
+1 \arrow[r] & \prod_{i \in T} \mathfrak{S}_{S_i} \arrow[r] & \mathcal{G} \arrow[r] & \mathfrak{S}_T \arrow[r] \arrow[d, no head, "\shortparallel" description] & 1 \\
+ & & & \mathbf{Z}/2\mathbf{Z} &
+\end{tikzcd}
+
+$\mathcal{G}$ d'ordre $72$. Soit $S' \subset \mathcal{G}$ l'ens des éléments
+\textbf{involutifs} de $\mathcal{G}$ au-dessus de l'élément $\neq 1$ de
+$\mathfrak{S}_T$, i.e. l'ens des scindages de l'ext. précédente.
+
+Pour $i \in T$ fixé, il est en corr. 1-1 avec
+\[
+  \mathrm{Isom}(S_i, S_j) \qquad \text{où } j \in T,\ j \neq i,
+\]
+ou encore il est en corr. 1-1 avec l'ens des corr. bijectives entre
+$(S_i)_{i \in T}$ i.e. des $\Gamma \subset \prod_{i \in T} S_i$ telles que
+$\forall\, i \in T$, $\Gamma \to S_i$ est bij.
+
+\page{8}
+
+C'est un ens qui a $6$ éléments, et on a une \struck{bijection} surjection
+\[
+  S' \longrightarrow T' \overset{\text{déf}}{=} \bigwedge_i \omega_{S_i}
+\]
+(notation précédente) qui est de degré $3$. Donc $S'$ est également un ens.
+muni d'une partition du type $(3,3)$.
+
+La donnée d'une structure hexagonale équivaut à : celle d'une structure
+$(S, R)$, et d'un $s \in S'$ --- celle d'un hexagone et d'un sommet dessus,
+\uncertain{à} un
+
+\note{la page s'arrête là, au premier tiers du feuillet ; le reste est blanc}
+
+\subsection{II}
+
+\page{9}
+
+Soit $V$ un \struck{\ill{}} plan vectoriel sur $\mathbf{F}_3$. La droite
+projective $P(V)$ a quatre éléments i.e. $V$ \add{contient} quatre droites
+vectorielles --- donnons nous une paire $T$ de droites de $V$
+$(D_i)_{i \in T}$. On a donc
+\[
+  (1) \qquad V = \bigoplus_{i \in T} D_i \simeq \prod_{i \in T} D_i
+\]
+\note{« contient » et le $T$ sont écrits au-dessus de la ligne}
+
+Considérons la paire complémentaire $T' = P(V) \smallsetminus T$,
+\struck{\ill{}} on a donc aussi
+\[
+  (2) \qquad V = \bigoplus_{i \in T'} D_i \simeq \prod_{i \in T'} D_i
+\]
+
+Notons les relations
+\[
+  (3) \qquad
+  \begin{cases}
+    T' \simeq \bigwedge_{i \in T} D_i^{*} \\
+    T \simeq \bigwedge_{i \in T'} D_i^{*}
+  \end{cases}
+\]
+l'application
+\[
+  \prod_{i \in T} D_i^{*} \longrightarrow T'
+\]
+qui définit $\bigwedge_{i \in T} D_i^{*} \to T'$ étant
+\[
+  (4) \qquad (u_i)_{i \in T} \longmapsto \mathbf{F}_3 \cdot \Bigl(\sum_{i \in T} u_i\Bigr).
+\]
+
+Si $P$ est un $V$-torseur, i.e. un \uncertain{plan} affine sur $\mathbf{F}_3$
+admettant $V$ comme groupe de translations, donc les formules (1) et (2)
+définissent respectivement deux décompositions de $P$ en produits
+\[
+  (5) \qquad P \simeq \prod_{i \in T} P_i\, , \qquad P \simeq \prod_{i \in T'} P_i
+\]
+\note{le mot rendu par « plan » est barré d'un trait, et rien ne le remplace}
+
+\page{10}
+
+\struck{où pour} pour tout $i \in T \amalg T' = P(V)$, $P_i$ est un
+$D_i$-torseur, défini par
+\[
+  (6) \qquad P_i = P / D_{\bar\imath} = P \wedge_V (D_i \simeq V / D_{\bar\imath})
+\]
+où $i \mapsto \bar\imath$ est l'\struck{élément} \add{involution} de $P(V)$ qui
+\struck{est} correspond à la partition du type $(2,2)$ $\{T, T'\}$, qui dans $T$
+et dans $T'$ se réduit à la transposition dans ces ensembles. Ainsi,
+l'ensemble $P$, de cardinal $9$, est muni, via
+\[
+  (\ast) \qquad P \simeq \prod_{i \in T} P_i
+\]
+d'\add{une paire de} \struck{deux} partitions du type $(3,3,3)$, indexées par
+$T$, ces partitions étant « orthogonales » en ce sens que l'application
+canonique \add{de} $P$ \uncertain{vers} le produit des deux ens. quotients
+correspondants est bijective, ce qui signifie aussi que pour toute classe de
+l'une et toute classe de l'autre, l'intersection a exactement un élément (il
+suffit de supposer qu'elle est toujours non vide, ou qu'elle a toujours au
+plus un élément \ldots). Et de même ensemble $P$ est muni d'une deuxième paire
+(distincte de la première) de partitions de type $(3,3)$\note{sic : le
+feuillet porte $(3,3)$ et non $(3,3,3)$}, « orthogonales », indexée par $T'$,
+correspondant à la décomposition
+\[
+  (\ast') \qquad P \simeq \prod_{i \in T'} P_i
+\]
+\note{« involution », « une paire de », « de » et « orthogonales », indexée
+par $T'$ » sont écrits au-dessus des lignes}
+
+\page{11}
+
+Ceci étant, on a des équivalences de catégories
+
+\begin{tikzcd}[column sep=small]
+ & (\mathbf{Tors}(V)) & \\
+\prod_{i \in T} (\mathbf{Tors}(D_i)) \arrow[ur, leftrightarrow, "\approx"] & & \prod_{i \in T'} (\mathbf{Tors}(D_i)) \arrow[ul, leftrightarrow, "\approx"']
+\end{tikzcd}
+
+(7)\note{le numéro (7) est porté à gauche du diagramme ; son
+soulignement de « Tors » est rendu en gras}
+
+Notons que pour une droite vectorielle $D$ sur $\mathbf{F}_3$, la catégorie
+$\mathbf{Tors}(D)$ est isomorphe canoniquement à celle des ens. $E$ de cardinal
+$3$, munis d'une bijection
+\[
+  \omega_E \simeq D^{*}
+\]
+\marginal{$\omega_E$ : l'une des $2$ orientations de $E$, i.e. des deux
+permutations circulaires de $E$ inverses l'une de l'autre}
+de sorte que la catégorie $\prod_{i \in T} (\mathbf{Tors}(D_i))$ peut être
+regardée comme celle des familles à deux éléments, indexées par $T$,
+d'ensembles de cardinal $3$
+\[
+  (P_i)_{i \in T}
+\]
+munis chacun d'une bijection
+\[
+  \omega_{P_i} \simeq D_i^{*} \qquad (i \in T)
+\]
+--- et de même pour la catégorie $\prod_{i \in T'} (\mathbf{Tors}(D_i))$.
+\note{la glose sur $\omega_E$ est écrite en petits caractères sous la formule,
+et non en marge}
+
+\page{12}
+
+On peut aussi l'interpréter, \add{via
+$(P_i)_{i \in T} \longmapsto \coprod_{i \in T} P_i$,} comme la catégorie des
+ensembles $E$ de cardinal $6$, munis d'une partition \add{$(P_i)_{i \in T}$}
+du type $(3,3)$ indexée par $T$, et pour chaque $i \in T$ d'une bijection
+$\omega_{P_i} \simeq D_i^{*}$. Ainsi les deux équivalences (7), fournissent une
+équivalence
+\note{« via $(P_i)_{i \in T} \mapsto \coprod_{i \in T} P_i$ » et
+« $(P_i)_{i \in T}$ » sont écrits au-dessus des lignes}
+\[
+  (8) \qquad
+  \begin{array}{l}
+    \text{Catégorie des ens. } E \text{ de} \\
+    \text{cardinal } 6, \text{ munis d'une} \\
+    \text{partition } (P_i)_{i \in T} \text{ du type } (3,3), \\
+    \text{indexée par } T, \text{ et d'une} \\
+    \struck{\text{famille}}\ \text{paire de bijections} \\
+    \qquad D_i^{*} \simeq \omega_{P_i}
+  \end{array}
+  \quad \xrightarrow{\ \approx\ } \quad
+  \begin{array}{l}
+    \text{Catégorie analogue} \\
+    \text{définie en termes} \\
+    \text{de } T' \text{ et de} \\
+    \quad (D_i^{*})_{i \in T'}
+  \end{array}
+\]
+
+Quand \add{(\uncertain{grâce à} $V$)} on échange le rôle de $T$ et de $T'$, il
+est évident que le diagramme d'équivalences (7) reste le même à symétrie près,
+et que l'équivalence (8) est donc remplacée par \struck{l'} une équivalence,
+\add{conséquemment} quasi-inverse de la précédente.
+
+Les catégories figurant de part et d'autre dans (8), se définissent en termes
+de la famille, indexée par $P(V) = T \amalg T'$, d'ensembles à deux éléments
+$\omega_i = D_i^{*}$ (dont la donnée équivaut à celle de la famille des droites
+vect. $D_i$ \ill{})
+
+\page{13}
+
+vu que \struck{$\mathbf{F}_3^{*}$} l'on a
+\[
+  \mathbf{F}_3^{*} = \{\pm 1\} \quad ).
+\]
+
+\struck{Ainsi} \add{Notons que} la donnée de $\{(\omega_i)_{i \in T}\}$ permet
+ainsi de reconstituer \add{(à isom. près)} la famille $(D_i)_{i \in T}$ de
+droites vectorielles sur $\mathbf{F}_3$ (via $D_i = \omega_i \amalg \{0\}$
+\ldots), donc le vectoriel
+\[
+  V = \prod_{i \in T} D_i
+\]
+sur $\mathbf{F}_3$, donc aussi \add{le plan vectoriel}
+$V = \prod_{i \in T} D_i$ avec la paire de droites indexée par $T$, d'où la
+paire complémentaire $(D_i)_{i \in T'}$. \struck{La}
+
+\struck{Donc ainsi on fait} donnée d'une famille $(\omega_i)_{i \in T}$ d'ens.
+à deux éléments, indexée par $T$, équivaut à celle d'un \textbf{carré}
+\add{comb.} $Q$, admettant $T$ comme ens. des diagonales. On trouve
+\add{ainsi} \struck{une} équivalences
+\[
+  (9) \qquad
+  \begin{array}{c} \text{Carrés combinatoires} \\ Q \end{array}
+  \quad \overset{\approx}{\longleftrightarrow} \quad
+  \begin{array}{l}
+    \text{plans vectoriels } V \text{ sur } \mathbf{F}_3, \\
+    \text{munis d'une paire} \\
+    \text{de droites vectorielles} \\
+    \quad (D_i)_{i \in T}
+  \end{array}
+\]
+\note{« Notons que », « (à isom. près) », « le plan vectoriel », « comb. »,
+« ainsi » et le $V$ de (9) sont écrits au-dessus des lignes. La lecture
+« carré » d'un mot souligné qu'on pourrait prendre pour « couvé » est dictée
+par la suite : un ensemble de quatre sommets dont $T$ est l'ensemble des deux
+diagonales}
+
+dans cette équivalence, donc, \struck{on $T$ correspond à}
+\[
+  (10) \qquad
+  \left\{
+  \begin{array}{l}
+    T \simeq \operatorname{diag} Q
+    \quad \text{et} \quad D_i^{*} \simeq d_i \quad \text{pour } i \in T \\[4pt]
+    S_Q = \bigcup_{i \in T} D_i^{*} = \coprod_{i \in T} D_i^{*} \\[4pt]
+    A_Q = \prod_{i \in T} D_i^{*} \simeq V^{*} \smallsetminus \bigcup_{i \in T} D_i^{*}
+    = \bigcup_{i \in T'} D_i^{*}
+  \end{array}
+  \right.
+\]
+où $d_i$ est l'ensemble des deux sommets de $Q$ qui constituent la diagonale
+$i$
+\note{à gauche de l'accolade, un « Diag $Q$ » est biffé au-dessus du numéro
+(10). Le dernier membre « $= \bigcup_{i \in T'} D_i^{*}$ » est rejeté dans la
+marge gauche, en bas du feuillet, qui coupe la dernière ligne ; dans la
+ligne de $A_Q$ un premier signe est surchargé en $\prod$}
+
+\page{14}
+
+\struck{Rien} On a d'ailleurs
+\[
+  \underset{\substack{\text{ens. d'arêtes} \\ \text{de } Q}}{A_Q}
+  \simeq
+  \underset{\substack{\text{produit} \\ \text{des deux} \\ \text{diagonales de } Q}}{\prod_{i \in T} D_i^{*}}
+  \simeq V^{*} - \bigcup_{i \in T} D_i^{*} = \bigcup_{i \in T'} D_i^{*}
+\]
+ce qui montre que \struck{\ill{}} le carré défini par l'\struck{ens.}
+\add{paire} $(D_i)_{i \in T'}$ des droites de $V^{*}$ complémentaire de la paire
+$(D_i)_{i \in T}$ s'identifie au carré dual $DQ$ de $Q$. Si on désigne par
+$V(Q)$ le \add{plan} vectoriel sur $\mathbf{F}_3$ défini par $Q$, on trouve
+donc un isomorphisme
+\[
+  (11) \qquad V(DQ) \xrightarrow[\ \sim\ ]{\ \alpha_Q\ } V(Q)
+\]
+et de façon symétrique
+\[
+  (\uncertain{12}) \qquad
+  \underset{\substack{\wr \\ DDQ}}{V(Q)} \xrightarrow{\ \alpha_{DQ}\ } V(DQ)
+\]
+\note{le numéro de cette formule est écrit comme celui de la précédente ; la
+suite, (13), demande (12). Le $Q$ de $V(Q)$ est surchargé}
+
+Ceci posé, on a la relation
+\[
+  (13) \qquad \alpha_Q\, \alpha_{DQ} = -\mathrm{id}_{V(Q)}
+  = V(\underset{\substack{\text{antipodisme} \\ \text{de } Q}}{a_Q})
+\]
+\note{les indices du premier membre sont écrits en surcharge d'une première
+version}
+et de même bien entendu
+\[
+  \alpha_{DQ}\, \alpha_Q = -\mathrm{id}_{V(DQ)} = V(a_{DQ})
+\]
+
+\page{15}
+
+Soient $V$ un Module \struck{loc.} libre \add{de rang $2$} sur un
+\add{anneau $\Lambda$} \struck{topos loc. annelé}, d'où $P(V) =$ ens. des
+« droites vectorielles » de $V$ (i.e. des sous-modules \struck{libres de}
+\add{loc.} inversibles facteurs directs), \struck{et $P(V)^! =$}
+\begin{itemize}
+  \item[(1)] $V^{*} =$ ens. des éléments de $V$ partout $\neq 0$ (i.e. qui font
+    partie d'une base)
+  \item[(2)] $P(V)^! = V^{*} / \Lambda^{*} \hookrightarrow P(V)$
+    l'ens. des « droites dans $V$ » qui sont des modules libres de rang $1$.
+\end{itemize}
+\note{« de rang $2$ », « anneau $\Lambda$ » et « loc. » sont écrits au-dessus
+des mots biffés}
+
+On a envie d'expliciter comment on récupère \add{le $\Lambda$-module} $V$ à
+l'aide de l'ens. $P(V)^!$, muni d'une structure supplémentaire, qui est
+\struck{un} essentiellement le $\Lambda^{*}$-\uncertain{torseur} relatif
+(ensembliste) $V^{*}$ sur $P(V)^! = X$.
+
+Pour $x \in P(V)^!$, soit $D_x \subset V$ la droite vectorielle correspondante,
+et posons
+\[
+  (3) \qquad T_x = D_x^{*} \qquad (\Lambda^{*}\text{-torseur})
+\]
+Soit de plus
+\[
+  (4) \qquad \omega_V = \det(V)^{*} \qquad (\text{un } \Lambda^{*}\text{-torseur})
+\]
+
+Sur $P(V)^!$ on a la relation binaire de disjonction
+\[
+  x, y \in P(V)^! \ \text{« \textbf{disjoints} »} \ \text{ssi} \ V \simeq D_x \oplus D_y
+\]
+(si $\Lambda$ est un corps, cela équivaut à : $x \neq y$ ; si $\Lambda$ est
+local, cela équivaut à : $x_0 \neq y_0$ (l'indice $0$
+
+\page{16}
+
+désignant la réduction mod. l'idéal maximal). Si $x$ et $y$ sont disjoints,
+alors \add{(et alors seulement)} \struck{l'appl.}
+\[
+  \begin{array}{c}
+    (u, v) \longmapsto u \wedge v \\
+    D_x \times D_y \longrightarrow \det V
+  \end{array}
+\]
+induit
+\[
+  T_x \times T_y \longrightarrow \omega_V
+\]
+qui se factorise par un \add{iso}morphisme
+\[
+  (5) \qquad
+  \underset{\substack{\text{produit contracté} \\ \text{de } \Lambda^{*}\text{-torseurs}}}{T_x \wedge T_y}
+  \xrightarrow{\ \sim\ } \omega_V
+\]
+
+\struck{noté} L'image de $(u \wedge v)$ \add{dans $\omega_V$} par cette
+application sera encore notée $u \wedge v$. On a encore
+\[
+  (6) \qquad u \wedge v = - v \wedge u
+\]
+\marginal{\textbf{NB} $-1 \in \Lambda^{*}$, et on pose, pour un
+$\Lambda^{*}$-torseur $T$, et $u \in T$,
+$-u \overset{\text{déf}}{=} (-1).u$)}
+
+Soient $x, y$ disjoints \add{$\in P(V)^!$}, et $z \in P(V)^!$ quelc., soient
+\[
+  u \in T_x, \quad v \in T_y, \quad w \in T_z
+\]
+considérons les relations
+\[
+  (7) \qquad u \wedge v = v \wedge w = w \wedge u
+\]
+équivalentes à
+\[
+  (7') \qquad w \wedge v = v \wedge u = u \wedge w \qquad )
+\]
+\note{le premier membre de (7') est écrit en surcharge}
+on vérifie de suite qu'elle équivaut à
+\[
+  (8) \qquad u + v + w = 0
+\]
+et qu'elle implique que $z$ est disjoint de $x, y$.
+
+\page{17}
+
+Je dis que \add{le $\Lambda$-module} $V$ se reconstitue \add{(du moins si
+$\Lambda$ est un corps)} à partir de
+\begin{itemize}
+  \item[a)] l'ens. $P = P(V)^!$
+  \item[b)] la famille des \add{$\Lambda^{*}$-torseurs} $(T_x)_{x \in P}$ ---
+    i.e. le \add{$\Lambda^{*}_P$-}torseur relatif
+    $\coprod_{x \in P(V)^!} T_x = V^{*}$ sur $P$
+  \item[c)] le $\Lambda^{*}$-torseur $\omega = \omega_V$
+  \item[d)] la donnée de la relation de disjonction dans $P = P(V)^!$
+    [ou ce qui revient au même, dans $V^{*}$ --- cette relation étant
+    \add{bi-}stable par l'opération de $\Lambda^{*}$ (i.e. $u, v$ disjoints
+    $\Rightarrow$ $\lambda u, \mu v$ disjoints pour $\lambda, \mu \in
+    \Lambda^{*}$)].
+  \item[\struck{e)}] \struck{le $\Lambda^{*}$-torseur $\omega = \omega_V$}
+  \item[e)] la donnée, pour $x, y$ disjoints, de l'isom. de
+    $\Lambda^{*}$-torseurs
+    \[
+      T_x \wedge T_y \simeq \omega \qquad \text{noté}\quad
+      u \mathbin{\underset{\Lambda^{*}}{\wedge}} v \longmapsto u \wedge v .
+    \]
+\end{itemize}
+\note{à gauche de a) et b), qu'embrasse un trait vertical, écrit en biais
+dans la marge :}
+\marginal{équivaut à : la donnée de l'ens. $V^{*}$, avec l'opération (libre)
+de $\Lambda^{*}$ sur $V^{*}$}
+\note{à gauche de d) et e), qu'embrasse un crochet, de même :}
+\marginal{Si $\Lambda$ est un corps, cette relation est la relation triviale
+$x \neq y$, et on \ill{} de donnée \ill{}}
+
+En effet, pour \struck{\ill{}} $u, v, w$ dans $V^{*}$, deux à deux disjoints,
+on trouve
+\[
+  u + v + w = 0 \iff u \wedge v = v \wedge w = w \wedge u
+\]
+donc on arrive à trouver la loi de composition \add{partielle}
+\[
+  (u, v) \longmapsto u + v \quad \text{sur } V^{*} \text{ pour } u, v
+  \ \textbf{disjoints}.
+\]
+
+\struck{On a} Dans le cas où $\Lambda$ est un corps, posant
+\[
+  \begin{cases}
+    V = V^{*} \amalg \{0\} \\
+    D_x = T_x \cup \{0\} \subset V
+  \end{cases}
+\]
+les $D_x$ sont des droites vectorielles sur $\Lambda$, et on
+
+\page{18}
+
+définit $u + v$ ($u, v \in V^{*}$) séparément quand $u$ ou $v = 0$ (comme
+étant $v$ resp. $u$), quand $u, v \in V^{*}$ et $u, v$ dans une même $D_x$
+(grâce à l'addition dans $D_x$), et quand $u, v$ sont disjoints par la
+\struck{\ill{}} somme $-w$, où $w$ est l'\textbf{unique} $w \in V^{*}$ qui
+soit disj. de $u, v$ et tel que
+\[
+  u \wedge v = v \wedge w = w \wedge u .
+\]
+Pour pouvoir réaliser cette construction, on a besoin des \struck{ceci}
+propriétés que voici sur les données a) b) c) [d)] e) :
+\begin{itemize}
+  \item[a)] Pour $x, y, z \in P$ mutuellement disjoints, on peut trouver
+    $u \in T_x$, $v \in T_y$, $w \in T_z$ tels que l'on ait
+    \[
+      u \wedge v = v \wedge w = w \wedge u \qquad (\ill{})
+    \]
+    (et alors on peut même supposer que $u$ ou $v$ ou $w$ \struck{\ill{}} soit
+    donné d'avance).
+\end{itemize}
+\note{« $\in P$ » et les deux « ou » sont écrits au-dessus des lignes ; la
+parenthèse au bout de la formule reste illisible. La page s'arrête au tiers
+inférieur du feuillet}
+
+\subsection{Polygones}
+
+\page{19}
+
+$\mathrm{Pol}\ \mathrm{top} \longrightarrow \mathrm{Pol}\ \mathrm{comb}$
+\add{est} ess.\ surjectif\add{, \uncertain{\textbf{Foncteur réalisation topologique}}} : dim. \ill{}
+\note{à droite, un polygone dessiné : un cercle portant alternativement des
+points et des croix, un arc épaissi entre deux points}
+
+dualité : échange de $S$ et $A$
+
+point de vue ens. ordonnés $P = S \amalg A$
+\struck{\ill{}} ($S$ él. minimaux, $A$ éléments maximaux
+\begin{itemize}
+  \item[] chaque \struck{élément} \uncertain{minimal} majoré \ill{}
+  \item[] chaque élément minimal majoré \add{\uncertain{strict.}} par
+    exactement deux él. maximaux)
+  \item[] chaque élément maximal minoré par exactement deux éléments
+    \uncertain{minimaux})
+\end{itemize}
+ici dualité : renversement de la relation d'ordre
+
+\struck{Point de vue} \add{Composantes connexes des \uncertain{v.t.} des ens.
+comb. polygones combinatoires (définitions combinatoires)} Point de vue
+\textbf{ens. de base $S$} (valable si les comp. connexes sont d'ordre
+$\geqslant 3$)
+\[
+  A \hookrightarrow \mathfrak{P}_2(S) \quad
+  \text{structure ens. de parties à deux éléments de } S
+  \ (\text{appelées \textbf{arêtes}})
+\]
+tel que $\forall\, s \in S$ \uncertain{appartient} : exactement deux arêtes
+
+Point de vue dual : structure sur $A$, d'une ens.
+$S \hookrightarrow \mathfrak{P}_2(A)$ (qui \ill{} « les
+\uncertain{sommets} »)
+
+Point de vue ordres circulaires (cas des polygones d'ordre $\geqslant 3$) :
+donnée sur $S$ (ou $A$) d'une paire d'ordres circulaires \add{(i.e.
+permutations transitives)} inverses l'un de l'autre --- une
+\textbf{orientation} de $\Pi$ correspond au choix de l'un des deux ordres
+circulaires en question.
+
+\note{les deux lignes insérées au-dessus de « Point de vue ens. de base
+$S$ » sont serrées et en partie illisibles}
+
+\page{20}
+
+Orientation d'une \textbf{arête} : par choix d'une « origine ».
+Orientations induites sur le bord de l'arête (extrémité $-$ origine)
+
+Orientation d'un contour combinatoire : choix d'une orientation sur chaque
+arête, de telle façon que pour tout sommet $s$, les deux orientations induites
+sur $s$ soient opposées \quad $\longrightarrow\!\bullet\!\longrightarrow$
+\marginal{orientations opposées}
+
+\struck{\ill{}} Relations avec le cas topologique ; orientation d'un segment
+topologique, d'une $1$-variété topologique
+
+\textbf{Théorème} a) Tout \struck{\ill{}} polygone combinatoire admet
+exactement $2$ orientations, \struck{\ill{}} \add{\uncertain{les} \ill{}
+d'un contour.}
+\marginal{i.e. il y a \ill{} orientations}
+
+b) À toute orientation $\omega$ \add{d'un contour,} correspond une unique
+\uncertain{bijection} $f_\omega$ telle que
+\begin{itemize}
+  \item[1)] $f_\omega$ conserve l'orientation
+  \item[2)] $\forall\, s \in S$, $\struck{\ill{}}\,(s, f_\omega(s))$ soit une
+    \textbf{arête} $a$, \add{et} dont l'origine $o_\omega(a)$ soit $s$.
+  \item[\struck{c)}] \struck{\ill{}}
+\end{itemize}
+\textbf{NB} 2) caractérise déjà $f_\omega$, si les comp. de $\Pi$ sont d'ordre
+$\geqslant 3$.
+
+c) $\omega \mapsto f_\omega$ induit une bij. entre l'ens. des orientations de
+$\Pi$, et l'ens. des \uncertain{automorphismes} de $\Pi$ qui satisfont 2).
+
+\note{la marge gauche porte, en biais et reliée au texte par un long trait
+coudé, une seconde formulation de 2) :}
+\marginal{b) $\forall\, s \in S$, $\ill{}\, f(s)$ soit adjacent à $s$ ;
+$\beta$) $\forall\, a \in A$, $\ill{}$ ; $f(a) \neq a$ \ill{} origine \ill{}
+de $f(s)$ \ill{}}
+
+\textbf{NB} La description des orientations, via $f$ est \ill{}. Orientons
+$\Pi$ en un sommet $s$ revient à choisir l'arête « origine » et l'arête
+« extrémité » en $s$ \quad (croquis : deux segments se rencontrant en un
+point, marqués $+$ et $-$)
+\note{les trois lignes biffées qui précèdent le premier \textbf{NB} ne se
+lisent pas ; le feuillet s'arrête en bas de page, la suite manque}
+
+\end{document}
