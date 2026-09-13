@@ -1,0 +1,509 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 41, batch 1 (pages 1-13).
+% Established from the facsimile archives/batches/41/batch-01.pdf (a mirror of
+% https://grothendieck.umontpellier.fr/41.pdf), per the skill
+% transcribe-grothendieck. The folder is thirteen pages and this is its only
+% batch.
+%
+% Twelve of the thirteen leaves are transcribed. Page 1 is the title leaf: it
+% carries, alone at the head of an otherwise blank sheet, an underlined
+% « Chap. VI », one line of prose, two struck words, and the run's title
+% underlined in full. Because it carries more than a name it keeps its \page
+% marker, and the title is also lifted out as the first section heading. Page 2
+% is the reverse of that leaf and carries nothing; it is skipped, and the gap
+% in the page numbers is the record. Pages 3 to 13 are the run.
+%
+% The subject is the one the title names: an étale Y-scheme M indexing the
+% relatively irreducible components of the fibres of a morphism f : X -> Y, and
+% the notion of a « monogène » section that goes with it. Page 3 defines
+% monogène for X/Y and for a map phi : Y -> X, forms the functor F(Y') of
+% monogène sections after base change, asks whether it is representable, and
+% gives the criterion an (M, phi_M) must satisfy to represent it: over an
+% algebraically closed extension Omega of kappa(y), M(Omega) must be in
+% bijection with the set of irreducible components of X tensor_Y Omega. Page 4
+% reduces the existence to a local question — the problem is local on Y, one
+% may take Y = Spec(A) with A local, then complete by descent of étale
+% morphisms. Pages 5 and 6 run the construction under the hypotheses
+% « universellement ouvert, de type fini, A local noethérien complet,
+% f^{-1}(y) irréductible »: a point x of the closed fibre determines a unique
+% relatively irreducible component, that map phi is monogène, and the last
+% thing to check is that phi is continuous. Page 7 states the Lemme the
+% construction rests on, with its five hypotheses, and closes on the
+% separatedness of M/Y. Page 8 is the Théorème: under a local
+% quasi-finiteness-over-affine-space hypothesis — satisfied in particular when
+% X is flat over Y — an étale separated M indexing the relatively irreducible
+% components of X/Y exists if and only if two specialisation conditions hold.
+% Page 9 adds the N.B. that the components of the geometric fibre inject into,
+% but need not exhaust, those of the fibre, and a third condition (iii) for M
+% to be an open étale scheme. Page 10 is two Remarques — (i) alone gives a
+% non-separated M; (iii) is automatic for a separable f; and if f is proper, M
+% is proper. Page 11 backs up to the irreducible-fibre case: Prop. 1 lists
+% three equivalent conditions for phi to be continuous, adds the auxiliary
+% (iii bis), and then Déf. 2 and Déf. 3 fix « universellement monogène » and
+% « monogène » once and for all. Page 12 observes that all of it is local on Y,
+% asks whether the functor I(X xS S'/S') is representable — « Est-il
+% représentable ??? » — and draws the cube of base changes in pencil. Page 13
+% is a Lemme cancelled by two long diagonals, two base-change diagrams, and a
+% Hyp/Concl pair on specialisations of relatively irreducible components, the
+% second conclusion Concl' being struck out in turn.
+%
+% The hand is drafting throughout and that is the folder's governing fact. The
+% statements, the labelled conditions, the displayed formulas and the
+% underlined words carry; a large part of the connective prose does not, and it
+% is marked \ill{} rather than invented. The apparatus is dense in consequence
+% and that density is the record of what these leaves support.
+%
+% Notation fixed once here rather than page by page. He writes two adverbs as
+% an abbreviation closed by a raised, underlined « t »: « rel^t » for
+% « relativement » and « abs^t » for « absolument », both set here as
+% $\mathrm{rel}^{\mathrm{t}}$ and $\mathrm{abs}^{\mathrm{t}}$; the pair is
+% settled by page 9, where he strikes a word and writes « relatives » above it,
+% and by page 8, where « abs^t » is inserted interlinearly over
+% « irréductibles ». E_{X/Y}(y) is his notation for the set of relatively
+% irreducible components of the fibre over y, and it is used unexplained from
+% page 5 on. « f. et s. » is « il faut et il suffit ».
+%
+% Readings flagged and not settled: the two words after « Dans le § de la » on
+% page 1; the noun in « une Y-préschéma » on page 7, whose ending will not
+% resolve; the underlined heading above « Supposons » on the same page, read
+% « Le Moyen »; and the underlined word opening the refinement of page 9, read
+% « Cor. ». One divergence from the inventory is recorded where it occurs and
+% not repaired: the leaf reads « Chap. VI », the archivists' title « (Chap. V) ».
+%
+% Pass: Opus 5 (claude-opus-5), 2026-09-13 — first pass, unchecked against the pages by a human.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{41}
+\batch{1}
+\pages{1}{13}
+\dating{[années 1960-1970]}
+\watermark{Édition de démonstration}
+\foldertitle{Construction de morphismes étales (Chap. V) : notes manuscrites (s.d.)}
+
+\begin{document}
+
+\section{Morphismes étales associés à l'étude des composantes irréductibles d'un morphisme ouvert}
+
+\note{le titre est de lui : il est écrit, souligné, sur le feuillet 1, par
+ailleurs vide, sous un « Chap. VI » souligné et sous deux mots biffés dont le
+premier, « Construction », est celui que les archivistes ont retenu pour leur
+propre titre}
+
+\page{1}
+
+Chap. VI. Dans le § de la \uncertain{descente}, \ill{}, applications,
+
+\struck{Construction} \struck{Étude}
+
+\note{suivent, soulignés et occupant deux lignes, les mots qui donnent son
+titre à la section : « Morphismes étales associés à l'étude des composantes
+irréductibles d'un morphisme ouvert ». Le reste du feuillet est vide}
+
+\note{le chiffre du chapitre est un VI sur le feuillet, et non le V que porte
+l'inventaire ; le groupe où les archivistes rangent la cote est celui du
+Séminaire de Géométrie Algébrique}
+
+\page{3}
+
+$X$ de type fini sur $Y$. On dit que $X$ est \emph{monogène} sur $Y$ si
+
+\begin{enumerate}
+\item[(i)] les fibres de $X$ sur les $y \in Y$ sont
+$\mathrm{rel}^{\mathrm{t}}$ irréductibles ;
+\item[(ii)] $X \to Y$ est ouvert.
+\end{enumerate}
+
+\note{la condition (ii) est ajoutée en interligne au-dessus de la ligne de (i),
+d'une écriture plus fine}
+
+Une application $\varphi : Y \to X$ est dite \emph{monogène} s'il existe un
+ouvert $U$ de $X$, \add{universellement ouvert} sur $Y$, tel que pour tout
+$y \in Y$, $\varphi(y)$ soit le point générique de $U \cap f^{-1}(y)$.
+
+\note{le mot entre « un ouvert $U$ de $X$ » et « tel que » est repris deux
+fois ; la seconde main donne « universellement ouvert sur $Y$ », qui est aussi
+ce que la définition 3 de la page 11 retiendra}
+
+\add{Si $Y$ est \ill{} noethérien, il revient au même de dire :}
+
+\begin{enumerate}
+\item[(ii)] Pour tout $y \in Y$, $\varphi(y)$ est le point générique d'une
+composante $\mathrm{rel}^{\mathrm{t}}$ irréductible de $f^{-1}(y)$ ;
+\item[(iii)] \ill{}
+\end{enumerate}
+
+\marginal{\ill{} a') $\Rightarrow$ (ii) \ill{}}
+
+\note{bloc marginal en biais le long du bord gauche, à quelque 45°,
+sur cinq lignes ; il n'est pas lisible à la résolution du film au-delà de
+l'implication qui l'ouvre}
+
+Si $\varphi : \struck{X} \to \struck{X}$ est monogène, alors pour tout
+changement de base $Y' \to Y$, l'application associée $\varphi' : Y' \to X'$
+\add{définie de façon évidente} est monogène. Ainsi l'ensemble $F(Y')$ des
+sections monogènes de $X'/Y'$ est un foncteur contravariant en $Y'$.
+
+Est-il représentable, \ill{} ? Si oui, le \ill{} $M$ sur $Y$ est
+vraisemblablement étale de type fini sur $Y$ \add{mais pas néc. séparé sur $Y$}.
+
+Soit $M$ étale de type fini sur $Y$, et $\varphi_M$ une \struck{section}
+application monogène pour $X \times_Y M / M$, qui ait les propriétés suivantes :
+pour tout $y \in Y$ et une extension alg. close $\Omega$ de $\kappa(y)$,
+l'application
+\[
+  M(\Omega) \longrightarrow \{\text{composantes irréductibles de } X \otimes_Y \Omega\}
+\]
+est bijective. Alors $(M, \varphi_M)$ représente le foncteur $F$.
+
+\marginal{\ill{} $M$ correspond aux points génériques des fibres de $X \to Y$}
+
+\page{4}
+
+\add{On est ramené à prouver ceci :} Soit $\psi : Y \to M$ une application telle
+que
+
+\begin{enumerate}
+\item[(i)] pour tout $y \in Y$, $\kappa(\psi(y)) = \kappa(y)$, i.e.\ $\psi(y)$
+est rationnel sur $\kappa(y)$ ;
+\item[(ii)] l'application composée $\varphi : Y' \to X'$, \struck{\ill{}}
+faisant correspondre à chaque $y \in Y'$ la composante
+$\mathrm{rel}^{\mathrm{t}}$ irréd.\ de $f^{-1}(y)$ correspondant \struck{à
+$\kappa(y)$} à $\psi(y)$, est monogène.
+\end{enumerate}
+
+Alors \struck{\ill{}} $\psi(Y)$ est \struck{\ill{}} ouvert, \struck{\ill{}}
+\struck{$\psi(Y) \to Y$} et donc $\psi$ provient d'une section de $M$ sur $Y$ ;
+sous cette forme, c'est évident, grâce à la condition de rationalité inscrite
+dans la définition de « monogène ».
+
+\textbf{Conséquence.} Si le Pb.\ des modules a une solution pour
+$X \times_Y \mathrm{Spec}(\Omega_y)$, il existe un ouvert $U \ni y$ de $Y$ tel
+que le Pb.\ des modules ait une solution pour $X|U / U$.
+
+\note{au-dessus de $\mathrm{Spec}(\Omega_y)$, en interligne : « une
+$\mathrm{Spec}(\Omega_y)$ » ; la formule est reprise deux fois sur la ligne}
+
+Cela nous ramène, pour l'existence, dans le cas où \struck{$X$}
+$Y = \mathrm{Spec}(A)$, $A$ local. \add{On peut donc supposer \ill{} $Y = $
+\ill{}} D'ailleurs, puisque\,: la descente des morphismes étales, on est ramené
+au cas où $A$ est complet, et on peut supposer que la fibre \ill{}
+$f^{-1}(y_0)$ \ill{} se décompose en composantes $\mathrm{rel}^{\mathrm{t}}$
+irréductibles.
+
+\page{5}
+
+\begin{tikzcd}[column sep=small, row sep=small]
+X \arrow[d, "f"] \\
+Y = \mathrm{Spec}(A)
+\end{tikzcd}
+
+\add{strictement} universellement ouvert, de type fini \note{« N.B. » entouré
+au-dessus de « de type fini »}, $A$ local noethérien complet, $f^{-1}(y)$
+(irréductible).
+
+\marginal{« \uncertain{strictement} » : \ill{}}
+
+\note{bloc en biais dans la marge de gauche, sur cinq lignes, glosant
+l'adjectif entre crochets de la première ligne ; illisible au-delà du mot
+répété}
+
+\begin{enumerate}
+\item[(i)] Supposons que \struck{$f^{-1}(y)$ soit \ill{}} \ill{} $\xi$ qui
+\ill{} \ill{} de $X$, il y a deux \ill{} dans $E_{X/Y}(y)$ qui \ill{} \ill{}
+a) \ill{}
+\end{enumerate}
+
+\note{$E_{X/Y}(y)$ désigne, ici et jusqu'à la fin du dossier, l'ensemble des
+composantes $\mathrm{rel}^{\mathrm{t}}$ irréductibles de la fibre au-dessus de
+$y$ ; la notation n'est nulle part définie}
+
+\ill{} $Y' = \mathrm{Spec}(W)$, $W$ anneau de valuation discrète \add{= une
+extension \ill{}}, \struck{\ill{}} \add{$f^{-1}(D')$
+$\mathrm{rel}^{\mathrm{t}}$ irréductible}, donc qu'il y a coïncidence des
+\ill{} des fibres géométriques en $f^{-1}(y)$. Supposons que ceci soit exclu.
+
+\begin{enumerate}
+\item[(ii)] Soit $\xi \in E_{X/Y}(y)$ tel que $x \in \bar{\xi}$
+\add{\ill{}, car $\bar{\xi}$ est \ill{}} ; je dis que $\bar{\xi}$ est
+$\mathrm{rel}^{\mathrm{t}}$ irréductible.
+\end{enumerate}
+
+En effet, \struck{\ill{}} \ill{} $y$ le pt.\ générique de $Y$, faisant une
+extension finie $K'$ sur $K$, et normalisant $A$ dedans, d'où un $A'$ fini sur
+$A$, on note que $A'$ est \emph{local} \add{et sa fibre générique
+$f^{-1}(y)$ \ill{}} (car $\frac{1}{2}$ local complet $A$).
+
+\note{le $\frac{1}{2}$ est son abréviation pour « semi- » : $A$ semi-local complet}
+
+Utilisant le lemme
+b), \struck{$\mathrm{rel}^{\mathrm{t}}$ irréductible, on \ill{}} \ill{} ; c'est
+donc le cas a), \emph{absurde}.
+
+On a donc trouvé une application $\varphi : Y \to X$ monogène : \ill{} tout
+$y \in Y$ l'unique \struck{composante irréd.} $\xi \in E_{X/Y}(y)$ tel que
+$x \in \bar{\xi}$, et ce $\xi$ est $\mathrm{rel}^{\mathrm{t}}$ irréd. Les
+conditions (i) et (ii) pour une application monogène sont satisfaites. Il
+existe donc un \ill{} $U$ de $X$ tel que $U \supset \varphi(Y)$, les fibres de
+$U$ sur $Y$ \ill{} $\mathrm{rel}^{\mathrm{t}}$ irréductibles.
+
+\page{6}
+
+Reste à vérifier que $\varphi$ est \emph{continue}, i.e.\ que \ill{} l'image
+inverse \ill{} d'un ouvert. \add{C'est vrai pour tout ouvert de $X|U$ \ill{} et
+on voit \ill{}} \ill{} que $X \to \struck{Y}$ est \struck{\ill{}} ouvert.
+
+\note{un bloc de deux lignes, enfermé dans une boucle allongée au milieu de la
+page, est annulé : on y lit « $U = \varphi^{-1}(U)$ \ill{} » puis
+« $M : Y \to Y$ \ill{} » ; il n'est pas rendu ici}
+
+\textbf{Conclusion} \ill{}
+
+\marginal{mais les composantes \struck{irréd.} $\mathrm{rel}^{\mathrm{t}}$
+irréd.}
+
+Si on ne suppose plus $f^{-1}(y)$ irréductible, \ill{} \ill{} la construction
+précédente \ill{} \add{si on \ill{}} \ill{} de $X/Y$, \ill{} les composantes de
+$f^{-1}(y)$, soit $Y_i = \struck{\ill{}}(Y - y)$, les diverses
+$(i = 1, \ldots, n)$, et $M'$ la réunion des \ill{} ; alors les $\varphi_i :
+Y'_i \to X$ \ill{} correspondent à des sections $\varphi'_i$ de $M'/Y'$, dans
+\ill{} $M'$ \ill{} que les $X'_i$ \ill{} $M'$ et les $Y'_i$ \ill{}
+
+\page{7}
+
+On a démontré le
+
+\textbf{Lemme.} Soit $X$ de type fini sur $Y = \mathrm{Spec}(A)$,
+
+\begin{enumerate}
+\item[(i)] $A$ \ill{} local complet ;
+\item[(ii)] $f^{-1}(y)$ \struck{\ill{}} comp.\ irréductible \struck{de
+$f^{-1}(y)$}, i.e.\ $\mathrm{rel}^{\mathrm{t}}$ irréductibles ;
+\item[(iii)] $X$ est universellement ouvert sur $Y$ ;
+\item[(iv)] \struck{la réunion} il existe $Y' = Y - y$ une
+\uncertain{$Y$-préschéma} telle \struck{\ill{}} \ill{} \add{supp.\ des} \ill{}
+\struck{la disparition des} composantes $\mathrm{rel}^{\mathrm{t}}$
+irréductibles par $X|Y'$ ;
+\item[(v)] $X \to y$ \ill{} de recollements \add{= \uncertain{coordination}} des
+composantes irréductibles \ill{} = composantes de $f^{-1}(y)$, puis
+\add{extension finie} de la base.
+\end{enumerate}
+
+\textbf{Alors} il \struck{existe} \struck{\ill{}} \uncertain{$Y$-préschéma} $M$
+\ill{} pour le rep.\ des comp.\ $\mathrm{rel}^{\mathrm{t}}$ irréd.\ de $X/Y$.
+
+\add{$M'/Y'$ soit séparé et fini,}
+
+\uncertain{Le Moyen} \ill{} Supposons que \ill{} $Z$ soit \ill{} \ill{}
+\struck{\ill{}} \ill{} et un \ill{} $A \to A_1$, tel que \ill{} \struck{une}
+relative de $X \times_Y Y_1$, sur \ill{} \add{se spécialise en} \struck{soit}
+deux distinctes \ill{}.
+
+\textbf{Alors} $M/Y$ est séparé.
+
+On a maintenant \struck{\ill{}} ce qu'il faut \ill{}
+
+\note{titre souligné, un second mot biffé juste au-dessous ; la lecture
+« Le Moyen » n'est pas assurée}
+
+\page{8}
+
+\textbf{Théorème.} $X$ \struck{\ill{} ouvert} de type fini sur $Y$. On suppose
+\struck{\ill{}} que pour tout pt.\ principal $x$ d'une fibre $f^{-1}(y)$, il
+existe un voisinage \ill{} \ill{} qui soit universellement ouvert et
+\add{quasi-}fini sur $Y[t_1, \ldots, t_{n-1}]$. \add{Condition vérifiée p.\ ex.\
+si $X$ est plat sur $Y$ au voisinage de $x$.} Pour qu'il existe un $M$
+\emph{étale} et \emph{séparé} sur $Y$, \struck{\ill{}} indexant les composantes
+irréductibles relatives de $X/Y$, il f.\ et s.\ que \ill{} \ill{} de relation
+discrète \ill{}
+
+\add{\ill{} les \ill{} \ill{} et \struck{\ill{}} faisant \ill{} les composantes
+des relations \ill{}}, une $Y' = \mathrm{Spec}(W)$ et $X' = X \times_Y Y'$,
+\ill{} fini et plat de $Y'$, \ill{} $V^{\circ}$ fini, $\xi'$ d'une \ill{} :
+
+\begin{enumerate}
+\item[(ii)] Pour toute \struck{relation} \ill{} de $f^{-1}(y')$, il existe un
+pt.\ principal des \ill{} qui soit dans $\bar{\xi}'$ \add{i.e.\ une comp.\
+\ill{} de la fibre générique $f^{-1}(y')$ ne se spécialise en deux composantes
+$\mathrm{abs}^{\mathrm{t}}$ irréductibles distinctes de la fibre spéciale} ;
+\item[(iii)] \ill{} composantes $\mathrm{abs}^{\mathrm{t}}$ irréductibles
+distinctes \ill{} ne \ill{} spécialiser en \ill{} comp.\
+$\mathrm{abs}^{\mathrm{t}}$ irréd.\ de $f^{-1}(y')$.
+\end{enumerate}
+
+\note{« $\mathrm{abs}^{\mathrm{t}}$ » est inséré en interligne au-dessus de
+« irréductibles », deux fois ; c'est la première apparition dans le dossier de
+l'abréviation d'« absolument », distincte de celle de « relativement »}
+
+\page{9}
+
+\textbf{N.B.} Cela signifie que \add{l'ensemble des} \struck{les composantes}
+composantes irréductibles \add{relatives} de $f^{-1}(\bar{y}')$ \struck{est
+\ill{}} s'injecte dans celui des composantes irréductibles
+\struck{distinctes} \add{relatives} de $f^{-1}(y')$ \add{qui est \ill{}}, mais
+\ill{} n'est pas néc.\ surjectif. On a cependant ceci :
+
+\uncertain{Cor.} Pour que $M$ soit un \emph{ouvert} étale \struck{de} sur $Y$,
+il f.\ et s.\ que l'on ait \ill{} les conditions précédentes :
+
+\begin{enumerate}
+\item[(iii)] \struck{Pour} Pour toute \struck{composante} \add{pt.\ générique
+d'une} composante irréductible relative de $f^{-1}(y')$, il existe un pt.\
+générique $x'$ d'une comp.\ irréd.\ relative de $f^{-1}(y)$ tel que
+$x' \in \bar{\xi}'$.
+\end{enumerate}
+
+\page{10}
+
+\struck{Corollaire}
+
+\textbf{Remarques.} 1) La condition (i) \ill{} est nec.\ et suffit pour
+l'existence d'un $M$ \emph{non nec.\ séparé} sur $Y$.
+
+2) La condition (i) \struck{et (iii)} est \ill{} satisfaite si $f$ est une
+application \struck{\ill{}} \add{(iii) est satisfaite. De plus,} \ill{}
+\emph{séparable}. De plus, si $f$ est propre, \struck{\ill{}} \ill{} des
+composantes irréductibles relatives \add{\ill{} déf. / $\kappa(y)$} \ill{} et
+les conditions \ill{}. Alors \struck{la conjonction de (ii) et (iii)} \ill{} se
+ramène aux conditions suivantes :
+
+\begin{enumerate}
+\item[a)] \ill{} (i) \ill{} \ill{} d'une composante $\mathrm{rel}^{\mathrm{t}}$
+irréd.\ \ill{} une spécialisation \ill{} ;
+\item[b)] \ill{} ;
+\item[c)] $M$ existe \ill{}
+\end{enumerate}
+
+\struck{Et} Alors $M$ est propre sur $Y$.
+
+\page{11}
+
+\textbf{Prop.~1°} Soit $f : X \to Y$ un morphisme \struck{\ill{}}
+\struck{loc.\ \ill{}} \add{de type fini} dont les fibres sont
+\struck{\ill{}} irréductibles. \add{Pour tout $y \in Y$, soit $\varphi(y)$ le
+pt.\ générique de $X_y$.} Conditions équivalentes :
+
+\begin{enumerate}
+\item[(i)] $\varphi$ \struck{soit} \ill{} continue ;
+\item[(ii)] $f$ soit ouvert \struck{\ill{}}, \ill{} si $Y$ est loc.\ noeth.,
+$f$ de type fini ;
+\item[(iii)] $y \in \overline{\{y'\}} \Longrightarrow \varphi(y) \in
+\overline{\varphi(\{y'\})}$.
+\end{enumerate}
+
+\textbf{Dém.} \struck{\ill{}} \ill{}
+
+\add{(iii bis)} Pour tout $y$, $y'$ tels que \ill{} $y \in
+\overline{\{y'\}}$, et $x$ au-dessus de $y$, il existe $x'$ au-dessus de $y'$
+tel que $x \in \overline{\{x'\}}$.
+
+\note{la condition (iii bis) est encadrée sur le feuillet}
+
+En effet, \ill{} (ii) $\Rightarrow$ (iii bis) : on \ill{} $x' = \varphi(y')$,
+et $x$ au-dessus de $y$ \ill{}. Il existe $x'$ \ill{} au-dessus de $y'$ tel que
+\ill{}. \struck{\ill{}} (ii) $\Rightarrow$ (iii bis)), \ill{} \struck{\ill{}}
+(ii)\textsuperscript{$\circ$} $\Leftrightarrow$ (ii), \ill{} alors
+$\varphi^{-1}(U) = f(U)$. De plus (ii) $\Rightarrow$ (iii) banal.
+
+\textbf{Déf.~2} On dit alors que $f$ est \ill{} \emph{universellement monogène}.
+Définition de \emph{universellement monogène}.
+
+\textbf{Déf.~3} Une \struck{\ill{}} \struck{partie} \ill{} $\varphi : Y \to X$
+est dite \struck{\ill{}} \emph{monogène} s'il existe un \ill{} $U$ de $X$,
+universellement monogène sur $Y$, tel que $\varphi$ soit \ill{} section de
+$U/Y$.
+
+\page{12}
+
+\ill{} $U' \subset U$ tel que \ill{} $U' \to Y$ soit \uncertain{surjectif},
+satisfaisant \struck{= propriétés} la propriété \emph{monogène}. Elle s'énonce
+aussi à ceci : pour tout $y \in Y$, $\varphi(y)$ est un pt.\ générique
+\add{d'une composante} de $X_y$, et il existe un \struck{\ill{}} voisinage
+\ill{} tel que $U$ soit universellement ouvert \ill{} et \ill{} ses fibres
+\ill{} aux pts.\ de \ill{} sont \ill{} \ill{}. Ce sont là des propriétés
+locales sur $Y$.
+
+Si $I(X/S) \to$ l'ens.\ des \ill{} monogènes de $X$ sur $S$, alors
+\[
+  I(X \times_S S' / S') \longrightarrow
+\]
+contravariant en $S'$ de façon évidente. Est-il représentable ???
+
+\begin{tikzcd}[column sep=small, row sep=small, nodes={font=\scriptsize}]
+X \arrow[dd] & & X_M \arrow[ll] \arrow[dd] & \\
+& X' \arrow[ul] \arrow[dd] & & X'_{m'} \arrow[ll] \arrow[ul] \arrow[dd] \\
+S & & M \arrow[ll] & \\
+& S' = \mathrm{Spec}(\Omega) \arrow[ul] & & m' \arrow[ll] \arrow[ul]
+\end{tikzcd}
+
+\note{ce cube est tracé au crayon, plus pâle que le reste du feuillet ; le
+montant de gauche porte deux annotations, $\kappa(s)$ en haut et $\kappa(s')$ en
+bas, reliées par un trait à $S$ et à $S'$}
+
+\page{13}
+
+\textbf{Lemme.} Soit $f : X \to Y$ un morphisme \add{plat} de type fini
+\add{en effet \ill{}}, \struck{universellement ouvert} \ill{}, avec $Y$ local
+noeth. Soit \struck{$x$ le point générique} \ill{} $y \in Y$. Alors il existe un
+\struck{\ill{} voisinage} $U$ \ill{} tel que $U \cap f^{-1}(y)$ soit dans
+$f^{-1}(y)$ et \add{tel que pour \ill{} \struck{la réunion des composantes}}
+\ill{} $y'$ \ill{} \ill{} \add{un pt.\ générique} $x'$ d'une composante de
+$f^{-1}(y') \cap U$, il existe \struck{une composante} un pt.\ générique $x$
+d'une composante de \struck{\ill{}} $f^{-1}(y)$ \struck{\ill{}} qui soit
+spécialisation de $x'$.
+
+\note{tout ce lemme est annulé par deux longues diagonales qui se croisent au
+milieu du feuillet ; il se lit néanmoins, et il est donné}
+
+\begin{tikzcd}[column sep=small, row sep=small]
+X \arrow[d] & X' = X \times_Y Y' \arrow[l] \arrow[d] \\
+Y & Y' \arrow[l]
+\end{tikzcd}
+
+$x_1 \in E_{X/Y}(y)$, \quad $x_2 \in \ill{}$, \quad
+$\bar{\xi} = \mathrm{Im}(\overline{\xi'}) \ni x$
+
+\begin{tikzcd}[column sep=small, row sep=small, nodes={font=\scriptsize}]
+X \arrow[d, "f"] & X' = X \times_Y Y' \arrow[l] \arrow[d, "f'"] & X'' = X \times_Y Y'' \arrow[l] \arrow[d] \\
+Y & Y' \arrow[l] & Y'' \arrow[l]
+\end{tikzcd}
+
+\note{à côté de chaque colonne il écrit les points qui l'accompagnent :
+$x \leftarrow \xi$ au-dessus de $y \leftarrow \eta$ pour la première,
+$x' \leftarrow \xi'$ au-dessus de $y' \leftarrow \eta'$ pour la deuxième,
+$y'' \leftarrow \eta''$ pour la troisième}
+
+\textbf{Hyp.}
+\[
+  \begin{cases}
+    x \in E_{X/Y}(y) \\
+    \xi \in E_{X/Y}(\eta) \\
+    x \in \bar{\xi} \\
+    y' \text{ sur } y \\
+    \eta' \text{ sur } \eta \\
+    y' \in \overline{\eta'}
+  \end{cases}
+\]
+
+\textbf{Concl.}
+
+\begin{enumerate}
+\item[a)] Si $x' \in E_{X'/Y'}(y')$ \ill{} \add{au-dessus de} $x$, il existe
+$\xi' \in E_{X'/Y'}(\eta')$ \ill{} $\xi$ tel que $x' \in \overline{\xi'}$ ;
+\item[b)] Si $\xi' \in E_{X'/Y'}(\eta')$ \ill{} $\xi$, il existe
+$x' \in E_{X'/Y'}(y')$ \ill{} $x$ tel que $x' \in \overline{\xi'}$.
+\end{enumerate}
+
+\note{une flèche partant de la marge gauche vient buter sur l'accolade de a) et
+b) ; elle porte « Si $Y'$ \ill{} sur $Y$ et $y'$ \ill{} »}
+
+\ill{} plus que \ill{} \ill{}. Vérifier !
+
+\struck{Concl'}
+\struck{$\Gamma_{X'/Y'}(y', \eta') \to E_{X'/Y'}(y')$}
+\struck{$\Gamma_{X'/Y'}(y', \eta') \to E_{X'/Y'}(\eta')$}
+\struck{\ill{} surjectif}
+
+\note{ces deux dernières lignes, et le mot qui les suit, sont annulés par une
+grande boucle}
+
+\end{document}
