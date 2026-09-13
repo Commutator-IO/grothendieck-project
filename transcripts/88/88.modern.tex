@@ -1,0 +1,554 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 88, pages 1-15.
+%
+% This is an INTERPRETATION, not a transcription. Everything the critical
+% apparatus carried moves into footnotes. In any dispute of substance the
+% transcription governs: whoever cites Grothendieck must cite batch-01.fr.tex.
+%
+% Pass: Opus 5 (claude-opus-5), 2026-09-13 — first pass, unchecked against the
+% pages by a human. The folder was read whole; it holds one batch, pages 1-15.
+% Page 1 is a wrapper carrying only a title, page 9 its blank other face.
+%
+% What the folder is. Two runs about maps (« cartes ») and the groups that act
+% on their flags. Run 1 (pages 2-8), under the wrapper's title « Cartes
+% associées aux syst. de Racines »: a root system is replaced by its Weyl
+% group with the torsor of its bases and the simple reflections; the
+% parabolic subsets give the Coxeter complex, a triangulated sphere; its
+% flags carry operations sigma_0..sigma_{l-1}, and the order of the last
+% product is computed to be 2 nu, nu the lcm of the Coxeter exponents. Run 2
+% (pages 10-15), « Théorème (à prouver) »: the simply connected quasi-regular
+% maps are the standard maps C_{p,q}, their automorphism group is the
+% quotient Gamma_{p,q} of the cartographic group, they are realised as
+% geodesic tessellations of the sphere, the plane or the hyperbolic plane
+% according to (p,q), and every map of type (p,q) is a quotient of C_{p,q}.
+%
+% Notation fixed for the whole document. Sigma a root system in V, W its Weyl
+% group, R the set of its bases (his « repères »), I the type set, phi(r,i)
+% the simple reflection of index i for the base r, n_ij the order of
+% phi(r,i)phi(r,j), l = Card I. For maps: p the order of the vertices, q the
+% order of the faces (he writes C_{p,q}), rho_s and rho_f the rotations about
+% a vertex and a face in the cartographic group, Gamma_{p,q} the quotient.
+% The Schläfli symbol of C_{p,q} is {q,p}; stated once, not used.
+%
+% Substantive departures from the pages, each footnoted where it occurs:
+% — page 2, d): I with the n_ij is the Coxeter graph, not the Dynkin diagram;
+%   B_n and C_n (n >= 3) have the same image, so Phi does not reflect
+%   isomorphism, and Aut(Sigma) -> Aut(Phi(Sigma)) is not onto when Sigma has
+%   a component B_2, G_2 or F_4, or components B_n and C_n together. Pages 3-4 prove injectivity in general and
+%   bijectivity exactly when the two diagrams have the same automorphisms;
+%   the top row of page 4's diagram must end in the automorphism group of the
+%   Dynkin diagram. The reading states this.
+% — page 3: « R partie homogène de u_R » read u_W.
+% — page 5: vertices of the Coxeter complex correspond to the MAXIMAL proper
+%   parabolic parts; « paraboliques minimaux » is minimal for the reversed
+%   order he has just adopted. Footnoted, not a correction.
+% — page 6: the first formula defines sigma_{i'} for i' up to l-1 and the
+%   second redefines sigma_{l-1}; the reading keeps sigma_i = id x tau_{i+1}
+%   for i <= l-2. Page 7: « n ≡ 0 (2 n_..) » read i ≡ 0 (2 n_..).
+% — page 14, (c_2): « p + q >= 10 ou (p,q) != (3,6),(6,3) » cannot be right
+%   as written; for p, q >= 3 the hyperbolic case is p + q >= 9 with (3,6),
+%   (6,3) excluded, i.e. 1/p + 1/q < 1/2.
+% — page 15: the underlined proper name read « Bourguignon » is not replaced;
+%   the footnote says what the context (maps on compact surfaces, algebraic
+%   curves) is known under today, without putting a name in his hand.
+%
+% Modern names given and footnoted as ours: Coxeter graph, Coxeter complex,
+% building of type W, extended triangle group [q,p], regular map and
+% Schläfli symbol, uniformisation, Fuchsian group, Belyi's theorem and dessins
+% d'enfants. « Groupe cartographique » is his own term (Esquisse d'un
+% programme, 1984).
+%
+% What the folder announces and never establishes: the whole of run 2, which
+% he heads « à prouver »; the proof that the flag complex of page 5 is a
+% sphere (« manifestement »); b) and the NB of page 13, largely illegible;
+% the determination of the pi of page 15.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{88}
+\pages{1}{15}
+\dating{s.d. — le groupe « Géométrie et topologie combinatoire » (69 à 102) est daté [1976-vers 1986]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Cartes standards : notes manuscrites (s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Une \emph{carte}, au sens de ces feuillets, est un dessin tracé sur une
+surface --- des sommets, des arêtes, des faces --- comme la carte d'un pays
+découpé en départements. Le cube dessiné sur une sphère en est une ; le pavage
+d'un carrelage en est une autre, sur le plan. Grothendieck a proposé de coder
+une carte par un objet purement algébrique : l'ensemble de ses \emph{drapeaux}
+(un sommet, une arête qui le touche, une face qui la borde) et trois
+opérations qui changent l'un des trois éléments en gardant les deux autres. Le
+groupe engendré par ces opérations s'appelle le \emph{groupe cartographique},
+et toute carte est un ensemble sur lequel il agit.
+
+Le dossier contient deux textes qui tournent autour de cette idée. Le premier
+part des systèmes de racines --- les configurations de vecteurs très
+symétriques qui classent les groupes de Lie --- et y trouve une carte cachée :
+les hyperplans de réflexion découpent la sphère en triangles, et les
+opérations sur les drapeaux de ce découpage sont données par les réflexions du
+groupe de Weyl. Il calcule l'ordre de la rotation qui en résulte. En chemin il
+se demande si le groupe de Weyl, avec ses générateurs, suffit à retrouver le
+système de racines ; la réponse qu'il donne est trop optimiste, parce que les
+générateurs ne voient pas la différence de longueur entre les racines.
+
+Le second texte est un théorème qu'il s'assigne à démontrer. Parmi toutes les
+cartes, les plus symétriques sont celles où tous les sommets ont le même
+nombre $p$ d'arêtes et toutes les faces le même nombre $q$ de côtés. Il en
+existe exactement une, à la bonne notion d'équivalence près et à quelques
+types dégénérés près, par couple $(p, q)$ --- à condition de la dessiner sur une surface simplement connexe ---,
+et elle vit sur la sphère, le plan ou le plan hyperbolique selon que
+$\frac{1}{p} + \frac{1}{q}$ est plus grand, égal ou plus petit que
+$\frac{1}{2}$. Sur la sphère ce sont les cinq solides de Platon et deux
+familles dégénérées ; sur le plan, les trois pavages réguliers ; tout le reste
+est hyperbolique. Toute autre carte de type $(p,q)$ s'obtient en repliant
+celle-là par un groupe.
+
+C'est la géométrie qui, dans l'\emph{Esquisse d'un programme} de 1984, mène aux
+« dessins d'enfants » : une carte sur une surface compacte définit une courbe
+algébrique, et ces feuillets s'arrêtent au bord de cette observation.
+
+\keywords{root system, Weyl group, Coxeter graph, Coxeter complex, cartographic group, regular map, triangle group, uniformization, Platonic solids}
+\end{resume}
+
+\section*{Le fil du dossier, et les conventions}
+
+\begin{enumerate}
+\item[1.] \emph{Du système de racines au groupe de Weyl épinglé} (pages 2 à 4) :
+un foncteur $\Phi$, et la question de savoir s'il est une équivalence.
+\item[2.] \emph{Le complexe des drapeaux} (pages 4 et 5) : parties paraboliques,
+facettes, triangulation de la sphère, repères.
+\item[3.] \emph{Les opérations sur les repères} (pages 6 à 8) : relations, et
+l'ordre $2\nu$.
+\item[4.] \emph{Le théorème des cartes standard} (pages 10 à 15), en sept
+articles, énoncé et non démontré.
+\end{enumerate}
+
+Les deux textes ne se citent pas. Le premier construit, à partir d'un système
+de racines de rang $\ell$, une carte de dimension $\ell - 1$ ; le second ne
+parle que de cartes de dimension 2. Ce qui les rattache est la méthode ---
+lire une carte sur ses drapeaux et les opérations qui les échangent --- et le
+titre de la chemise.
+
+\emph{Conventions.} $\Sigma$ est un système de racines dans $V$, $W$ son groupe
+de Weyl, $R$ l'ensemble de ses bases --- ses « repères » ---, sur lequel $W$
+opère simplement transitivement, $I$ l'ensemble des types, de cardinal
+$\ell$, et $\varphi(r, i)$ la réflexion simple d'indice $i$ relative à la base
+$r$ ; $n_{ij}$ est l'ordre de $\varphi(r,i)\varphi(r,j)$. Pour une carte, $p$
+est l'ordre des sommets et $q$ celui des faces ; le symbole de Schläfli de
+$C_{p,q}$ est $\{q, p\}$, et on ne l'utilise pas.\footnote{Il écrit
+$\overline{\mathbb{N}}^{*}$ pour $\mathbb{N}^{*} \cup \{\infty\}$, « comb. »,
+« gpe », « ppcm », « pt » pour combinatoire, groupe, plus petit commun
+multiple, point, et « ½ direct » pour semi-direct. Il surmonte le $\Sigma$
+d'une barre, inconstamment, qu'on ne reprend pas. Sur les pages 6 et 7, une
+parenthèse ouvrante suivie de son $r$ ressemble à un $w$ ; tous les premiers
+arguments de $\varphi$ sont des éléments de $R$.}
+
+\pagerange{2}{4}
+\section*{Le groupe de Weyl épinglé (pages 2 à 4)}
+
+À un système de racines $\Sigma$ on associe le quadruplet
+\[
+  \Phi(\Sigma) = \bigl(W,\ R,\ I,\ \varphi : R \times I \to W\bigr),
+\]
+qui satisfait :
+\begin{enumerate}
+\item[a)] $\varphi(wr, i) = \mathrm{int}(w)\,\varphi(r,i)$ ;
+\item[b)] pour tout $r$, les $\varphi(r,i)$ engendrent $W$ et en font un
+« groupe de Weyl épinglé » ;
+\item[c)] $\varphi(r,i)^{2} = 1$ et $\bigl(\varphi(r,i)\varphi(r,j)\bigr)^{n_{ij}}
+= 1$ pour $i \neq j$ forment une présentation de $W$ ;
+\item[d)] $I$, muni des $n_{ij}$, $i$ étant relié à $j$ si et seulement si
+$n_{ij} \geq 3$, est le graphe de Coxeter d'un groupe de Weyl.
+\end{enumerate}
+Les systèmes de ce type forment une catégorie, et $\Sigma \mapsto \Phi(\Sigma)$
+est un foncteur.\footnote{La page appelle « diagramme de Dynkin » le graphe de
+d). Ce n'en est pas un : le diagramme de Dynkin porte en outre, sur les liaisons
+doubles et triples, l'orientation qui distingue les racines longues des
+courtes, et les $n_{ij}$ n'en gardent rien. C'est ce qu'on appelle aujourd'hui
+le graphe de Coxeter. La distinction change la réponse à la question de la page,
+comme on va le voir.}
+
+\emph{Le centre.} Chaque base $r$ donne un système de générateurs
+$\Psi(r) = (\varphi(r,i))_{i \in I}$ de $W$ indexé par $I$. On a
+$\Psi(wr) = \Psi(r)$ si et seulement si $\mathrm{int}(w)$ fixe tous les
+$\varphi(r,i)$, c'est-à-dire si et seulement si $w$ est central. Donc $\Psi$
+est injective --- et $R$ s'identifie à un ensemble de systèmes de générateurs
+de $W$ indexés par $I$ --- si et seulement si $Z(W) = \{1\}$.\footnote{Un bloc
+d'une dizaine de lignes, annulé, précède cette conclusion ; il cherchait le
+stabilisateur d'un repère. Le centre de $W$ n'est pas trivial, par exemple,
+dès que $-1 \in W$ : types $A_{1}$, $B_{n}$, $D_{2k}$, $E_{7}$, $E_{8}$, $F_{4}$,
+$G_{2}$.}
+
+\emph{La question.} $\Phi$ est-il une équivalence de catégories ? La page
+répond : il est évidemment fidèle et essentiellement surjectif ; deux systèmes
+dont les images sont isomorphes ont des diagrammes isomorphes, donc sont
+isomorphes ; il reste la pleine fidélité, c'est-à-dire que
+$\mathrm{Aut}(\Sigma) \to \mathrm{Aut}(\Phi(\Sigma))$ soit bijectif.
+
+\emph{Ce qui est démontré} (pages 3 et 4). Soit
+$\alpha : W \to \mathrm{Aut}(\Phi(\Sigma))$, $\alpha(w) = (\mathrm{int}(w),
+w_{R}, \mathrm{id}_{I})$ ; c'est un morphisme, par a). Il est injectif, et son
+image est formée des automorphismes $(u_{W}, u_{R}, \mathrm{id}_{I})$ qui
+induisent l'identité sur $I$. En effet, un tel automorphisme est la donnée d'un
+automorphisme $u_{W}$ de $W$ et d'une bijection $u_{R}$ de $R$ affine de partie
+homogène $u_{W}$,\footnote{La page écrit « $R$ “partie homogène” de $u_{R}$ » ;
+le sens demande $u_{W}$.} qui vérifient
+\[
+  (\ast\ast) \qquad \varphi(u_{R}\,r,\ i) = u_{W}\,\varphi(r,i).
+\]
+Choisissons $r_{0} \in R$, et $a \in W$ tel que $u_{R}(r_{0}) = a\,r_{0}$ ;
+alors $u_{R}(w\,r_{0}) = u_{W}(w)\,a\,r_{0}$, et $(\ast\ast)$ pour
+$r = w\,r_{0}$ se développe en
+\[
+  a\,\varphi(r_{0}, i)\,a^{-1} = u_{W}\bigl(\varphi(r_{0}, i)\bigr)
+  \qquad (i \in I).
+\]
+Les $\varphi(r_{0}, i)$ engendrant $W$, $u_{W} = \mathrm{int}(a)$ ; puis
+$u_{R}(w\,r_{0}) = (awa^{-1})(ar_{0}) = a(w\,r_{0})$, soit $u_{R} = a_{R}$, et
+l'automorphisme est $\alpha(a)$.
+
+On a donc un diagramme à lignes exactes
+
+\begin{tikzcd}[column sep=small, row sep=small, nodes={font=\scriptsize}]
+  1 \arrow[r] & W \arrow[r, "\alpha_0"] \arrow[d, "\mathrm{id}"] &
+    \operatorname{Aut}(\Sigma) \arrow[r, "p_0"] \arrow[d] &
+    \operatorname{Aut}(\mathrm{Dyn}(\Sigma)) \arrow[r] \arrow[d, hook] & 1 \\
+  1 \arrow[r] & W \arrow[r, "\alpha"'] &
+    \operatorname{Aut}(\Phi(\Sigma)) \arrow[r, "p"'] &
+    \operatorname{Aut}(I, (n_{ij})) &
+\end{tikzcd}
+
+où $\mathrm{Aut}(\Sigma)/W = \mathrm{Aut}(\mathrm{Dyn}(\Sigma))$ est le groupe
+des automorphismes du diagramme de Dynkin --- « gr.\ des automorphismes ext.\
+de $\Sigma$ », écrit-il --- et $\mathrm{Aut}(I, (n_{ij}))$ celui du graphe de
+Coxeter. Le lemme des cinq donne :
+
+\textbf{Proposition.} $\mathrm{Aut}(\Sigma) \to \mathrm{Aut}(\Phi(\Sigma))$ est
+injectif ; il est bijectif si et seulement si tout automorphisme du graphe de
+Coxeter de $\Sigma$ respecte les longueurs des racines, c'est-à-dire si et
+seulement si aucune composante irréductible de $\Sigma$ n'est de type $B_{2}$,
+$G_{2}$ ou $F_{4}$, et si $\Sigma$ n'a pas à la fois une composante de type
+$B_{n}$ et une de type $C_{n}$, $n \geq 3$.
+
+\textbf{Conséquence.} $\Phi$ est fidèle, et essentiellement surjectif sur les
+systèmes qui satisfont a) à d). Il n'est pas une équivalence : il n'est pas
+plein dans ces cas, et il ne distingue pas $B_{n}$
+de $C_{n}$ pour $n \geq 3$. Sa restriction aux systèmes de racines dont toutes
+les racines ont même longueur --- types $A$, $D$, $E$ --- est une équivalence
+sur son image.\footnote{La page écrit le même $\mathrm{Aut}(I)$ au bout des
+deux lignes, avec deux flèches identiques, et conclut « le diagramme des 5 […]
+montre alors que la flèche verticale médiane est un iso, cqfd ». Cela suppose
+que les automorphismes de $I$ qui respectent les $n_{ij}$ proviennent tous
+d'automorphismes de $\Sigma$, ce qui est faux pour $B_{2}$ (les deux sommets
+échangés, $n_{12} = 4$), $G_{2}$ ($n_{12} = 6$) et $F_{4}$ (le retournement du
+graphe), où la symétrie du graphe de Coxeter échange racines longues et
+courtes. De même, « des diagrammes isomorphes, donc sont isomorphes » n'est
+vrai que pour les diagrammes de Dynkin, et $W(B_{n}) = W(C_{n})$ avec la même
+présentation. Pour ce qui suit dans le dossier --- des cartes, qui ne
+dépendent que de $W$ et de ses générateurs --- la perte est sans
+conséquence.}
+
+\pagerange{4}{5}
+\section*{Le complexe des drapeaux (pages 4 et 5)}
+
+Les parties paraboliques de $\Sigma \subset V$ correspondent aux facettes
+fermées de l'arrangement des hyperplans de réflexion dans le dual
+$\check{V}$, et l'inclusion des parties paraboliques --- ou des sous-groupes
+paraboliques, quand $\Sigma$ provient d'un groupe algébrique --- devient
+l'inclusion \emph{opposée} des facettes. On munit l'ensemble des parties
+paraboliques propres de cet ordre opposé ; il devient la géométrie des
+\emph{drapeaux stricts}, un complexe simplicial dont les sommets sont les
+paraboliques minimaux pour cet ordre, et les simplexes maximaux les
+« Borels », ou systèmes de racines simples, ou repères
+$r \in R$.\footnote{Minimaux pour l'ordre opposé, c'est-à-dire maximaux pour
+l'inclusion : les sommets sont les parties paraboliques propres maximales,
+qui correspondent aux « drapeaux minimaux », comme il l'ajoute en interligne.
+Le nom du complexe, après « correspondant à une un », ne se lit pas ; la même
+lettre $V$ est écrite là où les sommets et les simplexes maximaux sont
+nommés.}
+
+« Il s'agit manifestement d'une triangulation de la sphère $S^{\ell - 1}$ » :
+les chambres de Weyl découpent la sphère unité de $\check{V}$ en simplexes
+sphériques, à supposer que $\Sigma$ engendre $V$, de dimension
+$\ell$.\footnote{C'est le complexe de Coxeter de $W$ --- l'immeuble de type $W$
+de rang $\ell$ réduit à un seul appartement ; les noms ne sont pas sur la
+page.}
+
+\emph{Les repères du complexe.} Un drapeau complet de faces d'un simplexe
+maximal $r$ est une numérotation de ses $\ell$ sommets, et les sommets d'une
+chambre sont indexés par leurs types. L'ensemble des repères est donc
+\[
+  R \times \mathrm{Rep}'(I),
+  \qquad
+  \mathrm{Rep}'(I) = \mathrm{Bij}\bigl([1, \ell],\ I\bigr),
+\]
+et $\mathrm{Rep}'(I)$ s'envoie sur l'ensemble des ordres totaux sur $I$.
+C'est un torseur à droite sous $\mathfrak{S}_{\ell}$.
+
+\pagerange{6}{8}
+\section*{Les opérations sur les repères, et l'ordre $2\nu$ (pages 6 à 8)}
+
+Sur les repères d'un complexe de dimension $\ell - 1$ opèrent $\ell$
+involutions $\sigma_{0}, \ldots, \sigma_{\ell-1}$, $\sigma_{k}$ changeant la
+face de dimension $k$ du drapeau en gardant les autres. Ici :
+\[
+  \sigma_{i}(r, u) = (r,\ u \circ \tau_{i+1}) \quad (0 \leq i \leq \ell - 2),
+  \qquad
+  \sigma_{\ell-1}(r, u) = \bigl(\varphi(r, u(\ell)) \cdot r,\ u\bigr),
+\]
+où $\tau_{i+1} \in \mathfrak{S}_{\ell}$ est la transposition de $i+1$ et
+$i+2$.\footnote{La page définit d'abord
+$\sigma_{i'}(r, u) = (r, u \circ \tau_{i'})$ pour $0 \leq i' \leq \ell - 1$,
+puis redéfinit $\sigma_{\ell-1}$ à la ligne suivante ; elle annonce aussi
+« $\sigma_{0}, \ldots, \sigma_{\ell}$ ». On retient le décalage d'indice de sa
+phrase précédente, $\sigma_{i} = \mathrm{id}_{R} \times \tau_{i+1}$, qui est
+celui qu'utilisent tous les calculs.} La seconde formule traduit la
+géométrie : la cloison du drapeau est la face de $r$ opposée au sommet de type
+$u(\ell)$, et la chambre voisine à travers elle est $s_{u(\ell)}\,r$.
+
+\emph{Relations.} On vérifie :
+\begin{itemize}
+\item $\sigma_{i}^{2} = 1$ pour tout $i$ --- pour $\sigma_{\ell-1}$, parce que
+$\varphi(sr, u(\ell)) = s\,\varphi(r,u(\ell))\,s^{-1} = s$ si
+$s = \varphi(r, u(\ell))$ ;
+\item $\sigma_{i}\sigma_{j} = \sigma_{j}\sigma_{i}$ pour $j \geq i + 2$, le seul
+cas non trivial étant $j = \ell - 1$, $i \leq \ell - 3$, où
+$(u \circ \tau_{i+1})(\ell) = u(\ell)$ ;
+\item $(\sigma_{i}\sigma_{i+1})^{3} = 1$ pour $i \leq \ell - 3$, par
+$(\tau_{i+1}\tau_{i+2})^{3} = 1$.
+\end{itemize}
+
+\emph{Le dernier produit.} Soit $\pi = \sigma_{\ell-1}\sigma_{\ell-2}$ :
+\[
+  \pi(r, u) = \bigl(\varphi(r, u(\ell - 1)) \cdot r,\ u \circ \tau_{\ell-1}\bigr).
+\]
+Posons $a = \varphi(r, u(\ell-1))$ et $b = \varphi(r, u(\ell))$. Par a),
+$\pi^{2}(r,u) = \bigl(a\,\varphi(r,u(\ell))\,a^{-1}\,a\,r,\ u\bigr) = (ab\,r, u)$,
+et par récurrence
+\[
+  \pi^{2n}(r, u) = \bigl((ab)^{n}\, r,\ u\bigr),
+  \qquad
+  \pi^{2n+1}(r, u) = \bigl((ab)^{n} a\, r,\ u \circ \tau_{\ell-1}\bigr).
+\]
+Une puissance impaire change $u$ ; une puissance paire $2n$ fixe $(r, u)$ si et
+seulement si $(ab)^{n} = 1$, $R$ étant un torseur, c'est-à-dire si et seulement
+si $n_{u(\ell-1),\,u(\ell)}$ divise $n$. Sur l'orbite de $(r,u)$, $\pi$ est donc
+d'ordre $2\,n_{u(\ell-1),\,u(\ell)}$.\footnote{La page écrit la conclusion
+« $n \equiv 0\ (2\,n_{u(\ell-1),\,u(\ell)})$ » ; c'est $i = 2n$ qui est
+multiple de $2\,n_{u(\ell-1),u(\ell)}$. Géométriquement, une face de
+codimension 2 de type $I - \{i,j\}$ est contenue dans $2n_{ij}$ chambres.}
+Faisant varier $u$, toutes les paires $i \neq j$ apparaissent, et :
+
+\textbf{Proposition.} L'ordre de $\sigma_{\ell-2}\sigma_{\ell-1}$ sur
+$R \times \mathrm{Rep}'(I)$ est $2\nu$, où $\nu$ est le plus petit commun
+multiple des $n_{ij}$, $i \neq j$.\footnote{La page 8 écrit « ordre de
+$\pi = \sigma_{\ell-2}\sigma_{\ell-1} = 2\nu$ », égalant l'ordre à $\pi$ ; et
+$\sigma_{\ell-2}\sigma_{\ell-1}$ est l'inverse du $\pi$ de la page 6, ce qui
+ne change pas l'ordre. Les $n_{ij} = 2$ comptent dans le ppcm.}
+
+Pour $\ell = 3$ c'est une carte de dimension 2 sur la sphère : les faces sont
+des triangles ($\sigma_{0}\sigma_{1}$ d'ordre 3), et un sommet de type $k$ est
+d'ordre $2 n_{ij}$, $\{i, j\} = I - \{k\}$ ; elle n'est quasi-régulière, au
+sens de la seconde partie, que si les trois $n_{ij}$ sont égaux.
+
+\pagerange{10}{10}
+\section*{Le théorème des cartes standard : (1) à (4) (page 10)}
+
+La seconde partie porte, de sa main, le titre « Théorème (à prouver) ». Une
+\emph{carte cellulaire} est un triple $(X \supset K \supset S)$ : une surface,
+un graphe tracé dessus dont le complémentaire est une réunion de cellules, et
+l'ensemble de ses sommets. Elle est \emph{quasi-régulière} si tous ses sommets
+combinatoires ont le même ordre $p$ et toutes ses faces le même ordre $q$, de
+\emph{type} $(p, q)$, $1 \leq p, q \leq \infty$ ; \emph{régulière} si son groupe
+d'automorphismes est transitif sur les repères ; \emph{complète} si les sommets
+d'ordre fini sont effectifs.
+
+Dans le langage de l'\emph{Esquisse d'un programme}, les repères --- ou
+bi-drapeaux --- d'une carte sont permutés par le \emph{groupe cartographique}
+$\widehat{\Gamma} = \langle \sigma_{0}, \sigma_{1}, \sigma_{2} \mid
+\sigma_{i}^{2},\ (\sigma_{0}\sigma_{2})^{2} \rangle$, et
+$\rho_{s} = \sigma_{1}\sigma_{2}$, $\rho_{f} = \sigma_{0}\sigma_{1}$ sont les
+rotations autour d'un sommet et d'une face.\footnote{Les notations
+$\widehat{\Gamma}$, $\rho_{s}$, $\rho_{f}$ et le mot « groupe cartographique »
+sont sur la page ; la présentation est celle de l'\emph{Esquisse}, qui n'y est
+pas écrite. L'ordre des indices $\sigma_{i}$ est une convention que les
+feuillets ne fixent pas.}
+
+\begin{enumerate}
+\item[(1)] Toute carte cellulaire non vide, connexe, simplement connexe et
+quasi-régulière est régulière ; elle est complète, sauf si elle est isomorphe
+à $(\mathbb{R}^{2} \supset \mathbb{R})$, dont la complétion est la sphère munie
+d'un grand cercle ponctué.
+\item[(2)] Une telle carte régulière et complète --- une \emph{carte
+standard} --- est déterminée à isomorphisme près par son type $(p, q)$, et
+tous les types sont atteints sauf $(1, p)$ et $(p, 1)$ pour $p \neq 2$. On
+note $(C_{p,q}, r_{p,q})$ la carte standard épinglée par un repère, définie à
+isomorphisme unique près dans la catégorie des cartes à isotopie
+près.\footnote{« Isotopique » est lu avec doute. La page écrit « correspondant à
+$(q,p)$ » avec les indices dans l'autre ordre, et biffe « homéomorphisme près »
+pour « isomorphisme près ».}
+\item[(3)] $\mathrm{Aut}(C_{p,q}) \simeq \widehat{\Gamma}/\langle \rho_{s}^{p},
+\rho_{f}^{q} \rangle = \Gamma_{p,q}$, le sous-groupe distingué engendré par
+$\rho_{s}^{p}$ et $\rho_{f}^{q}$ étant sous-entendu, et aucune relation n'étant
+imposée pour un ordre infini.\footnote{$\Gamma_{p,q}$ est le groupe de
+réflexions triangulaire étendu $[q, p]$, engendré par trois réflexions dont
+les produits deux à deux sont d'ordres $2$, $p$ et $q$ ; le nom n'est pas sur la
+page. Un second numéral cerclé, entre (3) et (4), est noirci.}
+\item[(4)] \textbf{Corollaire.} Pour une carte cellulaire complète connexe
+quasi-régulière $\mathcal{C}$ de type $(p,q)$, le groupe fondamental de sa
+surface s'identifie à un sous-groupe de $\Gamma_{p,q}$ ; si $\mathcal{C}$ est
+régulière et épinglée, le groupe de ses automorphismes s'identifie au quotient
+correspondant de $\Gamma_{p,q}$.\footnote{L'énoncé court sur deux pages et
+plusieurs de ses mots sont illisibles ; la seconde moitié en particulier est
+reconstituée à partir de « régulière épinglée », « automorphismes », « groupe
+fondamental » et « $\Gamma_{p,q}$ ». La forme précise en est donnée par (7).}
+\end{enumerate}
+
+\pagerange{11}{13}
+\section*{(5) : surfaces standard et cartes géodésiques (pages 11 à 13)}
+
+\emph{Surfaces standard.} Une \emph{surface riemannienne standard} est une
+surface analytique réelle munie d'une métrique riemannienne, non vide,
+connexe, simplement connexe, dont le groupe des isométries est transitif. À un
+facteur constant près sur la métrique, c'est l'une des trois :
+
+\begin{enumerate}
+\item[1°)] la sphère $S^{2}$, espace homogène sous $SO(3, \mathbb{R})$ ---
+plan sphérique, déplacements sphériques ;
+\item[2°)] le plan complexe, sous le produit semi-direct
+$\mathrm{U} \cdot \mathbb{C}$ du cercle unité et des translations, groupe des
+déplacements euclidiens --- plan euclidien ;
+\item[3°)] le demi-plan de Poincaré, espace homogène sous
+$SL(2, \mathbb{R})/\{\pm 1\}$ --- plan hyperbolique.
+\end{enumerate}
+
+Les groupes écrits sont les composantes neutres des groupes d'isométries,
+c'est-à-dire les isométries qui conservent l'orientation, ou les
+automorphismes de la structure complexe associée à une
+orientation.\footnote{Les trois qualificatifs --- sphérique, euclidien,
+hyperbolique --- sont écrits en biais dans la marge. La page qualifie la
+métrique d'un « $\geq 0$ » qu'on ne reprend pas : une métrique riemannienne est
+définie positive. La classification suit du théorème d'uniformisation, ou
+directement de ce qu'une surface homogène est à courbure constante ; le nom
+n'est pas sur la page.} Dans les cas 1° et 3° toute similitude est une
+isométrie, et l'on normalise la courbure à $\pm 1$ ; dans le cas euclidien
+on normalisera la carte elle-même.
+
+\emph{Cartes géodésiques.} Une carte sur une surface riemannienne est
+\emph{géodésique} si ses arêtes sont des arcs de géodésiques ;
+\emph{métriquement régulière} si elle est géodésique et si le groupe de ses
+automorphismes isométriques est transitif sur les repères ; une \emph{carte
+géodésique standard} si elle est de plus complète, sur une surface standard.
+On doit avoir :
+
+\begin{enumerate}
+\item[a)] toute carte standard est topologiquement isomorphe à une carte
+géodésique standard $(X_{0}, K_{0}, S_{0})$ ;
+\item[b)] entre deux cartes géodésiques standard, il y a dans chaque classe
+d'isotopie d'isomorphismes topologiques un unique isomorphisme qui soit une
+isométrie --- à un facteur près dans le cas euclidien ;
+\item[c)] le groupe des automorphismes d'une carte géodésique standard opère
+proprement sur la surface.
+\end{enumerate}
+
+Une carte géodésique standard est \emph{normalisée} si, dans le cas euclidien,
+ses arêtes de longueur finie sont de longueur 1, les deux autres cas étant
+normalisés par la courbure.\footnote{Le NB de la page 13 est écrit sur trois
+niveaux d'insertions ; seuls « normalisée », « euclidien », « longueurs des
+arêtes » et « égale à 1 » s'y lisent. La restriction de b) au cas non
+sphérique, que la page semble faire, n'est pas lisible.}
+
+\textbf{Corollaire.} Le foncteur « métrique » de la catégorie des cartes
+géodésiques standard normalisées --- les morphismes étant les isométries qui
+respectent la carte --- dans la catégorie des cartes cellulaires standard est
+une équivalence de catégories. Épinglées, les cartes géodésiques standard
+normalisées vivent canoniquement sur $S^{2}$, $\mathbb{R}^{2} = \mathbb{C}$ et
+$\mathbb{H}$ munis de leur repère habituel, et on les note encore
+$C_{p,q}$.
+
+\pagerange{14}{14}
+\section*{(6) : sphérique, euclidien, hyperbolique (page 14)}
+
+\begin{enumerate}
+\item[(6)] $C_{p,q}$ est \emph{sphérique} exactement pour $p = 2$,
+$1 \leq q < \infty$ ; $q = 2$, $1 \leq p < \infty$ ; et
+\[
+  (3,3), \quad (3,4), \quad (4,3), \quad (3,5), \quad (5,3),
+\]
+le tétraèdre, le cube, l'octaèdre, le dodécaèdre et l'icosaèdre ; ou encore si
+et seulement si $C_{p,q}$ est finie, si et seulement si $\Gamma_{p,q}$ est fini.
+\item[(b)] $C_{p,q}$ est \emph{euclidienne} exactement pour
+\[
+  (4,4), \quad (3,6), \quad (6,3),
+\]
+les pavages carré, hexagonal et triangulaire ; $\Gamma_{p,q}$ est alors infini
+et résoluble.
+\item[(c)] $C_{p,q}$ est \emph{hyperbolique} dans les autres cas : pour
+$p, q \geq 3$, dès que $p + q \geq 9$ et $(p,q) \neq (3,6), (6,3)$, ou dès que
+$p$ ou $q$ est infini ; ou encore si et seulement si $\Gamma_{p,q}$ contient un
+sous-groupe libre à deux générateurs, donc des sous-groupes libres à $n$
+générateurs pour tout $n$.
+\end{enumerate}
+
+Les trois cas sont ceux où $\frac{1}{p} + \frac{1}{q}$ est supérieur, égal ou
+inférieur à $\frac{1}{2}$ : c'est la somme des angles du triangle
+fondamental, $\frac{\pi}{2} + \frac{\pi}{p} + \frac{\pi}{q}$, comparée à
+$\pi$.\footnote{Le critère angulaire est le nôtre ; la page donne les listes.
+Elle donne aussi deux descriptions du cas hyperbolique, $(c_{1})$ « $(p,q) >
+(4,4)$ ; ou $p = 3$, $q \geq 7$ ; ou $q = 3$, $p \geq 7$ ; ou $(4,5)$, $(5,4)$ »,
+qui est juste, et $(c_{2})$ « $p + q \geq 10$ ou $(p,q) \neq (3,6), (6,3)$ »,
+qui ne peut l'être telle qu'elle est écrite --- la seconde condition, jointe
+par « ou », engloberait les cas sphériques ; on la remplace par la forme
+équivalente à $(c_{1})$. Les types $(2, \infty)$ et $(\infty, 2)$, pour
+lesquels $\frac{1}{p} + \frac{1}{q} = \frac{1}{2}$, sont écrits puis biffés dans
+la liste euclidienne ; le premier est la carte $(\mathbb{R}^{2} \supset
+\mathbb{R})$ de l'exception de (1), et la page ne dit pas où elle les range.
+Le nom du pavage hexagonal est illisible. Que $\Gamma_{p,q}$ contienne un groupe
+libre non abélien dans le cas hyperbolique tient à ce qu'il y est un groupe
+fuchsien non élémentaire.}
+
+\pagerange{14}{15}
+\section*{(7) : les cartes de type $(p,q)$ comme quotients (pages 14 et 15)}
+
+\begin{enumerate}
+\item[(7)] Les cartes quasi-régulières épinglées de type $(p,q)$ s'obtiennent
+canoniquement à partir des sous-groupes $\pi \subset \Gamma_{p,q}$ opérant
+librement sur $X_{p,q}$, la carte étant le quotient de $C_{p,q}$ par $\pi$ et
+le groupe fondamental de sa surface s'identifiant à $\pi$ ; la surface
+quotient hérite d'une métrique riemannienne pour laquelle la carte est
+géodésique, et la carte est régulière exactement quand $\pi$ est distingué
+dans $\Gamma_{p,q}$.\footnote{La page écrit « les cartes régulières », puis
+« $\Gamma_{p,q}$ est invariant » ; on lit la seconde expression comme la
+condition de régularité, ce qui oblige à lire la première comme
+« quasi-régulières ». Une partie de l'énoncé est illisible.}
+\end{enumerate}
+
+\textbf{NB.} Pour $(p,q)$ donné, déterminer les $\pi$ possibles revient à
+étudier l'action de $\Gamma_{p,q}$ sur $X_{p,q}$, et en particulier les
+stabilisateurs des points : $\pi$ opère librement si et seulement s'il ne
+rencontre ces stabilisateurs qu'en l'élément neutre. Ce sont des groupes
+finis : diédraux d'ordre $2p$, $4$ et $2q$ aux sommets, aux milieux d'arêtes et
+aux centres de faces, d'ordre 2 aux autres points des droites de
+réflexion.\footnote{La description des stabilisateurs est la nôtre ; la page
+dit seulement qu'il faut étudier « les stabilisateurs des $\Gamma_{p,q}$ des
+pts de $X_{p,q}$ ». Pour un ordre infini le stabilisateur correspondant est
+vide de sens, le sommet ou le centre de face étant rejeté à l'infini.}
+
+\emph{Le cas compact.} La page se termine sur un palimpseste dont on lit
+qu'une carte finie orientée, $\pi$ étant d'indice fini, définit sur sa surface
+une structure complexe, et que dans le cas compact on obtient ainsi des
+courbes algébriques projectives. Le dernier mot, souligné, est un nom propre
+lu « Bourguignon ».\footnote{Le tiers gauche de la page, écrit en biais, n'est
+pas recouvrable, et la prose de la colonne de droite ne l'est qu'en partie.
+L'observation qu'on lit est le point de départ de ce que l'\emph{Esquisse
+d'un programme} (1984) appelle les dessins d'enfants : une carte sur une
+surface compacte orientée définit une courbe algébrique, et, par le théorème de
+Belyi (1979), les courbes ainsi obtenues sont exactement celles qui sont
+définies sur un corps de nombres. Rien sur la page ne permet de lire le nom de
+Belyi à la place de celui qui est écrit, et on ne le substitue pas.}
+
+\end{document}
