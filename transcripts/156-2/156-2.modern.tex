@@ -1,0 +1,675 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 156-2, pages 1-18.
+%
+% This is an INTERPRETATION, not a transcription. Everything the critical
+% apparatus carried moves into footnotes. In any dispute of substance the
+% transcription governs: whoever cites Grothendieck must cite batch-01.fr.tex.
+%
+% Pass: Opus 5 (claude-opus-5), 2026-09-13 — first pass, unchecked against the
+% pages by a human. The folder was read whole; it holds one batch, pages 1-18,
+% all of them mathematics, dated 6 June 1986 (page 1) and 7 June (page 14).
+%
+% What the folder is. Chapter II (« GF II ») of Vers une géométrie des formes:
+% the first steps of a topology of « failles » — a space with two ends,
+% cut by « lieux » — and of « mailles » — a space cut open along a two-sided
+% « nœud » into a faille. The « réseaux » of the chapter title are never
+% reached: the folder builds the two building blocks and stops at the
+% compatibility of two mailles.
+%
+% Notation fixed for the whole document. X/A the space X with A contracted to
+% a point a. V ≅ C(S) a conical neighbourhood, S its base, V_t = tV, W_t the
+% preimage of V_t in X, S_t its boundary. F = (X, {A,B}) a faille, U =
+% X∖(A∪B), X' the reduced faille (A, B contracted to a, b). L(F) the set of
+% lieux; for an interior lieu C, X∖C = U_{A,C} ⊔ U_{B,C}, X_{A,C} =
+% closure(U_{A,C}) ∪ C, F_{A,C} = (X_{A,C}, {A,C}). Comp(Z) the boolean ring
+% of clopen subsets. Riv(A,X) the rives; Ã the cut of A; β = {ρ,ρ'} a
+% bi-rive; X̄ = Dec_β(A,X) the space cut along (A,β). « Disjoints » for lieux
+% is always the page's relation (defined page 8), never mere empty
+% intersection; where the two could be confused the reading says the lieux
+% are « emboîtés ».
+%
+% Substantive departures from the pages, each footnoted where it occurs:
+% — page 2, NB (3): a closed submanifold is regularly immersed, via the normal
+%   disc bundle; the reading says which cone and in what topology.
+% — page 3: c') is stated with the closure of U_i (his margin), and the
+%   equivalence c) ⇔ c') is proved one way in general and the other when U
+%   has finitely many components, as he says.
+% — page 5: the last contradiction is with the connectedness of X∖{a}; the
+%   leaf writes X∖{c}.
+% — page 6: the lemma needs Z = Z' ∪ Z''; supplied.
+% — page 8: « disjoints » (his) implies C ∩ D = ∅ but not conversely; said.
+% — page 9: the parenthesis read « totalement ordonnée » is taken to mean that
+%   pairwise disjoint lieux form a chain, which is true; the set of all lieux
+%   between two lieux is not totally ordered, and the reading says so.
+% — page 10: the existence criterion and the uniqueness on the segment are
+%   true of REDUCED failles; « ∞ de structures réduites » fails for finite
+%   trees (k(k-1)/2); uniqueness for the segment is R. L. Moore's non-cut-point
+%   theorem. The two retracted claims are recorded as retracted.
+% — page 12: « homéomorphe à B^n » is read as: X ≅ B^n, ends and lieux
+%   ≅ B^{n-1}; the sketch's D^1 is B^1.
+% — page 15: ρ + ρ' = 1 forces ρ ≠ ρ' as soon as A is not open (the page says
+%   A ≠ ∅); (*) is injective always, bijective for X paracompact (Godement).
+% — page 16: X̃ is used without definition; the reading describes it and says
+%   that the precise definition is on neither the page nor here.
+%
+% Modern names given and footnoted as ours: voisinage conique / voisinage
+% régulier (J. H. C. Whitehead 1939), espaces localement coniques
+% (Siebenmann 1972), cobordisme et sa composition (Thom 1954; the categorical
+% form after 1986), théorème de R. L. Moore sur les points de non-coupure
+% (1920), plongement bicollier (M. Brown 1962) and théorème de Schoenflies
+% généralisé (Brown 1960, Mazur 1959), dualité de Stone (1936) and spectre de
+% Stone relatif, hypersurface bilatère non séparante.
+%
+% What the folder announces and never establishes: the equivalences of
+% categories of pages 7-9 (failles with lieux ↔ chains of failles glued by
+% homeomorphisms); the claim of page 7 that every lieu of a component faille
+% is a lieu of F; the symmetry of the compatibility of two mailles (page 18),
+% on which the text stops; the « réseaux » of the title.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{156-2}
+\pages{1}{18}
+\dating{1986}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{[Chapitre] II. Réalisations topologiques des réseaux : notes manuscrites (06/06/1986) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Un segment a deux bouts, et tout point intérieur le coupe en deux segments
+plus petits. Un cercle n'a pas de bouts, mais si on le coupe en un point, on
+obtient un segment dont les deux bouts sont deux copies du point de coupure.
+Ces deux gestes --- couper un objet entre ses bouts, et ouvrir une boucle en
+la coupant --- sont ce que ces dix-huit feuillets, écrits les 6 et 7 juin 1986,
+cherchent à formuler pour des espaces topologiques quelconques, sans
+supposer qu'ils soient des variétés ni même triangulés.
+
+La première notion est la \emph{faille} : un espace $X$ muni de deux parties
+fermées disjointes $A$ et $B$, ses bouts, qui se comporte « comme un segment »
+du point de vue de la connexité --- ôter un bout ne déconnecte pas l'espace,
+et près de chaque bout l'espace a la forme d'un cône. Un cylindre
+$S^{1} \times [0,1]$ avec ses deux cercles de bord en est l'exemple type, une
+boule avec deux points de son bord en est un autre. Dans une faille, un
+\emph{lieu} est une partie qui la coupe en deux failles, l'une du côté de $A$,
+l'autre du côté de $B$ : un cercle horizontal dans le cylindre. Les lieux
+s'ordonnent de $A$ vers $B$, et découper une faille par plusieurs lieux
+revient à recoller bout à bout plusieurs failles. Qui connaît les cobordismes
+reconnaîtra leur composition, mais ici rien n'est lisse et l'on ne parle que
+d'espaces.
+
+La seconde notion est la \emph{maille}. Près d'une partie fermée $A$ de $X$,
+l'espace privé de $A$ peut avoir plusieurs « côtés » : ce sont les
+\emph{rives} de $A$. Une hypersurface bilatère a deux côtés ; l'âme d'un ruban
+de Möbius n'en a qu'un, bien qu'elle coupe le ruban en deux près de chacun de ses
+points. Choisir une partition
+des rives en deux, puis couper $X$ le long de $A$ en dédoublant $A$, donne un
+nouvel espace qui a deux bouts, copies de $A$ ; si c'est une faille, on dit que
+$A$ est le \emph{nœud} d'une maille. Le cercle coupé en un point est la plus
+simple ; un anneau coupé le long d'un rayon en est une autre.
+
+Le titre annonce des « réseaux », et l'on devine l'intention : bâtir des
+espaces en recollant failles et mailles, comme on bâtit un graphe avec des
+arêtes et des boucles. Les feuillets n'y arrivent pas ; ils s'arrêtent sur la
+question de savoir quand deux mailles d'un même espace sont compatibles. Mais
+les briques sont posées, et plusieurs remarques en marge --- « Faux ! idiot ! »,
+« Faux … déjà dans le cas des segments ! » --- montrent un auteur qui
+essaie des énoncés et les retire aussitôt qu'un exemple simple les défait.
+
+\keywords{conelike neighbourhood, regular neighbourhood, cobordism, non-cut point, bicollared embedding, generalized Schoenflies theorem, Stone duality, two-sided hypersurface, cutting along a subspace}
+\end{resume}
+
+\section*{Le fil du dossier, et les conventions}
+
+\begin{enumerate}
+\item[1.] \emph{Immersion régulière} (pages 1 et 2).
+\item[2.] \emph{Failles topologiques} (pages 2 à 4).
+\item[3.] \emph{Lieux, et découpage d'une faille} (pages 4 à 7).
+\item[4.] \emph{L'ordre des lieux} (pages 8 et 9).
+\item[5.] \emph{Existence, et conditions sur les lieux} (pages 10 à 13).
+\item[6.] \emph{Rives et bi-rives} (pages 14 et 15), sous le titre « 2) Boucle
+topologique » daté du 7 juin.
+\item[7.] \emph{Mailles} (pages 16 à 18).
+\end{enumerate}
+
+Les feuillets portent sa pagination 1 à 18, qui coïncide avec celle des
+archivistes. La page 1 porte en angle « GF II » : c'est le chapitre II d'un
+texte dont le dossier 156-1, « Vers une géométrie des formes (topologiques) »,
+daté de la veille, est le chapitre I.
+
+\emph{Conventions.} Pour une partie fermée $A$ d'un espace $X$, $X/A$ est
+l'espace obtenu en contractant $A$ en un point $a$. $\mathrm{C}(S) = S \times
+[0,1] / S \times \{0\}$ est le cône sur $S$, de sommet $o$. Une faille est notée
+$F = (X, \{A,B\})$, $U = X \smallsetminus (A \cup B)$, et $X'$ la faille réduite
+obtenue en contractant $A$ et $B$ en $a$ et $b$. Pour un lieu intérieur $C$,
+$X \smallsetminus C = U_{A,C} \sqcup U_{B,C}$, $X_{A,C} = \overline{U_{A,C}} \cup
+C$ et $F_{A,C} = (X_{A,C}, \{A,C\})$. $\mathrm{Comp}(Z)$ est l'anneau booléen des
+parties ouvertes et fermées de $Z$. Le mot « disjoints », appliqué à deux lieux,
+a toujours le sens fixé à la page 8, plus fort que l'intersection vide.
+
+\emph{Ce que le dossier annonce et n'établit pas} : les équivalences de
+catégories des pages 7 à 9 entre failles munies de lieux et chaînes de failles
+recollées ; l'affirmation de la page 7 que tout lieu d'une faille composante est
+un lieu de la faille ; la symétrie de la compatibilité de deux mailles, sur
+laquelle le texte s'arrête (page 18) ; les réseaux du titre.
+
+\pagerange{1}{2}
+\section*{Immersion régulière (pages 1 et 2)}
+
+Soit $X$ un espace topologique et $A \subset X$ une partie fermée non
+vide\footnote{« non vide » est ajouté au-dessus de la ligne ; la remarque (2) de
+la page 2 examine pourtant le cas $A = \emptyset$, voir plus bas.}. Si $X'
+\subset X$ contient $A$, l'application $X'/A \to X/A$ identifie $X'/A$ à un
+sous-espace de $X/A$ : les fermés de $X'/A$ correspondent aux fermés $Y'$ de $X'$
+tels que $Y' \cap A \in \{\emptyset, A\}$, et ce sont les traces sur $X'$ des
+fermés de $X$ ayant la même propriété.
+
+On dit que $A$ est \emph{régulièrement immergé} dans $X$ si le point $a$ possède
+dans $X/A$ un voisinage fermé $V$ muni d'un homéomorphisme $h : V \simeq
+\mathrm{C}(S)$ envoyant $a$ sur le sommet, où $S$ est un espace\footnote{La page
+qualifie $S$ d'un mot lu « compact » avec doute. Rien de ce qui suit ne s'en
+sert, sinon pour que le cône $\mathrm{C}(S)$, pris avec la topologie quotient,
+soit un voisinage raisonnable de son sommet ; on ne l'impose pas.}, et tel que
+$V \smallsetminus B$ soit ouvert dans $X/A$, où $B = h^{-1}(S \times \{1\})$ est
+le bord de $V$\footnote{La lettre $S$ est écrite en surcharge sur un $B$ : le
+bord de $V$ et la base du cône se correspondent par $h$.}. La structure conique
+fournit les $V_{t} = h^{-1}(\mathrm{C}_{t}(S))$, $0 < t \leq 1$, tous homéomorphes
+à $V$, qui forment un système fondamental de voisinages de $a$. Leurs images
+réciproques $W_{t}$ dans $X$ forment alors un système fondamental de voisinages
+de $A$ --- tout ouvert de $X$ contenant $A$ est saturé pour la contraction, donc
+provient d'un ouvert de $X/A$. Le bord $S_{t}$ de $W_{t}$ est fermé, et
+\[
+X \smallsetminus S_{t} = W_{t}^{\circ} \sqcup (X \smallsetminus W_{t})
+\]
+est une somme topologique de l'intérieur et de l'extérieur de $W_{t}$.
+
+La notion est locale : elle ne dépend que d'un voisinage de $A$. Elle a encore un
+sens pour $A = \emptyset$, où $X/\emptyset = X \sqcup \{a\}$ et le cône est sur
+l'espace vide. Elle est vraie, dit la page, pour une sous-variété d'une
+variété\footnote{L'énoncé de la page est en partie illisible. Pour une
+sous-variété fermée lisse $A$ d'une variété lisse $X$, sans bord, le fibré en
+disques normaux $D(\nu)$ est un voisinage fermé de $A$, cylindre de
+l'application $S(\nu) \to A$ ; son quotient $D(\nu)/A$ est le cône
+$\mathrm{C}(S(\nu))$ sur le fibré en sphères, avec la topologie quotient. C'est
+l'hypothèse sous laquelle on la tient pour vraie ici.}.
+
+Le nom actuel le plus proche est celui de \emph{voisinage conique} ou de
+\emph{voisinage régulier}\footnote{Les voisinages réguliers de J.~H.~C.~Whitehead
+(1939) en topologie PL, les espaces localement coniques de L.~Siebenmann (1972),
+et plus généralement les espaces stratifiés, sont les cadres où cette condition
+est d'usage. Grothendieck en connaissait l'esprit : l'\emph{Esquisse d'un
+programme} (1984) réclame une « topologie modérée » précisément pour ce genre
+d'objets. Les feuillets ne citent personne.}. On notera que la condition porte
+sur $X/A$ et non sur $X$ : $A$ lui-même peut être un espace sauvage, seul compte
+le voisinage une fois $A$ écrasé.
+
+\pagerange{2}{4}
+\section*{Failles topologiques (pages 2 à 4)}
+
+\textbf{Définition.} Une \emph{faille topologique} est un couple $(X, \{A,B\})$
+formé d'un espace $X$ et d'une paire de parties de $X$ tels que :
+\begin{enumerate}
+\item[a)] $A$ et $B$ sont fermés et non vides, et les points $a \in X/A$,
+$b \in X/B$ ne sont pas isolés ;
+\item[b)] $A \cap B = \emptyset$ ;
+\item[c)] $(X \smallsetminus A)/B$ et $(X \smallsetminus B)/A$ sont connexes ;
+\item[d)] $A$ et $B$ sont régulièrement immergés.
+\end{enumerate}
+
+$A$ et $B$ sont les \emph{bouts} de la faille. Comme $a$ n'est pas isolé, $A$
+n'est pas ouvert, et de même pour $B$ ; donc $X \neq A \cup B$, et
+$U = X \smallsetminus (A \cup B)$ n'est pas vide.
+
+La condition c) admet une variante :
+\begin{enumerate}
+\item[c')] l'adhérence de toute composante connexe $U_{i}$ de $U$ rencontre $A$
+et rencontre $B$.\footnote{Le corps de la page écrit « $U_{i}$ rencontre $B$ et
+rencontre $A$ », ce qui est impossible puisque $U_{i} \subset U$ ; la marge
+corrige en $\overline{U_{i}}$.}
+\end{enumerate}
+On a c') $\Rightarrow$ c), et la réciproque est vraie si $U$ n'a qu'un nombre
+fini de composantes connexes, ce qui est le cas « modéré »\footnote{Les
+démonstrations ne sont pas sur la page. c') $\Rightarrow$ c) : une partie
+ouverte et fermée de $(X \smallsetminus A)/B$ qui ne contient pas $b$ contient
+chaque $U_{i}$ qu'elle rencontre, donc son adhérence, donc un point de $B$ ---
+contradiction. Réciproque : si $U$ n'a qu'un nombre fini de composantes, chacune
+est ouverte et fermée dans $U$ ; une composante dont l'adhérence ne rencontre pas
+$B$ serait ouverte et fermée dans $X \smallsetminus A$ et saturée, et
+déconnecterait $(X \smallsetminus A)/B$.}.
+
+La faille est \emph{réduite} si $A$ et $B$ sont des points $a$ et $b$. En
+contractant les deux bouts on obtient $X' = X/A/B$, et $(X, \{A,B\})$ est une
+faille si et seulement si $(X', \{a,b\})$ en est une. Pour une faille réduite,
+les conditions se lisent : $a$ et $b$ ne sont pas isolés, $a \neq b$,
+$X' \smallsetminus \{a\}$ et $X' \smallsetminus \{b\}$ sont connexes, et $a$, $b$
+ont des voisinages coniques. Une faille réduite est donc connexe, puisque
+$X' \smallsetminus \{b\}$ est connexe et dense. En revanche
+$X' \smallsetminus \{a,b\}$ ne l'est pas nécessairement : le cercle muni de deux
+points en est l'exemple\footnote{La marge écrit « mais pas néc. », d'une
+abréviation lue avec doute ; la sphère $S^{2}$ munie de deux points, dont le
+complémentaire est connexe, montre qu'on ne peut pas dire mieux.}.
+
+Qu'on puisse contracter les bouts sans rien perdre est la raison pour laquelle
+presque tout ce qui suit se démontre « on peut supposer $A$, $B$ réduits à des
+points ».
+
+\pagerange{4}{7}
+\section*{Lieux, et découpage d'une faille (pages 4 à 7)}
+
+\subsection*{Définition}
+
+\begin{quote}
+\textbf{Définition.} Un \emph{lieu} de la faille $(X, \{A,B\})$ est une partie
+fermée $C$ de $X$ telle que ou bien $C \in \{A, B\}$, ou bien $C \subset U$ et :
+il existe une décomposition de $X \smallsetminus C$ en somme topologique de deux
+sous-espaces
+\[
+X \smallsetminus C = U_{A,C} \sqcup U_{B,C}, \qquad A \subset U_{A,C}, \quad
+B \subset U_{B,C},
+\]
+avec $U_{A,C}/A$ et $U_{B,C}/B$ connexes.
+\end{quote}
+
+Autrement dit, dans la faille réduite, $X' \smallsetminus C$ a exactement deux
+composantes connexes, l'une contenant $a$ et l'autre $b$ ; la décomposition est
+donc unique\footnote{La page amorce « et ceci détermine $U_{A,C}$, $U_{B,C}$ de
+façon unique, comme les composantes connexes de $X' \smallsetminus C$ qui
+contiennent » et s'interrompt ; la marge le dit en toutes lettres. Une note
+oblique, en partie raturée, ajoute quelque chose sur le cas où $A$ et $B$ sont
+connexes.}. Un lieu intérieur est non vide, puisque $X'$ est connexe.
+
+On pose $X_{A,C} = \overline{U_{A,C}} \cup C$ et $X_{B,C} = \overline{U_{B,C}}
+\cup C$.
+
+\subsection*{Les deux moitiés sont presque des failles}
+
+\begin{quote}
+\textbf{Proposition} (page 5). \emph{$(X_{A,C}, \{A,C\})$ satisfait les conditions
+a), b), c) des failles, et de même $(X_{B,C}, \{B,C\})$.}
+\end{quote}
+
+On se ramène au cas où $A$, $B$, $C$ sont des points $a$, $b$, $c$. Comme
+$U_{a,c}$ est ouvert et fermé dans $X \smallsetminus \{c\}$, son adhérence est
+contenue dans $U_{a,c} \cup \{c\}$.
+
+a) $a$ n'est pas isolé dans $X_{a,c}$, qui contient un voisinage de $a$ dans $X$.
+Si $c$ l'était, $U_{a,c}$ serait fermé dans $X$ ; il est ouvert ; il serait
+ouvert et fermé, non vide et distinct de $X$, contre la connexité de $X$.
+
+c) $X_{a,c} \smallsetminus \{c\} = U_{a,c}$ est connexe par hypothèse. Si
+$X_{a,c} \smallsetminus \{a\}$ ne l'était pas, il contiendrait une partie $P$
+ouverte et fermée, non vide, ne contenant pas $c$. Fermée dans
+$X_{a,c} \smallsetminus \{a\}$, qui est fermé dans $X \smallsetminus \{a\}$, et
+ouverte dans l'ouvert $U_{a,c} \smallsetminus \{a\}$ de $X$, elle serait ouverte
+et fermée dans $X \smallsetminus \{a\}$, qui ne serait pas connexe ---
+absurde\footnote{La page conclut « $X \smallsetminus \{c\}$ ne serait pas
+connexe », ce qui n'est pas une contradiction : $X \smallsetminus \{c\}$ est
+déconnecté par définition d'un lieu. La contradiction est avec la connexité de
+$X \smallsetminus \{a\}$, où l'argument vient de placer $P$.}.
+
+b) est clair. Il ne manque, pour avoir une faille, que la condition d)
+d'immersion régulière du nouveau bout $C$.
+
+\subsection*{La condition qui manque}
+
+\begin{quote}
+\textbf{Lemme} (page 6). \emph{Soit $Z$ un espace réunion de deux parties fermées
+$Z'$ et $Z''$ telles que $Z' \cap Z'' = \{c\}$. Pour que $c$ ait un voisinage
+conique dans $Z$, il faut et il suffit qu'il en ait un dans $Z'$ et dans $Z''$.}
+\end{quote}
+
+L'hypothèse $Z = Z' \cup Z''$ n'est pas écrite, mais c'est ainsi que le lemme
+sert\footnote{Sans elle l'énoncé n'a pas de sens. La démonstration n'est pas sur
+la page. Suffisance : $\mathrm{C}(S') \vee_{o} \mathrm{C}(S'') =
+\mathrm{C}(S' \sqcup S'')$. Nécessité : si $V \simeq \mathrm{C}(S)$ est un
+voisinage de $c$ dans $Z$, la trace de $Z'$ sur $V \smallsetminus \{c\} \simeq S
+\times {]0,1]}$ y est ouverte et fermée, donc de la forme $T \times {]0,1]}$ avec
+$T$ ouvert et fermé dans $S$, et $V \cap Z' \simeq \mathrm{C}(T)$.}. Appliqué à
+$X' / C = X_{A,C}/C \cup X_{B,C}/C$, il dit que si l'on ajoute à la définition
+d'un lieu intérieur la condition « $C$ est régulièrement immergé dans $X$ », les
+deux moitiés $F_{A,C}$ et $F_{B,C}$ sont des failles. C'est ce que la page
+décide : on exige désormais cette condition.
+
+\emph{Exemple.} Pour $t$ assez petit, les bords $S_{A,t}$ des voisinages coniques
+$W_{t}$ de $A$ sont des lieux de la faille\footnote{Pour $t$ petit, $W_{t}$ évite
+$B$, puisque les $W_{t}$ forment un système fondamental de voisinages de $A$ ;
+$W_{t}^{\circ}/A$ est un cône ouvert, donc connexe, et
+$(X \smallsetminus W_{t})/B$ est connexe parce qu'on peut y rendre le collier
+$S \times {]t, 1[}$ à $(X \smallsetminus A)/B$ sans changer ses parties ouvertes
+et fermées. La page renvoie à une page dont le numéro est illisible.}.
+
+\subsection*{Découper et recoller}
+
+Un lieu intérieur $C$ de $F = (X, \{A,B\})$ décompose la faille en deux failles
+$F_{A,C}$ et $F_{B,C}$, et $X = X_{A,C} \cup_{C} X_{B,C}$. La page affirme que
+tout lieu d'une faille composante est un lieu de $F$, et que la catégorie des
+failles munies d'un lieu intérieur, avec les homéomorphismes, est équivalente à
+celle des paires de failles munies d'un homéomorphisme entre un bout de l'une et
+un bout de l'autre\footnote{Ces deux énoncés sont écrits sans démonstration, le
+second dans une énumération biffée puis reprise en interligne. On ne les
+démontre pas ici.}. C'est, sans aucune structure lisse, la forme de la
+composition des cobordismes\footnote{Un cobordisme $W$ entre deux variétés
+$\partial_{0} W$ et $\partial_{1} W$ est une faille $(W, \{\partial_{0}W,
+\partial_{1}W\})$ dès que ses bords ont des colliers et que les conditions de
+connexité sont satisfaites, et recoller deux cobordismes le long d'un bord commun
+est l'opération ci-dessus. La notion de cobordisme remonte à R.~Thom (1954) ; sa
+présentation comme composition dans une catégorie est postérieure à juin 1986
+(M.~Atiyah, 1988). Le rapprochement est le nôtre.}.
+
+\begin{quote}
+\textbf{Lemme} (page 7). \emph{Soient $C \neq D$ deux lieux de $F$ distincts des
+bouts. Alors $D$ est un lieu de $F_{B,C}$ si et seulement si $C$ est un lieu de
+$F_{A,D}$ ; et, en échangeant les rôles de $A$ et $B$, $D$ est un lieu de
+$F_{A,C}$ si et seulement si $C$ est un lieu de $F_{B,D}$.}
+\end{quote}
+
+Il suffit de prouver une implication, l'autre s'obtenant en échangeant $A$ et $B$,
+$C$ et $D$ ; et l'on peut supposer $A$, $B$, $C$, $D$ réduits à des points. Si $c$
+est un lieu de $X$ et $d$ un lieu de $X_{c,b}$, on a
+\[
+X = X_{a,c} \amalg_{c} X_{c,b}, \qquad X_{c,b} = X_{c,d} \amalg_{d} X_{d,b},
+\qquad \text{donc} \qquad
+X = \underbrace{X_{a,c} \amalg_{c} X_{c,d}}_{X_{a,d}} \amalg_{d} X_{d,b},
+\]
+et $c$ est un lieu de $X_{a,d}$\footnote{La page note $X_{c,b} = X_{b,c}$ par
+définition. La démonstration s'arrête sur la décomposition, qui est bien le
+fond de l'affaire : $X_{a,d} \smallsetminus \{c\}$ est la somme de
+$X_{a,c} \smallsetminus \{c\}$ et de $X_{c,d} \smallsetminus \{c\}$, chacune
+connexe une fois son bout contracté. Le lemme est réécrit à la page 12, puis
+barré.}.
+
+\pagerange{8}{9}
+\section*{L'ordre des lieux (pages 8 et 9)}
+
+\begin{quote}
+\textbf{Définition} (page 8). Deux lieux $C$ et $D$ sont \emph{disjoints} si :
+lorsque l'un d'eux est un bout, $C \neq D$ ; sinon, $C \neq D$ et $D$ est un lieu
+de $F_{A,C}$ ou de $F_{B,C}$ --- ce qui, par le lemme de la page 7, équivaut à ce
+que $C$ soit un lieu de $F_{B,D}$ ou de $F_{A,D}$. La relation est symétrique.
+\end{quote}
+
+Deux lieux disjoints en ce sens ont une intersection vide, mais la réciproque est
+fausse\footnote{La page 6 annonce « disjoints au sens $C \cap D = \emptyset$ » pour
+le seul cas où l'un des lieux est un bout, où les deux notions coïncident. Pour
+deux lieux intérieurs, $D \cap C = \emptyset$ ne suffit pas : un lieu n'est pas
+supposé connexe, et $D$ peut rencontrer à la fois $U_{A,C}$ et $U_{B,C}$.} : la
+relation de la page 8 dit que les deux lieux sont \emph{emboîtés}, l'un du côté de
+$A$ par rapport à l'autre.
+
+Une faille \emph{orientée} est une faille dont on a choisi un bout pour origine ;
+on écrit $F = (X, (A,B))$, et $\mathrm{or}(F) = A$, $\mathrm{ex}(F) = B$. Pour
+un lieu $C$ on pose $\mathcal{F}_{C}$ l'ensemble des lieux de $F_{A,C}$ si $C$ est
+intérieur, $\mathcal{F}_{A} = \{A\}$\footnote{La valeur pour $C = B$ est
+illisible ; la seule qui rende la suite cohérente est l'ensemble de tous les
+lieux de $F$.}, et l'on écrit
+\[
+C \leq D \iff \mathcal{F}_{C} \subset \mathcal{F}_{D} \iff C \in
+\mathcal{F}_{D}.
+\]
+C'est une relation d'ordre --- l'antisymétrie vient de ce que $F_{A,C} =
+F_{A,D}$ entraîne $C = D$, comme le dit la marge --- et deux lieux sont disjoints
+si et seulement si $C < D$ ou $D < C$. Changer l'orientation remplace l'ordre par
+l'ordre opposé.
+
+\textbf{Proposition} (page 9). \emph{L'ensemble ordonné $\mathcal{L}$ des lieux
+d'une faille orientée satisfait :}
+\begin{enumerate}
+\item[a)] \emph{il a un plus petit élément $\alpha = A$ et un plus grand élément
+$\beta = B$, distincts ;}
+\item[b)] \emph{pour tout $x \neq \beta$, l'ensemble des $y > x$ est filtrant
+décroissant ;}
+\item[b')] \emph{pour tout $x \neq \alpha$, l'ensemble des $y < x$ est filtrant
+croissant ;}
+\item[c)] \emph{si $x < y$, il existe $z$ avec $x < z < y$ (divisibilité).}
+\end{enumerate}
+
+La page énonce ces propriétés sans démonstration ; elles résultent de l'exemple
+de la page 6\footnote{Pour b), si $y, y' > x$, les bords $S_{x,t}$ des petits
+voisinages coniques de $x$ évitent le fermé $y \cup y'$ et sont des lieux compris
+entre $x$ et chacun d'eux ; pour c), on applique le même argument dans la faille
+$F_{x,y}$. C'est ici que l'exigence d'immersion régulière des lieux, ajoutée à la
+page 6, est indispensable.}. L'ordre n'est pas total : deux cercles ondulés qui se
+croisent sur un cylindre sont deux lieux non comparables. Ce qui est vrai, et
+qu'on lit dans la parenthèse de la page 9, c'est qu'une famille de lieux deux à
+deux disjoints est totalement ordonnée\footnote{La parenthèse est en grande
+partie illisible ; seuls « forment une partie totalement ordonnée » se lisent. On
+l'interprète dans le seul sens où l'énoncé est juste.}.
+
+Enfin, découper une faille orientée par $n$ lieux intérieurs deux à deux disjoints
+$x_{1} < \dots < x_{n}$ revient à se donner $n+1$ failles orientées recollées bout
+à bout : la page affirme l'équivalence de cette catégorie avec celle des systèmes
+\[
+(F_{1}, \dots, F_{n+1};\; h_{21}, \dots, h_{n+1,n}), \qquad h_{i+1,i} :
+\mathrm{ex}(F_{i}) \xrightarrow{\ \simeq\ } \mathrm{or}(F_{i+1}),
+\]
+de $n+1$ failles orientées et de $n$ homéomorphismes de recollement, le cas $n = 2$
+étant écrit à la page 8.
+
+\pagerange{10}{13}
+\section*{Existence, et conditions sur les lieux (pages 10 à 13)}
+
+\subsection*{Quels espaces portent une faille}
+
+\begin{quote}
+\emph{Un espace compact triangulé admet une structure de faille réduite si et
+seulement s'il est connexe et non réduit à un point.}
+\end{quote}
+
+« C'est gros ! », dit la page, et c'est juste\footnote{La page ne démontre rien.
+Pour $X$ connexe, les deux points $a$, $b$ doivent être des points de
+non-coupure ; tout continu non réduit à un point en a au moins deux (R.~L.~Moore,
+1920), et dans un espace triangulé tout point a un voisinage conique, le cône sur
+son entrelacs.}. La page ajoute qu'il y en a alors une infinité, et que la
+structure est unique pour le segment, et pour lui seul. La seconde affirmation est
+exactement le théorème de caractérisation de l'arc : un continu métrique qui a
+exactement deux points de non-coupure est un arc. La première demande une
+réserve : un arbre fini à $k$ feuilles n'a que $k(k-1)/2$ structures de faille
+réduite, une par paire de feuilles\footnote{La page écrit « $\infty$ de
+structures de faille réduite ». C'est vrai dès que $X$ contient un cycle ou une
+cellule de dimension $\geq 2$ ; faux pour les arbres. Les structures \emph{non}
+réduites, elles, sont toujours en infinité : la marge donne sur $[0,1]$ la famille
+$A = [0,\alpha]$, $B = [\beta, 1]$, $0 \leq \alpha < \beta \leq 1$, qui ne
+contredit pas l'unicité de la structure réduite.}.
+
+\subsection*{Deux essais retirés}
+
+La page considère la relation d'équivalence entre structures de faille orientée
+sur $X$ engendrée par : $(A,B) \sim (A',B')$ si $A \subset A'$ et $B \subset B'$.
+Elle affirme d'abord que si $(X, \{A,B\})$ est une faille et $A \subset A'$,
+$B \subset B'$ sont fermés, régulièrement immergés et disjoints, alors
+$(X, \{A',B'\})$ est une faille --- et barre l'énoncé, avec en marge « Faux !
+idiot ! » : grossir un bout peut déconnecter le complémentaire de l'autre. Elle
+affirme ensuite que deux structures de faille orientée sur un $X$ triangulé sont
+toujours équivalentes, et note en marge « Faux (cas orienté !) déjà dans le cas des
+segments ! ». En effet, sur $[0,1]$, chaque pas de la relation garde $0$ dans
+l'origine ; les orientations $([0,\alpha], [\beta,1])$ et $([\beta,1],
+[0,\alpha])$ ne sont pas équivalentes.
+
+\subsection*{Imposer une propriété aux bouts et aux lieux}
+
+On peut exiger de $A$, $B$ et des lieux une propriété $P$ intrinsèque --- être
+connexes, contractiles, homéomorphes à un espace donné --- et ne considérer que
+l'ensemble $\mathcal{L}_{P}$ des lieux qui la possèdent. Pour que $\mathcal{L}_{P}$
+garde les propriétés a) à c) de la page 9, il est bon d'imposer $P$ aussi aux bords
+$S_{A}$, $S_{B}$ des voisinages coniques des bouts, et, pour un lieu intérieur $C$,
+aux bords de ses voisinages coniques dans $X_{A,C}$ et dans $X_{B,C}$. Exemples :
+\begin{enumerate}
+\item[1)] \emph{Être réduit à un point.} On retrouve la théorie des segments
+topologiques ordonnés : les lieux sont les points intérieurs, l'ordre est celui du
+segment.
+\item[2)] \emph{Être homéomorphe à $B^{n-1}$}\footnote{La page annonce « être
+homéomorphe à $B^{n}$ », mais ce qui est homéomorphe à $B^{n}$ est l'espace $X$ ;
+les bouts et les lieux du croquis, dessiné pour $n = 2$, sont des $B^{1}$ (le
+croquis écrit $D^{1}$ pour l'un d'eux).}. On trouve la théorie de la décomposition
+de $I \times B^{n-1} \simeq B^{n}$, de bouts $\{0\} \times B^{n-1}$ et $\{1\} \times
+B^{n-1}$, par des lieux homéomorphes à $B^{n-1}$ ; ou, en contractant les bouts,
+d'une boule munie de deux points de son bord.
+\item[3)] \emph{Être homéomorphe à $S^{n}$.} Sur $S^{n+1}$ munie de deux points
+distincts $a$, $b$, on trouve la théorie de la décomposition par des sphères
+$S^{n}$ ; pour $n = 0$, un cercle coupé par des paires de points.
+\end{enumerate}
+
+On peut enfin exiger qu'un lieu intérieur $C$ ait un voisinage homéomorphe à
+$C \times {]-1,1[}$, avec $C = C \times \{0\}$, et les deux « rives »
+$C \times {]-1,0[}$ et $C \times {]0,1[}$ contenues respectivement dans $X_{A,C}$ et
+$X_{B,C}$. C'est la notion de \emph{plongement bicollier}\footnote{M.~Brown (1962)
+a montré qu'un sous-espace localement bicollier est bicollier ; son théorème de
+Schoenflies généralisé (1960, et B.~Mazur 1959) dit qu'une sphère $S^{n}$
+bicollier dans $S^{n+1}$ borde deux boules. C'est exactement ce qui fait marcher
+l'exemple 3). Le mot « rives » apparaît ici pour la première fois ; il devient
+une notion à la page 14.}.
+
+\pagerange{14}{15}
+\section*{Rives et bi-rives (pages 14 et 15)}
+
+Cette partie ouvre, le 7 juin, un deuxième paragraphe intitulé « Boucle
+topologique »\footnote{Le titre est souligné de deux traits, dont l'un pourrait
+être une rature ; la page enchaîne aussitôt sur un autre titre, « Rives d'une
+partie fermée ».}.
+
+Pour un espace $Z$, soit
+\[
+\mathrm{Comp}(Z) = \mathrm{Hom}_{\mathrm{cont}}(Z, \{0,1\}) = \Gamma(Z,
+\mathbf{F}_{2,Z}),
+\]
+l'anneau booléen des parties ouvertes et fermées de $Z$. Pour une partie fermée $A$
+de $X$, d'ouvert complémentaire $j : U = X \smallsetminus A \hookrightarrow X$, on
+pose
+\[
+\mathrm{Riv}(A,X) = \varinjlim_{V \supset A} \mathrm{Comp}(V \smallsetminus A) =
+\varinjlim_{V \supset A} \Gamma(V, j_{*}\mathbf{F}_{2,U}),
+\]
+la limite inductive portant sur les voisinages $V$ de $A$\footnote{La page note
+$i$ l'inclusion de $U$ ; on écrit $j$ pour ne pas la confondre avec une
+immersion fermée.}. Ses éléments sont les \emph{rives} de $A$ : des germes, le
+long de $A$, de parties ouvertes et fermées de $X \smallsetminus A$.
+
+\emph{Si $A$ est régulièrement immergé}, les $W_{t} \smallsetminus A \simeq
+S_{A} \times {]0,t]}$ sont cofinaux, et
+\[
+\mathrm{Riv}(A,X) \simeq \mathrm{Comp}(S_{A}).
+\]
+
+\emph{Si $X$ est paracompact}, pour tout faisceau $\mathcal{G}$ sur $X$ et tout
+fermé $A$, $\Gamma(A, \mathcal{G}|_{A}) = \varinjlim_{V \supset A}
+\mathcal{G}(V)$\footnote{C'est le théorème de R.~Godement (\emph{Topologie
+algébrique et théorie des faisceaux}, 1958, II.3.3.1), que la page cite sans
+référence.}.
+
+\emph{Le découpage.} Soit $\widetilde{A} \to A$ le spectre de Stone relatif du
+faisceau d'anneaux booléens $(j_{*}\mathbf{F}_{2,U})|_{A}$ : au-dessus de $x \in A$,
+ses points sont ceux du spectre de la fibre, c'est-à-dire, grossièrement, les côtés
+de $X \smallsetminus A$ au voisinage de $x$\footnote{La page écrit $\widetilde{A} =
+\mathrm{Spec}(i_{*}\mathbf{F}_{2,U})$ sans préciser ; la lecture comme spectre de
+Stone relatif est la nôtre, et c'est celle qui rend vraie l'égalité suivante, par
+la dualité de Stone (1936) fibre à fibre.}. On a
+\[
+\mathrm{Comp}(\widetilde{A}) \simeq \Gamma(A, (j_{*}\mathbf{F}_{2,U})|_{A}),
+\]
+d'où une application canonique
+\[
+(*) \qquad \mathrm{Riv}(A,X) \longrightarrow \mathrm{Comp}(\widetilde{A}),
+\]
+toujours injective, et bijective si $X$ est paracompact\footnote{L'injectivité
+n'utilise rien : une section sur $V$ nulle en germe en chaque point de $A$ est
+nulle sur un voisinage ouvert de $A$. La bijectivité est le théorème de Godement
+ci-dessus. La page écrit d'abord « bijective », puis ajoute « injective, et » au
+dessus de la ligne.}. Dans ce cas, choisir une rive, c'est choisir une partie
+ouverte et fermée de $\widetilde{A}$. On pense à $\widetilde{A}$ comme au bord de
+l'espace obtenu en coupant $X$ le long de $A$ : pour une hypersurface bilatère,
+$\widetilde{A} = A \times \{\pm 1\}$ ; pour l'âme d'un ruban de Möbius,
+$\widetilde{A}$ est le revêtement connexe de degré 2 du cercle.
+
+\begin{quote}
+\textbf{Définition} (page 15). Une \emph{bi-rive} de $A$ est une paire
+$\beta = \{\rho, \rho'\}$ d'éléments de $\mathrm{Riv}(A,X)$ tels que
+$\rho + \rho' = 1$ --- une décomposition en deux morceaux de $X \smallsetminus A$ au
+voisinage de $A$. Elle est \emph{triviale} si $\{\rho, \rho'\} = \{0,1\}$. On dit que
+$A$ \emph{déconnecte localement} $X$ s'il existe une bi-rive non triviale.
+\end{quote}
+
+Dans un anneau booléen, $\rho = \rho'$ et $\rho + \rho' = 1$ imposent $1 = 0$, ce
+qui arrive seulement si $A$ est ouvert ; une bi-rive a donc deux éléments distincts
+dès que $A$ n'est pas ouvert\footnote{La page écrit « si $A \neq \emptyset$ ». Pour
+$A$ ouvert et fermé non vide, $V = A$ est un voisinage et $\mathrm{Riv}(A,X) = 0$.}.
+Une bi-rive découpe $\widetilde{A} = \widetilde{A}_{1} \sqcup \widetilde{A}_{2}$.
+Pour une hypersurface bilatère connexe, $\mathrm{Riv}(A,X)$ a quatre éléments, $0$,
+$1$ et les deux côtés, qui forment une bi-rive non triviale. L'âme $A$ du ruban de
+Möbius coupe le ruban en deux près de chacun de ses points, mais le bord de son
+voisinage tubulaire est un cercle connexe : $\mathrm{Riv}(A,X) = \{0,1\}$, et il n'y
+a pas de bi-rive non triviale. C'est une hypersurface unilatère.
+
+\pagerange{16}{18}
+\section*{Mailles (pages 16 à 18)}
+
+Soit $A$ fermé dans $X$ et $\beta = \{\rho, \rho'\}$ une bi-rive. On note
+$\widetilde{X}$ l'espace $X$ coupé le long de $A$, qui contient $\widetilde{A}$ et
+s'envoie sur $X$ en envoyant $\widetilde{A}$ sur $A$\footnote{La page 16 se sert de
+$\widetilde{X}$ sans le définir ; la page 14 écrit seulement « la paire
+$(\widetilde{X}, \widetilde{A})$ ». La définition précise, en recollant $X
+\smallsetminus A$ et $\widetilde{A}$ par la topologie des rives, n'est pas sur la
+page et n'est pas faite ici.}. On contracte ensuite chacune des deux moitiés
+$\widetilde{A}_{1}$, $\widetilde{A}_{2}$ sur $A$ :
+\[
+\overline{X} = \mathrm{Dec}_{\beta}(A, X) = \widetilde{X}
+\amalg_{\widetilde{A}_{1}} A \amalg_{\widetilde{A}_{2}} A .
+\]
+C'est le \emph{découpage} de $X$ par $\beta$. Il contient une partie canoniquement
+isomorphe à $A \times \beta$, réunion de deux copies $A_{\rho}$, $A_{\rho'}$ de $A$,
+et l'application $\overline{X} \to X$ induit un homéomorphisme
+\[
+\overline{X} \smallsetminus (A_{\rho} \cup A_{\rho'}) \xrightarrow{\ \simeq\ } X
+\smallsetminus A
+\]
+et, sur $A \times \beta$, la projection $A \times \beta \to A$.
+
+\begin{quote}
+\textbf{Définition} (pages 16 et 17). On dit que $(A, \beta)$ définit sur $X$ une
+structure de \emph{maille} de \emph{nœud} $A$ et de bi-rive $\beta$ si
+$(\overline{X}, \{A_{\rho}, A_{\rho'}\})$ est une faille topologique. Orienter la
+maille, c'est orienter cette faille, c'est-à-dire choisir $\rho$ ou $\rho'$.
+\end{quote}
+
+La page 16 formulait d'abord la condition sur $(\widetilde{X}, \{\widetilde{A}_{1},
+\widetilde{A}_{2}\})$, avec « $A$ régulièrement immergé dans $X$ », en notant que
+$\widetilde{A}$ l'est alors dans $\widetilde{X}$\footnote{Un premier nom, « bouclage
+régulier », est biffé au profit de « maille ». La marge dit « réciproque » devant la
+remarque qu'une paire satisfaisant a), b), c) est une faille dès que
+$\widetilde{A}$ est régulièrement immergé.}. Une maille est ainsi un espace obtenu
+en recollant les deux bouts d'une faille par un homéomorphisme : le cercle, obtenu
+d'un segment ; l'anneau, obtenu d'un carré en recollant deux côtés opposés, de
+nœud un rayon. En termes actuels, le nœud d'une maille est une hypersurface
+bilatère non séparante\footnote{Le rapprochement est le nôtre. Pour une variété
+$X$, une telle hypersurface est la fibre en une valeur régulière d'une application lisse
+$X \to S^{1}$, et définit une classe de $H^{1}(X; \mathbf{Z})$ ; la notion de
+maille ne demande aucune de ces structures.}.
+
+\subsection*{Deux mailles compatibles}
+
+Soient $(A_{1}, \beta_{1})$ et $(A_{2}, \beta_{2})$ deux structures de maille sur
+$X$, $\beta_{i} = \{\rho_{i}, \rho'_{i}\}$. On dit qu'elles sont \emph{compatibles}
+si :
+\begin{enumerate}
+\item[a)] $A_{1} \cap A_{2} = \emptyset$, de sorte que $A_{2}$ s'identifie à une
+partie de $\overline{X}^{(A_{1}, \beta_{1})} \smallsetminus A_{1} \times
+\beta_{1}$ ;
+\item[b)] $A_{2}$ est un lieu de la faille $\overline{X}^{(A_{1}, \beta_{1})}$ ;
+\item[c)] si $U$ et $V$ sont les deux parties de $\overline{X}^{(A_{1},\beta_{1})}
+\smallsetminus (A_{1} \times \beta_{1} \cup A_{2})$ que découpe ce lieu, la paire
+$\{U, V\}$ définit à la fois la bi-rive $\beta_{1}$ de $A_{1}$ et la bi-rive
+$\beta_{2}$ de $A_{2}$\footnote{La page parle des « deux composantes connexes » ; par
+définition d'un lieu, ce sont les deux termes de la somme topologique, qui ne sont
+pas nécessairement connexes. La condition c) commence au bas de la page 17 et
+s'achève en haut de la page 18.}.
+\end{enumerate}
+
+Le croquis de la page 17 est un anneau coupé par deux rayons, l'un en haut de nœud
+$A$, l'autre en bas, les deux moitiés étant $U$ et $V$. La page 18 affirme que cette
+condition est en fait symétrique en les deux nœuds $(A_{i}, \beta_{i})$, et le
+texte s'arrête là\footnote{La symétrie n'est pas démontrée. Elle est plausible :
+$U$ et $V$, vus dans $X \smallsetminus (A_{1} \cup A_{2})$, ne dépendent pas de
+l'ordre dans lequel on coupe ; mais b) pour $A_{1}$ dans
+$\overline{X}^{(A_{2},\beta_{2})}$ reste à vérifier.}.
+
+\end{document}
