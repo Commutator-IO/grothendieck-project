@@ -1,0 +1,448 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 106, pages 1-16.
+%
+% This is an INTERPRETATION, not a transcription. Everything the critical
+% apparatus carried moves into footnotes. In any dispute of substance the
+% transcription governs: whoever cites Grothendieck must cite batch-01.fr.tex.
+%
+% Pass: Opus 5 (claude-opus-5), 2026-09-13 — first pass, unchecked against the
+% pages by a human. The folder was read whole; it holds one batch, pages 1-16.
+% His notebook leaves are pages 1, 3, 5, 7, 9, 11, 13, 15 (his 1 to 8); pages
+% 2, 12 and 14 are computer listings carrying trial figures of his; pages 4,
+% 6, 8, 10 and 16 carry nothing of his.
+%
+% What the folder is. One argument about the homotopy category of a category
+% with weak equivalences W and cofibrations cof satisfying Baues's axioms
+% C1-C3. First (pages 1-5): the inclusion of cofibrant objects induces an
+% equivalence of localisations, reduced to a condition (*). Then (pages 5-15),
+% every object being cofibrant: an attempt to compute W^{-1}C by a calculus of
+% fractions x -> y~ <- y, which breaks twice — the inverse of a weak
+% equivalence does not come out (page 9), and faithfulness is not clear (page
+% 11) — is rectified by changing the definition, and ends on a criterion (**)
+% for faithfulness, stated and not proved.
+%
+% Notation fixed for the whole document. C, W, cof; C_cof the full
+% subcategory of cofibrant objects, W_cof = W restricted to it; Ho = W^{-1}C.
+% « cof » kept, as he writes it. A tilde under an arrow marks membership of W
+% and is set as a label. x~ -> x (alpha_x) the cofibrant replacement. Two
+% homonyms separated here: Ch_0(x,y) is page 5's category (i in cof ∩ W, f
+% arbitrary) and Ch'_0(x,y) is page 11's rectified one (f in cof, i in W);
+% C~ and C~' the corresponding categories of components. He writes Ch_0 and
+% C~ for both.
+%
+% Substantive departures from the pages, each footnoted where it occurs:
+% — page 5: the composition law (g,j) o (f,i) = (g'g) . k_y omits f; the
+%   composite is (g'f, kj), g' and k coming from the pushout of g along i.
+% — page 7: f |-> (f, 1d_x) must be (f, 1_y).
+% — page 11: his doubt that inverting W_0 = W ∩ cof suffices is unfounded
+%   when every object is cofibrant: the factorisation of page 9 gives
+%   f = alpha i with alpha g = 1_y and g in W ∩ cof, so [alpha] = [g]^{-1}
+%   and [f] are invertible in W_0^{-1}C (K. S. Brown's factorisation lemma).
+%   The reading says so; what remains open on the leaves is faithfulness.
+% — page 1: the « weak lifting lemma » is used in a form the reading derives
+%   from C1-C3 (factor (alpha_y, f alpha_x) out of y~ v x~).
+%
+% Modern names given and footnoted as ours: cofibration category (Baues),
+% Brown's factorisation lemma, calculus of fractions (Gabriel-Zisman),
+% homotopy calculus of fractions, cofibrant replacement.
+%
+% What the folder announces and never establishes: the independence of the
+% choices in the rectified construction, reduced to (**); the sufficiency of
+% (**) for faithfulness; hence that C~' -> W^{-1}C is an isomorphism. The
+% illegible marginal note of page 13 is not restored.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{106}
+\pages{1}{16}
+\dating{[à partir de 1982]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{[Champs (stacks) 3] : notes manuscrites (s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+En topologie, deux espaces qu'on peut déformer continûment l'un dans l'autre
+sont considérés comme « le même » du point de vue de l'homotopie. Pour en
+faire une mathématique, on part d'une catégorie d'objets et d'une classe de
+flèches qu'on déclare être des équivalences --- les \emph{équivalences
+faibles} --- et l'on fabrique la catégorie où ces flèches sont devenues
+inversibles : la \emph{catégorie homotopique}. La construction formelle est
+simple à écrire et presque impossible à utiliser, car une flèche y est un
+zigzag arbitrairement long de flèches et d'inverses formels.
+
+Tout l'art est de raccourcir les zigzags. Si l'on dispose en plus d'une
+classe de \emph{cofibrations} --- les « bonnes » inclusions, le long
+desquelles on peut recoller --- avec quelques axiomes, on espère que toute
+flèche de la catégorie homotopique s'écrive comme un aller simple suivi d'un
+retour inversible, $x \to \widetilde{y} \leftarrow y$, exactement comme une
+fraction $a/s$ s'écrit avec un seul dénominateur. C'est ce qu'on appelle un
+calcul de fractions.
+
+Ces huit feuillets de bloc, écrits en août 1982 ou après, font cet essai sous
+les axiomes de H.-J.~Baues. Ils commencent par un point acquis : on peut se
+limiter aux objets « cofibrants », sans rien perdre. Puis ils tentent le
+calcul de fractions, et l'on voit l'essai échouer à deux reprises, en clair
+--- « Ça se présente mal ! », « je doute qu'il suffise… » ---, être rectifié
+par un changement de définition, et se réduire pour finir à une condition
+précise sur les sections d'une équivalence faible, qui n'est pas démontrée.
+
+C'est une page de travail au sens propre : on y voit l'endroit exact où une
+construction résiste, et la manière dont on déplace la définition plutôt que
+de forcer la preuve. L'un des deux doutes est d'ailleurs levé par les feuillets
+eux-mêmes, deux pages plus tôt, sans qu'il le remarque.
+
+\keywords{cofibration category, localization, homotopy category, cofibrant replacement, Brown factorization lemma, calculus of fractions}
+\end{resume}
+
+\section*{Le fil du dossier, et les conventions}
+
+\begin{enumerate}
+\item[1.] \emph{Objets cofibrants} (pages 1 à 5) :
+$W_{\mathrm{cof}}^{-1}\mathcal{C}_{\mathrm{cof}} \to W^{-1}\mathcal{C}$ est une
+équivalence si et seulement si une condition $(\star)$ est vérifiée.
+\item[2.] \emph{Premier calcul de fractions} (pages 5 à 9) : les catégories
+$\mathrm{Ch}_{0}(x,y)$, leur composition, la catégorie
+$\widetilde{\mathcal{C}}$, et l'échec sur les inverses.
+\item[3.] \emph{Le foncteur $q$} (page 9) : bijectif sur les objets, plein.
+\item[4.] \emph{Rectification} (pages 11 à 15) : la définition
+$\mathrm{Ch}'_{0}(x,y)$, la comparaison de factorisations, et le critère
+$(\star\star)$.
+\end{enumerate}
+
+\emph{Conventions.} $\mathcal{C}$ est une catégorie munie de deux classes de
+flèches, les équivalences faibles $W$ et les cofibrations
+$\mathrm{cof}$, satisfaisant aux axiomes C1 à C3 de Baues, avec un objet
+initial $\emptyset$.\footnote{Ce sont les axiomes d'une \emph{catégorie à
+cofibrations} au sens de H.-J.~Baues (exposés dans \emph{Algebraic Homotopy},
+1989) : C1, les isomorphismes sont dans $W$ et dans $\mathrm{cof}$, et $W$
+satisfait au deux-sur-trois ; C2, les sommes amalgamées le long d'une
+cofibration existent, et les cofibrations, ainsi que les cofibrations
+triviales, sont stables par ce changement de base ; C3, toute flèche se factorise en une
+cofibration suivie d'une équivalence faible. Il écrit « C1 : C3 de Baues » et
+ne les rappelle pas ; la page 5 dit que les seules sommes amalgamées « dont
+on postule l'existence » sont celles le long d'une cofibration. Le listing
+des pages 12 et 14 est daté par la machine des 24 et 25 août 1982.}
+$\mathcal{C}_{\mathrm{cof}}$ est la sous-catégorie pleine des objets
+cofibrants et $W_{\mathrm{cof}}$ la restriction de $W$. Une flèche marquée
+$\sim$ est dans $W$.
+
+\emph{Deux définitions sous un même nom.} La page 5 appelle
+$\underline{Ch}_{0}(x,y)$ la catégorie des diagrammes
+$x \xrightarrow{f} \widetilde{y} \xleftarrow{i} y$ avec $i \in \mathrm{cof}
+\cap W$ ; la page 11 reprend le même nom pour les diagrammes où
+$f \in \mathrm{cof}$ et $i \in W$. On écrit ici $\mathrm{Ch}_{0}$ pour la
+première, $\mathrm{Ch}'_{0}$ pour la seconde, et $\widetilde{\mathcal{C}}$,
+$\widetilde{\mathcal{C}}'$ pour les catégories qu'on en tire.
+
+\emph{Ce que le dossier annonce et n'établit pas} : que le choix des
+factorisations dans la construction rectifiée n'importe pas, ramené à
+$(\star\star)$ ; que $(\star\star)$ suffise à la fidélité ; et donc que
+$\widetilde{\mathcal{C}}' \to W^{-1}\mathcal{C}$ soit un isomorphisme.
+
+\pagerange{1}{3}
+\section*{Les objets cofibrants suffisent (pages 1 à 3)}
+
+\textbf{Énoncé connu.} Le foncteur $\Psi :
+W_{\mathrm{cof}}^{-1}\mathcal{C}_{\mathrm{cof}} \to W^{-1}\mathcal{C}$ induit
+par l'inclusion est une équivalence de catégories.\footnote{Il écrit « Alors il
+est connu que », entre parenthèses. L'énoncé est en effet classique pour les
+catégories à cofibrations. Une note au coin de la page, coupée d'un trait,
+porte « Ho $\mathcal{C}$ » et « cat.\ de […] co/fibrations ? », l'abréviation
+du milieu ne se résolvant pas.} Pour le voir, on construit un quasi-inverse
+$\Phi : W^{-1}\mathcal{C} \to W_{\mathrm{cof}}^{-1}\mathcal{C}_{\mathrm{cof}}$,
+c'est-à-dire un foncteur $\mathcal{C} \to
+W_{\mathrm{cof}}^{-1}\mathcal{C}_{\mathrm{cof}}$ qui rend inversibles les
+flèches de $W$.
+
+\emph{Remplacement cofibrant.} Pour tout $x$, C3 appliqué à $\emptyset \to x$
+donne $\alpha_{x} : \widetilde{x} \to x$ dans $W$ avec $\widetilde{x}$
+cofibrant.
+
+\emph{Relèvement faible.} Soit $f : x \to y$. On ne peut pas relever
+$f\alpha_{x} : \widetilde{x} \to y$ à $\widetilde{y}$, mais on peut le relever à
+un $\widetilde{y}'$ : il existe $i : \widetilde{y} \to \widetilde{y}'$ dans
+$\mathrm{cof} \cap W$, $\alpha'_{y} : \widetilde{y}' \to y$ dans $W$ avec
+$\alpha_{y} = \alpha'_{y}\, i$, et $\widetilde{f} : \widetilde{x} \to
+\widetilde{y}'$ avec $\alpha'_{y}\widetilde{f} = f\alpha_{x}$.
+
+\begin{tikzcd}[column sep=small, row sep=small, nodes={font=\scriptsize}]
+\widetilde{x} \arrow[r, "\widetilde{f}"] \arrow[d, "\underset{\sim}{\alpha_x}"'] & \widetilde{y}\,' \arrow[d, "\underset{\sim}{\alpha'_y}"] & \widetilde{y} \arrow[l, "i"'] \arrow[dl, "\underset{\sim}{\alpha_y}"] \\
+x \arrow[r, "f"'] & y &
+\end{tikzcd}
+
+On l'obtient en factorisant $(\alpha_{y}, f\alpha_{x}) : \widetilde{y} \vee
+\widetilde{x} \to y$ en une cofibration suivie d'une équivalence faible ;
+$\widetilde{y} \to \widetilde{y} \vee \widetilde{x}$ est une cofibration parce
+que $\widetilde{x}$ est cofibrant, et $i$ est dans $W$ par
+deux-sur-trois.\footnote{La page invoque le « weak lifting lemma » de Baues
+sans l'énoncer ; on donne la forme sous laquelle elle l'utilise et la manière
+de l'obtenir sous C1--C3.}
+
+On pose $\Phi(f) = [i]^{-1}[\widetilde{f}] : \widetilde{x} \to \widetilde{y}$
+dans $W_{\mathrm{cof}}^{-1}\mathcal{C}_{\mathrm{cof}}$.
+
+\emph{Indépendance des choix.} Deux choix $(i_{1}, \alpha'_{1},
+\widetilde{f}_{1})$ et $(i_{2}, \alpha'_{2}, \widetilde{f}_{2})$ se comparent
+dans la somme amalgamée $\widetilde{y}'_{1} \vee_{\widetilde{y}}
+\widetilde{y}'_{2}$, et l'on est ramené à la condition :
+
+\begin{enumerate}
+\item[$(\star)$] si $x', y'$ sont cofibrants, $\varphi, \psi : x' \to y'$, et
+$\alpha : y' \to y$ est dans $W$ avec $\alpha\varphi = \alpha\psi$, alors
+$[\varphi] = [\psi]$ dans $W_{\mathrm{cof}}^{-1}\mathcal{C}_{\mathrm{cof}}$.
+\end{enumerate}
+
+Sous $(\star)$, on obtient un foncteur $\mathcal{C} \to
+W_{\mathrm{cof}}^{-1}\mathcal{C}_{\mathrm{cof}}$, la compatibilité aux
+identités et aux compositions étant immédiate.\footnote{Le feuillet de listing
+de la page 2, tourné d'un quart de tour, est couvert d'essais de ce même
+diagramme --- deux relèvements dans $\widetilde{y}'$ et $\widetilde{y}''$ et leur
+somme amalgamée sous $\widetilde{y}$ ---, sans étiquettes.}
+
+\emph{Il rend $W$ inversible} (page 3). Si $f \in W$, alors $f\alpha_{x}$ et
+$\alpha'_{y}$ sont dans $W$, donc $\widetilde{f}$ aussi, et $[\widetilde{f}]$
+est un isomorphisme.
+
+\emph{Les deux composés.} $\Phi\Psi$ est l'identité : pour $x$ cofibrant on
+choisit $\widetilde{x} = x$ et $\alpha_{x} = 1$. Pour $\Psi\Phi$, il faut voir
+que $R : x \mapsto \widetilde{x}$, $\mathcal{C} \to W^{-1}\mathcal{C}$, est
+isomorphe au foncteur canonique par les isomorphismes $[\alpha_{x}]$,
+c'est-à-dire que
+\[
+[\alpha_{y}]\,\bigl([i_{f}]^{-1}[\widetilde{f}]\bigr) = [f]\,[\alpha_{x}] .
+\]
+Or $\alpha_{y} = \beta_{f}\, i_{f}$, où $\beta_{f} = \alpha'_{y}$, donne
+$[\alpha_{y}][i_{f}]^{-1} = [\beta_{f}]$, et $[\beta_{f}\widetilde{f}] =
+[f\alpha_{x}] = [f][\alpha_{x}]$.
+
+\pagerange{5}{5}
+\section*{La proposition, et le passage aux objets cofibrants (page 5)}
+
+\textbf{Proposition.} Pour que $\Psi :
+W_{\mathrm{cof}}^{-1}\mathcal{C}_{\mathrm{cof}} \to W^{-1}\mathcal{C}$ soit une
+équivalence de catégories, il faut et il suffit que la condition $(\star)$ soit
+vérifiée ; elle est d'ailleurs impliquée par la fidélité de $\Psi$.
+
+La suffisance est ce qui précède. La nécessité vient de ce que $[\varphi] =
+[\psi]$ dans $W^{-1}\mathcal{C}$, $[\alpha]$ y étant inversible.\footnote{Il
+ajoute un « ? » en interligne après « il f.\ et s. ». Comme l'énoncé
+initial est vrai pour les catégories à cofibrations, $(\star)$ l'est aussi : la
+proposition ne dit rien de faux, et le point d'interrogation porte sur ce que
+les feuillets démontrent, non sur ce qui est vrai.}
+
+\emph{Réduction.} On travaille désormais dans $\mathcal{C}_{\mathrm{cof}}$, en
+changeant les notations : \emph{tout objet de $\mathcal{C}$ est cofibrant}.
+C'est légitime, car $\mathcal{C}_{\mathrm{cof}}$, avec les classes induites,
+satisfait encore C1--C3, l'inclusion commutant aux sommes amalgamées le long
+d'une cofibration --- « les seules sommes dont on postule l'existence ! ».
+
+\pagerange{5}{7}
+\section*{Premier calcul de fractions (pages 5 et 7)}
+
+Pour deux objets $x, y$, soit $\mathrm{Ch}_{0}(x,y)$ la petite catégorie des
+diagrammes
+\[
+x \xrightarrow{\;f\;} \widetilde{y} \xleftarrow{\;i\;} y,
+\qquad i \in \mathrm{cof} \cap W,
+\]
+une flèche $(f, i) \to (f', i')$ étant une flèche $u : \widetilde{y} \to
+\widetilde{y}'$ telle que $uf = f'$ et $ui = i'$.\footnote{La page donne
+seulement les objets, et dit la catégorie « petite, connexe » suivi d'un mot
+illisible ; les flèches sont celles que le passage aux composantes connexes
+de la page 7 suppose.}
+
+\emph{Composition.} Pour $(f, i) \in \mathrm{Ch}_{0}(x,y)$ et $(g, j) \in
+\mathrm{Ch}_{0}(y,z)$, soit $\widetilde{z}'$ la somme amalgamée de
+$\widetilde{y} \xleftarrow{i} y \xrightarrow{g} \widetilde{z}$, avec
+$g' : \widetilde{y} \to \widetilde{z}'$ et $k : \widetilde{z} \to
+\widetilde{z}'$. Comme $i \in \mathrm{cof} \cap W$, $k$ l'est aussi, par C2, et
+l'on pose
+\[
+(g, j) \circ (f, i) = (g' f,\ k j) \in \mathrm{Ch}_{0}(x,z).
+\]
+
+\begin{tikzcd}[column sep=small, row sep=small, nodes={font=\scriptsize}]
+x \arrow[r, "f"] & \widetilde{y} \arrow[d, "g'"'] & y \arrow[l, "i"'] \arrow[d, "g"] & \\
+& \widetilde{z}\,' & \widetilde{z} \arrow[l, "k"] & z \arrow[l, "j"']
+\end{tikzcd}
+
+Le composé est bien défini à isomorphisme près, la somme amalgamée
+l'étant.\footnote{La page écrit « $(g,j) \circ (f,i) = (g'g) \cdot k_{y}$ »,
+dont le membre de droite ne fait pas intervenir $f$ ; le dernier facteur est
+lu $k_{y}$ avec doute. Le composé que la somme amalgamée fournit est celui
+qu'on écrit. Sur le feuillet, $k$ est marqué « cocart » et $g'$ désigne
+bien le composé $\widetilde{y} \to \widetilde{z}'$.}
+
+\emph{La catégorie $\widetilde{\mathcal{C}}$} (page 7). Cette composition est
+associative à isomorphisme canonique près et admet pour unités, à
+isomorphisme canonique près, les $\underline{1}_{x} = (1_{x}, 1_{x})$. On a
+des foncteurs $\mathrm{Hom}_{\mathcal{C}}(x,y)_{\text{discret}} \to
+\mathrm{Ch}_{0}(x,y)$, $f \mapsto (f, 1_{y})$, compatibles aux
+compositions.\footnote{La page écrit $(f, 1d_{x})$, avec un chiffre un ; la
+seconde composante doit être une flèche $y \to y$.} Posant
+\[
+\pi_{0}(x,y) = \pi_{0}\bigl(\mathrm{Ch}_{0}(x,y)\bigr),
+\]
+la composition passe aux composantes connexes et y devient associative et
+unitaire. D'où une catégorie $\widetilde{\mathcal{C}}$, de mêmes objets que
+$\mathcal{C}$, et un foncteur $\mathcal{C} \to \widetilde{\mathcal{C}}$.
+
+\emph{La question.} Ce foncteur rend-il inversibles les flèches de $W$ ? Pour
+$f : x \to y$ dans $W$, on cherche $(g, i)$ tel que $(g,i) \circ (f, 1_{y})$
+soit dans la composante de $\underline{1}_{x}$ et $(f, 1_{y}) \circ (g,i)$ dans
+celle de $\underline{1}_{y}$.
+
+\pagerange{9}{9}
+\section*{L'échec, et le foncteur $q$ (page 9)}
+
+\emph{La factorisation.} Soit $f : x \to y$ dans $W$. Factorisons
+$(f, 1_{y}) : x \sqcup y \to y$ en une cofibration $x \sqcup y \to \bar{x}$
+suivie d'une équivalence faible $\alpha : \bar{x} \to y$, et notons $i$ et $g$
+les composés de $x \to x \sqcup y$ et $y \to x \sqcup y$ avec
+$x \sqcup y \to \bar{x}$. Alors
+\[
+\alpha i = f, \qquad \alpha g = 1_{y}, \qquad i, g \in \mathrm{cof} \cap W,
+\]
+$i$ et $g$ étant des cofibrations parce que $x$ et $y$ sont cofibrants, et des
+équivalences faibles par deux-sur-trois.\footnote{La page présente la
+factorisation par le « weak lifting lemme », avec un diagramme pointillé, et
+note en marge « on utilise $y \in \mathcal{C}_{\mathrm{cof}}$ ici ». Elle dit
+$i \in W \cap \mathrm{cof}$ et « $\alpha$ admet une section $g$ », sans
+relever que $g$ est aussi dans $\mathrm{cof} \cap W$ --- ce qui servira plus
+bas. C'est le lemme de factorisation de K.~S.~Brown ; le nom n'est pas sur la
+page.}
+
+\emph{L'inverse proposé.} « Je dis que $(g, i)$ est l'inverse cherché. » Pour
+voir que $(gf, i)$ est dans la composante de $\underline{1}_{x}$, on voudrait
+utiliser le carré $\alpha i = f \cdot 1_{x}$ ; mais $\alpha$ n'est pas une
+cofibration, et $\alpha i = f$, qui est dans $W$, ne l'est pas davantage.
+Il faudrait une $\beta : y \to y'$ dans $W$ telle que $\beta f$ soit dans
+$\mathrm{cof}$, ce qui n'est visiblement pas possible en général --- prendre
+pour cofibrations les monomorphismes, et $f$ non mono. « Ça se présente
+mal ! »
+
+\emph{Le foncteur $q$.} On définit plutôt
+\[
+q : \widetilde{\mathcal{C}} \longrightarrow W^{-1}\mathcal{C},
+\qquad x \mapsto x, \qquad (f, i) \mapsto [i]^{-1}[f],
+\]
+compatible aux identités et à la composition, et bien défini sur les
+composantes : une flèche $u$ de $(f,i)$ vers $(f',i')$ est dans $W$ par
+deux-sur-trois, et $[i']^{-1}[f'] = [ui]^{-1}[uf]$. Il est bijectif sur les
+objets. Il est \emph{plein} : toute flèche de $W^{-1}\mathcal{C}$ est un
+composé de $[f]$ et de $[w]^{-1}$, $w \in W$, et il suffit que $[f]^{-1}$
+provienne de $\widetilde{\mathcal{C}}$ pour $f \in W$. Or $q(g, i) =
+[i]^{-1}[g]$ et, de $\alpha i = f$, $[f][i]^{-1} = [\alpha]$, d'où
+$[f]\,[i]^{-1}[g] = [\alpha][g] = [\alpha g] = [1_{y}]$.
+
+\pagerange{11}{12}
+\section*{Le doute, et la rectification (page 11)}
+
+\emph{La difficulté} est qu'il n'est pas clair que $q$ soit \emph{fidèle} --- ce
+qui en ferait un isomorphisme de catégories.
+
+\emph{Le doute.} Le foncteur $q$ se factorise visiblement par
+\[
+\widetilde{\mathcal{C}} \longrightarrow W_{0}^{-1}\mathcal{C}
+\longrightarrow W^{-1}\mathcal{C}, \qquad W_{0} = W \cap \mathrm{cof},
+\]
+et il faudrait que la seconde flèche soit une équivalence. « Mais je doute
+qu'il ne suffise d'inverser les équiv.\ faibles \emph{cofibrantes}, pour que les
+équiv.\ faibles deviennent inversibles ! »
+
+Le doute n'est pas fondé, et la page 9 contient de quoi le lever. Quand tous
+les objets sont cofibrants, toute $f \in W$ s'écrit $f = \alpha i$ avec
+$\alpha g = 1_{y}$ et $i, g \in W_{0}$. Dans $W_{0}^{-1}\mathcal{C}$, $[g]$ est
+inversible et $[\alpha][g] = 1$, donc $[\alpha] = [g]^{-1}$ est inversible, et
+$[f] = [\alpha][i]$ aussi. Ainsi $W_{0}^{-1}\mathcal{C} \to W^{-1}\mathcal{C}$
+est un isomorphisme de catégories.\footnote{L'argument est le nôtre, mais
+chacun de ses éléments est sur la page 9. Il ne règle pas la question de la
+page : que $W_{0}^{-1}\mathcal{C} = W^{-1}\mathcal{C}$ ne dit pas que les
+fractions $[i]^{-1}[f]$ à un seul dénominateur, prises à composante connexe
+près, suffisent à décrire les flèches, ni que deux fractions égales dans la
+localisation soient dans la même composante. C'est la fidélité de $q$ qui
+reste ouverte.}
+
+\emph{La rectification.} Il change donc de définition : $\mathrm{Ch}'_{0}(x,y)$
+est la catégorie des diagrammes
+\[
+x \xrightarrow{\;f\;} \widetilde{y} \xleftarrow{\;i\;} y,
+\qquad f \in \mathrm{cof}, \quad i \in W,
+\]
+et $\widetilde{\mathcal{C}}'$ la catégorie des $\pi_{0}(\mathrm{Ch}'_{0}(x,y))$.
+La page 5 demandait $i \in \mathrm{cof} \cap W$ sans rien demander à $f$ ;
+la page 11 déplace la condition de cofibration du dénominateur au
+numérateur.\footnote{Il écrit $\underline{Ch}_{0}$ et $\widetilde{\mathcal{C}}$
+pour les deux constructions. C'est le point de bascule du dossier ; on les
+distingue par un prime.}
+
+\pagerange{13}{15}
+\section*{Comparer deux factorisations, et le critère $(\star\star)$ (pages 13 à 15)}
+
+\emph{L'image d'une flèche.} Soit $f : x \to y$. Par C3, $f = \alpha f_{0}$ avec
+$f_{0} : x \to \bar{y}$ cofibration et $\alpha : \bar{y} \to y$ dans $W$ ; et,
+$y$ étant cofibrant, on peut supposer que $\alpha$ admet une section $i$,
+comme à la page 9. Le diagramme $(f_{0}, i)$ est dans $\mathrm{Ch}'_{0}(x,y)$,
+et $q(f_{0}, i) = [i]^{-1}[f_{0}] = [\alpha][f_{0}] = [f]$.\footnote{La page 13
+est la moins lisible du dossier : un palimpseste rapide, deux blocs annulés,
+et une note marginale en biais qu'on ne restitue pas. On donne la
+construction dans la forme que les pages 14 et 15 permettent de reconstituer.}
+
+\emph{Deux factorisations} $f = \alpha f_{0} = \alpha' f'_{0}$ se comparent à
+une troisième. La somme amalgamée de
+\[
+x \xleftarrow{\;\nabla_{x}\;} x \vee x \xrightarrow{\;f_{0} \vee f'_{0}\;}
+\bar{y} \sqcup \bar{y}'
+\]
+existe, $f_{0} \vee f'_{0}$ étant une cofibration ; soit $\widetilde{y}$ cette
+somme et $g : x \to \widetilde{y}$, cofibration par C2. Les flèches $(\alpha,
+\alpha')$ et $f$ induisent $\varphi : \widetilde{y} \to y$, qu'on factorise en
+$\varphi = \alpha''\varphi_{0}$, $\varphi_{0} \in \mathrm{cof}$,
+$\alpha'' \in W$. Posant $f''_{0} = \varphi_{0}\, g$, on obtient des flèches de
+factorisations $(f_{0}, \alpha) \to (f''_{0}, \alpha'')$ et
+$(f'_{0}, \alpha') \to (f''_{0}, \alpha'')$.
+
+\begin{tikzcd}[column sep=small, row sep=small, nodes={font=\scriptsize}]
+x \vee x \arrow[r, "f_0 \vee f'_0"] \arrow[d, "\nabla_x"'] & \bar{y} \sqcup \bar{y}\,' \arrow[d] \arrow[dr, "{(\alpha, \alpha')}"] & \\
+x \arrow[r, "g"'] & \widetilde{y} \arrow[r, "\varphi"'] & y
+\end{tikzcd}
+
+Il reste à comparer les sections\footnote{Le bloc de trois carrés de sommes amalgamées porté de sa
+main dans la marge du listing de la page 14 est la préparation de ce
+diagramme. Sur la page 15, $\varphi_{0}$ va de $\widetilde{y}$ dans un
+$\bar{y}''$ et $\alpha''$ de $\bar{y}''$ dans $y$ ; le carré de gauche est
+marqué « cocart ».} : il suffirait que les
+sections de $\alpha$ et $\alpha'$ soient compatibles avec une section de
+$\alpha''$, et ce n'est pas automatique.
+
+\emph{La réduction.} Comme $(f_{0}, i) = (\mathrm{id}_{\bar{y}}, i) \circ
+(f_{0}, \mathrm{id}_{\bar{y}})$, tout se ramène au choix de la section :
+
+\begin{enumerate}
+\item[$(\star\star)$] Soit $f : x \to y$ dans $W$, et $i, i' : y \to x$ deux
+sections de $f$. Alors $(1_{x}, i)$ et $(1_{x}, i')$ sont dans la même
+composante connexe de $\mathrm{Ch}'_{0}(x,y)$.
+\end{enumerate}
+
+\textbf{Énoncé final.} La condition $(\star\star)$ est nécessaire et suffisante
+pour que $q' : \widetilde{\mathcal{C}}' \to W^{-1}\mathcal{C}$ soit fidèle,
+donc un isomorphisme.
+
+La nécessité est claire : $f i = 1_{y}$ donne $[i]^{-1} = [f]$, de sorte que
+$q'(1_{x}, i) = [i]^{-1} = [f] = [i']^{-1} = q'(1_{x}, i')$ ; si $q'$ est
+fidèle, les deux diagrammes définissent la même flèche de
+$\widetilde{\mathcal{C}}'$, c'est-à-dire sont dans la même composante. La suffisance est affirmée, et le dossier s'arrête
+là.\footnote{La page écrit « (nec.\ et) suffis. », la nécessité entre
+parenthèses. Le nom de la construction dans la langue d'aujourd'hui est un
+\emph{calcul de fractions à homotopie près}. P.~Gabriel et M.~Zisman (1967) ont
+donné les conditions d'un calcul de fractions exact ; K.~S.~Brown (1973), pour
+les catégories d'objets fibrants, et plus tard D.-C.~Cisinski, pour les
+catégories dérivables, décrivent les flèches de la catégorie homotopique par
+des fractions à un seul dénominateur prises à homotopie près, et non à
+composante connexe près d'une catégorie de diagrammes. Cette lecture ne
+tranche pas si $(\star\star)$ est vraie sous C1--C3 ; elle signale que la
+littérature ne l'utilise pas sous cette forme, à notre connaissance.}
+
+\end{document}
