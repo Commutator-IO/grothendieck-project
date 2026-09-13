@@ -1,0 +1,783 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 141 (pages 1-15).
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried moves into
+% a footnote. It is held to being mathematically correct as it stands; where
+% the manuscript is loose or mistaken the true statement appears and the
+% footnote says what the page has. In any dispute of substance the
+% transcription governs: whoever cites Grothendieck cites batch-01.fr.tex.
+%
+% Scope: a single document for the whole folder. The shelfmark holds one
+% batch (pages 1-15), read whole before any of this was written. Pages 2, 4
+% and 6 are typed administrative notices, dated November 1980, with nothing
+% in his hand.
+%
+% The folder has no single argument. It holds four runs on four kinds of
+% paper — Kummer theory (1, 3, 5), classifying spaces (7-8), cartographic
+% groups (9-10), pi-sets and bitorsors (11-15) — and the spine section says
+% so rather than inventing a thread. Two connections between runs are this
+% reading's and are flagged as such: the group pi_1(X, Gamma, a) of page 14
+% is the combinatorial model of the pi_1(X, pi) of page 8; and the involution
+% epsilon of pages 11 and 14 is the Z/2-extension of page 13, whose coherence
+% condition is the F mu = mu F of page 15.
+%
+% Notation fixed for the whole folder. Groups act on the left unless said
+% otherwise; Ens(pi) is the category of left pi-sets; a (pi', pi)-biset is a
+% set with a left pi'-action and a commuting right pi-action, written
+% {}_{pi'}X_{pi}; X x_pi E is the contracted product (quotient of X x E by
+% (x lambda, e) ~ (x, lambda e)). Bit(pi', pi) is the groupoid of
+% (pi', pi)-bitorsors, Isomext(pi', pi) = Isom(pi', pi)/Int(pi), Out(pi) =
+% Isomext(pi, pi). H^1(X, pi) is the set of isomorphism classes of principal
+% pi-coverings. mu_n, G_m, Pic as usual; the page's Rev(S, mu_n) is written
+% H^1(S, mu_n).
+%
+% Substantive departures from the page, with pages.
+%  - Page 1: « K*/K*^n = Z/nZ » and « every extension is cyclic » use that V
+%    is henselian and that 1 + m and k* are n-divisible; supplied. The
+%    residue-characteristic-p statement needs V henselian (the page only says
+%    « pas nécessairement complet ») and is a statement about the TAME
+%    quotient of pi_1(K); the full pi_1(K) has a pro-p wild inertia.
+%  - Page 3: the map pi_1(S, sbar) -> lim mu_n(S) is written without saying
+%    what defines it; it is read as the Kummer character of a unit a, and the
+%    page's condition on n (read « premier à s ») as n invertible on S.
+%  - Page 5: the first line omits the second H^0(S, G_m) and the n-th power
+%    map; exactness of the Kummer sequence needs n invertible on S (étale
+%    topology) or the fppf topology; a must be a unit.
+%  - Page 7: the theorem needs X to range over CW complexes (or paracompact
+%    spaces) and « contractile » is « faiblement contractile » in general.
+%  - Page 8: « défini à isom. unique près » holds for the pair (B, class of E),
+%    not for B alone, whose self-equivalences realise Out(pi).
+%  - Page 9: the page never defines Gamma_{p,q} nor says which rotation p and
+%    q bound; its two mentions of rho_s (rho_s^3 = 1 in Gamma_{infty,3},
+%    rho_s^p alone) are compatible only with different conventions. Only
+%    statements independent of that choice are made. « C_{p',q'} = C_{p,q}/R »
+%    is restated as a full embedding with a left adjoint E |-> E/R.
+%  - Page 9: the special value of the modular invariant is 1728 = 2^6.3^3; the
+%    page has what reads 2^3.3^4.
+%  - Page 11: 𝒞 must be cocomplete (read « avec lim-> »); the rule rho_1 |->
+%    rho_infty rho_0 defines an automorphism only for the relation
+%    rho_infty rho_1 rho_0 = 1 (equivalently rho_1 rho_0 rho_infty = 1), not
+%    for rho_0 rho_1 rho_infty = 1.
+%  - Page 13: the struck definition pi_I = L_I/(lambda_0...lambda_{n-1}) is
+%    the ORIENTED group pi_I^+, which the page then writes; kept apart.
+%  - Page 14: a first product law, on the left, does not compose; the law on
+%    the right does and is the one given.
+%  - Page 15: Bit(pi', pi) -> Isomext(pi', pi) is a bijection on isomorphism
+%    classes; the groupoid also has automorphisms, the centre Z(pi), which the
+%    page does not mention.
+%
+% Announced and never established in the folder: the equivalence 1) <=> 2) of
+% Thm 1 (the card breaks off at « 2) E est contractile »); Thm 2 (stated, not
+% proved); the equivalences Bit.invol(pi) = Invol(Ens(pi)) = Ext(Z/2, pi) of
+% page 13 (stated; the reading sketches why they hold); the « carte trouée »
+% of page 10, whose definition is left at its first line.
+%
+% The archivists' title « note Alexandre (bi tenseur…) » is not discussed by
+% the pages; « bitorseur », the word of pages 12-15, is offered in the spine
+% section as a likely reading of « bi tenseur », and only as that.
+%
+% Pass: Opus 5 (claude-opus-5), 2026-09-13 — first pass, unchecked against the pages by a human.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{141}
+\pages{1}{15}
+\dating{[à partir de 1980]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Théorie de Kumer ? + note Alexandre (bi tenseur…) : notes manuscrites (s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Ces quinze pages tournent autour d'une seule question, prise sous quatre
+angles : quand un objet se « déplie » en plusieurs copies de lui-même qu'un
+groupe permute, qu'est-ce qui classe toutes les façons de le faire ?
+
+L'image la plus simple est celle des racines. Au-dessus d'un nombre $a$, les
+$n$ racines $n$-ièmes de $a$ forment un petit ensemble que le groupe des
+racines de l'unité fait tourner sur lui-même ; faire varier $a$, c'est faire
+varier ce « revêtement ». La \emph{théorie de Kummer}, à laquelle s'ouvrent les
+pages 1 à 5, dit que sur certains corps toutes les extensions sont de cette
+forme, et en tire une description complète de leur groupe de Galois ; puis
+elle passe à un espace de base quelconque, où les revêtements de ce type sont
+comptés par une suite exacte qui mêle les fonctions inversibles et les fibrés
+en droites.
+
+Les pages 7 et 8 font la même chose en topologie. Pour un groupe $\pi$, il
+existe un espace $B$ — l'\emph{espace classifiant} — tel que se donner un
+revêtement de groupe $\pi$ au-dessus d'un espace $X$ revienne exactement à se
+donner une application de $X$ dans $B$, à déformation près : comme une carte
+routière contient d'avance tous les trajets qu'on pourra y tracer. Ce qui
+caractérise $B$ est d'une simplicité frappante : son grand revêtement doit être
+contractile.
+
+Les pages 9 et 10 sont des esquisses d'un tout autre ton, au feutre, pleines de
+sphères, de polygones et de flèches. Ce sont les \emph{cartes} : des graphes
+dessinés sur des surfaces, que Grothendieck décrit au même moment par un
+groupe, le « groupe cartographique », agissant sur les drapeaux (sommet, arête,
+face) de la carte. Une carte devient un ensemble muni d'une action de groupe, et
+le groupe modulaire $SL(2, \mathbb{Z})$ apparaît au passage, comme le groupe
+des triangulations.
+
+Les pages 11 à 15, enfin, reprennent la question dans le langage le plus nu :
+celui des ensembles sur lesquels un groupe agit. Quand deux groupes ont-ils
+« les mêmes » ensembles à action ? Exactement quand il existe entre eux un
+\emph{bitorseur} — un ensemble sur lequel l'un agit à gauche, l'autre à droite,
+chacun librement et transitivement. Ce n'est pas tout à fait la même chose
+qu'un isomorphisme : c'est un isomorphisme connu seulement à conjugaison près,
+et cette nuance est le cœur des dernières pages, qui s'achèvent sur les
+bitorseurs « involutifs », où revient, semble-t-il, la conjugaison complexe
+agissant sur la sphère privée de quelques points.
+
+Les feuillets datent vraisemblablement de 1980 ou peu après : les versos
+administratifs sont de novembre 1980, quelques mois avant \emph{La Longue
+Marche à travers la théorie de Galois} (1981), dont le dossier est voisin dans
+l'inventaire, et quelques années avant l'\emph{Esquisse d'un programme} (1984),
+où les cartes et le groupe cartographique sont exposés.
+
+\keywords{Kummer theory, tame fundamental group, Kummer sequence, classifying space, Eilenberg–MacLane space, Borel construction, cartographic group, dessins d'enfants, extended modular group, free cocompletion, bitorsor, outer automorphism group, group extension, reflection group of an ideal polygon}
+\end{resume}
+
+\pagerange{1}{15}
+\section*{Le fil du dossier, et les conventions}
+
+Le dossier n'est pas un argument suivi. Il réunit quatre ensembles de
+feuillets, qui se distinguent à l'œil — encre, papier, format — autant que par
+le sujet ; aucun ne porte de titre de la main de Grothendieck.
+
+\begin{itemize}
+  \item \textbf{Pages 1, 3, 5 : théorie de Kummer.} Sur un anneau de
+    valuation discrète, puis sur un schéma quelconque ; stylo bleu, grands
+    caractères.
+  \item \textbf{Pages 7 et 8 : espace classifiant d'un groupe discret.} Deux
+    fiches de petit format, deux théorèmes, la construction de Borel.
+  \item \textbf{Pages 9 et 10 : cartes et groupes cartographiques.} Pages
+    d'esquisses au feutre, formules dispersées et dessins.
+  \item \textbf{Pages 11 à 15 : $\pi$-ensembles et bitorseurs.} Papier fin,
+    encre noire ; les pages 11 et 12 sont numérotées ① et ② de sa main. Le
+    seul ensemble qui ait la forme d'une rédaction, avec Proposition et
+    Corollaire.
+\end{itemize}
+
+Ce qui les rapproche est une question plutôt qu'un théorème : un groupe
+classe les torseurs sous lui, et l'on cherche chaque fois l'objet qui porte
+cette classification — le groupe $\varprojlim \mu_n$ de Kummer, l'espace $B\pi$,
+le groupe cartographique, la catégorie $\mathrm{Ens}(\pi)$. Deux liens entre
+les ensembles sont de cette lecture et non des pages : le groupe
+$\pi_1(X, \Gamma, a)$ de la page 14 est le modèle combinatoire du
+$\pi_1(X, \pi)$ de la page 8, et l'involution $\varepsilon$ des pages 11 et 14
+est un exemple des extensions par $\mathbb{Z}/2$ de la page 13, dont la page 15
+écrit la condition de cohérence.
+
+Le titre de l'inventaire, « note Alexandre (bi tenseur…) », n'est éclairé par
+aucune page ; « bitorseur », le mot des pages 12 à 15, en est une lecture
+vraisemblable, rien de plus.
+
+\textbf{Conventions, valables pour tout le dossier.} Les groupes agissent à
+gauche sauf mention contraire ; $\mathrm{Ens}(\pi)$ est la catégorie des
+$\pi$-ensembles à gauche. Un $(\pi', \pi)$-ensemble ${}_{\pi'}X_{\pi}$ porte une
+action de $\pi'$ à gauche et une action de $\pi$ à droite qui commutent ; le
+\emph{produit contracté} $X \times_{\pi} E$ d'un $\pi$-ensemble à droite $X$ et
+d'un $\pi$-ensemble à gauche $E$ est le quotient de $X \times E$ par
+$(x\lambda, e) \sim (x, \lambda e)$. Un $(\pi', \pi)$-\emph{bitorseur} est un
+$(\pi', \pi)$-ensemble sur lequel chacune des deux actions est libre et
+transitive ; $\mathrm{Bit}(\pi', \pi)$ désigne le groupoïde qu'ils forment. On
+note $\mathrm{Int}(\pi)$ les automorphismes intérieurs,
+$\mathrm{Isomext}(\pi', \pi) = \mathrm{Isom}(\pi', \pi)/\mathrm{Int}(\pi)$ et
+$\mathrm{Out}(\pi) = \mathrm{Isomext}(\pi, \pi)$. Pour un espace $X$,
+$H^1(X, \pi)$ est l'ensemble des classes d'isomorphisme de revêtements
+principaux de groupe $\pi$.
+
+\pagerange{1}{5}
+\section*{Théorie de Kummer (pages 1, 3 et 5)}
+
+\pagerange{1}{1}
+\subsection*{Le corps des fractions d'un anneau de valuation discrète}
+
+Soit $V$ un anneau de valuation discrète complet\footnote{La page écrit
+« a.v.d. noethérien ; complet », lecture incertaine de l'abréviation ; un
+anneau de valuation discrète est de toute façon noethérien. Ce qui sert
+ci-dessous est que $V$ soit hensélien, ce qu'entraîne la complétude.}, de
+corps résiduel $k$ et de corps des fractions $K$ ; soit $\varpi$ une
+uniformisante et $\overline{K}$ une clôture algébrique de $K$.
+
+\textbf{Cas où $k$ est algébriquement clos de caractéristique $0$.} Alors
+\[
+K^{*}/K^{*n} \simeq \mathbb{Z}/n\mathbb{Z}, \qquad x \longmapsto v(x) \bmod n,
+\]
+où $v$ est la valuation. En effet $K^{*} = \varpi^{\mathbb{Z}} \times V^{*}$, et
+tout élément de $V^{*}$ est une puissance $n$-ième : sa réduction dans $k^{*}$
+en est une, $k$ étant algébriquement clos, et l'on relève la racine par le
+lemme de Hensel, puisque $n$ est inversible dans $k$\footnote{La page donne
+l'isomorphisme « par la valuation » sans justification ; celle-ci est
+ajoutée.}. Le même argument montre que $K$ contient les racines $n$-ièmes de
+l'unité, et $\mu_n(K) = \mu_n(k)$. La théorie de Kummer identifie alors les
+extensions abéliennes d'exposant divisant $n$ aux sous-groupes de
+$K^{*}/K^{*n}$ : il y en a une seule de degré $n$, $K(\varpi^{1/n})$, et elle est
+cyclique. Comme toute extension finie de $K$ est totalement et modérément
+ramifiée — le corps résiduel est algébriquement clos et de caractéristique
+nulle —, elle est de cette forme : \emph{toutes les extensions finies de $K$
+sont cycliques, donc kummériennes}\footnote{« donc » est une lecture
+incertaine ; l'argument est celui qu'on vient de dire.}.
+
+Le groupe de Galois absolu se décrit alors canoniquement :
+\[
+\mathrm{Gal}(\overline{K}/K) \xrightarrow{\ \sim\ } T(k) := \varprojlim_n \mu_n(k),
+\qquad \sigma \longmapsto \bigl(\sigma(\varpi^{1/n})/\varpi^{1/n}\bigr)_n ,
+\]
+et $T(k)$, le « module de Tate » du groupe multiplicatif de $k$, est isomorphe
+à $\widehat{\mathbb{Z}}$, mais non canoniquement\footnote{La page note ce
+groupe $T_\infty(k)$ et écrit $\Gamma(\overline{K}, K)$ pour le groupe de Galois.
+L'isomorphisme ne dépend ni du choix des racines, les $\mu_n$ étant dans $K$, ni
+de celui de l'uniformisante : si $\varpi' = u\varpi$ avec $u \in V^{*}$, les
+racines $n$-ièmes de $u$ sont déjà dans $K$. On l'écrit aujourd'hui
+$\widehat{\mathbb{Z}}(1)$.}.
+
+\textbf{Cas où $k$ est de caractéristique $p > 0$.} On ne suppose plus $V$
+complet, mais seulement hensélien\footnote{La page dit « si $k$ car $\neq 0$,
+$V$ pas nécessairement complet » ; le signe « $\neq$ » est une lecture, et la
+page ne dit pas quelle hypothèse remplace la complétude. Sans hensélianité,
+les extensions de $K$ ne correspondent plus à celles du complété, et c'est le
+groupe de décomposition qui joue le rôle de $\mathrm{Gal}(\overline{K}/K)$.}.
+Les extensions de degré premier à $p$ du même type donnent le quotient
+\emph{modéré}, et l'on a une suite exacte
+\[
+1 \to \varprojlim_{(n, p) = 1} \mu_n(\overline{K}) \longrightarrow \pi_1^{t}(K)
+\longrightarrow \pi_1(k) \to 1, \qquad \pi_1(k) = \pi_1(\mathrm{Spec}\, V),
+\]
+où $\pi_1^{t}(K)$ est le groupe de Galois de l'extension modérément ramifiée
+maximale, $\pi_1(k) = \mathrm{Gal}(k^{s}/k)$, et le noyau est l'inertie modérée,
+isomorphe à $\prod_{\ell \neq p} \mathbb{Z}_\ell(1)$\footnote{La page écrit la
+suite avec $\pi_1(K)$ au milieu (page 3) et, page 1, une flèche
+$\pi_1(K)^{\text{premier à } p} \to \varprojlim_{(n,p)=1} \mu_n(k)$. Pour le
+groupe $\pi_1(K)$ entier la suite n'est pas exacte à gauche : le noyau de
+$\pi_1(K) \to \pi_1(k)$ est l'inertie tout entière, extension de l'inertie modérée
+par un pro-$p$-groupe, l'inertie sauvage. L'égalité
+$\pi_1(k) = \pi_1(\mathrm{Spec}\, V)$ est une propriété des anneaux henséliens. Le
+groupe fondamental modéré est l'objet du livre de Grothendieck et Murre sur le
+voisinage formel d'un diviseur à croisements normaux (1971).}.
+
+\pagerange{3}{5}
+\subsection*{Sur un schéma quelconque : la suite de Kummer}
+
+Soit $S$ un schéma et $n$ un entier inversible sur $S$. Toute unité
+$a \in \Gamma(S, \mathcal{O}_S^{*})$ définit un revêtement
+\[
+S_a = \mathrm{Spec}\bigl(\mathcal{O}_S[T]/(T^n - a)\bigr) \longrightarrow S,
+\]
+étale, torseur sous $\mu_n$ qui agit par $T \mapsto \zeta T$ ; sur un ouvert
+affine $\mathrm{Spec}\, A$, c'est $A[T]/(T^n - a)$. Si $S$ est connexe et si
+$\mu_n$ y est constant, un tel torseur, pointé au-dessus d'un point géométrique
+$\bar{s}$, équivaut à un homomorphisme $\pi_1(S, \bar{s}) \to \mu_n(S)$ — le
+caractère de Kummer de $a$ ; une famille compatible de racines de $a$ donne
+une flèche $\pi_1(S, \bar{s}) \to \varprojlim_n \mu_n(S)$, qui généralise celle de
+la page 1, où $a = \varpi$\footnote{La page 3 écrit
+$\pi_1(S, \bar{s}) \to \varprojlim \mu_n(S)$ sans dire ce qui définit la flèche,
+et place sous la limite une condition lue « $n$ premier à $s$ ». La lecture par
+le caractère de Kummer d'une unité, et la condition « $n$ inversible sur $S$ »,
+sont de cette édition.}.
+
+Le classement de tous ces torseurs est la suite exacte longue associée à la
+\emph{suite de Kummer} $1 \to \mu_n \to \mathbb{G}_m \xrightarrow{\,n\,} \mathbb{G}_m \to 1$,
+exacte pour la topologie étale quand $n$ est inversible sur $S$, et pour la
+topologie fppf en général\footnote{La page ne précise ni la topologie ni
+l'hypothèse sur $n$. Elle note $\mathrm{Rev}(S, \mu_n)$ ce qui est ici
+$H^1(S, \mu_n)$.} :
+\[
+0 \to \mu_n(S) \to \mathbb{G}_m(S) \xrightarrow{\,n\,} \mathbb{G}_m(S)
+\xrightarrow{\ \partial\ } H^1(S, \mu_n) \to \mathrm{Pic}(S)
+\xrightarrow{\,\otimes n\,} \mathrm{Pic}(S),
+\]
+en utilisant $H^0(S, \mathbb{G}_m) = \mathbb{G}_m(S)$ et
+$H^1(S, \mathbb{G}_m) = \mathrm{Pic}(S)$\footnote{La première ligne de la page 5
+omet le second $H^0(S, \mathbb{G}_m)$ et la puissance $n$-ième qui y mène ; la
+seconde les rétablit.}. Le cobord $\partial$ est $a \mapsto [S_a]$, et
+$H^1(S, \mu_n) \to \mathrm{Pic}(S)$ envoie un $\mu_n$-torseur sur le fibré en droites
+qu'il induit par $\mu_n \subset \mathbb{G}_m$, dont la puissance $n$-ième est
+trivialisée. D'où la suite exacte courte de la page :
+\[
+0 \to \mathbb{G}_m(S)/\mathbb{G}_m(S)^{n} \longrightarrow H^1(S, \mu_n)
+\longrightarrow {}_{n}\mathrm{Pic}(S) \to 0,
+\]
+où ${}_{n}\mathrm{Pic}(S)$ est le sous-groupe de $n$-torsion\footnote{La page écrit
+le premier terme $\mathbb{G}_m(S)_n$, et le dernier, surchargé, se lit
+${}_n\mathrm{Pic}(S)$.} : un $\mu_n$-torseur est donné par une unité, à puissance
+$n$-ième près, dès que le fibré en droites qu'il définit est trivial.
+
+\pagerange{7}{8}
+\section*{Espace classifiant d'un groupe discret (pages 7 et 8)}
+
+Soit $\pi$ un groupe discret et $E \to B$ un revêtement principal de groupe
+$\pi$. Pour tout espace $X$ — disons un CW-complexe\footnote{La page ne
+restreint pas la classe des espaces. L'invariance par homotopie de l'image
+réciproque, qui rend $h_X$ bien défini, demande $X$ paracompact ; l'équivalence
+ci-dessous se démontre pour $X$ parcourant les CW-complexes.} — on dispose de
+l'application, fonctorielle en $X$,
+\[
+h_X : [X, B] \longrightarrow H^1(X, \pi), \qquad f \longmapsto [f^{*}E],
+\]
+où $[X, B]$ désigne les classes d'homotopie d'applications\footnote{La page
+écrit $\mathrm{hot}(X, B)$.}.
+
+\textbf{Théorème 1.} Les conditions suivantes sont équivalentes :
+\begin{enumerate}
+  \item $h$ est un isomorphisme de foncteurs, i.e. $h_X$ est bijectif pour tout
+    $X$ ;
+  \item $E$ est faiblement contractile\footnote{La fiche s'arrête sur
+    « 2) $E$ est contractile », coupée au bas ; elle portait peut-être d'autres
+    conditions. « Contractile » est exact quand $B$ est un CW-complexe (théorème
+    de Whitehead) ; « faiblement contractile » en général. La page corrige
+    « injectif » en « bijectif » au stylo bleu.}.
+\end{enumerate}
+On dit alors que $(E, B, \pi)$ est un revêtement universel de groupe $\pi$, et
+que $B$ est un \emph{espace classifiant} pour $\pi$.
+
+L'équivalence tient à ceci. Appliquée à un point, la condition 1 dit que $B$ est
+connexe ; appliquée aux sphères $S^k$, $k \geq 2$, pour lesquelles
+$H^1(S^k, \pi)$ est réduit à un point, elle dit que $\pi_k(B) = 0$ ; appliquée à
+$S^1$ et à $B$ lui-même, que $E$ est connexe et que $\pi_1(B) \simeq \pi$. Donc $E$
+est le revêtement universel d'un espace $B$ dont tous les groupes d'homotopie
+supérieurs sont nuls : c'est la condition 2. La réciproque est la théorie de
+l'obstruction. En termes d'aujourd'hui, $B$ est un espace d'Eilenberg–MacLane
+$K(\pi, 1)$, et $H^1(X, \pi) \simeq \mathrm{Hom}(\pi_1(X), \pi)/\text{conjugaison}$ pour
+$X$ connexe\footnote{Cette justification est de l'édition ; la page énonce sans
+démontrer.}.
+
+\textbf{Théorème 2.} Pour tout groupe discret $\pi$, il existe un revêtement
+universel de groupe $\pi$, et le couple formé de l'espace classifiant $B_\pi$ et de
+la classe de $E_\pi$ est défini à isomorphisme unique près dans la catégorie
+homotopique\footnote{La page dit « un espace classifiant (défini à isom. unique
+près dans la cat. homotopique…) ». L'unicité à isomorphisme \emph{unique} vaut
+pour le couple, qui représente le foncteur $H^1(-, \pi)$ ; l'espace $B_\pi$ seul
+n'est unique qu'à isomorphisme près, ses auto-équivalences réalisant
+$\mathrm{Out}(\pi)$. L'existence est due à Milnor (1956) pour les groupes
+topologiques, et pour un groupe discret se lit sur la réalisation géométrique du
+nerf de $\pi$.}.
+
+\textbf{La construction de Borel.} Soit $X$ un espace sur lequel $\pi$
+agit\footnote{Après « opère », la page porte quelques signes illisibles ; aucune
+hypothèse sur l'action n'est nécessaire à ce qui suit.}. On pose
+\[
+X_{h\pi} = E_\pi \times_\pi X = (E_\pi \times X)/\pi ,
+\]
+qui se projette sur $B_\pi = E_\pi/\pi$ et sur $X/\pi$\footnote{Le but de la seconde
+projection est surchargé sur la page ; $X/\pi$ est ce que la formule
+impose.}. La première projection est un fibré de fibre $X$ ; la seconde est
+une équivalence d'homotopie quand l'action est libre et proprement
+discontinue et $X$ paracompact, $E_\pi$ étant contractile. La suite exacte d'homotopie de la
+fibration $X \to X_{h\pi} \to B_\pi$ donne, puisque $\pi_2(B_\pi) = 0$ :
+\[
+0 = \pi_2(B_\pi) \to \pi_1(X) \longrightarrow \pi_1(X, \pi) \longrightarrow \pi
+\longrightarrow \pi_0(X),
+\]
+où $\pi_1(X, \pi) := \pi_1(X_{h\pi})$, et le dernier terme est un ensemble pointé.
+Si $X$ est connexe — la page écrit $\pi_0(X) = 1$ —, c'est une extension
+\[
+1 \to \pi_1(X) \to \pi_1(X, \pi) \to \pi \to 1 ,
+\]
+celle qu'on appelle aujourd'hui le groupe fondamental équivariant, ou le groupe
+fondamental orbifolde quand l'action est propre. La page 14 en donnera, sans le
+dire, une description combinatoire.
+
+\pagerange{9}{10}
+\section*{Cartes et groupes cartographiques (pages 9 et 10)}
+
+Ces deux pages sont des esquisses : formules dispersées, flèches et dessins.
+On en tire ce qui s'énonce, sans prétendre restituer un ordre qu'elles n'ont
+pas.
+
+\pagerange{9}{9}
+\subsection*{Le groupe cartographique et les cartes de type $(p, q)$}
+
+Une \emph{carte} est un graphe $K$ tracé sur une surface $X$, découpant la
+surface en faces ; les pages l'écrivent $X \supset K \supset S$, surface,
+graphe, ensemble des sommets. Un \emph{drapeau} est un triplet
+(sommet, arête, face) incidents ; le groupe
+\[
+\Gamma = \langle \sigma_0, \sigma_1, \sigma_2 \mid \sigma_0^2 = \sigma_1^2 = \sigma_2^2 = (\sigma_0\sigma_2)^2 = 1 \rangle
+\]
+agit sur les drapeaux, $\sigma_i$ changeant la seule composante de dimension $i$.
+Une carte connexe pointée par un drapeau $\tilde{x}$ — au sens large, surfaces à
+bord, non orientables et cartes infinies comprises — équivaut à un sous-groupe
+$\pi \subset \Gamma$, le stabilisateur de $\tilde{x}$ ; une carte connexe
+non pointée, à une classe de conjugaison de sous-groupes ; et le groupe des
+automorphismes de la carte est $\mathrm{Norm}(\pi)/\pi$. La catégorie des cartes
+s'identifie ainsi à celle des $\Gamma$-ensembles, et le revêtement universel
+$\widetilde{X} \supset \widetilde{K} \supset \widetilde{S}$ en est l'objet
+correspondant à $\pi = 1$\footnote{Les pages ne définissent ni $\Gamma$ ni la
+catégorie ; la présentation ci-dessus est celle que Grothendieck publiera dans
+l'\emph{Esquisse d'un programme} (1984), sous le nom de groupe cartographique.
+Les pages écrivent seulement
+$\tilde{x} \in (\widetilde{X} \supset \widetilde{K} \supset \widetilde{S}) \simeq C_{p,q}$,
+$\Gamma_{p,q} \supset \pi$ et $\mathrm{Norm}(\pi)/\pi$.}.
+
+Les éléments pairs de $\Gamma$ forment le groupe cartographique \emph{orienté}
+$\Gamma^{0}$, qui agit sur les cartes orientées ; il est engendré par les deux
+rotations $\sigma_1\sigma_2$ (autour d'un sommet) et $\sigma_0\sigma_1$ (autour d'une
+face) et par le retournement d'arête $\sigma_2\sigma_0$, d'ordre $2$, dont le produit
+est trivial ; d'où $\Gamma^{0} \simeq \mathbb{Z} * \mathbb{Z}/2$.
+
+Pour $p, q \in \{1, 2, \ldots, \infty\}$, le groupe $\Gamma_{p,q}$ s'obtient en
+imposant la relation $\rho^{p} = 1$ à l'une des deux rotations et $\rho'^{\,q} = 1$ à
+l'autre ($p$ ou $q$ infini : pas de relation) ; ses
+ensembles à action forment la catégorie $C_{p,q}$ des cartes dont les sommets,
+respectivement les faces, sont de valence divisant ces entiers\footnote{La page
+ne dit pas laquelle des deux rotations est bornée par $p$. Elle écrit
+$\rho_s^3 = 1$ dans une présentation de $\Gamma_{\infty,3}$, $\rho_s$ étant
+vraisemblablement la rotation autour d'un sommet, et, à part, $\rho_s^{\,p}$
+souligné : les deux mentions ne s'accordent qu'avec des conventions opposées.
+On n'énonce ici que ce qui ne dépend pas de ce choix.}. En particulier
+$\Gamma_{\infty,\infty} = \Gamma$, qui se surjecte sur tous les autres :
+$\Gamma_{\infty,\infty} \to \Gamma_{\infty,3}$, $\Gamma_{\infty,\infty} \to \Gamma_{p,q}$.
+
+\textbf{Divisibilité.} Si $p' \mid p$ et $q' \mid q$, on a une surjection
+$\Gamma_{p,q} \to \Gamma_{p',q'}$, de noyau le sous-groupe distingué $R$ engendré par
+les relations supplémentaires. Un $\Gamma_{p',q'}$-ensemble est un
+$\Gamma_{p,q}$-ensemble sur lequel $R$ agit trivialement : $C_{p',q'}$ est une
+sous-catégorie pleine de $C_{p,q}$, et le foncteur $C_{p,q} \to C_{p',q'}$,
+$E \mapsto E/R$, en est l'adjoint à gauche\footnote{La page écrit
+« $C_{p',q'} = C_{p,q}/R$ » et $R_{(p,p',q,q')}$. L'égalité vaut pour les
+objets universels — la carte universelle de type $(p', q')$ est le quotient par
+$R$ de celle de type $(p, q)$ — ; pour les catégories, c'est un plongement plein
+muni d'un adjoint à gauche.}. Les cas extrêmes $C_{1,1}$, $C_{1,2}$, $C_{2,1}$
+figurent en bas de page.
+
+\textbf{Triangulations et groupe modulaire.} Quand l'une des rotations est
+d'ordre $3$ et l'autre libre, le groupe orienté est
+\[
+\Gamma^{0}_{\infty,3} \simeq \mathbb{Z}/2 * \mathbb{Z}/3 \simeq PSL(2, \mathbb{Z}) = SL(2, \mathbb{Z})/\{\pm 1\},
+\]
+et le groupe entier $\Gamma_{\infty,3}$ est le groupe modulaire étendu
+$PGL(2, \mathbb{Z})$, groupe de réflexions du triangle hyperbolique d'angles
+$\pi/2$, $\pi/3$, $0$. La réduction modulo $2$ donne une suite exacte
+\[
+1 \to \Gamma(2)/\{\pm 1\} \longrightarrow PSL(2, \mathbb{Z}) \longrightarrow SL(2, \mathbb{F}_2) \simeq \mathfrak{S}_3 \to 1,
+\]
+dont le noyau est libre de rang $2$ et s'identifie au groupe fondamental de la
+sphère privée de trois points\footnote{La page écrit la suite verticalement,
+avec un premier terme qui ressemble à $\Gamma_1$. Le noyau de
+$PSL(2,\mathbb{Z}) \to \mathfrak{S}_3$ est $\Gamma(2)/\{\pm 1\}$ : c'est la seule lecture
+compatible avec l'exactitude, et elle est de l'édition.}. La page le rattache
+à la géométrie : un réseau de $\mathbb{C}$ de base $(\omega_1, \omega_2)$ avec
+$\mathrm{Im}(\omega_2/\omega_1) > 0$, le module $\tau = \omega_2/\omega_1$, et, dessinée
+à côté, la droite des modules — une sphère marquée de deux points exceptionnels
+et d'une pointe —, dont $PSL(2, \mathbb{Z})$ est le groupe fondamental au sens des
+orbifoldes\footnote{Les deux croix du dessin sont marquées $0$ et d'une valeur
+lue $2^{3}\cdot 3^{4}$. S'il s'agit des valeurs exceptionnelles de l'invariant
+modulaire, la seconde est $j = 1728 = 2^{6}\cdot 3^{3}$. Ce lien entre cartes
+triangulées et courbes modulaires est celui que développera l'\emph{Esquisse
+d'un programme} ; le théorème de Belyi (1979), qui en fait une théorie
+arithmétique, était paru.}.
+
+\pagerange{10}{10}
+\subsection*{Cartes trouées}
+
+La page 10 esquisse une définition topologique des cartes. Une \emph{carte
+trouée} est un couple $(X \supset K)$ formé d'une surface topologique $X$ et
+d'une partie fermée $K$ de dimension $1$\footnote{« sous-variété fermée de dim
+$1$ » est une lecture incertaine ; la page s'arrête après « tels que ».},
+tel que les composantes de $\text{Déc}(X, K)$ — la surface découpée le long de
+$K$ — soient homéomorphes à des faces standard $D_n^{*}$, $1 \leq n \leq \infty$.
+
+La face standard se construit à partir d'un polygone : soit $\Pi_n$ le polygone
+convexe régulier à $n$ côtés, $\Pi_n = (S_n, A_n, F_n)$ ses sommets, arêtes et
+face\footnote{« pol. conv. », « côtés » et la troisième lettre sont des lectures
+incertaines.}, et $|\Pi_n|$ son bord, qui contient $S_n$. Alors
+$|\Pi_n| \times \left]0,1\right]$ est un disque fermé privé de son centre — le cône
+sur le bord, sommet ôté —, et
+\[
+D_n^{*} = |\Pi_n| \times \left]0,1\right] \smallsetminus S_n ,
+\]
+les sommets étant retirés du bord\footnote{L'interprétation de $|\Pi_n|$ comme
+bord du polygone et de $|\Pi_n| \times \left]0,1\right]$ comme disque épointé est
+de l'édition ; la page ne précise pas à quel niveau les sommets sont ôtés. Elle
+est confirmée par les dessins : un pentagone découpé en secteurs depuis son
+centre, et, pour $n = \infty$, une droite subdivisée prolongée à l'infini des
+deux côtés, dont le produit par $\left]0,1\right]$ est un demi-plan.}. Les faces
+d'une carte trouée sont donc épointées en leur centre : les composantes de
+$\text{Déc}(X, K)$ ne sont pas compactes, même pour une carte finie. Les dessins de la page — une
+face circulaire tournée de $\pm 2\pi/n$, une carte pentagonale aux sommets
+cerclés et arêtes pendantes, les générateurs $\sigma_0, \sigma_1, \sigma_2$ — restent
+sans texte.
+
+\pagerange{11}{15}
+\section*{$\pi$-ensembles et bitorseurs (pages 11 à 15)}
+
+\pagerange{11}{11}
+\subsection*{Deux rappels : indice des sous-groupes libres, sphère privée de trois points}
+
+Si $L$ est un groupe libre de rang $d$ et $L' \subset L$ un sous-groupe d'indice
+$n$, alors $L'$ est libre de rang $d'$ avec
+\[
+d' - 1 = n(d - 1)
+\]
+(formule de Schreier ; par exemple $d = 2$, $n = 2$ donne $d' = 3$). Topologiquement :
+si $L = \pi_1(X)$ pour un bouquet $X$ de $d$ cercles, $L'$ est le groupe
+fondamental d'un revêtement $X'$ à $n$ feuillets, et la caractéristique
+d'Euler, $\chi(X) = 1 - d$, est multipliée par $n$.
+
+La sphère privée des trois points $0, 1, \infty$ a pour groupe fondamental
+$\pi^{+} = \langle \rho_0, \rho_1, \rho_\infty \mid \rho_\infty \rho_1 \rho_0 = 1 \rangle$, libre
+de rang $2$. La conjugaison complexe, qui fixe l'axe réel et donc les trois
+points, y induit l'automorphisme involutif
+\[
+\rho_0 \mapsto \rho_0^{-1}, \qquad \rho_\infty \mapsto \rho_\infty^{-1}, \qquad
+\rho_1 \mapsto \rho_\infty \rho_0 = \rho_0^{-1}\,\rho_1^{-1}\,\rho_0 ,
+\]
+défini sur les générateurs libres $\rho_0, \rho_\infty$\footnote{La page ne donne pas
+la relation. La formule pour $\rho_1$ n'est compatible qu'avec
+$\rho_\infty \rho_1 \rho_0 = 1$ (ou sa permutation circulaire
+$\rho_1\rho_0\rho_\infty = 1$) : avec $\rho_0\rho_1\rho_\infty = 1$ il faudrait
+$\rho_1 \mapsto \rho_0 \rho_\infty$. Le lien avec la conjugaison complexe, suggéré
+par le triangle hachuré de sommets $0$, $1$, $\infty$ dessiné à côté, est de
+l'édition.}. On le retrouvera page 14.
+
+\pagerange{11}{12}
+\subsection*{Foncteurs sur les $\pi$-ensembles qui commutent aux limites inductives}
+
+Soit $\mathcal{C}$ une catégorie cocomplète\footnote{La page écrit $\mathcal{C}$ reliée à
+un mot lu « avec $\varinjlim$ » ; l'hypothèse est nécessaire pour que les produits
+contractés ci-dessous existent.}. On a une équivalence entre
+\begin{itemize}
+  \item les foncteurs $F : \mathrm{Ens}(\pi) \to \mathcal{C}$ qui commutent aux limites
+    inductives,
+  \item les objets $X$ de $\mathcal{C}$ munis d'une action à droite de $\pi$,
+\end{itemize}
+donnée par $F \mapsto F(\pi_s)$, où $\pi_s$ est $\pi$ agissant sur lui-même à
+gauche, et dont l'action de $\pi$ à droite par translations fait de $F(\pi_s)$ un
+$\pi$-objet à droite ; en sens inverse, $X \mapsto F_X$ avec
+\[
+F_X(E) = X \times_\pi E, \qquad
+\mathrm{Hom}_{\mathcal{C}}(X \times_\pi E, Y) \simeq \mathrm{Hom}_\pi\bigl(E, \mathrm{Hom}_{\mathcal{C}}(X, Y)\bigr).
+\]
+La formule d'adjonction dit que $F_X$ a un adjoint à droite, donc commute aux
+limites inductives ; qu'on retrouve ainsi tout $F$ vient de ce que tout
+$\pi$-ensemble est somme d'orbites,
+\[
+E \simeq \coprod_{i \in I} \pi/H_i, \qquad
+X \times_\pi E \simeq \coprod_{i} X \times_\pi (\pi/H_i) = \coprod_i X/H_i ,
+\]
+où $X/H_i$ est le quotient dans $\mathcal{C}$. En termes d'aujourd'hui,
+$\mathrm{Ens}(\pi)$ est la catégorie des préfaisceaux sur le groupe vu comme
+catégorie à un objet, sa \emph{complétion par limites inductives libre}, et $F_X$
+est l'extension de Kan à gauche de $X$\footnote{La page écrit $X$ « $\pi$-objet (à
+droite) de $\mathcal{C}$ », « à droite » ajouté en interligne. Elle esquisse aussi
+un foncteur $G : \mathcal{C} \to \mathcal{C}'$ commutant aux limites inductives, sans
+suite : le composé $G \circ F_X$ correspond à $G(X)$.}.
+
+\textbf{Exemple : $\mathcal{C} = \mathrm{Ens}(\pi')$.} Un $\pi'$-ensemble muni d'une action à
+droite de $\pi$ est un $(\pi', \pi)$-ensemble, et l'on obtient une équivalence
+\[
+\mathrm{Hom}_{!}\bigl(\mathrm{Ens}(\pi), \mathrm{Ens}(\pi')\bigr) \simeq {}_{\pi'}\mathrm{Ens}_{\pi},
+\qquad F_X \longleftrightarrow {}_{\pi'}X_{\pi},
+\]
+où $\mathrm{Hom}_{!}$ désigne les foncteurs qui commutent aux limites
+inductives\footnote{C'est la définition que la page accole au « ! ».}. Un
+$(\pi', \pi)$-ensemble est un foncteur $B\pi' \times (B\pi)^{\mathrm{op}} \to \mathrm{Ens}$, où
+$B\pi$ désigne le groupe vu comme catégorie à un objet : c'est un
+\emph{profoncteur} de $B\pi$ vers $B\pi'$, et la composition des profoncteurs est
+le produit contracté (page 15).
+
+\textbf{Proposition.} Pour que $F_X$ soit exact à gauche, il faut et il suffit
+que $X$ soit un $\pi$-torseur à droite, i.e. que l'action à droite de $\pi$ sur $X$
+soit libre et transitive.
+
+En effet, $F_X$ doit préserver l'objet final, donc $X/\pi$ est un point :
+$X \simeq H\backslash\pi$ pour un sous-groupe $H$, et alors $F_X(E) = H\backslash E$,
+l'ensemble des orbites de $H$. Il doit aussi préserver les produits ; or dans
+$H\backslash(\pi_s \times \pi_s)$, les classes de $(1, 1)$ et de $(1, h)$, $h \in H$, ont
+même image dans $H\backslash\pi \times H\backslash\pi$ et ne sont égales que si
+$h = 1$ : donc $H = 1$. Réciproquement, si $X$ est un torseur, le choix d'un
+point identifie $F_X(E)$ à $E$ lui-même, et $F_X$ préserve les limites, qui se
+calculent sur les ensembles sous-jacents\footnote{Démonstration de l'édition ; la page énonce seulement.
+« Exact à gauche » s'entend : préserve les limites projectives finies.}.
+
+Pour un $\pi$-torseur à droite $X$, on note
+\[
+{}^{X}\pi := X \times_\pi \pi_{\mathrm{int}} = \mathrm{Aut}_\pi(X),
+\]
+la \emph{forme tordue} de $\pi$ par $X$, où $\pi_{\mathrm{int}}$ est $\pi$ agissant sur
+lui-même par conjugaison ; le choix d'un point $x \in X$ l'identifie à $\pi$, et
+deux choix diffèrent d'un automorphisme intérieur. Une structure de
+$(\pi', \pi)$-ensemble sur $X$ est alors un homomorphisme $\pi' \to \mathrm{Aut}_\pi(X)$.
+
+\textbf{Corollaire.} Pour que $F_X$ soit une équivalence, il faut et il suffit
+que $\pi' \to \mathrm{Aut}_\pi(X)$ soit un isomorphisme, i.e. que $X$ soit un
+$(\pi', \pi)$-bitorseur. D'où une équivalence de groupoïdes
+\[
+\text{Équiv}\bigl(\mathrm{Ens}(\pi), \mathrm{Ens}(\pi')\bigr) \simeq \mathrm{Bit}(\pi', \pi),
+\]
+qui envoie un quasi-inverse $u^{[-1]}$ sur le bitorseur opposé $X^{-1}$ — le même
+ensemble, $\pi$ agissant à gauche et $\pi'$ à droite par les inverses\footnote{La
+page dessine le carré, avec $u \mapsto u^{[-1]}$ à gauche ; l'étiquette de la
+flèche de droite est illisible, et « bitorseur opposé » est ce que la
+commutativité du carré impose.}.
+
+\pagerange{13}{13}
+\subsection*{Bitorseurs involutifs et extensions par $\mathbb{Z}/2$}
+
+Un $(\pi, \pi)$-bitorseur $X$ est trivial — isomorphe au bitorseur $\pi$ — si et
+seulement s'il contient un élément $e$ tel que $\lambda e = e \lambda$ pour tout
+$\lambda \in \pi$. Un bitorseur \emph{involutif} est un $(\pi, \pi)$-bitorseur $X$ muni
+d'un isomorphisme $\mu : X \times_\pi X \xrightarrow{\sim} \pi$, associatif au sens où les
+deux isomorphismes $X \times_\pi X \times_\pi X \to X$ qu'il induit coïncident\footnote{La
+page écrit $X \circ X \xrightarrow{\sim} 1$ sans condition ; la condition
+d'associativité est celle que la page 15 écrit pour les foncteurs,
+$F\mu = \mu F$.}. La page affirme des équivalences de groupoïdes
+\[
+\mathrm{Bit.invol}(\pi) \simeq \mathrm{Invol}\bigl(\mathrm{Ens}(\pi)\bigr) \simeq \mathrm{Ext}(\mathbb{Z}/2, \pi).
+\]
+La première est le Corollaire des pages 11 et 12, appliqué à $\pi' = \pi$ et
+complété par $\mu$ : une involution de $\mathrm{Ens}(\pi)$ est un foncteur $F$ avec
+$\mu : F^2 \xrightarrow{\sim} \mathrm{id}$ et $F\mu = \mu F$ (page 15). La seconde
+associe à une extension $1 \to \pi \to \widetilde{\pi} \xrightarrow{p} \mathbb{Z}/2 \to 1$ la
+classe non neutre $X = p^{-1}(1)$, qui est un $(\pi, \pi)$-bitorseur par
+multiplication à gauche et à droite, et que la multiplication de $\widetilde{\pi}$
+munit de $\mu : X \times_\pi X \to \pi$ ; inversement $\widetilde{\pi} = \pi \sqcup X$, la
+loi étant donnée par les actions et par $\mu$\footnote{Justification de
+l'édition ; la page énonce. Le classement des extensions par
+$H^2(\mathbb{Z}/2, Z(\pi))$ au-dessus d'une action extérieure donnée est la théorie de
+Schreier et d'Eilenberg–MacLane.}.
+
+\textbf{Le groupe d'un polygone idéal.} Soit $I$ un ensemble fini à $n \geq 3$
+éléments, qu'on pense comme les côtés d'un polygone convexe\footnote{« pol.
+conv. fini » après un mot biffé, puis « cartes $n$-gonales
+$I$-pondérées » : lectures incertaines. La géométrie hyperbolique qui suit est
+de l'édition.}. Le produit libre
+\[
+\pi_I = (\mathbb{Z}/2)^{*I}
+\]
+est le groupe engendré par les réflexions par rapport aux côtés d'un polygone
+hyperbolique idéal à $n$ côtés — deux côtés adjacents se rencontrant à l'infini,
+aucune relation ne lie leurs réflexions. Le morphisme $\pi_I \to \mathbb{Z}/2$ qui envoie
+chaque générateur sur $1$ a pour noyau le sous-groupe des déplacements, et
+\[
+1 \to \pi_I^{+} \to \pi_I \to \mathbb{Z}/2 \to 1, \qquad
+\pi_I^{+} \simeq L_I/(\lambda_0 \lambda_1 \cdots \lambda_{n-1}),
+\]
+groupe libre de rang $n - 1$, groupe fondamental de la sphère privée de $n$
+points — le polygone doublé le long de son bord\footnote{La page écrit
+d'abord $\pi_I = L_I/(\lambda_0\lambda_1\cdots\lambda_{n-1} = 1)$ et le biffe, puis
+$\pi_I = (\mathbb{Z}/2)^{*I}$ et $\pi_I^{+} \simeq L_I/\!-$ : la présentation biffée était
+celle du sous-groupe orienté, non de $\pi_I$. Le rang $n - 1$ se vérifie par la
+caractéristique d'Euler rationnelle, $\chi(\pi_I) = 1 - n/2$ et
+$\chi(\pi_I^{+}) = 2 - n$. Un dessin de carte en quadrilatères aux sommets
+numérotés accompagne la suite.}. C'est un exemple de l'extension par
+$\mathbb{Z}/2$ qu'on vient de décrire : la réflexion par rapport à un côté est un
+élément de la classe non neutre.
+
+\pagerange{14}{14}
+\subsection*{L'involution sur un groupoïde fondamental, et le groupe $\pi_1(X, \Gamma, a)$}
+
+Pour $n = 4$, la page prend, semble-t-il, la sphère de Riemann privée de
+quatre points de l'axe réel, $\pi$ engendré par les lacets $\lambda_0, \lambda_1, \lambda_2, \lambda_3$ avec
+$\lambda_3\lambda_2\lambda_1\lambda_0 = 1$\footnote{Après une première écriture biffée
+$\lambda_0\lambda_1\lambda_2\lambda_3 = 1$ ; comme page 11, l'ordre du produit
+est celui qui rend les formules de l'involution cohérentes.}, et
+l'involution $\varepsilon$ induite par la conjugaison complexe :
+\[
+\varepsilon^2 = 1, \qquad \varepsilon\lambda_0\varepsilon^{-1} = \lambda_0^{-1}, \qquad
+\varepsilon\lambda_1\varepsilon^{-1} = \lambda_1^{-1},
+\]
+et note à côté $\lambda_1^{-1}\lambda_2^{-1}\lambda_1$, vraisemblablement l'image de
+$\lambda_2$, conjuguée de $\lambda_2^{-1}$ comme page 11\footnote{L'attribution de
+cette expression à $\varepsilon\lambda_2\varepsilon^{-1}$, et la lecture des
+quatre points comme réels, sont de l'édition : la page dessine une sphère
+marquée de $i$, $-i$, $1$, d'un point à gauche et de $0$ au centre.}.
+La difficulté que la page affronte est que la conjugaison ne fixe pas le point
+base : elle échange $i$ et $-i$. On travaille donc dans le groupoïde
+fondamental, où $\mathrm{Hom}(i, i)$ et $\mathrm{Hom}(-i, i)$ sont respectivement un
+groupe et un torseur sous $\pi$, et l'automorphisme de $\pi$ s'obtient en
+transportant par un chemin : $\lambda \mapsto \varepsilon \circ \bar\lambda \circ \varepsilon^{-1}$,
+où $\bar\lambda$ est le lacet conjugué, pointé en $-i$\footnote{La page dessine les
+lacets autour de $0$ et $1$ pointés en $i$ et $-i$, et trois chemins composables
+dont les extrémités sont en partie surchargées ; leur lecture est
+incertaine.}.
+
+La seconde moitié de la page généralise. Soit $\Gamma$ un groupe agissant sur un
+espace $X$ et $a \in X$. On pose
+\[
+\pi_1(X, \Gamma, a) = \{(\gamma, \ell) \mid \gamma \in \Gamma, \ \ell \in \mathrm{Hom}(\gamma a, a)\},
+\]
+les $\ell$ étant des classes de chemins, avec la loi
+\[
+(\gamma', \ell')(\gamma, \ell) = \bigl(\gamma'\gamma, \ \ell' \circ \gamma'(\ell)\bigr) :
+\quad \gamma'\gamma a \xrightarrow{\ \gamma'(\ell)\ } \gamma' a \xrightarrow{\ \ell'\ } a .
+\]
+La page écrit la loi plus généralement pour des chemins
+$\ell : \gamma a \to b$ et $\ell' : \gamma' b \to c$, ce qui en fait la composition d'un
+groupoïde\footnote{Une première écriture, à gauche de la page, compose dans
+l'autre ordre, $(\gamma\gamma', (\gamma\ell')\circ\ell)$, et les extrémités ne s'y
+raccordent pas ; elle est en partie biffée. La loi retenue est celle que la page
+écrit à droite.}. La projection $(\gamma, \ell) \mapsto \gamma$ est un morphisme vers
+$\Gamma$, de noyau $\pi_1(X, a)$, et l'image est formée des $\gamma$ qui ne changent pas
+la composante connexe par arcs de $a$. C'est exactement l'extension
+$1 \to \pi_1(X) \to \pi_1(X, \pi) \to \pi$ de la page 8 : quand $\Gamma = \pi$ est
+discret et $X$ assez régulier, $\pi_1(X, \Gamma, a) \simeq \pi_1(E_\pi \times_\pi X)$\footnote{Ce rapprochement est
+de l'édition. Pour $\Gamma = \mathbb{Z}/2$ agissant par conjugaison complexe, on
+retrouve l'extension de la page 13 ; pour une action propre, c'est le groupe
+fondamental orbifolde du quotient.}.
+
+\pagerange{15}{15}
+\subsection*{Composition et classement des bitorseurs}
+
+Le produit contracté compose les foncteurs : pour ${}_{\pi'}X_{\pi}$ et
+${}_{\pi''}Y_{\pi'}$,
+\[
+\mathrm{Ens}(\pi) \xrightarrow{\ F_X\ } \mathrm{Ens}(\pi') \xrightarrow{\ F_Y\ } \mathrm{Ens}(\pi''),
+\qquad F_Y \circ F_X \simeq F_{Y \times_{\pi'} X}
+\]
+— un isomorphisme canonique plutôt qu'une égalité, le produit contracté n'étant
+associatif qu'à isomorphisme près\footnote{La page écrit l'égalité
+$F_Y \circ F_X = F_{Y \wedge_{\pi'} X}$, avec la notation $\wedge$ pour le produit
+contracté.}.
+
+Comment classer les bitorseurs ? Si ${}_{\pi'}X_{\pi}$ est un bitorseur, on a
+$\pi' \xrightarrow{\sim} {}^{X}\pi$, et ${}^{X}\pi \simeq \pi$ non canoniquement, mais
+canoniquement à automorphisme intérieur de $\pi$ près : $X$ définit donc un
+élément de $\mathrm{Isomext}(\pi', \pi)$\footnote{La page écrit en interligne « non
+can. » puis « mais can. à $\mathrm{Isomext}({}^X\pi, \pi)$ près », lecture en partie
+incertaine.}. On obtient ainsi
+\[
+\pi_0\bigl(\mathrm{Bit}(\pi', \pi)\bigr) \xrightarrow{\ \sim\ } \mathrm{Isomext}(\pi', \pi),
+\]
+et le même raisonnement pour les bitorseurs pointés, dont le point fixe
+l'identification, donne le carré
+
+\begin{tikzcd}
+\pi_0\bigl(\mathrm{Bit}_{\mathrm{pt}}(\pi', \pi)\bigr) \arrow[r, "\sim"] \arrow[d] & \mathrm{Isom}(\pi', \pi) \arrow[d] \\
+\pi_0\bigl(\mathrm{Bit}(\pi', \pi)\bigr) \arrow[r, "\sim"] & \mathrm{Isomext}(\pi', \pi)
+\end{tikzcd}
+
+où les flèches verticales sont surjectives, celle de droite étant le passage au
+quotient par $\mathrm{Int}(\pi)$\footnote{La page écrit la flèche de droite en
+oblique, annotée « surj. » et « passage au quotient par $\mathrm{Int}(\pi)$ »,
+lecture incertaine ; « Classes de bit$(\pi', \pi)$ » est biffé au-dessus.}. Le
+groupoïde $\mathrm{Bit}(\pi', \pi)$ n'est pas pour autant discret : le groupe des
+automorphismes d'un bitorseur est le centre $Z(\pi)$. Pour $\pi' = \pi$,
+$\mathrm{Bit}(\pi, \pi)$ est le $2$-groupe $\mathrm{AUT}(\pi)$, avec
+$\pi_0 = \mathrm{Out}(\pi)$ et $\pi_1 = Z(\pi)$ — c'est le module croisé
+$\pi \to \mathrm{Aut}(\pi)$ — et ce qui vient d'être dit est qu'il s'identifie aux
+auto-équivalences de $\mathrm{Ens}(\pi)$\footnote{Ni le centre, ni le $2$-groupe, ni
+les modules croisés (Whitehead, 1949) ne sont nommés par la page. Les
+bitorseurs et leur rôle en cohomologie non abélienne sont exposés par Giraud
+(1971).}.
+
+\textbf{Involutions de catégories.} La page s'achève sur la définition qu'utilise
+la page 13 : une involution d'une catégorie est un foncteur $F$ muni d'un
+isomorphisme $\mu : F^2 \xrightarrow{\sim} \mathrm{id}$ tel que
+\[
+F\mu = \mu F : F^3 \longrightarrow F,
+\]
+i.e. tel que, pour tout objet $E$, les deux flèches
+$F(\mu_E), \mu_{F(E)} : F(F(F(E))) \to F(E)$ coïncident. C'est exactement la condition
+pour que $(F, \mu)$ définisse une action du groupe $\mathbb{Z}/2$ sur la catégorie à
+isomorphisme cohérent près ; sur $\mathrm{Ens}(\pi)$, elle correspond à
+l'associativité de $\mu$ pour un bitorseur involutif, et donc, par la page 13,
+à une extension de $\mathbb{Z}/2$ par $\pi$.
+
+\end{document}
