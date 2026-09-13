@@ -1,0 +1,602 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 41, pages 1-13.
+%
+% This is an INTERPRETATION, not a transcription. Everything the critical
+% apparatus carried moves into footnotes. In any dispute of substance the
+% transcription governs: whoever cites Grothendieck must cite batch-01.fr.tex.
+%
+% Pass: Opus 5 (claude-opus-5), 2026-09-13 — first pass, unchecked against the
+% pages by a human. The folder was read whole; it holds one batch, pages 1-13,
+% of which page 2 (the blank back of the title leaf) carries nothing.
+%
+% What the folder is. A draft section, under a title of his, on the étale
+% Y-scheme M whose geometric points over y are the irreducible components of
+% the geometric fibre of f : X -> Y: when it exists, when it is separated, when
+% it is proper. The hand is drafting and most of the connective prose is
+% illegible; the definitions, the statements and the displayed conditions are
+% what carry, and the reading is built on them.
+%
+% Notation fixed for the whole document. f : X -> Y of finite type, Y locally
+% noetherian where needed. X_y the fibre, X_{\bar y} a geometric fibre.
+% Irr(Z) the set of irreducible components of a space Z. His « rel^t
+% irréductible » is written « géométriquement irréductible » throughout, on the
+% evidence of page 4, where a component is « rel^t irréd. » exactly when the
+% point of M indexing it is rational over kappa(y); his « abs^t » (page 8) is
+% left as « irréductible » and the ambiguity is footnoted. His E_{X/Y}(y) is
+% kept. « Monogène » is his word and is kept, with its two definitions (page 3
+% and pages 11-12) reconciled on the spine.
+%
+% Substantive departures from the pages, each footnoted where it occurs:
+% — page 4, « Spec(Omega_y) »: the reduction it serves is to a local base, and
+%   the reading takes the local scheme Spec(O_{Y,y}); over a geometric point
+%   the statement would be empty.
+% — page 4, descent along the completion: effective for M separated (quasi-
+%   finite separated => quasi-affine), not guaranteed in schemes for M
+%   non-separated; the leaf does not distinguish.
+% — page 9, N.B.: the injection runs from the components of the special fibre
+%   into those of the generic fibre, through the sections of M over a strictly
+%   henselian trait; the reading states it so.
+% — page 9, « un ouvert étale »: what condition (iii) gives is the existence
+%   half of the valuative criterion, hence M proper, hence finite étale; the
+%   word on the leaf does not carry that sense and is footnoted.
+% — page 11, Prop. 1: (i) <=> (ii) holds with no hypothesis (phi^{-1}(U) =
+%   f(U), his own formula); (ii) <=> (iii) needs f locally of finite
+%   presentation. The reading says which implication uses what.
+% — page 13, the struck Lemme: as legible, it fails for a flat f without a
+%   further hypothesis; a counterexample is given in a footnote.
+%
+% The three valuative conditions on the spine (uniqueness of the generisation,
+% separation, existence) are this reading's analysis of why the Théorème has
+% the shape it has. They are ours and are marked as such; the leaves' own
+% conditions are largely illegible, and the reading does not claim that the
+% Théorème, as the leaf states it, is proved or even fully stated.
+%
+% What the folder announces and never establishes: the proof of the Théorème
+% of page 8; the Lemme of page 7 beyond its conclusion; conditions a) b) c) of
+% page 10; the representability asked on page 12 (« Est-il représentable ??? »);
+% the two conclusions of page 13, closed by « Vérifier ! ».
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{41}
+\pages{1}{13}
+\dating{[années 1960-1970]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Construction de morphismes étales (Chap. V) : notes manuscrites (s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Une famille d'objets géométriques qui dépend d'un paramètre peut changer de
+forme quand le paramètre varie. Une conique $xy = t$ est d'un seul tenant pour
+$t \neq 0$ et se casse en deux droites pour $t = 0$ ; inversement, deux
+morceaux séparés peuvent venir se recoller. Ces feuillets posent une question
+très simple sur ce phénomène : peut-on \emph{compter} les morceaux --- les
+composantes irréductibles --- de chaque membre de la famille d'une manière qui
+dépende elle-même bien du paramètre ?
+
+Compter ne suffit pas ; on veut \emph{étiqueter}. L'idée est de fabriquer un
+second objet $M$, posé au-dessus de l'espace des paramètres, dont les points
+au-dessus d'une valeur $y$ du paramètre soient exactement les composantes du
+membre de la famille correspondant à $y$. C'est un revêtement, au sens où les
+topologues l'entendent : au-dessus de chaque point, un ensemble discret de
+feuillets, qui se prolongent quand on bouge un peu. En géométrie algébrique ce
+genre d'objet s'appelle un schéma \emph{étale} sur la base, et le titre du
+dossier le dit : ce sont des morphismes étales associés aux composantes
+irréductibles des fibres.
+
+La difficulté est que les feuillets d'un tel revêtement ne se comportent pas
+tous bien. Quand une composante se casse en deux au passage d'une valeur
+spéciale, un feuillet se dédouble --- l'objet $M$ ressemble alors à une droite
+dont on aurait doublé un point, et il n'est plus \emph{séparé}. Quand une
+composante disparaît, un feuillet s'arrête net, et $M$ n'est plus
+\emph{propre}. Le cœur du dossier (pages 8 à 10) est l'énoncé qui fait
+correspondre ces pathologies de $M$ à la manière dont les composantes des
+fibres se spécialisent les unes dans les autres : une composante générique ne
+doit pas se casser en deux, deux composantes génériques ne doivent pas venir
+se fondre, aucune ne doit s'évanouir. C'est la traduction, dans ce cadre, des
+critères valuatifs par lesquels on teste la séparation et la propreté d'un
+morphisme : on regarde ce qui se passe au-dessus d'un petit disque.
+
+Le brouillon est difficile et souvent illisible, et il ne démontre pas son
+théorème. Il en montre la genèse : une notion forgée pour l'occasion
+(\emph{monogène}, pour une section qui choisit dans chaque fibre le point
+générique d'une composante de manière continue), la question de sa
+représentabilité, le passage à une base locale et complète, et l'essai d'une
+construction, repris plusieurs fois. Le sujet s'appelle aujourd'hui l'espace
+des composantes irréductibles d'un morphisme, et on le traite dans le cadre des
+espaces algébriques, précisément parce que $M$ n'est pas toujours séparé.
+
+\keywords{irreducible components of fibres, geometrically irreducible, universally open morphism, space of irreducible components, valuative criterion, strictly henselian trait}
+\end{resume}
+
+\section*{Le fil du dossier, et les conventions}
+
+Le dossier est une seule section de rédaction, sous un titre de sa main, et il
+avance en quatre temps.
+
+\begin{enumerate}
+\item[1.] \emph{La notion et la question} (page 3). Une section est
+\emph{monogène} si elle choisit continûment le point générique d'une
+composante géométriquement irréductible de chaque fibre ; ces sections forment
+un foncteur de la base ; est-il représentable, et par quoi ?
+\item[2.] \emph{Réduction et construction} (pages 4 à 7). Le problème est
+local sur la base, se ramène à une base locale complète, et s'y construit
+quand la fibre fermée est irréductible. Un Lemme résume ce qui a été obtenu.
+\item[3.] \emph{Le théorème} (pages 8 à 10). Existence d'un $M$ étale séparé
+sous deux conditions de spécialisation, puis d'un $M$ propre sous une
+troisième, avec deux remarques.
+\item[4.] \emph{Reprise} (pages 11 à 13). Retour au cas des fibres
+irréductibles, où la continuité de la section générique équivaut à
+l'ouverture du morphisme ; définitions arrêtées de « universellement
+monogène » et de « monogène » ; la question de représentabilité reposée ;
+un essai de lemme de spécialisation, barré.
+\end{enumerate}
+
+\emph{Conventions.} $f : X \to Y$ est de type fini. On note $X_y$ la fibre en
+$y \in Y$, $X_{\bar{y}}$ une fibre géométrique, c'est-à-dire
+$X \otimes_{Y} \Omega$ pour une extension algébriquement close $\Omega$ de
+$\kappa(y)$, et $\mathrm{Irr}(Z)$ l'ensemble des composantes irréductibles d'un
+espace $Z$. On garde sa notation $E_{X/Y}(y)$ pour l'ensemble des composantes
+de la fibre $X_y$ qu'il qualifie de « relativement irréductibles », et l'on
+écrit ici \emph{géométriquement irréductibles}.\footnote{Il écrit l'adverbe en
+abrégé, « rel » suivi d'un t surélevé et souligné, et ne le définit nulle part.
+Le sens retenu est fixé par la page 4 : la composante « rel.\ irréd. » qui
+correspond à un point $\psi(y)$ de $M$ est celle pour laquelle $\psi(y)$ est
+rationnel sur $\kappa(y)$, et un point de $M$ au-dessus de $y$ rationnel sur
+$\kappa(y)$ indexe une composante que l'extension des scalaires ne casse pas.
+La page 8 introduit l'abréviation parallèle « abs.\ » (absolument), insérée en
+interligne au-dessus de « irréductibles » ; dans l'usage de Weil « absolument
+irréductible » voulait précisément dire géométriquement irréductible, ce qui
+ferait des deux adverbes des synonymes, et l'on ne comprendrait pas qu'il les
+distingue. On lit donc ici « abs.\ irréductible » comme « irréductible »,
+sans plus, et l'on signale que cette lecture est la nôtre.} « Monogène » est
+son mot, et on le garde.
+
+\emph{Deux définitions de « monogène ».} La page 3 appelle monogène une
+application $\varphi : Y \to X$ telle qu'il existe un ouvert $U$ de $X$,
+universellement ouvert sur $Y$, avec $\varphi(y)$ point générique de
+$U \cap X_y$ pour tout $y$. La page 11 passe par un intermédiaire :
+$U \to Y$ est \emph{universellement monogène} (fibres géométriquement
+irréductibles, morphisme universellement ouvert), et $\varphi$ est monogène si
+elle est la section des points génériques d'un tel $U$. Les deux disent la même
+chose, et c'est la seconde qu'on adopte.
+
+\emph{Ce que le dossier annonce et n'établit pas} : la démonstration du
+théorème de la page 8 ; la plupart des hypothèses du Lemme de la page 7 ; les
+conditions a), b), c) de la page 10 ; la représentabilité que la page 12
+redemande avec trois points d'interrogation ; les deux conclusions de la page
+13, qu'il fait suivre de « Vérifier ! ».
+
+\pagerange{1}{1}
+\section*{Le titre (page 1)}
+
+Le premier feuillet ne porte que l'en-tête d'une rédaction : « Chap.\ VI »,
+une ligne sur un paragraphe consacré à la descente et à ses applications, deux
+mots biffés --- « Construction », « Étude » ---, et le titre, souligné sur deux
+lignes : \emph{Morphismes étales associés à l'étude des composantes
+irréductibles d'un morphisme ouvert}.\footnote{Le chiffre est un VI sur le
+feuillet et non le V du titre de l'inventaire ; le premier des deux mots biffés
+est celui que les archivistes ont retenu. Les deux mots qui suivent « Dans le
+§ de la » ne sont pas assurés, « descente » étant une lecture incertaine et le
+suivant illégible. Rien dans le dossier ne dit de quel ouvrage ce chapitre
+devait faire partie ; l'inventaire range la cote parmi les papiers du Séminaire
+de géométrie algébrique, et l'on s'en tient là.}
+
+\pagerange{3}{3}
+\section*{Sections monogènes et le foncteur qu'elles forment (page 3)}
+
+Soit $f : X \to Y$ de type fini. On dit que $X$ est \emph{monogène} sur $Y$ si
+ses fibres sont géométriquement irréductibles et si $f$ est ouvert ; qu'une
+application $\varphi : Y \to X$ est \emph{monogène} s'il existe un ouvert $U$
+de $X$, universellement ouvert sur $Y$, tel que pour tout $y$, $U \cap X_y$
+soit non vide et géométriquement irréductible, de point générique
+$\varphi(y)$.\footnote{La page écrit d'abord seulement « ouvert », puis reprend
+la ligne et donne « universellement ouvert sur $Y$ », qui est aussi ce que
+retient la définition 3 de la page 11. La non-vacuité et l'irréductibilité
+géométrique de $U \cap X_y$ ne sont pas écrites dans la définition de la page
+3, mais sans elles « le point générique de $U \cap f^{-1}(y)$ » n'a pas de sens
+et la stabilité par changement de base qui suit est fausse ; on les ajoute.
+Une variante « si $Y$ est noethérien, il revient au même de dire » suit, dont
+la seconde condition est illisible, ainsi qu'un bloc marginal en biais qui ne
+se lit pas au-delà de l'implication qui l'ouvre.}
+
+\emph{Stabilité par changement de base.} Si $\varphi$ est monogène, et
+$Y' \to Y$ un morphisme quelconque, posons $X' = X \times_Y Y'$ et
+$U' = U \times_Y Y'$. Alors $U'$ est ouvert dans $X'$ et encore universellement
+ouvert sur $Y'$ ; la fibre de $U'$ en $y'$ au-dessus de $y$ est
+$U_y \otimes_{\kappa(y)} \kappa(y')$, irréductible parce que $U_y$ est
+géométriquement irréductible. On définit $\varphi'(y')$ comme son point
+générique, et $\varphi'$ est monogène.\footnote{Ce n'est pas la composée de
+$\varphi$ et de la projection --- un point générique ne se transporte pas par
+image réciproque ---, d'où son « définie de façon évidente ». C'est là que
+l'irréductibilité \emph{géométrique} des fibres, et non leur seule
+irréductibilité, est indispensable.} Ainsi
+\[
+  F(Y') = \{\text{sections monogènes de } X' / Y'\}
+\]
+est un foncteur contravariant en $Y'$.
+
+\emph{La question.} $F$ est-il représentable ? Si oui, remarque-t-il, le
+représentant $M$ est vraisemblablement étale de type fini sur $Y$, mais pas
+nécessairement séparé.
+
+\emph{Le critère.} Soit $M$ étale de type fini sur $Y$, et $\varphi_M$ une
+application monogène pour $X \times_Y M / M$. Supposons que pour tout $y \in Y$
+et toute extension algébriquement close $\Omega$ de $\kappa(y)$, l'application
+qui à un point $m \in M(\Omega)$ associe la composante de $X \otimes_Y \Omega$
+de point générique $\varphi_M(m)$,
+\[
+  M(\Omega) \longrightarrow \mathrm{Irr}(X \otimes_Y \Omega),
+\]
+soit bijective. Alors $(M, \varphi_M)$ représente $F$. La page ne le démontre
+pas ; la page 4 dit à quoi la démonstration se ramène.\footnote{Une note en
+marge le glose : « $M$ correspond aux points génériques des fibres de
+$X \to Y$ ». Le nom moderne de l'objet est \emph{espace des composantes
+irréductibles} de $X/Y$ ; il est traité dans M.~Romagny, « Composantes
+connexes et irréductibles en familles », \emph{Manuscripta Math.} 136 (2011),
+dans le cadre des espaces algébriques --- ce que la remarque « pas
+nécessairement séparé » laisse prévoir. Le dossier ne cite personne, et la
+parenté n'est pas une filiation.}
+
+\pagerange{4}{4}
+\section*{Réduction au cas d'une base locale complète (page 4)}
+
+\emph{Ce qu'il faut prouver.} Soit $\psi : Y \to M$ une application (d'ensembles)
+telle que $\psi(y)$ soit rationnel sur $\kappa(y)$ pour tout $y$, et que
+l'application $\varphi : Y \to X$ qui à $y$ associe le point générique de la
+composante géométriquement irréductible de $X_y$ indexée par $\psi(y)$ soit
+monogène. Alors $\psi(Y)$ est ouvert dans $M$, et $\psi$ provient d'une section
+de $M$ sur $Y$.\footnote{La page écrit $\varphi : Y' \to X'$ dans un énoncé où
+tout se passe sur $Y$ ; on lit $Y$. Elle dit la conclusion « évidente, grâce à
+la condition de rationalité ». La seconde moitié l'est en effet : un ouvert
+$V = \psi(Y)$ de $M$ qui s'envoie bijectivement sur $Y$ avec
+$\kappa(\psi(y)) = \kappa(y)$ est étale et radiciel et surjectif sur $Y$, donc
+isomorphe à $Y$. Que $\psi(Y)$ soit ouvert, c'est ce que la monogénéité doit
+fournir, et la page ne dit pas comment.}
+
+\emph{Conséquence : le problème est local.} Si le problème des modules a une
+solution au-dessus du schéma local $\mathrm{Spec}(\mathcal{O}_{Y,y})$, il en a
+une au-dessus d'un voisinage ouvert de $y$.\footnote{La page écrit
+$\mathrm{Spec}(\Omega_y)$, deux fois sur la ligne. Au-dessus d'un point
+géométrique la solution est tautologique --- l'ensemble des composantes de la
+fibre géométrique --- et l'énoncé ne dirait rien ; la phrase suivante de la
+page, « cela nous ramène au cas où $Y = \mathrm{Spec}(A)$, $A$ local », montre
+que c'est le schéma local qui est en jeu. On le lit ainsi. La page n'argumente
+pas le passage du schéma local à un voisinage ; c'est un argument de passage à
+la limite pour un $M$ de présentation finie, mais la propriété de
+représentation elle-même doit encore être propagée aux points voisins, et rien
+ici ne le fait.} On se ramène ainsi, pour l'existence, au cas
+$Y = \mathrm{Spec}(A)$ avec $A$ local.
+
+\emph{Passage au complété.} Par descente des morphismes étales, on se ramène
+ensuite au cas où $A$ est complet, et l'on peut supposer que la fibre fermée se
+décompose en composantes géométriquement irréductibles.\footnote{La descente
+le long de $\mathrm{Spec}(\widehat{A}) \to \mathrm{Spec}(A)$, fidèlement plat,
+est effective pour un $M$ séparé : un morphisme quasi-fini séparé est
+quasi-affine (théorème principal de Zariski), et les données de descente sur un
+schéma quasi-affine sont effectives. Pour un $M$ non séparé, que la page 3
+vient d'envisager, l'effectivité n'est pas garantie dans la catégorie des
+schémas ; c'est l'une des raisons pour lesquelles la théorie moderne travaille
+avec des espaces algébriques. La page ne fait pas la distinction. Qu'on puisse
+rendre les composantes de la fibre fermée géométriquement irréductibles, c'est
+une extension finie du corps résiduel, relevée à $A$ complet par un
+revêtement étale ; la page l'affirme sans le détailler, et plusieurs mots de la
+ligne sont illisibles.}
+
+\pagerange{5}{6}
+\section*{La construction quand la fibre fermée est irréductible (pages 5 et 6)}
+
+Hypothèses : $f : X \to Y = \mathrm{Spec}(A)$ universellement ouvert, de type
+fini, $A$ local noethérien complet, $y$ le point fermé, et $X_y$
+irréductible.\footnote{Un adjectif est ajouté devant « universellement
+ouvert », lu « strictement » avec doute et glosé dans un bloc marginal en biais
+qui ne se lit pas ; on ne le reprend pas. Un « N.B. » entouré surmonte « de
+type fini », sans texte lisible.}
+
+\emph{Premier temps : exclure la ramification.} Soit $x$ un point de la fibre
+fermée. La page commence par supposer que $x$ est dans l'adhérence de deux
+composantes distinctes d'une fibre, et construit, pour réfuter cette
+éventualité, un trait $Y' = \mathrm{Spec}(W)$ au-dessus de $Y$, $W$ anneau de
+valuation discrète, en normalisant $A$ dans une extension finie $K'$ du corps
+des fractions $K$ : l'anneau $A'$ obtenu est fini sur $A$ et \emph{local}, parce
+que $A$ est local complet, donc hensélien.\footnote{Il écrit « $\frac{1}{2}$
+local complet », le $\frac{1}{2}$ étant son abréviation de « semi- » : un
+anneau fini sur un anneau local complet est semi-local complet, donc produit de
+locaux, et $A'$ intègre est local. On restitue l'argument dans ce sens. Le
+premier alinéa (i) est presque entièrement illisible, et le « lemme b) » qu'il
+invoque n'est pas identifié dans le dossier.} Le cas est déclaré « absurde ».
+
+\emph{Second temps : la section.} Pour chaque $y \in Y$ il y a donc une unique
+composante $\xi \in E_{X/Y}(y)$ dont l'adhérence contient $x$, et elle est
+géométriquement irréductible. On pose $\varphi(y) = $ son point générique. Les
+deux conditions d'une application monogène sont satisfaites, et il existe un
+ouvert $U$ de $X$ contenant $\varphi(Y)$ dont les fibres sur $Y$ sont
+géométriquement irréductibles.
+
+\emph{Reste la continuité} (page 6), que la page ramène à l'ouverture de
+$X \to Y$, et c'est exactement ce que la Prop.~1 de la page 11 établira :
+pour la section des points génériques d'un morphisme à fibres irréductibles,
+continuité et ouverture sont une seule et même chose.\footnote{Un bloc de
+deux lignes enfermé dans une boucle est annulé au milieu de la page 6. La page
+enchaîne sur le cas où la fibre fermée n'est plus irréductible : on traite
+chacune de ses composantes $i = 1, \ldots, n$ par la construction précédente,
+et l'on recolle les $n$ sections obtenues dans un $M'$ ; les mots qui disent
+comment sont presque tous illisibles, et l'on n'en tire pas davantage.}
+
+\pagerange{7}{7}
+\section*{Le Lemme de la page 7}
+
+La page récapitule sous forme de lemme ce qui vient d'être fait. Soit $X$ de
+type fini sur $Y = \mathrm{Spec}(A)$, avec $A$ local complet et $X$
+universellement ouvert sur $Y$, et supposons que les composantes de la fibre
+fermée soient géométriquement irréductibles. Il existe alors un $Y$-schéma $M$
+qui représente les composantes géométriquement irréductibles des fibres de
+$X/Y$ ; au-dessus de l'ouvert $Y' = Y - \{y\}$ il est séparé et
+fini.\footnote{Des cinq hypothèses du Lemme, seules (i), (ii) et (iii) se
+lisent ; (iv) parle de la disparition de composantes au-dessus de $Y'$ et (v)
+de recollements des composantes suivis d'une extension finie de la base, mais
+la plupart de leurs mots sont illisibles, et l'on ne les restitue pas. Le nom
+du $Y$-schéma est d'une terminaison incertaine.}
+
+La page ajoute un critère de séparation, sous un titre souligné que la
+transcription lit « Le Moyen » sans l'assurer : si, après tout changement de
+base local $A \to A_1$, aucune composante d'une fibre de $X \times_Y Y_1$ ne se
+spécialise en deux composantes distinctes, alors $M/Y$ est
+séparé.\footnote{L'énoncé est fait de fragments séparés par des mots
+illisibles ; on en donne le sens que ses mots lisibles --- « se spécialise
+en », « deux distinctes », « Alors $M/Y$ est séparé » --- permettent, et qui
+est celui de la condition (ii) de la page 8.}
+
+\pagerange{8}{9}
+\section*{Le théorème (pages 8 et 9)}
+
+\emph{L'énoncé du feuillet.} Soit $f : X \to Y$ de type fini. On suppose que
+pour tout point générique $x$ d'une composante d'une fibre $X_y$, il existe un
+voisinage de $x$ qui soit universellement ouvert et quasi-fini sur
+$Y[t_1, \ldots, t_{n-1}]$ --- condition vérifiée, dit-il, si $X$ est plat sur
+$Y$ au voisinage de $x$.\footnote{« Principal » est son mot pour ces points
+génériques. L'indice $n - 1$ est sur le feuillet sans que $n$ soit défini ; on
+comprend la dimension de la fibre en $x$ augmentée de un, mais c'est une
+lecture. L'assertion sur le cas plat n'est pas démontrée ici et cette lecture ne
+la vérifie pas : ce qu'on sait sans peine est qu'un morphisme plat de
+présentation finie est universellement ouvert, et c'est cette propriété que
+la construction des pages 5 et 6 utilise.} Pour qu'il existe un $M$
+\emph{étale et séparé} sur $Y$ indexant les composantes géométriquement
+irréductibles des fibres de $X/Y$, il faut et il suffit que, pour tout trait
+$Y' = \mathrm{Spec}(W) \to Y$, de point générique $y'$ et de point fermé
+$\bar{y}'$, en posant $X' = X \times_Y Y'$ :
+
+\begin{enumerate}
+\item[(ii)] aucune composante de la fibre générique $X'_{y'}$ ne se spécialise
+en deux composantes irréductibles distinctes de la fibre spéciale ;
+\item[(iii)] deux composantes irréductibles distinctes ne se rencontrent pas
+dans une même spécialisation.
+\end{enumerate}
+
+La démonstration n'est pas sur les feuillets, et la première condition du
+théorème, qui précède (ii), est illisible.\footnote{La condition (ii) est
+donnée avec la glose qu'il écrit en interligne, « i.e.\ une comp.\ de la fibre
+générique ne se spécialise en deux composantes abs.\ irréductibles distinctes
+de la fibre spéciale ». La condition (iii) est lacunaire : on lit
+« composantes abs.\ irréductibles distinctes », « ne », « spécialiser en »,
+« comp.\ abs.\ irréd.\ de $f^{-1}(y')$ » ; le sens qu'on lui donne ici est
+celui que ces mots permettent et que l'analyse qui suit rend nécessaire, et il
+est le nôtre. Les hypothèses sur le trait --- « fini et plat », « $V^{\circ}$
+fini » --- ne se lisent qu'en fragments.}
+
+\emph{Pourquoi ces conditions : les trois critères valuatifs.} Le théorème a la
+forme qu'il a parce qu'un schéma étale au-dessus d'un trait se lit sur ses
+points. Supposons $W$ strictement hensélien et $M$ étale de type fini sur
+$Y' = \mathrm{Spec}(W)$ ; ce qui suit est notre analyse, non celle du
+feuillet.
+
+\begin{itemize}
+\item \emph{Toute étale.} Si $m$ est un point de la fibre spéciale de $M$,
+l'anneau local $\mathcal{O}_{M,m}$ est une $W$-algèbre locale étale de même
+corps résiduel, donc égale à $W$ : un seul point générique de $M$ se spécialise
+en $m$. Dans le langage des composantes, une composante de la fibre spéciale
+provient d'une seule composante générique --- deux composantes génériques ne
+viennent pas se fondre en une.
+\item \emph{Séparation.} Par le critère valuatif, $M$ est séparé si et seulement
+si un point générique se spécialise en au plus un point spécial : une
+composante générique ne se casse pas en deux. C'est la condition (ii).
+\item \emph{Propreté.} Par le critère valuatif d'existence, $M$ (séparé, de
+type fini) est propre si et seulement si tout point générique se spécialise en
+au moins un point spécial : aucune composante générique ne disparaît. Un
+schéma étale, séparé et propre étant fini, $M$ est alors un revêtement étale
+fini de $Y$.
+\end{itemize}
+
+\emph{Le N.B.\ et le corollaire} (page 9). Sous les conditions du théorème,
+l'ensemble des composantes de la fibre spéciale s'injecte dans celui des
+composantes de la fibre générique --- à chaque point spécial de $M$, le Lemme de
+Hensel attache une unique section de $M$ sur le trait, et le point générique de
+cette section ---, mais l'injection n'est pas nécessairement
+surjective.\footnote{La page écrit que les composantes de $f^{-1}(\bar{y}')$
+s'injectent dans celles de $f^{-1}(y')$ ; on lit la barre comme désignant le
+point fermé du trait, ce que la suite de la page, où $y'$ est générique et $y$
+spécial, impose. La justification par les sections de $M$ est la nôtre.}
+D'où le complément : pour que $M$ soit en outre fini sur $Y$, il faut et il
+suffit que
+
+\begin{enumerate}
+\item[(iii)] pour tout point générique $\xi'$ d'une composante de la fibre
+générique, il existe un point générique $x'$ d'une composante de la fibre
+spéciale tel que $x' \in \overline{\{\xi'\}}$.
+\end{enumerate}
+
+C'est exactement le critère d'existence ci-dessus.\footnote{La page annonce ce
+complément sous un mot souligné lu « Cor. » sans certitude, et l'énonce comme la
+condition pour que $M$ soit « un \emph{ouvert} étale sur $Y$ ». Ce que la
+condition fournit est la propreté, donc la finitude, et non une ouverture ; le
+mot, tel qu'il se lit, ne porte pas le sens de la condition, et l'on énonce ce
+que la condition donne. Il numérote ce complément (iii), comme la seconde
+condition de la page 8 ; on garde ses numéros.}
+
+\pagerange{10}{10}
+\section*{Deux remarques (page 10)}
+
+\begin{enumerate}
+\item[1)] La première condition du théorème, seule, est nécessaire et suffisante
+pour l'existence d'un $M$ étale \emph{non nécessairement séparé}. C'est
+l'analogue, dans l'analyse de la page précédente, du premier des trois critères
+: ce qu'il faut pour que $M$ soit étale, avant toute question de séparation ou
+de propreté.\footnote{Le rapprochement est le nôtre, et il repose sur une
+condition que la page 8 ne laisse pas lire. Au-dessus d'un mot « Corollaire »
+biffé.}
+\item[2)] La condition (iii) est satisfaite si $f$ est séparable ; et si $f$
+est propre, $M$ est propre sur $Y$.\footnote{Entre les deux, la page ramène la
+conjonction de (ii) et (iii), dans le cas propre, à trois conditions a), b),
+c), dont on ne lit que des bribes (« d'une composante rel.\ irréd. », « une
+spécialisation », « $M$ existe ») ; on ne les restitue pas. La seconde
+assertion est cohérente avec l'analyse de la page 9 : si $f$ est propre,
+l'adhérence d'une composante générique rencontre la fibre spéciale, et, $f$
+étant de plus universellement ouvert, contient une composante de celle-ci.
+L'argument est le nôtre.}
+\end{enumerate}
+
+\pagerange{11}{11}
+\section*{Fibres irréductibles : continuité et ouverture (page 11)}
+
+\textbf{Proposition 1.} Soit $f : X \to Y$ un morphisme de type fini dont les
+fibres sont irréductibles et non vides, et soit $\varphi(y)$ le point générique
+de $X_y$. On considère les conditions :
+
+\begin{enumerate}
+\item[(i)] $\varphi : Y \to X$ est continue ;
+\item[(ii)] $f$ est ouvert ;
+\item[(iii)] $y \in \overline{\{y'\}} \Longrightarrow \varphi(y) \in \overline{\{\varphi(y')\}}$ ;
+\item[(iii bis)] pour tous $y \in \overline{\{y'\}}$ et $x$ au-dessus de $y$, il
+existe $x'$ au-dessus de $y'$ tel que $x \in \overline{\{x'\}}$.
+\end{enumerate}
+
+Alors (i) $\Leftrightarrow$ (ii) sans autre hypothèse, et
+(ii) $\Rightarrow$ (iii) $\Leftrightarrow$ (iii bis) ; si $f$ est localement de
+présentation finie --- par exemple $Y$ localement noethérien ---, les quatre
+conditions sont équivalentes.
+
+\emph{Démonstration.} Pour $U$ ouvert dans $X$, le point générique de la fibre
+irréductible $X_y$ est dans $U$ si et seulement si $U$ rencontre $X_y$ ; donc
+\[
+  \varphi^{-1}(U) = f(U),
+\]
+et $\varphi$ est continue si et seulement si $f$ est ouvert. Une application
+continue respecte la spécialisation, d'où (i) $\Rightarrow$ (iii). Si (iii)
+vaut, et $x$ est au-dessus de $y \in \overline{\{y'\}}$, on a
+$x \in \overline{\{\varphi(y)\}} \subset \overline{\{\varphi(y')\}}$, et
+$x' = \varphi(y')$ convient : c'est (iii bis). Inversement (iii bis) appliquée
+à $x = \varphi(y)$ donne $\varphi(y) \in \overline{\{x'\}}$ avec $x' \in X_{y'}$,
+donc $x' \in \overline{\{\varphi(y')\}}$, d'où (iii). Enfin (iii bis) dit que les
+générisations se relèvent le long de $f$, et pour un morphisme localement de
+présentation finie cela entraîne que $f$ est ouvert.\footnote{La formule
+$\varphi^{-1}(U) = f(U)$ est sur la page ; le reste de la démonstration est
+presque entièrement illisible, et on la rédige. La page énonce (ii) sous la
+forme « $f$ soit ouvert, […] si $Y$ est loc.\ noeth., $f$ de type fini », ce qui
+place l'hypothèse de finitude au bon endroit : elle ne sert qu'au retour de
+(iii bis) vers (ii), qui est le relèvement des générisations
+(EGA~IV, 1.10.4). La condition (iii bis) est encadrée sur le feuillet.}
+
+\textbf{Définition 2.} $f$ est \emph{universellement monogène} s'il est
+universellement ouvert et à fibres géométriquement irréductibles --- de sorte
+que la Proposition 1 s'applique après tout changement de
+base.\footnote{La page n'écrit que « Définition de \emph{universellement
+monogène} » après une première phrase inachevée ; on complète par ce que la
+page 3 et la page 12 en utilisent.}
+
+\textbf{Définition 3.} Une application $\varphi : Y \to X$ est \emph{monogène}
+s'il existe un ouvert $U$ de $X$, universellement monogène sur $Y$, dont
+$\varphi$ est la section des points génériques.
+
+\pagerange{12}{12}
+\section*{La question reposée (page 12)}
+
+La propriété monogène est locale sur $Y$ : elle dit que $\varphi(y)$ est le
+point générique d'une composante de $X_y$, et qu'au voisinage il existe un
+ouvert $U$ universellement ouvert dont les fibres sont géométriquement
+irréductibles.\footnote{La page ajoute qu'on peut rétrécir $U$ en un
+$U' \subset U$ encore surjectif sur $Y$ --- lecture incertaine ---, et plusieurs
+mots de la phrase sont illisibles.}
+
+Notant $I(X/S)$ l'ensemble des sections monogènes de $X$ sur $S$, le foncteur
+$S' \mapsto I(X \times_S S' / S')$ est contravariant de façon évidente. « Est-il
+représentable ??? » La question de la page 3 revient donc, cette fois sur une
+base notée $S$, et le dossier ne la tranche pas.\footnote{Dans l'état des
+feuillets, la représentabilité n'est acquise que sous les conditions du
+théorème de la page 8, qui n'est pas démontré. La réponse moderne est qu'en
+général le foncteur n'est pas représentable par un schéma, mais qu'il l'est
+par un espace algébrique étale sous des hypothèses de platitude et de
+présentation finie ; on renvoie à l'article de Romagny cité plus haut pour
+l'énoncé exact, que cette lecture ne reproduit pas.}
+
+La page se ferme sur un cube de changements de base, au crayon : $X \to S$,
+son changement de base $X_M \to M$ par $M \to S$, et la face obtenue au-dessus
+d'un point géométrique $S' = \mathrm{Spec}(\Omega)$, avec $X'_{m'} \to m'$.
+
+\begin{tikzcd}[column sep=small, row sep=small, nodes={font=\scriptsize}]
+X \arrow[dd] & & X_M \arrow[ll] \arrow[dd] & \\
+& X' \arrow[ul] \arrow[dd] & & X'_{m'} \arrow[ll] \arrow[ul] \arrow[dd] \\
+S & & M \arrow[ll] & \\
+& S' = \mathrm{Spec}(\Omega) \arrow[ul] & & m' \arrow[ll] \arrow[ul]
+\end{tikzcd}
+
+C'est la situation du critère de la page 3 : le point $m'$ de $M$ au-dessus du
+point géométrique $S'$ doit indexer une composante de $X'$.\footnote{Le montant
+de gauche du cube porte $\kappa(s)$ en haut et $\kappa(s')$ en bas, reliés par
+un trait à $S$ et à $S'$.}
+
+\pagerange{13}{13}
+\section*{Un lemme barré, et la spécialisation des composantes (page 13)}
+
+\emph{Le lemme barré.} Soit $f : X \to Y$ plat de type fini, $Y$ local
+noethérien, $y$ un point de $Y$. Il existerait un ouvert $U$ tel que, pour tout
+$y'$ et tout point générique $x'$ d'une composante de $X_{y'} \cap U$, un point
+générique $x$ d'une composante de $X_y$ soit spécialisation de $x'$. Il est
+annulé par deux grandes diagonales, et il ne tient pas tel
+quel.\footnote{Contre-exemple, si $U$ doit contenir la fibre $X_y$ tout
+entière --- la condition sur $U$ n'est pas lisible : sur un trait
+$\mathrm{Spec}(W)$ d'uniformisante $t$, soit $X \subset \mathbb{A}^3_W$ la
+réunion du plan $z = 0$ et de la droite $x = 0$, $z = t$. Chacune des deux
+composantes domine le trait et $X$ est réduit, donc $X$ est plat sur $W$. La
+fibre générique a deux composantes, le plan et une droite disjointe ; dans la
+fibre spéciale la droite vient se coucher dans le plan, dont elle n'est plus
+une composante. Le point générique de la droite générique n'a donc aucune
+composante de la fibre spéciale parmi ses spécialisations. Il faudrait une
+hypothèse d'équidimensionalité.}
+
+\emph{Le changement de base et les spécialisations.} Deux diagrammes
+cartésiens, $X' = X \times_Y Y'$ au-dessus de $Y' \to Y$, puis
+$X'' = X \times_Y Y''$ au-dessus de $Y'' \to Y' \to Y$, portent chacun leurs
+points : $x \leftarrow \xi$ au-dessus de $y \leftarrow \eta$,
+$x' \leftarrow \xi'$ au-dessus de $y' \leftarrow \eta'$.
+
+\begin{tikzcd}[column sep=small, row sep=small, nodes={font=\scriptsize}]
+X \arrow[d, "f"] & X' = X \times_Y Y' \arrow[l] \arrow[d, "f'"] & X'' = X \times_Y Y'' \arrow[l] \arrow[d] \\
+Y & Y' \arrow[l] & Y'' \arrow[l]
+\end{tikzcd}
+
+\emph{Hypothèses} : $x \in E_{X/Y}(y)$, $\xi \in E_{X/Y}(\eta)$,
+$x \in \overline{\{\xi\}}$ ; $y'$ au-dessus de $y$, $\eta'$ au-dessus de
+$\eta$, $y' \in \overline{\{\eta'\}}$. \emph{Conclusions espérées} :
+
+\begin{enumerate}
+\item[a)] pour tout $x' \in E_{X'/Y'}(y')$ au-dessus de $x$, il existe
+$\xi' \in E_{X'/Y'}(\eta')$ au-dessus de $\xi$ avec
+$x' \in \overline{\{\xi'\}}$ ;
+\item[b)] pour tout $\xi' \in E_{X'/Y'}(\eta')$ au-dessus de $\xi$, il existe
+$x' \in E_{X'/Y'}(y')$ au-dessus de $x$ avec $x' \in \overline{\{\xi'\}}$.
+\end{enumerate}
+
+Ce sont les deux sens --- montée et descente --- de la compatibilité entre la
+spécialisation des composantes et le changement de base, dont la définition de
+$M$ comme foncteur a besoin. Il écrit « Vérifier ! », et ne vérifie
+pas.\footnote{Une flèche venue de la marge porte une hypothèse supplémentaire
+sur $Y' \to Y$ dont les mots sont illisibles. Un « Concl' » qui suivait,
+formulé par deux applications
+$\Gamma_{X'/Y'}(y', \eta') \to E_{X'/Y'}(y')$ et
+$\Gamma_{X'/Y'}(y', \eta') \to E_{X'/Y'}(\eta')$ dont l'une au moins devait
+être surjective, est annulé par une grande boucle. Sans hypothèse sur
+$Y' \to Y$ (plate, par exemple) cette lecture ne garantit ni a) ni b).}
+
+\end{document}
