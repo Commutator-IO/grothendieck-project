@@ -1,0 +1,835 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 39 (pages 1-19).
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried moves into
+% a footnote. It is held to being mathematically correct as it stands; where
+% the manuscript is loose or mistaken the true statement appears and the
+% footnote says what the page has. In any dispute of substance the
+% transcription governs: whoever cites Grothendieck cites batch-01.fr.tex.
+%
+% Scope: a single document for the whole folder. The shelfmark holds one
+% batch (pages 1-19), read whole before any of this was written. Pages 1, 8
+% and 17 are blank separators.
+%
+% Notation fixed for the whole folder. k is the base ring (a field in the
+% first redaction, pages 2-7; any commutative ring in the second, pages 9-16);
+% S_n = k[[t_1,...,t_n]], m_n its ideal (t_1,...,t_n), epsilon : S_n -> k the
+% augmentation f |-> f(0), X_n = Spf S_n. The family is written A = (A_n); the
+% page writes A in the first redaction and A_* in the second. An
+% A-morphism X_m -> X_n is an n-tuple of elements of A_m whose values at 0 are
+% nilpotent. The conditions are given NAMES here — (I) coordonnées, (S)
+% substitution, (R) anneau, (L) local, (H) inversion/hensélienne, (D)
+% coefficients, (E) équations différentielles, (F) feuilletages, (Q) quotients
+% — because the page's letters collide: page 11 calls the henselian condition
+% d), page 14 opens the coefficient condition also as d), pages 13 and 15
+% invoke e), and the first and second redactions use a)-f) for different
+% things. A table in the spine section gives the correspondence.
+%
+% Substantive departures from the page, with pages.
+%  - Page 2: the smallest family satisfying stability, subring and t_1 in A_1
+%    is Lambda[t], Lambda the prime RING, not P[t] with P the prime field;
+%    the field needs the locality condition, which the page struck from that
+%    line. Page 2 also writes 1/f in S_n where A_n is meant.
+%  - Page 3: the NB « moyennant b) et e), la condition a) équivaut à 1 in A_0,
+%    différence, produit » is restated as what holds (given coordinates and
+%    substitution, the ring condition is equivalent to those three); the
+%    second redaction, page 9, reorganises the axioms exactly this way.
+%  - Page 5: the claim that the Hausdorff group law is an A-law is announced
+%    and reduced to the linear case by Ado; the linear case is not done, and
+%    this reading says what it would still need (the exponential is a
+%    time-one map, and time is only a formal variable in (E)).
+%  - Page 6: « cos, sin, tg in A_1 » is justified by a route the page does not
+%    give (arctan, inverse series, a square root by henselianity).
+%  - Page 9: the equivalence « composition closed <=> p^*(A_n) in A_m » needs
+%    the constants of A_n in A_m — his own margin note says so.
+%  - Page 10: the transversal fibre products announced under a)-c) need the
+%    henselian condition (H); « pleinement fidèle (?) » is faithful, not full;
+%    Hom_A(X, X_1) is the ideal of functions nilpotent at 0, not all of O_A(X).
+%  - Page 11: Cor. 1 as proved needs the substitution t_{n+1} = 1, which (S)
+%    does not allow — his own margin objection; the reading proves it with the
+%    coefficient condition (D) of page 14, which also gives the page's first
+%    form (any unit value at 0) directly, and with it f(0)^{-1} in A_0 — the
+%    fact his reductions between the forms use tacitly.
+%  - Page 19: the page writes the unit alpha as an element of A_0^*; it is a
+%    unit of A_0[[Z]].
+%
+% Announced and never established in the folder: whether f') implies f)
+% (page 3 margin); whether S_n is faithfully flat over A_n (page 12 margin);
+% the Hausdorff factorisation (page 5); the bijection between formal quotients
+% and formal equivalence relations (page 15, asserted); the condition (Q)
+% itself, which is an axiom. The formal preparation theorem of pages 18-19 is
+% never connected by the page to the classes A; the connection drawn in the
+% résumé and the spine is this reading's.
+%
+% Pass: Opus 5 (claude-opus-5), 2026-09-13 — first pass, unchecked against the pages by a human.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{39}
+\pages{1}{19}
+\dating{[vers 1960-1970]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Fonctions et structures « élémentaires » [Schémas formels, théorème de préparation] : notes manuscrites (s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Qu'est-ce qu'une classe « raisonnable » de fonctions ? Les polynômes, les
+fractions rationnelles, les fonctions algébriques, les fonctions qu'on obtient
+en résolvant des équations différentielles : chacune de ces familles est plus
+riche que la précédente, et chacune est stable par un certain nombre
+d'opérations — additionner, multiplier, composer, inverser une application,
+parfois intégrer. Ces dix-neuf pages cherchent à dire, une fois pour toutes,
+quelles opérations une telle famille doit supporter pour qu'on puisse faire de
+la géométrie avec elle.
+
+Le cadre est celui des séries formelles : une « fonction » de $n$ variables
+est une série entière $f(t_1, \ldots, t_n)$ dont on ne demande pas qu'elle
+converge. Toutes les séries formelles forment un monde trop grand et sans
+contenu propre ; une classe de fonctions sera un choix, pour chaque $n$, d'un
+sous-anneau $A_n$ de séries. Grothendieck dresse la liste des exigences :
+contenir les coordonnées, être stable par substitution, puis par inversion des
+changements de variables — et découvre qu'une telle liste, si on la prend au
+sérieux, force la famille à ressembler aux fonctions algébriques. Il en tire
+la conséquence qui compte : on peut alors définir des « variétés » dont les
+changements de cartes sont dans la classe, comme on définit les variétés
+analytiques en exigeant des changements de cartes analytiques plutôt que
+seulement différentiables. Il pousse ensuite la liste jusqu'aux sous-variétés,
+aux quotients, au calcul différentiel, et — en caractéristique nulle — aux
+exponentielles de champs de vecteurs, aux groupes de Lie formels et aux
+feuilletages.
+
+Le dossier contient deux rédactions de ce programme, la première sur un corps
+(pages 2 à 7), la seconde sur un anneau quelconque (pages 9 à 16), plus
+ordonnée et plus prudente : on y voit Grothendieck s'objecter en marge à un
+pas de sa propre démonstration, et réorganiser ses axiomes pour que chacun ne
+serve qu'une fois. Les deux dernières pages démontrent le théorème de
+préparation de Weierstrass sous forme formelle : toute série se divise par une
+série dont les coefficients d'indice $< N$ sont « petits » et celui d'indice
+$N$ inversible, avec un reste polynomial de degré $< N$. Les feuillets ne disent pas pourquoi ce théorème
+est là ; mais c'est exactement l'outil qui, dans la théorie qu'on a
+développée depuis, sert d'axiome central à ces classes de fonctions.
+
+Car la question a eu une postérité. Les familles de séries stables par
+substitution, par inversion et par division de Weierstrass sont aujourd'hui
+appelées \emph{systèmes de Weierstrass} ; elles servent en théorie des modèles
+et en géométrie modérée, et les séries formelles algébriques, qui sont la plus
+petite famille qu'impose la liste de ces pages, sont l'objet du théorème
+d'approximation d'Artin. L'autre fil — des changements de cartes pris dans une
+classe donnée — est celui des structures définies par un pseudogroupe.
+
+\keywords{Weierstrass system, Weierstrass division theorem, henselian pair, algebraic power series, pseudogroup structure, formal Frobenius theorem, Baker–Campbell–Hausdorff formula, Hasse derivative}
+\end{resume}
+
+\pagerange{2}{19}
+\section*{Le fil du dossier, et les conventions}
+
+Le dossier ne porte aucun titre de sa main avant la page 18 ; les pages 1, 8
+et 17 sont des feuillets intercalaires vierges, qui séparent trois ensembles.
+
+\begin{itemize}
+  \item \textbf{Pages 2 à 7 : première rédaction, sur un corps $k$.} Les
+    conditions algébriques et leurs plus petits modèles (pages 2 et 3) ; la
+    condition d'inversion et l'hensélianité (page 3) ; en caractéristique
+    nulle, exponentielles, équations différentielles et groupes formels
+    (pages 4 et 5) ; primitives, fonctions usuelles et feuilletages (page 6),
+    dont la page 7 est une reprise barrée.
+  \item \textbf{Pages 9 à 16 : seconde rédaction, sur un anneau commutatif
+    $k$.} Les conditions élémentaires (pages 9 et 10) ; la condition
+    hensélienne et ses trois corollaires (pages 11 et 12) ; sous-schémas
+    formels (page 13) ; la condition sur les coefficients et le calcul
+    différentiel (page 14) ; quotients et condition intégrale (pages 15 et
+    16).
+  \item \textbf{Pages 18 et 19 : le théorème de préparation formel}, énoncé
+    et démontré.
+\end{itemize}
+
+La seconde rédaction n'est pas une copie de la première : elle change de
+base, et surtout elle remet les axiomes en ordre. On les garde distincts
+ci-dessous, et l'on désigne les conditions par des noms plutôt que par les
+lettres de la page, qui se chevauchent\footnote{La page 11 appelle d) la
+condition hensélienne ; la page 14 ouvre la condition sur les coefficients
+sous la lettre d) elle aussi ; les pages 13 et 15 invoquent une condition e) ;
+et les lettres a) à f) ne désignent pas les mêmes énoncés dans les deux
+rédactions.}. La correspondance est la suivante.
+
+\begin{itemize}
+  \item $(\mathrm{I})$ \emph{coordonnées} : $t_i \in A_n$ pour $1 \leq i \leq n$ —
+    page 2, d) avec a) ; page 9, a).
+  \item $(\mathrm{S})$ \emph{substitution} (clôture par composition) — page 3,
+    e) ; page 9, b).
+  \item $(\mathrm{R})$ \emph{anneau} : $A_n$ sous-anneau unitaire de $S_n$ —
+    page 2, b) ; page 9, c).
+  \item $(\mathrm{L})$ \emph{localité} — page 2, c) ; dans la seconde
+    rédaction, conséquence de $(\mathrm{H})$ (page 11, Cor.~1), avec la condition
+    sur les coefficients.
+  \item $(\mathrm{H})$ \emph{inversion}, ou condition hensélienne — page 3,
+    f) ; page 11, d).
+  \item $(\mathrm{D})$ \emph{coefficients} — page 14, « d) ».
+  \item $(\mathrm{E})$ \emph{équations différentielles}, en caractéristique
+    nulle — page 4, g) et g$'$).
+  \item $(\mathrm{F})$ \emph{feuilletages} — page 6, h) ; et sa forme
+    $(\mathrm{Q})$ \emph{quotients}, ou condition intégrale — page 15, f).
+\end{itemize}
+
+\textbf{Conventions.} $k$ est l'anneau de base ; $S_n = k[[t_1, \ldots, t_n]]$,
+$\mathfrak{m}_n = (t_1, \ldots, t_n)$, $\varepsilon : S_n \to k$ l'augmentation
+$f \mapsto f(0)$, et $X_n = \mathrm{Spf}\, S_n$, le germe formel de l'espace
+affine de dimension $n$ à l'origine. Une classe est une famille
+$A = (A_n)_{n \geq 0}$ de parties $A_n \subset S_n$\footnote{La page écrit $A$
+dans la première rédaction, $A_*$ dans la seconde.}. Un morphisme de
+$k$-schémas formels $X_m \to X_n$ est un homomorphisme continu
+$S_n \to S_m$, c'est-à-dire un $n$-uplet $(f_1, \ldots, f_n)$ d'éléments de
+$S_m$ dont les valeurs $f_i(0)$ sont nilpotentes dans $k$ ; sur un corps,
+nulles\footnote{La page 2 dit seulement « donné par $f_1, \ldots, f_n \in S_m$ » ;
+la condition sur $\varepsilon(f_i)$ est écrite page 9. Elle est nécessaire : un
+homomorphisme $S_n \to S_m$, $t_i \mapsto f_i$, n'est continu, et une
+substitution $\varphi(f_1, \ldots, f_n)$ n'a de sens, que si les $f_i$ sont
+topologiquement nilpotents.}. C'est un \emph{$A$-morphisme} si les $f_i$ sont
+dans $A_m$.
+
+\textbf{Le point de vue.} Les objets $X_n$ et les $A$-morphismes forment,
+sous les conditions ci-dessous, une catégorie à produits finis
+($X_m \times X_n = X_{m+n}$) dont les automorphismes sont les « changements de
+coordonnées admissibles » : ce que Grothendieck appelle un \emph{$A$-schéma
+formel} est un germe formel lisse muni d'une classe de systèmes de coordonnées
+définis à un tel changement près — une structure de pseudogroupe, au sens
+d'Ehresmann, dans le cadre formel\footnote{Le mot « pseudogroupe » n'est pas
+sur la page. Les structures définies par un pseudogroupe de transformations
+(Lie, Cartan, Ehresmann dans les années 1950) lui étaient connues ;
+l'analogie est de cette lecture.}.
+
+\textbf{Ce que le dossier annonce sans l'établir.} Que la condition
+d'hensélianité entraîne celle d'inversion (page 3) ; que $S_n$ soit fidèlement
+plat sur $A_n$ (page 12) ; que la loi de Hausdorff soit une $A$-loi (page 5) ;
+la correspondance entre quotients formels et relations d'équivalence
+formelles (page 15). Et surtout le lien entre le théorème de préparation des
+pages 18 et 19 et les classes $A$ : les feuillets ne le font pas.
+
+\pagerange{2}{3}
+\section*{Première rédaction : les conditions algébriques sur un corps (pages 2 et 3)}
+
+Soit $k$ un corps. Les anneaux $S_n$ sont reliés entre eux par les
+substitutions de variables : toute application $\sigma : \{1, \ldots, n\} \to
+\{1, \ldots, m\}$ définit $S_n \to S_m$, $t_i \mapsto t_{\sigma(i)}$. Les $S_n$
+forment ainsi un foncteur de la catégorie des ensembles finis (toutes
+applications, ensemble vide compris) vers les anneaux\footnote{La page parle
+d'« anneau cosimplicial ». Les conditions qu'elle impose — permutations,
+ajout d'une variable, identification de deux variables — engendrent toutes
+les applications entre ensembles finis, pas seulement les applications
+croissantes : c'est plus qu'une structure cosimpliciale. La page 9 ajoute
+« coaugmenté », qui correspond à l'ensemble vide, $S_0 = k$.}. On se donne
+$A_n \subset S_n$, et l'on demande :
+
+\begin{itemize}
+  \item la \emph{stabilité} : $A = (A_n)$ est un sous-foncteur — $A_n$ est
+    stable par $\mathfrak{S}_n$, $f(t_1, \ldots, t_n) \in A_n$ entraîne
+    $f \in A_{n+1}$ (une variable $t_{n+1}$ qui ne figure pas), et
+    $f(t_1, \ldots, t_{n-1}, t_{n-1}) \in A_{n-1}$ (deux variables identifiées) ;
+  \item $(\mathrm{R})$ : chaque $A_n$ est un sous-anneau unitaire de $S_n$ ;
+  \item $(\mathrm{L})$ : si $f \in A_n$ et $f(0) \neq 0$, alors $f^{-1} \in A_n$
+    \footnote{La page écrit « alors $\frac{1}{f} \in S_n$ », ce qui est toujours vrai
+    ; c'est $A_n$ qui est voulu, comme le montre l'équivalence qu'elle écrit
+    ensuite.} ;
+    de façon équivalente, $A_n$ est un anneau local et l'inclusion
+    $A_n \to S_n$ est un homomorphisme local ;
+  \item $(\mathrm{I})$ : $t_1 \in A_1$ (et donc, par stabilité, $t_i \in A_n$).
+\end{itemize}
+
+L'équivalence dans $(\mathrm{L})$ est immédiate : si tout élément de $A_n$ hors
+de $\mathfrak{m}_n$ est inversible dans $A_n$, alors $A_n \cap \mathfrak{m}_n$ est
+un idéal dont le complémentaire est formé d'unités, donc l'unique idéal
+maximal ; réciproquement, si $A_n$ est local et l'inclusion locale, un élément
+hors de $\mathfrak{m}_n$ n'est pas dans l'idéal maximal de $A_n$.
+
+\textbf{Les plus petits modèles.} Notons $\Lambda$ l'image de $\mathbf{Z}$ dans
+$k$ ($\mathbf{Z}$ ou $\mathbf{F}_p$) et $P$ le sous-corps premier de $k$
+($\mathbf{Q}$ ou $\mathbf{F}_p$).
+
+\begin{itemize}
+  \item Stabilité et $(\mathrm{R})$ : $A_n = \Lambda$, les constantes.
+  \item Stabilité, $(\mathrm{R})$, $(\mathrm{L})$ : $A_n = P$.
+  \item Stabilité, $(\mathrm{R})$, $(\mathrm{I})$ : $A_n = \Lambda[t_1, \ldots, t_n]$
+    \footnote{La page écrit ici $P[t_1, \ldots, t_n]$, après avoir biffé
+    c) de la liste des conditions. Sans la condition de localité, rien
+    n'oblige à inverser les entiers : en caractéristique nulle, la plus petite
+    famille est $\mathbf{Z}[t_1, \ldots, t_n]$, et $\mathbf{Q}[t_1, \ldots, t_n]$
+    n'est pas minimale.}.
+  \item Les quatre : $A_n = P[t_1, \ldots, t_n]_{\mathfrak{p}_n}$, localisé en
+    $\mathfrak{p}_n = (t_1, \ldots, t_n)$ — les fractions rationnelles à
+    coefficients dans $P$ définies à l'origine.
+\end{itemize}
+
+\textbf{La composition.} La condition suivante porte sur les morphismes :
+
+\begin{itemize}
+  \item $(\mathrm{S})$ : le composé de deux $A$-morphismes
+    $X_m \to X_n \to X_p$ est un $A$-morphisme.
+\end{itemize}
+
+Moyennant $(\mathrm{S})$, on a
+$\mathrm{Hom}_A(X_m, X_n) \simeq \mathrm{Hom}(A_n, A_m)$, les homomorphismes
+locaux de $A_0$-algèbres\footnote{C'est la note marginale de la page 3,
+« $\mathrm{Hom}_A(X_m, X_n) \simeq \mathrm{Hom}_{A_0\text{-alg}}(A_n, A_m)$ »,
+dont le début est d'une lecture incertaine. L'isomorphisme demande de se
+restreindre aux homomorphismes qui envoient les $t_i$ dans l'idéal
+$A_m \cap \mathfrak{m}_m$ et se prolongent continûment aux $S$ ; nous l'énonçons
+ainsi.}. Les deux familles $P[t]$ et $P[t]_{\mathfrak{p}}$ la vérifient :
+substituer des polynômes, ou des fractions régulières nulles à l'origine,
+dans une fraction régulière à l'origine en donne une.
+
+Grothendieck observe alors qu'une partie des axiomes peut être remplacée par
+une condition sur trois morphismes seulement\footnote{La page écrit :
+« Moyennant b) et e), la condition a) équivaut au fait que $1 \in A_0$, le
+morphisme “différence” $X_1 \times X_1 \to X_1$ est un $A$-morphisme, le
+morphisme “produit” aussi. » Telle quelle, l'équivalence ne tient pas : ces
+trois conditions disent que les $A_n$ sont des anneaux, pas qu'ils sont
+stables par les substitutions de variables. L'énoncé correct est celui que
+nous donnons, et c'est exactement la réorganisation que fait la seconde
+rédaction, page 9.}. Si les coordonnées sont dans $A$ et que $A$ est stable
+par substitution au sens fort — $\varphi \in A_n$ et $f_1, \ldots, f_n \in A_m$
+nuls à l'origine entraînent $\varphi(f_1, \ldots, f_n) \in A_m$ —, la stabilité
+est automatique (les substitutions de variables sont des substitutions par
+des coordonnées), et $(\mathrm{R})$ équivaut à
+\[
+  1 \in A_0, \qquad t_1 - t_2 \in A_2, \qquad t_1 t_2 \in A_2,
+\]
+c'est-à-dire : la différence et le produit $X_1 \times X_1 \to X_1$ sont des
+$A$-morphismes. Autrement dit, $X_1$ est un objet anneau de la catégorie des
+$A$-morphismes.
+
+\pagerange{3}{3}
+\section*{Inversion et hensélianité (page 3)}
+
+La condition qui donne son contenu à la théorie est la suivante.
+
+\begin{itemize}
+  \item $(\mathrm{H})$ : si $u : X_n \to X_n$ est un $A$-morphisme et un
+    isomorphisme — c'est-à-dire si le jacobien $\det(\partial u_i/\partial t_j)(0)$
+    est non nul —, alors $u^{-1}$ est un $A$-morphisme.
+\end{itemize}
+
+C'est l'analogue, pour les morphismes, de la condition $(\mathrm{L})$ pour les
+fonctions : $(\mathrm{L})$ inverse une fonction, $(\mathrm{H})$ inverse un
+changement de coordonnées. Elle entraîne :
+
+\begin{itemize}
+  \item $(\mathrm{H}')$ : les anneaux locaux $A_n$ sont henséliens.
+\end{itemize}
+
+Plus précisément, $(\mathrm{H})$ en dimension $n$ entraîne que $A_{n-1}$ est
+hensélien, par l'argument que la seconde rédaction détaille (page 12,
+corollaire 3) : une équation $F(t, Z) = 0$ à racine simple se résout en
+inversant le changement de coordonnées $(t, z) \mapsto (t, F(t, z))$. La
+réciproque — $(\mathrm{H}')$ entraîne-t-il $(\mathrm{H})$ ? — est posée en marge
+et n'est pas tranchée par les feuillets\footnote{La marge ajoute « il suffit
+par récurrence », d'une lecture incertaine, sans suite.}. Un passage barré
+esquissait une description de $u^{-1}$ par une clôture hensélienne.
+
+\textbf{Le plus petit modèle hensélien.} La plus petite famille satisfaisant
+stabilité, $(\mathrm{R})$, $(\mathrm{L})$, $(\mathrm{I})$ et $(\mathrm{H}')$ est
+\[
+  A_n = P\{t_1, \ldots, t_n\},
+\]
+l'hensélisé de $P[t_1, \ldots, t_n]_{\mathfrak{p}_n}$, et elle satisfait
+$(\mathrm{S})$ et $(\mathrm{H})$. L'hensélisé se plonge dans $S_n$ : c'est
+l'anneau des séries formelles à coefficients dans $P$ qui sont algébriques sur
+$P[t_1, \ldots, t_n]$, et la minimalité découle de sa propriété universelle
+(un homomorphisme local vers un anneau hensélien se prolonge de façon unique à
+l'hensélisé)\footnote{La page note $P\{t_1, \ldots, t_n\}$ et l'identifie à
+la clôture hensélienne ; l'identification aux séries algébriques, et le nom de
+séries formelles algébriques, sont de cette lecture. C'est le cadre du
+théorème d'approximation d'Artin (1969).}.
+
+Moyennant ces conditions, conclut la page, on peut définir la catégorie des
+$A$-schémas formels, les Modules sur eux, et le calcul différentiel
+(opérateurs différentiels, parties principales)\footnote{Pour les parties
+principales, il faut davantage : c'est la condition sur les coefficients que
+la seconde rédaction introduit page 14, précisément dans ce but. Une note
+marginale en bas de page mentionne des produits fibrés « transversaux » ; elle
+est en grande partie illisible.}.
+
+\pagerange{4}{5}
+\section*{En caractéristique nulle : exponentielles et groupes formels (pages 4 et 5)}
+
+On suppose désormais $k$ de caractéristique nulle. Un champ de vecteurs formel
+$\xi$ sur un schéma formel lisse $X$ a alors une exponentielle,
+\[
+  X_1 \times X \longrightarrow X, \qquad (t, x) \longmapsto \exp(t\xi) \cdot x
+  = \sum_{r \geq 0} \frac{t^r}{r!}\, \xi^r(x),
+\]
+où $t$ est le « temps », une variable formelle. On demande :
+
+\begin{itemize}
+  \item $(\mathrm{E})$ : si $X$ est un $A$-schéma formel et $\xi$ un $A$-champ
+    de vecteurs, le flot $X_1 \times X \to X$ est un $A$-morphisme ; et plus
+    généralement, pour un champ dépendant du temps
+    $\xi : X_1 \times X \to \mathbf{T}(X)$, la solution $x = \varphi(t, x_0)$ de
+    l'équation différentielle formelle
+    \[
+      \frac{dx}{dt} = \xi(t, x), \qquad x(0) = x_0,
+    \]
+    est un $A$-morphisme $X_1 \times X \to X$.
+\end{itemize}
+
+Il suffit de le demander pour $X = X_n$. La seconde forme, remarque la page,
+fait du temps une variable explicite ; c'est elle qui sert.
+
+\textbf{Groupes de Lie formels.} Soit $k_0 = A_0$ ; par $(\mathrm{L})$, c'est un
+sous-corps de $k$. Pour une algèbre de Lie $\mathfrak{g}_0$ de dimension finie
+sur $k_0$, la formule de Baker--Campbell--Hausdorff définit une loi de groupe
+formel sur le complété à l'origine $\widehat{W}(\mathfrak{g}_0)$ de l'espace
+vectoriel $\mathfrak{g}_0 \otimes_{k_0} k$ — un $A$-schéma formel, une base de
+$\mathfrak{g}_0$ fournissant des coordonnées. On obtient un foncteur
+\[
+  \mathcal{L}(k_0) \longrightarrow \{\text{groupes formels sur } k_0\}
+  \longrightarrow \{\text{groupes formels sur } k\},
+\]
+la seconde flèche étant l'extension des scalaires. Grothendieck annonce que ce
+foncteur se factorise par les $A$-groupes formels : la loi de Hausdorff est
+une $A$-loi, et un homomorphisme $\mathfrak{g}_0 \to \mathfrak{h}_0$ donne un
+$A$-homomorphisme. Par le théorème d'Ado, il ramène l'énoncé au cas d'une
+sous-algèbre $\mathfrak{g}_0 \subset \mathfrak{gl}(n, k_0)$ : il suffirait de
+savoir que le sous-groupe formel de $\mathrm{GL}_n$ qu'elle définit est un
+sous-$A$-schéma formel.
+
+La page s'arrête là, sur des points de suspension, et le cas linéaire n'est pas
+fait\footnote{Deux passages, barrés, esquissaient un argument par le système
+de Pfaff associé ; ils sont illisibles pour l'essentiel. Ce qui reste à faire
+n'est pas immédiat. En coordonnées de seconde espèce,
+$(s_1, \ldots, s_d) \mapsto \exp(s_1 e_1) \cdots \exp(s_d e_d)$, chaque facteur
+est le flot d'un champ linéaire au temps $s_i$ et relève donc de
+$(\mathrm{E})$ ; mais la loi de Hausdorff est écrite en coordonnées canoniques,
+et passer de l'une à l'autre demande que $x \mapsto \exp(x)$ soit une
+$A$-application — le flot \emph{au temps $1$}, que $(\mathrm{E})$ ne fournit
+pas, le temps n'y étant qu'une variable formelle qu'on ne peut spécialiser
+en $1$.}. Nous le laissons pour ce qu'il est : un énoncé annoncé.
+
+\pagerange{6}{7}
+\section*{Primitives, fonctions usuelles, feuilletages (pages 6 et 7)}
+
+\textbf{Corollaire.} $A_1$ est stable par primitivation nulle à l'origine, et
+contient $\log(1 + t)$, $\exp t$, $\cos t$, $\sin t$, $\tan t$.
+
+La primitive $\int_0^t f$ d'un $f \in A_1$ est la solution, pour
+$x_0 = 0$, de l'équation $dx/dt = f(t)$ sur $X_1$, dont le second membre est
+dans $A_2$ ; elle est dans $A_1$ par $(\mathrm{E})$. Ensuite\footnote{La page
+donne $\log(1+t)$ comme primitive de $\frac{1}{1+t}$ et $\exp$ comme « série
+inverse », mais ne dit pas comment on obtient $\cos$, $\sin$ et $\tan$ ; le
+chemin qui suit est de cette lecture.} :
+
+\begin{itemize}
+  \item $\frac{1}{1+t} \in A_1$ par $(\mathrm{L})$, donc $\log(1+t) \in A_1$ ; sa
+    série réciproque $e^t - 1$ est dans $A_1$ par $(\mathrm{H})$, donc $e^t$ aussi ;
+  \item de même $\arctan t = \int_0^t \frac{ds}{1+s^2} \in A_1$, et sa série
+    réciproque $\tan t$ est dans $A_1$ ;
+  \item $\cos t = (1 + \tan^2 t)^{-1/2}$ est la racine de $Z^2 (1 + \tan^2 t) = 1$
+    qui vaut $1$ en $0$, racine simple : elle est dans $A_1$ par
+    hensélianité ; et $\sin t = \tan t \cdot \cos t$.
+\end{itemize}
+
+\textbf{Feuilletages.} Soit $X$ un schéma formel lisse de dimension $n = p + q$.
+Un feuilletage de dimension $p$ de $X$ est la donnée d'un quotient formel lisse
+$X \to B$, submersif, avec $\dim B = q$. Il lui correspond le sous-module
+$\mathfrak{P} \subset \Theta(X)$ des champs de vecteurs tangents aux fibres, qui
+est un sous-fibré de rang $p$ involutif, et en caractéristique nulle, par le
+théorème de Frobenius formel, tout sous-fibré involutif s'obtient ainsi\footnote{La
+page dit « système de Pfaff de dimension $p$ complètement intégrable ». Un
+système de Pfaff désigne classiquement un système de $1$-formes ; ici il
+s'agit de champs de vecteurs, ce qu'on appelle aujourd'hui une distribution
+involutive. L'hypothèse de caractéristique nulle, posée page 4, est
+indispensable : en caractéristique $p$ le théorème de Frobenius formel est
+faux.}.
+
+Si $X$ est un $A$-schéma formel, un feuilletage est un \emph{$A$-feuilletage}
+s'il existe sur $B$ une $A$-structure faisant de $X \to B$ un $A$-morphisme ;
+elle est alors unique, par $(\mathrm{H})$. Le sous-fibré $\mathfrak{P}$ d'un
+$A$-feuilletage est engendré par des $A$-champs. On demande la réciproque :
+
+\begin{itemize}
+  \item $(\mathrm{F})$ : un sous-fibré involutif engendré par des $A$-champs
+    définit un $A$-feuilletage. De façon équivalente : si $i : Y \to X$ est un
+    $A$-morphisme transverse à $\mathfrak{P}$ en $0$ — le composé
+    $\mathbf{T}_0(Y) \to \mathbf{T}_0(X) \to \mathbf{T}_0(X)/\mathfrak{P}(0)$ est un
+    isomorphisme —, l'unique rétraction $\pi : X \to Y$ constante sur les
+    feuilles est un $A$-morphisme.
+\end{itemize}
+
+Il en résulte que la feuille passant par $0$ est un sous-$A$-schéma formel.
+$(\mathrm{F})$ entraîne $(\mathrm{E})$, et pour $p = 1$ lui est
+équivalente\footnote{C'est la note marginale « h) implique g), qui équivaut
+à h) pour $p = 1$ ». Pour $p = 1$ et un champ non nul à l'origine, redresser
+le champ revient à connaître son flot, et $(\mathrm{H})$ fait passer de l'un à
+l'autre ; un champ quelconque se ramène à ce cas en lui ajoutant
+$\partial/\partial s$ sur $X_1 \times X$. La page ne détaille pas.}.
+
+La page 7 reprend la fin de la page 6 et a été barrée tout entière. Elle y
+formule l'équivalence de deux conditions pour une rétraction $\pi$ comme
+ci-dessus : $\pi$ est un $A$-morphisme ; il existe un $A$-isomorphisme
+$X \simeq B \times Y$ qui transforme le feuilletage en celui de la première
+projection. Une parenthèse, encadrée et biffée, construisait d'abord un
+isomorphisme formel $X \simeq Y \times Z$ à partir de deux transversales.
+
+\pagerange{9}{10}
+\section*{Seconde rédaction : les conditions élémentaires sur un anneau (pages 9 et 10)}
+
+La seconde rédaction reprend tout sur un anneau commutatif $k$ quelconque. Les
+$X_n$ forment un schéma formel simplicial augmenté, les $S_n$ un anneau
+topologique cosimplicial coaugmenté, et l'on pose les trois conditions
+élémentaires :
+
+\begin{itemize}
+  \item $(\mathrm{I})$ \emph{identités} : les opérations simpliciales entre les
+    $X_n$ sont des $A$-morphismes ; de façon équivalente, $t_i \in A_n$ pour
+    $1 \leq i \leq n$, ou encore les identités des $X_n$ sont des $A$-morphismes ;
+  \item $(\mathrm{S})$ \emph{composition} : si $\varphi \in A_n$ et si
+    $f_1, \ldots, f_n \in A_m$ ont des valeurs $f_i(0)$ nilpotentes, alors
+    $\varphi(f_1, \ldots, f_n) \in A_m$ ;
+  \item $(\mathrm{R})$ \emph{anneau} : $1 \in A_0$, et la différence et le
+    produit $X_1 \times X_1 \to X_1$ sont des $A$-morphismes ; c'est dire
+    $t_1 - t_2,\ t_1 t_2 \in A_2$, ou encore que les $A_n$ sont des
+    sous-anneaux unitaires des $S_n$.
+\end{itemize}
+
+La page donne $(\mathrm{S})$ sous la forme « le composé de deux $A$-morphismes
+est un $A$-morphisme », qu'elle déclare équivalente à la forme ci-dessus. Les
+deux ne coïncident que si les constantes suivent : la clôture par composition
+ne porte que sur des fonctions nulles à l'origine, et pour l'étendre à un
+$\varphi$ quelconque il faut que $\varphi(0)$ soit dans $A_m$, ce qui est vrai dès
+que $\mathrm{Im}(A_0 \to S_m) \subset A_m$\footnote{C'est exactement la note
+marginale de la page 9 : « ce serait vrai (sans supposer $\varepsilon(\varphi)$
+nilpotent) \ldots\ sachant que $\mathrm{Im}(A_0 \to S_n) \subset A_n$ ». Une
+autre note, en haut, porte sur les valeurs $\varepsilon(f_i)$ et se lit mal.
+La condition $(\mathrm{R})$ est en outre encadrée et barrée sur la page, sans
+rien qui la remplace ; la page 10 la tient pour acquise, et nous aussi.}. Nous
+prenons $(\mathrm{S})$ sous la forme forte.
+
+Ces trois conditions font de $A$ un sous-anneau cosimplicial de $S$, stable par
+toutes les substitutions de variables. La plus petite classe est
+\[
+  A_n = \mathrm{Im}\bigl(\mathbf{Z}[t_1, \ldots, t_n] \to k[[t_1, \ldots, t_n]]\bigr)
+  = \Lambda[t_1, \ldots, t_n],
+\]
+où $\Lambda$ est l'image de $\mathbf{Z}$ dans $k$, isomorphe à $\mathbf{Z}$ ou à
+$\mathbf{Z}/c\mathbf{Z}$, $c$ la caractéristique de $k$.
+
+\textbf{La catégorie des $A$-schémas formels.} Les $X_n$ et les
+$A$-morphismes forment une catégorie $\mathrm{Sfl}_A$, avec produits finis
+$X_n \simeq X_1^n$. La page y annonce aussi des produits fibrés dans le cas
+transversal\footnote{Pour paramétrer un produit fibré transversal par des
+$A$-coordonnées, il faut le théorème des fonctions implicites dans la classe,
+c'est-à-dire la condition hensélienne $(\mathrm{H})$ de la page 11, que la
+page n'a pas encore introduite.}.
+
+Soit $k_0 = A_0$. On a un foncteur $\mathbb{V}_A$ de la catégorie des
+$k_0$-modules libres de type fini vers les $A$-schémas formels,
+$M_0 \mapsto \mathrm{Spf}\, \widehat{\mathrm{Sym}}_k(M_0 \otimes_{k_0} k)$, qui
+est contravariant\footnote{La page dit « un foncteur » sans préciser la
+variance ; $M \mapsto \mathrm{Spf}\,\widehat{\mathrm{Sym}}(M)$ renverse le sens des
+flèches.}, fidèle, et qui transforme les objets en groupe en $A$-groupes
+formels\footnote{La page écrit « pleinement fidèle », suivi d'un point
+d'interrogation. Il n'est pas plein : $t \mapsto t^2$ est un $A$-morphisme
+$X_1 \to X_1$ qui ne vient d'aucune application linéaire.}. Plus
+généralement, le complété à l'origine d'un $k_0$-schéma lisse pointé porte une
+$A$-structure, et ce foncteur commute aux produits finis, donc envoie groupes
+sur groupes\footnote{Hors du cas des espaces affines, les changements de
+coordonnées étales qui interviennent sont des séries algébriques, et c'est
+encore la condition hensélienne qui les met dans $A$ ; la page 13 fait la
+construction sous cette hypothèse.}.
+
+La marge de la page 10 note l'anneau $\mathcal{O}_A(X) \subset \mathcal{O}(X)$ des
+$A$-fonctions sur $X$, et l'identifie à $\mathrm{Hom}_A(X, X_1)$ au sein de
+$\mathrm{Hom}(X, X_1)$. Il faut distinguer : $\mathrm{Hom}(X, X_1)$ n'est que
+l'idéal des fonctions nilpotentes à l'origine, et c'est
+$\mathrm{Hom}_A(X, X_1) = \mathcal{O}_A(X) \cap \mathrm{Hom}(X, X_1)$ qui est vrai ;
+$\mathcal{O}_A(X)$ lui-même est l'anneau qui vaut $A_n$ en coordonnées. La même
+marge mentionne les Modules $A$-formels et les fibrés vectoriels $A$-formels,
+et affirme que le foncteur « anneau des $A$-fonctions » commute aux limites
+projectives, sans préciser lesquelles.
+
+\pagerange{11}{12}
+\section*{La condition hensélienne et ses corollaires (pages 11 et 12)}
+
+\begin{itemize}
+  \item $(\mathrm{H})$ \emph{condition hensélienne} : si $u : X_n \to X_n$ est un
+    $A$-morphisme qui est un isomorphisme formel — si
+    $\det\bigl(\frac{\partial f_i}{\partial t_j}(0)\bigr)$ est inversible dans $k$ —,
+    alors $u^{-1}$ est un $A$-morphisme. Autrement dit, le foncteur d'oubli des
+    $A$-schémas formels vers les schémas formels sur $k$ est conservatif.
+\end{itemize}
+
+Sur un anneau, un endomorphisme $(f_1, \ldots, f_n)$ de $X_n$ dont les $f_i(0)$
+sont nilpotents et dont le jacobien à l'origine est inversible est bien un
+automorphisme : on écrit $f = c + h$ avec $c = f(0)$ nilpotent et $h(0) = 0$ ;
+$h$ est inversible par le théorème d'inversion formel, et $h^{-1}(x - c)$
+converge.
+
+\textbf{Corollaire 1.} Si $f \in A_n$ et si $f(0)$ est inversible dans $k$,
+alors $f^{-1} \in A_n$. En particulier $A_n \cap \mathfrak{m}_n$ est contenu dans
+le radical de Jacobson de $A_n$ (prendre $f = 1 + ag$, $g \in A_n \cap
+\mathfrak{m}_n$).
+
+La démonstration de la page considère l'automorphisme
+$u(x, s) = (x, f(x)\, s)$ de $X_{n+1}$, de jacobien $f(0)$ à l'origine, d'inverse
+$(x, s) \mapsto (x, f(x)^{-1} s)$. Par $(\mathrm{H})$,
+$g = f^{-1}\, t_{n+1} \in A_{n+1}$. La page substitue alors $t_{n+1} = 1$ pour
+conclure — et objecte elle-même, en marge, que $1$ n'est pas nilpotent, de
+sorte que $(\mathrm{S})$ n'autorise pas cette substitution ; elle propose
+d'exiger une propriété de divisibilité, $t_{n+1} f \in A_{n+1} \Rightarrow
+f \in A_n$\footnote{Une autre note marginale, en face de l'énoncé, parle d'une
+« condition de coefficientabilité » ; la lecture en est incertaine.}. La
+condition sur les coefficients $(\mathrm{D})$ de la page 14 suffit : $f^{-1}$ est
+le coefficient de $t_{n+1}$ dans $g$, donc est dans $A_n$. C'est sous cette
+hypothèse supplémentaire que nous tenons le corollaire pour démontré.
+
+La page passe ensuite, par des équivalences, aux formes « $f(0) = 1$ » et
+« $A_n \cap \mathfrak{m}_n \subset \mathrm{rad}\, A_n$ ». Revenir de là à la
+première forme suppose $f(0)^{-1} \in A_0$ ; c'est vrai, mais c'est le cas
+$n = 0$ de la première forme, donc de l'argument ci-dessus, et non une
+conséquence des seules formes affaiblies.
+
+\textbf{Corollaire 2.} Soit $P(Z) = Z^N + f_1 Z^{N-1} + \cdots + f_N \in A_n[Z]$
+unitaire, et $\zeta \in k_0$ une racine du polynôme réduit
+$P^\varepsilon(Z) = Z^N + a_1 Z^{N-1} + \cdots + a_N$, $a_i = f_i(0) \in k_0$, telle
+que $(P^\varepsilon)'(\zeta)$ soit inversible dans $k$. L'unique $F \in S_n$ tel que
+$P(F) = 0$ et $F(0) = \zeta$ est dans $A_n$. En d'autres termes, le couple
+$(A_n, A_n \cap \mathfrak{m}_n)$, déjà zariskien par le corollaire 1, est
+hensélien\footnote{« Zariskien » et « hensélien » sont les mots de la page pour
+le couple $(A_n, \mathfrak{p}_n)$, et ce sont les termes d'aujourd'hui. La page
+ajoute que $(P^\varepsilon)'(\zeta)$, inversible dans $k$, est « en fait dans
+$k_0^*$ » : il est dans $k_0$, et son inverse aussi, par le corollaire 1 pour
+$n = 0$. Une première démonstration, par
+l'automorphisme $(x, z) \mapsto (x, z^{N} + f_1(x) z^{N-1} + \cdots)$, a été
+encadrée et biffée.}.
+
+\textbf{Corollaire 3.} Soit $P \in A_{n+1}$, vu comme série en
+$(t_1, \ldots, t_n, Z)$, avec $P(0) = 0$ et $\frac{\partial P}{\partial Z}(0)$
+inversible dans $k$. L'unique $F \in S_n$ tel que $P(t, F(t)) = 0$ et
+$F(0) = 0$ est dans $A_n$.
+
+En effet, $u(x, z) = (x, P(x, z))$ est un $A$-morphisme de $X_{n+1}$ compatible
+aux projections sur $X_n$ et un isomorphisme formel ; par $(\mathrm{H})$ son
+inverse est de la forme $(x, z) \mapsto (x, \varphi(x, z))$ avec
+$\varphi \in A_{n+1}$, et $F = \varphi(t, 0) \in A_n$. Le corollaire 3 contient le
+corollaire 2 (translater $Z$ de $\zeta$) : c'est le théorème des fonctions
+implicites dans la classe.
+
+La marge de la page 12 pose une question que les feuillets laissent ouverte :
+les conditions $(\mathrm{I})$, $(\mathrm{S})$, $(\mathrm{R})$, $(\mathrm{H})$
+entraînent-elles que $S_n$ soit fidèlement plat sur $A_n$\footnote{La fin de
+la question porte une restriction sur $k$ par rapport à $k_0$, d'une lecture
+incertaine. Pour les séries algébriques sur un corps, la réponse est oui :
+$S_n$ est le complété de l'anneau local noethérien $A_n$.} ?
+
+\pagerange{13}{13}
+\section*{Sous-schémas formels (page 13)}
+
+Soit $X$ un $A$-schéma formel et $Y \subset X$ un sous-schéma formel lisse. On
+dit que $Y$ est un \emph{sous-$A$-schéma formel} s'il existe sur $Y$ une
+$A$-structure pour laquelle l'inclusion est un $A$-morphisme. Une telle
+structure est unique. On trouve en effet un $A$-morphisme $X \to Y'$ vers un
+$A$-schéma formel $Y'$ dont la restriction $Y \to Y'$ est un isomorphisme
+formel\footnote{La page dit « il est immédiat ». Sur un corps, ou sur un anneau
+local, une projection sur des coordonnées convenables convient ; sur un
+anneau quelconque, un sous-espace tangent n'a pas toujours de supplémentaire
+de coordonnées, et il faut raisonner localement sur $k$.} ; alors $Y$ est un
+sous-$A$-schéma formel si et seulement si le composé
+$Y' \xrightarrow{\sim} Y \hookrightarrow X$ est un $A$-morphisme, et la structure
+de $Y$ est celle transportée de $Y'$ — par $(\mathrm{H})$\footnote{La page
+invoque ici « (d) », d'une lecture incertaine ; c'est bien la condition
+hensélienne qui sert.}.
+
+\textbf{Exemples.} La diagonale de $X \times X$ ; plus généralement celle de
+$X \times_Y X$ si $X \to Y$ est un $A$-morphisme submersif. Et, en marge : un
+morphisme formel $X \to Y$ entre $A$-schémas formels est un $A$-morphisme si et
+seulement si son graphe est un sous-$A$-schéma formel de $X \times Y$ (la
+projection du graphe sur $X$ est un $A$-isomorphisme, par $(\mathrm{H})$).
+
+\textbf{Schémas au-dessus de l'anneau des $A$-fonctions.} Soit $\mathcal{X}$ un
+schéma sur $\mathrm{Spec}\, \mathcal{O}_A(X)$, muni d'une section $s_0$, et lisse
+aux points de cette section. Le complété formel $\widehat{\mathcal{X}}$ de
+$\mathcal{X} \otimes_{\mathcal{O}_A(X)} \mathcal{O}(X)$ le long de la section déduite
+$s$ porte une $A$-structure pour laquelle $X \to \widehat{\mathcal{X}} \to X$ sont
+des $A$-morphismes ; $\widehat{\mathcal{X}}$ dépend fonctoriellement du triple
+$(X, \mathcal{X}, s_0)$, et sa formation commute aux images inverses par
+$X' \to X$\footnote{La page dit « une construction utilisant e) permet d'y
+mettre une $A$-structure », sans la donner, et la lettre est incertaine. La
+construction naturelle choisit des coordonnées étales le long de la section
+et utilise les corollaires de la condition hensélienne pour que deux choix
+diffèrent d'un $A$-isomorphisme.}.
+
+\pagerange{14}{14}
+\section*{La condition sur les coefficients et le calcul différentiel (page 14)}
+
+\begin{itemize}
+  \item $(\mathrm{D})$ \emph{condition différentielle} : chaque $A_n$ est stable
+    par les opérateurs différentiels élémentaires
+    $D_p = \frac{1}{p_1! \cdots p_n!}\, \frac{\partial^{|p|}}{\partial t_1^{p_1}
+    \cdots \partial t_n^{p_n}}$ ; de façon équivalente, si
+    $f(x_1, \ldots, x_n, y_1, \ldots, y_m) \in A_{n+m}$ s'écrit
+    $\sum_{p \in \mathbf{N}^m} f_p(x)\, y^p$, les coefficients $f_p$ sont dans $A_n$.
+\end{itemize}
+
+Les $D_p$ sont les dérivations de Hasse, qui ont un sens sur tout anneau.
+L'équivalence est la formule de Taylor : $f(x + y) = \sum_p (D_p f)(x)\, y^p$,
+où $f(x+y) \in A_{2n}$ par $(\mathrm{S})$ ; dans l'autre sens, $f_p(x) =
+(D^{(y)}_p f)(x, 0)$.
+
+La page marque la lettre de cette condition « d) », qui est déjà celle de la
+condition hensélienne ; elle est vraisemblablement celle qu'invoquent les pages
+13 et 15 sous la lettre e).
+
+\textbf{Conséquences.} Pour un $A$-schéma formel $X$, les algèbres de parties
+principales $\mathcal{P}^r_{X/k} = \mathcal{O}(X \times X)/\mathcal{I}_\Delta^{r+1}$ ont
+une $A$-structure canonique et fonctorielle : en coordonnées, c'est le module
+libre de base les $(y - x)^p$, $|p| \leq r$, sur $A_n$, et $(\mathrm{D})$ dit
+précisément que l'image de $\mathcal{O}_A(X \times X)$ dans $\mathcal{P}^r_{X/k}$ est ce
+module. De même pour $\mathcal{P}^r_{X/Y}$ si $X \to Y$ est un $A$-morphisme
+submersif, et pour les invariants normaux $\mathcal{O}_X/\mathcal{J}^r$ d'un couple
+$Y \subset X$ de $A$-schémas formels, compatiblement aux images inverses
+transversales. L'opérateur différentiel universel
+$\mathcal{O}(X) \to \mathcal{P}^r_{X/k}$ envoie $\mathcal{O}_A(X)$ dans
+$(\mathcal{P}^r_{X/k})_A$. Les opérateurs différentiels $\mathrm{Diff}^r(X/k)$, duaux
+des $\mathcal{P}^r_{X/k}$, ont des $A$-structures ; la composition respecte les
+$A$-opérateurs, qui stabilisent $\mathcal{O}_A(X)$ ; de même pour les opérateurs
+relatifs à un $A$-morphisme submersif\footnote{La page note l'ordre des
+parties principales par l'exposant $n$, qui désigne ailleurs la dimension ;
+nous écrivons $r$. Une note marginale encerclée, en haut à gauche, est pour
+l'essentiel illisible.}.
+
+\textbf{Corollaire.} $A_n \subset k_0[[t_1, \ldots, t_n]]$ : les coefficients
+$(D_p f)(0)$ d'un $f \in A_n$ sont dans $A_0 = k_0$. D'où un foncteur des
+$A$-schémas formels vers les schémas formels sur $k_0$ — la classe $A$ est
+toujours définie sur le corps, ou l'anneau, de ses constantes.
+
+\pagerange{15}{16}
+\section*{Quotients et condition intégrale (pages 15 et 16)}
+
+Soit $p : X \to Y$ un morphisme submersif de schémas formels lisses, $X$ muni
+d'une $A$-structure. On dit que $Y$ admet une \emph{$A$-structure quotient} s'il
+admet une $A$-structure faisant de $p$ un $A$-morphisme. Elle est unique : il
+existe un sous-$A$-schéma formel $Y' \subset X$ (une transversale aux fibres) tel
+que $Y' \to Y$ soit un isomorphisme formel ; la $A$-structure quotient existe si
+et seulement si le composé $X \to Y \xrightarrow{\sim} Y'$ est un $A$-morphisme,
+et c'est alors celle de $Y'$\footnote{La page invoque ici e), d'une lecture
+incertaine. Le passage de $Y$ à $Y'$ et retour est un isomorphisme formel
+dont on veut l'inverse dans la classe : c'est $(\mathrm{H})$ qui sert.}.
+
+\textbf{Relations d'équivalence.} Si $p : X \to Y$ est submersif,
+$R = X \mathbin{\widehat{\times}_Y} X \subset X \mathbin{\widehat{\times}} X$ est un
+sous-schéma formel lisse, et une relation d'équivalence : symétrique, contenant
+la diagonale, transitive. Plus précisément, $X$ étant donné, la page affirme
+une correspondance biunivoque entre quotients formels submersifs $Y$ et
+relations d'équivalence formelles lisses $R$\footnote{L'énoncé n'est pas
+démontré. En caractéristique nulle, il se déduit du théorème de Frobenius
+formel appliqué à la distribution que définit $R$.}. Si $Y$ admet une
+$A$-structure quotient, $R$ est un sous-$A$-schéma formel de
+$X \mathbin{\widehat{\times}} X$. On demande la réciproque :
+
+\begin{itemize}
+  \item $(\mathrm{Q})$ \emph{condition intégrale} : si $R$ est une relation
+    d'équivalence formelle sur $X$ qui est un sous-$A$-schéma formel de
+    $X \mathbin{\widehat{\times}} X$, le quotient formel $Y = X/R$ admet une
+    $A$-structure quotient.
+\end{itemize}
+
+C'est la forme, dans la seconde rédaction, de la condition $(\mathrm{F})$ des
+feuilletages de la page 6, et Grothendieck le dit en ces termes :
+heuristiquement, étant donné un $A$-feuilletage de $X$, la variété formelle des
+feuilles admet une $A$-structure quotient ; en caractéristique nulle, les
+$A$-feuilletages correspondent aux systèmes de Pfaff complètement intégrables,
+et la condition intégrale signifie que l'intégration de ce système — par le
+morphisme formel $X \to Y'$ de tout à l'heure — se fait par un $A$-morphisme. La
+page s'arrête sur cette phrase ; le reste du feuillet est blanc.
+
+\pagerange{18}{19}
+\section*{Le théorème de préparation formel (pages 18 et 19)}
+
+\textbf{Théorème} (« de préparation “formel” »)\textbf{.} Soit $A$ un anneau
+linéairement topologisé, séparé et complet, $Z$ une indéterminée,
+$F = \sum_{i \geq 0} a_i Z^i \in A[[Z]]$, et $N \in \mathbf{N}$ tel que
+
+\begin{itemize}
+  \item[(i)] $a_i$ est topologiquement nilpotent pour $0 \leq i \leq N-1$ ;
+  \item[(ii)] $a_N$ est inversible.
+\end{itemize}
+
+Alors $F$ est un élément régulier de $A[[Z]]$, et $A[[Z]]/F A[[Z]]$ est un
+$A$-module libre de base les images des $Z^i$, $0 \leq i \leq N-1$ : tout
+$G \in A[[Z]]$ s'écrit de façon unique
+\[
+  G = QF + \sum_{0 \leq i \leq N-1} b_i Z^i, \qquad Q \in A[[Z]],\ b_i \in A.
+\]
+
+C'est la division de Weierstrass sous sa forme formelle\footnote{Le mot
+« division » n'est pas sur la page, qui dit « préparation ». La lettre $A$
+désigne ici un anneau quelconque et non plus une classe de séries ; nous
+gardons la notation de la page, qui ne rattache pas ce théorème aux pages
+précédentes. Sous cette forme, sur un anneau linéairement topologisé, il
+figure chez Bourbaki (\emph{Algèbre commutative}, chap.~VII, § 3), sauf erreur
+de notre part sur le lieu exact.}.
+
+\textbf{Démonstration.} $A$ est limite projective de ses quotients discrets
+$A/I$, $I$ parcourant les idéaux ouverts, et $A[[Z]] = \varprojlim (A/I)[[Z]]$.
+L'unicité fait que les écritures sur les $A/I$ se recollent, et un $H$ tel que
+$FH = 0$ est nul modulo chaque $I$ : on peut supposer $A$ discret. Alors (i)
+signifie que $a_0, \ldots, a_{N-1}$ sont nilpotents.
+
+Soit $\mathfrak{m}$ l'idéal qu'ils engendrent : il est de type fini et engendré
+par des nilpotents, donc nilpotent. Posons $A_0 = A/\mathfrak{m}$ et notons
+$\dot{a}_i$, $\dot{F}$ les réductions modulo $\mathfrak{m}$. On a $\dot{a}_i = 0$
+pour $i < N$, donc
+\[
+  \dot{F} = \dot{a}_N Z^N + \dot{a}_{N+1} Z^{N+1} + \cdots = Z^N \dot{u},
+\]
+où $\dot{u} = \dot{a}_N + \dot{a}_{N+1} Z + \cdots$ est une unité de $A_0[[Z]]$
+puisque $\dot{a}_N$ est inversible\footnote{La page écrit
+$\dot{F} = \dot{a}_N \alpha Z^N$ en mettant $\alpha$ dans $A_0^*$ ; c'est une unité
+de $A_0[[Z]]$, de terme constant $1$, et non une constante. La parenthèse est
+surchargée à cet endroit.}. Considérons l'application $A$-linéaire
+\[
+  \varphi : A^N \times A[[Z]] \longrightarrow A[[Z]], \qquad
+  \bigl((b_i)_{0 \leq i \leq N-1}, Q\bigr) \longmapsto
+  \sum_{0 \leq i \leq N-1} b_i Z^i + QF.
+\]
+Elle respecte les filtrations $\mathfrak{m}$-adiques, qui sont finies, et
+$\mathfrak{m}^j A[[Z]] = \mathfrak{m}^j[[Z]]$ puisque $\mathfrak{m}$ est de type fini.
+En degré $j$, l'application graduée associée est, pour le $A_0$-module
+$M = \mathfrak{m}^j/\mathfrak{m}^{j+1}$,
+\[
+  M^N \times M[[Z]] \longrightarrow M[[Z]], \qquad
+  \bigl((b_i), Q\bigr) \longmapsto \sum_{0 \leq i \leq N-1} b_i Z^i + Q\, \dot{u}\, Z^N,
+\]
+qui est manifestement bijective : on sépare les termes de degré $< N$ et l'on
+divise le reste par $Z^N$, puis par l'unité $\dot{u}$. Une application filtrée
+dont le gradué est bijectif, pour des filtrations finies, est bijective ;
+$\varphi$ l'est donc. La bijectivité donne l'écriture unique, et la régularité
+de $F$ : $FH = 0$ s'écrit $\varphi(0, H) = \varphi(0, 0)$, d'où $H = 0$.
+
+Cette démonstration est la seconde de la page. Une première, encadrée et
+barrée, procédait en trois temps : les $Z^i$, $i < N$, engendrent
+$A[[Z]]/F A[[Z]]$ parce qu'ils l'engendrent modulo $\mathfrak{m}$ et par
+Nakayama ; $F$ est régulier, par le gradué associé ; enfin, dans le cas
+polynomial $F = Z^N + a_{N-1} Z^{N-1} + \cdots + a_0$, l'application
+$A[Z]/F A[Z] \to A[[Z]]/F A[[Z]]$ est surjective, et bijective si et seulement
+si $F A[[Z]] \cap A[Z] = F A[Z]$. L'argument par l'application $\varphi$ remplace
+les trois à la fois.
+
+\textbf{Ce que les feuillets ne disent pas.} Les pages 18 et 19 ne mentionnent
+ni les classes $A$ ni les $A$-schémas formels. Le lien est pourtant direct :
+demander qu'une classe de séries soit stable par la division de Weierstrass —
+le quotient et le reste d'une série de la classe par une série de la classe
+restant dans la classe — est l'axiome central de ce qu'on appelle depuis
+Denef et Lipshitz, vers 1980, un \emph{système de Weierstrass}, et la plupart
+des conditions des pages 9 à 14 (inversion des unités, fonctions implicites,
+coefficients) en découlent ou l'accompagnent\footnote{Ces travaux sont
+postérieurs de plus de dix ans à la datation de l'inventaire ; les feuillets
+ne pouvaient pas les connaître, et nous ne suggérons pas qu'ils les
+annoncent. Le rapprochement, et l'hypothèse qu'il explique la présence du
+théorème dans le dossier, sont de cette lecture.}.
+
+\end{document}
