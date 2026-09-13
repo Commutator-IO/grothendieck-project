@@ -1,0 +1,536 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 104, pages 1-16.
+%
+% This is an INTERPRETATION, not a transcription. Everything the critical
+% apparatus carried moves into footnotes. In any dispute of substance the
+% transcription governs: whoever cites Grothendieck must cite batch-01.fr.tex.
+%
+% Pass: Opus 5 (claude-opus-5), 2026-09-13 — first pass, unchecked against the
+% pages by a human. The folder was read whole; it holds one batch, pages 1-16,
+% all transcribed.
+%
+% What the folder is. A category M of « modèles » in which every arrow is a
+% monomorphism and every endomorphism an identity is replaced by an
+% order-theoretic datum — the poset N of isomorphism classes, the posets I_n
+% of subobjects, the type maps tau_n and the admissible maps u_xi — from which
+% M is recovered up to equivalence (pages 6-10); three examples, which are
+% the simplex, the cube and the globe (page 10); a question on regular
+% spherical posets (page 11); and the presheaves on M that are unions of
+% their model subobjects, described by « M-pinned » posets (pages 12-16).
+% Pages 1-5 are trial sheets for the same construction and for the globular
+% apparatus of Pursuing Stacks, read briefly.
+%
+% Notation fixed for the whole document. M the category of models, M^ its
+% presheaves (he writes C^ on pages 14 and 16 for the same thing). N (his
+% barred N) the poset of isomorphism classes, distinct from the natural
+% numbers (his plain N). D_n a model of class n, I_n = D~_n its poset of
+% subobjects, d_n its greatest element, tau_n : I_n -> N the type map,
+% I_{n,n'} = tau_n^{-1}(n'), u^n_xi : I_{n'} -> I_n the admissible map of xi.
+% For an admissible presheaf X, K = X~ the poset of its model subobjects,
+% tau_K and u^K_xi its pinning.
+%
+% Substantive departures from the pages, each footnoted where it occurs:
+% — page 9: « rigide (deux objets isom. sont identiques) » is what is now
+%   called skeletal; the reading uses that word and says so.
+% — page 9: the list of data omits u_{d_n} = id and tau_n o u_xi = tau_{n'};
+%   both follow from the composition law, and the reading says how.
+% — page 10, Ex. 3: I_n = (Delta_n x {±1}) ⊔ {d_n} has 2n+3 elements; the
+%   margin's 2n+1, and the geometry of the hemispherical disc, want
+%   Delta_{n-1}. And « {±1} muni de l'ordre chaotique » gives a preorder; the
+%   order meant is (k, e) < (k', e') iff k < k'. The reading states both.
+% — page 13: the triangle's right vertex is L_{<=y}, not K_{<=y}.
+% — page 5: « pi_0(F_*, x) = classes de lacets en x » names a pi_1.
+% — pages 2-3: F_0 = Ob Delta_n (not Delta_{n'}), third line Fl C_1, last
+%   index n+1 (not q), as the pattern of the formulas requires.
+%
+% Modern names given and footnoted as ours: skeletal category; direct
+% category; semi-simplicial, semi-cubical and globular sets (the presheaf
+% categories of the three examples, the third being presheaves on the globe
+% category); face poset of a regular CW complex and Björner's CW posets;
+% regular polytopes; weak equivalence of higher groupoids for the conditions
+% of page 4.
+%
+% What the folder announces and never establishes: the proofs of the
+% equivalences of pages 9 and 13, both asserted; the sphericity of |I_n^*|
+% in the three examples, asserted; the answer to the question of page 11
+% (« Ça doit être dans les livres de Coxeter ! »); the canonicity asked in the
+% margin of page 11.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{104}
+\pages{1}{16}
+\dating{s.d.}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{[Champs (stacks) 1] : copies de notes manuscrites (s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Pour décrire une forme géométrique par des données finies, on la découpe en
+cellules élémentaires --- des triangles et leurs analogues en dimension
+supérieure, ou des carrés et des cubes, ou encore des disques --- et l'on note
+comment elles sont recollées. Le choix de la cellule de base n'est pas
+anodin : les triangles donnent les ensembles simpliciaux de la topologie
+algébrique, les cubes les ensembles cubiques, et une troisième forme, le
+disque découpé en deux hémisphères à chaque dimension, donne les ensembles
+« globulaires » dont Grothendieck se sert dans \emph{Pursuing Stacks} pour
+parler de groupoïdes de dimension supérieure. Chaque choix fournit une « catégorie de
+modèles ».
+
+Ces feuillets posent la question inverse : qu'est-ce qui, dans une catégorie
+de modèles, est vraiment nécessaire ? Leur réponse est qu'une telle catégorie
+--- sous deux hypothèses simples, que ses flèches soient des inclusions et
+qu'un modèle n'ait pas de symétrie propre --- est entièrement déterminée par
+des ensembles ordonnés : pour chaque modèle, l'ensemble ordonné de ses faces,
+chaque face étant marquée par le modèle auquel elle ressemble. Le triangle de
+dimension $n$ a $2^{n+1} - 1$ faces non vides, le cube $3^{n}$, le disque
+hémisphérique $2n + 1$ ; et dans les trois cas l'ensemble des faces propres,
+réalisé géométriquement, est une sphère.
+
+La seconde moitié applique la même idée aux objets construits en recollant
+des modèles. Un tel objet, quand chaque cellule y est plongée et que deux
+cellules se rencontrent le long de cellules, se décrit lui aussi par
+l'ensemble ordonné de ses cellules, muni d'un « épinglage » qui identifie
+chaque cellule et ses faces à un modèle. Les sommes et les recollements le long
+de sous-objets se lisent sur ces ensembles ordonnés.
+
+Au passage, une question que le dossier ne tranche pas : existe-t-il
+d'autres suites de formes aussi régulières que le simplexe, le cube et le
+disque, dont toutes les faces sont encore de la suite ? « Ça doit être dans
+les livres de Coxeter ! »
+
+\keywords{direct category, skeletal category, semi-simplicial set, cubical set, globular set, face poset, regular CW complex, CW poset, presheaf category}
+\end{resume}
+
+\section*{Le fil du dossier, et les conventions}
+
+\begin{enumerate}
+\item[1.] \emph{Feuillets d'essai} (pages 1 à 5) : cinq feuillets en travers,
+où apparaissent les mêmes objets de loin --- des systèmes globulaires, des
+conditions d'équivalence, un premier état de la construction.
+\item[2.] \emph{D'une catégorie de modèles à des ensembles ordonnés} (pages 6 à
+9) : les données $(\mathbb{N}, I_{n}, \tau_{n}, \varphi_{n,n'})$ et la
+reconstruction de $M$.
+\item[3.] \emph{Réciproque et exemples} (pages 10 et 11) : simplexe, cube,
+disque hémisphérique, et la question des suites régulières.
+\item[4.] \emph{Objets admissibles et ensembles ordonnés $M$-épinglés} (pages
+12 à 16).
+\end{enumerate}
+
+Les pages 6 à 16 sont la rédaction au propre, sous sa pagination 1 à 6, portée
+sur les rectos seulement, les versos continuant le texte ; elle est continue.
+
+\emph{Conventions.} $M$ est la catégorie des modèles, $\widehat{M}$ celle des
+préfaisceaux d'ensembles sur $M$, dans laquelle $M$ se plonge par
+Yoneda.\footnote{Il écrit $\widehat{M}$ à la page 12 et $\widehat{C}$ aux pages
+14 et 16, pour le même objet ; on écrit partout $\widehat{M}$.} On note
+$\mathbb{N}$ l'ensemble ordonné des classes d'isomorphisme d'objets de $M$, à
+ne pas confondre avec l'ensemble $\mathbf{N}$ des entiers naturels.\footnote{Il
+distingue les deux par la graisse du trait : un $N$ barré pour les classes, un
+$N$ ordinaire pour les entiers, et c'est tout le sens de sa remarque de la page
+10, « dans les cas que j'ai en tête, $\mathbb{N} = \mathbf{N}$ ».} Pour
+$n \in \mathbb{N}$, $D_{n}$ est un modèle de classe $n$, $I_{n}$ l'ensemble
+ordonné de ses sous-objets, $d_{n}$ son plus grand élément,
+$\tau_{n} : I_{n} \to \mathbb{N}$ l'application type,
+$I_{n,n'} = \tau_{n}^{-1}(n')$, et $u^{n}_{\xi} : I_{n'} \to I_{n}$
+l'application admissible attachée à $\xi \in I_{n,n'}$. Pour un ensemble ordonné
+$K$ et $\xi \in K$, $K_{\leq \xi} = \{x \in K \mid x \leq \xi\}$.
+
+\emph{Ce que le dossier annonce et n'établit pas} : les démonstrations des deux
+équivalences de catégories (pages 9 et 13), toutes deux affirmées ; la
+sphéricité de $|I_{n}^{*}|$ dans les trois exemples ; la réponse à la question
+de la page 11 et le caractère canonique demandé dans sa marge.
+
+\pagerange{1}{5}
+\section*{Feuillets d'essai (pages 1 à 5)}
+
+Les cinq premiers feuillets sont écrits sur du papier de rencontre --- le dos
+d'une enveloppe, le dos de pages dactylographiées --- et couverts de figures de
+cellules : segments subdivisés, amandes hachurées accolées, carrés divisés, un
+huit. Ils ne sont pas rédigés ; on en relève ce qui prépare la suite ou éclaire
+le contexte.
+
+\emph{Page 1.} Une chaîne de catégories,
+\[
+(\text{ensembles simpliciaux}) \supset (\mathrm{Cat}) \longleftarrow
+(\text{préordonnés}) \supset (\text{ordonnés}) \supset (\text{Maquettes}),
+\]
+le dernier mot remplaçant « Triangulations », biffé, et une famille $F_{x} \to
+F_{y}$ indexée par $x \leq y$.\footnote{Les inclusions sont tracées d'une
+seule courbe, et seule la flèche qui entre dans $(\mathrm{Cat})$ porte une
+pointe. Il écrit « Ss sets », « ensembles semi-simpliciaux », ancien nom des
+ensembles simpliciaux, avec dégénérescences. La première est le foncteur nerf, pleinement fidèle ; la seconde
+regarde un préordre comme une catégorie.}
+
+\emph{Pages 2 et 3 : systèmes globulaires.} Un système
+$F_{0} \leftleftarrows F_{1} \leftleftarrows F_{2}$ muni de sources et buts
+$s_{i}, t_{i}$, d'unités $\sigma_{i}$, de compositions $\mu_{i}^{j}$ et de trois
+lettres $a$, $\ell$, $r$ --- les contraintes d'associativité et d'unité à
+gauche et à droite d'une structure de dimension 2. Puis des cellules
+construites sur une suite de catégories $C_{1}, C_{2}, \ldots$ :
+\[
+F_{0} = \mathrm{Ob}\, C_{1}, \quad
+F_{1} = \mathrm{Fl}\, C_{1} \times \mathrm{Ob}\, C_{2}, \quad
+\ldots, \quad
+F_{n} = \mathrm{Fl}\, C_{1} \times \cdots \times \mathrm{Fl}\, C_{n}
+\times \mathrm{Ob}\, C_{n+1},
+\]
+essayées d'abord sur $C_{1} = \Delta_{n}$, $C_{2} = \Delta_{n'}$.\footnote{Trois
+indices sont écrits autrement sur les feuillets : $F_{0} =
+\mathrm{Ob}\,\Delta_{n'}$ à la page 2, où la suite demande $\Delta_{n}$ ;
+$\mathrm{Fl}\, C_{2}$ en tête de la troisième ligne de la page 3, où elle
+demande $C_{1}$ ; et $\mathrm{Ob}\, C_{q}$ pour le dernier facteur de
+$F_{n}$, où elle demande $C_{n+1}$. On rétablit la forme que la série impose.
+La page 3 porte aussi des sous-ensembles $O_{n} \subset F_{n}$, un cylindre
+$(F \times I) \sqcup_{\dot{F} \times I} \dot{F}$ et un produit de joints
+$(O_{1}, F_{1}) * (O_{2}, F_{2}) * \cdots$, sans texte.}
+
+\emph{Page 4 : quand un morphisme est-il une équivalence.} Le complexe
+$\mathbb{Z}[F_{n+1}] \to \mathbb{Z}[F_{n}] \xrightarrow{t_{n} - s_{n}}
+\mathbb{Z}[F_{n-1}]$ est un complexe, parce que
+$t_{n-1}(t_{n}y - s_{n}y) - s_{n-1}(t_{n}y - s_{n}y) = 0$ par les identités
+globulaires $s_{n-1}s_{n} = s_{n-1}t_{n}$ et $t_{n-1}s_{n} = t_{n-1}t_{n}$.
+Puis, pour $f : F \to F'$, des conditions échelonnées : a) tout objet de
+$F'$ est relié par une flèche à l'image d'un objet de $F$ ; b) deux objets
+dont les images sont reliées le sont --- « $\pi_{0}(f)$ inj. » ; b') et on peut
+choisir la flèche relevée à une 2-flèche près ; c) et c') les mêmes énoncés une
+dimension plus haut --- « $\pi_{1}(f)$ inj. ». Une colonne marginale en donne la
+forme générale :
+\begin{enumerate}
+\item[$(C_{i})$] pour tout $w' \in F'_{i}$, il existe $w \in F_{i}$ tel que
+$f(w) \sim w'$, et, si $i \geq 1$, on peut se donner d'avance la source et le
+but de $w$, sous la seule condition que leurs images soient ceux de
+$w'$.\footnote{C'est le feuillet le moins lisible du dossier, et la colonne
+marginale ne se lit que par fragments. La dernière ligne de c') écrit
+« $w \sim f(w)$ », où le sens demande $w' \sim f(w)$. La condition $(C_{i})$ est
+la forme, à bord prescrit, de la définition des équivalences faibles de
+groupoïdes de dimension supérieure ; le nom n'est pas sur la page.}
+\end{enumerate}
+
+\emph{Page 5 : premier état de la construction.} Au dos d'une page de son
+propre tapuscrit anglais sur les « Gr-stacks », le premier état des pages 6 à
+9, où l'ensemble ordonné des classes s'appelle $I$ au lieu de $\mathbb{N}$ :
+une famille d'ensembles ordonnés $n \mapsto \widetilde{D}_{n}$, une application
+strictement croissante $\tau_{n} : \widetilde{D}_{n} \to I$ d'image $I_{\leq n}$,
+et le dénombrement des faces du cube
+\[
+1 + n \cdot 2 + \frac{n(n-1)}{2}\, 2^{2} + \cdots + 2^{n} = (1 + 2)^{n}
+\]
+que la page 10 réduira à $\mathrm{Card}\, I_{n} = 3^{n}$.\footnote{La page note
+aussi « $\pi_{0}(F_{*}, x)$ = ens.\ des classes de lacets en $x$ », avec un lacet
+dessiné ; des classes de lacets en un point forment un $\pi_{1}$. Le mot
+« classes » est lu avec doute. Le tapuscrit anglais du verso pose
+$\underline{B} = (\text{Gr-stacks})$ et nomme les $\widetilde{D}_{n}$ ; le terme
+est celui de \emph{Pursuing Stacks}, rédigé en anglais en 1983, ce qui est un
+rapprochement et non une datation.}
+
+\pagerange{6}{9}
+\section*{D'une catégorie de modèles à des ensembles ordonnés (pages 6 à 9)}
+
+Soit $M$ une catégorie telle que
+\begin{enumerate}
+\item[(i)] toute flèche de $M$ est un monomorphisme ;
+\item[(ii)] tout endomorphisme d'un objet de $M$ est l'identité.
+\end{enumerate}
+Exemple : la catégorie définie par un ensemble ordonné.\footnote{« Tout
+endomorphisme » remplace « tout automorphisme », biffé. La correction
+importe : avec (i) seulement et des automorphismes triviaux, un endomorphisme
+non trivial resterait possible dans une catégorie infinie. Une catégorie qui
+satisfait (i) et (ii) est une \emph{catégorie directe} au sens de Reedy, dont
+toutes les flèches sont monomorphes, dès que l'ordre de $\mathbb{N}$ défini
+plus bas est bien fondé ; le nom n'est pas sur la page.}
+
+\emph{Sous-objets.} Pour $D \in \mathrm{Ob}\, M$, soit $\widetilde{D}$
+l'ensemble des sous-objets de $D$, ordonné par inclusion, et identifions $D$ au
+plus grand élément. Pour $D', D$ objets de $M$, l'application
+\[
+(*) \qquad \mathrm{Hom}_{M}(D', D) \longrightarrow \widetilde{D},
+\qquad u \longmapsto u(D')
+\]
+est injective : si $u$ et $v$ définissent le même sous-objet, $v = u\theta$
+avec $\theta$ automorphisme de $D'$, et $\theta = \mathrm{id}$ par (ii). Son
+image est l'ensemble des sous-objets de $D$ isomorphes à $D'$.
+
+\emph{Les classes.} L'ensemble $\mathbb{N}$ des classes d'isomorphisme
+d'objets de $M$, préordonné par l'existence d'une flèche, est ordonné : deux
+flèches $D' \to D \to D'$ composent en un endomorphisme, donc en
+l'identité, et $D \simeq D'$. Pour $n \in \mathbb{N}$, un objet $D_{n}$ de
+classe $n$ est déterminé à isomorphisme unique près, et $I_{n} =
+\widetilde{D}_{n}$ est donc défini à isomorphisme unique près.
+
+\emph{Le type} (page 7). L'application $\tau_{n} : I_{n} \to \mathbb{N}$, qui
+à un sous-objet associe sa classe, est strictement croissante, d'image
+$\mathbb{N}_{\leq n}$, et
+\[
+\tau_{n}^{-1}(n) = \{d_{n}\}.
+\]
+En effet, si $x \subset y$ sont deux sous-objets de même type, la flèche
+$x \to y$ admet une rétraction et le composé dans l'autre sens est un
+endomorphisme de $y$, donc l'identité : $x = y$.\footnote{La page énonce la
+stricte croissance et $\tau_{n}^{-1}(n) = \{d_{n}\}$ « par (ii) » ; l'argument
+est le nôtre. « Rappelle » et « déjà » sont lus sur le sens.}
+
+\emph{Les applications admissibles.} Pour $n' \leq n$, $(*)$ donne une bijection
+$\mathrm{Hom}(D_{n'}, D_{n}) \simeq I_{n,n'} = \tau_{n}^{-1}(n')$, et un
+monomorphisme $u : D_{n'} \to D_{n}$ induit par image directe une application
+$I_{n'} \to I_{n}$. D'où
+\[
+\varphi_{n,n'} : I_{n,n'} \longrightarrow \mathrm{Hom}(I_{n'}, I_{n}),
+\qquad \xi \longmapsto u^{n}_{\xi},
+\]
+avec, pour tout $\xi \in I_{n,n'}$ (page 8),
+\[
+u^{n}_{\xi}(d_{n'}) = \xi, \qquad
+u^{n}_{\xi} : I_{n'} \xrightarrow{\;\sim\;} (I_{n})_{\leq \xi}, \qquad
+u^{n}_{d_{n}} = \mathrm{id}_{I_{n}},
+\]
+de sorte que $\varphi_{n,n'}$ est injective ; et, pour
+$n'' \leq n' \leq n$, $\xi \in I_{n,n'}$, $y \in I_{n',n''}$, la \emph{loi de
+composition}
+\[
+u^{n}_{\xi} \circ u^{n'}_{y} = u^{n}_{\zeta}, \qquad \zeta = u^{n}_{\xi}(y),
+\]
+qui exprime la stabilité des applications admissibles par composition.
+
+\emph{La catégorie $M_{0}$.} Elle a pour objets les éléments de $\mathbb{N}$,
+pour flèches $n' \to n$ les applications admissibles $I_{n'} \to I_{n}$ si
+$n' \leq n$ et aucune sinon, la composition étant celle des applications. On a
+un foncteur $M \to M_{0}$, $D \mapsto$ sa classe, $u \mapsto$ l'image directe,
+et c'est une équivalence de catégories ; c'est un isomorphisme si $M$ est
+squelettique.\footnote{Il écrit « $M$ est une catégorie \emph{rigide} (deux
+objets isom.\ sont identiques) » : la définition entre parenthèses est celle
+qu'on appelle aujourd'hui \emph{squelettique}, « rigide » désignant d'ordinaire
+l'absence d'automorphismes non triviaux, que (ii) assure déjà. La page ne
+démontre pas l'équivalence ; elle est fidèle par $(*)$, pleine par définition
+de $M_{0}$, et essentiellement surjective par construction.}
+
+Supposant désormais $M$ squelettique, on l'identifie à $M_{0}$, catégorie
+définie par les données suivantes :
+\begin{itemize}
+\item $\mathbb{N}$, ensemble ordonné ;
+\item $(I_{n})_{n \in \mathbb{N}}$, ensembles ordonnés ayant chacun un plus grand
+élément $d_{n}$ ;
+\item $(\tau_{n} : I_{n} \to \mathbb{N})$, strictement croissantes,
+$\tau_{n}(I_{n}) = \mathbb{N}_{\leq n}$, $\tau_{n}^{-1}(n) = \{d_{n}\}$ ;
+\item $(\varphi_{n,n'})_{n' \leq n}$, $\xi \mapsto u^{n}_{\xi}$, avec
+$u^{n}_{\xi} : I_{n'} \simeq (I_{n})_{\leq \xi}$ et la loi de composition.
+\end{itemize}
+
+\pagerange{10}{11}
+\section*{Réciproque, exemples, et une question (pages 10 et 11)}
+
+\emph{Réciproque.} De telles données définissent une catégorie $M_{0}$
+satisfaisant à (i) et (ii), dont les ensembles de sous-objets sont les
+$I_{n}$.\footnote{Deux propriétés qu'on vient d'établir pour une catégorie
+donnée ne figurent pas dans la liste des données : $u^{n}_{d_{n}} =
+\mathrm{id}$ et $\tau_{n} \circ u^{n}_{\xi} = \tau_{n'}$. Elles s'en
+déduisent. La loi de composition donne $u_{d_{n}} \circ u_{d_{n}} = u_{d_{n}}$,
+et $u_{d_{n}}$ étant bijective, c'est l'identité. Elle impose aussi que
+$u^{n}_{\zeta}$ ait pour source $I_{n''}$, c'est-à-dire
+$\tau_{n}(u^{n}_{\xi}(y)) = \tau_{n'}(y)$. Les flèches de $M_{0}$ sont
+injectives, d'où (i), et $\mathrm{End}(n)$ s'identifie à
+$\tau_{n}^{-1}(n) = \{d_{n}\}$, d'où (ii). Enfin $\xi \leq \eta$ dans $I_{n}$
+si et seulement si $u_{\xi}$ se factorise par $u_{\eta}$, parce que
+$(I_{n})_{\leq \eta}$ est l'image de $u_{\eta}$ : les sous-objets de $n$ dans
+$M_{0}$ forment bien $I_{n}$. Ces vérifications sont les nôtres.} « Dans les cas
+que j'ai en tête, $\mathbb{N} = \mathbf{N}$. »
+
+\textbf{Exemple 1.} La catégorie des ensembles finis totalement ordonnés
+$\Delta_{n} = \{0, \ldots, n\}$ et des applications strictement croissantes.
+Les sous-objets sont les parties non vides :
+\[
+I_{n} = \mathfrak{P}^{*}(\Delta_{n}), \qquad
+\mathrm{Card}\, I_{n} = 2^{n+1} - 1 .
+\]
+
+\textbf{Exemple 2.} La catégorie des cubes combinatoires épinglés --- par un
+ordre total sur l'ensemble des paires d'hyperfaces opposées et le choix d'une
+face dans chaque paire --- et des inclusions de faces compatibles aux
+épinglages, l'épinglage d'un cube induisant celui de chacune de ses faces.
+Une face de $[0,1]^{n}$ fixe certaines coordonnées à $0$ ou $1$ et laisse les
+autres libres :
+\[
+\mathrm{Card}\, I_{n} = \sum_{k} \binom{n}{k} 2^{k} = 3^{n}.
+\]
+
+\textbf{Exemple 3.} La catégorie des disques hémisphériques $D_{n}$, dont les
+cellules sont deux hémisphères en chaque dimension $k < n$ et la cellule
+intérieure :
+\[
+I_{n} = \bigl(\Delta_{n-1} \times \{\pm 1\}\bigr) \sqcup \{d_{n}\},
+\qquad \mathrm{Card}\, I_{n} = 2n + 1,
+\]
+ordonné par $(k, \varepsilon) < (k', \varepsilon')$ si et seulement si
+$k < k'$, et $d_{n}$ plus grand élément.\footnote{Le corps de la page écrit
+$\Delta_{n} \times \{\pm 1\}$, qui aurait $2n + 3$ éléments ; la marge écrit
+« Card $I_{n} = 2n+1$ », et c'est ce que donne la géométrie : un disque de
+dimension $n$ a pour bord une sphère $S^{n-1}$ découpée en deux hémisphères en
+chacune des dimensions $0, \ldots, n-1$. On retient $\Delta_{n-1}$. La page
+munit $\{\pm 1\}$ de « l'ordre chaotique » ; le produit par un préordre
+chaotique serait un préordre et non un ordre, deux hémisphères de même
+dimension y étant chacun inférieur à l'autre. L'ordre voulu, celui des cellules
+du disque, est celui qu'on écrit.}
+
+\emph{Ce que sont ces trois catégories.} Les préfaisceaux sur la première sont
+les ensembles semi-simpliciaux au sens actuel du mot, c'est-à-dire sans
+dégénérescences, puisque toutes les flèches sont monomorphes ; sur la deuxième, des ensembles semi-cubiques ; sur
+la troisième, les ensembles globulaires. En effet $\mathrm{Hom}(D_{n'}, D_{n})
+= \tau_{n}^{-1}(n')$ a deux éléments pour $n' < n$, les deux hémisphères de
+dimension $n'$, et c'est la catégorie des globes, avec sa source et son
+but.\footnote{L'identification est la nôtre ; la page ne nomme aucune des
+trois. Le troisième exemple est la forme des cellules de \emph{Pursuing
+Stacks}. Le mot « hémisphères » est lu avec doute.}
+
+\emph{Sphéricité.} Dans les trois exemples, posant $I_{n}^{*} = I_{n} -
+\{d_{n}\}$ :
+\begin{enumerate}
+\item[a)] pour $n \geq 1$, la réalisation géométrique $|I_{n}^{*}|$ est une
+sphère de dimension $n - 1$, et $|I_{n}|$ un disque de dimension $n$ ;
+\item[b)] les $I_{n}^{*}$ sont \emph{réguliers} : leur groupe d'automorphismes
+est transitif sur les repères, c'est-à-dire sur les chaînes maximales
+$\xi_{0} < \xi_{1} < \cdots < \xi_{n-1}$.
+\end{enumerate}
+Le groupe est $\mathfrak{S}_{n+1}$ pour le simplexe, le groupe hyperoctaédral
+pour le cube, et $\{\pm 1\}^{n}$ pour le disque hémisphérique, qui y opère
+simplement transitivement.\footnote{Les trois groupes sont les nôtres ; la page
+énonce a) et b) sans démonstration. La réalisation d'un ensemble ordonné est
+celle de son complexe des chaînes. Un ensemble ordonné dont chaque
+$K_{< \xi}$ se réalise en une sphère est ce qu'on appelle aujourd'hui un
+\emph{CW-poset} : c'est exactement l'ensemble ordonné des cellules d'un
+complexe CW régulier (A.~Björner, 1984). Les trois exemples en sont.}
+
+\textbf{Question} (page 11). Existe-t-il d'autres suites $(P_{n})_{n \geq 1}$
+d'ensembles ordonnés telles que
+\begin{enumerate}
+\item[a)] $P_{n}$ soit un polyèdre sphérique régulier ;
+\item[b)] pour tout $\xi \in P_{n}$, $(P_{n})_{\leq \xi} \simeq P_{n'}$ pour un
+$n' \leq n$ convenable ?
+\end{enumerate}
+« Ça doit être dans les livres de Coxeter ! » On aimerait surtout pouvoir
+construire des $\varphi_{n,n'}$ satisfaisant la loi de
+composition.\footnote{En marge : « b) est-il canonique ?! », et
+$P_{n} = I_{n+1}^{*}$, ce qui fixe le décalage d'indice entre la question et les
+exemples. Parmi les polytopes réguliers convexes, la condition b) --- toute face
+est encore de la suite --- ne laisse passer indéfiniment que les simplexes et
+les cubes : les faces d'un octaèdre sont des triangles, et une suite qui
+contiendrait l'octaèdre devrait se poursuivre par un polytope régulier de
+dimension 4 à cellules octaédriques, le 24-cellules, qui n'a pas de successeur.
+Le disque hémisphérique n'est pas un polytope convexe, et c'est ce que la
+question laisse ouvert. Cette remarque est la nôtre.}
+
+\pagerange{12}{13}
+\section*{Objets admissibles et épinglages (pages 12 et 13)}
+
+Soit $\mathbb{B}_{0}$ la sous-catégorie pleine de $\widehat{M}$ formée des
+objets $X$ --- dits \emph{admissibles} --- tels que
+\begin{itemize}
+\item $X$ est la borne supérieure de ses sous-objets isomorphes à des objets de
+$M$ (ses sous-objets \emph{modèles}) ;
+\item si $K$ et $L$ sont deux sous-objets modèles de $X$, $K \cap L$ est la
+borne supérieure des sous-objets modèles qu'il contient.
+\end{itemize}
+
+Soit $K = \widetilde{X}$ l'ensemble ordonné des sous-objets modèles de $X$. Il
+porte une structure de \emph{$M$-épinglage} :
+\begin{enumerate}
+\item[a)] une application strictement croissante
+$\tau_{K} : K \to \mathbb{N}$, l'application type ;
+\item[b)] pour tout $\xi \in K$, de type $n = \tau_{K}(\xi)$, un isomorphisme
+d'ensembles ordonnés
+\[
+u^{K}_{\xi} : I_{n} \xrightarrow{\;\sim\;} K_{\leq \xi},
+\qquad u^{K}_{\xi}(d_{n}) = \xi,
+\]
+l'application d'épinglage de $K_{\leq \xi}$ ;
+\end{enumerate}
+qui satisfait
+\[
+(1) \qquad \tau_{K} \circ u^{K}_{\xi} = \tau_{n},
+\]
+\[
+(2) \qquad u^{K}_{\xi} \circ u^{n}_{y} = u^{K}_{\zeta}
+\quad \text{pour } y \in I_{n},\ \zeta = u^{K}_{\xi}(y).
+\]
+Les sous-objets modèles de $X$ contenus dans $\xi \simeq D_{n}$ sont ceux de
+$D_{n}$, par Yoneda et (i), d'où b).\footnote{Il écrit l'application type à
+valeurs dans $\mathbf{N}$, les entiers, après avoir biffé $\mathbb{N}$ ; il
+est alors dans le cas qu'il a « en tête ». On garde $\mathbb{N}$, qui est le cas
+général. En marge, les applications $I_{n} \to K$ ainsi définies sont dites
+« admissibles ».}
+
+\textbf{Énoncé.} La catégorie des objets admissibles de $\widehat{M}$ est
+équivalente à celle des ensembles ordonnés $M$-épinglés, dont les morphismes
+$f : K \to L$ sont les applications strictement croissantes telles que
+\begin{enumerate}
+\item[a)] $\tau_{L} \circ f = \tau_{K}$ ;
+\item[b)] pour tout $\xi \in K$, avec $y = f(\xi)$ et $n = \tau_{K}(\xi) =
+\tau_{L}(y)$, le triangle
+\end{enumerate}
+
+\begin{tikzcd}[column sep=small, row sep=small, nodes={font=\scriptsize}]
+K_{\leq \xi} \arrow[rr, "f|K_{\leq \xi}"] & & L_{\leq y} \\
+& I_n \arrow[ul, "u^K_\xi"] \arrow[ur, "u^L_y"'] &
+\end{tikzcd}
+
+commute.\footnote{Le sommet de droite du triangle est écrit comme un $K$ ;
+$f$ allant de $K$ dans $L$, c'est $L_{\leq y}$, que la page 14 écrit. Les deux
+obliques ne portent sur la feuille qu'un signe d'isomorphie. L'équivalence est
+affirmée et non démontrée ; ce qui la rend plausible est que tout élément de
+$X(D_{n})$ se factorise par un sous-objet modèle, donc est un monomorphisme, de
+sorte qu'un morphisme d'objets admissibles envoie modèles sur modèles, et
+qu'un objet admissible est la limite inductive de ses sous-objets modèles
+indexée par $K$. Cette esquisse est la nôtre.}
+
+\pagerange{14}{15}
+\section*{Parties fermées, et épinglages par les éléments maximaux (pages 14 et 15)}
+
+Un morphisme $f$ comme ci-dessus induit, pour tout $\xi$, un isomorphisme
+$K_{\leq \xi} \simeq L_{\leq f(\xi)}$. On s'intéresse surtout au cas où $f$ est
+injectif, qui correspond aux monomorphismes de $\widehat{M}$. Alors $f$ est un
+isomorphisme de $K$ sur son image $L' = f(K)$, munie de l'ordre induit ; $L'$ est
+une partie \emph{fermée} de $L$, c'est-à-dire stable par passage aux éléments
+plus petits ; une partie fermée porte un unique $M$-épinglage induit pour
+lequel l'inclusion est admissible ; et $f : K \simeq L'$ est compatible aux
+épinglages.
+
+\emph{Épinglages par les éléments maximaux} (page 15). Supposons que $K$ n'ait
+qu'un nombre fini d'éléments maximaux et que tout élément soit inférieur à
+l'un d'eux --- c'est le cas où $X$ est réunion finie de modèles. Un
+$M$-épinglage de $K$ est alors connu dès qu'on connaît les
+\[
+u^{K}_{\alpha} : I_{\tau(\alpha)} \xrightarrow{\;\sim\;} K_{\leq \alpha}
+\qquad (\alpha \in \mathrm{Max}\, K),
+\]
+et une telle famille définit un épinglage si et seulement si, pour
+$\alpha, \beta \in \mathrm{Max}\, K$ et $\xi \leq \alpha, \beta$, les deux
+isomorphismes $I_{n} \simeq K_{\leq \xi}$ que $u^{K}_{\alpha}$ et
+$u^{K}_{\beta}$ induisent --- chacun composé avec l'application admissible de
+l'antécédent de $\xi$ --- sont les mêmes.\footnote{Implicitement, les deux
+antécédents doivent avoir le même type $n$, sans quoi les deux isomorphismes
+n'ont pas la même source ; c'est une partie de la condition. Le dernier mot de
+la page, « mêmes », est lu avec doute.} C'est une condition de recollement,
+comme pour un atlas.
+
+\pagerange{16}{16}
+\section*{Sommes et sommes amalgamées (page 16)}
+
+La catégorie des objets admissibles de $\widehat{M}$ est stable par sommes
+quelconques et par sommes amalgamées $X \sqcup_{Z} Y$ le long de
+monomorphismes $Z \to X$ et $Z \to Y$, et le foncteur $X \mapsto
+\widetilde{X}$ commute à ces opérations. Les objets de type fini --- réunions
+finies de modèles --- sont stables par sommes finies et par ces sommes
+amalgamées.\footnote{La page dit la commutation « de façon évidente ». Voici
+pourquoi elle l'est. Les éléments de $X \sqcup_{Z} Y$ sur $D_{n}$ sont ceux de
+$X$ et de $Y$ recollés le long de $Z$, de sorte qu'un sous-objet modèle du
+recollement est dans $X$ ou dans $Y$. D'autre part, tout sous-préfaisceau d'un
+modèle est réunion de modèles, puisque toutes les flèches de $M$ sont
+monomorphes, ce qui assure la seconde condition d'admissibilité. Enfin, un
+sous-objet d'un objet admissible est admissible, et $Z$ l'est donc. Ces
+vérifications sont les nôtres.}
+
+\textbf{N.B.} Quand les $I_{n}$ sont finis, les objets admissibles de type fini
+correspondent aux ensembles ordonnés $M$-épinglés finis.
+
+\end{document}
