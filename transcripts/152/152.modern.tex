@@ -1,0 +1,347 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 152, pages 1-12.
+%
+% This is an INTERPRETATION, not a transcription. Everything the critical
+% apparatus carried moves into footnotes. In any dispute of substance the
+% transcription governs: whoever cites Grothendieck must cite batch-01.fr.tex.
+%
+% Pass: Opus 5 (claude-opus-5), 2026-09-13 — first pass, unchecked against the
+% pages by a human. The folder was read whole; it holds one batch, pages 1-12.
+% Pages 5, 8, 11 are listings with nothing of his.
+%
+% What the folder is. Pages 1-3 are trial sheets on « types de mots » and the
+% chord diagrams that code them, with a recursive notion of admissibility.
+% Pages 4-12 (his 1, 1', 2, 2', 3, 3') are one text: a plane tree is a tree
+% with a rotation system up to reversal; cutting the surface along a
+% circularised graph gives a contour; circularised graphs are equivalent to
+% oriented contours with a fixed-point-free involution on their edges; a tree
+% is exactly one polygon with a non-crossing involution, i.e. a disc cut by
+% non-crossing chords, whose dual graph is the tree.
+%
+% Notation fixed for the whole document. Gamma a graph, S its vertices, A its
+% edges, A_s the edges at s, A-bar the arcs (darts, oriented edges),
+% sigma_Gamma the orientation reversal, rho_Gamma the rotation (next dart in
+% the circular order at the origin). circ(Gamma) the set of circularisations.
+% C the contour, A(C) its edges, sigma_C the gluing involution on A(C), rho_C
+% the successor along the oriented contour. rd, rg: right-hand and left-hand
+% edge of a dart (his abbreviations).
+%
+% Substantive departures from the pages, each footnoted where it occurs:
+% — page 4: « si les sommets de Gamma sont d'ordre <= 1, il y a une seule »
+%   circularisation; the right bound is <= 2 (cyclic orders on sets of at
+%   most two elements are unique), as the preceding sentence (card A_s >= 3)
+%   says.
+% — pages 7 and 9: the dictionary is stated three ways on the leaves and they
+%   disagree: page 7's box rho_C(rd a) = rd(rho_Gamma a), page 9's head
+%   sigma_Gamma = sigma_C and rho_Gamma = rho_C, and page 9's table, whose
+%   last two rows give rho_C <-> rho_Gamma sigma_Gamma and rho_Gamma <->
+%   rho_C sigma_C. The consistent dictionary is sigma_C = sigma_Gamma,
+%   rho_C = rho_Gamma sigma_Gamma (face permutation), hence rho_Gamma =
+%   rho_C sigma_C; the reading states it and footnotes the three variants.
+% — page 2: the correspondence « types de mots » <-> chord diagrams is given
+%   in the form the leaf states; the reading of what a « type de mot » is
+%   (cyclic words in which letters are cancelled in pairs) is ours and marked.
+%
+% Modern names given and footnoted as ours: rotation system (Heffter,
+% Edmonds), ribbon graph, combinatorial map (darts with an involution and a
+% rotation, faces as cycles of their product), chord diagram, non-crossing
+% matching, dual tree of a dissection, Catalan numbers for rooted plane trees,
+% free reduction.
+%
+% What the folder announces and never establishes: the equivalence of page 2
+% (stated); the two last words of the boxed criterion of page 9 (illegible);
+% the functoriality of the equivalences, asserted as « équivalences de
+% catégories » and not checked on morphisms.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{152}
+\pages{1}{12}
+\dating{[à partir de 1982]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Catégorie des types de mots [dont arbres plans] : notes manuscrites (s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Un arbre est un réseau de points reliés par des segments, sans aucune boucle.
+Dessiné sur une feuille, il acquiert une information de plus : autour de chaque
+point, l'ordre dans lequel les segments en partent, en tournant. Deux dessins
+du même arbre peuvent différer par cet ordre, et c'est cette information qui
+fait d'un arbre un \emph{arbre plan}. Ces feuillets en donnent trois
+descriptions, et montrent qu'elles reviennent au même.
+
+La première est celle qu'on vient de dire : un ordre circulaire autour de chaque
+sommet, défini à renversement global près parce que la feuille n'a pas de
+côté privilégié. La deuxième s'obtient en découpant la feuille le long de
+l'arbre, comme on déplie un patron : on obtient un polygone, dont chaque côté
+longe l'un des deux bords d'un segment, et une règle qui dit quels côtés
+recoller. La troisième est le dessin dual : un disque découpé par des cordes qui
+ne se croisent pas, chaque région devenant un sommet et chaque corde une arête.
+
+Le passage de la première à la deuxième marche pour n'importe quel graphe
+dessiné sur une surface, et non seulement pour les arbres ; on obtient alors
+plusieurs polygones, un par face. C'est le dictionnaire des \emph{cartes
+combinatoires} : on ne garde que les demi-arêtes, et deux permutations --- l'une
+qui retourne une arête, l'autre qui tourne autour d'un sommet --- dont le
+produit fait le tour des faces. L'arbre se reconnaît alors à ce qu'il n'a
+qu'une face et que les recollements de son polygone ne se croisent pas.
+
+Les trois premiers feuillets, des feuilles d'essais, attaquent le même objet
+par un autre côté : des « types de mots » --- des suites de lettres et de leurs
+inverses, à ce qu'il semble --- que des cordes dans un disque codent aussi. Le texte est celui d'une rédaction qui cherche ses notations : trois
+formulations du dictionnaire y coexistent, et elles ne s'accordent pas toutes.
+
+\keywords{plane tree, rotation system, ribbon graph, combinatorial map, chord diagram, non-crossing matching, polygon dissection, dual tree}
+\end{resume}
+
+\section*{Le fil du dossier, et les conventions}
+
+\begin{enumerate}
+\item[1.] \emph{Feuilles d'essais} (pages 1 à 3) : « types de mots », disques
+découpés par cordes, admissibilité.
+\item[2.] \emph{Arbres plans et circularisations} (page 4).
+\item[3.] \emph{Découpage et contours} (page 6).
+\item[4.] \emph{Le dictionnaire graphes circularisés / contours} (pages 7 et 9),
+et le critère pour qu'un graphe soit un arbre.
+\item[5.] \emph{Disques découpés par cordes} (pages 10 et 12).
+\end{enumerate}
+
+Les pages 4 à 12 portent sa pagination $1, 1', 2, 2', 3, 3'$ et forment un
+texte suivi ; les pages 5, 8 et 11 sont des listings sans rien de sa main.
+
+\emph{Conventions.} Un graphe $\Gamma$ a un ensemble de sommets $S$ et un
+ensemble d'arêtes $A$ ; $A_{s}$ est l'ensemble des arêtes incidentes à $s$.
+$\bar{A}$ est l'ensemble des \emph{arcs}, ou arêtes orientées ;
+$\sigma_{\Gamma}$ est l'involution de $\bar{A}$ qui renverse l'orientation, et,
+pour un graphe circularisé, $\rho_{\Gamma}$ la permutation de $\bar{A}$ qui envoie
+un arc sur l'arc suivant, dans l'ordre circulaire, autour de son origine. Pour
+un contour $C$, $A(C)$ est l'ensemble de ses arêtes, $\rho_{C}$ la permutation
+« arête suivante » sur le contour orienté, et $\sigma_{C}$ l'involution de
+recollement. $\mathrm{rd}(\bar{a})$ et $\mathrm{rg}(\bar{a})$ sont l'arête du
+contour qui longe l'arc $\bar{a}$ à sa droite et à sa gauche.\footnote{« rd »
+et « rg » sont ses abréviations ; la page 7 écrit la première en toutes lettres,
+« arête droite de $\bar{a}$ ». $\bar{A}$ est sa notation pour l'ensemble des
+arcs, employée sans définition à partir de la page 6.}
+
+\emph{Ce que le dossier annonce et n'établit pas} : l'équivalence de la page 2,
+énoncée ; la fin du critère encadré de la page 9, illisible ; et la
+fonctorialité des équivalences, affirmées « de catégories » sans que les
+morphismes soient examinés.
+
+\pagerange{1}{3}
+\section*{Feuilles d'essais : types de mots et cordes (pages 1 à 3)}
+
+\emph{Page 1.} Un champ d'une trentaine de petites figures --- cercles marqués
+de points et de rayons, arbres à trois ou quatre branches --- où l'on lit des
+« systèmes » de deux lettres $uv$, $u^{-1}v$, $uv^{-1}$, $u^{-1}v^{-1}$, de
+trois lettres $uvw$, les systèmes $u^{-1}u$ et $uu^{-1}$, des « sommets
+principaux », des mots $uvu^{-1}$, et les mots « conjugués » et
+« invariants ».
+
+\emph{Page 2.} L'énoncé que le dossier se donne :
+
+\textbf{Énoncé.} La catégorie des « types de mots » de longueur $n$ est
+équivalente à la catégorie isotypique des systèmes $(D, \omega, K, S, S_{0})$
+formés d'un disque $D$ orienté par $\omega$, d'un découpage de $D$ par un
+ensemble $K$ de cordes, et d'un ensemble $S$ de $n$ sommets marqués sur le bord,
+avec au moins un sommet sur chaque arc que les extrémités des cordes découpent
+sur $\partial D$. Son \emph{nombre d'ordre réduit} est
+\[
+\sum_{\alpha \in \pi_{0}(\mathring{D} \smallsetminus K)}
+\bigl(\mathrm{card}(\alpha \cap S) - 1\bigr),
+\]
+la somme portant sur les régions du découpage. Un type de mot est
+\emph{trivial} quand ce nombre est nul.\footnote{L'énoncé ne définit pas
+« type de mot », ni $S_{0}$, et la page ajoute « type de mot réduit :
+$K = \emptyset$ (i.e.\ trivial) », qui ne s'accorde pas avec la définition du
+trivial par l'ordre réduit nul. Un tableau en tête du feuillet aligne « disques
+découpés par cordes $\leftrightarrow$ arbres, graphes circularisés
+$\leftrightarrow$ contours $\simeq$ involutions » : c'est le programme des pages
+4 à 12. L'adjectif « trivial » et le mot « contour » sont lus avec doute.}
+
+\emph{Page 3.} Un graphe muni d'une involution $\sigma$ sur l'ensemble de ses
+arêtes est dit \emph{admissible} par récurrence sur le nombre d'arêtes : si
+$\sigma = \mathrm{id}$, ou s'il existe une orbite de $\sigma$ formée de deux arêtes
+consécutives dont la contraction en un point donne un graphe admissible, muni de
+l'involution induite. Tout graphe sans arête est admissible.\footnote{L'adjectif
+qui qualifie le graphe est lu « segmenté » avec doute, et « admissible » aussi.
+Si l'on pense les arêtes consécutives d'un contour comme les lettres d'un mot
+cyclique, et les orbites de $\sigma$ comme les paires $x$, $x^{-1}$, la
+récurrence est celle de la réduction libre --- on efface deux lettres voisines
+inverses l'une de l'autre --- et un appariement est admissible exactement quand
+ses cordes ne se croisent pas. Ce rapprochement est le nôtre ; il éclaire la
+page 2 et le critère de la page 9, mais le feuillet ne le formule pas.}
+
+\pagerange{4}{4}
+\section*{Arbres plans et circularisations (page 4)}
+
+Un \emph{arbre} est un graphe connexe et simplement connexe ; il est donc
+strict --- sans boucle, et au plus une arête entre deux sommets distincts --- et
+se décrit par $(S, A)$, $A \subset \mathfrak{P}_{2}(S)$, avec $S \neq \emptyset$,
+et $A = \emptyset$ si et seulement si l'arbre est ponctuel.
+
+\textbf{Définition.} Un \emph{arbre plan} est un arbre muni d'une classe de
+plongements $|\Gamma| \hookrightarrow X$ dans une surface, deux plongements
+dans $X$ et $X'$ étant identifiés s'il existe des voisinages $U$, $U'$ de
+$|\Gamma|$ et un homéomorphisme $U \simeq U'$ induisant l'identité sur
+$|\Gamma|$.
+
+Une \emph{circularisation} de $\Gamma$ est la donnée, pour chaque sommet $s$,
+d'un ordre circulaire sur $A_{s}$ ; $\mathrm{circ}(\Gamma)$ est l'ensemble des
+circularisations, muni du passage à l'ordre opposé.
+
+\textbf{Proposition.}
+\begin{enumerate}
+\item[(i)] Les classes de plongements de $|\Gamma|$ dans une surface
+\emph{orientée} correspondent aux circularisations de $\Gamma$.
+\item[(ii)] Les classes de plongements dans une surface quelconque correspondent
+aux \emph{bicircularisations} : couples $(\varepsilon, c)$ formés d'un ensemble
+$\varepsilon$ à deux éléments et d'une application $c : \varepsilon \to
+\mathrm{circ}(\Gamma)$ qui échange les deux éléments de $\varepsilon$ avec deux
+circularisations opposées. Autrement dit, aux circularisations prises à
+renversement global près.
+\end{enumerate}
+En effet $|\Gamma|$ étant simplement connexe, il admet un voisinage simplement
+connexe $U$, et $U \simeq \mathbb{R}^{2}$ ; les deux orientations de $U$
+forment $\varepsilon$.\footnote{Le nom moderne d'une circularisation est
+\emph{système de rotation} (L.~Heffter, 1891 ; J.~Edmonds, 1960), et un graphe
+qui en est muni est un \emph{graphe à rubans} ; les noms ne sont pas sur la
+page. Le mot qui introduit $(\varepsilon, c)$, lu « paires », suit le sens et non
+le tracé.}
+
+La circularisation ne dépend que des $A_{s}$ de cardinal au moins 3. Si tous
+les sommets sont de degré au plus 2 --- l'arbre est un chemin ---, il n'y a
+qu'une circularisation, et un seul arbre plan.\footnote{La page écrit « si les
+sommets de $\Gamma$ sont d'ordre $\leq 1$ ». Un ordre circulaire sur un ensemble
+à au plus deux éléments est unique, et la phrase précédente de la page, qui
+parle des $A_{s}$ de cardinal $\geq 3$, demande la borne 2 ; on corrige.}
+
+\pagerange{6}{6}
+\section*{Découper la surface le long du graphe (page 6)}
+
+En découpant la surface $X$ le long de $|\Gamma|$, $\Gamma$ étant un arbre, on
+obtient une surface à bord connexe, munie d'une structure naturelle de polygone
+topologique ; le polygone combinatoire correspondant ne dépend que de l'arbre
+plan, à isomorphisme canonique près. Il a deux côtés par arête de l'arbre.
+
+Pour un graphe circularisé quelconque, la même construction donne un
+\emph{contour} --- une réunion disjointe finie de polygones, un par face ---
+qui n'est plus connexe en général. Les sommets de $\Gamma$ se retrouvent sur les
+arcs :
+\[
+S \simeq \bar{A}/\rho_{\Gamma}
+\]
+si $\Gamma$ n'a pas de sommet isolé, chaque orbite de la rotation étant
+l'ensemble des arcs issus d'un sommet.\footnote{La seconde moitié du feuillet
+est un bloc annulé par deux horizontales et trois diagonales ; on n'en garde que
+la formule $S \simeq \bar{A}/\rho_{\Gamma}$, qui y est lisible et que la suite
+utilise, et l'introduction de $\rho_{\Gamma}$ qui la précède.}
+
+\pagerange{7}{9}
+\section*{Graphes circularisés et contours : le dictionnaire (pages 7 et 9)}
+
+\emph{Les arêtes du contour sont les arcs.} Chaque arc $\bar{a}$ est longé à sa
+droite par une arête du contour, et l'application
+\[
+\mathrm{rd} : \bar{A} \xrightarrow{\;\sim\;} A(C),
+\qquad \bar{a} \longmapsto \text{l'arête droite de } \bar{a},
+\]
+est bijective ; l'arête gauche est $\mathrm{rg}(\bar{a}) =
+\mathrm{rd}(\sigma_{\Gamma}\bar{a})$. Par elle, chaque arête de $C$ reçoit une
+orientation naturelle, et $C$ est orienté.
+
+\emph{Les deux permutations du contour.} Le recollement identifie les deux côtés
+d'une même arête de $\Gamma$ : c'est l'involution sans point fixe
+\[
+\sigma_{C} = \mathrm{rd} \circ \sigma_{\Gamma} \circ \mathrm{rd}^{-1}.
+\]
+La permutation « arête suivante » sur le contour orienté fait le tour d'une
+face : au bout de l'arc $\bar{a}$, on repart par l'arc qui suit $\sigma_{\Gamma}
+\bar{a}$ autour de son origine. D'où, en identifiant $A(C)$ à $\bar{A}$ par
+$\mathrm{rd}$,
+\[
+\sigma_{C} = \sigma_{\Gamma}, \qquad
+\rho_{C} = \rho_{\Gamma}\,\sigma_{\Gamma}, \qquad
+\rho_{\Gamma} = \rho_{C}\,\sigma_{C},
+\]
+les cycles de $\rho_{C}$ étant les polygones du contour, c'est-à-dire les faces,
+et les orbites de $\rho_{C}\sigma_{C}$ les sommets.\footnote{Selon qu'on longe
+les arcs par la droite ou par la gauche et qu'on tourne dans un sens ou dans
+l'autre, on trouve $\rho_{\Gamma}\sigma_{\Gamma}$ ou une variante conjuguée ; on
+fixe la convention qui donne les deux dernières lignes du tableau de la page 9.
+Les feuillets donnent le dictionnaire sous trois formes qui ne s'accordent pas.
+La page 7 encadre « $\rho_{C}(\mathrm{rd}\,\bar{a}) =
+\mathrm{rd}(\rho_{\Gamma}(\bar{a}))$ » et « $\rho_{C}(\mathrm{rg}\,\bar{a}) =
+\mathrm{rg}(\rho_{\Gamma}(\bar{a}))$ », où $\sigma_{\Gamma}$ ne figure pas,
+l'exposant de la seconde étant noyé d'encre. La page 9 pose en tête
+« $\sigma_{\Gamma} = \sigma_{C}$, $\rho_{\Gamma} = \rho_{C}$ ». Enfin son tableau
+associe $\sigma_{\Gamma}$ à $\rho_{C}$, $\rho_{\Gamma}\sigma_{\Gamma}$ à
+$\rho_{C}$, et $\rho_{\Gamma}$ à $\rho_{C}\sigma_{C}$. Les deux dernières
+correspondances sont celles qu'on écrit ; la première égalité de la tête aussi.
+La page 7 construit encore des involutions $\sigma^{C}_{0}$, $\sigma^{C}_{1}$ sur
+les arêtes orientées du contour, $A(C) \times \{\pm 1\} \simeq \bar{A} \times
+\{\pm 1\}$, qui sont les opérations « changer de sommet » et « changer d'arête »
+d'une carte de dimension 1 ; on ne les reprend pas.}
+
+\textbf{Équivalence.} La catégorie des graphes combinatoires circularisés sans
+sommet isolé est équivalente à celle des contours orientés $(A(C), \rho_{C})$
+munis d'une involution sans point fixe $\sigma_{C}$ de $A(C)$. Dans les deux sens,
+l'ensemble sous-jacent est le même, et l'on passe d'un couple de permutations à
+l'autre par les formules ci-dessus.\footnote{C'est la description moderne d'une
+\emph{carte combinatoire} par un ensemble de demi-arêtes muni d'une involution
+et d'une rotation, les faces étant les cycles de leur produit. Le passage d'une
+présentation à l'autre n'est qu'un changement de générateurs ; les noms ne sont
+pas sur la page. Deux notes en biais dans la marge de la page 7 ne se lisent
+pas.}
+
+\textbf{Critère} (encadré, page 9). $\Gamma$ est un arbre, non ponctuel, si et
+seulement si $C$ est un polygone connexe et que l'involution $\sigma_{C}$ ne
+croise pas : pour deux orbites disjointes $\{a, \sigma_{C} a\}$ et
+$\{b, \sigma_{C} b\}$, les points $b$ et $\sigma_{C}b$ sont du même côté de la
+corde qui joint $a$ à $\sigma_{C}a$ dans l'ordre circulaire du polygone.
+
+En effet, $\Gamma$ est connexe puisque $\rho_{C}$ n'a qu'un cycle, et la formule
+d'Euler $|S| - |A| + 1 = 2 - 2g$ montre que $\Gamma$ est un arbre si et seulement
+si la surface obtenue en recollant le polygone est une sphère, $g = 0$. Or le
+recollement d'un polygone par un appariement de ses côtés, en renversant les
+orientations, donne une sphère exactement quand l'appariement est sans
+croisement.\footnote{La démonstration est la nôtre ; la page encadre l'énoncé,
+dont les deux derniers mots, après « la composition est », ne se lisent pas. On
+donne à « totalement non … » le sens que l'énoncé demande, celui d'un
+appariement sans croisement.}
+
+\pagerange{10}{12}
+\section*{Disques découpés par cordes (pages 10 et 12)}
+
+\emph{Retour au cas général.} Topologiquement, $|\Gamma|$ se déduit de $|C|$
+par passage au quotient : on recolle chaque arête $a$ du contour avec l'arête
+$\sigma_{C}(a)$, en renversant les orientations induites.\footnote{Il écrit
+l'involution en exposant, $\sigma_{C}^{a}$.}
+
+\emph{Le cas des arbres.} Quand $\Gamma$ est un arbre, $C$ est un seul polygone,
+et l'on peut le voir comme le bord d'un disque orienté. En joignant par une
+corde, à l'intérieur du disque, les milieux des arêtes qui se correspondent par
+$\sigma_{C}$, on obtient des cordes qui ne se rencontrent pas, par le critère de la
+page 9. Le disque est ainsi découpé en régions, et $\Gamma$ exprime la manière
+dont les régions se recollent le long de leurs frontières communes : un sommet
+par région, une arête par corde. C'est l'arbre dual du découpage.
+
+\textbf{Énoncé final.} Il en résulte deux équivalences, en tête de la page 10
+et à la page 12\footnote{« (non pointés) » et « (pas nécess.\ plus orientés) » sont ajoutés en
+interligne. Pointés en un arc, les arbres plans à $n$ arêtes sont comptés par le
+nombre de Catalan $\frac{1}{n+1}\binom{2n}{n}$, qui compte aussi les
+appariements sans croisement des $2n$ côtés d'un polygone ; la remarque est la
+nôtre. Le feuillet s'arrête sur l'énoncé.} :
+\begin{enumerate}
+\item[(i)] les arbres plans non pointés sont équivalents aux polygones
+combinatoires munis d'une involution sans point fixe et sans croisement sur
+l'ensemble de leurs arêtes ;
+\item[(ii)] la catégorie des arbres plans est équivalente à la catégorie
+isotypique des disques, non nécessairement orientés, munis d'un découpage par des
+cordes qui ne se croisent pas ; les sommets de l'arbre correspondent aux régions,
+c'est-à-dire aux paquets d'arêtes du polygone qui bordent une même région.
+\end{enumerate}
+
+\end{document}
