@@ -1,0 +1,482 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 113, pages 1-12.
+%
+% This is an INTERPRETATION, not a transcription. Everything the critical
+% apparatus carried moves into footnotes. In any dispute of substance the
+% transcription governs: whoever cites Grothendieck must cite batch-01.fr.tex.
+%
+% Pass: Opus 5 (claude-opus-5), 2026-09-13 — first pass, unchecked against the
+% pages by a human. The folder was read whole; it holds one batch, pages 1-12.
+% Page 1 is a cover (« Abelianization »), pages 4, 6, 8, 10 listings with
+% nothing of his. Page 2 treats another question and is read briefly.
+%
+% What the folder is. Under his heading « (x) dans Cat », pages 3-12 build
+% the tensor product of small k-linear categories and show that it computes
+% the tensor product of their categories of modules: P^k = Hom_k(P°, Ab_k),
+% the recognition of such categories, the free-cocompletion adjunction, the
+% 2-universal P (x)_k Q with its explicit construction, (P (x)_k Q)^k as the
+% tensor product of P^k and Q^k among cocomplete k-linear categories, the
+% comparison functor P^k (x)_k M -> P^k_M, projectives in P^k_M, and the
+% derived convolution.
+%
+% Notation fixed for the whole document. k a commutative ring, Ab_k the
+% k-modules. For P small k-linear: P^k = Hom_k(P°, Ab_k); for M k-linear,
+% P^k_M = Hom_k(P°, M) (his script P_M). Hom_{k!} = k-linear functors
+% preserving small colimits; Hom^!_k = those sending colimits to limits.
+% Bil_k bilinear functors, Bil_{k!!} those cocontinuous in each variable.
+% F *_k L' the convolution (coend) of F in P^k_M with L' in (P°)^k; Hom_k(L, F)
+% the corresponding end, in M. « Stable par lim » = admitting small colimits.
+%
+% Substantive departures from the pages, each footnoted where it occurs:
+% — page 3: a) and b) do not give a generating family of SMALL projectives,
+%   which is what the reconstruction uses (Freyd-Mitchell); the reading
+%   states the criterion with it, and reads « Ul Proj » as that subcategory.
+% — page 5: both sides of the first display are Q^k_M = Hom_k(P, M); the
+%   leaf's labels script-Q_M and script-P_M do not match the convention of
+%   page 9, and the reading uses page 9's.
+% — pages 9 and 11: (⊛) P^k (x)_k M -> P^k_M, and its case
+%   P^k (x)_k Q^k -> (P (x)_k Q)^k, are NOT fully faithful in general
+%   (P = k a field, M = Mod_k, infinite-dimensional objects); they are on
+%   L, L' in Kar P when the Hom-modules of P are finitely generated projective.
+%   The page asserts it, then ends on « pl. fid. ? ».
+% — page 11: the middle term Hom_M(x, Hom_k(L, F)) needs limits in M; the
+%   outer isomorphism holds without.
+% — page 12: « M |-> M (x)_k a » read with x.
+%
+% Modern names given and footnoted as ours: Karoubi envelope and Morita
+% invariance; Freyd-Mitchell recognition of functor categories; free
+% cocompletion; tensor product of k-linear categories; tensor product of
+% cocomplete k-linear categories (Kelly), and Deligne's tensor product of
+% abelian categories; coend and end; Tor over a ring with several objects.
+%
+% What the folder announces and never establishes: the 2-functorial
+% statement of page 3 (« 2-ess. surj. », « 3-fid. »), only drawn; the
+% question of page 11 in its Tor part; the propositions of page 12 beyond the
+% two-line arguments given here.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{113}
+\pages{1}{12}
+\dating{[à partir de 1982]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Abelianization : notes manuscrites (s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Un anneau se connaît par ses modules. On peut aller plus loin et remplacer
+l'anneau par une petite catégorie « linéaire » --- une catégorie dont les
+ensembles de flèches sont des modules et où la composition est bilinéaire, un
+anneau à plusieurs objets en somme --- et considérer ses modules, qui sont les
+foncteurs à valeurs dans les modules. Ces catégories de modules sont de grosses
+catégories abéliennes, avec toutes les sommes, et l'on sait les reconnaître
+parmi toutes les catégories abéliennes.
+
+Pour les anneaux commutatifs, il existe une opération familière : le produit
+tensoriel $A \otimes_{k} B$, et les modules sur $A \otimes_{k} B$ sont les objets
+qui sont à la fois des $A$-modules et des $B$-modules de manière compatible. Les
+feuillets, sous le titre de sa main « $\otimes$ dans Cat », font la même chose
+pour les catégories linéaires : ils fabriquent un produit tensoriel
+$P \otimes_{k} Q$, par une propriété universelle puis par une construction
+explicite, et montrent que la catégorie de modules de $P \otimes_{k} Q$ est le
+produit tensoriel des catégories de modules de $P$ et de $Q$ --- au sens
+précis où un foncteur bilinéaire sur les deux, qui respecte les sommes dans
+chaque variable, est la même chose qu'un foncteur sur le produit.
+
+La preuve est une suite de « curryfications » : un foncteur de deux variables
+est un foncteur d'une variable à valeurs dans les foncteurs de l'autre. C'est
+d'une grande économie, et c'est la manière moderne de traiter ces questions.
+
+Les dernières pages essaient d'aller plus loin --- comparer les deux produits
+tensoriels possibles, construire des résolutions projectives, dériver le
+produit --- et c'est là que le texte s'enhardit un peu trop : une comparaison
+qu'il déclare pleinement fidèle ne l'est pas en général, parce que le produit
+tensoriel de deux espaces d'applications linéaires est plus petit que l'espace
+des applications du produit dès que la dimension est infinie. Le feuillet
+lui-même finit cette ligne par un point d'interrogation. Au dos du feuillet de
+titre, sans rapport, un calcul sur des « MM-fibrés » semi-simpliciaux.
+
+\keywords{k-linear category, functor category, Karoubi envelope, Morita invariance, free cocompletion, tensor product of linear categories, Kelly tensor product, coend, derived tensor product}
+\end{resume}
+
+\section*{Le fil du dossier, et les conventions}
+
+\begin{enumerate}
+\item[1.] \emph{Au dos du titre} (page 2) : un calcul indépendant.
+\item[2.] \emph{Catégories de modules} (page 3) : $P^{k}$, sa reconnaissance,
+l'adjonction de la cocomplétion libre.
+\item[3.] \emph{Produit tensoriel de catégories $k$-linéaires} (page 5), et
+son plongement dans les foncteurs bilinéaires (page 7).
+\item[4.] \emph{Trois applications} (pages 7 et 9) : $P^{k}_{M}$ comme catégorie
+de modules, $(P \otimes_{k} Q)^{k}$ comme produit tensoriel, et la comparaison
+$(\circledast)$.
+\item[5.] \emph{Projectifs et produit dérivé} (pages 11 et 12).
+\end{enumerate}
+
+\emph{Conventions.} $k$ est un anneau commutatif et $Ab_{k}$ la catégorie des
+$k$-modules. Une catégorie $k$-additive est une catégorie additive $k$-linéaire.
+Pour $P$ petite et $k$-additive,
+\[
+P^{k} = \mathrm{Hom}_{k}(P^{\circ}, Ab_{k}),
+\qquad
+P^{k}_{M} = \mathrm{Hom}_{k}(P^{\circ}, M)
+\]
+pour $M$ $k$-additive.\footnote{Il écrit $\mathcal{P}$, d'un $P$ bouclé, pour
+la grosse catégorie et $P$ pour la petite, et $\mathcal{P}_{M}$ pour
+$P^{k}_{M}$ ; on écrit $P^{k}$ et $P^{k}_{M}$. Une catégorie « stable par
+$\varinjlim$ », abrégé « st.bl. », est une catégorie qui admet les petites
+limites inductives.} $\mathrm{Hom}_{k!}$ désigne les foncteurs $k$-linéaires
+qui commutent aux petites limites inductives, $\mathrm{Hom}^{!}_{k}$ ceux qui les
+transforment en limites projectives, $\mathrm{Bil}_{k}$ les foncteurs
+$k$-bilinéaires et $\mathrm{Bil}_{k!!}$ ceux qui commutent aux limites
+inductives en chaque variable. Pour $F \in P^{k}_{M}$ et $L' \in
+(P^{\circ})^{k}$, $F *_{k} L' \in M$ est leur convolution, et pour $L \in P^{k}$,
+$\mathrm{Hom}_{k}(L, F) \in M$ l'objet des morphismes :
+\[
+F *_{k} L' = \int^{a \in P} L'(a) \otimes_{k} F(a),
+\qquad
+\mathrm{Hom}_{k}(L, F) = \int_{a \in P} \mathrm{Hom}_{k}\bigl(L(a), F(a)\bigr),
+\]
+la première supposant $M$ cocomplète, la seconde complète.\footnote{Les
+formules par cofin et fin sont les nôtres ; la page nomme les deux opérations
+sans les définir. L'objet $\mathrm{Hom}_{k}(L(a), F(a))$ de $M$ est la
+puissance de $F(a)$ par le $k$-module $L(a)$.}
+
+\emph{Ce que le dossier annonce et n'établit pas} : l'énoncé 2-fonctoriel de la
+page 3, seulement dessiné ; la partie « Tor » de la question de la page 11 ; les
+propositions de la page 12 au-delà des deux arguments donnés ici.
+
+\pagerange{2}{2}
+\section*{Au dos du feuillet de titre (page 2)}
+
+Le feuillet de couverture ne porte que le mot « Abelianization » et le nombre
+377 ; c'est de lui que vient le titre de l'inventaire. Son verso, écrit en
+travers, traite d'une autre question. Des diagrammes
+$\alpha \twoheadrightarrow \beta \hookleftarrow \gamma$ au-dessus de
+$X \twoheadrightarrow Y \hookleftarrow Z$ en composent une chaîne, et une
+famille d'objets notés $M(\xi_{0}, \ldots, \xi_{n})$, reliés par des flèches
+presque toutes marquées « subm », décrit ce qu'il appelle des
+\emph{MM-fibrés}. Le feuillet se termine sur un critère :
+
+\emph{Pour que $\int_{I} X(i)$ ne fasse pas sortir des MM-fibrés
+semi-simpliciaux, il suffit que}
+\begin{enumerate}
+\item[a)] le nerf de $I$ soit asphérique, c'est-à-dire que $I$ soit asphérique ;
+\item[b)] chaque $X(i)$ transforme les opérateurs de face $d_{i} : \Delta_{n-1}
+\to \Delta_{n}$ en submersions ;
+\item[c)] pour toute flèche $u : i \to j$ de $I$, $X(u)$ se factorise en
+$g f$, avec $f$ une submersion et $g$ un monomorphisme.
+\end{enumerate}
+
+Cette lecture n'identifie pas la notion.\footnote{« MM-fibré »
+remplace « multibundle », biffé. Le mot qualifiant $f$ en c) est lu
+« submersion » sur la foi de l'étiquette « subm » qui court sur tout le
+feuillet. Une première version du bloc central, biffée en noir puis en rouge,
+n'est pas reprise, et la transcription n'a pas pu séparer les extrémités des
+flèches obliques $\eta_{0}, \ldots, \eta_{n-1}$. Le listing est daté du 16
+septembre 1982.}
+
+\pagerange{3}{3}
+\section*{Catégories de modules (page 3)}
+
+Soit $P$ une petite catégorie $k$-additive. La catégorie $P^{k}$ ne dépend pas
+de la structure $k$-linéaire choisie : un foncteur additif $P^{\circ} \to Ab$ est
+automatiquement à valeurs dans les $k$-modules. Le plongement de Yoneda
+$P \hookrightarrow P^{k}$ est additif et pleinement fidèle, et il induit
+\[
+\mathrm{Kar}(P) \xrightarrow{\;\sim\;} \mathrm{Proj}_{\mathrm{tf}}(P^{k}),
+\qquad
+(\mathrm{Kar}\, P)^{k} \xrightarrow{\;\sim\;} P^{k},
+\]
+où $\mathrm{Proj}_{\mathrm{tf}}(P^{k})$ est la sous-catégorie pleine des objets
+projectifs de type fini : les facteurs directs des objets représentables.
+C'est l'invariance de Morita.\footnote{La page écrit « $\mathrm{Kar}\, P
+\approx \mathrm{Ul}\,\mathrm{Proj}(P^{k})$ », les deux lettres devant
+« Proj » étant lues « Ul » et non identifiées. Les projectifs de $P^{k}$ ne sont
+pas tous dans l'image de $\mathrm{Kar}\, P$ --- une somme infinie de
+représentables ne l'est pas --- et c'est la sous-catégorie des projectifs de
+type fini que l'énoncé demande ; on lit ainsi. La seconde équivalence est en
+marge.}
+
+\textbf{Reconnaissance.} Pour qu'une catégorie $k$-additive $\mathcal{P}$ soit
+équivalente à $P^{k}$ pour une petite catégorie $k$-additive $P$, il faut et il
+suffit qu'elle soit abélienne, qu'elle admette les petites sommes, et qu'elle
+admette une petite famille génératrice d'objets projectifs \emph{de type fini},
+c'est-à-dire dont le foncteur $\mathrm{Hom}$ commute aux sommes. On peut alors
+prendre pour $P$ la sous-catégorie pleine de ces projectifs.\footnote{La page
+demande a) que $\mathcal{P}$ soit un « topos abélien » --- abélienne, stable
+par petites limites inductives filtrantes, celles-ci étant exactes, avec une
+petite sous-catégorie génératrice --- et b) qu'elle ait assez de projectifs.
+Ces conditions donnent bien une famille génératrice de projectifs, mais rien
+ne dit que ceux-ci soient de type fini, et c'est ce que la reconstruction
+utilise : la page prend elle-même « $P = \mathrm{Ul}\,\mathrm{Proj}(\mathcal{P})$ ».
+Le critère juste est dû à P.~Freyd et à B.~Mitchell ; le nom n'est pas sur
+la page.}
+
+\emph{Morphismes.} Les morphismes de « topos $k$-abéliens algébriques » sont
+les foncteurs $f_{!} : \mathcal{P} \to \mathcal{Q}$ qui commutent aux limites
+inductives et dont l'adjoint à droite $f^{*}$ y commute aussi, c'est-à-dire
+admet lui-même un adjoint à droite $f_{*}$. Il en dessine le résultat : le
+2-foncteur $P \mapsto P^{k}$, de la 2-catégorie des petites catégories
+$k$-additives vers celle des topos $k$-abéliens algébriques, est
+2-essentiellement surjectif, et devient une équivalence sur les catégories de
+morphismes après passage à l'enveloppe de Karoubi.\footnote{Le diagramme porte
+« 2-ess.\ surj. » et « 3-fid. » ; on lit le second comme la pleine fidélité au
+niveau des 2-flèches. Un tel $f_{!}$ préserve les projectifs de type fini,
+puisque $f^{*}$ est exact et commute aux sommes, et c'est ce qui le ramène à
+un foncteur $\mathrm{Kar}\,P \to \mathrm{Kar}\,Q$. La page ne démontre rien.}
+
+\emph{Cocomplétion libre.} Tout $L \in P^{k}$ est limite inductive canonique de
+représentables, $L \simeq \varinjlim_{P/L} a$, d'où, pour $M$ $k$-additive
+admettant les petites limites inductives,
+\[
+\mathrm{Hom}_{k!}(P^{k}, M) \xrightarrow{\;\sim\;} \mathrm{Hom}_{k}(P, M),
+\]
+et, dualement, pour $M$ admettant les petites limites projectives,
+\[
+\mathrm{Hom}^{!}_{k}\bigl((P^{k})^{\circ}, M\bigr) \xrightarrow{\;\sim\;}
+\mathrm{Hom}_{k}(P^{\circ}, M) = P^{k}_{M}.
+\]
+
+\pagerange{5}{5}
+\section*{Produit tensoriel de catégories $k$-linéaires (page 5)}
+
+\emph{Deux structures sur $P^{k}_{M}$.} Posant $Q = P^{\circ}$, les deux formules
+précédentes donnent\footnote{La page étiquette le membre de gauche
+$\mathcal{Q}_{M}$ et celui de droite $\mathcal{P}_{M}$. Avec la convention de
+la page 9, $P^{k}_{M} = \mathrm{Hom}_{k}(P^{\circ}, M)$, les deux sont
+$Q^{k}_{M}$ ; on suit la page 9.}, pour $M$ complète et cocomplète,
+\[
+\mathrm{Hom}^{!}_{k}\bigl((Q^{k})^{\circ}, M\bigr) \simeq Q^{k}_{M}
+= \mathrm{Hom}_{k}(P, M) \simeq \mathrm{Hom}_{k!}(P^{k}, M).
+\]
+Sur $P^{k}_{M} = \mathrm{Hom}_{k}(P^{\circ}, M)$ opèrent
+$(P^{\circ})^{k}$, par $(F, L') \mapsto F *_{k} L'$, et $P^{k}$, par
+$(L, F) \mapsto \mathrm{Hom}_{k}(L, F)$, et l'on a
+\[
+(F *_{k} L')^{\circ} \simeq \mathrm{Hom}_{k}(L', F^{\circ}),
+\qquad
+\mathrm{Hom}_{k}(L, F)^{\circ} \simeq F^{\circ} *_{k} L ,
+\]
+le premier dans $M^{\circ}$, où $F^{\circ} : P \to M^{\circ}$.
+
+\textbf{Définition.} Pour $P$, $Q$ $k$-additives, le produit tensoriel
+$P \otimes_{k} Q$, muni d'un foncteur $k$-bilinéaire $P \times Q \to P \otimes_{k}
+Q$, est défini par la propriété 2-universelle
+\[
+\mathrm{Hom}_{k}(P \otimes_{k} Q, M) \simeq \mathrm{Bil}_{k}(P, Q; M)
+\qquad \text{pour toute } M \ k\text{-additive}.
+\]
+
+\emph{Construction explicite.} Les objets sont les familles finies
+$\zeta = \bigoplus_{i \in I} a_{i} \otimes_{k} b_{i}$, et
+\[
+\mathrm{Hom}(\zeta, \zeta') = \prod_{(i,j) \in I \times J}
+\mathrm{Hom}_{P}(a_{i}, a'_{j}) \otimes_{k} \mathrm{Hom}_{Q}(b_{i}, b'_{j}),
+\]
+la composition étant celle des matrices. À retenir :
+\begin{enumerate}
+\item[a)] si $P$ et $Q$ sont petites, $P \otimes_{k} Q$ l'est ;
+\item[b)] $\mathrm{Hom}_{P} (a, a') \otimes_{k} \mathrm{Hom}_{Q}(b, b')
+\xrightarrow{\;\sim\;} \mathrm{Hom}_{P \otimes_{k} Q}(a \otimes_{k} b, a'
+\otimes_{k} b')$.
+\end{enumerate}
+
+\pagerange{7}{7}
+\section*{Plongement, et deux applications (page 7)}
+
+Le plongement de Yoneda de $P \otimes_{k} Q$ se lit dans les foncteurs
+bilinéaires :
+\[
+P \otimes_{k} Q \hookrightarrow (P \otimes_{k} Q)^{k} \simeq
+\mathrm{Bil}_{k}(P^{\circ}, Q^{\circ}; Ab_{k}),
+\qquad
+a \otimes_{k} b \longmapsto \bigl((x, y) \mapsto \mathrm{Hom}_{P}(x, a)
+\otimes_{k} \mathrm{Hom}_{Q}(y, b)\bigr).
+\]
+Il est pleinement fidèle par b) et Yoneda. D'où une seconde construction de
+$P \otimes_{k} Q$ : la sous-catégorie pleine de
+$\mathrm{Bil}_{k}(P^{\circ}, Q^{\circ}; Ab_{k})$ formée des sommes finies de tels
+foncteurs --- ce qui prouve l'existence, et la petitesse si $P$ et $Q$ sont
+petites.
+
+\textbf{Application 1.} Soit $M \simeq Q^{k}$, et $M^{\vee} \simeq
+(Q^{\circ})^{k}$ sa duale. Alors $P^{k}_{M}$ et $(P^{\circ})^{k}_{M^{\vee}}$ sont
+encore des catégories de modules :
+\[
+P^{k}_{M} = \mathrm{Hom}_{k}\bigl(P^{\circ}, \mathrm{Hom}_{k}(Q^{\circ},
+Ab_{k})\bigr) \simeq \mathrm{Hom}_{k}(P^{\circ} \otimes_{k} Q^{\circ}, Ab_{k}) =
+(P \otimes_{k} Q)^{k},
+\]
+\[
+(P^{\circ})^{k}_{M^{\vee}} \simeq \mathrm{Hom}_{k}(P \otimes_{k} Q, Ab_{k}) =
+\bigl((P \otimes_{k} Q)^{\circ}\bigr)^{k},
+\]
+en utilisant $(P \otimes_{k} Q)^{\circ} = P^{\circ} \otimes_{k} Q^{\circ}$.
+
+\textbf{Application 2.} Pour $M$ $k$-additive cocomplète,
+\[
+\mathrm{Bil}_{k!!}(P^{k}, Q^{k}; M) \simeq \mathrm{Hom}_{k!}\bigl((P \otimes_{k}
+Q)^{k}, M\bigr) \simeq \mathrm{Bil}_{k}(P, Q; M) :
+\]
+$(P \otimes_{k} Q)^{k}$ est le produit tensoriel de $P^{k}$ et $Q^{k}$ parmi les
+catégories $k$-additives cocomplètes et les foncteurs qui commutent aux limites
+inductives.\footnote{C'est le produit tensoriel de catégories $k$-linéaires
+cocomplètes de la théorie des catégories enrichies (G.~M.~Kelly, 1982), dont
+celui de P.~Deligne pour les catégories abéliennes $k$-linéaires de longueur
+finie (1990) est un cousin ; les noms ne sont pas sur la page, et les feuillets
+ne citent personne. La page pose un point
+d'interrogation sous l'énoncé, que la démonstration de la page 9 lève.}
+
+\pagerange{9}{9}
+\section*{La curryfication, et la comparaison $(\circledast)$ (page 9)}
+
+\emph{Démonstration de l'application 2.}
+\[
+\begin{aligned}
+\mathrm{Bil}_{k!!}(P^{k}, Q^{k}; M)
+ &\simeq \mathrm{Hom}_{k!}\bigl(P^{k}, \mathrm{Hom}_{k!}(Q^{k}, M)\bigr)
+  \simeq \mathrm{Hom}_{k!}\bigl(P^{k}, \mathrm{Hom}_{k}(Q, M)\bigr) \\
+ &\simeq \mathrm{Hom}_{k}\bigl(P, \mathrm{Hom}_{k}(Q, M)\bigr)
+  \simeq \mathrm{Hom}_{k}(P \otimes_{k} Q, M)
+  \simeq \mathrm{Hom}_{k!}\bigl((P \otimes_{k} Q)^{k}, M\bigr),
+\end{aligned}
+\]
+en utilisant que $\mathrm{Hom}_{k}(Q, M)$ est cocomplète, les limites
+inductives s'y calculant point par point. Dualement,
+$\mathrm{Bil}^{!!}_{k}((P^{k})^{\circ}, (Q^{k})^{\circ}; M) \simeq
+\mathrm{Hom}^{!}_{k}(((P \otimes_{k} Q)^{k})^{\circ}, M)$ pour $M$ complète.
+
+\textbf{Application 3.} Soit $M$ $k$-additive cocomplète. On a un foncteur
+$k$-bilinéaire, d'où un foncteur
+\[
+(\circledast) \qquad P^{k} \otimes_{k} M \longrightarrow
+\mathrm{Hom}_{k}(P^{\circ}, M) = P^{k}_{M},
+\qquad
+L \otimes_{k} x \longmapsto \bigl(a \mapsto L(a) \otimes_{k} x\bigr) =
+\widetilde{x} \circ L,
+\]
+où $\widetilde{x} : Ab_{k} \to M$, $N \mapsto N \otimes_{k} x$, est le foncteur
+cocontinu qui correspond à $x$ par $\mathrm{Hom}_{k!}(Ab_{k}, M) \simeq M$.
+
+\emph{Ce foncteur n'est pas pleinement fidèle en général.} Pour $P = k$ vu comme
+catégorie à un objet, $k$ un corps et $M = Ab_{k}$, il s'agit de l'application
+\[
+\mathrm{Hom}_{k}(L, L') \otimes_{k} \mathrm{Hom}_{k}(x, x') \longrightarrow
+\mathrm{Hom}_{k}(L \otimes_{k} x, L' \otimes_{k} x'),
+\]
+qui n'est pas surjective dès que $L$ et $x$ sont de dimension infinie. Soit
+$L = x = L' = x' = V$ de base $(e_{i})_{i \in \mathbf{N}}$, et $D$ la projection
+de $V \otimes V$ sur le sous-espace engendré par les $e_{i} \otimes e_{i}$.
+Pour un opérateur $T$ de $V \otimes V$, notons $T_{ij} : V \to V$,
+$v \mapsto (e_{i}^{*} \otimes \mathrm{id})\,T(e_{j} \otimes v)$. Si
+$T = \sum_{r \leq n} A_{r} \otimes B_{r}$, les $T_{ij}$ restent dans l'espace
+engendré par $B_{1}, \ldots, B_{n}$ ; or les $D_{ii}$ sont les projecteurs
+sur les $e_{i}$, en nombre infini et linéairement indépendants. Il est
+pleinement fidèle sur les $L \otimes_{k} x$ avec $L \in \mathrm{Kar}\, P$ lorsque
+les $\mathrm{Hom}$ de $P$ sont des $k$-modules projectifs de type fini : pour
+$L = a$ représentable, $\mathrm{Hom}(a \otimes_{k} x, L' \otimes_{k} x') =
+\mathrm{Hom}_{M}(x, L'(a) \otimes_{k} x')$ par Yoneda, et c'est
+$L'(a) \otimes_{k} \mathrm{Hom}_{M}(x, x')$ dès que $L'(a)$ est projectif de
+type fini.\footnote{La page affirme « Ce foncteur $(\circledast)$ est pl.\
+fidèle. En effet », puis dessine une comparaison par $M \to M^{k}$,
+$\mathrm{Hom}_{k}(P^{\circ}, M^{k})$ et $\mathrm{Bil}_{k}(P^{k} \times M^{\circ},
+Ab_{k})$, avec la mise en garde « attention, il faut passer à un univers plus
+gros ». Elle aboutit à « $P^{k} \otimes_{k} M \dashrightarrow
+\mathrm{Bil}_{k}(P^{k} \times M^{\circ}, Ab_{k})$ pl.\ fid.\ ? », en pointillé et
+avec un point d'interrogation, et à une remarque dont le premier mot, lu
+« Can. », n'est pas assuré. Le contre-exemple et l'énoncé restreint sont les
+nôtres.}
+
+\pagerange{11}{11}
+\section*{Formules, projectifs, et une question (page 11)}
+
+On identifiera parfois $L \otimes_{k} x$ à son image dans $P^{k}_{M}$. Pour
+$M = Q^{k}$, $(\circledast)$ devient
+\[
+P^{k} \otimes_{k} Q^{k} \longrightarrow (P \otimes_{k} Q)^{k} \simeq
+\mathrm{Bil}_{k}(P^{\circ}, Q^{\circ}; Ab_{k}),
+\qquad
+F \otimes_{k} G \longmapsto \bigl((a, b) \mapsto F(a) \otimes_{k} G(b)\bigr),
+\]
+avec les mêmes réserves sur la pleine fidélité.\footnote{La page écrit
+« pl.\ fid. » sans réserve ; le contre-exemple de la page 9 s'applique, avec
+$P = Q = k$.}
+
+\textbf{Formule 1.} Pour $L \in P^{k}$, $x \in M$ et $L' \in (P^{\circ})^{k}$,
+\[
+(L \otimes_{k} x) *_{k} L' \simeq (L *_{k} L') \otimes_{k} x,
+\qquad L *_{k} L' \in Ab_{k},
+\]
+parce que $\widetilde{x}$ commute aux limites inductives, donc au cofin ; il suffit
+de le vérifier pour $L = a$ et $L' = b^{\circ}$ représentables, où les deux
+membres valent $\mathrm{Hom}_{P}(b, a) \otimes_{k} x$.
+
+\textbf{Formule 2.} Pour $F \in P^{k}_{M}$,
+\[
+\mathrm{Hom}_{P^{k}_{M}}(L \otimes_{k} x, F) \simeq
+\mathrm{Hom}_{P^{k}}\bigl(L, \mathrm{Hom}_{M}(x, F)\bigr),
+\qquad
+\mathrm{Hom}_{M}(x, F) : a \longmapsto \mathrm{Hom}_{M}\bigl(x, F(a)\bigr),
+\]
+et, si $M$ est de plus complète, les deux sont isomorphes à
+$\mathrm{Hom}_{M}(x, \mathrm{Hom}_{k}(L, F))$.\footnote{La page écrit la chaîne
+des trois termes. Celui du milieu utilise l'objet $\mathrm{Hom}_{k}(L, F)$ de $M$,
+qui est une limite projective ; l'isomorphisme des deux termes extrêmes vaut
+sans elle :
+$\int_{a} \mathrm{Hom}_{M}(L(a) \otimes x, F(a)) = \int_{a}
+\mathrm{Hom}_{k}(L(a), \mathrm{Hom}_{M}(x, F(a)))$. Une note en biais dans la
+marge donne le cas $L = a$, où les deux derniers membres valent
+$\mathrm{Hom}_{M}(x, F(a))$.}
+
+\textbf{Corollaire.} Si $L$ est projectif dans $P^{k}$ et $x$ projectif dans $M$,
+$L \otimes_{k} x$ est projectif dans $P^{k}_{M}$ : par la formule 2,
+$\mathrm{Hom}(L \otimes_{k} x, -)$ est le composé de $F \mapsto
+\mathrm{Hom}_{M}(x, F(-))$, exact puisque $x$ est projectif et que l'exactitude
+se lit point par point, et de $\mathrm{Hom}_{P^{k}}(L, -)$, exact.
+
+\textbf{Question.} Si $M$ est cocomplète et a assez de projectifs, $P^{k}_{M}$
+a-t-elle assez de projectifs $F$, et ceux-ci annulent-ils les
+$\mathrm{Tor}_{i}(L, F)$, $L \in P^{k}$ ?
+
+\pagerange{12}{12}
+\section*{Le produit dérivé (page 12)}
+
+La première moitié de la question a une réponse positive, et la seconde une
+réponse positive sous une hypothèse de platitude ; la page le dit, dans ses
+deux marges.
+
+\textbf{Proposition.} Soit $N$ une catégorie $k$-additive abélienne admettant
+les petites sommes.
+\begin{enumerate}
+\item[a)] Si tout objet de $N$ est quotient d'un projectif, tout $F \in
+P^{k}_{N}$ est quotient d'une somme
+$\Phi = \bigoplus_{a \in \mathrm{Ob}\, P} a \otimes_{k} x_{a}$, les $x_{a}$
+projectifs, et un tel $\Phi$ est projectif.
+\item[b)] Si de plus, pour tout projectif $x$ de $N$, le foncteur
+$Ab_{k} \to N$, $V \mapsto V \otimes_{k} x$, est exact --- $x$ est
+« $k$-plat » ---, alors pour tout projectif $\Phi$ de $P^{k}_{N}$ le foncteur
+$L' \mapsto \Phi *_{k} L'$ est exact, et le produit dérivé
+$F \circledast^{L}_{k} L'$ se calcule indifféremment par résolutions
+projectives de $F$ ou de $L'$.
+\end{enumerate}
+
+\emph{Démonstration.} a) Pour chaque $a$, choisissons un épimorphisme
+$x_{a} \to F(a)$ ; par Yoneda il correspond à $a \otimes_{k} x_{a} \to F$, et la
+somme de ces flèches est un épimorphisme, point par point. $\Phi$ est
+projectif par le corollaire de la page 11. b) Pour $\Phi = a \otimes_{k} x$,
+la formule 1 donne $\Phi *_{k} L' = L'(a) \otimes_{k} x$, exact en $L'$ par
+platitude ; un projectif quelconque est facteur direct d'une somme de tels
+objets.\footnote{Les deux démonstrations sont les nôtres. La page énonce
+aussi, en tête, que le produit dérivé se définit par résolutions projectives en
+$F$ et qu'un quasi-isomorphisme en $L'$ en donne un ; et, dans une liste de
+quatre hypothèses sur $N$ dont la deuxième est illisible, elle nomme la
+quatrième « $k$-plat ». Elle écrit à deux reprises « $M \mapsto M \otimes_{k} a$ »
+là où la phrase parle de $x$ ; on lit $x$. Le signe $\circledast$ est son
+astérisque cerclé, qui désigne ici l'opération notée $*_{k}$ à la page 11.
+Dans la langue d'aujourd'hui, $F \circledast^{L}_{k} L'$ est le produit
+tensoriel dérivé au-dessus de l'« anneau à plusieurs objets » $P$.}
+
+\end{document}
