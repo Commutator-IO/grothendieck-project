@@ -109,6 +109,29 @@ export function MethodPage() {
               carefully as page 2, and each file records in its header which model produced it
               and when.
             </P>
+            <H3 id="parallel-batches">Batches of a folder, in parallel</H3>
+            <P id="parallel-background-tasks">
+              A fresh context per batch does not mean one batch after another. The batches of a
+              folder can be read at the same time as <strong>Claude Code background tasks</strong>:
+              the session mirrors the folder and cuts every batch into tiles first, then launches
+              one background subagent per batch. Each subagent starts with an empty context, reads
+              its twenty pages and nothing else, writes only its own{' '}
+              <code>batch-NN.fr.tex</code>, and checks that it renders. The parent session waits
+              for all of them, then compiles the PDFs, regenerates the manifest and the lexicon,
+              checks the reading views and commits once. Folder 11 was read this way on 14
+              September 2026: three batches, each pass about twenty-five minutes, done in the
+              time of one.
+            </P>
+            <P id="parallel-what-it-costs">
+              Running in parallel changes the wall-clock time, not the cost: each batch still
+              costs what a single pass costs, and the twenty-page ceiling is unchanged. What it
+              gives up is continuity. A batch no longer sees the transcription of the batch before
+              it, so each fixes its notation on its own and records any run that crosses a batch
+              boundary in a note, looking at the neighbouring sheets if it needs to. Subagents
+              should also be given separate scratch folders, since they share the session's.
+              The modernised reading is not run this way: it reads the folder whole, after every
+              batch is transcribed.
+            </P>
             <H3 id="typescripts">Typescripts are not handwriting</H3>
             <P id="typescripts-read-faster">
               A good part of the fonds is typed rather than written: carbons and photocopies of

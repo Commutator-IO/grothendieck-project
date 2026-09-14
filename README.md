@@ -119,6 +119,24 @@ fact about the file rather than about whichever model happened to be selected:
 | [`/modernize-grothendieck`](.claude/skills/modernize-grothendieck/SKILL.md) | the modernised reading — a résumé, then current notation and names, footnotes instead of apparatus |
 | [`/tag-grothendieck`](.claude/skills/tag-grothendieck/SKILL.md) | the folder's tags — the `\keywords{}` line closing the résumé |
 
+**Batches can run in parallel.** Transcription is one batch per fresh context,
+but the batches of a folder need not wait for each other: run them as Claude
+Code background tasks, one subagent per batch. The parent session mirrors and
+tiles every batch first (`npm run archive -- <folder> --batches 1-N`, then
+`npm run tiles -- <folder> <batch>` for each, which can run concurrently),
+then launches one background subagent per batch with
+`/transcribe-grothendieck <folder> batch <N>`. Each subagent writes only its
+own `batch-NN.fr.tex` and runs `npm run render` to check it. It does not run
+`pdf`, `manifest` or `lexicon`, and does not commit. When all of them have
+finished, the parent runs `npm run render && npm run pdf && npm run manifest &&
+npm run lexicon`, checks the reading views, and commits once. Folder 11 was
+transcribed this way: three batches of about twenty-five minutes each, done in
+the time of one. The cost per batch and the twenty-page ceiling don't change.
+What you give up is continuity: no batch can read the one before it, so each
+fixes its notation on its own and notes any run that crosses a batch boundary.
+Give each subagent its own scratch folder. The modernised reading always runs
+afterwards, on the whole folder.
+
 Both editions are in French — Grothendieck's language, and the language the
 notions were thought in. The modernised reading works from the transcription,
 never from the handwriting directly: two independent readings of the same hand
