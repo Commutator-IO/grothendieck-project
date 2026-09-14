@@ -1,0 +1,521 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 102, batch 1 (pages 1-13).
+% Established from the facsimile archives/batches/102/batch-01.pdf (a mirror of
+% https://grothendieck.umontpellier.fr/102.pdf), per the skill
+% transcribe-grothendieck. The folder is thirteen pages and this is its only
+% batch. Pages 7 (blank) and 9 (an unrelated printed verso, upside down,
+% exercises on valuations with no hand on it) are skipped, the gap in the page
+% numbers being the record. Page 1 is an orange cover inscribed « Recollements »
+% in his hand; following hand.md §5 it gets no \page{} and its word heads the
+% first section.
+%
+% The folder holds two things. Pages 2 to 6 are a typescript headed « Pour
+% EGA VI », « Recollements d'objets d'un site »: a site S (standard, i.e.
+% topology coarser than the canonical one — his interlinear insertion) with a
+% class M of arrows satisfying a) stability and quarrability, b) identities and
+% composition, c) locality on the target, d) a saturation condition (locality on
+% the source, which he rewrites by hand); a Proposition extending M uniquely to a
+% class M~ of arrows of the topos S~ (conditions a~ to d~ plus e~, f~) with a
+% typed proof by cases on the representability of the diagonal; the Definition
+% of objects of S~ « obtained by gluing objects of S along morphisms of M » and
+% the full subcategory S~_M; a stability Proposition (i)-(v) and a Corollary
+% (S~_M is the smallest class containing Ob S stable under sums and quotients by
+% equivalence relations with pr_1 in M~, and is unchanged under replacing S by
+% S' ⊂ S~_M); Examples (open immersions give schemes; étale morphisms give
+% Artin's algebraic spaces); and a Proposition under a « condition
+% draconienne » identifying the localised topos S~_M/X with the topos of
+% S(X,M). Following folders 48 and 55, the statements and his interventions
+% are given and the typed proofs are summarised in notes rather than
+% recomposed. Page 5 is the verso of page 4 and carries only two typed lines,
+% struck through, which continue the struck « Proposition 1) » at the foot of
+% page 3; they are given as struck.
+%
+% Pages 8, 10, 11, 12 and 13 are manuscript notes, page 8 in black ink, the
+% others in blue. Page 8 is « Questions pour Artin »: effectivity of descent
+% data for proper schemes over a henselian local base, fpqc descent of
+% « variétés », representability of proper algebraic spaces over a complete
+% local base, and fpqc descent of small étale sheaves, with two marginal notes
+% written slantwise. Page 10 is a numbered plan (1 to 8, with 7 moved by an
+% arrow to follow 5) for a general study of functors on (Sch): representable
+% morphisms, quasi-compact and locally finitely presented morphisms, formally
+% smooth/unramified/étale, monomorphisms and immersions, separation, surjective
+% and radicial morphisms, properness, connectedness, and the principle of
+% verification for morphisms of sheaves. Page 11 is a fragment of a proof, taken
+% up mid-sentence, reducing to a reduced fibre by a radicial extension and
+% using M = Hilb_{X/Y} and a set-theoretic section φ; a boxed block is struck.
+% Page 12 states that an fpqc sheaf monomorphism, infinitesimally étale,
+% between functors commuting with filtered limits of rings and adic limits of
+% artinian rings is an open immersion. Page 13 is a sheet of boxed keywords
+% (a map of the planned classes of morphisms and conditions), transcribed as a
+% list since its boxes do not carry arrows between them beyond one bracket.
+%
+% The manuscript hand is fast throughout, pages 8 and 11 worst: statements
+% carry, connective words often do not, and what the leaves will not support is
+% left \ill{}. The typescript is clean; the typist's own x-outs are not
+% reproduced, only the strikings and insertions in his hand.
+%
+% Notation fixed once here. The typescript's tilde over a letter (S~, M~,
+% S~_M, and the condition labels a~ ... f~, which he re-marks by hand) is set
+% \widetilde{} / \tilde{}; the typed « x » of fibre products is \times; « sss »
+% (si et seulement si) stays as typed; « ∐ » is \coprod. In the manuscript,
+% « fpqc » is written with the letters run together; « loc. noeth. »,
+% « loc. de prés. finie », « rel^t », « qu.-cpt » stay abbreviated as written.
+%
+% Readings flagged and not settled: the words between « S' → S » and « plat »
+% in 1°) of page 8 and the whole of its left-margin notes; « séparable » on page
+% 11 line 2; « compléments » (or « conditions ») in the bracket note of page 10;
+% « induits » in item 7 of page 10; and « relatif » boxed on page 13.
+%
+% Pass: Opus 5 (claude-opus-5), 2026-09-14 — first pass, unchecked against the pages by a human.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{102}
+\batch{1}
+\pages{1}{13}
+\dating{[après 1967]}
+\watermark{Édition de démonstration}
+\foldertitle{Etude générale des foncteurs (Sch)° → (Ens) : tapuscrit annoté (s.d.), notes manuscrites (s.d.).}
+
+\begin{document}
+
+\section*{Recollements}
+
+\note{le mot est de sa main, seul, en haut à droite de la chemise orange qui
+forme la page 1 ; il est repris ici comme titre de section}
+
+\page{2}
+
+\note{feuillet de tapuscrit, repris à la main à l'encre noire. Comme pour les
+tapuscrits des dossiers 48 et 55, on donne les énoncés et ses interventions ;
+les démonstrations tapées sont résumées}
+
+Pour EGA VI
+
+\subsection*{Recollements d'objets d'un site.}
+
+Soit $S$ un site\add{ standard (i.e.\ à topologie moins fine que la
+canonique)}, muni d'une partie $M$ de l'ensemble des flèches, satisfaisant les
+conditions habituelles :
+
+\begin{itemize}
+\item[a)] les flèches de $M$ sont quarrables et stables par changement de base,
+
+\item[b)] $M$ contient les flèches identiques et est stable par composition,
+
+\item[c)] une flèche $u : X \to Y$ appartient à $M$ si elle y appartient
+localement sur $Y$,
+\end{itemize}
+
+et en plus une condition de saturation :
+
+\begin{itemize}
+\item[d)] Soit $u_i : X_i \to X$ une \add{famille couvrante de}
+\struck{$Y$-}morphismes dans \uncertain{$S$}, \struck{supposons $X_i \to Y$
+dans} \add{et supposons les $uu_i : X_i \to Y$ dans $M$, (i.e., par a) et c),
+les} $X_i \times_X X_j \xrightarrow{\mathrm{pr}_1} X_i$ dans $M$), alors
+$u$\add{$: X \to Y$} est dans $M$.
+\end{itemize}
+
+\note{la condition d) est entièrement réécrite à la main : « famille couvrante
+de » au-dessus de la ligne, le « $Y$- » de « $Y$-morphismes » biffé, « supposons
+$X_i \to Y$ dans » tapé et biffé, remplacé en interligne par « et supposons les
+$uu_i : X_i \to Y$ dans $M$, », et au-dessus encore « (i.e.\ par a) et c), les »
+qui fait de la ligne tapée $X_i \times_X X_j \to X_i$ dans $M$ une parenthèse
+explicative ; le $Y$ en indice du produit fibré tapé est corrigé en $X$.
+« $: X \to Y$ » est ajouté sous « $u$ ». Le « $S$ » après « dans » est surchargé
+d'un trait vertical et pourrait avoir été changé}
+
+\marginal{essayer de ne pas le mettre ici, en saturant plus tard en
+$\widetilde{M}$, et formulant $\tilde{e}$) de façon un peu différente : $u$ est
+dans $M$ sss on peut trouver des $u_i : X_i \to X$ dans $M$ avec $uu_i$ dans
+$M$}\note{note écrite de biais dans la marge gauche, en regard de d) et du
+début de la proposition, et reliée à d) par une accolade}
+
+\textbf{Proposition.} Il existe une partie $\widetilde{M}$ de l'ensemble des
+flèches du topos $\widetilde{S}$, déterminée de façon unique par les propriétés
+suivantes : $\widetilde{M}$ satisfait aux conditions \add{$\tilde{a}$,
+$\tilde{b}$, $\tilde{c}$, $\tilde{d}$} analogues à a) à d), et de plus aux
+conditions suivantes :
+
+\begin{itemize}
+\item[$\tilde{e}$)] Si $u : X \to Y$ est une flèche de $S$, alors $u$ est dans
+$M$ sss $u$ est dans $\widetilde{M}$.
+
+\item[$\tilde{f}$)] Si $u : F \to X$ est une flèche dans $\widetilde{M}$, avec
+$X \in S$\note{le $S$ de « $X \in S$ » est surchargé à la main et se lit mal}, alors il existe une famille couvrante $u_i : X_i \to F$
+de flèches dans $\widetilde{M}$, avec $X_i \in S$. \struck{\ill{}}
+\end{itemize}
+
+\note{« $\tilde{a}, \tilde{b}, \tilde{c}, \tilde{d}$ » est écrit à la main
+au-dessus de « analogues à a) à d) ». À la fin de $\tilde{f}$) quelques mots
+tapés ont été biffés à la main ; on y devine « $uu_i$ … $\widetilde{M}$ »}
+
+Démontrons l'unicité, et montrons que l'on peut décider sans ambiguïté si une
+flèche $u : F \to G$ de $\widetilde{S}$ est dans $\widetilde{M}$. Pour ceci,
+distinguons deux cas :
+
+1º) Cas où le morphisme diagonal $F \to F \times_G F$ est représentable.
+
+\note{la démonstration tapée qui suit, et qui se poursuit sur la page 3, est
+résumée : on couvre $F$ par des $X_i \in S$, et par $\tilde{c}$) on se ramène
+au cas où $G = X \in S$ ; on montre alors que $u \in \widetilde{M}$ sss il existe
+une famille couvrante $u_i : X_i \to F$, $X_i \in S$, avec $uu_i \in M$ et les
+$X_i \times_F X_j \xrightarrow{\mathrm{pr}_1} X_i$ dans $M$}
+
+\page{3}
+
+\note{suite du tapuscrit. Ses interventions sur cette page sont : les
+étiquettes des conditions remarquées d'un tilde à la main
+($\tilde{b}$, $\tilde{c}$, $\tilde{e}$, $\tilde{f}$, $\tilde{a}$, $\tilde{d}$) ;
+dans la parenthèse « (NB cela a un sens, car l'hypothèse faite sur $u$ implique
+que $X_i \times_F X_j$ est représentable, comme image inverse de la diagonale de
+$F$ sur $X$) », l'insertion « dans $X_i \times_X X_j$ » au-dessus de « de la
+diagonale » ; et, dans le cas 2º), « morphisme diagonal » écrit au-dessus d'un
+mot tapé biffé. Le cas 2º) (cas général) se ramène au cas 1º) en observant que
+$Z_{ij} = X_i \times_F X_j$ est un sous-faisceau du faisceau représentable
+$Z'_{ij} = X_i \times_X X_j$, image inverse du morphisme diagonal, donc
+représentable. Le tapuscrit laisse au lecteur la vérification que
+$\widetilde{M}$ satisfait à $\tilde{a}$) à $\tilde{f}$)}
+
+\textbf{Définition.} On dit qu'un objet $F$ de $\widetilde{S}$ peut s'obtenir
+\emph{par recollement d'objets de $S$ à l'aide de morphismes dans $M$}, si on
+peut trouver une famille couvrante $u_i : X_i \to F$, avec $X_i \in S$ et
+$u_i \in \widetilde{M}$. On désignera par $\widetilde{S}_M$ la sous-catégorie
+pleine de $\widetilde{S}$ ayant comme objets ces $F$.
+
+\note{les mots « par recollement d'objets de $S$ à l'aide de morphismes dans $M$ »
+sont soulignés à la main}
+
+On a alors la propriété de stabilité suivante :
+
+\struck{\textbf{Proposition} 1) Soit $F \in \mathrm{Ob}\,\widetilde{S}$, et
+$F_i \to F$ une famille couvrante}
+
+\page{4}
+
+\textbf{Proposition.} (i) Tout faisceau représentable $F \in S$ est dans
+$\widetilde{S}_M$.
+
+(ii) Soit un morphisme $u : F \to G$ dans $\widetilde{M}$; si
+$G \in \mathrm{Ob}\,\widetilde{S}_M$, alors $F \in \mathrm{Ob}\,\widetilde{S}_M$.
+La réciproque est vraie si $u$ est couvrant.
+
+(iii) Soit $u : F \to G$ un morphisme couvrant, tel que
+$F \times_G F \xrightarrow{\mathrm{pr}_1} F$ soit dans $\widetilde{M}$, alors
+$G$ est dans $\widetilde{S}_M$ sss $F$ l'est.
+
+(iv) Une somme $\coprod F_i$ de faisceaux est dans $\widetilde{S}_M$ sss les
+$F_i$ le sont.
+
+(v) Supposons que $S$ soit stable par produit de deux objets (resp.\ par
+produit fibré de deux objets sur un troisième, resp.\ par objet final, resp.\
+par $\varprojlim$ finies) alors il en est de même de $\widetilde{S}_M$.
+
+\note{« $\mathrm{pr}_1$ » dans (iii) est écrit à la main au-dessus de la
+flèche ; le numéro « (iv) » est une surcharge d'un « (iii) » tapé ; l'énoncé (v)
+est retapé en interligne sur une première rédaction biffée à la machine
+(« Soit I une catégorie finie, telle que … »)}
+
+(i) est trivial, ainsi que la réciproque dans (ii). La partie directe est
+facile ….
+
+\note{la démonstration tapée est résumée : (iii) résulte de (ii) ; pour (iv),
+si $X \to F = \coprod F_i$ est dans $\widetilde{M}$ avec $X$ représentable, les
+$X_i = X \times_F F_i$ se couvrent par des $X_{ij} \in S$ par $\tilde{f}$), et
+les $X_{ij}$ couvrent les $F_i$. Pour (v), le tapuscrit renvoie au rédacteur}
+
+On laisse aussi (v) au rédacteur (attention, il est douteux que ça marche pareil
+pour un noyau, car il ne sera pas vrai nécessairement qu'un morphisme de
+doublets dans $\widetilde{S}$ \add{ou même de $S$} induisant des morphismes
+$\in \widetilde{M}$ sur les sommets induise un morphisme $\in M$ sur les noyaux
+des double flèches).
+
+\textbf{Corollaire.} $\mathrm{Ob}\,\widetilde{S}_M$ est le plus petit
+sous-ensemble de $\mathrm{Ob}\,\widetilde{S}$ contenant $\mathrm{Ob}\,S$ et
+stable par \add{sommes et par} passage au quotient par une relation d'équivalence
+à $\mathrm{pr}_1$ qui est dans $\widetilde{M}$. Par suite, $\widetilde{S}_M$ ne
+change pas si on remplace $S$ par une sous-catégorie $S'$ de $\widetilde{S}$
+contenue dans $\widetilde{S}_M$, et $M$ par
+$M' = \widetilde{M} \cap \mathrm{Fl}\,S'$.
+
+\note{le tapuscrit porte « le plus petit sous-ensemble de $\mathrm{Ob}\,S$ »,
+sans tilde ; le sens veut $\widetilde{S}$ et le tilde n'est pas tracé à cet
+endroit}
+
+\page{5}
+
+\struck{telle que les $F_i \times_F F_j \to F_i$ soient dans $\widetilde{M}$.
+Pour que l'on ait $F \in \mathrm{Ob}\,\widetilde{S}_M$ il f\add{au}t
+\add{et il suffit} que pour tout $i$, on ait $F_i$}
+
+\note{ces deux lignes tapées, au haut du verso de la page 4, continuent la
+proposition biffée au bas de la page 3, et sont barrées de plusieurs traits
+obliques ; la version retenue est la proposition de la page 4. Le « il fet s. »
+tapé est lu « il faut et il suffit »}
+
+\page{6}
+
+\textbf{Exemples :} Si $S$ est la catégorie des schémas affines, avec une
+topologie plus fine que Zar, $M$ l'ensemble des immersions ouvertes (ou, en
+l'absence de d), les immersions de la forme
+$\mathrm{Spec}(A_f) \to \mathrm{Spec}(A)$), alors la construction donne une
+catégorie $\widetilde{S}_M$ équivalente à celle des schémas. Si on prend une
+topologie plus fine que la topologie étale, et pour $M$ \add{l'ensemble} des
+morphismes étales (qui satisfont la condition d)), alors on trouve les
+« espaces algébriques » de Artin, en « recollant des spectres d'anneaux par des
+morphismes étales ». Le dernier corollaire nous dit qu'on aurait trouvé le même
+résultat en partant de la catégorie $S'$ des schémas, au lieu de celle $S$ des
+schémas affines. \add{Dans ce cas, les morphismes de $\widetilde{M}$ se disent
+\emph{étales} [la top.\ sur $S$ étant la top.\ étale).}
+
+\note{la dernière phrase est ajoutée à la main, à l'encre bleue, à la suite de
+la ligne tapée}
+
+\textbf{Proposition.} Supposons que $M$ satisfasse la condition draconienne
+suivante : soient $u : X \to Y$ et $v : Y \to Z$ des flèches composables dans
+$S$, alors $v \in M$ et $vu \in M$ implique $u \in M$. Pour un objet $X$ de $S$,
+soit $S(X,M)$ la sous-catégorie de $S_{/X}$ formée des $X' \to X$ qui sont dans
+$M$ (donc la condition précédente dit que tous les morphismes de $S(X,M)$ sont
+dans $M$); munissons-la de la topologie induite par $S$, et considérons le
+topos $S(X,M)^{\sim}$. Alors \struck{le foncteur
+$(\widetilde{S}_M)_{/X} \to S(X,M)^{\sim}$ composé de
+$(\widetilde{S}_M)_{/X} \xrightarrow{\text{incl}} \widetilde{S}_{/X}
+\xrightarrow{\text{can.}\ \approx} (S_{/X})^{\sim}
+\xrightarrow{\text{restr}} S(M,X)^{\sim}$ est une équivalence de catégories.}
+la sous-catégorie pleine de $\widetilde{S}_{/X}$ formée des $F \to X$ qui sont
+dans $\widetilde{M}$ \add{[d'où résulte $F \in \mathrm{Ob}\,\widetilde{S}_M$ !]},
+est un \emph{topos}, équivalent par le foncteur restriction à $S(X,M)$ au topos
+$S(X,M)^{\sim}$.
+
+\note{la première rédaction de la conclusion, tapée, est rayée à la main d'un
+trait horizontal et d'un zigzag, et encadrée ; dans le composé biffé, le
+dernier terme est tapé « $S(M,X)$ ». L'insertion entre crochets est de sa main à
+l'encre bleue, au-dessus de « dans $\widetilde{M}$ ». Dans la dernière ligne,
+« $S(X,M)$ » est une surcharge d'une frappe erronée}
+
+\section*{Questions pour Artin}
+
+\page{8}
+
+\note{le titre, souligné, est de sa main en haut de la page}
+
+1º) $S$ \struck{strictement} local \struck{noeth.} \emph{hens.} noeth.,
+$S' \to S$ \struck{\ill{}} \uncertain{plat.} \emph{surjectif}, $S'$ noeth.,
+$X'/S'$ \struck{loc.\ de t.f.} \add{propre} avec donnée de descente rel.\ à
+$S'/S$. Supposons que la donnée de descente sur $X'_s$ soit effective ($s$ pt.\
+fermé de $S$). Alors la donnée de descente sur $X'$ est effective ?
+
+\note{« hens. » est doublement souligné. « propre » est écrit au-dessus de
+« loc.\ de t.f. », biffé}
+
+Cas où $S' = \widehat{S}$ ?
+
+2º) Peut-on faire la descente fpqc de \emph{variétés} \add{ou relation loc.\
+de prés.\ finie,} p.\ ex.\ de parties d'un complété d'un anneau local ? [i.e.\
+la propriété, pour un faisceau fpqc loc.\ de prés.\ finie, d'être une variété
+est-elle loc.\ fpqc sur $S$ ?]
+
+\note{« ou relation loc.\ de prés.\ finie, » est une insertion au-dessus de la
+ligne, rattachée par un trait à « variétés » ; « relation » est une lecture
+possible, « relativement » en serait une autre. La parenthèse entre crochets
+est écrite en deux lignes serrées, la seconde sous la première}
+
+\marginal{Le Pb \ill{} \uncertain{le comm.} aux $\varprojlim$
+(\uncertain{adiques artiniennes})}\note{note écrite de biais dans la marge
+gauche, en regard de 2º) ; « $\varprojlim$ » est un « lim » souligné d'une
+flèche vers la gauche}
+
+3º) $S$ comme dans 1º, $X$ une \emph{variété} \struck{sur} \struck{loc.\ de
+t.f.} \add{propre} sur $S$, \add{et $X_s$ représentable,} \add{alors $X$
+est-il} \struck{si $X$ est représentable loc.\ fpqc sur $S$,} représentable ?
+Évidemment, si la réponse à 2º \struck{est} était affirmative, les questions 1º
+et 3º seraient équivalentes…
+
+\note{la rédaction de 3º) est reprise en interligne : « et $X_s$
+représentable, » sous la première ligne, « alors $X$ est-il » encadré au-dessus
+de la seconde ; la lecture du passage biffé entre les deux reste douteuse}
+
+\marginal{Exemples de $X$ \struck{variétés} propre sur $S$ local complet, $X_s$
+repr.\ mais $X$ non repr.\ ?; Exemples de $X$ variétés \uncertain{propres} sur
+$S$ noeth., \ill{} \uncertain{repr.}, qui ne soit repr.\ ?}\note{note écrite de
+biais dans la marge gauche en regard de 3º) et 4º), en deux paragraphes
+commençant chacun par « Exemples » ; plusieurs mots en sont incertains}
+
+4º) Descente fpqc des \add{(« petits »)} faisceaux étales.
+
+Lié à la question des conditions sur les foncteurs
+$(\mathrm{Sch})^{\circ}_{/S} \to (\mathrm{Ens})$ qui proviennent de petits
+faisceaux étales sur $S$. Une réponse affirmative à 2º (i.e.\ \uncertain{pour
+des} « variétés » dans le sens \uncertain{généralisé}, sans exiger que
+\add{la} diagonale soit une \add{immersion}) en impliquerait une à 4º.
+
+\note{« 4º » est entouré, et un trait le relie à la note marginale}
+
+\section*{Plan}
+
+\note{titre de l'édition : la page 10 ne porte pas de titre}
+
+\page{10}
+
+\begin{enumerate}
+\item[1.] Morphismes représentables. Morphismes $P$-représentables.
+
+Abus de langage : imm., imm.\ ouverte, imm.\ fermée, lisse, net, étale,
+(sous-entendu : repr.\ par …). Critère de représentabilité par
+« recollement des morceaux ». (SGAD XI 3.5.)
+
+\item[2.] [Faisceaux qu.-cpt, quasi-sép.\ Morphismes qu.-cpt, qu.-sép.\ …\
+des faisceaux]. Morphismes \add{loc.}\ de prés.\ finie, de prés.\ finie.
+
+\marginal{[ ] = petits \uncertain{compléments}}
+
+\item[3.] Morphismes formel\add{lemen}t lisses, formel\add{lemen}t nets,
+formel\add{lemen}t étales, et variantes infinitésimales. Critères standard…
+
+\item[4.] Critères pour qu'un morphisme soit un monomorphisme, un bimorphisme,
+une immersion, une immersion ouverte.
+
+\item[5.] Conditions de séparation : \emph{morph.\ diag.\ repr.}\ par imm.,
+par imm.\ qu.-cpte, [par imm.\ de prés.\ finie] ; morphisme diagonal repr.\ par
+imm.\ fermée ; Relations avec critères \struck{valutifs} \uncertain{valuatifs}.
+
+\item[7.] Espaces \uncertain{induits} et foncteurs \struck{\ill{}} sur
+$(\mathrm{Sch})_{/\ill{}}$. Morphismes surjectifs, \struck{radiciels} radiciels
+(morphisme diagonal est surjectif). [Une immersion ouverte surjective est un
+isom].
+
+\item[6.] Conditions de propreté.
+
+\item[8.] Conditions de connexions.
+\end{enumerate}
+
+\note{une flèche tracée dans la marge ramène l'item 7 entre les items 5 et 6 ;
+l'ordre de la page est gardé. Les trois lignes de 5, ici séparées par des
+points-virgules, sont réunies par une accolade ; « par imm.\ de prés.\ finie » est encadré et relié à « par imm.\
+qu.-cpte ». Autour de « critères valutifs » la page est surchargée : un mot
+biffé, et « Morphismes », d'une encre plus sombre, écrit par-dessus la fin de la
+ligne, et l'on n'est pas sûr de la frontière entre 5 et 7}
+
+Principe des vérifications pour les morphismes de faisceaux sur
+$(\mathrm{Sch})$ : a) Conditions locales b) Si $f : F \to G$ est
+représentable, cela doit coller avec la définition déjà acceptée pour morphismes
+de schémas [$\forall\, X \to G$, le morphisme de schémas $X \times_G F \to X$ a
+la propriété].
+
+\section*{Fragment d'une démonstration}
+
+\note{titre de l'édition ; la page 11 reprend au milieu d'une phrase, dont le
+début ne figure pas dans le dossier}
+
+\page{11}
+
+dans une extension radicielle convenable de \uncertain{$k(y)$}, on peut supposer
+que $(X_y)_{\mathrm{red}}$ est \uncertain{séparable} sur \add{$k(y) =$}
+\uncertain{$k(y)$}, et remplaçant $X$ par $X_{\mathrm{red}}$, on \ill{} \ill{}
+les conditions du th., et on gagne.
+
+La deuxième assertion se déduit de la troisième par réduction au cas
+noethérien. Pour la troisième,
+
+\struck{distinguons les deux cas. \ill{} \ill{} \ill{} $Y$ \ill{} \ill{} \ill{}
+$Y$ intègre, \ill{} \ill{} $Y$. Faisant une extension radicielle finie $Y'$ de
+$Y$ et normalisant \ill{} $Y$ réduit. Dans le premier cas.}
+
+\note{bloc encadré sur la gauche et biffé de plusieurs traits horizontaux et
+obliques ; seuls quelques mots se lisent}
+
+(On \uncertain{peut supposer} $Y$ réduit.) \struck{\ill{} \ill{}
+$M = \underline{\mathrm{Hilb}}$}
+
+\struck{\ill{} \ill{}} \uncertain{Notons} $M = \underline{\mathrm{Hilb}}_{X/Y}$,
+\ill{} alors une section \emph{ensembliste} $\varphi$ de $M$ sur $Y$,
+\struck{telle que} définie par : $\forall\, y \in Y$ le point
+\add{$\varphi(y)$} de $M_y$ \uncertain{défini par}
+$(X_y)_{\mathrm{red}} \subset X_y$. \struck{Soit $D'$} Soit
+$Y' = \varphi(Y)$. Je dis que $Y'$ est une partie \struck{[\ill{} \ill{}]}
+\ill{} \ill{} $Y'$ de la \uncertain{fermée} de $M$; \struck{\ill{}}
+\uncertain{admettons} \ill{} [NB. $Y' \to Y$ est \ill{} \ill{}, \ill{} fini…]
+\struck{\ill{} \ill{} admis}, \ill{} aura un morphisme fini \ill{}
+\uncertain{fermé}, on \struck{$\varphi$} \ill{} aura un $Y$-morphisme
+$Y' \to M$, correspondant à un sous-schéma \add{\uncertain{fermé}}
+\struck{$X$} $Z$ de $X'$, plat de prés.\ finie sur $Y$, dont les fibres sont
+\ill{} $(X_y)_{\mathrm{red}} \otimes_{k(y)} k(y')$, qui sont réduites. Par
+suite, $Z$ est \uncertain{réduit} sur $Y'$ \add{réduit}, donc
+\uncertain{évident}, et ayant même ensemble sous-jacent que $X'$, il est égal
+à $X'_{\mathrm{red}}$].
+
+\note{les lignes du milieu, de « Je dis que » à « un $Y$-morphisme », sont
+surchargées d'insertions interlinéaires et de biffures ; on n'y a gardé que ce
+qui se lit, et l'ordre des mots rendus n'est pas assuré. La parenthèse ouverte
+par « [NB. » se ferme au bas de la page, après « $X'_{\mathrm{red}}$ ». « sur
+$Y$ » dans « plat de prés.\ finie sur $Y$ » est lu tel qu'écrit, bien que le
+sens attende $Y'$}
+
+\section*{Immersions ouvertes}
+
+\note{titre de l'édition}
+
+\page{12}
+
+\begin{tikzcd}
+G \arrow[r, "u"] & F \arrow[d] \\
+ & S
+\end{tikzcd}
+
+$S$ loc.\ noeth.
+
+\struck{Si \ill{}} \add{Supposons} :
+
+(i) $F$ et $G$ sont des faisceaux fpqc, commutant aux $\varinjlim$ d'anneaux,
+aux $\varprojlim$ \uncertain{adiques} d'anneaux artiniens,
+
+(ii) $u$ est un monomorphisme, et est infinitésimalement étale.
+
+\struck{(iii) $u$ \ill{} \ill{} épimorphisme}
+
+Alors $G \to F$ est une immersion ouverte.
+
+\note{« $\varinjlim$ » et « $\varprojlim$ » sont des « lim » soulignés d'une
+flèche vers la droite et vers la gauche. Les deux énoncés suivants sont séparés
+du reste par des traits horizontaux}
+
+Une Immersion ouverte surjective de foncteurs est un isomorphisme
+
+Caractérisation des morphismes étales de foncteurs…,
+
+\page{13}
+
+\note{feuille de mots-clés encadrés, qui semble dresser la carte des notions à
+traiter ; les cadres ne sont pas reliés par des flèches, sauf une accolade. On
+les donne en liste, dans l'ordre de lecture}
+
+$X \to Y$ une imm.\ ouverte
+
+$X \to Y$
+
+morphisme \struck{affine} formel\add{lemen}t lisse, non ram., étale ---
+rel\add{ativemen}t lisse, rel\add{ativemen}t non ram., rel\add{ativemen}t étale
+
+\textbf{Mon} : immersion; \struck{immersion ouverte}; immersion \emph{fermée}
+--- imm. ouverte
+
+[séparé, —] [propre, …] [connexe, …]
+
+\note{« formellement » est surchargé sur un « affine » biffé. « Mon » est dans
+un petit cadre relié au cadre des immersions}
+
+$F_i \to F$  \emph{imm.\ ouvert\add{e}}
+
+\begin{tikzcd}
+G \arrow[r] & F \\
+G_T \arrow[r] \arrow[u] & F_T \arrow[u]
+\end{tikzcd}
+
+(A)  \struck{\uncertain{Ex.}}  faisceaux; \emph{loc.\ de
+prés.\ finie} [\uncertain{relatif}]; adiques
+
+\note{les trois derniers cadres (« faisceaux », « loc.\ de prés.\ finie
+[relatif] », « adiques ») sont réunis par une accolade à laquelle aboutit un
+mot biffé ; le « A » est entouré}
+
+\end{document}
