@@ -1,0 +1,674 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 11, batch 1 (pages 1-20).
+% Established from the facsimile archives/batches/11/batch-01.pdf (a mirror of
+% https://grothendieck.umontpellier.fr/11.pdf), per the skill
+% transcribe-grothendieck. The batch file carries no cover sheet: PDF page N is
+% archivists' page N (the pencilled numbers confirm it on every leaf).
+%
+% Pass: Opus 5 (claude-opus-5), 2026-09-14 — first pass, unchecked against the pages by a human.
+%
+% What the batch is. Ten leaves in his hand (the even pages 2-20), written on
+% the backs of a typescript in English on geometric invariant theory (pages
+% headed -2.24- to -2.33-, -3.1-, -3.2-): the odd pages 3-19 are that
+% typescript, upside down and without a mark of his, and page 1 is blank. They
+% are skipped without further mention. The leaves carry no date and no
+% pagination of his own.
+%
+% The mathematics is one continuous run: the formalism of correspondences
+% attached to a bivariant theory. V is a category with products of two
+% objects; A : X ↦ A(X) a functor to a category C of (graded) « bivariant »
+% algebras, i.e. with f_* and f^*, subject to an exchange (base change)
+% condition and the projection formula. He builds a new category V^A with the
+% objects of V and Hom_{V^A}(X,Y) = A(X×Y), composition
+% v∘u = p_{31*}(p_{32}^*(v) p_{21}^*(u)), and two functors φ : V → V^A and
+% ψ : V^A → k-mod gr. with ψφ = ωA.
+%
+%   2   the data; V^A, φ, ψ and the square they make commute; Ob V^A = Ob V;
+%       the composition law, boxed.
+%   4   « Associativité »: w(vu) and (wv)u both computed down to
+%       p_{XT*}(p_{ZT}^*(w) p_{YZ}^*(v) p_{XY}^*(u)), by exchange and
+%       projection, with two diagrams of projections from X×Y×Z×T.
+%   6   « Unités »: Δ_X = A(δ_X)_*(1_{A(X)}); u∘Δ_X = u through the cartesian
+%       square of δ_X × id_Y; a boxed marginal on the signs (−1)^{ux}; the NB
+%       that composition needs only projections, units the diagonals too.
+%   8   the two cases of exchange/projection actually used; definition of
+%       φ_{X,Y}(f) = A(Γ_f)_*(1) through the graph Γ_f = (id_X, f).
+%  10   φ is a functor: φ(id_X) = Δ_X, and φ(g)φ(f) = φ(gf) through a
+%       cartesian square of graphs and ν(x) = (x, f(x), gf(x)); then ψ:
+%       u(x) = p_{2*}(u p_1^*(x)).
+%  12   ψ is a functor: Δ_X(x) = x, and v(u(x)) = (v∘u)(x), both sides
+%       reduced to p_{Z*}(p_{YZ}^*(v) p_{XY}^*(u) p_X^*(x)).
+%  14   commutativity of the square, f_*(x) = φ(f)(x); « Remarque » on
+%       interpreting the contravariant side A(f)^*, answered by φ(f)^* obtained
+%       by transposition; the canonical s on V^A, u ↦ ^t u.
+%  16   φ* = sφ°, ψφ* = ω*A°; the case of a final object e with A(e) = k:
+%       the A(X) « jaugés » (read doubtfully) by the forms k_X; if they are
+%       Poincaré algebras, u_* and u^* are transposes, computed « mod. signe ».
+%  18   « Remarque »: only the monoid structure of the A(X) was used, so the
+%       theory should be written for « monoïdes bivariants »; a cancelled
+%       passage on signs; the proposal of graded monoids (A^i)_{i∈Z} with
+%       involutions σ^i and a degree d(A^*) fixing the degree of f_*.
+%  20   sub-objects A'(X) ⊂ A(X): equivalence of 1° stability under inverse
+%       and direct images and products, and 2° a) u(x) ∈ A', b) x ⊠ y ∈ A',
+%       c) graphs in A'; a struck and rewritten NB (the A' as subcategories
+%       of V^A); the proof both ways, with boxed marginal tags.
+%
+% Notation fixed for the batch. His curled V is \mathcal{V}, and the new
+% category \mathcal{V}^{A}; the functor A is sometimes drawn script, sometimes
+% roman, and is given as roman A throughout; C, e, k stay roman. Pull-backs and
+% push-forwards as p^{*}, p_{*}, with the indices he writes (p_{31}, p_{XZ},
+% q_1, r_2 …) left as they stand even where they disagree with a diagram's
+% labels (page 2). The external product is \boxtimes, the internal \otimes.
+%
+% Material facts stated once. The hand is fast throughout and the connective
+% prose often does not carry while the formulas do; page 18 is cancelled in a
+% block (a struck line, a boxed passage and a long wavy stroke), and page 20
+% has a struck NB rewritten in a box. Duplicate draft sketches of a diagram
+% (page 10, top left) are noted rather than redrawn.
+%
+% Batch boundary. The proof on page 20 closes on the leaf (« Stabilité par ⊠
+% claire. ») and the lower half is blank, so no sentence crosses into batch 2;
+% but the subject of the A' is taken up again on page 22 (batch 2), and a \note
+% at the end says so.
+
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{11}
+\batch{1}
+\pages{1}{20}
+\dating{[à partir de 1961]}
+\watermark{Édition de démonstration}
+\foldertitle{Formalisme des correspondances : notes manuscrites (s.d.)}
+
+\begin{document}
+
+\page{2}
+
+$\mathcal{V}$ catégorie (objets $X, Y, \ldots$) avec produits de deux objets
+(\uncertain{et un} objet final)
+
+$A \colon X \mapsto A(X)$ foncteur cov.\ de $\mathcal{V}$ dans la catégorie $C$
+des \uncertain{algèbres gr.}\ bivariantes, satisfaisant une condition d'échange
+\struck{\ill{}} \uncertain{(au sens gr.)} (dont on \uncertain{aura} besoin
+\struck{\ill{}} \ill{} \ill{} la suite ....).
+
+\note{Le début de la ligne est surchargé : « gr. » est ajouté au-dessus, et un
+mot biffé sous « algèbres » semble être « anticommutatives » ; la lecture de
+cette ligne reste douteuse.}
+
+On va définir une nouvelle catégorie, notée $\mathcal{V}^{A}$, et deux
+foncteurs $\varphi, \psi$
+
+\begin{tikzcd}
+\mathcal{V} \arrow[r, "\varphi"] \arrow[dr, "A"'] & \mathcal{V}^{A} \arrow[r, "\psi"] & k\text{-mod gr.} \\
+ & C \arrow[ur, "\omega"'] &
+\end{tikzcd}
+
+($\omega$ : oubli de la structure d'algèbre), rendant le carré ci-dessus
+commutatif. De plus, le foncteur $\varphi$ induira une bijection (en fait, une
+identité) sur les ensembles d'objets \struck{\ill{}} :
+\[ \operatorname{Ob} \mathcal{V}^{A} = \operatorname{Ob} \mathcal{V} . \]
+
+On pose
+\[ \operatorname{Hom}_{\mathcal{V}^{A}}(X,Y) = A(X \times Y) . \]
+On définit le produit de composition ainsi :
+\[
+\begin{array}{ccc}
+\operatorname{Hom}_{\mathcal{V}^{A}}(X,Y) \times \operatorname{Hom}_{\mathcal{V}^{A}}(Y,Z) & \longrightarrow & \operatorname{Hom}_{\mathcal{V}^{A}}(X,Z) \\
+(u, v) & \longmapsto & v \circ u
+\end{array}
+\]
+\[ A(X \times Y) \times A(Y \times Z) \longrightarrow A(X \times Z) \]
+
+\begin{tikzcd}
+ & X \times Y \times Z \arrow[dl, "p_{12}"'] \arrow[dr, "p_{23}"] \arrow[dd, "p_{13}"] & \\
+X \times Y & & Y \times Z \\
+ & X \times Z &
+\end{tikzcd}
+
+\[ \boxed{\, v \circ u = p_{31*}\bigl( p_{32}^{*}(v)\, p_{21}^{*}(u) \bigr) . \,} \]
+
+\note{Le diagramme porte les indices $p_{12}, p_{13}, p_{23}$, la formule
+encadrée $p_{31}, p_{32}, p_{21}$ ; on les laisse tels quels.}
+
+\page{4}
+
+\subsection*{Associativité}
+
+\[ X \xrightarrow{\;u\;} Y \xrightarrow{\;v\;} Z \xrightarrow{\;w\;} T \]
+
+À prouver
+\[ w(vu) = (wv)u \]
+\struck{Le premier membre est égal à : \ill{}}
+
+\begin{tikzcd}[column sep=small, row sep=small, nodes={font=\scriptsize}]
+ & & X \times Y \times Z \times T \arrow[dl, "\alpha'"'] \arrow[drrr, "\nu'"] & & & & \\
+ & X \times Y \times Z \arrow[dl, "\lambda"'] \arrow[d, "\mu"] \arrow[dr, "\nu"] & & & & X \times Z \times T \arrow[dlll, "\alpha"'] \arrow[d, "\gamma"] \arrow[dr, "\beta"] & \\
+X \times Y & Y \times Z & X \times Z & & & X \times T & Z \times T
+\end{tikzcd}
+
+\note{Le but de $\mu$ est écrit $Y \times Z$ par-dessus une première lettre ;
+une petite inscription le long de $\nu$ est \ill{}.}
+
+\[
+w(vu) \stackrel{\text{déf}}{=} \gamma_{*}\bigl( \beta^{*}(w)\, \alpha^{*}(vu) \bigr)
+\stackrel{\text{déf de } vu}{=} \gamma_{*}\Bigl( \beta^{*}(w)\, \alpha^{*}\bigl( \nu_{*}( \mu^{*}(v)\, \lambda^{*}(u) ) \bigr) \Bigr)
+\]
+car $\alpha^{*} \nu_{*} = \nu'_{*} \alpha'^{*}$ [échange]
+\[
+= \gamma_{*}\Bigl( \beta^{*}(w)\, \nu'_{*}\bigl( \alpha'^{*}( \mu^{*}(v)\, \lambda^{*}(u) ) \bigr) \Bigr)
+\]
+avec
+\[
+\alpha'^{*}\mu^{*}(v)\, \alpha'^{*}\lambda^{*}(u) = p_{YZ}^{*}(v)\, p_{X,Y}^{*}(u)
+\]
+$\|$ formule de proj.\ (att.\ signes !)
+\[
+\nu'_{*}\bigl( \nu'^{*}\beta^{*}(w)\, p_{YZ}^{*}(v)\, p_{XY}^{*}(u) \bigr),
+\qquad \nu'^{*}\beta^{*}(w) = p_{ZT}^{*}(w)
+\]
+\[
+= p_{XT*}\bigl( p_{ZT}^{*}(w)\, p_{YZ}^{*}(v)\, p_{XY}^{*}(u) \bigr)
+\]
+
+\note{À gauche de ces lignes, un fragment biffé : \struck{$(-1)$ \ill{}}.}
+
+\begin{tikzcd}[column sep=small, row sep=small, nodes={font=\scriptsize}]
+ & & X \times Y \times Z \times T \arrow[dl, "n'"'] \arrow[dr, "b'"] & & \\
+ & X \times Y \times T \arrow[dl, "a"'] \arrow[d, "c"] \arrow[dr, "b"] & & Y \times Z \times T \arrow[dl, "n"'] \arrow[d, "l"] \arrow[dr, "m"] & \\
+X \times Y & X \times T & Y \times T & Y \times Z & Z \times T
+\end{tikzcd}
+
+\[
+(wv)u = c_{*}\bigl( b^{*}(wv)\, a^{*}(u) \bigr)
+= c_{*}\Bigl( b^{*}\bigl( n_{*}( m^{*}(w)\, l^{*}(v) ) \bigr)\, a^{*}(u) \Bigr)
+\]
+\note{Dans la seconde expression, un premier $m_{*}$ est biffé et remplacé par
+$n_{*}$.}
+formule d'échange :
+\[
+n'_{*}\bigl( b'^{*}( m^{*}(w)\, l^{*}(v) ) \bigr),
+\qquad b'^{*}\bigl( m^{*}(w)\, l^{*}(v) \bigr) = p_{ZT}^{*}(w)\, p_{YZ}^{*}(v)
+\]
+\[
+= c_{*}\Bigl( n'_{*}\bigl( p_{ZT}^{*}(w)\, p_{YZ}^{*}(v) \bigr)\, a^{*}(u) \Bigr)
+\]
+--- formule de proj.\ (att.\ signes !)
+\struck{$= c_{*}$}
+\[
+= n'_{*}\bigl( p_{ZT}^{*}(w)\, p_{YZ}^{*}(v)\; n'^{*} a^{*}(u) \bigr),
+\qquad n'^{*}a^{*}(u) = p_{XY}^{*}(u)
+\]
+\[
+= p_{XT*}\bigl( p_{ZT}^{*}(w)\, p_{YZ}^{*}(v)\, p_{XY}^{*}(u) \bigr)
+\]
+
+\note{Devant $a^{*}(u)$ dans l'avant-dernière
+ligne, un symbole est biffé et surchargé, lu $n'^{*}$ d'après l'accolade qui le
+rend $p_{XY}^{*}(u)$. La dernière égalité est écrite dans la marge droite et
+sort de la feuille.}
+
+\page{6}
+
+\subsection*{Unités}
+
+On définit
+\[ \Delta_{X} \in \operatorname{Hom}_{\mathcal{V}^{A}}(X,X) = A(X \times X) \]
+en considérant
+\[ \delta_{X} \colon X \to X \times X \qquad (\text{diag.}) \]
+et définissant
+\[ \Delta_{X} = A(\delta_{X})_{*}(1_{A(X)}) \]
+\note{Après le signe $=$, un premier état est biffé : \struck{\ill{}}.}
+
+Prouvons que $\Delta_{X}$ est une unité \uncertain{bilatère} pour la
+composition : \uncertain{i.e.}
+\[ X \xrightarrow{\;\Delta_{X}\;} X \xrightarrow{\;u\;} Y \]
+\[ u \circ \Delta_{X} = p_{31*}\bigl( p_{32}^{*}(u)\, p_{21}^{*}(\Delta_{X}) \bigr) \]
+
+\begin{tikzcd}
+ & X \times X \times Y \arrow[dl, "p_{21}"'] \arrow[dr, "p_{32}"] \arrow[dd, no head] & \\
+X \times X & & X \times Y \\
+ & X \times Y &
+\end{tikzcd}
+
+\begin{tikzcd}
+X \times Y \arrow[r, "\delta_{X} \times \mathrm{id}_{Y} = q"] \arrow[d, "p"'] & X \times X \times Y \arrow[d, "p_{21}"] \\
+X \arrow[r, "\delta_{X}"] & X \times X
+\end{tikzcd}
+
+\[
+p_{21}^{*}(\Delta_{X}) = p_{21}^{*}\bigl( \delta_{X*}(1) \bigr) \stackrel{\text{échange}}{=} q_{*}\bigl( p^{*}(1) \bigr) = q_{*}(1)
+\]
+donc
+\[
+p_{32}^{*}(u)\, p_{21}^{*}(\Delta_{X}) = p_{32}^{*}(u)\, q_{*}(1) = q_{*}\bigl( q^{*}( p_{32}^{*}(u) ) \bigr)
+\]
+(formule de proj., attention signe !)
+\[ = q_{*}(u) \quad \text{car } p_{32}\, q = \mathrm{id}_{X \times Y} \]
+donc
+\[ u \circ \Delta_{X} = p_{31*}\, q_{*}(u) = u \]
+car \struck{$q$} $p_{31}\, q = \mathrm{id}$.
+
+\marginal{signes $(-1)^{ux}$ ; pour ces signes \uncertain{voir calculs} pour
+$\Delta_{X} \circ v = v$, $v \colon Y \to X$}
+
+On prouve de façon analogue que $\Delta_{X} \circ u = u$.
+
+\emph{Donc on trouve bien une catégorie $\mathcal{V}^{A}$.}
+
+[\emph{NB} Pour définir la composition on n'a eu besoin que des $p_{*}, p^{*}$
+pour projections $X \times Y \rightrightarrows X$ ; mais pour
+\struck{définir} construire les unités on a utilisé aussi $q_{*}, q^{*}$ pour
+les imm.\ diagonales et leurs produits par un $Y$ ....]
+
+\page{8}
+
+De \uncertain{fait}, pour la \struck{définit} vérification de l'associativité,
+on n'a utilisé la formule de projection et la formule d'échange que dans le cas
+
+\begin{tikzcd}
+ & X \times Y \times P \arrow[dl] \arrow[dr] & \\
+X \times P \arrow[dr, no head] & & Y \times P \arrow[dl, no head] \\
+ & P &
+\end{tikzcd}
+
+\note{Le $Y$ de $Y \times P$ est écrit par-dessus un $X$.}
+
+mais pour vérifier que les \uncertain{$\Delta_{X}$} sont des unités, on a eu
+besoin aussi du cas
+
+\begin{tikzcd}
+ & X \times Y \arrow[dl] \arrow[dr, hook] & \\
+X \arrow[dr, hook, "\mathrm{diag.}"'] & & X \times X \times Y \arrow[dl, "\mathrm{proj}"] \\
+ & X \times X &
+\end{tikzcd}
+
+Définissons le foncteur $\varphi$, en définissant pour tout
+$X, Y \in \operatorname{Ob} \mathcal{V}$ une application
+\[
+\varphi_{X,Y} \colon \operatorname{Hom}_{\mathcal{V}}(X,Y) \longrightarrow \operatorname{Hom}_{\mathcal{V}^{A}}(X,Y) = A(X \times Y)
+\]
+\note{L'indice de $\varphi$ ressemble ici et plus bas à « $X,Z$ » ; le contexte
+impose $X,Y$.}
+Soit donc $f \colon X \to Y$ dans $\mathcal{V}$, on en déduit \ill{} graphe
+\[ \Gamma_{f} = (\mathrm{id}_{X}, f) \colon X \to X \times Y \]
+d'où
+\[ A(\Gamma_{f})_{*} \colon A(X) \to A(X \times Y) \]
+Posons alors \struck{\ill{}}
+\[ \varphi_{X,Y}(f) = A(\Gamma_{f})_{*}(1) \]
+
+\page{10}
+
+Il faut prouver que $\varphi$ est bien un foncteur.
+
+a) $\varphi_{X,X}(\mathrm{id}_{X}) = \Delta_{X}$. En effet,
+\uncertain{c'est la définition} de $\Delta_{X}$ !
+
+\note{Sur cette ligne, un premier état est biffé et la leçon « c'est la
+définition » est écrite au-dessus.}
+
+b) $X \xrightarrow{\;f\;} Y \xrightarrow{\;g\;} Z$
+\[ \varphi(g)\, \varphi(f) = \varphi(gf) \]
+
+Le premier membre est
+\[
+p_{31*}\bigl( p_{32}^{*}(\varphi(g))\, p_{21}^{*}(\varphi(f)) \bigr)
+\]
+avec
+\[
+p_{32}^{*}(\varphi(g)) = p_{32}^{*}\bigl( \Gamma_{g*}(1) \bigr) = \lambda_{*}\bigl( \mu^{*}(1) \bigr) = \lambda_{*}(1),
+\qquad
+p_{21}^{*}(\varphi(f)) = p_{21}^{*}\, \Gamma_{f*}(1) = \lambda'_{*}\bigl( \mu'^{*}(1) \bigr) = \lambda'_{*}(1)
+\]
+\note{Devant $\lambda_{*}(\mu^{*}(1))$, un \struck{$p_{*}$} est biffé.}
+\[
+\varphi(g)\, \varphi(f) = p_{31*}\bigl( \lambda_{*}(1)\, \lambda'_{*}(1) \bigr)
+\]
+Mais
+\[
+\lambda_{*}(1)\, \lambda'_{*}(1) = \lambda_{*}\bigl( \lambda^{*}( \lambda'_{*}(1) ) \bigr) \quad (\text{form.\ proj.})
+\]
+\[
+\lambda^{*} \lambda'_{*}(1) = \Gamma_{f*}\bigl( \Gamma_{gf}^{*}(1) \bigr) = \Gamma_{f*}(1)
+\]
+\[
+= \lambda_{*}\, \Gamma_{f*}(1) = \nu_{*}(1)
+\]
+où $\nu \colon X \to X \times Y \times Z$ est donné par
+$\nu(x) = (x, f(x), gf(x))$.
+
+\begin{tikzcd}[column sep=small, row sep=small, nodes={font=\scriptsize}]
+ & & X \arrow[dl, hook, "\Gamma_{gf}"'] \arrow[dr, hook, "\Gamma_{f}"] & & \\
+ & X \times Z \arrow[dl, "\mu' = p_{X}"'] \arrow[dr, hook, "\lambda' = \Gamma_{f} \times Z"] & & X \times Y \arrow[dl, hook, "\lambda = \mathrm{id}_{X} \times \Gamma_{g}"'] \arrow[dr, "\mu = p_{Y}"] & \\
+X \arrow[dr, hook, "\Gamma_{f}"'] & & X \times Y \times Z \arrow[dl, "p_{21}"'] \arrow[dr, "p_{32}"] \arrow[dd, "p_{31}"] & & Y \arrow[dl, hook, "\Gamma_{g}"] \\
+ & X \times Y & & Y \times Z & \\
+ & & X \times Z & &
+\end{tikzcd}
+
+\note{Le carré supérieur est marqué « (\uncertain{cartésien}) ». Un premier
+croquis du même diagramme, en haut à gauche de la page, n'est pas redessiné.
+Sous le diagramme, les images des points :
+$x \mapsto (x, gf(x)) \leftarrow (x, f(x), gf(x))$,
+$x \mapsto (x, f(x)) \mapsto (x, f(x), gf(x))$, et en marge
+\struck{\ill{}} $(x, f(x), z)$, $(x, y, g(y))$, $(x, f(x), gf(x))$.}
+
+Donc
+\[
+\varphi(g)\, \varphi(f) = p_{31*}\bigl( \nu_{*}(1) \bigr) = \Gamma_{gf*}(1) = \varphi(gf) \qquad \text{OK.}
+\]
+
+Définissons le foncteur $\psi$, [i.e.\ \uncertain{posant}
+$\psi(X) = A(X)$,] pour $u \in \operatorname{Hom}_{\mathcal{V}^{A}}(X,Y) = A(X \times Y)$,
+et $x \in A(X)$, définissons $u(x) \in A(Y)$ par la formule
+\struck{$u(x)$}
+\[ u(x) = p_{2*}\bigl( u\, p_{1}^{*}(x) \bigr) \]
+Prouvons que l'on a bien une \emph{\uncertain{loi} fonctorielle}.
+
+\page{12}
+
+a) Si $X = Y$, prouvons que $\Delta_{X}(x) = x$. \uncertain{Or}
+
+\begin{tikzcd}
+ & X \arrow[d, "\delta"'] & \\
+ & X \times X \arrow[dl, "p_{1}"'] \arrow[dr, "p_{2}"] & \\
+X & & X
+\end{tikzcd}
+
+\[
+\Delta_{X}(x) = p_{2*}\bigl( \Delta_{X}\, p_{1}^{*}(x) \bigr) = p_{2*}\bigl( \delta_{*}(1)\, p_{1}^{*}(x) \bigr)
+\]
+--- form.\ de proj.
+\[
+\delta_{*}(1)\, p_{1}^{*}(x) = \delta_{*}\bigl( 1 \cdot \delta^{*} p_{1}^{*}(x) \bigr),
+\qquad \delta^{*} p_{1}^{*}(x) = x
+\]
+\[
+= p_{2*}\, \delta_{*}(x) = x \qquad \text{OK.}
+\]
+
+b) Prouvons $v(u(x)) = (v \circ u)(x)$.
+\[ X \xrightarrow{\;u\;} Y \xrightarrow{\;v\;} Z \]
+
+\begin{tikzcd}[column sep=small]
+ & & X \times Y \times Z \arrow[dl, "\lambda = p_{XY}"'] \arrow[dr, "\mu = p_{YZ}"] & & \\
+ & X \times Y \arrow[dl, "p_{1}"'] \arrow[dr, "p_{2}"] & & Y \times Z \arrow[dl, "q_{1}"'] \arrow[dr, "q_{2}"] & \\
+X & & Y & & Z
+\end{tikzcd}
+
+\note{Devant $q_{2*}$, un \struck{$p_{1}^{*}$} est biffé.}
+\[
+v(u(x)) = q_{2*}\bigl( v\, q_{1}^{*}(u(x)) \bigr)
+= q_{2*}\Bigl( v\, q_{1}^{*}\bigl( p_{2*}( u\, p_{1}^{*}(x) ) \bigr) \Bigr)
+\]
+[échange]
+\[
+q_{1}^{*}\, p_{2*}\bigl( u\, p_{1}^{*}(x) \bigr) = \mu_{*}\bigl( \lambda^{*}( u\, p_{1}^{*}(x) ) \bigr) = \mu_{*}\bigl( \lambda^{*}(u)\, p_{X}^{*}(x) \bigr)
+\]
+\[
+= q_{2*}\Bigl( \mu_{*}\bigl( \mu^{*}(v)\, \lambda^{*}(u)\, p_{X}^{*}(x) \bigr) \Bigr)
+\]
+(proj., attention signe)
+\[
+= p_{Z*}\bigl( p_{YZ}^{*}(v)\, p_{XY}^{*}(u)\, p_{X}^{*}(x) \bigr)
+\]
+
+\note{Le signe d'égalité qui introduit la ligne de l'échange est surmonté d'une
+marque \ill{}.}
+
+On a d'autre part
+
+\begin{tikzcd}[column sep=small]
+ & X \times Y \times Z \arrow[dl, "p_{XY}"'] \arrow[d, "p_{YZ}"] \arrow[dr, "p_{XZ}"] & & \\
+X \times Y & Y \times Z & X \times Z \arrow[dl, "r_{1}"'] \arrow[dr, "r_{2}"] & \\
+ & X & & Z
+\end{tikzcd}
+
+\[
+(v \circ u)(x) = r_{2*}\bigl( (v \circ u)\, r_{1}^{*}(x) \bigr)
+= r_{2*}\Bigl( p_{XZ*}\bigl( p_{YZ}^{*}(v)\, p_{XY}^{*}(u) \bigr)\, r_{1}^{*}(x) \Bigr)
+\]
+\[
+p_{XZ*}\bigl( p_{YZ}^{*}(v)\, p_{XY}^{*}(u)\, p_{XZ}^{*}\, r_{1}^{*}(x) \bigr),
+\qquad p_{XZ}^{*}\, r_{1}^{*}(x) = p_{X}^{*}(x)
+\]
+\[
+= p_{Z*}\bigl( p_{YZ}^{*}(v)\, p_{XY}^{*}(u)\, p_{X}^{*}(x) \bigr)
+\]
+OK.
+
+\page{14}
+
+\subsection*{Commutativité du carré de foncteurs}
+
+Il suffit de le voir sur les flèches, donc : prouvons pour
+$f \colon X \to Y$ dans $\mathcal{V}$, et $x \in A(X)$
+\[ f_{*}(x) = \varphi(f)(x) \]
+Or on a
+
+\begin{tikzcd}
+ & X \arrow[d, "\Gamma_{f}"] & \\
+ & X \times Y \arrow[dl, "p_{1}"'] \arrow[dr, "p_{2}"] & \\
+X & & Y
+\end{tikzcd}
+
+\[
+\varphi(f)(x) = p_{2*}\bigl( \varphi(f)\, p_{1}^{*}(x) \bigr) = p_{2*}\bigl( \Gamma_{f*}(1)\, p_{1}^{*}(x) \bigr)
+\]
+\[
+\Gamma_{f*}(1)\, p_{1}^{*}(x) = \Gamma_{f*}\bigl( \Gamma_{f}^{*}\, p_{1}^{*}(x) \bigr),
+\qquad \Gamma_{f}^{*}\, p_{1}^{*}(x) = x
+\]
+\[
+= p_{2*}\, \Gamma_{f*}(x) = x \qquad \text{OK.}
+\]
+
+\note{Le dernier membre est écrit $x$ ; le calcul donne $f_{*}(x)$, puisque
+$p_{2}\Gamma_{f} = f$.}
+
+\emph{Remarque} \struck{Question} Comment interpréter le foncteur
+contravariant $\mathcal{V}^{\circ} \to k$-mod gr.\ défini par $A$,
+\uncertain{i.e.}\ composé de $A$ et le foncteur
+$\omega^{*} \colon C^{\circ} \to k$-mod gr.\ (associant à $(f_{*}, f^{*})$
+l'application $f^{*}$) ? En d'autres termes, comment interpréter
+$A(f)^{*} \colon A(Y) \to A(X)$, si $f \colon Y \to X$ ? On démontre que c'est
+défini par
+\[
+\varphi(f)^{*} \in \operatorname{Hom}_{\mathcal{V}^{A}}(Y,X) = A(Y \times X),
+\]
+déduit de $\varphi(f) \in A(X \times Y)$ par l'isom.\ can.\
+\uncertain{voir dessous}. Vérification comme dessus.
+
+\note{« $f \colon Y \to X$ » est bien ce qu'on lit ; pour
+$A(f)^{*} \colon A(Y) \to A(X)$ on attend $f \colon X \to Y$.}
+
+On définit un \uncertain{iso.}\ foncteur canonique
+\[ s \colon \mathcal{V}^{A\circ} \to \mathcal{V}^{A\circ} \]
+induisant l'identité sur les objets, par
+\[
+u \mapsto {}^{t}u \colon \operatorname{Hom}_{\mathcal{V}^{A}}(X,Y) = A(X \times Y) \to \operatorname{Hom}_{\mathcal{V}^{A}}(Y,X) = A(Y \times X)
+\]
+
+\marginal{vérifier \uncertain{que c'est} multiplicatif !}
+
+\note{Les deux membres de $s$ portent l'exposant $A\circ$ sur la page ;
+l'usage qui en est fait page 16, $\varphi^{*} = s\varphi^{\circ} \colon
+\mathcal{V}^{\circ} \to \mathcal{V}^{A}$, demande un but sans $\circ$. La
+phrase se poursuit en tête de la page 16.}
+
+\page{16}
+
+[provenant de] l'isom.\ canonique entre $X \times Y$ et $Y \times X$. Soit
+alors
+\[ \varphi^{*} = s \varphi^{\circ} \colon \mathcal{V}^{\circ} \to \mathcal{V}^{A} \]
+on constate alors que le composé
+\[
+\psi \varphi^{*} = \psi(s \varphi^{\circ}) = (\psi s) \varphi^{\circ} \colon \mathcal{V}^{\circ} \to k\text{-mod gr.}
+\]
+est \struck{comme} \emph{\uncertain{égal}} :
+$\omega^{*} A^{\circ} \colon \mathcal{V}^{\circ} \to k$-mod gr.
+
+\marginal{\uncertain{à vérifier}}
+
+\struck{Ainsi, $\mathcal{V}^{A}$ apparaît comme une \ill{}
+d'\uncertain{enveloppe}}
+
+\emph{Cas où $\mathcal{V}$ a un objet final $e$, et de plus} $A(e) = k$,
+[Sinon, on remplace $k$ par $A(e)$ !] Alors les $A(X)$ sont naturellement
+\uncertain{jaugés} ; si c'est des alg.\ de Poincaré, il suffit alors de
+connaître \struck{ces} \uncertain{ces} alg.\ \uncertain{jaugées}, + les $f^{*}$
+($f \colon X \to Y$ dans $\mathcal{V}$) pour connaître $A$.
+
+\note{Le mot lu « jaugés » revient page 18 ; il pourrait aussi être une autre
+forme en \emph{-gés} ou \emph{-gués}. Les formes $k_{A(X)}$ qui suivent sont
+celles qu'il a en vue.}
+
+Soit
+\[ u \in \operatorname{Hom}_{\mathcal{V}^{A}}(X,Y) = A(X \times Y) \]
+\[ su \in \operatorname{Hom}_{\mathcal{V}^{A}}(Y,X) = A(Y \times X) \]
+d'où
+\[ \tilde{u} \colon A(X) \to A(Y) \qquad \widetilde{su} \colon A(Y) \to A(X) . \]
+
+Montrons que [si $u$ \uncertain{central} dans $A(X \times Y)$, \ill{}]
+$\tilde{u}$ et $\widetilde{su}$ sont transposés l'un de l'autre, pour les
+formes $k_{A(X)}$ et $k_{A(Y)}$ sur $A(X)$, $A(Y)$, i.e.\ on a pour
+$x \in A(X)$, $y \in A(Y)$, $u \in A(X \times Y)$
+\[
+k_{Y}\bigl( y\, u_{*}(x) \bigr) = k_{X}\bigl( u^{*}(y)\, x \bigr)
+\]
+i.e.
+\[
+g_{*}\bigl( y\, u_{*}(x) \bigr) = f_{*}\bigl( u^{*}(y)\, x \bigr) .
+\]
+(Car $u$ central !!) En effet
+
+\begin{tikzcd}
+A(X) \arrow[r, bend left=20, "u_{*}"] \arrow[d, "k_{X}"'] & A(Y) \arrow[l, bend left=20, "u^{*}"] \arrow[d, "k_{Y}"] \\
+k & k
+\end{tikzcd}
+
+\begin{tikzcd}
+ & X \times Y \arrow[dl, "p_{1}"'] \arrow[dr, "p_{2}"] & \\
+X \arrow[dr, no head, "f"'] & & Y \arrow[dl, no head, "g"] \\
+ & e &
+\end{tikzcd}
+
+\note{Entre les deux $k$ du premier diagramme, un signe $=$.}
+
+\[
+g_{*}\bigl( y\, u_{*}(x) \bigr) = g_{*}\bigl( y\, p_{2*}( u\, p_{1}^{*}(x) ) \bigr) = g_{*}\, p_{2*}\bigl( p_{2}^{*}(y)\, u\, p_{1}^{*}(x) \bigr) = k\bigl( p_{2}^{*}(y)\, u\, p_{1}^{*}(x) \bigr)
+\]
+\[
+f_{*}\bigl( u^{*}(y)\, x \bigr) = f_{*}\bigl( p_{1*}( u\, p_{2}^{*}(y) )\, x \bigr) = f_{*}\, p_{1*}\bigl( u\, p_{2}^{*}(y)\, p_{1}^{*}(x) \bigr) = k\bigl( u\, p_{2}^{*}(y)\, p_{1}^{*}(x) \bigr)
+\]
+\[
+= k\bigl( p_{2}^{*}(y)\, u\, p_{1}^{*}(x) \bigr) \qquad (\text{mod.\ signe !})
+\]
+
+\page{18}
+
+\emph{Remarque} On n'a jamais, dans les calculs précédents, utilisé la
+structure additive des $A(X)$, seulement leur structure de monoïdes. Donc il y
+a lieu de formuler la théorie des correspondances en prenant \struck{des
+$X \mapsto$} $A(X)$ \struck{qui sont des} [foncteurs dans les] « monoïdes
+bivariants » .... \struck{Il faudrait être \struck{prudent}
+\uncertain{rigoureux} pour les signes, dans le cas de monoïdes non
+commutatifs, en prenant des monoïdes gradués [les \uncertain{diagrammes}
+\ill{}] \ill{} anticommutatifs} Ce point de vue cependant me semble pas très
+commode dans le cas où les 2 formules de projection (gauche et droite) ne sont
+pas valables l'une et l'autre, et qu'il faut introduire des signes. Il
+faudrait plutôt remplacer les monoïdes par des « monoïdes
+\uncertain{jaugés} » $(A^{i})_{i \in \mathbf{Z}}$, loi de composition
+$A^{i} \times A^{j} \to A^{i+j}$ (NB : L'ensemble somme des $A^{i}$
+\struck{est} muni d'une structure de monoïde) et \struck{\ill{}}
+\uncertain{applications} \struck{\ill{}} \uncertain{bijectives}
+$\sigma^{i} \colon A^{i} \to A^{i}$ satisfaisant $\sigma^{i2} = \mathrm{id}$,
+$\sigma^{i} = \mathrm{id}$ si $i$ pair, \struck{pour} \uncertain{enfin chaque}
+$A^{*}$ muni d'un \emph{degré} $d(A^{*})$, qui permet d'imposer le degré des
+$f_{*}$ dans $(f_{*}, f^{*}) \colon A^{*} \to B^{*}$ comme
+$d(B^{*}) - d(A^{*})$. On peut alors imaginer comment les \emph{signes} doivent
+être contrôlés dans les formules de projection et d'échange
+(\ill{} on \uncertain{sait} que \ill{} sont \ill{}).
+
+\note{Le passage biffé est cancellé en bloc : un trait sur « Il faudrait être
+prudent », corrigé en interligne, un encadré autour de la suite et un long trait
+ondulé par-dessus ; on n'en donne que ce qui se lit. Au milieu, « (gauche et
+droite) » est ajouté en interligne.}
+
+\page{20}
+
+Pour tout $X \in \mathcal{V}$, soit $A'(X) \subset A(X)$, [avec
+$1_{A(X)} \in A'(X)$, stables par \uncertain{somme}.] Conditions équiv.
+
+1°) Les $A'(X)$ stables par images inverses, images directes par tout
+morphisme de $\mathcal{V}$, et par produit [ou encore, par produits
+$\boxtimes$].
+
+2°) \struck{Soit} a) $u \in A'(X \times Y)$, $x \in A'(X)$, alors
+$u(x) \in A'(Y)$.
+
+b) Si $x \in A'(X)$, $y \in A'(Y)$, alors $x \boxtimes y \in A'(X \times Y)$
+
+c) Pour tout morphisme $X \to Y$ [il suffit de \ill{}] le graphe
+$\gamma_{f} = \Gamma_{f*}(1) \in A(X \times Y)$ est dans $A'(X \times Y)$.
+
+\note{Sous la ligne de c), deux mots, « \ill{} les », ne se rattachent à rien
+de sûr. « tout » est entouré dans c) et relié au mot « tout » de 1°) et à la
+note marginale.}
+
+\marginal{il faudrait donner un énoncé d'équivalence plus général, où on
+remplace \uncertain{« tout »} par \ill{} $H$ morphismes de $\mathcal{V}$ \ill{}}
+
+\struck{NB Les $A'$ correspondent aux sous-catégories (pleines) de
+$\mathcal{V}^{A}$ ayant mêmes objets que $\mathcal{V}^{A}$}
+
+\emph{NB} Si $\mathcal{V}$ a un objet final, les $A'$ correspondent exactement
+aux sous-catégories de $\mathcal{V}^{A}$ qui ont mêmes objets que
+$\mathcal{V}^{A}$, stables par $\boxtimes$ de flèches, et contenant les
+\struck{\ill{}} morphismes de $\mathcal{V}$ et leurs $s$ \struck{\ill{}}
+${}^{s}\Gamma_{f}$ (il suffit ${}^{s}\delta_{X}$).
+
+\note{Ce second NB est récrit dans un encadré sur le premier ; « mêmes objets
+que » est suivi sur la page d'un $A$ seul.}
+
+\emph{Dém} 1°) $\Rightarrow$ 2°)
+
+1° forme simple [avec $\boxtimes$] implique forme non simple, car
+\[
+x \otimes y = \delta^{*}(x \boxtimes y) \qquad [x, y \in A(X),\ \delta = \mathrm{diag}_{X} \colon X \to X \times X]
+\]
+\marginal{images inverses par $\delta$}
+
+1° forme non simple implique forme simple, car
+\[ x \boxtimes y = p_{1}^{*}(x)\, p_{2}^{*}(y) . \]
+\marginal{images inverses par pr.}
+
+a) car
+\[ u(x) = p_{2*}\bigl( u\, p_{1}^{*}(x) \bigr) . \]
+[\ill{} $=$ pour $u^{*}(y) \in A'(X)$ si $y \in A'(Y)$]
+\marginal{images directes, inverses par pr \uncertain{de 2}}
+
+b) clair
+
+c) clair, car $1_{X} \in A'(X)$ par hyp.
+\marginal{images directes par graphes}
+
+2°) $\Rightarrow$ 1°). Stabilité par images \struck{\ill{}} directes : car
+\[ f_{*}(x) = \gamma_{f}(x) , \]
+\note{Un premier $\gamma_{f}$ est biffé : \struck{$\gamma_{f}$}.}
+on applique a) et c).
+
+\marginal{produits}
+
+Stabilité par images \struck{directes} inverses : car
+$f^{*}(y) = ({}^{t}\gamma_{f})_{*}(y)$, et comme
+$\gamma_{f} \in A'(X \times Y)$, $\Rightarrow$
+${}^{t}\gamma_{f} \in A'(Y \times X)$ (stabilité par isom.),
+
+Stabilité par $\boxtimes$ claire.
+
+\note{Les notes marginales de cette démonstration sont des étiquettes encadrées
+qui disent quelle stabilité sert à quelle étape. La page se termine ici, la
+moitié inférieure blanche ; les sous-foncteurs $A'$ sont repris page 22, dans
+le lot suivant.}
+
+\end{document}
