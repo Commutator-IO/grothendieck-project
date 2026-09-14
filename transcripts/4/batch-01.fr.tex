@@ -1,0 +1,649 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 4, batch 1 (pages 1-11).
+% Established from the facsimile archives/batches/4/batch-01.pdf (a mirror of
+% https://grothendieck.umontpellier.fr/4.pdf), per the skill
+% transcribe-grothendieck. The folder is eleven pages and this is its only
+% batch. All eleven pages carry mathematics and his hand, and all are
+% transcribed; none is skipped.
+%
+% The folder holds two things, as the inventory says. Page 1 is a single leaf
+% of manuscript notes headed « 8.4.4. », in ink: it is the « feuille jointe
+% (marquée 8.4.4) » that his marginal note on page 5 refers to, and the
+% « en vertu de 8.4.4 » he writes on page 4. Pages 2 to 11 are copies of a
+% typescript, §8 of a longer text, « Une estimation (heuristique) du nombre des
+% valeurs propres de frobenius dans la cohomologie évanescente qui sont des
+% unités p-adiques », which he went over in pencil and ink — insertions,
+% renumberings, whole paragraphs boxed and cancelled, and marginal notes.
+% Following folders 48 and 55, the numbered statements, the displayed formulas
+% and all of his interventions are given, and the typed connective prose is
+% given where his hand touches it and otherwise summarised in \note{} rather
+% than recomposed. The typist's own overstrikes (runs of x over a mistyped
+% word) are corrections of the typing and are not recorded; what he struck by
+% hand is.
+%
+% The mathematics. For X smooth projective over a perfect field k of
+% characteristic p, W = W(k), a crystalline cohomology H(X) is assumed with
+% the universal-coefficient sequences (8.1.2) relating H^i(X) ⊗_W k,
+% H^i_DR(X) and Tor_1^W(H^{i+1}(X), k). For a hyperplane or hypersurface
+% section Y, the snake lemma gives (8.1.3), linking the evanescent
+% cohomology E(Y) = Coker(H^{n-1}(X) → H^{n-1}(Y)) to its de Rham analogue.
+% 8.2 (cancelled) dualises the torsion terms by Poincaré duality; 8.3 uses
+% weak Lefschetz (admitted crystallinely) to make E(Y) torsion-free and the
+% relevant maps independent of Y. 8.4 takes semi-simple parts for the
+% p-linear Frobenius (exact functor), reads them as F_p-representations of
+% Gal(k̄/k), and Lemme 8.4.3 shows H^i_DR(X) → H^i(X, O_X) is an isomorphism
+% on semi-simple parts. « Théorème » 8.5 is the exact sequence (8.5.1)
+% 0 → Ker v → (pTors^n(X))_ss → (E(Y) ⊗ k)_ss → E(Y, O_Y)_ss → 0, whence the
+% dimension formula (8.5.5) and inequality (8.5.6): the number of Frobenius
+% eigenvalues on the evanescent cohomology that are p-adic units is bounded
+% below by the semi-simple rank of the coherent evanescent cohomology
+% E(Y, O_Y). The remarks 8.5.7-8.5.11 treat injectivity of v, independence
+% of Y over an open U_d, the local system on U_d, when φ is bijective, and
+% Serre's Mexico example (φ not injective; X × Z gives φ not surjective for
+% n ≥ 4). 8.6 asks whether the monodromy of the local system E(Y, O_Y)_ss is
+% all of Aut(V), which with the « formule de Woodshole » and Čebotarev would
+% control card Y(k') mod p, noting that nothing of the kind is proved even
+% for plane curves. Page 1 records, for i > n and i < n, the nilpotence of F
+% and V and the exact sequences (*) and (**) that page 4 and page 6 draw on,
+% and fixes the notation: subscript ss for F, superscript ss for V.
+%
+% The typescript reads cleanly; the difficulty is the hand. The manuscript leaf
+% (page 1) is a quick draft whose formulas carry. The pencil notes on the
+% typescript are faint and fast, and several are left partly \ill{}: the
+% slanted note at the foot of page 2, the faint note in the right margin of
+% page 6 opening « Katz fait observer », the struck lines on page 8, the long
+% interlinear note on page 11.
+%
+% Notation fixed once here. The structure sheaf, underlined on the typescript,
+% is set \underline{O}; the semi-simple parts are set with an upright ss,
+% subscript for F and superscript for V as page 1 defines them; the p-torsion
+% « pTors » with a left subscript is set {}_{p}\mathrm{Tors}; « lib » (free
+% part) is his.
+%
+% Readings flagged and not settled: the superscripts and the order of the
+% terms in (*) on page 1; « Tor » versus « Tors » in line a) of page 1; the
+% exponents i-n, i-n+1 in his marginal sequence on page 2; the hand label on
+% the arrow w of (8.5.3), read u_{dξ}; « H^n » over a blotted exponent on
+% page 8; the parenthesis « et, … si (pTors^n(X))_ss = 0 » on page 9; the note
+% « Cor. 8.4.4 ter » in the margin of page 5, whose numbering is unsure; the
+% placement of « H^1(Y, O_Y)_ss » on page 10.
+%
+% Pass: Opus 5 (claude-opus-5), 2026-09-14 — first pass, unchecked against the pages by a human.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{4}
+\batch{1}
+\pages{1}{11}
+\dating{[à partir de 1958]}
+\watermark{Édition de démonstration}
+\foldertitle{Torsion en cohomologie cristalline : notes manuscrites (s.d.), copies de tapuscrit annoté (s.d.)}
+
+\begin{document}
+
+\section*{8.4.4}
+
+\note{notes manuscrites, à l'encre, sur un feuillet seul. C'est la « feuille
+jointe (marquée 8.4.4) » à laquelle renvoie sa note marginale de la page 5, et
+le « en vertu de 8.4.4 » de la page 4 ; elle est donnée ici à sa place dans le
+dossier, avant le tapuscrit}
+
+\page{1}
+
+8.4.4. \quad \emph{NB}
+
+a) $F$ opérant sur $H^{i}(X) \otimes_{W} k$ pour $i > n$ est \emph{nilpotent},
+donc aussi opérant sur $\mathrm{Tors}^{i}(X) \otimes_{W} k$ ou sur
+$\mathrm{Tor}^{W}_{1}(H^{i}(X), k) \simeq {}_{p}\mathrm{Tors}^{i}(X)$\note{la
+lecture « Tor » et l'indice $W$ sont incertains : un premier signe est
+repris à la main}. On a
+\[
+H^{n}(X, \underline{O}_{X})_{\mathrm{ss}} \simeq (H^{n}(X) \otimes_{W} k)_{\mathrm{ss}}
+\]
+d'où
+\[
+(*) \qquad 0 \to (\mathrm{Tors}^{n}(X) \otimes k)_{\mathrm{ss}}
+\to H^{n}(X, \underline{O}_{X})_{\mathrm{ss}}
+\to (H^{n}_{\mathrm{lib}}(X) \otimes k)_{\mathrm{ss}} \to 0
+\]
+\note{les exposants et l'ordre des termes de $(*)$ sont lus tels qu'ils se
+présentent, sur une première tentative effacée à gauche ; ils ne sont pas
+assurés}
+
+b) $V$ opérant sur $H^{i}(X) \otimes_{W} k$ pour $i < n$ est nilpotent, et
+aussi opérant sur $\mathrm{Tors}^{i}(X) \otimes_{W} k$ et
+${}_{p}\mathrm{Tors}^{i}(X)$ pour $i \leq n$\note{« $i \leq n$ » est souligné
+deux fois}. On a
+\[
+(**) \qquad 0 \to (H^{n}_{\mathrm{lib}}(X) \otimes k)^{\mathrm{ss}}
+\to H^{0}(X, \Omega^{n}_{X})^{\mathrm{ss}}
+\to {}_{p}\mathrm{Tors}^{n+1}(X)^{\mathrm{ss}} \to 0
+\]
+
+Sans doute $(*)$ et $(**)$ sont transposés l'un de l'autre \ill{}.
+
+\emph{Notation} : l'indice $\mathrm{ss}$ indique qu'on prend la partie
+semi-simple pour $F$, l'exposant $\mathrm{ss}$ \ill{} \add{pour $V$}.
+
+\section*{8. Une estimation (heuristique) du nombre des valeurs propres de
+frobenius dans la cohomologie évanescente qui sont des unités $p$-adiques}
+
+\note{titre tapé en tête de la page 2, souligné à la main d'un bout à l'autre.
+Les pages 2 à 11 sont des copies de ce tapuscrit, qu'il a reprises au crayon et
+à l'encre}
+
+\page{2}
+
+\textbf{8.1.} Soit $X$ un schéma lisse et propre sur le corps parfait $k$
+\add{de car.\ $p > 0$}\note{inséré à la main}, et soit $W$ l'anneau des
+vecteurs de Witt sur $k$. Si on dispose d'une bonne théorie de la cohomologie
+cristalline $H(X)$ (au sens des catégories dérivées), on devra avoir la relation
+suivante avec la cohomologie de De Rham
+\[
+(8.1.1) \qquad H_{\mathrm{DR}}(X) = H(X) \otimes^{L}_{W} k
+\]
+(isomorphisme dans la catégorie dérivée des $k$-modules). On en déduit une
+formule des coéfficients universels : suites exactes
+\[
+(8.1.2) \qquad 0 \to H^{i}(X) \otimes_{W} k \to H^{i}_{\mathrm{DR}}(X)
+\to \mathrm{Tor}^{W}_{1}(H^{i+1}(X), k) \to 0 .
+\]
+Ce sont des suites exactes fonctorielles en $X$, tout comme l'isomorphisme
+(8.1.1). \struck{Sauf erreur,} ceci marche dès maintenant pour $p \neq 2$,
+grâce à Berthelot.\note{le « $L$ » de (8.1.1) est porté à la main au-dessus du
+produit tensoriel}
+
+\marginal{On conclut, grâce à 8.4.3,
+$0 \to (H^{i}(X) \otimes_{W} k)_{\mathrm{ss}} \to
+H^{i}(X, \underline{O}_{X})_{\mathrm{ss}}
+\to ({}_{p}\mathrm{Tors}^{i+1}(X))_{\mathrm{ss}} \to 0$
+(nul si $i > n$) \uncertain{(nul si $i \geq n$)} et
+$0 \to (H^{i}(X) \otimes_{W} k)^{\mathrm{ss}} \to
+H^{i-n}(X, \Omega^{n}_{X})^{\mathrm{ss}}
+\to ({}_{p}\mathrm{Tors}^{i-n+1}(X))^{\mathrm{ss}} \to 0$,
+où l'indice $\mathrm{ss}$ signifie la partie semi-simple pour
+$F_{X} = F_{X}^{*}\sigma$, et où l'exposant $\mathrm{ss}$ \ill{}
+$V_{X} = \sigma^{-1} F_{X*}$}\note{la première suite est écrite en interligne
+après « Berthelot », la suite de la note monte dans la marge gauche, qu'il faut
+tourner. Les exposants $i - n$ et $i - n + 1$ de la seconde suite sont
+incertains ; « (nul si $i > n$) » est écrit sous le terme médian de la
+première, « (nul si $i \geq n$) » au-dessus de son dernier terme}
+
+Si maintenant $Y$ est une section hyperplane de \struck{degré assez élevé de}
+$X$ (supposée maintenant $\subset \mathbf{P}^{r}_{k}$), on trouve une suite
+exacte analogue pour $Y$, et un homomorphisme \add{$u = (u_{0}, u_{1}, u_{2})$}
+de la première dans la seconde. Le diagramme du serpent nous donne alors une
+suite exacte
+\[
+(8.1.3) \qquad \bigl(0 \to \mathrm{Ker}\, u_{0} \to \mathrm{Ker}\, u_{1} \to
+\mathrm{Ker}\, u_{2} \to\bigr)\; E(Y) \otimes_{W} k \to
+\underbrace{E_{\mathrm{DR}}(Y)}_{=\,\mathrm{Coker}\, u_{1}}
+\to \mathrm{Coker}\, u_{2} \to 0 ,
+\]
+où on a posé
+\[
+E(Y) = \mathrm{Coker}\bigl(H^{n-1}(X) \xrightarrow{u_{0}} H^{n-1}(Y)\bigr),
+\qquad
+E_{\mathrm{DR}}(Y) = \mathrm{Coker}\bigl(H^{n-1}_{\mathrm{DR}}(X)
+\xrightarrow{u_{1}} H^{n-1}_{\mathrm{DR}}(Y)\bigr),
+\]
+$X$ étant supposée connexe de dimension $n$, enfin $u_{2}$ désigne
+l'application
+\[
+(8.1.4) \qquad u_{2} : \mathrm{Tor}^{W}_{1}(H^{n}(X), k) \to
+\mathrm{Tor}^{W}_{1}(H^{n}(Y), k).
+\]
+\note{le triplet $u = (u_{0}, u_{1}, u_{2})$, les trois premiers termes de
+(8.1.3) mis entre parenthèses, « $= \mathrm{Coker}\, u_{1}$ » et les étiquettes
+des flèches sont de sa main}
+
+\textbf{8.2.} Noter que $\mathrm{Tor}^{W}_{1}(-, k)$ est isomorphe à
+$\mathrm{Hom}_{W}(k, -)$ (éléments de $-$ annulés par $pW$), et que
+$\mathrm{Tors}^{n}(Y)$ (= sous-module de torsion de $H^{n}(Y)$) est dual (si on
+admet la dualité de Poincaré habituelle pour la cohomologie cristalline, y
+compris les formules pour la torsion) de $\mathrm{Tors}^{n-1}(Y)$, et\note{le
+numéro 8.2 est porté à la main ; tout le paragraphe, jusqu'à la fin de son
+premier alinéa en haut de la page 3, est barré de longues diagonales ; il est
+donné en clair, la rature étant notée ici une fois}
+
+\marginal{il est \uncertain{malcommode} d'utiliser ici la dualité de
+Poincaré}\note{note écrite de biais dans l'angle inférieur gauche, en regard
+du paragraphe 8.2 barré}
+
+\page{3}
+
+par suite le deuxième membre de (8.1.4) est canoniquement dual à
+$\mathrm{Tors}^{n-1}(Y) \otimes_{W} k$. De même le premier membre est
+canoniquement dual de $\mathrm{Tors}^{n+1}(X) \otimes_{W} k$, et enfin
+l'homomorphisme $u_{2}$ est transposé de l'homomorphisme
+\[
+(8.2.1) \qquad u'_{2} : \mathrm{Tors}^{n-1}(Y) \otimes_{W} k \to
+\mathrm{Tors}^{n+1}(X) \otimes_{W} k
+\]
+induit par l'homomorphisme de Gysin $H^{n-1}(Y) \to H^{n+1}(X)$. Par suite,
+les termes $\mathrm{Ker}\, u_{2}$ et $\mathrm{Coker}\, u_{2}$ dans (8.1.3)
+peuvent s'interpréter respectivement comme les duals de $\mathrm{Coker}\,
+u'_{2}$ et $\mathrm{Ker}\, u'_{2}$.
+
+\textbf{8.3.} Considérons l'homomorphisme induit par l'inclusion \add{$Y \to
+X$},\quad $u_{0} : H^{n-1}(X) \to H^{n-1}(Y)$. \struck{Sauf erreur,} dans la
+situation analogue \struck{sur le corps des complexes,} \add{en cohomologie
+$\ell$-adique ($\ell \neq p$)}, \struck{les assertions} \add{le théorème} de
+Lefschetz \struck{dans son livre « L'Analysis Situs \ldots{} »} \add{faible (pour
+les coefficients $\mathbf{Z}/\ell^{n}\mathbf{Z}$)} impliquent que le conoyau
+$E(Y)$ est sans torsion, \struck{ce} qui implique en particulier que $u_{0}$
+induit un isomorphisme
+\[
+(8.3.1) \qquad \mathrm{Tors}^{n-1}(X) \simeq \mathrm{Tors}^{n-1}(Y).
+\]
+\note{les corrections de ce passage sont à la main ; la parenthèse sur les
+coefficients est d'une lecture incertaine, et le « impliquent » tapé n'a pas été accordé}
+
+Nous admettrons que ces relations restent valables dans le cas de la
+cohomologie cristalline. Alors l'homomorphisme (8.2.1) s'interprète comme
+l'homomorphisme
+\[
+(8.3.2) \qquad u''_{2} : \mathrm{Tors}^{n-1}(X) \otimes_{W} k \to
+\mathrm{Tors}^{n+1}(X) \otimes_{W} k
+\]
+induit par l'homomorphisme $H^{n-1}(X) \to H^{n+1}(X)$, cup-produit par la
+classe de polarisation de $X \subset \mathbf{P}^{r}_{k}$. La chose importante
+pour nous est que ce morphisme (donc son Ker) ne dépend plus du choix de $Y$,
+donc \struck{aussi du} \add{\ill{}} \add{le} dernier terme de (8.1.3) (qui est le
+dual de ce Ker) ne dépend plus de $Y$.\note{au-dessus de « aussi du », biffé,
+une insertion à la main elle-même en partie biffée, qui ne se lit pas}
+
+\note{la suite de 8.3, tapée sans reprise, observe que $E(Y)$ étant sans
+torsion, il a même rang que $E(Y) \otimes_{W} k$, de sorte que les valeurs
+propres d'un endomorphisme de $E(Y)$ --- un frobenius --- se réduisent mod $p$
+en celles de l'endomorphisme induit ; et, « petit luxe supplémentaire », que le
+premier terme de (8.1.3) est nul}
+
+\page{4}
+
+\[
+(8.3.3) \qquad \mathrm{Ker}\, u_{0} = 0 .
+\]
+
+\textbf{8.4.} \note{le tapuscrit introduit les applications semi-linéaires
+Frob opérant fonctoriellement sur les termes de (8.1.3), vectoriels de
+dimension finie sur $k$ à endomorphisme $p$-linéaire, et pour un tel $V$ la
+partie « semi-simple » $V_{\mathrm{ss}}$, plus grand sous-espace stable sur
+lequel $F_{V}$ est surjectif ($k$ parfait) ; il revient au même de dire que $F$
+est surjectif sur ce sous-espace et \emph{nilpotent} sur le quotient --- ce mot
+souligné à la main. La formation de $V_{\mathrm{ss}}$ est un foncteur exact en
+$V$} Ainsi, la suite exacte (8.1.3) nous donne, compte tenu de (8.3.3), la suite
+exacte d'espaces vectoriels à opérateurs $p$-linéaires semi-simples :
+\[
+(8.4.1) \qquad 0 \to (\mathrm{Ker}\, u_{1})_{\mathrm{ss}} \to
+(\mathrm{Ker}\, u_{2})_{\mathrm{ss}} \to (E(Y) \otimes_{W} k)_{\mathrm{ss}}
+\to E_{\mathrm{DR}}(Y)_{\mathrm{ss}} \to (\mathrm{Coker}\, u_{2})_{\mathrm{ss}}
+\to 0 .
+\]
+\marginal{$(\mathrm{Ker}\, u_{2})_{\mathrm{ss}} =
+({}_{p}\mathrm{Tors}^{n}(X))_{\mathrm{ss}}$ ; \quad
+$(\mathrm{Coker}\, u_{2})_{\mathrm{ss}} = 0$ (en vertu de 8.4.4)}\note{la
+première égalité est écrite au-dessus du terme, avec une flèche ; la seconde
+est encerclée dans la marge droite, le « $0$ » relié au terme par un signe
+d'égalité vertical}
+
+\textbf{8.4.2.}\note{numéro porté à la main} D'après la théorie de structure des
+vectoriels à opération $p$-linéaire semi-simple, ceux-ci peuvent s'interpréter
+aussi comme des Modules libres de type fini sur le faisceau d'anneaux étale
+constant $\underline{\mathbf{F}}_{p}$ (corps premier à $p$ éléments), ou encore
+(une fois choisie une clôture séparable) comme des représentations de
+$G = \mathrm{Gal}(\overline{k}/k)$ sur des vectoriels de dimension finie sur
+$\mathbf{F}_{p}$. \note{le tapuscrit ajoute qu'il y a dans cette catégorie une
+autodualité, qui s'interprète indifféremment dans l'un ou l'autre langage}
+
+\page{5}
+
+\note{alors les termes $(\mathrm{Coker}\, u_{2})_{\mathrm{ss}}$ et
+$(\mathrm{Ker}\, u_{2})_{\mathrm{ss}}$ s'interprètent comme les duals de
+$(\mathrm{Ker}\, u''_{2})_{\mathrm{ss}}$ et de $(\mathrm{Coker}\,
+u''_{2})_{\mathrm{ss}}$, et $(\mathrm{Coker}\, u_{1})_{\mathrm{ss}}$,
+$(\mathrm{Ker}\, u_{1})_{\mathrm{ss}}$ ont aussi une interprétation simple,
+grâce au lemme qui suit}
+
+\textbf{Lemme 8.4.3.} Soit $X$ un schéma propre sur un corps $k$, de car.\
+$p > 0$. Alors pour tout $i \in \mathbf{Z}$, l'homomorphisme d'augmentation
+\[
+H^{i}_{\mathrm{DR}}(X) \to H^{i}(X, \underline{O}_{X})
+\]
+induit un isomorphisme sur les parties semi-simples (pour l'opération
+$p$-linéaire de Frobenius).\note{le numéro tapé « 8.4.2 » est corrigé en
+« 8.4.3 »}
+
+Ceci résulte aussitôt de la suite spectrale de Hodge
+\[
+E_{1}^{a,b} = H^{b}(X, \underline{\Omega}^{a}_{X/k}) \Longrightarrow
+H^{\bullet}_{\mathrm{DR}}(X),
+\]
+compte tenu que Frob opère $p$-linéairement sur cette suite spectrale et qu'il
+est nul sur $E_{1}^{a,b}$ pour $a \neq 0$. Alors les
+$(E_{1}^{0,b})_{\mathrm{ss}} = H^{b}(X, \underline{O}_{X})_{\mathrm{ss}}$ sont
+des cycles universels pour les $d_{r}$, et on gagne \ldots{}
+
+\marginal{Cor.\ 8.4.4 \uncertain{ter} (utilisé dans 8.1.\ill{}) les résultats
+de la feuille jointe (marquée 8.4.4).}\note{écrit en montant dans la marge
+gauche, en regard d'une grande accolade qui embrasse le lemme et sa
+démonstration. La feuille jointe est la page 1}
+
+Mettant ensemble les renseignements obtenus, \struck{et en même temps, pour des
+raisons de commodité, transformant par dualité de Poincaré l'homomorphisme
+$u''_{2}$ de (8.3.2), de sorte qu'on trouve (oubli dans 8.3 !)
+(8.4.2) $u_{2}$ est can.\ isomorphe à} on trouve :\note{le passage biffé est
+encadré et barré de traits obliques}
+
+\textbf{« Théorème » 8.5.} En admettant les ingrédients précédents pour la
+cohomologie cristalline (formule des coefficients universels, dualité de
+Poincaré, théorème de Lefschetz \struck{« faible », y compris pour les groupes
+de torsion} \add{sans négliger la torsion}), on obtient une suite exacte,
+relative à une variété lisse projective connexe $X \subset \mathbf{P}^{r}_{k}$
+de dimension $n$ sur un corps parfait de car.\ $p > 0$, et une section
+hyperplane (ou par une hypersurface \add{de degré $d \geq 1$}, cela s'y
+ramène \ldots{}) $Y$ lisse de dimension $n - 1$ :\note{« sans négliger la torsion »
+et « de degré $d \geq 1$ » sont à la main ; au pied de la page, une première
+frappe de la suite (8.5.1) est barrée et griffonnée}
+
+\page{6}
+
+\[
+(8.5.1) \qquad 0 \to \mathrm{Ker}\, v \xrightarrow{w}
+({}_{p}\mathrm{Tors}^{n}(X))_{\mathrm{ss}} \to
+(E(Y) \otimes_{W} k)_{\mathrm{ss}} \xrightarrow{\varphi}
+\underbrace{E(Y, \underline{O}_{Y})_{\mathrm{ss}}}_{\simeq\, \mathrm{Coker}\, v}
+\to 0 ,
+\]
+\note{la suite est entièrement reprise à la main : le second terme tapé est
+noirci et remplacé par $({}_{p}\mathrm{Tors}^{n}(X))_{\mathrm{ss}}$ encadré, les
+étiquettes $w$ et $\varphi$ sont ajoutées, et la fin de la ligne tapée, après
+$E(Y, \underline{O}_{Y})_{\mathrm{ss}}$, est noircie jusqu'au $0$}
+
+où on désigne par $v$ l'homomorphisme de restriction
+\[
+(8.5.2) \qquad v : H^{n-1}(X, \underline{O}_{X})_{\mathrm{ss}} \to
+H^{n-1}(Y, \underline{O}_{Y})_{\mathrm{ss}} ,
+\]
+(en particulier $\mathrm{Coker}\, v$ est la « cohomologie évanescente
+cohérente » $E(Y, \underline{O}_{Y})$), et par $w$ l'homomorphisme
+\[
+(8.5.3) \qquad w : (\mathrm{Tors}^{n-1}(X) \otimes_{W} k)_{\mathrm{ss}}
+\xrightarrow{u_{d\xi}} (\mathrm{Tors}^{n+1}(X) \otimes_{W} k)_{\mathrm{ss}}
+\]
+induit par l'homomorphisme $H^{n-1}(X) \to H^{n+1}(X)$, défini par le cup-produit
+avec la classe de polarisation \add{$d\xi$} sur $X$.\note{le passage de « et par
+$w$ » à « polarisation » est encadré et barré de traits obliques, et donné en
+clair ;
+l'étiquette $u_{d\xi}$ de la flèche est d'une lecture incertaine}
+
+\marginal{Katz fait \uncertain{observer} \ill{} \ill{} \ill{} \ill{} \ill{}
+sur la}\note{note au crayon très pâle dans la marge droite, en regard de
+(8.5.3). Dans la marge gauche, un griffonnage appuyé et encerclé ne se lit pas}
+
+Enfin, pour utiliser cette suite exacte (8.5.1), on tiendra compte du fait que
+\[
+(8.5.4) \qquad E(Y) \overset{\mathrm{dfn}}{=}
+\mathrm{Coker}\bigl(H^{n-1}(X) \to H^{n-1}(Y)\bigr)
+\]
+est un $W$-module libre \emph{sans torsion} ; en particulier, si $k$ est un
+corps fini, le rang de $(E(Y) \otimes_{W} k)_{\mathrm{ss}}$ est égal au nombre
+des valeurs propres de Frobenius géométrique relatif à $k$ opérant sur $E^{n-1}(Y)$\note{le $E$ est frappé sur un $H$}
+(la cohomologie cristalline évanescente de $Y$ ; ou ce qui revient au même, la
+cohomologie $\ell$-adique pour n'importe quel $\ell \neq p$ --- sous réserve
+de l'algébricité de l'opération $\Lambda$ sur les cohomologies cristallines et
+$\ell$-adiques) \emph{qui sont des unités $p$-adiques} ; les valeurs propres en
+question, réduites mod $p$, sont égales aux valeurs propres du frobenius
+$p$-linéaire (relatif au corps de base fini $k$) opérant sur le terme
+$E(Y) \otimes_{W} k$ de (8.5.1), ou si on préfère, en termes de
+l'interprétation 8.4.2, aux valeurs propres de l'inverse du générateur de
+frobenius de $G = \mathrm{Gal}(\overline{k}/k)$ opérant sur le vectoriel de
+dimension finie sur $\mathbf{F}_{p}$ correspondant.
+
+Notons d'autre part l'égalité suivante déduite de (8.5.1) :
+\[
+(8.5.5) \qquad \dim (E(Y) \otimes_{W} k)_{\mathrm{ss}} =
+\dim E(Y, \underline{O}_{Y})_{\mathrm{ss}} +
+\bigl(\dim ({}_{p}\mathrm{Tors}^{n}(X))_{\mathrm{ss}}
+- \dim \mathrm{Ker}\, v\bigr) ,
+\]
+où le terme entre parenthèses du deuxième membre est $\geq 0$, de sorte
+qu'on\note{après $E(Y, \underline{O}_{Y})_{\mathrm{ss}}$, un terme tapé est
+noirci ; « $\mathrm{Coker}\, w$ » est biffé et remplacé à la main}
+
+\page{7}
+
+a aussi l'inégalité suivante (résultant déjà de la suite exacte des trois
+derniers termes de (8.5.1)) :
+\[
+(8.5.6) \qquad \dim (E(Y) \otimes_{W} k)_{\mathrm{ss}} \geq
+\dim E(Y, \underline{O}_{Y})_{\mathrm{ss}}
+\]
+$= \dim E(Y, \underline{O}_{Y})_{\mathrm{ss}} - t^{n-1}(X, p)$, où
+$t^{i}(X, p)$ désigne le nombre de $p$-coéfficients de torsion de $X$ (défini
+via la cohomologie cristalline de $X$ en dimension $i$).\note{le terme tapé
+« $- \dim \mathrm{Ker}\, w$ » est noirci, et les deux lignes suivantes, de « $=$ » à « dimension
+$i$ », sont encadrées et barrées ; le « $p$- » de « $p$-coéfficients » avait été ajouté à
+la main avant la rature}
+
+\textbf{Remarques 8.5.7.} Je pense que l'homomorphisme $v$ de (8.5.2) est
+injectif (ce qui simplifie en conséquence (8.5.1) et (8.5.5), puisque on
+aurait $\mathrm{Ker}\, v = 0$) ; c'est vrai en tous cas si \add{$n = 2$, ou si}
+$Y$ est une section par une hypersurface de degré $d$ assez grand pour qu'on
+ait
+\[
+H^{n-1}(X, \underline{O}_{X}(-d)) = 0 .
+\]
+
+D'autre part, on peut si on veut dans 8.5.5 bloquer ensemble les deux
+termes $\dim \mathrm{Coker}\, w - \dim \mathrm{Ker}\, w$, pour trouver la
+différence des rangs des deux membres de (8.5.3).\note{alinéa encadré et barré
+de boucles, donné en clair}
+
+\textbf{8.5.8.} Lorsque l'on applique (8.5.5) en prenant pour $Y$ une section
+de $X$ avec une hypersurface de degré $d$ « assez générale » (de telle façon
+que le rang semi-simple de $E(Y, \underline{O}_{Y})$ ait la valeur maxima),
+alors on trouve qu'au terme $- \dim \mathrm{Ker}\, v$ près (sans doute toujours
+nul, cf.\ 8.5.7) le deuxième membre est \emph{indépendant du choix particulier
+de $Y$}. Cette remarque s'applique en particulier (8.5.7) si $d$ est assez
+grand. On en conclut que si $k$ est fini, on peut trouver un ouvert $U_{d}$ de
+l'espace projectif des hypersurfaces de degré $d$, tel que pour un point
+variable de $U_{d}$ à coéfficients dans une extension finie $k'$ de $k$, le
+nombre de valeurs propres de Frobenius opérant sur la cohomologie évanescente de
+$Y_{\overline{k}}$ et qui sont des unités $p$-adiques soit constant. Nous
+désirons mon-
+
+\page{8}
+
+trer que pour $d$ assez grand, ce nombre est non nul (ce qui impliquera alors
+--- et est sans doute équivalent --- que le motif $E(Y)$ pour tous ces $Y$ est
+de \emph{niveau} maximum $n - 1$, ou encore que le motif $E(Y)$ pour $Y$
+générique est de niveau $n - 1$). Sous la forme de (8.5.6), on voit que ceci
+est assuré dès que l'on sait que
+\[
+\dim E(Y, \underline{O}_{Y})_{\mathrm{ss}} > 0 \qquad \text{pour} \quad
+d \to +\infty ,
+\]
+où le dim est pris bien entendu avec sa valeur générique.\note{le « $> 0$ »
+est à la main, sur un terme tapé noirci}
+On sait seulement (cf.\ n° 7) que $\dim E(Y,
+\underline{O}_{Y})_{\mathrm{ss}} \to$ \ill{} pour $d$ grand, et que
+$\varphi \neq 0$ pour $d$ grand (donc $E(Y)$ de niveau $n - 1$) dès que l'on
+sait que $\dim ({}_{p}\mathrm{Tors}^{n+1}(X) \otimes k)_{\mathrm{ss}} <$
+\uncertain{$p$} \ill{}\note{deux lignes et demie à la main, serrées sous la
+ligne tapée et biffées, données en clair ; la lecture en est incertaine d'un bout à l'autre}
+
+\marginal{or cela est établi au n° 7}\note{dans la marge gauche, écrit de biais,
+avec une flèche vers la phrase biffée}
+
+\textbf{8.5.9.} Le corps de base $k$ étant à nouveau quelconque (même pas
+nécessairement parfait), désignons, pour un degré $d$ donné, par $U_{d}$
+l'ouvert de l'espace projectif des hypersurfaces de degré $d$ dans
+$\mathbf{P}^{r}_{k}$, formé des hypersurfaces dont l'intersection avec $X$ est
+lisse de dimension $n - 1$, et telles que $E(Y, \underline{O}_{Y})_{\mathrm{ss}}$
+soit de rang maximum. Alors les suites exactes (8.5.1), pour les $Y$ provenant
+de points de $U_{d}$, proviennent d'une suite exacte de Modules localement
+libres sur $U_{d}$ à opération $p$-linéaire semi-simple, ou de façon
+équivalente (cf 8.4.2) à une suite exacte de systèmes locaux de vectoriels sur
+$\mathbf{F}_{p}$ sur $U_{d}$ pour la topologie étale, ou enfin, une fois choisi
+un point géométrique de $U_{d}$ (par exemple via une clôture séparable du point
+générique) une suite exacte de représentations de $G = \pi_{1}(U_{d})$ dans des
+vectoriels de dimension finie sur $\mathbf{F}_{p}$. On trouve un homomorphisme
+\add{$\varphi$} du système local défini par les $E(Y) \otimes_{W} k'$
+\struck{dans} \add{sur} celui défini par les $E(Y, \underline{O}_{Y})$, dont le
+noyau \struck{et le conoyau sont des} \add{est un} système local
+\emph{constant} (i.e.\ provenant du corps de base $k$). Lorsque $k$ est fini, on
+peut supposer, quitte à passer à une extension finie de $k$, que les valeurs
+propres du frobenius relatif à $k$ opérant sur ce dernier sont toutes égales à
+$1$ (il suffit que les valeurs propres de frobenius relatif à $k$ opérant sur
+$H^{n}(X, \underline{O}_{X})_{\mathrm{ss}}$ \struck{et sur les deux membres de
+(8.5.3)} soient\note{l'exposant de $H^{n}$ est repris à la main sur un premier
+chiffre noirci ; \uncertain{$n$}}
+
+\page{9}
+
+toutes égales à $1$). On trouve alors une description complète de la variation
+des valeurs propres mod $p$ de frobenius opérant sur $E(Y)$, pour $Y$ variable
+avec un point de $U_{d}$, en termes essentiellement de la seule représentation
+de $G$ dans un vectoriel de dimension finie sur $\mathbf{F}_{p}$, correspondant
+aux $E(Y, \underline{O}_{Y})_{\mathrm{ss}}$ (donc essentiellement aux « matrices
+de Hasse-Witt des $Y$ en dimension critique), --- et bien entendu de la
+distribution des éléments de frobenius dans $G$ en termes d'un point variable de
+$U_{d}$.
+
+\textbf{8.5.10.} L'homomorphisme fondamental $\varphi$ de (8.5.1) est
+\struck{surjectif (resp.} injectif \add{donc bijectif} (si et seulement si $w$
+dans 8.5.1 est \struck{injectif (resp.\ si $w$ est} surjectif, \add{et, \ill{}
+si $({}_{p}\mathrm{Tors}^{n}(X))_{\mathrm{ss}} = 0$,} le seulement si étant vrai
+sous la réserve $\mathrm{Ker}\, v = 0$ de 8.5.7) ; il suffit en particulier pour
+ceci que $X$ n'ait pas de $p$-torsion en dimension $n$ \struck{(resp.\ en
+dimension $n + 1$} (ou ce qui revient au même par dualité, en dimension
+\uncertain{$n + 1$})\note{les « resp. » sont biffés à la main tout au long de
+l'alinéa, ramenant l'énoncé au seul cas injectif ; l'insertion « et, \ldots{} si
+$({}_{p}\mathrm{Tors}^{n}(X))_{\mathrm{ss}} = 0$ » est écrite en interligne, et
+l'exposant de la dernière parenthèse est repris sur un chiffre noirci}.
+Lorsque $X$ se relève (avec sa polarisation) en caractéristique nulle, cette
+condition suffisante doit aussi pouvoir s'exprimer (une fois qu'on disposera de
+fondements satisfaisants pour la cohomologie cristalline) par la condition
+analogue sur \add{la torsion de} la cohomologie $p$-\emph{adique} de la variété
+relevée (sur un corps algébriquement clos, ou si on veut, sur le corps des
+complexes \ldots{}) : on réécrit (8.5.3) en termes de $p$-torsion de cette
+variété tensorisée par $\mathbf{Z}/p\mathbf{Z}$ (mais en supprimant les indices
+ss, qui n'ont plus de sens), et on demande que $w_{p}$ ainsi défini soit
+surjectif resp.\ injectif \ldots{}\note{les accords au singulier
+(« cette condition suffisante doit », « la condition analogue ») sont faits à
+la main}
+
+Je pense que même si $n = \dim X = 2$, il peut arriver que $\varphi$ ne
+soit pas surjectif, et qu'on ne peut pas dans l'inégalité (8.5.6) supprimer le
+terme correctif $- \dim \mathrm{Ker}\, w$ ou $t^{n-1}(X, p)$. En effet, si $X$
+est une\note{de « on réécrit » au bas de la page, et le haut de la page 10
+jusqu'à la condition c), tout est barré de grands zigzags ; le passage est
+donné en clair}
+
+\page{10}
+
+Noter d'autre part qu'on a équivalence entre les conditions suivantes :
+\begin{enumerate}
+\item[a)] L'homomorphisme $\varphi$ est surjectif (resp.\ injectif) pour tout
+$d$ et tout point $s \in U_{d}$ (définissant un $Y$ correspondant).
+\item[b)] Même condition, mais avec \emph{un} $d$ fixé multiple de $p$, et tel
+que l'on ait $\mathrm{Ker}\, v = 0$ (condition sans doute automatiquement
+vérifiée (8.5.7)).
+\item[c)] $(\mathrm{Tors}^{n-1}(X) \otimes_{W} k)_{\mathrm{ss}} = 0$ (resp.\
+$(\mathrm{Tors}^{n+1}(X) \otimes_{W} k)_{\mathrm{ss}} = 0$).
+\end{enumerate}
+
+\textbf{8.5.11.}\note{numéro porté à la main} \struck{Il} serait intéressant de
+donner des exemples où \struck{ces conditions ne sont pas satisfaites. Notez
+que la condition non respée est toujours satisfaite si $n = 2$ ($X$ une
+surface) ? Dans le cas général,} \add{$\varphi$ n'est pas bijectif} on a
+l'inégalité
+\[
+\begin{aligned}
+(8.5.11.1) \qquad \dim_{k} H^{n-1}(X, \underline{O})_{\mathrm{ss}} &=
+\dim_{\mathbf{F}_{p}} H^{n-1}(\overline{X}, \mathbf{Z}/p\mathbf{Z}) \\
+&\geq
+\dim\bigl((H^{n-1}(X)/\mathrm{Tors}^{n-1}(X)) \otimes k\bigr)_{\mathrm{ss}}
+\end{aligned}
+\]
+(grâce à 8.1.2 et 8.4.3 ; en fait cela marche en toute dimension $i$, pas
+seulement $i = n - 1$), et dire que $\varphi$ est bijectif signifie que
+l'inégalité précédente est une égalité. L'exemple de Serre au symposium de
+Mexico fournit un $X$ (quotient d'une intersection complète par un groupe
+$G = \mathbf{Z}/p\mathbf{Z}$ opérant sans points fixes) pour lequel on a
+$H^{1}(X) = 0$, mais $H^{1}(X, \mathbf{Z}/p\mathbf{Z}) \neq \mathbf{Z}/{}$\add{$p\mathbf{Z}$}\note{le bord du feuillet coupe la fin de la
+formule}. Quitte à couper avec des hyperplans, on trouve le même exemple avec
+$\dim X = 2$. Pour cet exemple, d'après 8.1.2, on aura
+\[
+({}_{p}\mathrm{Tors}^{2}(X))_{\mathrm{ss}} \simeq
+H^{1}(X, \mathbf{Z}/p\mathbf{Z}) \otimes k = \mathrm{Ker}\, \varphi
+\]
+(quel que soit $d$ et la section $Y$ de $X$ de degré $d$, permettant de définir
+$\varphi$), qui est non nul, donc $\varphi$ n'est pas injectif.\note{l'indice
+$p$ de ${}_{p}\mathrm{Tors}$, l'exposant $2$ repris sur un autre chiffre et
+« $\mathrm{Ker}\, \varphi$ » sont à la main ; au-dessus, il écrit
+« $H^{1}(Y, \underline{O}_{Y})_{\mathrm{ss}}$ » avec un signe d'égalité
+vertical dont le terme d'attache n'est pas assuré}
+
+Si maintenant $Z$ est un schéma lisse projectif sur $k$ de dimension
+$n - 2$ ($n$ donné $\geq 4$), à cohomologie cristalline sans torsion et
+$(H^{n-4}(Z) \otimes k)_{\mathrm{ss}} \neq 0$ (par exemple
+$\mathbf{P}^{n-2}_{k}$ si $n$ pair \ldots{}), alors, posant $X' = X \times Z$, on
+voit (sous réserve de la \emph{formule de Kunneth} en cohomologie cristalline)
+que $(\mathrm{Tors}^{n-1}(X') \otimes k)_{\mathrm{ss}}$ est non nul, ce qui
+fournit des exemples où $\varphi$ n'est pas surjectif, pour tout $n \geq 4$. Il
+y a sans doute aussi des exemples avec $n = 3$, en cherchant bien \ldots{}\note{le
+paragraphe est encadré et barré de diagonales, et donné en clair ; le « $4$ » y est repris à la
+main sur un « $3$ »}
+
+\page{11}
+
+\textbf{8.6.} La suite exacte (8.5.9) de systèmes locaux sur $U_{d}$
+correspondant aux suites exactes (8.5.1) met en évidence que le système local
+correspondant aux $(E(Y) \otimes_{W} k)_{\mathrm{ss}}$ \struck{et aux
+$E(Y, \underline{O}_{Y})_{\mathrm{ss}}$ ont} \add{a}, en plus d'un sous-système
+\struck{resp.\ d'un système quotient} \add{du premier} de nature essentiellement
+triviale (car provenant du corps de base, donc constant du point de vue
+géométrique) \uncertain{un} composa\add{nt} \struck{commun $\mathrm{Coim}\,
+\varphi = \mathrm{Im}\, \varphi$} \add{$E(Y, \underline{O}_{Y})_{\mathrm{ss}}$},
+dont on s'attend qu'il donne lieu à une représentation tout à fait non triviale
+de $G$ (NB si on n'aime pas les groupes fondamentaux généraux et les systèmes
+locaux, on peut tout interpréter en termes de la suite exacte 8.5.1
+correspondant au \emph{point générique} $s$ de l'espace des hypersurfaces de
+degré $d$ dans $\mathbf{P}^{r}_{k}$, et remplacer $G$ par le groupe
+$\mathrm{Gal}(\overline{k(s)}/k(s))$, --- mais on perd alors les frobenius
+\ldots{}). On aimerait pouvoir préciser ce point. Par exemple, \add{(si $n \geq 2$,
+cette représentation est-elle \emph{irréductible}, ou même} l'image du groupe
+fondamental \add{$G$} dans $\mathrm{Aut}(V)$ ($V$ étant le vectoriel de
+dimension finie sur $\mathbf{F}_{p}$ où s'effectue la représentation envisagée
+de $G$) est-elle égale à $\mathrm{Aut}(V)$ tout entier ?\add{)}
+\struck{Si oui,} alors dès que \add{l'on a} $\dim V \geq 2$ (ce qui est sans
+doute vérifié dès que $d$ est assez grand, $\dim V$ tendant vers $\infty$ avec
+$d$, cf.\ 8.5.8), tout élément de $\mathbf{F}_{p}$ est trace d'un élément de
+$G$ opérant sur $V$.\note{les insertions sont au crayon ; « irréductible » est
+souligné}
+
+\marginal{(Ce n'est pas \struck{\ill{}} \ill{} lorsque
+$X = \mathbf{P}^{r-1}_{k}$, cas qu'on peut traiter trivialement.) Lorsque la
+condition \ill{}}\note{longue note au crayon en interligne au-dessus de
+« entier ? », qui déborde vers la droite ; en dessous, une reprise en plus petit
+ne se lit pas}
+
+De ceci, de la « formule de Woodshole » \struck{\ill{}} et du théorème de
+Čebotareff, on déduirait alors, si le corps $k$ est fini, qu'on peut, pour
+n'importe quel ouvert non vide $U$ de l'espace des hypersurfaces de degré $d$
+dans $\mathbf{P}^{r}_{k}$ ($d$ étant choisi comme dessus) trouver un point $s$
+de $U$ à coéfficients dans une extension finie $k'$ de $k$, définissant une
+section $Y$ telle que $\mathrm{card}\, Y(k')$ soit congru mod $p$ à un élément
+de $\mathbf{F}_{p}$ donné à l'avance. Au moment d'écrire ces lignes, et malgré
+l'assistance de gens compétents comme Katz, il ne semble pas qu'un résultat de
+cette nature soit prouvé, même si $X = \mathbf{P}^{2}$ \add{(}i.e.\ pour des courbes planes \add{$Y$} de grand degré\add{)}.
+Ce résultat serait déjà bien intéressant, car il impliquerait déjà une
+réponse affirmative à la conjecture du n° 6 sur le niveau de la cohomologie
+évanescente (dont il est question aussi dans 8.5.8).\note{« de la formule de
+Woodshole » est tapé en interligne, suivi de mots biffés à la main. Au-dessus de
+$X = \mathbf{P}^{2}$ il écrit ce qui semble être « $2 = r$ », et les deux dernières
+lignes et demie, « Ce résultat \ldots{} 8.5.8) », sont encadrées et barrées de
+diagonales}
+
+\end{document}
