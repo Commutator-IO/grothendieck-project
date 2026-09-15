@@ -112,7 +112,14 @@ export type Edition = 'fr' | 'modern';
  * distinction is worth a separate type: nothing that reasons about the manifest
  * should ever be handed `community` and try to look it up.
  */
-export type PaneView = Edition | 'community';
+export type PaneView = Edition | 'community' | 'tei';
+
+/*
+ * `tei` is the transcription rendered from its TEI export rather than from the
+ * `.tex` (COM-73 / #21). It has no tab: it is reachable only through the
+ * fragment `#<cote>/<batch>/tei`, while the two renderings are checked against
+ * each other (`npm run check-tei`) and before the Transcription tab switches.
+ */
 
 /**
  * One document of a scholarly edition, and the folder it transcribes.

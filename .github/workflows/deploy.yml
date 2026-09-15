@@ -56,6 +56,11 @@ jobs:
       - name: Export TEI
         run: npm run tei
 
+      # The TEI button opens a reading view rendered from that XML, not the
+      # raw file. It fails the deploy rather than ship a button that 404s.
+      - name: Render TEI reading views
+        run: npm run tei-view
+
       # The download PDFs are *built*, not stored.
       #
       # They are derived from transcripts/*.tex, so committing them would put

@@ -68,7 +68,7 @@ export function useReader(cotes: Cote[]) {
 
   useEffect(() => {
     const readHash = () => {
-      const h = /^#([\w-]+)\/(\d+)(?:\/(fr|modern|community))?$/.exec(location.hash);
+      const h = /^#([\w-]+)\/(\d+)(?:\/(fr|modern|community|tei))?$/.exec(location.hash);
       setOpen(h ? { cote: h[1], batch: Number(h[2]) } : null);
       // Only when the fragment says so: leaving it alone otherwise is what
       // keeps the toggle where the reader put it as they move between batches.
@@ -108,7 +108,7 @@ export function useReader(cotes: Cote[]) {
    */
   useEffect(() => {
     if (!open) return;
-    if (/^#[\w-]+\/\d+\/(fr|modern|community)$/.test(location.hash)) return;
+    if (/^#[\w-]+\/\d+\/(fr|modern|community|tei)$/.test(location.hash)) return;
     const mine = availableFor(manifest, open.cote, open.batch);
     if (mine.html.length === 0 && documentsFor(open.cote).length > 0) setEdition('community');
     else setEdition('fr');
@@ -132,7 +132,7 @@ export function useReader(cotes: Cote[]) {
           wholeFolder:
             edition === 'community'
               ? false
-              : servedByFolder(manifest, openCote.id, edition, 'html'),
+              : servedByFolder(manifest, openCote.id, edition === 'tei' ? 'fr' : edition, 'html'),
           relay: proxy,
         }
       : null;

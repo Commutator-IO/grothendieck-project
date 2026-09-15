@@ -25,12 +25,13 @@
 
 import { copyFile, mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve, basename } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const ROOT = resolve(import.meta.dirname, '..');
 const SOURCE = resolve(ROOT, 'transcripts');
 const OUT = resolve(ROOT, 'public', 'transcripts');
 
-const EDITION_LABELS = {
+export const EDITION_LABELS = {
   fr: { lang: 'fr', name: 'Transcription' },
   modern: { lang: 'fr', name: 'Lecture modernisée' },
 };
@@ -38,7 +39,7 @@ const EDITION_LABELS = {
 // ---------------------------------------------------------------------------
 // The supported subset. Anything else is an error, on purpose.
 
-const escapeHtml = (s) =>
+export const escapeHtml = (s) =>
   s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
 /**
@@ -374,7 +375,7 @@ function cdGap(opts, key, base) {
   return (base * (f ?? 1)).toFixed(2);
 }
 
-function renderDiagram(raw) {
+export function renderDiagram(raw) {
   const opts = (/^\\begin\{tikzcd\}(\[[^\]]*\])/.exec(raw) || [])[1] || '';
   const body = raw
     .replace(/^\\begin\{tikzcd\}(\[[^\]]*\])?/, '')
@@ -734,7 +735,16 @@ function render(tex, edition) {
   }
   html = dropMathBack(html, held);
   const { lang, name } = EDITION_LABELS[edition];
+  return readingPage({ meta, lang, name, html });
+}
 
+/**
+ * The reading view's document around a rendered body: head line, watermark,
+ * stylesheet and the KaTeX and diagram scripts. Shared with scripts/tei-view.mjs,
+ * so that a view rendered from the TEI export is the same page as one rendered
+ * from the `.tex`. `extraStyle` is empty here and the output is unchanged.
+ */
+export function readingPage({ meta, lang, name, html, extraStyle = '' }) {
   return `<!doctype html>
 <!-- Light forced. ar5iv ships \`color-scheme: light dark\` and follows the OS,
      which left a dark transcript sitting inside a light site — the two panes
@@ -886,7 +896,7 @@ function render(tex, edition) {
              font: 12px/1.5 ui-monospace, monospace; color: #575348;
              background: #f8f7f3; border: 1px solid #e4e0d5; border-radius: .4rem;
              padding: .6rem .8rem; }
-</style>
+${extraStyle}</style>
 </head>
 <body>
 <article class="ltx_document">
@@ -1264,7 +1274,10 @@ async function main() {
   process.stdout.write(`${n} reading views → public/transcripts/\n`);
 }
 
-main().catch((e) => {
-  process.stderr.write(`${e.message}\n`);
-  process.exit(1);
-});
+// Run only when invoked, not when scripts/tei-view.mjs imports the helpers.
+if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  main().catch((e) => {
+    process.stderr.write(`${e.message}\n`);
+    process.exit(1);
+  });
+}

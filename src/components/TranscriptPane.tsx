@@ -73,13 +73,17 @@ export function TranscriptPane({
   // Which of *our* editions the non-community path is showing. A fragment
   // asking for a community edition that no longer exists lands on the
   // transcription, which is the tab a reader would have opened anyway.
-  const view: Edition = edition === 'community' ? 'fr' : edition;
+  // The hidden `tei` view is the transcription rendered from its TEI export:
+  // same edition, same tab, another file beside it.
+  const isTei = edition === 'tei';
+  const view: Edition = edition === 'community' || isTei ? 'fr' : edition;
   const present = isCommunity || available.html.includes(view);
   const manifest = useManifest();
   // The modernised reading is one file for the whole folder, so every batch of
   // that folder opens the same document; a per-batch URL would 404 on batches
   // 2 and 3. `editionUrl` picks whichever file actually covers these pages.
-  const url = isCommunity ? '' : editionUrl(manifest, cote, batch, view, 'html');
+  const texUrl = isCommunity ? '' : editionUrl(manifest, cote, batch, view, 'html');
+  const url = isTei ? texUrl.replace(/\.fr\.html$/, '.fr.tei.html') : texUrl;
   // Folder-wide, not batch-wide: the modernised edition's precondition is that
   // every batch of the folder is transcribed, so an empty Modernised tab has to
   // report on the folder even though the reader is looking at one batch of it.
@@ -198,11 +202,11 @@ export function TranscriptPane({
               key={e.key}
               type="button"
               role="tab"
-              aria-selected={edition === e.key}
+              aria-selected={(isTei ? 'fr' : edition) === e.key}
               title={e.help}
               onClick={() => onEdition(e.key)}
               className={`rounded-md px-2.5 py-1 text-[12px] font-medium transition ${
-                edition === e.key
+                (isTei ? 'fr' : edition) === e.key
                   ? 'bg-white text-ink-900 shadow-[0_1px_3px_rgb(19_18_16/.12)]'
                   : 'text-ink-500 hover:text-ink-800'
               }`}
