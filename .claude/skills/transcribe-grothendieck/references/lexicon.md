@@ -223,8 +223,8 @@ Macros counted inside mathematics — what the notation of this fonds actually c
 | \leq | 840 | \gamma | 233 | \Theta | 85 |
 | \Delta | 839 | \page | 232 | \bullet | 83 |
 | \sigma | 798 | \Sigma | 231 | \Rightarrow | 81 |
-| \begin | 790 | \mu | 222 | \Psi | 80 |
-| \end | 787 | \overline | 221 | \underbrace | 78 |
+| \begin | 791 | \mu | 222 | \Psi | 80 |
+| \end | 788 | \overline | 221 | \underbrace | 78 |
 | \circ | 766 | \wedge | 221 | \supset | 74 |
 | \simeq | 757 | \sim | 219 | \exists | 72 |
 | \bigl | 692 | \Phi | 215 | \underset | 70 |

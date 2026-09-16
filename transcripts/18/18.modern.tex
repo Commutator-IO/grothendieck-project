@@ -1,0 +1,1353 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 18, pages 1-61.
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried moves into a
+% footnote. It is held to being mathematically correct as it stands; where the
+% manuscript is loose or mistaken, the true statement is what appears here and
+% the footnote says what the page has. In any dispute of substance the
+% transcription governs: cite batch-01/02/03/04.fr.tex.
+%
+% Pass: Opus 5 (claude-opus-5), 2026-09-16 — first pass, unchecked against the
+% pages by a human.
+%
+% Scope: one document for the shelfmark, its four batches read as one argument.
+% Thirty-six of the sixty-one leaves carry his hand — 4, 5, 6, 8, 10, 11, 12,
+% 14, 16, 18, 20, 22, 24, 26, 28, 31-40, 42, 44, 46, 48, 50, 52, 54, 56, 58, 60,
+% 61 — with covers in his hand at 3, 9, 13, 30 and 41 that carry titles and no
+% mathematics. The rest is the back of other people's paper (an NSF grant
+% proposal in English, a French typescript on formal kernels, Bourbaki « Tribu »
+% fascicles, a printed plate of the G_2 root system) and is not mentioned.
+%
+% Spine. One question runs the length of the folder: the several cohomological
+% realisations of one motive are abstractly isomorphic, but the comparison
+% isomorphisms are not canonical, and the folder asks what they cost.
+%   (1) pp. 4-8: what a motive is to be, over a number field and over a local
+%       field; the Tate twist on mixed Hodge structures.
+%   (2) pp. 10-12: the comparisons made into TORSORS, and the conjecture that
+%       the transcendence degree of the field of periods is the dimension of the
+%       torsor — the Grothendieck period conjecture.
+%   (3) pp. 14-28: the cost measured in one case, and it is 2iπ: the analytic
+%       and topological fundamental classes differ by (1/2iπ)^p in codimension
+%       p. Then the same over a field K abstractly isomorphic to C, where the
+%       constant cannot be written down without choosing a square root of -1.
+%   (4) pp. 31-40: the base field topological, ≃ R or ≃ C. Real Hodge theory:
+%       the real Frobenius f_R, the torsor of periods as the twist of G by the
+%       cocycle of f_R, and a Hodge decomposition attached to each archimedean
+%       topology.
+%   (5) pp. 42-61: the transcendence programme carried out adelically. Lattices
+%       M^Z_v at the places of k, the bound (n-1) dim G, and the archimedean
+%       component of the Galois action as a 1-cocycle with values in G(k),
+%       hence a torsor over k_0.
+%
+% Notation fixed for the whole folder, where the pages vary.
+%   - G is the Mumford-Tate (motivic Galois) group of M throughout; the pages
+%     write G, G_{M,xi_0} and Aut_ot(T_B) for it.
+%   - The fibre functors are T_B (Betti), T_DR (de Rham), T_Hdg (Hodge); the
+%     pages also write Betti( ) and DR( ) (pp. 31-34) and xi (pp. 26-28, 46).
+%   - THE LETTER xi CARRIES THREE DIFFERENT OBJECTS ON THESE LEAVES: the
+%     correspondence class of p. 24, the functor xi_K of pp. 26-28, and the
+%     reference fibre functor of p. 46. This reading writes c for the
+%     correspondence class, xi for the fibre functor, and says so at each.
+%   - P is the period torsor Isom(T_B ot k, T_DR) throughout. The second P of
+%     p. 10's NB (a scheme of bigradings without integrality) is written Big~
+%     here, and the P_i of p. 46 and P_{v,k} of p. 58 keep their indices.
+%   - f_R = f_infty, the real Frobenius, written both ways on pp. 33-37.
+%   - sigma is a Galois element or a complex conjugation; the embedding k -> C
+%     is written iota, and the specialisation map of p. 6 is written sp.
+%   - S_R is Serre's torus, U_R its circle subgroup; A_C is his ring of adeles
+%     with C at the infinite place.
+%
+% Substantive departures, each footnoted where it occurs:
+%   - p. 8: the general Tate twist. The page writes W_i(E(-n)) = W_{i+2n}(E) and
+%     F^i(E(-n)) = F^{i+n}(E), which are the formulas for E(n); the n = 1 case
+%     it writes out just above (W_{i-2}, F^{i-1}) is the correct one. This
+%     reading gives W_i(E(-n)) = W_{i-2n}(E), F^i(E(-n)) = F^{i-n}(E).
+%   - p. 8: the graded compatibility. The page writes Gr^W_i(E(-1)) = (Gr^W_i
+%     E)(-1); the weights do not match. The true statement is Gr^W_i(E(-1)) =
+%     (Gr^W_{i-2} E)(-1).
+%   - p. 20: the factor is written (1/2ipi)^p in a square otherwise indexed by
+%     i; for a^i(X) -> H^{2i} the exponent is i.
+%   - p. 35: the page boxes eps(f_infty) eps(f_infty) = -1, which cannot hold,
+%     f_infty being of order 2. The leaves double words constantly; the
+%     statement is eps(f_infty) = -1, which is what the argument then uses and
+%     what the real Frobenius does to the Tate motive.
+%   - p. 44: G ≃ SL(2) x SL(2) x G_m needs C and C' NON-ISOGENOUS; the words
+%     that would say so are compressed against the right edge and are lost.
+%   - p. 61: the boxed phi_w(sigma) = g_infty phi_v(sigma) g_infty^{-1} holds
+%     when g_infty is fixed by sigma-dot_infty. In general the two cocycles are
+%     cohomologous, not conjugate: phi_w(sigma) = (sigma-dot_infty g_infty
+%     sigma-dot_infty^{-1}) phi_v(sigma) g_infty^{-1}, which is what his struck
+%     first version writes. The invariant content — one class in H^1, one torsor
+%     up to isomorphism — is unaffected, and is what this reading states.
+%
+% Announced and never established, recorded in the spine section: why 1' and 4'
+% are to be replaced (p. 4); the group Pi_1 and its character chi_1 (p. 5, the
+% leaf stops); a specialisation theory for the Chow ring (p. 6, said not to
+% exist); the three questions on elliptic curves over Q-bar (p. 12); problems 3)
+% and 4) of the programme — de Rham against p-adic, and a p-adic cohomology at
+% every p (p. 42, never taken up); the gap between the bound 5 and the expected
+% 6 (p. 44); the lemma on generic elements of a coset (p. 48, stated in a
+% bracket, not proved); the converse begun on p. 50; the Zariski-density of
+% p. 58, marked « à vérifier / ok »; the sentence cut at the foot of p. 60.
+%
+% Modern names are footnoted with whether the pages could have known them.
+% Nothing on the leaves names Deligne's « Valeurs de fonctions L », Mumford-Tate
+% groups under that name, Ayoub or André, and this reading does not imply
+% otherwise; the dating [à partir de 1969-vers 1972] is the archivists'.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{18}
+\pages{1}{61}
+\dating{[à partir de 1969-vers 1972]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Motifs et théorie de Hodge : notes manuscrites (s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Une variété algébrique se laisse mesurer de plusieurs façons. On peut compter
+ses trous à la main, en la regardant comme un espace topologique ; on peut le
+faire avec des formes différentielles ; on peut le faire avec des congruences
+modulo un nombre premier. Chaque procédé livre un espace vectoriel, et les
+espaces obtenus se ressemblent : même dimension, mêmes symétries. Ces feuillets
+posent une question simple à énoncer et difficile à tenir : \emph{combien coûte
+le passage de l'un à l'autre} ?
+
+Le premier coût est un nombre. Si $Y$ est une sous-variété de codimension $p$
+dans $X$, elle a une classe fondamentale du côté topologique et une du côté
+analytique, et les deux ne sont pas égales : elles diffèrent du facteur
+$(2i\pi)^{p}$. Le calcul tient en une ligne — l'intégrale de $dz/z$ le long
+d'un cercle vaut $2i\pi$ — et occupe pourtant quinze feuillets, parce que
+Grothendieck veut voir le facteur apparaître partout où il doit : pour une
+image directe, pour une correspondance, pour un morphisme propre quelconque. Au
+bout de cette vérification il écrit « Ouf ! ».
+
+Le second coût n'est pas un nombre mais une \emph{absence de choix}. Prenons un
+corps $K$ abstraitement isomorphe à $\mathbb{C}$, sans qu'aucun isomorphisme ne
+soit donné. Le facteur $2i\pi$ n'a alors plus de sens : pour l'écrire il
+faudrait désigner une racine carrée de $-1$ dans $K$, et rien ne la désigne. Le
+choix d'une telle racine, observe-t-il, revient exactement à orienter la droite
+projective. Ce qui est canonique n'est donc pas la comparaison, mais
+l'\emph{ensemble} des comparaisons possibles, sur lequel le groupe des symétries
+du motif agit simplement transitivement — un espace sans point privilégié, ce
+qu'on appelle un torseur. L'analogie qui gouverne tout le dossier est celle-ci :
+un espace vectoriel de dimension $n$ n'a pas de base préférée, mais l'ensemble
+de ses bases est un espace homogène sous $GL_{n}$, et ce qu'on peut dire de lui
+ne dépend d'aucune base.
+
+De là vient l'idée que ces pages poursuivent. Si l'ensemble des comparaisons est
+un espace de dimension $d$, et si un point de cet espace a pour coordonnées les
+périodes de la variété, alors le corps engendré par ces périodes devrait avoir
+degré de transcendance $d$ : les périodes devraient être aussi indépendantes que
+la géométrie le permet, et pas davantage. C'est cet énoncé — un théorème de
+transcendance déduit d'une dimension — qui organise le dossier, et c'est lui
+qu'on appelle aujourd'hui la conjecture des périodes. Grothendieck la vérifie
+sur les courbes elliptiques, y reconnaît un théorème de Schneider, et sur un
+produit de deux courbes tombe sur un écart qu'il note sans le réduire : sa
+borne donne $5$ là où la conjecture attend $6$.
+
+Le dossier se termine sur une variante arithmétique de la même idée. Au lieu de
+comparer deux cohomologies, on compare le même réseau vu depuis les différentes
+places d'un corps de nombres ; la comparaison devient un élément d'un groupe
+adélique, la dépendance en la place devient un $1$-cocycle galoisien, et le
+cocycle définit à son tour un torseur. Le passage où il s'aperçoit que la
+composante archimédienne, seule, est parfaitement déterminée, il le ponctue de
+trois points d'exclamation. C'est la même figure une troisième fois : ce qui
+n'est pas canonique un par un devient canonique tout ensemble.
+
+\keywords{period conjecture, period torsor, Mumford-Tate group, motivic Galois group, comparison isomorphism, Betti realisation, de Rham cohomology, Tate twist, cycle class map, transcendence degree, mixed Hodge structure, weight filtration, Hodge filtration, real Frobenius, real Hodge structure, Serre torus, Galois descent, nonabelian cohomology, principal homogeneous space, adelic lattice, Tate conjecture, p-divisible group, filtered crystal, Hodge-Tate decomposition, totally real subfield, Schneider theorem}
+\end{resume}
+
+\pagerange{4}{4}
+\section*{Le fil du dossier, et les conventions}
+
+\subsection*{Les cinq stations}
+
+Le dossier n'est pas un texte suivi mais cinq suites de feuillets, chacune
+ouverte par une couverture de sa main portant son titre. Elles se lisent
+pourtant comme un seul argument, et l'ordre des feuillets est celui de cet
+argument.
+
+\begin{enumerate}
+  \item \textbf{Pages 4 à 8} — \emph{ce qu'un motif doit être}. Deux listes
+        parallèles de descriptions conjecturales : six sur un corps de nombres,
+        quatre pour les groupes $p$-divisibles sur un corps local. Puis, sur un
+        feuillet isolé, le twist de Tate sur les structures de Hodge mixtes.
+  \item \textbf{Pages 10 à 12} — \emph{les comparaisons devenues torseurs}, et
+        la conjecture de transcendance qu'on en tire.
+  \item \textbf{Pages 14 à 28} — \emph{le coût mesuré}, et c'est $2i\pi$ ;
+        puis ce qu'il en reste sur un corps abstraitement isomorphe à
+        $\mathbb{C}$.
+  \item \textbf{Pages 31 à 40} — \emph{le corps de base topologique}. Théorie
+        de Hodge réelle, le Frobenius réel, et une décomposition de Hodge par
+        topologie archimédienne.
+  \item \textbf{Pages 42 à 61} — \emph{le programme de transcendance}, mené
+        adéliquement jusqu'à un cocycle galoisien et son torseur.
+\end{enumerate}
+
+Les stations 2, 4 et 5 sont trois formes d'une même figure — un ensemble de
+comparaisons sans point privilégié — et c'est cette répétition, plutôt qu'aucune
+des trois prises isolément, qui fait l'unité du dossier.
+
+\subsection*{Les conventions, valables pour tout le dossier}
+
+$M$ désigne un motif, $G$ son groupe de Mumford--Tate, c'est-à-dire son groupe
+de Galois motivique\footnote{Les feuillets écrivent tantôt $G$, tantôt
+$G_{M,\xi_{0}}$ (page 46), tantôt $\mathrm{Aut}_{\otimes}(T_{B})$ (page 36) ;
+c'est le même groupe, et cette lecture l'écrit $G$ partout. Le nom
+« Mumford--Tate » n'est écrit sur aucun feuillet.}. Les foncteurs fibres sont
+$T_{B}$ (Betti), $T_{DR}$ (de Rham) et $T_{Hdg}$ (Hodge) ; les pages 31 à 34
+les écrivent $\mathrm{Betti}(\ )$ et $DR(\ )$, ce qui est conservé là où il
+s'agit de citer leur énoncé.
+
+Trois collisions de notation sont tranchées ici une fois pour toutes, faute de
+quoi le dossier se lit mal.
+
+\begin{itemize}
+  \item \textbf{La lettre $\xi$ porte trois objets distincts sur ces
+        feuillets} : la classe d'une correspondance dans $a^{n}(X \times Y)$
+        (page 24), le foncteur $\xi_{K}$ à valeurs dans les $\mathbb{Z}$-modules
+        (pages 26 à 28), et le foncteur fibre de référence (page 46). Cette
+        lecture écrit $c$ pour la classe de correspondance et réserve $\xi$ au
+        foncteur fibre.
+  \item \textbf{$P$} est le torseur des périodes
+        $\mathrm{Isom}(T_{B} \otimes k, T_{DR})$ dans tout le
+        dossier. On écrit $\mathrm{Isom}$ sans le soulignement dont on marque
+        d'ordinaire le faisceau des isomorphismes : dans cette édition le
+        soulignement est réservé à l'apparat, et un $\mathrm{Isom}$ souligné se
+        lirait à l'écran comme une lecture douteuse. Le second $P$ de la note finale de la page 10 — un schéma de
+        bigraduations sans condition d'intégralité — est écrit
+        $\widetilde{\mathrm{Big}}$ ici.
+  \item \textbf{$f_{\mathbb{R}}$ et $f_{\infty}$ sont le même élément}, le
+        Frobenius réel ; la page 36 le dit en toutes lettres. Cette lecture
+        écrit $f_{\infty}$.
+\end{itemize}
+
+Enfin $\sigma$ est, selon les pages, un élément de Galois, une conjugaison
+complexe, un isomorphisme $k \simeq \mathbb{C}$ ou l'homomorphisme de
+spécialisation des cycles. On réserve ici $\sigma$ aux deux premiers, on écrit
+$\iota$ pour un plongement $k \hookrightarrow \mathbb{C}$, et $\mathrm{sp}$ pour
+la spécialisation de la page 6.
+
+\subsection*{Ce que le dossier annonce et n'établit pas}
+
+C'est une part notable de ces feuillets, et elle est enregistrée ici plutôt que
+passée sous silence : pourquoi les descriptions $1'$ et $4'$ seraient à
+remplacer (page 4, la question close la page) ; le groupe $\Pi_{1}$ et son
+caractère $\chi_{1}$, introduits à la dernière ligne de la page 5, qui s'arrête
+là ; une théorie de la spécialisation pour l'anneau de Chow, dont la page 6 dit
+qu'elle n'existe pas ; les trois questions sur les courbes elliptiques de la
+page 12 ; les problèmes $3)$ et $4)$ du programme de la page 42 — comparaison
+de la cohomologie $p$-adique et de celle de de Rham, définition d'une
+cohomologie $p$-adique en tout $p$ — qui ne sont jamais repris ; l'écart entre
+la borne $5$ et la valeur attendue $6$ de la page 44 ; le lemme sur les éléments
+génériques d'une classe, énoncé entre crochets à la page 48 et non démontré ; la
+réciproque commencée à la page 50 ; la densité de Zariski de la page 58, en
+marge de laquelle il écrit « à vérifier / ok » ; et la phrase coupée au bas de
+la page 60, que la dernière page reprend.
+
+\pagerange{4}{6}
+\section*{Ce qu'un motif doit être (pages 4 à 6)}
+
+\subsection*{Deux listes parallèles}
+
+La page 4 dresse côte à côte deux listes de \emph{descriptions conjecturales}.
+Ce sont des façons concurrentes de dire ce que serait la catégorie des motifs,
+chacune consistant à retenir certaines réalisations et les structures qui les
+relient.
+
+Sur un corps de nombres $k$ :
+
+\begin{enumerate}
+  \item double réseau Betti -- de Rham ;
+  \item double réseau Betti -- Hodge ;
+  \item structure de Hodge, pour $k = \overline{\mathbb{Q}}$ ;
+  \item Betti -- (Gauss--)Manin, pour $k = \overline{\mathbb{Q}}$ ;
+  \item Betti -- Tate ;
+  \item de Rham filtré cristallin.
+\end{enumerate}
+
+Un « double réseau » est ici l'objet minimal qu'une comparaison produit : deux
+réseaux entiers dans un même espace, celui que donne la théorie de Betti et
+celui que donne la théorie de de Rham, sans isomorphisme privilégié entre eux.
+C'est déjà la figure du torseur, sous sa forme la plus pauvre.
+
+En regard, pour les groupes $p$-divisibles — plus généralement, écrit-il, pour
+des \emph{pseudo-motifs} — sur un corps local, c'est-à-dire sur le corps des
+fractions d'un anneau de valuation discrète complet\footnote{Deux mots
+interlinéaires sous « $p$-divisibles » portent vraisemblablement sur la
+caractéristique du corps résiduel ; ils ne se lisent pas, et la condition
+exacte n'est pas restituée ici.} :
+
+\begin{enumerate}
+  \item[$3'$)] structure de Hodge ;
+  \item[$2'$)] double réseau Tate -- Hodge ;
+  \item[$5'$)] module galoisien $\ell$-adique (Tate) ;
+  \item[$6'$)] cristal filtré : un espace vectoriel de dimension finie sur $K$,
+        muni d'une action $\sigma$-semi-linéaire, d'une filtration et d'une
+        graduation.
+\end{enumerate}
+
+La numérotation primée est celle des items non primés qu'elle transpose, et la
+liste primée n'en compte que quatre sur six : la page se ferme sur « Pourquoi
+remplacer $1'$, $4'$ ?? », et rien dans le dossier n'y répond.
+
+En marge de $3'$ il précise ce qu'est le côté Tate : un
+$\mathbb{Q}_{p}$-module $N$ de type fini, avec une bigraduation sur
+$N \otimes_{\mathbb{Q}_{p}} \mathbb{C}$ — c'est la décomposition de Hodge--Tate,
+et le $\mathbb{C}$ est celui de Tate\footnote{Le corps $\mathbb{C}_{p}$,
+complété d'une clôture algébrique de $\mathbb{Q}_{p}$. La page écrit simplement
+$C$ ; c'est le seul endroit du dossier où cette lettre ne désigne pas le corps
+des complexes ni une courbe elliptique.}. Le parallélisme des deux colonnes est
+tout le propos : une théorie de Hodge $p$-adique est postulée comme le miroir
+local de la théorie de Hodge complexe, et les deux listes doivent se
+correspondre item par item.
+
+\subsection*{Une extension et ses deux scindages}
+
+La page 5, écrite en travers du feuillet, pose une extension de groupes
+\[
+  1 \longrightarrow G'(\mathbb{Q}) \longrightarrow E \longrightarrow \pi
+  \longrightarrow 1
+\]
+munie de deux scindages $\sigma_{1}$ et $\sigma_{2}$, dans une situation où
+$\pi$ s'envoie par $u$ dans $G(\mathbb{Q}_{p})$ et par $\chi$ dans
+$\mathbb{Q}_{p}^{*} = G_{m}(\mathbb{Q}_{p})$, ce dernier s'envoyant par $j_{2}$
+dans $G'(\mathbb{Q}_{p})$.
+
+\begin{tikzcd}[column sep=small, row sep=small, nodes={font=\scriptsize}]
+ & \pi \arrow[d, "u"] & & \\
+ & G(\mathbb{Q}_{p}) \arrow[d, no head] & & \\
+1 \arrow[r] & G'(\mathbb{Q}) \arrow[r] \arrow[d, no head] & E \arrow[r] & \pi \arrow[l, bend left=30, "\sigma_{1}"] \arrow[l, bend right=30, "\sigma_{2}"'] \\
+ & G'(\mathbb{Q}_{p}) & & \\
+ & \mathbb{Q}_{p}^{*} \arrow[u, "j_{2}"] & & \\
+ & \pi \arrow[u, "\chi"] & &
+\end{tikzcd}
+
+Chacun des deux scindages se corrige à l'aide de la flèche dont il dispose :
+$\widetilde{\sigma}_{2}(\gamma) = \sigma_{2}(\gamma)\, j_{2}(\chi(\gamma))$ et
+$\widetilde{\sigma}_{1}(\gamma) = \sigma_{1}(\gamma)\, u(\gamma)$. En écrivant
+que les deux corrections coïncident, il obtient la mesure de leur écart :
+\[
+  \varphi(\gamma) \;=\; \sigma_{1}(\gamma)^{-1} \sigma_{2}(\gamma)
+  \;=\; u(\gamma) \cdot j_{2}\bigl(\chi(\gamma^{-1})\bigr) .
+\]
+C'est la formule de cobord habituelle : deux scindages d'une même extension
+diffèrent d'un $1$-cocycle, et ici le cocycle se factorise en deux morceaux
+identifiés, l'un dans $G(\mathbb{Q}_{p})$, l'autre dans
+$j_{2}(\mathbb{Q}_{p}^{*})$. Il en tire deux remarques : sur $\ker \chi$ on a
+$\varphi = u$, et $\ker u$ est l'ensemble des $\gamma$ tels que
+$\chi(\gamma) = 1$ et $\varphi(\gamma) = 1$, ce qui permet de poser
+$\Pi_{1} = \pi/\ker u$. Le feuillet s'arrête sur l'introduction de
+$\Pi_{1} \to \mathbb{Q}_{p}^{*}$, et rien ne reprend ce fil\footnote{La moitié
+inférieure de la page est laissée en blanc. Ce que $\Pi_{1}$ devait servir à
+faire n'est écrit nulle part dans le dossier.}.
+
+\subsection*{La spécialisation des cycles, et ce qui l'empêche}
+
+La page 6 est un feuillet dactylographié — numéroté 18 dans sa propre
+pagination, et corrigé de sa main — qui porte les numéros 7.13.10 à
+7.13.12\footnote{Rien sur le feuillet ne nomme l'ouvrage dont il est extrait ;
+il renvoie à « SGA 5 IV » et à « XIV 4.1 ». Cette lecture ne l'identifie pas
+davantage.}. Il est retenu ici parce que ce qu'il dit est exactement une borne
+du programme du dossier.
+
+Pour $f \colon X \to S$ lisse et propre, la spécialisation des cycles
+algébriques est compatible avec la formation des classes de cohomologie
+$\ell$-adiques :
+
+\begin{tikzcd}[column sep=small, row sep=small, nodes={font=\scriptsize}]
+\mathrm{Gr}^{i}(X_{\bar{t}})_{\mathbb{Q}} \arrow[r, "\mathrm{cl}"] \arrow[d] & H^{2i}(X_{\bar{t}}, \mathbb{Q}_{\ell}(i)) \arrow[d, "\wr"] \\
+\mathrm{Gr}^{i}(X_{\bar{s}})_{\mathbb{Q}} \arrow[r, "\mathrm{cl}"] & H^{2i}(X_{\bar{s}}, \mathbb{Q}_{\ell}(i))
+\end{tikzcd}
+
+mais — et c'est le point — seulement après avoir remplacé les coefficients
+$\mathbb{Z}_{\ell}(i)$ par $\mathbb{Q}_{\ell}(i)$, c'est-à-dire après avoir
+négligé la torsion. Un énoncé qui ne la négligerait pas devrait se placer sur
+l'anneau de Chow, où $\mathrm{cl}$ est naturellement défini à valeurs entières ;
+mais, écrit le feuillet, « on n'a pas développé pour le moment une théorie de la
+spécialisation pour l'anneau de Chow ». Tout ce qui subsiste est un carré au
+niveau des cycles eux-mêmes, avant toute équivalence :
+
+\begin{tikzcd}[column sep=small, row sep=small, nodes={font=\scriptsize}]
+Z^{i}(X_{t}) \arrow[r, "\mathrm{cl}"] \arrow[d, "\mathrm{sp}"'] & H^{2i}(X_{t}, \mathbb{Z}_{\ell}(i)) \\
+Z^{i}(X_{s}) \arrow[r, "\mathrm{cl}"] & H^{2i}(X_{s}, \mathbb{Z}_{\ell}(i)) \arrow[u]
+\end{tikzcd}
+
+La flèche verticale de droite monte, en sens inverse de la spécialisation : elle
+est le cospécialisation, et c'est elle qui rend le carré commutatif\footnote{Sa
+pointe est encrée à la main sur la frappe, et ne laisse pas de doute. La
+dactylographie s'interrompt sur « où $Z$ est », au bas du feuillet.}. Cette
+page dit donc, dans le dossier, ceci : \emph{les comparaisons entières sont
+hors de portée, et l'on travaillera rationnellement}. Tout le reste du dossier
+s'y tient, à une exception près — la page 26, qui reviendra aux
+$\mathbb{Z}$-modules et paiera pour cela d'une ambiguïté de signe.
+
+\pagerange{8}{8}
+\section*{Le twist de Tate sur les structures de Hodge mixtes (page 8)}
+
+Soit $\mathcal{E} = (\mathcal{E}, \mathcal{E}_{0}, W_{\bullet}, F^{\bullet})$
+une structure de Hodge mixte : un $\mathbb{Z}$-module $\mathcal{E}_{0}$, une
+filtration croissante $W$ par le poids, une filtration décroissante $F$ de
+Hodge. Le twist de Tate $\mathcal{E}(-n)$ a même module sous-jacent et des
+filtrations décalées :
+\[
+  W_{i}\bigl(\mathcal{E}(-n)\bigr) = W_{i-2n}(\mathcal{E}) ,
+  \qquad
+  F^{i}\bigl(\mathcal{E}(-n)\bigr) = F^{i-n}(\mathcal{E}) .
+\]
+Le twist par $(-1)$ monte donc le poids de $2$ et le niveau de Hodge de
+$1$\footnote{La page écrit ces deux formules pour $n = 1$ exactement comme
+ci-dessus, $W_{i-2}$ et $F^{i-1}$, ce qui est correct ; mais elle donne pour le
+cas général $W_{i}(\mathcal{E}(-n)) = W_{i+2n}(\mathcal{E})$ et
+$F^{i}(\mathcal{E}(-n)) = F^{i+n}(\mathcal{E})$, qui sont les formules de
+$\mathcal{E}(n)$ et non de $\mathcal{E}(-n)$. La discordance est sur le
+feuillet ; c'est le cas $n = 1$, écrit en toutes lettres, qui donne le bon
+signe, et c'est lui qu'on a suivi.}. La raison en est que $\mathbb{Q}(1)$ est
+de poids $-2$ et de type $(-1,-1)$ : tordre par $\mathbb{Q}(-1)$ ajoute $2$ au
+poids.
+
+La compatibilité aux gradués s'écrit alors
+\[
+  \mathrm{Gr}^{W}_{i}\bigl(\mathcal{E}(-1)\bigr)
+  \;\simeq\; \bigl(\mathrm{Gr}^{W}_{i-2}\,\mathcal{E}\bigr)(-1) ,
+\]
+et les poids se recollent : $\mathrm{Gr}^{W}_{i-2}\mathcal{E}$ est pur de poids
+$i-2$, le twist lui en ajoute $2$, et l'on retombe sur le
+poids $i$\footnote{La page écrit
+$W_{i}(\mathcal{E}(-1))/W_{i-1}(\mathcal{E}(-1)) \simeq
+[W_{i}(\mathcal{E})/W_{i-1}(\mathcal{E})](-1)$, c'est-à-dire
+$\mathrm{Gr}^{W}_{i}(\mathcal{E}(-1)) \simeq (\mathrm{Gr}^{W}_{i}\mathcal{E})(-1)$,
+dont le membre de droite est de poids $i+2$. Le membre de gauche vaut
+$W_{i-2}(\mathcal{E})/W_{i-3}(\mathcal{E})$, d'où l'énoncé rétabli ici.}.
+
+Ce feuillet est isolé entre deux suites, et il ne sert rien de ce qui l'entoure
+immédiatement. Sa place dans le dossier est ailleurs : $\mathbb{Q}(1)$ est le
+motif dont toutes les périodes de ce dossier sont faites — $2i\pi$ en est un
+générateur — et les pages 35 à 37 se serviront de ce que le Frobenius réel lui
+fait.
+
+\pagerange{10}{12}
+\section*{Les comparaisons devenues torseurs, et la conjecture de transcendance (pages 10 à 12)}
+
+\subsection*{Trois torseurs et leur triangle}
+
+C'est ici que la figure centrale du dossier est posée. Trois foncteurs fibres
+étant donnés, on ne retient pas des isomorphismes entre eux mais les
+\emph{schémas} de tous leurs isomorphismes :
+\[
+  \begin{cases}
+    P = \mathrm{Isom}(T_{B} \otimes k,\ T_{DR}) \\
+    P' = \mathrm{Isom}(T_{DR},\ T_{Hdg}) \\
+    P'' = \mathrm{Isom}(T_{Hdg},\ T_{B} \otimes k)
+  \end{cases}
+\]
+Ce sont des espaces principaux homogènes — des torseurs — sous les groupes de
+Galois motiviques correspondants, et la composition des isomorphismes en fait
+des applications
+\[
+  P \times P' \to P'' , \qquad P' \times P'' \to P , \qquad P'' \times P \to P' .
+\]
+
+Un point complexe de chacun donne un triangle qui se referme :
+
+\begin{tikzcd}[column sep=small, row sep=small, nodes={font=\scriptsize}]
+T_{B} \otimes_{\mathbb{Q}} \mathbb{C} \arrow[r, "\alpha"] & T_{DR} \otimes_{k} \mathbb{C} \arrow[d, "\beta"] \\
+ & T_{Hdg} \otimes_{\mathbb{Q}} \mathbb{C} \arrow[ul, "\gamma"]
+\end{tikzcd}
+
+avec $\beta\alpha = \gamma^{-1}$, et ses deux permutations circulaires
+$\gamma\beta = \alpha^{-1}$, $\alpha\gamma = \beta^{-1}$. Les coordonnées de
+$\alpha$ sont les \emph{périodes} : les nombres qu'on obtient en développant une
+base de la cohomologie de de Rham sur une base de la cohomologie de Betti.
+
+Deux schémas auxiliaires sur $\mathbb{Q}$ portent l'information de filtration :
+$\mathrm{Fil}$, celui des $\otimes$-filtrations de $T_{B}$, et $\mathrm{Big}$,
+celui des $\otimes$-bigraduations\footnote{Les indices que porte chacun des deux
+foncteurs $\mathrm{Filt}$ et $\mathrm{Bigr}$ sur le feuillet expriment une
+condition de compatibilité à la filtration, respectivement à la bigraduation, de
+$T_{DR}$ ; l'écriture ne permet pas de les restituer, et on les a laissés
+implicites.}. La projection
+$\mathrm{Big} \to \mathrm{Fil}$ — oublier la bigraduation et ne retenir que la
+filtration qu'elle induit — fait de $\mathrm{Big}$ un torseur sur
+$\mathrm{Fil}$ sous un groupe \emph{unipotent}. C'est l'énoncé classique : une
+filtration se scinde, le scindage n'est pas unique, et l'ambiguïté est
+unipotente. Du côté du groupe, cela se lit sur un sous-groupe parabolique
+$U' \subset B' \subset G'$, où $U'$ est le radical unipotent attaché à la
+filtration de $T_{DR}$, où $Q \subset P'$ est le schéma des sous-groupes de
+Levi de $B'$, et où $B'/U' \simeq L'$ reçoit un homomorphisme central de
+$G_{m}$ — le $G_{m}$ de Tate.
+
+Il ajoute en note qu'on peut refaire tout cela sans condition d'intégralité, en
+remplaçant $\mathrm{Fil}$ et $\mathrm{Big}$ par des schémas $F$ et
+$\widetilde{\mathrm{Big}}$, dont les quotients par $G$ sont encore des schémas
+sur $\mathbb{Q}$.
+
+\subsection*{La conjecture}
+
+La page 11 — un feuillet au crayon très pâle, barré de deux longues diagonales,
+dont la prose de liaison ne porte presque plus — énonce ceci. Si $g_{0}$ est un
+point générique convenable, alors
+\[
+  \deg\mathrm{tr}\; k(g_{0}) \;=\; \dim G'' \;=\; \dim G - 1 .
+\]
+C'est la conjecture des périodes : \emph{le degré de transcendance du corps
+engendré par les périodes est la dimension du torseur qui les porte}\footnote{On
+l'appelle aujourd'hui conjecture des périodes de Grothendieck. Rien sur le
+feuillet ne la nomme, et la formulation qui a cours — le torseur des périodes
+$P$ est de dimension égale au degré de transcendance du corps des périodes — ne
+fait pas apparaître le « $-1$ ». Celui-ci vient de ce qu'il travaille avec
+$G''$ et non $G$ : les pages comptent le motif de Tate à part, $2i\pi$ étant
+tenu pour connu. C'est exactement ce dont la page 44 constatera qu'il ne rend
+pas le bon compte.}. Une borne, il l'a déjà : la dimension majore toujours le
+degré de transcendance, puisque le point vit dans une variété de cette
+dimension. L'énoncé conjectural est que la majoration est une égalité — qu'il
+n'y a pas d'autres relations entre les périodes que celles que la géométrie
+impose.
+
+Il note aussitôt ce que cela contient : le théorème de Schneider pour les
+courbes elliptiques sans multiplication complexe, où le degré de transcendance
+en question est $3$, « les seules relations étant » — et la ligne se perd sous
+les diagonales\footnote{La relation en question est celle de Legendre,
+$\omega_{1}\eta_{2} - \omega_{2}\eta_{1} = 2i\pi$, qui lie les périodes et les
+quasi-périodes ; elle est ce qui fait tomber le compte de $4$ à $3$ une fois
+$2i\pi$ mis à part. Le feuillet ne l'écrit pas, et cette identification est
+celle de cette lecture.}.
+
+\subsection*{Trois questions sur les courbes elliptiques}
+
+La page 12 met la conjecture à l'épreuve. Soit $C$ une courbe elliptique sur
+$\overline{\mathbb{Q}}$ et $G$ son groupe de Galois motivique : c'est
+$GL(2,\mathbb{Q})$ si $C$ n'a pas de multiplication complexe, et la restriction
+des scalaires $\prod_{K/\mathbb{Q}} G_{m}$ du corps de multiplication complexe
+$K$ dans le cas contraire. Soit $g$ l'élément de
+$G(\mathbb{C})/G(\overline{\mathbb{Q}})$ qui compare le réseau transcendant de
+Betti à celui de de Rham. Trois questions :
+
+\begin{enumerate}
+  \item[a)] quel est le degré de transcendance de $\overline{\mathbb{Q}}(g)$ —
+        est-il $\dim G$, c'est-à-dire $4$, ou $2$ ?
+  \item[b)] soit $T$ le lieu de $g$ sur $G_{\overline{\mathbb{Q}}}$ et $H$ le
+        groupe qu'il engendre : a-t-on $H = G$ ?
+  \item[c)] la période $h$ qui scinde la filtration de de Rham peut-elle être
+        algébrique, ou est-elle toujours transcendante ?
+\end{enumerate}
+
+À la question c) il répond lui-même, dans un encadré en marge : « si $C$ a de la
+multiplication complexe, on a $h \in \overline{\mathbb{Q}}$ ! ». Les autres
+restent ouvertes sur le feuillet. Elles sont, mot pour mot, la forme sous
+laquelle la conjecture des périodes s'est ensuite posée pour les courbes
+elliptiques : la question b), celle de savoir si le lieu de $g$ engendre $G$,
+est la formulation « le torseur des périodes est connexe » dont la conjecture
+est aujourd'hui l'énoncé standard.
+
+\pagerange{14}{20}
+\section*{Le coût de la comparaison, et il vaut $2i\pi$ (pages 14 à 20)}
+
+\subsection*{La formule fondamentale}
+
+La station 3 change complètement d'allure : ce ne sont plus des conjectures mais
+un calcul, mené jusqu'au bout et vérifié dans tous les cas dont il aura besoin.
+
+Soit $X$ une variété holomorphe, $Y$ une sous-variété holomorphe partout de
+codimension $p$, et $\Omega^{\bullet}_{X}$ la résolution de $\mathbb{C}$ par les
+formes. La classe fondamentale de $Y$ se construit de trois façons — entière,
+complexe, analytique — et les trois s'inscrivent dans un carré :
+
+\begin{tikzcd}[column sep=small, row sep=small, nodes={font=\scriptsize}]
+H^{2p}_{Y}(X, \mathbb{Z}) \arrow[r] & H^{2p}_{Y}(X, \mathbb{C}) \arrow[r, "\sim"] & H^{2p}_{Y}(X, \Omega^{\bullet}_{X}) \\
+\mathbb{Z}_{Y} \arrow[u, "P^{\mathbb{Z}}_{\mathrm{top}}"] \arrow[r, hook] & \mathbb{C}_{Y} \arrow[u, "P^{\mathbb{C}}_{\mathrm{top}}"] & \mathbb{C}_{Y} \arrow[u, "P^{\Omega}_{\mathrm{an}}"]
+\end{tikzcd}
+
+La flèche horizontale de droite est l'isomorphisme de de Rham ; les trois
+verticales sont des isomorphismes. La question est de savoir si le carré
+commute, et la réponse est non — il commute à un facteur près, et c'est ce
+facteur qu'on cherche.
+
+On s'y ramène par deux réductions. D'abord, en prenant une section transversale
+$X'$ de dimension $n-p$, on ramène le cas général au cas où $Y$ est réduite à un
+point. Ensuite, si $f_{1}, \ldots, f_{p}$ est un système d'équations locales de
+$Y$, la classe analytique est représentée par le résidu
+\[
+  \frac{df_{1} \wedge \cdots \wedge df_{p}}{f_{1} \cdots f_{p}}
+  \;\in\; H^{p}_{Y}(\Omega^{p}_{X}) .
+\]
+
+Le cas $p = 1$ se calcule alors à la main. La classe $P_{\mathrm{an}}(1_{Y})$ est
+celle de la forme $dz/z$ sur $X$ privé du point, et l'écart se lit en intégrant
+sur un cercle orienté :
+\[
+  \lambda \;=\; \int_{C} P_{\mathrm{an}}(1_{Y}) \;=\; \int_{C} \frac{dz}{z}
+  \;=\; 2i\pi .
+\]
+D'où la formule qu'il encadre, et qu'il réécrit aussitôt sous ses deux formes :
+\[
+  P_{\mathrm{an}}\!\left(\tfrac{1}{2i\pi}\, 1_{Y}\right) = P_{\mathrm{top}}(1_{Y}) ,
+  \qquad
+  P_{\mathrm{top}}(1_{Y}) = \tfrac{1}{2i\pi}\, P_{\mathrm{an}}(1_{Y}) ,
+  \qquad
+  P_{\mathrm{an}}(1_{Y}) = 2i\pi\, P_{\mathrm{top}}(1_{Y}) .
+\]
+En codimension $p$, les $p$ résidus se multiplient et le facteur devient
+$(2i\pi)^{p}$ : le carré comparant $H^{i}(Y)$ à $H^{i+p}(X)$ commute une fois la
+flèche canonique du bas multipliée par $1/(2i\pi)^{p}$.
+
+C'est là le contenu arithmétique de tout ce dossier, sous sa forme la plus
+concrète. L'image directe analytique \emph{ne transforme pas les classes
+entières en classes entières} : il faut le facteur $1/(2i\pi)^{p}$ pour qu'il en
+soit ainsi. Autrement dit, la comparaison entre Betti et de Rham n'est pas
+définie sur $\mathbb{Z}$ ni même sur $\mathbb{Q}$ ; elle l'est sur
+$\mathbb{Q}(2i\pi)$, et c'est très exactement ce que le twist de Tate de la
+page 8 sert à comptabiliser\footnote{En termes d'aujourd'hui : la classe de
+cycle à valeurs entières prend ses valeurs dans $H^{2p}(X, \mathbb{Z}(p))$ et
+non dans $H^{2p}(X, \mathbb{Z})$, la torsion $\mathbb{Z}(p) = (2i\pi)^{p}
+\mathbb{Z}$ étant précisément le facteur calculé ici. Les feuillets écrivent le
+facteur et non le twist ; les deux écritures sont la même chose et les pages ne
+font pas le rapprochement explicitement.}.
+
+\subsection*{Ce qui dépend du plongement}
+
+La page 18 en tire la conséquence qui relance le dossier. Soit $X$ un schéma
+algébrique lisse sur un corps $k$ \emph{abstraitement} isomorphe à $\mathbb{C}$.
+La classe algébrique
+\[
+  a^{p}(X) \xrightarrow{\ P_{\mathrm{alg}}\ } H^{2p}(X, \Omega^{\bullet}_{X})
+\]
+est définie sans qu'on ait choisi d'isomorphisme $k \simeq \mathbb{C}$ : elle ne
+parle que de formes différentielles et de cycles. Mais si l'on choisit un
+plongement $\iota \colon k \xrightarrow{\ \sim\ } \mathbb{C}$, on dispose aussi
+de la classe topologique, et les deux diffèrent :
+\[
+  P_{\iota}^{(p)} \;=\; \left(\frac{1}{2i\pi}\right)^{p} P_{\mathrm{alg}} .
+\]
+Or $P_{\mathrm{alg}}$ ne dépend pas de $\iota$ et $P_{\iota}^{(p)}$ en dépend
+beaucoup. \emph{Le facteur porte toute la dépendance} : ce qui distingue les
+différents plongements d'un corps abstrait dans $\mathbb{C}$ n'est pas la
+géométrie algébrique, c'est le choix de $2i\pi$. Le cas $p = 1$,
+$X = \mathbb{P}^{1}$, où la classe est un isomorphisme, est celui sur lequel les
+pages 26 à 28 reviendront\footnote{Le bas de la page 18 reprend le même calcul
+avec un facteur et une quantité $E_{\iota}^{2i}$ dont ni l'exposant ni la
+définition ne se lisent ; la marge porte, soulignés, les mots « De Rham » et
+« $\pi$ transcendantal ».}.
+
+La page 20 reprend le carré sous sa forme $i^{!}$ et le clôt sur un dernier
+encadré :
+
+\begin{tikzcd}[column sep=small, row sep=small, nodes={font=\scriptsize}]
+a^{i}(X) \arrow[r, "P^{\mathbb{Z}}_{\mathrm{top}}"] \arrow[d, "(1/2i\pi)^{i} P_{\mathrm{an}}"'] & H^{2i}(X, \mathbb{Z}) \arrow[d, "\mathrm{can}"] \\
+H^{2i}(X, \Omega^{\bullet}_{X}) \arrow[r, "\sim"] & H^{2i}(X, \mathbb{C})
+\end{tikzcd}
+
+où $a^{i}(X)$ est le groupe des cycles analytiques de codimension
+$i$\footnote{La page écrit l'exposant du facteur $p$ alors que le reste du
+diagramme est indexé par $i$ ; pour un cycle de codimension $i$ l'exposant est
+$i$, et c'est ce qui est écrit ici. La discordance est sur le feuillet.}.
+
+\pagerange{22}{24}
+\section*{La même chose pour un morphisme propre, puis pour une correspondance (pages 22 et 24)}
+
+Le facteur étant trouvé, il reste à vérifier qu'il se propage — et c'est ce que
+font ces deux feuillets, qui achèvent un calcul commencé quinze pages plus
+tôt\footnote{La page 21 est un feuillet étranger, mais l'argument ne s'interrompt
+qu'en apparence : la page 22 s'ouvre sur « On généralise la formule
+fondamentale », et ce qu'elle généralise est la formule des pages 16 à 20.}.
+
+D'abord pour un morphisme \emph{propre quelconque} $f \colon X \to Y$, purement
+de codimension relative $p$ :
+
+\begin{tikzcd}[column sep=small, row sep=small, nodes={font=\scriptsize}]
+H^{2i}(X, \mathbb{C}) \arrow[r, "f^{\mathrm{top}}_{*}"] \arrow[d, "\wr"'] & H^{2i-2p}(Y, \mathbb{C}) \arrow[d, "\wr"] \\
+H^{2i}(X, \Omega^{\bullet}_{X}) \arrow[r, "\frac{1}{(2i\pi)^{p}} f^{\mathrm{an}}_{*}"] & H^{2i-2p}(Y, \Omega^{\bullet}_{Y})
+\end{tikzcd}
+
+Le décalage de degré est celui qu'impose l'image directe d'un morphisme propre
+de codimension relative $p$\footnote{Les exposants des $H$ sont repris à l'encre
+par-dessus une première écriture et ne se lisent pas avec certitude ; le
+décalage est celui que la situation impose et non celui que la page affirme.}.
+
+Puis pour une \emph{correspondance}, ce qui est le cas dont la théorie des
+motifs a besoin. Soit $c \in a^{n}(X \times Y)$ une classe de cycle ; elle
+définit un homomorphisme de $H^{i}(X)$ dans $H^{i}(Y)$ par la formule usuelle
+\[
+  c(x) \;=\; \mathrm{pr}^{\mathrm{top}}_{2*}\bigl(\mathrm{pr}^{*}_{1}(x) \cdot
+  P_{\mathrm{top}}(c)\bigr) ,
+\]
+et l'on veut savoir si c'est le même que celui que définit
+$P_{\mathrm{alg}}(c)$. Le calcul est immédiat une fois posé
+$P_{\mathrm{top}}(c) = (1/2i\pi)^{n} P_{\mathrm{alg}}(c)$ : le facteur introduit
+par la classe et celui introduit par l'image directe sont inverses l'un de
+l'autre et se compensent. Les deux morphismes coïncident, le carré
+
+\begin{tikzcd}[column sep=small, row sep=small, nodes={font=\scriptsize}]
+H^{i}(X, \mathbb{C}) \arrow[r, "c_{\mathbb{C}}"] \arrow[d, "\mathrm{can}"'] & H^{i'}(Y, \mathbb{C}) \arrow[d, "\mathrm{can}"] \\
+H^{i}(X, \Omega^{\bullet}_{X}) \arrow[r, "c_{\mathbb{C},\infty}"] & H^{i'}(Y, \Omega^{\bullet}_{Y})
+\end{tikzcd}
+
+commute, et l'isomorphisme canonique
+\[
+  \xi\bigl(H^{i}(X, \mathbb{Q}(0))\bigr) \otimes_{\mathbb{Z}} \mathbb{C}
+  \;\xrightarrow{\ \sim\ }\;
+  H^{i}(X, \Omega^{\bullet}_{X})
+\]
+est fonctoriel en le motif. C'est le résultat qui rend la station suivante
+possible : \emph{la comparaison est compatible aux correspondances}, donc elle
+est un isomorphisme de foncteurs fibres sur la catégorie des motifs, et non pas
+seulement une collection d'isomorphismes variété par variété. Il le ponctue
+d'un « Ouf ! » — le mot est de lui, et il marque la fin du calcul, non celle de
+la question.
+
+\pagerange{26}{28}
+\section*{Un corps sans isomorphisme choisi (pages 26 à 28)}
+
+Voici la conséquence, et c'est le moment où le dossier bascule du calcul vers la
+structure.
+
+Soit $K$ un corps \emph{topologique} isomorphe à $\mathbb{C}$, \emph{l'isomorphisme
+n'étant pas choisi}. On dispose encore du foncteur multiplicatif $\xi = \xi_{K}$
+sur la catégorie des motifs sur $K$, à valeurs dans les $\mathbb{Z}$-modules,
+avec ses isomorphismes
+\[
+  \xi \otimes_{\mathbb{Z}} \mathbb{Z}_{\ell} \;\xrightarrow{\ \sim\ }\; \xi_{\ell} ,
+  \qquad
+  \xi \otimes_{\mathbb{Z}} K \;\xrightarrow{\ \sim\ }\; \xi_{K} .
+\]
+Considérons alors le plus petit exemple possible :
+\[
+  \xi\bigl(H^{2}(\mathbb{P}^{1}, \mathbb{Z}(0))\bigr) = \xi\bigl(\mathbb{Z}(-1)\bigr) .
+\]
+C'est un $\mathbb{Z}$-module libre de rang $1$, donc isomorphe à $\mathbb{Z}$ —
+\emph{mais l'isomorphisme n'est pas déterminé}, pas même au signe près. Et le
+choix d'un tel isomorphisme, observe-t-il, revient au choix d'une
+\emph{orientation} de $\mathbb{P}^{1}_{K}$, c'est-à-dire, $\mathbb{P}^{1}_{K}$
+étant naturellement une sphère, au choix de l'une des deux racines carrées de
+$-1$ dans $K$.
+
+Cette phrase est le cœur du dossier. Elle dit que l'ambiguïté qu'on a mesurée
+à la page 16 par un nombre — le facteur $2i\pi$ — est en réalité une ambiguïté
+de \emph{signe}, celle de $i$, et qu'aucune considération algébrique ne peut la
+lever, puisque $K$ ne distingue pas ses deux racines de $-1$. En revanche $\pi$,
+lui, est bien déterminé comme élément de $K$\footnote{$\pi$ est réel, donc
+appartient au sous-corps réel maximal que la page 40 fabriquera ; c'est le seul
+des deux facteurs qui ne dépende pas d'une orientation. La page l'écrit
+« comme $\pi \in \mathbb{R}$ est bien déterminé ».}, de sorte que le choix fait,
+on peut écrire
+\[
+  \alpha_{\infty}(u) \;=\; \frac{1}{2\sqrt{-1}\,\pi}\; v ,
+\]
+où $v$ est le générateur canonique de $H^{2}(\mathbb{P}^{1}, \Omega^{1})$.
+
+Le cas réel est différent, et il le note avec soin : si $K$ est isomorphe à
+$\mathbb{R}$, l'isomorphisme \emph{est} unique, $\mathbb{R}$ n'ayant pas
+d'automorphisme non trivial. On définit encore, par choix d'une clôture
+algébrique, un foncteur à valeurs dans les $\mathbb{Z}$-modules, mais muni cette
+fois d'une action de $\mathbb{Z}/2\mathbb{Z} = \mathrm{Gal}(\overline{\mathbb{R}}/\mathbb{R})$,
+les réseaux vivant dans un produit
+\[
+  \prod_{\ell} M_{\ell} \times M_{\infty, \mathbb{C}} .
+\]
+Ce produit est le premier état, dans ce dossier, du module adélique que la
+page 52 écrira $M^{\mathbb{A}_{\mathbb{C}}}$ : la place archimédienne y figure
+déjà à côté des places finies, et avec le facteur $\mathbb{C}$ qui la
+distingue\footnote{C'est l'une des deux articulations du dossier qu'aucune
+couverture ne signale, l'autre étant le passage des torseurs de la page 10 aux
+cocycles de la page 58. Les feuillets 26-28 et 52-56 sont séparés par vingt-cinq
+pages et par deux autres suites, et rien sur eux ne les rapproche.}.
+
+\pagerange{31}{34}
+\section*{Le corps de base topologique, et le Frobenius réel (pages 31 à 34)}
+
+\subsection*{La structure réelle sur la cohomologie de de Rham}
+
+Soit $K$ un corps topologique isomorphe à $\mathbb{C}$ — il y a donc \emph{deux}
+isomorphismes, et l'on en choisit un — et soit $M$ un motif sur $K$. Pour $X$
+lisse projective sur $K$, l'ensemble $X(K)$ est une variété $K$-analytique
+compacte, d'où $H^{*}(X(K), \mathbb{Q})$, d'où le foncteur $\mathrm{Betti}$. Par
+l'argument habituel,
+\[
+  \mathrm{Betti}(M)_{K} \;\simeq\; DR(M)
+\]
+canoniquement, comme $\otimes$-isomorphisme. Ceci met sur $DR(M)$ une
+\emph{structure réelle} dont les points réels sont
+$\mathrm{Betti}(M)_{\mathbb{R}}$ ; et la donnée de la filtration de Hodge et de
+cette structure réelle scinde la filtration de façon unique, déterminant une
+\emph{bigraduation} compatible avec le degré total.
+
+Mais — et c'est l'observation de la page 32 — cette bigraduation obtenue par
+transport de structure \emph{dépend} de l'isomorphisme $u \colon K \simeq
+\mathbb{C}$ choisi : remplacer $u$ par $\bar{u}$ échange les deux indices.
+L'ambiguïté de la page 26 reparaît, et cette fois elle se voit sur un objet et
+non sur un nombre.
+
+\subsection*{Deux structures réelles qui commutent}
+
+Prenons maintenant $K_{0} = \mathbb{R}$ et $K$ une clôture algébrique. Alors
+\[
+  DR(M)_{K} = DR(M_{K})
+\]
+porte \emph{deux} $\mathbb{R}$-structures : celle qui vient de $DR(M)$ par
+extension des scalaires, et celle que le paragraphe précédent vient de
+fabriquer. Soit $\sigma$ la conjugaison associée à la première et $\tau$ celle
+associée à la seconde. Ce sont deux automorphismes semi-linéaires, et $\sigma$
+ne respecte pas la filtration tandis que $\tau$ la respecte. \emph{Ils
+commutent}, et leur composé
+\[
+  \sigma\tau = \tau\sigma \;=\; f_{\infty}
+\]
+est l'automorphisme de $H^{*}(X(K), K) \simeq DR(M)$ induit par la conjugaison
+$\tau_{X}$ de $X(K)$. La raison de la commutation est là : $\tau$ n'est autre
+que l'action sur la cohomologie d'une involution de l'\emph{espace}, et une
+involution de l'espace commute à tout ce qui vient des coefficients.
+
+\subsection*{Le Frobenius réel}
+
+D'où l'énoncé de la page 33, qui est le résultat de cette station. Un motif sur
+$\mathbb{R}$ définit :
+
+\begin{enumerate}
+  \item une structure de Hodge $V$ ;
+  \item un automorphisme de $V_{K}$, \emph{réel} — il préserve
+        $V_{\mathbb{R}}$ — et \emph{antilinéaire}, assujetti à la condition
+        d'échanger la filtration de Hodge avec son opposée.
+\end{enumerate}
+
+En termes de structures de Hodge, cette seconde donnée est un isomorphisme de
+$V$ avec sa structure de Hodge conjuguée : c'est le \emph{Frobenius réel}. Il
+correspond à un élément
+\[
+  f_{\infty} \in G(\mathbb{Q}) , \qquad f_{\infty}^{2} = 1 ,
+\]
+dont l'image dans $G/G^{0}$ engendre ce groupe\footnote{Autrement dit $G$ a deux
+composantes connexes et $f_{\infty}$ est dans la non neutre : le groupe de
+Galois motivique d'un motif sur $\mathbb{R}$ n'est pas connexe, et c'est le
+Frobenius réel qui mesure exactement ce défaut. C'est l'élément que la
+littérature écrit aujourd'hui $F_{\infty}$.}. Il normalise le morphisme
+$i \colon S_{\mathbb{R}} \to G_{\mathbb{R}}$ de Serre, précisément
+\[
+  f_{\infty}\, i(\lambda)\, f_{\infty}^{-1} = i(\lambda') ,
+\]
+où $\lambda \mapsto \lambda'$ est la symétrie canonique de $S_{\mathbb{R}}$
+— celle qui induit $\lambda \mapsto \bar{\lambda}$ sur
+$S_{\mathbb{R}}(\mathbb{R}) \simeq \mathbb{C}^{*}$. Sur le sous-groupe des
+éléments de module $1$ cela donne
+\[
+  f_{\infty}\, i(\lambda)\, f_{\infty}^{-1} = i(\lambda^{-1})
+  \qquad (\lambda \in U_{\mathbb{R}}) .
+\]
+Et le foncteur $M \mapsto (\text{structure de Hodge}, f_{\infty})$ est
+\emph{pleinement fidèle}. C'est la description complète cherchée : un motif sur
+$\mathbb{R}$, c'est une structure de Hodge plus une involution antilinéaire
+compatible\footnote{Cette description est exactement celle des « structures de
+Hodge réelles » telles qu'on les manipule depuis. Le feuillet ne cite personne
+et ne peut être daté mieux que par l'inventaire.}.
+
+\subsection*{Le Betti tordu}
+
+La page 34 en donne la forme concrète. Les éléments de $DR(M)$ dans
+$DR(M)_{K} \simeq V \otimes_{\mathbb{Q}} K$ sont les
+\[
+  z = x + iy , \qquad x, y \in V_{\mathbb{R}} , \qquad
+  f x = x , \quad f y = -y ,
+\]
+ce qui s'exprime par $\tau z = z$, c'est-à-dire $\sigma z = f(z)$. L'espace $W$
+qu'ils forment mérite, écrit-il, le nom de \emph{sous-espace de Betti tordu} de
+$DR(M)$, et l'on a le carré
+
+\begin{tikzcd}[column sep=small, row sep=small, nodes={font=\scriptsize}]
+H^{*}(X(K), \mathbb{Q}) = V \arrow[r, hook] & DR(M)_{K} \simeq DR(M_{K}) \\
+H^{*}(X(\mathbb{R}), \mathbb{Q}) = V \cap W = V^{f} \arrow[u, hook] & W \arrow[u, hook]
+\end{tikzcd}
+
+$W$ est donc un \emph{second foncteur fibre} sur $\mathbb{Q}$, isomorphe au
+premier : l'isomorphisme $V \simeq W$ est l'identité sur $V^{+}_{K}$ et la
+multiplication par $i$ sur $V^{-}_{K}$. Les deux foncteurs fibres sont ainsi des
+formes l'un de l'autre, et \emph{l'un se déduit de l'autre en tordant par le
+cocycle défini par $f_{\infty}$}. On retrouve, sur un exemple aussi petit que
+possible, la figure de la page 10 : ce qui n'est pas canonique est classifié par
+un torseur, et le torseur est décrit par un cocycle.
+
+\pagerange{35}{37}
+\section*{Motifs sur $\mathbb{R}$ : le torseur des périodes comme forme tordue (pages 35 à 37)}
+
+Ces trois feuillets sont à l'encre bleue et écrits au net ; ils se lisent
+presque de bout en bout, à la différence de tout ce qui précède.
+
+\subsection*{Quand le Frobenius réel est-il trivial ?}
+
+L'élément $\alpha \in P(\mathbb{C})$ du torseur des périodes est relié à
+$f_{\infty}$ par $\bar{\alpha} = f_{\infty}\,\alpha$, d'où aussitôt
+\[
+  f_{\infty} = 1 \iff \alpha \in P(\mathbb{R}) \iff \mathbb{R}(\alpha) = \mathbb{R} .
+\]
+Autrement dit : \emph{le Frobenius réel est trivial exactement quand toutes les
+périodes sont réelles}. Or, si $M$ contient le motif de Tate, il ne l'est
+jamais, et la raison tient en une ligne :
+\[
+  \varepsilon(f_{\infty}) = -1 ,
+\]
+où $\varepsilon$ est le caractère par lequel $G$ agit sur le motif de
+Tate\footnote{La page encadre $\varepsilon(f_{\infty})\,\varepsilon(f_{\infty})
+= -1$, ce qui ne peut tenir : $f_{\infty}$ étant d'ordre $2$, le membre de
+gauche vaut $1$. Ces feuillets doublent constamment les mots — « on a la
+relation », « qu'on qu'on », « bien bien » — et c'est un doublement de plus ;
+l'énoncé est $\varepsilon(f_{\infty}) = -1$, qui est vrai et qui est ce dont la
+suite se sert.}. La conjugaison complexe envoie $2i\pi$ sur $-2i\pi$ : le
+Frobenius réel agit par $-1$ sur $\mathbb{Q}(1)$, donc par $(-1)^{n}$ sur
+$\mathbb{Q}(n)$. D'où
+\[
+  f_{\infty} \neq 1 , \qquad \mathbb{R}(\alpha) = \mathbb{C}
+  \qquad \text{dès que } M \text{ contient le motif de Tate,}
+\]
+et, en sens inverse, l'équivalence qu'il encadre :
+\[
+  (f_{\infty} = 1) \iff (\mathbb{R}(\alpha) = \mathbb{R}) \iff
+  M \text{ engendré par les } \mathbb{Q}(-2n) \iff
+  G \simeq G_{m} \ \text{ ou } \ G \simeq \{e\} .
+\]
+Le cas d'exception est donc minuscule : les seuls motifs sur $\mathbb{R}$ dont
+toutes les périodes sont réelles sont les sommes de twists \emph{pairs} du motif
+de Tate, ceux sur lesquels $(-1)^{n} = 1$.
+
+\subsection*{Le torseur comme forme tordue de $G$}
+
+La page 36 récapitule sous le titre « Motifs sur $\mathbb{R}$ ». Soit $G =
+\mathrm{Aut}_{\otimes}(T_{B})$. L'application $x \mapsto \bar{x}$ sur
+$X(\mathbb{C})$ induit sur $H^{*}(X(\mathbb{C}), \mathbb{Q})$ un
+$\otimes$-automorphisme d'ordre $2$ du foncteur $T_{B}$, d'où
+\[
+  f_{\infty} \in G(\mathbb{Q}) , \qquad f_{\infty}^{2} = 1 ,
+\]
+le « Frobenius réel ». Si $\sigma_{M}$ est la conjugaison complexe de
+$M \otimes_{\mathbb{Q}} \mathbb{C}$ et $\tau_{M}$ celle associée à la structure
+réelle $T_{DR}(M)$, alors
+\[
+  \tau_{M} = (f_{\infty})_{M}\, \sigma_{M} = \sigma_{M}\, (f_{\infty})_{M} .
+\]
+Et le torseur des périodes
+\[
+  P = \mathrm{Isom}_{\otimes}\bigl(T_{B} \otimes_{\mathbb{Q}}
+  \mathbb{R},\ T_{DR}\bigr)
+\]
+sur $G_{\mathbb{R}}$ est celui \emph{défini par le $1$-cocycle normalisé sur}
+$\Gamma = \mathbb{Z}/2\mathbb{Z}$ \emph{à valeurs dans} $G(\mathbb{C})$
+\emph{dont la valeur en l'élément non trivial est} $f_{\infty}$ ; la forme
+tordue correspondante de $G$ s'obtient en munissant $G_{\mathbb{C}}$ de la
+donnée de descente $\mathrm{int}(f_{\infty}) \times_{\mathbb{R}}
+\sigma_{\mathbb{C}}$.
+
+C'est l'énoncé le plus net du dossier, et il mérite d'être isolé : \emph{le
+torseur des périodes d'un motif sur $\mathbb{R}$ est la forme de $G$ tordue par
+le Frobenius réel}. Un objet de transcendance — l'ensemble des comparaisons
+entre Betti et de Rham — est identifié à un objet de cohomologie galoisienne, une
+classe dans $H^{1}(\mathrm{Gal}(\mathbb{C}/\mathbb{R}), G(\mathbb{C}))$, et
+cette classe est portée par un seul élément d'ordre $2$.
+
+La relation entre $f_{\infty}$ et le morphisme de Serre est réécrite ici sous la
+forme $f_{\infty}\, j(\lambda)\, f_{\infty}^{-1} = j(\lambda')$, où $j$ est la
+lettre que cette page emploie pour le $i$ de la page 33.
+
+\subsection*{Deux conséquences}
+
+La page 37 en tire d'abord que les trois éléments du triangle de la page 10
+engendrent le même corps :
+\[
+  \mathbb{R}(\gamma) = \mathbb{R}(\beta, \gamma) = \mathbb{R}(\beta, \alpha)
+  = \mathbb{R}(\alpha) ,
+\]
+puisque $\beta$ est réel — il appartient à $Q(\mathbb{R}) \subset
+P'(\mathbb{R})$. Le corps des périodes ne dépend donc pas de celle des trois
+comparaisons qu'on regarde, et il vaut $\mathbb{C}$ hors du cas exceptionnel.
+
+Puis une remarque, qui est l'exact pendant de ce qui précède : on ne peut avoir
+$f_{\infty M} = \mathrm{id}_{M}$ que si $M$ est une somme directe de puissances
+tensorielles de $\mathbb{Q}(2)$. C'est la même chose que l'équivalence de la
+page 35, dite du côté du motif plutôt que du côté du groupe, et elle est exacte
+pour la raison déjà donnée : $F_{\infty}$ agit par $(-1)^{n}$ sur
+$\mathbb{Q}(n)$, donc trivialement exactement sur les twists pairs.
+
+Le bas du feuillet porte un calcul dans le normalisateur de
+$\{C, C^{-1}\}$ dans $G_{\mathbb{R}}$, encadré puis annulé de trois traits
+diagonaux ; il déduit de $f_{\infty} C f_{\infty}^{-1} = C^{-1}$ l'appartenance
+de $f_{\infty}$ à ce normalisateur, passe au quotient $\dot{G} = G/i(\mu)$, et
+s'arrête\footnote{Le calcul est lisible et il est transcrit ; il est biffé sur
+le feuillet et n'aboutit à aucun énoncé. On ne le reprend pas ici.}.
+
+\pagerange{38}{40}
+\section*{Une décomposition de Hodge par topologie archimédienne (pages 38 à 40)}
+
+Cette dernière suite de la station 4 revient à la question de la page 26 — ce
+qui subsiste quand aucun isomorphisme n'est choisi — et lui donne une réponse
+positive.
+
+Soit $K$ un corps topologique isomorphe à $\mathbb{C}$ et $X$ un schéma
+algébrique non singulier sur $K$. Alors $X_{\mathrm{top}}$ est défini, donc
+$H^{*}(X_{\mathrm{top}}, K)$ ; d'autre part la cohomologie de Hodge $H^{*}(X)$
+est définie indépendamment de la structure topologique de $K$. Le choix d'un
+isomorphisme topologique $u \colon K \simeq \mathbb{C}$ donne un isomorphisme
+\[
+  H^{*}(X_{\mathrm{top}}, K) \;\xrightarrow{\ \sim\ }\; H^{*}(X) ,
+\]
+et l'on vérifie qu'il \emph{ne dépend pas} du choix de $u$. La vérification est
+celle-ci : pour $K = \mathbb{C}$, les deux homomorphismes qu'on obtient en
+composant avec la conjugaison se déduisent l'un de l'autre par extension de la
+conjugaison aux coefficients, donc induisent le même isomorphisme
+\[
+  H^{*}(X_{\mathrm{top}}, \mathbb{R}) \hookrightarrow H^{*}(X) .
+\]
+
+Pour $X$ projective non singulière, il en va de même de la décomposition :
+\[
+  \varphi \colon \coprod_{p,q} H^{q}(X, \Omega^{p}_{X})
+  \;\xrightarrow{\ \sim\ }\; H^{*}(X) ,
+\]
+compatible avec la filtration, et indépendante de $u$. Et si $K$ est isomorphe à
+$\mathbb{R}$, on conclut par descente : $K'$ étant une clôture algébrique et
+$\pi = \mathbb{Z}/2\mathbb{Z}$ son groupe de Galois, les isomorphismes
+$\varphi_{K'}$ commutent à $\pi$, donc proviennent d'un isomorphisme sur $K$.
+
+D'où l'énoncé, qu'il appelle lui-même un résumé : \emph{chaque fois que $X$ est
+projectif non singulier sur un corps topologique localement compact
+archimédien}, on a une décomposition $\varphi$ compatible à la filtration, et
+l'on pose
+\[
+  H^{p,q}(X) = \varphi\bigl(H^{q}(X, \Omega^{p}_{X})\bigr) \subset F^{p} H^{q}(X) .
+\]
+
+La page 40 franchit le dernier pas. Si $K$ n'est \emph{pas} topologique, chaque
+topologie localement archimédienne $T$ sur $K$ en fournit une, par complétion :
+\[
+  H^{*}(X)_{T} = H^{*}(X) \otimes_{K} \widehat{K}_{T} ,
+  \qquad
+  \varphi_{T} \colon \coprod_{p,q} H^{q}(X, \Omega^{p}_{X})_{T}
+  \longrightarrow H^{*}(X)_{T} ,
+\]
+d'où des sous-$K$-espaces de $H^{q}(X)$ canoniquement définis par $T$ :
+\[
+  H^{p,q}_{T}(X) = \varphi_{T}\bigl(H^{q}(X, \Omega^{p}_{X})_{T}\bigr) \cap H^{*}(X)
+  \;\subset\; F^{p}\bigl(H^{q}(X)\bigr) ,
+\]
+et de même une version réelle $H^{p,q}_{T}(X, \mathbb{R})$, qui est un espace
+vectoriel sur le sous-corps $\mathbb{R}_{T}$ des éléments de $K$ réels pour
+$T$\footnote{La page est ici embrouillée : une première rédaction
+« $\widehat{K}_{T} \simeq \mathbb{C}$ » est biffée, puis réécrite après « si
+$\widehat{K}_{T} \simeq \mathbb{R}$ ». Le sens que la suite exige est celui
+donné ici : chaque $T$ complète $K$ en $\mathbb{R}$ ou en $\mathbb{C}$, et
+$\mathbb{R}_{T}$ est le sous-corps des éléments réels pour $T$.}. Enfin
+\[
+  K_{r} \;\simeq\; \bigcap_{T} \mathbb{R}_{T}
+  \;=\; \text{le plus grand sous-corps totalement réel de } K ,
+\]
+et il note que $K_{r}$ est une extension algébrique du corps premier
+$\mathbb{Q}$\footnote{Cette dernière remarque vaut lorsque $K$ est algébrique
+sur $\mathbb{Q}$ ; elle est écrite sans cette réserve. Un corps de nombres
+totalement réel est bien ce que l'intersection produit dans le cas qui
+l'intéresse.}.
+
+Ce qui est gagné est net : il n'y a pas \emph{une} décomposition de Hodge sur un
+corps abstrait, mais \emph{une par place archimédienne}, et leur intersection
+retrouve la partie du corps qui ne dépend d'aucune. Le dossier a maintenant tout
+ce qu'il lui faut pour indexer les comparaisons par les places, ce qu'il fera
+dans la station suivante — non plus aux places archimédiennes seules, mais à
+toutes.
+
+\pagerange{42}{44}
+\section*{Le programme, et un écart qu'il ne réduit pas (pages 42 et 44)}
+
+La couverture de la page 41 porte deux lignes de sa main : « Variations du
+réseau discret en termes d'une place archimédienne. Critère de transcendance ».
+C'est le titre de tout ce qui suit.
+
+La page 42 pose quatre problèmes :
+
+\begin{enumerate}
+  \item[1)] \emph{Betti, de Rham}. Comparer les « réseaux » de de Rham et de
+        Betti ; comparer les réseaux de Betti pour des topologies différentes ;
+        comparer les structures réelles, respectivement les scindages, dans de
+        Rham, pour des topologies différentes.
+  \item[2)] \emph{Betti, $\ell$-adique}. Comparer les réseaux de Betti pour des
+        topologies différentes, du côté $\ell$-adique.
+  \item[3)] \emph{De Rham, $p$-adique}. Sur un corps valué complet non
+        archimédien, une comparaison est-elle possible entre cohomologie
+        $p$-adique et cohomologie de de Rham ?
+  \item[4)] Définir une cohomologie $p$-adique en tout $p$ ?
+\end{enumerate}
+
+Les points $1)$ et $2)$ sont ce que le dossier a fait et ce qu'il va faire. Les
+points $3)$ et $4)$ ne sont jamais repris\footnote{Ils reprennent la colonne
+primée de la page 4, restée elle aussi sans suite. Ce que le dossier appelle ici
+un problème est, dans la littérature ultérieure, la théorie de Hodge $p$-adique
+et la cohomologie cristalline ; les feuillets ne les nomment pas et il n'y a
+rien ici qui prétende les esquisser.}.
+
+La page 44 est un test, et son résultat est négatif. Soient $C$ et $C'$ deux
+courbes elliptiques sans multiplication complexe et non isogènes\footnote{La
+condition de non-isogénie est ce que demande le groupe qui suit ; les mots de la
+page qui l'exprimeraient sont comprimés contre le bord droit du feuillet et ne
+se lisent pas. Sans elle le groupe serait plus petit.}, et $A = C \times C'$.
+Alors
+\[
+  G \simeq SL(2) \times SL(2) \times G_{m} \quad (\dim = 7) ,
+  \qquad
+  B \simeq B(2) \times B(2) \times G_{m} \quad (\dim = 5) ,
+\]
+où $B$ est le parabolique attaché à la filtration\footnote{Le groupe de
+Mumford--Tate de $C \times C'$ est le produit fibré $GL_{2} \times_{G_{m}}
+GL_{2}$, de dimension $7$ ; il est isogène au produit écrit ici, et la page
+porte d'ailleurs le mot « isogénie », biffé.}. Le corps $K$ engendré est alors
+de degré de transcendance $\leqslant 5$ sur $k$, donc $\leqslant 5$ sur
+$k(\pi)$ — \emph{alors qu'on s'attend à $\dim G - 1 = 6$}.
+
+L'écart est noté et n'est pas réduit. Il est, à la lettre, le défaut de la
+borne qu'il vient d'employer : le parabolique $B$ suffit à majorer le degré de
+transcendance, mais il majore trop bien, et la conjecture des périodes demande
+davantage que ce que la filtration seule peut donner. En marge il ajoute :
+« NB ceci vaut pour \emph{toutes} incarnations $k \subset \mathbb{C}$ », ce qui
+veut dire que l'écart n'est pas un artefact d'un plongement particulier.
+
+\pagerange{46}{50}
+\section*{Les réseaux aux places de $k$, et la borne $(n-1)\dim G$ (pages 46 à 50)}
+
+\subsection*{Le dispositif}
+
+Soit $M$ un motif sur un corps $k$ algébriquement clos, isomorphe à un
+sous-corps de $\mathbb{C}$. Pour toute place $v$ de $k$, on dispose d'un réseau
+\[
+  M^{\mathbb{Z}}_{v} \subset \prod_{\ell \text{ fini}} M(\ell) ,
+\]
+et la question est celle des relations entre les $M^{\mathbb{Z}}_{v}$ pour
+plusieurs places $v_{1}, \ldots, v_{n}$.
+
+On fixe un foncteur fibre de référence $\xi$, par exemple défini sur
+$\mathbb{Q}$, avec des isomorphismes fonctoriels
+$\xi(M)_{\mathbb{Q}_{\ell}} \simeq M(\ell) \otimes_{\mathbb{Z}_{\ell}}
+\mathbb{Q}_{\ell}$. Chaque place donne alors un torseur
+\[
+  P_{i} = \mathrm{Isom}(\xi, \xi_{v_{i}})
+\]
+sous $G$, et l'ensemble des places donne un point de
+$\bigl(\prod_{i} P_{i}\bigr)(\widehat{\mathbb{Q}})$, où $\widehat{\mathbb{Q}} =
+\prod_{\ell \text{ fini}} \mathbb{Q}_{\ell}$, donc un point du quotient
+$\bigl[\bigl(\prod_{i} P_{i}\bigr)/G\bigr](\widehat{\mathbb{Q}})$. Dit avec des
+matrices, c'est un point d'un espace de doubles classes
+\[
+  GL(n, \widehat{\mathbb{Z}})^{n} \,\backslash\,
+  GL(n, \widehat{\mathbb{Q}})^{n} \,/\,
+  GL(n, \widehat{\mathbb{Q}}) ,
+  \qquad n = \mathrm{rang}\, M ,
+\]
+le premier quotient parce que les réseaux ne sont définis qu'à
+$GL(n, \widehat{\mathbb{Z}})$ près, le second parce que le foncteur de référence
+n'est lui-même défini qu'à isomorphisme près. La dimension de cet espace donne
+la majoration
+\[
+  \deg\mathrm{tr} \;\leqslant\; (n-1)\, d , \qquad d = \dim G :
+\]
+$n$ places, un quotient diagonal, donc $n-1$ facteurs effectifs, chacun de
+dimension $d$. C'est la même mécanique que la page 11 — une dimension majore un
+degré de transcendance — transportée du cas archimédien au cas adélique.
+
+\subsection*{Comment rendre les composantes indépendamment génériques}
+
+Reste à savoir si la borne est atteinte, et c'est là qu'intervient l'arithmétique.
+Les places données définissent des éléments $g_{1}, \ldots, g_{n}$ de
+$G(\widehat{\mathbb{Z}})$ ; en remplaçant $v_{i}$ par $\tau_{i} v_{i}$ avec
+$\tau_{i} \in \mathrm{Gal}(k/k_{0})$, où $k_{0}$ est un corps de définition de
+type fini de $M$, on remplace $g_{i}$ par $\dot{\tau}_{i} g_{i}$. Si donc
+l'image de Galois est assez grosse, on peut bouger les places jusqu'à rendre les
+$g_{i}$ génériques indépendamment les uns des autres.
+
+C'est ce que fournit la \emph{conjecture de Tate renforcée}, sous la forme qu'il
+lui donne : l'homomorphisme
+\[
+  \mathrm{Gal}(k/k_{0}) \longrightarrow G(\widehat{\mathbb{Q}})
+\]
+a une image d'indice fini\footnote{C'est l'énoncé adélique dont le cas
+$\ell$-adique est le théorème d'image ouverte de Serre pour les courbes
+elliptiques sans multiplication complexe. Le feuillet écrit « conjecture de Tate
+renforcée » et ne renvoie à rien.}. Il lui faut alors un énoncé purement
+algébrique, qu'il enferme dans un grand crochet en bas de page :
+
+\begin{quote}
+Soit $G$ un groupe algébrique affine connexe sur $\mathbb{Q}$, $U$ un
+sous-groupe ouvert de $G(\widehat{\mathbb{Q}})$, et $P = U\!\cdot\!a$ une classe
+dans $G(\widehat{\mathbb{Q}})$ modulo $U$. Alors il existe dans $P$ un élément
+dont toutes les composantes sont génériques relativement à $\mathbb{Q}$.
+\end{quote}
+
+Le lemme n'est pas démontré, et la page 50 s'ouvre sur « Donc en admettant ce
+lemme ». Ce qu'il en tire est que tout système de places $v_{1}, \ldots, v_{n}$
+peut être rendu générique place par place. La réciproque est amorcée
+— « D'ailleurs, on ... inversement » — et abandonnée
+aussitôt\footnote{Une note écrite de biais dans la marge gauche de la page 50,
+en travers des lignes et en partie perdue, semble porter sur une complétion du
+groupe $T$ et sur les réseaux $M^{\mathbb{Z}}_{v}$ dans
+$M_{f} = \prod \mathbb{Z}_{\ell}$. On ne la reconstitue pas.}. Il note enfin, et
+c'est une restriction réelle, que le choix des $\tau_{i}$ et donc des $v_{i}$
+\emph{dépend de $M$} : il n'y a pas de système de places qui convienne à tous
+les motifs à la fois.
+
+\pagerange{52}{58}
+\section*{La place archimédienne, et le cocycle (pages 52 à 58)}
+
+\subsection*{Le module adélique}
+
+Supposons maintenant $k$ isomorphe à $\mathbb{C}$. Les réseaux vivent alors dans
+\[
+  M^{\mathbb{Z}}_{v} \subset M^{\mathbb{A}_{\mathbb{C}}} ,
+  \qquad
+  M^{\mathbb{A}_{\mathbb{C}}} = \prod_{\ell} M(\ell) ,
+  \qquad \ell \text{ fini \emph{ou infini}} ,
+\]
+la précision étant de lui et soulignée : la place archimédienne est comptée avec
+les autres, et son facteur est $M(\infty)$, la réalisation de de
+Rham\footnote{C'est le produit annoncé à la page 28. La notation
+$\mathbb{A}_{\mathbb{C}}$ est celle de cette lecture pour ce que les pages 52 à
+60 écrivent d'un seul trait ; la page 60 l'écrit avec un $C$ capital non
+ambigu, et le facteur archimédien du groupe est bien $G(\mathbb{C})$.}.
+
+Si $M$ est défini sur $k_{0}$, on a, pour $\sigma \in \mathrm{Gal}(k/k_{0})$,
+\[
+  M^{\mathbb{Z}}_{\sigma v} = \dot{\sigma}\, M^{\mathbb{Z}}_{v} ,
+\]
+où $\dot{\sigma}$ opère composante par composante :
+\[
+  \dot{\sigma}\bigl((x_{\ell})_{\ell \text{ fini}},\ x_{\infty}\bigr)
+  = \bigl(\tau_{\ell} x_{\ell},\ \dot{\sigma}_{\infty} x_{\infty}\bigr) .
+\]
+Aux places finies, $\tau_{\ell}$ provient de la représentation galoisienne
+$\mathrm{Gal}(k/k_{0}) \to G(\mathbb{Z}_{\ell})$ ; à la place infinie,
+$\dot{\sigma}_{\infty}$ est l'homomorphisme \emph{semi-linéaire} déduit de
+$\sigma$ par $M_{k}(\infty) \simeq M_{k_{0}}(\infty) \otimes_{k_{0}}
+k$\footnote{Il écrit « $\tfrac{1}{2}$ linéaire », son abréviation constante pour
+\emph{semi-}.}. La dissymétrie est le point : aux places finies l'action est
+linéaire et vit dans un groupe compact ; à la place infinie elle est
+semi-linéaire, et c'est elle qui portera toute l'information.
+
+\subsection*{Deux places, un élément du groupe adélique}
+
+Pour deux places $v$ et $w$, les réseaux correspondants sont commensurables et
+il existe
+\[
+  g \in G(\mathbb{A}_{\mathbb{C}})
+  = \prod_{\ell \text{ fini}} G(\mathbb{Z}_{\ell}) \times G(\mathbb{C})
+  \qquad \text{tel que} \qquad
+  M^{\mathbb{Z}}_{w} = g\, M^{\mathbb{Z}}_{v} ,
+\]
+déterminé modulo $G(\widehat{\mathbb{Z}})$. En faisant varier $\sigma$ on
+obtient une application
+\[
+  \mathrm{Gal}(k/k_{0}) \xrightarrow{\ \varphi_{v}\ }
+  G(\mathbb{A}_{\mathbb{C}})/G(\widehat{\mathbb{Z}})
+  \qquad \text{avec} \qquad
+  \dot{\sigma}_{\infty}\bigl(M^{\mathbb{Z}}_{v}\bigr)
+  = \varphi_{v}(\sigma)\, M^{\mathbb{Z}}_{v} .
+\]
+
+\subsection*{La composante archimédienne est bien déterminée}
+
+Vient alors le pas qu'il marque de trois points d'exclamation. L'indétermination
+modulo $G(\widehat{\mathbb{Z}})$ ne porte que sur les places finies : la
+composante archimédienne, elle, est \emph{bien déterminée dans $G(k)$}. On
+obtient donc une application canonique
+\[
+  \mathrm{Gal}(k/k_{0}) \xrightarrow{\ \varphi_{v,\infty}\ } G(k)
+  \;\subset\; GL\bigl(M_{k}(\infty)\bigr) ,
+\]
+et $G$ peut ici être considéré comme défini sur $k_{0}$, indépendamment de $v$.
+
+La raison de cette détermination est la même que celle qui rendait le facteur
+$2i\pi$ inévitable à la page 16 : le groupe $G(\widehat{\mathbb{Z}})$ est compact
+et absorbe l'ambiguïté aux places finies, tandis que $G(\mathbb{C})$ ne contient
+aucun sous-groupe compact qui jouerait ce rôle. Ce que les places finies
+n'arrivent pas à voir, la place archimédienne le voit exactement.
+
+\subsection*{Un $1$-cocycle, donc un torseur}
+
+L'application obtenue satisfait la relation de cocycle
+\[
+  \varphi_{v}(\tau\sigma) = {}^{\tau}\varphi_{v}(\sigma)\, \varphi_{v}(\tau) ,
+\]
+et $\psi_{v} = \varphi_{v}^{-1}$ la relation symétrique. Autrement dit
+$\varphi_{v}$ est un \emph{$1$-cocycle} de $\mathrm{Gal}(k/k_{0})$ à valeurs
+dans $G(k)$, pour l'action évidente par conjugaison et transport. Il lui
+correspond donc un fibré principal homogène $P_{v,k}$ sous $G(k)$, muni d'une
+action compatible de $\mathrm{Gal}(k/k_{0})$, c'est-à-dire d'une donnée de
+descente ; d'où une forme $P_{v,k_{0}}$ sur $k_{0}$.
+
+C'est le troisième torseur du dossier, et il boucle l'argument. Celui de la
+page 10 comparait deux cohomologies sur $\mathbb{C}$ ; celui de la page 36
+comparait Betti et de Rham sur $\mathbb{R}$ et se trouvait être la forme de $G$
+tordue par $f_{\infty}$ ; celui-ci compare le même motif vu depuis deux places
+d'un corps de nombres et est encore une forme de $G$, tordue cette fois par un
+cocycle galoisien tout entier et non plus par un seul élément d'ordre $2$. Il
+demande enfin que l'image de $\varphi_{v}$ soit Zariski-dense — « à vérifier /
+ok », note-t-il en marge — ce qui est la condition pour que le degré de
+transcendance atteigne effectivement la dimension.
+
+\pagerange{60}{61}
+\section*{Ce que le cocycle doit à la place choisie (pages 60 et 61)}
+
+La page 60 se demande ce que devient l'image lorsqu'on change de place, et
+regarde le noyau de $\sigma \mapsto \sigma_{*}$ ; elle demande que l'image de
+$\varphi_{v}$ domine un ouvert de $G(\mathbb{A}_{\mathbb{C}})$, et la phrase est
+coupée au bas du feuillet\footnote{Le bas du feuillet porte encore, à la mine,
+un « ( ) ? ». La page 61 reprend la phrase et la mène à son terme : c'est le
+seul endroit du dossier où un argument traverse effectivement une limite de lot.}.
+
+La dernière page du dossier la mène à son terme. Partant de
+$M^{\mathbb{Z}}_{w} = g\, M^{\mathbb{Z}}_{v}$, elle calcule
+\[
+  M^{\mathbb{Z}}_{\sigma w} = \dot{\sigma}\bigl(M^{\mathbb{Z}}_{w}\bigr)
+  = \dot{\sigma}\, g\, \dot{\sigma}^{-1}\,
+    \bigl(\dot{\sigma} \cdot M^{\mathbb{Z}}_{v}\bigr)
+  = \bigl(\dot{\sigma}\, g\, \dot{\sigma}^{-1}\bigr)\, \sigma_{*}\, g^{-1}\,
+    \bigl(g\, M^{\mathbb{Z}}_{v}\bigr) ,
+\]
+d'où l'opérateur tordu
+\[
+  \sigma'_{*} = \dot{\sigma}\, g\, \dot{\sigma}^{-1}\, \sigma_{*}\, g^{-1} .
+\]
+Aux places finies rien ne bouge :
+$\sigma'_{\ell} = \sigma_{\ell} g_{\ell} \sigma_{\ell}^{-1} \sigma_{\ell}
+g_{\ell}^{-1} = \sigma_{\ell}$. À la place infinie,
+\[
+  \sigma'_{\infty} = \dot{\sigma}_{\infty}\, g_{\infty}\,
+  \dot{\sigma}_{\infty}^{-1}\, \sigma_{\infty}\, g_{\infty}^{-1} .
+\]
+
+Ce que cela dit est exactement ceci : \emph{les deux cocycles sont
+cohomologues}. En posant ${}^{\sigma}g_{\infty} = \dot{\sigma}_{\infty}
+g_{\infty} \dot{\sigma}_{\infty}^{-1}$,
+\[
+  \varphi_{w}(\sigma) = {}^{\sigma}g_{\infty}\; \varphi_{v}(\sigma)\;
+  g_{\infty}^{-1} ,
+\]
+qui est la formule de cobord : $\varphi_{w}$ et $\varphi_{v}$ diffèrent du
+cobord de $g_{\infty}$ et définissent donc \emph{la même classe} dans
+$H^{1}\bigl(\mathrm{Gal}(k/k_{0}), G(k)\bigr)$, donc le même torseur
+$P_{v,k_{0}}$ à isomorphisme près. Lorsque $g_{\infty}$ est invariant par
+Galois, le cobord se réduit à une conjugaison ordinaire et l'on retrouve la
+formule qu'il encadre :
+\[
+  \varphi_{w}(\sigma) = g_{\infty}\, \varphi_{v}(\sigma)\, g_{\infty}^{-1}
+  \qquad \text{pour } M^{\mathbb{Z}}_{w} = g\, M^{\mathbb{Z}}_{v} ,
+\]
+c'est-à-dire lorsque $w$ et $v$ sont, selon son mot, \emph{$M$-équivalents}
+\footnote{La page encadre la formule de conjugaison. Sa première rédaction,
+biffée d'un long trait, porte $g_{\infty}^{\dot{\sigma}_{\infty}}$ à la place du
+premier $g_{\infty}$, c'est-à-dire exactement le cobord ; il l'a donc écrite
+juste avant de la simplifier. Le contenu invariant — une classe, un torseur — ne
+dépend pas de la simplification, et c'est lui qu'on a mis en avant ici.}.
+
+Le dossier s'arrête sur cette formule. Ce qu'elle établit est modeste et
+nécessaire : le torseur construit à la page 58 ne dépend pas de la place qui a
+servi à le construire. C'est la condition sans laquelle rien de ce qui précède
+ne serait un invariant du motif — et c'est, une dernière fois, la figure que
+tout le dossier répète : on n'a jamais de comparaison privilégiée, mais
+l'ensemble des comparaisons, lui, ne dépend d'aucun choix.
+
+\end{document}
