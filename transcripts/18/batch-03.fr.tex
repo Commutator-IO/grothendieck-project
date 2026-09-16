@@ -1,0 +1,408 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 18, batch 3 (pages 41-60).
+% Established from the facsimile archives/batches/18/batch-03.pdf (a mirror of
+% https://grothendieck.umontpellier.fr/18.pdf), per the skill
+% transcribe-grothendieck. Its PDF page 1 is archivists' page 41 (checked
+% against the pencilled number bottom-left, and again at 50, 52, 54, 56, 58, 60);
+% the batch file has no cover sheet.
+%
+% Pass: Opus 5 (claude-opus-5), 2026-09-16 — first pass, unchecked against the pages by a human.
+%
+% Eleven leaves carry his hand: 41, 42, 44, 46, 48, 50, 52, 54, 56, 58, 60 — the
+% even ones and the cover. The odd ones, 43 45 47 49 51 53 55 57 59, are the
+% backs of typescripts foreign to these notes (an English mathematical
+% typescript, Bourbaki fascicles) and are skipped: the gaps in the numbering are
+% the record. Page 41 is otherwise blank and carries only the two lines that
+% name the run; per the skill it takes no \page and its words open the file as
+% the section heading.
+%
+% Batches 1, 2 and 4 are being transcribed at the same time by other passes, so
+% no earlier .tex fixed the notation. No run crosses the 40/41 boundary: page 40
+% is on Hodge theory and a real subfield for T, page 41 opens a fresh heading and
+% page 42 a fresh list of problems. A run DOES cross the far boundary: page 60
+% breaks off on « ... est un sous-groupe ouvert de G(A_C) » and page 61 takes the
+% same computation up, with the relation M^Z_w = g M^Z_v and the conjugated
+% cocycle phi_w(sigma) = g_infty phi_v(sigma) g_infty^{-1}. Page 61 is batch 4's;
+% only 41-60 are transcribed here, and a \note marks the break.
+%
+% What the batch is about. A transcendence programme for periods, in the
+% language of motives and their Mumford-Tate groups. Page 42 lists four problems
+% of comparison (Betti/de Rham lattices, Betti lattices for different
+% topologies, real structures and splittings, de Rham against p-adic over a
+% complete valued field, and a p-adic cohomology at every p). Page 44 works the
+% example C x C' of two elliptic curves without complex multiplication: G of
+% dimension 7, B of dimension 5, and a transcendence degree bounded by 5 where
+% dim G - 1 = 6 was expected. Pages 46-50 are the general argument: for a motive
+% M over k, each place v gives a lattice M^Z_v inside the product of the M(l),
+% the places v_1, ..., v_n give principal homogeneous spaces P_i = Isom(xi,
+% xi_{v_i}) under the Mumford-Tate group G, and a point of the double coset
+% space bounds the transcendence degree by (n-1)d, d = dim G. A lemma on generic
+% elements of a coset U.a in G(Q-hat), and the strengthened Tate conjecture
+% (Gal(k/k_0) -> G(Z-hat) of finite index), let the v_i be moved by Galois until
+% the components are independently generic. Pages 52-58 turn to the archimedean
+% place: with k embedded in C, the adelic module M^{A_C} (l finite OR infinite),
+% the semi-linear map sigma_infty coming from M_k(infty) = M_{k_0}(infty) tensor
+% k, a map phi_v : Gal(k/k_0) -> G(A_C)/G(Z-hat), then — the point he marks with
+% three exclamation marks — the archimedean component alone is well determined
+% in G(k), giving phi_{v,infty} : Gal(k/k_0) -> G(k) inside GL(M_k(infty)), a
+% 1-cocycle, hence a principal homogeneous space P_{v,k} under G with Galois
+% descent data and a form P_{v,k_0} over k_0. Page 60 asks that the image be
+% Zariski-dense, resp. open in G(A_C).
+%
+% Notation fixed for the batch: M for a motive, M(l) for its l-adic realisation,
+% M^Z_v for the lattice attached to a place v, M^{A_C} for the adelic module;
+% A_C for his adeles with C at the infinite place (the superscript on page 52
+% and the argument of G on pages 54, 58 and 60 are the same letter, and page 60
+% writes it as an unambiguous capital C); Q-hat and Z-hat as \widehat{\mathbb{Q}}
+% and \widehat{\mathbb{Z}}; G = G_{M,xi_0} the Mumford-Tate group, G(Z_l),
+% G(Z-hat), G(k); sigma-dot and sigma_* for the operator of a Galois element,
+% sigma_infty for its archimedean (semi-linear) component; phi_v and psi_v for
+% the cocycles; k_0 the field of definition, k its extension embedded in C.
+% « 1/2 linéaire » is transcribed « semi-linéaire », his 1/2 for semi-. His « ré »
+% is drawn so that « réseaux » reads « viscaux » and « réelles » reads
+% « vielles »; the readings are fixed once here and held.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{18}
+\batch{3}
+\pages{41}{60}
+\dating{[à partir de 1969-vers 1972]}
+\watermark{Édition de démonstration}
+\foldertitle{Motifs et théorie de Hodge : notes manuscrites (s.d.)}
+
+\begin{document}
+
+\section*{Variations du réseau discret en termes d'une place archimédienne. Critère de transcendance}
+
+\note{Le titre est de lui. Ces deux lignes occupent seules le haut du feuillet
+41, par ailleurs vierge : ce feuillet sert de couverture à ce qui suit et n'est
+pas transcrit comme page, d'où le saut de 41 à 42 dans la numérotation.
+« place » y est abrégé « pl. ». Les autres feuillets absents (43, 45, 47, 49,
+51, 53, 55, 57, 59) portent au dos des textes étrangers à ces notes.}
+
+\page{42}
+
+\emph{Pbs}
+
+\begin{enumerate}
+  \item[1)] Betti, DeRham
+  \item[a)] Comparaison « réseaux » de DeRham et \struck{de} de Betti
+  \item[b)] Comparaison réseaux de Betti pour topologies différentes ?
+  \item[c)] Comparaison structures réelles, resp.\ splittages, (dans DeRham)
+        pour top.\ diff.
+  \item[2)] Betti, $\ell$-adique. \struck{Comp} Comparaison de réseaux de Betti
+        pour top.\ diff.\ (dans ch.\ $\ell$-adique) --- comp.\ \uncertain{évident ou $p$}
+  \item[3)] DeRham, $p$-adique. Sur un corps valué (\uncertain{complet} \ill{})
+        (non archimédien), comparaison possible entre cohomologie $p$-adique et
+        cohomologie de DeRham ?
+  \item[4)] Définition de cohomologie $p$-adique en tout $p$ ??
+\end{enumerate}
+
+\note{Le mot entre guillemets au point a) est le même que celui du feuillet de
+couverture : sa « ré » se lit « vi », et « réelles » du point c) se lit de même
+« vielles ». Deux insertions interlinéaires : au-dessus de « corps valué » du
+point 3), trois mots dont seul le premier se laisse lire ; au-dessus du point
+2), « (dans ch.\ $\ell$-adique) », donné ici dans la ligne.}
+
+\page{44}
+
+$C$, $C'$ courbes elliptiques sans mult.\ complexe, avec \ill{}
+\note{Les derniers mots de la ligne sont comprimés contre le bord droit et ne se
+laissent pas lire ; ce qui suit ($G \simeq SL(2) \times SL(2) \times
+\mathbb{G}_{m}$, de dimension $7$) demande que $C$ et $C'$ soient non
+isogènes.}
+
+$C \times C' = A$
+
+\struck{isogénie} $G \simeq SL(2) \times SL(2) \times \mathbb{G}_{m}$ \quad de dim.\ $7$
+
+$B \simeq B(2) \times B(2) \times \mathbb{G}_{m}$ \quad de dim.\ $5$
+
+Alors $K$ de degré de transcendance $\leqslant 5$ sur $k$, donc de degré de
+transcendance $\leqslant 5$ sur $k(\pi)$ [alors qu'on s'attend à
+$\dim G - 1 = 6$].
+
+\marginal{NB Ceci \uncertain{joint} pour \emph{ttes} incarnations $k \subset \mathbb{C}$ !}
+
+\page{46}
+
+$M$ motif sur $k$ \add{alg.\ clos}, $k$ isomorphe à un sous-corps de
+$\mathbb{C}$.
+
+Pour toute place $v$ de $k$, on a $M^{\mathbb{Z}}_{v}$ qui est un sous-réseau de
+$\prod_{\ell\ \mathrm{fini}} M(\ell)$. On veut établir les relations entre les
+$M^{\mathbb{Z}}_{v}$ pour diverses valeurs $v_{1}, \ldots, v_{n}$ de $v$.
+
+Choisissons un \uncertain{sous-foncteur} de \uncertain{référence} (p.\ ex.\
+défini sur $\mathbb{Q}$)
+\[
+  \xi : M \rightsquigarrow M_{\xi_{0}} \otimes_{\xi_{0}} \quad (= T(\mathbb{Q}))
+\]
+avec des isom.\ foncto\add{riels} $\xi_{\struck{\ill{}}}(M)_{\mathbb{Q}_{\ell}}
+= M(\ell) \otimes_{\mathbb{Z}_{\ell}} \mathbb{Q}_{\ell}$.
+\note{L'indice de $\otimes$ dans la première formule et la source du second
+membre de la seconde sont l'un et l'autre douteux ; on donne la lecture que
+demande la suite.}
+
+Alors $v_{1}, \ldots, v_{n}$ définissent les fibrés principaux homogènes
+\[
+  P_{i} = \underline{\mathrm{Isom}}(\xi, \xi_{v_{i}})
+\]
+sous $G^{\xi}_{M,\xi_{0}}$ (ou sur $\mathbb{Q}$), et \ill{} un point dans
+$\bigl(\prod P_{i}\bigr)(\widehat{\mathbb{Q}})$, où $\widehat{\mathbb{Q}} =
+\prod_{\ell\ \mathrm{fini}} \mathbb{Q}_{\ell}$, d'où un pt de
+$\bigl[\bigl(\prod P_{i}\bigr)/G\bigr](\widehat{\mathbb{Q}})$.
+
+On peut aussi considérer que l'on a un pt canonique dans
+\struck{$GL(n) \times \cdots \times GL(n)$}
+\struck{$\bigl[GL(n) \times \cdots \times GL(n)\bigr](\widehat{\mathbb{Q}}) / GL(n)(\widehat{\mathbb{Q}})$}
+\[
+  GL(n, \widehat{\mathbb{Z}}) \times \cdots \times GL(n, \widehat{\mathbb{Z}})
+  \,\backslash\, GL(n, \widehat{\mathbb{Q}}) \times \cdots \times GL(n, \widehat{\mathbb{Q}})
+  \,/\, GL(n, \widehat{\mathbb{Q}})
+\]
+\add{$n = \mathrm{rang}\ M$}
+\note{Dans la ligne encadrée il avait d'abord écrit $\mathbb{Z}$, biffé et
+récrit $\widehat{\mathbb{Z}}$ ; le $GL$ du second membre biffé est lui-même
+surchargé. En marge gauche, en face de ce bloc, deux mots qui ne se lisent pas.}
+
+Les considérations qui précèdent montrent que le degré de transcendance des pts
+en question
+
+\page{48}
+
+est majoré par $(n-1)d$, car \ill{} $\bigl((n-1) \cdot n\bigr)$ où
+$d = \dim G$. \struck{\ill{}}
+
+D'ailleurs, si $v_{1}, v_{2}, \ldots, v_{n}$ sont donnés, \struck{\ill{}}
+définissant \ill{} $g_{1}, \ldots, g_{n} \in G(\widehat{\mathbb{Z}})$, en
+prenant $\tau_{2}, \ldots, \tau_{n} \in \mathrm{Gal}(k/k_{0})$ (si $k_{0}$ est
+\ill{} corps de \struck{définition} \add{de type fini} de $M$) et $v'_{1},
+v'_{2}, \ldots, v'_{n}$ avec $v'_{i} = \tau_{i} v_{i}$, $1 \leqslant i
+\leqslant n$, on trouvera les éléments \struck{$g$} $\dot\tau_{2} g_{2}, \ldots,
+\dot\tau_{n} g_{n}$, \ill{} $\dot\tau_{i}$ l'image de \ill{} dans
+$G(\widehat{\mathbb{Z}})$. \struck{\ill{}}
+
+\marginal{N.B. On \ill{} \uncertain{prendra} \ill{} la « fine » \ill{} donc conne\ill{}}
+
+Admettant la \emph{conjecture de Tate renforcée}, $\mathrm{Gal}(k/k_{0}) \to
+G(\widehat{\mathbb{Q}})$ a une image \uncertain{$\sigma$} qui est d'indice fini,
+il s'ensuit que quitte à remplacer les $v_{i}$ par des $\tau_{i} v_{i}$
+convenables, on peut \struck{obtenir} $g_{2}, \ldots, g_{n}$ génériques
+indépendamment pour \emph{tt} $\ell$, si \ill{} devrait ceci :
+
+\begin{quote}
+Soit $G$ un gr.\ alg.\ \struck{\ill{}} affine connexe sur $\mathbb{Q}$, $U$
+s\add{ous}-g\add{rou}pe \ill{} ouvert de $G(\widehat{\mathbb{Q}})$, $P = U.a$
+\add{une classe} dans $G(\widehat{\mathbb{Q}})$ mod $U$. Alors il existe dans
+$P$ un élt \ill{} dont toutes les composantes soient génériques rel.\
+$\mathbb{Q}$.
+\end{quote}
+
+\note{Le lemme est enfermé dans un grand crochet, en bas à droite du feuillet ;
+il est repris à la première ligne de la page 50.}
+
+\page{50}
+
+Donc en admettant ce lemme, on trouvera que \emph{tt} syst.\ $v_{1}, \ldots,
+v_{n}$ \ill{} générique, \ill{} pt \struck{générique} de $V(\widehat{\mathbb{Z}})$
+\struck{générique} tel que pour \emph{tt} $\ell$, \ill{} $V(\mathbb{Z}_{\ell})$
+soit générique rel.\ à $\mathbb{Q}$.
+\note{Le $V$ de ces trois lignes n'est pas le $G$ du lemme ; la lettre est
+écrite en deux traits très ouverts et le reste de la page n'y revient pas.}
+
+D'ailleurs, on \ill{} inversement, \ill{}
+
+\marginal{Moyennant \ill{} complétion \ill{} le \ill{} de $M$, \ill{} $G$ \ill{}
+$T$ \ill{} qui \ill{} \ill{} des \ill{} $M^{\mathbb{Z}}_{v}$ \ill{}
+$(M_{f} = \prod \mathbb{Z}_{\ell})$}
+\note{Cette note est écrite de biais dans la marge gauche, en travers des
+lignes ; un lambeau en est entouré à la mine (« le lemme \ill{} »). On ne donne
+que le peu qui se laisse lire.}
+
+$M^{\mathbb{Z}}_{v}$ \ill{} $v_{i}$ \ill{} $M^{\mathbb{Z}}_{v_{i}}$ \ill{}
+comme \ill{}
+
+\ill{} \ill{} en transformé des réseaux \ill{} comparables.
+
+[On \ill{} que le choix des $\tau_{i}$, et enfin $v_{i}$,
+\emph{dépend de $M$} ; \ill{} que pour $M$ variable, \ill{} bien déterminé les
+\ill{} par des \ill{} $\xi$.]
+
+\page{52}
+
+Supposons maintenant $k$ isomorphe à $\mathbb{C}$, et donnons-nous une \ill{}
+pour laquelle \ill{} \emph{complet}. Alors on a \ill{} les réseaux
+\[
+  M^{\mathbb{Z}}_{v} \subset M^{\mathbb{A}_{\mathbb{C}}}
+  \quad\text{où}\quad
+  M^{\mathbb{A}_{\mathbb{C}}} = \struck{\ill{}} \prod M(\ell)
+\]
+\marginal{$\ell$ fini \emph{ou infini}}
+\ill{} indépendant.
+
+\struck{Comparaison \ill{}} Si $M$ est défini sur \ill{} $k_{0}$, et $k_{0}$
+\ill{} pour \ill{} que $G_{M}$ soit connexe \ill{} \ill{} de transcendance
+\struck{\ill{}} \ill{} minimum, \ill{} alors \struck{\ill{}} on a, pour
+$\sigma \in \struck{\mathrm{Aut}_{k_{0}}\ \ill{}}\ \mathrm{Gal}(k/k_{0})$,
+\[
+  M^{\mathbb{Z}}_{\sigma v} = \dot\sigma M^{\mathbb{Z}}_{v} ,
+\]
+\marginal{NB $k$ n'est pas \struck{\ill{}} \ill{} algébrique sur $k_{0}$, mais
+de degré de transcendance \ill{}}
+où $\dot\sigma$ opère sur $M^{\mathbb{A}_{\mathbb{C}}}$ \ill{} \emph{les
+images} \ill{} :
+\[
+  \dot\sigma\bigl((x_{\ell})_{\ell\ \mathrm{fini}},\ x_{\infty}\bigr)
+  = \bigl(\tau_{\ell} x_{\ell},\ \dot\sigma_{\infty} x_{\infty}\bigr)
+\]
+où $\tau_{\ell}$ provient de $\mathrm{Gal}(k/k_{0}) \to G(\mathbb{Z}_{\ell})$,
+et $\dot\sigma_{\infty}$ est l'hom.\ \emph{semi-}linéaire déduit de $\sigma$ via
+$M_{k}(\infty) \simeq M_{k_{0}}(\infty) \otimes_{k_{0}} k$.
+\note{Il écrit « $\tfrac{1}{2}$ linéaire » : son $\tfrac{1}{2}$ pour
+\emph{semi-}, comme ailleurs « $\tfrac{1}{2}$cosimplicial ». Le $\mathbb{A}$ de
+$M^{\mathbb{A}_{\mathbb{C}}}$ porte ici un petit c ; la page 60 écrit le même
+groupe $G(\mathbb{A}_{\mathbb{C}})$ avec un C capital non ambigu, et le facteur
+archimédien est bien $G(\mathbb{C})$.}
+
+\page{54}
+
+Comme \ill{} $v$ et $w$, \ill{} transformé dans \struck{Dont} comme d'habitude
+\ill{} il existe un
+\[
+  g \in G(\mathbb{A}_{\mathbb{C}}) = \prod_{\ell\ \mathrm{fini}} G(\mathbb{Z}_{\ell}) \times G(\mathbb{C})
+\]
+\struck{dit que $M^{\mathbb{Z}}_{w} = g$} tel que
+\[
+  \underline{M}^{\mathbb{Z}}_{w} = g\, M^{\mathbb{Z}}_{v}
+\]
+\add{où $G = G_{M,\xi_{0}}$} \ill{} isomorphes, \ill{} pour \ill{}, mod
+multiplication $g \rightsquigarrow gh$ ($h \in G(\widehat{\mathbb{Z}})$).
+
+$g$ est \ill{} associé à $M$, $v$. \ill{} $N_{v}$ et $N_{w}$ \ill{}
+
+D'ailleurs, $g$ est déterminé \ill{} $h \in G(\widehat{\mathbb{Z}})$.
+
+\marginal{N.B. \ill{} de \ill{} fixe $g_{\sigma}$ \ill{} indéterminé mod
+$G(\widehat{\mathbb{Z}})$ \ill{} $g_{\ell}$ \ill{} déterminé}
+
+\struck{$M^{\mathbb{Z}}_{\sigma v} = \dot\sigma_{\infty}(g M^{\mathbb{Z}}_{v})$}
+\[
+  M^{\mathbb{Z}}_{\sigma v} = \struck{g_{\sigma}}\ g_{\sigma} M^{\mathbb{Z}}_{v}
+  = \dot\sigma_{\infty} M^{\mathbb{Z}}_{v}
+\]
+d'où \ill{} \emph{une} application
+\[
+  \mathrm{Gal}(k/k_{0}) \xrightarrow{\ \varphi_{v}\ } G(\mathbb{A}_{\mathbb{C}})/G(\widehat{\mathbb{Z}})
+\]
+\[
+  M^{\mathbb{Z}}_{\sigma v} = g_{\sigma} \varphi_{v}(\sigma) M^{\mathbb{Z}}_{v}
+  \quad\text{i.e.}\quad
+  \dot\sigma_{\infty}(M^{\mathbb{Z}}_{v}) = \varphi_{v}(\sigma) M^{\mathbb{Z}}_{v}
+\]
+\marginal{N.B. $\sigma \rightsquigarrow$ \ill{} une surjection \ill{} peut
+induire \ill{} $v|k_{0}$ \ill{} $k_{0}$, \ill{} de card.\ $2$ (conj.\ complexe)}
+
+\page{56}
+
+\struck{Fixons une $v$ de \ill{} de $k$, \ill{}}
+
+On \ill{} $g_{\sigma}$ est \ill{} co\ill{} par $G(\widehat{\mathbb{Z}})$,
+d'\ill{} (où \ill{} $\ell$ = indéterminé) \ill{} l'application \ill{} par
+prendre
+\[
+  g_{\sigma} = \bigl((\sigma_{\ell})_{\ell\ \mathrm{fini}},\ \dot\sigma_{\infty}\bigr)
+\]
+\ill{} maintenant $\dot\sigma_{\infty}$ est \ill{} \emph{bien déterminé} dans
+$G(k)$ !!!
+
+On obtient ainsi une application canonique
+\[
+  \mathrm{Gal}(k/k_{0}) \xrightarrow{\ \varphi_{v,\infty}\ } G_{\struck{\ill{}}}(k)
+  \subset GL\bigl(M_{k}(\infty)\bigr)
+\]
+\marginal{N.B. $G$ peut ici être considéré comme \ill{} défini sur $k_{0}$,
+\ill{} indépendant de $v$ !}
+
+\struck{et telle qui \ill{} ait} $\dot\sigma M^{\mathbb{Z}}_{v} = \sigma_{*}
+M^{\mathbb{Z}}_{v}$ pour $\sigma \in \mathrm{Gal}(k/k_{0})$, avec
+\[
+  \sigma_{*} = \bigl((\sigma_{\ell})_{\ell\ \mathrm{fini}},\ \varphi_{v}(\sigma)\bigr) .
+\]
+
+On vérifie aussitôt, i.e.\ posant $\psi_{v} = \varphi_{v}^{-1}$ :
+\[
+  \varphi_{v}(\tau\sigma) = {}^{\tau}\varphi_{v}(\sigma)\, \varphi_{v}(\tau) ,
+  \qquad
+  \psi_{v}(\tau\sigma) = \psi_{v}(\tau)\, {}^{\tau}\psi_{v}(\sigma) .
+\]
+\note{Les deux formules portent chacune un astérisque biffé en bout de ligne ;
+le premier membre de la seconde a d'abord été écrit $\varphi$, corrigé en
+$\psi$.}
+
+\page{58}
+
+Ainsi $\varphi$ est un \emph{$1$-cocycle}, quand on \struck{fait} opère \ill{}
+$\mathrm{Gal}(k/k_{0})$ sur $G(k)$ de $2$ façons évidentes \ill{} (par
+conjugaison \ill{}). Il correspond à un fibré principal \ill{} homogène
+$P_{v,k}$ sous $G(k)$, avec opérations de $\mathrm{Gal}(k/k_{0})$ sur
+$\bigl(P_{v}, G(k)\bigr)$ \struck{compatible \ill{}} \ill{} fibré principal
+\ill{} $G_{k_{0}}$, avec \ill{}
+
+\ill{} points de $\mathrm{Gal}(k/k_{0})$ \ill{} \struck{compatible}
+
+Je désigne $P_{v,k_{0}}$ \ill{} le \ill{} \ill{} \uncertain{splitt.}\ \ill{}
+donné sur $k$.
+
+D'ailleurs, \ill{} c'est le \ill{} fibré principal $\xi_{M,\infty}$ avec
+$\xi^{\mathbb{Z}}_{M,v} \otimes_{\mathbb{Z}} k_{0}$, \ill{} en effet obtenu
+\ill{} de transcendance (N\textsuperscript{o} 1, \struck{cette fini} \ill{})
+\ill{} $P_{v}^{k}$ \ill{} l'\struck{multiplicité} multiplicité \ill{} dire que
+\[
+  \mathrm{Gal}(k/k_{0}) \xrightarrow{\ \varphi_{v}\ } G(k)
+  \quad\bigl[\subset GL(M_{k}(\infty))\bigr]
+\]
+\ill{} rang de Zariski \ill{} dense.
+
+\marginal{À vérifier / \emph{ok}.}
+\marginal{$\pi$ transporte \ill{} au $k_{0}$\ill{}}
+\note{Les deux notes précédentes sont écrites dans la marge gauche, la première
+barrée d'un grand trait oblique.}
+
+\page{60}
+
+\ill{} (pour \ill{} : \ill{}) $k_{0}$, $\sigma \rightsquigarrow
+({}^{\sigma}g) g^{-1}$ \add{\ill{} image de $g^{-1}g^{\sigma}$} une extension
+finie de \struck{[n'est déterminé \ill{} pour $g \in G(k_{0})$]} générique
+$/k_{0}$. Car \ill{} $g \in G(k)$ \ill{} générique sur $G(k)$, et \ill{} pour
+$g^{\sigma}$ \emph{tt} \ill{}
+
+\ill{} On voit \ill{} que $g^{\sigma} g$ \ill{} peut \struck{tt} être
+\uncertain{exact} \ill{} On voit \ill{} que $g$ soit \uncertain{générique}
+$/k_{0}$, \ill{} telle que \ill{} \struck{($\sigma$)} \ill{} $k_{0}(g)$.
+\struck{Et d'autres}
+
+\ill{} $\varphi$ a \ill{} génér\ill{} \struck{\ill{}}
+
+Considérons $\sigma \rightsquigarrow \sigma_{*}$,
+\[
+  \mathrm{Gal}(k/k_{0}) \longrightarrow G(\mathbb{A}_{\mathbb{C}}) .
+\]
+\struck{\ill{}}
+
+Considérons le noyau \ill{} qui contient le noyau \ill{} de
+$\mathrm{Gal}(k/k_{0}) \to \mathrm{Gal}(k/\bar{k}_{0})$. Ce noyau est envoyé
+\ill{} dans $G(\mathbb{A}_{\mathbb{C}})$ \ill{} par $\varphi_{v,\infty}$, et
+l'image \ill{} \struck{Il en résulte que \struck{$\varphi$} \ill{} plus précis},
+\ill{}
+
+\ill{} \emph{dominant} $\varphi_{v}\bigl(\mathrm{Gal}(k/k_{0})\bigr)$ \ill{} un
+\ill{} (ouvert) \ill{} de $G(\mathbb{A}_{\mathbb{C}})$.
+
+\note{La phrase est coupée en bas du feuillet : la page 61, premier feuillet du
+lot suivant, la reprend et écrit la relation $M^{\mathbb{Z}}_{w} = g
+M^{\mathbb{Z}}_{v}$ pour $w = \sigma v$ ainsi que le cocycle conjugué
+$\varphi_{w}(\sigma) = g_{\infty} \varphi_{v}(\sigma) g_{\infty}^{-1}$. Le bas
+du feuillet porte encore, à la mine, « ( )~? ».}
+
+\end{document}
