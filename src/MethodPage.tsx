@@ -475,11 +475,22 @@ function Contributors() {
  *
  * These are no longer declared figures. Every assistant message in a pass
  * records its own token usage, so summing them over the window of a pass is
- * arithmetic rather than estimation, and the numbers below are read off the
- * batches actually completed. The per-batch figures below are still those of
- * the first five passes — folders 115, 161-1 and the three of 135 — which are
- * the ones whose token usage was summed; the batch counts above have since
- * moved and the costs have not been re-measured.
+ * arithmetic rather than estimation, and the batch counts below are read off
+ * the manifest.
+ *
+ * The per-batch *costs*, though, are still those of the first five passes —
+ * folders 115, 161-1 and the three of 135 — and that is now a much weaker
+ * base than it was: they were measured over five batches and the count has
+ * since passed a hundred and twenty. They are kept rather than guessed at,
+ * and the staleness is said here rather than hidden. A re-measurement over a
+ * recent run is owed.
+ *
+ * One thing a recent run does settle, because it needs no token accounting:
+ * wall-clock time per batch varies by an order of magnitude and does not
+ * follow the page count. Across eleven passes on folders 2, 21, 22, 159 and
+ * 160, the fastest twenty-page batch took twelve minutes and the slowest two
+ * hours. `hoursPerBatch` below is model-active time with gaps dropped, which
+ * is a different measure and is not what those figures are.
  *
  * What the measurement makes visible is the thing every estimate here missed
  * by two orders of magnitude: almost nothing is *written*, almost everything
@@ -492,16 +503,17 @@ function Contributors() {
  */
 const PILOT = {
   /** Transcribed so far, counted off `public/manifest.json` and excluding the
-      specimen: twenty-six folders, 661 pages — 19#1–5, 26#1, 29#1–11, 35#1,
-      42#1, 44#1, 47#1, 48#1, 49#1, 50#1, 54#1, 66#1, 108#1, 112#1, 114#1,
-      115#1, 125#1, 134-1#1, 135#1–3, 139#1, 151#1–4, 161-1#1, 161-2#1–6,
-      161-3#1–3, 162-1#1, 162-6#1. */
-  batchesTranscribed: 52,
-  /** All but one — folder 139 has a transcription and no modernised reading,
-      and deliberately: it is two photographs of a medal and there is no
-      mathematics to restate. The reading is written per folder, taken whole,
-      and covers every batch of it. */
-  batchesModernised: 51,
+      specimen: sixty folders, 1,938 pages. The batch list that used to stand
+      here was rewritten at every pass and went stale between them; the
+      manifest is the record, and this figure is read off it. */
+  batchesTranscribed: 123,
+  /** Batches belonging to a folder that has a modernised reading. The reading
+      is written per folder, taken whole, and covers every batch of it, so a
+      folder is either wholly in this count or wholly out. Fifty-three folders
+      are read; seven transcribed folders are not — 4, 5, 97, 102, 103, 111 and
+      139. The last of those will stay out: it is two photographs of a medal,
+      and there is no mathematics to restate. */
+  batchesModernised: 114,
   /** Per batch. `contextM` is every token the pass sent or received, cache
       reads included; `writtenK` is output alone; hours are model-active time,
       gaps over five minutes dropped. Transcription is the mean of the five
