@@ -1198,4 +1198,120 @@ export const FINDINGS: Finding[] = [
     settle:
       'A person checks the typist’s leaf numbers on the facsimile of pages 11 to 17 and the two headers on pages 99 and 101. Whether the reversal belongs to the stack, the binding or the scan is not determined by the pages. Separately: the typescripts of pages 11–17, 71 and 83–87 are, by content and by their internal references (Exp VIII, Exp IX, SGA VIII 2.1), leaves of the seminar on group schemes and not of SGA 4; matching their numbering against the published volume would confirm that identification and situate the leaves within its redaction.',
   },
+  {
+    id: '16-graded-ring-lefschetz-criterion',
+    cote: '16',
+    pages: '4–17',
+    kind: 'mathematical',
+    claim:
+      'The folder gives a criterion for the hard Lefschetz package that mentions no underlying module at all: for a graded ring ℰ and an element L of degree 2, the existence in ℰ of one-sided inverses wᵢ to Lⁿ⁻ⁱ is enough for the grading projectors, the pseudo-inverse Λ and every projector of the primitive decomposition to lie in ℰ — and the whole argument runs over ℤ.',
+    basis:
+      'His no. 4 converts the module-theoretic conditions (4.1)–(4.3) into the internal (4.4)ᵢ; no. 5, on the inserted leaf « 5 bis », derives πᵢ ∈ ℰ from it through v′ᵢ = π₂ₙ₋ᵢ vᵢ πᵢ and w′ᵢ = πᵢ wᵢ π₂ₙ₋ᵢ, whose products are πᵢ and π₂ₙ₋ᵢ; and no. 6 proves the equivalence by a double descending induction with the explicit formulas (6.9), (6.10), (6.12) and (6.13).',
+    ours:
+      'The reading restores the theorem to three clauses. The manuscript’s list (i) to (vi) on page 9 is struck and renumbered three times and only its skeleton reads, and page 12 marks one implication « Démonstration à fournir »; the three clauses stated are those pages 10 to 12 actually prove. The normalisation of Λ as a two-sided pseudo-inverse rather than the Kähler adjoint — which is what keeps the argument integral — is read off the relations (6.7); the pages never remark on it.',
+    literature: ['arXiv API search (export.arxiv.org), 2026-09-19: queries on «standard conjectures» + «Lefschetz», «Artinian Gorenstein» + «strong Lefschetz», «Poincare duality algebra» + «Lefschetz element», «weak Lefschetz» + «standard conjecture». General web search was unavailable (Google and DuckDuckGo both served bot challenges, which this pass does not complete), and the decisive print sources were not consulted.'],
+    status: 'unsearched',
+    settle:
+      'Open Kleiman, « Algebraic cycles and the Weil conjectures » (Dix exposés sur la cohomologie des schémas, 1968) §1–2 and « The standard conjectures » (Motives, Proc. Sympos. Pure Math. 55.1, 1994) §2, where Λ is introduced for a Weil cohomology, and check whether the criterion is anywhere stated for an abstract graded ring with no module and over ℤ. If it is, mark matched.',
+  },
+  {
+    id: '16-universal-lefschetz-ring',
+    cote: '16',
+    pages: '13–16',
+    kind: 'mathematical',
+    claim:
+      'The folder constructs a universal graded ring Φ₀ = ℤ[L₀, Λ₀] acting on an exterior algebra, with explicit generators φ^{β,α}ᵢ and a multiplication table independent of the chosen (M₀, ξ₀), and makes the Lefschetz conditions on (ℰ, L) equivalent to the existence of a graded ring homomorphism Φ₀ → ℰ carrying L₀ to L and the πᵢ to the πᵢ, unique when it exists.',
+    basis:
+      'Page 14 lists the generators with their index ranges and the two cases α ≤ β and α ≥ β; the Proposition of pages 14–15 states the equivalence and the uniqueness, and the Corollaire of page 16 draws the module-free consequence that the πᵢ are then determined by the graded ring structure of ℰ alone.',
+    ours:
+      'One thing the entry cannot settle, and which decides what Φ₀ is. If Λ₀ is the contraction ξ₀* ⌐ − that page 13 writes, then (L₀, Λ₀) is the classical symplectic sl₂-pair on an exterior algebra and Φ₀ is a ℤ-form of its enveloping algebra; if Λ₀ is instead defined by the relations (6.15), as the same page also says, it is the pseudo-inverse and Φ₀ is not. The passage is largely illegible and the transcription marks it so; the reading takes the second, because the Proposition needs it. The claim therefore rests on a reading the page does not secure.',
+    literature: ['arXiv API search (export.arxiv.org), 2026-09-19: queries on «standard conjectures» + «Lefschetz», «Artinian Gorenstein» + «strong Lefschetz», «Poincare duality algebra» + «Lefschetz element», «weak Lefschetz» + «standard conjecture». General web search was unavailable (Google and DuckDuckGo both served bot challenges, which this pass does not complete), and the decisive print sources were not consulted.'],
+    status: 'unsearched',
+    settle:
+      'First fix the transcription of page 13 — whether Λ₀ is the contraction or the operator defined by (6.15) — since the two readings give different rings. Then compare Φ₀ with the Kostant ℤ-form of U(sl₂) acting on ΛM₀ and with the « Lefschetz algebra » of the Hodge-theory literature.',
+  },
+  {
+    id: '16-algebraic-iso-suffices',
+    cote: '16',
+    pages: '47–48',
+    kind: 'mathematical',
+    claim:
+      'The folder’s Lefschetz-type conjecture follows from D(X) together with the existence, for each i < n, of some algebraic isomorphism H^{2n−i}(X) → H^i(X) — an arbitrary one, with no requirement that it invert L^{n−i}.',
+    basis:
+      'The letter of page 47 takes the given algebraic isomorphism u and the algebraic v induced by L^{n−i}, forms the algebraic automorphism w = uv, and reads off Cayley–Hamilton that w⁻¹ is a combination of the wⁱ with coefficients ±σᵢ(w)/σ_b(w); D(X) makes those rational, so w⁻¹ is algebraic and so is w⁻¹u = v⁻¹. The Corollary of page 48 extends it to any algebraic isomorphism H^i(X) → H^{i+2j}(X′) between varieties satisfying the conjecture.',
+    ours:
+      'The reading restates the Cayley–Hamilton relation in w; the typescript writes it in u while its coefficients are those of w. Nothing else is supplied — the argument is complete on the leaf.',
+    literature: ['arXiv API search (export.arxiv.org), 2026-09-19: queries on «standard conjectures» + «Lefschetz», «Artinian Gorenstein» + «strong Lefschetz», «Poincare duality algebra» + «Lefschetz element», «weak Lefschetz» + «standard conjecture». General web search was unavailable (Google and DuckDuckGo both served bot challenges, which this pass does not complete), and the decisive print sources were not consulted.'],
+    status: 'unsearched',
+    settle:
+      'Read Kleiman 1994 §2, where the equivalences for the Lefschetz standard conjecture are collected, and Kleiman 1968 §4. This argument is short and memorable enough that it is more likely in the books than not; a reader who finds it there should mark this matched with the reference.',
+  },
+  {
+    id: '16-weak-variants-imply-strong',
+    cote: '16',
+    pages: '49',
+    kind: 'mathematical',
+    claim:
+      'The two critical-dimension variants A′⁰ and A″⁰ — statements about which classes become algebraic on a hyperplane section — together imply A⁰, so that the folder’s C(X) is equivalent to C(Y) + A′⁰(X×X) + A″⁰(X×X) and, by descent along a chain of hyperplane sections, to those two conditions alone on all of X×X, Y×Y, Z×Z, …',
+    basis:
+      'The page factors the critical-dimension operator through the section: L_T² : H^{2m−2}(T) → H^{2m+2}(T) as φ*, then φₓ, then L_T when dim T = 2m, and H^{2m}(T) → H^{2m+2}(T) as φ* then φₓ when dim T = 2m+1. Both factorisations are written out on the leaf, with the arrow names inked by hand.',
+    ours: null,
+    literature: ['arXiv API search (export.arxiv.org), 2026-09-19: queries on «standard conjectures» + «Lefschetz», «Artinian Gorenstein» + «strong Lefschetz», «Poincare duality algebra» + «Lefschetz element», «weak Lefschetz» + «standard conjecture». General web search was unavailable (Google and DuckDuckGo both served bot challenges, which this pass does not complete), and the decisive print sources were not consulted.'],
+    status: 'unsearched',
+    settle:
+      'Check Kleiman 1968 §3 and the later literature on reductions of the Lefschetz standard conjecture to the critical dimension, and in particular whether these two one-sided variants appear under any name. Note that the folder’s letters use A, C and D in senses of January 1967 that do not match the published labels, so the comparison has to be made statement by statement and not letter by letter.',
+  },
+  {
+    id: '16-hodge-algebras-order-2',
+    cote: '16',
+    pages: '24–28',
+    kind: 'mathematical',
+    claim:
+      'The folder axiomatises a graded anticommutative algebra k, V, kξ ⊕ W, V̌, kξ² by three data — an alternating form φ on V, a map ψ : Λ²V → W, a symmetric form Q on W — reduces associativity to one quadrilinear identity, and shows that the Lefschetz condition and the Poincaré condition are each equivalent to the non-degeneracy of exactly one of φ and Q; a second formulation then makes the polarisation ξ a parameter of the structure rather than part of its definition.',
+    basis:
+      'Page 24 fixes the five graded pieces, the two structure maps α and β, derives every remaining product, and states the three conditions in that order; page 26 introduces the quadrilinear χ by xyzt = χ(x,y,z,t)ξ² and rewrites the datum as (V, χ, (W̃, Q̃, α), ξ).',
+    ours:
+      'The reading separates these φ, ψ, Q, χ from the inclusion φ and the cohomology index χ of the later pages; the collision of letters is the folder’s. The closing passage of page 28, on the finiteness of an orbit, is an unreconstructible sketch and no part of this claim rests on it.',
+    literature: ['arXiv API search (export.arxiv.org), 2026-09-19: queries on «standard conjectures» + «Lefschetz», «Artinian Gorenstein» + «strong Lefschetz», «Poincare duality algebra» + «Lefschetz element», «weak Lefschetz» + «standard conjecture». General web search was unavailable (Google and DuckDuckGo both served bot challenges, which this pass does not complete), and the decisive print sources were not consulted.'],
+    status: 'unsearched',
+    settle:
+      'Compare with the literature on graded Poincaré duality algebras of formal dimension 4 and on the classification of cohomology rings of algebraic surfaces, and check in both directions that his « algèbre de Hodge d’ordre 2 » and the standard notion define the same objects. The point to test is the claimed separation — one condition per datum — rather than the axiomatisation itself.',
+  },
+  {
+    id: '16-page-21-not-gorenstein',
+    cote: '16',
+    pages: '21',
+    kind: 'mathematical',
+    claim:
+      'The six-dimensional graded algebra of page 21, in which L is Lefschetz while L′ is not although L′³ = L³, separates the Lefschetz property from the non-vanishing of the top power — but its middle pairing is degenerate, so it is not a counterexample within graded Artinian Gorenstein algebras, where that separation is standard.',
+    basis:
+      'The relations L⁴ = 0, L′² = LL′, L²L′ = L³, L³L′ = 0 give the basis 1 | L, L′ | L², LL′ | L³. L carries the degree-2 basis to the degree-4 basis and is an isomorphism there, while L′ sends both L and L′ to LL′ and has rank 1; and L′³ = L·L′² = L²L′ = L³ ≠ 0.',
+    ours:
+      'The pairing computation is the edition’s: the page states the relations and the conclusion about L and L′ and nothing more. All four products of the degree-2 basis with the degree-4 basis equal L³, so the pairing into degree 6 has matrix [[1,1],[1,1]] and rank 1. An earlier draft of the modernised reading framed the example as bearing on the strong Lefschetz property of Artinian Gorenstein algebras; that framing was wrong and has been corrected in the reading, the algebra being degenerate in the middle. What the example does separate is the Lefschetz condition from the Poincaré condition — the two that his own pages 24 to 28 impose separately.',
+    literature: [
+      'arXiv API search (export.arxiv.org), 2026-09-19: queries on «standard conjectures» + «Lefschetz», «Artinian Gorenstein» + «strong Lefschetz», «Poincare duality algebra» + «Lefschetz element», «weak Lefschetz» + «standard conjecture». General web search was unavailable (Google and DuckDuckGo both served bot challenges, which this pass does not complete), and the decisive print sources were not consulted.',
+      'Artinian Gorenstein / strong Lefschetz literature located by that search: Stanley’s theorem on monomial complete intersections and its extensions (arXiv math/0506537), the Hessian criterion for Lefschetz elements (arXiv 0903.3581), Hilbert functions of Artinian Gorenstein algebras with the strong Lefschetz property (arXiv 2007.10684)',
+    ],
+    status: 'matched',
+    settle:
+      'Nothing further on the mathematics: the distinction between Lⁿ ≠ 0 and the strong Lefschetz property is standard in that literature, and this algebra falls outside it for want of Poincaré duality. Kept as a killed candidate and as the record of a framing that had to be corrected.',
+  },
+  {
+    id: '16-letters-and-interrupted-run',
+    cote: '16',
+    pages: '30, 31, 39–41, 43, 47',
+    kind: 'codicological',
+    claim:
+      'One argument of the folder runs across a foreign leaf, two of its leaves are covers bearing only a title in his hand, and its two letters are dated by him a year apart although the later-dated one answers a question the earlier-dated one leaves open.',
+    basis:
+      'Page 39 breaks off mid-sentence on « Mais » and page 41 opens with no heading on the same discussion of C(X) and C(Y); page 40, between them, is an unrelated typescript. Pages 30 and 31 are otherwise blank leaves carrying only « Algèbres de Hodge » and « Formulaire de L, Λ », the titles of the runs they sit with — page 30’s naming the run that precedes it. The letters carry « 4.1.67 » on page 43 and « 6.1.1966 » on page 47, both in his hand; the second opens a proposition showing Cχ(X) independent of the polarisation, which is precisely what the first says it is not clear to him how to prove in characteristic p.',
+    ours:
+      'The connection of pages 39 and 41 is the edition’s: the two leaves were transcribed in different batches, by passes that could not see each other, and the join was made afterwards with both in view. Each side’s note now names the other. The reading transcribes both dates and reconciles neither.',
+    literature: [
+      'Transcriptions 16, batches 1, 2 and 3 (batch-01, batch-02, batch-03.fr.tex), headers and the sections on pages 30–31, 39, 41, 43 and 47',
+    ],
+    status: 'candidate',
+    settle:
+      'A person checks on the facsimile that page 39’s last line and page 41’s first join, that pages 30 and 31 carry nothing but their titles, and that the two dates read as transcribed. Whether « 6.1.1966 » is a slip for 1967 is not something the leaves settle; Coates’s own papers, or the notes of the talk both letters comment on, would.',
+  },
 ];
