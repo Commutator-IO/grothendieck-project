@@ -1,0 +1,470 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 5, batch 3 (pages 41-52).
+% Established from the facsimile archives/batches/5/batch-03.pdf (a mirror of
+% https://grothendieck.umontpellier.fr/5.pdf), per the skill
+% transcribe-grothendieck. The batch file carries no cover sheet: PDF page N is
+% archivists' page N + 40. Checked against the pencilled numbers bottom-left
+% ("41" on the first leaf, "42", "43", "44", "45", "46", "47", "48", "49", "50",
+% "51", "52" on the following ones), which confirm the alignment end to end.
+%
+% Pass: Fable 5.1 (claude-fable-5-1), 2026-09-19 — first pass, unchecked against the pages by a human.
+%
+% What the batch is. Twelve leaves, of three kinds, and two leaves that are
+% nobody's mathematics. Page 42 is one leaf in his hand, in blue ink, closing a
+% note on homogeneous polynomial maps and their polarisations that began in
+% batch 2 (the run is not readable from here; a \note records the boundary).
+% Pages 44 and 46 are two leaves in his hand, in black ink, headed « Cristaux »
+% by him: the conditions a system of elements π^{(n)} ∈ πA must satisfy for
+% x ↦ x^{(n)} = π^{(n)} y^n (x = πy) to be a divided-power structure on the
+% principal ideal J = πA, with three examples — A torsion-free over Z, A a
+% Z_(p)-algebra with π = p, and A a discrete valuation ring of absolute
+% ramification index e, where the condition v(π) ≥ e·sup_n v_p(n!)/n = e/(p−1)
+% gives, for π a uniformiser, the boxed inequality e ≤ p − 1. Pages 45 and 47
+% are the versos of 44 and 46: two pages, numbered 23 and 22, of a typescript
+% of EGA IV § 18.13 (the "completed" module of differentials Ω̄¹_{B/A} of a
+% topological algebra, the representability (18.13.4.1) of continuous
+% derivations, and Proposition (18.13.5)), gone over in his hand — insertions,
+% a cancelled clause, two marginal notes, a marginal formula. Following the
+% convention of folders 4, 48 and 55, the typed text is given in full where
+% his hand touches it, and here it touches nearly every line, so the two
+% pages are given entire; the typist's own overstrikes (x's over a mistyped
+% word) are not recorded, what he struck by hand is. The typescript reads
+% 22 (leaf 47) then 23 (leaf 45): page 22 ends "co-" and page 23 begins
+% "ïncide". The pages are kept in the archivists' order, and notes say so.
+% Page 48 is an otherwise blank leaf carrying, in his hand, « lettre à
+% Deligne / sur coh. p-adique »: the cover of the letter that follows, and it
+% gets no \page; its words are the section heading. Pages 49 to 52 are that
+% letter, a typed carbon dated by hand « 10.12.1965 » — the « lettre (1965) »
+% the inventory announces — to Deligne: a simplification of the proof of the
+% duality theorem avoiding relative purity, a relative form of the theorem
+% over a base with a sheaf of rings A killed by an integer n prime to the
+% residue characteristics, and then the conjecture that the transcendental
+% comparison between de Rham and ℓ-adic cohomology over C should have a
+% p-adic analogue over a complete non-archimedean field, through Tate's
+% rigid-analytic space X^an, a rigid-analytic Poincaré lemma, and, in
+% characteristic p, the map H*(X, F_p) → H*_DR(X) whose composite with the
+% Frobenius is the only thing it can be. The carbon has no arrows; they are
+% restored from the text and a note says so once.
+%
+% Skipped, without description: page 41, a typescript (a course announcement
+% and a seminar programme) scanned upside down, nothing in his hand; page 43,
+% a typescript on Banach categories and Spin(p,q), nothing in his hand.
+%
+% Notation fixed for the batch. Divided powers are written as he writes them,
+% π^{(n)}, x^{(n)}; his circled 1 labelling the three conditions is set (1).
+% Z is \mathbf{Z}. In the EGA typescript the underlined r (the radical) is
+% \mathfrak{r} as in the printed EGA, the overlined Ω is \overline{\Omega},
+% and « Dér » is \mathrm{D\acute{e}r}. In the letter the typescript's
+% underlined sheaf symbols (O_X, H^q, Ω) are kept underlined, as typed. The
+% one tikz-cd diagram, (18.13.5.1), has three vertical arrows and two rows
+% of three, transcribed as typed.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{5}
+\batch{3}
+\pages{41}{52}
+\dating{1965-1969}
+\watermark{Édition de démonstration}
+\foldertitle{Cristaux et cohomologie de De Rham : généralités, correspondances Deligne et Berthelot (1965-1969) : notes manuscrites (s.d.), lettre (1965).}
+
+\begin{document}
+
+\section*{Applications polynomiales homogènes}
+
+\note{titre de l'éditeur. Le feuillet 42 est la fin d'une note sur les
+applications polynomiales commencée dans le lot précédent (page 40 et avant),
+que ce lot ne peut pas lire ; les notations $\Phi$, $M$, $N$ y sont fixées.
+Sur les premières lignes du feuillet, $\Phi$, $M$ et $N$ sont soulignés, puis
+ne le sont plus ; « de degré $n$ » de la première ligne est en interligne.}
+
+\page{42}
+
+Une application polynomiale homogène de degré $n$ $\Phi : M \to N$ définit
+par la formule
+\[
+\Phi\Bigl(\sum_i t_i x_i\Bigr)
+= \sum_{p_1 + \cdots + p_r = n} \Phi_{p_1 \ldots p_r}(x_1, \ldots, x_r)\,
+t_1^{p_1} \cdots t_r^{p_r}
+\]
+[les $t_i$ des indéterminées] des applications polynomiales
+\[
+\Phi_{p_1 \ldots p_r} : M \times \cdots \times M \to N
+\]
+multihomogènes de degrés $p_1, \ldots, p_r$, d'où des applications
+\[
+\varphi_{p_1, \ldots, p_r} : \underbrace{M \times \cdots \times M}_{r} \to N
+\]
+(définies si $r \geq 1$, $p_1, \ldots, p_r \geq 0$, $\sum p_i = n$). Ces
+applications sont reliées par des relations
+\[
+\varphi_{p_1, \ldots, p_r}\Bigl(\sum_{1 \leq i \leq s_1} x_{1,i},\
+\sum_{1 \leq i \leq s_2} x_{2,i},\ \ldots,\ \sum_{i \leq s_r} x_{r,i}\Bigr)
+= \sum_{\substack{\sum_{1 \leq i_1 \leq s_1} q_{1,i_1} = p_1 \\ \sum_{1 \leq i_2 \leq s_2} q_{1,i_2} = p_2 \\ \cdots \\ \sum_{1 \leq i_r \leq s_r} q_{r,s_r} = p_r}}
+\varphi_{q_{1,i_1}, \ldots, q_{r,s_r}}(x_{1,1}, \ldots, x_{r,s_r})
+\]
+\note{les conditions de sommation sont écrites sous une accolade, l'une sous
+l'autre ; la seconde se lit $q_{1,i_2}$ sur la page, où l'on attend
+$q_{2,i_2}$, et l'indice de la dernière est écrit $q_{r,s_r}$ tel quel}
+\marginal{il suffit \ill{} pour \ill{} des \uncertain{arguments} \ill{}}
+\note{note marginale de six courtes lignes, accolée à la relation, dont seuls
+les premiers mots se lisent}
+
+\uncertain{Plus} relations de symétrie \note{souligné}
+
+On suppose que l'on a \ill{} \uncertain{vérifié} que … \note{la phrase
+s'interrompt sur des points de suspension ; le reste du feuillet est blanc}
+
+\section*{Cristaux}
+
+\note{titre de sa main, souligné, en tête du feuillet 44. La note se poursuit
+au feuillet 46 ; les feuillets 45 et 47, qui en sont les versos, portent deux
+pages d'un tapuscrit annoté de sa main, données ci-dessous à leur place dans
+la numérotation}
+
+\page{44}
+
+Soit $J$ un idéal principal d'un anneau $A$, $J = \pi A$. Formellement pour
+y définir des puissances divisées, on est amené à définir des
+\[
+\frac{(\pi y)^n}{n!} = \frac{\pi^n}{n!}\, y^n = \pi^{(n)} y^n
+\]
+donc à définir des éléments
+\[
+\pi^{(n)} \in \pi A \qquad (n \geq 1)
+\]
+qui satisfassent aux conditions suivantes.
+
+\struck{$\pi^{(m)} \pi^{(n)} = \frac{(m+n)!}{m!\,n!}\, \pi^{(m+n)}$ ; et si
+$\pi z = 0$, \ill{} $\pi^{(n)} (y+z)^n = \pi^{(n)} \uncertain{z}^n$, ce qui
+\ill{} \ill{} des $\pi^{(n)} y$} \note{trois lignes cernées d'un trait et
+biffées, premier état des conditions (1) ; dans la seconde le dernier facteur
+se lit $z^n$, où le sens attend $y^n$}
+
+\[
+(1)\qquad
+\begin{cases}
+\pi^{(1)} = \pi \\ \pi^{(m)} \pi^{(n)} = \dfrac{(m+n)!}{m!\,n!}\, \pi^{(m+n)} \\ \pi^{(p)} \Bigl(\dfrac{\pi^{(q)}}{\pi}\Bigr)^{p} = \dfrac{(pq)!}{p!\,(q!)^p}\, \pi^{(pq)}
+\end{cases}
+\]
+\note{le « 1 » de l'étiquette est cerclé sur la page, ici et à chaque rappel}
+
+NB. Comme $\pi^{(q)} \in \pi A$, $\pi^{(q)}/\pi$ est défini \uncertain{mod.
+addition} d'un $z$ tel que $\pi z = 0$, mais comme $\pi^{(p)} \in \pi A$, est
+déterminé sans ambiguïté l'élément $\pi^{(p)} \bigl(\pi^{(q)}/\pi\bigr)^p$.
+
+Alors on trouve une structure de puissances divisées (sur $J = \pi A$)
+\note{« sur $J = \pi A$ » en interligne, le $J$ tracé ici comme un I gras}
+\[
+x^{(n)} = (\pi y)^{(n)} = \pi^{(n)} y^n \qquad \text{pour } x = \pi y \in J,
+\]
+en notant que $x^{(n)}$ ne dépend pas du choix de $y$ t.q. $x = \pi y$.
+
+\emph{Exemple 1.} Supposons que $A$ soit sans torsion sur $\mathbf{Z}$. Alors
+les \struck{\ill{}} relations
+\[
+\pi^n = n!\, \pi^{(n)}
+\]
+déterminent uniquement les $\pi^{(n)}$ en fonction de $\pi$, et leur existence
+équivaut au fait que
+\[
+\pi^n \in n!\, A \qquad \forall n \geq 2 .
+\]
+Les relations (1) sont satisfaites automatiquement.
+
+\emph{Exemple 2.} Supposons $A_0 = \mathbf{Z}_{(p\mathbf{Z})}$, \struck{Alors}
+$\pi = p$. Alors \note{« $\pi = p$. Alors », précédé d'un « Alors » biffé, est
+écrit en bout de la ligne qui précède le titre « Exemple 2 » ; la virgule
+après $\mathbf{Z}_{(p\mathbf{Z})}$ l'y rattache} les conditions précédentes
+sont satisfaites, les $p^n/n!$ sont des entiers $p$-adiques. Donc si $A$ est
+\ill{} dans laquelle tout nb premier $q \neq p$ est \uncertain{inversible}
+(i.e. les \uncertain{caractéristiques} résiduelles sont $p$, $0$), \ill{} une
+algèbre sur $A_0$, on trouve par spécialisation des $\pi^{(n)} \in A$,
+$\pi^{(n)} = p^n/n!$, qui
+
+\section*{Tapuscrit EGA IV, § 18.13, page 23 (annoté)}
+
+\note{titre de l'éditeur. Copie d'un tapuscrit paginé « IV-977-23 », les
+chiffres 977 et 23 à la main, au verso du feuillet 44. La page 22 du même
+tapuscrit est au feuillet 47, verso du feuillet 46, et se lit avant celle-ci :
+son dernier mot, « co- », se poursuit ici par « ïncide ». Les interventions à
+la main sont données comme biffures, ajouts et notes marginales ; les ratures
+propres de la dactylographie ne sont pas relevées. L'énoncé de la proposition
+est souligné dans le tapuscrit}
+
+\page{45}
+
+ïncide avec le module de différentielles analytiques défini dans (18.13.1) ;
+en effet \note{« en effet » en interligne, au-dessus d'un mot raturé à la
+machine} (les définitions étant celles de (18.13.1)), il résulte du fait que
+$\overline{\Omega}^1_{A/k}$ est de type fini et de (0, 20.4.8) que la
+dérivation $\bar d_{A/k}$ se factorise en $A \xrightarrow{d_{A/k}}
+\Omega^1_{A/k} \xrightarrow{u_0} \overline{\Omega}^1_{A/k}$ et que tout
+$A$-homomorphisme $\Omega^1_{A/k} \xrightarrow{u} L$, où $L$ est un $A$-module
+de type fini, se factorise nécessairement en $\Omega^1_{A/k}
+\xrightarrow{u_0} \overline{\Omega}^1_{A/k} \xrightarrow{v} L$, si bien que
+$\mathrm{Ker}(u)$ contient toujours $\mathrm{Ker}(u_0)$, d'où notre assertion.
+
+On notera que si $\overline{\Omega}^1_{B/A}$ est un $B$-module de type fini,
+il représente le foncteur covariant $L \rightsquigarrow
+\mathrm{D\acute{e}r}_A(B, L)$ dans la catégorie des $B$-modules de type fini.
+Il est clair que si $\Omega^1_{B/A}$ lui-même est de type fini (ce qui sera
+par exemple le cas (0, 20.4.7) lorsque $B$ est une $A$-algèbre de type fini),
+on a $\overline{\Omega}^1_{B/A} = \Omega^1_{B/A}$.
+
+\textbf{Proposition (18.13.5).} --- Soient $A$ un anneau topologique,
+\struck{\ill{}} B et C deux \note{« B et C deux » à la main, remplaçant un mot
+biffé} $A$-algèbres topologiques qui \struck{\ill{}} sont des \note{« sont
+des » en interligne} anneaux \struck{\ill{}} semi-locaux noethériens et dont
+les topologies sont les topologies préadiques, $\rho : B \to C$ un
+$A$-homomorphisme continu. Alors :
+
+(i) Si \struck{\ill{}} $\overline{\Omega}^1_{C/A}$ est un $C$-module de type
+fini \struck{\ill{}}, $\overline{\Omega}^1_{C/B}$ est un $C$-module de type
+fini.
+
+(ii) Si $\overline{\Omega}^1_{B/A}$ est un $B$-module de type fini et si $C$
+est une $B$-algèbre finie, $\overline{\Omega}^1_{C/A}$ est un $C$-module de
+type fini.
+
+(iii) Supposons vérifiées, soit les hypothèses de (ii), soit \struck{\ill{}}
+l'hypothèse de (i) et la condition supplémentaire que $\Omega^1_{B/A}$ est un
+$B$-module de type fini ; alors il existe deux $C$-homomorphismes
+\struck{déterminés de façon uniques} \marginal{style \ill{}} \note{la note
+marginale, deux mots dont le second n'est pas lu, est accolée par un trait à
+la biffure} : $\bar u : \overline{\Omega}^1_{C/A} \to
+\overline{\Omega}^1_{C/B}$ et $\bar v : \overline{\Omega}^1_{B/A} \otimes_B C
+\to \overline{\Omega}^1_{C/A}$ tels que le diagramme
+
+\begin{tikzcd}[column sep=small, row sep=small, nodes={font=\scriptsize}]
+\Omega^1_{B/A} \otimes_B C \arrow[r, "v"] \arrow[d, "r^{\prime} \otimes 1"'] & \Omega^1_{C/A} \arrow[r, "u"] \arrow[d, "r"'] & \Omega^1_{C/B} \arrow[r] \arrow[d, "r^{\prime\prime}"'] & 0 \\
+\overline{\Omega}^1_{B/A} \otimes_B C \arrow[r, "\bar v"'] & \overline{\Omega}^1_{C/A} \arrow[r, "\bar u"'] & \overline{\Omega}^1_{C/B} \arrow[r] & 0
+\end{tikzcd}
+
+\note{numéroté (18.13.5.1) à gauche du diagramme ; la page s'arrête sur lui}
+
+\section*{Cristaux (suite)}
+
+\page{46}
+
+satisfait aux conditions précédentes (1), donc une structure de puissances
+divisées canonique sur $pA$.
+
+\emph{Exemple 3.} Soit $A$ intègre, \struck{\ill{}} tel que les seules
+\struck{\ill{}} \note{une ligne biffée, non lue} caractéristiques résiduelles
+soient $p$ et $0$. Soit $\pi$ un élément tel que \struck{les}
+\uncertain{caractéristiques} résiduelles de $A/\pi A$ soient $p$. À quelle
+condition peut-on trouver des $\pi^{(n)}$ ? Supposons que $A$ soit un anneau
+de valuation discrète. Il faut \struck{\ill{}} $\pi^n/n! \in A$, i.e.
+\[
+v(\pi^n/n!) \geq 0 \qquad \text{pour tout } n
+\]
+i.e.
+\[
+n\, v(\pi) - v(n!) \geq 0 \qquad \text{pour tout } n .
+\]
+Soit \struck{\ill{}} $v(p) = e$ l'indice de ramification absolu de $A$, donc
+\struck{$v(n!)$} pour un entier $N$, $v(N) = e\, v_p(N)$. \struck{Soit donc
+\ill{} $\rho = v(\pi)$.} La condition s'écrit \struck{\ill{}}
+\[
+v(\pi) \geq e\, \frac{v_p(n!)}{n} \qquad \text{pour tout } n
+\]
+i.e.
+\[
+v(\pi) \geq e\, \lambda(p) \qquad \text{où } \lambda(p) = \sup_n
+\frac{v_p(n!)}{n} = \frac{1}{p-1}
+\]
+\marginal{\uncertain{Legendre}} \note{en marge droite, au-dessus de la formule
+donnant $\lambda(p)$, qui est elle-même écrite en marge et rattachée au
+texte par une accolade} est une constante ne dépendant que de $p$, et qui est
+$\leq 1$ \marginal{\struck{\ill{} $\lambda(p)$}} … Donc on trouve la condition
+\[
+v(\pi) \geq \frac{e}{p-1} .
+\]
+Supposons que $\pi$ soit l'uniformisante, \uncertain{ou} $v(\pi) = 1$, on
+trouve la condition
+\[
+\boxed{e \leq p-1}
+\]
+
+\section*{Tapuscrit EGA IV, § 18.13, page 22 (annoté)}
+
+\note{titre de l'éditeur. Page « IV-977-22 » du tapuscrit dont la page 23 est
+au feuillet 45 ci-dessus ; elle se lit avant celle-ci. Le $\mathfrak{r}$
+souligné du tapuscrit est rendu $\mathfrak{r}$}
+
+\page{47}
+
+(18.13.4) Le résultat de (18.13.2), \struck{joint au fait que pour une
+$k$-algèbre analytique $A$, $\overline{\Omega}^1_{A/k}$ soit un $A$-module de
+type fini,} peut encore s'exprimer en disant que dans la catégorie des
+$A$-modules de type fini, $\overline{\Omega}^1_{A/k}$ est un objet
+représentant le foncteur covariant $L \rightsquigarrow
+\mathrm{D\acute{e}r}_k(A, L)$ \note{« $(0_{\mathrm{III}}, 8.1.11)$ » ajouté à
+la main au-dessus de la ligne, accolé à « représentant le foncteur
+covariant »}. Nous allons généraliser ce résultat. Considérons d'abord un
+anneau topologique $A$, et une $A$-algèbre topologique $B$ qui est un anneau
+semi-local noethérien \marginal{à quoi sert \uncertain{l'hypothèse} \ill{} ?
+Prendre \ill{} topologie plus \uncertain{générale} ?} \note{« semi-local
+noethérien » cerné d'un trait, un astérisque renvoyant à la note marginale,
+écrite en biais}, muni de sa topologie $\mathfrak{r}$-préadique
+($\mathfrak{r}$ étant le radical de $B$). Alors, pour tout $B$-module de type
+fini $L$, toute $A$-dérivation $D$ de $B$ dans $L$ est continue pour les
+topologies $\mathfrak{r}$-préadiques sur $B$ et $L$, puisque l'on a
+$D(\mathfrak{r}^{j+1}) \subset \mathfrak{r}^j L$ pour tout entier $j$ ; en
+vertu de (0, 20.4.8) elle s'écrit donc $D = u \circ d_{B/A}$, où $u :
+\Omega^1_{B/A} \to L$ est un homomorphisme de $B$-modules (nécessairement
+continu pour les topologies $\mathfrak{r}$-préadiques, et on sait que dans le
+cas considéré la topologie canonique \note{« canonique » en interligne} de
+$\Omega^1_{B/A}$ est la topologie \struck{\ill{}} $\mathfrak{r}$-préadique
+\note{« $\mathfrak{r}$-préadique » en interligne, au-dessus du mot biffé}
+(0, 20.4.5)). Nous désignerons par $\overline{\Omega}^1_{B/A}$ le quotient de
+$\Omega^1_{B/A}$ par l'intersection des noyaux des homomorphismes
+$\Omega^1_{B/A} \to L$ pour les $B$-modules $L$ \note{« $L$ » ajouté en
+interligne} de type fini (ou, ce qui revient au même puisque $L$ est
+noethérien, l'intersection des sous-modules $M$ de $\Omega^1_{B/A}$ tels que
+$\Omega^1_{B/A}/M$ soit de type fini). \marginal{On a donc
+$\mathrm{Hom}_B(\overline{\Omega}^1_{B/A}, L) = \mathrm{Hom}_B(\Omega^1_{B/A},
+L)$ pour tout $B$-module de type fini $L$.} \note{note marginale, insérée ici
+par un trait} Nous désignerons par $\bar d_{B/A}$ ou simplement $\bar d$
+l'application composée $B \xrightarrow{d_{B/A}} \Omega^1_{B/A}
+\xrightarrow{r} \overline{\Omega}^1_{B/A}$ ; c'est une $A$-dérivation
+\note{« $A$- » en interligne}, et $\overline{\Omega}^1_{B/A}$ est engendré par
+les éléments $\bar d_{B/A}(x)$ où $x$ parcourt $B$, en vertu de (0, 20.4.7) ;
+la définition précédente montre que l'application $v \rightsquigarrow v \circ
+\bar d_{B/A}$ est un isomorphisme de $B$-modules, fonctoriel en $L$
+\[
+(18.13.4.1)\qquad \mathrm{Hom}_B(\overline{\Omega}^1_{B/A}, L)
+\xrightarrow{\ \sim\ } \mathrm{D\acute{e}r}_A(B, L) =
+\mathrm{D\acute{e}r}.\mathrm{cont}_A(B, L)
+\]
+\note{« $= \mathrm{D\acute{e}r}.\mathrm{cont}_A(B, L)$ » ajouté à la main}
+$L$ étant toujours supposé de type fini. Lorsque l'on est dans les conditions
+de (18.13.2), le $A$-module $\overline{\Omega}^1_{A/k}$ qui vient d'être
+défini co- \note{la phrase se poursuit à la page 23 du tapuscrit, feuillet 45
+ci-dessus}
+
+\section*{Lettre à Deligne sur coh. p-adique}
+
+\note{titre de sa main sur le feuillet 48, par ailleurs blanc, qui n'a pas de
+numéro de page ici ; il coiffe la lettre dactylographiée des feuillets 49 à
+52, la « lettre (1965) » de l'inventaire. Le double dactylographié n'a pas
+les flèches, restituées d'après le texte, ni les crochets de décalage ; le
+premier paragraphe, de « Je vous propose » à « constant $\mathbf{Z}/n\mathbf{Z}$ », est
+délimité par deux crochets tracés à la main dans la marge}
+
+\page{49}
+
+10.12.1965 \note{date à la main, en haut à droite}
+
+Cher Deligne,
+
+Je vous propose une simplification pour la démonstration du théorème de
+dualité, qui permet d'éviter tout recours au théorème de pureté relative.
+Vous vous rappelez qu'on était réduit au cas où $f : X \to Y$ est de
+dimension relative $1$, $F = A_X$ et $G = A_Y$. Le procédé \note{« proéédé »
+dans la frappe} de passage à la limite de Exp VI, par. 6, permet de supposer
+la base noethérienne, et même si on y tien\add{t} de dimension finie (car de
+type fini sur $\mathbf{Z}$). On raisonne par récurrence sur $n = \dim X$. Si
+$n = 0$, on sait le vérifier. Supposons le théorème démontré en dimension
+$< n$. Se localisant sur $Y$, on peut supposer $Y$ strictement local. Alors,
+si $y$ est son point fermé, on a $\dim(Y - y) \add{<} n$, et comme on est
+réduit à prouver le théorème séparément pour $X \times_Y (Y - y)$ et $X
+\times_Y y$, on gagne. --- Autre remarque : le théorème de dualité peut se
+démontrer, essentiellement de la même façon et avec le même énoncé, pour un
+morphisme lisse $f : X \to Y$ compactifiable, lorsque $Y$ est muni d'un
+faisceau d'anneaux $A$ quelconque tel que il existe un entier $n$ premier aux
+caractéristiques résiduelles annulant $A$, et $X$ d'un faisceau d'anneaux
+$B$, et $f$ étant donné comme morphisme de $(X, B)$ dans $(Y, A)$, de sorte
+qu'on a un homomorphisme de faisceau d'anneaux $f^{-1}(A) \to B$. On définit
+alors
+\[
+f^{!}(K^{\bullet}) = R\,\underline{\mathrm{Hom}}^{\bullet}_{f^{-1}(A)}
+\bigl(B,\ f^{-1}(K) \otimes T_{X/Y}\,\add{[}2d\add{]}\bigr) .
+\]
+La définition de l'homomorphisme trace et la démonstration du théorème de
+dualité se décomposent alors en le cas où $f^{-1}(A) \to B$ est un
+isomorphisme, qui se traite comme le cas $A = (\mathbf{Z}/n\mathbf{Z})_Y$, et
+le cas où $f = \mathrm{id}$, qui est trivial. Je pense qu'il vaut le coup
+d'inclure cette forme générale du théorème de dualité, soit de prime abord,
+soit à la fin dans un numéro-\uncertain{rattrappage}. Je n'ai pas regardé si
+par hasard il pourrait se déduire du cas particulier
+
+\page{50}
+
+$A = (\mathbf{Z}/n\mathbf{Z})_Y$ comme simple corollaire, mais ça
+m'étonnerait. La même remarque s'applique d'ailleurs également au théorème de
+dualité globale, qui s'énonce pour des faisceaux d'anneaux plus généraux que
+le faisceau constant $\mathbf{Z}/n\mathbf{Z}$.
+
+Il me semble que la relation de nature transcendante qui lie la cohomologie
+de De-Rham ou de Hodge aux cohomologies $\ell$-adiques, lorsque le corps de
+base est $\mathbf{C}$, via la cohomologie entière, devrait avoir un analogue
+lorsque le corps de base est alg.\ clos \note{« alg clos » ajouté à la main}
+valué complet non archimédien, à corps résiduel de caractéristique $p$, et
+corps des fractions $K$ \note{« $K$ » ajouté à la main} de caractéristique
+zéro, savoir que $H^{*}(X, \mathbf{Z}_p)$ doit s'envoyer alors de façon
+$\mathbf{Z}_p$-linéaire dans la cohomologie de De Rham $H^{*}(X)$, qui serait
+isomorphe alors à $H^{*}(X, \mathbf{Z}_p) \otimes_{\mathbf{Z}_p} K$. Pour
+définir un tel homomorphisme, on pourrait penser à utiliser l'espace
+rigide-analytique au sens de Tate défini par $X$ (NB c'est un site qui ne
+peut être défini par une topologie au sens ordinaire, ce qui explique les
+difficultés conceptuelles initiales de Tate pour arriver à définir la notion
+d'espace rigide-analytique), soit $X^{\mathrm{an}}$. On espère que les
+arguments habituels prouveront que pour des faisceaux de torsion, la
+cohomologie de $X_{\text{ét}}$ coïncide avec celle de $X^{\mathrm{an}}$, et
+un excès d'optimisme nous ferait espérer que la cohomologie de
+$X^{\mathrm{an}}$ à coefficients constants $\mathbf{Z}_p$ est bien la limite
+projective des cohomologies à coefficients dans les $\mathbf{Z}/p^n\mathbf{Z}$,
+donc coïncide avec la cohomologie $p$-adique $H(X_{\text{ét}}, \mathbf{Z}_p)$
+(définie précisément comme une limite analogue). Si cela était vrai,
+l'immersion canonique de $\mathbf{Z}_p$ dans les fonctions constantes sur
+$X^{\mathrm{an}}$ semblerait permettre d'envoyer $H(X^{\mathrm{an}},
+\mathbf{Z}_p)$ dans la cohomologie de De Rham de $X^{\mathrm{an}}$, qui par
+Gaga rigide-analytique n'est autre que celle de $X$. L'« excès » plus haut
+serait justifié essentiellement par un « lemme
+
+\page{51}
+
+de Poincaré » rigide-analytique, disant que sur $X^{\mathrm{an}}$, le
+complexe de De-Rham est bien une résolution du faisceau des fonctions
+constantes à valeurs dans le corps de base. Notez bien que c'est certainement
+trivial pour l'analytique $p$-adique ordinaire, étant une simple question de
+séries converge\struck{a}ntes dans ce cas, mais que la question pour la
+topologie rigide-analytique (qui est beaucoup plus grossière) est plus
+délicate. Je vous avoue d'ailleurs que j'ai de grands doutes que les choses
+marchent aussi simplement que ça, i.e. que la cohomologie rigide-analytique
+à coefficients constants tout bêtes donne les « bons » nombres de Betti. Je
+crois me rappeler que Tate m'avait dit que c'était déjà faux pour le $H^1$
+des courbes elliptiques --- il faudrait lui demander quel était son
+argument ; apparemment, on trouverait un peu plus que pour la cohomologie
+étale, mais quand même pas toute la cohomologie. Il reste plausible
+néanmoins, quoi qu'il en soit, que la topologie rigide-analytique aura son
+rôle à jouer dans ces questions.
+
+Notez qu'en caractéristique $p > 0$, on a un homomorphisme évident de
+$H^{*}(X, \mathbf{F}_p)$ dans la cohomologie de De-Rham, comme on voit en
+calculant cette dernière pour la cohomologie étale et non pour la cohomologie
+de Zariski (ce qui donne le même résultat, puisque les composantes du
+complexe de De Rham sont quasi-cohérents), et utilisant la suite spectrale en
+cohomologie étale
+\[
+H^{*}(X) \Leftarrow H^p\bigl(X, \underline{H}^q(\underline{\Omega})\bigr) .
+\]
+Cet homomorphisme se factorise d'ailleurs à travers $H^{*}(X, \mathbf{F}_p)
+\to H^{*}(X, \underline{O}_X)$, ce dernier s'envoyant dans $H^{*}(X)$ grace à
+l'homomorphisme de puissance $p$-ème $f \rightsquigarrow f^p$, induisant un
+isomorphisme $\underline{O}_X \simeq \underline{H}^0(\underline{\Omega})$. Le
+composé des homomorphismes canoniques $H^n(X, \underline{O}_X) \to H^n(X) \to
+H^n(X, \underline{O}_X)$ (ce dernier
+
+\page{52}
+
+résultant de l'autre suite spectrale pour la cohomologie de De Rham) ne peut
+guère être autre chose que l'homomorphisme de Frobenius. Il faut dire que
+tout ça est bien éculé, et qu'on ne pourra dire des choses vraiment
+intéressantes et nouvelles qu'en faisant appel à la « vraie » cohomologie
+$p$-adique.
+
+Bien cordialement
+
+\end{document}
