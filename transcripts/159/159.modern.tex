@@ -1,0 +1,1551 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 159,
+% pages 1-33 (the whole folder).
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried — a doubtful
+% reading, a notation he used differently, a missing passage — moves into a
+% footnote.
+%
+% It is held to being mathematically correct as it stands, not merely faithful
+% to the page. Where the manuscript is loose or mistaken, the true statement is
+% what appears here, and the footnote says what the page has. In any dispute of
+% substance the transcription governs: whoever cites Grothendieck must cite
+% batch-01.fr.tex and batch-02.fr.tex.
+%
+% Pass: Opus 5 (claude-opus-5), 2026-09-19 — first pass, unchecked against the
+% pages by a human. The model was named explicitly in the request; it is the
+% model this reading actually ran on.
+%
+% Scope: a SINGLE document for the whole folder. The shelfmark holds two
+% batches — pages 1-20 and pages 21-33 — read together in one pass, and no part
+% of the folder is read in another file. Page 13 carries nothing but the
+% archivists' number and page 23 is a blank leaf; both are absent from the
+% transcriptions and from here.
+%
+% Notation fixed for the whole document, and departing from the pages:
+%   - H = PGL_2 = Aut(P^1), where the pages write PGL(1). His index counts the
+%     RELATIVE DIMENSION of the Brauer-Severi scheme, not the rank of the
+%     module: page 1 writes PGL(r)_S for a P^r-bundle. The convention is
+%     confirmed internally by page 15, where chi_DR(X,g) = 3 chi_DR(X,O_X)
+%     requires rk(g) = 3 = dim PGL_2.
+%   - O_S, O_X for his underlined O.
+%   - z (fraktur z) for the raised glyph the transcriber of pages 1-20 could
+%     not name. It is an EDITORIAL PLACEHOLDER, not a reading: see the note in
+%     the spine section and the footnote at page 14.
+%   - omega = Omega^1_{X/S} on a relative curve; Omega for the invertible (or
+%     locally free) module with J/J^2 = Omega, identified with Omega^1_{X/S}
+%     when a projective connection is in play; Omega-check for its dual.
+%   - varpi_i for the coefficients of C restricted to Omega, as the
+%     transcription of pages 27-33 sets them.
+%   - M_g^z for the moduli of pairs (curve, projective structure) over M_g;
+%     M_g^z(X) for the character variety of pi = pi_1(X,x) on pages 16-17.
+%     The two are DIFFERENT spaces of the same dimension 6g-6, and the pages
+%     use one symbol for both. See the conventions.
+%
+% Substantive departures from the pages, each footnoted where it occurs:
+%   - page 8: P^infty_{X/S} is an O_X-algebra, so the power series ring is
+%     O_X[[delta f_1,...,delta f_n]], not O_S[[...]] as the page writes.
+%   - page 14: a) is strictly stronger than b) as the three conditions stand;
+%     what is proved there is b) <=> c) and a) => b). The equivalence a) <=> b)
+%     for a curve of genus >= 2 carrying a projective connection follows from
+%     the theorem of pages 21-22, which the folder does not invoke here.
+%   - page 15: the relative dimension of M_g^z over M_g is 3g-3, not 6g-6.
+%     The leaf is not repaired; see the section devoted to it.
+%   - page 21: the two cases treated (Borel, normaliser of a maximal torus) do
+%     not exhaust the proper algebraic subgroups of PGL_2 in characteristic 0 —
+%     A_4, S_4, A_5 remain. The same device the page uses settles them.
+%   - page 30: the first term of C(omega) is written varpi_{-1}, which page 27
+%     excludes; the term is not read with certainty and is not reconstructed.
+%
+% What the folder announces and never establishes: the CANONICAL projective
+% connection its own title promises (page 8 asks the question and leaves it);
+% the characterisation of the Teichmueller locus inside the character variety
+% (page 17 states it as a supposition); the injectivity of M_ann(X) ->
+% M_g^z(X), asked on page 17 and not answered; item b) of the theorem of
+% page 25, which breaks off mid-sentence; item c) of page 26, almost entirely
+% lost; the whole of page 9 after the word "Posant".
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{159}
+\pages{1}{33}
+\dating{s.d. — le groupe « Dérivateurs » (157-1 à 160) est daté 1990-[1991]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Connexions projectives et uniformisation : notes manuscrites (s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Sur une surface, on sait ce qu'est une carte : un morceau du plan, collé à
+d'autres morceaux du plan. Ce qui fait la géométrie, c'est la règle de
+recollement — ce qu'on autorise comme changement de carte. Si l'on n'autorise
+que les déplacements, on fait de la géométrie euclidienne ; si l'on autorise
+toutes les bijections différentiables, on ne fait plus de géométrie du tout,
+seulement de la topologie. Entre les deux, il y a des choix intéressants. Une
+\emph{structure projective} sur une surface, c'est le choix suivant : les
+cartes sont des morceaux de la droite projective complexe $\mathbf{P}^1$ — la
+sphère de Riemann — et les changements de carte sont les seules
+transformations $z \mapsto (az+b)/(cz+d)$, celles qui préservent la structure
+projective de la sphère.
+
+Ce choix a une vertu particulière, et c'est elle qui fait tout le sujet. Les
+transformations $z \mapsto (az+b)/(cz+d)$ forment un groupe, $\mathrm{PGL}_2$,
+et une carte projective est rigide : deux cartes qui coïncident sur un ouvert
+coïncident partout où elles sont définies toutes deux. On peut donc, en
+partant d'une carte et en la prolongeant le long des chemins, fabriquer une
+seule application de la surface \emph{universelle} — le revêtement universel
+$\widetilde{X}$ — vers $\mathbf{P}^1$. On l'appelle l'\emph{application
+développante}. Elle n'est pas définie sur $X$ mais sur $\widetilde{X}$, et le
+défaut se mesure par un homomorphisme $\rho : \pi_1(X) \to \mathrm{PGL}_2$,
+la \emph{monodromie} : faire le tour d'un lacet change la développante par
+la transformation $\rho(\gamma)$.
+
+L'uniformisation, c'est le cas privilégié où tout cela se referme. Si
+l'application développante est un isomorphisme de $\widetilde{X}$ sur un
+disque $D \subset \mathbf{P}^1$ et si la monodromie identifie $\pi_1(X)$ à un
+groupe de transformations agissant librement sur $D$ avec quotient compact,
+alors $X$ \emph{est} $D/\pi_1(X)$ : la surface a été construite à partir d'un
+morceau du plan et d'un groupe. C'est le théorème d'uniformisation, et c'est
+une structure projective très particulière. Toutes les autres structures
+projectives sur la même surface sont des voisines de celle-là, et la question
+naturelle est : combien y en a-t-il, comment sont-elles rangées, et
+reconnaît-on celle qui uniformise ?
+
+Le dossier attaque cette question par un autre bout que l'analyse complexe,
+et c'est ce qui le rend intéressant. Il veut une théorie algébrique, valable
+au-dessus d'une base quelconque et sans convergence ni revêtement universel :
+là où l'analyste a des cartes, l'algébriste n'a que des voisinages
+infinitésimaux. Une structure projective devient alors une
+\emph{connexion projective}, qui est la donnée de deux choses : un fibré en
+droites projectives $P$ sur la courbe $X$, avec une section — ce qui, par un
+dictionnaire que les six premières pages établissent soigneusement, revient à
+une extension de modules $0 \to \Omega \to E \to \mathcal{O}_X \to 0$ — et une
+identification, ordre par ordre, entre le voisinage formel de la section dans
+$P$ et le voisinage formel de la diagonale dans $X \times X$. La seconde donnée
+est la traduction algébrique exacte de « une carte à valeurs dans
+$\mathbf{P}^1$ » : elle dit que $X$ ressemble à $\mathbf{P}^1$ à tout ordre
+fini, et de façon cohérente.
+
+De là le dossier tire une série de comptes. Sur une courbe de genre $g$, les
+connexions projectives forment un espace affine dont les translations sont les
+\emph{différentielles quadratiques}, les sections de $\omega^{\otimes 2}$ ;
+il y en a $3g-3$ en dimension, exactement le nombre de paramètres dont dépend
+la courbe elle-même. L'espace des couples (courbe, structure projective) a
+donc $6g-6$ paramètres, et c'est aussi la dimension de l'espace des
+monodromies possibles à conjugaison près — une coïncidence qui n'en est pas
+une, et qui est le contenu géométrique de tout l'exercice. Un autre compte,
+plus classique, apparaît au passage : la différence entre les
+$g(g+1)/2$ produits de deux formes différentielles et les $3g-3$
+différentielles quadratiques vaut $\tfrac12 (g-2)(g-3)$, qui est la dimension de
+l'espace des quadriques passant par la courbe canonique.
+
+Le résultat le plus net du dossier est ailleurs, et il est de nature
+négative. Sur une courbe de genre au moins $2$, aucune connexion projective ne
+peut être « réductible » : le groupe $\mathrm{PGL}_2$ ne se ramène jamais à un
+sous-groupe plus petit. La démonstration tient en six lignes de calcul de
+degrés — un sous-fibré invariant aurait le degré $g-1$, ce qui force une
+section nulle et une contradiction — et sur le corps des complexes elle dit
+que l'image de la monodromie est Zariski-dense. Autrement dit : une structure
+projective algébrique est toujours, en un sens précis, aussi peu dégénérée que
+possible. C'est le genre d'énoncé qui rend un espace de modules utilisable, et
+c'est aussi, dans le dossier, la pièce qui manquait ailleurs.
+
+Le dernier tiers des feuillets — dix pages, reprises cinq ou six fois — est
+d'une autre facture. Il ne parle plus de courbes du tout, mais d'algèbres :
+une algèbre complète, augmentée, dont le premier gradué est inversible, et
+munie d'une dérivation compatible. La question est de savoir si une telle
+algèbre est toujours isomorphe au modèle, l'algèbre des séries formelles, et
+de combien de façons. La réponse est aussi rigide qu'on peut l'espérer :
+l'isomorphisme existe, il est unique dès qu'on l'a fixé à l'ordre $3$, et
+l'ambiguïté à cet ordre est exactement une différentielle quadratique. C'est
+la démonstration technique de tout ce qui précède, écrite après coup et pour
+elle-même.
+
+Un mot sur ce qui n'est pas là. Le titre de la première page est de sa main et
+promet des connexions projectives \emph{canoniques} ; le dossier n'en construit
+aucune, et la page 8 pose la question — une connexion projective est-elle
+canoniquement déterminée par la courbe ? — sans y répondre. L'uniformisation
+proprement dite n'est pas atteinte non plus : la page 17 décrit le lieu des
+structures qui uniformisent, et introduit la description par le mot
+« on suppose ». Ce que le dossier livre est l'appareil, non le théorème. Il
+faut le dire, parce que le titre promet davantage.
+
+Un mot enfin sur ce que ces feuillets ne disent pas. Le dossier est rangé dans
+un groupe que les archivistes datent de 1990-[1991] et intitulent
+« Dérivateurs » ; rien de ce qui est écrit sur ces trente-trois pages ne relève
+des dérivateurs. C'est le vocabulaire des années EGA et SGA. C'est un constat
+de contenu, refaisable sur la transcription, et il ne date rien : un
+mathématicien revient sur un sujet ancien quand il lui plaît, et un dossier
+d'archives est une chemise de papier. Les deux transcripteurs ajoutent des
+observations matérielles — du papier à portées musicales imprimées aux pages
+30 et 32-33, du listing informatique en accordéon ailleurs — mais ce sont des
+récupérations qu'il a pratiquées sur des décennies, faites ici sur un
+fac-similé, et elles ne tranchent rien non plus. La datation portée en tête
+reste celle de Montpellier, inchangée.
+
+Les noms modernes sous lesquels chercher : structure projective sur une
+surface de Riemann, connexion projective et dérivée schwarzienne, opers au
+sens de Beilinson et Drinfeld, application développante et application de
+monodromie, variété des caractères, espace de Teichmüller, différentielles
+quadratiques, fibrés de Brauer-Severi, parties principales et algèbres de
+jets, connexion de Gauss-Manin et application de Kodaira-Spencer, théorème de
+Max Noether sur les quadriques de la courbe canonique.
+
+\keywords{projective structure, projective connection, oper, Schwarzian derivative, developing map, monodromy representation, uniformization, Fuchsian group, Teichmuller space, character variety, Zariski density, irreducible local system, Brauer-Severi scheme, principal parts, jet algebra, formal completion, affine group, torsor, quadratic differential, canonical curve, Max Noether theorem, Gauss-Manin connection, Kodaira-Spencer map, de Rham cohomology, Hodge filtration, symplectic self-duality, moduli of curves, Lie algebra cohomology, Euler-Poincare characteristic, adjoint bundle, Riemann-Hilbert correspondence, complete augmented algebra, rigidity}
+\end{resume}
+
+\pagerange{1}{33}
+\section*{Le fil du dossier, ses reprises, et les conventions}
+
+Le dossier n'est pas un texte suivi. Il a un titre, de sa main, porté en tête
+de la page 1 : « Connexions projectives canoniques et uniformisation des
+courbes algébriques ». Il a ensuite deux grands massifs qui ne se rejoignent
+jamais explicitement, et un théorème isolé entre les deux.
+
+\pagerange{1}{33}
+\subsection*{Les stations}
+
+\begin{itemize}
+\item \textbf{Pages 1 à 6} — le dictionnaire. Fibré de Brauer-Severi avec
+section, réduction du groupe structural au groupe affine, extension
+$0 \to \Omega \to E \to \mathcal{O}_S \to 0$ : trois descriptions d'un seul
+objet. Puis le complété formel le long de la section, et le calcul explicite
+de l'action de $\Omega$ dessus. La page 2 est un départ abandonné, repris de
+zéro à la page 3 ; on la garde pour ce qu'elle est.
+\item \textbf{Pages 7 à 9} — la définition. Une connexion projective sur
+$X/S$, l'identification forcée $\Omega \simeq \Omega^1_{X/S}$, la condition à
+l'ordre $2$, l'intégrabilité, et l'écriture en coordonnées locales. La
+page 9 s'arrête au premier tiers, sur le mot « Posant ».
+\item \textbf{Pages 10 à 12} — la dimension relative $1$. La cohomologie de
+de Rham d'une famille de courbes, son autodualité symplectique, les
+scindages de la filtration de Hodge, Gauss-Manin et Kodaira-Spencer, et le
+compte $\tfrac12(g-2)(g-3)$.
+\item \textbf{Pages 14 à 18} — les modules. L'espace $M_g^{\mathfrak{z}}$, le
+critère de non-dégénérescence sous trois formes, le calcul de dimension par
+la caractéristique d'Euler-Poincaré de de Rham, puis le tableau analytique :
+variété des caractères, action du groupe modulaire, plongement de l'espace de
+Teichmüller. La page 13 ne porte que le numéro des archivistes.
+\item \textbf{Pages 19 et 20} — le calcul en coordonnées, qui aboutit à la
+formule encadrée $u_\omega(c) = c + d^1_{\omega/S}(\omega)$.
+\item \textbf{Pages 21 et 22} — le théorème de non-réduction, et la densité
+Zariski de la monodromie sur $\mathbf{C}$. Ces deux pages achèvent un
+argument commencé plus haut dans le dossier.
+\item \textbf{Pages 24 à 33} — la théorie formelle, reprise cinq ou six fois.
+C'est un second sujet, et c'est aussi la démonstration de ce que les pages 7
+à 9 supposaient. La page 23 est un feuillet blanc.
+\end{itemize}
+
+\pagerange{24}{33}
+\subsection*{Les reprises, et leur ordre}
+
+Le dernier massif n'est pas un texte mais une suite de moutures du même
+matériau. Les compter est utile, parce qu'elles ne disent pas la même chose et
+que les fusionner reviendrait à effacer du contenu.
+
+\begin{itemize}
+\item \textbf{Page 24} — un premier jet, en langage de torseurs, qui pose
+déjà tout : la donnée à l'ordre $2$, le groupe $G$, la conclusion
+$G/G_0$. La phrase finale reste inachevée.
+\item \textbf{Pages 25 et 26} — la mise en forme de théorème, avec ses items
+a) et b), puis la correspondance biunivoque à trois termes. C'est la version
+la plus articulée.
+\item \textbf{Pages 27, 28 et 30} — le calcul explicite du changement de
+paramètre. La page 30 est la plus complète des trois ; les pages 27 et 28 en
+sont des états antérieurs.
+\item \textbf{Page 29} — la preuve du théorème de structure de $G$, écrite
+dans les termes géométriques.
+\item \textbf{Page 31} — la même preuve, entièrement dépouillée : un lemme
+sur un groupe $G \supset G_0$ opérant sur un ensemble $C \supset C_0$, sans
+une ligne de géométrie.
+\item \textbf{Pages 32 et 33} — le cadre reposé une dernière fois, avec la
+définition de la régularité, et l'énoncé final.
+\end{itemize}
+
+\pagerange{1}{33}
+\subsection*{Conventions, valables pour tout le dossier}
+
+\textbf{Le groupe.} Les feuillets écrivent $\mathrm{PGL}(r)_S$ pour le groupe
+structural d'un fibré de Brauer-Severi de dimension relative $r$. L'indice
+compte donc la \emph{dimension relative} et non le rang du module : son
+$\mathrm{PGL}(1)$ est le groupe des automorphismes de la droite projective,
+que l'on écrit ici $H = \mathrm{PGL}_2$, de dimension $3$. La convention est
+confirmée par le dossier lui-même : la formule d'Euler-Poincaré de la page 15
+donne $\chi_{DR}(X, \mathfrak{g}) = 3\,\chi_{DR}(X, \mathcal{O}_X)$, ce qui
+exige $\operatorname{rg} \mathfrak{g} = 3$.
+
+\textbf{Le fibré et l'extension.} On suit la convention de EGA :
+$P(E) = \operatorname{Proj} \operatorname{Sym}(E)$, de sorte qu'un point de
+$P(E)$ au-dessus de $S'$ est un quotient inversible de $E$, et
+$V(\Omega) = \operatorname{Spec} \operatorname{Sym}(\Omega)$, dont les
+sections sont les homomorphismes $\Omega \to \mathcal{O}$, c'est-à-dire les
+sections du \emph{dual} $\check{\Omega}$. C'est aussi ce que font les
+pages 3 et 4, qui décrivent les points du complété formel par des
+$\varphi : \Omega \to \mathcal{O}_S$ sans jamais nommer la
+dualité.\footnote{La variance n'est pas un détail : c'est elle qui rend la
+formule $\varphi^a = \varphi/(1+\varphi(a))$ de la page 4 cohérente avec
+$u_a(\omega) = \omega/(1+a)$ de la même page. La première est une action sur
+les points, la seconde sur les fonctions, et elles sont contragrédientes
+l'une de l'autre.}
+
+\textbf{Les modules.} $\mathcal{O}_S$, $\mathcal{O}_X$ pour ses $\mathcal{O}$
+soulignés ; $\omega = \Omega^1_{X/S}$ sur une courbe relative ;
+$\check{\Omega}$ pour le dual. $\Omega$ désigne, dans la partie formelle, le
+module inversible $J/J^2$ ; il est identifié à $\Omega^1_{X/S}$ dès qu'une
+connexion projective est en jeu, et il ne faut pas le confondre avec le
+$\Omega = f_*(\omega)$ des pages 10 à 12, qui est de rang $g$. Les feuillets
+emploient la même lettre pour les deux ; le contexte les sépare sans
+ambiguïté, mais il faut le savoir.
+
+\textbf{Les deux espaces de modules.} Les pages 14 et 15 écrivent
+$M_g^{\mathfrak{z}}$ pour l'espace des couples (courbe de genre $g$, structure
+projective), fibré sur $M_g$. Les pages 16 et 17 écrivent
+$M_g^{\mathfrak{z}}(X)$ pour un objet tout différent : la variété des
+caractères de $\pi = \pi_1(X,x)$, c'est-à-dire l'espace des représentations
+$\pi \to H$ à conjugaison près. Les deux ont la même dimension $6g-6$, et
+c'est le fait central ; ce ne sont pas le même espace, et
+$M_g^{\mathfrak{z}}(X)$ n'est pas la fibre de $M_g^{\mathfrak{z}}$ au-dessus
+de $X$ — celle-ci est de dimension $3g-3$. On garde ici les deux notations du
+dossier, en réservant la parenthèse à la seconde.
+
+\pagerange{14}{20}
+\subsection*{Le glyphe de la structure projective}
+
+À partir de la page 14 il note en exposant un signe que le transcripteur des
+pages 1 à 20 n'a pas su nommer, et qu'il rend par $\mathfrak{z}$ en le
+déclarant. C'est le même signe qui donne « $\mathfrak{z}$-structure » dans la
+prose, et il y désigne la structure projective : $M_g^{\mathfrak{z}}$,
+$\mathrm{Aut}^{\mathfrak{z}}(P)$, « $\mathfrak{z}$-fibré »,
+« $\mathfrak{z}$-extension ».
+
+Cette lecture reprend la convention telle quelle. Il faut dire clairement ce
+qu'elle est : \textbf{$\mathfrak{z}$ est un choix de l'édition et non une
+lecture du feuillet.} Personne n'a identifié le signe ; la lettre fraktur
+n'est là que pour lui donner un corps typographique et pour qu'on puisse le
+citer. Quiconque aura les feuillets sous les yeux pourra le nommer, et la
+substitution sera alors mécanique.\footnote{Le transcripteur des pages 21 à 33
+rencontre lui aussi, page 21, « un symbole isolé, qui revient plus bas devant
+\emph{fibré principal} », et le laisse en blanc plutôt que de le rapporter au
+$\mathfrak{z}$ du premier lot. Les deux observations sont indépendantes et
+n'ont pas été rapprochées sur le fac-similé ; il est vraisemblable, mais non
+établi, qu'il s'agisse du même signe.}
+
+\pagerange{1}{33}
+\subsection*{Ce que le contenu montre, et ce qu'il ne date pas}
+
+Il faut le dire ici plutôt que de le taire. Le dossier appartient, dans
+l'inventaire de Montpellier, au groupe 157-1 à 160, intitulé « Dérivateurs »
+et daté 1990-[1991] ; la cote elle-même porte « s.d. ». Or rien sur ces
+trente-trois pages ne relève des dérivateurs, ni des catégories dérivées, ni
+de l'algèbre homotopique. Ce qui s'y trouve est du vocabulaire des années EGA
+et SGA : fibrés de Brauer-Severi, $\mathrm{PGL}(r)_S$,
+$\operatorname{Spf} \widehat{\operatorname{Sym}}$, parties principales
+$P^n_{X/S}$ et $P^\infty_{X/S}$, connexion de Gauss-Manin, critère de descente
+par les degrés. Les deux transcripteurs le notent séparément, chacun sur son
+lot, sans s'être consultés.
+
+Ce constat est solide en ceci qu'il est recontrôlable : il suffit de relire la
+transcription. Il faut être exact sur sa portée, qui est étroite. \emph{Il ne
+date rien.} Il dit de quoi les feuillets traitent, non quand ils ont été
+écrits. Un mathématicien revient sur un sujet ancien quand il lui plaît, et un
+dossier d'archives est une chemise de papier, groupée selon la place qu'elle
+occupait et non selon ce qu'elle contient.
+
+À côté de ce constat viennent des observations d'une autre espèce, et il faut
+les en séparer nettement. Le transcripteur des pages 21 à 33 relève que les
+pages 30, 32 et 33 sont écrites sur du papier à portées musicales imprimées ;
+celui des pages 1 à 20 relève que d'autres feuillets sont du listing
+informatique en accordéon, et que la page 4 porte une ligne tracée sur la
+portée imprimée. Ce sont des observations matérielles, faites sur un
+fac-similé numérique, où l'encre, la pression, le grain et le format ne se
+jugent pas. Elles sont fragiles pour cette raison seule. Et quand bien même
+elles seraient sûres, elles ne trancheraient rien : la récupération de papier
+— portées, listings, versos — est une pratique qu'il a tenue sur des
+décennies, et un support ne date pas ce qu'on écrit dessus.
+
+En conséquence : \textbf{cette lecture ne conclut aucune date.} Le
+La ligne de datation portée en tête est celle des archivistes, repris verbatim des
+deux transcriptions, et il y reste. Ce qui est offert ici est la description
+de ce que les feuillets montrent, pour que quelqu'un qui pourra les manipuler
+sache quoi regarder.
+
+\pagerange{1}{6}
+\section*{Le dictionnaire : fibré projectif, groupe affine, extension (pages 1 à 6)}
+
+Soit $S$ un schéma de base. Un \emph{fibré de Brauer-Severi} sur $S$ de
+dimension relative $r$ est un schéma $P$ propre et lisse sur $S$ dont les
+fibres géométriques sont des espaces projectifs de dimension $r$. Se donner un
+tel $P$ revient à se donner un torseur sous $\mathrm{PGL}_{r+1}$ sur $S$ :
+c'est la descente, pour la topologie fppf, du fait que
+$\mathrm{Aut}(\mathbf{P}^r) = \mathrm{PGL}_{r+1}$.
+
+\pagerange{1}{2}
+\subsection*{Trois descriptions d'un même objet}
+
+Se donner de plus une section $\sigma : S \to P$ revient à réduire le groupe
+structural au stabilisateur d'un point de $\mathbf{P}^r$. Prenons pour point
+celui qui correspond au quotient inversible $\mathcal{O}_S$ de
+$\mathcal{O}_S^{\,r+1}$ défini par la dernière coordonnée ; son stabilisateur
+est le groupe des matrices
+\[
+  \begin{pmatrix} A & C \\ 0 & 1 \end{pmatrix},
+  \qquad A \in \mathrm{GL}_r, \quad C \in \mathbf{A}^r,
+\]
+c'est-à-dire de celles qui respectent la structure d'extension
+$0 \to \mathcal{O}_S^{\,r} \to \mathcal{O}_S^{\,r+1} \to \mathcal{O}_S \to 0$
+et induisent l'identité sur le quotient. Ce groupe est le \emph{groupe
+affine}, produit semi-direct
+\[
+  \mathrm{Aff}(r) \;=\; \mathrm{GL}_r \ltimes \mathbf{G}_a^{\,r},
+\]
+de dimension $r^2 + r$ ; c'est bien $r$ de moins que
+$\dim \mathrm{PGL}_{r+1} = r^2 + 2r$, comme il se doit puisque le quotient est
+$\mathbf{P}^r$.\footnote{Le feuillet écrit $\mathrm{Aff}(r) =
+\mathrm{GL}(r)\cdot E^r$ et précise « produit semi-direct » ; le point est de
+ne pas lire ce produit comme direct, l'action de $\mathrm{GL}_r$ sur
+$\mathbf{G}_a^r$ étant l'action tautologique. Dans la formule, l'argument de
+$\mathrm{Aff}$ et celui de $\mathrm{GL}$ sont chacun écrits sur une lettre
+biffée.}
+
+Troisième description, celle dont tout le reste va se servir : la donnée de
+$(P, \sigma)$ équivaut à celle d'une extension de modules localement libres
+\[
+  0 \longrightarrow \Omega \longrightarrow E
+  \xrightarrow{\ p\ } \mathcal{O}_S \longrightarrow 0,
+\]
+avec $\Omega$ de rang $r$, le passage se faisant par $P = P(E)$ et
+$\sigma$ la section définie par le quotient $p$. C'est une équivalence de
+catégories, où les morphismes du côté des extensions sont les isomorphismes
+induisant l'identité sur $\mathcal{O}_S$ — l'automorphisme d'une telle
+extension est un couple (automorphisme de $\Omega$, élément de
+$\mathrm{Hom}(\mathcal{O}_S, \Omega) = \Omega(S)$), ce qui redonne
+exactement $\mathrm{Aff}(r)$.\footnote{La page 1 s'interrompt au milieu de
+l'énoncé, qui est repris et achevé page 2, elle-même abandonnée et reprise du
+même point de départ page 3. On donne ici l'énoncé complet, qui est celui des
+pages 2 et 3 réunies. La précision sur les morphismes — que l'équivalence
+porte sur la catégorie où $\Omega$ varie, et non sur les extensions d'un
+$\Omega$ fixé — est ajoutée : sans elle l'équivalence serait fausse, car
+$P(E) \simeq P(E \otimes L)$ pour tout $L$ inversible.}
+
+\pagerange{3}{5}
+\subsection*{Le complété formel le long de la section, et l'action de $\Omega$}
+
+Soient $\widehat{P}$ le complété formel de $P$ le long de $\sigma(S)$,
+$\widehat{S} = \mathcal{O}_{\widehat{P}}$ son algèbre, $\widehat{J}$ l'idéal
+d'augmentation, et $L = \mathcal{O}_P(1)$ avec $\widehat{L}$ sa restriction.
+Le groupe $\Omega$, vu comme
+$\mathrm{Hom}(\mathcal{O}_S, \Omega) \subset \mathrm{Aff}(r)$, opère sur
+l'extension, donc sur $(P,\sigma)$, donc sur $\widehat{S}$ et sur
+$\widehat{L}$, de façon compatible.
+
+Supposons l'extension scindée, $E \simeq \Omega \oplus \mathcal{O}_S$. Alors
+les points de $\widehat{P}$ à valeurs dans $S'$ sont les quotients inversibles
+$L'$ de $E$ qui coïncident, sur le réduit, avec le quotient donné ; en
+normalisant $L'$ par l'image de la section $e$ de $\mathcal{O}_S$, un tel
+quotient s'écrit $(x,\lambda) \mapsto \varphi(x) + \lambda$ avec
+$\varphi : \Omega \to \mathcal{O}_{S'}$ à valeurs dans le nilradical. D'où
+l'identification
+\[
+  \widehat{P} \;\simeq\; V(\Omega)^{\wedge}
+  \;=\; \operatorname{Spf} \widehat{\operatorname{Sym}}(\Omega),
+\]
+le complété de $V(\Omega)$ le long de la section nulle.
+
+L'action de $a \in \Omega(S)$ est alors entièrement calculable. Sur
+l'extension, $u_a(x,\lambda) = (x + \lambda a, \lambda)$. Sur les points,
+\[
+  \varphi^a \;=\; u_a^*(\varphi) \;=\; \frac{\varphi}{1 + \varphi(a)} .
+\]
+Sur les fonctions, $u_a$ est l'automorphisme d'algèbre de
+$\widehat{\operatorname{Sym}}(\Omega)$ qui envoie $\omega \in \Omega$ sur
+\[
+  u_a(\omega) \;=\; \frac{\omega}{1+a}
+  \;=\; \sum_{n \geqslant 0} (-1)^n\, \omega\, a^n ,
+\]
+le quotient ayant un sens parce que $1 + a$ est inversible dans le complété.
+Comme $u_a$ est un morphisme d'algèbres, on en déduit la règle de degré, que
+le feuillet encadre :
+\[
+  u_a(f) \;=\; \frac{f}{(1+a)^n} \qquad \text{si } \deg f = n .
+\]
+Sur le module inversible $\widehat{L}$ la règle est décalée d'un cran. On
+identifie $\widehat{L}$ à $\widehat{S}$ par l'épimorphisme canonique
+$\pi : E \otimes_{\mathcal{O}_S} \widehat{S} \to \widehat{L}$, qui s'écrit
+$\pi(\omega \otimes f + e \otimes g) = \omega f + g$ ; la commutation demandée
+$\pi \circ u_{a*}^{\widehat{E}} = u_{a*}^{\widehat{L}} \circ \pi$ force alors
+\[
+  u_{a*}^{\widehat{L}}(g) \;=\; (1+a)\, u_{a*}(g)
+  \;=\; \frac{g}{(1+a)^{\,n-1}} \qquad \text{si } \deg g = n .
+\]
+Le feuillet vérifie l'identité sur un élément général, et le calcul tombe
+juste.\footnote{Dans le cas général d'une extension quelconque, définie par un
+torseur $T$ sous $\Omega$, on obtient $\widehat{S}$ et $\widehat{L}$ comme
+produits contractés de $T$ par $\widehat{\operatorname{Sym}}(\Omega)$ le long
+des deux actions ci-dessus. Le symbole de contraction est douteux sur le
+feuillet et les dernières lignes de la page 5 sont biffées ; on n'en tire rien
+de plus que le principe.}
+
+\pagerange{6}{6}
+\subsection*{La conséquence gradue}
+
+La page 6 est un brouillon au crayon très pâle, traversé par la transparence
+du verso : les formules portent, la prose qui les relie est en grande partie
+perdue. Ce qui s'en tire est ceci. L'idéal d'augmentation $\widehat{J}$ donne
+$\operatorname{gr}^1_{\widehat{J}}(\widehat{S}) \simeq \Omega$, donc
+$\operatorname{gr}_{\widehat{J}}(\widehat{S}) \simeq
+\operatorname{Sym}(\Omega)$ et $J^n/J^{n+1} \simeq \operatorname{Sym}^n\Omega$
+canoniquement. Ce qui n'est \emph{pas} canonique, et qui porte l'information,
+est le cran suivant : $J^n/J^{n+2}$ est une extension de
+$\operatorname{Sym}^n\Omega$ par $\operatorname{Sym}^{n+1}\Omega$, et sa
+classe s'obtient à partir du torseur $T$ par l'homomorphisme
+\[
+  \Omega \longrightarrow
+  \mathrm{Hom}\big( \operatorname{Sym}^n \Omega,\;
+  \operatorname{Sym}^{n+1} \Omega \big),
+  \qquad a \longmapsto \big( f \mapsto -\,n\,a f \big).
+\]
+Le facteur $n$ et le signe sont ce que produit la règle de degré :
+$u_a(f) = f(1+a)^{-n} \equiv f - n\,a f$ modulo le degré
+$n+2$.\footnote{Le feuillet écrit la flèche deux fois et pas de la même
+manière : en haut $f \mapsto n a f + \ldots$, plus bas $v(a)(f) = af$ sans
+coefficient. C'est la page 7 qui tranche : elle nomme la flèche
+$-u_1$, c'est-à-dire la valeur en $n=1$ de l'expression ci-dessus, signe
+compris. On a donc retenu $a \mapsto (f \mapsto -naf)$, qui est la seule des
+trois écritures compatible avec le reste du dossier. Le reste de la page 6 —
+une demi-douzaine de membres de phrase — est perdu.}
+
+\pagerange{7}{9}
+\section*{La définition d'une connexion projective (pages 7 à 9)}
+
+\pagerange{7}{7}
+\subsection*{Les deux données, et l'identification qu'elles forcent}
+
+Soit $X$ un schéma lisse sur $S$. Une \emph{connexion projective} sur $X$
+relativement à $S$ est la donnée de :
+
+\begin{itemize}
+\item[a)] un fibré de Brauer-Severi $P$ sur $X$ muni d'une section,
+c'est-à-dire, par le dictionnaire des pages 1 à 6, une extension de modules
+localement libres sur $X$
+\[
+  0 \longrightarrow \Omega \longrightarrow E \longrightarrow
+  \mathcal{O}_X \longrightarrow 0 \,;
+\]
+\item[b)] pour chaque $n$, un isomorphisme de $\mathcal{O}_X$-algèbres
+augmentées
+\[
+  P^n_{X/S} \;\simeq\; \mathcal{O}_{\widehat{P}} \big/ \widehat{J}^{\,n+1},
+\]
+compatible au passage de $n+1$ à $n$, où $P^n_{X/S}$ est le faisceau des
+parties principales d'ordre $n$ — l'algèbre du $n$-ième voisinage
+infinitésimal de la diagonale de $X \times_S X$ — et $\widehat{P}$ le complété
+formel de $P$ le long de la section.
+\end{itemize}
+
+C'est la traduction algébrique littérale de « une carte à valeurs dans
+$\mathbf{P}^r$ » : la donnée b) dit que le voisinage infinitésimal d'un point
+de $X$ est identifié, à tout ordre fini, au voisinage infinitésimal d'un point
+de $\mathbf{P}^r$, et que ces identifications sont cohérentes entre elles. Il
+n'y a pas de convergence à demander : c'est tout l'intérêt de la version
+algébrique.
+
+La donnée b) à l'ordre $1$ ne coûte rien mais impose tout : les gradués de
+degré $1$ des deux membres sont $\Omega^1_{X/S}$ d'un côté et $\Omega$ de
+l'autre, d'où l'identification
+\[
+  (*) \qquad \Omega \;\simeq\; \Omega^1_{X/S} .
+\]
+En particulier $r = \dim X/S$, et $E$ est une extension de $\mathcal{O}_X$ par
+$\Omega^1_{X/S}$.
+
+Le premier contenu réel est à l'ordre $2$. Du côté des parties principales,
+l'idéal d'augmentation donne une extension
+\[
+  0 \longrightarrow \operatorname{Sym}^2 \Omega^1_{X/S} \longrightarrow
+  I/I^3 \longrightarrow \Omega^1_{X/S} \longrightarrow 0
+\]
+dont la classe vit dans
+$\mathrm{Ext}^1(\Omega^1_{X/S}, \operatorname{Sym}^2\Omega^1_{X/S})$, et un
+isomorphisme comme en b) est en particulier un scindage relatif, c'est-à-dire
+un point d'un torseur sous
+$\mathrm{Hom}(\Omega^1_{X/S}, \operatorname{Sym}^2 \Omega^1_{X/S})$. Du côté
+de $\widehat{P}$, la page 6 vient de calculer l'extension analogue : c'est
+celle déduite du torseur $T$ par $-u_1$. La condition b) à l'ordre $2$ dit
+donc que les deux classes se correspondent, et fixe de plus
+l'isomorphisme.\footnote{La page 7 est au crayon, pâle, avec les dernières
+lignes reprises à l'encre bleue ; elle porte la charge d'illisible la plus
+lourde du premier lot avec les pages 6, 11 et 21. Les mots qui articulent la
+phrase — « est déterminée par », « d'un cocycle », « doit être muni d'un
+iso » — sont là, mais ce qui les relie ne l'est pas. L'énoncé donné ci-dessus
+est la seule lecture cohérente de ce qui reste ; il n'est pas une
+reconstruction du feuillet, et on ne comble pas les blancs.}
+
+\pagerange{8}{9}
+\subsection*{Intégrabilité, et l'écriture en coordonnées}
+
+L'algèbre $P^\infty_{X/S} = \varprojlim_n P^n_{X/S}$ porte une
+comultiplication canonique
+\[
+  \Delta : P^\infty_{X/S} \longrightarrow
+  P^\infty_{X/S} \otimes_{\mathcal{O}_X} P^\infty_{X/S}
+\]
+et une augmentation vers $\mathcal{O}_X$ : c'est le groupoïde formel du
+voisinage de la diagonale. On dit qu'une connexion projective à l'ordre
+infini est \emph{intégrable} si elle est compatible à cette structure,
+autrement dit si elle provient d'une connexion sur $P = P(E)$ au sens
+ordinaire ; cette dernière est alors déterminée de façon
+unique.\footnote{Le feuillet pose l'intégrabilité exactement ainsi — « si elle
+[provient] d'une $\infty$-connexion de $P = P(E)$, laquelle sera dès lors
+déterminée » — mais les verbes sont illisibles. On a choisi la formulation
+minimale. C'est la même page qui pose, sous forme de question et sans y
+répondre, celle que le titre du dossier annonce : une telle connexion est-elle
+canoniquement déterminée par $X/S$ ? Voir la section finale.}
+
+La condition étant locale sur $X$, on se place au-dessus d'un ouvert muni de
+coordonnées locales $f_1, \ldots, f_n$ étales sur $S$. Alors
+\[
+  P^\infty_{X/S} \;\simeq\;
+  \mathcal{O}_X[[\delta f_1, \ldots, \delta f_n]],
+  \qquad \delta f_i = f_i \otimes 1 - 1 \otimes f_i,
+\]
+et la comultiplication est primitive sur les générateurs :
+\[
+  \Delta(\delta f_i) = \delta f_i \otimes 1 + 1 \otimes \delta f_i .
+\]
+Symétriquement, $\Omega \simeq \Omega^1_{X/S} \simeq \mathcal{O}_X^{\,n}$
+donne $\widehat{S} \simeq \mathcal{O}_X[[T_1, \ldots, T_n]]$.\footnote{Le
+feuillet écrit $\mathcal{O}_S[[\delta f_1, \ldots]]$ et
+$\mathcal{O}_S[[T_1, \ldots, T_n]]$. C'est une inadvertance : $P^\infty_{X/S}$
+et $\widehat{S}$ sont des $\mathcal{O}_X$-algèbres, les $\delta f_i$ et les
+$T_i$ engendrent au-dessus de $\mathcal{O}_X$, et l'algèbre $\mathcal{O}_S$ ne
+donnerait pas les bons gradués. On a corrigé.}
+
+La connexion est alors la donnée des images réciproques des générateurs :
+\[
+  F_i = \delta f_i + G_i \in \Gamma\, P^\infty_{X/S},
+  \qquad \Phi_i = T_i + \Psi_i \in \Gamma\, \widehat{S},
+\]
+avec $G_i$ et $\Psi_i$ d'ordre $\geqslant 2$, et l'intégrabilité est la
+compatibilité de $c_\infty : P^\infty_{X/S} \to \widehat{S}$ aux deux
+comultiplications. Le feuillet s'arrête au premier tiers, sur le mot
+« Posant », au moment précis d'écrire cette compatibilité ; la suite manque et
+on ne la supplée pas.
+
+\pagerange{10}{12}
+\section*{Dimension relative un : de Rham, autodualité, Kodaira-Spencer (pages 10 à 12)}
+
+\pagerange{10}{10}
+\subsection*{La cohomologie de de Rham d'une famille de courbes}
+
+Soit maintenant $f : X \to S$ propre et lisse de dimension relative $1$, à
+fibres connexes de genre $g$. On pose
+\[
+  \omega = \Omega^1_{X/S}, \qquad \Omega = f_*(\omega), \qquad
+  DR = R^1 f_*\big( \Omega^\bullet_{X/S} \big),
+\]
+de sorte que $\Omega$ est localement libre de rang $g$ et $DR$ de rang $2g$.
+La dualité de Serre donne $R^1 f_*(\mathcal{O}_X) \simeq \check{\Omega}$, et
+la suite spectrale de Hodge vers de Rham se réduit à la suite exacte
+\[
+  0 \longrightarrow \Omega \longrightarrow DR \longrightarrow
+  \check{\Omega} \longrightarrow 0 .
+\]
+Le cup-produit $\Lambda^2 DR \to R^2 f_*(\Omega^\bullet_{X/S}) \simeq
+\mathcal{O}_S$ est un accouplement alterné parfait, pour lequel $\Omega$ est
+un sous-module lagrangien : c'est ce que la marge du feuillet résume d'un mot,
+« autodual ».
+
+Les scindages de la suite de Hodge forment un torseur sous
+$\mathrm{Hom}(\check{\Omega}, \Omega) = \Omega \otimes \Omega$. Un scindage
+$q : \check{\Omega} \to DR$ donne $DR \simeq \Omega \oplus \check{\Omega}$, et
+dans cette décomposition la forme symplectique s'écrit matriciellement
+\[
+  \begin{pmatrix} 0 & \pm\,\mathrm{id} \\ \mathrm{id} & \varphi_0 \end{pmatrix},
+\]
+où $\varphi_0$ est la forme alternée induite sur $\check{\Omega}$. Un autre
+choix $q' = q + u$ la change selon
+\[
+  \varphi'_0(t,t') = \varphi_0(t,t') + \langle t, u(t')\rangle
+  - \langle t', u(t)\rangle ,
+\]
+c'est-à-dire du double de l'antisymétrisé de $u$. Il en résulte que les
+scindages \emph{lagrangiens} — ceux pour lesquels $\varphi_0 = 0$ — existent
+dès que $2$ est inversible, et qu'ils forment un torseur sous la partie
+symétrique $\operatorname{Sym}^2 \Omega$, noyau de
+$\Omega \otimes \Omega \to \Lambda^2 \Omega$.\footnote{C'est la suite exacte
+que la page 12 écrit sous la forme
+$0 \to \Gamma^2\Omega \to \Omega\otimes\Omega \to \Lambda^2\Omega \to 0$, avec
+la note marginale « Epi (car. $\neq 2$) ». $\Gamma^2$ est le carré à
+puissances divisées, c'est-à-dire le module des tenseurs symétriques ; en
+caractéristique différente de $2$ il s'identifie à $\operatorname{Sym}^2$, et
+c'est là toute la portée de la restriction sur la caractéristique. Le signe
+entre les deux derniers termes de la formule de variation est masqué par un
+pâté d'encre sur le feuillet ; le transcripteur lit $-$, et c'est le signe que
+l'antisymétrie demande.}
+
+\pagerange{11}{11}
+\subsection*{Gauss-Manin, et ce que la page 11 ne livre pas}
+
+La page 11 est à l'encre bleue, d'une écriture rapide : les formules portent,
+la prose qui les relie est en grande partie perdue. C'est, avec les pages 6, 7
+et 21, l'un des quatre feuillets les plus abîmés du dossier. Voici ce qui s'en
+tire sans reconstruction.
+
+Si $S$ est lui-même relatif à une base $T$, la connexion de Gauss-Manin
+\[
+  \nabla : DR \longrightarrow DR \otimes \Omega^1_{S/T}
+\]
+n'est pas compatible à la filtration de Hodge, et ses défauts de compatibilité
+sont $\mathcal{O}_S$-linéaires : le premier est un homomorphisme
+$\Omega \to \check{\Omega} \otimes \Omega^1_{S/T}$, soit encore, par
+adjonction, un homomorphisme depuis ou vers $\check{\Omega} \otimes
+\check{\Omega}$. C'est la transversalité de Griffiths, et l'application
+obtenue est celle de Kodaira-Spencer.\footnote{Les flèches de la page 11 sont
+écrites $\Omega^1_{S/T} \to \check{\Omega}\otimes\check{\Omega}$ et
+$\Omega^1_{S/T} \to \Lambda^2\check{\Omega}$. Telles quelles, la source et le
+but sont dans la variance qu'aurait l'application duale : c'est
+$T_{S/T} \to \operatorname{Sym}^2\check{\Omega}$ qui est l'application de
+Kodaira-Spencer, et $\Omega^1_{S/T} \simeq f_*(\omega^{\otimes 2})$ qui en est
+la transposée — c'est d'ailleurs ce que la page 12 écrit. Le feuillet est trop
+abîmé pour qu'on décide s'il écrit l'application ou sa duale, et cette édition
+ne tranche pas. De même, la seconde flèche a pour but $\Lambda^2$ là où
+l'application de Kodaira-Spencer est symétrique ; on ne bâtit rien dessus.}
+
+Le reste de la page — une remarque sur les torseurs sous un groupe hyperbolique
+et le sous-groupe $\pi_1$ des automorphismes, une suite exacte faisant
+intervenir $H^0(X, \Omega_X)$ et un sous-fibré de corang $1$ sur une courbe de
+genre $\geqslant 2$ — n'est pas lisible assez continûment pour qu'on en tire
+un énoncé. On le signale et on passe.
+
+\pagerange{12}{12}
+\subsection*{Le compte des quadriques}
+
+La page 12 n'est pas de la prose : c'est une colonne de formules jetées. Deux
+d'entre elles portent, et elles se répondent.
+
+La première est
+\[
+  f_*(\omega^{\otimes 2}) \;\simeq\; \Omega^1_{S/T} .
+\]
+C'est l'isomorphisme de Kodaira-Spencer pour les modules de courbes : il dit
+que $S \to T$ est versel, c'est-à-dire que $S$ est (localement) l'espace de
+modules $M_g$. Comme $\deg \omega^{\otimes 2} = 4g-4$ et
+$H^1(X, \omega^{\otimes 2}) = 0$ pour $g \geqslant 2$, Riemann-Roch donne
+$\operatorname{rg} f_*(\omega^{\otimes 2}) = 3g-3$ : c'est la dimension de
+$M_g$.
+
+La seconde est le compte
+\[
+  \frac{g(g+1)}{2} - (3g-3) \;=\; \frac{1}{2}\big(g^2 - 5g + 6\big)
+  \;=\; \frac{1}{2}(g-2)(g-3) .
+\]
+Les deux termes de gauche sont les rangs de
+$\operatorname{Sym}^2 \Omega = \operatorname{Sym}^2 f_*(\omega)$ et de
+$f_*(\omega^{\otimes 2})$, et la flèche qui va du premier au second est la
+multiplication des sections. Le compte est donc la dimension de son noyau
+lorsqu'elle est surjective, c'est-à-dire — c'est le théorème de Max Noether —
+lorsque $X$ n'est pas hyperelliptique. Et ce noyau a un nom classique : c'est
+l'espace des quadriques de $\mathbf{P}^{g-1}$ passant par la courbe
+canonique, de dimension $\binom{g-2}{2}$.\footnote{L'identification des deux
+termes du compte est le fait de cette édition. Le feuillet n'écrit que
+l'arithmétique ; ce qui la justifie est son voisinage immédiat — la suite
+$0 \to \Gamma^2\Omega \to \Omega\otimes\Omega \to \Lambda^2\Omega \to 0$ deux
+lignes plus haut, et $f_*(\omega^2) \simeq \Omega^1_{S/T}$ une ligne plus
+bas — et rien d'autre. La mention de Max Noether est nôtre ; le feuillet ne le
+nomme pas, et ne dit pas non plus s'il suppose $X$ non hyperelliptique.}
+
+L'intérêt du compte pour le dossier est le suivant. Les scindages lagrangiens
+de $DR$ forment un torseur sous $\operatorname{Sym}^2\Omega$ ; les connexions
+projectives, on va le voir, forment un torseur sous
+$f_*(\omega^{\otimes 2})$ ; et la flèche de l'un vers l'autre est la
+multiplication. Le compte mesure donc exactement de combien un scindage de
+Hodge détermine \emph{plus} qu'une connexion projective. Le reste de la
+page — la suite $0 \to \mathcal{O}_X \to P^1 \to \omega \to 0$ des parties
+principales, le nombre $2-2g$, les modules $f_*(\omega^n \otimes P)$ et leur
+gradué — est du repérage sans énoncé.
+
+\pagerange{14}{18}
+\section*{L'espace de modules des structures projectives (pages 14 à 18)}
+
+\pagerange{14}{14}
+\subsection*{L'espace, et le critère de non-dégénérescence}
+
+On fixe un genre $g$ et un foncteur rigidifiant sur les courbes propres et
+lisses relatives de genre $g$ — de Torelli, ou de niveau convenable — de
+manière que $M_g$ soit un espace et non seulement un champ. Pour $S$ de
+caractéristique $0$, on pose alors : $M_g^{\mathfrak{z}}(S)$ est l'ensemble
+des courbes propres lisses $X/S$ de genre $g$, munies d'un fibré en droites
+projectives $P$ sur $X$ à structure projective, et soumises à la seule
+condition $\mathrm{Aut}^{\mathfrak{z}}(P_s) = 1$ pour tout point $s$ de
+$S$.\footnote{Le glyphe $\mathfrak{z}$ est
+celui de l'édition : voir la section qui lui est consacrée. La condition
+fibre à fibre est ce que le feuillet appelle avoir un « point
+$\mathfrak{z}$-ordinaire », en opposition à « dégénéré » ; le sens en est
+fixé par la remarque qui suit immédiatement.}
+
+Le feuillet explicite aussitôt ce que la condition exclut. Soient $X$ un
+schéma algébrique connexe sur $k$ algébriquement clos et $P$ un fibré
+projectif à structure projective sur $X$. Considérons :
+
+\begin{itemize}
+\item[a)] $\mathrm{Aut}^{\mathfrak{z}}(P) = 1$ ;
+\item[b)] le groupe algébrique
+$\mathrm{Aut}^{\mathfrak{z}}_{X/k}(P) \subset H = \mathrm{PGL}_2$ est de
+dimension $0$ ;
+\item[c)] $P$ n'est d'aucun des deux types dégénérés ci-dessous.
+\end{itemize}
+
+Les deux types dégénérés sont :
+
+\begin{itemize}
+\item[$\alpha$)] le type $\mathbf{G}_m$ : $P \simeq P(\Omega \oplus
+\mathcal{O}_X)$, clôture projective du fibré en droites $V(\Omega)$, avec sa
+structure évidente ;
+\item[$\beta$)] le type $\mathbf{G}_a$ : $P \simeq P(E)$ pour une extension
+$0 \to \mathcal{O}_X \to E \to \mathcal{O}_X \to 0$ à structure projective,
+c'est-à-dire la clôture projective d'un torseur sous $\mathbf{G}_a$.
+\end{itemize}
+
+Ce qui est établi est b) $\Leftrightarrow$ c) — un sous-groupe algébrique de
+$\mathrm{PGL}_2$ de dimension $> 0$ contient un $\mathbf{G}_m$ ou un
+$\mathbf{G}_a$, et le fibré est alors la clôture projective de la
+représentation correspondante — et a) $\Rightarrow$ b), trivialement. Le
+feuillet donne les trois pour équivalentes ; telles qu'elles sont écrites,
+a) est strictement plus forte que b), car un groupe fini non trivial est de
+dimension $0$.\footnote{L'exemple est immédiat : le groupe de Klein
+$V_4 \subset \mathrm{PGL}_2$ est fini, non trivial, et son propre
+centralisateur. Un fibré projectif plat de monodromie $V_4$ vérifie b) et c)
+sans vérifier a). Cette lecture énonce donc b) $\Leftrightarrow$ c) et
+a) $\Rightarrow$ b), et laisse l'équivalence complète à la condition
+supplémentaire qui la rend vraie — voir la remarque ci-dessous. Le feuillet
+n'énonce aucune restriction sur $X$ à cet endroit, ce qui est précisément d'où
+vient l'écart.}
+
+\textbf{Remarque de l'édition.} Dans le seul cas dont le dossier ait
+finalement besoin — $X$ courbe projective lisse de genre $\geqslant 2$ sur un
+corps de caractéristique $0$, munie d'une connexion projective — les trois
+conditions \emph{sont} équivalentes, et c'est le théorème des pages 21 et 22
+qui le donne : il y est montré que le groupe structural ne se réduit à aucun
+sous-groupe propre, donc que l'adhérence de Zariski de la monodromie est $H$
+tout entier, donc que le centralisateur de la monodromie est le centre de
+$\mathrm{PGL}_2$, qui est trivial. Le dossier ne fait jamais ce rapprochement ;
+il est de cette édition, et il est forcé par les deux énoncés tels qu'ils
+sont.
+
+\pagerange{15}{15}
+\subsection*{Le calcul de dimension}
+
+Soit $\mathfrak{g} = \mathrm{ad}(P)$ le fibré en algèbres de Lie adjoint,
+localement libre de rang $3$, muni de sa connexion plate. Le feuillet propose
+trois conditions supplémentaires, pour $X$ courbe propre lisse de genre $g$ :
+
+\begin{itemize}
+\item[d)] $\dim H^1_{DR}(X, \mathfrak{g}) = 6g-6$ ;
+\item[d$'$)] $H^0_{DR}(X, \mathfrak{g}) = 0$ ;
+\item[d$''$)] $H^2_{DR}(X, \mathfrak{g}) = 0$.
+\end{itemize}
+
+Leur équivalence tient en deux lignes. La forme de Killing donne
+$\mathfrak{g} \simeq \check{\mathfrak{g}}$, d'où par dualité de Poincaré
+\[
+  (*) \qquad H^0_{DR}(X, \mathfrak{g}) \;\simeq\;
+  H^2_{DR}(X, \mathfrak{g})^{\vee},
+\]
+ce qui donne d$'$) $\Leftrightarrow$ d$''$). La caractéristique
+d'Euler-Poincaré de de Rham ne dépend que du rang :
+\[
+  (**) \qquad \chi_{DR}(X, \mathfrak{g}) = 3\,\chi_{DR}(X, \mathcal{O}_X)
+  = 3(2-2g) = 6-6g .
+\]
+Combinant, on obtient
+\[
+  (\!*\!*\!*) \qquad \dim H^1_{DR}(X, \mathfrak{g})
+  = 2 \dim H^0_{DR}(X, \mathfrak{g}) + (6g-6),
+\]
+d'où d) $\Leftrightarrow$ d$'$). Enfin $H^0_{DR}(X, \mathfrak{g}) \simeq
+\operatorname{Lie} \mathrm{Aut}^{\mathfrak{z}}_{X/k}(P)$ — une section
+horizontale du fibré adjoint est un automorphisme infinitésimal — d'où
+d$'$) $\Leftrightarrow$ b), et la formule
+\[
+  \dim H^1_{DR}(X, \mathfrak{g})
+  = 2\Big( \dim \mathrm{Aut}^{\mathfrak{z}}_{X/k}(P) + 3g-3 \Big).
+\]
+Le feuillet porte, sous le membre de gauche, l'accolade qui dit ce qu'est cet
+espace : « espace tangent à l'espace modulaire $M_g^{\mathfrak{z}}$ au point
+correspondant à $(X, P, \mathfrak{z})$ ».
+
+De là : la condition d$'$) signifie que $M_g^{\mathfrak{z}}$ n'a pas
+d'automorphismes infinitésimaux et c) qu'il n'a pas d'automorphismes finis, de
+sorte que $M_g^{\mathfrak{z}}$ est rigide — et donc représentable, là où $M_g$
+ne l'est qu'après rigidification. La condition d$''$) donne la lissité
+formelle de $M_g^{\mathfrak{z}}$ au-dessus de $M_g$. Et la condition d) donne
+la dimension.
+
+\pagerange{15}{15}
+\subsection*{L'anomalie de la page 15, et ce que la cohérence demande}
+
+Le feuillet écrit : « d$''$) implique que $M_g^{\mathfrak{z}}$ est
+formellement lisse sur $M_g$, et d) que sa dimension relative sur $M_g$ est
+$6g-6$ ». Le transcripteur note expressément que la dimension relative se lit
+bien $6g-6$, et il l'a transcrite telle quelle, sans réparation. Or la
+formule qui précède immédiatement donne $3g-3$.
+
+Cette lecture ne corrige pas le feuillet. Elle dit ce que la cohérence
+demande, et sur quoi elle se fonde.
+
+Ce que la cohérence demande :
+\[
+  \dim M_g^{\mathfrak{z}} = 6g-6, \qquad \dim M_g = 3g-3, \qquad
+  \dim \big( M_g^{\mathfrak{z}} / M_g \big) = 3g-3 .
+\]
+
+Ce sur quoi elle se fonde — quatre appuis, tous internes au dossier :
+
+\begin{itemize}
+\item L'accolade de la page 15 elle-même dit que $H^1_{DR}(X,\mathfrak{g})$
+est l'espace tangent à $M_g^{\mathfrak{z}}$, sans mention de $M_g$. Le
+$6g-6$ est donc la dimension \emph{absolue}.
+\item La page 12 donne $f_*(\omega^{\otimes 2}) \simeq \Omega^1_{S/T}$, de
+rang $3g-3$ : c'est la dimension de $M_g$, et le dossier s'en sert dans le
+compte $g(g+1)/2 - (3g-3)$ de la même page.
+\item La fibre de $M_g^{\mathfrak{z}} \to M_g$ au-dessus d'une courbe $X$ est
+l'ensemble des connexions projectives sur $X$, dont les pages 26, 29, 31 et 33
+établissent qu'il est un torseur sous $\Gamma(X, \Omega^{\otimes 2}) =
+H^0(X, \omega_X^{\otimes 2})$, de dimension $3g-3$ pour $g \geqslant 2$. C'est
+le résultat principal du dernier tiers du dossier.
+\item La page 17 nomme le même module, $H^0(X, \omega^{\otimes 2}_{X/\mathbf{C}})$,
+comme celui qui gouverne l'espace $M_{\mathrm{ann}}(X)$ des structures
+projectives sur une courbe analytique fixée ; et la page 20 en donne l'action
+explicite, $u_\omega(c) = c + d^1_{\omega/S}(\omega)$.
+\end{itemize}
+
+Autrement dit : $6g-6 = (3g-3) + (3g-3)$, base plus fibre, et le dossier
+calcule les trois nombres. L'explication la plus économique de ce qu'on lit
+page 15 est qu'il a écrit la dimension absolue dans une phrase qui parlait de
+la dimension relative ; une autre est que les mots « relative sur $M_g$ » ne
+portaient, dans son intention, que sur la lissité. Cette édition n'en choisit
+aucune et ne réécrit pas le feuillet : ce qui est sur le papier est $6g-6$, et
+la transcription le dit.
+
+\pagerange{16}{17}
+\subsection*{Le tableau analytique : monodromie, Teichmüller, uniformisation}
+
+On passe sur $\mathbf{C}$. Soient $X$ une courbe analytique compacte connexe
+de genre $g \geqslant 2$, $x \in X$, $\pi = \pi_1(X,x)$ et
+$H = \mathrm{PGL}_2(\mathbf{C})$. Le feuillet pose
+\[
+  M_g^{\mathfrak{z}}(X) \;\simeq\;
+  \mathrm{Hom}^{\,!}(\pi, H) \,\big/\, H,
+\]
+où $\mathrm{Hom}^{\,!}$ désigne l'ensemble des homomorphismes dont le
+stabilisateur dans $H$ — c'est-à-dire le centralisateur de l'image — se réduit
+à l'élément neutre. C'est la variété des caractères, lisse de dimension
+$(2g-2)\dim H = 6g-6$ : le nombre coïncide avec celui de la page 15 sans que
+les deux espaces coïncident, et c'est tout l'intérêt de la
+chose.\footnote{C'est la correspondance de Riemann-Hilbert. La page 16 décrit
+$M_g^{\mathfrak{z}}(X)$ comme « l'espace analytique associé à une solution sur
+$\mathbf{C}$, lisse de dimension $6g-6$ », et laisse implicite qu'il ne dépend
+que de $\pi$, donc ni de la structure complexe de $X$, ni du fibré. La
+condition « $\,!$ » est ce qui fait du quotient un espace, et c'est
+exactement la condition a) de la page 14, transportée par la monodromie.}
+
+Le groupe $\mathrm{Aut}(\pi)$ opère à droite sur $\mathrm{Hom}(\pi,H)$ par
+$\rho \cdot u = \rho \circ u$ ; comme $\rho \circ \mathrm{int}(\gamma) =
+\mathrm{int}(\rho(\gamma)) \circ \rho$, les automorphismes intérieurs
+agissent trivialement sur le quotient, et c'est donc
+\[
+  \mathrm{Out}(\pi) = \mathrm{Aut}(\pi)/\mathrm{Int}(\pi)
+\]
+— le groupe modulaire de la surface — qui opère sur
+$M_g^{\mathfrak{z}}(X)$.
+
+Vient alors la pièce qui justifie le mot « uniformisation » du titre. Si $Y$
+est une courbe analytique complète de genre $g$ munie d'un isomorphisme
+$\pi_1(Y) \simeq \pi$, l'uniformisation de $Y$ par le disque fournit une
+représentation $\rho_Y : \pi \to H$, définie à conjugaison près, donc un point
+de $M_g^{\mathfrak{z}}(X)$. On obtient ainsi un morphisme analytique
+\emph{injectif}
+\[
+  M_g(X) \hookrightarrow M_g^{\mathfrak{z}}(X),
+\]
+où $M_g(X)$ est l'espace de Teichmüller rigidifié par $\pi$, et ce morphisme
+commute aux actions du groupe modulaire $\Gamma$.
+
+La colonne de droite du même feuillet caractérise l'image, et c'est là que le
+dossier touche l'uniformisation de plus près : ce sont les
+$\rho : \pi \hookrightarrow H$ injectifs pour lesquels il existe un domaine
+$D \subset \mathbf{P}^1(\mathbf{C})$ invariant — unique s'il existe — sur
+lequel $\pi$ opère librement avec quotient compact. C'est la définition même
+d'une uniformisation, réécrite dans la variété des caractères. Mais le
+feuillet ouvre la phrase par « on suppose » : rien n'est démontré ici, ni la
+constructibilité de l'image, ni son caractère algébrique.\footnote{La colonne
+de droite de la page 17 est lourdement raturée et sa moitié inférieure,
+surchargée de renvois, ne se laisse pas suivre. Les mots « on suppose que
+l'image [est] constructible [et] algébrique » sont ce qu'on lit, et ils sont
+présentés comme une supposition. La lecture ne va pas au-delà.}
+
+Le feuillet définit enfin $M_{\mathrm{ann}}(X)$, l'espace des structures
+projectives sur la courbe analytique fixée $X$, et note que
+$H^0(X, \omega^{\otimes 2}_{X/\mathbf{C}})$ le gouverne ; puis il pose le
+morphisme
+\[
+  M_{\mathrm{ann}}(X) \longrightarrow M_g^{\mathfrak{z}}(X)
+\]
+et demande : « est-il injectif ? » C'est l'application de monodromie des
+structures projectives, dont le comportement local et l'injectivité sont
+devenus un sujet en soi dans la littérature ; le feuillet pose la question et
+ne la tranche pas, et cette édition non plus.\footnote{La phrase qui décrit
+$M_{\mathrm{ann}}(X)$ est mutilée : on y lit « c'est un [\ldots] sur le
+[\ldots] de deux fois $H^0(X,\omega^{\otimes 2}_{X/\mathbf{C}})$ », et ni le
+mot que « deux fois » qualifie, ni la nature de la structure — torseur,
+fibré — ne se laissent lire. On n'a retenu que le module, qui est certain
+parce qu'il est écrit en toutes lettres.}
+
+\pagerange{18}{18}
+\subsection*{Les automorphismes du couple $(P,\sigma)$}
+
+Le tiers supérieur de la page 18 est annulé par des hachures. Ce qui suit se
+tient. Soit $E$ l'extension non scindée $0 \to \omega \to E \to \mathcal{O}_X
+\to 0$, de classe $c \in \mathrm{Ext}^1(\mathcal{O}_X, \omega) =
+H^1(X, \omega) \simeq k$, avec $c \neq 0$. Un automorphisme $u$ de $E$
+préservant $\omega$ agit sur $\omega$ par un scalaire $\lambda \in
+H^0(X, \mathcal{O}_X^*) = \mathbf{C}^*$, et multiplie donc la classe $c$ par
+$\lambda$ ; de $\lambda c = c$ et $c \neq 0$ on tire $\lambda = 1$. Un tel $u$
+est donc un automorphisme d'extension, c'est-à-dire un homomorphisme
+$\mathcal{O}_X \to \omega$, c'est-à-dire une forme différentielle globale.
+D'où
+\[
+  \mathrm{Aut}_X(P_X, \sigma) \;\simeq\; H^0(X, \omega_X),
+  \qquad u_\omega \longleftrightarrow \omega,
+\]
+isomorphisme de groupes, la source étant additive.
+
+La question posée à la fin de la page est celle que les deux suivantes
+résolvent : peut-on avoir $u_\omega(c) = c$, si $c$ est cette fois la classe
+d'une connexion projective ?\footnote{Le feuillet emploie la lettre $c$ pour
+deux objets différents dans le même paragraphe — la classe d'extension dans
+$H^1(X,\omega)$ et la connexion projective — et la question finale est
+précisément à la charnière. On a distingué les deux ici. Le feuillet mentionne
+aussi $P(P^1_{X/S}(-1))$, c'est-à-dire le fibré projectif des parties
+principales d'ordre $1$ d'un module inversible : c'est la construction
+standard du fibré sous-jacent à une structure projective, et le feuillet ne
+la développe pas.}
+
+\pagerange{19}{20}
+\section*{Le calcul en coordonnées, et la formule encadrée (pages 19 et 20)}
+
+Soit $\mathcal{U} = \mathfrak{g} = \mathrm{ad}(P)$ le fibré adjoint, de rang
+$3$. Le choix d'une uniformisante $t$ le scinde :
+\[
+  \mathcal{U} \;\simeq\; \omega \oplus \mathcal{O}_X \oplus \omega^{-1},
+\]
+les trois facteurs étant les espaces de poids $2, 0, -2$ de l'action adjointe
+de $\mathfrak{sl}_2$. La coordonnée $t$ définit une connexion projective
+$c_{D_t} : \mathcal{U} \to \mathcal{U} \otimes \omega \simeq
+\omega^{\otimes 2} \oplus \omega \oplus \mathcal{O}_X$, déterminée par
+\[
+  c_{D_t}(dt) = -2\,dt, \qquad c_{D_t}(1) = 1, \qquad
+  c_{D_t}\big((dt)^{-1}\big) = 0,
+\]
+les coefficients $-2$ et $0$ étant ceux de l'action adjointe sur les vecteurs
+de poids extrême.
+
+Pour $\omega \in \Gamma(X, \omega)$ on pose $u_\omega = \exp \Theta_\omega$,
+l'automorphisme unipotent de $\mathcal{U}$ engendré par $\mathrm{ad}(\omega)$,
+et l'on fait agir $u_\omega$ sur les connexions par conjugaison,
+$u_\omega(c) = u \circ c \circ u^{-1}$. Le calcul de la page 19 — trois
+niveaux de crochets, avec $[-\omega, 1] = -2\omega$ — aboutit page 20 au
+résultat encadré :
+\[
+  \boxed{\;u_\omega(c) \;=\; c + d^1_{\omega/S}(\omega)\;}
+\]
+pour toute connexion projective $c$, où $d^1_{\omega/S}$ est un opérateur
+différentiel d'ordre $1$ de $\omega$ vers $\omega^{\otimes 2}$.
+
+C'est la formule structurante du dossier, et il faut voir ce qu'elle dit :
+l'ensemble des connexions projectives sur $X$ est un \emph{espace affine} sous
+$\Gamma(X, \omega^{\otimes 2})$ — la différence de deux connexions projectives
+est une différentielle quadratique — et le groupe $H^0(X, \omega)$ des
+automorphismes du couple $(P,\sigma)$ y agit par les translations de l'image
+de $d^1_{\omega/S}$. C'est exactement ce que la théorie formelle des
+pages 24 à 33 va démontrer abstraitement, sous la forme
+$G/G_0 \simeq \Gamma(X, \Omega^{\otimes 2})$.
+
+Les deux corollaires que le feuillet tire sont mutilés au point décisif, et on
+n'y touche pas. Ils portent tous deux sur la condition
+$d^1_{\omega/S}(\omega) = 0$, avec la mention « a fortiori $d\omega = 0$ » et
+la restriction « si $2$ est inversible dans $S$ ». Ce qu'ils visent est clair :
+que l'action de $H^0(X,\omega)$ sur les connexions projectives soit libre,
+donc que deux connexions projectives distinctes ne donnent pas le même fibré à
+structure projective. Ce qui les rend illisibles ne l'est pas moins : la
+condition $d\omega = 0$ est vide sur une courbe relative, puisque
+$\Omega^2_{X/S} = 0$ et que toute forme globale y est fermée.\footnote{On ne
+reconstruit donc ni l'un ni l'autre corollaire. Deux remarques, pour qui
+reprendra le feuillet. Premièrement, l'opérateur $d^1_{\omega/S}$ n'est pas la
+différentielle extérieure : le feuillet les distingue lui-même, en écrivant
+que $d^1_{\omega/S}(\omega) = 0$ entraîne « a fortiori » $d\omega = 0$. C'est
+un opérateur d'ordre $1$ attaché à la structure projective, dont $d$ serait
+une composante. Deuxièmement, le corollaire a) est illisible juste à
+l'endroit de la négation — « $u_\omega(c)$ n'est une connexion projective
+[\ldots] ssi » — de sorte qu'on ne sait pas si l'énoncé affirme ou nie. Le
+bloc qui suit, où se lisent $M_g(X)$, $M_g^{\mathfrak{z}}(X)$ et
+$\mathrm{conn}(X)$ reliés par des flèches, est entièrement biffé de traits
+obliques.}
+
+Les dernières lignes de la page 20 ouvrent l'argument que les pages 21 et 22
+achèvent : si un tel automorphisme existait, le fibré à structure projective
+serait affine, donc isomorphe à un $P(F)$ pour une extension
+$0 \to M \to F \to \mathcal{O}_X \to 0$ à structure projective, avec
+$E \simeq F \otimes L$. C'est exactement l'hypothèse dont la page 21 part.
+
+\pagerange{21}{22}
+\section*{Aucune réduction du groupe structural : la densité de la monodromie (pages 21 et 22)}
+
+\pagerange{21}{21}
+\subsection*{Le calcul de degrés}
+
+Reprenons la situation où la page 20 s'est arrêtée. $E$ est de rang $2$ avec
+$\det E \simeq \omega_X$, et l'on suppose que le fibré projectif associé se
+réduit à un sous-groupe de Borel, c'est-à-dire que $E \simeq F \otimes L$ avec
+$F$ muni d'une réduction et $L$ inversible. De
+$\det E \simeq \det F \otimes L^{\otimes 2}$, avec $\det F = M$ de degré $0$,
+on tire
+\[
+  2 \deg L = \deg \omega_X = 2g-2, \qquad \text{donc} \qquad \deg L = g-1 .
+\]
+Considérons alors le composé
+\[
+  \omega \hookrightarrow E \simeq F \otimes L
+  \twoheadrightarrow L .
+\]
+C'est une section de $L \otimes \omega^{-1}$, module de degré
+$(g-1) - (2g-2) = -(g-1) < 0$ dès que $g \geqslant 2$ : elle est donc nulle.
+Par conséquent $E \to L$ se factorise par $E/\omega \simeq \mathcal{O}_X$,
+d'où $L \simeq \mathcal{O}_X$ et $\deg L = 0$, ce qui contredit
+$\deg L = g-1 \neq 0$.
+
+Le groupe structural ne peut donc pas se réduire à un sous-groupe de Borel.
+Mieux : il ne peut pas non plus se réduire au normalisateur d'un tore maximal,
+car le passage au revêtement double correspondant ramènerait au tore lui-même,
+donc à un Borel — et le genre du revêtement est encore $\geqslant 2$, de sorte
+que l'argument s'y applique.
+
+\begin{quote}
+\textbf{Théorème} (page 21). Soit $X$ une courbe projective lisse de genre
+$g \geqslant 2$ sur un corps $k$ de caractéristique nulle. Alors pour toute
+connexion projective sur $X$, le groupe structural $H = \mathrm{PGL}_2$ du
+fibré principal associé ne se réduit à aucun sous-groupe algébrique $H'$
+distinct de $H$.
+\end{quote}
+
+\textbf{Une lacune, et comment la combler.} Les deux cas traités
+n'épuisent pas les sous-groupes algébriques propres de $\mathrm{PGL}_2$ en
+caractéristique $0$. La classification en donne trois familles : ceux qui sont
+contenus dans un Borel, ceux qui sont contenus dans le normalisateur d'un tore
+maximal, et les trois groupes exceptionnels $A_4$, $S_4$, $A_5$, qui ne sont
+dans ni l'un ni l'autre. Ces trois-là se traitent pourtant par le procédé même
+que le feuillet emploie pour le normalisateur du tore : une réduction à un
+sous-groupe fini $\Gamma$ donne une monodromie d'image finie, donc un
+revêtement étale $Y \to X$ de degré $|\Gamma|$ sur lequel la monodromie est
+triviale ; la connexion projective se relève à $Y$, le genre de $Y$ est encore
+$\geqslant 2$ par Riemann-Hurwitz, et le groupe structural y est trivial, donc
+contenu dans un Borel — ce que le premier cas exclut.\footnote{Le feuillet
+écrit « Le [\ldots] argument montre : » et l'adjectif est illisible, juste à
+l'endroit où il aurait dit s'il considérait le cas général comme acquis. La
+page 21 est, avec les pages 6, 7 et 11, l'une des quatre plus abîmées du
+dossier : le nom du groupe y est écrit d'un seul jet et les lettres n'en sont
+pas assurées, et un symbole isolé qualifiant les fibrés n'a pas été lu du
+tout. Le théorème est vrai tel qu'il est énoncé ; ce que cette note ajoute est
+le troisième cas, que le feuillet ne traite pas.}
+
+\pagerange{22}{22}
+\subsection*{La densité de Zariski, et où la situer}
+
+Les trois lignes de la page 22 tirent la conséquence analytique. Sur
+$k = \mathbf{C}$, l'homomorphisme de monodromie
+\[
+  \pi_1(X^{\mathrm{an}}, x) \longrightarrow H(\mathbf{C})
+\]
+a une image Zariski-dense dans $H_{\mathbf{C}}$ : car une image non dense
+aurait pour adhérence un sous-groupe algébrique propre, auquel le fibré se
+réduirait.
+
+Il vaut la peine de situer cet énoncé, puisque c'est le genre de résultat dont
+un lecteur moderne voudra savoir où il se place. Ce que le dossier démontre
+est, dans le vocabulaire d'aujourd'hui, l'\emph{irréductibilité de la
+monodromie d'une structure projective} sur une courbe de genre $\geqslant 2$ :
+un $\mathfrak{sl}_2$-oper, au sens de Beilinson et Drinfeld, a une monodromie
+Zariski-dense. C'est un énoncé standard, et la démonstration standard est
+exactement celle du feuillet — un sous-fibré en droites invariant aurait le
+degré $g-1$, incompatible avec la position du fibré sous-jacent dans sa
+filtration de Harder-Narasimhan. Du côté analytique, la même chose se dit :
+une structure projective sur une surface de Riemann compacte de genre au moins
+$2$ a une monodromie non élémentaire, ce qu'on trouve chez Gunning dans les
+années soixante.
+
+Cette édition n'affirme aucune priorité, et n'a pas fait de recherche
+bibliographique exhaustive. Ce qu'elle constate est que le résultat est
+aujourd'hui connu, qu'il est ici obtenu par l'argument qui est resté le bon,
+et qu'il est, dans le dossier lui-même, la pièce dont les pages 14 à 16 ont
+besoin sans le dire.
+
+\pagerange{24}{33}
+\section*{La théorie formelle : rigidité d'une algèbre à connexion (pages 24 à 33)}
+
+Le dernier tiers du dossier change de sujet. Il n'y est plus question de
+courbes, ni de genre, ni de monodromie : seulement d'une algèbre complète et
+d'une dérivation. C'est la démonstration technique de ce que les pages 7 à 9
+avaient posé sans preuve, et de ce que la page 20 avait obtenu par le calcul.
+Il est repris cinq ou six fois ; on suit ici l'ordre logique, en signalant à
+chaque fois de quelle mouture on parle.
+
+\pagerange{32}{33}
+\subsection*{Le cadre, tel que les pages 32 et 33 le posent}
+
+C'est la dernière mouture qui est la plus propre ; on commence par elle.
+
+Soient $X/S$ un schéma relatif, et $P$ une $\mathcal{O}_X$-Algèbre augmentée,
+séparée et complète pour la topologie $J$-adique, où $J$ est l'idéal
+d'augmentation, avec $J/J^2 = \Omega$ inversible. Soit
+\[
+  C : P \longrightarrow P \,\widehat{\otimes}\, \Omega^1_{X/S}
+\]
+une connexion relative à $S$, compatible à la structure d'algèbre :
+\[
+  \begin{cases}
+    C(fg) = f\,C(g) + g\,C(f), & f,g \text{ sections de } P, \\
+    C(\lambda \cdot 1) = 1 \otimes d\lambda, &
+    \lambda \text{ section de } \mathcal{O}_X .
+  \end{cases}
+\]
+
+Localement sur $X$, on choisit un isomorphisme d'algèbres augmentées
+$P \simeq \widehat{\operatorname{Sym}}(\Omega)$ et l'on écrit $C$ dans ce
+modèle. La restriction de $C$ à $\Omega = \operatorname{Sym}^1$ donne
+\[
+  C|_\Omega : \Omega \longrightarrow
+  \widehat{\operatorname{Sym}}(\Omega) \,\widehat{\otimes}\, \Omega^1_{X/S}
+  = \prod_{i \geqslant 0} \operatorname{Sym}^i(\Omega)
+  \otimes \Omega^1_{X/S},
+\]
+dont on note $(\varpi_i)_{i \geqslant 0}$ les composantes. Leur nature se lit
+sur la règle de Leibniz : pour $i \neq 1$ la composante $\varpi_i$ est
+$\mathcal{O}$-linéaire, donc une section globale,
+\[
+  \varpi_i \in \Gamma\big( \Omega^{\otimes(i-1)} \otimes \Omega^1_{X/S}
+  \big) \quad (i \neq 1),
+\]
+tandis que $\varpi_1$ est une \emph{connexion sur $\Omega$} et non une
+section.\footnote{La distinction est celle que le feuillet écrit en gras :
+« les $\varpi_i$ pour $i \neq 1$ sont linéaires ». Elle est forcée par
+$C(\lambda\omega) = \lambda\,C(\omega) + \omega\,d\lambda$ de la page 27 : le
+terme $\omega\,d\lambda$ n'affecte que la composante de degré $1$. Le symbole
+$\varpi$ est écrit d'un seul trait bouclé sur les feuillets et le
+transcripteur le fixe ainsi dans toute la suite ; on garde sa convention.}
+
+Le symbole de $C$ est la donnée essentielle. On a
+$C(J^i) \subset J^{i-1} \,\widehat{\otimes}\, \Omega^1_{X/S}$, d'où pour tout
+$i \geqslant 1$ un homomorphisme $\mathcal{O}$-linéaire sur les gradués
+\[
+  \operatorname{gr}^i = J^i/J^{i+1} \simeq \Omega^{\otimes i}
+  \xrightarrow{\ \widetilde{c}\ }
+  \Omega^{\otimes(i-1)} \otimes \Omega^1_{X/S},
+\]
+et cet homomorphisme est la multiplication par un seul et même
+\[
+  \varpi_0 \in \Gamma\big( \Omega^{-1} \otimes \Omega^1_{X/S} \big)
+  = \mathrm{Hom}\big( \Omega, \Omega^1_{X/S} \big),
+\]
+\emph{indépendant de $i$}. On dit que $C$ est \textbf{régulière} si $\varpi_0$
+l'est, c'est-à-dire si
+\[
+  \varpi_0 : \Omega \xrightarrow{\ \sim\ } \Omega^1_{X/S} .
+\]
+C'est la condition qui fait de $P$ une algèbre de jets et non une algèbre
+quelconque : c'est l'identification $(*)$ de la page 7, retrouvée comme une
+propriété de la connexion plutôt que comme une donnée.
+
+\pagerange{25}{26}
+\subsection*{Le théorème de rigidité (pages 25 et 26)}
+
+Voici l'énoncé, dans la mouture des pages 25 et 26, qui est la plus
+articulée. On se place en caractéristique $0$.
+
+\begin{quote}
+\textbf{Théorème} (page 25). Soit $P$ comme ci-dessus, munie d'une connexion
+$C$ régulière. Alors il existe un couple $(P,\sigma)$ — c'est-à-dire une
+extension $\mathcal{E} : 0 \to \Omega \to E \to \mathcal{O}_S \to 0$, et donc
+un modèle $\widehat{S} = \widehat{\operatorname{Sym}}(\Omega)$ muni de sa
+connexion canonique $\widehat{c}$ — et un isomorphisme d'algèbres augmentées
+$u : \widehat{S} \xrightarrow{\ \sim\ } P$ tel que $u(C) = \widehat{c}$.
+\end{quote}
+
+Le théorème se démontre en deux temps, et c'est cette décomposition qui porte
+tout le contenu :
+
+\begin{itemize}
+\item[a)] La donnée d'un isomorphisme $u$ \emph{à l'ordre $2$} détermine déjà
+$(P,\sigma)$, c'est-à-dire l'extension $\mathcal{E}$, à isomorphisme unique
+près, par $\Omega = J/J^2$ et $E$ construit sur $J/J^3$.
+\item[b)] $(P,\sigma)$ étant ainsi déterminé, pour tout isomorphisme $u_3$
+\emph{à l'ordre $3$}, $\widehat{S}/\widehat{J}^{\,4} \to P/J^4$, prolongeant
+celui d'ordre $2$, il existe un isomorphisme $u$ et un seul qui le prolonge et
+tel que $u(C)$ soit de la forme $\widehat{c}$.
+\end{itemize}
+
+Autrement dit : rien n'est libre au-delà de l'ordre $3$. Toute l'ambiguïté est
+concentrée au passage de l'ordre $2$ à l'ordre $3$, et la page 26 l'identifie
+en donnant une correspondance biunivoque entre trois
+ensembles.\footnote{L'item b) du théorème s'arrête au bas du feuillet 25, la
+phrase inachevée, et se termine en tête de la page 26 : « il existe un iso. et
+un seul $u$ tel [qu'il prolonge] $u_2$, tel que $u(\widehat{c}) = C$ ». Dans
+l'item a) du feuillet, le signe entre $\Omega$ et $(J/J^3)$ est lu $\otimes$
+sans certitude par le transcripteur ; on a préféré écrire « $E$ construit sur
+$J/J^3$ », qui est ce que la construction demande, plutôt que de reproduire un
+produit tensoriel dont la lecture n'est pas assurée.}
+
+\begin{itemize}
+\item[a)] les solutions du problème, à isomorphisme près — la catégorie des
+solutions étant \emph{rigide}, c'est-à-dire sans automorphismes non triviaux ;
+\item[b)] $(P,\sigma)$ et $u_2$ étant fixés, l'ensemble des
+pseudo-$u_3$ qui prolongent $u_2$, lequel est un \emph{torseur sous}
+$\Gamma(X, \Omega^{\otimes 2})$ ;
+\item[c)] l'ensemble $\mathrm{Conn}^*(P)$ des connexions régulières sur $P$
+dont l'image est de la forme $\widehat{c}$.
+\end{itemize}
+
+C'est le résultat que tout le dossier attendait. La fibre de
+$M_g^{\mathfrak{z}} \to M_g$ est un torseur sous
+$\Gamma(X, \Omega^{\otimes 2}) = H^0(X, \omega^{\otimes 2})$, donc de
+dimension $3g-3$ ; c'est le contenu abstrait de la formule encadrée de la
+page 20.\footnote{L'item c) est presque entièrement perdu sur le feuillet :
+on y lit « l'ens. des connexions $C$ sur $P$ telles que $\widehat{c}$ soit,
+dans [\ldots], [donnée] de $C$ [\ldots] sur $\mathrm{Conn}^*(P)$ », et ni le
+complément de « dans », ni le verbe, ne se laissent lire. Ce qui est sûr est
+que le troisième terme de la correspondance est $\mathrm{Conn}^*(P)$, que les
+pages 28 et 33 nomment et définissent, et que le petit diagramme du bas de la
+page 26 confirme : $\mathrm{Sol} \xrightarrow{\sim} \mathrm{Iso}_3$ avec une
+oblique vers $\mathrm{Conn}^*P$. On n'en a pas reconstruit davantage. Le bas
+de la page 26 est du brouillon de calcul : une quinzaine d'égalités jetées
+côte à côte, la plupart biffées, où se lit l'essentiel de l'argument de la
+page 29 sous forme d'aide-mémoire.}
+
+\pagerange{27}{28}
+\subsection*{Le calcul du changement de paramètre (pages 27, 28 et 30)}
+
+Les trois feuillets calculent la même chose, la page 30 étant la plus
+complète. Le point est de vérifier, à la main, que le torseur annoncé est bien
+celui-là et que rien ne bouge au-delà.
+
+On écrit, pour un générateur local $\omega_0$ de $\Omega$,
+\[
+  C(\omega_0) = \sum_{i \geqslant 0} \omega_0^{\,i} \otimes \varpi_i,
+\]
+et l'on change de générateur : $\omega_0 \mapsto \omega_0\,u$ avec
+\[
+  u = 1 + \sum_{i \geqslant 2} \alpha_i\, \omega_0^{\,i} .
+\]
+Le feuillet note $\omega_0^{\,u}$ le produit $\omega_0 u$ ; le $u$ surélevé
+est un \emph{facteur, non un exposant}.\footnote{C'est la page 30 qui le dit
+en toutes lettres, en écrivant
+$C(\omega_0^{\,u}) = C\big(\omega_0(1 + \sum_{i\geqslant 2}
+\alpha_i\omega_0^{\,i})\big)$, ce qui identifie $\omega_0^{\,u}$ au produit
+$\omega_0 u$ pour ce même $u$ qui figure aux dénominateurs des formules de la
+page 28. La transcription conserve la notation telle quelle et le signale ;
+on la conserve ici aussi, avec l'avertissement. Sans lui, les formules de la
+page 28 sont illisibles.}
+
+La règle de Leibniz donne alors
+\[
+  C(\omega_0^{\,u}) = C(\omega_0)\Big( 1 + \sum_{i \geqslant 2}
+  (i+1)\,\alpha_i\, \omega_0^{\,i} \Big) + \text{(termes en } d\alpha_i),
+\]
+le coefficient $(i+1)$ venant de la somme du facteur $\alpha_i\omega_0^i$ et
+de la dérivation $i\,\alpha_i\omega_0^{i-1}C(\omega_0)$ du produit. Ramenant
+par $u^{-1}$ et travaillant modulo $\Omega^{n+1}$ avec $\alpha_i = 0$ pour
+$i < n$, il reste
+\[
+  C(\omega_0^{\,u})^{u^{-1}} = C(\omega_0)
+  + (n+1)\,\alpha_n\, \omega_0^{\,n}\, \varpi_0,
+\]
+de sorte que la condition pour que le changement de paramètre préserve la
+forme de la connexion est
+\[
+  (n+1)\,\alpha_n = 0 ,
+\]
+c'est-à-dire, en caractéristique $0$, $\alpha_n = 0$. C'est la rigidité, sous
+sa forme la plus élémentaire : au-delà du terme de degré $2$, aucun changement
+de paramètre n'est disponible. Le feuillet vérifie les cas $n = 2$ et
+$n = 3$ séparément avant d'écrire le cas général.\footnote{Le premier terme du
+développement de $C(\omega)$ à la page 30 est transcrit
+$C(\omega) = \omega\,\varpi_{-1} + \omega\,\varpi_0 + \ldots$, avec la note
+que ce premier terme n'est pas lu avec certitude. Il ne peut être ce qui est
+écrit : la page 27 pose $C(\omega_0) = \sum_{i \geqslant 0} \omega_0^i \otimes
+\varpi_i$, où l'indice part de $0$, et un $\varpi_{-1}$ n'y a pas de place.
+Cette édition n'en propose pas de lecture et n'utilise que la formule de la
+page 27. La moitié inférieure des pages 27 et 30 est du brouillon, en crayon
+très pâle, largement biffé ; on n'en a rien tiré.}
+
+\pagerange{29}{31}
+\subsection*{La structure du groupe $G$ (pages 29 et 31)}
+
+Soit $G$ le groupe des automorphismes de $\widehat{S}$ comme algèbre
+augmentée qui sont l'identité modulo $J^3$, et $G_0 \subset G$ le sous-groupe
+de ceux qui sont l'identité modulo $J^4$. Un élément de $G$ est déterminé par
+l'image de $\Omega$, soit $\omega \mapsto \omega + q_3(\omega) + \ldots$ avec
+$q_i : \Omega \to \Omega^{\otimes i}$ ; être l'identité modulo $J^3$ annule
+$q_2$, l'être modulo $J^4$ annule en outre $q_3$. D'où
+\[
+  G/G_0 \;\simeq\; \mathrm{Hom}\big(\Omega, \Omega^{\otimes 3}\big)
+  \;\simeq\; \Gamma\big(\Omega^{\otimes 2}\big),
+\]
+le dernier isomorphisme parce que $\Omega$ est inversible.\footnote{Le calcul
+de $G/G_0$ est esquissé par le feuillet, qui écrit directement
+« donc $G/G_0 \simeq \Gamma(\Omega^{\otimes 2})$ » sans le justifier ;
+l'argument par les $q_i$ est de cette édition, et c'est lui qui explique que
+ce soit $\Omega^{\otimes 2}$ et non $\Omega^{\otimes 3}$ qui apparaisse. C'est
+aussi ce qui rend la fibre de $M_g^{\mathfrak{z}} \to M_g$ de dimension
+$3g-3$ et non $4g-4$.}
+
+On pose, pour une connexion $c$ sur $P$,
+\[
+  G(c) = \{\, h \in G \ \mid\ h \cdot \widehat{c}
+  \text{ est de la forme } \widehat{c}\,' \,\},
+\]
+qui est un sous-groupe de $G$. Le théorème de structure est alors :
+\[
+  G_0 \times G(c) \longrightarrow G, \qquad (g,h) \longmapsto g h
+\]
+est bijectif, d'où $G(c) \xrightarrow{\ \sim\ } G/G_0 \simeq
+\Gamma(X, \Omega^{\otimes 2})$.
+
+La démonstration tient en deux lignes de chaque côté. Injectivité : si
+$gh = g'h'$, alors $(g'^{-1}g)h = h'$ ; or $h\widehat{c}$ et $h'\widehat{c}$
+sont tous deux de la forme $\widehat{c}\,'$, et le corollaire du haut de la
+page 29 — un élément de $G_0$ qui envoie $\widehat{c}$ sur un $\widehat{c}\,'$
+est l'identité — donne $g'^{-1}g = 1$, d'où $g = g'$ puis $h = h'$.
+Surjectivité : pour $g \in G$, la proposition de la page 28 écrit
+$g\widehat{c} = k\,\widehat{c}_0$ avec $k \in G_0$, d'où $k^{-1}g \in G(c)$ et
+$g = k(k^{-1}g)$.
+
+La page 31 reprend exactement cette démonstration en la dépouillant de toute
+géométrie : un groupe $G$, un sous-groupe $G_0$, un $G$-ensemble $C$, une
+partie $C_0$ telle que $G_0 \times C_0 \xrightarrow{\ \sim\ } C$, et
+$G(c) = \{g \in G \mid g\cdot c \in C_0\}$ pour $c \in C_0$ ; la conclusion est
+la même, et l'énoncé n'a plus rien d'algébrique. C'est le même argument vu
+deux fois, et il vaut la peine de garder les deux : la seconde version montre
+que le résultat ne doit rien aux algèbres, seulement à l'action
+simplement transitive.\footnote{La démonstration de la page 31 emploie la
+lettre $h$ pour trois objets différents dans la même phrase — « soit
+$h \in G$, alors $hc$ est de la forme $h \cdot c'$ [\ldots] donc $h^{-1}k$
+[\ldots] donc $h = hg$ » — et la transcription reproduit fidèlement la
+collision. On a récrit la démonstration avec des lettres distinctes ; c'est la
+version de la page 29, avec $k$, qui est correcte telle quelle, et c'est elle
+qu'on a suivie.}
+
+Le corollaire que la page 31 tire du lemme — l'intersection d'une orbite de
+$G$ dans $C$ avec $C_0$ s'identifie à $G_0 \backslash G$ — est la même chose
+dite du côté des orbites. Son énoncé est mutilé sur le feuillet, et on ne le
+mentionne que pour mémoire.
+
+\pagerange{33}{33}
+\subsection*{L'énoncé final}
+
+La page 33 referme, avec ses hypothèses au complet. En caractéristique
+nulle, pour $P = \widehat{S} = \mathcal{O}_{\widehat{P}}$ :
+\[
+  \mathrm{Conn}^*(P) \times G_0 \longrightarrow
+  \mathrm{Conn}^*(\widehat{S}), \qquad (c,g) \longmapsto g \cdot \widehat{c}
+\]
+est bijective, où $\mathrm{Conn}^*$ désigne les connexions \emph{régulières} ;
+et pour $c \in \mathrm{Conn}^*(P)$,
+\[
+  G(c) \;\xrightarrow{\ \sim\ }\; G/G_0 \;\simeq\;
+  \Gamma\big(X, \Omega^{\otimes 2}\big).
+\]
+
+C'est le dernier mot du dossier, et c'est aussi le plus important : l'ensemble
+des structures projectives sur une courbe fixée est un torseur sous les
+différentielles quadratiques.
+
+\pagerange{1}{33}
+\section*{Ce que le dossier cherche, et ce qui lui manque}
+
+Reste à dire ce que ces trente-trois pages veulent, puisque le titre de la
+page 1 est de lui et annonce l'uniformisation.
+
+\pagerange{1}{33}
+\subsection*{Ce qui s'articule}
+
+Trois choses se rejoignent, et deux d'entre elles ne sont jamais rapprochées
+par le dossier.
+
+\begin{itemize}
+\item \textbf{La théorie formelle des pages 24 à 33 est la démonstration de ce
+que les pages 7 à 9 posaient.} La définition d'une connexion projective exige
+un isomorphisme $P^n_{X/S} \simeq \mathcal{O}_{\widehat{P}}/\widehat{J}^{n+1}$
+pour tout $n$ ; le théorème de la page 25 dit que cet isomorphisme existe, et
+qu'il est unique une fois fixé à l'ordre $3$. Sans lui, la définition des
+pages 7 à 9 demanderait une infinité de données et ne serait pas maniable.
+Cette articulation-là, le dossier la fait : le vocabulaire est le même, les
+notations $\widehat{S}$, $\widehat{J}$, $\widehat{c}$ sont celles de la
+page 3.
+\item \textbf{La théorie formelle calcule la fibre que les pages 14 à 18
+comptent.} L'ambiguïté à l'ordre $3$ est un torseur sous
+$\Gamma(X,\Omega^{\otimes 2})$, de dimension $3g-3$ : c'est exactement la
+fibre de $M_g^{\mathfrak{z}} \to M_g$, et avec $\dim M_g = 3g-3$ cela donne
+$\dim M_g^{\mathfrak{z}} = 6g-6$, qui est le nombre que la page 15 obtient par
+un tout autre chemin, la caractéristique d'Euler-Poincaré de de Rham du fibré
+adjoint. Deux calculs indépendants, le même résultat. Le dossier ne les
+confronte jamais — ils sont séparés par onze feuillets et un changement de
+sujet — et c'est pourtant leur accord qui rend l'anomalie de la page 15
+lisible comme une inadvertance et non comme un désaccord.
+\item \textbf{L'argument de densité des pages 21 et 22 fournit l'hypothèse
+dont la page 14 a besoin.} Le critère de non-dégénérescence de la page 14
+n'est complet que si les automorphismes finis sont exclus aussi bien que les
+infinitésimaux ; la densité Zariski de la monodromie les exclut tous. Cette
+articulation-là non plus n'est pas faite par le dossier, et elle est de cette
+édition.
+\end{itemize}
+
+\pagerange{1}{33}
+\subsection*{Ce qui ne s'articule pas}
+
+Il faut être franc sur le reste, parce que le titre promet davantage que ce
+que les pages livrent.
+
+\begin{itemize}
+\item \textbf{Il n'y a aucune connexion projective canonique dans le dossier.}
+Le mot est au titre ; la page 8 pose la question — une connexion projective
+est-elle canoniquement déterminée par $X/S$, sans donnée supplémentaire ? — et
+la laisse, avec un point d'interrogation. Tout ce que le dossier établit va
+dans l'autre sens : les connexions projectives forment un espace affine de
+dimension $3g-3$, sans point privilégié. Un point privilégié ne peut venir que
+d'ailleurs — de l'uniformisation, précisément, qui en fournit un sur
+$\mathbf{C}$ mais pas algébriquement.
+\item \textbf{L'uniformisation elle-même n'est pas atteinte.} Ce qu'on en
+trouve est le plongement de l'espace de Teichmüller dans la variété des
+caractères, page 17, et la caractérisation de son image par l'existence d'un
+domaine invariant à quotient compact. La caractérisation est juste et elle est
+la bonne ; mais le feuillet l'introduit par « on suppose », et rien n'est
+démontré. La question qu'il pose ensuite — l'injectivité de l'application de
+monodromie — est restée une vraie question.
+\item \textbf{Les deux massifs ne se parlent pas.} Les pages 1 à 22 sont de la
+géométrie des courbes ; les pages 24 à 33 sont de l'algèbre formelle
+au-dessus d'un $X/S$ quelconque, où le genre n'apparaît jamais et où le mot
+« courbe » n'est pas prononcé. Rien dans le second massif ne renvoie au
+premier, et l'unique pont — que $\Gamma(X,\Omega^{\otimes 2})$ du dernier
+feuillet est le $H^0(X, \omega^{\otimes 2})$ des pages 12 et 17 — n'est
+jamais franchi sur le papier.
+\end{itemize}
+
+Ce que le dossier est, finalement : l'appareil algébrique complet d'une
+théorie des structures projectives sur les courbes, avec un théorème net au
+milieu, et sans le théorème que le titre annonce. C'est un état de chantier, et
+c'est ce qui le rend lisible — on y voit ce qu'il fallait construire avant de
+pouvoir poser la question.
+
+\end{document}

@@ -1,0 +1,1332 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 160,
+% pages 1-22 (the whole folder).
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried — a doubtful
+% reading, a notation he used differently, a missing passage — moves into a
+% footnote.
+%
+% It is held to being mathematically correct as it stands, not merely faithful
+% to the page. Where the manuscript is loose or mistaken, the true statement is
+% what appears here, and the footnote says what the page has. In any dispute of
+% substance the transcription governs: whoever cites Grothendieck must cite
+% batch-01.fr.tex and batch-02.fr.tex.
+%
+% Pass: Opus 5 (claude-opus-5), 2026-09-19 — first pass, unchecked against the
+% pages by a human. The model was named explicitly in the request; it is the
+% model this reading actually ran on.
+%
+% Scope: a SINGLE document for the whole folder. The shelfmark holds two
+% batches — pages 1-20 and pages 21-22 — read together in one pass, and no
+% part of the folder is read in another file. Page 17 is blank and carries no
+% mathematics; it is absent from the transcription and from here.
+%
+% Notation fixed for the whole document, and departing from the pages:
+%   - A^n for affine n-space, where the pages write E^n; G_m x A^{n-1} for the
+%     open subscheme the pages write E^* x E^{n-1}.
+%   - X^{(m)} for the m-th infinitesimal neighbourhood of Z in X on page 1,
+%     where the page writes X_m. From page 2 on, X_n means something else
+%     entirely — the scheme of subgroups of rank p^n — and the collision is
+%     the one real notational trap in the folder.
+%   - alpha_{p^r} = Ker(F^r), following the pages themselves from page 2b on;
+%     NOT alpha_p^r, which is a different group scheme. See the footnote at
+%     the surjectivity argument.
+%   - Delta_n for the Moore determinant, A_i for the Dickson invariants,
+%     indexed as on pages 9-16 (A_i homogeneous of degree p^n - p^i). Page 19
+%     indexes them the other way round; that is recorded, not adopted.
+%   - V(E) = Spec Sym(E), so that sections of V(E) are sections of the DUAL
+%     E-check. This is EGA II 1.7.8 and it is also what pages 13-14 use; the
+%     variance matters and is stated in the conventions.
+%
+% Substantive departures from the pages, each footnoted where it occurs:
+%   - page 2: the composite is Frob^r o f_alpha, not f_alpha o Frob^r.
+%   - page 4: the special fibre's kernel has rank p^m with m the LAST nonzero
+%     index, not p^{n-i} with i the first.
+%   - page 9: Delta_0 = (-1)^n Delta_n^p exactly, sign included; this is
+%     consistent with A_0 = (-1)^n Delta_n^{p-1} and the two are not in
+%     conflict.
+%   - page 11: A_i(X_1,...,X_{n-1},0) = A_{i-1}(X_1,...,X_{n-1})^p — the page
+%     omits the Frobenius twist.
+%   - page 21, right column: the first relation drops the term b(alpha-beta),
+%     and the three lines after it are the identity for b*alpha, not b.
+%
+% What the folder announces and never establishes: the reducedness of X_n in
+% general (page 5 asks, pages 5-6 answer only at n = 1 and only at the
+% origin); the constant c in the Moore factorisation (page 7 says "reste a
+% determiner c"); the descent of page 18; the question mark on the right-hand
+% column of page 16 and on the last diagram of page 22.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{160}
+\pages{1}{22}
+\dating{s.d. — le groupe « Dérivateurs » (157-1 à 160) est daté 1990-[1991]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Schémas [en] groupes : notes manuscrites (s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+En caractéristique $p$, l'élévation à la puissance $p$ est additive :
+$(x+y)^p = x^p + y^p$, parce que tous les coefficients binomiaux du milieu
+sont divisibles par $p$. C'est une identité élémentaire, et c'est le ressort
+de tout ce dossier. Elle entraîne que tout polynôme de la forme
+$f(x) = c_n x^{p^n} + \dots + c_1 x^p + c_0 x$ — on les appelle les
+\emph{polynômes additifs} — vérifie $f(x+y) = f(x) + f(y)$ : ce n'est pas
+seulement une fonction sur la droite, c'est un endomorphisme du groupe
+additif. Ses zéros forment donc un sous-groupe.
+
+Mais « ses zéros » ne veut pas dire ici ce qu'il voudrait dire sur les
+nombres réels. Prenons $f(x) = x^p$ : le seul point où il s'annule est $0$,
+et pourtant il s'y annule $p$ fois. L'objet que le polynôme découpe n'est pas
+l'ensemble de ses racines, c'est le \emph{schéma} qu'il définit, ici
+l'algèbre $k[x]/(x^p)$, de dimension $p$ sur $k$ alors qu'elle n'a qu'un
+point. On le note $\alpha_p$. Il est invisible pour qui ne regarde que les
+points, et il est un vrai sous-groupe : c'est le prototype des groupes
+infinitésimaux, ceux qui vivent entièrement dans un voisinage de l'origine.
+À côté de lui, le polynôme $x^p - x$ découpe les $p$ éléments de
+$\mathbb{F}_p$, un sous-groupe honnêtement constitué de points, et le
+polynôme $x^p - a x$ pour $a$ quelconque interpole entre les deux cas. Il
+faut compter non pas les points mais le \emph{rang}, c'est-à-dire la
+dimension de l'algèbre : $\alpha_p$ et $\mathbb{Z}/p$ sont tous deux de
+rang $p$, et pourtant ils ne se ressemblent pas.
+
+La question du dossier est alors naturelle : les sous-groupes finis du groupe
+additif $\mathbb{G}_a$ sont-ils \emph{tous} de cette forme, noyaux de
+polynômes additifs ? Et si oui, comment la famille de tous les sous-groupes
+d'un rang donné est-elle elle-même organisée ? La réponse, démontrée aux
+pages 2 à 6, est aussi nette qu'on peut l'espérer : pour tout schéma de base
+$S$ de caractéristique $p$, les sous-groupes finis localement libres de rang
+$p^n$ de $\mathbb{G}_{a,S}$ sont exactement les noyaux des
+$f_a(x) = x^{p^n} + a_{n-1}x^{p^{n-1}} + \dots + a_0 x$, et chacun ne
+provient que d'un seul $a$. La famille de tous ces sous-groupes est donc
+l'espace affine de dimension $n$, sans point double et sans point manquant.
+Le sous-groupe est étale — c'est-à-dire fait de points, sans partie
+infinitésimale — exactement quand $a_0$ est inversible.
+
+Ce théorème une fois acquis, le dossier le retourne et s'en sert. Sur un
+corps, se donner un sous-groupe étale de rang $p^n$ revient à se donner $n$
+éléments $\xi_1, \dots, \xi_n$ linéairement indépendants sur $\mathbb{F}_p$,
+et le polynôme qui s'annule exactement sur leurs combinaisons a des
+coefficients que la règle de Cramer calcule. Le déterminant qui apparaît au
+dénominateur — le \emph{déterminant de Moore}, formé des lignes $\xi_i$,
+$\xi_i^p$, $\xi_i^{p^2}$, et ainsi de suite — se factorise complètement en
+formes linéaires, et les coefficients obtenus sont des polynômes en les
+$\xi_i$ invariants sous tous les changements de base à coefficients dans
+$\mathbb{F}_p$. Les pages 9 à 12 montrent qu'il n'y en a pas d'autres : les
+polynômes invariants sous $GL(n, \mathbb{F}_p)$ forment eux-mêmes une algèbre
+de polynômes, engendrée par ces $n$ coefficients. C'est le théorème des
+\emph{invariants de Dickson}, et il tombe ici comme un corollaire de la
+classification des sous-groupes, par un argument de géométrie — surjectivité,
+fibres finies, Main Theorem de Zariski — et non par un calcul d'algèbre.
+
+Les pages 13 à 16 refont tout cela au-dessus d'une base quelconque, où les
+$n$ éléments indépendants ne peuvent plus être écrits en ligne : ils
+deviennent un faisceau localement libre $E$ de rang $n$ muni d'un
+isomorphisme avec son tiré en arrière par le Frobenius. Le déterminant de
+Moore devient une application polynomiale à valeurs dans la puissance
+extérieure maximale, et le fait que $A_0$ soit la puissance $(p-1)$-ième du
+déterminant devient une trivialisation canonique — c'est ce qui permet de
+parler d'un torseur sous $\mathbb{F}_p^*$ là où on parlait d'une racine
+$(p-1)$-ième. La page 16 s'arrête sur un tableau à deux colonnes qui oppose
+le cas étale, entièrement réglé, au cas localement libre général ; et la
+flèche qui devrait fermer la seconde colonne porte un point d'interrogation
+qu'il ne lève pas.
+
+Le reste du dossier est d'une autre nature. La page 1, isolée, énonce un
+lemme d'algébrisation le long d'un fermé qui ne se rattache à rien d'autre
+ici. La page 18 esquisse une descente le long d'un pincement — on recolle
+deux points d'un schéma en un seul, et on demande ce qui redescend — et
+s'arrête au milieu. Les pages 19 à 22, au crayon puis à l'encre, sont du
+calcul à la main : le cas $n = 2$, deux racines $\alpha$ et $\beta$ dont on
+élimine les coefficients, et à la dernière ligne de la page 21 le déterminant
+de Moore de $(f, g, X)$ reparaît, celui-là même de la page 7. La page 22,
+écrite des deux bouts du feuillet, fabrique l'exemple que la page 18
+demandait : deux points où les fibres d'un sous-groupe sont abstraitement
+isomorphes mais où les facteurs se croisent. Elle finit sur l'opérateur
+$\lambda \mapsto (\lambda/f)^p - (\lambda/f)$, un Artin--Schreier tordu dont
+le noyau est exactement la droite $\mathbb{F}_p f$ — la brique élémentaire
+dont tout le reste est composé.
+
+Un mot sur ce que ces feuillets ne disent pas. Le dossier est rangé dans un
+groupe que les archivistes datent de 1990-[1991] et intitulent
+« Dérivateurs » ; or rien de ce qui est écrit sur ces vingt-deux pages ne
+relève des dérivateurs. C'est de la théorie des schémas en groupes finis en
+caractéristique $p$, le matériau de SGA 3. C'est un constat de contenu, que
+n'importe quel lecteur de la transcription peut refaire. Il ne date rien : un
+mathématicien peut revenir à tout âge sur un sujet ancien, et un dossier
+d'archives est une chemise physique, pas une unité thématique. L'un des deux
+transcripteurs ajoute une observation d'écriture — main rapide et droite au
+stylo-plume, abréviations et notation des années EGA — mais une observation
+d'écriture faite sur un fac-similé est fragile, et aucun des vingt-deux
+feuillets ne porte de date, d'en-tête ni de verso réutilisé qui trancherait.
+La datation portée en tête de cette lecture reste donc celle de Montpellier,
+inchangée, et rien ici ne prétend la corriger.
+
+Les noms modernes sous lesquels chercher : polynômes additifs et anneau de
+polynômes tordus, schémas en groupes finis en caractéristique $p$,
+$\alpha_p$ et suite connexe-étale, déterminant de Moore, invariants de
+Dickson, modules à Frobenius inversible, théorie d'Artin--Schreier,
+pincement au sens de Ferrand.
+
+\keywords{additive polynomial, twisted polynomial ring, finite group scheme, additive group scheme, infinitesimal group scheme, connected-etale sequence, Moore determinant, Dickson invariant, modular invariant theory, Zariski's main theorem, valuative criterion of properness, unit-root F-crystal, Artin-Schreier theory, companion matrix, Ferrand pinching, formal completion, schematic density}
+\end{resume}
+
+\pagerange{1}{22}
+\section*{Le fil du dossier, et l'ordre des feuillets}
+
+Le dossier n'est pas un texte suivi, et il ne se lit pas comme tel. Il y a
+un centre, et autour de lui deux appendices et deux chantiers.
+
+\pagerange{1}{22}
+\subsection*{Les stations}
+
+\begin{itemize}
+\item \textbf{Page 1} — un lemme d'algébrisation le long d'un fermé, isolé.
+Il ne se rattache à rien d'autre du dossier, et la moitié de sa prose est
+perdue. On le donne pour ce qu'il est.
+\item \textbf{Pages 2 à 6} — le cœur. Construction de l'application
+$a \mapsto \operatorname{Ker} f_a$, et démonstration qu'elle est bijective :
+surjectivité sur un corps algébriquement clos, monomorphie par déformation
+aux nombres duaux, propreté par le critère valuatif, description du lieu
+étale, calcul de l'espace tangent de Zariski à l'origine pour $n = 1$, puis
+l'énoncé du théorème au-dessus d'une base quelconque.
+\item \textbf{Pages 7 à 12} — la conséquence combinatoire. Le déterminant de
+Moore et sa factorisation, la règle de Cramer qui donne les coefficients, la
+divisibilité $\Delta_i = A_i \Delta_n$, et le théorème de Dickson sur les
+invariants de $GL(n, \mathbb{F}_p)$, avec sa variante pour
+$SL(n, \mathbb{F}_p)$.
+\item \textbf{Pages 13 à 16} — la même chose au-dessus d'une base, en termes
+de faisceaux. Se termine sur un tableau à deux colonnes dont la seconde
+reste ouverte.
+\item \textbf{Page 18} — une esquisse séparée : descente d'un sous-groupe de
+$\mathbb{G}_a$ le long d'un pincement. Inachevée. La page 17 est blanche.
+\item \textbf{Pages 19 à 22} — du calcul. Deux feuillets au crayon, puis
+deux à l'encre, sur le cas $n = 2$ ; la page 22 rejoint la page 18.
+\end{itemize}
+
+Ce qui fait l'unité du dossier n'est pas l'ordre des feuillets mais un
+objet : le polynôme additif dont les racines sont exactement un
+$\mathbb{F}_p$-sous-espace donné. Il est construit abstraitement aux pages 2
+à 6, écrit comme un quotient de déterminants aux pages 7 à 9, rendu
+intrinsèque aux pages 13 à 16, et calculé à la main pour $n = 2$ aux
+pages 19 à 22. Les quatre stations sont quatre présentations du même objet.
+
+\pagerange{1}{22}
+\subsection*{Conventions, valables pour tout le dossier}
+
+On écrit $\mathbb{A}^n$ l'espace affine de dimension $n$ sur $\mathbb{F}_p$,
+là où les feuillets écrivent $\mathbb{E}^n$, et
+$\mathbb{G}_m \times \mathbb{A}^{n-1}$ l'ouvert où la première coordonnée est
+inversible, là où ils écrivent $\mathbb{E}^* \times \mathbb{E}^{n-1}$.
+
+Pour $a = (a_0, \dots, a_{n-1})$ à coefficients dans un anneau $R$ de
+caractéristique $p$, on pose
+\[
+  f_a(x) = x^{p^n} + a_{n-1}x^{p^{n-1}} + \dots + a_1 x^p + a_0 x ,
+\]
+endomorphisme du groupe $\mathbb{G}_{a,R}$, fini localement libre de degré
+$p^n$ puisque le polynôme est unitaire de degré $p^n$. Son noyau
+$\operatorname{Ker} f_a$ est donc un sous-schéma en groupes fini localement
+libre de rang $p^n$.\footnote{Le langage moderne le dit d'un mot :
+$\operatorname{End}(\mathbb{G}_{a,R})$ est l'anneau de polynômes tordus
+$R\{F\}$, avec $F c = c^p F$, et $f_a$ en est un élément unitaire de
+$F$-degré $n$. Les feuillets ne nomment pas cet anneau mais en manipulent
+constamment la loi de composition.}
+
+$F$ désigne le Frobenius, $\alpha_{p^r} = \operatorname{Ker}(F^r)$ le noyau
+de sa $r$-ième itérée, de rang $p^r$ et à un seul point. Il ne faut pas le
+confondre avec $\alpha_p^r$, qui est un produit de $r$ copies de $\alpha_p$
+et n'est pas isomorphe à $\alpha_{p^r}$ dès que $r \geqslant 2$ ; le dossier
+utilise partout le premier.
+
+$X_n$ désigne, à partir de la page 2 et jusqu'à la fin, le schéma des
+sous-groupes finis localement libres de rang $p^n$ de $\mathbb{G}_a$. Mais
+sur la page 1, et seulement là, la même lettre indicée désigne les
+voisinages infinitésimaux d'un fermé. Les deux objets n'ont rien de commun,
+et pour éviter qu'on lise le second comme le premier on note ici $X^{(m)}$
+le $m$-ième voisinage infinitésimal de la page 1.
+
+Enfin, on suit la convention de EGA : pour $E$ localement libre,
+$V(E) = \operatorname{Spec} \underline{\operatorname{Sym}}(E)$, de sorte
+qu'une section de $V(E)$ au-dessus de $S$ est un homomorphisme
+$E \to \mathcal{O}_S$, c'est-à-dire une section du \emph{dual}
+$\check{E}$. C'est aussi ce que font les pages 13 et 14, qui parlent de
+sections de $\check{E}$ et de points de $V(E)$ sans jamais les
+distinguer.\footnote{La variance est ici tout sauf un détail : les
+opérations $\xi \mapsto \xi^{(p)}$ des pages 14 et 15 vivent sur $\check{E}$
+et utilisent la structure $\check{u} : \check{E}^{(p)} \to \check{E}$
+déduite de $u : E^{(p)} \xrightarrow{\ \sim\ } E$ par dualité. Les lire sur
+$E$ donnerait des énoncés faux.}
+
+\pagerange{1}{22}
+\subsection*{Ce que le contenu montre, et ce qu'il ne date pas}
+
+Il faut le dire ici plutôt que de le taire. Le dossier appartient, dans
+l'inventaire de Montpellier, à un groupe intitulé « Dérivateurs » et daté
+1990-[1991]. Rien sur ces vingt-deux pages ne relève des dérivateurs, ni des
+catégories dérivées, ni de l'algèbre homotopique. Ce qui s'y trouve est de
+la théorie des schémas en groupes finis en caractéristique $p$ : polynômes
+additifs, $\alpha_p$, Verschiebung, critère valuatif, Main Theorem de
+Zariski, invariants de Dickson, complétion formelle le long d'un fermé. Le
+lemme de la page 1 est écrit dans le vocabulaire de EGA III et IV ; les
+pages 2 à 16 sont, mot pour mot, le genre de matériau que SGA 3 organise.
+
+Ce constat est solide en ceci qu'il est vérifiable : il suffit de lire la
+transcription. Il faut être exact sur sa portée, qui est étroite. Il dit ce
+que les feuillets traitent ; il ne dit pas quand ils ont été écrits. Un
+mathématicien revient sur un sujet ancien quand il lui plaît, et un dossier
+d'archives est une chemise de papier, groupée par les archivistes selon la
+place qu'elle occupait, non selon ce qu'elle contient. Un contenu de 1960 ne
+prouve pas une écriture de 1960.
+
+À côté de ce constat, l'un des deux transcripteurs porte une observation
+d'une autre espèce : une main rapide et droite, au stylo-plume, avec les
+abréviations et la notation des années EGA. C'est une observation
+paléographique, et elle est fragile — elle a été faite sur un fac-similé
+numérique, où l'encre, la pression, le papier et le format ne se jugent
+pas. Elle demanderait l'œil d'un humain sur les feuillets eux-mêmes. Le même
+transcripteur note qu'aucune des vingt-deux pages ne porte de date, d'en-tête
+ni de verso réutilisé qui trancherait la question.
+
+En conséquence : cette lecture ne conclut aucune date. La ligne de datation
+portée en tête est celle des archivistes, reprise verbatim des deux
+transcriptions, et elle y reste. Ce qui est offert ici est la description de
+ce que les feuillets montrent, pour que quelqu'un qui pourra les manipuler
+sache quoi regarder.
+
+\pagerange{1}{1}
+\section*{Un lemme d'algébrisation isolé (page 1)}
+
+Le feuillet est seul de son espèce dans le dossier, et il est très abîmé :
+la moitié de sa prose manque, la démonstration s'arrête au milieu d'une
+phrase, et une parenthèse ouverte au point 2) n'est jamais fermée. On donne
+ce qui se tient.
+
+Soient $f : X' \to X$ un morphisme de type fini entre schémas
+noethériens,\footnote{Le mot « propre » est écrit puis biffé sur le
+feuillet, et remplacé par « de type fini ». On suit la correction.} $V'
+\subset X'$ l'ouvert des points où $f$ est étale, $Z \subset X$ une partie
+fermée, $\hat{X}$ le complété formel de $X$ le long de $Z$, et $X^{(m)}$ le
+$m$-ième voisinage infinitésimal de $Z$ dans $X$. On se donne une section
+formelle $q = (q_m)$ de $X'$ au-dessus de $\hat{X}$, c'est-à-dire une famille
+compatible de sections de $X' \times_X X^{(m)}$ au-dessus de $X^{(m)}$, et on
+note $Z'$ l'image de la section au niveau réduit, de sorte que $f$ induise
+$Z' \xrightarrow{\ \sim\ } Z$.
+
+La page pose alors une question de densité schématique et énumère trois
+conditions dont elle dit qu'elles sont liées :
+
+\begin{itemize}
+\item $q_m^{-1}(V')$ est schématiquement dense dans $X^{(m)}$ ;
+\item $X'$ est l'adhérence schématique de la famille des $q_m(X^{(m)})$ ;
+\item la famille des $V'$ vus dans les $X^{(m)}$ est schématiquement dense
+dans $X'$, ce que la marge résume en « i.e. en un $\hat{V'}$ ».
+\end{itemize}
+
+Le cas retenu est celui où $Z \subset V'$, c'est-à-dire où $f$ est étale aux
+points de $Z$ : il existe alors un ouvert $U' \subset V'$ contenant $Z'$ tel
+que $U' \times_X Z \xrightarrow{\ \sim\ } Z' \xrightarrow{\ \sim\ } Z$. La
+démonstration esquissée scinde la troisième condition en deux, une de
+densité schématique de $V'$ dans $X'$ et une de densité de $\hat{V'}$ dans
+$U'$, et s'interrompt là.\footnote{Ce qui manque n'est pas récupérable :
+les mots qui relient les trois conditions sont illisibles, et l'implication
+que la page veut établir — laquelle des trois entraîne laquelle — n'est
+lisible sur aucune ligne. On ne la reconstruit pas. Le contexte général est
+celui des théorèmes d'algébrisation le long d'un fermé, autour de EGA III 5
+et des voisinages étales ; la page n'en nomme aucun.}
+
+\pagerange{2}{6}
+\section*{Les sous-groupes finis de $\mathbb{G}_a$ et l'application $\varphi_n$ (pages 2 à 6)}
+
+Le but est l'application
+\[
+  \varphi_n : \mathbb{A}^n \longrightarrow X_n, \qquad
+  a = (a_0, \dots, a_{n-1}) \longmapsto \operatorname{Ker} f_a ,
+\]
+et l'affirmation qu'elle est un isomorphisme. Les pages 2 à 5 la démontrent
+par morceaux : elle est surjective, elle est un monomorphisme, elle est
+propre ; d'où un isomorphisme sur $X_{n,\mathrm{réd}}$. La page 5 pose alors
+la question de la réduction de $X_n$, et la page 6 énonce le théorème
+complet.\footnote{Le dossier utilise $X_n$ sans jamais le construire. Il est
+représentable : un sous-schéma fermé fini localement libre de rang $d$ de
+$\mathbb{A}^1_S$ est le lieu des zéros d'un unique polynôme unitaire de
+degré $d$ — le polynôme caractéristique de la multiplication par $x$ sur son
+algèbre —, ce qui plonge la famille dans l'espace affine $\mathbb{A}^{p^n}$
+des polynômes unitaires de degré $p^n$ ; la condition d'être un sous-groupe y
+découpe $X_n$. C'est cette représentabilité qui donne un sens aux mots
+« propre », « quasi-fini » et « réduit » employés plus bas.}
+
+\pagerange{2}{2}
+\subsection*{Surjectivité (page 2)}
+
+Il suffit de voir que $\mathbb{A}^n(k) \to X_n(k)$ est surjective pour $k$
+algébriquement clos. Soit donc $H \subset \mathbb{G}_{a,k}$ fini de rang
+$p^n$. Sa composante neutre $H^0$ est un sous-schéma fini connexe de
+$\mathbb{A}^1_k$ concentré à l'origine, donc de la forme
+$\operatorname{Spec} k[x]/(x^{p^r})$, c'est-à-dire
+$\alpha_{p^r} = \operatorname{Ker}(F^r)$ ; le quotient $H/H^0$ est étale, tué
+par $p$, donc $(\mathbb{Z}/p)^s$ avec $r + s = n$, et sur $k$ parfait la
+suite connexe-étale est scindée :
+\[
+  H \;\simeq\; \alpha_{p^r} \times (\mathbb{Z}/p)^s_k , \qquad r + s = n .
+\]
+\footnote{La transcription lit $\alpha_p^r$ à cet endroit. C'est
+$\alpha_{p^r}$ qu'il faut, et c'est ce que la page écrit quatre lignes plus
+bas, sous la forme $\alpha_{p^r}$ glosée
+« $\operatorname{Ker} \mathrm{Frob}^r$ ». Les deux groupes sont différents
+dès $r \geqslant 2$ — $\alpha_{p^2}$ a une algèbre $k[x]/(x^{p^2})$, $\alpha_p^2$
+une algèbre $k[x,y]/(x^p, y^p)$ —, et seul $\alpha_{p^r}$ se plonge dans
+$\mathbb{G}_a$. La distinction entre indice et exposant se joue, dans une
+main rapide, sur la hauteur d'un caractère.}
+
+Soient $\xi_1, \dots, \xi_s$ une base de $H(k)$ sur $\mathbb{F}_p$. Le
+sous-groupe constant qu'ils engendrent est le lieu des zéros du polynôme
+\[
+  f_\alpha(x) = \prod_{\lambda \in \mathbb{F}_p^s}
+  \Bigl(x - \sum_{i=1}^{s} \lambda_i \xi_i\Bigr),
+\]
+qui est additif précisément parce que son ensemble de racines est un
+$\mathbb{F}_p$-sous-espace, et séparable de degré
+$p^s$.\footnote{La page écrit « $H(k)_k = \operatorname{Ker}(f_\alpha)$,
+$\alpha \in \mathbb{E}^s_k$, à justifier ». La justification est celle qu'on
+vient de donner, et c'est un fait classique sur les polynômes additifs
+(Ore) : un polynôme unitaire séparable est additif si et seulement si son
+lieu de zéros est un $\mathbb{F}_p$-sous-espace.} On pose alors
+\[
+  f = F^r \circ f_\alpha , \qquad
+  f(x) = x^{p^{r+s}} + \alpha_{s-1}^{p^r} x^{p^{r+s-1}} + \dots
+  + \alpha_0^{p^r} x^{p^r} ,
+\]
+d'où
+\[
+  \operatorname{Ker} f = f_\alpha^{-1}(\alpha_{p^r}) \;\supset\;
+  H(k)_k \cdot \alpha_{p^r} = H ,
+\]
+et les deux membres étant de rang $p^{r+s} = p^n$, l'inclusion est une
+égalité. Donc $H = \operatorname{Ker} f$ avec $f$ additif unitaire de degré
+$p^n$, c'est-à-dire $H = \varphi_n(a)$ pour un $a \in
+k^n$.\footnote{La page écrit $f = f_\alpha \circ \mathrm{Frob}^r$. C'est
+l'autre ordre qu'il faut : avec $f = f_\alpha \circ F^r$ on aurait
+$\operatorname{Ker} f = F^{-r}(\operatorname{Ker} f_\alpha)$, et non
+$f_\alpha^{-1}(\alpha_{p^r})$ comme la page l'écrit deux lignes plus bas ; et
+les $\xi_i$ ne seraient pas annulés. Avec $f = F^r \circ f_\alpha$ tout
+s'ajuste, y compris le développement que la page donne — à ceci près que les
+coefficients y sont écrits $\alpha_j$ au lieu de $\alpha_j^{p^r}$, ce qui est
+sans conséquence sur $k$ parfait. C'est une inversion d'écriture, pas une
+erreur de raisonnement.}
+
+\pagerange{2}{3}
+\subsection*{Monomorphie, par déformation (pages 2 et 3)}
+
+Soient $k$ une $\mathbb{F}_p$-algèbre et $a, b$ avec
+$\operatorname{Ker} f_a = \operatorname{Ker} f_b$. En notant $H$ ce noyau
+commun, $f_a$ et $f_b$ se factorisent tous deux par $\mathbb{G}_{a,k}/H$, et
+comme ils y induisent des isomorphismes sur leur image on obtient
+$f_b = u \circ f_a$ avec $u \in \operatorname{Aut}(\mathbb{G}_{a,k})$. Tout
+revient donc à :
+
+\textbf{Lemme.} Si $u \in \operatorname{Aut}(\mathbb{G}_{a,k})$ est tel que
+$u \circ f_a$ soit encore de la forme $f_b$, alors
+$u = \operatorname{id}$.
+
+Si $k$ est réduit, c'est immédiat : $\operatorname{Aut}(\mathbb{G}_{a,k})$
+se réduit alors aux homothéties $k^*$, et
+$u \circ f_a = c_0 f_a$ ne peut être unitaire que si $c_0 = 1$.\footnote{En
+termes de l'anneau de polynômes tordus : $R\{F\}^\times = R^\times$ dès que
+$R$ est réduit, parce que le $F$-degré est alors additif. C'est exactement ce
+qui tombe en défaut sur un anneau non réduit, et c'est pourquoi la page passe
+aux déformations.}
+
+Le cas général se ramène, $k$ étant supposé noethérien, à une suite
+d'extensions de carré nul.\footnote{La page écrit « OPS $k$ noethérien » —
+on peut supposer — et ne détaille pas la réduction. Elle est standard :
+l'énoncé est local et de présentation finie, donc se descend à une
+$\mathbb{F}_p$-algèbre de type fini, où le nilradical est nilpotent et se
+dévisse en idéaux de carré nul.} Soit donc $J \subset k$ un idéal avec
+$J^2 = 0$, $k_0 = k/J$, et supposons $u_0 = \operatorname{id}$ sur
+$\mathbb{G}_{a,k_0}$. Alors
+\[
+  u(x) = c_0 x + c_1 x^p + c_2 x^{p^2} + \dots + c_N x^{p^N},
+  \qquad c_0 \in 1 + J, \quad c_i \in J \ (i \geqslant 1) ,
+\]
+et en développant
+\[
+  u \circ f_a(x) = \sum_{j=0}^{N} c_j
+  \Bigl(x^{p^{n+j}} + a_{n-1}^{p^j} x^{p^{n+j-1}} + \dots
+  + a_0^{p^j} x^{p^j}\Bigr).
+\]
+Le coefficient de $x^{p^{n+N}}$ vaut $c_N$ ; comme $u \circ f_a = f_b$ est de
+degré $p^n$, il est nul, donc $c_N = 0$. Le coefficient de $x^{p^{n+N-1}}$
+vaut alors $c_{N-1}$, nul de même, et de proche en proche
+$c_1 = \dots = c_N = 0$. Il reste $u(x) = c_0 x$, et $c_0 = 1$ parce que
+$f_b$ est unitaire.\footnote{La page écrit à cet endroit
+« $u(x) = c_0(x) = c_0 x^{p^n}$ » — l'exposant est de trop, et la
+conclusion voulue est bien $u(x) = c_0 x$ puis $c_0 = 1$. La ligne suivante
+du feuillet, « et il faut aussi $c_0 = 1$ », le confirme.}
+
+\pagerange{3}{4}
+\subsection*{Propreté, par le critère valuatif (pages 3 et 4)}
+
+\textbf{Lemme.} Soient $S = \operatorname{Spec} V$ un trait sur
+$\mathbb{F}_p$, de point générique $\eta$ et de corps des fractions $K$, et
+$H \subset \mathbb{G}_{a,S}$ fini plat de rang $p^n$ sur $S$. Si
+$H_\eta = \operatorname{Ker} f_{a_\eta}$ avec $a_\eta \in K^n$, alors
+$a_\eta \in V^n$, et $H = \operatorname{Ker} f_{a_\eta}$ sur $S$ tout entier.
+
+\emph{Démonstration.} Supposons $a_\eta \notin V^n$ et posons
+$\nu = -\inf_i \operatorname{val}(a_i) > 0$, $\pi$ une uniformisante,
+$b_i = \pi^\nu a_i$ : tous les $b_i$ sont dans $V$ et l'un d'eux est une
+unité. Soit
+\[
+  f(x) = \pi^\nu x^{p^n} + b_{n-1}x^{p^{n-1}} + \dots + b_1 x^p + b_0 x ,
+  \qquad f : \mathbb{G}_{a,S} \to \mathbb{G}_{a,S} .
+\]
+Sur la fibre générique $f_\eta = \pi^\nu f_{a_\eta}$ et $\pi^\nu$ est
+inversible, donc $\operatorname{Ker} f_\eta = H_\eta$. Le morphisme $f$ est
+plat, parce qu'il l'est fibre à fibre : sur la fibre spéciale $f_s$ n'est pas
+nul, un des $b_{i,s}$ étant non nul. Par suite
+$\operatorname{Ker} f = f^{-1}(0)$ est plat sur $S$, de fibre générique
+$H_\eta$ ; c'est donc l'adhérence schématique de $H_\eta$ dans
+$\mathbb{G}_{a,S}$, c'est-à-dire $H$ lui-même. La fibre spéciale
+$\operatorname{Ker} f_s$ devrait donc être de rang $p^n$. Or $\pi^\nu$
+s'annule sur la fibre spéciale, de sorte que
+\[
+  f_s(x) = b_{m,s} x^{p^m} + \dots , \qquad
+  m = \max\{\, i \leqslant n-1 \;:\; b_{i,s} \neq 0 \,\} ,
+\]
+et $\operatorname{Ker} f_s$ est de rang $p^m$ avec $m \leqslant n - 1$.
+Contradiction.\footnote{La page conclut « il est de rang $p^{n-i}$ si
+$b_{i,s}$ est le premier des $b_{0,s}, b_{1,s}, \dots$ qui soit non nul ».
+Le rang du noyau d'un polynôme additif est son degré, gouverné par le
+\emph{dernier} indice non nul et non par le premier ; et c'est bien
+$p^m$, $m$ maximal, qu'il faut écrire. La conclusion est la même — le rang
+tombe strictement en dessous de $p^n$ dès que $\pi^\nu$ meurt — mais l'énoncé
+intermédiaire de la page n'est pas celui-là.}
+
+\emph{Une fois ce lemme acquis}, $\varphi_n$ est propre par le critère
+valuatif, et un monomorphisme propre est une immersion fermée. Comme elle est
+de plus surjective, elle induit
+\[
+  \mathbb{A}^n \xrightarrow{\ \sim\ } X_{n,\mathrm{réd}} .
+\]
+
+\pagerange{4}{5}
+\subsection*{Le lieu étale (pages 4 et 5)}
+
+Soit $X_n^{\text{ét}} \subset X_n$ l'ouvert des sous-groupes étales sur la
+base. Alors $\varphi_n$ induit
+\[
+  \mathbb{G}_m \times \mathbb{A}^{n-1} \xrightarrow{\ \sim\ }
+  X_n^{\text{ét}} ,
+\]
+l'ouvert de gauche étant celui des $(a_0, \dots, a_{n-1})$ à $a_0$
+inversible. La raison est d'une ligne : $f_a'(x) = a_0$, donc $f_a$ est étale
+— et son noyau aussi — exactement quand $a_0$ est
+inversible.\footnote{La page porte « à justifier » en marge de l'existence de
+l'ouvert $X_n^{\text{ét}}$, non de l'énoncé. Que le lieu où un schéma en
+groupes fini localement libre est étale sur la base soit ouvert est un fait
+général ; c'est le lieu où le discriminant est inversible.}
+
+\pagerange{5}{6}
+\subsection*{$X_n$ est-il réduit ? L'espace tangent à l'origine pour $n = 1$ (pages 5 et 6)}
+
+La page pose la question sous cette forme : $X_n$ est-il réduit, c'est-à-dire
+$\varphi_n$ est-elle une immersion fermée dans les deux sens ?\footnote{La
+page ajoute, sous forme de seconde question, « ou $X_n^{\mathrm{réd}}
+\simeq \mathbb{E}^* \times \mathbb{E}^{n-1}$ ? ». Ce ne peut être
+$X_n^{\mathrm{réd}}$ — la page vient d'établir que celui-ci est $\mathbb{A}^n$
+tout entier — mais $X_n^{\text{ét}}$, dont le lemme précédent donne
+précisément cet isomorphisme. On lit l'exposant comme une reprise distraite
+de la ligne du dessus.}
+
+Elle traite $n = 1$ au point $0$, ce qui revient à montrer que l'espace
+tangent de Zariski de $X_1$ en $0$ est de dimension $1$ — il est a priori de
+dimension au moins $1$. Il faut donc décrire les points de $X_1$ à valeurs
+dans les nombres duaux $k = \mathbb{F}_p[J]/J^2$ qui se réduisent sur $0$,
+c'est-à-dire les sous-groupes plats $H \subset \mathbb{G}_{a,k}$ tels que
+$H_0 = \alpha_p$.
+
+Le calcul de la page procède ainsi. Posons $G = \mathbb{G}_{a,k}$,
+$G_0 = \mathbb{G}_{a,\mathbb{F}_p}$, $K = G/H$ et $K_0 = G_0/H_0$. Le
+quotient $K$ est une extension de $K_0$ par $J K_0$, et l'obstruction à la
+scinder — donc la donnée de $H$ au-dessus de $H_0$ — est mesurée par un
+homomorphisme
+\[
+  u : H_0 \longrightarrow J K_0 .
+\]
+Ici $H_0 = \alpha_p \subset G_0 = \mathbb{G}_a$ et
+$K_0 \simeq J K_0 \simeq \mathbb{G}_a$, de sorte que l'extension est triviale
+et que l'espace tangent cherché est
+\[
+  T_0 X_1 \;=\; \operatorname{Hom}_{\mathbb{F}_p\text{-gr}}(\alpha_p,
+  \mathbb{G}_a) .
+\]
+Or tout homomorphisme de $\alpha_p$ dans $\mathbb{G}_a$ est tué par le
+Frobenius au but, donc se factorise par $\alpha_p$, et
+$\operatorname{End}(\alpha_p) = \mathbb{F}_p \cdot \operatorname{id}$ sur
+$\mathbb{F}_p$ : l'espace tangent est de dimension $1$, et $X_1$ est lisse
+en $0$.\footnote{Cette dernière étape n'est pas sur la page, qui s'arrête sur
+l'expression $\operatorname{Hom}_{\mathbb{F}_p}(H_0, J K_0)$ sans en calculer
+la dimension. Elle est nécessaire pour que le calcul réponde à la question
+posée, et elle est courte ; on la donne. Les six lignes de la page 5 qui
+mènent à $u$ sont, elles, parmi les plus abîmées du dossier : trois mots sur
+quatre sont illisibles, et on n'a restitué que le squelette de l'argument —
+extension, scindage, obstruction — que les formules encore lisibles
+soutiennent. La page 19 reprend le même calcul au crayon, et ne l'éclaircit
+pas.}
+
+\pagerange{6}{6}
+\subsection*{Le théorème (page 6)}
+
+\textbf{Théorème.} Soit $S$ un schéma de caractéristique $p$. Pour tout
+sous-schéma en groupes $H \subset \mathbb{G}_{a,S}$ fini localement libre de
+rang $p^n$, il existe un unique
+$a = (a_0, \dots, a_{n-1}) \in \Gamma(S, \mathcal{O}_S)^n$ tel que
+$H = \operatorname{Ker} f_a$. Autrement dit
+$\varphi_n : \mathbb{A}^n \xrightarrow{\ \sim\ } X_n$. De plus $H$ est étale
+sur $S$ si et seulement si $a_0 \in \Gamma(S, \mathcal{O}_S^*)$.
+
+L'énoncé est vrai.\footnote{La démonstration se complète ainsi : un
+sous-schéma fermé de $\mathbb{A}^1_S$ fini localement libre de rang $p^n$ est
+le lieu des zéros d'un unique polynôme unitaire $f$ de degré $p^n$ (polynôme
+caractéristique de la multiplication par $x$), et la condition que ce lieu
+soit un sous-groupe force $f$ additif. Le dossier n'emprunte pas ce chemin :
+il démontre l'isomorphisme sur le réduit, pose la question de la réduction de
+$X_n$, et y répond au seul cas $n = 1$ et au seul point $0$. L'énoncé général
+est donc, dans ce dossier, annoncé et non établi ; c'est la plus grande
+lacune du feuillet, et elle ne tient pas à ce que la page soit abîmée.}
+
+\pagerange{7}{12}
+\section*{Le déterminant de Moore et les invariants de Dickson (pages 7 à 12)}
+
+Le théorème une fois là, la question devient : \emph{quel} $a$ ? Sur un
+corps, un sous-groupe étale de rang $p^n$ est le $\mathbb{F}_p$-espace
+engendré par $n$ éléments indépendants, et il s'agit de calculer $a$ à
+partir d'eux. La réponse fait apparaître un déterminant, et le déterminant
+fait apparaître, sans qu'on l'ait cherchée, toute la théorie des invariants
+du groupe linéaire sur $\mathbb{F}_p$.
+
+\pagerange{7}{7}
+\subsection*{La factorisation du déterminant de Moore (page 7)}
+
+\textbf{Lemme.} Dans $\mathbb{F}_p[X_1, \dots, X_n]$,
+\[
+  \Delta_n(X_1, \dots, X_n) \;=\;
+  \det\bigl(X_j^{p^{i-1}}\bigr)_{1 \leqslant i, j \leqslant n}
+  \;=\; \prod_{j=0}^{n-1} \ \prod_{\alpha \in \mathbb{F}_p^{\,j}}
+  \Bigl(X_{j+1} + \sum_{i=1}^{j} \alpha_i X_i\Bigr).
+\]
+
+L'argument de la page est de divisibilité et de degré. Chaque facteur
+$P_\lambda = X_{j+1} + \sum \alpha_i X_i$ est irréductible, ils sont deux à
+deux non associés, et chacun annule le déterminant — deux colonnes
+deviennent liées —, donc le produit $P$ divise le déterminant $Q$. Les degrés
+coïncident :
+\[
+  \deg P \;=\; 1 + p + \dots + p^{n-1} \;=\; \frac{p^n - 1}{p - 1}
+  \;=\; \operatorname{card} \mathbb{P}^{n-1}(\mathbb{F}_p) ,
+\]
+donc $Q = c P$ avec $c \in \mathbb{F}_p^*$. La page s'arrête sur « reste à
+déterminer $c$ » ; avec la normalisation ci-dessus, où chaque facteur est
+unitaire en sa variable de plus grand indice, on a $c =
+1$.\footnote{Vérification directe pour $n = 2$ :
+$\det\begin{pmatrix} X_1 & X_2 \\ X_1^p & X_2^p \end{pmatrix}
+= X_1 X_2^p - X_1^p X_2$, et le produit vaut
+$X_1 \prod_{\alpha \in \mathbb{F}_p}(X_2 + \alpha X_1)
+= X_1 (X_2^p - X_1^{p-1} X_2)$, les deux étant égaux. Le cas général suit
+par récurrence sur $n$ en comparant les coefficients de
+$X_n^{p^{n-1}}$.}\footnote{La page écrit
+$\frac{p^n - 1}{p-1} = \operatorname{card} \mathbb{P}^n(\mathbb{F}_p)$. C'est
+le cardinal de $\mathbb{P}^{n-1}(\mathbb{F}_p)$ que la formule donne : les
+formes linéaires non nulles en $n$ variables, modulo $\mathbb{F}_p^*$, sont
+les points de l'espace projectif de dimension $n-1$. Le même décalage
+reparaît sur la page 20, au crayon, sous la forme
+$\prod_{\mathbb{P}^n(\mathbb{F}_p)}(\lambda_1 X_1 + \dots + \lambda_n X_n)$ ;
+il est donc constant chez lui dans ce dossier, et non accidentel.}
+
+\textbf{Corollaire.} Pour $k$ un corps de caractéristique $p$ et
+$\xi \in k^n$, on a $\Delta_n(\xi) = 0$ si et seulement si
+$\xi_1, \dots, \xi_n$ sont linéairement dépendants sur $\mathbb{F}_p$. Par
+suite l'ouvert $U_n \subset \mathbb{A}^n$ où $GL(n, \mathbb{F}_p)$ opère
+librement est $U_n = \mathbb{A}^n_{\Delta_n}$.
+
+\pagerange{8}{8}
+\subsection*{Cramer (page 8)}
+
+Cherchons $a$ tel que $f_a(\xi_i) = 0$ pour $1 \leqslant i \leqslant n$.
+C'est un système de $n$ équations linéaires en $a_0, \dots, a_{n-1}$, de
+seconds membres $-\xi_i^{p^n}$ et de déterminant $\pm\Delta_n(\xi)$. Si
+$\Delta_n(\xi)$ est inversible — c'est-à-dire, par le corollaire précédent,
+si les $\xi_i$ engendrent un sous-groupe étale de rang $p^n$ — il y a une
+solution et une seule, et Cramer la donne comme un quotient de deux
+déterminants : celui du bas est $\Delta_n$, celui du haut est $\Delta_j$,
+obtenu en remplaçant dans la matrice de Moore la ligne des $\xi_i^{p^j}$ par
+la ligne des $\xi_i^{p^n}$.
+
+La façon propre de fixer les signes une fois pour toutes est de poser
+\[
+  D(T) \;=\; \det\begin{pmatrix}
+    X_1 & \cdots & X_n & T \\
+    X_1^p & \cdots & X_n^p & T^p \\
+    \vdots & & \vdots & \vdots \\
+    X_1^{p^n} & \cdots & X_n^{p^n} & T^{p^n}
+  \end{pmatrix}
+  \;=\; \sum_{j=0}^{n} \Delta_j(X)\, T^{p^j} ,
+\]
+le développement se faisant selon la dernière colonne, de sorte que le
+coefficient de $T^{p^n}$ soit exactement le déterminant de Moore
+$\Delta_n(X)$ et que $\Delta_j(X)$ soit, au signe $(-1)^{n+j}$ près, le
+mineur obtenu en supprimant la ligne des $X_i^{p^j}$.\footnote{Cette
+normalisation est la nôtre ; la page écrit les mineurs un à un, et plusieurs
+de leurs lignes sont illisibles, la transcription les restituant selon la
+règle de Cramer que la page énonce. Elle a l'avantage de rendre l'identité
+suivante exacte, signes compris, là où la page laisse flotter des $\pm$.}
+
+\pagerange{9}{9}
+\subsection*{Les $A_i$, et pourquoi ce sont des polynômes (page 9)}
+
+Prenons $k = \mathbb{F}_p[X_1, \dots, X_n]$ et $\xi_i = X_i$ : puisque
+$D(X_i) = 0$ (deux colonnes égales),
+\[
+  \Delta_n X_i^{p^n} + \Delta_{n-1} X_i^{p^{n-1}} + \dots + \Delta_0 X_i = 0
+  \qquad (1 \leqslant i \leqslant n) .
+\]
+La page affirme ensuite que les $\Delta_i$ sont divisibles par $\Delta_n$ et
+pose $\Delta_i = A_i \Delta_n$. La raison, qu'elle ne donne pas, est
+lisible sur la factorisation du lemme de la page 7 appliquée à $n+1$
+variables :
+\[
+  D(T) \;=\; \Delta_n(X) \prod_{\lambda \in \mathbb{F}_p^n}
+  \Bigl(T - \sum_{i=1}^n \lambda_i X_i\Bigr) ,
+\]
+de sorte que $D(T)/\Delta_n$ est un polynôme unitaire en $T$, additif, de
+degré $p^n$, dont les coefficients sont les $A_i$.\footnote{Cette écriture
+rend tout le reste immédiat, et c'est la raison de la donner : les $A_i$ sont
+des polynômes, ils sont homogènes de degré $p^n - p^i$, et ils sont
+invariants sous $GL(n, \mathbb{F}_p)$ parce que le produit de droite est
+invariant — le groupe ne fait que permuter les $\lambda$. La page démontre
+l'invariance autrement, en marge, par $\Delta_n(u \cdot X) = \det(u)
+\Delta_n(X)$, ce qui marche aussi puisque les $\Delta_j$ se transforment tous
+par le même facteur.}
+
+En particulier, pour $j = 0$, le mineur est $\det(X_j^{p^i})_{1 \leqslant i
+\leqslant n}$, c'est-à-dire $\Delta_n^p$, d'où
+\[
+  \Delta_0 \;=\; (-1)^n\, \Delta_n^{\,p} ,
+  \qquad\text{donc}\qquad
+  A_0 \;=\; (-1)^n\, \Delta_n^{\,p-1} .
+\]
+\footnote{La page écrit $\Delta_0 = \pm \Delta_n^p (-1)^n$, et le corollaire
+juste en dessous $A_0 = \pm \Delta_n^{p-1}$. Les deux ne sont pas en conflit :
+ils se déduisent l'un de l'autre par $A_0 = \Delta_0/\Delta_n$, et le
+transcripteur l'avait déjà noté. Ce que la normalisation ci-dessus apporte
+est de remplacer le $\pm$ flottant par le signe exact $(-1)^n$, qui vaut
+dans les deux identités.}
+
+\textbf{Corollaire.} $X_i^{p^n} + A_{n-1}X_i^{p^{n-1}} + \dots + A_0 X_i = 0$
+pour $1 \leqslant i \leqslant n$, et les $A_i$ sont caractérisés par cette
+relation.
+
+\textbf{Corollaire.} Sur un corps $k$ de caractéristique $p$, on a
+$\Delta_n(\xi) \neq 0$ — c'est-à-dire $\xi_1, \dots, \xi_n$ linéairement
+indépendants sur $\mathbb{F}_p$ — si et seulement si $\Delta_0(\xi) \neq 0$.
+C'est immédiat sur $\Delta_0 = (-1)^n \Delta_n^p$.
+
+\pagerange{9}{11}
+\subsection*{Le théorème de Dickson (pages 9 à 11)}
+
+Soit $\Gamma_n = GL(n, \mathbb{F}_p)$, opérant sur $\mathbb{A}^n$ par
+changement de base à coefficients dans $\mathbb{F}_p$, et
+$Q_n = \mathbb{A}^n/\Gamma_n = \operatorname{Spec} A_n$ avec
+$A_n = \mathbb{F}_p[X_1, \dots, X_n]^{\Gamma_n}$. Les $A_i$ étant invariants,
+le morphisme
+\[
+  A_* : \mathbb{A}^n \longrightarrow \mathbb{A}^n, \qquad
+  \xi \longmapsto (A_0(\xi), \dots, A_{n-1}(\xi))
+\]
+se factorise par $Q_n$.
+
+\textbf{Théorème.} $Q_n \to \mathbb{A}^n$ est un isomorphisme,
+c'est-à-dire
+\[
+  \mathbb{F}_p[X_1, \dots, X_n]^{GL(n, \mathbb{F}_p)}
+  \;=\; \mathbb{F}_p[A_0, \dots, A_{n-1}] ,
+\]
+algèbre de polynômes sur les $n$ générateurs $A_i$, homogènes de degrés
+$p^n - p^i$.\footnote{Ce sont les \emph{invariants de Dickson}, établis par
+L. E. Dickson en 1911. La page ne le nomme pas et ne renvoie à rien. La
+démonstration donnée ici est géométrique et tire tout de la classification
+des sous-groupes ; ce n'est pas celle de Dickson, qui est algébrique.}
+
+\emph{Démonstration.} $A_*$ envoie $U_n = \mathbb{A}^n_{\Delta_n}$ sur
+l'ouvert $\mathbb{G}_m \times \mathbb{A}^{n-1}$ — c'est le corollaire
+$A_0 = (-1)^n \Delta_n^{p-1}$ — et y est bijectif sur les orbites, donc
+$Q_n \to \mathbb{A}^n$ est birationnel. $Q_n$ est intègre, $\mathbb{A}^n$ est
+normal ; il suffit donc, par le Main Theorem de Zariski, de voir que
+$Q_n \to \mathbb{A}^n$ est quasi-fini et surjectif, et pour cela que sur un
+corps algébriquement clos $k$ l'application $A_* : k^n \to k^n$ est
+surjective à fibres finies.
+
+\emph{Fibres finies.} Les fibres sont exactement les orbites de $\Gamma_n$,
+qui sont finies. La page en tire au passage, indépendamment du Main Theorem,
+que $Q_n \to \mathbb{A}^n$ est surjectif, radiciel et birationnel.
+
+\emph{Surjectivité.} Soit $a \in k^n$. Si $a = 0$, c'est l'image de $0$.
+Sinon soit $r$ le premier indice avec $a_r \neq 0$. Le cas $r = 0$ est celui
+du sous-groupe étale : $\operatorname{Ker} f_a$ est alors étale de rang
+$p^n$, et sur $k$ algébriquement clos ses points forment un
+$\mathbb{F}_p$-espace de dimension $n$ ; une base $\xi$ de cet espace vérifie
+$A_j(\xi) = a_j$ pour tout $j$, puisque $D_\xi(T)/\Delta_n(\xi)$ est le
+polynôme unitaire additif de lieu de zéros $\mathbb{F}_p\xi$, c'est-à-dire
+$f_a$. Le cas général s'y ramène par le
+
+\textbf{Lemme.}
+\[
+  A_0(X_1, \dots, X_{n-1}, 0) = 0, \qquad
+  A_i(X_1, \dots, X_{n-1}, 0) = A_{i-1}(X_1, \dots, X_{n-1})^{\,p}
+  \quad (1 \leqslant i \leqslant n) ,
+\]
+et plus généralement
+\[
+  A_\alpha(X_1, \dots, X_{n-s}, 0, \dots, 0) =
+  \begin{cases}
+    0 & \text{si } 0 \leqslant \alpha < s, \\[2pt]
+    A_{\alpha - s}(X_1, \dots, X_{n-s})^{\,p^s} & \text{si } s \leqslant \alpha \leqslant n .
+  \end{cases}
+\]
+\footnote{La page écrit ces formules sans les puissances de Frobenius :
+$A_i(X_1, \dots, X_{n-1}, 0) = A_{i-1}(X_1, \dots, X_{n-1})$. Le twist est
+nécessaire, et se lit directement sur la factorisation : en annulant $X_n$,
+chaque valeur $\sum \lambda_i X_i$ est atteinte $p$ fois, donc
+$\prod_{\lambda \in \mathbb{F}_p^n}(T - \lambda \cdot X) =
+\bigl(\prod_{\mu \in \mathbb{F}_p^{n-1}}(T - \mu \cdot X)\bigr)^p$, et
+élever au carré de Frobenius décale les exposants tout en élevant les
+coefficients à la puissance $p$. Vérification pour $n = 2$ :
+$A_1^{(2)}(X_1, 0) = -X_1^{p(p-1)}$, tandis que $A_0^{(1)}(X_1) =
+-X_1^{p-1}$. La surjectivité n'en souffre pas : sur un corps algébriquement
+clos, donc parfait, on extrait les racines $p^r$-ièmes qu'il faut.}
+
+Avec ce lemme, on relève $(a_r, \dots, a_{n-1})$ par un $\xi'$ à $n - r$
+variables — cas $r = 0$ en $n - r$ variables, après extraction des racines
+$p^r$-ièmes — puis on complète par $r$ zéros.
+
+\pagerange{11}{12}
+\subsection*{La variante $SL$ (pages 11 et 12)}
+
+Puisque $\Delta_n(u \cdot X) = \det(u)\, \Delta_n(X)$, le déterminant de
+Moore est invariant sous $S\Gamma_n = SL(n, \mathbb{F}_p)$, et
+
+\textbf{Corollaire.}
+$\mathbb{F}_p[X_1, \dots, X_n]^{SL(n, \mathbb{F}_p)} =
+\mathbb{F}_p[A_1, \dots, A_{n-1}, \Delta_n]$, avec
+$\Gamma_n/S\Gamma_n \xrightarrow[\ \det\ ]{\ \sim\ } \mathbb{F}_p^*$ opérant
+trivialement sur $A_1, \dots, A_{n-1}$ et par homothéties sur
+$\Delta_n$.\footnote{$A_0$ n'a pas à figurer parmi les générateurs : il vaut
+$(-1)^n \Delta_n^{p-1}$. La page barre d'ailleurs la ligne qui aurait dit que
+les $\Delta_i = \Delta_n A_i$ sont eux aussi $S\Gamma_n$-invariants — ils le
+sont, mais ils ne sont pas des générateurs indépendants.}
+
+\emph{Démonstration.} Le carré
+\[
+  \begin{array}{ccc}
+    \mathbb{A}^n/S\Gamma_n & \longrightarrow & \mathbb{A}^n \\
+    \downarrow & & \downarrow \\
+    \mathbb{A}^n/\Gamma_n & \xrightarrow{\ \sim\ } & \mathbb{A}^n
+  \end{array}
+\]
+a pour flèche de droite celle définie par l'inclusion
+$\mathbb{F}_p[A_1, \dots, A_{n-1}, \Delta_n^{p-1}] \subset
+\mathbb{F}_p[A_1, \dots, A_{n-1}, \Delta_n]$. Les deux flèches verticales
+sont des revêtements de groupe $\mathbb{F}_p^*$ identifiant le but au
+quotient de la source ; la flèche du haut est compatible aux deux actions,
+donc génériquement bijective et birationnelle, donc un isomorphisme puisque
+$\mathbb{A}^n$ est normal.
+
+\pagerange{13}{16}
+\section*{La version relative : modules à Frobenius inversible (pages 13 à 16)}
+
+Sur une base quelconque, il n'y a plus de « $n$ éléments indépendants » à
+écrire en ligne. Ce qui les remplace est un faisceau, et toute la
+construction des pages 7 à 12 se transpose — c'est le contenu de ces quatre
+pages.
+
+\pagerange{13}{13}
+\subsection*{Structures spéciales linéaires et racines $(p-1)$-ièmes (page 13)}
+
+\textbf{Corollaire.} Soit $M \subset \mathbb{G}_{a,S}$ fini localement libre
+de rang $p^n$, d'où $a$ avec $M = \operatorname{Ker} f_a$ ; supposons $a_0$
+inversible, c'est-à-dire $M$ étale. Alors l'ensemble des structures
+$\mathbb{F}_p$-spéciales linéaires de $M$ — les trivialisations de
+$\Lambda^n_{\mathbb{F}_p} M$ — est en correspondance biunivoque avec
+l'ensemble des racines $(p-1)$-ièmes de $a_0$. Plus précisément
+$(\Lambda^n_{\mathbb{F}_p} M)^*$ s'identifie au torseur, sous
+$\mu_{p-1,S} \simeq (\mathbb{F}_p^*)_S$, de l'image réciproque de $a_0$ par
+$\mathbb{G}_m \xrightarrow{\ x \mapsto x^{p-1}\ } \mathbb{G}_m$.
+
+C'est la traduction exacte de $A_0 = (-1)^n \Delta_n^{p-1}$ : une racine
+$(p-1)$-ième de $a_0$ est, au signe près, une valeur de $\Delta_n$,
+c'est-à-dire un générateur de la puissance extérieure maximale, c'est-à-dire
+une trivialisation.
+
+\textbf{N.B.} Se donner sur $S$ un faisceau en $\mathbb{F}_p$-espaces
+vectoriels de rang $n$, fini étale, équivaut à se donner un faisceau $E$
+localement libre de rang $n$ et un isomorphisme
+\[
+  u : E^{(p)} \xrightarrow{\ \sim\ } E , \qquad E^{(p)} = F_S^* E ,
+\]
+la traduction étant $E = M \otimes_{\mathbb{F}_p} \mathcal{O}_S$ dans un
+sens, et
+$M = \operatorname{Ker}\bigl(V(E) \xrightarrow{\ \operatorname{id} -
+u \circ F_E\ } V(E)\bigr)$ dans l'autre.\footnote{C'est l'équivalence entre
+$\mathbb{F}_p$-systèmes locaux et \emph{modules à Frobenius inversible} —
+aujourd'hui \emph{unit-root $F$-crystals} —, dont le fond est la théorie
+d'Artin--Schreier : la suite exacte
+$0 \to \mathbb{F}_p \to \mathbb{G}_a \xrightarrow{x^p - x} \mathbb{G}_a \to
+0$ pour la topologie étale. La formulation qu'en donne la page est celle
+qu'on trouve chez Katz ; rien sur le feuillet ne renvoie à une source, et on
+n'affirme pas qu'il en avait une en vue.}
+
+Se donner un homomorphisme $\varphi : M \to \mathbb{G}_a$ équivaut à se
+donner un homomorphisme $\mathcal{O}$-linéaire $E \to \mathcal{O}_S$,
+c'est-à-dire une section $\xi$ de $\check{E}$ ; et $\check{E}$ porte la
+structure duale $\check{u} : \check{E}^{(p)} \to \check{E}$.
+
+\pagerange{14}{15}
+\subsection*{Le déterminant de Moore d'un faisceau (pages 14 et 15)}
+
+Pour $\xi$ section de $\check{E}$, on pose
+\[
+  \xi^{(p)} \;=\; \check{u}\bigl(\xi^{(F)}\bigr) ,
+\]
+puis $\xi^{(p^i)}$ par itération ; ces sections correspondent aux composés de
+$\varphi : M \to \mathbb{G}_a$ avec les itérées du Frobenius de
+$\mathbb{G}_a$. On forme alors
+\[
+  \Delta_n^E(\xi) \;=\; \xi \wedge \xi^{(p)} \wedge \dots \wedge
+  \xi^{(p^{n-1})} \;\in\; \Gamma\bigl(\Lambda^n \check{E}\bigr) ,
+\]
+soit une application polynomiale, homogène de degré
+$\frac{p^n - 1}{p - 1}$,
+\[
+  \Delta_n^E : V(E) \longrightarrow V\bigl(\Lambda^n E\bigr) .
+\]
+L'image réciproque de la section nulle est un diviseur de Cartier relatif ;
+son complémentaire $V(E)^0$ est un ouvert schématiquement dense. Sur lui,
+$\xi, \xi^{(p)}, \dots, \xi^{(p^{n-1})}$ forment une base de $\check{E}$, et
+l'on peut écrire
+\[
+  \xi^{(p^n)} + A^E_{n-1}(\xi)\,\xi^{(p^{n-1})} + \dots + A^E_0(\xi)\,\xi
+  = 0 ,
+\]
+ce qui définit des fonctions
+$A^E_i \in \Gamma(V(E)^0, \mathcal{O})$ uniquement déterminées. Comme dans le
+cas absolu, elles s'étendent à $V(E)$ tout entier — les $A_i$ sont des
+polynômes, pas seulement des fractions —, et l'on a encore
+\[
+  A^E_0 \;=\; (\pm 1)\,\bigl(\Delta_n^E\bigr)^{p-1} .
+\]
+Cette dernière égalité a un sens parce que
+$(\Lambda^n \check{E})^{\otimes (p-1)} \simeq \mathcal{O}_S$ :
+en effet $(\Lambda^n \check{E})^{\otimes p} \simeq
+\Lambda^n(\check{E}^{(p)}) \xrightarrow{\ \Lambda^n \check{u}\ }
+\Lambda^n \check{E}$.\footnote{C'est exactement l'argument entre crochets de
+la page 15, et c'est ce qui rend la page 13 possible : la trivialisation de
+$(\Lambda^n \check{E})^{\otimes(p-1)}$ est ce qui permet de parler d'un
+torseur sous $\mu_{p-1}$ plutôt que d'une racine $(p-1)$-ième d'un scalaire.
+Le signe, ici, on le laisse comme la page le laisse : il vaut $(-1)^n$ dans
+la trivialisation du cas absolu, mais la trivialisation relative dépend de
+$u$ et le feuillet ne la normalise pas.}
+
+\pagerange{15}{16}
+\subsection*{La matrice compagnon, et le tableau qui reste ouvert (pages 15 et 16)}
+
+Si $\xi$ est une section de $V(E)^0$, les $\xi^{(p^i)}$ pour
+$0 \leqslant i \leqslant n-1$ forment une base de $\check{E}$, qui s'identifie
+ainsi à $\mathcal{O}_S^n$ ; en notant $e_i = \xi^{(p^i)}$ on a
+\[
+  e_0^{(p)} = e_1, \quad e_1^{(p)} = e_2, \quad \dots, \quad
+  e_{n-2}^{(p)} = e_{n-1}, \qquad
+  e_{n-1}^{(p)} = -\bigl(a_0 e_0 + a_1 e_1 + \dots + a_{n-1} e_{n-1}\bigr),
+\]
+c'est-à-dire que $\check{u}$ s'écrit, dans cette base, par la matrice
+compagnon
+\[
+  \begin{pmatrix}
+    0 & 0 & \cdots & 0 & -a_0 \\
+    1 & 0 & \cdots & 0 & -a_1 \\
+    0 & 1 & & \vdots & \vdots \\
+    \vdots & & \ddots & 0 & \vdots \\
+    0 & 0 & \cdots & 1 & -a_{n-1}
+  \end{pmatrix} .
+\]
+\footnote{La dernière colonne du feuillet est en partie recouverte de
+ratures ; la transcription ne garantit que $-a_0$, $a_1$ et $-a_{n-1}$. La
+matrice compagnon est déterminée par les relations écrites juste au-dessus,
+qui, elles, sont nettes, et c'est d'elles qu'on la tire — non de la lecture
+des entrées.}
+
+Le feuillet s'achève sur un tableau à deux colonnes, chacune de trois étages
+reliés par des flèches montantes, les colonnes étant reliées par des
+inclusions de gauche à droite.
+
+La colonne de gauche est le cas étale, et ses trois étages sont équivalents :
+
+\begin{itemize}
+\item les $(a_0, \dots, a_{n-1})$ à $a_0$ inversible ;
+\item les sous-groupes finis étales de $\mathbb{G}_{a,S}$ de rang $p^n$ ;
+\item les couples formés d'un $E$ localement libre de rang $n$ avec
+$\check{E}^{(p)} \simeq \check{E}$, et d'une section $\xi$ de $\check{E}$
+telle que $\xi, \xi^{(p)}, \dots, \xi^{(p^{n-1})}$ soit une base.
+\end{itemize}
+
+La colonne de droite est le cas général, et c'est là que le feuillet
+s'arrête :
+
+\begin{itemize}
+\item les $(a_0, \dots, a_{n-1})$ quelconques ;\footnote{Le feuillet écrit
+$(a_0, \dots, a_n)$ en tête de cette colonne. Il en faut $n$, comme à gauche
+et comme partout ailleurs dans le dossier ; on lit une inattention.}
+\item les sous-groupes finis localement libres de rang $p^n$ de
+$\mathbb{G}_{a,S}$ ;
+\item les couples formés d'un $F$ localement libre de rang $n$ avec une
+flèche $F^{(p)} \to F$ non nécessairement inversible, et d'une section $\xi$
+de $F$ telle que $\xi, \xi^{(p)}, \dots, \xi^{(p^{n-1})}$ soit une base.
+\end{itemize}
+
+La flèche montante du troisième étage vers le deuxième, dans la colonne de
+droite, porte un point d'interrogation, et une accolade court du bas vers le
+haut de la colonne, annotée « trivial ? ». C'est le seul endroit du dossier
+où l'auteur marque explicitement qu'il ne conclut pas.\footnote{On peut dire
+ce qui est acquis et ce qui ne l'est pas. Du premier étage au troisième, il
+n'y a rien à démontrer : la matrice compagnon ci-dessus fabrique
+$(F, \phi, \xi)$ à partir de $a$, et la condition de base est vraie par
+construction. Du premier au deuxième, c'est le théorème de la page 6. Ce qui
+reste ouvert est ce que le point d'interrogation vise : une caractérisation
+du deuxième étage par le troisième qui ne passe pas par le choix d'un $\xi$,
+c'est-à-dire un énoncé de nature dieudonnéenne. Le feuillet ne dit pas
+laquelle des deux choses il vise, et on ne tranche pas pour lui.}
+
+\pagerange{18}{18}
+\section*{Descente le long d'un pincement (page 18)}
+
+La page 17 est blanche. La page 18 ouvre un sujet neuf et ne le referme pas.
+
+On part d'un schéma $X'$ et de deux points $a, b$ de $X'$ ; $X$ est obtenu
+en les identifiant — la marge dit « déduit de $X'$ en pinçant $a$ et
+$b$ ».\footnote{C'est ce qu'on appelle aujourd'hui un \emph{pincement}, et
+le formalisme complet de la descente le long d'un tel carré co-cartésien est
+celui de Ferrand. Le feuillet n'y renvoie évidemment pas et n'en a pas
+besoin : il manipule directement les données de recollement.} La question
+est celle de la descente : si $H' \subset \mathbb{G}_{a,X'}$ est un
+sous-groupe fini localement libre dont les fibres en $a$ et en $b$
+coïncident, $H'_a = H'_b$, descend-il en un $H \subset \mathbb{G}_{a,X}$ ?
+
+Le feuillet met en place l'obstruction plutôt que de répondre. Soit
+$\varphi$ un homomorphisme de $\mathbb{G}_{a,X}$ s'annulant sur $H$, et $N'$
+l'adhérence schématique dans $\mathbb{G}_{a,X'}$ du noyau de sa version
+relevée, de sorte que
+\[
+  N' \subset H' \subset \mathbb{G}_{a,X'} , \qquad
+  \mathbb{G}_{a,X'}/N' \longrightarrow \mathbb{G}_{a,X'}/H'
+  \quad \text{étale} .
+\]
+Et il pose la situation qui l'intéresse :
+\[
+  H'(a) = H'(b) \qquad\text{mais}\qquad N'(a) \neq N'(b) .
+\]
+Autrement dit, la donnée de recollement peut valoir pour $H'$ sans valoir
+pour le sous-groupe distingué $N'$ qu'on en a tiré : ce qui descend ne
+descend pas avec sa filtration. Suivent deux suites exactes,
+\[
+  0 \to N' \to \mathbb{G}_{a,X'} \xrightarrow{\ f_{\alpha'}\ }
+  \mathbb{G}_{a,X'} \to 0 , \qquad
+  0 \to K' \to \mathbb{G}_{a,X'} \xrightarrow{\ f_{\beta'}\ }
+  \mathbb{G}_{a,X'} \to 0 ,
+\]
+et des flèches $u_\lambda$, $u_{\lambda'}$ vers $\mathbb{G}_{a,X}$ annotées
+« hom. Verschiebung », destinées à comparer les deux. L'argument qui devait
+les comparer n'est pas écrit.\footnote{Ce n'est pas un défaut de lecture : la
+transcription note que la fin de la page est une esquisse, les suites et les
+flèches tracées, l'argument absent, et qu'un des points d'arrivée disparaît
+sous une tache d'encre. On ne comble pas. Ce qui se tient — la mise en place
+de l'obstruction et l'exemple que la page 22 en donnera — se tient sans lui.}
+
+\pagerange{19}{22}
+\section*{Le cas $n = 2$, calculé à la main (pages 19 à 22)}
+
+Les quatre derniers feuillets sont du calcul, sans une phrase de rédaction
+suivie. Ils ne répètent pas les pages précédentes : ils en font tourner la
+machinerie sur le plus petit cas non trivial, et la page 22 revient à la
+page 18 avec un exemple.
+
+\pagerange{19}{20}
+\subsection*{Les brouillons au crayon (pages 19 et 20)}
+
+La page 19 réécrit le polynôme $X^{p^n} + A_1 X^{p^{n-1}} + \dots +
+A_{n-1}X$, les $A_i$ y étant indexés en sens inverse de celui des pages 9 à
+15.\footnote{On n'harmonise pas. L'indexation des pages 9 à 15 est celle où
+$A_i$ est le coefficient de $X^{p^i}$, donc homogène de degré $p^n - p^i$ ;
+celle de la page 19 compte à partir du haut. Les deux se traduisent l'une
+dans l'autre par $i \mapsto n - i$, et la page 19 étant au crayon et sans
+rédaction, il n'y a pas lieu de décider qu'elle corrige les précédentes.} Un
+bloc écrit dans le sens de la hauteur occupe la marge gauche et reprend, au
+crayon, le calcul d'espace tangent des pages 5 et 6 — $H_0$, $K_0 =
+\mathbb{G}_0/H_0$, $\operatorname{Hom}(\alpha_{p^r}, \mathbb{G}_a)$, $F^r =
+0$. Il est en grande partie illisible et n'ajoute rien qu'on puisse
+établir.\footnote{Ce bloc est, avec les pages 1, 5-6 et 18, l'endroit du
+dossier où la charge d'illisible est la plus lourde. On a renoncé à en tirer
+autre chose que la constatation qu'il refait le calcul déjà fait ; il serait
+facile, et faux, de le reconstruire depuis les pages 5 et 6.}
+
+Suivent les relations de la matrice compagnon dans l'indexation renversée,
+et un $M$ localement libre de type fini avec $M^{(p)} \xrightarrow{\ \sim\ }
+M$ : c'est le module à Frobenius inversible des pages 13 à 15, rejoué au
+crayon.
+
+La page 20 essaie des coefficients pour $n = 2$, écrit le déterminant de
+Moore sous forme transposée, redonne le degré $\frac{p^n-1}{p-1}$ et le
+produit sur les formes linéaires — avec le même $\mathbb{P}^n$ pour
+$\mathbb{P}^{n-1}$ qu'à la page 7. Deux lignes y méritent d'être relevées :
+\[
+  \frac{(X^p Y - Y^p X)^p}{X^p Y - Y^p X} = (X^p Y - Y^p X)^{p-1},
+  \qquad \text{annoté } (X \wedge Y) ,
+\]
+qui est exactement $A_0 = \pm\Delta_2^{p-1}$ avec, dans la marge, la lecture
+extérieure des pages 13 à 15 ; et
+\[
+  \left(\frac{X}{Y}\right)^{p^2} = \frac{X}{Y} ,
+\]
+c'est-à-dire que le rapport de deux éléments d'une base est fixé par le carré
+du Frobenius.\footnote{La transcription signale que les exposants de la
+première ligne de la page 20 sont les plus incertains du feuillet. Elle y
+écrit $(f^{p-1} - g^{p-1})X^{p^2} - (f^{p^2} - g^{p^2})X^p + (f^{p^2}g^{p-1}
+- g^{p^2}f^{p-1})X$, et cette ligne n'est pas une identité : la page 21
+écrira la bonne, et on la donne là-bas. On ne corrige pas la page 20, dont
+les exposants ne sont pas assurés.}
+
+\pagerange{21}{21}
+\subsection*{Élimination à partir de deux racines (page 21)}
+
+Le feuillet part de $X^{p^2} + aX^p + bX$ et de deux racines $\alpha$,
+$\beta$ :
+\[
+  \alpha^{p^2} + a\alpha^p + b\alpha = 0 , \qquad
+  \beta^{p^2} + a\beta^p + b\beta = 0 .
+\]
+En multipliant la première par $\beta$, la seconde par $\alpha$ et en
+retranchant, le terme en $b$ disparaît et
+\[
+  a\bigl(\alpha^p\beta - \beta^p\alpha\bigr) =
+  -\bigl(\alpha^{p^2}\beta - \beta^{p^2}\alpha\bigr) ,
+  \qquad\text{d'où}\qquad
+  a = -\,\frac{\alpha^{p^2}\beta - \beta^{p^2}\alpha}
+              {\alpha^p\beta - \beta^p\alpha} .
+\]
+De même, en multipliant par $\beta^p$ et $\alpha^p$,
+\[
+  b = \frac{\alpha^{p^2}\beta^p - \beta^{p^2}\alpha^p}
+           {\alpha^p\beta - \beta^p\alpha} .
+\]
+\footnote{La page écrit $a$ sans le signe moins, et $b$ avec le bon signe. Le
+dénominateur de $b$ porte d'ailleurs deux exposants $p$ que la page biffe
+elle-même pour le ramener à celui de $a$ ; corrigé, il est exact. C'est
+Cramer sur deux lignes, et c'est le cas $n = 2$ de la page 8.}
+
+La colonne de droite recommence autrement, en utilisant $\alpha^p - \beta^p =
+(\alpha - \beta)^p$ :
+\[
+  a(\alpha^p - \beta^p) = -(\alpha^{p^2} - \beta^{p^2}) ,
+  \qquad\text{d'où}\qquad a = -(\alpha - \beta)^{p^2 - p} .
+\]
+\footnote{Cette première relation s'obtient en retranchant les deux
+équations, mais la soustraction laisse un terme $b(\alpha - \beta)$ que la
+page ne porte pas. La valeur $a = -(\alpha-\beta)^{p^2-p}$ qui en sort ne
+coïncide donc pas avec celle de la colonne de gauche. On la signale sans la
+réparer : tout ce qui suit dans cette colonne est exact \emph{à partir
+d'elle}, et c'est la cohérence interne de la suite qui permet d'affirmer
+qu'il s'agit d'un terme omis, non d'une lecture douteuse.}
+
+De là, les trois lignes suivantes, qui sont exactes entre elles :
+\[
+  b\alpha = -\alpha^{p^2} + \alpha^p(\alpha - \beta)^{p^2 - p} ,
+\]
+\[
+  (\alpha - \beta)^p\, b\alpha =
+  \beta^p\alpha^{p^2} - \alpha^p\beta^{p^2}
+  = \alpha^p\beta^p\bigl(\alpha^{p^2 - p} - \beta^{p^2 - p}\bigr) ,
+\]
+\[
+  b\alpha = \Bigl(\frac{\alpha\beta}{\alpha - \beta}\Bigr)^{p}
+  \bigl(\alpha^{p^2 - p} - \beta^{p^2 - p}\bigr) .
+\]
+\footnote{Les trois lignes sont écrites sur le feuillet avec $b$ au premier
+membre là où c'est $b\alpha$ : la relation tirée de $\alpha^{p^2} + a\alpha^p
++ b\alpha = 0$ porte le facteur $\alpha$, et le même facteur manque aux deux
+lignes suivantes, qui restent cohérentes entre elles. Rétabli, on obtient
+$b = \alpha^{p-1}\beta^p(\alpha-\beta)^{-p}(\alpha^{p^2-p} -
+\beta^{p^2-p})$. C'est la faute qui court sur trois lignes ; on la corrige
+en une fois plutôt qu'à chaque ligne.}
+
+Le feuillet dégage ensuite le polynôme obtenu en chassant les dénominateurs
+et, après un détour par une version où les coefficients portent un facteur
+$\lambda$ et sont nommés $r$, $s$, $t$, il finit par écrire :
+\[
+  \bigl(f^p g - g^p f\bigr) X^{p^2}
+  - \bigl(f^{p^2} g - g^{p^2} f\bigr) X^{p}
+  + \bigl(f^{p^2} g^{p} - g^{p^2} f^{p}\bigr) X .
+\]
+C'est, au signe près, le déterminant de Moore de $(f, g, X)$ :
+\[
+  \det\begin{pmatrix} f & g & X \\ f^p & g^p & X^p \\
+  f^{p^2} & g^{p^2} & X^{p^2}\end{pmatrix} ,
+\]
+c'est-à-dire le $D(T)$ de la page 8 pour $n = 2$, dont les racines sont
+exactement $\mathbb{F}_p f + \mathbb{F}_p g$. La dernière ligne du feuillet
+rejoint donc la page 7, et c'est ce qui donne leur sens aux deux feuillets de
+calcul : ils refont à la main, sur deux éléments, la construction que les
+pages 7 à 16 mènent en général.\footnote{On l'a vérifié en développant le
+déterminant selon la dernière colonne : les trois cofacteurs sont
+$fg^p - gf^p$, $-(fg^{p^2} - gf^{p^2})$ et $f^pg^{p^2} - g^pf^{p^2}$, et la
+ligne du feuillet en est l'opposée terme à terme. Les versions
+intermédiaires de la même page, celles à coefficients $(\alpha^p - \beta^p)$
+et celles à facteur $\lambda$, portent le défaut signalé plus haut ; la
+dernière ligne ne le porte plus.}
+
+\pagerange{22}{22}
+\subsection*{Le feuillet écrit des deux bouts (page 22)}
+
+La page 22 est écrite des deux bouts : le tiers supérieur à l'endroit, les
+deux tiers inférieurs tête-bêche, séparés par un long trait au crayon, le
+bloc renversé se lisant depuis le pied du feuillet. Ce n'est pas un défaut de
+numérisation mais la mise en page de l'auteur, et elle fixe l'ordre de
+lecture ; sous son trait, le bloc renversé est lui-même en deux colonnes.
+
+\emph{Le bloc à l'endroit} construit l'exemple que la page 18 appelait. On y
+prend deux fonctions $f$, $g$ sur $X'$ avec
+\[
+  f(a) = 0, \quad g(a) = 1, \qquad f(b) = 1, \quad g(b) = 0 ,
+\]
+donc non constantes et linéairement indépendantes sur $\mathbb{F}_p$. À
+chacune est associé $H_f, H_g \subset \mathbb{G}_a$, et on pose $H = H_f
+\times H_g$. Le point est alors :
+\[
+  H_a \simeq \alpha_p \times \mathbb{Z}/p , \qquad
+  H_b \simeq \mathbb{Z}/p \times \alpha_p .
+\]
+Les deux fibres sont abstraitement isomorphes, mais les deux facteurs se
+croisent entre $a$ et $b$ : l'isomorphisme existe, la décomposition ne se
+recolle pas. C'est exactement ce que la page 18 avait besoin de produire — un
+$H'$ dont la donnée de recollement vaut, et dont les sous-groupes distingués
+ne la respectent pas.
+
+Le feuillet se donne ensuite $\lambda$ non constante avec
+$\lambda(a) = \lambda(b) = 0$ — c'est-à-dire une fonction qui, elle, descend
+au pincement.
+
+\emph{Le bloc renversé} travaille l'opérateur qui fabrique $H_f$. On y lit,
+en regard l'une de l'autre, les deux écritures
+\[
+  \Bigl(\frac{\lambda}{f}\Bigr)^{p} - \frac{\lambda}{f}
+  \qquad\text{et}\qquad
+  \lambda^p - f^{p-1}\lambda ,
+\]
+qui diffèrent du facteur $f^p$. Le second membre est le polynôme additif
+$\wp_f(\lambda) = \lambda^p - f^{p-1}\lambda$, dont le lieu de zéros est
+exactement la droite $\mathbb{F}_p f$ : c'est un Artin--Schreier tordu par
+$f$, et c'est le cas $n = 1$ de la construction de la page 7, puisque
+$D(T)/\Delta_1 = T^p - f^{p-1}T$.
+
+Le feuillet compose alors deux opérateurs de cette espèce :
+\[
+  r\bigl(\wp_f \lambda\bigr)^{p} - r^{p}\bigl(\wp_f \lambda\bigr) ,
+  \qquad r = g^p - f^{p-1}g = \wp_f(g) ,
+\]
+c'est-à-dire $r \cdot \wp_r(\wp_f(\lambda))$. Le lieu de zéros de ce composé
+est $\mathbb{F}_p f + \mathbb{F}_p g$ : c'est, à un scalaire près, le
+polynôme de degré $p^2$ que la dernière ligne de la page 21 avait écrit
+comme un déterminant.\footnote{La transcription signale que $r$ est d'abord
+écrit $(g/f)^p - f^{p-1}g$, le quotient $g/f$ étant biffé d'une croix ;
+corrigé, $r = g^p - f^{p-1}g$, qui est bien $\wp_f(g)$. On note au passage
+que $f\,\wp_f(g) = fg^p - f^pg = \Delta_2(f,g)$ : le coefficient dominant du
+composé est le déterminant de Moore des deux fonctions, divisé par $f$. Les
+deux présentations — composée d'Artin--Schreier tordus, et quotient de
+déterminants — sont la même chose vue des deux bouts, ce qui est aussi le
+cas des pages 7 à 9 et des pages 13 à 15.} La ligne suivante,
+\[
+  \left(\frac{\bigl(\frac{\lambda}{f}\bigr)^p - \frac{\lambda}{f}}
+             {r}\right)^{\nu} = (\quad) ,
+\]
+amorce visiblement l'itération suivante — on renormalise par $r$ avant de
+réappliquer l'opérateur — mais l'exposant est un seul signe, lu $\nu$, et le
+second membre est une parenthèse laissée vide. On n'en tire rien.
+
+La suite du bloc renversé reprend la situation à deux points sous une forme
+un peu plus riche : $H = H_1 \times H_2 \times K$ avec
+$H_{1a} \simeq H_{2b} \simeq \alpha_p$ — le croisement des facteurs, de
+nouveau —, puis $f(a) = 0$, $g(b) = 0$, $f(b) = \alpha$, $g(a) = \beta$ avec
+$\alpha, \beta$ indépendants sur $\mathbb{F}_p$, et la fibre
+\[
+  \alpha_p + \mathbb{F}_p\alpha + \mathbb{F}_p\beta \subset \mathbb{G}_a ,
+\]
+de rang $p^3$. La colonne de gauche écrit alors la donnée de recollement
+elle-même :
+\[
+  i_a(H'_a) = i_b(H'_b) = \alpha_p + \mathbb{F}_p\alpha +
+  \mathbb{F}_p\beta ,
+\]
+c'est-à-dire que les deux fibres coïncident comme sous-groupes de
+$\mathbb{G}_a$, ce qui est précisément la condition de descente de la
+page 18 ; et le $H \subset \mathbb{G}_{a,X}$ correspondant a la même fibre.
+La colonne de droite ajoute une troisième fonction $h$, avec
+$h(a), h(b) \in \mathbb{F}_p\alpha + \mathbb{F}_p\beta$,
+$h(a) \notin \mathbb{F}_p\beta$ et $h(b) \notin \mathbb{F}_p\alpha$ — par
+exemple $h(a) = \alpha$, $h(b) = \beta$ —, ce qui est la façon de rendre le
+croisement inévitable.
+
+Le feuillet finit sur un diagramme où $H \hookrightarrow \mathbb{G}_a
+\xrightarrow{\ f\ } \mathbb{G}_a$ est complété par une flèche $u$ et une
+flèche verticale qui porte un point d'interrogation, puis sur
+$\mathbb{G}_{a,X'}/H_1 \times H_2$ et, au crayon fin, sur
+$\lambda \mapsto (\lambda/f)^p - (\lambda/f)$. C'est le second et dernier
+point d'interrogation du dossier ; le premier était sur la colonne droite du
+tableau de la page 16.\footnote{Plusieurs annotations de ce bloc ne se lisent
+pas : deux mots au crayon sous une accolade, deux lignes biffées dont ne
+surnage que $H_2$, trois lignes entre accolades à droite de $f$, $g$. Elles
+portaient sans doute l'énoncé que la page voulait atteindre. On ne le
+devine pas.}
+
+\section*{Ce que le dossier annonce et n'établit pas}
+
+Il vaut la peine de les rassembler, parce qu'aucun n'est dû à l'état du
+papier :
+
+\begin{itemize}
+\item \textbf{La réduction de $X_n$.} Le théorème de la page 6 est énoncé
+dans sa généralité ; ce que les pages 2 à 5 démontrent est l'isomorphisme sur
+$X_{n,\mathrm{réd}}$, et la question de la réduction, explicitement posée à
+la page 5, n'est traitée qu'au cas $n = 1$ et au seul point $0$.
+\item \textbf{La constante $c$} de la factorisation du déterminant de Moore :
+« reste à déterminer $c$ », page 7, et elle n'est pas déterminée. Elle vaut
+$1$ pour la normalisation que la page adopte.
+\item \textbf{L'ouverture de $X_n^{\text{ét}}$}, portée « à justifier » en
+marge de la page 4.
+\item \textbf{La colonne de droite du tableau de la page 16}, avec son point
+d'interrogation et son « trivial ? ».
+\item \textbf{La descente de la page 18}, dont la mise en place est écrite et
+l'argument non.
+\item \textbf{L'itération de la page 22}, qui s'arrête sur une parenthèse
+vide.
+\end{itemize}
+
+Et une dernière chose, qui n'est pas une lacune mais un fait : le lemme de la
+page 1 n'a de rapport avec rien d'autre dans le dossier. Ni sa question — la
+densité schématique d'une section formelle le long d'un fermé — ni son
+vocabulaire ne reparaissent aux vingt et une pages suivantes. C'est un
+feuillet qui s'est trouvé là.
+
+\end{document}
