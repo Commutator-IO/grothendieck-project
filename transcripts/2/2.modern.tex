@@ -1,0 +1,1538 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 2, pages 1-44.
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried moves into a
+% footnote. It is held to being mathematically correct as it stands; where the
+% manuscript is loose or mistaken, the true statement is what appears here and
+% the footnote says what the page has. In any dispute of substance the
+% transcription governs: cite batch-01/02/03.fr.tex.
+%
+% Pass: Opus 5 (claude-opus-5), 2026-09-19 — first pass, unchecked against the
+% pages by a human.
+%
+% Scope: one document for the shelfmark, its three batches read as one folder.
+% Twenty-eight of the forty-four leaves carry mathematics; five are covers in
+% his hand, whose words become section headings here; the rest are blank or are
+% a typescript that is not his.
+%
+% SPINE. The folder is not one text, and its unity is not chronological: it is
+% a single NUMBER, (-1)^{i-1}(i-1)!, appearing in four disguises on leaves that
+% cannot all have been written at one date.
+%
+%   as the top Chern class of a point in P^r      c(xi^r) = 1 + (-1)^{r-1}(r-1)! eta^r   (p. 9)
+%   as the defect of the comparison CK -> GK      phi psi = (-1)^{i-1}(i-1)!             (p. 21)
+%   as the reason a nonzero class can have        (r-1)! x' = 0  =>  c = 1               (p. 13)
+%     trivial total Chern class
+%   as the coefficient of log c in terms of ch    log c = sum (-1)^{m-1}(m-1)! ch_m      (p. 43)
+%
+% The fourth is not written on any leaf; it is what page 43's exp(...) is the
+% first two terms of, and it is what makes the other three one fact. Stated in
+% the body as this edition's own observation, never as the page's.
+%
+%   pp. 2-3    RIEMANN-ROCH ON A CURVE, BEFORE THE LETTER K. The ring E of
+%              classes of coherent sheaves, its subgroups E_0, N, D, L and the
+%              subalgebra Phi; E = Phi + D, E/N = Z + P; R.R. in one line,
+%              int(F) = K_1(c(F)(1 - K/2)).
+%   pp. 4-7    THE SAME IN K-THEORY, dim <= 1. K^.(X) and K_.(X), rank and
+%              length augmentations, the gamma-filtration, Pic(X), pi_0(X), the
+%              comparison c = ch into B^.(X), B_.(X), and the map K^. -> K_.
+%              which is multiplication by the class of O_X.
+%   pp. 9-13   "CONTRE-EXEMPLES". The total Chern class of i_! along
+%              X -> X x P^r; the factor (r-1)!; the polynomials Q^{(r)}_i; and
+%              a nonzero class whose total Chern class is 1.
+%   pp. 15-18  MODULES ON A RINGED TOPOS CARRYING A GROUP ACTION. Restriction
+%              and induction, the projection formula, the external product, the
+%              induction product over the symmetric groups, and the formulas
+%              for T^n. This is where the lambda-operations of pp. 20-29 come
+%              from; no leaf says so.
+%   pp. 20-29  "CAS DES SCHEMAS": the lambda-ring formalism. Special
+%              lambda-rings with geometric elements, the universal ring B, the
+%              Chern ring CK, the gamma-filtration and GK, phi_K : CK -> GK,
+%              the factor (-1)^{i-1}(i-1)!, and the counterexample
+%              K = Z[L]/(L-1)^n = K(P^{n-1}).
+%   pp. 32-37  "CONSTRUCTION DES CHERN COVARIANTS". D_parf(f), K with supports
+%              in a closed Z or a family Phi, the Chow groups A_Phi(X), the
+%              Chern classes between them, and R.R. as the measure of the
+%              defect of covariance.
+%   pp. 40-44  "R.R. DES SURFACES". The GRR square, (1), (1 bis), (2), (1 ter),
+%              the fibration, a curve in a curve, a covering, a curve in a
+%              non-singular surface, and — one identification short of being
+%              written — the adjunction formula.
+%
+% What only a folder-wide reading can say, and which is written in the body:
+%   - the 1 - K/2 of page 3 IS the tau_h(X) of page 42: the Todd class of a
+%     curve, five wrappers and (at least) one campaign apart, under two names.
+%   - the K_1 of page 3 IS the K_p of page 41 and the K_2 of page 44: one
+%     operator, the degree of the component of degree p.
+%   - the (r-1)! of page 9 IS the (i-1)! of page 21. The geometric
+%     counterexample of pages 9-13 and the algebraic one of page 21 are the
+%     same phenomenon: torsion that CK sees and GK does not.
+%   - pages 15-18 construct the operations that pages 20-29 axiomatise.
+%   - the gamma-filtration is on page 4 as well as on page 20, so it does not
+%     separate the folder's campaigns.
+%
+% NOTATION fixed for the folder. His own varies from run to run; one name is
+% chosen here and the variants are footnoted where they occur.
+%   ch          — the Chern character. He writes c = ch (pp. 4, 6), ch
+%                 (pp. 36-37) and varphi (pp. 40-44).
+%   Todd        — the Todd class. He writes 1 - K/2 (p. 3) and tau_h (pp. 40-44).
+%   c^i, c      — Chern classes and the total Chern class; c-tilde when the rank
+%                 is carried alongside, as the pair [eps(x), 1 + c^1 + ...].
+%   A-tilde     — for a graded ring A, the set Z x (1 + A^{>=1}) with Whitney
+%                 sum as its addition and the universal Q_n as its product.
+%   deg         — the degree of the component of degree p. He writes K_1 (p. 3),
+%                 K_p (p. 41), K_2 (p. 44).
+%   k_X, k_Y    — canonical classes. He writes K (p. 3), k and k' (p. 42),
+%                 k_x, k_y, k_Y, k_X (pp. 42-44).
+%   V, V', V''  — vector bundles on pages 2-3, where E is the ring of classes
+%                 and cannot also be a bundle. The leaf uses E for both.
+%   zeta        — the generator of CK on page 21, where he writes xi, which is
+%                 already 1 - L^{-1} on pages 9-13 and a K-class on page 42.
+%   h           — the first Chern class of the twisting sheaf on page 42, where
+%                 he writes xi, which on the same leaf is also the K-class (n,d).
+%   E           — the ring of classes (pp. 2-3), a distinguished element E_s
+%                 (pp. 27-29), a vector bundle (pp. 41-43). Three objects, one
+%                 letter, in three runs; kept, and separated in the spine section.
+%   X, Y        — on pages 42 to 44, X is the source curve and Y the target
+%                 throughout, which is what the formulas require and what the
+%                 prose of those leaves contradicts four times. Each is footnoted.
+%
+% SUBSTANTIVE DEPARTURES, each footnoted at the point of departure:
+%   - p. 9 / p. 11: the exponent of (-1) is written r+1 on one leaf and r-1 on
+%     the other. The two are equal. The transcription flags a variance that is
+%     not one, and the reading says so.
+%   - p. 9: the expansion of c-tilde(x) * (1 - i eta) is transcribed without the
+%     binomial coefficients the formula carries. Restored here.
+%   - p. 11: the leaf computes the leading coefficient of Q^{(r)}_i only for
+%     i = 1. The general form its own method gives is stated here and marked as
+%     supplied.
+%   - p. 13: the last displayed member is read 0 where the total Chern class is
+%     1. Both are said; the two differ only by what c-tilde denotes.
+%   - p. 20: phi psi is written (-1)^i (i-1)!; page 21 proves (-1)^{i-1}(i-1)!,
+%     which is what holds.
+%   - p. 22: he strikes the line c^i(xy) = Q_i(...) and rewrites it with
+%     c-tilde on the left. The struck line is the correct one.
+%   - p. 18: w_{m,n} is written as a map out of S_m. Its source is the wreath
+%     product S_n wr S_m; supplied here.
+%   - p. 40: (1 bis) is correct with T_{Y/X} read as the normal bundle of X in
+%     Y. Said once.
+%   - p. 42: the left-hand side is written varphi_X where the class lives on Y.
+%   - p. 43: f_*(O_X) is called a bundle on X where it is one on Y.
+%   - p. 44: the surface is Y in the formulas and X in the sentence.
+%
+% WHAT THE FOLDER ANNOUNCES AND NEVER ESTABLISHES: the universal polynomial for
+% gamma^i(xy) (p. 22 stops on it); Propositions 1 and 2 of page 20, of which
+% only the statement of the third survives, through its proof on page 21; the
+% proposition of page 21 marked "à prouver directement?" and struck through,
+% taken up in another form on page 27; the three questions of page 34 (A_Phi(X)
+% for general X, the lambda-procedure, cohomological Chern classes); the
+% filtration on K^._X(X'), a title on page 37 with nothing under it; the shape
+% of (2) on page 40; and the adjunction formula, which page 44 is one
+% identification short of writing when the folder stops.
+
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{2}
+\pages{1}{44}
+\dating{[1957]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Théorème de Riemann-Roch / RR [Riemann-Roch] Notes Antiques (antérieur[es à] 1958) : notes manuscrites (s.d.). — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Ces quarante-quatre feuillets tournent autour d'un théorème et autour d'un
+nombre. Le théorème est celui de Riemann-Roch. Le nombre est
+$(-1)^{i-1}(i-1)!$, et c'est lui, plutôt que le théorème, qui donne au dossier
+son unité.
+
+Voici d'abord le théorème, dans sa forme la plus ancienne. Prenons une courbe
+algébrique compacte et lisse --- on peut se la représenter comme une surface :
+la sphère, le tore, le bretzel à $g$ trous. Donnons-nous dessus un nombre fini
+de points et, en chacun, un ordre de pôle autorisé. Combien existe-t-il de
+fonctions sur la courbe n'ayant de pôles qu'aux endroits permis, et pas plus
+forts que permis ? Ces fonctions forment un espace vectoriel de dimension
+finie, et la question est de calculer cette dimension. Il se trouve qu'elle ne
+dépend presque que de deux entiers : le nombre total de pôles autorisés, que
+l'on appelle le \emph{degré}, et le nombre $g$ de trous, que l'on appelle le
+\emph{genre}. Presque : la formule exacte fait apparaître un terme correctif,
+qui est lui-même une dimension du même type pour une autre donnée de pôles.
+C'est ce que l'on appelle le théorème de Riemann-Roch, et sous cette forme il
+date du XIX\textsuperscript{e} siècle.
+
+Le terme correctif est gênant tant qu'on le prend pour un reste. Il devient
+naturel dès qu'on cesse de compter une dimension pour compter une
+\emph{différence alternée} de dimensions --- première dimension moins seconde.
+Cette différence porte un nom, la caractéristique d'Euler-Poincaré, et elle a
+sur chacun des deux termes pris isolément un avantage décisif : elle est
+\emph{additive}. Si un objet se décompose en deux morceaux, sa caractéristique
+est la somme des leurs. Or c'est exactement ce dont on a besoin pour calculer :
+une quantité additive se laisse suivre à travers les découpages.
+
+De là vient l'idée qui organise tout le dossier. Considérons tous les objets
+que l'on peut poser sur la courbe --- ce sont les \emph{faisceaux cohérents},
+mais l'essentiel est qu'il y en a beaucoup et qu'ils se découpent les uns dans
+les autres --- et décidons de ne retenir de chacun qu'une étiquette, sa
+\emph{classe}, avec une seule règle : quand un objet se découpe en deux, sa
+classe est la somme des deux autres. On obtient ainsi un groupe, et même, le
+produit tensoriel fournissant une multiplication, un anneau. Cet anneau ne se
+souvient de rien d'autre que de ce qui est additif ; c'est toute sa force. On
+l'appelle aujourd'hui le \emph{groupe de Grothendieck}, ou l'anneau
+$K$ ; ces pages l'écrivent tantôt $E$, tantôt $K$, ce qui est déjà un indice
+sur leur date. Le théorème de Riemann-Roch, une fois ces classes en main, tient
+littéralement sur une ligne, et la page 3 l'écrit sur une ligne.
+
+Reste à savoir mesurer une classe. Il y a pour cela deux règles graduées, et la
+tension entre elles est le sujet véritable du dossier. La première, les
+\emph{classes de Chern}, est à coefficients entiers : elle ne ment pas, mais
+elle se comporte mal vis-à-vis de l'addition et de la multiplication, où
+apparaissent des formules compliquées. La seconde, le \emph{caractère de
+Chern}, est parfaitement additive et multiplicative --- mais il faut, pour
+l'écrire, autoriser des dénominateurs, c'est-à-dire sortir des entiers. On veut
+évidemment les deux à la fois : la bonne algèbre et les coefficients entiers.
+On ne les a pas. Le passage de l'une à l'autre coûte, en degré $i$, exactement
+le facteur $(-1)^{i-1}(i-1)!$ --- et ce facteur, qui est le nombre annoncé plus
+haut, traverse le dossier d'un bout à l'autre.
+
+Il y apparaît sous quatre visages, sur des feuillets qui n'ont visiblement pas
+été écrits ensemble. Comme la classe de Chern d'un point plongé dans un espace
+projectif de dimension $r$, qui vaut $(-1)^{r-1}(r-1)!$ fois la classe de ce
+point (page 9). Comme le défaut d'un certain isomorphisme, qui n'en est pas un,
+entre deux façons de graduer l'anneau des classes (page 21). Comme la raison
+pour laquelle une classe non nulle peut avoir une classe de Chern totale
+parfaitement triviale --- il suffit d'une classe de torsion tuée par $(r-1)!$,
+et c'est le contre-exemple de la page 13. Et enfin, quoique aucun feuillet ne
+l'écrive, comme le coefficient qui relie le logarithme de la classe de Chern
+totale au caractère de Chern, dont la page 43 calcule les deux premiers termes.
+Quand Grothendieck, quelques années plus tard, cherchera un
+« Riemann-Roch sans dénominateurs », c'est contre ce facteur qu'il se battra.
+
+Le dossier lui-même n'est pas un texte. Il est un paquet : cinq chemises
+inscrites de sa main le découpent en cinq courses --- « Classique pour les
+Courbes », « Contre-exemples », « Cas des schémas », « Construction des Chern
+covariants », « R.R. des surfaces » --- écrites sur trois sortes de papier,
+dont les versos d'un texte dactylographié qui n'est pas de lui. Et ces courses
+ne peuvent pas être contemporaines : certaines ne connaissent que les faisceaux
+et les classes de Chern, tandis que d'autres emploient des mots --- topos,
+complexe parfait, catégorie dérivée --- qui n'existaient pas encore lorsque le
+théorème a été démontré. L'inventaire range le tout sous une date unique,
+antérieure à 1958 ; les feuillets montrent que cela ne peut pas valoir pour
+tous. Ce que l'on peut établir de ces écarts, et ce que l'on ne peut pas en
+conclure, fait l'objet d'une section à part, immédiatement après celle-ci ;
+c'est, pour un lecteur d'archives, la question centrale du dossier.
+
+Il faut enfin dire ce que le dossier n'est pas. Ce ne sont pas des notes de
+lecture, et ce n'est pas non plus une rédaction : c'est un homme qui recommence
+le même calcul dans plusieurs langues successives, qui se pose des questions
+par écrit --- « Est-ce que $\varphi_{K}$ est toujours bijectif ??? » --- et qui
+y répond, deux lignes plus bas, « Non », en encadrant le mot. Plusieurs
+feuillets s'arrêtent au milieu d'une phrase, un autre porte un titre sous lequel
+rien n'est écrit, et le dernier s'interrompt six lignes après son début, à une
+identification près de la formule d'adjonction qu'il allait obtenir. Le dossier
+ne se termine pas : il cesse.
+
+Les noms modernes sous lesquels chercher la suite : théorème de
+Grothendieck-Riemann-Roch, caractère de Chern et classe de Todd, groupe de
+Grothendieck d'un schéma, $\lambda$-anneaux et filtration $\gamma$,
+Riemann-Roch sans dénominateurs, complexes parfaits et $K$-théorie à supports,
+formule d'adjonction.
+
+\keywords{Riemann-Roch theorem, Grothendieck-Riemann-Roch, Chern character, Todd class, total Chern class, Grothendieck group, K-theory of coherent sheaves, divisor class group, Picard group, Euler characteristic of a coherent sheaf, canonical class, lambda-ring, gamma-filtration, associated graded of the gamma-filtration, Chern ring, splitting principle, Riemann-Roch without denominators, regular closed immersion, normal bundle, projective space bundle, torsion in K-theory, ringed topos, equivariant module, induction product, symmetric group, tensor power operations, wreath product, projection formula, perfect complex, derived category, K-theory with supports, family of supports, Chow ring with supports, covariant Chern character, proper pushforward, higher direct image, fibration, degree of a covering, normalisation of a curve, adjunction formula, genus}
+\end{resume}
+
+\pagerange{1}{1}
+\section*{Le fil du dossier, et les conventions}
+
+\emph{Les stations.} Le dossier est un paquet de courses, séparées par cinq
+chemises qu'il a inscrites lui-même (pages 1, 8, 19, 31 et 39) et que les
+titres de section reprennent ici. Voici ce que chacune contient.
+
+\begin{enumerate}
+  \item \emph{Pages 2 et 3}, sous « Classique pour les Courbes » :
+  Riemann-Roch sur une courbe non singulière, écrit dans l'anneau $E$ des
+  classes de faisceaux cohérents. C'est la $K$-théorie avant la lettre $K$.
+  \item \emph{Pages 4, 6 et 7} : le même énoncé refait en $K$-théorie, pour un
+  schéma noethérien de dimension $\leqslant 1$, avec les deux variances
+  $K^{\bullet}$ et $K_{\bullet}$, la filtration $\gamma$, $\operatorname{Pic}$
+  et $\pi_{0}$.
+  \item \emph{Pages 9, 11 et 13}, sous « Contre-exemples » : la classe de Chern
+  totale d'une image directe le long de $X \to X \times \mathbb{P}^{r}$, le
+  facteur $(r-1)!$, et une classe non nulle dont la classe de Chern totale
+  vaut $1$.
+  \item \emph{Pages 15 à 18} : les Modules sur un topos annelé où un groupe
+  opère, le produit d'induction sur les groupes symétriques, et les formules
+  pour les puissances tensorielles $T^{n}$.
+  \item \emph{Pages 20 à 29}, sous « Cas des schémas » : le formalisme des
+  $\lambda$-anneaux. L'anneau de Chern $CK$, le gradué $GK$ de la filtration
+  $\gamma$, la comparaison entre les deux, le facteur $(-1)^{i-1}(i-1)!$, et un
+  contre-exemple à la bijectivité.
+  \item \emph{Pages 32 à 37}, sous « Construction des Chern covariants, et
+  $K^{\bullet}$ et $A^{\bullet}$ à supports » : les catégories dérivées de
+  complexes parfaits, la $K$-théorie et les groupes de Chow à supports, et
+  Riemann-Roch conçu comme la mesure d'un défaut de covariance.
+  \item \emph{Pages 40 à 44}, sous « R.R. des surfaces, et autres cas
+  particuliers divers » : le carré de Grothendieck-Riemann-Roch, ses formules
+  (1), (1 bis), (2) et (1 ter), puis les exemples --- une fibration, une courbe
+  dans une courbe, un revêtement, une courbe dans une surface.
+\end{enumerate}
+
+\emph{Ce que seule une lecture d'ensemble peut dire.} Quatre liens, qu'aucun
+feuillet n'énonce, et dont chacun enjambe au moins une chemise.
+
+Le premier : le facteur $1 - \tfrac{1}{2}K$ par lequel la page 3 multiplie la
+classe d'un faisceau \emph{est} la classe de Todd $\tau_{h}(X) = 1 -
+\tfrac{1}{2}k$ de la page 42. Le même nombre, sur le même objet --- une courbe
+---, à trente-neuf feuillets et au moins une campagne d'écriture de distance,
+sous deux notations dont aucune ne renvoie à l'autre.
+
+Le deuxième : l'opérateur $K_{1}$ de la page 3, défini comme la forme linéaire
+nulle sur $\mathbb{Z}$ et égale au degré sur les classes de diviseurs, est
+l'opérateur $K_{p}$ de la page 41 et le $K_{2}$ de la page 44. Un seul
+opérateur : prendre la composante de degré $p$, puis son degré. Il est écrit
+ici $\deg$ partout.
+
+Le troisième, et c'est le plus lourd : le $(r-1)!$ des pages 9 à 13 et le
+$(i-1)!$ de la page 21 sont le même facteur, et les deux contre-exemples qu'ils
+servent à construire sont le même contre-exemple. Sur les feuillets
+géométriques, une classe de diviseur de torsion tuée par $(r-1)!$ donne une
+classe non nulle de classe de Chern totale triviale. Sur les feuillets
+algébriques, l'anneau $CK$ a de la torsion là où le gradué $GK$ n'en a pas, et
+la flèche de l'un vers l'autre n'est donc pas injective. C'est une seule et
+même chose, dite deux fois et jamais rapprochée.
+
+Le quatrième est de cette lecture et non du dossier. Les trois manifestations
+précédentes sont des cas particuliers d'une identité que personne n'écrit ici :
+si $c$ est la classe de Chern totale et $\operatorname{ch}$ le caractère de
+Chern, alors
+\[
+  \log c \;=\; \sum_{m \geqslant 1} (-1)^{m-1}(m-1)!\,\operatorname{ch}_{m} .
+\]
+La page 43 en calcule, sans la nommer, les deux premiers termes, en écrivant la
+classe de Chern totale comme l'exponentielle de
+$\operatorname{ch}_{1} - \operatorname{ch}_{2}$.\footnote{L'identité se lit sur
+les racines de Chern : $\log \prod_{j}(1 + a_{j}) = \sum_{m}
+\frac{(-1)^{m-1}}{m}\sum_{j} a_{j}^{m}$, et $\sum_{j} a_{j}^{m} = m!\,
+\operatorname{ch}_{m}$. Elle n'est écrite sur aucun feuillet du dossier ; elle
+est donnée ici parce qu'elle est ce qui fait des trois observations
+précédentes une seule.}
+
+\emph{Deux liens plus faibles, et il faut dire pourquoi ils sont plus faibles.}
+Les pages 15 à 18 construisent les opérations $\lambda^{i}$ par puissances
+tensorielles à opérateurs, c'est-à-dire exactement les opérations dont les
+pages 20 à 29 se donnent les axiomes ; mais aucune des deux courses ne renvoie
+à l'autre, et l'ordre des feuillets n'est pas un argument. Et la filtration
+$\gamma$ figure sur la page 4 comme sur la page 20 : elle ne peut donc pas
+servir à distinguer les campagnes, contrairement à ce qu'on pourrait croire en
+ne lisant que la seconde moitié du dossier.
+
+\emph{Les conventions.} Sa notation change d'une course à l'autre ; une seule
+est tenue ici, et les variantes sont signalées en note à l'endroit où elles
+apparaissent.
+
+\begin{itemize}
+  \item Le caractère de Chern est $\operatorname{ch}$. Il écrit $c = \mathrm{ch}$
+  aux pages 4 et 6, $\operatorname{ch}$ aux pages 36 et 37, et $\varphi$
+  indexé par la base aux pages 40 à 44.
+  \item La classe de Todd est $\operatorname{Todd}$. Il écrit $1 - \tfrac12 K$
+  à la page 3 et $\tau_{h}$ aux pages 40 à 44.
+  \item Les classes de Chern sont $c^{i}$, la classe totale $c$, et
+  $\widetilde{c}(x) = [\varepsilon(x),\, 1 + c^{1}(x) + c^{2}(x) + \cdots]$
+  lorsque le rang est porté à côté. Pour un anneau gradué $A$, on note
+  $\widetilde{A} = \mathbb{Z} \times (1 + A^{\geqslant 1})$, muni de l'addition
+  qui est la multiplication des séries et du produit $\ast$ décrit à la
+  section sur les pages 20 à 29. C'est l'anneau où vivent les classes totales,
+  et c'est le $\widetilde{A}$ des pages 9, 24, 27 et 40.
+  \item $\deg$ est l'opérateur « composante de degré $p$, puis degré » :
+  ses $K_{1}$, $K_{p}$, $K_{2}$.
+  \item Les classes canoniques sont $k_{X}$, $k_{Y}$. Il écrit $K$ à la page 3,
+  $k$ et $k'$ à la page 42, et $k_{x}$, $k_{y}$, $k_{X}$, $k_{Y}$ aux pages 42
+  à 44.
+  \item Aux pages 2 et 3, les fibrés vectoriels sont $V$, $V'$, $V''$ : la
+  lettre $E$ y désigne déjà l'anneau des classes, et le feuillet l'emploie pour
+  les deux.
+  \item La lettre $E$ a trois emplois dans le dossier, dans trois courses
+  distinctes : l'anneau des classes (pages 2 et 3), les éléments distingués
+  $E_{s}$ d'un $\lambda$-anneau (pages 27 à 29), un fibré vectoriel (pages 41
+  à 43). Aucun rapport entre les trois.
+  \item La lettre $\xi$ en a trois aussi : $\xi = 1 - L^{-1}$ dans
+  $K(\mathbb{P}^{r})$ (pages 9 à 13, conservé), le générateur de $CK$ à la page
+  21 (écrit $\zeta$ ici), et la classe $(n,d) \in K(X)$ aux pages 42 et 43
+  (conservé). La page 42 emploie de plus $\xi$ pour la classe du faisceau
+  tordant, sur le même feuillet que l'emploi précédent : cette dernière est
+  écrite $h$ ici.
+\end{itemize}
+
+\pagerange{1}{44}
+\section*{Les campagnes du dossier : ce que les feuillets montrent}
+
+Trois lecteurs indépendants, travaillant sur trois tranches différentes, ont
+relevé la même chose : le dossier ne peut pas être homogène. Il faut le dire de
+front, et il faut séparer soigneusement ce qui s'observe sur les feuillets, ce
+qui s'en déduit, et ce qui n'en résulte pas.
+
+\emph{Ce qui s'observe.} D'abord la matière. Le dossier est un paquet, non un
+cahier : cinq chemises de sa main le découpent (pages 1, 8, 19, 31, 39), et les
+courses qu'elles ouvrent sont écrites sur des supports différents --- feuillets
+blancs libres, feuillets bleu-gris, et versos d'un texte dactylographié qui
+n'est pas de lui, lequel occupe à lui seul huit des quarante-quatre pages.
+Ensuite le vocabulaire, et c'est là que la chose se tranche.
+
+Certaines pages emploient des mots dont la date de naissance est connue et
+postérieure à 1958.
+
+\begin{itemize}
+  \item Page 15 : « topos annelé ». Le mot \emph{topos} est du séminaire de
+  1963-1964, et n'a pas de sens avant lui.
+  \item Page 32 : $D_{\mathrm{parf}}(f)$, « complexes de
+  $\mathcal{O}_{X}$-Modules parfaits relativement à $f$ »,
+  $K_{\mathrm{parf}}(f)$, ainsi que $\mathrm{R}i_{*}$ et les catégories
+  $D_{Z}(X)$. Les catégories dérivées sont du début des années soixante ; les
+  complexes parfaits relatifs à un morphisme sont l'objet propre du séminaire
+  de 1966-1967 sur Riemann-Roch.
+  \item Pages 32 à 36 : les familles de supports $\Phi$ en $K$-théorie,
+  $K_{\Phi}(X)$, $A_{\Phi}(X)$, et les classes de Chern entre les deux.
+  \item Pages 4 et 34 : le mot « préschéma », et le mot « Module » avec une
+  capitale pour un faisceau de modules. Ce sont deux conventions des
+  \emph{Éléments}, dont le premier volume est de 1960.
+\end{itemize}
+
+D'autres pages ne portent rien de tel. Les pages 2 et 3 écrivent $E$, et non
+$K$, pour l'anneau des classes ; elles parlent de « faisceau algébrique
+cohérent » et de « courbe non singulière », et leur seul outil est la classe de
+Chern $c^{1}$ à valeurs dans le groupe des classes de diviseurs. Les pages 9 à
+13 et 40 à 44 calculent avec la classe de Chern totale, le caractère de Chern,
+la classe de Todd, $f_{!}$ et $f_{*}$, dans un anneau de Chow tensorisé par
+$\mathbb{Q}$ : c'est l'appareil du théorème tel qu'il a été exposé en 1957 et
+rédigé en 1958, et l'on n'y trouve ni complexe, ni support, ni catégorie
+dérivée.
+
+\emph{Ce qui s'en déduit.} Le dossier contient au moins deux campagnes, et la
+datation « antérieures à 1958 » ne peut pas couvrir les deux. C'est une
+conclusion sûre : elle ne repose pas sur une impression d'écriture mais sur des
+mots dont on sait qu'ils n'existaient pas.
+
+Un point mérite d'être ajouté, parce qu'il dérange la coupure la plus naturelle.
+La frontière ne tombe pas sur les chemises. La première chemise, « Classique
+pour les Courbes », contient à la fois les pages 2 et 3, qui ignorent la lettre
+$K$, et les pages 4, 6 et 7, qui emploient $K^{\bullet}$ et $K_{\bullet}$ avec
+leurs deux variances, $\pi_{0}(X)$, $\operatorname{Pic}(X)$, la filtration
+$\gamma$ et le mot « préschéma ». Autrement dit, une couture passe à
+l'intérieur d'une course que sa chemise donne pour une. Et la filtration
+$\gamma$, dont on pourrait croire qu'elle marque le tard, est déjà sur la page
+4.
+
+\emph{Ce qui n'en résulte pas.} Trois choses, qu'il serait facile et faux de
+croire acquises.
+
+Aucun feuillet n'est daté par cette lecture. Que les pages 40 à 44 ne
+contiennent aucune catégorie dérivée ne prouve nullement qu'elles soient
+anciennes : un calcul classique s'écrit à n'importe quelle date, et ces pages
+pourraient tout aussi bien être une reprise tardive, pour un cours ou pour une
+rédaction. Ce que l'on peut dire est exactement ceci : les courses classiques
+ne portent rien qui soit postérieur à 1958, et les courses tardives portent
+quelque chose qui ne peut pas lui être antérieur. La première moitié de cette
+phrase est beaucoup plus faible que la seconde, et c'est volontaire.
+
+L'inventaire n'est pas pris en défaut. Sa date reste ici telle quelle,
+$[1957]$, entre les crochets qui sont la convention des archivistes pour une
+date déduite et non lue ; l'inférence appartient au lecteur, et cette édition
+ne la fait pas. On notera seulement, comme un fait et non comme une thèse, que
+les mots de l'inventaire --- « Notes Antiques (antérieures à 1958) » --- ne
+figurent sur aucune des cinq chemises transcrites, qui portent respectivement
+« Classique pour les Courbes », « Contre-exemples », « Cas des schémas »,
+« Construction des Chern covariants » et « R.R. des surfaces ». D'où ils
+viennent, la transcription ne le dit pas. Si l'étiquette est de lui, elle
+désigne un paquet et non chacune de ses pièces, et un paquet ainsi étiqueté est
+précisément ce à quoi l'on ajoute des feuillets plus tard --- mais ceci est une
+conjecture, elle est signalée comme telle, et le dossier ne la tranche pas.
+
+Enfin, et c'est ce qui importe le plus pour qui vient lire les mathématiques :
+rien de ce qui suit ne dépend de la réponse. Les courses classiques démontrent
+le théorème de 1957 ; les courses tardives construisent la machinerie qui
+portera son nom dix ans après. La question qu'elles traitent, elle, est la même
+de bout en bout --- la distance entre la classe de Chern et le caractère de
+Chern, qui est le facteur $(-1)^{i-1}(i-1)!$ ---, et c'est vraisemblablement
+pour cela que ces feuillets ont fini dans une même chemise. Qu'un feuillet ait
+été écrit en 1957 ou en 1966 change l'histoire du texte ; cela ne change aucun
+de ses énoncés.
+
+\pagerange{2}{3}
+\section*{Classique pour les Courbes : Riemann-Roch avant la lettre $K$ (pages 2 et 3)}
+
+Soit $X$ une courbe algébrique non singulière, irréductible et
+propre.\footnote{Le feuillet dit seulement « $X$ courbe non singulière ».
+L'irréductibilité et la propreté sont indispensables : sans la première le
+groupe $\pi_{0}$ intervient, sans la seconde la caractéristique
+d'Euler-Poincaré de la formule (1) n'est pas finie. Elles sont ajoutées ici.}
+
+\subsection*{L'anneau des classes}
+
+On considère le groupe libre sur les faisceaux cohérents sur $X$, et l'on y
+impose une relation par suite exacte courte : pour toute
+$0 \to F' \to F \to F'' \to 0$, la classe de $F$ est la somme de celles de
+$F'$ et de $F''$. Le produit tensoriel en fait un anneau, que le feuillet note
+$E$. C'est le groupe que l'on appelle aujourd'hui $K_{0}(X)$ ; la lettre $K$ ne
+figure pas sur ces deux pages.\footnote{La page 2 se sert de la lettre $E$ à la
+fois pour l'anneau et pour un fibré vectoriel, dans la même proposition. Les
+fibrés sont écrits $V$, $V'$, $V''$ ici.}
+
+Le feuillet distingue dans $E$ les sous-objets suivants.
+
+\begin{itemize}
+  \item $N$, le sous-groupe engendré par les éléments $(F) - (F') - (F'')$ ---
+  c'est-à-dire, dans le groupe libre, ce que l'on quotiente.\footnote{Le
+  feuillet travaille donc simultanément dans le groupe libre et dans son
+  quotient, sans le dire. Les énoncés $E/N \simeq \cdots$ n'ont de sens que
+  dans le premier ; les lignes qui identifient $E$ à l'anneau des classes n'ont
+  de sens que dans le second. La lecture suit cet usage, qui est cohérent
+  pourvu qu'on prenne $E$ pour le groupe libre et $E/N$ pour l'anneau des
+  classes proprement dit.}
+  \item $\mathcal{D}$, le sous-groupe engendré par les faisceaux gratte-ciel
+  $k_{x}$ : c'est le groupe des diviseurs.
+  \item $\mathcal{L} \subset \mathcal{D}$, le groupe des diviseurs
+  linéairement équivalents à $0$.
+  \item $\Phi$, la sous-algèbre engendrée par les faisceaux localement libres,
+  isomorphe à l'algèbre des classes de fibrés vectoriels, et $\Phi_{N}$ son
+  intersection avec $N$.
+  \item $E_{0}$, le noyau d'une augmentation dont le feuillet ne laisse pas
+  lire le nom.\footnote{Le mot, abrégé, commence par un $g$ et se termine en
+  \texttt{-ti.} ; il n'a pas été lu. Le rôle que $E_{0}$ joue dans les deux
+  identités $\mathcal{D} + N = E_{0}$ et $E = \Phi + \mathcal{D}$ est celui du
+  noyau du rang, mais la lecture n'est pas reconstruite ici.}
+\end{itemize}
+
+Le feuillet affirme alors, en marquant chaque ligne d'une étoile :
+\[
+  E = \Phi + \mathcal{D}, \qquad \Phi \cap \mathcal{D} = 0,
+  \qquad E/N \;\simeq\; \Phi/\Phi_{N} \;\simeq\; \mathbb{Z} + \mathfrak{P} ,
+\]
+où $\mathfrak{P}$ est le groupe des classes de diviseurs, c'est-à-dire
+$\mathcal{D}/\mathcal{L} = \operatorname{Pic}(X)$, et où l'isomorphisme envoie
+$(1,0)$ sur la classe de $\mathcal{O}_{X}$ et induit sur $\mathfrak{P}$ le
+passage au quotient de l'inclusion $\mathcal{D} \subset E$.\footnote{Sur le
+feuillet, $\mathcal{L}$, $\mathcal{D}$ et $\mathfrak{P}$ ne se distinguent que
+par le tracé de la lettre, et le transcripteur signale que ces lectures sont
+solidaires : si $\mathfrak{P}$ n'est pas le groupe des classes de diviseurs,
+elles bougent toutes. L'algèbre les fixe pourtant sans recours au tracé. La
+page 3 pose $\mathcal{D} \cap N = \mathcal{L}$, donc
+$E_{0}/N = (\mathcal{D} + N)/N \simeq \mathcal{D}/\mathcal{L}$ : le quotient est
+forcément le groupe des classes de diviseurs, et c'est ce groupe qui reçoit
+$c^{1}$ et qui contient la classe canonique $K$ de la formule (1). Aucune autre
+lecture ne rend ces quatre emplois compatibles.}
+
+\subsection*{La proposition, et ce qu'elle sert à établir}
+
+\textbf{Proposition (page 2).} \emph{Le sous-groupe $N$ est engendré par les
+éléments}
+\[
+  c(V) - c(V') - c(V''), \qquad
+  c(V) - c(W) - c\bigl(\mathcal{O}_{X}(V)/f\,\mathcal{O}_{X}(W)\bigr),
+\]
+\emph{où la première famille court sur les suites exactes de fibrés
+vectoriels et la seconde sur les couples de fibrés en droites munis d'une
+section} $f \in H^{0}(X, \mathcal{O}_{X}(W^{*} \otimes V))$ \emph{non
+nulle.}\footnote{Le feuillet laisse illisible le mot qualifiant $f$ ; le membre
+de droite n'a de sens que si $f$ est injective, ce qu'une section non nulle
+assure sur une courbe intègre. La restriction aux fibrés de rang $1$ est celle
+du feuillet.}
+
+Le feuillet reformule aussitôt : cela revient à dire que $N$ est engendré par
+les $\lambda(D + D') - \lambda(D) - \lambda(D')$, où $\lambda(\Delta)$ est la
+classe du faisceau inversible associé au diviseur $\Delta$, et qu'on peut s'y
+ramener au cas $D \geqslant 0$.
+
+La page 3 en tire quatre identités équivalentes :
+\[
+  \mathcal{D} + N = E_{0}, \qquad \mathcal{D} \cap N = \mathcal{L},
+  \qquad \Phi \cap N = \Phi_{N} ,
+\]
+la quatrième, $\Phi + N = E$, étant biffée sur le feuillet.\footnote{Elle est
+d'ailleurs fausse telle quelle : $\Phi + N$ ne contient pas les classes de
+faisceaux de torsion, qui engendrent $\mathcal{D}$. La raturer est la bonne
+décision, et la lecture la respecte.} La deuxième est le cœur de l'affaire :
+elle dit que deux diviseurs dont les classes coïncident dans l'anneau des
+classes sont linéairement équivalents, et c'est exactement ce que la seconde
+famille de générateurs de la proposition fournit, puisque celle-ci n'identifie
+deux diviseurs que lorsqu'une fonction les relie.\footnote{Le feuillet écrit
+les éléments de $\mathcal{D} \cap N$ « diviseurs « $f$-équivalents
+» à $0$ », le préfixe entre guillemets étant une haste bouclée
+que le transcripteur ne tranche pas entre $f$ et $l$ (pour
+« linéairement »). Le contenu de la proposition rend les deux lectures
+équivalentes : $f$-équivalent, c'est-à-dire équivalent au moyen d'une fonction,
+\emph{est} linéairement équivalent.}
+
+\subsection*{Riemann-Roch en une ligne}
+
+On définit $E \to \mathbb{Z} + \mathfrak{P}$ ainsi : sur $\mathcal{D}$, c'est
+l'application canonique $\mathcal{D} \to \mathfrak{P}$ ; sur $\Phi$, un fibré
+vectoriel $V$ de rang $n$ va sur $(n,\, c^{1}(V))$. C'est, dans le langage
+d'aujourd'hui, le caractère de Chern : pour une courbe,
+$\operatorname{ch} = (\operatorname{rg}, c^{1})$, et il est à valeurs entières
+puisque les termes de degré $\geqslant 2$ n'existent pas.
+
+La formule de la page 3, pour $F$ un faisceau cohérent, est alors
+\begin{equation*}
+  \chi(F) \;=\; \deg\Bigl( \operatorname{ch}(F)\cdot
+  \bigl(1 - \tfrac{1}{2}k_{X}\bigr) \Bigr)
+  \tag{1}
+\end{equation*}
+où $k_{X} \in \mathfrak{P}$ est la classe canonique, et où $\deg$ est la forme
+linéaire nulle sur $\mathbb{Z}$ et égale au degré sur
+$\mathfrak{P}$.\footnote{Il écrit le membre de gauche avec un $s$ long bouclé,
+que la transcription rend par $\int$ : c'est la caractéristique
+d'Euler-Poincaré, et elle est écrite $\chi$ ici. Il écrit $K$ pour la classe
+canonique et $K_{1}$ pour la forme linéaire ; ces deux lettres sont remplacées,
+la première parce que $K$ désigne partout ailleurs dans le dossier un
+$\lambda$-anneau ou un groupe de Grothendieck, la seconde parce que le même
+opérateur reparaît aux pages 41 et 44 sous le nom $K_{p}$.}
+
+C'est le théorème de Riemann-Roch. Il suffit en effet, comme le feuillet le
+note, de le vérifier sur $F = k_{x}$ et sur $F = \mathcal{O}_{X}$, tout
+faisceau cohérent sur une courbe ayant même classe qu'une combinaison de
+ceux-là. Pour $\mathcal{O}_{X}$ : $\operatorname{ch} = (1,0)$, le produit vaut
+$(1, -\tfrac12 k_{X})$, et son degré est $-\tfrac12(2g-2) = 1-g = \chi(\mathcal{O}_{X})$.
+Pour $k_{x}$ : $\operatorname{ch} = (0, [x])$, le produit vaut $(0,[x])$, de
+degré $1 = \chi(k_{x})$. Pour $F$ quelconque de rang $n$ et de degré $d$, on
+trouve $d + n(1-g)$.
+
+Le facteur $1 - \tfrac12 k_{X}$ est la classe de Todd de la courbe. Il
+reviendra page 42, à l'autre bout du dossier, calculé cette fois comme
+$-k/(1 - e^{k})$ et noté $\tau_{h}(X)$ : c'est le même nombre, et rien sur les
+feuillets ne les rapproche.
+
+\pagerange{4}{7}
+\section*{Le même énoncé en $K$-théorie : dimension $\leqslant 1$ (pages 4, 6 et 7)}
+
+Les trois feuillets suivants refont la page 3 dans un autre vocabulaire. Soit
+$X$ un schéma noethérien de dimension $\leqslant 1$ admettant un faisceau
+inversible ample.\footnote{Le feuillet écrit « préschéma », qui est la
+convention des \emph{Éléments} ; et il commence par écrire « admettant aussi un
+Module inversible ample », le mot « aussi » étant biffé. L'hypothèse d'amplitude
+n'est pas décorative : c'est elle qui donne le théorème de structure des fibrés
+utilisé plus bas.} On dispose de deux groupes de Grothendieck, celui des fibrés
+vectoriels $K^{\bullet}(X)$, contravariant, et celui des faisceaux cohérents
+$K_{\bullet}(X)$, covariant.\footnote{Il les écrit avec un point surélevé et un
+point souscrit. Ce sont les groupes que l'on note aujourd'hui $K^{0}(X)$ et
+$K_{0}(X)$.}
+
+\subsection*{Le côté contravariant}
+
+$K^{\bullet}(X)$ est augmenté vers $H^{0}(X, \mathbb{Z}) = \mathbb{Z}^{\pi_{0}(X)}$
+par le rang, qui est localement constant. Soit $I(X)$ l'idéal d'augmentation.
+Pour $x \in I(X)$ on a $\gamma^{i}(x) = 0$ dès que $i \geqslant 2$, d'où
+$F^{i}_{\gamma}(K^{\bullet}(X)) = 0$ pour $i \geqslant 2$, et par
+conséquent
+\[
+  K^{\bullet}(X) \;\simeq\; \mathbb{Z}^{\pi_{0}(X)} \times \operatorname{Pic}(X),
+  \qquad
+  \operatorname{Pic}(X) \simeq \prod_{i \in \pi_{0}(X)} \operatorname{Pic}(X_{i}),
+\]
+la classe d'un fibré $V$ étant $\bigl[\operatorname{rg}(V),\, \det V\bigr]$,
+c'est-à-dire
+\[
+  \operatorname{cl}(V) \;=\; \sum_{i} \bigl(\operatorname{rg}_{i}(V) - 1\bigr)\,1_{i}
+  \;+\; \operatorname{cl}(\det V).
+\]
+La raison est que sur un tel $X$ tout fibré vectoriel est somme directe d'un
+fibré trivial et de son déterminant.\footnote{Le feuillet ne donne pas cette
+raison et laisse illisible la phrase qui suivait « faisceau loc. libre de rang
+», ainsi que le rang lui-même, lu $0$. C'est le théorème de structure des
+fibrés sur un schéma de dimension $\leqslant 1$ à faisceau ample, et c'est là
+que sert l'hypothèse d'amplitude.} On pose $B^{\bullet}(X) = \mathbb{Z}^{\pi_{0}(X)}
+\times \operatorname{Pic}(X)$ ; avec ces identifications, le caractère de
+Chern $K^{\bullet}(X) \to B^{\bullet}(X)$ est l'identité.
+
+\subsection*{Le côté covariant}
+
+$K_{\bullet}(X)$ est augmenté vers $\mathbb{Z}^{\pi_{0}^{(1)}(X)}$, où
+$\pi_{0}^{(1)}(X)$ est l'ensemble des composantes irréductibles de dimension
+$1$, par les longueurs aux points génériques. Le noyau est engendré par les
+classes de faisceaux à support fini et par les différences de faisceaux
+inversibles sur les composantes de dimension $1$.\footnote{Le feuillet écrit ce
+noyau $K_{0}(X) \simeq \mathbb{Z}^{k^{(0)}(X)} \times \operatorname{Pic}'(X)$
+et glose le second facteur comme un produit de $K_{0}(X_{i})$ sur les
+composantes de dimension $1$. Les indices ne sont pas tous lisibles et la
+description exacte du premier facteur est perdue ; ce qui est donné ici est la
+part de l'énoncé que le feuillet soutient.}
+
+\subsection*{La flèche d'un côté à l'autre}
+
+Les pages 6 et 7 sont un palimpseste rapide dont la prose de liaison est en
+très grande partie perdue, et la seconde est barrée d'obliques depuis son
+milieu.\footnote{Aucune tentative n'est faite ici de combler ces lacunes. Ce
+qui suit est ce que portent les formules, non ce que disait le texte qui les
+reliait.} Ce qu'elles établissent malgré tout est net.
+
+En dimension $0$, le rang et la longueur sont des isomorphismes de
+$\lambda$-anneaux $K^{\bullet}(X) \simeq \mathbb{Z}$ et $K_{\bullet}(X) \simeq
+\mathbb{Z}$, et le caractère de Chern est l'identité. En dimension $1$, la page
+6 dresse la liste des invariants : l'ensemble fini $\pi_{0}(X)$ des composantes
+irréductibles, le groupe $\operatorname{Pic}(X)$, le groupe $K_{(0)} =
+\prod_{i} K_{(0)}(X_{i})$, les entiers $\mu_{i} = \operatorname{lg}_{i}(\mathcal{O}_{X})$,
+un élément $\delta \in K_{0}(X)$, et enfin des applications
+$u_{i} : \operatorname{Pic}(X) \to K_{(0)}$, $L \mapsto
+\operatorname{cl}\bigl((L-1)\mathcal{O}_{X_{i}}\bigr)$.
+
+La page 7 écrit alors l'homomorphisme $K^{\bullet}(X) \to K_{\bullet}(X)$. Il
+est déterminé par l'image de $1$, soit
+$1_{\bullet} = \sum_{i} \mu_{i} 1_{i} + \delta_{\varepsilon}$, et vaut
+\[
+  u(n, \xi) \;=\; n \sum_{i} \mu_{i}\,1_{i}
+  \;+\; \Bigl( n\,\delta_{\varepsilon} + \sum_{i} \mu_{i}\,u_{i}(\xi) \Bigr),
+  \qquad n \in \mathbb{Z},\ \xi \in \operatorname{Pic}(X).
+\]
+Ce que les feuillets ne disent pas, et qui explique tout, est que cette flèche
+est simplement la multiplication par la classe de $\mathcal{O}_{X}$ dans
+$K_{\bullet}(X)$ : $K_{\bullet}$ est un module sur $K^{\bullet}$, et l'unique
+morphisme de modules $K^{\bullet} \to K_{\bullet}$ est $x \mapsto
+x \cdot [\mathcal{O}_{X}]$. La formule s'obtient alors en développant
+$(n + \xi)\cdot 1_{\bullet}$ et en observant que $\xi \cdot \delta_{\varepsilon} = 0$
+pour raison de degré, tandis que $\xi \cdot 1_{i} = u_{i}(\xi)$ par définition
+de $u_{i}$.\footnote{C'est donc, en langage moderne, la flèche
+$K^{0}(X) \to K_{0}(X)$, dont on sait qu'elle est bijective lorsque $X$ est
+régulier. Le feuillet
+demande, en dimension $0$, « pour $2$ choix ! », et l'annotation marginale
+signale que l'invariant en cause dépend du choix de la classe de $1$ dans
+$K_{\bullet}(X)$ : c'est exactement l'observation ci-dessus.}
+
+\pagerange{9}{13}
+\section*{Contre-exemples : la classe de Chern d'une immersion, et le facteur $(r-1)!$ (pages 9 à 13)}
+
+Cette course pose une question précise : les classes de Chern d'une image
+directe sont-elles calculables à partir de celles de la classe qu'on pousse ?
+La réponse est oui, avec un facteur entier qui grossit ; et le prix de ce
+facteur est qu'une classe non nulle peut avoir une classe de Chern totale
+triviale. C'est là le contre-exemple qui donne son titre à la chemise.
+
+\subsection*{La situation}
+
+Soit $X$ un schéma, $r \geqslant 1$, et $i : X \to X \times \mathbb{P}^{r}$
+l'immersion fermée d'une section constante. C'est une immersion régulière de
+codimension $r$ à fibré normal trivial. On dispose de
+\[
+  K(X \times \mathbb{P}^{r}) \;=\;
+  K(X) \otimes K(\mathbb{P}^{r}), \qquad
+  K(\mathbb{P}^{r}) = \mathbb{Z}[\xi]/(\xi^{r+1}),\quad \xi = 1 - L^{-1},
+\]
+où $L = \mathcal{O}(1)$ ; la classe $\xi^{r}$ est celle du faisceau structural
+d'un point.\footnote{Le feuillet écrit la présentation sous la forme
+$K(X) \otimes K(\mathbb{P}^{r})/(\xi = 1 - L^{-1})$, c'est-à-dire en nommant le
+générateur plutôt qu'en donnant la relation $\xi^{r+1} = 0$. Les deux disent la
+même chose.} On a donc $i_{!}(x) = x \otimes \xi^{r}$, et la flèche
+$K(X) \to K(X \times \mathbb{P}^{r})$ est injective, la composée avec
+$p_{*}$ valant l'identité :
+
+\begin{tikzcd}[column sep=large, row sep=small]
+K(X) \arrow[r, "\text{inj.}"] \arrow[d, "\widetilde{c}_{X}"'] & K(X \times \mathbb{P}^{r}) \arrow[d, "\widetilde{c}_{X \times \mathbb{P}^{r}}"] \\
+\widetilde{A}(X) \arrow[r] & \widetilde{A}(X \times \mathbb{P}^{r})
+\end{tikzcd}
+
+\subsection*{La classe de Chern totale d'un point}
+
+Puisque $\xi^{r} = \sum_{i=0}^{r} \binom{r}{i}(-1)^{i} L^{-i}$ et
+$c(L^{-i}) = 1 - i\eta$, avec $\eta$ la classe d'un hyperplan, on a
+\[
+  c(\xi^{r}) \;=\; \prod_{i=0}^{r} (1 - i\eta)^{(-1)^{i}\binom{r}{i}} .
+\]
+En passant au logarithme, le coefficient de $\eta^{m}$ est
+$-\frac{1}{m}\sum_{i}(-1)^{i}\binom{r}{i} i^{m}$, somme qui est nulle pour
+$m < r$ et vaut $(-1)^{r} r!$ pour $m = r$. Comme $\eta^{r+1} = 0$, il ne reste
+qu'un terme et l'exponentielle se réduit à sa partie linéaire :
+\[
+  c(\xi^{r}) \;=\; 1 + (-1)^{r-1}(r-1)!\ \eta^{r} .
+\]
+C'est le premier visage du nombre du dossier : la classe de Chern de dimension
+maximale du faisceau structural d'un point de $\mathbb{P}^{r}$ n'est pas la
+classe de ce point, mais son multiple par
+$(-1)^{r-1}(r-1)!$.\footnote{L'exposant de $(-1)$ est écrit $r+1$ à la page 9 et
+$r-1$ à la page 11, et la transcription signale que la page ne tranche pas
+entre les deux. Elle n'a pas à trancher : $(-1)^{r+1} = (-1)^{r-1}$. Les deux
+leçons sont la même, et la variance relevée n'en est pas une.}
+
+\subsection*{Les polynômes $Q^{(r)}_{i}$}
+
+Le feuillet écrit ensuite $c(i_{!}(x)) = c(x) \ast c(\xi^{r})$ et développe. Le
+résultat auquel il arrive est
+\[
+  c\bigl(i_{!}(x)\bigr) \;=\; 1 + (-1)^{r-1}(r-1)!\ \eta^{r}
+  \Bigl[\, \varepsilon(x) + \sum_{i \geqslant 1}
+  Q^{(r)}_{i}\bigl(c^{1}(x), \ldots, c^{i}(x)\bigr) \Bigr],
+\]
+où $Q^{(r)}_{i-r}$ est, par définition, la partie linéaire en la variable de
+degré $r$ du polynôme universel $Q_{i}$ qui exprime $c^{i}$ d'un produit ---
+les termes de degré $\geqslant 2$ en cette variable disparaissant puisque
+$(\eta^{r})^{2} = 0$.\footnote{La page 9 développe $c(x) \ast (1 - i\eta)$ en
+$\sum_{j \leqslant k} c^{j}(x)(-i\eta)^{k-j}$, sans les coefficients
+binomiaux : le terme de degré $k$ de $c(x \otimes M)$, pour $M$ inversible de
+première classe $m$, est $\sum_{j=0}^{k}\binom{n-j}{k-j} c^{j}(x) m^{k-j}$ avec
+$n = \varepsilon(x)$. Les binômes sont rétablis ici. Le feuillet porte sous
+cette ligne une accolade et une glose dont le milieu est illisible.}
+
+Le feuillet ne calcule le coefficient dominant de $Q^{(r)}_{i}$ que pour
+$i = 1$, où il trouve $-r\,c^{1}$. Sa propre méthode le donne pour tout $i$ :
+\[
+  Q^{(r)}_{i}\bigl(c^{1}, \ldots, c^{i}\bigr)
+  \;=\; -\,\frac{(r+i-1)!}{(r-1)!\,(i-1)!}\ c^{i}
+  \;+\; (\text{termes décomposables}),
+\]
+et la lettre du feuillet le confirme, puisqu'il écrit son coefficient sous la
+forme $-\frac{(r+1-1)!}{(r-1)!\,(1-1)!}$, c'est-à-dire précisément cette
+expression pour $i = 1$.\footnote{La formule générale est fournie ici et ne
+figure pas sur le feuillet, qui n'écrit que le cas $i=1$. Voici d'où elle
+vient. Le fibré normal étant trivial, $\operatorname{ch}(i_{!}x) = \eta^{r}
+\operatorname{ch}(x)$, d'où $\operatorname{ch}_{r+j}(i_{!}x) = \eta^{r}
+\operatorname{ch}_{j}(x)$ et, par l'identité $\log c = \sum_{m}(-1)^{m-1}(m-1)!
+\operatorname{ch}_{m}$ et $(\eta^{r})^{2} = 0$,
+$c(i_{!}x) = 1 + (-1)^{r-1}\eta^{r}\sum_{j}(-1)^{j}(r+j-1)!\operatorname{ch}_{j}(x)$.
+On conclut par $\operatorname{ch}_{i} = \frac{(-1)^{i-1}}{(i-1)!}c^{i} +
+(\text{décomposables})$, conséquence des identités de Newton. Le feuillet note
+au passage $Q^{(r)}_{0} = 0$, ce qui est cohérent : le terme de rang est porté
+à part, sous la forme du $\varepsilon(x)$ entre crochets.} Le feuillet ajoute,
+en marge de ce calcul, l'avertissement que les coefficients numériques
+proviennent tous du $(r-1)!$ : c'est exact, et c'est ce qui rend le paragraphe
+suivant possible.
+
+Il note enfin cette situation $c(i_{!}(x)) = (i_{*})_{r}\bigl(c(x)\bigr)$, en
+introduisant donc un « $i_{*}$ » agissant directement sur les classes de Chern
+totales. C'est la question que l'on appellera plus tard Riemann-Roch sans
+dénominateurs : obtenir une formule d'image directe pour les classes de Chern
+entières, et non pour le caractère de Chern rationnel.
+
+\subsection*{Le contre-exemple}
+
+Soit $Y \subset X$ un diviseur, de classe $x' \in A^{1}(X)$. On a
+$c(\mathcal{O}_{Y}) = (1 - x')^{-1} = \sum_{n} (x')^{n}$. En appliquant ce qui
+précède à $x = [\mathcal{O}_{Y}]$, chaque terme du crochet porte en facteur
+$(r-1)!$ multiplié par une puissance de $x'$.\footnote{Explicitement, le terme
+de rang $j$ vaut $(r+j-1)!\operatorname{ch}_{j}(\mathcal{O}_{Y})/(r-1)! =
+\binom{r+j-1}{j}(-1)^{j-1}(x')^{j}$ au signe près, dont tous les coefficients
+sont des entiers multipliés par $(r-1)!$ une fois le facteur global rétabli.}
+Par conséquent :
+
+\textbf{Si $(r-1)!\,x' = 0$ dans $A^{1}(X)$, alors
+$c\bigl(i_{!}(\mathcal{O}_{Y})\bigr) = 1$.}\footnote{Le dernier membre de la
+page 13 est lu $0$ ; la classe de Chern \emph{totale} vaut $1$, et c'est sa
+partie de degré $\geqslant 1$ qui vaut $0$. Les deux énoncés disent la même
+chose et ne diffèrent que par ce que $\widetilde{C}$ désigne ; le feuillet ne
+tranche pas, et il n'y a rien à trancher.}
+
+Autrement dit, la classe non nulle $[\mathcal{O}_{Y \times \mathbb{P}^{r}}]$ a
+une classe de Chern totale triviale : les classes de Chern ne séparent pas.
+Reste à produire un $x' \neq 0$ tué par $(r-1)!$, ce qu'une classe de torsion
+de $\operatorname{Pic}^{0}$ fournit --- par exemple un point de torsion d'ordre
+divisant $(r-1)!$ sur une courbe elliptique.\footnote{Le feuillet demande
+seulement $(r-1)!\,x' = 0$, et la fin de sa dernière phrase est illisible.
+L'en-tête de la transcription du lot nomme une courbe elliptique ; le corps
+transcrit du feuillet ne la nomme pas. L'exemple est donc donné ici comme ce
+qu'exige la condition, non comme ce que la page écrit.}
+
+C'est le même phénomène que celui de la page 21, qui l'énoncera en pure algèbre :
+$CK$ a de la torsion, $GK$ n'en a pas, et la flèche de l'un vers l'autre n'est
+donc pas injective. Ici la torsion est celle de $\operatorname{Pic}^{0}$ ; là,
+celle qu'introduisent les factorielles.
+
+\pagerange{15}{18}
+\section*{Modules sur un topos annelé où un groupe opère (pages 15 à 18)}
+
+Ces quatre feuillets ne sont précédés d'aucune chemise et leur sujet n'est pas
+celui de la course qui les précède.\footnote{Le titre de cette section est de
+l'éditeur ; les mots sont ceux de la première ligne du feuillet 15. C'est la
+seule course du dossier qui ne soit annoncée par aucune chemise inscrite.}
+C'est, en apparence, une digression ; c'est en réalité la construction des
+opérations dont la course suivante se donnera les axiomes, et c'est aussi la
+course la plus tardive du dossier, puisqu'elle commence par le mot
+\emph{topos}.
+
+Soit $\mathcal{X}$ un topos annelé, d'anneau commutatif $\mathcal{O}$. Pour
+tout groupe $G$ on note $A(\mathcal{X}, G)$ la catégorie des $\mathcal{O}$-Modules
+de $\mathcal{X}$ munis d'une action de $G$ --- autrement dit, la catégorie des
+$\mathcal{O}[G]$-Modules.
+
+\subsection*{Restriction, induction, et le produit extérieur}
+
+Un homomorphisme $u : G \to G'$ donne une restriction
+$u^{*} : A(\mathcal{X}, G') \to A(\mathcal{X}, G)$ et une induction
+$u_{*}$ en sens inverse. Lorsque $u$ est injectif d'indice fini, on a
+l'isomorphisme canonique de $\mathcal{O}$-Modules
+\[
+  u^{*} u_{*}(F) \;\simeq\; \bigsqcup_{G'/G} F ,
+\]
+la somme portant sur les classes à gauche, $G$ permutant les facteurs par
+translation.\footnote{Le feuillet écrit $F^{(G'/G)}$, notation qui se lit aussi
+bien comme un produit. Pour un indice fini les deux coïncident ; l'hypothèse
+d'indice fini n'est pas sur le feuillet et est ajoutée ici.} Les
+sous-catégories pleines des Modules localement libres, libres de type fini, et
+localement libres de type fini sur $\mathcal{O}[G]$ sont stables par ces
+foncteurs.
+
+On dispose dans $A(\mathcal{X}, G)$ du produit tensoriel, commutatif et
+associatif, et des isomorphismes fonctoriels
+\[
+  u^{*}(F' \otimes G') \simeq u^{*}(F') \otimes u^{*}(G'),
+  \qquad
+  u_{*}\bigl(F \otimes u^{*}(G')\bigr) \simeq u_{*}(F) \otimes G' ,
+\]
+la seconde étant la formule de projection. Pour $F \in A(\mathcal{X}, G)$ et
+$H$ un second groupe, $G \in A(\mathcal{X}, H)$, on pose
+\[
+  F \boxtimes G \;=\; \mathrm{pr}_{1}^{*}(F) \otimes \mathrm{pr}_{2}^{*}(G)
+  \;\in\; A(\mathcal{X}, G \times H),
+\]
+et le produit tensoriel ordinaire se retrouve par restriction le long de la
+diagonale : $F \otimes G = (\mathrm{diag}_{G})^{*}(F \boxtimes
+G)$.\footnote{Le feuillet écrit l'objet dans $A(\mathcal{X}, H \times G)$ alors
+que la définition le place dans $A(\mathcal{X}, G \times H)$ ; c'est une
+inversion sans conséquence, les deux catégories étant canoniquement
+isomorphes.}
+
+\subsection*{Le produit d'induction, et les puissances tensorielles}
+
+Soit $u_{pq} : \mathfrak{S}_{p} \times \mathfrak{S}_{q} \to
+\mathfrak{S}_{p+q}$ l'injection canonique. Pour $F$ dans
+$A(\mathcal{X}, \mathfrak{S}_{p})$ et $G$ dans $A(\mathcal{X}, \mathfrak{S}_{q})$
+on pose
+\[
+  F \ast G \;=\; u_{pq\,*}\bigl(F \boxtimes G\bigr)
+  \;\in\; A(\mathcal{X}, \mathfrak{S}_{p+q}),
+\]
+opération commutative et associative : elle fait de la somme des
+$A(\mathcal{X}, \mathfrak{S}_{n})$ un anneau gradué.\footnote{Il abrège
+$A(\mathcal{X}, p)$ pour $A(\mathcal{X}, \mathfrak{S}_{p})$. C'est le produit
+d'induction, celui qui fait de la somme des catégories de représentations des
+groupes symétriques l'anneau des fonctions symétriques.}
+
+Notant $T^{n}(F)$ la puissance tensorielle $n$-ième munie de son action de
+$\mathfrak{S}_{n}$, la page 18 énonce les trois formules
+\[
+  T^{n}(F + G) \simeq \bigsqcup_{p+q=n} T^{p}(F) \ast T^{q}(G),
+  \qquad
+  T^{m}\bigl(T^{n}(F)\bigr) \simeq w_{m,n}^{*}\bigl(T^{mn}(F)\bigr),
+  \qquad
+  T^{m}(F \otimes G) \simeq T^{m}(F) \otimes T^{m}(G),
+\]
+où $w_{m,n} : \mathfrak{S}_{n} \wr \mathfrak{S}_{m} \to \mathfrak{S}_{mn}$ est
+le plongement du produit en couronne.\footnote{Le feuillet écrit $w_{m,n} :
+\mathfrak{S}_{m} \to \mathfrak{S}_{?}$, la cible étant illisible, et le
+qualifie de « convenable ». La source ne peut pas être $\mathfrak{S}_{m}$ :
+$T^{m}(T^{n}F)$ est $T^{mn}(F)$ muni de l'action du groupe des permutations de
+$mn$ objets rangés en $m$ paquets de $n$, qui est le produit en couronne. La
+correction est faite ici.} La première est la formule du binôme pour les
+puissances tensorielles, et c'est elle qui produit les opérations
+$\lambda^{i}$ : le facteur $T^{p}(F) \ast T^{q}(G)$ est exactement ce qui
+rend $\lambda$ additif au sens des $\lambda$-anneaux.
+
+Le feuillet termine en isolant la condition ($\ast$) que doit remplir un Module
+$F$ pour que les $u_{pq\,*}$ de ses composantes soient localement libres sur
+les $\mathcal{O}[\mathfrak{S}_{p_{1}} \times \cdots \times
+\mathfrak{S}_{p_{r}}]$, pour toute décomposition $\sum p_{i} = n$. C'est la
+condition d'admissibilité qui fait fonctionner tout ce qui précède ; son
+énoncé n'est pas lisible au-delà de sa forme.\footnote{La prose de cette
+dernière ligne est presque entièrement perdue. Rien n'en est reconstruit ici.}
+
+\pagerange{20}{29}
+\section*{Cas des schémas : les $\lambda$-anneaux, $CK$ et $GK$ (pages 20 à 29)}
+
+La chemise qui ouvre cette course porte, de sa main, le programme : « Filtration
+des $\lambda$-anneaux, classes de Chern universelles ; $\lambda$-anneaux
+« spéciaux» i.e. avec éléments
+« géométriques» ; Application ». Le dossier
+exécute les deux premiers points et pas le troisième.
+
+\subsection*{Le cadre}
+
+Soit $K$ un $\lambda$-anneau spécial, augmenté vers $\mathbb{Z}$ par
+$\varepsilon$, muni d'une famille $(E_{s})_{s \in S}$ d'éléments
+\emph{géométriques}, c'est-à-dire tels que
+\[
+  \varepsilon(E_{s}) = n_{s} \geqslant 0, \qquad
+  \lambda^{i}(E_{s}) = 0 \ \text{ pour } i > n_{s}, \qquad
+  \lambda^{n_{s}}(E_{s}) \ \text{ inversible.}
+\]
+Ce sont les axiomes que vérifie la classe d'un fibré vectoriel de rang $n_{s}$,
+dont le déterminant est inversible ; d'où le nom. On demande de plus un
+homomorphisme déterminant $\det : K \to K^{*}$ avec $\det(E_{s}) =
+\lambda^{n_{s}}(E_{s})$.\footnote{Les pages 27 et 28 posent ces axiomes ; la
+page 20 les annonce et la page 21 en donne, sous forme de proposition barrée
+d'une grande croix, une variante équivalente en termes des $c^{i}$ : une
+famille engendre $K$ pour la structure de $\lambda$-anneau avec déterminants
+inversibles si et seulement si $c^{i}(E_{s}) = 0$ pour $i > \varepsilon(E_{s})$.
+Il l'avait notée « à prouver directement ? » avant de la rayer.}
+
+On note $I(K) = \ker \varepsilon$, $\gamma^{i}$ les opérations déduites des
+$\lambda^{i}$ par $\gamma_{t} = \lambda_{t/(1-t)}$, et $K^{(i)}$ la filtration
+$\gamma$ : le sous-groupe engendré par les produits
+$\gamma^{i_{1}}(x_{1})\cdots\gamma^{i_{m}}(x_{m})$ avec $x_{j} \in I(K)$ et
+$\sum i_{j} \geqslant i$. Le gradué associé est $GK = \operatorname{gr} K$, et
+les classes de Chern sont
+\[
+  c^{i}(x) \;=\; \gamma^{i}\bigl(x - \varepsilon(x)\bigr) \bmod K^{(i+1)}
+  \;\in\; GK^{i} .
+\]
+
+\subsection*{L'anneau $\widetilde{A}$ et le produit $\ast$}
+
+Pour un anneau gradué $A$, on note $\widetilde{A} = \mathbb{Z} \times
+(1 + A^{\geqslant 1})$, dont les éléments s'écrivent $[\varepsilon,\,
+1 + a^{1} + a^{2} + \cdots]$. L'addition de $\widetilde{A}$ est l'addition des
+rangs et la multiplication des séries ; sa multiplication, notée $\ast$, est
+donnée par les polynômes universels $Q_{n}$ :
+\[
+  c^{n}(x \ast y) \;=\; Q_{n}\bigl(c^{1}(x), \ldots, c^{n}(x);\,
+  c^{1}(y), \ldots, c^{n}(y)\bigr),
+\]
+lesquels sont déterminés par le principe de scindage : si $c(x) =
+\prod_{i}(1 + a_{i})$ sur $\varepsilon(x)$ racines et $c(y) =
+\prod_{j}(1 + b_{j})$ sur $\varepsilon(y)$ racines, alors $c(x \ast y) =
+\prod_{i,j}(1 + a_{i} + b_{j})$. C'est l'anneau où vit la classe de Chern
+totale, et c'est celui que le dossier note $\widetilde{A}$ aux pages 9, 24, 27
+et 40.
+
+\subsection*{L'anneau de Chern $CK$ et la comparaison avec $GK$}
+
+La page 28 définit $CK$ par générateurs et relations : des générateurs
+$c^{i}(x)$ pour $x \in K$ et $i \geqslant 1$, et les relations
+\[
+  \begin{cases}
+    c^{i}(1) = 0 & i \geqslant 1, \\[3pt]
+    c^{n}(x+y) = \displaystyle\sum_{i+j=n} c^{i}(x)\,c^{j}(y)
+      & x, y \in K,\ n \geqslant 1, \\[8pt]
+    c^{n}(x \ast y) = Q_{n}\bigl(c^{1}(x), \ldots ;\, c^{1}(y), \ldots\bigr)
+      & x, y \in I(K),\ n \geqslant 1, \\[5pt]
+    c^{n}(E_{s}) = 0 & n > n_{s}.
+  \end{cases}
+\]
+La dernière relation est celle qui fait intervenir la donnée géométrique.
+Puisque $\lambda^{i}(E_{s}) = 0$ pour $i > n_{s}$ entraîne $\gamma^{n}(E_{s} -
+n_{s}) = 0$ pour $n > n_{s}$, les classes $\gamma^{i}(x - \varepsilon(x))$
+satisfont à toutes ces relations, d'où un homomorphisme
+\[
+  \varphi_{K} : CK \longrightarrow GK, \qquad
+  c^{i}(x) \longmapsto \gamma^{i}\bigl(x - \varepsilon(x)\bigr) \bmod K^{(i+1)},
+\]
+visiblement surjectif. Le feuillet note en passant --- et c'est l'observation
+juste --- que plus la famille $(E_{s})$ est grande, plus $CK$ est petit, et plus
+il y a de chances que $\varphi_{K}$ soit un isomorphisme.\footnote{Le bas de la
+page 28 porte une longue note d'une plume plus fine dont seul le premier mot se
+laisse lire, et une note marginale interrogeant l'itération du produit $\ast$
+sur les $P(\gamma^{i}(x - \varepsilon(x)))$. Ni l'une ni l'autre n'est
+reconstruite ici.}
+
+La page 29 ajoute la réciproque du point de vue : tout homomorphisme de Chern
+$\chi : K \to \widetilde{A}$ respectant les $E_{s}$ envoie $K^{(i)}$ dans
+$A^{(i)}$, d'où une flèche $\psi : GK \to G(\widetilde{A}) \simeq A$ en sens
+inverse. Le feuillet s'arrête après trois lignes, les deux tiers inférieurs
+étant restés blancs.
+
+\subsection*{Le facteur $(-1)^{i-1}(i-1)!$, et la réponse à la question}
+
+La page 20 numérote trois propositions. Des deux premières il ne reste que le
+mot et le numéro, la prose qui les énonçait étant perdue ; la troisième se
+laisse reconstituer, non par son énoncé mais par sa démonstration, qui occupe
+le haut de la page 21.
+
+\textbf{Proposition (page 21).} \emph{Sur la composante de degré $i$,}
+$\varphi \psi = (-1)^{i-1}(i-1)! \cdot \mathrm{id}$.
+
+La démonstration est celle du feuillet, et elle est bonne : $CB \to CK$ et
+$GB \to GK$ étant surjectifs, on se ramène à l'anneau universel $B$ ; pour
+$P \in B^{(i)}$ on a $\varphi\psi$ appliqué à la classe de $P$ égal à
+$\gamma^{i}(P - \varepsilon(P)) \bmod B^{(i+1)}$, et
+\[
+  \gamma^{i}\bigl(P - \varepsilon(P)\bigr) - (-1)^{i-1}(i-1)!\,P
+  \;\in\; B^{(i+1)} .
+\]
+\footnote{La page 20 écrit ce coefficient $(-1)^{i}(i-1)!$ ; c'est
+$(-1)^{i-1}(i-1)!$ qui est correct, comme la page 21 le démontre et comme le
+vérifie le cas géométrique de la page 9, où $c^{r}(\xi^{r}) =
+(-1)^{r-1}(r-1)!\,\eta^{r}$ tandis que $\operatorname{ch}_{r}(\xi^{r}) =
+\eta^{r}$. La page 20 est un feuillet très serré dont la prose de liaison n'est
+pas lisible ; la leçon de la page 21 est retenue.} Il en résulte que
+$\varphi_{K}$ est toujours surjectif, et qu'il devient bijectif après
+tensorisation par $\mathbb{Q}$ ; le feuillet énonce la surjectivité en
+corollaire.
+
+Il pose alors la question, en toutes lettres : « Est-ce que $\varphi_{K}$ est
+toujours bijectif ??? », et répond « Non », le mot encadré, en renvoyant à
+l'exemple qui suit.
+
+\textbf{Exemple (page 21).} Soit $K = \mathbb{Z}[L]/(L-1)^{n}$, avec
+$\lambda_{t}(L) = 1 + Lt$ --- c'est-à-dire $K = K(\mathbb{P}^{n-1})$, comme le
+feuillet le note en marge. La filtration $\gamma$ y est la filtration par les
+puissances de $(L-1)$, si bien que $GK = \mathbb{Z}[\zeta]/(\zeta^{n})$ est sans
+torsion. Or $CK$ a de la torsion, engendrée par la relation
+\[
+  (1+\zeta)^{\,\cdot} \;=\; 1 + (-1)^{n-1}(n-1)!\,\zeta^{n} + \cdots
+\]
+Un homomorphisme surjectif d'un anneau avec torsion sur un anneau sans torsion
+n'est pas injectif : $\varphi_{K}$ ne l'est donc pas.\footnote{Le générateur de
+$CK$ est écrit $\xi$ sur le feuillet ; il est écrit $\zeta$ ici, la lettre
+$\xi$ servant déjà à $1 - L^{-1}$ aux pages 9 à 13 et à une classe de $K(X)$
+aux pages 42 et 43. L'exposant de $(1+\zeta)$ et le générateur exact de l'idéal
+sont illisibles, ainsi qu'une note marginale en diagonale dont seuls l'idéal et
+l'anneau $\mathbb{Z}[\zeta]/\zeta^{n}$ se laissent lire ; l'argument, lui, ne
+dépend d'aucun des deux, et n'est pas reconstruit au-delà.} C'est le
+contre-exemple des pages 9 à 13 --- le même facteur, la même torsion --- énoncé
+sans géométrie.
+
+\subsection*{L'anneau libre, et deux énoncés de finitude}
+
+\textbf{Lemme (page 22).} Sur l'anneau libre $B = \mathbb{Z}\bigl[
+(\lambda^{i}(X_{s}))_{1 \leqslant i \leqslant \varepsilon(s)},\,
+(\lambda^{d}(Y_{t}))_{d \geqslant 1}\bigr]$, engendré par une famille
+géométrique $(X_{s})$ et une famille libre $(Y_{t})$, et muni de la filtration
+$B^{(k)}$ par les monômes de poids $\geqslant k$ en les $\gamma^{i}(X_{s} -
+\varepsilon(X_{s}))$ et $\gamma^{d}(Y_{t} - \varepsilon(Y_{t}))$, la classe
+totale $x \mapsto \widetilde{c}(x)$ vérifie
+\[
+  \widetilde{c}(x+y) = \widetilde{c}(x)\,\widetilde{c}(y),
+  \qquad
+  c^{i}(xy) = Q_{i}\bigl(c^{1}(x), \ldots ;\, c^{1}(y), \ldots\bigr).
+\]
+La première résulte de $\gamma_{t}(x' + y') = \gamma_{t}(x')\gamma_{t}(y')$
+pour $x' = x - \varepsilon(x)$ ; la seconde de la formule correspondante pour
+les $\gamma^{i}$.\footnote{Le feuillet écrit la seconde ligne avec
+$\widetilde{c}(xy)$ au membre de gauche, après avoir biffé une ligne qui
+portait $c^{i}(xy)$. C'est la ligne biffée qui est correcte : le membre de
+droite est homogène de degré $i$. La leçon rayée est retenue ici.} Le feuillet
+annonce ensuite que $\gamma^{i}(xy)$ est un polynôme universel en les
+$\gamma^{k}(x)$ et $\gamma^{h}(y)$ de poids $\geqslant i$, et s'arrête sans
+l'écrire ; c'est la première des choses que le dossier promet et ne donne pas.
+
+\textbf{Proposition (page 24).} \emph{Soit $x$ avec $\varepsilon(x) = n$ et
+$\lambda_{t}(x)$ polynomial de degré $\leqslant n$. Alors
+$\gamma^{i}(x - n) = 0$ pour $i > n$.}
+
+C'est immédiat : $\gamma_{t}(x - n) = \lambda_{t/(1-t)}(x)\,(1-t)^{n} =
+\sum_{i \leqslant n} \lambda^{i}(x)\, t^{i}(1-t)^{n-i}$, polynôme de degré
+$\leqslant n$ en $t$.\footnote{Le feuillet donne un argument différent, passant
+par la nilpotence, dont la moitié des mots manque ; la démonstration ci-dessus
+est celle que la formule elle-même fournit. La \emph{Remarque} et le
+\emph{Corollaire} qui suivent sur le même feuillet portent sur la condition
+exacte de nullité de $n!\,x^{n+1}$ et sur la filtration de $\gamma^{m}(X - m)$
+dans l'anneau $\mathbb{Z}[(\lambda^{i}(X))_{i}]$ ; ils sont trop lacunaires pour
+être restitués, et rien n'en est reconstruit ici.} L'énoncé dit qu'un élément de
+rang fini a une filtration $\gamma$ bornée par son rang : c'est la propriété
+qui rend la filtration utilisable en géométrie, où les fibrés ont un rang.
+
+\pagerange{32}{37}
+\section*{Construction des Chern covariants, et $K^{\bullet}$ et $A^{\bullet}$ à supports (pages 32 à 37)}
+
+Cette course est la plus tardive du dossier et la plus lacunaire : elle est
+écrite au crayon puis à l'encre sur les versos d'un texte dactylographié, et la
+prose qui relie ses formules est presque entièrement perdue aux pages 36 et 37.
+Ce qui suit s'en tient à ce que portent les formules et les titres.
+
+\subsection*{Les catégories dérivées de complexes parfaits}
+
+Soit $f : X \to Y$ localement de type fini. On note $D_{\mathrm{parf}}(f)$ la
+catégorie dérivée des complexes de $\mathcal{O}_{X}$-Modules parfaits
+relativement à $f$, et $K_{\mathrm{parf}}(f)$ le groupe de Grothendieck
+correspondant.\footnote{Le feuillet qualifie cette catégorie d'un adjectif lu
+« hégélienne », que la transcription donne comme incertain et que rien n'éclaire.
+Il n'est pas repris ici. Le mot « parfait » figure deux fois sur la ligne, la
+première biffée.} Pour $Z \subset X$ fermé, on définit de même
+$D_{\mathrm{parf},Z}(X)$ et $K_{Z}(X)$, et pour $\Phi$ une famille de supports
+\[
+  D_{\mathrm{parf},\Phi}(X) = \varinjlim_{Z \in \Phi} D_{\mathrm{parf},Z}(X),
+  \qquad
+  K_{\Phi}(X) = \varinjlim_{Z \in \Phi} K_{Z}(X) .
+\]
+Pour $i : Z \to X$ on a $\mathrm{R}\,i_{*}$ vers $D_{Z}(X)$ et $i_{!}$ vers
+$K_{Z}(X)$ ; et si $i_{n} : Z_{n} \to X$ parcourt les voisinages
+infinitésimaux de $Z$ dans $X$, le foncteur
+\[
+  \varinjlim_{n} D_{\mathrm{parf}}(i_{n}) \longrightarrow D_{Z}(X)
+\]
+est pleinement fidèle.\footnote{L'objet dont $\mathrm{R}i_{*}$ est pris et le
+qualificatif des voisinages $Z_{n}$ sont illisibles. L'énoncé donné est celui
+que la flèche écrite supporte, et pas davantage.}
+
+\subsection*{Les groupes de Chow à supports, et les classes de Chern}
+
+La page 34 demande, en parallèle de $K_{\Phi}(X)$, un anneau de Chow à supports
+$A_{\Phi}(X)$ --- qui n'a pas d'unité, l'élément $1$ n'ayant pas de support
+dans $\Phi$, d'où la parenthèse « (pseudo-)anneaux \ldots{} par voie d'éliminer
+$1$ » --- et des classes de Chern
+\[
+  c^{i}_{\Phi} : K_{\Phi}(X) \longrightarrow A_{\Phi}(X), \qquad i > 0,
+\]
+soumises à la formule de Whitney écrite sans unité :
+\[
+  c^{n}_{\Phi}(x+y) \;=\; c^{n}_{\Phi}(x) + c^{n}_{\Phi}(y)
+  \;+\; \sum_{\substack{p+q=n \\ p,\,q > 0}} c^{p}_{\Phi}(x)\,c^{q}_{\Phi}(y),
+\]
+et compatibles avec les homomorphismes d'oubli du support :
+
+\begin{tikzcd}[column sep=large, row sep=small]
+K_{\Phi}(X) \arrow[r] \arrow[d, "c_{\Phi}"'] & K(X) \arrow[d, "c"] \\
+A_{\Phi}(X) \arrow[r] & A(X)
+\end{tikzcd}
+
+Le feuillet ne construit rien de tout cela : il pose trois cas, et les trois
+sont des questions. Pour $X$ lisse, prendre les cycles à support dans $\Phi$.
+Pour $X$ général, se demander si la « $\lambda$-procédure » --- c'est-à-dire la
+définition de $A$ comme gradué d'une filtration $\gamma$ --- s'applique à
+$K_{\Phi}(X)$. Et enfin : des classes de Chern cohomologiques ? Aucune des
+trois n'est traitée.\footnote{Le feuillet écrit, au milieu de cette page, en
+anglais : « l'anneau de Chow \emph{ordinaire} whatever that means ». C'est le
+seul endroit du dossier où il change de langue.}
+
+\subsection*{Riemann-Roch comme mesure d'un défaut}
+
+La page 36 est un palimpseste dont presque toute la prose est perdue. Ce que
+ses formules dessinent est le programme suivant. On veut des groupes
+$K^{\Phi}(X/S)$ et $A^{\Phi}(X/S)$ \emph{covariants} en $X$ au-dessus de $S$,
+et entre eux un caractère de Chern qui commute strictement aux images
+directes :
+\[
+  \operatorname{ch}^{Y/S}\bigl(g_{!}(x)\bigr)
+  \;=\; g_{*}\bigl(\operatorname{ch}^{X/S}(x)\bigr) .
+\]
+Le caractère de Chern ordinaire, lui, ne commute pas aux images directes ---
+c'est précisément l'objet du théorème. La phrase qui subsiste, « Mais
+« R.R.» s'interprète comme \ldots{} », dit donc
+que Riemann-Roch est ce qui traduit l'écart entre les deux : la classe de Todd
+est la comparaison entre le caractère de Chern covariant et le caractère de
+Chern contravariant.\footnote{Cette lecture est de l'éditeur. Les mots qui
+relient les formules de la page 36 sont perdus au point que la phrase citée
+n'est lisible qu'à un tiers ; ce qui est avancé ici est ce que la disposition
+des formules impose, et rien n'est reconstruit au-delà. C'est, en termes
+d'aujourd'hui, la construction d'une transformation naturelle de la $K$-théorie
+vers l'homologie commutant aux images directes propres --- ce que le théorème
+de Riemann-Roch singulier fera vingt ans plus tard.}
+
+La page 37 dresse une échelle à quatre montants comparant les deux variances :
+
+\begin{tikzcd}[column sep=small, row sep=small, nodes={font=\scriptsize}]
+K^{\bullet}(i_{n}) \arrow[r, "u"] \arrow[d, "\alpha"'] & \varinjlim_{n} K^{\bullet}(i_{n}) \arrow[r] \arrow[d, "\beta"] & K^{\bullet}_{X}(X') \arrow[r] \arrow[d, "\gamma"] & K^{\bullet}(X') \arrow[d, "\delta"] \\
+K_{\bullet}(X_{n}) \arrow[r, "u'"'] & \varinjlim_{n} K_{\bullet}(X_{n}) \arrow[r] & K^{X}_{\bullet}(X') \arrow[r, "w'"'] & K_{\bullet}(X')
+\end{tikzcd}
+
+Les quatre flèches verticales portent la même glose, et c'est la seule chose
+que la page dise d'elles.\footnote{La glose est lue « isom. si $X'/X$ rig. ».
+Ce sont les comparaisons entre la $K$-théorie des fibrés et celle des faisceaux
+cohérents, dont on sait qu'elles sont bijectives sous une hypothèse de
+régularité ; l'abréviation n'est pas tranchée par la transcription et n'est pas
+interprétée ici. Un bloc de trois lignes au milieu du feuillet est entièrement
+raturé, dont ne subsistent en marge que $w'v' = \mathrm{id}$ et $v'w' =
+\mathrm{id}$.} Suit l'expression $\operatorname{ch}(i_{!}x)\cdot
+\operatorname{Todd}(X'/S)$, qui est le membre de gauche de Riemann-Roch relatif,
+puis un titre --- « Filtration sur $K^{\bullet}_{X}(X')$ » --- sous lequel rien
+n'est écrit.
+
+\pagerange{40}{41}
+\section*{R.R. des surfaces : le carré, les trois formules, et la fibration (pages 40 et 41)}
+
+La dernière course du dossier, annoncée par la chemise « R.R. des surfaces, et
+autres cas particuliers divers », est une suite d'exemples calculés. Elle
+n'emploie que l'appareil classique : caractère de Chern, classe de Todd,
+$f_{!}$ et $f_{*}$. Aucun complexe, aucun support, aucune catégorie dérivée.
+
+\subsection*{Le carré}
+
+Soit $f : X \to Y$ un morphisme propre de variétés non
+singulières.\footnote{La page 40 ne dit que « morphisme propre ». La
+non-singularité est indispensable pour que $\operatorname{Todd}(X)$ et
+$\operatorname{Todd}(Y)$ aient un sens et pour que $f_{!}$ opère sur $K(X) =
+K^{0}(X)$ ; elle est ajoutée ici, et les exemples des pages 42 à 44 la
+supposent tous.}
+
+\begin{tikzcd}[column sep=large, row sep=large]
+K(X) \arrow[r, "f_{!}"] \arrow[d, "\operatorname{ch}\,\cdot\,\operatorname{Todd}(X)"'] & K(Y) \arrow[d, "\operatorname{ch}\,\cdot\,\operatorname{Todd}(Y)"] \\
+A(X) \otimes \mathbb{Q} \arrow[r, "f_{*}"'] & A(Y) \otimes \mathbb{Q}
+\end{tikzcd}
+
+\begin{equation*}
+  \operatorname{Todd}(Y) \cdot \operatorname{ch}\bigl(f_{!}(\xi)\bigr)
+  \;=\; f_{*}\bigl(\operatorname{Todd}(X) \cdot \operatorname{ch}(\xi)\bigr)
+  \tag{1}
+\end{equation*}
+
+C'est le théorème de Grothendieck-Riemann-Roch.\footnote{Le feuillet dessine le
+carré en quatre lignes plutôt qu'en deux, décomposant chaque flèche verticale
+en trois : $\widetilde{c}$ vers $\widetilde{A}$, puis $h$ vers $A \otimes
+\mathbb{Q}$, puis $\tau_{h}$. Le composé est le produit du caractère de Chern
+par la classe de Todd, et c'est lui qui est dessiné ici ; la décomposition du
+feuillet dit d'où vient chacun des deux facteurs.}
+
+\subsection*{Les trois variantes}
+
+\emph{Pour $f$ une immersion fermée}, la formule de projection permet de
+rentrer $\operatorname{Todd}(Y)^{-1}$ sous $f_{*}$ et les classes de Todd de
+$X$ et de $Y$ se combinent en celle du fibré normal $N$ de $X$ dans $Y$ :
+\begin{equation*}
+  \operatorname{ch}\bigl(f_{!}(\xi)\bigr)
+  \;=\; f_{*}\Bigl(\operatorname{ch}(\xi)\cdot \operatorname{Todd}(N)^{-1}\Bigr)
+  \tag{1 bis}
+\end{equation*}
+\footnote{Le feuillet écrit $T_{Y/X}$ là où l'on écrit aujourd'hui $N_{X/Y}$ :
+c'est bien le fibré normal, et non un fibré tangent relatif, comme le montre
+l'exposant $-1$ et comme le confirme la formule (2) de la même page, où
+$\lambda_{-1}$ lui est appliqué. La lettre du feuillet est conservée dans la
+transcription et traduite ici.}
+
+Il annonce ensuite pour ce cas « une formule meilleure », numérotée (2), qui
+donnerait la classe de Chern de degré $q+d$ de $f_{!}(\xi)$ à partir de
+$\widetilde{c}(\xi) \ast \lambda_{-1}(\widetilde{c}(N))$ et de $c^{q}(N)$ : ce
+serait la version entière du théorème, ce que l'on appellera Riemann-Roch sans
+dénominateurs, et c'est la suite directe du calcul des pages 9 à 13. Sa forme
+exacte n'est pas établie ici.\footnote{La transcription signale que la ligne
+inférieure de (2), à l'encre bleue et portée sous une barre, est lue comme le
+dénominateur d'une fraction mais peut tout aussi bien être une variante
+ajoutée après coup. Les deux lectures donnent des énoncés différents, et rien
+sur le feuillet ne permet de choisir. L'énoncé n'est donc pas donné ici, ni
+sous une forme ni sous l'autre. Suivent sur le feuillet une référence
+« (5.13) » et la formule $f_{!}(\tau_{X}(F)) = \tau_{Y}(F)$, dont le contexte
+est perdu.}
+
+\emph{Pour $f$ une fibration}, avec $E$ un fibré vectoriel sur $X$ et
+$E^{(i)} = \mathrm{R}^{i}f_{*}(E)$, on a $f_{!}(E) = \sum_{i}(-1)^{i}E^{(i)}$
+et donc
+\begin{equation*}
+  \operatorname{Todd}(Y) \sum_{i}(-1)^{i}\operatorname{ch}\bigl(E^{(i)}\bigr)
+  \;=\; f_{*}\bigl(\operatorname{Todd}(X)\cdot\operatorname{ch}(E)\bigr)
+  \tag{1 ter}
+\end{equation*}
+
+\subsection*{Ce que (1 ter) contient de plus que Hirzebruch}
+
+C'est le meilleur passage du dossier, et il tient en deux observations.
+
+\emph{En degré $0$}, (1 ter) redonne Riemann-Roch sur la fibre.\footnote{Le
+feuillet écrit « Prenant les \ldots{} des deux membres », le mot gouvernant
+toute la réduction étant illisible. Ce que le calcul exige est : les
+composantes de degré $0$. C'est ainsi qu'il est restitué ici, et la lacune est
+signalée.} Le membre de gauche devient $\sum_{i}(-1)^{i}\operatorname{rg}
+E^{(i)} = \chi(Z;\, E|_{Z})$ pour $Z$ une fibre. Le membre de droite devient le
+degré de la composante de degré $p = \dim Z$ de $i^{*}\bigl[
+\operatorname{Todd}(X)\operatorname{ch}(E)\bigr]$, et l'on calcule
+\[
+  i^{*}\bigl(\operatorname{Todd}(X)\bigr)\cdot i^{*}\bigl(\operatorname{ch}(E)\bigr)
+  \;=\; \operatorname{Todd}\bigl(i^{*}T_{X}\bigr)\operatorname{ch}\bigl(E|_{Z}\bigr)
+  \;=\; \operatorname{Todd}(T_{Z})\operatorname{ch}\bigl(E|_{Z}\bigr) ,
+\]
+la dernière égalité parce que le fibré normal d'une fibre est
+trivial.\footnote{C'est la seule chose que la réduction demande, et elle vaut
+dès que $f$ est lisse : $N_{Z/X} \simeq f^{*}T_{Y,y}$ est trivial, donc
+$i^{*}T_{X}$ et $T_{Z}$ ont même classe de Todd. La lissité n'est pas énoncée
+sur le feuillet et est fournie ici.} On retrouve la formule de Hirzebruch pour
+la fibre.
+
+\emph{En degré $\geqslant 1$}, en revanche, (1 ter) donne les classes de Chern
+de $\sum_{i}(-1)^{i}E^{(i)}$ --- et cela, comme le feuillet le souligne, n'est
+pas contenu dans la formule de Hirzebruch proprement dite. Il en tire un
+énoncé qui n'est pas trivial : \emph{pour $n$ grand, la classe de Chern de
+$f_{*}(E(n))$ dépend polynomialement de $n$}.\footnote{Le feuillet porte cet
+énoncé au bas de la page 41 sous une longue barre terminée par une flèche, et
+sa dernière ligne se poursuit en tête de la page 42 : c'est une note ajoutée au
+résultat, non la suite du texte. Les mots « pour $n$ grand » et l'adjectif
+« modifiée » qualifiant la classe de Chern sont donnés comme incertains par la
+transcription ; « modifiée » n'est pas interprété ici. Une note marginale sur
+le bord inférieur gauche, dont ne se laissent lire que « ensuite » et « dans le
+cas général », n'est pas restituée.}
+
+\pagerange{42}{43}
+\section*{Le développement en $n$, et une courbe dans une courbe (pages 42 et 43)}
+
+\subsection*{La dépendance polynomiale en $n$}
+
+Si $h$ est la première classe de Chern du faisceau tordant et $E(n) = E \otimes
+\mathcal{O}(n)$, alors $\operatorname{ch}(E(n)) = \operatorname{ch}(E)e^{nh}$,
+d'où
+\[
+  f_{*}\bigl(\operatorname{Todd}(X)\operatorname{ch}(E(n))\bigr)
+  \;=\; \sum_{k} n^{k}\, f_{*}\!\left(\frac{h^{k}}{k!}\,
+  \operatorname{Todd}(X)\,\operatorname{ch}(E)\right),
+\]
+somme finie puisque $h$ est nilpotente. C'est la démonstration de l'énoncé
+annoncé au bas de la page 41 : le membre de droite est un polynôme en $n$ à
+coefficients indépendants de $n$.\footnote{Le feuillet écrit $\xi$ pour cette
+classe, sur le feuillet même où $\xi$ désigne déjà l'élément $(n,d)$ de $K(X)$.
+Elle est écrite $h$ ici.}
+
+\subsection*{Morphismes propres particuliers}
+
+Le feuillet ouvre alors, sous un titre de sa main séparé par un trait ondulé,
+une suite de cas particuliers. Le premier est celui d'un morphisme d'une courbe
+dans une variété.
+
+Dans tout ce qui suit, $X$ est la courbe source et $Y$ le but.\footnote{C'est ce
+qu'exigent toutes les formules de ces trois feuillets, et ce que porte la
+formule encadrée de la page 42, « $f : X \to Y$ ». Les lettres vacillent
+pourtant : le titre du feuillet 42 annonce « morphismes d'une courbe dans une
+variété $X$ », et la lettre est effacée sous un pâté à chacune de ses premières
+occurrences, ce qui donne à penser qu'il a renommé source et but en cours de
+route. Rien n'a été réparé dans la transcription ; ici, les lettres sont
+tenues, et chaque endroit où le feuillet porte l'autre est signalé.}
+
+Sur une courbe non singulière, $K(X) \simeq \mathbb{Z} + \operatorname{Pic}(X)$,
+l'isomorphisme étant donné par la classe de Chern. Pour $\xi = (n,d)$ :
+\[
+  \operatorname{ch}(\xi) = n + d,
+  \qquad c(T_{X}) = 1 - k_{X},
+  \qquad \operatorname{Todd}(X) = \frac{-k_{X}}{1 - e^{k_{X}}}
+  = 1 - \tfrac{1}{2}k_{X},
+\]
+$k_{X}$ étant la classe canonique, et donc
+\[
+  \operatorname{ch}(\xi)\operatorname{Todd}(X)
+  \;=\; \bigl(1 - \tfrac{1}{2}k_{X}\bigr)(n+d)
+  \;=\; n + \bigl(d - \tfrac{1}{2}n\,k_{X}\bigr).
+\]
+On reconnaît la formule (1) de la page 3, écrite trente-neuf feuillets plus
+tôt : la classe de Todd d'une courbe est $1 - \tfrac12 k_{X}$ dans les deux
+cas, et le degré de ce produit est la caractéristique d'Euler-Poincaré.
+
+\subsection*{a) Le but est une courbe}
+
+Soit $k_{Y}$ son diviseur canonique, $\operatorname{Todd}(Y) = 1 -
+\tfrac12 k_{Y}$, et $\delta$ le degré de $f$, de sorte que $f_{*}(1) = \delta$.
+Alors
+\[
+  f_{*}\bigl(\operatorname{ch}(\xi)\operatorname{Todd}(X)\bigr)
+  \;=\; n\delta + \bigl(f_{*}(d) - \tfrac{1}{2}n\,f_{*}(k_{X})\bigr),
+\]
+et en divisant par $\operatorname{Todd}(Y)$ :
+\[
+  \operatorname{ch}\bigl(f_{!}(\xi)\bigr)
+  \;=\; \bigl(1 + \tfrac{1}{2}k_{Y}\bigr)
+  \Bigl( n\delta + f_{*}(d) - \tfrac{1}{2}n\,f_{*}(k_{X}) \Bigr)
+  \;=\; n\delta + \Bigl[\tfrac{1}{2}n\delta\,k_{Y} + f_{*}(d)
+  - \tfrac{1}{2}n\,f_{*}(k_{X})\Bigr],
+\]
+soit, dans les coordonnées $(\text{rang},\, c^{1})$ :
+\[
+  f_{!}(\xi) \;=\; \Bigl(n\delta,\ \ \tfrac{1}{2}n\delta\,k_{Y}
+  + f_{*}(d) - \tfrac{1}{2}n\,f_{*}(k_{X})\Bigr),
+  \qquad f : X \to Y .
+\]
+\footnote{Le feuillet écrit le membre de gauche de l'avant-dernière ligne
+$\varphi_{X}(f_{!}(\xi))$ : c'est $\varphi_{Y}$ qu'il faut, puisque $f_{!}(\xi)$
+vit dans $K(Y)$. La ligne suivante de la page 43 écrit d'ailleurs $\varphi_{Y}$.
+La lettre du feuillet est reproduite telle quelle dans la transcription, et
+corrigée ici. Dans la formule encadrée il distingue les deux classes canoniques
+en portant la base en indice, $k_{y}$ et $k_{x}$, là où les lignes précédentes
+portaient $k'$ et $k$ ; l'indexation par la base est ce qui est tenu ici.}
+
+\subsection*{Le revêtement}
+
+Appliquant cela à $\xi = [\mathcal{O}_{X}]$, c'est-à-dire $n = 1$, $d = 0$,
+pour $f$ un revêtement de degré $\delta$ : le faisceau $f_{*}(\mathcal{O}_{X})$
+est un fibré vectoriel \emph{sur $Y$}, de rang $\delta$, et sa première classe
+de Chern vaut
+\[
+  c^{1}\bigl(f_{*}\mathcal{O}_{X}\bigr)
+  \;=\; \tfrac{1}{2}\bigl(\delta\,k_{Y} - f_{*}(k_{X})\bigr).
+\]
+\footnote{Le feuillet place $f_{*}(\mathcal{O}_{X})$ « sur $X$ » là où le calcul
+le demande sur $Y$ ; la lettre est reproduite telle quelle dans la
+transcription et corrigée ici. Il indique aussi un degré, dont la transcription
+ne retient que le fragment « $-\,g\,\delta$ » ; le degré que la formule donne
+est $\deg c^{1}(f_{*}\mathcal{O}_{X}) = \delta(g_{Y}-1) - (g_{X}-1)$, ce qui
+est bien $\chi(\mathcal{O}_{X}) - \delta\,\chi(\mathcal{O}_{Y})$ comme il se
+doit. Le fragment lisible ne suffit pas à dire si c'est ce qu'il avait écrit, et
+rien de plus n'est affirmé ici.}
+
+\pagerange{43}{44}
+\section*{b) Une courbe dans une surface, et la formule d'adjonction (pages 43 et 44)}
+
+Soit maintenant $Y$ une surface non singulière et $f : X \to Y$ un morphisme
+depuis une courbe, d'image la courbe $C$, de degré $\delta$ sur son
+image.\footnote{Les trois lignes qui ouvrent ce cas sont barrées d'un long
+trait et portent deux additions interlinéaires ; seuls « classe canonique » et
+deux $k_{Y}$ s'en laissent lire. Le feuillet note $k_{Y}^{1}$ et $k_{Y}^{2}$
+les deux classes de Chern du fibré tangent, la première étant la classe
+canonique ; elles sont écrites $k_{Y}$ et $c^{2}(T_{Y})$ ici.}
+
+De $c(T_{Y}) = 1 - k_{Y} + c^{2}(T_{Y})$ on tire
+\[
+  \operatorname{Todd}(Y) = 1 - \tfrac{1}{2}k_{Y}
+  + \tfrac{1}{12}\bigl[k_{Y}^{2} + c^{2}(T_{Y})\bigr],
+  \qquad
+  \operatorname{Todd}(Y)^{-1} = 1 + \tfrac{1}{2}k_{Y}
+  + \tfrac{1}{12}\bigl[k_{Y}^{2} - c^{2}(T_{Y})\bigr] \cdot
+\]
+\footnote{Le signe qui joint les deux termes du crochet de
+$\operatorname{Todd}(Y)^{-1}$ est recouvert sur le feuillet et la transcription
+ne le tranche pas. Il ne sert nulle part dans la suite : le calcul qui vient
+n'utilise que les termes de degré $\leqslant 1$, puisque $f_{*}$ d'une classe
+de degré $\leqslant 1$ sur une courbe ne dépasse pas le degré $2$ sur la
+surface. Le terme de degré $2$ est écrit ici sous la forme qu'il a, sans que
+rien n'en dépende.}
+
+On a $f_{*}(1) = \delta\,C$, et $f_{*}(k_{X})$, $f_{*}(d)$ sont des classes de
+$0$-cycles. D'où, pour $\xi = (n,d)$ :
+\[
+  \operatorname{ch}\bigl(f_{!}(\xi)\bigr)
+  \;=\; n\delta\,C + \Bigl[\,f_{*}(d) - \tfrac{1}{2}n\,f_{*}(k_{X})
+  + \tfrac{1}{2}n\delta\,(C\cdot k_{Y})\,\Bigr],
+\]
+et en passant à la classe de Chern totale,
+\[
+  c\bigl(f_{!}(\xi)\bigr) \;=\; 1 + n\delta\,C
+  + \Bigl[\,\tfrac{1}{2}n^{2}\delta^{2}C^{2} - \tfrac{1}{2}n\delta\,(C\cdot k_{Y})
+  - f_{*}(d) + \tfrac{1}{2}n\,f_{*}(k_{X})\,\Bigr].
+\]
+Le passage se fait par $c = \exp\bigl(\operatorname{ch}_{1} -
+\operatorname{ch}_{2}\bigr)$ à l'ordre $2$, ce que le feuillet écrit
+exactement.\footnote{Et c'est le quatrième visage du nombre du dossier : les
+deux premiers termes de $\log c = \sum_{m}(-1)^{m-1}(m-1)!\operatorname{ch}_{m}$
+sont $\operatorname{ch}_{1} - \operatorname{ch}_{2}$. Le feuillet écrit
+l'exponentielle et ne nomme pas l'identité ; le rapprochement avec le $(i-1)!$
+de la page 21 et le $(r-1)!$ de la page 9 est de cette lecture.} Pour
+$n = \delta = 1$ :
+\[
+  c\bigl(f_{!}(\xi)\bigr) \;=\; 1 + C
+  + \Bigl[\,\tfrac{1}{2}\bigl(C^{2} - C\cdot k_{Y}\bigr) - f_{*}(d)
+  + \tfrac{1}{2}f_{*}(k_{X})\,\Bigr].
+\]
+
+\subsection*{La dernière page, et la formule qu'elle n'écrit pas}
+
+Le dernier feuillet applique ceci à $f : \widetilde{C} \to Y$, la normalisée
+d'une courbe $C$ tracée sur la surface, avec $\xi = [\mathcal{O}_{\widetilde{C}}]$.
+Il trouve
+\[
+  c^{2}\bigl(\mathcal{O}_{C}\bigr) \;=\; \tfrac{1}{2}
+  \Bigl[\,C^{2} - C\cdot k_{Y} + f_{*}\bigl(k_{\widetilde{C}}\bigr)\,\Bigr],
+\]
+puis, $Y$ étant compacte et $\widetilde{C}$ de genre $g$, en prenant le degré
+des deux membres :
+\[
+  \deg c^{2}\bigl(\mathcal{O}_{C}\bigr)
+  \;=\; \tfrac{1}{2}\bigl[\,C^{2} - C\cdot k_{Y} + 2g - 2\,\bigr]
+  \;=\; \tfrac{1}{2}\bigl(C^{2} - C\cdot k_{Y}\bigr) + g - 1 .
+\]
+\footnote{La surface est appelée $Y$ dans les formules et $X$ dans la phrase qui
+les commente, sans que rien sur le feuillet distingue les deux ; l'indice du
+dernier $k$ est recouvert d'encre et se lit sur la ligne suivante, et le but de
+$f : \widetilde{C} \to \,\cdot$ est effacé sous un pâté. Ce que la cohérence
+demande est ce qui est écrit ici : $Y$ est la surface, $f$ va de $\widetilde{C}$
+dans $Y$, et l'opérateur $K_{2}$ du feuillet est le $\deg$ de la page 3 et le
+$K_{p}$ de la page 41.}
+
+Le feuillet s'arrête là, et le reste de la page est blanc : c'est la fin du
+dossier. Or il est à une identification de la formule d'adjonction. La classe
+$[\mathcal{O}_{C}]$ vaut $1 - [\mathcal{O}_{Y}(-C)]$ dans $K(Y)$, d'où
+$c(\mathcal{O}_{C}) = (1-C)^{-1}$ et $c^{2}(\mathcal{O}_{C}) = C^{2}$ lorsque
+$C$ est lisse. Égaler les deux valeurs donne
+\[
+  C^{2} \;=\; \tfrac{1}{2}\bigl(C^{2} - C\cdot k_{Y}\bigr) + g - 1,
+  \qquad \text{c'est-à-dire} \qquad
+  2g - 2 \;=\; C^{2} + C\cdot k_{Y} .
+\]
+C'est la formule d'adjonction, obtenue comme corollaire de
+Grothendieck-Riemann-Roch pour la normalisée d'une courbe sur une
+surface.\footnote{Ce dernier pas n'est pas sur le feuillet. Il calcule le
+premier membre et s'arrête ; le second calcul, immédiat, n'est nulle part dans
+le dossier, et le rapprochement est de cette lecture. On notera qu'écrite dans
+ce sens, la formule vaut pour $C$ lisse ; pour $C$ singulière, c'est la version
+de gauche qui reste vraie et qui définit le genre géométrique de la
+normalisée --- ce qui est sans doute pourquoi il l'a écrite dans ce sens-là.}
+
+\end{document}

@@ -1,0 +1,1260 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 22, pages 1-29.
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried moves into a
+% footnote. It is held to being mathematically correct as it stands; where the
+% manuscript is loose or mistaken, the true statement is what appears here and
+% the footnote says what the page has. In any dispute of substance the
+% transcription governs: cite batch-01/02.fr.tex.
+%
+% Pass: Opus 5 (claude-opus-5), 2026-09-19 — first pass, unchecked against the
+% pages by a human. The model was chosen explicitly for this pass.
+%
+% Scope: one document for the shelfmark, its two batches read as one argument.
+% Twenty-two of the twenty-nine leaves carry something; pages 4, 6, 7, 8 are
+% blank versos of the offprints, 18 and 25 are covers carrying one word each,
+% and 27 and 29 are printed matter foreign to the folder (they are the versos
+% of the pencil leaves 26 and 28).
+%
+% Spine. The folder asks ONE question in four registers, and the question is:
+% WHEN IS A LOCAL RING SMOOTH OVER ITS BASE IN THE PURELY FORMAL SENSE — every
+% solution modulo a square-zero ideal lifts — AND WHAT MEASURES THE
+% OBSTRUCTION? The answer the folder converges on is 3.13: formally smooth =
+% flat + geometrically regular closed fibre. The obstruction, in every register,
+% is a module of differentials.
+%
+%   pp. 1-8    TWO PRINTED NOTES OF J.-P. JOUANOLOU (CRAS 1963), not
+%              transcribed; only his marginalia, on pages 1, 2, 3 and 5. Both
+%              notes are about the DIFFERENTIAL CRITERION OF REGULARITY (Nakai,
+%              Suzuki, Mount, Kunz: D(A) free iff A regular) and about
+%              D_A(B) = 0. That is the published state of the art on exactly
+%              the fibre condition 3.13 will need. His annotations are a
+%              triage: « connu », « connu (Nagata) », « faux » twice,
+%              « C ⊃ A !!! », « séries formelles ?? », « assez rare ! »,
+%              « non vérifié ».
+%   pp. 9-17   THE TYPESCRIPT, his pages 24 to 32, the numéro 3 of a chapter,
+%              addressed to a « tu ». Lemme 3.2 (criterion for a continuous
+%              homomorphism to be a topological isomorphism), Lemme 3.3 and
+%              Cor. 3.4, 3.5 (products of flats are flat; a strict countable
+%              limit of projectives is flat), Théorème 3.6 (formal smoothness
+%              and uniqueness of the lift), Déf. 3.7 (Cohen algebra), Cor. 3.8
+%              (uniqueness + four equivalent forms), Cor. 3.9 (the local
+%              criterion), Cor. 3.10 (EXISTENCE, via Cohen's structure
+%              theorem), Cor. 3.11, 3.12 (the unramified case), Cor. 3.13 (the
+%              punchline), and a page of self-criticism proposing to throw the
+%              whole numéro away and keep 3.13 alone.
+%   pp. 18-20  A cover inscribed « Questions », then four OPEN QUESTIONS in
+%              ink. Question 2) is the one pages 21-24 answer.
+%   pp. 21-24  Ink. IS A = K[[t_1,…,t_n]] FORMALLY SMOOTH OVER k? Case p > 0
+%              settled by p-bases; case p = 0, « Je suis pessimiste », never
+%              for the discrete topology, with the obstruction exhibited over
+%              k = Q((x_i)).
+%   pp. 25-28  A cover inscribed « Différentielles » (forward-referenced from
+%              p. 21 as « cf. "Diff" »), then pencil, a later campaign: the
+%              square k → K, k ∩ K^p → K^p, the injectivity of
+%              Ω^1_{k/k∩K^p} ⊗_k K → Ω^1_K, and a counterexample in
+%              characteristic p.
+%
+% What only a folder-wide reading can say. Three links, none stated on any one
+% leaf:
+%   - QUESTION 2) OF PAGE 19 IS ANSWERED ON PAGES 21 TO 24. The wording is
+%     nearly verbatim ("est-il ft simple pour sa top. discrète ?" against "A
+%     est-il … pour la topologie discrète ???"), and the answer is: no in
+%     characteristic zero as soon as dim A > 0, yes in characteristic p when
+%     K has a finite p-basis. This is the single strongest piece of evidence
+%     that the folder is one dossier and not four.
+%   - THE DIVIDING LINE IS THE DIMENSION OF Ω_{K/k}. Page 23's proposition
+%     assumes it finite; page 21's marginal notes Ω_{K/k} free; page 22's
+%     counterexample makes it infinite. The three campaigns agree on one
+%     invariant without ever saying so.
+%   - THE OFFPRINTS ARE THE FIBRE CONDITION. 3.13 needs "B ⊗_A k universally
+%     regular over k"; Jouanolou's two notes are about when regularity is
+%     detected by differentials. Nothing in pp. 9-28 cites Jouanolou, so this
+%     link is thematic only, and is stated as such in the body.
+%
+% NOTATION fixed for the folder.
+%   - « formellement simple » is his word; it is written FORMELLEMENT LISSE
+%     throughout, which is today's name and which the folder itself drifts to
+%     on p. 22. The rename is footnoted once, at its first occurrence.
+%   - r(A), his notation for the radical of a local ring, is written 𝔪_A.
+%   - « universellement régulier » is kept as his term and glossed once as
+%     geometrically regular.
+%   - « condition P » is NOT defined in this folder (it belongs to an earlier
+%     numéro). It is kept under his name, and exactly what the folder uses of
+%     it is isolated in the spine section.
+%   - « multiplicité radicielle finie » is likewise not defined here. Kept as
+%     his term; what it is FOR is stated (the NB of p. 14 says it: to know B_0
+%     is Cohen-Macaulay).
+%   - A_i = A/I_i, B_i = B/I_iB, C_i = C/I_iC, B_0 = B/IB throughout.
+%
+% Substantive departures, each footnoted where it occurs:
+%   - p. 11 (Théorème 3.6 (ii)): the five equivalent conditions are typed about
+%     B and must be about C. As typed they are consequences of the theorem's
+%     own hypotheses and the equivalence is vacuous; the proof, which lifts
+%     u_0^{-1} : C_0 → B_0 using formal smoothness of C, settles it. Written
+%     here about C.
+%   - p. 11: the proof says assertion (i) follows "de a)"; it needs a) AND the
+%     handwritten clause b), which was inserted after the proof was typed.
+%   - p. 9: the marginal calls hypothesis d) useless, but the typed proof of
+%     (ii) ⟹ (i bis) uses it. The hypothesis is kept.
+%   - p. 10 (Lemme 3.3): the handwritten « de type fini » on the free modules
+%     is not an embellishment, it is what makes the proof work. Kept, and the
+%     necessity is stated.
+%   - p. 15 (Cor. 3.10): « le théorème de structure 3.4 » cannot be the 3.4 of
+%     this numéro (products of flat modules). It is Cohen's structure theorem,
+%     from numéro 2.
+%   - p. 17 (Cor. 3.13): the handwritten alternative hypothesis is written
+%     "k(B) = k(A)B"; page 15 writes the same clause "r(B) = r(A)B", which is
+%     the hypothesis of 3.12 and the only reading that makes it an alternative.
+%   - p. 22: « de dim A ≥ 0 » is read as dim A > 0. Dimension zero must be
+%     excluded: in characteristic zero every field extension is formally
+%     smooth.
+%   - p. 23: the right half of the Proposition is illegible. The conclusion
+%     given here is the one its hypothesis and the surrounding argument force,
+%     and it is OURS.
+%   - p. 24: the reduction to D(t_i) = 0 is carried out on pp. 22 and 23 in
+%     prose that is largely illegible. Only its shape is given.
+%
+% NUMBERING. The digit opening each statement is typed then gone over in ink
+% and reads as 3 or 4. The transcription retained 3.N. That reading is taken
+% up here and strengthened; the argument is in a footnote in the spine section.
+%
+% What the folder announces and never establishes: the definition of condition
+% P; the definition of « multiplicité radicielle »; the statements 3.1, 2.3,
+% 2.6, 2.12 and 0_III 10.3.1, all cited and none present; the head of Lemme 3.2
+% (his page 23, absent); the four open questions of pp. 19-20, whose connective
+% prose and whose two long marginal additions could not be read at all; the end
+% of the counterexample of p. 24, which stops on the construction; and the role
+% of the norm N_{K/k}, named twice on p. 26 in illegible surroundings.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{22}
+\pages{1}{29}
+\dating{1963-[vers 1967]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{[EGA IV]. [Chapitre] 0 IV. Cohen, différentielles, algèbres formellement simples (Compléments) : tirés à part (1963), tapuscrit annoté (s.d.), notes manuscrites (s.d.). — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Il y a une question qu'on peut poser d'une machine à calculer approximativement,
+et c'est celle de tout ce dossier : \emph{si j'ai résolu un système d'équations
+à une certaine précision, puis-je toujours corriger ma solution pour gagner un
+cran de précision de plus ?}
+
+Prenons le cas le plus familier. On cherche une racine d'un polynôme, on en
+connaît une valeur approchée, et la méthode de Newton la raffine : on remplace
+la valeur approchée par une valeur meilleure, et on recommence. La méthode
+marche à une condition, celle que la dérivée ne s'annule pas au point considéré
+— c'est-à-dire que la courbe y soit \emph{lisse}. Là où la dérivée s'annule, la
+correction se bloque : il existe des solutions approchées qu'aucune correction
+ne prolonge.
+
+L'algèbre a transposé cette situation mot pour mot, et sans aucune limite ni
+aucune convergence. On se donne un anneau, on se donne un idéal dont le carré
+est nul — c'est la façon algébrique de dire « à un infiniment petit près » — et
+l'on demande que toute solution modulo cet idéal se relève en une solution
+exacte. Une algèbre pour laquelle ce relèvement est toujours possible est dite
+\emph{formellement lisse}. Grothendieck, à la date de ces feuillets, l'appelle
+encore \emph{formellement simple}, et l'on verra le mot changer sous nos yeux
+d'un feuillet à l'autre du dossier.
+
+Le problème auquel le dossier s'attaque est qu'on ne sait pas reconnaître les
+algèbres formellement lisses à l'œil. Le relèvement doit être possible pour
+\emph{tous} les anneaux et \emph{tous} les idéaux de carré nul : c'est une
+infinité de vérifications, dont aucune n'est calculable. Il faut donc un
+critère, c'est-à-dire une propriété qui se lise sur l'algèbre elle-même. Le
+dossier en trouve un, et c'est son point d'arrivée : une algèbre locale est
+formellement lisse sur sa base exactement quand elle est \emph{plate} sur elle
+— la base ne se déforme pas sous ses pieds — et quand sa \emph{fibre spéciale},
+ce qui reste de l'algèbre quand on annule tout ce qui vient de la base, est
+\emph{régulière}, et le reste après n'importe quelle extension du corps de
+base. Deux conditions, l'une de famille, l'autre de fibre, et l'on peut les
+vérifier.
+
+Une deuxième histoire traverse le dossier, celle de Cohen. Un théorème de
+structure, dû à Cohen, dit qu'un anneau local complet n'a pas de mystère : il
+ressemble à un anneau de séries formelles à coefficients dans un corps. La
+question relative se pose aussitôt : on se donne une base, on se donne la fibre
+spéciale, existe-t-il au-dessus de la base une algèbre qui redonne cette fibre,
+et est-elle unique ? Le tapuscrit du dossier appelle \emph{algèbre de Cohen} la
+bonne notion pour poser cette question, et il y répond en deux temps :
+l'unicité est acquise sans rien supposer de plus, l'existence ne l'est que si
+l'extension de corps résiduels en jeu est séparable. Le cas d'école est celui
+où la fibre spéciale se réduit à une extension de corps : on retrouve alors
+l'énoncé qui gouverne les anneaux de Cohen et, à travers eux, la façon dont
+tout anneau local complet se laisse écrire.
+
+La troisième histoire est celle des \emph{différentielles}, et c'est elle qui
+donne au dossier sa surprise. Une différentielle est l'objet algébrique qui
+enregistre les directions dans lesquelles on peut dériver. Or il y a deux
+manières de demander qu'une algèbre soit formellement lisse, selon qu'on
+s'autorise ou non à passer à la limite : la topologie \emph{habituelle}
+d'un anneau local permet de dire que deux éléments sont proches quand leur
+différence est très divisible ; la topologie \emph{discrète} l'interdit et
+exige un relèvement exact, en une fois. Grothendieck se demande si la première
+entraîne la seconde. Quatre feuillets manuscrits répondent : non. La raison est
+d'une simplicité désarmante et se voit sur un exemple. Prenons pour corps de
+base un corps engendré par une infinité de variables indépendantes, et
+au-dessus de lui l'anneau des séries formelles en une variable. Dériver une
+série formelle, c'est dériver chacun de ses coefficients ; si chaque
+coefficient fait intervenir une variable neuve, la dérivée de la série fait
+intervenir une infinité de directions à la fois. Or l'objet où la dérivée doit
+atterrir n'autorise que des \emph{sommes finies} de directions. La dérivée
+existe donc terme à terme, elle converge dans un espace un peu plus grand, et
+elle n'atterrit nulle part dans celui qu'on lui impose. L'obstruction n'est pas
+un défaut de la géométrie, c'est un défaut de place.
+
+En caractéristique positive, la même question reçoit la réponse inverse, et
+pour une raison également simple : le corps de base y possède, quand il n'est
+pas trop gros, un système fini de directions indépendantes — une
+\emph{p-base} — et une infinité de directions ne peut pas se produire. C'est
+la même mesure qui décide dans les deux cas : la dimension de l'espace des
+différentielles du corps. Finie, tout va bien ; infinie, rien ne va.
+
+Reste à dire ce que ces feuillets sont, car cela fait partie de ce qu'on y lit.
+Le dossier est un dossier de travail, et il montre quatre régimes d'écriture
+que rien n'oblige à cohabiter. Deux tirés à part imprimés, dont le texte n'est
+pas de lui, et qu'il annote en juge : « connu », « connu (Nagata) », « faux »,
+et en grand, en haut d'une page, « $C \supset A$ !!! ». Un tapuscrit envoyé à
+quelqu'un qu'il tutoie, où il écrit un chapitre et plaide simultanément contre
+lui : « je me repens un peu de la définition 3.7 », « la terminologie “algèbre
+de Cohen” risque plutôt d'embrouiller les idées (d'autant plus que nous
+n'utiliserons plus jamais que “formellement simple”) », et pour finir le
+conseil de tout jeter sauf un énoncé, de le démontrer « en deux pages ou
+trois », « et un point c'est tout ». Une note en bas de feuillet où Serre lui
+apprend qu'un article de Mac Lane de 1940 rend inutile une hypothèse qu'il
+vient de faire, avec la commission passée au destinataire d'aller y voir. Et
+quatre feuillets d'encre où il écrit, avant de savoir : « Je suis
+pessimiste ». C'est le moment d'une pensée mathématique où le pressentiment
+précède la démonstration, et il est rare qu'un tel moment soit conservé par
+écrit.
+
+Les noms sous lesquels on cherchera la suite : lissité formelle et morphismes
+réguliers, théorème de structure de Cohen et anneaux de Cohen, critère local de
+platitude, p-bases et théorème de Cartier, anneaux excellents, ouverture du
+lieu régulier, et — puisque le dernier feuillet de questions s'achève sur ces
+mots soulignés — la résolution des singularités.
+
+\keywords{formally smooth morphism, formal smoothness, formally unramified, formally etale, Cohen structure theorem, Cohen ring, adic ring, ideal of definition, preadmissible ring, completed tensor product, local criterion of flatness, flat module, faithfully flat descent, finitely presented module, product of flat modules, strict projective system, projective limit, regular local ring, regular system of parameters, Cohen-Macaulay ring, geometrically regular fibre, regular homomorphism, module of Kahler differentials, differential criterion of regularity, p-basis, p-independence, imperfect field, separable field extension, inseparable extension, radicial extension, first fundamental exact sequence, deformation and lifting, excellent ring, openness of the regular locus, resolution of singularities, analytically reduced local ring, integral closure finiteness}
+\end{resume}
+
+\pagerange{1}{29}
+\section*{Le fil du dossier, et les conventions}
+
+\emph{Les quatre campagnes.} Le dossier n'est pas un texte, c'est un dossier :
+quatre campagnes d'écriture de dates et de natures différentes, rangées dans
+une même chemise.
+
+\begin{enumerate}
+  \item \emph{Pages 1 à 8}, imprimé. Deux notes aux Comptes rendus de
+  J.-P. Jouanolou, celle du 4 novembre 1963 (t. 257, p. 2948-2950) et celle du
+  14 janvier 1963 (t. 256, p. 842-844). Le texte imprimé n'est pas reproduit
+  dans la transcription ; seules figurent ses annotations, sur les pages 1, 2,
+  3 et 5.
+  \item \emph{Pages 9 à 17}, tapuscrit paginé par lui 24 à 32, avec une
+  campagne de corrections à l'encre. C'est le numéro 3 d'un chapitre, adressé à
+  un correspondant qu'il tutoie et que le dossier ne nomme pas. Du lemme 3.2
+  au corollaire 3.13.
+  \item \emph{Pages 18 à 20}, encre. Une chemise portant le seul mot
+  « Questions », puis quatre questions ouvertes.
+  \item \emph{Pages 21 à 28}, en deux temps : l'encre des pages 21 à 24, sur
+  le verso de feuilles à en-tête de sa dactylographe ; puis, après une chemise
+  portant le seul mot « Différentielles » (page 25), le crayon des pages 26 et
+  28, d'une campagne visiblement postérieure.
+\end{enumerate}
+
+Les pages 4, 6, 7 et 8 sont les versos blancs des tirés à part. Les pages 27 et
+29 portent un imprimé sur la topologie de l'espace des répartitions et le
+groupe des idèles, étranger au chapitre et sans annotation de lui : ce sont les
+versos des feuillets 26 et 28, et ils ne sont pas lus ici.
+
+\emph{Le dossier tient-il ensemble ?} Le titre d'inventaire annonce trois
+choses, « Cohen, différentielles, algèbres formellement simples », et il faut
+dire honnêtement lesquelles des quatre campagnes se répondent et lesquelles ne
+font que voisiner.
+
+Deux liens sont documentés par les feuillets eux-mêmes, et ils sont solides. Le
+premier : la question 2) de la page 19 demande si une algèbre locale
+noethérienne formellement lisse sur $k$ pour sa topologie habituelle l'est
+encore pour la topologie discrète ; les pages 21 à 24 posent exactement cette
+question dès leur première ligne et y répondent. Le second : la page 21 renvoie
+explicitement, entre crochets, à « Diff », c'est-à-dire à la chemise
+« Différentielles » qui ouvre la campagne au crayon quatre feuillets plus loin.
+Les pages 19 à 28 forment donc bien, malgré la différence d'encre et de date,
+une seule enquête, et son unité est écrite sur les feuillets.
+
+Le lien avec le tapuscrit est plus lâche, mais il est réel et il est
+mathématique. Le tapuscrit aboutit au corollaire 3.13, dont la seconde
+condition est que la fibre spéciale $B \otimes_A k$ soit universellement
+régulière sur $k$ ; les questions des pages 19 et 20 portent toutes sur cette
+même condition, la question 1) demandant précisément si l'on peut se dispenser
+de l'hypothèse de finitude que 3.13 fait sur l'extension résiduelle. Rien dans
+le tapuscrit ne renvoie aux questions, ni les questions au tapuscrit, mais elles
+tournent autour du même énoncé et de ses hypothèses superflues.
+
+Le lien avec les tirés à part, en revanche, n'est \emph{pas} documenté : aucune
+ligne des pages 9 à 28 ne cite Jouanolou. Ce qu'on peut dire est thématique, et
+il faut le dire comme tel. Les deux notes annotées portent l'une et l'autre sur
+le critère différentiel de régularité — la régularité d'une localité se lit sur
+la liberté de son module de différentielles absolu — et sur l'annulation du
+module de différentielles relatif ; c'est-à-dire sur les deux ingrédients dont
+3.13 a besoin, la régularité de la fibre et la non-ramification. Que ces deux
+tirés à part de 1963 dorment dans la même chemise que le tapuscrit n'est pas un
+hasard de rangement ; mais l'affirmer plus fortement serait fabriquer une unité
+que les feuillets ne portent pas.
+
+La conclusion est donc mesurée : le dossier tient ensemble comme dossier de
+travail autour d'une question unique, la lissité formelle et ce qui la mesure ;
+il ne tient pas ensemble comme texte. Les trois mots du titre d'inventaire sont
+trois faces de cette question — « Cohen » est le théorème d'existence et
+d'unicité, « algèbres formellement simples » la notion, « différentielles »
+l'obstruction — et c'est la meilleure description qu'on puisse en donner sans
+en inventer davantage.
+
+\emph{La numérotation du tapuscrit.} Les énoncés sont numérotés $3.N$ dans tout
+ce qui suit ; le chiffre de tête est, sur le film, aussi lisible $3$ que
+$4$.\footnote{Le transcripteur a retenu $3.N$ parce que les renvois
+dactylographiés restés intacts dans le corps de la prose donnent $3.1$, $3.5$,
+$3.9$, ainsi que $2.6$ et $2.3$ pour le numéro précédent. Ce raisonnement est
+repris ici, et il se renforce de trois observations que la transcription ne
+tire pas. D'abord, $3.5$ est un énoncé de la série elle-même, page 10 ; le
+renvoi dactylographié intact « en vertu de 3.5. » de la page 11 vise donc une
+étiquette de la série, et étiquette et renvoi s'accordent sur le même chiffre.
+Ensuite, la marginale manuscrite de la page 17 écrit « garder cependant 3.1. au
+Nº3 » au moment même où le corps du texte parle du « présent numéro » : la
+main, et non plus la machine, nomme le numéro et un de ses énoncés, et les
+accorde. Enfin, puisque la transcription note que les corrections manuscrites
+donnent elles aussi $3$, la surfrappe n'est pas une renumérotation du numéro :
+l'indécision porte sur le dessin du chiffre, non sur sa valeur. Reste une
+réserve, qu'il faut énoncer : si toute la série avait été renumérotée, les
+renvois dactylographiés porteraient l'ancienne numérotation et les étiquettes à
+l'encre la nouvelle, et l'argument tomberait. C'est précisément ce que l'accord
+des deux campagnes exclut. Un dernier indice, moins net, va dans le même sens :
+la page 15 renvoie au « théorème de structure 3.4 », qui ne peut être le 3.4 de
+la série et doit être $2.4$ — une faute de frappe d'un $2$ en $3$, dans un
+numéro où le $3$ était sous les doigts.}
+
+\emph{Les noms et les notations, valables pour tout le dossier.} Ce qu'il
+appelle \emph{formellement simple} est écrit ici \emph{formellement lisse},
+qui est le nom d'aujourd'hui ; le dossier fait lui-même le glissement, puisque
+la page 22 écrit « formellement lisse » là où le tapuscrit écrivait
+« formellement simple ».\footnote{« Simple » était, dans la terminologie des
+premiers \emph{Éléments}, le mot pour ce qu'on appelle aujourd'hui
+\emph{lisse} ; le changement de vocabulaire est postérieur à la rédaction du
+tapuscrit et antérieur aux feuillets manuscrits, ce qui donne au dossier un
+repère de datation interne, indépendant de l'inventaire.} Son $r(A)$, le radical
+d'un anneau local, est écrit $\mathfrak{m}_A$. Ses $A_i = A/I_iA$ sont écrits
+$A_i = A/I_i$, et $B_i = B/I_iB$, $C_i = C/I_iC$, $B_0 = B/IB$ de même.
+L'expression \emph{universellement régulière sur $k$} est gardée telle quelle ;
+elle désigne ce qu'on appelle aujourd'hui une algèbre \emph{géométriquement
+régulière} sur $k$, c'est-à-dire régulière et qui le reste après toute
+extension du corps de base.
+
+Deux notions du dossier ne sont pas définies dans le dossier, et il vaut mieux
+le dire d'emblée que de le laisser découvrir.
+
+La \emph{condition P} vient d'un numéro antérieur. Ce que le tapuscrit en
+utilise tient en deux points, et c'est tout ce qu'on en saura ici : elle
+implique la platitude, par le corollaire 3.5, dès que l'anneau de base est
+noethérien ; et elle est impliquée par la platitude sous les hypothèses
+noethériennes de 3.8, dont elle devient alors une reformulation. Le passage
+biffé du corollaire 3.5 laisse voir ce qu'elle disait : un module topologique
+$P$ satisfait P lorsqu'il est isomorphe à la limite projective d'un système
+projectif \emph{strict}, admettant un système cofinal dénombrable, de modules
+projectifs de type fini.\footnote{Le passage est frappé de x sur deux lignes et
+demie et reste partiellement lisible ; on y lit « de $A$-modules projectifs de
+type fini », et les mots « stricte » et « dénombrable » y sont glosés. La
+définition donnée ici est donc une reconstitution à partir d'un passage
+supprimé, et elle n'est pas nécessaire à la suite : les énoncés du numéro
+n'utilisent de P que les deux implications dites.}
+
+La \emph{multiplicité radicielle finie} d'une extension résiduelle n'est pas
+définie non plus. Ce qu'on sait d'elle par le dossier : elle est vérifiée par
+les extensions séparables et par les extensions de type fini (3.9 et 3.13 le
+disent) ; elle ne sert qu'à garantir que la fibre spéciale est de
+Cohen-Macaulay (le NB de la page 14 le dit explicitement) ; et il la croit
+superflue.
+
+\pagerange{1}{8}
+\section*{I. Les deux notes annotées de Jouanolou (pages 1 à 8)}
+
+Huit feuillets imprimés ouvrent le dossier, et leur texte n'est pas de lui. Ce
+sont deux notes de J.-P. Jouanolou aux Comptes rendus, toutes deux de 1963 :
+« Étude différentielle des anneaux locaux réguliers : applications », présentée
+le 4 novembre, et « Sur les modules de différentielles », présentée le 14
+janvier. Elles appartiennent au dossier par leur sujet et par ce qu'il en a
+fait : des verdicts en marge, et rien d'autre.
+
+Le sujet des deux notes est le \emph{critère différentiel de régularité}. Pour
+une localité $A$, on dispose du module des différentielles absolu $D(A)$, et
+une famille de théorèmes — Nakai, Suzuki, Mount, Kunz — relie la régularité de
+$A$ à des propriétés de liberté ou de finitude de ce module. C'est très
+exactement l'ingrédient dont le tapuscrit aura besoin sept feuillets plus loin,
+lorsque le corollaire 3.13 demandera que la fibre spéciale soit régulière ; et
+c'est la seule raison pour laquelle ces huit feuillets sont ici.
+
+Ses annotations forment un tri, et il n'y en a pas d'autre nature. Contre le
+lemme sur le noyau de $\hat{A} \otimes_A D(A) \to D(\hat{A})$ et tout le bloc
+qui le suit jusqu'à la proposition 6 — les énoncés de séparabilité du corps des
+fractions du complété sur celui de $A$, et le passage par le théorème de
+structure de Cohen — un long trait vertical et un mot : « connu ». Contre la
+proposition 7, la finitude de la fermeture intégrale de $A$ dans une extension
+finie de son corps des fractions : « connu (Nagata) ». Contre le dernier alinéa
+de la page 3, celui qui tire du lemme 2 de Zariski-Samuel qu'une localité
+analytique normale est analytiquement normale : « connu » encore. Contre le
+corollaire 3, dont l'hypothèse est que le séparé $D'(A)$ soit de type fini :
+« assez rare ! ». Contre la proposition 2, sur le lieu singulier d'une algèbre
+affine : « séries formelles ?? », c'est-à-dire la question de savoir si le
+passage des séries convergentes aux séries formelles est licite.
+
+Trois annotations sont des objections. En haut de la page 3, en grand, au bout
+d'un trait qui descend vers la première ligne imprimée : « $C \supset A$ !!! ».
+L'énoncé visé parle de « toute $A$-algèbre intègre qui est localisée d'une
+$A$-algèbre finie $C$ », et l'objection est que cet énoncé suppose tacitement
+$A$ contenu dans $C$. Sur la même page, un long trait horizontal souligne la
+parenthèse « (Pour appliquer le lemme, on remarque que $h_1$ et $h_2$ sont
+stables par localisation.) », et la marge porte : « faux ». Enfin, contre le
+lemme du numéro 3 de la première note, une annotation oblique de quatre lignes
+brèves qui commence par « faux », fait figurer une flèche $A \to B$ et s'achève
+sur deux points d'interrogation.\footnote{Cette annotation n'est lisible qu'en
+partie, et ce qui manque est ce qui expliquerait l'objection. Il en va de même
+de trois autres marginales de ces feuillets, qui n'ont pas pu être lues du
+tout : en marge de droite de la page 1, trois lignes courtes contre le
+corollaire 2 [Kunz], dont le premier mot pourrait être « contenu » ; un mot,
+contre la proposition 3, qui se termine par « -ique » ; et le premier trait
+d'une annotation dont la suite se lit « hypothèse ». Aucune reconstruction n'en
+est proposée ici.}
+
+Il faut ajouter une réserve, qui vaut pour toute cette section : le texte
+imprimé n'ayant pas été transcrit, aucun de ces verdicts ne peut être vérifié
+sur pièces. Ce qui est établi est qu'il les a portés, non qu'ils sont fondés.
+
+La seconde note, « Sur les modules de différentielles », ne reçoit que deux
+marques, toutes deux sur son premier feuillet. Contre la définition du numéro 1
+— $B$ est dite \emph{quasi-séparable} sur $A$ lorsque $D_A(B) = 0$, ce qu'on
+appelle aujourd'hui \emph{formellement non ramifiée} — et contre l'affirmation
+que cette propriété est locale : « non vérifié », souligné. Et en bas de page,
+contre la ligne qui traduit la relation $\mathfrak{n} = \mathfrak{m}B$ par « ce
+qui exprime que $B$ n'est pas ramifié sur $A$ » : un point d'interrogation.
+Cette relation $\mathfrak{n} = \mathfrak{m}B$ est celle-là même qui sera
+l'hypothèse du corollaire 3.12, quinze feuillets plus loin, sous la forme
+$\mathfrak{m}_B = \mathfrak{m}_A B$.
+
+\pagerange{9}{17}
+\section*{II. Le tapuscrit : le numéro 3 (pages 9 à 17)}
+
+Neuf feuillets dactylographiés, paginés par lui 24 à 32, forment une suite
+continue et incomplète : elle commence au milieu d'une phrase, sa page 23
+n'étant pas dans le dossier. C'est un brouillon envoyé — il y dit « j'espère
+que tu pourras la rendre plus lisible », « que tu regardes cela » — et les
+annotations à l'encre sont ses corrections au brouillon, portées avant ou après
+l'envoi.
+
+L'architecture du numéro est celle-ci. Un critère pour reconnaître qu'un
+homomorphisme continu est un isomorphisme (3.2) ; trois énoncés de platitude
+(3.3 à 3.5) qui servent à transformer une condition de présentation en une
+condition de platitude ; le théorème central (3.6), qui combine les deux ; une
+définition (3.7) qui nomme la situation ; puis une cascade de corollaires
+(3.8 à 3.13) qui descendent du cadre le plus général au cadre local
+noethérien, où l'énoncé devient reconnaissable.
+
+\pagerange{9}{9}
+\subsection*{Reconnaître un isomorphisme sur la fibre spéciale (lemme 3.2, page 9)}
+
+Le feuillet s'ouvre au milieu des hypothèses. Voici la situation telle qu'elle
+se reconstitue.\footnote{Le début de l'énoncé est sur sa page 23, qui n'est pas
+dans le dossier. Les hypothèses données ici sont celles que la fin de la phrase
+et la démonstration exigent ; elles ne sont pas toutes lisibles sur le
+feuillet.} $A$ est un anneau préadmissible, $I = I_0$ un idéal de définition,
+$(I_i)$ un système fondamental d'idéaux ouverts contenus dans $I_0$, et
+$A_i = A/I_i$. $B$ et $C$ sont des $A$-algèbres topologiques dont les topologies
+sont définies par les puissances d'idéaux contenant respectivement $IB$ et
+$IC$, et l'on suppose $I_iB$ et $I_iC$ fermés — condition automatiquement
+vérifiée si $B$ et $C$ sont noethériens.\footnote{Il porte en marge de ce
+feuillet que cette hypothèse est inutile, qu'elle « résulte du fait que $IB$
+(ou $IC$) [est topologiquement] nilpotent » ; l'abréviation est lue « top. »
+sans certitude. L'hypothèse est pourtant conservée ici, et pour une raison
+qu'on lit dans sa propre démonstration : c'est elle, et elle seule, qui rend
+bijectives les applications canoniques $B \to \varprojlim B_i$ et
+$C \to \varprojlim C_i$, dont l'implication (ii) $\Rightarrow$ (i bis) se
+sert.} Enfin $u : B \to C$ est un homomorphisme continu de $A$-algèbres, et
+$u_i : B_i \to C_i$ l'homomorphisme déduit par passage au quotient.
+
+On suppose une fois pour toutes que $u_0 : B_0 \to C_0$ est un homéomorphisme.
+Cette clause figure sur le feuillet à l'intérieur de chacune des conditions ;
+il a entouré à l'encre ses quatre occurrences et porté devant chacune une
+flèche montante, c'est-à-dire l'ordre de la détacher de la liste. C'est ce qui
+est fait ici, et l'énoncé y gagne sa vraie forme.\footnote{Sans cette
+correction l'énoncé est redondant : la même clause figurerait dans les quatre
+conditions d'une équivalence, ce qui ne peut être que le signe d'une hypothèse
+mal placée. La correction est de sa main et elle est juste.}
+
+\emph{Lemme 3.2.} Sous ces hypothèses, les conditions suivantes sont
+équivalentes.
+
+\begin{enumerate}
+  \item[(i)] $u$ est bijectif.
+  \item[(i bis)] $u$ est un isomorphisme d'algèbres topologiques.
+  \item[(ii)] Pour tout $i$, $u_i : B_i \to C_i$ est bijectif.
+  \item[(ii bis)] Pour tout $i$, en munissant $B_i$ et $C_i$ des filtrations
+  $I$-adiques, l'homomorphisme $\mathrm{gr}_I(B_i) \to \mathrm{gr}_I(C_i)$
+  induit par $u$ est bijectif.
+\end{enumerate}
+
+Si de plus les $C_i$ sont plats sur les $A_i$, ces conditions équivalent
+également à
+
+\begin{enumerate}
+  \item[(iii)] $u_0 : B_0 \to C_0$ est bijectif.
+\end{enumerate}
+
+L'équivalence de (i) et (i bis) est formelle : les topologies de $B$ et $C$
+étant définies par les puissances d'idéaux contenant $IB$ et $IC$, une
+bijection continue compatible est automatiquement bicontinue. L'implication
+(i bis) $\Rightarrow$ (ii) est immédiate, et (ii) $\Rightarrow$ (i bis) résulte
+de la bijectivité des applications $B \to \varprojlim B_i$ et
+$C \to \varprojlim C_i$, elle-même conséquence du fait que les $I_iB$ et $I_iC$
+sont fermés.\footnote{Il renvoie ici à une « rectification à $0_{7.2.4}$ »,
+qui n'est pas dans le dossier.} L'équivalence de (ii) et (ii bis) tient à ce
+que $I$, étant un idéal de définition, est nilpotent dans chaque $A_i$ : les
+filtrations induites sur $B_i$ et $C_i$ sont donc \emph{finies}, et un
+morphisme filtré dont le gradué est bijectif est bijectif.
+
+Reste la seule implication qui coûte, (iii) $\Rightarrow$ (ii bis), et c'est
+elle qui a besoin de la platitude. Il en trace le diagramme de sa main au bas
+du feuillet, et c'est le diagramme qui contient la démonstration :
+
+\begin{tikzcd}
+\mathrm{gr}_I(B_i) \arrow[r, "\mathrm{gr}(u_i)"] & \mathrm{gr}_I(C_i) \\
+B_0 \otimes_{A_0} \mathrm{gr}_I(A_i) \arrow[r, "u_0 \otimes 1"] \arrow[u] & C_0 \otimes_{A_0} \mathrm{gr}_I(A_i) \arrow[u]
+\end{tikzcd}
+
+La flèche verticale de droite est bijective : c'est exactement ce que dit la
+platitude de $C_i$ sur $A_i$, sous la forme du critère local de platitude, qui
+identifie le gradué de $C_i$ au produit tensoriel de sa fibre spéciale par le
+gradué de $A_i$. La flèche verticale de gauche est surjective sans aucune
+hypothèse, la surjection $B_0 \otimes \mathrm{gr}(A_i) \to \mathrm{gr}(B_i)$
+étant définie pour tout $B$. La flèche du bas est bijective par (iii). Le carré
+commute, donc le composé de la flèche du bas suivie de celle de droite est
+bijectif ; ce composé étant aussi celui de la flèche de gauche suivie de celle
+du haut, la flèche de gauche est injective, donc bijective, et celle du haut est
+alors bijective à son tour. C'est (ii bis).
+
+\pagerange{10}{10}
+\subsection*{Produits, présentation finie, platitude (3.3 à 3.5, page 10)}
+
+Trois énoncés, dont la fonction est annoncée en une phrase : « il nous sera
+commode d'avoir un critère permettant de déduire de la propriété P une
+propriété de platitude ».
+
+\emph{Lemme 3.3.} Soient $A$ un anneau, $(P_i)_{i \in I}$ une famille de
+$A$-modules, $P = \prod_i P_i$ leur produit, et $M$ un $A$-module de
+présentation finie. Alors l'homomorphisme canonique
+\[
+  M \otimes_A P \longrightarrow \prod_i (M \otimes_A P_i)
+\]
+est un isomorphisme.
+
+La démonstration est celle du feuillet : on écrit $M$ comme conoyau d'un
+homomorphisme $L' \to L$ de modules libres \emph{de type fini}, on note que le
+foncteur produit est exact, et l'on est ramené au cas $M = A^n$, où l'énoncé
+est trivial. Le membre « de type fini » est une addition manuscrite, et ce
+n'est pas une précision de confort : c'est elle qui fait marcher la
+démonstration.\footnote{Pour $L = A^{(J)}$ avec $J$ infini, l'application
+$A^{(J)} \otimes P \to \prod_i (A^{(J)} \otimes P_i)$ est l'inclusion de
+$P^{(J)}$ dans $(\prod_i P_i^{(J)})$, qui n'est pas surjective. Sans « de type
+fini » la réduction est donc fausse, et l'hypothèse de présentation finie sur
+$M$ perdrait tout emploi. La correction manuscrite répare une lacune réelle de
+la version dactylographiée.}
+
+\emph{Corollaire 3.4.} Supposons que tout $A$-module de type fini soit de
+présentation finie — par exemple $A$ noethérien. Alors tout produit de
+$A$-modules plats est plat.
+
+Il suffit en effet de voir que $P \otimes_A -$ transforme en monomorphisme tout
+monomorphisme $M \to N$ de modules \emph{de type fini}, la platitude se testant
+sur ces seuls monomorphismes ; le lemme 3.3 ramène alors la question à un
+produit de monomorphismes, qui est un monomorphisme.
+
+\emph{Corollaire 3.5.} Supposons $A$ comme en 3.4, par exemple noethérien. Soit
+$P$ un $A$-module isomorphe à la limite projective d'un système projectif
+\emph{strict}, admettant un système cofinal dénombrable, de $A$-modules
+projectifs. Alors $P$ est un $A$-module plat.
+
+Le feuillet dit seulement « on voit facilement que sous les conditions dites,
+$P$ est isomorphe à un produit de $A$-modules projectifs, donc plats, d'où le
+résultat ». L'argument mérite d'être écrit, car il est court et il est le
+ressort de tout le numéro. Le système cofinal dénombrable permet de se ramener
+à un système $(P_n)_{n \in \mathbf{N}}$ dont les applications de transition
+$P_{n+1} \to P_n$ sont surjectives — c'est ce que veut dire \emph{strict}. Pour
+chaque $n$, la suite exacte
+\[
+  0 \longrightarrow K_n \longrightarrow P_{n+1} \longrightarrow P_n
+  \longrightarrow 0
+\]
+est scindée, puisque $P_n$ est projectif ; donc $P_{n+1} \simeq P_n \oplus K_n$,
+et $K_n$, facteur direct d'un projectif, est projectif. En itérant,
+$\varprojlim_n P_n \simeq P_0 \times \prod_{n \geqslant 0} K_n$, produit de
+modules projectifs. Le corollaire 3.4 conclut.
+
+\pagerange{11}{12}
+\subsection*{Le théorème central (3.6, pages 11 et 12)}
+
+\emph{Théorème 3.6.} Soient $A$ un anneau préadmissible muni d'un idéal de
+définition $I = I_0$ et d'un système fondamental $(I_i)$ d'idéaux de définition
+contenus dans $I_0$, et $B$ une $A$-algèbre topologique. On suppose les
+$A_i = A/I_i$ noethériens, et sur $B$ les conditions suivantes :
+
+\begin{enumerate}
+  \item[a)] $B$, comme $A$-module topologique, satisfait la condition P ;
+  \item[b)] $B_0$ est formellement lisse sur $A_0$ ;
+  \item[c)] $B$ est adique ;
+  \item[d)] les idéaux $I_iB$ sont fermés dans $B$ — automatiquement vérifié
+  si $B$ est noethérien.
+\end{enumerate}
+
+Alors :
+
+\begin{enumerate}
+  \item[(i)] $B$ est formellement lisse sur $A$.
+  \item[(ii)] Soit $C$ une $A$-algèbre topologique satisfaisant à c) et d),
+  mais pas nécessairement à a), et soit $u_0 : B_0 \to C_0$ un isomorphisme
+  d'algèbres topologiques. Alors il existe un $A$-homomorphisme continu
+  $u : B \to C$ se réduisant suivant $u_0$.
+\end{enumerate}
+
+Ce dernier étant choisi, les conditions suivantes sont équivalentes :
+
+\begin{enumerate}
+  \item[1)] $C$ est formellement lisse sur $A$ ;
+  \item[2)] $C$ satisfait la condition a), c'est-à-dire la condition P ;
+  \item[3)] les $C_i$ sont plats sur les $A_i$ ;
+  \item[4)] $u$ est un isomorphisme de $A$-algèbres topologiques ;
+  \item[5)] $C$ est isomorphe à $B$ comme $A$-algèbre topologique.
+\end{enumerate}
+
+La liste des cinq conditions est écrite sur le feuillet à propos de $B$ et non
+de $C$. C'est une faute de frappe répétée, et la corriger n'est pas une
+liberté : à propos de $B$, les conditions 1), 2) et 3) sont des conséquences
+immédiates des hypothèses du théorème et l'équivalence est
+vide.\footnote{Conditions 1) et 2) à propos de $B$ redisent respectivement
+l'assertion (i) et l'hypothèse a) ; la condition 3) résulte de a) par 3.5.
+Surtout, sa propre démonstration tranche : elle commence par « supposons 1)
+vérifié » et relève alors $u_0^{-1} : C_0 \to B_0$ en un homomorphisme
+$v : C \to B$, ce qui exige la lissité formelle de \emph{$C$}, non celle de
+$B$. Les cinq conditions portent donc sur $C$, et sont écrites ainsi ici. Les
+étiquettes 4) et 5), qui parlent de $u$ et de $C$, sont d'ailleurs les seules
+que le feuillet écrive correctement.}
+
+\emph{Démonstration.} L'assertion (i) résulte des hypothèses a) et b), par
+l'énoncé 3.1 du numéro, qui ramène la lissité formelle de $B$ sur $A$ à celle
+de $B_0$ sur $A_0$.\footnote{Le feuillet écrit « (i) résulte déjà de a) », sans
+mentionner b). C'est que la clause b) est une insertion manuscrite : la liste
+des hypothèses est renumérotée à la main, un ancien a) est biffé, la clause
+« $B_0$ est formellement simple sur $A_0$ » est intercalée en entier à l'encre,
+et l'ancien b) devient c). La démonstration, tapée avant l'insertion, n'a pas
+été mise à jour. Elle a besoin de b) : la condition P donne la platitude, non
+la lissité formelle.} L'existence de $u$ dans (ii) résulte de (i) et de
+l'énoncé 1.7, qui n'est pas dans le dossier.
+
+Pour les équivalences : 2) $\Rightarrow$ 1) par (i) appliqué à $C$, qui
+satisfait alors a), c) et d), et dont la fibre spéciale $C_0 \simeq B_0$ est
+formellement lisse sur $A_0$ ; 4) $\Rightarrow$ 2) et 5) $\Rightarrow$ 2)
+trivialement, puisque $B$ satisfait P ; 2) $\Rightarrow$ 3) par 3.5, les $A_i$
+étant noethériens. Restent 1) $\Rightarrow$ 4) et 3) $\Rightarrow$ 4).
+
+Supposons 1). Par 1.7, $u_0^{-1} : C_0 \to B_0$ se prolonge en un homomorphisme
+continu $v : C \to B$, grâce aux hypothèses c) et d). Or les $B_i$ sont plats
+sur les $A_i$, par a) et 3.5. Le lemme 3.2, dans ses conditions (i) et (iii),
+les rôles de $B$ et $C$ étant échangés, garantit alors que $v$ est un
+isomorphisme d'algèbres topologiques ; $u$ l'est donc aussi. Supposons 3) :
+le même argument s'applique dans l'autre sens, la platitude requise par 3.2
+(iii) étant cette fois l'hypothèse elle-même. Enfin 4) $\Rightarrow$ 5) est
+immédiat.\footnote{Les implications 4) $\Rightarrow$ 5) et 5) $\Rightarrow$ 2)
+sont des ajouts manuscrits qui ferment le cycle, le tapuscrit s'arrêtant à
+3) $\Rightarrow$ 4). Il note lui-même en clair, à la ligne suivante : « On peut
+certainement améliorer la rédaction de la démonstration, évitant certaines
+redites. »}
+
+Il annonce aussitôt la restriction qui gouvernera tout le reste : « pour
+simplifier, nous nous restreindrons par la suite à des hypothèses
+noethériennes », ce qui permet en particulier de se débarrasser de la
+« désagréable hypothèse d) ».
+
+\pagerange{12}{13}
+\subsection*{Les algèbres de Cohen, et l'unicité (3.7 et 3.8, pages 12 et 13)}
+
+\emph{Définition 3.7.} Soit $A \to B$ un homomorphisme continu d'anneaux
+noethériens préadiques. On dit que $B$ est une \emph{algèbre (topologique) de
+Cohen} sur $A$ si a) $B$ est séparé et complet, c'est-à-dire un anneau adique ;
+b) $B$ satisfait la condition P ; c) $B$ est formellement lisse sur $A$, ou, ce
+qui revient au même par 3.1, $B_0 = B/IB$ est formellement lisse sur
+$A_0 = A/I$ pour un idéal de définition $I$ de $A$.\footnote{Le feuillet écrit
+« $B_0 = B/ID$ » ; il faut lire $B/IB$. La phrase manuscrite qui ferme la
+définition court sur deux lignes en interligne et n'est lisible qu'en partie ;
+elle porte en tête « $= A/I$ ». — Sur le nom : « algèbre de Cohen » est ici une
+notion \emph{relative}, attachée à un homomorphisme, et non la notion absolue
+d'\emph{anneau de Cohen} qui a survécu dans la littérature (un anneau local
+complet dont l'idéal maximal est engendré par $p$). Rien ici n'est à
+confondre avec elle ; et lui-même, quatre feuillets plus loin, propose
+d'abandonner le mot.} Il note en marge qu'il conviendrait d'ajouter dès après
+3.7 que la notion est stable par extension de la base via produits tensoriels
+complétés, « c'est une trivialité ».
+
+\emph{Corollaire 3.8.} Soient $A$ un anneau noethérien, $I$ un idéal, $A$ muni
+de la topologie $I$-préadique, $A_0 = A/I$, et $B_0$ une $A_0$-algèbre
+topologique. Supposons qu'il existe une algèbre de Cohen $B$ sur $A$ telle que
+$B/IB$ soit isomorphe à $B_0$ comme $A_0$-algèbre topologique — ce qui entraîne
+que $B_0$ est elle-même de Cohen sur $A_0$. Alors $B$ est unique à isomorphisme
+près, compatible avec les isomorphismes donnés des algèbres réduites modulo
+$I$ avec $B_0$. De plus, si $B$ est une $A$-algèbre topologique adique telle que
+$B/IB \simeq B_0$, les conditions suivantes sur $B$ sont équivalentes :
+
+\begin{enumerate}
+  \item[0)] $B$ est une $A$-algèbre de Cohen ;
+  \item[1)] $B$ est formellement lisse sur $A$ ;
+  \item[2)] $B$ satisfait la condition P ;
+  \item[3)] $B$ est plat sur $A$ ;
+  \item[3 bis)] pour tout entier $n \geqslant 0$, $B_n = B/I^{n+1}B$ est plat
+  sur $A_n = A/I^{n+1}$.
+\end{enumerate}
+
+L'unicité est 3.6 (ii) lu à l'envers : si $B$ et $B'$ sont deux algèbres de
+Cohen de même fibre spéciale, l'isomorphisme des fibres se relève par (i), et
+la condition 4) de la liste dit que le relèvement est un isomorphisme. Des cinq
+équivalences, seule celle de 3) et de 3 bis) demande un argument, et il dit où
+il est : c'est le critère local de platitude, moyennant les hypothèses
+noethériennes.\footnote{Il l'appelle « la platitude supérieure », nom du numéro
+des \emph{Éléments} où le critère est démontré. L'implication de 3) vers 3 bis)
+est un changement de base ; la réciproque est le critère proprement dit, et
+c'est elle qui utilise la complétion.}
+
+Le corollaire 3.8 est le tournant du numéro, et il le souligne. Il montre
+« l'intérêt qu'il y a, $A$, $I$ et $B_0$ étant donnés, de disposer d'un
+\emph{théorème d'existence} » : l'unicité étant acquise, tout se joue
+désormais sur l'existence.
+
+\pagerange{13}{15}
+\subsection*{Le problème d'existence, et le critère local (3.9, pages 13 à 15)}
+
+La réduction est classique et il la fait en trois lignes : la construction de
+proche en proche, remplaçant $A$ par les $A_i$ et $I$ par ses puissances,
+ramène au cas où $I$ est de carré nul, donc où $A$ est discret. « On obtient
+alors un problème de nature essentiellement infinitésimale, dont nous ignorons
+s'il existe toujours une solution, faute de savoir caractériser la structure des
+algèbres de Cohen $B_0$ sur l'anneau discret $A_0$. » C'est l'aveu central du
+numéro : le problème général d'existence reste ouvert, et ce qui suit n'en
+traite qu'un cas particulier.\footnote{Un premier « Théorème 3.9 » est ici
+biffé de deux grands traits diagonaux sur six lignes. Il portait sur $A$ local
+noethérien de corps résiduel $k$ et $B_0$ une $k$-algèbre locale noethérienne
+complète de corps résiduel $K$ de multiplicité radicielle finie sur $k$,
+extension séparable de $k$, et s'arrêtait au milieu d'un mot. Il est remplacé
+par le corollaire qui suit, puis le théorème d'existence reparaît à 3.10.}
+
+\emph{Corollaire 3.9.} Soit $A \to B$ un homomorphisme local d'anneaux locaux
+noethériens dont l'extension résiduelle est de multiplicité radicielle finie —
+par exemple séparable. Les conditions suivantes sont équivalentes, $A$ et $B$
+étant munis de leurs topologies habituelles :
+
+\begin{enumerate}
+  \item[1)] $B$ est une algèbre de Cohen sur $A$ ;
+  \item[2)] $B$ est plat sur $A$, complet, et $B_0 = B/\mathfrak{m}_A B$ est
+  une algèbre de Cohen sur $k = A/\mathfrak{m}_A$, c'est-à-dire formellement
+  lisse sur $k$.
+\end{enumerate}
+
+Une troisième condition est écrite à l'encre dans l'énoncé, « $B$ est
+formellement lisse sur $A$ », puis en partie annulée d'un griffonnage ; c'est
+celle que le corollaire 3.11 ajoutera, à deux feuillets de là, sous la forme
+« $B$ est complet et formellement lisse sur $A$ ». Elle n'est pas retenue ici,
+puisqu'il l'a lui-même déplacée.\footnote{L'énoncé dactylographié était une
+phrase du type « pour que $B$ soit une algèbre de Cohen, il faut et il suffit
+que \ldots » ; la main y plante trois numéros 1), 2), 3) et biffe « il faut et
+suffit que », retournant la phrase en liste de conditions équivalentes. La
+forme donnée ici est celle que ces corrections produisent.}
+
+Il note entre parenthèses ce qui allège tout : sur un corps, une algèbre
+topologique est de Cohen si et seulement si elle est adique et formellement
+lisse. La condition P disparaît, puisque tout module sur un corps est libre et
+que les quotients $B_0/J_n$ forment un système projectif strict dénombrable.
+
+\emph{Démonstration de} 2) $\Rightarrow$ 1). Tout revient à montrer que $B$
+satisfait la condition P, ce qui ramène au cas où $A$ est artinien. Par les
+résultats du numéro 2, $B_0$ est régulier ; on choisit un système régulier de
+paramètres de $B_0$ — un système de paramètres formant une $B_0$-suite
+suffirait — et on le relève en un système $x = (x_1, \ldots, x_r)$ de
+paramètres de $B$. Les idéaux $J_n$ engendrés par les $x^n = (x_1^n, \ldots,
+x_r^n)$ forment un système fondamental de voisinages de $0$ dans $B$. Les
+$B/J_n$ sont alors plats sur $A$, par division successive par un élément
+régulier ; et $A$ étant artinien local, un module plat y est
+projectif.\footnote{Sur un anneau local artinien, plat entraîne libre, donc
+projectif ; le feuillet écrit seulement « comme $A$ est artinien, ils sont donc
+projectifs ». — Une phrase manuscrite traverse la page à cet endroit, sur deux
+lignes, et n'a pas pu être lue : on n'en relève que les fragments « que \ldots\
+3) $\Rightarrow$ 2) », « \ldots\ suffisante » et « \ldots\ d'ailleurs ci-dessous
+3.11. ». Rien n'en est reconstruit ici, et l'argument donné ci-dessus est
+celui du corps dactylographié seul.}
+
+Suit un NB, barré de six longs traits diagonaux au crayon bleu mais resté
+lisible d'un bout à l'autre, et c'est le passage le plus parlant du tapuscrit.
+Il y dit d'abord à quoi sert l'hypothèse qu'il vient de faire : « on n'a
+utilisé l'hypothèse sur la multiplicité radicielle que pour savoir que $B_0$
+est Cohen-Macaulay. L'hypothèse faite est très probablement inutile. » Puis :
+« Serre vient de me dire que Mac-Lane a prouvé la réciproque de 2.3. sans
+hypothèse de multiplicité rad finie, dans “Note on a relative structure of
+$p$-adic fields”, Ann Math t. 41, 1940, page 751-753. Cela vaudrait peut-être
+le coup, pour le coup d'œil, que tu regardes cela et donnes le résultat complet
+dans 2.3. » En marge du feuillet suivant, à propos de la démonstration de 3.11,
+il revient dessus : « Réduction inutile dans le cas “vrai” du
+NB. »\footnote{Le NB est barré, non supprimé, et il est resté intégralement
+lisible ; il est restitué ici parce qu'il dit à quoi sert une hypothèse que
+l'énoncé fait sans la justifier, et qu'aucun autre feuillet ne le dit. La page
+suivante porte, à l'encre, l'amorce de la correction qu'il en tire : compléter
+l'hypothèse de 3.9 « avec : ou $\mathfrak{m}_B = \mathfrak{m}_A B$ », qui est
+exactement l'hypothèse du corollaire 3.12.}
+
+\pagerange{15}{16}
+\subsection*{Le théorème d'existence, et le cas non ramifié (3.10 à 3.12, pages 15 et 16)}
+
+\emph{Corollaire 3.10 (existence).} Soient $A$ un anneau local noethérien de
+corps résiduel $k$, et $B_0$ une $k$-algèbre qui soit un anneau local
+noethérien et une $k$-algèbre de Cohen, c'est-à-dire formellement lisse sur $k$
+et complète pour sa topologie ordinaire. Supposons de plus l'extension
+résiduelle $K/k$ séparable — ce qui n'est pas une restriction si $B_0 = K$,
+mais en est évidemment une en général. Alors il existe une $A$-algèbre
+topologique de Cohen $B$ qui se réduit suivant $B_0$ ; elle est unique à
+isomorphisme près par 3.8, et c'est un anneau local noethérien complet.
+
+La démonstration est un dévissage en deux cas types, et elle est jolie. Le
+théorème de structure de Cohen donne $B_0 \simeq K[[T_1, \ldots,
+T_n]]$.\footnote{Le feuillet écrit « en vertu du théorème de structure 3.4 ».
+Ce ne peut pas être le 3.4 du numéro, qui porte sur les produits de modules
+plats ; c'est le théorème de structure de Cohen, qui appartient au numéro 2. La
+référence est donc à lire $2.4$.} Le critère 3.9 2) et la transitivité de la
+platitude ramènent alors aux deux cas $1^{\mathrm{o}}$) $B_0 = K$ et
+$2^{\mathrm{o}}$) $B_0 = k[[T_1, \ldots, T_n]]$ : dans le premier on invoque le
+résultat général de $0_{\mathrm{III}}$ 10.3.1, dans le second il suffit de
+prendre $B = \hat{A}[[T_1, \ldots, T_n]]$. Autrement dit : l'extension du corps
+résiduel et l'adjonction de variables formelles sont les deux seuls
+mouvements, et chacun se relève pour son propre compte.
+
+\emph{Corollaire 3.11.} Sous les conditions de 3.9, l'extension résiduelle
+étant de multiplicité radicielle finie, les conditions 1) et 2) équivalent
+aussi à : 3) $B$ est complet et formellement lisse sur $A$.
+
+Tout revient à prouver que $B$ est plat sur $A$, et le procédé est une descente.
+On fait une extension de la base $A \to A'$, avec $A'$ local, libre de type fini
+sur $A$, à extension radicielle convenable ; on trouve alors un $B'$ local sur
+$A'$, encore formellement lisse sur $A'$, et cette fois à extension résiduelle
+\emph{séparable}. Le théorème d'existence 3.10 s'applique, et 3.8 (équivalence
+de 0) et 1)) donne que $B'$ est de Cohen sur $A'$, donc plat sur $A'$. Donc $B$
+est plat sur $A$.\footnote{Cette dernière implication est la descente fidèlement
+plate de la platitude : $A'$ étant libre de type fini et local sur $A$, il est
+fidèlement plat, et $B' = B \otimes_A A'$ plat sur $A'$ entraîne $B$ plat sur
+$A$. Le feuillet écrit seulement « Donc $B$ est plat sur $A$ ».}
+
+\emph{Corollaire 3.12.} Soient $A \to B$ un homomorphisme local d'anneaux
+locaux noethériens tels que $\mathfrak{m}_B = \mathfrak{m}_A B$, et $K/k$
+l'extension résiduelle. Les conditions suivantes sont équivalentes : 1) $B$ est
+complet et formellement lisse sur $A$ ; 2) $B$ est complet, plat sur $A$, et
+$K/k$ est séparable ; 3) $B$ est une algèbre de Cohen sur $A$. De plus, une
+extension séparable $K$ de $k$ étant donnée, il existe une algèbre de Cohen $B$
+sur $A$ se réduisant suivant $K$, et $B$ est unique à isomorphisme de
+$A$-algèbres près.
+
+C'est le cas d'école, et il vaut la peine de dire ce qu'il est en langage
+d'aujourd'hui : l'hypothèse $\mathfrak{m}_B = \mathfrak{m}_A B$ dit que $B$ est
+non ramifié sur $A$, la fibre spéciale se réduit alors au seul corps $K$, et la
+lissité formelle jointe à la non-ramification est ce qu'on appelle aujourd'hui
+la \emph{lissité formelle étale}. L'énoncé dit donc : les extensions locales
+complètes non ramifiées de $A$ correspondent exactement aux extensions
+séparables de son corps résiduel, et chacune est unique. C'est l'énoncé sur
+lequel reposent la construction des anneaux de Cohen et, plus tard, celle de
+l'hensélisé strict.
+
+\pagerange{16}{17}
+\subsection*{L'énoncé qui reste, et le plan de rédaction abandonné (3.13, pages 16 et 17)}
+
+Avant le dernier corollaire, un paragraphe où il change de registre. « La
+rédaction commence à faire un peu touffu, j'espère que tu pourras la rendre
+plus lisible. » Puis un regret sur sa propre définition : il n'est « pas
+vraiment naturel de supposer $B$ séparée et complète pour sa topologie propre,
+mais simplement pour sa topologie $IB$-adique », et il laisse le choix à son
+correspondant, en prévoyant l'effet de la modification — dans 3.9 à 3.12 il
+faudrait « simplement supprimer à certains endroits le mot “complet” ». Le
+feuillet s'achève sur un premier jet manuscrit du corollaire 3.13, aussitôt
+annulé de cinq grandes boucles ; le feuillet suivant le reprend au
+propre.\footnote{Du premier jet on lit « $A \to B$ \ldots\ local d'anneaux
+locaux nœth., \ldots\ de corps \ldots\ à mult.\ deg.\ finie. Alors conditions
+équivalentes », et rien de plus : les quatre lignes sont d'une écriture très
+rapide et n'ont pas pu être lues davantage. Ce qu'elles apportent n'est donc
+pas un contenu mais une chronologie — l'énoncé final a été essayé une fois
+avant d'être tapé.}
+
+\emph{Corollaire 3.13.} Soit $A \to B$ un homomorphisme local d'anneaux locaux
+noethériens. On suppose l'extension résiduelle $k(B)/k(A)$ de multiplicité
+radicielle finie — par exemple séparable, ou de type fini — ou bien
+$\mathfrak{m}_B = \mathfrak{m}_A B$.\footnote{Cette dernière clause est une
+addition manuscrite, écrite « $k(B) = k(A)B$ ». Lue ainsi elle n'a pas de sens.
+La page 15 porte, également à l'encre, l'instruction de compléter l'hypothèse
+de 3.9 « avec : ou $r(B) = r(A)B$ » ; c'est la même clause, c'est l'hypothèse
+du corollaire 3.12, et c'est la seule lecture qui en fasse une alternative
+utilisable. Elle est écrite ici sous cette forme, et la correction est nôtre.}
+On munit $A$ et $B$ de leurs topologies habituelles. Alors les conditions
+suivantes sont équivalentes :
+
+\begin{enumerate}
+  \item[(i)] $B$ est formellement lisse sur $A$ ;
+  \item[(ii)] $B$ est plat sur $A$, et $B_0 = B \otimes_A k$ est une algèbre
+  universellement régulière sur $k$.
+\end{enumerate}
+
+Les deux conditions étant invariantes par remplacement de $B$ par son complété
+$\hat{B}$, on se ramène au cas où $B$ est complet, et l'énoncé est alors
+contenu dans 3.11, compte tenu de ce que pour $B_0$, formellement lisse et
+universellement régulier coïncident — c'est l'énoncé 2.6 du numéro précédent,
+qui n'est pas dans le dossier.
+
+C'est l'énoncé sur lequel tout le numéro converge, et c'est celui qu'on
+reconnaît aujourd'hui : un homomorphisme local d'anneaux locaux noethériens est
+formellement lisse si et seulement s'il est plat à fibre spéciale
+géométriquement régulière. C'est la définition même de ce qu'on appelle un
+\emph{homomorphisme régulier}, et c'est le point de départ de toute la théorie
+qui en découle.
+
+Il le sait, et le dernier paragraphe du dossier est un plan de rédaction contre
+lui-même. « Du point de vue pratique, les résultats du présent numéro
+consistent essentiellement en 3.13, l'unicité du $B$ correspondant à un $B_0$
+donné, et enfin l'existence moyennant la séparabilité de $K/k$. À force de
+dévissage et de généralité, cette substance n'apparaît pas assez clairement, et
+la terminologie “algèbre de Cohen” introduite concurremment à “formellement
+simple” risque plutôt d'embrouiller les idées (d'autant plus que nous
+n'utiliserons plus jamais que “formellement simple”). » Suit la recommandation :
+énoncer 3.13 en théorème, le démontrer « en deux pages ou trois » en laissant
+de côté « tout le fatras anneaux admissibles, algèbres de Cohen etc. »,
+commencer par l'existence d'un $B$ satisfaisant (i) et (ii) quand $K/k$ est
+séparable, s'y ramener par descente comme dans 3.11, conclure par comparaison
+du $B$ type avec le $B$ donné « ce qui donne en même temps l'unicité, et un
+point c'est tout ». Une marginale, écrite verticalement sur quatre lignes,
+sauve deux choses du naufrage : « garder cependant 3.1 au Nº3. On peut signaler
+2.6 pour remarque, à réserver pour l'avenir. »
+
+\pagerange{18}{20}
+\section*{III. Questions ouvertes (pages 18 à 20)}
+
+Une feuille nue portant en haut à droite le seul mot « Questions » enveloppe
+deux feuillets d'encre. Ce sont des questions qu'il se pose, numérotées 1) à
+4), et il faut dire tout de suite dans quel état elles nous parviennent : les
+énoncés numérotés ont leur squelette, la prose qui les relie ne se laisse lire
+qu'en fragments, et chacun des deux feuillets porte en outre, écrit en oblique
+de bas en haut dans toute la marge de gauche, un long bloc d'ajouts postérieurs
+— une douzaine de lignes sur le premier, une vingtaine sur le second, avec des
+renvois numérotés et des passages soulignés — qui n'ont pas pu être lus du
+tout.\footnote{Rien n'est reconstruit ici de ces deux blocs, ni de la prose de
+liaison. Ce qui suit est donc, pour cette section seule, moins une lecture
+modernisée qu'un relevé de ce qui est sûr ; les questions 3) et 4)
+particulièrement sont données dans un état qui ne permet pas de les
+interpréter. Sur le premier feuillet on distingue seulement, dans les premières
+lignes de la marge, « Faut-il supposer \ldots\ vraiment \ldots ? Peut-être
+qu'\ldots », et une formule qui est soit $\Lambda = VA$ soit
+$\mathfrak{p} \cap A$.}
+
+\emph{Question 1).} Soit $A$ une algèbre locale noethérienne sur $k$. Est-il
+vrai que $A$ est formellement lisse sur $k$ si $A$ est universellement
+régulière sur $k$ ?
+
+C'est exactement la réciproque du corollaire 3.13 dépouillée de son hypothèse
+de finitude. Sur un corps la platitude est automatique, de sorte que la
+condition (ii) de 3.13 se réduit à la régularité universelle de $A$ ; la
+question demande donc si l'hypothèse de multiplicité radicielle finie faite sur
+l'extension résiduelle peut être levée. Le NB de la page 14 disait déjà qu'il
+la croyait superflue.\footnote{Le feuillet porte entre crochets, à la suite de
+la question, une glose partiellement illisible qui a la forme d'une définition
+— « pour hom. local $A \to B$ d'anneaux locaux noethériens, équivalence entre
+“ft simple” et “universellement régulier” » — c'est-à-dire la formulation
+générale de 3.13. Le rapprochement fait ci-dessus repose sur cette glose et sur
+l'énoncé 3.13 ; il n'est écrit nulle part sur le feuillet.}
+
+\emph{Question 2).} Soit $A$ une algèbre locale noethérienne sur $k$,
+formellement lisse sur $k$ pour sa topologie habituelle. Est-il vrai que $A$
+est formellement lisse pour sa topologie discrète ?
+
+C'est la question du dossier. Elle est reprise mot pour mot par la première
+ligne de la page 21, et les quatre feuillets qui suivent y répondent ; c'est
+l'objet de la section IV ci-dessous, et c'est le seul endroit du dossier où
+deux campagnes d'écriture se répondent explicitement. Une variante relative est
+esquissée à la suite, dont il ne reste que la forme : $A$ plat sur un anneau
+$\Lambda$, tous deux noethériens, et la question de savoir si la lissité
+formelle des complétés pour les topologies habituelles entraîne celle de $A$
+sur $\Lambda$ pour la topologie discrète.
+
+\emph{Question 3).} $B$ plat sur $A$, $A$ et $B$ noethériens. L'ensemble des
+points de $\mathrm{Spec} B$ où la fibre est formellement lisse sur le
+corps résiduel du point correspondant de $\mathrm{Spec} A$ est-il
+ouvert ?
+
+C'est une question d'ouverture du lieu lisse, et c'est tout ce qu'on en peut
+dire avec certitude : la moitié des mots qui désignent l'ensemble en question
+manque.\footnote{La formulation donnée ici est la seule que les fragments
+lisibles — « l'\ldots\ de $\mathrm{Spec} B$ dans l'\ldots\ fermé dans le
+$\mathrm{Spec} A$ \ldots\ est ft simple sur le corps résiduel de $A$,
+est-il ouvert ? » — rendent plausible, et elle est nôtre. La question se
+poursuit sur le feuillet suivant par un crochet ouvert et non refermé.} Deux
+choses en revanche sont sûres et valent d'être relevées. La première est la
+suite immédiate, sur la page 20 : « faut-il supposer que $A$ et $B$ soient des
+“bons anneaux” ». C'est la question qui allait recevoir sa réponse dans le nom
+d'\emph{anneau excellent}, et le mot n'est pas encore là. La seconde est une
+ligne barrée, réunie par un crochet à l'encre à la mention « Cf IV 2.10.1 » :
+c'est le seul renvoi précis à un autre chapitre que portent ces deux
+feuillets.\footnote{Le renvoi n'est pas identifié ici : le dossier ne contient
+pas le chapitre visé, et la transcription n'a pas ouvert les \emph{Éléments}
+imprimés.}
+
+Le feuillet porte encore, entre deux blancs, trois lignes dont on ne relève que
+les ancres : une mention « d'extension résiduelle finie » ; une question sur un
+« critère jacobien » de Nagata pour une algèbre locale noethérienne ; et une
+dernière ligne, qui est celle qu'on retient, où « bons » et « la résolution des
+singularités » sont soulignés sur la feuille et où l'on lit que c'est acquis
+« en caractéristique $0$ ».\footnote{Le reste de ces trois lignes est illisible,
+et notamment ce à quoi se rapporte l'affirmation. On ne peut donc pas dire ce
+qu'il tient pour acquis en caractéristique zéro, seulement qu'il l'y tient pour
+acquis \emph{pour les bons anneaux} et qu'il souligne, à la suite, la
+résolution des singularités. Le dossier n'est pas daté ; la résolution en
+caractéristique zéro est le théorème de Hironaka de 1964. Aucune autre
+inférence n'est tirée ici de cette ligne.}
+
+\emph{Question 4).} $A \to B$ un homomorphisme d'anneaux noethériens, et de
+nouveau une question d'ouverture d'un lieu, portant cette fois sur un quotient.
+
+Elle est tracée en colonne étroite dans la moitié droite du feuillet, et ses
+dernières lignes chevauchent l'en-tête imprimé du papier. Elle n'est pas
+restituable : ce qui se lit en est une localisation $A' = A_{\mathfrak{p}}$, un
+$B'$, un $\Lambda \subset B'$, un produit tensoriel $B \otimes_{A'}$ et la
+clause finale « $B'$ plat sur $A'$ », dans un ordre que la page ne permet pas
+de reconstituer.\footnote{Les identifications $A'$ et $B'$ sont elles-mêmes
+données comme douteuses par la transcription. Rien n'est proposé ici.}
+
+\pagerange{21}{24}
+\section*{IV. $K[[t_1,\ldots,t_n]]$ est-il formellement lisse sur $k$ ? (pages 21 à 24)}
+
+Quatre feuillets d'encre, écrits d'un trait, sur le verso de feuilles à en-tête
+de sa dactylographe. Ils s'ouvrent sur la question 2) de la page 19, reposée
+dans les mêmes termes : une algèbre locale séparée et complète, formellement
+lisse pour la topologie habituelle, l'est-elle pour la topologie discrète ?
+Trois points d'interrogation ferment la ligne. La réponse tient en deux cas, et
+ils sont opposés.
+
+\pagerange{21}{21}
+\subsection*{Caractéristique $p > 0$ : les p-bases suffisent (page 21)}
+
+En caractéristique $p$, la lissité formelle d'une extension se lit sur les
+p-bases, et c'est ce qu'il utilise. Soit $A \simeq K[[t_1, \ldots, t_n]]$ avec
+$K/k$ une extension, et supposons $K$ fini sur $K^p$ — c'est dire que $K$
+possède une p-base finie sur $k$. On prend alors une p-base $(x_1, \ldots,
+x_m)$ de $K$ et on lui adjoint les variables $t_1, \ldots, t_n$. Le point est
+que la complétion selon les $t_i$ ne détruit pas la p-indépendance : le système
+$(x_1, \ldots, x_m, t_1, \ldots, t_n)$ est une p-base de $A$ sur $k$, et $A$
+est formellement lisse sur $k$, pour la topologie discrète comme pour
+l'autre.\footnote{Le feuillet accompagne cette conclusion d'une formule dont la
+parenthèse n'est pas refermée, « $k(A^p \simeq K \otimes_{K^p} A^p$ », qui dit
+que $K$ et $A^p$ sont linéairement disjoints sur $K^p$ — c'est-à-dire
+exactement que les $t_i$ restent p-indépendants au-dessus de $K$. Le terme
+après le signe $\simeq$ est repassé et n'a pas été lu avec certitude. La marge
+porte, isolément : « $\Omega_{K/k}$ est libre sur $K$ », qui est la traduction
+de l'hypothèse de p-base et qui annonce l'invariant dont tout dépendra.} Il
+ajoute le renvoi « [cf. “Diff”] », qui vise la chemise « Différentielles »
+quatre feuillets plus loin : c'est le dossier qui se cite lui-même.
+
+\pagerange{22}{24}
+\subsection*{Caractéristique nulle : « Je suis pessimiste » (pages 22 à 24)}
+
+Le cas contraire s'ouvre sur ces quatre mots, et sur une conjecture qu'il pose
+avant de la démontrer : dès que $\dim A > 0$, $A$ n'est \emph{jamais}
+formellement lisse sur $k$ pour la topologie discrète.\footnote{Le feuillet
+porte « Je présume que de dim $A \geqslant 0$ », lecture dont la moitié est
+illisible. La dimension nulle doit être exclue : $A$ se réduit alors au corps
+$K$, et en caractéristique nulle toute extension de corps est séparable, donc
+formellement lisse pour la topologie discrète. C'est $\dim A > 0$ qui est écrit
+ici, et la correction est nôtre.}
+
+Le mécanisme est celui-ci, et il est entièrement contenu dans une question de
+place. Si $A$ est formellement lisse sur $k$ pour la topologie discrète, la
+suite exacte fondamentale des différentielles
+\[
+  \Omega^1_{k} \otimes_{k} A \longrightarrow \Omega^1_{A}
+  \longrightarrow \Omega^1_{A/k} \longrightarrow 0
+\]
+se complète à gauche par un zéro et se scinde ; en particulier il existe une
+rétraction $\Omega^1_A \to \Omega^1_k \otimes_k A$, et en la composant avec la
+différentielle de $A$ on obtient une dérivation
+\[
+  D : A \longrightarrow \Omega^1_{k} \otimes_{k} A
+\]
+qui induit $d_{k}$ sur $k$. C'est cette dérivation que les pages 22 à 24
+cherchent, et c'est son inexistence qui est l'obstruction.
+
+\emph{L'exemple.} Prenons $k = \mathbf{Q}(x_i : i \in I)$ avec $I$ infini, et
+$A = k[[t]]$. Alors $\Omega^1_{k}$ est un $k$-espace vectoriel de base
+$(dx_i)_{i \in I}$, de sorte que
+\[
+  \Omega^1_{k} \otimes_{k} A \simeq A^{(I)} \subsetneq \prod_{i \in I} A\,dx_i ,
+\]
+la somme directe étant \emph{strictement} contenue dans le produit dès que $I$
+est infini. Toute la démonstration est là.
+
+\emph{L'argument.} Supposons donnée une telle $D$, et supposons d'abord
+$D(t) = 0$. Alors pour tout $n$, $D(\mathfrak{m}^n) \subset \mathfrak{m}^n
+\cdot (\Omega^1_k \otimes_k A)$, puisque $\mathfrak{m}^n = t^n A$ et que
+$D(a t^n) = D(a)\,t^n$. La dérivation $D$ est donc automatiquement continue
+pour les topologies $\mathfrak{m}$-adiques ; le but étant
+$\mathfrak{m}$-adiquement séparé, $D$ est entièrement déterminée par ses
+valeurs sur les polynômes, et l'on a nécessairement
+\[
+  D\Big(\sum_{\lambda} a_{\lambda} t^{\lambda}\Big)
+  \;=\; \sum_{\lambda} d_{k}(a_{\lambda})\, t^{\lambda} .
+\]
+Or le membre de droite n'a aucune raison d'appartenir à $A^{(I)}$. Il suffit,
+pour le prendre en défaut, de choisir une suite d'indices distincts $i_0, i_1,
+i_2, \ldots$ et des coefficients $a_n \in k$ tels que $d_k(a_n)$ ait une
+composante non nulle sur $dx_{i_n}$ — par exemple $a_n = x_{i_n}$ — et de poser
+\[
+  f = \sum_{n \geqslant 0} a_n t^{n} .
+\]
+La suite des sommes partielles de $D(f)$ est de Cauchy pour la topologie
+$\mathfrak{m}$-adique et converge donc dans le complété de $A^{(I)}$, qui
+contient $A^{(I)}$ strictement ; mais sa limite a une infinité de composantes
+non nulles et n'appartient pas à $A^{(I)}$. La dérivation $D$ ne peut donc pas
+exister, et $A$ n'est pas formellement lisse sur $k$ pour la topologie
+discrète.\footnote{Le feuillet 24 s'arrête sur la construction de $f = \sum a_n
+t^n$ ; la conclusion n'est pas écrite. Elle est fournie ici, et la rédaction
+de l'argument de continuité l'est aussi : les pages 22 et 23 disent seulement
+que $D(a)$ est « une combinaison linéaire finie de certains $\ldots x_i$,
+$i \in J$ », ce qui est la même observation prise par l'autre bout. — La
+réduction au cas $D(t) = 0$ est ce que les bas de pages 22 et 23 mènent, en
+passant à un sous-corps $k_0 = \mathbf{Q}(x_i : i \in J)$ engendré par les
+indices $J$, en nombre fini, qui apparaissent dans $D(t)$ ; mais la prose qui
+l'exécute est un palimpseste et n'est pas lisible. Seule sa forme est donnée
+ici. Le feuillet 22 porte en outre une prescription « $D(x_i) = 1/\alpha\,x_i$ »
+dont la lettre au dénominateur est une seule lettre, lue $\alpha$ sans
+certitude ; elle n'est pas utilisée ici.}
+
+\emph{Ce que la page 23 énonce.} Entre la conjecture et le contre-exemple, il
+pose une proposition dont l'hypothèse est nette et dont la conclusion ne l'est
+pas : $k$ un corps, $K$ une extension telle que $\Omega_{K/k}$ soit \emph{de
+dimension finie} sur $K$, et $A = K[[t_1, \ldots, t_n]]$. La conclusion est
+que $A$ est alors formellement lisse sur $k$ pour la topologie
+discrète.\footnote{La moitié droite de l'énoncé est illisible, et la conclusion
+donnée ici est nôtre. Elle est celle que l'hypothèse force : si $\Omega_{K/k}$
+est de dimension finie sur $K$, alors $\Omega_{K/k} \otimes_K A$ est un
+$A$-module libre de \emph{rang fini}, somme directe et produit coïncident, et
+l'obstruction exhibée trois lignes plus bas s'évanouit. Elle est aussi celle
+que la suite du feuillet suppose, puisqu'il y cherche une $D$ à valeurs dans
+$\Omega_{K/k} \otimes_K A$ induisant $d_{K/k}$ et qu'il conclut sur un
+« l'hypothèse ! ». Aucune autre conclusion ne rendrait compte de ces deux
+choses.}
+
+C'est ce qui unifie les deux cas, et c'est le vrai contenu de ces quatre
+feuillets : l'invariant qui décide n'est ni la caractéristique ni la dimension,
+c'est \emph{la dimension de $\Omega_{K/k}$ sur $K$}. En caractéristique $p$,
+l'existence d'une p-base finie la rend finie, et tout va bien. En
+caractéristique nulle sur un corps engendré par une infinité de variables, elle
+est infinie, et rien ne va. Les trois campagnes du dossier — la marginale de la
+page 21, la proposition de la page 23, le contre-exemple des pages 22 et 24 —
+disent la même chose de trois manières, sans que le dossier le dise jamais.
+
+\pagerange{25}{28}
+\section*{V. Différentielles : le carré $k \to K$ et son contre-exemple (pages 25 à 28)}
+
+Une feuille crème par ailleurs blanche porte en haut à droite, souligné, le
+seul mot « Différentielles » : c'est la chemise à laquelle renvoyait la page
+21. Ce qu'elle enveloppe est d'une autre campagne, au crayon, d'aspect
+postérieur, et n'occupe que deux feuillets.\footnote{Les pages 27 et 29, versos
+de ces deux feuillets, portent un imprimé sur la topologie de l'espace des
+répartitions et le groupe des idèles, sans rapport avec le chapitre et sans
+annotation de lui. Elles ne sont pas lues.}
+
+\emph{La remarque.} Soit $K$ un corps de caractéristique $p > 0$ et $k$ un
+sous-corps. Il considère le carré
+
+\begin{tikzcd}
+k' = k \cap K^{p} \arrow[r, no head] \arrow[d, no head] & K^{p} \arrow[d, no head] \\
+k \arrow[r, no head] & K
+\end{tikzcd}
+
+et pose la question de l'injectivité de l'application canonique
+\[
+  \Omega^{1}_{k/k \cap K^{p}} \otimes_{k} K \longrightarrow \Omega^{1}_{K} ,
+\]
+dans le prolongement de la suite $\Omega^{1}_{k'} \otimes_{k'} K \to
+\Omega^{1}_{k} \otimes_{k} K \to \Omega^{1}_{K}$.\footnote{Le feuillet dessine
+le carré avec $k \to K$ en haut, muni d'une pointe de flèche, et les trois
+autres côtés sans pointe ; il est redressé ici de manière que les quatre côtés
+soient des inclusions et que le sous-corps commun soit en haut à gauche. Le
+contenu est le même et les deux dispositions sont également légitimes. — La
+prose qui entoure la question est presque entièrement illisible : on y
+distingue des différentielles $d_{k/k'}x$, $d_{K/k'}\gamma$, $d_{K/K^p}x$,
+$d_{K/K^p}\gamma$ et, à deux reprises, une norme $N_{K/k}$ dont le rôle ne se
+laisse pas reconstituer.}
+
+C'est la question de la validité, pour une extension de corps en
+caractéristique $p$, de la première suite exacte fondamentale des
+différentielles. Elle est équivalente à une condition de séparabilité, et elle
+est fausse en général : il en construit un contre-exemple, et c'est le seul
+passage complètement démontré de ces deux feuillets.
+
+\emph{Le contre-exemple.} Soit $\mathbf{F}_0$ le corps premier à $p$ éléments.
+On prend $x$, $y$, $a_1, \ldots, a_{p-1}$ algébriquement indépendants sur
+$\mathbf{F}_0$, et l'on pose
+\[
+  a_0 = y - \sum_{i=1}^{p-1} a_i x^{i} ,
+  \qquad\text{de sorte que}\qquad
+  y = \sum_{i=0}^{p-1} a_i x^{i} .
+\]
+On pose alors $K = \mathbf{F}_0(x, a_0^{1/p}, a_1^{1/p}, \ldots,
+a_{p-1}^{1/p})$, de sorte que $K^p = \mathbf{F}_0(x^p, a_0, a_1, \ldots,
+a_{p-1})$ : tous les $a_i$ sont dans $K^p$, tandis que $x$, qui est de degré
+$p$ sur $K^p$, n'y est pas. Enfin $k = \mathbf{F}_0(x,y)$, qui est bien
+contenu dans $K$ puisque $y = \sum a_i x^i$. On note $k' = k \cap K^p$, et l'on
+observe que $x^p \in k'$ et $x \notin k'$, de sorte que $k'(x)$ est de degré
+$p$ sur $k'$, de base $1, x, \ldots, x^{p-1}$.
+
+Deux vérifications. La première est que dans $\Omega^1_K$, les différentielles
+de $x$ et de $y$ sont \emph{liées} : les $a_i$ étant dans $K^p$, ils sont
+annulés par toute dérivation de $K$, et la relation $y = \sum a_i x^i$ donne
+\[
+  d y = \Big(\sum_{i=1}^{p-1} i\,a_i x^{i-1}\Big)\,d x
+  \qquad \text{dans } \Omega^1_K .
+\]
+La seconde est que dans $\Omega^1_{k/k'}$ elles ne le sont pas, parce que le
+couple $(x,y)$ est p-indépendant sur $k'$. C'est l'argument de la page 28, et
+il est par l'absurde. Si $(x,y)$ n'était pas p-indépendant sur $k'$, alors
+$k = k'(x,y)$ serait de degré au plus $p$ sur $k'$, donc égal à $k'(x)$, et
+$y$ s'écrirait $y = \sum_{i=0}^{p-1} a'_i x^{i}$ à coefficients $a'_i \in k'$.
+Mais $x \notin K^p$, donc $1, x, \ldots, x^{p-1}$ est aussi une base de
+$K^p(x)$ sur $K^p$, et les deux écritures de $y$ à coefficients dans $K^p$
+coïncident : $a'_i = a_i$ pour tout $i$. On aurait donc $a_i \in k =
+\mathbf{F}_0(x,y)$, ce qui est absurde, les $a_i$ ayant été pris
+algébriquement indépendants de $x$ et de $y$.
+
+Donc $dx$ et $dy$ engendrent dans $\Omega^1_{k/k'} \otimes_k K$ un sous-espace
+de dimension deux sur $K$, dont l'image dans $\Omega^1_K$ est la droite
+$K\,dx$ : l'application n'est pas injective, et la remarque est
+tranchée.\footnote{Les deux feuillets portent, autour de cet argument, plusieurs
+essais biffés du même exemple — une version en $\alpha$, $y - \alpha x$ et
+$b = a^{1/p}$, et une réduction où l'on pose $a_i = 0$ pour
+$2 \leqslant i \leqslant p-1$, qui ramène au cas $y = a_0 + a_1 x$ — ainsi
+qu'une remarque finale
+indiquant que $\mathbf{F}$ peut être un corps fini. Ils ne sont pas rendus
+ici : ce sont des variantes du même contre-exemple, et aucune n'est écrite
+assez complètement pour être vérifiée. La reconstitution donnée ci-dessus est
+celle des fragments cohérents des pages 26 et 28 ; l'identification du corps de
+base $\mathbf{F}$, que le feuillet écrit tantôt $\mathbf{F}$ tantôt
+$\mathbf{F}_0$, est nôtre.}
+
+\end{document}

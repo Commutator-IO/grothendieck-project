@@ -1,0 +1,1297 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 21, pages 1-28.
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried moves into a
+% footnote. It is held to being mathematically correct as it stands; where the
+% manuscript is loose or mistaken, the true statement is what appears here and
+% the footnote says what the page has. In any dispute of substance the
+% transcription governs: cite batch-01/02.fr.tex.
+%
+% Pass: Opus 5 (claude-opus-5), 2026-09-19 — first pass, unchecked against the
+% pages by a human. The model was chosen explicitly for this pass.
+%
+% Scope: one document for the shelfmark, its two batches read as one argument.
+% Twenty-four of the twenty-eight leaves carry mathematics; pages 1 and 14 are
+% kraft wrappers, pages 2 and 12 blank versos.
+%
+% Spine. The folder asks ONE question and answers it three times, in three
+% categories of increasing looseness: WHEN IS AN OBJECT ON X ALREADY KNOWN FROM
+% ITS RESTRICTION TO X - Y, Y CLOSED? The answer is always the same shape — a
+% vanishing condition on local cohomology along Y, checkable point by point —
+% and the folder's work is to make that shape survive the loss of additivity.
+%
+%   pp. 3-13   THE TYPESCRIPT, « 2. Généralités sur certains foncteurs de
+%              modules », Prop. 2.1 to Remarques 2.17. The additive toolkit:
+%              (a) a cohomological functor vanishes iff it vanishes on a
+%              generating family (2.1-2.5); (b) a left exact contravariant
+%              functor on I-power-torsion modules is Hom(-, H) for a single
+%              module H = colim T(A_n) (2.6-2.11); (c) consequences — the
+%              vanishing criterion in terms of H (2.12, 2.13), Ass H = the
+%              generic points (2.14), H injective iff T exact (2.15, 2.16),
+%              and the sheaf-theoretic generalisation (2.17).
+%   pp. 15-20  SHEAVES OF SETS, in his hand. (P1) and (P2): F -> i_* i^* F
+%              injective, resp. bijective. Localisation Loc_x(X) at a point,
+%              the pointwise form of the conditions, Prop. 3 (global iff
+%              pointwise on Y), Cor. 4 (stability), Lemme 5 (sections over the
+%              localisation are a filtered colimit), and the noetherian
+%              induction.
+%   pp. 21-28  FIBERED CATEGORIES, in his hand. Déf. 6: P1/P2/P3 = the
+%              restriction functor is faithful / fully faithful / an
+%              equivalence. Translation into the sheaves Hom(f,g); the induced
+%              fibered category F_(x); Prop. 7 (global iff pointwise);
+%              Cor. 8 (stability); the proofs; Cor. 10 (the conditions ARE the
+%              vanishing of H^i_Y); and the closing special case of torsors,
+%              Prop. 9, where H^0_Y and H^1_Y are the kernel and cokernel of
+%              F -> i_* i^* F.
+%
+% What only a folder-wide reading can say. Three links, none of them stated on
+% any one leaf, and the first is the folder's hinge:
+%   - the module H^i = colim_m T^i(A_m) of 2.12 IS the local cohomology of the
+%     manuscript half. The typescript builds it abstractly, as the object
+%     representing a left exact functor, and never writes H^i_Y; the manuscript
+%     writes H^i_Y and never says where it comes from. Read together, the
+%     typescript is the construction of the very object the manuscript's
+%     criterion is stated in.
+%   - the noetherian induction is ONE move used twice in two categories: in 2.3
+%     a maximal subobject admitting a composition series is shown to be the
+%     whole object; on pp. 19 and 26 a maximal point of Y carries the induction
+%     over the closed subsets of Y. The typescript proves the abstract form.
+%   - the marginal N.B. of p. 15 — « regarder aussi la propriété : surjective »
+%     — is answered eleven leaves later. Surjectivity at the level of OBJECTS,
+%     not of sections, is exactly the third condition P3 of Déf. 6, and it is
+%     what the whole of pp. 24-27 is spent on.
+%
+% NOTATION fixed for the folder. The two halves collide and are separated here:
+%   U   — the typescript has no name for X - Y; pp. 15-20 write U, pp. 21-28
+%         write a script U. WRITTEN HERE: U throughout.
+%   F   — the typescript writes F for a general object of C (2.3, 2.4, 2.5);
+%         pp. 15-28 write F for a sheaf and script F for the fibered category.
+%         WRITTEN HERE: M, N for objects of C; F for a sheaf; script F for the
+%         fibered category. Nothing is written F in the first half.
+%   H   — the typescript's H (2.12 ff.) and the manuscript's H^i_Y are the same
+%         object; the identification is made explicit in the spine section and
+%         the two notations are kept apart in the body, because the folder
+%         itself never joins them.
+%   X_(x) — the set of generizations of x with the induced topology, his
+%         Loc_x(X). X'_(x) = X_(x) - {x}.
+% A is a commutative noetherian ring, I an ideal, A_n = A/I^{n+1}, X = Spec A,
+% Y = V(I), U = X - Y, i : U -> X. Sheaf Hom is written script-H om.
+%
+% Substantive departures, each footnoted where it occurs:
+%   - p. 3 (2.3): the leaf defines a system of generators by « il existe un
+%     M in C », which is vacuous. It must be M in G, and is written so.
+%   - p. 8: « modules de type fini sur C » where the argument needs A. Written
+%     over A; the leaf's reading is footnoted, as the transcriber flagged it.
+%   - p. 8: the same subcategory is written C^n and C_n on one leaf. C_n here.
+%   - p. 9: Prop. 2.9 has a heading and no statement. The statement given here
+%     is the one the surrounding paragraph forces, and is ours.
+%   - pp. 9-10: Cor. 2.10 is cut by the leaf's end and 2.11 falls entirely in
+%     the gap. 2.7 and 2.8 are attached to no legible statement and are
+%     reconstructed only as far as the back-references allow.
+%   - p. 13 (2.15): « En vertu de Krull » for what is the Artin-Rees lemma, and
+%     the containment is written I^n N contains N cap I^m N where the argument
+%     and the next display both need N cap I^m M.
+%   - p. 27 (Cor. 10): the ranges are written i <= 1 (i <= 2, i <= 3) and are
+%     one too high in each case; p. 28 states the correct ones for P1 and P2,
+%     and the H^2_Y of the display on the same leaf confirms the third.
+%   - p. 27: the illegible exponent on the right-hand H is 1, forced by
+%     H^i_Y = R^{i-1} i_*; the reading is ours and is footnoted as such.
+%   - p. 26: the proof glues an object over W with one over U along W cap U.
+%     That is effectivity of descent for the covering {W, U} — the fibered
+%     category must be a stack. Déf. 6 asks only for a fibered category.
+%   - p. 22: the essential surjectivity clause is written with F(W) where the
+%     argument needs F(V).
+%   - p. 24: (ii) carries a capital X where the point x is meant.
+%
+% NUMBERING. His draft's, and disordered, and NOT reordered here: the
+% typescript runs 2.1 to 2.17 with 2.7, 2.8, 2.9 and 2.11 carrying no legible
+% statement; the manuscript runs Déf. 6, Prop. 7, Cor. 8 (p. 24), Cor. 10
+% (p. 27), Prop. 9 (p. 28). The sections below follow the leaves, so Cor. 10 is
+% read before Prop. 9, and the discordance is stated rather than smoothed.
+%
+% What the folder announces and never establishes: the property (P4), named
+% once on p. 15 and never used; the « propriété surjective » of the same
+% marginal note, in its sheaf-of-sets form; the definition of « espace
+% noethérien spécial » and of Loc_x, announced on p. 15 in a line that is
+% almost entirely illegible; the statements 2.7, 2.8, 2.9 and 2.11; and the
+% Bourbaki exposé number of 2.17, left as four dots on the leaf.
+
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{21}
+\pages{1}{28}
+\dating{[vers 1960-1967]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{[Chapitre] 0 III : tapuscrit et copies de tapuscrit annotés (s.d.), notes manuscrites (s.d.). — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Ce dossier pose une question qu'on peut énoncer sans aucun vocabulaire
+technique : \emph{si je connais un objet partout sauf sur une petite partie
+fermée, est-ce que je le connais partout ?}
+
+Deux exemples classiques donnent les deux réponses possibles. Prenons le plan
+complexe et retirons-en l'origine. La fonction $1/z$ est parfaitement
+holomorphe sur ce qui reste, et elle ne se prolonge pas au point retiré : ici,
+connaître la fonction en dehors de l'origine ne suffit pas. Prenons maintenant
+l'espace complexe de dimension deux et retirons-en encore l'origine. Cette
+fois, toute fonction holomorphe sur ce qui reste se prolonge, et de façon
+unique, à l'espace entier : c'est un théorème de Hartogs, et il dit que la
+réponse a changé. Qu'est-ce qui a changé ? Pas la nature de l'objet retiré — un
+point dans les deux cas — mais son \emph{épaisseur relative} : dans le plan
+complexe, un point est de codimension un, et l'on peut tourner autour ; dans
+l'espace de dimension deux, il est de codimension deux, et il n'y a pas assez
+de place autour de lui pour qu'une fonction y prenne un comportement sauvage.
+
+Tout le dossier est une machine à mesurer cette épaisseur, et à en tirer des
+conséquences. La mesure s'appelle aujourd'hui la \emph{profondeur} le long de
+la partie fermée, et l'on trouve son nom sur la chemise de kraft qui enveloppe
+la seconde moitié des feuillets : « profondeur $\geqslant 2$ pour faisceaux
+d'ensembles ». Deux conditions sont isolées. La première, notée $(P_1)$, dit
+qu'une section est \emph{déterminée} par ce qu'elle vaut en dehors du fermé :
+deux sections qui coïncident dehors coïncident partout. La seconde, notée
+$(P_2)$, ajoute que toute section définie dehors \emph{provient} d'une section
+définie partout. La première est la profondeur $\geqslant 1$, la seconde la
+profondeur $\geqslant 2$, et le théorème de Hartogs est le cas où la seconde
+est vérifiée.
+
+Le problème, et c'est lui qui occupe les vingt-quatre feuillets, est que ces
+deux conditions ne se laissent pas vérifier directement. On voudrait les
+ramener à quelque chose de local — les tester point par point — et à quelque
+chose de calculable. Le dossier procède en deux temps, et les deux temps sont
+matériellement séparés : onze feuillets tapés à la machine, puis treize
+feuillets manuscrits.
+
+Les feuillets tapés construisent l'outillage, et ils le font dans le cadre le
+plus confortable, celui où l'on peut additionner : les modules sur un anneau.
+Deux idées y sont mises en place. La première est un principe d'économie : pour
+vérifier qu'une certaine mesure est nulle, il n'est pas nécessaire de la
+calculer sur tous les objets, il suffit de la calculer sur une famille
+d'objets assez riche pour engendrer tous les autres — exactement comme on
+vérifie qu'une application linéaire est nulle en la testant sur une base. La
+seconde est un principe de représentation : une mesure qui se comporte bien
+vis-à-vis des suites exactes n'est pas un objet informe, c'est toujours
+« prendre les homomorphismes vers un seul module fixe » ; et ce module fixe se
+fabrique par un passage à la limite explicite. Ce module, le tapuscrit ne lui
+donne pas de nom ; c'est celui que l'on appelle aujourd'hui la
+\emph{cohomologie locale} le long du fermé.
+
+Les feuillets manuscrits appliquent l'outillage, et ils commencent par le
+priver de ce qui le rendait confortable. Un faisceau d'ensembles n'a pas
+d'addition : on ne peut ni soustraire deux sections ni parler du noyau d'une
+application. Les conditions $(P_1)$ et $(P_2)$, elles, gardent un sens, et la
+question devient : le principe de localisation survit-il ? La réponse est oui,
+et le prix à payer est l'introduction, en chaque point, d'un espace plus petit
+— l'ensemble des points dont le point considéré est une spécialisation — sur
+lequel la condition se lit de façon purement locale. La démonstration est une
+récurrence sur les parties fermées, c'est-à-dire exactement le même mouvement
+que celui qui, dans les feuillets tapés, servait à fabriquer les suites de
+composition.
+
+Le dernier tiers du dossier fait un pas de plus, et c'est le plus intéressant.
+Jusque-là on prolongeait des \emph{sections} ; on va maintenant prolonger des
+\emph{objets} — un fibré, un revêtement, un torseur. La différence est qu'entre
+deux objets il n'y a plus égalité ou non-égalité, mais des isomorphismes, en
+général plusieurs. Une collection d'objets attachée à chaque ouvert, avec des
+restrictions, s'appelle une \emph{catégorie fibrée}, et le foncteur de
+restriction d'un ouvert à son intersection avec le complémentaire du fermé peut
+être fidèle, pleinement fidèle, ou une équivalence. Là où il y avait deux
+conditions, il y en a donc trois : $(P_1)$, $(P_2)$, $(P_3)$. Et le dossier
+établit que ces trois conditions se lisent sur les trois premiers groupes de
+cohomologie locale $H^0_Y$, $H^1_Y$, $H^2_Y$ — la troisième faisant intervenir
+un degré de plus que la seconde, exactement comme la seconde en fait intervenir
+un de plus que la première. Le dernier feuillet en donne le cas le plus net,
+celui des torseurs sous un faisceau de groupes, où $H^0_Y$ et $H^1_Y$
+apparaissent tout simplement comme le noyau et le conoyau de l'application dont
+on mesurait au départ l'injectivité et la bijectivité.
+
+Reste à dire ce que ces feuillets sont, matériellement, car cela fait partie de
+ce qu'on y lit. La chemise porte, de sa main, « Notes pour Dieud. §9 » : ce
+sont des notes destinées à Dieudonné, c'est-à-dire de la matière première pour
+un chapitre des \emph{Éléments}. Et le tapuscrit est un texte qui se parle à
+lui-même de sa propre rédaction. La première ligne du premier feuillet propose
+déjà de déplacer le numéro ailleurs. Une note marginale, deux fois répétée, dit
+« déployer ». Une phrase avoue qu'« il aurait fallu déployer la formule
+également dans 2.4 ». Une autre : « Tout ceci devrait figurer dans un numéro à
+part au Chap 0 ». Une autre encore : « Il serait préférable d'inclure 2.13 dans
+l'énoncé de 2.12 […] pour éviter des redites ». Et au milieu du dernier
+feuillet tapé, une ligne entière est biffée à la machine, qui commençait :
+« Si on rejette tout ce numéro (comme il me semble raisonnable) ». Il est en
+train d'écrire, et simultanément de plaider contre l'existence de ce qu'il
+écrit. On trouve même, au détour d'un corollaire, la remarque qu'il aurait été
+« canularesque » d'énoncer la proposition sous sa forme contravariante. La
+seconde moitié est l'exact opposé : une écriture rapide où les énoncés et les
+formules passent et où les phrases qui les relient, très souvent, ne passent
+pas. Ce sont deux régimes de travail, et le dossier les a conservés côte à
+côte.
+
+Les noms sous lesquels on cherchera la suite : cohomologie locale et
+profondeur, prolongement à travers un fermé, théorème d'Eilenberg--Watts,
+théorie de Matlis des modules injectifs, espaces spectraux, champs et descente,
+et — pour le dernier feuillet — cohomologie non abélienne.
+
+\keywords{local cohomology, depth along a closed subset, extension across a closed subset, Hartogs phenomenon, cohomological functor, system of generators, noetherian object, Eilenberg-Watts theorem, tensoring an abelian category over a ring, finitely presented module, Matlis theory, injective hull, associated primes, embedded prime, torsion functor, Artin-Rees lemma, ind-representable functor, coherent sheaf with support in a closed set, sheaf of sets, spectral space, generization, localisation of a space at a point, fibered category, stack, pseudo-limit, 2-colimit, faithful functor, fully faithful functor, noetherian induction, constructible set, torsor, principal homogeneous space, nonabelian cohomology, Lefschetz condition}
+\end{resume}
+
+\pagerange{3}{28}
+\section*{Le fil du dossier, et les conventions}
+
+\emph{Les stations.}
+
+\begin{enumerate}
+  \item \emph{Pages 3 à 5}, tapuscrit : tester l'annulation d'un foncteur
+  cohomologique sur un système de générateurs. Propositions 2.1 à 2.5.
+  \item \emph{Pages 5 à 7}, tapuscrit : le produit tensoriel $P \otimes_A M$
+  d'un module par un objet d'une catégorie abélienne, et la caractérisation des
+  foncteurs exacts à droite par leur valeur en $A$. Proposition 2.6.
+  \item \emph{Pages 8 à 10}, tapuscrit : le cas contravariant, le passage à la
+  limite sur $A_n = A/I^{n+1}$, et le module $H$ qui représente un foncteur
+  exact à gauche. Les énoncés 2.7 à 2.11, dont aucun n'est intégralement sur
+  les feuillets.
+  \item \emph{Pages 10 et 11}, tapuscrit : le critère d'annulation en termes de
+  $H$ (2.12, 2.13), et les idéaux premiers associés de $H$ (2.14).
+  \item \emph{Pages 11 à 13}, tapuscrit : $H$ injectif si et seulement si le
+  foncteur est exact (2.15), la stabilité des injectifs par torsion (2.16), et
+  la généralisation aux faisceaux cohérents (2.17).
+  \item \emph{Pages 15 à 20}, manuscrit : les propriétés $(P_1)$ et $(P_2)$
+  pour un faisceau d'ensembles, la localisation en un point, et l'équivalence
+  entre la forme globale et la forme ponctuelle. Définitions 1 et 2,
+  Proposition 3, Corollaire 4, Lemme 5.
+  \item \emph{Pages 21 à 24}, manuscrit : les trois conditions $(P_1)$,
+  $(P_2)$, $(P_3)$ pour une catégorie fibrée, leur traduction en termes des
+  faisceaux $\mathcal{H}om(f,g)$, la catégorie fibrée induite en un point, et
+  l'énoncé global-ponctuel. Définition 6, Proposition 7, Corollaire 8.
+  \item \emph{Pages 25 à 27}, manuscrit : les démonstrations, la récurrence
+  noethérienne, et la traduction des trois conditions en l'annulation des
+  faisceaux de cohomologie locale. Corollaire 10.
+  \item \emph{Page 28}, manuscrit : le cas des torseurs sous un faisceau de
+  groupes. Proposition 9.
+\end{enumerate}
+
+\emph{La numérotation est la sienne, et elle est en désordre ; elle n'est pas
+remise en ordre ici.} Le tapuscrit va de 2.1 à 2.17 sans rupture, mais quatre
+de ses numéros — 2.7, 2.8, 2.9, 2.11 — ne portent sur les feuillets aucun
+énoncé qu'on puisse lire : 2.9 n'a que son intitulé, 2.10 est coupé par la fin
+du feuillet 9, et 2.7, 2.8, 2.11 ne sont connus que par les renvois que le
+texte leur fait. Le manuscrit, lui, se numérote Définition 6 (page 21),
+Proposition 7 et Corollaire 8 (page 24), Corollaire 10 (page 27), puis
+Proposition 9 (page 28) : le 9 vient \emph{après} le 10, sur le dernier
+feuillet. Les sections ci-dessous suivent l'ordre des feuillets, non celui des
+numéros ; le Corollaire 10 y est donc lu avant la Proposition 9, et c'est
+d'ailleurs heureux, car la seconde est ce qui permet de corriger le premier.
+
+\emph{Ce que seule une lecture d'ensemble peut dire.} Trois liens, qu'aucun
+feuillet n'énonce.
+
+Le premier, et c'est la charnière du dossier. Le tapuscrit fabrique, à la page
+9, un objet
+\[
+  H^{i} \;=\; \varinjlim_{m} T^{i}(A_{m}) , \qquad A_{m} = A/I^{m+1} ,
+\]
+et il en fait le représentant du foncteur exact à gauche $T$. Il ne lui donne
+aucun nom et n'écrit jamais de cohomologie. Le manuscrit, lui, écrit à la page
+27 des faisceaux $\underline{H}^{i}_{Y}(F)$ sans dire d'où ils viennent. Ce
+sont le même objet : pour $T^{i}(M) = \mathrm{Ext}^{i}(M,F)$, la limite
+inductive des $T^{i}(A_{m})$ est la cohomologie locale de $F$ le long de
+$Y = V(I)$. Le tapuscrit est la \emph{construction} de l'objet dans lequel le
+manuscrit \emph{énonce} son critère. C'est la seule raison pour laquelle les
+deux paquets sont dans la même chemise, et ni l'un ni l'autre ne le dit.
+
+Le deuxième : la récurrence noethérienne est un seul mouvement, employé deux
+fois dans deux catégories différentes. À la page 3, pour montrer qu'un objet
+admet une suite de composition, on prend un sous-objet \emph{maximal} qui en
+admet une et l'on montre qu'il est le tout ; aux pages 19 et 26, pour établir
+une propriété relativement à un fermé $Y$, on la suppose acquise pour tout
+fermé strictement plus petit et l'on descend en un point \emph{maximal} de $Y$.
+Le tapuscrit démontre la forme abstraite de ce que le manuscrit utilise sous
+forme topologique.
+
+Le troisième : la note marginale de la page 15, « N.B. regarder aussi la
+propriété : \emph{surjective} », reste sans réponse dans la partie consacrée
+aux faisceaux d'ensembles. Elle est pourtant la question que les pages 24 à 27
+traitent exclusivement. Car pour une catégorie fibrée, la surjectivité
+essentielle — tout objet au-dessus de $V \cap U$ est la restriction d'un objet
+au-dessus de $V$ — est précisément ce que la condition $(P_3)$ ajoute à
+$(P_2)$, et c'est le seul des trois cas dont la démonstration coûte quelque
+chose.
+
+\emph{Les notations, valables pour tout le dossier.} $A$ est un anneau
+commutatif noethérien, $I$ un idéal, $A_n = A/I^{n+1}$, $X = \mathrm{Spec}\, A$,
+$Y = V(I)$ la partie fermée qu'il définit, $U = X - Y$ son complémentaire et
+$i : U \to X$ l'inclusion. Le complémentaire est noté $U$ partout : le
+tapuscrit ne le nomme pas, les pages 15 à 20 l'écrivent $U$ et les pages 21 à
+28 l'écrivent $\mathcal{U}$. Les objets d'une catégorie abélienne sont notés
+$M$, $N$ ; la lettre $F$ est réservée aux faisceaux et $\mathcal{F}$ aux
+catégories fibrées, alors que le tapuscrit écrit $F$ pour un objet quelconque
+de $\underline{C}$. Ses catégories $\underline{C}$, $\underline{C}'$,
+$\underline{G}$ sont écrites $\mathcal{C}$, $\mathcal{C}'$, $\mathcal{G}$. Pour
+un point $x$ d'un espace $X$, $X_{(x)}$ désigne l'ensemble des générisations de
+$x$ — les points dont $x$ est une spécialisation — muni de la topologie
+induite, ce qu'il note $\mathrm{Loc}_x(X)$, et $X'_{(x)} = X_{(x)} - \{x\}$. Le
+faisceau des homomorphismes est noté $\mathcal{H}om$.
+
+\pagerange{3}{13}
+\section*{I. Le tapuscrit : l'outillage additif (pages 3 à 13)}
+
+\pagerange{3}{5}
+\subsection*{Tester l'annulation sur un système de générateurs (pages 3 à 5)}
+
+Le tapuscrit s'ouvre sur une remarque de rédaction — le numéro pourrait aussi
+bien figurer au chapitre $0_{\mathrm{III}}$, qui contiendrait alors certains des
+sorites du paragraphe 7 — puis entre immédiatement dans le principe d'économie
+qui gouverne toute la première moitié.\footnote{Le feuillet renvoie à un
+« Chap. $\mathrm{O}_{III}$ » et à un « par. 7 » sans autre précision. Rien n'a
+été confronté ici aux \emph{Éléments} imprimés, conformément à la
+transcription, qui ne les a pas ouverts non plus.}
+
+\emph{Proposition 2.1.} Soient $\mathcal{C}$ une catégorie abélienne et
+$\mathcal{G} \subset \mathrm{Ob}\,\mathcal{C}$ une partie telle que tout objet
+de $\mathcal{C}$ admette une suite de composition finie dont les facteurs sont
+isomorphes à des quotients d'objets de $\mathcal{G}$. Soit $\mathcal{C}'$ une
+seconde catégorie abélienne.
+
+\begin{enumerate}
+  \item[(i)] Un foncteur additif exact à droite $T : \mathcal{C} \to
+  \mathcal{C}'$ est nul si et seulement s'il est nul sur les objets de
+  $\mathcal{G}$.
+  \item[(ii)] Soit $(T^{i})$ un foncteur cohomologique de $\mathcal{C}$ dans
+  $\mathcal{C}'$ tel que $T^{i} = 0$ pour $i > i_{0}$, et soit $n$ un entier.
+  Alors $T^{i} = 0$ pour $i > n$ si et seulement si $T^{i}(M) = 0$ pour tout
+  $M \in \mathcal{G}$ et tout $i > n$.
+\end{enumerate}
+
+La démonstration de (ii) est une récurrence \emph{descendante} sur $n$, et
+c'est sa mécanique qui mérite d'être retenue, car c'est elle que le dossier
+réemploiera. Pour $n \geqslant i_{0}$ l'énoncé est vide. Supposons-le acquis au
+rang $n+1$ et supposons $T^{i}(M) = 0$ pour $M \in \mathcal{G}$ et $i > n$.
+L'hypothèse de récurrence donne alors $T^{i} = 0$ pour $i > n+1$ ; mais un
+foncteur cohomologique dont tous les termes de degré supérieur s'annulent est
+exact à droite en son plus haut degré non trivial, donc $T^{n+1}$ est exact à
+droite, et (i) le rend nul. La suite exacte longue fait tomber les degrés un à
+un, et chaque degré est ramené au cas (i).
+
+\emph{Corollaire 2.2.} Sous les mêmes hypothèses, soit $(T^{i})$ un foncteur
+cohomologique \emph{contravariant} de $\mathcal{C}$ dans $\mathcal{C}'$ tel que
+$T^{i} = 0$ pour $i < i_{0}$, et soit $n$ un entier. Alors $T^{i} = 0$ pour
+$i < n$ si et seulement si $T^{i}(M) = 0$ pour tout $M \in \mathcal{G}$ et tout
+$i < n$.
+
+C'est 2.1 (ii) appliqué à $\mathcal{C}$ et $\mathcal{C}'^{\,\circ}$ : un
+foncteur contravariant de $\mathcal{C}$ dans $\mathcal{C}'$ est un foncteur
+covariant de $\mathcal{C}$ dans $\mathcal{C}'^{\,\circ}$, l'exactitude s'y
+renverse, et la suite exacte longue y est lue de haut en bas ; en posant
+$S^{j} = T^{-j}$ on est exactement dans les hypothèses de 2.1 (ii) avec
+$-i_{0}$ et $-n$.\footnote{Le feuillet ne détaille pas ce renversement ; il
+écrit seulement « il suffit d'appliquer 2.1. (ii) à $\underline{C}$ et
+$\underline{C}'^{o}$ ». Le calcul des indices est ajouté ici, parce que c'est le
+seul endroit du dossier où une variance est retournée et qu'une erreur d'un
+signe y rendrait faux tout ce qui suit.} Il ajoute, et c'est sa manière : « pour
+qu'il n'y ait pas de jaloux, il faudrait aussi répéter (i) » — de fait, l'énoncé
+contravariant de (i) n'est nulle part écrit, et le Corollaire 2.3 le citera
+pourtant sous la forme « les conclusions de 2.1 (i)(ii) et 2.2 (i)(ii)
+».\footnote{2.2 tel qu'il est énoncé n'a pas de partie (i) ; le renvoi de 2.3 en
+suppose une. Elle est immédiate — un foncteur contravariant exact à gauche est
+nul dès qu'il l'est sur $\mathcal{G}$ — et c'est elle que la lecture suppose
+partout où 2.3 invoque « 2.2 (i) ».} Il note aussi qu'« il aurait été
+canularesque d'énoncer 2.1 avec des foncteurs contravariants ».
+
+\emph{Corollaire 2.3.} Soient $\mathcal{C}$, $\mathcal{C}'$ deux catégories
+abéliennes et $\mathcal{G} \subset \mathrm{Ob}\,\mathcal{C}$. On suppose que les
+objets de $\mathcal{C}$ sont \emph{noethériens}, c'est-à-dire satisfont la
+condition de chaîne ascendante pour les sous-objets, et que $\mathcal{G}$ est un
+\emph{système de générateurs} de $\mathcal{C}$, au sens suivant : pour tout
+objet $N \neq 0$ de $\mathcal{C}$, il existe $M \in \mathcal{G}$ et un
+homomorphisme non nul $M \to N$.\footnote{Le feuillet écrit « il existe un
+$M \in \underline{C}$ », ce qui rendrait la condition vide : $N$ lui-même
+convient toujours. C'est $M \in \underline{G}$ qu'il faut, et c'est ce qui est
+écrit ici ; toute la démonstration qui suit l'utilise sous cette forme.} Alors
+les conclusions de 2.1 et de 2.2 valent.
+
+La démonstration est le premier des deux emplois de la récurrence noethérienne
+annoncés plus haut. Soit $N$ un objet de $\mathcal{C}$ et soit $N'$ un
+sous-objet \emph{maximal} parmi ceux qui admettent une suite de composition du
+type voulu — il en existe, car $0$ en admet une et les objets sont noethériens.
+Si $N' \neq N$, alors $N/N' \neq 0$, donc il existe $M \in \mathcal{G}$ et un
+homomorphisme non nul $M \to N/N'$ ; l'image inverse dans $N$ de son image est
+un sous-objet strictement plus grand que $N'$ qui admet encore une telle suite,
+ce qui contredit la maximalité. Donc $N' = N$.
+
+\emph{Exemple 2.4.} Soient $A$ un anneau commutatif noethérien, $I$ un idéal,
+$X = \mathrm{Spec}\, A$, $Y = V(I)$. Soit $\mathcal{C}$ la catégorie des
+$A$-modules de type fini dont tout élément est annulé par une puissance de $I$
+— de façon équivalente, la catégorie des modules cohérents sur $X$ à support
+contenu dans $Y$.\footnote{Le feuillet écrit d'abord « Modules quasi-cohérents », la mention
+\emph{quasi-} étant ensuite surfrappée à la machine : c'est
+bien la catégorie des modules cohérents, comme l'exige l'hypothèse « de type
+fini » qu'il ajoute à l'encre sur la même ligne.} Ses objets sont noethériens,
+et pour $M \in \mathcal{C}$ :
+\[
+  M \text{ est un générateur de } \mathcal{C}
+  \quad\Longleftrightarrow\quad
+  \mathrm{supp}\, M = Y .
+\]
+
+La nécessité : si $\mathrm{supp}\, M \neq Y$, une composante irréductible
+$Y_{j}$ de $Y$ n'est pas contenue dans $\mathrm{supp}\, M$ ; en prenant
+$N = \mathcal{O}_{Y_{j}}$ pour la structure réduite induite, on a
+$\mathrm{Hom}(M,N) = 0$ avec $N \neq 0$. La suffisance repose sur la formule
+\[
+  \mathrm{Ass}\,\mathcal{H}om(M,N) \;=\; \mathrm{supp}\, M \cap \mathrm{Ass}\, N ,
+\]
+valable pour $M$ de type fini : si $\mathrm{supp}\, M = Y$ et si $N$ est
+quasi-cohérent de support contenu dans $Y$, alors $\mathrm{Ass}\, N \subset Y =
+\mathrm{supp}\, M$, de sorte que $\mathrm{Hom}(M,N) = 0$ force
+$\mathrm{Ass}\, N = \emptyset$, donc $N = 0$. Le même argument montre qu'une
+famille $(M_{j})$ d'objets de $\mathcal{C}$ est un système de générateurs si et
+seulement si
+\[
+  \bigcup_{j} \mathrm{supp}\, M_{j} \;=\; Y ,
+\]
+et donc — c'est le point — que pour vérifier l'annulation d'un foncteur comme
+dans 2.1 ou 2.2, il suffit de le tester sur les $M_{j}$, en particulier sur un
+seul module de support $Y$.
+
+\emph{Exemple 2.5.} La même chose sur un schéma : $X$ noethérien
+quasi-compact muni d'un faisceau ample $\mathcal{O}_{X}(1)$, $Y$ une partie
+fermée, $\mathcal{C}$ la catégorie des faisceaux cohérents à support contenu
+dans $Y$. Si $(M_{j})$ est une famille d'objets de $\mathcal{C}$ telle que
+$\bigcup_{j} \mathrm{supp}\, M_{j} = Y$, alors les $M_{j}(-n)$ pour $n \geqslant
+N$ forment un système de générateurs de $\mathcal{C}$, et même de la catégorie
+de tous les modules quasi-cohérents de support contenu dans
+$Y$.\footnote{L'énoncé est écrit sur le feuillet avec $n > N$ et sa conclusion
+avec $n \geqslant N$ ; l'un des deux est un lapsus et la différence est sans
+conséquence, la famille étant cofinale dans les deux cas. $n \geqslant N$ est
+retenu ici.} En effet, si $F$ est quasi-cohérent non nul de support contenu dans
+$Y$, on se place sur un ouvert affine où $F \neq 0$ et 2.4 donne
+$\mathcal{H}om(M_{j},F) \neq 0$ pour un $j$ convenable ; l'amplitude fournit
+alors des sections non nulles de $\mathcal{H}om(M_{j},F)(n)$ pour $n$ grand,
+c'est-à-dire des homomorphismes non nuls $M_{j}(-n) \to F$.
+
+\pagerange{5}{7}
+\subsection*{Le produit tensoriel $P \otimes_A M$, et les foncteurs exacts à droite (pages 5 à 7)}
+
+Le tapuscrit change alors d'objet. $A$ est maintenant un anneau quelconque, non
+nécessairement commutatif, $\mathcal{C}$ une catégorie abélienne de
+$A$-modules à gauche — par exemple n'importe quelle sous-catégorie pleine de la
+catégorie des $A$-modules stable par noyaux et conoyaux — et $\mathcal{C}'$ une
+catégorie abélienne.\footnote{Le feuillet dit bien « une catégorie abélienne de
+$A$-modules », et non « la catégorie » ; la transcription le signale, et la
+distinction compte, puisque tout ce qui suit vaut pour une sous-catégorie
+pleine stable par noyaux et conoyaux.}
+
+Soit $P$ un objet de $\mathcal{C}'$ muni d'une structure de $A$-module à droite,
+c'est-à-dire d'un homomorphisme d'anneaux $A^{\circ} \to \mathrm{End}(P)$. Pour
+tout $Q \in \mathcal{C}'$, le groupe $\mathrm{Hom}_{\mathcal{C}'}(P,Q)$ est
+alors un $A$-module à \emph{gauche}, par $a \cdot u = u \circ \rho_{a}$. On pose,
+lorsqu'il existe, $P \otimes_{A} M$ pour l'objet de $\mathcal{C}'$ défini par la
+propriété universelle
+\[
+  \mathrm{Hom}_{\mathcal{C}'}(P \otimes_{A} M,\, Q)
+  \;=\;
+  \mathrm{Hom}_{A}(M,\, \mathrm{Hom}_{\mathcal{C}'}(P,Q)) ,
+\]
+fonctorielle en $Q$.
+
+Cet objet n'existe pas toujours, et le feuillet énumère exactement ce qui le
+fait exister. D'abord $P \otimes_{A} A_{g} \simeq P$, où $A_{g}$ est $A$ vu
+comme $A$-module à gauche. Ensuite, si $M'' \to M' \to M \to 0$ est exacte et si
+$P \otimes_{A} M'$ et $P \otimes_{A} M''$ existent, alors $P \otimes_{A} M$
+existe et
+\[
+  P \otimes_{A} M'' \longrightarrow P \otimes_{A} M' \longrightarrow
+  P \otimes_{A} M \longrightarrow 0
+\]
+est exacte : sous réserve d'existence, $P \otimes_{A} M$ est exact à droite en
+$M$. Enfin le foncteur commute aux limites inductives quelconques — pas
+seulement filtrantes — au sens précis suivant : si les $P \otimes_{A} M_{j}$
+existent, alors $P \otimes_{A} \varinjlim M_{j}$ existe si et seulement si
+$\varinjlim (P \otimes_{A} M_{j})$ existe, et les deux sont canoniquement
+isomorphes. En combinant : $P \otimes_{A} M$ existe dès que $M$ est de
+présentation finie, car il existe pour $A_{g}^{(I)}$ avec $I$ fini, donc pour un
+conoyau $A_{g}^{(I)} \to A_{g}^{(J)}$ ; et il existe sans restriction sur $M$ si
+$\mathcal{C}'$ admet les sommes directes quelconques. La construction se lit sur
+une présentation : la matrice qui présente $M$ définit un morphisme
+$P^{(I)} \to P^{(J)}$ dont le conoyau est l'objet cherché.\footnote{« Tout ceci
+devrait figurer dans un numéro à part au Chap 0, sans trainer l'accent $'$ sur
+la catégorie abélienne », note-t-il ici ; et en marge, deux fois dans le
+tapuscrit, le seul mot « déployer ».}
+
+La version duale est obtenue en remplaçant $\mathcal{C}'$ par l'opposée d'une
+catégorie abélienne $\mathcal{C}_{1}$ : les $A$-$\mathcal{C}'$-modules à droite
+sont alors les $A$-$\mathcal{C}_{1}$-modules à gauche, et le produit tensoriel
+s'écrit, en termes de $\mathcal{C}_{1}$, $\mathrm{Hom}_{A}(M,P)$, défini
+directement par
+\[
+  \mathrm{Hom}_{\mathcal{C}_{1}}(Q,\, \mathrm{Hom}_{A}(M,P))
+  \;=\;
+  \mathrm{Hom}_{A}(M,\, \mathrm{Hom}_{\mathcal{C}_{1}}(Q,P)) .
+\]
+« Il y aurait donc lieu de développer les deux formalismes en parallèle », l'un
+sur les produits tensoriels, l'autre sur les Hom.\footnote{La ligne qui précède
+ce dernier déploiement n'a pas été lue sur le feuillet : la transcription
+signale que les deux membres de la formule sont les seuls à y figurer en clair
+et que la phrase qui les introduit est reconstituée du contexte. La formule
+elle-même ne fait aucun doute, étant la définition par adjonction.}
+
+Soit alors $\mathcal{C}$ la catégorie des $A$-modules à gauche de présentation
+finie. Tout $A$-$\mathcal{C}'$-module à droite $P$ donne un foncteur additif
+$M \rightsquigarrow P \otimes_{A} M$ de $\mathcal{C}$ dans $\mathcal{C}'$, et
+inversement :
+
+\emph{Proposition 2.6.} Soit $T : \mathcal{C} \to \mathcal{C}'$ un foncteur
+additif, et soit $P = T(A)$, muni de sa structure naturelle de $A$-module à
+droite. L'homomorphisme canonique $P \otimes_{A} M \to T(M)$ est un isomorphisme
+si et seulement si $T$ est exact à droite.
+
+C'est le théorème qu'on appelle aujourd'hui d'Eilenberg--Watts, ici sous la
+forme où la catégorie but est une catégorie abélienne quelconque et non la
+catégorie des modules sur un anneau.\footnote{Les deux articles fondateurs —
+Eilenberg, \emph{Abstract description of some basic functors}, et Watts,
+\emph{Intrinsic characterizations of some additive functors} — datent de 1960,
+et le dossier est daté par les archivistes « vers 1960-1967 ». Le feuillet ne
+cite personne, ni ne nomme le résultat. Rien ici n'autorise à dire qu'il les
+connaissait, ni le contraire.}
+
+Le feuillet 7 n'a pu être lu de bout en bout ; il porte encore le numéro 2.7,
+dont l'énoncé n'est pas accessible.\footnote{La transcription le dit
+explicitement : « la page 7 n'a pu être lue de bout en bout ; le texte ci-dessus
+en donne les énoncés, les phrases de liaison manquent ». 2.7 est connu par le
+seul renvoi de la page 8, « il faudra expliciter les énoncés duals de 2.6. et
+2.7. », qui le place à côté de 2.6 et suggère qu'il s'agit de la forme
+catégorique de celle-ci — l'équivalence entre foncteurs additifs exacts à droite
+$\mathcal{C} \to \mathcal{C}'$ et $A$-$\mathcal{C}'$-modules à droite. Cette
+identification est une inférence, et n'est pas sur le feuillet.} Un
+homomorphisme canonique $P \otimes_{A} M \to \,?$ y est amorcé dont le second
+membre n'a pas été lu.
+
+\pagerange{8}{10}
+\subsection*{Le cas contravariant, et le module qui représente (pages 8 à 10)}
+
+La page 8 reprend en cours de phrase, sur le cas contravariant : un foncteur
+$T : \mathcal{C}^{\circ} \to \mathcal{C}'$, ce qui se ramène au précédent en
+remplaçant $\mathcal{C}'$ par $\mathcal{C}'^{\,\circ}$. La contravariance
+retourne la structure de module : $T(A)$ porte maintenant une structure de
+$A$-module à \emph{gauche}, et l'homomorphisme canonique, fonctoriel en $M$, est
+\[
+  T(M) \longrightarrow \mathrm{Hom}_{A}(M, T(A)) .
+\]
+C'est un isomorphisme si et seulement si $T$ est \emph{exact à gauche},
+c'est-à-dire transforme une suite exacte $M'' \to M' \to M \to 0$ de
+$\mathcal{C}$ en une suite exacte $0 \to T(M) \to T(M') \to T(M'')$. On obtient
+ainsi une équivalence entre la catégorie des foncteurs contravariants exacts à
+gauche de $\mathcal{C}$ dans $\mathcal{C}'$ et la catégorie, notée $A(\mathcal{C}')$,
+des objets de $\mathcal{C}'$ munis d'une structure de $A$-module à
+gauche.\footnote{Le retournement du côté est ce que la contravariance impose et
+n'est pas dit sur le feuillet : dans le cas covariant $T(A)$ est un module à
+droite, dans le cas contravariant un module à gauche. La notation
+$A(\underline{C}')$ du feuillet, où le $A$ est ajouté à l'encre devant la
+parenthèse, est cohérente avec cette lecture, puisqu'il écrit ailleurs
+« $A$-$\underline{C}'$-modules à droite » lorsqu'il veut l'autre côté.} Le
+résultat s'étend à la catégorie de tous les $A$-modules, sans hypothèse
+noethérienne sur $A$, pourvu que les produits quelconques existent dans
+$\mathcal{C}'$.
+
+Vient alors le passage qui donne au tapuscrit sa raison d'être. On revient à la
+catégorie $\mathcal{C}$ de l'exemple 2.4 : les $A$-modules de type fini annulés
+par une puissance de $I$. Pour $n \geqslant 0$, soit $\mathcal{C}_{n}$ la
+sous-catégorie pleine des modules de type fini sur $A$ annulés par $I^{n+1}$,
+équivalente à la catégorie des modules de type fini sur $A_{n} = A/I^{n+1}$. Le
+foncteur $\mathcal{C}_{n} \to \mathcal{C}$ est exact et $\mathcal{C}$ est
+réunion filtrante des $\mathcal{C}_{n}$.\footnote{Le feuillet écrit « les modules
+de type fini sur $\underline{C}$ » là où l'argument demande « sur $A$ » ; la
+transcription porte la variante telle quelle et la signale. La lecture retenue
+ici est « sur $A$ », la seule qui donne un sens à la phrase suivante, qui
+identifie $\mathcal{C}_{n}$ aux modules de type fini sur $A_{n}$. Le même
+feuillet écrit d'abord $\underline{C}^{n}$ puis $\underline{C}_{n}$ pour la même
+sous-catégorie ; l'indice inférieur est retenu.}
+
+Un foncteur additif $T : \mathcal{C} \to \mathcal{C}'$ est déterminé par ses
+restrictions $T_{n}$ aux $\mathcal{C}_{n}$, et ce qui précède fournit pour
+chacune un homomorphisme fonctoriel $T(A_{n}) \otimes_{A} M \to T_{n}(M)$. Pour
+$M$ fixé dans un $\mathcal{C}_{n_{0}}$, la famille $(T(A_{n}) \otimes_{A} M)_{n
+\geqslant n_{0}}$ est un système projectif, dont le système projectif constant
+de valeur $T(M)$ est un quotient ; sous réserve d'existence des limites, on
+obtient
+\[
+  \left(\varprojlim_{n} T(A_{n})\right) \otimes_{A} M \longrightarrow T(M) ,
+\]
+et cet homomorphisme ne dépend pas du choix de $n_{0}$ tel que
+$M \in \mathcal{C}_{n_{0}}$.
+
+C'est cependant la situation \emph{duale} dont le dossier aura besoin. Pour
+$T : \mathcal{C}^{\circ} \to \mathcal{C}'$ contravariant, on a des
+homomorphismes
+\[
+  (\ast) \qquad
+  T_{n}(M) \longrightarrow \mathrm{Hom}_{A}(M, T_{n}(A_{n}))
+  \qquad (n \geqslant n_{0}) ,
+\]
+compatibles au passage à la limite, d'où
+\[
+  T(M) \longrightarrow \varinjlim_{n} \mathrm{Hom}_{A}(M, T(A_{n}))
+  \longrightarrow \mathrm{Hom}_{A}\!\left(M, \varinjlim_{n} T(A_{n})\right) .
+\]
+Pour que $T$ soit exact à gauche, il faut et il suffit que les $T_{n}$ le
+soient, ou encore que les $(\ast)$ soient des isomorphismes. Et si dans
+$\mathcal{C}'$ les limites inductives filtrantes dénombrables existent et sont
+exactes — a fortiori si l'axiome (AB 5) est vérifié — le foncteur
+$P \rightsquigarrow \mathrm{Hom}_{A}(M,P)$ commute à ces limites pour tout $M$
+de présentation finie sur $A$, de sorte que l'homomorphisme composé
+\[
+  T(M) \longrightarrow \mathrm{Hom}_{A}\!\left(M, \varinjlim_{n} T(A_{n})\right)
+\]
+est un isomorphisme. La réciproque est triviale.
+
+\emph{Proposition 2.9.} Soient $A$ un anneau commutatif noethérien, $I$ un
+idéal, $\mathcal{C}$ la catégorie des $A$-modules de type fini annulés par une
+puissance de $I$, et $\mathcal{C}'$ une catégorie abélienne où les limites
+inductives filtrantes dénombrables existent et sont exactes. Pour un foncteur
+contravariant $T : \mathcal{C}^{\circ} \to \mathcal{C}'$, les conditions
+suivantes sont équivalentes : $T$ est exact à gauche ; l'homomorphisme canonique
+$T(M) \to \mathrm{Hom}_{A}(M, H)$ est un isomorphisme pour tout
+$M \in \mathcal{C}$, où l'on a posé
+\[
+  H \;=\; \varinjlim_{n} T(A_{n}) .
+\]
+
+\footnote{Sur le feuillet 9, 2.9 n'est qu'un intitulé : « \emph{Proposition
+2.9.} », suivi d'un blanc, puis le texte reprend par « généralisant 2.8 sous les
+conditions dites ». L'énoncé ci-dessus n'est pas de lui : c'est celui que le
+paragraphe qui le précède immédiatement vient d'établir mot pour mot, et il est
+reconstitué à ce titre. Rien n'interdit que ce qu'il avait en tête fût plus
+général.}
+
+La suite du feuillet 9 est perdue avec son bas, et la page 10 s'ouvre en cours
+de phrase. Ce qu'on en lit décrit la catégorie qui apparaît dans le
+\emph{Corollaire 2.10} : les systèmes inductifs $(H_{n})$ dont chaque morphisme
+de transition $H_{n} \to H_{m}$ induit un isomorphisme de $H_{n}$ sur le
+sous-objet $\mathrm{Hom}_{A}(A_{n}, H_{m})$ des « éléments annulés par
+$I^{n+1}$ ». Sous les hypothèses de 2.9, cette catégorie est équivalente à la
+catégorie des $A$-$\mathcal{C}'$-modules dont 2.10 parle, laquelle est donc un
+cas particulier d'un énoncé 2.11.\footnote{L'énoncé de 2.10 est coupé net par la
+fin du feuillet 9 — il s'arrête sur « la catégorie des » — et 2.11 tombe
+entièrement dans la lacune entre les deux feuillets : il n'est connu que par le
+renvoi « qui est donc un cas particulier de 2.11 ». Ni l'un ni l'autre n'est
+reconstitué ici. Ce qui est sûr, et suffit à la suite du dossier, est
+l'équivalence entre foncteurs contravariants exacts à gauche sur $\mathcal{C}$ et
+modules de $I$-torsion, par $T \mapsto \varinjlim T(A_{n})$ et
+$H \mapsto \mathrm{Hom}_{A}(-,H)$.}
+
+\pagerange{10}{11}
+\subsection*{Le critère d'annulation, et les premiers associés (pages 10 et 11)}
+
+\emph{Corollaire 2.12.} Soient $A$ un anneau commutatif noethérien, $I$ un
+idéal, $Y = V(I)$, $\mathcal{C}$ la catégorie des $A$-modules de type fini
+annulés par une puissance de $I$, et $\mathcal{C}'$ une catégorie abélienne où
+les limites inductives filtrantes dénombrables sont exactes. Soit $(T^{i})$ un
+foncteur cohomologique contravariant de $\mathcal{C}$ dans $\mathcal{C}'$ tel
+que $T^{i} = 0$ pour $i < i_{0}$, soit $n$ un entier, et soit $(M_{j})$ une
+famille de $A$-modules de type fini telle que $\bigcup_{j} \mathrm{supp}\, M_{j}
+= Y$. Posons
+\[
+  H^{i} \;=\; \varinjlim_{m} T^{i}(A_{m}) .
+\]
+Les conditions suivantes sont équivalentes :
+\begin{enumerate}
+  \item[(i)] $T^{i} = 0$ pour $i < n$ ;
+  \item[(ii)] $H^{i} = 0$ pour $i < n$ ;
+  \item[(iii)] $T^{i}(M_{j}) = 0$ pour $i < n$ et tout $j$.
+\end{enumerate}
+
+L'équivalence de (i) et (iii) est 2.2 combinée à 2.4 : la famille $(M_{j})$ est
+un système de générateurs. L'implication (i) $\Rightarrow$ (ii) est immédiate.
+Pour (ii) $\Rightarrow$ (i) on procède par récurrence sur $n$ ; c'est vide pour
+$n \leqslant i_{0}$, et supposant l'énoncé acquis pour tous les $n' < n$, il
+reste à voir que $T^{n-1} = 0$. Or les degrés inférieurs étant nuls, la suite
+exacte longue rend $T^{n-1}$ exact à gauche, donc 2.9 donne $T^{n-1}(M) \simeq
+\mathrm{Hom}_{A}(M, H^{n-1})$, qui est nul puisque
+$H^{n-1} = 0$.\footnote{Le mot ajouté à l'encre au-dessus de cette ligne se lit
+« nul » ou « une » ; la transcription le signale comme douteux et retient
+« nul », qui est ce que l'argument demande. La lecture est ici la même.}
+
+\emph{Corollaire 2.13.} Sous ces conditions, on a un isomorphisme fonctoriel
+\[
+  T^{n}(M) \;=\; \mathrm{Hom}_{A}(M, H^{n}) .
+\]
+\emph{Il serait préférable}, note-t-il aussitôt, \emph{d'inclure 2.13 dans
+l'énoncé de 2.12 et de démontrer par récurrence} (ii) $\Rightarrow$ (i)
+\emph{plus l'énoncé final 2.13, pour éviter des redites.} La remarque est juste :
+la récurrence ci-dessus produit 2.13 en chemin.
+
+\emph{Corollaire 2.14.} $\mathcal{C}$ étant comme ci-dessus, soit
+$T : \mathcal{C}^{\circ} \to (\mathrm{Ab})$ un foncteur contravariant exact à
+gauche. Soit $(Y_{j})_{j \in I}$ la famille des composantes irréductibles de
+$Y = V(I)$, et soit $J \subset I$ une sous-famille telle que, pour tout
+$M \in \mathcal{C}$, la nullité de $T(M)$ — qui de toute façon ne dépend que de
+$\mathrm{supp}\, M$, en vertu de 2.4 — équivaille à : $Y_{j} \not\subset
+\mathrm{supp}\, M$ pour tout $j \in J$. Soit $S$ l'ensemble des points
+génériques des $Y_{j}$, $j \in J$. Alors, pour tout $M \in \mathcal{C}$,
+\[
+  \mathrm{Ass}\, T(M) \;=\; \mathrm{supp}\, M \cap S ;
+\]
+en particulier le $A$-module $T(M)$ n'a pas d'idéal premier associé
+immergé.\footnote{Le feuillet glose $S$ par une addition à l'encre
+« $= (Y_{i})_{i \in J}$ », ce qui confond l'ensemble des points génériques avec
+la famille des composantes. C'est l'ensemble des points génériques qui est
+utilisé partout ensuite, et c'est lui qui est écrit ici.}
+
+Posons $H = \varinjlim_{n} T(A/I^{n})$.\footnote{Le feuillet écrit ici $A/I^{n}$
+là où 2.12 écrivait $A_{m} = A/I^{m+1}$. Les deux familles sont cofinales et la
+limite est la même ; le décalage d'indice n'a aucune conséquence et n'est pas
+corrigé ailleurs.} Par 2.9, $T(M) \simeq \mathrm{Hom}(M,H)$, d'où
+\[
+  (\ast\ast) \qquad
+  \mathrm{Ass}\, T(M) \;=\; \mathrm{supp}\, M \cap \mathrm{Ass}\, H ,
+\]
+et tout revient à établir $\mathrm{Ass}\, H = S$. On a d'emblée
+$\mathrm{Ass}\, H \subset \mathrm{supp}\, H \subset Y$. Soit $y \in Y$ et
+$M = A/\mathfrak{p}_{y}$, de sorte que $\mathrm{supp}\, M = \overline{\{y\}}$.
+Par $(\ast\ast)$, $T(M) \neq 0$ équivaut à ce que $\overline{\{y\}}$ rencontre
+$\mathrm{Ass}\, H$ ; par hypothèse, $T(M) \neq 0$ équivaut à ce que
+$\overline{\{y\}}$ rencontre $S$. Donc, pour tout $y \in Y$ :
+\[
+  \overline{\{y\}} \cap \mathrm{Ass}\, H \neq \emptyset
+  \quad\Longleftrightarrow\quad
+  \overline{\{y\}} \cap S \neq \emptyset .
+\]
+Prenons $y \in \mathrm{Ass}\, H$ : il existe alors $z \in S$ avec $z \in
+\overline{\{y\}}$, c'est-à-dire $\overline{\{z\}} \subset \overline{\{y\}}$ ;
+mais $\overline{\{z\}}$ est une composante irréductible de $Y$ et
+$\overline{\{y\}} \subset Y$, donc $\overline{\{y\}} = \overline{\{z\}}$ et
+$y = z \in S$. D'où $\mathrm{Ass}\, H \subset S$. Réciproquement, pour $z \in S$,
+$\overline{\{z\}}$ rencontre $S$, donc rencontre $\mathrm{Ass}\, H$ en un point
+$w$ ; par ce qui précède $w \in S$, et deux éléments de $S$ dont l'un spécialise
+l'autre sont égaux, donc $w = z$ et $z \in \mathrm{Ass}\, H$.\footnote{La
+dernière phrase du feuillet — « puis $S \subset \mathrm{Ass}\, H$ puisque tout
+$y \in S$ doit avoir une spécialisation dans $S$, donc être dans $S$ » — est
+elliptique et, prise au pied de la lettre, circulaire. L'argument restitué
+ci-dessus est celui qu'elle abrège, et son ressort est bien la dernière clause
+qu'il écrit : deux éléments de $S$ dont l'un spécialise l'autre sont
+identiques.} L'énoncé dit, en langage d'aujourd'hui, qu'un module de
+$I$-torsion représentant un foncteur exact à gauche est une somme d'enveloppes
+injectives indexée par des points génériques : pas de premier immergé.
+
+\pagerange{11}{13}
+\subsection*{Injectivité, et la généralisation aux faisceaux (pages 11 à 13)}
+
+\emph{Proposition 2.15.} Avec les notations précédentes, pour que $H$ soit un
+$A$-module injectif, il faut et il suffit que le foncteur
+$T_{H}(M) = \mathrm{Hom}(M,H)$ sur la catégorie $\mathcal{C}$ des $A$-modules de
+type fini annulés par une puissance de $I$ soit exact à droite, donc exact.
+Autrement dit, 2.10 induit une équivalence entre la catégorie des foncteurs
+contravariants \emph{exacts} de $\mathcal{C}$ dans $(\mathrm{Ab})$ et la
+catégorie des $A$-modules injectifs dont tout élément est annulé par une
+puissance de $I$.
+
+La nécessité est triviale. Pour la suffisance, il suffit — c'est le critère de
+Baer, qu'il cite sous le nom de \emph{Tohoku} — de vérifier que pour tout
+sous-module $N$ de $A$, l'application $\mathrm{Hom}(A,H) \to \mathrm{Hom}(N,H)$
+est surjective, ce qui ramène au cas où $M$ et $N$ sont de type fini. Soit donc
+$u : N \to H$. Son image est un sous-module de type fini de $H$, donc annulé par
+une puissance de $I$ : $u$ est nul sur $I^{n}N$. Par le lemme d'Artin--Rees, il
+existe $m$ tel que $N \cap I^{m}M \subset I^{n}N$.\footnote{Le feuillet écrit
+« En vertu de \emph{Krull}, $I^{n}N$ contient une intersection $N \cap I^{m}N$ »
+— avec $N$ au second membre, là où le déploiement qui suit immédiatement écrit
+$N \cap I^{m}M$, qui est le seul terme dont l'énoncé ait besoin. C'est le lemme
+d'Artin--Rees ; le théorème d'intersection de Krull en est le corollaire usuel,
+et c'est lui qu'il nomme.} On a alors une injection
+$0 \to N/(N \cap I^{m}M) \to M/I^{m}M$ dans $\mathcal{C}$, et $u$ se factorise
+par un homomorphisme $u' : N/(N \cap I^{m}M) \to H$, lequel par hypothèse se
+prolonge à $M/I^{m}M$ ; d'où $v : M \to H$ prolongeant $u$.
+
+\emph{Corollaire 2.16.} Soit $K$ un $A$-module et soit $H^{0}_{I}(K)$ le
+sous-module des éléments annulés par une puissance de $I$. Si $K$ est injectif,
+$H^{0}_{I}(K)$ l'est aussi.
+
+En effet, lorsque $M$ parcourt $\mathcal{C}$, l'inclusion induit un isomorphisme
+fonctoriel $\mathrm{Hom}(M, H^{0}_{I}(K)) \xrightarrow{\ \sim\ }
+\mathrm{Hom}(M,K)$ — un homomorphisme d'un module de $I$-torsion de type fini
+atterrit dans la partie de $I$-torsion — et il suffit d'appliquer 2.15.
+C'est l'énoncé que le foncteur de $I$-torsion préserve les
+injectifs.\footnote{La notation $H^{0}_{I}$ est la sienne, et c'est la seule
+occurrence, dans tout le tapuscrit, d'un symbole de cohomologie locale. Le
+foncteur est aujourd'hui noté $\Gamma_{I}$ et ses dérivés $H^{i}_{I}$ ; le
+module $H$ de 2.9 et les $H^{i}$ de 2.12 sont exactement ces dérivés, et c'est
+par là que le tapuscrit rejoint la seconde moitié du dossier. Le feuillet ne le
+dit nulle part.}
+
+Juste avant la dernière remarque, une ligne entière est biffée à la machine :
+\emph{« Si on rejette tout ce numéro (comme il me semble raisonnable) »}. Le
+numéro n'a pas été rejeté ; il est dans la chemise.
+
+\emph{Remarques 2.17.} On peut généraliser 2.6, 2.9 et leurs corollaires au cas
+d'un préschéma noethérien $X$, $\mathcal{C}$ désignant la catégorie des modules
+cohérents sur $X$ à support contenu dans $Y$ — avec $Y = X$ dans le cas de 2.6.
+Pour un foncteur contravariant exact à gauche $T$ de $\mathcal{C}$ dans
+$(\mathrm{Ab})$, on a une représentation, essentiellement unique,
+\[
+  T \;\simeq\; \big(F \rightsquigarrow \mathrm{Hom}(F,H)\big) ,
+  \qquad H \simeq \varinjlim_{n} T(\mathcal{O}_{X}/I^{n}) ,
+\]
+où $H$ est quasi-cohérent à support contenu dans $Y$. La démonstration tient en
+deux observations : $T$ est ind-représentable, par le critère général de
+\emph{Technique de descente et théorèmes d'existence en géométrie algébrique,
+II}, applicable ici parce que les objets de $\mathcal{C}$ sont
+noethériens ;\footnote{Le numéro de l'exposé est laissé en blanc sur le
+feuillet, quatre points de suspension. Il s'agit du Séminaire Bourbaki,
+exposé 195 (1959/60), sous le titre « Le théorème d'existence en théorie
+formelle des modules » ; le numéro est fourni ici et ne figure pas sur la page.}
+et $\mathrm{Ind}(\mathcal{C})$ est naturellement équivalente à la catégorie de
+tous les modules quasi-cohérents sur $X$ à support contenu dans $Y$ — ce qui est
+la forme catégorique du fait qu'un module quasi-cohérent est limite inductive
+filtrante de modules cohérents. Il conclut : « Nous n'aurons sans doute pas
+besoin de ce fait dans ce Chapitre, où les résultats affines développés ici
+suffiront pour notre propos. »
+
+\pagerange{15}{20}
+\section*{II. Les faisceaux d'ensembles : $(P_1)$ et $(P_2)$ (pages 15 à 20)}
+
+Ici la main change, et le régime d'écriture avec elle. Ce qui suit est un
+brouillon rapide : les énoncés et les formules affichées passent, les phrases
+qui les relient très souvent non. Le lecteur doit savoir, avant d'entrer, que
+les pages 17, 19 et 20 sont en grande partie illisibles et que rien n'y est
+comblé ici.\footnote{La chemise de kraft qui enveloppe ces six feuillets porte,
+biffés de trois longues diagonales : « Foncteurs élémentaires / sur les espaces
+topologiques, / en particulier noethériens, / profondeur $\geqslant 2$ / pour
+faisceaux / d'ensembles ». C'est le seul endroit du dossier où le mot
+\emph{profondeur} est écrit, et il nomme ce que $(P_{2})$ signifie.}
+
+\emph{Définition 1.} Soient $X$ un espace topologique, $Y$ une partie fermée,
+$U = X - Y$, $i : U \to X$ l'inclusion, et $F$ un faisceau d'ensembles sur $X$.
+On dit que $F$ a la propriété $(P_{1})$, resp. $(P_{2})$, si le morphisme
+canonique
+\[
+  F \longrightarrow i_{*}i^{*}F \;=\; i_{*}(F|U)
+\]
+est injectif, resp. bijectif. De façon équivalente, si pour tout ouvert
+$V \subset X$ l'application de restriction
+\[
+  \Gamma(V,F) \longrightarrow \Gamma(V \cap U, F)
+\]
+est injective, resp. bijective.
+
+En marge, et sans suite : « N.B. regarder aussi la propriété :
+\emph{surjective} ». La question restera sans réponse dans cette partie ; elle
+est exactement celle à laquelle la troisième partie du dossier répondra, sous le
+nom de $(P_{3})$ et pour des objets au lieu de sections.
+
+Ce qui suit — la restriction de l'étude aux espaces localement noethériens dont
+les parties fermées se comportent bien, l'introduction de ce qu'il appelle un
+« espace noethérien spécial », et les définitions de $\mathrm{Loc}_{x}(X)$ et de
+$\mathrm{Loc}_{x}(F)$ — est annoncé sur le feuillet 15 dans des lignes dont
+presque rien n'a été lu. La \emph{Définition 2}, qui y transporte $(P_{1})$ et
+$(P_{2})$ en un point, est dans le même état, et y nomme au passage des
+propriétés $(P_{3})$ et $(P_{4})$ qui n'apparaîtront plus jamais dans cette
+partie.\footnote{L'état du feuillet est tel que la transcription y porte, sur
+trois lignes consécutives, sept marques d'illisibilité et trois lectures
+douteuses. Aucune reconstitution n'est tentée ici : ni la définition de
+« l'espace noethérien spécial », ni celle de $\mathrm{Loc}_{x}$, ni le contenu
+de $(P_{3})$ et $(P_{4})$ à ce stade. Ce qui suit utilise la seule définition
+que la suite du dossier rende certaine, et qui est écrite au net au Lemme 5 :
+$X_{(x)}$ est l'ensemble des générisations de $x$ muni de la topologie induite,
+et $F_{(x)}$ la restriction de $F$ à cet ensemble.}
+
+La définition ponctuelle qui est effectivement utilisée dans tout le reste du
+dossier est donc celle-ci : $F$ a la propriété $(P_{1})$, resp. $(P_{2})$,
+\emph{en un point} $x$ lorsque $F_{(x)}$ l'a sur $X_{(x)}$ relativement à
+$\{x\}$ ; et sur un espace localement noethérien quelconque, $F$ a la propriété
+lorsqu'il l'a en tout point.
+
+\emph{Proposition 3.} Soient $X$ un espace localement noethérien
+« spécial »,\footnote{Le terme est le sien et n'est défini nulle part
+lisiblement dans le dossier. Ce que les démonstrations en utilisent — toute
+partie fermée irréductible a un point générique unique, les parties
+constructibles se comportent bien vis-à-vis des générisations, tout fermé non
+vide a un point maximal — est ce qu'on appelle aujourd'hui un \emph{espace
+spectral}, terme dû à Hochster (1969), soit postérieur au dossier. On ne trouve
+sur les feuillets ni ce mot ni celui de \emph{sobre}.} $Y$ une partie fermée,
+$F$ un faisceau d'ensembles sur $X$. Sont équivalentes :
+\begin{enumerate}
+  \item[(i)] $F$ a la propriété $(P_{1})$, resp. $(P_{2})$, relativement à $Y$ ;
+  \item[(ii)] pour tout $x \in Y$, $F$ a la propriété $(P_{1})$, resp.
+  $(P_{2})$, en $x$.
+\end{enumerate}
+
+\emph{Corollaire 4.} Si $F$ satisfait $(P_{1})$, resp. $(P_{2})$, relativement à
+$Y$, alors pour tout ouvert $X' \subset X$ et toute partie fermée $Y'$ de $X'$
+avec $Y' \subset X' \cap Y$, le faisceau $F|X'$ satisfait $(P_{1})$, resp.
+$(P_{2})$, relativement à $Y'$.
+
+La démonstration du corollaire est celle qui passe le mieux sur le feuillet 18,
+et elle est purement formelle. Avec $U' = X' - Y'$, on a le triangle commutatif
+des restrictions
+
+\begin{tikzcd}
+  \Gamma(V,F) \arrow[r, "\rho'"] \arrow[dr, "\rho"'] & \Gamma(V \cap U', F) \arrow[d, "\rho''"] \\
+  & \Gamma(V \cap U, F)
+\end{tikzcd}
+
+où $\rho$ et $\rho''$ sont injectifs, resp. bijectifs — le second parce que
+$V \cap U = (V \cap U') \cap U$ — d'où il suit que $\rho'$ l'est.
+
+\emph{Lemme 5.} Pour tout $x \in X$, en posant $X_{(x)} = \mathrm{Loc}_{x}(X)$,
+$X'_{(x)} = X_{(x)} - \{x\}$ et $V_{(x)} = V \cap X_{(x)}$, on a un isomorphisme
+\[
+  (\ast) \qquad
+  \Gamma(V_{(x)}, F_{(x)}) \;\simeq\;
+  \varinjlim_{W \ni x} \Gamma(W \cap V, F) ,
+\]
+la limite étant prise sur les voisinages ouverts $W$ de $x$.\footnote{Le
+feuillet 18 écrit la première de ces égalités sous la forme
+« $\mathrm{Loc}_{x}(X) = \mathrm{Loc}_{x}(X) - \{x\}$ », le même symbole des
+deux côtés : c'est le symbole de gauche qui doit porter un accent, et c'est
+$X'_{(x)}$ qui est écrit ici. La transcription note que la formule $(\ast)$ est
+la seule ligne de ce feuillet écrite au net, les lignes qui la précèdent étant
+un palimpseste de trois états successifs.}
+
+C'est l'énoncé de continuité qui fait fonctionner tout le reste : la
+localisation $X_{(x)}$ est l'intersection filtrante décroissante des voisinages
+de $x$, et les sections d'un faisceau sur une telle intersection sont la limite
+inductive des sections sur les voisinages. C'est de cette forme, et non d'une
+autre, que le dossier a besoin, puisque c'est elle qui permet de passer d'une
+condition en un point à une condition sur un voisinage.
+
+Le feuillet 17 porte, entre deux ratures, un lemme sans numéro qui est l'outil
+topologique du reste : pour deux parties localement constructibles $E \supset
+E'$ de $X$ et un point $x$, on a $E \supset E'$ au voisinage de $x$ si et
+seulement si
+\[
+  E_{(x)} \;\supset\; E'_{(x)} ,
+\]
+ce qui se ramène au fait qu'une partie constructible $Z$ telle que
+$Z_{(x)} = \emptyset$ a une adhérence ne contenant pas $x$, c'est-à-dire que
+$X - Z$ est un voisinage de $x$. C'est ce lemme qui permet de faire descendre
+une égalité vérifiée sur la localisation $X_{(x)}$ jusqu'à un voisinage de
+$x$.\footnote{Le feuillet 17 est, avec les feuillets 19 et 20, le plus abîmé du
+lot : une longue rature horizontale y traverse quatre lignes, et la prose de
+liaison y est presque intégralement illisible. L'énoncé ci-dessus est ce que les
+deux formules affichées et les mots « constructible », « immédiat » et
+« voisinage » permettent de restituer ; le reste du feuillet, y compris la
+démonstration de surjectivité qu'il amorce, n'est pas restitué ici et ne doit
+pas l'être.}
+
+Le feuillet 19 porte la démonstration de (ii) $\Rightarrow$ (i), et c'est le
+feuillet le plus travaillé du lot : trois longues ratures horizontales, deux
+blocs cernés, un mot biffé en marge. Ce qui en passe est la \emph{structure} et
+non le détail, et on n'en dira ici que la structure. La question étant locale
+sur $X$, on peut supposer $X$ noethérien, et l'on procède par \emph{récurrence
+noethérienne} sur les parties fermées : on suppose la propriété acquise
+relativement à tout fermé $Y' \subsetneq Y$ et on l'établit relativement à $Y$.
+Le cas $Y = \emptyset$ est trivial. Il faut alors montrer que
+\[
+  \Gamma(X,F) \longrightarrow \Gamma(U,F) , \qquad U = X - Y ,
+\]
+est injective, resp. bijective. Pour l'injectivité, deux sections $f$, $g$ de
+$F$ sur $X$ de même image dans $\Gamma(U,F)$ coïncident en tout point $x$ de $Y$
+dont l'adhérence n'est pas $Y$ tout entier, par l'hypothèse de récurrence ; en
+un point maximal de $Y$, c'est l'hypothèse $(P_{1})$ en ce point qui conclut, via
+le Lemme 5. La surjectivité, au feuillet 20, suit le même plan : on recouvre
+$V_{(x)}$ par des ouverts $W_{i}$ portant des sections $f_{i}$ qui induisent la
+section donnée, on considère les parties
+$W_{ij} = \{\, y \in W_{i} \cap W_{j} : f_{i,y} = f_{j,y} \,\}$, qui sont
+constructibles, et l'on ajuste les $W_{i}$ pour que ces parties soient les
+intersections entières, de sorte que les $f_{i}$ se recollent en une vraie
+section.\footnote{Le feuillet 20 écrit « $f_{i,y} = h_{y}$ » là où l'argument
+demande $f_{j,y}$ : la transcription porte le $h$ tel quel et le signale. La
+lecture retenue ici est $f_{j}$, seule compatible avec le rôle de ces parties
+dans le recollement. Il faut redire que ces deux feuillets sont, en prose, très
+largement illisibles : le décompte des étapes ci-dessus est ce que les formules
+affichées et les mots isolés qui subsistent permettent d'affirmer, et rien de
+plus n'est affirmé.}
+
+L'implication (i) $\Rightarrow$ (ii) occupe la fin du feuillet 20 et est plus
+courte : pour $x \in Y$, le Corollaire 4 appliqué à $\overline{\{x\}}$ donne que
+$F$ satisfait la propriété relativement à $\overline{\{x\}}$, donc, avec
+$V = X - \overline{\{x\}}$, que $\Gamma(W,F) \to \Gamma(W \cap V, F)$ est
+injective, resp. bijective, pour tout voisinage ouvert $W$ de $x$ ; on passe à
+la limite sur $W$ et l'on identifie le résultat, par deux applications du
+Lemme 5, à
+\[
+  \Gamma(X_{(x)}, F_{(x)}) \longrightarrow \Gamma(X'_{(x)}, F_{(x)}) .
+\]
+
+\pagerange{21}{28}
+\section*{III. Les catégories fibrées : $(P_1)$, $(P_2)$, $(P_3)$ (pages 21 à 28)}
+
+\pagerange{21}{24}
+\subsection*{Les trois conditions, et leur forme ponctuelle (pages 21 à 24)}
+
+Le feuillet 21 s'ouvre sur la fin de la démonstration commencée au feuillet 20 —
+le prolongement d'une section de $F$ sur $U$ en une section sur $X$, par
+l'hypothèse de récurrence et la propriété $(P_{2})$ au point $x$ — puis passe
+sans transition au changement de cadre qui occupe les huit derniers feuillets.
+
+Le changement est celui-ci. Jusqu'ici on prolongeait des \emph{sections}, et
+deux sections sont égales ou ne le sont pas. On va prolonger des \emph{objets},
+et deux objets ne sont pas égaux : ils sont isomorphes, et en général de
+plusieurs manières. La donnée pertinente n'est plus un faisceau mais une
+\emph{catégorie fibrée} $\mathcal{F}$ sur la catégorie des ouverts de $X$ : une
+catégorie $\mathcal{F}(V)$ pour chaque ouvert, des foncteurs de restriction, et
+les isomorphismes de compatibilité entre eux. Et un foncteur de restriction peut
+manquer d'être une équivalence de trois manières emboîtées, d'où trois
+conditions au lieu de deux.
+
+\emph{Définition 6.} Soient $X$ un espace topologique, $Y$ une partie fermée,
+$U = X - Y$, et $\mathcal{F}$ une catégorie fibrée sur la catégorie des ouverts
+de $X$. On dit que $\mathcal{F}$ satisfait la condition $(P_{1})$, resp.
+$(P_{2})$, resp. $(P_{3})$, relativement à $Y$, si pour tout ouvert
+$V \subset X$ le foncteur de restriction
+\[
+  \mathcal{F}(V) \longrightarrow \mathcal{F}(V \cap U)
+\]
+est fidèle, resp. pleinement fidèle, resp. une équivalence de
+catégories.\footnote{Le feuillet porte devant le $\mathcal{F}$ du premier membre
+un jambage supplémentaire, lu $\Gamma$ par la transcription, que le second
+membre n'a pas ; l'asymétrie est sur la page et la lecture y est donnée pour
+douteuse. Aucune interprétation ne rend $\Gamma\mathcal{F}(V)$ différent de
+$\mathcal{F}(V)$ dans cet énoncé, et c'est $\mathcal{F}(V)$ qui est écrit ici.}
+On dit que $\mathcal{F}$ satisfait la condition en un point $x \in X$ si le
+foncteur
+\[
+  \mathrm{Pseudolim}_{W}\ \mathcal{F}(W)
+  \longrightarrow
+  \mathrm{Pseudolim}_{W}\ \mathcal{F}(W - W \cap \overline{\{x\}})
+\]
+est fidèle, resp. pleinement fidèle, resp. une équivalence, $W$ parcourant les
+voisinages ouverts de $x$.\footnote{Le mot est le sien, écrit avec le $W$ sous
+une longue flèche : c'est une limite inductive filtrante de \emph{catégories},
+prise au sens où la composition des restrictions n'est associative qu'à
+isomorphisme près. On dit aujourd'hui pseudo-colimite filtrante, ou
+$2$-colimite. Le nom de « limite » est trompeur : $W$ décroît, la construction
+est une colimite.}
+
+Une note marginale, elle-même très abîmée, demande si les deux formes — globale
+et ponctuelle — coïncident sur un espace localement noethérien spectral. C'est
+la Proposition 7, et c'est la question que toute cette partie traite.
+
+Les pages 22 et 23 ramènent les trois conditions à des conditions sur des
+faisceaux, ce qui est ce qui permettra à la deuxième partie du dossier de servir.
+Pour deux objets $f$, $g$ de $\mathcal{F}(V)$, soit $\mathcal{H}om(f,g)$ le
+faisceau sur $V$ des homomorphismes, dont les sections sur $V' \subset V$ sont
+les homomorphismes $f|V' \to g|V'$. Alors :
+\begin{itemize}
+  \item $\mathcal{F}$ satisfait $(P_{1})$, resp. $(P_{2})$, relativement à $Y$
+  si et seulement si, pour tout ouvert $V$ et tout couple
+  $f, g \in \mathrm{Ob}\,\mathcal{F}(V)$, le faisceau $\mathcal{H}om(f,g)$
+  satisfait $(P_{1})$, resp. $(P_{2})$, relativement à $Y \cap V$ ;
+  \item $\mathcal{F}$ satisfait $(P_{3})$ si de plus, pour tout ouvert $V$, tout
+  objet $f'$ de $\mathcal{F}(V \cap U)$ est isomorphe à la restriction d'un objet
+  de $\mathcal{F}(V)$.
+\end{itemize}
+
+\footnote{Le feuillet écrit ce dernier objet dans $\mathcal{F}(W)$ alors que
+l'argument demande $\mathcal{F}(V)$ ; la transcription le signale et porte $W$
+tel quel. C'est $V$ qui est écrit ici. Une hypothèse est par ailleurs
+tacitement faite dans toute cette page, et il faut la dire : pour que
+« $V' \rightsquigarrow \mathrm{Hom}(f|V', g|V')$ » soit un \emph{faisceau} et
+non un simple préfaisceau, il faut que $\mathcal{F}$ soit un préchamp. La
+Définition 6 ne demande qu'une catégorie fibrée.}
+
+La troisième forme, à la page 23, est celle qui rend la condition ponctuelle
+maniable : pour tout $x \in X$, on introduit la \emph{catégorie fibrée induite}
+$\mathcal{F}_{(x)}$ sur $X_{(x)}$ en posant
+\[
+  \mathcal{F}_{(x)}(w) \;=\; \mathrm{Pseudolim}_{W}\ \mathcal{F}(W) ,
+\]
+$W$ parcourant les ouverts de $X$ tels que $W_{(x)} = w$. On a alors, pour $f$,
+$g$ au-dessus d'un ouvert $V$,
+\[
+  \mathcal{H}om(f,g)_{(x)} \;\simeq\; \mathcal{H}om(f_{(x)}, g_{(x)}) ,
+\]
+et le N.B. du feuillet en tire ce qui sera utilisé partout : la propriété
+$(P_{1})$, resp. $(P_{2})$, resp. $(P_{3})$, de $\mathcal{F}$ \emph{en} $x$
+revient à la même propriété de $\mathcal{F}_{(x)}$ \emph{sur} $X_{(x)}$, et pour
+$(P_{1})$ et $(P_{2})$ elle revient encore à ce que les faisceaux
+$\mathcal{H}om(f,g)$ aient la propriété correspondante en $x$.\footnote{Le
+feuillet écrit cette identification avec une double flèche et non une flèche
+d'isomorphisme, ce que la transcription porte tel quel ; il l'introduit aussi
+par « j'imagine », qui est sa manière d'annoncer ce qu'il n'a pas vérifié. La
+lecture la donne comme isomorphisme, ce qu'elle est, la limite inductive
+filtrante commutant aux Hom d'objets de présentation finie sur un voisinage
+fixé.}
+
+\emph{Proposition 7.} Soient $X$ un espace topologique noethérien spectral,
+$\mathcal{F}$ une catégorie fibrée sur la catégorie des ouverts de $X$, et $Y$
+une partie fermée. Sont équivalentes :
+\begin{enumerate}
+  \item[(i)] $\mathcal{F}$ satisfait $(P_{1})$, resp. $(P_{2})$, resp.
+  $(P_{3})$, relativement à $Y$ ;
+  \item[(ii)] pour tout $x \in Y$, $\mathcal{F}$ satisfait $(P_{1})$, resp.
+  $(P_{2})$, resp. $(P_{3})$, en $x$.
+\end{enumerate}
+
+\footnote{La condition (ii) est écrite sur le feuillet « en $X$ », avec une
+majuscule, là où c'est le point $x$ qui est en cause ; la transcription le
+signale. Pour $(P_{1})$ et $(P_{2})$, l'énoncé n'est autre que la Proposition 3
+appliquée aux faisceaux $\mathcal{H}om(f,g)$, ce que la page dit en une ligne :
+« Reste le cas $P_{3}$, quand $P_{1}$, $P_{2}$ sont déjà vérifiés. »}
+
+\emph{Corollaire 8.} Si $\mathcal{F}$ satisfait $(P_{1})$, resp. $(P_{2})$,
+resp. $(P_{3})$, relativement à $Y$, alors pour tout ouvert $X' \subset X$ et
+toute partie fermée $Y' \subset Y \cap X'$, la catégorie fibrée induite
+$\mathcal{F}|X'$ satisfait la même condition relativement à $Y'$.
+
+\pagerange{25}{27}
+\subsection*{Les démonstrations, et la traduction cohomologique (pages 25 à 27)}
+
+Le Corollaire 8 se démontre comme le Corollaire 4, et par le même diagramme, une
+catégorie en remplaçant un ensemble de sections :
+
+\begin{tikzcd}
+  \mathcal{F}(V) \arrow[r, "\rho'"] \arrow[dr, "\rho"'] & \mathcal{F}(V \cap U') \arrow[d, "\rho''"] \\
+  & \mathcal{F}(V \cap U)
+\end{tikzcd}
+
+$\rho$ et $\rho''$ étant des équivalences, $\rho'$ en est une.
+
+L'implication (i) $\Rightarrow$ (ii) de la Proposition 7 s'obtient en appliquant
+la condition à $\overline{\{x\}}$ pour $x \in Y$ : pour tout voisinage ouvert
+$W$ de $\overline{\{x\}}$, le foncteur $\mathcal{F}(W) \to \mathcal{F}(W - W
+\cap \overline{\{x\}})$ est une équivalence, donc le reste après passage à la
+limite sur les $W$, ce qui est exactement la condition en $x$.\footnote{Le
+feuillet abrège les trois énoncés — fidélité, pleine fidélité, équivalence — par
+une lettre $\mathcal{H}$ qu'il n'introduit nulle part et qu'il glose seulement
+par « l'un des types ». Elle n'est pas reprise ici ; les trois cas sont énoncés
+ensemble, comme partout ailleurs dans le dossier.}
+
+L'implication (ii) $\Rightarrow$ (i) est le seul endroit qui coûte quelque
+chose, et seulement pour $(P_{3})$ : il s'agit de montrer que tout objet $f'$ de
+$\mathcal{F}(U)$ provient d'un objet de $\mathcal{F}(X)$. La question étant
+locale, on suppose $X$ noethérien, et l'on fait la récurrence noethérienne :
+$\mathcal{F}$ satisfait $(P_{3})$ relativement à tout fermé $Y' \subsetneq Y$.
+Si $Y = \emptyset$, il n'y a rien à prouver. Sinon, soit $x$ un point maximal de
+$Y$. La restriction $f'|X'_{(x)}$ provient, par hypothèse, d'un objet de
+$\mathcal{F}_{(x)}(X'_{(x)})$, donc d'un objet $f_{0}$ de $\mathcal{F}(W)$ pour
+un voisinage ouvert $W$ de $x$ assez petit. Les restrictions de $f_{0}$ et de
+$f'$ à $W \cap U$ deviennent isomorphes sur $V_{(x)} = X'_{(x)}$, donc — quitte
+à rétrécir $W$ — sont isomorphes. En recollant le long de cet isomorphisme, on
+obtient un objet $f'_{1}$ de $\mathcal{F}(W \cup U)$ qui prolonge $f'$ ; le
+complémentaire de $W \cup U$ est un fermé strictement contenu dans $Y$, donc
+l'hypothèse de récurrence fait provenir $f'_{1}$ d'un objet de
+$\mathcal{F}(X)$.\footnote{C'est le seul pas du dossier qui demande à
+$\mathcal{F}$ plus que d'être une catégorie fibrée. Recoller $f_{0}$ sur $W$ et
+$f'$ sur $U$ le long d'un isomorphisme au-dessus de $W \cap U$, c'est
+l'effectivité de la descente pour le recouvrement ouvert $\{W, U\}$ :
+$\mathcal{F}$ doit être un \emph{champ}. La Définition 6 ne le demande pas, et
+aucun feuillet ne le dit. L'hypothèse est ajoutée ici parce que sans elle la
+démonstration ne tient pas ; le vocabulaire — champ, préchamp, descente
+effective — est postérieur au dossier.}
+
+\emph{Corollaire 10.} Sont équivalentes :
+\begin{enumerate}
+  \item[(i)] les conditions $(P_{1})$, resp. $(P_{2})$, resp. $(P_{3})$ ;
+  \item[(ii)] $\underline{H}^{i}_{Y}(F) = 0$ pour $i \leqslant 0$, resp.
+  $i \leqslant 1$, resp. $i \leqslant 2$.
+\end{enumerate}
+
+\footnote{C'est ici que la lecture s'écarte le plus du feuillet, et il faut dire
+exactement en quoi. Le feuillet écrit les trois plages « $i \leqslant 1$
+($i \leqslant 2$, $i \leqslant 3$) », soit une de trop dans chacun des trois
+cas. Deux choses le montrent, et elles sont toutes deux sur les feuillets. La
+première est la Proposition 9 du feuillet suivant, qui énonce les deux premiers
+cas sous la forme « $\underline{H}^{0}_{Y}(F) = 0$
+($\underline{H}^{0}_{Y}(F) = 0$ et $\underline{H}^{1}_{Y}(F) = 0$), i.e. $i = 0$
+($i = 0, 1$) » — ce qui est $i \leqslant 0$ et $i \leqslant 1$, non
+$i \leqslant 1$ et $i \leqslant 2$. La seconde est le déploiement que le
+feuillet 27 donne lui-même immédiatement après, pour traiter « le cas
+$P_{3}$ » : il y écrit $\underline{H}^{2}_{Y}$, et non $\underline{H}^{3}_{Y}$.
+Le feuillet se corrige donc deux fois lui-même, et ce sont ses corrections qui
+sont retenues. Une remarque sur l'objet de l'énoncé : (i) y est écrit « $F$
+satisfait à $P_{1}$ ($P_{2}$, $P_{3}$) », avec $F$ là où toute la page précédente
+porte sur $\mathcal{F}$. Les trois conditions n'ont de sens à trois niveaux que
+pour une catégorie fibrée ; c'est ainsi que l'énoncé est lu ici, $F$ étant le
+faisceau abélien dont $\mathcal{F}$ est, comme au feuillet suivant, la catégorie
+des torseurs.}
+
+Le feuillet donne, pour le cas $(P_{3})$, l'identification qui fait tout :
+\[
+  \underline{H}^{2}_{Y}(F) \;=\;
+  \text{faisceau associé au préfaisceau } \;
+  V \rightsquigarrow H^{1}(V \cap U, F) .
+\]
+C'est le cas $i = 2$ de la formule générale $\underline{H}^{i}_{Y}(F) \simeq
+R^{i-1}i_{*}(F|U)$ pour $i \geqslant 2$, et c'est elle qui donne l'implication
+(i) $\Rightarrow$ (ii). Réciproquement, si les faisceaux s'annulent, tout objet
+$f'$ de $\mathcal{F}(U)$ provient d'un objet de $\mathcal{F}(X)$, la question
+étant locale sur $Y$ et réglée en chaque point par la Proposition
+7.\footnote{L'exposant du $H$ du second membre ne se lit pas sur le feuillet :
+la transcription note « un seul jambage, ni un zéro net ni un chiffre », et
+celui de $\underline{H}_{Y}$ s'y lit $2$. Le $1$ écrit ici est notre lecture, et
+il est forcé : avec $\underline{H}^{2}_{Y}$ au premier membre, la seule valeur
+qui rende la formule vraie est $1$, puisque $\underline{H}^{i}_{Y}(F)$ est le
+faisceau associé à $V \rightsquigarrow H^{i-1}(V \cap U, F)$ pour
+$i \geqslant 2$. Un seul jambage est d'ailleurs ce à quoi ressemble un 1. Les
+deux autres occurrences du même exposant, dans les deux lignes qui suivent, sont
+illisibles de la même façon et sont lues de la même manière.}
+
+\pagerange{28}{28}
+\subsection*{Le cas des torseurs (page 28)}
+
+Le dernier feuillet donne le cas particulier où tout se calcule, et où le lien
+avec la première moitié du dossier devient visible d'un coup.
+
+Soient $F$ un faisceau de groupes sur $X$ et $\mathcal{F}$ la catégorie fibrée
+des fibrés principaux homogènes sous $F$ — des \emph{torseurs} — au-dessus des
+ouverts de $X$. Soit $Y$ une partie fermée.\footnote{La ligne qui définit
+$\mathcal{F}$ est très abrégée sur le feuillet ; la transcription ne donne pour
+sûrs que la locution « fibrés principaux homogènes » et le rôle de $F$, et
+signale que $F$ y est appelé \emph{préfaisceau}. C'est comme faisceau qu'il est
+lu ici, faute de quoi ni $i_{*}i^{*}F$ ni les $\underline{H}^{i}_{Y}$ n'auraient
+leur sens usuel.}
+
+\emph{Proposition 9.} Sont équivalentes :
+\begin{enumerate}
+  \item[(i)] $\mathcal{F}$ satisfait $(P_{1})$, resp. $(P_{2})$, relativement à
+  $Y$ ;
+  \item[(ii)] $F$ satisfait $(P_{1})$, resp. $(P_{2})$, relativement à $Y$ ;
+  \item[(iii)] $\underline{H}^{0}_{Y}(F) = 0$, resp.
+  $\underline{H}^{0}_{Y}(F) = 0$ et $\underline{H}^{1}_{Y}(F) = 0$.
+\end{enumerate}
+
+La démonstration tient en trois phrases et elles sont toutes les trois sur le
+feuillet. (ii) $\Rightarrow$ (i) : si $f_{0}$ désigne le torseur trivial sur
+$X$, on a $F \simeq \mathcal{H}om(f_{0}, f_{0})$, et la traduction du feuillet 22
+s'applique. (i) $\Rightarrow$ (ii) : pour $f$, $g$ dans $\mathcal{F}(V)$, le
+faisceau $\mathcal{H}om(f,g)$ est localement isomorphe à $F$, donc hérite de la
+propriété. (ii) $\Leftrightarrow$ (iii) : par définition même de
+$\underline{H}^{0}_{Y}(F)$ et de $\underline{H}^{1}_{Y}(F)$ comme noyau et
+conoyau de
+\[
+  F \longrightarrow i_{*}i^{*}F ,
+\]
+l'injectivité de ce morphisme est l'annulation du premier et sa bijectivité
+l'annulation des deux.\footnote{La suite exacte à quatre termes
+$0 \to \underline{H}^{0}_{Y}(F) \to F \to i_{*}i^{*}F \to
+\underline{H}^{1}_{Y}(F) \to 0$ est ce qui justifie l'appellation, et elle rend
+l'équivalence immédiate. Deux réserves, qu'aucun feuillet ne lève. La première :
+le conoyau n'est un faisceau de groupes que si $F$ est abélien ; pour $F$ non
+abélien, ce que l'énoncé appelle $\underline{H}^{1}_{Y}(F)$ est un faisceau
+d'ensembles pointés, quotient de $i_{*}i^{*}F$ par $F$, et l'énoncé garde son
+sens à cette lecture près. La seconde : il n'y a pas ici de troisième condition.
+$(P_{3})$ pour la catégorie des torseurs demanderait qu'un torseur sur $U$ se
+prolonge à $X$, ce qui relève de $\underline{H}^{2}_{Y}$ par le feuillet
+précédent, et la Proposition 9 ne traite que $(P_{1})$ et $(P_{2})$. Le dossier
+s'arrête là.}
+
+Et c'est ici qu'il faut revenir au tapuscrit. Les faisceaux
+$\underline{H}^{i}_{Y}(F)$ dont ce dernier feuillet fait le critère sont, sur le
+spectre d'un anneau noethérien, exactement les faisceaux associés aux modules
+\[
+  H^{i} \;=\; \varinjlim_{m} \mathrm{Ext}^{i}_{A}(A/I^{m+1}, F)
+\]
+que le Corollaire 2.12 construit à la page 10, comme limite inductive des
+valeurs d'un foncteur cohomologique contravariant sur les $A_{m}$. Le tapuscrit
+démontre que cette limite représente le foncteur, qu'elle suffit à tester
+l'annulation, et que ses idéaux premiers associés sont les points génériques des
+composantes de $Y$ ; le manuscrit s'en sert pour dire quand un objet défini hors
+de $Y$ se prolonge. Aucun des vingt-quatre feuillets ne dit que ce sont les
+mêmes $H^{i}$. C'est pourtant la seule raison pour laquelle ils sont dans la
+même chemise.
+
+\end{document}
