@@ -304,3 +304,10 @@ correspondence cannot be, without permission.
 No transcription here is an edition. A machine pass over seventy-year-old
 handwriting produces a reading, checkable against the facsimile on the same
 screen. That is its whole value, and its whole claim.
+
+**Two licences, not one.** The code and the site are CC0 — take them. The
+transcriptions are not and cannot be: they reproduce manuscripts whose rights
+run until the end of 2084 and belong to Grothendieck's heirs, so this project
+claims nothing over their contents and grants nothing. [`RIGHTS.md`](RIGHTS.md)
+sets out both, and says what happens if the University or the rights holders
+ask for this to come down.

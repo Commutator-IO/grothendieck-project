@@ -78,6 +78,20 @@ CI runs the same on your branch. Nothing deploys from a pull request; only
 
 ## Licence
 
-CC0 1.0 — the work goes into the public domain, which is the only licence that
-makes sense for readings of a fonds nobody owns. By contributing you agree to
-release your contribution under it.
+Two licences, because one cannot honestly cover both halves of this
+repository. [`RIGHTS.md`](RIGHTS.md) sets it out in full; the short version:
+
+- **The code and the site are CC0 1.0** — `scripts/`, `src/`, `relay/`, the
+  build configuration. Ours to give, and given. By contributing to them you
+  agree to release your contribution under CC0.
+- **`transcripts/` is not.** Those files reproduce manuscripts by Alexandre
+  Grothendieck, who died in 2014; the rights run until the end of 2084 and are
+  held by his heirs. This project claims no rights over the contents of the
+  manuscripts and grants none, so it cannot place a transcription in the
+  public domain, and neither can you. What you contribute to `transcripts/` is
+  a reading of someone else's work, offered on the same terms as the rest of
+  the edition: « Édition de démonstration », withdrawn on request.
+
+An earlier version of this file said CC0 was "the only licence that makes
+sense for readings of a fonds nobody owns". The fonds is owned. That claim was
+wrong and is withdrawn.

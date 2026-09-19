@@ -369,9 +369,18 @@ function PullRequest() {
     <section className="mt-14 max-w-[52em]">
       <h2 className="titre text-[22px] text-ink-900">Opening a pull request</h2>
       <p className="prose-fonds mt-3">
-        The repository is public and the licence is CC0 — the work is placed in the public
-        domain, which is the only licence that makes sense for readings of a fonds nobody owns.
-        A pull request is the same shape whether you are fixing one accent or adding a folder.
+        The repository is public, and it carries two licences rather than one. The code and
+        this site are CC0 — ours to give, and given. The transcriptions are not: they reproduce
+        manuscripts whose rights run until 2084 and belong to Grothendieck's heirs, so this
+        project claims nothing over them and grants nothing.{' '}
+        <a
+          href={`${REPO}/blob/main/RIGHTS.md`}
+          className="font-medium text-brand-600 underline decoration-brand-200 underline-offset-2 hover:text-brand-700"
+        >
+          RIGHTS.md
+        </a>{' '}
+        sets out both. A pull request is the same shape whether you are fixing one accent or
+        adding a folder.
       </p>
 
       <Code>{`gh repo fork ${REPO.replace('https://github.com/', '')} --clone
