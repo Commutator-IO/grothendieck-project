@@ -1,7 +1,7 @@
 import { H2, H3, LI, P, useHashTarget } from './components/Anchors.tsx';
 import { Footer, Header } from './components/Frame.tsx';
-import { BOOKS, cotesOf } from './content/books.ts';
-import { COTES } from './content/catalogue.ts';
+import { BOOKS, UNEDITED, cotesOf } from './content/books.ts';
+import { BY_ID, COTES } from './content/catalogue.ts';
 import {
   BATCH_SIZE,
   batchCount,
@@ -229,7 +229,7 @@ export function MethodPage() {
 
         <Pipeline />
 
-        <CostAndHorizon />
+        <CostAndHorizon manifest={manifest} />
 
         <Contributors />
 
@@ -501,6 +501,18 @@ function Contributors() {
  * input, and output at several times it — and quoting one number for both is
  * how the earlier figure came to be wrong.
  */
+/**
+ * The day the first batch was committed, and the only declared figure in the
+ * pace below.
+ *
+ * Everything else about the rate is observed: the batches come from the
+ * manifest and the elapsed days from the calendar, so the figure moves on its
+ * own — down on a quiet week, up on a working one — instead of being a claim
+ * somebody has to remember to refresh. That is the whole reason to compute it
+ * this way rather than to write "about twenty a week" into the page.
+ */
+const FIRST_BATCH = '2026-08-08';
+
 const PILOT = {
   /** Transcribed so far, counted off `public/manifest.json` and excluding the
       specimen: sixty folders, 1,938 pages. The batch list that used to stand
@@ -538,13 +550,35 @@ const PILOT = {
   spread: 1.6,
 };
 
-function CostAndHorizon() {
+function CostAndHorizon({ manifest }: { manifest: ReturnType<typeof useManifest> }) {
   const bookBatches = BOOKS.reduce(
     (s, b) => s + cotesOf(b).reduce((x, c) => x + batchCount(c.pages), 0),
     0,
   );
   // The whole open-access fonds, not only the notebooks.
   const allBatches = COTES.reduce((s, c) => s + batchCount(c.pages), 0);
+  // The work outstanding: the fonds minus what a published edition already covers.
+  const openBatches = UNEDITED.reduce((s, c) => s + batchCount(c.pages), 0);
+
+  /**
+   * The pace, observed rather than claimed.
+   *
+   * Batches from the manifest, days from the calendar, and nothing declared
+   * but the date the first one landed. A page that gives hours of model-active
+   * time answers "what does it cost" and not "when is it done", which is the
+   * question anybody actually has; this answers that one, and answers it
+   * unflatteringly by construction, because a fortnight of doing nothing
+   * lengthens the horizon on its own.
+   */
+  const transcribedNow = Object.entries(manifest?.transcripts ?? {}).filter(
+    ([id, e]) => e.html.includes('fr') && BY_ID.has(id.split('#')[0]),
+  ).length;
+  const daysElapsed = Math.max(
+    1,
+    Math.round((Date.now() - Date.parse(FIRST_BATCH)) / 86_400_000),
+  );
+  const perWeek = (transcribedNow / daysElapsed) * 7;
+  const weeksLeft = (n: number) => Math.round(Math.max(0, n - transcribedNow) / perWeek);
 
   const hoursDone =
     PILOT.batchesTranscribed * PILOT.transcribe.hoursPerBatch +
@@ -574,14 +608,29 @@ function CostAndHorizon() {
       <H2 id="cost">Cost, and the horizon</H2>
       <P id="cost-measured" className="prose-fonds mt-3">
         <strong>{PILOT.batchesTranscribed} batches</strong> have been transcribed, across
-        seventeen folders taken end to end, and <strong>{PILOT.batchesModernised}</strong> of
-        them have their modernised reading — folders 139 and 29 are transcribed and not yet
-        read. At the per-batch means below that comes to about{' '}
+        sixty folders, and <strong>{PILOT.batchesModernised}</strong> of them have their
+        modernised reading — seven transcribed folders are not yet read, and folder 139 never
+        will be: it is two photographs of a medal. At the per-batch means below that comes to
+        about{' '}
         <strong>{hoursDone.toFixed(1)} h</strong> of model-active time,{' '}
         <strong>{fmtM(contextDoneM)} tokens</strong> of context and{' '}
         <strong>{fmtSmallM(writtenDoneK / 1000)}</strong> written. That total is the batch
         count times a measured mean, not a sum over every pass: seven passes have been
         metered end to end, and the rest are assumed to resemble them.
+      </P>
+      <P id="cost-pace" className="prose-fonds mt-3">
+        The figure a reader actually wants is not hours but weeks, so here it is, observed the
+        same way: <strong>{transcribedNow} batches</strong> in the{' '}
+        <strong>{daysElapsed} days</strong> since the first was committed, which is{' '}
+        <strong>{perWeek.toFixed(1)} a week</strong> counted flat across every day, working or
+        not. At that pace the folders nobody has edited — {openBatches} batches — would be
+        finished in about <strong>{weeksLeft(openBatches)} weeks</strong>, and the whole
+        open-access fonds in <strong>{weeksLeft(allBatches)}</strong>. Both numbers move on
+        their own as the manifest and the calendar do, which is the only way a claim like this
+        stays true. Two things they do not know: the pace has better than doubled since the
+        tooling landed, so the average understates the recent weeks; and the folders left are
+        larger than the ones done, the median having risen from 78 pages to 85 as the small
+        end was cleared.
       </P>
       <P id="cost-context-vs-written" className="prose-fonds mt-3">
         Those last two numbers are the same work counted twice, and keeping them apart is the
