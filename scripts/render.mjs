@@ -671,6 +671,51 @@ function readMeta(tex) {
   };
 }
 
+/**
+ * A nested list is refused, loudly, rather than rendered wrong.
+ *
+ * The lift below takes a block environment out whole, and the item splitter
+ * that follows knows one level. Give either a list inside a list and both
+ * misbehave, in the quietest way available: the outer `\begin` is matched to
+ * the *inner* `\end` when the two share a name, and when they do not, the
+ * splitter flattens the inner items into the outer list and prints the
+ * inner `\begin{…}` and `\end{…}` as words in the reading view. Neither
+ * throws. A reader then sees six sub-conditions promoted to conditions, with
+ * LaTeX source in the middle of a sentence — a hierarchy the manuscript does
+ * not have, asserted by the edition.
+ *
+ * Supporting nesting properly is a change to the splitter, not to this
+ * regex. Until then the file is refused, because the whole of this
+ * renderer's design is that what it cannot represent it declines rather
+ * than approximates. The transcriptions flatten the nesting instead: the
+ * outer list closes, the inner one opens as its sibling.
+ */
+function refuseNestedEnv(text, ENVS) {
+  const open = new RegExp(`\\\\(begin|end)\\{(${ENVS})\\}`, 'g');
+  const stack = [];
+  for (const m of text.matchAll(open)) {
+    if (m[1] === 'begin') {
+      if (stack.length) {
+        // Not a line number: math and footnotes have already been lifted out,
+        // so offsets here are not the file's. The opening words of the item
+        // are what actually finds the place in the .tex.
+        const where = text
+          .slice(Math.max(0, m.index - 120), m.index)
+          .split('\n')
+          .filter((l) => l.trim())
+          .pop();
+        throw new Error(
+          `nested list environment: \\begin{${m[2]}} inside ` +
+            `\\begin{${stack[stack.length - 1]}}, after “${(where ?? '').trim()}” — ` +
+            `flatten it (close the outer list, open the inner one as a sibling); ` +
+            `this renderer handles one level only`,
+        );
+      }
+      stack.push(m[2]);
+    } else if (stack.length) stack.pop();
+  }
+}
+
 function render(tex, edition) {
   const body = /\\begin\{document\}([\s\S]*)\\end\{document\}/.exec(tex);
   if (!body) throw new Error('no \\begin{document} … \\end{document}');
@@ -691,6 +736,7 @@ function render(tex, edition) {
   const kept = [];
   const stripped = text.replace(/(?<!\\)%.*$/gm, ''); // LaTeX comments
   const { text: cleaned, notes } = liftFootnotes(stripped);
+  refuseNestedEnv(cleaned, ENVS);
   const lifted = cleaned.replace(
     new RegExp(`\\\\begin\\{(${ENVS})\\}[\\s\\S]*?\\\\end\\{\\1\\}`, 'g'),
     (m) => {
