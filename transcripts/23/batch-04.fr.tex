@@ -1,0 +1,803 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 23, batch 4 (pages 61-80).
+% Established from the facsimile archives/batches/23/batch-04.pdf (a mirror of
+% https://grothendieck.umontpellier.fr/23.pdf), per the skill
+% transcribe-grothendieck. The batch file carries no cover sheet: PDF page N is
+% archivists' page 60+N. Checked against the pencilled numbers bottom-left,
+% which read 61 … 80 on the twenty leaves in order (65, 68, 71, 72, 74, 75,
+% 76, 77, 78, 79, 80 verified one by one; the others by position) — the
+% alignment holds end to end.
+%
+% Pass: Fable 5.1 (claude-fable-5-1), 2026-09-21 — first pass, unchecked against the pages by a human.
+%
+% What the batch is. Five kinds of paper, in the order the folder gives them.
+%
+%   61-64  The last four leaves of a letter in ink, paginated 3 to 6 at the top
+%          right by its author, signed « P. Deligne » on page 64 and addressed
+%          to a « tu » who wrote chapter 0_IV of EGA IV. Its first two leaves
+%          are not in this batch. The letter goes through 0_IV paragraph by
+%          paragraph — 15.1.16, 16.1.9, 19.2, 19.4.6, 19.4.7, 19.8.3, 20.4.6,
+%          20.4.13, then III 4.3.6 — and proves what it says is missing: the
+%          lifting of a purely inseparable residue extension to a flat local
+%          algebra (p. 61-62), the equivalences on regular sequences and the
+%          Koszul complex with the lemma « (Nagata !) » on prime avoidance
+%          (p. 62-63), and « plat ⟺ formellement projectif » for a finite
+%          module over a local homomorphism (p. 63-64). A second hand — the
+%          recipient's, in a heavier ink, obliquely in the left margin — adds
+%          « garder EGA IV 19, à compléter », « faire errata : remplacer
+%          P_1 - P_2 par P_2 - P_1 », and, in pencil on page 61, queries an
+%          exponent. These are \marginal{} with a \note{} saying whose hand.
+%   65     An otherwise blank kraft sheet inscribed « Divers …. » in his hand,
+%          top right: the cover of the run that follows. No \page; its word
+%          opens the second section.
+%   66-72  Manuscript notes in ink, his hand, one topic per leaf or pair of
+%          leaves: the plan of a proof of the Main Theorem and how to make it
+%          local (66-67); « morphismes ess. de prés. finie » and « morphismes
+%          essentiellement affines » (69-70); the preschemes whose reduced
+%          local rings are fields, with nine equivalent conditions (72).
+%          Pages 68 and 71 are blank versos (68 shows page 67 through the
+%          paper) and are absent.
+%   73     One typescript leaf, paginated 41, the statement of a theorem 9.4
+%          on effective descent for étale sheaves. It is the folder's own
+%          typescript, not an alien verso, and is transcribed; its
+%          handwritten marks are layout instructions for the typist and are
+%          not reproduced.
+%   74-76  Manuscript, ink: the condition (h_0) on f : T → S (injectivity of
+%          OF(S) → OF(T), OF = open-and-closed subsets), its behaviour under
+%          change of base field, a Corollaire 1, and a sheet of sketches on
+%          extending a morphism A_T → B_T to A → B.
+%   77, 79 Pencil, the same list of equivalent conditions on Y → X written
+%          twice — π_0, OF, Γ, étale coverings — page 77 on the back of a
+%          typescript leaf that shows through, page 79 on the back of another.
+%   78     A typescript leaf paginated 24 (the proof of a (i) by noetherian
+%          induction, f_*F' constructible) corrected in his hand; transcribed
+%          with the corrections applied and flagged.
+%   80     Ink sketches on the back of an unrelated typescript filmed upside
+%          down (a « Corollaire 6.3 » on cohomological functors, not his
+%          hand, not transcribed): a few formulas on i_*Λ_V and R^i p_* and
+%          two base-change squares, relevé for what they are.
+%
+% Notation fixed for the batch. OF(S) for the ligatured « ouverts-fermés »
+% sign; ess. / prés. / pr. f. / qu. cpt / loc. noeth. kept as he abbreviates
+% them; 0_IV as $0_{\mathrm{IV}}$; « item » (his « idem ») kept; the
+% recipient's marginalia distinguished from the writer's text by a \note.
+% The subsection titles on pages 66, 69, 70 are his own headings; those on
+% 72, 74, 77, 80 are the editor's and say so.
+%
+% Legibility. The Deligne letter reads nearly end to end. The ink notes of
+% 66-76 are a fast draft with many abbreviations; formulas carry, connective
+% prose sometimes does not. The pencil of 77 and 79 over a typescript
+% show-through is the hardest of the batch and carries the most \ill{}.
+% No date appears anywhere in these twenty leaves.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{23}
+\batch{4}
+\pages{61}{80}
+\dating{1966-1968}
+\watermark{Édition de démonstration}
+\foldertitle{EGA IV. Compléments : notes manuscrites (s.d.), lettres (1966, 1968), tapuscrit (s.d.).}
+
+\begin{document}
+
+\section{Lettre de P. Deligne sur le chapitre $0_{\mathrm{IV}}$ (pages 3 à 6)}
+\note{les deux premiers feuillets de la lettre ne sont pas dans ce lot}
+
+\page{61}\note{p. 3 de la lettre, numérotée par l'auteur en haut à droite}
+Remplaçant $A$ par $A'$, il reste à prouver que si $\mathfrak{m}/\mathfrak{m}^2 \otimes K \to \mathfrak{n}/\mathfrak{n}^2$
+est surjectif (i.e.\ $K = B \otimes k$) on peut trouver $C$ tel que $K = C \otimes k$
+(d'où $\operatorname{gr} C = K \otimes_k \operatorname{gr} A$). On va manger $K$ par étapes
+\note{les deux parenthèses sont des ajouts interlinéaires, appelés par un
+crochet et une flèche}
+
+\begin{enumerate}
+  \item[a)] soit $(x_i)_{i \in I}$ une base de transcendance de $K$ sur $k$ ;
+    \struck{et} on relève les $x_i$ en des éléments de $B$, définissant ainsi
+    $A(x_i) \to B$. $A(x_i)$ est la limite inductive des localisées, au point
+    générique de la fibre spéciale, des $A[X_i]_{i \in J}$, $J$ fini ds $I$.
+    (cf Nagata, Local rings pg 17 et 18). On peut soit utiliser $0_{\mathrm{III}}$
+    10.3.1.3 pour vérifier que cet anneau est noethérien, soit le compléter et
+    utiliser le critère de platitude pour vérifier que son complété est plat
+    sur $A$
+  \item[b)] on s'est ainsi réduit à supposer $K$ algébrique sur $k$ et, si on y
+    tient, à supposer $A$ complet. On trouve sans histoire $A'$ plat sur $A$,
+    non ramifié, de corps résiduel la clôture séparable de $k$ dans $K$, et
+    $A' \to B$.
+
+    Reste à traiter le cas où $K/k$ est purement inséparable, et on va
+    utiliser une propriété « d'intersection complète » des corps, que je n'ai
+    pas su bien dégager
+  \item[c)] on suppose : $K/k$ purement inséparable, $A$ et $B$ complets,
+    $\uncertain{K = B \otimes k}$.
+    \note{les trois lettres sont récrites en surcharge}
+    soit $K_n$ le sous corps de $K$ formé des $x$ tels que $x^{p^n} \in k$
+    ($K_n = K \cap k^{p^{-n}}$), et soit $x_n^\alpha$ une $p$-base de $K_n$
+    sur $K_{n-1}$ ($n \geqslant 1$). $K$ est l'anneau engendré par des
+    éléments $x_n^\alpha$ soumis à des relations
+    $(x_n^\alpha)^p = P_n^\alpha(x_m^\beta,\ m < n)$ ($P$ à coefficients
+    dans $k$). Relevons les $x_n^\alpha$ dans $B$. On aura des relations
+    \[
+      (x_n^\alpha)^p = P_n^\alpha(x_m^\beta,\ m < n) + q_n^\alpha
+      \quad \text{avec } q_n^\alpha \text{ dans l'idéal maximal}
+      \ (P \text{ à coeff ds } A)
+    \]
+    par hypothèse, $\mathfrak{m}/\mathfrak{m}^2 \otimes_k K \to \mathfrak{n}/\mathfrak{n}^2$
+    est surjectif. D'où
+    \[
+      (x_n^\alpha)^p = P_n^\alpha(x_m^\beta,\ m < n) + Q_{n,1}^\alpha(x_m^\beta) + r_n^\alpha
+      \quad \text{avec } P \text{ (resp } Q) \text{ à coefficients dans } A \text{ (resp } \mathfrak{m})
+    \]
+    et par récurrence et passage à la limite
+    \[
+      \boxed{\,(x_n^\alpha)^p = P_n^\alpha(x_m^\beta,\ m < n) + \sum_{i=1}^{\infty} Q_{n,i}^\alpha(x_m^\beta)\,}
+    \]
+    où $P_n^\alpha$ (resp $Q_{n,i}^\alpha$) est un polynome en les $x_m^\beta$
+    à coefficients dans $A$ (resp dans $\mathfrak{m}^{\uncertain{(n)}}$)
+    \note{l'exposant est entouré d'un cercle. En marge de gauche, au crayon et
+    d'une autre main que celle de la lettre : « $Q_{n i}^\alpha$ linéaire en
+    les $x_m^\beta$ \ill{} » et « $(\ )^i$ ? » — l'exposant attendu est
+    $i$, non $n$}
+
+    Pour $C$, il suffira maintenant de prendre l'anneau complet engendré par
+    des générateurs $x_n^\alpha$ soumis aux relations précédentes. Pour une
+    définition rigoureuse, disons qu'on prend la limite projective des
+    $A/\mathfrak{m}^k$-algèbres engendrées par des générateurs $x_n^\alpha$
+    soumis aux relations
+    \begin{equation}
+      (x_n^\alpha)^p = P_n^\alpha(x_m^\beta,\ m < n) + \sum_{i=1}^{k-1} Q_{n,i}^\alpha(x_m^\beta)
+    \end{equation}
+    Il reste à voir qu'on obtient ainsi une $A/\mathfrak{m}^k$-algèbre plate.
+    Pour cela, il suffit vérifier que le quotient de $A[X_n^\alpha]$ par un
+    nombre fini de
+\end{enumerate}
+\page{62}\note{p. 4 de la lettre}
+relations (1) est plat, seules un nombre fini d'indéterminées jouent alors un
+rôle, et on va appliquer $0_{\mathrm{IV}}$ 15.1.16 c) $\Rightarrow$ b) : il faut
+vérifier que dans $k[X_n^\alpha]$, les $(X_n^\alpha)^p - P_n^\alpha(X_m^\beta,\ m < n)$
+forment une suite régulière, et cela résulte d'un calcul de dimension trivial —
+CQFD
+
+La propriété que je n'ai pas su bien dégager est que toute extension
+algébrique $K/k$ est du type $K = k[T_\alpha]/(P_i)$, de sorte que si on relève
+les $P_i$ à un anneau artinien de corps résiduel $k$, soit $A$,
+$A[T_\alpha]/(\widetilde{P}_i)$ \uncertain{soit} plat sur $A$.
+\note{le mot est récrit en surcharge}
+
+\marginal{$0_{\mathrm{IV}}$ \struck{16.4} 15}
+Il manque des résultats sur les suites régulières, notamment le suivant auquel
+Quillen faisait une référence fantôme dans sa lettre sur $\Omega_{B/A}$.
+
+\marginal{\uncertain{Vs} garder EGA IV 19, à compléter éventuellement.}
+\note{en marge de gauche, en oblique, d'une autre main que celle de la lettre —
+celle du destinataire — et d'une encre plus grasse}
+
+\textbf{prop} : Soit $A$ noethérien, $I$ un idéal. Les conditions suivantes
+sont équivalentes.
+\begin{enumerate}
+  \item[(i)] $\operatorname{Sym}_{A/I}(I/I^2) \xrightarrow{\sim} \operatorname{gr}_I(A)$
+    et $I/I^2$ projectif sur $A/I$
+  \item[(ii)] $\Lambda\, I/I^2 \xrightarrow{\sim} \operatorname{Tor}(A/I, A/I)$
+    et \emph{idem}
+    \note{quatre guillemets de répétition sous « et $I/I^2$ projectif sur
+    $A/I$ » de la ligne précédente}
+\end{enumerate}
+Si de plus $A$ est local, et si $f_1 \dots f_n$ est un système minimal de
+générateurs de $I$ (i.e.\ $n = \dim_k I \otimes k$), cela équivaut encore à
+\begin{enumerate}
+  \item[(iii)] $f_1 \dots f_n$ est une suite régulière \struck{\ill{}} (?)
+  \item[(iv)] le complexe de l'algèbre extérieure $K(f, A)$ est une résolution
+    de $A/I$
+  \item[(v)] $\operatorname{Ext}^i(A/I, A) = 0$ si $i < n$
+\end{enumerate}
+\note{en (iii), une demi-ligne est biffée à gros traits, illisible, et suivie
+d'un « (?) » ; en (iv), une coche suit « $A/I$ »}
+
+\textbf{Démonstration} : (i) et (ii) étant de nature locale, on peut supposer
+$A$ local ; on peut aussi supposer $I \neq A$.
+
+Il est clair que (i) $\Longleftrightarrow$ (iii) $\Longrightarrow$ (iv)
+$\Longrightarrow$ (ii), $\Longrightarrow$ (v) (car (iv) $\Rightarrow$ que
+$\operatorname{Tor}^1(A/I, A/I) = I/I^2$ est $A/I$-libre)
+\note{sur la feuille, (iv) est suivi de deux flèches divergentes, vers (ii) et
+vers (v)}
+
+— l'implication (ii) $\Rightarrow$ (iv) : Soit $P_*$ une résolution projective
+de $A/I$ ; il existe une seule classe d'homotopie d'applications
+$K(f, A) \to P_*$ (2) induisant l'identité sur $A/I$, et l'application
+$\Lambda\, I/I^2 = H_*(K(f, A) \otimes A/I) \to \operatorname{Tor}(A/I, A/I) = H_*(P_* \otimes A/I)$
+déduite coïncide avec celle considérée en (ii), qui provient de la structure
+multiplicative de $\operatorname{Tor}(\ )$. [facile] — Soit $E$ le mapping
+cylinder de (2). (ii) signifie que $E \otimes A/I$ est acyclique, ce qui
+implique par Nakayama que $E$ l'est, donc que (iv) est vrai.
+
+— l'implication (v) $\Rightarrow$ (iii) Va être modulée.
+
+\textbf{prop} : Si $I$ est un idéal de l'anneau local $A$, $f_1 \dots f_n$ un
+système minimal de générateurs de $I$, $M$ un $A$-module de type fini et si
+$\operatorname{Ext}^i(A/I, M) = 0$ pour $i < n$ alors $f_1 \dots f_n$ est une
+suite $M$-régulière
+\page{63}\note{p. 5 de la lettre}
+\textbf{démonstration} : 1) on remarque d'abord que la conclusion ne dépend
+qu'apparamment du système de générateurs choisis :
+\begin{gather*}
+  f_1 \dots f_n \text{ régulier} \Longleftrightarrow f_1 \dots f_n \text{ quasi-régulier} \Longleftrightarrow \\
+  A/I[T_1 \dots T_n] \otimes_{A/I} M/I \to \operatorname{gr}_I(A) \otimes_{\operatorname{gr}^0_I(A)} \operatorname{gr}^0_I(M) \to \operatorname{gr}_I(M) \text{ bijectif} \\
+  \Longleftrightarrow \operatorname{gr}_I(A) \otimes_{A/I} M/I \to \operatorname{gr}_I(M) \text{ bijectif et} \\
+  A/I[T_1 \dots T_n] \otimes A/\operatorname{Ann}(M/I) \to \operatorname{gr}_I(A) \otimes A/\operatorname{Ann}(M/I) \text{ bijectif.} \\
+  \Longleftrightarrow \operatorname{gr}_I(A) \otimes M/I \xrightarrow{\sim} \operatorname{gr}_I(M),
+  \text{ et modulo } \operatorname{Ann}(M/I),\ I/I^2 \text{ libre de rg } n \text{ et}
+  \operatorname{Sym}_{A/I}(I/I^2) \simeq \operatorname{gr}_I(A).
+\end{gather*}
+
+2) supposons qu'il existe $f$ dans $I \setminus \mathfrak{m} I$ qui soit
+$M$-régulier. On sait que $\operatorname{Ext}^i_A(A/I, M)$ \struck{signifie}
+$= 0$ pour $i < n$ signifie qu'il existe une $n$-suite $M$-régulière contenue
+dans $I$. On aura donc $\operatorname{Ext}^i_{A/f}(A/I, M/fM) = 0$ pour
+$i \leqslant n-1$ et $I/f$ est engendré par $n-1$ générateurs. On conclut par
+récurrence sur $n$
+
+3) supposons enfin qu'aucun élément de $I \setminus \mathfrak{m} I$ ne soit
+$M$-régulier. On a $I \subset \mathfrak{m} I \cup \bigcup_{\mathfrak{p} \in \operatorname{Ass}(M)} \mathfrak{p}$,
+donc (lemme plus bas) $\exists\, \mathfrak{p} \in \operatorname{Ass} M : I \subset \mathfrak{p}$.
+et $\operatorname{Hom}(A/I, M) \neq 0$ donc $n = 0$, $I = 0$ et l'assertion est
+vraie
+
+On a utilisé le
+
+\textbf{lemme} (Nagata !) : Soit $\mathfrak{a}$ un idéal d'un anneau $A$,
+$(\mathfrak{b}_i)_{0 < i \leqslant n}$ des idéaux,
+$(\mathfrak{p}_i)_{0 < i \leqslant m}$ des idéaux premiers. Si
+$\mathfrak{a} \subset \bigcup_i \mathfrak{b}_i \cup \bigcup_i \mathfrak{p}_i$,
+soit $\mathfrak{a} \subset \bigcup \mathfrak{b}_i$, soit
+$\exists\, i : \mathfrak{a} \subset \mathfrak{p}_i$.
+
+\textbf{démonstration} : $\alpha$) réduction à $m = 1$ [regarder les
+$\mathfrak{p}$ comme $\mathfrak{b}$, sauf 1 et récurrer] et à ce que
+$\mathfrak{p} \not\supset \mathfrak{b}_i$. $\beta$) Si
+$\mathfrak{a} \not\subset \bigcup \mathfrak{b}_i$, soit
+$x \in \mathfrak{a} \setminus \bigcup \mathfrak{b}_i$ donc $x \in \mathfrak{p}$.
+Si $y \in \mathfrak{a} \cap \bigcap \mathfrak{b}_i$,
+$x + y \in \mathfrak{a} \setminus \bigcup \mathfrak{b}_i$ donc
+$x + y \in \mathfrak{p}$ et $y \in \mathfrak{p}$ :
+$\mathfrak{a} \cap \bigcap \mathfrak{b}_i \subset \mathfrak{p}$ et comme
+$\mathfrak{b}_i \not\subset \mathfrak{p}$, $\mathfrak{a} \subset \mathfrak{p}$.
+
+\struck{[N.B. : un dévissage analogue permet je crois de montrer (iv)
+$\Rightarrow$ (iii) sans utiliser l'hypothèse \ill{} (iv)]}
+
+\marginal{$0_{\mathrm{IV}}$ 16.1.9.}
+On peut y supprimer l'hypothèse noethérienne, \uncertain{en} référant à Bourb.\
+Alg Comm ch V § 1 nº 1 Th 1 ($E_{\mathrm{III}}$)
+
+\marginal{$0_{\mathrm{IV}}$ 19.2}
+Il manque la proposition suivante, dont tu démontres un cas particulier en
+19.7.1.1 (et un peu plus, car tu prouves là $B$ strictement formellement
+projectif)
+
+\textbf{prop} : Soit $A \to B$ un homomorphisme local d'anneaux locaux
+noethériens, $M$ un $B$-module de type fini ; on munit $A$ et $M$ des
+topologies $\mathfrak{m}$ et $\mathfrak{n}$-adiques ($\mathfrak{m} = R(A)$,
+$\mathfrak{n} = R(B)$. Les conditions suivantes sont équivalentes :
+\page{64}\note{p. 6 de la lettre}
+\begin{enumerate}
+  \item[(i)] $M$ est plat sur $A$
+  \item[(ii)] $M$ est formellement projectif sur $A$
+\end{enumerate}
+\textbf{démonstration} : a) réduction à $A$ artinien local
+
+b) (ii) $\Longleftrightarrow$ $\forall N$ sur $A$,
+$\varinjlim \operatorname{Ext}^1_A(M/\mathfrak{n}^k M, N) = 0$
+$\Longleftrightarrow$ idem pour $N$ un $k$-vectoriel (dévissage)
+$\Longleftrightarrow$ $\varinjlim (\operatorname{Ext}^1_A(M/\mathfrak{n}^k M, k))^I = 0$ $\forall I$
+$\Longleftrightarrow$ « $\varinjlim$ » $\operatorname{Ext}^1_A(M/\mathfrak{n}^k M, k) = 0$ comme Ind-objet
+$\Longleftrightarrow$ « $\varprojlim$ » $\operatorname{Tor}^A_1(M/\mathfrak{n}^k M, k) = 0$ comme pro-objet,
+le précédent étant dual de celui-ci. On calcule ce $\operatorname{Tor}$ par une
+résolution plate de $k$, et par Artin-Rees, le pro-objet précédent n'est autre
+que
+\[
+  \text{« } \varprojlim \text{ »}\ \operatorname{Tor}^A_1(M, k) \big/ \mathfrak{n}^k \operatorname{Tor}^A_1(\dots)
+\]
+dont la nullité signifie $\operatorname{Tor}_1(M, k) = 0$. ie que $M$ est plat
+sur $A$.
+\note{l'indice des $\operatorname{Ext}$ et $\operatorname{Tor}$ est un simple
+trait sur la feuille ; il est lu $1$}
+
+\marginal{$0_{\mathrm{IV}}$ 19.4.6}
+(changement de base et limite formelle) — Il n'est pas nécessaire de supposer
+$B$ formellement projectif dans l'hypothèse 2º, en faisant sur la classe de
+l'extension le jeu fait ici sur le cocycle de Hochschild — De même, dans 1º,
+l'hypothèse de « formellement projectif » peut se remplacer par une hypothèse
+de finitude ($B/J_\lambda$ fini sur $A/J_\lambda$ qui est noethérien p.e.)
+
+\marginal{$0_{\mathrm{IV}}$ 19.4.7.}
+La démonstration se simplifierait si tu avais fait remarquer auparavant que
+$\uncertain{\operatorname{Exalcotop}_A(B, L)}$ est foncteur semi-exact en $L$.
+\note{les dernières lettres du nom du foncteur sont récrites en surcharge}
+
+\marginal{$0_{\mathrm{IV}}$ 19.8.3}
+pg 110 ligne $-8$, $-6$ ; pg 111 ligne 7 : lire homomorphisme local et non
+homomorphisme
+
+\marginal{$0_{\mathrm{IV}}$ 20.4.6}
+Le signe choisi pour $dx$ est l'opposé du signe universellement choisi en
+analyse (où $\Delta f(x ; x') = f(x') - f(x)$,
+$g.\Delta f(x ; x') = g(x)\, \Delta f(x ; x')$), compte tenu de ce que
+$B \otimes B$ et $P^1_{B/A}$ sont des $B$-\struck{modules} algèbres par
+$b \to b \otimes 1$.
+
+\marginal{faire errata : remplacer $P_1 - P_2$ par $P_2 - P_1$ ! attention aux
+passages subséquents}
+\note{en marge de gauche, en oblique, de la main du destinataire}
+
+\marginal{$0_{\mathrm{IV}}$ 20.4.13 (iv)}
+L'hypothèse « $A$ intégralement clos » n'a rien à faire ici [cf 20.5.9 par ex.]
+enfin
+\note{un « ! » en marge sous la référence}
+
+\marginal{III 4.3.6 pg 133 ligne 7}
+la formule $K' = K \otimes_A \widehat{A}$ est fausse en général !
+\note{« !!! » et « … » en marge sous la référence}
+
+En relisant cette lettre, je suis honteux de la démonstration tordue donnée pg
+2 de ce que $\operatorname{Tor}$ et « pro-objet complétion » commutent. Il
+suffirait, par dévissage, de traiter directement le cas $N = A$ (et $M = B$),
+ié « $\varprojlim$ » $\operatorname{Tor}^A_p(A/\mathfrak{m}^k, M) = 0$ si
+$p > 0$, mais j'en suis incapable. Tu trouveras ci-joint une lettre de Serre
+que je te renvoie
+
+Bien à toi
+
+P. Deligne
+
+\section{Divers}
+\note{le mot est de sa main, seul en haut à droite d'un feuillet kraft par
+ailleurs vierge (page 65), suivi de points de suspension : la couverture des
+notes qui suivent}
+
+\subsection{Structure Main Theorem}
+
+\page{66}
+\begin{enumerate}
+  \item[a)] Démonstration par voie globale (cas $Y$ loc.\ noethérien
+    \uncertain{§}, $f$ quasi-projectif — ou \uncertain{des versions
+    compatibles} —
+  \item[b)] Extension au cas $f$ quasi-fini séparé de prés.\ finie, et $Y$ qu.\
+    cpt qu.\ sép. On prouve que la question est alors locale sur $Y$
+    (IV 8.12.3), cela ramène au cas noethérien. On prouve de plus que
+    l'hypothèse faite implique $f$ quasi-affine (IV 8.11.2.) donc on est sous
+    les conditions de a).
+\end{enumerate}
+
+Élimination de la méthode globale : par réduction — au cas $Y$ local ess.\ de
+type fini sur $\operatorname{Spec} \mathbb{Z}$, et passage aux complétés et
+récurrence sur la dimension : on montre que le passage au complété est
+compatible avec l'opération de fermeture intégrale (IV 6.14.4.)
+\note{« local ess. » est un ajout interlinéaire}
+
+\page{67}
+\begin{enumerate}
+  \item[c)] Élimination de l'hypothèse : \struck{\ill{} on remplace « $f$}
+    « $f$ de présentation finie », \struck{\ill{}} (il reste $f$ quasi-fini
+    séparé).
+\end{enumerate}
+
+\struck{Ou bien} En supposant $f$ quasi-projectif : \uncertain{fini}, et
+faisant un argument de passage à la limite dans $X = \varprojlim X_i$.
+
+\struck{Ou bien on peut} Mais on prouve par ailleurs que $f$ est
+nécessairement quasi-affine (donc quasi-projectif) (IV 18.12.12) par la
+technique de localisation étale, en utilisant pour « descendre » la prop
+IV 17.7.4. i.e.\ IV.11.3.16 (assez délicate, \struck{\ill{}} utilisant la
+prop : la limite \uncertain{des} platitudes). // On notera que la technique
+de localisation étale \emph{utilise} cependant le Main Theorem (local en
+haut) tel qu'il est contenu dans b) ; à ce stade, — — le choix entre la
+démonstration chronologique globale, — ou démonstration purement locale…
+\note{« (IV 18.12.12) » et « i.e. IV.11.3.16 » sont des ajouts interlinéaires,
+appelés par des crochets ; « globale » de même, au-dessus de
+« chronologique »}
+
+\subsection{Morphismes ess. \struck{affines} de prés. finie}
+
+\page{69}
+Soit $f : X \to Y$ un morphisme. Considérons les conditions
+\begin{enumerate}
+  \item[(i)] $f$ est la $\varprojlim$ d'un syst.\ projectif filtrant
+    \uncertain{ess.\ affine} des $Y$-préschémas de prés.\ finie
+  \item[(ii)] $f$ est égal à un composé $X \xrightarrow{f_1} X_0 \xrightarrow{f_0} Y$,
+    avec $f_0$ de prés.\ finie et $f_1$ affine
+  \item[(iii)] Comme (ii), mais avec $X = \operatorname{Spec}(\mathcal{A})$,
+    $\mathcal{A}$ Alg.\ quasi-cohérente sur $X_0$ qui est $\varinjlim$ d'une
+    famille filtrante d'Algèbres de prés.\ finie sur $X_0$.
+\end{enumerate}
+Alors (i) $\Longleftrightarrow$ (iii) $\Longrightarrow$ (ii), et tout est
+équivalent si $Y$ est loc.\ noeth.
+
+\textbf{Définition} On dit que $f$ est ess.\ de prés.\ finie s'il satisfait la
+condition (ii). On dit que $X$ est ess.\ de prés.\ finie si
+$X \to \operatorname{Spec} \mathbb{Z}$ est ess.\ de pr.\ finie.
+
+N.B.\ \struck{Alors} $f$ ess.\ pr.\ f.\ $\Longrightarrow$ $f$ qu.\ cpt qu.\ sép.
+
+\textbf{Prop}
+\begin{enumerate}
+  \item[(i)] Prés.\ finie $\Rightarrow$ ess.\ prés.\ finie ; affine + but loc.\
+    noeth ou qu.\ cpt qu.\ sép avec faisceau inv.\ ample $\Rightarrow$ ess.\
+    pr.\ f. ; $f$ imm.\ \struck{qu.\ cpte} + but qu.\ cpt qu.\ sép.\
+    $\Longrightarrow$ ess.\ prés.\ finie.
+    \note{« qu. sép » est un ajout interlinéaire entouré d'un cercle}
+  \item[(ii)] Stabilité changement de base
+  \item[(iii)] Stabilité composition
+  \item[(iv)] Si $g$ \struck{\ill{}} ess.\ pr.\ f.\ (et $S$ qu.\ cpt qu.\ sép., ou
+    si $g$ est de pr.\ f.), alors : $gf$ \struck{est} ess.\ pr.\ f.\
+    $\Longrightarrow$ $f$ l'est
+    \note{la parenthèse est un ajout interlinéaire écrit au-dessus de la ligne
+    et relié par un trait ; « ess. pr. f. » après $gf$ est lui aussi
+    interlinéaire, au-dessus du mot biffé}
+\end{enumerate}
+
+\textbf{Prop} Supposons $S$ univ.\ japonais, p.\ ex.\ $S = \operatorname{Spec} \mathbb{Z}$.
+Alors si $X$ est \struck{géom.\ unibr.} ess.\ pr.\ f.\ sur $S$, pour que $X$
+soit géom.\ unibr., il f.\ et s.\ qu'il soit de la forme $\varprojlim X_i$,
+avec les conditions habituelles, et de plus les $X_i$ géom.\ unibranches
+(resp.\ normaux).
+
+\subsection{Morphismes essentiellement affines}
+
+\page{70}
+$f : X \to Y$ est dit ess.\ affine s'il se factorise en
+$X \xrightarrow{f_1} X_0 \xrightarrow{f_0} Y$, avec $f_0$ de prés.\ finie
+\struck{\ill{}} et $f_1$ affine. Il revient au même, \emph{si} $Y$ est loc.\
+noethérien, que $X$ est isomorphe à la $\varprojlim$ d'un système projectif
+filtrant \struck{de préschémas} ess.\ affine des $Y$-préschémas de prés.\
+finie (= de type fini).
+\begin{enumerate}
+  \item[(i)] Un morphisme affine, un morphisme de prés.\ finie, sont ess.\
+    affines.
+  \item[(ii)]
+\end{enumerate}
+\note{le (ii) est resté vide ; le feuillet s'arrête là}
+
+\subsection{Préschémas dont les anneaux locaux réduits sont des corps}
+\note{titre de l'éditeur ; le feuillet s'ouvre sur « $X$ préschéma. Conditions
+équivalentes »}
+
+\page{72}
+$X$ préschéma. Conditions équivalentes
+\begin{enumerate}
+  \item[(i)] Tt pt fermé
+  \item[(ii)] Tt pt admet un \uncertain{voisinage ouvert} loc.\ cpct
+  \item[(ii b)] idem, cpct
+    \note{un long trait tient lieu de la ligne précédente, suivi de « cpct »}
+  \item[(ii ter)] Tout ouvert affine est cpct.
+  \item[(ii quater)] (si $X$ quasi-séparé) $X$ est loc.\ cpct
+  \item[(iii)] Les anneaux locaux de $X_{\mathrm{réd}}$ sont des corps.
+  \item[(iv)] $X^{\mathrm{cons}} \to X$ est \uncertain{un} \struck{\ill{}}
+    homéomorphisme (ou : un iso)
+  \item[(iv bis)] Toute partie loc.\ constructible est ouverte
+    \note{« ind-constr. » est écrit au-dessus de « constructible » ; le
+    numéro suivant est biffé et illisible}
+  \item[(iv ter)] (si $X$ qu.\ séparé) Toute partie \struck{loc.} constructible
+    est ouverte
+  \item[(iv quater)] (\ \ ) Toute \struck{partie} ouverte affine est fermée
+\end{enumerate}
+\note{les numéros (iv bis), (iv ter), (iv quater) sont récrits en surcharge
+sur « (v bis) », « (v ter) », « (v quater) », et les renvois ci-dessous
+gardent la numérotation en (v) ; les conditions (i)--(iii) sont réunies par
+un crochet, (iv)--(iv quater) par une accolade}
+
+(i) $\Longleftrightarrow$ (iii) trivial
+
+(iv) $\Longleftrightarrow$ (v) if
+
+(v) $\Longleftrightarrow$ (v bis) if
+
+(v bis) $\Longrightarrow$ (v ter) $\Longleftarrow$ (v quater) if
+
+(iv) $\Longrightarrow$ (ii) if \note{« et variantes / version bis » sous la
+ligne}
+
+(ii) $\Longrightarrow$ (i) if
+
+(i) $\Longrightarrow$ (v quater) Car l'adhérence est formée des
+spécialisations \ill{} \uncertain{de $\mathcal{U}$}
+
+N.B.\ Tt esp.\ loc.\ cpct tot.\ discontinu muni d'un faisceau d'anneaux dont
+les fibres sont des corps, est un préschéma (loc.\ cpct \uncertain{réduit}\,)
+
+\textbf{Cor} \textbf{Cond.\ équiv.} (i) $X$ « loc.\ compact » (pas néc.\
+séparé) \uncertain{réduit} ; (ii) Tout Module sur $X$ plat ; (ii bis) Tout
+Module \struck{qu.\ coh.} de prés.\ finie sur un ouvert affine de $X$ est plat ;
+(ii ter) (si $X$ qu.\ sép) tt Module qu.\ coh.\ sur $X$ \struck{\ill{}} est
+$=$ plat. (iii) $X^{\mathrm{cons}} \to X$ est un \uncertain{iso}
+d'espaces annelés.
+\note{à droite de « (i) $X$ », un renvoi en accolade vers la phrase « Car
+l'adhérence… » ci-dessus}
+
+\subsection{Tapuscrit : descente effective des faisceaux étales (théorème 9.4)}
+\note{un seul feuillet dactylographié, paginé 41 au crayon en haut à droite ;
+ses annotations manuscrites sont des consignes de mise en page pour la
+dactylographe (« pas d'interligne suppl. », « centrer », « replacer à la
+ligne », « centrer ») et ne sont pas reproduites}
+
+\page{73}\note{p. 41 du tapuscrit}
+après le changement de base $X' \to X$, et on applique la partie déjà prouvée
+de 9.1. Le morphisme $u : F \to G$ répond alors à la question, cqfd.
+
+\textbf{Théorème 9.4.} Soit $f : X' \to X$ un morphisme surjectif de
+préschéma. On suppose que l'une des hypothèses suivantes est vérifiée :
+\begin{enumerate}
+  \item[a)] $f$ est entier.
+  \item[b)] $f$ est propre.
+  \item[c)] $f$ est plat et localement de présentation finie.
+  \item[d)] $X$ est discret (p.ex.\ le spectre d'un corps).
+\end{enumerate}
+Alors $f$ est un \emph{morphisme de descente effective} pour la catégorie
+fibrée $\mathcal{F}$ sur $(\mathrm{Sch})$ des faisceaux étales sur des
+préschémas variables, i.e.\ le foncteur $f^*$ induit une \emph{équivalence}
+de la catégorie des faisceaux sur $X$ avec la catégorie des faisceaux sur
+$X'$, \emph{munis} d'une donnée de descente relativement à $f : X' \to X$.
+
+9.4.1. Soit $F'$ un faisceau sur $X'$, muni d'une donnée de descente
+relativement à $f : X' \to X$. On définit alors un foncteur
+$G : X^{\circ}_{\text{ét}} \to (\mathrm{Ens})$ par la formule
+\[
+  G(Y) = \operatorname{Ker}\big(F'(Y') \rightrightarrows F''(Y'')\big).
+\]
+On constate aussitôt que $G$ est un \emph{faisceau} pour la topologie étale,
+d'autre part on a un homomorphisme canonique injectif $G \to f_*(F')$,
+\note{le tapuscrit s'interrompt ici ; la suite n'est pas dans ce lot}
+
+\subsection{La condition $(h_0)$ : parties ouvertes et fermées et changement de base}
+\note{titre de l'éditeur ; le feuillet s'ouvre sur « Condition $(h_0)$ ».
+$\mathrm{OF}(S)$ désigne dans toute la suite l'ensemble des parties ouvertes
+et fermées de $S$ ; les deux lettres sont tracées en un seul signe ligaturé}
+
+\page{74}
+\textbf{Condition} \struck{\ill{}} $(h_0)$ pour $f : T \to S$ : l'application
+$\mathrm{OF}(S) \to \mathrm{OF}(T)$ injective ($\Longleftrightarrow$ $\forall\,\mathcal{U}$
+partie ouverte et fermée de $S$ non vide, $f^{-1}(\mathcal{U})$ est non vide
+$\Longleftrightarrow$ $S' \mapsto T' = T \times_S S'$ des revêtements de $S$
+aux rev.\ étales de $T$ est \struck{plt} conservatif) ; $\Longrightarrow$
+$S' \mapsto T'$ \uncertain{pleinement} \struck{est} \emph{fidèle}.
+\note{le membre après $\Longrightarrow$ est ajouté en dessous de la ligne ;
+le « $\forall$ » et le « $\Longleftrightarrow$ » qui le précèdent sont
+surchargés}
+
+Si $S$ connexe $\neq \emptyset$, cette condition équivaut : $T \neq \emptyset$.
+\note{« $\neq \emptyset$ » est un ajout au-dessus de la ligne}
+
+Si $S = \coprod_i S_i$, les $S_i$ connexes non vides, la condition
+équivaut à $f^{-1}(S_i) \neq \emptyset$ pour tt $i$.
+
+\marginal{N.B.\ Si $f$ est \ill{} \ill{}, il \uncertain{suffit}
+d'avoir $(h_0)$ fibre par fibre}
+\note{en marge de gauche, relié par une accolade à la proposition qui suit}
+
+\textbf{Prop} \struck{Supposons que} Soit $f : T \to S$ un morphisme de
+$k$-préschémas ($k$ un corps) et $\uncertain{R'}$ un $k$-préschéma.
+\struck{extension de $k$, Alors} $f' : T' \to S'$ déduit par changement de
+base. Alors si $f$ satisfait $h_0$, \struck{et} $f'$ \struck{satisfait} item ;
+réciproque vraie si $\uncertain{R'} \neq \emptyset$.
+\note{sous la ligne, « ou $R' \neq \emptyset$ », dont le premier mot est
+biffé}
+
+Si $f'$ satisfait $h_0$, il en résulte que $f$ y satisfait, car [$S' \to S$
+est surjectif, une partie \uncertain{ouverte et fermée}] de $S$ dont
+l'image inverse dans $S'$ est $\emptyset$ est $\emptyset$.
+
+Inversement, si $f$ satisfait $h_0$, alors $f'$ item. \uncertain{Ceci est
+vrai} : \struck{\ill{}} fibre par fibre, donc on peut supposer
+$R' = \operatorname{Spec} k'$, $k'$ corps. On peut supposer $k'$ alg.\ clos,
+puis \uncertain{on est}
+
+\page{75}
+ramené au cas où $k'$ est la clôture alg.\ de $k$. Mais alors
+\struck{l'image de} \struck{\ill{} de $S$ est une partie fermée et stable
+par \ill{}} l'image, pour un $\mathcal{U}'$ de $S'$, \uncertain{d'une partie
+ouverte et fermée de $\mathcal{U}'$ par $\operatorname{Gal}(k'/k)$}, est un
+ouvert, et donc l'image inverse de l'image directe (fermée) $\mathcal{U}$
+de $\mathcal{U}'$ dans $S$, est aussi fermée, ce qui implique que $\mathcal{U}$
+est aussi ouvert et fermé, et comme son image inverse dans $T$ est
+$\emptyset$, $\mathcal{U}$ est $\emptyset$, \uncertain{donc}
+$\mathcal{U}' = \emptyset$.
+\note{les quatre premières lignes sont un palimpseste : deux lignes biffées,
+deux ajouts interlinéaires, et le « $\mathcal{U}$ » qui nomme l'image
+directe est écrit en exposant au-dessus de « (fermée) » ; l'ordre des
+membres est celui que l'éditeur a cru lire}
+
+Cf simplification éventuelles de EGA IV 4
+
+\textbf{Corollaire 1} Supposons que $f : T \to S$ satisfasse $h_0$, et que
+$R'$ \uncertain{sur $k$} soit $\neq \emptyset$. Alors le diagramme
+
+\begin{tikzcd}
+  \mathrm{OF}(S) \arrow[r, hook] \arrow[d] & \mathrm{OF}(T) \arrow[d] \\
+  \mathrm{OF}(S') \arrow[r, hook] & \mathrm{OF}(T')
+\end{tikzcd}
+
+est cartésien.
+
+En effet, $\mathrm{OF}(S) \to \mathrm{OF}(T)$ est injectif, il en est de
+même \uncertain{donc} de
+$\mathrm{OF}(S) \to \mathrm{OF}(T) \times_{\mathrm{OF}(T')} \mathrm{OF}(S')$,
+prouver que c'est \emph{surjectif}. Soit donc $V \in \mathrm{OF}(T)$ dans
+l'image des $\mathrm{OF}(T')$ provenant de $\mathcal{U}' \in \mathrm{OF}(S')$,
+prouver que $\mathcal{U}'$ provient de $\mathcal{U} \in \mathrm{OF}(S)$.
+\emph{Immédiat} par descente, en utilisant que
+$\mathrm{OF}(S'') \to \mathrm{OF}(T'')$ est injectif…
+
+\page{76}
+\note{feuillet de croquis : trois diagrammes et quelques lignes, sans
+titre}
+
+\begin{tikzcd}[column sep=small, row sep=small]
+  A_0 \quad B_0 \arrow[d] & & A \quad B \arrow[d, no head] & \\
+  S_0 \arrow[r] \arrow[dd] & T_0' \arrow[ddl] & S \arrow[dd, no head] \arrow[r, leftrightarrow] & T' \arrow[ddl] \\
+  & & & \\
+  T_0 \arrow[rr, no head] & & \operatorname{Spec} k = T &
+\end{tikzcd}
+\note{le diagramme est redessiné d'un croquis : les couples $A_0, B_0$ et
+$A, B$ sont reliés chacun par deux traits obliques à $S_0$ et à $S$, rendus
+par une seule flèche ; la double
+flèche $S \leftrightarrows T'$ porte un mot biffé ; à gauche de $T_0$,
+« $Z$ — $T_0$ » relié par un trait ; en haut à droite, « $A_x \to B_x$ »,
+l'indice incertain}
+
+\[
+  A_{0\,T_0'} \to B_{0\,T_0'}
+\]
+
+$A \quad B \qquad A_T \to B_T \qquad$ se prolonge en $A \to B$
+
+\begin{tikzcd}[column sep=small, row sep=small]
+  S & T \arrow[l] \\
+  S' \arrow[u] \arrow[r] & T' \arrow[u] \\
+  S'' \arrow[u] \arrow[r] & T'' \arrow[u, no head]
+\end{tikzcd}
+\note{$S'' \to S'$ est dessiné avec deux flèches parallèles, une seule est
+rendue ; le trait $T'' - T'$ est sans pointe}
+
+\begin{itemize}
+  \item[] toute partie ouverte et fermée de $S''$ dont l'image inverse sur
+    $T''$ est vide, est vide. ($(h_0)$ sur $T'' \to S''$)
+  \item[] $S' \to S$ morphisme de descente pour catégorie des schémas
+    \ill{} \uncertain{relatifs}
+\end{itemize}
+$\Downarrow$
+
+\struck{\ill{}} $\exists$ \emph{au plus} un $u : A \to B$ induisant
+$v : A_T \to B_T$ donné. Pour qu'il en existe un, il f.\ et s.\ qu'il en
+soit de même après changement de base $S' \to S$.
+
+\subsection{Conditions équivalentes pour $Y \to X$ : composantes connexes et revêtements étales}
+\note{titre de l'éditeur ; deux feuillets au crayon, pages 77 et 79, qui
+reprennent la même liste sous deux formes. Le haut de la page 77, au-dessus
+d'un trait horizontal, porte des croquis étrangers à cette liste, relevés
+en tête}
+
+\page{77}
+\begin{tikzcd}
+  \bar Y \arrow[r] \arrow[d] & \bar X \arrow[d] \\
+  Y \arrow[r] & X
+\end{tikzcd}
+
+$\struck{X'} \rightrightarrows Y$, $\Omega^1$, $\struck{\Omega^1_{X/Y}}$,
+$\uncertain{\Omega^1_{X'} - \Omega^1_{X'/Y'}}$, \ill{}
+\note{croquis au crayon, au-dessus du trait : un $X'$ biffé d'où partent
+deux flèches vers $Y$, trois $\Omega$ dont un biffé, et un mot illisible
+sous le trait}
+
+$Y \to X$ — \textbf{Conditions équivalentes}
+\begin{enumerate}
+  \item[(i bis)] ($\forall\, X, Y$ loc.\ noeth) Pour tout $X'$ \struck{f.}
+    étale sur $X$, posant $Y' = Y \times_X X'$, \struck{\ill{}}
+    $\pi_0(Y') \to \pi_0(X')$ est surjectif (bijectif)
+    \note{« i.e.\ $X' \neq \emptyset$ \uncertain{resp.}\ $X'$ connexe non
+    vide) » et, biffé, « implique $Y'$ item. » suivent en dessous ; le numéro
+    est surchargé}
+  \item[(i)] Pour tout $X'$ comme dessus, $\mathrm{OF}(X') \to \mathrm{OF}(Y')$
+    inj.\ (bij)].
+  \item[(ii)] $\Gamma(X'/X) \to \Gamma(Y'/Y)$ est injectif (bijectif)
+  \item[(iii)] Le foncteur $X' \mapsto Y' = X' \times_X Y$ de la catégorie
+    des rev.\ étales finis de $X$ en celle des rev.\ étales finis de $Y$ est
+    fidèle (plein.\ fidèle)
+\end{enumerate}
+\note{(i bis) et (i) sont reliés par une double flèche verticale marquée
+« tr », de même (ii) et (iii). Deux flèches courbes en marge de gauche :
+de (iii) vers (i), « considération des graphes » ; de (i) vers (iii), « par
+considération des Hom », avec un mot biffé ; et sous elles :
+« Car $\mathrm{OF}(X') \simeq \Gamma(\uncertain{I_{X'}}/X')$ »}
+
+\subsection{Tapuscrit : démonstration de (i) par récurrence noethérienne}
+\note{un feuillet dactylographié, paginé 24 au crayon en haut à droite,
+corrigé de sa main : les corrections sont portées dans le texte et
+signalées}
+
+\page{78}\note{p. 24 du tapuscrit}
+\textbf{Démonstration.} (i). Par récurrence noethérien\add{ne} et (2.4 (i)),
+il suffit de démontrer que $f_* F'$ est localement constant et
+constructible sur un ouvert non-vide convenable.
+\note{« ne » ajouté à la main ; « convenable » remplace « quelconque »
+biffé ; « (2.4 (i)) » est écrit à la main dans un blanc du tapuscrit}
+C'est donc une assertion locale sur $X$. Soit $x$ un point maximal de $X$.
+En remplaçant $X$ par un revêtement étale d'un voisinage de $x$, on peut
+supposer que chaque point $x'$ de $X'$ au dessus de $x$ est radiciel
+\struck{sur $x$}. \struck{dessus.} Alors $s : X' \to X$ est somme de
+morphismes radiciels dans un voisinage de $x$ (EGA IV.9.6.1).
+\note{« EGA » ajouté à la main au-dessus de la référence}
+Rétrécissant \struck{Remplaçant} $X$ encore, on peut supposer que $f$ est
+somme de morphismes radiciels, et de plus que $F'$ est constant (et
+constructible) sur $X'$. Alors $f_* F'$ est produit d'un nombre fini de
+faisceaux constructibles constants, et est donc constructible et constant.
+\note{« Rétrécissant » et le « $X$ » qui suit « encore » sont de sa main ;
+le feuillet s'arrête là, le reste de la page est blanc}
+
+\page{79}
+$Y \xrightarrow{f} X$ — \textbf{Cond équivalentes}
+\begin{enumerate}
+  \item[(i)] Pour tout $X'$ étale sur $X$, $\mathrm{OF}(X') \to \mathrm{OF}(Y')$
+    est bij.\ (inj)
+  \item[(i bis)] ($\forall\, X, Y$ loc.\ noeth) $X' \to X$,
+    $\pi_0(Y') \to \pi_0(X')$ surj (bij)
+  \item[(ii)] $X' \mapsto Y' = X' \times_X Y$ est fidèle (pl.\ fidèle)
+    \marginal{avec réserve}
+  \item[(iii)] [Cas \struck{\ill{}} \uncertain{un pt}] $f(Y)$ \emph{dense}
+    dans $X$
+\end{enumerate}
+\note{les numéros (i bis), (ii), (iii) sont surchargés ; un crochet à
+droite de (ii) porte la réserve}
+
+(i) $\Longleftrightarrow$ (i bis) comme avant
+
+(ii) $\Longrightarrow$ (i) item
+
+(i) $\Longrightarrow$ (ii) comme avant tant qu'on se borne aux schémas
+\emph{séparés} sur $X$, ou qu'il ne s'agit que de l'énoncé \ill{}
+\uncertain{« inj »}. Sinon, il semble qu'il faille supposer $f$
+\uncertain{universellement} \ill{} et \uncertain{reste} tel après
+changement de base \ill{}. // Cependant, si $X, Y$ sont \uncertain{ess.}\
+pr.\ f.\ et qu'on met des conditions stables pour tt changement de base
+fini, alors c'est \uncertain{de} nouveau OK. (cf SGAA)
+
+\begin{tikzcd}
+  Y' \arrow[r, no head] \arrow[d, no head] & X' \arrow[d, no head] \\
+  Y \arrow[r, no head] & X
+\end{tikzcd}
+\note{croquis en marge de gauche, sans pointes ; au-dessus, « $V$ » et
+« $U$ ? »}
+
+\subsection{Croquis : images directes et changement de base}
+\note{titre de l'éditeur. Feuillet de croquis à l'encre, tracés en travers
+d'un tapuscrit filmé tête-bêche qui n'est pas de sa main et n'est pas
+transcrit ; ne sont relevés que les formules et diagrammes}
+
+\page{80}
+$V \subset C$ — \struck{\ill{}}
+
+\[
+  i_*(\Lambda_V) = \Lambda_C, \qquad
+  R^1 i_*(\Lambda_V) = \uncertain{\mathcal{H}^{-1}_{Z,C}}
+\]
+\note{le second membre est souligné deux fois ; « 2.14. » en dessous}
+
+$1 + \varepsilon'$ — $\uncertain{\pm P(C)}$
+
+\begin{tikzcd}
+  \bar Y \arrow[r] \arrow[d] & \bar X \arrow[d] \\
+  Y \arrow[r] & X
+\end{tikzcd}
+
+\begin{tikzcd}
+  \bar Y \arrow[r, "u^{\prime}"'] \arrow[d, "p_Y"'] & \bar X \arrow[d, "p"] & \bar F \\
+  Y \arrow[r, "u"'] & X &
+\end{tikzcd}
+
+$F$ — $X' \xrightarrow{p} X$ — $p_*(F)$
+
+\[
+  \uncertain{u^*}\big(R^i p_*(\bar F)\big) \to R^i p_{Y*}\big(u'^*(\bar F)\big)
+\]
+\note{deux boîtes en perspective, dessinées à droite, ne sont pas
+reproduites}
+
+\end{document}
