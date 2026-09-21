@@ -93,17 +93,22 @@ export const EDITED_COTES: Cote[] = COTES.filter((c) => EDITED.has(c.id));
  * Folders in hand one at a time, outside any notebook marked `inProgress`.
  *
  * The notebook flag covers a whole thread being read through; this covers the
- * folders picked up singly, which do not share a notebook — these five sit
- * across the Cahiers tardifs, the Long March and the Notes techniques
- * dispersées. Expressing them as a notebook flag would mean claiming three
- * whole notebooks are in hand, which is false and would paint two hundred
- * pages the wrong colour.
+ * folders picked up singly. Expressing them as a notebook flag would mean
+ * claiming a whole notebook is in hand, which would paint hundreds of pages
+ * the wrong colour.
  *
  * Kept as a plain list because that is what it is: the work actually started,
  * edited as it starts and finishes. A folder here that later gets transcribed
- * needs no removal — the transcription outranks it.
+ * needs no removal — the transcription outranks it — but the list is pruned
+ * anyway, so that it says what is in hand rather than what once was.
+ *
+ * These four are the queue of 2026-09-21, all four in the group « Dossiers
+ * rassemblés par Grothendieck sur différentes thématiques » (161-1 à 162-6):
+ * 161-4 Introduction à géométrie algébrique, 161-5 Barsotti-Tate, 161-6
+ * Graphes et icosaèdre, 162-5 Tapis de Quillen. The five that stood here
+ * before — 156-2, 141, 158, 159, 160 — are all transcribed now.
  */
-const IN_PROGRESS_FOLDERS = ['156-2', '141', '158', '159', '160'];
+const IN_PROGRESS_FOLDERS = ['161-4', '161-5', '161-6', '162-5'];
 
 export const IN_PROGRESS: ReadonlySet<string> = new Set([
   ...BOOKS.filter((b) => b.inProgress).flatMap((b) => b.sections.flatMap((s) => s.cotes)),
