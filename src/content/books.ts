@@ -102,13 +102,13 @@ export const EDITED_COTES: Cote[] = COTES.filter((c) => EDITED.has(c.id));
  * needs no removal — the transcription outranks it — but the list is pruned
  * anyway, so that it says what is in hand rather than what once was.
  *
- * The queue of 2026-09-22, the next row of #24: 67 Chirurgie des surfaces
- * conformes (transcribed, and pruned) and 68 Jeux de position, which close the group
- * « Autour de l'enseignement » (66-89). Before them, 161-4, 161-5, 161-6 and
- * 162-5 stood here, and before those 156-2, 141, 158, 159 and 160 — all
- * transcribed now.
+ * Empty again: the queue of 2026-09-22, the next row of #24 — 67 Chirurgie
+ * des surfaces conformes and 68 Jeux de position, which close the group
+ * « Autour de l'enseignement » (66-89) — is transcribed. Before them,
+ * 161-4, 161-5, 161-6 and 162-5 stood here, and before those 156-2, 141,
+ * 158, 159 and 160 — all transcribed now.
  */
-const IN_PROGRESS_FOLDERS = ['68'];
+const IN_PROGRESS_FOLDERS: string[] = [];
 
 export const IN_PROGRESS: ReadonlySet<string> = new Set([
   ...BOOKS.filter((b) => b.inProgress).flatMap((b) => b.sections.flatMap((s) => s.cotes)),

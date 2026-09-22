@@ -1,0 +1,678 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 68, batch 1 (pages 1-20).
+% Established from the facsimile archives/batches/68/batch-01.pdf (a mirror of
+% https://grothendieck.umontpellier.fr/68.pdf), per the skill
+% transcribe-grothendieck. The batch file carries no cover sheet: PDF page N is
+% archivists' page N (pencilled numbers bottom-left read 11, 12, 14, 15, 16,
+% 18, 19, 20 at the PDF page of the same number).
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-09-22 — first pass, unchecked against the pages by a human.
+%
+% What the batch is. Pages 1-12: a numbered exposé in pencil on games of
+% position (« Jeu de positions »): 1 the data (C, R, J, i, G_0), 2 parties,
+% 3 strategies and winning positions G(j), Thm 1 (recursive characterisation
+% of G(j)), corollary on a largest Gamma-winning strategy, 4 J'-strategies and
+% « acceptable » positions, Thm 2 (x not winning for j' iff acceptable
+% against j'), reduction to the two-player game J(j'), 5 recursive
+% construction G_i(j) and « ? Th 3 » G_infty(j) = G(j). Page 13 carries only
+% the title of a §6 never written. Pages 14-16 are scratch computations on
+% subsets of an abelian group (sums E*F, tables of multiples of a) and, on
+% page 16 in blue ink, finite-subset families A(g~) over a double cover
+% G~ -> G. Pages 18-20, black ink, start a new numbered run (1 |f,g|,
+% 2 f' < f, 3 couples préférés, 4 couples bornés, « condition K ») on
+% rearrangement inequalities for positive finitely supported functions on a
+% group. Page 17 is a typed administrative table (promotions list) and is
+% skipped. Pages 15 and the lower half of 16 are written upside down; the
+% mirrored prose on page 15 is show-through from another leaf, not
+% transcribed.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{68}
+\batch{1}
+\pages{1}{20}
+\dating{[à partir de 1978-à partir de 1983]}
+\watermark{Édition de démonstration}
+\foldertitle{Jeux de position : notes manuscrites (s.d.)}
+
+\begin{document}
+
+\page{1}
+\section*{1. Jeu (de positions)}
+
+(a) $C$ ensemble des positions (ou configurations)
+
+$R\subset C\times C$ relation ($(x,y)\in R$ se lit $y\in R(x)$\,: $y$ \emph{successeur} de $x$)
+
+\emph{Déf.} Position $x$ \emph{terminale} $\Longleftrightarrow$ $R(x)=\emptyset$
+\[
+  C_0=\{x\in C\mid R(x)=\emptyset\}=\text{ens.\ des positions terminales}
+\]
+\note{cette définition est écrite plus bas sur la page, à l'encre bleue en partie, et une flèche la renvoie sous (a)}
+
+(b) $J$ ensemble des joueurs
+
+$i : C\smallsetminus C_0\to J$ \qquad $i(x)$ est le joueur qui a l'initiative dans la position $x$
+\[
+  C\smallsetminus C_0=\coprod_{j\in J}C(j)
+\]
+
+\emph{NB} \struck{$i$ n'intervient que par sa restriction à $C\smallsetminus C_0$}
+\note{« $\smallsetminus C_0$ », dans la flèche $i$ et dans la décomposition, est ajouté à l'encre bleue ; la remarque NB est barrée de traits bleus, devenue sans objet}
+
+(c) $J\to\mathfrak{P}(C_0)$ \qquad $j\mapsto G_0(j)\subset C_0$ \quad (positions terminales \uncertain{gagnantes pour $j$})
+\marginal{\emph{NB} On \uncertain{ne} suppose pas $G_0(j)\subset C_0(j)$}
+\note{ces mots sont écrits sous $G_0(j)$, reliés à lui par une flèche}
+
+\section*{2. Parties.}
+
+(Ne dépend que de $(C,R)$…)
+
+\emph{Partie} (à $n$ coups, $n\in\mathbb{N}$), $(x_0,x_1,\ldots,x_n)\in C^{n+1}$ \qquad $\forall\ 0\leqslant i\leqslant n-1$, $x_{i+1}\in R(x_i)$
+
+\emph{Prolongement} de parties
+
+\emph{Partie terminée} (ou partie maximale) : telles que $x_n\in C_0$
+
+Partie infinie, partie circulaire. $(x_0,x_1,\ldots,x_n)$ \quad $x_n=x_0$ \quad ($n\geqslant 1$)
+
+\emph{Prop} S'il existe une partie circulaire, existe une partie infinie. L'inverse est vrai si $C$ est fini.
+
+\emph{Construction \uncertain{récurrente}}
+\[
+  C_{-1}=\emptyset \qquad C_0=\{x\in C\mid \forall y\in R(x),\ y\in C_{-1}\}=\{x\in C\mid R(x)=\emptyset\}
+\]
+\[
+  C_1=\{x\in C\mid \forall y\in R(x),\ y\in C_0\} \qquad \text{NB } C_1\supset C_0
+\]
+\[
+  C_i=\{x\in C\mid \forall y\in R(x),\ y\in C_{i-1}\}
+\]
+
+\emph{Prop} $(C_i)$ suite croissante d'ensembles.
+
+$C_i=\{x\in C\mid$ toute partie \struck{\ill{}} \uncertain{partant de} $x$ est de longueur $\leqslant i\}$
+
+\emph{Cor} Soit $C_\infty=\bigcup C_i$. Alors $C_\infty=\{x\in C\mid$ \struck{l'une des} les longueurs des parties partant de $x$ est bornée$\}$
+
+\page{2}
+\emph{Cor} Conditions équivalentes
+
+a) $C=C_\infty$ i.e.\ pour tout $x\in C$, l'une des longueurs des parties partant de $x$ est finie.
+
+b) $\exists\ C\xrightarrow{\ \ell\ }\mathbb{N}$ tel que si $y\in R(x)$, on ait $\ell(y)<\ell(x)$
+
+[Alors $\forall x\in C$, si $\ell=\ell(x)$, on a $x\in C_\ell$]
+
+\struck{Exemple}
+
+\emph{NB} Ces conditions impliquent que $\nexists$ partie infinie.
+\struck{Mais} Si $C$ est fini, \struck{\ill{}} \uncertain{la réciproque est vraie} : en effet, les parties \struck{\ill{}} ont une longueur majorée par $(\operatorname{card}C)-1=N-1$, i.e.
+\[
+  C=C_{N-1}
+\]
+\note{la ligne est surchargée ; au-dessus de « fini » une première rédaction, barrée, parlait d'une \uncertain{longueur} « \ill{} »}
+
+\struck{Prop Soit $C$}
+
+\section*{3. \emph{Stratégie pour $j\in J$}}
+
+\[
+  \Sigma\subset\bigl(C(j)\times C\bigr)\cap R \quad\text{tel que}
+\]
+$\forall x\in C(j)$, on ait $\bigl(R(x)\neq\emptyset$ (i.e.\ $x\notin C_0$) $\Longrightarrow\Sigma(x)\neq\emptyset\bigr)$
+
+\emph{Partie} $\underline{x}=(x_0,\ldots,x_n)$ \emph{compatible} avec stratégie $\Sigma$ pour $j$ : $\forall\ 0\leqslant i\leqslant n-1$ tel que $x_i\in C(j)$, on ait $x_{i+1}\in\Sigma(x_i)$ / Idem pour partie infinie
+
+\emph{Stratégie gagnante} (pour $j$) pour $x$ ($\in C$) :
+
+a) Toute partie partant de $x$, compatible avec $\Sigma$, est finie (i.e.\ $\nexists$ partie infinie partant de $x$, comp.\ avec $\Sigma$)
+
+b) \struck{\ill{}} Toute partie terminée, $(x_0=x,\ x_1,\ \ldots,\ x_N)$, partant de $x$, compatible avec $\Sigma$, est telle que $x_N\in G_0(j)$.
+
+On dit que $x\in C$ est \emph{gagnante pour $j$} si $\exists$ stratégie [pour $j$] $\Sigma$ gagnante pour $x$. L'ens.\ des $x$ est noté $G(j)$
+
+\emph{NB} $G(j)\cap C_0=G_0(j)$
+
+Posons $\overline{C}(j)=C\smallsetminus C(j)$, $\overline{G}(j)=C\smallsetminus G(j)$ …
+
+\page{3}
+\struck{Prop.} \emph{Thm 1}
+\marginal{S'il \uncertain{n'y a pas} de partie infinie}
+
+1°) $\bigl(C(j)\smallsetminus C_0(j)\bigr)\cap G(j)=\{x\in C(j)\mid$ \struck{\ill{}} $\exists\,y\in R(x)$, avec $y\in G(j)\}$
+
+\quad (i.e.\ $R(x)\cap G(j)\neq\emptyset$)
+
+2°) $\bigl(\overline{C}(j)\smallsetminus\overline{C}_0(j)\bigr)\cap G(j)=\{x\in\overline{C}(j)\mid \forall y\in R(x)$ on a $y\in G(j)$ \struck{et $\forall$ si $R(x)=\emptyset$ (i.e.\ $x\in C_0$) \ill{} $x\in G_0(j)$}$\}$
+
+\quad i.e.\ $R(x)\subset G(j)$
+\note{« $\smallsetminus C_0(j)$ », « $\smallsetminus\overline{C}_0(j)$ » et « $R(x)\subset G(j)$ » sont ajoutés à l'encre bleue ; la condition sur $R(x)=\emptyset$ est biffée à grands traits}
+
+\emph{Dém} \struck{a) Soit $x\in C(j)$} 1°) Soit $x\in C(j)$, il faut prouver que
+\[
+  x\in G(j)\Longleftrightarrow \exists\,y\in R(x),\ y\in G(j).
+\]
+
+\struck{Si $x\in C_0$, \ill{} clair (cf NB plus haut \ill{})}
+
+S'il $x\notin C_0$ (i.e.\ $R(x)\neq\emptyset$). Prouvons $\Longrightarrow$ i.e.\ supposons $x\in G(j)$, prouvons $\exists\,y\in R(x)$ gagnant. Soit $\Sigma$ stratégie \struck{\ill{}} $x$-gagnante. Considérons $\Sigma(x)$ ; donc \struck{\ill{}} $\Sigma(x)\neq\emptyset$, donc $\exists\,y\in\Sigma(x)$. Je dis que $y\in G(j)$, i.e.
+
+\emph{Lemme} Si $x\in C(j)\cap G(j)$, $\Sigma$ une $j$-stratégie $x$-gagnante, alors $\forall y\in\Sigma(x)$, on a $y\in G(j)$, i.e.\ $\Sigma(x)\subset G(j)$. (Plus précisément, $\Sigma$ est $y$-gagnante \struck{pour $\Sigma$}.) \struck{En effet, je dis que}
+Trivial sur définitions,
+
+Inversement, supposons $\exists\,y\in R(x)$ avec $y\in G(j)$, prouvons que $x\in G(j)$. Soit $\Sigma$ une $j$-stratégie $y$-gagnante. On va (en changeant $\Sigma$) définir une $j$-stratégie $\Sigma'$ $x$-gagnante ainsi : Pour $z\in C(j)$, on pose
+\[
+  \Sigma'(z)=\begin{cases}
+    \Sigma(z) & \text{si } z\neq x\\
+    \{y\} & \text{si } z=x
+  \end{cases}
+\]
+(C'est une $j$-stratégie, on a \struck{: $R(z)\neq\emptyset$ \ill{} $R(x)\neq\emptyset$, \ill{}} $\Sigma(z)\neq\emptyset$ pour \struck{\ill{} les cas $z\neq x$ \ill{}, mais} \struck{\ill{} $\Sigma'(z)=\Sigma(z)$} $\neq\emptyset$ par hyp.\ que $\Sigma$ est stratégie.)
+\note{les deux lignes du milieu de cette parenthèse sont barrées et en partie surchargées}
+
+Prouvons que $\Sigma'$ est $x$-gagnante : Soit une partie $(x_0=x,\ x_1,\ \ldots,\ x_n,\ \ldots)$ partant de $x$ et compatible avec $\Sigma'$. On a donc $x_1=y$ ; et prouvons que la partie $(x_1,\ x_2,\ \ldots,\ x_n,\ \ldots)$ est compatible avec $\Sigma$, i.e.\ que \struck{\ill{}} $\forall i\geqslant 1$, $x_i\in C(j)\Longrightarrow x_{i+1}\in\Sigma(x_i)$,
+\note{« prouvons que » est ajouté au-dessus de la ligne ; sous $x_1$ il note $=y$}
+
+\page{4}
+Il n'y a de pb.\ que si \struck{\ill{}} $x_i=x$ (car si $x_i\neq x$, $\Sigma(x_i)=\Sigma'(x_i)$, donc $x_{i+1}\in\Sigma'(x_i)$ par hyp.\ de compatibilité avec $\Sigma'$. \struck{Mais si on avait \ill{}}
+\note{au-dessus de « $x_i=x$ », un ajout : « l'un des \uncertain{est égal} »}
+
+\struck{$(x_0=x,\ \ldots,\ x_1,\ x_2,\ \ldots,\ x_i,\ \ldots)$ \ill{} une nouvelle partie}
+\note{ligne encadrée et biffée ; sous $x_1$ il note $=y$, sous $x_i$ $=x$}
+
+\marginal{\uncertain{Montrons} d'abord qu'il n'y a pas de partie compatible avec \struck{\ill{}} \struck{\uncertain{Fermeture} ?} $\Sigma$ commençant avec $y$ et terminant \uncertain{par $x$}}
+\note{note écrite en oblique dans la marge gauche, au droit des lignes précédentes}
+
+\struck{\ill{}} Par hyp.\ sur $\Sigma$, la partie $(x_1,\ \ldots,\ x_n,\ \ldots)$ est finie, donc et son \struck{\ill{}} \uncertain{dernier terme} $x_N$ \uncertain{qui} est \ill{} terminaison de la partie $(x_0,\ x_1,\ \ldots)$, est $\in G_0(j)$,
+
+\struck{\ill{}} OK dans le cas \ill{}.
+Mais si $\exists$ partie comp.\ avec $\Sigma$ commençant \uncertain{avec} $y$ et terminée avec $x$, alors par le \uncertain{lemme} \ill{} $x\in G(j)$ \uncertain{cqfd}.
+
+2°) Soit $x\in\overline{C}(j)$, il faut prouver que
+\[
+  x\in G(j)\Longleftrightarrow \forall y\in R(x),\ \text{on a } y\in G(j)
+\]
+\struck{et $(R(x)=\emptyset\Longrightarrow x\in G_0(j))$}
+
+\struck{Si $x\in C_0$ i.e.\ $R(x)=\emptyset$, c'est clair}
+\struck{Si $x\notin C_0$ i.e.\ $R(x)\neq\emptyset$, il suffit de prouver $x\in G(j)\Longleftrightarrow\forall y\in R(x)$, $y\in G(j)$}
+\note{ces deux lignes, réunies par une accolade, sont biffées}
+
+Prouvons $\Longrightarrow$, Soit $x\in G(j)$, $y\in R(x)$, prouvons $y\in G(j)$. Soit $\Sigma$ \struck{\ill{}} stratégie \struck{\ill{}} $x$-gagnante, \struck{\ill{}} je dis qu'elle est $y$-gagnante. En effet
+\struck{\ill{}} Considérons \struck{\ill{}} partie (\struck{\ill{}} $x_1=y,\ x_2,\ \ldots,\ x_n,\ \ldots$) \uncertain{maximale}, compatible avec $\Sigma$, \struck{\ill{}}, alors $(x_0=x,\ x_1=y,\ x_2,\ \ldots,\ x_n,\ \ldots)$ est aussi comp.\ avec $\Sigma$. (NB \ill{} $x\in\overline{C}(j)$, \ill{} $(x,y)$ compatible avec $\Sigma$)
+
+Alors partie \ill{} \ill{} $\Sigma$, elle est partie finie, (\ill{} $x_N$ \ill{}) et $x_N\in G_0(j)$.
+
+\struck{Prouvons que $x_1$, $y\in G(j)$, \ill{} \ill{}}
+\struck{\ill{} \ill{} \ill{} $z\in\Sigma(z)$}
+\note{passage encadré et biffé au bas de la page}
+
+\page{5}
+Prouvons $\Longleftarrow$, i.e.\ \struck{soit $x\in\overline{C}(j)$, $R(x)\neq\emptyset$,} $\forall y\in R(x)$, on a $y\in G(j)$, prouvons $x\in G(j)$.
+\note{la fin de la première ligne, après « i.e. », est biffée et surchargée ; la lecture en est incertaine}
+
+Stratégie $\Sigma$ \uncertain{convenable} :
+\[
+  z\in C(j), \qquad
+  \Sigma(z)=\begin{cases}
+    R(z) & \text{si } z\notin G(j)\\
+    R(z)\cap G(j) & \text{si } z\in G(j)
+  \end{cases}
+\]
+
+\uncertain{par} 1° et 2°) $\Longrightarrow$ \struck{i.e.\ $R(z)\neq\emptyset\Rightarrow\Sigma(z)\neq\emptyset$.}
+
+a) \struck{$\Sigma$ est une stratégie, il suffit de voir que si $z\in G(j)$ et $z\in C(j)$, $R(z)\cap G(j)\neq\emptyset$ ; \ill{} \ill{} si $z\in G(j)$.}
+\note{ce passage est barré de grandes croix}
+
+b) Elle est $x$-gagnante. En effet, soit $(x_0=x,\ x_1=y,\ x_2,\ \ldots,\ x_n,\ \ldots)$ une partie issue de $x$, compatible avec $\Sigma$, \ill{} montrons qu'elle est finie.
+\marginal{\uncertain{On suppose qu'il y a une partie infinie}}
+
+Prouvons en prouvant \uncertain{par récurrence} que $x_i\in G(j)$ $\forall i\geqslant 1$ \struck{les distinguer} \uncertain{vrai} pour $i=1$ par hyp. Supposons que \struck{\ill} l'on ait $x_i\in G(j)$, prouvons $x_{i+1}\in G(j)$. En effet, si $x_i\in\overline{C}(j)$, cela provient de la partie déjà prouvée de 2°. Si $x_i\in C(j)$, cela provient de la définition de $\Sigma$, car
+\[
+  \Sigma(x_i)=R(x_i)\cap G(j) \quad\text{donc}\quad x_{i+1}\in\Sigma(x_i)
+\]
+\struck{donc $x_{i+1}$} est $\in G(j)$. O.K.
+
+\emph{Corollaire} \struck{Pour \ill{}} \struck{Il existe} Soit $j\in J$, $\Gamma\subset G(j)$ \uncertain{stable} (dans $G(j)$). \struck{Il existe \ill{} stratégie $\Sigma$ \ill{}} \struck{Alors les stratégies} \struck{$\Gamma\in G(j)$}. Il existe une
+
+\struck{a)} stratégie $\Sigma$ \ill{} $x$-gagnante pour tous les $x\in\Gamma$.
+
+b) \uncertain{Parmi} celles-ci il y en a une plus grande
+
+\page{6}
+\note{toute la page est traversée d'un long trait oblique, qui semble l'annuler ; elle reste lisible et est transcrite}
+Prouvons $\Longleftarrow$, i.e.\ supposons que $\forall y\in R(x)$, \ill{} $y\in G(j)$, prouvons $x\in G(j)$, i.e.\ montrons qu'il existe une $j$-stratégie $\Sigma$ $x$-gagnante (sachant que \add{$R(x)\neq\emptyset$ et que} $\forall y\in R(x)$, $\exists\ \Sigma_y$ \struck{stratégie} $j$-stratégie $y$-gagnante, et que $x\in\overline{C}(j)$).
+\note{« $R(x)\neq\emptyset$ et que » est un ajout interlinéaire de sa main}
+
+Considérons un \uncertain{bon ordre} sur $R(x)$, et posons pour $z\in C(j)$
+\[
+  \Sigma(z)=\begin{cases}
+    R(z) & \text{si } z \text{ n'est pas conséquent de } x\\
+    \Sigma_{y(z)}(z) & \text{si } \exists\, y(z)\in R(x),\ \text{avec } z\geqslant y(z).
+  \end{cases}
+\]
+\note{la première ligne portait d'abord « si \struck{$z$ n'est pas conséquent} $z\ngeq x$ », la seconde « si \struck{$y(z)\geqslant x$, donc si $z\geqslant y$} » ; les deux formes sont biffées et récrites}
+On prend $y(z)$ le plus petit.
+
+On vérifie immédiatement que 1) $\Sigma$ est une \emph{stratégie} i.e.\ $R(z)\neq\emptyset\Longrightarrow\Sigma(z)\neq\emptyset$ (car les $\Sigma_y$ \uncertain{le sont}), 2) qu'elle est $x$-gagnante.
+
+\struck{Prouvons en effet d'abord que \ill{} si $z$ \ill{} une succession de \ill{} $x$, $\Sigma(z)\subset G(j)$}
+\struck{$z\in G(j)\cap C(j)$, \ill{} $\Sigma$}
+\note{passage encadré et biffé}
+
+Soit $(x_0=x,\ x_1=y,\ x_2,\ \ldots,\ x_n,\ \ldots)$ une partie issue de $x$, compatible avec $\Sigma$. Alors les $x_i$ ($i\geqslant 1$) sont $\geqslant x$, \struck{\ill{} de $x$, et \ill{}} donc $\forall i\geqslant 1$, $\exists\ y_i\in R(x)$, \struck{avec} \ill{} $x_i\geqslant y_i$ ; soit $y_i$ le plus petit de ceux-là. Comme $x_{i+1}\geqslant x_i\geqslant y_i$, \ill{} $y_{i+1}\leqslant y_i$ ; donc les $y_i$ vont \uncertain{décroissant}) donc \uncertain{sont stationnaires}. Soit $y$ la valeur commune.
+
+Donc pour $n$ assez grand, \ill{}
+
+\page{7}
+donnée par la condition ($\Gamma$ donné \struck{et} $z\in C(j)$)
+\[
+  \Sigma(z)=\begin{cases}
+    R(z) & \text{si } z\notin\Gamma\\
+    R(z)\cap G(j) & \text{si } z\in\Gamma
+  \end{cases}
+\]
+\note{les conditions portaient d'abord, biffées et surchargées : « \struck{$\nexists$ partie $(x_0,x_1,\ldots,x_n)$ avec $x_0\in\Gamma$, $x_n=z$} », « \struck{$\exists\,x\in\Gamma$, \ill{} $x_i\in\Sigma(\ldots)$ $z\geqslant x$, ou si $z\notin G(j)$} », « \struck{$\exists\,x\in\Gamma$ tel que $z\geqslant x$, et $z\in G(j)$} (donc $z\in G(j)$) » ; il ne reste que $z\notin\Gamma$, $z\in\Gamma$}
+
+\emph{Dém.} Prouvons que $\Sigma$ est une stratégie, \uncertain{et} \ill{} pour \uncertain{tout} $x\in\Gamma$. C'est une stratégie : i.e.\ $R(z)\neq\emptyset\Longrightarrow\Sigma(z)\neq\emptyset$. Il suffit de regarder le cas \struck{où} $z\in\Gamma$ \struck{$\exists\,x\in\Gamma$, tel que $z\geqslant x$, et $z\in G(j)$}. \uncertain{Mais} $\Sigma(z)=R(z)\cap G(j)$, et par le 1°) de la prop.\ \ill{} (puisque \struck{$z$} $\notin G_0$ \uncertain{donc} $z\notin G_0(j)$) $R(z)\cap G(j)\neq\emptyset$ OK.
+
+Prouvons que $\Sigma$ est $x$-gagnante pour les $x\in\Gamma$. Soit donc une partie $(x_0=x,\ x_1,\ \ldots,\ x_N)$ \struck{définitive} partant de $x$, compatible avec $\Sigma$, et terminée : $x_N\in G_0$ ; prouvons $x_N\in G_0(j)$ (\uncertain{c'est, au reste,} $x_N\in G(j)$). Par hyp.\ $x_0\in G(j)$, \uncertain{on se} prouve par récurrence
+\[
+  x_i\in G(j)\Longrightarrow x_{i+1}\in G(j) \qquad (0\leqslant i\leqslant N-1).
+\]
+Si $x_i\in\overline{C}(j)$, cela résulte de Prop., 2°. Si $x_i\in C(j)$, cela résulte de la définition de $\Sigma$, qui implique que $\Sigma(x_i)=R(z)\cap G(j)$,
+\note{il écrit bien $R(z)$ ici, pour $R(x_i)$}
+donc $x_{i+1}\in\Sigma(x_i)$ et $x_{i+1}\in G(j)$. O.K.
+
+Prouvons enfin \uncertain{que} parmi les stratégies $\Sigma'$
+
+\page{8}
+\uncertain{$\Gamma$-}$x$-gagnantes, \struck{pour $\forall$} $\Sigma$ est la plus grande, i.e.\ $\Sigma\supset\Sigma'$, i.e.\ $\forall z\in C(j)$, on a
+$\Sigma(z)\supset\Sigma'(z)$. C'est évident (puisque $\Sigma'(z)\subset R(z)$) \struck{$\Sigma$} dans le cas où $\Sigma(z)=R(z)$, donc pour \struck{\ill{}} $z\notin\Gamma$ \struck{$\exists\,x\in\Gamma$, tel que $z\geqslant x$, et $z\in G(j)$}. Supposons \uncertain{donc} $z\in\Gamma$, \uncertain{donc} $\Sigma(z)=R(z)\cap G(j)$. Il suffit donc de prouver que $\Sigma'(z)\subset G(j)$, \struck{\ill{}} ce qui résulte \uncertain{du lemme} après la prop.
+
+\struck{Stratégie}
+
+4°) \emph{Stratégies acceptables, positions acceptables.}
+
+$J'$-stratégie (où $J'\subset J$) se définit comme une $J$-stratégie, en y remplaçant $C(j)$ par $C(J')$,
+\[
+  C(J')=\bigcup_{j\in J'}C(j),
+\]
+\note{« comme une $J$-stratégie » : lire sans doute « comme une $j$-stratégie » ; la lettre est ambiguë}
+Donc les $j$-stratégies deviennent les $\{j\}$-stratégies.
+
+Une \struck{\ill{}} $J'$-stratégie \uncertain{choisie} $\Sigma'$ est dite \emph{acceptable} (\struck{contre}) \uncertain{pour $x\in C$} si pour \uncertain{toute} partie $(x_0,\ \ldots,\ x_N)$ \uncertain{partant de $x$}, compatible avec $\Sigma'$, et terminée, \ill{} i.e.\ \ill{} $x_N\notin G_0(j)$.
+\note{les mots « pour $x\in C$ » et « partant de $x$ » sont des ajouts interlinéaires ; un autre ajout, après « acceptable (», est biffé}
+
+\page{9}
+\struck{Prop.\ Pour $x\in C$ \uncertain{que}}
+
+On dit que $x\in C$ \struck{\ill{}} est \emph{acceptable contre $j'\in J$} \struck{pour $J'=J-\{j\}$} s'il $\exists$ (\uncertain{posons} $J'=J-\{j'\}$) $J'$-stratégie $\Sigma'$ telle que $\Sigma'$ soit acceptable pour $x\in C$ contre $j'$.
+\marginal{Si $x\in C$, cela signifie donc que $x\notin G(j')$.}
+
+Cela implique que $x\notin G(j')$. \struck{\ill{}} En effet, si $x\in G(j')$, et si $\Sigma$ est une $j'$-stratégie $x$-gagnante, alors prenons une partie maximale (\ill{}) issue de $x$, et compatible avec $\Sigma$ et $\Sigma'$ (\ill{} pour $x$ et $j$), et $(x_N$ \uncertain{est terminale}$)$ : à la fois $x_N\in G(j)$, et $x_N\notin G(j)$, absurde.
+\note{il écrit ici $G(j)$ là où l'argument demande $G_0(j')$ ; la lettre $j$ et le prime sont peu distincts sur cette ligne}
+
+\emph{Théorème 2} Soient $j'\in J$, $J'=J\smallsetminus\{j'\}$, $x\in C$. Pour que $x\in\overline{G}(j')$ (i.e.\ $x\notin G(j')$), il faut et il suffit que $x$ soit acceptable contre $j'$.
+
+\page{10}
+Il reste à prouver que si $x\in\overline{G}(j')$, alors $x$ est acceptable contre $j'$. On va construire une stratégie $\Sigma'$ pour $J'$ qui soit acceptable pour \emph{tous} les $x\in\overline{G}(j')$.
+
+On pose, pour $z\in C(J')$
+\[
+  \Sigma'(z)=\begin{cases}
+    R(z) & \text{si } z\in G(j')\\
+    R(z)\cap\overline{G}(j') & \text{sinon, i.e.\ } z\in\overline{G}(j')
+  \end{cases}
+\]
+
+C'est une \emph{stratégie} i.e.\ $R(z)\neq\emptyset\Longrightarrow\Sigma'(z)\neq\emptyset$. Il suffit de le voir pour $z\in\overline{G}(j')$, donc $z\in\overline{C}(j')\cap\overline{G}(j')$, mais par la prop.\ 2°
+\[
+  \overline{C}(j')\cap\overline{G}(j')=\bigl\{z\in\overline{C}(j')\ \big|\ \exists\,y\in R(z) \text{ avec } y\in\overline{G}(j') \text{ ou } (R(z)=\emptyset \text{ et } z\in\overline{G}_0(j'))\bigr\}
+\]
+\uncertain{donc}, \uncertain{comme} $R(z)\neq\emptyset$, \ill{} que $R(z)\cap\overline{G}(j')\neq\emptyset$, OK.
+
+Prouvons que $\Sigma'$ est acceptable \uncertain{contre} $j'$ pour $x\in\overline{G}(j')$. Soit donc $(x_0=x,\ x_1,\ \ldots,\ x_N)$ \ill{}
+\note{sous $x_0$, il inscrit $\in\overline{G}(j')$}
+
+\page{11}
+une partie compatible avec $\Sigma'$, commençant avec $x_0\in\overline{G}(j')$, et maximale i.e.\ $x_N\in C_0$, prouvons $x_N\in\overline{G}_0(j')$. On le prouve par réc.\ $x_i\in\overline{G}(j')$ \quad $0\leqslant i\leqslant N$. Supposons $x_i\in\overline{G}(j')$, prouvons $x_{i+1}\in\overline{G}(j')$ …
+\note{sous la seconde occurrence de $x_i$, il précise $0\leqslant i\leqslant N-1$}
+
+À vrai dire, on a fait deux fois le même raisonnement. Considérons un jeu auxiliaire $J'=J(j')$ : deux joueurs $j'$ et $\overline{j'}=j$, avec
+\[
+  C'=C \text{ ens.\ des positions}, \quad \text{et } R'=R
+\]
+\[
+  C'(j')=C(j'),\qquad C'(j)=C(J')\qquad (J'=J-\{j'\}),
+\]
+\[
+  G'_0(j')=G_0(j'),\qquad G'_0(j)=C_0\smallsetminus G'_0(j')=C_0\smallsetminus G_0(j')
+\]
+(donc $C_0=G'_0(j)\amalg G'_0(j')$). Alors les stratégies \struck{\ill{}} du jeu $J$ pour $J'=J\smallsetminus\{j'\}$ sont les stratégies du jeu $J'=J(j')$ pour $j$, et une stratégie $\Sigma'$ est acceptable pour $x\in C$ contre $j'$ ssi elle est gagnante pour $x$ \uncertain{(pour $J$)}. Donc les positions $x\in C$ acceptables \struck{pour} contre $j'$ sont celles qui sont \emph{gagnantes pour $j$}.
+\note{« (on pose aussi $C'(j)$) », « (on le note aussi $G_0(j)$) », « pour $x\in C$ » et « positions » sont des ajouts interlinéaires, ici insérés à leur place}
+\marginal{s'il n'y a pas de partie infinie}
+
+Comme $G_0(j')\cap G_0(j)=\emptyset$, on sait déjà qu'une $x$ ne peut être simultanément gagnante pour $j$ et $j'$ : le raisonnement précédent montre \struck{que} \uncertain{l'implication} les deux inverses
+\note{au-dessous de la ligne, il écrit : « gagnante pour $j$ $\Rightarrow$ non gagnante pour $j'$ »}
+
+\page{12}
+\section*{\struck{Construction} 5.\ \emph{Essai de construction récurrente de $G(j)$}}
+
+\marginal{NB $G_{-1}(j)=\emptyset$}
+
+$G_0(j)$ donné
+\[
+  G_1(j)=G_0(j)\cup\left\{x\in C\ \middle|\ \begin{array}{l}
+    \bigl(x\in C(j) \text{ et } R(x)\cap G_0(j)\neq\emptyset\bigr)\\
+    \text{ou } \bigl(x\in(\overline{C}(j)\smallsetminus\overline{C}_0(j)) \text{ et } R(x)\subset G_0(j)\bigr)
+  \end{array}\right\}
+\]
+\[
+  G_i(j)=G_0(j)\cup\left\{x\in C\ \middle|\ \begin{array}{l}
+    x\in C(j) \text{ et } R(x)\cap G_{i-1}(j)\neq\emptyset\\
+    x\in(\overline{C}(j)\smallsetminus\overline{C}_0(j)) \text{ et } R(x)\subset G_{i-1}(j)
+  \end{array}\right\}
+\]
+\note{dans la définition de $G_1(j)$, un premier « $\{x\in C$ » est biffé avant $G_0(j)\cup$}
+
+On voit par récurrence sur $i$ :
+\[
+  G_i(j)\subset G_{i+1}(j)
+\]
+et aussi
+\[
+  G_i(j)\subset G(j)
+\]
+(en utilisant la prop.)
+
+Posons
+\[
+  G_\infty(j)=\bigcup G_i(j) \quad\text{donc}\quad G_\infty(j)\subset G(j)
+\]
+
+? \emph{Th 3} $G_\infty(j)=G(j)$.
+\marginal{Si $C$ fini, \struck{\ill{}} ou s'il n'existe pas de partie infinie, \uncertain{plus généralement} si $C=\bigcup C_i$}
+
+\struck{Je vais prouver $x\in G(j)\Longrightarrow\exists\,i$, $x\in G_i(j)$. Soit $\Sigma$ une $j$-stratégie gagnante pour $x$. Donc \ill{} partie maximale \uncertain{compatible} avec $\Sigma$, \ill{} $x$, compatible avec $\Sigma$, $X=(x_0=x,\ x_1,\ \ldots,\ x_N)$, $x_N\in G_0(j)$. Je dis que}
+\note{tout ce passage est encadré, barré de hachures obliques et abandonné ; sous l'encadré, « On le p… », inachevé et biffé}
+
+On prouve par récurrence sur $i\geqslant 0$
+\[
+  G_\infty(j)\cap C_i=G(j)\cap C_i
+\]
+en utilisant le Th.\ 1.
+
+\page{13}
+\section*{6. \emph{Élimination des parties circulaires} (en $C$ fini)}
+
+\note{la page ne porte que ce titre ; le paragraphe annoncé n'est pas rédigé ici}
+
+\page{14}
+\note{page de calculs de brouillon, sans phrases suivies ; on transcrit ce qui est lisible, dans l'ordre de la page. Le lien avec les jeux de position n'est pas explicité : les objets sont des parties $E$, $V_i$ d'un groupe commutatif noté additivement}
+\[
+  \{0\}\ \big/\ \underset{x_1}{V_1}\ \big/\ V_1\dotplus\{x_2\},\ \underset{x_2}{V_2}\ \big/\ V_2+\{x_3\}
+\]
+\[
+  \bigl\{V_2+x_3*V_1,\ V_2+x_3*V_1+\{x_2+x_3\}\bigr\},\quad V_3
+\]
+\note{sous $V_1$ et $V_2$, il écrit $\ni x_1$, $\ni x_2$}
+\[
+  V_1+\{x_2\}\qquad V_2+\{x_3\}\qquad 2V_2+x_3*V_1+\{x_2+x_3\}
+\]
+\[
+  3\,3\,3\,3\,1\,1\,1
+\]
+
+\struck{\ill{}} \quad $a_1\ a_2\ a_3$ \quad $b_1\ b_2\ b_3$
+
+$E\dotplus x*E$
+
+($E_{2n}\supsetneq E_2$) donnés ssi [ $E_2$ ss-groupe \uncertain{abélien} ; $E_{2n}$ stable par translations par $E_2$
+
+\struck{$n$ pair,} $E_{2n+1}$, $E_2$ donnés
+$\{$ $E_2$ ss-groupe ; $E_{2n+1}=E'_{2n}\dotplus\{x\}$, où $E'_{2n}$ est stable par $E_2$
+\[
+  3\,2\,2\,2
+\]
+
+$E_3$ \quad $E_3$ donnés \qquad $3$ \quad $3\,2\,2\,1\,1$ …
+
+$a_1\ a_2\ a_3$ \quad $b_1\ b_2\ b_3$
+
+\note{suivent plusieurs essais de tableaux $3\times3$ de sommes, encerclés et en partie barrés : lignes $0,\ a,\ a'$ / $0,\ a,\ b'$ ; $0,\ a,\ b'$ / $a,\ 2a,\ a+b'$ / $a',\ a+a',\ a'+b'$ avec les conditions $2a\neq a$, $a'=b'=a$ (biffé), $b'=a$, $a'+b'=a$ ; puis $0,\ a,\ a-a'$ / $a,\ 2a,\ 2a-a'$ / $a',\ a+a',\ a$}
+\[
+  0\ \ a\ \ a' \qquad 0\ \ a\ \ a-a' \qquad\qquad 0\ \ a\ \ 2a \qquad 0\ \ a\ \ -a
+\]
+\[
+  -2a\ \ -a\ \ 0\ \ a\ \ 2a \qquad\qquad 2a\neq 0
+\]
+\[
+  \begin{array}{ccc} -2a & -a & 0\\ -a & 0 & a\\ 0 & a & 2a \end{array}
+\]
+$0$ \quad $\left|\begin{array}{l} 2a=0\\ a'=-a\\ a'=2a\end{array}\right.$
+\note{ce dernier cas porte en tête, biffé, « $2a=0$ »}
+
+\page{15}
+\note{la page est écrite tête-bêche ; on la lit retournée. Le texte en miroir qui en occupe la moitié inférieure est l'encre traversante d'une autre feuille et n'appartient pas à cette page}
+\[
+  (V_1\dotplus\{x\})*(V_1\dotplus\{x\})=2V_1\dotplus\{u\}+2\{x\}*V_1=2G+\{u\}\qquad (x^2=u)
+\]
+\struck{$2V_1+x+$} \qquad $\boxed{3\ 2\ 2\ 2}$
+\[
+  \{e\}\quad V_1\quad V_1\dotplus\{x\}\quad V_2
+\]
+\note{« $V_1\dotplus\{x\}$ » est récrit au-dessus d'une première forme biffée}
+
+$E*F$ \qquad $a+b=a'+b'$ \qquad $(a-a')=(b'-b)$
+
+$a_1+a_2$ \quad $b_1+b_2$
+
+$0\ \ a\ \big/\ 0$ \struck{\ill{}} $a$ \qquad \struck{$0\ \ a$} \quad $0\ \ a,\ a\ \ 2a$ \qquad $a\neq0$ \quad \struck{$2a\neq0$} \quad $2a=0$
+\[
+  1\,1\,1\,1 \qquad 2\,2 \qquad 2\,1\,1 \qquad 2\,1\,1 \qquad 4\,1\,1\,1 \qquad 2\,2\,1\,1 \qquad 1\,1\,1\,1\,1\,1 \qquad 2\,1\,1\,1
+\]
+\note{colonnes de partitions, sans commentaire ; dans « $4\,1\,1\,1$ » le $4$ surcharge un $2$ ; sous la dernière ligne, un essai biffé et illisible}
+\[
+  V_1*(V_1+\{x\})=2V_1+x*V_1
+\]
+\[
+  \underset{3}{E}+\underset{3}{x*E}\qquad (V_1+G)
+\]
+
+\page{16}
+\note{page à l'encre bleue ; la moitié supérieure et la moitié inférieure sont écrites tête-bêche l'une par rapport à l'autre. On donne d'abord la moitié écrite à l'endroit, puis l'autre, retournée ; rien n'indique laquelle est la première}
+\[
+  E_i=[i,i]\quad 0\leqslant i\leqslant m \qquad\qquad \text{NB } E_m=G,\ E_1=\varepsilon
+\]
+\[
+  F_j=[m-j,\ m+1+j]\quad 0\leqslant j\leqslant m-1 \qquad F_m=E_m=G
+\]
+\[
+  F_i*F_j=\sum_0^m\beta_{ij}^k E_k \qquad \beta_{ij}^k\geqslant 0
+\]
+\[
+  E_i*E_j=\sum\alpha_{ij}^k E_k \qquad \alpha_{ij}^k\geqslant 0
+\]
+\[
+  E_i*F_j=\sum\gamma_{ij}^k F_k \qquad\qquad \varepsilon=\varepsilon^{-1}
+\]
+\note{les indices des $F$ dans la première ligne sont surchargés ($j$ sur $i$) ; une flèche relie $F_i*F_j$ à $E_i*E_j$. La lettre des coefficients de la troisième formule est lue $\gamma$ sans certitude}
+\[
+  \mathcal{A}(g,\varepsilon)=\begin{cases} g*\mathcal{A}(0) & \text{si } \varepsilon=+1\\ g*\mathcal{B}(0) & \text{si } \varepsilon=-1\end{cases}
+\]
+\[
+  \mathcal{A}(\tilde g)*\mathcal{A}(\tilde h)\subset\mathcal{A}(\tilde g\tilde h)
+\]
+
+\struck{Soit $G$ groupe $G'\longrightarrow G$}
+
+$\tilde G$ \ill{} \quad $\tilde G\xrightarrow{\ 2\ }G$ hom., \quad $i : {}_2G\simeq\operatorname{Ker}\eta$
+
+$\forall\tilde g\in\tilde G$ \quad $\mathcal{A}(\tilde g)\subset\mathfrak{P}_f(G)$
+\marginal{Soit $A=g*\check A=\check A*g$, $B=h*\check B=\check B*h$, $A*B=g*\check A*h*\check B=g*h*\check A*\check B$}
+\marginal{On pose $C(\tilde g)$ cône des $\sum_{A\in\mathcal{A}(\tilde g)}\alpha_A A$, $\alpha_A\geqslant0$}
+
+a) $\mathcal{A}(\tilde g)$ tot.\ ordonné
+
+b) $A\in\mathcal{A}(\tilde g)\Longrightarrow A=$ \struck{\ill{}} $g*\check A$ \quad où $g=\eta(\tilde g)$
+
+c) $A\in\mathcal{A}(\tilde g)$, $B\in\mathcal{A}(\tilde h)\Longrightarrow A*B\in C(\tilde g\tilde h)$
+\marginal{$\forall\tilde g\in\tilde G$ ; \quad $\forall\tilde g,\tilde h\in\tilde G$}
+
+d) si $u\in{}_2G$, $\tilde g\in\tilde G$, on a \struck{$\mathcal{A}(\tilde g u^2)=u*\mathcal{A}(\tilde g)$} $\mathcal{A}(i(u)\tilde g)=u*\mathcal{A}(\tilde g)$
+
+d) $\forall\,\tilde g,\tilde h\in\tilde G$ \quad $\exists\,s\in G$ tel que $\mathcal{A}(\tilde g)\cup s\,\mathcal{A}(\tilde h)$ tot.\ ordonné
+
+[i.e.\ $\bigcup\mathcal{A}_{\tilde g}$ \ill{}
+\note{la flèche $\tilde G\to G$ est notée $\eta$ dans « $\operatorname{Ker}\eta$ » ; la lettre est lue sans certitude. Le crochet final reste ouvert}
+
+\page{18}
+\note{à partir d'ici, encre noire, main plus appliquée ; nouvelle numérotation, par chiffres cerclés, rendus ici (1), (2)}
+\section*{(1) $|f,g|$}
+
+\struck{\ill{}} $G$ un ensemble, $C(G)=\mathbb{R}[G]=\mathbb{R}^{(G)}$ (fonctions réelles à support fini), $\mathbb{R}[G]^+=\{f\in\mathbb{R}[G]\mid f\geqslant0\}$
+
+\struck{$f,g\in$} Éparpillement $f'$ de $f$ (ou $f,f'$ équivalentes, on écrit $f\sim f'$) ssi $\exists\,\sigma\in\mathfrak{S}_G$, $f'=f\circ\sigma$ $\Longleftrightarrow$ la suite des valeurs $\neq0$ de $f$, \struck{complètement} rangée en décroissant et avec multiplicités, soit la même $\Longleftrightarrow$ $f(\mu)=f'(\mu)$ (image directe de la mesure canonique).
+\marginal{Notation $A(f)$ ; ordonnée ; $A(f)=A(f')$}
+\note{la note de marge, écrite en oblique, est lue ainsi sans certitude ; la parenthèse finale et le mot « canonique » ferment une ligne coupée par la marge}
+
+Si $f,g\in\mathbb{R}[G]^+$, on pose
+\[
+  |f,g|=\sup_{f'\sim f}\langle f',g\rangle=\sup_{g'\sim g}\langle f,g'\rangle=\sup_{\substack{f'\sim f\\ g'\sim g}}\langle f',g'\rangle
+\]
+
+\emph{NB} $|f,g|=|f',g'|$ si $f'\sim f$, $g'\sim g$
+\marginal{\emph{NB} Si $f\sim g$ \uncertain{on a} $|f,g|=\|f\|_2^2$ \uncertain{et} $f'=g'$ … $|f,g|=|f,g'|$}
+\note{cette seconde note de marge, en oblique au bas de la page, est en partie coupée ; lecture incertaine dans le détail}
+
+\struck{\emph{Proposition}} Pour que $\langle f',g'\rangle$ réalise le sup, il faut et il suffit que pour tt $\alpha,\beta\in\mathbb{R}^{+*}$, $E_\alpha(f')$ et $E_\beta(g')$ soient en relation d'inclusion (i.e.\ $\subset$ ou $\supset$), i.e.\ il faut et il suffit que
+
+$E_\alpha(f')\cup E_\alpha(g')$ soit tot.\ ordonné $\Longleftrightarrow$ $\exists$ un ordre total sur $G$ [si $G$ est fini ou dénombrable] $\sim[0,n]$ ou $\mathbb{N}$, tel que $f$ et $g$ soient décroissantes.
+\note{il écrit bien $E_\alpha(g')$ dans la première formule de cette ligne, là où l'on attend $E_\beta(g')$ ; et $f$, $g$ pour $f'$, $g'$ à la fin}
+
+\emph{NB} On pose $E_\alpha(f)=\{s\in G\mid f(s)\geqslant\alpha\}$ (donc $\alpha\leqslant\beta\Rightarrow E_\alpha(f)\supset E_\beta(f)$) et $E_*(f)=\{E_\alpha(f)\}$
+
+\struck{Proposition} $f'\sim f\Longleftrightarrow\forall g\in C(G)^+$, $|f',g|=|f,g|\Longleftrightarrow\forall A\in\mathfrak{P}_f(G)$, $|f',A|=|f,A|$
+
+\section*{(2) $f'\prec f$}
+
+\emph{Prop.} Conditions équivalentes sur $f',f\in\mathbb{R}[G]^+$
+
+a) $\forall g\in\mathbb{R}[G]^+$, on a
+\[
+  |f',g|\leqslant|f,g|
+\]
+
+b) $\forall A\in\mathfrak{P}_f(G)$, on a
+\[
+  |f',A|\leqslant|f,A|
+\]
+
+c) \struck{\ill{}} $\forall n\in\mathbb{N}^*$, on a
+\[
+  \sum_0^n A(f')_i\leqslant\sum_0^n A(f)_i
+\]
+
+On écrit alors $f'\prec f$.
+
+\page{19}
+\emph{NB} C'est une relation \struck{d'ordre} de préordre. La relation d'équivalence associée est $f'\sim f$.
+
+\emph{NB} Le sup de $\langle f',g\rangle$ pour $f'\prec f$ est atteint pour des $f'\sim f$ …
+
+\struck{\emph{Cor} $f'\prec f$, $g'\prec g\Longrightarrow|f',g'|\leqslant|f,g$}
+
+\emph{Cor} $f'\prec f\Longleftrightarrow\forall g',g\in C(G)^+$, avec $g'\prec g$, on a
+\[
+  |f',g'|\leqslant|f,g|
+\]
+
+\section*{3.\ \emph{Couples préférés}}
+
+\note{le premier mot du titre est surchargé ; lu « Couples », que confirme la définition plus bas}
+
+À partir de maintenant, $G$ est un groupe, d'où $\mathbb{R}[G]^*$, $\mathbb{R}[G]^+$ est stable
+\marginal{\emph{NB} Soient $f,g\in\mathbb{R}[G]^+$. Considérons les $\|f'*g\|_\infty$ (ou $(f'*g)(0)$) pour $f'\prec f$ ; le sup est \struck{\ill{}} \ill{}, et il est atteint pour \uncertain{des} $f'\sim f$}
+\note{la note de marge, écrite verticalement le long du bord gauche, est lue en partie seulement}
+
+\struck{Prop} \emph{Prop} $f,g\in\mathbb{R}(G)^+$, Conditions équivalentes
+
+a) $f'\prec f$, $g'\prec g$, $\Longrightarrow$ $\|f'*g'\|_\infty\leqslant\|f*g\|_\infty$
+
+b) $\forall f'\prec f$, $g'\prec g$ \quad $(f'*g')(0)\leqslant\sup_{s\in G}(f*g)(s)$, \quad où $(f'*g')(0)=\langle f',\check g'\rangle$ et $(f*g)(s)=\langle f*\varepsilon_s,\check g\rangle$
+\note{la dernière égalité récrit une première forme biffée}
+
+a') \struck{\ill{}} a) b) …
+
+b') … $f'\sim f$, $g'\sim g$
+
+c) \quad $|f,g|=\|f*g\|_\infty$
+
+d) \quad $\exists\,s\in G$ tel que $E_*(f)\cup E_*(\varepsilon_s\check g)$ tot.\ ordonné i.e.
+\[
+  \forall\alpha,\beta\in\mathbb{R}^{+*},\quad E_\alpha(f)\ \text{et}\ E_\beta(\varepsilon_s\check g)\ \text{en relation d'inclusion}
+\]
+\note{au-dessus, reliée par une double flèche : « $E_\alpha(g)\cup E_\alpha(f*\varepsilon_s)$ \struck{\ill{}} tot.\ ordonné »}
+
+\emph{Déf} On dit alors que le \struck{\ill{}} couple $(f,g)$ est \emph{préféré}
+
+([Il n'est pas clair que la relation soit symétrique \struck{telle signifie $\forall s$} mais OK si $G$ commutatif])
+
+\emph{Cor} $f\in\mathbb{R}[G]^+$, \struck{symétrique} $(f,f)$ est préféré (\struck{\ill{}} \struck{$f$ et $\check f$ \ill{}} $\exists\,s\in G$) tel que $\check f=\varepsilon_s*f$ ($\Longleftrightarrow\check f=f*\varepsilon_s$)
+
+\emph{NB} Si dans la prop.\ $g$ satisfait à la condition précédente, alors la condition de la prop.\ signifie aussi e) $\exists\,s\in G$ t.q.\ $E_*(f)\cup E_*(\varepsilon_s*g)$ tot.\ ordonné.
+\note{au-dessus de la fin de ligne, reliée par une flèche : « $E_\alpha(\varepsilon_s*f)\cup E_\alpha(g)$ tot.\ ordonné »}
+
+\page{20}
+5.\ Donc si $f$ et $g$ sont sym.\ à translation près, la condition $(f,g)$ préféré est une condition \emph{symétrique} en $f,g$
+\marginal{Cette condition est inv.\ par translations. \struck{\ill{}} $(f,g)$ est bien $\check g,\check f$ aussi. Donc si $f,g$ sont sym.\ modulo translation, alors $(f,g)$ bonne \uncertain{ssi} $(g,f)$ bonne}
+\note{le chiffre « 5 » en tête surcharge un autre ; la note de droite est d'une écriture serrée, lue en partie}
+
+\section*{4.\ \emph{Couples \uncertain{bornés}}}
+
+\note{le second mot du titre est d'une lecture incertaine}
+
+$f,g\in\mathbb{R}[G]^+$.
+
+\emph{Prop} Conditions équivalentes
+
+a) $f'\prec f$, $g'\prec g\Longrightarrow f'*g'\prec f*g$
+
+b) $f'\sim f$, $g'\sim g\Longrightarrow f'*g'\prec f*g$
+
+c) $\forall h\in\mathbb{R}[G]^+$
+\[
+  \sup_{\substack{f'\prec f\\ g'\prec g\\ h'\prec h}}(f'*g'*h')(0)\leqslant\sup_{h'\sim h}f*g*h'(0)\quad\Bigl(=\sup_{h'\sim h}\|f*g*h'\|_\infty\Bigr)
+\]
+
+c') $\forall A\in\mathfrak{P}_f(G)$,
+\[
+  \sup_{\substack{A'\sim A\\ f'\sim f\\ g'\sim g}}f'*g'*A'(0)\leqslant\sup_{A'\sim A}f*g*A'(0)\quad\Bigl(=\sup_{A'\sim A}\|f*g*A'\|_\infty\Bigr)
+\]
+
+\uncertain{C'est impliqué par} $(f,g)$ est \emph{préféré}.
+
+\emph{Cor} Soit $S\subset\mathbb{R}[G]^+$, $S$ \emph{stable par} $*$. \struck{Pour que} Conditions équivalentes :
+
+a) \struck{\ill{}} \uncertain{Tout} couple $(f,g)\in S\times S$ est borné, \struck{il suffit}
+
+b) \struck{que} Pour \struck{tout} $n\in\mathbb{N}$, $n\geqslant2$, $f_1,\ldots,f_n\in S$, $f'_1,\ldots,f'_n\in\mathbb{R}[G]^+$ avec $f'_1\prec f_1,\ \ldots,\ f'_n\prec f_n$
+\[
+  f'_1*\cdots*f'_n\prec f_1*\cdots*f_n
+\]
+
+c) [Si $\forall n\in\mathbb{N}^*$, $\exists\,A\in S\cap\mathfrak{P}_f(G)$ tel que $\operatorname{card}A=n$] $\longrightarrow$ « condition K »
+
+$f'_1\prec f_1,\ \ldots,\ f'_n\prec f_n$ ($f'_i\in\mathbb{R}(G)^+$, $f_i\in S$) $\Longrightarrow$
+\[
+  \|f'_1*\cdots*f'_n\|_\infty\leqslant\|f_1*\cdots*f_n\|_\infty
+\]
+\marginal{condition K \quad $\Uparrow\ \Downarrow$ hyp.}
+\note{« $n\leqslant\operatorname{card}G$ » est ajouté à l'encre bleue au-dessus de « $\exists\,A$ », et « condition K » est de la même encre ; la parenthèse de la seconde ligne de c) s'ouvre sur « (ou $f'_1*\cdots*f'_n(0)$) »}
+
+\struck{d) $f'_1\sim f_1$, $f'_2\sim f_2$, … $f'\sim f$, $g'\sim g$, $A'\sim A\in\mathfrak{P}_f(G)\cap S\Longrightarrow f'*g'*A'(0)\leqslant\|f*g*A\|_\infty$}
+\marginal{\struck{condition K}}
+
+\end{document}
