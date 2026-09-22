@@ -102,12 +102,13 @@ export const EDITED_COTES: Cote[] = COTES.filter((c) => EDITED.has(c.id));
  * needs no removal — the transcription outranks it — but the list is pruned
  * anyway, so that it says what is in hand rather than what once was.
  *
- * Empty since 2026-09-22: the queue of 2026-09-21 — 161-4, 161-5, 161-6 and
- * 162-5, which close the group « Dossiers rassemblés par Grothendieck sur
- * différentes thématiques » (161-1 à 162-6) — is transcribed. Before it,
- * 156-2, 141, 158, 159 and 160 stood here.
+ * These two are the queue of 2026-09-22, the next row of #24: 67 Chirurgie
+ * des surfaces conformes and 68 Jeux de position, which close the group
+ * « Autour de l'enseignement » (66-89). Before them, 161-4, 161-5, 161-6 and
+ * 162-5 stood here, and before those 156-2, 141, 158, 159 and 160 — all
+ * transcribed now.
  */
-const IN_PROGRESS_FOLDERS: string[] = [];
+const IN_PROGRESS_FOLDERS = ['67', '68'];
 
 export const IN_PROGRESS: ReadonlySet<string> = new Set([
   ...BOOKS.filter((b) => b.inProgress).flatMap((b) => b.sections.flatMap((s) => s.cotes)),
