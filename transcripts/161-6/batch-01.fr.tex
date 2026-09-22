@@ -1,0 +1,696 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 161-6, batch 1 (pages 1-20).
+% Established from the facsimile archives/batches/161-6/batch-01.pdf (a mirror of
+% https://grothendieck.umontpellier.fr/161-6.pdf), per the skill
+% transcribe-grothendieck. The batch file carries no cover sheet: PDF page N is
+% archivists' page N, as the pencilled numbers bottom-left confirm.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-09-22 — first pass, unchecked against the pages by a human.
+%
+% What the batch is.
+%   1      The folder's own chemise: on the tab, in pencil, « Graphes,
+%          icosaèdre » (whence the inventory's title); at the head, a circled
+%          « 6 », a word read « Groupes »? (doubtful), and « (Notes sur formes
+%          paradoxiques? prêtées à Labarde) » — cf. folder 162-1, the lending
+%          register. No \page; the tab's words head the file and a \note
+%          records the rest.
+%   2, 11, 20  Blank: absent.
+%   3-10   A fair copy in ink on ruled paper, headed « L'icosaèdre » in his
+%          hand: the regular icosahedron constructed from a pair (u, v) of
+%          orthonormal vectors in a Euclidean 3-space — the equilateral
+%          spherical triangle of dihedral angle θ, the choice θ = 2π/5, the
+%          caps (« calottes »), the lemma that the six neighbours of x_0 form
+%          a cap, the theorem that Γ' (rotations preserving I) acts simply
+%          transitively on oriented edges, |Γ'| = 60, |Γ| = 120, and the
+%          remark that the automorphism groups of the vertex-edge graph and
+%          of the face-edge graph are both Γ'. Page 6 is an unfinished matrix
+%          check of the lemma; page 10 closes on the wish to characterise Γ'
+%          combinatorially.
+%   12, 14 Ink scratch pages on the fifth cyclotomic field: γ = ζ + ζ^{-1},
+%          γ² + γ - 1 = 0, the Galois action of (Z/5Z)^*, the fixed ring of
+%          ζ ↦ ζ^{-1} computed in the basis 1, T, T², T³, then a sketch over
+%          Spec Z[1/n] of μ_n^*, its quotient ϑ_n by inversion and the map
+%          λ ↦ λ + λ^{-1} to the affine line.
+%   15, 13, foot of 12  A pencil run, crossed through by a long diagonal on
+%          15 and 13, on order-preserving maps between ordered sets in a
+%          category written (OM): K is shown to be the sum of I and J in (OM),
+%          then the statement is generalised to restricted infinite products.
+%          Page 13 and the two lines at the foot of 12 are written head to
+%          tail with respect to the ink; the reading order is 15 → 13 → foot
+%          of 12, and the notes say so. The run begins before page 15 (its
+%          hypotheses a), b), c) are not in this batch) — perhaps in batch 2.
+%   16-19  Leaves from a spiral notebook, landscape, much of 17-19 written
+%          sideways: page 16 is a sheet of doodles (flowers labelled corolle,
+%          racine, tige, cœur, pétale; tetrahedra; a cube) with a few lines on
+%          Hom_G(G/H, E) = E^H; page 17 is a first draft of the computation of
+%          pp. 3-4; page 18 proves G ≃ A_5 via an action on 15 objects
+%          (pairs of opposite edges) grouped in 5 triples, over a projected
+%          icosahedron with labelled vertices A_i, A'_i; page 19 is scattered
+%          scratch (permutations of Z/5Z, normalisers, trial relations for α).
+%
+% Notation fixed once for the batch: E, S, u^⊥, Σ_u; u ∧ v; x(u,v;α); θ = 2π/5;
+% v_i, x_i, x'_i = -x_i, u' = -u; I = I_{u,v}; G = O(E), G' = SO(E); Γ, Γ';
+% G_C, G'_C; ℓ, ℓ'; γ^w_α. His ∁ is \complement; « ½ direct » is kept as
+% written (semi-direct). On the cyclotomic pages ζ is the root of unity; the
+% round letter he writes like a gothic ϑ is rendered \vartheta, uncertain.
+% (OM) is kept as two letters in parentheses; what they abbreviate is not on
+% these pages.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{161-6}
+\batch{1}
+\pages{1}{20}
+\dating{[à partir de 1973-vers 1977] — le groupe « Dossiers rassemblés par Grothendieck sur différentes thématiques » (161-1 à 162-6) est daté [après 1961-vers 1977]}
+\watermark{Édition de démonstration}
+\foldertitle{Graphes, icosaèdre [etc.] : notes manuscrites (s.d.)}
+
+\begin{document}
+
+\section*{Graphes, icosaèdre}
+
+\note{Ces mots sont écrits au crayon sur l'onglet de la chemise (page 1). En tête de la chemise, un « 6 » cerclé, un mot lu \uncertain{Groupes}, et, entre parenthèses : « Notes sur formes \uncertain{paradoxiques} prêtées à \uncertain{Labarde} ». La chemise ne porte rien d'autre. Les pages 3 à 10 sont une mise au net à l'encre, titrée de sa main « L'icosaèdre » ; les pages 12 à 19 sont des brouillons, dont une suite au crayon sur les ensembles ordonnés (pp. 15, 13 et pied de la p. 12) et quatre feuillets d'un carnet à spirale.}
+
+\section*{L'icosaèdre}
+
+\page{3}
+\marginal{[espace vectoriel muni d'une forme quadratique non dégénérée, qu'on supposera définie positive au besoin]}
+$E$ espace vectoriel euclidien de dim 3 $/\mathbb{R}$, produit scalaire $x.y$ ($\|x\| = \sqrt{x^2}$).
+$S$ la sphère unité $= \{x \in E \mid \|x\|^2 = 1\}$.
+
+Si $u \in S$, $u^{\perp}$ désigne le plan orthogonal ; donc $u + u^{\perp}$ est le plan tangent à $S$ en $u$, tandis que l'espace vectoriel tangent à $u$ en $S$ est can. isom. à $u^{\perp}$.
+
+L'ensemble des directions tangentes en $u$ \struck{sur} la sphère \add{$S$} s'identifie à l'ensemble $u^{\perp} \cap S = \Sigma_u$ des vecteurs unité orthogonaux à $u$.
+\note{le $S$ après « sphère » est ajouté au-dessus de la ligne.}
+
+On suppose $E$ orienté, de sorte que à un couple $u \in S$, $v \in \Sigma_u$ est associé un troisième vecteur $w = u \wedge v$, caractérisé par les conditions $w \in S \cap u^{\perp} \cap v^{\perp}$, $(u,v,w)$ orienté en sens direct.
+\marginal{On peut dire que le plan $u^{\perp}$ est orienté : \struck{\uncertain{puisque}} la rotation d'angle $\frac{\pi}{2}$ $v \mapsto u \wedge v$ y est définie.}
+
+Le groupe spécial orthogonal $\mathrm{SO}(E)$ opère de façon simplement transitive sur l'ensemble des directions tangentes à la sphère $S$ en ses différents points, i.e. l'ensemble des couples $(u,v) \in S$ avec $u.v = 0$ i.e. $v \in \Sigma_u$. Le groupe orthogonal $\mathrm{O}(E) \simeq \mathrm{SO}(E) \cdot \mu_2$ ($\mu_2$ = homothéties $\pm 1$) opère de façon doublement transitive.
+\note{« $\mathrm{SO}(E)$ » est écrit au-dessus d'un mot biffé, suivi d'un signe noirci, avant $\mu_2$ ; on lit « $(u,v) \in S$ » là où l'on attendrait $S \times S$.}
+
+\struck{\ill{}} \add{Les} points sur $S$ du grand cercle passant par $u$ dans la direction $v$, \struck{sont} i.e. de $w^{\perp} \cap S$, sont de la forme
+\[
+  x(u,v;\alpha) = u \cos\alpha + v \sin\alpha \qquad \alpha \text{ défini mod } 2\pi\mathbb{Z}.
+\]
+D'autre part, les \struck{autres} directions tangentes à $S$ en $u$, i.e. les points de $u^{\perp} \cap S$, s'écrivent
+\[
+  v' = v \cos\theta + w \sin\theta .
+\]
+
+\note{en marge gauche, une figure : l'arc de grand cercle de $u$ vers $x(u,v;\alpha)$ et celui de $u$ vers $x(u,v';\alpha)$, l'angle $\theta$ entre eux marqué en $u$ et près des sommets, l'angle $\alpha$ au centre ; en bas, les vecteurs $v$, $v'$, $w$ issus du centre, l'angle $\theta$ entre $v$ et $v'$.}
+Fixons $\theta$, et calculons les carrés des côtés du triangle de sommets $u$, $x(u,v;\alpha)$, $x(u,v';\alpha)$. On a
+\[
+\begin{cases}
+  \|x(u,v;\alpha) - u\|^2 \underset{\text{par raison de sym.}}{=} \|x(u,v';\alpha) - u\|^2 = (\cos\alpha - 1)^2 + \sin^2\alpha = 2(1 - \cos\alpha) = 4 \sin^2 \frac{\alpha}{2} \\[1ex]
+  \|x(u,v,\alpha) - x(u,v',\alpha)\|^2 = \sin^2\alpha \, \|v - v'\|^2 = \sin^2\alpha \; 4 \sin^2 \frac{\theta}{2} = \Bigl(4 \sin^2 \frac{\alpha}{2} \cos^2 \frac{\alpha}{2}\Bigr)\Bigl(4 \sin^2 \frac{\theta}{2}\Bigr)
+\end{cases}
+\]
+
+\page{4}
+Donc pour que ces trois points forment un triangle équilatéral (il est de toutes façons isocèle) il faut qu'on ait
+\[
+  \text{(1)} \qquad \cos\frac{\alpha}{2} = \pm \frac{1}{2 \sin \theta/2} .
+\]
+\note{un mot biffé, illisible, après la formule (1).}
+\marginal{[\textbf{NB} Un tel $\alpha$ existe sss $|\sin\frac{\theta}{2}| \geqslant \frac{1}{2}$, i.e. si $0 \leqslant \theta \leqslant \pi$, sss $\frac{\pi}{6} \leqslant \frac{\theta}{2} \leqslant \frac{5\pi}{6}$ i.e. \struck{$\frac{\pi}{3} \leqslant$} $\boxed{\theta \geqslant \frac{\pi}{3}}$]}
+ou encore, comme $\cos\alpha = \cos^2\frac{\alpha}{2} - \sin^2\frac{\alpha}{2} = 2\cos^2\frac{\alpha}{2} - 1$
+\[
+  \text{(1')} \qquad \cos\alpha = \frac{1}{2\sin^2\theta/2} - 1 = \frac{1 - 2\sin^2\theta/2}{2\sin^2\theta/2} = \frac{\cos\theta}{2\sin^2\theta/2} = \frac{\cos\theta}{1 - \cos\theta}
+\]
+\marginal{\textbf{NB} $\begin{cases} \cos 2\alpha = -\frac{3}{5} \\ \cos\alpha = \frac{1}{\sqrt{5}} \end{cases}$ pour $\theta = \frac{2\pi}{5}$}
+Bien entendu, dans ce cas, les autres « angles dièdres » définis par ce triangle en les deux autres sommets, sont également égaux à $\theta$. On a en fait construit ici, \add{choisissant la détermination principale de $\alpha$ (comme $0 < \alpha < \pi$),} \emph{le} seul triangle équilatéral inscrit dans la sphère $S$, d'angle dièdre $\theta$, ayant un sommet en $u$, un \struck{autre} \add{deuxième sommet $x$} dans la direction tangente $v$ à $S$ en $u$, et \struck{situé} de façon que \uncertain{pour} le troisième sommet $x'$ l'orientation $\uncertain{u},x,x'$ soit directe.
+\note{« choisissant la détermination principale de $\alpha$ (comme $0<\alpha<\pi$) » et « deuxième sommet $x$ » sont des ajouts interlinéaires de sa main.}
+
+Nous allons fixer par la suite
+\[
+  \text{(2)} \qquad \theta = \frac{2\pi}{5}
+\]
+et, pour quelque temps, on fixe $u$ et $v$. On posera
+\[
+  \text{(3)} \qquad v_i = v \cos i\theta + w \sin i\theta \qquad i \in \mathbb{Z}/5\mathbb{Z}
+\]
+(de sorte que $v_0 = v$, i.e. $v_i = v$ si $i \equiv 0$ (5)), et on posera
+\struck{\ill{}}
+\[
+  \text{(4)} \qquad x_i = x(u, v_i, \alpha) = u\cos\alpha + v_i \sin\alpha = u\cos\alpha + v\cos i\theta \sin\alpha + w \sin i\theta \sin\alpha \qquad (i \in \mathbb{Z}/5\mathbb{Z})
+\]
+\marginal{\textbf{NB} Il est immédiat que les $u, x_i$ sont \uncertain{6} pts \emph{distincts} (leurs projections sur le plan $u^{\perp}$ sont $0$ et les $v_i \sin\alpha$) à coordonnée suivant $u > 0$ ; donc les $u, x_i, u', x'_i$ sont 12 points \emph{distincts} de $S$}
+où $\alpha$ est fixé par (1) ou (1'), $0 < \alpha < \pi$. On trouve donc cinq points en ordre circulaire sur le cercle de \add{centre $u$} rayon (rectiligne) $4\sin^2\frac{\alpha}{2}$ tracé sur la sphère $S$. On pose de plus
+\[
+  \text{(5)} \qquad x'_i = -x_i , \quad u' = -u \qquad (i \in \mathbb{Z}/5\mathbb{Z})
+\]
+\marginal{On appelle cet ens. de 12 pts l'\emph{icosaèdre} défini par $u, v$.}
+\note{le « rayon (rectiligne) » $4\sin^2\frac{\alpha}{2}$ est le carré de la distance calculée p. 3, non la distance elle-même ; tel quel sur la page.}
+
+Un ensemble de points $(x,y,z)$ de $S$ \add{définissant un triangle équilatéral} d'angle au centre $\alpha$ est appelé un \emph{triangle icosaédral} ; \add{cela signifie aussi qu'il y a une rotation qui l'amène en $(u,x_0,x_1)$} un ensemble de points $(a, b_0, b_1, \ldots, b_4)$ \add{de $S$} est appelé une \emph{calotte d'icosaèdre} s'il existe une transformation \add{orthogonale} $g \in \mathrm{O}(E)$ qui l'amène en l'ensemble précédent $(u, x_0, x_1, \ldots, x_4)$. Il revient encore au même \struck{que} de dire \add{que son cardinal est 6, et que l'on peut ordonner cet ens. de telle façon que} que les triangles $(a, b_i, b_{i+1})$ pour $0 \leqslant i \leqslant 3$ sont icosaédraux (et alors $(a, b_4, b_0)$ est aussi icosaédral*. Le point $a$ est alors uniquement
+
+\page{5}
+\note{les deux premières lignes sont la note appelée par l'astérisque de la p. 4, écrite en tête de page.}
+* On a encore que les longueurs des dix vecteurs $a - b_i$ ($0 \leqslant i \leqslant 4$), $b_i - b_{i+1}$ ($0 \leqslant i \leqslant 4$, posant $b_5 = b_0$) sont égales à
+\[
+  \text{(4)} \qquad \ell = 2 \sin\frac{\alpha}{2}
+\]
+Notons les longueurs correspondantes des vecteurs $a - b'_i = a + b'_i$
+\[
+  \text{(4')} \qquad \ell' = 2 \cos\frac{\alpha}{2}
+\]
+\note{le numéro (4) est déjà celui de la formule qui définit les $x_i$, p. 4 ; tel quel.}
+\marginal{notons aussi que $\ell^2$ et $\ell'^2$ sont les solutions de l'équation quadratique $\lambda^2 - 4\lambda + 4\sin^2\alpha = 0$}
+
+déterminé, \struck{et l'ens} on l'appelle le \emph{sommet} de la calotte d'icosaèdre, les autres points les \emph{points périphériques}, \struck{et} sur l'ensemble de ceux-ci (grâce à l'orientation donnée de $S$, \struck{donc} il y a alors un ordre circulaire canonique, qui en fait un torseur sous le groupe $\mathbb{Z}/5\mathbb{Z}$. Le sous-groupe $G_C$ de $G = \mathrm{O}(E)$ qui laisse une calotte $C$ invariante, \struck{\ill{}} a dix éléments, \struck{le sous-g} son intersection $G'_C$ avec $G' = \mathrm{SO}(E)$, est le groupe (can. isom. à $\mathbb{Z}/5\mathbb{Z}$) des rotations d'angle multiple de $2\pi/5 = \theta$ autour du \struck{\ill{}} vecteur $a$. \struck{On obtient un} Les cinq points de $G_C \cap \complement G'_C$, d'ordre 2, et formant avec l'élément neutre \struck{sont} les stabilisateurs dans $G_C$ des cinq points périphériques de la calotte ; l'élément $g_i \in G_C \cap \complement G'_C$ qui laisse $b_i$ invariant est la symétrie p.r. au plan engendré par $a, b_i$. La structure du groupe $G_C$ est le produit ½ direct du \struck{\ill{}} sous groupe $G_C$ (can. isom. à $\mathbb{Z}/5\mathbb{Z} = \mu_5$) et du groupe $\mathbb{Z}/2\mathbb{Z}$, opérant sur $G_C$ par symétrie. Enfin, le groupe $G'_C \simeq \mathbb{Z}/5\mathbb{Z} = \mu_5$ opère de façon simplement transitive sur l'ens. des pts périphériques de la calotte (ce qui redonne une définition de l'ordre circulaire can. sur leur ens.)
+\note{« ½ direct » : semi-direct. Dans « du sous groupe $G_C$ » et « opérant sur $G_C$ », on n'aperçoit pas le prime que le sens demande ($G'_C$). La phrase « les cinq points de $G_C \cap \complement G'_C$, d'ordre 2, et formant avec l'élément neutre … » reste inachevée telle que les ajouts interlinéaires l'ont laissée.}
+
+Jusqu'à maintenant le choix $\theta = 2\pi/5$ n'a pas joué de rôle particulier : on aurait pu prendre $\theta = 2\pi/m$, et le groupe des $m$ rotations multiples de $2\pi/m$ aurait remplacé celui envisagé. Cela va changer avec le
+
+\textbf{Lemme.} L'ensemble $(x_0; x_1, u, x_{-1}, x'_2, x'_{-2})$ est une calotte d'icosaèdre de sommet \uncertain{$u$}, l'ordre circulaire canonique étant celui écrit.
+\note{la notation $(a; b_0, \ldots)$ désigne $x_0$ comme sommet ; la lettre après « sommet » se lit pourtant $u$.}
+
+\emph{Démonstration.} Faisant la symétrie p.r. \struck{au} plan \struck{engendré} engendré par $u, x_0$ (qui échange $x_1$ et $x_{-1}$, $x'_2$ et $x'_{-2}$) on est ramené, à une question d'orientation près, à montrer que les \struck{trois triangles} longueurs des trois vecteurs $x_0 - x'_2$, $x_{-1} - x'_2$, $x'_2 - x'_{-2}$ sont égales à la (4) --- et où on peut se dispenser de la \struck{dernière} vecteur.
+\note{au-dessus de « dernière » biffé, un ajout : \uncertain{vérifier pour} \ill{}.}
+\struck{\ill{}} Il sera plus astucieux de montrer que si \struck{\ill{}} on considère l'élément $\gamma^{w}_{\alpha}$ de $G' = \mathrm{SO}(E)$ qui est \struck{l'identité sur $w$}, \struck{et qui dans le plan $(u,v)$} est la rotation d'angle $\alpha$ autour de $w$ et l'élément $\gamma^{u}_{\frac{\theta}{2}}$ qui est la \struck{identité sur \ill{} et qui est} rotation d'angle $-\theta/2$ autour de $u$, et si on pose
+
+\page{6}
+$\gamma = \gamma^{w}_{\alpha} \gamma^{u}_{-\theta/2}$, alors $\gamma$ transforme la calotte $(u, (x_i)_{i \in \mathbb{Z}/5\mathbb{Z}})$ en l'\struck{\ill{}} \uncertain{ensemble} dit, plus précisément que l'on a les six relations
+\[
+  \gamma u = x_0 , \quad \gamma x_0 = x'_{2} , \quad \gamma x_1 = x'_{-2} , \quad \gamma x_2 = x_1 , \quad \gamma x_3 = u , \quad \gamma x_4 = x_{-1}
+\]
+\note{dans $\gamma x_0 = x'_2$ et $\gamma x_2$, l'indice 2 est récrit par-dessus un autre.}
+
+Faisons le calcul :
+\begin{align*}
+  \gamma u &= \gamma^{w}_{\alpha}(u) = u\cos\alpha + v\sin\alpha \\
+  \gamma v &= \gamma^{w}_{\alpha}\Bigl(v\cos\frac{\theta}{2} - w\sin\frac{\theta}{2}\Bigr) = (-u\sin\alpha + v\cos\alpha)\cos\frac{\theta}{2} - w\sin\frac{\theta}{2} \\
+  &= -u\sin\alpha\cos\frac{\theta}{2} + v\cos\alpha\cos\frac{\theta}{2} - w\sin\frac{\theta}{2} \\
+  \gamma w &= \gamma^{w}_{\alpha}\Bigl(+v\sin\frac{\theta}{2} + w\cos\frac{\theta}{2}\Bigr) = (-u\sin\alpha + v\cos\alpha)\sin\frac{\theta}{2} + w\cos\frac{\theta}{2} \\
+  &= -u\sin\alpha\sin\frac{\theta}{2} + v\cos\alpha\sin\frac{\theta}{2} + w\cos\frac{\theta}{2}
+\end{align*}
+\note{plusieurs signes et plusieurs $\cos$ / $\sin$ de ces lignes sont repassés à l'encre ; on transcrit la forme finale.}
+\[
+  \gamma = \begin{pmatrix}
+    \cos\alpha & -\sin\alpha\cos\frac{\theta}{2} & -\sin\alpha\sin\frac{\theta}{2} \\
+    \sin\alpha & \cos\alpha\cos\frac{\theta}{2} & \cos\alpha\sin\frac{\theta}{2} \\
+    0 & -\sin\frac{\theta}{2} & \cos\frac{\theta}{2}
+  \end{pmatrix}
+\]
+\begin{align*}
+  \gamma u &= u\cos\alpha + v\sin\alpha = x_0 \qquad \text{OK} \\
+  \gamma x_0 &= \gamma u \cos\alpha + \gamma v \sin\alpha = u\Bigl(\cos^2\alpha - \sin^2\alpha\cos\frac{\theta}{2}\Bigr) + v\Bigl(\sin\alpha\cos\alpha + \sin\alpha\cos\alpha\cos\frac{\theta}{2}\Bigr) \\
+  &\qquad - w\Bigl(\sin\alpha\sin\frac{\theta}{2}\Bigr)
+\end{align*}
+Or $x'_2 = -x_2 = -u\cos\alpha - v\cos 2\theta\sin\alpha - w\sin 2\theta\sin\alpha$
+\note{au-dessus du signe devant $v$, un petit signe de correction, \ill{}.}
+
+à prouver
+\[
+\begin{cases}
+  -\cos\alpha = \cos^2\alpha - \sin^2\alpha\cos\frac{\theta}{2} \\
+  -\cos 2\theta \struck{\sin\alpha} = \struck{\sin\alpha}\cos\alpha\Bigl(1 + \cos\frac{\theta}{2}\Bigr) \\
+  \struck{\ill{}} \sin 2\theta = \struck{\sin\alpha} \sin\frac{\theta}{2}
+\end{cases}
+\]
+\[
+  \gamma x_1 = \gamma u \cos\alpha + \gamma v \sin\alpha\cos\theta + w\sin\alpha\sin\theta
+\]
+$=$
+\note{le calcul s'arrête là ; le reste de la page est blanc.}
+
+\page{7}
+\textbf{Cor.} Soit \struck{\ill{}} $g \in G = \mathrm{O}(E)$ transformant la calotte $(u, (x_i))$ en celle du Lemme. Alors $g$ invarie l'icosaèdre $I = I_{u,v}$.
+En effet, il est immédiat que l'icosaèdre associé à cette deuxième calotte est encore $I$.
+
+Soit $\Gamma_I = \Gamma_{u,v}$ le sous-groupe de $G = \mathrm{O}(E)$ qui laisse l'icosaèdre $I = I_{u,v}$ invariant, $\Gamma' = \Gamma \cap G'$ le sous-groupe formé des rotations de $\Gamma$. Il est clair que $\Gamma'$ est d'indice 2 dans $\Gamma$ (N.B. $-1 \in \Gamma \cap \complement\Gamma'$) et que $\Gamma$ est donc le produit
+\[
+  \Gamma \simeq \mu_2 \times \Gamma'
+\]
+
+\textbf{Théorème.} $\Gamma'$ opère de façon transitive sur l'ens. des sommets de l'icosaèdre, $I$, et de façon simplement transitive sur l'ens. des couples $(x, d)$ où $x$ est un sommet de l'icosaèdre, $I$ une arête. $\Gamma$ opère de façon simplement transitive sur l'ens. des triples $(x,y,z)$ de points de $I$ formant une face*.
+\note{« $I$ une arête » : tel quel ; le $d$ du couple $(x,d)$ est récrit par-dessus une autre lettre.}
+\marginal{* On peut aussi \uncertain{dire} sur l'ens. des triples d'arêtes formant \ill{} --- \ill{} c'est évidemment équivalent.}
+
+On a oublié de préciser que par définition les \emph{arêtes} de l'icosaèdre $I$ sont les 30 segments suivants \struck{de longueur $\ell$ qui joignent} :
+\[
+\begin{cases}
+  (u, x_i), & \struck{\ill{}} \; (u', x'_i) \\
+  (x_i, x_{i+1}), & (x'_i, x'_{i+1}) \qquad i \in \mathbb{Z}/5\mathbb{Z} \\
+  (x_i, x'_{i-2}) & (x'_i, x_{i-2})
+\end{cases}
+\]
+\marginal{Ce sont aussi les \struck{ensembles} couples $(x,y)$ d'éléments distincts de l'icosaèdre, de distance minimum (laquelle est $\ell$) --- il sera plus facile à vérifier, après transitivité de $\Gamma'$ sur l'ens. des sommets.}
+
+De plus, on appelle \emph{faces} de l'icosaèdre \struck{une partie de 3 éléments} des 20 \struck{ensembles} de trois sommets \struck{qui fait partie des ensembles} suivants (ou les triangles qu'ils déterminent)
+\[
+\begin{array}{lll}
+  (u, x_i, x_{i+1}) & (u', x'_i, x'_{i+1}) & i \in \mathbb{Z}/5\mathbb{Z} \\
+  (x_i, x'_{i-2}, \underset{\textstyle x_{i+1}}{\underset{\shortparallel}{x_{i-4}}}) & (x'_i, x_{i-2}, \underset{\textstyle x'_{i+1}}{\underset{\shortparallel}{x'_{i-4}}}) &
+\end{array}
+\]
+\note{les trois ajouts interlinéaires de cette phrase (« des 20 », « de trois », « 20 ») et ses ratures laissent une syntaxe flottante ; on la donne telle quelle.}
+\marginal{Ce sont aussi les triples $(x,y,z)$ tels que $(x,y)$, $(y,z)$ et $(z,x)$ soient des arêtes. Il y en a exactement \emph{cinq} contenant \struck{issus du sommet} $u$ comme sommet. Ici aussi, ce sera immédiat à vérifier après la transitivité.}
+
+\emph{Démonstration.} On sait déjà que les points $x_i$ \struck{\ill{}} sont congruents sous $\Gamma'$, et par symétrie les points $x'_i = -x_i$ aussi. De plus le lemme nous montre que $u$ est congruent à $x_0$, \struck{$x_0$ est congru} (donc par symétrie $u'$ l'est à $x'_0$), et \struck{par} $x_0$ à $x'_2$ --- donc tous les \uncertain{$x$} sont \emph{congruents}. \struck{Pour montrer} Montrons que $\Gamma'$ est simplement transitif sur l'ens. des couples $(x, d)$ i.e. des arêtes \emph{orientées} $(x,y)$, \struck{\ill{}} i.e. que si $(x',y')$ en est une autre alors $\exists!\, g \in \Gamma'$, $gx' = x$, $gy' = y$. On peut supposer $x = u$, $y = x_0$, et par la transitivité déjà établie sur les sommets, $x' = u$. Donc \struck{\ill{}} alors $y'$ est un des $x_i$, \struck{et l'on sait} il est clair que le stabilisateur
+
+\page{8}
+\marginal{Données équivalentes : $\begin{cases} \text{l'icosaèdre + un de ses sommets} \\ \text{icosaèdre + calotte d'icosaèdre contenue dedans} \\ \text{calotte d'icosaèdre} \\ \text{un couple } (u,v) \text{ modulo rotations sur } v \text{ dans } u^{\perp} \text{ d'angle multiple de } \theta \end{cases}$ [\uncertain{point du} fibré principal sur $S$ de groupe \uncertain{$\mathbb{T}$} \uncertain{quotient} \ill{} de celui formé des $(u,v)$ \ill{}]}
+\marginal{\struck{\ill{}} Précisons que tout point de l'icosaèdre est centre d'une calotte d'icosaèdre contenue dans $I$, \struck{déterminée} unique, \struck{\ill{}} la calotte de centre $u$ étant formée de $u$ et des \uncertain{sommets} \emph{reliés} à $u$ par une arête.}
+\note{la seconde note marginale, écrite en biais dans le coin supérieur gauche, est appelée par un signe cerclé placé après « de $u$ dans ».}
+
+de $u$ dans $\Gamma'$ est aussi le sous-groupe \struck{de} $G'$ \struck{formé des} des $g \in G'$ qui invarient la calotte $(u, (x_i))$, lequel, nous avons vu, est le groupe $\mu_5$ qui opère de façon simplement transitive sur l'ens. des $x_i$, ok.
+Prouvons enfin l'assertion de \add{simple} transitivité de $\Gamma$ sur l'ens. des \struck{faces} triples $(x,y,z)$ qui sont une face. Procédant comme dessus, on peut supposer, utilisant ce qui est déjà démontré, que $x = x' = u$, $y = y' = x_0$, $z = x_1$. Mais il n'y a que deux \struck{triangles} faces \struck{\ill{}} admettant $(u, x_0)$ comme arête, leurs autres sommets sont resp. $x_1$ et $x_{-1}$. Si c'est $x_{-1}$, la symétrie p.r. au plan $u, v$ (qui évidemment invarie l'icosaèdre $I$) transforme $x_{-1}$ en $x_1$ en laissant $u, x_0$. Il reste donc : \struck{vérifier} noter que $u, x_0, x_1$ \struck{\ill{}} étant linéairement indépendants une transformation linéaire qui fixe ces trois points est l'identité.
+
+\textbf{Corollaire.} $\Gamma'$ est d'ordre 60, $\Gamma$ d'ordre 120.
+
+Le premier point provient du fait que l'icosaèdre a 30 arêtes, donc $2 \cdot 30 = 60$ arêtes orientées. Comme $\Gamma \simeq \Gamma' \times \mu_2$, on trouve que $\Gamma$ a 120 éléments. On peut aussi noter qu'il y a 20 faces, chacune ayant \struck{trois} six ordres totaux sur l'ens. de ses sommets, ce qui fait $6 \times 20 = 120$ triples ordonnés faisant face.
+
+\textbf{Remarque.} Les sommets et arêtes de l'icosaèdre forment (avec leur relation d'incidence) un \emph{graphe}, et $\Gamma'$ opère par automorphismes de ce graphe. Montrer que \emph{tout} automorphisme \add{g} du graphe est dans $\Gamma'$. On est ramené à \struck{\ill{}} prouver \struck{pour} qu'un automorphisme du graphe qui fixe $u, x_0, x_1$ \uncertain{est} l'identité. Prouvons qu'il est l'identité sur tous les points $x_i$ (qui peuvent être reliés à \struck{\ill{}} un des sommets --- $u$ en l'occurrence --- par une arête) \add{i.e. tous les pts de $I$} : en effet \struck{\ill{}} pour $x_0, x_1$ il n'y a rien à prouver, or $x_2$ ($x_{-1}$) est l'unique point de $I$ \add{distinct de $x_0$ (resp.\ $x_1$)} qui est relié \struck{par} à la fois à $u$ et $x_1$ ($u$ et $x_0$), donc il est fixé, donc aussi $x_3$ (p. ex. comme
+\note{« \add{g} » : un petit $g$ ajouté au-dessus de « automorphisme » ; l'ajout « i.e. tous les pts de $I$ » est écrit au-dessus de la parenthèse, avec un signe d'insertion.}
+
+\page{9}
+l'unique autre point de $I$, à part $x_{-1}, x_0, x_1, x_2$, qui soit relié à $u$). Donc \struck{l'un} chacun des points \struck{fixes} de la calotte standard \struck{\ill{}} de centre $u$ est fixe. La même chose est vraie pour les points de la calotte de centre $x_0$, donc aussi [appliquant ces deux triangles $(u, x_i, x_{i+1})$] à ceux de la calotte de centre $x_i$, $i \in \mathbb{Z}/5\mathbb{Z}$. Mais cela donne \emph{tous} les points \add{de $I$} sauf $u'$, or celui-ci doit être fixe aussi comme le complémentaire de \uncertain{l'ens.} précédent !
+\note{« appliquant ces deux triangles » : lecture douteuse de la tournure ; « de $I$ » est ajouté au-dessus de la ligne.}
+
+\struck{Ainsi, on} On peut aussi regarder l'ens. des \emph{faces} et l'ens. des arêtes de l'icosaèdre $I$ \add{et leur relation d'incidence} (NB une arête est déterminée par l'ens. des deux faces qui la contiennent), ils forment encore un graphe (dont les « sommets » sont les faces de l'icosaèdre ; \struck{on} \uncertain{ce} serait le graphe des sommets-arêtes du dodécaèdre, \emph{dual} à l'icosaèdre). Je dis que le groupe des automorphismes de ce graphe est encore $\Gamma'$ [NB il est \struck{immédiat} évident que $\Gamma$ y opère de façon fidèle]. On est encore ramené à prouver que tout automorphisme de ce graphe qui \struck{\ill{}} invarie une face donnée et ses trois arêtes, disons \struck{\ill{}} celle $(u, x_0, x_1)$, est l'identité. Or il invarie alors chacun des \add{trois} triangles adjacents (comme les uniques triangles adjacents distincts sur les trois arêtes envisagées), \struck{et invarie donc leurs arêtes (?)} puis les \struck{triangles} faces $(u, x_2, x_3)$ et $(u, x_3, x_4)$ comme les seul couple de faces adjacentes mutuellement, et adjacents resp. à $(u, x_1, x_2)$ et $(u, x_0, x_{-1})$ (dont on sait qu'ils sont invariants). Cela donne l'invariance des \struck{faces \ill{}} arêtes $(u, x_{\uncertain{2}})$ et $(u, x_4)$ comme intersection, donc aussi des arêtes restantes $(x_1, x_2)$ et $(x_0, x_{-1})$ des deux \struck{triangles} faces $(u, x_1, x_2)$, $(u, x_0, x_{-1})$. Donc leurs arêtes sont fixes, \struck{donc} et par symétrie on voit que pour chacune des \struck{triangles} faces adjacentes à $(u, x_0, x_1)$, \struck{les \ill{}} ses faces et leurs arêtes sont fixes. À partir de là la conclusion est triviale
+\note{« ses faces et leurs arêtes » : tel quel ; le sens demande « les faces adjacentes et leurs arêtes ».}
+
+\page{10}
+On voit ainsi que les propriétés des actions de $\Gamma$\struck{\ill{}} sur les ens. de sommets, arêtes et faces de l'icosaèdre (\struck{ensembles} munis de leurs relations d'incidence mutuelles) sont conséquence de la seule structure combinatoire de ces ensembles (soit \struck{le complexe} sommets-arêtes, soit faces-arêtes, soit même le triple système sommets-arêtes-faces …). Il conviendrait cependant de caractériser le sous-groupe $\Gamma'$ de $\Gamma$ en termes combinatoires. On peut dire p. ex. que c'est le groupe qui \struck{respecte} \add{les} ordres circulaires (\add{sur l'ens. des points périphériques des}) \struck{qu'il y a sur les} calottes \struck{sphériques de l'icosa} \add{de} l'icosaèdre (en termes de la structure combinatoire, on peut définir \emph{deux} « syst. cohérents » d'ordres circulaires sur les calottes \struck{\ill{}}, correspondants aux deux orientations possibles de l'espace ambiant).
+\note{la phrase sur les ordres circulaires porte deux couches de corrections ; l'état final retenu ici est « le groupe qui [respecte] les ordres circulaires sur l'ens. des points périphériques des calottes de l'icosaèdre ».}
+
+\page{12}
+\[
+  \zeta^{3} + \zeta^{-1} + \zeta + \zeta^{-3} = \zeta + \zeta^{2} + \zeta^{3} + \zeta^{4} = -1
+\]
+L'équation de $\gamma$ \uncertain{est} donc
+\[
+  \boxed{\gamma^{2} + \gamma - 1 = 0}
+\]
+donc
+\[
+  \uncertain{\mathfrak{D}}_5 = \mathbb{Z}[\tfrac{1}{5}][t]/(t^{2} + t - 1)
+\]
+\[
+  \boxed{\gamma = (-1 \pm \sqrt{5})/2}
+\]
+\marginal{\struck{si 2 inv.} Cette formule garde un sens sur tout anneau où 2 \emph{et} 5 sont inversibles}
+\note{la lettre de l'équation, $\gamma$, est tracée comme un $\gamma$ bouclé ; celle de l'anneau quotient, un $\mathfrak{D}$ ou un $\vartheta$ gothique, n'est pas sûre.}
+\[
+  2\cos\frac{2\pi}{5} = (\sqrt{5} - 1)/2 \qquad (2\gamma + 1)^{2} = 5 \qquad \struck{4\gamma^{2} + 4\gamma = 4}
+\]
+\[
+  \cos\frac{2\pi}{5} = \frac{\sqrt{5} - 1}{4} \qquad \cos\frac{4\pi}{5} = \frac{-\sqrt{5} - 1}{4} \qquad c^{2} + c - 1
+\]
+\[
+  (-1 + \sqrt{5})/2 = \bigl((-1 - \sqrt{5})/2\bigr)^{2} - 2 = \frac{1 + 5 + 2\sqrt{5}}{4} - 2 = -\frac{1}{2} + \frac{1}{2}\sqrt{5}
+\]
+\note{à gauche, un cercle partagé par cinq rayons, deux points du bord marqués d'un trait, un arc double entre deux rayons à droite : la division du cercle en cinq, sans légende.}
+\[
+  \zeta \longmapsto \zeta^{2} \qquad \zeta \longmapsto \zeta^{3} \qquad \text{si } \zeta + \zeta^{-1} = t
+\]
+\[
+  \struck{\cos' D, D} \qquad \cos'_{\ill{}}(D, \zeta D) = \operatorname{Tr} \zeta^{2} = \zeta^{2} + \zeta^{-2} = t^{2} - 2
+\]
+\note{dans $\zeta D$, le $\zeta$ est récrit par-dessus une autre lettre.}
+\[
+  t', t'' \qquad t'' = t'^{2} - 2 = (t''^{2} - 2)^{2} - 2 \qquad t' = t''^{2} - 2
+\]
+\[
+\begin{array}{cccc}
+  \zeta & \zeta^{2} & \zeta^{3} & \zeta^{4} \\
+  & & \shortparallel & \shortparallel \\
+  & & \zeta^{-2} & \zeta^{-1} \\[1ex]
+  \zeta + \zeta^{-1} & \zeta^{2} + \zeta^{-2} & \zeta^{3} + \zeta^{-3} & \zeta^{4} + \zeta^{-4} \\
+  \shortparallel & \shortparallel & \shortparallel & \shortparallel \\
+  \eta = \eta_1 & \eta_2 & \uncertain{\eta_2} & \eta_1
+\end{array}
+\]
+\note{sous $\zeta^{4} + \zeta^{-4}$, une double flèche $\Leftarrow$ pointe vers la gauche.}
+
+\note{au pied de la page, deux lignes au crayon, tête-bêche par rapport au reste, sans rapport apparent avec le calcul qui précède :}
+\begin{enumerate}
+  \item[d)] $\gamma((V_\lambda)) \leq \alpha_\lambda(V'_\lambda) \Longrightarrow V_\lambda \leq V'_\lambda$ ou $\exists\, \mu \neq \lambda$ avec $V_\mu = 0_{\uncertain{I_\mu}}$
+  \item[e)] $\gamma((V_\lambda)) \subset \sup_i W_i$
+\end{enumerate}
+\note{le $V$ est tracé comme un $\forall$ barré ; la lecture $V$ est une conjecture.}
+
+\page{13}
+\note{page au crayon, écrite tête-bêche par rapport aux pages d'encre qui l'entourent, et barrée d'un long trait oblique ; elle ne traite pas de l'icosaèdre, mais d'applications croissantes entre ensembles ordonnés. Elle commence au milieu d'un calcul dont le début n'est pas dans ce lot, et se termine par « TSVP » : la suite est, selon toute apparence, les deux lignes d) et e) au pied de la p. 12. Les lettres $U$, $V$, $W$ se confondent souvent sous ce crayon.}
+\[
+  = \sup_{\ill{}} [\bar\alpha(U) \wedge \bar\beta(V)] \wedge [\bar\alpha(U') \wedge \bar\beta(V')]
+  = \bigl(\sup \bar\alpha(U) \wedge \bar\beta(V)\bigr) \wedge \bigl(\sup \bar\alpha(U') \wedge \bar\beta(V')\bigr)
+  = \bar\gamma(W) \wedge \bar\gamma(W') , \qquad \text{ok}
+\]
+
+$\gamma$) $\bar\gamma$ commute aux Sup quelconques
+\[
+  \bar\gamma(\underbrace{\struck{\ill{}}\sup W_i}_{W}) \geq \sup\bigl(\bar\gamma(W_i)\bigr) \quad \text{clair, prouvons } \leq
+\]
+\[
+  \bar\gamma(W) = \sup_{\gamma(U \times V) \subset \sup_i W_i} \bar\alpha(U) \wedge \bar\beta(V)
+\]
+\note{la ligne précédente est reconstituée d'un « $\shortparallel$ » placé sous $\bar\gamma(\sup W_i)$, d'un « Sup » et, dessous, de la condition « $\gamma(U \times V) \subset \sup W_i$ ».}
+à prouver que l'on a $\bar\alpha(U) \wedge \bar\beta(V) \leq \sup_i \bar\gamma(W_i)$. Or on a, si $\gamma(U \times V) \subset \sup W_i$ :
+\[
+  \begin{array}{l} U = \sup U_j \\ V = \sup V_k \end{array} \;\Big|\; \forall\, j, k \ \exists\, i \text{ avec } \gamma(U_j \times V_k) \leq W_i
+\]
+Donc
+\[
+  \bar\alpha(U) \wedge \bar\beta(V) = \bigl(\sup_j \bar\alpha(U_j)\bigr) \wedge \bigl(\sup_k \bar\beta(V_k)\bigr) = \sup_{j,k} \bar\alpha(U_j) \wedge \bar\beta(V_k) \qquad \Bigl(\overset{?}{\leq} \sup_i \bar\gamma(W_i)\Bigr)
+\]
+et comme $\exists\, i$ $\surd$ $\gamma(U_j \times V_k) \leq W_i$, on a
+\[
+  \bar\alpha(U_j) \wedge \bar\beta(V_k) \leq \bar\gamma(W_i) \leq \sup_{i'} \bar\gamma(W_{i'}) \qquad \text{qfd}
+\]
+
+Généralisation aux sommes (produits) infinies :
+\[
+  (I_\lambda)_{\lambda \in \Lambda} \qquad I_\lambda \in \operatorname{Ob}(\uncertain{\mathrm{OM}})
+\]
+$\prod' I_\lambda$ partie du produit formée des $(V_\lambda)$ tels que $V_\lambda = 1_{I_\lambda}$ pour presque tout $\lambda$
+\[
+  \alpha^{0}_{\mu} : I_\mu \longrightarrow \prod{}' I_\lambda \qquad \alpha^{0}_{\mu}(x)_\lambda = \begin{cases} x & \text{si } \lambda = \mu \\ 1_{I_\lambda} & \text{si } \lambda \neq \mu \end{cases} \qquad \text{appl. cr.}
+\]
+\[
+  \gamma : \prod{}' I_\lambda \longrightarrow K \quad \text{flèche dans } (\uncertain{\mathrm{OM}})
+\]
+\[
+  \alpha_\mu = \gamma \circ \alpha^{0}_{\mu} : I_\mu \to K \quad \text{appl. cr.}
+\]
+On suppose
+\begin{enumerate}
+  \item[a)] Les $\alpha_\mu$ commutent aux Sup quelc.
+  \item[b)] $\gamma$ commute aux Inf finis [en particulier $\gamma((V_\lambda)) = \inf_\lambda \alpha_\lambda(V_\lambda)$ (Inf en fait fini) ; et les $\alpha_\mu$ sont des morphismes de $(\uncertain{\mathrm{OM}})$]
+  \item[c)] Tout élément de $K$ est le sup d'éléments de $\prod'_\lambda I_\lambda$
+\end{enumerate}
+TSVP
+\note{« (OM) » : deux lettres capitales entre parenthèses, désignant une catégorie d'ensembles ordonnés ; la lecture des lettres n'est pas sûre. Au c), on attendrait « d'éléments de $\gamma(\prod' I_\lambda)$ ».}
+
+\page{14}
+\note{page de calculs épars, sans texte suivi ; on les donne dans l'ordre de lecture, de haut en bas et de gauche à droite. La lettre ronde tracée comme un $\vartheta$ (déjà p. 12) est rendue $\vartheta$ ; le $\mu$ à double jambage est rendu $\mu$.}
+\[
+  \Gamma = (\mathbb{Z}/5\mathbb{Z})^{*} \simeq \mathbb{Z}/4\mathbb{Z}
+  \qquad
+  \begin{array}{ccc}
+    \mu_5 & \supset & \mu_5^{*} \\
+    | & & | \\
+    \operatorname{Spec} \mathbb{Z} & \longleftarrow & \mathbb{Z}[\frac{1}{5}]
+  \end{array}
+\]
+fini étale de rang 4 sur $\mathbb{Z}[\frac{1}{5}]$ ; \struck{\ill{}} Galoisien de groupe $\Gamma$.
+\[
+  \struck{\ill{}}\; \tau = \mu_5^{*}/\beta \quad \text{engendré par } \struck{\zeta}\, \zeta + \bar\zeta = \zeta + \zeta^{-1} = \eta
+\]
+\note{sous le premier $\zeta$, une flèche : « racine primitive universelle ».}
+\begin{itemize}
+  \item deux générateurs $(\alpha, \alpha')$ : 2 et 3 ($= -2$) mod 5
+  \item un élément d'ordre 2 ($-\beta$) : $-1$ ou 4 mod 5
+  \item un élément d'ordre 1 : 1 mod 5
+\end{itemize}
+Sur $\mu_5(S)$ l'effet est
+\[
+  \zeta \mapsto \zeta^{2} \text{ ou } \zeta \mapsto \zeta^{-2} = \zeta^{3} \text{ resp.} \qquad \zeta \mapsto \zeta^{-1} = \zeta^{4} \qquad \zeta \mapsto \zeta
+\]
+\[
+  \begin{array}{c} B \supset B^{\Gamma} \\ | \\ A \end{array}
+  \qquad
+  B = A[\zeta] \struck{\ill{}} = A[T]/(1 + T + T^{2} + T^{3} + T^{4})
+  \qquad T \longmapsto T^{4}
+\]
+\[
+\begin{aligned}
+  \beta(T) &= T^{-1} = T^{4} = -(1 + T + T^{2} + T^{3}) \\
+  \beta(T^{2}) &= T^{-2} = T^{3} \\
+  \beta(T^{3}) &= T^{-3} = T^{2} \\
+  \beta(T^{4}) &-
+\end{aligned}
+\qquad\qquad 1 = T^{0} \mid T \quad T^{2} \quad T^{3}
+\]
+\[
+\begin{aligned}
+  \beta(c_0 + c_1 T + c_2 T^{2} + c_3 T^{3}) \struck{\ill{}}
+  &= c_0 \mathbin{\ill{}} c_1(\uncertain{-1} + T + T^{2} + T^{3}) + c_2 T^{3} + c_3 T^{2} \\
+  &= (c_0 - c_1) - c_1 T + (c_3 - c_1) T^{2} + (c_2 - c_1) T^{3} \\
+  &\overset{?}{=} c_0 + c_1 T + c_2 T^{2} + c_3 T^{3}
+\end{aligned}
+\]
+\[
+  c_1 = 0 \qquad c_2 = c_3 \qquad\qquad c_0 + c_2 (T^{2} + T^{3})
+\]
+\note{le signe entre $c_0$ et $c_1$ est couvert d'une tache ; la ligne suivante suppose $c_0 - c_1(1 + T + T^{2} + T^{3})$.}
+
+${}_n\mathcal{U}$ étale de \uncertain{rang} \ill{} sur $\mathbb{Z}$ si $n$ \uncertain{premier} ; \struck{\ill{}} $\mu_n$ \emph{tordu} par $T$
+\[
+  \begin{array}{c} \mu_n \\ \cup \\ \mu_n^{*} \\ \downarrow \\ S \end{array}
+  \quad (\mathbb{Z}/n\mathbb{Z})^{*} \qquad \zeta \longmapsto \zeta^{-1}
+\]
+\note{à gauche, un grand cercle sans légende, marqué $\varphi(n)$ sur son bord droit ; deux traits obliques relient $\mu_n^{*}$ à $S$.}
+\[
+  \varphi(n) = \prod \bigl(p_i^{\alpha_i} - p_i^{\alpha_i - 1}\bigr) \qquad \text{pas gros} \qquad p^{n} - p^{n-1} = p^{n-1}(p - 1) \qquad (\mathbb{Z}/n\mathbb{Z})^{*} \ni -1
+\]
+\uncertain{or}
+\[
+\begin{array}{ccccc}
+  \mu_n^{T} & \subset & \mathcal{U} & & \\
+  \cup & & & & \\
+  \mu_n^{*T} & \subset & \mathcal{U} & & \zeta + \bar\zeta \\
+  \Big\downarrow{\scriptstyle \text{étale rang } 2} & & \Big\downarrow{\scriptstyle \operatorname{Tr}_{K/\mathbb{Q}}} & & \\
+  \vartheta_n^{T} = \mathcal{V}_n & \subset & \mathcal{O} & & \\
+  \Big\downarrow{\scriptstyle \text{étale rang } \uncertain{\varphi(n)/2}} & & & & \\
+  S & & & &
+\end{array}
+\]
+\[
+  \begin{array}{ccc}
+    \mu_n & \subset & \mathbb{G}_m \\[1ex]
+    \mu_n^{*} & \subset & \mathbb{G}_m \\
+    \downarrow & & \downarrow{\scriptstyle \rho} \\
+    \vartheta_n & \subset & \mathbb{E}^{1}
+  \end{array}
+  \qquad \rho(\lambda) = \lambda + \lambda^{-1}
+\]
+\[
+  \zeta + \zeta^{-1} \;\Big|\; \begin{array}{l} \frac{p - 1}{2} = 2 \\ \cos \end{array}
+\]
+\[
+  1 + \zeta + \zeta^{2} + \zeta^{3} + \zeta^{4} = 0 \qquad \zeta + \zeta^{-1} = \gamma
+\]
+\[
+\begin{aligned}
+  \operatorname{Tr} \gamma &= \gamma + \gamma^{\alpha} = \zeta + \zeta^{-1} + \zeta^{2} + \zeta^{-2} = \zeta + \zeta^{2} + \zeta^{3} + \zeta^{4} = -1 \\
+  \operatorname{N} \gamma &= \gamma\gamma^{\alpha} = (\zeta + \zeta^{-1})(\zeta^{2} + \zeta^{-2}) =
+\end{aligned}
+\]
+\note{le calcul de la norme s'arrête sur ce signe $=$.}
+
+\page{15}
+\note{au crayon, barrée d'un long trait oblique comme la p. 13. Cette page précède en fait celle-là : son dernier calcul, $\bar\gamma(W \wedge W') = \ldots$, se poursuit en tête de la p. 13, qui continue par le point $\gamma$) après les $\alpha$) et $\beta$) d'ici. Le début (hypothèses a), b), c) et la catégorie (OM)) n'est pas dans ce lot.}
+Alors $\alpha, \beta : \begin{array}{l} I \to K \\ J \to K \end{array}$ [font de $K$ une somme de $I, J$ dans $(\mathrm{OM})$]
+\marginal{sont dans $(\mathrm{OM})$ (grâce à a) b)), je dis qu'ils}
+\note{la ligne interlinéaire au-dessus, reliée par un trait, s'insère après « $J \to K$ ».}
+
+a) $\alpha, \beta$ épimorphiques i.e. pour $L \in \operatorname{Ob}(\mathrm{OM})$,
+\[
+  \struck{\ill{}} \qquad \operatorname{Hom}_{\mathrm{OM}}(K, L) \longrightarrow \operatorname{Hom}_{\mathrm{OM}}(I, L) \times \operatorname{Hom}_{\mathrm{OM}}(J, L) \qquad \varphi \longmapsto (\varphi \circ \alpha, \varphi \circ \beta)
+\]
+injectif.
+
+En effet, si on connaît $\varphi \circ \alpha$ et $\varphi \circ \beta$, i.e. $\varphi$ sur les $\gamma(x \times 1)$ et $\gamma(1 \times y)$, on les connaît sur leurs $\wedge$ deux à deux $\gamma(x \times y)$ (par b)) donc sur les Sup de \uncertain{objets} de \uncertain{ces} $\gamma(\ldots)$ donc sur tout $K$ (par c)).
+
+b) \uncertain{Ceci} est surjectif. Donnons-nous donc
+\[
+  \bar\alpha : I \longrightarrow L \qquad \bar\beta : J \longrightarrow L \qquad \text{dans } (\mathrm{OM})
+\]
+définissons une application
+\[
+  \bar\gamma : K \longrightarrow L
+\]
+par
+\[
+  \bar\gamma(W) = \sup_{\substack{U \in I \\ V \in J \\ \gamma(U \times V) \subset W}} \bar\alpha(U) \wedge \bar\beta(V)
+\]
+
+1°) Prouvons d'abord
+\[
+  \bar\gamma \circ \alpha = \bar\alpha , \qquad \bar\gamma \circ \beta = \bar\beta
+\]
+Or
+\[
+  (\bar\gamma \circ \alpha)(U') = \bar\gamma(U' \times 1) = \sup_{\gamma(U \times V) \leq \gamma(U' \times 1)} \bar\alpha(U) \wedge \bar\beta(V)
+\]
+Or les $U \times V$ en question sont, en vertu de d), ceux pour lesquels ou bien $V = 0_I$ (l'élément correspondant du Sup est alors $0_{\uncertain{K}}$, et \uncertain{ne} compte pas), ou bien ceux pour lesquels $U \subset U'$, $V$ quelconque. Donc le Sup est $\bar\alpha(U') \wedge \bar\beta(1) = \bar\alpha(U')$, OK. On prouve de même $\bar\gamma \circ \beta = \bar\beta$.
+\note{« en vertu de d) » : la condition d) est l'une des deux lignes au crayon du pied de la p. 12. $0_I$ tel quel (on attendrait $0_J$).}
+
+2°) Prouvons que $\bar\gamma$ est un morphisme de $(\mathrm{OM})$.
+\begin{enumerate}
+  \item[$\alpha$)] $\bar\gamma$ croissant : clair
+  \item[$\beta$)] $\bar\gamma$ commute aux Inf finis.
+\end{enumerate}
+\[
+  \bar\gamma(1_K) \struck{\ill{}} \overset{\text{def}}{=} \bar\alpha(1_I) \wedge \bar\beta(1_J) = 1_K
+\]
+\marginal{Inf de famille vide}
+\[
+  \bar\gamma(W \wedge W') = \sup_{\gamma(U \times V) \subset W \wedge W'} \bar\alpha(U) \wedge \bar\beta(V) = \sup_{\substack{\gamma(U \times V) \subset W \\ \gamma(U' \times V') \subset W'}} \bar\alpha(U \wedge U') \wedge \bar\beta(V \wedge V')
+\]
+[d'où $\gamma(U \wedge U' \times V \wedge V') \subset W \wedge W'$ via (b)]
+\note{« $= 1_K$ » : tel quel ; on attendrait $1_L$. Les lettres $U$, $V$ sont peu distinctes au crayon.}
+
+\page{16}
+\note{feuillet de carnet à spirale, en largeur, couvert de croquis à l'encre et au crayon : fleurs à trois, quatre ou cinq pétales, dont l'une est légendée, en marge gauche, « corolle », « racine », « tige », « cœur », « pétale » ; tétraèdres et pyramides, dont l'un avec un point intérieur relié aux sommets ; un losange à diagonales suivi d'un « $G$ » ; un hexagone découpé en six triangles, relié par un arc au sommet d'une fleur et légendé « $\mathrm{O}(3)$ », « $\mathrm{SO}(3)$ » ; une suite d'ovales emboîtés dont les deux plus intérieurs portent « $u_1$ » et « $u_0$ » cerclé ; un carré inscrit dans un carré, reliés par les diagonales ; un graphe sur six sommets marqués de ronds et de croix ; un cube dont trois faces sont fléchées vers un sommet. On transcrit ci-dessous les formules et les mots, sans restituer la disposition.}
+\[
+  \underline{X} \longrightarrow (\mathrm{Ens}) \qquad \underline{\hat X} \longrightarrow (\mathrm{Ens}) ,
+\]
+\uncertain{correspondant} \ill{}
+\[
+  x \subset e \qquad x \quad y \qquad z \to x \cap y
+\]
+\[
+  4 \longrightarrow 3 \longrightarrow 2 \longrightarrow 1 \longrightarrow 0
+\]
+\[
+  X_1 \longleftarrow X_0 \qquad y \leq x \qquad U_x \subset U_y \qquad F(y) \longrightarrow F(x)
+\]
+\note{en haut, au crayon, « $8 \times 6$ » et, à côté d'un symbole inachevé, « \uncertain{789} » ou « \uncertain{989} ».}
+
+\uncertain{opinion} \ill{} \ill{} \uncertain{homogène} $X \simeq G/H$ \ill{} $= [x \in S^{2}]$ et \uncertain{même} cas \uncertain{\ill{}} \uncertain{particulier} de $S^{1}$).
+\[
+  \operatorname{Hom}_G(X, E) \subset \operatorname{Hom}_G(P_S, E) \simeq E
+\]
+\uncertain{savoir} l'unique application $g \longmapsto gx$ telles que l'on ait $gx = ghx$ i.e. $E^{H}$
+\note{« $P_S$ » : lecture douteuse. Le passage « $gx = ghx$ i.e. $E^{H}$ » décrit, semble-t-il, l'identification de $\operatorname{Hom}_G(G/H, E)$ aux invariants $E^{H}$.}
+
+\page{17}
+\note{feuillet de carnet à spirale, écrit en travers, au crayon et à l'encre : un premier jet du calcul des pp. 3--4, avec d'autres lettres ($\rho_i$, $v'$, $w'$, $x(\alpha)$, $y(\alpha)$). Des croquis l'accompagnent : un cône de sommet le centre, découpé en triangles d'angle au sommet $\alpha$ (côtés marqués $1$, $\rho$, $\alpha$) et légendé « $0 \leqslant i \leqslant 4$ » ; les vecteurs $u$, $v$ issus du centre d'une sphère ; deux cercles tangents, l'un portant deux axes, l'autre un angle.}
+$u, v, w$
+\[
+  \struck{\ill{}} + v \cos i\frac{2\pi}{5} + w \sin i\frac{2\pi}{5} = \rho_i \qquad \boxed{0 \leqslant i \leqslant 4}
+\]
+\[
+\begin{cases}
+  u \\
+  u\cos\alpha + \rho_i \sin\alpha \\
+  -u\cos\alpha - \rho_i \sin\alpha \\
+  -u
+\end{cases}
+\]
+\note{le $u$ de la première ligne de l'accolade est écrit par-dessus un gribouillis qui couvre aussi le début de la ligne précédente.}
+\[
+  \frac{4\pi}{5} < \frac{2\pi}{3} \qquad \frac{\pi}{3} < \qquad \frac{4\pi}{5} \to \frac{\pi}{6} \;? \qquad \frac{4\pi}{5} \leqslant \frac{5\pi}{6}
+\]
+\note{ces inégalités, éparses dans la marge des croquis, sont données telles quelles ; la première est fausse ($4\pi/5 > 2\pi/3$), la dernière a son $4$ récrit.}
+
+$u, v', w'$ vecteurs unitaires
+\[
+  \begin{array}{l} u \perp v' \\ u \perp w' \end{array} \qquad v'w' = \cos\frac{2\pi}{5}
+\]
+\[
+\begin{aligned}
+  x(\alpha) &= u\cos\alpha + v'\sin\alpha \\
+  y(\alpha) &= u\cos\alpha + w'\sin\alpha
+\end{aligned}
+\]
+\[
+  x(\alpha) - u = u(\cos\alpha - 1) + v'\sin\alpha
+\]
+\[
+\begin{aligned}
+  \|x(\alpha) - u\|^{2} = \|y(\alpha) - u\|^{2} &= (\cos\alpha - 1)^{2} + \sin^{2}\alpha = 2 - 2\cos\alpha \\
+  &= 4\sin^{2}\frac{\alpha}{2} \qquad \Bigl(1 - \cos\alpha = 2\sin^{2}\frac{\alpha}{2}\Bigr)
+\end{aligned}
+\]
+\[
+  \|x(\alpha) - u\| = 2\sin\frac{\alpha}{2}
+\]
+\[
+\begin{aligned}
+  \|x(\alpha) - y(\alpha)\|^{2} &= \|v'\sin\alpha - w'\sin\alpha\|^{2} \\
+  &= \sin^{2}\alpha \, \|v' - w'\|^{2} = \sin^{2}\alpha \Bigl(2 - 2\cos\frac{2\pi}{5}\Bigr) \\
+  &\struck{= \sin^{2}\alpha + \sin^{2}\alpha - 2\cos\frac{2\pi}{5}\sin^{2}\alpha} \\
+  &= 4\sin^{2}\alpha \sin^{2}\frac{\pi}{5} \struck{= \ill{}}
+\end{aligned}
+\]
+\[
+  \|x(\alpha) - y(\alpha)\| = 2\sin\alpha \sin\frac{\pi}{5} = 4\sin\frac{\alpha}{2}\cos\frac{\alpha}{2}\sin\frac{\pi}{5}
+\]
+\[
+  \|x(\alpha) - u\| = \|y(\alpha) - u\| = \|x(\alpha) - y(\alpha)\|
+\]
+\[
+  \Longleftrightarrow \quad 2\cos\frac{\alpha}{2}\sin\frac{\pi}{5} = 1 \quad \text{i.e.} \quad \boxed{\cos\frac{\alpha}{2} = \frac{1}{2\sin\pi/5}}
+\]
+\marginal{NB $2\sin\frac{\pi}{5}$ = côté du pentagone régulier \uncertain{unité}}
+
+\page{18}
+\note{feuillet de carnet à spirale ; le bloc de gauche est écrit en travers, le reste droit. Au centre, une projection de l'icosaèdre sur le plan orthogonal à un axe : un décagone dont les sommets portent alternativement $A_1, A'_3, A_0, A'_2, A_4, A'_1, A_2, A'_0, A_3, A'_4$ (plusieurs lettres récrites, $A$ par-dessus $\alpha$), le centre marqué $s$ et $s'$, les deux pentagones $A_i$ et $A'_i$ tracés, l'un en trait appuyé.}
+$G$ groupe d'ordre 60, opérant \add{transitivement} sur $I$ ens. d'ordre 15, sur lequel il y a un automorphisme $\alpha$ d'ordre 3 commutant à $G$, d'où $I/\alpha = J$ ens. à 5 éléments, sur lequel $G$ opère transitivement. Le sous-groupe de stabilité d'un \add{$\mathrm{elt}$ de $J$} est un sous-groupe \struck{\uncertain{$\mathfrak{F}$}} d'ordre 12 de $G$, et on trouve $G \to \mathfrak{S}_5$ \add{ordre 120}. \ill{} \uncertain{si on sait} que $G$ opère fidèlement sur $J$, alors $G \to \mathfrak{S}_5$ est injectif, donc $G \simeq$ sous-groupe d'indice 2 de $\mathfrak{S}_5$, donc $G \simeq \mathfrak{A}_5$.
+\note{« transitivement », « elt de $J$ » et « ordre 120 » sont interlinéaires.}
+\[
+\begin{aligned}
+  (AB, A'B') &= P \\
+  (EC', CE') &= Q = \alpha(P) \\
+  (SD, S'D') &= R = \alpha(Q) = \alpha^{2}(P) \\
+  (AB, A'B') &= \uncertain{\alpha(R)} = \alpha^{2}(Q) = \alpha^{3}(P)
+\end{aligned}
+\]
+\note{les lettres $A, B, C, D, E, S$ ne sont pas portées sur la figure ; les couples sont apparemment des couples d'arêtes opposées. La seconde égalité de la dernière ligne, $\alpha^{2}(Q)$, se lit ainsi ; on attendrait $\alpha^{3}(P) = P$.}
+
+$\sigma \in G$, laissant stable $(P, Q, R)$, donc $\sigma \in N$ (normalisateur \uncertain{d'un} \ill{} de Sylow$_2$ \ill{}) ; l'intersection des conjugués de $N$ est un sous-groupe de $N$ invariant, donc soit $N$, soit $\uncertain{\mathfrak{F}_2}$, soit $0$. Ce n'est pas $N$, ni $\uncertain{\mathfrak{F}_2}$
+\note{la phrase s'arrête au bord du feuillet.}
+
+\[
+  \alpha D \longrightarrow D \qquad \begin{array}{cc} 30 & 15 \\ \uncertain{\alpha^{!}}? & \alpha \end{array}
+\]
+$\alpha^{\uncertain{13}}$ est d'ordre 2 ou 1 [transform\ill{} \ill{} \ill{} \uncertain{orientation} \ill{} \ill{} \ill{}]
+\[
+  G/\mathfrak{F}_2 \longrightarrow G/\mathfrak{F}_4 \qquad 2, 4, 3, 1
+\]
+\note{au-dessus, quelques signes au crayon très pâle, illisibles.}
+\[
+  \frac{\pi}{\uncertain{3}} \leqslant \frac{2\pi}{5} \leqslant \frac{5\pi}{6}
+  \qquad
+  \cos\alpha = \cos^{2}\frac{\alpha}{2} - \sin^{2}\frac{\alpha}{2} = 2\cos^{2}\frac{\alpha}{2} - 1 = \frac{1}{2\sin^{2}\theta} - 1 = 1 - 2\sin^{2}\theta = \cos 2\theta
+\]
+\note{la chaîne pour $\cos\alpha$ est écrite en colonne, deux lignes intermédiaires se chevauchant ; on la donne telle qu'on la lit, sans en vérifier les égalités. Près d'elle, $\alpha'_{12} = \pi - \frac{\alpha}{2}$ (lecture douteuse), et un petit triangle rectangle dont l'hypoténuse porte $2\sin\frac{\alpha}{2}$ et un côté $4$, avec « $\ell^{2} = 4\sin^{2}\frac{\alpha}{2}$ ».}
+\[
+  u \to u\cos\alpha + v\sin\alpha \qquad v \to u(-\sin\alpha) + v\cos\alpha
+\]
+
+\page{19}
+\note{feuillet de brouillon du même carnet, écrit dans deux sens (une partie à l'encre droite, la plus grande partie au crayon en travers), sans ordre suivi. On donne les formules lisibles par groupes ; les croquis (un triangle isocèle d'angle au sommet $\theta$ et de côtés $\rho$, avec $2\rho\sin\frac{\theta}{2}$ ; un cône de demi-angle $\alpha$ avec $\cos\alpha$ et un angle de $72^{\circ}$ ; trois vecteurs issus d'un point ; un décagone ; un cercle traversé d'un triangle rectangle) ne sont que signalés.}
+
+\emph{À l'encre, en tête :}
+\[
+  \frac{1\,2\,3\,4\,\struck{0}}{2,4,1,3,0} \qquad \frac{}{3,1,4,2,0} \qquad \zeta \quad \zeta^{2} \qquad u, 2u, 3u, 4u, 0 \qquad \zeta^{i} \qquad e^{i\theta} \qquad u^{2} + w^{2} = 1 \qquad \theta^{2} + \mu^{2} = 1 \qquad x^{2} - y^{2}
+\]
+\note{les deux lignes de permutations $2,4,1,3,0$ et $3,1,4,2,0$ sont les images de $1,2,3,4,0$ par $i \mapsto 2i$ et $i \mapsto 3i$ modulo $5$ ; à côté, « $\mathfrak{S}_{i_0}$ » et une matrice commençant par $\cos\theta$, inachevée.}
+
+\emph{Au crayon :}
+\[
+  g(\sigma . i) \qquad \rho(g)(\sigma . i) = \bigl(\rho(g)\ldots\bigr)\bigl(\rho(\ldots)\bigr) \qquad g(\sigma i) = g\sigma g^{-1}\, gi
+\]
+\[
+  G/H = X \ni e \qquad y e = a . e = a \qquad y x = y g e = g \uncertain{u} e = g' a e = \ill{}
+\]
+\[
+  b' = b h \qquad b^{-1} b' \in H \quad \Longrightarrow \quad (ba)^{-1} b' a \in H \quad \text{i.e.} \quad a^{-1} b^{-1} b' a \in H \quad \text{i.e.} \quad a^{-1} H a \subset H
+\]
+\[
+  \frac{N(H')}{\bigcap \operatorname{Conj} H} \qquad
+  N(H) \cap N(H') = N(\uncertain{H'}) \subset N(H) = \mathfrak{Z}_3 . \mathfrak{F}_2^{2}
+  \qquad
+  \begin{array}{ccc}
+    N(H') & \subset & N(H) \\
+    \cup & & \cup \\
+    H' & \subset & H \;\text{---}\; \mathfrak{F}_2^{2} \\
+    \cup & & \cup \\
+    K \cap H' = K'_0 & \subset & K' = 0
+  \end{array}
+\]
+\note{« $\mathfrak{Z}_3 . \mathfrak{F}_2^{2}$ » est récrit par-dessus d'autres signes ; la lecture est douteuse.}
+\[
+  \cos^{2}\alpha \cos\frac{2\pi}{5} = \cos\alpha \qquad 2\sin\frac{\alpha}{2}\sin\frac{2\pi}{5} = 1 \qquad \boxed{\cos\alpha = \frac{1}{2\sin\frac{2\pi}{\uncertain{10}}}}
+\]
+\[
+  1 + x + x^{2} + x^{3} + x^{4} = 0 \qquad \Bigl(2\sin\frac{\alpha}{2}\Bigr)\Bigl(2\sin^{2}\frac{\pi}{\uncertain{4}}\Bigr) \qquad \alpha = 60\,? \qquad \cos\frac{\alpha}{2} = \frac{\sqrt{3}}{2} \qquad \sqrt{3}\sin\frac{\pi}{5} = 1 \qquad \frac{\pi}{6}
+\]
+\note{les relations entre $\alpha$ et $\pi/5$ de ce feuillet ne s'accordent pas toutes avec celle, encadrée, des pp. 4 et 17 ; ce sont des essais, transcrits sans correction.}
+
+\end{document}
