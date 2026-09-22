@@ -1,0 +1,931 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 67, batch 5 (pages 81-100).
+% Established from the facsimile archives/batches/67/batch-05.pdf (a mirror of
+% https://grothendieck.umontpellier.fr/67.pdf), per the skill
+% transcribe-grothendieck. The batch file carries no cover sheet: PDF page N
+% is page 80+N, as the Montpellier footer printed on each PDF page confirms.
+% \page{} numbers that position, as batch 4 does; the archivists' pencil
+% numbers bottom-left run three ahead (page 81 is pencilled 84, page 100 is
+% pencilled 103).
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-09-22 — first pass, unchecked against the pages by a human.
+%
+% What the batch is.
+%   81      Two lines only, on a leaf he numbers « 15 »: the end of the
+%           sentence batch 4 breaks off on (page 80, « il ne devrait pas
+%           être bien dur de vérifier si »).
+%   82, 89  Blank. Absent.
+%   83-88   « Modules M_{0,4} et l'octaèdre » (his boxed title). I a set of
+%           four points, J = P_{2,2}(I), V(J) the Klein four-group; the
+%           plane V ⊂ S_I acting on a projective line X, its six fixed
+%           points forming an octahedron S; the normaliser Γ ≃ S_4, the
+%           exact sequence 1 → V → Γ → Aut(V) → 1 and its splittings as
+%           pairs of antipodal faces; a Proposition (p. 85) matching
+%           Klein subgroups V ⊂ Aut X, subgroups Γ ≃ S_4, and octahedral
+%           6-subsets S ≃ (P^1, {0, ∞, ±1, ±i}); then the V-torsor I(V),
+%           the formulas X = X(I) ∧^V t and X/V ≃ Σ(J) (p. 87), and a
+%           Théorème (p. 88): the groupoid of (X, I ↪ X), I of card. 4,
+%           is equivalent to that of pairs (I, ξ ∈ Σ(J(I))*).
+%   90-100  « Courbes elliptiques réelles », dated « Déc 83 » top left of
+%           p. 90. First (pp. 90-91) the linear algebra: a 2-regular
+%           module M with an involution σ ↔ triples (P, Q, m) with
+%           P = M_+, Q = M_-, m ⊂ P/2P ⊕ Q/2Q, and a Prop. that this is an
+%           equivalence; p. 91 is the rough calculation for it. Then
+%           (pp. 92-97) real elliptic curves as (Π, σ, c): the two
+%           families E_a, E'_a (a ∈ R*+), Q(x e_+ + y e_-) = x² + a y²,
+%           real structures on a complex curve as a torsor under G^+, the
+%           two G^+-orbits, a(−σ) = 1/a(σ), and the case analysis n = 2,
+%           4 (square: E_1, E'_1), 6 (hexagonal: E'_{√3}, E'_{1/√3}).
+%           P. 95 is a leaf of drawings only (spheres cut by arcs).
+%           P. 98 gives τ = √a·i for E_a, τ = ½(1 + √a·i) for E'_a, and
+%           counts components of X(R): two for E_a, one for E'_a (p. 100).
+%           P. 99 returns to the module classification over a principal
+%           ring (conjugacy classes of involutions in GL(2, k)). P. 100
+%           closes with H¹(R, E) via 0 → Π → V → E(C) → 0: Z/2 for E_a,
+%           0 for E'_a, hence the only genuinely inhomogeneous real
+%           elliptic curves are the torsors E^!_a, which give the
+%           non-orientable conformal surfaces of genus 1 with boundary.
+%           The margin of p. 100 carries « 9.2. », perhaps a date.
+%
+% Notation fixed for the batch. The symmetric group is \mathfrak{S}; the
+% set of 2-element (resp. 3-, 6-element) subsets is \mathfrak{P}_{2}(S)
+% etc.; blackboard letters as batch 4 has them (\mathbb{R}, \mathbb{C},
+% \mathbb{Z}, \mathbb{P}); the underlined antipodism a is \underline{a},
+% the underlined torsor t is \underline{t}, both in math only. His
+% contracted product X(I) ∧_V t, V written under the wedge, is set
+% \wedge^{V}. The letter he draws as an X barred horizontally, in Σ(J)
+% and Σ(J)*, is read \Sigma: it is the quotient X/V, a line.
+%
+% Legibility. Pages 83-85, 87-88 and 97-100 are written fair and read
+% nearly through; 86, 92, 93 and the lower half of 96 are a fast draft
+% heavily struck over, whose formulas carry and whose prose often does
+% not. The oblique margins of 83 and 85 are largely lost even turned.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{67}
+\batch{5}
+\pages{81}{100}
+\dating{[à partir de 1977]-1984}
+\watermark{Édition de démonstration}
+\foldertitle{Chirurgie des surfaces conformes : notes manuscrites (s.d., 1983-1984), lettres (1984)}
+
+\begin{document}
+
+\page{81}
+\note{feuillet numéroté « 15 » en tête par l'auteur, qui n'y écrit que deux
+lignes : elles achèvent, semble-t-il, la phrase sur laquelle s'arrête la
+page 80 (lot 4), « il ne devrait pas être bien dur de vérifier si »}
+
+est \uncertain{étale}, en calculant \uncertain{ou} interprétant
+\uncertain{l'application} tangente.
+
+\section{Modules $M_{0,4}$ et l'octaèdre}
+\note{titre encadré, en tête du feuillet, de sa main}
+
+\page{83}
+$I$ ens.\ de card.\ 4 donné
+
+$J = \mathfrak{P}_{2,2}(I)$, $V(J)$ plan vectoriel sur $\mathbb{F}_{2}$ avec
+$V(J)^{*} \simeq J$,
+
+$V(J) \subset \mathfrak{S}_{I}$ formé des \uncertain{bi-identités} et des
+« bitranspositions ».
+
+On s'intéresse aux droites projectives (sur $\mathbb{C}$ disons -- \ill{} sur
+tt corps alg.\ clos \add{de car.\ $\neq 2$}) munies de $I \hookrightarrow X$.
+(plus précisément $I_{\mathbb{C}} \hookrightarrow X$, ou $I \to X(\mathbb{C})$
+…).
+\note{« de car.\ $\neq 2$ » est ajouté en interligne}
+
+L'opération de $V(J)$ sur $I$ se prolonge en une opération de $V(J)$ sur $X$
+\[
+  V(J) \hookrightarrow G_{X} = \operatorname{Aut}(X)
+\]
+Soit $S$ = ens.\ des pts dans $X$ qui sont fixes par un élément de
+$J = V(J)^{*}$, donc $\operatorname{card} S = 6$.
+
+\marginal{\ill{} \uncertain{ok} \ill{}}
+[En fait, on trouve que les opérations \uncertain{fidèles} d'un plan vectoriel
+sur une $X$, i.e.\ les plongements $V \hookrightarrow G_{X}$, sont toutes
+équivalentes (modulo autom.\ intérieurs de $G_{X}$) et sont \uncertain{même}
+\uncertain{avec base fixée}${}^{e_{0},\, e_{1}}$ équivalentes : l'opération
+sur $\mathbb{P}^{1}$
+\[
+\begin{array}{lll}
+  u(e_{0}) = (z \mapsto -z) = \begin{pmatrix} -1 & 0 \\ 0 & 1 \end{pmatrix}
+    & & \text{pts fixes } 0, \infty \\[1ex]
+  u(e_{1}) = (z \mapsto 1/z) = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}
+    & & \text{pts fixes } \pm 1 \\[1ex]
+  u(e_{0}+e_{1}) = (z \mapsto -1/z) = \begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix}
+    & & \text{pts fixes } \pm i
+\end{array}
+\]
+
+Les \struck{quatre groupes} \uncertain{sous-groupes} \ill{} : Donc les
+\ill{} de $G_{X}$ correspondent 1-1 aux parties $S$ de cardinal 6 de $X$,
+isom.\ à $(\mathbb{P}_{1}, \{0, \infty, \pm 1, \pm i\})$.
+\marginal{parties \uncertain{octaédrales} \uncertain{d'une droite}
+\uncertain{projective}}
+Le normalisateur d'un tel \struck{\ill{}} sous-groupe $V$ \add{de $G_{X}$}
+\uncertain{est isomorphe} au groupe \struck{des autom.} $\mathfrak{S}_{4}$ (de
+façon \uncertain{canonique}, i.e.\ à $\mathfrak{S}_{I}$ \ill{} $V$
+\ill{}), plus précisément, si $V = V(J)$ avec $J = \mathfrak{P}(I)$, on
+trouve \struck{des} \uncertain{un} iso de suites exactes
+\note{la marge gauche porte, écrit en oblique, « parties octaédrales d'une
+droite projective » (lecture douteuse) ; plus haut, à hauteur du crochet
+ouvrant « [En fait », une autre note oblique de trois ou quatre mots qui ne se
+lit pas}
+
+\begin{tikzcd}[column sep=small]
+  1 \arrow[r] & V \arrow[r] \arrow[d, no head, "\Vert" description] & \mathfrak{S}_{I} \arrow[r] \arrow[d] & \operatorname{Aut}(V) \arrow[r] \arrow[d, no head, "\Vert" description] & 1 \\
+  1 \arrow[r] & V \arrow[r] & \Gamma \arrow[r] & \operatorname{Aut}(V) \arrow[r] & 1
+\end{tikzcd}
+
+\note{au-dessus de $\mathfrak{S}_{I}$, un mot biffé et, sous lui, un signe
+d'égalité vertical}
+défini modulo automorphismes intérieurs par un élément de $V$. Quand $I$ est
+le torseur trivial, on trouve un tel \uncertain{iso} d'ex\ill{}
+
+\page{84}
+précisé : se donner un scindage de l'extension
+\[
+  (*) \qquad 1 \to V \to \Gamma \to \operatorname{Aut}(V) \to 1,
+  \qquad \Gamma = \operatorname{Nor}_{G}(V), \quad
+  \operatorname{Aut}(V) \simeq \mathfrak{S}_{J}
+\]
+\note{« $\operatorname{Nor}_{G}(V)$ » est écrit sous $\Gamma$ avec un signe
+d'égalité vertical, et « $\simeq \mathfrak{S}_{J}$ » sous
+$\operatorname{Aut}(V)$ ; l'indice de Nor est une petite lettre qui se lit
+mal}
+En termes géométriques, ces scindages \uncertain{sont associés} aux quatre
+systèmes de \uncertain{paires de} \uncertain{faces} antipodiques sur
+l'octaèdre. \struck{Ainsi les} L'octaèdre combinatoire (non orienté) \ill{}
+l'ens.\ $S$ de \ill{} \uncertain{points}) se définit : partition de \ill{} et
+l'antipodisme \struck{sur} $S$, de la façon \ill{}, et \ill{} habituelles,
+on forme les parties : trois éléments \struck{qui} $S'$ telles que
+$S' \cup \underline{a}(S') = S$. \struck{Pour} un tel triplet, le sous-groupe
+de $\Gamma$ qui l'invarie est un scindage de l'extension $(*)$.
+
+\ill{} le groupe $\Gamma$ \struck{est} \uncertain{est} le groupe des autom.\ de
+la \uncertain{structure octaédrale} \struck{\ill{}} $S$ qui conservent
+\struck{\ill{}} \uncertain{les faces} $F \subset \mathfrak{P}_{3}(S)$ \ill{}.
+\uncertain{Orientation} : (définie par l'ens.\ des \ill{}
+\note{« $F \subset \mathfrak{P}_{3}(S)$ » est écrit en interligne, au-dessus
+de « l'ens.\ des »}
+des arêtes $A \subset \mathfrak{P}_{2}(S)$ \add{est} défini comme l'ens.\ des
+parties de card 2 contenues dans une face), par le choix \add{donc}
+d'une orientation, \ill{}. Choisir cette orientation revient \ill{}
+\ill{} $X = \mathbb{P}^{1}$, $S = \{0, \infty, \pm 1, \pm i\}$ et le choix
+dans le cas standard \ill{} \uncertain{orientés} $\overleftrightarrow{\{0,1,i\}}$
+et \ill{} une face est $\{0, 1, i\}$, et les faces
+$\overrightarrow{\{0,1,i\}}$ sont \uncertain{opposées}. Donc le choix d'une
+orientation revient au choix d'une racine carrée de $-1$.
+
+Pour un sous-groupe $V \simeq D$ de $G_{X}$, on désigne par
+$\operatorname{Oct}(V) \subset X$ l'octaèdre correspondant, par
+$I(V) = F/\underline{a}_{I}$ l'ens.\ de ses paires de faces antipodiques. Alors
+$\Gamma(V) = \operatorname{Nor}_{G}(V)$
+
+\page{85}
+qui opère sur $\operatorname{Oct}(V)$, puis sur $I(V)$, et on trouve
+\[
+  \Gamma(V) \xrightarrow{\ \sim\ } \mathfrak{S}_{I(V)} ,
+\]
+\note{sous $\Gamma(V)$, avec un signe d'égalité vertical, « \struck{\ill{}}
+$\operatorname{Aut}^{+}(\operatorname{Oct}(V))$ »}
+et est iso.\ \struck{\ill{}} définit une structure de $V$-torseur sur $I(V)$.
+(Ceci résulte de la théorie combinatoire de l'octaèdre, ou dans \ill{} c'est
+kif-kif.)
+
+\textbf{Proposition} \struck{\ill{}} \uncertain{Soit} $X$ droite projective
+\uncertain{réelle} sur un corps \ill{} dans le\add{quel} \ill{} soit
+\uncertain{réalisable} par extraction de racines (il suffit qu'il
+\struck{contienne} \ill{} \uncertain{racines} $\sqrt{\ }$ de car.\ $\neq 2$), et
+$G = \operatorname{Aut}_{k} X$. Alors il y a corr.\ 1-1 entre
+\begin{itemize}
+  \item a) les sous-groupes $V$ de $G$ isom.\ à $D_{2}$
+  \item b) — $\Gamma$ de $G$ isom.\ à $\mathfrak{S}_{4}$
+    \struck{\ill{}}
+  \item c) les parties $S \subset \mathfrak{P}_{6}(X(k))$ qui sont
+    « octaédrales » i.e.\ \struck{telles que} \uncertain{isom.\ à}
+    $(\mathbb{P}^{1}_{k}, \{0, \infty, \pm 1, \pm i\})$
+\end{itemize}
+\note{au b), le trait horizontal tient lieu de « les sous-groupes »}
+par
+\[
+  \Gamma = \operatorname{Nor}_{G}(V)
+\]
+$V$ = unique sous-groupe \uncertain{invariant} de $\Gamma$ \uncertain{isomorphe}
+à $D_{2}$
+\note{« unique » est écrit au-dessus de « sous-groupe », et une fin de phrase
+biffée suit « $D_{2}$ »}
+$S$ = ens.\ des \uncertain{points fixes} de \uncertain{l'action} de $V$ sur
+$X$ \struck{\ill{}}
+(\emph{NB} $\Gamma$ a un ens.\ de points fixes plus grand qui comprend,
+en plus de $S$, les « milieux d'arêtes » et « centres des faces » de
+l'octaèdre),
+\ill{} $S$, on a un antipodisme $\underline{a}_{S} = \underline{a}_{V}$ \ill{}
+par la condition que pour $\sigma \in V^{\times}$, $\underline{a}_{S}$
+\struck{est} \add{induit} la transposition \ill{} $X^{\sigma}$ (de cardinal 2).
+\uncertain{On} définit sur $S$ une structure octaédrale, admettant $\Gamma$ comme
+groupe des automorphismes orientés, et $\underline{a}$ comme antipodisme, via
+l'antipodisme (les faces sont les parties $S' \in \mathfrak{P}_{3}(S)$ telles
+que $S' \cup a(S') = S$).
+
+\marginal{Cas : la catégorie formée des $(X, V)$ (ou $(X, \Gamma)$, ou
+$(X, S)$) \ill{} \uncertain{équivalente} \ill{} des octaèdres \ill{}
+$(\mathrm{Oc})$ \ill{} \ill{} Dans \ill{} \ill{}
+$\mathbb{Q}(i)$ \ill{} $q : \{\pm i\} \simeq$ \ill{}}
+\note{la note marginale est écrite en oblique, de bas en haut, sur toute la
+moitié inférieure de la marge gauche ; redressée, elle reste en grande partie
+illisible}
+
+\page{86}
+\emph{NB} On sait que la donnée d'un octaèdre \add{combin.,} \uncertain{non
+orienté,} revient à celle d'un système $(I, \infty)$ \struck{\ill{}}
+$E_{I_{3}} \times E_{I_{2}}$, ens.\ des \uncertain{code-graphes} et des
+orientations. Ici $\omega = \{i, -i\}$, \struck{\ill{}} \struck{Mais ici on a
+\uncertain{réduit} \ill{} $I$ \uncertain{figuré} \ill{} le donnée de $I$
+\ill{}} qui \uncertain{s'était} \uncertain{ôté} \ill{}, mais \ill{} de
+cardinal 6 \uncertain{sur lequel} $V$ opère. $S$, qui est un ens.\ de
+\add{son} cardinal \ill{} \uncertain{définissent} une
+\note{passage très raturé ; la ligne « Mais ici … figuré » est biffée
+et la place de ce qui la remplace ne se décide pas}
+La condition à mettre \struck{$*$} pour que \uncertain{ceci} définisse une
+structure octaédrale (dont $S$ ser.\ l'ens.\ des sommets) \struck{\ill{}} est
+que $\forall\, \sigma \in V^{*}$, \struck{\ill{}}
+$\operatorname{card} S^{\sigma} = 2$, et
+$S = \bigcup_{\sigma \in V^{*}} S^{\sigma}$ (réunion forcément disjointe) tel
+\uncertain{condition} que $\sigma$ opère sur $(S \smallsetminus S^{\sigma})$
+par transposition \add{\uncertain{dans les deux}} \struck{\ill{}} \ill{} des
+composants $S^{\sigma'}$, $S^{\sigma''}$ (où $V^{*} = \{\sigma, \sigma',
+\sigma''\}$). Donc la donnée de \struck{\ill{}} $(V, S, u : V \hookrightarrow
+\mathfrak{S}_{S})$, ou $(S, V \subset \mathfrak{S}_{S})$, équivaut à celle de
+$S$, avec une involution sans pts fixes \ill{} \ill{} \uncertain{ayant} les
+$S^{\sigma}$ comme orbites).
+
+\uncertain{Résumant} : la donnée d'un $V$ qui opère \add{fidt.} sur $X$,
+considérons une orbite \add{$I$} de $V$ sur $X^{*} = X \smallsetminus S(V)$.
+Donc $I$ est un torseur sous $V$. La donnée de $(X, I, V(I) \hookrightarrow
+G_{X})$, $(X, I, I \hookrightarrow X)$ équivalent : celle de
+$(X, I, V(I) \hookrightarrow G_{X}$, orbite de $V(I)$ dans $X)$, et on
+\uncertain{se} \uncertain{garde} de confondre les $(V = V(I))$-torseurs $I$,
+avec le $V$-torseur $I(V)$ \add{$= I(V, X)$} défini via l'octaèdre
+$\operatorname{Oc}(V) = \operatorname{Oc}(V, X)$.
+
+En termes de $I$ \add{$\{\pm i\}$}, on peut définir un octaèdre
+\struck{orienté} \ill{} \struck{\ill{} bien \ill{}} canonique \struck{\ill{}
+l'un des \ill{} « $\{\pm i\}$ » $I$, l'un de ses orientations \ill{}
+\ill{}} \struck{bitransp.} \uncertain{à} condition que \ill{} \struck{soit
+$V$}. Cet \struck{\ill{}} octaèdre, \struck{\ill{} pas choisi \ill{}
+$i = \sqrt{-1}$}, peut \uncertain{s'écrire} comme ens.\ $(X, S)$ \ill{}
+\struck{\ill{}} \uncertain{conséquemment} $(X(I), S(I))$. On a un \uncertain{iso}
+\uncertain{canonique}
+\note{les trois dernières lignes du feuillet sont chargées de ratures
+superposées ; seules les formules et les mots isolés ci-dessus s'y lisent}
+
+\page{87}
+\[
+  X(I)/V(I) \simeq X(J)
+\]
+où $J = J(I)$ comme dessus.
+
+Ceci dit soit \add{une opération de $V$ sur $X$} \struck{$I \hookrightarrow X$
+\ill{} donc \ill{} dans $X$ une} \struck{opération $V = V(I)$}
+$V \hookrightarrow G_{X}$, d'où un $I(V)$ $V$-torseur \uncertain{des} \ill{}
+\uncertain{paires} de $\operatorname{Oc}(V)$, et \ill{} \struck{$X \simeq$}
+\[
+  X \simeq X(I(V)) \qquad \text{iso.\ canonique}
+\]
+(et \uncertain{aussi} $X \simeq X(I)$). Mais \uncertain{pour} \struck{\ill{}} deux
+torseurs $T, T'$ sous \ill{} $= V$, on a \ill{}
+\[
+  X(T \wedge T') = X(T) \wedge^{V} T'
+\]
+\marginal{\uncertain{explicitez}}
+\note{à droite de la formule, derrière un trait vertical, un mot seul}
+Soit donc $\underline{t} = \delta(I, \lambda)$ le $V$-torseur tel que
+$I(V) \simeq I \wedge^{V} \underline{t}$, i.e.\
+$\delta \simeq I(V) \wedge I^{-1}$, on aura donc
+\[
+  \boxed{X = X(I(V)) = X(I) \wedge^{V} \underline{t}}
+\]
+\struck{Donc} \add{donc} \struck{\ill{}}
+\[
+  \boxed{X/V \simeq X(I)/V \simeq \Sigma(J)}
+\]
+\note{la lettre de $\Sigma(J)$ est tracée comme un $X$ barré horizontalement ;
+elle revient plus bas sous la forme « $\Sigma(J)^{*}$ »}
+
+En résumé :
+
+\emph{Cor.} \struck{\ill{}} \struck{La donnée, d'une} Pour
+$I \in \operatorname{Ob} E_{I_{2}}$ \struck{\ill{}} donné, d'où $J$ \ill{}
+et $V = V(J)$, la donnée d'un $X$ et d'un plongement
+$V \hookrightarrow G_{X}$ équivaut à la donnée d'un torseur $\underline{t}$
+sous $V$, via
+\[
+  \underline{t} \longmapsto X(I) \wedge^{V} \underline{t}
+\]
+On a donc
+\[
+  X/V \simeq \Sigma(J) \qquad \text{(iso.\ canonique)}
+\]
+\note{les trois paragraphes précédents, depuis « $V = V(J)$ », sont réunis
+par un trait vertical dans la marge}
+
+\struck{\ill{}} \add{Donc} la donnée de $(X, I \hookrightarrow X)$ équivaut à
+celle de a) un pt $\xi$ de $\Sigma(J)^{*}$, b) un $V$-torseur $\underline{t}$,
+\struck{et c) un $V$-isom.\ \ill{} $X = X(I) \wedge^{V} \underline{t}$, et}
+\[
+  X_{\xi} = X(I)_{\xi} \wedge \underline{t} \simeq I \qquad \text{i.e.} \qquad
+  \underline{t} = I \wedge X(I)_{\xi}^{-1}
+\]
+\struck{$X_{\xi}$ = fibre de}
+
+\page{88}
+\textbf{Théorème} Soit $k$ un corps alg.\ clos de car.\ $\neq 2$, \struck{soit
+$I$ un ens.\ de card 4, d'où $J$ de card.\ 3, et $V = V(J)$}
+\struck{Considérons}
+Considérons le groupoïde des $(X, I \hookrightarrow X)$, où $X$ est une droite
+projective sur $k$, \add{$I$ de card.\ 4}. \struck{\ill{}} Ce groupoïde est
+équivalent à celui des couples $(I, \xi \in \Sigma(J(I))^{*})$,
+\uncertain{l'équivalence} \uncertain{étant} \ill{} : on pose
+\[
+  X = X(I) \wedge^{V(J(I))} t(\xi, I)
+\]
+\note{sous $V(J(I))$, une accolade et « $\simeq V(I)$ »}
+où $t(\xi, I)$ est le $V(I)$-torseur $I \wedge X(I)_{\xi}^{-1}$
+\[
+  I \hookrightarrow X \text{ est la fibre de } X \to \xi, \text{ compte tenu
+  que}
+\]
+\note{au-dessus de « la fibre », un $X$ en interligne, dont la place dans la
+phrase n'est pas sûre}
+\[
+\begin{array}{c}
+  X/V(I) \simeq X(I)/V(I) \simeq \Sigma(J) \\
+  X_{\xi} \simeq X(I)_{\xi} \wedge t(\xi, I) .
+\end{array}
+\]
+\note{l'énoncé, depuis « Théorème », est tenu par un trait vertical dans la
+marge gauche}
+
+\struck{\ill{}} Si $I$ est muni d'un pt $i_{0}$, on a une description
+de $X$ comme $X(I) \wedge^{V(I)} X(I)_{\xi}^{-1}$, i.e.\ isom.\ à $X(I)$ une
+fois choisi un \uncertain{élément} dans $X(I)$ au-dessus de $\xi$.
+
+De façon plus générale, \struck{\ill{}} la donnée d'un isom.\
+« admissible » $X \simeq X(I)$ équivaut à celle d'un $V$-isom.
+\[
+  I \simeq X(I)_{\xi} .
+\]
+
+\section{Courbes elliptiques réelles}
+\note{titre souligné, en haut à droite du feuillet 90, de sa main}
+
+\page{90}
+\marginal{Déc 83}
+\note{la date est écrite en oblique dans le coin supérieur gauche, séparée du
+texte par un trait}
+
+Soit $k$ un anneau (\uncertain{par exemple} commut.)
+\struck{$M$ sur $k$-\ill{}}
+Considérons la catégorie des $k$-Modules $M$ munis d'un automorphisme
+$\sigma$ \struck{tel} tels que
+\begin{itemize}
+  \item a) $\sigma^{2} = \mathrm{id}$
+  \item b) $2\,\mathrm{id}_{M}$ injectif (on dit \uncertain{alors} $M$
+    \emph{2-régulier})
+\end{itemize}
+À un tel couple $(M, \sigma)$, associons les triples $(P, Q, m)$ de deux
+\add{$k$-}modules pour lesquels $2\,\mathrm{id}_{P}$ et $2\,\mathrm{id}_{Q}$
+sont injectifs (i.e.\ $P, Q$ 2-réguliers), et
+$m \subset P/2P \oplus Q/2Q$ \add{un sous-$k/2k$-module} (avec
+$m \cap P/2P = 0$, $m \cap Q/2Q = 0$, \uncertain{i.e.}\ $m$ est le graphe d'un
+iso.\ entre deux sous-modules $p' \subset p = P/2P$, $q' \subset q = Q/2Q$, et
+un iso.\ $p' \simeq q'$), de la façon suivante
+\[
+\begin{array}{l}
+  P = M_{+} = \operatorname{Ker}(\mathrm{id}_{M} - \sigma)
+    = \{x \in M \mid \sigma x = x\} \\
+  Q = M_{-} = \operatorname{Ker}(\mathrm{id}_{M} + \sigma)
+    = \{x \in M \mid \sigma x = -x\}
+\end{array}
+\]
+\ill{} $M_{+} \cap M_{-} = 0$ dans $M$, car $M$ 2-régulier, \uncertain{donc}
+\[
+  2M \subset M_{+} \oplus M_{-} \subset M
+  \quad \text{car } \forall x \in M, \text{ on a }
+  2x = \underbrace{(x + \sigma x)}_{M_{+}} + \underbrace{(x - \sigma x)}_{M_{-}}
+\]
+\note{un point d'exclamation dans la marge, devant la formule ; à la suite
+de « $\subset M$ », un terme biffé : \struck{$\subset \tfrac{1}{2}(M_{+} \oplus M_{-})$}}
+\uncertain{soit}
+\[
+  \underset{\substack{\Vert \\ 2M}}{M'} \subset M_{+} \oplus M_{-} = P \oplus Q
+\]
+on a donc
+\struck{\ill{}}
+\[
+  2P \oplus 2Q \subset M' \subset P \oplus Q
+\]
+donc $M'$ est l'image d'un sous-module $m$ de
+\[
+  (P \oplus Q)/(2P \oplus 2Q) \simeq \underbrace{P/2P}_{p} \oplus
+  \underbrace{Q/2Q}_{q} ,
+\]
+et on \uncertain{vérifie}
+\[
+\begin{cases}
+  m \cap p = 0 & \text{i.e.\ }
+    \underbrace{M' \cap \bigl(P + (2P + 2Q)\bigr)}_{M' \cap P + (2P + 2Q)}
+    = (2P + 2Q) \\
+  m \cap q = 0 & \text{i.e.\ } M' \cap \bigl(Q + (2P + 2Q)\bigr) = 2Q
+\end{cases}
+\]
+car $M' \cap P = 2P$ puisque $2x \in P$ i.e.\ $\sigma 2x = 2x$ implique
+$x \in P$ i.e.\ $\sigma x = x$, \uncertain{et} $M' \cap Q = 2Q$.
+
+\uncertain{D'ailleurs} \struck{\ill{}} $(M, \sigma)$ se reconstitue à partir
+de $(P, Q, m)$, car $M' \subset P \oplus Q$ se reconstitue, et
+\struck{\ill{}} $\sigma_{M'}$ est induit par
+$\mathrm{id}_{P} \oplus (-\mathrm{id}_{Q})$, et
+$2\,\mathrm{id}_{M} : M \to M'$ est un iso.\ de $(M, \sigma_{M})$ sur
+$(M', \sigma_{M'})$.
+
+\emph{Prop.} Le foncteur précédent $(M, \sigma) \longmapsto (P, Q, m)$ est une
+équivalence de catégories.
+
+\emph{Cor.} Supposons $k$ \struck{\ill{}} \add{connexe,} 2-régulier, prenons
+\struck{\ill{}} $M$ \add{$(M, \sigma)$} \uncertain{projectif} de
+\uncertain{rang} 2 \ill{}, avec $\sigma \neq \mathrm{id}_{M}, -\mathrm{id}_{M}$,
+alors la cat.\ des \struck{\ill{}} \uncertain{des} \uncertain{faisceaux}
+\ill{} \uncertain{est} équivalente à celle des paires $(P, Q)$ avec $P, Q$
+inv., et $p \subset P/2P$, $q \subset Q/2Q$ et $p \simeq q$ \ill{}
+\note{la dernière ligne est coupée au bord droit du feuillet ; l'interligne au-dessus de « prenons » porte plusieurs mots biffés}
+
+\page{91}
+\note{calculs de brouillon pour le feuillet précédent, écrits sur un
+listing d'ordinateur daté « 19 AUG 82 » ; ils sont transcrits dans l'ordre de
+la page, du haut à droite vers le bas}
+
+\struck{$M'$}
+\[
+  P \oplus Q \supset M' \supset 2P \oplus 2Q
+\]
+\struck{\ill{} $\exists\, x, y \in M'$, $(1 + \sigma)(x, y) =$ \ill{}}
+\[
+\begin{array}{l}
+  \sigma(x, y) = x - y \\
+  (1 + \sigma)(x, y) = 2x \\
+  (1 - \sigma)(x, y) = 2y
+\end{array}
+\]
+\note{la troisième ligne est barrée d'un trait oblique ; le « $x - y$ » de la
+première est tel qu'écrit}
+$P =$ \struck{$x \in (x, y) \in M'$}
+\[
+\begin{cases}
+  M' \cap P = 2P \\
+  M' \cap Q = 2Q
+\end{cases}
+\qquad \text{i.e.\ } M' \cap (P + 2Q) = 2P + 2Q
+\ \ \bigl(= (M' \cap P) + 2Q\bigr)
+\]
+$(x, y) \mapsto x + 2y \in M'$
+\[
+  m \subset \underbrace{P/2P}_{p} \times \underbrace{Q/2Q}_{q}
+  \qquad \text{sous-module de } k/2k\text{-modules}
+\]
+\[
+\begin{array}{ll}
+  m \cap p = 0 & \qquad m \to p \text{ injectif} \\
+  m \cap q = 0 & \qquad m \to q \text{ injectif}
+\end{array}
+\]
+
+$x \mapsto 2x : M \to M$ injectif \quad
+\struck{$k'$} $k \hookrightarrow k' = k[\tfrac{1}{2}]$
+
+$M$ plat sur $k$ \quad
+$M \subset M \otimes k' = M' = M'_{+} \oplus M'_{-}$ \struck{$= M_{+} k'$}
+\[
+\begin{array}{l}
+  M_{+} = \{x \in M \mid \sigma x = x\} = \operatorname{Ker}(1 - \sigma) \\
+  M_{-} = \{x \in M \mid \sigma x = -x\} = \operatorname{Ker}(1 + \sigma) \\
+  M_{+} \cap M_{-} = 0 \\
+  M/M_{+} + M_{-} \ \text{annulé par } 2 \\
+  2x = \underbrace{(x + \sigma x)}_{\in M_{+}} + \underbrace{(x - \sigma x)}_{\in M_{-}}
+\end{array}
+\]
+dans \uncertain{$x \mapsto 2x$} $M \to M$ injectif
+\[
+\begin{array}{l}
+  M_{+} \oplus M_{-} \subset M \subset \tfrac{1}{2}(M_{+} \oplus M_{-}) \\
+  2M_{+} \oplus 2M_{-} \subset \underbrace{2M}_{M'} \subset M_{+} \oplus M_{-}
+\end{array}
+\]
+\struck{$P \oplus Q$} \ $P, Q$ \qquad $M$
+\[
+  m \in P/2P \oplus Q/2Q
+\]
+\[
+  (1 + \sigma) M' = 2M_{+}, \qquad (1 - \sigma) M' = 2M_{-}
+\]
+\note{un long trait oblique traverse la moitié inférieure de ces calculs, de
+« $M_{-} = \ldots$ » jusqu'à « $2M$ » : la page est ainsi, en partie,
+cancellée}
+
+\page{92}
+\emph{Courbes elliptiques réelles} \struck{Elles sont} La catégorie de ces
+courbes (avec morphismes \uncertain{pas} \uncertain{nécessairement} des iso)
+\uncertain{équivaut} à celle des systèmes \struck{\ill{}}
+$(\Pi, \sigma, c)$, où $\Pi$ est un $\mathbb{Z}$-module libre \add{de rang 2},
+\struck{\ill{}} $c$ une structure \struck{conf.} conforme orientée sur
+$\Pi_{\mathbb{R}} = \Pi \otimes_{\mathbb{Z}} \mathbb{R}$, et $\sigma$ un
+anti-automorphisme de \uncertain{la} \uncertain{struct.} $(\Pi, c)$, qui peut
+s'interpréter comme une \add{\uncertain{symétrie} de $\Pi \otimes \mathbb{R}$
+i.e.\ de déterminant $-1$,} involution de $\Pi$, renversant l'orientation
+(donc $\neq \pm \mathrm{id}_{\Pi}$), et conservant la structure conforme. Pour
+le couple $(\Pi, \sigma)$ il y a seulement deux possibilités, à
+\uncertain{iso} près (elles sont d'ailleurs \uncertain{isogènes} …). Je
+\uncertain{note}, pour chacune d'elles, \uncertain{à} trouver les structures
+conformes qui sont invariantes par $\sigma$. On peut les normaliser par
+\struck{\ill{}}
+\[
+  Q(e_{+}) = 1
+\]
+\note{après $Q(e_{+})$, une parenthèse biffée ; en marge droite, « \emph{NB}
+\ill{} une base de \struck{\ill{}} $\Pi_{+}$, $\Pi_{-}$ », avec $\Pi_{+}$ et
+$\Pi_{-}$ l'un sous l'autre et un trait qui les relie}
+donc on sait les structures de la forme
+\[
+  Q(x e_{+} + y e_{-}) = x^{2} + a y^{2}
+\]
+où $a \in \mathbb{R}^{*+}$. Il y a donc deux familles de courbes elliptiques
+réelles, paramétrées chacune par $\mathbb{R}^{*+}$, on peut les désigner par
+$E_{a}$, $E'_{a}$ $(a \in \mathbb{R}^{*+})$. \struck{Considérons}
+
+Considérons les automorphismes \struck{\ill{}} \add{d'une courbe elliptique}
+définis par $(\Pi, \sigma, c)$, ils correspondent \struck{\ill{}} \add{aux}
+\uncertain{automorphismes} \ill{} \uncertain{commutant} à $\sigma$ et
+\uncertain{respectant} la \ill{} de $\Pi$ qui \add{\uncertain{sont}
+\uncertain{orientés}} \struck{\ill{}} \ill{} = \uncertain{celles} de la
+structure conforme (\uncertain{compatible} à l'orientation) \struck{\ill{}}
+\ill{} $Q$ transforme $\Pi^{\pm}$ en $\Pi^{\pm}$ \struck{\ill{}}, \ill{}
+\ill{} $\pm e_{0}$, \ill{} \ill{} \struck{\ill{}} \ill{} la symétrie
+\ill{}) \ill{} \ill{}. Mais \ill{} \ill{} \ill{} de
+$\mathbb{R} e_{0} + \mathbb{R} e_{1}$ \uncertain{qui respectent} $Q$, qui
+\uncertain{fixent} $e_{0}$ et qui \ill{} \uncertain{respectent}
+l'orientation ! Donc il \uncertain{n'y a} que l'identité, et $\sigma$,
+\struck{\ill{}} \ill{} que \uncertain{l'automorphisme} universel,
+\uncertain{correspondant} à $-1$.
+\note{la seconde moitié du feuillet est une écriture rapide, très raturée ;
+les formules et quelques mots s'y lisent, la prose presque pas}
+
+\page{93}
+Pour une courbe elliptique \uncertain{complexe} donnée, définie par un réseau
+\add{$\Pi$} dans un espace vectoriel complexe $V$ de dim 1, les structures
+réelles qu'on peut mettre dessus correspondent aux \struck{\ill{}}
+\add{droites réelles} \ill{} de $V$, telles que la \struck{symétrie}
+\add{réflexion} \uncertain{orthogonale} \ill{} : $\mathbb{D}$ conserve $\Pi$.
+Peut-il y en avoir plusieurs ? \uncertain{Si oui}, les structures réelles
+correspondantes sont-elles isom.\ (i.e.\ conjuguées de l'une d'elles par
+\ill{} automorphisme complexe \ill{}) ? \struck{En tous cas, \ill{}
+$\sigma, \sigma'$ \ill{}}
+
+\struck{Cas de} \struck{\ill{}} Dans tous les cas, soit $G$ le groupe des
+\uncertain{automorphismes} \add{$X$ défini par $(\Pi, c)$} de la courbe
+elliptique \uncertain{conformes}. Pour que \struck{\ill{}} $X$ admette une
+structure réelle, il faut \struck{\ill{}} \uncertain{et il suffit} que
+$G \xrightarrow{\det} \pm 1$ soit surjectif, \ill{} \ill{} \ill{} : on a
+\[
+  1 \longrightarrow \underset{\substack{\Vert \\ \operatorname{Aut}(X)}}{G^{+}}
+  \longrightarrow G \longrightarrow \pm 1 \longrightarrow 1
+\]
+Mais un élément $\sigma$ de $G$ de déterminant $-1$ est une transformation
+orth.\ de déterminant $-1$, et \uncertain{une} réflexion, donc c'est une
+structure réelle sur la courbe elliptique ; les courbes elliptiques réelles
+\uncertain{sur} la \ill{} \uncertain{structures} réelles \ill{} \ill{} qui
+\uncertain{admettent} une \ill{} \ill{} \uncertain{celles} dont l'invariant
+\ill{} \ill{} \uncertain{sous} la conjugaison, i.e.\ \struck{\ill{}} $G^{+}$ est
+cyclique d'ordre \struck{\ill{}} $n = 2, 4$ \uncertain{ou} $6$ et
+\add{\uncertain{réel}}. L'ens.\ \struck{des \ill{} structures} \struck{\ill{}}
+\ill{} est un \uncertain{torseur} sous $G^{+}$, \struck{\ill{} ($X$ fini)}
+et $G$ \ill{} \struck{\ill{}} \uncertain{isomorphe} au groupe diédral
+$D_{n}$. $G^{+}$ \ill{}
+\note{le bas du feuillet est chargé de ratures en deux couches ; « $n = 2, 4,
+\ldots$ » est ajouté au-dessus d'une ligne biffée, « \ill{} diédral $D_{n}$ »
+termine la page}
+
+\page{94}
+structures réelles s'identifie ! $G^{-}$, qui est un \emph{torseur} sous
+$G^{+}$ par translations à gauche. Par contre, l'opération de $G^{+}$ sur
+$G^{-}$ par automorphismes intérieurs est \ill{} \ill{}, le centre
+$\zeta = \{\pm 1\}$ de $G$ \uncertain{opérant} trivialement, et il y a deux
+orbites sous $G^{+}$ (ou sous $G^{+}/\zeta$) \uncertain{si} $n = 2$
+\uncertain{ou} \ill{} (\uncertain{pour} $n = 4$ \uncertain{ou} $6$) les
+symétries par rapport \struck{\ill{}} \add{respectivement} aux sommets et aux
+côtés des \struck{\ill{}} polygones (carrés ou hexagones) fondamentaux
+\note{dans la marge gauche, à hauteur de cette ligne, un petit carré dessiné}
+
+\emph{Donc} on \uncertain{trouve}
+
+\emph{Proposition}. Soit une courbe elliptique \struck{réelle} complexe $X$.
+Les structures réelles \struck{\ill{}} \add{sur $X$} \struck{\ill{}}
+\ill{} de la courbe \struck{\ill{}} \ill{} si et seulement \ill{}
+\struck{\ill{}}
+\[
+  1 \longrightarrow G^{+} \longrightarrow G \longrightarrow \pm 1
+  \longrightarrow 1
+\]
+\ill{} et carrés (i.e.\ \uncertain{droites}). Dans ce cas, $G$ est
+\struck{un groupe} \add{donc un} groupe diédral, dont $G^{+}$ (d'ordre
+$n = 2, 4, \ldots, 6$) est le groupe des rotations. L'ens.\ des structures
+réelles se \uncertain{partage} en deux orbites sous $G^{+}$ (\uncertain{par}
+\ill{} \ill{}), et les structures réelles correspondant à deux orbites
+distinctes sont (par définition !) non isomorphes. \struck{\ill{} \ill{}
+correspondant aux structures $E_{a}$, $E'_{a}$ \ill{}}
+
+Je présume que l'une est formée de structures $E_{a}$
+($a \in \mathbb{R}^{*+}$ fixé), l'autre est formée des structures $E'_{a'}$
+(avec $a' = a$), et inversement, i.e.\ qu'on peut trouver un
+$a \in \mathbb{R}^{*+}$ unique, tel que les deux orbites sont l'une formée des
+structures isom.\ à $E_{a}$, l'autre des structures isom.\ à $E'_{a}$. De plus
+il faudrait \ill{}
+
+\page{95}
+\note{feuillet de dessins, sans un mot ni une formule : neuf sphères tracées
+à main levée au feutre (noir, brun, vert, orange, bleu), chacune découpée par
+un réseau d'arcs de grands cercles en régions dont certaines sont hachurées
+ou coloriées ; la plus grande, en orange, en haut à droite, est coupée par
+quatre cordes en secteurs, l'un hachuré}
+
+\page{96}
+explicitons le lien \uncertain{du} paramètre $a$ avec le paramètre $\tau$, ou
+mieux, avec l'invariant modulaire $j \in \mathbb{R}^{\pm}$
+(\uncertain{s'agit-il} \struck{i.e.\ $a = \exp j$ ou $a = \exp - j$}
+\struck{\ill{} dans la famille $E_{a}$ ou $E'_{a}$ ?)}).
+\marginal{$j = \tfrac{1}{2} \log a$ ?}
+\note{dans la marge gauche, sous cette note, un hexagone dessiné avec son axe
+vertical et une diagonale horizontale}
+
+\struck{Considérons} Notons que si $\sigma$ est dans $G^{-}$, \uncertain{alors}
+(\uncertain{réflexion} par \ill{} \ill{} \uncertain{hexagonal}, \ill{})
+suivant les \uncertain{cas} $-\sigma$ est conjugué, ou non conjugué, à
+$\sigma$. Dans le cas hexagonal il est non conjugué ; dans le cas carré, il
+est conjugué. Dans le cas \uncertain{non harmonique}, $n = 2$, il est
+\uncertain{bien sûr} non conjugué (cas \uncertain{d'un} \uncertain{groupe}
+commutatif) -- dans le cas \struck{hexagonal} \add{carré} et le seul \ill{}
+\ill{} \struck{\ill{}} soit conjugué à $\sigma$. \struck{Dans le cas \ill{}}
+\struck{dans le cas carré précisément, on trouve}
+
+\emph{Distinguons les cas}
+
+1) \emph{$n = 2$} Cas \uncertain{non harmonique}. Le groupe des automorphismes
+\add{anti} est $\pm 1$, $\pm \sigma$, où $\sigma$ est une \uncertain{anti-rotation}.
+On voit donc que si $\sigma$ est du type \ill{} \ill{} droite d'un
+\ill{}, il en est de même de $-\sigma$ (\ill{} $P$, $Q$ \ill{}
+$\mathrm{id}_{P}$ et $-\mathrm{id}_{Q}$), donc on est dans le cas $E_{a}$,
+\ill{} \ill{}) donc on est dans $E_{a}$ et en $E_{a'}$, correspondant aux
+deux \ill{} de \ill{} $a a' = 1$. \struck{\ill{}} \uncertain{Si} on
+\uncertain{prend} $\Pi$, $\sigma'$ de $G^{-}$, \ill{} \ill{}
+\uncertain{un générateur} $u = e_{+}$ de $\Pi_{+}$, \ill{} $v = e_{-}$ de
+$\Pi_{-}$, \ill{}
+\[
+  a = a(\sigma) = \frac{Q(e_{-})}{Q(e_{+})}
+\]
+et \uncertain{remplaçant} \ill{} la \ill{} de $\sigma$ \uncertain{par} $-\sigma$
+\ill{} \ill{}, on trouve bien
+\[
+  a(-\sigma) = 1/a(\sigma)
+\]
+\marginal{\uncertain{Ceci} vaut \uncertain{aussi} bien dans le cas des
+$E_{a}$ que des $E'_{a}$}
+(valable dans tous les cas), donc
+\[
+  a(-\sigma) = a(\sigma) \iff a(\sigma) = 1 \iff \text{cas \emph{carré}} .
+\]
+
+\page{97}
+2) \emph{Cas carré} $n = 4$. On voit que l'un \uncertain{a} un $\sigma$ du type
+$E_{1}$, et $-\sigma$ est du \uncertain{même} type. Cela \uncertain{correspond}
+aux symétries p.r.\ aux \add{diagonales} \struck{\ill{}} des carrés de
+\uncertain{départ}. La symétrie par rapport à une \uncertain{arête},
+\uncertain{changeant} $e_{0}$ et $e_{1}$, les \uncertain{invariants} et
+anti-invariants \uncertain{sont} engendrés par $e_{0} + e_{1}$ et
+$e_{0} - e_{1}$, \uncertain{qui engendrent} \ill{} \ill{} \ill{} dans le cas
+$E'_{a'}$. \uncertain{Comme}
+\[
+  a' = \frac{Q(e_{0} - e_{1})}{Q(e_{0} + e_{1})} = 1
+\]
+\note{devant le « 1 », une lettre biffée : \struck{A}}
+on \uncertain{voit} \ill{} \ill{}. Donc on trouve les types $E_{1}$
+(« \uncertain{sommets} ») et $E'_{1}$ (« côtés »).
+\note{dans la marge gauche, le carré fondamental dessiné sur ses axes, avec
+les vecteurs $e_{0}$ et $e_{1}$ issus du centre vers deux sommets}
+
+3) \emph{Cas hexagonal} $n = 6$.
+
+\struck{\ill{}} \emph{Réflexions-sommets}. L'\uncertain{ensemble} des
+\uncertain{invariants} \uncertain{par} la réflexion p.r.\ à $\mathbb{R} u$ sont
+engendrés par $u$, les anti-invariants par $2v - u$, c'est du type $E'_{a}$,
+\uncertain{avec}
+\[
+  a = \frac{Q(2v - u)}{Q(u)} = \sqrt{3}
+\]
+\note{dans la marge gauche, l'hexagone dessiné avec ses six sommets nommés
+$u$, $v$, $v - u$, $-u$, $-v$, $u - v$, et le sommet $2v - u$ du triangle
+extérieur qui s'appuie sur le côté $v - u$, $v$ ; des flèches vont du centre
+aux sommets. La valeur $\sqrt{3}$ est telle qu'écrite}
+
+\emph{Réflexions-faces} \uncertain{Ce sont} les $-\sigma$, on trouve donc
+$E'_{1/a} = E'_{1/\sqrt{3}}$
+
+\emph{En résumé} Dans tous les cas, sauf le cas carré, \struck{\ill{}}
+\add{l'un des}
+\struck{les types de} \struck{les} structures réelles sur $X$ est soit
+\struck{du type} $\{E_{a}, E_{1/a}\}$, \add{avec $a > 1$,} \struck{Cas} soit
+$\{E'_{a}, E'_{1/a}\}$ (le cas hexagonal étant dans le deuxième cas \add{avec
+$a = \sqrt{3}$}), à l'exclusion bien sûr l'un de l'autre.
+\emph{Dans} le cas carré, l'ens.\ des structures réelles est
+$\{E_{1}, E'_{1}\}$ i.e.\ il y a à la fois des structures $E$ et $E'$.
+\note{le résumé est tenu par un trait vertical dans la marge gauche}
+
+\page{98}
+\emph{Résumé}
+
+Cas $E_{a}$ : base $u = e_{0}$, $v = e_{1}$, forme
+\struck{$Q(e_{0}) = Q(e_{1})$} $Q(x e_{0} + y e_{1}) = x^{2} + a y^{2}$.
+
+Si on \uncertain{veut} \struck{\ill{}} \add{\uncertain{normaliser}} forme $Q$
+sous forme standard, on prend la base
+$\underbrace{e_{0}}_{1}, \underbrace{\tfrac{1}{\sqrt{a}}\, e_{1}}_{i}$, on
+trouve donc la base $1, \sqrt{a}\, i$ d'où
+\[
+  \boxed{\tau = \sqrt{a}\, i}
+\]
+
+Cas $E'_{a}$ : base \struck{$e_{0}$, $v =$ \ill{} $u$, \ill{}} \ill{} \ill{}
+\ill{} \ill{} la base $e_{0} = u$, $e_{1} = 2v - u$, où
+$Q(x e_{0} + y e_{1}) = x^{2} + a y^{2}$, $v = \tfrac{1}{2}(e_{0} + e_{1})$ ;
+on \struck{\ill{}} \uncertain{change} \uncertain{encore} de base.
+\[
+  \underbrace{e_{0}}_{1}, \ \underbrace{\tfrac{1}{\sqrt{a}}\, e_{1}}_{i}
+  \qquad \text{base orthonormale}
+\]
+et on a $u \mapsto 1$, $v \mapsto \tfrac{1}{2}(1 + \sqrt{a}\, i)$, donc
+\[
+  \boxed{\tau = \tfrac{1}{2}(1 + \sqrt{a}\, i)} = \frac{1}{2} + \frac{\sqrt{a}}{2}\, i
+\]
+\note{un trait ondulé traverse ici toute la largeur du feuillet}
+
+Calcul des groupes des pts réels d'une courbe $E_{a}$, $E'_{a}$.
+
+Pts réels sont les $x \bmod \Pi$ $(x \in \Pi_{\mathbb{R}})$ tels que
+\[
+  \sigma x \equiv x \quad (\Pi)
+\]
+
+\emph{Distinguons les deux cas}.
+
+1) \emph{$E_{a}$} \struck{$\sigma(e_{0}, e_{1}) =$} $\sigma(x, y) = x, -y$
+donc
+\[
+  \sigma(x, y) - (x, y) = (0, -2y)
+\]
+\note{le signe de « $-2y$ » est un trait court devant le 2, dont la lecture
+n'est pas sûre}
+donc la condition est que $2y \in \mathbb{Z}$. Donc $y = 0$ \struck{ou}
+\add{ou $\tfrac{1}{2}$}, les pts de
+\struck{$0$,} $\tfrac{1}{2}\, \mathbb{R} e_{0}$ et de
+\struck{\ill{}} $(0, \tfrac{1}{2}) + \mathbb{R} e_{0}$, donc \emph{deux
+composantes connexes} pour $X(\mathbb{R})$.
+
+\page{99}
+\emph{Cor.} Supposons $k$ principal \add{2-régulier}, $k_{0} = k/2k$ un corps.
+Alors les $(M, \sigma)$ \add{\uncertain{à} \uncertain{isom.\ près}}
+\uncertain{projectifs} équivalent à celles des paires
+$(P, Q,$ \struck{\ill{}}$)$ avec $P, Q$ libres de rang 1, et
+\struck{$p \subset$} $m \subset \underbrace{P/2P}_{p} \oplus
+\underbrace{Q/2Q}_{q}$ sous-esp.\ vectoriel sur $k_{0}$, \struck{\ill{}}
+qui est soit nul, soit une droite $\neq p, q$ (\uncertain{toutes}
+\uncertain{conditions}).
+
+\emph{Cor.} Cela donne une description des classes de conjugaison
+d'éléments de $\mathrm{Gl}(2, k)$ \struck{$*$} qui sont d'ordre 2 exactement,
+\add{\uncertain{i.e.}} et distincts de $\{\pm 1\}$ : il y \struck{\ill{}} a
+$\begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}$ (correspondant au cas
+$m = 0$), puis \struck{\ill{} \uncertain{familles} indexées par \ill{} \ill{}
+\ill{} $\mathbb{P}^{1}(k_{0})$ distincts de $0, \infty$ (\ill{} \ill{} que
+$k^{*} \to k_{0}^{*}$ est surjectif) \ill{} \ill{} la classification \ill{}
+plus \ill{})} \add{$k^{*} \to k_{0}^{*}$ \uncertain{surj.}} \uncertain{une}
+\uncertain{fois} \ill{} base de $P/2P$ \ill{} $Q/2Q$ \uncertain{provenant}
+\uncertain{d'}une base de $P$, $Q$.
+\note{deux lignes de ce paragraphe sont biffées ensemble et reprises dans la
+marge droite par « $k^{*} \to k_{0}^{*}$ surj. »}
+
+\uncertain{Elle} correspond à
+\[
+\begin{array}{l}
+  P = k, \quad Q = k, \quad m = \text{diagonale de } k_{0} \times k_{0}
+    \text{ i.e.} \\
+  M' = (2k \oplus 2k) + \text{diag.\ de } k \oplus k
+    = \{(x, y) \mid x - y \in 2k\}
+\end{array}
+\]
+donc \uncertain{les} \uncertain{pour} prendre base de $M'$
+\[
+  u_{0} = (2, 0), \quad v_{1} = (1, 1), \quad \text{d'où} \quad
+  -u_{0} + 2 v_{1} = (0, 2) = \operatorname{sym}(u_{0})
+\]
+\note{les lettres de $u_{0}$ et $v_{1}$ sont surchargées à chacune de leurs
+occurrences sur cette ligne et la suivante ; la lecture $u$, $v$ est celle
+que confirme la figure en marge}
+\marginal{$u = 2e_{0}$, $v = e_{0} + e_{1}$}
+On trouve
+\[
+  \sigma u_{0} = u_{0}, \quad \sigma v_{1} = (1, -1) = u_{0} - \operatorname{sym} v_{1}
+  = u_{0} - v_{1}
+\]
+i.e.\ la matrice de $\sigma$ p.r.\ à $(u_{0}, v_{1})$ est
+\[
+  \begin{pmatrix} 1 & 1 \\ 0 & -1 \end{pmatrix}
+\]
+Dans le cas où $k = \mathbb{Z}$, c'est la matrice de la réflexion p.r.\ à la
+diagonale $u, e_{0}$ de l'hexagone régulier, \uncertain{hexagone} \ill{}, le
+\ill{} de l'hexagone étant réalisé à un \uncertain{rapport} de
+\uncertain{similitude} \uncertain{près} \ill{} \uncertain{comme} base deux
+sommets consécutifs $u$, $v$ (\uncertain{Mais} le réseau \uncertain{est}
+engendré par \ill{} un des sommets).
+\note{dans la marge gauche, l'hexagone dessiné, sommets nommés
+$v - u$, $v$, $-u$, $e_{0} = u_{+}$, $-v$, $\sigma v = u - v$, avec en haut
+« $2v - u = u_{-}$ » ; flèches du centre vers les sommets}
+
+\emph{NB} Soit $u_{+}$ une base de $\Pi_{+}$, $u_{-}$ une base de $\Pi_{-}$,
+alors \struck{dans} on peut représenter $\sigma_{\mathbb{R}}$, pour la base
+$(u_{+}, u_{-})$ de $\Pi \otimes \mathbb{R}$, par la matrice
+$\begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}$, le réseau $\Pi$ étant
+identifié à $\mathbb{Z} u_{-} + \mathbb{Z} u_{+}$ \struck{\ill{}} dans le
+premier cas et dans le $2^{\text{e}}$ \uncertain{cas} à l'ens.\ des
+$x u_{+} + y u_{-}$ tels que $x - y \in \mathbb{Z}$, $x, y \in \tfrac{1}{2}\mathbb{Z}$
+\note{la dernière ligne est coupée au bord droit ; au pied du feuillet, écrit
+serré sous la dernière ligne : « $\sigma^{2}(e_{1}) = \sigma e_{0} - \sigma
+e_{1} = e_{0} - (e_{0} - e_{1}) = e_{1}$ »}
+
+\page{100}
+2) \emph{$E'_{a}$} Donc $\Pi$ engendré par $u, v$ avec $\sigma u = u$,
+$\sigma v = u - v$
+\note{dans la première ligne de calcul, le second $\sigma$ est surchargé ou
+biffé}
+\[
+\begin{array}{l}
+  \sigma(x, y) = \sigma(xu + yv) = xu + y(u - v) = (x + y) u - y v . \\
+  \sigma(x, y) - (x, y) = yu - 2yv = y(u - 2v),
+\end{array}
+\]
+donc la condition est $y \in \mathbb{Z}$, donc on trouve \struck{\ill{}} les
+points de $\mathbb{R} u_{+}$ mod $\Pi$, donc dans ce cas $X(\mathbb{R})$ est
+connexe.
+
+\marginal{9.2.}
+\note{« 9.2. » est écrit dans la marge gauche, à hauteur du « NB » ; c'est
+peut-être une date, sans année}
+\emph{NB} Pour bien faire, il faudrait aussi classifier les courbes elliptiques
+réelles inhomogènes, i.e.\ les torseurs $X$ sur $\operatorname{Spec}
+\mathbb{R}$, sous les \add{schémas en} groupes elliptiques $E_{a}$, $E'_{a}$.
+Les torseurs non triviaux fournissent les surfaces conformes \struck{sans}
+\uncertain{à} bord non orientables de genre 1. La suite exacte de
+$\gamma$-modules (où $\gamma = \operatorname{Gal}(\mathbb{C}/\mathbb{R})
+\simeq \{\pm 1\}$)
+\[
+  0 \longrightarrow \Pi \longrightarrow V \longrightarrow
+  E(\mathbb{C}) \longrightarrow 0
+\]
+fournit
+\[
+  H^{1}(\gamma, E(\mathbb{C})) \simeq H^{2}(\gamma, \Pi) \simeq
+  \Pi^{\gamma}/(1 + \sigma)\Pi = \Pi_{+}/(1 + \sigma)\Pi
+\]
+
+1) \emph{Cas de $E_{a}$}. On a $\Pi \simeq \Pi_{+} \oplus \Pi_{-}$, d'où
+$\Pi^{\gamma} = \Pi_{+}$
+\[
+  H^{1}(\mathbb{R}, E_{\mathbb{R}}) \simeq H^{1}(\gamma, E(\mathbb{C}))
+  \simeq H^{2}(\gamma, \Pi) \simeq
+  \underbrace{H^{2}(\gamma, \Pi_{+})}_{\mathbb{Z}/2\mathbb{Z}} \oplus
+  \underbrace{H^{2}(\gamma, \Pi_{-})}_{0}
+\]
+\note{sous chacun des deux termes, un signe d'égalité vertical porte la
+valeur}
+Il y a exactement une classe non nulle dans $H^{1}$, qui est d'ordre 2
+
+2) \emph{Cas de $E'_{a}$} On a $H^{1}(\mathbb{R}, E_{\mathbb{R}}) \simeq 0$.
+
+Donc les seules courbes elliptiques vraiment inhomogènes sur $\mathbb{R}$ sont
+les $E^{!}_{a}$ = \add{le} torseur \struck{\ill{}} non trivial (d'ordre 2) sous
+$E_{a}$, dépendant du paramètre $a \in \mathbb{R}^{*+}$.
+\note{le « ! » en exposant de $E^{!}_{a}$ est tel qu'écrit}
+
+\end{document}
