@@ -1,0 +1,1648 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 161-4
+% (pages 1-31, the whole folder).
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried moves into a
+% footnote. It is held to being mathematically correct as it stands; where the
+% manuscript is loose or mistaken, the true statement is what appears here and
+% the footnote says what the page has. In any dispute of substance the
+% transcription governs: whoever cites Grothendieck must cite
+% batch-01.fr.tex (pp. 1-20) or batch-02.fr.tex (pp. 21-31).
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-09-22 — first pass, unchecked against the pages by a human.
+% The folder was read whole, both batches together; this is one document for
+% the shelfmark. It was made on Opus 5.5 and has not been measured against the
+% reference reading of folder 115 (made on Opus 5).
+%
+% Spine. Seven strands, not one argument.
+%   I    pp. 2-6 (his pp. 1-5): faithfully flat descent, items (1)-(5); (5)
+%        is a heading with nothing under it.
+%   II   pp. 7-9: radicial / universally open morphisms, quasi-affine
+%        morphisms and the boxed implication table, ample sheaves (EGA II 4.5).
+%   III  pp. 10-12: course plans — stability rules a) b) c) for a class M,
+%        syllabi, the pencil plan (d)-(h) with P(M) = V(M)^*/G_m.
+%   IV   pp. 14, 16: schemes as functors; Hom(X, Spec A); the sites diagram;
+%        representability by Zariski sheaves covered by open affines.
+%   V    pp. 22-24, 26-28: the course outline, English prerequisites then
+%        items (1)-(10) on affine k-schemes as functors V_A.
+%   VI   pp. 28-31 and 21: item (11), the spectrum; p. 21 by content after
+%        the outline (the « 10') Fonctorialité » of p. 30's margin).
+%   VII  pp. 19-20: « Compléments » on limits and sums in Aff_k; they use the
+%        outline's e_k, V_A and the spectra of (11), so they are read last.
+%   VIII pp. 17, 15, 25: not the course. Product of topoi (p. 15 continues
+%        p. 17); p. 25 pencil fragments. Cross-reference to 161-6 p. 22.
+%
+% Notation fixed for the whole document. k a commutative ring (often a
+% field). V_A = Spec A seen as the functor k' -> Hom_{k-alg}(A, k'); E^I_k his
+% affine space functor k' -> k'^I; e_k = V_k, emptyset_k = V_0; Aff_k, Alg_k,
+% Sch_k. His « espace algébrique affine » = affine k-scheme (NOT Artin's
+% algebraic spaces). Descent: f : S' -> S, g : X -> Y an S-morphism, primes =
+% base change to S', S'' = S' x_S S'. « cohérent » (his) = qcqs. A class of
+% morphisms M with his rules a) b) c). Topos pages: pi(C, E) = Fun(C^op, E),
+% hat = presheaves, tilde = sheaves. On A, f < g (his ≺) iff f^n in gA.
+%
+% Substantive departures, with pages.
+%  p. 2   lying-over from A/p -> B/pB injective: the step needs B (x) k(p) != 0,
+%         i.e. faithful flatness applied to k(p); supplied.
+%  p. 2   margin criterion « M fid. plat <=> M (x) k(p) != 0 »: M flat supplied.
+%  p. 3   flat base change lemma: f qcqs and F quasi-coherent supplied.
+%  p. 4   f, f' for g, g' (flagged in the transcription); quasi-compactness
+%         descends along f surjective qc, the rest along f fpqc (stated so).
+%  p. 4   descent of immersions stated for open, closed, quasi-compact
+%         immersions only; arbitrary immersions left as the page's own open
+%         question (pp. 3, 5).
+%  p. 5   quasi-affine: « X -> Spec g_* O_X immersion » stated as open
+%         immersion (equivalent here); Ssf(F) read as quasi-coherent submodules.
+%  p. 6   ampleness criterion written with g : X -> Y, not f, F on X not S.
+%  p. 6   the NB on projective / quasi-projective: « among the listed
+%         properties »; reason given (the sheaf, not its ampleness, fails to
+%         descend).
+%  p. 7   conditions a)-d) renumbered (i)-(iv); a) b) c) kept for p. 10's rules.
+%  p. 8   projective = proper + quasi-projective: Y quasi-compact supplied;
+%         definitions are EGA II's, footnoted; finite = proper quasi-finite
+%         holds without noetherian hypothesis.
+%  p. 9   composite of ample sheaves: Z quasi-compact supplied (uniform n_0).
+%  p. 10  M contains isomorphisms supplied; the last equivalence quantified
+%         over base changes of g; « qu.-coh. » for « cohérent » (transcription).
+%  p. 11  identity principle: the source Z is reduced, not X.
+%  p. 12  « de type fini » includes quasi-separated, unlike EGA; flagged.
+%  p. 14  Γ(U_f, O_X) read Γ(φ^{-1}(U_f), O_X); equivalence of Zariski-sheaf
+%         categories Sch_k vs Aff_k supplied (page draws the arrow only).
+%  p. 16  Cor: « soit un faisceau » for « soit un schéma » (unflagged slip).
+%  p. 17  the characterisation of Ĉ x D~ by p_*, q_* alone is false
+%         (counterexample given); corrected to all partial functors; p. 15 takes
+%         the correct route. γ(C,E) is in fact always an equivalence (classical).
+%  p. 19  his k[I] (function algebra) written k^I; k[I] today = group algebra.
+%  p. 20  Ker φ -> ker u (transcription); induced topology stated only for the
+%         cases the page names.
+%  p. 21  Spec ∏ A_i = ⊔ Spec A_i for I finite only; « [vrai sur un corps alg.
+%         clos] » read as the maximal spectrum, as the next line says;
+%         φ^{-1}(p) read u^{-1}(p).
+%  p. 23  « sur A » for « sur k » (transcription).
+%  p. 27  idempotent description of Hom(∏ A_i, k') for I finite only.
+%  p. 28  « O.K. si R fini »: modern effectivity needs R finite locally free.
+%  p. 29  « contiennent A » for « S » (transcription).
+%  p. 30  « f_i ∈ I » (transcription); finite subfamily renamed I_0.
+%
+% Announced and never established on the pages: (5) « Questions d'effectivité
+% de données de descente » (p. 6) is a bare heading; « Expliquer ce que cela
+% signifie » (p. 5); the converse of p. 7's Prop (« nettement plus difficile »);
+% item (7) of p. 24 (illegible); the passage to the quotient promised p. 28;
+% the sheaf property of p. 31 (« … »); on the topos pages, that γ is an
+% equivalence (p. 17 ends « ce qui prouvera… », p. 15 reduces to two cases and
+% stops). Dating: the pages support only « after EGA II » (margin p. 9) and a
+% two-part summer course taught in English (p. 22); no course or year is named.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{161-4}
+\pages{1}{31}
+\dating{[après 1961] — le groupe « Dossiers rassemblés par Grothendieck sur différentes thématiques » (161-1 à 162-6) est daté [après 1961-vers 1977]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Introduction à géométrie algébrique : notes manuscrites (s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+La chemise porte au crayon « Introduction à Géom. Alg. », et c'est bien ce
+qu'elle contient : les papiers de travail de quelqu'un qui prépare un cours
+d'initiation à la géométrie algébrique, et qui se demande par où commencer.
+Les feuillets ne forment pas un texte suivi. Ce sont des morceaux de cours,
+des plans raturés et refaits, des listes de ce qu'il ne faut pas oublier ; et,
+glissés parmi eux, trois feuillets sur un tout autre sujet.
+
+La géométrie algébrique étudie les ensembles de solutions des systèmes
+d'équations polynomiales. La difficulté, pour qui l'enseigne, est de dire ce
+qu'est l'« espace » formé par ces solutions. Il y a deux chemins. Le premier,
+celui des \emph{Éléments de géométrie algébrique}, fabrique un espace
+topologique muni d'un faisceau d'anneaux, puis établit une à une les propriétés
+des morphismes entre de tels objets : il est complet, mais long, et un plan du
+dossier en appelle la première étape, sans ironie apparente, la « traversée du
+désert ». Le second chemin part d'une idée plus simple. On connaît une serrure
+par l'ensemble des clés qu'elle accepte ; de même, on connaît un système
+d'équations par l'ensemble de ses solutions dans \emph{chaque} anneau --- les
+nombres rationnels, les réels, les complexes, les entiers modulo $5$, et tous
+les autres --- et par la façon dont ces ensembles se transforment quand on
+change d'anneau. Un cercle n'a pas les mêmes points sur $\mathbb{Q}$ et sur
+$\mathbb{C}$ ; la donnée de tous ces ensembles de points à la fois, c'est le
+cercle, et l'on ne perd rien à le définir ainsi. Les feuillets du cours
+choisissent ce second chemin. Ils en tirent une conclusion que l'une des pages
+énonce avec une satisfaction visible : la notion de schéma s'en trouve
+« explicitée sans recours à la notion d'espaces topologiques ». L'espace
+topologique n'est pas pour autant abandonné : il revient à la fin, reconstruit,
+sous le nom de \emph{spectre}, et ses points sont les « lieux » où tombent les
+solutions.
+
+Une page en anglais situe le cours. C'est un cours d'été en deux parties, une
+introduction à la géométrie algébrique suivie d'une introduction aux groupes
+algébriques, et la page note que la première est le prérequis de la seconde.
+Le plan porte la trace de cette destination : il construit tôt les noyaux, le
+groupe spécial linéaire comme noyau du déterminant, les stabilisateurs ; et il
+montre pourquoi les schémas affines ne suffisent pas pour les quotients, sur un
+exemple où le quotient calculé dans la catégorie affine est un point --- « ce
+qui est idiot ! ».
+
+Une autre strate, plus ancienne peut-être, en tout cas d'un autre niveau, fait
+la liste de ce qu'un cours plus avancé devrait contenir. La plus longue série
+porte sur la \emph{descente}. L'image est celle d'un atlas : on connaît un pays
+par des cartes locales et par la manière dont elles se recouvrent. La descente
+généralise l'atlas à des « recouvrements » beaucoup plus grossiers que des
+ouverts --- les morphismes fidèlement plats --- et pose deux questions : quelles
+propriétés d'un objet peut-on vérifier après être passé au recouvrement, et
+quels objets du recouvrement proviennent d'un objet d'en bas ? À la première,
+une longue liste répond « presque toutes », avec une exception notée à part :
+être projectif. La seconde reste un titre sans rien dessous.
+
+Ces pages ont un autre intérêt, qui ne demande aucune préparation : elles
+montrent un auteur qui juge son propre sujet. La matière est « messy », dit la
+page anglaise, et l'on ne pourra en donner qu'un survol. Tous les schémas des
+« Anciens », note un plan, étaient de type fini et séparés sur un corps ; ceux
+qu'on rencontre aujourd'hui sont presque tous quasi-séparés, et certains, parmi
+les importants, ne sont pas quasi-compacts. Ailleurs, devant une construction
+qui ne donne que ce qu'on savait déjà, une parenthèse : « nous fait une belle
+jambe ! ». Le souci de l'ordre est constant : les plans sont renumérotés,
+les rubriques déplacées par des flèches, une marge promet de voir « tôt » les
+schémas non séparés.
+
+Les trois feuillets étrangers au cours portent sur les topos. Deux d'entre eux
+cherchent à montrer que les préfaisceaux sur une petite catégorie à valeurs
+dans un topos forment le produit de deux topos ; ils s'arrêtent juste avant la
+fin. La même question est posée, sur une page barrée, dans le dossier 161-6.
+
+Les noms à chercher ensuite : descente fidèlement plate, foncteur des points,
+faisceau de Zariski et critère de représentabilité, schémas en groupes affines,
+espaces sobres et spectraux, produit de topos.
+
+\keywords{faithfully flat descent, fpqc descent, effective descent, universally submersive morphism, radicial morphism, universal homeomorphism, quasi-affine morphism, relatively ample invertible sheaf, permanence properties of morphisms, projective bundle, functor of points, Zariski sheaf, representability criterion, affine group scheme, constant group scheme, Nullstellensatz, limits of affine schemes, Zariski topology, sober space, spectral space, structure sheaf, product of topoi, presheaf topos}
+\end{resume}
+
+\pagerange{1}{31}
+\section*{Le fil du dossier, et les conventions}
+
+\emph{Les strates.} Le dossier est un assemblage de feuillets de papiers, d'encres
+et de moments différents, et l'ordre dans lequel les archivistes les ont
+numérotés n'est pas toujours celui de l'argument. Après la chemise, il se lit
+en sept ensembles de feuillets, qui sont les sept sections qui suivent.
+
+\begin{enumerate}
+  \item \emph{Page 1}, la chemise : « Introduction à Géom. Alg. », au crayon,
+  sur l'onglet.
+  \item \emph{Pages 2 à 6} (paginées par lui 1 à 5, encre bleue) : la descente
+  fidèlement plate, en rubriques numérotées (1) à (5). La rubrique (5) n'a que
+  son titre. Section I.
+  \item \emph{Pages 7 à 9}, feuilles volantes de même main : morphismes
+  radiciels et universellement ouverts, morphismes quasi-affines avec un tableau
+  encadré d'implications, faisceaux amples. Section II.
+  \item \emph{Pages 10 à 12} : trois plans de cours, très surchargés. Les
+  règles de stabilité a), b), c) d'une classe de morphismes, deux programmes
+  numérotés, puis au crayon un plan à rubriques (d) à (h) où apparaissent les
+  schémas comme foncteurs et $P(M)$. Section III.
+  \item \emph{Pages 14 et 16} : les schémas comme foncteurs --- morphismes
+  d'un espace localement annelé vers un schéma affine, le diagramme des
+  catégories de faisceaux, le critère de représentabilité. Section IV.
+  \item \emph{Pages 22 à 24 et 26 à 28} : le cours lui-même. Une page de
+  prérequis en anglais, puis un plan en français, rubriques (1) à (10), sur les
+  schémas affines sur $k$ vus comme foncteurs sur les $k$-algèbres. Section V.
+  \item \emph{Pages 28 à 31, et 21} : la rubrique (11), le spectre ---
+  ensemble sous-jacent, topologie, faisceau structural. La page 21, que les
+  archivistes placent avant le plan, emploie la notation du plan ($V_A$, les
+  lettres gothiques) et traite la fonctorialité du spectre, qu'une marge de la
+  page 30 annonce comme une rubrique « 10') » à insérer ; par son contenu elle
+  vient donc après les pages 22 à 28. Section VI.
+  \item \emph{Pages 19 et 20}, feuille titrée « Géom. Algébrique » :
+  « Compléments sur le formalisme des $\varprojlim$ et des sommes dans
+  $\mathrm{Aff}_k$ ». Elles emploient l'objet final $e_k$ et la notation $V_A$
+  des pages 22 à 26, et parlent des spectres de la rubrique (11) : on les lit en
+  dernier. Section VII.
+  \item \emph{Pages 15, 17 et 25} : étrangères au cours. Les pages 15 et 17 sur
+  le produit de deux topos --- la page 15, qui commence par « Or », continue la
+  page 17 et non l'inverse ---, la page 25 au crayon, sur des topos aussi, lue
+  seulement par fragments. Section VIII.
+\end{enumerate}
+
+Les pages 13 et 18 sont blanches. Rien sur les pages ne date le cours ni ne le
+situe : on sait seulement qu'une marge de la page 9 renvoie à EGA II, et que
+la page 22 prévoit un cours d'été en deux parties, enseigné en anglais. On ne
+cherche pas à l'identifier.
+
+\emph{Deux niveaux.} Les sections I à III supposent connue la théorie des
+schémas et en organisent les notions ; les sections IV à VII construisent
+l'objet depuis le début. Rien n'indique que les deux strates appartiennent au
+même cours, et on ne les confond pas.
+
+\emph{Notations.} Elles valent pour tout le document.
+
+\begin{itemize}
+  \item $k$ est un anneau commutatif, souvent un corps ; $\mathrm{Alg}_k$ la
+  catégorie des $k$-algèbres commutatives, $\mathrm{Aff}_k$ celle des schémas
+  affines sur $k$, $\mathrm{Sch}_k$ celle des $k$-schémas.
+  \item Pour une $k$-algèbre $A$, $V_A$ est le foncteur
+  $k' \mapsto \operatorname{Hom}_{k\text{-alg}}(A, k')$ sur $\mathrm{Alg}_k$ ;
+  c'est $\operatorname{Spec} A$ vu par ses points. $\mathbb{E}^I_k$ est le
+  foncteur $k' \mapsto k'^I$, c'est-à-dire l'espace affine $V_{P_I}$ avec
+  $P_I = k[(T_i)_{i \in I}]$. On pose $e_k = V_k$ (objet final) et
+  $\emptyset_k = V_0$.
+  \item Ce que les pages appellent \emph{espace algébrique affine} sur $k$ est,
+  dans la langue d'aujourd'hui, un $k$-schéma affine présenté par son foncteur
+  des points.\footnote{Le mot ne doit pas être confondu avec les \emph{espaces
+  algébriques} au sens d'Artin, introduits à la fin des années 1960, qui sont
+  une généralisation des schémas. Ici l'adjectif « affine » ne quitte jamais le
+  nom, et l'objet est exactement un foncteur représentable $V_A$.}
+  \item Descente : $f : S' \to S$ est le morphisme de descente,
+  $g : X \to Y$ un $S$-morphisme, un accent désigne le changement de base à
+  $S'$ ($X' = X \times_S S'$, $g' = g \times_S S'$), et
+  $S'' = S' \times_S S'$.
+  \item Il dit \emph{cohérent} pour « quasi-compact et
+  quasi-séparé » ;\footnote{C'est la terminologie de SGA 4 ; la page 10 la
+  définit elle-même (« Morphismes cohérents $=$ qu.-cpt qu.-sép. »). Le mot a
+  d'autres sens aujourd'hui (faisceau cohérent), d'où l'abréviation
+  « qcqs » qu'on lui préfère.} on écrit « qcqs ». « fpqc » abrège
+  « fidèlement plat et quasi-compact ».
+  \item $\mathcal{M}$ désigne une classe de morphismes, et a), b), c) ses
+  règles de stabilité, fixées à la section III.
+  \item Topos : $\widehat{C}$ est le topos des préfaisceaux sur $C$,
+  $\widetilde{D}$ celui des faisceaux sur $D$ pour une topologie donnée, et
+  $\pi(C, E) = \underline{\operatorname{Hom}}(C^{\circ}, E)$ le topos des
+  préfaisceaux sur $C$ à valeurs dans le topos $E$.
+  \item Sur un anneau $A$, on écrit $f \prec g$ lorsque $f$ appartient à la
+  racine de l'idéal $gA$ ; c'est la notation de la page 30.
+\end{itemize}
+
+\emph{Ce que le dossier annonce sans l'établir.} La rubrique (5) de la
+descente, sur l'effectivité des données de descente, n'a que son titre. La
+réciproque de la proposition de la page 7 est annoncée « nettement plus
+difficile » et n'est pas donnée. Le passage au quotient est promis à la page 28.
+Le caractère de faisceau du faisceau structural est laissé en points de
+suspension à la page 31. Sur les pages de topos, l'énoncé visé --- que le
+morphisme de comparaison $\gamma$ est une équivalence --- n'est pas atteint.
+
+\pagerange{2}{6}
+\section*{I. La descente fidèlement plate (pages 2 à 6)}
+
+Cinq pages paginées de sa main, en rubriques numérotées : (1) descente de
+propriétés de morphismes, (2) descente de propriétés topologiques, (3) descente
+effective des faisceaux quasi-cohérents, des sous-schémas, des morphismes, des
+schémas affines, (4) descente de l'amplitude, (5) questions d'effectivité.
+Elles sont précédées de rappels sur la platitude. C'est, en abrégé, la matière
+que l'on trouve aujourd'hui dans l'exposé VIII de SGA 1 et au paragraphe 2
+d'EGA IV ; la page n'y renvoie pas.
+
+\pagerange{2}{2}
+\subsection*{Platitude fidèle (page 2)}
+
+Soit $A \to B$ un morphisme d'anneaux. On dit que $B$ est \emph{fidèlement
+plat} sur $A$ si $B$ est plat et si, pour tout $A$-module $M$,
+$M \otimes_A B = 0$ entraîne $M = 0$.
+
+\textbf{Proposition.} $B$ est fidèlement plat sur $A$ si et seulement si $B$
+est plat et $\operatorname{Spec} B \to \operatorname{Spec} A$ est surjectif.
+
+Si $B$ est fidèlement plat, alors pour tout $A$-module $M$ l'application
+$M \to M \otimes_A B$ est injective ; en particulier $A \to B$ est injectif et
+$\mathfrak{J} B \cap A = \mathfrak{J}$ pour tout idéal $\mathfrak{J}$ de $A$.
+Pour un idéal premier $\mathfrak{p}$, la fibre $B \otimes_A k(\mathfrak{p})$
+n'est pas nulle, puisque $k(\mathfrak{p}) \neq 0$ : il existe donc un idéal
+premier de $B$ au-dessus de $\mathfrak{p}$.\footnote{La page conclut de
+l'injectivité de $A/\mathfrak{p} \to B/\mathfrak{p}B$ à l'existence d'un
+premier au-dessus de $\mathfrak{p}$. L'injectivité seule ne suffit pas :
+$\mathbb{Z} \to \mathbb{Z}[1/2]$ est injectif et aucun premier de
+$\mathbb{Z}[1/2]$ n'est au-dessus de $2$. Ce qui fait marcher l'argument est la
+fidélité appliquée au module $k(\mathfrak{p})$, et c'est ce qu'on écrit. Un mot
+cerclé, lu « Ind. » avec doute, précède la phrase sur la page.} Réciproquement,
+si $B$ est plat et le morphisme des spectres surjectif, et si $M \neq 0$, on
+choisit un sous-module monogène $A/I \neq 0$ de $M$ et un idéal maximal
+$\mathfrak{m} \supset I$ ; par platitude $B/IB \subset M \otimes_A B$, et
+$B/IB$ se surjecte sur $B/\mathfrak{m}B$, qui n'est pas nul puisque
+$\mathfrak{m}$ est induit par un premier de $B$.\footnote{La page raisonne
+ainsi, avec plusieurs reprises biffées (« on peut supposer $M$ de t.f. »), et la
+réduction aux quotients $A/\mathfrak{m}$ y est lue avec doute.}
+
+La marge de la page ajoute deux critères, sous une forme qu'on complète :
+un $A$-module \emph{plat} $M$ est fidèlement plat si et seulement si
+$M \otimes_A k(\mathfrak{p}) \neq 0$ pour tout premier $\mathfrak{p}$ ; et si
+$A \to B$ est un homomorphisme local d'anneaux locaux, $B$ plat équivaut à
+$B$ fidèlement plat.\footnote{La marge écrit le premier critère sans
+l'hypothèse de platitude, que l'énoncé exige ; elle est dans le sens du
+contexte, qui ne parle que de modules plats. La marge est écrite en travers de
+la page, sur plusieurs colonnes, et d'autres bribes s'y lisent sans ordre sûr.}
+
+Un morphisme de schémas $f : X \to Y$ est dit fidèlement plat s'il est plat et
+surjectif.\footnote{La définition, sur la page, s'arrête après « ssi » ; on
+donne la définition usuelle, qui est celle que la suite emploie.} Si $f$ est
+plat, alors pour tout $x \in X$ d'image $y$, l'application
+$\operatorname{Spec} \mathcal{O}_{X,x} \to \operatorname{Spec} \mathcal{O}_{Y,y}$
+est surjective (un homomorphisme local plat est fidèlement plat) ; par
+conséquent tout point maximal de $X$ --- point générique d'une composante
+irréductible --- est au-dessus d'un point maximal de $Y$. C'est le théorème de
+\emph{descente des générisations} : un morphisme plat est
+\emph{générisant}.
+
+\pagerange{3}{3}
+\subsection*{La topologie de $S$, quotient de celle de $S'$ (page 3)}
+
+\textbf{Corollaire.} Un morphisme plat et localement de présentation finie est
+universellement ouvert.\footnote{« univ. » est ajouté au-dessus de la ligne.}
+
+\textbf{Proposition.} Soit $f : S' \to S$ fidèlement plat. L'application
+$T \mapsto f^{-1}(T)$, des sous-schémas de $S$ vers ceux de $S'$, est
+injective.\footnote{La page ajoute une seconde propriété, illisible. L'injectivité
+n'exige pas la quasi-compacité : les ensembles sous-jacents se séparent par
+surjectivité, et les idéaux par platitude fidèle des anneaux locaux
+$\mathcal{O}_{S,s} \to \mathcal{O}_{S',s'}$.} Par conséquent, pour des
+$S$-schémas $X$ et $Y$, l'application
+$\operatorname{Hom}_S(X, Y) \to \operatorname{Hom}_{S'}(X', Y')$ est injective
+(on l'applique aux graphes).
+
+\textbf{Lemme (changement de base plat).} Soit un carré cartésien de
+morphismes $X' \to X$, $f : X \to Y$, $f' : X' \to Y'$, $Y' \to Y$, avec
+$Y' \to Y$ plat. Si $f$ est quasi-compact et quasi-séparé et $F$ un
+$\mathcal{O}_X$-module quasi-cohérent, l'homomorphisme canonique
+$f_*(F)' \to f'_*(F')$ est un isomorphisme.\footnote{Les hypothèses « $f$
+qcqs » et « $F$ quasi-cohérent » ne sont pas sur la page, qui écrit seulement le
+carré et la flèche ; sans elles l'énoncé est faux.}
+
+\textbf{Théorème.} Soit $f : S' \to S$ un morphisme plat, et $T \subset S$
+l'image d'un morphisme quasi-compact $g : Z \to S$. Alors
+\[
+f^{-1}(\overline{T}) = \overline{f^{-1}(T)} .
+\]
+
+La page en donne deux démonstrations. La première se ramène au cas affine :
+si $Z = \operatorname{Spec} C$, $S = \operatorname{Spec} A$ et
+$u : A \to C$, l'adhérence $\overline{T}$ est $V(\operatorname{Ker} u)$, et la
+platitude de $A \to A'$ donne
+$\operatorname{Ker}(u \otimes A') = (\operatorname{Ker} u) A'$. La seconde
+est plus éclairante, et la page note elle-même qu'elle « marche pour tout
+morphisme générisant » : comme $g$ est quasi-compact, $\overline{T}$ est
+l'ensemble des spécialisations des points de $T$, et de même pour
+$f^{-1}(T)$, qui est l'image du morphisme quasi-compact
+$Z \times_S S' \to S'$ ; si $s' \in f^{-1}(\overline{T})$, le point $f(s')$
+est spécialisation d'un $t \in T$, et comme $f$ est générisant, $t$ se relève
+en une générisation de $s'$, qui est dans $f^{-1}(T)$.\footnote{Les deux
+ajouts de la colonne de droite qui portent cette seconde démonstration sont
+reliés au théorème par des traits, et leur ordre de lecture est incertain ; on
+les enchaîne selon l'argument. Deux mots de l'énoncé sont illisibles, et le
+début en est biffé puis récrit (« image d'un morphisme » est ajouté).}
+
+\textbf{Corollaire.} Si $f$ est fidèlement plat et quasi-compact, la topologie
+de $S$ est la topologie quotient de celle de $S'$ : une partie $T$ de $S$ est
+fermée si et seulement si $f^{-1}(T)$ l'est. En effet, si $f^{-1}(T)$ est
+fermé, $T = f(f^{-1}(T))$ est l'image d'un morphisme quasi-compact, donc
+$f^{-1}(\overline{T}) = \overline{f^{-1}(T)} = f^{-1}(T)$, et $T = \overline{T}$
+par surjectivité.\footnote{« et quasi-compact » est ajouté au-dessus de la
+ligne. La page écrit ensuite l'argument pour une partie fermée saturée de $S'$,
+avec une ligne entière biffée.}
+
+\textbf{Corollaire.} Si $f$ est fpqc, les suites
+\[
+\begin{array}{l}
+F(S) \to F(S') \rightrightarrows F(S''), \\
+O(S) \to O(S') \rightrightarrows O(S''), \\
+LF_{\mathrm{rc}}(S) \to LF_{\mathrm{rc}}(S') \rightrightarrows LF_{\mathrm{rc}}(S'')
+\end{array}
+\]
+sont exactes, où $F$, $O$, $LF_{\mathrm{rc}}$ désignent respectivement les
+parties fermées, ouvertes, localement fermées rétrocompactes. Pour l'ensemble
+$P$ de toutes les parties, l'exactitude vaut dès que $f$ est surjectif, parce
+que $S'' \to S' \times_S S'$ (produit des ensembles sous-jacents) est
+surjectif : une partie de $S'$ qui a même image réciproque par les deux
+projections est saturée. Les deux premières suites s'en déduisent par le
+corollaire précédent. Pour la troisième, on se ramène aux deux premières en
+passant à l'adhérence et en utilisant le théorème : une partie $T$ qui est
+l'image d'un morphisme quasi-compact est localement fermée si et seulement si
+$f^{-1}(T)$ l'est.\footnote{La page porte, entre crochets et suivie d'un point
+d'interrogation, la même suite pour les parties localement fermées sans
+condition de rétrocompacité. Elle ne la tranche pas, et on ne la tranche pas ici :
+c'est l'égalité $f^{-1}(\overline{T}) = \overline{f^{-1}(T)}$ qui manque pour
+une partie quelconque. La même question revient à la page 5, pour les
+sous-schémas. Le premier mot du dernier corollaire, lu « fermée » avec doute,
+est probablement « ouverte », puisque « fermée » suit entre parenthèses.}
+
+Ce qui sert dans toute la suite n'est pas la platitude en tant que telle, mais
+le fait que $f$ et tous ses changements de base sont des applications
+quotients. On dit aujourd'hui que $f$ est \emph{universellement submersif}. La
+page note deux fois que cela vaut aussi pour $f$ surjectif, quasi-compact et
+universellement générisant, ce que la démonstration du théorème
+confirme.\footnote{Aux pages 3 et 4, entre parenthèses : « ou univ.
+générisant », le second mot lu avec doute. Le nom « submersif » n'est pas sur
+les pages.}
+
+\pagerange{4}{4}
+\subsection*{(1) et (2) : descente de propriétés de morphismes (page 4)}
+
+Soit $g : X \to Y$ un $S$-morphisme et $g' : X' \to Y'$ son changement de base.
+La question est : si $g'$ a une propriété, $g$ l'a-t-il ?\footnote{Sur toute la
+page, le morphisme que l'on descend est appelé tantôt $g$, tantôt $f$, $f'$ ---
+la lettre du morphisme de descente. Le contexte ne laisse pas de doute ; on écrit
+$g$, $g'$ partout. La transcription le signale.}
+
+\begin{itemize}
+  \item Si $f$ est surjectif, $g$ est surjectif (resp. radiciel) si et seulement
+  si $g'$ l'est.
+  \item Si $f$ est surjectif et quasi-compact, $g$ est quasi-compact si et
+  seulement si $g'$ l'est. Si $f$ est fpqc, il en va de même pour
+  « de type fini », « de présentation finie », « localement de type fini »,
+  « localement de présentation finie ».\footnote{La page écrit les deux cas en
+  une phrase avec « resp. » ; on répartit les hypothèses comme elles doivent
+  l'être : la quasi-compacité descend le long d'un morphisme surjectif
+  quasi-compact, les conditions de finitude demandent la platitude fidèle.}
+  \item \textbf{Lemme.} Si $A \to A'$ est fidèlement plat et $B$ une
+  $A$-algèbre, $B$ est de type fini (resp. de présentation finie) si et
+  seulement si $B \otimes_A A'$ l'est sur $A'$. Les mêmes arguments pour les
+  modules donnent : si $f$ est fpqc et $F$ quasi-cohérent sur $S$, $F$ est de
+  type fini (resp. de présentation finie, localement libre de type fini,
+  localement libre de rang $n$) si et seulement si $F'$ l'est.
+  \item Si $f$ est fidèlement plat, $g$ est plat (resp. fidèlement plat) si et
+  seulement si $g'$ l'est.
+\end{itemize}
+
+Sous l'hypothèse que $f$ est fpqc, $Y' \to Y$ est une application quotient
+universelle, ce qui donne la descente des propriétés topologiques (rubrique
+(2)) : si $g'$ est ouvert (resp. fermé, générisant, un homéomorphisme sur son
+image, un homéomorphisme), $g$ l'est ; donc $g$ est universellement ouvert
+(resp. universellement fermé, un homéomorphisme universel) si et seulement si
+$g'$ l'est.\footnote{La page annonce un « Th. » dont l'énoncé est laissé en
+points de suspension, puis passe au corollaire. Une rubrique marginale
+« Quelques contre-exemples » n'est suivie d'aucun.} Il suit que $g$ est séparé
+(resp. propre) si et seulement si $g'$ l'est, et que $g$ est un isomorphisme si
+et seulement si $g'$ l'est : $g$ est alors un homéomorphisme universel, et
+$\mathcal{O}_Y \to g_*\mathcal{O}_X$ est un isomorphisme parce qu'il le devient
+après le changement de base plat $Y' \to Y$.
+
+Les immersions ouvertes, les immersions fermées et plus généralement les
+immersions quasi-compactes descendent de même.\footnote{La page écrit
+« $g$ une imm. (ouverte) ssi $g'$ l'est », le mot « ouverte » lu avec doute.
+Pour une immersion quelconque, la descente se heurte à la question que la page
+pose elle-même pour les parties localement fermées non rétrocompactes (page 3)
+et pour les sous-schémas non rétrocompacts (page 5) ; on s'en tient aux cas
+qu'elle établit.}
+
+La page se termine par une liste, reliée par un trait aux corollaires : c'est
+l'inventaire des propriétés qui descendent le long d'un morphisme fpqc.
+
+\begin{itemize}
+  \item surjectif, radiciel ;
+  \item plat, fidèlement plat ;
+  \item quasi-compact, quasi-séparé, qcqs, de type fini, de présentation
+  finie, localement de type fini, localement de présentation finie ;
+  \item séparé, propre, universellement fermé, universellement ouvert,
+  homéomorphisme universel ;
+  \item immersion fermée, immersion ouverte ;
+  \item affine, entier, fini ;
+  \item quasi-affine, quasi-fini ;
+  \item lisse, non ramifié, étale ; formellement lisse, formellement
+  étale.\footnote{La dernière ligne est ouverte par un crochet que rien ne
+  ferme, et « formellement lisse » est suivi d'un point d'interrogation : la
+  page ne se prononce pas, et nous non plus. Pour lisse, non ramifié et étale,
+  la descente est établie dans EGA IV (§ 17). Le mot « net » de la page est le
+  nom d'EGA pour « non ramifié ». Deux lignes de la liste sont biffées et
+  illisibles, et la page porte « TSVP » en bas à droite.}
+\end{itemize}
+
+\pagerange{5}{6}
+\subsection*{(3) Descente effective (pages 5 et 6)}
+
+\textbf{Théorème.} Si $f : S' \to S$ est fpqc, $f$ est un morphisme de
+descente effective, universellement, pour la catégorie fibrée des modules
+quasi-cohérents.
+
+Autrement dit --- et c'est ce que la page se donne à faire, « Expliquer ce que
+cela signifie » ---, se donner un module quasi-cohérent $F$ sur $S$ revient au
+même que se donner un module quasi-cohérent $F'$ sur $S'$ muni d'un isomorphisme
+$\varphi : p_1^* F' \simeq p_2^* F'$ sur $S''$ qui vérifie la condition de
+cocycle sur $S' \times_S S' \times_S S'$ ; et cela reste vrai après tout
+changement de base $T \to S$.\footnote{La page n'écrit pas cette explication ; elle
+en note seulement la nécessité. Celle qu'on donne est la définition usuelle.}
+
+Les corollaires en découlent en appliquant le théorème à des sous-objets.
+
+\begin{itemize}
+  \item Pour $F$ quasi-cohérent sur $S$, la suite des ensembles de
+  sous-modules quasi-cohérents $\mathrm{Ssf}(F) \to \mathrm{Ssf}(F')
+  \rightrightarrows \mathrm{Ssf}(F'')$ est exacte.\footnote{La page emploie la même
+  abréviation $\mathrm{Ssf}$ pour les sous-modules d'un module et pour les
+  sous-schémas fermés d'un schéma. Un premier énoncé, cerclé et barré, le
+  démontrait en se ramenant au cas affine ; son croquis en marge
+  ($N' \cap M = N_0$) indique qu'il s'agit bien de sous-modules.}
+  \item Les suites analogues pour les sous-schémas fermés ($\mathrm{Ssf}$),
+  ouverts ($\mathrm{Sso}$) et rétrocompacts, c'est-à-dire dont l'immersion est
+  quasi-compacte ($\mathrm{Ssrc}$), sont exactes. La page demande si l'on peut
+  descendre les sous-schémas non rétrocompacts ; la question reste ouverte sur
+  la page.
+  \item $f$ est un morphisme de descente, universellement, pour la catégorie
+  fibrée des schémas : la suite
+  \[
+  \operatorname{Hom}_S(X, Y) \to \operatorname{Hom}_{S'}(X', Y')
+  \rightrightarrows \operatorname{Hom}_{S''}(X'', Y'')
+  \]
+  est exacte. Lorsque $Y$ est quasi-séparé sur $S$, cela suit du corollaire
+  précédent appliqué aux graphes, qui sont des sous-schémas rétrocompacts de
+  $X \times_S Y$ ; en général on se ramène à $S$ et $Y$ affines. En langage
+  d'aujourd'hui : les foncteurs représentables sont des faisceaux pour la
+  topologie fpqc.
+  \item Une immersion fermée (resp. ouverte) descend ; les algèbres
+  quasi-cohérentes descendent.
+\end{itemize}
+
+\textbf{Théorème.} Si $f$ est fpqc, $f$ est un morphisme de descente
+effective, universellement, pour la catégorie fibrée des schémas
+\emph{affines} sur la base.
+
+\textbf{Corollaire.} $g$ est affine (resp. quasi-affine, entier, fini, fini
+localement libre) si et seulement si $g'$ l'est. Pour « quasi-affine », on
+utilise que $g$ est quasi-affine si et seulement si $g$ est qcqs et
+$X \to \operatorname{Spec} g_*(\mathcal{O}_X)$ est une immersion
+ouverte.\footnote{La page écrit « immersion ». Quand $g$ est qcqs, le morphisme
+$X \to \operatorname{Spec} g_*(\mathcal{O}_X)$ est quasi-compact, et c'est une
+immersion si et seulement si c'est une immersion ouverte : les deux énoncés
+sont équivalents.} Pour « fini » et « entier », on est ramené au lemme de la
+page 6 : si $A \to A'$ est fidèlement plat, une $A$-algèbre $B$ est finie (resp.
+entière) si et seulement si $B \otimes_A A'$ l'est sur $A'$. « Fini est une
+histoire de module » ; entier s'y ramène en regardant les sous-algèbres
+$A[x]$, $x \in B$.
+
+\pagerange{6}{6}
+\subsection*{(4) Descente de l'amplitude, et (5) la rubrique vide (page 6)}
+
+Soient $g : X \to Y$ un $S$-morphisme qcqs, $L$ un faisceau inversible sur $X$,
+et $f : S' \to S$ fpqc. Alors $L$ est très ample (resp. ample) relativement à
+$Y$ si et seulement si $L'$ l'est relativement à $Y'$.
+
+La démonstration de la page est la suivante. Comme $g$ est qcqs, $g_*(L)$ est
+quasi-cohérent et $g_*(L)' \simeq g'_*(L')$. « Très ample » signifie que
+$g^* g_*(L) \to L$ est surjectif, ce qui définit
+$X \to \mathbf{P}(g_*(L))$, et que ce morphisme est une immersion ; la
+surjectivité descend, et l'immersion, qui est quasi-compacte, aussi. Si $g$ est
+de type fini, « ample » se ramène à « très ample », localement sur $Y$. En
+général, on utilise le critère : pour $Y$ quasi-compact, $L$ est ample
+relativement à $Y$ si et seulement si, pour tout module quasi-cohérent de type
+fini $F$ sur $X$, $g^* g_*(F \otimes L^{\otimes n}) \to F \otimes L^{\otimes n}$
+est surjectif pour $n$ assez grand.\footnote{La page écrit
+$f^*(f_*(F(n)))$ et « $F$ … sur $S$ » : ce sont les lettres du morphisme de
+descente et de la base, mis pour le morphisme structural $g$ et pour $X$. On
+corrige.} On retrouve la descente des morphismes quasi-affines, puisque $g$ est
+quasi-affine si et seulement si $\mathcal{O}_X$ est ample relativement à $Y$.
+
+\textbf{NB.} Parmi les propriétés usuelles de morphismes, les seules de la liste
+qui ne descendent pas sont « projectif » et « quasi-projectif ».\footnote{La
+page dit « les seuls exemples », avec un mot illisible ; on restreint
+l'affirmation à ce qu'elle peut vouloir dire. La raison est dans ce qui précède :
+l'amplitude d'un faisceau \emph{donné} descend, mais un faisceau inversible sur
+$X'$ ne provient pas en général d'un faisceau sur $X$. La projectivité n'est
+d'ailleurs pas même locale sur la base pour la topologie de Zariski, comme le
+montre un exemple classique de Hironaka.}
+
+La page se clôt sur un titre : « (5) Questions d'effectivité de données de
+descente ». Rien n'est écrit dessous, et le bas de la feuille est
+vide.\footnote{On ne sait pas ce qu'il comptait y mettre. Les réponses
+connues aujourd'hui sont celles de l'exposé VIII de SGA 1 : une donnée de
+descente est effective pour les schémas affines sur la base, et plus
+généralement pour les schémas quasi-projectifs munis d'un faisceau ample
+compatible avec la donnée ; elle ne l'est pas en général, et c'est l'une des
+origines des espaces algébriques.}
+
+\pagerange{7}{9}
+\section*{II. Trois classes de morphismes (pages 7 à 9)}
+
+\pagerange{7}{7}
+\subsection*{Morphismes radiciels, homéomorphismes universels, morphismes universellement ouverts (page 7)}
+
+Soit $f : X \to Y$ un morphisme de schémas. Les conditions suivantes sont
+équivalentes :\footnote{La page numérote ces conditions a) à d). On les
+renumérote pour réserver a), b), c) aux règles de stabilité de la page 10,
+auxquelles la même page renvoie deux lignes plus bas.}
+
+\begin{itemize}
+  \item[(i)] $f$ est universellement injectif ;
+  \item[(ii)] pour tout $y \in Y$, la fibre $X_y$ a au plus un point $x$, et
+  $k(x)$ est une extension radicielle de $k(y)$ ;
+  \item[(iii)] pour tout corps $K$, l'application $X(K) \to Y(K)$ est
+  injective ;
+  \item[(iv)] le morphisme diagonal $\delta_f : X \to X \times_Y X$ est
+  surjectif.
+\end{itemize}
+
+Ces morphismes sont dits \emph{radiciels}. Une immersion est radicielle ; donc
+le morphisme diagonal, qui est une immersion, l'est. La classe des morphismes
+radiciels satisfait les trois règles a), b), c) : stabilité par changement de
+base, par composition, et si $gf$ est radiciel, $f$ l'est.
+
+\textbf{Proposition.} Un morphisme entier, radiciel et surjectif est un
+homéomorphisme universel. La page ajoute qu'on peut démontrer la réciproque,
+« mais c'est nettement plus difficile », et ne la démontre pas.\footnote{La
+réciproque est vraie : un homéomorphisme universel est entier, radiciel et
+surjectif (EGA IV, § 18.12). « surjectif » est ajouté au-dessus de la ligne dans
+l'énoncé.}
+
+Exemples : si $k'/k$ est une extension radicielle (par exemple la clôture
+parfaite), $X_{k'} \to X$ est entier, radiciel et surjectif, donc un
+homéomorphisme universel ; de même la normalisation d'une courbe à point de
+rebroussement, $t \mapsto (t^2, t^3)$ de la droite vers la cubique
+$y^2 = x^3$.
+
+\emph{Morphismes universellement ouverts.} Un morphisme ouvert est
+générisant ; la réciproque vaut pour un morphisme localement de présentation
+finie. Donc un morphisme universellement ouvert est universellement
+générisant, et réciproquement s'il est localement de présentation finie. Les
+deux classes sont stables par changement de base et par
+composition.\footnote{La page écrit « satisfont 1), 2) », qui renvoie à ces
+deux règles. Le mot « générisant » y est chaque fois lu avec doute ; c'est le
+seul qui donne un sens mathématique juste aux phrases.}
+
+\pagerange{8}{8}
+\subsection*{Morphismes quasi-affines (page 8)}
+
+Un schéma est \emph{quasi-affine} s'il est quasi-compact et isomorphe à un
+ouvert d'un schéma affine. Pour un schéma $X$ qcqs, d'anneau
+$A = \Gamma(X, \mathcal{O}_X)$, les conditions suivantes sont équivalentes :
+
+\begin{itemize}
+  \item[(a)] $X$ est quasi-affine ;
+  \item[(b)] $X \to \operatorname{Spec} A$ est une immersion ouverte ;
+  \item[(b')] $X \to \operatorname{Spec} A$ est un homéomorphisme sur son
+  image ;
+  \item[(c)] $\mathcal{O}_X$ est ample, c'est-à-dire : les $X_f$
+  ($f \in A$) forment une base de la topologie ; ou : les $X_f$ affines en
+  forment une ; ou : tout module quasi-cohérent est engendré par ses sections
+  globales ; ou : tout idéal quasi-cohérent l'est ;
+  \item[(d)] il existe un faisceau inversible $L$ tel que $L$ et $L^{-1}$
+  soient amples ;
+  \item[(d')] tout faisceau inversible est ample.\footnote{En (d), « inversible »
+  est écrit au-dessus d'un « ample » biffé.}
+\end{itemize}
+
+Les morphismes quasi-affines sont stables par changement de base et par
+composition ; une immersion quasi-compacte est quasi-affine, donc la diagonale
+d'un morphisme quasi-séparé l'est ; si $gf$ est quasi-affine et $g$
+quasi-séparé, $f$ est quasi-affine.
+
+\textbf{Théorème.} Un morphisme séparé et quasi-fini (de type fini, à fibres
+finies) est quasi-affine, donc quasi-projectif. C'est une forme du
+\emph{Main Theorem} de Zariski.\footnote{Le nom n'est pas sur la page.}
+
+Les définitions sont celles d'EGA II :\footnote{Elles diffèrent de celles de
+plusieurs manuels d'aujourd'hui, où « projectif » veut dire « immersion fermée
+dans un $\mathbf{P}^n_Y$ ». Dans la convention d'EGA, $\mathbf{P}(E)$ est pris
+pour un module quasi-cohérent de type fini $E$ quelconque.} $f$ est
+\emph{quasi-projectif} s'il est de type fini et s'il existe un faisceau
+inversible $f$-ample ; \emph{propre} s'il est séparé, de type fini et
+universellement fermé ; et, lorsque $Y$ est quasi-compact, $f$ est
+\emph{projectif} si et seulement s'il est propre et quasi-projectif, ou encore
+universellement fermé et quasi-projectif.\footnote{La page écrit
+« projectif $=$ propre $+$ quasi-projectif » sans condition sur $Y$. L'égalité
+demande que $Y$ soit quasi-compact : sans cela un faisceau ample relatif peut
+exiger une infinité de sections, et le module $E$ de la définition n'est plus
+de type fini.}
+
+Le tableau encadré de la page se lit ainsi, chaque flèche étant une
+implication :
+
+\begin{tikzcd}
+\text{imm. fermée} \arrow[r, Rightarrow] \arrow[d, Rightarrow] & \text{fini} \arrow[r, Rightarrow] \arrow[d, Rightarrow] & \text{entier} \arrow[r, Rightarrow] \arrow[d, Rightarrow] & \text{affine} \arrow[d, Rightarrow] \\
+\text{imm. quasi-compacte} \arrow[d, Rightarrow] & \text{projectif} \arrow[r, Rightarrow] \arrow[d, Rightarrow] & \text{univ. fermé} & \text{séparé} \\
+\text{quasi-affine de t.f.} \arrow[r, Rightarrow] & \text{quasi-projectif} &  &
+\end{tikzcd}
+
+avec en outre : projectif $\Rightarrow$ propre $\Rightarrow$ universellement
+fermé ; propre $\Rightarrow$ séparé ; quasi-projectif $\Rightarrow$ séparé ;
+fini $\Rightarrow$ affine de type fini $\Rightarrow$ quasi-affine de type
+fini.\footnote{Sur la page, « propre » est intercalé sur la flèche qui va de
+« proj » à « univ. fermé » ; on l'a sorti du dessin. Une flèche barrée, venant
+de la marge, entre dans le cadre ; « affine de t.f. » est écrit contre une
+flèche oblique. Toutes les implications sont justes avec les définitions
+d'EGA ; celle de « fini » vers « projectif » est la moins évidente.}
+
+\textbf{Théorème.} Un morphisme est fini si et seulement s'il est propre et à
+fibres finies, si et seulement s'il est projectif et à fibres
+finies.\footnote{La page qualifie l'énoncé de « cas noethérien », lu avec
+doute. L'énoncé vaut sans hypothèse noethérienne (EGA IV, § 18.12) ; le cas
+noethérien est dans EGA III. Une seconde assertion (b), sur les morphismes
+séparés à fibres finies, est entièrement biffée.}
+
+\pagerange{9}{9}
+\subsection*{Faisceaux amples (page 9)}
+
+La marge porte « EGA II 4.5 », et la page résume en effet ce paragraphe
+d'EGA. Soient $X$ un schéma qcqs et $L$ un faisceau inversible ; pour
+$f \in \Gamma(X, L^{\otimes n})$, $n \geqslant 1$, on note $X_f$ l'ouvert où
+$f$ ne s'annule pas. Les conditions suivantes sont équivalentes :
+
+\begin{itemize}
+  \item[(a)] les $X_f$ forment une base de la topologie de $X$ ;
+  \item[(a')] les $X_f$ affines en forment une ;
+  \item[(b)] pour tout module quasi-cohérent de type fini $F$,
+  $F \otimes L^{\otimes n}$ est engendré par ses sections globales pour $n$
+  grand ; autrement dit $F$ est quotient d'une somme de copies de
+  $L^{\otimes -n}$ ;
+  \item[(b')] la même chose pour les idéaux quasi-cohérents de type fini.
+\end{itemize}
+
+Si $X$ est au-dessus d'un schéma affine $S$, il suffit pour cela qu'une
+puissance $L^{\otimes n}$, $n > 0$, soit très ample relativement à $S$ ; la
+condition est nécessaire si $X$ est de type fini sur $S$, et alors
+$L^{\otimes n}$ est très ample pour tout $n$ assez grand. On dit que $L$ est
+\emph{ample} s'il satisfait ces conditions ; si $f : X \to Y$ est qcqs, $L$ est
+\emph{$f$-ample} s'il existe un recouvrement de $Y$ par des ouverts affines
+$Y_i$ au-dessus desquels $L$ est ample ; c'est alors vrai au-dessus de tout
+ouvert affine. Si une puissance de $L$ est très ample relativement à $Y$, $L$
+est $f$-ample ; la réciproque vaut si $f$ est de type fini et $Y$
+quasi-compact.
+
+\textbf{Proposition.} Soient $f : X \to Y$ et $g : Y \to Z$ qcqs, avec $Z$
+quasi-compact, $L$ ample relativement à $Y$ et $M$ ample relativement à $Z$.
+Il existe $n_0$ tel que $L \otimes f^*(M^{\otimes n})$ soit ample
+relativement à $Z$ pour tout $n \geqslant n_0$. De même pour « très
+ample ».\footnote{La page suppose seulement $g$ quasi-compact. Pour que le
+même $n_0$ convienne partout, il faut que $Z$ soit quasi-compact ; sans cela
+on n'a l'énoncé qu'au-dessus de chaque ouvert quasi-compact de $Z$. « idem avec
+très amples » est sur la page ; dans ce cas on peut prendre $n = 1$.}
+
+\pagerange{10}{12}
+\section*{III. Plans de cours (pages 10 à 12)}
+
+Trois pages de plans, les deux premières à l'encre, la troisième au crayon,
+surchargées de flèches, d'accolades et de reprises. On n'en donne pas une
+lecture ligne à ligne --- la transcription le fait ---, mais ce qu'elles fixent :
+une manière d'organiser les classes de morphismes, et deux ordres de
+traitement.
+
+\pagerange{10}{11}
+\subsection*{Les règles de stabilité a), b), c) (pages 10 et 11)}
+
+Soit $\mathcal{M}$ une classe de morphismes de schémas contenant les
+isomorphismes.\footnote{La page écrit, après la règle a), « ($\Rightarrow$ tout
+isom. $\in \mathcal{M}$) ». La stabilité par changement de base ne donne cela
+que si $\mathcal{M}$ contient déjà des identités ; on le suppose, comme le fait
+toute la suite de la page.}
+
+\begin{itemize}
+  \item[a)] Si $f \in \mathcal{M}$, tout changement de base $f'$ de $f$ est
+  dans $\mathcal{M}$.
+  \item[b)] Si $f, g \in \mathcal{M}$, alors $gf \in \mathcal{M}$.
+  \item[c)] Si $gf \in \mathcal{M}$, alors $f \in \mathcal{M}$.
+\end{itemize}
+
+De a) et b) suit que $f_1 \times_S f_2 \in \mathcal{M}$ si
+$f_1, f_2 \in \mathcal{M}$, et la règle
+\[
+(*) \qquad gf \in \mathcal{M} \text{ et } \Delta_g \in \mathcal{M}
+\ \Longrightarrow\ f \in \mathcal{M} .
+\]
+En effet, pour $f : X \to Y$ et $g : Y \to S$, $f$ se factorise en
+$X \xrightarrow{\Gamma_f} X \times_S Y \xrightarrow{\mathrm{pr}_2} Y$ ; le
+graphe $\Gamma_f$ est le changement de base de $\Delta_g : Y \to Y \times_S Y$
+par $f \times \mathrm{id}_Y$, et $\mathrm{pr}_2$ celui de $gf : X \to S$ par
+$g$.
+
+\begin{tikzcd}
+X \arrow[r, "\Gamma_f"] \arrow[d, "f"'] & X \times_S Y \arrow[d, "f \times \mathrm{id}_Y"] \\
+Y \arrow[r, "\Delta_g"'] & Y \times_S Y
+\end{tikzcd}
+
+Sous a) et b), pour un morphisme $g : Y \to S$, les conditions suivantes sont
+équivalentes :
+
+\begin{itemize}
+  \item[(i)] $\Delta_g \in \mathcal{M}$ ;
+  \item[(ii)] pour tout $S' \to S$, toute section de $Y' \to S'$ est dans
+  $\mathcal{M}$ ;
+  \item[(iii)] pour tout couple de $S$-morphismes $u, v : X \rightrightarrows Y$,
+  le noyau $\operatorname{Ker}(u, v) \to X$ est dans $\mathcal{M}$ ;
+  \item[(iv)] pour tout $S$-morphisme $f : X \to Y$, le graphe $\Gamma_f$ est
+  dans $\mathcal{M}$ ;
+  \item[(v)] pour tout $S' \to S$ et tout $S'$-morphisme $f : X \to Y'$,
+  $g'f \in \mathcal{M}$ entraîne $f \in \mathcal{M}$.
+\end{itemize}
+
+Et c) équivaut, sous a) et b), à : toutes les diagonales sont dans
+$\mathcal{M}$.\footnote{La page écrit la dernière équivalence
+« $gf \in \mathcal{M} \Rightarrow f \in \mathcal{M}$ » pour $g$ seul. Pour
+qu'elle entraîne (i), il faut la demander aussi pour les changements de base de
+$g$ : c'est ce qui permet d'y prendre pour $f$ une section, comme en (ii). Une
+variante entre crochets, pour les noyaux, suppose de plus la propriété
+« locale en bas et vraie au cas affine ».}
+
+Les plans passent alors les classes en revue, en notant pour chacune les règles
+qu'elle satisfait. Morphismes quasi-compacts, de type fini : a) et b).
+Localement de type fini, immersions, morphismes séparés : a), b), c) ; si $f$
+est localement de type fini, sa diagonale est localement de présentation finie.
+Morphismes \emph{séparés} : la diagonale est fermée, ou les noyaux de couples
+sont fermés, ou encore vaut le principe de prolongement des identités --- deux
+$S$-morphismes d'un schéma réduit $Z$ vers $X$ qui coïncident sur un ouvert
+dense sont égaux.\footnote{La page 11 écrit « pour $X$ réduit » ; c'est la
+source $Z$ qui doit l'être, comme le dit la page 10 (« morphismes des schémas
+réduits dedans »).} Morphismes \emph{quasi-séparés} : la diagonale est
+quasi-compacte ; sur une base quasi-séparée, cela revient à dire que
+l'intersection de deux ouverts quasi-compacts est quasi-compacte. Morphismes
+\emph{qcqs} : a), b), et si $gf$ est qcqs avec $g$ quasi-séparé, $f$ l'est ;
+si $f$ est qcqs et $F$ quasi-cohérent, $f_*(F)$ et les $R^i f_*(F)$ sont
+quasi-cohérents.\footnote{La page 10 écrit « Si $f$ qu.-coh. » pour « si $f$
+cohérent » ; la transcription le signale.} Morphismes de présentation finie
+(localement de présentation finie et qcqs) : a), b), et si $gf$ est de
+présentation finie avec $g$ de type fini et quasi-séparé, $f$ l'est. Toutes ces
+notions sont locales sur la base.
+
+Au milieu de la page 10, un NB mérite d'être rapporté pour lui-même : tous les
+schémas envisagés par « les Anciens » étaient de type fini et séparés sur des
+corps ; ceux qu'on envisage couramment pourraient être supposés séparés,
+pratiquement tous ceux qu'on rencontre sont quasi-séparés, et beaucoup sont
+quasi-compacts --- « mais il y en a d'importants qui ne le sont pas ».
+
+\pagerange{10}{11}
+\subsection*{Deux programmes (pages 10 et 11)}
+
+Le bas de la page 10 donne un plan en quatre temps :
+
+\begin{itemize}
+  \item[a)] Traversée du désert ;
+  \item[b)] Passage au quotient, et langage faisceautique (descente
+  fidèlement plate) ;
+  \item[c)] Notion « géométrique » sur un corps ;
+  \item[d)] Ensembles constructibles, passage à la limite.
+\end{itemize}
+
+C'est à peu près, sans que la page le dise, l'ordre de la première moitié
+d'EGA IV.\footnote{Rapprochement de nous : EGA IV traite d'abord des conditions
+de finitude relatives, puis de la platitude et de la descente, puis des
+propriétés « géométriques » par changement de corps, puis des limites
+projectives et des propriétés constructibles.}
+
+La page 11 dresse un autre programme, en trois blocs. I : morphismes
+quasi-compacts, de type fini, localement de présentation finie ; immersions
+ouvertes et fermées ; morphismes séparés ; les règles de stabilité. II :
+schémas noethériens, localement noethériens, artiniens ; irréductibles,
+connexes ; intègres ; normaux, réguliers ; puis les schémas locaux --- un
+schéma quasi-compact qui n'a qu'un point fermé est le spectre d'un anneau
+local, puisque tout ouvert affine contenant ce point contient tous les
+autres.\footnote{La page définit le schéma local par « $\exists !$ pt fermé, et
+quasi-compact » ; la justification entre tirets est de nous.} III : les
+morphismes affines, quasi-séparés, qcqs, de présentation finie ; finis,
+entiers, quasi-finis ; projectifs, quasi-projectifs, quasi-affines ; radiciels,
+homéomorphismes universels ; propres. Des lettres cerclées (a) à (d) y fixent un
+ordre de traitement qui n'est pas celui de la liste : projectifs, puis propres,
+puis finis, puis radiciels. Une rubrique « Oubli » rappelle trois points : la
+cohérence du faisceau structural d'un schéma localement noethérien, la
+structure réduite induite sur un fermé, et qu'un schéma localement noethérien
+est quasi-séparé. Une bulle ajoute : « on verra tôt les schémas non
+séparés ». Suivent le prolongement d'un module quasi-cohérent, ou d'un
+sous-module, depuis un ouvert rétrocompact, et une accolade où « plat,
+fidèlement plat » est encadré.\footnote{La page est traversée de longues barres
+obliques, comme pour marquer le bloc comme fait ; elle reste lisible. Une
+seconde bulle ne se lit qu'en partie.}
+
+\pagerange{12}{12}
+\subsection*{Le plan au crayon : schémas comme foncteurs, et $P(M)$ (page 12)}
+
+La page 12 est la suite d'un plan à rubriques cerclées, dont se lisent (d) à
+(h). On y voit apparaître le point de vue que les pages 14 et 16 développeront.
+
+(d) Schémas de type fini sur $S$.\footnote{La page les définit par
+« quasi-comp. et qu.-sép. sur $S$ et loc. de type fini sur $S$ ». La
+convention d'EGA ne demande pas « quasi-séparé » ; la page adopte une variante,
+qu'on signale sans la corriger, puisque c'est une définition.} Puis : « Schémas
+comme foncteurs : avantages respectifs des arguments anneaux (schémas affines)
+et des arguments schémas (vrais espaces localement annelés) ». La rubrique (e),
+biffée, annonçait un « corollaire du théorème de représentabilité ».
+
+(f) Le schéma $P(M)$, pour $M$ quasi-cohérent sur $S$. Il représente un
+foncteur « remarquable » sur la catégorie des espaces localement annelés
+au-dessus de $S$ : celui qui associe à $T$ l'ensemble des quotients inversibles
+de $M_T$. La page ajoute entre parenthèses « univ. des topos loc. annelés sur
+$S$ ».\footnote{Ce point de vue sera développé par Monique Hakim, élève de
+Grothendieck, dans \emph{Topos annelés et schémas relatifs} (1972). La page ne
+cite personne ; le rapprochement est de nous.} Ses dépendances : par
+changement de base, fonctorielle en $S$, et en $M$ pour les épimorphismes. Les
+schémas quasi-projectifs sur $S$ affine se plongent dans un $P(M)$, avec $M$ de
+type fini.
+
+Relation avec le fibré vectoriel $V(M) = \operatorname{Spec}(\operatorname{Sym} M)$,
+dont les points à valeurs dans $T$ sont les formes linéaires
+$M_T \to \mathcal{O}_T$. Soit $V(M)^{*} \subset V(M)$ le sous-foncteur ouvert
+des formes \emph{surjectives}. Le morphisme $V(M)^{*} \to P(M)$ qui envoie une
+forme surjective sur le quotient qu'elle définit est un épimorphisme de
+faisceaux pour la topologie de Zariski --- tout quotient inversible admet
+localement une telle forme, là où il est trivial. Le groupe
+$\mathbb{G}_{m,S}$ opère sur $V(M)$ par homothéties, laisse $V(M)^{*}$ stable
+et y opère librement, et
+\[
+P(M) \simeq V(M)^{*} / \mathbb{G}_m \qquad \text{(isomorphisme de faisceaux de Zariski).}
+\]
+C'est la présentation de l'espace projectif comme quotient de « l'espace
+affine privé de l'origine » par les homothéties, écrite pour un module
+quelconque.\footnote{La page écrit que $\mathbb{G}_m$ « opère sur $V(M)^{*}$,
+laissant $V(M)^{*}$ stable » : la première occurrence est à lire $V(M)$. Le
+quotient est un quotient de faisceaux, non de schémas : c'est ce que dit la
+parenthèse de la page.}
+
+(g) Limites projectives finies dans la catégorie des schémas. (h) Spectre d'une
+algèbre quasi-cohérente, et morphismes affines.
+
+\pagerange{14}{14}
+\section*{IV. Les schémas comme foncteurs (pages 14 et 16)}
+
+\subsection*{Morphismes vers un schéma affine, et le diagramme des faisceaux (page 14)}
+
+\textbf{Proposition.} Soient $\mathcal{X}$ un espace localement annelé au-dessus
+de $k$ et $A$ une $k$-algèbre. L'application
+\[
+\operatorname{Hom}_k(\mathcal{X}, \operatorname{Spec} A) \longrightarrow
+\operatorname{Hom}_{k\text{-alg}}\bigl(A, \Gamma(\mathcal{X}, \mathcal{O}_{\mathcal{X}})\bigr)
+\]
+est bijective.
+
+La page construit l'inverse. Soit $u : A \to \Gamma(\mathcal{X}, \mathcal{O}_{\mathcal{X}})$.
+Pour $x \in \mathcal{X}$, on pose $\varphi(x) = $ le noyau du composé
+$A \to \Gamma(\mathcal{X}, \mathcal{O}_{\mathcal{X}}) \to k(x)$, qui est un idéal
+premier. Pour $f \in A$, $\varphi^{-1}(Y_f)$ est l'ensemble des $x$ où $u(f)_x$
+est inversible, c'est-à-dire l'ouvert $\mathcal{X}_{u(f)}$ : $\varphi$ est
+continue. Les homomorphismes
+$A_f \to \Gamma(\mathcal{X}_{u(f)}, \mathcal{O}_{\mathcal{X}})$, qui rendent $f$
+inversible, sont compatibles aux restrictions et définissent un morphisme
+d'espaces annelés,\footnote{La page écrit
+$\Gamma(U_f, \mathcal{O}_{\mathcal{X}})$ ; l'ouvert de $\mathcal{X}$ dont il
+s'agit est $\varphi^{-1}(U_f) = \mathcal{X}_{u(f)}$.} qui est local sur les
+fibres parce que $\mathcal{X}$ est localement annelé.\footnote{Cette dernière
+phrase est sur la page en partie illisible ; on donne la raison usuelle.}
+
+\emph{Conséquence.} La catégorie des $k$-schémas est la catégorie des
+schémas au-dessus de $S = \operatorname{Spec} k$ ; mais la catégorie
+$\mathrm{Sch}_{/S}$ est importante sans que $S$ soit nécessairement affine.
+
+Le grand diagramme de la page met en place trois catégories et leurs
+catégories de préfaisceaux et de faisceaux de Zariski :
+\[
+\mathrm{Aff}_k \simeq (\mathrm{Alg}_k)^{\circ} \subset \mathrm{Sch}_k \subset \mathrm{Locan}_k ,
+\]
+où $\mathrm{Locan}_k$ est la catégorie des espaces localement annelés au-dessus
+de $k$, chaque inclusion étant pleine. Les préfaisceaux sur $\mathrm{Aff}_k$
+sont les foncteurs covariants $\mathrm{Alg}_k \to \mathrm{Ens}$. La restriction
+des préfaisceaux de $\mathrm{Sch}_k$ à $\mathrm{Aff}_k$ n'est pas pleinement
+fidèle, et la page le note. En revanche la restriction des \emph{faisceaux} de
+Zariski est une équivalence :
+\[
+\widetilde{\mathrm{Sch}_k} \xrightarrow{\ \sim\ } \widetilde{\mathrm{Aff}_k}
+\simeq \{\text{faisceaux de Zariski } \mathrm{Alg}_k \to \mathrm{Ens}\} ,
+\]
+parce que tout schéma est recouvert par des schémas affines.\footnote{La page
+trace la flèche de restriction sans l'étiqueter « $\simeq$ ». L'équivalence est
+le lemme de comparaison des sites (SGA 4, exposé III), aux précautions d'univers
+près ; c'est elle qui permet, page 16, de parler indifféremment de foncteurs sur
+les schémas et de foncteurs sur les algèbres.}
+
+La page pose alors la question : comment exprimer en algèbre commutative
+qu'un foncteur $F : \mathrm{Alg}_k \to \mathrm{Ens}$ est un faisceau de
+Zariski ? La réponse est : pour toute $k$-algèbre $A$ et toute famille finie
+$(f_i)$ d'éléments engendrant l'idéal unité, la suite
+\[
+F(A) \to \prod_i F(A_{f_i}) \rightrightarrows \prod_{i,j} F(A_{f_i f_j})
+\]
+est exacte.\footnote{La page pose la question sans y répondre ; la réponse est
+de nous. Elle contient le cas des sommes finies, puisque
+$\operatorname{Spec}(A \times B)$ est recouvert par les deux ouverts
+$\operatorname{Spec} A$ et $\operatorname{Spec} B$.} Un ajout au crayon rappelle
+que $\widehat{C}_{/S} \simeq \widehat{C_{/S}}$ pour $C = \mathrm{Aff}_k$ :
+préfaisceaux au-dessus d'un objet et préfaisceaux sur la catégorie
+au-dessus.\footnote{La transcription écrit les deux membres de la même façon,
+$\widehat{C}_{/S} \approx \widehat{C}_{/S}$ ; c'est l'équivalence classique
+qu'on donne, la seule qui ait un sens ici. Le signe $\approx$ est souligné d'un
+trait épais.} Suivent deux notes : les sommes s'interprètent en termes de
+faisceaux (sup de sous-faisceaux), et les limites projectives finies ne posent
+pas de difficulté.
+
+\pagerange{16}{16}
+\subsection*{Le critère de représentabilité (page 16)}
+
+Un sous-foncteur $F_i \subset F$ est \emph{ouvert} si, pour tout schéma $T$ et
+tout $T \to F$, le produit fibré $T \times_F F_i$ est représenté par un ouvert
+de $T$. Une famille de sous-foncteurs ouverts \emph{recouvre} $F$ si, pour
+tout $T \to F$, les ouverts correspondants recouvrent $T$ ; c'est ce que la page
+écrit $F = \operatorname{Sup} F_i$, le sup étant pris dans la catégorie des
+faisceaux.
+
+\textbf{Proposition.} Un foncteur $F : (\mathrm{Sch}_{/S})^{\circ} \to \mathrm{Ens}$
+est représentable si et seulement si (a) $F$ est un faisceau de Zariski, et
+(b) $F$ est recouvert par une famille de sous-foncteurs ouverts représentables.
+
+\textbf{Corollaire.} On peut exiger en (b) que les $F_i$ soient des schémas
+affines. En particulier, pour $S = \operatorname{Spec} k$, un foncteur
+$\mathrm{Alg}_k \to \mathrm{Ens}$ est un schéma si et seulement si c'est un
+faisceau de Zariski qu'on peut recouvrir par des sous-foncteurs ouverts
+affines.\footnote{La page écrit : « Pour qu'un foncteur $\mathrm{Alg}_k \to
+(\mathrm{Ens})$ soit un faisceau il f. et il s. que ce soit un faisceau, et
+qu'on le puisse recouvrir… » ; le premier « faisceau » est un lapsus pour
+« schéma », que la transcription ne relève pas.}
+
+Et la page conclut : « Ainsi, la notion de schéma est explicitée sans recours à
+la notion d'espaces \emph{topologiques}, faisceau d'anneaux, espaces loc.
+annelés ». C'est la définition des schémas par leur \emph{foncteur des points},
+qu'on trouve ainsi rédigée dans le traité de Demazure et Gabriel (1970).\footnote{La
+page ne cite rien ; le rapprochement est de nous et ne dit rien de l'ordre des
+dates.}
+
+Applications annoncées : (a) représentabilité du foncteur $P(E)$, $E$ localement
+libre sur $S$ --- par exemple un espace vectoriel de dimension finie sur un
+corps --- ; (b) représentabilité de $\operatorname{Spec}$ d'une algèbre ; (c)
+produits fibrés, et plus généralement limites projectives finies ; (d) limites
+projectives filtrantes de schémas affines au-dessus d'un schéma. Une bulle en
+marge ajoute : sommes disjointes, et disjointes universelles.
+
+\pagerange{22}{24}
+\section*{V. Le cours : prérequis et plan (pages 22 à 24, 26 à 28)}
+
+\pagerange{22}{22}
+\subsection*{La page anglaise (page 22)}
+
+La page s'ouvre en anglais : « Prerequisites for the courses I and II ». Le cours
+I est une introduction à la géométrie algébrique, qui suppose la théorie des
+catégories et de l'algèbre de base, y compris un peu d'algèbre commutative --- la
+page renvoie à Bourbaki et promet de rappeler la plupart des faits utilisés.
+Le cours II est une introduction aux groupes algébriques, qui suppose les
+notions de base de la géométrie algébrique. Le sujet, dit la page, est
+« messy » ; on ne pourra en donner, dans ce cours d'été, qu'un survol de
+quelques points clés, en esquissant des démonstrations le plus souvent
+directes, et un travail personnel sera nécessaire à qui n'a pas déjà une bonne
+formation. Et, pour finir : « The content of I are prerequisites for II! ».
+
+Le plan, en français, commence aussitôt dessous.
+
+\subsection*{(1)--(3) Équations, et le point de vue géométrique (page 22)}
+
+Soient $k$ un anneau, $I$ et $J$ des ensembles finis ou infinis, et
+$P_I = k[(T_i)_{i \in I}]$.\footnote{La page écrit $P[(T_i)_{i \in I}]$, pour
+$k[\ldots]$.} Un point $x \in k^I$ est la même chose qu'un homomorphisme de
+$k$-algèbres $\varepsilon_x : P_I \to k$, et $f(x) = \varepsilon_x(f)$. On
+considère un système d'équations $F_j(T) = 0$, $j \in J$.
+
+Il y a deux points de vue. Le point de vue \emph{arithmétique} étudie les
+solutions dans $k$ lui-même, et il dépend fortement de la nature de $k$. Le
+point de vue \emph{géométrique}, issu de la géométrie sur $\mathbb{R}$ et sur
+$\mathbb{C}$, étudie les solutions dans toutes les $k$-algèbres $k'$, la manière
+dont elles varient, et les propriétés du système qui sont stables par
+changement de $k'$. On introduit donc le foncteur
+\[
+\mathbb{E}^I_k : \mathrm{Alg}_k \to \mathrm{Ens}, \qquad k' \longmapsto k'^I ,
+\]
+et son sous-foncteur $V_S \subset \mathbb{E}^I_k$ des solutions du système
+$S = (F_j)$. On peut étudier $V_S$ indépendamment de son plongement, ou étudier le
+plongement lui-même.
+
+\pagerange{23}{23}
+\subsection*{(4)--(5) Les schémas affines comme foncteurs représentables (page 23)}
+
+Un sous-foncteur fermé de $\mathbb{E}^I_k$, c'est-à-dire de la forme $V_S$, est
+ce que la page appelle un espace algébrique affine. On a $V_S = V_J$, où $J$ est
+l'idéal engendré par $S$, et c'est le système d'équations le plus
+naturel.\footnote{En marge, un renvoi au théorème de la base de Hilbert : pour
+$k$ noethérien, $k[T_1, \ldots, T_n]$ est noethérien, donc un système fini
+suffit.} Avec $A_J = P_I / J$ :
+\[
+V_J(k') = \{ u : P_I \to k' \mid u(J) = 0 \} \simeq \operatorname{Hom}_{k\text{-alg}}(A_J, k') ,
+\]
+c'est-à-dire $V_J = V_{A_J}$. Toute $k$-algèbre étant quotient d'une algèbre de
+polynômes, les foncteurs $V_S$ sont, à isomorphisme près, exactement les
+foncteurs représentables $V_A$ ; se donner un isomorphisme $V_A \simeq V_S$
+revient à se donner un isomorphisme $A \simeq P_I / J$. Plus précisément, un
+monomorphisme de foncteurs $V_A \to \mathbb{E}^I_k$ correspond à un épimorphisme
+d'anneaux $P_I \to A$, qui n'est pas nécessairement surjectif --- ainsi
+$k[T] \to k[T, T^{-1}]$ ; les plongements \emph{fermés} correspondent aux
+homomorphismes surjectifs, c'est-à-dire aux systèmes de générateurs
+$(a_i)_{i \in I}$ de la $k$-algèbre $A$.\footnote{L'exemple
+$k[T] \to k[T, T^{-1}]$ est de nous. Le passage est surchargé : une ligne biffée,
+puis la phrase récrite au-dessus.}
+
+\textbf{Corollaire (5).} La catégorie des schémas affines sur $k$ est
+anti-équivalente à celle des $k$-algèbres.\footnote{La page écrit « algèbres
+sur $A$ », pour « sur $k$ » ; la transcription le signale.} Ceux qui se
+plongent comme sous-foncteurs fermés dans un $\mathbb{E}^n_k$, $n$ fini,
+correspondent aux $k$-algèbres de type fini. Les sous-foncteurs fermés de
+$\mathbb{E}^I_k$ correspondent aux idéaux de $P_I$, en renversant l'ordre :
+$V_J \subset V_{J'}$ si et seulement si $J' \subset J$, puisque
+\[
+J = \{ f \in P_I \mid f(x) = 0 \text{ pour toute } k\text{-algèbre } k' \text{ et tout } x \in V_J(k') \} ;
+\]
+il suffit en effet de prendre $k' = A_J$ et pour $x$ le point universel.
+
+\pagerange{24}{24}
+\subsection*{(6)--(8) Restriction aux corps, Nullstellensatz, fonctions (page 24)}
+
+\textbf{(6)} Que se passe-t-il si l'on ne regarde que les points à valeurs dans
+des \emph{corps} ? Notons $V'_S$ la restriction de $V_S$ aux corps sur $k$.
+Alors $V'_S = V'_J = V'_{\sqrt{J}}$, et $J \mapsto V'_J$ n'est plus injective ;
+mais elle l'est sur les idéaux radicaux, car
+\[
+\sqrt{J} = \{ f \in P_I \mid f(x) = 0 \text{ pour tout corps } k' \text{ sur } k \text{ et tout } x \in V_J(k') \} .
+\]
+C'est l'énoncé d'algèbre commutative : dans tout anneau, l'intersection des
+noyaux des homomorphismes vers des corps --- l'intersection des idéaux premiers
+--- est le nilradical. Donc $\sqrt{J} \subset \sqrt{J'}$ si et seulement si
+$V'_{J'} \subset V'_J$.\footnote{La page écrit le radical $\widetilde{J}$ ; on
+emploie la notation d'aujourd'hui.}
+
+\textbf{(6')} Les mêmes conclusions valent si l'on se restreint à une classe
+plus petite de corps, pourvu qu'elle soit assez grande : pour $I$ fini, les
+extensions finies des corps résiduels de $k$ suffisent, et si $k$ est un corps
+algébriquement clos, $k$ lui-même suffit. C'est le
+\emph{Nullstellensatz}, que la marge nomme : dans une algèbre de type fini sur
+un corps, tout idéal premier (ou radical) est intersection d'idéaux
+maximaux.\footnote{La phrase de la page est entrecoupée d'illisibles (« pourvu
+que … finis que $k$ soit assez grand … ») ; on donne l'énoncé que les
+exemples entre parenthèses rendent précis. Pour $k$ anneau quelconque et $I$
+fini, il résulte du Nullstellensatz appliqué aux fibres de
+$\operatorname{Spec} A \to \operatorname{Spec} k$.}
+
+\textbf{(7)} « Importance des … » : le reste est illisible.
+
+\textbf{(8)} Par Yoneda,
+\[
+A \simeq \operatorname{Hom}_{k\text{-alg}}(k[T], A) \simeq \operatorname{Hom}(V_A, \mathbb{E}^1_k) :
+\]
+$A$ est \emph{l'anneau des fonctions} sur le schéma affine $V_A$. Si
+$A = P_I / J$ et si $f \in A$ se relève en $g \in P_I$, la fonction
+$f_{k'} : V_A(k') \to k'$ est induite par $g_{k'} : k'^I \to k'$. La structure
+d'anneau de $A$ provient de la structure d'anneau du foncteur
+$\mathbb{E}^1_k$, c'est-à-dire de la droite affine vue comme schéma en
+anneaux.\footnote{La marge, en biais et surchargée, esquisse la même chose :
+$(f+g)(x) = f(x) + g(x)$, $(fg)(x) = f(x)g(x)$.}
+
+\pagerange{26}{27}
+\subsection*{(9) Limites projectives dans $\mathrm{Aff}_k$ (pages 26 et 27)}
+
+Les limites projectives dans $\mathrm{Aff}_k$ correspondent aux limites
+inductives dans $\mathrm{Alg}_k$. Le point de vue adapté est celui de
+$\mathrm{Aff}_k$ comme sous-catégorie pleine des préfaisceaux : le plongement de
+Yoneda commute aux limites projectives qui existent, et les limites se
+calculent donc point par point.
+
+\begin{itemize}
+  \item Les produits correspondent aux produits tensoriels :
+  $\prod_i V_{A_i} = V_{\bigotimes_i A_i}$. L'objet final est $e_k = V_k$ ; ses
+  sections dans $X$ sont les points de $X$ à valeurs dans $k$.
+  \item Les produits fibrés correspondent à $B \otimes_A C$, produit dans
+  $\mathrm{Aff}_{k/S}$, somme dans $\mathrm{Alg}_A$. Le changement de base
+  $\mathrm{Aff}_{/S} \to \mathrm{Aff}_{/S'}$ est adjoint à droite de l'oubli
+  $\mathrm{Aff}_{/S'} \to \mathrm{Aff}_{/S}$ ; en termes de foncteurs, c'est la
+  restriction d'un foncteur sur les $k$-algèbres aux $k'$-algèbres.
+  \item Produits et produits fibrés donnent toutes les limites. Le noyau d'une
+  double flèche $u, v : X \rightrightarrows Y$ est
+  $X \times_{Y \times Y} Y$, pris le long de $(u, v)$ et de la diagonale. Du
+  côté des algèbres, le conoyau de $u, v : A \rightrightarrows B$ est $B$ divisé
+  par l'idéal engendré par les $u(x) - v(x)$, ou encore
+  $B \otimes_{A \otimes A} A$, puisque la multiplication
+  $A \otimes A \to A$ est surjective de noyau engendré par les
+  $x \otimes 1 - 1 \otimes x$.
+  \item Les limites projectives filtrantes correspondent aux limites
+  inductives filtrantes d'algèbres, qui se calculent sur les ensembles
+  sous-jacents.
+\end{itemize}
+
+\emph{Exemples, vers les groupes.} Le noyau d'un homomorphisme de groupes
+algébriques affines $G \to G'$ est un groupe algébrique affine ; ainsi
+$\mathrm{SL}(n)_k = \operatorname{Ker}\bigl(\mathrm{GL}(n)_k \xrightarrow{\det} \mathbb{G}_{m,k}\bigr)$.
+Si $G$ opère sur $X$ et $x \in X(k) = \operatorname{Hom}(e_k, X)$, le
+\emph{stabilisateur} $G_{(x)}$ est le produit fibré de $G \to X$,
+$g \mapsto g.x$, et de $x : e_k \to X$. Pour plusieurs points $x_i \in X_i(k)$,
+l'intersection des stabilisateurs --- un produit fibré encore --- est le
+stabilisateur de $(x_i)$ dans $\prod X_i$. Ce sont des \emph{schémas en groupes
+affines} définis par leur foncteur des points.
+
+\pagerange{27}{28}
+\subsection*{(10) Limites inductives dans $\mathrm{Aff}_k$ (pages 27 et 28)}
+
+Les limites inductives dans $\mathrm{Aff}_k$ ne s'interprètent pas commodément
+en termes de foncteurs sur les algèbres et n'ont guère de sens géométrique,
+sauf dans des cas très particuliers. Elles correspondent aux limites projectives
+d'algèbres, qui se calculent sur les ensembles --- « nous fait une belle
+jambe ! ».
+
+\emph{L'exemple.} Soient $G = \mathrm{GL}(n)_k$ et $B \subset G$ le sous-groupe
+des matrices triangulaires. $B$ définit une relation d'équivalence sur $G$, et
+le quotient $G/B$ calculé dans $\mathrm{Aff}_k$ est $e_k$ --- « ce qui est
+idiot ! ». En effet ce quotient est le spectre de l'algèbre des fonctions sur
+$G$ invariantes par $B$, qui sont les fonctions globales sur la variété des
+drapeaux ; celle-ci est projective et connexe, et ses seules fonctions globales
+sont les constantes.\footnote{La justification est de nous. L'exemple montre ce
+que la page veut montrer : le bon quotient $G/B$ est un schéma projectif, non
+affine, et la catégorie affine est trop petite pour les quotients.}
+
+\emph{Sommes.} Les sommes dans $\mathrm{Aff}_k$ correspondent aux produits
+d'algèbres. Seules les sommes finies ont une interprétation géométrique
+simple. Pour $I$ fini et $X = V_{\prod A_i}$, l'application
+\[
+\coprod_i \operatorname{Hom}_{k\text{-alg}}(A_i, k') \longrightarrow \operatorname{Hom}_{k\text{-alg}}\Bigl(\prod_i A_i,\ k'\Bigr)
+\]
+est injective si $k' \neq 0$, mais pas bijective en général : un homomorphisme
+$\prod A_i \to k'$ est la donnée d'une famille $(e_i)$ d'idempotents de $k'$
+orthogonaux deux à deux et de somme $1$, et d'homomorphismes
+$A_i \to k' e_i$.\footnote{La page n'écrit pas « $I$ fini » dans cette phrase,
+bien qu'elle vienne de le dire pour l'interprétation géométrique. Pour $I$
+infini la description est fausse : pour $k$ fini, les ultrafiltres non principaux
+sur $I$ donnent des homomorphismes $k^I \to k$ qui annulent tous les
+idempotents $e_i$.} Si $k'$ est \emph{connexe}, c'est-à-dire non nul et sans
+idempotent autre que $0$ et $1$ --- par exemple intègre, ou local, ou tel que
+$k' / \mathrm{Nil}(k')$ soit intègre ---, l'application est bijective.
+
+Pour $I = \emptyset$ on trouve l'objet initial $\emptyset_k = V_0$, spectre de
+l'algèbre nulle : $\emptyset_k(k')$ est vide si $k' \neq 0$ et réduit à un point
+si $k' = 0$. C'est un objet initial \emph{strict} --- tout objet qui a une flèche
+vers lui lui est isomorphe ---, le « $k$-espace algébrique vide ».
+
+\emph{Conoyaux.} Le conoyau de $u, v : R \rightrightarrows X$ dans
+$\mathrm{Aff}_k$ correspond au noyau de $A \rightrightarrows B$ ; il n'a en
+général pas beaucoup de sens. La page le juge « O.K. » si $R$ est une relation
+d'équivalence sur $X$ finie sur $X$, et renvoie à « la question des passages au
+quotient », qui n'est pas traitée dans le dossier.\footnote{Le théorème qui rend
+cet « O.K. » précis --- le quotient est effectif et $X \to X/R$ est fini ---
+suppose $R$ fini et \emph{localement libre} sur $X$ (SGA 3, exposé V). Sans
+platitude, on ne peut pas affirmer davantage que la page.}
+
+Enfin, les sous-schémas fermés d'un schéma affine $V_A$ correspondent aux idéaux
+de $A$, l'ordre étant renversé.
+
+\pagerange{28}{29}
+\section*{VI. Le spectre (pages 28 à 31, et 21)}
+
+La rubrique (11) associe à un schéma affine $\mathfrak{X} = V_A$ un objet
+géométrique, en trois temps : un ensemble, une topologie, un faisceau
+d'anneaux.\footnote{Le numéro cerclé est surchargé ; on lit (11).}
+
+\subsection*{(a) L'ensemble sous-jacent (pages 28 et 29)}
+
+Deux points géométriques de $\mathfrak{X}$, à valeurs dans des corps, ont même
+« lieu » s'ils proviennent d'un même point à valeurs dans un corps plus petit ;
+l'ensemble des lieux est en bijection avec l'ensemble
+$\operatorname{Spec} A$ des idéaux premiers de $A$, le point
+$u : A \to k'$ ayant pour lieu $\operatorname{Ker} u$. À chaque point $x$ est
+attaché son corps résiduel $k(x)$, qui représente le foncteur « ensemble des
+points à valeurs dans le corps $k'$ de lieu $x$ » :
+ces points sont les $k$-plongements $k(x) \to k'$.
+
+\pagerange{29}{30}
+\subsection*{(b) La topologie de Zariski (pages 29 et 30)}
+
+Les fermés de $X = \operatorname{Spec} A$ sont les $V(S)$, pour $S \subset A$ :
+$V(S)$ est l'ensemble des idéaux premiers qui contiennent $S$, c'est-à-dire des
+lieux des points géométriques où tous les éléments de $S$
+s'annulent.\footnote{La page écrit ensuite que $\widetilde{J}_S$ est
+l'intersection des idéaux premiers « qui contiennent $A$ » : il faut lire
+$S$. La transcription le signale.} On a
+$V(S) = V(J_S) = V(\sqrt{J_S})$, où $J_S$ est l'idéal engendré, et il est bon de
+se borner aux idéaux radicaux : $V(S) \subset V(S')$ si et seulement si
+$\sqrt{J_S} \supset \sqrt{J_{S'}}$, ce qui est l'énoncé (6) de la page 24
+relu dans le spectre. De plus
+\[
+V\Bigl(\bigcup_i S_i\Bigr) = V\Bigl(\sum_i J_i\Bigr) = \bigcap_i V(J_i) \quad (I \text{ quelconque}),
+\]
+\[
+V\Bigl(\bigcap_i J_i\Bigr) = V\Bigl(\prod_i J_i\Bigr) = \bigcup_i V(J_i) \quad (I \text{ fini}),
+\]
+la seconde parce qu'un premier qui contient un produit fini d'idéaux contient
+l'un d'eux. La somme de deux idéaux radicaux n'est pas nécessairement radicale,
+note la page ; ainsi $(y) + (y - x^2) = (y, x^2)$ dans $k[x, y]$.\footnote{L'exemple
+est de nous.}
+
+C'est donc une topologie. L'adhérence d'un point $x$, d'idéal $\mathfrak{p}_x$,
+est $V(\mathfrak{p}_x)$, et $x \in \overline{\{y\}}$ si et seulement si
+$\mathfrak{p}_x \supset \mathfrak{p}_y$. Les ouverts
+$X_f = X \setminus V(f)$ forment une base stable par intersections finies :
+$X_1 = X$, $X_{fg} = X_f \cap X_g$. L'espace $X$ est quasi-compact : si
+$A = \sum_{i \in I} J_i$, il existe une partie finie $I_0 \subset I$ telle que
+$A = \sum_{i \in I_0} J_i$.\footnote{La page appelle $J$ cette partie finie, la
+lettre des idéaux ; on la renomme.} Si $J$ est un idéal,
+$\operatorname{Spec}(A/J)$ s'identifie au sous-espace fermé $V(J)$, qui ne
+change pas si l'on remplace $J$ par $\sqrt{J}$ : tout fermé est homéomorphe au
+spectre d'un anneau réduit.
+
+\textbf{Proposition.} Si $A$ est réduit, $\operatorname{Spec} A$ est
+irréductible si et seulement si $A$ est intègre. En effet, $X = V(J') \cup V(J'')$
+équivaut à $J'J'' \subset \mathrm{Nil}(A) = 0$, et $V(J') = X$ à $J' = 0$.
+
+\textbf{Corollaire.} Pour $A$ quelconque, les fermés irréductibles de $X$ sont
+les $V(\mathfrak{p})$, $\mathfrak{p}$ premier, en bijection décroissante avec
+les idéaux premiers, et $V(\mathfrak{p})$ est l'adhérence du point
+$\mathfrak{p}$. En particulier tout fermé irréductible a un unique point
+générique : $X$ est \emph{sobre}.
+
+Avec la quasi-compacité des $X_f \simeq \operatorname{Spec} A_f$, que la marge de
+la page 30 rappelle, ce sont exactement les propriétés qui caractérisent
+aujourd'hui les \emph{espaces spectraux}.\footnote{Le nom et la caractérisation
+sont de Hochster (1969). Le mot « sobre » est sur la page.} Enfin, l'espace
+$\operatorname{Spec} A$ ne dépend que de la structure d'anneau de $A$, et non de
+sa structure de $k$-algèbre.
+
+\pagerange{30}{31}
+\subsection*{(c) Le faisceau structural (pages 30 et 31)}
+
+« On ne peut reconstituer $A$ à partir du seul espace topologique » : tous les
+corps ont le même spectre. Il faut donc un faisceau d'anneaux, et la page le
+construit sur la base des $X_f$.
+
+On a $X_f \subset X_g$ si et seulement si $f \in \sqrt{gA}$, c'est-à-dire s'il
+existe $n \in \mathbb{N}$ et $h \in A$ avec $f^n = gh$ ; on écrit $f \prec g$.
+C'est un préordre. Un préfaisceau sur la base est la donnée d'un ensemble
+$P(f)$ pour chaque $f$ et d'une restriction $P(g) \to P(f)$ pour $f \prec g$,
+transitives, et l'identité pour $f = g$. On a $X_f = \bigcup_{i \in I} X_{f_i}$
+si et seulement si $f_i \prec f$ pour tout $i$ et s'il existe $n$ et des
+$h_i$, presque tous nuls, avec $f^n = \sum_i f_i h_i$ ; et le préfaisceau est
+un faisceau si, pour tout tel recouvrement, la suite
+\[
+P(f) \longrightarrow \prod_i P(f_i) \rightrightarrows \prod_{i,j} P(f_i f_j)
+\]
+est exacte.\footnote{La page écrit « $f_i \in I$ » pour « $i \in I$ » ; la
+transcription le signale. Elle note ensuite qu'on peut supposer $I$ fini, par
+quasi-compacité.}
+
+Soit $M$ un $A$-module. Pour $f \in A$, on pose
+$M_f = \varinjlim_n M$, les flèches de transition étant la multiplication par
+$f^{n'-n}$ ; les éléments de $M_f$ sont les $m/f^n$, avec les règles de calcul
+habituelles, et $M \to M_f$ est la solution universelle du problème de rendre
+$f$ inversible. On a $M_f \simeq M \otimes_A A_f$.
+
+\textbf{Lemme.} Si $f \prec g$, il existe un unique homomorphisme
+$M_g \to M_f$ compatible aux applications canoniques ; car $f^n = gh$ étant
+inversible sur $M_f$, $g$ l'est aussi.
+
+On obtient ainsi un préfaisceau $\widetilde{M}$ sur la base des $X_f$, qui est un
+préfaisceau de modules sur le préfaisceau d'anneaux $f \mapsto A_f$. C'est un
+\emph{faisceau} : la suite
+$M_f \to \prod_i M_{f_i} \rightrightarrows \prod_{i,j} M_{f_i f_j}$ est exacte
+dès que $X_f = \bigcup X_{f_i}$. Comme $(M_f)_g \simeq M_g$ pour $g \prec f$, on
+se ramène au cas $f = 1$, $\sum f_i h_i = 1$, qui est l'argument classique de
+partition de l'unité.\footnote{La page s'arrête, après la réduction au cas
+$f = 1$, sur des points de suspension ; la démonstration n'est pas écrite. Le mot
+qui précède l'énoncé (« Prop » ou « Th ») est illisible.}
+
+En particulier, $X$ est annelé par $\mathcal{O}_X = \widetilde{A}$, faisceau de
+$A$-algèbres. Sa fibre en $x$, d'idéal $\mathfrak{p}$, est la limite inductive
+des $A_f$ pour $f \notin \mathfrak{p}$ ; comme $A \setminus \mathfrak{p}$ est
+filtrant pour $\succ$, c'est le localisé $A_{\mathfrak{p}}$, et c'est un anneau
+local. De même la fibre de $\widetilde{M}$ est $M_{\mathfrak{p}}$.
+
+\pagerange{21}{21}
+\subsection*{Fonctorialité et topologie des spectres (page 21)}
+
+La page 21, sous le titre « Topologie des spectres », appartient à cette
+rubrique, et plus précisément à la « 10') Fonctorialité de $\operatorname{Spec} A$ »
+qu'annonce la marge de la page 30 : elle emploie les lettres gothiques et les
+$V_A$ du plan, et suppose connue la base des $X_f$.
+
+Un espace est \emph{noethérien} si toute suite décroissante de fermés est
+stationnaire ; il est alors quasi-compact, et tout fermé n'a qu'un nombre fini
+de composantes irréductibles.\footnote{La page définit l'espace noethérien comme
+« quasicompact tel que » ces deux conditions ; la seconde entraîne les deux
+autres, et la définition est donc équivalente à l'usuelle.} Dans un espace dont
+les composantes irréductibles sont en nombre fini --- ou plus généralement
+forment une famille localement finie ---, les composantes connexes sont
+ouvertes.
+
+Soient $u : A \to B$ et $\varphi : X = \operatorname{Spec} B \to Y = \operatorname{Spec} A$.
+Alors\footnote{La page écrit $\varphi(x_{\mathfrak{p}}) = y_{\varphi^{-1}(\mathfrak{p})}$ :
+l'image réciproque de l'idéal est prise par $u$. Les indices des deux lignes
+suivantes sont surchargés, $\varphi(f)$ corrigé en $u(f)$.}
+\[
+\varphi(\mathfrak{q}) = u^{-1}(\mathfrak{q}), \qquad
+\varphi^{-1}(V(J)) = V(u(J)B), \qquad
+\varphi^{-1}(Y_f) = X_{u(f)} .
+\]
+
+\begin{itemize}
+  \item[a)] Si $u$ est surjectif, $\varphi$ est une immersion fermée.
+  \item[b)] Pour $u : A \to A_f$, $\varphi$ est une immersion ouverte, et
+  $\operatorname{Spec}(A_f) \simeq Y_f$. Dans ces deux cas les extensions
+  résiduelles sont triviales ; il en va de même dès que $u$ est un épimorphisme
+  d'anneaux, c'est-à-dire dès que $V_B \to V_A$ est un monomorphisme.
+  \item[c)] Pour $I$ \emph{fini},
+  $\operatorname{Spec} \prod_{i \in I} A_i \simeq \coprod_i \operatorname{Spec} A_i$.\footnote{La
+  page écrit $\prod_I$ sans condition. Pour $I$ infini, le spectre du produit est
+  beaucoup plus gros que la somme : il contient un point pour chaque
+  ultrafiltre sur $I$.}
+  \item[d)] Le foncteur « espace sous-jacent » ne commute pas aux produits
+  fibrés : l'application
+  \[
+  \lvert \mathfrak{X} \times_S \mathfrak{Y} \rvert \longrightarrow
+  \lvert \mathfrak{X} \rvert \times_{\lvert S \rvert} \lvert \mathfrak{Y} \rvert
+  \]
+  est surjective mais non injective ; sa fibre au-dessus de $(x, y)$, avec $x$ et
+  $y$ au-dessus de $s$, est $\operatorname{Spec}\bigl(k(x) \otimes_{k(s)} k(y)\bigr)$,
+  qui n'est pas vide. Ses points correspondent aux corps composés $K'$ de $k(x)$
+  et $k(y)$ au-dessus de $k(s)$ ; la page les dessine en quatre croquis, et la
+  marge renvoie à l'exemple du plan $\mathbb{E}^1 \times \mathbb{E}^1$.
+\end{itemize}
+
+Sur un corps algébriquement clos et pour des schémas de type fini, c'est le
+\emph{spectre maximal} qui commute aux produits finis, en tant qu'ensemble ---
+ses points sont les points rationnels ---, mais sa topologie n'est pas la
+topologie produit.\footnote{La page porte, à la fin de d), « [vrai sur un corps
+alg. clos] » ; la phrase suivante précise qu'il s'agit du spectre maximal, et
+c'est ainsi qu'on la lit. Pour le spectre tout entier l'énoncé serait faux même
+sur un corps algébriquement clos : le point générique du plan et celui de la
+diagonale ont la même image.}
+
+\pagerange{19}{20}
+\section*{VII. Compléments : sommes, limites et spectres dans $\mathrm{Aff}_k$ (pages 19 et 20)}
+
+La feuille est titrée de sa main « Géom. Algébrique » et annonce des
+« compléments sur le formalisme des $\varprojlim$ et des sommes dans
+$\mathrm{Aff}_k$ ». Elle complète les rubriques (9) et (10), dont elle emploie les
+notations, et suppose le spectre de la rubrique (11).
+
+\emph{a) Les sommes finies sont disjointes et universelles.} Soit
+$X = \coprod_{i \in I} X_i$, $I$ fini, c'est-à-dire $A = \prod_i A_i$. Alors :
+chaque $X_i \to X$ est un monomorphisme, et même une immersion fermée, puisque
+$A \to A_i$ est surjectif ; $X_i \times_X X_j = \emptyset$ pour $i \neq j$,
+puisque $A_i \otimes_A A_j = 0$ (l'idempotent de $A_i$ vaut $1$ dans $A_i$ et
+$0$ dans $A_j$) ; et pour tout $X' \to X$, $X' \simeq \coprod_i X'_i$ avec
+$X'_i = X' \times_X X_i$, puisque toute $A$-algèbre $B$ se décompose en
+$\prod_i B e_i$. Donc les produits, et les produits fibrés, sont distributifs
+par rapport aux sommes finies.
+
+Il en résulte que le foncteur
+\[
+(\text{ensembles finis}) \longrightarrow \mathrm{Aff}_k, \qquad
+\Gamma \longmapsto \Gamma_k = \coprod_{\Gamma} e_k = V_{k^{\Gamma}}
+\]
+commute aux produits finis et aux produits fibrés, donc aux limites projectives
+finies. Il transforme donc un monoïde (un groupe) fini en un monoïde (un groupe)
+algébrique affine : c'est le \emph{schéma en groupes constant} $\Gamma_k$. Son
+algèbre est l'algèbre $k^{\Gamma}$ des fonctions sur $\Gamma$, contravariante
+en $\Gamma$ ; si $\Gamma$ a une loi $\Gamma \times \Gamma \to \Gamma$, elle
+définit la comultiplication
+$k^{\Gamma} \to k^{\Gamma \times \Gamma} \simeq k^{\Gamma} \otimes k^{\Gamma}$.\footnote{La
+page note aussi cette algèbre $k[I]$, en prévenant contre la confusion avec les
+polynômes. On l'écrit $k^{\Gamma}$ : aujourd'hui $k[\Gamma]$ désigne d'ordinaire
+l'algèbre \emph{du groupe}, dont la structure d'algèbre de Hopf est duale de
+celle-ci ; pour $\Gamma$ commutatif, son spectre est le groupe diagonalisable
+dual de $\Gamma_k$, et non $\Gamma_k$. La page emploie tantôt $\Gamma$, tantôt
+$I$, pour le même ensemble.} Le foncteur $\Gamma_k$ associe à $k'$ l'ensemble
+des décompositions de $1$ en idempotents orthogonaux indexées par
+$\Gamma$,\footnote{C'est la marge ; le mot qui qualifie ces décompositions est
+lu « parfaites » avec doute : il s'agit des systèmes \emph{complets}, de somme
+$1$.} ce qui redonne l'ensemble $\Gamma$ lorsque $k'$ est connexe ; et
+$\operatorname{Spec} k^{\Gamma} = \coprod_{\Gamma} \operatorname{Spec} k$.
+
+\emph{b) Produits fibrés le long d'un monomorphisme.} Si l'un des deux
+morphismes est un monomorphisme, le carré des espaces sous-jacents est encore
+cartésien, en tant que carré d'ensembles : les extensions résiduelles d'un
+monomorphisme sont triviales (page 21), et les fibres
+$\operatorname{Spec}\bigl(k(x) \otimes_{k(y)} k(y')\bigr)$ sont réduites à un
+point. Si de plus $\mathfrak{Y}' \to \mathfrak{Y}$ est une immersion fermée, une
+immersion ouverte, ou plus généralement correspond à une localisation
+$A \to S^{-1}A$ --- trois classes stables par changement de base, et formées
+d'homéomorphismes sur l'image ---, la topologie de $X'$ est la topologie induite
+par celle de $X$.\footnote{La page dit « plus généralement si celle correspond à
+$A \to A S^{-1}$, disons l'homéomorphisme dans ». On s'en tient aux trois cas
+qu'elle nomme, pour lesquels l'énoncé est vrai ; pour un monomorphisme qui n'est
+qu'un homéomorphisme sur son image, la stabilité par changement de base ne va
+pas de soi. Les flèches du croquis de gauche sont en pointillé, et celle du bas
+porte deux pointes.} Cas particulier : l'intersection de deux sous-objets.
+
+\emph{c) Adhérence de l'image.} Pour $u : A \to B$ et
+$\varphi : X = \operatorname{Spec} B \to Y = \operatorname{Spec} A$, et
+$Z = V(J) \subset X$, on a $\overline{\varphi(Z)} = V(u^{-1}(J))$. En
+particulier $\varphi$ est dominant si et seulement si
+$\operatorname{Ker} u \subset \mathrm{Nil}(A)$.\footnote{La page écrit
+$\operatorname{Ker} \varphi$ ; il s'agit du noyau de $u$. La transcription le
+signale. La formule pour $\overline{\varphi(Z)}$ n'est qu'annoncée sur la page ;
+on la donne.}
+
+\pagerange{15}{17}
+\section*{VIII. Feuillets étrangers au cours : le produit de deux topos (pages 17 et 15), et la page 25}
+
+Les pages 15 et 17 ne parlent pas de géométrie algébrique. Elles portent sur une
+question de théorie des topos, et on les lit dans l'ordre de l'argument : la page
+17, qui reprend en cours de raisonnement, puis la page 15, qui la
+continue.\footnote{La page 15 est un fragment isolé en haut d'une feuille, qui
+commence par « Or » et emploie le $C'$ et le $\widetilde{D}$ introduits à la
+page 17 ; elle en utilise aussi le corollaire (que $\gamma$ est un plongement).
+Les deux feuilles sont traversées de longs traits au crayon.}
+
+Le cadre est posé ailleurs. Dans le dossier 161-6, à la page 22 --- une page
+barrée d'une croix, mais lisible ---, on lit : pour un topos $E$ et une petite
+catégorie $C$, $\pi(C, E) = \underline{\operatorname{Hom}}(C^{\circ}, E)$ est un
+topos, qui dépend 2-fonctoriellement de $(C, E)$ ; on définit un morphisme de
+topos $\gamma(C, E) : \pi(C, E) \to \widehat{C} \times E$ vers le produit dans
+la 2-catégorie des topos ; et l'on demande si $\gamma(C, E)$ est toujours une
+équivalence, en notant trois cas : les sommes, les groupoïdes, et
+$E = \widehat{D}$, où $\pi(C, E) \simeq \widehat{C \times D}$.\footnote{Dossier
+161-6, page 22 (transcription \texttt{161-6/batch-02.fr.tex}). On rapproche les
+deux dossiers par leur contenu, qui est le même problème dans les mêmes
+notations ; on ne les fusionne pas, et rien ne dit que les feuilles aient été
+écrites au même moment.} La page 17 de notre dossier reprend exactement là : le
+cas $E = \widehat{D}$, puis le cas général.
+
+\pagerange{17}{17}
+\subsection*{Le cas des préfaisceaux, puis la réduction (page 17)}
+
+Pour $E = \widehat{D}$, la question devient :
+\[
+(2) \qquad \widehat{C \times D} \overset{?}{\simeq} \widehat{C} \times \widehat{D} .
+\]
+Si $C$ et $D$ ont des limites projectives finies, $C \times D$ aussi, et l'on
+conclut par la propriété universelle des topos de préfaisceaux : pour une
+catégorie $A$ à limites finies et un topos $E$,
+\[
+\underline{\operatorname{Homtop}}(E, \widehat{A}) \simeq
+\bigl(\underline{\operatorname{Hom}}_{\mathrm{lex}}(A, E)\bigr)^{\circ},
+\qquad u \longmapsto u^{*}|_A ,
+\]
+les morphismes de topos $E \to \widehat{A}$ correspondant aux foncteurs exacts
+à gauche $A \to E$.\footnote{C'est le théorème de Diaconescu dans le cas où $A$
+a des limites finies ; la page le rappelle sans nom. Le signe ${}^{\circ}$ tient à
+la convention choisie pour les 2-morphismes de topos, par les images directes ou
+par les images inverses ; il est sans effet sur la question posée.} Un foncteur
+exact à gauche sur $C \times D$ est la même chose qu'un couple de foncteurs
+exacts à gauche sur $C$ et sur $D$, et (2) est une équivalence.
+
+Dans le cas général, on choisit un plongement pleinement fidèle $i : C \to C'$
+dans une petite catégorie à limites finies, et un plongement de topos
+$j : E \hookrightarrow \widehat{D}$, c'est-à-dire une présentation
+$E \simeq \widetilde{D}$ par un site $D$, qu'on peut prendre à limites
+finies. On obtient un carré commutatif à isomorphisme près :
+
+\begin{tikzcd}
+\pi(C, \widetilde{D}) \arrow[r, "{\alpha = \pi(i, j)}"] \arrow[d, "\gamma"'] & \pi(C', \widehat{D}) \simeq \widehat{C' \times D} \arrow[d, "\gamma'"] \\
+\widehat{C} \times \widetilde{D} \arrow[r, hook, "{\beta = i \times j}"'] & \widehat{C'} \times \widehat{D}
+\end{tikzcd}
+
+où $\gamma'$ est une équivalence par le cas précédent, et $\beta$ un plongement
+de topos, produit de deux plongements. Le morphisme $\alpha$ se factorise en
+\[
+\pi(C, \widetilde{D}) \xrightarrow{\ \alpha_0\ } \pi(C, \widehat{D}) \simeq \widehat{C \times D}
+\xrightarrow{\ \alpha_1\ } \pi(C', \widehat{D}) \simeq \widehat{C' \times D} ;
+\]
+$\alpha_1$ est un plongement parce que $C \times D \to C' \times D$ est
+pleinement fidèle, et $\alpha_0$ en est un parce que son image directe,
+$u \mapsto j_* \circ u$, est pleinement fidèle.
+
+\textbf{Corollaire.} $\gamma(C, E) : \pi(C, E) \to \widehat{C} \times E$ est un
+plongement de topos. En effet $\beta\gamma \simeq \gamma'\alpha$ est un
+plongement, et $\beta$ aussi, donc l'image directe de $\gamma$ est pleinement
+fidèle.
+
+Reste à montrer que $\gamma$ est essentiellement surjectif, c'est-à-dire que
+l'image de $\pi(C, \widetilde{D})$ dans $\widehat{C' \times D}$ est tout le
+sous-topos $\widehat{C} \times \widetilde{D}$. La page propose de décrire ce
+sous-topos comme la sous-catégorie pleine des $F$ tels que $p_*(F)$ soit dans
+l'image essentielle de $\widehat{C}$ et $q_*(F) \in \widetilde{D}$, où $p$ et $q$
+sont les deux projections. Cette description est trop faible. La bonne est :
+$F(c, -) \in \widetilde{D}$ pour tout objet $c$ de $C'$, et $F(-, d)$ dans
+l'image essentielle de $\widehat{C}$ pour tout objet $d$ de $D$.\footnote{Contre-exemple
+à la description de la page, dans ses propres hypothèses : $C = C'$ l'ensemble
+ordonné $\{0 < 1\}$, $D$ la catégorie ponctuelle, et $\widetilde{D}$ le topos
+dégénéré (la topologie pour laquelle le crible vide couvre), dont le seul objet
+est l'objet final. Alors $\widehat{C} \times \widetilde{D}$ est dégénéré ; mais
+$q_*(F) = F(1)$, puisque $1$ est final dans $C$, et la condition de la page ne
+demande que $F(1)$ réduit à un point, laissant $F(0)$ arbitraire.} C'est
+exactement l'image de $\pi(C, \widetilde{D})$ --- ce que la page voulait
+établir, « ce qui prouvera que $\gamma$ est une équivalence ». Elle s'arrête sur
+ces mots.
+
+\pagerange{15}{15}
+\subsection*{Une autre route (page 15)}
+
+La page 15 prend la route correcte. Elle vérifie « directement » que, comme
+sous-catégories strictement pleines de $\pi(C', \widehat{D})$,
+\[
+\pi(C, \widetilde{D}) = \pi(C', \widetilde{D}) \cap \pi(C, \widehat{D}),
+\]
+et, de l'autre côté, que le produit se décompose de même comme intersection de
+sous-topos :
+\[
+\widehat{C} \times \widetilde{D} = \bigl(\widehat{C'} \times \widetilde{D}\bigr) \cap \bigl(\widehat{C} \times \widehat{D}\bigr).
+\]
+Les deux égalités sont justes : l'intersection de deux sous-topos est la
+sous-catégorie des objets qui sont des faisceaux pour les deux topologies, et un
+produit de sous-topos est l'intersection de leurs images réciproques. On est
+ainsi ramené à montrer que $\gamma(C, \widehat{D})$ et
+$\gamma(C', \widetilde{D})$ sont des équivalences, c'est-à-dire, puisque ce sont
+des plongements, que leurs images directes sont essentiellement surjectives. La
+page s'arrête là.\footnote{Le losange de la page est tracé sans pointes, sauf un
+trait. Au-dessus du premier produit « $\times_{\mathrm{Top}}$ », un petit signe
+illisible surmonté d'un tilde.}
+
+\emph{La réponse.} La question posée sur ces feuilles et dans le dossier 161-6
+a une réponse positive : pour toute petite catégorie $C$ et tout topos $E$, le
+topos $\underline{\operatorname{Hom}}(C^{\circ}, E)$ des préfaisceaux sur $C$ à
+valeurs dans $E$ est le produit $\widehat{C} \times E$ dans la 2-catégorie des
+topos. C'est un fait classique de la théorie des topos --- le changement de base
+d'un topos de préfaisceaux est un topos de préfaisceaux ---, qu'on trouve dans les
+traités de Johnstone.\footnote{Ce paragraphe est de nous. Il ne dit rien de ce
+que Grothendieck savait ou ne savait pas au moment d'écrire ces pages.}
+
+\pagerange{25}{25}
+\subsection*{La page 25}
+
+Une feuille au crayon, barrée de longs traits diagonaux croisés, sur un autre
+sujet que les pages qui l'entourent : on y lit, par fragments, un topos $X$ et un
+objet $F$, le topos induit $X/F$, un
+$\underline{\operatorname{Hom}}_X(F, \mathbb{L}_X)$, des puissances $I^E$ indexées
+par un ensemble ordonné $E$, et la ligne « Topos associé à l'espace compact
+$I^E$ ». Les fragments ne suffisent pas à reconstituer un énoncé, et l'on n'en
+propose pas.\footnote{La lettre notée $\mathbb{L}_X$ peut être un $\mathcal{L}$
+cursif ; la transcription ne tranche pas. Rien n'indique que cette page ait un
+rapport avec les pages 15 et 17, sinon qu'elle parle aussi de topos.}
+
+\end{document}
