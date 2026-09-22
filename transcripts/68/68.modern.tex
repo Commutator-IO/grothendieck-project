@@ -1,0 +1,1856 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 68
+% (pages 1-55, the whole folder).
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried moves into a
+% footnote. It is held to being mathematically correct as it stands; where the
+% manuscript is loose or mistaken, the true statement is what appears here and
+% the footnote says what the page has. In any dispute of substance the
+% transcription governs: whoever cites Grothendieck must cite
+% batch-01.fr.tex (pp. 1-20), batch-02.fr.tex (pp. 21-40) or
+% batch-03.fr.tex (pp. 41-55).
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-09-22 — first pass, unchecked against the pages by a human.
+% The folder was read whole, its three batches together; this is one document
+% for the shelfmark. It was made on Opus 5.5 and has not been measured against
+% the reference reading of folder 115 (made on Opus 5). The references in the
+% footnotes are given from memory and were not checked against the sources.
+%
+% Spine. Five subjects on loose leaves; no link between them is written.
+%  (1) Positional games, in three moutures kept distinct:
+%      A  pp. 1-13, pencil, numbered 1-5 (6 is a title only): data
+%         (C, R, J, i, G_0), parties, C_i, strategies, G(j), Thm 1, the
+%         largest strategy, acceptable positions, Thm 2, J(j'), G_i(j) and
+%         « ? Th 3 »;
+%      B  pp. 23-33, « Jeux de position »: the fixed-point theorem with a
+%         complete proof (well-ordering), strategies against j, admissible
+%         positions, the two-player partition, alternating games (G, P, N),
+%         the characterisation of (G, P) without infinite parties;
+%      C  p. 47, « Jeux à N joueurs »: data and circular games only.
+%  (2) Rearrangements on a group: scratch pp. 14-16; numbered run
+%      pp. 18-21 (|f,g|, weak majorisation, couples prétassés and tassés,
+%      condition K, the class S~).
+%  (3) « Exponentielles (en car. 0) », pp. 35-45.
+%  (4) Orientation of real vector spaces, pp. 49, 51, 53.
+%  (5) Graded determinants, p. 55 (axioms only).
+%  Not mathematics, not transcribed: p. 17 (typed administrative table),
+%  pp. 50, 52, 54 (typescript « XVIII Les épousailles (2) »). Blank: 22, 34,
+%  46, 48.
+%
+% Notation fixed for the document.
+%  - Games: C, R, C_0, J, G_0(j), G(j) as on the pages. The initiative map is
+%    alpha (B's letter) in both moutures; A writes i. Cbar(j) is
+%    (C \ C_0) \ C(j) throughout (B's convention; A's Cbar(j) = C \ C(j)
+%    contains C_0 and A writes Cbar(j) \ Cbar_0(j)). A's « acceptable » and
+%    B's « admissible » are kept, each in its mouture. F_j (the operator of
+%    the fixed-point equation) and G_alpha(j) for ordinal alpha are ours.
+%    B's G, P, N (gagnantes, perdantes, nulles) are kept; combinatorial game
+%    theory's N-, P-, D-positions are his G, P, N — letter clash flagged.
+%  - Rearrangements: f^down for the decreasing sequence the p. 18 margin
+%    calls A(f); e for the neutral element (the pages write 0); prétassé /
+%    tassé for the conditions batch 1 reads « préféré » (p. 19) and « bornés »
+%    (p. 20), on the authority of p. 21, which names them so.
+%  - Exponentials: Ghat_a for the page's G_a barre; W(U) for K' -> U (x) K';
+%    O_X for his underlined O_X.
+%  - Orientation: tau_P for the page's underlined a_P; D(W,V) for his
+%    Dem_{W,V} / Omega(W,V) (the two half-spaces).
+%  - Determinants: Pic^Z(k) for his P(k) with a doubled stem.
+%
+% Substantive departures, with pages.
+%  p. 2    « no infinite partie » does not imply C = union C_i when C is
+%          infinite; ordinal rank supplied in a footnote (ours).
+%  pp. 3-6 Thm 1 stated in general; A's proof of 2° <= (p. 5) holds only
+%          without infinite parties (counterexample ours); p. 6's attempt at
+%          the general case is cancelled and incomplete; B pp. 26-28 proves it.
+%  pp. 5-8 corollary: « Gamma stable » defined here (ours, from p. 7's
+%          struck attempts); valid without infinite parties; no largest
+%          strategy in general (counterexample ours).
+%  p. 9    G(j) read G_0(j').
+%  p. 12   « ? Th 3 »: true if C = union C_i (the page's proof), if C is
+%          finite, or if opponents' positions have finitely many successors
+%          (ours); false in general, even without infinite parties, so the
+%          margin's « pas de partie infinie » is not enough (counterexample
+%          ours); in general G(j) = union over ordinals of G_alpha(j), the
+%          least fixed point of F_j (ours).
+%  p. 25   B's theorem: G(j) is a fixed point, the least one (ours); the
+%          equations do not characterise it when there are infinite parties.
+%  p. 28   « jouée suivant x_0 » read « suivant Sigma' ».
+%  p. 33   condition 1) restricted to Gtilde \ C_0 (as written it forces
+%          Gtilde cap C_0 = empty and makes 3) void).
+%  p. 18   E_alpha(g') read E_beta(g'); f, g read f', g'; c) taken for all
+%          n >= 1 with sums over i < n (the page's n in N*, sum from 0 to n,
+%          misses the first term).
+%  p. 19   (f*g)(s) = <f * eps_s, gcheck> is (f*g)(s^-1); written
+%          <f, eps_s * gcheck>.
+%  p. 20   tassé => prétassé, not the converse (« C'est impliqué par » is an
+%          uncertain reading); counterexample ours.
+%  p. 21   a) f = eps_t * f read fcheck = eps_t * f.
+%  p. 35   « exp 1 = 0 » read log 1 = 0; the margin's « réciproque ? »
+%          answered (ours). Ex. 2 needs J nilpotent or M of finite type
+%          (counterexample ours).
+%  p. 38   (**) for M not of finite type: Hom(G_a, Aut_K(M)) corresponds to
+%          locally nilpotent endomorphisms, not N(End_K(M)); « u_n nuls sauf
+%          un nombre fini » fails (counterexample ours).
+%  p. 40   c_ij = -1/(i+j+1)! (page 1/(i+j)!); Theta, Theta' act on
+%          Hom_K(M, N), not End_K(M).
+%  p. 43   E_{Theta+Theta'} = E_Theta o E_Theta' (page +); « loc.
+%          nilpotente » read as nilpotent locally on X (for a locally
+%          nilpotent derivation in today's sense the statement fails).
+%  p. 44   Cor: (i)-(iii) do not imply (iv); exp maps nilpotent derivations
+%          onto unipotent automorphisms, a strictly smaller set
+%          (counterexample ours; cf. the page's own « est-il nécessaire ? »).
+%  p. 45   last Cor: a), b) false as stated; true with Theta(I) in I^2 and
+%          u = id on gr_I(A) (the struck margin (iii')); counterexample ours.
+%  p. 49   St_V read St_{V'}; Omega(V,W) wedge Omega(W) read ... Omega(V).
+%  p. 53   the sign « (-1)^? » fixed in p. 51's normalisation (ours).
+%  p. 55   phi_{W1,W1} read phi_{W1,W2}.
+%
+% Announced and never established: A's §6 (p. 13, title only); « ? Th 3 » in
+% the generality the margin claims; the end of p. 21 (the common point of the
+% level sets); any use of p. 16's axioms; the NB question of p. 43; I(omega,
+% omega') on p. 53; the theorem p. 55's axioms prepare; any winning condition
+% for the N-player games of p. 47.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{68}
+\pages{1}{55}
+\dating{[à partir de 1978-à partir de 1983]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Jeux de position : notes manuscrites (s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Cinquante-cinq pages de notes, au crayon et à l'encre bleue, sans date de
+sa main ; l'inventaire les date d'une période qui s'ouvre en 1978 et se ferme
+en 1983 ou après, et les range dans un groupe de dossiers intitulé « Autour
+de l'enseignement ». La chemise porte le titre
+des premières pages, « Jeux de position », mais les feuillets traitent de cinq
+sujets que rien sur les pages ne relie.
+
+Le premier, et le plus développé, est celui des jeux. Pensez aux échecs, ou à
+un pion qu'on pousse de case en case : des positions, des coups permis d'une
+position à l'autre, des joueurs dont c'est tour à tour le tour, et des
+positions finales où l'un a gagné. La question est de savoir de quelles
+positions un joueur est sûr de gagner, quoi que fassent les autres. L'idée est
+de raisonner à rebours depuis la fin. Une position où c'est à moi de jouer est
+gagnante si l'un de mes coups mène à une position gagnante ; une position où
+c'est aux autres de jouer est gagnante si tous leurs coups y mènent. On part
+des positions finales gagnées et l'on remonte, comme l'eau qui gagnerait un
+terrain depuis ses points les plus bas : gagnant en un coup, en deux coups, et
+ainsi de suite. Tout le délicat est dans les parties qui peuvent ne pas
+finir. Grothendieck écrit deux fois la théorie. La première rédaction a une
+démonstration qui ne passe que si toute partie s'achève, et se termine sur un
+énoncé précédé d'un point d'interrogation : la remontée coup par coup
+atteint-elle toutes les positions gagnantes ? La réponse est non en général :
+il faut parfois la poursuivre au-delà de tous les entiers. La seconde
+rédaction repart de zéro, démontre le théorème central en toute généralité par
+un argument de bon ordre, et traite le jeu à deux joueurs qui jouent
+alternativement, où chaque position est gagnante, perdante ou nulle. Une
+troisième, d'une page, pose le cadre d'un jeu à $N$ joueurs.
+
+Le deuxième sujet est un problème d'arrangement. Deux listes de nombres
+positifs qu'on multiplie terme à terme et qu'on additionne donnent le plus
+grand total quand on range le plus grand en face du plus grand. Sur un groupe,
+où l'on combine deux fonctions par convolution, la question devient : comment
+disposer les valeurs de chaque fonction pour que la convolution ait le plus
+haut pic, ou mieux, domine toutes les autres dispositions ? La réponse
+attendue est de \emph{tasser} chaque fonction autour d'un centre, en tas
+symétrique, comme on tasse du sable ; les pages cherchent sous quelles
+conditions cela marche sur un groupe quelconque.
+
+Le troisième est l'exponentielle, en algèbre pure. Une dérivation est une
+variation infinitésimale ; son exponentielle en fait une transformation
+finie. En caractéristique zéro, et quand la dérivation est nilpotente, la série
+s'arrête d'elle-même et tout devient algèbre. Les pages montrent que les
+groupes à un paramètre qui agissent sur un module sont exactement les
+exponentielles d'un opérateur, que les automorphismes d'algèbre qui
+« diffèrent peu » de l'identité sont les exponentielles de dérivations, et
+transportent cela aux schémas. Plusieurs énoncés y demandent une hypothèse
+que la page ne met pas, et deux sont faux tels qu'écrits ; on donne ce qui
+est vrai.
+
+Le quatrième est l'orientation. Qu'est-ce qu'orienter un espace ? Pour une
+droite, choisir un sens ; pour un plan, un sens de rotation ; en général,
+choisir l'une de deux classes. Plutôt que de le définir, Grothendieck écrit
+les règles que toute notion d'orientation doit suivre --- chaque espace en a
+exactement deux, et un demi-espace oriente l'hyperplan qui le borde, comme
+dans la formule de Stokes --- et montre qu'il n'y a qu'une théorie qui les
+suive : celle du signe du déterminant. La dernière page commence le même
+travail pour les déterminants eux-mêmes, sur un anneau quelconque.
+
+Ce que ces pages montrent de sa manière tient en deux gestes. Le premier est
+d'écrire les règles auxquelles une notion doit obéir, puis de prouver que ces
+règles la déterminent : c'est la théorie de l'orientation. Le second est de
+laisser la question ouverte sur la page, marquée comme telle, plutôt que de
+l'enjamber ; et, quand une démonstration ne passe pas, de reprendre le texte à
+zéro plutôt que de la rapiécer.
+
+Les noms sous lesquels chercher la suite sont ceux de théorie des jeux
+combinatoires et de jeux sur les graphes (théorème de Zermelo, attracteur,
+détermination), de noyau d'un graphe orienté, d'inégalités de réarrangement
+(Hardy--Littlewood, Riesz--Sobolev) et de majorisation, de correspondance
+exponentielle entre dérivations nilpotentes et automorphismes unipotents, de
+torseur d'orientation et de droite déterminant.
+
+\keywords{combinatorial game theory, positional game, Zermelo's theorem, backward induction, reachability game, attractor, positional determinacy, Gale–Stewart theorem, kernel of a digraph, ordinal rank, rearrangement inequality, weak majorization, Riesz–Sobolev inequality, symmetric decreasing rearrangement, Pollard's theorem, exponential map, nilpotent derivation, unipotent automorphism, formal additive group, locally nilpotent derivation, differential operator, orientation torsor, determinant line, Koszul sign rule, graded determinant, Picard category}
+\end{resume}
+
+\pagerange{1}{55}
+\section*{Le fil du dossier, et les conventions}
+
+\emph{Les pièces.} Le dossier n'a pas de pagination de sa main ; on suit
+celle de l'archive.
+
+\begin{enumerate}
+  \item \emph{Pages 1 à 13}, crayon : un exposé numéroté sur les jeux de
+  position, §1 à §5, et le seul titre d'un §6 (section I). C'est la
+  \emph{première mouture}.
+  \item \emph{Pages 14 à 16} : calculs de brouillon sur des parties finies
+  d'un groupe commutatif, la page 16 à l'encre bleue ; \emph{pages 18 à 21},
+  encre noire puis bleue : une suite numérotée sur le réarrangement des
+  fonctions positives sur un groupe (section IV). La page 17 est un tableau
+  administratif dactylographié, sans rapport, que la transcription ne reprend
+  pas.
+  \item \emph{Pages 23 à 33}, crayon, titrées « Jeux de position » : la
+  \emph{seconde mouture} de la théorie des jeux (section II).
+  \item \emph{Pages 35 à 45}, crayon, titrées « Exponentielles (en car.\ 0) »
+  (section V).
+  \item \emph{Page 47}, crayon, « Jeux à $N$ joueurs » : une \emph{troisième
+  mouture}, réduite aux données (section III).
+  \item \emph{Pages 49, 51 et 53}, encre bleue : une théorie axiomatique de
+  l'orientation (section VI). Elles alternent avec trois exemplaires d'une
+  même page dactylographiée, pages 50, 52 et 54, intitulée « XVIII Les
+  épousailles (2) » --- une liste de couples de mots, « lumière et ombre »,
+  corrigée à la main, sans mathématiques, que la transcription ne reprend
+  pas.\footnote{La page 52 porte « 82 » à la main. Le thème --- des couples
+  de contraires --- est celui que Grothendieck développera sous les noms de
+  yin et de yang dans \emph{Récoltes et semailles} ; le rapprochement est le
+  nôtre, et rien ne dit que ce tapuscrit en soit un état.}
+  \item \emph{Page 55}, crayon : les axiomes d'une théorie des déterminants
+  gradués (section VII).
+\end{enumerate}
+Les pages 22, 34, 46 et 48 sont blanches.
+
+\emph{Le fil.} Il n'y en a pas un, mais cinq. Les jeux (sections I à III)
+forment le seul sujet repris : trois fois, et les trois rédactions sont des
+\emph{moutures} distinctes, qu'on ne fond pas. La première (pages 1 à 13)
+démontre le théorème central par un argument qui ne vaut qu'en l'absence de
+parties infinies, s'essaie au cas général sur une page qu'il barre, et finit
+sur une question. La seconde (pages 23 à 33) reprend tout, démontre le
+théorème en général et va jusqu'au jeu alterné. La troisième (page 47) change
+de cadre --- une position initiale, $N$ joueurs qui jouent dans un ordre
+circulaire --- et s'arrête aux définitions. L'ordre dans lequel les trois ont
+été écrites n'est pas établi ; celui des pages est celui qu'on suit. Le
+réarrangement (section IV), l'exponentielle (section V), l'orientation et le
+déterminant (sections VI et VII) sont des sujets à part ; les deux derniers se
+touchent, par la règle des signes de Koszul, et ce rapprochement est dit à
+la section VII.
+
+\emph{Notations.} Chaque partie garde les lettres de ses pages, avec les
+exceptions suivantes, signalées en note au point où elles interviennent. Dans
+les deux premières moutures, l'application qui donne le joueur qui a
+l'initiative est notée $\alpha$, comme dans la seconde (la première écrit
+$i$) ; et $\overline{C}(j)$ désigne toujours l'ensemble des positions
+\emph{non terminales} où l'initiative est à un autre joueur que $j$, comme
+dans la seconde (la première y inclut les positions terminales). Pour le
+réarrangement, la suite décroissante des valeurs d'une fonction $f$ est notée
+$f^{\downarrow}$, et l'élément neutre du groupe $e$. Pour l'exponentielle, la
+droite formelle est notée $\widehat{\mathbb{G}}_a$.
+
+\emph{Collisions de lettres.} Elles sont nombreuses et on ne les corrige pas,
+mais il faut les avoir en tête. $G$ est l'ensemble des positions gagnantes
+(pages 31 à 33), $G(j)$ celui des positions gagnantes pour $j$, et $G$ un
+groupe aux pages 14 à 21. $N$ est l'ensemble des positions nulles (pages 29
+à 32), le nombre de joueurs (page 47), et $N(A)$ l'ensemble des éléments
+nilpotents d'un anneau (pages 35 à 45). $P$ est l'ensemble des positions
+perdantes ; $\mathfrak{P}$, l'ensemble des parties. Surtout, la théorie des
+jeux combinatoires d'aujourd'hui dit \emph{N-position} (« next ») ce que la
+page appelle \emph{gagnante}, \emph{P-position} (« previous ») ce qu'elle
+appelle \emph{perdante}, et \emph{D-position} (« draw ») ce qu'elle appelle
+\emph{nulle} : le $N$ de la page n'est pas celui de la littérature.
+
+\emph{Ce que le dossier annonce sans l'établir.} Le §6 de la première
+mouture (page 13), dont il n'y a que le titre ; le « Th 3 » de la page 12,
+dans la généralité où la marge le place ; la fin de la page 21 ; l'usage des
+axiomes de la page 16 ; la question du NB de la page 43 ; l'indice
+$I(\omega, \omega')$ de la page 53 ; le théorème que préparent les axiomes de
+la page 55 ; une condition de gain pour les jeux à $N$ joueurs de la page 47.
+
+\pagerange{1}{13}
+\section*{I. Jeux de position, première mouture (pages 1 à 13)}
+
+\pagerange{1}{1}
+\subsection*{Les données (page 1)}
+
+Un \emph{jeu de position} est la donnée :
+\begin{itemize}
+  \item d'un ensemble $C$ de \emph{positions} (ou configurations) ;
+  \item d'une relation $R \subset C \times C$ ; on écrit $y \in R(x)$ pour
+  $(x, y) \in R$, et l'on dit que $y$ est un \emph{successeur} de $x$. Les
+  positions sans successeur sont dites \emph{terminales} :
+  $C_0 = \{x \in C \mid R(x) = \emptyset\}$ ;
+  \item d'un ensemble $J$ de \emph{joueurs} et d'une application
+  $\alpha : C \smallsetminus C_0 \to J$, où $\alpha(x)$ est le joueur qui a
+  l'\emph{initiative} dans la position $x$ ; on pose
+  $C(j) = \alpha^{-1}(j)$, d'où
+  $C \smallsetminus C_0 = \bigsqcup_{j \in J} C(j)$, et
+  $\overline{C}(j) = (C \smallsetminus C_0) \smallsetminus C(j)$ ;
+  \item pour chaque joueur $j$, d'une partie $G_0(j) \subset C_0$, les
+  positions terminales \emph{gagnantes pour $j$}.
+\end{itemize}
+Rien n'oblige les $G_0(j)$ à être disjoints ; une position terminale peut
+n'être gagnante pour personne.\footnote{La page note l'initiative $i$ ; on
+écrit $\alpha$, la lettre de la seconde mouture. L'application était d'abord
+définie sur $C$ tout entier : la restriction à $C \smallsetminus C_0$ est
+ajoutée à l'encre bleue, et une remarque qui le justifiait est barrée. La page
+pose $\overline{C}(j) = C \smallsetminus C(j)$, qui contient $C_0$, et écrit
+ensuite $\overline{C}(j) \smallsetminus \overline{C}_0(j)$ pour les positions
+non terminales ; on adopte d'emblée la convention de la page 23. Une note
+marginale, dont la négation est d'une lecture incertaine, précise qu'« on ne
+suppose pas $G_0(j) \subset C_0(j)$ » ; $C_0(j)$ n'est défini nulle part, et
+la remarque n'a de sens que pour la version où $\alpha$ était définie sur
+$C$ : une position terminale gagnante pour $j$ n'a pas à être une position
+« où $j$ a la main ».}
+
+\pagerange{1}{2}
+\subsection*{Parties, et positions de longueur bornée (pages 1 et 2)}
+
+Une \emph{partie} à $n$ coups est une suite $(x_0, \ldots, x_n)$ avec
+$x_{i+1} \in R(x_i)$ ; elle ne dépend que de $(C, R)$. Elle est
+\emph{terminée} si $x_n \in C_0$. On parle aussi de parties infinies, et une
+partie est \emph{circulaire} si $x_n = x_0$ avec $n \geqslant 1$. S'il existe
+une partie circulaire, il existe une partie infinie ; la réciproque vaut si
+$C$ est fini, puisqu'une partie infinie repasse alors par une même position.
+
+On définit par récurrence
+\[
+C_{-1} = \emptyset,
+\qquad
+C_i = \{x \in C \mid R(x) \subset C_{i-1}\} \quad (i \geqslant 0),
+\]
+de sorte que $C_0$ est bien l'ensemble des positions terminales. La suite
+$(C_i)$ est croissante, et $C_i$ est l'ensemble des positions dont toutes les
+parties issues sont de longueur au plus $i$. La réunion
+$C_\infty = \bigcup_i C_i$ est donc l'ensemble des positions d'où les
+longueurs des parties sont \emph{bornées}. Il revient au même de demander
+$C = C_\infty$ ou l'existence d'une fonction $\ell : C \to \mathbb{N}$ qui
+décroît strictement le long des coups ($\ell(y) < \ell(x)$ pour
+$y \in R(x)$) ; on a alors $x \in C_{\ell(x)}$.\footnote{La page 2 écrit « pour
+tout $x$, l'une des longueurs des parties partant de $x$ est finie » ; ce qui
+est équivalent à $C = C_\infty$ est que ces longueurs soient bornées, comme le
+dit le corollaire qui précède.}
+
+Ces conditions interdisent les parties infinies. Si $C$ est fini, de cardinal
+$N$, la réciproque est vraie : sans partie infinie, il n'y a pas de partie
+circulaire, une partie ne repasse jamais par la même position, sa longueur est
+au plus $N - 1$, et $C = C_{N-1}$.\footnote{Les mots « la réciproque est
+vraie » sont d'une lecture incertaine, sur une ligne surchargée ; c'est bien
+ce que dit la suite. Pour $C$ infini, l'absence de partie infinie
+n'entraîne pas $C = C_\infty$ : une position dont les successeurs $y_1, y_2,
+\ldots$ commencent des chaînes forcées de longueurs $1, 2, \ldots$ n'a que des
+parties finies, mais de longueurs non bornées (exemple nôtre). La bonne
+généralisation est transfinie : $C_\alpha = \{x \mid R(x) \subset
+\bigcup_{\beta < \alpha} C_\beta\}$ pour tout ordinal $\alpha$, et l'absence
+de partie infinie équivaut à $C = \bigcup_\alpha C_\alpha$ (avec l'axiome des
+choix dépendants) ; le plus petit $\alpha$ tel que $x \in C_\alpha$ est le
+\emph{rang} ordinal de $x$. Ce point commande la question de la page 12.}
+
+\pagerange{2}{2}
+\subsection*{Stratégies et positions gagnantes (page 2)}
+
+Une \emph{stratégie} pour le joueur $j$ est une application
+$\Sigma : C(j) \to \mathfrak{P}(C)$ telle que
+$\emptyset \neq \Sigma(x) \subset R(x)$ pour tout $x \in C(j)$ : en chaque
+position où il a la main, $j$ s'autorise un ensemble non vide de coups. Une
+partie est \emph{compatible} avec $\Sigma$ si chacun de ses coups joués depuis
+une position de $C(j)$ est dans $\Sigma$ ; même définition pour les parties
+infinies. La stratégie $\Sigma$ est \emph{gagnante pour $x$} si
+\begin{itemize}
+  \item[a)] il n'y a pas de partie infinie issue de $x$ et compatible avec
+  $\Sigma$ ;
+  \item[b)] toute partie terminée issue de $x$ et compatible avec $\Sigma$
+  s'achève dans $G_0(j)$.
+\end{itemize}
+La position $x$ est \emph{gagnante pour $j$} s'il existe une stratégie pour
+$j$ gagnante pour $x$ ; on note $G(j)$ l'ensemble de ces positions. On a
+$G(j) \cap C_0 = G_0(j)$.
+
+Deux traits de cette définition sont modernes avant la lettre. Une stratégie
+ne regarde que la position présente, non l'histoire de la partie : c'est ce
+qu'on appelle aujourd'hui une stratégie \emph{positionnelle}, ou sans
+mémoire. Et elle autorise un ensemble de coups plutôt qu'un seul, ce qu'on
+appelle parfois une multi-stratégie. Le second trait dispense de choisir un
+coup en chaque position ; le premier se révélera sans perte de généralité
+(section II).
+
+\pagerange{3}{6}
+\subsection*{Théorème 1 : l'équation de point fixe (pages 3 à 6)}
+
+\textbf{Théorème 1.} Soit $j \in J$.
+\begin{itemize}
+  \item[1°)] Pour $x \in C(j)$ : $x \in G(j)$ si et seulement si
+  $R(x) \cap G(j) \neq \emptyset$.
+  \item[2°)] Pour $x \in \overline{C}(j)$ : $x \in G(j)$ si et seulement si
+  $R(x) \subset G(j)$.
+\end{itemize}
+
+Avec $G(j) \cap C_0 = G_0(j)$, cela dit que $G(j)$ est un point fixe de
+l'opérateur, croissant pour l'inclusion,
+\[
+F_j(X) = G_0(j)
+\cup \{x \in C(j) \mid R(x) \cap X \neq \emptyset\}
+\cup \{x \in \overline{C}(j) \mid R(x) \subset X\},
+\]
+qu'on introduit pour la commodité de ce qui suit.\footnote{L'opérateur $F_j$
+n'est pas sur la page ; c'est la forme que prend aujourd'hui le calcul des
+régions gagnantes d'un jeu sur un graphe.}
+
+Le théorème est vrai tel quel, sans hypothèse. La démonstration de la page ne
+l'établit pourtant qu'en partie.\footnote{La marge de la page 3 porte « S'il
+n'y a pas de partie infinie », la négation étant d'une lecture incertaine :
+c'est l'hypothèse sous laquelle la démonstration de 2°, $\Leftarrow$, est
+correcte.} Elle repose sur un lemme : si $\Sigma$ est gagnante pour $x$, elle
+l'est pour toute position d'une partie issue de $x$ et compatible avec
+$\Sigma$ ; en particulier $\Sigma(x) \subset G(j)$ quand $x \in C(j)$.
+
+\emph{1°.} Le sens direct est le lemme. Pour la réciproque, soit
+$y \in R(x) \cap G(j)$ et $\Sigma$ gagnante pour $y$ ; on la modifie en
+posant $\Sigma'(x) = \{y\}$. Si une partie issue de $y$ et compatible avec
+$\Sigma$ passe par $x$, alors $x$ est déjà gagnante pour $\Sigma$ par le
+lemme ; sinon, une partie issue de $x$ et compatible avec $\Sigma'$ ne revient
+jamais en $x$, suit $\Sigma$ après son premier coup, et est
+gagnée.\footnote{C'est la note écrite en oblique dans la marge de la page 4 :
+« Montrons d'abord qu'il n'y a pas de partie compatible avec $\Sigma$
+commençant avec $y$ et terminant par $x$ », les derniers mots d'une lecture
+incertaine. Plusieurs mots de l'argument sont illisibles ; l'articulation
+donnée ici est celle que la page 26 rédige en clair.}
+
+\emph{2°.} Le sens direct est immédiat : une stratégie gagnante pour $x$ l'est
+pour chaque $y \in R(x)$, puisque $x$ n'est pas une position de $j$. Pour la
+réciproque, la page 5 propose la stratégie
+\[
+\Sigma(z) = R(z) \cap G(j) \ \ (z \in C(j) \cap G(j)),
+\qquad
+\Sigma(z) = R(z) \ \ \text{sinon},
+\]
+et montre par récurrence que toute partie issue de $x$ et compatible avec
+elle reste dans $G(j)$ ; une telle partie, si elle se termine, se termine
+donc dans $G(j) \cap C_0 = G_0(j)$. Ce raisonnement ne montre pas qu'elle se
+termine, et ne suffit donc qu'en l'absence de parties infinies. Rester dans
+les positions gagnantes n'est pas gagner.\footnote{Exemple nôtre : deux
+positions $a, b \in C(j)$ avec $R(a) = \{b, t\}$, $R(b) = \{a\}$, et
+$t \in G_0(j)$. Les deux sont gagnantes ($a$ en jouant $t$, $b$ en jouant
+$a$ puis $t$), mais la stratégie « rester dans $G(j)$ », qui autorise
+$a \to b$, laisse jouer $a, b, a, b, \ldots$ indéfiniment. Le mot
+« convenable » qui qualifie la stratégie, et la note marginale de la page 5,
+lue « On suppose qu'il y a une partie infinie », sont d'une lecture
+incertaine ; on attendrait plutôt « qu'il n'y a pas ».}
+
+La page 6, traversée d'un trait oblique qui l'annule, tente le cas général :
+on munit $R(x)$ d'un bon ordre, on choisit pour chaque $y \in R(x)$ une
+stratégie $\Sigma_y$ gagnante pour $y$, et, en une position $z$ atteinte, on
+suit $\Sigma_{y(z)}$ pour le plus petit $y(z)$ d'où $z$ est atteint ; le
+long d'une partie, les $y(x_i)$ décroissent, donc stationnent. La page
+s'interrompt là. Telle qu'écrite, l'accessibilité est prise au sens de
+parties quelconques, et la queue de partie qui suit $\Sigma_y$ après la
+stationnarité n'a alors aucune raison d'être gagnante pour $\Sigma_y$. La
+seconde mouture reprend exactement cet argument, en prenant l'accessibilité
+par des parties compatibles avec $\Sigma_y$, et il passe (pages 26 à 28,
+section II).
+
+\pagerange{5}{8}
+\subsection*{La plus grande stratégie gagnante (pages 5, 7 et 8)}
+
+Disons qu'une partie $\Gamma \subset G(j)$ est \emph{stable} si
+$R(z) \cap G(j) \subset \Gamma$ pour $z \in \Gamma \cap C(j)$ et
+$R(z) \subset \Gamma$ pour $z \in \Gamma \cap \overline{C}(j)$ ; par le
+théorème 1, $G(j)$ lui-même est stable. On ordonne les stratégies par
+inclusion : $\Sigma' \subset \Sigma$ si $\Sigma'(z) \subset \Sigma(z)$ pour
+tout $z$.
+
+\textbf{Corollaire.} Supposons qu'il n'y ait pas de partie infinie, et soit
+$\Gamma \subset G(j)$ stable. La stratégie
+\[
+\Sigma_\Gamma(z) = R(z) \cap G(j) \ \ (z \in \Gamma \cap C(j)),
+\qquad
+\Sigma_\Gamma(z) = R(z) \ \ (z \in C(j) \smallsetminus \Gamma)
+\]
+est gagnante pour tout $x \in \Gamma$, et elle est la plus grande des
+stratégies gagnantes pour tout $x \in \Gamma$.
+
+C'est une stratégie par le 1° du théorème 1. Une partie issue de
+$x \in \Gamma$ et compatible avec elle reste dans $\Gamma$ par stabilité ;
+elle est finie par hypothèse, et se termine dans
+$\Gamma \cap C_0 \subset G_0(j)$. Enfin, si $\Sigma'$ est gagnante pour tout
+point de $\Gamma$, le lemme donne $\Sigma'(z) \subset G(j)$ pour
+$z \in \Gamma \cap C(j)$, donc $\Sigma' \subset \Sigma_\Gamma$ (pages 7 et
+8).\footnote{Le mot « stable » est d'une lecture incertaine et n'est pas
+défini ; la définition est la nôtre. Elle est lue dans les conditions
+biffées de la page 7, qui cherchaient à restreindre la stratégie aux
+positions accessibles depuis $\Gamma$ ; sans elle, la démonstration de la page
+7, qui applique la définition de $\Sigma$ en des positions $x_i \in C(j)$
+comme si elles étaient dans $\Gamma$, ne passe pas. La page écrit aussi
+$R(z)$ pour $R(x_i)$. La démonstration, comme celle du 2° du théorème 1, ne
+vérifie que la condition b) de gain ; l'hypothèse de l'absence de parties
+infinies, qui n'est pas écrite à cet endroit, est nécessaire.}
+
+Sans cette hypothèse, il n'y a pas en général de plus grande stratégie
+gagnante.\footnote{Exemple nôtre : $a, b \in C(j)$, $R(a) = \{b, t\}$,
+$R(b) = \{a, t'\}$, $t, t' \in G_0(j)$. Les stratégies
+$(\Sigma(a), \Sigma(b)) = (\{b, t\}, \{t'\})$ et $(\{t\}, \{a, t'\})$ sont
+gagnantes pour $a$ et pour $b$ ; toute stratégie qui les contient autorise la
+boucle $a, b, a, \ldots$. La notion est celle de stratégie \emph{la plus
+permissive} (Bernet, Janin et Walukiewicz, 2002) : elle existe pour les
+objectifs de sûreté, non en général pour les objectifs d'atteinte comme
+celui-ci.}
+
+\pagerange{8}{11}
+\subsection*{Positions acceptables ; théorème 2 (pages 8 à 11)}
+
+Pour $J' \subset J$, une \emph{$J'$-stratégie} se définit comme une stratégie
+pour un joueur, en remplaçant $C(j)$ par $C(J') = \bigcup_{j \in J'} C(j)$ :
+c'est la stratégie d'une coalition. Fixons $j' \in J$ et
+$J' = J \smallsetminus \{j'\}$. Une $J'$-stratégie $\Sigma'$ est
+\emph{acceptable pour $x$ contre $j'$} si toute partie terminée issue de $x$
+et compatible avec $\Sigma'$ s'achève hors de $G_0(j')$ ; et $x$ est
+\emph{acceptable contre $j'$} s'il existe une telle $\Sigma'$. Les parties
+infinies ne comptent pas contre la coalition : être acceptable, c'est
+empêcher $j'$ de gagner.
+
+\textbf{Théorème 2.} Pour que $x \notin G(j')$, il faut et il suffit que $x$
+soit acceptable contre $j'$.
+
+\emph{Suffisance} (page 9). Si $x \in G(j')$ par une stratégie $\Sigma$ et
+que $\Sigma'$ est acceptable pour $x$, une partie maximale issue de $x$ et
+compatible avec les deux est finie, puisque $\Sigma$ est gagnante, et
+s'achève à la fois dans $G_0(j')$ et hors de $G_0(j')$.\footnote{La page écrit
+$G(j)$ là où l'argument demande $G_0(j')$ ; $j$ et le prime sont peu
+distincts sur cette ligne. L'existence d'une partie maximale compatible avec
+les deux stratégies, qui est implicite ici, est le lemme de la page 24 ; elle
+repose sur l'axiome des choix dépendants.}
+
+\emph{Nécessité} (pages 10 et 11). On pose, pour $z \in C(J')$,
+\[
+\Sigma'(z) = R(z) \ \ (z \in G(j')),
+\qquad
+\Sigma'(z) = R(z) \smallsetminus G(j') \ \ (z \notin G(j')).
+\]
+C'est une $J'$-stratégie par le 2° du théorème 1, et une partie issue d'une
+position $x \notin G(j')$ et compatible avec elle reste hors de $G(j')$ : aux
+positions de $j'$ par le 1°, aux autres par construction. Elle ne peut donc
+s'achever dans $G_0(j')$. Cette stratégie est acceptable pour \emph{toutes}
+les positions non gagnantes pour $j'$ à la fois.
+
+Le théorème 2 vaut sans hypothèse, dès lors que le théorème 1 vaut en
+général. Grothendieck observe alors qu'il a « fait deux fois le même
+raisonnement », et réduit le théorème au jeu auxiliaire à deux joueurs
+$J(j')$ : $j'$ contre la coalition, notée $\bar\jmath$, avec les mêmes
+positions et les mêmes coups, $C(\bar\jmath) = C(J')$,
+$G_0(\bar\jmath) = C_0 \smallsetminus G_0(j')$. Les $J'$-stratégies du jeu
+initial sont les stratégies de $\bar\jmath$ dans $J(j')$, et, \emph{s'il n'y
+a pas de partie infinie}, être acceptable contre $j'$ revient à être gagnant
+pour $\bar\jmath$.\footnote{L'hypothèse est dans la marge de la page 11, et
+elle est nécessaire : une partie infinie compte pour la coalition dans
+« acceptable », non dans « gagnante ». Ce décalage est celui qui sépare, dans
+le vocabulaire d'aujourd'hui, un objectif d'\emph{atteinte} (ouvert) d'un
+objectif de \emph{sûreté} (fermé).} On en tire, sans parties infinies,
+qu'en tout jeu à deux joueurs où chaque position terminale est gagnante pour
+exactement l'un des deux, toute position est gagnante pour exactement l'un
+des deux. C'est le théorème de Zermelo, qui est ce que la page écrit, en
+bas, par « gagnante pour $j$ $\Rightarrow$ non gagnante pour $j'$ » et
+l'implication inverse.\footnote{Zermelo (1913), pour les échecs ; König
+(1927) et Kalmár (1928) pour les jeux où toute partie est finie. Le théorème 2
+lui-même est un cas du théorème de Gale et Stewart (1953) : un jeu dont
+l'objectif est ouvert est déterminé ; ici avec des stratégies positionnelles
+des deux côtés. Rien sur la page ne cite ces travaux.}
+
+\pagerange{12}{12}
+\subsection*{« ? Th 3 » : la construction récurrente (page 12)}
+
+La page 12 cherche à construire $G(j)$ comme la page 1 construisait les
+$C_i$. On pose $G_{-1}(j) = \emptyset$ et
+\[
+G_i(j) = F_j\bigl(G_{i-1}(j)\bigr) \qquad (i \geqslant 0),
+\]
+c'est-à-dire : $G_i(j)$ est l'ensemble des positions d'où $j$ peut forcer le
+gain en au plus $i$ coups. La suite est croissante, contenue dans $G(j)$ par
+le théorème 1, et l'on pose $G_\omega(j) = \bigcup_i G_i(j) \subset G(j)$.
+La page énonce alors, sous un point d'interrogation :
+
+\begin{quote}
+\textbf{? Th 3.} $G_\omega(j) = G(j)$.
+\end{quote}
+
+et démontre, par récurrence sur $i$ au moyen du théorème 1, que
+$G_\omega(j) \cap C_i = G(j) \cap C_i$ pour tout $i$.\footnote{La page note
+$G_\infty(j)$ ; on écrit $G_\omega(j)$ pour la distinguer de l'itération
+transfinie. Une première tentative de démonstration, qui partait d'une
+stratégie gagnante et d'une partie maximale, est encadrée, hachurée et
+abandonnée.} Voici ce qui est vrai.
+
+\begin{itemize}
+  \item[a)] Si $C = \bigcup_i C_i$ --- les longueurs des parties issues de
+  chaque position sont bornées ---, alors $G_\omega(j) = G(j)$ : c'est la
+  démonstration de la page. Le cas d'un $C$ fini sans partie circulaire est
+  compris.
+  \item[b)] Si $C$ est fini, même avec des parties circulaires, alors
+  $G_\omega(j) = G(j)$ : la suite croissante $G_i(j)$ stationne, et sa limite
+  est le plus petit point fixe de $F_j$, qui est $G(j)$ (point d) ci-dessous).
+  \item[c)] Plus généralement, $G_\omega(j) = G(j)$ dès que chaque position
+  de $\overline{C}(j)$ n'a qu'un nombre fini de successeurs.
+  \item[d)] En général, $G_\omega(j) \neq G(j)$, même quand il n'y a aucune
+  partie infinie. Il faut prolonger la récurrence au-delà des entiers :
+  \[
+  G_\alpha(j) = F_j\Bigl(\,\bigcup_{\beta < \alpha} G_\beta(j)\Bigr)
+  \quad (\alpha \text{ ordinal}),
+  \qquad
+  G(j) = \bigcup_\alpha G_\alpha(j),
+  \]
+  et $G(j)$ est le plus petit point fixe de $F_j$.
+\end{itemize}
+
+Les points b) à d) sont les nôtres.\footnote{La marge de la page 12 énonce le
+théorème « si $C$ fini, ou s'il n'existe pas de partie infinie, plus
+généralement si $C = \bigcup C_i$ ». La démonstration couvre le dernier cas,
+mais l'absence de parties infinies n'en est pas un cas particulier quand $C$
+est infini (note de la page 2). Contre-exemple (nôtre) : une position
+$x \in \overline{C}(j)$ dont les successeurs $y_1, y_2, \ldots$ commencent des
+chaînes forcées de longueurs $1, 2, \ldots$ aboutissant dans $G_0(j)$. Toute
+partie est finie et gagnée par $j$, donc $x \in G(j)$ ; mais
+$y_n \in G_n(j) \smallsetminus G_{n-1}(j)$, de sorte que
+$R(x) \not\subset G_i(j)$ pour tout $i$ et $x \notin G_\omega(j)$ ; on a
+$x \in G_{\omega + 1}(j)$.} Pour d), on voit que $G_\alpha(j) \subset G(j)$
+par récurrence transfinie à l'aide du théorème 1 ; inversement, si $\Sigma$
+est gagnante pour $x$, l'arbre des parties issues de $x$ et compatibles avec
+$\Sigma$ n'a pas de branche infinie, et une récurrence sur son rang montre
+que $x$ appartient à un $G_\alpha(j)$. La suite transfinie stationne à un
+ordinal de cardinal au plus celui de $C$. Pour c), l'hypothèse rend $F_j$
+compatible aux réunions croissantes dénombrables, et le point fixe est atteint
+en $\omega$ étapes.\footnote{Dans le vocabulaire des jeux sur les graphes,
+$G(j)$ est l'\emph{attracteur} de $G_0(j)$ pour le joueur $j$, et les
+$G_\alpha(j)$ en sont les étapes ; sur un graphe infini, l'attracteur se
+calcule par récurrence transfinie. Le point d) donne aussi une démonstration
+du théorème 1 qui n'a besoin ni de bon ordre ni de choisir des stratégies
+(seul l'axiome des choix dépendants intervient) : la stratégie du rang, qui en une position
+$z \in C(j) \cap G(j)$ autorise les coups vers les positions de rang plus
+petit, est gagnante, parce que le rang décroît strictement le long des
+parties.}
+
+\pagerange{13}{13}
+\subsection*{Un paragraphe annoncé (page 13)}
+
+La page 13 ne porte que le titre d'un §6, « Élimination des parties
+circulaires (en $C$ fini) ». Le paragraphe n'est écrit nulle part dans le
+dossier, et l'on n'en reconstitue pas le contenu. On note seulement qu'en $C$
+fini, le point b) ci-dessus rend la question du « Th 3 » sans objet.
+
+\pagerange{23}{33}
+\section*{II. Jeux de position, seconde mouture (pages 23 à 33)}
+
+\pagerange{23}{24}
+\subsection*{Données, parties, stratégies (pages 23 et 24)}
+
+Les données sont celles de la première mouture, écrites cette fois avec la
+convention $\overline{C}(j) = (C \smallsetminus C_0) \smallsetminus C(j)$
+dès le départ.\footnote{La page 23 écrit la relation avec un $R$ rond ; les
+pages suivantes ont un $R$ droit.} Une \emph{partie} est une suite finie ou
+infinie de positions dont deux termes consécutifs vérifient
+$x_{i+1} \in R(x_i)$ ; les parties \emph{terminées}, ou non prolongeables,
+sont les parties infinies et les parties finies dont la dernière position est
+terminale. Une marge note que les parties se composent de façon associative,
+et parle de « catégorie des positions » : c'est la catégorie libre sur le
+graphe $(C, R)$, dont les parties finies sont les flèches. Une partie est
+\emph{gagnée pour $j$} si elle est finie, terminée, et s'achève dans
+$G_0(j)$ ; une marge observe qu'une partie composée $XY$ est gagnée si et
+seulement si $Y$ l'est.
+
+Une stratégie pour $j$ est, comme en I, une application
+$\Sigma : C(j) \to \mathfrak{P}(C)$ avec
+$\emptyset \neq \Sigma(x) \subset R(x)$ ; on la prolonge par
+$\Sigma(x) = R(x)$ sur $\overline{C}(j)$. Les parties compatibles avec
+$\Sigma$ --- les « $\Sigma$-parties » --- sont stables par composition et
+forment une sous-catégorie.
+
+\textbf{Lemme} (page 24). Soient $J' \subset J$ et, pour chaque $j \in J'$,
+une stratégie $\Sigma_j$ pour $j$. De toute position part une partie
+terminée compatible avec toutes les $\Sigma_j$.\footnote{On la construit coup
+par coup : c'est l'axiome des choix dépendants, que la page ne mentionne
+pas.}
+
+La stratégie $\Sigma$ est \emph{gagnante pour $x_0$} si toute partie
+terminée issue de $x_0$ et compatible avec $\Sigma$ est gagnée pour $j$ :
+c'est la définition de la section I, les deux conditions a) et b) réunies en
+une. On note encore $G(j)$ l'ensemble des positions gagnantes pour $j$, et
+$G(j) \cap C_0 = G_0(j)$. Une proposition entre crochets en tire, par le
+lemme, que si $\bigcap_{j \in J'} G_0(j) = \emptyset$ (avec $J'$ non vide),
+aucune position n'est gagnante pour tous les $j \in J'$ à la fois.
+
+\pagerange{25}{28}
+\subsection*{Le théorème de point fixe, démontré (pages 25 à 28)}
+
+\textbf{Proposition} (page 25). Si $\Sigma$ est gagnante pour $x_0$, toute
+position d'une $\Sigma$-partie issue de $x_0$ est gagnante pour $\Sigma$.
+
+\textbf{Théorème} (page 25). On a
+\[
+G(j) \cap C(j) = \{x \in C(j) \mid R(x) \cap G(j) \neq \emptyset\},
+\qquad
+G(j) \cap \overline{C}(j) = \{x \in \overline{C}(j) \mid R(x) \subset G(j)\},
+\]
+et $G(j) \cap C_0 = G_0(j)$ ; autrement dit, $G(j) = F_j(G(j))$.
+
+C'est le théorème 1 de la page 3, et la démonstration en est cette fois
+complète. Le point a), $\supset$, est celui de la section I : si
+$x_1 \in R(x_0) \cap G(j)$ par une stratégie $\Sigma_1$, et si $x_0$ n'est
+pas déjà gagnante pour $\Sigma_1$, la stratégie $\Sigma_0$ égale à
+$\Sigma_1$ sauf en $x_0$, où $\Sigma_0(x_0) = \{x_1\}$, est gagnante : une
+partie jouée suivant $\Sigma_0$ ne revient jamais en $x_0$, car le premier
+retour ferait de $x_0$ une position gagnante pour $\Sigma_1$.
+
+Le point b), $\supset$, est le cœur. Soit $x_0 \in \overline{C}(j)$ avec
+$R(x_0) \subset G(j)$ ; on choisit pour chaque $x_1 \in R(x_0)$ une stratégie
+$\Sigma_{x_1}$ gagnante pour $x_1$, et un bon ordre sur $R(x_0)$. Pour
+$x \in C$, soit $E(x)$ l'ensemble des $x_1 \in R(x_0)$ tels qu'il existe une
+$\Sigma_{x_1}$-partie de $x_1$ à $x$, soit
+$C' = \{x \mid E(x) \neq \emptyset\}$, et, pour $x \in C'$, soit $\varepsilon(x)$
+le plus petit élément de $E(x)$. On pose
+\[
+\Sigma_0(x) = \Sigma_{\varepsilon(x)}(x) \ \ (x \in C(j) \cap C'),
+\qquad
+\Sigma_0(x) = R(x) \ \ \text{sinon}.
+\]
+Un lemme (page 27) dit que tout $x \in C'$ est gagnant pour
+$\Sigma_{\varepsilon(x)}$, donc $C' \subset G(j)$, et que pour
+$y \in \Sigma_0(x)$ on a $\varepsilon(x) \in E(y)$, donc $y \in C'$ et
+$\varepsilon(y) \leqslant \varepsilon(x)$. Le long d'une partie issue de
+$x_0$ et compatible avec $\Sigma_0$, les $\varepsilon(x_i)$, $i \geqslant 1$,
+forment alors une suite décroissante dans un ensemble bien ordonné : elle
+stationne en une valeur $\xi$ à partir d'un rang $n$, et la queue
+$(x_n, x_{n+1}, \ldots)$ est une $\Sigma_\xi$-partie issue d'une position
+gagnante pour $\Sigma_\xi$ ; elle est donc finie. Comme toutes les $x_i$ sont
+dans $C' \subset G(j)$, la partie s'achève dans $G(j) \cap C_0 = G_0(j)$.
+
+C'est très exactement l'argument que la page 6 avait ébauché puis barré ; ce
+qui le fait passer est de mesurer l'accessibilité par des parties compatibles
+avec $\Sigma_{x_1}$, et non par des parties quelconques.\footnote{L'indice du
+point de départ, dans « de $x_1$ à $x$ », est surchargé ; $x_1$ est la
+lecture que demande la suite. Le choix des $\Sigma_{x_1}$ et du bon ordre
+utilise l'axiome du choix ; la stratégie du rang (note de la page 12) s'en
+dispense.}
+
+\emph{Lecture moderne.} Le théorème dit que $G(j)$ est un point fixe de
+$F_j$ ; il ne dit pas lequel, et les équations seules ne le caractérisent pas
+quand il y a des parties infinies.\footnote{Deux positions $a, b \in C(j)$
+avec $R(a) = \{b\}$, $R(b) = \{a\}$ et $G_0(j) = \emptyset$ : $X = \{a, b\}$
+vérifie $F_j(X) = X$, alors que $G(j) = \emptyset$ (exemple nôtre).} Ce qui
+le caractérise est d'être le \emph{plus petit} point fixe (section I, page 12,
+point d)) ; quand il n'y a pas de partie infinie, le point fixe est unique,
+par récurrence sur le rang. C'est ce qu'établit la page 33 dans le cas
+alterné.
+
+\pagerange{28}{29}
+\subsection*{Stratégies contre $j$ ; positions admissibles (pages 28 et 29)}
+
+Une \emph{stratégie contre $j$} est une application $\Sigma'$ définie sur
+$C \smallsetminus C_0$, avec $\Sigma'(x) = R(x)$ pour $x \in C(j)$ et
+$\emptyset \neq \Sigma'(x) \subset R(x)$ pour $x \in \overline{C}(j)$ :
+c'est la stratégie de la coalition de tous les autres joueurs. Elle est
+\emph{admissible pour $x_0$} si toute partie terminée issue de $x_0$ et
+jouée suivant $\Sigma'$ n'est pas gagnée par $j$, c'est-à-dire est infinie
+ou s'achève hors de $G_0(j)$.\footnote{La page écrit « jouée suivant
+$x_0$ » ; on lit « suivant $\Sigma'$ ».} C'est la notion que la première
+mouture appelait « acceptable ».
+
+\textbf{Théorème} (pages 28 et 29). Soit $\Sigma'_*$ la stratégie contre $j$
+définie par
+\[
+\Sigma'_*(x) = R(x) \ \ (x \in C(j) \cup G(j)),
+\qquad
+\Sigma'_*(x) = R(x) \smallsetminus G(j) \quad
+(x \in \overline{C}(j) \smallsetminus G(j)).
+\]
+Pour $x_0 \in C$, les conditions suivantes sont équivalentes : a)
+$x_0 \notin G(j)$ ; b) $x_0$ est admissible contre $j$ ; c) $x_0$ est
+admissible pour $\Sigma'_*$.
+
+C'est une stratégie par le b) du théorème de point fixe ; c)
+$\Rightarrow$ b) est trivial, b) $\Rightarrow$ a) résulte du lemme de la page
+24, et pour a) $\Rightarrow$ c) une partie jouée suivant $\Sigma'_*$ depuis
+$x_0 \notin G(j)$ reste hors de $G(j)$.\footnote{La page énonce les conditions
+« pour $x \in C$ » et les écrit pour $x_0$.} C'est le théorème 2 de la
+première mouture, et il contient une remarque qui n'est pas sur la page : une
+seule stratégie positionnelle de la coalition bloque $j$ depuis toutes ses
+positions non gagnantes, contre \emph{toute} façon de jouer de $j$, avec ou
+sans mémoire. Restreindre $j$ aux stratégies positionnelles ne lui retire donc
+rien : $G(j)$ est aussi l'ensemble des positions d'où $j$ gagne avec des
+stratégies qui tiennent compte de l'histoire. C'est la \emph{détermination
+positionnelle} des jeux d'atteinte.
+
+\textbf{Corollaire} (page 29). Supposons $J = \{j, j'\}$ et
+$G_0(j) \cap G_0(j') = \emptyset$, et soit $N$ l'ensemble des positions
+admissibles contre $j$ et contre $j'$. Alors
+\[
+C = G(j) \sqcup G(j') \sqcup N .
+\]
+Les positions de $N$ sont celles d'où aucun des deux joueurs ne peut forcer
+le gain : la partie peut se prolonger indéfiniment, ou finir sur une position
+qui ne donne la victoire à personne.
+
+\pagerange{30}{32}
+\subsection*{Gagnantes, perdantes, nulles : le jeu alterné (pages 30 à 32)}
+
+Toujours à deux joueurs, notons $\bar\alpha(x)$ l'adversaire du joueur
+$\alpha(x)$ qui a la main en $x \in C \smallsetminus C_0$. La page 30 pose
+\[
+G^* = \{x \in C \smallsetminus C_0 \mid x \in G(\alpha(x))\},
+\qquad
+P^* = \{x \in C \smallsetminus C_0 \mid x \in G(\bar\alpha(x))\},
+\]
+les positions non terminales \emph{gagnantes} (pour celui qui a la main) et
+\emph{perdantes} (gagnantes pour l'autre), et appelle \emph{nulles} les
+autres : $N^* = N \cap (C \smallsetminus C_0)$. On a
+$G(j) \cap C(j) = G^* \cap C(j)$ et
+$G(j) \cap \overline{C}(j) = P^* \cap C(j')$, de sorte que les $G(j)$ se
+reconstituent à partir de $G^*$, de $P^*$ et des $G_0(j)$.
+
+Le jeu est \emph{alterné} s'il existe $\hat\alpha : C \to J$ prolongeant
+$\alpha$ avec $\hat\alpha(y) \neq \hat\alpha(x)$ pour $y \in R(x)$. Il faut et
+il suffit que deux coups consécutifs vers des positions non terminales
+changent de joueur, et que les prédécesseurs d'une même position terminale
+appartiennent tous au même joueur ; $\hat\alpha$ est alors déterminée hors des
+positions \emph{isolées}, sans prédécesseur ni successeur, où l'on peut la
+choisir librement. On pose
+\[
+G = \{x \in C \mid x \in G(\hat\alpha(x))\},
+\qquad
+P = \{x \in C \mid x \in G(\bar{\hat\alpha}(x))\},
+\]
+qui prolongent $G^*$ et $P^*$, et l'on a $C \smallsetminus (G \cup P) = N$.
+Les $G(j)$ se lisent sur $\hat\alpha$, $G$ et $P$, et pour
+$x \in C \smallsetminus C_0$ :
+\[
+x \in G \iff R(x) \cap P \neq \emptyset,
+\qquad
+x \in P \iff R(x) \subset G .
+\]
+Une position est gagnante si l'on peut jouer vers une position perdante, et
+perdante si tous les coups mènent à des positions gagnantes : c'est
+l'analyse rétrograde des jeux combinatoires.\footnote{Dans le vocabulaire de
+la théorie des jeux combinatoires (Berlekamp, Conway et Guy, \emph{Winning
+Ways}, 1982), ce que la page appelle gagnante, perdante et nulle se dit
+N-position, P-position et, pour les jeux où les parties peuvent ne pas finir
+(\emph{loopy games}), D-position. Dans la convention dite normale, où celui
+qui ne peut plus jouer perd, $G_0(j)$ est l'ensemble des positions terminales
+où c'est à l'adversaire de $j$ de jouer, et toute position terminale est
+perdante. Le $G_0$ de la page laisse cette convention libre.}
+
+\pagerange{33}{33}
+\subsection*{Caractérisation sans parties infinies (page 33)}
+
+\textbf{Proposition} (page 33). Soit un jeu alterné à deux joueurs, et soient
+$\widetilde{G}, \widetilde{P} \subset C$ tels que
+\begin{itemize}
+  \item[1)] pour $x \in \widetilde{G} \smallsetminus C_0$, il existe
+  $y \in R(x) \cap \widetilde{P}$ ;
+  \item[2)] pour $x \in \widetilde{P}$, $R(x) \subset \widetilde{G}$ ;
+  \item[3)] pour $x \in \widetilde{G} \cap C_0$, $x \in G_0(\hat\alpha(x))$ ;
+  \item[4)] pour $x \in \widetilde{P} \cap C_0$,
+  $x \in G_0(\bar{\hat\alpha}(x))$.
+\end{itemize}
+S'il n'y a pas de partie infinie, alors $\widetilde{G} \subset G$ et
+$\widetilde{P} \subset P$. Si de plus $\widetilde{G}$ et $\widetilde{P}$ sont
+complémentaires et $G_0(j) \cap G_0(j') = \emptyset$, alors
+$\widetilde{G} = G$, $\widetilde{P} = P$, et par suite $G \cup P = C$ et
+$C_0 = G_0(j) \sqcup G_0(j')$.\footnote{La page énonce 1) pour tout
+$x \in \widetilde{G}$. Pris à la lettre, il interdit à $\widetilde{G}$ de
+contenir une position terminale, rend 3) vide, et la seconde conclusion
+devient fausse dès qu'une position terminale est gagnante pour celui qui
+aurait la main. On restreint 1) aux positions non terminales, ce que demande
+la présence de 3).}
+
+Pour la première assertion, chaque joueur joue, depuis ses positions de
+$\widetilde{G}$, vers $\widetilde{P}$ : la partie alterne entre
+$\widetilde{G}$ et $\widetilde{P}$, se termine faute de parties infinies, et
+les conditions 3) et 4) disent que la position finale donne la victoire au
+bon joueur. Sans l'hypothèse, deux positions qui se renvoient l'une à l'autre,
+l'une dans $\widetilde{G}$ et l'autre dans $\widetilde{P}$, vérifient 1) à 4)
+sans que personne ne gagne. La seconde vient de ce que $G \cap P = \emptyset$
+quand les $G_0$ sont disjoints.
+
+\textbf{Corollaire} (page 33). Pour un jeu alterné sans partie infinie où
+$C_0 = G_0(j) \sqcup G_0(j')$, le couple $(G, P)$ est l'\emph{unique} couple
+de parties complémentaires de $C$ qui vérifie 1) à 4).
+
+Dans la convention normale, où les positions terminales sont perdantes, les
+conditions disent que $P$ ne contient aucun coup entre deux de ses éléments,
+et que toute position hors de $P$ a un coup vers $P$ : $P$ est le
+\emph{noyau} du graphe du jeu, et le corollaire est l'existence et l'unicité
+du noyau d'un graphe sans chemin infini.\footnote{Von Neumann et Morgenstern
+(1944), sous le nom de « solution » d'une relation de domination ; le mot
+« noyau » est de Berge (1958). Les P-positions sont aussi les zéros de la
+fonction de Sprague et Grundy (1935, 1939). Rien sur la page ne cite ces
+travaux.}
+
+\pagerange{47}{47}
+\section*{III. Jeux à $N$ joueurs, troisième mouture (page 47)}
+
+La page 47 repart d'un autre cadre. Un jeu à $N$ joueurs est la donnée
+\begin{itemize}
+  \item d'un ensemble $C$ de configurations et d'un ensemble $J$ de joueurs,
+  de cardinal $N$ ;
+  \item d'une application $j : C \to J$, définie cette fois partout : en
+  toute configuration, il y a un joueur « dont c'est le tour » ;
+  \item d'une application $\sigma : C \to \mathfrak{P}(C)$ qui donne les
+  configurations suivantes, ou de la relation équivalente
+  $\Sigma \subset C \times C$ ;
+  \item d'une configuration initiale $x_0$ ; les configurations terminales
+  sont celles où $\sigma(x) = \emptyset$.
+\end{itemize}
+Une partie à $n$ coups est une suite $(x_1, \ldots, x_n)$ avec
+$x_i \in \sigma(x_{i-1})$ : le joueur $j(x_0)$ choisit $x_1$, puis $j(x_1)$
+choisit $x_2$, et ainsi de suite.\footnote{La lettre $\Sigma$ désigne ici la
+relation de succession, que les deux autres moutures notent $R$, et non une
+stratégie. La lettre $j$ de l'application est surchargée sur la page.}
+
+Le jeu est \emph{circulaire} si $j$ est surjective (tout joueur joue), s'il
+existe $\rho : J \to J$ avec $j(y) = \rho(j(x))$ pour tout coup
+$(x, y) \in \Sigma$, et si $\rho$ est une permutation circulaire : les
+joueurs jouent à tour de rôle, dans un ordre fixé. L'application $\rho$ est
+unique dès que chaque joueur a la main dans au moins une configuration non
+terminale.
+
+Trois choses changent par rapport aux deux premières moutures : une position
+initiale est fixée, l'initiative est définie aussi aux positions terminales,
+comme le $\hat\alpha$ du jeu alterné, et il n'y a pas encore de condition de
+gain. Pour $N = 2$, un jeu circulaire est un jeu alterné au sens de la page
+31. La page s'arrête aux définitions.
+
+\pagerange{14}{21}
+\section*{IV. Réarrangements sur un groupe (pages 14 à 21)}
+
+\pagerange{14}{16}
+\subsection*{Les brouillons (pages 14 à 16)}
+
+Les pages 14 et 15 sont des calculs sans phrases, sur des parties finies d'un
+groupe commutatif noté additivement : sommes de parties, tableaux de sommes
+$0, a, a'$ contre $0, a, b'$, et des listes d'entiers comme $3\,2\,2\,1\,1$ ou
+$3\,2\,2\,2$. On y reconnaît --- la page ne le dit pas --- des \emph{profils}
+de convolution : la suite décroissante des valeurs de
+$\mathbf{1}_E * \mathbf{1}_F$, c'est-à-dire du nombre de façons d'écrire
+chaque élément comme somme d'un élément de $E$ et d'un élément de
+$F$.\footnote{Lecture nôtre, vérifiée sur deux cas. Pour $E = F = \{0, 1, 2\}$
+dans $\mathbb{Z}$, le profil est $(3, 2, 2, 1, 1)$. Pour $E = V_1 \cup \{x\}$,
+où $V_1$ est un sous-groupe d'ordre $2$ d'un groupe $G$ d'ordre $4$,
+$G = V_1 \cup (x + V_1)$ et $2x = u$, la page 15 calcule
+$\mathbf{1}_E * \mathbf{1}_E = 2 \cdot \mathbf{1}_G + \delta_u$, de profil
+$(3, 2, 2, 2)$, le nombre qu'elle encadre.} La page 14 s'essaie aussi à
+décrire des familles emboîtées $E_2 \subset E_{2n}$ de parties, où $E_2$ est
+un sous-groupe et $E_{2n}$ est stable par translation par $E_2$ : ce sont les
+candidats au rôle d'« intervalles » dans un groupe qui a de la $2$-torsion.
+
+La page 16, à l'encre bleue, est plus organisée, et ses deux moitiés sont
+écrites tête-bêche. L'une est un modèle : dans $G = \mathbb{Z}/(2m+1)$, les
+intervalles $E_i = [-i, i]$, de cardinal impair, et
+$F_j = [m - j, m + 1 + j]$, de cardinal pair, centrés en $m + \tfrac12$, le
+« demi-point » opposé à $0$ sur le cercle (dans $\mathbb{Z}/(2m+1)$, où $2$
+est inversible, on a encore $F_j = -F_j$) ; la convolution de deux $E$ ou de deux $F$ est une
+combinaison à coefficients positifs des $E_k$, celle d'un $E$ et d'un $F$ une
+combinaison des $F_k$.\footnote{La transcription lit $E_i = [i, i]$ et
+$E_1 = \varepsilon$ ; le sens demande $[-i, i]$ et $E_0 = \{0\}$. La lettre
+des coefficients de la troisième relation est lue $\gamma$ sans certitude.}
+L'autre moitié en tire des axiomes, pour un groupe commutatif $G$ muni d'un
+homomorphisme surjectif $\eta : \widetilde{G} \to G$ dont le noyau est
+identifié par $i$ au sous-groupe ${}_2G$ des éléments d'ordre divisant $2$.
+À chaque $\tilde g \in \widetilde{G}$ est associée une famille
+$\mathcal{A}(\tilde g)$ de parties finies de $G$ ; on note
+$\mathcal{C}(\tilde g)$ le cône des combinaisons positives de ses éléments,
+et $g = \eta(\tilde g)$. Les axiomes sont :
+\begin{itemize}
+  \item[a)] $\mathcal{A}(\tilde g)$ est totalement ordonnée par inclusion ;
+  \item[b)] tout $A \in \mathcal{A}(\tilde g)$ vérifie $A = g - A$ ;
+  \item[c)] pour $A \in \mathcal{A}(\tilde g)$ et $B \in \mathcal{A}(\tilde h)$,
+  $\mathbf{1}_A * \mathbf{1}_B \in \mathcal{C}(\tilde g \tilde h)$ ;
+  \item[d)] pour $u \in {}_2G$, $\mathcal{A}(i(u)\tilde g) = u + \mathcal{A}(\tilde g)$ ;
+  \item[d')] pour $\tilde g, \tilde h$, il existe $s \in G$ tel que
+  $\mathcal{A}(\tilde g) \cup (s + \mathcal{A}(\tilde h))$ soit totalement
+  ordonné.
+\end{itemize}
+Lu ainsi, $\tilde g$ est le \emph{centre} des ensembles de
+$\mathcal{A}(\tilde g)$ : un ensemble tel que $A = g - A$ est symétrique
+autour de « $g/2$ », qui n'existe pas toujours dans $G$ --- dans $\mathbb{Z}$,
+un intervalle de longueur paire est centré en un demi-entier ---, et
+$\widetilde{G}$ est le groupe de ces centres. Deux centres au-dessus du même
+$g$ diffèrent d'un élément de ${}_2G$, et d) dit que leurs familles se
+déduisent l'une de l'autre par translation.\footnote{Cette lecture est la
+nôtre ; la page ne construit pas $\widetilde{G}$, qu'elle se donne. La suite
+exacte $0 \to {}_2G \to G \xrightarrow{\,2\,} G$ notée isolément au pied de
+la page 21 est la même. La lettre $\eta$ est lue sans certitude, le dernier
+crochet reste ouvert, et la page écrit deux conditions d).} C'est le cadre où
+le réarrangement « symétrique décroissant » a un sens sur un groupe
+commutatif ; il n'est pas repris ailleurs dans le dossier.
+
+\pagerange{18}{18}
+\subsection*{Le couplage $|f, g|$ (page 18)}
+
+Soit $G$ un ensemble, $\mathbb{R}[G] = \mathbb{R}^{(G)}$ les fonctions réelles
+à support fini, $\mathbb{R}[G]^+$ celles qui sont positives. Deux fonctions
+$f, f' \in \mathbb{R}[G]^+$ sont \emph{équivalentes}, $f' \sim f$, si
+$f' = f \circ \sigma$ pour une permutation $\sigma$ de $G$ ; il revient au
+même de demander qu'elles aient la même suite décroissante de valeurs
+\[
+f^{\downarrow} = (f^{\downarrow}_0 \geqslant f^{\downarrow}_1 \geqslant \cdots),
+\]
+valeurs non nulles comptées avec multiplicité et complétées par des zéros, ou
+la même image de la mesure de comptage. La page dit $f'$ un
+\emph{éparpillement} de $f$.\footnote{La page note $A(f)$ la suite ordonnée,
+dans une note de marge lue sans certitude ; on écrit $f^{\downarrow}$, la
+notation d'aujourd'hui, qui évite une collision avec les ensembles $A$.} On
+pose, pour $f, g \in \mathbb{R}[G]^+$,
+\[
+|f, g| = \sup_{f' \sim f} \langle f', g \rangle
+= \sup_{f' \sim f,\ g' \sim g} \langle f', g' \rangle
+= \sum_{n \geqslant 0} f^{\downarrow}_n g^{\downarrow}_n ,
+\]
+la dernière égalité, que la page n'écrit pas, étant l'inégalité de
+réarrangement de Hardy et Littlewood : le couplage est maximal quand on range
+les grandes valeurs en face des grandes valeurs. En particulier
+$|f, f| = \|f\|_2^2$.
+
+\textbf{Cas d'égalité.} $\langle f', g' \rangle = |f, g|$ si et seulement si,
+pour tous $\alpha, \beta > 0$, les ensembles de niveau
+$E_\alpha(f') = \{s \mid f'(s) \geqslant \alpha\}$ et $E_\beta(g')$ sont
+comparables pour l'inclusion ; autrement dit, si la réunion des familles
+$E_*(f')$ et $E_*(g')$ est totalement ordonnée ; autrement dit encore, s'il
+existe un ordre total sur $G$ pour lequel $f'$ et $g'$ sont toutes deux
+décroissantes.\footnote{La page écrit « $E_\alpha(f') \cup E_\alpha(g')$ soit
+tot.\ ordonné » pour la réunion des deux familles, et « $f$ et $g$
+décroissantes » pour $f'$ et $g'$. Elle ajoute que l'ordre total peut être
+pris de type $[0, n]$ ou $\mathbb{N}$ si $G$ est fini ou dénombrable. On
+dit aujourd'hui que $f'$ et $g'$ sont \emph{comonotones}.}
+
+Enfin $f' \sim f$ si et seulement si $|f', g| = |f, g|$ pour tout $g$, et il
+suffit de le demander pour les indicatrices des parties finies :
+$|f, \mathbf{1}_A|$ est la somme des $\operatorname{card} A$ plus grandes
+valeurs de $f$.
+
+\pagerange{18}{19}
+\subsection*{La relation $f' \prec f$ (pages 18 et 19)}
+
+\textbf{Proposition.} Pour $f', f \in \mathbb{R}[G]^+$, les conditions
+suivantes sont équivalentes :
+\begin{itemize}
+  \item[a)] $|f', g| \leqslant |f, g|$ pour tout $g \in \mathbb{R}[G]^+$ ;
+  \item[b)] $|f', \mathbf{1}_A| \leqslant |f, \mathbf{1}_A|$ pour toute partie
+  finie $A$ ;
+  \item[c)] $\sum_{i < n} f'^{\downarrow}_i \leqslant \sum_{i < n}
+  f^{\downarrow}_i$ pour tout $n \geqslant 1$.
+\end{itemize}
+On écrit alors $f' \prec f$.\footnote{La page écrit c) avec
+$\sum_0^n$ pour $n \in \mathbb{N}^*$, ce qui omet la première inégalité
+$f'^{\downarrow}_0 \leqslant f^{\downarrow}_0$ ; on somme sur $i < n$.}
+
+C'est un préordre, dont la relation d'équivalence associée est $\sim$. On
+l'appelle aujourd'hui \emph{sous-majorisation faible} : les sommes partielles
+de la suite décroissante sont dominées, sans égalité imposée des sommes
+totales.\footnote{Hardy, Littlewood et Pólya (1929, puis \emph{Inequalities},
+1934) ; l'exposé de référence est Marshall et Olkin, \emph{Inequalities:
+Theory of Majorization and Its Applications} (1979). L'équivalence de a) et
+c) est une transformation d'Abel, puisque $g^{\downarrow}$ est décroissante et
+positive.} Le supremum de $\langle f', g \rangle$ sur les $f' \prec f$ est
+$|f, g|$, atteint en des $f' \sim f$ ; et $f' \prec f$ équivaut à
+$|f', g'| \leqslant |f, g|$ pour tous $g' \prec g$.
+
+\pagerange{19}{20}
+\subsection*{Couples prétassés (pages 19 et 20)}
+
+Désormais $G$ est un groupe, d'élément neutre $e$, et $\mathbb{R}[G]^+$ est
+stable par la convolution
+$(f * g)(s) = \sum_{ab = s} f(a)\, g(b)$. On note
+$\check g(a) = g(a^{-1})$ et $\varepsilon_s$ la masse de Dirac en $s$. On a
+\[
+(f * g)(s) = \langle f, \varepsilon_s * \check g \rangle ,
+\qquad\text{d'où}\qquad
+\|f * g\|_\infty \leqslant |f, g| ,
+\]
+puisque $\varepsilon_s * \check g \sim g$.\footnote{La page écrit
+$(f * g)(s) = \langle f * \varepsilon_s, \check g \rangle$ ; ce second membre
+vaut $(f * g)(s^{-1})$ dans un groupe commutatif, ce qui est sans effet sur le
+supremum en $s$. La forme écrite ici est celle qui rend exacte la condition
+d) ci-dessous. La page note l'élément neutre $0$.}
+
+\textbf{Proposition} (page 19). Pour $f, g \in \mathbb{R}[G]^+$, les
+conditions suivantes sont équivalentes :
+\begin{itemize}
+  \item[a)] $\|f' * g'\|_\infty \leqslant \|f * g\|_\infty$ pour tous
+  $f' \prec f$, $g' \prec g$ ;
+  \item[b)] $(f' * g')(e) \leqslant \|f * g\|_\infty$ pour tous $f' \prec f$,
+  $g' \prec g$ (ou seulement $f' \sim f$, $g' \sim g$) ;
+  \item[c)] $|f, g| = \|f * g\|_\infty$ ;
+  \item[d)] il existe $s \in G$ tel que la réunion des familles $E_*(f)$ et
+  $E_*(\varepsilon_s * \check g)$ soit totalement ordonnée.
+\end{itemize}
+On dit alors que le couple $(f, g)$ est \emph{prétassé}.\footnote{La
+transcription lit ici « couple \emph{préféré} », le titre étant
+« Couples préférés », au premier mot surchargé. La page 21 appelle
+« prétassé » exactement la condition dont le corollaire ci-dessous donne le
+cas $(f, f)$, et l'en-tête du lot 2 de la transcription nomme la section de
+la page 19 « Couples prétassés ». On suit la page 21 ; la lecture des pages
+19 et 20 serait à revoir sur le fac-similé.} La relation n'est pas
+symétrique en général, mais l'est si $G$ est commutatif.
+
+\textbf{Corollaire.} Le couple $(f, f)$ est prétassé si et seulement si $f$
+est symétrique autour d'un centre : il existe $s \in G$ avec
+$\check f = \varepsilon_s * f$, ou, ce qui revient au même,
+$\check f = f * \varepsilon_s$.
+
+En effet, deux fonctions équivalentes dont les ensembles de niveau sont
+comparables ont les mêmes ensembles de niveau, puisque ceux-ci ont deux à
+deux le même cardinal fini : la condition d) force
+$f = \varepsilon_s * \check f$.\footnote{L'argument est le nôtre ; la page
+énonce le corollaire sans démonstration. L'équivalence des deux formes, à
+gauche et à droite, vaut dans tout groupe, avec le même $s$.} Si $g$ est
+elle-même symétrique, d) se récrit : il existe $s$ tel que
+$E_*(f) \cup E_*(\varepsilon_s * g)$ soit totalement ordonné. Quand $f$ et $g$
+sont toutes deux symétriques à translation près, la condition est donc
+symétrique en $f$ et $g$ (page 20, en tête), et elle est invariante par
+translation.
+
+\pagerange{20}{21}
+\subsection*{Couples tassés, et la condition K (pages 20 et 21)}
+
+\textbf{Proposition} (page 20). Pour $f, g \in \mathbb{R}[G]^+$, les
+conditions suivantes sont équivalentes :
+\begin{itemize}
+  \item[a)] $f' * g' \prec f * g$ pour tous $f' \prec f$, $g' \prec g$ ;
+  \item[b)] $f' * g' \prec f * g$ pour tous $f' \sim f$, $g' \sim g$ ;
+  \item[c)] pour tout $h \in \mathbb{R}[G]^+$,
+  \[
+  \sup_{f' \prec f,\ g' \prec g,\ h' \prec h} (f' * g' * h')(e)
+  \leqslant \sup_{h' \sim h} (f * g * h')(e) ;
+  \]
+  \item[c')] la même inégalité pour $h = \mathbf{1}_A$, $A$ partie finie de
+  $G$, et $f' \sim f$, $g' \sim g$, $h' \sim h$.
+\end{itemize}
+On dira que $(f, g)$ est \emph{tassé}.\footnote{Le titre de la section est lu
+« Couples \emph{bornés} », d'une lecture incertaine ; la page 21 dit
+« tassé » de la condition a) pour les parties finies, et l'en-tête du lot 2
+de la transcription nomme cette section « Couples tassés ». Le second membre
+de c) est aussi $\sup_{h' \sim h} \|f * g * h'\|_\infty$, comme la page
+l'écrit. L'équivalence de a) et b) repose sur la description des
+sous-majorations faibles par les matrices doublement sous-stochastiques et
+sur la sous-additivité des sommes partielles ; la page ne la justifie pas.}
+
+Un couple tassé est prétassé : la première inégalité de $f' * g' \prec f * g$
+est $\|f' * g'\|_\infty \leqslant \|f * g\|_\infty$. La réciproque est fausse,
+et c'est pourquoi l'on ne suit pas ici la lecture « C'est impliqué par
+$(f, g)$ préféré ».\footnote{La lecture de « C'est impliqué par » est
+incertaine ; le sens exact est « cela implique ». Contre-exemple (nôtre) :
+dans $\mathbb{Z}$, $A = \{0, 1, 3, 4\}$ vérifie $A = 4 - A$, donc
+$(\mathbf{1}_A, \mathbf{1}_A)$ est prétassé. Mais $I = \{0, 1, 2, 3\}$ est
+équivalent à $A$, et les deux plus grandes valeurs de
+$\mathbf{1}_I * \mathbf{1}_I$ sont $4$ et $3$, de somme $7$, contre $4$ et
+$2$, de somme $6$, pour $\mathbf{1}_A * \mathbf{1}_A$ ; donc
+$\mathbf{1}_I * \mathbf{1}_I \not\prec \mathbf{1}_A * \mathbf{1}_A$.}
+
+\textbf{Corollaire} (page 20). Soit $S \subset \mathbb{R}[G]^+$ stable par
+convolution. Les conditions suivantes sont équivalentes :
+\begin{itemize}
+  \item[a)] tout couple de $S \times S$ est tassé ;
+  \item[b)] pour tout $n \geqslant 2$, tous $f_1, \ldots, f_n \in S$ et tous
+  $f'_i \prec f_i$,
+  $f'_1 * \cdots * f'_n \prec f_1 * \cdots * f_n$ ;
+  \item[c)] (\emph{condition K}) si $S$ contient, pour chaque
+  $n \leqslant \operatorname{card} G$, l'indicatrice d'une partie finie de
+  cardinal $n$ : pour tout $n \geqslant 2$, tous $f_i \in S$ et tous
+  $f'_i \prec f_i$,
+  \[
+  \|f'_1 * \cdots * f'_n\|_\infty \leqslant \|f_1 * \cdots * f_n\|_\infty .
+  \]
+\end{itemize}
+Le passage de a) à b) se fait par récurrence, $S$ étant stable ; celui de c)
+à a) passe par c') de la proposition, et c'est là que sert l'hypothèse sur
+les cardinaux.\footnote{Cette hypothèse et la borne
+$n \leqslant \operatorname{card} G$ sont ajoutées à l'encre bleue, avec le
+nom « condition K ». Une condition d), qui ne portait que sur trois
+fonctions, est biffée.}
+
+La condition K est la forme que prend sur un groupe l'\emph{inégalité de
+Riesz--Sobolev} et sa version à plusieurs fonctions : si $S$ est la classe
+des fonctions « symétriques décroissantes », elle dit que la convolution de
+fonctions réarrangées n'a jamais un pic plus haut que celle de leurs
+réarrangements symétriques décroissants.\footnote{F. Riesz (1930) sur
+$\mathbb{R}$, Sobolev (1938) sur $\mathbb{R}^n$, Brascamp, Lieb et Luttinger
+(1974) pour plusieurs fonctions ; sur $\mathbb{Z}$, le cas de trois suites
+est un théorème de Hardy et Littlewood (\emph{Inequalities}, chap. X), où
+deux réarrangements symétriques, l'un centré sur un entier et l'autre sur un
+demi-entier, rappellent le revêtement $\widetilde{G}$ de la page 16. Rien sur la page ne cite ces travaux.}
+
+La page 21 reprend la question pour les parties finies. Soit $S$ stable par
+convolution et par translation, et $S_0 = S \cap \mathfrak{P}_f(G)$ ses
+parties finies (identifiées à leurs indicatrices), supposé non vide. Elle
+énonce
+\begin{itemize}
+  \item[d)] pour $A, B \in S_0$, $A' \sim A$, $B' \sim B$ :
+  $\mathbf{1}_{A'} * \mathbf{1}_{B'} \prec \mathbf{1}_A * \mathbf{1}_B$,
+  c'est-à-dire que $(A, B)$ est tassé ;
+  \item[e)] pour $A, B, C \in S_0$ et des parties équivalentes :
+  $\|\mathbf{1}_{A'} * \mathbf{1}_{B'} * \mathbf{1}_{C'}\|_\infty \leqslant
+  \|\mathbf{1}_A * \mathbf{1}_B * \mathbf{1}_C\|_\infty$,
+\end{itemize}
+et conclut que tout $f \in S$ vérifie a) $\check f = \varepsilon_t * f$
+pour un $t \in G$ --- $(f, f)$ est prétassé --- et b) ses ensembles de niveau
+sont dans $S_0$.\footnote{La page écrit a) « $f = \varepsilon_t * f$ »,
+l'accent n'étant pas visible ; le crochet qui suit, « $(f, f)$ prétassé »,
+et le corollaire de la page 19 demandent $\check f$. Le premier mot de b) est
+illégible, et le crochet de b) dit « $(f, A)$ prétassé pour $A \in S_0$ » ;
+que les ensembles de niveau de $f$ soient dans $S_0$ ne découle pas de ce qui
+précède, et fonctionne ici comme une définition. La note marginale en tête de
+page n'est lue qu'en partie.} Elle définit alors la classe $\widetilde{S}$
+des $f$ qui vérifient a) et b), c'est-à-dire
+\[
+f = \sum_i \alpha_i \mathbf{1}_{A_i},
+\qquad \alpha_i > 0,\ \ A_i \in S_0 \ \text{emboîtées},\quad
+A_i = s - A_i \ \text{pour un même } s,
+\]
+calcule $f * g$ pour deux telles fonctions, et veut montrer que, si les
+ensembles de niveau des $\mathbf{1}_{A_i} * \mathbf{1}_{B_j}$ forment une
+chaîne, ils ont un point commun. La page s'arrête sur cette intersection.
+C'est le programme de la page 16 : bâtir, à partir d'une chaîne de parties
+symétriques, la classe des fonctions symétriques décroissantes d'un groupe,
+et montrer qu'elle est stable par convolution.
+
+Un cas particulier montre ce que la condition d) contient. Pour
+$G = \mathbb{Z}/p\mathbb{Z}$, $p$ premier, et deux intervalles de longueurs
+$a, b$ avec $a + b \leqslant p + 1$, la condition d) équivaut --- calcul
+nôtre --- au théorème de Pollard (1974), qui généralise celui de
+Cauchy--Davenport : pour $t \leqslant \min(a, b)$,
+$\sum_x \min(r(x), t) \geqslant t(a + b - t)$, où $r(x)$ est le nombre de
+représentations de $x$ comme somme d'un élément de $A'$ et d'un élément de
+$B'$.\footnote{Les deux fonctions comparées ont la même masse $ab$ ; la
+majorisation $r \prec r_0$ équivaut alors à
+$\sum_x (r(x) - t)^+ \leqslant \sum_x (r_0(x) - t)^+$ pour tout entier $t$,
+soit $\sum_x \min(r(x), t) \geqslant \sum_x \min(r_0(x), t)$, et pour deux
+intervalles le second membre vaut $t(a + b - t)$. Pollard, J. London Math.
+Soc. (2) 8 (1974) ; Cauchy (1813), Davenport (1935). Rien sur la page ne
+cite ces travaux.}
+
+\pagerange{35}{45}
+\section*{V. Exponentielles en caractéristique zéro (pages 35 à 45)}
+
+\pagerange{35}{35}
+\subsection*{L'exponentielle des éléments nilpotents (page 35)}
+
+Soit $\mathbb{A}$ une $\mathbb{Q}$-algèbre associative unitaire et
+$N(\mathbb{A})$ l'ensemble de ses éléments nilpotents ; on a
+$1 + N(\mathbb{A}) \subset \mathbb{A}^*$. Sur $N(\mathbb{A})$, la série
+$\exp x = \sum_{n \geqslant 0} x^n / n!$ est une somme finie.
+
+\textbf{Théorème 1.}
+\begin{itemize}
+  \item[1)] $\exp : N(\mathbb{A}) \to 1 + N(\mathbb{A})$ est bijective,
+  d'inverse $\log(1 + y) = \sum_{n \geqslant 1} (-1)^{n+1} y^n / n$.
+  \item[2)] Si $x, y \in N(\mathbb{A})$ commutent, $x + y \in N(\mathbb{A})$
+  et $\exp(x + y) = \exp x \exp y$ ; si $u, v \in 1 + N(\mathbb{A})$
+  commutent, $uv \in 1 + N(\mathbb{A})$ et $\log(uv) = \log u + \log v$. On a
+  $\exp 0 = 1$ et $\log 1 = 0$.
+  \item[3)] Si $L \subset N(\mathbb{A})$ est un sous-$\mathbb{Q}$-espace
+  stable par les puissances $x \mapsto x^n$ ($n \geqslant 1$), $\exp$ induit
+  une bijection $L \to 1 + L$.
+\end{itemize}
+Tout se ramène à des identités entre séries formelles à une ou deux
+variables qui commutent.\footnote{La page écrit « NB $\exp 1 = 0$ » pour
+$\log 1 = 0$.}
+
+\textbf{Remarques.} Si de plus $L$ est stable par produit --- une
+sous-algèbre non unitaire formée d'éléments nilpotents ---, $1 + L$ est un
+sous-groupe de $\mathbb{A}^*$, et $\exp$ transporte sa loi sur $L$ :
+$x \star y = \log(\exp x \exp y)$. Cette loi est commutative si et seulement
+si $L$ l'est, et c'est alors l'addition. La page marque la réciproque d'un
+« ? » ; elle est vraie.\footnote{Argument nôtre : si
+$\exp(\lambda x)\exp(\mu y) = \exp(\mu y)\exp(\lambda x)$ pour tous
+$\lambda, \mu \in \mathbb{Q}$, les deux membres sont des polynômes en
+$\lambda, \mu$ à coefficients dans $\mathbb{A}$, égaux sur
+$\mathbb{Q}^2$, donc coefficient par coefficient ; le coefficient de
+$\lambda\mu$ donne $xy = yx$. Quand $L$ est nilpotente, la loi $\star$ est
+donnée par la formule de Baker--Campbell--Hausdorff, qui est alors finie ;
+c'est le point de départ de la correspondance de Malcev et Lazard (1954)
+entre groupes nilpotents uniquement divisibles et algèbres de Lie nilpotentes
+sur $\mathbb{Q}$.}
+
+\textbf{Exemple 1.} Soient $K$ une $\mathbb{Q}$-algèbre commutative,
+$\mathbb{A}$ une $K$-algèbre et $J$ un nilidéal de $K$. Alors $J\mathbb{A}$
+vérifie les conditions de la remarque --- un élément
+$\sum j_k a_k$ fait intervenir un nombre fini d'éléments nilpotents et
+centraux $j_k$, et est donc nilpotent --- et
+$\exp : J\mathbb{A} \to 1 + J\mathbb{A}$ est une bijection. Avec
+$K_0 = K/J$ et $\mathbb{A}_0 = \mathbb{A} \otimes_K K_0$, $J\mathbb{A}$ est
+le noyau de $\mathbb{A} \to \mathbb{A}_0$ et $1 + J\mathbb{A}$ l'image
+réciproque de $1$.
+
+\textbf{Exemple 2.} Soit $M$ un $K$-module, $M_0 = M/JM$, et
+$\mathcal{U} = \operatorname{End}_K(M)$. On pose
+\[
+L = \{u \in \mathcal{U} \mid u(M) \subset JM\},
+\qquad
+1 + L = \{u \in \mathcal{U} \mid u \otimes_K K_0 = \mathrm{id}_{M_0}\}.
+\]
+Si $J$ est \emph{nilpotent}, ou si $M$ est de type fini, $L$ vérifie les
+conditions de la remarque et $\exp : L \to 1 + L$ est une
+bijection.\footnote{L'hypothèse n'est pas sur la page, qui dit que « les
+conditions de la remarque sont satisfaites » pour un nilidéal. Une ligne
+illisible de l'exemple 1 commence « mais avec $J$ nilpotent ». Si $J$ est
+seulement nil et $M$ quelconque, un $u \in L$ peut ne pas être nilpotent
+(exemple nôtre) : $K = \mathbb{Q}[t_1, t_2, \ldots]/(t_1^2, t_2^2, \ldots)$,
+$J = (t_1, t_2, \ldots)$, $M = K^{(\mathbb{N})}$ de base $(e_k)$, et
+$u(e_k) = t_k e_{k+1}$ ; alors $u^n(e_1) = t_1 \cdots t_n e_{n+1} \neq 0$.
+Pour $M$ de type fini, les coefficients de $u$ sur des générateurs engendrent
+un idéal de type fini formé de nilpotents, donc nilpotent.}
+
+\pagerange{36}{37}
+\subsection*{Groupes formels à un paramètre (pages 36 et 37)}
+
+Soit $K$ une $\mathbb{Q}$-algèbre commutative unitaire. Les foncteurs
+considérés sont définis sur les $K$-algèbres commutatives $K'$. La
+\emph{droite formelle} $\widehat{\mathbb{G}}_a$ est le sous-foncteur
+$K' \mapsto N(K')$ du groupe additif $\mathbb{G}_a : K' \mapsto K'$ ; c'est
+la limite inductive des $\operatorname{Spec} K[t]/(t^n)$.\footnote{La page
+note $\overline{\mathbb{G}}_{a,K}$ la droite formelle ; on écrit
+$\widehat{\mathbb{G}}_a$, la notation d'aujourd'hui du groupe additif
+formel.} Pour une $K$-algèbre $\mathcal{U}$, soit $W(\mathcal{U})$ le
+foncteur $K' \mapsto \mathcal{U} \otimes_K K'$ et
+$\mathrm{Un}(\mathcal{U}) \subset W(\mathcal{U})$ le foncteur en groupes
+$K' \mapsto (\mathcal{U} \otimes_K K')^*$.\footnote{La lettre $W$ est lue
+sans certitude à la page 37. Quand $\mathcal{U}$ est un $K$-module projectif
+de type fini, $\mathrm{Un}(\mathcal{U})$ est représentable, et c'est le
+schéma en groupes des unités de $\mathcal{U}$ ; la page le traite en
+foncteur.}
+
+À $x \in \mathcal{U}$ on associe $\bar e_x : \widehat{\mathbb{G}}_a \to
+\mathrm{Un}(\mathcal{U})$, $\lambda \mapsto \exp(\lambda x)$, bien défini
+parce que $\lambda x$ est nilpotent quand $\lambda$ l'est (exemple 1), et
+homomorphisme par le 2) du théorème 1. Si $x$ est nilpotent,
+$e_x : \mathbb{G}_a \to \mathrm{Un}(\mathcal{U})$,
+$\lambda \mapsto \exp(\lambda x)$, est défini pour tout $\lambda$, et
+$\bar e_x$ en est la restriction. D'où deux applications
+\[
+(*)\quad \mathcal{U} \to
+\operatorname{Hom}_{\mathrm{gr}}(\widehat{\mathbb{G}}_a, \mathrm{Un}(\mathcal{U})),
+\ \ x \mapsto \bar e_x ;
+\qquad
+(**)\quad N(\mathcal{U}) \to
+\operatorname{Hom}_{\mathrm{gr}}(\mathbb{G}_a, \mathrm{Un}(\mathcal{U})),
+\ \ x \mapsto e_x .
+\]
+Si $x$ et $y$ commutent, $\bar e_{x+y} = \bar e_x \bar e_y$, et de même pour
+$e$ ; si $\mathcal{U}$ est commutative, $(*)$ et $(**)$ sont des
+homomorphismes de groupes.
+
+\textbf{Théorème 2.} $(*)$ et $(**)$ sont bijectives.
+
+Un morphisme de foncteurs $\widehat{\mathbb{G}}_a \to W(\mathcal{U})$ est une
+série $\sum_{n \geqslant 0} a_n \lambda^n$ à coefficients $a_n \in
+\mathcal{U}$, et un morphisme $\mathbb{G}_a \to W(\mathcal{U})$ un polynôme :
+c'est le lemme de Yoneda, $W(\mathcal{U})$ prenant la valeur
+$\mathcal{U}[t]/(t^n)$ sur $K[t]/(t^n)$ et $\mathcal{U}[t]$ sur
+$K[t]$.\footnote{La page utilise cette description sans la justifier.}
+L'injectivité se lit sur le coefficient de $\lambda$. Pour la surjectivité,
+écrire que $\varphi(\lambda + \mu) = \varphi(\lambda)\varphi(\mu)$ donne,
+coefficient par coefficient,
+\[
+\binom{i + j}{i}\, a_{i+j} = a_i a_j ,
+\qquad\text{d'où}\qquad
+n a_n = a_1 a_{n-1}
+\quad\text{et}\quad
+a_n = \frac{x^n}{n!},\ \ x = a_1 ,
+\]
+où l'on divise par $n$ : c'est là que sert la caractéristique zéro. Pour
+$\mathbb{G}_a$, les $a_n$ sont nuls à partir d'un certain rang, donc $x$ est
+nilpotent.\footnote{Les homomorphismes de $\mathbb{G}_a$ vers le groupe des
+unités d'une algèbre sont donc les $\lambda \mapsto \exp(\lambda x)$, $x$
+nilpotent, et ceux de $\widehat{\mathbb{G}}_a$ les mêmes avec $x$
+quelconque : en caractéristique zéro, un groupe formel est déterminé par son
+algèbre de Lie (Cartier), et l'algèbre de Lie de $\mathrm{Un}(\mathcal{U})$
+est $\mathcal{U}$. Voir Demazure et Gabriel, \emph{Groupes algébriques}
+(1970), et SGA 3, que Grothendieck a codirigé ; rien sur la page ne les
+cite.}
+
+\pagerange{38}{38}
+\subsection*{Opérations sur un module (page 38)}
+
+Soit $M$ un $K$-module et $\mathbf{Aut}_K(M)$ le foncteur en groupes
+$K' \mapsto \operatorname{Aut}_{K'}(M \otimes_K K')$. Le même calcul
+donne :
+\begin{itemize}
+  \item[$(*)$] $u \mapsto \bar e_u$ est une bijection de
+  $\operatorname{End}_K(M)$ sur
+  $\operatorname{Hom}_{\mathrm{gr}}(\widehat{\mathbb{G}}_a, \mathbf{Aut}_K(M))$,
+  pour tout $M$ ;
+  \item[$(**)$] $u \mapsto e_u$ est une bijection de l'ensemble des
+  endomorphismes \emph{localement nilpotents} de $M$ (tout $m \in M$ est tué
+  par une puissance de $u$) sur
+  $\operatorname{Hom}_{\mathrm{gr}}(\mathbb{G}_a, \mathbf{Aut}_K(M))$ ; si $M$
+  est de type fini, ce sont les endomorphismes nilpotents.
+\end{itemize}
+Un morphisme de foncteurs $\widehat{\mathbb{G}}_a \to \mathbf{End}_K(M)$
+s'écrit bien de façon unique $\sum_n u_n \lambda^n$ avec
+$u_n \in \operatorname{End}_K(M)$, puisque
+$\operatorname{End}_{K[t]/(t^n)}(M[t]/(t^n)) = \operatorname{End}_K(M)^n$.
+Pour $\mathbb{G}_a$, en revanche, un morphisme est une application
+$K$-linéaire $M \to M[t]$, c'est-à-dire une suite $(u_n)$ telle que, pour
+chaque $m$, les $u_n(m)$ soient nuls pour $n$ grand --- non une suite
+d'endomorphismes nuls à partir d'un certain rang, comme l'écrit la page ; les
+deux coïncident si $M$ est de type fini.\footnote{Contre-exemple (nôtre) à
+l'énoncé de la page : $M = K^{(\mathbb{N})}$ de base $(e_k)$, $u(e_0) = 0$,
+$u(e_k) = e_{k-1}$. L'endomorphisme $u$ est localement nilpotent sans être
+nilpotent, et $\lambda \mapsto \exp(\lambda u)$ est un homomorphisme
+$\mathbb{G}_a \to \mathbf{Aut}_K(M)$ qui n'est pas de la forme $e_x$ avec
+$x$ nilpotent. Qu'en caractéristique zéro les actions de $\mathbb{G}_a$
+correspondent aux endomorphismes, et pour une algèbre aux dérivations,
+localement nilpotents est un résultat classique. La page note elle-même que
+le cas projectif de type fini se ramène au précédent avec
+$\mathcal{U} = \operatorname{End}_K(M)$.}
+
+\pagerange{39}{41}
+\subsection*{Morphismes, et le passage à $\exp$ (pages 39 à 41)}
+
+\textbf{Proposition} (page 39). Soient $u \in \operatorname{End}_K(M)$,
+$v \in \operatorname{End}_K(N)$ et $f : M \to N$ linéaire. Pour que $f$
+commute aux actions $\bar e_u$ et $\bar e_v$ de $\widehat{\mathbb{G}}_a$, il
+faut et il suffit que $vf = fu$ ; si $u$ et $v$ sont nilpotents, c'est aussi
+la condition pour $\mathbb{G}_a$.
+
+On écrit $\sum_n \lambda^n (v^n f - f u^n)/n! = 0$ identiquement en
+$\lambda$ nilpotent, ce qui équivaut à $v^n f = f u^n$ pour tout $n$, et donc
+à $vf = fu$.
+
+\textbf{Proposition} (pages 39 à 41). Soient $u, v$ nilpotents. Les
+conditions suivantes sont équivalentes : (1) $f$ est un
+$\widehat{\mathbb{G}}_a$-morphisme ; (2) $f$ est un
+$\mathbb{G}_a$-morphisme ; (3) $\delta = vf - fu$ est nul ; (4)
+$f \circ \exp u = \exp v \circ f$.
+
+Seul (4) $\Rightarrow$ (3) est nouveau. Avec
+$\delta_n = v^n f - f u^n = \sum_{i + j = n - 1} v^i \delta u^j$, la
+condition (4) s'écrit $\sum_{n \geqslant 1} \delta_n / n! = 0$, soit
+\[
+\delta = \sum_{i + j \geqslant 1} c_{ij}\, v^i \delta u^j,
+\qquad c_{ij} = -\frac{1}{(i + j + 1)!} .
+\]
+Les opérateurs $\Theta(x) = vx$ et $\Theta'(x) = xu$ sur
+$\operatorname{Hom}_K(M, N)$ sont nilpotents et commutent ; donc
+$\rho = \sum_{i+j \geqslant 1} c_{ij} \Theta^i \Theta'^j$ est nilpotent, et
+$\delta = \rho\delta = \rho^N \delta = 0$ pour $N$ grand (page
+41).\footnote{La page écrit $c_{ij} = 1/(i+j)!$ ; l'équation qui précède
+donne la valeur ci-dessus, et seule compte l'existence des $c_{ij}$. Elle
+fait agir $\Theta$ et $\Theta'$ sur $\mathcal{U} = \operatorname{End}_K(M)$ ;
+$\delta$ vit dans $\operatorname{Hom}_K(M, N)$, et c'est là qu'ils opèrent.
+Une voie plus courte (nôtre) : de $f a = b f$ on tire $f P(a) = P(b) f$ pour
+tout polynôme $P$, et $\log$ est un polynôme sur les unipotents d'ordre
+donné ; appliqué à $a = \exp u$, $b = \exp v$, cela donne $fu = vf$.}
+
+\pagerange{41}{42}
+\subsection*{Tenseurs, dérivations, et l'action sur $\operatorname{Hom}$ (pages 41 et 42)}
+
+Si $\widehat{\mathbb{G}}_a$ opère sur $M$ par $\bar e_u$ et sur $N$ par
+$\bar e_v$, il opère sur $M \otimes N$ par
+\[
+\bar e_u \otimes \bar e_v = \bar e_{u \otimes 1 + 1 \otimes v},
+\]
+puisque $u \otimes 1$ et $1 \otimes v$ commutent ; de même pour $e$ si $u$ et
+$v$ sont nilpotents, et pour un produit tensoriel fini quelconque.
+
+\textbf{Corollaire.} Soit $M$ une $K$-algèbre, non nécessairement associative
+ni unitaire, et $u \in \operatorname{End}_K(M)$. L'action $\bar e_u$ de
+$\widehat{\mathbb{G}}_a$ se fait par automorphismes d'algèbre si et seulement
+si $u$ est une dérivation. Si $u$ est nilpotent, il en est de même de
+l'action $e_u$ de $\mathbb{G}_a$, et aussi de la seule condition que
+$\exp u$ soit un automorphisme d'algèbre.
+
+On applique la proposition précédente à la multiplication
+$m : M \otimes M \to M$ : elle est équivariante si et seulement si
+$u \circ m = m \circ (u \otimes 1 + 1 \otimes u)$, ce qui est la règle de
+Leibniz ; et la condition sur $\exp u$ est la condition (4).\footnote{La page
+qualifie ce corollaire de « naïf », mot d'une lecture incertaine.}
+
+Si $\mathbb{G}_a$ opère sur $M$ et $N$ par $e_u$ et $e_v$, il opère sur
+$\operatorname{Hom}_K(M, N)$ par $e_\delta$, avec $\delta(f) = vf - fu$, et de
+même pour $\widehat{\mathbb{G}}_a$. La page note qu'en toute rigueur ces
+actions ne sont définies que si le foncteur
+$K' \mapsto \operatorname{Hom}_{K'}(M \otimes K', N \otimes K')$ est de la
+forme $W(\operatorname{Hom}_K(M, N))$, ce qui n'est guère assuré que si $M$
+est projectif de type fini.
+
+\pagerange{42}{43}
+\subsection*{Foncteurs en modules (pages 42 et 43)}
+
+Pour s'affranchir de cette restriction, la page généralise aux
+\emph{$K$-foncteurs en modules} $\mathcal{M}$ : pour chaque $K'$, un
+$K'$-module $\mathcal{M}(K')$, et pour chaque $K' \to K''$ une application
+semi-linéaire $\mathcal{M}(K') \to \mathcal{M}(K'')$.\footnote{La lettre qui
+qualifie ces modules est surchargée et entourée ; la transcription lit
+$\mathbb{Q}$, et le contexte attend $K$.} Les endomorphismes de
+$\mathcal{M}$ forment une $K$-algèbre. Si $u$ en est un élément nilpotent,
+les $\exp(\lambda u)$, $\lambda \in K'$, font de $\mathcal{M}$ un
+$\mathbb{G}_a$-module ; pour $u$ quelconque,
+$\bar e_u(\lambda) = \exp(\lambda u)$, $\lambda$ nilpotent, définit un
+homomorphisme $\widehat{\mathbb{G}}_a \to \mathbf{Aut}_K(\mathcal{M})$. La
+page se demande, sans y répondre, si
+\[
+\operatorname{End}_K(\mathcal{M}) \to
+\operatorname{Hom}_{\mathrm{gr}}(\widehat{\mathbb{G}}_a, \mathbf{Aut}_K(\mathcal{M})),
+\qquad
+N(\operatorname{End}_K(\mathcal{M})) \to
+\operatorname{Hom}_{\mathrm{gr}}(\mathbb{G}_a, \mathbf{Aut}_K(\mathcal{M}))
+\]
+sont encore bijectives, et annonce l'extension aux algèbres symétriques,
+tensorielles et extérieures. On ne tranche pas la question ; la page 38 montre
+seulement que, pour $\mathcal{M} = W(M)$, la seconde demande de remplacer les
+nilpotents par les localement nilpotents.
+
+\pagerange{43}{43}
+\subsection*{Globalisation (page 43)}
+
+Soit $X$ un schéma de caractéristique zéro et $\Theta$ une dérivation de
+$\mathcal{O}_X$, nilpotente localement sur $X$ : tout point a un voisinage
+ouvert sur lequel une puissance de $\Theta$ est nulle. Alors $\exp \Theta$ est
+un automorphisme du faisceau d'anneaux $\mathcal{O}_X$ qui induit l'identité
+sur $\mathcal{O}_{X_{\mathrm{red}}}$, donc un automorphisme de $X$, qu'on note
+$\mathbb{E}_\Theta$, et qui est un $S$-automorphisme si $\Theta$ est une
+$S$-dérivation. On a $\mathbb{E}_0 = \mathrm{id}$ et
+\[
+\mathbb{E}_{\Theta + \Theta'} = \mathbb{E}_\Theta \circ \mathbb{E}_{\Theta'}
+\qquad\text{si } [\Theta, \Theta'] = 0 .
+\]
+Que $\exp \Theta$ soit l'identité modulo les nilpotents tient à ce qu'une
+dérivation nilpotente d'une $\mathbb{Q}$-algèbre commutative prend ses
+valeurs dans le nilradical.\footnote{Argument nôtre. Une dérivation d'une
+$\mathbb{Q}$-algèbre préserve le nilradical, et passe donc à l'anneau réduit.
+Sur un anneau réduit, si $\Theta^n = 0$ avec $n$ minimal et $n \geqslant 2$,
+soit $b = \Theta^{n-2}(a)$ avec $c = \Theta(b) \neq 0$ ; comme
+$\Theta(c) = 0$, on a $0 = \Theta^n(b^n) = n!\, c^n$, d'où $c = 0$. La page
+écrit « $\Theta$ loc.\ nilpotente » ; au sens d'aujourd'hui (chaque section
+est tuée par une puissance de $\Theta$), l'énoncé serait faux : sur la droite
+affine, $d/dx$ est localement nilpotente, et $\exp(\lambda\, d/dx)$ est une
+translation, qui n'induit pas l'identité. La page écrit
+$\mathbb{E}_\Theta + \mathbb{E}_{\Theta'}$, avec un signe $+$ ; il s'agit de
+la composition. L'ordre des facteurs est sans importance ici, puisque les
+deux automorphismes commutent.}
+
+\pagerange{44}{45}
+\subsection*{Automorphismes unipotents et dérivations nilpotentes (pages 44 et 45)}
+
+Soit $A$ une $\mathbb{Q}$-algèbre commutative unitaire, $u$ un automorphisme
+de $A$, et $J$ l'idéal engendré par les $u(x) - x$.
+
+\textbf{Proposition} (page 44). Soit $n \in \mathbb{N}$.
+\begin{itemize}
+  \item[1)] Les conditions suivantes sont équivalentes : (i) $u$ est un
+  opérateur différentiel d'ordre $\leqslant n$ ; (ii) $J^{n+1} = 0$ ; (iii)
+  il existe un idéal $I$ avec $I^{n+1} = 0$ et $u \equiv \mathrm{id}$ modulo
+  $I$.
+  \item[2)] $\Theta \mapsto \exp \Theta$ est une bijection de l'ensemble des
+  dérivations $\Theta$ de $A$ telles que $\Theta^{n+1} = 0$ sur l'ensemble des
+  automorphismes $u$ tels que $(u - \mathrm{id})^{n+1} = 0$.
+\end{itemize}
+Pour (i) $\Leftrightarrow$ (ii) : au sens de EGA IV (16.8), un opérateur $P$
+est différentiel d'ordre $\leqslant n$ si ses commutateurs itérés
+$[\ldots[[P, a_0], a_1], \ldots, a_n]$ avec les multiplications sont nuls ;
+pour un endomorphisme d'anneau, $[u, a] = (u(a) - a)\, u$, et le commutateur
+itéré vaut $\prod_{i=0}^n (u(a_i) - a_i) \cdot u$, qui est nul pour tous les
+$a_i$ si et seulement si $J^{n+1} = 0$.\footnote{La lecture « op.\ diff. »
+est incertaine aux pages 44 et 45 ; ce calcul, qui est le nôtre, la
+confirme.} Pour 2), $\log u$ est une dérivation parce que
+$\log(u \otimes u) = \log u \otimes 1 + 1 \otimes \log u$, par l'argument du
+corollaire de la page 41.
+
+Une quatrième condition, (iv) $u = \exp \Theta$ avec $\Theta$ dérivation et
+$\Theta^{n+1} = 0$, est écrite puis biffée, avec en marge « est-il
+nécessaire ? ». La réponse est non. La condition (iv) entraîne (i), parce que
+$\Theta^k$ est un opérateur différentiel d'ordre $\leqslant k$ ; mais elle ne
+lui est pas équivalente. Dans $A = \mathbb{Q}[x, e]/(e^2)$, l'automorphisme
+$u$ qui fixe $x$ et envoie $e$ sur $2e$ vérifie $J = (e)$, $J^2 = 0$, alors
+que $(u - \mathrm{id})^k(e) = e$ pour tout $k$ : $u$ n'est pas unipotent, et
+n'est l'exponentielle d'aucune dérivation nilpotente.\footnote{Exemple nôtre.
+L'interligne au-dessus de (iv) dit « Pour ceci, il suffit que
+$(u - \mathrm{id})^{n+1} = 0$ » : c'est la condition de 2), qui est la bonne.
+Deux conditions (ii') et (iii') de la marge gauche, portant sur
+$\mathrm{gr}_I(A)$, sont biffées et encadrées ; on les retrouve plus bas.}
+
+\textbf{Corollaire} (page 44). Pour un automorphisme $u$ de $A$, les
+conditions (i) $u$ est un opérateur différentiel, (ii) $J$ est nilpotent,
+(iii) $u \equiv \mathrm{id}$ modulo un idéal nilpotent, sont équivalentes.
+La condition (iv) $u = \exp \Theta$ pour une dérivation nilpotente $\Theta$,
+c'est-à-dire $u$ \emph{unipotent}, les entraîne et est strictement plus
+forte ; et $\Theta \mapsto \exp \Theta$ est une bijection des dérivations
+nilpotentes sur les automorphismes unipotents.\footnote{La page énonce
+(i) à (iv) comme équivalentes, et la bijection comme allant sur les
+automorphismes qui sont des opérateurs différentiels. L'exemple ci-dessus
+montre que ces deux énoncés sont faux ; on donne ce qui est vrai.}
+
+\textbf{Corollaire} (page 45). Si le nilradical $N(A)$ est nilpotent (par
+exemple si $A$ est noethérien), les conditions (i) à (iii) équivalent à : (v)
+$u$ induit l'identité sur $A_{\mathrm{red}}$ ; et si $N(A)^{N+1} = 0$, $u$ est
+alors un opérateur différentiel d'ordre $\leqslant N$.
+
+\textbf{Corollaire} (page 45). Si $A$ est une $K$-algèbre, $K$ une
+$\mathbb{Q}$-algèbre, et $\Theta$ une dérivation nilpotente, $\exp \Theta$
+est $K$-linéaire si et seulement si $\Theta$ l'est.
+
+\textbf{Corollaire} (page 45). Soit $I$ un idéal de $A$ avec $I^{N+1} = 0$.
+Soient $L_K(A, I)$ l'ensemble des $K$-dérivations $\Theta$ telles que
+$\Theta(A) \subset I$ et $\Theta(I) \subset I^2$, et $G_K(A, I)$ le groupe
+des $K$-automorphismes qui induisent l'identité sur
+$\mathrm{gr}_I(A) = \bigoplus_k I^k / I^{k+1}$, c'est-à-dire sur $A/I$ et sur
+$I/I^2$. Alors $\Theta^i(A) \subset I^i$ pour $\Theta \in L_K(A, I)$, en
+particulier $\Theta^{N+1} = 0$, et
+\[
+\exp : L_K(A, I) \xrightarrow{\ \sim\ } G_K(A, I).
+\]
+La page définit $L_K(A, I)$ et $G_K(A, I)$ par les seules conditions
+$\Theta(A) \subset I$ et $u \equiv \mathrm{id}$ modulo $I$ ; avec ces
+définitions, le corollaire est faux.\footnote{Le même anneau
+$A = \mathbb{Q}[x, e]/(e^2)$, $I = (e)$, $N = 1$, en donne les
+contre-exemples (nôtres) : la dérivation $\Theta$ définie par
+$\Theta(x) = e$ et $\Theta(e) = e$ envoie $A$ dans $I$ mais
+$\Theta^k(x) = e$ pour tout $k \geqslant 1$, et l'automorphisme $e \mapsto
+2e$ induit l'identité sur $A/I$ sans être unipotent. La condition
+supplémentaire est celle de la note marginale (iii') de la page 44, biffée :
+« $u$ induise l'identité sur $\mathrm{gr}_I(A)$ ». Avec elle, $u -
+\mathrm{id}$ envoie $I^k$ dans $I^{k+1}$, donc
+$(u - \mathrm{id})^{N+1} = 0$, et la proposition 2) s'applique.}
+C'est, dans ce cadre, la correspondance entre une algèbre de Lie nilpotente
+de dérivations et un groupe unipotent d'automorphismes : $L_K(A, I)$ est une
+algèbre de Lie, filtrée par les $I^k$, et $\exp$ en fait un groupe par la
+formule de Baker--Campbell--Hausdorff.
+
+\pagerange{49}{53}
+\section*{VI. L'orientation des espaces vectoriels réels (pages 49 à 53)}
+
+\pagerange{49}{49}
+\subsection*{Deux lemmes sur les ensembles à deux éléments (page 49)}
+
+Un ensemble $P$ à deux éléments a une seule involution sans point fixe,
+$\tau_P$ ; c'est un torseur sous $\mathbb{Z}/2$.\footnote{La page note cette
+involution $a_P$, soulignée.}
+
+\textbf{Lemme 1.} Pour $\varphi : P \to Q$ entre ensembles à deux éléments,
+sont équivalents : $\varphi$ bijective, injective, surjective, non constante,
+$\mathbb{Z}/2$-équivariante ($\varphi \circ \tau_P = \tau_Q \circ \varphi$).
+
+\textbf{Lemme 2.} Pour $\varphi : P \times Q \to R$ entre ensembles à deux
+éléments, $\varphi$ se factorise par un isomorphisme
+$P \wedge Q \xrightarrow{\sim} R$ si et seulement si, pour $x \in P$,
+$\varphi(x, \cdot) : Q \to R$ est bijective et
+$\varphi(\tau_P x, \cdot) = \tau_R \circ \varphi(x, \cdot)$. Ici
+$P \wedge Q = (P \times Q)/(\mathbb{Z}/2)$ est le produit contracté des deux
+torseurs.
+
+\pagerange{49}{49}
+\subsection*{Les axiomes (page 49)}
+
+Soit $\mathcal{V}$ le groupoïde des espaces vectoriels réels de dimension
+finie et de leurs isomorphismes linéaires. Une \emph{théorie de
+l'orientation} est la donnée
+\begin{itemize}
+  \item[a)] d'un foncteur $\Omega$ de $\mathcal{V}$ vers les ensembles, avec
+  $\operatorname{card} \Omega(V) = 2$ pour tout $V$ ;
+  \item[b)] d'une identification $\Omega(0) \simeq \{\pm 1\}$ ;
+  \item[c)] pour tout hyperplan $W \subset V$ et tout demi-espace fermé $V'$
+  de $V$ bordé par $W$, d'une \emph{application de Stokes}
+  $\mathrm{St}_{V'} : \Omega(V) \to \Omega(W)$, naturelle en $(V, V')$,
+\end{itemize}
+soumise à deux axiomes : $\mathrm{St}_{V'}$ est bijective, et si $V''$ est le
+demi-espace opposé, $\mathrm{St}_{V''} = \tau \circ \mathrm{St}_{V'}$.\footnote{La page écrit $\mathrm{St}_{V''} = a \circ \mathrm{St}_V$ ; on lit
+$\mathrm{St}_{V'}$. Le premier axiome est d'abord justifié par le seul
+cardinal, ce qui ne suffit pas : une application entre deux ensembles à deux
+éléments peut être constante. Le mot « vectoriels » est d'une lecture
+incertaine.} Par le lemme 2, il revient au même de demander que, en notant
+$D(W, V)$ l'ensemble à deux éléments des demi-espaces bordés par $W$, les
+applications de Stokes se factorisent en un isomorphisme
+naturel\footnote{La page note cet ensemble $\mathrm{Dem}_{W,V}$, lecture
+incertaine sous une rature, puis $\Omega(W, V)$.}
+\[
+D(W, V) \wedge \Omega(V) \xrightarrow{\ \sim\ } \Omega(W).
+\]
+Le nom rappelle la formule de Stokes,
+où l'orientation d'un domaine induit celle de son bord.
+
+Un morphisme de théories $(\Omega, \mathrm{St}) \to (\Omega', \mathrm{St}')$
+est une transformation naturelle $\Omega \to \Omega'$ compatible à b) et à c).
+
+\textbf{Théorème} (page 49). a) Tout morphisme de théories est un
+isomorphisme. b) Entre deux théories de l'orientation, il existe un et un
+seul isomorphisme. c) Il existe une théorie de l'orientation.
+
+Pour a) et l'unicité dans b), on raisonne par récurrence sur la dimension :
+$\varphi_V$ est déterminé, et bijectif, par
+$\varphi_W \circ \mathrm{St}_{V'} = \mathrm{St}'_{V'} \circ \varphi_V$,
+puisque les applications de Stokes sont bijectives. L'existence dans b) et c)
+passe par une description des théories en termes de groupes.
+
+\pagerange{49}{51}
+\subsection*{Réduction au signe du déterminant (pages 49 et 51)}
+
+Le groupoïde des espaces de dimension $n$ est équivalent au groupe
+$\mathrm{GL}(n, \mathbb{R})$. Se donner $\Omega$ en dimension $n$ revient
+donc à se donner l'ensemble $\omega_n = \Omega(\mathbb{R}^n)$ et l'action de
+$\mathrm{GL}(n, \mathbb{R})$ sur lui, c'est-à-dire un homomorphisme
+$\varepsilon_n : \mathrm{GL}(n, \mathbb{R}) \to \{\pm 1\}$. Se donner les
+applications de Stokes en dimension $n$ revient, en choisissant le
+demi-espace $\mathbb{R}^{n-1} \times \mathbb{R}_+$ de $\mathbb{R}^n$, à se
+donner une bijection $s_n : \omega_n \to \omega_{n-1}$ compatible à l'action
+du stabilisateur de l'hyperplan $\mathbb{R}^{n-1}$, formé des matrices
+\[
+u_n = \begin{pmatrix} u_{n-1} & * \\ 0 & \lambda \end{pmatrix},
+\qquad u_{n-1} \in \mathrm{GL}(n-1, \mathbb{R}),\ \lambda \in \mathbb{R}^* ,
+\]
+qui échange ou non les deux demi-espaces selon le signe de $\lambda$. La
+compatibilité s'écrit
+\[
+\varepsilon_n(u_n) = \operatorname{sg}(\lambda)\, \varepsilon_{n-1}(u_{n-1}).
+\]
+Pour $n = 1$, elle donne $\varepsilon_1 = \operatorname{sg}$, et de proche en
+proche\footnote{Le passage du stabilisateur à $\mathrm{GL}(n, \mathbb{R})$ tout
+entier, que la page fait « de proche en proche », utilise que tout
+homomorphisme $\mathrm{GL}(n, \mathbb{R}) \to \{\pm 1\}$ se factorise par le
+déterminant, le groupe dérivé étant $\mathrm{SL}(n, \mathbb{R})$ ; il est
+donc déterminé par ses valeurs sur les matrices diagonales
+$\operatorname{diag}(1, \ldots, 1, \lambda)$. La note marginale, lue
+« choisi $\mathbb{R}^{n-1} \times \mathbb{R}^+$ comme demi-espace de
+$\mathbb{R}^n$ », a son premier mot incertain. La page 49 écrit la donnée de
+Stokes $\Omega(V, W) \wedge \Omega(W) \to \Omega(W)$ ; le second facteur est
+$\Omega(V)$.}
+\[
+\varepsilon_n = \operatorname{sg} \circ \det .
+\]
+
+Les caractères sont donc imposés, et une théorie se réduit aux bijections
+$s_n : \omega_n \to \omega_{n-1}$ et à $\omega_0 \simeq \{\pm 1\}$, qui
+identifient tous les $\omega_n$ à $\{\pm 1\}$ : d'où l'unicité à isomorphisme
+unique près, et l'existence en prenant pour $\Omega(V)$ l'ensemble des deux
+orientations usuelles de $V$. C'est ce que disait un passage encadré et
+biffé d'une grande croix, dont la conclusion est « donc
+$\omega_n \simeq \{\pm 1\}$ ».
+
+Dans le langage d'aujourd'hui, $\Omega(V)$ est le \emph{torseur
+d'orientation} de $V$, l'ensemble des deux composantes connexes de
+$\Lambda^{\dim V} V \smallsetminus \{0\}$, où $\Lambda^{\dim V} V$ est la
+\emph{droite déterminant} ; $\operatorname{sg} \circ \det$ est le caractère
+d'orientation. Le théorème dit que ces objets sont caractérisés par leur
+comportement vis-à-vis des bords. La normalisation de la page, où
+$[e_1 \wedge \cdots \wedge e_n]$ s'envoie sur
+$[e_1 \wedge \cdots \wedge e_{n-1}]$ pour le demi-espace
+$\mathbb{R}^{n-1} \times \mathbb{R}_+$, met en dernier la normale
+\emph{rentrante} ; la convention usuelle des géomètres, normale
+\emph{sortante} en premier, en diffère par le signe $(-1)^{\dim V}$, et le
+théorème fournit l'isomorphisme canonique entre les deux.\footnote{La
+normalisation n'est pas écrite à la page 51 ; on la lit dans la formule de
+la page 53. Le calcul du signe est le nôtre.}
+
+\pagerange{53}{53}
+\subsection*{Produits, et composition des applications de Stokes (page 53)}
+
+La page 53 ébauche la suite, sans phrases. Pour un sous-espace $W \subset V$
+quelconque, les applications de Stokes se généralisent en un isomorphisme
+$\Omega(V/W) \wedge \Omega(V) \simeq \Omega(W)$ ; pour un drapeau
+$U \subset W \subset V$, elles se composent, et la page nomme
+$I(\omega, \omega')$ un élément de $\Omega$ qu'elle ne définit pas. Il y a un
+produit
+\[
+\Omega(V) \wedge \Omega(V') \to \Omega(V \times V'),
+\qquad
+(\omega, \omega') \mapsto \omega \times \omega',
+\qquad
+\omega' \times \omega = (-1)^{\dim V \cdot \dim V'}\, \omega \times \omega' ,
+\]
+la seconde égalité s'entendant via l'échange des facteurs : c'est la
+\emph{règle des signes de Koszul}. Enfin la page compare Stokes et produits.
+Dans la normalisation qu'on vient de dire, pour un demi-espace de $V'$ et pour
+un demi-espace de $V$ respectivement,
+\[
+\mathrm{St}(\omega \times \omega') = \omega \times \mathrm{St}(\omega'),
+\qquad
+\mathrm{St}(\omega \times \omega') = (-1)^{\dim V'}\, \mathrm{St}(\omega) \times \omega' ,
+\]
+ce qui est la formule
+$\mathrm{St}(e_1 \cdots e_{p-1} e_p f_1 \cdots f_q) =
+(-1)^q\, e_1 \cdots e_{p-1} f_1 \cdots f_q$ écrite au bas de la page, où
+$e_p$ est la normale.\footnote{La page écrit les deux formules sans signe,
+avec au-dessus de la première, relié par un trait, « $(-1)^?$ » ; le signe
+est déterminé ici, dans la normalisation de la page 51. Deux croquis au bas de
+la page --- un carré, et un quadrant hachuré avec ses demi-axes fléchés et
+une flèche de rotation --- illustrent le cas de $\mathbb{R}^2$ et de ses
+deux demi-droites de bord.}
+
+\pagerange{55}{55}
+\section*{VII. Les déterminants gradués (page 55)}
+
+Soit $k$ un anneau commutatif, $\mathcal{V}(k)$ le groupoïde des $k$-modules
+libres de type fini et de leurs isomorphismes, réunion disjointe des
+$\mathcal{V}_n(k)$ des modules de rang $n$, et muni de la somme directe. Soit
+$\mathrm{Pic}^{\mathbb{Z}}(k)$ la catégorie de Picard des $k$-modules libres
+de rang $1$ gradués par $\mathbb{Z}$, avec pour contrainte de commutativité
+l'isomorphisme de Koszul
+$\ell \otimes m \mapsto (-1)^{\deg \ell \cdot \deg m}\, m \otimes
+\ell$.\footnote{La page note cette catégorie $\mathbb{P}(k)$, et dit
+$\mathcal{V}$ « catégorie additive (graduée) » : avec les seuls
+isomorphismes pour morphismes, c'est un groupoïde monoïdal symétrique pour
+$\oplus$. Le titre, « Théorie des déterminants gradués », est souligné ; un
+premier « déterminants » y est barré, avec au-dessus un mot lu sans
+certitude « modules ».} Une \emph{théorie des déterminants gradués} est un
+foncteur $\Delta : \mathcal{V}(k) \to \mathrm{Pic}^{\mathbb{Z}}(k)$ muni
+\begin{itemize}
+  \item[a)] d'isomorphismes naturels
+  $\varphi_{V,V'} : \Delta(V \oplus V') \simeq \Delta(V) \otimes \Delta(V')$
+  qui en font un foncteur monoïdal, d'où $\Delta(0) \simeq \mathbb{1}$ ;
+  \item[b)] pour $V$ de rang $1$, d'un isomorphisme $\Delta(V) \simeq V$,
+  placé en degré $1$ ;
+  \item[c)] de la condition suivante : si $W_2$ et $W'_2$ sont deux
+  supplémentaires libres d'un sous-module $W_1 \subset V$, avec
+  $\alpha : W_1 \oplus W_2 \simeq V$, $\alpha' : W_1 \oplus W'_2 \simeq V$ et
+  $\lambda : W_2 \simeq W'_2$ l'isomorphisme induit par $V/W_1$, le
+  diagramme
+\end{itemize}
+
+\begin{tikzcd}
+\Delta(W_1 \oplus W_2) \arrow[r, "\Delta(\alpha)"] \arrow[d, "{\varphi_{W_1,W_2}}"'] & \Delta(V) & \Delta(W_1 \oplus W'_2) \arrow[l, "\Delta(\alpha')"'] \arrow[d, "{\varphi_{W_1,W'_2}}"] \\
+\Delta(W_1) \otimes \Delta(W_2) & & \Delta(W_1) \otimes \Delta(W'_2) \arrow[ll, "{\mathrm{id} \otimes \Delta(\lambda)}"]
+\end{tikzcd}
+
+est commutatif.\footnote{La page écrit $\varphi_{W_1, W_1}$ sur la flèche de
+gauche, lapsus pour $\varphi_{W_1, W_2}$, et marque les quatre flèches du
+signe $\simeq$.} Ce qui équivaut, dit la page, à demander que tout
+automorphisme de $V$ qui induit l'identité sur $W_1$ et sur $V/W_1$ agisse
+trivialement sur $\Delta(V)$.
+
+La page s'arrête sur les axiomes. Le théorème qu'ils préparent, analogue à
+celui de la page 49, n'est pas écrit. L'objet visé est le déterminant gradué
+$V \mapsto (\Lambda^{\operatorname{rg} V} V, \operatorname{rg} V)$ ; la
+condition c) dit que les transvections agissent trivialement, et sur un
+corps, où $\mathrm{GL}_n$ est engendré par les transvections et les matrices
+diagonales, l'argument de la page 51 transpose : le caractère par lequel
+$\mathrm{GL}_n(k)$ opère sur $\Delta(k^n)$ est forcé d'être le déterminant.
+Sur un anneau quelconque, la question touche au groupe $SK_1(k)$, et la page
+ne la pose pas.\footnote{Ce paragraphe est le nôtre. Les références sont
+Knudsen et Mumford, « The projectivity of the moduli space of stable curves
+I : preliminaries on det and Div », Math. Scand. 39 (1976), qui
+introduisent le déterminant gradué et ses signes, et Deligne, « Le
+déterminant de la cohomologie » (1987), qui en axiomatise la notion ; les
+catégories de Picard sont de Deligne (SGA 4, exposé XVIII, 1973), et la thèse
+de Hoàng Xuân Sính sur les Gr-catégories (1975) a été dirigée par
+Grothendieck. Rien sur la page ne cite ces travaux.}
+
+La règle des signes de la page 53, $\omega' \times \omega =
+(-1)^{\dim V \cdot \dim V'}\, \omega \times \omega'$, est la trace de celle-ci :
+sur $\mathbb{R}$, l'ensemble des orientations de $V$ est celui des
+composantes connexes de $\Delta(V) \smallsetminus \{0\}$, et la contrainte de
+Koszul y devient le signe de la page 53. Le rapprochement des deux dernières
+sections est le nôtre ; les pages ne le font pas.
+
+\end{document}
