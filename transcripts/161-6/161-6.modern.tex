@@ -1,0 +1,1411 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 161-6
+% (pages 1-33, the whole folder).
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried moves into a
+% footnote. It is held to being mathematically correct as it stands; where the
+% manuscript is loose or mistaken, the true statement is what appears here and
+% the footnote says what the page has. In any dispute of substance the
+% transcription governs: whoever cites Grothendieck must cite
+% batch-01.fr.tex (pp. 1-20) or batch-02.fr.tex (pp. 21-33).
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-09-22 — first pass, unchecked against the pages by a human.
+% The folder was read whole, both batches together; this is one document for
+% the shelfmark. It was made on Opus 5.5 and has not been measured against the
+% reference reading of folder 115 (made on Opus 5).
+%
+% Spine. Not one argument but three subjects and a digression, on loose leaves.
+%  (1) The icosahedron: ink fair copy pp. 3-10 (construction, calottes, lemma,
+%      Gamma' simply transitive on oriented edges, |Gamma'| = 60, the two
+%      graphs, the wish to see Gamma' combinatorially); notebook leaves
+%      pp. 16-19 (draft of pp. 3-4, Gamma' = A_5 via five triples, the coset
+%      lemmas Hom_G(G/H,E) = E^H and Aut_G(G/H) = N(H)/H); pp. 14 then 12 (the
+%      golden number in Z[1/5][zeta_5]); p. 21 (icosahedra relative to a
+%      quadratic form over a base).
+%  (2) Graphs: pp. 24-30 (isotopy classes of embeddings of a 1-complex in an
+%      oriented surface = ribbon graphs, model surfaces, mapping class group,
+%      normal and planar embeddings, a Question, a fibration sequence);
+%      pp. 32-33 (graphs with a group transitive on vertices and oriented
+%      edges, coded by G > H' > H and sigma-dot).
+%  (3) Products: pencil run pp. 15 -> 13 -> foot of 12 (a coproduct in a
+%      category « (OM) » of ordered sets, read here as frames); p. 22,
+%      cancelled (pi(C,E) = Hom(C°,E) and gamma(C,E) : pi(C,E) -> C^ x E),
+%      footnoted against 161-4 pp. 15, 17 (same notation, not merged).
+%  The links between (1) and (2) — p. 10's coherent circular orders are a
+%  rotation system; the icosahedron is the coset graph of (A_5, 1 < C_5,
+%  sigma) of pp. 32-33 — and between the two halves of (3) are OURS, said so.
+%
+% Notation fixed for the document (each part keeps the page's letters except):
+%  - rotation of angle t about a unit vector a: R_{a,t}; the page's
+%    gamma = gamma^w_alpha gamma^u_{-theta/2} (pp. 5-6) is written r.
+%  - eta = zeta + zeta^{-1} = 2cos(2pi/5), eta' = zeta^2 + zeta^{-2}; the page
+%    writes gamma (pp. 12, 14, 21), eta (p. 14), t, c. The ring
+%    Z[1/5][t]/(t^2+t-1) and its spectrum: theta_5 (vartheta), which p. 14
+%    also writes V_n and p. 21 double-struck V_5.
+%  - (OM) run: m : I x J -> K for the page's gamma, a, b for its alpha, beta,
+%    f_1, f_2, f for its alpha-bar, beta-bar, gamma-bar; m(U,V) for gamma(UxV).
+%  - p. 22: pi(C,E), gamma(C,E) kept (shared with 161-4).
+%  - pp. 24-30: nu_lambda for the number of ends (p. 26 writes a letter read
+%    beta); g(alpha) for the genus the page calls gamma(alpha); Mod(S) for the
+%    page's G = Isot_o(S,S), « groupe de Teichmüller »; Pi = pi_1(S_rho) for the
+%    page's G_rho on p. 27 (which also calls Isot_o(S_rho,S_rho) G_rho).
+%  - pp. 32-33: H = G_a (arc stabiliser), H' = G_s (vertex stabiliser), as p. 32.
+%  Letters S, G, Gamma, alpha, pi mean different things in different parts;
+%  the spine section lists the collisions.
+%
+% Substantive departures, with pages.
+%  p. 3   O(E) « doublement transitive » on (u,v): transitive, stabilisers of order 2.
+%  p. 4   existence of alpha needs theta > pi/3 (page: >=; theta = pi/3 gives alpha = 0).
+%  p. 4   « rayon 4 sin^2(alpha/2) »: that is the squared chord; radius l = 2 sin(alpha/2).
+%  p. 5   (4) used twice; renamed l, l'. G_C for G'_C twice (primes supplied).
+%  p. 5   Lemma « de sommet u »: the summit is x_0.
+%  p. 5   gamma^u_{theta/2} named, rotation of angle -theta/2 meant.
+%  p. 6   computation stops; the six relations are completed here (ours) and
+%         reduced to eta^2 + eta - 1 = 0 (the link to pp. 12, 14 is ours).
+%  p. 7   « I une arête »: d an edge through x.
+%  pp. 8-9  Aut(vertex-edge graph) and Aut(face-edge graph) are Gamma (order
+%         120), not Gamma' as the page writes; his own reduction (fix u, x_0,
+%         x_1) and p. 10 both require Gamma. Checked by brute force.
+%  p. 13  c) « éléments de prod' » -> of its image under m.
+%  p. 15  0_I -> 0_J, 0_K -> 0_L, 1_K -> 1_L.
+%  (OM)   not defined in the folder; read as frames from what the proofs use
+%         (infinite distributivity in L used silently).
+%  p. 17  « 4pi/5 < 2pi/3 » false. p. 18 cos alpha chain wrong; p. 19 boxed
+%         cos alpha is cos(alpha/2). All footnoted, not used.
+%  p. 18  injectivity of G -> S_5 completed (ours, class sizes).
+%  p. 21  margin c^2 + c - 1 = 0 for c = cos'(D_i,D_j): false (c = -6/5); the
+%         golden relation is eta's. First equation for a, b: sign of b gamma^2.
+%         Base: 2 and 5 invertible supplied; Z[1/4] kept in a footnote.
+%  p. 22  p_C a functor, not a morphism of topoi. The Question: yes, classical.
+%  p. 25  margin « b_1 + 1 components »: true iff g(alpha) = 0; general
+%         formula |I(alpha)| = b_0 + b_1 - 2 g(alpha) (ours). Prop bounds
+%         (S^1 x [1,2[, {1}, ]0,2[) inconsistent as read; stated correctly.
+%  p. 26  genus « sum g_lambda + gamma(alpha) — vérifier »: correct formula adds
+%         b_1 of the gluing graph (ours).
+%  p. 27  Isot a torsor under Autext: under Mod^+, which injects into Out with
+%         image of index 2 (genus >= 1, DNB). p. 28 « est un isom. » idem.
+%  p. 28  normal case « nu_lambda nuls »: nu_lambda <= 1 (0 when S compact).
+%         H = 1 in the normal case: last step ours (DNB injectivity).
+%  p. 28  exponent of S^2 read 2 against the hand (1).
+%  p. 32  G « ≃ » Perm(S) x Perm(A): a subgroup.
+%  p. 33  labels G_a, G_s under H', H swapped; condition sigma-dot not in H'/H
+%         (edges not loops) supplied.
+%
+% Announced and never established on the pages: p. 21 a)-c); p. 22 the
+% Question (answered by the literature, and pursued in 161-4); p. 29 the
+% Question (left open here); p. 30 exactness (« ?? »); p. 13 e) and the
+% infinite version's conclusion; pp. 12-15 the binary hypotheses a)-c) are
+% on no page of this folder.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{161-6}
+\pages{1}{33}
+\dating{[à partir de 1973-vers 1977] — le groupe « Dossiers rassemblés par Grothendieck sur différentes thématiques » (161-1 à 162-6) est daté [après 1961-vers 1977]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Graphes, icosaèdre [etc.] : notes manuscrites (s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+La chemise porte deux mots, « Graphes, icosaèdre », et l'inventaire ajoute
+prudemment « etc. ». Les feuillets qu'elle contient ne forment pas un texte
+suivi : une mise au net à l'encre, des brouillons, quatre pages d'un carnet à
+spirale, quelques feuilles volantes. Ils traitent de trois sujets, et d'un
+quatrième en passant.
+
+Le premier est l'un des plus anciens objets des mathématiques, l'icosaèdre
+régulier, le solide à vingt faces triangulaires. Une mise au net soignée le
+construit à partir de presque rien : deux vecteurs unitaires orthogonaux, un
+angle de 72 degrés, un peu de trigonométrie. On obtient douze points sur la
+sphère, et l'on montre que les rotations qui les préservent sont au nombre de
+soixante, chacune déterminée par l'image d'une seule arête orientée. Puis
+vient le mouvement qui fait l'intérêt de ces pages. Le solide construit, la
+géométrie est mise de côté : tout ce qu'on a démontré sur ce groupe se lit sur
+le seul schéma d'incidence --- quels sommets sont reliés à quels sommets. Le
+solide devient un \emph{graphe}. Une chose pourtant échappe au graphe :
+l'orientation de l'espace, ce qui distingue une rotation de son reflet dans un
+miroir. Pour la retrouver, il faut ajouter en chaque sommet un ordre
+circulaire sur les arêtes qui en partent, comme les heures sur un cadran. La
+page s'arrête sur ce souhait.
+
+Autour de cette mise au net gravitent des calculs sur le nombre
+$2\cos(2\pi/5)$, racine de $t^{2} + t - 1 = 0$ --- l'inverse du nombre d'or ---,
+faits dans l'anneau engendré par les racines cinquièmes de l'unité, et une
+page qui transporte l'icosaèdre en géométrie algébrique : un icosaèdre non
+plus dans l'espace euclidien mais relativement à une forme quadratique sur une
+base quelconque, dont elle annonce, sans le démontrer, que le groupe de
+symétries reste en chaque point le groupe alterné à cinq lettres.
+
+Le deuxième sujet prend l'ordre circulaire aux sommets pour point de départ,
+dans une tout autre généralité : un graphe quelconque dessiné sans croisement
+sur une surface. Posez un graphe en fil de fer sur une table et collez un
+ruban de papier le long de chaque fil, en recollant les rubans aux carrefours
+dans l'ordre où les fils y arrivent : vous obtenez une surface percée de
+trous. Grothendieck énonce que cette surface-ruban ne dépend que des ordres
+circulaires, et montre que classer les dessins revient à classer les façons de la
+compléter en une surface, puis à comprendre comment les déformations de la
+surface agissent sur eux. Il y retrouve le groupe des classes
+d'homéomorphismes d'une surface, qu'il appelle groupe de Teichmüller, et
+laisse une question ouverte. Deux pages enfin décrivent les graphes dont le
+groupe de symétries agit transitivement sur les sommets et les arêtes : trois
+sous-groupes emboîtés et un élément d'ordre deux suffisent à les coder, et
+l'icosaèdre en est l'exemple --- rapprochement qui est le nôtre.
+
+Le sujet traité en passant est le produit. Une suite au crayon démontre qu'un
+certain ensemble ordonné est la « somme » de deux autres, et ce qu'elle
+manipule est ce qu'on appelle aujourd'hui un \emph{frame} : l'ensemble
+ordonné des ouverts d'un espace, pris pour lui-même. Une page barrée pose, pour
+les topos, la question voisine du produit d'un topos par un topos de
+préfaisceaux --- question que le dossier 161-4 travaille aussi, dans les mêmes
+notations.
+
+Ce que ces pages montrent de sa manière est net sur l'icosaèdre : une
+construction faite avec des sinus et des cosinus est aussitôt relue comme une
+structure combinatoire, et la question devient de savoir ce que la
+combinatoire voit et ce qu'elle ne voit pas. La datation de l'inventaire,
+« à partir de 1973 », place ces feuillets à Montpellier. Les noms sous
+lesquels chercher la suite sont ceux de graphe enrubanné (\emph{ribbon
+graph}), de système de rotation, de groupe modulaire d'une surface, de graphe
+arc-transitif, de frame et de locale. Grothendieck lui-même reviendra aux
+graphes sur les surfaces et à l'icosaèdre, sous le nom de « cartes » et de
+« dessins d'enfants », dans l'\emph{Esquisse d'un programme} de 1984 ; c'est
+un contexte postérieur, que ces pages ne citent pas.
+
+\keywords{regular icosahedron, icosahedral group, golden ratio, real cyclotomic field, equiangular lines, frame, coproduct of frames, product of topoi, presheaf topos, ribbon graph, rotation system, mapping class group, Dehn–Nielsen–Baer theorem, arc-transitive graph, coset graph}
+\end{resume}
+
+\pagerange{1}{33}
+\section*{Le fil du dossier, et les conventions}
+
+\emph{Les pièces.} Le dossier est fait de feuillets de nature différente,
+sans pagination de sa main. Les pages 2, 11, 20, 23 et 31 sont blanches.
+
+\begin{enumerate}
+  \item \emph{Page 1}, la chemise. Sur l'onglet, au crayon : « Graphes,
+  icosaèdre ». En tête, un « 6 » cerclé, un mot qui se lit peut-être
+  « Groupes », et entre parenthèses une mention de prêt : « Notes sur formes
+  paradoxiques prêtées à Labarde », dont les deux mots décisifs sont d'une
+  lecture incertaine.\footnote{Le dossier 162-1 du même fonds est un registre
+  de prêts de la même période. Rien ne permet de rattacher cette mention à
+  ce registre : la transcription de 162-1, parcourue pour ce travail, ne
+  porte pas le nom lu ici, et les « formes paradoxiques » ne correspondent à
+  aucune de ses entrées. On ne suppose aucun lien.}
+  \item \emph{Pages 3 à 10}, encre sur papier réglé, titrée « L'icosaèdre » :
+  une mise au net (section I).
+  \item \emph{Pages 14 et 12}, encre : calculs sur les racines cinquièmes de
+  l'unité, à lire dans cet ordre (section III).
+  \item \emph{Pages 15, 13 et pied de la page 12}, crayon, écrit tête-bêche
+  par rapport à l'encre et barré : une démonstration sur des ensembles
+  ordonnés (section V).
+  \item \emph{Pages 16 à 19}, quatre feuillets d'un carnet à spirale :
+  croquis, premier jet des pages 3 et 4, le groupe $\mathfrak{A}_5$
+  (section II).
+  \item \emph{Page 21}, l'icosaèdre relativement à une forme quadratique
+  (section IV).
+  \item \emph{Page 22}, écrite dans l'autre sens et barrée d'une croix : le
+  produit d'un topos par un topos de préfaisceaux (section VI).
+  \item \emph{Pages 24 à 30} : plongements d'un graphe dans une surface
+  orientée (section VII).
+  \item \emph{Pages 32 et 33} : graphes à groupe transitif (section VIII).
+\end{enumerate}
+
+\emph{Le fil.} Trois sujets, que rien sur les pages ne relie explicitement.
+L'icosaèdre (I à IV) est construit, puis réduit à son graphe, et la page 10
+demande comment retrouver combinatoirement les rotations parmi les
+symétries ; la réponse qu'elle esquisse --- des ordres circulaires
+« cohérents » aux sommets --- est exactement la donnée $\omega(\varphi)$
+dont partent les pages 24 à 30, et l'icosaèdre est un cas des graphes des
+pages 32 et 33. Ces deux rapprochements sont les nôtres ; ils expliquent
+peut-être pourquoi ces feuillets sont réunis sous « Graphes, icosaèdre »,
+mais ils ne sont écrits nulle part. Le produit (V et VI) est un sujet à part :
+la suite au crayon établit une propriété universelle de somme dans une
+catégorie d'ensembles ordonnés, la page 22 pose la question du produit de
+deux topos ; que la seconde soit la version topos de la première est encore
+notre lecture.
+
+\emph{Notations.} Chaque partie garde les lettres de ses pages, sauf là où
+une même lettre y désigne deux objets. Les renommages sont les suivants,
+chacun signalé en note au point où il se produit : la rotation que les pages
+5 et 6 appellent $\gamma$ est notée $r$, et $R_{a,t}$ désigne la rotation
+d'angle $t$ autour du vecteur unitaire $a$ ; le nombre
+$\zeta + \zeta^{-1} = 2\cos(2\pi/5)$, que les pages appellent tour à tour
+$\gamma$, $\eta$, $t$ ou $c$, est noté $\eta$ ; dans la suite au crayon,
+l'application que la page appelle $\gamma$ est notée $m$ ; aux pages 24 à 30,
+le genre que la page appelle $\gamma(\alpha)$ est noté $g(\alpha)$, et le
+groupe que la page appelle $G$ est noté $\mathrm{Mod}(S)$. Restent des
+collisions entre parties, qu'on ne corrige pas mais qu'il faut avoir en
+tête : $S$ est la sphère unité en I, un schéma de base en IV, une surface en
+VII, l'ensemble des sommets en VIII ; $G$ est $\mathrm{O}(E)$ en I, un groupe
+abstrait en II et VIII ; $\alpha$ est un angle en I, un système d'ordres
+circulaires en VII ; $\pi$ est une partition en VII.
+
+\emph{Ce que le dossier annonce sans l'établir.} Les énoncés a), b), c) de la
+page 21 ; la réponse à la Question de la page 22 ; la Question de la page 29 ;
+l'exactitude de la suite de la page 30, marquée « ?? » ; la conclusion de la
+version infinie de la page 13. Les hypothèses de la suite au crayon, dans sa
+forme à deux facteurs, sont sur une page qui n'est pas dans ce dossier.
+
+\pagerange{3}{10}
+\section*{I. L'icosaèdre (pages 3 à 10)}
+
+\pagerange{3}{4}
+\subsection*{Le triangle équilatéral d'angle $\theta$ (pages 3 et 4)}
+
+Soit $E$ un espace euclidien orienté de dimension $3$, de produit scalaire
+$x \cdot y$, et $S$ sa sphère unité.\footnote{En marge de la page 3 : « espace
+vectoriel muni d'une forme quadratique non dégénérée, qu'on supposera définie
+positive au besoin ». C'est le germe de la page 21, où l'icosaèdre est défini
+relativement à une forme quadratique quelconque.} Pour $u \in S$, on note
+$\Sigma_u = u^{\perp} \cap S$ l'ensemble des directions tangentes unitaires en
+$u$ ; pour $v \in \Sigma_u$, on pose $w = u \wedge v$, de sorte que
+$(u, v, w)$ est une base orthonormée directe. Le groupe $\mathrm{SO}(E)$ agit
+simplement transitivement sur l'ensemble des couples $(u, v)$ avec
+$u \in S$, $v \in \Sigma_u$ ; le groupe
+$\mathrm{O}(E) = \mathrm{SO}(E) \times \{\pm 1\}$ y agit transitivement, le
+stabilisateur d'un couple étant d'ordre $2$, engendré par la symétrie par
+rapport au plan de $u$ et $v$.\footnote{La page dit que $\mathrm{O}(E)$ opère
+« de façon doublement transitive » ; ce qu'elle veut dire est ce qui est
+écrit ici --- la double transitivité, au sens usuel, est autre chose. Elle
+écrit aussi « $(u,v) \in S$ » là où il faut $S \times S$.}
+
+Le grand cercle issu de $u$ dans la direction $v$ est paramétré par
+$x(u,v;\alpha) = u\cos\alpha + v\sin\alpha$, et les directions tangentes en
+$u$ s'écrivent $v' = v\cos\theta + w\sin\theta$. Pour $\theta$ fixé, le
+triangle de sommets $u$, $x = x(u,v;\alpha)$, $x' = x(u,v';\alpha)$ est
+isocèle, et
+\[
+\|x - u\|^{2} = \|x' - u\|^{2} = 4\sin^{2}\tfrac{\alpha}{2},
+\qquad
+\|x - x'\|^{2} = \sin^{2}\alpha\,\|v - v'\|^{2}
+= 16\sin^{2}\tfrac{\alpha}{2}\cos^{2}\tfrac{\alpha}{2}\sin^{2}\tfrac{\theta}{2}.
+\]
+Pour $0 < \alpha < \pi$, il est donc équilatéral si et seulement si
+\[
+(1)\quad \cos\frac{\alpha}{2} = \frac{1}{2\sin(\theta/2)},
+\qquad\text{soit}\qquad
+(1')\quad \cos\alpha = \frac{\cos\theta}{1 - \cos\theta}.
+\]
+Pour $0 < \theta \leqslant \pi$, un tel $\alpha$ existe si et seulement si
+$\theta > \pi/3$.\footnote{La marge de la page 4 écrit
+$|\sin\frac{\theta}{2}| \geqslant \frac12$ et conclut
+$\theta \geqslant \frac{\pi}{3}$ ; pour $\theta = \pi/3$ on trouve $\alpha = 0$
+et le triangle dégénère en un point, d'où l'inégalité stricte. La page écrit
+aussi $\cos\frac{\alpha}{2} = \pm\frac{1}{2\sin\theta/2}$ ; le signe $-$ donne
+$2\pi - \alpha$, c'est-à-dire le même cercle parcouru dans l'autre sens, et
+l'ajout interlinéaire « choisissant la détermination principale de $\alpha$ »
+l'écarte.} Les trois angles sphériques du triangle sont alors égaux à
+$\theta$, et c'est le seul triangle équilatéral inscrit dans $S$, d'angle
+$\theta$, ayant un sommet en $u$, un deuxième dans la direction $v$, et tel
+que $(u, x, x')$ soit direct.
+
+On fixe désormais
+\[
+(2)\quad \theta = \frac{2\pi}{5},
+\qquad\text{d'où}\qquad
+\cos\alpha = \frac{1}{\sqrt{5}},\quad \sin\alpha = \frac{2}{\sqrt{5}},\quad \cos 2\alpha = -\frac{3}{5},
+\]
+les deux dernières valeurs étant notées en marge de la page 4. On abrège
+$c = \cos\alpha$ et $s = \sin\alpha$.
+
+\pagerange{4}{5}
+\subsection*{Les douze points, et les calottes (pages 4 et 5)}
+
+Pour $u$, $v$ fixés, on pose, pour $i \in \mathbb{Z}/5\mathbb{Z}$,
+\[
+v_i = v\cos i\theta + w\sin i\theta,\qquad
+x_i = u\cos\alpha + v_i\sin\alpha,\qquad
+x'_i = -x_i,\qquad u' = -u .
+\]
+Les six points $u, x_0, \ldots, x_4$ sont distincts --- leurs projections sur
+$u^{\perp}$ sont $0$ et les $s\,v_i$ --- et ont une coordonnée positive le
+long de $u$, puisque $c > 0$ ; les douze points $u, u', x_i, x'_i$ sont donc
+distincts. Leur ensemble est l'\emph{icosaèdre} $I = I_{u,v}$ défini par
+$(u,v)$. Les $x_i$ sont en ordre circulaire sur le cercle de $S$ de centre $u$
+et de rayon (rectiligne) $\ell = 2\sin\frac{\alpha}{2}$.\footnote{La page 4
+donne pour rayon $4\sin^{2}\frac{\alpha}{2}$, qui est le carré de la distance
+calculée page 3.}
+
+On note
+\[
+\ell = 2\sin\frac{\alpha}{2} = \|a - b_i\|,\qquad \ell' = 2\cos\frac{\alpha}{2} = \|a + b_i\|,
+\]
+les deux distances qui interviennent entre le centre $a$ d'une calotte et ses
+points périphériques $b_i$ ou leurs opposés ; $\ell^{2}$ et $\ell'^{2}$ sont
+les racines de $\lambda^{2} - 4\lambda + 4\sin^{2}\alpha = 0$.\footnote{La page
+numérote (4) la formule de $\ell$, alors que (4) numérote déjà, une page plus
+haut, la définition des $x_i$ ; (4') est la formule de $\ell'$. On nomme les
+deux longueurs sans les numéroter.}
+
+Un \emph{triangle icosaédral} est un ensemble de trois points de $S$ deux à
+deux à distance $\ell$ ; de façon équivalente, l'image de $\{u, x_0, x_1\}$
+par une rotation. Une \emph{calotte d'icosaèdre} est l'image de
+$\{u, x_0, \ldots, x_4\}$ par un élément de $\mathrm{O}(E)$. Il revient au
+même de demander un ensemble de six points qu'on puisse écrire
+$(a; b_0, \ldots, b_4)$ de sorte que les triangles $(a, b_i, b_{i+1})$,
+$0 \leqslant i \leqslant 3$, soient icosaédraux : la rotation d'angle $\pm\theta$
+autour de $a$ envoie alors chaque $b_i$ sur $b_{i+1}$, et, parce que
+$5\theta = 2\pi$, le triangle $(a, b_4, b_0)$ est lui aussi icosaédral. Le
+point $a$, le seul qui soit à distance $\ell$ des cinq autres, est le
+\emph{sommet} de la calotte ; les $b_i$ en sont les \emph{points
+périphériques}. L'orientation de $E$ munit ceux-ci d'un ordre circulaire
+canonique --- celui dans lequel les rencontre une rotation directe autour de
+$a$ ---, qui en fait un torseur sous $\mathbb{Z}/5\mathbb{Z}$.
+
+Le stabilisateur $G_C$ d'une calotte $C$ dans $G = \mathrm{O}(E)$ est un
+groupe diédral d'ordre $10$. Son intersection $G'_C$ avec
+$G' = \mathrm{SO}(E)$ est le groupe des rotations autour de $a$ d'angle
+multiple de $\theta$, canoniquement isomorphe à $\mathbb{Z}/5\mathbb{Z}$ grâce
+à l'orientation, et il agit simplement transitivement sur les points
+périphériques, ce qui redonne leur ordre circulaire. Les cinq autres éléments
+sont d'ordre $2$ : ce sont les symétries $g_i$ par rapport aux plans
+$\langle a, b_i \rangle$, et $\{1, g_i\}$ est le stabilisateur de $b_i$ dans
+$G_C$. Ainsi $G_C = G'_C \rtimes \mathbb{Z}/2\mathbb{Z}$, le facteur
+$\mathbb{Z}/2\mathbb{Z}$ agissant sur $G'_C$ par
+inversion.\footnote{Aux deux endroits où la page écrit « le sous-groupe
+$G_C$ » et « opérant sur $G_C$ », le sens demande $G'_C$ ; on ne voit pas le
+prime sur la page. La page dit « les cinq points de
+$G_C \cap \complement G'_C$ » pour les cinq éléments, et la phrase qui les
+décrit reste inachevée ; « produit ½ direct » est le produit semi-direct.}
+
+Jusqu'ici, la page le note, $\theta = 2\pi/5$ n'a joué aucun rôle : on aurait
+pu prendre $\theta = 2\pi/m$. Ce choix intervient avec le lemme suivant.
+
+\pagerange{5}{7}
+\subsection*{Le lemme de la calotte voisine (pages 5 à 7)}
+
+\textbf{Lemme.} L'ensemble $\{x_0, x_1, u, x_{-1}, x'_2, x'_{-2}\}$ est une
+calotte de sommet $x_0$, et l'ordre circulaire canonique de ses points
+périphériques est $(x_1, u, x_{-1}, x'_2, x'_{-2})$.\footnote{La page écrit la
+calotte $(x_0; x_1, u, x_{-1}, x'_2, x'_{-2})$, sommet en tête, puis « calotte
+d'icosaèdre de sommet $u$ » ; la lettre après « sommet » est un lapsus pour
+$x_0$. On a vérifié que l'ordre écrit est bien l'ordre direct autour de
+$x_0$.}
+
+La page ébauche d'abord une démonstration par les distances : la symétrie par
+rapport au plan $\langle u, x_0 \rangle$ échange $x_1$ et $x_{-1}$, $x'_2$ et
+$x'_{-2}$, et ramène le lemme, à l'orientation près, à vérifier que
+$x_0 - x'_2$, $x_{-1} - x'_2$ et $x'_2 - x'_{-2}$ sont de longueur $\ell$ ---
+la dernière étant évidente. Elle préfère ensuite une voie « plus astucieuse ».
+Soit
+\[
+r = R_{w,\alpha} \circ R_{u,-\theta/2},
+\]
+composé de la rotation d'angle $-\theta/2$ autour de $u$ et de la rotation
+d'angle $\alpha$ autour de $w$.\footnote{La page appelle cette rotation
+$\gamma = \gamma^{w}_{\alpha}\gamma^{u}_{-\theta/2}$, après avoir nommé
+$\gamma^{u}_{\theta/2}$, avec l'indice sans signe, « la rotation d'angle
+$-\theta/2$ autour de $u$ ». On la note $r$ : la lettre $\gamma$ désigne dans
+ce dossier trois autres objets.} Sa matrice dans la base $(u, v, w)$ est
+\[
+r = \begin{pmatrix}
+\cos\alpha & -\sin\alpha\cos\frac{\theta}{2} & -\sin\alpha\sin\frac{\theta}{2} \\
+\sin\alpha & \cos\alpha\cos\frac{\theta}{2} & \cos\alpha\sin\frac{\theta}{2} \\
+0 & -\sin\frac{\theta}{2} & \cos\frac{\theta}{2}
+\end{pmatrix},
+\]
+et le lemme résulte des six relations
+\[
+r u = x_0,\quad r x_0 = x'_2,\quad r x_1 = x'_{-2},\quad r x_2 = x_1,\quad r x_3 = u,\quad r x_4 = x_{-1},
+\]
+puisque $r$ est une rotation, qui transporte la calotte $(u; x_0, \ldots, x_4)$
+et son ordre canonique.
+
+La page vérifie la première, écrit $r x_0$ et pose les trois égalités à
+prouver pour la deuxième, commence $r x_1$ et s'arrête. On achève le
+calcul.\footnote{La vérification qui suit est la nôtre ; la page 6 s'arrête
+sur « $\gamma x_1 = \gamma u \cos\alpha + \ldots = $ », le reste de la page
+étant blanc. Les trois égalités qu'elle pose pour $r x_0 = x'_2$ sont
+exactes : ce sont, dans l'ordre, les coordonnées selon $u$, $v$ et $w$
+ci-dessous, pour $i = 0$.} La rotation $R_{u,-\theta/2}$ envoie $v_i$ sur le
+vecteur unitaire d'angle $\beta_i = (2i - 1)\pi/5$ dans le plan $(v, w)$, d'où
+\[
+r x_i = \bigl(c^{2} - s^{2}\cos\beta_i\bigr)\,u + cs\,(1 + \cos\beta_i)\,v + s\sin\beta_i\,w .
+\]
+On compare aux coordonnées de $x_j = c\,u + s\cos j\theta\,v + s\sin j\theta\,w$
+et de $x'_j = -x_j$. Les coordonnées selon $w$ concordent d'elles-mêmes ; pour
+$i = 3$, $\beta_3 = \pi$ et $r x_3 = u$ ; pour les quatre autres valeurs de
+$i$, en utilisant $s^{2} = 1 - c^{2}$, les deux autres coordonnées se ramènent
+aux deux identités
+\[
+\text{(A)}\quad c\,(1 - \cos\tfrac{2\pi}{5}) = \cos\tfrac{2\pi}{5},
+\qquad
+\text{(B)}\quad c\,(1 + \cos\tfrac{\pi}{5}) = \cos\tfrac{\pi}{5},
+\]
+(A) pour $i = 2$ et $i = 4$, (B) pour $i = 0$ et $i = 1$. L'identité (A) est
+(1'). Posons $\eta = 2\cos\frac{2\pi}{5}$ et $p = 2\cos\frac{\pi}{5}$ ; alors
+$p = \eta + 1$ et $p\,\eta = 1$, deux formes de la relation
+$\eta^{2} + \eta - 1 = 0$, et, compte tenu de (A), l'identité (B) équivaut à
+$\eta + p\eta = p$, qui en découle. C'est là, et seulement là, que
+$\theta = 2\pi/5$ intervient : par l'équation du nombre d'or, que les pages 14
+et 12 établissent pour elles-mêmes, sans rapport écrit avec
+celle-ci.\footnote{Le rapprochement entre la vérification de la page 6 et
+les calculs des pages 12 et 14 est le nôtre. Ces derniers sont écrits dans
+un autre contexte (section III), mais ils calculent exactement ce qui manque
+ici.}
+
+\textbf{Corollaire.} Toute $g \in \mathrm{O}(E)$ qui envoie la calotte
+$(u; x_0, \ldots, x_4)$ sur celle du lemme préserve l'icosaèdre $I$. En
+effet, pour l'une et l'autre calotte $C$, on a $I = C \cup (-C)$, et $g$ est
+linéaire. En particulier $r$ préserve $I$.
+
+\pagerange{7}{8}
+\subsection*{Le groupe de l'icosaèdre (pages 7 et 8)}
+
+Soit $\Gamma$ le stabilisateur de $I$ dans $\mathrm{O}(E)$, et
+$\Gamma' = \Gamma \cap \mathrm{SO}(E)$. Comme $-1 \in \Gamma$ et
+$-1 \notin \Gamma'$, on a $\Gamma = \Gamma' \times \{\pm 1\}$.
+
+Les \emph{arêtes} de $I$ sont les trente paires
+\[
+\{u, x_i\},\ \{u', x'_i\},\ \{x_i, x_{i+1}\},\ \{x'_i, x'_{i+1}\},\ \{x_i, x'_{i-2}\},\ \{x'_i, x_{i-2}\}\qquad (i \in \mathbb{Z}/5\mathbb{Z}),
+\]
+c'est-à-dire les paires de points distincts de $I$ à distance minimale
+$\ell$. Ses \emph{faces} sont les vingt triples
+\[
+\{u, x_i, x_{i+1}\},\ \{u', x'_i, x'_{i+1}\},\ \{x_i, x'_{i-2}, x_{i+1}\},\ \{x'_i, x_{i-2}, x'_{i+1}\},
+\]
+c'est-à-dire les triples deux à deux reliés par une arête ; cinq d'entre eux
+contiennent $u$. Tout point de $I$ est le sommet d'une unique calotte contenue
+dans $I$, formée de lui-même et des cinq points qui lui sont reliés par une
+arête.
+
+\textbf{Théorème.} (i) $\Gamma'$ agit transitivement sur les douze sommets de
+$I$. (ii) $\Gamma'$ agit simplement transitivement sur les soixante arêtes
+orientées, c'est-à-dire sur les couples $(x, d)$ formés d'un sommet $x$ et
+d'une arête $d$ issue de $x$. (iii) $\Gamma$ agit simplement transitivement
+sur les cent vingt triples ordonnés $(x, y, z)$ qui forment une
+face.\footnote{La page écrit « $(x,d)$ où $x$ est un sommet de l'icosaèdre,
+$I$ une arête » : le $I$ est un lapsus pour « $d$ une arête issue de $x$ ».
+Une note en marge, en partie illisible, ajoute qu'on peut dire la même chose
+des triples d'arêtes formant une face.}
+
+\emph{Démonstration.} La rotation $R_{u,\theta}$ préserve $I$ et permute
+circulairement les $x_i$, et les $x'_i$ ; la rotation $r$ envoie $u$ sur
+$x_0$ et $x_0$ sur $x'_2$, et, étant linéaire, $u'$ sur $x'_0$. Tous les
+sommets sont donc congrus sous $\Gamma'$. Un élément de $\Gamma'$ qui fixe $u$
+préserve l'ensemble des points de $I$ à distance $\ell$ de $u$ --- les autres
+sont à distance $\ell' > \ell$ ou $2$ --- donc la calotte de sommet $u$ ;
+inversement, une rotation qui préserve cette calotte $C$ préserve
+$I = C \cup (-C)$. Le stabilisateur de $u$ dans $\Gamma'$ est donc $G'_C$,
+simplement transitif sur les $x_i$, d'où (ii). Pour (iii), on se ramène par
+(ii) aux triples $(u, x_0, z)$ ; il n'y a que deux faces contenant l'arête
+$\{u, x_0\}$, de troisièmes sommets $x_1$ et $x_{-1}$, échangés par la
+symétrie par rapport au plan $\langle u, v \rangle$, qui préserve $I$ ; et
+une application linéaire qui fixe $u$, $x_0$, $x_1$, linéairement
+indépendants, est l'identité.
+
+\textbf{Corollaire.} $|\Gamma'| = 60$ et $|\Gamma| = 120$ : il y a trente
+arêtes, donc soixante arêtes orientées ; et vingt faces, chacune avec six
+ordres sur ses sommets.
+
+En marge de la page 8, la liste des données équivalentes : un icosaèdre et
+l'un de ses sommets ; un icosaèdre et une calotte contenue dans lui ; une
+calotte ; un couple $(u, v)$ modulo les rotations de $v$ dans $u^{\perp}$
+d'angle multiple de $\theta$. Autrement dit, l'espace de ces données est le
+quotient de l'espace des couples $(u, v)$ --- un torseur sous
+$\mathrm{SO}(E)$, qui est aussi un fibré principal sur $S$ de groupe
+$\mathrm{SO}(2)$ --- par le sous-groupe $\mu_5$ du groupe structural :
+c'est un fibré principal sur $S$ de groupe
+$\mathrm{SO}(2)/\mu_5$.\footnote{La marge dit, entre crochets et d'une
+lecture douteuse en plusieurs mots : « point du fibré principal sur $S$ de
+groupe $\mathbb{T}$ quotient […] de celui formé des $(u,v)$ ». La
+formulation ci-dessus est la nôtre.}
+
+\pagerange{8}{10}
+\subsection*{Deux graphes, et ce que la combinatoire ne voit pas (pages 8 à 10)}
+
+Les sommets et les arêtes de $I$ forment un graphe $\mathcal{G}_1$ : douze
+sommets, trente arêtes, cinq arêtes en chaque sommet. Le groupe $\Gamma$ y
+agit fidèlement, puisque les sommets engendrent $E$.
+
+\textbf{Proposition} (une « Remarque » de la page). Le groupe des
+automorphismes de $\mathcal{G}_1$ est $\Gamma$, d'ordre $120$.\footnote{La page écrit : « Montrer que \emph{tout}
+automorphisme du graphe est dans $\Gamma'$ », et, pour le second graphe,
+« le groupe des automorphismes de ce graphe est encore $\Gamma'$ ». C'est
+faux : $-1$ et les quinze symétries planes de $\Gamma$ sont des
+automorphismes du graphe qui ne sont pas des rotations. La démonstration de
+la page, elle, établit l'énoncé juste : elle se ramène aux automorphismes qui
+fixent $u$, $x_0$ \emph{et} $x_1$, réduction qui repose sur la transitivité
+de $\Gamma$ sur les faces ordonnées, point (iii), et non sur celle de
+$\Gamma'$ ; la page 10 dit d'ailleurs « les actions de $\Gamma$ » et
+cherche à caractériser $\Gamma'$ \emph{parmi} les symétries combinatoires,
+ce qui n'aurait pas de sens si elles étaient toutes des rotations. Nous avons
+vérifié par énumération que le graphe a exactement $120$ automorphismes.}
+
+\emph{Démonstration.} Les faces sont les triangles du graphe, donc tout
+automorphisme permute les triples ordonnés formant une face ; par (iii), il
+suffit de montrer qu'un automorphisme qui fixe $u$, $x_0$, $x_1$ est
+l'identité. Il fixe $x_2$, seul voisin commun de $u$ et $x_1$ autre que
+$x_0$, et $x_{-1}$, seul voisin commun de $u$ et $x_0$ autre que $x_1$ ; puis
+$x_3$, dernier voisin de $u$. La calotte de sommet $u$ est donc fixée point
+par point ; de même celle de sommet $x_0$, puis, de proche en proche le long
+des triangles $(u, x_i, x_{i+1})$, celles de sommet $x_i$. Cela donne tous les
+sommets sauf $u'$, qui est fixé comme le seul restant. Le groupe des
+automorphismes agit donc librement sur les $120$ faces ordonnées, ce qui
+majore son ordre par $120 = |\Gamma|$.
+
+Les faces et les arêtes forment un second graphe $\mathcal{G}_2$ : vingt
+sommets, trente arêtes, trois arêtes en chaque sommet, une arête de $I$
+reliant les deux faces qui la contiennent. C'est le graphe des sommets et
+arêtes du dodécaèdre, dual de l'icosaèdre. Son groupe d'automorphismes est
+encore $\Gamma$ : il suffit de voir qu'un automorphisme qui fixe une face,
+disons $F_0 = \{u, x_0, x_1\}$, et chacune de ses trois voisines, est
+l'identité. Il fixe alors $\{u, x_2, x_3\}$ et $\{u, x_3, x_4\}$, seul couple
+de faces adjacentes entre elles et adjacentes respectivement à
+$\{u, x_1, x_2\}$ et à $\{u, x_4, x_0\}$ ; donc chacune des voisines de $F_0$
+a ses trois voisines fixées. De proche en proche, toutes les faces sont
+fixées.\footnote{La page conclut : « par symétrie on voit que pour chacune
+des faces adjacentes à $(u, x_0, x_1)$, ses faces et leurs arêtes sont
+fixes. À partir de là la conclusion est triviale ». « Ses faces » est à lire
+« ses faces adjacentes ».}
+
+La page 10 tire la leçon. Les propriétés de l'action de $\Gamma$ sur les
+sommets, les arêtes et les faces sont conséquences de la seule structure
+combinatoire --- le graphe $\mathcal{G}_1$, le graphe $\mathcal{G}_2$, ou le
+système des trois ensembles avec leurs incidences. Mais les rotations
+$\Gamma'$, sous-groupe d'indice $2$, ne sont pas visibles sur le graphe seul.
+La page propose de les caractériser comme les automorphismes qui respectent
+les ordres circulaires des points périphériques des calottes, et note qu'on
+peut définir combinatoirement \emph{deux} « systèmes cohérents » de tels
+ordres, correspondant aux deux orientations de l'espace.
+
+On peut préciser ce qu'est un système cohérent, dans les termes de la
+section VII.\footnote{Ce paragraphe est le nôtre.} Un choix d'ordre
+circulaire sur les cinq voisins de chaque sommet --- un \emph{système de
+rotation} --- définit des cycles de bord, obtenus en tournant, à chaque
+sommet atteint, vers l'arête suivante. Est cohérent un système dont les
+cycles de bord sont les vingt triangles. Il y en a exactement deux,
+échangés par tout élément de $\Gamma \smallsetminus \Gamma'$, et $\Gamma'$ est
+le stabilisateur de l'un d'eux dans $\Gamma = \mathrm{Aut}(\mathcal{G}_1)$.
+Qu'un graphe planaire $3$-connexe n'ait, à homéomorphisme près, qu'un
+plongement dans la sphère est un théorème de Whitney (1933) ; rien n'indique
+que Grothendieck le connaissait, et la page ne le cite pas. Un système
+cohérent est exactement l'invariant $\omega(\varphi)$ que les pages 24 à 30
+attachent au plongement de l'icosaèdre dans la sphère $S$.
+
+\pagerange{16}{19}
+\section*{II. Les feuillets du carnet (pages 16 à 19)}
+
+Quatre feuillets d'un carnet à spirale, écrits en largeur et en travers,
+couverts pour partie de croquis --- fleurs légendées « corolle », « racine »,
+« tige », « cœur », « pétale », tétraèdres, un cube, une projection de
+l'icosaèdre. On en retient trois choses.
+
+\pagerange{17}{17}
+\subsection*{Un premier jet des pages 3 et 4 (page 17)}
+
+Avec d'autres lettres ($\rho_i$ pour $v_i$, $v'$ et $w'$ pour deux directions
+tangentes faisant l'angle $2\pi/5$), la page 17 refait le calcul des côtés du
+triangle et aboutit à la même condition (1), encadrée :
+$\cos\frac{\alpha}{2} = 1/(2\sin\frac{\pi}{5})$. Elle note en marge que
+$2\sin\frac{\pi}{5}$ est le côté du pentagone régulier inscrit dans le cercle
+unité.\footnote{Parmi les inégalités éparses dans la marge des croquis, la
+première, « $\frac{4\pi}{5} < \frac{2\pi}{3}$ », est fausse ; elles sont des
+essais autour de la condition d'existence de la page 4 et ne servent nulle
+part.}
+
+\pagerange{18}{18}
+\subsection*{Le groupe des rotations est $\mathfrak{A}_5$ (page 18)}
+
+Soit $G$ un groupe d'ordre $60$ --- ici $\Gamma'$ --- agissant
+transitivement sur un ensemble $I_{15}$ à quinze éléments, les paires
+d'arêtes opposées de l'icosaèdre, c'est-à-dire les quinze axes passant par
+les milieux des arêtes. Ces axes se groupent en cinq triples d'axes deux à
+deux orthogonaux, et l'on peut munir chaque triple d'un ordre circulaire, de
+façon invariante par $G$ : c'est l'automorphisme $\alpha$ d'ordre $3$ de
+$I_{15}$ commutant à $G$ de la page, dont le quotient est un ensemble $J$ à
+cinq éléments.\footnote{La page vérifie sur la figure --- une projection de
+l'icosaèdre le long d'un axe, dont les sommets sont marqués $A_i$, $A'_i$ ---
+que $\alpha^{3}(P) = P$ pour une paire $P$, en écrivant
+$(AB, A'B') = \alpha(R) = \alpha^{2}(Q) = \alpha^{3}(P)$. Cette chaîne est
+exacte : $\alpha(R) = \alpha(\alpha(Q)) = \alpha^{2}(Q)$. La note de la
+transcription qui y voit une anomalie est à écarter.} Le groupe $G$ agit
+transitivement sur $J$, avec des stabilisateurs d'ordre $12$ ; d'où un
+morphisme $G \to \mathfrak{S}_5$. S'il est injectif, son image est un
+sous-groupe d'indice $2$ de $\mathfrak{S}_5$, donc $\mathfrak{A}_5$, et
+$G \simeq \mathfrak{A}_5$.
+
+L'injectivité, la page commence à l'établir en passant par le normalisateur
+d'un $2$-sous-groupe de Sylow, et s'arrête au bord du feuillet. On l'achève
+ainsi.\footnote{Cet argument est le nôtre.} Le noyau $K$ est distingué dans
+$G$ et contenu dans un stabilisateur, donc d'ordre au plus $12$ ; il est
+réunion de classes de conjugaison. Or les classes non triviales de $\Gamma'$
+ont $15$, $20$, $12$ et $12$ éléments --- les demi-tours autour des axes
+d'arêtes, les rotations d'angle $\pm 2\pi/3$ autour des axes de faces, les
+rotations d'angle $\pm 2\pi/5$ et celles d'angle $\pm 4\pi/5$ autour des axes
+de sommets ---, ce qu'on lit sur les centralisateurs, d'ordres $4$, $3$, $5$
+et $5$. Aucune ne tient dans $K \smallsetminus \{1\}$, qui a au plus onze
+éléments ; donc $K = \{1\}$.
+
+\pagerange{16}{19}
+\subsection*{Deux lemmes sur les ensembles homogènes (pages 16 et 19)}
+
+Au milieu des croquis, deux calculs qui sont exactement les outils des pages
+32 et 33. Page 16 : pour un $G$-ensemble $E$ et un sous-groupe $H$,
+\[
+\mathrm{Hom}_G(G/H, E) \simeq E^{H},
+\]
+une application équivariante étant déterminée par l'image de la classe
+neutre, qui doit être fixée par $H$. Page 19 : la multiplication à droite
+par $a \in G$ passe au quotient $G/H$ si et seulement si $a^{-1}Ha \subset H$ ;
+d'où, $G$ étant fini,
+\[
+\mathrm{Aut}_G(G/H) \simeq N_G(H)/H .
+\]
+La page 19 note aussi que le normalisateur d'un sous-groupe de Klein dans
+$\mathfrak{A}_5$ est $(\mathbb{Z}/2\mathbb{Z})^{2} \rtimes \mathbb{Z}/3\mathbb{Z} \simeq \mathfrak{A}_4$,
+le stabilisateur d'ordre $12$ ci-dessus.\footnote{La page 19 contient aussi
+des essais trigonométriques qui ne s'accordent pas avec (1) : on y lit,
+encadré, $\cos\alpha = 1/(2\sin\frac{2\pi}{10})$, qui est la valeur de
+$\cos\frac{\alpha}{2}$, non de $\cos\alpha$. De même, page 18, la chaîne
+$\cos\alpha = \ldots = \frac{1}{2\sin^{2}\theta} - 1 = 1 - 2\sin^{2}\theta = \cos 2\theta$
+confond $\theta$ et $\theta/2$ et contient une égalité fausse ; la formule
+juste est (1'). Ce sont des brouillons, que la mise au net corrige.}
+
+\pagerange{12}{14}
+\section*{III. Le nombre d'or dans le corps des racines cinquièmes (pages 14 et 12)}
+
+Les deux pages d'encre se lisent dans l'ordre 14, puis 12 : le calcul de la
+norme de $\eta$, qui s'arrête page 14 sur un signe $=$, se termine en tête de
+la page 12, qui en tire l'équation de $\eta$.\footnote{Cet ordre de lecture
+est le nôtre ; la transcription ne le relève pas. Il est confirmé par la
+suite au crayon des mêmes feuilles, qui se lit elle aussi 15 avant 13
+(section V) : les deux feuilles semblent avoir été rangées dans l'ordre
+inverse de celui où elles ont été écrites.}
+
+\pagerange{14}{14}
+\subsection*{Le quotient par l'inversion (page 14)}
+
+Soit $A = \mathbb{Z}[\frac15]$ et $\mu_5^{*} \subset \mu_5$ le schéma des
+racines primitives cinquièmes de l'unité sur $\mathrm{Spec}\,A$ :
+\[
+\mu_5^{*} = \mathrm{Spec}\,B,\qquad B = A[T]/(1 + T + T^{2} + T^{3} + T^{4}).
+\]
+Il est fini étale de rang $4$ sur $A$, galoisien de groupe
+$(\mathbb{Z}/5\mathbb{Z})^{*} \simeq \mathbb{Z}/4\mathbb{Z}$, qui agit par
+$\zeta \mapsto \zeta^{k}$ ; $2$ et $3$ en sont les générateurs, et $-1$
+l'élément d'ordre $2$.\footnote{La page note ce groupe $\Gamma$ ; la lettre
+est prise, en I, par le groupe de l'icosaèdre.} Soit $\beta$ l'inversion
+$\zeta \mapsto \zeta^{-1}$. Dans la base $1, T, T^{2}, T^{3}$,
+\[
+\beta(c_0 + c_1T + c_2T^{2} + c_3T^{3}) = (c_0 - c_1) - c_1T + (c_3 - c_1)T^{2} + (c_2 - c_1)T^{3},
+\]
+de sorte que les invariants sont les $c_0 + c_2(T^{2} + T^{3})$ : l'anneau
+$B^{\beta}$ est libre de rang $2$ sur $A$, de base $1$ et
+$T^{2} + T^{3} = \zeta^{2} + \zeta^{-2}$. Ce calcul vaut sur tout anneau
+$A$.\footnote{Le signe entre $c_0$ et $c_1$ est couvert d'une tache sur la
+page ; la ligne suivante, que l'on suit, suppose
+$c_0 - c_1(1 + T + T^{2} + T^{3})$.}
+
+Posons $\eta = \zeta + \zeta^{-1}$ et $\eta' = \zeta^{2} + \zeta^{-2}$, son
+conjugué par $\zeta \mapsto \zeta^{2}$ ; on a $\eta' = -1 - \eta$, donc
+$B^{\beta} = A[\eta]$.\footnote{La page écrit ce nombre $\eta$ en tête, puis
+$\gamma$ dans le calcul de la trace et de la norme ; la page 12 l'écrit
+$\gamma$ et $t$, la page 21 $\gamma$ et $c$. On garde $\eta$ partout.} Sa
+trace et sa norme sont
+\[
+\mathrm{Tr}\,\eta = \eta + \eta' = \zeta + \zeta^{2} + \zeta^{3} + \zeta^{4} = -1,
+\qquad
+\mathrm{N}\,\eta = \eta\,\eta' = \zeta^{3} + \zeta^{-1} + \zeta + \zeta^{-3} = -1,
+\]
+la seconde égalité étant celle de la page 12.
+
+La page esquisse ensuite la situation pour $n$ quelconque : sur
+$\mathbb{Z}[\frac1n]$ et pour $n \geqslant 3$, l'inversion agit librement sur
+$\mu_n^{*}$, le quotient $\vartheta_n = \mu_n^{*}/(\zeta \sim \zeta^{-1})$
+est fini étale de rang $\varphi(n)/2$, $\mu_n^{*} \to \vartheta_n$ est étale
+de rang $2$, et $\lambda \mapsto \lambda + \lambda^{-1}$ plonge $\vartheta_n$
+dans la droite affine --- ce qui revient au fait classique que l'anneau des
+entiers du sous-corps réel de $\mathbb{Q}(\zeta_n)$ est
+$\mathbb{Z}[\zeta_n + \zeta_n^{-1}]$.\footnote{Le rang de $\vartheta_n$ est
+une lecture incertaine sur la page. La page esquisse aussi une version
+« tordue » de ces objets par un torseur $T$ ($\mu_n^{T}$, $\vartheta_n^{T}$,
+qu'elle note aussi $\mathcal{V}_n$), sans la développer ; on ne
+l'interprète pas.}
+
+\pagerange{12}{12}
+\subsection*{L'équation (page 12)}
+
+De la trace et de la norme :
+\[
+\eta^{2} + \eta - 1 = 0,\qquad \mathcal{O}(\vartheta_5) = \mathbb{Z}[\tfrac15][t]/(t^{2} + t - 1).
+\]
+Le discriminant du polynôme est $5$ : $\vartheta_5$ est étale sur
+$\mathbb{Z}[\frac15]$, et non au-dessus de $5$.\footnote{La lettre qui nomme
+cet anneau sur la page, un $\mathfrak{D}$ ou un $\vartheta$ gothique, n'est
+pas sûre ; on reprend le $\vartheta_n$ de la page 14. La marge dit que la
+formule $\eta = (-1 \pm \sqrt5)/2$ « garde un sens sur tout anneau où 2
+\emph{et} 5 sont inversibles » : plus exactement, les deux racines sont
+distinctes dès que $5$ est inversible, et la formule les exprime là où, de
+plus, $2$ est inversible et $5$ a une racine carrée choisie.} Sur
+$\mathbb{R}$,
+\[
+\eta = 2\cos\tfrac{2\pi}{5} = \frac{\sqrt5 - 1}{2},\qquad \eta' = 2\cos\tfrac{4\pi}{5} = -\frac{\sqrt5 + 1}{2} :
+\]
+$\eta$ est l'inverse du nombre d'or, $\eta'$ son opposé. Les deux racines
+s'échangent par $t \mapsto t^{2} - 2$, trace de l'élévation au carré :
+$\eta' = \eta^{2} - 2$ et $\eta = \eta'^{2} - 2$. La page note enfin
+$\cos'(D, \zeta D) = \mathrm{Tr}\,\zeta^{2} = t^{2} - 2$ : pour deux droites
+d'un plan, l'invariant naturel n'est pas le cosinus de leur angle, défini au
+signe près, mais $\cos' = 2\cos$ de l'angle double. C'est la notation que
+reprend la page 21.
+
+\pagerange{21}{21}
+\section*{IV. L'icosaèdre relativement à une forme quadratique (page 21)}
+
+La page 21 transporte l'icosaèdre sur une base quelconque. Elle écrit
+« icosaèdre projectif --- icosaèdre » : ce qui se transporte bien n'est pas
+l'ensemble des douze sommets, mais celui des six droites qui joignent les
+sommets opposés.
+
+Dans l'espace euclidien de la section I, avec $Q(x) = x \cdot x$, de forme
+polaire $B(x, y) = Q(x + y) - Q(x) - Q(y) = 2\,x \cdot y$ et $B' = B/2$, ces six
+droites $D_1, \ldots, D_6$ font deux à deux le même angle $\alpha$ ou
+$\pi - \alpha$ : ce sont six droites \emph{équiangulaires}, le maximum possible
+en dimension $3$. La page le calcule à partir du nombre d'or :
+\[
+\cos\alpha = \frac{\eta}{2 - \eta} = \frac{2\eta + 1}{5} = \frac{1}{\sqrt5},
+\qquad \cos 2\alpha = -\frac35,
+\]
+la forme $a + b\eta$ étant obtenue en identifiant à
+$\eta^{2} + \eta - 1$.\footnote{La première équation en $a, b$ s'écrit sur
+la page $2a + (2b - 1 - a)\gamma + b\gamma^{2} = 0$ ; le signe du dernier
+terme doit être $-$, comme le confirme la forme normalisée qui suit, juste
+sur la page, et qui donne $b = 2a$, $a = \frac15$, $b = \frac25$.} Pour $x$ et
+$y$ engendrant deux droites distinctes,
+\[
+\cos'(D_i, D_j) = \frac{B(x,y)^{2}}{Q(x)Q(y)} - 2 = 2\cos 2\alpha = -\frac65,
+\]
+\[
+B(x,y)^{2} = \frac45\,Q(x)Q(y),
+\qquad
+B'(x,y)^{2} = \frac15\,Q(x)Q(y).
+\]
+
+La page ne définit pas l'« icosaèdre local ». Ce qu'elle calcule conduit à la
+définition suivante, qui est la nôtre. Soit $S$ un schéma sur lequel $2$ et
+$5$ sont inversibles, $\mathcal{E}$ un $\mathcal{O}_S$-module localement
+libre de rang $3$ muni d'une forme quadratique non dégénérée $Q$, et
+$B' = B/2$. Un icosaèdre (projectif) relatif à $Q$ est une famille de six
+sous-modules $D_1, \ldots, D_6$ localement facteurs directs de rang $1$, tels
+que, pour des générateurs locaux $x_i$, les $Q(x_i)$ soient inversibles et
+\[
+B'(x_i, x_j)^{2} = \tfrac15\,Q(x_i)Q(x_j)\qquad (i \neq j).
+\]
+La page annonce alors, sans les démontrer :
+
+\begin{itemize}
+  \item[a)] il existe localement des icosaèdres ;
+  \item[b)] deux icosaèdres sont localement conjugués par $\mathrm{SO}(Q)$ ;
+  \item[c)] le stabilisateur d'un icosaèdre dans $\mathrm{SO}(Q)$ --- son
+  groupe d'automorphismes --- est un schéma en groupes fini étale sur $S$,
+  dont les fibres géométriques sont isomorphes au groupe alterné
+  $\mathfrak{A}_5$.
+\end{itemize}
+
+Sur $\mathbb{R}$, c) est le théorème de la section II. On ne vérifie pas ces
+énoncés en toute généralité, en particulier en caractéristique $3$, qui
+divise $|\mathfrak{A}_5|$.\footnote{La page ne dit pas sur quelle base elle
+se place ; l'hypothèse « $2$ et $5$ inversibles » est la nôtre, imposée par la
+formule encadrée ($B' = B/2$, et le facteur $\frac15$). En tête de la page,
+une colonne $\boldsymbol{\mu}_5$ --- $\boldsymbol{\mu}_5^{*}$ ---
+$\mathbb{V}_5$ --- $\mathbb{Z}[\frac14]$ : la transcription lit $\frac14$,
+tel qu'écrit, là où l'on attendrait $\frac15$. La page note aussi
+qu'« en caractéristique $2$ », la relation en $B$ dégénère en
+$B(x,y)^{2} = 0$, et passe à $B'$, qui lui-même demande $2$ inversible ; la
+ligne « ceci signifie : $y \parallel x$ » qui suit reste obscure.} « Localement »
+doit s'entendre pour une topologie qui adjoint $\sqrt5$ --- la topologie
+étale, par exemple : sur un corps où $5$ n'est pas un carré, trois droites
+$D_1, D_2, D_3$ ne peuvent être toutes rationnelles, car le produit des
+$Q(x_i)Q(x_j)/5$ sur les trois paires serait à la fois un carré et $5$ fois
+un carré.\footnote{Cette remarque est la nôtre ; la page ne précise pas la
+topologie.}
+
+Deux éléments de la page ne s'accordent pas avec ce calcul. En marge des
+énoncés, la page écrit $c^{2} + c - 1 = 0$ pour la constante
+$c = \cos'(D_i, D_j)$ ; or $c = -\frac65$ ne vérifie pas cette équation. La
+relation du nombre d'or est celle de $\eta = 2\cos\frac{2\pi}{5}$, qui sert à
+calculer $\cos\alpha$ mais n'est pas l'invariant d'une paire
+d'axes.\footnote{On lit sans doute là une première idée de la définition,
+où la constante serait un nombre d'or, que le calcul de la même page
+remplace. Le petit diagramme du haut de la page, où un schéma
+$\mathrm{Ic}_Q$ est dessiné au-dessus de $\mathbb{V}_{5s}$, lui-même au-dessus
+de $S$, avec une flèche $S \to \mathbb{V}_5$, appartient vraisemblablement à
+cette première idée ; $\mathbb{V}_5$ est le $\vartheta_5$ des pages 14 et 12,
+que la page 14 note aussi $\mathcal{V}_n$. La page ne dit pas ce que sont
+ces flèches, et l'indice $5s$ est d'une lecture douteuse ; on ne les
+interprète pas.}
+
+\pagerange{12}{15}
+\section*{V. Une somme dans une catégorie d'ensembles ordonnés (pages 15, 13 et pied de la page 12)}
+
+Une suite au crayon, barrée d'un long trait, écrite tête-bêche par rapport à
+l'encre, et qui se lit dans l'ordre : page 15, page 13, deux lignes au pied de
+la page 12. Elle commence au milieu d'un raisonnement : la catégorie qu'elle
+appelle $(\mathrm{OM})$ et les hypothèses a), b), c) de sa forme à deux
+facteurs sont sur une page qui n'est pas dans ce dossier.
+
+\pagerange{15}{15}
+\subsection*{La catégorie, et les hypothèses (page 15)}
+
+Ce que la démonstration utilise fixe la catégorie. Ses objets sont des
+ensembles ordonnés ayant des bornes supérieures quelconques et des bornes
+inférieures finies, les secondes distribuant sur les premières :
+\[
+x \wedge \bigvee_j y_j = \bigvee_j\, (x \wedge y_j) ;
+\]
+ses morphismes sont les applications qui commutent aux bornes supérieures
+quelconques et aux bornes inférieures finies. Ce sont les \emph{frames} :
+l'ensemble ordonné des ouverts d'un espace topologique en est le modèle, et
+leur catégorie opposée est celle des \emph{locales}.\footnote{Le sigle
+$(\mathrm{OM})$ n'est pas expliqué dans ce dossier, et la lecture des deux
+lettres n'est pas sûre. L'identification avec les frames est la nôtre :
+elle résulte de ce que les démonstrations des pages 15 et 13 utilisent,
+y compris la distributivité dans l'objet d'arrivée, que la page emploie sans
+la dire. Les lettres $U$, $V$, $W$ pour les éléments, et l'écriture
+« $\gamma(U \times V)$ », suggèrent le modèle des ouverts d'un produit. Les
+frames, sous d'autres noms, remontent à Ehresmann (1957) et Bénabou (1958) ;
+le mot \emph{frame} est de Dowker, celui de \emph{locale} d'Isbell (1972),
+et les sommes de frames ont été étudiées dans les années 1970, notamment
+par Dowker et Strauss. Rien sur ces pages ne cite ces travaux.}
+
+Soient $I$, $J$, $K$ trois frames et $m : I \times J \to K$ une application ;
+on pose $a(U) = m(U, 1)$ et $b(V) = m(1, V)$.\footnote{La page écrit
+$\gamma(U \times V)$, $\alpha$ et $\beta$ ; on écrit $m(U,V)$, $a$ et $b$, les
+lettres $\alpha$, $\beta$, $\gamma$ étant prises ailleurs dans le dossier. De
+même, $f_1$, $f_2$ et $f$ ci-dessous sont les $\bar\alpha$, $\bar\beta$ et
+$\bar\gamma$ de la page.} Les hypothèses dont la démonstration se sert sont
+les suivantes :
+
+\begin{itemize}
+  \item[a)] $a$ et $b$ commutent aux bornes supérieures quelconques ;
+  \item[b)] $m$ commute aux bornes inférieures finies :
+  $m(1,1) = 1$ et $m(U \wedge U', V \wedge V') = m(U,V) \wedge m(U',V')$ ; en
+  particulier $m(U,V) = a(U) \wedge b(V)$, et $a$, $b$ sont des morphismes ;
+  \item[c)] tout élément de $K$ est borne supérieure d'éléments $m(U,V)$ ;
+  \item[d)] si $m(U,V) \leqslant a(U')$, alors $U \leqslant U'$ ou $V = 0$ ; et
+  symétriquement pour $b$ ;
+  \item[e)] si $m(U,V) \leqslant \bigvee_i W_i$, il existe des décompositions
+  $U = \bigvee_j U_j$ et $V = \bigvee_k V_k$ telles que chaque $m(U_j, V_k)$
+  soit majoré par l'un des $W_i$.
+\end{itemize}
+
+Les hypothèses a), b), c) sont reconstituées d'après leur usage. Les
+hypothèses d) et e) sont écrites au pied de la page 12, mais sous la forme
+infinie de la page 13 ; la page 15 invoque d) sous la forme à deux facteurs
+donnée ici, et la page 13 utilise e) sous cette forme sans la
+nommer.\footnote{La forme d) du pied de la page 12 est :
+« $\gamma((V_\lambda)) \leq \alpha_\lambda(V'_\lambda) \Rightarrow V_\lambda \leq V'_\lambda$
+ou $\exists\,\mu \neq \lambda$ avec $V_\mu = 0$ ». Elle se spécialise
+exactement en la forme à deux facteurs, et c'est celle que la page 15
+utilise.}
+
+\textbf{Proposition.} Sous ces hypothèses, $(a, b)$ fait de $K$ la somme de
+$I$ et $J$ dans la catégorie des frames.
+
+\emph{Unicité.} Si $\varphi : K \to L$ est un morphisme, il est connu sur les
+$a(U)$ et les $b(V)$, donc sur leurs bornes inférieures
+$m(U,V) = a(U) \wedge b(V)$ par b), donc sur leurs bornes supérieures, donc
+sur tout $K$ par c).
+
+\emph{Existence.} Soient $f_1 : I \to L$ et $f_2 : J \to L$ deux morphismes
+vers un frame $L$. On pose
+\[
+f(W) = \bigvee_{m(U,V) \leqslant W} f_1(U) \wedge f_2(V).
+\]
+1°) $f \circ a = f_1$. Les couples $(U, V)$ avec $m(U,V) \leqslant a(U')$
+sont, par d), ceux pour lesquels $V = 0$, dont le terme est nul, et ceux pour
+lesquels $U \leqslant U'$ ; la borne supérieure vaut donc
+$f_1(U') \wedge f_2(1) = f_1(U')$. De même $f \circ b = f_2$.\footnote{La page
+écrit « ou bien $V = 0_I$ (l'élément correspondant du Sup est alors $0_K$) » :
+il faut $0_J$, et le terme nul est $0_L$. Plus bas, elle écrit
+$\bar\gamma(1_K) = \ldots = 1_K$, pour $1_L$.}
+
+2°) $f$ est un morphisme. Elle est croissante ; $f(1) = f_1(1) \wedge f_2(1) = 1$.
+Pour les bornes inférieures finies, b) donne
+$m(U \wedge U', V \wedge V') \leqslant W \wedge W'$ dès que
+$m(U,V) \leqslant W$ et $m(U',V') \leqslant W'$, d'où, par la distributivité
+dans $L$,
+\[
+f(W \wedge W') = \bigvee_{\substack{m(U,V) \leqslant W \\ m(U',V') \leqslant W'}} \bigl(f_1(U) \wedge f_2(V)\bigr) \wedge \bigl(f_1(U') \wedge f_2(V')\bigr) = f(W) \wedge f(W').
+\]
+Pour les bornes supérieures : $f(\bigvee W_i) \geqslant \bigvee f(W_i)$ est
+clair. Inversement, si $m(U,V) \leqslant \bigvee W_i$, on décompose par e) ;
+chaque $f_1(U_j) \wedge f_2(V_k)$ est majoré par un $f(W_i)$, et
+$f_1(U) \wedge f_2(V) = \bigvee_{j,k} f_1(U_j) \wedge f_2(V_k)$ par
+distributivité.
+
+L'hypothèse e) demande une subdivision « en damier », unique pour tout le
+recouvrement. Dans la somme de deux frames, la relation de recouvrement
+s'obtient par subdivisions successives, qui ne se ramènent pas a priori à un
+damier : e) est donc une vraie hypothèse, et la proposition un critère
+suffisant.\footnote{Cette remarque est la nôtre ; la page ne discute pas des
+cas où les hypothèses sont satisfaites. Pour les frames d'ouverts, on sait
+aujourd'hui que le frame des ouverts de $X \times Y$ est la somme de ceux de
+$X$ et de $Y$ lorsque $X$ est localement compact, mais pas en général.}
+
+\pagerange{13}{13}
+\subsection*{Sommes infinies (page 13 et pied de la page 12)}
+
+La page généralise à une famille $(I_\lambda)_{\lambda \in \Lambda}$. Le
+produit restreint $\prod' I_\lambda$ est formé des familles $(V_\lambda)$ avec
+$V_\lambda = 1$ pour presque tout $\lambda$, et
+$\alpha^{0}_\mu : I_\mu \to \prod' I_\lambda$ insère un élément à la place
+$\mu$ et $1$ ailleurs. Pour $m : \prod' I_\lambda \to K$ et
+$a_\mu = m \circ \alpha^{0}_\mu$, les hypothèses sont : a) les $a_\mu$
+commutent aux bornes supérieures quelconques ; b) $m$ commute aux bornes
+inférieures finies, de sorte que $m((V_\lambda)) = \bigwedge_\lambda a_\lambda(V_\lambda)$,
+borne inférieure en fait finie ; c) tout élément de $K$ est borne supérieure
+d'éléments de l'image de $m$ ; d) et e), au pied de la page 12, comme
+ci-dessus.\footnote{La page écrit, au c) : « tout élément de $K$ est le sup
+d'éléments de $\prod'_\lambda I_\lambda$ » ; il faut « de l'image de
+$\prod' I_\lambda$ par $m$ ». Elle s'achève sur « TSVP » ; la suite est aux
+deux lignes du pied de la page 12, qui énoncent d) et le début de e), et
+s'arrêtent.} La conclusion attendue --- $K$ est la somme des $I_\lambda$ ---
+n'est pas écrite ; la démonstration à deux facteurs s'y transpose mot pour
+mot.
+
+\pagerange{22}{22}
+\section*{VI. Le produit d'un topos par un topos de préfaisceaux (page 22)}
+
+Une page barrée d'une croix, entièrement lisible. Soient $E$ un topos de
+Grothendieck et $C$ une petite catégorie. La catégorie
+\[
+\pi(C, E) = \underline{\mathrm{Hom}}(C^{\circ}, E)
+\]
+des préfaisceaux sur $C$ à valeurs dans $E$ est un topos. Un foncteur
+$f : C \to C'$ et un morphisme de topos $g : E \to E'$ définissent un
+morphisme de topos $\pi(f, g) : \pi(C, E) \to \pi(C', E')$, d'image inverse
+et d'image directe
+\[
+\pi(f,g)^{*}(u') = g^{*} \circ u' \circ f^{\circ},
+\qquad
+\pi(f,g)_{*}(u) = g_{*} \circ f_{*}(u),
+\]
+où $f_{*}$ est l'extension de Kan à droite le long de $f^{\circ}$, calculée
+dans $E$ ; comme $g_{*}$ commute aux limites, on peut aussi la calculer après
+$g_{*}$, dans $E'$. Ainsi $\pi$ est un $2$-foncteur
+$(\mathrm{Cat}) \times (\mathrm{Top}) \to (\mathrm{Top})$.\footnote{La page
+écrit $\pi(f,g)_{*} = (u' \mapsto g_{*} f_{*}^{(E)})$ et note en marge
+« vérifier l'expression donnée en $\pi(f,g)_{*}$ » : l'expression est juste,
+appliquée à $u \in \pi(C, E)$ plutôt qu'à $u'$.}
+
+On définit un morphisme de topos
+\[
+(1)\qquad \gamma(C, E) : \pi(C, E) \longrightarrow \hat{C} \times E
+\]
+vers le produit dans la $2$-catégorie des topos, par ses deux composantes :
+$\gamma_1 = \pi(\mathrm{id}_C, p_E)$, où $p_E : E \to P$ est le morphisme vers
+le topos ponctuel et $\hat{C} = \pi(C, P)$, d'image inverse
+$F \mapsto (X \mapsto F(X)_E)$, le préfaisceau d'objets constants ; et
+$\gamma_2 = \pi(p_C, \mathrm{id}_E)$, où $p_C : C \to C_0$ est le foncteur vers
+la catégorie ponctuelle et $E = \pi(C_0, E)$, d'image inverse
+$X \mapsto (i \mapsto X)$, le préfaisceau constant.\footnote{La page qualifie
+$p_C$ d'« unique morphisme de topos », d'une lecture incertaine : c'est un
+foncteur.}
+
+\textbf{Question} (de la page). $\gamma(C, E)$ est-il toujours une
+équivalence ? La page note trois cas. a) Les deux membres transforment
+sommes en sommes, en chacun des arguments ; on peut donc supposer $C$
+connexe. b) Si $C$ est un groupoïde connexe, équivalent à un groupe $G$,
+alors $\hat{C}$ est le topos classifiant $B_G$ et $\pi(C, E)$ la catégorie
+des objets de $E$ munis d'une action de $G$. c) Si $E = \hat{D}$, alors
+$\pi(C, E) \simeq (C \times D)^{\wedge}$, et $\gamma$ est le morphisme évident
+$(C \times D)^{\wedge} \to \hat{C} \times \hat{D}$.
+
+La réponse est oui : que la catégorie des préfaisceaux sur $C$ à valeurs dans
+un topos de Grothendieck $E$ soit le produit de $\hat{C}$ et de $E$ --- ce
+qu'on énonce aussi en disant que le changement de base de $\hat{C}$ le long
+de $E \to P$ est $\underline{\mathrm{Hom}}(C^{\circ}, E)$ --- est aujourd'hui
+un résultat classique de la théorie des topos (voir par exemple
+P. T. Johnstone, \emph{Sketches of an Elephant}, 2002).\footnote{Le dossier
+161-4 du même fonds travaille la même comparaison, avec les mêmes notations
+$\pi(C, E)$ et $\gamma(C, E)$, aux pages 15 et 17 de sa transcription.
+Page 17, il établit le cas c) quand $C$ et $D$ ont des limites projectives
+finies, par la propriété universelle d'un topos de préfaisceaux
+($\underline{\mathrm{Homtop}}(E, \hat{A}) \simeq \underline{\mathrm{Hom}}^{*}_{\mathrm{gex}}(A, E)^{\circ}$
+pour $A$ à limites finies) ; puis, pour $E = \widetilde{D}$ quelconque, il
+plonge $C$ dans une catégorie à limites finies $C'$ et $E$ dans $\hat{D}$,
+montre que $\gamma(C, E)$ est un \emph{plongement}, et s'interrompt sur la
+phrase « ce qui prouvera que $\gamma$ est une équivalence ». La page 15 de
+161-4 est un fragment de la même démonstration. Les deux dossiers ne sont pas
+fusionnés ici ; on ne sait pas lequel précède l'autre.}
+
+\pagerange{24}{30}
+\section*{VII. Graphes plongés dans une surface orientée (pages 24 à 30)}
+
+\pagerange{24}{24}
+\subsection*{Les ordres circulaires aux sommets (page 24)}
+
+Soit $X$ un espace compact triangulable de dimension au plus $1$ --- un
+graphe fini --- et $S$ une surface orientée. On étudie les classes
+d'isotopie de plongements modérés $\varphi : X \hookrightarrow S$ ; leur
+ensemble est noté $\mathrm{Pl}_{\mathrm{isot}}(X, S)$.
+
+Les sommets topologiques de $X$ sont les points où $X$ n'est pas localement
+un intervalle : points isolés, bouts (une seule branche), points de
+ramification. On note $X'_0$ l'ensemble de ces derniers, où partent
+$\nu_x \geqslant 3$ branches. Un plongement induit en chaque $x \in X'_0$ un
+ordre circulaire $\omega_x(\varphi)$ sur les branches issues de $x$ --- celui
+dans lequel on les rencontre en tournant autour de $\varphi(x)$ dans le sens
+de l'orientation ; l'ensemble $\Omega_x(X)$ de ces ordres a
+$(\nu_x - 1)!$ éléments.\footnote{La page parle des « arêtes issues de
+$x$ » ; si une arête est une boucle en $x$, elle compte pour deux branches,
+et c'est sur les branches qu'il faut prendre l'ordre. Aux bouts, la donnée
+est vide ; aux points de valence $2$, qui ne sont pas des sommets
+topologiques, elle est unique.} On obtient une application
+\[
+\omega : \mathrm{Pl}_{\mathrm{isot}}(X, S) \longrightarrow \Omega(X) = \prod_{x \in X'_0} \Omega_x(X),
+\]
+et l'on se propose d'étudier ses fibres $\mathrm{Pl}^{\alpha}_{\mathrm{isot}}(X, S)$,
+ou plus généralement, pour $X$ et $\alpha \in \Omega(X)$ fixés, tous les
+plongements $\varphi$ de $X$ dans des surfaces orientées tels que
+$\omega(\varphi) = \alpha$.
+
+Dans le langage d'aujourd'hui, un couple $(X, \alpha)$ est un \emph{graphe
+enrubanné} (\emph{ribbon graph}, \emph{fat graph}), et $\alpha$ un
+\emph{système de rotation}.\footnote{La notion de système de rotation remonte
+à Heffter (1891) et a été formalisée par Edmonds (1960) ; elle est au cœur
+de la démonstration du théorème de coloriage des cartes (Ringel et Youngs,
+1968). Les termes \emph{ribbon graph} et \emph{fat graph} sont postérieurs,
+des années 1980. Rien sur la page ne cite ces travaux. Grothendieck reviendra
+à ces objets sous le nom de « cartes » dans l'\emph{Esquisse d'un programme}
+(1984) ; c'est un contexte postérieur. Signalons enfin, sans pouvoir dire
+s'il y a un lien, que le titre d'un article d'Y. Ladegaillerie,
+« Classes d'isotopie de plongements de 1-complexes dans les surfaces »
+(\emph{Topology}, 1984), issu d'un travail fait à Montpellier dans les années
+1970, décrit exactement le sujet de ces pages ; rien sur elles ne le
+mentionne.}
+
+\pagerange{24}{25}
+\subsection*{Le voisinage tubulaire, et ses bords (pages 24 et 25)}
+
+\textbf{Théorème 1.} Pour $\alpha$ fixé, le voisinage tubulaire fermé d'un
+plongement $\varphi$ avec $\omega(\varphi) = \alpha$ ne dépend, à un
+homéomorphisme près induisant l'identité sur $X$ --- unique à isotopie
+près ---, que de $\alpha$, et non de $S$ ; on le note $\mathcal{U}_\alpha$.
+La restriction à $X$ induit une bijection
+\[
+\mathrm{Pl}^{+}_{\mathrm{isot}}(\mathcal{U}_\alpha, S) \xrightarrow{\ \sim\ } \mathrm{Pl}^{\alpha}_{\mathrm{isot}}(X, S),
+\]
+où l'exposant $+$ désigne les plongements qui préservent
+l'orientation.\footnote{La page écrit la flèche dans l'autre sens,
+$\mathrm{Pl}^{\alpha}_{\mathrm{isot}}(X,S) \to \mathrm{Pl}_{\mathrm{isot}}(\mathcal{U}_\alpha, S)$
+(par passage au voisinage tubulaire), et « celle-ci est une bijection », ce
+dernier mot d'une lecture incertaine. La précision « préservant
+l'orientation » est la nôtre : un plongement de $\mathcal{U}_\alpha$ qui
+renverse l'orientation induirait sur $X$ l'ordre opposé à $\alpha$. La page
+ne démontre pas le théorème.}
+
+$\mathcal{U}_\alpha$ est une surface compacte orientée à bord, qui se
+rétracte par déformation sur $X$ : c'est la surface-ruban du graphe
+enrubanné. Son complémentaire
+$\mathcal{V}_\alpha = \mathcal{U}_\alpha \smallsetminus X$ a pour composantes
+connexes des anneaux semi-ouverts $\mathcal{V}^{i}_\alpha \simeq S^{1} \times [1, 2[$,
+dont l'extrémité fermée $S^{1} \times \{1\}$ est une composante du bord de
+$\mathcal{U}_\alpha$, et dont l'extrémité ouverte est collée à $X$ : les
+voisinages de $X$ dans $\mathcal{U}_\alpha$ induisent sur
+$\mathcal{V}^{i}_\alpha$ le filtre des $S^{1} \times {]2 - \varepsilon, 2[}$.\footnote{Telle
+que la transcription la lit, la page donne à la fois
+$\mathrm{bord}(\mathcal{U}_\alpha) \cap \mathcal{V}^{i}_\alpha \simeq S^{1} \times \{1\}$
+et, pour trace des voisinages de $X$, « le filtre des voisinages de
+$S^{1} \times \{1\}$ dans $S^{1} \times {]0,2[}$ » : les deux extrémités
+seraient la même. Les chiffres sont récrits sur d'autres et le passage est
+lourdement raturé. On donne l'énoncé cohérent.}
+
+On note $I(\alpha) = \pi_0(\mathcal{V}_\alpha)$ l'ensemble de ces anneaux,
+c'est-à-dire des composantes du bord de $\mathcal{U}_\alpha$. La page demande
+de l'« expliciter combinatoirement » ; voici comment.\footnote{Cette
+description et la formule qui suit sont les nôtres.} Soit $\mathsf{H}$
+l'ensemble des demi-arêtes de $X$ (pour une triangulation quelconque), $\iota$
+l'involution qui échange les deux moitiés d'une arête, et $\sigma$ la
+permutation qui envoie une demi-arête sur la suivante autour de son sommet
+pour l'ordre $\alpha$. Les composantes du bord de $\mathcal{U}_\alpha$
+correspondent aux orbites de $\sigma \circ \iota$, auxquelles s'ajoute un
+cercle par point isolé de $X$. Si $g(\alpha)$ désigne la somme des genres des
+surfaces fermées obtenues en bouchant chaque bord de chaque composante de
+$\mathcal{U}_\alpha$ par un disque, la formule d'Euler donne
+\[
+|I(\alpha)| = b_0(X) + b_1(X) - 2\,g(\alpha).
+\]
+La marge de la page 25 conjecture « le nombre des $\mathcal{V}^{i}_\alpha$ est
+$b_1(X) + 1$ si $X$ est connexe non vide », et en général
+$b_1(X) + b_0(X)$ : c'est exact si et seulement si $g(\alpha) = 0$.
+
+\pagerange{25}{26}
+\subsection*{Recoller le complémentaire : les surfaces modèles (pages 25 et 26)}
+
+Pour un plongement de $\mathcal{U}_\alpha$ dans $S$, la surface $S$ s'obtient
+en recollant à $\mathcal{U}_\alpha$ la surface orientée à bord
+$\mathcal{U}' = \overline{S \smallsetminus \varphi(\mathcal{U}_\alpha)}$,
+compacte si et seulement si $S$ l'est, par un isomorphisme de
+$\partial\,\mathcal{U}'$ sur $-\partial\,\mathcal{U}_\alpha \simeq I(\alpha) \times S^{1}$.
+Si toute composante connexe de $S$ rencontre $X$, toute composante connexe de
+$\mathcal{U}'$ a un bord non vide. Trouver tous les plongements de $X$ dans
+une surface orientée, à isomorphisme près induisant l'identité sur $X$,
+revient donc à trouver toutes les façons d'écrire $I(\alpha) \times S^{1}$
+comme bord orienté d'une surface.
+
+Une telle surface est décrite par a) une partition $\pi$ de $I = I(\alpha)$
+en parties $(I_\lambda)_{\lambda \in \Lambda}$ ; b) pour chaque $\lambda$,
+une surface orientée connexe $\mathcal{U}'_\lambda$ et un isomorphisme
+$\partial\,\mathcal{U}'_\lambda \simeq -I_\lambda \times S^{1}$. Si l'on se
+borne aux surfaces « algébriques », compactes moins un ensemble fini, une
+telle $\mathcal{U}'_\lambda$ est déterminée par son genre $g_\lambda$ --- celui
+de la surface fermée obtenue en rajoutant les bouts et en contractant chaque
+composante du bord en un point --- et par son nombre de bouts
+$\nu_\lambda$.\footnote{La page 26 écrit le nombre de bouts d'une lettre que
+la transcription lit $\beta$, et la page 27 d'un $\nu$ net ; c'est la même
+lettre. On écrit $\nu$.} Explicitement,
+\[
+\mathcal{U}'_\lambda = S_{g_\lambda} \smallsetminus \Bigl(\bigcup_{j \in I_\lambda} \mathring{D}_j \cup P_\lambda\Bigr),
+\]
+où $S_g$ est la surface fermée orientée de genre $g$, les $D_j$ des disques
+fermés disjoints, et $P_\lambda$ un ensemble de $\nu_\lambda$ points hors des
+disques. Un homéomorphisme orienté de $\mathcal{U}'_\lambda$ peut permuter
+les composantes du bord de façon prescrite ; il est donc inutile de préciser
+laquelle est recollée à quel $j$.
+
+Soit $\rho = (\alpha, \pi, (g_\lambda), (\nu_\lambda))$ et
+$S_\rho = \mathcal{U}_\alpha \cup \coprod_\lambda \mathcal{U}'_\lambda$ la
+surface ainsi construite, munie d'un plongement canonique
+$\varphi_\rho : X \hookrightarrow S_\rho$. Elle a
+$\nu = \sum_\lambda \nu_\lambda$ bouts. Son genre, lorsqu'elle est connexe, est
+\[
+g(S_\rho) = \sum_{\lambda \in \Lambda} g_\lambda + g(\alpha) + b_1(\Delta_\rho),
+\]
+où $\Delta_\rho$ est le graphe biparti dont les sommets sont les composantes
+connexes de $X$ et les parties $I_\lambda$, et dont les arêtes sont les
+éléments de $I$, chacun joignant la composante de $X$ qu'il borde à la partie
+qui le contient.\footnote{La marge de la page 26 propose
+« $\sum_\lambda g_\lambda + \gamma(\alpha)$, $\gamma(\alpha)$ un entier (le
+genre de $\mathcal{U}_\alpha$) --- \emph{vérifier} ». La formule est juste
+exactement lorsque $\Delta_\rho$ est un arbre ; en général il faut ajouter
+$b_1(\Delta_\rho)$, qui compte les anses créées par le recollement
+lui-même. Exemple : $X$ un cercle, $\mathcal{U}_\alpha$ un anneau, les deux
+bords recollés à un même anneau $\mathcal{U}'$ ; on obtient un tore, alors
+que $g_\lambda = g(\alpha) = 0$. La formule donnée ici, qui se déduit de la
+caractéristique d'Euler, est la nôtre.}
+
+\textbf{Théorème 2.} Tout plongement de $X$ dans une surface orientée
+algébrique est isomorphe à un $\varphi_\rho$, pour un $\rho$ unique à
+renumérotation des $\lambda$ près.\footnote{La phrase de la page s'arrête au
+bas de la page 26 sur « uniquement déterminés … ». La précision « à
+renumérotation près » est la nôtre.}
+
+\pagerange{27}{28}
+\subsection*{Le groupe modulaire (pages 27 et 28)}
+
+Pour $S$ fixée, on a donc une application de $\mathrm{Pl}_{\mathrm{isot}}(X, S)$
+vers l'ensemble des $\rho$, et l'on est ramené à étudier, pour $\rho$ fixé, la
+fibre $\mathrm{Pl}_{\mathrm{isot}}(X, S; \rho)$, non vide si et seulement si
+$S \simeq S_\rho$. La restriction à $X$ définit une application
+\[
+(*)\qquad r : \mathrm{Isot}^{+}(S_\rho, S) \longrightarrow \mathrm{Pl}_{\mathrm{isot}}(X, S; \rho),
+\]
+surjective d'après le Théorème 2, où $\mathrm{Isot}^{+}$ désigne les classes
+d'isotopie d'homéomorphismes préservant l'orientation.
+
+Soit $\mathrm{Mod}(S)$ le groupe des classes d'isotopie d'homéomorphismes de
+$S$ préservant l'orientation --- le \emph{groupe modulaire} de $S$, qu'on
+appelle aussi \emph{mapping class group}, et que la page appelle « groupe de
+Teichmüller ».\footnote{La page note ce groupe $G = \mathrm{Isot}_o(S,S)$,
+puis $G = \mathrm{Isot}(S,S)$ ; elle note aussi $G_\rho$ à la fois
+$\pi_1(S_\rho)$ et $\mathrm{Isot}_o(S_\rho, S_\rho)$. On écrit
+$\mathrm{Mod}(S)$ et $\Pi = \pi_1(S_\rho)$. « Groupe modulaire de
+Teichmüller » était le nom courant dans les années 1970.} Il agit sur les deux
+membres de $(*)$, et $r$ est équivariante ; le premier membre est un torseur
+sous $\mathrm{Mod}(S)$. Choisissant $f : S_\rho \xrightarrow{\sim} S$, et
+notant $H \subset \mathrm{Mod}(S)$ le stabilisateur de la classe de
+$f|_X$, l'application $r$ s'identifie à
+$\mathrm{Mod}(S) \to \mathrm{Mod}(S)/H$. Il reste deux questions : déterminer
+$\mathrm{Mod}(S)$ ; déterminer $H$, le sous-groupe des $h$ tels que
+$h \circ f|_X$ soit isotope à $f|_X$. On peut supposer $S = S_\rho$ et
+$f = \varphi_\rho$.
+
+La première est classique, et c'est le théorème de Dehn, Nielsen et Baer :
+pour $S$ fermée de genre au moins $1$, l'homomorphisme canonique
+\[
+\mathrm{Mod}(S) \longrightarrow \mathrm{Out}(\pi_1(S, s))
+\]
+est injectif, d'image le sous-groupe d'indice $2$ des automorphismes
+extérieurs qui préservent l'orientation ; il est injectif aussi, plus
+généralement, pour les surfaces algébriques.\footnote{La page 28 écrit que
+cet homomorphisme « est un isomorphisme », et la page 27 que
+$\mathrm{Isot}(S_\rho, S)$ est un torseur sous
+$\mathrm{Autext}(\pi_1(S_\rho))$, « du moins si $S_\rho$ est compacte ». Ce
+n'est vrai que si l'on admet les homéomorphismes qui renversent
+l'orientation ; or ceux-ci ne préservent pas la fibre au-dessus de $\rho$,
+puisqu'ils renversent $\alpha$. Pour les classes qui préservent
+l'orientation, qui sont celles qu'il faut ici, l'image est d'indice $2$. Le
+genre $0$ est à part : $\mathrm{Mod}(S^{2})$ est trivial, et
+$\mathrm{Out}(1)$ aussi.}
+
+\pagerange{28}{29}
+\subsection*{Le cas normal, la sphère, et une question (pages 28 et 29)}
+
+Supposons $X$ connexe et $\pi_1(X) \to \pi_1(S)$ surjectif : la page appelle
+un tel plongement \emph{normal}. Cela signifie que la partition $\pi$ est
+discrète, que les $g_\lambda$ sont nuls et que chaque $\nu_\lambda$ vaut $0$
+ou $1$ : $S$ se déduit de $\mathcal{U}_\alpha$ en bouchant chaque bord par un
+disque, éventuellement épointé.\footnote{La page écrit, « sauf erreur »,
+que les $\nu_\lambda$ sont nuls. Un disque épointé recollé le long de son
+bord ne change pas le groupe fondamental, puisque la surface se rétracte
+alors sur $\mathcal{U}_\alpha$ ; la condition juste est
+$\nu_\lambda \leqslant 1$. Elle se réduit à $\nu_\lambda = 0$ quand $S$ est
+compacte.} Le genre de $S$ est alors $g(\alpha)$.
+
+Si $h\varphi$ est isotope à $\varphi$, il lui est homotope, donc
+$\pi_1(h) \circ c$ et $c$ coïncident à automorphisme intérieur près, où
+$c = \pi_1(\varphi) : \pi_1(X) \to \pi_1(S)$ ; $c$ étant surjectif,
+$\pi_1(h)$ est intérieur. Par l'injectivité de Dehn--Nielsen--Baer, $h$ est
+isotope à l'identité : $H = \{1\}$, et les plongements normaux de type $\rho$
+forment un torseur sous $\mathrm{Mod}(S)$.\footnote{La page s'arrête à
+« $\pi_1(h)$ est un automorphisme intérieur, $c$ étant surjectif, en gros » ;
+la conclusion $H = \{1\}$ est la nôtre.}
+
+En particulier, pour $S = S^{2}$, dont tout homéomorphisme orienté est
+isotope à l'identité, et $X$ connexe : les classes d'isotopie de plongements
+de $X$ dans la sphère correspondent bijectivement aux $\alpha \in \Omega(X)$
+tels que $g(\alpha) = 0$.\footnote{L'exposant de $S^{2}$, aux deux
+occurrences, est tracé comme un $1$ ; c'est la sphère que l'argument
+demande, et la transcription le lit ainsi en le marquant douteux. La
+phrase commencée au bas de la page 28 se ferme en tête de la page 29.} La
+page 29 ajoute qu'« il faut donner une certaine condition simple sur
+$\alpha$ pour qu'il en soit ainsi ». La formule de la page 25 la donne :
+$g(\alpha) = 0$ si et seulement si $\sigma \circ \iota$ a exactement
+$b_1(X) + 1$ orbites.\footnote{Cette réponse est la nôtre. C'est la forme
+combinatoire classique du critère de planarité par les systèmes de
+rotation.} C'est le cas de l'icosaèdre muni d'un système cohérent au sens
+de la page 10 : $b_1 = 30 - 12 + 1 = 19$, et vingt faces.
+
+\textbf{Question} (de la page 29). Soit $h \in \mathrm{Mod}(S)$ tel que, pour
+toute composante connexe $X_i$ de $X$, de plongement induit
+$\varphi_i : X_i \to S$, on ait
+$\pi_1(h\varphi_i) = \pi_1(\varphi_i)$ dans
+$\mathrm{Homext}(\pi_1(X_i), \pi_1(S))$ --- condition évidemment nécessaire
+pour que $h \in H$. A-t-on $h \in H$ ? Autrement dit, pour ces plongements,
+l'isotopie se lit-elle sur l'homotopie ? La page ne répond pas, et nous ne
+tranchons pas ici.\footnote{Pour une seule courbe fermée simple, la réponse
+est le théorème classique de Baer et Epstein : deux courbes simples
+homotopes sont isotopes. Pour un $1$-complexe quelconque, la question
+appelle des précautions (courbes parallèles, composantes contractiles) ; le
+lecteur qui voudrait savoir si elle a reçu une réponse commencera par
+l'article de Ladegaillerie cité plus haut.}
+
+\pagerange{30}{30}
+\subsection*{Une suite exacte (page 30)}
+
+La dernière page de la suite écrit, pour le groupe topologique
+$\mathcal{G}$ des homéomorphismes de $S$ et le sous-groupe
+$\mathcal{H} = \mathrm{Aut}(S/X)$ de ceux qui induisent l'identité sur $X$,
+l'identification de $\mathcal{G}/\mathcal{H}$ à un espace $\mathfrak{X}$ de
+plongements --- l'orbite de $\varphi$ --- et la suite d'homotopie
+\[
+\pi_1(\mathcal{H}) \to \pi_1(\mathcal{G}) \to \pi_1(\mathfrak{X}) \to \pi_0(\mathcal{H}) \to \pi_0(\mathcal{G}) \to \pi_0(\mathfrak{X}).
+\]
+La page la marque « ?? ». Elle vaut dès que $\mathcal{G} \to \mathfrak{X}$ est
+une fibration localement triviale, c'est-à-dire sous un théorème d'extension
+des isotopies pour les plongements modérés de $1$-complexes, que la page ne
+démontre pas.\footnote{Cette lecture est la nôtre. Les lettres de la page
+sont une ronde, une cursive et un $X$ à double jambage ; que $\mathcal{G}$
+soit le groupe des homéomorphismes préservant l'orientation n'est pas
+précisé.} Son intérêt est de donner la réponse de principe à la seconde
+question de la page 27 : l'exactitude en $\pi_0(\mathcal{G}) = \mathrm{Mod}(S)$
+dit que $H$ est l'image du groupe des classes d'homéomorphismes de $S$ qui
+fixent $X$ point par point.
+
+\pagerange{32}{33}
+\section*{VIII. Graphes à groupe transitif sur les sommets et les arêtes (pages 32 et 33)}
+
+Un \emph{graphe} est ici la donnée d'un ensemble $S$ de sommets, d'un
+ensemble $A$ d'arêtes orientées muni d'une involution sans point fixe
+$\sigma$ --- le retournement ---, d'une partie $A' \subset A$ stable par
+$\sigma$, formée des arêtes qui ont des extrémités, et d'une application
+« origine » $\varphi_1 : A' \to S$, d'où
+$\varphi = (\varphi_1, \varphi_1 \circ \sigma) : A' \to S \times S$.\footnote{La
+page écrit
+$(S, A, A' \xrightarrow{\varphi} S \times S, \sigma)$ sans définir $A'$ ;
+qu'il s'agisse des arêtes non isolées est notre lecture, imposée par le cas
+a), où $A' = \emptyset$. La page esquisse aussi, avant de la biffer, une
+autre présentation par une relation d'incidence, et une présentation
+équivalente $(S, R \subset A \times A, L \to A, \sigma)$, sans la développer.}
+Une arête est \emph{circulaire} --- une boucle --- si ses deux extrémités
+coïncident.
+
+Soit $G$ un groupe agissant sur un graphe $\Gamma$, c'est-à-dire un
+sous-groupe de $\mathrm{Perm}(S) \times \mathrm{Perm}(A)$ respectant la
+structure, et supposons $G$ transitif sur $S$ et sur $A$.\footnote{La page
+écrit « $G \simeq \mathrm{Perm}(S) \times \mathrm{Perm}(A)$ » ; c'est une
+inclusion.} Comme $A'$ est stable par $G$, ou bien $A' = \emptyset$, ou bien
+$A' = A$ et $\varphi_1$ est surjective ; dans ce second cas, par
+transitivité, ou bien toutes les arêtes sont des boucles, ou bien aucune.
+
+\emph{a) Les arêtes n'ont pas d'extrémités.} Alors
+$\mathrm{Aut}\,\Gamma = \mathrm{Perm}(S) \times \mathrm{Aut}(A, \sigma)$, et, si
+$A_1 = A/\sigma$,
+$\mathrm{Aut}(A, \sigma) \simeq (\mathbb{Z}/2\mathbb{Z})^{A_1} \rtimes \mathrm{Perm}(A_1)$,
+le groupe hyperoctaédral.
+
+Dans les deux autres cas, on choisit $a \in A$ et $s = \varphi_1(a)$, et l'on
+note $H = G_a \subset H' = G_s$ leurs stabilisateurs, de sorte que
+$A \simeq G/H$ et $S \simeq G/H'$. Par les deux lemmes des pages 16 et 19,
+l'involution $\sigma$, qui commute à $G$, est la multiplication à droite par
+un élément $\dot\sigma \in N_G(H)/H$ ; elle est sans point fixe si et
+seulement si $\dot\sigma \neq 1$, et involutive si et seulement si
+$\dot\sigma^{2} = 1$. Le groupe $G$ agit fidèlement sur $\Gamma$ si et
+seulement si $\bigcap_{g \in G} g H g^{-1} = \{1\}$.
+
+\emph{b) Toutes les arêtes sont des boucles.} La compatibilité
+$\varphi_1 \circ \sigma = \varphi_1$ signifie $\dot\sigma \in H'/H$, d'où les
+données
+\[
+G \supset H' \supset H,\qquad \dot\sigma \in \bigl(H' \cap N_G(H)\bigr)/H,\qquad \dot\sigma^{2} = 1,\ \dot\sigma \neq 1 .
+\]
+Ce cas est biffé sur la page, qui reste lisible.
+
+\emph{c) Aucune arête n'est une boucle} (page 33). Les données sont
+\[
+G \supset H' \supset H,\qquad \dot\sigma \in N_G(H)/H,\qquad \dot\sigma^{2} = 1,\qquad \dot\sigma \notin H'/H,
+\]
+la dernière condition disant que l'extrémité $\varphi_1(\sigma a)$ diffère de
+l'origine.\footnote{Sous $H'$ et $H$, la page 33 inscrit $G_a$ et $G_s$,
+l'inverse de la page 32 ; c'est un lapsus, car l'origine
+$\varphi_1 : A \to S$ étant équivariante, $G_a \subset G_{\varphi_1(a)} = G_s$,
+et la suite de la page suppose bien $H = G_a$. La condition
+$\dot\sigma \notin H'/H$ n'est pas écrite ; elle est la nôtre, et c'est elle
+qui sépare le cas c) du cas b).} Le graphe est \emph{simplicial} --- sans
+arêtes multiples, donné par un ensemble de parties à deux éléments de $S$ ---
+si et seulement si $\varphi : A \to S \times S$, c'est-à-dire
+$gH \mapsto (gH', g\dot\sigma H')$, est injective, ce qui équivaut à
+\[
+H' \cap \dot\sigma H' \dot\sigma^{-1} \subset H,
+\]
+condition indépendante du représentant de $\dot\sigma$ puisque
+$H \subset H'$.\footnote{La page écrit $\dot\sigma^{-1}H'\dot\sigma$ ; c'est le
+même sous-groupe, puisque $\dot\sigma^{2} \in H \subset H'$.}
+
+Inversement, toute donnée $(G, H \subset H', \dot\sigma)$ de ce type définit,
+sur $S = G/H'$ et $A = G/H$, un graphe sur lequel $G$ agit transitivement
+sur les sommets et sur les arêtes orientées --- ce que la page annonce par
+« Si on a une telle situation » avant de s'interrompre. C'est la description
+d'aujourd'hui des graphes \emph{arc-transitifs} comme graphes de classes
+(\emph{coset graphs}), due pour l'essentiel à Sabidussi
+(1964).\footnote{Rien sur la page ne cite Sabidussi, ni les travaux de Tutte
+sur les graphes cubiques symétriques (1947).}
+
+L'icosaèdre en est un exemple, et c'est une façon de relire le Théorème de la
+page 7.\footnote{Ce rapprochement est le nôtre.} Pour $G = \Gamma' \simeq \mathfrak{A}_5$,
+simplement transitif sur les arêtes orientées, on a $H = \{1\}$ ; $H'$ est le
+groupe cyclique d'ordre $5$ des rotations autour de $u$ ; et $\dot\sigma$
+est le demi-tour autour de l'axe qui passe par le milieu de l'arête
+$\{u, x_0\}$, qui n'est pas dans $H'$. La condition simpliciale dit que les
+stabilisateurs de deux sommets voisins ne se rencontrent qu'en l'identité.
+On retrouve ainsi douze sommets et soixante arêtes orientées.
+
+\end{document}
