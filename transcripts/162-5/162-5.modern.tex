@@ -1,0 +1,1458 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 162-5
+% (pages 1-68, the whole folder).
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the pages leave
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through; everything the apparatus carried moves into footnotes. It is
+% held to being mathematically correct as it stands: where the pages are loose
+% or mistaken, the true statement is what appears here and a footnote says what
+% the page has. In any dispute of substance the transcription governs: whoever
+% cites Grothendieck must cite batch-01.fr.tex (pp. 1-20), batch-02.fr.tex
+% (pp. 21-40) or batch-03.fr.tex (pp. 41-60). Pages 61-68 have no transcription,
+% by design: they are pp. 5-12 of Quillen's spirit-duplicated English typescript
+% « On a conjecture of Adams », not his, carrying no annotation.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-09-22 — first pass, unchecked against the pages by a human.
+% The folder was read whole, all three transcribed batches together; this is
+% one document for the shelfmark. It was made on Opus 5.5 and has not been
+% measured against the reference reading of folder 115 (made on Opus 5).
+%
+% Witnesses. The typescript « Tapis de Quillen » (notes du 10.9.68, 16 typed
+% pages) is here twice. Copy B (pp. 32-41, 43-48) is the typed top copy
+% annotated in blue ink; its transcription (batches 2-3) is the text followed
+% here for the typescript AND for its ink layer. Copy A (pp. 2-17) is a black
+% photocopy of copy B taken after the ink, which then received notes of its
+% own. From batch 1 this reading takes only: the cover (p. 1), the date « notes
+% du 10.9.68 », and copy A's own notes — « (compactes ?) » (p. 12), « NB H*(X)
+% (= H*(X, F_2)) » (p. 14), « i.e. l'enveloppe "karoubienne" » (p. 14),
+% « quasi-abélienne = karoubienne + additive » (p. 15), « cf exposé Karoubi à
+% Bourbaki ! » (p. 17). Batch 1 was being revised when this was written; its
+% readings of the ink layer shared with copy B are NOT used. Statements that
+% rest on copy A: the compactness footnote (part III), the F_2-coefficients
+% footnote, the two Karoubi-envelope footnotes, and the dating inference from
+% the Karoubi pointer (section on the photocopy). Folder 111 is a third copy of
+% the typescript; it is named, not used.
+%
+% Spine. pp. 21-30 (6.9.68): formal categories over X_0, abstract De Rham
+% complexes, the Lie algebroid g = Hom(Omega, O), Quillen's theorem in char. 0,
+% coefficients, De Rham vs Hochschild. pp. 32-48 (10.9.68): the typescript,
+% parts I (categories and simplicial sets), II (n-categories, Gr-categories,
+% Dold-Kan, K_n), III (cobordism « motivique »). The typescript takes up NOTHING
+% of the manuscript, in particular not its section 11 (De Rham-Hochschild).
+% Order of the body: manuscript, typescript (copy B), photocopy (copy A),
+% printed pieces by Quillen (pp. 19, 50-68).
+%
+% Notation fixed for the whole document. Manuscript: O = O_{X_0}; C a formal
+% category, A its pro-ring, I the augmentation ideal, Omega = I/I^2; delta for
+% the differential of any De Rham complex (the page's d = d_C when it comes from
+% C); g = Hom_O(Omega, O), theta its anchor, i_X contraction; pairing
+% <a^b, X^Y> = a(X)b(Y) - a(Y)b(X), determinants on Lambda^3; nabla for the
+% connection M -> Omega (x) M (the page's delta^1_M on p. 27, delta^0_M on
+% p. 28). Typescript: N(C) for the nerve (the page's S(C)); Ho(Cat), Ho(sSet)
+% for (Cat)', (Ssimpl)'; C^ for the presheaf topos (the page's C~); « catégorie
+% double » for the page's « bi-catégorie »; V for the category of manifolds of
+% part III (the page's C); B_d(X) graded by relative dimension; H^k(X) =
+% H^k(X; F_2), matched with B_{-k}; Hom_{B^H} for the page's H(X,Y).
+%
+% Substantive departures, with pages.
+%  p. 22-23  Remarque 1 claims alpha), beta), gamma) suffice for delta^2 = 0.
+%            False: delta^2 on Omega is a further O-linear condition,
+%            equivalent (Omega loc. free f.t.) to Jacobi. Counterexample: X_0 a
+%            point, any antisymmetric non-Jacobi bracket. beta) corrected
+%            (delta_0 f ^ omega).
+%  p. 24-25  « pourquoi est-ce nul ?? »: answered (ours) by the identity
+%            <omega, J(X,Y,Z)> = <delta delta omega, X^Y^Z>
+%              - sum_cyc <delta delta <omega,Z>, X^Y>,
+%            checked by hand and numerically; the page's route through
+%            T(delta omega) is not followed.
+%  p. 25-26  §5 correspondence and §6 Quillen's theorem: variance fixed
+%            (covariant in A, contravariant in C; C -> g^C covariant).
+%  p. 28     sign (-1)^{deg omega} supplied in the extended Leibniz rule.
+%  p. 29     K(X,Y)(u) = -<K'(u), X^Y> (the page: K'(u)(X,X), « Attention
+%            signe ! »).
+%  p. 30     descent data <-> INTEGRABLE connections (the page: connexions).
+%  p. 32     « système de coefficients » = functors C° -> Ens inverting every
+%            arrow (the page: « transformant isomorphismes en isomorphismes »,
+%            which every functor does); lim^(i)_C F read as lim^i over C° of
+%            u*F'.
+%  p. 34     coproduct of the cochains corrected to a product (the ink asks it).
+%  p. 35     C, C' read X, X'; the question « se borner aux systèmes locaux
+%            commutatifs » answered negatively (acyclic groups, ours).
+%  p. 36     unit functor C_0 -> C_1 supplied; Segal condition supplied for the
+%            page's « objets qui … ».
+%  p. 38     Hom_grab identified with tau_{<=0} RHom (truncation supplied).
+%  p. 39     the ink « pl. fidèle (?) » is corrected: the loop functor is not
+%            even faithful (cup-product example, ours).
+%  p. 39     « tuage » analogy for Aut(1): footnoted as rather a looping.
+%  p. 43     compact (closed) manifolds supplied.
+%  p. 44     F^• : V° -> B (the page: C -> B); composition in B written out.
+%  p. 45     base change written alpha_{s•} alpha_s^• = Gamma^• i_{s•} (the
+%            page's order alpha_s^* alpha_{s*} does not type-check).
+%  p. 45     H (x) Lambda = B holds as Lambda-modules for any homogeneous lift,
+%            by Conner-Floyd freeness and graded Nakayama.
+%  p. 45-46  the page's « quasi-abélienne » = pseudo-abelian (Karoubian
+%            additive), not Schneiders' quasi-abelian.
+%  p. 47-48  « Thom's theorem » (x in S(X) iff A^+ x = 0), read with the usual
+%            action on cohomology, fails: RP^1 in RP^2. Reported under reserve;
+%            the page itself doubts the necessity.
+%
+% Announced and never established on the pages: the divided-power variant
+% (pp. 26, 30); whether a formal category is a groupoid (p. 21); whether order 2
+% suffices in the descent condition (p. 27); the lemma of p. 23; the
+% generalisation to « localement homotopiquement trivial » topoi (pp. 34-35);
+% n-categories as n-simplicial sets (p. 37); the Hom_grab identification
+% (p. 38) and the 2-Grab-category of homomorphisms (p. 40); abelian groups in
+% n-Cat <-> complexes of length n (p. 40); K_n via universal Gr-n-categories
+% (p. 40); the universality of S (p. 47); the structure of G (p. 48).
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{162-5}
+\pages{1}{68}
+\dating{1968-[à partir de 1970] — le groupe « Dossiers rassemblés par Grothendieck sur différentes thématiques » (161-1 à 162-6) est daté [après 1961-vers 1977]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Tapis de Quillen : tapuscrit et copies de tapuscrits (1968, s.d.), notes manuscrites (1968), tiré à part (1968) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Au début de septembre 1968, Grothendieck a pris des notes sur ce que Daniel
+Quillen, alors âgé de vingt-huit ans, lui exposait. Ce dossier les réunit.
+« Tapis », dans sa langue de ces années, désigne un ensemble de résultats et la
+manière de s'en servir : les mêmes pages parlent du « tapis de Dold » et du
+« tapis de Roos ». Il y a deux textes, écrits à quatre jours d'intervalle et sur
+des sujets qui ne se recoupent pas. Le premier, du 6 septembre, fait dix pages
+manuscrites. Le second, du 10, est un tapuscrit de seize pages, présent ici en
+deux exemplaires annotés. Autour, des pièces de Quillen lui-même : une liste de
+ses publications, un tiré à part, une prépublication en anglais.
+
+Les notes du 6 septembre portent sur les symétries infinitésimales. Un groupe
+de Lie a une algèbre de Lie, qui en est comme l'ombre au premier ordre : elle
+retient les directions dans lesquelles on peut partir de l'identité, et la façon
+dont deux de ces mouvements ne commutent pas. En caractéristique nulle, cette
+ombre suffit à reconstruire le groupe au voisinage de l'identité. Le théorème
+que les notes attribuent à Quillen dit la même chose pour des objets plus
+souples, des « catégories formelles ». Au lieu d'un seul point, on a tous les
+points d'un espace, et entre deux points voisins des flèches infiniment
+petites. L'ombre au premier ordre d'un tel objet est ce qu'on appelle
+aujourd'hui un algébroïde de Lie. Grothendieck le code par une algèbre
+différentielle graduée, un « complexe de De Rham » généralisé. Suivent les
+coefficients : un module muni d'une action de la catégorie formelle est la même
+chose, en caractéristique nulle, qu'un module muni d'une connexion plate. La dernière page compare deux
+cohomologies de ce module, et c'est là que les notes s'arrêtent. Une question
+y est laissée ouverte, « pourquoi est-ce nul ?? », sur l'identité de Jacobi.
+Elle a une réponse simple, que nous donnons ; elle oblige à corriger une remarque
+antérieure des mêmes pages.
+
+Le tapuscrit du 10 septembre a trois parties. La première part de ce qu'une
+catégorie est un espace : ses objets sont des points, ses flèches des segments,
+ses triangles commutatifs des faces. Selon Quillen, les catégories et les
+ensembles simpliciaux ont la même théorie de l'homotopie, et toute catégorie a
+le même type d'homotopie que son opposée. Grothendieck y voit l'occasion de
+définir un type d'homotopie par la catégorie dérivée de ses systèmes locaux.
+La deuxième partie traite des catégories supérieures munies d'une loi de groupe.
+Une catégorie de Picard, c'est-à-dire un groupe « à isomorphismes près », est
+à peu de chose près un complexe de groupes abéliens de longueur un. Il en va de
+même en longueur deux, et le texte espère qu'il en ira ainsi en toute longueur.
+Il espère aussi définir les groupes $K_n$ d'une catégorie munie d'un produit
+tensoriel comme les groupes d'homotopie de sa « complétion en groupe »
+universelle. C'est ce que Quillen fera dans les années suivantes, par d'autres
+chemins. La troisième partie regarde le cobordisme d'un œil de géomètre
+algébriste. Deux variétés sont cobordantes quand, ensemble, elles bordent une
+troisième. En comptant les variétés au-dessus d'un espace à cobordisme près, on
+obtient une catégorie de correspondances qui ressemble aux motifs. Le groupe
+des symétries des opérations de Steenrod y joue le rôle d'un « groupe de Galois
+motivique ». Contrairement au cas familier, ce groupe est unipotent, et il est
+défini sur le corps à deux éléments.
+
+Ces pages montrent aussi une manière de travailler. Le tapuscrit rapporte
+(« Quillen prouve ») et se pose des questions (« Demander à Quillen… »). Dans ses
+marges, une encre différente répond à certaines d'entre elles, par « oui » ou
+par « non, … ». On y voit une conversation mathématique en train de se
+faire : ce qu'on a compris, ce qu'on croit, ce qu'on ira demander.
+
+Pour aller plus loin, les noms à chercher sont les suivants : algébroïdes de
+Lie et groupoïdes formels ; la structure de modèles de Thomason sur les
+catégories ; les 2-groupes et les champs de Picard ; la $K$-théorie supérieure
+de Quillen. Il faut surtout lire la note de Quillen de 1969 sur les lois de
+groupes formels du cobordisme, qui, un an après ces notes, donnera à la
+troisième partie sa structure véritable. On la retrouve aujourd'hui dans le
+cobordisme algébrique de Levine et Morel.
+
+\keywords{Lie algebroid, formal groupoid, Chevalley–Eilenberg complex, integrable connection, van Est isomorphism, nerve of a category, category of simplices, homotopy theory of categories, double category, Segal condition, Dold–Kan correspondence, 2-group, Picard category, higher algebraic K-theory, group completion, unoriented cobordism, correspondence category, Karoubi envelope, Chow motive, Steenrod algebra, motivic Galois group, Pontryagin–Thom construction}
+\end{resume}
+
+\pagerange{1}{68}
+\section*{Le fil du dossier, et les conventions}
+
+\emph{Les pièces}, dans l'ordre des archivistes.
+
+\begin{enumerate}
+  \item \emph{Page 1}, la chemise : « Le Tapis de Quillen / notes d'Alexandre
+  (1968) », au crayon, d'une main qui n'est probablement pas la sienne.
+  \item \emph{Pages 2 à 17} : une photocopie noire du tapuscrit « Tapis de
+  Quillen » (ses pages 1 à 16), datée « notes du 10.9.68 ». Nous l'appelons la
+  \emph{photocopie}.
+  \item \emph{Page 19} : une liste dactylographiée, « Publications of Daniel
+  Quillen », sans annotation. Les pages 18 et 20 sont blanches.
+  \item \emph{Pages 21 à 30} : dix feuillets manuscrits à l'encre bleue,
+  intitulés « tapis Quillen (Notes du 6.9.68) » et numérotés par paragraphes
+  de 1 à 11. La page 31 est blanche.
+  \item \emph{Pages 32 à 41 et 43 à 48} : l'original dactylographié du même
+  tapuscrit, annoté à l'encre bleue. Nous l'appelons l'\emph{exemplaire annoté}.
+  La page 42 est blanche.
+  \item \emph{Pages 50 à 55} : le tiré à part de D. Quillen, « On the
+  Representation of Hermitian Forms as Sums of Squares », Inventiones math. 5
+  (1968). Les pages 49 et 56 sont blanches.
+  \item \emph{Pages 57 à 68} : un tapuscrit anglais de Quillen reproduit à
+  l'alcool, « On a conjecture of Adams », ses pages 1 à 12. Seule la page 58 y
+  porte une intervention étrangère à la reproduction.
+\end{enumerate}
+
+\emph{Les deux exemplaires du tapuscrit.} La photocopie a été tirée sur
+l'exemplaire annoté \emph{après} que l'encre y eut été portée. Elle en reproduit
+donc la couche manuscrite, puis elle a reçu quelques notes qui lui sont propres.
+Le texte suivi ici, pour le tapuscrit comme pour ses annotations, est celui de
+l'exemplaire annoté. Les notes propres à la photocopie sont signalées en note au
+point où elles portent, et rassemblées dans une section à part. Le dossier 111
+du fonds contient une troisième copie du même tapuscrit.
+
+\emph{Deux textes sans intersection.} Les notes du 6 septembre et le tapuscrit
+du 10 portent le même titre, mais le tapuscrit ne reprend rien des notes. Il n'y
+est question ni de catégories formelles, ni de complexes de De Rham, ni, en
+particulier, de la comparaison entre cohomologie de De Rham et cohomologie de
+Hochschild par laquelle les notes se terminent (page 30). Ce sont deux
+conversations, ou deux moments d'une conversation, sur des sujets distincts. On
+les lit ici dans l'ordre des dates.
+
+\emph{Qui écrit.} Le tapuscrit parle à la première personne : « ma lettre à
+Verdier », « “ma” construction chérie de la “catégorie de Picard” », « mon
+interprétation chérie », « le rôle universel que j'ai envisagé plus haut ». Il
+rapporte ce que « Quillen prouve » et note ce qu'il faudra « demander à
+Quillen ». Nous n'attribuons pas l'encre qui annote les deux exemplaires ; la
+transcription de l'exemplaire annoté ne le fait pas non plus. Les notes du 6
+septembre sont de sa main selon la transcription.
+
+\emph{Notations}, valables pour tout le document ; chaque écart avec la page est
+signalé en note.
+
+\begin{itemize}
+  \item Notes du 6 septembre. $X_0$ est un schéma et $\mathcal{O} =
+  \mathcal{O}_{X_0}$. On note $\mathcal{C}$ une catégorie formelle sur $X_0$, $A$
+  son pro-anneau, $I$ l'idéal d'augmentation, $\Omega = I/I^{2}$ le conormal et
+  $\Lambda^{\bullet}\Omega$ l'algèbre extérieure sur $\mathcal{O}$. La
+  différentielle d'un complexe de De Rham est notée $\delta$ ; la page écrit $d$
+  quand elle vient de $\mathcal{C}$. On pose $\mathfrak{g} =
+  \mathcal{H}\mathrm{om}_{\mathcal{O}}(\Omega, \mathcal{O})$, on note $\theta$ son
+  ancre et $i_X$ la contraction par $X$. L'accouplement est $\langle a \wedge b, X
+  \wedge Y\rangle = a(X)b(Y) - a(Y)b(X)$, par déterminants en degré 3. Pour un
+  module $M$, une connexion est notée $\nabla : M \to \Omega \otimes M$.
+  \item Tapuscrit. $N(C)$ désigne le nerf (la page : $S(C)$), et $C^{\circ}$ la
+  catégorie opposée. $\mathrm{Ho}(\mathrm{Cat})$ et $\mathrm{Ho}(\mathrm{sSet})$
+  désignent les catégories homotopiques (la page : $(\mathrm{Cat})'$,
+  $(\mathrm{Ssimpl})'$), et $\widehat{C}$ le topos des préfaisceaux sur $C$ (la
+  page : $\widetilde{C}$). Dans la troisième partie, $\mathcal{V}$ est la
+  catégorie des variétés (la page : $C$), et $H^{\bullet}(X) = H^{*}(X;
+  \mathbb{F}_2)$.
+\end{itemize}
+
+\emph{Ce que le dossier annonce sans l'établir.} La variante à puissances
+divisées du théorème de Quillen est annoncée deux fois (pages 26 et 30) et
+jamais écrite. Plusieurs questions restent ouvertes : si une catégorie formelle
+est automatiquement un groupoïde (page 21), et si l'ordre 2 suffit dans la
+condition de descente (page 27). Le tapuscrit laisse ouverte la généralisation
+aux topos « localement homotopiquement triviaux » (pages 34 et 35). Il pose sans
+les établir la description des $n$-catégories par des ensembles
+$n$-simpliciaux (page 37) et celle des homomorphismes entre catégories de
+Picard (pages 38 et 40). Il ne fait qu'espérer la correspondance entre groupes
+abéliens de $(n\text{-Cat})$ et complexes de longueur $n$ (page 40), et la
+définition des $K_n$ (page 40). Il suppose sans la démontrer l'universalité de
+la catégorie $\mathbf{S}$ (page 47), et ne dit pas la structure du groupe $G$
+(page 48).
+
+\pagerange{21}{30}
+\section*{Les notes du 6 septembre 1968 : catégories formelles et complexes de De Rham (pages 21 à 30)}
+
+\pagerange{21}{22}
+\subsection*{1. Catégories formelles (pages 21 et 22)}
+
+Soit $X_0$ un schéma. Une \emph{catégorie formelle} $\mathcal{C}$ sur $X_0$ est
+un objet catégorie dans les schémas formels, c'est-à-dire dans un certain type
+d'ind-schémas. Son schéma d'objets est $X_0$ lui-même, et son schéma de flèches
+$X_1$ est un voisinage infinitésimal de $X_0$, plongé par les flèches
+identiques.\footnote{En marge gauche de la page 21, le schéma vertical d'un objet
+semi-simplicial tronqué $X_2 \to X_1 \rightrightarrows X_0$ : trois flèches de
+faces descendent de $X_2$ à $X_1$, deux de $X_1$ à $X_0$, avec les
+dégénérescences en sens inverse. La page regarde $X_0$ « comme schéma formel,
+i.e.\ ind-schéma particulier ».} Algébriquement, c'est la donnée des objets
+suivants :
+\begin{itemize}
+  \item un pro-anneau $A = (A_\alpha)$ sur $X_0$, qualifié d'« admissible » ;
+  \item une augmentation $\varepsilon : A \to \mathcal{O}$, dont l'idéal $I$
+  est un idéal de définition ;
+  \item deux structures de $\mathcal{O}$-algèbre, à gauche et à droite, qui
+  correspondent à la source et au but ;
+  \item une comultiplication $\Delta : A \to A \otimes_{\mathcal{O}} A$, le
+  produit tensoriel étant pris entre la structure droite du premier facteur et
+  la structure gauche du second.
+\end{itemize}
+On demande que $\Delta$ soit coassociative et que l'augmentation soit une
+counité à gauche et à droite. On dirait aujourd'hui un groupoïde formel, ou
+une algèbre de Hopf complète au-dessus de $\mathcal{O}$ (un « algébroïde de
+Hopf »), mais sans antipode. La page demande si l'antipode existe
+nécessairement, c'est-à-dire si une catégorie formelle est automatiquement un
+groupoïde formel.\footnote{Question laissée ouverte par la page, entre
+crochets ; les mots « de passage à l'inverse » y sont d'une lecture incertaine.
+Pour une loi de groupe formel sur un anneau quelconque, l'inverse existe
+toujours, ce qui rend plausible une réponse positive au moins dans le cas lisse.
+Nous ne tranchons pas.}
+
+On pose $\Omega_{\mathcal{C}} = I/I^{2}$, le faisceau conormal de $X_0$ dans
+$X_1$. C'est a priori un pro-faisceau quasi-cohérent sur $X_0$, et un module
+quasi-cohérent ordinaire lorsque $A$ est $I$-adique. Sur
+$\Lambda^{\bullet}\Omega_{\mathcal{C}}$ on définit une différentielle d'anneau
+gradué $\delta = d_{\mathcal{C}}$, dont la composante de degré 0 est
+\[
+\delta f = t^{*}f - s^{*}f \mod I^{2},
+\]
+où $s, t : X_1 \to X_0$ sont la source et le but (la page écrit
+$\mathrm{pr}_1$, $\mathrm{pr}_2$). La construction en degrés supérieurs est
+renvoyée « plus bas » ; elle est ce que le paragraphe suivant rend abstrait.
+
+\emph{Opérateurs différentiels.} Regardons $A_\alpha$ comme
+$\mathcal{O}$-module par la structure gauche. L'application $f \mapsto t^{*}f$
+de $\mathcal{O}$ dans $A_\alpha$ est alors un opérateur différentiel, d'ordre
+$n$ si $I_\alpha^{n+1} = 0$. Les sections de
+$\mathcal{D}^{\mathcal{C}}_\alpha =
+\mathcal{H}\mathrm{om}_{\mathcal{O}}(A_\alpha, \mathcal{O})$ opèrent donc sur
+$\mathcal{O}$ par opérateurs différentiels. La réunion
+$\mathcal{D}^{\mathcal{C}} = \varinjlim_\alpha \mathcal{D}^{\mathcal{C}}_\alpha$
+est un faisceau d'anneaux associatifs et unitaires, dont le produit est dual de
+$\Delta$. Elle s'envoie dans le faisceau des opérateurs différentiels de
+Grothendieck $\mathcal{D}_{X_0/\mathbb{Z}}$. Le cas universel est celui où
+$\mathcal{C}$ est le complété formel de la diagonale de $X_0 \times_{\mathbb{Z}}
+X_0$. Les $A_\alpha$ y sont alors les faisceaux de parties principales, et
+$\mathcal{D}^{\mathcal{C}}$ est $\mathcal{D}_{X_0/\mathbb{Z}}$
+lui-même.\footnote{La page le dit dans une parenthèse coupée par le changement
+de feuillet, avec un mot illisible : « au fond ici ce serait la formalisation de
+la catégorie … définie par $X_0/\mathrm{Spec}\,\mathbb{Z}$ ». L'identification
+aux parties principales et aux opérateurs différentiels de EGA IV, § 16, est
+notre explicitation.} En particulier, le module
+\[
+\mathfrak{g}^{\mathcal{C}} =
+\mathcal{H}\mathrm{om}_{\mathcal{O}}(\Omega_{\mathcal{C}}, \mathcal{O})
+= \varinjlim_\alpha \mathcal{H}\mathrm{om}_{\mathcal{O}}(\Omega_{\mathcal{C}_\alpha}, \mathcal{O})
+\]
+opère sur $\mathcal{O}$ par dérivations. C'est le module des « champs de
+vecteurs » de $\mathcal{C}$. On le retrouvera au paragraphe 3 à partir du seul
+complexe de De Rham.
+
+\pagerange{22}{23}
+\subsection*{2. Complexes de De Rham abstraits (pages 22 et 23)}
+
+Soit $\Omega$ un $\mathcal{O}$-module quasi-cohérent. Un \emph{complexe de De Rham}
+sur $\Omega$ est une différentielle d'anneau gradué $\delta$ sur
+$\Lambda^{\bullet}\Omega$. C'est une antidérivation de degré $+1$,
+$\delta(ab) = \delta a \cdot b + (-1)^{|a|} a \cdot \delta b$, de carré
+nul.\footnote{« abstrait » est d'une lecture incertaine. La page ajoute entre
+crochets qu'il faudrait considérer aussi les espaces annelés, ainsi que « tout
+complexe obtenu par les sorites de 1 » ; c'est le cas du complexe de la
+catégorie formelle.} Autrement dit, c'est une structure d'algèbre différentielle
+graduée commutative sur $\Lambda^{\bullet}\Omega$, compatible à la graduation.
+
+\emph{Remarque 1, rectifiée.} Une telle $\delta$ est déterminée par ses deux
+premières composantes. La première est
+$\delta_0 : \mathcal{O} \to \Omega$, une dérivation :
+\[
+\alpha)\quad \delta_0(fg) = \delta_0(f)\,g + f\,\delta_0(g).
+\]
+Il revient au même de se donner un morphisme $u : \Omega^{1}_{X_0/\mathbb{Z}} \to
+\Omega$, avec $\delta_0 = u \circ d$. La seconde est $\delta_1 : \Omega \to
+\Lambda^{2}\Omega$, soumise aux conditions
+\[
+\beta)\quad \delta_1(f\omega) = \delta_0(f) \wedge \omega + f\,\delta_1(\omega),
+\qquad
+\gamma)\quad \delta_1\delta_0 = 0 .
+\]
+Inversement, soient $\delta_0$, $\delta_1$ vérifiant $\alpha)$ et $\beta)$.
+Ils se prolongent de façon unique en une antidérivation $\delta$ de
+$\Lambda^{\bullet}\Omega$.\footnote{La page écrit, au premier terme de
+$\beta)$, $\delta_0(f)\,\delta_1(\omega)$ ; la règle de Leibniz donne
+$\delta_0(f) \wedge \omega$, que nous rétablissons.} Le carré
+$\delta^{2}$ est alors une dérivation de degré 2, donc nul si et seulement s'il
+l'est sur $\mathcal{O}$ et sur $\Omega$. Sur $\mathcal{O}$, c'est la condition
+$\gamma)$. Sur $\Omega$, la condition $\gamma)$ rend
+$\delta^{2}|_{\Omega} : \Omega \to \Lambda^{3}\Omega$ $\mathcal{O}$-linéaire, car
+$\delta^{2}(f\omega) = \delta^{2}f \wedge \omega + f\,\delta^{2}\omega$. Mais elle
+ne l'annule pas : c'est une condition de plus,
+\[
+\gamma')\quad \delta_2\,\delta_1 = 0 ,
+\]
+où $\delta_2$ est la composante de degré 2 de l'antidérivation prolongée. On
+verra au paragraphe suivant qu'elle équivaut à l'identité de Jacobi, lorsque
+$\Omega$ est localement libre de type fini.\footnote{La page affirme que
+l'antidérivation prolongée « est de carré nul grâce à la condition
+$\gamma)$ », et note en marge : « dégager un lemme circonstancié ». C'est faux
+tel quel. Soit $X_0$ un point, $\Omega = V^{*}$ le dual d'un espace vectoriel
+de dimension finie, $\delta_0 = 0$ et $\delta_1$ la transposée d'une
+application bilinéaire alternée quelconque $V \times V \to V$. Les conditions
+$\alpha)$, $\beta)$ et $\gamma)$ sont trivialement satisfaites, et $\delta^{2} =
+0$ sur $\Omega$ équivaut exactement à l'identité de Jacobi pour ce crochet. C'est
+elle que la page cherchera en vain à démontrer aux pages 24 et 25. La définition
+elle-même, au début du paragraphe, demande bien une différentielle,
+donc $\delta^{2} = 0$ : seule la Remarque est en défaut.}
+
+\pagerange{23}{25}
+\subsection*{3. L'algébroïde de Lie d'un complexe de De Rham (pages 23 à 25)}
+
+Soit $(\Lambda^{\bullet}\Omega, \delta)$ un complexe de De Rham, et
+$\mathfrak{g} = \mathcal{H}\mathrm{om}_{\mathcal{O}}(\Omega, \mathcal{O})$.
+C'est un faisceau de $\mathcal{O}$-modules.\footnote{La page le dit
+« ind-module quasi-cohérent, qui s'identifie à un Module quasi-cohérent bien
+défini ». Nous n'en avons pas besoin, et ce n'est assuré que si $\Omega$ est de
+présentation finie.} Toute section $X$ de $\mathfrak{g}$ définit une dérivation
+$\theta_X$ de $\mathcal{O}$ :
+\[
+\theta_X(f) = \langle \delta f, X \rangle ,
+\qquad
+\theta_{gX} = g\,\theta_X ,
+\]
+et la règle de Leibniz pour $\theta_X$ résulte de $\alpha)$. Pour $X, Y$
+sections de $\mathfrak{g}$ sur un ouvert $U$, on définit $[X,Y] \in \Gamma(U,
+\mathfrak{g})$ par
+\[
+(*)\qquad \langle \omega, [X,Y] \rangle
+= -\langle \delta\omega, X \wedge Y \rangle + \theta_X \langle \omega, Y \rangle
+- \theta_Y \langle \omega, X \rangle ,
+\qquad \omega \in \Gamma(U, \Omega).
+\]
+Le second membre est $\mathcal{O}$-linéaire en $\omega$ grâce à $\alpha)$ et
+$\beta)$. Il définit donc bien une section de $\mathfrak{g}$, qui est
+$[X,Y]$.\footnote{La page écrit « définit une section $X \wedge Y$ » ; c'est
+$[X,Y]$ qui est défini. Les deux signes devant $\theta_X$ et $\theta_Y$ dans
+$(*)$ sont récrits à l'encre par-dessus d'autres, et un mot biffé illisible
+suit $[X,Y]$.}
+
+On a alors les formules suivantes.
+\begin{itemize}
+  \item[(**)] $\theta_{[X,Y]} = [\theta_X, \theta_Y] = \theta_X\theta_Y -
+  \theta_Y\theta_X$. Plus précisément, pour toute fonction $f$,
+  \[
+  \theta_{[X,Y]}f - [\theta_X, \theta_Y]f = -\langle \delta\delta f, X \wedge Y\rangle ,
+  \]
+  de sorte que $(**)$ résulte de $\gamma)$. Réciproquement, $\gamma)$ est
+  nécessaire à $(**)$ si $\Omega$ est localement libre.
+  \item $[X,X] = 0$, et $[X, fY] = \theta_X(f)\,Y + f\,[X,Y]$, qui résulte de
+  $\alpha)$.
+  \item \emph{Jacobi.} Pour toute section $\omega$ de $\Omega$, on a l'identité
+  \[
+  \Big\langle \omega, \sum_{\mathrm{cycl}} [[X,Y],Z] \Big\rangle
+  = \langle \delta\delta\omega, X \wedge Y \wedge Z \rangle
+  - \sum_{\mathrm{cycl}} \langle \delta\delta\langle\omega, Z\rangle, X \wedge Y \rangle .
+  \]
+  L'identité de Jacobi vaut donc dans tout complexe de De Rham, puisque
+  $\delta^{2} = 0$. Si $\Omega$ est localement libre de type fini et que
+  $\gamma)$ est satisfaite, elle équivaut à la condition $\gamma')$ du
+  paragraphe 2.
+\end{itemize}
+L'identité de Jacobi se démontre ainsi. Pour une 2-forme $\eta$, la règle de
+Leibniz et $(*)$ donnent la formule de Cartan
+\[
+\delta\eta(X,Y,Z) = \sum_{\mathrm{cycl}} \theta_X\,\eta(Y,Z)
+- \sum_{\mathrm{cycl}} \eta([X,Y],Z).
+\]
+On la vérifie sur les produits $a \wedge b$, sans faire appel à Jacobi. On
+l'applique à $\eta = \delta\omega$, on développe $\delta\omega(Y,Z)$ par $(*)$,
+et les termes en $\theta_X\langle\omega, [Y,Z]\rangle$ se détruisent par
+permutation circulaire. Il reste l'identité annoncée, où $(**)$ réécrit les
+termes en $[\theta_X, \theta_Y] - \theta_{[X,Y]}$.\footnote{La page mène un
+calcul très corrigé, dont une partie est barrée de trois longues diagonales.
+Elle aboutit à $(\mathrm{Jacobi})(\omega) = T(\delta\omega)$ avec $T =
+\sum(i_X i_Y \delta i_Z - \theta_Z i_X i_Y)$. Elle récrit ensuite $T$, à l'aide
+de la formule de Cartan $\theta_X = i_X\delta + \delta i_X$, sous la forme
+$\sum [\,i_{X \wedge Y}, \theta_Z\,]$, et s'arrête sur : « pourquoi est-ce nul
+?? ». La question reste ouverte sur la page. La réponse ci-dessus est la nôtre,
+par une autre voie que la sienne. Ce qu'il fallait, c'est appliquer $\delta$ à
+$\delta\omega$, c'est-à-dire utiliser $\delta^{2} = 0$ en degré 1 ; la Remarque
+de la page 22 croyait cette condition automatique.}
+
+La conclusion de la page 25 se lit alors ainsi. $\mathfrak{g}$ est une
+\emph{$\mathcal{O}$-algèbre de Lie} sur $X_0$ : c'est un faisceau d'anneaux de
+Lie et un $\mathcal{O}$-module. Elle est munie d'un homomorphisme d'anneaux de
+Lie $\theta : \mathfrak{g} \to T_{X_0/\mathbb{Z}} =
+\mathcal{D}\mathrm{er}(\mathcal{O})$, qui est $\mathcal{O}$-linéaire, et elle
+satisfait $[X, fY] = f[X,Y] + \theta_X(f)\,Y$. C'est ce qu'on appelle
+aujourd'hui un \emph{algébroïde de Lie} sur $X_0$, d'ancre $\theta$, ou, en
+algèbre, une \emph{algèbre de Lie--Rinehart}.\footnote{La page dit
+« $\mathcal{O}$-Algèbre de Lie » et « Anneau de Lie ». La notion algébrique
+figure chez Rinehart (1963), après Herz et Palais ; le nom d'algébroïde de Lie
+vient de Pradines (1967), en géométrie différentielle ; « algèbre de
+Lie--Rinehart » est un nom plus tardif. La page ne cite aucun de ces travaux, et
+nous n'impliquons pas qu'elle les connaissait.}
+
+\pagerange{25}{26}
+\subsection*{4 et 5. Le complexe de Chevalley--Eilenberg, et la correspondance (pages 25 et 26)}
+
+Soit $\mathfrak{g}$ une $\mathcal{O}$-algèbre de Lie. On pose
+$C^{p}(\mathfrak{g}) =
+\mathcal{H}\mathrm{om}_{\mathcal{O}}(\Lambda^{p}_{\mathcal{O}}\mathfrak{g},
+\mathcal{O})$, avec la différentielle de Chevalley--Eilenberg :
+\[
+(\delta c)(X_0, \ldots, X_p) = \sum_{i} (-1)^{i}\,\theta_{X_i}\,c(\ldots, \widehat{X_i}, \ldots)
++ \sum_{i<j} (-1)^{i+j}\,c([X_i, X_j], \ldots, \widehat{X_i}, \ldots, \widehat{X_j}, \ldots).
+\]
+En degré 1 elle redonne $(*)$.\footnote{La page renvoie à « une note Bourbaki »
+et à « une formule connue », sans l'écrire. La formule, et le fait qu'elle
+prolonge les conventions de signe de $(*)$, sont de nous. Pour les algèbres de
+Lie--Rinehart, ce complexe est celui de Rinehart.} Lorsque $\mathfrak{g}$
+provient d'un complexe de De Rham $(\Lambda^{\bullet}\Omega, \delta)$,
+l'homomorphisme évident d'algèbres graduées $\Lambda^{\bullet}\Omega \to
+C^{\bullet}(\mathfrak{g})$ est compatible aux différentielles. C'est un
+isomorphisme si $\Omega$ est localement libre de type fini.
+
+On obtient ainsi une correspondance bijective entre deux classes d'objets : les
+$\mathcal{O}$-algèbres de Lie localement libres de type fini sur $X_0$, et les
+complexes de De Rham construits sur des $\Omega$ localement libres de type
+fini. On passe de l'une à l'autre par $\mathfrak{g} \mapsto
+C^{\bullet}(\mathfrak{g})$ et $\Omega \mapsto
+\mathcal{H}\mathrm{om}(\Omega, \mathcal{O})$. Cette correspondance renverse
+les flèches : un morphisme d'algébroïdes $\mathfrak{g} \to \mathfrak{g}'$
+donne un morphisme d'algèbres différentielles $\Lambda^{\bullet}\Omega' \to
+\Lambda^{\bullet}\Omega$. C'est donc une \emph{anti}-équivalence.\footnote{La
+page dit que les deux sortes d'objets « se correspondent exactement », sans
+parler des morphismes ; la variance est notre précision. On lit aujourd'hui
+cette correspondance comme celle entre algébroïdes de Lie et « champs de
+vecteurs homologiques » sur le fibré décalé (Vaintrob, 1997), formulation
+postérieure.}
+
+\pagerange{26}{26}
+\subsection*{6. Le théorème de Quillen (page 26)}
+
+Revenons à une catégorie formelle $\mathcal{C}$, donnée par $A = (A_\alpha)$,
+et à son complexe de De Rham $(\Lambda^{\bullet}\Omega, \delta)$.
+
+\emph{Théorème (attribué par la page à Quillen).} Supposons $X_0$ de
+caractéristique nulle, c'est-à-dire au-dessus de $\mathbb{Q}$. Alors le
+foncteur $A \mapsto (\Lambda^{\bullet}\Omega_A, \delta)$ induit une
+équivalence entre deux catégories :
+\begin{itemize}
+  \item celle des catégories formelles $I$-adiques sur $X_0$ dont le
+  $\Omega$ est plat ;
+  \item celle des complexes de De Rham sur $X_0$ dont le $\Omega$ est plat.
+\end{itemize}
+Les $A$ en question sont ceux pour lesquels le morphisme canonique
+$\mathrm{Sym}_{\mathcal{O}}\Omega \to \mathrm{gr}_I A$ est un isomorphisme, ce
+qu'il appelle une propriété de « lissité différentielle ».\footnote{La page ne
+donne aucune référence, et ne précise pas les morphismes. Le foncteur est
+covariant en $A$ : un morphisme de pro-anneaux compatible aux structures donne
+un morphisme des complexes. Il est donc contravariant en $\mathcal{C}$,
+puisqu'un foncteur $\mathcal{C} \to \mathcal{C}'$ induisant l'identité sur
+$X_0$ donne $A' \to A$. Par le paragraphe 5, $\mathcal{C} \mapsto
+\mathfrak{g}^{\mathcal{C}}$ est une équivalence \emph{covariante} vers les
+algébroïdes de Lie, lorsque $\Omega$ est localement libre de type fini.
+« $I$-adiques » et « lorsque $X_0$ est de caractéristique nulle » sont des
+ajouts à l'encre, le second d'une lecture incertaine. La phrase sur
+$\mathrm{Sym}\,\Omega \to \mathrm{Gr}(A)$ est entre crochets. Nous la lisons
+comme une description des $A$ visés. Nous ne savons pas si, en
+caractéristique nulle, la platitude de $\Omega$ l'entraîne en général. Pour
+les groupes formels sur un corps de caractéristique nulle, la lissité est un
+théorème de Cartier.}
+
+Ceci contient, pour $X_0$ le spectre d'un corps de caractéristique nulle, le
+théorème que la page attribue à Cartan. Les catégories formelles sur un point
+sont alors les groupes formels, et les complexes de De Rham de dimension finie
+sont les complexes de Chevalley--Eilenberg des algèbres de Lie. Le théorème dit
+donc que les groupes formels de dimension finie équivalent aux algèbres de Lie
+de dimension finie.\footnote{La littérature attache cette équivalence (le
+« troisième théorème de Lie » formel, en caractéristique nulle) à plusieurs
+noms : Cartier, Lazard, Dieudonné. Sous la forme duale des algèbres de Hopf,
+c'est le théorème de Milnor et Moore (1965). Nous ne vérifions pas
+l'attribution de la page. La correspondance générale entre groupoïdes formels
+et algébroïdes de Lie en caractéristique nulle est aujourd'hui un chapitre
+classique, dont la page ne pouvait connaître les formulations ultérieures.}
+
+\emph{Variante à puissances divisées.} La page annonce une variante sans
+hypothèse sur la caractéristique. On y remplace les voisinages infinitésimaux
+par des enveloppes à puissances divisées : $A = (A_n)_{n \in \mathbb{N}}$ est
+muni sur l'idéal d'augmentation d'une structure de puissances divisées, qui
+passe aux quotients $A_n$. On demande que $I_n$ soit nilpotent d'ordre $n$ et
+que la filtration soit celle qui provient des puissances divisées. Elle note
+qu'il faudrait des relations entre cette structure et $\Delta$. L'énoncé n'est
+pas formulé, et le titre « Variante à puissances divisées » qui clôt la page 30
+n'est suivi de rien.\footnote{C'est le côté cristallin de la théorie : les
+stratifications à puissances divisées de ses propres notes sur les cristaux
+(« Crystals and the de Rham cohomology of schemes », exposé de 1966, publié
+en 1968), puis les opérateurs différentiels à puissances divisées de Berthelot.
+La page ne cite rien.}
+
+\pagerange{27}{30}
+\subsection*{7 à 10. Coefficients : descente et connexions (pages 27 à 30)}
+
+\emph{Données de descente.} Soit $M$ un $\mathcal{O}$-module. On a la notion de
+donnée de descente sur $M$ relativement à $\mathcal{C}$, que la page appelle
+aussi « $\mathcal{C}$-stratification » ou « opération de $\mathcal{C}$ sur
+$M$ ». C'est un isomorphisme $t^{*}M \simeq s^{*}M$ au-dessus de la catégorie
+formelle, normalisé le long des identités et satisfaisant la condition de
+cocycle. On dirait aujourd'hui un comodule sur l'algébroïde de Hopf $A$. Une
+telle donnée munit $\Lambda^{\bullet}\Omega \otimes_{\mathcal{O}} M$ d'un
+opérateur $\delta_M$ tel que
+\[
+\delta_M(a x) = \delta(a)\,x + (-1)^{|a|}\,a\,\delta_M(x)
+\qquad (a \in \Lambda^{\bullet}\Omega).
+\]
+Il suffit pour cela de la donnée de recollement d'ordre 1. L'opérateur est
+connu dès qu'on connaît sa restriction $\nabla : M \to \Omega \otimes M$. Le
+fait qu'il soit de carré nul provient de la condition de descente. La page
+demande si l'ordre 2 suffit pour cela, et ne répond pas.\footnote{Passage
+difficile : le crochet ouvert après « La » et l'ajout interlinéaire « soit de »
+se lisent mal. On en donne le sens que la transcription dégage. La page note
+ici $\delta^{1}_M$ ce qu'elle note $\delta^{0}_M$ au paragraphe suivant ; nous
+écrivons $\nabla$ dans les deux cas.}
+
+\emph{Connexions relatives à un complexe de De Rham.} Plus généralement, soit
+$(\Lambda^{\bullet}\Omega, \delta)$ un complexe de De Rham sur $X_0$. Une
+\emph{connexion} sur $M$ est un morphisme additif $\nabla : M \to \Omega
+\otimes M$ tel que $\nabla(fx) = \delta f \otimes x + f\,\nabla x$. Elle se
+prolonge de façon unique en un opérateur $\delta_M$ sur
+$\Lambda^{\bullet}\Omega \otimes M$ tel que
+\[
+\delta_M(\omega x) = \delta(\omega)\,x + (-1)^{|\omega|}\,\omega\,\delta_M(x).
+\]
+Le signe est nécessaire.\footnote{La page écrit $\delta_M(\omega x) =
+\delta(\omega)x + \omega(\delta_M x)$ ; le signe $(-1)^{|\omega|}$ manque.}
+Le carré $\delta_M^{2}$ est $\Lambda^{\bullet}\Omega$-linéaire, puisque
+$\delta^{2} = 0$. Il est donc nul si et seulement s'il l'est en degré 0,
+c'est-à-dire si et seulement si le composé
+\[
+K' : M \xrightarrow{\ \nabla\ } \Omega \otimes M \xrightarrow{\ \delta_M\ } \Lambda^{2}\Omega \otimes M
+\]
+est nul. Ce composé est $\mathcal{O}$-linéaire, et c'est le \emph{tenseur de
+courbure}. La connexion fait opérer $\mathfrak{g}$ sur $M$ par
+$\theta^{M}_X(x) = (X \otimes \mathrm{id}_M)(\nabla x)$, et l'on a
+\[
+a)\ \ \theta^{M}_X(fx) = \theta_X(f)\,x + f\,\theta^{M}_X(x),
+\qquad
+b)\ \ \theta^{M}_{fX} = f\,\theta^{M}_X ,
+\qquad
+c)\ \ \theta^{M}_{[X,Y]} = [\theta^{M}_X, \theta^{M}_Y] \ \text{si } K' = 0 .
+\]
+La condition c) vaut sous l'hypothèse d'une connexion sans
+courbure.\footnote{La page biffe « intégrable » et écrit « sans courbure ».}
+
+\emph{$\mathfrak{g}$-connexions.} Soit $\mathfrak{g}$ une
+$\mathcal{O}$-algèbre de Lie. Une $\mathfrak{g}$-connexion sur $M$ est une
+action $X \mapsto \theta^{M}_X$ satisfaisant a) et b). Son tenseur de courbure
+est
+\[
+K(X,Y) = \theta^{M}_{[X,Y]} - [\theta^{M}_X, \theta^{M}_Y]
+\ \in\ C^{2}\big(\mathfrak{g}, \mathcal{E}\mathrm{nd}_{\mathcal{O}}(M)\big).
+\]
+On vérifie que c'est bien $\mathcal{O}$-bilinéaire alterné en $(X,Y)$ et
+$\mathcal{O}$-linéaire en $M$. La connexion est dite \emph{intégrable} si $K =
+0$.\footnote{C'est l'opposé de la courbure usuelle $[\nabla_X, \nabla_Y] -
+\nabla_{[X,Y]}$ ; la convention est celle de la page.} Si $\mathfrak{g}$
+provient de $\Omega$ et que la $\mathfrak{g}$-connexion provient d'une
+connexion $\nabla$, les deux courbures se déterminent l'une l'autre :
+\[
+K(X,Y)(u) = -\langle K'(u), X \wedge Y \rangle .
+\]
+C'est la même formule que celle qui relie $\theta_{[X,Y]}$ et $\delta\delta$
+au paragraphe 3.\footnote{La page écrit « $K(X,Y)(u) = K'(u)(X,X)$ », où l'on
+attend $(X,Y)$, et note en marge « Attention signe ! ». Le signe $-$ est celui
+que donnent nos conventions ; nous l'avons vérifié.}
+
+\emph{Le cas localement libre.} Si $\Omega$ est localement libre de type fini,
+ce qui équivaut à ce que $\mathfrak{g}$ le soit, les deux notions de connexion
+se correspondent biunivoquement. Il en va de même des deux tenseurs de courbure
+et des deux notions de connexion intégrable. Pour une connexion intégrable, le
+complexe $\Lambda^{\bullet}\Omega \otimes M$ s'identifie au complexe de
+Chevalley--Eilenberg à coefficients $C^{\bullet}(\mathfrak{g}, M)$.
+
+\pagerange{30}{30}
+\subsection*{11. Cohomologie de De Rham et cohomologie de Hochschild (page 30)}
+
+On se place sous les hypothèses du théorème de Quillen : $X_0$ de
+caractéristique nulle, et $(\Lambda^{\bullet}\Omega, \delta)$ à $\Omega$ plat,
+correspondant à une catégorie formelle $\mathcal{C}$ à $\Omega$ plat. Soit $M$
+un $\mathcal{O}$-module. Les structures de $\mathcal{C}$-descente sur $M$
+correspondent alors aux $\Omega$-connexions \emph{intégrables} sur
+$M$.\footnote{La page dit « aux $\Omega$-connexions », sans l'adjectif. Il est
+imposé par le paragraphe 7, où la condition de descente donne $\delta_M^{2} =
+0$.} De plus, la cohomologie de De Rham de $M$, soit l'hypercohomologie
+$\mathbb{H}^{\bullet}(X_0, \Lambda^{\bullet}\Omega \otimes M)$, est
+canoniquement isomorphe à la cohomologie de Hochschild, ou de Čech--Alexander,
+de $\mathcal{C}$ à coefficients dans $M$. Plus précisément, il y a un
+quasi-isomorphisme canonique dans la catégorie dérivée
+\[
+\Lambda^{\bullet}\Omega \otimes M \ \simeq\ C^{\bullet}(\mathcal{C}, M).
+\]
+Ici $C^{n}(\mathcal{C}, M)$ est formé des fonctions sur le schéma formel des
+$n$-uples de flèches composables de $\mathcal{C}$, à valeurs dans $M$, avec la
+différentielle cobar.\footnote{La page n'écrit pas la définition de
+$C^{\bullet}(\mathcal{C}, M)$ ; nous donnons celle qu'appellent les deux noms
+qu'elle emploie. Pour $\mathcal{C}$ le complété de la diagonale d'un
+$X_0$ lisse sur $\mathbb{Q}$, c'est la comparaison entre cohomologie de De Rham
+et cohomologie infinitésimale par les complexes de Čech--Alexander de ses
+propres notes sur les cristaux. Pour $X_0$ un point, c'est la comparaison
+entre cohomologie d'un groupe formel et cohomologie de son algèbre de Lie. On
+parle aujourd'hui d'isomorphisme de van Est, dont la version pour les
+groupoïdes (Crainic, 2003, entre autres) est très postérieure à ces notes.}
+
+La marge, écrite en oblique, porte : « Relier au th.\ fondamental du dévissage
+des cristaux …. Peut-il y avoir ce raisonnement dans un topos convenable ?! ».
+Nous n'identifions pas le théorème désigné.\footnote{La note est lue sur une vue
+redressée ; sa dernière ligne est incertaine.} Suit le titre « Variante à
+puissances divisées », et la page s'arrête.
+
+Le tapuscrit du 10 septembre ne reprend pas ce paragraphe, ni rien de ces dix
+pages.
+
+\pagerange{32}{48}
+\section*{Le tapuscrit du 10 septembre 1968 (pages 32 à 48 ; photocopie, pages 2 à 17)}
+
+Le tapuscrit compte seize pages dactylographiées. Dans l'exemplaire annoté, la
+page $N$ du tapuscrit est la page $31 + N$ du dossier pour $N \leq 10$, et la
+page $32 + N$ pour $N \geq 11$. Dans la photocopie, c'est la page $N + 1$. Le
+texte et les annotations à l'encre suivis ici sont ceux de l'exemplaire annoté.
+Celui-ci porte la date « notes du 10.9.68 » en tête de sa première
+page.\footnote{La même date est reproduite en tête de la photocopie, page 2.
+Sur les deux exemplaires, les indices de $C_0$, $C_1$ et $X_{ij}$, frappés en
+exposant, sont récrits en indice à la main, et l'on suit la correction.}
+
+\pagerange{32}{36}
+\subsection*{I. Catégories et ensembles simpliciaux (pages 32 à 36)}
+
+\emph{Le nerf.} À toute catégorie $C$ on associe son nerf $N(C)$, l'ensemble
+simplicial des suites de flèches composables. Le foncteur $N :
+(\mathrm{Cat}) \to (\mathrm{sSet})$ est pleinement fidèle.\footnote{La page note
+$S(C)$ le nerf et $(\mathrm{Ssimpl})$ la catégorie des ensembles
+semi-simpliciaux, c'est-à-dire, dans la terminologie de l'époque, simpliciaux.
+Nous réservons la lettre $S$ à la troisième partie.} Les systèmes locaux
+d'ensembles sur $N(C)$ correspondent aux foncteurs sur $C$ qui envoient toute
+flèche sur un isomorphisme, c'est-à-dire qui se factorisent par le groupoïde
+enveloppant $C[C^{-1}]$. Leur cohomologie s'interprète de deux façons : par les
+foncteurs dérivés de $\varprojlim$, ou comme cohomologie du topos $\widehat{C}$
+des préfaisceaux sur $C$. Il s'agit de $H^{0}$ pour les ensembles, de $H^{1}$
+pour les groupes, et de tous les $H^{i}$ pour les groupes abéliens. Pour un
+système local abélien $F$, vu comme foncteur $C^{\circ} \to \mathrm{Ab}$, on a
+$H^{i}(N(C), F) = H^{i}(\widehat{C}, F) = \varprojlim^{i}_{C^{\circ}} F$.
+
+Un foncteur $u : C \to C'$ est un \emph{homotopisme} si $N(u)$ est une
+équivalence faible ; c'est le terme de la page. Le critère cohomologique
+d'Artin et Mazur donne une caractérisation. $u$ est un homotopisme si et
+seulement si, pour tout système de coefficients local $F'$ sur $C'$, les
+applications
+\[
+\varprojlim\nolimits^{i}_{C'^{\circ}} F' \longrightarrow \varprojlim\nolimits^{i}_{C^{\circ}} u^{*}F'
+\]
+sont bijectives, pour les $i$ où cela a un sens.\footnote{La page écrit au
+second membre $\varprojlim^{(i)}_{C} F$, au lieu de l'image inverse de $F'$ ;
+elle indexe $\varprojlim$ par $C$ plutôt que par $C^{\circ}$. La parenthèse
+ouverte avant « du \emph{topos} $C$ » n'est pas refermée. « Homotopisme » se dit
+aujourd'hui équivalence faible, ou équivalence d'homotopie faible, de
+catégories. Le théorème A de Quillen (1973) en donnera un critère suffisant
+par les catégories comma ; il est postérieur à ces notes. Le livre d'Artin et
+Mazur, « Etale homotopy », paraîtra en 1969.}
+
+\emph{Le topos.} À $C$ est associé le topos $\widehat{C}$, qui varie de façon
+\emph{covariante} avec $C$. Un foncteur $u$ induit en effet un morphisme de topos
+$\widehat{u} : \widehat{C} \to \widehat{C'}$, dont l'image inverse est la
+restriction le long de $u$. La page ajoute que le foncteur $C \mapsto
+\widehat{C}$ n'a plus rien de pleinement fidèle, « semble-t-il ».\footnote{C'est
+bien le cas : le topos des préfaisceaux ne voit $C$ qu'à complétion de Karoubi
+près. Deux catégories de même enveloppe karoubienne ont des topos de
+préfaisceaux équivalents.} Un système de coefficients ensembliste sur $C$ est un
+foncteur $C^{\circ} \to \mathrm{Ens}$ qui envoie toute flèche sur une
+bijection.\footnote{La page définit les systèmes de coefficients comme les
+foncteurs « transformant isomorphismes en isomorphismes », ce que fait tout
+foncteur. Le sens est celui du premier alinéa : toute flèche est envoyée sur un
+isomorphisme. « $C^{\circ} \to \mathrm{Ens}$ » est ajouté à l'encre.} Les
+systèmes de coefficients sont exactement les objets localement constants de
+$\widehat{C}$, qui se définissent intrinsèquement à partir du topos. Il en
+résulte qu'être un homotopisme ne dépend que de $\widehat{u}$. Cela signifie
+que $H^{i}(\widehat{C'}, F') \to H^{i}(\widehat{C}, \widehat{u}^{*}F')$ est
+bijectif pour tout faisceau localement constant $F'$ sur $\widehat{C'}$.
+
+\emph{La catégorie des simplexes.} Dans l'autre sens, on associe à un ensemble
+simplicial $X$ la catégorie de ses simplexes $T(X) = \Delta/X$. Ses objets sont
+les simplexes de $X$ ; c'est une catégorie fibrée sur $\Delta$, à fibres les
+ensembles discrets $X_n$. Quillen prouve deux choses. D'abord, $N T(X)$ est
+canoniquement isomorphe à $X$ dans $\mathrm{Ho}(\mathrm{sSet})$. Ensuite,
+$T N(C)$ est canoniquement isomorphe à $C$ dans la localisée
+$\mathrm{Ho}(\mathrm{Cat})$ de $(\mathrm{Cat})$ par les homotopismes. Ces
+isomorphismes sont fonctoriels. Il en résulte formellement qu'un morphisme
+$f$ d'ensembles simpliciaux est une équivalence faible si et seulement si
+$T(f)$ est un homotopisme. $N$ et $T$ induisent donc des équivalences
+quasi-inverses
+\[
+\mathrm{Ho}(\mathrm{Cat}) \ \simeq\ \mathrm{Ho}(\mathrm{sSet}).
+\]
+\footnote{C'est aujourd'hui un résultat classique : on le cite d'ordinaire
+d'après Illusie (1972), qui l'attribue à Quillen. Thomason (1980) en fera une
+équivalence de catégories de modèles. L'isomorphisme $N(\Delta/X) \to X$ est
+réalisé par l'application « dernier sommet ».}
+
+\emph{Une catégorie et son opposée.} Quillen construit de plus un isomorphisme
+canonique et fonctoriel entre $C$ et $C^{\circ}$ dans
+$\mathrm{Ho}(\mathrm{Cat})$. Il revient au même d'en construire un entre
+$N(C)$ et $N(C^{\circ})$ dans $\mathrm{Ho}(\mathrm{sSet})$. C'est un
+isomorphisme de la catégorie localisée, non un foncteur de $C$ dans
+$C^{\circ}$.\footnote{La page ne dit pas comment Quillen le construit. Nous
+n'en disons pas plus qu'elle.} Son effet sur les systèmes locaux est le suivant.
+Un foncteur contravariant $F$ sur $C$, qui rend toute flèche inversible, devient
+le foncteur covariant qui a les mêmes valeurs sur les objets et $F(u)^{-1}$ sur
+une flèche $u$. Sur les groupoïdes fondamentaux, c'est l'isomorphisme évident
+$\pi_1(C) \to \pi_1(C^{\circ}) = \pi_1(C)^{\circ}$, $g \mapsto g^{-1}$.
+
+Il s'en déduit une interprétation faisceautique de la cohomologie d'un ensemble
+simplicial $X$ à coefficients dans un système local \emph{covariant} $F$. Cette
+cohomologie est classiquement définie par le complexe cosimplicial
+$C^{n}(F) = \prod_{x \in X_n} F(x)$. On passe au système local contravariant
+défini par $F$, on le regarde comme un faisceau sur $T(X)$, c'est-à-dire comme
+un objet de $(\mathrm{sSet})_{/X}$, et on prend sa cohomologie.\footnote{La
+frappe porte $\coprod_{x \in X_n}$ ; l'encre entoure le signe et demande en
+marge « $\prod$ ? ». Des cochaînes sont bien un produit, et nous écrivons
+$\prod$.} Pour un système de coefficients covariant non local, la page ne
+connaît pas d'interprétation faisceautique de la cohomologie classique. Elle
+n'en connaît pas non plus de l'homologie d'un système contravariant, ni,
+inversement, de sa cohomologie faisceautique en termes classiques.
+
+\emph{Les catégories dérivées de systèmes locaux.} Soit $u : C \to C'$ un
+homotopisme. Notons $D^{b}_{\mathrm{lc}}(C)$ la sous-catégorie triangulée de
+la catégorie dérivée bornée des faisceaux abéliens sur $\widehat{C}$ formée des
+complexes dont les faisceaux de cohomologie sont localement constants. Quillen
+montre que $u^{*} : D^{b}_{\mathrm{lc}}(C') \to D^{b}_{\mathrm{lc}}(C)$ est une
+équivalence, et réciproquement. L'énoncé vaut avec un anneau de base
+quelconque, supposé non nul pour la réciproque. La partie directe vaut aussi
+avec un anneau de coefficients constant tordu.
+
+Le tapuscrit conjecture ensuite (« je pense que ce résultat (facile) doit
+pouvoir se généraliser ») un énoncé pour les topos. Soit $f : X \to X'$ un
+morphisme de topos qui induit des isomorphismes en cohomologie pour tout
+faisceau localement constant sur $X'$, le cas non commutatif inclus. Supposons
+$X$ et $X'$ \emph{localement homotopiquement triviaux}. Cela veut dire que pour
+tout entier $n \geq 1$, tout objet $U$ a un recouvrement $(U_i \to U)$ tel que :
+a) tout système local et toute section sur $U$ deviennent constants sur les
+$U_i$ ; b) pour tout groupe abélien $G$, les $H^{j}(U, G) \to H^{j}(U_i, G)$
+sont nuls pour $1 \leq j \leq n$. Alors $f^{*} : D^{b}_{\mathrm{lc}}(X') \to
+D^{b}_{\mathrm{lc}}(X)$ serait une équivalence. Il en irait de même avec un
+système local d'anneaux sur $X'$, et $f$ induirait une équivalence entre
+coefficients locaux sur $X$ et sur $X'$.\footnote{« $X$ et $X'$ », « $\geq 1$ »
+sont ajoutés à l'encre, « de $X'$ » est biffé. La frappe de la fin de la page 34
+a été reprise à la machine : les mots « pleinement fidèle (resp.\ » y sont
+effacés, de sorte que « induit une équivalence » est la lecture la plus
+probable, non la seule. Dans la phrase sur les coefficients locaux, la page
+écrit $C$, $C'$ là où le contexte demande $X$, $X'$.} Une note à l'encre, en
+marge, précise la portée de la condition : elle « n'est typiquement \emph{pas}
+satisfaite par les schémas avec leur topologie étale (mais bien par variétés
+loc.\ noeth.\ avec top.\ Zariski) ».
+
+Le principe de démonstration proposé est le suivant. Un topos localement
+homotopiquement trivial est localement connexe et localement simplement
+connexe, d'où une bonne théorie des $\pi_0$ et $\pi_1$, qui sont ici discrets.
+On est ramené à un cas particulier du critère d'Artin et Mazur : un
+homomorphisme de groupes $G \to H$ est un isomorphisme s'il induit des
+bijections sur $H^{0}$ et $H^{1}$, cas non commutatif compris. La pleine
+fidélité se ramène, par la suite spectrale, aux $\mathrm{Ext}^{i}$ de
+coefficients locaux. Elle résulterait de deux faits : dans un topos localement
+homotopiquement trivial, les faisceaux abéliens localement constants sont
+stables par $\mathcal{E}\mathrm{xt}^{i}$, et $M \mapsto M_X$ commute aux
+$\mathrm{Ext}^{i}$. Pour $X$, $X'$ localement homotopiquement triviaux, trois
+conditions sur $f$ seraient alors équivalentes.
+\begin{itemize}
+  \item[a)] $f$ est un homotopisme : il induit un isomorphisme sur les $H^{i}$
+  pour tout système local sur $X'$, non nécessairement commutatif.
+  \item[b)] $f^{*} : D^{b}_{\mathrm{lc}}(X') \to D^{b}_{\mathrm{lc}}(X)$ est une
+  équivalence.
+  \item[a')] $f$ induit une équivalence entre systèmes locaux abéliens sur $X'$
+  et sur $X$, et des isomorphismes sur les $H^{i}$ correspondants.
+\end{itemize}
+La page ignore si l'on peut, dans a), se borner aux systèmes locaux
+commutatifs, et l'encre met un point d'interrogation. La réponse est
+non.\footnote{Remarque nôtre. Il existe des groupes acycliques non triviaux, par
+exemple le groupe de Higman à quatre générateurs. Pour un tel groupe $G$, le
+morphisme du topos $BG$ vers le point induit des isomorphismes sur la
+cohomologie de tout système local abélien du point. Mais ce n'est pas un
+homotopisme : $H^{1}(-, G)$ le distingue, et a') échoue. Le phénomène est celui
+que la construction « plus » de Quillen, postérieure à ces notes, met en
+œuvre.} L'équivalence de a) et b) motive une définition des types d'homotopie
+par la catégorie $D^{b}_{\mathrm{lc}}(X)$. On la munirait de la sous-catégorie
+pleine des systèmes locaux, du foncteur cohomologique à valeurs dans celle-ci et
+du produit tensoriel, ce qui fait sortir de $D^{b}$ vers $D^{-}$ : « redactor
+demerdetur ».\footnote{L'idée de décrire un type d'homotopie par des
+coefficients reviendra chez lui, sous une tout autre forme, dans « À la
+poursuite des champs » (1983). Nous n'allons pas plus loin.}
+
+\pagerange{36}{41}
+\subsection*{II. $n$-catégories, catégories $n$-uples, Gr-catégories (pages 36 à 41)}
+
+\emph{Catégories doubles.} Le tapuscrit appelle « bi-catégorie » une catégorie
+dans $(\mathrm{Cat})$. C'est la donnée d'une catégorie $C_0$, de foncteurs
+source et but $p_1, p_2 : C_1 \rightrightarrows C_0$, d'un foncteur unité $C_0
+\to C_1$ et d'une composition $\pi : C_1 \times_{C_0} C_1 \to C_1$, avec les
+axiomes habituels. On dit aujourd'hui \emph{catégorie double}.\footnote{Ce n'est
+pas une bicatégorie au sens de Bénabou (1967), c'est-à-dire une 2-catégorie
+faible : c'est la catégorie double d'Ehresmann (1963). Nous employons le nom
+moderne pour éviter le contresens. La page dit « un triple » pour une donnée à
+cinq termes, et ne mentionne pas le foncteur unité, que nous ajoutons.} On
+identifie $(\mathrm{Cat})$ à la sous-catégorie pleine de $(\mathrm{sSet})$
+formée des ensembles simpliciaux qui satisfont la condition d'exactitude
+« familière ». Il s'agit de transformer sommes amalgamées en produits fibrés :
+$X_n \simeq X_1 \times_{X_0} \cdots \times_{X_0} X_1$, ce qu'on appelle
+aujourd'hui la condition de Segal.\footnote{La page laisse la phrase en suspens
+: « des objets qui …. ». Nous la complétons par la condition qu'elle énonce
+elle-même une ligne plus bas. Le nom de Segal est postérieur.} De même, les
+catégories doubles s'identifient aux ensembles bisimpliciaux $(X_{ij})$ qui
+satisfont cette condition ligne par ligne et colonne par colonne. Les
+catégories triples s'identifient de même à des objets trisimpliciaux, et
+ainsi de suite.
+
+\emph{Exemple.} Pour une catégorie $C$, posons $C_0 = C$ et $C_1 =
+\mathrm{Fl}(C)$, la catégorie des flèches, avec les structures évidentes. Les
+composantes simpliciales supérieures sont les catégories $\mathrm{Fl}^{n}(C)$
+des suites de $n$ flèches. L'ensemble bisimplicial correspondant a pour
+composantes $\mathrm{Hom}([n] \times [m], C)$. Les objets de $X_{11}$ sont les
+carrés commutatifs de $C$, qu'on peut lire de deux manières comme morphismes de
+flèches. L'échange des lignes et des colonnes est une symétrie de la catégorie
+des catégories doubles. De même, le groupe symétrique $\mathfrak{S}_n$ opère
+sur la catégorie des catégories $n$-uples.
+
+Une \emph{2-catégorie} (stricte) est une catégorie double dont la catégorie
+d'objets $C_0$ est discrète. En termes bisimpliciaux, c'est un ensemble
+bisimplicial dont la première ligne est un ensemble simplicial constant. Il
+paraît qu'on a une interprétation analogue des $n$-catégories en termes
+d'ensembles $n$-simpliciaux. Le tapuscrit note de demander à Quillen le rapport
+entre les $m$-catégories dans $(n\text{-Cat})$ et les ensembles
+$(m+n)$-simpliciaux.\footnote{Paragraphe signalé par un double trait en marge.
+C'est la voie que prendront, pour les $n$-catégories faibles, Tamsamani et
+Simpson à la fin des années 1990, bien après ces notes.}
+
+\emph{Groupes dans $(\mathrm{Cat})$ et catégories de Picard.} Les groupes dans
+$(\mathrm{Cat})$ sont les groupes simpliciaux qui satisfont la condition de
+Segal. Par la correspondance de Dold--Kan (le « tapis de Dold »), les groupes
+\emph{abéliens} dans $(\mathrm{Cat})$ forment une catégorie équivalente à celle
+des complexes de chaînes de longueur 1 :
+\[
+0 \longleftarrow C_0 \xleftarrow{\ d\ } C_1 \longleftarrow 0 .
+\]
+Explicitons le groupe abélien dans $(\mathrm{Cat})$ associé à un tel complexe.
+On trouve la catégorie de Picard du complexe, que le tapuscrit appelle « “ma”
+construction chérie ». Ses objets sont les éléments de $C_0$, et ses flèches de
+$x$ vers $y$ sont les $z \in C_1$ tels que $dz = y - x$. On obtient ainsi, à
+isomorphisme près, tous les groupes abéliens de $(\mathrm{Cat})$.\footnote{La
+notion de catégorie de Picard est la sienne. Deligne en donnera l'exposé de
+référence en 1973 (SGA 4, exposé XVIII, § 1.4). On y trouve l'équivalence entre
+catégories de Picard strictement commutatives et complexes de longueur 1 à
+quasi-isomorphisme près.}
+
+Complément important : toute Gr-catégorie, c'est-à-dire toute catégorie
+monoïdale où objets et flèches sont inversibles, est équivalente à un vrai
+groupe dans $(\mathrm{Cat})$. Le tapuscrit disait « toute catégorie de Picard
+(resp.\ et commutative) … (resp.\ $(\mathrm{Cat})$-groupe commutatif) ».
+L'encre biffe les deux parenthèses, et explique en marge : une « cat.\ de
+Picard commut. » ne se réalise en général que par un groupe \emph{non
+commutatif} dans $(\mathrm{Cat})$.\footnote{La marge est bien fondée. Une
+catégorie de Picard symétrique dont la symétrie $c_{x,x}$ n'est pas l'identité
+ne peut pas être équivalente à un groupe abélien strict dans $(\mathrm{Cat})$.
+Seules les catégories de Picard strictement commutatives le sont. Le terme de
+Gr-catégorie, qu'on lit ici en 1968, est celui que reprendra la thèse de Hoàng
+Xuân Sính (1975), préparée sous sa direction. On dit aujourd'hui aussi
+2-groupes. La marge porte
+en outre un premier bloc de cinq lignes, barré et resté illisible.} Une
+insertion à l'encre ajoute ceci. Quand on passe aux classes d'équivalence de
+catégories de Picard, cela revient à travailler dans la catégorie
+\emph{dérivée} des complexes, dont les seuls invariants sont $H_0$ et $H_1$,
+autrement dit $\pi_0$ et $\pi_1$.\footnote{Pour les objets, c'est exact
+parce que $\mathrm{Ext}^{2}_{\mathbb{Z}} = 0$ : un complexe de longueur 1 est
+quasi-isomorphe à $H_0 \oplus H_1[1]$. Les morphismes voient encore
+$\mathrm{Ext}^{1}(H_0, H_1)$. « simplifie » et « Grab » sont des lectures
+incertaines de l'insertion.}
+
+Une note encadrée en tête de la page 38 se lit ainsi : « Attention : la
+catégorie $\mathrm{Hom}_{\mathrm{grab}}$, qui s'identifie à la catégorie définie
+par un $R\mathrm{Hom}_{\mathbb{Z}}(C_x, C'_x)$, ce point devant être élucidé !
+». Les « Grab » sont les groupes abéliens ; il s'agit des homomorphismes entre
+catégories de Picard associées à deux complexes $C_x$, $C'_x$. L'énoncé correct
+demande une troncature. Les foncteurs additifs de $P(C_x)$ dans $P(C'_x)$
+forment la catégorie de Picard associée à $\tau_{\leq 0}
+R\mathrm{Hom}(C_x, C'_x)$.\footnote{La page n'appelle cette note par aucun
+renvoi visible et ne définit pas $C_x$, $C'_x$. La troncature est notre
+précision : $R\mathrm{Hom}$ entre complexes de longueur 1 a de la cohomologie
+en trois degrés, et une catégorie de Picard n'en retient que deux. C'est sous
+cette forme que l'énoncé figure chez Deligne (SGA 4 XVIII).}
+
+On a ainsi une classification beaucoup plus restreinte que celle des
+H-espaces (resp.\ des H-espaces homotopiquement commutatifs) à homotopie près.
+La raison en est qu'on est plus exigeant, dans le cadre catégorique, sur
+l'associativité (resp.\ la commutativité). On ne demande pas seulement
+l'existence d'isomorphismes d'associativité, ce qui suffirait pour avoir un
+groupe dans $\mathrm{Ho}(\mathrm{Cat}) \simeq \mathrm{Ho}(\mathrm{sSet})$. On
+les suppose \emph{donnés}, avec des compatibilités, et c'est ce qui permet de
+se ramener à de vrais groupes dans $(\mathrm{Cat})$. L'encre biffe la suite,
+« resp.\ de vraie commutativité », pour la raison qu'on vient de dire.
+
+\emph{Le cran suivant.} On doit trouver une meilleure approximation, d'un cran,
+de la classification topologique. Il faut pour cela passer aux groupes
+(resp.\ groupes abéliens) dans $(2\text{-Cat})$, ou plus généralement aux
+« Gr-2-catégories » (resp.\ « Grab-2-catégories »). Deux opérations relient
+les crans. Une Grab-catégorie définit une Grab-2-catégorie, comme une catégorie
+définit une 2-catégorie : c'est l'analogue d'un « cosquelette tronqué ».
+Inversement, une Grab-2-catégorie définit une Grab-catégorie, celle des
+automorphismes de l'objet unité. Le tapuscrit y voit l'analogue du « tuage des
+groupes d'homotopie en dimension $\geq 1$ ».\footnote{Les deux signes $\geq$ de
+ce passage sont repassés à l'encre sur un signe frappé, et le « 1 » est
+retouché. Remarque nôtre : si l'on calcule les invariants, la seconde
+opération ressemble plutôt au passage à l'espace des lacets. Les $\pi_0$,
+$\pi_1$ de la Gr-catégorie des automorphismes de l'unité sont les $\pi_1$,
+$\pi_2$ de la Gr-2-catégorie de départ ; c'est un décalage plus qu'une
+troncature.} Pour la notion « grossière », l'idée de sa lettre à Verdier était
+la suivante. On doit trouver la même chose que les tronqués au cran 2 dans la
+catégorie \emph{homotopique} des H-espaces, c'est-à-dire ce qu'on en déduit en
+tuant les groupes d'homotopie en dimension $\geq 2$.\footnote{La lettre à
+Verdier n'est pas dans le dossier.}
+
+Le tapuscrit note de demander à Quillen si les objets-groupes et les objets
+pointés connexes de la catégorie homotopique forment des catégories
+équivalentes par le foncteur espace des lacets. Une encre différente répond en
+marge : « non, on a un foncteur pl.\ fidèle (?) mais pas essentiellement
+surjectif ». La non-surjectivité est juste. Le point d'interrogation est
+justifié : le foncteur des lacets n'est même pas fidèle.\footnote{Remarque
+nôtre. La classe $ab \in H^{4}(S^{2} \times S^{2}; \mathbb{Z})$, produit des
+deux générateurs, définit une application non homotope à zéro $S^{2} \times
+S^{2} \to K(\mathbb{Z}, 4)$. Sa bouclée est pourtant homotope à zéro, parce
+que la suspension cohomologique annule les produits. « pl.\ » et
+« essentiellement » sont des lectures incertaines.}
+
+\emph{Les vrais groupes abéliens dans $(2\text{-Cat})$.} L'approche de Quillen
+les identifie d'abord à des groupes abéliens dans la catégorie des catégories
+doubles. Ce sont donc des groupes abéliens bisimpliciaux particuliers,
+soumis à la condition de Segal sur chaque ligne et chaque colonne. Par la
+version bisimpliciale de Dold--Kan, ils équivalent aux bicomplexes de groupes
+abéliens nuls hors du carré $0 \leq i, j \leq 1$. La première ligne doit
+correspondre à un groupe simplicial constant ; elle se réduit donc à son terme
+de degré 0, et le bicomplexe devient\footnote{La frappe porte « La colonne que
+la première ligne correspond » ; le sens est celui d'une condition sur la
+première ligne. Les flèches du diagramme sont en partie tracées ou repassées à
+l'encre.}
+
+\begin{tikzcd}
+C_{00} & 0 \arrow[l] \\
+C_{10} \arrow[u] & C_{11} \arrow[l] \arrow[u]
+\end{tikzcd}
+
+Ces bicomplexes s'identifient aux complexes de chaînes de longueur 2,
+$C_{11} \to C_{10} \to C_{00}$. La catégorie des groupes abéliens dans
+$(2\text{-Cat})$ est donc équivalente à celle des complexes de longueur 2. La
+2-catégorie associée à un tel complexe est « mon interprétation chérie ». Il
+resterait à décrire, par un complexe $R\mathrm{Hom}$, la 2-Grab-catégorie des
+homomorphismes entre deux telles 2-Grab-catégories strictes.
+
+L'idée qui se dégage, et que Quillen, « on espère », va expliciter, est la
+suivante. Les groupes abéliens dans $(n\text{-Cat})$ devraient correspondre
+aux complexes de longueur $n$. On raisonnerait soit à isomorphisme près des deux
+côtés, soit à $n$-équivalence près d'un côté et dans la catégorie dérivée de
+l'autre. Cela doit pouvoir se préciser au moyen de $\mathrm{Hom}^{\bullet}$
+(resp.\ $R\mathrm{Hom}^{\bullet}$).\footnote{Pour des groupes abéliens
+\emph{stricts}, la catégorie dérivée est bien la bonne cible. Pour les
+versions faibles et symétriques, elle ne l'est plus : ce sont des spectres
+tronqués qui les classent, et non des complexes. La biffure « resp.\ de vraie
+commutativité » de la page 38 enregistre déjà ce phénomène au cran 1.}
+
+\emph{Les $K_n$ d'une catégorie monoïdale.} Soit $C$ une catégorie munie d'un
+produit tensoriel associatif, et éventuellement unitaire : un bifoncteur avec
+des isomorphismes d'associativité, mais sans inverses. On doit pouvoir lui
+associer une Gr-catégorie universelle, comme on associe à un monoïde son
+groupe symétrisé. On en tire des invariants $K_0(C)$ et $K_1(C)$. On suppose
+qu'on trouvera de même, pour tout $n$, une Gr-$n$-catégorie universelle où
+envoyer $C$ de façon compatible à $\otimes$. Ses invariants $\pi_n$ seraient
+par définition les $K_n(C)$. Un cas intéressant est celui d'une catégorie à
+produits finis, additive par exemple, où $\otimes$ est le produit. Mais pour
+une catégorie abélienne, il y a une notion plus adéquate du $K_0$, qui devrait
+correspondre à une meilleure notion des $K_i$, « inspirée du tapis de Roos ».
+C'est sans doute en termes de « vraies » catégories triangulées qu'il faudra
+poser les définitions.\footnote{Le crochet ouvert avant « Mais », tracé à
+l'encre sur une parenthèse tapée, se referme au haut de la page 41. Nous
+n'identifions pas le « tapis de Roos ». Quillen définira les $K_n$ supérieurs
+en 1970--1972, par la construction « plus » puis par la construction $Q$
+(publiée en 1973). Pour une catégorie monoïdale symétrique, ce sera par
+complétion en groupe (Grayson, 1976, d'après Quillen). Schlichting (2002)
+montrera que la $K$-théorie n'est pas un invariant de la catégorie
+triangulée seule, ce qui donne du poids aux guillemets de « vraies ».}
+
+Peut-être Quillen a-t-il une définition simpliciale plus directe du H-espace
+qui devrait correspondre à $C$, sans passer par les $n$-catégories. En marge, à
+l'encre : « oui ».\footnote{En effet, c'est par un espace que Quillen définira
+les $K_n$. La marge n'est pas datée.} Ce n'est certainement pas en général le
+nerf $N(C)$. Une catégorie additive est contractile, puisque le foncteur
+identique est homotope au foncteur nul : il suffit d'une transformation
+naturelle de l'un à l'autre. Pourtant, lorsque $C$ est une Gr-catégorie, le
+nerf naïf est le bon. On trouve en effet des $\pi_0$ et $\pi_1$ qui sont aussi
+ceux de $C$ au sens des catégories sans Gr-structure. Une note à l'encre au pied
+de la page 41 ajoute : « A expliquer : pour des Gr-$n$-catégories, les $\pi_i$
+au sens simplicial sont aussi les $\pi_i$ au sens Gr-$n$-catégories, savoir les
+objets à isomorphisme près dans divers $\mathrm{Hom}(1,1)$ … ».\footnote{La
+seconde moitié de cette note est barrée. Elle parlait d'une interprétation de
+l'opération « lacets » en termes du décalage géométrique sur les
+$n$-catégories, et le nom de l'opération est incertain.}
+
+\pagerange{43}{48}
+\subsection*{III. Point de vue « motivique » en théorie du cobordisme (pages 43 à 48)}
+
+\emph{Le problème universel.} Soit $\mathcal{V}$ la catégorie des variétés
+différentiables compactes sans bord, non nécessairement orientables. Ses
+morphismes sont les classes d'homotopie d'applications continues.\footnote{La
+page ne dit pas « compactes ». Nous l'ajoutons : les images directes, la
+composition des correspondances et la surjectivité de Thom invoquée plus bas
+l'exigent. Sur la \emph{photocopie} (page 12), et non sur l'exemplaire annoté,
+une note en marge demande justement « (compactes ?) ». La généralisation de la
+page 48 lève ensuite l'hypothèse.} Soit $\mathcal{E}$ une catégorie. On
+s'intéresse aux couples $(F_\bullet, F^\bullet)$ formés d'un foncteur covariant
+$F_\bullet : \mathcal{V} \to \mathcal{E}$ et d'un foncteur contravariant
+$F^\bullet : \mathcal{V}^{\circ} \to \mathcal{E}$, qui ont les mêmes valeurs sur
+les objets. On leur impose le changement de base pour tout carré cartésien
+d'applications différentiables où $f$ et $g$ sont transverses :
+
+\begin{tikzcd}
+ & X' \arrow[dl, "g'"'] \arrow[dr, "f'"] & \\
+X \arrow[dr, "f"'] & & Y' \arrow[dl, "g"] \\
+ & Y &
+\end{tikzcd}
+
+\[
+g^{\bullet} f_{\bullet} = f'_{\bullet}\, g'^{\bullet}
+\qquad (f_\bullet = F_\bullet(f),\ f^\bullet = F^\bullet(f)).
+\]
+La question est de trouver un couple universel. Quillen prouve que la
+construction suivante en donne un.\footnote{Ce cadre, deux fonctorialités liées
+par le changement de base transverse, est celui que Quillen rendra célèbre en
+1971 pour le cobordisme complexe (« Elementary proofs of some results of
+cobordism theory using Steenrod operations »). On le retrouve dans les
+théories bivariantes de Fulton et MacPherson (1981) et dans le cobordisme
+algébrique de Levine et Morel (2007). Tout cela est postérieur à ces notes.}
+
+\emph{L'anneau $B(X)$.} Pour $X$ dans $\mathcal{V}$, soit $B(X)$ l'ensemble des
+classes de variétés $Z \to X$ au-dessus de $X$ pour la relation de cobordisme.
+Deux variétés $Z' \to X$ et $Z'' \to X$ sont cobordantes s'il existe une
+variété à bord $W$ et $W \to X$ tels que $\partial W = Z' \sqcup Z''$, les deux
+applications étant induites. La somme est la réunion disjointe ; c'est une loi
+de groupe où tout élément est d'ordre 2. Le produit est le produit fibré, après
+qu'on a rendu les deux applications transverses par le théorème de Thom.
+L'anneau est gradué par la dimension relative : $B_d(X)$ est formé des $Z \to
+X$ avec $\dim Z - \dim X = d$. Pour $f : X \to Y$, l'image directe $f_\bullet :
+B(X) \to B(Y)$ est la composition avec $f$, et l'image inverse $f^\bullet :
+B(Y) \to B(X)$ est le produit fibré transverse. $B$ est ainsi un foncteur en
+anneaux gradués contravariant, et un foncteur en groupes covariant. La formule
+de changement de base entraîne la formule de projection
+habituelle.\footnote{La graduation et la mention de la formule de projection
+sont des ajouts à l'encre. En termes d'aujourd'hui, $B_d(X)$ est le groupe de
+cobordisme non orienté $MO^{-d}(X)$ d'Atiyah (1961). Par la dualité de
+Poincaré--Atiyah, c'est aussi le bordisme $\mathfrak{N}_{n+d}(X)$ de Thom, si
+$X$ est de dimension $n$. La page dit « anneau de bordisme ».}
+
+\emph{La catégorie $\mathbf{B}$.} Les constructions usuelles de la théorie des
+correspondances donnent une catégorie $\mathbf{B}$. Ses objets sont ceux de
+$\mathcal{V}$, et ses morphismes sont donnés par
+\[
+\mathrm{Hom}_{\mathbf{B}}(X, Y) = B(X \times Y),
+\qquad
+\beta \circ \alpha = p_{13\bullet}\big(p_{12}^{\bullet}\alpha \cdot p_{23}^{\bullet}\beta\big),
+\]
+où les $p_{ij}$ sont les projections de $X \times Y \times Z$.\footnote{La page
+renvoie aux « constructions bien connues » ; la formule de composition est la
+nôtre. Elle demande que $Y$ soit compact.} La symétrie $B(X \times Y) \simeq
+B(Y \times X)$ donne un isomorphisme canonique $\mathbf{B} \simeq
+\mathbf{B}^{\circ}$, qui est l'identité sur les objets. Le foncteur $F_\bullet :
+\mathcal{V} \to \mathbf{B}$ est l'identité sur les objets et envoie une flèche
+sur son graphe. Composé avec la symétrie, il donne $F^\bullet :
+\mathcal{V}^{\circ} \to \mathbf{B}$.\footnote{La frappe écrit « $F^\bullet : C
+\to \mathbf{B}$ », sans l'opposée qu'appelle un foncteur contravariant, et
+l'encre n'ajoute rien.} Le couple satisfait aux conditions voulues ; la page
+note que cela devrait être formalisé pour des correspondances générales.
+
+Reste la propriété universelle. Soit $(F'_\bullet, F'^\bullet)$ un couple à
+valeurs dans une catégorie $\mathbf{B}'$, et notons $X' = F'(X)$. Il faut
+définir des applications $B(X \times Y) \to \mathrm{Hom}_{\mathbf{B}'}(X',
+Y')$. On envoie $Z \to X \times Y$, de composantes $p$ et $q$, sur
+$F'_\bullet(q) \circ F'^\bullet(p)$. Il faut voir que le résultat ne dépend que
+de la classe de cobordisme de $Z$. Soit $T \to X \times Y$ un cobordisme,
+avec $\partial T = Z_0 \sqcup Z_1$. En « doublant » $T$, on obtient une variété
+$W$ au-dessus de $S^{1}$, transverse au-dessus de deux points $s_0$, $s_1$ dont
+les fibres sont $Z_0$ et $Z_1$, et l'application vers $X \times Y$ se
+prolonge à $W$. On est ramené à montrer que le composé $F'_\bullet(\alpha_i)
+\circ F'^\bullet(\alpha_i)$, endomorphisme de $W'$, ne dépend pas de $i$, où
+$\alpha_i : Z_i \hookrightarrow W$ est l'inclusion. Soit $p : W \to S^{1}$.
+Considérons le carré cartésien d'inclusions, transverse pour $s$ valeur
+régulière :
+
+\begin{tikzcd}
+W_{s} \arrow[r, "\alpha_{s}"] \arrow[d, "\alpha_{s}"'] & W \arrow[d, "{\Gamma = (p, \mathrm{id}_{W})}"] \\
+W \arrow[r, "i_{s}"'] & S^{1} \times W
+\end{tikzcd}
+
+Le changement de base donne
+\[
+\alpha_{s\bullet}\,\alpha_s^{\bullet} = \Gamma^{\bullet}\, i_{s\bullet},
+\]
+et le second membre ne dépend pas de $s$, puisque la classe d'homotopie de $i_s$
+n'en dépend pas. La page conclut : « Le reste est sans doute
+l'AQT ».\footnote{La page écrit $X$ pour notre $W$, qui est son $\overline{T}'$.
+Elle écrit la relation $\alpha_s^{*}\alpha_{s*} = \Gamma^{*} i_{s*}$. Lue comme
+une composition, elle ne se compose pas, car les deux membres agissent sur des
+objets différents ; nous écrivons l'ordre qui convient. Les flèches du carré,
+les $\alpha$, les astérisques et l'étiquette $\Gamma = (p, \mathrm{id})$ sont
+portés à l'encre dans les blancs de la frappe. Nous ne savons pas résoudre
+l'abréviation « AQT ».}
+
+\emph{La structure des $B_\bullet(X)$.} Ce sont des algèbres graduées sur
+$\Lambda = B_\bullet(\mathrm{pt})$. $\Lambda$ est à degrés positifs et réduit à
+$\mathbb{F}_2$ en degré 0 : c'est l'anneau de bordisme non orienté
+$\mathfrak{N}_*$ de Thom. C'est une algèbre de polynômes
+$\mathbb{F}_2[x_i]$, avec un générateur $x_i$ de degré $i$ pour chaque entier
+$i \geq 1$ qui n'est pas de la forme $2^{\nu} - 1$.\footnote{La description des
+générateurs est un ajout à l'encre, appelé par un signe en marge ; « entier
+$\geq 1$ » y est d'une lecture incertaine. Elle est exacte.}
+
+On a un homomorphisme évident d'anneaux gradués $B_\bullet(X) \to
+H^{\bullet}(X)$. Il envoie $Z \to X$ sur l'image de $1 \in H^{0}(Z)$ par
+l'homomorphisme de Gysin, et envoie $B_{-k}$ dans $H^{k}$ ; il est donc nul en
+degrés $> 0$. Il est surjectif par Thom : toute classe provient d'une variété
+compacte.\footnote{$H^{\bullet}(X)$ est la cohomologie à coefficients dans
+$\mathbb{F}_2$. La surjectivité combine le théorème de représentabilité de Thom
+pour l'homologie modulo 2 et la dualité de Poincaré, d'où, encore,
+l'hypothèse de compacité. Sur la \emph{photocopie} (page 14), et non sur
+l'exemplaire annoté, une note précise « NB $H^{*}(X)$ ($= H^{*}(X,
+\mathbb{F}_2)$) ».} Une note à l'encre ajoute : « en fait $H^{\bullet}(X)
+\simeq B_\bullet(X)/\Lambda^{+}B_\bullet(X)$ », et c'est exact.
+
+On prouve même qu'il existe un relèvement fonctoriel $s : H^{\bullet}(X) \to
+B_\bullet(X)$, tel que l'homomorphisme induit
+\[
+H^{\bullet}(X) \otimes_{\mathbb{F}_2} \Lambda \xrightarrow{\ \sim\ } B_\bullet(X)
+\]
+soit un isomorphisme de $\Lambda$-modules. Le tapuscrit ajoute que ce sera
+vrai pour tout relèvement pris individuellement, et c'est exact pour tout
+relèvement homogène.\footnote{Justification (nôtre). $B_\bullet(X)$ est un
+$\Lambda$-module libre (Conner et Floyd, 1964), de quotient $H^{\bullet}(X)$
+modulo $\Lambda^{+}$. Par le lemme de Nakayama gradué, les images d'une base
+homogène engendrent, et un épimorphisme entre modules libres de même rang
+gradué, de dimension finie en chaque degré, est un isomorphisme.} Le
+tapuscrit disait le relèvement « compatible avec multiplication ». L'encre
+écrit au-dessus « il est douteux qu'il soit ». Elle transforme aussi la seconde
+condition en question : « Quillen ignore si » le relèvement est compatible avec
+les homomorphismes de Gysin.\footnote{Les lettres a) et b) et le « et » sont
+biffés à la main, et la seconde clause est mise entre crochets à l'encre. Ces
+deux questions, multiplicativité et compatibilité aux images directes, sont
+exactement celles que tranchera la note de Quillen de 1969, « On the formal
+group laws of unoriented and complex cobordism theory ». La loi de groupe
+formel du cobordisme non orienté y est universelle parmi les lois $F$ sur les
+$\mathbb{F}_2$-algèbres telles que $F(x,x) = 0$. Toute telle loi est isomorphe
+à la loi additive, mais n'est pas égale à elle, et c'est cet écart qui
+gouverne la compatibilité d'un relèvement multiplicatif aux images de Gysin.
+Une formule de Riemann--Roch en tient lieu. Ces notes du 10 septembre 1968 ne
+pouvaient pas le savoir, et nous ne leur prêtons rien de ce qui précède.}
+
+\emph{Modules et enveloppe de Karoubi.} Le foncteur $X \mapsto B_\bullet(X)$
+est pleinement fidèle, de $\mathbf{B}$ dans la catégorie des
+$\Lambda$-modules gradués libres de type fini. Les modules obtenus ont leurs
+générateurs en degrés $\leq 0$. Pour $X$ connexe, il y a un seul générateur de
+degré 0, et ils satisfont la dualité de Poincaré.\footnote{La pleine fidélité
+résulte de l'isomorphisme précédent, de la formule de Künneth et de la dualité
+de Poincaré ; la page ne la détaille pas.} Passons à l'enveloppe
+pseudo-abélienne $\widetilde{\mathbf{B}}$ de $\mathbf{B}$, c'est-à-dire à son
+enveloppe de Karoubi, puisque $\mathbf{B}$ est déjà additive. On obtient tous
+les $\Lambda$-modules gradués libres de type fini à générateurs en degrés $\leq
+0$. C'est une catégorie additive et karoubienne, munie d'un $\otimes$ induit par
+le produit des variétés. Elle a toutes les vertus, sauf d'être abélienne et
+d'avoir des $\mathrm{Hom}$ internes.\footnote{La page dit « catégorie
+quasi-abélienne », au sens de pseudo-abélienne. Ce n'est pas la catégorie
+quasi-abélienne au sens moderne (Schneiders, 1999), notion toute différente.
+Le tilde de $\widetilde{\mathbf{B}}$ est à l'encre. Sur la \emph{photocopie}
+(pages 14 et 15), et non sur l'exemplaire annoté, deux notes le disent en
+toutes lettres : « i.e.\ l'enveloppe “karoubienne” » et « quasi-abélienne $=$
+karoubienne $+$ additive ».}
+
+\emph{L'objet $\Lambda(-1)$.} Pour obtenir les $\mathrm{Hom}$ internes, on peut
+paraphraser la construction des motifs. Soit $p : S^{1} \to e$ l'application du
+cercle sur un point. Le morphisme $p^{\bullet} : e \to S^{1}$ de $\mathbf{B}$
+est scindé par le choix d'un point de $S^{1}$. On pose
+\[
+\Lambda(-1) = \mathrm{coker}\big(p^{\bullet} : e \to S^{1}\big)
+\ \in\ \widetilde{\mathbf{B}},
+\qquad
+B_\bullet(S^{1}) = \Lambda \oplus \Lambda(-1).
+\]
+C'est un module libre sur un générateur de degré $-1$, donc un objet de poids
+1, le poids étant le degré des générateurs changé de signe.\footnote{La frappe
+écrit $S$ pour le cercle, et « $\Lambda(-1)$ » est ajouté à l'encre. Le
+scindage, qui fait exister le conoyau dans l'enveloppe karoubienne, est notre
+précision. C'est l'analogue de la décomposition du motif de la droite
+projective en l'unité et le motif de Lefschetz.} Le foncteur $M \mapsto M(-1) =
+M \otimes \Lambda(-1)$ est pleinement fidèle. Une construction formelle
+standard permet donc de rendre $\Lambda(-1)$ inversible. Dans la catégorie
+obtenue, les $\mathrm{Hom}$ internes existent et valent $\check{X} \otimes Y$.
+On y trouve \emph{tous} les $\Lambda$-modules gradués libres de type fini.
+
+Cette catégorie n'est pas abélienne, puisque $\Lambda$ n'est pas un corps. On
+s'attend à ce que la catégorie abélienne engendrée soit celle des
+$\Lambda$-modules gradués de présentation finie. Cette catégorie est bien
+abélienne, quoique $\Lambda$ ne soit pas noethérien. $\Lambda$ est en effet
+limite inductive d'anneaux de polynômes en un nombre fini de variables, à
+morphismes de transition plats ; il est donc cohérent.\footnote{Le tapuscrit
+demandait si $\Lambda$ était noethérien, et si le nombre de générateurs était
+fini. La question est biffée, et l'encre répond par la phrase que nous
+rendons. « de type » est corrigé en « de présentation » à l'encre. Le « lim »
+de l'encre est souligné d'un trait qui peut être la flèche d'une limite
+inductive. Le terme d'anneau cohérent est le nôtre.}
+
+\emph{L'analogie avec les motifs.} Cette construction ressemble à une théorie
+des motifs où l'on n'aurait pas passé à l'équivalence homologique des cycles,
+mais gardé l'équivalence rationnelle, bien trop fine à beaucoup
+d'égards.\footnote{On parle aujourd'hui de motifs de Chow, dans le cadre exposé
+par Manin en 1968.} On pourrait poser le même problème universel en prenant
+l'équivalence homologique des morphismes, via le graphe, au lieu de
+l'équivalence homotopique. Un passage biffé en tirait une conclusion
+décevante. La catégorie solution aurait pour flèches toutes les correspondances
+cohomologiques, et donnerait, après inversion de $\mathbb{F}_2(-1)$, tous les
+espaces vectoriels gradués de dimension finie sur $\mathbb{F}_2 $ : « un peu
+trop trivial ».\footnote{La dernière ligne de la page 46 et les sept premières
+de la page 47 sont barrées.}
+
+\emph{La catégorie $\mathbf{S}$ et le groupe de Steenrod.} Pour trouver une
+catégorie universelle, on associe à $X$ l'ensemble $S(X) \subset
+H^{\bullet}(X)$ des classes de sous-variétés de $X$, modulo équivalence
+homologique. On prouve, par un théorème de Thom dont il va être question, que
+c'est un sous-anneau. Par le même théorème, les $S(X \times Y)$ sont stables par
+composition des correspondances cohomologiques. Cela ne semble pas trivial,
+puisque les $S(X)$ ne sont pas stables par Gysin. D'où une catégorie additive
+$\mathbf{S}$, dont les objets sont les variétés et les flèches les $S(X \times
+Y)$. « Il semble qu'elle doive jouer le rôle universel que j'ai envisagé plus
+haut. »
+
+Pour en donner une interprétation algébrique, considérons l'algèbre de
+Steenrod $\mathcal{A}$ des opérations cohomologiques stables modulo 2. Elle est
+graduée, et munie d'une diagonale associative et unitaire, anticommutative,
+c'est-à-dire commutative (on est en caractéristique 2). Son dual gradué
+$\mathcal{A}_*$ est une algèbre commutative, avec une diagonale associative et
+unitaire, et réduite à $\mathbb{F}_2$ en degré 0. C'est donc l'anneau d'un
+schéma en groupes affine $G$ sur $\mathbb{F}_2$. La page l'identifie au foncteur
+des $\otimes$-automorphismes additifs de $H^{\bullet}$ sur $\mathcal{V}$ qui
+opèrent trivialement sur $H^{1}(S^{1})$.\footnote{« i.e.\ commutative (car.\ 2
+!) », « graduée anticommutative donc » et « additifs » sont frappés en
+interligne. La définition tapée de l'algèbre des opérations est barrée. La
+restriction « qui opèrent trivialement sur $H^{1}(S^{1})$ » est à l'encre, et
+l'exposant 1 est incertain. C'est elle qui écarte les automorphismes de
+graduation. Aujourd'hui, $\mathcal{A}_* = \mathbb{F}_2[\xi_1, \xi_2, \ldots]$
+(Milnor, 1958), et $G(R)$ est le groupe, pour la composition, des séries $x +
+\sum a_i x^{2^{i}}$ : les automorphismes stricts du groupe formel additif.}
+
+Le tapuscrit énonce alors, comme « le théorème de Thom », qu'un $x \in
+H^{\bullet}(X)$ est dans $S(X)$ si et seulement s'il est fixe par $G$,
+c'est-à-dire si $\mathcal{A}^{+} x = 0$. Il demande aussitôt : « Pourquoi cette
+condition est-elle déjà nécessaire ? ». Nous rapportons cet énoncé sous réserve.
+Lu avec l'action usuelle des carrés de Steenrod sur la cohomologie, il est en
+défaut.\footnote{Remarque nôtre. Une droite $\mathbb{RP}^{1} \subset
+\mathbb{RP}^{2}$ est une sous-variété, de classe le générateur $a \in
+H^{1}(\mathbb{RP}^{2})$, et $\mathrm{Sq}^{1}a = a^{2} \neq 0$. La nécessité
+échoue donc, comme la page le soupçonne. L'énoncé doit viser une autre action,
+par exemple sur l'homologie ou tordue par les classes de Wu, que la page ne
+permet pas de restituer. Ce qui en dépend ci-dessous est rapporté sous la
+même réserve.} Sous cette réserve, le foncteur $H^{\bullet}$, de
+$\mathbf{S}$ vers les représentations de $G$ dans des espaces vectoriels sur
+$\mathbb{F}_2$, serait pleinement fidèle. Son enveloppe pseudo-abélienne
+serait une sous-catégorie pleine des représentations de $G$. Il est douteux
+qu'elle soit abélienne, et plus encore qu'elle contienne toutes les
+représentations de dimension finie.
+
+$G$ est prolisse, et, « d'après Quillen », pro-unipotent. Une note à l'encre en
+marge répond « oui, car son anneau affine est une algèbre de polynômes à une
+infinité d'indéterminées, réunion d'algèbres de polynômes » en un nombre fini
+d'indéterminées, stables par $\Delta$.\footnote{La fin de la note est en partie
+illisible. Le « car » justifie la prolissité, par les sous-algèbres
+$\mathbb{F}_2[\xi_1, \ldots, \xi_n]$ stables par la diagonale. La
+pro-unipotence vient de ce que l'algèbre de Hopf est graduée connexe, réduite à
+$\mathbb{F}_2$ en degré 0.} Ici $G$ joue le rôle d'un \emph{groupe de Galois
+motivique}. Contrairement à la situation familière, il est fortement non
+réductif, et son corps de définition est $\mathbb{F}_2$, non
+$\mathbb{Q}$.\footnote{L'expression « groupe de Galois motivique » est sur la
+page, en 1968. Le formalisme tannakien qui lui donne son sens précis sera
+publié par Saavedra Rivano en 1972. Nous ne tirons de cette rencontre aucune
+conclusion de priorité.}
+
+\emph{Orientations.} Quillen généralise la construction de $\mathbf{B}$ de deux
+façons. D'abord aux variétés non nécessairement compactes, $f_\bullet$ n'étant
+alors défini que pour $f$ propre. Ensuite à une condition d'orientation stable
+sur les \emph{morphismes}, donnée par un morphisme $H \to BO(\infty)$, où $H$
+est un H-espace, dont la page se demande s'il est commutatif, associatif et
+unitaire. Une orientation de $f : X \to Y$ est un relèvement homotopique à $H$
+de l'application $X \to BO$ qui classe $T_X - f^{\bullet}T_Y$. Les morphismes
+$\mathrm{Hom}_{\mathbf{B}^{H}}(X, Y)$ sont les classes de diagrammes $X
+\leftarrow Z \to Y$ de morphismes orientés, le second propre, modulo les bords.
+Comme ensemble, cela se décrit par la variété $X \times Y$ munie de la famille
+des fermés propres sur $Y$.\footnote{La page note $H(X,Y)$ ces ensembles de
+morphismes, avec la même lettre que l'H-espace ; nous changeons la notation.
+Pour $H = BO$ on retrouve $\mathbf{B}$. Pour $H = BU$, on obtient le
+cobordisme complexe $MU$, celui où Quillen trouvera en 1969 la loi de groupe
+formel universelle. Ce sont les $(B,f)$-structures de Lashof (1963).} Une note à
+l'encre au pied de la page 48 ajoute : « Les $B^{H}_m(X)$ ($X$ compact de dim.\
+$n$) peuvent se décrire homotopiquement à la Thom, comme les groupes
+d'homotopie stables d'espaces $\mathrm{Hom}(X, MH(N - m))$ ». C'est la
+construction de Pontryagin--Thom, $MH$ désignant l'espace de Thom associé à
+$H$.\footnote{L'indexation est celle de la page, qui ne l'explique pas. La
+note se termine par « - - - - - ».}
+
+\pagerange{2}{17}
+\section*{La photocopie et ses notes propres (pages 2 à 17)}
+
+La photocopie des pages 2 à 17 reproduit en noir l'exemplaire annoté, encre
+comprise. Elle a donc le même texte et la même couche manuscrite que les pages
+32 à 48. Elle porte en outre cinq notes qui ne sont pas sur l'exemplaire annoté.
+On les a rencontrées en note dans la troisième partie :
+\begin{itemize}
+  \item page 12, en regard des « variétés différentiables » : « (compactes ?)
+  », qui est l'hypothèse que nous avons dû ajouter ;
+  \item page 14 : « NB $H^{*}(X)$ ($= H^{*}(X, \mathbb{F}_2)$) », qui fixe
+  les coefficients ;
+  \item page 14, en regard de la « catégorie quasi-abélienne » : « i.e.\
+  l'enveloppe “karoubienne” » ;
+  \item page 15 : « quasi-abélienne $=$ karoubienne $+$ additive » ;
+  \item page 17, au pied de la dernière page : « cf exposé Karoubi à Bourbaki !
+  ».
+\end{itemize}
+Les trois premières précisent des hypothèses que le texte laisse implicites.
+Les deux suivantes traduisent le vocabulaire du tapuscrit dans celui qui
+s'imposera. La dernière pointe, selon toute vraisemblance, vers l'exposé de
+Karoubi au Séminaire Bourbaki de 1971-1972, « Cobordisme et groupes formels
+(d'après D. Quillen et T. tom Dieck) ». Il rend compte des résultats de Quillen
+sur le cobordisme et les lois de groupes formels, ceux-là mêmes qui répondent
+aux questions de la page 45. Si c'est bien cet exposé, les notes propres à la
+photocopie lui sont postérieures. C'est une
+inférence, non une date lue ; la datation du dossier reste celle de
+l'inventaire.
+
+\pagerange{50}{68}
+\section*{Les pièces de Quillen (pages 19, 50 à 68)}
+
+Trois pièces sont de Quillen lui-même. Elles ne sont pas transcrites, faute de
+porter autre chose que ce que Quillen a publié ou diffusé.
+\begin{itemize}
+  \item \emph{Page 19} : la liste dactylographiée « Publications of Daniel
+  Quillen », onze titres, de 1966 à « to appear ». Elle ne porte aucune
+  annotation.
+  \item \emph{Pages 50 à 55} : le tiré à part « On the Representation of
+  Hermitian Forms as Sums of Squares », Inventiones math. 5 (1968), 237--242.
+  Il ne porte aucune marque de main.
+  \item \emph{Pages 57 à 68} : le tapuscrit anglais « On a conjecture of
+  Adams », reproduit à l'alcool, ses pages 1 à 12, avec l'écriture de Quillen
+  reproduite par la duplication. Sa seule intervention étrangère est à la page
+  58, d'une encre plus foncée. La phrase porte sur l'application canonique $F :
+  E \to E^{(p)}$ : elle est « of (inseparable) degree $p$ on each fiber ». On
+  a mis $\dim E$ en exposant de $p$, et le degré devient $p^{\dim E}$, ce qui
+  est juste : le Frobenius relatif d'un fibré vectoriel de rang $r$ est de
+  degré $p^{r}$.\footnote{La main n'est pas identifiée. Les pages 61 à 68 ne
+  portent rien de tel, et ne sont pas transcrites.}
+\end{itemize}
+
+\end{document}
