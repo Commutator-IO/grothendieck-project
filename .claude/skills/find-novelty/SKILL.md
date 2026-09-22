@@ -5,7 +5,7 @@ description: Reads a folder's modernised reading and its transcriptions and prop
 
 # Looking for what is not in the literature
 
-**Runs on the model that wrote the folder's modernised reading** — Fable 5.1
+**Runs on the model that wrote the folder's modernised reading** — Opus 5.5
 or Opus 5, whichever that file's `% Pass:` header names, and on nothing else.
 The frontmatter used to pin Opus 5, when every reading was made on it; the pin
 went on 2026-09-03 with those of `/modernize-grothendieck` and

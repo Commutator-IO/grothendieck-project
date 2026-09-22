@@ -6,13 +6,15 @@ description: Produces the modernised reading of an already-transcribed folder of
 # The modernised reading of a folder
 
 
-**Runs on Fable 5.1 or Opus 5, and on nothing else.** The frontmatter used to
-pin Opus 5, which made the choice automatic; the pin is gone since 2026-09-03,
-when Fable 5.1 was admitted, and what replaces it is a check you make yourself
-before reading a line of the transcription:
+**Runs on Opus 5.5 or Opus 5, and on nothing else.** The frontmatter used to
+pin Opus 5, which made the choice automatic; the pin is gone since 2026-09-03.
+Fable 5.1 was admitted from then until 2026-09-22 and is no longer; the
+readings it produced stay as they are, and their headers say so. What replaces
+the pin is a check you make yourself before reading a line of the
+transcription:
 
-- **Fable 5.1 (`claude-fable-5-1`)** — permitted, and the default for a
-  session already running on it.
+- **Opus 5.5 (`claude-opus-5-5`)** — permitted since 2026-09-22, and the
+  default; the successor to Opus 5.
 - **Opus 5 (`claude-opus-5`)** — permitted; what every reading in the
   repository before 2026-09-03 was produced with.
 - **Anything else** — stop, say which model the session is on, and do not
@@ -23,7 +25,7 @@ One thing the pin used to carry has to be said plainly now that it is gone.
 The standard this edition is held to — correct as it stands, with the four
 failure modes checked — is a reasoning standard, and folder 115's reading is
 what it was calibrated against. That reading was made on Opus 5, and its
-header says so. A reading made on Fable 5.1 is held to the same standard but
+header says so. A reading made on Opus 5.5 is held to the same standard but
 is **not measured against that reference**: the two models were never
 compared on this task, and nothing in this repository says how they differ.
 The header records which one ran, and that is the only claim the file makes
@@ -254,7 +256,7 @@ and the folder's metadata:
   the folder.
 
 Then the pass header comment, naming the model and date, in the form the
-existing files use — `% Pass: Fable 5.1 (claude-fable-5-1), <date> — first
+existing files use — `% Pass: Opus 5.5 (claude-opus-5-5), <date> — first
 pass, unchecked against the pages by a human.` — with the model that actually
 ran, never the one a reference reading was made on. If the session is on a
 model the list above does not admit, stop rather than write a header for it.

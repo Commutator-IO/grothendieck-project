@@ -5,7 +5,7 @@ description: Writes or refreshes a folder's modern English keywords — the \key
 
 # Tagging a folder with its modern vocabulary
 
-**Runs on the model that wrote the folder's modernised reading** — Fable 5.1
+**Runs on the model that wrote the folder's modernised reading** — Opus 5.5
 or Opus 5, whichever the reading's own `% Pass:` header names, and on nothing
 else. The frontmatter used to pin Opus 5, when every reading was made on it;
 the pin went on 2026-09-03 with `/modernize-grothendieck`'s, and what replaces
