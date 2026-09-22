@@ -1,0 +1,957 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 161-4, batch 1 (pages 1-20).
+% Established from the facsimile archives/batches/161-4/batch-01.pdf (a mirror of
+% https://grothendieck.umontpellier.fr/161-4.pdf), per the skill
+% transcribe-grothendieck. The batch file carries no cover sheet: PDF page N is
+% archivists' page N, as the pencilled numbers bottom-left confirm.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-09-22 — first pass, unchecked against the pages by a human.
+%
+% What the batch is.
+%   1      The folder's jacket, its tab inscribed in pencil « Introduction à
+%          Géom. Alg. » — no \page; the words head the file, with a \note.
+%   2-6    A run he paginates 1-5 (archivists' p. N = his p. N-1), blue ink:
+%          faithfully flat descent. Flat / faithfully flat algebras; the
+%          going-down and closure theorems for flat morphisms; the topology of
+%          S as quotient of that of S' for f fpqc; descent of properties of
+%          morphisms (a long checklist at the foot of p. 4); effective descent
+%          of quasi-coherent modules, of subschemes, of morphisms and of affine
+%          schemes; descent of ampleness; the NB that projective and
+%          quasi-projective are the only properties not descended. Ends on
+%          « (5) Questions d'effectivité de données de descente » — nothing more.
+%   7-9    Loose sheets in the same hand and ink: radicial morphisms and
+%          universal homeomorphisms; quasi-affine schemes and morphisms, with a
+%          boxed implication table (imm. fermée => fini => entier => affine
+%          ...); ample invertible sheaves (margin: EGA II 4.5).
+%   10-11  Two plan pages for the course — the « a) b) c) » stability yoga of
+%          classes of morphisms M (local on the base, base change, composition,
+%          and the diagonal/graph criterion), then a numbered syllabus I-III
+%          with letters (a)-(d) reordering it and an « Oubli » list. Heavily
+%          overwritten; read in blocks.
+%   12     Pencil, yellow paper: continuation of a lettered plan (d)-(h) —
+%          schemes as functors, P(M) as representing a functor, V(M)* -> P(M)
+%          an epimorphism of Zariski sheaves, P(M) = V(M)*/G_m.
+%   13, 18 Blank: absent.
+%   14     Ink, yellow paper: Hom(X, Spec A) = Hom(A, Γ(X, O_X)) for locally
+%          ringed spaces; the big diagram (Aff_k), (Sch)_k, (Locan)_k and their
+%          categories of (Zariski) sheaves and presheaves.
+%   15, 17 Two sheets on the product of topoi (π(C, D~), C ×_Top D~, the
+%          question whether (C×D)^ ≈ C^ × D^, and γ(C, E) a plongement). They
+%          belong to topos theory rather than to the course; p. 15 is a
+%          fragment, p. 17 a full page. Transcribed, and flagged in \note.
+%   16     Ink: criterion of representability of a functor on (Sch)/S by open
+%          sub-sheaves covering it; « Ainsi, la notion de schéma est explicitée
+%          sans recours à la notion d'espaces topologiques … »; applications.
+%   19-20  White ruled paper, headed « Géom. Algébrique »: finite sums in
+%          Aff_k disjoint and universal, the functor Γ -> Γ_k = ⨿ e_k from
+%          finite sets, k[I] and comultiplication; fibre products along a
+%          monomorphism; dominance criterion Ker ⊂ Nil A.
+%
+% Notation fixed for the batch. Script X of p. 14 = \mathcal{X} (a locally
+% ringed space); categories in \mathrm (Sch, Aff_k, Alg_k, Ens, Locan); his
+% hat and tilde over categories = presheaves / sheaves (\widehat, \widetilde);
+% « lim ← » = \varprojlim; Ssf/Sso/Ssrc (sous-schémas fermés / ouverts /
+% rétrocompacts) kept as he abbreviates; LF_rc = locally closed retrocompact
+% parts. He writes fid. plat, qu.-cpt, qu.-sép., qu.-coh., t.f., p.f.,
+% loc. noeth., tt: kept as written.
+%
+% Diagrams: most are small squares or chains laid out as arrays; two tikzcd
+% on p. 10 (the graph / diagonal squares) and one on p. 17 (the square
+% α, β, γ, γ'). Arrays were preferred where the page draws headless strokes or
+% arrows of uncertain direction.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{161-4}
+\batch{1}
+\pages{1}{20}
+\dating{[après 1961] — le groupe « Dossiers rassemblés par Grothendieck sur différentes thématiques » (161-1 à 162-6) est daté [après 1961-vers 1977]}
+\watermark{Édition de démonstration}
+\foldertitle{Introduction à géométrie algébrique : notes manuscrites (s.d.)}
+
+\begin{document}
+
+\section*{Introduction à la géométrie algébrique}
+
+\note{titre porté au crayon, de sa main, sur l'onglet de la chemise (p. 1) : « Introduction à Géom. Alg. » ; la chemise ne porte rien d'autre et ne reçoit pas de numéro de page ici}
+
+\page{2}
+\note{les pp. 2 à 5 sont une suite paginée par lui 1 à 4 en tête de page (p. 2 $=$ sa p. 1), écrite à l'encre bleue, avec des reprises à l'encre noire}
+
+\subsection*{Descente plate}
+
+Module plat sur un anneau \struck{\ill{}}
+
+Algèbre plate $B/A$ \qquad | \quad \emph{Faisceautisation} \uncertain{de la notion de platitude} pour \uncertain{des espaces} i.e. pour $f : X \to Y$.
+
+\textbf{Proposition} $B$ algèbre sur $A$. Alors $B$ fid. plat ssi $B$ est \emph{plat} et $\operatorname{Spec} B \to \operatorname{Spec} A$ est \emph{surjectif} \struck{(\ill{} fait, \ill{})} [en outre, $\forall$ idéal [premier] $\mathfrak{J}$ de $A$, $A/\mathfrak{J}A \leftarrow B/\mathfrak{J}B$]\note{la flèche est tracée ainsi, de $B/\mathfrak{J}B$ vers $A/\mathfrak{J}A$ ; la suite de la page établit l'injectivité de $A/\mathfrak{J} \to B/\mathfrak{J}B$}
+
+\struck{$N/c$ \ill{} $A/\mathfrak{p}$ $\leftarrow$}
+
+$B$ fid. plat$/A$ $\Rightarrow$ $A \to B$ injectif (car si $\mathfrak{J} \subset A$ est un idéal \uncertain{non nul} tel que $\mathfrak{J} \to A$ inj., \struck{le noyau $\mathfrak{J}$ doit satisfaire} donc $\mathfrak{J} \otimes_A B \to B$ injectif donc $\mathfrak{J}B \neq 0$)
+
+$\forall$ idéal $\mathfrak{J} \subset A$, $\mathfrak{J} = \mathfrak{J}B \cap A$ \quad ($A/\mathfrak{J} \to B/\mathfrak{J}B$ injectif)
+
+p.ex. si $\mathfrak{J}$ premier \quad $A/\mathfrak{p} \hookrightarrow B/\mathfrak{p}B$ \emph{injectif}
+
+\struck{Donc $\operatorname{Spec} B/\mathfrak{p}B$} \uncertain{Ind.}\note{mot cerclé, écrit sur le début biffé de la ligne} $\exists$ un \emph{idéal premier} $\mathfrak{q}$ de $B$ qui \emph{induit} $\mathfrak{p}$
+
+Donc $\operatorname{Spec} B \to \operatorname{Spec} A$ surjectif
+
+Inversement si $\operatorname{Spec} B \to \operatorname{Spec} A$ surj. et $B$ plat sur $A$, prouvons qu'il est \emph{fid. plat} : $M$ un $A$-module $\neq 0$, prouvons $M \otimes_A B \neq 0$. \struck{On peut supposer $M$ de t.f.} $\neq 0$, soit $M' \subset M$ \struck{de t.f. $\neq 0$}, monogène \struck{de t.f.} il suffit de prouver $M' \otimes B \neq 0$ (car il est $\subset M \otimes B$). \uncertain{Je me ramène} aux \uncertain{quotients} de la forme $A/\mathfrak{m}$ ($\mathfrak{m}$ idéal maximal), alors \struck{\ill{}} $M$ \uncertain{est monogène}, prouvons \uncertain{que} $B/\mathfrak{m}B \neq 0$, clair car $\mathfrak{m}$ induit par un idéal premier de $B$.
+
+\textbf{Déf} Soit $f : X \to Y$ morphisme de \struck{\uncertain{espaces annelés}} \struck{schémas}, \struck{$M$} \ill{} $\mathcal{O}_X$ schémas. \struck{On dit que} \struck{$M$ plat$/Y$ ssi} $f$ est fid. plat ssi \note{la définition s'arrête là ; un trait oblique suit}
+
+a) b) pour morphismes plats et fid. plats
+
+\textbf{Prop} Si $f : X \to Y$ est plat, il induit \struck{des} \uncertain{surjections}
+
+\begin{itemize}
+  \item[a)] $\operatorname{Spec} \mathcal{O}_{X,x} \to \operatorname{Spec} \mathcal{O}_{Y,y}$ ;
+  \item[b)] Tout pt maximal de $X$ est au-dessus d'un pt \emph{maximal} de $Y$.
+\end{itemize}
+
+\marginal{$M$ $A$-module. $M$ fid. plat $\Longleftrightarrow$ $\forall \mathfrak{p}$ premier \struck{\ill{}} de $A$, $M \otimes_A k(\mathfrak{p}) \neq 0$ \quad \uncertain{Nécessaire}, \emph{suffisant} : … \quad \textbf{Cor} Cas $B$ une $A$-algèbre : $\Longleftrightarrow$ $B$ plat et $\operatorname{Spec} B \to \operatorname{Spec} A$ \uncertain{surj.} \quad \textbf{Cor} $A \to B$ local \ill{} : $B$ plat $\Longleftrightarrow$ $B$ fid. plat \quad (\ill{}) $M$ \ill{}}\note{marge gauche, écrite en travers de la page, sur plusieurs colonnes ; d'autres bribes (« $B$ fid. plat$/A$ », « $A$ surj. », « $A \to$ ») s'y lisent sans ordre sûr}
+
+\page{3}
+\note{sa p. 2}
+
+\textbf{Cor} Si $f$ est loc. de présentation finie et plat, $f$ est \add{univ.}\note{« univ. » est ajouté au-dessus} \emph{ouvert}.
+
+\textbf{Prop} Si $S' \xrightarrow{f} S$ est fid. plat, l'application $T \mapsto f^{-1}(T)$ des sous-schémas de $S$ vers les sous-schémas de $S'$ est injective et \ill{}.
+
+\textbf{Cor} Si $X, Y$ sur $S$, alors $\operatorname{Hom}_S(X, Y) \to \operatorname{Hom}_{S'}(X', Y')$ injective.
+
+\textbf{Lemme}
+\[
+\begin{array}{ccc}
+X & \longleftarrow & X' \\
+{\scriptstyle f}\downarrow & \text{cart.} & \downarrow{\scriptstyle f'} \\
+Y & \xleftarrow[\text{plat}]{} & Y'
+\end{array}
+\qquad\qquad f_*(F)' \xrightarrow{\ \sim\ } f'_*(F')
+\]
+
+\[
+\begin{array}{ccc}
+Z' & \longrightarrow & Z \\
+{\scriptstyle g'}\swarrow & & \swarrow{\scriptstyle g} \text{ quasi-compact} \\
+S' & \longrightarrow & S
+\end{array}
+\qquad g(Z) = T
+\]
+
+\textbf{Th} Soit $f : S' \to S$ un morphisme \emph{plat}. \uncertain{Pour} \ill{} \struck{\ill{} fermée} $T$ de $S$ \struck{telle que} \add{image d'un morphisme} $Z \to S$ quasi-compact, … on a
+\[
+f^{-1}(\overline{T}) = \overline{f^{-1}(T)} .
+\]
+
+\textbf{Dém} \uncertain{Supposons} $X, Y, Z$ affines.
+\[
+\begin{array}{ccc} C' & \longleftarrow & C \\ \uparrow & & \uparrow{\scriptstyle u} \\ A' & \longleftarrow & A \end{array}
+\qquad
+\text{Alors } \overline{T} = V(\mathfrak{J}) \ (\mathfrak{J} = \operatorname{Ker} u), \quad f^{-1}(\overline{T}) = V(\mathfrak{J}A'), \quad \overline{f^{-1}(T)} = V(K), \ K = \operatorname{Ker} u'
+\]
+
+\emph{Autre dém} \uncertain{On se ramène au} \ill{} : \uncertain{car} $g$ dominant $\Rightarrow$ $g'$ dominant, et $g$ dominant, $S' \neq \emptyset$ $\Rightarrow$ $Z' \neq \emptyset$ ; $\overline{g'(Z')}$. Mais cela marche pour tout morphisme \emph{générisant}, comme on \uncertain{s'en rendra compte} aussitôt avec \uncertain{Cor. Mais} : Soit $g : Z \to S$ qu.-cpt. \uncertain{Alors} $g$ dominant \struck{Mais} pour tout pt maximal $s$ de $S$, $Z_s \neq \emptyset$.\note{deux ajouts de la colonne de droite, reliés par des traits au théorème ; l'ordre de lecture est incertain}
+
+\textbf{Cor} Si $f$ fid. plat \add{et quasi-compact}, la topologie de $S$ est quotient de celle de $S'$. \uncertain{[$f(S')$ induite par $S$]}
+
+\struck{$F = f^{-1}(\ldots) = \overline{F} \ldots f^{-1}(\overline{f(F)}) \ldots$ \ill{}}\note{ligne entière biffée}
+
+Il faut prouver que si $\overline{T}'$ est une fermée de $S'$ saturée par $f$, alors $\overline{T} = f(Z')$ est rel. fermé dans $\Sigma = f(S')$, \uncertain{Or} par $\overline{T} \cap Z = T$ i.e. $f^{-1}(T) = f^{-1}(\overline{T})$ \quad ok.\note{sous les deux membres de la dernière égalité, $T'$ est écrit avec des signes $=$ verticaux}
+
+\textbf{Cor} (si $f : S' \to S$ fid. plat qu.-cpt \uncertain{(ou univ. \ill{})})
+\[
+\begin{array}{l}
+F(S) \to F(S') \rightrightarrows F(S'') \\
+O(S) \to O(S') \rightrightarrows O(S'') \\
+LF_{rc}(S) \to LF_{rc}(S') \rightrightarrows LF_{rc}(S'') \\
+{}[LF(S) \to LF \rightrightarrows LF(S'')\ ?]
+\end{array}
+\qquad
+\left(\begin{array}{l}
+\text{où } F = \text{parties fermées} \\
+O = \text{parties ouvertes} \\
+LF \text{ parties loc. fermées \uncertain{rétrocompactes}} \\
+S'' = S' \times_S S'
+\end{array}\right) \text{ est \emph{exact}}
+\]
+\uncertain{Vrai} si $f$ surj. … \quad $P(S) \to P(S') \rightrightarrows P(S'')$ \quad ($P =$ parties)
+
+\marginal{\uncertain{structure induite} \ill{}}\note{marge gauche, en oblique, avec un trait vers la ligne des $LF$}
+
+car $S'' \to [S'] \times_{[S]} [S']$ surjectif. Donc l'exactitude des \struck{deux} \add{deux} premières suites \uncertain{simples} (car la top. de $S$ est quotient, \struck{\ill{}} car est \uncertain{injective}).
+
+\textbf{Cor} Une partie $T$ de $S$ est \uncertain{fermée} (fermée, loc. fermée rétrocompacte) ssi $f^{-1}(T)$ l'est. Si $T$ est l'image d'un morphisme qu.-cpt, alors $T$ loc. f. ssi $f^{-1}(T)$ l'est…
+
+Pour le troisième cas, on est ramené aux deux premiers en introduisant l'adhérence et réutilisant le Th.
+
+\page{4}
+\note{sa p. 3 ; un titre « Descente » est biffé en tête}
+
+\marginal{(1) \uncertain{descente de propriétés de morphismes}}
+
+\textbf{Prop} Soit $S' \to S$ \emph{surjectif}. Pour qu'un $S$-morphisme $g : X \to Y$ soit surjectif (resp. radiciel) il f. et il s. que $g' : X' \to Y'$ le soit. [Si $f'$ inj. --- bij. --- \ill{} \uncertain{ou quasi-injectif}, de même $f$]
+
+\textbf{Prop} Soit $f : S' \to S$ surjectif qu.-cpt \add{(resp. fid. plat qu.-cpt)}. Alors $f$ est quasi-compact (resp. de t.f., de prés. finie, loc. de t.f., loc. de prés. finie) ssi $f'$ l'est.\note{« $f$ », « $f'$ » sur la page ; le contexte demande $g$, $g'$}
+
+Le \uncertain{premier} \ill{} immédiat. On est ramené \ill{} \ill{}.
+
+\[
+\begin{array}{ccc}
+X' & & X \\
+\downarrow{\scriptstyle g'} & & \downarrow{\scriptstyle g} \\
+Y' & \longrightarrow & Y \\
+& \searrow \quad \swarrow & \\
+S' & \longrightarrow & S
+\end{array}
+\]
+
+\textbf{Lemme} Soit $A \to A'$ fid. plat, $B$ $A$-algèbre. Alors $B$ est de t.f. \add{(resp. pr. f.)} ssi $B'$ l'est.
+
+Les \uncertain{mêmes} \emph{arguments}, pour \uncertain{modules}, donnent
+
+\textbf{Cor.} Soit $f : S' \to S$ fid. plat qu.-cpt, $F$ faisceau qu.-coh. sur $S$. Alors $F$ de t.f. (pr. f.) ssi $F'$ l'est.
+
+On prouve de même pour « loc. libre de t.f. » \{loc. libre de rang $n$ \quad dém. : \uncertain{inversibilité}\}
+
+\textbf{Prop} $f$ fid. plat. Alors $g$ est plat (fid. plat) ssi $g'$ l'est \uncertain{[on peut prendre modules]}
+
+\marginal{(2) \uncertain{descente de propriétés topologiques} et conséquences}
+
+\textbf{Th.} …
+
+Soit $S' \to S$ fid. plat (et quasi-compact) \add{(ou univ. \uncertain{générisant})}
+
+\textbf{Cor} Soit $g : X \to Y$ un $S$-morphisme, \ill{}. Alors si $g'$ est ouvert (resp. fermé \add{générisant}, univ. homéom. dans, resp. un homéom.), $f$ de même.\note{« $f$ de même » sur la page}
+
+\[
+\begin{array}{ccc}
+X' & \longrightarrow & X \\
+{\scriptstyle g'}\downarrow & & \downarrow{\scriptstyle g} \\
+Y' & \xrightarrow[\ f_Y\ ]{} & Y \\
+& & \\
+S' & \xrightarrow[\ f\ ]{} & S
+\end{array}
+\]
+\marginal{\uncertain{Quelques contre-exemples}}
+
+Donc $f$ univ. ouvert (resp. univ. \ill{} …) ssi $f'$ l'est.
+
+\textbf{Cor} $f$ séparé (propre) ssi $f'$ l'est
+
+\textbf{Cor} $f$ une imm. (\uncertain{ouverte}) ssi $f'$ l'est. \uncertain{On se ramène au cas d'une imm.,} \struck{et pour cela il suffit \ill{} \ill{} (\ill{})}, donc un homéomorphisme univ., \uncertain{reste à} prouver que $\mathcal{O}_Y \to f_*(\mathcal{O}_X)$ est un \uncertain{isom.}, ce qui se \uncertain{déduit} après chgt. de base, ok.
+
+\struck{\ill{}} \quad \uncertain{Question} \ill{} \ill{} \ldots{} OK.\note{bloc en partie biffé, à droite}
+
+\begin{itemize}
+  \item surj., radiciel, \struck{\ill{}}
+  \item plat, fid. plat
+  \item \struck{\ill{}}
+  \item qu.-cpt, qu.-sép., \add{coh.,} t.f., p.f., loc. t.f., loc. p.f.
+  \item séparé, propre, \struck{\ill{}} univ. fermé, univ. ouvert, homéo. univ., \ill{}
+  \item \uncertain{Immersions} (imm. fermées, imm. ouvertes)
+  \item \struck{\ill{}}
+  \item affines, entiers, finis,
+  \item quasi-affines, quasi-finis
+  \item \struck{plat fid.}
+  \item {}[lisse, net, étale
+  \item formellement lisse (?), formellement étale ….
+\end{itemize}
+
+\note{un trait relie cette liste, en bas à gauche, aux corollaires de la page ; en bas à droite, « TSVP »}
+
+\page{5}
+\note{sa p. 4}
+
+(3) \emph{Descente de} \struck{\ill{}} \emph{faisceaux} \struck{\ill{}} \add{des sous-schémas} qu.-coh., \struck{et des morphismes} \uncertain{de} morphismes de schémas, de schémas affines.
+
+\struck{\textbf{Prop} $f : S' \to S$ fid. plat et qu.-cpt, $F$ qu.-coh. sur $S$. Alors $\mathrm{Ssf}(F) \to \mathrm{Ssf}(F') \rightrightarrows \mathrm{Ssf}(S'')$ est exact. On se ramène au cas $S$ affine, puis $S'$ affine, et au résultat conn. d'algèbre commutative.}\note{bloc cerclé et barré d'obliques ; à gauche, $N' \cap M = N_0$, et les lignes $M$, $\hat{M}'$, $M''$ au-dessus de $A \to A' \rightrightarrows A''$}
+
+\textbf{Th} Soit $f : S' \to S$ fid. plat qu.-cpt. Alors $f$ est de descente effective (\uncertain{univ.}) pour la catégorie fibrée des Modules qu.-coh.
+
+Expliquer ce que cela signifie.
+
+\textbf{Cor} \struck{\ill{}} Soit $F$ qu.-coh. sur $S$. Alors suite exacte
+\[
+\mathrm{Ssf}(F) \to \mathrm{Ssf}(F') \rightrightarrows \mathrm{Ssf}(F'')
+\]
+
+\textbf{Corollaire} On a des suites exactes
+\[
+\begin{array}{l}
+\struck{\mathrm{Ssf}(S)} \\
+\mathrm{Ssf}(S) \to \mathrm{Ssf}(S') \rightrightarrows \mathrm{Ssf}(S'') \\
+\mathrm{Sso}(S) \to \mathrm{Sso}(S') \rightrightarrows \mathrm{Sso}(S'') \\
+\mathrm{Ssrc}(S) \to \mathrm{Ssrc}(S') \rightrightarrows \mathrm{Ssrc}(S'')
+\end{array}
+\]
+Peut-on descendre les sous-schémas \uncertain{pas nécess. rétroc.}, non ouverts ?
+
+\textbf{Corollaire} $f$ est de descente \uncertain{(univ.)} pour la catégorie fibrée des schémas sur d'autres :
+\[
+\operatorname{Hom}_S(X, Y) \to \operatorname{Hom}_{S'}(X', Y') \rightrightarrows \operatorname{Hom}_{S''}(X'', Y'')
+\]
+\[
+\begin{array}{ccccc}
+X \times_S Y = Z & & Z' & & Z'' \\
+\uparrow\downarrow & & \downarrow & & \downarrow \\
+Y & & Y' & & Y''
+\end{array}
+\qquad S \to S' \rightrightarrows S''
+\]
+On le voit par le corollaire précédent si $Y$ est qu.-sép. sur $S$. Mais on se ramène aisément au cas $S$, $Y$ affines…
+
+On retrouve que $g'$ un iso $\Rightarrow$ $g$ un iso
+
+\textbf{Corollaire} \uncertain{Pour} que $f'$ soit imm. fermée \uncertain{resp.} ouverte, \add{arbitraire} il f. et il s. que $f$ le soit \struck{\ill{}}\note{un bloc à droite est rayé de hachures obliques et ne se lit pas}
+
+\textbf{Corollaire} Descente d'Algèbres qu.-coh.
+
+\struck{Cor} \textbf{Th} \add{Si $f$ fid. plat qu.-cpt, alors} \struck{\ill{}} $f$ est un morphisme de descente eff. (univ.) pour \uncertain{la cat. des} schémas relatifs \emph{affines}
+
+\textbf{Cor} $g$ \struck{\ill{}} affine $\Longleftrightarrow$ $g'$ affine
+
+$g$ quasi-affine $\Longleftrightarrow$ $g'$ quasi-affine \quad [car $g$ qu.-affine $\Longleftrightarrow$ $g$ coh. et $X \to \operatorname{Spec} g_*(\mathcal{O}_X)$ \uncertain{immersion}]
+
+$g$ entier \add{(fini, fini loc. libre)} $\Longleftrightarrow$ $g'$ entier (fini, fini loc. libre)
+
+\page{6}
+\note{sa p. 5, dernière de la suite ; le bas de la feuille est vide}
+
+Pour ce dernier point, on est ramené au
+
+\textbf{Lemme.} $A'$ fid. plat sur $A$, $B$ une $A$-algèbre. Alors $B$ fini (entier) sur $A$ ssi $B'$ l'est sur $A'$.
+
+Fini est une histoire de module. Entier s'y ramène en regardant les $A[x]$, $x \in B$.
+
+(4) \emph{Descente de l'amplitude}
+
+\[
+\begin{array}{ccc}
+X & & X' \\
+\downarrow & & \downarrow \\
+Y & \longleftarrow & Y' \\
+\downarrow & & \\
+S & \longleftarrow & S'
+\end{array}
+\qquad f \text{ fid. plat qu.-cpt}
+\]
+
+$L$ (très) ample rel$/Y$ $\Longleftrightarrow$ $L'$ (très) ample rel.$/Y'$
+
+On peut supposer $X$ cohérent sur $Y$, donc $g_*(L)$ qu.-coh. et $g_*(L)' \simeq g'_*(L')$.
+
+Très ample signifie que 1) $g^*(g_*(L)) \to L$ épim., donc $X \to P(g_*(L))$ défini ; 2) \struck{$g^*(g_*(L)) \ldots$} $X \to P(g_*(L))$ une immersion.
+
+Si $g$ de t.f., « ample » se ramène à « très ample », d'où descente.
+
+Pour le cas général, \uncertain{on utilise le} critère que pour $F$ qu.-coh. de t.f. sur $S$ \add{\uncertain{pourvu que $Y$ qu.-cpt}}, \uncertain{à $n$ grand}, $f^*(f_*(F(n))) \to F(n)$ \uncertain{épi}.
+
+On retrouve que $g$ quasi-affine $\Longleftrightarrow$ $g'$ qu.-affine.
+
+\textbf{NB} Les seuls exemples de propriétés de morphismes que \uncertain{l'on} ne descende \uncertain{pas} \ill{} sont les morphismes \emph{projectifs} et \emph{quasi-projectifs}.
+
+(5) \emph{Questions d'effectivité de données de descente}
+
+\page{7}
+\textbf{Morphismes radiciels.} Soit $f : X \to Y$ un morphisme de schémas. Conditions équivalentes :
+
+\begin{enumerate}
+  \item[a)] $f$ univ. \emph{injectif} ;
+  \item[b)] $\forall y \in Y$, $X_y$ est radiciel sur $k(y)$, i.e. \struck{\ill{}} a au plus un point $x$, et $k(x)$ est une ext. radicielle de $k(y)$ ;
+  \item[c)] $\forall$ corps $K$, $X(K) \to Y(K)$ est \emph{\uncertain{injective}} ;
+  \item[d)] $\delta_f : X \to X \times_Y X$ est surjective.
+\end{enumerate}
+
+Ces morphismes sont dits \emph{radiciels}. (Une \emph{immers.} est radicielle, donc une immers., comme $\delta_f$, l'est.) \uncertain{Satisfont} a) b) et c) ($gf$ radiciel $\Rightarrow$ $f$ radiciel).
+
+\textbf{Prop} Soit $f : X \to Y$ un morphisme entier radiciel \add{surjectif}\note{« surjectif » est ajouté au-dessus de la ligne, avec un trait de renvoi}. Alors c'est un \emph{homéom.} \struck{\ill{}} \emph{universel}.
+
+On peut prouver la réciproque --- mais c'est nettement plus difficile.
+
+\textbf{Exemples} 1) $k'/k$ ext. radicielle (\uncertain{p. ex. clôture parfaite}) : $X_{k'} \to X_k$ est entier radiciel surjectif, donc un homéom. (universel).
+
+2) Courbe : cusp, et sa normalisation.
+
+\textbf{Morphismes univ. ouverts}
+
+\emph{Condition néc.} pour qu'un morphisme soit ouvert : il est \emph{\uncertain{générisant}}. Cette condition est \emph{suffisante} si $f$ loc. de prés. finie. Donc morphismes univ. ouverts sont \emph{univ. \uncertain{générisants}}, et réciproquement si $f$ est loc. de prés. finie.
+
+Morphismes univ. ouverts et univ. \uncertain{générisants} satisfont \uncertain{1), 2)}.
+
+\page{8}
+\textbf{Schémas quasi-affines / morphismes quasi-affines}\quad (quasi-compacts, et \uncertain{donc isom. à des} sous-schémas ouverts d'un schéma affine)
+
+Conditions équivalentes sur schéma $X$ cohérent, $A = \Gamma(X, \mathcal{O}_X)$ :
+
+\begin{enumerate}
+  \item[a)] $X$ quasi-\struck{affine}\note{le mot est repris par-dessus ; on lit « quasi-affine »} ;
+  \item[b)] $X \to \operatorname{Spec} A$ une immers. ouverte ;
+  \item[b')] $X \to \operatorname{Spec} A$ un homéomorphisme dans ;
+  \item[c)] $\mathcal{O}_X$ est ample, i.e.
+\end{enumerate}
+
+\begin{enumerate}
+    \item[c')] les $X_f$ forment une base top. de $X$ ;
+    \item[c'')] les $X_f$ affines forment base top. de $X$ ;
+    \item[c''')] tout $F$ quasi-cohérent engendré par ses sections ;
+    \item[c'''')] id. pour $F$ qu.-coh. $\subset \mathcal{O}_X$ ;
+\end{enumerate}
+
+\begin{enumerate}
+  \item[d)] $\exists$ faisceau \struck{ample} \add{inversible}\note{« inversible » (abrégé) est écrit au-dessus du mot biffé} $L$ tel que $L$ et $L^{-1}$ amples ;
+  \item[d')] tout Module inv. $L$ est ample.
+\end{enumerate}
+
+\textbf{Morphismes quasi-affines} : stable par changement de base, par composition. Les immers. quasi-compactes sont quasi-affines, donc si $f$ qu.-sép., $\delta_f$ qu.-affine. $gf$ qu.-affine et $g$ qu.-sép. $\Rightarrow$ $f$ qu.-affine.
+
+\textbf{Th} Si $f$ de type fini, \struck{\ill{}} à fibres finies ($f$ quasi-fini) et $f$ séparé, alors $f$ quasi-affine (donc quasi-projectif).
+
+\emph{Morph. quasi-projectif} : de t.f. $+$ $\exists L$ $f$-ample.
+
+Propre $=$ univer. fermé, séparé, de t.f. \qquad projectif $=$ propre $+$ quasi-projectif $=$ \struck{\ill{}} fermé $+$ quasi-projectif
+
+entier
+
+\note{tableau encadré, flèches doubles d'implication ; « affine de t.f. » est écrit contre une flèche oblique qui descend de « fini » vers « quasi-affine de t.f. » : on en fait un nœud intermédiaire. Dans la marge gauche, une flèche barrée venant de \uncertain{« affine de t.f. »} entre dans le cadre}
+
+\[
+\begin{array}{ccccccc}
+\text{imm. fermée} & \Longrightarrow & \text{fini} & \Longrightarrow & \text{entier} & \Longrightarrow & \text{affine} \\
+\Downarrow & & \Downarrow & & \Downarrow & & \Downarrow \\
+\text{imm. qu.-cpte} & & \text{proj} & \Longrightarrow \text{ propre } \Longrightarrow & \text{univ. fermé} & & \\
+\Downarrow & & \Downarrow & & & & \\
+\text{quasi-affine de t.f.} & \Longrightarrow & \text{qu.-proj} & & & & \text{séparé}
+\end{array}
+\]
+avec, en outre : $\text{fini} \Rightarrow \text{affine de t.f.} \Rightarrow \text{quasi-affine de t.f.}$ ; $\text{propre} \Rightarrow \text{séparé}$ ; $\text{qu.-proj} \Rightarrow \text{séparé}$.
+
+\textbf{Th.} (a) \emph{fini} $=$ \emph{propre à fibres finies} (\uncertain{cas noethérien})
+
+$=$ projectif à fibres finies
+
+\struck{(b) séparé \ill{} $\Rightarrow$ \ill{} affine \ill{} à fibres finies}\note{ligne entière biffée ; « affine » y est récrit au-dessus}
+
+\page{9}
+\marginal{EGA II 4.5}
+
+$X$ \emph{cohérent}, $L$ inversible. Conditions équivalentes :
+
+\begin{enumerate}
+  \item[a)] les $X_f$ forment base de la topologie de $X$ \quad ($f \in S_n = \Gamma(X, L^{\otimes n})$, $n \geqslant 1$) ;
+  \item[a')] les $X_f$ affines forment une base … ;
+  \item[b)] pour tt $F$ quasi-cohérent \add{de t.f.} sur $X$, $F(n)$ est engendré par ses sections, pour $n$ grand [en \uncertain{somme} : $F$ quotient d'un $\mathcal{O}_X^N(-n)$] ;
+  \item[b')] comme b), avec $F \subset \mathcal{O}_X$.
+\end{enumerate}
+
+\struck{Si} Il \emph{suffit} \struck{que}, si $X$ est au-dessus de $S$ \emph{affine}, qu'il \struck{\ill{}} :
+
+\begin{enumerate}
+  \item[c)] $\exists n > 0$ tel que $L^{\otimes n}$ très ample rel$/S$ ;
+  \item[c')] $\exists n_0 > 0$ tel que $L^{\otimes n}$ très ample pour $n \geqslant n_0$.
+\end{enumerate}
+
+Cette condition est aussi \emph{nécessaire} si \struck{$X$} de t.f. sur $S$.
+
+\textbf{Définition} $L$ est dit \emph{ample} s'il satisfait les conditions équivalentes a) à b'). Si \struck{$Y$ \ill{}} On\ill{}. $f : X \to Y$, \struck{morphisme} \struck{cohérent} on dit que $L$ est $f$-ample (ou ample rel$/Y$) \struck{ssi} si $\exists$ recouvrement ouvert affine de $Y$ par des $Y_i$, tel que ($X|Y_i$ cohérents) $L|(X|Y_i)$ ample pour tt $i$.
+
+\struck{Il suffit} Alors c'est vrai pour \uncertain{tt $i$}, et on peut utiliser aisément les \struck{\ill{}} critères b), b') (pour $Y$ qu.-cpt dans ce cas).
+
+\textbf{NB} \struck{Très ample} Si $\exists n$ tel que $L^{\otimes n}$ soit très ample rel$/Y$, alors il est ample rel$/Y$ ; la réciproque est vraie si $f$ est de t.f. et $Y$ qu.-cpt.
+
+\textbf{Prop} \struck{Soit}
+\[
+X \xrightarrow{\ f\ } Y \xrightarrow{\ g\ } Z, \qquad L \text{ sur } X,\ M \text{ sur } Y, \quad g \text{ qu.-cpt.}
+\]
+\[
+\left.\begin{array}{l} L \text{ ample rel}/Y \\ M \text{ ample rel}/Z \end{array}\right\}
+\Longrightarrow \exists\, n_0 \text{ tel que } n \geqslant n_0 \text{ implique } L \otimes f^{*}(M^{\otimes n}) \text{ ample rel}/Z .
+\]
+(idem avec très amples)
+
+\page{10}
+\note{page de plan, très chargée : listes, accolades, renvois fléchés d'un bloc à l'autre, taches d'encre. On transcrit les blocs dans l'ordre de lecture, de haut en bas, la colonne de droite après celle de gauche ; les notes marginales tournées de la gauche ne se lisent qu'en partie}
+
+Schémas irréductibles, connexes, noethériens (attention !), loc. noeth. / réduits, intègres ($=$ irréd $+$ réduits) / normaux \struck{réguliers} (anneaux locaux n.) \struck{réguliers (\ill{})}
+
+\begin{itemize}
+  \item[global] Morphismes \emph{qu.-cpts}, de \emph{type fini} : a) b) (cas de $V(M)$, $P(M)$)
+  \item[local] loc. de t.f. : a) b) c) ; loc. de prés. f. : a) b) \struck{c)}
+\end{itemize}
+
+[$f$ \struck{\ill{}} loc. de t.f. $\Rightarrow$ $\operatorname{diag}_f$ loc. de prés. finie]
+
+\emph{immersions} : a) b) c) ; imm. \emph{fermées}, \emph{ouvertes} [\emph{surjectives}] a) b)
+
+Sous-schémas ouverts, fermés [\uncertain{transitivité}, stable par im. inverse]
+
+Morphismes \emph{séparés} [a) b) c)] : diagonale fermée $\Longleftrightarrow$ noyaux de couples dedans fermés $\Longleftrightarrow$ principe d'identité pour morphismes des schémas réduits dedans.
+
+\textbf{Ex} \{\uncertain{immo} --- donc applic. diag., noyaux, diag. ; morphismes affines ; $P(V) \to S$\}
+
+\struck{\ill{}}
+
+Schémas séparés (i.e. séparés sur n'importe quoi). $\Rightarrow$ \uncertain{toute intersection} \struck{\ill{}} de $S$-affines \ill{} affines sur $S$ i.e. $X, Y$ \ill{} $\Rightarrow$ $X \times_S Y$ affine.
+
+Morphismes \emph{quasi-séparés} (a) b) c)) (\struck{\ill{}} schémas quasi-séparés) : diagonale quasi-compacte $\Longleftrightarrow$ noyaux de couples dedans quasi-compacts $\Longleftrightarrow$ sections \uncertain{qu.-cpts} ; [si base quasi-sép. : $\Longleftrightarrow$ \struck{\ill{}} l'intersection de deux ouverts qu.-cpts est qu.-cpte] $\Longleftrightarrow$ \uncertain{tout} schéma \ill{} $X$ qu.-cpt \ill{} qu.-\uncertain{compact} \ill{} $X$]
+
+\marginal{\ill{} qu.-cpt (de t.f.) et qu.-sép. $\Rightarrow$ \ill{} (qu.-sép.)}\note{marge gauche, écrite en oblique, avec plusieurs mots biffés ; une ligne biffée à droite de la marge ne se lit pas}
+
+Morphismes \emph{cohérents} $=$ qu.-cpt qu.-sép. : a) b) [$gf$ coh. et $g$ qu.-sép. $\Rightarrow$ $f$ coh.]
+
+Si $f : X \to Y$ qu.-coh.\note{sic, pour « cohérent »} et $F$ qu.-coh. sur $X$, alors $f_*(F)$ (et les $R^i f_*(F)$) quasi-cohérents. \quad (schémas cohérents)
+
+\textbf{NB} Tous les schémas envisagés par les Anciens étaient de t.f. et \emph{séparés} sur des corps. La plupart des schémas qu'on envisage couramment \uncertain{on pourrait les supposer} séparés ; pratiquement tous ceux qu'on \uncertain{rencontre} sont quasi-séparés. Beaucoup sont qu.-cpts --- mais il y en a d'importants qui ne le sont pas.
+
+[Morphismes de \emph{prés. finie} a) b) [$gf$ de prés. finie et $g$ de t.f. et qu.-sép.] ($=$ loc. de prés. finie et cohérents)]
+
+\textbf{Toutes les notions sont \emph{locales en bas}}\note{un trait fléché relie ce cadre au bloc des morphismes de prés. finie et à la ligne suivante}
+
+$\to$ Yoga des \ill{} : \ill{} limite.
+
+\note{colonne de droite de la page}
+
+\begin{itemize}
+  \item[a)] si $f \in \mathcal{M}$, $f' \in \mathcal{M}$ ($\Rightarrow$ tout isom. $\in \mathcal{M}$) ;
+  \item[b)] si $f, g \in \mathcal{M}$, $gf \in \mathcal{M}$ ;
+\end{itemize}
+
+\[
+\begin{array}{ccc} X & \longleftarrow & X' \\ \downarrow & \text{cart.} & \downarrow \\ Y & \longleftarrow & Y' \end{array}
+\qquad\qquad X \xrightarrow{\ f\ } Y \xrightarrow{\ g\ } Z
+\]
+$\Longrightarrow$ ($f_1 \in \mathcal{M}$, $f_2 \in \mathcal{M}$ $\Rightarrow$ $f_1 \times f_2 \in \mathcal{M}$)
+
+$\Longrightarrow$ ($gf \in \mathcal{M}$, $\operatorname{diag}(g) \in \mathcal{M}$ $\Rightarrow$ $f \in \mathcal{M}$) $(*)$
+
+\begin{itemize}
+  \item[c)] si $gf \in \mathcal{M}$, $f \in \mathcal{M}$ [en présence de a) et b), équivaut à : toute section est $\in \mathcal{M}$, donc diagonales $\in \mathcal{M}$] ; ou : noyaux $\in \mathcal{M}$ [si c'est local en bas \struck{et vrai pour imm. ouv.} \uncertain{et vrai au cas affine}].
+\end{itemize}
+
+\textbf{Ex} : morphisme diagonal, sections, noyaux.
+
+\[
+\begin{array}{lcl}
+\operatorname{diag} g \in \mathcal{M} & \Longleftrightarrow & \forall S' \to S, \text{ les sections de } Y' \text{ sur } S' \text{ sont } \in \mathcal{M} \\
+g : Y \to S & \Longleftrightarrow & \forall (u, v) : X \rightrightarrows Y \text{ sur } S,\ \operatorname{Ker}(u, v) \to X \text{ est } \in \mathcal{M} \\
+ & \Longleftrightarrow & \forall f : X \to Y,\ \Gamma_f : X \to X \times_S Y \text{ est } \in \mathcal{M} \\
+ & \Longleftrightarrow & gf \in \mathcal{M} \Rightarrow f \in \mathcal{M}
+\end{array}
+\]
+
+$(*)$
+
+\begin{tikzcd}
+X \arrow[d, "f"'] \arrow[dr, "\Gamma_f"] & \\
+Y \arrow[d, "g"'] & X \times_S Y \arrow[l, "\mathrm{pr}_2"'] \arrow[d, "\mathrm{pr}_1"] \\
+S & X \arrow[l, "gf"]
+\end{tikzcd}
+
+\begin{tikzcd}
+X \arrow[r, "\Gamma_f"] \arrow[d, "f"'] & X \times_S Y \arrow[d, "f \times \mathrm{id}_Y"] \\
+Y \arrow[r, "\operatorname{diag}_Y"'] & Y \times_S Y
+\end{tikzcd}
+
+\textbf{Généralités} : local en bas ; stable par chang. de base ; stable par composition $\Longrightarrow$ \note{la flèche double ne mène à rien sur la page}
+
+\textbf{Plan}
+
+\begin{enumerate}
+  \item[a)] Traversée du désert
+  \item[b)] Passage au quotient [et langage faisceautique] \{descente fid. plat\}
+  \item[c)] Notion « géométrique » sur un corps
+  \item[d)] \struck{\ill{}} Ensembles constructibles, passage à la limite
+\end{enumerate}
+
+\page{11}
+\note{autre plan, où de longues barres obliques traversent le premier bloc, comme pour le marquer fait ; il reste lisible}
+
+\struck{Localisé d'un schéma en un point, schéma local, morphisme d'un schéma local dans un schéma}\note{ligne de tête reprise plus bas, au I) de la colonne de droite}
+
+\textbf{I} Morphismes quasi-compacts, de type fini, loc. de \uncertain{prés. finie}
+
+immersions \{ouvertes, fermées\} \marginal{\uncertain{immersions surjectives}}\note{marge gauche, sous un bloc noirci}
+
+Sous-schémas ouverts --- fermés
+
+morphismes séparés : diagonale fermée --- noyaux fermés --- principe de prolongement des identités $Z \to X$ pour $X$ réduit (\,$X$ séparé sur $S$\,)
+
+\struck{morphismes qu\ill{}}
+
+\[
+\begin{array}{ccc} X & \longleftarrow & X' \\ {\scriptstyle f}\downarrow & & \downarrow{\scriptstyle f'} \\ Y & \longleftarrow & Y' \end{array}
+\qquad
+\begin{array}{c} X \xrightarrow{\ f\ } Y \\ \searrow \quad \swarrow{\scriptstyle g} \\ S \end{array}
+\]
+[Si $f$ est $\mathcal{M}$, $f'$ est $\mathcal{M}$ ; si $f$ et $g$ sont $\mathcal{M}$, $gf$ aussi ; $\Rightarrow$ si $f_1$ et $f_2$ sont $\mathcal{M}$, $f_1 \times_S f_2$ est $\mathcal{M}$ ; si $gf$ est $\mathcal{M}$, $f$ est $\mathcal{M}$ --- loc. \uncertain{t.f.}, \struck{\ill{}} vrai pour imm., morphismes séparés]
+
+\textbf{Ex} \{Morphisme diagonal --- noyaux ; sections\}
+
+\textbf{II}
+
+\begin{itemize}
+  \item Schémas noeth., loc. noeth., artiniens, loc. artiniens
+  \item Schémas irréd., connexes
+  \item Schémas \struck{réduits}, intègres
+  \item Schémas normaux, réguliers
+\end{itemize}
+
+\textbf{I)} Schémas localisés d'un \struck{\ill{}} schéma en un point ; schémas locaux ($\exists !$ pt fermé, et quasi-compact) ; morphismes d'un schéma local dans un schéma.
+
+\textbf{III} Morphismes : \emph{affines}, [mono, surjectifs] [\emph{qu.-cpts}, \emph{de t.f.}, \emph{loc. de t.f.}, \emph{loc. de} \ill{}], \emph{imm.} \uncertain{loc.} \emph{fermées}, surjections], \emph{séparés}, [\emph{quasi-séparés}, \emph{cohérents}, de \emph{prés. finie}]
+
+[entiers] (c) morphismes \emph{finis}, [quasi-finis] \struck{\ill{}}
+
+(a) \emph{projectifs}, \emph{quasi-projectifs} [quasi-affines]
+
+(d) \emph{radiciels}, homéom. universels, \struck{univ. ouverts}, univ. fermés
+
+(b) \emph{propres}\note{les lettres cerclées (a)--(d) et des flèches fixent un ordre de traitement différent de l'ordre de la liste}
+
+\textbf{Oubli}
+
+\begin{itemize}
+  \item Cohérence du faisceau structural sur un schéma loc. noeth.
+  \item Structure induite réduite sur un \emph{fermé}
+  \item Un schéma loc. noeth. est qu.-sép.
+\end{itemize}
+
+\marginal{\uncertain{et on verra tôt les schémas non séparés}}\note{dans une bulle reliée à la dernière ligne ; une seconde bulle, au-dessus, ne se lit qu'en partie : « \uncertain{Attention}, \ill{} immersions \ill{} ouvertes \ill{} : cas \ill{} »} \quad Sur \uncertain{base} cohérente
+
+$f$ cohérent, $F$ qu.-coh. $\Rightarrow$ $f_*(F)$ qu.-coh.
+
+\textbf{Cor}
+
+\begin{itemize}
+  \item Extension de faisceaux qu.-coh. d'un ouvert rétrocompact
+  \item Extension de sous-faisceaux \struck{\ill{}} (\,$U$ rétrocompact\,)
+\end{itemize}
+
+\{\emph{net}, \emph{lisse}, \emph{étale} ; \textbf{\emph{plat}, \emph{fid. plat}}\note{encadré}\}
+
+Propriétés géom. des fibres …
+
+\page{12}
+\note{au crayon, sur papier jaune ; suite d'un plan à rubriques cerclées, dont (a), (d), (e), (f), (g), (h) se lisent sur cette page. Le haut de la feuille est barré de longs traits obliques et de plusieurs biffures}
+
+\struck{\ill{}} \struck{\uncertain{épimorphismes universels}} (Zar.) de schémas (${}=$ \uncertain{foncteurs représentables})\note{ligne soulignée puis barrée, avec deux mots biffés en tête et une rubrique cerclée qui ne se lit pas}
+
+(d) Schéma de type fini sur un autre \add{$S$} [quasi-comp. et qu.-sép. sur $S$ et loc. de type fini sur $S$]
+
+\marginal{\uncertain{rep. \ill{}}}\note{marge gauche, en oblique, barrée}
+
+Schémas comme foncteurs : avantages respectifs des arguments anneaux (a) (schémas affines) et des arguments schémas (\emph{\uncertain{vrais} espaces localement annelés})
+
+(e) \struck{Corollaire du th. de représentabilité : notion \uncertain{locale} \ill{}} \uncertain{(par rec. affine)} du \uncertain{Pb.}\note{la ligne est barrée ; la parenthèse cerclée est reliée par un trait au $S$ de la ligne suivante}
+
+(f) Schéma $P(M)$, $M$ module qu.-coh. sur $S$ : il représente un foncteur remarquable \uncertain{\ill{}} dans la catégorie des espaces loc. annelés sur $S$ (\uncertain{univ.} des topos loc. annelés sur $S$). Sa structure essentielle : Dépendance \uncertain{p.r.} au changement de base ; dépendance fonctorielle en $S$ / Dépendance en $M$ (pour épi) \add{de t.f. sur $S$,}
+
+\marginal{\uncertain{cor. de th. de représentabilité}}\note{marge gauche, de biais, contre l'accolade qui borde (f)}
+
+[Schémas \struck{projectifs} \add{\uncertain{quasi-proj.}} sur $S$ ($S$ affine disons) \add{(on peut alors choisir $V$ de type fini)} qui se plongent dans un $P(M)$, \struck{\ill{}} ]
+
+Relation avec $V(M)$ (fibré vectoriel sur $S$ associé à $M$)
+
+$V(M)^* \subset V(M)$ (les \emph{épi} $M_{k'} \to k'$)
+
+$V(M)^* \longrightarrow P(M)$ \quad épi de \emph{faisceaux} \quad [i.e. \emph{il y a une section loc. pour Zar.}]
+
+En fait, $\mathbb{G}_{m,S}$ opère sur $V(M)^*$, \uncertain{laissant} $V(M)^*$ stable, i.e. y opère librement, et
+\[
+P(M) \simeq V(M)^* / \mathbb{G}_m \qquad (\text{isom. de faisceaux Zar.})
+\]
+
+(g) \uncertain{$\varprojlim$ finies}\note{« lim » avec une flèche vers la gauche dessous, et « finies » au-dessus ; une tache couvre le mot} dans (Sch)
+
+(h) Spec d'Algèbre qu.-coh. et \struck{\ill{}} morphismes affines (\uncertain{des} schémas affines sur $S$)
+
+\page{14}
+\note{à l'encre, sur papier jaune ; le bas de la page repasse au crayon}
+
+1) Morphismes d'un espace loc. annelé dans \add{un} schéma affine
+\[
+\operatorname{Hom}_k(\mathcal{X}, \underset{\substack{\wr\wr \\ \operatorname{Spec} A}}{Y}) \xrightarrow{\ \simeq\ } \operatorname{Hom}_{k\text{-alg}}(\underset{\substack{\wr\wr \\ \Gamma(Y, \mathcal{O}_Y)}}{A}, \Gamma(\mathcal{X}, \mathcal{O}_{\mathcal{X}}))
+\]
+\note{une flèche de retour, sans étiquette, est tracée sous la flèche $\simeq$}
+
+\struck{$\forall x \in$} Soit $u : A \to \Gamma(\mathcal{X}, \mathcal{O}_{\mathcal{X}})$
+
+Pour tout $x \in \mathcal{X}$, soit $\varphi(x)$ \add{$\in Y = \operatorname{Spec}(A)$} \struck{\ill{}} le noyau de $A \xrightarrow{u} \Gamma(\mathcal{X}, \mathcal{O}_{\mathcal{X}}) \xrightarrow{\varepsilon_x} k(x)$ \quad (\,$\Gamma(\mathcal{X}, \mathcal{O}_{\mathcal{X}}) \to \mathcal{O}_{\mathcal{X},x} \to k(x)$\,)
+
+\uncertain{d'où} $\varphi : \mathcal{X} \to Y$
+
+Si $f \in A$, $\varphi^{-1}(U_f) = $ \uncertain{ens. des} $x \in \mathcal{X}$ tels que $\varepsilon_x(u(f)) \neq 0$ i.e. tels que $u(f)_x$ inversible, i.e. $\mathcal{X}_{u(f)}$ : il est ouvert, donc $\varphi$ continue.
+
+De plus, on a des
+\[
+A_f \longrightarrow \Gamma(U_f, \mathcal{O}_{\mathcal{X}})
+\]
+rendant $f$ inversible, \uncertain{en} \uncertain{homomorphismes}
+\[
+\Gamma(U_f, \mathcal{O}_Y) \simeq A_f \longrightarrow \Gamma(U_f, \mathcal{O}_{\mathcal{X}})
+\]
+\uncertain{avec compatibilités} pour restrictions, d'où un morphisme annelé.
+
+$\mathcal{X}$ est \emph{loc.} annelé, car \struck{\ill{}, \ill{}} \struck{\ill{}} \ldots{} $\varphi^{-1}(Y_f) = \mathcal{X}_{u(f)}$ et \uncertain{donc} $=$ \uncertain{quasi-rationnellement} \ill{} \uncertain{\ill{} suivant}…
+
+\textbf{Conséquence} La catégorie $(\mathrm{Sch})_{/k}$ se reconstitue connaissant $\mathrm{Sch} = (\mathrm{Sch})_{/\mathbb{Z}}$ --- et $S = \operatorname{Spec} k$ comme $(\mathrm{Sch})_{/S}$ : les \uncertain{k-schémas} sont les $S$-schémas. Mais $\mathrm{Sch}_{/S}$ important \uncertain{sans} que $S$ soit néc. affine.
+
+\note{grand diagramme : une première ligne d'inclusions, puis des chapeaux ($\widetilde{\ }$ et $\widehat{\ }$) désignant des catégories de foncteurs ; un long contour trace un parallélogramme autour de la colonne centrale. On le donne par lignes}
+
+\[
+\begin{array}{ccccc}
+\underset{\substack{\wr\wr \\ (\mathrm{Alg}_k)^{\circ}}}{\overset{\substack{(\mathrm{Sch}\text{-}\mathrm{Aff})^{\circ} \\ \wr\wr}}{(\mathrm{Aff}_k)}} & \xhookrightarrow{\ \mathrm{incl}\ } & (\mathrm{Sch})_k & \hookleftarrow & (\mathrm{Locan})_k
+\end{array}
+\]
+\note{au-dessus de $(\mathrm{Aff}_k)$, « $(\mathrm{Sch}\text{-}\mathrm{Aff})^{\circ}$ » est à demi lisible ; sous $(\mathrm{Locan})_k$, une flèche descend vers $\widetilde{(\mathrm{Sch})_k}$}
+
+\[
+\begin{array}{lcl}
+\widetilde{(\mathrm{Aff}_k)} \simeq \underline{\operatorname{Hom}}^{\sim}(\mathrm{Alg}_k, \mathrm{Ens}) & & \\
+\widetilde{(\mathrm{Sch})_k} \xrightarrow{\ \mathrm{restr.}\ } \widetilde{\mathrm{Aff}_k} \simeq \underline{\operatorname{Hom}}^{\sim}(\mathrm{Alg}_k, \mathrm{Ens}) & & \text{(faisceaux pour la top. « de Zariski »)} \\
+\qquad \downarrow \text{inc.} \qquad\qquad \downarrow \text{inc.} & & \\
+\widehat{(\mathrm{Sch})_k} \xrightarrow{\ \mathrm{restr.}\ } \widehat{\mathrm{Aff}_k} \simeq \underline{\operatorname{Hom}}(\mathrm{Alg}_k, \mathrm{Ens}) & & \text{(pas plein\uncertain{fid.})} \\
+\widehat{(\mathrm{Aff}_k)} \simeq \underline{\operatorname{Hom}}(\mathrm{Alg}_k, \mathrm{Ens}) & &
+\end{array}
+\]
+\note{les flèches marquées « inc. » partent de $\widetilde{\ }$ vers $\widehat{\ }$ ; dans la dernière égalité de la deuxième ligne, un premier nom (\struck{\ill{}}) est biffé avant $\underline{\operatorname{Hom}}^{\sim}$, et « $\mathrm{Alg}_k$ » est écrit, en surcharge, dans les deux $\underline{\operatorname{Hom}}$ de droite}
+
+Comment exprimer en termes d'algèbre commutative qu'un \struck{\uncertain{objet}} foncteur sur $\mathrm{Aff}_k$ est un faisceau, i.e. un foncteur \add{$\mathrm{Aff}$}\note{« Aff » ajouté sous la ligne, le mot suivant manque}
+
+[Interprétation en termes de foncteurs d'anneaux de
+\[
+\begin{array}{ccc}
+(\mathrm{Sch})_k & \simeq & \mathrm{Sch}_{/\operatorname{Spec} k = S} \\
+\cap & & \cap \\
+\widehat{C}_{/S} & \approx & \widehat{C}_{/S}
+\end{array}
+\qquad C = \mathrm{Aff}_k
+\]
+]\note{bloc au crayon ; le signe $\approx$ est souligné d'un trait épais}
+
+\{Interprétation des \emph{sommes} en termes faisceautiques \{\uncertain{(Notion de Sup de sous-faisceaux)}\}
+
+\{(pas d'ennui pour les \struck{produits} $\varprojlim$ (finies, \uncertain{disons}) …)
+
+\page{15}
+\note{fragment isolé en haut de la feuille, à l'encre, traversé de deux longs traits verticaux au crayon ; il ne se rattache pas au plan des pages voisines. Le reste de la feuille est vide}
+
+Or on vérifie facilement \emph{directement} que (pour les sous-catégories str. pleines \uncertain{correspondantes} \uncertain{$\pi(C', \widehat{D})$} des diagrammes) \struck{$\pi(C, \widetilde{D}) =$} (\uncertain{le faire} …)
+
+on a
+\[
+\pi(C, \widetilde{D}) = \pi(C', \widetilde{D}) \cap \pi(C, \widehat{D})
+\qquad\qquad
+\begin{array}{ccc}
+& \pi(C, \widetilde{D}) & \\
+\swarrow & & \searrow \\
+\pi(C', \widetilde{D}) & & \pi(C, \widehat{D}) \\
+\searrow & & \swarrow \\
+& \pi(C', \widehat{D}) &
+\end{array}
+\]
+\note{les traits du losange sont tracés sans pointe, sauf celui qui descend de $\pi(C, \widetilde{D})$ vers $\pi(C, \widehat{D})$}
+
+donc on \uncertain{est ramené}, grâce à l'\uncertain{utilisation} \uncertain{analogue}
+\[
+C \mathbin{\underset{\mathrm{Top}}{\times}} \widetilde{D} = \Bigl(C' \mathbin{\underset{\mathrm{Top}}{\times}} \widetilde{D}\Bigr) \cap \Bigl(C \mathbin{\underset{\mathrm{Top}}{\times}} \widehat{D}\Bigr)
+\]
+\note{au-dessus du premier $\times$, un petit signe (\ill{}) surmonté du $\sim$}
+
+à prouver que $\gamma(C, \widehat{D})$ et $\gamma(C', \widetilde{D})$ sont des équivalences i.e. \uncertain{que} les foncteurs $\gamma(C, \widehat{D})_*$ \uncertain{et} $\gamma(C', \widetilde{D})_*$ \uncertain{sont} \uncertain{ess. surj.}
+
+ou encore
+
+\page{16}
+\note{le haut de la page est au crayon, la suite à l'encre}
+
+[Caractérisation des foncteurs $(\mathrm{Sch})_k^{\circ} \to \mathrm{Ens}$ qui sont représentables. \quad Idem : $\widehat{\ }$ \quad $\mathrm{Alg}_k \to \mathrm{Ens}$ \quad \ill{} ]\note{deux blancs sont laissés en ligne, soulignés, dans la seconde ligne du crochet}
+
+a) Immersions ouvertes de faisceaux [stable par chgt. de base, par composition]
+
+b) Sup de sous-faisceaux d'un faisceau.
+
+\textbf{Prop.} Soit $F$ un foncteur $(\mathrm{Sch})_{/S} \to (\mathrm{Ens})$. Pour que $F$ soit repr. \add{(i.e. un schéma …)} il f. et il s. qu'il satisfasse les conditions suivantes :
+
+\begin{itemize}
+  \item[a)] $F$ un faisceau ;
+  \item[b)] $\exists$ $(F_i)_{i \in I}$ famille de sous-\emph{faisceaux} \emph{ouverts} \add{(ds cat. des faisceaux)}, tel que $F = \operatorname{Sup} F_i$ \uncertain{(\ill{})} et chacun des $F_i$ repr. i.e. un schéma ;
+\end{itemize}
+
+\textbf{Cor} On peut \struck{\ill{}} remplacer b) par
+
+\begin{itemize}
+  \item[b')] comme b), les $F_i$ étant de plus des schémas \emph{affines}.
+\end{itemize}
+
+\textbf{Cor} (Supposant $S = \operatorname{Spec} k$) Pour qu'un foncteur $\mathrm{Alg}_k \to (\mathrm{Ens})$ soit un faisceau il f. et il s. que \struck{\ill{}} \add{\uncertain{ce soit un}} faisceau, et qu'on le puisse recouvrir par des sous-faisceaux ouverts affines …
+
+Ainsi, la notion de schéma est explicitée sans recours à la notion d'espaces \emph{topologiques}, faisceau d'anneaux, espaces \uncertain{loc.} annelés ….
+
+\textbf{Applications} a) \emph{Représentabilité du \emph{foncteur}} $P(E)$ ($E$ un module loc. libre sur $S$ --- \uncertain{p.ex.} $S = \operatorname{Spec} k$, $E$ un module de t.f. sur $k$)
+
+b) \emph{Représentabilité de} $\operatorname{Spec} A$
+
+c) \emph{Produits fibrés} (des $\varprojlim$ finies)
+
+d) $\varprojlim$ \add{\uncertain{filtrantes}} par des schémas affines au-dessus d'un schéma.
+
+\marginal{\uncertain{sommes disjointes et disjointes universelles}}\note{dans une bulle en marge gauche, reliée par une flèche à c)}
+
+\page{17}
+\note{à l'encre ; la page reprend en cours de raisonnement, sur le produit de deux topos, et se rattache au fragment de la p. 15 plutôt qu'au plan de géométrie algébrique. Un long trait au crayon la traverse en diagonale}
+
+donc la question est si c'est une équiv. de topos
+\[
+(2) \qquad \widehat{C \times D} \overset{?}{\approx} \widehat{C} \times \widehat{D}
+\]
+
+Si $C$ et $D$ sont stables par $\varprojlim$ finies, alors $C \times D$ l'est aussi ; et \uncertain{soit} $A$ de façon générale \uncertain{A} est une telle catégorie, \ldots{} \uncertain{sachant} que
+\[
+\underline{\operatorname{Homtop}}(E, \widehat{A}) \simeq \bigl(\underline{\operatorname{Hom}}^{*}_{\mathrm{gex}}(A, E)\bigr)^{\circ}, \qquad u \longmapsto u^{*}
+\]
+\add{on conclut} \struck{et} \emph{dans ce cas}, (2) est une équivalence.
+
+\note{« Hom » souligné, indice « gex » (exact à gauche) ; l'astérisque en exposant est lu $u^{*}$}
+
+c) Dans le cas général, on peut écrire \uncertain{grâce à} des morphismes \struck{$\ill{} : C \to D \quad j : E \to \widehat{D}$}
+\[
+i : C \to C' \qquad j : E \hookrightarrow \widehat{D} \quad (\text{i.e. } E \approx \widetilde{D} \text{ pour une top. conv. sur } D)
+\]
+\add{$C'$ et $D$ stables par $\varprojlim$ finies,} $i$ pl. fidèle, $j$ plongement de topos, \uncertain{et on en} conclut un diagramme commutatif mod. is. can.
+
+\begin{tikzcd}
+\pi(C, \widetilde{D}) \arrow[r, "{\alpha = \pi(i, j)}"] \arrow[d, "\gamma"'] & \pi(C', \widehat{D}) \approx \widehat{C' \times D} \arrow[d, "\gamma'"] \\
+\widehat{C} \times \widetilde{D} \arrow[r, hook, "\beta = i \times j"'] & \widehat{C'} \times \widehat{D}
+\end{tikzcd}
+
+\note{sur la flèche verticale de droite, un signe $\wr\wr$ ; sous $\beta$ : « plongement de topos comme 2-produit de tels »}
+
+\marginal{Si $\gamma$ est une équivalence, donc $\alpha$ est un plongement. Peut-on vérifier que $\alpha$ l'est en fait ? \struck{\ill{}}}\note{à droite du diagramme}
+
+Or $\alpha = \pi(i, j)$ est un composé
+\[
+\pi(C, \widetilde{D}) \xrightarrow{\ \alpha_0\ } \underset{\substack{\wr\wr \\ \widehat{C \times D}}}{\pi(C, \widehat{D})} \xrightarrow{\ \alpha_1\ } \underset{\substack{\wr\wr \\ \widehat{C' \times D}}}{\pi(C', \widehat{D})}
+\]
+où $\widehat{C \times D} \to \widehat{C' \times D}$ est un \emph{plongement} car $C \times D \to C' \times D$ pl. fid.
+
+donc on est ramené à voir seulement si
+\[
+\alpha_0 : \pi(C, \widetilde{D}) \longrightarrow \pi(C, \widehat{D}) \simeq \widehat{C \times D}
+\]
+est un plongement, à le foncteur image \struck{inverse associé est} directe associé est \struck{$F \longmapsto (X \longmapsto a(FX))$} $u \longmapsto j_* \circ u$ qui est bien pl. fidèle.
+
+\textbf{Corollaire} \struck{\ill{}}, $\gamma(C, E) : \pi(C, E) \to \widehat{C} \times \widetilde{D}$ est un \emph{plongement}. (Car $\gamma'$ l'est, et $\beta$ aussi, donc $\beta\gamma$ l'est, $\gamma$ aussi.)
+
+Notons que \struck{\ill{}} $\widehat{C} \times \widetilde{D}$ est la sous-catégorie \add{str.} pleine de $\widehat{C'} \times \widehat{D} \approx \widehat{C' \times D}$, \struck{\ill{}} celle formée des $F \in \operatorname{Ob} \widehat{C' \times D}$ tels que (désignant par $p$ et $q$ les deux projections $\widehat{C' \times D} \rightrightarrows \widehat{C'}, \widehat{D}$) on ait
+\[
+\begin{cases}
+p_*(F) \in \widehat{C} & (\text{identifié à la sous-catégorie str. pleine image essentielle de } i_* : \widehat{C} \to \widehat{C'}) \\
+q_*(F) \in \widetilde{D}
+\end{cases}
+\]
+
+Prouvons que \uncertain{c'est} \struck{\ill{}} (l'image ess. de) $\pi(C, D)$ --- ce qui prouvera que $\gamma$ est une équivalence.
+
+\page{19}
+\note{à l'encre, sur papier blanc réglé ; titre souligné de sa main}
+
+\subsection*{Géom. Algébrique}
+
+Compléments sur le formalisme des $\varprojlim$ et des sommes dans $\mathrm{Aff}_k$.
+
+a) \emph{Les sommes \add{finies} sont disjointes et universelles}
+\[
+X = \coprod_{i \in I} X_i \longleftarrow X_i
+\]
+
+\begin{itemize}
+  \item[1)] $X_i \to X$ un mono \add{et $=$ une imm. \emph{fermée}} \quad ($A = \prod A_i \to A_i$ surjectif)
+  \item[2)] $X_i \times_X X_j = \emptyset$ si $i \neq j$ \quad i.e. $A_i \otimes_A A_j = 0$ si $i \neq j$ (car \uncertain{égal} à $1$ dans $A_i$, $0$ dans $A_j$ \struck{\ill{}})
+  \item[3)] $\forall$ $X' \to X$, \uncertain{avec} $X'_i \to X_i$ \quad on a $X' \xleftarrow{\ \simeq\ } \coprod X'_i$ \quad i.e. $\forall$ $A = \prod A_i \to B$, $B$ décompose en $\prod B_i$, et …
+\end{itemize}
+
+\[
+\begin{array}{ccc}
+X' & \longrightarrow & X \\
+\uparrow & & \uparrow \\
+X'_i & \longrightarrow & X_i
+\end{array}
+\]
+
+\struck{b) Dans le cas où} Donc les produits \add{(ou produits fibrés)} sont distributifs par rapport aux sommes
+\[
+\Bigl(\coprod_i X_i\Bigr) \times \Bigl(\coprod_j Y_j\Bigr) \simeq \coprod_{i,j} (X_i \times Y_j)
+\]
+\[
+\Bigl[\; X \times \underbrace{\coprod Y_i}_{Y} \longleftarrow \coprod_i X \times Y_i \quad \ldots \;\Bigr]
+\qquad
+\begin{array}{ccccc}
+X \times Y_i & \longrightarrow & X \times Y & & X \\
+\downarrow & & \downarrow & & | \\
+Y_i & \longrightarrow & Y & \text{---} & e
+\end{array}
+\]
+
+Donc le foncteur
+\[
+(\mathrm{Ens\ finis}) \longrightarrow \mathrm{Aff}_k, \qquad \Gamma \longmapsto \Gamma_k = \coprod_{\Gamma} e_k
+\]
+commute aux \struck{$\varprojlim$ finies} produits \add{finis}, \struck{en particulier aux} \add{et $=$ aux} produits fibrés, donc aux $\varprojlim$ finies. Donc transforme monoïde (groupe) fini en monoïde (groupe) algébrique affine.
+
+Du point de vue alg. comm., on a
+\[
+\Gamma_k = V_{k^{\Gamma}} \qquad k \to k^{\Gamma} \ \text{contravariant en } \Gamma \ (\text{algèbre produit} \simeq \operatorname{Fonc}(\Gamma, k))
+\]
+\note{il écrit tantôt $\Gamma$, tantôt $I$, pour le même ensemble fini ; on garde $\Gamma$ dans la formule, $I$ là où il l'écrit}
+
+$k^{I}$ ou $k[I]$ (gare aux confusions avec polynômes), si \struck{\ill{}} $I$ a une \struck{\ill{}} \add{loi de composition} $I \times I \to I$, cela définit
+\[
+k[I] \to k[I \times I] \simeq k[I] \otimes k[I]
+\]
+la comultiplication ….
+
+\marginal{Le foncteur $I_k$ est le foncteur « ensemble des décompositions idempotentes \add{\uncertain{parfaites}} indexées par $I$ »}\note{marge gauche, reliée par un trait à $I_k = V_{k^I}$}
+
+\page{20}
+
+\[
+\operatorname{Spec} I_k = \operatorname{Spec} k^{I} = \coprod_{I} \underbrace{\operatorname{Spec}(k)}_{S} \qquad \text{\uncertain{envoyé} dans $S$ \uncertain{à} \uncertain{façon} \uncertain{évidente}.}
+\]
+
+b) Produits fibrés dans le cas où l'un des deux morphismes est un monomorphisme. Alors les diagrammes correspondants sur les spectres sont cartésiens
+\[
+\begin{array}{ccc}
+\mathcal{X} & \dashrightarrow & \mathcal{X}' \\
+\downarrow & & \vdots \\
+\mathcal{Y} & \longleftrightarrow & \mathcal{Y}'
+\end{array}
+\qquad\qquad
+\begin{array}{ccc}
+X & \longrightarrow & X' \\
+\downarrow & & \downarrow \\
+Y & \longrightarrow & Y'
+\end{array}
+\]
+\note{à gauche, les lettres cursives désignent les spectres ; la flèche du haut et celle de droite sont en pointillé, celle du bas porte deux pointes}
+
+De plus, si $\mathcal{Y}' \to \mathcal{Y}$ est une imm. fermée (resp. ouverte) --- plus généralement si celle correspond à $A \to A_S^{-1}$\note{lu $A S^{-1}$, localisation}, disons l'homéomorphisme dans, \struck{le diagramme} des $=$ pour $\mathcal{X}' \to \mathcal{X}$, donc la top. de $X'$ est la top. induite.
+
+\textbf{Cas particulier} Intersection de deux sous-objets ---
+
+c)
+\[
+\begin{array}{ccc}
+A & \xrightarrow{\ u\ } & B \\
+Y & \xleftarrow[\ \varphi\ ]{} & X
+\end{array}
+\qquad \text{formule pour } \overline{\varphi(Z)}, \ Z = V(J)
+\]
+Condition pour que $\varphi$ soit dominant :
+\[
+\operatorname{Ker} \varphi \subset \operatorname{Nil} A
+\]
+\note{« $\operatorname{Ker}\varphi$ » sur la page ; il s'agit du noyau de $u$}
+
+\end{document}
