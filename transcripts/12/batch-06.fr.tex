@@ -1,0 +1,998 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 12, batch 6 (pages 101-120).
+% Established from the facsimile archives/batches/12/batch-06.pdf (a mirror of
+% https://grothendieck.umontpellier.fr/12.pdf), per the skill
+% transcribe-grothendieck. The batch file carries no cover sheet: PDF page N
+% is page 100+N, as the Montpellier footer printed on each PDF page confirms,
+% and the archivists' pencil numbers bottom-left agree with that position
+% wherever they are legible (101, 112-120 checked).
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-09-23 — first pass, unchecked against the pages by a human.
+%
+% What the batch is.
+%   101      An isolated typed leaf in English (cycle classes: functoriality
+%            squares for f^*, f_*; correspondences via Künneth and Poincaré
+%            duality; "algebraic" homomorphisms). Formulas and diagrams inked
+%            by hand into the typed blanks; it breaks off before the
+%            composition it announces. Not continued on either side.
+%   102, 109 Blank. Absent.
+%   103      A loose sheet: weight/level tables for H^1 and H^2 (proper vs
+%            smooth case), semi-simplicity of the pure pieces, a remark on
+%            H^2_! and mixing of weights "in the wrong direction".
+%   104-108  "Poids de la cohomologie ℓ-adique d'une variété singulière ou/et
+%            non propre" (his boxed title, p. 104). A) constant coefficients:
+%            (1) X smooth quasi-projective, X = X' - Y with Y a normal-crossings
+%            divisor; Proposition 1 (weights of H^i_! in [0, i], levels) and
+%            Corollaire 1 by duality for H^i (weights in [i, 2n]); (2) smooth
+%            non-quasi-projective / non-separated; (3), (4) non-smooth, by
+%            dévissage and cohomological descent. B) twisted coefficients
+%            coming from R^j f_*Q_ℓ of a projective smooth f, degeneration by
+%            Deligne; C) effective coefficients of weight and level j.
+%   110-115  "Faisceaux ℓ-adiques admissibles et motifs virtuels" (his title,
+%            p. 110), numbered 1., 2.1-2.3, 3.1-3.3, 4.1-4.2, 5.1-5.4, 6.:
+%            "spécial de poids i" sheaves (subquotients of R^i f_*Q_ℓ, f proj.
+%            smooth), Lemma 2.2 (sums, tensor, pull-back, dual twist,
+%            Q_ℓ(-i)); "effectivement admissible à poids dans P" (3.1-3.3),
+%            with levels (4.1-4.2); Théorème 5.1 (R^i f_! of a strictly
+%            special sheaf is eff. admissible, weights ≤ i+j, levels table),
+%            its proof by reduction to A) (1); Cor. 5.2 under the
+%            semi-simplicity part of Tate's conjectures; Cor. 5.3 without it;
+%            Cor. 5.4 over a field for R^i f_*; §6 opens on R^i f_* for an
+%            immersion. P. 115 is the calculation sheet for that immersion
+%            case (normal-crossings compactification, spectral sequence).
+%   116      A typed administrative note to him dated 27 March 1968. Absent.
+%   117      Weight/level tables for the E_2^{p,q} terms, cases i ≤ n-1 and
+%            i ≥ n; (p, q) grids drawn, not redrawn.
+%   118      Printed cover of Springer LNM 41, "Local Cohomology" (1967), with
+%            a printer's stamp "20.3.68 1. Korrektur". Absent.
+%   119      Calculation sheet on the back of p. 120: the refined tables, the
+%            boxed bounds weight ≤ 2 Inf(i, n), level ≤ Inf(i, n-1), then
+%            + j for F special of weight j, and the relative case with
+%            n = d_y(f).
+%   120      An isolated typed leaf in French, starting and ending mid-sentence,
+%            presenting Deligne's work (item 5: λ-structure on K^•(X) via
+%            perfect complexes and Dold-Puppe; the SGA 6 seminar of 1966/67
+%            is named). Hand additions « resté », « sur X », « -Puppe ».
+%   The two skipped versos (116, 118) both carry March 1968 dates; they are
+%   recorded here only, not in the body, since the skill skips such pages.
+%
+% Notation fixed for the batch. \operatorname{Inf} for his « Inf » (minimum),
+% H^{i}_{!} for compactly supported cohomology, \mathbb{Q}_{\ell,X} for the
+% constant sheaf, E_{2}^{pq} for spectral-sequence terms, \check{F} for the
+% dual. His « eff^t » is eff\add{t} (effectivement), « str^t » str\add{t}
+% (strictement); his « ½simplicité » is kept as \tfrac{1}{2} and glossed once.
+% Prose ellipses are « … »; \ldots only inside math.
+%
+% Legibility. 104-107 and 110-111 are a fast draft but carry; 106, 108, 112,
+% 113 are heavily struck over and reworked in the interlinear space — the
+% formulas and the final state are given, much connecting prose is \ill{}.
+% 115, 117, 119 are calculation sheets, transcribed as tables and formulas.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{12}
+\batch{6}
+\pages{101}{120}
+\dating{1964-[vers 1971]}
+\watermark{Édition de démonstration}
+\foldertitle{Généralités (sous-groupes de Galois motiviques) (1964 ?) : notes manuscrites (s.d.), tapuscrit (s.d.)}
+
+\begin{document}
+
+\page{101}
+\note{feuillet dactylographié, en anglais, isolé : ni le feuillet qui le
+précède dans le lot 5 ni celui qui le suit ici n'en continuent le texte, et
+il s'arrête au milieu d'une phrase. Les formules et les deux diagrammes sont
+tracés à la main dans les blancs laissés par la machine, de même que les
+mentions « Kunneth formula » et « Poincaré duality » ; nous ne savons pas
+de quelle main}
+
+The association of a cohomology class with a cycle has all the functorial and
+compatibility properties one could hope for. In particular, if
+$f : X \to Z$ is a morphism of schemes over $k$, then there are commutative
+diagrams
+
+\begin{tikzcd}
+H^{2i}_{\ell}(Z) \arrow[r, "f^{*}"] & H^{2i}_{\ell}(X) \\
+C^{i}(Z) \arrow[u, "\rho_{Z}"] \arrow[r, "f^{*}"] & C^{i}(X) \arrow[u, "\rho_{X}"']
+\end{tikzcd}
+
+\begin{tikzcd}
+H^{2i}_{\ell}(X) \arrow[r, "f_{*}"] & H^{2i-2r}_{\ell}(Z) \\
+C^{i}(X) \arrow[u, "\rho_{X}"] \arrow[r, "f_{*}"] & C^{i-r}(Z) \arrow[u, "\rho_{Z}"']
+\end{tikzcd}
+
+where $r = \dim X - \dim Z$.
+
+\emph{Correspondences.} Let $X$ and $Z$ be projective, smooth, and connected
+schemes over $k$. Then there are canonical isomorphisms
+\[
+\begin{aligned}
+H^{*}_{\ell}(X \times Z) &\simeq H^{*}_{\ell}(X) \otimes_{\mathbb{Q}_{\ell}} H^{*}_{\ell}(Z)
+&& \text{(Kunneth formula)} \\
+&\simeq \check{H}^{*}_{\ell}(X) \otimes_{\mathbb{Q}_{\ell}} H^{*}_{\ell}(Z)
+&& \text{(Poincaré duality)} \\
+&\simeq \operatorname{Hom}_{\mathbb{Q}_{\ell}}\bigl(H^{*}_{\ell}(X), H^{*}_{\ell}(Z)\bigr) .
+\end{aligned}
+\]
+Thus to an element $\alpha$ of $H^{*}_{\ell}(X \times Z)$ we can canonically
+associate a homomorphism $\tilde{\alpha} : H^{*}_{\ell}(X) \to H^{*}_{\ell}(Z)$,
+and to a homomorphism $\beta : H^{*}_{\ell}(X) \to H^{*}_{\ell}(Z)$ we can
+canonically associate an element $\hat{\beta} \in H^{*}_{\ell}(X \times Z)$.
+In particular, we say that $\beta : H^{*}_{\ell}(X) \to H^{*}_{\ell}(Z)$ is
+\emph{algebraic} if the associated cohomology class $\hat{\beta}$ is
+\emph{algebraic}, i.e.\ belongs to $C^{*}_{\ell}(X \times Z)$.
+
+It is sometimes convenient to note that, given
+$\alpha \in H^{*}_{\ell}(X \times Z)$, the homomorphism
+$\tilde{\alpha} : H^{*}_{\ell}(X) \to H^{*}_{\ell}(Z)$ is the composition of
+the homomorphisms
+\note{la composition annoncée n'est pas inscrite : le bas du feuillet est laissé en blanc}
+
+\page{103}
+\note{feuillet isolé, à l'encre bleue : deux tableaux de poids et de niveaux,
+puis deux remarques ; la disposition en colonnes est celle de la page}
+
+$H^{1}$ \quad \struck{\ill{}} \emph{cas propre, ou du $H^{1}_{!}$} (au-dessus
+des colonnes de poids 0 et 1) ; \emph{cas lisse} (sous les colonnes de poids 1
+et 2) :
+\[
+\begin{array}{c|ccc}
+\text{poids} & 0 & 1 & 2 \\
+\hline
+\text{niveau} & 0 & 1 & 0
+\end{array}
+\]
+morceaux purs sont semi-simples
+
+$H^{2}_{\ill{}}$ \quad \emph{cas propre} (au-dessus des poids 0 à 2) ;
+\emph{cas lisse} (sous les poids 2 à 4) :
+\[
+\begin{array}{c|ccccc}
+\text{poids} & 0 & 1 & 2 & 3 & 4 \\
+\hline
+\text{niveau} & 0 & 1 & 2 & 1 & 0
+\end{array}
+\]
+\note{l'indice de ce $H^{2}$ est une petite boucle que nous ne savons pas
+lire ; ce n'est pas le « ! » de la ligne suivante}
+
+morceaux purs de poids $\neq 2$ sont semi-simples. Le morceau pur de poids 2
+est une extension par un motif de Tate $\mathbb{Q}(-1)^{r}$.
+
+$H^{2}_{!}$ \quad il semble qu'il puisse y avoir mélange de poids dans le
+mauvais sens, à cause d'une extension d'un motif effectif de poids 0 par un
+autre de poids 1 ; en plus de cela, il y aurait une extension, peut-être non
+triviale, d'un motif effectif de poids 0 \add{resp.} 1\note{« resp. 1 » est
+ajouté au-dessus de la ligne} par un autre.
+
+\section{Poids de la cohomologie $\ell$-adique d'une variété singulière ou/et non propre}
+\note{titre encadré, en tête de la page 104, de sa main ; « $\ell$-adique » y
+est ajouté au-dessus de la ligne, et une parenthèse, en haut à droite, porte
+\uncertain{(sur un corps de type fini)}}
+
+\page{104}
+\subsection{A) Coefficients constants}
+
+(1) Soit d'abord $X$ lisse et quasi-projective, donc par résolution forte (que
+nous admettons), on aura
+\[
+X = X' - Y, \qquad Y = \bigcup_{i} Y_{i},
+\]
+$X'$ lisse et projective, $Y_{i}$ diviseurs lisses, irréd.\add{uctibles}, à
+croisements normaux. \struck{Soit} On a donc
+\[
+H^{i-1}(X') \to H^{i-1}(Y) \to H^{i}_{!}(X) \to H^{i}(X') \to H^{i}(Y) \to
+H^{i+1}_{!}(X) \to \cdots
+\]
+\note{le début de la suite, $H^{i-1}(X') \to H^{i-1}(Y)$, est récrit au-dessus
+d'un premier terme biffé}
+\note{en marge gauche, le diagramme}
+
+\begin{tikzcd}
+X \arrow[r, hook] \arrow[d, "f"'] & X' \arrow[dl, "f^{\prime}"] \\
+\operatorname{Spec} k &
+\end{tikzcd}
+
+\struck{\ill{}} donc les poids dans $H^{i}_{!}(X)$ [qui se définissent
+\uncertain{via les val.\ absolues des valeurs propres de Frobenius} dans le
+cas \uncertain{d'un} corps fini, par réduction au cas d'un corps de type
+fini…] sont contenus dans ceux de $H^{i}(X')$ [\uncertain{voisins} à $i$
+par Weil] et ceux de $H^{i-1}(Y)$.
+
+Or
+\[
+H^{*}(Y) \Longleftarrow E_{2}^{pq} = H^{p}\bigl(i_{0} \ldots i_{p} \mapsto
+H^{q}(Y_{i_{0}} \cap \cdots \cap Y_{i_{p}})\bigr)
+\]
+\note{sous le terme, en interligne : « on peut se borner ici aux cochaînes
+alternées » ; à droite, une accolade porte : de poids $q$ ; de niveau
+$\leqslant q$ [intervient si $i (= p+q) \leqslant n-1$] ; de niveau
+$\leqslant 2n-i-q$ [si $i = p+q \geqslant n$]. En marge gauche :
+$(2n-i-1)-q$}
+
+\struck{Donc} Or ici $Y_{i_{0}} \cap \cdots \cap Y_{i_{p}}$ est projectif et
+lisse (de dimension $n-p-1$ si $X$ \struck{\ill{}} purement de dim.\ $n$).
+Donc le poids du terme $E_{2}^{pq}$ est $q$, et on trouve que le poids de
+$H^{j}(Y)$ est $\leqslant j$. Donc :
+
+\textbf{Proposition 1} \struck{Lemme}\note{« Proposition 1 » est écrit
+au-dessus d'un premier mot biffé} $H^{i}_{!}(X)$ est de poids compris entre 0
+et $\leqslant i$. La partie de poids $i$ (resp.\ de poids $\leqslant i-1$) est
+le quotient image de $H^{i}_{!}(X) \to H^{i}(X')$ [resp.\ l'image de
+$H^{i-1}(Y) \to H^{i}_{!}(X)$]. De plus, si $i \geqslant n = \dim X$, alors le
+\emph{niveau} de $H^{i}_{!}(X)$ est $\leqslant 2n-i$, et les deux niveaux
+précédents sont de niveau $\leqslant 2n-i-1$ ; de plus, il n'y a des poids
+qu'entre $2(i-n)$ [car il faut écrire $q \leqslant 2(n-p-1)$ !] et $i$, i.e.
+\ill{} d'amplitude $2n-i$…
+
+Pour un complément, notons que le niveau de $E_{2}^{pq}$ est $\leqslant$ celui
+de $H^{q}(Y_{i_{0}} \cap \cdots \cap Y_{i_{p}})$ (de dim.\ $n-p-1$), donc
+\[
+\leqslant \struck{\ill{}}\; 2(n-p-1) - q \;=\; \struck{\operatorname{Inf}(q,}
+(2n-i-2) - p \qquad (i = p+q),
+\]
+donc $\leqslant 2(n-1)-i$.
+\note{au-dessus, une variante : « donc $= 2(n-1)-i-p$ »}
+
+\marginal{NB Tous les niveaux de la filtration sont « effectifs »}
+\marginal{En tous cas, niveau $\leqslant \operatorname{Inf}(i, n)$}
+
+\page{105}
+Donc \struck{remplaçant} pour $p+q = i-1$, on trouve un niveau
+$\leqslant 2(n-1)-i+1 = 2n-i-1$.
+
+\emph{Remarque.} La filtration de $H^{*}(Y)$ déduite de la suite spectrale
+est aussi autre que la filtration par les poids. La filtration image de
+$H^{i}_{!}$ est donc aussi la filtration par les poids croissants (de 0 à $i$,
+\ill{}) donc est également indépendante de la \uncertain{compactification}
+$X'$ choisie. Écrivons les termes de cette filtration, en utilisant le fait que
+$H^{i-1}(X')$ est purement de poids $i-1$, et \struck{$E_{2}^{i-1,0}$} que la
+suite spectrale est dégénérée pour des raisons de poids :
+\[
+\begin{array}{c|c|c|c|c|c|c}
+ & E_{2}^{i-1,0} & E_{2}^{i-2,1} & \cdots & E_{2}^{1,i-2} &
+ E_{2}^{0,i-1}/\operatorname{Im} H^{i-1}(X') &
+ \operatorname{Ker}\bigl(H^{i}(X') \to E_{2}^{0,i}\bigr) \\
+\hline
+\text{poids} & 0 & 1 & & i-2 & i-1 & i
+\end{array}
+\]
+\note{sous le tableau, une troisième ligne est amorcée puis laissée vide, son
+intitulé biffé}
+
+\struck{Cas $i \geqslant n$} Si $i \leqslant n$, les « niveaux » sont
+\add{seulement} $\leqslant$ poids, il n'y a pas lieu à priori d'attendre plus.
+L'on trouve d'autre part, pour $i \geqslant n$, un tableau
+\uncertain{de gr.\ filtré $\geqslant n$} :
+\[
+\begin{array}{c|c|c|c|c|c|c}
+ & 0 \cdots 0 & \scriptstyle E_{2}^{2n-i-1,2(i-n)} & \scriptstyle E_{2}^{2n-i-2,2(i-n)+1} & \cdots
+ & \scriptstyle E_{2}^{0,i-1}/\operatorname{Im} H^{i-1}(X') &
+ \scriptstyle \operatorname{Ker}(H^{i}(X') \to E_{2}^{0,i}) \\
+\hline
+\text{poids} & \times & 2(i-n) & 2(i-n)+1 & \cdots & i-1 & i \\
+\hline
+\text{niveau} & \times & 0 & 1 & \cdots & 2n-i-1 & 2n-i
+\end{array}
+\]
+\note{les premières colonnes, nulles, sont barrées d'une croix sur les deux
+lignes ; l'exposant de la première colonne non nulle est récrit sur un premier
+exposant biffé}
+
+\textbf{Corollaire 1} (\uncertain{par dualité}) $H^{i}(X)$ est de poids
+compris entre $i$ et $2n$. Le morceau \struck{\ill{}} de poids $i$ est
+exactement l'image de $H^{i}(X')$. Si $i \geqslant n$, les niveaux des morceaux
+de poids $i, i+1, \ldots, 2n$ sont resp.\ $\leqslant 2n-i, 2n-i-1, \ldots, 0$.
+Si $i \leqslant n$, il n'y a de morceaux que des poids $i, i+1, \ldots, 2i$
+\struck{$i, i+1, \ldots, 2n = 2(n-i) = \ldots$}, qui sont de niveaux resp.
+$\leqslant i, \uncertain{i-1}, \ldots, 0$.
+\marginal{NB Les niveaux ici \emph{dé}croissants}
+
+\marginal{Tous les morceaux de la filtration sont « effectifs ». En tous cas,
+niveau $\leqslant \operatorname{Inf}(i, n)$}
+
+\page{106}
+(2) \emph{Cas \struck{\ill{}} lisse non quasi-projectif.}
+
+Si $X$ est séparé, utilisant une compactification de Nagata, et résolution des
+singularités [comme ci-dessus], on a les mêmes résultats que ci-dessus, en
+notant que la résolution des singularités permet de ramener les conj.\ de Weil
+pour des var.\ propres et lisses au cas projectif et lisse.
+
+Si $X$ non séparé, $H^{i}_{!}(X)$ n'est plus défini. Par contre $H^{i}(X)$ est
+défini. On a, avec un recouvrement affine,
+\[
+H^{*}(X) \Longleftarrow E_{2}^{pq} = H^{p}\bigl(\sigma \mapsto
+H^{q}(U_{\sigma})\bigr) .
+\]
+Ici $E_{2}^{pq}$ est effectif de poids $\geqslant q$, mais
+\struck{non dégénéré} \struck{\ill{}} on peut en conclure que l'effectivité de
+$H^{i}(X)$, et le fait que ses poids sont compris entre 0 et $2n$ si
+$i \geqslant n$, et entre 0 et $2i$ si $i \leqslant n$ ; en tous cas, en
+\ill{}, on trouve que le niveau \struck{est $\leqslant 2n-i$ (il reste à
+regarder pour $i \geqslant n$)} \uncertain{des poids $\leqslant 2i$} est
+$\leqslant i$ \struck{\ill{}}.
+\note{passage très raturé : deux lignes biffées d'un long trait ; nous ne
+donnons que ce qui reste lisible}
+\marginal{Question : le niveau $\leqslant 2n-i$ ? \struck{\ill{}} (si
+$n = \dim X$)}
+
+(3) \emph{Cas non lisse} : $H^{i}_{!}(X)$, ($X$ séparé). Je dis qu'il est encore
+\emph{effectif} et de poids $\leqslant i$, de niveau
+$\leqslant \operatorname{Inf}(i, 2n-i)$ \uncertain{le complément ci-dessus}.
+\note{en interligne : « vrai quand il est lisse dense »,
+\uncertain{lecture douteuse}}
+Soit $U$ un ouvert lisse dense, $Y = X - U$. On a
+\[
+\to H^{i}_{!}(U) \to H^{i}_{!}(X) \to H^{i}_{!}(Y) \to
+\]
+et $H^{i}_{!}(U)$ est effectif de poids $\leqslant i$, \add{de niveau
+$\leqslant i$}\note{ajouté au-dessus de la ligne}, et $H^{i}_{!}(Y)$ aussi par
+hypothèse de récurrence sur la dimension, donc $H^{i}_{!}(X)$ est effectif de
+poids $\leqslant i$, de niveau $\leqslant i$. De même $H^{i}_{!}(U)$ est de
+niveau $\leqslant 2n-i$, et $H^{i}_{!}(Y)$ de niveau
+$\leqslant 2(n-1)-i \leqslant 2n-i$, cqfd.
+
+(4) \emph{Cas non lisse} : $H^{i}(X)$ \struck{($X$ séparé)}. Je dis qu'il est
+effectif, à poids $\leqslant 2i$ \add{$\leqslant i$ et $\leqslant n$}, à
+niveau \struck{$\leqslant \operatorname{Inf}(i, \ldots\ \dim X)$} \ill{}.
+\note{l'ajout « $\leqslant i$ et $\leqslant n$ » est écrit au-dessus de la
+ligne, entre « poids » et « niveau », sans qu'on voie auquel des deux il se
+rapporte}
+Par la suite spectrale de Leray, on est ramené au cas où $X$ affine. Récurrence
+sur $i$, c'est trivial si $i \leqslant 0$. On utilise une résolution
+$X' \to X$, et suite spectrale de descente
+\[
+H^{*}(X) \Longleftarrow E_{2}^{pq} = H^{p}\bigl(s \mapsto
+H^{q}((X'/X)^{s})\bigr)
+\]
+\note{l'exposant $s$ porte sur le produit fibré itéré de $X'$ au-dessus de
+$X$ : \uncertain{lecture}}
+par hyp.\ de récurrence, si $q < i$, $E_{2}^{pq}$ est effectif
+\marginal{poids $\leqslant 2\operatorname{Inf}(i,n)$, niveau $\leqslant
+\uncertain{\operatorname{Inf}(i,n)}$}
+
+\page{107}
+de \struck{niveau} poids $\leqslant 2q$, de niveau $\leqslant q$. Donc il en
+est ainsi de $E_{\infty}^{pq}$ si $p+q = i$, $p \neq 0$, \add{et même ils
+sont de poids $\leqslant 2(i-1) < 2i$, de niveau $\leqslant i-1 < i$}\note{en
+interligne, au-dessus de la ligne} ; reste à examiner le terme
+$E_{2}^{0,i} \subset H^{i}(X')$ ; comme $X'$ est lisse, il est donc effectif,
+de poids $\leqslant 2i$, de niveau $\leqslant i$. On ajoute que, si $i > n$,
+on a $H^{i}(X) = 0$ ($X$ affine !).
+
+\struck{A fortiori $H^{i}(X)$ est de niveau $\leqslant n = \dim X$. Il suffit
+\ill{} $E_{2}^{pq}$ \ill{} utilisant un recouvrement}
+\note{trois lignes cancellées d'un long zigzag, lisibles en partie}
+
+\subsection{B) Coefficients tordus sur $X$ lisse}
+\note{dans le titre, deux ajouts entourés : « séparé » après « lisse »,
+et « $F$ effectif de poids et niveau $j$ »}
+
+(1) On suppose que les coefficients envisagés proviennent d'un motif lisse sur
+$X$, et \add{par dévissage (possible loc.\ ?)}\note{ajouté en interligne} on se
+ramène au cas où ce dernier est un facteur direct d'un
+$R^{j}f_{*}(\mathbb{Q}_{\ell,Y})$, avec $f : Y \to X$ un morphisme projectif
+et lisse. \add{On peut supposer même $f$ de dim.\ relative $j$.}\note{ajouté
+en interligne, suivi d'une ligne que nous ne lisons pas} On a
+\[
+F = R^{j}f_{*}(\mathbb{Q}_{\ell,Y}) .
+\]
+Considérons la suite spectrale
+\[
+H^{*}(Y) \Longleftarrow E_{2}^{pq} = H^{p}\bigl(X, R^{q}f_{*}(Y)\bigr) .
+\]
+D'après \emph{Deligne}, cette suite spectrale dégénère. Donc
+$H^{i}(X, R^{j}f_{*}(\mathbb{Q}_{\ell}(Y)))$ \add{et par suite $H^{i}(X,F)$}
+apparaît comme un \emph{morceau} de $H^{i+j}(Y)$. On trouve que c'est un
+\struck{module} (effectif) de poids compris entre $i+j$ et
+$2(n+j) = 2n+2j$ (où $n = \dim X$) ; \struck{$2(n+j)$ et $2(i+j)$} les
+niveaux sont resp.\ $\leqslant (2n-i+j), \ldots, 0$. Si $i \leqslant n$, il
+n'y a que des poids \uncertain{qui ont les dimensions}
+$i+j, i+j+1, \ldots, 2(i+j)$, de \struck{poids} niveaux respectifs
+\struck{$\leqslant 0, \ldots, i+j$} $i+j, i+j-1, \ldots, 0$.
+\note{« $2(i+j)$ » et « $2n+2j$ » sont entourés ; les trois bulles de la marge
+s'y rattachent}
+\marginal{peut-on remplacer $2n+2j$ par $2n+j$ ?}
+\marginal{peut-on remplacer $2i+2j$ par $2i+j$ ? \struck{Idiot \ill{}} !}
+\marginal{Les poids sont-ils $\geqslant j$ ?}
+
+Résultats duals pour $H^{i}_{!}(F)$, il est effectif de poids $\leqslant i+j$,
+et \struck{à niveaux} si $i \geqslant n$, il est à niveaux croissants de 0 à
+\struck{$2n-i+j$} $2(n+j)-(i+j) = 2n-i+j$ pour des poids croissants de
+\ill{}.
+
+Si $X$ est \emph{propre}, on trouve que $H^{i}(X,F)$ est pur de poids $i+j$
+(et semi-simple ici…) !
+
+\page{108}
+(2) Cas où on dispose seulement d'une représentation de $F$ sous forme
+symbolique \emph{localement} sur $X$ pour la top.\ (Zariski). Dans ce cas,
+\struck{on ne peut plus utiliser la filtration. $X$ séparé, on doit
+\ill{} localiser sur $X$ en sous (ét), et utiliser la suite spectrale de Leray
+d'un recouvrement. On trouve \ill{} effectivité, poids entre 0 et $2n+2j$}
+\note{passage encadré à gauche, biffé de deux traits obliques et d'un trait
+horizontal} on a intérêt à travailler \emph{d'abord} avec la cohomologie à
+supports propres sur $X$, qui permet de découper $X$ en morceaux, et d'obtenir
+le même résultat que dessus. On déduit l'analogue en cohomologie à supports
+quelconques par dualité.
+
+\struck{Si $F$ est symplectique,}
+
+\emph{Remarque.} [En fait, on voit par ce raisonnement que, en ce qui concerne
+la coh.\ à supports propres, les résultats sont obtenus en supposant seulement
+que $F$ soit « joli par morceaux » sur $X$ \add{\uncertain{la lissité de $X$
+par ailleurs}} ; si \uncertain{de plus} $X$ lisse, le fait \uncertain{que}
+$F$ \uncertain{constant} est utilisé \struck{\ill{}} pour passer aux
+\uncertain{résultats} précédents par dualité.
+
+\subsection{C) Cas de coefficients effectifs de (poids $j$, niveau $j$) quelc., $X$ quelconque}
+
+1) Cas de la cohomologie $H^{i}_{!}$ : déjà traité dans le numéro
+précédent : résultat le même que dans (B) 1).
+
+2) Cas de la cohomologie $H^{i}(X, F)$. Je dis qu'il est \emph{effectif}, de
+poids \struck{entre 0 et $2i$}
+$\leqslant \operatorname{Inf}(2i, 2n) = 2 \operatorname{Inf}(i, n)$, de niveau
+$\leqslant \operatorname{Inf}(\uncertain{i}, n)$, où $n = \dim X$.
+\struck{On procède par} ----
+\marginal{?}
+
+\section{Faisceaux $\ell$-adiques admissibles et motifs virtuels}
+\note{titre en tête de la page 110, de sa main}
+
+\page{110}
+\struck{1. Soit $S$ un schéma, $\mathbb{Q}_{\ell}$}
+
+1. On a fixé un nb premier $\ell$. Les schémas envisagés sont premiers à
+$\ell$. (Le cas le plus intéressant est celui des schémas loc.\ de type fini
+sur $\mathbb{Z}$.)\note{« de type fini sur » est récrit au-dessus de la
+ligne ; un mot ajouté, \uncertain{constructibles}, s'y rattache} Les faisceaux
+envisagés sont les $\mathbb{Q}_{\ell}$-faisceaux. On note $\mathbb{Q}_{\ell}(1)$
+le faisceau de Tate $T_{\ell}(\mathbb{G}_{m}) \otimes_{\mathbb{Z}_{\ell}}
+\mathbb{Q}_{\ell}$, et le twist par sa puissance tensorielle $n$-ième est
+noté $F \mapsto F(n)$.
+\marginal{Le bon point de vue \uncertain{commence} à se \uncertain{voir} !}
+
+2.1 Un faisceau $F$ sur $S$ est dit \emph{spécial} \add{de poids $i$} s'il
+est isomorphe \struck{à un facteur direct} \add{quotient tordu}
+\add{sous-quotient tordu} d'un faisceau de la forme $R^{i}f_{*}(\mathbb{Q}_{\ell,X})$,
+où $f : X \to S$ est projectif et lisse. [On entend \uncertain{que} si $i < 0$,
+cela signifie $F = 0$ ; si $i = 0$, alors \struck{\ill{}} cela signifie :
+$F$ localement constant.]
+\note{deux ajouts entourés, dans l'interligne : « \uncertain{ou d'un
+\ill{} ?} » et « sous-quotients et quotients tordus, et sommes directes » ; ce
+dernier est rattaché par un trait au mot « équivalent à »,
+\uncertain{lecture}}
+\marginal{définition canulée : \uncertain{on ne saurait} se ramener à une
+situation définie sur $\mathbb{Z}$}
+\marginal{Un travail dans la catégorie des faisceaux $\ell$-adiques naturels
+\uncertain{arithmétiques}…}
+\note{sous ces deux bulles de marge, une troisième, longue, est cancellée de
+traits verticaux ; nous ne la lisons pas}
+
+\textbf{Lemme 2.2.}
+\begin{enumerate}
+\item[a)] Stabilité de « spécial de poids $i$ » par sommes directes.
+\item[b)] Si $F$, $F'$ sont spéciaux de poids respectifs $i, j$, alors
+$F \otimes F'$ est spécial de poids $i+j$.
+\item[c)] Stabilité par image inverse.
+\item[d)] Si $F$ spécial de poids $i$, $\check{F}(-i)$ l'est aussi.
+\item[e)] $\mathbb{Q}_{\ell}(-i)$ est spécial de poids $2i$, pour $i \geqslant 0$.
+\end{enumerate}
+\note{ajout en interligne sous d), rattaché à la marge « d) \uncertain{on
+déduit} Lefschetz »}
+
+Démonstration.
+\begin{enumerate}
+\item[a)] Se prouve en introduisant $\coprod_{1 \leqslant i \leqslant n} X_{i}$,
+\item[b)] Se prouve en considérant un $X_{1} \times_{S} X_{2}$, et utilisant
+Künneth,
+\item[c)] Par th.\ de changement de base.
+\item[d)] Par th.\ de Lefschetz en cohomologie $\ell$-adique.
+\item[e)] On prend $\mathbb{Q}_{\ell}(-i) = R^{2i}f_{*}(\mathbb{Q}_{\ell,
+\mathbb{P}^{i}_{S}})$.
+\end{enumerate}
+\marginal{Cor.\ 2.3 Si $F$ spécial de poids $i$, et $n \geqslant i$, alors
+$\check{F}(-n)$ est spécial de poids $2n-i$}
+
+3.1 Un faisceau $F$ sur $S$ est dit \emph{effectivement admissible}
+\struck{\ill{}} [\emph{admissible}] s'il existe pour tout ouvert $U$ de $S$
+\struck{une filtration de $F|U$} \add{$F|U$ dont les quotients \ill{}} une
+filtration …, où $Y \to X$ …
+\struck{\ill{} et \ill{} $F|S_{\alpha}$ …}
+\note{les lignes qui suivent la définition sont barrées de trois longs traits
+et récrites en interligne ; nous ne donnons que les fragments lisibles}
+\marginal{il faudrait permettre une extension finie radicielle loc.\ \ill{}
+\uncertain{sur} $Y$ \uncertain{rendant} \ill{} spécial}
+
+On dit que $F$ est \emph{à poids dans $P$}, où $P$ est une partie de
+$\mathbb{Z}$, si … \uncertain{les} $F|S_{\alpha}$ sont
+\uncertain{admissibles} … poids $\in P$. (Donc \struck{eff.\ admissible}
+alors $F$ est de poids $\in P'$, pour tout $P' \supset P$.)
+Si \struck{$P = \emptyset$} \struck{\ill{}} $P$ ne contient pas …
+d'élément $\geqslant 0$, cela signifie $F = 0$.
+\marginal{Attention, il est tautologique ! cela signifie que si $F$ est à
+poids $\in P$ et à poids $\in P'$, il est à poids $\in P \cap P'$
+\struck{\ill{}}}
+
+\page{111}
+\struck{d) Si $F$ spécial de poids}
+
+\textbf{Proposition 3.3} \struck{3.2}
+\begin{enumerate}
+\item[a)] Stabilité de « eff.\ adm.\ de poids $\subset P$ » par
+sous-faisceaux constructibles, quotients constructibles, \add{sommes
+finies,} extensions.
+\item[b)] Si $F, F'$ sont eff.\ adm.\ à poids $\subset P, P'$, alors
+$F \otimes F'$ est admissible à poids
+$\subset P + P' = \{ i+i' \mid i \in P, i' \in P' \}$.
+\item[c)] Stabilité par chgt de base.
+\item[d)] Si $F$ est \struck{spécial} eff\add{t} admissible \emph{constant
+tordu} à poids $\subset P$, et si $i \in P \Rightarrow i \leqslant n$, alors
+$\check{F}(\struck{n})$ est à\add{ eff\add{t}} admissible (constant tordu) à
+poids $\subset 2n - P = \{ n-i \mid i \in P \}$.
+\end{enumerate}
+\note{sic : l'ensemble est écrit $\{ n-i \mid i \in P \}$, alors que
+« $2n - P$ » appellerait $\{ 2n-i \}$ ; le twist de $\check{F}$ est
+surchargé et nous ne le lisons pas avec sûreté}
+\marginal{d) \uncertain{\ill{}} Lefschetz}
+
+\emph{Dém.}\ a) b) c) sont immédiats, en utilisant les notations
+correspondantes de 2.1. Notons d'ailleurs :
+
+3.2. [\struck{Supposons $S$ \ill{}} \add{Supposons $S$ qu.\ cpt
+\uncertain{sép}.}]\note{ajout entouré, au-dessus de la ligne} Pour que $F$
+soit eff\add{t} adm.\ à poids $\subset P$, il faut et il suffit que l'on
+puisse trouver une partition de $S$ en \struck{\ill{}} sous-schémas
+$S_{i} \overset{\alpha_{i}}{\hookrightarrow} S$, $\alpha_{i}$ immersion de
+prés.\ finie, avec \struck{\ill{}} $F|S_{i} = F_{i}$ admettant une filtration
+dont les quotients successifs sont spéciaux de poids $\in P$.
+\note{une grande accolade tracée à gauche, de 3.2 jusqu'en haut de la page,
+se termine par une flèche vers « Proposition 3.3 » : l'énoncé 3.2 doit
+précéder la Proposition}
+
+Comme, pour $F$ constant tordu, la formation de $\check{F}$ commute au
+changement de base, \add{3.2} d) résulte de 2.2.
+
+4.1 Un faisceau $F$ est dit eff\add{t} admissible \emph{de niveaux}
+$\leqslant \nu$ \struck{s'il est effectivement admissible, et} dans 3.1, on
+peut prendre $G$ \struck{\ill{} de poids $j \in$} de la forme $G'(-k)$,
+$k \geqslant 0$, où $G'$ est spécial de poids \struck{\ill{}} $\leqslant \nu$.
+--- On dit que $F$ est eff\add{t} admissible « de poids $\subset P$, et de
+niveau $\leqslant \nu$ » si, avec \struck{\ill{}} $G = G'(-k)$ dans 3.1, $G'$
+est spécial de poids $j \leqslant \nu$, avec $j + 2k \in P$.
+\emph{Attention}, à priori cela n'est pas la conjonction de « de poids
+$\subset P$ » et « de niveau $\leqslant \nu$ ». \struck{\ill{}} On notera
+que si \struck{\ill{}} $\nu$ est \struck{\ill{}} \struck{\ill{}} un entier tel
+que $P \leqslant \nu$ (i.e.\ $j \in P \Rightarrow j \leqslant \nu$), alors
+« eff\add{t} adm.\ de poids $\in P$ » $\Rightarrow$ « id.\ et à niveau
+$\leqslant \nu$ ».
+\note{en bas, avant « alors », un début de ligne biffé :
+« \struck{4.2 a) b) c)} »}
+\marginal{blague : après 3.2, on remarque qu'on peut faire : 3.2, soit 3.1
+qu'on \uncertain{étend} par \uncertain{4.2}}
+
+\page{112}
+\textbf{Proposition 4.2}
+\begin{enumerate}
+\item[a)] Stabilité de « eff\add{t} adm.\ de poids $\subset P$ et niveau
+$\leqslant \nu$ » par sous-faisceaux constr., quotients constructibles,
+sommes finies, extensions.
+\item[b)] $F_{i}$ « eff\add{t} adm.\ de poids $\subset P_{i}$, niveau
+$\leqslant \nu_{i}$ » pour $i = 1, 2$ implique $F_{1} \otimes F_{2}$
+« eff\add{t} adm.\ de poids $\subset P_{1} + P_{2}$, niveau
+$\leqslant \nu_{1} + \nu_{2}$ ».
+\item[c)] Stabilité par chgt de base.
+\item[d)] Si $F$ \add{eff\add{t}} admissible \emph{constant tordu}, « à poids
+\struck{$k$} \add{$\nu + 2k$} et niveau $\leqslant \nu$ » (où $k \geqslant 0$,
+$\nu \geqslant 0$), \struck{et si} alors pour tout $n \geqslant \nu + k$
+\add{(soit $n = \nu + k + h$, $h \geqslant 0$)}, $\check{F}(n)$ est « eff\add{t}
+admissible constant tordu, à poids $2n - \nu - 2k = \nu + 2h$, niveau
+$\leqslant \nu$ ».
+\end{enumerate}
+\note{le twist de $\check{F}$ est surchargé : lecture $\check{F}(n)$
+\uncertain{probable}}
+
+\emph{Remarque} : introduire plutôt : « à morceaux de poids $i_{\alpha}$,
+niveau $\nu_{\alpha}$ », $\alpha \in \ldots$ ».
+
+\textbf{Théorème 5.1.} Soit $f : X \to S$ un morphisme séparé de
+\uncertain{type} \add{prés.\ finie}, et $F$ \struck{\ill{} de poids \ill{}}
+\emph{strictement spécial} de poids $j$ \struck{(i.e.\ déf.\ 2.1, avec
+\ill{})} (i.e.\ déf.\ 1 \add{\uncertain{d'un}} facteur \emph{direct} d'un
+$R^{j}g_{*}(\mathbb{Q}_{\ell,Y})$, avec $g : Y \to X$ proj.\ lisse). Alors
+\struck{\ill{}} sur $X$ \struck{\ill{}} \uncertain{s'appliquant}, avec $F$
+…, $R^{i}f_{!}(F)$ est eff\add{t} admissible \struck{\ill{}} à poids
+$\leqslant i + j$ \struck{\ill{}}, et à niveaux $\leqslant
+\operatorname{Inf}(i+j, 2n-i+j)$ …
+\struck{Si $f$ \ill{} lisse et $X$ \ill{} \ill{} poids \ill{} niveau
+\ill{}} Si $n = \operatorname{Sup}_{s \in S} \dim X_{s}$, et si
+$i \geqslant n$, les poids $\ldots$ possibles sont et niveaux correspondants
+\[
+\begin{array}{c|c|c|c|c}
+\text{poids} & 2(i-n) & 2(i-n)+1 & \cdots & (i+j) \\
+\hline
+\text{niveau} & \leqslant 0 & \leqslant 1 & \cdots & \leqslant 2n-i+j
+\end{array}
+\]
+\note{énoncé très raturé : deux lignes barrées, où figurait un premier
+tableau (« poids $i+j$, $2i$ … ; niveau … ») biffé en zigzag ;
+nous donnons l'état final, et le tableau est celui qu'il a gardé. La
+première colonne, $2(i-n)$, ne dépend pas de $j$ : sic}
+\marginal{Utiliser Lefschetz \uncertain{à la} Deligne}
+\marginal{+ résolution des singularités pour les \uncertain{variétés sur}
+les corps résiduels de $S$.}
+\marginal{+ $\tfrac{1}{2}$ simplicité arithmétique ?}
+\note{le $\frac{1}{2}$ de la dernière bulle : sa manière d'écrire
+« semi- », soit « semi-simplicité
+arithmétique ? »}
+
+\emph{Démonstration.} Cas \add{(a)} où $F = R^{j}g_{*}(\mathbb{Q}_{\ell,Y})$,
+$g : Y \to X$ proj.\ lisse. Utilisant le th.\ de changement de base propre,
+\struck{\ill{}} et dévissage via suite exacte de cohomologie à supports
+propres, on se ramène au cas où \struck{$\exists\, S' \to S$} $S$ est affine,
+noeth., intègre, $\exists\, S' \to S$ morphisme fini \uncertain{radiciel}
+\add{$X$ affine,} tel que $X_{1} = X \times_{S} S'$ soit \emph{lisse} sur
+$S'$, et se « compactifie » en un $\widehat{X}_{S'}$ \struck{tel que $X'$}
+projectif et lisse, tel que $\widehat{X}_{S'} - X_{S'}$ soit un diviseur
+\add{relatif}, à croisements normaux, à composantes irréductibles
+\uncertain{lisses} sur $S'$ ; enfin $F$ \struck{\ill{}} est \emph{spécial}
+de poids $j$. [\struck{Quitte} : quitte à changer de notation, on
+\uncertain{peut} … $S = S'$, et d'où $X \subset X' = \widehat{X}$.]
+On \uncertain{peut supposer} $F = \mathbb{Q}_{\ell,X}$, on est ramené à
+\uncertain{la} situation traitée dans les notes préliminaires (partie
+(A, 1)). [\emph{NB} On n'utilise pas la dégénérescence de la suite
+spectrale qui y intervient.]
+\marginal{à expliciter au point \uncertain{de vue} \uncertain{construction}
+servira dans 3.3.\ a) et 4.2 a)}
+\note{la « partie (A, 1) » des « notes préliminaires » est la section
+A) (1) des pages 104–105}
+
+\page{113}
+\struck{B) Cas général. On se réduit au}
+
+Si $F$ est quelconque, on écrit que $F$ est un sous-…
+\struck{facteur direct d'un} \add{ct.\ tordu} \struck{quotient}
+\struck{d'un $R^{d}f_{*}(\mathbb{Q}_{\ell,Y})$}, avec $f : Y \to X$
+morphisme projectif. [Utilisant Lefschetz \struck{et 2.1.\ d), …
+$j \geqslant d$ … relative} \struck{\ill{} … la
+\uncertain{fibre} de $f$} \struck{fortement} si $j < d =$ dim.\ relative de
+$Y/X$, et remplaçant $Y$ par $Y \times_{X} \mathbb{P}^{j-d}_{X}$ si
+$j > d$, on peut supposer $j = d$.]
+\note{passage très raturé : trois lignes biffées, reprises dans
+l'interligne ; nous donnons l'état final}
+\marginal{\struck{\ill{} Lefschetz \ill{}} \uncertain{Voir si cette
+réduction est vraiment utile}…}
+
+La suite spectrale
+\[
+R^{*}_{!}(fg)(\mathbb{Q}_{\ell}) \Longleftarrow E_{2}^{pq} =
+R^{p}_{!}f\bigl(R^{q}_{!}g(\mathbb{Q}_{\ell,X})\bigr)
+\]
+dégénère \struck{par} \emph{Deligne}, donc
+$R^{i}_{!}f(F) = E_{2}^{ij}$ est $\simeq$ quotient \add{ct.\ tordu} d'un
+sous-faisceau ct.\ tordu d'un $R^{i+j}_{!}(fg)(\mathbb{Q}_{\ell,Y})$.
+\note{la suite spectrale est notée ici avec $f$ et $g$ ; le terme de gauche
+porte $(fg)$ et $\mathbb{Q}_{\ell}$ sans indice lisible, et
+$R^{q}_{!}g(\mathbb{Q}_{\ell,X})$ porte $X$ où l'on attendrait $Y$ : tel
+quel}
+La conclusion en résulte, en utilisant le cas précédent pour $Y \to S$, de
+dim.\ relative $\leqslant n + j$…
+\marginal{utiliser Lefschetz fort \uncertain{\ill{}} Deligne}
+\marginal{[N.B.\ Voir si Deligne ne peut pas remplacer une factorisation
+\uncertain{d'Artin} sur $X \to S$ \ill{} \uncertain{variant} …]}
+
+\textbf{Corollaire 5.2.} Si la partie « \emph{semi-simplicité} » des
+conjectures de Tate est vérifiée, la conclusion de 5.1 est vraie
+\add{même si} on suppose seulement que $F$ est eff\add{t} admissible de poids
+$j$. Par suite, si on suppose $F$ eff\add{t} admissible de poids
+$\leqslant j$, alors on a un énoncé : $R^{i}_{!}f(F)$ est eff\add{t}
+admissible, de poids \struck{\ill{}} $\leqslant i+j$, \add{niveau
+$\leqslant \operatorname{Inf}(i+j, 2n-i+j)$} ; si $i \geqslant n$, il a des
+\struck{\ill{}} poids \uncertain{entre} $2(i-n)$ et $(i+j)$, correspondant
+aux niveaux $0, 1, \ldots, 2n-i+j$.
+\marginal{semi-simplicité utilisée !}
+\marginal{alors par semi-simplicité : $F$ eff\add{t} $=$ str.\ spécial}
+
+\textbf{Cor.\ 5.3} \add{(Sans conj.\ de Tate)} On se ramène au cas
+\add{par dévissage et déf.}\ où $F$ est \emph{spécial} de poids $j$, et par
+\uncertain{th.\ de chgt de base propre} au cas où $S$ de type fini sur Spec
+$\mathbb{Z}$, et \struck{\ill{}} si $F$ est eff\add{t} admissible, alors
+$R^{i}_{!}f(F)$ est eff\add{t} admissible.
+\note{l'énoncé de 5.3 et le début de sa réduction sont mêlés sur la page,
+l'ajout « (Sans conj.\ de Tate) » et la réduction étant écrits au-dessus ;
+nous suivons l'ordre des lignes}
+
+\page{114}
+\textbf{Cor.\ 5.4.} Sur un corps $k$, si $X$ est lisse, séparé, de t.f., et si
+$F$ est \struck{\ill{}} str\add{t} spécial de poids $j$ (resp.\ eff\add{t}
+adm.\ de poids $j$, si l'on admet conjecture de $\tfrac{1}{2}$simplicité),
+alors $R^{i}f_{*}(F)$ est \struck{\ill{}} eff\add{t} admissible de poids entre
+$i+j$ et $2n+2j$, et les niveaux correspondants étant resp.
+$\leqslant (2n-i+j), 2n-i+j-1, \ldots, 0$. Si … $i \leqslant n$, on a
+\struck{les niveaux} \emph{seulement} des poids $i+j, i+j+1, \ldots, 2(i+j)$,
+\struck{dans les \ill{}} de niveaux correspondants resp.
+$i+j, i+j-1, \ldots, 0$.
+\note{« $\tfrac{1}{2}$simplicité » : semi-simplicité. Les niveaux
+$2n-i+j$, $2n-i+j-1$ sont récrits sur des premiers termes surchargés}
+\marginal{résolution, Lefschetz fort, et \uncertain{au besoin}
+semi-simplicité}
+
+On peut, sans procéder par dualité à partir de 5.1 resp.\ 5.2, \add{dans le
+cas $F$ quelc.,} tout reprendre \add{(la dém.\ de 5.1 resp.\ 5.2,
+\uncertain{via} la suite spectrale de Leray)}, puis se ramener
+\struck{en utilisant la suite exacte de cohomologie relative} au cas où
+$F = \mathbb{Q}_{\ell}$. Dans ce cas, on peut raisonner comme au cas
+précédent par \add{compactification et} résolution des singularités, pour
+écrire $X = \widehat{X} - D$, $\widehat{X}$ \struck{projectif et lisse} propre
+et lisse et $D$ \add{diviseur} à croisements normaux, et on écrit suites
+exactes de cohomologie \uncertain{relative} (supports quelc.)\ pour
+$X, \widehat{X}$ et $D$, et la suite spectrale de localisation pour
+$H^{*}_{D}(\widehat{X})$.
+\marginal{Le faire à titre de vérification de cohérence du yoga !}
+
+6. Soit $f : X \to S$ un morphisme de t.f., $F$ un faisceau
+\struck{str\add{t} spécial} \add{effectivement admissible} sur $X$, de poids
+$j$. On veut des renseignements sur \add{les} $R^{i}f_{*}(F)$, en
+particulier on veut qu'ils soient effectivement admissibles, de poids que
+nous préciserons. Supposons d'abord $F = \mathbb{Q}_{\ell,X}$.
+\struck{Comme} par le th.\ de finitude, on regarde d'abord le cas d'une
+immersion
+\note{la page s'arrête sur ce mot}
+
+\page{115}
+\note{feuillet de calculs, sans phrases suivies, et qui semble continuer le
+cas de l'immersion par lequel s'arrête la page 114 ; nous en donnons les
+formules dans l'ordre de la page. Le haut porte quelques symboles
+d'essai :}
+
+$X \subset Y$ \qquad $X_{0}, X_{1}, \ldots$ \qquad \struck{$X \hookrightarrow Y$}
+\qquad $\mathbb{Q}_{\ell}$ \qquad $X$ \emph{régulier}
+\[
+X_{0} \overset{i}{\hookrightarrow} X \overset{f}{\hookrightarrow} Y, \qquad
+i_{!}(\mathbb{Q}_{\ell,X_{0}}) \to Ri_{*}(\mathbb{Q}_{\ell,X_{0}}) .
+\]
+
+(1) $X$ \emph{régulier}, $F = \mathbb{Q}_{\ell,X}$, $f$ immersion
+($n = \dim \overline{f(X)}$).
+On peut supposer $X \to Y$ imm.\ \emph{ouverte}, $Y'$ régulier,
+$Y' - g(X) = h^{-1}(Y - X) = Z$ diviseur à croisements normaux,
+$Z = \sum Z_{i}$ :
+
+\begin{tikzcd}
+X \arrow[r, "g"] \arrow[dr, "f"'] & Y' \arrow[d, "h"] \\
+& Y
+\end{tikzcd}
+
+\[
+R^{*}f_{*}(\mathbb{Q}_{\ell,X}) \Longleftarrow E_{2}^{pq} =
+R^{p}h_{*}\bigl(R^{q}g_{*}(\mathbb{Q}_{\ell})\bigr),
+\]
+\[
+R^{q}g_{*}(\mathbb{Q}_{\ell}) = \bigwedge^{q} \sum \mathbb{Q}_{\ell,Z_{i}} =
+\sum_{i_{1} < \cdots < i_{q}} \mathbb{Q}_{\ell,Z_{i_{1}} \cap \cdots \cap Z_{i_{q}}}(-q)
+\]
+pur de poids $2q$ ;
+
+$E_{2}^{p0} = R^{p}h_{*}(\mathbb{Q}_{\ell,Y'})$ est eff\add{t} admissible de
+poids $\leqslant p = i$, niveau
+$\leqslant \operatorname{Inf}(p, 2n-2-p)$ [avec \uncertain{égalité} si
+$p \geqslant n-1$] ;
+
+$E_{2}^{pq} = \sum_{i_{1} < \cdots < i_{q}}
+R^{p}h_{Z_{i_{1}} \cap \cdots \cap Z_{i_{q}}\,*}(\mathbb{Q}_{\ell})(-q)$ est
+eff.\ admissible de poids $\leqslant p + 2q = i + q$
+\struck{$\leqslant 2n$}, de niveau $\leqslant \operatorname{Inf}(p, 2n-2q-p)$.
+\note{les indices des faisceaux sont écrits $\mathbb{Q}_{\ell,X_{0}}$ puis
+récrits ; celui de $E_{2}^{p0}$ est surchargé, $Y'$ \uncertain{probable}}
+
+En tous cas, poids sont $\leqslant \operatorname{Inf}(2i, 2n-2 \ldots$
+\note{l'encadré de « $\leqslant$ » est surchargé}, niveau
+$\leqslant \operatorname{Inf}(i, 2n-2-i)$.
+
+\marginal{(5.e) \quad $i+q$ : \quad $p \leqslant 2(n-q)$, encadrés
+$p + 2q \leqslant 2n$ et $q \leqslant n, 2n-i$ ; puis $p \leqslant n-1$,
+$q \leqslant n$}
+
+\note{en bas de page, des calculs d'indices : $p$, $n-q$ ; $p+q \geqslant n$ ;
+$2(p-n-q) = 2(i-n)$ ; $2(n-q) - p = 2n - i - q$ ; et, à droite, un
+diagramme des $(p, q)$ admissibles, points marqués d'une croix dans le
+quadrant, axes gradués $1, 2, \ldots, n-1, n$ et $n-3, n-2, n-1$, que nous
+ne redessinons pas}
+
+\page{117}
+\note{feuillet de tableaux de poids et de niveaux, suite des calculs de la
+page 115 ; il n'y a pas de phrases. Nous donnons les tableaux
+dans l'ordre de la page, en omettant les colonnes intermédiaires qu'il
+laisse en pointillé}
+
+$i \leqslant n-1$ :
+\[
+\begin{array}{c|ccc}
+\text{poids} & 0 & 1 \;\cdots & 2i \\
+\hline
+\text{niveau} & 0 & 1 \;\cdots & 2i
+\end{array}
+\]
+\note{premier essai, séparé du reste par un trait ; le niveau sous $2i$ est
+« $2i$ », peut-être corrigé plus bas en 0}
+
+\[
+\begin{array}{l|c|c|c|c|c|c}
+E_{2}^{i,0} & \text{poids} & 0 & 1 & \cdots & i & \\
+ & \text{niveau} \leqslant & 0 & 1 & \cdots & i & \\
+\hline
+E_{2}^{i-1,1} & \text{poids} & 2 & 3 & \cdots & i & i+1 \\
+ & \text{niveau} & 0 & 1 & \cdots & i-2 & i-1 \\
+\hline
+E_{2}^{i-2,2} & \text{poids} & 4 & 5 & \cdots & i \;\; i+1 & i+2 \\
+ & \text{niveau} & 0 & 1 & \cdots & i-4 \;\; i-3 & i-2 \\
+\hline
+E_{2}^{0,i} & \text{poids} & 2i & & & & \\
+ & \text{niveau} & 0 & & & &
+\end{array}
+\]
+\note{en marge de ces lignes, des conditions biffées :
+\struck{$p+q = i$}, \struck{$p \leqslant 2(n-1-q)$}, \struck{$p+q \leqslant
+n-1$} ; la dernière entrée de la ligne $E_{2}^{i-1,1}$ est surchargée}
+
+$i \leqslant n-1$ (encadré) :
+\[
+\begin{array}{c|c|c|c|c|c|c|c|c}
+\text{poids} & 0 & 1 & \cdots & i-1 & i & i+1 & \cdots & 2i \\
+\hline
+\text{niveau} & 0 & 1 & \cdots & i-1 & i & i-1 & \cdots & 0
+\end{array}
+\]
+
+$i \geqslant n$ :
+\[
+\begin{array}{l|c|c|c|c|c}
+E_{2}^{i,0} & 2(i-n+1) & 2(i-n+1)+1 & \cdots & & i \\
+ & 0 & 1 & 2 \;\cdots & & 2(n-1)-i \\
+\hline
+E_{2}^{i-1,1} & 2(i-n)+2 & 2(i-n)+3 & \cdots & i & i+1 \\
+ & 0 & 1 & \cdots & 2n-i-2 & 2n-i-1 \\
+\hline
+E_{2}^{i-2,2} & 2(i-n)+4 & 2(i-n)+5 & \cdots & i \;\; i+1 & i+2 \\
+ & 0 & 1 & \cdots & 2n-i-2 \;\; 2n-i-3 & 2n-i-2 \\
+\hline
+E_{2}^{i-3,3} & 2(i-n)+6 & 2(i-n)+7 & \cdots & i \;\; i+1 \;\; i+2 & i+3 \\
+ & 0 & 1 & \cdots & 2n-i-6 \;\; \ldots & 2n-i-3 \\
+\hline
+E_{2}^{0,i} & 2i & & & & \\
+ & 0 & & & &
+\end{array}
+\]
+\note{les niveaux des dernières colonnes sont écrits vite et en partie
+surchargés ; nous les donnons tels que nous les lisons, sans les
+vérifier. Des traits obliques relient la dernière colonne de chaque ligne à
+la suivante}
+
+\[
+q = 2n - i, \quad p = 2(i-n) : \qquad
+E_{2}^{2(i-n),\,2n-i} = R^{2(i-n)}f_{Z\,*}(\mathbb{Q}_{\ell}\ldots, \qquad
+2(i-n) + 2(2n-i) = 2n .
+\]
+
+\note{à gauche, deux diagrammes des couples $(p, q)$ : des croix dans le
+quadrant, axes gradués $0, 1, 2, 3, \ldots, n-2, n-1, n$ en ordonnée et
+$\ldots, 2n-6, 2n-5, 2n-4, 2n-3, 2n-2$ en abscisse, séparés par un trait
+vertical ; nous ne les redessinons pas}
+
+\page{119}
+\note{feuillet de calculs, qui reprend les tableaux de la page
+117 ; il n'y a guère de phrases}
+
+$i \geqslant n$ (encadré) :
+\[
+\begin{array}{c|c|c|c|c|c|c|c|c}
+\text{poids} & 2(i-n)+2 & 2(i-n)+3 & 2(i-n)+4 & \cdots & i+1 & i+2 & \cdots & 2n \\
+\hline
+\text{niveau} & 0 & 1 & 2 & \cdots & 2n-i-1 & 2n-i-2 & \cdots & 0
+\end{array}
+\]
+\note{une colonne « $i$ », de niveau $2n-i-2$, est barrée d'une croix entre
+$2(i-n)+4$ et $i+1$ ; sous le tableau, deux flèches, l'une montante vers le
+milieu, l'autre descendante : les niveaux croissent puis décroissent}
+
+Poids $2n$ intervient avec
+\[
+E_{2}^{2(i-n),\,2n-i} = \sum R^{2(i-n)}f_{Z_{\alpha_{1}} \cap Z_{\alpha_{2}}
+\cap \cdots \cap Z_{\alpha_{2n-i}}\,*}(\mathbb{Q}_{\ell})\bigl(-(2n-i)\bigr),
+\]
+l'intersection étant de dim.\ $i-n$ ; $2n-i \leqslant n \leqslant i$ ;
+$n - (2n-i) = i-n$ ; $2(i-n) + 2(2n-i) = 2n$.
+
+\[
+\begin{array}{c|c|c|c|c|c|c|c|c|l}
+i & 0 & 1 & \cdots & n-1 & n & n+1 & \cdots & 2n-1 & \\
+\hline
+\text{niveau} & 0 & 1 & \cdots & n-1 & n-1 & n-2 & \cdots & 0 & \leqslant n-1 \\
+\hline
+\text{poids} \leqslant & 0 & 2 & \cdots & 2n-2 & 2n & 2n & 2n & 2n & \leqslant 2n
+\end{array}
+\]
+\note{tableau encadré ; en tête de la dernière colonne, « $\leqslant 2n-1$ »,
+et un « $\leqslant 2n$ » biffé}
+
+\[
+\boxed{\begin{array}{l}
+\text{poids} \leqslant 2\operatorname{Inf}(i, n) \\
+\text{niveau} \leqslant \operatorname{Inf}(i, n-1)
+\end{array}}
+\]
+
+Si $F$ \uncertain{str\add{t}} spécial de poids $j$ :
+\[
+\text{poids} \leqslant 2\operatorname{Inf}(i, n) + j \;? \qquad
+\text{niveau} \leqslant \operatorname{Inf}(i, n-1) + j .
+\]
+
+(2°) \struck{$f$ \ill{} $F = \mathbb{Q}_{\ell,X}$} Cas général
+\uncertain{(relatif, en gardant \ill{})} :
+
+\begin{tikzcd}
+X \arrow[d, "f"] \\
+Y
+\end{tikzcd}
+
+$y \in Y$, et
+\[
+n = d_{y}(f) = \operatorname*{Sup}_{x \in X} \bigl[\deg \operatorname{tr}
+k(x) : k(f(x)) + \dim \overline{f(x)}_{y}\bigr] ,
+\]
+$x$ tel que $f(x) \in \uncertain{\operatorname{Spec} \mathcal{O}_{Y,y}}$ ;
+\emph{au voisinage de $y$} :
+\[
+\boxed{\begin{array}{l}
+\text{poids} \leqslant 2\operatorname{Inf}(i, n) + j \\
+\text{niveau} \leqslant \operatorname{Inf}(i, n) + j
+\end{array}}\ ?
+\]
+\marginal{peut-on remplacer $n$ par \uncertain{la} \struck{dim des fibres}
+… $\leqslant n-1$ ?}
+\note{la formule de $d_{y}(f)$ est écrite vite et en partie surchargée :
+lecture douteuse dans le détail}
+
+\page{120}
+\note{feuillet dactylographié, en français, isolé : il commence et s'arrête au
+milieu d'une phrase, et ne continue ni ne précède rien dans ce lot. Il
+présente des travaux de Deligne. Les soulignements, et les ajouts « resté »,
+« sur X » et « -Puppe », sont à la main ; les biffures à la machine sont
+rendues par \texttt{struck} quand elles se lisent}
+
+une sorte de synthèse géométrico-arithmétique des nombreuses théories
+cohomologiques dont on dispose \struck{\ill{}} à présent pour les variétés
+algébriques, \struck{de toutes dimensions,} et des représentations linéaires
+de groupes de Galois arithmétiques auxquelles ces théories donnent naissance.
+
+5) \emph{Solution du problème d'introduction d'une $\lambda$-structure}
+(correspondant à la notion de puissance extérieure) \emph{dans l'anneau}
+$K^{\bullet}(X)$ (dit « de Grothendieck ») d'un espace topologique localement
+annelé (par exemple une variété analytique, ou différentiable, ou un schéma),
+construit à l'aide de la catégorie des complexes « parfaits » sur $X$. Ce
+problème était signalé comme le plus important problème \add{resté} en
+suspens dans le Séminaire de Géométrie Algébrique de l'IHES 1966/67, sur le
+théorème de Riemann-Roch. La nécessité de travailler avec le $K^{\bullet}(X)$
+défini en termes de \emph{complexes} parfaits, plutôt que de \emph{fibrés}
+vectoriels seulement, est imposé par des \struck{\ill{}} impératifs
+techniques irrécusables, qui finiront certainement par s'imposer aussi en
+dehors de la géométrie algébrique. La solution de Deligne, comme prévu, passe
+par l'intermédiaire d'une construction de \struck{\ill{}} foncteurs puissances
+extérieures dans la catégorie dérivée $D(X)$ (catégorie des complexes de
+modules \add{sur $X$} --- en fait, il faut se borner ici aux complexes de
+\emph{chaînes}), en utilisant la théorie de Dold\add{-Puppe}. La difficulté
+sérieuse consistait à prouver que ces opérations dans $K^{\bullet}(X)$
+satisfont aux propriétés algébriques habituelles, permettant d'exprimer par
+exemple $\lambda^{i}(xy)$ comme polynôme universel à coéfficients entiers en
+les $\lambda^{j}(x), \lambda^{k}(y)$. Deligne procède par une voie très
+ingénieuse, en déterminant d'abord la structure du $\lambda$-anneau de toutes
+les « opérations tensorielles universelles » qu'on peut effectuer sur des
+fibrés vectoriels. Il n'a écrit sa théorie que lorsqu'on travaille au dessus
+d'un corps de base \struck{\ill{}} (de caractéristique arbitraire).
+\struck{Le cas de la caractéristique}
+\note{la dernière ligne est biffée à la main ; le feuillet s'arrête là}
+
+\end{document}

@@ -1,0 +1,744 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 12, batch 1 (pages 1-20).
+% Established from the facsimile archives/batches/12/batch-01.pdf (a mirror of
+% https://grothendieck.umontpellier.fr/12.pdf), per the skill
+% transcribe-grothendieck. The batch file carries no cover sheet: PDF page N is
+% archivists' page N; the pencilled numbers bottom-left ("2", "3" ... "17",
+% "19", "20") read at the PDF page of the same number.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-09-23 — first pass, unchecked against the pages by a human.
+%
+% What the batch is. One continuous draft in his hand on IHES letterhead
+% paper (Bures-sur-Yvette), headed « Esquisse d'une théorie des motifs » and
+% paginated by him 1 to 17 top right, plus one list on a separate leaf.
+% Archivists' pages 1-9 are his 1-9; page 10 is a blank letterhead sheet
+% (absent); pages 11-18 are his 10-17 (offset of one). Page 19 is blank
+% (absent). Page 20 is a separate leaf (typescript show-through on the other
+% face), a boxed « Motifs » heading and a table of 19 numbered topics.
+% Nothing is dated on the leaves.
+%
+% The argument, by his numbered sections:
+%   1-5    (p. 1) programme: review of cohomology theories, idea of motives;
+%          M^+(k) effective motives, a semi-simple abelian ⊗-category with
+%          realisation functors T_DR, T_Hdg, T_B, T^ℓ; grading, h^i(X);
+%          M^{+1}(k)° ≃ isogeny category of abelian varieties; Q(-1) and
+%          the category M(k) with internal Hom and its universal property.
+%   6      (pp. 2-3) level (niveau) of a motive; decomposition by pure level;
+%          link with Lefschetz and with the ℓ-adic « filtration géométrique »
+%          Filt^j H^i by kernels to open complements of codimension >= j.
+%   7      (pp. 3-5) ⊗-categories: rigid, K-linear, connected; Modf(G) as
+%          universal example; (C,F) ≃ (Modf(G), oubli), full faithfulness;
+%          type fini ⟺ G of finite type, semi-simple ⟺ pro-reductive;
+%          twisting fibre functors by torsors, F' = P ×^G F, G' = ad(P);
+%          existence of fibre functors over finite extensions, gerbes.
+%   8      (pp. 5-6) motives over a regular connected base S; the Betti fibre
+%          functor at a complex point gives the motivic Galois group G;
+%          Serre's counter-example in char p (supersingular elliptic curves),
+%          ℓ-adic fibre functors, G_K over a finite extension K of Q.
+%   9      (pp. 6-9) relation with π_1: F associated to a geometric point ξ;
+%          examples; lim G_α/G_α^0 ≃ π_1(S, ξ) (boxed (*)), via the
+%          π_1-modules of finite rank as motives of level and weight 0 under
+%          Tate/Hodge; étale coverings S'/S; (*) bijective iff G connected
+%          over algebraically closed fields. Page 7's first version is
+%          cancelled by pencil cross-hatching and restarted on page 8.
+%   10     (pp. 9, 11-13; his 9-12) relation with profinite π_1: compatibility
+%          with Tate's functor, ρ_ℓ : π_1 → G(Q_ℓ), η_ℓ ρ_ℓ = id; a
+%          triangle with dashed arrows through G_α/G_α^0; Tate conjecture as
+%          G_α = algebraic hull of the ℓ-adic image; finite fields:
+%          Frob_{k,F} in the centre Z(Q), G commutative, extension of Ẑ by a
+%          (pro)torus; the family of Frobenius f_s in I_G(Q) = T/W.
+%   12     (pp. 14-16; his 13-15) supplementary structures: gradings as
+%          T = D_K(M) → G, weight y : G_m → G, Hodge i_1, i_2 with
+%          i_1 i_2 = y and complex conjugation, ε : G → G_m from Q(-1) with
+%          ε(y(λ)) = λ² (boxed), filtrations via Gr(F), torsors under the
+%          unipotent H(α). There is no section 11 on the leaves: 10 is
+%          followed by 12.
+%   13     (pp. 16-18; his 15-17) relation with the Mumford-Tate group; the
+%          Hodge conjecture read as G = G_0.
+%   14     (p. 18) title « Structure de positivité » only; the draft stops.
+%   20     « Motifs »: 19-point plan (M^+(X), variances, T_ℓ, Q_ℓ(n), Hom and
+%          RHom, filtrations, rings M^+(X), M(X), Tate, Galois invariants,
+%          absolute cohomology, positive forms, L-functions, Hodge).
+%
+% Readings to note. The centre of G is written with a figure-3 letter, set
+% as \mathfrak{Z} (hand.md §4). "½" is his semi- (½-simple, ½-invariants).
+% The fast connecting prose often does not carry; the formulas do.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{12}
+\batch{1}
+\pages{1}{20}
+\dating{1964-[vers 1971]}
+\watermark{Édition de démonstration}
+\foldertitle{Généralités (sous-groupes de Galois motiviques) (1964 ?) : notes manuscrites (s.d.), tapuscrit (s.d.)}
+
+\begin{document}
+
+\section{Esquisse d'une théorie des motifs}
+\note{le titre est de sa main, souligné, en tête du feuillet 1 ; la suite est
+paginée par lui de 1 à 17, en haut à droite}
+
+\page{1}
+1. Revue des théories cohomologiques habituelles pour les schémas projectifs
+lisses. L'idée de motifs, \marginal{qui doit \uncertain{remplacer} la
+cohomologie entière (la théorie des modules (de t.f.\ sur $\mathbb{Z}$ !))}
+\uncertain{Résumé} : a) Isomotifs, b) Motifs ½ simples c) Base ponctuelle.
+\note{les parenthèses de cette ligne sont un ajout interlinéaire, d'une encre
+plus pâle ; trois astérisques en marge gauche, en face des items 1, du
+paragraphe « Les motifs de poids $\geq 1$ » et de « Connexion continue »}
+
+2. Définition de la catégorie $\mathcal{M}^{+}(k)$ des motifs effectifs sur
+$k$. C'est une catégorie abélienne « ½ simple » avec $\otimes$. Foncteurs
+$T^{*}_{\mathrm{DR}}$, $T_{\mathrm{Hdg}}$ (si $k$ de car.\ nulle)
+$T_{B}$ (si $k = \mathbb{C}$) $T^{\ell}$ (si $\ell \neq \operatorname{car} k$)
+\struck{\ill{}}. Les foncteurs sont multiplicatifs. Tous ces foncteurs sont
+fidèles.
+\note{« ½ simple » est interlinéaire, au-dessus de « abélienne » ; après
+« car $k$ », un mot biffé puis une parenthèse entièrement noircie}
+
+3. Graduation dans la catégorie $\mathcal{M}^{+}(k)$. (Le produit $\otimes$
+compatible avec graduation. Les foncteurs $h^{i}(X)$.
+\uncertain{$\mathcal{M}^{+}(X)$}).
+
+4. L'équivalence $\mathcal{M}^{+1}(k)^{\circ} \xrightarrow{\ \sim\ }
+\mathrm{Isab}(k)$ ($X \mapsto \mathrm{Pic}^{00}_{X}$,
+$A \mapsto h^{1}(\hat{A})$).
+\struck{Les motifs $\mathbb{Q}(-1)$, cette catégorie $\mathcal{M}(k)$ des
+motifs}
+\note{l'exposant de $\mathrm{Pic}$ est lu $00$, sous réserve}
+
+Les motifs de poids $\geq 1$ comme généralisation des VA. La connexion
+« discrète » est conservée (s'exprimant ici par le fait que si
+$k \to k'$ est une extension de corps algébriquement clos, alors
+$\mathcal{M}^{e}(k) \to \mathcal{M}^{e}(k')$ est pleinement fidèle).
+\note{l'exposant de $\mathcal{M}$ est douteux : un petit « e », peut-être
+autre chose}
+
+Connexion continue… Exemple d'invariant suggéré par la théorie des
+\uncertain{schémas} abéliens : caractérisation des motifs \emph{lisses} sur
+$S$ \struck{réguliers (\ill{})} \uncertain{normal}.
+\note{« normal » est écrit au-dessus du passage biffé}
+
+5. Le motif $\mathbb{Q}(-1)$ (anti-Tate). La catégorie $\mathcal{M}(k)$ des
+motifs (isomotifs semi-simples sur $k$ !). Maintenant il y a un
+\emph{Hom} interne, en plus du $\otimes$ et de la graduation. Si
+$\mathcal{C}$ est une catégorie pseudo-abélienne avec $\otimes$, alors les
+foncteurs compatibles avec $\otimes$ de $\mathcal{M}(k)$ dans $\mathcal{C}$
+correspondent aux foncteurs $T : \mathcal{V}(k)^{\circ} \to \mathcal{C}$,
+satisfaisant Künneth, et tels que \struck{\ill{}}
+$T(\mathbb{Q}(-1)) = \operatorname{Im} T(\pi)$ ($\pi$ le projecteur dans
+$h(\mathbb{P}^{1}_{k})$ \struck{\ill{}}, d'image
+$h^{2}(\mathbb{P}^{1}_{k}) = \mathbb{Q}(-1)$) \emph{soit inversible}. On
+montre que les $T$ commutent automatiquement à la formation des \emph{Hom}.
+La catégorie des motifs $\mathcal{M}(k)$ est donc caractérisée, avec sa
+structure $\otimes$, \struck{\ill{}} à équivalence près par propriété
+universelle.
+
+\page{2}
+\marginal{\uncertain{Résulte} de la \uncertain{présence} de $\mathcal{M}^{+}$
+dans $\mathcal{M}$.}
+\note{en tête du feuillet, au-dessus du paragraphe 6, et relié par une
+accolade à la définition qui suit}
+
+6. \emph{Niveau d'un motif}. Un motif $M$ est dit \emph{de niveau}
+$\leq i$ s'il est de la forme $M'(n)$, où $M' \in \operatorname{Ob}
+\mathcal{M}^{+}(k)$ est à composantes homogènes de degrés $\leq i$. On dit
+que $M$ est \uncertain{purement} de niveau $i$ s'il est de niveau $\leq i$, et
+si aucun sous-motif $\neq 0$ n'est de niveau $\leq i-1$. \marginal{Cet $i$ est
+unique, et $\geq 0$.} Tout motif $M$ se décompose de façon unique en somme de
+motifs purs de niveau $i$
+\[
+  M = \coprod_{i \in \mathbb{Z}} M_{i}
+\]
+donc s'il est de \struck{degré} poids $n$, \marginal{(les $i$ tels que
+$M_{i} \neq 0$ ont la même parité que $n$, et \ill{})} \struck{il s'écrit}
+\[
+  M = \coprod_{i} M'_{i}\Big(\frac{n-i}{2}\Big) \qquad
+  M'_{i} \in \mathcal{M}^{+i}_{\text{pur}}(k)
+\]
+où $M'_{i}$ est \struck{purement de poids} \struck{effectif} pur de poids et
+niveau $i$.
+\note{« $\mathcal{M}^{+i}_{\text{pur}}(k)$ » est entouré ; « effectif »,
+interlinéaire, paraît biffé avec le reste}
+
+\struck{\ill{}} Les motifs de \struck{poids} niveau $\leq i$ sont ceux qui,
+modulo twist de Tate, « proviennent » de variétés $X \in \mathcal{V}(k)$ de
+dimension $\leq i$. Ceci résulte des faits que $h(X)$ est de niveau
+$\leq \dim X$, et que \struck{\uncertain{Addition}} si $i \leq \dim X$,
+$h^{i}(X) \hookrightarrow h^{i}(Y)$, où $Y$ est une section linéaire de
+dim.\ $i$ (\uncertain{sens} du « th.\ de Lefschetz »). Autre interprétation en
+termes de cohomologie $\ell$-adique \struck{(en supposant le corps de base
+alg.\ clos, ce qui est licite, car la notion de niveau, \ill{} la \ill{} du
+niveau, est invariant par extension du corps de base).} On regarde
+$H^{i}(\overline{X}, \mathbb{Q}_{\ell})$ et la « filtration géométrique »
+définie par
+\[
+  \operatorname{Filt}^{j} H^{i}(\overline{X}, \mathbb{Q}_{\ell}) =
+  \varinjlim_{U} \operatorname{Ker}\big(H^{i}(\overline{X}, \mathbb{Q}_{\ell})
+  \to H^{i}(\overline{U}, \mathbb{Q}_{\ell})\big)
+\]
+$U$, $U$ ouvert tel que $\operatorname{codim}(X-U) \geq j$.
+
+\marginal{Exemple : si $i \geq n = \dim X$, alors $h^{i}(X)$ est de
+\emph{niveau} $\leq 2n-i < i$}
+\marginal{Ex.\ Si $i \geq n = \dim X$, $h^{i}(X)$ est de niveau
+$\leq 2n-i$}
+\note{deux notes marginales à gauche, presque identiques, l'une en face de la
+définition, l'autre en face de l'argument de Lefschetz}
+
+\page{3}
+Alors on a, \struck{si $X$ provenant de dim.\ $n$ et $i \leq n$}
+\uncertain{(supp.\ $i \geq n$)}
+\[
+  \operatorname{Filt}^{j} H^{i}(\overline{X}, \mathbb{Q}_{\ell}) =
+  \text{partie de } T^{\ell}(h^{i}(X))
+\]
+\struck{provenant} image du plus grand sous-motif \struck{(\ill{}
+$2n-i \geq j$)} de niveau $\leq i-2j$ de $h^{i}(X)$.
+
+Cette caractérisation \marginal{du niveau des motifs} est \ill{} \ill{}
+\uncertain{courante} si on admet la résolution des singularités
+\marginal{des variétés de dim.\ $\leq \dim X = n$ seulement},
+\struck{\ill{}} (conséquence de la résolution et des conjectures standard),
+on trouve donc que les dimensions des
+$\operatorname{Filt}^{j} H^{i}(\overline{X}, \mathbb{Q}_{\ell})$ sont
+indépendantes de $\ell$. (Bien mieux, ils correspondent à des motifs, et les
+quotients gradués successifs sont \struck{\ill{}} purs de poids $i-2j$
+resp.\ $2n-i-j$). Parler des inv.\ birationnels…
+
+\marginal{Conjectures de Tate et de Hodge pourraient venir ici.}
+\note{en marge gauche, en oblique, entre le paragraphe précédent et le
+paragraphe 7, avec un trait qui les sépare}
+
+7. \emph{Structure des $\otimes$-catégories}. \struck{standard}
+
+\struck{Catégorie} Catégorie abélienne avec opération $\otimes$ « ass.,
+comm. » et « unitaire ». On suppose de plus l'existence de \emph{Hom}
+internes, au sens du $\otimes$. On dit qu'elle est « rigide » si
+\[
+  \check{M} \otimes N \xrightarrow{\ \sim\ } \underline{\mathrm{Hom}}(M, N)
+\]
+Supposons de plus que $\mathcal{C}$ soit $K$-linéaire ($K$ un corps) (i.e.\ on se donne $K \to \operatorname{End}(\mathrm{id}_{\mathcal{C}})$), et que
+les \emph{Hom} soient de dim.\ finie sur $k$ : \struck{\ill{}} On dira qu'on
+a une $\otimes$-catégorie sur $k$ (qu'on suppose rigide). Une telle catégorie
+est dite « connexe » si
+$\operatorname{End}(\mathbb{1}_{\mathcal{C}}) \simeq k$ (\uncertain{bien}
+l'identité).
+\note{il écrit tantôt $K$, tantôt $k$, pour le corps de base de la
+$\otimes$-catégorie ; la transcription suit la page}
+
+\page{4}
+Exemple : Si $G$ est un groupe algébrique sur $K$, la catégorie
+$\mathrm{Modf}(G)$ des \uncertain{modules} sur lesquels $G$ opère.
+\uncertain{Plus} \uncertain{avec} groupes pro-algébriques
+(\uncertain{p.\ ex.\ profinis}).
+
+Cet exemple \struck{est} essentiellement universel, comme on va voir.
+
+$\otimes$-foncteurs. Foncteurs fibres \marginal{sur $K$, sur $K'$, ….}
+Considérons un couple $(\mathcal{C}, F)$ formé d'une $\otimes$-catégorie sur
+$K$, avec foncteur fibre rat.\ $/K$. À cette situation est associé
+canoniquement un groupe \struck{alg.} affine $G$ sur $K$ (ou pro-groupe
+\uncertain{profini} sur $K$), et une équivalence
+\[
+  (\mathcal{C}, F) \simeq (\mathrm{Modf}(G), \text{oubli}).
+\]
+De façon précise, associant à chaque $G$ le couple
+$((\mathrm{Modf}(G), G), \text{oubli})$, on trouve un foncteur
+\[
+  \text{groupes affines sur } K \longrightarrow
+  \begin{array}{l}
+    \otimes\text{-catégories avec foncteur fibre donné, avec} \\ \otimes\text{-foncteurs modulo isom., compatibles avec } F
+  \end{array}
+\]
+et ce foncteur est pleinement fidèle.
+$\mathcal{C}$ « de type fini » $\Longleftrightarrow$ $G$ de type fini
+
+$\mathcal{C}$ ½-simple $\Longleftrightarrow$ $G$ pro-réductif.
+\struck{\ill{}}
+\note{sous la seconde équivalence, « si $K$ de car.\ nulle » ; la fin de la
+ligne a été réécrite deux fois, et une ligne entière biffée en dessous}
+
+\marginal{$G(A) = \operatorname{Aut} F_{A}$, ($F_{A}(M) = F(M) \otimes A$)
+\struck{\ill{}} comme foncteur fibre à valeurs dans $\mathrm{Mod}(A)$}
+\note{note entourée, en marge gauche, en face de l'équivalence
+$(\mathcal{C}, F) \simeq (\mathrm{Modf}(G), \text{oubli})$}
+
+\emph{Cor.} Possibilité d'une définition des autres opér.\ tensorielles telles
+$\Lambda$, $\mathrm{Symm}$ (en fait, on voit que c'est indépendant de
+l'existence et du choix de $F$). Si on a un foncteur fibre, tout autre
+foncteur fibre $F'$ s'obtient en « tordant » avec un pro-torseur $P$ sous $G$,
+$P = (P_{i})$ :
+\[
+  F' = P \times^{G} F
+\]
+
+\marginal{Remarque : affirmer que si $\mathcal{C}$ de type fini, deux
+foncteurs fibres deviennent isomorphes sur ext.\ finie}
+
+\page{5}
+Alors $G' = P \times^{G} G = \operatorname{ad}(P)$.
+
+En fait, il y a des cas intéressants où on ne peut trouver aucun foncteur
+fibre. Mais si $\mathcal{C}$ est de type fini, alors on
+\marginal{doit pouvoir} \uncertain{montrer} qu'on peut trouver un foncteur
+fibre sur une extension finie de $K$.
+\marginal{(Quand il en est ainsi, \struck{on démontre})}
+\struck{On construit ainsi \ill{} ; \ill{}} Admettant le résultat
+« d'existence » de foncteurs fibres, on \struck{doit} arrive à décrire
+$(\mathcal{C}, F)$ intrinsèquement, en termes d'une gerbe sur un site
+convenable…
+
+8. \emph{Cas des catégories de motifs.} \struck{Lien avec le groupe
+fondamental profini}
+
+$S$ schéma régulier \marginal{connexe}. On définit $\mathcal{M}^{+}(S)$,
+$\mathcal{M}(S)$ en remplaçant ce qui est fait sur un corps, en travaillant
+avec $X$ projectifs lisses sur $S$, avec
+$C(X) \overset{\mathrm{df}}{=} C(X_{\eta})$ ($\eta$ pt générique de $S$).
+Ainsi, $\mathcal{M}(S) \to \mathcal{M}(\eta)$ est pleinement fidèle,
+permettant d'interpréter $\mathcal{M}(S)$ comme sous-catégorie pleine de
+$\mathcal{M}(\eta)$. De plus, pour tout morphisme $f : S' \to S$ de schémas
+réguliers, on définit $f^{*} : \mathcal{M}(S) \to \mathcal{M}(S')$ un
+$\otimes$-foncteur correspondant (c'est ici que sert l'hypothèse de
+\emph{régularité} sur les schémas….).
+\marginal{à expliciter …..}
+
+Tout point \emph{complexe} \marginal{géom.} $\xi$ de $S$ définit un foncteur
+fibre « de Betti »
+\struck{$F_{\xi}^{\mathrm{Betti}} = F_{\xi}$}
+$F_{\xi}^{\mathrm{Betti}} = F_{\xi}^{B} : \mathcal{M}(S) \to
+\mathrm{Modf}(\mathbb{Q})$, d'où un groupe pro-algébrique $G$ sur
+$\mathbb{Q}$, pro-réductif
+
+\page{6}
+en fait, \struck{\ill{}} décrivant $\mathcal{M}(S)$. Pratiquement, on n'a guère
+qu'à considérer dans \struck{une} chaque question une sous-catégorie de type
+fini de $\mathcal{M}(S)$, soit $\mathcal{C}$. Elle est donc décrite par un
+\struck{\ill{}} groupe algébrique \marginal{réductif} $G$ sur $\mathbb{Q}$.
+Question intéressante : comment sont reliés ces groupes pour des $\xi$
+différents (ils se déduisent les uns des autres par twist…). Déjà intéressant
+si $S$ est le spectre d'une ext.\ finie $k$ de $\mathbb{Q}$….!
+
+Si $S$ est de car.\ $p > 0$, on ne peut en général trouver de foncteur fibre
+sur $\mathbb{Q}$ (contre-exemple de Serre, lié aux courbes elliptiques de
+Hasse nul). Mais on a un foncteur fibre sur $\mathbb{Q}_{\ell}$ pour tout pt
+géom.\ de car.\ $\neq \ell$, d'où un foncteur fibre sur une extension finie
+$K/\mathbb{Q}$ (qu'on se \uncertain{contentera} : une
+$\mathcal{C} \subset \mathcal{M}(S)$ stable par \struck{\ill{}}
+$\otimes$, $\vee$, $\oplus$ : engendrée finie…). Donc on trouve un groupe
+algébrique réductif $G_{K}$ sur $K$, qui permet de représenter la catégorie
+des $K'$-motifs pour tout corps $K'$ \uncertain{qui est une} extension de
+$K$.
+
+\marginal{Structure $\varepsilon$, $y$ ($\varepsilon y(\lambda) = \lambda^{2}$),
+structure $y$, $i_{1}$, $i_{2}$ \struck{pour corps de base $\mathbb{C}$,
+$T_{\mathrm{Hdg}}$}. (A) \ill{}$/G^{0} \to \pi_{1}^{1}$.}
+\note{ajout interlinéaire serré, en travers de la ligne du titre 9), qui
+annonce les paragraphes 12) et suivants ; le premier symbole de « (A) » et la
+parenthèse entre $y$ et « structure » sont lus sous réserve}
+
+9) \emph{Relation avec le $\pi_{1}$ \struck{profini}} : Soit $F$ un foncteur
+fibre à coefficients dans $K$ sur $\mathcal{M}(S)$, $\xi$ un pt
+géométrique. On dit que $F$ et $\xi$ sont associés si on a un isom.
+\note{le numéro 9) paraît récrit sur un 8) ; en marge, quatre petits traits.
+La lettre dans « $\mathcal{M}(S)$ » ressemble à un $C$}
+
+\page{7}
+\[
+  F \mid \mathcal{M}^{+0}(S) \simeq F_{\xi}
+\]
+où $F_{\xi}$ est le foncteur induit sur $\mathcal{M}^{+0}(S)$ : fibre en
+$\xi$. (NB. $S$ étant connexe, ces foncteurs sont isomorphes entre eux, donc
+la \emph{condition} d'association ne dépend pas de $\xi$. Mais il faut la
+considérer plutôt comme une \emph{donnée} supplémentaire, comme donnée de
+l'isom.\ en question). \emph{Ex 1} Si $S = \operatorname{Spec}(\mathbb{C})$,
+\struck{alors} $F = F^{\mathrm{Betti}}_{\xi}$, \marginal{\emph{Ex.\ 2}
+$T^{\ell}_{\xi}$} alors on a une telle donnée. \emph{Ex 3} Si
+$S = \operatorname{Spec} k$, $k$ corps de car.\ nulle (p.\ ex.\ $k = \mathbb{Q}$) et si $F$ est le foncteur fibre \struck{\ill{}}
+\marginal{à coefficients dans $k$} $T_{\mathrm{DR}}$ \struck{\ill{}} ou
+$T_{\mathrm{Hdg}}$, alors il n'est pas en général associé aux pts
+géométriques. \emph{Ex 4} Si \struck{$k$ est} $S$ est le spectre d'un corps
+alg.\ clos, alors tout $F$ est associé à $\xi$, du moins si $k$ est
+dénombrable \marginal{i.e.\ de degré de transc.\ dénombrable (dénombrable)},
+dans $\mathcal{M}(k)$, à engendrement dénombrable….
+\note{les numéros des exemples 3 et 4 sont récrits sur d'autres chiffres}
+
+\struck{Alors on trouve un isom.\ canonique
+$\pi_{1}(S, \xi) \simeq \varprojlim G_{\alpha}/G_{\alpha}^{0}$ $\{$ les
+$G_{\alpha}/G_{\alpha}^{0}$ sont des groupes constants sur $K$ ……. Cela
+résulte du \ill{} $\otimes$-foncteur canonique
+$\mathrm{Mod}\text{-}\mathrm{cont}(\pi_{1}) \simeq
+\mathcal{M}^{+0}(S)$ $\to \mathcal{M}(S)$ qui définit $G \to \pi_{1}$}
+\note{tout ce passage est barré au crayon de hachures croisées ; il est repris
+en tête du feuillet suivant ; l'indice de « $\mathrm{Mod}$ », lu « cont », est douteux}
+
+\page{8}
+Alors on trouve un $\otimes$-foncteur \marginal{pleinement} fidèle
+\[
+  \pi_{1}\text{-}\mathbb{Q}\text{-modules continus de rang fini sur }
+  \mathbb{Q} \longrightarrow \text{motifs sur } S
+\]
+qui se décrit par un \marginal{épi}morphisme
+\[
+  G = \varprojlim G_{\alpha} \longrightarrow \pi_{1}(S, \xi)
+\]
+et se factorise donc en un \emph{isomorphisme} canonique
+\[
+  (*) \qquad \boxed{\varprojlim_{\alpha} G_{\alpha}/G_{\alpha}^{0}
+  \xrightarrow{\ \sim\ } \pi_{1}(S, \xi)}
+\]
+Soit $\pi_{1}^{!}$ le \ill{} \ill{}. Alors \marginal{supposant $K = \mathbb{Q}$}
+\struck{les} (\struck{$\pi_{1}^{!}$} pour simplifier) les
+$\pi_{1}^{!}$-$\mathbb{Q}$-modules correspondent à la sous-catégorie de
+$\mathcal{M}(S)$ formée des motifs $M$ tels que la sous-$\otimes$-catégorie
+engendrée par $M$ soit de « longueur finie ». Utilisant conjecture de Tate
+(ou de Hodge si $S$ de car.\ générique nulle), on \struck{voit} prouve que ce
+sont les motifs de niveau zéro \marginal{et poids zéro} (i.e.\ les motifs
+effectifs de poids zéro), i.e.\ que $(*)$ est un \emph{isomorphisme}. Les
+\struck{résultats} réflexions précédentes peuvent se développer aussi
+(utilisant la notion de motif sur $S$ à coeff.\ dans $K$) si on ne suppose
+pas $K = \mathbb{Q}$.
+
+\struck{\ill{}}
+
+\emph{NB} Soit $S' \to S$ un revêtement étale \marginal{connexe} de $S$,
+\marginal{\uncertain{s'envoyant}} et supposons que $F$ provienne d'
+
+\page{9}
+un \struck{\ill{}} $\otimes$-foncteur \struck{fibre} sur $S'$. Alors, comme en
+théorie des groupes fondamentaux ordinaires, $G' \to G$ est un
+monomorphisme, dont l'image est le \struck{noyau} l'image inverse
+\marginal{dans $G$} du sous-groupe ouvert de $\pi_{1}(S, \xi)$ qui correspond
+à $S'/S$. On en conclut que la bijectivité de $(*)$
+\struck{équivalente pour \ill{} $S = \ill{}$} (pour tout $S$, disons) équivaut
+au fait que pour $S = \operatorname{Spec} k$, $k$ alg.\ clos, les groupes
+$G$ sont \emph{connexes}.
+
+10) \emph{Relation avec le $\pi_{1}$ profini} : \emph{les homs
+$\pi_{1} \to G(\mathbb{Q}_{\ell})$}.
+
+Supposons \struck{\ill{}} que $K \hookrightarrow \mathbb{Q}_{\ell}$ ;
+\marginal{on dit que} \struck{et que} $F$ \struck{est associé au pt géom.\ $\xi$} \emph{compatible avec le foncteur de Tate} $T^{\ell}_{\xi}$
+(\uncertain{i.e.\ on se donne le} plongement donné de $K$ dans
+$\mathbb{Q}_{\ell}$) si
+\[
+  F \otimes_{K} \mathbb{Q}_{\ell} \xrightarrow{\ \sim\ } T^{\ell}_{\xi}
+\]
+(donnée de compatibilité avec foncteur de Tate). \emph{Exemple 1}
+$K = \mathbb{Q}_{\ell}$, $F = T^{\ell}_{\xi}$, \emph{Exemple 2}
+$K = \mathbb{Q}$, $F = T^{\xi}_{\mathrm{Betti}}$, où $\xi$ un pt complexe.
+
+Alors \struck{\ill{}} l'homomorphisme canonique
+\[
+  \pi_{1}(S, \xi) \to \operatorname{Aut} T^{\ell}_{\xi}
+\]
+\struck{définit} puis :
+$\operatorname{Aut} T^{\ell}_{\xi} \simeq
+\operatorname{Aut} F \otimes_{K} \mathbb{Q}_{\ell} \simeq G(\mathbb{Q}_{\ell})$
+définit un homomorphisme
+\[
+  \boxed{\rho_{\ell} : \pi_{1}(S, \xi) \longrightarrow G(\mathbb{Q}_{\ell})}
+\]
+
+\page{11}
+\note{p.\ 10 de sa pagination ; à partir d'ici, son numéro est inférieur d'une
+unité à celui des archivistes, jusqu'au feuillet 18 (son 17)}
+Noter que si $F$ est compatible avec $T^{\ell}_{\xi}$, il est a fortiori
+\emph{associé} à $\xi$, et on trouve
+\[
+  G \longrightarrow \pi_{1}(S, \xi)
+\]
+d'où
+\[
+  \eta_{\ell} : G(\mathbb{Q}_{\ell}) \longrightarrow \pi_{1}(S, \xi) .
+\]
+On voit tout de suite que cet homomorphisme \struck{est} est inverse à gauche
+de $\rho_{\ell}$
+\[
+  \boxed{\eta_{\ell} \rho_{\ell} = \mathrm{id}_{\pi_{1}(S, \xi)}}
+\]
+Si on s'intéresse à une sous-catégorie $\mathcal{C}_{\alpha}$ de
+$\mathcal{C}$, correspondant à un $G_{\alpha}$, alors
+$G_{\alpha}/G_{\alpha}^{0}$ \marginal{définit} \struck{correspond à} un
+quotient $\pi_{\alpha}$ de $\pi_{1}(S, \xi)$, et on a :
+
+\begin{tikzcd}
+  & G_{\alpha}/G_{\alpha}^{0} \arrow[dr, dashed] & \\
+  \pi_{1}(S, \xi) \arrow[r, "\rho_{\ell}"] \arrow[rr, bend right=40, "\text{hom can.}"'] & G_{\alpha}(\mathbb{Q}_{\ell}) \arrow[r] \arrow[u, dashed] & \pi_{\alpha}
+\end{tikzcd}
+
+(commutatif).
+
+La conjecture de Tate \marginal{(avec action semi-simple de Galois !)}
+équivaut à dire que, \ill{} localisé d'un schéma de type fini sur
+$\mathbb{Z}$, $G_{\alpha}$ est l'enveloppe algébrique de
+$\operatorname{Im}(\pi_{1}(S, \xi) \to G_{\alpha}(\mathbb{Q}_{\ell}))$.
+\struck{NB $G_{\alpha}(\mathbb{Q}_{\ell})$ \ill{}}
+\note{à droite, un encadré de quatre ou cinq lignes commençant par « NB »,
+barré au crayon de hachures serrées et illisible dessous}
+
+\marginal{\emph{NB} La conjecture de Tate sous la forme : les ½-invariants
+dans $H^{2i}(\overline{X}, \mathbb{Q}_{\ell}(i))$ sont les comb.\ à coeff.\ dans $\mathbb{Q}_{\ell}$ des classes algébriques — implique (avec conjectures
+standard) la ½ simplicité dans Tate…}
+
+\emph{Cas $S = \operatorname{Spec} k$, $k$ corps fini}.
+$\mathcal{C} \subset \mathcal{M}(k)$, et $F$ un « foncteur fibre » sur
+$\mathcal{C}$ à coeff.\ dans $K$. Comme on a un élément canonique
+\[
+  \mathrm{Frob}_{k} \in \operatorname{Aut} \underline{\mathrm{id}}_{\mathcal{M}(k)}
+  \longrightarrow \operatorname{Aut} \mathrm{id}_{\mathcal{C}}
+  \quad [\simeq \mathfrak{Z}(\mathbb{Q}) \text{, où } \mathfrak{Z}
+  \text{ est le centre de } G]
+\]
+on en déduit un élément canonique de $G(K) = \operatorname{Aut} F$, et même
+de $\mathfrak{Z}(\mathbb{Q})$ (où $\mathfrak{Z}$ est le centre de $G$)
+\[
+  \boxed{\mathrm{Frob}_{k,F} \in \mathfrak{Z}(\mathbb{Q}) \subset G(K)} .
+\]
+\marginal{N.B. $\mathfrak{Z}$ est \struck{\ill{}} défini sur $\mathbb{Q}$ !}
+\note{il note le centre par une lettre en forme de 3, transcrite
+$\mathfrak{Z}$ ; dans le crochet, « où $\mathfrak{Z}$ est le centre de $G$ »
+est récrit sur un mot biffé}
+
+\page{12}
+Si $K \subset \mathbb{Q}_{\ell}$ et si $F$ est compatible avec
+$T^{\ell}_{\xi}$, alors l'image de
+$\mathrm{Frob}_{k,F} \in \mathfrak{Z}(K) \to \mathfrak{Z}(\mathbb{Q}_{\ell})
+\subset G(\mathbb{Q}_{\ell})$ \struck{n'est autre \ill{} par} n'est autre que
+l'image du générateur
+\[
+  \mathrm{Frob}_{k} \in \pi_{1}(k, \xi) \simeq \hat{\mathbb{Z}}
+\]
+par l'hom.
+\[
+  \rho_{\ell} : \hat{\mathbb{Z}} \longrightarrow G(\mathbb{Q}_{\ell})
+\]
+La \emph{conjecture de Tate} pour le corps fini $k$ équivaut à dire que $G$
+est l'enveloppe algébrique du sous-groupe engendré par
+$\mathrm{Frob}_{k,F} \in G(K)$. Elle implique donc que $G$ est commutatif.
+[Comme il est défini \uncertain{pour toute} \ill{}, on voit qu'il est en fait
+défini sur $\mathbb{Q}$, canonique, et évidemment on aura en fait, donc
+\[
+  \mathrm{Frob}_{k,F} \in G(\mathbb{Q})
+\]
+].
+\note{devant $G(\mathbb{Q})$, un $\mathfrak{Z}(\mathbb{Q})$ biffé}
+
+\emph{Conséquence de conjecture de Tate pour $k$}.
+\struck{(canoniquement \ill{})} $G$ est extension
+\marginal{de $\hat{\mathbb{Z}}$ par un tore resp.\ protore.}
+
+\emph{Conséquences} : Soit maintenant $S$ quelconque, mais muni d'un pt
+fermé $s$ tel que $k(s)$ soit fini. Soit $\mathcal{C} \subset \mathcal{M}(S)$,
+\struck{\ill{}} \struck{$\mathcal{C}'$ une sous-catégorie de} muni d'un
+foncteur fibre $F$, à coeff.\ dans un corps $K \supset \mathbb{Q}$,
+
+\page{13}
+d'où un $G$ \uncertain{schéma} en groupes sur $K$. Soit $I_{G}$ le « schéma
+des invariants », isomorphe si $G$ connexe à $T/W$ ($T$ tore maximal
+\struck{\ill{}}, $W$ le groupe de Weyl). Alors on trouve un élément $f_{s}$
+de $I_{G}(\mathbb{Q})$. (NB. $I_{G}$ est en fait défini sur $\mathbb{Q}$).
+On trouve ainsi une famille d'éléments $(f_{s})_{s \in S_{0}}$, où $S_{0}$
+désigne l'ens.\ des pts $s$ de $S$ tels que $k(s)$ soit fini : famille des
+frobenius. Compatibilité avec les homs
+\[
+  G \longrightarrow \pi_{1}(S, \xi)
+\]
+et les homs
+\[
+  \pi_{1}(S, \xi) \longrightarrow G(\mathbb{Q}_{\ell}) .
+\]
+
+\page{14}
+12) \emph{Structures supplémentaires sur le groupe de Galois motivique} :
+\marginal{structures associées aux} graduations, filtrations, au motif de
+Tate.
+
+On choisit une sous-\marginal{$\otimes$-}catégorie grad.\ \struck{La
+catégorie} $\mathcal{C}$ de $\mathcal{M}(S)$, avec un foncteur fibre $F$,
+\marginal{à coeff.\ dans $K$} d'où groupe de Galois motivique $G$.
+
+a) \struck{Une} graduation de type $M$ sur le foncteur fibre, compatible avec
+$\otimes$, est équivalente à la donnée d'un hom.
+\[
+  T = D_{K}(M) \longrightarrow G
+\]
+La graduation provient d'une graduation fonctorielle de $\mathcal{M}$
+\marginal{$\mathrm{df}$ / \ill{}} ssi l'hom $T \to G$ est central. Par suite :
+
+1°) La graduation \marginal{canonique} de type $\mathbb{Z}$ des objets de
+$\mathcal{C}$ définit un hom canonique
+\[
+  y : \mathbb{G}_{m,K} \longrightarrow G
+\]
+
+2°) Si $F = T_{\mathrm{Hdg}}$, la bigraduation de ce foncteur correspond : un
+hom \struck{$D_{K}(\mathbb{Z}^{2}) = \mathbb{G}_{m}^{2} \to G$ donc :
+donnant \ill{}}
+\[
+  i : \mathbb{G}_{m,K}^{2} \longrightarrow G
+\]
+donc : deux homs commutant l'un à l'autre
+\[
+  i_{1}, i_{2} : \mathbb{G}_{m} \longrightarrow G
+\]
+Comme la graduation totale associée est celle de 1°), on trouve
+\[
+  i_{1}(\lambda) i_{2}(\lambda) = y(\lambda)
+\]
+(ce qui contient déjà que $i_{1}$, $i_{2}$ commutent…).
+\note{dans $D_{K}(M)$, la lettre sous la parenthèse est surchargée ; lue $M$}
+
+\page{15}
+3°) Supposons $S = \operatorname{Spec}(\mathbb{C})$, prenons
+$F = T_{\mathrm{Betti}}$ \struck{ou $T_{\mathrm{Hdg}}$}. Alors on
+\struck{peut prendre} a $K = \mathbb{Q}$. D'autre part
+$F \otimes_{\mathbb{Q}} \mathbb{C} \simeq T_{\mathrm{Hdg}}$
+\struck{\ill{}}, donc on a
+$G^{\mathrm{Betti}} \otimes_{\mathbb{Q}} \mathbb{C} \simeq G^{\mathrm{Hdg}}$
+\struck{\ill{}}. Donc dans $G^{\mathrm{Betti}} \otimes_{\mathbb{Q}} \mathbb{C}$
+on trouve \struck{\ill{}} $i_{1}$, $i_{2}$
+\[
+  i_{1}, i_{2} : \mathbb{G}_{m} \to G^{\mathrm{Betti}} \otimes_{\mathbb{Q}}
+  \mathbb{C}
+\]
+tels que
+\[
+  i_{1}(\lambda) i_{2}(\lambda) = y(\lambda)
+\]
+De plus on a
+\[
+  \overline{i_{1}(\lambda)} = i_{2}(\lambda)
+\]
+ce qui exprime que les deux graduations \uncertain{relatives} sont conjuguées
+complexes l'une de l'autre.
+\note{en tête, au-dessus du numéro de page, « $\mathrm{Bett}$ / $\mathrm{Hdg}$ »
+biffé}
+
+b) Il y a lieu de supposer que $\mathcal{C} \ni$
+\uncertain{$\mathbb{Q}(-1)$}. Alors $\mathbb{Q}(-1)$ \struck{est} définit un
+G-module $F(\mathbb{Q}(-1))$ de rang 1, d'où un hom
+\[
+  \varepsilon : G \longrightarrow \mathbb{G}_{m,K}
+\]
+Comme $\mathbb{Q}(-1)$ est de \struck{degré} poids 2, on aura
+\[
+  \boxed{\varepsilon(y(\lambda)) = \lambda^{2}}
+\]
+
+c) Supposons que sur le foncteur $F$ il y ait une filtration fonctorielle,
+compatible avec gr.\ Comment l'expliciter ? On considère
+\[
+  F' = \mathrm{Gr}(F)
+\]
+
+\page{16}
+c'est un autre foncteur fibre, mais gradué, donc défini par un \emph{torseur}
+$P$ \struck{\ill{}} sous $G$, et $F$ en termes de $F'$ \ill{} par torseur
+$P'$ sous $G'$. Supposons que sur \struck{\ill{}} une extension $K'$ de $K$,
+on puisse trouver un isom
+\[
+  F \simeq F'
+\]
+compatible avec les filtrations, et induisant l'identité sur les gradués
+associés. [\emph{Ex} \marginal{$S = \operatorname{Spec} k$,} $k$ de car.\ nulle, $F = T_{\mathrm{DR}}$ avec filtration canonique ; ça marche aussi si
+$S$ est un préschéma \marginal{régulier} de car.\ nulle…]. Alors il y a un
+sous-torseur \marginal{canonique} $Q$ de $P$ \struck{\ill{}}, de groupe $H$ le
+sous-groupe de $G$ des automorphismes compatibles avec filtration et
+induisant l'identité sur le gradué, et de \struck{\ill{}} $Q'$ de $P'$,
+\marginal{groupe $H'$ !} On remarque que $H$, $H'$ sont unipotents. Ainsi,
+$F$ se déduit canoniquement du foncteur gradué $F'$ [graduation définie par
+$\mathbb{G}_{m,K} \xrightarrow{\ \alpha\ } G'$] à l'aide d'un torseur $Q'$
+sous le groupe \marginal{unipotent} $H(\alpha)$ de $G'$ défini par $\alpha$
+comme on pense.
+
+\marginal{expliciter la construction de $H(\alpha)$}
+\note{note entourée en marge gauche}
+
+13) \emph{Relation avec le groupe de \struck{Galois} Mumford-Tate}.
+
+Les structures de Hodge polarisables forment une $\otimes$-catégorie
+semi-simple. Toute sous-$\otimes$-catégorie de type fini est « définie » par
+un groupe \uncertain{réd.} \ill{} sur $\mathbb{Q}$. Soit $(V, V_{0}, (V^{pq}))$
+une structure de Hodge. \ill{}
+\note{la dernière ligne, sous un trait horizontal au bas du feuillet, en
+partie hors du cadre de la numérisation : « \ill{} avec
+$i_{1}, i_{2} : \mathbb{G}_{m,\mathbb{C}} \to G_{\mathbb{C}}$ satisfaisant
+$i_{1}(\lambda) i_{2}(\lambda) = i(\lambda)$ central,
+$i_{2}(\lambda) = \overline{i_{1}(\lambda)}$ », suivie d'une ligne coupée}
+
+\page{17}
+Considérons $\Gamma = \underline{\mathrm{Aut}}_{\mathbb{Q}}(V_{0})$, groupe
+algébrique sur $\mathbb{Q}$, et les deux homs
+\[
+  i_{1}, i_{2} : \mathbb{G}_{m,\mathbb{C}} \longrightarrow \Gamma_{\mathbb{C}}
+\]
+définissant la bigraduation de $V$
+\[
+  i(\lambda, \mu) \text{ est } \lambda^{p}\mu^{q} \text{ sur } V^{pq}
+\]
+\note{au-dessus de la formule, un début biffé, lu $i_{1}(\lambda)$}
+Soit $G$ le plus petit sous-groupe algébrique \marginal{de $\Gamma$}
+\struck{tel} que $G_{\mathbb{C}}$ contienne $\operatorname{Im} i_{1}$,
+$\operatorname{Im} i_{2}$ ; \struck{Alors} c'est aussi le sous-groupe
+algébrique de $\Gamma_{\mathbb{C}}$ engendré par les $i_{\sigma}$,
+\uncertain{$\sigma$} parcourant les \struck{\ill{}} automorphismes de
+$\mathbb{C}$. C'est un groupe algébrique réductif, appelé \emph{groupe de
+Mumford-Tate} de la structure de Hodge.
+\struck{\ill{} représentation de $G$ \ill{} $M$ \ill{} sur $\mathbb{Q}$,}
+\note{un passage de deux lignes et demie, encadré et barré de boucles}
+Si $\Sigma$ est une opération tensorielle sur un module, de sorte que $G$
+opère sur $\Sigma(V_{0})$, on voit que les éléments de $\Sigma(V_{0})$
+invariants sous $G$ \struck{sont \ill{}} sont ceux qui sont invariants par
+\marginal{les homs} $i_{1}$, $i_{2}$, i.e.\ qui sont de bidegré $0,0$. Cela
+permet de voir que
+
+\page{18}
+le « groupe de Galois », au sens structures de Hodge, de
+$(V, V_{0}, (V^{pq}))$, s'identifie à $G$.
+
+Supposons maintenant que $V$ provienne d'un motif $M$, engendrant une
+\marginal{$\otimes$-}catégorie de motifs $\mathcal{C}_{0}$. On a alors
+$\mathcal{C}_{0} \to \mathcal{C}$, donc $G \to G_{0}$, où $G_{0}$ est le
+groupe de Galois motivique ($G_{0} \subset \Gamma$). La conjecture de Hodge
+s'interprète en disant que \emph{$G = G_{0}$} !
+
+14) \emph{Structure de \uncertain{positivité}}
+\note{le paragraphe 14) s'arrête sur son titre ; le reste du feuillet est
+vierge. C'est la dernière page de sa pagination 1 à 17}
+
+\section{Motifs}
+\note{le titre est de sa main, encadré, en haut à droite du feuillet 20, qui
+porte une table en dix-neuf points, sur une feuille dont l'autre face est un
+texte dactylographié. Le feuillet 19 est vierge}
+
+\page{20}
+\begin{enumerate}
+  \item La catégorie $\mathcal{M}^{+}(X)$
+  \item Variances pour $X$
+  \item Cas $X = \varprojlim X_{i}$
+  \item Foncteurs $T_{\ell}$
+  \item Les $\mathbb{Q}_{\ell}(n)$
+  \item La catégorie $\mathcal{M}(X)$
+  \item Les foncteurs $\underline{\mathrm{Hom}}$ et $R\underline{\mathrm{Hom}}$
+  \item Motifs constants, tordus, et \uncertain{pt.\ con.}
+  \item Filtrations de $\mathcal{M}(X)$ et $\mathcal{M}^{+}(X)$
+  \item Anneaux $M^{+}(X)$ et $M(X)$.
+  \item Interprétation topologique des \struck{\ill{}} niveaux par la
+    filtration canonique \struck{\ill{}} \uncertain{variété proj.\ non
+    singulière}.
+  \item L'hom $L(K) \to M^{+}(K)$ et invariants birationnels fondamentaux.
+    [NB. À généraliser à des coefficients quelconques]
+  \item Caractérisation géométrique des filtrations (Conj.\ de Tate)
+  \item Invariants de Galois et thms de commutation.
+  \item Cohomologie absolue des motifs. Cas des schémas de type fini.
+  \item Relation avec les $\mathrm{gr}$ \uncertain{relatifs} et le \ill{} des
+    VA sur un schéma de type fini.
+  \item Formes positives.
+  \item Motifs et fonctions $L$
+  \item Relation avec la cohomologie de Hodge….
+\end{enumerate}
+\note{les numéros 1) à 19) sont les siens ; la liste les porte dans l'ordre}
+
+\end{document}

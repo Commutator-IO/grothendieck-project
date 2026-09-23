@@ -1,0 +1,423 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 12, batch 3 (pages 41-60).
+% Established from the facsimile archives/batches/12/batch-03.pdf (a mirror of
+% https://grothendieck.umontpellier.fr/12.pdf), per the skill
+% transcribe-grothendieck. The batch file carries no cover sheet: PDF page N
+% is page 40+N of the folder (the Montpellier footer prints « 41 » ... « 60 »),
+% and the archivists' pencil numbers bottom-left agree leaf by leaf (45, 46,
+% 47 ... 60 are legible).
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-09-23 — first pass, unchecked against the pages by a human.
+%
+% Nineteen of the twenty pages are transcribed. Page 60 is the upside-down
+% verso of an unrelated typescript (a few lines on a base change, cancelled
+% by strokes, nothing in his hand) and is absent.
+%
+% What the batch is. One continuous run in his hand, not paginated by him,
+% organised by numbered paragraphs 11) to 15) that continue the numbering of
+% the previous batch; each paragraph heading is underlined and becomes a
+% \section here.
+%   41-42  11) Topological interpretation of dimensional types: the
+%          coniveau spectral sequence E_1^{pq} = ∐_{x∈X[p]} H^{q-p}(x)(-p)
+%          ⇒ H^*(X), which comes from motives; the piece of filtration ≥ p
+%          has dimensional type ≤ n-2p. Top of 42 cancelled (twisted
+%          constant motive, Tate conjecture); boxed insert: H^i(X) → H^i(U)
+%          is an isomorphism modulo D_{i-1}, whence a birational invariant.
+%   42-51  12) The fundamental homomorphism σ : L(K) → M^+(K), L(K) the
+%          Grothendieck ring of K-schemes of finite type (cut-and-paste),
+%          cl(X) ↦ Σ(-1)^i cl H^i_!(X); virtual Betti numbers « demandés par
+%          Serre »; filtration by dimension, the Lefschetz twist ζ, gr_n L(K)
+%          → Z^(σ_n ∪ ζσ_{n-1} ∪ …), the invariants γ_j(X) (n-birational),
+%          primitive components via Lefschetz; Γ^i(X) the largest bipure
+%          sub-motive of lim_U H^i(U), functorial and injective for dominant
+%          maps; questions: equivalence of R, R' from the Γ_i (curves with
+%          isogenous jacobians, unirationality if Γ_i = 0 for i > 0, ruled
+%          varieties if Γ_n = 0; « Non en car. p > 0 » with E × E, E
+%          supersingular). 50: the ranges of H^i_!, H^i for X smooth; 51
+%          (cancelled): is L_i/L_{i-1} → Z^{σ_i(K)} injective, surjective?
+%   52-54  13) Galois characterisation of the filtrations: M^+(X) →
+%          M^+_ℓ(X) bijective over Z of finite type by Tate; weight by
+%          Frobenius absolute values N(x)^{i/2} (Weil), effectivity by
+%          integrality of Frobenius eigenvalues (Tate), D_i by twisting;
+%          bottom of 54 cancelled.
+%   55-56  14) Galois invariants and commutation theorems: Tate conjecture
+%          H^{2i}(X̄,Q_ℓ(i))^π ≅ A^i ⊗ Q_ℓ; algebraic correspondences U^i
+%          and the enveloping algebra of Galois as mutual commutants;
+%          question on the image of Galois (reductive Lie algebra).
+%   57     Cancelled leaf, out of sequence: continuation of the 41 argument
+%          (gr^p H^n of pure dimensional type n-2p) and, written sideways,
+%          localisation sequences H_Y → H(X) → H(U) with ζ-ranges.
+%   58     The Lie-algebra motive 𝔊_M ⊂ M̌ ⊗ M, the canonical « pro-motif
+%          fondamental » (motivic Galois group in its Lie form).
+%   59     15) Cohomologie absolue: H^i(X,M), RΓ_X : D^b(M^+(X)) → D^b(Ab),
+%          properties 1°) limits, 2°) transitivity (breaks off).
+%
+% Notation fixed for the batch: \mathcal{M}^{+}(K), \mathcal{M}^{+}_{i}(K)
+% for his script M (effective motives, of type i); D_i, D'_i the filtrations;
+% \zeta for his curly « ʒ » (the Lefschetz motive, raising dimension by one);
+% \underline{\Gamma} where he underlines Γ; \mathfrak{G} for the looped
+% capital G of pages 56 and 58 (not Gal, which he writes out on page 55);
+% \mathcal{U}^{i} for his script U (correspondences), \mathcal{A}^{i} for
+% his script A (algebraic cycles). His « cl » is \mathrm{cl}.
+%
+% Cancelled passages (42 top, 43 bottom, 51 whole, 54 bottom, 57 whole) are
+% transcribed as far as they read, the cancellation recorded once per page
+% in a \note.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{12}
+\batch{3}
+\pages{41}{60}
+\dating{1964-[vers 1971]}
+\watermark{Édition de démonstration}
+\foldertitle{Généralités (sous-groupes de Galois motiviques) (1964 ?) : notes manuscrites (s.d.), tapuscrit (s.d.)}
+
+\begin{document}
+
+\section{11) Interprétation topologique des types dimensionnels (ou « géométriques »)}
+\note{titre de sa main, souligné, en tête du feuillet 41, où il écrit « types \struck{filtr.} dimensionnel », deux mots biffés ; le numéro « 11 » continue la suite des paragraphes numérotés du lot précédent.}
+
+\page{41}
+Soit $X$ \struck{projective} une variété lisse sur le corps alg.\ clos. Considérons la filtration de $X$ par la codimension, et la suite spectrale
+\[
+  H^{*}(X, \mathbb{Q}_{\ell}) \Longleftarrow E_{1}^{pq} = \coprod_{x \in X[p]} H^{q-p}(x, \mathbb{Q}_{\ell})(-p)
+\]
+\marginal{utilisation du terme initial $E_1$ et non $E_2$ !!}
+où on pose
+\[
+  \begin{cases}
+    X[p] = \{x \in X \mid \dim \mathcal{O}_{X,x} = p\} \\
+    H^{*}(x, \mathbb{Z}_{\ell}(-p)) = \varinjlim_{U} H^{*}(U, \mathbb{Q}_{\ell}(-p))
+  \end{cases}
+\]
+\note{sous la limite inductive : « $U$ ouvert \uncertain{dense} de $\bar{x}$ » ; à gauche, un petit schéma des axes $(p, q)$ : la demi-droite issue de l'origine au-dessus de l'axe des $p$, et un « 0 » dans le secteur situé en dessous ; les termes $E_1^{pq}$ sont donc nuls hors du secteur $0 \leq p \leq q$. Le $\mathbb{Z}_{\ell}$ de la seconde ligne est bien écrit tel, contre $\mathbb{Q}_{\ell}$ partout ailleurs.}
+
+On sait que \struck{\ill{}} cette suite spectrale provient d'une suite spectrale de motifs (au moins à partir de $E_{r}^{pq}$ avec $r \geq 2$ ; sinon il faudrait parler de ind-motifs, ou bien passer aux filtrations finies convenables de $X$ par des \uncertain{sous-schémas fermés} [\uncertain{en dehors de} \ill{}]). Le morceau \marginal{si $X$ est \struck{projectif} lisse (hypothèse essentielle ! ou si $X$ de dim.\ 1 !)} de filtration $\geq p$ est visiblement de type dimensionnel $\leq n-2p$. On voit que \ill{} \ill{} \uncertain{exactement} le morceau de type dimensionnel $n-p$.
+\note{l'insertion entre crochets verticaux, en bas à gauche, se rattache à « Le morceau de filtration $\geq p$ » ; le mot souligné de la dernière ligne, lu « ex.\ tous » ou « exactement », reste douteux.}
+
+\page{42}
+\note{tout le haut du feuillet, jusqu'au titre 12), est barré de longs traits obliques ; il est transcrit, les traits de biffure une fois signalés ici.}
+si le \struck{\ill{}} motif de coefficient $\mathbb{Z}(0)$ est remplacé par \struck{un} un motif] constant tordu, en \add{motif} \uncertain{purement} de type dimensionnel \struck{\ill{}} $\delta$ [attention au décalage par $\delta$ !]. Cet énoncé \struck{est} \struck{\ill{}} précise les interprétations géométriques et la conjecture de Tate du \struck{\ill{}} \ldots, et est sans doute moins profond.
+\note{le crochet fermant après « un motif » n'a pas d'ouvrant visible sur ce feuillet.}
+
+\marginal{$X$ de dim.\ $n$, $U$ ouvert, $X - U$ de dim.\ $< n$. Alors \uncertain{si $i$}, $H^{i}(X) \to H^{i}(U)$ est un \uncertain{isom.} mod $D_{i-1}(M^{+}(K))$, donc $H^{i}(X)$ et $H^{i}(U)$ ont même composant dans $D_{i}(M^{+}(K))/D_{i-1}(M^{+}(K))$. \struck{De plus} (via résolution) ce dernier est dans l'image de $M^{+}_{i}(K)$, d'où un invariant birationnel $\in \mathbb{Z}^{\ill{}}$\ldots}
+\note{ajout encadré, à droite du titre qui suit, lui-même traversé par l'un des traits obliques ; l'exposant final de $\mathbb{Z}$ n'est pas lu.}
+
+\section{12) L'homomorphisme fondamental $L(K) \to M^{+}(K)$ et invariants birationnels fondamentaux}
+\note{titre de sa main, souligné, au milieu du feuillet 42 ; un « B. » souligné, biffé, précède « L'homomorphisme ».}
+
+$K$ est un corps. On désigne par $L(K)$ le \uncertain{groupe} \ill{} engendré par les préschémas de type fini sur $K$, avec comme relations celles définies par décomposition en morceaux. C'est un anneau par \uncertain{$\times$}. On définit un homomorphisme d'anneaux
+\[
+  \sigma : L(K) \longrightarrow M^{+}(K)
+\]
+
+\page{43}
+par
+\[
+  \mathrm{cl}(X) \longmapsto \sum (-1)^{i}\, \mathrm{cl}\, H^{i}_{!}(X, \mathbb{Q}(0))
+\]
+où bien entendu $H^{i}_{!}(X, \mathbb{Z}(0))$ est \struck{considéré} \add{défini} comme motif sur $K$ par $R^{i}f_{!}(\mathbb{Q}(0))$ ; $f : X \to \operatorname{Spec} K$ la projection. Prenant les composantes homogènes de $\sigma\,\mathrm{cl}(X)$, on \ill{} les $\sigma_{i}(\mathrm{cl}(X))$ qui sont des « motifs virtuels », et permettent de définir des « nombres de Betti virtuels », ceux demandés par Serre.
+\note{« défini » est interlinéaire, au-dessus du mot biffé.}
+
+\note{ce qui suit, jusqu'au bas du feuillet, est barré de plusieurs traits obliques.}
+Si on filtre $L(K)$ par la dimension, en $L_{i}(K)$, on trouve
+\[
+  L_{i}(K) \longrightarrow D_{i}(M^{+}_{\uncertain{\varepsilon}}(K))
+\]
+On peut se demander si c'est surjectif, \struck{et bijectif} \ill{} éventuellement \struck{bijectif} \ill{} torsion. \struck{Déjà} Pour $i = 1$ \ill{} [\uncertain{déjà de transc.\ infinie ou corps parfait}] (\uncertain{$K$ alg.\ clos}) rien n'est connu.
+
+On peut \ill{} \uncertain{relations} \ill{} considérer des $X/K$ munis d'un groupe fini donné $G$ d'autom. --- mais il faut
+
+\marginal{Pb pour bien \ill{} \ill{} \uncertain{négative} \ill{} \struck{\ill{}} \ill{} de plus bas \ill{} formulations correctes\ldots\ En fait
+\[
+  L_{i}(K) \to M^{+}_{(i)}(K) + \zeta M^{+}_{(i-1)}(K) + \zeta^{2} M^{+}_{(i-2)}(K) + \cdots
+\]}
+\note{note oblique en marge gauche, en bas ; la lettre lue $\zeta$ (un « ʒ ») reparaît au feuillet suivant, où elle semble noter le motif de Lefschetz, qui élève la dimension d'une unité.}
+
+\page{44}
+Filtrant $L(K)$ par la dimension, on trouve
+\[
+  L_{(i)}(K) \longrightarrow \underbrace{M^{+}_{(i)}(K) + \zeta M^{+}_{(i-1)}(K) + \zeta^{2} M^{+}_{(i-2)}(K) + \cdots}_{=\ D'_{i}(M^{+}(K))}
+\]
+\note{sous $\zeta M^{+}_{(i-1)}(K)$ et $\zeta^{2}M^{+}_{(i-2)}(K)$ il écrit « $\cap$ $M^{+}_{i+1}(K)$ » et « $\cap$ $M^{+}_{i+2}(K)$ » ; à gauche, biffé : « \struck{donc si $x \in$} ».}
+
+d'où un homom.\ naturel
+\[
+  \operatorname{gr}_{n}(L(K)) \longrightarrow \operatorname{gr}'_{n}(M^{+}(K)) \simeq \mathbb{Z}^{(\sigma_{n} \cup \zeta\sigma_{n-1} \cup \zeta^{2}\sigma_{n-2} \cup \cdots)}
+\]
+\marginal{filtration par les $D'_{i}(M^{+}(K))$}
+\note{un exposant biffé devant la parenthèse de $\mathbb{Z}$.}
+
+Donc, si $X$ est un préschéma de type fini \struck{de} sur $K$, de dim.\ $\leq n$, alors prenant $\mathrm{cl}(X) \in L_{n}(K)$ et réduisant modulo $L_{n-1}(K)$, on trouve un \uncertain{« type »} dans $\mathbb{Z}^{(\sigma_{n} \cup \zeta\sigma_{n-1} \cup \cdots)}$ i.e.\ un invariant de la forme
+\[
+  \gamma_{n}(X) + \zeta\gamma_{n-1}(X) + \zeta^{2}\gamma_{n-2}(X) + \cdots
+\]
+\struck{$\beta_{n}(X)\ \zeta\beta_{n-1}(X)\ \zeta^{2}\beta_{n-2}$ \ldots\ poids $n$ $n+1$ $n+2$} [poids $n$, $n+1$, $n+2$, \ldots]
+
+\page{45}
+i.e.\ des
+\[
+  \gamma_{j}(X) \in \mathbb{Z}^{\sigma_{j}(X)} \qquad 0 \leq j \leq n
+\]
+Ils sont obtenus en prenant les $\beta_{k}(X)$ de Serre [composants de poids purs de $\mathrm{cl}(X)$] pour $k \geq n$, et \struck{la composante} en notant qu'un tel $\beta_{k}(X)$ se met sous la forme $\zeta^{k-n}\beta'_{2n-k}(X)$, où $\beta'_{2n-k}(X) \in M^{+}_{2n-k}(K)$ ; alors $\gamma_{2n-k}(X)$ s'obtient en prenant la composante \emph{\uncertain{primitive}} de $\beta'_{2n-k}(X)$ \ldots
+\marginal{au signe près !}
+\note{note cerclée en marge gauche.}
+
+Par construction même, les invariants ainsi obtenus sont des invariants \emph{$n$-birationnels} de $X$. Si $X$ est projectif \emph{lisse sur $K$}, \struck{\ill{}}, les $\beta'_{j}(X)$ pour $0 \leq j \leq n$ n'est autre (par \emph{Lefschetz}\ldots) que le \uncertain{dual} des $H^{j}(X, \mathbb{Q}(0))$. Donc notre construction consiste à prendre la composante \uncertain{primitive} des $H^{j}(X, \mathbb{Q}(0))$. Mais cela n'est autre aussi.
+
+\page{46}
+d'après le n° précédent que la \struck{composante} \add{l'image des $j$-bipures de}
+\[
+  \varinjlim_{U \text{ ouvert dense}} H^{j}(U, \mathbb{Q}(0))
+\]
+de $H^{j}(X, \mathbb{Z}(0))$.
+\note{l'insertion au-dessus de la ligne, qui remplace « composante » biffé, n'est pas sûre ; sous la limite, un premier « d… » biffé avant « dense ».}
+
+En fait, on constate (via dualité) que si $X$ est lisse (sans doute inutile) de dim.\ $\leq n$, et si $i \leq n$, alors pour tout ouvert dense $U$ de $X$,
+\[
+  H^{i}(X) \longrightarrow H^{i}(U)
+\]
+est \struck{bijectif} \emph{injectif mod $D_{i-2}(\mathcal{M}^{+}(X))$} et \emph{bijectif mod $D_{i-1}(\mathcal{M}^{+}(X))$}, ce qui donne un invariant birationnel dans $D_{i}(\mathcal{M}^{+}(X)) / D_{i-1}(\mathcal{M}^{+}(X))$, lequel est d'ailleurs dans l'image de $\mathcal{M}^{+}_{(i)}(X)$, donc définit un objet de
+\[
+  \mathcal{M}^{+}_{(i)}(X) \big/ \bigl[\mathcal{M}^{+}_{(i-1)}(X) + \zeta\,\mathcal{M}^{+}_{(i-2)}(X)\bigr],
+\]
+donc un élément de $\mathbb{Z}^{\sigma_{i}(X)}$. C'est l'invariant birationnel $\gamma_{i}(X)$.
+\note{il écrit ici $\mathcal{M}^{+}(X)$ et $\sigma_{i}(X)$, là où les feuillets voisins ont $\mathcal{M}^{+}(K)$ ; transcrit tel quel. Un « + » biffé devant $\zeta$ dans le crochet.}
+
+\page{47}
+Sous la forme précédente, on voit que l'on a mieux que des invariants dans $\mathcal{M}^{+}_{i}(K)$. En fait, on a des
+\[
+  \underline{\Gamma}^{i}(X) \in \operatorname{Ob} \mathcal{M}^{+}_{i\,\mathrm{bipur}}(K),
+\]
+objet semi-simple, définis de la façon suivante ($K$ parfait, on \uncertain{peut le supposer}) $\Gamma^{i}(X) \subset \varinjlim_{U \text{ ouvert dense}} H^{i}(U, \mathbb{Z}(0))$ est le plus grand sous-motif \emph{bipur} de type $i$ [c'est un foncteur en $X$ \struck{la fonction \ill{} par $\Gamma^{i}(X)$} [ou en l'anneau des fonctions rat.\ sur $X$, comme alg.\ sur $K$]], de façon évidente [TMB si $X' \to X$ \uncertain{n'est pas dominant}, $X$ irréd., alors $\Gamma^{i}(X) \to \Gamma^{i}(X')$ est nul]. Pour un \uncertain{morphisme} \emph{dominant}, $\Gamma^{i}(X) \to \Gamma^{i}(X')$ est \emph{injectif}. En effet, on peut supposer (prenant des modèles convenables) (\struck{\ill{}} surjectif) $X' \to X$ est propre, $X$ et $X'$ lisses, puis $H^{i}(X) \to H^{i}(X')$ est \emph{injectif} comme on le sait bien \ldots
+\note{le signe entre $\Gamma^{i}(X)$ et la limite porte un mot biffé, lu « lim » ; « TMB » est lu tel quel. En marge gauche, un petit schéma vertical $X' \to X$.}
+
+\emph{Question} \struck{Conditions} Propriétés de « fidélité » \struck{des} du foncteur précédent ?? On \uncertain{aimerait}, pour deux \struck{\ill{}} extensions de type \ldots, $\underline{\Gamma}_{i}(R) \to \underline{\Gamma}_{i}(R')$
+
+\page{48}
+provenant d'un $K$-homom.\ $R \hookrightarrow R'[t_{1}, \ldots, t_{N}]$ ($R$, $R'$ ext.\ de type fini de $K$), que l'isomorphie des systèmes des $(\Gamma_{i}(R))$ à des systèmes des $(\Gamma_{i}(R'))$ implique que $R$ et $R'$ sont « équivalents » en ce sens que chacun s'immerge dans une extension transcendante pure de l'autre \ldots
+
+\emph{Exemples.} 1) Soient $C$, $C'$ deux courbes \add{lisses complètes connexes} sur $K$ alg.\ clos (\ill{} \ill{}) telles que les jacobiennes soient telles qu'il existe un homom.\ $J \to J'$ à noyau fini. Prouver qu'il existe \struck{$C'$} une application rationnelle dominante
+\[
+  C'[t_{1}, \ldots, t_{N}] \longrightarrow C \quad ??
+\]
+\marginal{$K$ alg.\ clos au besoin !}
+\note{« lisses complètes connexes » est écrit au-dessus de la ligne, en bout, relié par un trait.}
+
+2) Si les $\underline{\Gamma}_{i}(R)$ sont nuls pour $i > 0$, prouver que $R$ est unirationnelle ?? [En particulier, si la cohomologie \marginal{de $X$ var.\ proj.\ non sing.} est entièrement algébrique ??] Cas d'une surface ?? [\uncertain{Cast.\ ok !}]
+\note{la précision « de $X$ var.\ proj.\ non sing. » est cerclée au-dessus de la ligne et rattachée à « cohomologie ».}
+
+\page{49}
+\emph{Remarque.} Si nous négligeons les \emph{variétés réglées} \add{en dimension $n$} [i.e.\ les extensions $L$ de $K$ \add{de degré de transc.\ $n$} de la forme $L_{0}[t]$, $t$ une indéterminée), le seul invariant \add{cohomologique} qui reste est $\underline{\Gamma}_{n}$. \uncertain{Trouve-t-on} un isom.\ entre $\operatorname{gr}_{n} L(K)$ mod.\ le sous-groupe réglé [i.e.\ $\operatorname{Im} \zeta \operatorname{gr}_{n-1} L(K)$] avec $\mathbb{Z}^{\sigma_{n}(K)}$ ? En particulier, si $\underline{\Gamma}_{n}(X) = 0$ \struck{\ill{}}, est-il vrai que $X$ est \emph{réglé} ??
+\note{les trois précisions entre soufflets sont interlinéaires.}
+
+\emph{Exemples.} Pour une surface : si la cohomologie $H^{2}$ est algébrique, la surface est-elle réglée ??
+\marginal{\emph{Non en car.\ $p > 0$}, prendre $E \times E$ avec $E$ d'invariant de Hasse nul.}
+\note{la réponse est écrite à droite de la question, séparée d'elle par un trait vertical ; un double trait vertical en marge gauche.}
+
+\page{50}
+\marginal{$X$ lisse}
+$X$ \struck{\ill{}} de dim.\ $n$ partout.
+\[
+  \begin{cases}
+    H^{i}_{!}(X, \mathbb{Z}(0)) \in \operatorname{Ob} \mathcal{M}^{+}_{i}(K) \ \text{et} \in \operatorname{Ob} \mathcal{M}^{+}_{n}(K) \quad \forall i \quad \text{mieux :} \\
+    H^{n+k}_{!}(X, \mathbb{Z}(0)) \in \operatorname{Ob} \bigl[\zeta^{k} \mathcal{M}^{+}_{n-k}(K)\bigr]
+  \end{cases}
+\]
+\note{« $X$ lisse » est cerclé ; « et $\in \operatorname{Ob}\mathcal{M}^{+}_{n}(K)$ » est un ajout encadré au-dessus de la ligne ; à la fin de la seconde ligne, biffé, un terme « $+\,\zeta^{k+1}\mathcal{M}^{+}_{n-k-2}$ ».}
+\[
+  H^{i}(X, \mathbb{Z}(0)) \in \operatorname{Ob} \underline{D}_{i}(\mathcal{M}^{+}(K)), \ \text{et} \in \operatorname{Ob} D_{n}(\mathcal{M}^{+}(K)) \quad \forall i
+\]
+et mieux
+\[
+  \begin{aligned}
+    H^{i}(X, \mathbb{Z}(0)) &\in \operatorname{Ob} \bigl[\mathcal{M}^{+}_{i} + \zeta \mathcal{M}^{+}_{i-1} + \zeta^{2} \mathcal{M}^{+}_{i-2} + \cdots\bigr] && \text{si } i \leq n \\
+    &\in \operatorname{Ob} \zeta^{i-n} \bigl[\mathcal{M}^{+}_{2n-i} + \zeta \mathcal{M}^{+}_{2n-i-1} + \zeta^{2} \mathcal{M}^{+}_{2n-i-2} + \cdots\bigr] && \text{si } i \geq n
+  \end{aligned}
+\]
+\note{une première tentative de ces deux lignes est biffée : « \struck{$H^{i}(X, \mathbb{Z}(0)) \in$} » et, au-dessus de la seconde, « \struck{$\mathcal{M}^{+}_{n} + \zeta\mathcal{M}^{+}_{n} + \zeta^{2}\mathcal{M}^{+}_{n-2}$} ».}
+\[
+  \begin{aligned}
+    \mathrm{cl}\, H^{i}(X, \mathbb{Z}(0)) &\in \sum_{i \leq \alpha \leq \operatorname{Inf}(2i, 2n)} \operatorname{Gr}_{i}(\mathcal{M}^{+}(K)) && \text{plus gén. :} \\
+    \mathrm{cl}\, H^{i}(X, M) &\in \sum_{\rho + i \leq \alpha \leq \rho + \operatorname{Inf}(2i, 2n)} \operatorname{Gr}_{i} && \text{si }M\text{ pure de poids }\rho\text{}
+  \end{aligned}
+\]
+\note{l'indice de $\operatorname{Gr}$ est écrit $i$, non $\alpha$, dans les deux lignes ; la borne inférieure $i$ des sommes pourrait aussi se lire $1$.}
+
+\page{51}
+\note{le feuillet entier est barré d'un long trait oblique. Il commence au milieu d'une phrase dont le début n'est pas sur le feuillet 50.}
+(i.e.\ l'Albanese à isogénie près) d'une surface $X$ (sur $K$ alg.\ clos) sont connus quand on connaît $X$ dans $L(K)$ seulement \ldots
+\struck{$L_{i}(K)/L_{i-1}(K) \longrightarrow \mathcal{M}^{+}_{i}(K)/\mathcal{M}^{+}_{i-1}(K)$}
+Notons que l'hom.
+\[
+  L_{i}(K)/L_{i-1}(K) \longrightarrow D_{i}\mathcal{M}^{+}(K) / D_{i-1}\mathcal{M}^{+}(K)
+\]
+prend ses valeurs dans l'image de $\mathcal{M}^{+}_{i}(K)$ modulo $D_{i-1}\mathcal{M}^{+}(K)$, \struck{donc} i.e.\ dans le \ill{} \ill{} \ill{} \ldots\ On peut se demander si
+\[
+  \boxed{L_{i}(K)/L_{i-1}(K) \longrightarrow \mathbb{Z}^{\sigma_{i}(K)}}
+\]
+est injectif, ou surjectif, du moins mod torsion \ldots
+\note{devant la flèche encadrée, un symbole biffé ; devant l'encadré, « si » au-dessus d'un signe biffé.}
+
+\section{13) Caractérisation galoisienne des filtrations}
+\note{titre de sa main, souligné, en tête du feuillet 52 ; le « 13 » est cerclé et suivi d'un « 12 » biffé ; un second « 13 », cerclé, en marge gauche du premier alinéa.}
+
+\page{52}
+On peut définir le sous-groupe (\uncertain{en fait}, \struck{\ill{}} anneau) $\mathcal{M}^{+}_{\ell}(X)$ de $K$ ($K$ des \struck{\ill{}} $\mathbb{Q}_{\ell}$-faisceaux constants tordus sur $X$) \emph{provenant} de motifs, on a donc un homom.\ surjectif
+\[
+  \mathcal{M}^{+}(X) \longrightarrow \mathcal{M}^{+}_{\ell}(X)
+\]
+Si $X$ est de type fini sur $\mathbb{Z}$, cet homom.\ est en fait \emph{bijectif}, car il résulte des conjectures de Tate, plus précisément, que si $E$ et $F$ sont des motifs constants tordus, \emph{simples} \add{non isom.}\ sur $X$, alors $T_{\ell}(E)$ et $T_{\ell}(F)$ \struck{\ill{}} n'ont pas de facteurs simples isomorphes en commun.
+\note{le premier $K$ de la ligne est surchargé ; $K$ désigne ici, semble-t-il, le groupe de Grothendieck des $\mathbb{Q}_{\ell}$-faisceaux constants tordus, non le corps de base des numéros précédents.}
+
+Par suite, \struck{\ill{}} \uncertain{si} la \struck{filt.} \emph{graduation} de $\mathcal{M}^{+}(X)$ (voir une partition de $\Sigma^{+}(X)$) et la filtration de $\mathcal{M}_{\ell}(X)$ (voir une filtration de \uncertain{$\Sigma_{\ell}(X)$}) permettent de décrire en termes galoisiens. On trouve \add{pour $E \in \operatorname{Ob} \mathcal{M}(X)$} :
+\[
+  \mathrm{cl}(E) \in \mathbf{M}_{i}(X) \Longleftrightarrow
+  \begin{array}{l}
+    \text{pour tout pt fermé }x\text{ de }X\text{,} \\
+    \text{les valeurs propres de Frobenius} \\
+    \text{dans }T_{\ell}(E)(x)\text{ sont de val.\ abs.\ }N(x)^{i/2}\text{}
+  \end{array}
+\]
+\marginal{« Conjectures de Weil » \uncertain{de} Riemann}
+\note{la note marginale est reliée par une accolade à l'équivalence ; « pour $E \in \operatorname{Ob}\mathcal{M}(X)$ » est ajouté au-dessus de la ligne ; avant l'équivalence, biffé : « \struck{$\mathrm{cl}(E)$ \ill{} \ill{} $\in$} ». Le $\mathbf{M}_{i}$ est tracé plus appuyé que les autres $\mathcal{M}$.}
+
+\page{53}
+D'autre part, si $E \in \operatorname{Ob} \mathcal{M}^{\ast}(X)$, \struck{\ill{}} \add{simple}, on trouve
+\[
+  \mathrm{cl}(E) \in \mathcal{M}^{+}(X) \Longleftrightarrow
+  \begin{array}{l}
+    \forall x \text{ pt fermé de } X, \text{ le polynôme caractéristique} \\
+    \text{de }\mathrm{Frob}_{x}^{-1}\text{ dans }T_{\ell}(E)(x)\text{ est à coefficients \textit{entiers}} \\
+    \text{[i.e.\ les valeurs propres de Frobenius sont des \textit{entiers} algébriques]}
+  \end{array}
+\]
+\note{l'exposant de $\mathcal{M}$ est surchargé (lu $\ast$) ; « simple » remplace un mot biffé ; « de Frobenius » est biffé après « caractéristique », et $\mathrm{Frob}_{x}^{-1}$ écrit dessous.}
+\marginal{« Conjectures de Tate » !}
+\note{note oblique en marge gauche, avec deux flèches : l'une vers l'accolade de l'équivalence précédente, l'autre vers le cas 1) qui suit.}
+
+Par ailleurs, prenons \struck{\ill{} décrit, pour \ill{} $\mathcal{M}_{\alpha}(X)$} $E$ « homogène » de degré $\alpha$, pour examiner si $E \in \operatorname{Ob} D_{i}(\mathcal{M}(X))$, où $i \geq 0$ \struck{\ill{}, \ill{}} un entier.
+\[
+  \boxed{E \in \operatorname{Ob} D_{i}\mathcal{M}(X) \text{ i.e.\ } \mathrm{cl}(E) \in D_{i}\mathcal{M}(X) \Longleftrightarrow S_{i}}
+\]
+\note{dans l'encadré, une première écriture est biffée : « \struck{$\mathrm{cl}(E) \in \sum_{i}$ \ldots\ $\in D_{\alpha}\mathcal{M}(X)$} » ; une grande flèche descend en marge droite.}
+
+[1) $i = 0$. Alors
+\[
+  E \in \operatorname{Ob} D_{0}(\mathcal{M}(X)) \Longleftrightarrow
+  \begin{array}{l}
+    E\text{ est de degré \textit{pair} }\alpha = 2\beta \\
+    \text{et }E\zeta^{-\beta} = F\text{ (qui est de degré }0\text{) est }\in \operatorname{Ob} \mathcal{M}^{+}(X)\text{}
+  \end{array}
+\]
+i.e.\ si $\rho_{i}(x)$ sont les valeurs propres de $\mathrm{Frob}_{x}^{-1}$ dans $T_{\ell}(\mathcal{M}(x))$, alors les $\rho_{i}(x)/N(x)^{\beta}$ sont des entiers algébriques]
+
+\marginal{N.B. Ce sont bien des \uncertain{variantes} de l'\uncertain{unité} [\ill{} \ill{} \ill{} I 1 !]}
+
+2°) $i \geq 1$. Alors il existe une plus grande puissance $\zeta^{\beta}$ de $\zeta$ telle que $E\zeta^{-\beta}$ \struck{\ill{}} [$= E(+\beta)$] soit de degré $i-1$ ou $i$ (suivant la parité de $\alpha$)]. On veut que $E(\beta)$ soit $\in \operatorname{Ob} \mathcal{M}^{+}(X)$, i.e.\ que les $\rho_{i}(x)/N(x)^{\beta}$ doivent être des entiers alg.
+
+\page{54}
+Le cas 1°) \struck{dit} signifie aussi que $T_{\ell}(E)(\beta)$ est tel que $\pi_{1}(X)$ y opère à travers un \emph{quotient fini}. [Mais cet énoncé ne se généralise guère via filtration de $\pi_{1}$, comme on voit sur $X = \operatorname{Spec}$ corps fini].
+
+Supposons $E$ \add{$\in \operatorname{Ob} \mathcal{M}^{+}$} \emph{semi-simple}, donc $T_{\ell}(E)$ semi-simple. Soit $E_{i}$ la composante de $E$ de type dimensionnel $i$, pouvons-nous caractériser $T_{\ell}(E_{i}) \subset T_{\ell}(E)$ du pt de vue Galoisien ? \marginal{c'est purement combinatoire en termes de Frobenius.}
+\note{la précision encadrée est écrite sous la question, à gauche.}
+
+\note{tout ce qui suit, jusqu'au bas du feuillet, est encadré et barré de plusieurs traits obliques ; la surcharge ne laisse lire que des fragments.}
+Lorsque $X = \operatorname{Spec}$ corps fini, \ill{} [la décomposition de $T_{\ell}(E)$ en composantes homogènes \ill{} \ill{} \ill{} entièrement]. On \ill{} \ill{} \ill{} \ill{} $\mathbb{Z}(1)$ et [\ill{} diminuant par le type dimensionnel] \ill{} le maximum de \ill{} de type dimensionnel $i$ \ill{} type $0$ ou \ill{} \ill{} \ill{} Le cas général \ill{} \ill{}, si on connaît tous les Frobenius \ill{}
+
+\section{14) Invariants de Galois et thms de commutation}
+\note{titre de sa main, souligné, en tête du feuillet 55.}
+
+\page{55}
+$X$ propre lisse sur $K$ de type fini. $H^{2i}(\overline{X}, \mathbb{Q}_{\ell}(i))$ est de poids $0$, donc peut avoir des invariants non nuls sous Galois.
+
+La conjecture de Tate s'énonce en disant que
+\[
+  H^{2i}(\overline{X}, \mathbb{Q}_{\ell}(i))^{\pi} \xleftarrow{\ \approx\ } \mathcal{A}^{i}(X/K) \otimes_{\mathbb{Q}} \mathbb{Q}_{\ell}
+\]
+\note{le $\mathbb{Q}_{\ell}$ du membre de gauche est écrit sur un $\mathbb{Z}$ biffé ; $\mathcal{A}^{i}$ note sans doute les cycles algébriques de codimension $i$ modulo équivalence.}
+
+On peut la préciser ainsi :
+
+L'anneau des correspondances alg.\ $/K$ \add{\uncertain{opérant} en dim.\ $i$}, \struck{\ill{}} $\mathcal{U}^{i}(X/K)$, est un anneau semi-simple, et [via Hodge] et on veut que $\mathcal{U}^{i}(X/K) \otimes_{\mathbb{Q}} \mathbb{Q}_{\ell}$ soit le commutant de $\Pi = \operatorname{Gal}(\overline{K}/K)$ dans $\operatorname{End}_{\mathbb{Q}_{\ell}}(H^{i}(X, \mathbb{Q}_{\ell}(0)))$, \emph{et} l'algèbre enveloppe de $\Pi$ en $\operatorname{End}_{\mathbb{Q}_{\ell}}(H^{i})$ doit être le commutant de $\mathcal{U}^{i}(X/K)$ [donc l'action de $\Pi$ est \emph{semi-simple}].
+
+Le deuxième énoncé $+$ injectivité de $\mathcal{U}^{i}(X/K) \otimes_{\mathbb{Q}} \mathbb{Q}_{\ell} \longrightarrow \operatorname{End}_{\mathbb{Q}_{\ell}}(H^{i}(X, \mathbb{Q}_{\ell}(0)))$ entraîne tout.
+
+\page{56}
+\emph{N.B.} a) Ceci ne caractérise pas les classes algébriques elles-mêmes, mais seulement les $\mathbb{Q}_{\ell}$-espaces engendrés.
+
+b) De même, on ne peut pas caractériser ainsi l'image de $\Pi$, mais seulement l'algèbre enveloppante \ldots
+
+Passant à la limite sur les extensions finies de $K$, on trouve
+\[
+  \begin{cases}
+    H^{2i}(\overline{X}, \mathbb{Q}_{\ell}(i))^{\mathfrak{G}_{\ell}(\overline{K}/K)} \xleftarrow{\ \sim\ } \mathcal{A}^{i}(\overline{X}) \otimes_{\mathbb{Q}} \mathbb{Q}_{\ell} \\
+    \mathcal{U}^{i}(X) \otimes_{\mathbb{Q}} \mathbb{Q}_{\ell} \text{ et l'algèbre enveloppante de } \mathfrak{G}_{\ell}(\overline{K}/K) \text{ dans } \operatorname{End}_{\mathbb{Q}_{\ell}}(H^{i}(\overline{X}, \mathbb{Q}_{\ell}(0))) \\
+    \qquad \text{sont commutant l'une de l'autre.}
+  \end{cases}
+\]
+\note{$\mathfrak{G}_{\ell}$ transcrit une lettre gothique ou ronde, un « G » à boucle, qui ne note plus $\operatorname{Gal}$ écrit en toutes lettres au feuillet précédent, mais sans doute l'adhérence $\ell$-adique de l'image de Galois ; la même lettre revient au feuillet suivant.}
+
+\emph{Question} : Comment caractériser l'image de $\mathfrak{G}_{\ell}(\overline{K}/K)$ dans $\operatorname{End}_{\mathbb{Q}_{\ell}}(H^{i}(\overline{X}, \mathbb{Q}_{\ell}(0)))$ ?? Cela doit être une sous-algèbre de Lie \emph{réductive}, on peut la considérer comme \uncertain{prolongée} dans $H^{2n-i}(\overline{X}) \otimes H^{i}(\overline{X})(n)$.
+
+\page{57}
+\note{le feuillet entier est barré de quatre longs traits obliques. Il ne suit pas le feuillet 56 : il reprend, semble-t-il, l'argument du feuillet 41 sur la suite spectrale de la filtration par la codimension.}
+dimensionnel $\leq n-2p$, donc que les $\operatorname{gr}^{p}(H^{n}(X, \mathbb{Z}(0)))$ sont \struck{\ill{}} de \emph{type dimensionnel} \emph{pur} $n-2p$. Or le \ill{} \ill{}, on sait qu'il est de \emph{poids} $n$, d'autre part le terme
+\[
+  E_{1}^{pq} = \coprod_{x \in X(p)} H^{n-2p}(x, \mathbb{Q})_{\ell}(-p)
+\]
+(où $q = n-p$) \uncertain{donne} des \struck{\ill{}} $\mathcal{M}^{+}(X)$ \ill{} dans
+\[
+  \zeta^{p}\bigl[\mathcal{M}^{+}_{n-2p} + \zeta \mathcal{M}^{+}_{n-2p+1} + \cdots\bigr]
+\]
+\note{le mot biffé après « sont » est peut-être « bipurs » ; l'indice du second terme, $n-2p+1$, est tel sur la page.}
+
+\note{ce qui suit est écrit en travers du feuillet, parallèlement au bord gauche ; il est transcrit la page tournée.}
+\[
+  \begin{gathered}
+    H^{i}_{Y}(X) \to H^{i}(X) \to H^{i}(U) \to H^{i+1}_{Y}(X) \\
+    H^{i}_{!}(Y) \leftarrow H^{i}_{!}(X) \leftarrow H^{i}_{!}(U) \leftarrow H^{i-1}_{!}(Y)
+  \end{gathered}
+\]
+\[
+  H^{i}_{!}(Y) \in \zeta^{i-m} \mathcal{M}^{+}_{2m-i} \quad (i \geq 2m) \qquad
+  \zeta^{i-m} \mathcal{M}^{+}_{2n-i-2} = \zeta^{i-m} \mathcal{M}^{+}_{j-2}
+\]
+\[
+  H^{i-1}_{!}(Y) \in \zeta^{i-m-1} \mathcal{M}^{+}_{2m-(i-1)-2} = \zeta^{i-m-1} \mathcal{M}^{+}_{j-1}
+\]
+\note{en marge de ces lignes : « $j \leq n$ », « $i \geq n$ » ; « $2n - i = j$ », puis « $\zeta^{p}[\mathcal{M}^{+}_{n-2p} + \zeta\mathcal{M}^{+}_{n-2p+1} + \cdots]$ » repris verticalement. Les indices $m$ et $n$ sont mal distingués dans cette partie : lecture sous réserve.}
+
+\page{58}
+Si $M$ est un motif sur $K$, \uncertain{semi-simple} pour simplifier, alors on a
+\[
+  \mathfrak{G}_{\ell}(\overline{K}/K) \longrightarrow \operatorname{End}(M_{\ell}) \simeq \check{M}_{\ell} \otimes M_{\ell}
+\]
+\struck{On} On peut par l'image provenir d'un motif $\mathfrak{G}_{M} \subset \check{M} \otimes M$ \add{indépendant de $\ell$} [qui est un motif en algèbres de Lie]. Pour $M$ de plus en plus grand, on trouve \ldots\ un pro-motif \add{(en algèbres de Lie)} \emph{canonique}, appelé \emph{pro-motif fondamental}, qui peut aussi se construire de façon canonique en termes de la catégorie des motifs, munie de ses structures habituelles \ldots
+
+Quelle est la partie « algébrique » de ce pro-motif ? [Sur un corps fini, ce pro-motif \uncertain{n'étant} \uncertain{lui-même} \uncertain{autre} \ill{} \ill{} le pro-motif \ill{} \ill{} \struck{\ill{}} \add{en} tout \add{autre} \struck{\ill{}} cas, on \ill{} que $\mathbb{Z}(0)$ ! ; \struck{il paraît qu'il est une \ill{} \ill{} \ill{} \ill{}}]
+\note{« $\mathfrak{G}_{M}$ » est écrit au-dessus de « $\mathfrak{G}(M)$ » biffé ; l'exposant de $\mathfrak{G}$, dans la première formule, est un « $\ell$ » placé au-dessus. Les deux dernières lignes du feuillet sont barrées et surchargées : « \struck{l'\ill{} contenu \ldots\ pro-motif fondamental, et \ill{} \ill{} \ill{} \ill{} \ill{} de $\mathbb{Z}(0)$ [\ill{} \ill{}]} ».}
+
+\section{15) Cohomologie absolue}
+\note{titre de sa main, souligné, en tête du feuillet 59.}
+
+\page{59}
+En plus des foncteurs cohomologiques de motifs $R^{i}f_{*}$ [$f$ morphisme de type fini] il y a lieu de considérer également les foncteurs « absolus »
+\[
+  H^{i}(X, M) = \bigl(H^{i}(X, M)\bigr)_{i} \,;
+\]
+$M$ motif variable sur $X$, qui doivent provenir d'un foncteur de catégories triangulées
+\[
+  \mathbb{R}\Gamma_{X} : D^{b}(\mathcal{M}^{+}(X)) \longrightarrow D^{b}(\mathrm{Ab})
+\]
+\note{l'exposant du premier $H$ est surchargé, lu ici $i$ ; dans $D^{b}(\mathcal{M}^{+}(X))$, le $\mathcal{M}$ est repassé et l'exposant n'est pas sûr.}
+
+On veut que les $H^{i}(X, M)$ et $\mathbb{R}\Gamma(M_{\bullet})$ aient les propriétés suivantes
+
+1°) Commutation aux \emph{lim} essentielles \uncertain{filtrantes} de préschémas à pr.\ \uncertain{quasi} proj.\ \uncertain{affines}. Cela nous ramène pratiquement au cas $X$ de type fini sur $\mathbb{Z}$.
+\note{la fin de la première phrase est difficile ; on peut aussi y lire « de préschémas à morph.\ de transition affines ».}
+
+2°) \emph{Transitivité} : si $f : X \to Y$ est
+\note{la phrase s'interrompt au bas du feuillet ; la suite n'est pas dans ce lot.}
+
+\end{document}
