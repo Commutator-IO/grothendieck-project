@@ -1836,4 +1836,65 @@ export const FINDINGS: Finding[] = [
     settle:
       'A person reads the two notes, on the facsimile or in the Comptes rendus, for the hyperbolicity of (M, q) ⊥ (M, −q) without 2 invertible. If it is there, that note is the likely source of « Laborde dixit » — a source, not a date, since « il paraît » may as well report a conversation. If it is not, the offprints bear on pages 5–8 only through their subject and their place in the folder.',
   },
+  {
+    id: '161-4-pages-19-21-after-course',
+    cote: '161-4',
+    pages: '19–31',
+    kind: 'codicological',
+    claim:
+      'Pages 19–21, bound before the course pages 22–31, come after them in the argument: they use notation those pages introduce and treat matter those pages list or announce, page 21 as the functoriality of the spectrum that a margin of page 30 schedules, pages 19–20 as « Compléments » to items (9)–(10) on limits and sums in Aff_k.',
+    basis:
+      'Page 21 writes the affine spaces in gothic letters with V_{k(x)} → V_A, S = V_k and a marginal « exemple du produit 𝔼¹ × 𝔼¹ », and uses the base of opens X_f and the closed sets V(J); 𝔼^I_k is introduced on page 22, V_A on page 23, 𝔛 = V_A and the spectrum with its X_f on pages 28–29. The margin of page 30 lists « Spec(A_f) ≃ X_f (homéomorphisme) — 10′) Fonctorialité de Spec A — 11) », and page 21 carries a struck « homéomorphismes X_f ≃ Spec A_f », then « Spec(A_f) ≃ X_f » and the maps φ(x_𝔭), φ⁻¹(V(J)), φ⁻¹(Y_f) for u : A → B. Pages 19–20 are headed « Compléments sur le formalisme des lim et des sommes dans Aff_k », write Γ_k = ⨿_Γ e_k = V_{k^Γ} with e_k, which page 26 defines as V_k, describe I_k in a margin as the functor of idempotent decompositions indexed by I, as page 27 describes homomorphisms out of ∏ A_i, and take Spec of I_k. The papers differ: page 21 is black ink on squared paper, pages 19–20 ink on white ruled paper, pages 22–24 black ink on spiral-pad sheets, pages 26–31 blue ink on plain paper.',
+    ours:
+      'The observation for page 21 is the transcription’s (batch 2 header: « likely later in the argument than page 22 despite the archivists’ order »), and the reading adopts it; the placing of pages 19–20 is the reading’s, and the entry checks both against the transcriptions. Batch 2 notes that the margin of page 30 « renvoie par une flèche » to a line of page 21, which cannot be a physical arrow between two leaves of different paper; the entry rests on what the margin says, not on that arrow. The margin numbers the functoriality 10′, before item (11), while page 21 uses the topology that item (11) builds; the entry claims only that page 21 comes after the pages whose notation it uses. No facsimile was consulted.',
+    literature: [
+      'Transcription 161-4, batch 1 (batch-01.fr.tex), header and pages 19–20',
+      'Transcription 161-4, batch 2 (batch-02.fr.tex), header and pages 21–31',
+      'Modernised reading 161-4 (161-4.modern.tex), « Le fil du dossier » and sections VI–VII',
+    ],
+    status: 'candidate',
+    settle:
+      'A person checks on the facsimile what the arrow in the margin of page 30 points to, and whether the squared sheet of page 21 or the ruled sheet of pages 19–20 matches the paper of any course page. A match of paper would say where the sheets were inserted; without it, the order stays an order of the argument, not of the writing.',
+  },
+  {
+    id: '161-4-topos-leaves-continue-161-6',
+    cote: '161-4',
+    pages: '15, 17',
+    kind: 'codicological',
+    claim:
+      'The two topos leaves filed in this course folder read in the order 17, 15, and page 17 opens by continuing the question written on page 22 of folder 161-6: that page ends on case c), E = D̂, where γ(C, E) is « le morph. de topos évident » (C × D)^ → Ĉ × D̂, and page 17 begins « donc la question est si c’est une équiv. de topos », numbering its display (2) after that page’s boxed (1).',
+    basis:
+      'Page 17 opens mid-argument on « donc » with the display (2) (C × D)^ ≈? Ĉ × D̂ and settles it when C and D have finite limits; it then writes « c) Dans le cas général », builds the square α, β, γ, γ′ with C → C′ and E ↪ D̂, and proves the corollary that γ(C, E) is a plongement. Page 15, a fragment at the head of an otherwise empty leaf, opens « Or », uses C′, D̃ and π(C′, D̂), and reduces to showing that γ(C, D̂)_* and γ(C′, D̃)_* are essentially surjective, which presupposes page 17’s corollary. Page 22 of 161-6, written the other way up and cancelled by a cross, defines π(C, E) and the boxed « (1) » γ(C, E) : π(C, E) → Ĉ × E, asks whether it is always an equivalence, and lists a) sums, b) C a groupoid, c) E = D̂; page 23 of 161-6 is blank. One detail does not fit a direct continuation: page 17 letters the general case c), the letter 161-6 gives to E = D̂.',
+    ours:
+      'The link between the two folders is the readings’: 161-4’s says page 17 « reprend exactement là », 161-6’s that « on ne sait pas lequel précède l’autre ». The entry claims a continuity of the text, not an order of writing. The observation that « donc » picks up the last line of 161-6 page 22, and the mismatch of the letter c), are made for this entry from the two transcriptions; neither reading remarks the letter. No facsimile was consulted.',
+    literature: [
+      'Transcription 161-4, batch 1 (batch-01.fr.tex), header and pages 15 and 17',
+      'Transcription 161-6, batch 2 (batch-02.fr.tex), header and page 22',
+      'Modernised reading 161-4 (161-4.modern.tex), section VIII',
+      'Modernised reading 161-6 (161-6.modern.tex), the footnote on 161-4 to the section on π(C, E)',
+    ],
+    status: 'candidate',
+    settle:
+      'A person compares on the facsimile the paper and ink of 161-6 page 22 with those of 161-4 pages 15 and 17, and looks for a leaf, in either folder or elsewhere in the fonds, on which the E = D̂ case is lettered b), which would explain page 17’s c). If the leaves are one run, the inventory’s datings of the two shelfmarks, [après 1961] and [à partir de 1973-vers 1977], bear on each other; they date the shelfmarks, not the leaves.',
+  },
+  {
+    id: '161-4-course-unnamed-undated',
+    cote: '161-4',
+    pages: '9, 14, 16, 22–31',
+    kind: 'codicological',
+    claim:
+      'The folder names neither the place nor the year of the course it prepares: page 22 speaks only of « our summer course », in English and in two parts, « Introduction to A.G. » and « Introduction to algebraic groups », and the one outside reference on any leaf, « EGA II 4.5 » in the margin of page 9, is on a sheet of another run — so nothing dates the functorial pages 14, 16 and 22–31 relative to Demazure–Gabriel (1970) or to the second edition of EGA I (1971).',
+    basis:
+      'Batch 2 transcribes page 22: « Prerequisites for the courses I and II », « in our summer course », « The content of I are prerequisites for II! », followed by the French items (1)–(8). Batch 1 gives page 9, with its « EGA II 4.5 » margin, as one of the loose sheets of pages 7–9 in the hand and blue ink of the descent run of pages 2–6; the functor pages are page 14 (ink, yellow paper), page 16 (pencil, then ink) and pages 22–31 (black ink on spiral-pad sheets, then blue ink on plain paper). No leaf carries a date, and both batches copy the inventory’s dating for the group 161-1 to 162-6, [après 1961-vers 1977], the folder’s own being [après 1961].',
+    ours:
+      'The reading already declines to identify the course (« On ne cherche pas à l’identifier ») and says its comparison of page 16 with Demazure–Gabriel « ne dit rien de l’ordre des dates ». Its header says the pages support only « after EGA II (margin p. 9) »; that margin dates the sheet of page 9 at most, not the course pages, and the entry narrows it so. Its résumé calls the descent pages « une autre strate, plus ancienne peut-être »; no date on the leaves supports « plus ancienne », and the entry does not adopt it. The Buffalo comparison in the settle field is ours, from memory. No facsimile was consulted.',
+    literature: [
+      'Transcription 161-4, batch 1 (batch-01.fr.tex), header and pages 9, 14 and 16',
+      'Transcription 161-4, batch 2 (batch-02.fr.tex), header and page 22',
+      'Modernised reading 161-4 (161-4.modern.tex), header, résumé, « Le fil du dossier » and the footnote on Demazure–Gabriel in section IV',
+    ],
+    status: 'candidate',
+    settle:
+      'A person compares pages 22–31 with the notes of the summer school Grothendieck gave at Buffalo in 1973, « Introduction to functorial algebraic geometry, part 1: affine algebraic geometry », written up by Federico Gaeta — title, year and editor cited from memory and unchecked — for the order of items (1)–(11), the notation 𝔼^I_k, V_A, e_k, and the example G/B = e_k « ce qui est idiot ! ». A match would identify course I of page 22 and date the course leaves, not the descent pages 2–6 nor the topos leaves 15, 17 and 25. This entry exists to stop the next reader taking page 16’s « la notion de schéma est explicitée sans recours à la notion d’espaces topologiques » as placed before or after anyone’s published account. Whatever is found, priority is not a claim this project makes, about anyone.',
+  },
 ];
