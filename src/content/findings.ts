@@ -1897,4 +1897,43 @@ export const FINDINGS: Finding[] = [
     settle:
       'A person compares pages 22–31 with the notes of the summer school Grothendieck gave at Buffalo in 1973, « Introduction to functorial algebraic geometry, part 1: affine algebraic geometry », written up by Federico Gaeta — title, year and editor cited from memory and unchecked — for the order of items (1)–(11), the notation 𝔼^I_k, V_A, e_k, and the example G/B = e_k « ce qui est idiot ! ». A match would identify course I of page 22 and date the course leaves, not the descent pages 2–6 nor the topos leaves 15, 17 and 25. This entry exists to stop the next reader taking page 16’s « la notion de schéma est explicitée sans recours à la notion d’espaces topologiques » as placed before or after anyone’s published account. Whatever is found, priority is not a claim this project makes, about anyone.',
   },
+  {
+    id: '161-5-annotations-later-than-offprints',
+    cote: '161-5',
+    pages: '9, 15, 16, 19, 20',
+    kind: 'codicological',
+    claim:
+      'The five red-ink annotations on Serre’s two offprints are later than the offprints: they report as done, or as just published, work that — if « Inventions », « Annals » and « le livre de T. Springer sur les alg. de Jordan récemment paru chez Springer-Verlag » are S. Sen’s papers in Inventiones Math. 17 (1972) and Ann. of Math. 97 (1973) and Springer’s Jordan Algebras and Algebraic Groups (1973) — appeared in 1972–1973, so the inventory’s 1967–1969 dates the printing of the offprints, not the hand that annotated them, which the transcription could not identify as his.',
+    basis:
+      'Batch 1 transcribes five marginal notes in one red ink and one hand: « En fait, on a M = I_alg (Sen) » (p. 9), « voir Sen (Annals) » (p. 15), « démontré par S. Sen (Inventions) » (p. 16), « ceci a été démontré par S. Sen (Annals) » (p. 19) and « voir à ce sujet le livre de T. Springer sur les alg. de Jordan récemment paru chez Springer-Verlag » (p. 20). Each marks a remark or a question of the printed text as settled or treated elsewhere: Serre’s question w = e_K·v + O(1) on page 16, his conjecture on H_V° without solvability on page 19, the attempt at a classification for n₁ > 1 on page 20. The offprints are Serre’s Driebergen paper (Springer, 1967) and his résumé of the Collège de France course of 1967–1968 (Annuaire, 68e année, 1968–1969). « Annals » is an uncertain reading on page 15 and a clear one on page 19; the claim rests on pages 16, 19 and 20. The blue correction of a printed sign on page 15 is attributed to no one and plays no part.',
+    ours:
+      'The identification of the three references is the transcription’s, given in its header as inference and kept out of its dating line, and the reading adopts it; the margins give no year, no title and no initial beyond « S. Sen » and « T. Springer ». That the five annotations are one campaign rests on the transcription’s « same red ink and same hand ». The claim says nothing about whose hand it is. No facsimile was consulted.',
+    literature: [
+      'Transcription 161-5, batch 1 (batch-01.fr.tex), header and pages 9, 15, 16, 19 and 20',
+      'Modernised reading 161-5 (161-5.modern.tex), section I and « Ce que les annotations disent de leur date »',
+    ],
+    status: 'candidate',
+    settle:
+      'A person checks the three references against the printed passages they face: S. Sen, « Ramification in p-adic Lie extensions » (Invent. Math. 17, 1972), against page 16; Sen, « Lie algebras of Galois groups arising from Hodge-Tate modules » (Ann. of Math. 97, 1973), against pages 15 and 19; T. A. Springer, Jordan Algebras and Algebraic Groups (Ergebnisse 75, 1973), against page 20 — all cited from memory. Sen also has an earlier Annals paper, « On automorphisms of local fields » (Ann. of Math. 90, 1969), so « Annals » alone does not date; it is the subject of page 19 that points to 1973. The same person compares the red hand on the facsimile with his and with Serre’s. If it is his, the annotations date a reading of the offprints, not their arrival in the folder.',
+  },
+  {
+    id: '161-5-leaves-undated-mysterious-functor',
+    cote: '161-5',
+    pages: '22–28',
+    kind: 'codicological',
+    claim:
+      'Nothing in the folder dates the manuscript leaves, pages 22–28, relative to Grothendieck’s public statement of the « mysterious functor » problem in 1970 or to Fontaine’s period rings: the leaves carry no date, the inventory itself calls them « notes manuscrites (s.d.) », its 1967–1969 is the date of the printed offprints they are filed with, their one reference, « par Tate », bounds them only from below, and the one datable layer in the folder, the red annotations on the offprints, points, if its references are as the transcription proposes, to 1973 or after.',
+    basis:
+      'Batch 2’s header describes pages 22–28 as leaves in three media — ink on squared paper (pp. 22–23), pencil on ruled paper (pp. 24–26), pencil on squared paper (pp. 27–28) — with a separate ink computation on the lower half of page 28, and records no date on any of them; both batches copy the inventory’s « 1967-1969 », and the folder title reads « tirés à part annotés (1967-1969), notes manuscrites (s.d.) ». The leaves cite no author but Tate, for the full faithfulness of page 22 (« Foncteur pl. fid. (par Tate) »), and do not refer to the offprints. Their vocabulary — « BT à isog. près », « catégorie tannakienne », « F-isocristal », a « L-foncteur fibre filtré » — is the only other internal evidence, and bounds nothing without a dated comparison.',
+    ours:
+      'The reading’s résumé says that Grothendieck « l’appellera en 1970 » the problem of the « foncteur mystérieux » and that Fontaine « y répondra »; section II calls it the question he « posera publiquement en 1970 »; its footnotes say that the pages « ne les connaissent pas », Fontaine’s constructions, and that of Kottwitz’s G-isocrystals « rien de cela n’est connu des pages ». Each presupposes a date the folder does not give, and the entry adopts none of them. The reading’s footnote on the annotations offers the name « Barsotti-Tate » as « un indice, faible » that the leaves too are later than 1967–1969; the entry does not adopt that either. The identification of the Question of page 23 with the mysterious functor is the reading’s and is not part of the claim. No facsimile was consulted.',
+    literature: [
+      'Transcription 161-5, batch 1 (batch-01.fr.tex), header',
+      'Transcription 161-5, batch 2 (batch-02.fr.tex), header and pages 22–28',
+      'Modernised reading 161-5 (161-5.modern.tex), résumé, « Ce que les annotations disent de leur date » and its footnote, and the footnotes on Fontaine and on Kottwitz in sections II and III',
+    ],
+    status: 'candidate',
+    settle:
+      'Only physical or documentary evidence would narrow it: the paper and ink of pages 22–28 against dated leaves elsewhere in the fonds, and whether he or the archivists put the leaves with the offprints. A comparison of the notation — ℳ^BT, T_cr, T_DR, T_Hdg, the torsors 𝔓 and Q, the data 1)–6) — with his Nice address « Groupes de Barsotti-Tate et cristaux » (Actes du Congrès international des mathématiciens, 1970) and his Montréal lectures Groupes de Barsotti-Tate et cristaux de Dieudonné (from the summer course of 1970, published 1974), both cited from memory, would show a resemblance, not a date. This entry exists to stop the next reader taking the reading’s future tense as placing the leaves before 1970, or before or after anyone’s published account. Whatever is found, priority is not a claim this project makes, about anyone.',
+  },
 ];
