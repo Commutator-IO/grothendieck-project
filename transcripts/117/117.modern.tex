@@ -1,0 +1,598 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 117
+% (pages 1-25, the whole folder).
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried moves into a
+% footnote. It is held to being mathematically correct as it stands; where the
+% manuscript is loose or mistaken, the true statement is what appears here and
+% the footnote says what the page has. In any dispute of substance the
+% transcription governs: whoever cites Grothendieck must cite batch-01.fr.tex
+% (pp. 1-20) or batch-02.fr.tex (pp. 21-25).
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-09-23 — first pass, unchecked against the pages by a human.
+% The folder was read whole, its two batches together; this is one document
+% for the shelfmark. It was made on Opus 5.5 and has not been measured against
+% the reference reading of folder 115 (made on Opus 5). The literature named
+% in the footnotes is cited from memory and was not checked against the
+% sources.
+%
+% Scope. Pages 6, 8, 10, 12, 14, 16, 18 (versos: administrative tables in
+% another hand) and 23, 25 (typed university notices) carry nothing of his and
+% are absent. Two leaves carry dates in his hand: « déc. 83 » (p. 1) and
+% « 24.11.83 » (p. 4, margin); nothing else dates a leaf, and nothing orders
+% the runs among themselves.
+%
+% Spine. What a « homotopy theory » attached to every small category should
+% be — today a (pre)derivator — in four stretches:
+%   pp. 1-2    « Structure des dérivateurs »: three levels of Hom (set, space,
+%              internal space) and the adjunctions f_! -| f^* -| f_* at each.
+%   pp. 3-4    a programme a)-i): models, long exact sequences, resolutions,
+%              mapping spaces, invariants, K-theory, internal Hom; « tout …
+%              en termes de (M, W) ».
+%   pp. 5-20   his paginated run 1-9: the 2-functor A -> H(A), (Hot 1)
+%              sums to products, a cancelled first integration through
+%              presheaves (p. 7), (Hot 2)-(Hot 3) the adjoints f_!, f_*,
+%              duality, the additive case; examples 1-4 (diagrams in M; W^{-1}
+%              of diagrams in (M, W); Cat with a fundamental localizer;
+%              derived categories of sheaves); (Hot 4)-(Hot 6).
+%   pp. 21-24  cofinality when i has a left adjoint; a gluing condition for
+%              A = A' u A''; the staircase of the loop (fibre) sequence.
+%
+% Notation fixed for the document. H for his script H (the theory), H(A) its
+% value; f^*, f_!, f_* without his index H; Hot_H = H(Δ_0), Δ_0 the point
+% category (his notation, kept); ∫_A = (π_A)_! (his « intégration », a
+% homotopy colimit) and ∏_A = (π_A)_* (his « cointégration », a homotopy
+% limit); A^ the presheaf category, h_A the Yoneda functor. « Cofibré » and
+% « fibré » for Grothendieck's cofibred / fibred categories (op-fibration /
+% fibration), read as what the page's « cofibrant », « fibrant » mean on p. 20.
+%
+% Substantive departures, each footnoted where it occurs:
+%  p. 1    « Homhot(x, y) ≃ ∫_I Homhot(x, y) »: the global mapping space is a
+%          homotopy LIMIT (his ∏ of p. 11), not ∫; the internal formulas
+%          (3'), (3'') are stated as the page states them, the internal
+%          object not being defined there.
+%  p. 9    f^H_! : H(B) -> H(A) written as f^* (sic), corrected.
+%  p. 13   (Hot 1) for Ex. 2: a localisation need not commute with an
+%          infinite product; holds for model categories (cited from memory).
+%  p. 17   the Remarque needs 2-out-of-3 for W' (supplied), then units and
+%          counits are in W, W'.
+%  p. 20   Ex. 4: the page denies a left adjoint in general, then derives
+%          L f_! from an « exact à gauche » f_!; a left Kan extension of
+%          abelian sheaves is right exact, not exact, so the argument fails
+%          as written; both adjoints exist on the derived categories
+%          (derivator of a Grothendieck abelian category, cited from memory).
+%  p. 20   (Hot 4): the condition belongs on f' (f inherits it); the page's
+%          bracketed alternatives « ou g fibrant ?? » are right (proper /
+%          smooth functors, cited from memory).
+%  p. 20   (Hot 6) is FALSE for a localisation of categories in the ordinary
+%          sense: a category whose nerve is S^2, localised at all arrows,
+%          gives Δ_0, and f^* is not fully faithful on spaces
+%          (counterexample ours); true for localisations in the homotopical
+%          sense.
+%  p. 21   the page writes i where the argument needs j (p_0 j = p); j.
+%  p. 24   the squares are not said to be homotopy cartesian; supplied.
+%
+% Announced and never established: the existence of the f_* for a
+% fundamental localizer (« non encore »); the comparison of two (M, W)
+% giving one theory (p. 19); the axioms of the programme (« Dégager les bons
+% axiomes »); the gluing condition of p. 22 (wished for, « on veut »); the
+% filtered case (p. 21 margin).
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{117}
+\pages{1}{25}
+\dating{1983}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Théories homotopiques : notes manuscrites (1983, s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+En topologie, on ne regarde souvent les espaces qu'« à déformation près » :
+deux espaces qu'on peut déformer continûment l'un en l'autre comptent pour le
+même. On obtient ainsi une catégorie, la catégorie homotopique, où beaucoup
+de constructions familières se dérobent. Un recollement, une limite, un
+quotient ne s'y calculent plus bien : deux diagrammes d'espaces peuvent être
+indiscernables objet par objet et donner, une fois recollés, des résultats
+différents. Le remède connu consiste à ne jamais perdre de vue les
+diagrammes eux-mêmes. Il ne suffit pas de garder la catégorie homotopique des
+espaces ; il faut garder, pour chaque forme de diagramme, la catégorie
+homotopique des diagrammes de cette forme, et les opérations qui passent de
+l'une à l'autre.
+
+Ces feuillets cherchent à dire ce qu'est, en général, une telle « théorie
+homotopique ». À chaque petite catégorie $A$ --- une forme de diagramme ---
+elle associe une catégorie $\mathcal H(A)$ ; à chaque foncteur entre formes,
+un moyen de restreindre, et deux moyens de pousser en avant, l'un qui recolle
+(une « intégration », qui généralise la limite inductive), l'autre qui
+rassemble (une « cointégration », qui généralise la limite projective). On
+peut penser à une carte routière dessinée à plusieurs échelles : ce qui
+compte n'est pas une carte, mais le système des cartes et les règles pour
+passer d'une échelle à l'autre. Grothendieck pose des axiomes, les numérote
+(Hot~1) à (Hot~6), les éprouve sur quatre exemples --- diagrammes dans une
+catégorie ordinaire, diagrammes dans une catégorie munie d'une classe de
+« flèches à inverser », les petites catégories elles-mêmes, les complexes de
+faisceaux --- et note ce qu'il n'a pas encore su démontrer.
+
+Deux feuillets sont datés de sa main, de novembre et de décembre 1983 ; le
+feuillet 1, celui de décembre, porte le titre « Structure des
+dérivateurs ». D'autres dressent un programme --- modèles, suites exactes, foncteurs dérivés, invariants --- qui
+finit sur une consigne : « Dégager les bons axiomes ». Les derniers essaient
+des énoncés plus fins : quand l'intégration sur une sous-catégorie donne la
+même chose que sur le tout, comment une théorie se recolle sur deux morceaux,
+et comment se déroule, en escalier, la suite des espaces de lacets.
+
+Ce qu'on appelle aujourd'hui un \emph{dérivateur}, ou, sous d'autres
+axiomes, une « théorie homotopique » au sens de Heller, est exactement ce
+genre d'objet. Deux énoncés du dossier sont à corriger, et on le fait en
+note : l'axiome (Hot~6) est faux pour une localisation au sens ordinaire, et
+un argument sur les faisceaux ne tient pas tel qu'il est écrit.
+
+\keywords{derivator, prederivator, homotopy Kan extension, homotopy exact square, homotopical category, fundamental localizer, fiber sequence}
+\end{resume}
+
+\section*{Le fil du dossier, et les conventions}
+
+\begin{enumerate}
+\item[1.] \emph{La structure des dérivateurs} (pages 1 et 2) : trois
+niveaux de $\mathrm{Hom}$ et les adjonctions à chaque niveau.
+\item[2.] \emph{Un programme} (pages 3 et 4), en neuf points.
+\item[3.] \emph{Les axiomes} (pages 5 à 11), dans une suite qu'il pagine de 1
+à 4 : la variance, (Hot~1) à (Hot~3), la dualité, le cas additif.
+\item[4.] \emph{Quatre exemples} (pages 13 à 20, ses pages 5 à 9).
+\item[5.] \emph{Propriétés formelles} (page 20) : (Hot~4) à (Hot~6).
+\item[6.] \emph{Cofinalité} (page 21), \emph{recollement} (page 22),
+\emph{la suite des lacets} (page 24), sur trois feuillets non paginés.
+\end{enumerate}
+
+\emph{Conventions.} Une \emph{théorie} $\mathcal H$ associe à toute petite
+catégorie $A$ une catégorie $\mathcal H(A)$, et à tout foncteur $f : A \to B$
+un foncteur $f^{*} : \mathcal H(B) \to \mathcal H(A)$, de façon
+2-fonctorielle stricte et contravariante en $f$. On écrit $f^{*}$, $f_{!}$,
+$f_{*}$ sans l'indice $\mathcal H$ que la page place en haut ou en bas.
+$\Delta_0$ est la catégorie ponctuelle, $\mathrm{Hot}_{\mathcal H} =
+\mathcal H(\Delta_0)$, et $\pi_A : A \to \Delta_0$ le foncteur unique. On
+note $\int_A = (\pi_A)_{!}$ l'intégration et $\prod_A = (\pi_A)_{*}$ la
+cointégration ; dans les exemples homotopiques, ce sont la limite inductive
+et la limite projective \emph{homotopiques}. $A^{\wedge}$ est la catégorie
+des préfaisceaux sur $A$ et $h_A : A \to A^{\wedge}$ le foncteur de Yoneda.
+Les mots « cofibré » et « fibré » désignent les catégories cofibrées et
+fibrées au sens de Grothendieck.\footnote{C'est ainsi qu'on lit les
+« $f$ cofibrant » et « $g$ fibrant » de la page 20 ; la page ne définit pas
+ces mots. Dans le vocabulaire actuel : op-fibration et fibration.}
+
+\emph{Dates.} Deux feuillets sont datés de sa main : « déc. 83 » (page 1) et
+« 24.11.83 » (page 4, en marge). Rien ne date les autres, et rien n'ordonne
+les quatre suites entre elles.
+
+\emph{Ce que le dossier annonce et n'établit pas} : les axiomes eux-mêmes
+(« Dégager les bons axiomes ») ; l'existence des $f_{*}$ pour un
+localisateur fondamental (« non encore ») ; la comparaison de deux couples
+$(M, W)$ qui donnent la même théorie ; la condition de recollement de la
+page 22 (« on veut ») ; le cas des catégories filtrantes (page 21, en marge).
+
+\pagerange{1}{2}
+\section*{La structure des dérivateurs (pages 1 et 2)}
+
+Le feuillet 1, encadré sous ce titre, fixe une donnée $\mathcal H(I)$ pour
+chaque petite catégorie $I$ et distingue trois niveaux de morphismes entre
+deux objets $x, y$ de $\mathcal H(I)$ :
+\begin{itemize}
+  \item un ensemble $\mathrm{Hom}(x, y)$ ;
+  \item un type d'homotopie $\mathrm{Homhot}(x, y) \in \mathrm{Hot}$, dont
+  l'ensemble des composantes est $\mathrm{Hom}(x, y) = \pi_0\,
+  \mathrm{Homhot}(x, y)$ ;
+  \item un objet interne $\underline{\mathrm{Homhot}}(x, y) \in
+  \mathrm{Hot}(I)$, dont on retrouve le précédent en passant au global sur
+  $I$ :
+  \[
+    \mathrm{Homhot}(x, y) \simeq \mathrm{holim}_I\,
+    \underline{\mathrm{Homhot}}(x, y).
+  \]
+\end{itemize}
+\footnote{La page écrit $\int_I$. Or, dans la suite du dossier, $\int$ est
+l'intégration, qui joue le rôle d'une limite \emph{inductive} (page 9). Un
+espace de morphismes global s'obtient par une limite \emph{projective}
+homotopique, la cointégration $\prod_I$ de la page 11 ; c'est elle qu'on
+écrit. Le premier terme de la formule est surchargé sur la page, et la
+nature de l'objet interne n'y est pas précisée.}
+
+Pour $f : I \to J$, $X \in \mathcal H(I)$ et $Y \in \mathcal H(J)$,
+l'adjonction $f_{!} \dashv f^{*}$ s'écrit aux trois niveaux :
+\[
+  \mathrm{Hom}(f_{!}X, Y) \simeq \mathrm{Hom}(X, f^{*}Y), \qquad
+  \mathrm{Homhot}(f_{!}X, Y) \simeq \mathrm{Homhot}(X, f^{*}Y),
+\]
+\[
+  \underline{\mathrm{Homhot}}(f_{!}X, Y) \simeq f_{*}\,
+  \underline{\mathrm{Homhot}}(X, f^{*}Y),
+\]
+chacune donnant la précédente, la deuxième par passage aux $\pi_0$, la
+troisième par passage au global sur $J$. De même, « duales », pour
+l'adjonction $f^{*} \dashv f_{*}$ :
+\[
+  \mathrm{Hom}(f^{*}Y, X) \simeq \mathrm{Hom}(Y, f_{*}X), \qquad
+  \mathrm{Homhot}(f^{*}Y, X) \simeq \mathrm{Homhot}(Y, f_{*}X),
+\]
+\[
+  \underline{\mathrm{Homhot}}(Y, f_{*}X) \simeq f_{*}\,
+  \underline{\mathrm{Homhot}}(f^{*}Y, X).
+\]
+Les deux formules internes sont encadrées.\footnote{Nous les donnons comme la
+page les donne. Elles valent dans une théorie « enrichie » en types
+d'homotopie, munie d'un $\mathrm{Hom}$ interne convenable ; la page ne dit pas
+lequel. Pour le $\mathrm{Hom}$ interne cartésien des diagrammes d'espaces, la
+première demanderait une formule de projection $f_{!}(X \times f^{*}Z)
+\simeq f_{!}X \times Z$, qui n'a pas lieu pour tout $f$.}
+
+Le feuillet 2 est un brouillon sans phrase : $\pi_0$ et $\pi_1$ d'un objet de
+$\mathcal H(\Delta_1)$, des 2-flèches entre deux flèches $x
+\rightrightarrows y$, une sous-catégorie $J \subset I$ et la restriction
+$\mathcal H(I) \to \mathcal H(J)$, et, isolés, les mots « $M$ $W$ »,
+« $\mathrm{Hot}$ », « $\mathrm{Cl}(M, W)$ ».
+
+\pagerange{3}{4}
+\section*{Un programme (pages 3 et 4)}
+
+Deux feuillets énumèrent, sous des lettres a) à i), ce qu'une théorie
+homotopique devrait expliquer :
+\begin{enumerate}
+  \item[a)] les \emph{modèles}, leur importance et leur indétermination ;
+  \item[b)] les suites exactes longues associées à une flèche, liées aux
+  cylindres et cocylindres ;
+  \item[c)] les résolutions d'un modèle, à gauche ou à droite, et le
+  formalisme des foncteurs dérivés quand deux théories sont en présence ;
+  \item[d)] les notions homotopiques sur les modèles --- équivalences
+  faibles $W$, cofibrations, homotopismes --- qu'une note marginale dit
+  « intermédiaires » pour construire les catégories dérivées ;
+  \item[e)] les homotopies entre applications, entre homotopies, et ainsi de
+  suite, c'est-à-dire un espace $\mathrm{Hom}(X, Y)$ dans $\mathrm{Hot}$ ---
+  « dans Quillen, il y a des $\mathrm{Hom}$ simpliciaux » ;
+  \item[f)] des opérations, « grossières » sur les modèles ou « délicates »
+  sur $\mathcal H$ ;
+  \item[g)] des invariants $\pi_i$ ou $H_i$, à valeurs dans une catégorie
+  souvent abélienne ;
+  \item[h)] des invariants $K(\mathcal H)$ définis par « triangles
+  exacts », et des $K_i$ supérieurs --- « cas additif seulement ?!? » ;
+  \item[i)] des $\mathrm{Hom}$ internes et une structure multiplicative, avec
+  \[
+    \mathrm{Hom}(x \otimes y, z) \simeq \mathrm{Hom}(x,
+    \underline{\mathrm{Hom}}(y, z)).
+  \]
+\end{enumerate}
+\footnote{Les lettres des quatre derniers points sont surchargées ; f) et g)
+sont restituées d'après la note marginale qui les nomme (« des aspects
+particulièrement peu compris »), h) et i) d'après l'ordre. Une note datée du
+24.11.83 demande, en marge du point i), les relations entre ces
+$\mathrm{Hom}$ internes et les $\mathrm{Homhot}$ du point e).}
+
+La conclusion : « sauf peut-être f) et g), il semble que tout puisse se
+décrire en termes de $(M, W \subset \mathrm{Fl}(M))$ » --- une catégorie et
+une classe de flèches à inverser. « Dégager les bons axiomes. »\footnote{Un
+couple $(M, W)$ s'appelle aujourd'hui une catégorie relative, ou
+homotopique. Que la localisation simpliciale d'un tel couple en retienne
+toute la théorie homotopique est un théorème de Dwyer et Kan (1980) ; les
+catégories relatives comme modèle des théories homotopiques sont étudiées
+par Barwick et Kan (2012). Références citées de mémoire ; les pages ne
+citent que Quillen.}
+
+\pagerange{5}{11}
+\section*{La variance et les premiers axiomes (pages 5 à 11)}
+
+Le feuillet 5 ouvre une suite qu'il pagine de 1 à 9, sous le titre
+« Théorie (de variance) homotopique $\mathcal H$ ».
+
+\subsection*{La variance}
+
+Une théorie $\mathcal H$ associe à toute petite catégorie $A$ une catégorie
+$\mathcal H(A)$, non nécessairement petite, et à tout foncteur $f : A \to B$
+un foncteur $f^{*} : \mathcal H(B) \to \mathcal H(A)$, de façon
+2-contravariante \emph{stricte}. On pose $\mathrm{Hot}_{\mathcal H} =
+\mathcal H(\Delta_0)$. Pour chaque objet $a$ de $A$, soit $i_a : \Delta_0 \to
+A$ le foncteur de valeur $a$ ; on en tire le foncteur « diagramme sous-jacent »
+\[
+  \alpha_A : \mathcal H(A) \longrightarrow \underline{\mathrm{Hom}}(A,
+  \mathrm{Hot}_{\mathcal H}), \qquad \mathcal X \longmapsto \bigl(a \mapsto
+  i_a^{*}\mathcal X\bigr),
+\]
+naturel en $A$ : pour $f : A \to B$, $\alpha_A \circ f^{*} = f^{*} \circ
+\alpha_B$.\footnote{Plus généralement, dit une N.B., tout $B$ donne
+$\mathcal H(A) \to \underline{\mathrm{Hom}}(\underline{\mathrm{Hom}}(B, A),
+\mathcal H(B))$, et $B = \Delta_0$ redonne $\alpha_A$. Dans le vocabulaire
+actuel, une telle donnée est un \emph{prédérivateur} (Grothendieck,
+\emph{Les Dérivateurs}, 1990--1991 ; Heller, \emph{Homotopy theories}, 1988 ;
+cités de mémoire), et $\alpha_A$ le foncteur « diagramme ». La page n'impose
+pas que la famille des $i_a^{*}$ soit conservative, qui est l'axiome
+Der~2 des dérivateurs.}
+
+\textbf{(Hot 1)} Si $A = \coprod_{i \in I} A_i$, alors $\mathcal H(A)
+\to \prod_{i \in I} \mathcal H(A_i)$ est une équivalence.\footnote{C'est
+l'axiome Der~1.}
+
+\subsection*{Une première intégration, abandonnée (page 7)}
+
+Un premier essai définit l'intégration en passant par les préfaisceaux : on
+se donne, pour toute petite $A$, un foncteur $L_A : \mathcal H(A) \to
+\mathcal H(A^{\wedge})$ tel que $(h_A)^{*} L_A = \mathrm{id}$, et l'on
+demande que les $f_{!}$ soient induits par un carré commutatif avec
+$L_A$, $L_B$ et le foncteur induit $\mathcal H(A^{\wedge}) \to
+\mathcal H(B^{\wedge})$. Tout ce passage est barré de longs traits
+obliques.\footnote{Il suppose $\mathcal H$ défini sur $A^{\wedge}$, qui
+n'est pas petite ; les « $U$-catégories » de la page 5 laissent penser à un
+changement d'univers. La page 21 reprend le même carré, avec $(h_A)_{!}$ à
+la place de $L_A$, pour un usage précis.}
+
+\subsection*{Les adjoints (pages 9 et 11)}
+
+\textbf{(Hot 2)} Pour tout $f : A \to B$, le foncteur $f^{*} : \mathcal H(B)
+\to \mathcal H(A)$ a un adjoint à gauche $f_{!} : \mathcal H(A) \to
+\mathcal H(B)$.\footnote{La page écrit $f^{\mathcal H}_{!} : \mathcal H(B) \to
+\mathcal H(A)$, la source et le but de $f^{*}$ ; c'est une inadvertance.
+Une remarque, « A. », se demande s'il ne faudra pas se borner aux $f$
+« cofibrantes ». Les axiomes actuels (Der~3) ne se restreignent pas.}
+
+Pour $B = \Delta_0$, on obtient l'\emph{intégration} $\int_A =
+(\pi_A)_{!} : \mathcal H(A) \to \mathrm{Hot}_{\mathcal H}$, qui joue le rôle de
+$\varinjlim_A$. Par transitivité, $\int_A \mathcal X \simeq \int_B
+f_{!}\mathcal X$. L'existence des $f_{!}$ implique celle des sommes dans les
+$\mathcal H(A)$, avec (Hot~1) ; et les $f^{*}$ y commutent dès qu'ils ont
+aussi un adjoint à droite.\footnote{La page dit « et les $f^{*}$ bien sûr y
+commutent ». C'est vrai sous (Hot~3), qui fait de $f^{*}$ un adjoint à
+gauche ; sous (Hot~2) seul, il faudrait une propriété de changement de base,
+celle de (Hot~4).}
+
+\textbf{(Hot 3)} Pour tout $f$, le foncteur $f^{*}$ a un adjoint à droite
+$f_{*}$. D'où la \emph{cointégration} $\prod_A = (\pi_A)_{*}$, avec $\prod_A
+\mathcal X \simeq \prod_B f_{*}\mathcal X$, et l'existence des produits dans
+les $\mathcal H(A)$.\footnote{(Hot~2) et (Hot~3) forment l'axiome Der~3 :
+existence des extensions de Kan homotopiques à gauche et à droite.}
+
+\emph{Dualité.} En posant $\mathcal H^{\circ}(A) = \mathcal H(A)^{\circ}$,
+on obtient une théorie $\mathcal H^{\circ}$ où $f^{*}_{\mathcal H^{\circ}} =
+(f^{*})^{\circ}$, $f^{\mathcal H^{\circ}}_{!} = (f_{*})^{\circ}$ et
+$f^{\mathcal H^{\circ}}_{*} = (f_{!})^{\circ}$ : intégration et cointégration
+s'échangent.
+
+\emph{Cas additif.} Si les $\mathcal H(A)$ sont additives (ou $k$-linéaires)
+et les $f^{*}$ additifs, les $f_{!}$ et $f_{*}$ le sont aussi, comme adjoints
+de foncteurs additifs.
+
+\pagerange{13}{20}
+\section*{Quatre exemples (pages 13 à 20)}
+
+\emph{Exemple 1.} Soit $M$ une catégorie complète et cocomplète, et
+$\mathcal H(A) = \underline{\mathrm{Hom}}(A, M)$. Les $f^{*}$ sont les
+restrictions, leurs adjoints les extensions de Kan à gauche et à droite ;
+$\mathrm{Hot}_{\mathcal H} = M$, $\int_A = \varinjlim_A$ et $\prod_A =
+\varprojlim_A$. C'est le dérivateur représenté par $M$.
+
+\emph{Exemple 2.} Soit $(M, W)$ une catégorie munie d'une classe de flèches
+$W$. On note $W_A$ la classe des flèches de $\underline{\mathrm{Hom}}(A, M)$
+qui sont dans $W$ objet par objet, et l'on pose
+\[
+  \mathcal H(A) = W_A^{-1}\,\underline{\mathrm{Hom}}(A, M).
+\]
+Les $f^{*}$ passent aux localisées, puisqu'ils préservent les $W_A$.
+L'existence des adjoints est une condition sur $W$.\footnote{Elle est
+satisfaite, par exemple, quand $(M, W)$ provient d'une catégorie de modèles
+de Quillen : c'est le théorème selon lequel toute catégorie de modèles
+définit un dérivateur (Cisinski, 2003, cité de mémoire). La note marginale
+affirme que (Hot~1) est satisfait. Ce n'est pas automatique : une
+localisation commute aux produits finis, pas en général aux produits
+infinis ; pour une catégorie de modèles, cela vaut.}
+
+\emph{Une remarque sur les morphismes} (pages 15 et 17). Un foncteur $f : M \to
+M'$ tel que $f(W) \subset W'$ induit des foncteurs $\mathcal H_W(A) \to
+\mathcal H_{W'}(A)$ compatibles aux $f^{*}$, mais rien ne dit qu'ils
+commutent aux $f_{!}$ et $f_{*}$ : quand $W$ et $W'$ sont réduits aux
+isomorphismes, cela voudrait dire que $f$ commute aux limites inductives,
+resp.\ projectives. En revanche, si ce sont des équivalences pour tout $A$,
+la commutation suit. En voici un cas. Supposons que $f$ ait un adjoint à
+droite $g$, que $f^{-1}(W') = W$, que la counité $fg(X') \to X'$ soit dans
+$W'$ pour tout $X'$, et que $W'$ satisfasse au « deux sur trois ». Alors $g$
+envoie $W'$ dans $W$, l'unité et la counité sont dans $W$ et $W'$, et $f$ et
+$g$ induisent des équivalences inverses $\mathcal H_W(A) \simeq
+\mathcal H_{W'}(A)$ pour tout $A$, les mêmes conditions passant à
+$\underline{\mathrm{Hom}}(A, M) \rightleftarrows \underline{\mathrm{Hom}}(A,
+M')$ objet par objet.\footnote{La page n'écrit pas la propriété « deux sur
+trois », sans laquelle l'argument ne passe pas. Avec elle : si $w' : X' \to
+Y'$ est dans $W'$, alors $fg(w')$ l'est, car la counité est naturelle, donc
+$g(w') \in f^{-1}(W') = W$ ; et $f$ appliqué à l'unité, composé avec la
+counité en $f(X)$, donne l'identité, donc l'unité est dans $W$. La
+conclusion de la page est barrée après « Donc » ; nous l'écrivons.}
+
+Les théories qui se décrivent par un couple $(M, W)$ sont dites
+\emph{spéciales}, et « cela implique des conditions draconiennes sur $(M,
+W)$ ». On peut se proposer d'avoir une vue d'ensemble des couples qui
+donnent une théorie donnée : deux tels couples $(M_1, W_1)$, $(M_2, W_2)$
+s'envoient-ils toujours dans un troisième, de façon à induire l'isomorphisme
+donné entre les théories ?\footnote{La question reste ouverte sur la page.
+Aujourd'hui, pour les catégories de modèles combinatoires, deux catégories
+qui définissent des dérivateurs équivalents sont reliées par une chaîne
+d'équivalences de Quillen (Renaudin, 2009, cité de mémoire) ; hors de ce
+cadre, la réponse dépend des hypothèses.}
+
+\emph{Exemple 3.} $M = (\mathrm{Cat})$ et $W$ un \emph{localisateur
+fondamental}. La page dit : « J'ai prouvé l'existence des $f_{!}$, mais non
+encore celle des $f_{*}$ », et ajoute qu'il faudra peut-être des hypothèses
+de finitude sur $A$, $B$.\footnote{La page ne donne pas la démonstration.
+Que tout localisateur fondamental définisse un dérivateur, avec les deux
+adjoints et sans hypothèse de finitude, est établi par Cisinski
+(\emph{Les préfaisceaux comme modèles des types d'homotopie}, Astérisque
+308, 2006), cité de mémoire. Le terme « localisateur fondamental » est aussi
+celui de \emph{À la poursuite des champs}, dont le dossier relève dans
+l'inventaire.}
+
+\emph{Exemple 4.} Soit $\mathcal A$ une catégorie abélienne, $M$ ses
+complexes et $W$ les quasi-isomorphismes : $\mathcal H(A)$ est la catégorie
+dérivée de $\underline{\mathrm{Hom}}(A, \mathcal A)$. Si $\mathcal A$ est la
+catégorie des faisceaux de $k$-modules sur un topos $\mathcal T$, alors
+$\underline{\mathrm{Hom}}(A, \mathcal A)$ est la catégorie des faisceaux de
+$k$-modules sur le topos produit $A^{\circ\wedge} \times \mathcal T$, et
+$f^{*}$ est l'image inverse par le morphisme de topos $f^{\circ} \times
+\mathrm{id}_{\mathcal T}$. Le foncteur induit sur les catégories dérivées a
+un adjoint à droite $\mathrm{R}f_{*}$, et aussi un adjoint à gauche
+$\mathrm{L}f_{!}$.\footnote{La page dit d'abord que, « généralement », il
+n'y a pas d'adjoint à gauche, sauf pour le topos ponctuel. Puis elle obtient
+$\mathrm{L}f_{!}$ ainsi : au niveau des faisceaux d'ensembles, $(f^{\circ})_{!}$
+existe et serait « exact à gauche », donc transformerait quasi-isomorphismes
+en quasi-isomorphismes. L'argument ne tient pas tel qu'il est écrit : sur
+les faisceaux abéliens, l'extension de Kan à gauche est exacte à droite, non
+exacte, et ne préserve pas les quasi-isomorphismes. La conclusion est juste
+par une autre voie : les complexes d'une catégorie abélienne de Grothendieck
+définissent un dérivateur, avec les deux adjoints (Cisinski, 2003, cité de
+mémoire), et $\mathrm{L}f_{!}$ se calcule par des résolutions convenables.}
+
+\pagerange{20}{20}
+\section*{Propriétés formelles (page 20)}
+
+\textbf{(Hot 4) Changement de base.} Soit un carré cartésien de petites
+catégories
+\[
+  A = B \times_{B'} A' \xrightarrow{\ g'\ } A', \qquad f : A \to B, \qquad
+  f' : A' \to B', \qquad g : B \to B'.
+\]
+Les morphismes canoniques
+\[
+  f_{!}\, g'^{*} \longrightarrow g^{*} f'_{!} \qquad \text{et} \qquad
+  g^{*} f'_{*} \longrightarrow f_{*}\, g'^{*}
+\]
+sont des isomorphismes : le premier si $f'$ est cofibré, ou si $g$ est
+fibré ; le second si $f'$ est fibré, ou si $g$ est cofibré.\footnote{La page
+met la condition sur $f$, qui dans un carré cartésien l'hérite de $f'$ ; c'est
+$f'$ qui compte. Elle ajoute les alternatives entre crochets, « [ou $g$ fibrant
+??] » et « [ou $g$ cofibrant ??] », avec ses points d'interrogation. Elles
+sont justes : un carré cartésien est homotopiquement exact dès que sa flèche
+verticale est propre, par exemple cofibrée, ou sa flèche horizontale lisse,
+par exemple fibrée, et dualement (Grothendieck, \emph{Les Dérivateurs} ;
+Maltsiniotis, 2005 ; cités de mémoire). Les axiomes actuels (Der~4)
+demandent le changement de base pour les carrés « comma », dont celui-ci
+se déduit. La page note enfin que les deux formules sont « transposées »
+l'une de l'autre.}
+
+\textbf{(Hot 5)} Si $f : A \to B$ est pleinement fidèle, les foncteurs
+$f_{!}$ et $f_{*}$ sont pleinement fidèles : $f^{*}f_{!} \simeq \mathrm{id}$ et
+$f^{*}f_{*} \simeq \mathrm{id}$. Autrement dit, $f^{*}$ est un foncteur de
+localisation.
+
+\textbf{(Hot 6)} Si $f : A \to B$ est une localisation \emph{au sens
+homotopique}, alors $f^{*}$ est pleinement fidèle : $f_{!}f^{*} \simeq
+\mathrm{id} \simeq f_{*}f^{*}$.\footnote{La page dit « si $f$ localisation »,
+sans préciser. Pour une localisation au sens ordinaire des catégories,
+l'énoncé est faux. Soit $A$ une catégorie dont le nerf a le type
+d'homotopie de la sphère $S^{2}$ --- l'ensemble ordonné des faces propres d'un
+tétraèdre, par exemple --- et $f : A \to \Delta_0$. Comme $A$ est connexe et
+simplement connexe, localiser $A$ en toutes ses flèches donne une catégorie
+équivalente à $\Delta_0$ : $f$ est une localisation. Mais, dans la théorie
+des types d'homotopie, $\mathrm{Hom}(f^{*}X, f^{*}Y)$ est l'ensemble des
+classes d'applications $X \times S^{2} \to Y$, qui diffère de
+$\mathrm{Hom}(X, Y)$ pour $X$ ponctuel et $Y = K(\mathbb Z, 2)$. L'énoncé
+vaut quand le nerf de $f$ est une localisation homotopique, au sens de
+Dwyer et Kan. Le contre-exemple est le nôtre ; la référence est citée de
+mémoire. La dernière formule est écrite contre le bord du feuillet.}
+
+\pagerange{21}{21}
+\section*{Cofinalité (page 21)}
+
+On cherche des conditions sur un foncteur $i : A_0 \to A$ pour que
+\[
+  \int_{A_0} i^{*}\xi \xrightarrow{\ \sim\ } \int_A \xi \qquad \text{pour tout
+  } \xi \in \mathcal H(A),
+\]
+ce qu'il appelle « cofinalité ». Il en donne une : $i$ a un adjoint à gauche
+$j : A \to A_0$. Alors
+\[
+  i^{*} \simeq j_{!},
+\]
+d'où, puisque $p_0 j = p$ ($p$ et $p_0$ désignant les foncteurs vers
+$\Delta_0$),
+\[
+  \int_{A_0} i^{*} = p_{0!}\, i^{*} \simeq p_{0!}\, j_{!} \simeq p_{!} =
+  \int_A.
+\]
+\footnote{La page écrit la formule $i^{*} = j_{!}$ entourée, précédée d'un
+point d'interrogation (« je présume »), puis les deux formules suivantes avec
+$i$ là où l'argument demande $j$ : $p_0$ et $i$ ne se composent pas en
+$p_0 i$. Nous écrivons $j$. L'énoncé est le fait classique qu'un adjoint à
+droite est homotopiquement cofinal.}
+
+\emph{Exemple.} Si $A$ a un objet final $e$ et que $A_0$ est un point envoyé
+sur $e$, le foncteur $A \to A_0$ est adjoint à gauche de $i$, et $\int_A \xi
+\simeq \xi(e)$.
+
+\emph{Justification de $i^{*} \simeq j_{!}$.} Pour tout foncteur $j : A \to
+B$, le carré
+\[
+  (h_B)_{!}\, j_{!} \simeq (j^{*}_{\wedge})^{*}\, (h_A)_{!}
+\]
+commute, où $j^{*}_{\wedge} : B^{\wedge} \to A^{\wedge}$ est la restriction des
+préfaisceaux.\footnote{Les deux membres sont des extensions de Kan à gauche
+calculées sur la même catégorie comma, celle des éléments de $j^{*}G$ pour
+$G \in B^{\wedge}$ ; l'égalité suit du changement de base (Hot~4). Ce calcul
+est le nôtre ; la page renvoie à « un diagramme commutatif ».} Si $j$ a un
+adjoint à droite $i$, on a $j^{*}_{\wedge} = i^{\wedge}_{!}$, qui prolonge
+$i$ aux préfaisceaux. En restreignant par $h_B$, pleinement fidèle, et en
+utilisant (Hot~5), on obtient $j_{!} \simeq i^{*}$.
+
+En marge : « Cas des catégories filtrantes ?? ».\footnote{Question sans
+suite. Pour les dérivateurs, une limite inductive homotopique filtrante n'est
+pas en général calculée objet par objet ; c'est une propriété
+supplémentaire de certains dérivateurs.}
+
+\pagerange{22}{22}
+\section*{Un recollement (page 22)}
+
+Soient $A'$, $A''$ deux sous-catégories pleines de $A$, toutes deux des
+cribles ou toutes deux des cocribles, de réunion $A$ et d'intersection $A_0$.
+Alors $A = A' \amalg_{A_0} A''$ dans $(\mathrm{Cat})$, puisque toute flèche de
+$A$ est dans $A'$ ou dans $A''$. On voudrait que le foncteur
+\[
+  \mathcal H(A) \longrightarrow \mathcal H(A') \times_{\mathcal H(A_0)}
+  \mathcal H(A'')
+\]
+soit \emph{plein} --- pour $\xi, \eta \in \mathcal H(A)$, l'application
+$\mathrm{Hom}(\xi, \eta) \to \mathrm{Hom}(\xi', \eta') \times_{\mathrm{Hom}(\xi_0,
+\eta_0)} \mathrm{Hom}(\xi'', \eta'')$ surjective --- et il « a tendance d'être
+bijectif sur les objets ». On s'en servira pour la catégorie en forme de coin
+$a' \leftarrow c \to a''$, réunion de deux flèches issues de $c$, pour son
+dual, et pour leurs produits par une petite catégorie $B$.\footnote{C'est une
+forme de l'axiome dit « fort » des dérivateurs, qui demande que
+$\mathcal H(B \times \Delta_1) \to \mathcal H(B)^{\Delta_1}$ soit plein et
+essentiellement surjectif (Der~5 ; Heller ; cités de mémoire). La
+condition de la page, pour les réunions de deux cribles, en est voisine ;
+nous ne l'identifions pas.}
+
+\pagerange{24}{24}
+\section*{La suite des lacets (page 24)}
+
+Le feuillet 24 ne porte que des diagrammes, dans une théorie pointée, $e$
+désignant l'objet nul. Pour une flèche $f : X \to Y$, on complète par des
+carrés homotopiquement cartésiens :
+\[
+  Z = X \times^{h}_{Y} e, \qquad \Omega Y = e \times^{h}_{Y} e, \qquad
+  \Omega Y \xrightarrow{\ h\ } Z,
+\]
+et l'on recommence. Les carrés s'empilent en escalier jusqu'à
+$\Omega^{4} Y$, et la suite
+\[
+  Y \xleftarrow{\ f\ } X \xleftarrow{\ g\ } Z \xleftarrow{\ h\ } \Omega Y
+  \xleftarrow{\ \Omega f\ } \Omega X \xleftarrow{\ \Omega g\ } \Omega Z
+  \xleftarrow{\ \Omega h\ } \Omega^{2} Y \longleftarrow \cdots
+\]
+est redessinée en zigzag, chaque composé de deux flèches consécutives passant
+par $e$. C'est la suite des fibres, ou suite de Puppe.\footnote{La page ne
+dit pas que les carrés sont homotopiquement cartésiens ; c'est ce qui donne à
+l'escalier son sens, et nous le précisons. Une telle construction de la suite
+des fibres par carrés cartésiens itérés est standard dans les dérivateurs
+pointés (Groth, 2013, cité de mémoire). Le feuillet porte encore un croquis
+en perspective de l'escalier, un carré en pointillés et un petit croquis à
+deux lettres, que nous ne reconstituons pas. Les signes de la flèche $\Omega
+h$ et le détail des étiquettes sont ceux de la page ; les carrés composés
+disent que $\Omega$ de la suite est, au signe près, la suite décalée.}
+
+\end{document}
