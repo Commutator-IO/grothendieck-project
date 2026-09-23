@@ -1,0 +1,760 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 15, batch 1 (pages 1-20).
+% Established from the facsimile archives/batches/15/batch-01.pdf (a mirror of
+% https://grothendieck.umontpellier.fr/15.pdf), per the skill
+% transcribe-grothendieck. The batch file carries no cover sheet: PDF page N
+% is page N of the folder (the Montpellier footer prints « 1 » ... « 20 »),
+% and the archivists' pencil numbers bottom-left agree where legible (« 3 »,
+% « 7 », « 11 », « 14 » among others).
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-09-23 — first pass, unchecked against the pages by a human.
+%
+% Twelve of the twenty pages are transcribed. Absent: page 1, an otherwise
+% blank sheet of brown paper inscribed in his hand « Groupe de Galois
+% motivique commutatif. Cas d'un corps de base fini » — a cover, whose words
+% become the \section heading before page 2 (references/hand.md §5); pages 3,
+% 5, 7, 9, 11, five leaves of an unrelated English typescript on
+% two-dimensional rational singularities (Theorem 25.1, Remarks 25.2-25.3, its
+% own pp. 159-163), scanned upside down, nothing in his hand; page 14, blank.
+% He did not paginate these leaves.
+%
+% What the batch is. Two runs in his hand, not dated.
+%   (1) Pages 2-13, « Catégorie des motifs sur F_p = k »: the motivic Galois
+%   group G of motives over a finite field (commutative), with its fibre
+%   functors T_ℓ (ℓ ≠ p) and crystalline T_p, and the rational fibre
+%   functor F^0 on motives of level 0. G is of multiplicative type with
+%   character group Γ ⊂ Q̄* the Weil numbers (conj. of Tate and Tate-Honda);
+%   G^0, ε : G → G_m (ε*(1) = p), i : G_m → G (weight grading,
+%   |λ| = p^{i*(λ)/2}); H = Ker(ε|G^0) ≃ H^0 × μ_2 with H^0 a compact torus.
+%   The category with its fibre functors is classified by a gerbe class
+%   ξ ∈ H^2(Q, H), split at all ℓ ≠ p; ξ_p = ∂(η_p) with η_p in
+%   H^1(Q_p, G/H) ≃ H^1(Q_p, Ẑ) given by Frobenius; the components along
+%   H^0 and μ_2 are determined place by place (Σ inv_v = 0); NB on the
+%   absence of a fibre functor over R (ξ_∞ ≠ 0). Pages 12-13 are free
+%   sheets of diagrams: the exact sequence G^0 → G → Ẑ, D(Γ), the
+%   canonical Frobenius in G(Q), the comparison with (G_{F_p})_red and
+%   Q̄_p* via p-adic valuation, End(M) for a simple motive (Tate-Honda,
+%   A_M splits at ℓ ≠ p), and the Tate-Nakayama style cohomology sequence
+%   for H^2(Q, H) with Γ^0 = unités de Weil.
+%   (2) Pages 15-20, untitled (the \section heading is bracketed, ours):
+%   « catégories de Deuring » over a Dedekind ring A, i.e. A-preadditive
+%   categories equivalent to invertible modules over a maximal order of an
+%   Azumaya algebra; their classification by Br(K); equivalences as
+%   biinvertible bimodules, the Brandt groupoid Brd(O), a 2-groupoid;
+%   the associated G_m-gerbe of « banalisations » and the fully faithful
+%   C → Rep(G); determinant and reduced norm (margin p. 20). Page 20 breaks
+%   off mid-sentence (« la catégorie des repr. des »), continued in batch 2.
+%
+% Notation fixed for the batch. \mathcal{M} for the category of motives (his
+% script M); \mathrm{Niv}^0(\mathcal{M}) « motifs de niveau 0 »; \Gamma the
+% character group, \Gamma^0 the Weil units; G, G^0, H, H^0, U, U^0 as he
+% writes them; \check{M} on p. 13; \mathcal{O}, \mathcal{O}' orders, E, E'
+% their algebras, \mathcal{O}^{\natural} for a superscript zigzag read as the
+% centre; \mathcal{G} the gerbe on pp. 19-20. His « tt », « isom. »,
+% « loc. », « ssi », « kif-kif » are kept. Plain square brackets in the text
+% are his (interlinear additions); editorial additions are \add{} and none
+% was needed.
+%
+% Legibility. Pages 2-8 and 15-19 read largely; the connective prose of
+% pages 10, 16, 18 and 20 is a fast palimpsest of additions and deletions,
+% heavily \ill{}; pages 12-13 are diagrams whose layout is redrawn.
+%
+% The dating is the inventory's own for the folder, copied verbatim. Its
+% group, [10-18] « Théorie des motifs », is dated [à partir de 1958-à partir
+% de 1982].
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{15}
+\batch{1}
+\pages{1}{20}
+\dating{1965-[vers 1977]}
+\watermark{Édition de démonstration}
+\foldertitle{Théorie arithmétique. Théorie de Galois des motifs (1965) : notes manuscites (s.d.), tapuscrit (s.d.).}
+
+\begin{document}
+
+\section{Groupe de Galois motivique commutatif. Cas d'un corps de base fini}
+
+\note{titre de sa main, sur le feuillet 1, une feuille de papier brun par ailleurs blanche, qui sert de
+couverture à la suite}
+
+\page{2}
+\subsection*{Catégorie des motifs sur $\mathbb{F}_p = k$}
+
+\note{titre souligné, de sa main, en tête du feuillet}
+
+$\mathcal{M}$ admet un foncteur fibre $T_\ell$ sur $\mathbb{Q}_\ell$ (à valeurs dans
+$\mathrm{Mod}(\widehat{\mathbb{Z}}, \mathbb{Q}_\ell)$) pour tt $\ell \neq p$~; pour $\ell = p$, il y a un
+foncteur $T_p$ sur $\mathbb{Q}_p$~: cohomologie cristalline (foncteur à valeurs dans \struck{$\mathrm{Mod}$}
+(F-cristaux sur $\mathbb{Q}_p$), donc dans des vectoriels sur $\mathbb{Q}_p$ munis d'un automorphisme,
+donc dans $\mathrm{Mod}(\mathbb{Z}, \mathbb{Q}_p)$ --- attention, ici on ne peut remplacer $\mathbb{Z}$
+par $\widehat{\mathbb{Z}}$~!]
+\note{le crochet fermant est sur la page, sans crochet ouvrant correspondant}
+
+Soit \struck{$\mathcal{M}$} $\mathrm{Niv}^0(\mathcal{M})$ la sous-catégorie des motifs de niveau $0$
+\[
+  \mathrm{Niv}^0(\mathcal{M})^{\circ} \xrightarrow{\qquad\qquad\qquad} \ \ill{}.
+\]
+\note{la flèche est un long trait, sans but écrit~; le mot qui la suit, après une virgule, n'est pas lu}
+
+\marginal{\uncertain{motifs de dim.\ 0}}
+Il y a un foncteur fibre naturel \struck{\ill{}} [\uncertain{à valeurs dans}] $\mathbb{Q}$ sur la
+sous-catégorie $\mathrm{Niv}^0(\mathcal{M})^{\circ}$, soit
+\[
+  F^{0} \colon \mathrm{Niv}^0(\mathcal{M})^{\circ} \longrightarrow
+  \mathrm{Mod}(\mathbb{Q}, \struck{\widehat{\mathbb{Z}}}\,)
+\]
+\[
+  \mathrm{Niv}^0(\mathcal{M})^{\circ} \longrightarrow \mathrm{Mod}(\mathbb{Q}, \pi) \longrightarrow
+  \mathrm{Mod}(\mathbb{Q}, \ldots)
+\]
+défini par
+\[
+  F^{0}(H^{0}(X)) = f_{*}(\mathbb{Q}_X)
+\]
+\[
+  F^{0}(\mathbb{Q}(1)) = \mathbb{Q}.
+\]
+\marginal{(\uncertain{à condition} \ill{} \uncertain{faisceaux} de $\mathbb{Q}$-\uncertain{espaces}
+\ill{}~; si $X$ fini sur \struck{$k$}, cela définit $F^0$ sur $\mathrm{Niv}^0(\mathcal{M})^{\circ}$}
+\note{la deuxième ligne est une flèche oblique ajoutée sous la première, qui fait passer $F^0$ par
+$\mathrm{Mod}(\mathbb{Q}, \pi)$ et que relie un trait courbe à la note de droite~; une accolade à gauche
+réunit les formules, avec la note marginale de gauche. Le $\widehat{\mathbb{Z}}$ de la première ligne
+est biffé}
+
+Donc le groupe \struck{des} [$\mathcal{G}$] des foncteurs fibres de $\mathcal{M}$ contient \struck{le}
+[$\mathcal{H}$] le sous-groupe des foncteurs fibres de $\mathcal{M}$ prolongeant $F^0$, lesquels
+correspondent (si $G$ est le groupe de Galois de $\mathcal{M}$, [qui est] un groupe
+\emph{commutatif} sur $k$, si \ill{} \ill{} (à des questions de densité …) au groupe
+\uncertain{admettant} les $y^{\circ}\theta^{\circ}$ \ill{}
+\[
+  \struck{H}\,\mathrm{Ker}\bigl(G^{0} \xrightarrow{\;\varepsilon\;} \mathbb{G}_m\bigr)
+\]
+\note{« $\mathcal{G}$ » et « $\mathcal{H}$ » sont écrits dans l'interligne~; le passage entre
+« correspondent » et la formule est rapide, et les signes « $y^{\circ}\theta^{\circ}$ » sont transcrits
+tels qu'on les voit}
+
+Par ailleurs, \struck{\ill{}} on connaît par les conj.\ de Tate et de Tate--Honda, \uncertain{grâce}
+à \uncertain{qui} le groupe de \uncertain{type mult.}\ \ill{} dont le groupe des caractères $\Gamma$ est
+
+\page{4}
+le sous-groupe
+\[
+  \Gamma \subset \overline{\mathbb{Q}}^{*}
+\]
+formé des $\lambda$ tels que l'on ait
+\[
+  \begin{cases}
+    \lambda \ \text{entier algébrique} \\
+    \lambda \ \text{unité } \ell\text{-adique pour } \ell \neq p \\
+    |\lambda_i| = p^{\nu/2} \ \text{pour} \ \nu \in \mathbb{Z}^{+} \ \text{convenable,} \\
+    \qquad \text{pour tout conjugué } \lambda_i \text{ de } \lambda\,;
+  \end{cases}
+\]
+\note{la première ligne porte un indice peu lisible sous $\lambda$~; devant $\nu$, un mot biffé}
+
+Le groupe $G^{0}$ est défini par
+\[
+  \Gamma / \Gamma_{\mathrm{tors}} = \Gamma / (\text{racines de l'unité})
+\]
+
+L'homom.
+\[
+  G \xrightarrow{\;\varepsilon\;} \mathbb{G}_m
+\]
+correspond~: à l'homom.
+\[
+  \begin{array}{ccc}
+    \mathbb{Z} & \longrightarrow & \Gamma \\
+    1 & \longmapsto & p
+  \end{array}
+\]
+et $\mathrm{Ker}(\varepsilon \,|\, G^{0}) = \mathrm{Ker}(G^{0} \to \mathbb{G}_m)$ est défini par le groupe des caractères
+\[
+  \Gamma / \{\text{racines de l'unité}, p^{\nu}\} = \Gamma'
+\]
+qui est un groupe \struck{sans} dont le sous-groupe de torsion est $\simeq \mathbb{Z}/2\mathbb{Z}$~:
+\[
+  0 \longrightarrow \mathbb{Z}/2\mathbb{Z} \longrightarrow \Gamma' \longrightarrow \Gamma'/\mathrm{tors}(\Gamma') \longrightarrow 0
+\]
+\[
+  1 \longmapsto \text{classe de } p^{1/2} \text{ dans } \Gamma'
+\]
+
+Donc on a donc
+\[
+  0 \longrightarrow H^{0} \longrightarrow H \longrightarrow \mu_2 \longrightarrow 0 ,
+\]
+et $H^{0}$ est un \emph{tore compact}. En fait, l'homom.\ $i \colon \mathbb{G}_m \to G$ définit
+$i \,|\, \mu_2 \colon \mu_2 \to H^{0}$, et donne un \emph{splitting}
+\[
+  H \simeq H^{0} \times \mu_2
+\]
+\note{ainsi sur la page~: $i\,|\,\mu_2$ est écrit à valeurs dans $H^0$, alors que le scindage annoncé
+demande une section de $H \to \mu_2$~; « donc on a donc » est de sa main}
+
+\page{6}
+On a presque la décision. ($\mathcal{M}$ avec la famille des \struck{\ill{}}
+\marginal{\uncertain{(à isom.\ près} …)}
+$T_\ell$ ($\ell \in \mathrm{Specmax}(\mathbb{Z})$),
+[la structure \uncertain{de graduation}, augmentation,] \struck{le foncteur \ill{}} et les
+foncteurs $F_0$.) La connaissance de $\mathcal{M}$, graduation, augmentation, $F_0$ est connue quand on connaît la
+classe de $H$ comme $H$-gerbe, i.e.\ un élément
+\[
+  \xi_0 \in H^2(\mathbb{Q}, H) \simeq H^2(\mathbb{Q}, H^{0}) \times H^2(\mathbb{Q}, \mu_2)
+\]
+\note{la parenthèse et l'ajout « à isom.\ près … », de lecture douteuse, sont écrits au-dessus de la
+première ligne, après un mot biffé ; l'ajout « la structure de graduation, augmentation » est porté dans
+l'interligne et rattaché par un trait}
+
+N.B. La graduation correspond à un homom.
+\[
+  \Gamma \xrightarrow{\;i^{*}\;} \mathbb{Z}
+\]
+qui est donné par
+\[
+  i^{*}(\lambda) = \nu \iff |\lambda| = p^{\nu/2} \,).
+\]
+
+Donc ceci~:
+
+Si $\ell \neq p$, les foncteurs $F_\ell$ prolongent (à isom.\ près) les foncteurs $F_0$, donc \struck{\ill{}}
+définissent un splitting de la gerbe $H$ en $\ell$. \emph{Donc}~: \emph{$H$ est splittée
+canoniquement en tous} $\ell \neq p$ [i.e.\ sur tous les $\mathbb{Q}_\ell$], donc la connaissance de
+\struck{la gerbe} $\mathcal{M}$, grad., augm., $F_0$, $F_\ell$ ($\ell \neq p$) équivaut à la donnée de
+\[
+  \xi \in H^2(\mathrm{Spec}\, \mathbb{Q} \bmod T, H)
+\]
+où
+\[
+  T = \coprod_{\ell \neq p} \mathrm{Spec}(\mathbb{Q}_\ell).
+\]
+\note{« mod » est de lecture douteuse~: une cohomologie relative de $\mathrm{Spec}\,\mathbb{Q}$ modulo $T$, ce
+que confirme la phrase suivante}
+Retenons pour l'instant~: $\xi \in H^2(\mathbb{Q}, H)$ \emph{splittée en toutes les places finies}
+$\ell \neq p$.
+
+Si $\ell = p$, les foncteurs fibres $T_p \,|\, \mathrm{Niv}^0(\mathcal{M})^{\circ}$ et $F_p$ ne sont pas
+isomorphes. Ils diffèrent par un torseur sous $(G/H)^{\wedge}_{\mathbb{Q}_p}$, extension de
+$G/G^{0} \simeq \widehat{\mathbb{Z}}$ par $G^{0}/H \simeq \mathbb{G}_m$~;
+\note{le chapeau sur $(G/H)$ est placé en exposant, à droite de la parenthèse}
+
+\page{8}
+et si
+\[
+  \eta_p \in H^1(\mathbb{Q}_p, G/H)
+\]
+est la classe de ce torseur, alors par un argument universel on trouve que
+\[
+  \xi_p \ (\text{image de } \xi \text{ dans } H^2(\mathbb{Q}_p, H)) = \partial(\eta_p)
+\]
+où \struck{$\eta_p$} $\partial$ est le cobord relatif à la suite exacte
+\[
+  0 \longrightarrow H \longrightarrow G \longrightarrow G/H \longrightarrow 0 .
+\]
+
+Par suite la classe $\xi_p$ est déterminée entièrement par la connaissance de $\eta_p$. Or
+\[
+  0 \longrightarrow \mathbb{G}_m \longrightarrow G/H \longrightarrow \widehat{\mathbb{Z}} \longrightarrow 0
+\]
+\uncertain{(extension qui splitte)}, d'où
+\note{sous $\mathbb{G}_m$ est écrit $(G/H)^{0}$, rattaché par un trait à cette parenthèse}
+\[
+  H^1(\mathbb{Q}_p, G/H) \xrightarrow{\;\sim\;} H^1(\mathbb{Q}_p, \widehat{\mathbb{Z}})
+\]
+donc il suffit de connaître l'image de $\eta_p$ dans $H^1(\mathbb{Q}_p, \widehat{\mathbb{Z}})$, i.e.\ comparer
+les torseurs des isom.\ de $(F_0)_{\mathbb{Q}_p} \,|\, \mathrm{Niv}^0(\mathcal{M})^{\circ}$ avec
+$T_p \,|\, \mathrm{Niv}^0(\mathcal{M})^{\circ}$. On trouve (\uncertain{histoire graduelle} \ill{} sur $k$
+corps de base, en \struck{\ill{}} $T_p$ sur \struck{\ill{}} \ill{} $(W(k))$ …) trivialement comme
+\struck{\ill{}} \uncertain{l'élément} de $H^1(\mathbb{Q}_p, \widehat{\mathbb{Z}})$
+[$\simeq \mathrm{Hom}(\pi_1(\mathbb{Q}_p), \widehat{\mathbb{Z}})$] correspondant à l'isom.
+\[
+  \mathrm{Gal}(\overline{\mathbb{Q}}_p / \mathbb{Q}_p) \simeq \widehat{\mathbb{Z}} \quad \text{donné par Frobenius.}
+\]
+\note{la parenthèse sur le calcul cristallin est rapide et en partie biffée~; seuls $T_p$ et $W(k)$ y sont
+sûrs}
+
+Notons que les composantes de $\xi$ suivant $H^2(\mathbb{Q}, H^{0})$ et $H^2(\mathbb{Q}, \mu_2)$ sont connues
+quand on connaît leurs composantes \emph{en toutes places} (y compris~: $\ell = \infty$), et
+\marginal{vif} pour la dernière, à cause de la formule $\sum \mathrm{inv}_v = 0$, il suffit de la connaître
+à distance finie.
+\note{un trait vertical dans la marge gauche accompagne les deux dernières lignes, avec le mot
+« \uncertain{vif} »}
+
+\page{10}
+Pour la première \uncertain{composante}, \ill{} un tore compact, les composantes à l'infini \ill{}
+nulles. Donc on connaît $\xi$ quand on connaît les $\xi_\ell$ ($\ell$ fini). Donc on connaît $\xi$.
+\note{le feuillet reprend après le feuillet 8~; la première phrase porte sans doute sur la composante de
+$\xi$ suivant $H^2(\mathbb{Q}, H^{0})$, $H^{0}$ étant un tore compact}
+
+\emph{NB} On sait \struck{\ill{}} que $\mathcal{M}$ \uncertain{n'a} pas de foncteur fibre
+sur $\mathbb{R}$, (dans \struck{\ill{}} $\mathcal{M}^{\circ}$ \struck{\ill{}} \ill{} valeurs)
+\uncertain{tout} à cause du fait que $\mathcal{M}$ \ill{}, \ill{} que $U$ est \uncertain{disconnexe},
+\uncertain{sans parler} par l'\struck{\ill{}} [a] une représentation de $G^{0}$ de degré $1$, rang $1$
+(qui \struck{\ill{}} \struck{l'obstruction étant dans des $\mathrm{Ext}^2(\mathbb{Z}, \ldots$}, \ill{} à
+$\mathbb{G}$), \ill{} de \struck{degré} rang $1$ et de degré $1$ donnant une \ill{} (i.e.\ \ill{}
+foncteurs fibres), \ill{} \ill{} l'argument de \ill{} \ill{} \uncertain{Hasse} \ill{} \ill{} \ill{}
+\uncertain{elliptiques}.
+\note{« NB » est souligné, ainsi que « sur $\mathbb{R}$ »~; la parenthèse « (dans … valeurs) » est un
+ajout de l'interligne, en partie biffé, et la ligne « l'obstruction étant dans des $\mathrm{Ext}^2$ »
+est barrée d'un trait. La lecture de ce paragraphe est très lacunaire}
+
+A fortiori, $\xi_\infty \neq 0$, \ill{} \ill{} \ill{} \ill{} \ill{}~: la composante de $\xi_\infty$
+suivant $H^2(\mathbb{R}, \mu_2)$ est \uncertain{l'élément} [\uncertain{en $H^2$}] $\neq 0$~; cela
+\uncertain{dépend} \uncertain{du} ($\xi_p$) \ill{} \uncertain{l'unique} \ill{}
+[\uncertain{l'élément unique}] de $H^2(\mathbb{Q}_p, \mu_2)$ \ill{} \ill{} une \uncertain{dualité}.
+\note{la fin de la page est un ajout rapide, rattaché par un trait courbe~; « $H^2(\mathbb{Q}_p, \mu_2)$ »
+est sûr. Le reste du feuillet est blanc}
+
+\page{12}
+\note{feuillet de diagrammes et de formules disposés librement sur la page, avec des annotations
+brèves~; ils sont transcrits de haut en bas, la colonne de droite après la colonne de gauche}
+
+\[
+  \begin{array}{ccccccc}
+    \longrightarrow & G^{0} & \longrightarrow & G & \longrightarrow & \widehat{\mathbb{Z}} & \longrightarrow 0 \\
+    & \wr & & \wr & & \wr & \\
+    & D(\Gamma/\text{racines de } 1) & & D(\Gamma) & \longleftarrow & D(\text{racines de } 1) &
+  \end{array}
+\]
+\note{au-dessus de $G$~: « groupe de Galois mot.\ de $\mathbb{F}_p$ »~; sous $D(\Gamma)$, une flèche vers
+« nombres de Weil ». La flèche de la seconde ligne est une double flèche en partie surchargée}
+
+\[
+  \mathbb{G}_m \xrightarrow{\;i\;} G \xrightarrow{\;\varepsilon\;} \mathbb{G}_m
+  \qquad\qquad \varepsilon i\,(\chi) = \lambda^{2}
+\]
+\[
+  \mathbb{Z} \xleftarrow{\;i^{*}\;} \Gamma \xleftarrow{\;\varepsilon^{*}\;} \mathbb{Z}
+\]
+\[
+  |\lambda| = p^{\,i^{*}(\lambda)/2} \qquad\qquad \varepsilon^{*}(1) = p
+\]
+\note{la formule « $\varepsilon i\,(\chi) = \lambda^2$ » est lue telle quelle~; le signe devant
+$\chi$ est peu net}
+
+$\varphi \in G(\mathbb{Q})$ canonique, défini par $\Gamma \subset \overline{\mathbb{Q}}^{*}$
+($\overline{\mathbb{Q}}$, \uncertain{singulier} \ill{} \uncertain{les nombres alg.\ de $\mathbb{Q}$}~;
+\ill{} \ill{} \uncertain{les éléments} \ill{} défini $\Gamma$)
+\note{« $\varphi$ » transcrit une grande lettre barrée, le Frobenius, qu'il note plus bas $\varphi_M$~;
+la parenthèse de droite est de lecture très douteuse}
+
+\[
+  \begin{array}{ccccc}
+    & & (G^{0}_{\mathbb{F}_\ell})_{\mathrm{red}} & \longrightarrow & (G^{0})_{\mathbb{Q}_\ell} \\
+    G_{\widehat{\mathbb{F}}_p} & \longrightarrow & (G_{\mathbb{F}_p})_{\mathrm{red}} & \xrightarrow[\text{(épi)}]{\;\alpha\;} & (G)_{\mathbb{Q}_p} \\
+    & & & \searrow \quad \widehat{\mathbb{Z}} \quad = & \widehat{\mathbb{Z}}
+  \end{array}
+\]
+\note{diagramme redessiné~: $(G^{0})_{\mathbb{Q}_\ell}$ est relié à $(G)_{\mathbb{Q}_p}$ par un trait,
+et $(G_{\mathbb{F}_p})_{\mathrm{red}}$ comme $(G)_{\mathbb{Q}_p}$ s'envoient en diagonale sur
+$\widehat{\mathbb{Z}}$. Sous $(G_{\mathbb{F}_p})_{\mathrm{red}}$, une accolade~: « \uncertain{Faisceaux}
+\uncertain{motiviques} \uncertain{F-constants} sur $\mathbb{F}_p$ », avec à gauche « \uncertain{enveloppes}
+\uncertain{algébriques} de $\mathbb{Z}$ », puis « $= D(\overline{\mathbb{Q}}_p^{*})$ »}
+
+\[
+  \begin{array}{ccccc}
+    \mathbb{Q} & \longleftarrow & \overline{\mathbb{Q}}_p^{*} & \xleftarrow{\;\alpha^{*}\;} & \Gamma \\
+    \| & & \downarrow & & \downarrow \\
+    \mathbb{Q} & \longleftarrow & \overline{\mathbb{Q}}_p^{*}/\text{racines de } 1 & \longleftarrow & \Gamma/\text{racines de } 1
+  \end{array}
+\]
+\note{la flèche $\alpha^{*}$ est à crochet (une inclusion), commentée « l'inclusion canonique »~; la
+première flèche horizontale est commentée « val.\ $p$-adique normalisée »}
+
+$M$ motif [simple] sur $\mathbb{F}_p$, $A_M = \mathrm{End}(M)$ \struck{\ill{}} \emph{centre}
+$Z_M$ \struck{engendré par} $\varphi_M \in A$
+\[
+  A \otimes_{\mathbb{Q}} \mathbb{Q}_\ell \simeq \mathrm{End}(T_\ell(M)) \quad
+  \text{(par Tate--Honda si $M$ une VA)}
+\]
+$A_M$ splitte sur $\mathbb{Q}_\ell$ pour $\ell \neq p$ ($\ell$ fini).
+\note{la dernière ligne est entourée sur la page~; une flèche la relie à $A_M$. À droite, une accolade~:
+« Les invariants des composantes simples de »~; la phrase n'est pas achevée. Un mot biffé, sous $M$,
+à gauche}
+
+\marginal{$U = \mathrm{Ker}(\varepsilon \,|\, G^{0}) \simeq \mu_2 \times U^{0}$~;
+$\struck{D(\Gamma/\varepsilon^{*}\mathbb{Z}) \simeq 1) \ (\mathbb{Z}/2\mathbb{Z} \times}$~;
+$\Gamma/(\text{racines de } 1).\,\varepsilon^{*}(\mathbb{Z})$ et $\mathbb{Z}/2\mathbb{Z} \times
+\Gamma^{0}/\text{racines de } 1$~; $\Gamma^{0}$ = \uncertain{nombres} de Weil \uncertain{dont toutes
+les} val.\ absolues \uncertain{sont} $1$ [en \emph{toutes} les places $\neq p$]}
+\note{colonne de droite, en haut du feuillet~: les objets sont reliés à $U$ et à $U^{0}$ par des flèches
+verticales. « toutes » est souligné}
+
+\page{13}
+\note{feuillet de calculs disposés librement, sans phrase suivie~; transcrits de haut en bas. $K$ est
+écrit sans commentaire~; $I$, $C$, $D_p$ sont les notations de la théorie du corps de classes (idèles,
+classes d'idèles), telles qu'on les lit}
+
+\[
+  H^2(\mathbb{Q}, H) \simeq \varinjlim H^2(G, K^{*} \otimes \check{M})
+\]
+
+\[
+  \begin{array}{ccccc}
+    H^1(G, I \otimes \check{M}) & \to & H^1(G, C \otimes \check{M}) & \to & H^2(G, K^{*} \otimes \check{M}) \\
+    \wr & & \wr & & \wr \\
+    \sum_{\mathfrak{p}} \widehat{H}^{-1}(G, D_{\mathfrak{p}} \otimes \check{M}) & \to & \widehat{H}^{-1}(G, \check{M})
+    & \to & \widehat{H}^{0}(G, \check{M} \otimes Y)
+  \end{array}
+\]
+\[
+  \begin{array}{ccccc}
+    \to H^2(G, I \otimes \check{M}) & \to & H^2(G, C \otimes \check{M}) \\
+    \wr & & \wr \\
+    \to \sum_{\mathfrak{p}} \widehat{H}^{0}(G, D_{\mathfrak{p}} \otimes \check{M}) & \to & \widehat{H}^{0}(G, \check{M})
+  \end{array}
+\]
+\note{les deux lignes forment sur la page une seule suite exacte, coupée ici en deux pour la largeur}
+\note{le « $Y$ » de $\widehat{H}^{0}(G, \check{M} \otimes Y)$ est surchargé et douteux}
+
+\[
+  \sum_{\mathfrak{p}} \widehat{H}^{-1}(G, D_{\mathfrak{p}} \otimes \check{M})
+  \simeq \sum_{\mathfrak{p}} \widehat{H}^{-1}(G_{\mathfrak{p}}, \check{M}),
+  \qquad
+  \widehat{H}^{-1}(G_{\mathfrak{p}}, \check{M}) \simeq
+  \mathrm{Ker}\bigl(\check{M}_{G_{\mathfrak{p}}} \xrightarrow{N_{G_{\mathfrak{p}}}} \check{M}^{G_{\mathfrak{p}}}\bigr)
+\]
+\[
+  \widehat{H}^{-1}(G, \check{M}) \simeq
+  \mathrm{Ker}\bigl(\check{M}_{G} \xrightarrow{N_{G}} \check{M}^{G}\bigr)
+\]
+[\uncertain{identifié avec le} $H$ \uncertain{compact}~; $\check{M}_G$ = co-invariants de $\check{M}$~;
+$\check{M}/2\check{M}$]~;
+pour $\mathfrak{p} = \infty$, c'est $\check{M}/2\check{M}$ dans le cas compact.
+
+\[
+  \widehat{H}^{0}(G, D_{\mathfrak{p}} \otimes \check{M}) \simeq \widehat{H}^{0}(G_{\mathfrak{p}}, \check{M})
+  \simeq \check{M}^{G_{\mathfrak{p}}} / N_{G_{\mathfrak{p}}} \check{M}
+\]
+\[
+  H^2(\mathbb{Q}_p, H^{0}) \simeq H^2(\mathbb{Q}_p, H/\mu_2)
+\]
+\[
+  \longrightarrow H/\mu_2 \longrightarrow G/\mu_2 \longrightarrow G' \longrightarrow 0,
+  \qquad G' \simeq \mathbb{G}_m \times \widehat{\mathbb{Z}}
+\]
+
+\[
+  \Gamma^{0}/\text{racines de } 1 \simeq M \longrightarrow \mathbb{Z} \quad
+  \text{stable par } G_{p}
+  \struck{\ill{}}
+\]
+[valuations $p$-adiques \uncertain{normalisées} par $v_p(p) = 1$]~; $H^{0}$ est dual du groupe $M$ formé
+des \struck{\ill{}} nombres de Weil qui sont
+\[
+  \struck{\ill{}}\,, \ \rho_1, \overline{\rho}_1, \ \rho_2, \overline{\rho}_2, \ \ldots,
+  \ \rho_\nu, \overline{\rho}_\nu \qquad n_1
+\]
+\note{après « stable par $G_p$ », une suite de mots soulignés puis biffés, illisibles~; « qui sont »
+reste en suspens au-dessus de la liste des $\rho_i, \overline{\rho}_i$}
+
+\[
+  \Gamma^{0} = \mathrm{Ker}\, i^{*} = \text{unités de Weil}
+\]
+\[
+  \mathbb{Z} \xrightarrow{\;\varepsilon^{*}\;} \Gamma \xrightarrow{\;i^{*}\;} \mathbb{Z},
+  \qquad i^{*}\varepsilon^{*} = 2\,\mathrm{Id}
+  \qquad
+  \begin{cases}
+    \varepsilon^{*}(1) = p \\
+    |\lambda| = p^{\,i^{*}(\lambda)/2}
+  \end{cases}
+\]
+\note{« unités de Weil » est souligné d'un trait ondulé, avec « ($p$-) » entouré au-dessus~; $\Gamma$ est
+glosé « nombres de Weil »}
+
+\[
+  \struck{\mathbb{Z} \longrightarrow \mathbb{Z}/2\mathbb{Z} \longrightarrow \Gamma/\varepsilon^{*}(\mathbb{Z})}
+\]
+\[
+  \begin{array}{ll}
+    \mathbb{Z}/2\mathbb{Z} & (\text{engendré par } p^{1/2}) \\
+    \downarrow & \\
+    \Gamma/(\text{racines de } 1).\,\varepsilon^{*}(\mathbb{Z}) & \longleftrightarrow U \\
+    \uparrow & \\
+    \Gamma^{0}/\text{racines de } 1 & \longleftrightarrow U^{0}
+  \end{array}
+\]
+\note{à gauche, une note rattachée par une flèche à $\mathbb{Z}/2\mathbb{Z}$~: « $1$ dans la classe de
+$\pm p^{1/2}$ », lue sous réserve}
+
+\[
+  u = \varepsilon\, p^{\nu} \quad
+  (\varepsilon \text{ racine de } 1,\ \nu \in \mathbb{Z},\ u \text{ unité de Weil})
+  \ \Longrightarrow\ \nu = 0, \text{ donc } u \text{ racine de } 1.
+\]
+
+\section{[Catégories de Deuring]}
+
+\note{titre de l'éditeur, entre crochets~: le feuillet 15 ouvre, sans titre de sa main, une nouvelle suite de notes sur les catégories préadditives dont les objets se comportent comme les modules inversibles sur un ordre maximal d'une algèbre d'Azumaya~; elle court jusqu'au feuillet 20 et au-delà}
+
+\page{15}
+Soit $A$ un anneau [comm.] [de Dedekind], de corps des fractions $K$.]
+\note{« comm. » est ajouté au-dessus de la ligne~; « de Dedekind » est entre crochets, et un crochet
+fermant suit $K$}
+
+\marginal{(i.e.\ les $\mathrm{Hom}$ sont des $A$-modules, et la composition des
+$\mathrm{Hom}$.\ bilinéaire $\iff$ $C$ est préadditive, et on a un homom.\ d'anneaux
+$A \to \mathrm{End}(\mathrm{id}_{C})$)}
+Une catégorie $A$-préadditive $C$ est dite «~catégorie de Deuring (relative à $A$)~» si elle
+satisfait la condition
+\note{la note marginale, rattachée par un trait à « $A$-préadditive », est de lecture en partie
+douteuse}
+
+(D), $\exists X \in \mathrm{Ob}\, C$ tel que
+
+[ a) L'anneau $\mathcal{O} = \mathrm{End}(X)$ est un ordre maximal de
+$\mathrm{End}(X) \otimes_{A} K$, qui est une algèbre d'Azumaya sur $K$ ]
+
+b) Pour tout module [à droite] (projectif de rang $1$) $P$ sur $\mathcal{O}$,
+$P \otimes_{\mathcal{O}} \struck{X}$ \struck{est} existe comme objet de $C$
+\marginal{(i.e.\ loc.\ sur $\mathrm{Spec}\, A$ libre de rang $1$ sur $\mathcal{O}$)}
+
+c) Le foncteur $P \longmapsto P \otimes_{\mathcal{O}} X$ est une équivalence de catégories de la
+catégorie des $\mathcal{O}$-modules à droite proj.\ de rang $1$ avec la catégorie $C$.
+
+\marginal{NB La condition a) est \uncertain{disjointe} de b) et c) qui sont \uncertain{raisonnables}
+indépendamment}
+\note{note écrite en oblique dans la marge gauche, en face de b) et c)~; il y a en outre, plus bas
+dans la même marge, une note oblique~: « a) \uncertain{comme} \uncertain{indépendant} \ill{} b) et c) »}
+
+Si cette condition est vérifiée, \struck{\ill{}} pour \emph{un} objet, elle l'est pour tt autre. Il
+suffit en effet de vérifier que si $\mathcal{O}$ est un ordre maximal d'une algèbre d'Azumaya $E$
+sur $K$, et $C$ la catégorie des $\mathcal{O}$-modules [à droite] projectifs de rang $1$, avec sa
+structure $A$-préadditive naturelle, tout objet $P$ de la catégorie $C$ satisfait les conditions
+a) b) c). [a) signifie que le commutant $\mathcal{O}'$ de $\mathcal{O}$ [dans $P$] est
+\struck{$\simeq$} un ordre maximal d'une algèbre d'Azumaya (en fait, $E$ si on veut)] évident en fait.
+b) signifie (que si [i.e.\ \struck{\ill{}} libre \struck{loc.}\ sur $\mathrm{Spec}\, A$] $Q$ est un
+$\mathcal{O}'$-module à droite projectif de rang $1$, alors $Q \otimes_{\mathcal{O}'} P$ est un
+$\mathcal{O}$-module à droite, ce qui est clair~;
+c) Le foncteur $Q \longmapsto Q \otimes_{\mathcal{O}'} P$ est une équivalence de la catégorie des
+modules à droite projectifs sur $\mathcal{O}'$
+\note{« en fait, $E$ si on veut » est de lecture douteuse~; l'ajout « i.e.\ … libre … sur
+$\mathrm{Spec}\,A$ » est porté au-dessus de la ligne de b), en partie biffé. Le feuillet s'achève sur
+« sur $\mathcal{O}'$ », sans ponctuation~: la phrase continue page 16}
+
+\page{16}
+dans la cat.\ analogue pour $\mathcal{O}$. C'est $\pm$ trivial, on trouve un foncteur quasi-inverse
+en associant à tout $P'$ de la deuxième catégorie $Q = \mathrm{Hom}_{C}(P, P')$, considéré comme
+module à droite sur $\mathcal{O}'$ qui \struck{\ill{}} (i.e.\ \uncertain{op.}) \uncertain{opère} sur $P$.
+\note{la page continue la phrase coupée au bas du feuillet 15}
+
+La catégorie $C$ est connue \struck{\ill{}} à équivalence (\uncertain{non unique}) près quand on connaît
+\struck{\ill{}} [Toute $A$-algèbre $\mathcal{O}$ définit une catégorie de Deuring
+$\mathbb{P}(\mathcal{O})$ = cat.\ des $\mathcal{O}$-modules à droite loc.\ libres de rang $1$~!]
+la $A$-algèbre $\mathcal{O} = \mathrm{End}(X)$, pour $X \in \mathrm{Ob}\, C$. Pour que \struck{\ill{}}
+[$A$-additives] deux catégories [équivalentes] \struck{\ill{}} définies par \struck{\ill{}} des
+$A$-algèbres $\mathcal{O}, \mathcal{O}'$ \ill{} \struck{\ill{}} des catégories équivalentes, il faut et il
+suffit que $\exists$ bimodule $L$ sur $\mathcal{O}, \mathcal{O}'$ ($\mathcal{O}$ à gauche, $\mathcal{O}'$
+à dr.)\ tel que $L$ soit projectif de rang $1$ sur $\mathcal{O}$ et sur $\mathcal{O}'$. C'est une
+relation d'équivalence. \struck{Si $\mathcal{O} \otimes_A K \simeq E$ existe}
+\note{l'ajout entre crochets « Toute $A$-algèbre … rang $1$~! » est serré dans l'interligne, en partie
+en surcharge~; « (non unique) » est porté au-dessus de « équivalence », de lecture douteuse}
+
+\struck{Pour tout autre …$K$ …intégrisons,} Si …alors
+$\mathcal{O} \otimes_A K \simeq \mathcal{O}' \otimes_{A} K$ comme \struck{$A$-\ill{}} et, [$\mathcal{O}$ et
+$\mathcal{O}'$ sont] équivalentes en ce sens, alors [ils] \struck{sont} …\emph{$K$-algèbres}. La
+réciproque est vraie si \struck{\ill{}} [\emph{$\mathcal{O}$ et $\mathcal{O}'$ sont}] des ordres
+maximaux \struck{des} [\ill{}] algèbres \struck{d'Azumaya} [d'Azumaya]~: on peut le
+\marginal{\struck{\ill{} il faut …$A$ …dim.\ 1}}
+\note{toute cette partie du feuillet est surchargée d'ajouts et de ratures~; l'ordre de lecture proposé
+est incertain. La note marginale, à gauche, est biffée et entourée}
+
+$E, E'$ \struck{…effet, on …\ill{}} [ …] \struck{\ill{} $\mathcal{O}, \mathcal{O}' \subset E$,
+et on désigne \ill{}}
+
+$E = E'$, \struck{i.e.} \ill{} [on] \struck{\ill{}} \struck{l'ens.\ des $x \in E$ tels que}
+$x\mathcal{O} \subset \mathcal{O}' x$. [L'ens.\ des …]
+\[
+  \mathcal{O} . \mathcal{O}' = \Bigl\{ \sum \lambda_i \mu_i \Bigr\} \subset K, \quad
+  \lambda_i \in \mathcal{O}, \ \mu_i \in \mathcal{O}'
+\]
+et on constate qu'il \uncertain{marche}, $\mathcal{O}$ et $\mathcal{O}'$ étant maximaux.
+\note{un long trait biffe en diagonale les deux lignes commençant par « $E, E'$ » et « $E = E'$ »~; la
+formule $\mathcal{O}.\mathcal{O}'$ est lue telle qu'elle est écrite, avec « $\subset K$ »~; à gauche, dans
+un cadre, le mot « \uncertain{\ill{}} »}
+
+\struck{D'autre part, si} Je dis d'ailleurs que si $\mathcal{O}$ est un ordre maximal de
+$\mathcal{O} \otimes_A K$, et si $\mathcal{O}'$ lui est équivalent, alors $\mathcal{O}'$ est un ordre
+maximal de $\mathcal{O}' \otimes_A K$~: en effet,
+\note{la phrase se poursuit sur le feuillet suivant}
+
+\page{17}
+la maximalité est une condition locale, et $\mathcal{O}, \mathcal{O}'$ sont loc.\ isomorphes. Donc, les
+classes \struck{d'équiv.} [d'équivalence] de catégories $A$-préadditives «~strictement
+Deuringiennes~» correspondent aux classes d'isomorphie d'algèbres d'Azumaya \struck{Brauer} sur $A$
+($A$ étant de Dedekind) i.e.\ aux éléments du groupe de Brauer de $K$, $\mathrm{Br}(K)$.
+\note{« Deuringiennes » est entre guillemets sur la page~; la fin, $\mathrm{Br}(K)$, est écrite en
+surcharge sur un $A$}
+
+$C, C'$ deux catégories de Deuring sur $A$
+
+\emph{Équiv}$(C, C')$ catégorie des équivalences $A$-linéaires [si elle est $\neq \emptyset$,]
+\uncertain{C'est} \struck{\ill{}} [une] «~catégorie torseur~» sous la catégorie des équivalences
+$A$-linéaires de $C$ avec elle-même.
+\note{« Équiv » est souligné~; l'ajout « si elle est $\neq \emptyset$ » est dans l'interligne, rattaché
+par un trait}
+
+\uncertain{Si} $C$ \uncertain{contient} $X$, une \struck{\ill{}} [équivalence] $A$-linéaire
+$\varphi \colon C \to C'$ \struck{\ill{}} est connue à isom.\ unique près quand on connaît [$X' =$]
+$\varphi(X)$, et l'\struck{\ill{}} isom.
+\[
+  \varphi_{X} \colon \mathcal{O} = \mathrm{End}(X) \xrightarrow{\;\sim\;} \mathcal{O}' = \mathrm{End}(X').
+\]
+Donc la catégorie envisagée, pour $C, C'$ [\ill{}], s'identifie à la catégorie des couples $(X', u)$
+d'un objet de $C'$ et d'un isom.\ \struck{de $\mathcal{O}$} $\mathcal{O} \simeq \mathrm{End}(X')$.
+Identifiant $C$ à $\mathbb{P}(\mathcal{O})$, on trouve la \emph{catégorie des}
+$\mathcal{O}$-\emph{bimodules} $P$ tels que $P$ soit projectif de rang $1$ pour ses deux structures.
+
+La composition des \struck{torseurs} [foncteurs] correspond au \struck{\ill{}} produit tensoriel des
+bimodules, les \struck{\ill{}} \uncertain{objets} \ill{} correspondant aux éléments du foncteur
+identique correspondent aux éléments de $\mathcal{O}^{*}$, \uncertain{Gm}, dans le cas Deuring strict,
+sont les éléments de \struck{$A$} $A^{*}$). [Le \emph{centre} du foncteur identique est $A$
+évidemment les éléments de $A^{\natural}$.]
+\note{fin de feuillet très rapide~: les deux dernières phrases sont proposées sous réserve~; « $A^{*}$ »
+et « $A^{\natural}$ » transcrivent deux signes placés en exposant sur $A$, le second peu lisible}
+
+\page{18}
+On obtient ainsi, en termes de \struck{$C$, \ill{}} [$C$, une] Gr-catégorie, qui, pour un objet $X$
+fixé de $C$ d'anneau $\mathcal{O}$, (i.e.\ une réalisation de $C$ comme $\mathbb{P}(\mathcal{O})$)
+s'écrit comme la \struck{groupoïde de Brandt} [catégorie des] bimodules «~biinversibles~». Il lui
+correspond les invariants
+\[
+  \mathrm{Brd}(\mathcal{O}) = \pi_{1}\bigl(\underline{\mathrm{End}}(C)\bigr)
+  \quad \text{(groupe de Brandt)}
+\]
+\[
+  \mathcal{O}^{\natural *} = \pi_{0}\bigl(\underline{\mathrm{End}}(C)\bigr) = \mathrm{End}(\mathrm{id}_{C})
+\]
+\note{les deux formules sont transcrites telles qu'elles sont écrites, $\pi_1$ pour le groupe des
+classes et $\pi_0$ pour les automorphismes, à l'inverse de la convention usuelle ($\pi_0$ pour les
+classes d'objets, $\pi_1$ pour les automorphismes de l'unité)~; « groupe de Brandt » est écrit sous la
+première, rattaché par un trait. Le signe en exposant sur $\mathcal{O}$, ici et au feuillet 17, est un
+zigzag semblable à un bécarre, transcrit $\natural$~; avec l'égalité à $\mathrm{End}(\mathrm{id}_C)$ il
+désigne vraisemblablement le centre}
+
+et \struck{une} \struck{\ill{}} [l'opération $\sigma(\lambda)$ triviale de $\mathrm{Brd}(\mathcal{O})$
+sur $\mathcal{O}^{\natural *}$] \struck{\ill{} $\mathrm{B}($Brd} [l'invariant que $\lambda = \mathrm{cl}(L)
+\in \mathrm{Brd}(\mathcal{O})$] \struck{de \ill{}} ($L$ bimodule biinversible) \struck{\ill{}}
+[\uncertain{caractérisé}] par la condition
+\[
+  \sigma(\lambda)\, x = x \lambda \qquad \text{pour tt } x \in L, \ \lambda \in \mathcal{O}^{\natural}
+\]
+[i.e., \uncertain{notations}, $\sigma(\lambda) = x \lambda x^{-1} = \lambda$ car $\lambda$ central …]
+\note{les ajouts de cette phrase sont en surcharge sur des passages biffés~; l'ordre de lecture est
+proposé sous réserve. Dans la formule, la même lettre $\lambda$ désigne l'élément central et, plus
+haut, la classe de $L$~; c'est ainsi sur la page}
+
+et enfin un \uncertain{élément} canonique
+\[
+  \xi \in H^{3}\bigl(\mathrm{Brd}(\mathcal{O}), \mathcal{O}^{\natural *}\bigr)
+\]
+
+Les catégories $C$ de Deuring équivalentes entre elles [\uncertain{$\mathcal{D}$}] forment un
+\struck{2-catégorie} 2-groupoïde, dont les \struck{\ill{}} Gr-catégories fondamentales sont les
+groupoïdes de Brandt des $\mathcal{O}$ envisagés. La deux-catégorie \ill{} des $\mathcal{O}$ envisagés,
+i.e.\ des $\mathcal{O}$ envisagés, est aussi 2-équivalente à la catégorie \struck{\ill{}} [Brd] dont les
+\emph{objets} sont les $\mathcal{O}$ \struck{\ill{}} d'un choix des \struck{\ill{}} anneaux $\mathcal{O}$,
+\struck{les \ill{}} la catégorie des $\mathrm{Hom}$ de $\mathcal{O}$ dans $\mathcal{O}'$ étant la
+catégorie des bitorseurs biinversibles sous $\mathcal{O}', \mathcal{O}$, la composition des
+$\mathrm{Hom}$ étant le $\otimes$ …
+\note{la fin du feuillet est rapide et surchargée de ratures~; l'ordre des mots et la répétition « des
+$\mathcal{O}$ envisagés, i.e.\ des $\mathcal{O}$ envisagés » sont proposés sous réserve. « Objets » est
+souligné. La page s'arrête sur des points de suspension, de sa main}
+
+\page{19}
+En effet, on a un \struck{\ill{}} 2-foncteur
+\[
+  \begin{array}{ccc}
+    \underline{\underline{\mathrm{Brd}}} & \longrightarrow & \underline{\underline{\mathcal{D}}} \\
+    \mathcal{O} & \longmapsto & C_{\mathcal{O}}
+  \end{array}
+\]
+qui est une 2-équivalence. Malheureusement, on n'a pas de 2-foncteur naturel en sens inverse.
+\note{$\mathrm{Brd}$ et $\mathcal{D}$ sont doublement soulignés sur la page}
+
+\struck{les $\mathcal{O}$ \ill{} des \ill{} \ill{} d'Azumaya sur $K$, $A$ Dedekind.}
+[\ill{} \uncertain{alg.\ d'Azumaya}]
+\note{ajout biffé, entre parenthèses, à droite, sous la ligne précédente}
+
+On suppose par la suite que \struck{$\mathcal{O}^{\natural} = A$} [i.e.\ $A \xrightarrow{\sim}
+\mathrm{End}(\mathrm{id}_C)$].
+
+En termes de $C$, on va définir une \emph{gerbe} sur $A$ de groupe $\mathbb{G}_m$. Pour ceci, pour tt
+$A$-schéma $T$ sur $A$, on va définir la catégorie des \struck{\ill{}} \emph{linéaires} [banalisations]
+de $C$ sur $T$, notée $\mathcal{G} \colon \struck{\underline{\mathrm{Ban}}(C)(T)}$
+$\struck{\underline{\mathrm{Rep}}_T(C)}$, comme la catégorie des foncteurs $A$-\struck{\ill{}}
+[linéaires]
+\[
+  \varphi \colon C \longrightarrow \mathrm{Mod}(\mathcal{O}_{T})
+\]
+qui ont la propriété suivante~: pour tt $X \in C$ (ou un $X \in \mathrm{Ob}\, C$ en pareil)
+\struck{il existe} [posant $\mathcal{O} = \mathrm{End}_C(X)$,] $\varphi(X)$ considéré comme
+$\mathcal{O} \otimes_A \mathcal{O}_T$-module est \struck{localement libre de rang $1$}
+[une banalisation de $\mathcal{O}$].
+\note{« Mod » porte en indice un symbole biffé devant $\mathcal{O}_T$~; « linéaires » est souligné puis
+remplacé par « banalisations »~; les noms biffés $\underline{\mathrm{Ban}}(C)(T)$ et
+$\underline{\mathrm{Rep}}_T(C)$ sont superposés après $\mathcal{G}$}
+
+On constate alors~: \struck{\ill{}} [\ill{}] les foncteurs
+\struck{$T \mapsto \underline{\mathrm{Rep}}_T(C)$ est un champ pour la top.\ fpqc.}
+\[
+  \varphi \longmapsto \varphi(X)
+\]
+est une équivalence de la catégorie fibrée $T \mapsto \underline{\mathrm{Rep}}_T(C)(T)$ et de la
+catégorie fibrée \struck{$\underline{\mathrm{End}}_C(X)$} des banalisations de
+$\mathcal{O} = \mathrm{End}(X)$~; c'est donc une \emph{gerbe} de liens $\mathbb{G}_m$. D'ailleurs
+l'équivalence de cette gerbe avec la gerbe des banalisations de $\mathcal{O}$ \uncertain{ne} dépend pas
+du choix de $X$.
+\note{une accolade à gauche, avec le mot « \uncertain{fibrées} », réunit les deux lignes « $T \mapsto
+\underline{\mathrm{Rep}}_T(C)$ … » et « $\varphi \mapsto \varphi(X)$ ». La dernière phrase est lue sous
+réserve~: on attendrait plutôt que l'équivalence \emph{dépend} du choix de $X$, ou que la gerbe n'en
+dépend pas}
+
+\page{20}
+\struck{\ill{}} On a de plus un foncteur \emph{pleinement fidèle}
+\[
+  C \longrightarrow \underline{\mathrm{Rep}}(\mathcal{G})
+\]
+\marginal{N.B. on a $\underline{C} \times \mathcal{G} \to \underline{\underline{\mathrm{Mod}}}$, où
+$\underline{C}$ est la catégorie fibrée constante définie par $C$}
+dont l'image est formée des représentations de $\mathcal{G}$ qui sont «~de degré $1$~» et
+\emph{localement} \struck{\ill{}} de degré donné $n(x)$ (où $n(x)$ est la fonction rang de
+$\mathcal{O}$ sur $\mathrm{Spec}\, A$ …).
+\note{la note marginale, en haut à gauche, est reliée par un trait à $\underline{C}$~; « de degré $1$ »
+est entre guillemets sur la page~; « Rep » est souligné}
+
+Donc on trouve
+
+Une catégorie de Deuring--Azumaya sur $A$ est ainsi la même chose qu'une gerbe sur $S = \mathrm{Spec}\, A$
+de lien $\mathbb{G}_m$, \emph{munie} d'une fonction $x \mapsto n(x)$ loc.\ constante sur
+$\mathrm{Spec}\, A$, avec $K$ …$n(x)$ tel que la gerbe soit \struck{\ill{}} réalisable globalement
+\struck{\ill{}} par une algèbre d'Azumaya de rang $n(x)$ \struck{\ill{}}
+\struck{(…mais …algèbres \ill{})} [\ill{}] en chaque pt …)
+\note{« munie » est souligné~; la fin de la phrase est en partie biffée et de lecture douteuse}
+
+\marginal{On peut donc définir $\det X$ pour $X \in \mathrm{Ob}\, C$, comme un objet de
+$\underline{\mathrm{Rep}}(\mathcal{G})$. Si $X' = P \otimes_{\mathcal{O}} X$, on aura des isomorphismes
+$\det(X') \simeq \det(X)\, \mathrm{N}_{\mathrm{rdd}}(P)$ où $\mathrm{N}_{\mathrm{rdd}}$ est la norme
+\uncertain{réduite}, qu'on peut considérer comme foncteur $\mathrm{Mod.\,inv.}(\mathcal{O}) \to
+\mathrm{Mod.\,inv.}(A)$}
+\note{longue note marginale écrite en oblique dans la marge gauche, en face des deux paragraphes, et
+isolée par un trait courbe~; « rdd » (réduite) est l'indice qu'il écrit à $\mathrm{N}$~; le
+$\otimes_{\mathcal{O}}$ porte une étoile en exposant. Les derniers mots, « Mod.\ inv.\ $(\mathcal{O})$ »
+et « Mod.\ inv.\ $(A)$ », sont lus sous réserve}
+
+\struck{Supposons} Supposons qu'on ait une catégorie de Deuring \struck{Hasse} [\uncertain{\ill{}}]
+\struck{sur $A$} [sur $A$ anneau de Dedekind, et $\mathcal{O}_K$, \uncertain{azumaya} sur $K$] sur $A$
+\struck{normal, et que \ill{} Dedekind, \ill{}} [normal, avec …] (Soit
+$U \subset \mathrm{Spec}\, S$ le plus grand ouvert sur lequel (ce qui est \emph{kif-kif}) soient
+\struck{\ill{}} [\ill{}] $\mathcal{O} = \underline{\mathrm{End}}(X)$ \uncertain{les termes} [\ill{}] de
+$C$…d'Azumaya. [Donc] $C$ définit une gerbe $\mathcal{G}_U$ de lien $\mathbb{G}_m$ sur $U$, par la
+classe dans $\mathrm{Br}(U)$ est …fini par $n$, et $C \otimes_{A} \frac{\Gamma(U)}{A'}$ se
+récupère par cette gerbe $\mathcal{G}_U$, à équivalence canonique (définie à isom.\ unique) près.
+\struck{Or} Donc la catégorie des \uncertain{repr.\ des cette}
+\note{le paragraphe est une suite d'ajouts et de ratures dans l'interligne~; l'ordre de lecture
+proposé est incertain, et la mention « $\mathrm{Spec}\, S$ » est telle qu'on la lit. « Kif-kif » est de
+sa main. Le feuillet s'arrête sur « des repr.\ des … », la phrase continue au lot suivant}
+
+\end{document}

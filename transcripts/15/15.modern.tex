@@ -1,0 +1,2696 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 15
+% (pages 1-227, the whole folder).
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried moves into a
+% footnote. It is held to being mathematically correct as it stands; where the
+% manuscript is loose or mistaken, the true statement is what appears here and
+% the footnote says what the page has. In any dispute of substance the
+% transcription governs: whoever cites Grothendieck must cite batch-01.fr.tex
+% (pp. 1-20) ... batch-12.fr.tex (pp. 221-227).
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-09-23 — first pass, unchecked against the pages by a human.
+% The folder was read whole, all twelve batches together; this is one document
+% for the shelfmark. It was made on Opus 5.5 and has not been measured against
+% the reference reading of folder 115 (made on Opus 5).
+%
+% Scope. Of the 227 leaves, about 125 carry his hand, three carry the folder's
+% own typescripts (pp. 58, 80-81), and eight are covers whose words become
+% headings here (pp. 1, 139, 156, 171, 181, 188, 189; p. 179 repeats p. 171 in
+% pencil). The rest are blanks, or typescripts used as paper (courses on
+% analytic functions, Bourbaki drafts, English translations, an etale
+% typescript, errata, an administrative sheet dated 1.4.68, a computer
+% listing) and are not mentioned. Page 167 (« Unités ») is in another hand; page
+% 154 is a cancelled sheet of an unrelated text. The 1.4.68 date is on a verso
+% and dates nothing here; the \dating is Montpellier's, copied from the
+% batches.
+%
+% Spine. One question, asked of the simplest motives there are: what is the
+% motivic Galois group, with its gerbe and its fibre functors, when it is
+% commutative — over a finite field first, then over a number field (CM
+% motives, class field theory) — and what is left of a motive's arithmetic in
+% its fibre functors at each place?
+%   pp. 1-13    motives over F_p: G of multiplicative type, characters = Weil
+%               numbers; the gerbe class xi in H^2(Q, H), H = H^0 x mu_2.
+%   pp. 15-55   Deuring categories: maximal orders, Brandt groupoid, the
+%               G_m- and mu_2-gerbes of banalisations; supersingular curves;
+%               the torsor under H^1(Z^ x R, mu_2) and the Deuring element.
+%   pp. 58-77   the typescript « Catégories de Deuring » §1 and its handwritten
+%               continuation: jolies categories, the Brandt Picard category.
+%   pp. 80-81   typescript « Localisation pour les variétés abéliennes ».
+%   pp. 83-124  commutative motivic gerbes: Riemann algebras, Weil q-numbers,
+%               the « Conjecture fondamentale », the tori of CM fields, real
+%               fibre functors and polarisations, the slope cocharacter.
+%   pp. 127-132 the maximal totally real field KK and maximal CM field LL.
+%   pp. 134-138 « Groupes de Galois motiviques commutatifs »: gerbes of the
+%               Tate, Artin and level-0 parts.
+%   pp. 139-154 « Motifs essentiellement abéliens et théorie du corps de
+%               classes »: §1 the tori T_K, V_K, S°_K (Serre's torus), §2 CM
+%               structures and reflex norms Psi_Sigma; H^1(Q,T)'.
+%   pp. 156-164 class field theory as abelian motives; Hodge realisations.
+%   p. 167      « Unités » (not his hand).  p. 169 the plan items 0-9.
+%   pp. 171-178 absolute cohomology of Z(n) over F_q and Spec Z; §5 on Brauer.
+%   pp. 181-186 distribution of Frobenius over R-points.
+%   pp. 188-226 motivic fibre functors: canonical points at l, p, infinity, Z;
+%               motivic points as a stack; the discrete motivic fundamental
+%               group; comparing places. Ends mid-sentence.
+%
+% NOTATION fixed for the folder (the batches diverge; one convention here):
+%   - blackboard bold throughout (Q, Z, F_p, G_m); the batches 5-6 write bold.
+%   - o (fraktur) for a maximal order = End(X) (batch 1: script O; batch 2:
+%     sigma; batches 3-4: o); script O for the category/set of orders
+%     « apparentés » (batch 4). Brd for the Brandt group (his Brd/Brdt; the
+%     reading « Bird » is rejected), Eqv for autoequivalences (his Éq, Eqv).
+%   - KK, LL (\mathbb{K}, \mathbb{L}) the maximal totally real and maximal CM
+%     subfields of Q-bar (pp. 127-132); his Q' and Q'(i) of pp. 93-107 are
+%     these two fields and are written so.
+%   - « weilien » (lower case) = contained in LL, i.e. totally real or CM.
+%   - xi: the gerbe class of pp. 6-10 only; the Deuring element of pp. 49-55
+%     is written delta_p (his xi_p); the Brauer class of B_{p,infty} is beta;
+%     the canonical points of pp. 190-226 keep xi with indices (xi_ell,
+%     xi_{x,p}, xi_{x,Z}...). On pp. 182-186 the class he writes xi(s') is
+%     c(s'). U, used by him for five objects, is spelled out each time.
+%   - Weights: Q(1) of weight -2; eps : G -> G_m the Tate character (eps*(1)
+%     = p over F_p), i or j : G_m -> G the weight cocharacter as the page has
+%     it (eps o i = square). Folder 12 writes y for the latter.
+%
+% Substantive departures, each footnoted where it occurs:
+%   p. 4    Gamma = Weil p-numbers without integrality and nu in Z (the page's
+%           conditions describe effective motives, a monoid); i|mu_2 lands in
+%           H, not H^0, and is a section of H -> mu_2.
+%   p. 10   « on connaît xi » needs Sha^2(Q, H^0) = 0 (supplied as hypothesis).
+%   p. 12   the unfinished « invariants des composantes simples » = Tate's
+%           formula (supplied).
+%   p. 16   OO' lies in E, not K.  p. 17 Deuring categories <-> isomorphism
+%           classes of central simple algebras (Brauer class AND degree), not
+%           Br(K).  p. 19 the banalisation gerbe lives on the open where o is
+%           Azumaya (p. 20 says so).  p. 18 pi_0/pi_1 swapped back.
+%   p. 29   pi_0 = 1 in the local case only if E is unramified there (p. 69).
+%   p. 33   « degré n, rang 1 » read weight 1, rank n (as p. 20).
+%   p. 35   the sequence onto Ram(C/A) is surjective when Pic(A) = 0.
+%   p. 39   Brd(C_p, T_p) = Z_p*/Z_p*^2 x Z/2 is the whole group (split
+%           extension), = H^1(Q_p, mu_2), not H^1(Z_p, mu_2); the real gerbe
+%           is compared with the model gerbe g_infty, not the trivial one.
+%   p. 45   F_p[T]/Phi_{p^n-1} is a product of fields, not F_{p^n}.
+%   p. 55   Frobenius generates Z[sqrt(-p)], the full ring of integers of
+%           Q(sqrt(-p)) only for p = 1 mod 4; F^2 + p = 0 needs p >= 5.
+%   p. 65   the stabiliser is Out(o) without the page's hypothesis.
+%   p. 69   j = 0 <-> Z/6, j = 1728 <-> Z/4 (page inverted); pi_0(C,X) =
+%           classes of curves, the quotient by Frobenius is pi_0(O).
+%   p. 83   phi(u)phi(u)' = eps(u)^w for E pure of weight w.
+%   p. 85   the L_i may also be totally real with trivial involution.
+%   p. 89   c) needs stability under duals; a) <=> b) (the converse is ours).
+%   p. 93   real Weil numbers are +-(q^{1/2})^i.
+%   p. 95   the divisor is 2h(P - P'), as the page's own proof gives.
+%   p. 97   lambda in L (page: K).  p. 99 struck 4): in, not in/2.
+%   p. 101  M(q) = Z x M°(q) for every q.
+%   p. 109  (Z^P)' contains M_0/torsion with finite index, not equality.
+%   p. 116  Prop. 1 (ii) « eps not a square », Prop. 2 (ii) « eps a
+%           normalised square »; the page's « n'est pas » in Prop. 2 is
+%           inverted. p. 118 G° = U° x G_m with chi = pr_2, eps = chi^2.
+%   p. 120  lambda -> v_P(lambda)/n is a fractional cocharacter (slope).
+%   p. 132  lambda lambda-bar = Q^i (page: Q).
+%   p. 141  [K_0 : Q] = r (page: [K_0 : K]).
+%   p. 148  reflex degree <= 2^d (page: binom(2d, d), true but weaker).
+%   p. 158  extension of the NARROW class group by A*(Z^)/E°.
+%   p. 172  H^i(Spec Z, Q(n)) = H^i(U, Q(n)) for n =/= 1 (page: n =/= 0).
+%   p. 204  the level-rho part as V_Q cap F^rho is Hodge's 1950 form of the
+%           generalised conjecture, false in general (Grothendieck 1969); the
+%           true form is stated.
+%
+% What only a folder-wide reading can say (ours, and said so in the body):
+%   - the mu_2 component of xi (pp. 4-10), the quaternion algebra B_{p,infty}
+%     of Deuring (pp. 22-55) and Prop. 2 of p. 116 are one fact: over F_p the
+%     Tate character is a normalised square, so there is no fibre functor
+%     over R.
+%   - p. 130 proves lambda in LL where p. 93's Cor. only gets a power.
+%   - p. 29's pi_0 = 1 is contradicted by p. 69's Brd = Z/eZ (ramified case).
+%   - the i of p. 120 is the slope cocharacter: the global form of p. 12's
+%     p-adic valuation and of folder 10's slope torus.
+%   - S°_K (p. 143) and G° = A*/N (p. 158) are two presentations of Serre's
+%     torus; p. 190's obstruction in H^2(Q, G) is the class xi of pp. 6-10.
+%   - p. 206's « faux » is examined on pp. 218-220.
+%
+% Announced and never established: the continuation of p. 39 (« On trouve
+% donc »); the value of the Deuring element (pp. 53-55) and the sign at
+% infinity (p. 51); p. 35's « À vérifier !! »; the question of p. 69; the
+% typescripts' sequels (pp. 58-60 § 1 only; pp. 80-81 never reach abelian
+% varieties); p. 85's NB; the « Conjecture fondamentale » (p. 99) and the
+% « Conjecture affaiblie » (p. 105); C) 4) => 3) of p. 107; the examples of
+% pp. 97-113 (« demander à Serre ? »); the questions of pp. 120-124 and 151;
+% the programme of the cover p. 156; the question of p. 162; items 0-9 of
+% p. 169; p. 173's « est-ce vrai ?? »; Th. 5.6 (p. 175); the distribution of
+% Frobenius (pp. 182-186); the guesses of pp. 190, 194, 206, 220; Serre's
+% example (p. 214); the moduli problem (pp. 216, 226).
+
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{15}
+\pages{1}{227}
+\dating{1965-[vers 1977]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Théorie arithmétique. Théorie de Galois des motifs (1965) : notes manuscites (s.d.), tapuscrit (s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Ces feuillets cherchent la symétrie cachée des nombres qui apparaissent
+quand on compte les solutions d'équations sur un corps fini, et de ceux qui
+apparaissent quand on les résout sur les nombres complexes.
+
+Voici le problème. Sur un corps fini à $q$ éléments, une variété algébrique
+a un Frobenius, et les valeurs propres de ce Frobenius sont des nombres
+algébriques d'un type très particulier : tous leurs conjugués complexes ont
+la même valeur absolue, une puissance de $\sqrt{q}$. On les appelle
+aujourd'hui les \emph{nombres de Weil}. Si les motifs existent --- ces
+objets dont chaque cohomologie serait une photographie, que le dossier 12 a
+mis en place ---, ils ont un groupe de symétries, le groupe de Galois
+motivique. Sur un corps fini, ce groupe devrait être commutatif et se lire
+entièrement sur les nombres de Weil : ses caractères \emph{sont} les nombres
+de Weil. La question est alors de savoir ce qu'un tel groupe ne dit pas :
+comment les motifs se recollent d'un nombre premier à l'autre, et ce qui les
+empêche d'avoir un « modèle » sur les nombres réels.
+
+L'idée du dossier est de ranger cette information dans un seul objet, une
+\emph{gerbe} --- disons une famille de réalisations possibles, deux à deux
+isomorphes localement mais pas globalement, comme les bases d'un espace
+vectoriel dont on n'aurait pas choisi l'orientation. Sa classe est un
+élément d'un groupe de cohomologie galoisienne ; Grothendieck calcule ses
+composantes place par place. L'obstruction qui reste, à la place réelle, est
+une vieille connaissance : l'algèbre de quaternions que Deuring a trouvée en
+1941 comme anneau d'endomorphismes des courbes elliptiques « supersingulières ».
+Toute une partie du dossier construit alors, pour ces courbes, une théorie
+des catégories dont les objets se comportent comme les idéaux d'un ordre
+de quaternions --- groupoïde de Brandt, catégorie de Picard --- pour tenter
+de rendre canonique ce qui ne l'est qu'au signe près.
+
+Le dossier passe ensuite aux corps de nombres. Les nombres de Weil vivent
+tous dans un corps remarquable : la plus grande extension de $\mathbb{Q}$ où
+la conjugaison complexe commute à tout, qu'il construit et caractérise. Les
+motifs dont le groupe de Galois motivique est commutatif (ceux des variétés
+abéliennes à multiplication complexe) ont pour groupe un tore que Serre
+avait décrit en 1968 ; le dossier le retrouve, et y voit une relecture de la
+théorie du corps de classes comme une théorie de motifs. Viennent enfin un
+calcul de cohomologie absolue des motifs de Tate sur $\operatorname{Spec}
+\mathbb{Z}$, où il trouve un $\mathbb{Q}$ en degré $3$ là où la dualité
+d'Artin--Verdier met $\mathbb{Q}/\mathbb{Z}$, et une réflexion sur les
+« points motiviques » d'un schéma : les réalisations en chaque place, et
+les groupes fondamentaux discrets qu'elles définissent.
+
+On voit ici comment une conjecture se forme. Les feuillets écrivent d'abord
+les « conditions nécessaires » que doit satisfaire une valeur propre de
+Frobenius, les vérifient, puis posent en marge : « Conjecture fondamentale :
+les conditions nécessaires précédentes sont suffisantes », avec, à côté,
+« Th.\ d'existence de motifs ». Quelques pages plus loin, la conjecture est
+affaiblie, et une note ajoute qu'elle devrait résulter de la multiplication
+complexe. C'est la voie par laquelle Honda, en 1968, l'a démontrée pour les
+variétés abéliennes, c'est-à-dire en poids 1. Le dossier est plein de ces questions laissées ouvertes
+avec leur piste --- « demander à Serre ? », « analyser l'exemple de Serre »,
+« question semble sérieuse » --- et il s'arrête au milieu d'une phrase.
+
+Les noms sous lesquels chercher la suite : théorème de Honda--Tate, motifs
+sur les corps finis et tore des nombres de Weil (Milne), groupoïde
+pseudo-motivique de Langlands--Rapoport, correspondance de Deuring, groupe
+de Serre et normes réflexes, groupe de Taniyama, cohomologie de
+Weil-étale, groupes de Sato--Tate, foncteur mystérieux et comparaison
+cristalline.
+
+\keywords{Weil q-number, Honda-Tate theorem, motives over finite fields, Weil-number torus, pseudo-motivic groupoid, class of a gerbe, Tate-Nakayama duality, Tate's theorem on endomorphisms of abelian varieties, quaternion algebra ramified at p and infinity, Deuring correspondence, maximal order, Morita equivalence, invertible bimodule, Brandt groupoid, two-sided ideal class group, Picard group of a noncommutative ring, Picard category, Gr-category, k-invariant of a 2-group, mu2-gerbe, twisted sheaf, reduced norm, Hasse-Schilling norm theorem, Dieudonne module, supersingular j-invariant, idempotent completion, stack of an A-linear category, CM field, maximal CM field, maximal totally real field, compact torus, real fibre functor, slope cocharacter, Serre group, Chevalley's theorem on units, CM type, reflex field, reflex norm, locally algebraic abelian representations, Hasse unit index, Weil-etale cohomology, Artin-Verdier duality, K-theory of finite fields, Borel's theorem on K-groups of Z, Brauer group of a regular scheme, Sato-Tate group, equidistribution of Frobenius, mysterious functor, crystalline comparison theorem, integral Betti lattice, finiteness of class numbers, conjugate varieties, generalised Hodge conjecture}
+\end{resume}
+
+\pagerange{1}{227}
+\section*{Le fil du dossier, et les conventions}
+
+\subsection*{Les stations}
+
+Le dossier ne rédige pas une théorie ; il interroge, sous plusieurs angles, le
+cas où le groupe de Galois motivique est commutatif --- sur un corps fini
+d'abord, puis sur un corps de nombres --- et ce qu'il reste de l'arithmétique
+d'un motif dans ses foncteurs fibres en chaque place.
+
+\begin{enumerate}
+  \item \emph{Pages 1 à 13}, « Groupe de Galois motivique commutatif. Cas
+  d'un corps de base fini » : le groupe $G$ des motifs sur $\mathbb{F}_{p}$,
+  de type multiplicatif, de groupe des caractères les nombres de Weil ; la
+  classe $\xi \in H^{2}(\mathbb{Q}, H)$ qui classe la catégorie avec ses
+  foncteurs fibres, calculée place par place.
+  \item \emph{Pages 15 à 55}, les catégories de Deuring : définition sur un
+  anneau de Dedekind, groupoïde et 2-groupoïde de Brandt, gerbe des
+  banalisations et déterminant, puis le cas des courbes elliptiques
+  supersingulières, la gerbe de lien $\mu_{2}$ sur $\mathbb{Z}[1/p]$, le
+  torseur adélique et l'« élément de Deuring » ; enfin la question de sa
+  détermination par les $F$-cristaux.
+  \item \emph{Pages 58 à 77}, le tapuscrit « Catégories de Deuring », son
+  paragraphe 1, et la suite à la main : catégories « jolies », catégorie de
+  Picard de Brandt.
+  \item \emph{Pages 80 et 81}, le tapuscrit « Localisation pour les variétés
+  abéliennes ».
+  \item \emph{Pages 83 à 124}, les gerbes motiviques à lien commutatif :
+  algèbres de Riemann et tores compacts, caractérisations des $q$-nombres de
+  Weil, unités des corps CM, la « Conjecture fondamentale » et sa forme
+  affaiblie, les tores associés, foncteurs fibres réels et polarisations.
+  \item \emph{Pages 127 à 132}, le corps totalement réel maximal
+  $\mathbb{K}$ et le corps CM maximal $\mathbb{L}$.
+  \item \emph{Pages 134 à 138}, « Groupes de Galois motiviques commutatifs » :
+  les gerbes des parties de Tate, d'Artin et de niveau zéro.
+  \item \emph{Pages 139 à 154}, « Motifs essentiellement abéliens et théorie
+  du corps de classes » : les tores $T_{K}$, $V_{K}$, $S^{\circ}_{K}$, les
+  structures CM et les homomorphismes $\Psi_{\Sigma}$, un calcul de
+  $H^{1}(\mathbb{Q}, T)$.
+  \item \emph{Pages 156 à 164}, « Corps de classes commutatif = Motifs à
+  groupe fondamental motivique connexe commutatif » : la théorie du corps de
+  classes lue en termes de motifs, et les réalisations de Hodge aux diverses
+  places.
+  \item \emph{Page 167}, « Unités », d'une autre main ; \emph{page 169}, un
+  plan en dix points, « Foncteurs fibres motiviques, et groupes fondamentaux
+  motiviques ».
+  \item \emph{Pages 171 à 178}, « Calculs de cohomologie absolue des Motifs de
+  Tate $\mathbb{Z}(n)$ », et deux feuillets d'un paragraphe 5 sur le groupe
+  de Brauer.
+  \item \emph{Pages 181 à 186}, « Généralités fonctorielles-catégoriques sur
+  la distribution des Frobenius dans les groupes de Galois motiviques ».
+  \item \emph{Pages 188 à 226}, « Théorie de Galois des Motifs. Généralités »,
+  « Foncteurs fibres motiviques et groupe fondamental motivique » : les points
+  canoniques en $\ell$, en $p$, à l'infini et sur $\mathbb{Z}$, les points
+  motiviques comme champ, le groupe fondamental motivique discret, la
+  comparaison des places archimédiennes. Le dossier s'arrête au milieu d'une
+  phrase.
+\end{enumerate}
+
+\subsection*{Les moutures, gardées distinctes}
+
+La notion de \emph{catégorie de Deuring} est définie deux fois, et la
+différence compte. Page 15, elle est stricte : une catégorie équivalente à
+celle des modules inversibles sur un \emph{ordre maximal} d'une algèbre
+centrale simple. Page 25, et dans les tapuscrits des pages 58 et 80, elle
+est générale : une catégorie équivalente à celle des modules localement
+libres de rang $1$ sur une algèbre $\mathfrak{o}$ quelconque. On dit ici
+« catégorie de Deuring » au sens de la page 25, et « de Deuring--Brandt »
+quand $\mathfrak{o}$ est un ordre maximal. La \emph{positivité} du groupe de
+Galois motivique vient deux fois : par l'algèbre de Riemann d'un motif
+polarisé (pages 83 à 91), par les polarisations des foncteurs fibres réels
+(pages 116 à 124). Le groupe des motifs sur un corps fini est décrit deux
+fois : comme groupe de type multiplicatif de caractères donnés (pages 2 à 13),
+comme tore dual d'un groupe de $q$-nombres de Weil variant avec $q$ (pages 99
+à 105).
+
+\subsection*{Ce que seule une lecture d'ensemble peut dire}
+
+Six liens, qu'aucun feuillet n'énonce, et qui sont de nous.
+
+Le facteur $\mu_{2}$ du noyau $H$ de la page 4, l'absence de foncteur fibre
+réel constatée page 10, l'algèbre de quaternions de Deuring des pages 22 à 55,
+et la Proposition 2 de la page 116 sont un seul fait. Sur $\mathbb{F}_{p}$, le
+caractère de Tate est le carré du caractère « $\sqrt{p}$ », qui est de poids
+impair ; il y a donc un $\mu_{2}$ dans le noyau, aucun foncteur fibre à
+valeurs dans $\mathbb{R}$, et la composante de la classe $\xi$ selon ce
+$\mu_{2}$ est la classe de l'algèbre de quaternions ramifiée en $p$ et en
+l'infini.
+
+La Proposition de la page 130 démontre $\lambda \in \mathbb{L}$ là où le
+Corollaire de la page 93 n'obtient qu'une puissance de $\lambda$ ; et les
+corps $\mathbb{Q}'$, $\mathbb{Q}'(i)$ des pages 93 à 107 sont les corps
+$\mathbb{K}$, $\mathbb{L}$ que la page 127 construit.
+
+Le « $\pi_{0} = 1$ » que la page 29 donne dans le cas local est contredit, dès
+que l'algèbre est ramifiée, par le $\operatorname{Brd}(C) = \mathbb{Z}/e\mathbb{Z}$
+de la page 69.
+
+La forme $\lambda \mapsto \frac{1}{n} v_{\mathfrak{P}}(\lambda)$ de la page 120
+est le cocaractère des pentes : c'est, sur le groupe global, ce que la
+valuation $p$-adique de la page 12 fait sur le groupe local, et c'est le tore
+des pentes du dossier 10 (pages 66 à 83).
+
+Le tore $S^{\circ}_{K}$ de la page 143 et le schéma en groupes
+$G^{\circ}$ de la page 158 sont deux présentations d'un même objet, le tore
+de Serre ; et l'obstruction dans $H^{2}(\mathbb{Q}, G)$ que la page 190
+signale pour $\operatorname{Spec} \mathbb{F}_{q}$ est la classe $\xi$ des
+pages 6 à 10.
+
+Enfin la marge « faux » de la page 206 est examinée, et en partie
+confirmée, aux pages 218 et 220.
+
+\subsection*{Les conventions, valables pour tout le dossier}
+
+\begin{itemize}
+  \item On écrit $\mathbb{Q}$, $\mathbb{Z}$, $\mathbb{F}_{q}$,
+  $\mathbb{G}_{m}$ partout, là où les pages 83 à 124 écrivent des capitales
+  barrées, transcrites en gras.
+  \item $\mathfrak{o}$ désigne l'anneau d'endomorphismes d'un objet d'une
+  catégorie de Deuring, le plus souvent un ordre maximal ; la page 15 l'écrit
+  $\mathcal{O}$, les pages 21 à 39 $\sigma$, les pages 41 à 77 $o$. On garde
+  $\mathcal{O}$ pour l'ensemble, puis la catégorie, des ordres
+  « apparentés » (pages 53 et 65 à 77).
+  \item $\operatorname{Brd}$ est le groupe de Brandt, qu'il écrit $\mathrm{Brd}$
+  ou $\mathrm{Brdt}$ (la lecture « Bird » d'un sigle est écartée) ;
+  $\operatorname{Eqv}(C)$ la catégorie des autoéquivalences, qu'il écrit
+  $\text{Éq}$ ou $\mathrm{Eqv}$.
+  \item $\mathbb{K}$ est le sous-corps totalement réel maximal de
+  $\overline{\mathbb{Q}}$, $\mathbb{L} = \mathbb{K}(\sqrt{-1})$ le sous-corps
+  CM maximal. Un corps est \emph{weilien} s'il est contenu dans $\mathbb{L}$,
+  c'est-à-dire totalement réel ou CM ; la page 140 écrit « Weilien », les
+  suivantes « weilien ».
+  \item La lettre $\xi$ sert chez lui à quatre choses. On la garde pour la
+  classe de gerbe des pages 6 à 10 et, munie d'indices, pour les points
+  canoniques des pages 190 à 226 ($\xi_{\ell}$, $\xi_{x,p}$,
+  $\xi_{x,\mathbb{Z}}$\,…). La classe de Brauer de l'algèbre de quaternions
+  $B_{p,\infty}$ est notée $\beta$ ; l'« élément de Deuring » des pages 49 à
+  55, qu'il note $\xi_{p}$, est noté $\delta_{p}$ ; la classe qu'il note
+  $\xi(s')$ aux pages 182 à 186 est notée $c(s')$.
+  \item $\varepsilon \colon G \to \mathbb{G}_{m}$ est le caractère de Tate ;
+  le cocaractère des poids est noté $i$ ou $j$ comme sur la page, avec
+  $\varepsilon \circ i (\lambda) = \lambda^{2}$ ; le dossier 12 l'écrit $y$.
+  Il se sert de $U$ pour cinq objets différents ; on le nomme chaque fois.
+\end{itemize}
+
+\subsection*{Ce que le dossier suppose sans l'établir, et ce qu'il annonce
+sans le faire}
+
+Tout ce qui porte sur les motifs suppose une catégorie de motifs
+tannakienne et semi-simple, ce que les conjectures standard donneraient. La
+description du groupe des motifs sur un corps fini par les nombres de Weil
+suppose de plus la conjecture de Tate avec la semi-simplicité du Frobenius ;
+la partie « tout nombre de Weil apparaît » est, pour les variétés abéliennes,
+le théorème de Honda. Les points entiers $T_{\alpha}(\mathbb{Z})$ des pages
+190 à 226 supposent des motifs à coefficients entiers, qui n'existent que
+conjecturalement. On le rappelle à chaque énoncé qui en dépend.
+
+Il annonce et ne fait pas : la suite du « On trouve donc » de la page 39 ;
+la valeur de l'élément de Deuring et le signe à l'infini (pages 51 à 55) ;
+la vérification que la page 35 marque « À vérifier !! » ; la question de la
+page 69 ; la suite des deux tapuscrits, dont le second n'atteint jamais les
+variétés abéliennes de son titre ; la détermination de $\varepsilon$ et $j$
+demandée page 85 ; la « Conjecture fondamentale » (page 99) et la
+« Conjecture affaiblie » (page 105) ; l'implication marquée « ? » de la page
+107 ; les exemples des pages 97 à 113 ; les questions des pages 120 à 124 et
+151 ; le programme de la couverture de la page 156 ; la question de la page
+162 ; les points 0 à 9 du plan de la page 169 ; le « est-ce vrai ?? » de la
+page 173 ; le Théorème 5.6 (page 175) ; la distribution des Frobenius (pages
+182 à 186) ; les conjectures des pages 190, 194, 206 et 220 ; l'analyse de
+l'exemple de Serre (page 214) ; le problème des modules (pages 216 et 226).
+
+\pagerange{1}{13}
+\section*{I. Groupe de Galois motivique commutatif. Cas d'un corps de base fini (pages 1 à 13)}
+
+Le feuillet 1 est une couverture de papier brun qui porte seulement ce titre ;
+les feuillets 2 à 13 sont de sa main, non paginés, non datés. Ils font un
+calcul : décrire la catégorie des motifs sur $k = \mathbb{F}_{p}$ par un groupe
+et par une classe de cohomologie, et calculer cette classe place par place.
+
+\pagerange{2}{4}
+\subsection*{Les foncteurs fibres, et le groupe $G$ (pages 2 et 4)}
+
+Soit $\mathcal{M}$ la catégorie des motifs sur $k = \mathbb{F}_{p}$, qu'on
+suppose tannakienne et semi-simple sur $\mathbb{Q}$. Elle a, pour chaque nombre
+premier $\ell \neq p$, un foncteur fibre $T_{\ell}$ sur $\mathbb{Q}_{\ell}$ : la
+cohomologie $\ell$-adique, qui prend ses valeurs dans les
+$\mathbb{Q}_{\ell}$-espaces munis d'une action continue de $\widehat{\mathbb{Z}}
+= \operatorname{Gal}(\bar{k}/k)$. Pour $\ell = p$, elle a un foncteur fibre
+$T_{p}$ sur $\mathbb{Q}_{p}$, la cohomologie cristalline, à valeurs dans les
+$F$-isocristaux sur $\mathbb{Q}_{p}$, c'est-à-dire --- $k$ étant premier --- dans
+les $\mathbb{Q}_{p}$-espaces munis d'un automorphisme. Attention, dit-il : ici
+l'action de $\mathbb{Z}$ ne se prolonge pas à $\widehat{\mathbb{Z}}$.\footnote{Elle
+se prolonge continûment si et seulement si les valeurs propres du Frobenius
+cristallin sont des unités $p$-adiques ; c'est faux dès que le motif a une
+pente non nulle, par exemple pour $\mathbb{Q}(1)$, sur lequel le Frobenius agit
+par $p^{-1}$. Le dossier 10, pages 66 à 83, fait la théorie de ces objets.}
+
+Il isole la sous-catégorie tensorielle $\operatorname{Niv}^{0}(\mathcal{M})$ des
+motifs \emph{de niveau zéro}, engendrée par les motifs d'Artin et le motif de
+Tate. Elle a un foncteur fibre naturel $F^{0}$ à valeurs dans les
+$\mathbb{Q}$-espaces vectoriels : pour $X$ fini étale sur $k$ et $f \colon X \to
+\operatorname{Spec} k$, $F^{0}(h^{0}(X))$ est l'espace des fonctions sur
+$X(\bar{k})$ à valeurs dans $\mathbb{Q}$, c'est-à-dire la fibre de
+$f_{*}\mathbb{Q}_{X}$, et $F^{0}(\mathbb{Q}(1)) = \mathbb{Q}$.\footnote{La page
+écrit $\operatorname{Niv}^{0}(\mathcal{M})^{\circ}$, avec un exposant que la
+transcription ne commente pas, et une marge douteuse, « motifs de dim.\ 0 ».
+Elle fait passer $F^{0}$ par les $\mathbb{Q}$-espaces munis d'une action de
+$\pi = \operatorname{Gal}(\bar{k}/k)$, puis oublie cette action ; un
+$\widehat{\mathbb{Z}}$ d'abord écrit dans le but est biffé. La phrase qui
+suit, sur les foncteurs fibres prolongeant $F^{0}$, est en partie illisible ;
+on en donne le sens que les pages 6 et 8 imposent.}
+
+Le groupe de Galois motivique $G$ de $\mathcal{M}$ est alors commutatif, de
+type multiplicatif sur $\mathbb{Q}$, et son groupe des caractères, comme
+module galoisien, est le groupe
+\[
+  \Gamma = \bigl\{ \lambda \in \overline{\mathbb{Q}}^{*} \ :\ \exists\, \nu \in
+  \mathbb{Z},\ |\sigma(\lambda)| = p^{\nu/2} \ \text{pour tout plongement}\
+  \sigma \colon \overline{\mathbb{Q}} \to \mathbb{C},\ \lambda \ \text{unité en
+  dehors de}\ p \bigr\}
+\]
+des \emph{nombres de Weil} relatifs à $p$ ; on écrit $G = D(\Gamma)$. Ce
+n'est pas un théorème. La page dit qu'on le « connaît par les conjectures de
+Tate et de Tate--Honda », et il faut dire lesquelles.\footnote{L'énoncé
+suppose : (a) que $\mathcal{M}$ soit tannakienne et semi-simple, ce que
+donneraient les conjectures standard (Jannsen, 1992, obtient la semi-simplicité
+pour l'équivalence numérique, au prix d'une modification de la contrainte de
+commutativité) ; (b) la conjecture de Tate, avec la semi-simplicité du
+Frobenius, pour toutes les variétés sur $\mathbb{F}_{p}$, qui fait de $G$ un
+groupe commutatif engendré par le Frobenius ; (c) que les valeurs propres
+satisfassent la condition de poids, ce qui est le théorème de Deligne (« La
+conjecture de Weil I », 1974), postérieur au début du dossier ; (d) que tout
+nombre de Weil apparaisse, ce qui, pour les variétés abéliennes, où la
+conjecture de Tate est un théorème (Tate, 1966), est le théorème de Honda
+(Honda, 1968 ; Tate, Séminaire Bourbaki, 1968). La description de la catégorie
+des motifs sur un corps fini par le tore des nombres de Weil est aujourd'hui
+dans Milne, « Motives over finite fields » (1994), sous les mêmes conjectures.
+La page énumère : $\lambda$ entier algébrique, unité $\ell$-adique pour
+$\ell \neq p$, $|\lambda_{i}| = p^{\nu/2}$ avec $\nu \geqslant 0$. Ce sont les
+valeurs propres du Frobenius sur les motifs \emph{effectifs}, qui forment un
+monoïde ; le groupe des caractères est le groupe qu'elles engendrent, où l'on
+perd l'intégralité et la positivité de $\nu$. On a corrigé en conséquence.}
+
+Ses torsions sont les racines de l'unité, et la composante neutre $G^{0}$ a
+pour caractères $\Gamma/\mu_{\infty}$ ; comme l'action de Galois sur
+$\operatorname{Hom}(\mu_{\infty}, \overline{\mathbb{Q}}^{*})$ est triviale,
+$G/G^{0}$ est le groupe profini constant $\widehat{\mathbb{Z}}$. Deux
+homomorphismes structurent $G$. Le caractère de Tate
+$\varepsilon \colon G \to \mathbb{G}_{m}$ correspond à $\mathbb{Z} \to \Gamma$,
+$1 \mapsto p$. Le cocaractère des poids $i \colon \mathbb{G}_{m} \to G$
+correspond à $i^{*} \colon \Gamma \to \mathbb{Z}$, $i^{*}(\lambda) = \nu$ si
+$|\lambda| = p^{\nu/2}$. Comme $i^{*}(p) = 2$, on a
+$\varepsilon \circ i (\lambda) = \lambda^{2}$.
+
+Le noyau $H = \operatorname{Ker}(\varepsilon|_{G^{0}})$ a pour caractères
+\[
+  \Gamma' = \Gamma / \mu_{\infty}\, p^{\mathbb{Z}} ,
+\]
+dont la torsion est $\mathbb{Z}/2\mathbb{Z}$, engendrée par la classe de
+$\sqrt{p}$ : si $\lambda^{n} = \zeta p^{m}$, la condition de poids force
+$\lambda = \zeta' p^{\nu/2}$. D'où une suite exacte $1 \to H^{0} \to H \to
+\mu_{2} \to 1$, où $H^{0}$ est le tore de caractères $\Gamma'/\text{torsion}$.
+Ce tore est \emph{compact} : pour $\lambda$ de poids $\nu$ on a $\bar{\lambda} =
+p^{\nu}/\lambda$, donc la conjugaison complexe agit par $-1$ sur $\Gamma'$.
+Enfin la restriction de $i$ à $\mu_{2}$ est à valeurs dans $H$ (car
+$\varepsilon(i(-1)) = 1$), et c'est une section de $H \to \mu_{2}$ : sur les
+caractères, la composée $\mathbb{Z}/2 \to \Gamma' \to \mathbb{Z}/2$ envoie la
+classe de $\sqrt{p}$ sur $i^{*}(\sqrt{p}) = 1$. Donc
+\[
+  H \simeq H^{0} \times \mu_{2} .
+\]
+\footnote{La page écrit $i|_{\mu_{2}} \colon \mu_{2} \to H^{0}$. Ce ne peut être,
+puisque le composé $\mu_{2} \to H \to \mu_{2}$ est l'identité : l'image est dans
+$H$, non dans $H^{0}$, et c'est ce qui fournit le scindage annoncé. Les pages 12
+et 13 identifient le tore : ses caractères sont $\Gamma^{0}/\mu_{\infty}$, où
+$\Gamma^{0} = \operatorname{Ker} i^{*}$ est le groupe des « unités de Weil »,
+nombres de Weil de poids $0$.}
+
+\pagerange{6}{10}
+\subsection*{La classe de la gerbe, place par place (pages 6 à 10)}
+
+« On a presque la décision », écrit-il. La catégorie $\mathcal{M}$, avec sa
+graduation, son augmentation $\varepsilon$ et le foncteur fibre $F^{0}$ sur la
+partie de niveau zéro --- dont le groupe est $G/H$, de caractères
+$\mu_{\infty}\, p^{\mathbb{Z}}$ ---, est connue à équivalence près dès qu'on
+connaît la gerbe des foncteurs fibres de $\mathcal{M}$ qui prolongent $F^{0}$.
+C'est une gerbe de lien $H$, et $H$ étant commutatif, elle a une classe
+\[
+  \xi \in H^{2}(\mathbb{Q}, H) \simeq H^{2}(\mathbb{Q}, H^{0}) \times
+  H^{2}(\mathbb{Q}, \mu_{2}) .
+\]
+\footnote{Le formalisme --- gerbe des foncteurs fibres d'une catégorie
+tannakienne, classe dans $H^{2}$ quand le lien est commutatif --- est celui de
+Giraud (\emph{Cohomologie non abélienne}, 1971) et de Saavedra (1972), que les
+dossiers 10 et 12 mettent en place. La donnée que ces pages organisent, un
+groupe de nombres de Weil avec, en chaque place, la position des réalisations
+locales, est celle que Langlands et Rapoport (1987) ont codée dans leur
+« groupoïde pseudo-motivique », et que Milne (1994) compare à la gerbe des
+motifs.}
+
+\emph{Aux places $\ell \neq p$.} Le foncteur $T_{\ell}$ restreint au niveau
+zéro est isomorphe à $F^{0} \otimes \mathbb{Q}_{\ell}$ : il prolonge donc $F^{0}$
+après extension des scalaires, et la gerbe est neutre sur $\mathbb{Q}_{\ell}$.
+La classe $\xi$ est nulle en toute place finie $\ell \neq
+p$.\footnote{La page écrit d'abord que la donnée équivaut à une classe
+$\xi \in H^{2}(\operatorname{Spec} \mathbb{Q} \bmod T, H)$, une cohomologie
+relative à $T = \coprod_{\ell \neq p} \operatorname{Spec} \mathbb{Q}_{\ell}$ : la
+classe \emph{avec} ses neutralisations locales, qui est plus fine. Elle se
+contente ensuite de la classe absolue, « splittée en toutes les places finies
+$\ell \neq p$ », et on fait de même ; « mod » est de lecture douteuse.}
+
+\emph{À la place $p$.} Là, $T_{p}$ et $F^{0} \otimes \mathbb{Q}_{p}$ ne sont
+pas isomorphes sur le niveau zéro : ils diffèrent par un torseur sous
+$(G/H)_{\mathbb{Q}_{p}}$, de classe $\eta_{p} \in H^{1}(\mathbb{Q}_{p}, G/H)$,
+et un argument universel donne
+\[
+  \xi_{p} = \partial(\eta_{p}) ,
+\]
+où $\partial$ est le cobord de la suite $1 \to H \to G \to G/H \to 1$ et $\xi_{p}$
+l'image de $\xi$ dans $H^{2}(\mathbb{Q}_{p}, H)$.\footnote{À un signe près qui
+dépend des conventions de cobord ; la page ne s'en occupe pas, et le dossier
+10 dit de son calcul analogue : « sauf erreur de signe, car je n'ai nulle part
+fait attention aux signes ».} Or $G/H$ est extension de $G/G^{0} =
+\widehat{\mathbb{Z}}$ par $G^{0}/H \simeq \mathbb{G}_{m}$, et l'extension est
+scindée puisque ses caractères $\mu_{\infty}\, p^{\mathbb{Z}} \simeq
+\mu_{\infty} \times \mathbb{Z}$ le sont ; par le théorème 90 de Hilbert,
+\[
+  H^{1}(\mathbb{Q}_{p}, G/H) \xrightarrow{\ \sim\ } H^{1}(\mathbb{Q}_{p},
+  \widehat{\mathbb{Z}}) = \operatorname{Hom}_{\mathrm{cont}}\bigl(
+  \operatorname{Gal}(\overline{\mathbb{Q}}_{p}/\mathbb{Q}_{p}),
+  \widehat{\mathbb{Z}} \bigr) ,
+\]
+et l'image de $\eta_{p}$ est, « trivialement », le caractère non ramifié qui
+envoie le Frobenius sur $1$. C'est le calcul local du dossier 10 (pages 76 et
+77), où le même torseur est celui de l'extension non ramifiée maximale de
+$\mathbb{Q}_{p}$.\footnote{La parenthèse qui justifie ce calcul par la
+cohomologie cristalline sur $W(k)$ est rapide et en partie biffée ; seuls
+$T_{p}$ et $W(k)$ y sont sûrs.}
+
+\emph{À l'infini, et la reconstitution de $\xi$.} Les deux composantes se
+traitent séparément. Pour $\mu_{2}$ : $H^{2}(\mathbb{Q}, \mu_{2}) =
+\operatorname{Br}(\mathbb{Q})[2]$ s'injecte dans la somme des groupes de Brauer
+locaux, avec la seule relation $\sum_{v} \operatorname{inv}_{v} = 0$ ; la
+composante est donc connue dès qu'on connaît ses composantes aux places finies.
+Pour $H^{0}$ : c'est un tore compact, donc $H^{2}(\mathbb{R}, H^{0}) = 0$ ---
+un $\mathbb{R}$-tore compact est un produit de cercles, et
+$H^{2}(\mathbb{R}, \mathrm{U}(1)) = \mathrm{U}(1)/N(\mathbb{C}^{*}) = 0$ --- et
+la composante à l'infini est nulle. « Donc on connaît $\xi$ »,
+conclut-il.\footnote{Pour la composante selon $H^{0}$, la conclusion suppose
+que $H^{2}(\mathbb{Q}, H^{0})$ s'injecte dans le produit des $H^{2}$ locaux,
+c'est-à-dire que le groupe de Tate--Shafarevich
+$\mathrm{Sha}^{2}(\mathbb{Q}, H^{0})$, noyau de cette application, soit nul. Pour un tore de type fini, ce groupe
+est fini et dual de $\mathrm{Sha}^{1}(\mathbb{Q}, X(H^{0}))$ (dualité de
+Tate--Nakayama) ; il n'est pas nul en général. La page ne le dit pas ;
+l'énoncé qu'on donne est donc : $\xi$ est connue à un élément de
+$\mathrm{Sha}^{2}(\mathbb{Q}, H^{0})$ près.}
+
+Vient une remarque : $\mathcal{M}$ n'a pas de foncteur fibre sur $\mathbb{R}$.
+L'argument de la page est presque illisible ; il invoque Hasse et les courbes
+elliptiques. En voici une forme complète.\footnote{Reconstruction nôtre. Sur
+$\mathbb{F}_{p}$, le nombre de Weil $\sqrt{p}$ est, par le théorème de Honda et
+la formule de Tate, le Frobenius d'une surface abélienne simple $A$ dont
+l'algèbre d'endomorphismes est une algèbre de quaternions $D$ sur
+$\mathbb{Q}(\sqrt{p})$ ramifiée aux deux places réelles. Un foncteur fibre
+$\omega$ à valeurs dans les $\mathbb{R}$-espaces ferait de $\omega(h^{1}(A))$,
+de dimension $4$, un module fidèle sur $D \otimes \mathbb{R} \simeq \mathbb{H}
+\times \mathbb{H}$, qui n'en a pas en dimension inférieure à $8$. Sur
+$\mathbb{F}_{p^{2}}$, c'est une courbe supersingulière de Frobenius $p$ qui
+joue ce rôle, d'algèbre $B_{p,\infty}$ : c'est vraisemblablement celle que la
+page a en vue. La Proposition 2 de la page 116 donne l'argument général.} Donc
+$\xi_{\infty} \neq 0$ ; comme la composante selon $H^{0}$ y est nulle, c'est la
+composante selon $\mu_{2}$ qui ne l'est pas, et elle est déterminée par la
+composante en $p$ par la formule des invariants.
+
+On peut en dire plus que la page. La composante de $\xi$ selon $\mu_{2}$ est
+nulle en toute place $\ell \neq p$ et non nulle à l'infini ; par la loi de
+réciprocité elle est non nulle en $p$, et c'est donc la classe
+\[
+  \beta = [B_{p,\infty}] \in \operatorname{Br}(\mathbb{Q})[2]
+\]
+de l'algèbre de quaternions ramifiée exactement en $p$ et à l'infini --- celle
+que Deuring a trouvée comme algèbre d'endomorphismes des courbes
+supersingulières, et qui occupe les pages 15 à 55.\footnote{Ce raccord est de
+nous ; la page s'arrête sur une allusion à l'élément non nul de
+$H^{2}(\mathbb{Q}_{p}, \mu_{2})$ et à une dualité, de lecture douteuse.}
+
+\pagerange{12}{13}
+\subsection*{Deux feuillets de formules (pages 12 et 13)}
+
+Ces deux feuillets rassemblent, sans phrases, le paysage des pages
+précédentes.
+
+La suite $1 \to G^{0} \to G \to \widehat{\mathbb{Z}} \to 0$ est duale de
+$\Gamma/\mu_{\infty} \leftarrow \Gamma \leftarrow \mu_{\infty}$. L'inclusion
+$\Gamma \subset \overline{\mathbb{Q}}^{*}$ définit un point canonique
+$\varphi \in G(\mathbb{Q})$ --- l'élément de Frobenius, qui agit sur chaque
+motif $M$ par son Frobenius $\varphi_{M}$. Le choix d'un plongement
+$\overline{\mathbb{Q}} \to \overline{\mathbb{Q}}_{p}$ fait de $\Gamma$ un
+sous-groupe de $\overline{\mathbb{Q}}_{p}^{*}$, d'où un épimorphisme $\alpha$ du
+groupe de type multiplicatif de caractères $\overline{\mathbb{Q}}_{p}^{*}$ ---
+la partie réductive du lien des $F$-isocristaux sur $\mathbb{F}_{p}$, qu'étudie
+le dossier 10 --- sur $G_{\mathbb{Q}_{p}}$ : c'est la réalisation cristalline
+lue sur les liens. La valuation $p$-adique normalisée par $v_{p}(p) = 1$ passe
+au quotient par les racines de l'unité et donne la graduation par les pentes.
+
+Pour un motif simple $M$, l'algèbre $A_{M} = \operatorname{End}(M)$ est à
+division, de centre $\mathbb{Q}(\varphi_{M})$, et $A_{M} \otimes \mathbb{Q}_{\ell}$
+est l'algèbre des endomorphismes de $T_{\ell}(M)$ qui commutent au Frobenius
+--- un théorème de Tate quand $M$ vient d'une variété abélienne. Elle est
+déployée en toute place finie $\ell \neq p$. La page commence « Les invariants
+des composantes simples de » et s'arrête : la réponse est la formule de
+Tate.\footnote{Pour $\pi = \varphi_{M}$ et $F = \mathbb{Q}(\pi)$ :
+$\operatorname{inv}_{v}(A_{M}) = 0$ aux places finies $v \nmid p$,
+$\operatorname{inv}_{v} = 1/2$ aux places réelles de $F$ (qui n'existent que si
+$\pi = \pm\sqrt{p}^{\,\nu}$), et $\operatorname{inv}_{v} = \frac{v(\pi)}{v(p)}
+[F_{v} : \mathbb{Q}_{p}]$ aux places $v \mid p$ (Tate, 1966 et 1968). La page
+écrit $A \otimes \mathbb{Q}_{\ell} \simeq \operatorname{End}(T_{\ell}(M))$ sans
+préciser qu'il s'agit des endomorphismes galoisiens.}
+
+La page 13 calcule $H^{2}(\mathbb{Q}, H)$ par la suite de la théorie du corps de
+classes : pour un tore $T$ déployé par une extension galoisienne finie $K$ de
+groupe $\mathfrak{g}$, de groupe des cocaractères $Y$, les termes
+$H^{r}(\mathfrak{g}, C_{K} \otimes Y)$ s'identifient par Tate--Nakayama aux
+$\widehat{H}^{r-2}(\mathfrak{g}, Y)$, et les termes locaux aux
+$\widehat{H}^{r-2}(\mathfrak{g}_{v}, Y)$. À la place infinie, pour un tore
+compact, la conjugaison agit par $-1$, la norme est nulle et
+$\widehat{H}^{-1}(\mathbb{Z}/2, Y) = Y/2Y$, comme il l'écrit.\footnote{La page
+note $\check{M}$ ce module, et $M$ le groupe des unités de Weil modulo les
+racines de l'unité ; on évite ici la lettre $M$, réservée aux motifs.} Il note
+enfin que les caractères de $H^{0}$ sont les unités de Weil modulo les racines
+de l'unité, stables par le groupe de décomposition en $p$ et lus par les
+valuations $p$-adiques, et qu'une unité de Weil de la forme $\zeta p^{\nu}$ est
+une racine de l'unité.
+
+\pagerange{15}{55}
+\section*{II. Catégories de Deuring (pages 15 à 55)}
+
+Sans titre de sa main, le feuillet 15 ouvre une suite qui court jusqu'à la page
+55 : une théorie des catégories dont les objets se comportent comme les
+modules inversibles sur un ordre maximal, faite pour les courbes elliptiques
+supersingulières. Le lien avec ce qui précède n'est pas écrit ; on l'a dit :
+l'algèbre de ces courbes est celle dont la classe est la composante de $\xi$
+selon $\mu_{2}$.
+
+\pagerange{15}{17}
+\subsection*{Définition et classification (pages 15 à 17)}
+
+Soit $A$ un anneau de Dedekind de corps des fractions $K$. Une catégorie
+$A$-linéaire $C$ --- ses $\operatorname{Hom}$ sont des $A$-modules, la
+composition est bilinéaire, d'où un homomorphisme $A \to
+\operatorname{End}(\mathrm{id}_{C})$ --- est \emph{de Deuring--Brandt} s'il
+existe un objet $X$ tel que
+\begin{itemize}
+  \item[a)] $\mathfrak{o} = \operatorname{End}(X)$ soit un ordre maximal de
+  $E = \mathfrak{o} \otimes_{A} K$, et $E$ une algèbre simple centrale sur $K$ ;
+  \item[b)] pour tout $\mathfrak{o}$-module à droite $P$ localement libre de rang
+  $1$ sur $\operatorname{Spec} A$, le produit tensoriel $P \otimes_{\mathfrak{o}}
+  X$ existe dans $C$ ;
+  \item[c)] le foncteur $P \mapsto P \otimes_{\mathfrak{o}} X$ soit une
+  équivalence de la catégorie $\mathbb{P}(\mathfrak{o})$ de ces modules sur
+  $C$.
+\end{itemize}
+Il note en marge que a) est indépendante de b) et c). Si la condition vaut pour
+un objet, elle vaut pour tous : dans $\mathbb{P}(\mathfrak{o})$, l'anneau
+$\mathfrak{o}' = \operatorname{End}_{\mathfrak{o}}(P)$ d'un objet $P$ est
+localement isomorphe à $\mathfrak{o}$, donc encore un ordre maximal de $E$, la
+maximalité étant locale ; et $Q \mapsto Q \otimes_{\mathfrak{o}'} P$ est une
+équivalence $\mathbb{P}(\mathfrak{o}') \to \mathbb{P}(\mathfrak{o})$, de
+quasi-inverse $P' \mapsto \operatorname{Hom}(P, P')$. C'est l'équivalence de
+Morita donnée par le bimodule inversible $P$.
+
+Deux ordres $\mathfrak{o}$, $\mathfrak{o}'$ définissent des catégories
+équivalentes si et seulement s'il existe un $(\mathfrak{o},
+\mathfrak{o}')$-bimodule $L$ localement libre de rang $1$ de chaque côté.
+Alors $\mathfrak{o} \otimes K$ et $\mathfrak{o}' \otimes K$ sont isomorphes
+comme $K$-algèbres ; et réciproquement deux ordres maximaux d'une même algèbre
+simple centrale sont reliés par le bimodule $\mathfrak{o}\mathfrak{o}' \subset E$
+des sommes $\sum \lambda_{i}\mu_{i}$.\footnote{La page écrit
+$\mathfrak{o}.\mathfrak{o}' \subset K$ ; c'est dans $E$ que vit ce produit. Que
+$\mathfrak{o}\mathfrak{o}'$ soit inversible, d'ordre à gauche $\mathfrak{o}$ et
+d'ordre à droite $\mathfrak{o}'$, quand les deux ordres sont maximaux, est un
+théorème classique (voir Reiner, \emph{Maximal Orders}, 1975). Le passage est une
+suite de ratures ; l'ordre de lecture est celui que la transcription propose.}
+Les classes de catégories de Deuring--Brandt sur $A$ correspondent donc aux
+classes d'isomorphie d'algèbres simples centrales sur $K$.\footnote{La page dit
+« aux éléments du groupe de Brauer de $K$ ». Une algèbre simple centrale est
+déterminée par sa classe de Brauer \emph{et} son degré ; c'est le couple qui
+classe les catégories. La page 20 rétablit d'ailleurs le rang $n(x)$ comme donnée
+supplémentaire. Elle parle aussi d'algèbres « d'Azumaya sur $A$ » : un ordre
+maximal ne l'est qu'aux places où $E$ est non ramifiée.}
+
+\pagerange{17}{21}
+\subsection*{Le groupoïde de Brandt, la gerbe des banalisations, le déterminant (pages 17 à 21)}
+
+Les équivalences $A$-linéaires $C \to C'$ forment, si elles existent, une
+« catégorie torseur » sous la catégorie $\operatorname{Eqv}(C)$ des
+autoéquivalences de $C$. Fixer $X$ identifie une équivalence $\varphi$ au couple
+$(\varphi(X), \mathfrak{o} \simeq \operatorname{End}\varphi(X))$, et
+$\operatorname{Eqv}(C)$ à la catégorie des $\mathfrak{o}$-bimodules
+\emph{biinversibles}, la composition devenant le produit tensoriel. C'est une
+Gr-catégorie --- un 2-groupe, dirait-on aujourd'hui ---, et elle a trois
+invariants : le groupe des classes d'objets, le \emph{groupe de Brandt}
+$\operatorname{Brd}(\mathfrak{o})$ ; le groupe des automorphismes de l'unité,
+$\operatorname{End}(\mathrm{id}_{C})^{*} = Z(\mathfrak{o})^{*}$, les unités du
+centre ; et une classe
+\[
+  k \in H^{3}\bigl(\operatorname{Brd}(\mathfrak{o}), Z(\mathfrak{o})^{*}\bigr) ,
+\]
+l'action du premier sur le second étant triviale.\footnote{La page écrit
+$\operatorname{Brd}(\mathfrak{o}) = \pi_{1}$ et $Z(\mathfrak{o})^{*} = \pi_{0}$,
+à l'inverse de la convention usuelle ; on a rétabli $\pi_{0}$ pour les classes
+et $\pi_{1}$ pour les automorphismes de l'unité. Elle appelle « groupoïde de
+Brandt » ce qu'elle corrige aussitôt en « catégorie des bimodules », et note
+$\mathfrak{o}^{\natural}$ le centre. La classification des Gr-catégories par
+$(\pi_{0}, \pi_{1}, \text{action}, k)$ est publiée dans la thèse de Hoàng Xuân
+Sính (1975), faite sous la direction de Grothendieck ; ces feuillets s'en
+servent sans la démontrer. Le groupe $\operatorname{Brd}(\mathfrak{o})$ est ce
+qu'on appelle aujourd'hui le groupe de Picard du couple, ou le groupe des classes
+d'idéaux bilatères (Fröhlich, 1973) ; le groupoïde des idéaux d'une algèbre de
+quaternions est celui de Brandt (1927).} Les catégories de Deuring équivalentes
+à une catégorie donnée forment un 2-groupoïde, 2-équivalent à celui dont les
+objets sont les ordres choisis, les $\operatorname{Hom}$ les bimodules
+biinversibles et la composition le produit tensoriel ; « malheureusement, on
+n'a pas de 2-foncteur naturel en sens inverse ».
+
+Supposons désormais $A \simeq \operatorname{End}(\mathrm{id}_{C})$ ($E$
+centrale) et, jusqu'à nouvel ordre, $\mathfrak{o}$ d'Azumaya sur $A$. Pour un
+$A$-schéma $T$, soit $\mathcal{G}(T)$ la catégorie des foncteurs $A$-linéaires
+$\varphi \colon C \to \operatorname{Mod}(\mathcal{O}_{T})$ tels que $\varphi(X)$
+soit une \emph{banalisation} de $\mathfrak{o}$, c'est-à-dire que $\mathfrak{o}
+\otimes_{A} \mathcal{O}_{T} \to \operatorname{End}(\varphi(X))$ soit un
+isomorphisme. Le foncteur $\varphi \mapsto \varphi(X)$ identifie $\mathcal{G}$ à
+la gerbe des banalisations de $\mathfrak{o}$ : c'est une gerbe de lien
+$\mathbb{G}_{m}$, dont la classe est celle de $E$ dans le groupe de
+Brauer.\footnote{Hors de l'ouvert où $\mathfrak{o}$ est d'Azumaya, $\mathfrak{o}$
+n'a pas de banalisation, même localement ; c'est ce que la page 20 dit en
+restreignant la gerbe à cet ouvert $U$, et on l'a supposé dès ici. La
+transcription lit que l'équivalence avec la gerbe des banalisations « ne dépend
+pas » du choix de $X$ ; ce qui est vrai est que la gerbe $\mathcal{G}$, définie
+par $C$ seule, n'en dépend pas, et que les équivalences avec les gerbes des
+banalisations des divers $\operatorname{End}(X)$ se correspondent par les
+équivalences de Morita.} Le foncteur $C \to \operatorname{Rep}(\mathcal{G})$
+est pleinement fidèle, d'image les représentations de poids $1$ et de rang
+$n(x)$ donné, où $n(x)^{2}$ est le rang de $\mathfrak{o}$ : on dirait
+aujourd'hui les faisceaux tordus de rang $n$. Une catégorie de Deuring--Azumaya
+est donc la même chose qu'une gerbe de lien $\mathbb{G}_{m}$ munie d'une
+fonction localement constante $n(x)$ telle que la gerbe soit réalisée par une
+algèbre d'Azumaya de degré $n(x)$. Et chaque objet a un déterminant, objet de
+$\operatorname{Rep}(\mathcal{G})$ de poids $n$, avec
+$\det(P \otimes_{\mathfrak{o}} X) \simeq \det(X) \otimes
+\operatorname{Nrd}(P)$, où $\operatorname{Nrd}$ est la norme réduite, vue comme
+foncteur des $\mathfrak{o}$-modules inversibles vers les $A$-modules
+inversibles.
+
+La page 21 cherche un système transitif d'isomorphismes $\det P \simeq A$,
+fonctoriel et multiplicatif. Il suffit, dit-elle, que
+\[
+  \operatorname{Pic}(A) = 0, \qquad \Phi \cap A^{*} = \{1\}, \qquad
+  \Phi \cdot A^{*} = K^{*}, \qquad \text{où } \Phi =
+  \operatorname{Nrd}(E^{*}) ,
+\]
+ce qui a lieu pour $A = \mathbb{Z}$ et $E \otimes \mathbb{R}$ le corps des
+quaternions : par le théorème de Hasse--Schilling, $\Phi$ est alors le groupe
+des rationnels positifs.\footnote{La page dit seulement que les conditions sont
+vérifiées « si $A = \mathbb{Z}$, $E_{K}$ ($= E_{\mathbb{R}}$) » suivi d'un mot
+illisible ; la raison donnée est de nous.} Dans ce cas il y a un objet
+inversible canonique de degré $n$ dans $\operatorname{Rep}(\mathcal{G})$, et le
+lien de la gerbe se trouve réduit à $\mu_{n}$ : pour les quaternions, à
+$\mu_{2}$.
+
+\pagerange{22}{23}
+\subsection*{Les courbes elliptiques supersingulières (pages 22 et 23)}
+
+Soit $C$ la catégorie des courbes elliptiques supersingulières sur un corps
+algébriquement clos de caractéristique $p$, avec leurs homomorphismes.
+« D'après Deuring », c'est une catégorie de Deuring--Brandt sur $\mathbb{Z}$,
+attachée à l'algèbre de quaternions $B_{p,\infty}$ sur $\mathbb{Q}$ ramifiée
+exactement en $p$ et à l'infini, d'ordre $2$ dans
+$\operatorname{Br}(\mathbb{Q})$.\footnote{C'est la correspondance de Deuring
+(1941) : pour une courbe supersingulière $E_{0}$, le foncteur $E \mapsto
+\operatorname{Hom}(E_{0}, E)$ est une équivalence de la catégorie des courbes
+supersingulières sur la catégorie des modules inversibles sur l'ordre maximal
+$\operatorname{End}(E_{0})$ de $B_{p,\infty}$ --- c'est sous cette forme
+catégorique qu'on l'énonce aujourd'hui. Le mot « supersingulières » manque à
+la page 22, où un mot est illisible ; les pages 49, 51 et 69 disent « d'invariant
+de Hasse nul ».} Sur $\operatorname{Spec} \mathbb{Z}[1/p]$, où l'ordre est
+d'Azumaya, on obtient une gerbe de lien $\mu_{2}$.
+
+Sur $A' = \prod_{\ell \neq p} \mathbb{Z}_{\ell}$, les modules de Tate donnent
+une banalisation : $E \mapsto \prod_{\ell} T_{\ell}(E)$ est un foncteur fibre, de
+rang $2$, et le déterminant canonique est envoyé sur
+\[
+  \det T(E) \simeq A'(1) \overset{\mathrm{df}}{=} \prod_{\ell \neq p}
+  \mathbb{Z}_{\ell}(1)
+\]
+par l'accouplement de Weil. Si $\mathcal{H}_{A'}$ est la gerbe des racines
+carrées de $A'(1)$, qui est une gerbe sous $\mu_{2}$, on a donc une équivalence
+canonique $\mathcal{G}_{A'} \simeq \mathcal{H}_{A'}$. L'invariant qu'on en tire
+est un élément du torseur $\Pi$ des trivialisations de $\mathcal{H}_{A'}$, sous
+\[
+  H^{1}(A', \mu_{2}) \simeq \prod_{\ell \neq p}
+  \mathbb{Z}_{\ell}^{*}/\mathbb{Z}_{\ell}^{*2} , \qquad
+  \mathbb{Z}_{\ell}^{*}/\mathbb{Z}_{\ell}^{*2} \simeq
+  \begin{cases} \mathbb{Z}/2 & \ell \neq 2, \\ (\mathbb{Z}/2)^{2} & \ell = 2 .
+  \end{cases}
+\]
+Comme la gerbe elle-même n'est donnée qu'à équivalence non unique près,
+l'invariant vit en fait dans le quotient $\Pi/\rho(H^{1}(\mathbb{Z}[1/p],
+\mu_{2}))$, où
+\[
+  \rho \colon H^{1}(\mathbb{Z}[1/p], \mu_{2}) = \{\pm 1, \pm p\}/\text{carrés}
+  \simeq (\mathbb{Z}/2)^{2} \hookrightarrow H^{1}(A', \mu_{2})
+\]
+envoie la classe de $p$ (resp.\ $-1$) sur la famille de ses classes modulo les
+carrés de $\mathbb{Z}_{\ell}^{*}$ --- nulle en $\ell \neq 2$ si et seulement si
+$p$ (resp.\ $-1$) est un carré modulo $\ell$. Deux marges : il n'y a « absolument
+pas » de façon naturelle de choisir une origine ; et le facteur
+$(\mathbb{Z}/2)^{2}$ s'éliminerait par la donnée d'une orientation à l'infini
+et d'une « orientation » en $p$.
+
+\pagerange{25}{39}
+\subsection*{« Cat.\ de Deuring sur A » : foncteurs admissibles, normes, ramification (pages 25 à 39)}
+
+Une seconde rédaction, sur papier jauni, reprend tout sous un titre souligné,
+et avec une définition plus large : une catégorie $A$-linéaire $C$ est \emph{de
+Deuring} s'il existe une $A$-algèbre $\mathfrak{o}$ --- quelconque --- et une
+équivalence $A$-linéaire $C \approx \mathbb{P}(\mathfrak{o}/A)$ avec la
+catégorie des $\mathfrak{o}$-modules à droite localement libres de rang $1$ sur
+$\operatorname{Spec} A$ ; de façon équivalente, un objet $X_{0}$ tel que $P
+\mapsto P \otimes_{\mathfrak{o}} X_{0}$ soit défini et soit une équivalence, et
+alors tout objet convient. À équivalence près, $C$ est définie par
+$\mathfrak{o}$ ; deux algèbres définissent des catégories équivalentes si et
+seulement si l'une est $\operatorname{End}(P)$ pour un $P \in
+\mathbb{P}(\mathfrak{o}/A)$ --- on tord $\mathfrak{o}$ « par automorphismes
+intérieurs » ---, et si $\mathfrak{o}$ est commutative, cela force
+$\mathfrak{o}' \simeq \mathfrak{o}$.
+
+Un foncteur $A$-linéaire $F \colon C \to C'$, au-dessus d'un homomorphisme
+$A \to A'$, est \emph{admissible} s'il commute aux produits tensoriels
+$P \otimes_{\mathfrak{o}} X$. Il suffit de le demander pour un objet $X$, et
+les foncteurs admissibles correspondent alors aux couples $(X', u)$ formés d'un
+objet $X'$ de $C'$ et d'un homomorphisme $u \colon \mathfrak{o} \to
+\operatorname{End}(X')$ compatible à $A \to A'$ ; il y a un changement de base
+universel $C_{A'}$, avec $\operatorname{Hom}_{\mathrm{ad}}(C, C') \simeq
+\operatorname{Hom}_{\mathrm{ad}, A'}(C_{A'}, C')$. Les autoéquivalences
+forment la Gr-catégorie des bimodules inversibles sous $\mathfrak{o}$, et les
+équivalences $C \to C'$ une catégorie torseur sous elle.
+
+\emph{Exemple 1.} $A$ de Dedekind, $E$ semi-simple sur $K$, et les catégories
+« de type $E$ » définies par les ordres maximaux de $E$ : le $\pi_{1}$ de la
+catégorie des autoéquivalences est le groupe des unités de la clôture intégrale
+de $A$ dans le centre de $E$ ($A^{*}$ si $E$ est centrale). La page ajoute que,
+si $A$ est local, le $\pi_{0}$ est trivial, tout bimodule inversible des deux
+côtés étant trivial ; c'est vrai quand $E$ est non ramifiée en $A$, et faux
+sinon.\footnote{Pour $A$ local et $E$ ramifiée d'indice local $e > 1$, l'idéal
+maximal bilatère $\mathfrak{m}$ de l'ordre maximal est un bimodule inversible
+non trivial, et les classes forment $\mathbb{Z}/e\mathbb{Z}$ : c'est ce que la
+page 69 écrit, $\operatorname{Brd}(C) = \mathbb{Z}/e\mathbb{Z}$. Le passage de
+la page 29 est en partie illisible.} La base peut changer par $A \to A'$, $A'$
+corps ou anneau de Dedekind, pourvu que l'image d'un ordre maximal reste
+maximale, ce qui a lieu pour les localisés et les complétés.
+
+\emph{Exemple 2.} Une \emph{norme} de $C$ vers une catégorie de Deuring $D$ est
+un foncteur $\nu \colon C \to D$ muni d'isomorphismes
+$\nu(P \otimes_{\mathfrak{o}} X) \simeq \operatorname{Nrd}_{\mathfrak{o}/A}(P)
+\otimes_{A} \nu(X)$, transitifs et fonctoriels. Il y a une norme universelle,
+de but noté $\nu_{A}(C)$, et, $X$ fixé, les normes correspondent aux objets de
+$D$. Si l'on dispose d'isomorphismes fonctoriels et transitifs
+$\operatorname{Nrd}(P) \simeq A$, tout foncteur admissible $\varphi \colon C \to
+C'$ définit un objet canonique $T_{\varphi}$ avec $\nu(\varphi(X)) \simeq
+T_{\varphi}$.
+
+\emph{Exemple 3.} Les couples $(C, \tau)$, $\tau$ objet de $\nu_{A}(C)$,
+généralisent les gerbes de lien $\mu_{n}$ : une telle gerbe donne la catégorie
+$C$ de ses représentations de poids $1$ et de rang $n$, et $\tau$ est le
+déterminant.\footnote{La transcription lit « représentations de degré $n$, de
+rang $1$ » ; la page 20 appelle « degré » le poids et « rang » le rang, et
+c'est ainsi qu'on a lu : poids $1$, rang $n$.} Les autoéquivalences de
+$(C, \tau)$ sont les bimodules $P$ munis d'un isomorphisme
+$\operatorname{Nrd}(P) \simeq A$. Dans le cas local non ramifié, elles forment
+une catégorie de Picard strictement commutative, de $\pi_{1} = \mu_{n}(A)$,
+équivalente à la catégorie $\operatorname{Tors}(S, \mu_{n})$ des
+$\mu_{n}$-torseurs sur $S = \operatorname{Spec} A$. En général, son $\pi_{0}$
+s'insère dans
+\[
+  0 \longrightarrow H^{1}(S, \mu_{n}) \longrightarrow
+  \pi_{0}\operatorname{Eqv}(C, \tau) \longrightarrow \operatorname{Ram}(C/A) ,
+\]
+\[
+  \operatorname{Ram}(C/A) \overset{\mathrm{df}}{=}
+  \operatorname{Brd}(C)/\operatorname{Pic}(A) \simeq
+  \bigoplus_{\mathfrak{p}} \mathbb{Z}/e_{\mathfrak{p}}\mathbb{Z} ,
+\]
+où $e_{\mathfrak{p}}$ est l'indice de ramification de l'ordre en $\mathfrak{p}$,
+et la dernière flèche est surjective quand $\operatorname{Pic}(A) = 0$ --- ce qui
+est le cas de tous les anneaux qui servent ici, $\mathbb{Z}$,
+$\mathbb{Z}[1/p]$, $\mathbb{Z}_{p}$.\footnote{La page écrit la suite exacte à
+droite sans condition, et marque « À vérifier !! » l'alinéa qui suit. Le noyau
+de $\pi_{0}\operatorname{Eqv}(C, \tau) \to \operatorname{Brd}(C)$ est
+$A^{*}/A^{*n}$, l'image est le noyau de la norme $\operatorname{Brd}(C) \to
+\operatorname{Pic}(A)$ ; la surjectivité sur $\operatorname{Ram}$ demande que
+les normes réduites des idéaux premiers ramifiés soient des puissances $n$-ièmes
+dans $\operatorname{Pic}(A)$, ce qui est automatique si $\operatorname{Pic}(A) =
+0$. Le premier terme de la suite est surchargé au point d'être illisible ; le
+$H^{1}(S, \mu_{n})$ est ce que le reste de la page impose.} Pour une
+$A$-algèbre $A'$ et $(C', T')$ sur $A'$ équivalent à $(C, T)_{A'}$, les
+équivalences forment une catégorie torseur sous $\operatorname{Eqv}(C', T')$,
+donc sous $\operatorname{Tors}(S', \mu_{n})$ si $C'$ est non ramifiée.
+
+Page 37 : une catégorie de Deuring--Brauer porte un objet canonique $T$ de
+$\nu(C)$ --- celui que la page 21 construit ---, c'est-à-dire une section $c$
+du foncteur $\operatorname{Eqv}(C, T) \to \operatorname{Eqv}(C)$. Les classes
+d'équivalences $(C, T)_{A'} \simeq (C', T')$ forment alors un torseur sous
+$\operatorname{Brd}(C', T')/\operatorname{Im}\operatorname{Brd}(C)$, et il
+explicite l'application $\operatorname{Brd}(C) \to \operatorname{Brd}(C, T) \to
+\operatorname{Brd}(C', T')$, $\rho \mapsto (\rho, u_{\rho})$.
+
+Page 39, le cas qui intéresse : $A = \mathbb{Z}$, $E = B_{p,\infty}$. Ici
+$\operatorname{Pic}(\mathbb{Z}) = 0$ et $p$ est le seul premier ramifié, avec
+$e_{p} = 2$, donc $\operatorname{Brd}(C) = \mathbb{Z}/2$. Son générateur est
+l'idéal bilatère $\mathfrak{m}$ de $\mathfrak{o}$ au-dessus de $p$ ; il
+correspond au foncteur de Frobenius $E \mapsto E^{(p)} = E/\operatorname{Ker}
+F_{E}$ sur les courbes, et $\operatorname{Nrd}(\mathfrak{m}) = p\mathbb{Z}$ ; on
+le relève en $(\mathfrak{m}, p)$ dans $\operatorname{Brd}(C, T)$. Sur un $A'$ où
+$p$ est inversible, l'image de $(\mathfrak{m}, p)$ dans
+$\operatorname{Brd}(C_{A'}, T_{A'}) \simeq H^{1}(S', \mu_{2})$ est la classe de
+$p$ modulo les carrés. Sur $A' = \mathbb{Z}_{p}$, le groupe
+$\operatorname{Brd}(C_{p}, T_{p})$ est extension de $\mathbb{Z}/2$ par
+$H^{1}(\mathbb{Z}_{p}, \mu_{2}) = \mathbb{Z}_{p}^{*}/\mathbb{Z}_{p}^{*2}$, et
+elle est scindée, car $(\mathfrak{m}, p)^{2}$ est l'élément neutre :
+\[
+  \operatorname{Brd}(C_{p}, T_{p}) \simeq \mathbb{Z}_{p}^{*}/\mathbb{Z}_{p}^{*2}
+  \times \mathbb{Z}/2 \simeq \mathbb{Q}_{p}^{*}/\mathbb{Q}_{p}^{*2} =
+  H^{1}(\mathbb{Q}_{p}, \mu_{2}) ,
+\]
+d'ordre $4$ si $p \neq 2$ --- d'où, dit-il, « d'innombrables possibilités de
+trivialiser un torseur » sous ce groupe.\footnote{La page donne
+$\mathbb{Z}_{p}^{*}/\mathbb{Z}_{p}^{*2} \times \mathbb{Z}/2$ comme le noyau de
+l'extension, avec l'égalité « $= H^{1}(\mathbb{Z}_{p}, \mu_{2})$ ». Le noyau est
+$H^{1}(\mathbb{Z}_{p}, \mu_{2}) = \mathbb{Z}_{p}^{*}/\mathbb{Z}_{p}^{*2}$ ; le
+produit est le groupe entier. Le calcul de $(\mathfrak{m}, p)^{2}$ :
+$\mathfrak{m}^{2} = p\mathfrak{o}$, qu'on identifie à $\mathfrak{o}$ par $p^{-1}$,
+et la trivialisation $p \otimes p \mapsto 1$ de
+$\operatorname{Nrd}(\mathfrak{m})^{\otimes 2}$ devient celle de
+$\operatorname{Nrd}(\mathfrak{o}) = \mathbb{Z}$, puisque la norme réduite de $p$
+est $p^{2}$. Ce calcul est de nous. Le signe lu $p$ au début de la page, dans
+« ramifié seulement en $p$ et $\infty$ », ressemble à un $2$.}
+
+Sur $A' = \mathbb{R}$ enfin, la gerbe $\mathcal{G}_{\mathbb{R}}$ de lien $\mu_{2}$
+a une classe non nulle dans $H^{2}(\mathbb{R}, \mu_{2}) \simeq \mathbb{Z}/2$ :
+c'est celle des quaternions de Hamilton $B_{p,\infty} \otimes \mathbb{R} =
+\mathbb{H}$. On ne peut donc la comparer qu'à une gerbe modèle de même classe
+--- la gerbe $g_{\infty}$ des pages 41 et 51 ---, et les classes d'équivalences
+avec elle, qu'il appelle ses « polarisations », forment un torseur sous
+$H^{1}(\mathbb{R}, \mu_{2}) = \mathbb{R}^{*}/\mathbb{R}^{*2}$.\footnote{La page dit
+« équivalence avec la gerbe triviale sur $\mathbb{R}$ ». La gerbe n'est pas
+triviale, puisque $B_{p,\infty}$ est ramifiée à l'infini ; c'est le même fait
+que $\xi_{\infty} \neq 0$ à la page 10. Les pages 41 et 51 comparent bien à une
+gerbe « type » $g_{\infty}$, et c'est ce qu'on a écrit.} La page s'arrête sur
+« On trouve donc » ; la page 41 ne continue pas visiblement cette phrase.
+
+\pagerange{41}{51}
+\subsection*{Le torseur adélique et l'élément de Deuring (pages 41 à 51)}
+
+La page 41 ne continue pas visiblement la page 39 ; elle reprend avec trois
+modèles locaux. Sur $A' = \prod_{\ell \neq p} \mathbb{Z}_{\ell}$, la catégorie
+de Deuring déployée $(C'(A'), T')$ associée à la gerbe des racines carrées de
+$A'(1)$ --- qui dépend du choix d'une clôture algébrique
+$\overline{\mathbb{F}}_{p}$. En $p$, la catégorie $C(\mathbb{Z}_{p})$ des
+$F$-cristaux de rang $2$ et de pente $\tfrac{1}{2}$ sur
+$\overline{\mathbb{F}}_{p}$, avec le $F$-cristal de Tate. À l'infini, celle
+qu'on associe à une gerbe modèle $g_{\infty}$ sur $\mathbb{R}$. Comparant $C$ à
+ces trois modèles, on trouve un torseur $\mathcal{T}'(C)$ sous
+\[
+  \Gamma' = A'^{*}/A'^{*2} \times \bigl( \mathbb{Z}_{p}^{*}/\mathbb{Z}_{p}^{*2}
+  \times \mathbb{Z}/2 \bigr) \times \mathbb{R}^{*}/\mathbb{R}^{*2} ,
+\]
+le facteur du milieu étant le groupe $\operatorname{Brd}(C_{p}, T_{p})$ de la
+page 39. Le groupe $\mathbb{Z}/2$ des classes d'autoéquivalences de $C$ agit sur
+ce torseur par translation par l'image $f$ du Frobenius, qui est
+$(p, (0,1), p)$ dans les trois facteurs --- et $p$ est un carré dans
+$\mathbb{R}$. Soit $\Gamma'_{0}$ le sous-groupe
+\[
+  \Gamma'_{0} = A'^{*}/A'^{*2} \times \mathbb{Z}_{p}^{*}/\mathbb{Z}_{p}^{*2}
+  \times \mathbb{R}^{*}/\mathbb{R}^{*2} = H^{1}(\widehat{\mathbb{Z}} \times
+  \mathbb{R}, \mu_{2}) ;
+\]
+alors $\Gamma' = \Gamma'_{0} \times f(\pm 1)$, et le quotient
+$\mathcal{T}(C) = \mathcal{T}'(C)/\pm 1$ est un torseur sous $\Gamma'/f(\pm 1)
+\simeq \Gamma'_{0}$, qui ne dépend pas de $C$.\footnote{La page écrit
+$\mathbb{A} = \prod_{\ell} \mathbb{Z}_{\ell}$, « $\ell$ y compris $p$ et
+$\infty$ », avec $\mathbb{Z}_{\infty} = \mathbb{R}$, et glose « adèles ». C'est
+l'anneau $\widehat{\mathbb{Z}} \times \mathbb{R}$ des adèles entiers, non l'anneau
+des adèles ; on l'écrit ainsi pour éviter la confusion, et le $H^{1}$ d'un
+produit d'anneaux est le produit des $H^{1}$.} Il dépend encore de
+$\overline{\mathbb{F}}_{p}$ par l'action de $\widehat{\mathbb{Z}} =
+\operatorname{Gal}(\overline{\mathbb{F}}_{p}/\mathbb{F}_{p})$ ; mais le Frobenius
+agit sur les trois modèles par le même élément $(p, f, p)$, donc
+\emph{trivialement} sur $\mathcal{T}$. On a ainsi un torseur canonique
+$\mathcal{T}$ sous $H^{1}(\widehat{\mathbb{Z}} \times \mathbb{R}, \mu_{2})$.
+
+Ceci suggère, dit la page 43, une gerbe triviale de lien $\mu_{2}$ sur
+$\widehat{\mathbb{Z}} \times \mathbb{R}$ dont $\mathcal{T}$ serait le torseur
+des classes. Il considère les couples $(C, \alpha)$ où $C$ est une catégorie de
+Deuring de type $\beta$ et $\alpha$ une classe d'équivalences
+$(C, T)_{\mathbb{Z}_{p}} \simeq (C(\mathbb{Z}_{p}), T(\mathbb{Z}_{p}))$ modulo
+celles qui viennent de $\operatorname{Pic}(\mathbb{Z}_{p})$ --- « trop
+compliqué », corrige la marge : il suffit de fixer une classe d'équivalences
+$C_{\mathbb{Z}_{p}} \simeq C(\mathbb{Z}_{p})$, c'est-à-dire, si $C$ est défini
+par $\mathfrak{o}$, une structure de $\mathfrak{o} \otimes \mathbb{Z}_{p}$-module
+sur un cristal de rang $2$ et de pente $\tfrac{1}{2}$. Une autre marge note
+qu'il y a deux classes d'isomorphie de tels couples (cristal, ordre), échangées
+par le Frobenius. Deux couples $(C, \alpha)$, $(C', \alpha')$ sont toujours
+équivalents, et les équivalences forment un groupoïde connexe de groupe
+fondamental $\mathbb{Z}/2$ : deux équivalences sont isomorphes, et l'isomorphisme
+est unique \emph{au signe près}. À un $(C, \alpha)$ est associée la gerbe
+$\mathcal{G}(C, \alpha)$ sur $\widehat{\mathbb{Z}} \times \mathbb{R}$, de lien
+$\mu_{2}$, des équivalences avec le couple modèle compatibles en $p$ avec
+$\alpha$ ; elle est déterminée à une équivalence près unique au signe près,
+mais dépend du choix de $\overline{\mathbb{F}}_{p}$. Il voudrait s'en affranchir
+en définissant canoniquement $\mathbb{F}_{p^{n}}$ comme
+$\mathbb{F}_{p}[T]/\Phi_{p^{n}-1}(T)$ ; ce n'est pas un corps en
+général.\footnote{Le polynôme cyclotomique $\Phi_{p^{n}-1}$ se factorise sur
+$\mathbb{F}_{p}$ en $\varphi(p^{n}-1)/n$ facteurs irréductibles de degré $n$, et
+l'anneau quotient est un produit d'autant de copies de $\mathbb{F}_{p^{n}}$ :
+choisir un facteur est encore un choix. Les polynômes dits de Conway fixent un
+tel choix par convention, non par une construction canonique.}
+
+Page 47, la même chose en termes de 2-catégories : les $(C, \alpha)$ forment une
+2-catégorie $\mathcal{S}$ connexe, dont les 1-morphismes sont tous isomorphes,
+et dont les 2-automorphismes sont $\mathbb{Z}/2$, avec un 2-foncteur vers la
+2-catégorie des gerbes de lien $\mu_{2}$ ; la gerbe a une « section définie à
+isomorphisme canonique près au signe près », et une marge prévient qu'il y a ici
+« un deuxième signe ». Autre façon : la suite de catégories de Picard
+\[
+  \operatorname{Eqv}(C) \longrightarrow \operatorname{Eqv}(C, T)
+  \longrightarrow \operatorname{Eqv}(C_{p}, T_{p}) \simeq
+  \operatorname{Eqv}(C(\mathbb{Z}_{p}), T(\mathbb{Z}_{p}))
+\]
+est pleinement fidèle, de quotient la catégorie rigide de groupe
+$\mathbb{Z}_{p}^{*}/\mathbb{Z}_{p}^{*2}$ ; les équivalences
+$(C, T)_{\mathbb{Z}_{p}} \simeq (C(\mathbb{Z}_{p}), T(\mathbb{Z}_{p}))$ modulo
+l'action de $\operatorname{Eqv}(C)$ forment donc un torseur $\mathcal{T}_{p}$
+sous $\mathbb{Z}_{p}^{*}/\mathbb{Z}_{p}^{*2}$, indépendant de $C$ à isomorphisme
+canonique près. Un élément de $\mathcal{T}_{p}$ choisi, les couples $(C,
+\alpha)$ avec $\alpha$ dans cette classe sont équivalents de façon canonique.
+
+D'où, page 49, pour tout $\delta \in \mathcal{T}_{p}$, une gerbe
+\emph{canonique} $\mathcal{G}(\delta)$ sur $\widehat{\mathbb{Z}} \times
+\mathbb{R}$, de lien $\mu_{2}$ : sur $A' \times \mathbb{R}$, la gerbe des
+équivalences de la gerbe $\mathcal{G}_{\mathbb{Z}[1/p]}$ définie par $(C, T)$
+avec la gerbe modèle (racines carrées de $A'(1)$ sur $A'$, $g_{\infty}$ sur
+$\mathbb{R}$) ; en $p$, la gerbe triviale. Et « la théorie des courbes
+elliptiques d'invariant de Hasse nul nous fournit »
+\begin{itemize}
+  \item[a)] un élément $\delta_{p} \in \mathcal{T}_{p}$, l'\emph{élément de
+  Deuring} ;
+  \item[b)] une section $\hat{\delta}$ de $\mathcal{G}(\delta_{p})$, définie à
+  isomorphisme près et \emph{au signe près à l'infini}, de valeur en $p$ la
+  section unité et de valeur à l'infini la polarisation donnée par
+  $T$.\footnote{Il écrit $\xi_{p}$ ; on écrit $\delta_{p}$ pour ne pas le
+  confondre avec la classe $\xi$ des pages 6 à 10. La fin de b) est raturée et
+  se lit mal. D'où viennent a) et b) --- par quelle construction la théorie des
+  courbes supersingulières fournit ces éléments --- n'est pas écrit : les pages
+  53 à 55 posent la question.}
+\end{itemize}
+
+« À l'infini, la situation n'est pas très belle encore », dit la page 51. Pour
+tout $\delta_{p}$, la gerbe $\mathfrak{h}(\delta_{p})$ de lien $\mu_{2}$ sur
+$\mathbb{Z}[1/p]$ définie par $(C(\delta_{p}), T(\delta_{p}))$ donne sur
+$\mathbb{R}$ une gerbe canonique ; pour l'élément de Deuring, elle est munie
+d'une polarisation --- une classe d'équivalences avec la gerbe modèle
+$g_{\infty}$ ---, « mais il reste l'ambiguïté de signe ».\footnote{La page
+semble dire que cette gerbe « est triviale » ; le mot qui précède est
+illisible. Elle a la classe de $\mathbb{H}$, non nulle ; ce qui est vrai, et ce
+que la suite de la phrase utilise, est qu'elle est équivalente à la gerbe type
+$g_{\infty}$. Cette page est d'une encre pâle, au crayon par endroits.}
+Concrètement, $C(\delta_{p})_{\mathbb{R}}$ est la catégorie des droites
+vectorielles à droite sur les quaternions $\mathbb{H}$, munie de la norme réduite
+vers la catégorie de Picard des droites réelles, et il y a un foncteur
+« canonique au signe près » de $C(\delta_{p})$ vers celle-ci --- une marge
+explique que le foncteur vers les droites quaternioniennes unitaires a deux
+isomorphismes. Pour l'élément de Deuring, on aurait ainsi un foncteur
+essentiellement canonique des courbes supersingulières vers les droites
+quaternioniennes, où la norme correspondrait à la polarisation. L'écriture se
+défait sur ces mots.
+
+\pagerange{53}{55}
+\subsection*{« Détermination de $\xi_{p}$ ? » (pages 53 à 55)}
+
+Il explicite d'abord $\mathcal{T}_{p}$. Soit $\mathcal{O}$ l'ensemble des ordres
+maximaux de $B_{p,\infty}$. Un élément $\delta$ de $\mathcal{T}_{p}$ est une
+fonction qui, à tout couple $(M, \mathfrak{o})$ formé d'un $\mathfrak{o} \in
+\mathcal{O}$ et d'un $F$-cristal $M$ de rang $2$ sur $\mathbb{F}_{p^{2}}$ (ou sur
+$\overline{\mathbb{F}}_{p}$) muni d'une action de $\mathfrak{o}$, associe un
+élément
+\[
+  u_{\delta}(M, \mathfrak{o}) \in \operatorname{Isom}\bigl( \textstyle\bigwedge^{2}
+  M, T_{p} \bigr) / \mathbb{Z}_{p}^{*2} ,
+\]
+où $T_{p}$ est le cristal de Tate, de sorte que : (i) $u_{\delta}$ soit stable
+par isomorphisme ; (ii) si $P$ est un $\mathfrak{o}$-module à droite inversible,
+de commutant $\mathfrak{o}'$, et $M' = P \otimes_{\mathfrak{o}} M$, l'isomorphisme
+canonique
+\[
+  c \colon \det M' \simeq \operatorname{Nrd}(P) \otimes_{\mathbb{Z}} \det M
+  \simeq \det M
+\]
+(donné par $\operatorname{Nrd}(P) \simeq \mathbb{Z}$) transforme $u_{\delta}(M,
+\mathfrak{o})$ en $u_{\delta}(M', \mathfrak{o}')$ :
+
+\begin{tikzcd}[column sep=small]
+\det M \arrow[rr, "c"] \arrow[dr, no head, "{u_{\delta}(M,\mathfrak{o})}"'] & & \det M' \arrow[dl, no head, "{u_{\delta}(M',\mathfrak{o}')}"] \\
+ & T_{p} &
+\end{tikzcd}
+
+En présence de (ii), la condition (i) équivaut à la stabilité par les
+isomorphismes de corps $\bar{k} \to \bar{k}'$, ou encore par le Frobenius de
+$\bar{k}$. Page 55, il est équivalent de se donner les $u_{\delta}$ pour des
+triples $(M_{0}, \mathfrak{o}, i)$, où $i \colon R \to \mathfrak{o}$ est un
+plongement de l'anneau $R$ engendré par une racine de $T^{2} + p$ --- ce qui
+revient à une descente $M_{0}$ de $M$ à $\mathbb{F}_{p}$ dont le Frobenius
+satisfait $F^{2} + p = 0$ ---, avec la stabilité par isomorphisme et la
+compatibilité aux tordus par un $R$-module inversible $P_{0}$, via
+$\det_{\mathbb{Z}} P_{0} \simeq \mathbb{Z}$.\footnote{La page dit « l'anneau des
+entiers de $\mathbb{Q}[T]/(T^{2} + p)$ ». Le Frobenius d'une courbe
+supersingulière définie sur $\mathbb{F}_{p}$ engendre $\mathbb{Z}[\sqrt{-p}]$,
+qui n'est l'anneau des entiers de $\mathbb{Q}(\sqrt{-p})$ que pour $p \equiv 1
+\pmod 4$ ; et l'équation $F^{2} + p = 0$, c'est-à-dire une trace nulle, n'est
+forcée par la borne de Hasse que pour $p \geqslant 5$.} La page s'arrête là, à
+mi-hauteur : l'élément de Deuring n'est pas déterminé.
+
+\pagerange{58}{77}
+\section*{III. Le tapuscrit « Catégories de Deuring », et la catégorie de Picard de Brandt (pages 58 à 77)}
+
+\pagerange{58}{62}
+\subsection*{Catégories $A$-linéaires et $\otimes$-enveloppes (pages 58 à 62)}
+
+Le seul feuillet dactylographié de cette suite porte le titre « Catégories de
+Deuring » et le paragraphe « 1.\ Catégories $A$-linéaires et
+$\otimes$-enveloppes ». $A$ est un anneau commutatif, $C$ une catégorie
+$A$-linéaire. Un foncteur $A$-linéaire $F \colon C \to C'$ est \emph{admissible},
+ou compatible au produit tensoriel externe, si pour tout objet $X$ muni d'une
+action d'une $A$-algèbre $\mathfrak{o}$ et tout $\mathfrak{o}$-module à droite
+$P$ tel que $P \otimes_{\mathfrak{o}} X$ existe, $P \otimes_{\mathfrak{o}} F(X)$
+existe et $P \otimes_{\mathfrak{o}} F(X) \to F(P \otimes_{\mathfrak{o}} X)$ est un
+isomorphisme ; une marge dactylographiée annonce la notion duale,
+« coadmissible », compatible aux $\operatorname{Hom}$. Pour une catégorie de
+Deuring, il suffit de le demander pour un objet $X$ et $P \in
+\mathbb{P}(\mathfrak{o}/A)$, et les foncteurs admissibles correspondent aux
+objets de $C'$ munis d'une action de $\mathfrak{o}$. Soit
+\[
+  C(1) = \operatorname{Hom}_{A\text{-adm}}(C^{\circ}, \operatorname{Mod}(A)) ;
+\]
+le plongement de Yoneda $i \colon C \to C(1)$, $X \mapsto \operatorname{Hom}(-,
+X)$, est pleinement fidèle.\footnote{Qu'un foncteur représentable soit
+admissible résulte de $P \otimes_{\mathfrak{o}} X \simeq
+\operatorname{Hom}_{\mathfrak{o}}(\check{P}, X)$ pour $P$ projectif de type fini,
+l'ajout manuscrit du feuillet 58, que la page 60 érige en définition des
+produits tensoriels « stricts ».}
+
+La suite est de sa main. Si $X$ est un \emph{générateur strict} --- tout objet
+est de la forme $P \otimes_{\mathfrak{o}} X$ avec $P$ projectif de type fini ---,
+les valeurs de $i(X)$ sont projectives de type fini, et il appelle $C_{sp}(1)$
+la catégorie de ces foncteurs « spéciaux » : le choix de $X$ l'identifie aux
+$\mathfrak{o}$-modules à droite projectifs de type fini. C'est la « saturée »
+de $C$, ce qu'on appelle aujourd'hui son enveloppe additive et karoubienne. Le
+produit tensoriel externe est \emph{strict} si $P \otimes_{\mathfrak{o}} X \to
+\operatorname{Hom}_{\mathfrak{o}}(\check{P}, X)$ est un isomorphisme, et les
+produits tensoriels sont \emph{raisonnables} s'ils sont stricts pour tout $P$
+projectif de type fini --- ce qui a lieu si $C$ est additive et karoubienne ;
+alors $P \mapsto P \otimes_{\mathfrak{o}} X$ est pleinement fidèle. Enfin $C$
+est \emph{jolie} si ses produits tensoriels sont raisonnables et si, pour deux
+objets, $\operatorname{Hom}(X, X')$ est projectif de type fini sous
+$\operatorname{End}(X')$ et a $\operatorname{End}(X)$ pour commutant. Une
+catégorie à générateur strict est alors une sous-catégorie pleine des
+$\mathfrak{o}$-modules projectifs de type fini contenant $\mathfrak{o}$, et une
+catégorie jolie est la limite inductive de ses sous-catégories « strictement
+monogènes », chacune de ce type.
+
+\pagerange{65}{69}
+\subsection*{Le groupe de Brandt et la fibration sur les ordres (pages 65 à 69)}
+
+Soit $C \simeq \mathbb{P}(\mathfrak{o}/A)$ une catégorie de Deuring, $X$ un
+objet, $\mathfrak{o} = \operatorname{End}(X)$. Le groupe de Brandt
+$\operatorname{Brd}(C) = \pi_{0}\operatorname{Eqv}(C)$ opère sur l'ensemble
+$\operatorname{Is}(C)$ des classes d'objets ; le quotient est l'ensemble des
+classes d'isomorphie d'algèbres « apparentées » à $\mathfrak{o}$ --- pour des
+ordres maximaux, les classes de conjugaison d'ordres maximaux --- et le
+stabilisateur de la classe de $X$ est le groupe $\operatorname{Out}_{A}
+(\mathfrak{o})$ des automorphismes extérieurs.\footnote{La page ajoute « si
+$\mathrm{Brdt}(A) = 0$ », où l'on attendrait $\operatorname{Pic}(A)$ ; la suite
+exacte qui suit montre que l'énoncé n'en a pas besoin : un bimodule $L$ fixe la
+classe de $X$ si et seulement si $L \simeq \mathfrak{o}$ comme module à droite,
+c'est-à-dire si $L$ est $\mathfrak{o}$ tordu à gauche par un automorphisme.} D'où
+la suite exacte
+\[
+  1 \to Z(\mathfrak{o})^{*} \to \mathfrak{o}^{*} \to \operatorname{Aut}_{A}
+  \mathfrak{o} \to \operatorname{Brd}(C) \to \operatorname{Is}(C) \to
+  \operatorname{Is}(\mathcal{O}) \to 1 ,
+\]
+exacte au sens des ensembles pointés pour ses deux derniers termes, que la page
+récrit dans un cadre comme la suite d'homotopie
+\[
+  \pi_{1}(\mathcal{B}, 1) \to \pi_{1}(C, X) \to \pi_{1}(\mathcal{O}, \mathfrak{o})
+  \to \pi_{0}(\mathcal{B}, 1) \to \pi_{0}(C, X) \to \pi_{0}(\mathcal{O},
+  \mathfrak{o}) \to 1
+\]
+de la catégorie de Brandt $\mathcal{B}$, de la catégorie de Deuring $C$ et de la
+catégorie $\mathcal{O}$ des anneaux apparentés : « on a envie de dire que $C$
+est fibrée sur $\mathcal{O}$, de fibre $\mathcal{B}$ ».\footnote{C'est une
+heuristique, et la page la donne comme telle : on n'a pas de foncteur fibré
+explicite, mais les termes coïncident avec ceux de la suite précédente
+($\pi_{1}(\mathcal{B}) = Z(\mathfrak{o})^{*}$, $\pi_{1}(C, X) =
+\mathfrak{o}^{*}$, $\pi_{1}(\mathcal{O}, \mathfrak{o}) = \operatorname{Aut}
+\mathfrak{o}$), comme dans la suite exacte d'homotopie d'une fibration de
+groupoïdes.} Si $\mathfrak{o}$ est centrale, $L \mapsto L \otimes_{A} -$ est un
+foncteur pleinement fidèle $\operatorname{Pic}(A) \to \mathcal{B}$, et
+\[
+  0 \to \operatorname{Pic}(A) \to \operatorname{Brd}(C) \to
+  \operatorname{Ram}(C/A) \to 0 , \qquad \operatorname{Ram}(C/A) \simeq
+  \bigoplus_{\mathfrak{p}\ \text{ramifié}} \mathbb{Z}/e_{\mathfrak{p}}\mathbb{Z}
+\]
+dans le cas des ordres maximaux, le quotient étant celui des idéaux bilatères
+par ceux de $A$.\footnote{La marge se demande si ce groupe est la somme des
+$\operatorname{Br}(\widehat{K}_{\mathfrak{p}})/\operatorname{Br}(\widehat{A}_{\mathfrak{p}})$,
+« ??? ». Pour un corps de nombres, $e_{\mathfrak{p}}$ est l'indice local de $E$ en
+$\mathfrak{p}$, et $\mathbb{Z}/e_{\mathfrak{p}}\mathbb{Z}$ est le
+\emph{sous-groupe} de $\operatorname{Br}(\widehat{K}_{\mathfrak{p}}) \simeq
+\mathbb{Q}/\mathbb{Z}$ engendré par la classe locale de $E$, non le quotient
+$\operatorname{Br}(\widehat{K}_{\mathfrak{p}})/\operatorname{Br}(\widehat{A}_{\mathfrak{p}})$,
+qui est $\mathbb{Q}/\mathbb{Z}$ tout entier.}
+
+Si $A$ est local, $\operatorname{Is}(C) = 1$ et $\operatorname{Pic}(A) = 0$, donc
+$\operatorname{Out}(\mathfrak{o}) = \operatorname{Brd}(C) =
+\mathbb{Z}/e\mathbb{Z}$ : il y a une obstruction locale à ce que les
+automorphismes d'un ordre maximal soient intérieurs. Pour les corps gauches de
+Deuring, ramifiés en $p$ et à l'infini, la suite devient
+\[
+  1 \to \{\pm 1\} \to \mathfrak{o}^{*} \to \operatorname{Aut}(\mathfrak{o}) \to
+  \mathbb{Z}/2 \to \pi_{0}(C, X) \to \pi_{0}(\mathcal{O}, \mathfrak{o}) \to 1 ,
+\]
+et il l'annote terme à terme. Le groupe $\mathfrak{o}^{*} =
+\operatorname{Aut}(X)$ est $\{\pm 1\}$, sauf pour $j = 1728$ où il est cyclique
+d'ordre $4$ et $j = 0$ où il est cyclique d'ordre $6$ ($p \neq 2, 3$). Le
+$\mathbb{Z}/2$ est engendré par le Frobenius $E \mapsto E^{(p)}$, et
+$\operatorname{Aut}(\mathfrak{o}) \to \mathbb{Z}/2$ est surjectif si et seulement
+si $X$ se descend à $\mathbb{F}_{p}$, c'est-à-dire $j \in \mathbb{F}_{p}$ :
+c'est alors la conjugaison par un endomorphisme de degré $p$. Enfin
+$\pi_{0}(C, X)$ est l'ensemble des classes d'isomorphie de courbes
+supersingulières, et son quotient par le Frobenius est $\pi_{0}(\mathcal{O})$,
+l'ensemble des classes de conjugaison d'ordres maximaux.\footnote{La page
+apparie $j = 0$ à $\mathbb{Z}/4$ et $j = 12^{3}$ à $\mathbb{Z}/6$ ; c'est
+l'inverse. Elle écrit sous $\pi_{0}(C, X)$ « classes d'iso.\ des courbes …
+mod l'opération de Frobenius », ce qui décrit $\pi_{0}(\mathcal{O})$ : le premier
+ensemble a pour cardinal le nombre de classes de $B_{p,\infty}$, le second son
+nombre de types (Deuring). La marge demande pour quels $p$ ces deux valeurs de
+$j$ sont supersingulières, et le feuillet 76 note « $-1$ carré mod $p$ ;
+$p \equiv 1\ (4)$ ; $\left[\frac{-1}{p}\right] = -1$ » : la réponse classique est
+$p \equiv 3 \pmod 4$ pour $j = 1728$ et $p \equiv 2 \pmod 3$ pour $j = 0$.} La
+page s'arrête sur une question : « $\mathfrak{o}^{*}$ est-il toujours égal ».
+
+\pagerange{71}{77}
+\subsection*{Les 2-catégories de Brandt et la catégorie de Picard $\mathcal{B}$ (pages 71 à 77)}
+
+Soit $\mathcal{O}$ la catégorie des algèbres apparentées à une algèbre donnée,
+$K$ l'anneau total des fractions de $A$, supposé semi-local, et $E \simeq
+\mathfrak{o}_{K}$, dont on suppose tous les automorphismes intérieurs (le cas
+des algèbres simples centrales, par Skolem--Noether). Trois 2-catégories sont
+équivalentes : $\mathcal{B}_{0}$, celle des catégories de Deuring de type
+$\mathfrak{o}$ ; $\mathcal{B}_{1}$, dont les objets sont les objets de
+$\mathcal{O}$ et les $\operatorname{Hom}(\mathfrak{o}, \mathfrak{o}')$ les
+bimodules localement libres de rang $1$, composés par $L \otimes_{\mathfrak{o}'}
+M$ ; et $\mathcal{B}_{2}$, le 2-groupoïde de Brandt, dont les objets sont les
+sous-anneaux $\mathfrak{o} \subset E$ apparentés, les 1-morphismes les
+bimodules $L$ \emph{contenus dans} $E$, et les 2-morphismes $L \to M$ les
+éléments $\lambda$ du centre de $E$ tels que $\lambda L = M$. « Les 2-foncteurs
+$\mathcal{B}_{2} \to \mathcal{B}_{1} \to \mathcal{B}_{0}$ ne sont pas des
+équivalences naturelles. »
+
+Supposons la condition (C) : pour tout $\mathfrak{o} \subset E$ dans
+$\mathcal{O}$, les $(\mathfrak{o}, \mathfrak{o})$-bimodules « spéciaux » contenus
+dans $E$ commutent, $LM = ML$. C'est le cas des ordres maximaux, dont le groupe
+des idéaux bilatères est abélien ; la marge le croit vrai localement, « cf.\
+Auslander ».\footnote{Le groupe des idéaux bilatères d'un ordre maximal sur un
+anneau de Dedekind est abélien libre sur les idéaux premiers bilatères
+(Auslander--Goldman, 1960 ; Reiner, \emph{Maximal Orders}).} Alors
+$\operatorname{Eqv}(C) \simeq \operatorname{Hom}_{\mathcal{B}_{1}}(\mathfrak{o},
+\mathfrak{o})$ reçoit une contrainte de commutativité \emph{stricte}, par
+transport : pour $L$, $M$ spéciaux, on choisit des plongements $L \simeq L'
+\subset E$, $M \simeq M' \subset E$, et
+\[
+  c \colon L \otimes_{\mathfrak{o}} M \simeq L'M' = M'L' \simeq M
+  \otimes_{\mathfrak{o}} L ,
+\]
+qui ne dépend pas des plongements.
+
+\emph{Proposition (page 75).} Cette contrainte de commutativité ne dépend pas
+du choix de $X \in \operatorname{Ob} C$.
+
+La démonstration : un autre objet est $X' = P \otimes X$, avec $P \subset E$ ; son
+anneau $\mathfrak{o}' = \operatorname{End}(P)$ est plongé dans $E$, et
+l'identification des bimodules spéciaux sous $\mathfrak{o}$ et sous
+$\mathfrak{o}'$ est $L \mapsto PLP^{-1}$, qui respecte les produits :
+$P(LM)P^{-1} = (PLP^{-1})(PMP^{-1})$. « OK. »
+
+\emph{Conclusion (page 77).} Les catégories $\operatorname{Eqv}(C)$, pour $C$
+dans $\mathcal{B}_{0}$, sont canoniquement des catégories de Picard strictes,
+canoniquement équivalentes entre elles : on peut les identifier à une seule
+catégorie de Picard $\mathcal{B}$, la \emph{catégorie de Picard de Brandt}.
+Elle opère sur chaque $C$, chaque $\operatorname{Eqv}(C, C')$ est une catégorie
+torseur sous $\mathcal{B}$, et $C' \mapsto \operatorname{Eqv}(C, C')$ est une
+équivalence de 2-catégories de $\mathcal{B}_{0}$ sur celle des catégories
+torseurs sous $\mathcal{B}$. Un changement de base $A \to A'$ qui préserve les
+hypothèses donne un homomorphisme $\mathcal{B} \to \mathcal{B}'$ compatible aux
+actions.\footnote{Les catégories de Picard sont celles de Deligne (SGA 4,
+exposé XVIII, 1973) ; la notion de catégorie torseur sous un 2-groupe et
+l'équivalence d'un 2-groupoïde connexe avec les torseurs sous le 2-groupe
+d'automorphismes d'un de ses objets sont la forme catégorique d'un fait
+élémentaire sur les groupoïdes.}
+
+\pagerange{80}{81}
+\section*{IV. Localisation pour les variétés abéliennes (pages 80 et 81)}
+
+Deux feuillets dactylographiés, le début d'un tapuscrit dont le titre annonce
+les variétés abéliennes et qui s'arrête avant de les avoir nommées. $A$ est un
+anneau commutatif, $C$ une catégorie $A$-linéaire, non nécessairement additive.
+Pour toute $A$-algèbre $A'$, $C_{A'}$ a les mêmes objets et les
+$\operatorname{Hom}$ tensorisés par $A'$ ; d'où une catégorie fibrée
+$\underline{C}$ sur les schémas affines au-dessus de $S = \operatorname{Spec}
+A$. Ce n'est presque jamais un champ sur ce gros site, mais c'en est souvent un
+sur le petit site de Zariski des ouverts affines de $S$ : on dit alors que $C$
+est \emph{localisable sur $A$}. Conséquences :
+\begin{itemize}
+  \item[a)] si $X$ porte une action d'une $A$-algèbre $R$, non nécessairement
+  commutative, les $P \otimes_{R} X$ existent pour les $R$-modules à droite
+  localement isomorphes à $R$, et si $R \to \operatorname{End}(X)$ est
+  bijectif, $P \mapsto P \otimes_{R} X$ est pleinement fidèle, d'image les objets
+  localement isomorphes à $X$ ;
+  \item[b)] si $C$ est additive, de même pour les $P$ localement libres de type
+  fini, l'image étant formée des objets localement isomorphes à un $X^{n}$ ; la
+  conclusion vaut aussi si, au lieu de la localisabilité, on suppose $C$
+  karoubienne et $P$ projectif de type fini ;\footnote{La frappe de b) omet
+  « bijectif » après « si $R \to \operatorname{End}_{C}(X)$ » ; on l'a rétabli
+  comme en a).}
+  \item[c)] la catégorie $\operatorname{Mod}(R, C)$ des objets de $C$ munis
+  d'une action de $R$ est localisable si $C$ l'est --- sur $S$, non
+  nécessairement sur $\operatorname{Spec} R$ quand $R$ est commutative, ce que le
+  raisonnement « ne prouve pas » ;\footnote{Le tapuscrit écrit « objets de
+  $R$ » ; le sens demande « objets de $C$ ».}
+  \item[d)] la localisation commute à la restriction aux ouverts affines ;
+  \item[e)] deux objets sont \emph{apparentés} s'ils sont localement
+  isomorphes, et les objets apparentés à un objet donné forment une catégorie
+  localisable qui est une catégorie de Deuring --- au sens large de la page 25,
+  par a) ---, où la frappe s'arrête, au milieu de la phrase.
+\end{itemize}
+
+\pagerange{83}{124}
+\section*{V. Gerbes motiviques à lien commutatif, et $q$-nombres de Weil (pages 83 à 124)}
+
+Une longue suite de sa main, sans titre ni pagination, qui se lit d'un recto au
+suivant. Elle reprend la question des pages 1 à 13 sous forme générale --- que
+peut-on dire du groupe d'une catégorie motivique quand il est commutatif ? ---
+et la mène jusqu'à une conjecture qui déterminerait le groupe de Galois
+motivique d'un corps fini.
+
+\pagerange{83}{87}
+\subsection*{Algèbres de Riemann et tores compacts (pages 83 à 87)}
+
+Soit $\mathcal{M}$ une catégorie motivique semi-simple de gerbe $\mathcal{G}$,
+dont le lien est commutatif : il correspond à un groupe $G$ de type
+multiplicatif sur $\mathbb{Q}$, et $G^{0}$ est un tore. Comme $G$ est
+commutatif, $G(\mathbb{Q})$ opère sur tout motif par des automorphismes
+naturels ; si $E$ est un motif \emph{fidèle}, on a une injection
+$\varphi \colon G(\mathbb{Q}) \hookrightarrow \operatorname{End}(E)$. Une
+polarisation de $E$ fait de $A = \operatorname{End}(E)$ une algèbre de Riemann,
+c'est-à-dire munie d'une involution positive $a \mapsto a'$, et pour $u \in
+G(\mathbb{Q})$
+\[
+  \varphi(u)\,\varphi(u)' = \varepsilon(u)^{w}\, 1_{E}
+\]
+si $E$ est pur de poids $w$.\footnote{La page écrit $\varepsilon(u)\,1_{E}$, ce
+qui correspond à $w = 1$ ou à une normalisation de $\varepsilon$ ; l'exposant
+$w$ vient de ce que la forme de polarisation est à valeurs dans
+$\mathbb{Q}(-w)$. La conclusion n'en dépend pas.} Le noyau $U =
+\operatorname{Ker}\varepsilon$ s'envoie donc dans le « groupe unitaire » de
+$(A, ')$, dont les points réels forment un groupe compact puisque l'involution
+est positive ; les points rationnels d'un tore étant denses, $U^{0}$ est un
+\emph{tore compact}.
+
+Plus précisément, l'algèbre $B$ engendrée par $G(\mathbb{Q})$ dans $A$ est
+commutative et stable par l'involution, donc produit de corps $L_{i}$ dont chacun
+est ou bien un corps CM --- extension quadratique totalement imaginaire d'un
+corps totalement réel $K_{i}$, l'involution induisant la conjugaison complexe
+---, ou bien un corps totalement réel où elle est triviale.\footnote{La page
+ne prévoit que le premier cas ; le second se présente, par exemple pour le motif
+de Tate. Les normes, ajoute-t-elle, sont proportionnelles sur chaque $L_{i}$ à
+la trace ordinaire.} Alors $B^{*} = H(\mathbb{Q})$ pour $H =
+\prod_{i} R_{L_{i}/\mathbb{Q}}\mathbb{G}_{m}$, et le groupe unitaire est formé
+des points rationnels de $H^{u} = \prod_{i} R_{K_{i}/\mathbb{Q}}
+\Gamma_{i}$, où $\Gamma_{i}$ est le tore des éléments de norme $1$ de
+$L_{i}/K_{i}$ : un tore compact « de nature assez particulière », dont $U^{0}$
+est un sous-tore. Il note qu'il faudrait exprimer $\varepsilon$ et le cocaractère
+$j$ par les tores normes des $L_{i}$ ; ce n'est pas fait. Pour un lien quelconque,
+le quotient commutatif maximal $\mathcal{L}'$ du lien correspond à un groupe
+$H'$, et le même argument montre que $(\operatorname{Ker}\varepsilon|_{H'})^{0}$
+est un tore compact.
+
+Il se place ensuite dans une catégorie munie d'un Frobenius « générateur » : le
+lien est commutatif, de groupe $G$ de type multiplicatif, muni d'un élément $f$
+qui engendre $G$ au sens de Zariski.
+
+\pagerange{89}{93}
+\subsection*{Caractérisations des $q$-nombres de Weil (pages 89 à 93)}
+
+Trois données sont équivalentes : a) un groupe $T$ de type multiplicatif sur
+$\mathbb{Q}$ et un $f \in T(\mathbb{Q})$ qui l'engendre ; b) un sous-groupe $M$
+de $\overline{\mathbb{Q}}^{*}$ stable par Galois (l'image de $\chi \mapsto
+\chi(f)$, injective puisque $f$ engendre) ; c) une sous-catégorie pleine de celle
+des $\mathbb{Q}$-espaces munis d'un automorphisme semi-simple, stable par
+$\otimes$, $\oplus$, sous-objets et duaux.\footnote{La page dit « stable par
+$\otimes$, $\oplus$, sous-objet » et « endomorphisme » ; pour que $M$ soit un
+groupe, il faut les duaux, donc un automorphisme.} On se donne de plus un
+cocaractère $j \colon \mathbb{G}_{m} \to T$ invariant par Galois, soit
+$j^{*} \colon M \to \mathbb{Z}$, et un caractère $\varepsilon \colon T \to
+\mathbb{G}_{m}$ avec $\varepsilon j(\lambda) = \lambda^{\alpha}$ ; on pose $q =
+\varepsilon(f) \in M \cap \mathbb{Q}^{*}$. Alors les conditions
+\begin{itemize}
+  \item[a)] $T^{0}/\operatorname{Im} j$ est compact ;
+  \item[b)] $q > 0$, et $|m| = q^{j^{*}(m)/\alpha}$ pour tout $m \in M$ ;
+  \item[c)] $q > 0$, et pour tout objet $(V, f)$ de degré $i$, les valeurs
+  propres de $f$ dans $V_{\mathbb{C}}$ sont de valeur absolue $q^{i/\alpha}$,
+\end{itemize}
+sont équivalentes. Que b) et c) le soient est clair, les valeurs propres de $f$
+sur les objets de degré $i$ étant les $m$ tels que $j^{*}(m) = i$. Il montre que
+a) implique c) : si $U$ est le plus grand sous-tore compact de $T_{\mathbb{R}}$,
+a) donne $T^{0}_{\mathbb{R}} = U \cdot \operatorname{Im} j$, donc $f^{\nu} = u\,
+j(x)$ pour un entier $\nu > 0$, $u \in U(\mathbb{R})$, $x \in \mathbb{R}^{*}$ ;
+les valeurs propres de $u$ sont de module $1$, celles de $j(x)$ sont les $x^{i}$,
+et $\varepsilon$ étant trivial sur le tore compact $U$, $q^{\nu} =
+\varepsilon(f)^{\nu} = x^{\alpha}$, d'où $|\lambda| = q^{i/\alpha}$. La
+réciproque, qu'il ébauche puis biffe, est vraie et
+immédiate.\footnote{Démonstration de nous. Les caractères de
+$T^{0}/\operatorname{Im} j$ sont les classes des $m$ tels que $j^{*}(m) = 0$ ;
+par b), ils sont de module $1$ en tout plongement, donc $\bar{m} = m^{-1}$ : la
+conjugaison complexe agit par $-1$, ce qui est la compacité. La page ajoute que
+a) équivaut à munir $M$ d'une structure « positive », et laisse en suspens la
+phrase qui suit.}
+
+Prenons $\alpha = 2$ et appelons $\mathbb{K}$ le sous-corps totalement réel
+maximal de $\overline{\mathbb{Q}}$ et $\mathbb{L} = \mathbb{K}(i)$, que la page
+écrit $\mathbb{Q}'$ et $\mathbb{Q}'(i)$ et que la page 127 construira. La
+condition a) équivaut à : pour tout $\lambda \in M$, $\lambda\bar{\lambda} =
+q^{j^{*}(\lambda)}$. Un corollaire affirme que si
+$\lambda_{\alpha}\bar{\lambda}_{\alpha}$ est le même rationnel pour tous les
+conjugués, une puissance de $\lambda$ est dans $\mathbb{L}$ ; en fait $\lambda$
+lui-même y est, par la Proposition de la page 130. Deux marges : les $\lambda$
+réels sont les $\pm (q^{1/2})^{i}$, « les triviaux » ;\footnote{La page écrit
+$\lambda = (q^{1/2})^{i}$ ; le signe est libre.} et l'exemple de $p^{1/4}$,
+dont tous les conjugués ont le même module mais dont le corps n'est ni
+totalement réel ni CM, montre que c'est la \emph{rationalité} de
+$|\lambda|^{2}$ qui compte.
+
+\emph{Proposition (page 93).} Soient $\lambda \in \overline{\mathbb{Q}}^{*}$ et
+$q \in \mathbb{Q}$, $q > 0$. Conditions équivalentes :
+\begin{itemize}
+  \item[(i)] il existe un entier $i$ tel que $|\lambda_{\alpha}| = q^{i/2}$, i.e.\
+  $\lambda_{\alpha}\bar{\lambda}_{\alpha} = q^{i}$, pour tout conjugué
+  $\lambda_{\alpha}$ de $\lambda$ ;
+  \item[(ii)] $\lambda \in \mathbb{L}$ et $\lambda\bar{\lambda} = q^{i}$ pour un
+  entier $i$ ;
+  \item[(ii bis)] il existe $n > 0$ tel que $\lambda^{n} \in \mathbb{L}$, et
+  $\lambda\bar{\lambda} = q^{i}$ pour un entier $i$ ;
+  \item[(iii)] il existe un groupe $G$ de type multiplicatif sur $\mathbb{Q}$,
+  $f \in G(\mathbb{Q})$ et $\mathbb{G}_{m} \xrightarrow{j} G
+  \xrightarrow{\varepsilon} \mathbb{G}_{m}$ avec $\varepsilon j(\lambda) =
+  \lambda^{2}$, $\operatorname{Ker}\varepsilon$ compact et $\varepsilon(f) = q$,
+  tels que $\lambda$ soit valeur propre de $f$ dans une représentation de $G$ ;
+  \item[(iv)] il existe une algèbre de Riemann commutative $A$ sur $\mathbb{Q}$,
+  un $f \in A$ avec $ff' = q^{i}$, et un homomorphisme $A \to
+  \overline{\mathbb{Q}}$ qui envoie $f$ sur $\lambda$.
+\end{itemize}
+Ce sont les \emph{$q$-nombres de Weil} de poids $i$.\footnote{Le nom est
+moderne ; la notion est chez Weil (1948) pour les variétés abéliennes, et chez
+Honda (1968) et Tate (Séminaire Bourbaki, 1968), qui démontrent que tout
+$q$-nombre de Weil entier de poids $1$ est le Frobenius d'une variété abélienne
+sur $\mathbb{F}_{q}$. L'équivalence (i) $\Leftrightarrow$ (ii) est la
+Proposition de la page 130, avec $Q = q^{i}$ ; (ii bis) $\Rightarrow$ (i)
+s'obtient en l'appliquant à $\lambda^{n}$.}
+
+\pagerange{95}{99}
+\subsection*{Unités des corps CM, et la « Conjecture fondamentale » (pages 95 à 99)}
+
+\emph{Proposition (page 95).} Soit $L$ une extension quadratique d'un corps de
+nombres $K$, $\sigma$ son automorphisme non trivial, et $\mathfrak{p}$ un idéal
+premier de $K$ qui se décompose dans $L$ en $\mathfrak{P} \neq \mathfrak{P}'$.
+Il existe $x \in L^{*}$ tel que $x\,\sigma(x) = 1$ et $\operatorname{div} x =
+2h(\mathfrak{P} - \mathfrak{P}')$, où $h$ est l'ordre de la classe de
+$\mathfrak{P} - \mathfrak{P}'$.
+
+En effet, si $\operatorname{div} y = h(\mathfrak{P} - \mathfrak{P}')$, alors
+$y\,\sigma(y) = N(y)$ est une unité $u$ de $K$, et $x = y^{2}/u$
+convient.\footnote{L'énoncé de la page dit $h(\mathfrak{P} - \mathfrak{P}')$ ;
+sa propre démonstration donne $2h$, et la transcription le relève. La marge
+énonce que les diviseurs des éléments de norme $1$ sont les diviseurs de norme
+nulle ; c'est vrai à indice fini près.} Une remarque en tire : si $K$ est
+totalement réel, $L$ CM, et si aucun premier de $K$ au-dessus de $p$ ne se
+décompose dans $L$, un entier $\lambda$ de $L$ tel que $\lambda\bar{\lambda} =
+p^{i}$ est de la forme $p^{i/2}\zeta$, $\zeta$ racine de l'unité : $\mu =
+\lambda^{2}/p^{i}$ est de module $1$ en tout plongement et une unité partout,
+donc une racine de l'unité par le théorème de Kronecker.\footnote{La page
+suppose de plus $K$ et $L$ galoisiens sur $\mathbb{Q}$, pour passer d'un premier
+au-dessus de $p$ à tous ; on a mis l'hypothèse sur tous les premiers. Celle
+qu'elle fait sur la décomposition n'est pas lue.}
+
+Page 97, pour $K$ totalement réel, $L$ CM sur $K$ et $q = p^{n}$, il étudie le
+groupe des $\lambda \in L$ qui sont des unités hors de $p$ et vérifient
+$\lambda\bar{\lambda} = q^{i}$.\footnote{La page écrit « $\lambda \in K$ » ; il
+s'agit de $L$.} Les unités $u$ hors de $p$ telles que $u\bar{u} = 1$ forment un
+groupe, et $u \mapsto (v_{\mathfrak{P}}(u))_{\mathfrak{P} \mid p}$ a un noyau
+fini (les racines de l'unité) et, par la proposition, une image d'indice fini
+dans les diviseurs $D$ au-dessus de $p$ tels que $D + \bar{D} = 0$. Ce groupe
+est donc, à un groupe fini près, libre de rang le nombre de premiers de $K$
+au-dessus de $p$ qui se décomposent dans $L$. La page s'arrête là.
+
+Page 99, il écrit les \emph{conditions nécessaires} pour qu'un $\lambda$ soit
+valeur propre du Frobenius d'une variété projective et lisse sur
+$\mathbb{F}_{q}$, $q = p^{n}$ :
+\begin{itemize}
+  \item[1)] $\lambda$ est un entier algébrique ;
+  \item[2)] $\lambda \in \mathbb{L}$ ;
+  \item[3)] $\lambda^{2} = q^{i}u$, avec $i \in \mathbb{Z}$ et $u$ une unité hors
+  de $p$ de module $1$ en tout plongement --- ce qui équivaut, compte tenu de 2),
+  à $|\lambda_{\alpha}| = q^{i/2}$ pour tout conjugué.
+\end{itemize}
+Une quatrième condition, sur les valuations en deux premiers conjugués, est
+barrée avec la mention « conséquence de 2 et 3 !!! », à juste
+titre.\footnote{Elle s'écrit, avec $v_{\mathfrak{P}}(p) = 1$ et $\mathfrak{P}'$
+le conjugué complexe de $\mathfrak{P}$, $v_{\mathfrak{P}}(\lambda) +
+v_{\mathfrak{P}'}(\lambda) = v_{\mathfrak{P}}(\lambda\bar{\lambda}) = in$. La
+page écrit $in/2$ ; c'est $in$.} L'entier $i$ est le \emph{poids} ; si les
+conditions valent relativement à $q' = q^{m}$, elles valent relativement à $q$,
+avec un poids multiplié par $m$. Les conditions 2) et 3) définissent un groupe
+$M(q) \subset \mathbb{L}^{*}$, et il remarque que $q^{1/2} \in \mathbb{K}$. Que
+ces conditions soient nécessaires est le théorème de Deligne sur les valeurs
+propres de Frobenius (1974), et l'intégralité est dans SGA 7 ; en 1965, c'était
+connu pour les variétés abéliennes (Weil).
+
+Et, dans un cadre :
+
+\emph{Conjecture (« fondamentale »).} Les conditions nécessaires précédentes sont
+suffisantes.
+
+La marge dit « Th.\ d'existence de motifs sur $\mathbb{F}_{q}$ », et le texte :
+« Cela détermine donc explicitement, en termes arithmétiques simples, le groupe
+de Galois motivique des $\mathbb{F}_{q}$. »\footnote{Pour les nombres de poids
+$1$ et les variétés abéliennes, c'est le théorème de Honda (1968), démontré par
+relèvement en caractéristique nulle et multiplication complexe. Dans le
+langage des motifs, et sous la conjecture de Tate, la conséquence qu'il en tire
+--- le groupe de Galois motivique de $\mathbb{F}_{q}$ est le dual du groupe des
+$q$-nombres de Weil --- est ce que démontre Milne (1994), sous cette conjecture. On n'affirme rien
+de plus sur la forme « toute valeur propre en tout poids » telle que la page
+l'énonce.}
+
+\pagerange{101}{105}
+\subsection*{Le groupe $G(q)$, la limite sur $\overline{\mathbb{F}}_{p}$, la conjecture affaiblie (pages 101 à 105)}
+
+« Vérifions que cela donne bien » le bon $G/G^{0}$ : il est dual du groupe des
+racines de l'unité, et ce dernier est bien le dual de $\widehat{\mathbb{Z}}$.
+Soit $M(q) \subset \mathbb{L}^{*}$ le groupe des $q$-nombres de Weil, $G(q)$ le
+groupe de type multiplicatif dual, $f_{q} \in G(q)(\mathbb{Q})$ l'élément
+canonique : c'est, sous la conjecture, le groupe de Galois motivique de
+$\mathbb{F}_{q}$. Pour $q = p^{n}$ on a
+\[
+  M(q^{m}) \subset M(q) \subset M(p), \qquad M(q)^{m} \subset M(q^{m}) ,
+\]
+et la restriction des motifs à $\mathbb{F}_{q^{m}}$ donne $G(q^{m}) \to G(q)$,
+$f_{q^{m}} \mapsto f_{q}^{m}$, dont la transposée est $\lambda \mapsto
+\lambda^{m}$, de noyau fini et d'image comprise entre $M(q^{m})^{m}$ et
+$M(q^{m})$. Une marge décompose
+\[
+  M(q) \simeq \mathbb{Z} \times M^{\circ}, \qquad \lambda \mapsto \bigl(i,
+  \lambda/(q^{1/2})^{i}\bigr) ,
+\]
+où $M^{\circ}$ est le groupe des \emph{unités de Weil}, nombres de Weil de poids
+$0$, qui ne dépend pas de $q$ ; sur $M^{\circ}$ les transitions sont $u \mapsto
+u^{m}$.\footnote{La marge semble restreindre la décomposition au cas où $q$ est
+une puissance paire de $p$ (« $r$ pair », lecture douteuse). Elle vaut pour tout
+$q$, puisque $q^{1/2}$, réel de conjugués $\pm q^{1/2}$, est lui-même un
+$q$-nombre de Weil de poids $1$ ; c'est la décomposition $\Gamma = \sqrt{p}^{\,
+\mathbb{Z}} \times \Gamma^{0}$ de la page 4. Le reste de la marge, sur la
+multiplication « par $2$ », est illisible.} La limite inductive $M(q^{\infty})$
+des $M(q^{m})$ le long de ces transitions est sans torsion, et
+\[
+  M(q^{\infty}) \simeq \mathbb{Z} \times (M^{\circ} \otimes_{\mathbb{Z}}
+  \mathbb{Q}) ;
+\]
+son dual doit être le groupe de Galois motivique de $\overline{\mathbb{F}}_{p}$,
+et $M^{\circ} \otimes \mathbb{Q}$ s'identifie au quotient par les racines de
+l'unité du groupe des $\lambda \in \overline{\mathbb{Q}}^{*}$ dont une puissance
+est dans $M^{\circ}$. Un essai encadré d'expliciter cette identification est
+barré.
+
+D'où, page 105, la « forme plus juste, géométrique » : le groupe de Galois
+motivique de $\overline{\mathbb{F}}_{p}$ serait
+\[
+  G \simeq D(M^{\circ} \otimes \mathbb{Q}) \times \mathbb{G}_{m} ,
+\]
+$j$ étant l'injection de $\mathbb{G}_{m}$ et $\varepsilon(x, \lambda) =
+\lambda^{2}$ ; la « partie compacte » est le premier facteur.\footnote{C'est le
+tore qu'on appelle aujourd'hui tore des nombres de Weil, noté $P$ chez Langlands
+et Rapoport (1987) et chez Milne (1994), limite projective des tores $P(p^{n})$ ;
+son identification au groupe de Galois motivique de $\overline{\mathbb{F}}_{p}$
+est conditionnelle à la conjecture de Tate.} Et en termes de valeurs propres :
+
+\emph{Conjecture affaiblie.} Soit $\lambda$ un entier algébrique de la forme
+$\lambda = p^{i/2}u$, avec $i \geqslant 0$ et $u$ une unité de Weil (une unité
+hors de $p$ de module $1$ en tout plongement complexe) dont une puissance est
+dans $\mathbb{L}$. Il existe un entier $m > 0$ tel que $\lambda^{m}$ soit valeur
+propre du Frobenius $f_{p^{m}}$ dans un motif semi-simple de poids $i$ sur
+$\mathbb{F}_{p^{m}}$.\footnote{L'énoncé est raturé ligne à ligne et l'état final
+se lit mal. Parmi les conditions sur $u$, la page lit seulement $u^{n} \in
+\mathbb{L}^{*}$ et $v_{\mathfrak{P}}(u^{n}) + v_{\mathfrak{P}'}(u^{n}) = 0$ pour
+deux premiers conjugués ; sans la condition archimédienne $|u| = 1$ en tout
+plongement, que l'on a supposée, $\lambda$ ne serait pas un nombre de Weil (une
+unité totalement positive de $\mathbb{K}$ satisfait les conditions lues).}
+
+La marge dit que cela « résulterait probablement de la théorie de la
+multiplication complexe : cf.\ Taniyama--Shimura ». C'est exactement la voie de
+Honda : relever en caractéristique nulle une variété abélienne à multiplication
+complexe dont le Frobenius se calcule par la formule de Shimura--Taniyama.
+
+\pagerange{107}{113}
+\subsection*{Corps CM et tores associés (pages 107 à 113)}
+
+Page 107, pour $K$ totalement réel et $L = K(x)$ quadratique,
+$x^{2} - ax + b = 0$ : $L$ est totalement imaginaire si et seulement si le
+discriminant $(x - \bar{x})^{2}$ est totalement négatif. Pour $x \in
+\overline{\mathbb{Q}} \subset \mathbb{C}$, sont équivalents : $x + \bar{x}$
+totalement réel et $(x - \bar{x})^{2}$ totalement strictement négatif ; $x$
+engendre une extension CM d'un corps totalement réel ; $x \in \mathbb{L} -
+\mathbb{K}$. (Pour l'une des implications on prend $K = \mathbb{Q}(x + \bar{x},
+x\bar{x})$, et la remarque que $x\bar{x} = \tfrac{1}{4}((x + \bar{x})^{2} - (x -
+\bar{x})^{2})$ rend superflue la condition sur $x\bar{x}$.) Il en tire que ces
+conditions sont stables par conjugaison, « ce qui n'était pas évident
+autrement ». Avec des inégalités larges, les conditions équivalent à $x \in
+\mathbb{L}$ ; elles entraînent que $x_{\alpha}\bar{x}_{\alpha}$ est totalement
+positif pour tout conjugué, et la réciproque est marquée d'un « ? » que la page
+ne lève pas.
+
+Page 109, il construit le tore de $M(q)$ pour un corps $L$ CM galoisien,
+$M(q)$ étant l'ensemble des $\lambda \in L$ entiers hors de $p$ tels que
+$\lambda\bar{\lambda} = q^{i}$. Par la page 97, le groupe $M_{0}$ des unités de
+Weil de $L$, modulo la torsion, s'envoie avec un noyau fini et une image d'indice
+fini dans le groupe $(\mathbb{Z}^{\mathcal{P}})'$ des diviseurs $D$ supportés
+au-dessus de $p$ tels que $D + \bar{D} = 0$.\footnote{La page écrit
+$M_{0}(q)/\mathrm{Torsion} \simeq (\mathbb{Z}^{\mathcal{P}})'$, une égalité. La
+page 97 ne donne qu'un indice fini, et la page 111 remarque elle-même qu'un
+certain relèvement n'existe que si l'égalité a lieu ; la page 113 en cherche un
+contre-exemple.} Un premier $\mathfrak{P}$ de $L$ au-dessus de $p$ définit la
+forme $\lambda \mapsto v_{\mathfrak{P}}(\lambda)$, d'où un cocaractère de
+$G_{L}$ ; il est rationnel sur le corps $L_{0}$ des invariants du groupe de
+décomposition $\Gamma_{\mathfrak{P}}$, et $L_{0}$ n'est pas réel puisque la
+conjugaison complexe déplace $\mathfrak{P}$. Soit $K_{0} = L_{0} \cap K$. Le
+groupe $(\mathbb{Z}^{\mathcal{P}})'$ est celui des caractères du tore
+\[
+  G' = R_{K_{0}/\mathbb{Q}}\bigl( \operatorname{Ker}(N \colon
+  R_{L_{0}/K_{0}}\mathbb{G}_{m} \to \mathbb{G}_{m}) \bigr), \qquad
+  G'(\mathbb{Q}) = \operatorname{Ker}(N_{L_{0}/K_{0}} \colon L_{0}^{*} \to
+  K_{0}^{*}) ,
+\]
+et l'inclusion d'indice fini des groupes de caractères donne une isogénie
+$\varphi \colon G' \to G^{0}$, par laquelle le cocaractère $v_{\mathfrak{P}}$ se
+factorise. L'élément de Frobenius, corrigé pour tomber dans $G^{0}$, ne se relève
+dans $G'(\mathbb{Q})$ que si l'isogénie est un isomorphisme. Page 113, pour
+$K_{0} = \mathbb{Q}$, il s'agit de trouver un corps quadratique imaginaire dont
+le groupe des classes n'est pas un $2$-groupe, la conjugaison y agissant par
+l'inverse ; la marge dit « demander à Serre ? », et la page s'arrête au premier
+tiers.
+
+\pagerange{116}{124}
+\subsection*{Foncteurs fibres réels et polarisations (pages 116 à 124)}
+
+Soit $G$ le groupe d'une situation motivique, $U = \operatorname{Ker}(\varepsilon
+|_{G^{0}})$, et $j$ le cocaractère des poids, $\varepsilon j(\lambda) =
+\lambda^{2}$. Comme $\langle \varepsilon, j \rangle = 2$, le caractère
+$\varepsilon$ de $G^{0}$ est ou bien primitif, ou bien le carré d'un caractère
+$\chi$ tel que $\langle \chi, j \rangle = 1$ --- un carré « normalisé ».
+
+\emph{Proposition 1 (page 116).} Conditions équivalentes : (i) $U$ est un tore ;
+(ii) $\varepsilon$ n'est pas un carré dans le groupe des caractères de $G^{0}$ ;
+(iii) $\mathcal{M}_{\mathbb{R}}$ admet un foncteur fibre, i.e.\ la gerbe
+$\mathcal{G}_{\mathbb{R}}$ n'est pas vide. C'est toujours le cas si
+$\mathcal{M}$ n'a que des degrés pairs, i.e.\ si $j(-1) = 1$.
+
+\emph{Proposition 2.} Conditions équivalentes : (i) $U \simeq U^{0} \times
+\mu_{2}$, $U^{0}$ un tore ; (ii) $\varepsilon$ est un carré normalisé ; (iii)
+$\mathcal{M}_{\mathbb{R}}$ n'a pas de foncteur fibre.\footnote{La transcription
+lit la condition (ii) de la Proposition 2 « $\varepsilon$ n'est pas un carré
+normalisé », et celle de la Proposition 1 en partie illisible. La page dit
+pourtant que (ii) de la Proposition 1 équivaut à la négation de (ii) de la
+Proposition 2, et démontre (ii) de la Proposition 1 en exhibant, en degrés
+pairs, un $j'$ avec $\varepsilon j' = \mathrm{id}$ --- ce qui rend $\varepsilon$
+primitif. Et sur $\mathbb{F}_{p}$, où $U \simeq U^{0} \times \mu_{2}$ et où il n'y
+a pas de foncteur fibre réel (pages 4 et 10), $\varepsilon = \chi^{2}$ avec
+$\chi$ le caractère « $\sqrt{p}$ ». On a donc écrit : (ii) de la Proposition 1,
+$\varepsilon$ n'est pas un carré ; (ii) de la Proposition 2, $\varepsilon$ est un
+carré normalisé. Le « pas » de la transcription est soit une inversion de la
+page, soit une lecture ; les énoncés donnés sont ceux qui sont vrais.}
+
+Les démonstrations. Les caractères de $U$ sont $X(G^{0})/\mathbb{Z}\varepsilon$ ;
+ce groupe est sans torsion si $\varepsilon$ est primitif, et de torsion
+$\mathbb{Z}/2$, engendrée par $\chi$ et scindée par $x \mapsto \langle x, j
+\rangle \bmod 2$, si $\varepsilon = \chi^{2}$ : d'où (i) $\Leftrightarrow$ (ii)
+dans les deux cas. (iii) $\Rightarrow$ (ii) de la Proposition 1 : dans
+$\mathcal{M}_{\mathbb{R}}$ muni d'un foncteur fibre, un objet de degré impair a un
+rang pair, comme le montre l'existence d'une forme alternée fondamentale, alors
+qu'un carré normalisé $\varepsilon = \chi^{2}$ donnerait un objet de rang $1$ et
+de degré $\langle \chi, j \rangle = 1$. (i) $\Rightarrow$ (iii) : l'obstruction
+vit dans $H^{2}(\mathbb{R}, U)$, qui est nul pour un tore compact. En degrés
+pairs, $j = 2j'$ et $\varepsilon j' = \mathrm{id}$, d'où la dernière assertion
+de la Proposition 1, et le \emph{corollaire} : pour $\mathcal{M}$ quelconque,
+la sous-catégorie $\mathcal{M}^{\mathrm{pair}}$ des degrés pairs, de groupe
+$G/j(\mu_{2})$, admet un foncteur fibre réel.
+
+\emph{Corollaire (page 118).} Dans le cas de la Proposition 2, $G^{0} \simeq
+U^{0} \times \mathbb{G}_{m}$ avec $\chi = \mathrm{pr}_{2}$, donc $\varepsilon =
+\mathrm{pr}_{2}^{2}$ ;\footnote{La page écrit $\varepsilon = \mathrm{pr}_{2}$ et
+$j(\lambda) = j_{1}(\lambda)^{2}$ : c'est la même chose après avoir remplacé
+$\varepsilon$ par sa racine carrée normalisée $\chi$.} la structure tensorielle de
+$\mathcal{M}_{\mathbb{R}}$ est connue par $G$ et l'unique élément non nul de
+$H^{2}(\mathbb{R}, U)$, qui vient de $H^{2}(\mathbb{R}, \mu_{2})$, et il y a un
+objet de degré $1$ et de rang $2$ sur lequel $U^{0}$ agit trivialement --- le
+modèle est le $h^{1}$ d'une courbe supersingulière. Dans le cas favorable
+$\mathcal{G}_{\mathbb{R}} \neq \emptyset$, l'ensemble des classes de foncteurs
+fibres réels est un torseur sous $H^{1}(\mathbb{R}, U) \simeq
+(\mathbb{Z}/2)^{\dim U}$, les points d'ordre $2$ du tore compact. À chaque
+foncteur fibre réel correspond une « structure polarisante » sur $G^{0}$, donnée
+par un homomorphisme $i_{1}$ défini sur $\mathbb{C}$ et soumis à deux conditions
+qu'il écrit, $\varepsilon_{\mathbb{R}} i_{1} = \mathrm{id}$ et $i_{1}\bar{\imath}_{1}
+= j_{\mathbb{R}}$ ; les structures polarisantes forment un torseur sous le même
+groupe, et l'application, compatible aux actions, est donc bijective : foncteurs
+fibres réels et polarisations « se déterminent mutuellement ».\footnote{Le
+domaine de $i_{1}$ est lu $\mu_{2,\mathbb{C}}$. Les deux conditions ressemblent
+à celles de l'opérateur de Weil $h(\sqrt{-1})$ et de sa relation au poids, qui
+demanderaient $\mu_{4}$ ; la transcription ne permet pas de trancher, et on
+n'a pas corrigé.} Il demande si le groupe des automorphismes de
+$(G^{0}_{\mathbb{R}}, \varepsilon, j)$ opère transitivement sur les polarisations,
+ou si l'on peut en distinguer une.
+
+Pour les motifs sur $\mathbb{F}_{q}$, $q = p^{n}$, il y a une classe distinguée :
+si $G$ correspond à $M \subset L^{*}$, $L$ CM, et $\mathfrak{P}$ est un premier de
+$L$ au-dessus de $p$, la forme
+\[
+  i^{*}(\lambda) = \tfrac{1}{n}\, v_{\mathfrak{P}}(\lambda) , \qquad
+  v_{\mathfrak{P}}(p) = 1 ,
+\]
+vérifie $i^{*}(\lambda) + i^{*}(\bar{\lambda}) = \tfrac{1}{n}
+v_{\mathfrak{P}}(q^{j^{*}(\lambda)}) = j^{*}(\lambda)$ et $i^{*}(q) = 1$, soit
+$i + \bar{\imath} = j$ et $\varepsilon i = \mathrm{id}$. Mais ses valeurs ne sont
+pas entières en général : c'est un cocaractère \emph{fractionnaire}, un
+homomorphisme vers $G$ du tore des pentes de caractères $\mathbb{Q}$, non un
+homomorphisme $\mathbb{G}_{m} \to G$.\footnote{La page écrit $i \colon
+\mathbb{G}_{m,\mathbb{C}} \to G_{\mathbb{C}}$ ; la marge demande de « calculer
+cette forme par degrés : valeurs entières », et le nombre de Weil $\sqrt{p}$,
+de valuation $\tfrac{1}{2}$, montre que l'intégralité manque. C'est le
+cocaractère de Newton, ou des pentes : le tore des pentes est construit au
+dossier 10, pages 66 à 83, et la page 12 de ce dossier-ci en donne la version
+locale. Dans le groupoïde de Langlands et Rapoport, c'est le morphisme qui
+exprime la place $p$.} Il propose de « normaliser » $G_{\mathbb{C}}$ par ce
+choix, qui détermine la structure d'effectivité ; une marge suggère l'exemple
+$L = \mathbb{Q}(\sqrt{-p})$ de nombre de classes $1$, $p = 3, 7, 11$.
+
+Les pages 122 et 124, très rapides, en tirent une « structure de positivité »
+sur $G$ : les différences $i - i'$ de ces cocaractères engendrent un sous-groupe
+d'indice fini de $\operatorname{Hom}(\mathbb{G}_{m,\mathbb{C}},
+G^{0}_{\mathbb{C}})$, sans indication sur l'indice --- « question semble
+sérieuse ». Sur un corps fini, la conjugaison complexe, centrale dans
+$\operatorname{Gal}(L/\mathbb{Q})$, induit sur $G$ une involution canonique qui
+est la conjugaison sur les cocaractères ; mais il ne semble pas qu'elle se
+relève à la gerbe, à cause de la classe fondamentale dans $H^{2}(\mathbb{Q},
+U)$, et la page s'arrête au premier tiers.
+
+\pagerange{127}{132}
+\section*{VI. Le corps totalement réel maximal et le corps CM maximal (pages 127 à 132)}
+
+Six feuillets écrits posément, qui fondent ce que les pages 93 à 113 utilisaient
+sous le nom de $\mathbb{Q}'$ et $\mathbb{Q}'(i)$.
+
+\emph{Définition et scholie.} Une extension algébrique $K$ de $\mathbb{Q}$ est
+\emph{totalement réelle} si tout plongement $K \to \mathbb{C}$ tombe dans
+$\mathbb{R}$ ; un élément est totalement réel (resp.\ totalement positif) si
+toutes ses images le sont. Un corps engendré par des sous-corps, ou des éléments,
+est totalement réel si et seulement s'ils le sont ; il y a donc un plus grand
+sous-corps totalement réel, et dans $\overline{\mathbb{Q}}$ un plus grand,
+$\mathbb{K}$. Si $\pi = \operatorname{Gal}(\overline{\mathbb{Q}}/\mathbb{Q})$ et
+$\tau$ est la conjugaison complexe, le sous-groupe $\pi'$ qui fixe $\mathbb{K}$
+est le sous-groupe distingué fermé engendré par les conjugués $\sigma\tau
+\sigma^{-1}$ de $\tau$ ; $\mathbb{K}$ est galoisien sur $\mathbb{Q}$.
+
+Le groupe $H = \pi'^{\mathrm{ab}}$ de l'extension abélienne maximale de
+$\mathbb{K}$ est topologiquement engendré par les images des conjugués de $\tau$,
+qui sont d'ordre $2$ : il est annulé par $2$. Pour une extension abélienne $L
+\neq \mathbb{K}$ de $\mathbb{K}$, sont équivalents : (i) les $\sigma\tau
+\sigma^{-1}$ coïncident sur $L$ ; (ii) $L$ est quadratique sur $\mathbb{K}$ et
+galoisienne sur $\mathbb{Q}$ ; (iii) $L$ est quadratique et totalement
+imaginaire sur $\mathbb{K}$. Une telle $L$ existe et est unique : c'est
+$\mathbb{L} = \mathbb{K}(\sqrt{-1})$, le quotient de $H$ par l'action de
+$\operatorname{Gal}(\mathbb{K}/\mathbb{Q})$.
+
+\emph{Corollaire (page 129).} Un sous-corps $L$ de $\overline{\mathbb{Q}}$ est
+contenu dans $\mathbb{L}$ si et seulement s'il est totalement réel ou extension
+quadratique totalement imaginaire d'un corps totalement réel --- un corps CM.
+
+Et $\mathbb{L}$ est la plus grande extension galoisienne de $\mathbb{Q}$ dans le
+groupe de laquelle l'image de $\tau$ est centrale ; elle contient donc
+l'extension abélienne maximale de $\mathbb{Q}$.\footnote{On note aujourd'hui
+$\mathbb{Q}^{\mathrm{tr}}$ et $\mathbb{Q}^{\mathrm{cm}}$ ces deux corps ; le
+second est le corps de définition naturel des nombres de Weil et du groupe de
+Serre. Les démonstrations de la page sont complètes ; on ne les reprend pas.}
+
+\emph{Proposition (page 130).} Soient $Q \in \mathbb{Q}^{*}$ et $\lambda$ un
+nombre algébrique. Conditions équivalentes :
+\begin{itemize}
+  \item[(a)] $|\lambda_{\alpha}|^{2} = Q$ pour tout conjugué $\lambda_{\alpha}$ ;
+  \item[(b)] il existe un corps totalement réel $K$ tel que $K(\lambda)$ soit $K$
+  ou une extension CM de $K$, et $\lambda\bar{\lambda} = Q$ ;
+  \item[(b$'$)] de même avec $K = \mathbb{Q}(a)$, $a = \lambda + \bar{\lambda} =
+  \lambda + Q/\lambda$ ;
+  \item[(b$''$)] $\lambda$ est racine de $T^{2} - aT + Q$ avec $a$ totalement
+  réel et $4Q - a^{2}$ nul ou totalement positif ;
+  \item[(c)] $\lambda \in \mathbb{L}$ et $\lambda\bar{\lambda} = Q$.
+\end{itemize}
+Le point décisif est (c) $\Rightarrow$ (a) : si $\lambda_{\alpha} =
+\sigma_{\alpha}(\lambda)$, alors, $\tau$ étant central sur $\mathbb{L}$,
+$\bar{\lambda}_{\alpha} = \sigma_{\alpha}(\bar{\lambda})$ et
+$\lambda_{\alpha}\bar{\lambda}_{\alpha} = \sigma_{\alpha}(Q) = Q$. Les autres
+implications se font par le trinôme : si $|\lambda_{\alpha}|^{2} = Q$, les
+conjugués de $a$ sont les $\lambda_{\alpha} + \bar{\lambda}_{\alpha}$, réels, et
+le discriminant $a_{\alpha}^{2} - 4Q$ est $\leqslant 0$. (Toutes les conditions
+sont fausses si $Q < 0$.) Un corollaire encadré --- tout sous-corps de
+$\mathbb{L}$ fini sur $\mathbb{Q}$ serait engendré par un $\lambda$ tel que
+$\lambda\bar{\lambda} = Q$ --- est barré, à raison (un corps totalement réel
+n'est pas engendré par un $\pm\sqrt{Q}$) ; la remarque qui suit en donne une
+forme juste et plus faible.
+
+\emph{Remarque (page 131).} Pour $K$ totalement réel de degré fini et $Q > 1$
+rationnel, il existe une extension CM $L$ de $K$ et un $i \geqslant 0$ tels que
+$L = \mathbb{Q}(\lambda)$ avec $\lambda\bar{\lambda} = Q^{i}$ : on prend $K =
+\mathbb{Q}(a)$, $i$ assez grand pour que $4Q^{i} - a^{2}$ soit totalement
+positif, et $\lambda$ racine de $T^{2} - aT + Q^{i}$, entier si $Q$ et $a$ le sont.
+Alors $\lambda' = \lambda^{1/i}$ est encore dans $\mathbb{L}$ par (a)
+$\Rightarrow$ (c), avec $\lambda'\bar{\lambda}' = Q$, et $\mathbb{Q}(\lambda')$
+contient $K$ : \emph{tout corps totalement réel est contenu dans le corps d'un
+$Q$-nombre de Weil de poids $1$}.\footnote{La page justifie $\lambda' \in
+\mathbb{L}$ par « $\lambda\bar{\lambda} = Q$ », pour $Q^{i}$. La formulation en
+italique est de nous.}
+
+\pagerange{134}{138}
+\section*{VII. Groupes de Galois motiviques commutatifs (pages 134 à 138)}
+
+Sous ce titre souligné, un dévissage. Soit $k$ un corps, $\mathcal{M}$ la
+catégorie des isomotifs semi-simples sur $k$, $G$ son lien, $\mathcal{G}$ la
+gerbe de ses foncteurs fibres.\footnote{« Supposé commutatif » est biffé après
+« $G$ lien de $\mathcal{M}$ » ; le titre dit commutatif, et le dévissage n'en a
+pas besoin.} Trois sous-catégories donnent trois quotients.
+
+La sous-catégorie $\mathcal{M}_{0}$ engendrée par $\mathbb{Q}(1)$ a pour lien
+$\mathbb{G}_{m}$, d'où $\mathcal{G} \to \mathcal{G}_{0}$ et $\varepsilon \colon G
+\to \mathbb{G}_{m}$ ; $\mathcal{G}_{0}$ est neutre, et comme
+$H^{1}(\mathbb{Q}, \mathbb{G}_{m}) = 0$, deux foncteurs fibres sur
+$\mathcal{M}_{0}$ sont isomorphes. Fixer l'un d'eux, $\varphi$, et ne garder que
+les foncteurs fibres munis d'un isomorphisme de leur restriction avec lui donne
+une gerbe $\mathcal{G}_{\varphi}$ de lien $V = \operatorname{Ker}\varepsilon$ ;
+une marge demande de vérifier chez Giraud.
+
+La sous-catégorie $\mathcal{M}_{\mathrm{Art}}$ des motifs d'Artin --- les $M$
+tels que les puissances tensorielles de $M \oplus \check{M}$ n'aient qu'un nombre
+fini de constituants simples --- est équivalente à une catégorie de
+$\mathbb{Q}$-espaces tordus par $\operatorname{Gal}(\bar{k}/k)$ ; son lien
+$G'$ est le quotient de $G$ par la composante neutre, $1 \to G^{0} \to G \to G'
+\to 1$. Le choix d'une clôture $\bar{k}$ y donne un foncteur fibre $\psi$, d'où une
+gerbe $\mathcal{G}_{\psi}$ de lien $G^{0}$ ; comme en général
+$H^{1}(\mathbb{Q}, G') \neq 1$, c'est un vrai choix.\footnote{La page écrit
+$\mathcal{M}'$ pour les motifs d'Artin, et réemploie les accents à la page 138
+pour les objets relatifs à une extension $k'$ ; on a écrit
+$\mathcal{M}_{\mathrm{Art}}$ et, pour $k'$, des indices.}
+
+La sous-catégorie $\mathcal{M}^{(0)}$ engendrée par les deux précédentes est
+formée des sommes finies $\sum_{i} V_{i}(i)$, $V_{i}$ d'Artin ; elle a le
+foncteur fibre $\sum V_{i}(i) \mapsto \sum V_{i}(\bar{k})$ et le lien $G^{(0)}
+\simeq G' \times \mathbb{G}_{m}$, d'où une gerbe $\mathcal{G}_{\chi}$ de lien $U =
+\operatorname{Ker}(G \to G^{(0)}) = V \cap G^{0}$. La page 138, un feuillet
+déchiré écrit en travers, dessine les carrés :
+
+\begin{tikzcd}
+\mathcal{G}_{\chi} \arrow[r] \arrow[d] & \mathcal{G}_{\psi} \arrow[d] \\
+\mathcal{G}_{\varphi} \arrow[r] & \mathcal{G}
+\end{tikzcd}
+
+\begin{tikzcd}
+U \arrow[r, hook] \arrow[d, hook] & G^{0} \arrow[d, hook] & \\
+V \arrow[r, hook] & G \arrow[r, "\varepsilon"] \arrow[d] & \mathbb{G}_{m} \\
+ & G' &
+\end{tikzcd}
+
+et leur comportement par extension algébrique $k'/k$ : le lien $G_{k'}$ de
+$\mathcal{M}_{k'}$ s'injecte dans $G$, avec un isomorphisme sur les composantes
+neutres, $U_{k'} \simeq U$, $G^{0}_{k'} \simeq G^{0}$, et des morphismes de
+gerbes $\mathcal{G}_{\chi, k'} \to \mathcal{G}_{\chi}$, $\mathcal{G}_{\psi, k'}
+\to \mathcal{G}_{\psi}$.\footnote{On a redressé les flèches : la page dessine les
+carrés avec $\mathcal{G}_{\chi}$ et $U$ en bas à gauche, les flèches montant vers
+$\mathcal{G}_{\varphi}$ et $V$ ; le contenu est le même.}
+
+\pagerange{139}{154}
+\section*{VIII. Motifs essentiellement abéliens et théorie du corps de classes (pages 139 à 154)}
+
+Une couverture orange (page 139) porte ce titre. Suivent un paragraphe 1,
+entouré, sur des tores attachés aux corps de nombres, et un paragraphe 2 sur les
+structures de multiplication complexe. La notation $T_{\mathfrak{m}} =
+T/\overline{E}_{\mathfrak{m}}$ qu'il emploie est celle de Serre, \emph{Abelian
+$\ell$-adic representations} (1968), ce qui laisse penser que ces pages lui sont
+postérieures.
+
+\pagerange{140}{144}
+\subsection*{§ 1. Les tores $T_{K}$, $V_{K}$ et le tore de Serre (pages 140 à 144)}
+
+Pour $K$ fini sur $\mathbb{Q}$, soient $T_{K} = R_{K/\mathbb{Q}}\mathbb{G}_{m}$ et
+$V_{K} = \operatorname{Ker}(N_{K/\mathbb{Q}} \colon T_{K} \to \mathbb{G}_{m})$.
+Les unités $E_{K}$ de norme $1$, $E_{1} = E_{K} \cap V_{K}(\mathbb{Q})$, sont
+d'indice $1$ ou $2$ dans $E_{K}$.
+
+\emph{Proposition (page 140).} Soit $V'_{K} = V_{K}/R$ un quotient de $V_{K}$.
+Conditions équivalentes :
+\begin{itemize}
+  \item[(i)] l'image de $E_{1}$ dans $V'_{K}(\mathbb{Q})$ est finie ;
+  \item[(ii)] il existe un module $\mathfrak{m}$ de $K$ tel que $T_{K} \to
+  T_{\mathfrak{m}} = T_{K}/\overline{E}_{\mathfrak{m}}$ tue $R$, où
+  $\overline{E}_{\mathfrak{m}}$ est l'adhérence de Zariski du groupe des unités
+  congrues à $1$ modulo $\mathfrak{m}$ ;
+  \item[(iii)] $(V'_{K})_{\mathbb{R}}$ est un tore compact ;
+  \item[(iv)] si $L$ est le plus grand sous-corps weilien de $K$ et $L_{0} = L
+  \cap \mathbb{R}$, $R$ contient le noyau de $V_{K} \xrightarrow{N_{K/L}} V_{L}
+  \to V_{L}/\operatorname{Im} V_{L_{0}}$ : $V'_{K}$ est un quotient de
+  $V_{L}/V_{L_{0}}$.
+\end{itemize}
+
+(i) $\Leftrightarrow$ (ii) : tout sous-groupe d'indice fini des unités contient
+un groupe de congruence $E_{\mathfrak{m}}$ --- c'est le théorème de Chevalley
+(1951) qu'il invoque. (i) $\Rightarrow$ (iii) : $E_{1}$ est un sous-groupe
+discret de rang $r_{1} + r_{2} - 1$, cocompact dans $V_{K}(\mathbb{R})$, qui est
+$\mathbb{R}_{>0}^{\,r_{1} + r_{2} - 1}$ fois un groupe compact ; si l'image de
+$E_{1}$ est finie, le quotient $V'(\mathbb{R})$ est compact. (iii) $\Rightarrow$
+(iv) se lit sur les caractères : ceux de $T_{K}$ forment
+$\mathbb{Z}[I_{K}]$, où $I_{K} = G/Q$ est l'ensemble des plongements de $K$, pour
+$G$ le groupe de Galois d'une clôture galoisienne $\widetilde{K}$ ; ceux de $V'$
+forment un sous-module $N$ sur lequel $\tau$ agit par $-1$ modulo les constantes ;
+tous les conjugués de $\tau$ y agissent donc de la même façon, le sous-groupe
+distingué $P$ de $G$ engendré par les $\tau \cdot \sigma\tau\sigma^{-1}$ y agit
+trivialement, et $N \subset \mathbb{Z}[I_{K}]^{P} = \mathbb{Z}[P\backslash I_{K}]
+= \mathbb{Z}[I_{L}]$, où $L = K \cap K'$, $K'$ étant le corps fixe de $P$ --- le
+plus grand sous-corps weilien de $\widetilde{K}$. (iv) $\Rightarrow$ (ii) vient de ce que $N_{K/L}$
+envoie unités sur unités et du corollaire 1.\footnote{L'ordre des feuillets
+n'est pas celui de la lecture : la phrase coupée au bas de la page 140 reprend
+en tête de la page 142, et la page 141, qui donne le corollaire 1 et (iv)
+$\Rightarrow$ (ii), se lit après la page 142. Une démonstration de (iii)
+$\Rightarrow$ (i), encadrée, est barrée.}
+
+\emph{Corollaire 1 (page 141).} Si $K$ est weilien et $K_{0} = K \cap
+\mathbb{R}$, le tore $V_{K}/V_{K_{0}} \simeq T_{K}/T_{K_{0}}$ est compact --- sur
+$\mathbb{R}$ c'est un produit de cercles ---, $V_{K_{0}}$, déployé sur
+$\mathbb{R}$, n'a pas de quotient compact non trivial, et les unités de $K_{0}$
+sont d'indice fini dans celles de $K$, les rangs étant tous deux $r - 1$ pour
+$[K_{0} : \mathbb{Q}] = r$.\footnote{La page écrit $[K_{0} : K] = r$ ; c'est
+$[K_{0} : \mathbb{Q}]$.}
+
+\emph{Corollaire 2 (page 143).} Parmi les quotients satisfaisant la
+proposition, il y en a un maximal, $V_{K}^{\mathrm{cpt}}$ : $N_{K/L}$ induit
+$V_{K}^{\mathrm{cpt}} \simeq V_{L}/V_{L_{0}}$, et le $R$ minimal est
+$\operatorname{Ker}(N_{K/L}) \cdot V_{L_{0}}$ --- ce qu'on vérifie parce que
+$N_{K/L}(\lambda) = \lambda^{[K:L]}$ sur $L$ et que l'élévation à une puissance
+est un épimorphisme du tore $V_{L_{0}}$.
+
+Il pose alors $S^{\circ}_{K} = T_{K}/R$, $R$ minimal, d'où une suite exacte
+\[
+  1 \longrightarrow V_{K}^{\mathrm{cpt}} \longrightarrow S^{\circ}_{K}
+  \xrightarrow{\ \varepsilon\ } \mathbb{G}_{m} \longrightarrow 1
+\]
+quotient de $1 \to V_{K} \to T_{K} \to \mathbb{G}_{m} \to 1$. C'est le tore de
+Serre de $K$.\footnote{Le quotient de $T_{K}$ par l'adhérence de Zariski d'un
+sous-groupe d'indice fini assez petit des unités est le tore
+$T_{\mathfrak{m}}$ de Serre (\emph{Abelian $\ell$-adic representations}, 1968,
+chap.\ II) pour $\mathfrak{m}$ assez divisible, que l'on appelle aujourd'hui le
+groupe de Serre $S^{K}$ ; par (i), c'est exactement $T_{K}/R$ pour le $R$
+minimal. Le groupe de Serre complet $S_{\mathfrak{m}}$ est une extension du groupe
+des classes de rayon par ce tore ; c'est elle qui revient à la page 160.} Il est
+contravariant en $K$ par les normes, covariant par les inclusions $i_{K/K'}$,
+mais celles-ci multiplient $\varepsilon$ par $[K' : K]$ :
+
+\begin{tikzcd}
+1 \arrow[r] & V_{K}^{\mathrm{cpt}} \arrow[r] \arrow[d] & S^{\circ}_{K} \arrow[r, "\varepsilon"] \arrow[d, "i_{K/K'}"] & \mathbb{G}_{m} \arrow[r] \arrow[d, "\lambda \mapsto \lambda^{r}"] & 1 \\
+1 \arrow[r] & V_{K'}^{\mathrm{cpt}} \arrow[r] & S^{\circ}_{K'} \arrow[r, "\varepsilon"] & \mathbb{G}_{m} \arrow[r] & 1
+\end{tikzcd}
+
+\emph{Corollaire 3.} Le système projectif des $S^{\circ}_{K}$ équivaut à celui
+des $T_{K}/V_{K_{0}}$ pour $K$ weilien galoisien.
+
+\emph{Corollaire 4.} Il existe un unique homomorphisme $i \colon \mathbb{G}_{m}
+\to S^{\circ}_{K}$ tel que $\varepsilon i(\lambda) = \lambda^{2}$ : unique parce
+que $\operatorname{Ker}\varepsilon$ est compact, donc sans cocaractère non
+trivial ; pour l'existence, si $K$ est réel on prend $\lambda \mapsto
+\lambda^{2}$, sinon l'inclusion $S^{\circ}_{K_{0}} = \mathbb{G}_{m} \to
+S^{\circ}_{K}$, avec $r = 2$.
+
+\pagerange{146}{151}
+\subsection*{§ 2. Structures CM et normes réflexes (pages 146 à 151)}
+
+Soient $E$, $K$ deux extensions de $\mathbb{Q}$ et $\mathfrak{A}$ un idéal de
+$E \otimes_{\mathbb{Q}} K$. Il définit une \emph{structure CM} sur $E$ relative à
+$K$ si l'ensemble $\Sigma$ qu'il découpe dans $\operatorname{Hom}(E,
+\overline{K})$ vérifie $\tau\Sigma = \operatorname{Hom}(E, \overline{K}) - \Sigma$
+pour toute conjugaison complexe $\tau$. Le corps de définition $K_{0} \subset K$
+de l'idéal est alors weilien et non réel. En termes galoisiens, $E$ et $K$
+correspondent à des ensembles homogènes $I_{E}$, $I_{K}$ sous $G =
+\operatorname{Gal}(\overline{\mathbb{Q}}/\mathbb{Q})$, et $\Sigma$ est une partie
+de $I_{E} \times I_{K}$ stable par $G$ telle que $(\tau \times 1)\Sigma$ soit son
+complémentaire ; comme $(\tau \times \tau)\Sigma = \Sigma$, cela équivaut à la
+même condition pour $(1 \times \tau)$ : \emph{la condition est symétrique en $E$
+et $K$}.\footnote{Pour $K = \overline{\mathbb{Q}}$, c'est un type CM de $E$ au sens
+de Shimura et Taniyama --- la page 147 écrit d'ailleurs « structure CM de
+Sh.-Tan. » ---, et le corps $K_{0}$ est son corps réflexe ; la symétrie en $E$ et
+$K$ est la dualité entre un type CM et son type réflexe (Shimura--Taniyama,
+1961). La page 147 lit dans la seconde formule un signe qui ressemble à
+$\subset$ ; c'est l'égalité qui est démontrée.}
+
+Il y a un plus petit couple $(E_{0}, K_{0})$ d'où $\mathfrak{A}$ provient, formé
+de corps weiliens, et si $[E_{0} : \mathbb{Q}] = 2d$ alors $[K_{0} : \mathbb{Q}]
+\leqslant \binom{2d}{d}$.\footnote{La borne vient de ce que le stabilisateur
+d'une partie à $d$ éléments d'un ensemble à $2d$ éléments est d'indice au plus
+$\binom{2d}{d}$. Comme l'orbite de $\Sigma_{y}$ est formée de types CM, qui
+rencontrent chaque paire conjuguée en un point, on a même $[K_{0} : \mathbb{Q}]
+\leqslant 2^{d}$, la borne usuelle du degré réflexe.} Un bimodule $t$ de type CM
+sur $(E, K)$ --- un $E \otimes K$-module monogène dont l'annulateur est de type
+CM --- définit
+\[
+  \Psi_{\Sigma} \colon T_{K} \longrightarrow T_{E}, \qquad \Psi_{\Sigma}(x) =
+  \det\nolimits_{E}(x \mid t) = N_{E \otimes K/E}(x^{1_{\Sigma}}) ,
+\]
+compatible aux normes en $K$ et aux inclusions en $E$. C'est la \emph{norme
+réflexe}. Sur les caractères, $\Psi_{\Sigma}$ est donné par la matrice
+$1_{\Sigma}$ sur $I_{E} \times I_{K}$, de sorte que $\Sigma$ et $\Psi_{\Sigma}$
+se déterminent l'un l'autre. Réduit à $E = E_{0}$, $K = K_{0}$ weilien de degré
+$2d'$, $\Sigma$ est un ensemble $\{\sigma_{1}, \ldots, \sigma_{d'}\}$ de
+plongements $K \to \overline{E}$ qui, avec leurs conjugués, les épuisent, et
+\[
+  \Psi_{\Sigma}(x) = \sigma_{1}(x) \cdots \sigma_{d'}(x) , \qquad
+  \Psi_{\Sigma}|_{T_{K_{r}}} = N_{K_{r}/\mathbb{Q}} ,
+\]
+où $K_{r}$ est le sous-corps réel ; $\Psi_{\Sigma}$ tue donc $V_{K_{r}}$ et se
+factorise par $S^{\circ}_{K}$. De plus $\Psi_{\Sigma} \circ i_{K} =
+i_{E/\mathbb{Q}}$, puisque les deux membres élevés à la puissance $d'$ coïncident
+sur $\mathbb{Q}^{*}$.
+
+\emph{Question (page 150) :} les $\Psi_{\Sigma}$, $\Sigma$ parcourant les
+structures CM de $K$, forment-ils une famille fidèle sur $S^{\circ}_{K}$ ? La
+réponse, écrite aussitôt, est oui : si $\Sigma_{i}$ se déduit de $\Sigma$ en
+remplaçant $\sigma_{i}$ par $\bar{\sigma}_{i}$ et si $\Psi_{\Sigma}(x) =
+\Psi_{\Sigma_{i}}(x) = 1$ pour tout $i$, alors $\sigma_{i}(x) =
+\bar{\sigma}_{i}(x)$, donc $x \in K_{r}$ et $N_{K_{r}/\mathbb{Q}}(x) = 1$, et
+l'argument vaut sur toute $\mathbb{Q}$-algèbre :
+\[
+  \operatorname{Ker}\Psi_{\Sigma} \cap \bigcap_{i}
+  \operatorname{Ker}\Psi_{\Sigma_{i}} = 1 \quad \text{dans } S^{\circ}_{K} .
+\]
+Une seconde question demande si les $E$ quadratiques suffisent, les
+$\Psi$ correspondants étant les normes $N_{K/E}$ vers les sous-corps quadratiques
+imaginaires ; la fin, très rapide, semble répondre que non, un corps de groupe
+$(\mathbb{Z}/2)^{N}$ ayant un tore dans le noyau de toutes ces normes.
+
+\pagerange{153}{154}
+\subsection*{Un calcul de $H^{1}(\mathbb{Q}, T)$ (page 153)}
+
+Soit $K$ un corps CM galoisien de groupe $G$, $\rho$ la conjugaison complexe, et
+$M$ le $G$-module des $\varphi \colon G \to \mathbb{Z}$ tels que $\varphi(\rho
+\sigma) = -\varphi(\sigma)$, qui définit un tore $T$ sur $\mathbb{Q}$ --- le tore
+$T_{K}/T_{K_{0}}$, isomorphe au tore des éléments de norme $1$ de $K/K_{0}$ par
+$x \mapsto x/\bar{x}$. Le sous-groupe $H^{1}(\mathbb{Q}, T)'$ des classes nulles
+en toute place finie s'insère dans une suite exacte à groupes de Tate, d'où
+\[
+  H^{1}(\mathbb{Q}, T)' \simeq \Bigl\{ (a_{v}) \in \mathbb{F}_{2}^{\,
+  \{v \mid \infty\}} \ :\ \sum_{v} a_{v} = 0 \Bigr\} ,
+\]
+les combinaisons à coefficients dans $\mathbb{F}_{2}$ des places à l'infini, de
+somme nulle.\footnote{Contrôle de nous : $H^{1}(\mathbb{Q}, T) =
+K_{0}^{*}/N(K^{*})$ ; une classe localement triviale aux places finies n'est
+déterminée que par ses signes aux places réelles de $K_{0}$ (théorème des normes
+de Hasse, l'extension étant cyclique), et ces signes sont de produit $+1$ par la
+loi de réciprocité de Hilbert. Pour $K$ quadratique imaginaire on trouve $0$.}
+
+La page 154, isolée et barrée au crayon, appartient à un autre texte : des
+familles épimorphiques, effectives ou strictes, dans une catégorie, une
+Proposition 0 sur leur stabilité, et une Proposition 1 selon laquelle un ensemble d'objets est générateur (resp.\
+générateur strict) si et seulement si le morphisme canonique
+$\varinjlim_{T \in \mathcal{G}/X} T \to X$ est épimorphique (resp.\ un
+isomorphisme) ; la démonstration s'interrompt.
+
+\pagerange{156}{164}
+\section*{IX. Corps de classes commutatif et motifs métabéliens (pages 156 à 164)}
+
+La couverture brune de la page 156 porte, de sa main : « Corps de classes
+commutatif $=$ Motifs à groupe fondamental motivique [connexe] commutatif ($=$
+Motifs métabéliens) ». C'est un programme, et les deux feuillets qui suivent,
+d'une encre noire sur papier jauni, en sont l'ébauche.\footnote{« Connexe » est
+une lecture douteuse. Le programme est, en termes d'aujourd'hui, celui que
+Serre a réalisé pour les représentations $\ell$-adiques abéliennes localement
+algébriques (1968), où le groupe $S_{\mathfrak{m}}$ joue le rôle du groupe
+fondamental, et que Langlands (1979) et Deligne (1982) ont prolongé aux motifs
+de type CM sur $\mathbb{Q}$ par le groupe de Taniyama, extension de
+$\operatorname{Gal}(\mathbb{Q}^{\mathrm{ab}}/\mathbb{Q})$ par le groupe de Serre
+--- d'où « métabélien ». Le dossier n'en fait que l'esquisse.}
+
+\pagerange{158}{160}
+\subsection*{Le groupe de classes et le schéma $G^{\circ}$ (pages 158 et 160)}
+
+Soit $K$ un corps de nombres, $A$ son anneau des entiers, $\underline{A}^{*}$ le
+schéma en groupes des unités sur $\mathbb{Z}$, $E = \underline{A}^{*}(\mathbb{Z})$
+les unités et $E^{\circ}$ les unités totalement positives, d'indice $2^{\alpha}$,
+$\alpha \leqslant r_{1}$, égal à $E$ si $K$ est totalement imaginaire. Le groupe
+de Galois abélianisé de $K$ est une extension du groupe des classes \emph{au
+sens restreint} par $\underline{A}^{*}(\widehat{\mathbb{Z}})/\overline{E^{\circ}}$
+--- ou, ce qui revient au même, du groupe des classes par le quotient de
+$\underline{A}^{*}(\widehat{\mathbb{Z}}) \times \pi_{0}(K_{\infty}^{*})$ par
+l'adhérence de $E$.\footnote{La page écrit « extension de $\operatorname{Pic}(A)$
+par $\underline{A}^{*}(\widehat{\mathbb{Z}})/E^{\circ}$ » ; ce n'est exact que si
+$K$ est totalement imaginaire, ou avec le groupe des classes restreint. Le
+quotient est par l'adhérence de $E^{\circ}$, qui est son complété par le théorème
+de Chevalley. Une marge dit « vérification en » suivi d'un mot illisible.} Le
+schéma en groupes connexe sur $\mathbb{Z}$ que la classification des motifs
+abéliens associe à $K$ « semble être »
+\[
+  G^{\circ} = \underline{A}^{*}/\mathfrak{N} ,
+\]
+où $\mathfrak{N}$ est l'adhérence schématique de $E^{\circ}$ : sur $\mathbb{Q}$,
+c'est le quotient de $T_{K}$ par l'adhérence de Zariski des unités, le tore de
+Serre $S^{\circ}_{K}$ de la page 143, dont ceci est un modèle
+entier.\footnote{Le rapprochement avec la page 143 est de nous ; la fin de la page
+158 est peu sûre.} Page 160, une extension canonique $0 \to G^{\circ} \to G \to
+\gamma \to 0$ par un groupe fini de classes --- c'est la forme du groupe
+$S_{\mathfrak{m}}$ de Serre ---, puis, à toute place $\xi$ de $K$, des foncteurs
+\[
+  \text{motifs abéliens} \longrightarrow \bigl(\mathbb{Q}\text{-espaces avec
+  action de } G\bigr) \xrightarrow{\ \Phi_{\xi}\ } \text{structures de Hodge} ,
+\]
+plus une structure réelle si la place est réelle. Ainsi toute représentation de
+$G$, et même de $G^{\circ}$ --- c'est-à-dire de $\underline{K}^{*}$, triviale sur
+les unités ---, reçoit en chaque place, une place du « corps de classes absolu »
+$\widetilde{K}$ étant choisie, une structure de Hodge sur $V \otimes
+\mathbb{C}$.\footnote{« Réseaux de Hodge », lecture douteuse, est ce que la page
+écrit pour le but ; il s'agit de structures de Hodge munies d'un réseau entier.
+C'est aujourd'hui la description des structures de Hodge de type CM par les
+représentations du groupe de Serre et de son cocaractère canonique.}
+
+\pagerange{162}{164}
+\subsection*{Les réalisations de Hodge aux diverses places (pages 162 et 164)}
+
+« Si $\bar{\xi}$ est réelle, on a une structure de Hodge à involution. Comment se
+relient ces structures de Hodge ?? » Les motifs sur $\widetilde{K}$ provenant
+de $K$ ont, pour deux plongements $\tilde{\xi}$, $\xi'$, deux foncteurs fibres
+vers les $G^{0}$-modules, suivis du foncteur vers les structures de Hodge. Pour
+$V$ un $G^{0}$-module de poids $p$, un plongement $\xi$ définit un sous-espace
+$H_{\xi}(V) \subset V_{\mathbb{C}}$ sur $\overline{K}$, filtré, qui fait de $V$
+une structure de Hodge dont le groupe de Mumford--Tate est l'image de
+$G^{0}$.\footnote{La page dit que $G^{0}$ est « exactement » le groupe de Galois de
+la structure de Hodge, puis, plus bas, biffe « contenu » pour écrire
+$\operatorname{Im} G^{0}$ : c'est l'image, égale à $G^{0}$ quand $V$ est fidèle.
+Le passage biffé de la page 162 est un premier état de cette définition ; « coh.\
+de De Rham » est ajouté au crayon.} Si $\xi$ est réelle, l'élément
+$\mathrm{Frob}_{\xi} \in G(\mathbb{Q})$ --- le Frobenius réel --- donne une
+involution de $V$ qui se prolonge en une involution semi-linéaire de $V
+\otimes \overline{K}_{\xi}$, triviale sur $H_{\xi}(V)$, et compatible avec la
+structure de Hodge. La question de la page 162 reste sans réponse.
+
+\pagerange{167}{169}
+\section*{X. « Unités », et un plan (pages 167 et 169)}
+
+La page 167, sur papier quadrillé, est d'une écriture ronde et appliquée qui
+n'est pas la sienne. Elle démontre que, pour un corps de nombres $K \subset
+\mathbb{C}$, toute unité a une puissance réelle si et seulement si $K \subset
+\mathbb{R}$ ou $K$ est un corps CM. Si $K' = K \cap \mathbb{R}$ et $[K : K'] =
+p' \geqslant 2$, la condition égale les rangs des unités, $r_{1} + r_{2} =
+r'_{1} + r'_{2}$, tandis que $r_{1} + 2r_{2} = p'(r'_{1} + 2r'_{2})$ ; d'où
+$r_{1} + 2r'_{2} \leqslant 0$, donc $r_{1} = r'_{2} = 0$, puis $p' = 2$ : $K'$
+est totalement réel et $K$ totalement imaginaire quadratique sur lui. Exemple :
+$\mathbb{Q}(\zeta_{m})$.\footnote{La page écrit $p$ pour ce degré, puis
+« $[K : K'] = 2$ », reste d'une première version où l'extension était supposée
+quadratique ; le calcul donne $p' = 2$. C'est l'énoncé que le corollaire 1 de la
+page 141 contient pour les corps weiliens, et, sous forme quantitative, l'indice
+d'unités de Hasse.}
+
+La page 169, « Foncteurs fibres motiviques, et groupes fondamentaux
+motiviques », est un plan « à examiner », en dix points : 0) les variétés
+abéliennes à la Weil associées aux motifs purs de poids impair, et les
+conditions de Hodge--Riemann ; 1) l'extension de groupes définie par des points
+motiviques, et le groupe fondamental motivique ; 2) les relations avec le corps
+de classes ; 3) le spectre d'un corps fini, et les points motiviques à valeurs
+dans $\mathbb{R}$ ; 4) le rôle des groupes fondamentaux motiviques dans la
+comparaison des réseaux canoniques --- deux réseaux transcendants en deux places,
+réseau transcendant et réseau de Hodge, deux réseaux $\ell$-adiques ; 5) les
+relations avec « mes » notes anciennes ; 6) la fonction $L$ et son équation
+fonctionnelle ; 7) les structures positives ; 8) la topologie à coefficients dans
+$\mathbb{Z}$ ; 9) l'hypothèse de Riemann. Les points 1, 3 et 7 portent « OK » en
+marge, 1 et 4 un astérisque ; les pages 83 à 124, 156 à 164 et 188 à 226
+répondent en partie à 1 à 4 et à 7. Une dernière ligne propose d'obtenir la
+positivité à la Hodge en se ramenant aux diviseurs, par récurrence.
+
+\pagerange{171}{178}
+\section*{XI. Cohomologie absolue des motifs de Tate $\mathbb{Z}(n)$ (pages 171 à 178)}
+
+Le titre est sur une couverture (page 171), répété au crayon, peut-être d'une
+autre main, sur la page 179. On note $\mathbb{H}^{i}$ la cohomologie « absolue »
+--- les $\operatorname{Ext}$ dans une catégorie de motifs --- comme la page 172,
+et $H^{i}$ la cohomologie étale.
+
+\pagerange{172}{174}
+\subsection*{Sur un corps fini, et sur $\operatorname{Spec} \mathbb{Z}$ (pages 172 à 174)}
+
+Pour $k = \mathbb{F}_{q}$, $\pi = \widehat{\mathbb{Z}}$ engendré par le Frobenius
+$f$, et $M$ un $\mathbb{Z}_{\ell}$-module de type fini à action continue,
+$H^{0}(\pi, M) = \operatorname{Ker}(1 - f)$, $H^{1}(\pi, M) = M/(1 - f)M$,
+$H^{i} = 0$ pour $i \geqslant 2$. D'où, pour $n \neq 0$, $H^{0}(\pi,
+\mathbb{Z}_{\ell}(n)) = 0$ et
+\[
+  H^{1}(\pi, \mathbb{Z}_{\ell}(n)) \simeq \mathbb{Z}_{\ell}/(1 - q^{n}) ,
+\]
+nul si $\ell \nmid 1 - q^{n}$, c'est-à-dire si $n$ n'est pas multiple de l'ordre
+de $q$ modulo $\ell$ ($\ell$ impair) ; à coefficients $\mathbb{Q}_{\ell}$, tout
+s'annule pour $n \neq 0$, et $H^{0} = H^{1} = \mathbb{Q}_{\ell}$ pour $n = 0$. Il
+en infère les valeurs absolues :
+\[
+  \mathbb{H}^{0}(\mathbb{F}_{q}, \mathbb{Z}) = \mathbb{H}^{1}(\mathbb{F}_{q},
+  \mathbb{Z}) = \mathbb{Z}, \qquad \mathbb{H}^{0}(\mathbb{F}_{q}, \mathbb{Z}(n))
+  = 0, \quad \mathbb{H}^{1}(\mathbb{F}_{q}, \mathbb{Z}(n)) =
+  \mathbb{Z}/(1 - q^{n}) \quad (n \neq 0),
+\]
+« modulo $p$-groupes ? », et à coefficients $\mathbb{Q}$ tout est nul pour $n
+\neq 0$.\footnote{Le groupe $\mathbb{Z}/(q^{n} - 1)$ est
+$K_{2n-1}(\mathbb{F}_{q})$ (Quillen, 1972), c'est-à-dire la cohomologie motivique
+$H^{1}(\mathbb{F}_{q}, \mathbb{Z}(n))$ d'aujourd'hui, et il est d'ordre premier
+à $p$. En revanche le $\mathbb{H}^{1}(\mathbb{F}_{q}, \mathbb{Z}) = \mathbb{Z}$
+n'est ni la cohomologie étale ($H^{1}_{\text{ét}}(\mathbb{F}_{q}, \mathbb{Z}) =
+0$) ni la cohomologie motivique ; c'est la cohomologie « de Weil-étale » de
+Lichtenbaum (2005), où le groupe de Weil $\mathbb{Z}$ remplace
+$\widehat{\mathbb{Z}}$.} Puis, sur $X = \operatorname{Spec} \mathbb{Z}$,
+\[
+  \mathbb{H}^{i}(\operatorname{Spec} \mathbb{Z}, \mathbb{Z}(1)) = \begin{cases}
+  \mathbb{Z} & i = 3 \\ 0 & i \neq 3 \end{cases} , \qquad
+  \mathbb{H}^{i}(\operatorname{Spec} \mathbb{Z}, \mathbb{Z}) = \begin{cases}
+  \mathbb{Z} & i = 0 \\ 0 & i \neq 0 \end{cases} ,
+\]
+énoncés sans démonstration, et, pour $U$ ouvert de $X$, $\mathbb{H}^{i}(X,
+\mathbb{Q}(n)) \simeq \mathbb{H}^{i}(U, \mathbb{Q}(n))$ pour $n \neq 1$.\footnote{La
+page 172 dit « $n \neq 0$ ». La suite de localisation de la page 173, où
+$i_{x}^{!}\mathbb{Q}(n) = \mathbb{Q}(n-1)[-2]$, donne l'isomorphisme dès que la
+cohomologie des corps finis à coefficients $\mathbb{Q}(n-1)$ est nulle,
+c'est-à-dire pour $n \neq 1$ --- $n = 0$ compris ---, et c'est bien pour $n = 1$
+qu'il échoue. Pour $n$ impair $\geqslant 3$, ces groupes sont de rang $1$ en degré
+$1$ par le théorème de Borel (1974) sur $K_{2n-1}(\mathbb{Z}) \otimes \mathbb{Q}$,
+que la page ne calcule pas.}
+
+Page 173 : la suite de localisation, pour $S = X - U$ fini,
+\[
+  \cdots \to H^{i-2}(S, i^{*}M(-1)) \to H^{i}(X, M) \to H^{i}(U, M) \to
+  H^{i-1}(S, i^{*}M(-1)) \to \cdots ,
+\]
+qu'il suppose, pour $M = \mathbb{Q}(1)$, réduite à
+\[
+  0 \to H^{1}(X) \to H^{1}(U) \to \mathbb{Q}^{S} \to H^{2}(X) \to H^{2}(U) \to
+  \mathbb{Q}^{S} \to H^{3}(X) \to H^{3}(U) \to 0 ,
+\]
+les termes en degré $\geqslant 4$ étant nuls et $H^{3}(U, \mathbb{Q}(1))$
+supposé nul (« $0$ ? »). Avec $H^{1}(U, \mathbb{Q}(1)) = \mathcal{O}(U)^{*}
+\otimes \mathbb{Q} \simeq \mathbb{Q}^{S}$, envoyé isomorphiquement par les
+valuations, et $\operatorname{Pic} \otimes \mathbb{Q} = 0$, il trouve
+\[
+  H^{i}(X, \mathbb{Q}(1)) = 0 \ (i \neq 3), \qquad H^{3}(X, \mathbb{Q}(1)) =
+  \mathbb{Q} ,
+\]
+« où on trouve $\mathbb{Q}$ ! ».
+C'est l'analogue rationnel du $H^{3}(\overline{X}, \mathbb{G}_{m}) =
+\mathbb{Q}/\mathbb{Z}$ de la dualité d'Artin--Verdier, que les pages 176 et 177
+recalculent.\footnote{Pour $n \neq 1$, il ajoute « est-ce vrai ?? ». L'existence
+d'une cohomologie à coefficients $\mathbb{Z}(n)$ sur $\operatorname{Spec}
+\mathbb{Z}$ qui aurait ces propriétés, avec un $\mathbb{Z}$ en degré $3$ pour
+$\mathbb{Z}(1)$, est du domaine des conjectures de Lichtenbaum (1973, puis la
+cohomologie de Weil-étale, 2009) ; on ne prétend pas que ses valeurs coïncident
+avec celles de la page.} La page 174, barrée, calcule la cohomologie de
+$\widehat{\mathbb{Z}}$ par les homomorphismes croisés, $H^{1}(\mathbb{Z}, M) =
+M/(1 - f)M$.
+
+\pagerange{175}{178}
+\subsection*{La dualité d'Artin--Verdier recalculée, et le groupe de Brauer (pages 175 à 178)}
+
+Pages 176 et 177, sur $\overline{X}$ --- $\operatorname{Spec} \mathbb{Z}$ avec sa
+place à l'infini, au sens d'Artin et Verdier --- et $\overline{U} = \overline{X} -
+S$ : la cohomologie locale $\mathcal{H}^{1}_{x}(\mathbb{G}_{m}) = \mathbb{Z}_{x}$,
+nulle en d'autres degrés, donne $H^{i}_{S}(X, \mathbb{G}_{m}) = H^{i-1}(S,
+\mathbb{Z})$, et la suite de localisation avec
+\[
+  H^{0}(\overline{X}, \mathbb{G}_{m}) = \{\pm 1\}, \quad H^{1} = H^{2} = 0, \quad
+  H^{3}(\overline{X}, \mathbb{G}_{m}) = \mathbb{Q}/\mathbb{Z}
+\]
+fournit $H^{0}(\overline{U}, \mathbb{G}_{m}) = \mathbb{Z}/2 \oplus
+\mathbb{Z}^{S}$, $H^{1} = 0$, $H^{2}(\overline{U}, \mathbb{G}_{m}) =
+\operatorname{Ker}((\mathbb{Q}/\mathbb{Z})^{S} \to \mathbb{Q}/\mathbb{Z})$,
+$H^{i} = 0$ pour $i \geqslant 3$ ; puis, par la suite de Kummer ($\ell \in S$,
+$\ell$ impair, « petite modification pour $\ell = 2$ »),
+$H^{1}(\overline{U}, \mu_{\ell^{n}}) \simeq (\mathbb{Z}/\ell^{n})^{S}$ et
+$H^{2}(\overline{U}, \mu_{\ell^{n}}) \simeq \operatorname{Ker}
+((\mathbb{Z}/\ell^{n})^{S} \to \mathbb{Z}/\ell^{n})$, enfin $H^{1}(U,
+\mathbb{Z}_{\ell}(1)) \simeq \mathbb{Z}_{\ell}^{S}$ et $H^{2} =
+\operatorname{Ker}(\mathbb{Z}_{\ell}^{S} \to \mathbb{Z}_{\ell})$. Ces valeurs
+sont celles de la dualité d'Artin--Verdier et du corps de classes, et il conclut
+de nouveau $H^{i}(X, \mathbb{Q}(1)) = 0, 0, 0, \mathbb{Q}$ pour $i = 0, 1, 2,
+3$.
+
+Les pages 178 et 175, dans cet ordre selon leur numérotation, sont deux
+feuillets d'une rédaction sur le groupe de Brauer, en paragraphe 5. Pour $X$
+irréductible de point générique $y$, on a la suite exacte (5.1)
+\[
+  0 \to \mathbb{G}_{m,X} \to R^{*}_{X} \to \mathcal{D}\mathrm{iv}_{X} \to 0 ,
+\]
+où $R^{*}_{X}$ est le faisceau des fonctions rationnelles inversibles et
+$\mathcal{D}\mathrm{iv}_{X}$ celui des diviseurs de Cartier, d'où, les $H^{p}(X,
+R^{*}_{X})$ étant de torsion pour $p > 0$, des bijections $H^{i}(X,
+\mathcal{D}\mathrm{iv}_{X}) \to H^{i+1}(X, \mathbb{G}_{m})$ modulo torsion pour $i
+\geqslant 1$.\footnote{La torsion des $H^{p}(X, R^{*}_{X})$ est établie dans un
+passage encadré et barré de la page 178, par la suite spectrale de Leray de
+l'inclusion du point générique ; la page 178 s'en sert en renvoyant à « (*) »,
+qui est dans ce passage.} Si les anneaux locaux stricts de $X$ sont factoriels,
+$\mathcal{D}\mathrm{iv}_{X}$ est la somme des $\mathbb{Z}$ portés par les points
+de codimension $1$ --- la page 178 s'arrête sur les deux-points qui devaient
+l'écrire ---, et $H^{1}(X, \mathcal{D}\mathrm{iv}_{X}) = 0$.
+
+\emph{Proposition 5.4.} Sous ces hypothèses, les homomorphismes $H^{2}(X,
+\mathbb{G}_{m}) \to H^{2}(X, R^{*}_{X}) \to H^{2}(y, \mathbb{G}_{m}) =
+\operatorname{Br}(y)$ sont injectifs.
+
+\emph{Corollaire 5.5.} $\operatorname{Br}(X) \to \operatorname{Br}(y)$ est
+injectif : $\operatorname{Br}(X)$ est un sous-groupe du groupe de Brauer du corps
+des fonctions.
+
+\emph{Théorème 5.6 a).} Si $X$ est local, $\xi \in H^{2}(X, \mathbb{G}_{m})$ est
+dans $\operatorname{Br}(X)$ si et seulement s'il est tué par un morphisme fini
+étale surjectif $X' \to X$.
+
+La page s'arrête sur cet énoncé.\footnote{On retrouve ces énoncés au début du
+« Groupe de Brauer II » (Séminaire Bourbaki, 1965-1966, repris dans \emph{Dix
+exposés sur la cohomologie des schémas}, 1968), sous une autre numérotation ; une
+marge de la page 178 parle d'un « corollaire 5.4 » que la page 175 appelle
+proposition. Le lien de ces deux feuillets avec les calculs qui les entourent
+n'est pas écrit.}
+
+\pagerange{181}{186}
+\section*{XII. La distribution des Frobenius dans les groupes de Galois motiviques (pages 181 à 186)}
+
+Sous le titre de la couverture (page 181), « Généralités
+fonctorielles-catégoriques sur la distribution des Frobenius dans les gpes de
+Galois motiviques », un brouillon rapide dont la prose de liaison est en grande
+partie illisible ; les formules portent.
+
+Soit $M$ une catégorie de motifs géométriques de type fini sur un préschéma $S$ de
+type fini sur $\mathbb{Z}$, qu'on suppose à degrés pairs --- sinon on passe à
+$M^{(\mathrm{pair})}$, comme le permet le corollaire de la page 116. Il faut
+« démultiplier » les points fermés : on considère les couples $s' = (s, i)$, où
+$i \colon \mathbb{G}_{m,\mathbb{C}} \to G(s)_{\mathbb{C}}$ est un cocaractère du
+groupe de Galois motivique de la fibre $M_{s}$ --- ce sont les
+« $\mathbb{R}$-points motiviques ». Chacun définit une classe
+\[
+  c(s') \in H^{1}(\mathbb{R}, G^{0u}_{\mathbb{R}}), \qquad G^{0u} =
+  \operatorname{Ker}(\varepsilon \colon G^{0}_{\mathbb{R}} \to \mathbb{G}_{m}) ,
+\]
+et un homomorphisme $u(s') \colon G(s)_{\mathbb{R}} \to G_{\mathbb{R}}^{c(s')}$
+vers la forme tordue par $c(s')$, compatible avec $\varepsilon$ et $i$, déterminé
+à un élément de $G^{0u}_{\mathbb{R}}(\mathbb{R})$ près.\footnote{Il écrit
+$s' = (s, \xi)$ et $\xi(s')$ pour la classe ; on a écrit $i$ et $c(s')$.
+L'exposant $0u$ est une lecture douteuse.} Il y a d'autre part sur
+$G^{0}_{\mathbb{R}}$ une « $\pi$-structure » privilégiée, donnée par un
+homomorphisme $\mu_{2,\mathbb{C}} \to G^{0}_{\mathbb{C}}$, et la restriction de
+$i(s')$ à $\mu_{2}$, transportée par $u(s')$, doit la redonner : c'est une
+condition non tautologique sur $u(s')$. Sous les conjectures de Tate, ajoute-t-il,
+la connaissance des $u(s')$ équivaut à celle de la structure d'effectivité sur
+les $G_{\mathbb{R}}$-modules ; et les Frobenius
+\[
+  f(s') \in G_{\mathbb{R}}^{c(s')}(\mathbb{R})
+\]
+ont pour valeurs propres, dans toute représentation, des \emph{entiers}
+algébriques --- « une condition arithmétique assez draconienne ! ». La page
+s'arrête au premier tiers.\footnote{Le cadre moderne de la question est celui
+des groupes de Sato--Tate et des conjectures d'équidistribution des classes de
+Frobenius dans un sous-groupe compact maximal du groupe de Galois motivique
+(Serre, « Propriétés conjecturales des groupes de Galois motiviques et des
+représentations $\ell$-adiques », \emph{Motives}, 1994). Le rapprochement est de
+nous ; la page ne parle pas de mesure.}
+
+\pagerange{188}{210}
+\section*{XIII. Foncteurs fibres motiviques et groupe fondamental motivique (pages 188 à 210)}
+
+Deux couvertures : une fiche au crayon, « Théorie de Galois des Motifs /
+Généralités » (page 188), et « Foncteurs fibres motiviques et gp fondamental
+motivique » (page 189). La rédaction qui suit est d'une main posée.
+
+Le cadre, jamais écrit en entier : pour un préschéma connexe $X$, la catégorie des
+motifs sur $X$ est filtrée par des sous-catégories de type fini
+$\mathcal{M}_{\alpha}(X)$, et le « pro-torseur fondamental » $(T_{\alpha})$
+associe à un anneau $k$ l'ensemble $T_{\alpha}(k)$ des foncteurs fibres de
+$\mathcal{M}_{\alpha}(X)$ à valeurs dans les $k$-modules --- un torseur sous le
+groupe fondamental motivique. Parler de $T_{\alpha}(\mathbb{Z})$ suppose des
+motifs à coefficients entiers, qui sont conjecturaux.
+
+\pagerange{190}{192}
+\subsection*{En caractéristique $p$ : les points canoniques (pages 190 et 192)}
+
+Si $X_{\mathrm{réd}}$ est de caractéristique $p > 0$, les $T_{\alpha}$ n'ont pas
+de sections en général ; on dispose seulement, canoniquement,
+\begin{itemize}
+  \item[(i)] de $\xi_{\ell}^{(\alpha)} \in T_{\alpha}(\mathbb{Z}_{\ell})$ pour $\ell
+  \neq p$, la cohomologie $\ell$-adique, provenant sans doute d'un point à valeurs
+  dans le hensélisé $\mathbb{Z}_{(\ell)}^{h}$ ;
+  \item[(ii)] de $\xi_{p}^{(\alpha)} \in T_{\alpha}(W(k))$ pour $k$ parfait, la
+  cohomologie cristalline, avec la structure supplémentaire des opérations $F$ et
+  $V$, semi-linéaires, $FV = p$ ;
+  \item[(iii)] de sa réduction $\xi_{p}^{(\alpha)0} \in T_{\alpha}(k)$, la
+  cohomologie de De Rham--Hodge, avec sa filtration.
+\end{itemize}
+Pour $X = \operatorname{Spec} \mathbb{F}_{q}$, il y a en général des obstructions
+non triviales dans $H^{2}(\mathbb{Q}, G)$ --- c'est la classe $\xi$ des pages 6 à
+10. En imposant aux foncteurs fibres d'induire le foncteur canonique sur les
+motifs effectifs de poids $0$, les points de $T_{\alpha}(\mathbb{Z}_{\ell})$
+sont sans doute uniques à isomorphisme près, par le théorème de Lang, de même
+ceux de $T_{\alpha}(W(k))$ pour $k$ fini ; en général $T_{\alpha}(k)$ aura
+plusieurs classes, mais peut-être $T_{\infty}(k) = \varprojlim T_{\alpha}(k)$
+n'en a-t-il qu'une, celle de De Rham--Hodge --- « cf.\ Manin ».\footnote{Le
+théorème de Lang dit qu'un torseur sous un groupe algébrique connexe sur un corps
+fini est trivial ; par Hensel, il en va de même sur $\mathbb{Z}_{\ell}$ pour un
+groupe lisse à fibre spéciale connexe --- hypothèse que la page ne vérifie pas,
+d'où son « sans doute ». Le renvoi à Manin vise vraisemblablement sa
+classification des modules de Dieudonné (1963).}
+
+Page 192 : les $\xi_{\ell}$ dépendent du choix d'un point géométrique, à
+isomorphisme unique près, et $\pi_{1}(X)$ opère sur eux ; les $\xi_{p}$ dépendent
+du choix d'un point à valeurs dans un corps parfait, $\pi_{1}(X)$ n'opère plus,
+mais les automorphismes de $k$ au-dessus de $k(x)$ agissent semi-linéairement,
+et transforment en général $\xi_{x,p}$ en un $\xi_{x,p}^{\sigma}$ non isomorphe.
+Notations : $\xi_{\bar{x},\ell}$, $\xi_{x,\ell}$ ; $\xi_{x,p}$, $\xi_{x,p}^{0}$.
+
+\pagerange{194}{200}
+\subsection*{Sur une base qui domine $\operatorname{Spec} \mathbb{Z}$ (pages 194 à 200)}
+
+Si $X$ a des points de caractéristique nulle, on a : (i) les $\xi_{\ell}$ pour
+tout $\ell$, à l'action de $\pi_{1}$ près ; (ii) les $\xi_{x,p}$, $\xi_{x,p}^{0}$
+aux points de caractéristique $p$, et il conjecture une relation entre
+$\xi_{y,p}$, en un point $y$ de caractéristique $p$, et $\xi_{x,p}
+\otimes_{\mathbb{Z}_{p}} W(k)$, en un point $x$ de caractéristique nulle ---
+« ils ne sont en général pas isomorphes, sans doute » ;\footnote{C'est le
+problème qu'il posera à Nice en 1970 sous le nom de « foncteur mystérieux » :
+relier la cohomologie $p$-adique étale d'une variété de caractéristique nulle à
+la cohomologie cristalline de sa réduction. La réponse est la théorie de Hodge
+$p$-adique de Fontaine : les deux ne sont pas isomorphes, mais le deviennent
+après extension des scalaires à l'anneau $B_{\mathrm{cris}}$ (théorème de
+comparaison cristalline, Fontaine--Messing 1987, Faltings 1989).} (iii) en un
+point $x$ à valeurs dans un corps $k$ de caractéristique nulle, $\xi_{x,\infty}
+\in T_{\alpha}(k)$, la cohomologie de De Rham, avec ses deux
+filtrations.\footnote{La marge verticale en distingue deux : celle dont le gradué
+est la cohomologie de Hodge $H^{\bullet}(X, \Omega^{p})$, et une autre,
+« authentique », qui ferait penser à la filtration canonique des motifs, dont on
+s'attend à ce qu'elle ne provienne pas d'une filtration du motif.} Il n'y a pas
+lieu de penser que deux tels foncteurs, en deux points à valeurs dans le même
+$k$, soient isomorphes. Pour $k = \mathbb{Q}$, $\xi_{x,\infty}$ trivialise
+$T_{\mathbb{Q}}$ ; il n'y a pas d'isomorphisme privilégié entre $\xi_{x,\infty}
+\otimes \mathbb{Q}_{\ell}$ et $\xi_{\bar{x},\ell} \otimes \mathbb{Q}_{\ell}$, de
+sorte que tout point rationnel définit une classe dans
+$H^{1}(\mathbb{Q}_{\ell}, G_{\ell}^{(\alpha)})$ --- celle du torseur des
+isomorphismes entre les deux.
+
+(iv) En un point complexe $x$, on a $\xi_{x,\mathbb{Z}} \in
+T_{\alpha}(\mathbb{Z})$, le réseau entier de la cohomologie de Betti, avec des
+isomorphismes canoniques
+\[
+  \xi_{x,\mathbb{Z}} \otimes \mathbb{Z}_{\ell} \simeq \xi_{x,\ell}, \qquad
+  \xi_{x,\mathbb{Z}} \otimes \mathbb{C} \simeq \xi_{x,\infty} ,
+\]
+les théorèmes de comparaison d'Artin et de De Rham, et un isomorphisme
+« involutif » $\xi_{x,\mathbb{Z}} \simeq \xi_{\tau x,\mathbb{Z}}$ avec le point
+conjugué. Si $x$ est localisé en $a \in X$, $\xi_{x,\mathbb{Z}}$ dépend de la
+topologie archimédienne choisie sur $k(a)$ : si $k(a)$ est dense dans
+$\mathbb{C}$, c'est tout ; si son complété est $\mathbb{R}$, le groupe
+$\operatorname{Gal}(\mathbb{C}/\mathbb{R})$ opère sur $\xi_{x,\mathbb{Z}}$,
+compatiblement avec l'action semi-linéaire sur $\xi_{\bar{a},\infty}$, et les
+invariants sont
+\[
+  \xi_{a,\infty} \in T_{\alpha}(\mathbb{R}), \quad \xi_{\bar{a},\mathbb{Z}} \in
+  T_{\alpha}(\mathbb{Z}), \quad \xi_{\bar{a},\infty} \in T_{\alpha}(\mathbb{C}),
+  \qquad \xi_{\bar{a},\infty} \simeq \xi_{a,\infty} \otimes_{\mathbb{R}}
+  \mathbb{C} \simeq \xi_{\bar{a},\mathbb{Z}} \otimes_{\mathbb{Z}} \mathbb{C} .
+\]
+$\pi_{1}(X)$ n'opère plus sur $\xi_{a,\mathbb{Z}}$ ; seules restent l'action de
+$\tau$ si $a$ est réel et, sur $\xi_{\bar{a},\infty}$, celle, semi-linéaire, de
+$\operatorname{Aut}_{k(a)}(\mathbb{C})$.
+
+\pagerange{202}{210}
+\subsection*{Le Frobenius réel, la conjecture de Hodge, les points motiviques (pages 202 à 210)}
+
+En un point complexe, outre la structure entière, il y a la décomposition en
+types, déterminée par la filtration et l'involution semi-linéaire $\tau'$ de
+$\xi_{x,\infty} = \xi_{x,\mathbb{R}} \otimes_{\mathbb{R}} \mathbb{C}$, où
+$\xi_{x,\mathbb{R}} = \xi_{x,\mathbb{Z}} \otimes \mathbb{R}$ ; si $k(x)$ est réel,
+il y a une seconde involution semi-linéaire $\tau''$, « algébrique », et
+$\tau = \tau'\tau'' = \tau''\tau'$ agit linéairement sur
+$(\xi_{x,\mathbb{Z}})_{\mathbb{C}}$. La situation locale en un point réel se
+connaît par $\tau$ sur $\xi_{x,\mathbb{Z}}$, d'où $\tau$ sur $\xi_{x,\ell}$,
+« or c'est là l'élément de $\pi_{1}(x)$, Frobenius en la place à l'infini
+réelle ! » --- le Frobenius réel $f_{\infty}$, la conjugaison complexe vue dans le
+groupe de Galois, qui agit sur la cohomologie de Betti par le théorème de
+comparaison. Les deux relations portent « à vérifier » en marge.
+
+Page 204, une lecture de la conjecture de Hodge : pour un motif $F$, la partie de
+$\xi_{x,\mathbb{Q}}(F)$ qui provient de sous-motifs de niveau borné par $\rho$
+serait déterminée par la filtration de Hodge. Il l'écrit comme l'intersection
+$\xi_{x,\mathbb{Q}}(F) \cap \xi_{x,\infty}(F)^{(\rho)} \cap
+f_{\infty}\xi_{x,\infty}(F)^{(\rho)}$. Sous cette forme, c'est la conjecture de
+Hodge généralisée dans la rédaction de Hodge (1950), fausse en général ; la
+forme correcte remplace l'intersection par la plus grande sous-structure de
+Hodge rationnelle contenue dans le cran de la filtration.\footnote{Une
+intersection $V_{\mathbb{Q}} \cap F^{\rho}$ n'est pas une sous-structure de Hodge
+en général. C'est Grothendieck lui-même qui l'a remarqué, dans « Hodge's general
+conjecture is false for trivial reasons » (\emph{Topology} 8, 1969), et qui a
+donné la forme corrigée, par la plus grande sous-structure de Hodge contenue dans
+$F^{\rho}$ ; cela laisse penser que cette page est antérieure à 1969. Quand
+$2\rho$ est le degré, l'intersection est l'espace des classes de Hodge, et
+l'énoncé est la conjecture de Hodge proprement dite, qui est ouverte. La page
+lit ici $f_{\infty}$ comme conjugaison de la filtration ; l'indexation par le
+« niveau » est la sienne, et la phrase qui suit est peu sûre.}
+
+Page 206 : faisant varier le point complexe, il pense que les
+$\xi_{x,\mathbb{Z}}$ attachés à des places distinctes ne sont pas isomorphes,
+alors que les $\xi_{x,\mathbb{C}}$ le sont, non canoniquement ; une marge
+entourée dit « faux, cf.\ groupoïde fondamental sur $\mathbb{Z}$ », et les pages
+218 et 220 reprennent la question. En caractéristique $p$, $T_{\alpha}(\mathbb{R})$
+serait vide. Puis la définition : un \emph{point motivique} de $X$ à valeurs dans
+un anneau $k$ est un objet de $T(k)$, l'analogue de la fibre d'un motif en un
+point ; ils forment une catégorie fibrée sur les schémas, qui est un champ pour
+fpqc, et les isomorphismes entre deux points forment un torseur sous le groupe
+des automorphismes du premier. Il en distingue quatre sortes : $\ell$-adiques (à
+valeurs dans $\mathbb{Z}_{\ell}$ ou $\mathbb{Q}_{\ell}$), transcendants (dans
+$\mathbb{R}$, voire $\mathbb{Z}$, qui semblent correspondre aux points complexes
+de $X$ modulo la conjugaison), de Hodge--De Rham (dans un corps quelconque), de
+Witt (dans $W(k)$). Page 210, des « Questions » : les points à valeurs dans un
+corps de caractéristique $p$ correspondraient à des points motiviques dans $W(k)$
+avec $F$, $V$ --- « points motiviques généralisés » ---, ceux de caractéristique
+nulle à des points avec structure filtrée, les points complexes modulo la
+conjugaison à des points dans $\mathbb{R}$, dans $\mathbb{C}$ muni de
+$f_{\infty}$, ou dans $\mathbb{Z}$ ; les « points banaux » sont à valeurs dans
+$\mathbb{Z}_{\ell}$ ou $\mathbb{Q}_{\ell}$, et le « cas particulier important »
+est celui des points à valeurs dans $W(\mathbb{F}_{q})$ avec $(F, V)$.
+
+\pagerange{212}{226}
+\section*{XIV. Le groupe fondamental motivique discret (pages 212 à 226)}
+
+Sous ce titre souligné (page 212) : pour $\xi \in T(\mathbb{Z})$,
+\[
+  \pi_{1}(X, \xi) = \operatorname{Aut}(\xi) = G_{\xi}(\mathbb{Z}) ,
+\]
+et plus généralement, pour $\xi \in T_{(\alpha)}(k)$, $G(X, \xi) =
+\underline{\operatorname{Aut}}(\xi)$ et $\pi_{1}(X, \xi) \simeq G(X, \xi)(k)$.
+« En vertu de Borel [-Harish-Chandra] », il n'y a, pour $\alpha$ donné, qu'un
+nombre fini de $\xi \in T_{\alpha}(\mathbb{Z})$ à isomorphisme près, donc un
+nombre fini de groupes fondamentaux discrets. Sont-ils tous isomorphes
+?\footnote{Si $T_{\alpha}(\mathbb{Z})$ n'est pas vide, ses classes
+d'isomorphisme de points ayant même image sur $\mathbb{Q}$ sont en bijection avec
+un ensemble de classes $G(\mathbb{Q}) \backslash G(\mathbb{A}_{f}) /
+G(\widehat{\mathbb{Z}})$ ; sa finitude est le théorème de finitude du nombre de
+classes de Borel (1963), qui prolonge Borel--Harish-Chandra (1962). Il faut en
+outre la finitude de l'ensemble des classes rationnelles qui proviennent de
+points entiers ; la page ne le discute pas.} Il note la comparaison avec
+$\pi_{1}(X^{\mathrm{an}}, \xi)$, et que, pour $X$ sur $\mathbb{C}$ et $\xi$
+défini par un point complexe, $\xi$ est filtré et $\pi_{1}(X, \xi)$ porte une
+structure de Hodge. La page 214 continue : ce qui précède résulte de la
+conjonction des conjectures de Hodge et de Tate, au moins sous forme faible ;
+« caractérisation de l'image ?? » ; même conclusion sur un corps algébriquement
+clos $k \subset \mathbb{C}$, par exemple $\overline{\mathbb{Q}}$ ; et, souligné :
+« Analyser l'exemple de Serre de $\pi_{1}$ non isomorphes ».\footnote{Serre,
+« Exemples de variétés projectives conjuguées non homéomorphes » (\emph{C. R.
+Acad.\ Sci.}\ 258, 1964) : deux variétés conjuguées par un automorphisme de
+$\mathbb{C}$ dont les groupes fondamentaux ne sont pas isomorphes. L'analyse
+n'est pas faite dans le dossier.} Sur $\mathbb{R}$, un point réel donne $\xi_{a}
+\in T_{\alpha}(\mathbb{Z})$ et une involution de $G(X, \xi)$ compatible avec la
+conjugaison, et le foncteur $M \mapsto (\xi(M_{\mathbb{C}}), \text{structure de
+Hodge} + \text{structure réelle par } f_{\infty})$ serait pleinement fidèle. Le
+problème : comment la structure de Hodge varie avec le point complexe.
+
+Page 216, le lien avec les variétés de modules de motifs polarisés rigidifiés :
+si $\mathcal{M}$ est une telle variété, un morphisme $X \to \mathcal{M}$ est
+déterminé par sa valeur en un point et par l'application $\pi_{1}(X) \to
+\pi_{1}(\mathcal{M})$, « propriété intrinsèque importante ». Il propose les
+schémas motiviquement pointés et leurs morphismes, qui donnent $G(X, \xi) \to
+G(Y, \eta)$, donc $\pi_{1}(X, \xi) \to \pi_{1}(Y, \eta)$.
+
+\pagerange{218}{222}
+\subsection*{Deux places archimédiennes (pages 218 à 222)}
+
+Soit $X$ de type fini sur un corps $k$, et $v$, $w$ deux places archimédiennes,
+d'où deux foncteurs fibres $\xi_{v}^{\mathbb{Z}}$, $\xi_{w}^{\mathbb{Z}}$.
+Sont-ils isomorphes, et sinon leurs restrictions aux sous-catégories de type fini
+$\mathcal{M}_{\alpha}(X)$ le sont-elles ? On peut supposer $k$ algébriquement
+fermé dans $k(X)$ ; soit $k_{0}$ la clôture algébrique de $\mathbb{Q}$ dans $k$.
+1°) Si $X$ est défini sur $k_{0}$, les restrictions à tous les
+$\mathcal{M}_{\alpha}(X)$ sont isomorphes, par le groupe fondamental
+transcendant ; et même $\xi_{v}^{\mathbb{Z}} \simeq \xi_{w}^{\mathbb{Z}}$ si $v$ et
+$w$ coïncident sur $k_{0}$. Pour $k$ dénombrable, $k$ est réunion filtrante de
+$k_{0}$-algèbres $A_{i}$ de type fini à transitions lisses et à fibres
+géométriquement connexes ; les ensembles de chemins entre les points
+correspondants des $X_{i,\mathbb{C}}$ forment un système projectif dénombrable
+d'ensembles non vides à transitions surjectives, dont la limite n'est pas vide,
+« cqfd ».\footnote{La page 218 est un palimpseste ; on donne la couche qui
+subsiste, et la réduction du cas non dénombrable n'est qu'indiquée. La limite
+projective d'une suite d'ensembles non vides à transitions surjectives est non
+vide, et c'est là que sert la dénombrabilité.} 2°) Si la clôture algébrique $E$
+de $\mathbb{Q}$ dans $k$ n'est pas $k_{0}$ --- si les deux places diffèrent sur
+les constantes ---, « je pense » qu'il existe $\alpha$ avec des restrictions non
+isomorphes, et l'on peut se ramener à $X = \operatorname{Spec} k$, $k$ fini sur
+$\mathbb{Q}$ ; la suite est barrée. La marge « faux » de la page 206 est ainsi
+confirmée dans le cas 1°) et maintenue en doute dans le cas 2°).
+
+Page 222 : « Il s'agirait de construire $X$ projectif lisse sur $k$ tel que
+$H^{*}(X_{v}, \mathbb{Z})$ et $H^{*}(X_{v'}, \mathbb{Z})$ soient non isomorphes
+comme anneaux. On devrait mettre Serre à contribution. » Une marge : peut-on
+remplacer $\mathbb{Z}$ par $\mathbb{R}$ ?\footnote{Oui : F. Charles
+(« Conjugate varieties with distinct real cohomology algebras », \emph{J. reine
+angew.\ Math.}\ 630, 2009) a construit des variétés conjuguées dont les algèbres
+de cohomologie réelle ne sont pas isomorphes, ce qui répond à la question
+entière \emph{a fortiori}.} Puis, pour $k$ un corps de nombres, $v_{0}$ une
+place et $M$ un motif sur $k$ : le groupe $G_{M,v_{0}}$ est défini sur
+$\mathbb{Z}$, chaque autre place $v$ définit un torseur $P_{v}$ sous lui, et il
+rappelle la conjecture « de plus haut » : si $M$ est assez général, $v \neq v'$
+entraîne $P_{v} \not\simeq P_{v'}$. Le groupe
+\[
+  G_{M,v_{0}}(\mathbb{Z}) = \pi^{1}_{M}(k, v)
+\]
+est un groupe discret : « Vers : groupes fondamentaux (arithmétiques) discrets
+». Une marge prévient que l'existence d'un isomorphisme fonctoriel $\xi(M)
+\otimes_{\mathbb{Z}} \mathbb{C} \simeq M_{\infty} \otimes_{k} \mathbb{C}$
+compatible aux conditions de Riemann--Hodge « risque d'être une condition
+restrictive sérieuse ».
+
+\pagerange{224}{226}
+\subsection*{Foncteur fibre et structure de Hodge (pages 224 et 226)}
+
+Un motif est très loin d'être caractérisé par son foncteur fibre à valeurs dans
+les $\mathbb{Z}$-modules ; qu'en est-il si l'on ajoute la structure de Hodge ?
+Il se ramènerait « facilement » au cas de $X = \mathbb{P}^{1}_{\mathbb{C}} -
+\{0, 1, \infty\}$, avec le motif d'une famille de courbes elliptiques dont
+l'invariant est l'indéterminée ; une réduction plus longue, par une clôture
+algébrique de $\mathbb{Q}$ et $\mathbb{P}^{r}_{\mathbb{C}}$, est barrée. La page
+226 demande quels sont, pour les motifs sur $\mathbb{C}$, les foncteurs
+multiplicatifs vers les structures de Hodge qui sont motivés --- « en vertu de
+la conjecture de Hodge », dit une marge ---, et dans quelle mesure un tel
+foncteur peut être pris arbitrairement, « ?!? » ; c'est lié à la construction
+des schémas de modules de motifs polarisés. « Moralement … si $Y$ est le
+spectre d'un corps », et le dossier s'arrête là.
+
+\end{document}
