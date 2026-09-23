@@ -2433,4 +2433,60 @@ export const FINDINGS: Finding[] = [
     settle:
       'A person checks on the facsimile whether the notice of page 10 carries anything of his on either face, whether it was folded inside the wrapper with the leaves of pages 3–7, and whether its paper matches theirs; a physical tie would bound the leaves it touches from below and nothing from above. Whatever is found, priority is not a claim this project makes, about anyone.',
   },
+  {
+    id: '125-cd-complement-formal-comparison',
+    cote: '125',
+    pages: '2, 4, 7',
+    kind: 'mathematical',
+    claim:
+      'The folder asserts, without proof, that for P^n ⊃ X^r ⊃ Y^m with r > m > 0, the vanishing H^p(X − Y, F) = 0 for p ≥ m and every coherent F is equivalent — through H^p_Y(X, F) → H^p(X, F) being bijective for p > m and surjective for p = m, and a duality with Ext^q(−, Ω^r) on X and on its formal completion X̂ along Y — to H^q(X, F) → H^q(X̂, F̂) being bijective for q < r − m and injective for q = r − m for F locally free, each step reduced to twists O(n).',
+    basis:
+      'Page 2 is a chart of boxed statements joined by vertical equivalences, one of them labelled « dualité », with a right-hand column reducing each to O(n), n grand, and an N.B. dispensing with the case p = m because H^m(X, O(−n)) = 0 for n large; page 4 writes H^p_Y(X, F) = lim Ext^p(P; O_{Y_n}, F), H^p(X − Y, F) = lim Ext^p(P; J^n, F) and the dual inverse limit on the completion; page 7 boxes H^i(P̂, Ω^r_P(−n)) = 0 for 0 < i < r − m with the margin « ⟺ P − X est de dim. coh. r − m ». Under the chart: the bound of page 2’s first display is illegible, « réduit à » in the right-hand column is uncertain, « [m = dim Y] » stands between two illegible stretches, and the diagonal N.B. at the foot is legible only in fragments.',
+    ours:
+      'The reading names no published statement for the chart: it gives it as one chain of equivalences, states the duality as a perfect pairing, and footnotes the fifth box as « la forme sous laquelle l’énoncé est aujourd’hui le plus reconnaissable » without naming it. This pass reads the chart, from memory, as Hartshorne’s comparison between the cohomological dimension of X − Y and the formal completion along Y (Ample Subvarieties of Algebraic Varieties, 1970, chapter III, for X non-singular projective), the page’s m playing the part of its q, and records the entry as a guard to be marked matched rather than as a candidate. It also reads the folder differently from the reading in four places: Ω^r_{X/k} is a dualizing sheaf only for X smooth, which neither the page nor the reading states; the reading’s single notation — P = P^n, X of dimension r — does not fit pages 4 and 7, which write P^r ⊃ X ⊃ Y and Ω^r_P, so that there r is the dimension of the ambient space; the reading’s footnote that every coherent sheaf is a quotient of a sum of O(n), n large, should read O(−n), as page 2’s N.B. has it; and its footnote to page 7 folds page 2’s complement X − Y into page 7’s P − X, which are different statements. Page 7’s second boxed line, H^r(P, Ω^r(−n)) ≅ H^r(P̂, Ω̂^r(−n)), cannot hold as transcribed when the hat is a completion along a closed subset of smaller dimension — its right side is then zero — and the reading reproduces it without comment. Written on Opus 5.5 against a reading made on Opus 5.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Read R. Hartshorne, Ample Subvarieties of Algebraic Varieties (LNM 156, 1970), chapter III, §3, the formal duality theorem and the comparison theorem that follows it; R. Hartshorne, « Cohomological dimension of algebraic varieties » (Ann. of Math. 88, 1968); SGA 2, exposé XII, on a projective scheme and its formal completion; R. Hartshorne, Local Cohomology (LNM 41, 1967), for H^p_Y = lim Ext^p(O_{Y_n}, −) and H^p(X − Y, −) = lim Ext^p(J^n, −); A. Ogus, « Local cohomological dimension of algebraic varieties » (Ann. of Math. 98, 1973). If page 2’s equivalence is there for X smooth projective, mark matched and cite the section. All are cited from memory. No web search was available for this pass (2026-09-23), so nothing has been read.',
+  },
+  {
+    id: '125-typescript-leaves-unattributed',
+    cote: '125',
+    pages: '3, 6',
+    kind: 'codicological',
+    claim:
+      'The folder’s two typescript leaves, headed « - III-18 - » and « - III-5 - », stand among his leaves in reverse order of their numbers, are annotated in a hand the transcription records as unlike his and does not attribute, and come from a text neither file identifies — one that cites itself as « (II, 2, 7, prop. 17) » or « (I, 1, 4, th. 2) » and works with préschémas.',
+    basis:
+      'The transcription’s header and its notes on pages 3 and 6 describe typescript leaves headed III-18 (page 3) and III-5 (page 6), annotated in ink and pencil and highlighted in yellow, the annotating hand « round, careful and upright », not like the fast angular hand of pages 2, 4, 5, 7 and 8 — « Whose it is, the folder does not say »; page 3 cites « (II, 2, 7, prop. 17) », « (I, 2, 7, prop. 19) », « (I, 4, 1, prop. 4) » and « (I, 1, 4, th. 2) », page 6 its own « n° 1 » and « la prop. 1 », and page 6’s Proposition 2 carries the interlinear « un préschéma ». Several words of the annotations, including a pencil note on page 3, are illegible.',
+    ours:
+      'The reading’s footnote on the two leaves repeats that the edition does not decide whose hand annotates them, but its résumé calls them « des pages d’un tapuscrit qu’il a annotées », which attributes the annotations to him; this pass takes the transcription as governing and does not adopt the attribution. The reading also says the « préschéma » correction keeps the hypothesis from bearing on « le mauvais objet », which the typed « si X est noethérien » does not bear out: both wordings are about X. From memory, this pass notes that page 6’s Proposition 2 and its Corollary state what EGA III, §1.2, states — the Čech cohomology of the complement of V(f) computed by the Koszul complex, and the vanishing on an affine as a consequence; the leaves’ citation style is not that of the printed EGA, so they may be a draft of it or another text. That identification is not adopted and not checked. No facsimile was consulted. Written on Opus 5.5 against a reading made on Opus 5.',
+    literature: [
+      'Transcription 125, batch 1 (batch-01.fr.tex), header and pages 3 and 6',
+      'Modernised reading 125 (125.modern.tex), « Résumé », « Le dossier, sa charpente et ses notations » and its footnote, and the sections on pages 3 and 6',
+      'Every transcription in transcripts/ searched for « III-18 », « III-5 » and the Koszul identification C^{p+1}((f), M) (2026-09-23): no hit outside folder 125',
+    ],
+    status: 'candidate',
+    settle:
+      'A person compares the typed text of pages 3 and 6 with EGA III, §1.1–1.2, with the printed EGA’s cross-references, and with any duplicated drafts held elsewhere in the fonds, to identify the typescript; and compares on the facsimile the annotating hand with his own. An identification would say which text the leaves come from, not when his own leaves of the folder were written.',
+  },
+  {
+    id: '125-leaves-undated-no-order-against-literature',
+    cote: '125',
+    pages: '1–8',
+    kind: 'codicological',
+    claim:
+      'Nothing in the folder dates its leaves: « [avant 1970] » is the inventory’s, and no leaf carries a date in his hand or on the typescript, so nothing places the chart of page 2 or the programme of pages 7–8 before or after EGA III, SGA 2 or Hartshorne’s work of 1968–1970 on cohomological dimension and formal completion; the names Greenberg and Néron on page 8 could bound that page from below only through works the page does not cite.',
+    basis:
+      'The transcription and the reading carry the inventory’s « [avant 1970] », which the catalogue gives beside « notes manuscrites (s.d.) »; the transcription records no date on the cover or on any leaf, the typescript leaves carry only their headings III-18 and III-5, and page 8 stops two-thirds down with no sequel. Page 8’s item 6 names « Greenberg » and « Néron », underlined, with two illegible words in the sentence; page 7’s item 2 names « Lefschetz » and a second name read « Grauert » as uncertain.',
+    ours:
+      'The reading’s footnote to item 1 of the programme says that calling the theorem on formal functions « fondamental » beside finiteness « est ce que fera EGA III », which places the page before EGA III; the entry adopts no such order, and identifying the typescript leaves (see 125-typescript-leaves-unattributed) would date the typescript, not his leaves. The reading names no work for the chart of page 2; this pass’s match with Hartshorne 1970 (see 125-cd-complement-formal-comparison) is an identity of statements, not an order, and « [avant 1970] » beside it is not to be read as precedence. The reading’s résumé calls the programme « écrit à l’usage de personne » and speaks of the order in which it was « mis au propre »: the arrow and the circled 2 of page 7 record a renumbering on the page, not when, why or for whom it was written. No facsimile was consulted. Written on Opus 5.5 against a reading made on Opus 5.',
+    literature: [
+      'Transcription 125, batch 1 (batch-01.fr.tex), header, cover and pages 3, 6, 7 and 8',
+      'Modernised reading 125 (125.modern.tex), « Résumé » and the footnotes on items 1, 2 and 6 of the programme',
+      'Catalogue entry for folder 125 (src/content/catalogue.ts)',
+    ],
+    status: 'candidate',
+    settle:
+      'A person checks on the facsimile whether the cover, any leaf or the typescript carries a date, a stamp or a watermark, and whether pages 2, 4, 5, 7 and 8 share paper and ink with the typescript leaves. A physical tie would bound his leaves by the typescript from below only. Whatever is found, priority is not a claim this project makes, about anyone.',
+  },
 ];
