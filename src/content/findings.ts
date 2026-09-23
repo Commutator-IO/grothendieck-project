@@ -2359,4 +2359,43 @@ export const FINDINGS: Finding[] = [
     settle:
       'A person checks on the facsimile whether the comma of page 47 falls at the foot of the leaf or above blank space, and whether any leaf of the fonds carries the sentence on. Blank space below would make the stop an abandonment rather than a loss.',
   },
+  {
+    id: '113-listing-stamps-bound-below-only',
+    cote: '113',
+    pages: '2–12',
+    kind: 'codicological',
+    claim:
+      'The machine stamp « 16 SEP 82 » on the listings of pages 2 and 12 bounds from below only the handwriting written across or around those two listings; nothing in the folder bounds any leaf from above, so nothing places its tensor product of k-linear categories, or of their categories of modules, before or after the text of Kelly (1982) or the tensor product of abelian categories of Deligne (1990) that the reading cites.',
+    basis:
+      'The transcription records that the listings of pages 2 and 12 are stamped 16 SEP 82 and that page 12’s footer announces the machine’s shutdown for Friday 17 September — 17 September 1982 was a Friday, so the two agree; that page 2 is written landscape across its listing and page 12 in the two free margins of its own, page 12 being the reverse of page 11; that pages 4, 6, 8 and 10 are listings « of that run » with nothing of his on them; and it records no stamp on pages 4–10 and no date in his hand on any leaf. The leaves cite nobody.',
+    ours:
+      'The transcription’s header says « The versos date the folder »; the reading’s footnote on page 2 says « Le listing est daté du 16 septembre 1982 », and its footnote on Application 2 names « G. M. Kelly, 1982 » and « P. Deligne … (1990) », calling Deligne’s product « un cousin », while noting that the leaves cite nobody. Read together these can suggest a date for the whole run, or a place for it between the two publications; the entry adopts neither. The stamp dates the printing. It bounds the handwriting of pages 3–11 only if their listings belong to the same job and were printed before he wrote on their backs — the usual order for scrap paper, but not recorded; that pages 4–10 are the other faces of pages 3–9 is inferred from pages 1–2 and 11–12, not stated. The inventory’s « [à partir de 1982] » is not contradicted. Whether Kelly’s text of 1982 states the tensor product of cocomplete k-linear categories, as the footnote’s date implies, is not checked here. No facsimile was consulted. Written on Opus 5.5 against a reading made on Opus 5.',
+    literature: [
+      'Transcription 113, batch 1 (batch-01.fr.tex), header and pages 2, 11 and 12',
+      'Modernised reading 113 (113.modern.tex), header, the footnote on page 2 and the footnote on Application 2 (page 7)',
+    ],
+    status: 'candidate',
+    settle:
+      'A person checks on the facsimile whether the listings of pages 4, 6, 8 and 10 carry the job header or stamp of page 12, and whether pages 3–11 are the blank backs of those listings. A match bounds the whole run from below by 16 September 1982 and bounds nothing above. Whatever is found, priority is not a claim this project makes, about anyone.',
+  },
+  {
+    id: '113-cover-word-and-verso-unattached',
+    cote: '113',
+    pages: '1–12',
+    kind: 'codicological',
+    claim:
+      'The cover leaf carries two things the rest of the folder does not take up: the word « Abelianization » of page 1, from which the inventory takes the folder’s title, appears nowhere on pages 3–12, whose own heading is « ⊗ dans Cat »; and page 2, the other face of the same leaf, is a calculation on semi-simplicial « MM-fibrés » that mentions neither abelianisation nor k-additive categories and is continued on no other leaf of the folder.',
+    basis:
+      'The transcription records page 1 as an otherwise blank listing carrying « Abelianization » top right and the number 377 top left, both in his hand; page 2 as its other face, written landscape: chains α ↠ β ↩ γ over X ↠ Y ↩ Z, objects M(ξ₀, …, ξₙ) joined by arrows marked « subm », « multibundle » struck for « MM-fibré », and a sufficient condition for ∫_I X(i) not to leave the semi-simplicial MM-fibrés, the word qualifying f in its condition c) read « submersion » as uncertain and preceded by an illegible word. Pages 3–12 carry his boxed heading « ⊗ dans Cat » and his circled pagination 1 to 5, and speak of « topos abélien » and « topos k-abéliens » but never of abelianisation.',
+    ours:
+      'The transcription’s header says the word is where the inventory’s title comes from, « which is therefore his and not the archivists’ »; the reading repeats it, calls page 2 « un calcul indépendant » and says it does not identify the notion. That the word titles pages 3–12 — the passage from a k-additive P to the abelian P^k would fit it — is stated by neither file and is not adopted here; nor is any order between the two faces of the leaf. Neither file explains the number 377. No facsimile was consulted. Written on Opus 5.5 against a reading made on Opus 5.',
+    literature: [
+      'Transcription 113, batch 1 (batch-01.fr.tex), header, cover and pages 2–3',
+      'Modernised reading 113 (113.modern.tex), « Au dos du feuillet de titre (page 2) » and its footnote',
+      'Every transcription in transcripts/ searched for « MM-fibr », « multibundle », « Abelianization » and « 377 » (2026-09-23): no hit outside folder 113',
+    ],
+    status: 'candidate',
+    settle:
+      'A person checks on the facsimile whether 377 recurs, in his hand and in the same corner, on the covers of neighbouring folders of the fonds — a series number would make page 1 a filing cover and say nothing about page 2 — and, as further folders are transcribed, looks for the MM-fibrés or multibundles of page 2 elsewhere in the fonds.',
+  },
 ];
