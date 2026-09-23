@@ -1,0 +1,1794 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 133
+% (pages 1-53, the whole folder).
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried moves into a
+% footnote. It is held to being mathematically correct as it stands; where the
+% manuscript is loose or mistaken, the true statement is what appears here and
+% the footnote says what the page has. In any dispute of substance the
+% transcription governs: whoever cites Grothendieck must cite batch-01.fr.tex
+% (pp. 1-20), batch-02.fr.tex (pp. 21-40) or batch-03.fr.tex (pp. 41-53).
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-09-23 — first pass, unchecked against the pages by a human.
+% The folder was read whole, its three batches together; this is one document
+% for the shelfmark. It was made on Opus 5.5 and has not been measured against
+% the reference reading of folder 115 (made on Opus 5). The literature named
+% in the footnotes is cited from memory and was not checked against the
+% sources.
+%
+% Scope. Pages 1, 34 and 44 are covers whose words head sections here. Pages
+% 4, 9 and 40 are blank. Pages 10-16 are two printed offprints of O. Laborde
+% (C. R. Acad. Sc. Paris 1974), with nothing in his hand; they are identified,
+% not described. Page 17 is a computer listing carrying one formula of his.
+% Pages 47 and 49 are typed notices of the USTL (49: an « avis de soutenance »
+% dated 5 June 1975), versos of 46 and 48. The unity of the folder is the
+% archivists' bracketed title, « [Groupes de Witt et formes quadratiques,
+% groupes formels] »; it is not his, and the reading says so.
+%
+% Spine. Seven runs, unrelated except where noted; kept distinct.
+%   pp. 1-3     cover « groupes Witt et formes quadratiques »; scratch: the
+%               associativity square and Mac Lane's pentagon with an
+%               obstruction in Ext^1(pi0,pi0,pi0;pi1); w1 = [-1], w2 = c1 mod 2
+%               for the hyperbolic plane on L; the change-of-rings spectral
+%               sequence.
+%   pp. 5-8     « Groupes de Witt et variantes »: WG(S) for a locally ringed
+%               topos, pre-lambda-ring, the lambda-ring question reduced to
+%               B_{O(m)}; hyperbolic map alpha: K_s(S) -> WG(S), W(S) = coker;
+%               « Laborde dixit »; total Stiefel-Whitney class. Offprints
+%               pp. 10-16.
+%   pp. 17-28   G-sets and symmetric groups: k_*(G) = sum k(G x S_n) with the
+%               induction product; tau^n(E) = cl_n(Mon(I_n,E)), exponential;
+%               T^n(E) = cl_n(E^{I_n}); functors from finite sets and
+%               injections (special, distinguished, « equivalences »,
+%               Omega = End); on a ringed topos, the tensor power in
+%               K(X,*) = sum K(B_{S_n}X) as sum over types of m_alpha(lambda)
+%               rho^alpha; lambda^n and Adams psi^n as coefficients.
+%   pp. 29-33   the game of go: territory score vs area, D = 2(P+T) - nu^2 -
+%               eps; rules of capture; end of the obligation to play; who
+%               plays last.
+%   pp. 34-39   cover « Groupes formels »; statements on p-divisible and
+%               unipotent formal groups; the « Solution »: a group G seen
+%               through Cent(G), D(G), two crossed modules sharing pi0, pi1;
+%               scratch on central extensions, Ga-hat by Ga-hat.
+%   pp. 41-43   smooth connected algebraic groups with a Chevalley
+%               decomposition: G = L x^z Z, Z anti-affine; Ext^1(A, z) =
+%               Hom(D(z), Pic^0); char 0 vs char p; non-constructibility of
+%               G_aff; « Reformulation ».
+%   pp. 44-53   cover « Fourbis auxiliaires cohomologiques pour groupes
+%               formels », his pp. 1-7: realising two crossed modules by one
+%               G; obstruction H^3, indeterminacy H^2; N' = Cent G via Psi_G,
+%               N = DG via lambda_G; dependence on the central extension E
+%               through its commutator pairing c_E.
+%
+% Notation fixed for the document.
+%  - « extension de A par B » is Grothendieck's: 1 -> B -> E -> A -> 1.
+%  - [-1] := partial(-1) in H^1(S, mu_2) (p. 3 writes alpha, which pp. 6-7 use
+%    for the hyperbolic map). alpha(E) = H(E) = E + E-check.
+%  - G-sets: k_0(G), k_n(G) = k(G x S_n), cl_n, tau^n (injections, p. 19),
+%    T^n (all maps, p. 21). On pp. 27-28 the tensor power, which the page
+%    calls tau^n, is written T^n: it linearises E^{I_n}, not Mon(I_n, E).
+%  - Formal groups: Cent(G), D(G) (the page also writes Z(G) in gothic, Der G,
+%    DG); the subgroup of M on pp. 46-51 is gothic Z; the group L cap Z of
+%    pp. 41-43 is fraktur z; on p. 45 N cap N' is written pi_1 only. Z on
+%    pp. 41-43 is the anti-affine subgroup, nothing else.
+%  - Crossed module (N, M, d, Theta); pi_1 = Ker d, pi_0 = Coker d.
+%
+% Substantive departures, each footnoted where it occurs:
+%  p. 2    the target « L » of the square read as L_.; the Ext groups read as
+%          multilinear extension groups (ours).
+%  p. 3    abutment Ext_A^{p+q}(M,N) supplied; 2 invertible supplied; w2 = c1
+%          mod 2 is his claim with a « ? », left unproved.
+%  p. 5    P_i takes lambda^1..lambda^i (page: ..lambda^{i-1}); even rank needs
+%          a point of residue characteristic 2; the product without 2
+%          invertible checked (ours).
+%  p. 6    alpha does NOT factor through K(S) in general: Atiyah's F_2 on an
+%          elliptic curve (ours).
+%  p. 7    alpha(K(S)) read alpha(K_s(S)); Laborde's statement proved via a
+%          bilinear lift of q (ours); the B_{O(n)} counterexample is his,
+%          unproved; the lambda-structure does not pass to W(S) (ours).
+%  p. 8    the struck « w o alpha = 1 » is false: w(H(O)) = 1 + [-1];
+%          normalisation w = 1 + class supplied.
+%  p. 18   sigma_{-t} lambda_t = 1, E^2 = sigma^2 + lambda^2 and 2 lambda^2 +
+%          E = E^2 hold for cardinalities, fail in A(Z/2) (ours); only
+%          sigma^2 = lambda^2 + E holds as G-sets. A(G) -> R(G) injective iff
+%          G cyclic (the page draws a hook).
+%  p. 21   the cancelled formula replaced by the correct one over types alpha
+%          with the stabilisers W_alpha = prod S_i wr S_{alpha_i} (ours).
+%  p. 24   special = direct summands of finite SUMS of H_I (page: of an H_I;
+%          2 h_{1} is a counterexample).
+%  p. 28   NB (linear independence of the rho^alpha) true over Q, false over
+%          F_2 (rho_1^2 = 2 rho_2); Question: yes for fields of char 0, no for
+%          F_p (ours); sum index i >= 0.
+%  p. 29   « nu^2 - D' » read nu^2 + D'; hypotheses: no seki, no neutral
+%          point, every dead stone captured.
+%  p. 33   the rule presupposes that each side only fills its own territory.
+%  pp. 35-36  the page's labels pair Z(G) with G/Z(G) and D(G) with G/D(G);
+%          exactness forces Cent(G) -> G/D(G) and D(G) -> G/Cent(G) (p. 36's
+%          arcs agree).
+%  p. 41   Ext^1(A, z) = Hom(D(z), Pic^0_{A/k}) (page: Pic_{A/k}); k perfect.
+%  p. 42   phi_0 : t-dual -> H^1(A, O_A) (page: t -> ...).
+%  p. 43   over the algebraic closure of a finite field z_m must be finite too
+%          (ours); the non-constructibility sharpened (ours).
+%  p. 45   [N, N'] = 1 supplied (needed for the crossed-module structures).
+%  p. 50   Psi_0 injective <=> N' = H cap Cent(G) (page: N' = Cent(H); only
+%          one direction holds).
+%  p. 53   the « vérifier » (lambda_0 onto <=> dN = DM) checked (ours).
+%
+% Links the pages do not write (ours, and said so in the body): p. 3 computes
+% w(alpha(L)), which is why p. 8's « w o alpha = 1 » is struck; p. 2 and pp.
+% 45-53 are the pi_0/pi_1/class-one-degree-up pattern of folder 135; p. 21's
+% decomposition Hom(I_n,E) = sum Mon(Q,E) is p. 24's H_J = sum h_Q; pp. 27-28
+% are the linear counterpart of pp. 21-22 and take up folder 2 (pp. 15-18);
+% p. 8's target ring is folder 2's A-tilde; p. 35's « Solution » is the problem
+% of pp. 45-53, and p. 36's phi_G is p. 46's; pp. 41-43 are the algebraic
+% model of p. 38's scratch.
+%
+% Announced and never established: the meaning of p. 2's obstruction; w2 = c1
+% (p. 3); whether WG(S) is a lambda-ring and the task WG(B_{O(m)}) (p. 5); the
+% B_{O(n)} counterexample (p. 7); existence of w (p. 8); lambda^i(xy) on G-sets
+% (p. 18); any use of q_H^n (p. 20); the relation T*/tau* (p. 21, cancelled);
+% the permanence of distinguished functors (p. 25); what Omega is for (p. 26);
+% the Ko rule « cf. plus bas » (p. 31); whether eps depends on the play
+% (p. 30); every statement of p. 35 and its « Question »; p. 36's « G
+% unipotent »; p. 37's « voir fin »; the « bien connu » of p. 42 and the NB of
+% p. 43; the obstruction and indeterminacy of p. 45; « on doit trouver »
+% (p. 48); the unfinished sentence of p. 51; which E satisfy c) (p. 53); any
+% return to formal groups.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{133}
+\pages{1}{53}
+\dating{1974-[à partir de 1975]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{[Groupes de Witt et formes quadratiques, groupes formels] : notes manuscrites (s.d.), tirés à part (1974) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Ce dossier n'est pas un texte mais un paquet. Sept suites de notes, sans
+date et sans lien entre elles, y sont rangées sous un titre que les
+archivistes ont écrit entre crochets, « Groupes de Witt et formes
+quadratiques, groupes formels » : c'est leur titre, non le sien. Trois
+chemises de sa main découpent le paquet — « groupes Witt et formes
+quadratiques », « Groupes formels », « Fourbis auxiliaires cohomologiques
+pour groupes formels » — et entre elles se glissent une réflexion sur les
+ensembles munis de symétries et quatre pages sur le jeu de go. On les lit ici
+une par une, sans leur prêter une unité qu'elles n'ont pas.
+
+La première suite part d'une question ancienne : comment classer les formes
+quadratiques, ces expressions comme $x^{2} + y^{2}$ ou $xy$, non plus sur un
+corps mais sur un espace qui varie. Grothendieck fait ce qu'on fait pour
+passer des entiers naturels aux entiers relatifs : on autorise les
+différences formelles de formes, puis on décide qu'une forme et son opposée
+s'annulent. Ce qui reste est le groupe de Witt. Deux questions l'occupent.
+Les opérations qui généralisent les coefficients binomiaux (les « puissances
+extérieures ») obéissent-elles aux identités qu'elles vérifient pour les
+nombres ? Il ne le sait pas, et réduit la question à un seul cas universel.
+Et peut-on attacher à une forme des invariants de parité, les classes de
+Stiefel–Whitney, qui mesurent en cohomologie modulo $2$ ce qui l'empêche
+d'être une somme de carrés ?
+
+La deuxième suite compte avec des symétries. Un ensemble fini sur lequel un
+groupe agit a une « taille » plus fine qu'un nombre : l'ensemble des types
+d'orbites qui le composent. Si l'on choisit $n$ éléments distincts d'un tel
+ensemble, en les numérotant, on obtient un nouvel ensemble, sur lequel
+agissent en plus les permutations des numéros ; Grothendieck montre que
+cette construction transforme une réunion en un produit, comme
+l'exponentielle transforme une somme en un produit. Il remarque au passage
+que la vieille identité « $n^{2}$ couples $=$ $n$ couples diagonaux $+$ deux
+fois les paires » cesse d'être vraie quand on retient la symétrie, et c'est
+ce qui oblige à garder les permutations. Viennent ensuite les foncteurs
+définis sur les ensembles finis et leurs injections, objets qu'on a
+étudiés pour eux-mêmes une quarantaine d'années plus tard, puis la version linéaire : la puissance
+tensorielle d'un module, avec les permutations de ses facteurs, contient à
+la fois les puissances extérieures et les opérations d'Adams.
+
+La suite sur le jeu de go est un exercice de comptabilité. Deux manières de
+compter les points d'une partie — les prisonniers plus le territoire, ou les
+pierres plus le territoire — donnent des résultats qui diffèrent d'au plus
+un point, selon qui a joué le dernier ; Grothendieck l'établit, puis cherche
+à dire précisément quand une partie est finie.
+
+Les deux dernières suites, les plus longues, veulent reconstituer un groupe
+non commutatif à partir de deux de ses sous-groupes : son centre et le
+sous-groupe engendré par ses commutateurs. Chacun des deux fournit une
+flèche dont le noyau et le conoyau sont les mêmes deux groupes, et la
+question est de savoir si l'on peut recoller les deux flèches en un groupe.
+L'analogie est celle de la retenue dans une addition à plusieurs chiffres :
+on connaît chaque chiffre, et il faut encore choisir les retenues, de façon
+cohérente. La réponse a la forme classique : un obstacle à l'existence,
+dans un groupe de cohomologie de degré $3$, puis une liberté de choix,
+mesurée en degré $2$ par les extensions centrales ; et il faut enfin que le
+groupe construit ait \emph{exactement} le centre et les commutateurs
+prescrits, ce que le dossier traduit en conditions sur une forme bilinéaire
+alternée. Entre les deux, trois pages sur les groupes algébriques
+décomposent un groupe en une partie affine et une variété abélienne, et
+relèvent un phénomène qui sépare la caractéristique nulle de la
+caractéristique $p$.
+
+On voit ici des notes de travail au sens strict. Les ignorances sont écrites
+comme telles (« j'ignore si c'est un $\lambda$-anneau », « il n'est pas
+clair »), les affirmations d'autrui sont signées (« Laborde dixit »), et une
+présentation exacte mais laide est rejetée pour une autre, parce qu'elle
+oblige à manipuler des choses « trop dégueulasses » : le goût pour la donnée
+naturelle plutôt que pour la donnée explicite. La datation vient de
+l'inventaire ; les tirés à part sont de 1974, et un avis administratif de
+juin 1975 sert de verso à l'une des dernières pages.
+
+Les noms sous lesquels chercher la suite : groupe de Grothendieck–Witt et
+groupe de Witt d'un schéma, classes de Stiefel–Whitney d'une forme
+quadratique, $\lambda$-anneaux ; anneau de Burnside, opérations de
+puissance, FI-modules et espèces de structures, dualité de Schur–Weyl ;
+décompte par territoire et par zone au go ; modules croisés, obstruction
+d'Eilenberg–Mac Lane, groupes anti-affines et formule de Barsotti–Weil.
+
+\keywords{Grothendieck-Witt ring, Witt group of a scheme, nonsingular quadratic form, hyperbolic form, Stiefel-Whitney class of a quadratic form, lambda-ring, Mac Lane pentagon, change-of-rings spectral sequence, Burnside ring, power operation, FI-module, combinatorial species, monomial symmetric function, Schur-Weyl duality, Adams operation, rules of Go, area scoring, territory scoring, formal group, p-divisible group, crossed module, Eilenberg-Mac Lane obstruction, extension with non-abelian kernel, commutator pairing, Chevalley structure theorem, anti-affine group, Cartier duality, Barsotti-Weil formula}
+\end{resume}
+
+\pagerange{1}{53}
+\section*{Le fil du dossier, et les conventions}
+
+\subsection*{Les stations}
+
+L'inventaire date le dossier « 1974-[à partir de 1975] » et lui donne un
+titre entre crochets, qui est le leur\footnote{Le titre de l'inventaire est
+« [Groupes de Witt et formes quadratiques, groupes formels] : notes
+manuscrites (s.d.), tirés à part (1974) ». Les crochets sont ceux des
+archivistes : les mots viennent vraisemblablement des deux premières
+chemises, pages 1 et 34, mais la réunion des deux est de leur fait. Aucune
+page ne relie les formes quadratiques aux groupes formels.}. Les pages
+transcrites se répartissent en sept suites.
+
+\begin{enumerate}
+  \item \emph{Pages 1 à 3.} La chemise « groupes Witt et formes
+  quadratiques », puis deux brouillons : l'associativité d'un produit sur un
+  complexe, une obstruction et le pentagone de Mac Lane (page 2) ; les
+  classes de Stiefel–Whitney du plan hyperbolique sur un fibré en droites,
+  et la suite spectrale de changement d'anneaux (page 3).
+  \item \emph{Pages 5 à 8}, « Groupes de Witt et variantes » : le groupe
+  $WG(S)$ des modules quadratiques sur un topos localement annelé, la
+  question de sa structure de $\lambda$-anneau, l'application hyperbolique
+  et le groupe de Witt $W(S)$, la classe de Stiefel–Whitney totale. Les
+  pages 10 à 16 sont deux tirés à part d'O.~Laborde, que la page 7 cite.
+  \item \emph{Pages 17 à 28}, sans titre : l'anneau $k_{*}(G)$ des
+  $G \times \mathfrak{S}_n$-ensembles finis virtuels, les opérations
+  $\tau^{n}$ et $T^{n}$, les foncteurs sur la catégorie des ensembles finis
+  et injections, puis les puissances tensorielles sur un topos annelé et les
+  représentations des groupes symétriques.
+  \item \emph{Pages 29 à 33}, le jeu de go : décompte des points, règles de
+  prise, fin de l'obligation de jouer.
+  \item \emph{Pages 34 à 39}, « Groupes formels » : énoncés sur les groupes
+  formels $p$-divisibles et unipotents, et la « Solution » qui voit un groupe
+  à travers son centre et son groupe dérivé ; brouillons.
+  \item \emph{Pages 41 à 43}, sans titre : groupes algébriques lisses
+  connexes admettant une décomposition de Chevalley, et leurs extensions
+  centrales.
+  \item \emph{Pages 44 à 53}, « Fourbis auxiliaires cohomologiques pour
+  groupes formels », paginées par lui de 1 à 7 : réaliser deux modules
+  croisés de mêmes invariants par un seul groupe, puis imposer que ce groupe
+  ait le centre et le groupe dérivé voulus.
+\end{enumerate}
+
+Les pages 4, 9 et 40 sont blanches. La page 17 est un feuillet de listing
+d'ordinateur qui ne porte de sa main qu'une formule. Les pages 47 et 49 sont
+des avis dactylographiés de l'administration de l'université, versos des
+pages 46 et 48 ; le second, un avis de soutenance daté du 5 juin 1975, lui
+est adressé\footnote{Ils ne sont pas de sa main et ne sont pas transcrits.
+Comme sa pagination court sans interruption de la page 46 (sa page 2) à la
+page 48 (sa page 3) et à la page 50 (sa page 4), ces feuillets sont du papier
+de réemploi ; l'avis de 1975 suggère seulement que la dernière suite n'est
+pas antérieure à juin 1975.}.
+
+\subsection*{Sept suites, gardées distinctes}
+
+Les suites ne se citent pas : aucune page ne renvoie à une autre, et les
+pages 41 à 43, sur les groupes algébriques, sont rangées entre les deux
+suites sur les groupes formels sans qu'aucune ne les mentionne. Les liens
+signalés plus bas sont donc tous de nous. Deux d'entre eux s'appuient
+cependant sur ce que les pages montrent : la page 3 calcule la classe de
+Stiefel–Whitney d'un plan hyperbolique, et c'est l'affirmation qu'une telle
+classe est triviale qui est barrée page 8 ; la « Solution » de la page 35 et
+les « Fourbis » des pages 45 à 53 donnent à la même application le même nom,
+$\varphi_G$.
+
+\subsection*{Conventions}
+
+\begin{itemize}
+  \item \emph{Extensions.} « Extension de $A$ par $B$ » a le sens de
+  Grothendieck : une suite exacte $1 \to B \to E \to A \to 1$.
+  \item \emph{Formes quadratiques.} Un module quadratique $(M, q)$ est un
+  module localement libre de type fini muni d'une forme quadratique, de
+  forme polaire $b(x, y) = q(x+y) - q(x) - q(y)$ ; il est
+  \emph{strictement non dégénéré} (le mot de la page ; on dit aujourd'hui
+  \emph{non singulier}) si $b$ identifie $M$ à son dual $\check{M}$. Le plan
+  hyperbolique sur $E$ est $H(E) = E \oplus \check{E}$, $q(x + \xi) =
+  \langle x, \xi \rangle$, et l'application hyperbolique est
+  $\alpha(E) = H(E)$. La classe de $-1$ dans $H^{1}(S, \mu_2)$ est notée
+  $[-1]$ ; la page 3 l'appelle $\alpha$, lettre que les pages 6 et 7
+  réservent à l'application hyperbolique.
+  \item \emph{Ensembles finis.} $I_n = \{1, \dots, n\}$ ; $\mathrm{Mon}(I, E)$
+  est l'ensemble des injections, $E^{I} = \mathrm{Hom}(I, E)$ celui de
+  toutes les applications. $\tau^{n}(E)$ est la classe de
+  $\mathrm{Mon}(I_n, E)$ (page 19), $T^{n}(E)$ celle de $E^{I_n}$ (page 21).
+  Aux pages 27 et 28, la puissance tensorielle $n$-ième d'un module, que la
+  page appelle $\tau^{n}$, est notée ici $T^{n}$ : elle linéarise
+  $E^{I_n}$ et non $\mathrm{Mon}(I_n, E)$, puisque l'algèbre d'un produit
+  est le produit tensoriel des algèbres.
+  \item \emph{Groupes.} $\mathrm{Cent}(G)$ est le centre, $D(G)$ le groupe
+  dérivé (la page écrit aussi $\mathfrak{Z}(G)$, $\mathrm{Dér}\,G$, $DG$).
+  Un module croisé est un quadruplet $(N, M, d, \Theta)$, d'invariants
+  $\pi_1 = \operatorname{Ker} d$ et $\pi_0 = \operatorname{Coker} d$. Le
+  sous-groupe de $M$ des pages 46 à 51 est noté $\mathfrak{Z}$ ; le groupe
+  $L \cap Z$ des pages 41 à 43 est noté $\mathfrak{z}$, et $Z$ n'y désigne
+  que le sous-groupe anti-affine. À la page 45, $N \cap N'$ est noté
+  $\pi_1$ seulement\footnote{La page 45 l'écrit aussi avec le « 3 » bouclé
+  qu'on rend par $\mathfrak{z}$ ; c'est un autre objet que le $\mathfrak{z}$
+  des pages 41 à 43.}.
+\end{itemize}
+
+\subsection*{Ce que seule une lecture d'ensemble peut dire}
+
+Six liens, qu'aucune page n'écrit, et qui sont de nous.
+
+Le brouillon de la page 3 donne, pour le plan hyperbolique sur un fibré en
+droites $L$, $w_1 = [-1]$ et $w_2 = c_1(L) \bmod 2$. C'est exactement
+$w(\alpha(L))$, et cela montre que la phrase de la page 8 selon laquelle
+$w \circ \alpha = 1$ est fausse : c'est celle que Grothendieck a barrée.
+
+Le brouillon de la page 2 (des invariants $\pi_0$, $\pi_1$, une contrainte
+d'associativité, une obstruction un degré plus haut modulo l'image d'un
+degré plus bas) et les pages 45 à 53 (deux modules croisés d'invariants
+$\pi_0$, $\pi_1$, une obstruction dans $H^{3}$, une indétermination dans
+$H^{2}$) relèvent du même schéma : celui des Gr-catégories du dossier 135,
+daté des mêmes années.
+
+La décomposition $\mathrm{Hom}(I_n, E) = \coprod_{Q} \mathrm{Mon}(Q, E)$,
+sur les quotients $Q$ de $I_n$, qui ouvre la page 21, est la décomposition
+$H_J = \coprod_Q h_Q$ de la page 24, vue ensemble par ensemble ; c'est elle
+qui fait des $T^{n}$ des polynômes en les $\tau^{m}$.
+
+Les pages 27 et 28 sont la contrepartie linéaire des pages 21 et 22 : les
+deux sommes y sont indexées par les types $\alpha$ de partitions de $n$. Et
+elles reprennent le cadre du dossier 2 (pages 15 à 18), où le produit
+d'induction sur les groupes symétriques et les puissances tensorielles
+d'un module sur un topos annelé sont déjà posés.
+
+La « Solution » de la page 35 et les « Fourbis » des pages 45 à 53 sont un
+même problème : $\mathrm{Cent}(G)$ et $D(G)$ fournissent deux modules
+croisés de mêmes invariants, et il s'agit de dire quand deux tels modules
+croisés proviennent d'un groupe. Le point d'exclamation de la page 36
+(« est quasi-unipotent ! ») est l'injectivité de $\Psi_G$ que la page 46
+caractérise.
+
+Les pages 41 à 43 donnent, pour les groupes algébriques, le modèle de ce que
+le brouillon de la page 38 esquisse pour les groupes formels : une extension
+centrale d'un groupe linéaire (ou de son complété formel) par un groupe
+commutatif.
+
+\subsection*{Ce que le dossier annonce sans l'établir}
+
+Le sens de l'obstruction de la page 2. L'égalité $w_2 = c_1 \bmod 2$ de la
+page 3, marquée d'un « ? ». La question de la page 5 (est-ce un
+$\lambda$-anneau ?) et la tâche de déterminer $WG(B_{O(m)})$. Le
+contre-exemple de la page 7 sur $B_{O(n)}$. L'existence de la classe $w$ de
+la page 8. Les formules de $\lambda^{i}(xy)$ pour les $G$-ensembles (page
+18). Tout usage des applications $q^{n}_H$ (page 20). La relation entre
+$T^{*}$ et $\tau^{*}$ annoncée page 21, dont la formule est annulée. Les
+propriétés de permanence des foncteurs distingués (page 25). Ce à quoi doit
+servir $\Omega$ (page 26). La description du ko, « cf.\ plus
+bas » (page 31), jamais écrite. La question de la page 30 : la valeur de
+$\varepsilon$ dépend-elle de la suite du jeu ? Tous les énoncés de la page
+35 et sa « Question ». Le « $G$ unipotent » de la page 36. Le « voir fin »
+de la page 37, qu'aucune fin ne reprend. Le « bien connu » de la page 42 et
+le NB de la page 43. L'obstruction et l'indétermination de la page 45. Le
+« on doit trouver » de la page 48. La phrase inachevée de la page 51. La
+détermination des extensions $E$ qui satisfont les conditions c) (pages 51
+et 53). Et tout retour aux groupes formels : le dossier s'arrête sur la
+page 53 sans y revenir.
+
+\pagerange{1}{3}
+\section*{I. « Groupes Witt et formes quadratiques » : la chemise et deux brouillons (pages 1 à 3)}
+
+La page 1 est une chemise de carton rose qui ne porte que ces mots, en haut à
+droite\footnote{Le dernier mot est abrégé, « qu.dr.tiques », et lu
+« quadratiques ».}. Les deux feuillets qui suivent sont des brouillons, sans
+phrase suivie.
+
+\pagerange{2}{2}
+\subsection*{Associativité et pentagone (page 2)}
+
+Le feuillet, à en-tête de l'Institut de mathématiques de Montpellier, part
+d'un complexe $L_{\bullet}$ muni d'un produit $p \colon L_{\bullet} \otimes
+L_{\bullet} \to L_{\bullet}$, et dessine le carré qui exprime
+l'associativité de $p$ : les deux composés
+\[
+p \circ (p \otimes L_{\bullet}) \quad \text{et} \quad
+p \circ (L_{\bullet} \otimes p) \circ a,
+\qquad
+(L_{\bullet} \otimes L_{\bullet}) \otimes L_{\bullet} \longrightarrow
+L_{\bullet},
+\]
+où $a$ est l'isomorphisme d'associativité du produit tensoriel des
+complexes\footnote{La page écrit $L$ sans indice au sommet inférieur du
+carré ; on lit $L_{\bullet}$, que le reste du carré demande. Une flèche
+courbe entre les deux $L_{\bullet} \otimes L_{\bullet}$, marquée d'un
+$\alpha$ douteux, est biffée.}. Sous le carré, une flèche
+\[
+\mathrm{Ext}(\pi_0, \pi_0 ; \pi_1) \xrightarrow{\ \delta^{(1)}\ }
+\mathrm{Ext}^{1}(\pi_0, \pi_0, \pi_0 ; \pi_1).
+\]
+La page ne définit aucun de ces groupes. Notre lecture est la suivante, et
+elle n'est qu'une lecture : si $\pi_0$ et $\pi_1$ sont les deux groupes
+d'homologie d'un complexe à deux termes et si $p$ n'est associatif qu'à
+homotopie près, le défaut d'associativité définit une classe dans un groupe
+d'extensions « trilinéaires » de $\pi_0$ par $\pi_1$, et changer $p$ la
+modifie par l'image, sous une différentielle $\delta^{(1)}$, d'un groupe
+d'extensions « bilinéaires ». Seule la classe dans le conoyau de
+$\delta^{(1)}$ mesure l'obstruction\footnote{C'est le schéma des
+obstructions d'associativité qu'on rencontre en cohomologie de Hochschild
+et de Mac Lane ; l'identification des groupes de la page est de nous. En
+tête du feuillet, deux relations isolées, $q' + q'' + q''' = -1$ et
+$q''' = q'q''$ (le signe central est surchargé), ne se rattachent à rien.}.
+
+Le feuillet se termine sur le \emph{pentagone} : pour quatre objets
+$x, y, z, t$, les deux chemins de $((x \otimes y) \otimes z) \otimes t$ à
+$x \otimes (y \otimes (z \otimes t))$, l'un par $(x \otimes y) \otimes
+(z \otimes t)$, l'autre par $(x \otimes (y \otimes z)) \otimes t$ et
+$x \otimes ((y \otimes z) \otimes t)$, doivent coïncider :
+\[
+a_{x, y, z \otimes t} \circ a_{x \otimes y, z, t}
+= (x \otimes a_{y, z, t}) \circ a_{x, y \otimes z, t} \circ
+(a_{x, y, z} \otimes t).
+\]
+C'est l'axiome de cohérence de Mac Lane (1963), qui garantit que toutes les
+manières de réassocier un produit de $n$ facteurs
+s'accordent\footnote{La page dessine les cinq sommets sans écrire
+l'égalité ; la flèche de droite, entre $(x \otimes y) \otimes (z \otimes t)$
+et $x \otimes (y \otimes (z \otimes t))$, porte deux pointes. S.~Mac Lane,
+« Natural associativity and commutativity », 1963 : Grothendieck ne le cite
+pas ici, mais l'article est antérieur de dix ans.}. Le même schéma — deux
+invariants, une contrainte, une classe un degré plus haut — est celui des
+Gr-catégories du dossier 135 (pages 40 et 41), et on le retrouvera aux pages
+45 à 53.
+
+\pagerange{3}{3}
+\subsection*{Une classe de Stiefel–Whitney, une suite spectrale (page 3)}
+
+On suppose $2$ inversible\footnote{Hypothèse implicite de la page : elle
+identifie $\mu_2$ à $\mathbb{F}_2$ et utilise la suite de Kummer
+$1 \to \mu_2 \to \mathbb{G}_m \xrightarrow{2} \mathbb{G}_m \to 1$.}. Soit $L$
+un fibré en droites sur $S$ et $E = L \oplus L^{-1}$, muni de la forme
+quadratique $Q(x, x') = x x'$ : c'est le plan hyperbolique $H(L)$ des
+pages 6 et 7. La page affirme (« Je dis que ») :
+\[
+w_1(E) = [-1] := \partial(-1), \qquad w_2(E) \equiv c_1(L) \bmod 2,
+\]
+où $\partial \colon H^{0}(S, \mathbb{G}_m) \to H^{1}(S, \mu_2)$ et
+$H^{1}(S, \mathbb{G}_m) \to H^{2}(S, \mu_2)$ sont les cobords de Kummer. La
+première égalité est juste : localement, $H(L)$ est la forme
+$\langle 1, -1 \rangle$, de discriminant $-1$. La seconde est vérifiée
+formellement : si $y$ est une « racine » de $E$, l'autre est $y + [-1]$, et
+\[
+(1 + y)(1 + y + [-1]) = 1 + [-1] + y(y + [-1]),
+\]
+la page inscrivant sous $y(y + [-1])$ « $c_1$ ? ». Nous ne l'établissons
+pas ici\footnote{Deux vérifications sont compatibles avec l'énoncé : pour
+$L$ trivial, $w_2(\langle 1, -1 \rangle) = 0 = c_1$ ; et sur les nombres
+complexes, la réduction de $H(L)$ au groupe orthogonal compact est le fibré
+réel orienté sous-jacent à $L$, dont la classe $w_2$ est $c_1 \bmod 2$. La
+page écrit $\alpha$ pour $[-1]$.}.
+
+En tête du feuillet, une classe $\eta \in H^{1}(P', \mathbb{F}_2)$ sur un
+$P' = W^{*}(L^{\otimes 2})$ au-dessus duquel $L^{\otimes 2}$ devient trivial,
+soumise à
+\[
+\eta^{2} + w_1 \eta + w_2 = 0 .
+\]
+La page ne dit pas ce qu'est $W^{*}$. La relation a la forme de celle par
+laquelle son article de 1958 définit les classes de Chern sur le fibré
+projectif, réduite modulo $2$ et en rang $2$\footnote{« La théorie des
+classes de Chern », Bull. SMF 86 (1958) : sur le fibré projectif d'un fibré
+de rang $r$, la classe tautologique $\xi$ vérifie
+$\sum_{i} (-1)^{i} c_i \xi^{r-i} = 0$, et cette relation définit les $c_i$.
+Le rapprochement est de nous.}.
+
+Le bas du feuillet note, pour un homomorphisme d'anneaux $A \to B$, un
+$A$-module $M$ et un $B$-module $N$, la suite spectrale de changement
+d'anneaux
+\[
+E_2^{p,q} = \mathrm{Ext}_B^{p}\bigl(\mathrm{Tor}_q^{A}(M, B), N\bigr)
+\Longrightarrow \mathrm{Ext}_A^{p+q}(M, N),
+\]
+issue de l'adjonction $\mathrm{Hom}_A(M, N) = \mathrm{Hom}_B(M \otimes_A B,
+N)$\footnote{La page n'écrit que le terme $E_2$, les indices $p$ et $q$ en
+surcharge sur un $B$ et un $A$ ; l'aboutissement est ajouté ici. C'est la
+suite de Cartan et Eilenberg (\emph{Homological Algebra}, 1956). Quelques
+lignes non mathématiques au pied du feuillet ne sont pas transcrites.}.
+
+\pagerange{5}{16}
+\section*{II. Groupes de Witt et variantes (pages 5 à 16)}
+
+\pagerange{5}{5}
+\subsection*{Le groupe $WG(S)$ et la question du $\lambda$-anneau (page 5)}
+
+Soit $S$ un topos localement annelé. On note $WG(S)$ le groupe de
+Grothendieck du monoïde, pour la somme orthogonale, des classes
+d'isomorphie de modules quadratiques strictement non dégénérés sur $S$.
+C'est ce qu'on appelle aujourd'hui le \emph{groupe de Grothendieck–Witt} de
+$S$\footnote{Pour un anneau commutatif, M.~Knebusch introduit les
+« Grothendieck- und Wittringe » en 1969-1970 ; pour un schéma, la
+définition moderne (Knebusch, 1977, puis Walter et Schlichting) ajoute les
+relations issues des sous-modules lagrangiens, que la définition de la page
+ne contient pas. Hors du cas affine, les deux groupes peuvent différer ;
+voir la note sur la page 6.}.
+
+\emph{Structure.} Le produit tensoriel et les puissances extérieures font de
+$WG(S)$ un pré-$\lambda$-anneau, augmenté par le rang vers l'anneau
+binomial $H^{0}(S, \mathbb{Z})$ des fonctions localement constantes à
+valeurs entières. En général, il n'a pas d'unité : l'unité naturelle serait
+la forme $\langle 1 \rangle$, $q(x) = x^{2}$, dont la forme polaire $2xy$
+n'est non dégénérée que si $2$ est inversible\footnote{La page ne dit pas
+comment le produit est défini quand $2$ n'est pas inversible. Il l'est :
+sur $M_1 \otimes M_2$, il existe une unique forme quadratique de forme
+polaire $b_1 \otimes b_2$ qui vaut $2\,q_1(x)\,q_2(y)$ sur $x \otimes y$,
+et elle est strictement non dégénérée avec $b_1$ et $b_2$. La vérification
+est de nous. La page ne dit pas non plus comment les $\lambda^{i}$ sont
+définies sur les modules quadratiques ; quand $2$ est inversible, ce sont
+les puissances extérieures, avec la forme bilinéaire
+$\det\bigl(b(x_i, y_j)\bigr)$.}. Si $S$ est connexe et que $2$ n'est pas
+inversible, les rangs sont pairs : en un point de caractéristique
+résiduelle $2$, la forme polaire est alternée ($b(x, x) = 2q(x) = 0$) et non
+dégénérée\footnote{La page dit « $2$ non inversible dans
+$\mathcal{O}_S$ » ; l'argument demande un point de caractéristique
+résiduelle $2$, ce qui revient au même pour un topos ayant assez de
+points.}. Si $2$ est inversible, $WG(S)$ est un anneau unitaire.
+
+\emph{La question.} Même alors, Grothendieck ignore si $WG(S)$ est un
+$\lambda$-anneau, c'est-à-dire si l'on a les identités universelles
+\[
+\lambda^{i}(xy) = P_i\bigl(\lambda^{1}x, \dots, \lambda^{i}x ;
+\lambda^{1}y, \dots, \lambda^{i}y\bigr), \qquad
+\lambda^{i}(\lambda^{j}x) = Q_{i,j}\bigl(\lambda^{1}x, \dots,
+\lambda^{ij}x\bigr),
+\]
+à coefficients entiers\footnote{La page arrête les arguments de $P_i$ à
+$\lambda^{i-1}$ ; les polynômes universels font intervenir $\lambda^{i}$,
+comme le montre déjà $P_2 = x^{2}\lambda^{2}y + y^{2}\lambda^{2}x -
+2\lambda^{2}x\,\lambda^{2}y$. On corrige.}. Il réduit la question à un
+cas universel. Pour la première identité, il suffit de la vérifier sur le
+topos classifiant $B_{O(m) \times O(n)}$, pour les images inverses des
+modules quadratiques universels de rangs $m$ et $n$ : toute paire de modules
+quadratiques de rangs $m$ et $n$ en provient par image inverse, et les deux
+membres, biadditifs au sens des $\lambda$-anneaux, se déterminent sur les
+classes effectives. De même la seconde se teste sur $B_{O(m)}$. « D'où la
+tâche de déterminer $WG(B_{O(m)})$ », que le dossier n'entreprend
+pas\footnote{Le « topos classifiant » s'entend ici comme celui qui classifie
+les modules quadratiques de rang donné ; la page ne précise pas au-dessus
+de quelle base. Sur le sort de la question : on sait aujourd'hui — nous le
+citons de mémoire — que la réponse est positive pour un corps de
+caractéristique différente de $2$ (S.~McGarraghy) et, plus généralement,
+pour les schémas sur un tel corps (M.~Zibrowius, 2015), par une réduction
+aux représentations des groupes orthogonaux proche de celle que la page
+propose.}.
+
+\pagerange{6}{7}
+\subsection*{L'application hyperbolique et le groupe de Witt (pages 6 et 7)}
+
+Soit $K_s(S)$ le groupe de Grothendieck « spécial » des modules localement
+libres de type fini, construit sur les seules classes d'isomorphie, et
+$K(S)$ son quotient par les relations issues des suites exactes courtes.
+L'application $E \mapsto H(E)$ définit un homomorphisme
+\[
+\alpha \colon K_s(S) \longrightarrow WG(S).
+\]
+La page note qu'il n'est pas clair qu'il se factorise par $K(S)$,
+c'est-à-dire que $H(E) = H(E') + H(E'')$ dans $WG(S)$ pour une extension
+non scindée de $E''$ par $E'$. Il ne se factorise pas en
+général\footnote{Contre-exemple de nous. Le rang et la classe du module
+sous-jacent définissent un homomorphisme $WG(S) \to K_s(S)$, qui envoie
+$H(E)$ sur $[E] + [\check{E}]$. Sur une courbe elliptique $X$, soit $F_2$
+l'extension non scindée de $\mathcal{O}_X$ par $\mathcal{O}_X$ (Atiyah,
+1957) ; elle est autoduale et indécomposable, et comme les fibrés sur une
+variété complète vérifient le théorème de Krull–Schmidt (Atiyah, 1956),
+$K_s(X)$ est libre sur les classes d'indécomposables. Donc
+$[F_2] + [\check{F}_2] = 2[F_2] \neq 4[\mathcal{O}_X]$, et
+$H(F_2) \neq 2H(\mathcal{O}_X)$ dans $WG(X)$. La définition moderne du
+groupe de Grothendieck–Witt impose précisément cette relation.}.
+
+Par définition, le \emph{groupe de Witt} $W(S)$ est le conoyau de $\alpha$ :
+\[
+K_s(S) \xrightarrow{\ \alpha\ } WG(S) \longrightarrow W(S) \longrightarrow 0 .
+\]
+
+\emph{Les formes $q \perp -q$.} Si $2$ est inversible, $F = (M, q) \perp
+(M, -q)$ est hyperbolique, isomorphe à $H(M)$ : la diagonale $\Delta$ et
+l'antidiagonale $\nabla$ de $M \oplus M$ sont totalement isotropes,
+supplémentaires, et la forme polaire les met en dualité par
+$\bigl((x, x), (y, -y)\bigr) \mapsto 2b(x, y)$. La page 7 ajoute que, sur un
+schéma affine, « il paraît (Laborde dixit) » que c'est vrai sans condition
+sur $2$, et que ce n'est pas vrai sur tout topos localement annelé, par
+exemple sur $B_{O(n)}$, $n \geqslant 1$.
+
+L'énoncé attribué à Laborde est juste, et se démontre ainsi. Supposons
+qu'il existe une forme bilinéaire $\beta$ sur $M$, non nécessairement
+symétrique, telle que $\beta(y, y) = q(y)$ ; c'est le cas si $M$ est
+projectif, donc sur un schéma affine. La diagonale $\Delta$ est un
+lagrangien sur lequel la forme quadratique $q \perp -q$ s'annule. Définissons
+$g \colon M \to M$ par $b(x, g(y)) = -\beta(y, x)$ ; alors le sous-module
+$\Lambda = \{(y + g(y), g(y))\}$ est un supplémentaire de $\Delta$, et
+$(q \perp -q)(y + g(y), g(y)) = q(y) + b(y, g(y)) = 0$. Deux lagrangiens
+supplémentaires sur lesquels la forme s'annule font de $F$ le plan
+hyperbolique $H(\Delta) \simeq H(M)$\footnote{Démonstration de nous ; pour
+$2$ inversible on prend $\beta = b/2$ et l'on retrouve l'argument de la page
+6. L'existence de $\beta$ est une condition suffisante, dont nous ne
+montrons pas qu'elle est nécessaire : l'affirmation de la page sur
+$B_{O(n)}$, qui ne peut porter que sur une base où $2$ n'est pas inversible,
+reste la sienne, sans démonstration.}.
+
+\emph{Le groupe de Witt, directement.} Dans l'un et l'autre cas —
+$2$ inversible, ou $S$ affine — toute classe de $W(S)$ est celle d'un module,
+puisque $[M] - [M'] = [M \perp (M', -q')] - \alpha(M')$, et deux modules ont
+même classe si et seulement s'il existe des modules localement libres $E$,
+$F$ avec
+\[
+(M, q) \perp (M', -q') \perp H(F) \simeq H(E),
+\]
+ce que la page marque « à vérifier » en marge et qui se vérifie ainsi : une
+égalité dans le groupe de Grothendieck est un isomorphisme après addition
+d'un module $X$, et $X \perp (X, -q_X) \simeq H(X)$ se range dans les
+termes hyperboliques. Sur un corps, où vaut le théorème de simplification
+de Witt, la condition devient : $(M, q) \perp (M', -q') \simeq H(G)$ pour un
+$G$\footnote{Le théorème de simplification de Witt vaut pour les formes
+quadratiques non singulières sur un corps de toute caractéristique. La page
+l'écrit « si on dispose d'un “th.\ de Witt” — ce qui est toujours le cas si
+$S$ est le spectre d'un corps », « toujours » et « corps » étant des
+lectures douteuses.}.
+
+\emph{Structure de $W(S)$.} L'image $\alpha(K_s(S))$ est un idéal de
+$WG(S)$, puisque $(N, q_N) \otimes H(E) \simeq H(N \otimes E)$ ; $W(S)$ est
+donc un anneau\footnote{La page écrit $\alpha(K(S))$ ; il s'agit de
+$\alpha(K_s(S))$.}. Mais il n'est plus augmenté vers $H^{0}(S,
+\mathbb{Z})$, seulement vers $H^{0}(S, \mathbb{Z}/2\mathbb{Z})$, par le rang
+modulo $2$, puisque les plans hyperboliques sont de rang pair. La page
+demande si la pré-$\lambda$-structure passe au quotient. Elle n'y passe
+pas : $\lambda^{2}\bigl(H(\mathcal{O}_S)\bigr) = \lambda^{2}\langle 1, -1
+\rangle = \langle -1 \rangle$ est de rang $1$, donc non nul dans $W(S)$ dès
+que $S$ est non vide et que $2$ y est inversible, alors que $H(\mathcal{O}_S)$
+y est nul\footnote{Réponse de nous.}.
+
+\pagerange{8}{8}
+\subsection*{La classe de Stiefel–Whitney totale (page 8)}
+
+On suppose maintenant l'anneau $\mathcal{O}_S$ strictement local (c'est le
+cas de l'anneau structural d'un topos étale) et $2$ inversible\footnote{La
+seconde hypothèse est ajoutée dans la marge ; « structural » et « ét. »
+sont des lectures douteuses. Leur rôle, que la page ne dit pas : sur un
+anneau local strictement hensélien où $2$ est inversible, toute unité est un
+carré, de sorte que tout module quadratique non dégénéré de rang $n$ est
+localement isomorphe à la forme unité $\langle 1, \dots, 1 \rangle$. Les
+modules de rang $n$ sont alors les torseurs sous $O(n)$, et ceux de rang $1$
+les torseurs sous $\mu_2 = \mathbb{Z}/2$.}. On définit alors la
+\emph{classe de Stiefel–Whitney totale}
+\[
+w \colon WG(S) \longrightarrow 1 + \widehat{H}^{+}(S, \mathbb{F}_2),
+\]
+caractérisée, $S$ variant, par : a) sa fonctorialité en $S$ ; b) sa valeur
+en rang $1$, $w(M, q) = 1 + \mathrm{cl}(M, q)$, où
+$\mathrm{cl}(M, q) \in H^{1}(S, \mu_2) = H^{1}(S, \mathbb{F}_2)$ est la
+classe du torseur $\mathrm{Isom}(\langle 1 \rangle, (M, q))$ ; c) la formule
+$w(x + y) = w(x)\,w(y)$\footnote{La page annonce b) comme une
+« normalisation » sans écrire la valeur ; celle-ci est la seule possible.
+L'unicité repose sur un principe de scindage, que la page invoque plus bas
+sous le nom d'« arguments habituels de splitting », et l'existence sur la
+cohomologie des $B_{O(n)}$ ; ni l'une ni l'autre n'est établie ici. Sur un
+corps, ces classes sont celles de A.~Delzant (1962) ; J.~Milnor s'en sert en
+1970.}.
+
+Un passage barré affirmait qu'« un calcul facile » donne $w \circ \alpha = 1$,
+de sorte que $w$ se factoriserait par $W(S)$. C'est faux, et Grothendieck
+l'a barré : $w\bigl(H(\mathcal{O}_S)\bigr) = w\langle 1, -1 \rangle = 1 +
+[-1]$, et la classe $[-1]$ n'est pas nulle en général — sur le topos étale de
+$\operatorname{Spec} \mathbb{R}$, par exemple. Le brouillon de la page 3
+porte précisément sur $w(H(L))$, qu'il donne égal à
+$1 + [-1] + c_1(L) \bmod 2$\footnote{Le
+rapprochement avec la page 3 est de nous. La note barrée en marge commence
+par « $w(\alpha(E)) = $ ».}.
+
+Les arguments de scindage montrent en revanche que $w(M \otimes N)$ et
+$w(\lambda^{i} M)$ s'expriment par des formules universelles en $w(M)$,
+$w(N)$ et les rangs. Le rang et $w$ définissent donc un homomorphisme de
+$\lambda$-anneaux
+\[
+WG(S) \longrightarrow H^{0}(S, \mathbb{Z}) \times \bigl(1 +
+\widehat{H}^{+}(S, \mathbb{F}_2)\bigr),
+\]
+où le but porte la structure de $\lambda$-anneau définie par ces formules
+universelles. C'est l'anneau $\widetilde{A}$ que le dossier 2 construit pour
+les classes de Chern (pages 20 à 29), pris ici modulo $2$\footnote{Le
+rapprochement avec le dossier 2 est de nous. La page écrit
+$H^{0}(S, \mathbb{Z}) \times (1 + \hat{H}^{*+}(S, \mathbb{F}_2))$.}.
+
+\pagerange{10}{16}
+\subsection*{Les tirés à part (pages 10 à 16)}
+
+Entre la page 8 et la suite, deux notes d'O.~Laborde aux \emph{Comptes rendus}
+de 1974, sans annotation de sa main : « Théorème de Skolem-Nother pour les
+algèbres d'Azumaya graduées sur un anneau semi-local » (pages 10 à 12) et
+« Formes quadratiques, algèbres de Clifford et signatures » (pages 13 à 16).
+La page 7 cite Laborde ; ces tirés à part n'étant pas transcrits, on ne
+sait pas si l'énoncé qu'elle lui attribue s'y trouve. Ils sont la seule
+date antérieure à 1975 que porte le dossier\footnote{Cette lecture ne les
+résume pas.}.
+
+\pagerange{17}{28}
+\section*{III. Ensembles finis, groupes symétriques et opérations $\lambda$ (pages 17 à 28)}
+
+Cette suite, au feutre noir puis à l'encre, n'a pas de titre. Elle part d'un
+groupe $G$ et de ses ensembles finis, et aboutit aux représentations des
+groupes symétriques.
+
+\pagerange{17}{18}
+\subsection*{Un brouillon : $\lambda$ et $\sigma$ sur les $G$-ensembles (pages 17 et 18)}
+
+La page 17, un feuillet de listing, ne porte que $K_n(G) = K(G \times
+\mathfrak{S}_n)$. La page 18 essaie sur un $G$-ensemble fini $E$ les
+opérations des $\lambda$-anneaux : $\lambda^{i}(E)$ est la classe de
+l'ensemble $\mathfrak{P}_i(E)$ des parties à $i$ éléments, $\sigma^{i}(E)$
+celle de $\mathrm{Sym}^{i}(E) = E^{i}/\mathfrak{S}_i$, et la page encadre
+$\sigma_{-t}(E)\,\lambda_t(E) = 1$, puis, en degré $2$,
+\[
+E \times E = \sigma^{2}(E) + \lambda^{2}(E), \qquad
+\sigma^{2}(E) = \lambda^{2}(E) + E, \qquad
+2\lambda^{2}(E) + E = E^{2},
+\]
+en vérifiant la dernière sur les cardinaux :
+$2 \cdot \frac{d(d-1)}{2} + d = d^{2}$.
+
+Ces identités sont vraies pour les cardinaux, c'est-à-dire pour $G$ trivial.
+Dans l'anneau des $G$-ensembles virtuels, seule la deuxième subsiste, car
+$\mathrm{Sym}^{2}(E)$ est la réunion de la diagonale et de
+$\mathfrak{P}_2(E)$. Les deux autres tombent déjà pour $G = \mathbb{Z}/2$
+agissant sur lui-même : $E \times E$ est formé de deux orbites libres, alors
+que $2\lambda^{2}(E) + E$ est formé de deux points fixes et d'une orbite
+libre ; et le coefficient de $t^{2}$ dans $\sigma_{-t}\lambda_t$ vaut
+$2 - [G] \neq 0$\footnote{Calcul de nous. La raison est que
+$E \times E \smallsetminus \Delta = \mathrm{Mon}(I_2, E)$, dont le quotient
+par $\mathfrak{S}_2$ est $\mathfrak{P}_2(E)$, n'est pas en général
+$2\,\mathfrak{P}_2(E)$ : le passage au quotient oublie l'action des
+permutations.}. Ce qui se perd est l'action de $\mathfrak{S}_n$ sur les
+$n$-uplets d'éléments distincts, et c'est précisément ce que les pages
+suivantes conservent.
+
+La page esquisse aussi le modèle linéaire, pour un élément $L$ « de rang
+$1$ » : $\lambda_t(L) = 1 + tL$ et $\sigma_t(L) = (1 - tL)^{-1}$. Elle
+encadre une flèche $\mathcal{E}(G) \hookrightarrow R(G) \to R_{\mathbb{Q}}(G)$
+de l'anneau des $G$-ensembles vers l'anneau des représentations, qui,
+pour $G$ fini, n'est injective que si $G$ est cyclique\footnote{Le rang de l'anneau de
+Burnside est le nombre de classes de conjugaison de sous-groupes, celui de
+$R_{\mathbb{Q}}(G)$ le nombre de classes de sous-groupes cycliques, et
+l'application devient surjective après tensorisation par $\mathbb{Q}$
+(théorème d'induction d'Artin). Elle est donc injective exactement quand
+tout sous-groupe est cyclique, c'est-à-dire quand $G$ est cyclique.
+L'indice du dernier $R$ est douteux.}. Elle se termine sur la question
+« $\lambda^{i}(xy) = $ ? », sans réponse.
+
+\pagerange{19}{20}
+\subsection*{L'anneau $k_{*}(G)$ et les opérations $\tau^{n}$ (pages 19 et 20)}
+
+Soit $G$ un groupe, $k_0(G)$ l'anneau des $G$-ensembles finis virtuels —
+l'\emph{anneau de Burnside} de $G$ — et, pour $n \geqslant 0$,
+\[
+k_n(G) = k(G \times \mathfrak{S}_n), \qquad
+k_{*}(G) = \bigoplus_{n \geqslant 0} k_n(G),
+\]
+avec $\mathfrak{S}_0 = \{1\}$ ; on note $\mathrm{cl}_n(E) \in k_n(G)$ la
+classe d'un $G \times \mathfrak{S}_n$-ensemble fini. Le \emph{produit
+d'induction}
+\[
+\mathrm{cl}_m(E) * \mathrm{cl}_n(F) = \mathrm{cl}_{m+n}\bigl((E \times F)
+\times^{\mathfrak{S}_m \times \mathfrak{S}_n} \mathfrak{S}_{m+n}\bigr),
+\]
+où $G$ agit diagonalement, fait de $k_{*}(G)$ une $k_0(G)$-algèbre graduée,
+commutative\footnote{La page écrit le produit contracté
+$(E \times F) \wedge^{\mathfrak{S}_m \times \mathfrak{S}_n}
+\mathfrak{S}_{m+n}$. La commutativité, que la page ne mentionne pas, vient
+de la conjugaison par la permutation qui échange les deux blocs.}. Pour
+$G$ trivial, c'est la somme des anneaux de Burnside des groupes symétriques,
+munie du produit qui fait de $\bigoplus_n R(\mathfrak{S}_n)$ l'anneau des
+fonctions symétriques.
+
+Pour un $G$-ensemble fini $E$, on pose, avec $I_n = \{1, \dots, n\}$ et
+$\mathfrak{S}_n$ agissant par la source,
+\[
+\tau^{n}(E) = \mathrm{cl}_n\bigl(\mathrm{Mon}(I_n, E)\bigr) \in k_n(G),
+\qquad
+\tau^{*}(E) = \sum_{n \geqslant 0} \tau^{n}(E) \in 1 +
+\widehat{k_{*}(G)}^{+},
+\]
+où $\widehat{k_{*}(G)}^{+} = \prod_{n \geqslant 1} k_n(G)$ ; on a
+$\tau^{0}(E) = 1$ et $\tau^{1}(E) = \mathrm{cl}_0(E)$, et la somme est finie
+puisque $\mathrm{Mon}(I_n, E)$ est vide pour $n > \mathrm{card}\,E$.
+
+\textbf{Proposition} (page 19). \emph{On a $\tau^{*}(E \sqcup F) =
+\tau^{*}(E)\,\tau^{*}(F)$, c'est-à-dire $\tau^{n}(E \sqcup F) =
+\sum_{i+j=n} \tau^{i}(E) * \tau^{j}(F)$.}
+
+Une injection de $I_n$ dans $E \sqcup F$ est la donnée de la partie $J$ de
+$I_n$ qui va dans $E$ et de deux injections $J \to E$,
+$I_n \smallsetminus J \to F$ :
+\[
+\mathrm{Mon}(I_n, E \sqcup F) = \coprod_{i = 0}^{n}
+\coprod_{J \in \mathfrak{P}_i(I_n)} \mathrm{Mon}(J, E) \times
+\mathrm{Mon}(I_n \smallsetminus J, F),
+\]
+et chaque terme d'indice $i$ est stable par $\mathfrak{S}_n$. La page s'arrête
+à « il suffit de voir que » la classe de ce terme est $\tau^{i}(E) *
+\tau^{j}(F)$. C'est le cas : $\mathfrak{S}_n$ agit transitivement sur
+$\mathfrak{P}_i(I_n)$, le stabilisateur de $I_i$ est $\mathfrak{S}_i \times
+\mathfrak{S}_j$, et le terme est l'induit de $\mathrm{Mon}(I_i, E) \times
+\mathrm{Mon}(I_j, F)$ de $\mathfrak{S}_i \times \mathfrak{S}_j$ à
+$\mathfrak{S}_n$\footnote{Cette dernière étape est de nous.}.
+
+\textbf{Corollaire} (page 20). \emph{Il existe un unique homomorphisme du
+groupe additif $k_0(G)$ dans le groupe multiplicatif
+$1 + \widehat{k_{*}(G)}^{+}$ tel que $\tau^{*}(\mathrm{cl}_0(E)) =
+\tau^{*}(E)$ pour tout $G$-ensemble fini $E$.} C'est la propriété
+universelle du groupe de Grothendieck, puisque $1 + \widehat{k_{*}(G)}^{+}$
+est un groupe pour la multiplication.
+
+La page définit enfin, pour un sous-groupe $H \subset \mathfrak{S}_n$,
+l'application additive $q_H \colon k_n(G) \to k_0(G)$,
+$\mathrm{cl}_n(E) \mapsto \mathrm{cl}_0(E^{H})$, et l'application
+polynomiale de degré $n$
+\[
+q^{n}_H = q_H \circ \tau^{n} \colon k_0(G) \longrightarrow k_0(G).
+\]
+Le dossier n'en fait rien\footnote{La lecture ${}^{H}\!E$, les invariants
+sous $H$, est incertaine. Les points fixes, comme les orbites, respectent
+les réunions disjointes et définissent des applications additives ; avec
+les orbites et $H = \mathfrak{S}_n$, on retrouverait
+$\mathrm{Mon}(I_n, E)/\mathfrak{S}_n = \mathfrak{P}_n(E)$, le $\lambda^{n}$
+de la page 18, alors qu'avec les points fixes $q_{\mathfrak{S}_n}\tau^{n}$
+est nul pour $n \geqslant 2$. Les points fixes sont en revanche ceux qui
+définissent les « marques » de Burnside.}.
+
+\pagerange{21}{22}
+\subsection*{Les puissances $T^{n}$, et ce qui les relie aux $\tau^{n}$ (pages 21 et 22)}
+
+La page 21 définit de même, avec toutes les applications,
+\[
+T^{n}(E) = \mathrm{cl}_n\bigl(E^{I_n}\bigr) \in k_n(G), \qquad
+T^{*}(E) = \sum_n T^{n}(E),
+\]
+multiplicatif sur les réunions disjointes par le même argument, et prolongé
+à $k_0(G)$ comme au corollaire. C'est l'\emph{opération de puissance} de
+l'anneau de Burnside, restreinte au sous-groupe diagonal $G \times
+\mathfrak{S}_n$ du produit en couronne $G \wr \mathfrak{S}_n$\footnote{Les
+opérations de puissance sont celles d'Atiyah en $K$-théorie (« Power
+operations in $K$-theory », 1966), après la norme d'Evens (1963) en
+cohomologie des groupes ; pour les anneaux de Burnside, elles sont étudiées
+par tom Dieck (1979) et, sous le nom de transfert multiplicatif, par Tambara
+(1993). La page ne cite personne.}. La page annonce une relation entre
+$T^{*}$ et $\tau^{*}$. Elle part de la décomposition d'une application
+$I_n \to E$ en la partition de $I_n$ par ses fibres et une injection du
+quotient :
+\[
+E^{I_n} = \coprod_{Q \text{ quotient de } I_n} \mathrm{Mon}(Q, E) =
+\coprod_{\alpha} \ \coprod_{Q \text{ de type } \alpha} \mathrm{Mon}(Q, E),
+\]
+où le \emph{type} $\alpha = (\alpha_1, \dots, \alpha_n)$ d'une partition
+compte ses $\alpha_i$ classes à $i$ éléments, avec $\sum_i i\alpha_i = n$.
+
+La formule encadrée qui suit, $T^{n}(E) = \sum_i \varphi_{n,i}(\tau^{i}(E))$
+avec $\varphi_{n,i}(\mathrm{cl}_i(E)) = \mathrm{cl}_n(E
+\times^{\mathfrak{S}_i} \mathfrak{S}_n)$, est annulée par deux grandes
+croix, et à raison : l'induction de $\mathfrak{S}_i$ à $\mathfrak{S}_n$ ne
+décrit pas l'action de $\mathfrak{S}_n$ sur les partitions. Voici la formule
+juste\footnote{Elle est de nous. La page 22 écrit une somme indexée par les
+types $\alpha$, $\sum_\alpha \varphi_{\nu(\alpha), \mu(\alpha)}\bigl(
+\tau^{\mu(\alpha)}(x)\bigr)$ avec $\nu(\alpha) = n$ et $\mu(\alpha) = m$ ;
+c'est la bonne indexation, mais l'opération $\varphi$ doit dépendre du type
+et non des seuls $n$ et $m$.}. Soit $Q_\alpha$ une partition de type
+$\alpha$ à $m = \sum_i \alpha_i$ classes. Son stabilisateur dans
+$\mathfrak{S}_n$ est le produit de couronnes
+$W_\alpha = \prod_i \mathfrak{S}_i \wr \mathfrak{S}_{\alpha_i}$, qui agit sur
+l'ensemble des $m$ classes à travers
+$\pi_\alpha \colon W_\alpha \to \prod_i \mathfrak{S}_{\alpha_i} \subset
+\mathfrak{S}_m$. Alors
+\[
+T^{n}(E) = \sum_{\sum i\alpha_i = n}
+\mathrm{Ind}_{G \times W_\alpha}^{G \times \mathfrak{S}_n}\,
+\pi_\alpha^{*}\,
+\mathrm{Res}^{G \times \mathfrak{S}_m}_{G \times \prod_i
+\mathfrak{S}_{\alpha_i}}\, \tau^{m}(E).
+\]
+Le reste de la page 22 compte les partitions de type $\alpha$ :
+\[
+\frac{n!}{\prod_{i} \alpha_i!\,(i!)^{\alpha_i}},
+\]
+ce qui est juste. Sur les cardinaux, la formule redonne
+$d^{n} = \sum_m S(n, m)\, d(d-1)\cdots(d-m+1)$, avec les nombres de Stirling
+de seconde espèce. Un tableau de valeurs de $\tau^{2}(e_i)$ et
+$\tau^{3}(e_i)$ est préparé et laissé vide.
+
+\pagerange{23}{26}
+\subsection*{Foncteurs sur la catégorie des ensembles finis et injections (pages 23 à 26)}
+
+Soit $\mathcal{E}$ la catégorie des ensembles finis, les morphismes étant
+les applications \emph{injectives}, et $\mathcal{H}$ celle des foncteurs
+$\mathcal{E} \to (\mathrm{Ensf})$ à valeurs dans les ensembles finis. C'est
+un prétopos\footnote{Lecture douteuse, mais l'énoncé est juste :
+$\mathcal{H}$ est une sous-catégorie pleine du topos des foncteurs
+$\mathcal{E} \to (\mathrm{Ens})$, stable par limites finies, sommes finies
+et quotients par les relations d'équivalence, qui s'y calculent point par
+point.}. On y distingue :
+\begin{itemize}
+  \item les foncteurs \emph{représentables} $h_I = \mathrm{Mon}(I, -)$ ;
+  par Yoneda, $I \mapsto h_I$ identifie $\mathcal{E}^{\circ}$ à une
+  sous-catégorie pleine de $\mathcal{H}$ ;
+  \item les foncteurs $H_I = (-)^{I} = \mathrm{Hom}_{(\mathrm{Ens})}(I, -)$,
+  restrictions à $\mathcal{E}$ des foncteurs correspondants sur
+  $(\mathrm{Ensf})$.
+\end{itemize}
+
+\textbf{Proposition} (pages 23 et 24). \emph{Les $h_I$ sont des objets
+connexes non vides de $\mathcal{H}$ ; à isomorphisme près, ce sont les
+composantes connexes des $H_J$.} En effet $H_J = \coprod_Q h_Q$, la somme
+portant sur les quotients $Q$ de $J$ : c'est, fonctorialisée, la
+décomposition de la page 21\footnote{Le rapprochement est de nous. La
+fonctorialité tient à ce qu'une injection $E \to E'$ ne change pas la
+partition de $J$ par les fibres d'une application $J \to E$.}.
+
+\emph{Foncteurs spéciaux} : les sommes finies de $h_I$ ; ce sont aussi les
+facteurs directs des sommes finies de $H_I$\footnote{La page dit « des
+sommandes directs (pour $I$ de cardinal assez grand) de foncteurs de la forme
+$H_I$ ». Un seul $H_I$ ne suffit pas : $h_{I}$ apparaît dans $H_N$ avec pour
+multiplicité le nombre de Stirling $S(\mathrm{card}\,N, \mathrm{card}\,I)$,
+qui vaut $1$ si $\mathrm{card}\,I = 1$, de sorte que $2h_{\{1\}}$ n'est
+facteur direct d'aucun $H_N$. On corrige en « sommes finies de ».}. Ils
+sont stables par sommes, produits et plus généralement limites finies : un
+produit $h_I \times h_J$ se décompose selon les configurations
+d'images\footnote{$h_I \times h_J \simeq \coprod h_K$, sur les classes
+d'isomorphie de couples d'injections $I \to K$, $J \to K$ conjointement
+surjectives ; un égalisateur de deux flèches $h_I \rightrightarrows h_J$ est
+$h_I$ ou vide. Ces vérifications sont de nous.}. Un foncteur spécial envoie
+les injections sur des injections, donc s'identifie à un foncteur
+$\mathcal{E} \to \mathcal{E}$, et le composé de deux foncteurs spéciaux est
+spécial.
+
+\emph{Foncteurs distingués} : les sommes finies de foncteurs
+$E \mapsto \mathrm{Mon}(I, E)/H$, pour $H \subset \mathfrak{S}_I$ ; ce sont
+aussi les sommes finies de composantes connexes des
+$E \mapsto E^{I}/H$. La page affirme, sans le détailler, qu'ils ont les mêmes
+propriétés de permanence que les foncteurs spéciaux. Une addition en marge
+les décrit tous d'un coup :
+\[
+E \longmapsto \coprod_{n \geqslant 0} \mathrm{Mon}(I_n, E)
+\times^{\mathfrak{S}_n} X_n,
+\]
+où $(X_n)$ est une suite de $\mathfrak{S}_n$-ensembles finis, presque tous
+vides. C'est l'extension de Kan à gauche, le long de l'inclusion des
+bijections dans les injections, de la suite $(X_n)$ — de ce qu'on appelle
+depuis Joyal (1981) une \emph{espèce} finie. Dans le langage linéaire de
+Church, Ellenberg et Farb (2015), les $\mathcal{E}$-ensembles sont des
+« FI-ensembles », et les foncteurs distingués sont l'analogue ensembliste
+des FI-modules induits, qu'on appelle aussi FI$\sharp$-modules\footnote{Les
+deux noms sont postérieurs de plusieurs années à la page, qui ne pouvait pas
+les connaître : les espèces de structures datent de 1981, les FI-modules de
+2015. L'identification est de nous.}.
+
+Un morphisme $u \colon F \to G$ de foncteurs $\mathcal{E} \to
+(\mathrm{Ens})$ est une \emph{équivalence} s'il existe $n$ tel que $u(E)$ soit
+bijectif pour tout $E$ de cardinal au moins $n$. Les équivalences vérifient
+la propriété « deux sur trois » et sont stables par changement de base,
+comme l'énonce la page ; ce sont les isomorphismes « en rang assez grand »,
+le point de vue qui est aujourd'hui celui de la \emph{stabilité des
+représentations} de Church et Farb\footnote{Le rapprochement est de
+nous.}.
+
+La page 26 pose enfin
+\[
+\Omega = \mathrm{End}(\mathcal{E}, \mathcal{E})
+\subset \mathrm{Hom}(\mathcal{E}, (\mathrm{Ens})) =
+\widehat{\mathcal{E}^{\circ}} ,
+\]
+la catégorie des foncteurs $\mathcal{E} \to \mathcal{E}$ — à valeurs finies,
+envoyant les injections sur des injections — avec pour morphismes les
+transformations naturelles à composantes injectives. C'est une
+sous-catégorie non pleine, comme la page le souligne, du topos des
+préfaisceaux sur $\mathcal{E}^{\circ}$. Elle porte trois opérations,
+\[
+(F + G)(E) = F(E) \sqcup G(E), \qquad (F \times G)(E) = F(E) \times G(E),
+\qquad (F \circ G)(E) = F(G(E)),
+\]
+et le feuillet s'arrête là, le bas restant blanc. Une somme, un produit et
+une composition qui se distribuent sont la structure d'un anneau de
+composition, celle des opérations sur les $\lambda$-anneaux ; mais la page
+ne passe pas au groupe de Grothendieck et ne dit pas où elle
+va\footnote{Le rapprochement est de nous. Les anneaux de composition
+remontent à Tall et Wraith (1970), qu'il pouvait connaître ; le nom de
+« pléthorie » est de Borger et Wieland (2005).}.
+
+\pagerange{27}{28}
+\subsection*{Puissances tensorielles et représentations des groupes symétriques (pages 27 et 28)}
+
+Soit $X$ un topos annelé commutatif, et
+\[
+K(X, *) = \bigoplus_{n \geqslant 0} K(B_{\mathfrak{S}_n X}),
+\]
+où $K(B_{\mathfrak{S}_n X})$ est le groupe de Grothendieck des modules
+localement libres de type fini sur $X$ munis d'une action de
+$\mathfrak{S}_n$, avec le produit d'induction. Pour $\xi = \mathrm{cl}(E)$
+dans $K(X)$, on note $T^{n}(\xi)$ la classe de la puissance tensorielle
+$E^{\otimes n}$, $\mathfrak{S}_n$ permutant les facteurs, et $T^{*}(\xi) =
+\sum_n T^{n}(\xi) \in 1 + K(X, *)^{\wedge +}$\footnote{La page écrit
+$\tau^{n}$ et $\tau^{*}$, et $\widetilde{\otimes}^{n}$ pour la puissance
+tensorielle, lecture proposée. On écrit $T^{n}$ parce que c'est l'analogue
+linéaire du $T^{n}$ de la page 21 : l'algèbre de $E^{I_n}$ est la
+puissance tensorielle $n$-ième de l'algèbre de $E$.}. C'est le cadre du
+dossier 2, pages 15 à 18, où le produit d'induction et les puissances
+tensorielles d'un module sur un topos annelé sont déjà posés\footnote{Le
+dossier 2 est daté par l'inventaire de 1957 ; rien ici ne le cite.}.
+
+Soit $\rho_i$ l'élément unité de $K(B_{\mathfrak{S}_i}) = R_{\mathbb{Z}}
+(\mathfrak{S}_i)$, regardé comme élément de degré $i$ de
+$R(1, *) = K(e, *) = \bigoplus_i R(\mathfrak{S}_i)$, $e$ étant le topos
+ponctuel ; le monôme $\rho^{\alpha} = \rho_1^{\alpha_1} \cdots
+\rho_n^{\alpha_n}$ est la représentation de permutation de $\mathfrak{S}_n$
+sur les classes du sous-groupe de Young $\prod_i \mathfrak{S}_i^{\alpha_i}$.
+La page énonce :
+\[
+T^{n}(\xi) = \sum_{\sum i\alpha_i = n} m_\alpha\bigl(\lambda^{1}\xi, \dots,
+\lambda^{n}\xi\bigr)\, \rho^{\alpha},
+\]
+où $m_\alpha \in \mathbb{Z}[S_1, \dots, S_n]$ est le polynôme isobare de
+poids $n$ qui exprime la fonction symétrique monomiale
+$\sum x_1^{\nu_1} \cdots x_m^{\nu_m}$ (avec $\alpha_i$ exposants égaux à
+$i$) en les fonctions symétriques élémentaires $S_1, \dots,
+S_n$\footnote{La page note ce polynôme $\Sigma_{\alpha_1, \dots, \alpha_n}$ ;
+sa phrase s'interrompt au bas de la page 27 sur « en », et la page 28 ne la
+reprend pas. On la complète.}.
+
+La formule est juste, pour $E$ localement libre de type fini. Pour une
+somme de fibrés en droites, $E^{\otimes n}$ se décompose selon les orbites de
+$\mathfrak{S}_n$ sur les applications $I_n \to \{1, \dots, d\}$, et une
+permutation des facteurs d'une puissance tensorielle d'une droite agit
+trivialement ; le cas général s'en déduit par le principe de scindage, que
+nous admettons pour $K(X, *)$. En degré $2$, elle donne $T^{2}(\xi) = \lambda^{2}\xi\,\rho_1^{2} + (\xi^{2} -
+2\lambda^{2}\xi)\,\rho_2$, c'est-à-dire, si $2$ est inversible,
+$\rho_1^{2}$ étant alors la représentation régulière $1 + \varepsilon$ de
+$\mathfrak{S}_2$,
+$T^{2}(\xi) = \sigma^{2}\xi \cdot 1 + \lambda^{2}\xi \cdot \varepsilon$ : la
+suite exacte $0 \to \Lambda^{2}E \otimes \varepsilon \to E^{\otimes 2} \to
+\mathrm{Sym}^{2}E \to 0$\footnote{Vérifications de nous.}. Par la
+caractéristique de Frobenius, qui envoie $\rho_i$ sur la fonction
+symétrique complète $h_i$, c'est l'identité de Cauchy
+$\sum_\alpha m_\alpha(x)\,h_\alpha(y) = \prod_{i,j}(1 - x_i y_j)^{-1}$.
+
+En marge, la page demande si, pour $\xi$ effectif, la formule est une somme
+directe, et renvoie au théorème de commutation de H.~Weyl. Pas dans cette
+base : $m_{(2)}(\xi) = \xi^{2} - 2\lambda^{2}\xi$ n'est pas effectif. La
+somme directe existe dans l'autre base, celle des représentations
+irréductibles : c'est la dualité de Schur–Weyl,
+$E^{\otimes n} = \bigoplus_\mu S_\mu(E) \otimes V_\mu$, là où $n!$ est
+inversible\footnote{Réponse de nous. H.~Weyl, \emph{The Classical Groups},
+1939.}.
+
+\textbf{Corollaire} (page 28). \emph{$\lambda^{n}(\xi)$ est le coefficient de
+$\rho_1^{n}$ dans $T^{n}(\xi)$, et l'opération d'Adams $\psi^{n}(\xi)$ celui
+de $\rho_n$.} En effet $m_{(1, \dots, 1)} = S_n$ et $m_{(n)} = \sum
+x_j^{n}$ est la somme de Newton. C'est la démarche d'Atiyah (1966), qui tire
+$\lambda^{n}$ et $\psi^{n}$ de l'opération de puissance\footnote{La page
+écrit $S^{n}$ pour l'opération d'Adams. Elle ne cite pas Atiyah.}.
+
+Un « coefficient » suppose que les $1_{K(X)} \cdot \rho^{\alpha}$ soient
+linéairement indépendants sur $K(X)$, ce que la page croit « facile sans
+doute ». C'est vrai si $X$ est au-dessus de $\mathbb{Q}$, et faux en
+caractéristique $p$ : sur $\mathbb{F}_2$, la représentation régulière de
+$\mathfrak{S}_2$ est extension de la triviale par la triviale, de sorte que
+$\rho_1^{2} = 2\rho_2$\footnote{Contre-exemple de nous. Au-dessus de
+$\mathbb{Q}$, les représentations de $\mathfrak{S}_n$ sont définies sur
+$\mathbb{Q}$ et $K(B_{\mathfrak{S}_n X}) = K(X) \otimes
+R_{\mathbb{Q}}(\mathfrak{S}_n)$, où les $\rho^{\alpha}$ forment une base.}.
+
+\emph{Question} (page 28) : pour quels anneaux $k$ l'anneau
+$R_k(1, *) = \bigoplus_{i \geqslant 0} R_k(\mathfrak{S}_i)$ est-il l'anneau
+de polynômes en les $\rho_i$ ? Est-ce vrai pour un anneau local, ou pour
+un anneau tel que $\mathbb{Z} \to K(k)$ soit un isomorphisme ? Pour un corps
+de caractéristique nulle, oui : par Frobenius,
+$\bigoplus_i R(\mathfrak{S}_i)$ est l'anneau des fonctions symétriques,
+polynomial en les $h_i$. Pour un corps de caractéristique $p$, non : la
+relation $\rho_1^{2} = 2\rho_2$ sur $\mathbb{F}_2$, et en général le rang de
+$R_{\mathbb{F}_p}(\mathfrak{S}_n)$, qui est le nombre de partitions
+$p$-régulières de $n$, l'interdisent. Un corps fini étant local, la réponse
+à la seconde question est négative\footnote{Réponse de nous. La page
+indexe la somme par « $i \in \mathbf{Z}$ » ; on lit $i \geqslant 0$.}.
+
+\pagerange{29}{33}
+\section*{IV. Le jeu de go (pages 29 à 33)}
+
+Ces cinq pages, au feutre, n'ont de rapport avec rien d'autre dans le
+dossier. Ce sont des mathématiques d'un jeu : une identité de comptabilité
+entre deux façons de compter les points, et un essai de règles assez
+précises pour qu'une partie finisse d'elle-même.
+
+\pagerange{29}{29}
+\subsection*{Deux décomptes, et le dernier coup (page 29)}
+
+On joue une partie « complète » sur un goban de $\nu \times \nu$
+intersections ; noir commence et joue $N$ coups, blanc en joue $N'$, avec
+$\varepsilon = N - N' \in \{0, 1\}$, et $\varepsilon = 0$ si blanc joue le
+dernier\footnote{La page écrit « $N' = N$ ou $N - 1$ », le signe étant
+surchargé ; $N - 1$ est ce que demande le trait de noir.}. En fin de
+partie, $P$ et $P'$ sont les nombres de pierres noires et blanches sur le
+goban, $Q$ et $Q'$ les nombres de pierres noires et blanches capturées,
+$T$ et $T'$ les territoires noir et blanc. Ainsi $N = P + Q$ et
+$N' = P' + Q'$\footnote{La page appelle $Q$ le « nombre de prisonniers
+noirs » ; l'égalité $N = P + Q$ impose qu'il s'agisse des pierres noires
+prises par blanc, et non des pierres que noir a prises.}. On suppose que
+toute intersection est, à la fin, une pierre ou un point de territoire :
+\[
+P + P' + T + T' = \nu^{2},
+\]
+ce qui exclut les points neutres et les seki, et demande que toutes les
+pierres mortes aient été effectivement capturées — c'est le sens de
+« complète »\footnote{Hypothèses implicites, rendues explicites ici. Un
+seki est une position où des groupes des deux couleurs vivent ensemble sans
+territoire ; ses libertés communes ne sont à personne.}.
+
+Au décompte par territoire, noir marque $S = Q' + T$ et blanc
+$S' = Q + T'$. Comme $Q' - Q = (N' - P') - (N - P) = (P - P') - \varepsilon$,
+l'écart vaut
+\[
+D = S - S' = (P - P') + (T - T') - \varepsilon, \qquad \text{soit} \qquad
+D = 2(P + T) - \nu^{2} - \varepsilon ,
+\]
+et symétriquement $D' = -D = 2(P' + T') - \nu^{2} + \varepsilon$\footnote{La
+page écrit « $\nu^{2} - D' = 2(P' + T') + \varepsilon$ » ; c'est
+$\nu^{2} + D'$, ou $\nu^{2} - D$, qui vaut $2(P' + T') + \varepsilon$. La
+formule encadrée, elle, est juste.}. Or $(P + T) - (P' + T') = 2(P + T) -
+\nu^{2}$ est l'écart au \emph{décompte par zone}, qui compte les pierres
+posées et le territoire. L'identité dit donc que les deux décomptes, par
+territoire (règles japonaises) et par zone (règles chinoises), diffèrent
+exactement de $\varepsilon$ : d'un point si noir a joué le dernier, de rien
+sinon\footnote{Le rapprochement avec les règles actuelles est de nous. Les
+règles de l'AGA (1991) imposent, par des « pierres de passe », que blanc
+joue le dernier, pour que les deux décomptes coïncident — nous le citons de
+mémoire.}.
+
+\pagerange{30}{30}
+\subsection*{La position réglée (page 30)}
+
+Supposons atteinte une position où les territoires des deux camps sont
+« inattaquables », blanc ayant joué le dernier, de sorte que les deux camps
+ont joué le même nombre $n = n'$ de coups et que noir a le trait. Avec les
+mêmes lettres en minuscules — les prisonniers étant cette fois « virtuels »,
+les pierres mortes restées sur le goban étant comptées comme prises — on
+trouve de même, puisque $n = n'$,
+\[
+d = s - s' = 2(p + t) - \nu^{2} .
+\]
+Si chacun ne joue plus que dans son propre territoire, y compris pour y
+capturer effectivement les pierres mortes, chaque coup ajoute une pierre et
+ôte un point de territoire, et une capture rend au territoire des points
+qu'il comptait déjà : $p + t = P + T$ est invariant, d'où
+$D = d - \varepsilon$. La page ajoute que, faute de pouvoir prévoir
+$\varepsilon$ — « est-elle indépendante de la suite du jeu ? » —, il est
+raisonnable de compenser l'avantage du trait en posant $\varepsilon = 1$,
+c'est-à-dire en comptant comme si noir jouait le dernier : une compensation
+d'un point au décompte par zone. La compensation qu'on pratique
+aujourd'hui, le komi, est de six à sept points\footnote{La page ne parle pas
+de komi. « Inattaquables » est une lecture douteuse, et une ligne sur les
+prisonniers virtuels est en partie illisible.}.
+
+\pagerange{31}{32}
+\subsection*{Règles de prise, et fin de l'obligation de jouer (pages 31 et 32)}
+
+\emph{Prise.} Une pierre ne peut être posée sur une intersection libre où le
+groupe qui la contiendrait n'aurait aucune liberté — le \emph{suicide} est
+interdit —, sauf dans deux cas : le ko, renvoyé « plus bas » et jamais
+décrit ; et le « remplissage d'un trou » : $A$ joue sur une intersection
+$i$ qui est la dernière liberté d'un groupement $E$ de groupes de $B$, $E$
+entourant le groupe de $A$ qui contient $i$. C'est la règle actuelle : un
+coup qui prend est légal, les pierres prises étant retirées avant qu'on
+examine les libertés de la pierre posée\footnote{Dans cette formulation, la
+reprise d'un ko est elle-même un remplissage de trou ; ce que la règle du ko
+ajoute est l'interdiction de reprendre aussitôt. La page n'en dit pas
+plus.}.
+
+\emph{Fin de partie.} Les joueurs jouent à tour de rôle et ne peuvent pas
+passer. L'obligation de jouer ne tombe que dans un cas : le joueur $A$ n'a
+plus d'intersection libre où il puisse légalement jouer, sinon des
+intersections $c$ de la forme suivante : un groupement $E$ de $A$ n'a plus que
+deux libertés isolées, toutes ses autres libertés étant prises par $B$, et
+$c$ est l'une d'elles. Autrement dit, les seuls coups restants de $A$
+bouchent l'un des deux yeux d'un de ses groupes. La page explique pourquoi
+l'obligation doit alors tomber : si $A$ bouchait un œil, $B$ prendrait le
+groupe en jouant dans l'autre, et, l'obligation persistant, $A$ perdrait de
+proche en proche toutes ses pierres, « même si $A$ avait un avantage
+considérable ».
+
+Elle exige de plus que le groupement soit « inattaquable » : si c'était à
+$B$ de jouer, il ne pourrait se placer ni en $c$ ni en $c'$, faute d'un
+sous-groupement de $E$ entourant l'un d'eux et n'ayant plus que lui pour
+liberté, et le ko ne le lui permettrait pas non plus. C'est la distinction
+entre un vrai œil et un \emph{faux œil}\footnote{Le mot « isolées » est une
+lecture douteuse. Le nom de faux œil est de nous.}.
+
+\pagerange{33}{33}
+\subsection*{Qui joue le dernier (page 33)}
+
+En fin de partie, noir a $\rho$ groupements vivants, chacun avec au moins
+deux yeux, et blanc $\rho'$. Partant de la position réglée de la page 30, où
+noir a le trait, la page énonce : si $t - 2\rho \leqslant t' - 2\rho'$,
+blanc joue le dernier ($\varepsilon = 0$, $D = d$) ; si
+$t' - 2\rho' < t - 2\rho$, noir joue le dernier ($\varepsilon = 1$,
+$D = d - 1$).
+
+La règle est juste sous une hypothèse qu'elle ne dit pas : que chacun, à
+partir de la position réglée, ne fasse que remplir son propre territoire
+jusqu'à ne laisser que deux yeux d'un point à chaque groupe. Noir dispose
+alors de $t - 2\rho$ coups et blanc de $t' - 2\rho'$ ; noir ayant le trait,
+celui qui s'épuise le premier est noir si $t - 2\rho \leqslant t' - 2\rho'$,
+et c'est alors blanc qui a joué le dernier\footnote{Vérification de nous.
+L'obligation de jouer forcerait en fait le joueur qui s'épuise à jouer dans
+le territoire adverse, là où une pierre a des libertés ; la page ne tient
+pas compte de ces coups. Un passage barré affirmait que, blanc jouant le
+dernier, tous ses groupes ont exactement deux yeux.}. La question de la page
+30 reçoit ainsi une réponse partielle : $\varepsilon$ se lit sur la position
+réglée, pourvu qu'on joue comme on vient de dire.
+
+\pagerange{34}{39}
+\section*{V. Groupes formels (pages 34 à 39)}
+
+La page 34 est une chemise qui ne porte que ces mots ; la page 35 les
+répète en tête. La suite est à l'encre bleue, et c'est la plus difficile à
+lire du dossier : au-delà des formules, la page 35 est pour l'essentiel
+une suite de lectures douteuses\footnote{On s'en tient ici à ce que la
+transcription donne comme lisible, et l'on présente les énoncés comme les
+siens, sans les démontrer.}. La page ne précise ni le corps de base, ni si
+les groupes formels sont commutatifs ; les énoncés ne prennent leur sens qu'en
+caractéristique $p > 0$, pour des groupes formels non nécessairement
+commutatifs, où « $p$-divisible » désigne les groupes de Barsotti–Tate
+connexes\footnote{Hypothèses supposées par nous. Les groupes de
+Barsotti–Tate sont, sous l'angle galoisien, l'objet du dossier 161-5 (pages
+22 et 23). Nous lisons « a-torique » comme « sans partie torique »,
+c'est-à-dire sans partie de type multiplicatif ; la page ne le définit
+pas.}.
+
+\pagerange{35}{35}
+\subsection*{Les énoncés de départ (page 35)}
+
+La page énonce, sans démonstration :
+\begin{itemize}
+  \item (I) une extension d'un groupe $p$-divisible par un groupe lisse, ou
+  unipotent, est triviale ; d'où, pour un $p$-divisible a-torique, un
+  produit direct\footnote{« un produit direct » est une lecture douteuse.} ;
+  \item tout sous-groupe $p$-divisible a-torique est central ; suit, en
+  accolade, la liste de ce qu'il faudrait établir pour le plus grand
+  sous-groupe $p$-divisible a-torique : son existence, sa stabilité par
+  extension du corps de base, son comportement vis-à-vis des sous-groupes et
+  des quotients ;
+  \item (II) une extension d'un groupe formel lisse par un $p$-divisible est
+  un produit « à isogénie près » ; d'où
+  $D(G) \cap \mathrm{Cent}(G)$ quasi-unipotent, « primaire au $p$ », et
+  mieux, $\mathrm{Cent}(D(G))$ quasi-unipotent.
+\end{itemize}
+La démonstration esquissée du corollaire de (II) prend le plus grand
+sous-groupe $p$-divisible a-torique $T$ de $G$ : on aurait
+$G \simeq T \times G/T$, donc $D(G) \cap T = \{e\}$. Un dernier corollaire
+voudrait $G$ lisse isogène à un produit d'un facteur a-torique et d'un
+autre facteur, et s'achève sur « … ? » ; une remarque, un NB et une note
+en marge, qui disent qu'un certain quotient est « linéaire », ne se lisent
+que par fragments\footnote{On ne les reconstruit pas : la transcription y
+compte plus de mots illisibles que de mots lus.}. La page pose alors la
+\emph{Question} : $D(G) \cap \mathrm{Cent}(G)$ est-il unipotent,
+c'est-à-dire ne contient-il pas de $\mu_p$ ? Une note en marge ajoute qu'il
+suffirait de le vérifier pour un quotient linéaire, et que
+$\mathrm{Cent}(G/\mathrm{Cent}\,G)$ est « mieux » quasi-unipotent.
+
+\pagerange{35}{36}
+\subsection*{La « Solution » : un groupe vu par son centre et son groupe dérivé (pages 35 et 36)}
+
+Sous le mot « Solution », la page introduit six groupes :
+\[
+L_1 = \mathrm{Cent}(G), \quad D_1 = D(G), \quad
+\Pi_1 = L_1 \cap D_1, \quad \Pi_0 = G / L_1 D_1,
+\]
+et les deux quotients $G/\mathrm{Cent}(G)$ et $G/D(G)$. Ils forment deux
+suites exactes, qui ont les mêmes extrémités :
+\[
+1 \to \Pi_1 \to \mathrm{Cent}(G) \longrightarrow G/D(G) \to \Pi_0 \to 1,
+\qquad
+1 \to \Pi_1 \to D(G) \longrightarrow G/\mathrm{Cent}(G) \to \Pi_0 \to 1 .
+\]
+La seconde flèche du milieu est un \emph{module croisé} : $G/\mathrm{Cent}(G)$
+agit sur $D(G)$ par conjugaison, et c'est l'action $\theta$ que la page
+dessine. La première l'est aussi, pour l'action triviale\footnote{La page
+nomme $L_0 = G/\mathfrak{Z}(G)$ et $D_0 = G/D(G)$ et dessine les flèches
+$L_1 \to L_0$ et $D_1 \to D_0$, avec $\theta \colon D_0 \to \mathrm{Aut}\,D_1$.
+C'est incohérent : $\mathrm{Cent}(G) \to G/\mathrm{Cent}(G)$ est trivial, et
+seule l'association $\mathrm{Cent}(G) \to G/D(G)$, $D(G) \to
+G/\mathrm{Cent}(G)$ donne pour noyau $\Pi_1$ et pour conoyau $\Pi_0$ ; c'est
+aussi celle que dessinent les deux arcs de la page 36, qui joignent $L_1$ à
+$D_0$ et $D_1$ à $L_0$. On évite ici les lettres $L_0$, $D_0$.}. La
+page note deux contraintes, qu'elle tire vraisemblablement des énoncés de
+départ : $\Pi_1$ n'a pas de partie $p$-divisible, et $\Pi_0$ pas de
+partie a-torique.
+
+La « Solution » est donc un programme : reconstituer $G$ à partir des deux
+modules croisés, qui partagent leurs invariants $\pi_1 = \Pi_1$ et
+$\pi_0 = \Pi_0$. La page en donne la forme : les deux données se recollent
+en
+\[
+D' = D(G) \sqcup_{\Pi_1} \mathrm{Cent}(G) = \mathrm{Cent}(G) \cdot D(G),
+\qquad
+L' = G/\mathrm{Cent}(G) \times_{\Pi_0} G/D(G) = G/\Pi_1,
+\]
+avec « obstruction nulle dans $H^{3}(\Pi_0, \Pi_1)$, indétermination dans
+$H^{2}(\Pi_0, \Pi_1)$ »\footnote{Une note en marge identifie une image à
+$\widehat{H}$, complété formel d'un groupe algébrique $H$ « canonique » :
+c'est la situation du brouillon de la page 38.}. Elle se donne trois tâches : traiter le cas où
+$\Pi_0$ est $p$-divisible ; dire quels couples de modules croisés sont
+possibles ; donner des conditions pour que $G$ soit linéaire et $D(G)$
+algébrisable. Seule la deuxième est reprise, aux pages 45 à 53, sous une
+forme générale\footnote{Le rapprochement avec les pages 45 à 53 est de
+nous ; il s'appuie sur l'identité des notations ($\varphi_G$, le diagramme
+en losange, $H^{3}$ et $H^{2}$).}.
+
+La page 36 amorce le calcul. Dans la situation générale
+$1 \to \Pi_1 \to G_1 \to G_0 \to \Pi_0 \to 1$, avec $G_1 = \mathrm{Cent}(G)
+\cdot D(G)$ et $G_0 = G/\Pi_1$, il y a un homomorphisme $\varphi_G$ de
+$\mathrm{Cent}(G_0) \cap \operatorname{Ker}\theta$ vers
+$Z^{1}(\Pi_0, \Pi_1)$ — ici vers $\mathrm{Hom}(\Pi_0, \Pi_1)$ —, de noyau
+l'image de $\mathrm{Cent}(G)$ dans $G_0$. Dans le cas qui l'intéresse, la
+page écrit cette application sur les éléments centraux de
+$G/\mathrm{Cent}(G)$ qui agissent trivialement sur $D(G)$, à valeurs dans
+$\mathrm{Hom}(\Pi_0, \Pi_1)$, et de noyau nul. D'où, $\Pi_1$ étant
+quasi-unipotent, la conclusion encadrée : ce groupe d'éléments centraux est
+quasi-unipotent. C'est, sous une forme encore floue, l'injectivité de
+l'application $\Psi_G$ de la page 46, qui porte le même nom
+$\varphi_G$\footnote{La phrase « ce qui exprime que $L_0 \hookrightarrow
+\mathrm{Cent}\,G$ est iso » est une lecture douteuse. La page conclut
+encore : « En fait, on doit avoir $G$ unipotent, comme $D_0 \simeq G/(G,G)$,
+$\mathrm{Cent}(D_0)$ unipotent » ; nous ne savons pas la justifier et la
+rapportons telle quelle.}.
+
+\pagerange{37}{39}
+\subsection*{Brouillons (pages 37 à 39)}
+
+La page 37 aligne trois énoncés encadrés — $\mathrm{Cent}(D(G))$ unipotent,
+$(G/\mathrm{Cent}\,G)_{\mathrm{ab}}$ linéaire, $\mathrm{Cent}(G/\mathrm{Cent}
+\,G)$ unipotent — et une question entourée, « $(D(G))_{\mathrm{ab}}$
+unipotent ? », avec une flèche vers « voir fin ». Aucune fin du dossier ne la
+reprend.
+
+La page 38 pose une extension centrale
+\[
+1 \to \mathfrak{z} \to D \to \widehat{H} \to 1,
+\]
+où $H$ est un groupe algébrique linéaire connexe lisse, $\widehat{H}$ son
+complété formel et $\mathfrak{z}$ un groupe formel commutatif lisse : le
+pendant formel de la structure que les pages 41 à 43 étudient pour les
+groupes algébriques.
+
+La page 39, couverte de schémas, calcule les extensions de
+$\widehat{\mathbb{G}}_a$ par $\widehat{\mathbb{G}}_a$ par cocycles :
+$\varphi(x, y)$, modifié par $\psi(x + y) - \psi(x) - \psi(y)$, dans
+$H^{2}(\widehat{\mathbb{G}}_a, \widehat{\mathbb{G}}_a)$, et note, pour une
+telle extension $E$, $\mathrm{Cent}(E) = D(E)$. Une telle extension non
+commutative n'existe qu'en caractéristique $p$ : en caractéristique nulle,
+un groupe formel est déterminé par son algèbre de Lie, et une extension
+centrale de $k$ par $k$ est abélienne. En caractéristique $p$, la loi
+$(x, z)(x', z') = (x + x', z + z' + x x'^{p})$ en donne une, de commutateur
+$x x'^{p} - x' x^{p}$\footnote{Exemple de nous. La page ne dit pas quelle
+extension elle considère.}.
+
+\pagerange{41}{43}
+\section*{VI. Groupes algébriques lisses connexes et décomposition de Chevalley (pages 41 à 43)}
+
+Trois pages sans titre, à l'encre bleue, sur des groupes algébriques et non
+formels. Aucune page ne dit à quoi elles servent ; elles sont rangées entre
+les deux suites sur les groupes formels.
+
+\pagerange{41}{41}
+\subsection*{La structure (page 41)}
+
+Soit $G$ un groupe algébrique lisse connexe sur un corps $k$, admettant une
+décomposition de Chevalley
+\[
+1 \to L \to G \to A \to 1,
+\]
+$A$ variété abélienne, $L$ affine lisse connexe — c'est le cas si $k$ est
+parfait (théorème de Chevalley)\footnote{On suppose désormais $k$ parfait,
+ce que la décomposition $\mathfrak{z} = \mathfrak{z}_u \times \mathfrak{z}_m$
+de la page 42 demande aussi. La page écrit « schéma abélien ».}. Soit
+$M = G_{\mathrm{aff}}$ le plus grand quotient affine de $G$ et
+\[
+1 \to Z \to G \to M \to 1 .
+\]
+On sait que $Z$ est caractérisé par $M$ affine et $Z_{\mathrm{aff}} = 1$,
+que $Z$ est central et que $Z \to A$ est surjectif, donc $G = Z \cdot L$ et
+$L \to M$ surjectif\footnote{Ce sont des théorèmes de Rosenlicht (1956) ;
+$Z$ est ce qu'on appelle aujourd'hui le sous-groupe \emph{anti-affine} de
+$G$, étudié par M.~Brion (2009).}. Posons $\mathfrak{z} = L \cap Z$,
+groupe affine commutatif. Alors $G \to M \times A$ est surjectif de noyau
+$\mathfrak{z}$ central, et
+\[
+G = L \times^{\mathfrak{z}} Z = (L \times Z)/\mathfrak{z}
+\]
+est déterminé, avec le diagramme de ses sous-groupes, par les deux
+extensions centrales : $L$ de $M$ par $\mathfrak{z}$, et $Z$ de $A$ par
+$\mathfrak{z}$. La donnée de $G$ équivaut ainsi à celle de $M$, $A$,
+$\mathfrak{z}$ et de deux extensions centrales, $L$ lisse connexe et
+$Z_{\mathrm{aff}} = 1$ ; ou encore, en partant de $L$, à celle d'un groupe
+affine lisse connexe $L$, d'une variété abélienne $A$, d'un sous-groupe
+$\mathfrak{z} \subset \mathrm{Cent}(L)$ et d'une extension $Z$ de $A$ par
+$\mathfrak{z}$ avec $Z_{\mathrm{aff}} = 1$\footnote{La page note ce $L$ avec
+un astérisque, $L^{*}$ ; la reformulation n'en demande pas.}.
+
+\pagerange{41}{42}
+\subsection*{Extensions d'une variété abélienne par un groupe affine (pages 41 et 42)}
+
+Une extension centrale de $A$ par $\mathfrak{z}$ commutatif est
+commutative, puisque son commutateur définirait une application
+bimultiplicative de $A \times A$ dans le groupe affine $\mathfrak{z}$, qui
+est constante. Ces extensions sont données par la formule de Barsotti–Weil
+généralisée :
+\[
+\mathrm{Ext}^{1}(A, \mathfrak{z}) =
+\mathrm{Hom}\bigl(D(\mathfrak{z}), \mathrm{Pic}^{0}_{A/k}\bigr),
+\]
+où $D(\mathfrak{z})$ est le dual de Cartier de $\mathfrak{z}$ et
+$\mathrm{Pic}^{0}_{A/k} = A^{*}$ la variété abélienne duale ; la catégorie de
+ces extensions est rigide, puisque $\mathrm{Hom}(A, \mathfrak{z}) =
+0$\footnote{La page écrit $\mathrm{Pic}_{A/k}$. C'est
+$\mathrm{Pic}^{0}$ : pour $\mathfrak{z} = \mathbb{G}_m$, le fibré des
+éléments non nuls d'un fibré en droites porte une loi de groupe au-dessus de
+celle de $A$ si et seulement s'il est algébriquement équivalent à zéro
+(Weil, Barsotti) ; voir le dossier 50, page 2. Pour la partie
+infinitésimale de $D(\mathfrak{z})$, la page 42 note elle-même que les
+homomorphismes se factorisent par $\mathrm{Pic}^{0}$. La commutativité des
+extensions centrales est de nous.}. L'extension $Z$ est donc une flèche
+$\varphi \colon D(\mathfrak{z}) \to A^{*}$, et il reste à exprimer
+$Z_{\mathrm{aff}} = 1$.
+
+\emph{$Z_{\mathrm{aff}}$ en termes de $\varphi$.} Le groupe $\mathfrak{z}$
+se surjecte sur $Z_{\mathrm{aff}}$, puisque $A$ n'a pas de quotient affine
+non trivial ; $Z_{\mathrm{aff}}$ est le plus grand quotient $\mathfrak{z}_1$
+de $\mathfrak{z}$ tel que l'extension poussée de $A$ par $\mathfrak{z}_1$
+soit triviale. Par dualité de Cartier, qui échange quotients de
+$\mathfrak{z}$ et sous-groupes de $D(\mathfrak{z})$, c'est
+$\mathfrak{z}_1 = D(\operatorname{Ker}\varphi)$. Donc
+\[
+Z_{\mathrm{aff}} = 1 \iff \varphi \text{ est un monomorphisme.}
+\]
+Décomposons $\mathfrak{z} = \mathfrak{z}_u \times \mathfrak{z}_m$ en ses
+parties unipotente et de type multiplicatif, et soit $\Gamma =
+D(\mathfrak{z}_m)$, groupe constant tordu de type fini ; $\varphi$ a deux
+composantes $\varphi_0$ sur $D(\mathfrak{z}_u)$ et $\varphi_1$ sur $\Gamma$.
+Leurs images, l'une connexe et l'autre étale, se coupent trivialement, de
+sorte que $\varphi$ est un monomorphisme si et seulement si $\varphi_0$ et
+$\varphi_1$ en sont.
+
+\emph{Caractéristique nulle.} $\mathfrak{z}_u = W(t)$ est le groupe
+vectoriel de son espace tangent $t$, et $\varphi_0$ est une application
+linéaire $t^{\vee} \to H^{1}(A, \mathcal{O}_A)$, l'espace tangent de
+$A^{*}$\footnote{La page écrit $\varphi_0 \colon t \to
+t_{\mathrm{Pic}_{A/k}}$. Le dual de Cartier de $W(t)$ est le
+groupe formel de $t^{\vee}$, et $\mathrm{Ext}^{1}(A, W(t)) = t \otimes
+H^{1}(A, \mathcal{O}_A) = \mathrm{Hom}(t^{\vee}, H^{1}(A, \mathcal{O}_A))$ :
+c'est $t^{\vee}$ qui se plonge.}. La donnée de $\mathfrak{z}$ et de $Z$ avec
+$Z_{\mathrm{aff}} = 1$ équivaut donc à celle d'un sous-espace vectoriel de
+$H^{1}(A, \mathcal{O}_A)$ et d'un sous-groupe constant tordu de type fini de
+$A^{*}$.
+
+\emph{Caractéristique $p$.} La page donne pour « bien connu » que la partie
+unipotente de $Z_{\mathrm{aff}}$ est isogène à $\mathfrak{z}_u$, de sorte
+que $Z_{\mathrm{aff}} = 1$ force $\mathfrak{z}_u$ fini ; son dual
+$D(\mathfrak{z}_u)$ est alors fini radiciel, et $\varphi_0$ se factorise par
+le complété formel $\widehat{A^{*}}$\footnote{L'énoncé « bien connu » est
+cohérent avec le théorème de Brion (2009) selon lequel, en caractéristique
+$p$, les groupes anti-affines sont des variétés semi-abéliennes ; nous le
+citons de mémoire.}. La donnée de $\mathfrak{z}$ et de $Z$ équivaut à celle
+d'un couple $(\tau, \Gamma)$ formé d'un sous-groupe radiciel $\tau$ et d'un
+sous-groupe constant tordu $\Gamma$ de $A^{*}$, avec
+$D(\mathfrak{z}) = \tau \times \Gamma \hookrightarrow A^{*}$.
+
+\pagerange{43}{43}
+\subsection*{Quels groupes $\mathfrak{z}$, et un défaut de constructibilité (page 43)}
+
+\emph{NB.} Pour $k$ algébriquement clos, un groupe affine commutatif
+$\mathfrak{z}$ intervient pour un $G$ convenable si et seulement s'il se
+plonge centralement dans un groupe affine lisse connexe — ce qui, dit la
+page, est toujours possible, et même dans un groupe commutatif — et si
+$D(\mathfrak{z})$ se plonge dans une variété abélienne duale. D'après la
+page, la seconde condition est toujours remplie en caractéristique nulle, et
+l'est en caractéristique $p$ si et seulement si $\mathfrak{z}_u$ est fini. Il
+faut ajouter, en caractéristique $p$, que $k$ ne soit pas une clôture
+algébrique d'un corps fini : sur $\overline{\mathbb{F}}_p$, tout point d'une
+variété abélienne est de torsion, et $\Gamma$ doit être fini, c'est-à-dire
+$\mathfrak{z}_m$ fini\footnote{La restriction est de nous ; elle vient de
+la correction $\mathrm{Pic}^{0}$ de la page 41. Elle s'accorde avec ce que
+nous croyons être une remarque de Brion : sur $\overline{\mathbb{F}}_p$, les
+groupes anti-affines sont des variétés abéliennes. Une note entourée, sous
+le 2°, souligne que ce fait « distingue ici les caractéristiques » ; sa
+lecture est douteuse.}.
+
+\emph{NB.} La formation de $G_{\mathrm{aff}}$, pour un schéma en groupes
+lisse à fibres connexes sur une base $S$, n'est pas « constructible » en
+général. Exemple de la page : $G$ extension d'un schéma abélien $A$ par
+$\mathbb{G}_a$, non triviale au point générique $y$, de caractéristique
+nulle, et triviale en une spécialisation $s$ de caractéristique $p$ ; alors
+$(G_y)_{\mathrm{aff}} = 1$ et $(G_s)_{\mathrm{aff}} \simeq \mathbb{G}_a$. Le
+phénomène est plus fort que l'exemple : par l'étude de la page 42, une
+extension de $A$ par $\mathbb{G}_a$ n'a jamais $G_{\mathrm{aff}} = 1$ en
+caractéristique $p$, puisque $\mathfrak{z}_u = \mathbb{G}_a$ n'est pas fini.
+Sur une base dominant $\operatorname{Spec}\mathbb{Z}$, le lieu où
+$G_{\mathrm{aff}}$ est trivial est donc contenu dans la fibre de
+caractéristique nulle, qui n'est pas constructible. En caractéristique
+résiduelle fixée, la page affirme au contraire que la construction est
+constructible\footnote{Le renforcement est de nous. La page écrit « groupe
+affine lisse à fibres connexes », ce que l'exemple, qui n'est pas affine,
+contredit ; nous lisons « groupe lisse à fibres connexes ».}.
+
+\emph{Reformulation.} Il est « maladroit », dit la page, de se donner
+$\mathfrak{z} \subset \mathrm{Cent}(L)$ et un monomorphisme
+$D(\mathfrak{z}) \hookrightarrow A^{*}$ ; mieux vaut se donner $L$, $A$ et une
+extension de $A$ par $\mathrm{Cent}(L)$ tout entier, c'est-à-dire un
+homomorphisme $D(\mathrm{Cent}\,L) \to A^{*}$ : en poussant l'extension $Z$
+le long de $\mathfrak{z} \subset \mathrm{Cent}(L)$, on retrouve
+$G = L \times^{\mathrm{Cent}(L)} Z'$ sans condition d'injectivité. La
+présentation précédente n'a d'avantage, conclut-il, que d'expliciter la
+donnée sans faire intervenir des choses « à la Cantor » trop
+« dégueulasses » — et la page s'arrête sur un tiret\footnote{« Cantor » est
+une lecture douteuse. Il vise sans doute les sous-groupes arbitraires de
+type fini d'un groupe de points comme $A^{*}(k)$, qu'aucune condition
+naturelle ne décrit.}.
+
+\pagerange{44}{53}
+\section*{VII. Fourbis auxiliaires cohomologiques pour groupes formels (pages 44 à 53)}
+
+La page 44 est une chemise qui porte ce titre. Les pages 45 à 53 sont
+paginées par lui de 1 à 7, les pages 47 et 49 étant des versos
+administratifs. Malgré le titre, rien n'y est propre aux groupes formels :
+les groupes sont des faisceaux en groupes sur un topos $X$, et la
+cohomologie celle du topos classifiant $B_{\pi_0}$ au-dessus de $X$ — pour
+des groupes abstraits, la cohomologie des groupes. On y traite en général le
+problème posé par la « Solution » de la page 35.
+
+\pagerange{45}{45}
+\subsection*{Le problème : deux modules croisés, un groupe (page 45)}
+
+Un \emph{module croisé} $\mathcal{C} = (N, M, d, \Theta)$ est un
+homomorphisme $d \colon N \to M$ avec une action $\Theta$ de $M$ sur $N$ telle
+que $d$ soit équivariant pour l'action de $M$ sur lui-même par conjugaison
+et que $d(n)$ agisse sur $N$ comme la conjugaison par $n$. Son noyau
+$\pi_1$ est central dans $N$, son image est distinguée, et $M$ agit sur
+$\pi_1$ à travers $\pi_0 = \operatorname{Coker} d$\footnote{La notion est de
+J.~H.~C.~Whitehead (1949) ; la classification des modules croisés par
+$(\pi_0, \pi_1)$ et une classe de $H^{3}(\pi_0, \pi_1)$ est de Mac Lane et
+Whitehead (1950). Sous le nom de Gr-catégories, c'est l'objet de la thèse
+de Hoàng Xuân Sính (1975), préparée sous la direction de Grothendieck ;
+voir le dossier 135. La page ne nomme ni les modules croisés ni ces
+travaux.}.
+
+Si $G$ est un groupe et $N$, $N'$ deux sous-groupes distingués qui commutent
+entre eux, on obtient deux modules croisés,
+\[
+\mathcal{C} = \bigl(N \to M = G/N'\bigr), \qquad
+\mathcal{C}' = \bigl(N' \to M' = G/N\bigr),
+\]
+les actions étant induites par la conjugaison ; ils ont les mêmes
+invariants, $\pi_1 = N \cap N'$ et $\pi_0 = G/NN'$, avec la même action de
+$\pi_0$ sur $\pi_1$\footnote{L'hypothèse que $N$ et $N'$ commutent est
+ajoutée ici : sans elle, $G/N'$ n'agit pas sur $N$. Elle est remplie dans le
+cas qui intéresse la suite, où $N' = \mathrm{Cent}(G)$.}. Le problème de la
+page est l'inverse : étant donnés deux modules croisés $\mathcal{C}$,
+$\mathcal{C}'$ (données I et II) et des isomorphismes
+$\pi_i(\mathcal{C}) \simeq \pi_i(\mathcal{C}')$ compatibles aux actions
+(donnée III), trouver $G$.
+
+Les données déterminent deux groupes : le sous-groupe $H = NN'$ de $G$ et le
+quotient $K = G/\pi_1$,
+\[
+H = (N \times N')/\pi_1, \qquad K = M \times_{\pi_0} M',
+\]
+$\pi_1$ étant plongé antidiagonalement : un carré cocartésien et un carré
+cartésien, que la page dessine. Les lignes
+$(\alpha, \alpha') \cdot (\lambda, -\lambda) = (\alpha \cdot \lambda,
+-\alpha' \cdot \lambda)$ vérifient que l'action de $K$ préserve
+l'antidiagonale, ce qui est la compatibilité III\footnote{La page note $K =
+G/\mathfrak{z}$, le « 3 » bouclé désignant ici $N \cap N' = \pi_1$.}. Et
+$H \to K$ est un nouveau module croisé, d'invariants $\pi_0$, $\pi_1$.
+Trouver $G$, c'est trouver une extension de $K$ par $\pi_1$ contenant $H$ de
+façon compatible. La page énonce :
+\[
+\text{obstruction dans } H^{3}(B_{\pi_0}/X, \pi_1), \qquad
+\text{indétermination dans } H^{2}(B_{\pi_0}/X, \pi_1) =
+\mathrm{Extop}(\pi_0, \pi_1),
+\]
+c'est-à-dire : il existe une solution si et seulement si une classe de
+degré $3$ s'annule, et les solutions forment alors un torseur sous le groupe
+des classes d'extensions de $\pi_0$ par $\pi_1$ avec l'action
+donnée\footnote{La page l'énonce sans démonstration. C'est la forme de la
+théorie d'Eilenberg et Mac Lane (1947) des extensions à noyau non
+abélien, obstruction dans $H^{3}$ et torseur sous $H^{2}$, et la classe
+d'obstruction est l'invariant de Mac Lane–Whitehead du module croisé
+$H \to K$ : cette identification est de nous. Le dossier 135 (pages 7 à 10)
+retrouve l'obstruction de Mac Lane par les 2-gerbes relatives sur $B_G$ au-dessus de
+$S$, dans la même notation.}.
+
+La page isole ensuite les deux conditions qui intéressent la « Solution » :
+$N'$ est central si et seulement si l'action $\Theta'$ de $M'$ sur $N'$ est
+triviale, et $N$ contient $D(G)$ si et seulement si $M' = G/N$ est
+commutatif. La première réduit $\mathcal{C}'$ à un homomorphisme
+$d' \colon N' \to M'$ de noyau central, avec $N'$ commutatif et $d'(N')$
+central dans $M'$, sans autre structure, et elle force l'action de
+$\pi_0$ sur $\pi_1$ à être triviale — condition à vérifier sur
+$\mathcal{C}$. La seconde rend $M'$, donc $\pi_0$, commutatif\footnote{En
+marge de la page, quelques lignes en allemand, écrites verticalement, sans
+rapport apparent avec la page ; non transcrites.}.
+
+\pagerange{46}{46}
+\subsection*{Que $N'$ soit exactement le centre (page 46)}
+
+Supposons $N'$ central. L'image du centre de $G$ dans $M$ est contenue dans
+le sous-groupe
+\[
+\mathfrak{Z} = \bigl[\mathrm{Cent}(K)/(N'/\pi_1)\bigr] \cap
+\operatorname{Ker}\bigl(\Theta \colon M \to \mathrm{Aut}(N)\bigr),
+\]
+qui ne dépend que des données, et l'on a $N' \subset \mathrm{Cent}(G)
+\subset \overline{N'}$, où $\overline{N'}$ est l'image inverse de
+$\mathfrak{Z}$ dans $G$. Pour $g \in G$ et $z \in \overline{N'}$, le
+commutateur $[g, z]$ tombe dans $\pi_1$ ; il est additif en $z$, additif en
+$g$, nul pour $g \in N'$ et pour $g \in N$, puisque l'image de $z$ agit
+trivialement sur $N$. Il définit donc un accouplement
+$\pi_0 \times \mathfrak{Z} \to \pi_1$, c'est-à-dire
+\[
+\Psi_G \colon \mathfrak{Z} \longrightarrow \mathrm{Hom}(\pi_0, \pi_1),
+\]
+et $\mathrm{Cent}(G)$ est exactement l'image inverse de
+$\operatorname{Ker}\Psi_G$. D'où :
+\[
+N' = \mathrm{Cent}(G) \iff \Psi_G \text{ est injectif.}
+\]
+La page passe par $\varphi_G \colon \pi_0 \to \mathrm{Hom}(\mathfrak{Z},
+\pi_1)$, le même accouplement curryfié de l'autre côté\footnote{Les
+vérifications d'additivité et de nullité sont de nous ; la page les
+résume par « est triviale sur $N'$ et sur $\mathfrak{Z}$ ». En marge, une
+définition antérieure, $\mathfrak{Z} = \operatorname{Ker}\Theta \cap
+\mathrm{Cent}\,M$, est biffée.}.
+
+\pagerange{48}{51}
+\subsection*{Changer de solution : l'accouplement $c_E$ (pages 48 à 51)}
+
+Une autre solution $G_1$ se déduit de $G$ par une extension $E$ de $\pi_0$
+par $\pi_1$, ici centrale puisque l'action est triviale :
+$G_1 = (G \times_{\pi_0} E)/\pi_1$. Le commutateur de deux relèvements dans
+$E$ définit une forme alternée
+\[
+c_E \colon \pi_0 \times \pi_0 \longrightarrow \pi_1,
+\]
+bilinéaire parce que $\pi_0$ est commutatif, et nulle si et seulement si
+$E$ est commutative\footnote{En marge : « on suppose $\pi_0$ commutatif ici.
+Que dire sinon ? ». Dans le problème qui intéresse la « Solution », la
+condition $N \supset D(G)$ le rend commutatif : la question ne s'y pose
+pas.}. La page annonce, « au signe près »,
+\[
+\Psi_{G_1} = \Psi_G + \tilde{c}_E \circ \alpha,
+\]
+où $\alpha \colon \mathfrak{Z} \to M \to \pi_0$ est la projection et
+$\tilde{c}_E \colon \pi_0 \to \mathrm{Hom}(\pi_0, \pi_1)$ la curryfication
+de $c_E$. C'est juste : dans $G_1$, un commutateur est le produit des
+commutateurs dans $G$ et dans $E$\footnote{Le « on doit trouver » de la
+page est vérifié par nous. Le signe dépend du côté où l'on curryfie, ce que
+la page note (« d'un signe ! »). Un $\beta$ biffé, qui envoyait
+$\mathrm{Hom}(\pi_0, \pi_1)$ dans $\mathrm{Hom}(\pi_0, N')$, est abandonné
+par la page elle-même.}. Il faut donc choisir $E$ de sorte que
+$\Psi_G + \tilde{c}_E \alpha$ soit injectif.
+
+\emph{Diviser la condition.} Soit $\mathfrak{Z}_0 = \operatorname{Ker}(\mathfrak{Z}
+\to \pi_0)$, l'ensemble des éléments de $\mathfrak{Z}$ qui proviennent de
+$H$. Sur $\mathfrak{Z}_0$, le terme correctif s'annule, et $\Psi_0 =
+\Psi_G|_{\mathfrak{Z}_0}$ ne dépend ni de $G$ ni de $E$ : il se calcule dans
+$H$, sur lequel $G$ agit à travers $K$\footnote{Une première tentative, par
+une application $\varphi_0 \colon \mathfrak{Z} \to \mathrm{Hom}(\pi_0,
+N'/\pi_1)$, est annulée de deux traits au bas de la page 48 et en tête de la
+page 50 ; elle ne pouvait aboutir, $\Psi_G$ étant à valeurs dans
+$\mathrm{Hom}(\pi_0, \pi_1)$. Une addition en marge identifie
+$\mathfrak{Z}_0$ à $\mathrm{Cent}(N)/\pi_1 \cap \mathrm{Cent}(M)$, avec une
+lecture douteuse.}. On obtient :
+\begin{itemize}
+  \item[b)] une condition préliminaire, indépendante de $E$ : $\Psi_0$ est
+  injectif, c'est-à-dire $N' = H \cap \mathrm{Cent}(G)$, le sous-groupe des
+  éléments de $H$ fixés par l'action de $K$\footnote{La page écrit « $N'$
+  est égal au centre de $H$, $N' = \mathrm{Cent}(H)$ », avec un point
+  d'interrogation en marge. Le noyau de $\Psi_0$ est
+  $(H \cap \mathrm{Cent}\,G)/N'$ ; comme $\mathrm{Cent}(H)$ contient
+  $H \cap \mathrm{Cent}(G)$, l'égalité $N' = \mathrm{Cent}(H)$ entraîne b),
+  mais la réciproque n'a pas de raison d'être vraie. On corrige.} ;
+  \item[c)] une condition qui dépend de $E$ : l'application
+  $\overline{\Psi}_{G_1} \colon \mathfrak{Z}/\mathfrak{Z}_0 = \pi_0^{*} \to
+  \mathrm{Hom}(\pi_0, \pi_1)/\Psi_0(\mathfrak{Z}_0)$ déduite de
+  $\Psi_{G_1}$ est injective, $\pi_0^{*}$ désignant l'image de
+  $\mathfrak{Z}$ dans $\pi_0$.
+\end{itemize}
+Les deux ensemble équivalent à l'injectivité de $\Psi_{G_1}$. La phrase qui
+devait dire ce que c) impose à la classe de $E$ reste
+inachevée\footnote{Elle s'arrête sur « Cette condition sur $G_1$ i.e.\ sur
+$E_G \in \operatorname{Ob}\mathrm{Extop}(\pi_0, \pi_1)$ », avec
+« (condition ?) » en marge.}.
+
+\pagerange{51}{53}
+\subsection*{Que $N$ soit exactement le groupe dérivé (pages 51 à 53)}
+
+On veut maintenant $N = D(G)$. D'abord a) $N \supset D(G)$, c'est-à-dire
+$M'$ commutatif, d'où $\pi_0$ commutatif. Soit
+$\mathcal{D} = (N_{\mathrm{ab}})_M$ le groupe des coïnvariants sous $M$ de
+l'abélianisé de $N$, et $N_0$ le noyau de $N \to \mathcal{D}$ ; tout quotient
+$N/N_1$ sur lequel $G$ agit trivialement est un quotient de $\mathcal{D}$.
+Dans $G/N_0$, extension centrale de $M'$ par $\mathcal{D}$, le commutateur de
+deux relèvements définit une forme bilinéaire alternée, qui s'annule dès
+qu'un des arguments est dans $d'(N')$ puisque $N'$ est central :
+\[
+\lambda_G \colon \pi_0 \otimes \pi_0 \longrightarrow \mathcal{D},
+\qquad
+N/D(G) \simeq \mathcal{D}/\lambda_G(\pi_0 \otimes \pi_0) .
+\]
+La condition cherchée est donc que $\lambda_G$ soit
+surjectif\footnote{La page écrit « si $\bar{x}$ ou $\bar{y} \in d'(N')$ » ;
+ce sont $x$ et $y$, non leurs relèvements, qui doivent être dans $d'(N')$.
+L'isomorphisme $N/D(G) \simeq \mathcal{D}/\lambda_G(\pi_0 \otimes \pi_0)$
+vient de ce que $D(G)/N_0$ est le groupe dérivé de $G/N_0$, engendré par ces
+commutateurs.}. Quand on change $G$ en $G_1$ par l'extension $E$,
+\[
+\lambda_{G_1} = \lambda_G + \beta \circ c_E,
+\]
+où $\beta \colon \pi_1 \to \mathcal{D}$ est le passage au quotient.
+
+La page divise encore. Soit $\mathcal{D}_0 = \operatorname{Coker}(\pi_1 \to
+\mathcal{D})$ et $\lambda_0 \colon \pi_0 \otimes \pi_0 \to \mathcal{D}_0$
+déduit de $\lambda_G$ : il ne dépend pas de $G$, puisqu'il se construit dans
+$K = G/\pi_1$. Soit $P = \operatorname{Ker}\lambda_0$ et
+$\pi_{1*} = \operatorname{Im}(\pi_1 \to \mathcal{D})$ ; $\lambda_G$ induit
+$\overline{\lambda}_G \colon P \to \pi_{1*}$. Alors $\lambda_G$ est
+surjectif si et seulement si
+\begin{itemize}
+  \item[b)] $\lambda_0$ est surjectif — condition indépendante de $G$, qui
+  signifie que $N/\pi_1 = D(K)$, ou encore que $d(N) = D(M)$ ;
+  \item[c)] $\overline{\lambda}_G \colon P \to \pi_{1*}$ est surjectif —
+  condition qui dépend de $G$, par la formule
+  $\overline{\lambda}_{G_1} = \overline{\lambda}_G + p\,c_E\,i$, où $i$ est
+  l'inclusion $P \subset \pi_0 \otimes \pi_0$ et $p$ la projection
+  $\pi_1 \to \pi_{1*}$.
+\end{itemize}
+L'équivalence de $N/\pi_1 = D(K)$ et de $d(N) = D(M)$, que la page marque
+« vérifier », est exacte\footnote{Vérification de nous :
+$d(N) = NN'/N'$ et $D(M) = D(G)N'/N'$ ; si $NN' = D(G)N'$, alors, $D(G)$ étant
+contenu dans $N$, la loi modulaire donne $N = D(G)(N \cap N') =
+D(G)\,\pi_1$, qui est $N/\pi_1 = D(K)$. La réciproque est immédiate. De
+même, b) et c) ensemble équivalent à la surjectivité de $\lambda_G$.}.
+
+Le dossier s'arrête là. Ce qu'il a obtenu tient en peu de mots : une fois
+levée l'obstruction de la page 45, le groupe cherché est déterminé par le
+choix d'une extension centrale $E$ de $\pi_0$ par $\pi_1$, et les deux
+conditions c) ne dépendent de $E$ qu'à travers sa forme alternée $c_E$, de
+façon affine. Pour des groupes abstraits, toute forme bilinéaire alternée
+$\pi_0 \times \pi_0 \to \pi_1$ est la forme d'une extension centrale, et le
+problème devient un problème d'algèbre linéaire : trouver une forme alternée
+$c$ qui rende $\overline{\Psi}_G + \overline{\tilde{c}\alpha}$ injectif et
+$\overline{\lambda}_G + p\,c\,i$ surjectif\footnote{Cette mise en forme,
+et la surjectivité de $H^{2}(\pi_0, \pi_1) \to \mathrm{Alt}(\pi_0, \pi_1)$
+pour des groupes abéliens abstraits, sont de nous. Pour des groupes formels
+ou des faisceaux, la surjectivité demande une vérification que le dossier
+ne fait pas.}. Le dossier ne le résout pas, et ne revient pas aux groupes
+formels.
+
+\end{document}

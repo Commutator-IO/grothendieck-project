@@ -1,0 +1,452 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 133, batch 3 (pages 41-53).
+% Established from the facsimile archives/batches/133/batch-03.pdf (a mirror of
+% https://grothendieck.umontpellier.fr/133.pdf), per the skill
+% transcribe-grothendieck. The batch file carries no cover sheet: PDF page N
+% is page 40+N of the folder (the Montpellier footer prints « 41 » ... « 53 »),
+% and the archivists' pencil numbers bottom-left agree wherever legible
+% (« 44 », « 45 », « 46 », « 48 », « 49 », « 50 », « 51 », « 52 », « 53 »).
+% The folder's last thirteen pages; the batch is short because the folder is.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-09-23 — first pass, unchecked against the pages by a human.
+% (A first agent on this batch stalled at page 42 before writing; its drafts
+% were used as a starting point and every page was re-read against the tiles.)
+%
+% Ten of the thirteen pages are transcribed. Absent: page 44, an otherwise
+% blank leaf inscribed in his hand « Fourbis auxiliaires cohomologiques pour
+% groupes formels » — a cover, whose words become the \section heading before
+% page 45 (references/hand.md §5); pages 47 and 49, typed notices of the USTL
+% administration (page 49 an « avis de soutenance » dated Montpellier, 5 juin
+% 1975, addressed to him), nothing in his hand — they are the versos of 46 and
+% 48, since his own pagination runs 2 (p. 46), 3 (p. 48), 4 (p. 50) straight
+% across them. No offprint (« tiré à part ») falls in this batch, so the
+% folder-22 rule for printed matter is not needed here.
+%
+% What the batch is. Two runs, undated, blue ink.
+%   41-43  Smooth connected algebraic groups G over k admitting a Chevalley
+%          decomposition 1 -> L -> G -> A -> 1; with M = G_aff (largest affine
+%          quotient) and 1 -> Z -> G -> M -> 1, the diagram (D) and 𝔷 = L ∩ Z;
+%          G is a central extension of A × M by 𝔷, so the datum of G amounts
+%          to (M, A, 𝔷) and two central extensions L of M, Z of A by 𝔷 with
+%          Z_aff = 1; Ext^1(A, 𝔷) = Hom(D(𝔷), Pic_{A/k}), rigid; Z_aff = 1 iff
+%          φ : D(𝔷) -> Pic is injective, worked out in characteristic 0
+%          (𝔷_u = W(t), φ_0 on the tangent space H^1(A, O_A)) and in
+%          characteristic p (𝔷_u finite, radiciel subgroups of Pic); NB on
+%          which 𝔷 can occur, on the non-« constructible » nature of G_aff in
+%          mixed characteristic (extension of A by G_a), and a
+%          « Reformulation » in terms of D(Cent L) -> Pic_{A/k}. Page 43 ends
+%          on a dash.
+%   45-53  Under the cover title of page 44, paginated by him 1-7 (45, 46,
+%          48, 50, 51, 52, 53): two crossed modules 𝒞 = (N, M, d, Θ),
+%          𝒞' = (N', M', d', Θ') with an identification of π_0 and π_1, to be
+%          realised by one group G with N ∩ N' = π_1, M = G/N', M' = G/N;
+%          obstruction in H^3(B_{π_0}/X, π_1), indeterminacy
+%          H^2 = Extop(π_0, π_1); conditions N' = Cent G (the map
+%          Ψ_G : ℨ -> Hom(π_0, π_1) injective) and N = DG (the alternating
+%          pairing λ_G : π_0 ⊗ π_0 -> 𝒟 = (N_comm)_M surjective), and how both
+%          vary when G is changed by a central extension E of π_0 by π_1
+%          (Ψ_{G_1} = Ψ_G + c̃_E α, λ_{G_1} = λ_G + β c_E), each split into a
+%          part independent of G (conditions b)) and a part that depends on
+%          it (conditions c)). The last sentence of page 53 closes the run;
+%          nothing is cut at the end of the batch.
+%
+% Notation fixed for the batch: his curly figure-3 (the group L ∩ Z on 41-43,
+% the group N ∩ N' = π_1 on 45) as \mathfrak{z}, as in batch 2; his larger
+% gothic Z (the subgroup of M on 46-51) as \mathfrak{Z}, as batch 2 does for
+% the same glyph; the script D-like letter of 51-53 ((N_comm)_M) as
+% \mathcal{D}; D G (derived group) as D; 𝒞 for his round C. Functors he
+% underlines (Hom, Aut, Cent, Pic, Extop) keep the underline inside math;
+% words he underlines in prose are set in \emph. Square brackets in his text
+% mark his own interlinear additions.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{133}
+\batch{3}
+\pages{41}{53}
+\dating{1974-[à partir de 1975]}
+\watermark{Édition de démonstration}
+\foldertitle{[Groupes de Witt et formes quadratiques, groupes formels] : notes manuscrites (s.d.), tirés à part (1974).}
+
+\begin{document}
+
+\section{[Groupes algébriques lisses connexes, décomposition de Chevalley et extensions centrales]}
+\note{titre de l'éditeur, entre crochets : le feuillet 41 n'en porte aucun. Dans ce lot, les crochets droits à l'intérieur de son texte signalent ses propres additions interlinéaires.}
+
+\page{41}
+$G$ groupe alg.\ lisse connexe sur $k$, ayant une décomposition en ext.\ de Chevalley (p.\ ex.\ $k$ parfait)
+\[
+  1 \to L \to G \to A \to 1 \qquad (*)
+\]
+$A$ schéma abélien, $L$ groupe alg affine lisse connexe.
+\note{dans la suite exacte, $L$ est écrit sur une lettre biffée, et un exposant est biffé sur $A$.}
+
+Considérons de plus $M = G_{\mathrm{aff}}$, le plus grand quotient affine de $G$, et la suite
+\[
+  1 \to Z \to G \to M \to 1
+\]
+on sait que $(**)$ $M$ affine, $Z_{\mathrm{aff}} = 1$ (caractéristiques pour cette ext.) et que cela entraîne $Z$ central dans $G$, $Z \to A$ \emph{épi}.
+
+Considérons
+
+\begin{tikzcd}[column sep=small, row sep=small]
+1 \arrow[dr] & & & & 1 \\
+& L \arrow[rr, dashed] \arrow[dr, hook] & & M \arrow[ur] & \\
+L \cap Z = \mathfrak{z} \arrow[ur] \arrow[dr] & & G \arrow[ur] \arrow[dr] & & \\
+& Z \arrow[rr, dashed] \arrow[ur, hook] & & A \arrow[dr] & \\
+1 \arrow[ur] & & & & 1
+\end{tikzcd}
+
+(D)
+\note{diagramme redessiné : sur la page, les deux flèches pointillées $L \dashrightarrow M$ et $Z \dashrightarrow A$ sont horizontales, et $L \cap Z = \mathfrak{z}$ est écrit à gauche, relié par deux flèches à $L$ et à $Z$. La lettre $\mathfrak{z}$ rend un « 3 » bouclé, sa notation pour ce groupe tout au long des pages 41 à 43.}
+
+avec $Z \to A$ épi, donc $G = Z.L$, i.e.\ $L \to M$ épi.
+
+$G$ est une extension centrale de $A \times M$ par $\mathfrak{z}$, et \struck{est} connue (comme telles, avec reconstitution du diagramme (D)) par la connaissance des deux extensions centrales $L$ de $M$ par $\mathfrak{z}$ et $Z$ de $A$ par $\mathfrak{z}$. Donc la donnée de $G$ \struck{(avec ses deux structures)} [\uncertain{satisfaisant à l'hyp.\ du début}] équivaut à celle de
+\begin{enumerate}
+  \item[a)] des groupes alg.\ $M$, $A$, $\mathfrak{z}$ ($M$ affine lisse connexe, $A$ V.A., $\mathfrak{z}$ [affine,] commutatif)
+  \item[b)] d'\struck{une} extensions \emph{centrales} $L$ de $M$ par $\mathfrak{z}$, et $Z$ de $A$ par $\mathfrak{z}$, satisfaisant (i) $L$ lisse connexe, (ii) $Z_{\mathrm{aff}} = 1$.
+\end{enumerate}
+\note{« satisfaisant à l'hyp.\ du début » est une addition interlinéaire au-dessus des mots biffés, lecture incertaine ; « affine » est ajouté au-dessus de « commutatif ».}
+
+On peut reformuler ces données en
+\begin{enumerate}
+  \item[a')] groupe alg.\ affine lisse connexe $L^{*}$, et V.A.\ $A$
+  \item[b')] sous-groupe [alg] $\mathfrak{z} \subset \underline{\mathrm{Cent}}(L)$
+  \item[c')] Extension [centrale] \struck{\ill{}} $Z$ de $A$ par $\mathfrak{z}$ telle que $Z_{\mathrm{aff}} = 1$.
+\end{enumerate}
+\note{en a'), l'astérisque sur $L$ est net.}
+
+On sait d'ailleurs que les ext.\ centrales d'un schéma abélien $A$ par un groupe [alg] comm.\ affine $\mathfrak{z}$ sont données par
+\[
+  \mathrm{Ext}^{1}(A, \mathfrak{z}) = \mathrm{Hom}(D(\mathfrak{z}), \underline{\mathrm{Pic}}_{A/k})
+\]
+(la catégorie de ces extensions est \emph{rigide} puisque le $\mathrm{Ext}^{0} = \mathrm{Hom}(A, \mathfrak{z}) = 0$) donc la donnée \struck{de} [d'une extension] \uncertain{$Z$} équivaut à la donnée de
+\[
+  \varphi \colon D(\mathfrak{z}) \longrightarrow \underline{\mathrm{Pic}}_{A/k}
+\]
+et il reste à expliciter la condition $Z_{\mathrm{aff}} = 1$, [(plus gén.] \struck{\ill{}}
+\note{la lettre qui suit « d'une extension » est surchargée ; on la lit $Z$ (l'extension elle-même) sans certitude. En fin de ligne, « (plus gén. » est écrit au-dessus d'un mot biffé illisible ; la parenthèse se poursuit en tête de la page 42.}
+
+\page{42}
+à déterminer $Z_{\mathrm{aff}}$ en termes de $\varphi$, et écrire ensuite qu'il est $1$).
+On voit \struck{que} aisément que $Z_{\mathrm{aff}}$ est un quotient [$\mathfrak{z}_{1}$] \struck{de} de $\mathfrak{z}$ --- savoir le plus grand quotient de $\mathfrak{z}$ tel que l'extension correspondante de $A$ par $\mathfrak{z}_{1}$ soit triviale, et c'est aussi $\mathfrak{z}_{1} = D(\operatorname{Ker}\varphi)$, donc il faut exprimer $\operatorname{Ker}\varphi = 1$.
+
+\struck{\ill{}} Il y a deux cas à distinguer, en décomposant $\mathfrak{z} = \mathfrak{z}_{u} \times \mathfrak{z}_{m}$ (\emph{unipot.}, \emph{t.\ mult.}) et posant $\Gamma = D(\mathfrak{z}_{m})$
+
+1°) $k$ de car.\ $0$, donc $\mathfrak{z}_{u}$ est un groupe vectoriel, [\uncertain{soit} $\mathfrak{z}_{u} = W(t)$ ($t$ tangent à l'origine)] \struck{Alors $\varphi$} correspond à deux hom
+\[
+  \varphi_{0} \colon \struck{\mathfrak{z}_{u}} \ t \longrightarrow t_{\underline{\mathrm{Pic}}_{A/k}} \simeq H^{1}(A, \underline{O}_{A})
+\]
+\[
+  \varphi_{1} \colon \Gamma \longrightarrow \underline{\mathrm{Pic}}_{A/k}
+\]
+\note{« soit $\mathfrak{z}_u = W(t)$ ($t$ tangent à l'origine) » est une addition interlinéaire, et « Alors $\varphi$ » est entouré puis biffé ; « unipot. » et « t. mult. » sont écrits sous les deux facteurs. Dans $\varphi_0$, un premier argument ($\mathfrak{z}_u$, lecture incertaine) est biffé au profit de $t$.}
+
+\struck{Si $t_{0} = \operatorname{Ker}\varphi$}
+
+Il faut $\varphi_{0}$ injectif, $\varphi_{1}$ injectif. (donc la donnée de $\mathfrak{z} = \mathfrak{z}_{u} \times \mathfrak{z}_{m}$ [et de l'extension $Z$, telle que $Z_{\mathrm{aff}} = 1$] équivaut, par dualité : à la donnée d'un [couple] \struck{sous-espace} $(t, \Gamma)$ d'un sous-espace vect.\ de $H^{1}(A, \underline{O}_{A}) = t_{\underline{\mathrm{Pic}}_{A/k}}$ et d'un sous-groupe constant tordu \struck{de t.\ f.} \struck{de pt \ill{}} à engendrement fini de $\underline{\mathrm{Pic}}_{A/k}$)
+
+2°) $k$ de car.\ $p > 0$. Alors, \struck{si} il est bien connu que $(Z_{\mathrm{aff}})_{u}$ \struck{est} est isogène à $\mathfrak{z}_{u}$, ce qui montre que si $(Z_{\mathrm{aff}})_{u} = 0$, $\mathfrak{z}_{u}$ est fini, bien plus : \ill{} \ill{} [un] groupe alg.\ comm.\ finis unipotents $D(\mathfrak{z}_{u})$, \struck{\ill{}} correspondant par dualité exactement aux groupes alg.\ comm.\ \emph{radiciels}. \struck{$\varphi_{0} \colon D(\mathfrak{z}_{u})$}
+\note{fin de paragraphe très raturée : les deux mots après « bien plus : » ne se lisent pas, « un » est ajouté au-dessus de la ligne, et une ligne entière est biffée avant « correspondant par dualité ».}
+
+Ici la donnée de $\varphi$ équivaut à
+\[
+  \varphi_{0} \colon D(\mathfrak{z}_{u}) \longrightarrow \underline{\mathrm{Pic}}_{A/k}
+  \quad (\text{se factorise par } \underline{\mathrm{Pic}}^{0} = A^{*} \text{ et même par } \widehat{A^{*}})
+\]
+\[
+  \varphi_{1} \colon \Gamma \longrightarrow \underline{\mathrm{Pic}}_{A/k}
+\]
+et la condition $Z_{\mathrm{aff}} = 1$ équivaut à : $\varphi_{0}$ et $\varphi_{1}$ injectifs.
+(Donc la donnée de $\mathfrak{z} = \mathfrak{z}_{u} \times \mathfrak{z}_{m}$, $\mathfrak{z}_{u}$ fini, et de l'ext.\ $Z$ équivaut à la donnée d'un couple $(\tau, \Gamma)$, d'un sous-groupe alg.\ radiciel $\tau$ de $\underline{\mathrm{Pic}}_{A/k}$ et d'un sous-groupe constant tordu $\Gamma$ de $\underline{\mathrm{Pic}}_{A/k}$, \uncertain{tq} avec
+\[
+  D(\mathfrak{z}) = \tau \times \Gamma \hookrightarrow \underline{\mathrm{Pic}}_{A/k}
+\]
+\note{la parenthèse ouverte avant « Donc » n'est pas refermée sur la page.}
+
+\page{43}
+\emph{NB} Les groupes $\mathfrak{z}$ qui peuvent intervenir (pour $G$ convenable satisfaisant la condition de Chevalley) sont \struck{ceux} les groupes alg.\ comm.\ affines pour lesquels a) $\exists$ mono [central] $\mathfrak{z} \hookrightarrow L$, avec $L$ lisse connexe affine --- tjrs vérifié, et ce avec $L$ commutatif --- ce qui donne un $G$ commutatif --- et b) $\exists$ schéma abélien $A$ et mono $D(\mathfrak{z}) \hookrightarrow \underline{\mathrm{Pic}}_{A/k}$ \struck{ce qui \ill{}} [ce qui] (pour $k$ alg.\ clos, pour simplifier)
+\begin{enumerate}
+  \item[1°)] si car.\ $k = 0$ \struck{\ill{}} est \emph{tjrs} vérifié
+  \item[2°)] Si car.\ $k = p > 0$, est vérifié ssi $\mathfrak{z}_{u}$ fini.
+\end{enumerate}
+\marginal{(\uncertain{attire notre attention sur ce fait, qui distingue ici les caractéristiques})}
+\note{ligne entourée, écrite en travers sous le 2°) et reliée à « est vérifié » par un trait ; lecture incertaine dans son ensemble.}
+
+\emph{NB} Ceci \struck{montre} [\uncertain{prouve}] \struck{que} la construction de $G_{\mathrm{aff}}$ \struck{n'est pas \ill{}} [\ill{} un $G$] groupe affine lisse à fibres connexes sur base $S$…) n'est pas de nature « constructible » en \emph{général}. Prenons p.\ ex.\ pour $G$ une extension d'un schéma abélien $A$ par $\mathbb{G}_{a}$, non triviale en un pt maximal $y$ de $S$ de car.\ $0$, donc $(G_{y})_{\mathrm{aff}} = 1$, cependant avec \emph{triviale} [\uncertain{sur}] spécialisation $s$ de $y$ de car.\ $p > 0$, on aura $(G_{s})_{\mathrm{aff}} \simeq \mathbb{G}_{a}$.
+Par contre, cela montre en même temps qu'en égales car.\ résiduelles, c'est une construction [de nature] « constructible ».
+\note{le début du paragraphe est raturé : après $G_{\mathrm{aff}}$ trois mots biffés (« n'est pas … ») sont remplacés par une addition interlinéaire dont se lit seulement « un $G$ ». La parenthèse fermante après « base $S$… » est sur la page sans parenthèse ouvrante.}
+
+\emph{Reformulation.} Il est maladroit de prendre $\mathfrak{z} \subset \underline{\mathrm{Cent}}(L)$ et \emph{mono} $D(\mathfrak{z}) \hookrightarrow \underline{\mathrm{Pic}}_{A/k}$, il vaut mieux dire qu'on donne
+\begin{enumerate}
+  \item[A)] groupe alg.\ affine lisse connexe $L$ et V.A.\ $A$
+  \item[B)] Extension de $A$ par $\underline{\mathrm{Cent}}(L)$ i.e.\ hom.
+  \[
+    D(\underline{\mathrm{Cent}}(L)) \longrightarrow \underline{\mathrm{Pic}}_{A/k}
+  \]
+\end{enumerate}
+L'avantage de la présentation adoptée plus haut semble uniquement dans le fait qu'elle permet d'expliciter la donnée B) sans faire intervenir des « choses » à la \uncertain{Cantor} trop \emph{dégueulasses} —
+\note{la page s'arrête sur ce tiret ; la suite du lot change de sujet.}
+
+\section{Fourbis auxiliaires cohomologiques pour groupes formels}
+\note{titre de sa main, seul sur le feuillet 44, qui sert de couverture à la suite. Les feuillets 45 à 53 sont paginés par lui de 1 à 7 (45 = 1, 46 = 2, 48 = 3, 50 = 4, 51 = 5, 52 = 6, 53 = 7).}
+
+\page{45}
+\note{sa p.~1.}
+
+I : $(N, M, d, \Theta) = \mathcal{C}$
+\struck{\ill{} $\longrightarrow \underline{\mathrm{Aut}}_{\mathrm{gr}}(\ill{})$}
+\struck{\ill{} $\longrightarrow$ \ill{}}
+
+II : $(N', M', d', \Theta') = \mathcal{C}'$
+
+III : $(*)$
+$\begin{cases} \pi_{0}(\mathcal{C}) \simeq \pi_{0}(\mathcal{C}') \\ \pi_{1}(\mathcal{C}) \simeq \pi_{1}(\mathcal{C}') \end{cases}$
+compatibles avec op.\ des $\pi_{0}$ sur $\pi_{1}$
+\note{I, II, III sont trois données réunies par une accolade ; deux lignes lourdement biffées suivent I. Les primes de II sont écrits en surcharge, et un indice (\uncertain{1}) sur $\mathcal{C}'$ est biffé.}
+
+on \uncertain{veut} reconstituer \uncertain{resp.} $K = G/\mathfrak{z} \simeq \operatorname{Im}(G \to M \times M')$ et $H = \operatorname{Im}(N \times N' \to G)$
+
+\begin{tikzcd}[column sep=small, row sep=small]
+& N \cap N' = \mathfrak{z} = \pi_1 \arrow[dl, no head] \arrow[dr, no head] & \\
+N \arrow[dr, no head] \arrow[ddr, no head, bend right=50, "M^{\prime}"'] & & N' \arrow[dl, no head] \arrow[ddl, no head, bend left=50, "M"] \\
+& NN' = H \arrow[d, no head] & \\
+& G &
+\end{tikzcd}
+
+\note{schéma en haut à droite de la page, sans flèches : les deux arcs extérieurs, marqués $M'$ et $M$, joignent $N$ et $N'$ à $G$ ($M' = G/N$, $M = G/N'$). « $NN' = H$ » est écrit sur un « $MM'$ » effacé. Le « 3 » bouclé $\mathfrak{z}$ désigne ici $N \cap N' = \pi_1$.}
+
+\begin{tikzcd}[column sep=tiny, row sep=small, nodes={font=\scriptsize}]
+& (N \times N' \to G,\; D_1,\; \Theta_1) \arrow[dl] \arrow[dr] & \\
+(N, M, d, \Theta) \arrow[dr] & & (N', M', d', \Theta') \arrow[dl] \\
+& (G,\; M \times M',\; D_2,\; \Theta_2) &
+\end{tikzcd}
+
+$(H, K, D, \Theta)$
+
+$1 \to \mathfrak{z} \hookrightarrow H \subset G$
+\note{deux crochets relient $\mathfrak{z}$ à $G$ par-dessus et $1$ à $H$ par-dessous.}
+
+\begin{tikzcd}[column sep=small, row sep=small]
+H \arrow[rrr, bend left=20] & N \times N' \arrow[l] \arrow[r] & M \times M' \arrow[d] & K \arrow[l, hook'] \arrow[d] \\
+\pi_1 \arrow[u] & \pi_1 \times \pi_1 \arrow[l, "\text{épi}"'] \arrow[u] & \pi_0 \times \pi_0 \arrow[r] & \pi_0
+\end{tikzcd}
+
+\note{le carré de gauche est marqué « cocart », celui de droite « cart » ; la grande flèche courbe va de $H$ à $K$.}
+
+$(\alpha, \alpha').(\lambda, \lambda') = (\alpha.\lambda, \alpha'.\lambda')$
+
+$(\alpha, \alpha').(\lambda, -\lambda) = (\alpha.\lambda, -\alpha'\lambda)$
+
+Obstruction dans $H^{3}(B_{\pi_0}/X, \pi_1)$
+
+Indétermination dans $H^{2}(B_{\pi_0}/X, \pi_1) = \underline{\mathrm{Extop}}(\pi_0, \pi_1)$
+
+\struck{\ill{}}
+\begin{itemize}
+  \item $N'$ central (i.e.\ $N' \subset \underline{\mathrm{Cent}}(G)$) $\Longleftrightarrow$ $\Theta' \colon M' \to \underline{\mathrm{Aut}}_{\mathrm{gr}}(N')$ trivial ($d' \to N'$ \ill{})
+  \item $N$ cocentral $\Longleftrightarrow$ $M'$ commutatif i.e.\ $N \supset DG$
+\end{itemize}
+\note{les deux lignes sont réunies par une accolade ; « i.e.\ $N' \subset \underline{\mathrm{Cent}}(G)$ » est entouré au-dessus de la première. La fin de la première ligne passe sous les lignes verticales de la marge.}
+
+L'une des deux conditions signifie que la donnée de $\mathcal{C}'$ se réduit : la donnée des groupes comm.\ $N'$ et $M'$ et un hom
+\[
+  N' \xrightarrow{\;d'\;} M'
+\]
+sans plus. Cela signifie que l'opération de $\pi_0'$ sur $\pi_1'$ est triviale, donc item pour $\pi_0$ sur $\pi_1$ (condition à vérifier sur $\mathcal{C}$). \struck{Ceci} dit, la donnée des
+$\begin{array}{|l} N' \xrightarrow{d'} M' \quad d(x') \text{ central} \\ N' \text{ commutatif} \end{array}$
+\uncertain{nous}. $(*)$ est sans conditions de compatibilité \uncertain{supplémentaire}
+\note{la donnée « $N' \to M'$, $d(x')$ central, $N'$ commutatif » est encadrée ; une rature la traverse. Le mot final est surchargé.}
+\note{dans la marge de droite, quelques lignes en allemand écrites verticalement, en partie biffées, sans rapport apparent avec la page ; non transcrites.}
+
+\page{46}
+\note{sa p.~2.}
+
+Condition pour que $N' = \underline{\mathrm{Cent}}\, G$
+
+*) Il faut que $N' \subset \underline{\mathrm{Cent}}\, G$, i.e.\ op.\ [$\Theta'$] de $M'$ sur $N'$ triviale ($\Longrightarrow$ $N'$ commutatif et $d'(N') \subset \underline{\mathrm{Cent}}(M')$)
+
+b) D'ailleurs, l'image \uncertain{du} centre de $G$ dans $K$ [$= G/\pi_1$] \struck{\ill{}} contenue dans $\underline{\mathrm{Cent}}(K) \supset N'/\pi_1$, i.e.\ son image dans $M$ contenue dans $\underline{\mathrm{Cent}}(K)/(N'/\pi_1)$, et aussi dans $\operatorname{Ker}(\Theta \colon M \to \underline{\mathrm{Aut}}_{\mathrm{gr}}(N))$. Soit
+\[
+  \mathfrak{Z} = \struck{\underline{\mathrm{Cent}}(M)}\ [\underline{\mathrm{Cent}}(K)/(N'/\pi_1)] \cap \operatorname{Ker}\Theta
+  \qquad (N' \subset \underline{\mathrm{Cent}}(G) \subset \overline{N'})
+\]
+\note{« $K$ » est écrit sur une autre lettre ; au-dessus, « $= G/\pi_1$ » et un mot biffé. « $\underline{\mathrm{Cent}}(K)/(N'/\pi_1)$ » est entouré en bout de ligne, puis récrit au-dessus de $\underline{\mathrm{Cent}}(M)$ biffé dans la définition de $\mathfrak{Z}$. La lettre $\mathfrak{Z}$ rend son grand Z gothique, distinct du « 3 » bouclé de la page 45.}
+
+et soit $\overline{N'}$ [le sous-groupe invariant de $G$ \ill{}] \struck{son} image inverse (dans $G$, qui est donc une extension de $\mathfrak{Z}$ par $N'$. L'opération de $G$ sur $\overline{N'}$, via $M$, par automorphismes \struck{int} intérieurs, est triviale sur $N'$ et sur $\mathfrak{Z} = \overline{N'}/N'$ (car $\mathfrak{Z} \subset \underline{\mathrm{Cent}}(M)$), donc se définit par un hom
+\[
+  M \longrightarrow \underline{\mathrm{Hom}}_{\mathrm{gr}}(\mathfrak{Z}, N') \qquad \struck{Z^{1}(\ill{}, \pi_1)}
+\]
+prenant en fait ses valeurs dans $\underline{\mathrm{Hom}}_{\mathrm{gr}}(\mathfrak{Z}, \pi_1)$ (lequel, par construction de $\mathfrak{Z}$, est aussi trivial sur $d(N) \subset M$ ($\mathfrak{Z} \subset \operatorname{Ker}\Theta$). Donc l'hom se factorise en
+\[
+  \varphi_G \colon \pi_0 \longrightarrow \underline{\mathrm{Hom}}_{\mathrm{gr}}(\mathfrak{Z}, \pi_1) \qquad \struck{Z^{1}}
+\]
+qui s'interprète [aussi] \struck{comme}
+\[
+  \Psi_G \colon \mathfrak{Z} \longrightarrow \underline{\mathrm{Hom}}_{\mathrm{gr}}(\pi_0, \pi_1) \qquad \struck{\ill{}}
+\]
+Soit $\mathfrak{Z}_G = \operatorname{Ker}\Psi_G$, et $\overline{N'}_G$ l'image inverse de $\mathfrak{Z}_G$ dans $G$, il est clair alors que
+\[
+  \overline{N'}_G = \underline{\mathrm{Cent}}(G)
+\]
+donc $N' = \underline{\mathrm{Cent}}(G)$ équivaut à la condition
+\[
+  \boxed{\mathfrak{Z}_G = \operatorname{Ker}\Psi_G = 1 \quad \text{i.e.\ } \Psi_G \text{ injectif}}
+\]
+Soit $G_1$ une deuxième sol.\ du pb initial, déduite de $G$ par une extension \struck{\ill{}} $E$ de $\pi_0$ par $\pi_1$ (op.\ triviale de $\pi_0$ sur $\pi_1$ i.e.\ extension centrale).
+
+\marginal{\struck{$\mathfrak{Z} = \operatorname{Ker}\Theta \cap \underline{\mathrm{Cent}}\,M$ \ill{}} ; $\hat{M} \simeq G/N'$ ; $Z^{1}(\pi_0, \pi_1)$ ; $\mathfrak{Z} \subset \operatorname{Im}\underline{\mathrm{Cent}}(K)$}
+\note{notes écrites en oblique dans la marge de gauche, en face de la définition de $\overline{N'}$ ; lecture incertaine dans le détail. L'addition interlinéaire sur « le sous-groupe invariant de $G$ » se termine par deux mots illisibles.}
+
+\page{48}
+\note{sa p.~3 ; la page 47 intercalée n'est pas de sa main.}
+\[
+  1 \to \pi_1 \to E \to \pi_0 \to 1
+\]
+Les automorphismes intérieurs de $E$ sont l'identité sur $\pi_0$ et $\pi_1$, donc définissent des hom $\pi_0 \to \pi_1$, on trouve ainsi un accouplement
+\[
+  c_E = c_{G, G_1} \colon \pi_0 \times \pi_0 \longrightarrow \pi_1
+\]
+(associant à $x, y \in \pi_0$ $\bar{x}\bar{y}\bar{x}^{-1}\bar{y}^{-1}$ [$\in \pi_1$], où $\bar{x}, \bar{y}$ relèvements de $x$ et $y$) C'est une forme alternée, nulle ssi l'extension $E$ est commutative. On doit trouver, au \emph{signe} près
+\[
+  \Psi_{G_1} = \Psi_G + \struck{\beta}\, \tilde{c}_E\, \alpha
+\]
+où $\tilde{c}_E \colon \pi_0 \to \underline{\mathrm{Hom}}(\pi_0, \pi_1)$ est défini de façon évidente par $c_E$ (choix de \uncertain{ce droit ou à gauche} [\uncertain{changement}] \struck{\ill{}} d'un \emph{signe} !), $\alpha$ l'hom \uncertain{de passage au quotient}
+\[
+  \underbrace{\mathfrak{Z} \to M \to \pi_0}_{\alpha}
+\]
+\struck{$\beta \colon \underline{\mathrm{Hom}}(\pi_0, \pi_1) \to \underline{\mathrm{Hom}}(\pi_0, N')$ déduit de l'inclusion $\pi_1 \to N'$.} Il faut donc se borner aux $G_1$ \uncertain{i.e.} aux $E$ pour lesquels $c_E$ est tel que
+\[
+  \Psi_G + \struck{\beta}\, \tilde{c}_E\, \alpha \colon \mathfrak{Z} \longrightarrow \underline{\mathrm{Hom}}(\pi_0, \pi_1)
+\]
+soit \emph{injectif}.
+\note{la parenthèse sur le choix du signe est très abrégée ; seul « d'un signe ! » est sûr. Le $\beta$ est biffé dans les deux formules, en accord avec la ligne biffée qui le définissait.}
+
+\marginal{\emph{NB} on suppose $\pi_0$ commutatif ici. Que dire sinon ? Regarder l'image $\pi_0^{*}$ de $\mathfrak{Z}$ dans $\pi_0$, invariant et commut., on trouve $\pi_0^{*} \times \pi_0 \to \pi_1$}
+\note{note écrite en oblique dans le coin supérieur gauche, en face de la définition de $c_E$.}
+
+On peut simplifier encore les conditions, en notant \struck{\ill{}} que le composé
+\[
+  \mathfrak{Z} \xrightarrow{\;\Psi_G\;} \underline{\mathrm{Hom}}(\pi_0, N') \longrightarrow \underline{\mathrm{Hom}}(\pi_0, N'/\pi_1)
+\]
+ne dépend pas du choix de $G_1$ : c'est
+\note{ce dernier paragraphe est annulé par deux traits obliques ; il se poursuit, annulé de même, en tête de la page 50 (sa p.~4). L'étiquette de la première flèche est surchargée.}
+
+\page{50}
+\note{sa p.~4 ; la page 49 intercalée n'est pas de sa main. Le haut de la page, jusqu'à « Soit $\mathfrak{Z}_0 = \operatorname{Ker}\varphi_0$ », est annulé par des traits obliques, comme la fin de la page 48 qu'il continue.}
+
+clair sur la formule précédente donnant $\Psi_{G_1}$ en termes de $c_E$, mais on peut définir un hom
+\[
+  \varphi_0 \colon \mathfrak{Z} \longrightarrow \underline{\mathrm{Hom}}(\pi_0, N'/\pi_1)
+\]
+en termes des données de départ (I II III) qui définissent en effet le groupe $K = G/\pi_1$ [\uncertain{ext.} de $M$ par $N'/\pi_1$] \ill{}, d'où comme précédemment
+\[
+  M \longrightarrow \underline{\mathrm{Hom}}(\mathfrak{Z}, N'/\pi_1)
+\]
+se factorisant par $\pi_0$, i.e.
+\[
+  \mathfrak{Z} \xrightarrow{\;\varphi_0\;} \underline{\mathrm{Hom}}(\pi_0, N'/\pi_1).
+\]
+Soit $\mathfrak{Z}_0 = \operatorname{Ker}\varphi_0$
+\note{l'insertion « ext. de $M$ par $N'/\pi_1$ » est reliée par un trait au mot « $K$ » ; un mot interlinéaire au-dessus d'elle et un petit symbole au-dessus de « se factorisant » ne se lisent pas.}
+
+\marginal{$\mathfrak{Z} \to \struck{\ill{}}\ \underline{\mathrm{Hom}}(\pi_0, \pi_1)$ ; $\mathfrak{Z} \supset \mathfrak{Z}_0$ ; $\mathfrak{Z}/\mathfrak{Z}_0 = \pi_0^{*} \subset \pi_0$ ; $\pi_0^{*} \hookrightarrow \underline{\mathrm{Hom}}(\pi_0, \pi_1)/\mathfrak{Z}_0$ (inj)}
+\note{notes écrites verticalement dans la marge de gauche, traversées par les traits d'annulation ; « inj » est entouré.}
+
+\note{à droite, isolé, un petit schéma : $\underline{K} \to \Sigma$ et une flèche montant de $\underline{I}$ vers $\underline{K}$ ; lecture incertaine.}
+
+On peut diviser un peu plus en introduisant
+\[
+  \mathfrak{Z}_0 = \operatorname{Ker}(\mathfrak{Z} \to \pi_0)
+\]
+et l'hom induit par $\Psi_G$
+\[
+  \Psi_{0\struck{G}} \colon \mathfrak{Z}_0 \longrightarrow \underline{\mathrm{Hom}}(\pi_0, \pi_1).
+\]
+\marginal{$= \struck{\ill{}}\ d(\underline{\mathrm{Cent}}(N)) \cap d^{-1}(\underline{\mathrm{Cent}}\,M) = d(\underline{\mathrm{Cent}}\,N) \cap \underline{\mathrm{Cent}}(M) \simeq \underline{\mathrm{Cent}}(N)/\pi_1 \cap \underline{\mathrm{Cent}}\,M$}
+\note{addition à droite de la définition de $\mathfrak{Z}_0$, d'une encre plus foncée, sur trois lignes ; « $d^{-1}$ » est une lecture incertaine.}
+
+On trouve que la définition de celui-ci ne dépend pas du choix de $G_1$, mais peut se faire en termes des groupes $H$ et $N, N' \subset H$ (construits par les données I II III). Une condition préliminaire indépendante de $G_1$ (i.e.\ de $E$) est que (b) $\Psi_0$ soit \emph{injective} --- cela exprime que $N'$ est \emph{égal} au centre de $H$, $N' = \underline{\mathrm{Cent}}(H)$. Ceci étant supposé acquis, \struck{posons} soit
+\marginal{(\uncertain{condition} ?)}
+\note{le paragraphe est marqué d'une accolade et d'un point d'interrogation dans la marge de gauche, avec la mention entre parenthèses ; « (b) » est entouré. « étant supposé acquis » est ajouté sous la ligne.}
+
+\page{51}
+\note{sa p.~5.}
+\[
+  \overline{\Psi}_{G_1} \colon \mathfrak{Z}/\mathfrak{Z}_0 = \pi_0^{*} \longrightarrow \underline{\mathrm{Hom}}(\pi_0, \pi_1)/\mathfrak{Z}_0
+\]
+déduit de $\Psi_{G_1}$ par passage au quotient. La condition à exprimer encore est
+
+c) $\overline{\Psi}_{G_1}$ est \emph{injective}
+
+Cette condition dépend effectivement de $G_1$ à priori, puisque $\Psi_{G_1}$ donc $\overline{\Psi}_{G_1}$ en dépend (de la manière explicitée plus haut). Cette condition sur $G_1$ i.e.\ sur $E_G \in \operatorname{Ob}\underline{\mathrm{Extop}}(\pi_0, \pi_1)$
+\marginal{(condition ?)}
+\note{la phrase reste inachevée ; un double trait la sépare de la suite.}
+
+On veut exprimer maintenant $N = DG$. Donc
+
+a) $N \supset DG$ i.e.\ $M'$ ($= G/N$) \emph{commutatif} ($\Longrightarrow$ $\pi_0$ commutatif)
+
+Il faut exprimer ensuite que pour tout sous-groupe [invariant] $N_1 \subset N$ tel que $G/N_1$ commutatif, on a $N_1 = N$. $G/N_1$ commutatif \emph{signifie} que $G$ y opère trivialement, cela implique qu'il opère [\uncertain{et} \ill{}] trivialement sur $N/N_1$ (où $G$ opère sur $N$ (\uncertain{donc} $N/N_1$) via $M$, donc la condition est que \struck{\ill{}} $N/N_1$ est majoré par $\mathcal{D} = (N_{\mathrm{comm}})_{M}$ [$= N/N_0$ si $N_1 \supset N_0$] [. Comme] donc dans l'extension [$G/N_0$] de $G/N = M'$ par $\mathcal{D}$, $G$ y opère, [en induisant l'id.\ sur les facteurs], d'où un hom
+\[
+  G \longrightarrow \underline{\mathrm{Hom}}(M', \mathcal{D})
+\]
+d'ailleurs nul sur $N$, d'où hom
+\[
+  M' \longrightarrow \underline{\mathrm{Hom}}(M', \mathcal{D})
+\]
+\note{passage chargé d'additions interlinéaires, dont une, au-dessus de « trivialement sur $N/N_1$ », ne se lit pas. La lettre $\mathcal{D}$ rend un D cursif à boucle, distinct du $D$ du groupe dérivé $DG$ ; il désigne les coinvariants sous $M$ de l'abélianisé de $N$, que la page écrit « $N_{\mathrm{comm}}\,\underline{M}$ » et la page 52 « $(N_{\mathrm{comm}})_M$ ».}
+
+\page{52}
+\note{sa p.~6.}
+ou encore
+\[
+  M' \times M' \xrightarrow{\;\lambda_G\;} \mathcal{D}
+\]
+C'est obtenu ainsi : si $x, y \in M'(\uncertain{S})$, on relève en $\bar{x}, \bar{y} \in G$, on prend $(\bar{x}, \bar{y}) = \bar{x}\bar{y}\bar{x}^{-1}\bar{y}^{-1}$, qui est dans $N$, on réduit mod $N_0$, et c'est $\lambda_G(x, y)$. \struck{Comme} [Si] $N'$ est central (\uncertain{ce qu'on a supposé}) cette description montre que si $\bar{x}$ ou $\bar{y}$ $\in d'(N') \subset M'$, alors \struck{\ill{}} $\lambda_G(x, y) = 0$, donc $\lambda_G$ s'interprète comme un hom
+\[
+  \pi_0 \otimes \pi_0 \xrightarrow{\;\lambda_G\;} \mathcal{D} = (N_{\mathrm{comm}})_{M}
+\]
+Notons aussi que $\lambda_G$ est alterné. Ceci posé, \struck{la condition} on a évidemment
+\[
+  N/DG \simeq \mathcal{D}/\lambda_G(\pi_0 \otimes \pi_0)
+\]
+donc la condition cherchée est que $\lambda_G$ \emph{est surjective}. Pour apprécier cette condition, il faut voir comment $\lambda_G$ varie avec $G$, on trouve (si $G_1$ est obtenu en utilisant l'extension $E$ de $\pi_0$ par $\pi_1$)
+\[
+  \lambda_{G_1} = \lambda_G + \beta c_E
+\]
+où $c_E \colon \pi_0 \otimes \pi_0 \to \pi_1$ est l'accouplement [(commut.)] associé à l'ext.\ centrale de $\pi_0$ par $\pi_1$, et où
+\[
+  \beta \colon \pi_1 \longrightarrow \mathcal{D} = (N_{\mathrm{comm}})_{M}
+\]
+est le passage au quotient. \struck{N\ill{}}
+
+Nous pouvons diviser la condition $\lambda_G$ \emph{surjective}, en introduisant encore
+
+\page{53}
+\note{sa p.~7.}
+$\mathcal{D}_0 = \operatorname{Coker}(\pi_1 \to \mathcal{D})$, et l'hom
+\[
+  \lambda_0 \colon \pi_0 \otimes \pi_0 \longrightarrow \mathcal{D}_0
+\]
+déduit de $\lambda_G$ par passage au quotient. C'est indépendant du choix de $G$, \uncertain{on le voit en ce qu'il} se construit directement dans le groupe $K = G/\pi_1$. Il faut donc
+
+b) $\lambda_0$ \emph{surjectif} (car signifie aussi que $N/\pi_1$ dans $K \subset M \times M'$ est $= DK$, ou encore que $dN = DM$ \ill{} exactement)
+\marginal{vérifier}
+
+\struck{\ill{}} Introduisons alors $\operatorname{Ker}\lambda_0 = P \subset \pi_0 \otimes \pi_0$, (indépendant de $G$), donc $\lambda_G$ induit
+\[
+  \overline{\lambda}_G \colon P \twoheadrightarrow \pi_{1*} = \operatorname{Im}(\pi_1 \to \mathcal{D}) \subset \mathcal{D}
+\]
+et la condition effectivement dépendante du choix de $G$ qu'\uncertain{on} veut exprimer est
+
+c) $P \xrightarrow{\;\overline{\lambda}_G\;} \pi_{1*}$ est un épim.
+
+Ici la dépendance de cette condition pour $G$ variable est explicitée grâce à la formule donnant $\overline{\lambda}_{G_1}$ en fonction de $\overline{\lambda}_G$, qui s'écrit de façon évidente
+\[
+  \overline{\lambda}_{G_1} = \overline{\lambda}_G + p\, c_E\, i
+\]
+$i$ l'inclusion $P \subset \pi_0 \otimes \pi_0$, $p$ la projection $\pi_1 \to \pi_{1*}$.
+\note{sur les deux premières occurrences de $\pi_{1*}$, un astérisque en exposant est biffé et remplacé par l'astérisque en indice. Dans « la formule donnant $\overline{\lambda}_{G_1}$ », l'indice est mal formé. La page, et le dossier, s'arrêtent ici.}
+
+\end{document}
