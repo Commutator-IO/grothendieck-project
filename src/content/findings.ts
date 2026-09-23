@@ -1453,4 +1453,113 @@ export const FINDINGS: Finding[] = [
     settle:
       'A person sets the typed faces of folder 14, pp. 3–15, beside those of folder 12, pp. 159–167, and compares typeface, paper, margins and running heads; a title or colophon on any folder 14 leaf would decide it. Folder 16, batch 2, lists a Brauer-group typescript among its typed versos without describing it, and is the next place to look.',
   },
+  {
+    id: '15-real-fibre-functor-criterion',
+    cote: '15',
+    pages: '116–118',
+    kind: 'mathematical',
+    claim:
+      'For a motivic category over ℚ with commutative band G, Tate character ε and weight cocharacter j with εj(λ) = λ², and U = Ker(ε|G°) with U° a compact torus, the folder shows that the category admits a fibre functor with values in real vector spaces if and only if U is connected, that otherwise U ≃ U° × μ₂, and hence that its even-weight subcategory, of group G/j(μ₂), always admits one.',
+    basis:
+      'Proposition 1 and Proposition 2 of page 116 state the two alternatives, each as three equivalent conditions; the page proves (iii) ⇒ (ii) of Proposition 1 by the existence of an alternating fundamental form (an object of odd degree has even rank over ℝ) and (i) ⇒ (iii) by H²(ℝ, T) = 0 for a compact torus T, then derives the Corollary on 𝓜^pair from j = 2j′, εj′ = id. Page 118 adds that, when a real fibre functor exists, its isomorphism classes form a torsor under H¹(ℝ, U) ≃ (ℤ/2)^{dim U}. The compactness of U° comes from the Riemann-algebra argument of pages 83–87.',
+    ours:
+      'Condition (ii) of both propositions is the edition’s. In Proposition 1 it is partly illegible (« ε est … dans l’ens. des caractères », one word illegible); in Proposition 2 the transcription reads « ε n’est pas un carré normalisé », which the reading inverts to « est un carré normalisé » because the page’s own remark that (ii) of 1 is the negation of (ii) of 2 requires it. The direction (iii) ⇒ (i) passes on the page through that (ii), and the reading supplies its link to (i) by computing the character group X(G°)/ℤε. In the key step H²(ℝ, T) = 0 the exponent is read doubtfully and « compact » is uncertain, and the word « normalisé » qualifying the fibre functor is a pencil addition the page does not define. The bijection of page 118 between real fibre functors and « structures polarisantes » is left out: the domain of i₁ is read μ₂ where the stated conditions look like those of μ₄, and the reading does not decide it.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Read Deligne and Milne, « Tannakian categories » (LNM 900, 1982) §5, on Tannakian categories over ℝ, polarisations and the remark on supersingular elliptic curves; Milne, « Motives over finite fields » (Motives, Proc. Sympos. Pure Math. 55.1, 1994) §§2–3, on fibre functors of the category of motives over 𝔽_q and its even-weight part; and Saavedra Rivano, Catégories tannakiennes (LNM 265, 1972) ch. V–VI. If the criterion « real fibre functor ⟺ Ker(ε|G°) connected », or the corollary for even weights, is stated there for commutative bands, mark matched.',
+  },
+  {
+    id: '15-brandt-picard-category',
+    cote: '15',
+    pages: '71–77',
+    kind: 'mathematical',
+    claim:
+      'For a Deuring category C over a Dedekind ring — equivalent to the invertible modules over an order 𝔬 in an algebra E whose automorphisms are all inner, and whose invertible two-sided (𝔬, 𝔬)-bimodules inside E commute — the folder puts on the 2-group Eqv(C) of autoequivalences a strictly commutative symmetric structure, by embedding bimodules in E and using LM = ML, proves that it does not depend on the object used to identify Eqv(C) with bimodules, and concludes that all Deuring categories of one type are torsor-categories under a single strict Picard category, the « catégorie de Picard de Brandt », the 2-category they form being equivalent to that of torsor-categories under it.',
+    basis:
+      'Page 73 states condition (C) and defines c : L ⊗_𝔬 M ≃ L′M′ = M′L′ ≃ M ⊗_𝔬 L through embeddings L ≃ L′ ⊂ E, M ≃ M′ ⊂ E, noting that the category of special bimodules has associativity and commutativity constraints that are identities; page 75 checks independence of the embeddings and proves the Proposition (independence of X) by L ↦ PLP⁻¹, « OK »; page 77, headed « Conclusion », states the strict Picard category ℬ, the torsor structure on each Eqv(C, C′), the equivalence of 2-categories ℬ₀ → torsor-categories under ℬ, and the compatibility with base change A → A′.',
+    ours:
+      'That condition (C) holds for maximal orders is the edition’s, citing Auslander–Goldman and Reiner: the page’s margin only believes it locally (« Je crois … cf. Auslander », read under reserve). The 2-categories ℬ₁, ℬ₂ of page 71 on which the construction rests are written fast, with several words illegible; the claim rests on pages 73–77, which read through.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Look for a symmetric — in particular strictly commutative — monoidal structure on the Picard groupoid of invertible bimodules of a maximal order, independent of a base object, in A. Fröhlich, « The Picard group of noncommutative rings, in particular of orders » (Trans. AMS 180, 1973), H. Bass, Algebraic K-theory (1968) ch. II, I. Reiner, Maximal Orders (1975) §§22 and 37, and the thesis of Hoàng Xuân Sính on Gr-catégories (1975). If the structure, or the description of these categories as torsors under one Picard category, is there, mark matched.',
+  },
+  {
+    id: '15-leaf-141-read-after-142',
+    cote: '15',
+    pages: '140–143',
+    kind: 'codicological',
+    claim:
+      'In § 1 of « Motifs essentiellement abéliens et théorie du corps de classes », the sentence cut at the foot of page 140 resumes at the head of page 142, and page 141, which sits between them, carries Corollary 1 and the proof of (iv) ⇒ (ii) and is to be read after page 142: the text order is 140, 142, 141, 143.',
+    basis:
+      'Page 140 ends « et E₁ (donc F) est un » and page 142 opens « s-groupe discret de rang r₁ + r₂ − 1 », completing the proof of (i) ⇒ (iii); page 142 then proves (iii) ⇒ (iv); page 141 opens « Pour expliciter la condition (iii) », states Corollaire 1 and ends with (iv) ⇒ (ii) « de la dernière assertion du corollaire »; page 143 opens with Corollaire 2.',
+    ours:
+      'The order is the transcription’s, recorded in the headers of batches 7 and 8 and followed by the reading. Whether page 141 is a separate sheet, as batch 8 describes it, or the back of page 140 written on afterwards, is not settled by the transcriptions.',
+    literature: [
+      'Transcription 15, batch 7 (batch-07.fr.tex), page 140 and its closing note',
+      'Transcription 15, batch 8 (batch-08.fr.tex), header and notes on pages 141 and 142',
+    ],
+    status: 'candidate',
+    settle:
+      'A person checks on the facsimile that page 140’s last line and page 142’s first line join, and whether page 141 is the verso of page 140 or a sheet of its own. If it is a verso, the « misplacement » is only the scan’s recto–verso order.',
+  },
+  {
+    id: '15-brauer-section-5-leaves',
+    cote: '15',
+    pages: '175, 178',
+    kind: 'codicological',
+    claim:
+      'Pages 178 and 175 are two leaves of a numbered handwritten redaction on the Brauer group, a § 5 with (5.1), Proposition 5.4, Corollary 5.5 and Theorem 5.6, to be read 178 then 175 although filed the other way, and the displayed isomorphism announced by page 178’s closing colon, together with the statement (5.3) that page 175 invokes, is on neither leaf.',
+    basis:
+      'Page 178 gives the exact sequence (5.1) 0 → 𝔾_{m,X} → R*_X → 𝒟iv_X → 0 and ends « isomorphisme de faisceaux étales : », with a margin « Démonstration du corollaire 5.4 »; page 175 opens « on tire aisément de (5.3.) », then states Proposition 5.4, Corollary 5.5 and Theorem 5.6 a), which breaks off. Both leaves sit among the calculations of the absolute cohomology of ℤ(n) (pages 172–177) and have no written link to them.',
+    ours:
+      'The reading adds that these statements are found, under another numbering, at the start of « Le groupe de Brauer II »; that comparison has not been made against the printed text for this entry. The margin of page 178 calls 5.4 a corollary where page 175 calls it a proposition; the entry records the mismatch and resolves nothing from it.',
+    literature: [
+      'Transcription 15, batch 9 (batch-09.fr.tex), header and pages 175 and 178',
+      'Modernised reading 15, section XI',
+    ],
+    status: 'candidate',
+    settle:
+      'A person checks on the facsimile that nothing below page 178’s colon or above page 175’s first line has been missed, then compares the leaves with § 1 of « Le groupe de Brauer II » (Séminaire Bourbaki 1965–66, exp. 297; Dix exposés sur la cohomologie des schémas, 1968) to see whether they are a draft of it and where the numbering diverges. The other leaves of the § 5, if they survive, would be in another folder of the fonds.',
+  },
+  {
+    id: '15-unites-leaf-other-hand',
+    cote: '15',
+    pages: '167',
+    kind: 'codicological',
+    claim:
+      'The leaf « Unités » is not in his hand: it is written in blue ink on squared, perforated paper, in a round and careful script unlike his on every other handwritten leaf of the folder, and it proves that every unit of a number field K ⊂ ℂ has a real power if and only if K is real or a CM field.',
+    basis:
+      'Transcription 15, batch 9, describes the hand of page 167 as « quite unlike his elsewhere in the batch » and transcribes the statement, its proof by comparing unit ranks, and the example ℚ(ζ); the proof keeps a leftover « [K : K′] = 2 » from a version in which the extension was assumed quadratic.',
+    ours:
+      'The description of the hand is the transcription’s and has not been compared with other hands in the fonds. That the statement is contained, for « weilien » fields, in Corollary 1 of page 141 is the reading’s remark, not the leaf’s.',
+    literature: [
+      'Transcription 15, batch 9 (batch-09.fr.tex), header and page 167',
+      'Modernised reading 15, section X',
+    ],
+    status: 'candidate',
+    settle:
+      'A person compares the hand of page 167 with his and with the other hands known in the fonds. Identifying the writer would say whether the leaf is a correspondent’s answer to a question of the folder or a stray. The pencil cover of page 179, which repeats the title of page 171, is the other leaf whose hand the transcription leaves undecided.',
+  },
+  {
+    id: '15-two-typescripts',
+    cote: '15',
+    pages: '58–62, 80–81',
+    kind: 'codicological',
+    claim:
+      'The « tapuscrit » of the folder’s title is three typed leaves from two different typescripts: « Catégories de Deuring », § 1 (p. 58), continued in his hand on pages 59–62, and « Localisation pour les variétés abéliennes », § 1 (pp. 80–81), which breaks off mid-sentence two-thirds down page 81 without reaching abelian varieties. Every other typed leaf in the folder is foreign material used as paper.',
+    basis:
+      'Page 58 is headed « Catégories de Deuring. » and « 1. Catégories A-linéaires et ⊗-enveloppes. », with typed and handwritten corrections; pages 59–62 continue its last handwritten sentence. Page 80 is headed « Localisation pour les variétés abéliennes. », § 1 a)–b), and page 81 gives c)–e), ending « et c’est une catégorie de Deuring, », with page 82 blank. The batch headers identify the other typed leaves as foreign: courses on analytic functions, an étale-cohomology typescript, English translations, Bourbaki drafts n° 370, 403, 413 and Tribu 59 and 99, typed errata to an exposé on groups of multiplicative type (p. 117), an administrative sheet dated 1.4.68 (p. 135) and a computer listing (p. 180).',
+    ours:
+      'Matching the inventory’s word « tapuscrit » to these three leaves is the edition’s, since the inventory does not say which leaves it means. That the two typescripts are two texts rests on their titles and on each opening a § 1. Nothing is claimed about which was typed first or whether the second was meant as a sequel to the first.',
+    literature: [
+      'Transcription 15, batches 3, 4 and 5 (batch-03, batch-04, batch-05.fr.tex), pages 58–62 and 80–81 and their headers',
+      'Transcription 15, batches 2 and 6–12, headers (the foreign typed leaves)',
+      'Modernised reading 15, header « Scope » and sections III and IV',
+    ],
+    status: 'candidate',
+    settle:
+      'A person compares typeface, paper and margins of page 58 with pages 80–81 on the facsimile. Further leaves of either typescript — a § 2 of « Catégories de Deuring », or the part of « Localisation » that reaches abelian varieties — would be looked for in the Montpellier inventory and the neighbouring folders of the group [10–18].',
+  },
 ];
