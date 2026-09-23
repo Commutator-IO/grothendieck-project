@@ -2217,4 +2217,39 @@ export const FINDINGS: Finding[] = [
     settle:
       'A person checks on the facsimile whether the cover of page 140 physically wraps pages 142–179, reads « top. » and the struck line, and compares the paper and ink of pages 156–179 with those of pages 142–154 and with the typescript of pages 117–136. A shared wrapper would make the reversed order one of filing, not of the titles; nothing of this would order the handwritten run and the typescript in time.',
   },
+  {
+    id: '104-pinned-posets-nonsingular-presheaves',
+    cote: '104',
+    pages: '12–16',
+    kind: 'mathematical',
+    claim:
+      'For a category M whose arrows are all monomorphisms and whose endomorphisms are all identities, the folder asserts that the presheaves on M which are unions of their subobjects isomorphic to objects of M are equivalent to « M-pinned » posets — a poset K with a strictly increasing type map τ_K to the poset of isomorphism classes and, for each ξ ∈ K of type n, an isomorphism u_ξ : I_n ≅ K_{≤ξ} from the poset of subobjects of the model, subject to τ_K ∘ u_ξ = τ_n and u_ξ ∘ u_y = u_{u_ξ(y)} — morphisms of presheaves corresponding to the type-preserving strictly increasing maps compatible with the pinnings and monomorphisms to the injective ones, and that this class is stable under sums and under amalgamated sums along monomorphisms, with X ↦ X̃ commuting to both.',
+    basis:
+      'Page 12 defines the subcategory 𝔹₀ of M̂ by two conditions and the pinning a), b) of the poset K = X̃ of model subobjects; page 13 writes the axioms (1) and (2), asserts that the category of admissible objects « est équivalente à » that of M-pinned posets, and describes the maps f : K → L by τ_L ∘ f = τ_K and a commutative triangle; page 14 treats injective f, closed subsets and the induced pinning; page 15 gives the gluing condition for pinnings given on the maximal elements; page 16 states the stability under sums and amalgamated sums, « de façon évidente », and the N.B. on objects of finite type. No proof is written. On page 13 the word just before « celle des ens. ordonnés M-épinglés » is illegible, « homs. » in « les flèches les homs. entre eux » is uncertain, and the sentence introducing the maps f reads « les objets quelconques de M̂ et leurs » followed by an illegible word, « se reconstituent également, ce sont les applications strictement croissantes », the last three words uncertain.',
+    ours:
+      'The reading renders that sentence as the description of the morphisms between admissible objects, which the page does not say in those words; it calls 𝔹₀ a full subcategory, and it sketches why the equivalence holds (every element of an admissible X is a monomorphism, and X is the colimit of its model subobjects indexed by K); the proof is not on the page. This pass reads the folder differently from the reading on one point and says so: the first condition of page 12 holds exactly when every element D_n → X is a monomorphism, the second then follows from (i) alone — a subpresheaf of a representable is a union of representables, as the reading itself notes for page 16 but not for page 12 — and K with its type map and pinning is then the category of elements of X, which (i) and (ii) make a poset. The asserted equivalence would then be the restriction of the classical equivalence between presheaves on M and discrete fibrations over M to the presheaves whose category of elements is a poset; the reading names face posets, CW posets and regular CW complexes but not this match. Written on Opus 5.5 against a reading made on Opus 5.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'First check that the M-pinned poset of X is its category of elements; if so, the general statement is the correspondence between presheaves and categories fibred in sets of SGA 1, exposé VI, restricted, and the entry should be marked matched with that reference. What would remain is only the order-theoretic form of the three cases of page 10 — non-singular semi-simplicial, semi-cubical and globular sets described by posets with pinnings. Look in A. Björner, « Posets, regular CW complexes and Bruhat order » (Europ. J. Combin. 5, 1984); R. P. Stanley, « f-vectors and h-vectors of simplicial posets » (J. Pure Appl. Algebra 71, 1991); F. Waldhausen, B. Jahren and J. Rognes, Spaces of PL Manifolds and Categories of Simple Maps (Annals of Math. Studies 186, 2013), on non-singular simplicial sets; and D.-C. Cisinski, Les préfaisceaux comme modèles des types d’homotopie (Astérisque 308, 2006), on skeletal categories. All are cited from memory. No web search was available for this pass (2026-09-23), so nothing has been read.',
+  },
+  {
+    id: '104-trial-sheets-undated-against-fair-copy',
+    cote: '104',
+    pages: '1–5, 6–16',
+    kind: 'codicological',
+    claim:
+      'Nothing in the folder dates the five trial sheets of pages 1–5 relative to the fair copy of pages 6–16: their place before it, and the reading of page 5 as a first state of pages 6–9, are orders of the binding and of the argument; the one physical fact recorded that bears on page 5 is that it is written on the back of a page of an English typescript which already sets B = (Gr-stacks) and calls B(0) the full subcategory of the base objects D_n, n ∈ N.',
+    basis:
+      'The transcription records pages 1–5 as five loose sheets written across the leaf on paper at hand — page 2 the back of an envelope addressed to him, pages 3 and 5 the backs of typed pages — and pages 6–16 as ink in portrait under his pagination 1 to 6. No leaf carries a date, and no postmark is recorded for the envelope. Its note on page 5 says the typed side sets B = (Gr-stacks), says that inductive limits there are computed componentwise, and calls B(0) the full subcategory of the base objects D_n, n ∈ N, all underlined. Page 5 names the poset of classes I and leaves the cube count as 1 + n·2 + … + 2ⁿ = (1 + 2)ⁿ; pages 6–10 name it with the barred N and write Card I_n = 3ⁿ. Neither run refers to the other.',
+    ours:
+      'The transcription’s header calls pages 1–5 « the same construction seen earlier and from further off », page 5 « the draft of pages 6 to 9 », and its cube count one « that page 10’s margin will reduce to Card I_n = 3^n »; the reading calls page 5 « le premier état des pages 6 à 9 » and repeats « que la page 10 réduira ». These take a change of notation and an unsimplified sum for an order of writing; the entry adopts neither. The reading compares « Gr-stacks » with Pursuing Stacks, « rédigé en anglais en 1983 », and says this is « un rapprochement et non une datation »; the entry leaves it there. Whether the typed side of page 5 was typed before the leaf was written on is not recorded; if it was, as with reused paper, the notes of page 5 are not earlier than that typed page. The transcription’s note says the typed page « nomme les D̃_n » while transcribing its objects as D_n underlined; the entry claims only the latter. No facsimile was consulted.',
+    literature: [
+      'Transcription 104, batch 1 (batch-01.fr.tex), header and pages 2, 3, 5 and 6',
+      'Modernised reading 104 (104.modern.tex), header and « Feuillets d’essai (pages 1 à 5) », page 5 and its footnote',
+    ],
+    status: 'candidate',
+    settle:
+      'A person checks the envelope of page 2 for a postmark, reads the typed sides of pages 3 and 5 in full, and looks for the page behind page 5 in the typescript of Pursuing Stacks. A match would bound the handwriting of page 5 below by that typed page, if the typing came first, and would say nothing about pages 6–16. Whatever is found, priority is not a claim this project makes, about anyone.',
+  },
 ];
