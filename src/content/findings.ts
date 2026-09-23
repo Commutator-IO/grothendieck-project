@@ -1690,4 +1690,78 @@ export const FINDINGS: Finding[] = [
     settle:
       'A person checks on the facsimile whether pages 50, 52 and 54 are the backs of pages 49, 51 and 53. If they are, the orientation notes were written on the backs of three copies of the typed page and are not earlier than it. The same person reads the heading, the « 82 » and the corrections. The typed page is then compared with the typescripts of Récoltes et semailles, part III (« La Clef du yin et du yang »), and of La Clef des songes, looking for a chapter XVIII or a section « Les épousailles ». A match would bound the date of the orientation leaves more closely than the inventory’s « [à partir de 1978-à partir de 1983] ».',
   },
+  {
+    id: '81-inventory-title-on-no-leaf',
+    cote: '81',
+    pages: '1, 13, 40',
+    kind: 'codicological',
+    claim:
+      'The inventory’s title for the folder, « Immersions du disque et de la circonférence », is written on none of the transcribed leaves and describes none of them: the folder’s three covers carry, in his hand, « Cartes sphériques en général » (p. 1), « Décompositions n-aires (et découpages) d’espaces topologiques » (p. 13) and « relations d’équi. non parallèles » (p. 40), and no leaf treats immersions.',
+    basis:
+      'The three transcriptions record pages 1, 13 and 40 as sheets otherwise blank, inscribed in pencil in his hand, whose words head the sections that follow. The rest of the folder is spherical maps and rational functions (pp. 2–5), drawings of discs cut by chords (pp. 9–11), cuts of a topological space and binary decompositions (pp. 14–39), non-crossing parts of a polygon (pp. 41–52) and the gluing of two maps along an edge (pp. 53–54). The leaves left untranscribed are described in batch 1’s header: pages 6–7 in another hand on Fermat’s last theorem, page 8 blank but for a faint pencilled name and dates, page 12 a table that is not mathematics; batch 2’s header gives page 30 as blank.',
+    ours:
+      'That no leaf treats immersions is the reading’s judgement of the whole, which the entry adopts. The reading’s conjecture that the title may point to S. Blank’s work on extending immersions of the circle to the disc, by way of the chords of pages 9–11, is its own, marked there as unsupported by the pages, and no part of the claim. Pages 8 and 12 are described in the header, not transcribed, so their words are not on record. No facsimile was consulted.',
+    literature: [
+      'Transcription 81, batches 1–3 (batch-01, batch-02, batch-03.fr.tex), headers and the notes on pages 1, 13 and 40',
+      'Modernised reading 81 (81.modern.tex), header « Scope » and the footnote to « Les stations »',
+    ],
+    status: 'candidate',
+    settle:
+      'A person looks on the facsimile for the title on every leaf, the untranscribed pages 6–8 and 12 and the backs of the covers included. If it is on none, the question goes to the Montpellier archives: whether it was read from an outer wrapper that was not digitised, or supplied by the cataloguers, in which case it would carry the brackets their other supplied titles carry.',
+  },
+  {
+    id: '81-dessins-dating-cannot-support-precedence',
+    cote: '81',
+    pages: '2–5, 12',
+    kind: 'codicological',
+    claim:
+      'Nothing in the folder dates the pages on spherical maps and « special » rational functions relative to Belyi’s theorem (1979), to La Longue Marche à travers la théorie de Galois (1981) or to the Esquisse d’un programme (1984): the one year the transcriptions record anywhere in the folder is 1981, the latest year of a table on page 12 that is not mathematics, and the inventory’s « [à partir de 1981] » is a lower bound for the shelfmark, not a reading of pages 2–5.',
+    basis:
+      'Batch 1’s header records that page 12 is a table in his hand, not mathematics, whose latest year, 1981, agrees with the archivists’ « [à partir de 1981] », and that page 8 carries faint pencilled dates read through the paper, which it does not give. Pages 2–5 carry no date; pages 3 and 5 are the versos of 2 and 4 and hold cancelled algebra and the second derivative of P/Q. The inventory’s title calls the folder « notes manuscrites (s.d.) ».',
+    ours:
+      'The reading names Belyi’s theorem and the Esquisse, footnotes that the inventory’s date makes it possible that he knew Belyi’s work while nothing on the page cites it, and notes that Belyi’s theorem is not needed in genus 0. Its résumé nevertheless calls page 2 « le point de départ » of what the Esquisse names dessins d’enfants; that is an order the folder does not date, and the entry does not adopt it. That page 12’s table is what the archivists dated the folder from is an inference, since they do not say. No facsimile was consulted.',
+    literature: [
+      'Transcription 81, batch 1 (batch-01.fr.tex), header and pages 2–5',
+      'Modernised reading 81 (81.modern.tex), résumé and the footnotes to « Le dictionnaire (page 2) »',
+    ],
+    status: 'candidate',
+    settle:
+      'Only physical evidence would settle it: whether pages 2–5 and page 12 share a paper or a sheet, what the dates of page 8 are, and a comparison with the dated texts where a person would look for the same observation — La Longue Marche (written in the first half of 1981), the Esquisse (January 1984), both dates cited from memory, and folder 88, whose page 15 the reading says stops at the same point for its maps of type (p, q). This entry exists to stop the next reader treating « [à partir de 1981] » as a date for page 2. Whatever is found, priority is not a claim this project makes, about anyone.',
+  },
+  {
+    id: '81-fermat-leaves-other-hand',
+    cote: '81',
+    pages: '6–7',
+    kind: 'codicological',
+    claim:
+      'Pages 6–7 are not in his hand: they carry an attempted proof of Fermat’s last theorem — a^q + b^q = c^q worked through Newton’s binomial expansion, with a boxed example for q = 2 (3-4-5) — in a rounded school hand, and concern nothing else in the folder.',
+    basis:
+      'Batch 1’s header describes pages 6–7 so and leaves them untranscribed as unrelated. They fall between the note on the Galois action (p. 4) with its cancelled verso (p. 5) and the blank page 8, which is followed by the drawings of discs cut by chords (pp. 9–11).',
+    ours:
+      'The description of the hand is the transcription’s and has not been compared with other hands in the fonds. The reading leaves the pages undescribed. No facsimile was consulted.',
+    literature: ['Transcription 81, batch 1 (batch-01.fr.tex), header'],
+    status: 'candidate',
+    settle:
+      'A person compares the hand of pages 6–7 with his and with the other hands known in the fonds, and establishes whether 6 and 7 are the two sides of one sheet and whether page 8, whose faint pencilled name and dates are read through the paper, belongs with them. That would say whether the sheet is a correspondent’s, a stray, or paper he reused.',
+  },
+  {
+    id: '81-cover-13-names-both-redactions',
+    cote: '81',
+    pages: '13–14, 30–31, 37',
+    kind: 'codicological',
+    claim:
+      'The pink cover of page 13 names two redactions, not one: its title, « décompositions n-aires … d’espaces topologiques », is the title of Version II (p. 31) and uses a term the folder defines only in Version II’s margin (p. 37), while « et découpages », added in interline, is the word of Version I (p. 14), which never speaks of n-ary decompositions.',
+    basis:
+      'Batch 1 records page 13 as a pink sheet, otherwise blank, inscribed in pencil « décompositions n-aires (et découpages) d’espaces topologiques », with « et découpages » added in interline; page 14, headed « Version I » over a struck « V », proposes to study « le “découpage” de X » and speaks only of binary and ternary partitions. Batch 2 records page 31 headed « Décompositions n-aires d’un espace topologique », with « Version II » in the margin, and the margin of page 37 naming a « décomposition n-aire » when card A = n; it also records page 30, just before, as a blank pink sheet.',
+    ours:
+      'The comparison of the words is the edition’s, made for this entry from the transcriptions; neither transcription nor the reading draws it, and the reading places the cover at the head of pages 13–24, Version I alone. Nothing is claimed about whether the cover was written before, with or after either redaction: the interlinear addition shows only that « et découpages » came after the rest of the cover’s title. No facsimile was consulted.',
+    literature: [
+      'Transcription 81, batch 1 (batch-01.fr.tex), header and pages 13–14',
+      'Transcription 81, batch 2 (batch-02.fr.tex), header and pages 31 and 37',
+      'Modernised reading 81 (81.modern.tex), « Les stations » and sections III and V',
+    ],
+    status: 'candidate',
+    settle:
+      'A person checks on the facsimile whether the pink sheets of pages 13 and 30 are the two halves of one folded chemise and, if so, which leaves it enclosed: pages 14–29 would put Version I and the unlabelled redaction of pages 25–29 under a title taken from Version II, with Version II itself outside. The same person compares the pencil of the title with that of « et découpages » and of the « Version I » on page 14.',
+  },
 ];
