@@ -1764,4 +1764,76 @@ export const FINDINGS: Finding[] = [
     settle:
       'A person checks on the facsimile whether the pink sheets of pages 13 and 30 are the two halves of one folded chemise and, if so, which leaves it enclosed: pages 14–29 would put Version I and the unlabelled redaction of pages 25–29 under a title taken from Version II, with Version II itself outside. The same person compares the pencil of the title with that of « et découpages » and of the « Version I » on page 14.',
   },
+  {
+    id: '133-centre-and-derived-group-from-two-crossed-modules',
+    cote: '133',
+    pages: '35–36, 45–53',
+    kind: 'mathematical',
+    claim:
+      'For a group G with normal subgroups N ⊃ D(G) and N′ ⊂ Cent(G), seen as two crossed modules N → G/N′ and N′ → G/N sharing π₁ = N ∩ N′ and π₀ = G/NN′, the folder shows that N′ = Cent(G) if and only if a map Ψ_G : ℨ → Hom(π₀, π₁) is injective, ℨ being a subgroup of G/N′ determined by the two crossed modules alone, and that N = D(G) if and only if an alternating pairing λ_G : π₀ ⊗ π₀ → (N_ab)_{G/N′} is surjective; and that when G is replaced by another group G₁ realising the same two crossed modules, obtained from a central extension E of π₀ by π₁, both maps change only through the commutator pairing c_E of E: Ψ_{G₁} = Ψ_G + c̃_E α up to sign, and λ_{G₁} = λ_G + β c_E.',
+    basis:
+      'Page 45 sets out the data — 𝒞 = (N, M, d, Θ), 𝒞′ = (N′, M′, d′, Θ′) and isomorphisms of their π₀ and π₁ compatible with the actions — and the groups H = NN′ and K = G/π₁ they determine, and it states, without proof, an obstruction in H³(B_{π₀}/X, π₁) and an indeterminacy H² = Extop(π₀, π₁). Page 46 defines ℨ = [Cent(K)/(N′/π₁)] ∩ Ker Θ, factors the action of G on the inverse image of ℨ through φ_G : π₀ → Hom(ℨ, π₁), reinterprets it as Ψ_G, and boxes « Ψ_G injectif » as equivalent to N′ = Cent(G). Page 48 defines c_E from the commutators of E and writes « On doit trouver, au signe près » Ψ_{G₁} = Ψ_G + c̃_E α. Pages 51–52 define 𝒟 = (N_comm)_M and λ_G by lifting commutators, write N/DG ≃ 𝒟/λ_G(π₀ ⊗ π₀) and λ_{G₁} = λ_G + β c_E. Pages 50–53 then split each condition into a part independent of G, b), and a part that depends on it, c). Pages 35–36, under « Solution », set the same problem for a formal group, with L₁ = Cent G and D₁ = D(G). The uncertain words (« du » centre on page 46, « de passage au quotient » for α and the parenthesis on the sign on page 48, the S of M′(S) on page 52) carry none of the formulas.',
+    ours:
+      'The reading supplies the hypothesis [N, N′] = 1, without which G/N′ does not act on N, and the additivity and nullity checks that make Ψ_G a homomorphism, which the page sums up as « triviale sur N′ et sur ℨ ». The formula for Ψ_{G₁} is announced by the page (« on doit trouver ») and verified by the reading. Condition b) of page 50, which the page states as N′ = Cent(H) with « (condition ?) » in the margin, is repaired by the reading to N′ = H ∩ Cent(G), so the claim leaves out the b)/c) splitting for Ψ. The obstruction and the indeterminacy are unproved on the page; their identification with Eilenberg–Mac Lane’s theory of extensions with non-abelian kernel is the reading’s, and neither is part of the claim. π₀ is taken commutative, as the margin of page 48 says and as N ⊃ D(G) forces. The reading’s closing reduction to linear algebra on alternating forms, through the surjectivity of H²(π₀, π₁) → Alt(π₀, π₁), is its own and is not claimed. On page 35 the labels L₀ and D₀ pair the wrong quotients, and the reading repairs them from the arcs of page 36.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'The obstruction in H³ and the torsor under H² are Eilenberg and Mac Lane’s (« Cohomology theory in abstract groups. II », Ann. of Math. 48, 1947) and Mac Lane and Whitehead’s (1950), so the question is only the part about the centre and the derived group. Look first at isoclinism, whose invariant is G/Cent(G), D(G) and the commutator map: P. Hall, « The classification of prime-power groups » (J. reine angew. Math. 182, 1940); F. R. Beyl and J. Tappe, Group Extensions, Representations, and the Schur Multiplicator (LNM 958, 1982), on central extensions and their commutator forms; N. S. Hekster, « On the structure of n-isoclinism classes of groups » (J. Pure Appl. Algebra 40, 1986). Then look in the crossed-module literature, R. Brown, P. J. Higgins and R. Sivera, Nonabelian Algebraic Topology (EMS, 2011), and in Hoàng Xuân Sính’s thesis, Gr-catégories (Paris VII, 1975; folder 135). All are cited from memory. If a group is described in any of them by these two crossed modules, with the conditions for its centre and derived group to be exactly N′ and N, mark matched. No web search was available for this pass (2026-09-23), so nothing has been read.',
+  },
+  {
+    id: '133-affine-quotient-not-constructible',
+    cote: '133',
+    pages: '42–43',
+    kind: 'mathematical',
+    claim:
+      'For smooth group schemes with connected fibres over a base of mixed characteristic, the largest affine quotient of the fibres does not vary constructibly: an extension G of an abelian scheme A by 𝔾_a that is non-trivial at a point y of characteristic 0 and trivial at a specialisation s of characteristic p has (G_y)_aff = 1 and (G_s)_aff ≃ 𝔾_a.',
+    basis:
+      'Page 43, in an NB, says that the construction of G_aff « n’est pas de nature « constructible » en général », gives this example, and adds that « en égales car. résiduelles » it is constructible, the last without argument. The example rests on page 42: in characteristic 0 the extension of A by 𝔷 given by φ : D(𝔷) → Pic has Z_aff = 1 exactly when φ is injective, so a non-trivial extension by 𝔾_a has no non-trivial affine quotient; at s the extension is A × 𝔾_a. The subject of the sentence is an interlinear addition of which only « un G » is read, « prouve » and « sur » are uncertain readings, and the page’s « groupe affine lisse à fibres connexes » contradicts its own example.',
+    ours:
+      'The reading reads « groupe lisse » for the page’s « groupe affine lisse », which the example, an extension of an abelian scheme, requires. It also sharpens the example: in characteristic p an extension of A by 𝔾_a never has trivial G_aff, by page 42’s « bien connu », which the page does not prove, so over a base dominating Spec ℤ the locus where G_aff is trivial lies in the characteristic-0 fibre. That sharpening is not part of the claim. Neither the page nor the reading exhibits such an extension; over ℤ_p, the class p·ω of a basis vector ω of H¹(A, 𝒪_A) gives one, a check made for this entry. The constructibility in equal residue characteristic is the page’s assertion and is not claimed.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'The difference between the characteristics is classical: in characteristic 0 a non-trivial extension of an abelian variety by a vector group can have trivial affine quotient, in characteristic p it cannot (M. Rosenlicht, « Extensions of vector groups by abelian varieties », Amer. J. Math. 80, 1958; M. Brion, « Anti-affine algebraic groups », J. Algebra 321, 2009). The question is whether the consequence for families is stated. Look in SGA 3, exposé VI_B, on affine quotients of group schemes over a base; in M. Raynaud, Faisceaux amples sur les schémas en groupes et les espaces homogènes (LNM 119, 1970); in Brion, « Some structure theorems for algebraic groups » (Proc. Sympos. Pure Math. 94, 2017); and in the work on anti-affine group schemes over a base. All are cited from memory. If the non-constructibility is stated in any of them, mark matched, and the equal-characteristic assertion becomes the thing to look up. No web search was available for this pass (2026-09-23), so nothing has been read.',
+  },
+  {
+    id: '133-dating-cannot-support-precedence',
+    cote: '133',
+    pages: '10–16, 23–26, 48–49',
+    kind: 'codicological',
+    claim:
+      'Nothing in the folder dates the pages on functors from finite sets and injections (pp. 23–26) relative to Joyal’s species (1981) or to the FI-modules of Church, Ellenberg and Farb (2015): the only dates the folder carries are the printed 1974 of the Laborde offprints (pp. 10–16) and 5 June 1975 on a typed notice (p. 49) filed within another run, and the inventory’s « 1974-[à partir de 1975] » gives the end of its range only as « à partir de 1975 ».',
+    basis:
+      'Batch 1’s header dates the offprints 24 June and 16 September 1974. Batch 3’s header records page 49 as an « avis de soutenance » of the USTL, dated Montpellier, 5 June 1975 and addressed to him, and pages 47 and 49 as the versos of 46 and 48, inside the run of pages 45–53 that he paginates 1–7. Batch 2’s header calls its five runs undated; pages 23–25 are in black ink and page 26 in blue, and no leaf of pages 17–28 carries a date. All three batches copy the inventory’s dating for the whole shelfmark.',
+    ours:
+      'The reading’s footnote on the distinguished functors says that species and FI-modules are « postérieurs de plusieurs années à la page, qui ne pouvait pas les connaître », and its résumé that these objects were studied « une quarantaine d’années plus tard ». Both presuppose a date for pages 23–26 that the folder does not give, and the entry does not adopt them. The reading’s own note on the notice, that it suggests only that the last run is not earlier than June 1975, is the limit of what the notice dates. Batch 3 infers that pages 47 and 49 are versos from his pagination running across them, which would hold equally for separate sheets filed between his; if they are separate, the notice dates nothing in his hand. No facsimile was consulted.',
+    literature: [
+      'Transcription 133, batch 1 (batch-01.fr.tex), header',
+      'Transcription 133, batch 2 (batch-02.fr.tex), header and pages 23–26',
+      'Transcription 133, batch 3 (batch-03.fr.tex), header',
+      'Modernised reading 133 (133.modern.tex), résumé, « Le fil du dossier » and the footnote on species and FI-modules in section III',
+    ],
+    status: 'candidate',
+    settle:
+      'Only physical evidence would narrow it: whether pages 47 and 49 are the backs of 46 and 48, whether the paper and ink of pages 23–26 match those of a dated leaf, and what the notice of page 49 announces. This entry exists to stop the next reader taking the inventory’s range, or the reading’s footnote, as placing pages 23–26 before species or FI-modules. Whatever is found, priority is not a claim this project makes, about anyone.',
+  },
+  {
+    id: '133-laborde-offprints-after-witt-run',
+    cote: '133',
+    pages: '7, 10–16',
+    kind: 'codicological',
+    claim:
+      'The two 1974 Comptes rendus notes of O. Laborde bound at pages 10–16 come directly after the run « Groupes de Witt et variantes », whose page 7 reports at second hand, « il paraît (Laborde dixit) », that (M, q) ⊕ (M, −q) is of the form E ⊕ Ě on an affine scheme without 2 being invertible; neither the transcriptions nor the reading record whether either note contains that statement.',
+    basis:
+      'Batch 1 records page 7’s sentence, with the interlinear « α(E) = » and the parenthesis saying that it fails on B_{O(n)}. Page 8 ends the run and page 9 is blank. Pages 10–12 are an offprint of a note on the Skolem–Noether theorem for graded Azumaya algebras over a semi-local ring (C. R. Acad. Sc. Paris 279, 16 September 1974, Série A, 447–449), and pages 13–16 one of « Formes quadratiques, algèbres de Clifford et signatures » (C. R. 278, 24 June 1974, Série A, 1599–1602), with nothing in his hand on any leaf, checked at 250 dpi and by an ink-colour count. The run that follows them (pp. 17–20) is on G-sets and does not mention quadratic forms.',
+    ours:
+      'The reading proves the statement attributed to Laborde by a bilinear lift of q, and that proof is not part of the claim. The reading says outright that, the offprints not being transcribed, it does not know whether the statement is in them. Nothing in the transcriptions shows whether the offprints are where he filed them or where the archivists put them. No facsimile was consulted.',
+    literature: [
+      'Transcription 133, batch 1 (batch-01.fr.tex), header, pages 6–7 and the note before page 17',
+      'Modernised reading 133 (133.modern.tex), section II, « Les tirés à part »',
+    ],
+    status: 'candidate',
+    settle:
+      'A person reads the two notes, on the facsimile or in the Comptes rendus, for the hyperbolicity of (M, q) ⊥ (M, −q) without 2 invertible. If it is there, that note is the likely source of « Laborde dixit » — a source, not a date, since « il paraît » may as well report a conversation. If it is not, the offprints bear on pages 5–8 only through their subject and their place in the folder.',
+  },
 ];
