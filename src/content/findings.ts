@@ -1634,4 +1634,60 @@ export const FINDINGS: Finding[] = [
     settle:
       'A person reads the circled numbers of pages 41–45 on the facsimile — whether « 17 » and « 21 » are « 1′ » and « 2′ », and whether « 10 » to « 12 » are 16 to 18 or a second series — and compares the paper of pages 44–45 with the tractor-feed sheets of pages 26–40. If the numbers stand as read, pages 41–43 belong to a second numbered redaction whose text happens to continue page 40, and its missing sheets should be looked for in the neighbouring folders of the group [66–89].',
   },
+  {
+    id: '68-orientation-stokes-axioms',
+    cote: '68',
+    pages: '49, 51',
+    kind: 'mathematical',
+    claim:
+      'On the groupoid of finite-dimensional real vector spaces, the folder defines a « theory of orientation » as a functor Ω to two-element sets with Ω(0) ≃ {±1} and, for every hyperplane W ⊂ V and half-space V′ bounded by W, a bijection St_{V′} : Ω(V) → Ω(W), natural in (V, V′), which changes by the involution of Ω(W) when V′ is replaced by the opposite half-space; and it shows that every morphism of such theories is an isomorphism and that any two theories are related by exactly one isomorphism, the action of GL(n, ℝ) on Ω(ℝⁿ) being forced to be sg ∘ det.',
+    basis:
+      'Page 49 states two lemmas on two-element sets, the data a)–c), the two axioms and their equivalent form « Ω(W, V) ∧ Ω(V) ≃ Ω(W) », and a Theorem: a) every morphism of theories is an isomorphism, b) between two theories there is a unique isomorphism, c) a theory exists; it proves a) and the uniqueness in b) by induction on the dimension through the Stokes maps. Page 51 reduces a theory in dimension n to a character ε_n of GL(n, ℝ) and a Stokes bijection ω_n → ω_{n−1} for the half-space ℝ^{n−1} × ℝ₊, writes the compatibility with its stabiliser as ε_n(u_n) = sg(λ) ε_{n−1}(u_{n−1}), and concludes ε_1 = sg and ε_n = sg ∘ det « de proche en proche »; a boxed passage, struck with a large cross, draws the conclusion that all ω_n are identified with {±1}.',
+    ours:
+      'The reading supplies the step that « de proche en proche » leaves out: every homomorphism GL(n, ℝ) → {±1} factors through the determinant, so ε_n is fixed by its values on diag(1, …, 1, λ). It reads « St_V » in the second axiom as St_{V′}, and the Stokes datum written « Ω(V, W) ∧ Ω(W) → Ω(W) » as … ∧ Ω(V) → Ω(W). The page first justifies the bijectivity of St by the cardinal alone, which does not suffice; the claim uses bijectivity as the axiom the page states. « Dem_{W,V} », the name of the set of half-spaces, is read under an erasure, and « vectoriels » and the margin word « choisi » on page 51 are uncertain; none carries the statement. Existence, c), is only the usual orientations and is not part of the claim; page 49 marks it « ? » and the conclusion that would give it is in the struck passage. The comparison of the page’s inward-last normalisation with the geometers’ outward-first convention, by a sign (−1)^{dim V}, is the reading’s and the entry does not use it.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'That Hom(GL(n, ℝ), {±1}) = {1, sg ∘ det} is classical, and so is the orientation torsor; the question is only whether orientation has been characterised, up to unique isomorphism, by axioms on its boundary (Stokes) maps for half-spaces. Look in Bourbaki’s treatment of the orientation of vector spaces over an ordered field (Algèbre), in P. Deligne and D. Freed, « Sign manifesto » (Quantum Fields and Strings: A Course for Mathematicians, vol. 1, AMS, 1999), in the discussions of boundary-orientation conventions in Bott–Tu, Differential Forms in Algebraic Topology, and in Greub, Linear Algebra, and, for the determinant analogue that page 55 prepares, in Knudsen–Mumford (Math. Scand. 39, 1976). All are cited from memory. If the characterisation is stated in any of them, mark matched. No web search was available for this pass (2026-09-23), so nothing has been read.',
+  },
+  {
+    id: '68-games-redactions-order',
+    cote: '68',
+    pages: '1, 3, 6, 23–28, 33',
+    kind: 'codicological',
+    claim:
+      'Of the two long redactions on positional games, the transcriptions support reading the pencil layer of the first (pages 1–13) as earlier than the second (pages 23–33): the second carries through, on pages 26–28, the well-ordering proof of the fixed-point theorem that the first begins on page 6 and cancels, and the first bears blue-ink corrections on pages 1 and 3 that bring its initiative map and its sets of non-terminal positions to the conventions the second uses from its first page.',
+    basis:
+      'Batch 1 records that page 6 is crossed by a long oblique stroke and that its argument — a well-order on R(x), winning strategies Σ_y, the least y(z) from which z is reached, a decreasing and so stationary sequence — breaks off at « Donc pour n assez grand ». Batch 2 records the same construction on pages 26–28, with reachability taken through Σ_{x₁}-parties, E(x), ε(x) = min E(x), carried to « absurde ». Batch 1 records that « ∖ C₀ » in the arrow i and in the decomposition of page 1 is added in blue ink, that the NB which the restriction made pointless is struck through in blue, and that « ∖ C₀(j) », « ∖ C̄₀(j) » and « R(x) ⊂ G(j) » on page 3 are blue additions; page 23 defines α on C ∖ C₀ and C̄(j) = (C ∖ C₀) ∖ C(j) from the start. Batch 2 records page 33, the last page of the second redaction, in blue ink.',
+    ours:
+      'The inference to an order is the edition’s, made for this entry. The reading says the order of the three redactions « n’est pas établi », and neither transcription proposes one. It is not claimed that the blue of pages 1 and 3 is the ink of page 33: the transcriptions say only « encre bleue », which they also use for pages 16, 20–21 and 49–53. The one-page third redaction (p. 47) has no bearing on the claim. No facsimile was consulted.',
+    literature: [
+      'Transcription 68, batch 1 (batch-01.fr.tex), pages 1, 3 and 6 and their notes',
+      'Transcription 68, batch 2 (batch-02.fr.tex), header and pages 23, 26–28 and 33',
+      'Modernised reading 68 (68.modern.tex), « Le fil du dossier » and sections I–II',
+    ],
+    status: 'candidate',
+    settle:
+      'A person compares on the facsimile the blue ink of the corrections on pages 1 and 3 with that of page 33 and of the other blue-ink leaves, and the paper of pages 1–13 with that of pages 23–33. A shared ink would make the corrections to the first redaction and the end of the second one campaign. Without it, only the textual argument remains: the second redaction completes the first’s cancelled proof, which does not by itself exclude a later pass over the first.',
+  },
+  {
+    id: '68-epousailles-typescript',
+    cote: '68',
+    pages: '49–54',
+    kind: 'codicological',
+    claim:
+      'The blue-ink notes on orientation, pages 49, 51 and 53, alternate with three copies of one typed page headed « XVIII Les épousailles (2) », a list of paired words such as « lumière et ombre » with handwritten corrections, and the orientation text runs straight across them from page 49 to 51 to 53.',
+    basis:
+      'Batch 3 records pages 50, 52 and 54 as three copies of a typescript page headed « XVIII Les épousailles (2) » (paired words: « lumière et ombre », …), with handwritten corrections, not mathematics and not transcribed, and says the orientation run continues p. 49 → p. 51 → p. 53 across them; page 51 opens with a note that it follows page 49 and that page 50 is an unrelated typescript. Batch 1 records one other typed leaf in the folder, page 17, an administrative table (a list of promotions), between the scratch computations of page 16 and the run that begins on page 18.',
+    ours:
+      'The reading adds that page 52 carries « 82 » by hand, which no transcription records. It also compares the theme of paired contraries with the yin and yang of Récoltes et semailles, while saying that nothing shows the typescript to be a state of it; the entry keeps that comparison out of the claim. The transcriptions do not record whether each typed face is the back of the blue-ink page before it, and no facsimile was consulted.',
+    literature: [
+      'Transcription 68, batch 3 (batch-03.fr.tex), header and note on page 51',
+      'Transcription 68, batch 1 (batch-01.fr.tex), header (page 17)',
+      'Modernised reading 68 (68.modern.tex), « Le fil du dossier », item 6 and its footnote',
+    ],
+    status: 'candidate',
+    settle:
+      'A person checks on the facsimile whether pages 50, 52 and 54 are the backs of pages 49, 51 and 53. If they are, the orientation notes were written on the backs of three copies of the typed page and are not earlier than it. The same person reads the heading, the « 82 » and the corrections. The typed page is then compared with the typescripts of Récoltes et semailles, part III (« La Clef du yin et du yang »), and of La Clef des songes, looking for a chapter XVIII or a section « Les épousailles ». A match would bound the date of the orientation leaves more closely than the inventory’s « [à partir de 1978-à partir de 1983] ».',
+  },
 ];
