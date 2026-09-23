@@ -18,6 +18,17 @@ this step would be a second reader silently disagreeing with the first about
 what the folder says, in the one place where the disagreement becomes a claim
 about other people's work.
 
+**One exception, since 2026-09-23: Opus 5.5 may run on a reading made by
+Opus 5.** Opus 5.5 is Opus 5's successor and the default for every other
+skill; waiting for an Opus 5 session left thirty-three folders without a
+pass. The disagreement the rule guards against is then made visible rather
+than prevented: where the pass reads the folder differently from the reading
+— a statement it thinks the reading gets wrong, a match the reading missed —
+it says so in the entry's `ours` field, and the commit names both models. It
+does not silently override the reading. The exception runs one way only:
+Opus 5 does not run on an Opus 5.5 reading, and no model runs on a Fable
+reading (folders 1 and 47) until someone decides what should.
+
 ## The thing this skill is for, and the thing it must not do
 
 A folder of the fonds occasionally contains a statement that is not in the
