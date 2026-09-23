@@ -1598,4 +1598,40 @@ export const FINDINGS: Finding[] = [
     settle:
       'A person looks on the facsimile for faint numbers at the head of pages 2–20, since a pencil figure is easily passed over, and establishes which pages share a sheet. If none of this yields a run ending at 11 on page 21, the number belongs to a sequence partly outside the folder. The neighbouring folders of the group « Variétés abéliennes » (45–56) are then the place to look.',
   },
+  {
+    id: '67-involution-modules-triples',
+    cote: '67',
+    pages: '90, 99',
+    kind: 'mathematical',
+    claim:
+      'For any ring k and any k-module M on which multiplication by 2 is injective, the folder shows that an involution σ of M amounts to a triple (P, Q, m) — P = M₊ and Q = M₋ the ±1-eigenmodules, both 2-regular, and m ⊂ P/2P ⊕ Q/2Q a sub-(k/2k)-module meeting each summand trivially, that is, the graph of an isomorphism between a submodule of P/2P and one of Q/2Q — the functor (M, σ) ↦ (P, Q, m) being an equivalence of categories, with no finiteness or projectivity hypothesis on M.',
+    basis:
+      'Page 90 proves M₊ ∩ M₋ = 0 from 2-regularity, 2M ⊂ M₊ ⊕ M₋ from 2x = (x + σx) + (x − σx), and M′ ∩ P = 2P, M′ ∩ Q = 2Q for M′ = 2M, then reconstructs (M, σ) from (P, Q, m) through the isomorphism 2 · id : M → M′, and states the Proposition. Page 99 draws the Corollary for k principal and 2-regular with k/2k a field: m is zero or a line distinct from P/2P and Q/2Q, giving two conjugacy classes of involutions ≠ ±1 in GL₂(k), represented by diag(1, −1) and the matrix (1 1; 0 −1), which for k = ℤ is the reflection of the hexagonal lattice. The folder uses it for the two lattice types E_a, E′_a of real elliptic curves (p. 92). The uncertain words on page 90 (« par exemple » before « commut. », « on vérifie », « D’ailleurs ») carry no part of the statement.',
+    ours:
+      'The check that the equivalence needs no finiteness — a σ-map is determined by its restriction to P ⊕ Q, since M ⊂ ½(P ⊕ Q) and the target is 2-regular — is the edition’s, made for this entry; the page states the Proposition without restriction and does not discuss it. The reading corrects the scratch computation of page 91 (σ(x, y) = x − y for (x, −y)), which the entry does not use. The first Corollary of page 90, for M projective of rank 2 over a connected k, is partly illegible and cut at the right edge, and no part of the claim rests on it; on page 99, « à isom. près » and « projectifs » are uncertain.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'The case k = ℤ is classical — two conjugacy classes of involutions ≠ ±1 in GL₂(ℤ), equivalently the three indecomposable ℤ[C₂]-lattices (I. Reiner, « Integral representations of cyclic groups of prime order », Proc. AMS 8, 1957; Curtis–Reiner, Methods of Representation Theory I, §34) — so the question is only the general Proposition. Since k[C₂] is the fibre product k ×_{k/2k} k when 2 is regular, look first in L. S. Levy, « Modules over pullbacks and subdirect sums » (J. Algebra 71, 1981), whose separated modules over a pullback are described by triples of this shape; then in J. Milnor, Introduction to Algebraic K-theory (1971), §2, for the projective case. All three references are cited from memory. If the Proposition is there, or is a direct instance of Levy’s description, mark matched. No web search was available for this pass (2026-09-23), so nothing has been read.',
+  },
+  {
+    id: '67-canonical-metrics-leaf-order',
+    cote: '67',
+    pages: '26–45',
+    kind: 'codicological',
+    claim:
+      'The run « Métriques canoniques sur les surfaces conformes » is to be read 26, 44, 27, 45, 28–40, 41–43 — pages 44 and 45 being inserts between his sheets 1 and 2 and between his sheets 2 and 3, and pages 41–43 continuing his sheet 15 — although the circled numbers read on pages 41–45, « 10 », « 11 », « 12 », « 17 », « 21 », either repeat the numbers 10–12 already carried by pages 35–37 or fall outside his series 1–15.',
+    basis:
+      'Page 44 carries a « Corollaire 3 » after Cor. 1 and 2 of page 26, refers to « (i) ci-dessus », page 26’s condition (i), and ends « On trouve donc de plus », which page 27, noted as lacking its lead-in, continues with « les surfaces suivantes ». Page 45 completes case (1) of page 27 (the unique metric of curvature −1 when X is compact) and breaks off in case 2) on « La constante multiplicative », which page 28, noted as lacking the start of case 2, continues with « déterminée par la condition que l’aire totale de X soit = 1 ». Page 40 breaks off on « la deuxième », and page 41 goes on with the conformal surfaces with boundary begun on page 39. Batch 2 records his numbers 1–15 on pages 26–40, hence 10–12 on pages 35–37; batch 3 records circled numbers on pages 41–45, those of 42 and 43 as « sans doute », and puts pages 44–45 on another paper than pages 41–43.',
+    ours:
+      'The order is the reading’s, established from the text; neither transcription states it. Batch 3 treats the numbers of pages 41–45 as continuing a series begun in batch 2 and says his sheets 13–16 and 18–20 are missing, without noting that 10–12 already occur on pages 35–37. The join 40 → 41 is the weakest of the three, since the first word of page 41 is illegible. That « 17 » and « 21 » might be « 1′ » and « 2′ », which would fit the inserts’ positions, is the edition’s conjecture, made for this entry, and nothing in the claim rests on it. No facsimile was consulted.',
+    literature: [
+      'Transcription 67, batch 2 (batch-02.fr.tex), header and pages 26–28, 35–40',
+      'Transcription 67, batch 3 (batch-03.fr.tex), header and pages 41–45',
+      'Modernised reading 67 (67.modern.tex), header « Order of the leaves » and « L’ordre des feuillets sur les métriques canoniques »',
+    ],
+    status: 'candidate',
+    settle:
+      'A person reads the circled numbers of pages 41–45 on the facsimile — whether « 17 » and « 21 » are « 1′ » and « 2′ », and whether « 10 » to « 12 » are 16 to 18 or a second series — and compares the paper of pages 44–45 with the tractor-feed sheets of pages 26–40. If the numbers stand as read, pages 41–43 belong to a second numbered redaction whose text happens to continue page 40, and its missing sheets should be looked for in the neighbouring folders of the group [66–89].',
+  },
 ];
