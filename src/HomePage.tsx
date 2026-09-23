@@ -253,9 +253,12 @@ function Disclaimer() {
       </p>
       <p className="mt-2 text-[13.5px] leading-relaxed text-ink-700">
         The transcriptions and modernised readings on this site were produced in 2026 by{' '}
-        <strong className="font-semibold text-ink-900">Claude Fable 5</strong> and{' '}
-        <strong className="font-semibold text-ink-900">Claude Opus 5</strong>, a folder at a
-        time, the transcriptions twenty pages at a time. Which model made which file is not a
+        <strong className="font-semibold text-ink-900">Claude Opus 5</strong> and{' '}
+        <strong className="font-semibold text-ink-900">Claude Opus 5.5</strong>, and for part of
+        them by <strong className="font-semibold text-ink-900">Claude Fable 5</strong> and{' '}
+        <strong className="font-semibold text-ink-900">Claude Fable 5.1</strong>, which are no
+        longer used for new passes — a folder at a time, the transcriptions twenty pages at a
+        time. Which model made which file is not a
         detail we keep a tally of here — <strong className="font-semibold text-ink-900">each
         file records the model and the date of its pass in its own header, and that header is
         the authority</strong>, not this sentence. A disputed reading years from now needs to
