@@ -1,0 +1,593 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 105, batch 3 (pages 41-52).
+% Established from the facsimile archives/batches/105/batch-03.pdf (a mirror of
+% https://grothendieck.umontpellier.fr/105.pdf), per the skill
+% transcribe-grothendieck. The batch file carries no cover sheet: PDF page N
+% is page 40+N of the folder (the Montpellier footer prints « 41 » ... « 52 »),
+% and the archivists' pencil numbers bottom-left agree on every leaf where
+% they are visible (« 41 » to « 52 »). The folder's last twelve pages; the
+% batch is short because the folder is.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-09-23 — first pass, unchecked against the pages by a human.
+%
+% Ten of the twelve pages are transcribed. Absent: page 41, a blank leaf
+% carrying nothing but a faint ghost of the text of page 42; page 43, a typed
+% page (typist's number « 90 ») of prose unrelated to the mathematics, whose
+% only marks by hand are typing corrections.
+%
+% His own pagination runs through the batch and is recorded once per page
+% in a \note: 6 (p. 42), 7 (p. 44), 8 and 9 (p. 45, the two halves of a
+% landscape sheet), 10 (p. 46), 11 (p. 47), 12 and 13 (p. 48, same layout;
+% the « 12 » is only partly visible), 14 (p. 49), 15 (p. 50), 16 and 17
+% (p. 51, same layout), 18 (p. 52). His pages 1 to 5 are not in this batch
+% and do not appear in batch 2 either (checked on thumbnails only); page 42
+% opens on the struck tail of an argument that ends in « cqfd ».
+%
+% What the batch is. One run, in ink, on computer-listing paper and on
+% squared paper, about the axioms W7 and W8 (and their « bis » forms) for a
+% class W of weak equivalences in Cat, tested on W = W_D, the class defined
+% by a « dérivateur » D with A = D(e):
+%   42-44  two opens U, U' of X as a map phi : X -> Delta^1 x Delta^1, i.e.
+%          when U u U' = X a map to Psi = Delta^1 x Delta^1 - {(1,1)}; the
+%          diagram U n U' -> U, U' in Cat is the functor Psi -> Cat defining
+%          the split cofibred X-bar over Psi; phi-bar_* computed fibrewise.
+%   45-46  gamma_0 = phi-bar_*(xi) in D(Psi), gamma = k_*(gamma_0) in
+%          D(Delta^1 x Delta^1), the « carré cartésien »; the square (**) of
+%          H_D(-,xi) of X, U, U', U n U'; hence i_0 in W_D => i in W_D. The
+%          converse would need gamma to be also cocartesian; « moralement »
+%          the translation of U n U' -> U, U' -> X being cocartesian in Cat.
+%   47-49  the « Principe »: for X_0 -> X_a, X_0 -> X_b in Cat and the
+%          cofibred X over Psi it defines, the square of H_D(X_?, xi) is
+%          cartesian by construction; that it is also cocartesian does not
+%          follow from Der 1 - Der 5, 5', and is posed as « Der 6 »
+%          (provisoire), the « axiome des cofibrations »; its dual « Der 6' »
+%          for X fibred over Phi = (a -> 1 <- b); then « Der 6 » restated:
+%          gamma in D(Delta^1 x Delta^1) is cartesian iff it is cocartesian.
+%   50     consequences for the four arrows of the square (i_1 iso => i_0
+%          iso, j_1 iso => j_0 iso), and a « Lemme » reducing to a form of
+%          Der 3.
+%   51-52  « Dans HOT, j'ai admis que » every cocartesian square is
+%          cartesian, and when a cartesian square is cocartesian (pi_0
+%          criterion); « Der 8 », two-out-of-three for a map of squares;
+%          W7 bis and W8 bis in Hot_W, then fair copies of both on p. 52
+%          (with X smooth, resp. X, X' smooth, over Phi).
+%
+% Notation fixed for the batch: his double-struck D (the dérivateur) as
+% \mathbb{D}; W_D as W_{\mathbb{D}}; his cohomology H with a dot and a D
+% below as H^{\bullet}_{\mathbb{D}}; his script X for the fibred/cofibred
+% category as \mathcal{X}; X-bar as \overline{X}; the letter he writes for
+% D(e) as \mathcal{A}; his curly gamma as \gamma; Psi, Phi, Q, U_0 are
+% underlined by him and keep the underline inside math. Square brackets in
+% his text are his own. No date is written on any leaf of the batch.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{105}
+\batch{3}
+\pages{41}{52}
+\dating{[à partir de 1982]}
+\watermark{Édition de démonstration}
+\foldertitle{[Champs (stacks) 2] : notes manuscrites (s.d.).}
+
+\begin{document}
+
+\section{[Les axiomes W7, W8 pour $W = W_{\mathbb{D}}$, et l'axiome « Der 6 »]}
+\note{titre de l'éditeur, entre crochets : aucun feuillet du lot n'en porte. Sa propre pagination court de 6 (page 42) à 18 (page 52) ; ses pages 1 à 5 ne sont pas dans ce lot.}
+
+\page{42}
+\note{p.\ 6 de l'auteur. Le haut de la page, jusqu'au « cqfd », est biffé de trois traits obliques ; c'est la fin d'un argument commencé avant.}
+\struck{$q \in W \Longleftrightarrow q_{\overline{U}} \in W$.}
+\note{la double flèche est elle-même barrée d'un trait.}
+
+\struck{On a}
+
+\begin{tikzcd}
+U \arrow[r, "i_0"] \arrow[d, "q_U"'] & \overline{U} \arrow[d, "q_{\overline{U}}"] \\
+U' \arrow[r, "i'_0"'] & \overline{U}'
+\end{tikzcd}
+
+\struck{avec $i_0$, $i'_0 \in W$, donc $q_{\overline{U}} \in W$ ssi $q_U \in W$. Donc $q \in W$ ssi $q_U \in W$ cqfd.}
+
+\emph{Dém.} de $W7$, $W$(\uncertain{7}bis) si $W = W_{\underline{\mathbb{D}}}$ ?
+\note{le chiffre devant « bis » est surchargé.}
+
+Se donner dans $X$ ouverts $U$, $U'$ \struck{avec $U \cup U' = X$}, revient \uncertain{au même} que de se donner $X \xrightarrow{\varphi} \Delta^1 \times \Delta^1$, \struck{\ill{}} les fibres \struck{\ill{}} \uncertain{au-dessus des points} resp.\ \uncertain{étant}
+\[
+  \left\{
+  \begin{array}{l}
+  X_{0,0} = U \cap U', \quad X_{0,1} = U \cap T', \quad X_{1,0} = T \cap U', \quad X_{1,1} = T \cap T' \\
+  U = \varphi^{-1}(\{0\} \times \Delta^1), \quad U' = \varphi^{-1}(\Delta^1 \times \{0\})
+  \end{array}
+  \right.
+\]
+\struck{Donc} ($T = X \setminus U$, $T' = X \setminus U'$). \struck{Donc} $U \cup U' = X$ i.e.\ $T \cap T' = \emptyset$ équivaut à : $X_{1,1} = \emptyset$, donc à ce que $\varphi$ se factorise par $X \to \Psi = \Delta^1 \times \Delta^1 \setminus \{(1,1)\}$ ;
+\note{il écrit $\{1,1\}$ pour le point $(1,1)$.}
+on a un foncteur
+
+\begin{tikzcd}
+& & a = (0,1) \\
+X \arrow[r] & \underline{\Psi} = 0 \arrow[ur] \arrow[dr] & \\
+& & b = (1,0)
+\end{tikzcd}
+
+les fibres \uncertain{étant}
+\[
+  X_0 = U \cap U', \quad X_a = U \cap T', \quad X_b = U' \cap T .
+\]
+Soient $\underline{U}_0$, $\underline{U}'_0$ les ouverts de $\Psi$ induits par $\{0\} \times \Delta^1$, $\Delta^1 \times \{0\}$, donc
+\[
+  \left\{
+  \begin{array}{l}
+  \underline{U}_0 = \{0, a\}, \quad \underline{U}'_0 = \{0, b\} \\
+  \underline{U}_0 \cup \underline{U}'_0 = \Psi, \quad \underline{U}_0 \cap \underline{U}'_0 = \{0\}
+  \end{array}
+  \right.
+\]
+on a donc
+\[
+  \left\{
+  \begin{array}{l}
+  U = \varphi^{-1}(\underline{U}_0), \quad U' = \varphi^{-1}(\underline{U}'_0) \\
+  U \cap U' = \varphi^{-1}(\underline{U}_0 \cap \underline{U}'_0) = \varphi^{-1}(\{0\}) = X_0
+  \end{array}
+  \right.
+\]
+\note{les égalités $X_0 = U \cap U'$, $X_a = U \cap T'$ sont soulignées d'un trait ondulé.}
+
+\page{44}
+\note{p.\ 7 de l'auteur.}
+On a aussi
+\[
+  U = X_{/a}, \quad U' = X_{/b}, \quad U \cap U' = X_{/0} .
+\]
+\note{dans la première égalité, un $X$ est écrit sur un signe biffé.}
+Ainsi le diagramme dans $\mathrm{Cat}$
+
+(*)
+
+\begin{tikzcd}[column sep=small, row sep=small]
+& U \\
+U \cap U' \arrow[ur, "i'_0"] \arrow[dr, "i_0"'] & \\
+& U'
+\end{tikzcd}
+
+de type $\underline{\Psi}$ n'est-il autre que le foncteur $\underline{\Psi} \to \mathrm{Cat}$ qui définit la cat.\ [\uncertain{cofibrée scindée}]
+\[
+  \Upsilon(X/\underline{\Psi}) = \overline{X} \text{ sur } \Psi
+\]
+
+\begin{tikzcd}
+X \arrow[rr, "\alpha"] \arrow[dr, "\varphi"', no head] & & \overline{X} \arrow[dl, "\overline{\varphi}", no head] \\
+& \underline{\Psi} &
+\end{tikzcd}
+
+$\alpha \in W_{\underline{\Psi}}$
+\note{sous le $W$, un indice surchargé puis $\underline{\Psi}$ ; lecture de l'indice incertaine. Les deux traits vers $\underline{\Psi}$ sont sans pointe sur la page. La lettre $\Upsilon$ rend le $\Psi$ épaissi qu'il écrit devant $(X/\underline{\Psi})$ ; « cofibrée scindée » est ajouté au-dessus de la ligne.}
+\[
+  U = \overline{X}_a, \quad U' = \overline{X}_b, \quad U \cap U' = \overline{X}_0 ,
+\]
+les foncteurs $i'_0$, $i_0$ de ces \uncertain{diagrammes} \uncertain{étant les} foncteurs changement de base relatifs : $0 \xrightarrow{i'_0} a$ et $0 \xrightarrow{i_0} b$. \struck{D'autre}
+
+D'autre part $\overline{\varphi}$ est \emph{propre}, donc $\overline{\varphi}_*$ se calcule \uncertain{fibre par fibre}, en particulier, pour un coeff.\ const.\ $\xi_{\overline{X}}$, avec $\xi \in \mathcal{A}$, on trouve
+\[
+  \overline{\varphi}_*(\xi_{\overline{X}})(s) =
+  \begin{cases}
+    H^{\bullet}_{\mathbb{D}}(U \cap U', \xi) & \text{si } s = 0 \\
+    H^{\bullet}_{\mathbb{D}}(U, \xi) & \text{si } s = a \\
+    H^{\bullet}_{\mathbb{D}}(U', \xi) & \text{si } s = b
+  \end{cases}
+\]
+\note{dans la deuxième ligne une étoile est ajoutée après $\xi$ ; le point de $H^{\bullet}$ n'est net qu'à la première ligne.}
+
+\page{45}
+\note{pp.\ 8 et 9 de l'auteur : feuille à l'italienne, la moitié gauche porte le 8, la moitié droite le 9.}
+Donc le diagramme squelettique
+
+(*)
+
+\begin{tikzcd}[column sep=small]
+H^{\bullet}_{\mathbb{D}}(U, \xi) \arrow[dr] & & H^{\bullet}_{\mathbb{D}}(U', \xi) \arrow[dl] \\
+& H^{\bullet}_{\mathbb{D}}(U \cap U', \xi) &
+\end{tikzcd}
+
+de type $\underline{\Psi}^{\mathrm{op}}$, provient-il d'un diagramme \uncertain{essentiel}
+\[
+  \gamma_0 \overset{\text{déf}}{=} \overline{\varphi}_*(\xi_{\overline{X}}) \in \mathbb{D}(\underline{\Psi}) .
+\]
+\note{« de type $\Psi^{\mathrm{op}}$ » est ajouté au-dessus de la ligne ; devant le $=$, une lettre biffée sous « déf ».}
+Considérons l'inclusion
+
+\begin{tikzcd}[column sep=small, row sep=small]
+& (0,1) \arrow[dr, no head] & \\
+(0,0) \arrow[ur, no head] \arrow[dr] & & (1,1) \\
+& (1,0) \arrow[ur] &
+\end{tikzcd}
+
+\[
+  \underline{\Psi} \overset{k}{\subset} \Delta^1 \times \Delta^1 = \text{(le carré ci-dessus)}
+\]
+\note{le carré est écrit à droite de l'inclusion, après le signe $=$ ; deux de ses côtés seulement portent une pointe.}
+déduite de $\Psi$ en lui \uncertain{ajoutant} l'élément final $(1,1)$. Soit $\underline{k}$ l'inclusion, et considérons le « carré cartésien »
+\[
+  \gamma = \underline{k}_*(\gamma_0) \in \mathbb{D}(\Delta^1 \times \Delta^1)
+\]
+\struck{Donc les fibres de $\gamma$ sur les points de}
+On a
+\[
+  \underline{k}^*(\gamma) \simeq \gamma_0
+\]
+donc le \struck{\ill{}} squel.\ induit par $\gamma$ sur $\Psi$ n'est autre que (*) ci-dessus. Mais je dis que le diagramme squelettique sur $\Delta^1 \times \Delta^1$ tout entier (\ill{}) s'identifie à :
+
+\marginal{à vérifier (\uncertain{ou à mettre comme axiome} sur les dérivateurs).}
+\note{note oblique dans la marge, entre les deux moitiés de la feuille, reliée par un trait au paragraphe « Ceci doit faire partie » plus bas.}
+
+(**)
+
+\begin{tikzcd}[column sep=small]
+& H^{\bullet}_{\mathbb{D}}(X, \xi) \arrow[dl, "i^*"'] \arrow[dr, "i'^*"] & \\
+H^{\bullet}_{\mathbb{D}}(U, \xi) \arrow[dr, "i_0'^*"'] & & H^{\bullet}_{\mathbb{D}}(U', \xi) \arrow[dl, "i_0^*"] \\
+& H^{\bullet}_{\mathbb{D}}(U \cap U', \xi) &
+\end{tikzcd}
+
+\note{en tête, sous le $X$, une lettre biffée.}
+
+\marginal{\emph{NB} On a un \uncertain{carré cartésien} pour \uncertain{tt} $\xi \in \mathbb{D}(X)$, \uncertain{pas seulement} $\xi$ constant…}
+\note{encadré dans la marge droite, à côté de (**).}
+
+Notons pour ceci que si
+\[
+  \psi = \underline{k} \circ \varphi : \overline{X} \longrightarrow \Delta^1 \times \Delta^1 = \underline{Q}
+\]
+on a
+\[
+  \gamma = \underline{k}_*(\gamma_0) = \underline{k}_*(\varphi_*(\xi_{\overline{X}})) = \psi_*(\xi_{\overline{X}}) ,
+\]
+d'où
+\[
+  H^{\bullet}_{\mathbb{D}}(\Delta^1 \times \Delta^1, \gamma) \simeq H^{\bullet}_{\mathbb{D}}(\overline{X}, \xi) \xrightarrow[\;1\;]{\sim} H^{\bullet}_{\mathbb{D}}(X, \xi)
+\]
+\note{sous la flèche, un renvoi « (1) » ; à côté, « car $\alpha : X \to \overline{X} \in W$ ».}
+D'autre part, comme $e = (1,1)$ élément final de $\Delta^1 \times \Delta^1 = \underline{Q}$, donc $e \to \underline{Q}$ \ill{},
+\[
+  \underbrace{H^{\bullet}_{\mathbb{D}}(\underline{Q}, \gamma)}_{H^{\bullet}_{\mathbb{D}}(\overline{X}, \xi)} \simeq \gamma(e) = \gamma(1,1)
+\]
+\note{après $\gamma(1,1)$, un mot biffé.}
+d'où l'assertion.
+
+Ceci doit faire partie, d'autre part, des propriétés générales des carrés cartésiens « dans $\mathcal{A}$ » \struck{pris} (comme (**)), que
+\[
+  i_0^* \text{ iso} \Longleftrightarrow i^* \text{ iso} ,
+\]
+et ceci étant vrai pour \uncertain{tt} $\xi \in \mathcal{A} = \mathbb{D}(e)$, cela donne
+\[
+  i_0 \in W_{\mathbb{D}} \Longrightarrow i \in W_{\mathbb{D}} .
+\]
+\note{« dans $\mathcal{A}$ » est ajouté au-dessus de « pris », biffé ; le premier $W_{\mathbb{D}}$ est écrit sur un premier essai.}
+
+\page{46}
+\note{p.\ 10 de l'auteur. Les quatre premières lignes sont barrées de grands traits croisés.}
+\struck{(Alors pour le \uncertain{Dérivateur} \ill{}, \uncertain{avec des coeff.\ loc.\ constants} $\xi$ \ill{} \ill{}, il faut \ill{} que l'\ill{} $X \to \overline{X}$ soit $\mathbb{D}$-équiv.\ 2-\uncertain{complète}}
+\note{au-dessus de la ligne biffée, un mot entre guillemets, peut-être « complète ».}
+
+Pour avoir l'implication inverse
+\[
+  i \in W_{\mathbb{D}} \Longrightarrow i_0 \in W_{\mathbb{D}} ,
+\]
+il faudrait savoir que le diagramme (**), plus \struck{\ill{}} précisément le \struck{diagramme} [carré] substantiel $\gamma$ qui lui donne naissance, est non seulement \emph{cartésien}, mais aussi \emph{cocartésien}. « Moralement », \uncertain{qu'il soit} cartésien me semble être la traduction cohomologique du fait que le \struck{diagramme} [carré]
+\note{« carré » est écrit, les deux fois, au-dessus de « diagramme » biffé.}
+
+\begin{tikzcd}[column sep=small, row sep=small]
+& U \arrow[dr] & \\
+U \cap U' \arrow[ur] \arrow[dr] & & X \\
+& U' \arrow[ur] &
+\end{tikzcd}
+
+dans $\mathrm{Cat}$ est \emph{cocartésien} dans un sens suffisamment fort. Mais il est également cartésien, de façon triviale, et on peut \uncertain{s'attendre} (sous certaines conditions \ill{}) \uncertain{à ce que} les diagrammes « transformés » par $H^{\bullet}_{\mathbb{D}}(-, \xi)$ soit cocartésien…
+
+J'ai envie de \ill{} \ill{} \ill{} $X$ \ill{} sur $\underline{Q} = \Delta^1 \times \Delta^1$, plutôt que sur \ill{} $\underline{\Psi} = \underline{Q} - \{e\}$ de $\underline{Q}$, alors
+\[
+  \Psi_{\underline{Q}}(X) \mid \underline{\Psi} \simeq \Psi_{\underline{\Psi}}(X) \text{ déjà considéré.}
+\]
+
+\page{47}
+\note{p.\ 11 de l'auteur.}
+mais sa quatrième fibre est
+\[
+  \overline{X}_{(1,1)} = X_{/(1,1)} \simeq X
+\]
+donc le diagramme [dans $\mathrm{Cat}$] du type $\underline{Q}$ donnant naissance à $\Psi_{\underline{Q}}(X)$ n'est autre que
+
+\begin{tikzcd}[column sep=small, row sep=small]
+& U \arrow[dr, no head] & \\
+U \cap U' \arrow[ur, no head] \arrow[dr] & & X \\
+& U' \arrow[ur, no head] &
+\end{tikzcd}
+
+Mais ce diagramme [comme diagramme de $\mathrm{Cat}$] n'est bien sûr pas quelconque, sa propriété essentielle, parmi les propriétés que nous avons en vue, \struck{un exemple} étant la suivante :
+\[
+  \underbrace{\Bigl(\int \bigl(V \to U,\ V \to U'\bigr)\Bigr)}_{\overset{\text{déf}}{=}\ \Psi_{\underline{\Psi}}(X)} \longrightarrow X
+\]
+\note{sous l'intégrale, la source commune est d'abord écrite puis surchargée ; on la lit $V$, qui dans le petit diagramme de droite tient la place de $U \cap U'$. L'accolade porte « déf » ; lecture de ce qui l'accompagne incertaine.}
+$\Psi_{\underline{\Psi}}(X)$ construit \uncertain{précédemment} \uncertain{de} $\mathrm{Cat}$ \uncertain{sans plus}
+\marginal{flèche définie par le diagramme $V \to U \to X$, $V \to U' \to X$ dans $\mathrm{Cat}$}
+\note{dans la marge, le diagramme est dessiné en losange ; il est ici mis en ligne.}
+est dans $W$. Et le fait général \ill{} \ill{} \ill{} est le suivant :
+
+« \emph{Principe} » (?) Soit
+
+\begin{tikzcd}[column sep=small, row sep=small]
+& X_a \\
+X_0 \arrow[ur, no head] \arrow[dr] & \\
+& X_b
+\end{tikzcd}
+
+un diagramme dans $\mathrm{Cat}$ du type $\underline{\Psi}$, soit $\mathcal{X}$ la cat.\ cofibrée sur $\Psi$ qu'il définit. Pour tout
+
+\page{48}
+\note{pp.\ 12 et 13 de l'auteur : feuille à l'italienne, les deux moitiés comme à la page 45.}
+$\xi \in \mathbb{D}(\mathcal{X})$, considérons (si $\varphi : \mathcal{X} \to \underline{\Psi}$ est la projection)
+\[
+  \gamma_0 \overset{\text{déf}}{=} \varphi_*(\xi) \in \mathbb{D}(\underline{\Psi}) , \qquad
+  \gamma = \underline{k}_*(\gamma_0) \in \mathbb{D}(\underline{Q}) ,
+\]
+d'où
+\[
+  \begin{array}{l}
+  \gamma(0,0) \simeq H^{\bullet}_{\mathbb{D}}(X_0, \xi) \\
+  \gamma(0,1) \simeq H^{\bullet}_{\mathbb{D}}(X_a, \xi) \\
+  \gamma(1,0) \simeq H^{\bullet}_{\mathbb{D}}(X_b, \xi) \\
+  \gamma(1,1) \simeq H^{\bullet}_{\mathbb{D}}(\mathcal{X}, \xi)
+  \end{array}
+\]
+\note{à la première ligne, un symbole biffé après $\simeq$.}
+et \struck{diagramme} le carré squelettique \uncertain{associé} est
+
+(*)
+
+\begin{tikzcd}[column sep=small]
+& H^{\bullet}_{\mathbb{D}}(\mathcal{X}, \xi) \arrow[dl] \arrow[dr] & \\
+H^{\bullet}_{\mathbb{D}}(X_a, \xi) \arrow[dr] & & H^{\bullet}_{\mathbb{D}}(X_b, \xi) \arrow[dl] \\
+& H^{\bullet}_{\mathbb{D}}(X_0, \xi) &
+\end{tikzcd}
+
+(\emph{NB}
+
+\begin{tikzcd}[column sep=small, row sep=small]
+& X_a \arrow[dr] & \\
+X_0 \arrow[ur] \arrow[dr] & & \mathcal{X} \\
+& X_b \arrow[ur] &
+\end{tikzcd}
+
+\uncertain{n'est même pas} commutatif, dans $\mathcal{X}$ \ill{} $X_a \cap X_b = \emptyset$. Mais
+
+\begin{tikzcd}[column sep=small, row sep=small]
+& X_{/a} \arrow[dr, no head] & \\
+X_{/0} \arrow[ur, no head] \arrow[dr] & & \mathcal{X} \\
+& X_{/b} \arrow[ur, no head] &
+\end{tikzcd}
+
+est commutatif, et le carré (*) est aussi déduit de celui-ci par $H^{\bullet}_{\mathbb{D}}(-, \xi)$.)
+\note{« est commutatif » est écrit en haut de la moitié droite ; le passage enjambe les deux moitiés.}
+
+L'élément $\gamma \in \mathbb{D}(\underline{Q})$ est cartésien par construction, \uncertain{dans le} « \uncertain{cas} » \ill{} \ill{}. Ça serait le cas pour \uncertain{tout} \ill{} $\mathcal{X}$ [propre] au-dessus de $\underline{\Psi}$, sans avoir à le supposer cofibré. Mais le fait que $\mathcal{X}$ soit cofibré doit donner \ill{} \ill{} le \uncertain{cas} \ill{} suppl.\ qu'il est aussi \emph{cocartésien}. J'ai l'impression \ill{} \ill{} \ill{} que ça ne \uncertain{peut} \ill{} des \uncertain{raisons} \ill{} de l'un des axiomes Der 1 -- Der 5, 5' \uncertain{jusqu'à présent}. Je vais le \uncertain{mettre} comme
+
+« \emph{Der 6} » (provisoire) \struck{Si} Si $\mathcal{X}$ sur $\underline{\Psi}$ est cofibré, \struck{\ill{}} $\xi$ \struck{quelconque \ill{} $\mathcal{X}$ \ill{}} \ill{} dans $\mathbb{D}(\mathcal{X})$, \struck{\ill{}} l'élément
+\[
+  \psi_*(\xi) \in \mathbb{D}(\underline{Q}) , \qquad \text{où } \psi = \bigl(\mathcal{X} \xrightarrow{\varphi} \underline{\Psi} \xrightarrow{\underline{k}} \underline{Q}\bigr), \quad \underline{Q} = \Delta^1 \times \Delta^1 ,
+\]
+est non seulement cartésien, mais aussi cocartésien.
+
+\marginal{Axiome des cofibrations}
+\note{écrit en oblique au bas de la moitié droite, souligné ; au-dessous, en plus petit, trois lignes presque illisibles où l'on distingue « Der 6 ». Dans la marge de gauche de la même moitié, une note oblique reliée à « Der 6 » (« \ill{} \ill{} \uncertain{cohomologiquement} \ill{} ») reste illisible.}
+
+\page{49}
+\note{p.\ 14 de l'auteur.}
+« \emph{Der 6'} » (\uncertain{provisoire}) Si $\mathcal{X}$ est fibré sur
+\[
+  \underline{\Psi}^{\mathrm{op}} = \underline{\Phi} = \bigl(a \rightarrow 1 \leftarrow b\bigr)
+\]
+(donc donné, à $\underline{\Phi}$-équiv.\ près, par un diagramme
+
+\begin{tikzcd}[column sep=small, row sep=small]
+& X_0 \\
+X_a \arrow[ur, no head] \arrow[dr] & \\
+& X_b
+\end{tikzcd}
+
+dans $\mathrm{Cat}$) alors pour $\xi \in \mathbb{D}(\mathcal{X})$ constant (\uncertain{voir l.c.}), \struck{\ill{}} $\psi_!(\xi) \in \mathbb{D}(\underline{Q})$ est non seulement cocartésien (sans mérite), mais aussi cartésien.
+\note{le diagramme est reproduit tel que la page le trace, un trait sans pointe entre $X_a$ et $X_0$ et une flèche de $X_a$ vers $X_b$. Dans la marge gauche, un bloc de griffonnages raturés, et en oblique « Axiome \uncertain{des fibrations} ».}
+
+\begin{tikzcd}[column sep=small, row sep=small]
+& a \arrow[dl] & \\
+1 & & 0 \arrow[ul] \arrow[dl] \\
+& b \arrow[ul] &
+\end{tikzcd}
+
+\[
+  \underline{\Phi} \subset \underline{Q}^{\circ} = \text{(le carré ci-dessus)}
+\]
+\note{sur la page, les trois sommets $a$, $1$, $b$ sont entourés d'un trait : c'est $\underline{\Phi}$ dans $\underline{Q}^{\circ}$.}
+
+\emph{NB} Der 6' pour $\mathbb{D}$ \struck{équivaut} n'est autre que Der 6 pour $\mathbb{D}^{\circ}$. Je ne vois pas comment l'une impliquerait l'autre, en dehors du cas exceptionnel où il y a comme (\ill{}) un foncteur dualisant dans $\mathcal{A} = \mathbb{D}(e)$, et une \uncertain{dualité} correspondante par dualité entre cohomologie et homologie.
+
+Finalement, il semblerait que l'axiome \uncertain{qui} englobe Der 6 et Der 6bis \uncertain{bien} \ill{}, \uncertain{soit} le suivant !
+
+« \emph{Der 6} » \struck{\ill{}} Si $\gamma \in \mathbb{D}(\Delta^1 \times \Delta^1)$, $\gamma$ est cartésien ssi il est cocartésien. [\struck{De plus} (ça \uncertain{revient au même} que si \ill{} \ill{}) le diagramme squelettique associé est \ill{}]
+\note{« Der 6 » est suivi d'un mot noirci ; l'addition entre crochets, à droite, est interlinéaire et très raturée. Dans la marge gauche, en oblique et en partie biffé : « l'axiome \uncertain{“vrai”} \ill{} \ill{} \uncertain{cartésien} \ill{} ».}
+
+\page{50}
+\note{p.\ 15 de l'auteur.}
+
+\begin{tikzcd}[column sep=small, row sep=small]
+& \gamma(0,1) \arrow[dl, "j_0"'] & \\
+\gamma(0,0) & & \gamma(1,1) \arrow[ul, "i_1"'] \arrow[dl, "j_1"] \\
+& \gamma(1,0) \arrow[ul, "i_0"] &
+\end{tikzcd}
+
+donc
+\[
+  \left\{
+  \begin{array}{l}
+  i_1 \text{ iso} \Longrightarrow i_0 \text{ iso} , \\
+  j_1 \text{ iso} \Longrightarrow j_0 \text{ iso} .
+  \end{array}
+  \right.
+\]
+\marginal{De plus, on doit invoquer \ill{} \ill{} les dérivateurs induits $\mathbb{D}_I$ ($I \in \mathrm{Diag}$), \uncertain{dans} $\mathbb{D}(I \times \Delta^1 \times \Delta^1)$.}
+\note{en haut à droite de la page, à côté du carré.}
+
+Cette dernière \uncertain{montre aussitôt} \ill{} de la précédente (car \uncertain{cart.} implique $\Longrightarrow$, cocartésien implique $\Longleftarrow$), pourvu qu'on ait :
+
+« \emph{Lemme} » (\struck{associé à Der 6}) : si
+\[
+  \xi = \Bigl( \xi_a \xrightarrow{\;j_0\;} \xi_0 \xleftarrow{\;i_0\;} \xi_b \Bigr)
+\]
+est un diagramme substantiel tel que $i_0$ soit un iso, alors il est \uncertain{isom.}\ à l'image inverse d'un $\eta \in \mathbb{D}(\underline{U})$
+\note{avant la parenthèse, un $\xi$ suivi d'un signe biffé ; sous le $\underline{U}$ de $\mathbb{D}(\underline{U})$, une lettre raturée.}
+(où $\underline{U} = (0 \to a) \simeq \Delta^1$ est l'ouvert \uncertain{complémentaire} \ill{} dans $\underline{\Psi}$) par la \uncertain{rétraction} \uncertain{canonique} $\rho$ de $\underline{\Psi}$ sur $\underline{U}$.
+
+Il suffit de prouver que
+\[
+  \rho^* \rho_*(\xi) \longrightarrow \xi \quad (\text{adj.})
+\]
+est un iso. Comme $\rho$ est \uncertain{lisse}, comme induit par $\mathrm{pr}_1 : \Delta^1 \times \Delta^1 \to \Delta^1$ \struck{propre}, $\rho_*(\xi)$ \uncertain{se calcule} \ill{} fibre par fibre. On est ramené à \uncertain{calculer} fibre par fibre que
+\[
+  \mathcal{A} = \mathbb{D}(e) \longrightarrow \mathbb{D}^{\mathrm{cc}}(\Delta^1)
+\]
+est une équiv.\ de cat.\ (\emph{forme de Der 3})$^*$
+\note{l'exposant de $\mathbb{D}$ se lit mal ; « cc » est une lecture. La phrase commence par une flèche barrée. Le long de la marge gauche, une note verticale, biffée, reste illisible.}
+
+\page{51}
+\note{pp.\ 16 et 17 de l'auteur : feuille à l'italienne, comme aux pages 45 et 48.}
+Dans HOT, j'ai admis que :
+\begin{quote}
+Tout carré cocartésien est cartésien. Pour qu'un carré cartésien
+\end{quote}
+
+\begin{tikzcd}[column sep=small, row sep=small]
+& \xi_0 \arrow[dl] \arrow[dr] & \\
+\xi_a \arrow[dr] & & \xi_b \arrow[dl] \\
+& \xi_1 &
+\end{tikzcd}
+
+\begin{quote}
+soit aussi cocartésien, il f.\ et s.\ que l'on ait
+\[
+  \pi_0(\xi_1) = \mathrm{Im}\, \pi_0(\xi_a) \cup \mathrm{Im}\, \pi_0(\xi_b)
+\]
+\end{quote}
+\note{les trois lignes sont tenues par un trait vertical à gauche. Dans la marge, une note oblique, en partie lisible : « \uncertain{tout carré cocartésien} \ill{} \ill{} $\xi_1 = e$ \ill{} ».}
+
+Der 6 \uncertain{ou} Der 6' \ill{} \uncertain{donc} \ill{}
+
+\uncertain{Clairement} : W8, il semble découler \uncertain{d'un} principe général (« \uncertain{lemme des carrés} ») :
+
+« \emph{Der 8} » (Soit un \uncertain{homomorphisme} d'un carré \struck{\ill{}} cartésien \ill{} dans $\mathcal{A}(\Delta^1 \times \Delta^1)$. \uncertain{Considérons} dans \uncertain{un autre}, dans les conditions
+
+\begin{tikzcd}[column sep=small, row sep=small]
+& \xi_a \arrow[dr] \arrow[ddd, "f_a"] & \\
+\xi_0 \arrow[ur] \arrow[dr] \arrow[ddd, "f_0"'] & & \xi_1 \arrow[ddd, "f_1"] \\
+& \xi_b \arrow[ur] \arrow[ddd, "f_b"'] & \\
+& \eta_a \arrow[dr] & \\
+\eta_0 \arrow[ur] \arrow[dr] & & \eta_1 \\
+& \eta_b \arrow[ur] &
+\end{tikzcd}
+
+\note{cube redessiné : sur la page les deux carrés sont décalés l'un sous l'autre et les quatre flèches verticales $f_0$, $f_a$, $f_b$, $f_1$ se croisent ; les indices $a$, $b$ des sommets intermédiaires se lisent mal.}
+\begin{enumerate}
+  \item[a)] $f_0$ est iso
+  \item[b)] $f_1$ est iso
+  \item[c)] $f_a$ et $f_b$ sont iso.
+\end{enumerate}
+\struck{Alors} si les carrés sont \uncertain{cartésiens}, \struck{\ill{} \ill{}} \emph{Alors} $b + c \Rightarrow a$. S'ils sont \uncertain{cocartésiens}, \struck{\ill{} \ill{}} $a + c \Rightarrow b$). S'ils sont \struck{\ill{}} \uncertain{bicartésiens}, \struck{\ill{} \ill{}} de plus $a + b \Rightarrow c$ (\ill{} ?)
+
+\struck{\emph{NB}. Le \ill{} $a + c \Rightarrow b$, $b + c \Rightarrow a$ \ill{} \ill{} \ill{} \ill{} \ill{} \ill{} \ill{}. Les \ill{} vrais \ill{} \ill{} \ill{} \ill{} $a + b \Rightarrow c$}
+\note{passage barré de traits obliques. Dans la marge gauche, en oblique : « Il suffit d'exiger $a + b \Rightarrow c$ \ill{} \ill{} \ill{} \uncertain{si $f_a$, $f_b$} \ill{} \ill{} ».}
+
+\emph{W7 bis} Soit
+
+\begin{tikzcd}[column sep=small, row sep=small]
+& X_a \\
+X_0 \arrow[ur, no head] \arrow[dr] & \\
+& X_b
+\end{tikzcd}
+
+diagramme dans $\mathrm{Cat}$, soit $\underline{\Phi} = \bigl(0 \leftarrow a,\ 0 \leftarrow b\bigr)$ et $\mathcal{X}$ la catégorie fibrée sur $\underline{\Phi}$ définie par le diagramme. On a un diagramme commutatif dans $\mathrm{Hot}_{W}$ :
+
+\begin{tikzcd}[column sep=small, row sep=small]
+& X_0 \arrow[dl, "i_a"'] \arrow[dr, "i_b"] & \\
+X_a \arrow[dr, "i'_b"'] & & X_b \arrow[dl, "i'_a"] \\
+& \mathcal{X} &
+\end{tikzcd}
+
+\note{les pointes des flèches de $\underline{\Phi}$ se lisent mal ; la forme donnée est une lecture. À la page 52, la même donnée s'écrit avec les mêmes étiquettes.}
+\marginal{\emph{NB} Autre \uncertain{possibilité} : $\mathcal{X}$ \uncertain{fibrée} \ill{} \ill{} \ill{} sur \ill{}}
+
+(\emph{NB} Dans $\mathrm{Cat}$, \struck{je présume que} les deux flèches composées sont homotopes, par \uncertain{un chemin} de longueur 2 \ill{} \ill{} \ill{} homotopes toutes deux, par une homotopie de long.\ 1, à « l'inclusion » $X_0 \hookrightarrow \mathcal{X}$)
+
+Alors tous
+\[
+  \begin{array}{l}
+  i_a \in W \Longleftrightarrow i'_a \in W \\
+  i_b \in W \Longleftrightarrow i'_b \in W
+  \end{array}
+\]
+
+\emph{W8 bis} Soit un diagramme commutatif (traits pleins) dans $\mathrm{Cat}$
+
+\begin{tikzcd}[column sep=small, row sep=small]
+& X_a \arrow[dr, dashed] \arrow[ddd, "f_a"] & \\
+X_0 \arrow[ur] \arrow[dr] \arrow[ddd, "f_0"'] & & \mathcal{X} \arrow[ddd, "f"] \\
+& X_b \arrow[ur, dashed] \arrow[ddd, "f_b"'] & \\
+& X'_a \arrow[dr, dashed] & \\
+X'_0 \arrow[ur] \arrow[dr] & & \mathcal{X}' \\
+& X'_b \arrow[ur, dashed] &
+\end{tikzcd}
+
+\note{cube redessiné sur le modèle de celui de la moitié gauche ; sur la page, les flèches vers $\mathcal{X}$ et $\mathcal{X}'$ sont pointillées, les autres pleines. Les étiquettes $f_a$, $f_b$ se lisent mal.}
+\marginal{équivalemment : \ill{} \ill{} \ill{} $\mathcal{X}$, $\mathcal{X}'$ \ill{} \ill{} \ill{} \uncertain{cartésien} sur $\mathcal{X}'$}
+\note{en oblique à gauche du cube, en partie biffé. À droite du cube, une autre note oblique : « et \ill{} \ill{} $f$ \ill{} \ill{} ».}
+
+\uncertain{se complétant} par un diagramme commutatif dans $\mathrm{Hot}_{W}$ (\uncertain{via} construction de $\mathcal{X}$, $\mathcal{X}'$ \uncertain{à la W7bis}, $\mathcal{X} = \int\bigl(X_0 \to X_a,\ X_0 \to X_b\bigr)$). Considérons les conditions
+\[
+  \left\{
+  \begin{array}{l}
+  \text{a) } f \in W \\
+  \text{b) } f_0 \in W \\
+  \text{c) } f_a \text{ et } f_b \in W
+  \end{array}
+  \right.
+\]
+Alors deux de ces conditions impliquent la troisième.
+
+\page{52}
+\note{p.\ 18 de l'auteur (numéro entouré).}
+\struck{Variante forte} [Corollaire de W7 bis] (\uncertain{sous forme} plus forte \ill{} W\ill{})
+
+\emph{W7 bis} Soit $\mathcal{X}$ lisse sur $\underline{\Phi} = \bigl(0 \leftarrow a,\ 0 \to b\bigr)$, d'où diagramme (comme dans $\mathrm{Hot}_{W}$)
+\note{les pointes des flèches de $\underline{\Phi}$ se lisent mal, ici comme à la page 51.}
+
+\begin{tikzcd}[column sep=small, row sep=small]
+& X & \\
+X_a \arrow[ur, "i'_b"] & & X_b \arrow[ul, "i'_a"'] \\
+& X_0 \arrow[ul, "i_a"] \arrow[ur, "i_b"'] &
+\end{tikzcd}
+
+Alors
+\[
+  i_a \in W \Longleftrightarrow i'_a \in W
+\]
+(donc $i_b \in W \Longleftrightarrow i'_b \in W$)
+
+(\emph{NB} cela \uncertain{implique} l'axiome dual W7' bis, \uncertain{avec} $X$ \uncertain{propre} sur $\underline{\Psi} = \bigl(0 \to a,\ 0 \to b\bigr)$)
+
+\struck{Corollaire} de W8 bis (forme \uncertain{renforcée} \ill{} W\ill{})
+
+\emph{W8 bis} Soient $\mathcal{X}$, $\mathcal{X}'$ lisses sur $\underline{\Phi} = \bigl(0 \leftarrow a,\ 0 \leftarrow b\bigr)$ et $f : \mathcal{X} \to \mathcal{X}'$ un $\underline{\Phi}$-morphisme, \uncertain{soient} $f_a$, $f_b$, $f_0$ induits sur les fibres, et les conditions
+\begin{enumerate}
+  \item[a)] $f \in W$
+  \item[b)] $f_0 \in W$
+  \item[c)] $f_a$ et $f_b \in W$.
+\end{enumerate}
+Alors deux de ces conditions impliquent la troisième.
+
+\end{document}
