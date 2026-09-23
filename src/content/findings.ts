@@ -2398,4 +2398,39 @@ export const FINDINGS: Finding[] = [
     settle:
       'A person checks on the facsimile whether 377 recurs, in his hand and in the same corner, on the covers of neighbouring folders of the fonds — a series number would make page 1 a filing cover and say nothing about page 2 — and, as further folders are transcribed, looks for the MM-fibrés or multibundles of page 2 elsewhere in the fonds.',
   },
+  {
+    id: '116-presheaf-gluing-continuous-gluing-functor',
+    cote: '116',
+    pages: '6–7',
+    kind: 'mathematical',
+    claim:
+      'The folder asserts, without proof, that a topos glued from an open subtopos X₀ and its closed complement X₁ along a left exact φ : F(X₀) → F(X₁) is a presheaf topos Top(X) exactly when X₀ and X₁ are presheaf topoi Top(X₀), Top(X₁) and φ commutes with all projective limits, the gluing datum then being a bifunctor h : X₀^op × X₁ → (Ens).',
+    basis:
+      'Pages 6–7 write « Un cas particulièrement important pour nous est celui où X est de la forme Top(X), [illegible] X dans (Cat), il revient au même de dire que » X₀, X₁ are of the form Top(X₀), Top(X₁) and that φ commutes with arbitrary projective limits, i.e. has a left adjoint f^*, defined by a functor X₁ → X̂₀ extended by continuity in inductive limits, « correspondant i.e. à un bifoncteur » (x₀, x₁) ↦ h(x₁, x₀). « Top(X) » is written over a struck illegible word, « Top(X₀), Top(X₁) » over a struck « X̂₀, X̂₁ »; the words before « X dans (Cat) », before « un adjoint à g. » and at the start of the parenthesis on continuity are illegible. None of them carries the equivalence.',
+    ours:
+      'Every step of the proof is the reading’s, footnoted as its own: a subterminal of a presheaf topos is a sieve, cutting X into the full sieve X₀ and the cosieve X₁; the gluing functor is then restriction of a right Kan extension, hence continuous, and h(x₁, x₀) = Hom_X(x₀, x₁); conversely any h defines a category — the collage, or cograph, of the profunctor h — whose presheaf topos is the gluing. The reading sets this out as a forward statement followed by « Réciproquement »; this pass reads the page’s « il revient au même » as an equivalence and checks both halves. From memory, the direction from a profunctor to a gluing is standard; if anything here is a candidate it is the necessity half — a gluing that is a presheaf topos has a continuous gluing functor — which follows in two lines from subterminals of presheaf topoi being sieves and is likely folklore. Written on Opus 5.5 against a reading made on Opus 5.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Look for the statement that an Artin gluing is a presheaf topos if and only if both parts are and the gluing functor preserves all limits — equivalently, that presheaf topoi with an open subtopos are exactly the collages of profunctors — in SGA 4, IV 9.5 and the exercises that follow it; P. T. Johnstone, Sketches of an Elephant (2002), A2.1 and A4.5, on Artin glueing and open and closed subtoposes; G. C. Wraith, « Artin glueing » (J. Pure Appl. Algebra 4, 1974); A. Carboni and P. T. Johnstone, « Connected limits, familial representability and Artin glueing » (Math. Structures Comput. Sci. 5, 1995). If both halves are there, mark matched. All are cited from memory. No web search was available for this pass (2026-09-23), so nothing has been read.',
+  },
+  {
+    id: '116-leaves-undated-vocabulary-dates-nothing',
+    cote: '116',
+    pages: '1–10',
+    kind: 'codicological',
+    claim:
+      'Nothing in the folder dates his handwriting: its only date, 19 June 1981, is that of the administrative notice of page 10, which the transcription records as bearing nothing of his and as tied to no leaf he wrote on, so it bounds no leaf; and neither his vocabulary nor his two substitutions of « équivalence faible » for « asphérique » place the leaves in time, among themselves or against the literature the reading names.',
+    basis:
+      'The transcription records page 1 as the kraft wrapper carrying « Mapping cone » alone, page 2 as its other face, pages 3–7 in ink on white leaves under his title, page 8 blank but for the show-through of page 9, page 9 a separate leaf, and page 10 a notice of the Université des Sciences et Techniques du Languedoc dated 19 June 1981; it records no date in his hand, and says the notice is « presumably » how the archivists reached « [à partir de 1981] », « though nothing says so ». The substitutions are interlinear, on pages 3 and 5; page 4 keeps « strict. asphérique » unstruck.',
+    ours:
+      'The reading’s résumé says « Le vocabulaire est celui du début des années 1980 », on the strength of the two substitutions; that dates the leaves by their words and is not adopted here — a struck word orders two wordings of one line, not the leaves against anything. Its header lists as modern names, « given and footnoted as ours », Artin gluing (SGA 4 IV 9.5), the Sierpiński topos, cohomology with supports, the collage of a profunctor and Quillen’s Theorem A; nothing places any leaf before or after them. The reading calls pages 2 and 9 separate notes; this pass notes that page 2’s « induit iso sur Γ, puis H* » has the shape of page 3’s cohomology isomorphism, and adopts no link or order between them. The inventory’s « [à partir de 1981] » is not contradicted. No facsimile was consulted. Written on Opus 5.5 against a reading made on Opus 5.',
+    literature: [
+      'Transcription 116, batch 1 (batch-01.fr.tex), header, cover and pages 2–5',
+      'Modernised reading 116 (116.modern.tex), header, « Résumé » and the footnotes on pages 3, 5 and 7',
+    ],
+    status: 'candidate',
+    settle:
+      'A person checks on the facsimile whether the notice of page 10 carries anything of his on either face, whether it was folded inside the wrapper with the leaves of pages 3–7, and whether its paper matches theirs; a physical tie would bound the leaves it touches from below and nothing from above. Whatever is found, priority is not a claim this project makes, about anyone.',
+  },
 ];
