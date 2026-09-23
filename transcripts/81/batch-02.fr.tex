@@ -1,0 +1,979 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 81, batch 2 (pages 21-40).
+% Established from the facsimile archives/batches/81/batch-02.pdf (a mirror of
+% https://grothendieck.umontpellier.fr/81.pdf), per the skill
+% transcribe-grothendieck. The batch file carries no cover sheet: PDF page N
+% is archivists' page 20+N; the Montpellier footer prints « 21 » ... « 40 »,
+% and the pencilled numbers bottom-left agree wherever legible (« 31 »,
+% « 32 », « 33 », « 34 », « 35 », « 36 », « 37 », « 38 », « 39 » among
+% others). He did not paginate these leaves; his own formula numbers (1) to
+% (27) run through pages 31-38.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-09-23 — first pass, unchecked against the pages by a human.
+%
+% Eighteen of the twenty pages carry a \page. Absent: page 30, a blank
+% (pink) sheet; page 40, an otherwise blank sheet inscribed in pencil, top
+% right, in his hand, « relations d'équi. non parallèles » — a cover for the
+% run that opens batch 3 (page 41 ff.; « Relation d'équivalence non
+% parallèle » is the heading of its pages 48-50). By the rule for covers its
+% words head the next section, which lies in batch-03.fr.tex and opens on
+% them.
+%
+% What the batch is. Three runs, all on non parallel « binary
+% decompositions » of a space X into two closed « hemispheres » meeting in
+% an « equator » — the combinatorial frame for cutting a disc along
+% disjoint arcs.
+%   21-24  End of a run begun in batch 1: a family (E_i)_{i∈I} of disjoint
+%          « equators », each cutting X into Σ_i^+ and Σ_i^-. Page 21: for
+%          V = X \ ∪_{α∈K} Σ̂_α^+ (the Σ̂_α^+ disjoint), V̄ ∩ E_α =
+%          closure(Σ_α^-) ∩ E_α ≠ ∅ (a boxed, cancelled attempt, then a
+%          two-line proof). Page 22: V̄ ∩ E_β = ∅ for β ∉ K; Lemma (each E_i
+%          lies in one Σ_α^+); Corollary: the partition Π_K^0 consists of the
+%          Σ_α^+ and V. Page 23: the classes U_s (s ∈ S) of Π_I^0, the
+%          relation R ⊂ S × I (closure(U_s) ∩ E_i ≠ ∅); Lemma: (S, I, R) is a
+%          tree. Page 24 stops after a third of a page.
+%   25-29  A fresh start: « disposition binaire » of a set, hemispheres,
+%          equator; two dispositions « non parallèles »; the chain
+%          Σ_1^+ ⊃ E_1 → Σ_12 ← E_2 → Σ_2^+ and a long oblique margin on the
+%          degenerate case; page 27: from a tree Γ = (S, A, R) and families
+%          (U_s), (E_a), X = ∐ U_s ∐ ∐ E_a with one binary decomposition per
+%          edge; conditions (*) end-vertices, (**) and (***) order-2
+%          vertices; page 28: its picture as a graph with a point on each
+%          edge (barycentric subdivision); page 29: the traces on S* = S ∐ A'.
+%   31-39  « Version II », titled « Décompositions n-aires d'un espace
+%          topologique », numbered 1.1-1.3 with formulas (1)-(27): binary
+%          decomposition (closed hemispheres, equator, Σ^{0ε}), 1.2 non
+%          parallel pairs, the inclusion diagram (14) with its three
+%          cartesian-cocartesian squares, (16) Σ_12 ≠ ∅, Proposition
+%          (uniqueness of the disjoint pair), the cases (20) where the four
+%          sets are not distinct, Déf « strictement non parallèles » (21), the
+%          poset (22) on four elements; 1.3 families (Π_α)_{α∈A} mutually
+%          non parallel (« décomposition n-aire »), C = ∐ ω_α with its
+%          fixed-point-free involution σ and order (26), the increasing map
+%          (27) C → closed parts of X; Déf « quartette ordonné »; page 39:
+%          Proposition, C_{≥x} and C_{≤x} totally ordered — proof broken off
+%          mid-formula, the rest of the page blank.
+%
+% Notation fixed for the batch. \widehat{\Sigma} for his Σ with a hat
+% (pages 21-24, the closed hemisphere), \Sigma^{0\varepsilon} for his
+% « Σ^{0ε} » (hemisphere minus equator), \mathfrak{P}_2 for his script P_2,
+% \smallsetminus for set difference. The run 21-29 is a fast hand whose
+% formulas carry and whose prose often does not; 31-39 are written fair,
+% with oblique marginal notes that are largely uncertain. His tree diagram
+% (14) on page 33 and the four-point order on page 37 are commutative-diagram
+% like and go into tikzcd; the pictures (a segment with three points, a cross
+% of arrows) are described in \note{}.
+%
+% The dating is the inventory's own for the folder, copied verbatim. Its
+% group, [69-89] « Géométrie et topologie combinatoire ».
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{81}
+\batch{2}
+\pages{21}{40}
+\dating{[à partir de 1981]}
+\watermark{Édition de démonstration}
+\foldertitle{Immersions du disque et de la circonférence : notes manuscrites (s.d.).}
+
+\begin{document}
+
+\page{21}
+\struck{Un procédé par récurrence sur $\operatorname{card} K$, pour prouver
+que} On note d'abord que (si $V=X\smallsetminus\bigcup_{\alpha\in
+K}\widehat{\Sigma}_{\alpha}^{+}$, les $\widehat{\Sigma}_{\alpha}^{+}$
+($\alpha\in K$) étant disjoints)
+\note{sous l'accolade qui souligne $X\smallsetminus\bigcup_{\alpha\in
+K}\widehat{\Sigma}_{\alpha}^{+}$, il écrit « $=\bigcap_{\alpha\in
+K}\Sigma_{\alpha}^{-}$ »}
+\[
+  \left\{
+  \begin{array}{l}
+    \overline{V}\cap E_{\alpha}\neq\emptyset\\
+    V\cap\Sigma_{\alpha}^{-}\neq\emptyset\quad\text{dès que}\quad
+    V\cap\Sigma_{\alpha}^{+}=\emptyset
+  \end{array}
+  \right.
+\]
+\marginal{trivial}
+\note{« trivial » est écrit à gauche de la seconde ligne, dont le $\neq$
+remplace un $=$ biffé}
+
+De façon précise, je dis que
+\[
+  \overline{V}\cap E_{\alpha}=\overline{\Sigma_{\alpha}^{-}}\cap E_{\alpha}
+  \qquad(\text{qui est donc}\neq\emptyset)
+\]
+\note{au-dessous, une ligne biffée d'un trait :
+« $=\overline{V}\cap\widehat{\Sigma}_{\alpha}^{+}$ » sous le membre de gauche,
+« $\overline{\Sigma_{\alpha}^{-}}\cap\widehat{\Sigma}_{\alpha}^{+}$ » sous
+celui de droite}
+
+\struck{Comme $V\subset\Sigma_{\alpha}^{-}$, on a $V\cap
+E_{\alpha}\subset\overline{\Sigma_{\alpha}^{-}}\cap E_{\alpha}$, prouvons
+l'inclusion inverse}
+\struck{$\overline{\Sigma_{\alpha}^{-}}\cap E_{\alpha}\subset
+\overline{V}\cap E_{\alpha}$.}
+\struck{Soit $x\in\overline{\Sigma_{\alpha}^{-}}\cap E_{\alpha}$, prouvons
+$x\in\overline{V}\cap E_{\alpha}$ i.e.\ $x\in\overline{V}$, soit $W$ un
+voisinage de $x$, montrons qu'il rencontre \ill{}.}
+\struck{Or \ill{} par construction cette égalité comme égalité dans
+l'espace}
+\struck{$\widehat{\Sigma}_{\alpha}^{-}=\Sigma_{\alpha}^{-}\cup E_{\alpha}$}
+\struck{dans laquelle on a deux parties fermées disjointes}
+\note{tout ce passage est encadré d'un trait et barré de plusieurs longues
+diagonales ; devant « $=\widehat{\Sigma}_{\alpha}^{-}$ » un $X$ est biffé,
+et « égalité » remplace un mot biffé en début de ligne}
+
+Or dans $X$ on a les deux parties fermées \emph{disjointes}
+\[
+  Y=\widehat{\Sigma}_{\alpha}^{+},\qquad
+  Z=\bigcup_{\beta\in K\smallsetminus\{\alpha\}}\widehat{\Sigma}_{\beta}^{+}
+\]
+et on doit prouver
+\[
+  \overline{\bigl(X\smallsetminus(Y\cup Z)\bigr)}\cap Y
+  =\overline{(X\smallsetminus Y)}\cap Y
+\]
+ce qui est immédiat.
+
+\page{22}
+Soit maintenant $\beta\in I\smallsetminus K$, prouvons que l'on a
+\[
+  \overline{V}\cap E_{\beta}=\emptyset .
+\]
+En effet, $V$ \struck{contient} ne rencontre aucun $E_{i}$ ($i\in I$) donc
+\[
+  E_{\beta}\subset X\smallsetminus V=\bigcup_{\alpha\in
+  K}\widehat{\Sigma}_{\alpha}^{+},
+\]
+\struck{donc si \ill{}} je dis que si $\beta\in I\smallsetminus K$, on a en fait
+\[
+  E_{\beta}\subset\bigcup\Sigma_{\alpha}^{+}\qquad(\text{ouvert disjoint de
+  }V)
+\]
+qui prouve l'assertion — mieux, je dis que $\exists\,\alpha\in K$ tel que
+$E_{\beta}\subset\Sigma_{\alpha}^{+}$. Cela résulte du
+\marginal{c'est trivial, du fait que les $E_{i}$ ($i\in I$) sont disjoints}
+
+\emph{Lemme} Soit $K\subset I$, \struck{tel que les} et des
+$\Sigma_{\alpha}^{+}$ ($\alpha\in K$) tels que
+\[
+  \alpha\neq\beta\in K,\ \alpha\neq\beta\ \Rightarrow\ \Sigma_{\alpha}^{+}\cap\Sigma_{\beta}^{+}=\emptyset .
+\]
+Soit $i\in I\smallsetminus K$ tel que $E_{i}\subset\bigcup\Sigma_{\alpha}^{+}$,
+alors \struck{$E_{i}$ est contenu dans un} $\exists\,\alpha\in K$, tel que
+$E_{i}\subset\Sigma_{\alpha}^{+}$.
+
+Cela \struck{signifie que} \uncertain{provient} \ill{}
+\note{la phrase reste inachevée}
+
+\emph{Corollaire} Avec les hyp.\ précédentes sur
+$(\Sigma_{i}^{\alpha})_{\alpha\in K}$, la partition $\Pi_{K}^{0}$ est formée
+des $\Sigma_{\alpha}^{+}$ ($\alpha\in K$) et de
+\[
+  V=X\smallsetminus\bigcup_{\alpha\in K}\widehat{\Sigma}_{\alpha}^{+} .
+\]
+\note{la réunion est écrite avec le signe de réunion disjointe}
+
+Immédiat par récurrence sur $\operatorname{card} K\geqslant0$.
+
+\page{23}
+Considérons la partition $\Pi_{I}^{0}$ de $X\smallsetminus\bigcup_{i\in
+I}E_{i}$, soit $S$ l'ens.\ des classes, notées $U_{s}$ ($s\in S$).
+\struck{On} Considérons la \struck{relation $R$ entre} \struck{$\forall
+i\in I$,} \add{relation $R$ entre} $S$ et $I$
+\[
+  (s,i)\in R\ \overset{\text{déf}}{\Longleftrightarrow}\ \overline{U_{s}}\cap E_{i}\neq\emptyset .
+\]
+
+\emph{Lemme} Cette relation fait de $(S,I,R)$ un graphe strict ayant $S$
+comme ens.\ de sommets, $I$ comme ens.\ d'arêtes. \struck{Cette relation}
+Ce graphe est un \emph{arbre}.
+
+Le fait que c'est un graphe strict signifie que a) $\forall i\in I$,
+\struck{il y a} il y a exactement deux $U_{s}$ tels que
+$\overline{U_{s}}\cap E_{i}\neq\emptyset$, et b) $i$ est caractérisé par
+l'une de ces deux $U_{s}$.
+
+Soient $\Sigma_{i}^{+}$, $\Sigma_{i}^{-}$ les deux comp.\ conn.\ de
+$X\smallsetminus E_{i}$, alors a) se précise ainsi : il y a exactement
+\struck{une} une $U_{s_{+}}$ contenue dans $\Sigma_{i}^{+}$ telle que
+$\overline{U_{s_{+}}}\cap E_{i}\neq\emptyset$ (et de même pour
+$\Sigma_{i}^{-}$, \ill{} définit une $U_{s_{-}}\subset\Sigma_{i}^{-}$ telle
+que $\overline{U_{s_{-}}}\cap E_{i}\neq\emptyset$),
+
+\page{24}
+\struck{Soit en effet} Si on a $U_{s}\subset\Sigma_{i}^{-}$,
+$\overline{U_{s}}\cap E_{i}\neq\emptyset$, \struck{ainsi} alors on a
+\[
+  U_{s}=X\smallsetminus\bigcup_{\alpha\in K}\widehat{\Sigma}_{\alpha}^{+}
+  \qquad\text{où } i\in K\subset I
+\]
+$\forall\alpha\in K$
+$\Sigma_{\alpha}^{+}\in\pi_{0}(X\smallsetminus E_{\alpha})$ \struck{tel},
+et les $\Sigma_{\alpha}^{+}$ mut\add{uellemen}t disjoints.
+\note{dans $U_{s}\subset\Sigma_{i}^{-}$, le $\Sigma$ est repassé et son
+exposant mal formé ; la réunion est écrite avec le signe de réunion
+disjointe}
+
+Il faut voir que \struck{$K$} $K\smallsetminus\{i\}$ et les
+$\Sigma_{\alpha}^{+}$ ($\alpha\in K\smallsetminus\{i\}$) sont déterminés en
+termes de $i$ et de $\Sigma_{i}^{+}$ i.e.\ $\Sigma_{i}^{-}$. Je dis que
+\[
+  K\smallsetminus\{i\}=\{\alpha\in I\mid E_{\alpha}\subset\Sigma_{\alpha}^{-}\}
+\]
+\note{l'indice du dernier $\Sigma$ est bien un $\alpha$ sur la page ; on
+attendrait $\Sigma_{i}^{-}$. La page s'arrête là, les deux tiers inférieurs
+restent blancs}
+
+\page{25}
+Soit $X$ un ens. Une \emph{disposition binaire} de $X$ est un ens.\ de deux
+parties de $X$
+\[
+  (\Sigma^{\alpha})_{\alpha\in\omega}\qquad(\text{les “hémisphères”})
+\]
+\note{l'indice de la famille est mal formé ; on lit $\alpha\in\omega$ ou
+$\alpha\in\varepsilon$}
+dont la réunion est $X$, et dont \struck{l'intersection} aucune n'est
+contenue dans l'autre — on désigne par $E$ (“équateur”) l'intersection (on
+n'exclut pas qu'elle soit vide). Quand $X$ est un espace topologique, on
+\uncertain{suppose} \ill{} \ill{} que \struck{hémisphères} les
+$\Sigma_{\alpha}$ sont fermés, (et \add{de} plus, le plus souvent,
+\uncertain{connexes} \ill{} et \uncertain{si} $E\neq\emptyset$) ; si les
+$\Sigma^{\alpha}$ connexes et $E\neq\emptyset$, $X$ est connexe,
+\struck{\ill{}} si \struck{les $\Sigma^{\alpha,0}$ connexes}, on conclut
+\struck{aussitôt} que $\overline{\Sigma^{\alpha,0}}\cap E\neq\emptyset$ (car
+$\overline{\Sigma^{\alpha,0}}\cap E=\overline{\Sigma^{\alpha,0}}
+\smallsetminus\Sigma^{\alpha,0}$, et \uncertain{si} $\Sigma^{\alpha,0}$ une
+partie à la fois ouverte et fermée $\neq\emptyset$ et $\neq X$)
+\note{interligne, au-dessus de « le plus souvent » :
+« $\Sigma^{\alpha}$ et $\Sigma^{\alpha}\smallsetminus E=\Sigma^{\alpha,0}$ »
+; la fin de la phrase, depuis « connexes », est entourée d'un trait qui la
+rattache à cette insertion}
+
+\uncertain{car} $\Sigma^{\alpha,0}$ est un \uncertain{ouvert} \ill{}
+\note{début de ligne laissé en suspens}
+
+\marginal{diagramme \struck{\ill{}} : un segment,
+$\Sigma^{-}\supset E\subset\Sigma^{+}$}
+\note{dans la marge gauche, en oblique : un segment entre deux points, avec
+dessous « $\Sigma^{-}\supset E\subset\Sigma^{+}$ »}
+
+Considérons deux dispositions binaires $\{\Sigma_{1}^{+},\Sigma_{1}^{-}\}$,
+$\{\Sigma_{2}^{+},\Sigma_{2}^{-}\}$ \struck{distinctes} de $X$, on dit
+qu'elles sont \emph{non parallèles} \add{si elles sont \emph{distinctes},
+et} si on peut trouver $\Sigma_{1}^{+}$ dans l'une, $\Sigma_{2}^{+}$ dans
+l'autre, tels que
+\[
+  \Sigma_{1}^{+}\cap\Sigma_{2}^{+}=\emptyset\qquad(\text{d'où }E_{1}\cap
+  E_{2}=\emptyset)
+\]
+on a donc
+\[
+  \begin{array}{ll}
+    \Sigma_{1}^{+}\subset\Sigma_{2}^{-} &
+    \text{i.e.}\ \Sigma_{1}^{+}\cap\Sigma_{2}^{-}=\Sigma_{1}^{+}\\
+    \Sigma_{2}^{+}\subset\Sigma_{1}^{-} &
+    \text{i.e.}\ \Sigma_{2}^{+}\cap\Sigma_{1}^{-}=\Sigma_{2}^{+}
+  \end{array}
+\]
+\[
+  \Sigma_{12}\overset{\text{déf}}{=}\Sigma_{1}^{-}\cap\Sigma_{2}^{-}\supset
+  E_{1}\cup E_{2},\qquad\Sigma_{1}^{-}\cap\Sigma_{2}^{-}\neq\emptyset
+\]
+\note{après $\Sigma_{1}^{+}\subset\Sigma_{2}^{-}$, un « $\neq\emptyset$ »
+biffé}
+
+\page{26}
+cette dernière relation $\Sigma_{1}^{-}\cap\Sigma_{2}^{-}\neq\emptyset$ est
+vraie \uncertain{même} si $E_{1}=E_{2}=\emptyset$, car \struck{\ill{}} si
+\uncertain{on avait} de plus $\Sigma_{1}^{-}\cap\Sigma_{2}^{-}=\emptyset$, on
+en conclurait que les deux \struck{part.} décompositions binaires
+\struck{sont} (qui sont donc des partitions binaires) \uncertain{sont}
+\emph{identiques}, ce que l'on \uncertain{exclut}. Cela montre que les
+$\Sigma_{1}^{+}$, $\Sigma_{2}^{+}$ sont uniquement déterminés.
+
+On a donc le diagramme d'inclusions
+\[
+  \Sigma_{1}^{+}\supset E_{1}\hookrightarrow\Sigma_{12}\hookleftarrow
+  E_{2}\hookrightarrow\Sigma_{2}^{+}
+\]
+qu'on \uncertain{exprime} par un diagramme
+\note{un segment, trois points marqués (les deux extrémités et le milieu),
+et dessous
+« $\Sigma_{1}^{+}\supset E_{1}\hookrightarrow\Sigma_{12}\hookleftarrow
+E_{2}\hookrightarrow\Sigma_{2}^{+}$ »}
+\marginal{NB $\left\{\begin{array}{l}
+\Sigma_{1}^{-}=\Sigma_{12}\amalg_{E_{2}}\Sigma_{2}^{+}\\
+\Sigma_{2}^{-}=\Sigma_{12}\amalg_{E_{1}}\Sigma_{1}^{+}
+\end{array}\right.$}
+
+Je me propose d'étudier les ensembles \struck{\ill{}}
+$(\Pi_{\alpha})_{\alpha\in A}$ \struck{$\ill{}$, \ill{}} de décompositions
+binaires de $X$ \struck{\ill{}} deux à deux non parallèles. \uncertain{Voici}
+une façon \struck{très} générale \add{d'en} obtenir des \uncertain{exemples}.
+
+\marginal{Ceci n'implique pas que les quatre ensembles
+$\Sigma_{1}^{+},\Sigma_{1}^{-},\Sigma_{2}^{+},\Sigma_{2}^{-}$ soient
+distincts, car on peut avoir (bien que $\Sigma_{1}^{+}\neq\Sigma_{2}^{+}$, ni
+$\Sigma_{1}^{-}=\Sigma_{2}^{-}$, mais) $\Sigma_{1}^{+}=\Sigma_{2}^{-}$, qui
+implique : $E_{1}=\Sigma_{12}$ et \uncertain{contraire} $E_{2}=\emptyset$
+\ill{} (cela signifie, en termes de $(\Sigma_{1}^{+},\Sigma_{1}^{-})$, que
+$\Sigma_{2}^{-}=\Sigma_{1}^{+}$,
+$\Sigma_{2}^{+}=X\smallsetminus\Sigma_{1}^{+}=\Sigma_{1}^{-,0}$) \ill{}
+symétrique. On \uncertain{demande} \ill{} \uncertain{en ce cas}, i.e.\
+\uncertain{on} n'exige pas que les quatre ensembles
+$\Sigma_{1}^{+},\Sigma_{1}^{-},\Sigma_{2}^{+},\Sigma_{2}^{-}$ soient
+distincts \ill{} \ill{} les \struck{ens.} deux décompositions
+\uncertain{sont strict.} non parallèles.}
+\note{longue note de sa main, écrite en oblique dans toute la marge gauche,
+d'une lecture très incertaine ; elle porte aussi un petit segment entre deux
+points marqué « $\Sigma_{1}^{+}\supset E_{1}\subset\Sigma_{12}$ » et, sur une
+ligne biffée, « $\Sigma^{+}_{i}\in\pi_{0}\ldots$ ». Vers la fin, la
+correction « strict.\ » est ajoutée devant « non parallèles », ce qui
+annonce la notion de la page 36}
+
+\page{27}
+Soit $\Gamma=(S,A,R)$ un arbre ayant $S$ comme ens.\ de sommets, $A$ comme
+ens.\ d'arêtes, $R$ comme relation d'incidence [\uncertain{définie} par
+$A\hookrightarrow\mathfrak{P}_{2}(S)$, et $S\longrightarrow\mathfrak{P}(A)$,
+et cette application est injective sauf si $\Gamma$ est isomorphe au graphe
+$\bullet\!\!-\!\!\bullet$ ]. Soient $(U_{s})_{s\in S}$ et
+$(E_{a})_{a\in A}$ deux familles d'ensembles, et posons
+\[
+  X=\coprod_{s\in S}U_{s}\ \amalg\ \coprod_{a\in A}E_{a} .
+\]
+Pour tout $a_{0}\in A$, considérons les deux comp.\ conn.\ $\Gamma'$,
+$\Gamma''$ de l'arbre $\Gamma$ “coupé en $a_{0}$”, et considérons la
+décomposition binaire $X=X'\cup X''$ de $X$, où
+\[
+  X'=\coprod_{s\in S'}U_{s}\amalg\coprod_{a\in A'}E_{a},\qquad
+  X''=\coprod_{s\in S''}U_{s}\amalg\coprod_{a\in A''}E_{a},
+\]
+\note{il n'est pas précisé si $A'$, $A''$ contiennent $a_{0}$ ; la formule
+suivante le demande}
+donc
+\[
+  X'\cap X''=E_{a_{0}} .
+\]
+Cette décomposition est “propre” ssi $X'\neq E_{a_{0}}$,
+$X''\neq E_{a_{0}}$. Ceci est le cas, quel que soit le choix de $a_{0}\in
+A$, ssi on a la propriété suivante :
+
+($*$) Si $s\in S$ est un sommet-bout, alors $U_{s}\neq\emptyset$
+
+\page{28}
+De plus si $a_{1},a_{2}\in A$, $a_{1}\neq a_{2}$, on voit de suite que les
+décompositions $\Pi_{a_{1}}$, $\Pi_{a_{2}}$ sont non parallèles, à cela près
+qu'il \uncertain{faut exiger} (\uncertain{**}) \uncertain{si $s\in S$}
+\struck{\ill{} \ill{} sont \ill{} elles} \ill{} d'ordre 2, alors un des trois
+ens.\ $U_{s}$, $E_{a}$, $E_{b}$ \uncertain{est $\neq\emptyset$ si $a$, $b$
+sont les deux arêtes en $s$}.
+\marginal{\uncertain{si} $a\neq b$ \uncertain{ensemble}, donc
+$\Pi_{a}\neq\Pi_{b}$}
+\note{la condition (**) est écrite en partie dans l'interligne et en partie
+dans la marge gauche, en oblique, où on lit « $E_{a}$, $E_{b}$ \ill{}
+$\neq\emptyset$ \ill{} $a$, $b$ sont deux arêtes en $s$ » ; une ligne
+biffée court sous l'interligne}
+
+Une façon de visualiser la construction \uncertain{est via} un ensemble
+topologique
+\[
+  \mathcal{X}=(\boldsymbol{\Gamma},S)
+\]
+(tel que $\Gamma$ en soit une description combinatoire). On fixe un pt sur
+chaque arête, de façon à trouver un graphe topologique (subdivision
+barycentrique)
+\[
+  \mathcal{X}^{*}=(\boldsymbol{\Gamma}^{*},\underbrace{S\amalg A'}_{S^{*}}),
+\]
+où $A'\subset\boldsymbol{\Gamma}$ est en correspondance biunivoque
+\uncertain{canonique} avec \struck{\ill{}} $A$.
+\note{le $\mathcal{X}$ de la première formule remplace une lettre biffée,
+peut-être $\mathcal{A}$. Le $\Gamma$ qu'il souligne (le graphe comme espace
+topologique, par opposition à sa description combinatoire $\Gamma$) est
+transcrit $\boldsymbol{\Gamma}$ dans toute la page, pour ne pas le confondre avec
+le soulignement d'une lecture douteuse}
+
+\struck{\ill{}} [\emph{NB} $A'$ est formé de \struck{pts} sommets d'ordre 2,
+et \uncertain{chaque} arête de $\boldsymbol{\Gamma}^{*}$ a une
+\uncertain{et une seule} des deux extrémités \uncertain{dans} $A'$,
+\uncertain{l'autre} \ill{} $S$ — voici une description complète des
+propriétés particulières des $\Gamma^{*}$…]
+
+Alors les points $a'$ de $A'$ coupent $\boldsymbol{\Gamma}$ en deux
+composantes connexes, dont les adhérences définissent une décomposition
+binaire de $\boldsymbol{\Gamma}$, d'équateur $\{a'\}$. Deux telles
+décompositions de $\boldsymbol{\Gamma}$, pour $a'\neq a''$, définissent des
+décompositions binaires \emph{strict\add{ement}} non parallèles.
+
+\page{29}
+Ici, si on regarde les traces de ces décompositions binaires sur
+$S^{*}=S\amalg A'$. Donc pour toute application \emph{surjective}
+$X\longrightarrow S^{*}$, si on regarde les images inverses des décompositions
+binaires précédentes de $S^{*}$. Or la donnée d'une telle application revient
+à celle d'une famille $(X_{\sigma})_{\sigma\in S^{*}}$
+\add{d'ensembles} \uncertain{deux à deux disjoints $\neq\emptyset$}, i.e.\ à
+celle des deux familles $(U_{s})_{s\in S}$ et $(E_{a})_{a\in A}$ d'ens.\ non
+vides.
+\note{la première phrase reste sans verbe principal ; « deux à deux
+$\neq\emptyset$ » est ajouté dans l'interligne et rattaché par un trait}
+
+Le cas où certains des ensembles $U_{s}$, $E_{a}$ pourraient être vides est à
+examiner un peu de plus près, il donne \uncertain{évidemment} \ill{} en
+\uncertain{général} \uncertain{encore} ssi on a les conditions ($*$) ($**$)
+ci-dessus, et la condition de non-parallélisme \uncertain{strict} ssi on a
+\emph{aussi} ($***$) (\uncertain{en plus} que ($**$))
+
+($***$) Si $s\in S$ est un sommet \emph{d'ordre 2} \struck{et}, $a\in A$
+une arête incidente, on a \struck{que $U_{s}=\emptyset$, et}
+\[
+  U_{s}\neq\emptyset\quad\text{ou}\quad E_{a}\neq\emptyset .
+\]
+
+\page{31}
+\section{Décompositions $n$-aires d'un espace topologique}
+\marginal{Version II}
+\note{le titre est de sa main, en tête de la page 31 ; « Version II » est
+écrit en oblique dans le coin supérieur gauche, et souligné}
+
+1.1. Soit $X$ un espace topologique. On appelle \emph{décomposition binaire}
+de $X$ une paire (\uncertain{notation} indicielle\uncertain{ment})
+\[
+  \Pi=(\Sigma^{\varepsilon})_{\varepsilon\in\omega}\qquad(\omega\text{ ens.\ à deux éléments})
+\]
+de \struck{ensembles} parties \emph{fermées} (distinctes) de $X$, de réunion
+$X$
+\[
+  X=\bigcup_{\varepsilon\in\omega}\Sigma^{\varepsilon} .
+  \tag{1}
+\]
+On suppose que
+\[
+  \Sigma^{\varepsilon}\neq\emptyset\qquad(\forall\varepsilon\in\omega)
+  \tag{2}
+\]
+ce qui signifie aussi que
+\[
+  \Pi\neq\{\emptyset,X\}
+  \tag{2'}
+\]
+et implique que $X\neq\emptyset$, et même $\operatorname{card} X\geqslant2$,
+puisque l'on suppose
+\[
+  \Sigma^{\varepsilon}\neq\Sigma^{\varepsilon'}\quad\text{si}\quad
+  \varepsilon,\varepsilon'\in\omega,\ \varepsilon\neq\varepsilon' .
+  \tag{3}
+\]
+On n'exclut pas le cas où on aurait une inclusion
+\[
+  \Sigma^{\varepsilon'}\subset\Sigma^{\varepsilon}
+\]
+ce qui équivaut, par (1), à la relation
+\[
+  \Sigma^{\varepsilon}=X .
+\]
+Les $\Sigma^{\varepsilon}$ ($\varepsilon\in\omega$) s'appellent les
+\emph{hémisphères} de la décomposition binaire, \struck{\ill{}} et l'ensemble
+\[
+  E=\bigcap_{\varepsilon\in\omega}\Sigma^{\varepsilon}
+  \tag{4}
+\]
+s'appelle l'\emph{équateur} de la décomposition binaire.
+\note{dans (4) l'exposant est écrit $\omega$ au lieu de $\varepsilon$}
+
+On n'exclut pas le cas où l'on aurait $E=\emptyset$, ce qui indique que les
+$\Sigma^{\varepsilon}$ ($\varepsilon\in\omega$) \uncertain{complémentaires
+l'un de l'autre, donc} sont à la fois fermés et ouverts — donc que $X$ est
+disconnexe.
+\note{« ($\varepsilon\in\omega$) » et « complémentaires l'un de l'autre,
+donc » sont ajoutés dans l'interligne, le second d'une lecture incertaine}
+
+\page{32}
+Notons les implications
+\[
+  \left\{
+  \begin{array}{l}
+    X\ \text{connexe}\ \Longrightarrow\ E\overset{\text{déf}}{=}
+    \bigcap_{\varepsilon\in\omega}\Sigma^{\varepsilon}\neq\emptyset\\
+    \text{Si les }\Sigma^{\varepsilon}\text{ connexes, alors }
+    X\ \text{connexe}\ \Longleftrightarrow\ E\neq\emptyset .
+  \end{array}
+  \right.
+  \tag{5}
+\]
+Nous poserons
+\[
+  \Sigma^{0\varepsilon}=\Sigma^{\varepsilon}\smallsetminus E
+  =\Sigma^{\varepsilon}\smallsetminus\Sigma^{\varepsilon}\cap
+  \Sigma^{\varepsilon'}=X\smallsetminus\Sigma^{\varepsilon'}
+  \qquad(\omega=\{\varepsilon,\varepsilon'\})
+  \tag{6}
+\]
+de sorte que l'on a la décomposition
+\[
+  X=\Sigma^{0\varepsilon_{1}}\cup E\cup\Sigma^{0\varepsilon_{2}}
+  \qquad(\omega=\{\varepsilon_{1},\varepsilon_{2}\})
+  \tag{7}
+\]
+de $X$ en \struck{\ill{}} ens.\ mutuellement disjoints.
+\note{dans (7) les indices sont d'abord écrits $\varepsilon_{1}$,
+$\varepsilon_{2}$, puis corrigés en $\varepsilon'_{1}$, $\varepsilon'_{2}$
+dans la parenthèse ; la lecture des indices est incertaine}
+
+Notons
+\[
+  \overline{\Sigma^{0\varepsilon}}\cap E=\overline{\Sigma^{0\varepsilon}}\cap
+  \Sigma^{\varepsilon'}=\overline{\Sigma^{0\varepsilon}}\smallsetminus
+  \Sigma^{0\varepsilon}=\dot{\Sigma}^{0,\varepsilon} ,
+  \tag{8}
+\]
+\struck{dans le cas} \struck{on s'intéresse à la cond.}
+
+1.2. Deux décompositions binaires
+\[
+  \Pi_{1}=\{\Sigma_{1}^{\varepsilon}\}_{\varepsilon\in\omega_{1}},\qquad
+  \Pi_{2}=\{\Sigma_{2}^{\varepsilon}\}_{\varepsilon\in\omega_{2}}
+  \tag{9}
+\]
+sont dites \emph{non parallèles}, si elles sont distinctes, et s'il existe
+un $\Sigma_{1}^{+}\in\Pi_{1}$, et un $\Sigma_{2}^{+}\in\Pi_{2}$, tels que
+l'on ait
+\[
+  \Sigma_{1}^{+}\cap\Sigma_{2}^{+}=\emptyset
+  \tag{10}
+\]
+condition qui équivaut à :
+\[
+  \Sigma_{1}^{+}\subset\Sigma_{2}^{-}
+  \tag{11}
+\]
+ou encore :
+\[
+  \Sigma_{2}^{+}\subset\Sigma_{1}^{-}
+  \tag{11 bis}
+\]
+où $\Sigma_{1}^{-}$, $\Sigma_{2}^{-}$ sont définis par
+\[
+  \Pi_{1}=\{\Sigma_{1}^{+},\Sigma_{1}^{-}\},\qquad
+  \Pi_{2}=\{\Sigma_{2}^{+},\Sigma_{2}^{-}\}
+  \tag{12}
+\]
+\note{le numéro de la dernière formule, mal formé, se lit (12) ou (17) ;
+« si elles sont distinctes, et » est ajouté dans l'interligne}
+
+\page{33}
+Posons
+\[
+  \Sigma_{12}=\Sigma_{1}^{-}\cap\Sigma_{2}^{-},\qquad
+  E_{1}=\Sigma_{1}^{+}\cap\Sigma_{1}^{-},\qquad
+  E_{2}=\Sigma_{2}^{+}\cap\Sigma_{2}^{-}
+  \tag{13}
+\]
+alors on a le diagramme d'inclusions de parties fermées de $X$
+\note{c'est la formule (14) de la page ; les flèches sont les inclusions}
+
+\begin{tikzcd}[column sep=small, row sep=small]
+ & & X & & \\
+ & \Sigma_{2}^{-} \arrow[ur] & & \Sigma_{1}^{-} \arrow[ul] & \\
+ \Sigma_{1}^{+} \arrow[ur] & & \Sigma_{12} \arrow[ul] \arrow[ur] & &
+ \Sigma_{2}^{+} \arrow[ul] \\
+ & E_{1} \arrow[ul] \arrow[ur] & & E_{2} \arrow[ul] \arrow[ur] &
+\end{tikzcd}
+
+\note{sous $E_{1}$, une flèche hachurée d'un trait épais, et plus bas une
+lettre biffée, peut-être $E$}
+\marginal{NB $\Sigma_{1}^{+}\cap\Sigma_{2}^{+}=\emptyset$ donne
+$E_{1}\cap\Sigma_{2}^{+}=\emptyset$, $E_{2}\cap\Sigma_{1}^{+}=\emptyset$
+i.e.\ $E_{1}\subset\Sigma_{2}^{0-}$, $E_{2}\subset\Sigma_{1}^{0-}$,
+$E_{1}\cap E_{2}=\emptyset$}
+
+où les trois carrés sont cartésiens et cocartésiens, i.e.
+\[
+  \left|
+  \begin{array}{l}
+    E_{1}=\Sigma_{1}^{+}\cap\Sigma_{12},\quad
+    \Sigma_{2}^{-}=\Sigma_{1}^{+}\cup\Sigma_{12}
+  \end{array}
+  \right.
+\]
+\note{« cartésiens » est ajouté au-dessus de la ligne, après
+« cocartésiens » ; sous la formule, une lettre biffée}
+et les deux relations analogues correspondant aux deux autres carrés
+\[
+  \left\{
+  \begin{array}{l}
+    E_{2}=\Sigma_{12}\cap\Sigma_{2}^{+},\quad
+    \Sigma_{1}^{-}=\Sigma_{12}\cup\Sigma_{2}^{+}\\[4pt]
+    \Sigma_{12}\overset{(13)}{=}\Sigma_{1}^{-}\cap\Sigma_{2}^{-},\quad
+    X=\Sigma_{2}^{-}\cup\Sigma_{1}^{-} .
+  \end{array}
+  \right.
+  \tag{15}
+\]
+\note{dans la première ligne de (15), les indices de $\Sigma_{12}$ sont
+récrits par-dessus d'autres}
+
+Notons que
+\[
+  \left\{
+  \begin{array}{ll}
+    \text{a)} & \Sigma_{1}^{+}\cap\Sigma_{2}^{-}=\Sigma_{1}^{+}\neq\emptyset\\
+    \text{b)} & \Sigma_{2}^{+}\cap\Sigma_{1}^{-}=\Sigma_{2}^{+}\neq\emptyset\\
+    \text{c)} & \Sigma_{1}^{-}\cap\Sigma_{2}^{-}=\Sigma_{12}\neq\emptyset ,
+  \end{array}
+  \right.
+  \tag{16}
+\]
+\emph{Prouvons} la dernière relation (les deux premières étant évidentes).
+Si on avait $\Sigma_{12}=\emptyset$, comme $E_{1},E_{2}\subset\Sigma_{12}$,
+on aurait $E_{1}=\emptyset$, $E_{2}=\emptyset$, de sorte que $\Pi_{1}$ et
+$\Pi_{2}$ sont deux \emph{partitions} de $X$ en deux parties non vides, i.e.\
+\struck{$\Sigma_{1}^{-}=X\smallsetminus\Sigma_{1}^{+}$} on aurait
+\[
+  \Sigma_{1}^{-}=X\smallsetminus\Sigma_{1}^{+},\qquad
+  \Sigma_{2}^{-}=X\smallsetminus\Sigma_{2}^{+}
+\]
+
+\page{34}
+d'où
+\[
+  \Sigma_{12}=X\smallsetminus(\Sigma_{1}^{+}\cup\Sigma_{2}^{+})
+\]
+donc $\Sigma_{12}=\emptyset$ signifierait que
+\[
+  X=\Sigma_{1}^{+}\amalg\Sigma_{2}^{+}
+\]
+et par suite
+\[
+  \Pi_{1}=\{\Sigma_{1}^{+},\underset{\Sigma_{1}^{-}=X\smallsetminus
+  \Sigma_{1}^{+}}{\underset{\shortparallel}{\Sigma_{2}^{+}}}\},\qquad
+  \Pi_{2}=\{\Sigma_{2}^{+},\Sigma_{1}^{+}\}
+\]
+donc \struck{\ill{}} $\Pi_{1}=\Pi_{2}$ contrairement à l'hypothèse.
+\note{sous $\Sigma_{2}^{+}$, l'indice de $\Sigma^{-}$ est récrit ; on lit
+$\Sigma_{1}^{-}$}
+
+On trouve donc
+\marginal{\struck{Corollaire}}
+
+\emph{Proposition} \uncertain{Soient} $\Pi_{1}$, $\Pi_{2}$ deux
+décompositions binaires de $X$, mutuellement non parallèles. Alors il existe
+un \emph{unique} couple
+\[
+  (\Sigma_{1}^{+},\Sigma_{2}^{+})\in\Pi_{1}\times\Pi_{2}
+\]
+tel que l'on ait
+\[
+  \Sigma_{1}^{+}\cap\Sigma_{2}^{+}=\emptyset .
+\]
+\note{« Proposition » est écrit au-dessus de « Corollaire », biffé ; l'énoncé
+est marqué d'un trait vertical dans la marge}
+
+Soit alors
+\[
+  C=\Pi_{1}\amalg\Pi_{2}=\omega_{1}\amalg\omega_{2}
+  \tag{17}
+\]
+l'ensemble somme, qui a quatre éléments. On a une application canonique
+\[
+  C\longrightarrow\mathfrak{P}_{\text{fermé}}(X)
+  \tag{18}
+\]
+qui a comme image
+\[
+  \{\Sigma_{1}^{+},\Sigma_{1}^{-},\Sigma_{2}^{+},\Sigma_{2}^{-}\},
+  \tag{19}
+\]
+et laquelle on \uncertain{identifie} si (18) est injective i.e.
+\note{les numéros (17), (18), (19) sont récrits sur d'autres ; la phrase se
+poursuit à la page suivante}
+
+\page{35}
+si \struck{\ill{}} cardinal de l'ens.\ (18) est 4, i.e.\ si les quatre
+parties de $X$
+\[
+  \Sigma_{1}^{+},\ \Sigma_{1}^{-},\ \Sigma_{2}^{+},\ \Sigma_{2}^{-}
+\]
+sont distinctes. A \uncertain{priori} \uncertain{on sait} que l'on sait déjà
+par \struck{hypothèse} \struck{($\Pi_{1}$, $\Pi_{2}$ étant} \emph{définition}
+des déc.\ binaires
+\[
+  \Sigma_{1}^{+}\neq\Sigma_{1}^{-},\qquad\Sigma_{2}^{+}\neq\Sigma_{2}^{-}
+  \tag{$*$}
+\]
+et qu'on a
+\[
+  \Sigma_{1}^{+}\neq\Sigma_{2}^{+}
+  \tag{$**$}
+\]
+puisque $\Sigma_{1}^{+}$ et $\Sigma_{2}^{+}$ sont des parties disjointes
+\emph{non vides}. Notons donc qu'on \uncertain{lit} sur le diagramme (14)
+\[
+  \left.
+  \begin{array}{ll}
+    \text{a)} & (\Sigma_{1}^{+}=\Sigma_{2}^{-})\Longleftrightarrow
+    E_{1}=\Sigma_{12}\qquad(\Rightarrow E_{2}=\emptyset)\\
+    \text{b)} & (\Sigma_{2}^{+}=\Sigma_{1}^{-})\Longleftrightarrow
+    E_{2}=\Sigma_{12}\qquad(\Rightarrow E_{1}=\emptyset)
+  \end{array}
+  \right.
+  \tag{$*{*}*$}
+\]
+\note{dans a), le signe entre $\Sigma_{1}^{+}$ et $\Sigma_{2}^{-}$, et entre
+$E_{1}$ et $\Sigma_{12}$, est un $=$ repassé en $\neq$ ou l'inverse ; b) et
+la suite de l'argument demandent $=$}
+et que les deux relations a), b) \uncertain{énergiques} \uncertain{de}
+($*{*}*$) ne peuvent être satisfaites simultanément, puisque
+\struck{$\Sigma_{12}$} l'on aurait $\Sigma_{12}=E_{1}=E_{2}=\emptyset$
+puisque $E_{1}\cap E_{2}=\emptyset$, ce qui contredit (16) (c).
+
+Enfin
+\[
+  (\Sigma_{1}^{-}=\Sigma_{2}^{-})\Longleftrightarrow
+  (\Sigma_{1}^{-}=\Sigma_{2}^{-}=X)\quad\text{i.e.}\quad\Sigma_{12}=X
+  \tag{$*{*}{*}*$}
+\]
+\uncertain{ce} cas est mutuellement exclusif avec chacun des cas ($*{*}*$),
+\struck{\ill{} on aurait \ill{}} \struck{$\Sigma_{1}^{-}=\Sigma_{2}^{-}=X$}
+$\Sigma_{12}=X$ et $E_{1}=\Sigma_{12}$ \uncertain{on aurait} $E_{1}=X$ donc
+$\Sigma_{1}^{+}=\Sigma_{1}^{-}=X$, \struck{\ill{}} ce qui contredit (3).
+\note{deux lignes de ce passage sont en partie biffées et récrites dans
+l'interligne ; la lecture de leur enchaînement est incertaine}
+
+\emph{Proposition} Pour que l'on ait
+$\operatorname{card}\{\Sigma_{1}^{+},\Sigma_{1}^{-},\Sigma_{2}^{+},
+\Sigma_{2}^{-}\}=4$, il faut et il suffit que l'on ne soit pas dans l'un des
+trois cas suivants, qui s'excluent mutuellement
+\[
+  \left\{
+  \begin{array}{lll}
+    \text{a)} & E_{1}=\Sigma_{12} & (\Rightarrow E_{2}=\emptyset)\\
+    \text{a')} & E_{2}=\Sigma_{12} & (\Rightarrow E_{1}=\emptyset)\\
+    \text{b)} & \Sigma_{12}=X\ \text{i.e.}\ \Sigma_{1}^{-}=\Sigma_{2}^{-}=X &
+    (\text{d'où }E_{1}=\Sigma_{1}^{+},\ E_{2}=\Sigma_{2}^{+})
+  \end{array}
+  \right.
+  \tag{20}
+\]
+\uncertain{auquel cas le cardinal de \ill{} est égal à trois}.
+\note{cette dernière ligne est coupée par le bord inférieur de la feuille ;
+le numéro (20) est récrit sur un autre}
+
+\page{36}
+\emph{Cor}\add{ollaire} \struck{Dans} Dans le cas où
+$\operatorname{Card}\{\ \}=4$, et $\Sigma_{1}^{-}\neq X$,
+$\Sigma_{2}^{-}\neq X$, les seules relations d'inclusions entre les ensembles
+$\Sigma_{1}^{+},\Sigma_{1}^{-},\Sigma_{2}^{+},\Sigma_{2}^{-}$ sont les
+relations
+\[
+  (*)\quad\left\{
+  \begin{array}{l}
+    \Sigma_{1}^{+}\subset\Sigma_{2}^{-}\\
+    \Sigma_{2}^{+}\subset\Sigma_{1}^{-} .
+  \end{array}
+  \right.
+\]
+\note{« Cor » est écrit au-dessus d'un « D » biffé ; « et
+$\Sigma_{1}^{-}\neq X$, $\Sigma_{2}^{-}\neq X$ » est ajouté au-dessus de la
+ligne}
+\marginal{Sous forme : Pour que les relations \uncertain{ci-dessus} soient
+les seules relations d'inclusion \uncertain{non triviales} entre les
+ensembles $\Sigma_{1}^{+},\Sigma_{1}^{-},\Sigma_{2}^{+},\Sigma_{2}^{-}$, il
+faut et il suffit que ceux-ci \uncertain{soient} distincts et que l'on ait
+$\Sigma_{1}^{-}\neq X$, $\Sigma_{2}^{-}\neq X$.}
+\note{note de sa main, en oblique dans la marge gauche, qui reformule le
+corollaire ; lecture incertaine par endroits}
+
+En effet, on n'a pas les inclusions inverses, \ill{} par
+hypothèse. D'autre part, on n'a \emph{pas}
+\[
+  \Sigma_{1}^{+}\subset\Sigma_{1}^{-}\quad\text{ou}\quad
+  \Sigma_{1}^{-}\subset\Sigma_{1}^{+},
+\]
+car on aurait \struck{$\Sigma_{1}^{+}$, $\Sigma_{1}^{-}$}
+$\Sigma_{1}^{-}=X$, de même on n'a pas
+$\Sigma_{2}^{+}\subset\Sigma_{2}^{-}$ ni $\Sigma_{2}^{-}\subset\Sigma_{2}^{+}$,
+et on n'a pas $\Sigma_{1}^{+}\subset\Sigma_{2}^{+}$ ni l'inclusion inverse,
+puisque $\Sigma_{1}^{+}$ et $\Sigma_{2}^{+}$ sont disjoints et
+$\neq\emptyset$. Il reste à voir que l'on n'a pas une inclusion
+$\Sigma_{1}^{-}\subset\Sigma_{2}^{-}$ ou l'inclusion inverse, or on
+\uncertain{lit} sur le diagramme (14) que \struck{cela} la première
+\uncertain{p.\ ex.} \struck{signifierait que
+$\Sigma_{12}\simeq\Sigma_{1}^{-}$} \struck{et} \uncertain{implique}
+$\Sigma_{2}^{-}=X$, cas que l'on a exclu.
+\note{les deux mots entre « la première p.\ ex.\ » et « $\Sigma_{2}^{-}=X$ »
+sont récrits sur la ligne biffée ; « la première p.\ ex.\ » est ajouté dans
+l'interligne}
+
+\emph{Déf} On dit que $\Pi_{1}$, $\Pi_{2}$ sont \emph{strictement non
+parallèles} si elles sont non parallèles, et si les quatre ensembles
+$\Sigma_{1}^{+},\Sigma_{1}^{-},\Sigma_{2}^{+},\Sigma_{2}^{-}$ sont
+distincts, et si de plus $\Sigma_{1}^{-}\neq X$, $\Sigma_{2}^{-}\neq X$ —
+i.e.\ si les seules relations d'inclusion entre ces ensembles
+$\Sigma_{1}^{+},\Sigma_{1}^{-},\Sigma_{2}^{+},\Sigma_{2}^{-}$ sont
+$\Sigma_{1}^{+}\subset\Sigma_{2}^{-}$, $\Sigma_{2}^{+}\subset\Sigma_{1}^{-}$ —
+ce qui signifie aussi que l'on a :
+\[
+  \Sigma_{1}^{-}\neq X,\ \Sigma_{2}^{-}\neq X\ \ (\text{on dit donc que
+  }\Pi_{1},\Pi_{2}\text{ sont \emph{propres}}),\quad
+  E_{1}\neq\Sigma_{12},\ E_{2}\neq\Sigma_{12} .
+  \tag{21}
+\]
+\note{la définition est marquée d'un trait vertical dans la marge ; « si
+elles sont non parallèles, et » est ajouté dans l'interligne}
+
+\page{37}
+Mais si cette condition n'est pas satisfaite pour $\Pi_{1}$, $\Pi_{2}$ non
+parallèles, on \uncertain{écrit} \ill{}, et on regarde l'ens.\ à quatre
+éléments
+\[
+  C=\Pi_{1}\amalg\Pi_{2}=\omega_{1}\amalg\omega_{2}=\{\varepsilon_{1}^{+},
+  \varepsilon_{1}^{-},\varepsilon_{2}^{+},\varepsilon_{2}^{-}\}
+  \tag{17}
+\]
+et la relation d'ordre dessus, où les seules relations $<$ sont données
+par
+\[
+  \varepsilon_{1}^{+}<\varepsilon_{2}^{-},\qquad
+  \varepsilon_{2}^{+}<\varepsilon_{1}^{-}
+  \tag{22}
+\]
+
+\begin{tikzcd}[column sep=small, row sep=small]
+\varepsilon_{1}^{-} & \varepsilon_{2}^{-} \\
+\varepsilon_{1}^{+} \arrow[ur] & \varepsilon_{2}^{+} \arrow[ul]
+\end{tikzcd}
+
+\note{les quatre éléments sont des points ; sous $\varepsilon_{1}^{+}$ un
+mot biffé}
+
+1.3. Soit \struck{$(\Pi_{\alpha})_{\alpha\in A}$ une famille}
+\[
+  (\Pi_{\alpha})_{\alpha\in A},\qquad
+  \Pi_{\alpha}=\{\Sigma_{\alpha}^{\varepsilon}\}_{\varepsilon\in\omega_{\alpha}}
+  \tag{23}
+\]
+\struck{une famille} \add{un} ens.\ (\uncertain{notation}
+indicielle\uncertain{ment}) \struck{de} \uncertain{de} décompositions
+binaires de $X$, \uncertain{on suppose} \struck{parallèles}
+\[
+  \forall\alpha,\beta\in A,\ \alpha\neq\beta,\quad\Pi_{\alpha},\Pi_{\beta}
+  \text{ sont mut\add{uellemen}t non parallèles.}
+  \tag{24}
+\]
+\emph{Déf} \struck{On} On dit alors que $(\Pi_{\alpha})_{\alpha\in A}$ est
+non parallèle. (Terminologie analogue pour \emph{strictement} non
+parallèle).
+\marginal{c'est un élément de
+$\mathfrak{P}(\mathfrak{P}_{2}(\mathfrak{P}(X)))$ \ill{}}
+\marginal{On dit, si $\operatorname{card} A=n$, que l'on a une
+\emph{décomposition $n$-aire} non parallèle de $X$}
+\note{deux notes de sa main, en oblique dans la marge gauche ; la seconde
+porte le titre de la page 31}
+
+Considérons
+\[
+  C=\coprod_{\alpha\in A}\omega_{\alpha}
+  \tag{25}
+\]
+avec l'involution sans pt fixe $\sigma$ qui sur chaque $\omega_{\alpha}$
+induit une transposition, et sur $C$ la relation d'ordre, dans laquelle on
+a
+\note{la page s'arrête sur ce « a », en bas de feuille ; l'ajout sur
+l'involution $\sigma$ est écrit dans l'interligne à droite de (25)}
+
+\page{38}
+\[
+  \Bigl(x<y,\ x\in\omega_{\alpha},\ y\in\omega_{\beta}\Bigr)
+  \Longleftrightarrow
+  \Bigl(\alpha\neq\beta,\ x\underset{\{\Pi_{\alpha},\Pi_{\beta}\}}{<}y\Bigr)
+  \tag{26}
+\]
+\note{dans le membre de gauche, « $x\in\omega_{\alpha}$ »,
+« $y\in\omega_{\beta}$ » sont écrits verticalement, $\omega_{\alpha}$ sous
+$x$ et $\omega_{\beta}$ sous $y$, avec un $\in$ couché ; sous l'accolade du
+membre de droite : « i.e.\
+$\Sigma_{\alpha}^{x}\cap\Sigma_{\beta}^{\sigma y}=\emptyset$ »}
+
+\marginal{il faut vérifier que c'est \uncertain{transitif} \ill{} relation
+\ill{} \uncertain{i.e.} \uncertain{d'ordre}}
+\note{note en oblique dans la marge gauche, sur le mot « Alors »}
+
+Alors $\sigma$ est un antiautomorphisme (involutif sans pt fixe) de $C$.
+L'application
+\[
+  \begin{array}{c}
+    C\overset{\varphi}{\longrightarrow}\mathfrak{P}_{\text{fermé}}(X)\\
+    (\alpha,x)\longmapsto\Sigma_{\alpha}^{x}
+  \end{array}
+  \tag{27}
+\]
+est une application croissante. Pour qu'elle soit injective, et définisse un
+isomorphisme d'ens.\ ordonnés de $C$ sur son image, il faut et il suffit que
+$(\Pi_{\alpha})_{\alpha\in A}$ soit \emph{strictement non parallèle}.
+
+Inversement on a :
+
+\emph{Définition} On appelle \emph{quartette \struck{ordonné}}
+\add{\uncertain{ordonné}} (de décompositions $n$-aires) un ens.\
+\uncertain{fini} \struck{\ill{}} $C$, muni d'une involution $\sigma$ sans pt
+fixe, et d'une relation d'ordre, ayant les propriétés suivantes :
+\note{« quartette » est souligné ; « ordonné » y est biffé puis, semble-t-il,
+récrit ; au-dessus de « un ens.\ » un mot ajouté, peut-être « fini »}
+
+\struck{a) Si $x,y\in C$ et $x<y$, alors $\sigma x$ et $\sigma y$ …}
+\struck{Si $x,y\in C$, $\sigma x\neq y$, $x$ et $y$ …}
+\struck{on n'a pas $x<y$ \ill{}}
+\note{trois lignes biffées d'un trait chacune, et le numéro a) barré d'une
+grande croix}
+
+a) si $x,y\in C$, \struck{\ill{}} alors
+\uncertain{$\bigl\{$}$x,y$ comparables
+\struck{$\sigma x,y$ et $x,\sigma y$} ssi $\sigma x,y$ non comparables,
+\struck{et $\sigma y<\sigma x$}
+
+\struck{b) si $x,y\in C$, alors $x<y\Rightarrow\sigma y<\sigma x$}
+\note{b) est biffé d'un trait, mais son contenu est repris dans le NB qui
+suit ; la numérotation a), b) est corrigée plusieurs fois dans la marge}
+
+\marginal{NB \ill{} que $x<y$ \uncertain{ssi} \ill{} $x<y$ \uncertain{non}
+\uncertain{comparables} \ill{} $\sigma$}
+\note{note en oblique dans la marge gauche, en bas de page ; lecture très
+incertaine}
+
+\emph{NB} \uncertain{Cela} \ill{} \uncertain{que} $\sigma$ est un
+antiautomorphisme de l'ens.\ ordonné $C$
+\note{la dernière ligne de la page s'arrête là}
+
+\page{39}
+\emph{Proposition} Soit $(C,\sigma,<)$ un \struck{\ill{}}
+quartette ordonné. Alors pour tout $x\in C$, \struck{les ens.}
+\[
+  C_{\geqslant x}=\{y\in C\mid y\geqslant x\},\qquad
+  C_{\leqslant x}=\{y\in C\mid y\leqslant x\}
+\]
+sont \emph{totalement} ordonnés.
+\note{l'énoncé est marqué d'un trait vertical dans la marge ; le mot
+souligné est abrégé « tot$^{t}$ »}
+
+Il suffit de \uncertain{prouver} la première (par dualité), \struck{soit
+donc} ce qui signifie aussi :
+\[
+  \text{si } x<y,\ x<z,\ \text{avec } y\neq z,\ \text{alors } (y,z)\ \text{comparables.}
+\]
+\note{à gauche, un petit croquis : trois points $x$ (en bas), $y$ et $z$
+(en haut), avec des flèches $x\to y$, $x\to z$ et deux traits croisés}
+
+[On note que $y$ et $z$ sont non conjugués \uncertain{mod} $\sigma$, car
+\uncertain{ce serait} \uncertain{contre} (28 a),] Si $y$ et $z$ étaient
+\emph{in}comparables, on aurait que $\sigma y$ et $z$ sont comparables,
+\uncertain{or} on ne peut avoir $z\leqslant\sigma y$ car on aurait
+$x\leqslant\sigma y$, ce qui contredit $x<y$ par (28 a). On
+\struck{\ill{}} aurait donc $\sigma y<z$ d'où $\sigma z<$
+\note{la phrase s'arrête là ; le reste de la page est blanc. La référence
+(28 a) renvoie sans doute à la condition a) de la page 38, dont le numéro
+n'est pas lisible sur la page ; « $y$ et $z$ » après « Si » sont récrits
+sur d'autres lettres}
+
+\end{document}

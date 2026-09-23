@@ -1,0 +1,551 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 81, batch 3 (pages 41-54).
+% Established from the facsimile archives/batches/81/batch-03.pdf (a mirror of
+% https://grothendieck.umontpellier.fr/81.pdf), per the skill
+% transcribe-grothendieck. The batch file carries no cover sheet: PDF page N
+% is archivists' page 40+N; the pencilled numbers bottom-left read « 41 »,
+% « 42 », « 43 », « 44 », « 48 », « 49 », « 50 », « 51 », « 52 », « 53 »,
+% « 54 » at the expected PDF pages (1-4, 8-14), and the others fall in
+% sequence. He did not paginate these leaves.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-09-23 — first pass, unchecked against the pages by a human.
+%
+% All fourteen pages carry a \page. Page 54 has no word on it (pencil
+% sketches continuing page 53's gluing pictures) and is kept as a \page with
+% a \note describing the drawings. Nothing is skipped as unrelated.
+%
+% What the batch is. Combinatorics of a finite « polygon »: a finite set S of
+% cardinal N ≥ 3 with a « bi-circulation » {u, u^{-1}} (a cyclic order up to
+% reversal), i.e. the vertices of a disc's boundary circle.
+%   41-43  Segments of S (T = {s_0, u s_0, ..., u^{i-1} s_0}, 0 < i < N);
+%          complements, intersections, unions; endpoints; the bijection
+%          segments <-> S × [1, N-1] once an orientation is chosen; the
+%          segments contained in a proper subset S' (its components, read
+%          topologically on a polygon (X, S)); Proposition: for disjoint
+%          A, B ≠ ∅, S the equivalent conditions a) disjoint enclosing
+%          segments, b) no crossing pairs {a,a'}, {b,b'}, c)/c') each lies
+%          in a component of the other's complement; « A, B non parallèles »;
+%          margin d): convex hulls P_A ∩ P_B = ∅ for S on a convex curve.
+%   44     « Structure à étudier » : partitions of S into mutually non
+%          parallel parts (« partitions non parallèles »); intuition that
+%          they reduce to degree-2 partitions (chord diagrams) on a smaller
+%          bi-circulated set. A circle drawn below.
+%   45-47  Families Σ of nested-or-disjoint segments (σ1, σ2), the « cores »
+%          A* = A \ ∪_{B ⊊ A} B, their disjointness, the partition Σ̂* of S;
+%          (σ3); page 47: whether Σ̂* determines Σ — no, a counterexample
+%          with three chords a_1a_1', bb', a_2a_2' (drawn).
+%   48-50  Brown ink. « Relation d'équivalence non parallèle » R on S;
+%          R-saturated segments; Prop: minimal saturated segments are the
+%          classes that are segments (« anglets »); Cor: ≥ 2 anglets unless
+%          R is the coarse relation; the induction removing anglets
+%          (R_1 = R|S_1 ...), the tower Σ_1, Σ_2, ... / T_1, T_2, ...
+%   51-52  Black ink, a restart for a « quasi-segment » I: non parallel pairs
+%          ε, ε' ∈ 𝔓_2(I) and parts; « Partitions non parallèles de I »
+%          from a family Σ of segments with a), b), c); A*, Σ̂, Σ̂*; NB every
+%          non parallel partition arises so, in several ways; Σ_max. Page 52
+%          stops after four lines.
+%   53-54  A different subject on a square sheet: gluing two maps along an
+%          edge (« attachement de deux arêtes ») — the bi/bi, mon/bi and
+%          mon/mon cases, with the effect on f (faces) and g (genus).
+%          Page 54: pencil sketches only.
+%
+% Notation fixed for the batch. \mathfrak{P}_2(A) for his script P_2 (the
+% set of two-element subsets); \smallsetminus for his set difference; A^* for
+% his starred cores; \widehat{\Sigma} for his Σ with a hat. His « ens. »,
+% « segm. », « comp. », « card » are kept as written. Brown-ink pages 48-50
+% are a fast hand whose formulas carry and whose prose often does not; the
+% rotated margins on pages 41-43 and 51 are largely \ill{}.
+%
+% The dating is the inventory's own for the folder, copied verbatim. Its
+% group, [69-89] « Géométrie et topologie combinatoire ».
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{81}
+\batch{3}
+\pages{41}{54}
+\dating{[à partir de 1981]}
+\watermark{Édition de démonstration}
+\foldertitle{Immersions du disque et de la circonférence : notes manuscrites (s.d.).}
+
+\begin{document}
+
+\section{Relations d'équi.\ non parallèles}
+\note{ces mots sont de sa main, au crayon, sur le feuillet 40 (dernier du lot
+précédent), par ailleurs vierge, qui ne reçoit pas de numéro de page}
+
+\page{41}
+Soit $S$ un ens.\ fini, \add{de} \uncertain{cardinal} $N$, avec une structure
+polygonale ou bi-circulation $\{u,u^{-1}\}$ ($\operatorname{card} S\geqslant
+3$).
+
+\struck{\ill{}} $T\subset S$ \add{de cardinal $i$} est dit un
+\struck{\ill{}} \emph{segment} de $S$, si
+a) \struck{\ill{}} $T\neq S$, $T\neq\emptyset$ \struck{$i\neq N$} i.e.\
+$0<i<N$
+b) $\exists\, s_{0}\in S$, \struck{$i\in\mathbb{N}$}, tel que
+$T=\{s_{0},us_{0},\dots,u^{i-1}s_{0}\}$ (alors, posant
+$t_{0}=u^{i-1}s_{0}$, on a aussi $T=\{t_{0},vt_{0},\dots,v^{i-1}t_{0}\}$,
+où $v=u^{-1}$).
+
+\emph{Ex.} les parties réduites à un point. \struck{\ill{}} les
+parties-arêtes.
+
+$T$ est un segm.\ ssi $S\smallsetminus T$ en est un.
+
+\emph{Intersection} de deux segments \add{contenus dans un segment} (en est un
+ssi il est $\neq\emptyset$)
+
+Réunion de deux segments qui se rencontrent et tels que $T\cup T'\neq S$
+\add{est un segment}
+
+Extrémités d'un segment : $s_{0}$, $t_{0}$ (distinctes ssi $i\neq1$ i.e.\ $T$
+non réduit à un point).
+\marginal{\uncertain{Propr.} : \ill{}, \uncertain{soit} $A$ \ill{}}
+\marginal{i.e.\ \ill{} de $S$ \ill{}}
+
+Origine, extrémité pour une orientation.
+
+[\emph{NB} Si $u$ i.e.\ l'orientation choisi, le $s_{0}$ est unique i.e.\ il
+y a corr.\ 1-1 entre l'ens.\ des segments de $S$ et l'ens.\
+$(S,[1,N-1]_{\mathbb{N}})$, via
+\[
+  (s_{0},i)\longmapsto\{s_{0},us_{0},\dots,u^{i-1}s_{0}\}.
+\]
+\note{le crochet ouvert devant \emph{NB} n'est pas refermé sur la page ; le
+couple $(S,[1,N-1]_{\mathbb{N}})$ est écrit tel quel, pour ce qui est
+visiblement le produit $S\times[1,N-1]$}
+
+Soit $S'\subsetneq S$ une partie de $S$. Alors \struck{les segments de $S$
+contenus} deux segments de $S$ contenus dans $S'$, et qui se rencontrent, ont
+comme réunion un segment \add{de $S$} contenu dans $S'$ — cela implique
+
+\page{42}
+que pour tout segment $I$ de $S$, \add{$I\subset S'$}, il existe un plus grand
+segment de $S$ contenu dans $S'$ le contenant. Les éléments maximaux de
+\add{$\operatorname{Segm}_{S'}(S)$} sont \uncertain{exactement} les
+\emph{segments} \ill{} \ill{} partition de $S'$, \ill{} d'une relation
+d'équivalence dans $S'$.
+\marginal{i.e.\ \uncertain{introduisant}
+$\operatorname{Segm}_{S'}(S)=\{I\subset S'\mid
+I\in\operatorname{Segm}(S)\}$}
+\marginal{les éléments maximaux de $\operatorname{Segm}(S,S')$ \ill{} les
+segments \uncertain{composants} de $S'$ \ill{} en corr.\ \ill{}
+$S\smallsetminus I$ \ill{}}
+
+\ill{} d'une réalisation top.\ de $(S,\{u,u^{-1}\})$ par un polygone top.\
+$(X,S)$, si $S''=S\smallsetminus S'$, les \struck{classes} segments de $S'$
+sont en corr.\ biunivoque \add{avec les} comp.\ conn.\ de $X\smallsetminus
+S''$ qui rencontrent $S'$ — ce sont les intersections de $S'$ avec ces comp.\
+connexes.
+
+\note{dans la marge gauche, un cercle portant une vingtaine de points, les
+uns pleins, les autres évidés ; légende en dessous : « $S''$
+\uncertain{marqué} \ill{} »}
+
+\emph{Proposition} Soient $A$, $B$ deux parties \struck{disjointes}
+\struck{non vides} de $S$, \ill{} \struck{$A$ et $B$} $A,B\neq\emptyset,S$,
+$A\cap B=\emptyset$.
+
+Conditions équivalentes :
+
+a) Il existe des segments $\overline{A}$, $\overline{B}$ de $S$, tels que
+$\overline{A}\supset A$, $\overline{B}\supset B$,
+$\overline{A}\cap\overline{B}=\emptyset$,
+
+\marginal{\emph{NB} On \ill{} \ill{} $\overline{A}$, $\overline{B}$
+\add{plus petits} \struck{\ill{}} segments \ill{}}
+
+\page{43}
+b) Pour $a,a'\in A$, $b,b'\in B$, avec $a\neq a'$, $b\neq b'$,
+\struck{les \ill{}} $a$, $a'$ sont \struck{contigus} \emph{adjacents}
+\add{l'un à l'autre} pour la structure bi-circulaire sur $\{a,a',b,b'\}$
+induite par celle de $S$, \struck{i.e.\ \ill{}} ($\Longleftrightarrow$
+$\{b,b'\}$ sont adjacents)
+
+$\Longleftrightarrow$ $\{a,a'\}$ ne \uncertain{sont} pas
+\uncertain{opposés} $\Longleftrightarrow$ $b$, $b'$ ne \uncertain{sont}
+\ill{}
+
+c) $B$ est contenu dans un segment composant de $S\smallsetminus A$
+
+c') $A$ est contenu dans un segment composant de $S\smallsetminus B$
+
+\uncertain{Quand} il en est ainsi : Parmi les \add{couples de} segments
+$(\overline{A},\overline{B})$ satisfaisant les conditions de a), il existe
+un plus petit…
+
+On dit que $A$, $B$ sont \emph{non parallèles} (plus généralement si
+$A\cap B$ est un segment). \emph{Ex.} Si \struck{\ill{}} $A$ ou $B$ réduit
+à un pt.\ (de cardinal 1), cela signifie \ill{} pour la bicirculation \ill{}
+un côté du \uncertain{couvert} $A\cup B$ \ill{} $B$ est un côté). Donc, $A$
+et $B$ sont non parallèles \uncertain{ssi} $\forall A'\in\mathfrak{P}_{2}(A)$,
+$B'\in\mathfrak{P}_{2}(B)$, $A'$ et $B'$ sont non parallèles.
+
+\marginal{d) Quand $S$ est réalisé comme partie \add{\uncertain{convexe}} du
+\uncertain{bord} d'un disque plan (dans un plan réel affine) : Soit $P_{A}$
+la réunion des segments affines joignant deux à deux les points de $A$ (i.e.\
+l'enveloppe convexe de $A$) \ill{} $\Longleftrightarrow$ $P_{A}\cap
+P_{B}=\emptyset$ \ill{} \struck{\ill{} $A$, $B$ \ill{}} \ill{} conditions
+\ill{} $A\cup B$ \ill{} $C\supset A\cup B$, \ill{} les composantes \ill{}}
+\note{longue note marginale en travers, écrite en rotation dans la marge
+gauche et en partie surchargée ; seuls les termes mathématiques ressortent}
+
+\page{44}
+\emph{Structure à étudier} : Partitions de $S$ en des
+$(S_{\alpha})_{\alpha\in J}$ mutuellement non parallèles. (On les appelle
+des \emph{partitions non parallèles})
+\marginal{\emph{Ex.} partitions \ill{} (au moins deux) \ill{} de $S$}
+
+\emph{Intuition} À \struck{\ill{}} un ens.\ bicirculé \add{de cardinal $N$,}
+muni d'une partition non parallèle, correspond (\uncertain{essentiellement}
+pour les \ill{}) un ens.\ bicirculé (d'ordre \add{pair} cardinal $N'\leqslant
+N$), avec une partition \add{non parallèle} de degré 2 (classes de cardinal
+2)…
+
+\note{sous ce texte, un grand cercle tracé à la main, sans aucune marque ; le
+reste de la page est vide}
+
+\page{45}
+Soit $\Sigma$ un ens.\ de segments de $S$, satisfaisant \add{aux} les
+conditions suivantes :
+
+($\sigma_{1}$) \struck{\ill{}} Si $A,B\in\Sigma$, et si $A\cap
+B\neq\emptyset$, alors $A\subset B$ ou $B\subset A$.
+
+\add{($\sigma_{2}$)} Si de plus $A\neq B$ et $A\subset B$, alors $A$ est
+contenu dans l'intérieur de $B$.
+
+Posons alors, pour $A\in\Sigma$ :
+\[
+  A^{*}=A\smallsetminus\bigcup_{\substack{B\in\Sigma\\ B\subset A,\ B\neq A}}B .
+\]
+On a (par $\sigma_{2}$) $A^{*}\supset\partial A$ (ens.\ des extrémités de
+$A$), donc $A^{*}\neq\emptyset$. Je dis que $A\mapsto A^{*}$,
+$\Sigma\to\mathfrak{P}(S)$ est injectif, i.e.\ que si $A,B\in\Sigma$, alors
+$A^{*}=B^{*}\Rightarrow A=B$ \struck{\ill{}} $A\neq B$ \struck{distincts}
+$\Rightarrow A^{*}\neq B^{*}$. \add{Comme \ill{} $A^{*}$, $B^{*}$ sont
+$\neq\emptyset$, il suffit de voir que $A^{*}\cap B^{*}=\emptyset$.}
+
+\struck{En effet}, si $A\cap B=\emptyset$, alors $A^{*}\cap B^{*}=\emptyset$,
+donc \ill{} (puisque $A^{*}$, $B^{*}$ non vides). Si $A\cap B\neq\emptyset$,
+\ill{} (par $\sigma_{1}$) $A\subset B$ ou $B\subset A$, soit $A\subset B$.
+\struck{Mais $A\cap\partial B=\emptyset$ (\struck{donc} par $\sigma_{2}$)
+$A^{*}\cap\partial B=\emptyset$, donc $A^{*}\not\supset B^{*}$ (comme
+\ill{} $\partial B\subset B^{*}$) \ill{}}
+\note{ce passage est encadré puis biffé}
+
+Comme $A\neq B$, $A\cap B^{*}=\emptyset$ par définition de $B^{*}$,
+\struck{Je dis} Ainsi $A^{*}$, $B^{*}$ \ill{} $A^{*}\subset A$ segment
+$\subset S\smallsetminus B^{*}$.
+
+\marginal{\emph{Prop} Si $A,B\in\Sigma$, $A\neq B\Rightarrow A^{*}\cap
+B^{*}=\emptyset$ (i.e.\ \ill{} $A^{*}\neq B^{*}$).}
+\marginal{On a $\bigcup_{A\in\Sigma}A=\bigcup_{A\in\Sigma}A^{*}$. Si
+$x\in\bigcup A$, alors $\Sigma(x)$ \ill{} non vide \ill{} $A\in\Sigma(x)$
+minimal \ill{} $x\in A^{*}$ \ill{}}
+
+\page{46}
+\emph{Conséquences} : Si $\bigcup_{A\in\Sigma}A^{*}=S$, alors
+\struck{les} $(A^{*})_{A\in\Sigma}$ est une partition \struck{dans}
+\uncertain{par-dessus} de $S$. Si $\bigcup_{A\in\Sigma}A^{*}\neq S$, alors
+posant \struck{\ill{}}
+\[
+  \begin{cases}
+    R=S\smallsetminus\bigcup_{A\in\Sigma}A^{*}, &
+    \widehat{\Sigma}=\Sigma\cup\{R\}\\[2pt]
+    R^{*}=R\smallsetminus\bigcup_{A\in\widehat{\Sigma},\ A\subsetneq R}A=R &
+  \end{cases}
+\]
+alors $(A^{*})_{A\in\widehat{\Sigma}}$ est une partition
+\uncertain{par-dessus} de $S$.
+\note{« par-dessus » est une lecture douteuse, ici comme deux lignes plus
+haut ; la page 44 dit, pour la même chose, « partition non parallèle »}
+
+\emph{NB} Si $R$ est lui-même un segment, alors \struck{\ill{}}
+$\widehat{\Sigma}$ satisfait les conditions de $\Sigma$ — et $R$ est un
+élément « isolé » de $\widehat{\Sigma}$, en ce sens que \add{pour} $A$
+\ill{} élément de $\widehat{\Sigma}$, \struck{\ill{}} $R\cap A=\emptyset$ —
+i.e.\ \ill{} minimal et \ill{}
+
+Considérons
+
+($\sigma_{3}$) $R=S\smallsetminus\bigcup_{A\in\Sigma}A$
+($=S\smallsetminus\bigcup A^{*}$) n'est pas un segment
+
+(\emph{NB} précisément ce cas si $R=\emptyset$ par ex.)
+
+\marginal{\uncertain{Seul}}
+\uncertain{Moyennant} donc ce cas \struck{\ill{}} $\Sigma$ est \add{\ill{}}
+\struck{défini} \ill{} connaît la partition
+$\widehat{\Sigma}^{*}=\{A^{*}\mid A\in\widehat{\Sigma}\}$
+\[
+  \widehat{\Sigma}=
+  \begin{cases}
+    \Sigma & \text{si } R=\emptyset\\
+    \Sigma\cup\{R\} & \text{si } R\neq\emptyset
+  \end{cases}
+\]
+
+\page{47}
+Je veux construire $A$ en termes de $\widehat{\Sigma}^{*}$,
+$A^{*}\in\widehat{\Sigma}^{*}$ (dans le cas $A\in\Sigma$). Bien sûr, $A$ est
+un segment qui contient $A^{*}$, et comme $A^{*}\supset\partial A$, il est
+minimal (\ill{}) parmi les segments qui contiennent $A^{*}$ — mais cela ne
+suffit pas à le caractériser. Il a cependant la propriété supplémentaire,
+$\forall B^{*}\in\widehat{\Sigma}^{*}$, ou $B^{*}\cap A=\emptyset$, ou
+$B^{*}\subset A$.
+
+\emph{NB} En fait, avec les seules conditions $\sigma_{1}$ à $\sigma_{3}$ sur
+$\Sigma$, il n'est pas vrai que la connaissance de $\widehat{\Sigma}^{*}$
+redonne $\Sigma$, exemple la relation d'équivalence $R$ \add{\ill{}} avec
+trois classes $\{a_{1},a_{1}'\}$, $\{b,b'\}$, $\{a_{2},a_{2}'\}$ ($\Sigma_{1}$
+formé des segments $\{a_{i},a_{i}'\}$ ($i\in\{1,2\}$), et
+$\{a_{1},a_{1}',b,b'\}$, et $\Sigma_{2}$ défini de façon symétrique,
+\ill{} la même $R$).
+
+\note{à droite, un cercle traversé de trois cordes verticales parallèles,
+d'extrémités notées $a_{1}$, $b$, $a_{2}$ en haut et $a_{1}'$, $b'$,
+$a_{2}'$ en bas}
+
+\struck{\emph{Exemple} plus général : on part \ill{} de façon unique \ill{}
+donnons $\Sigma$ de façon \ill{} $\widehat{\Sigma}^{*}=R$, et
+$R\overset{\mathrm{def}}{=}S\smallsetminus\bigsqcup_{A\in\Sigma}A=S_{i}$,
+chaque donnée d'une classe de $R$ si non un segment \ill{}}
+\note{ce dernier paragraphe est barré de deux traits en diagonale}
+
+\page{48}
+\emph{Relation d'équivalence non \uncertain{parallèle}} sur $S$.
+\note{à partir d'ici, et jusqu'à la page 50, une encre brune et une main
+rapide}
+
+Segments \add{$R$-}\emph{saturés} : \uncertain{saturés} par $R$ \ill{} par
+passage au complémentaire, et par réunion et intersection de segments
+\add{p.ex.\ si} ($A\cup B\neq S$, $A\cap B\neq\emptyset$).
+
+Si $S_{i}\in R$, alors les segments composants de $S\smallsetminus S_{i}$
+sont saturés, donc \ill{} leurs complémentaires, i.e.\ les segments
+\uncertain{minimaux} contenant $S_{i}$ \ill{} \add{segments} (\ill{}
+\uncertain{composants} de $S_{i}$). \struck{Plus généralement}
+\struck{Si $T\subset S$ est une partie de $S$ $R$-saturée, alors les
+segments composants de}
+
+\emph{Prop} Les segments saturés minimaux sont les $S_{i}\in R$ qui sont des
+segments.
+\marginal{\ill{} \uncertain{anglets} \ill{}}
+
+Il est évident que si $S_{i}\in R$ est un segment, alors c'est un segment
+saturé, et il est minimal (car \ill{} non vides). Inversement, soit $A$
+segment saturé minimal, \struck{\ill{}} soit $S_{i}\in R$, $S_{i}\subset A$,
+\struck{soit} Je dis que $S_{i}=A$, \struck{\ill{}} i.e.\ qu'il n'y a pas deux
+$S_{i},S_{j}\in R$ distincts, $\subset A$. En effet, si $A_{i}$ ($A_{j}$) est
+le segment \ill{} \uncertain{composant} de \ill{} qui contient $S_{i}$
+($S_{j}$) \ill{} $\subset A$, alors la condition que $S_{i}$, $S_{j}$ sont
+\ill{} se traduit par la condition \struck{\ill{}} que $A_{i}\cap
+A_{j}=\emptyset$, donc $A_{i}$, $A_{j}$ sont des segments saturés $\subset A$
+et $\neq A$, absurde.
+
+\note{dans la marge gauche, un arc de cercle aux deux extrémités marquées
+d'un point, la moitié supérieure repassée à l'encre}
+\marginal{\uncertain{unicité} des \ill{} de la condition \ill{}}
+
+\page{49}
+\emph{Cor} Tout \struck{\ill{}} segment saturé contient un
+« \uncertain{anglet} » — donc si $R$ n'est pas la relation grossière, il
+existe au moins deux anglets (car il existe alors au moins deux segments
+saturés, complémentaires l'un de l'autre).
+
+\add{$\Sigma_{0}$ l'ens.\ des anglets de $R$}
+\note{« anglet » est la lecture retenue pour un mot écrit ici six fois ; il
+désigne une classe de $R$ qui est un segment}
+
+Soit \ill{} la réunion des anglets, $S_{1}$ son complémentaire. Alors, si
+$S_{1}\neq\emptyset$, $S_{1}$ a au moins deux composantes
+($\operatorname{card}\pi_{0}(S_{1})\geqslant2$), sinon, $R$, \uncertain{serait}
+un segment contenant deux anglets, absurde. Si $\operatorname{card}R_{1}=2$,
+alors $R_{1}\in R$ \ill{}
+
+\struck{\ill{}} de $R$ consiste en les anglets et en $R_{1}$ (car les
+$S_{i}\subset R_{1}$ sont de card.\ $\geqslant2$, \struck{\ill{}} \ill{}
+1 seulement aux anglets…)
+
+Si $\operatorname{card}R_{1}\geqslant3$, $R_{1}$ est lui-même un
+\uncertain{polygone}, et $R_{1}=R\mid R_{1}$ est une relation d'équivalence
+non \uncertain{parallèle}. De plus, \struck{\ill{}} $S_{i}\subset R_{1}$ n'est
+contenu dans un segment composant de $R_{1}$ — sinon il serait \ill{}
+segment saturé contenu dans \ill{} \ill{} \ill{}), lequel contiendrait un
+anglet $\subset R$. — absurde. Si $R_{1}$ est la relation grossière, on a
+fini — $R$ est formé des anglets, et de $R_{1}$.
+\note{sur cette page, $R_{1}$ désigne tantôt la relation induite sur
+$S_{1}$, tantôt $S_{1}$ lui-même ; transcrit tel qu'écrit}
+
+\page{50}
+Sinon, considérons l'ens.\ des \add{$R_{1}$-}anglets \struck{\ill{}}
+\add{\ill{}} — il y en a au moins deux. Ces anglets, \ill{} c'est un
+\uncertain{cour.} 1-1 \ill{} un ens.\ de segments $\Sigma_{2}$ de $S$, qui
+sont \ill{} contenant au moins un \ill{} de $S_{1}$, et dont les extrémités
+sont \uncertain{distinctes} de $S_{1}$, et qui sont mutuellement disjoints.
+Soit $T_{2}$ \ill{}
+
+\[
+  \begin{array}{ccccc}
+    \Sigma_{1} & \Sigma_{2} & \Sigma_{3} & \cdots & \Sigma_{i}\\
+    T_{1} & T_{2} & T_{3} & & T_{i}
+  \end{array}
+\]
+
+$\Sigma_{i}$ est un ens.\ de segments ($R$-saturés), mutuellement disjoints
+\uncertain{(\ill{})}, $\operatorname{card}\Sigma_{i}\geqslant2$,
+\add{de réunion $T_{i}$} (\emph{NB} les segments composants de $T_{i}$
+\ill{} réunions partielles de $\Sigma_{i}$, \ill{})
+\marginal{$i\geqslant1$}
+\marginal{$i\geqslant2$ \ill{}}
+\struck{tout élément $A\in\Sigma_{i-1}$ est contenu dans un
+$B\in\Sigma_{i}$, tel \ill{}} Tout $B\in\Sigma_{i}$ contient au moins un
+\add{segment composant} \struck{$B\in\Sigma_{i-1}$} de $T_{i-1}$, et
+$\partial B\subset S\smallsetminus T_{i-1}$.
+
+$\Sigma_{1}$ ens.\ de segments mutuellement disj.\ de $S=S_{0}$,
+\struck{$\operatorname{card}(\Sigma_{1})\geqslant2$}
+\[
+  T_{1}=\bigcup_{A\in\Sigma_{1}}A,\qquad S_{1}=S\smallsetminus T_{1}
+\]
+\struck{$\operatorname{card}S_{1}\geqslant2$}
+les segm.\ comp.\ de $S_{1}$ dans $S$ \uncertain{ont} au moins 2 \ill{}
+
+$\Sigma_{2}'$ ens.\ de segments disjoints de $S_{1}$ \emph{non contenus}
+dans un des segments composants \ill{},
+$\operatorname{card}\Sigma_{1}\geqslant2$,
+\[
+  T_{2}=T_{1}\cup\bigcup_{A\in\Sigma_{2}'}A,\qquad
+  S_{2}=S\smallsetminus T_{2},\qquad
+  \operatorname{card}\pi_{0}(S_{2})\neq1
+\]
+
+\page{51}
+$I$ \uncertain{quasi-segment} (\uncertain{fini}) ayant au moins deux
+\uncertain{sommets}
+\note{à partir d'ici une encre noire ; reprise, pour un « quasi-segment »
+$I$, des notions des pages 41 à 47}
+
+Deux \add{parties} d'éléments $\varepsilon,\varepsilon'\in\mathfrak{P}_{2}(I)$
+sont dites \emph{non parallèles} si
+\add{$\varepsilon\cap\varepsilon'=\emptyset$ et si}
+$I_{\varepsilon}\cap I_{\varepsilon'}=\emptyset$ \add{ou
+$I_{\varepsilon}\subset I_{\varepsilon'}$ ou $I_{\varepsilon'}\subset
+I_{\varepsilon}$} (où $I_{\varepsilon}$ est le segment déterminé par un ens.\
+à deux éléments $\varepsilon$).
+
+Deux parties $A$, $A'$ de $I$, sont dites non parallèles si
+
+a) $A\cap A'=\emptyset$
+
+b) $\forall\varepsilon\in\mathfrak{P}_{2}(A)$,
+$\varepsilon'\in\mathfrak{P}_{2}(A')$, $\varepsilon$, $\varepsilon'$ non
+parallèles.
+
+\struck{\ill{}} Cela revient à dire que $A'$ est contenu dans l'un des
+\struck{\ill{}} composants de $I\smallsetminus A$ ou (si $A$ ne contient pas
+d'extrémité de $I$) dans la réunion des deux composants extrêmes (i.e.\ ceux
+qui contiennent les deux extrémités).
+\marginal{\ill{} ou encore, que l'un des deux $A$, $A'$ est contenu dans un
+segment \ill{} de $I$ qui ne \uncertain{rencontre} pas l'autre \ill{}}
+\marginal{\emph{NB} un segment \ill{} une seule extrémité \ill{}}
+
+Partitions non parallèles de $I$
+
+$\Sigma$ ens.\ de segments de $I$ tel que :
+
+a) Si $A,B\in\Sigma$, ou $A\cap B=\emptyset$, ou $A\subset B$, ou $B\subset A$
+
+b) Si $A,B\in\Sigma$, $B\subsetneq A$, alors $B\cap\partial A=\emptyset$
+\note{le signe entre $B$ et $\partial A$ est surchargé ; la lecture
+$B\cap\partial A=\emptyset$ est celle que demande la condition ($\sigma_{2}$)
+de la page 45}
+
+c) \struck{\ill{}} $\partial I\subset\bigcup_{A\in\Sigma}A$ donc $\partial
+I\subset\bigcup_{A\in\Sigma}\partial A$
+
+Pour un tel $\Sigma$, posons pour $A\in\Sigma$
+\[
+  A^{*}=A\smallsetminus\bigcup_{\substack{B\in\Sigma\\ B\subsetneq A}}B
+  \qquad(\supset\partial A\text{, donc }A^{*}\neq\emptyset)
+\]
+alors \struck{les $A^{*}$ sont deux à deux} pour $A,B\in\Sigma$, $A\neq B$,
+on a $A^{*}$ et $B^{*}$ non parallèles — posons \struck{\ill{}} alors
+\[
+  I'=\bigcup_{A\in\Sigma}A=\bigcup_{A\in\Sigma}A^{*},\qquad
+  R=I\smallsetminus I',\qquad R^{*}=R
+\]
+\[
+  \widehat{\Sigma}=
+  \begin{cases}
+    \Sigma & \text{si } R=\emptyset\\
+    \Sigma\cup\{R\} & \text{si } R\neq\emptyset
+  \end{cases}
+\]
+
+\page{52}
+alors
+\[
+  \widehat{\Sigma}^{*}=\{A^{*}\mid A\in\widehat{\Sigma}\}
+\]
+est une partition non parallèle de $I$.
+
+\emph{NB} Toute partition non parallèle peut s'obtenir ainsi, mais de
+plusieurs façons…
+
+Soit $\Sigma_{\max}$ l'ens.\ des éléments maximaux de $\Sigma$. On voit de
+suite que deux élts distincts de $\Sigma_{\max}$ sont disjoints, et que
+\[
+  I'=\bigcup_{A\in\Sigma_{\max}}A
+\]
+\note{la page s'arrête ici ; le reste en est vide}
+
+\page{53}
+\note{feuille carrée, d'un autre sujet : le recollement de deux cartes le long
+d'une arête. En tête, trois croquis au crayon, repassés à l'encre aux
+points de recollement : deux lobes accolés marqués « bi » et « bi », joints
+par un trait vertical dont les extrémités portent des flèches courbes ; deux
+lobes « mon » et « bi » séparés par une bande à deux traits parallèles, avec
+une double flèche en haut et en bas ; deux lobes « mon » et « mon », une
+double flèche au-dessus. En bas à droite, un cercle au crayon avec des
+cordes inscrites}
+
+Attachement de deux arêtes \struck{\uncertain{bipartites}} : on trouve
+\add{paire d'}\struck{deux} arêtes \add{$a$, $a'$} \emph{binaires}
+\struck{opposées} (qui sont telles que $(a,\omega)$, $(a',\omega)$ et
+$(a,\overline{\omega})$, $(a',\overline{\omega})$ sont des \add{paires d'}
+\struck{paires} associés, \struck{mais}
+\[
+  f=f'+f''-2,\qquad g=g'+g''
+\]
+\marginal{4 faces deviennent 2}
+
+Attachement de deux arêtes, l'une monaire, l'autre binaire. On trouve une
+paire d'arêtes $\{a,a'\}$ (\add{monaires} \struck{binaires}) incidentes :
+\ill{} \ill{} faces
+\[
+  f^{*}=f'+f''-2,\qquad g=g'+g''
+\]
+\marginal{trois faces deviennent 1}
+
+Attachement des deux arêtes \struck{\uncertain{monaires}}, on trouve
+\struck{deux} paire d'arêtes monaires, incidentes à des faces distinctes
+\[
+  f=f'+f'',\qquad g=g'+g''-1
+\]
+\marginal{deux faces deviennent 2}
+\note{chaque bilan est écrit à droite des formules, séparé d'elles par un
+trait vertical ; le $g$ de la dernière ligne est souligné. Dans le deuxième
+cas il écrit $f^{*}$ là où les deux autres ont $f$}
+
+\page{54}
+\note{page sans texte : croquis au crayon d'une même opération de collage
+en volume — un disque vu en perspective relié par un tube court à une
+feuille rectangulaire ; un petit cercle traversé d'un trait entre deux
+arcs ; un grand rectangle à qui une bande est attachée par le haut ; une
+feuille en perspective portant deux petits cylindres dressés. En haut à
+droite, à l'encre, le trait vertical à extrémités recourbées du premier
+croquis de la page 53}
+
+\end{document}

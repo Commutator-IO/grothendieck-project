@@ -1,0 +1,1714 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 81
+% (pages 1-54, the whole folder).
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried moves into a
+% footnote. It is held to being mathematically correct as it stands; where the
+% manuscript is loose or mistaken, the true statement is what appears here and
+% the footnote says what the page has. In any dispute of substance the
+% transcription governs: whoever cites Grothendieck must cite batch-01.fr.tex
+% (pp. 1-20), batch-02.fr.tex (pp. 21-40) or batch-03.fr.tex (pp. 41-54).
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-09-23 — first pass, unchecked against the pages by a human.
+% The folder was read whole, its three batches together; this is one document
+% for the shelfmark. It was made on Opus 5.5 and has not been measured against
+% the reference reading of folder 115 (made on Opus 5). The literature named
+% in the footnotes is cited from memory and was not checked against the
+% sources.
+%
+% Scope. Pages 1, 13 and 40 are covers whose words head sections here
+% (« Cartes sphériques en général », « Décompositions n-aires (et découpages)
+% d'espaces topologiques », « relations d'équi. non parallèles »). Pages 6-7
+% are in another hand and unrelated; page 8 is blank; page 12 carries nothing
+% for the mathematics; page 30 is blank. None of them is described. The
+% inventory title (« Immersions du disque et de la circonférence ») is on no
+% transcribed leaf and describes none; footnoted in the spine section.
+%
+% Spine. How pieces cut out by non-crossing cuts fit together, in three
+% settings, with a map-theoretic frame at both ends:
+%   pp. 1-5     spherical maps with a marking <-> rational functions P/Q
+%               normalised at 0, 1, oo, unramified off {0,1,oo}, ramification
+%               <= 2 over 1 (Belyi maps; dessins); coefficients algebraic,
+%               Aut(C) acts through Gal(Qbar/Q). Pp. 3, 5 cancelled scratch.
+%   pp. 9-11    drawings: discs cut by chords, with small graphs; p. 10 power
+%               sets and Hom(X,Y) in P(X x Y).
+%   pp. 13-24   Version I: closed cuts E_i of a connected space, each with two
+%               complementary components; two cuts give five pieces; n cuts
+%               give n+1 pieces, each X minus disjoint closed hemispheres,
+%               uniquely; the pieces and cuts form a tree (stated p. 23).
+%   pp. 25-29   « disposition binaire »; from a tree to a family of pairwise
+%               (strictly) non-parallel binary decompositions, conditions
+%               (*), (**), (***).
+%   pp. 31-39   Version II, §§ 1.1-1.3: closed hemispheres, equator, the
+%               non-parallel pair and diagram (14), strictness (21), the
+%               ordered set C with involution sigma (25)-(27), the « quartette
+%               ordonné », a Proposition (p. 39) whose proof breaks off.
+%   pp. 40-52   polygons (bi-circulated finite sets), segments, non-parallel
+%               parts = non-crossing, « partitions non parallèles » = the
+%               non-crossing partitions of Kreweras (1972), nested families
+%               of segments and cores, anglets, the quasi-segment restart.
+%   pp. 53-54   gluing two maps at an edge: faces and genus.
+%
+% Notation fixed for the document.
+%  - Version I (pp. 14-24): Sigma_i^+-, the two OPEN components of X \ E_i;
+%    hat-Sigma_i^+- = Sigma_i^+- u E_i, CLOSED. Version II (pp. 31-39):
+%    Sigma^eps the CLOSED hemispheres, Sigma^{0 eps} = Sigma^eps \ E open.
+%    So hat-Sigma (I) = Sigma (II) and Sigma (I) = Sigma^0 (II); stated in the
+%    spine section, kept as each version writes it.
+%  - « morceau » for a class of the partition Pi_I^0 (the page: « classe »).
+%  - Gamma_I for the graph of p. 23 (the page: (S, I, R)); R is kept for the
+%    equivalence relation of pp. 47-50 only. The residual set of p. 46 (the
+%    page's R) is written Z.
+%  - Polygon (S, {u, u^{-1}}), N = card S >= 3; « segment » = arc of
+%    consecutive vertices, 0 < card < N; d T its two ends.
+%  - « non parallèle » is the page's word throughout and is kept; it means
+%    « non-crossing / compatible » (two disjoint chords in the usual sense
+%    parallel are non parallèles in his). Said once, in the spine section.
+%  Collisions not corrected: S is the set of pieces (p. 23), of tree
+%  vertices (p. 27) and the polygon (p. 41); I indexes the cuts (pp. 14-24)
+%  and is the quasi-segment (p. 51); A indexes a family (p. 37), is the edge
+%  set of a tree (p. 27) and a part of the polygon (pp. 42 ff.).
+%
+% Substantive departures, each footnoted where it occurs:
+%  p. 2    the first « ≃ » (maps <-> f étale off 0,1,oo) needs the
+%          ramification <= 2 over 1 that the next line adds; without it, f
+%          classifies hypermaps (bipartite maps). The page's question « P'=0
+%          sans P=Q ? » answered yes; in the family aT^2+bT only T^2 and
+%          2T-T^2 are special (ours).
+%  p. 4    algebraicity of the coefficients: argument supplied (finitely
+%          many special f of each degree).
+%  p. 10   « Hom(E, Hom(X,Z)) = P(Hom(X,Z)) »: variance, P(Y) = Hom(Y, E).
+%  p. 14   X connected and I finite supplied; the components are open without
+%          local connectedness (two of them); pieces need not be connected
+%          (example on the circle, ours).
+%  pp. 16, 17  « X \ Sigma_i » read X \ E_i (sic twice).
+%  p. 16   the equality for closure(Sigma_12) proved (ours).
+%  p. 22   the Lemma needs (b), not disjointness alone; proof supplied.
+%  p. 23   b) read as « no multiple edges »; the tree Lemma proved (ours).
+%  p. 24   « K \ {i} = {alpha | E_alpha in Sigma_alpha^-} » is wrong; with
+%          Sigma_i^- it fails for three parallel chords; correct form ours.
+%  p. 27   A', A'' must contain a_0; Gamma finite.
+%  p. 32   (11), (11 bis) are implied by (10), not equivalent to it; the
+%          equivalent forms use the open Sigma^{0-} (counterexample ours).
+%  p. 36   the Cor.'s proof: Sigma_1^- in Sigma_1^+ gives Sigma_1^+ = X.
+%  p. 38   transitivity of (26), asked in the margin, checked; (27) proved.
+%          The quartette's axiom a) does not imply that sigma reverses the
+%          order (counterexample ours): the NB is an axiom.
+%  p. 39   the Proposition is FALSE as stated: three chords around a triangle
+%          (the tripod of p. 11) give C_{>= x} not totally ordered; true:
+%          every interval [x, z] is a chain, and C_{>= x} is a chain for all
+%          x exactly in the linear case. « (28 a) » identified with a) of
+%          p. 38.
+%  p. 43   the smallest pair (Abar, Bbar) supplied.
+%  p. 46   « partition par-dessus » read as the non-parallel (non-crossing)
+%          partition of p. 44.
+%  p. 48   the Prop's proof, as legible, needs repair (A_i may leave A);
+%          proof ours.
+%  p. 49   « R serait un segment contenant deux anglets » read as « S_1
+%          serait un segment saturé, contenant donc un anglet »; R_1 = S_1.
+%  p. 53   the operation is not described on the page; reconstructed as the
+%          exchange of the ends of two edges; mon/mon needs a connected
+%          result (not two bridges).
+%
+% Links the pages do not write (ours, and said so in the body): Version I
+% goes from cuts to a tree, pp. 27-29 from a tree to decompositions; the
+% counterexample to p. 39 is the tripod drawn on p. 11; the three parallel
+% chords of p. 47 and the four of p. 9; the nested families of p. 45 and the
+% chord diagrams of p. 44; the bi-circulation of p. 41 is folder 89's third
+% description of a polygon (89, pp. 19-20); p. 53 is the combinatorial side
+% of folder 67's surgery and of folder 88's maps.
+%
+% Announced and never established: the end of p. 4 (« le diviseur de f
+% est »); the question of the drawings pp. 9-11 (no text); the equality of
+% p. 16 (stated); the Lemma of p. 22 (« Cela provient »); the tree Lemma of
+% p. 23 (proof begun p. 24, stops); the « description complète » of p. 28;
+% p. 29's « à examiner de plus près »; the transitivity asked on p. 38; the
+% converse announced by « Inversement » (p. 38); the Proposition of p. 39;
+% « il existe un plus petit… » (p. 43); the Intuition of p. 44; « Je veux
+% construire A » (p. 47, refuted by its own NB); the tower of p. 50; the NB
+% of p. 52 and the study of Sigma_max; the derivation of p. 53's counts.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{81}
+\pages{1}{54}
+\dating{[à partir de 1981]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Immersions du disque et de la circonférence : notes manuscrites (s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Ces feuillets découpent. Un disque de papier qu'on entaille le long de
+cordes, une sphère sur laquelle on a tracé un réseau de lignes, des points
+rangés en cercle qu'on répartit en paquets : chaque fois la question est de
+savoir comment les morceaux s'agencent, et ce qui, dans cet agencement, ne
+dépend que de la combinatoire. Le titre que l'inventaire donne au dossier,
+« Immersions du disque et de la circonférence », ne se lit sur aucun
+feuillet et ne décrit aucun d'eux ; trois chemises de sa main portent
+d'autres titres, qu'on suit ici.
+
+Le dossier s'ouvre sur une remarque de quelques lignes, devenue célèbre sous
+une autre forme. Tracez sur une sphère un graphe dont les arêtes ne se
+croisent pas : c'est une \emph{carte}. On peut alors faire de la sphère une
+surface de Riemann et construire une fraction rationnelle qui envoie les
+sommets sur $0$, les milieux d'arêtes sur $1$, les faces sur l'infini, et
+n'a pas d'autre valeur critique que ces trois-là ; une fois trois points
+marqués, elle est unique, et réciproquement une telle fraction redessine la
+carte. Grothendieck en tire que les coefficients de ces
+fractions sont des nombres algébriques, et donc que le groupe de Galois des
+nombres algébriques agit sur les cartes, objets pourtant purement
+topologiques. La page s'arrête au milieu d'une phrase. C'est le point de
+départ de ce que l'\emph{Esquisse d'un programme}, en 1984, appellera les
+\emph{dessins d'enfants}.
+
+La partie la plus longue pose une question plus élémentaire. On coupe un
+espace d'un seul tenant --- pensez à un disque --- par des coupures qui ne se
+rencontrent pas, chacune le séparant en deux. Combien de morceaux, et
+comment se touchent-ils ? Avec $n$ coupures on obtient $n+1$ morceaux, et si
+l'on dessine un point par morceau et un trait par coupure, joignant les deux
+morceaux qu'elle sépare, on obtient un \emph{arbre} : un réseau sans boucle,
+comme le plan d'une maison où chaque porte est le seul passage d'une aile à
+l'autre. Grothendieck écrit cette théorie trois fois. La première rédaction
+travaille avec les coupures elles-mêmes. La deuxième et la troisième
+remplacent chaque coupure par ce qu'elle produit, deux « hémisphères » fermés
+qui recouvrent l'espace et se rencontrent le long d'un « équateur », et
+appellent \emph{non parallèles} deux tels découpages dont on peut choisir un
+hémisphère de chacun sans point commun --- deux cordes d'un disque qui ne se
+croisent pas. La dernière rédaction code tout cela par un ensemble fini
+ordonné muni d'une symétrie (retourner une coupure), et en cherche les
+axiomes. La proposition sur laquelle elle s'achève est fausse telle
+qu'énoncée : trois cordes entourant un triangle la mettent en défaut, et la
+démonstration s'interrompt.
+
+La troisième partie pose la même question sur les seuls points d'un cercle.
+On range $N$ points sur un cercle et on les répartit en paquets de sorte que
+deux paquets ne « se croisent » jamais, c'est-à-dire que les polygones qu'ils
+dessinent soient disjoints --- comme des convives autour d'une table ronde qui
+se serreraient la main par groupes sans qu'aucun bras n'en croise un autre.
+Ce sont les \emph{partitions non croisées}, qu'on étudie aujourd'hui sous ce
+nom. Grothendieck montre qu'il y a toujours au moins deux paquets faits de
+points consécutifs, sauf s'il n'y a qu'un paquet, et commence à les retirer
+un à un, comme on effeuille un arbre par ses feuilles. Il décrit aussi ces
+partitions par des familles d'arcs emboîtés, et remarque, sur trois cordes
+parallèles, que la famille ne se retrouve pas à partir de la partition. Une
+dernière page revient aux cartes : recoller deux cartes le long d'une arête,
+et compter ce que deviennent les faces et le genre.
+
+Ces pages montrent une manière de faire. Les définitions s'y corrigent en
+écrivant : « si elles sont distinctes » s'ajoute en interligne quand la
+démonstration en a besoin, « strictement » vient se placer devant « non
+parallèles » dans la marge d'une page avant d'être défini dix pages plus
+loin. Ce qui n'est pas encore compris est étiqueté comme tel ---
+« Structure à étudier », « Intuition », « il faut vérifier que c'est
+transitif » --- plutôt que glissé sous une formule. Et quand une rédaction ne
+tient plus, il en commence une autre, numérotée.
+
+Les noms sous lesquels chercher la suite : dessins d'enfants et théorème de
+Belyi ; arbre dual d'un système de coupures, scissions compatibles et
+théorème de Buneman, « pocsets » et arbres de Dunwoody ; partitions non
+croisées de Kreweras, familles laminaires, laminations du disque.
+
+\keywords{dessin d'enfant, Belyi map, Riemann existence theorem, Galois action on dessins, chord diagram, dual tree, nested cuts, compatible splits, Buneman's splits-equivalence theorem, pocset, Dunwoody's tree construction, non-crossing partition, laminar family, convex position, gluing of maps, genus of a map}
+\end{resume}
+
+\pagerange{1}{54}
+\section*{Le fil du dossier, et les conventions}
+
+\subsection*{Les stations}
+
+Le dossier n'est pas daté de sa main ; l'inventaire le date « à partir de
+1981 » et le range dans le groupe « Géométrie et topologie combinatoire »,
+avec les dossiers 69 à 89\footnote{Le titre de l'inventaire, « Immersions du
+disque et de la circonférence », ne figure sur aucun des feuillets
+transcrits, et aucun ne traite d'immersion. Les trois chemises (pages 1, 13
+et 40) portent leurs propres titres, qui sont repris ici comme titres de
+sections. On ne sait pas d'où vient celui de l'inventaire. Si c'était le
+dessein de Grothendieck, on remarquera --- c'est une conjecture de notre part,
+que rien sur les pages ne soutient --- que la question de savoir quelles
+courbes fermées immergées dans le plan bordent un disque immergé a été
+résolue en 1967 par S.~Blank en découpant le disque le long de cordes
+(exposé de V.~Poénaru au Séminaire Bourbaki, 1967-1968) ; les disques coupés
+de cordes des pages 9 à 11 et les découpages des pages 13 à 39 seraient
+alors des outils pour cette question.}.
+
+\begin{enumerate}
+  \item \emph{Pages 1 à 5}, « Cartes sphériques en général » : les cartes
+  sur la sphère munies d'un repère correspondent aux fractions rationnelles
+  normalisées en $0$, $1$, $\infty$, non ramifiées hors de ces trois valeurs
+  et ramifiées au plus à l'ordre $2$ au-dessus de $1$ (page 2) ; leurs
+  coefficients sont algébriques et $\mathrm{Aut}(\mathbb{C})$ agit à travers
+  $\mathrm{Gal}(\overline{\mathbb{Q}}/\mathbb{Q})$ (page 4). Les pages 3 et 5
+  sont des brouillons barrés.
+  \item \emph{Pages 9 à 11}, des dessins sans texte : disques coupés de
+  cordes, chacun avec un petit graphe ; la page 10 porte en outre quelques
+  formules sur les ensembles de parties.
+  \item \emph{Pages 13 à 24}, « Décompositions $n$-aires (et découpages)
+  d'espaces topologiques », \emph{Version I} : un espace connexe coupé par
+  des fermés disjoints $E_i$, chacun de complémentaire à deux composantes ;
+  deux coupures font cinq pièces, $n$ coupures font $n+1$ morceaux, chacun
+  s'écrit de façon unique comme le complémentaire d'hémisphères fermés
+  disjoints, et morceaux et coupures forment un arbre.
+  \item \emph{Pages 25 à 29}, un nouveau départ : les « dispositions
+  binaires » d'un ensemble, la non-parallélité, puis la construction
+  inverse de la précédente, qui d'un arbre tire une famille de
+  décompositions deux à deux non parallèles.
+  \item \emph{Pages 31 à 39}, « Décompositions $n$-aires d'un espace
+  topologique », \emph{Version II}, paragraphes 1.1 à 1.3 et formules (1) à
+  (27) : décompositions binaires fermées, paires non parallèles et le
+  diagramme (14), paires strictement non parallèles, l'ensemble ordonné $C$
+  à involution d'une famille, le « quartette ordonné » et une proposition
+  dont la démonstration s'interrompt.
+  \item \emph{Pages 40 à 52}, « Relations d'équivalence non parallèles » :
+  polygones combinatoires et leurs segments, parties non parallèles,
+  partitions non parallèles --- les partitions non croisées ---, familles
+  emboîtées de segments et leurs cœurs, « anglets », et une reprise pour un
+  « quasi-segment ».
+  \item \emph{Pages 53 et 54}, « Attachement de deux arêtes » : recoller deux
+  cartes le long d'une arête, et le bilan des faces et du genre.
+\end{enumerate}
+
+\subsection*{Trois rédactions, gardées distinctes}
+
+La théorie des découpages est écrite trois fois, et les trois ne disent pas
+la même chose. La \emph{Version I} (pages 14 à 24) part des coupures $E_i$ et
+des \emph{composantes ouvertes} $\Sigma_i^{\pm}$ de $X \smallsetminus E_i$ ;
+elle ferme ces composantes en $\widehat{\Sigma}_i^{\pm} = \Sigma_i^{\pm} \cup
+E_i$. La \emph{disposition binaire} des pages 25 à 29 est une paire de
+parties d'un ensemble dont aucune ne contient l'autre. La \emph{Version II}
+(pages 31 à 39) part de deux \emph{hémisphères fermés} $\Sigma^{\varepsilon}$
+de réunion $X$, admet que l'un contienne l'autre, et n'appelle « propre » la
+décomposition que si ce n'est pas le cas. Les lettres ne veulent donc pas
+dire la même chose d'une rédaction à l'autre :
+\[
+\widehat{\Sigma} \ (\text{Version I}) = \Sigma \ (\text{Version II}), \qquad
+\Sigma \ (\text{Version I}) = \Sigma^{0} \ (\text{Version II}).
+\]
+On garde, dans chaque section, les lettres de la rédaction qu'elle lit.
+
+\subsection*{Conventions}
+
+\begin{itemize}
+  \item \emph{Non parallèle.} C'est le mot de Grothendieck, pour les
+  décompositions (pages 25 et 32) comme pour les parties d'un polygone (pages
+  43 et 51), et on le garde. Il veut dire « qui ne se croisent pas » : deux
+  cordes disjointes d'un disque, que l'usage dirait parallèles, définissent
+  des décompositions \emph{non parallèles} au sens de ces pages. Le nom
+  actuel est \emph{compatibles} (pour des scissions) ou \emph{non croisées}
+  (pour des parties d'un cycle).
+  \item Un \emph{morceau} est une classe de la partition $\Pi_I^0$ du
+  complémentaire des coupures (la page dit « classe »). Le graphe des
+  morceaux de la page 23, que la page note $(S, I, R)$, est noté ici
+  $\Gamma_I$.
+  \item Un \emph{polygone} est un ensemble fini $S$ de cardinal $N \geqslant
+  3$ muni d'une « bi-circulation » $\{u, u^{-1}\}$, où $u$ est une permutation
+  circulaire de $S$ ; un \emph{segment} est une partie formée de sommets
+  consécutifs, non vide et distincte de $S$ ; $\partial T$ est l'ensemble de
+  ses extrémités. La relation d'équivalence des pages 47 à 50 est notée $R$,
+  ses classes $S_i$ ; l'ensemble résiduel de la page 46, que la page note
+  aussi $R$, est noté $Z$.
+\end{itemize}
+
+Restent des collisions de lettres, qu'on ne corrige pas parce que les
+sections ne se mêlent pas : $S$ est l'ensemble des morceaux (page 23), celui
+des sommets d'un arbre (page 27) et le polygone (page 41) ; $I$ indexe les
+coupures (pages 14 à 24) et désigne le quasi-segment (page 51) ; $A$ indexe
+une famille (page 37), est l'ensemble des arêtes d'un arbre (page 27) et une
+partie du polygone (pages 42 et suivantes).
+
+\subsection*{Ce que seule une lecture d'ensemble peut dire}
+
+Quatre liens, qu'aucun feuillet n'écrit, et qui sont de nous. La Version I
+va des coupures à l'arbre (pages 16 à 24) ; les pages 27 à 29 vont de l'arbre
+aux décompositions : ce sont les deux sens d'une même correspondance, que la
+Version II cherche à axiomatiser. Le contre-exemple à la proposition de la
+page 39 est la configuration de trois cordes autour d'un triangle, dont le
+graphe dessiné page 11 est un tripode. Les trois cordes parallèles de la page
+47, qui montrent qu'une famille de segments ne se retrouve pas à partir de
+sa partition, rappellent la rangée de quatre cordes parallèles marquée
+« ? » page 9. Et la bi-circulation de la page 41 est exactement la troisième
+description d'un polygone combinatoire du dossier 89 (pages 19 et 20) : une
+paire de permutations circulaires inverses l'une de l'autre.
+
+\subsection*{Ce que le dossier annonce sans l'établir}
+
+La fin de la page 4 (« le diviseur de $f$ est »). La question, s'il y en a
+une, des dessins des pages 9 à 11. L'égalité annoncée page 16, le lemme de la
+page 22 et le lemme de l'arbre de la page 23, dont la démonstration commence
+page 24 et s'arrête ; on les démontre ici. La « description complète » de la
+page 28 et le cas des ensembles vides, « à examiner de plus près » page 29.
+La transitivité demandée en marge de la page 38 ; la réciproque qu'annonce
+l'« Inversement » de la même page. La proposition de la page 39, fausse telle
+qu'énoncée. Le « plus petit » couple de la page 43. L'« Intuition » de la
+page 44. La reconstruction d'une famille de segments à partir de sa partition
+(page 47), que le NB de la même page réfute. La tour de la page 50. Le NB et
+l'étude de $\Sigma_{\max}$ de la page 52. La dérivation des bilans de la page
+53.
+
+\pagerange{1}{5}
+\section*{I. Cartes sphériques en général (pages 1 à 5)}
+
+\pagerange{2}{2}
+\subsection*{Le dictionnaire (page 2)}
+
+Une \emph{carte sphérique orientée} est un graphe fini tracé sans croisement
+sur une sphère orientée, dont le complémentaire est une réunion de disques
+ouverts, les \emph{faces} ; on la considère à isotopie près. Un \emph{repère}
+y fixe trois points\footnote{La page n'explique pas le mot « repère ». La
+normalisation $f(0)=0$, $f(1)=1$, $f(\infty)=\infty$ qui suit revient à
+marquer un sommet (au-dessus de $0$), un milieu d'arête (au-dessus de $1$) et
+une face (au-dessus de $\infty$) : c'est notre lecture. La page ne dit pas
+s'ils doivent être incidents ; la normalisation ne le demande pas.}. La page
+énonce trois descriptions équivalentes de ces objets.
+
+\textbf{Premier dictionnaire.} Les cartes sphériques orientées repérées
+correspondent aux fractions rationnelles $f \colon \mathbb{P}^1_{\mathbb{C}}
+\to \mathbb{P}^1_{\mathbb{C}}$ qu'il appelle \emph{spéciales} :
+\[
+f(0) = 0, \qquad f(1) = 1, \qquad f(\infty) = \infty,
+\]
+$f$ est étale au-dessus de $\mathbb{P}^1 \smallsetminus \{0, 1, \infty\}$, et
+tout point critique $z \in \mathbb{C}$ de $f$ avec $f(z) \notin \{0,\infty\}$
+vérifie $f(z) = 1$ et $f''(z) \neq 0$ : au-dessus de $1$, l'indice de
+ramification est au plus $2$\footnote{La page définit d'abord « spécial »
+par les trois valeurs et l'étalité hors de $\{0,1,\infty\}$, et n'ajoute
+qu'à la ligne suivante, « et de plus », la condition $f''(z) \neq 0$. Sans
+elle, la première équivalence est fausse : les fonctions étales hors de
+trois points correspondent aux \emph{hypercartes} (cartes biparties), et
+c'est la ramification au plus $2$ au-dessus de $1$ qui fait de chaque point
+au-dessus de $1$ un milieu d'arête. On a intégré la condition à la
+définition.}. Les sommets sont les points au-dessus de $0$, avec pour degré
+l'indice de ramification ; les faces, les points au-dessus de $\infty$ ; les
+arêtes, les points au-dessus de $1$ d'indice $2$, l'arête étant la
+composante de l'image réciproque du segment $[0,1]$ qui passe par ce point\footnote{Un point
+au-dessus de $1$ d'indice $1$ est l'extrémité libre d'une demi-arête : c'est
+ce que la page admet en demandant l'indice \emph{au plus} $2$. Quand on
+exige l'indice exactement $2$, on parle aujourd'hui de fonction de Belyi
+« propre ». Le dictionnaire est de nous ; la page n'énonce que
+l'équivalence.}.
+
+C'est une forme du \emph{théorème d'existence de Riemann}. Une carte fait de
+la sphère privée des sommets, des milieux d'arêtes et des centres de faces un
+revêtement fini de la sphère privée de trois points ; ce revêtement porte une
+unique structure complexe qui rende la projection holomorphe, elle se
+prolonge aux points ôtés, et la surface obtenue, de genre $0$, est isomorphe à
+$\mathbb{P}^1$, l'isomorphisme étant fixé par les trois points du
+repère\footnote{Ces trois étapes (existence de Riemann, prolongement, $\mathbb{P}^1$
+comme seule surface de Riemann compacte de genre $0$, rigidité d'un
+automorphisme qui fixe trois points) sont sous-entendues par la page. Le
+repère est ce qui rend les objets rigides : une carte repérée n'a pas
+d'automorphisme non trivial.}. On reconnaît ce qu'on appelle aujourd'hui une
+\emph{fonction de Belyi} sur $\mathbb{P}^1$, et la carte est son \emph{dessin
+d'enfant}\footnote{Les deux noms sont postérieurs à la page : « dessin
+d'enfant » est le terme de l'\emph{Esquisse d'un programme} (1984), et
+« fonction de Belyi » vient du théorème de G.~V.~Belyi (1979), selon lequel
+une courbe sur $\mathbb{C}$ est définie sur $\overline{\mathbb{Q}}$ si et
+seulement si elle admet une telle fonction. Ici la courbe est
+$\mathbb{P}^1$, et le théorème de Belyi n'intervient pas. La date de
+l'inventaire rend possible que Grothendieck ait connu le travail de Belyi ;
+rien sur la page ne le cite. Voir aussi la fin du dossier 88 (page 15), qui
+s'arrête au bord de la même observation pour ses cartes de type $(p,q)$.}.
+
+\textbf{Deuxième dictionnaire.} Écrivons $f = P/Q$ avec $P, Q \in
+\mathbb{C}[z]$ premiers entre eux. Les conditions aux trois points
+s'écrivent
+\[
+P(0) = 0, \qquad P(1) = Q(1), \qquad \deg Q < \deg P,
+\]
+d'où $Q(0) \neq 0$ et $P(1) = Q(1) \neq 0$ par primalité ; on normalise par
+$P(1) = Q(1) = 1$. En un point $z$ où $P(z) Q(z) \neq 0$, on a
+$f'/f = P'/P - Q'/Q$, et la condition sur les points critiques devient :
+\[
+\frac{P'(z)}{P(z)} = \frac{Q'(z)}{Q(z)} \ \Longrightarrow\ P(z) = Q(z)
+\ \text{ et } \ P''(z) \neq Q''(z).
+\]
+La seconde conclusion vient de ce qu'en un tel point
+$f''(z) = \bigl(P''(z) - Q''(z)\bigr)/Q(z)$, puisque $P(z) = Q(z)$ et
+$P'(z) = Q'(z)$\footnote{La page écrit $\frac{P''(z)}{P(z)} -
+\frac{Q''(z)}{Q(z)} \neq 0$ « i.e. » $P''(z) \neq Q''(z)$, ce qui est
+juste une fois $P(z) = Q(z)$ acquis. Le calcul de $(P/Q)''$ qui le justifie
+est au verso, page 5.}.
+
+\pagerange{2}{2}
+\subsection*{Une question, et sa réponse (page 2)}
+
+La page note l'identité
+\[
+Q P' - P Q' = (Q - P)\,P' + P\,(P' - Q').
+\]
+En un point critique $z$ de $f$ (où $QP' - PQ' = 0$) avec $P(z) \neq 0$, elle
+montre que $P(z) = Q(z)$ entraîne $P'(z) = Q'(z)$, et que réciproquement
+$P'(z) = Q'(z)$ entraîne $P(z) = Q(z)$ \emph{pourvu que} $P'(z) \neq 0$. D'où
+la question de la page : peut-on avoir $P'(z) = Q'(z) = 0$ sans $P(z) =
+Q(z)$ ?
+
+La réponse est oui, et l'exemple que la page commence la
+donne\footnote{L'exemple est au bas de la page, déchirée, et se poursuit dans
+la marge gauche, lue en partie seulement ; la conclusion qui suit est de
+nous.}. Prenons $Q = 1$ : les conditions se réduisent à $P(0) = 0$, $P(1) =
+1$, et la question devient de savoir si $P'(z) = 0$ entraîne $P(z) \in \{0,
+1\}$. Pour $P(T) = aT^2 + bT$ avec $a + b = 1$ et $a \neq 0$, le seul point
+critique est $z = -b/2a$, et
+\[
+P\Bigl(-\frac{b}{2a}\Bigr) = -\frac{b^2}{4a}.
+\]
+Cette valeur vaut $0$ si et seulement si $b = 0$, et $1$ si et seulement si
+$b^2 = -4a = 4b - 4$, c'est-à-dire $b = 2$. Dans cette famille, les seules
+fonctions spéciales sont donc $T^2$ --- un sommet de degré $2$ et deux
+demi-arêtes libres --- et $2T - T^2 = 1 - (1-T)^2$ --- deux sommets, en $0$ et
+en $2$, joints par une arête dont le milieu est $1$ ; pour toute autre valeur
+de $b$, $P'$ s'annule en un point où $P$ ne vaut ni $0$ ni $1$.
+
+\pagerange{4}{4}
+\subsection*{L'action de $\mathrm{Aut}(\mathbb{C})$ (page 4)}
+
+Si $\sigma$ est un automorphisme du corps $\mathbb{C}$ et $f$ une fonction
+spéciale, la fonction $f^{\sigma}$ obtenue en appliquant $\sigma$ aux
+coefficients est encore spéciale : toutes les conditions sont algébriques.
+Donc $\mathrm{Aut}(\mathbb{C})$ agit sur l'ensemble des fonctions spéciales,
+et, dit la page, il agit à travers
+$\mathrm{Gal}(\overline{\mathbb{Q}}/\mathbb{Q})$ parce que les coefficients
+de $P$ et $Q$ sont algébriques ; il revient au même de dire que les zéros de
+$P$ et de $Q$ le sont.
+
+La page affirme l'algébricité sans la justifier\footnote{La page s'arrête sur
+« i.e. le diviseur de $f$ est », au milieu du feuillet. L'argument qui suit
+est de nous.}. Voici pourquoi elle est vraie. Pour un degré $d$ donné, il n'y
+a qu'un nombre fini de fonctions spéciales : un revêtement de degré $d$ de
+$\mathbb{P}^1 \smallsetminus \{0,1,\infty\}$ est donné par une action
+transitive du groupe libre à deux générateurs sur un ensemble à $d$
+éléments, il y en a un nombre fini à isomorphisme près, et chacun n'admet
+qu'un nombre fini de repères. Normalisés par $P(1) = Q(1) = 1$, les
+coefficients sont déterminés par $f$ ; chacun n'a donc qu'un nombre fini de
+conjugués sous $\mathrm{Aut}(\mathbb{C})$, et un nombre complexe qui n'a
+qu'un nombre fini de conjugués est algébrique, puisque $\mathrm{Aut}(\mathbb{C})$
+agit transitivement sur les nombres transcendants. L'action se factorise
+alors par la restriction $\mathrm{Aut}(\mathbb{C}) \to
+\mathrm{Gal}(\overline{\mathbb{Q}}/\mathbb{Q})$.
+
+On a ainsi un groupe de Galois qui agit sur des objets purement
+combinatoires --- des graphes tracés sur une sphère. C'est l'observation que
+l'\emph{Esquisse d'un programme} place au centre, pour les cartes de tout
+genre, et dont elle tire, à l'aide du théorème de Belyi, que l'action sur
+l'ensemble de tous les dessins est fidèle\footnote{La fidélité n'est pas sur
+la page, qui ne considère que le genre $0$.}.
+
+\pagerange{3}{5}
+\subsection*{Les versos (pages 3 et 5)}
+
+Les pages 3 et 5, barrées, sont des brouillons. La page 3 calcule dans une
+algèbre engendrée par des éléments $e_i$, $f_i$ et $\eta$, munie d'une
+dérivation $\delta$, et conclut, sous ses hypothèses, que $\delta \eta = \pm
+e_{d-2}$ ; rien ne la rattache aux cartes\footnote{Transcription condensée,
+formules seulement ; on ne cherche pas à reconstituer la structure étudiée.}.
+La page 5 porte, sur une couche, la suite de ce calcul, et, tête-bêche, la
+dérivée seconde
+\[
+\Bigl(\frac{P}{Q}\Bigr)'' = \frac{P''Q^2 - Q''PQ - 2P'QQ' + 2PQ'^2}{Q^3},
+\]
+qui sert à la page 2.
+
+\pagerange{9}{11}
+\section*{II. Disques coupés de cordes (pages 9 à 11)}
+
+Les pages 9 et 11 sont des pages de dessins, sans texte. Chacune montre des
+rangées de disques coupés par des cordes, droites ou courbes, parfois
+concourantes, une région parfois hachurée ; sous chaque disque, un petit
+graphe. Pour la plupart des dessins, les sommets du graphe semblent être les
+cordes et ses arêtes leurs croisements : un point pour une corde, deux points
+pour deux cordes disjointes, un segment pour deux cordes qui se croisent, un
+triangle pour trois cordes deux à deux sécantes\footnote{Cette lecture est
+celle du transcripteur (« apparemment ») ; un dessin au moins, trois cordes
+concourantes au-dessus d'un segment, ne s'y conforme pas, et on ne force
+pas l'interprétation. Le graphe des croisements d'une famille de cordes
+s'appelle aujourd'hui un \emph{graphe de cercle} ; rien sur la page ne dit
+que c'est ce qu'il étudie.}. Plusieurs dessins sont marqués « ok », avec
+des variantes introduites par « ou » ; sous une rangée de disques à quatre
+cordes parallèles, un « ? ». La page 11 ajoute, parmi les graphes, un
+tripode en forme de Y, un carré, un triangle surmonté d'un segment.
+
+Ces dessins sont des \emph{diagrammes de cordes}, et ils reviennent plus
+loin sous deux formes : les partitions en classes de deux éléments de la
+page 44, qui sont des familles de cordes sans croisement, et les trois
+cordes parallèles de la page 47. Les configurations à cordes sécantes que
+dessinent les pages 9 et 11 sont exactement celles que la condition « non
+parallèle » des pages 40 à 52 exclut ; c'est un rapprochement de notre
+part.
+
+\textbf{La page 10.} Au milieu de ces dessins, quelques formules sur les
+ensembles de parties $\mathbb{P}(X)$ et les applications :
+\[
+\mathbb{P}(X \times Z) \simeq \mathrm{Hom}(Z \times X, \mathcal{E}) =
+\mathrm{Hom}\bigl(X, \mathrm{Hom}(Z, \mathcal{E})\bigr), \qquad
+\mathrm{Hom}(X, Y) \subset \mathbb{P}(X \times Y).
+\]
+Si l'on lit $\mathcal{E}$, que la page ne définit pas, comme un ensemble à
+deux éléments --- ou, dans un topos, le classifiant des sous-objets ---, la
+première ligne est la correspondance entre parties et fonctions
+caractéristiques, suivie de la curryfication, et vaut sans le point
+d'interrogation que la page met sur « $\simeq$ » ; la seconde identifie une
+application à son graphe\footnote{Une autre ligne porte
+$\mathrm{Hom}(\mathcal{E}, \mathrm{Hom}(X,Z)) =
+\mathbb{P}(\mathrm{Hom}(X,Z))$, dont la première lettre est douteuse. Telle
+qu'écrite, la variance est fausse : $\mathbb{P}(Y) = \mathrm{Hom}(Y,
+\mathcal{E})$ est contravariant en $Y$, et il faudrait
+$\mathrm{Hom}(\mathrm{Hom}(X,Z), \mathcal{E})$. La lecture de $\mathcal{E}$
+comme classifiant est la nôtre.}. Le croquis voisin, $H \subset P \times X
+\times Y$ au-dessus de $P \times X$, puis de $P$, évoque la relation
+universelle sur un objet de parties, par laquelle on construit les
+exponentielles d'un topos à partir de ses objets de parties ; la page n'en
+dit pas plus. Rien ne rattache cette page au reste du dossier.
+
+\pagerange{13}{24}
+\section*{III. Découpages d'un espace par des coupures : la Version I (pages 13 à 24)}
+
+\pagerange{13}{14}
+\subsection*{Les hypothèses (pages 13 et 14)}
+
+Soient $X$ un espace topologique \emph{connexe} et $(E_i)_{i \in I}$ une
+famille \emph{finie} de parties fermées de $X$ telles que :
+\begin{enumerate}
+  \item[(a)] pour tout $i$, $X \smallsetminus E_i$ a exactement deux
+  composantes connexes, notées $\Sigma_i^{+}$ et $\Sigma_i^{-}$ ;
+  \item[(b)] pour $i \neq j$, $E_j$ est contenu dans l'une des deux
+  composantes de $X \smallsetminus E_i$.
+\end{enumerate}
+La condition (b) entraîne que les $E_i$ sont deux à deux disjoints ; elle
+est automatique si les $E_i$ sont connexes et disjoints. On pose
+$\widehat{\Sigma}_i^{\pm} = \Sigma_i^{\pm} \cup E_i$\footnote{La connexité de
+$X$ et la finitude de $I$ ne sont pas dans l'énoncé. La première apparaît en
+marge (« ce qui est le cas si $X$ est connexe ») et sert à chaque pas ; la
+seconde est demandée par la récurrence sur $\operatorname{card} I$ et par le
+fait que les morceaux soient ouverts. Les deux sont supposées dans toute la
+section.}.
+
+Trois conséquences servent partout. Les $\Sigma_i^{\pm}$ sont \emph{ouverts}
+dans $X$ : chacun est fermé dans $X \smallsetminus E_i$ comme composante, donc
+ouvert comme complémentaire de l'autre, et $X \smallsetminus E_i$ est ouvert
+dans $X$\footnote{La marge dit « ouvertes », lecture incertaine. C'est vrai
+sans hypothèse de connexité locale, parce qu'il n'y a que deux
+composantes.}. On a $\overline{\Sigma_i^{\pm}} \subset \Sigma_i^{\pm} \cup
+E_i$, puisque l'autre composante est un ouvert disjoint ; en particulier
+$\widehat{\Sigma}_i^{\pm}$ est fermé. Enfin, $X$ étant connexe,
+$\overline{\Sigma_i^{\pm}} \cap E_i \neq \emptyset$ : sinon $\Sigma_i^{\pm}$
+serait ouvert et fermé, non vide et distinct de $X$. En particulier $E_i \neq
+\emptyset$.
+
+L'exemple à garder en tête est celui d'un disque fermé coupé par des cordes
+disjointes. Pour des cordes rectilignes, (a) est élémentaire ; pour des arcs
+simples joignant deux points du bord, c'est une forme du théorème de Jordan,
+et il faut celui de Schoenflies pour savoir que les morceaux sont encore des
+disques\footnote{La page ne mentionne ni l'un ni l'autre ; c'est ce qu'il
+faut pour que l'exemple du disque, qu'elle dessine page 14, satisfasse ses
+hypothèses.}.
+
+\pagerange{14}{15}
+\subsection*{Deux coupures (pages 14 et 15)}
+
+Soit $I = \{1, 2\}$, et notons $\Sigma_i^{+}$ la composante de $X
+\smallsetminus E_i$ qui \emph{ne contient pas} l'autre coupure.
+
+\textbf{Les deux calottes sont disjointes.} On a
+\[
+\Sigma_1^{+} \subset \Sigma_2^{-}, \qquad \Sigma_2^{+} \subset \Sigma_1^{-},
+\qquad \Sigma_1^{+} \cap \Sigma_2^{+} = \emptyset .
+\]
+En effet $\Sigma_2^{-}$ contient $E_1$, donc en est un voisinage ouvert, et
+$\overline{\Sigma_1^{+}}$ rencontre $E_1$ ; donc $\Sigma_2^{-}$ rencontre
+$\Sigma_1^{+}$. La réunion $\Sigma_2^{-} \cup \Sigma_1^{+}$ est alors un
+connexe contenu dans $X \smallsetminus E_2$ (car $\Sigma_1^{+} \cap E_2 =
+\emptyset$) et contenant la composante $\Sigma_2^{-}$ : elle lui est égale,
+et $\Sigma_1^{+} \subset \Sigma_2^{-}$. Symétriquement pour l'autre
+inclusion, et la disjonction en résulte.
+
+\textbf{Les cinq pièces.} La partition commune des deux partitions $X =
+\Sigma_i^{+} \sqcup E_i \sqcup \Sigma_i^{-}$ est
+\[
+X = \Sigma_1^{+} \sqcup E_1 \sqcup \Sigma_{12} \sqcup E_2 \sqcup
+\Sigma_2^{+}, \qquad \Sigma_{12} = \Sigma_1^{-} \cap \Sigma_2^{-},
+\]
+avec $\Sigma_2^{-} = \Sigma_1^{+} \sqcup E_1 \sqcup \Sigma_{12}$ et
+$\Sigma_1^{-} = \Sigma_{12} \sqcup E_2 \sqcup \Sigma_2^{+}$. Les trois pièces
+$\Sigma_1^{+}$, $\Sigma_{12}$, $\Sigma_2^{+}$ sont ouvertes, et
+\[
+\Sigma_1^{+} \subsetneq \overline{\Sigma_1^{+}} \subset \Sigma_1^{+} \cup
+E_1, \qquad \overline{\Sigma_{12}} \subset \Sigma_{12} \cup E_1 \cup E_2,
+\qquad \Sigma_2^{+} \subsetneq \overline{\Sigma_2^{+}} \subset \Sigma_2^{+}
+\cup E_2 .
+\]
+\textbf{La pièce du milieu touche les deux coupures} :
+$\overline{\Sigma_{12}} \cap E_1 \neq \emptyset$ et $\overline{\Sigma_{12}}
+\cap E_2 \neq \emptyset$ ; en particulier $\Sigma_{12} \neq \emptyset$. Si
+l'on avait $\overline{\Sigma_{12}} \cap E_1 = \emptyset$, on aurait
+$\overline{\Sigma_{12}} \subset \Sigma_{12} \cup E_2$, puis
+\[
+\overline{\Sigma_1^{-}} = \overline{\Sigma_2^{+}} \cup E_2 \cup
+\overline{\Sigma_{12}} \subset \Sigma_1^{-},
+\]
+et $\Sigma_1^{-}$ serait fermé, ce que la connexité interdit.
+
+\pagerange{16}{16}
+\subsection*{Le cas des frontières communes (page 16)}
+
+Supposons de plus que chaque coupure soit la frontière commune de ses deux
+côtés :
+\[
+\overline{\Sigma_i^{+}} = \Sigma_i^{+} \cup E_i, \qquad
+\overline{\Sigma_i^{-}} = \Sigma_i^{-} \cup E_i \qquad (i \in I),
+\]
+comme c'est le cas pour une corde d'un disque. Alors
+\[
+\overline{\Sigma_{12}} = \Sigma_{12} \cup E_1 \cup E_2 .
+\]
+La page l'annonce (« je dis que ») sans le démontrer\footnote{La page écrit
+« les deux comp.\ conn.\ de $X \smallsetminus \Sigma_i$ » pour $X
+\smallsetminus E_i$, ici comme page 17. La démonstration est de nous.}. En
+effet $E_1 \subset \overline{\Sigma_1^{-}} = \overline{\Sigma_2^{+}} \cup E_2
+\cup \overline{\Sigma_{12}}$, et $E_1$ ne rencontre ni $E_2$ ni
+$\overline{\Sigma_2^{+}} \subset \Sigma_2^{+} \cup E_2$ ; donc $E_1 \subset
+\overline{\Sigma_{12}}$, et de même pour $E_2$.
+
+\pagerange{16}{19}
+\subsection*{Compter les morceaux (pages 16 à 19)}
+
+Pour $J \subset I$, notons $U_J = X \smallsetminus \bigcup_{j \in J} E_j$ et
+$\Pi_J^0$ la partition de $U_J$ qui est la partition commune des partitions
+$\{\Sigma_j^{+} \cap U_J, \Sigma_j^{-} \cap U_J\}$ ($j \in J$) : deux points
+sont dans la même classe s'ils sont, pour chaque $j$, du même côté de $E_j$.
+Ses classes non vides sont les \emph{morceaux}\footnote{Ce sont les
+composantes connexes de $U_J$ dans l'exemple du disque, mais pas en général.
+Sur un cercle, une paire de points $E = \{p, q\}$ est une coupure au sens de
+(a) ; avec deux paires non entrelacées, dans l'ordre $p_1, q_1, p_2, q_2$, le
+morceau du milieu $\Sigma_{12}$ est la réunion des deux arcs $]q_1, p_2[$ et
+$]q_2, p_1[$. L'exemple est de nous ; le compte qui suit porte sur les
+classes, et reste juste.}. Ils sont ouverts, comme intersections finies
+d'ouverts.
+
+\textbf{Le compte (pages 17 et 19).} \emph{Si $\operatorname{card} I = n$,
+la partition $\Pi_I^0$ a exactement $n + 1$ morceaux.}
+
+Par récurrence sur $n$, les cas $n = 0, 1$ étant clairs. Soit $I = J \sqcup
+\{i\}$. Par (b), $E_i$ est, pour chaque $j \in J$, d'un seul côté de $E_j$ ;
+il est donc contenu dans un unique morceau de $\Pi_J^0$, noté $U_{J,i}$, qui
+en est un voisinage ouvert.
+
+\textbf{Lemme (page 17).} \emph{Tout morceau de $\Pi_J^0$ distinct de
+$U_{J,i}$ est contenu dans $\Sigma_i^{+}$ ou dans $\Sigma_i^{-}$.}
+
+« C'est presque une tautologie. » Un morceau $U_\alpha \neq U_{J,i}$ est, pour
+un certain $j \in J$, du côté de $E_j$ qui ne contient pas $E_i$ ; par
+l'étude de deux coupures, ce côté est contenu dans le côté de $E_i$ qui
+contient $E_j$, et $U_\alpha$ aussi.
+
+Les morceaux de $\Pi_I^0$ sont donc ceux de $\Pi_J^0$ autres que $U_{J,i}$,
+inchangés, et les deux ensembles $U_{J,i} \cap \Sigma_i^{+}$ et $U_{J,i} \cap
+\Sigma_i^{-}$, qui sont non vides parce que $U_{J,i}$ est un voisinage de
+$E_i$ et que les deux côtés de $E_i$ ont $E_i$ dans leur adhérence. Il y en
+a $(n - 1) + 2 = n + 1$ (page 19).
+
+\pagerange{18}{22}
+\subsection*{La forme des morceaux (pages 18 à 22)}
+
+\textbf{Lemme (page 19).} \emph{Tout morceau de $\Pi_I^0$ s'écrit}
+\[
+V = X \smallsetminus \bigcup_{\alpha \in K} \widehat{\Sigma}_\alpha^{+}
+= \bigcap_{\alpha \in K} \Sigma_\alpha^{-},
+\]
+\emph{où $K \subset I$ est non vide si $I$ l'est, et où, pour chaque $\alpha
+\in K$, $\Sigma_\alpha^{+}$ est l'une des deux composantes de $X
+\smallsetminus E_\alpha$ (et $\Sigma_\alpha^{-}$ l'autre), les
+$\widehat{\Sigma}_\alpha^{+}$ étant deux à deux disjoints.}
+
+Pour $\alpha \neq \beta$, la disjonction de $\widehat{\Sigma}_\alpha^{+}$ et
+$\widehat{\Sigma}_\beta^{+}$ équivaut à celle de $\Sigma_\alpha^{+}$ et
+$\Sigma_\beta^{+}$ : par l'étude de deux coupures, une seule des quatre
+paires de composantes est disjointe, celle des deux côtés « extérieurs », et
+chaque coupure est alors du côté intérieur de l'autre.
+
+La démonstration (pages 18 et 20) est une récurrence. Par hypothèse de
+récurrence, $U_{J,i} = X \smallsetminus \bigcup_{\alpha \in K_0}
+\widehat{\Sigma}_\alpha^{+}$, et
+\[
+U_{J,i} \cap \Sigma_i^{-} = X \smallsetminus \Bigl( \bigcup_{\alpha \in K_0}
+\widehat{\Sigma}_\alpha^{+} \cup \widehat{\Sigma}_i^{+} \Bigr).
+\]
+Dans la réunion on peut omettre les $\alpha$ tels que $\Sigma_\alpha^{+}
+\subset \Sigma_i^{+}$, puisqu'alors $\widehat{\Sigma}_\alpha^{+} \subset
+\widehat{\Sigma}_i^{+}$ ; soit $K_1$ l'ensemble des autres. Reste à voir que
+pour $\alpha_0 \in K_1$, $\Sigma_{\alpha_0}^{+} \cap \Sigma_i^{+} =
+\emptyset$. Or $E_i \subset U_{J,i} \subset \Sigma_{\alpha_0}^{-}$, donc
+$\Sigma_{\alpha_0}^{+}$ est le côté de $E_{\alpha_0}$ qui ne contient pas
+$E_i$ ; il est contenu dans le côté de $E_i$ qui contient $E_{\alpha_0}$.
+Comme $\Sigma_{\alpha_0}^{+} \not\subset \Sigma_i^{+}$, ce côté est
+$\Sigma_i^{-}$, et $\Sigma_i^{+}$ est l'autre, disjoint de
+$\Sigma_{\alpha_0}^{+}$ par l'étude de deux coupures\footnote{La page écrit
+« $\Sigma_{\alpha_0} \cap \Sigma_i = \emptyset$ » sans les signes. Elle
+annonce la conclusion (« ce qui achèvera la démonstration ») avant
+l'argument, qui occupe le bas de la page 20 ; on a rétabli l'ordre.}. On
+conclut avec $K = K_1 \cup \{i\}$ ; l'autre morceau, $U_{J,i} \cap
+\Sigma_i^{+}$, se traite de même.
+
+\textbf{Corollaire du lemme (page 20).} \emph{L'écriture de $V$ est unique :}
+\[
+K = \{ \alpha \in I \mid \overline{V} \cap E_\alpha \neq \emptyset \},
+\]
+\emph{et, pour $\alpha \in K$, $\Sigma_\alpha^{+}$ est la composante de $X
+\smallsetminus E_\alpha$ qui ne rencontre pas $V$.} Comme $V$ est ouvert et
+ne rencontre aucune coupure, la condition $\overline{V} \cap E_\alpha \neq
+\emptyset$ équivaut à $\dot{V} \cap E_\alpha \neq \emptyset$, où $\dot{V}$
+est la frontière de $V$.
+
+Les pages 21 et 22 le démontrent en deux temps.
+
+\emph{Si $\alpha \in K$, alors $\overline{V} \cap E_\alpha =
+\overline{\Sigma_\alpha^{-}} \cap E_\alpha$, qui est non vide.} Posons $Y =
+\widehat{\Sigma}_\alpha^{+}$ et $Z = \bigcup_{\beta \in K \smallsetminus
+\{\alpha\}} \widehat{\Sigma}_\beta^{+}$, fermés disjoints. On a $X
+\smallsetminus Y = (X \smallsetminus (Y \cup Z)) \cup Z$, donc, $Z$ étant
+fermé, $\overline{X \smallsetminus Y} = \overline{X \smallsetminus (Y \cup
+Z)} \cup Z$, et en coupant par $Y$, qui ne rencontre pas $Z$ :
+\[
+\overline{X \smallsetminus (Y \cup Z)} \cap Y = \overline{X \smallsetminus Y}
+\cap Y ,
+\]
+ce qui est l'égalité cherchée (« immédiat », dit la page, après une première
+tentative encadrée et barrée).
+
+\emph{Si $\beta \notin K$, alors $\overline{V} \cap E_\beta = \emptyset$.} Le
+morceau $V$ ne rencontre aucune coupure, donc $E_\beta \subset X
+\smallsetminus V = \bigcup_{\alpha \in K} \widehat{\Sigma}_\alpha^{+}$, et,
+les coupures étant disjointes, $E_\beta \subset \bigcup_{\alpha \in K}
+\Sigma_\alpha^{+}$, ouvert disjoint de $V$.
+
+\textbf{Lemme (page 22).} \emph{Mieux : il existe $\alpha \in K$ tel que
+$E_\beta \subset \Sigma_\alpha^{+}$.} Par (b), $E_\beta$ est, pour chaque
+$\alpha \in K$, contenu dans $\Sigma_\alpha^{+}$ ou dans $\Sigma_\alpha^{-}$ ;
+s'il était contenu dans tous les $\Sigma_\alpha^{-}$, il le serait dans leur
+intersection $V$, qu'il ne rencontre pas, et il est non vide\footnote{La page
+énonce le lemme pour une famille quelconque de $\Sigma_\alpha^{+}$ deux à
+deux disjoints et laisse la démonstration en suspens (« Cela provient
+… ») ; la marge dit que c'est « trivial, du fait que les $E_i$ sont
+disjoints ». La disjonction ne donne que l'inclusion dans la réunion ; pour
+passer à un seul $\Sigma_\alpha^{+}$, il faut (b), ou la connexité de
+$E_\beta$. La démonstration est de nous.}.
+
+\textbf{Corollaire (page 22).} \emph{Les morceaux de la partition
+$\Pi_K^0$, définie par les seules coupures $E_\alpha$ ($\alpha \in K$), sont
+les $\Sigma_\alpha^{+}$ ($\alpha \in K$) et $V$.} Chaque $\Sigma_\alpha^{+}$
+est en effet contenu dans tous les $\Sigma_\beta^{-}$ ($\beta \neq \alpha$),
+et le compte, $\operatorname{card} K + 1$, est le bon (« immédiat par
+récurrence »). L'unicité de l'écriture en résulte : $K$ est l'ensemble des
+coupures qui touchent $V$, et $\Sigma_\alpha^{+}$ le côté de $E_\alpha$ qui
+ne contient pas $V$.
+
+\pagerange{23}{24}
+\subsection*{L'arbre des morceaux (pages 23 et 24)}
+
+Soit $S$ l'ensemble des morceaux $U_s$ de $\Pi_I^0$. Disons que le morceau
+$U_s$ et la coupure $E_i$ sont \emph{incidents} si $\overline{U_s} \cap E_i
+\neq \emptyset$.
+
+\textbf{Lemme (page 23).} \emph{Chaque coupure $E_i$ est incidente à
+exactement deux morceaux, l'un dans $\Sigma_i^{+}$, l'autre dans
+$\Sigma_i^{-}$. Le graphe $\Gamma_I$ qui a pour sommets les morceaux et pour
+arêtes les coupures, l'arête $i$ joignant ses deux morceaux incidents, est
+sans arête multiple, et c'est un arbre.}
+
+La page ne démontre que le début\footnote{Elle écrit que $(S, I, R)$ est un
+« graphe strict », ce qui signifie a) que chaque $E_i$ touche exactement
+deux morceaux, et b) que « $i$ est caractérisé par l'une de ces deux
+$U_s$ » ; on lit b) comme l'absence d'arêtes multiples : $i$ est déterminé
+par ses deux extrémités. La démonstration qui suit est de nous.}. Voici un
+argument complet, qui suit la récurrence des pages 16 à 19. Pour $I = J
+\sqcup \{i\}$, le graphe $\Gamma_I$ s'obtient à partir de $\Gamma_J$ en
+dédoublant le sommet $U_{J,i}$ en deux sommets $U_{J,i} \cap \Sigma_i^{\pm}$
+joints par l'arête $i$, les autres arêtes issues de $U_{J,i}$ allant à l'un
+ou à l'autre selon le côté de $E_i$ où se trouve la coupure. En effet :
+\begin{itemize}
+  \item si $E_j \subset \Sigma_i^{-}$ touche $U_{J,i}$, il touche $U_{J,i}
+  \cap \Sigma_i^{-}$, puisque $\Sigma_i^{-}$ est un voisinage ouvert de $E_j$,
+  et ne touche pas $U_{J,i} \cap \Sigma_i^{+}$, dont l'adhérence est dans
+  $\Sigma_i^{+} \cup E_i$ ;
+  \item un morceau $U_t \neq U_{J,i}$ ne touche pas $E_i$, car il est dans
+  un côté d'une coupure $E_j$ qui ne contient pas $E_i$, dont l'adhérence est
+  dans ce côté réuni à $E_j$ ;
+  \item les deux moitiés touchent $E_i$, puisque $U_{J,i}$ est un voisinage
+  de $E_i$ et que les deux côtés de $E_i$ l'ont dans leur adhérence.
+\end{itemize}
+Dédoubler un sommet d'un arbre en une arête, en répartissant les autres
+arêtes, donne un arbre ; on part de l'arbre à un sommet ($I = \emptyset$).
+
+La page 24 commence à décrire le morceau incident à $E_i$ du côté
+$\Sigma_i^{-}$. Il s'écrit $U = X \smallsetminus \bigcup_{\alpha \in K}
+\widehat{\Sigma}_\alpha^{+}$ avec $i \in K$, et $\Sigma_i^{+}$ y est le côté
+de $E_i$ qui ne contient pas $U$. Il s'agit de voir que le reste de
+l'écriture est déterminé par $i$ et le choix du côté. C'est vrai, et
+\[
+K \smallsetminus \{i\} = \{ \alpha \neq i \mid E_\alpha \subset
+\Sigma_i^{-} \text{ et aucune coupure ne sépare } E_\alpha \text{ de } E_i
+\},
+\]
+$\Sigma_\alpha^{+}$ étant, pour ces $\alpha$, le côté de $E_\alpha$ qui ne
+contient pas $E_i$ : ce sont les arêtes de l'arbre qui partent du même
+sommet que $i$\footnote{La page s'arrête sur « $K \smallsetminus \{i\} = \{
+\alpha \in I \mid E_\alpha \subset \Sigma_\alpha^{-} \}$ », le reste restant
+blanc. Telle qu'écrite la condition ne dépend pas de $i$ ; lue avec
+$\Sigma_i^{-}$, comme le transcripteur le suggère, elle est fausse dès trois
+cordes parallèles $E_1, E_2, E_3$ d'un disque, dans cet ordre : du côté de
+$E_1$ qui contient les deux autres, le morceau incident à $E_1$ ne touche que
+$E_2$. La condition de non-séparation est de nous.}.
+
+\pagerange{25}{29}
+\section*{IV. Dispositions binaires et arbres (pages 25 à 29)}
+
+\pagerange{25}{26}
+\subsection*{Dispositions binaires et paires non parallèles (pages 25 et 26)}
+
+Une \emph{disposition binaire} d'un ensemble $X$ est une paire de parties
+$\{\Sigma^{+}, \Sigma^{-}\}$, les \emph{hémisphères}, de réunion $X$, dont
+aucune ne contient l'autre ; leur intersection $E$, éventuellement vide, est
+l'\emph{équateur}. Pour un espace topologique, on demande les hémisphères
+fermés, et le plus souvent connexes avec $E \neq \emptyset$ ; alors $X$ est
+connexe. Si $X$ est connexe, l'hémisphère ouvert $\Sigma^{\pm,0} = \Sigma^{\pm}
+\smallsetminus E$ a $E$ dans son adhérence : sinon il serait ouvert et
+fermé, non vide et distinct de $X$\footnote{La première phrase topologique
+est d'une lecture incertaine ; on a gardé ce qui s'y démontre.}.
+
+Deux dispositions binaires $\{\Sigma_1^{\pm}\}$, $\{\Sigma_2^{\pm}\}$ sont
+\emph{non parallèles} si elles sont distinctes et si l'on peut choisir un
+hémisphère de chacune, noté $\Sigma_1^{+}$ et $\Sigma_2^{+}$, avec
+$\Sigma_1^{+} \cap \Sigma_2^{+} = \emptyset$\footnote{« Si elles sont
+distinctes » est ajouté en interligne ; la démonstration de la page 26 en a
+besoin.}. Alors $E_1 \cap E_2 = \emptyset$, $\Sigma_1^{+} \subset
+\Sigma_2^{-}$ et $\Sigma_2^{+} \subset \Sigma_1^{-}$, et $\Sigma_{12} =
+\Sigma_1^{-} \cap \Sigma_2^{-}$ contient $E_1 \cup E_2$ et n'est pas vide,
+même si les deux équateurs le sont : sinon les deux dispositions seraient
+deux partitions de $X$ égales à $\{\Sigma_1^{+}, \Sigma_2^{+}\}$. Il en
+résulte que le choix de $\Sigma_1^{+}$ et $\Sigma_2^{+}$ est unique. La
+chaîne d'inclusions
+\[
+\Sigma_1^{+} \supset E_1 \hookrightarrow \Sigma_{12} \hookleftarrow E_2
+\subset \Sigma_2^{+}
+\]
+se dessine comme un segment à trois points marqués, et la marge note
+$\Sigma_1^{-} = \Sigma_{12} \amalg_{E_2} \Sigma_2^{+}$ et $\Sigma_2^{-} =
+\Sigma_{12} \amalg_{E_1} \Sigma_1^{+}$, sommes amalgamées.
+
+Une longue note oblique de la marge signale que les quatre hémisphères ne
+sont pas nécessairement distincts --- on peut avoir $\Sigma_1^{+} =
+\Sigma_2^{-}$, d'où $E_1 = \Sigma_{12}$ et $E_2 = \emptyset$ --- et ajoute
+« strict.\ » devant « non parallèles » : c'est la notion que la page 36
+définira\footnote{La note est d'une lecture très incertaine ; on n'en garde
+que ce que la page 35 établit.}.
+
+\pagerange{27}{29}
+\subsection*{D'un arbre à une famille de décompositions (pages 27 à 29)}
+
+Voici « une façon très générale » d'obtenir des familles de décompositions
+binaires deux à deux non parallèles. Soit $\Gamma = (S, A)$ un arbre
+\emph{fini}, d'ensemble de sommets $S$ et d'ensemble d'arêtes $A$, et soient
+$(U_s)_{s \in S}$, $(E_a)_{a \in A}$ deux familles d'ensembles ; posons
+\[
+X = \coprod_{s \in S} U_s \ \amalg\ \coprod_{a \in A} E_a .
+\]
+Pour $a_0 \in A$, l'arbre privé de l'arête $a_0$ a deux composantes
+$\Gamma'$, $\Gamma''$ ; soient $S'$, $S''$ leurs sommets, et $A'$, $A''$
+leurs arêtes \emph{auxquelles on ajoute $a_0$}. La décomposition binaire
+$\Pi_{a_0}$ est $X = X' \cup X''$, avec
+\[
+X' = \coprod_{s \in S'} U_s \amalg \coprod_{a \in A'} E_a, \qquad
+X'' = \coprod_{s \in S''} U_s \amalg \coprod_{a \in A''} E_a, \qquad
+X' \cap X'' = E_{a_0} .
+\]
+La page ne dit pas si $A'$ et $A''$ contiennent $a_0$ ; l'égalité $X' \cap X''
+= E_{a_0}$ l'exige\footnote{La finitude de l'arbre est de nous : sans elle,
+une composante peut n'avoir aucune feuille, et la condition ($*$) ne suffit
+plus.}.
+Elle est \emph{propre} ($X' \neq E_{a_0}$ et $X'' \neq E_{a_0}$) pour tout
+$a_0$ si et seulement si
+\begin{enumerate}
+  \item[($*$)] pour toute feuille $s$ de $\Gamma$, $U_s \neq \emptyset$.
+\end{enumerate}
+En effet, chaque composante $\Gamma'$ contient une feuille de $\Gamma$, et
+réciproquement, si $U_s = \emptyset$ pour une feuille $s$, la coupure à son
+arête isole $X' = E_{a_0}$.
+
+Pour $a \neq b$, l'hémisphère de $\Pi_a$ qui ne contient pas $E_b$ et celui
+de $\Pi_b$ qui ne contient pas $E_a$ sont disjoints ; $\Pi_a$ et $\Pi_b$ sont donc non
+parallèles dès qu'elles sont distinctes, et elles le sont si et seulement
+si
+\begin{enumerate}
+  \item[($**$)] pour tout sommet $s$ d'ordre $2$, d'arêtes $a$ et $b$, l'un
+  des trois ensembles $U_s$, $E_a$, $E_b$ est non vide\footnote{La condition
+  est écrite en partie dans l'interligne et en partie dans la marge, et sa
+  lecture est incertaine. On a vérifié qu'ainsi lue elle est exactement ce
+  qu'il faut : $\Pi_a = \Pi_b$ exige $E_a = E_b = \emptyset$ et tout ce qui
+  est entre $a$ et $b$ vide, ce qui, sous ($*$), force les sommets
+  intermédiaires à être d'ordre $2$ et viole ($**$) au premier d'entre
+  eux.}.
+\end{enumerate}
+Ils sont \emph{strictement} non parallèles au sens de la page 36 si et
+seulement si l'on a de plus
+\begin{enumerate}
+  \item[($*{*}*$)] pour tout sommet $s$ d'ordre $2$ et toute arête $a$ qui y
+  aboutit, $U_s \neq \emptyset$ ou $E_a \neq \emptyset$,
+\end{enumerate}
+condition qui entraîne ($**$). La page 29 l'affirme, en ajoutant que le cas
+où certains ensembles sont vides « est à examiner un peu de plus
+près »\footnote{Le passage est d'une lecture incertaine. On a vérifié
+l'énoncé sur les cas de la page 35 : l'égalité $E_a = \Sigma_{12}$ demande
+que tout ce qui sépare $a$ de $b$, et $E_b$, soient vides, ce que ($*{*}*$)
+interdit au sommet voisin de $b$.}.
+
+\textbf{La réalisation topologique.} La page 28 visualise la construction.
+Réalisons $\Gamma$ comme graphe topologique $|\Gamma|$ et marquons le milieu
+$a'$ de chaque arête : c'est la subdivision barycentrique $\Gamma^{*}$, de
+sommets $S^{*} = S \amalg A'$. Chaque point $a'$ coupe $|\Gamma|$ en deux
+composantes, dont les adhérences forment une décomposition binaire
+d'équateur $\{a'\}$, et deux telles décompositions sont strictement non
+parallèles. Leurs traces sur $S^{*}$ sont des décompositions binaires de
+$S^{*}$ ; et se donner une application surjective $X \to S^{*}$ revient à se
+donner les deux familles $(U_s)$, $(E_a)$ d'ensembles non vides. La
+construction de la page 27 est donc l'image réciproque, par une telle
+application, des décompositions de l'arbre lui-même\footnote{La page 28
+annonce, entre crochets, « une description complète des propriétés
+particulières des $\Gamma^{*}$ » --- chaque arête a une extrémité dans $A'$
+et l'autre dans $S$ --- et s'interrompt.}.
+
+C'est la construction inverse de celle de la Version I, qui partait des
+coupures pour trouver l'arbre ; les deux ensemble disent qu'une famille
+finie de découpages deux à deux non parallèles et un arbre sont la même
+chose. Dans le cas d'un ensemble fini sans équateurs, c'est ce qu'on appelle
+aujourd'hui le \emph{théorème d'équivalence des scissions} de
+Buneman\footnote{P.~Buneman, 1971 : une famille de scissions (bipartitions)
+d'un ensemble fini deux à deux compatibles --- l'un des quatre croisements
+vide, exactement la condition de non-parallélité --- est l'ensemble des
+scissions définies par les arêtes d'un arbre. Rien n'indique que
+Grothendieck connaissait ce travail, publié dans un recueil d'archéologie
+quantitative. Le rapprochement, et l'affirmation que les deux constructions
+sont inverses, sont de nous.}.
+
+\pagerange{31}{39}
+\section*{V. Décompositions $n$-aires : la Version II (pages 31 à 39)}
+
+La troisième rédaction, titrée et numérotée, reprend tout avec des
+hémisphères fermés et sans supposer $X$ connexe.
+
+\pagerange{31}{32}
+\subsection*{1.1. Décompositions binaires (pages 31 et 32)}
+
+Une \emph{décomposition binaire} d'un espace topologique $X$ est une paire
+$\Pi = (\Sigma^{\varepsilon})_{\varepsilon \in \omega}$, indexée par un
+ensemble $\omega$ à deux éléments, de parties \emph{fermées} de $X$ telles
+que
+\[
+X = \bigcup_{\varepsilon \in \omega} \Sigma^{\varepsilon} \quad (1), \qquad
+\Sigma^{\varepsilon} \neq \emptyset \quad (2), \qquad
+\Sigma^{\varepsilon} \neq \Sigma^{\varepsilon'} \text{ pour } \varepsilon
+\neq \varepsilon' \quad (3).
+\]
+Il en résulte $\operatorname{card} X \geqslant 2$. On n'exclut pas que
+$\Sigma^{\varepsilon'} \subset \Sigma^{\varepsilon}$, ce qui équivaut par
+(1) à $\Sigma^{\varepsilon} = X$. Les $\Sigma^{\varepsilon}$ sont les
+\emph{hémisphères}, et
+\[
+E = \bigcap_{\varepsilon \in \omega} \Sigma^{\varepsilon} \qquad (4)
+\]
+l'\emph{équateur}. Si $E = \emptyset$, les hémisphères sont complémentaires,
+donc ouverts et fermés, et $X$ n'est pas connexe. D'où (5) : si $X$ est
+connexe, $E \neq \emptyset$ ; et si les hémisphères sont connexes, $X$ est
+connexe si et seulement si $E \neq \emptyset$.
+
+Pour $\omega = \{\varepsilon, \varepsilon'\}$, on pose
+\[
+\Sigma^{0\varepsilon} = \Sigma^{\varepsilon} \smallsetminus E = X
+\smallsetminus \Sigma^{\varepsilon'} \qquad (6),
+\]
+ouvert, d'où la partition $X = \Sigma^{0\varepsilon} \sqcup E \sqcup
+\Sigma^{0\varepsilon'}$ (7), et
+\[
+\overline{\Sigma^{0\varepsilon}} \cap E = \overline{\Sigma^{0\varepsilon}}
+\cap \Sigma^{\varepsilon'} = \overline{\Sigma^{0\varepsilon}} \smallsetminus
+\Sigma^{0\varepsilon} = \dot{\Sigma}^{0\varepsilon} \qquad (8),
+\]
+la frontière de l'hémisphère ouvert\footnote{La page commence ensuite une
+condition sur ces frontières (« on s'intéresse à la cond. »), qu'elle barre.
+C'est la condition qui, dans la Version I, venait de la connexité.}.
+
+\pagerange{32}{36}
+\subsection*{1.2. Paires non parallèles (pages 32 à 36)}
+
+Deux décompositions binaires $\Pi_1 = \{\Sigma_1^{+}, \Sigma_1^{-}\}$ et
+$\Pi_2 = \{\Sigma_2^{+}, \Sigma_2^{-}\}$ (9) sont \emph{non parallèles} si
+elles sont distinctes et si l'on peut nommer leurs hémisphères de sorte que
+\[
+\Sigma_1^{+} \cap \Sigma_2^{+} = \emptyset \qquad (10).
+\]
+Cette condition équivaut à $\Sigma_1^{+} \subset \Sigma_2^{0-}$, et à
+$\Sigma_2^{+} \subset \Sigma_1^{0-}$ ; elle entraîne les inclusions
+\[
+\Sigma_1^{+} \subset \Sigma_2^{-} \quad (11), \qquad \Sigma_2^{+} \subset
+\Sigma_1^{-} \quad (11 \text{ bis}),
+\]
+mais n'équivaut à aucune d'elles\footnote{La page écrit que (10)
+« équivaut » à (11), « ou encore » à (11 bis). Avec des hémisphères fermés,
+(11) n'exclut pas que $\Sigma_1^{+}$ touche l'équateur $E_2$. Exemple (de
+nous) : dans un disque, $\Sigma_2^{-}$ un demi-disque fermé, $\Sigma_1^{+}$ un
+petit disque fermé contenu dans $\Sigma_2^{-}$ et tangent au diamètre $E_2$,
+$\Sigma_1^{-}$ l'adhérence de son complémentaire ; (11) est vraie, et aucune
+paire d'hémisphères n'est disjointe. Dans la Version I, où $\Sigma$ désignait
+les composantes ouvertes, l'équivalence de la page 14 était juste.}. La marge
+ajoute que (10) donne $E_1 \subset \Sigma_2^{0-}$, $E_2 \subset
+\Sigma_1^{0-}$, et $E_1 \cap E_2 = \emptyset$.
+
+Posons $\Sigma_{12} = \Sigma_1^{-} \cap \Sigma_2^{-}$, $E_1 = \Sigma_1^{+}
+\cap \Sigma_1^{-}$, $E_2 = \Sigma_2^{+} \cap \Sigma_2^{-}$ (13). On a le
+diagramme d'inclusions de parties fermées (14) :
+
+\begin{tikzcd}[column sep=small, row sep=small]
+ & & X & & \\
+ & \Sigma_{2}^{-} \arrow[ur] & & \Sigma_{1}^{-} \arrow[ul] & \\
+ \Sigma_{1}^{+} \arrow[ur] & & \Sigma_{12} \arrow[ul] \arrow[ur] & &
+ \Sigma_{2}^{+} \arrow[ul] \\
+ & E_{1} \arrow[ul] \arrow[ur] & & E_{2} \arrow[ul] \arrow[ur] &
+\end{tikzcd}
+
+où les trois carrés sont \emph{cartésiens et cocartésiens} : dans chacun, le
+sommet du bas est l'intersection et le sommet du haut la réunion des deux
+autres,
+\[
+\begin{array}{ll}
+E_1 = \Sigma_1^{+} \cap \Sigma_{12}, & \Sigma_2^{-} = \Sigma_1^{+} \cup \Sigma_{12}, \\
+E_2 = \Sigma_{12} \cap \Sigma_2^{+}, & \Sigma_1^{-} = \Sigma_{12} \cup \Sigma_2^{+}, \\
+\Sigma_{12} = \Sigma_1^{-} \cap \Sigma_2^{-}, & X = \Sigma_2^{-} \cup \Sigma_1^{-}
+\end{array}
+\qquad (15).
+\]
+Ce sont des vérifications directes à partir de (11) et (11 bis)\footnote{Par
+exemple $\Sigma_1^{+} \cup \Sigma_{12} = (\Sigma_1^{+} \cup \Sigma_1^{-})
+\cap (\Sigma_1^{+} \cup \Sigma_2^{-}) = \Sigma_2^{-}$. Une réunion de deux
+fermés recollés le long de leur intersection est aussi une somme amalgamée
+d'espaces topologiques : les carrés sont cocartésiens dans les espaces, pas
+seulement dans l'ensemble ordonné des parties.}. De plus (16) :
+$\Sigma_1^{+} \cap \Sigma_2^{-} = \Sigma_1^{+} \neq \emptyset$,
+$\Sigma_2^{+} \cap \Sigma_1^{-} = \Sigma_2^{+} \neq \emptyset$, et
+$\Sigma_{12} \neq \emptyset$ ; pour la dernière, si $\Sigma_{12}$ était vide,
+les équateurs qu'il contient le seraient, $\Pi_1$ et $\Pi_2$ seraient des
+partitions, et $X = \Sigma_1^{+} \amalg \Sigma_2^{+}$ donnerait $\Pi_1 = \Pi_2$.
+
+\textbf{Proposition (page 34).} \emph{Si $\Pi_1$ et $\Pi_2$ sont non
+parallèles, il existe un unique couple $(\Sigma_1^{+}, \Sigma_2^{+}) \in
+\Pi_1 \times \Pi_2$ d'hémisphères disjoints.} Les trois autres couples se
+rencontrent, par (16).
+
+Soit $C = \Pi_1 \amalg \Pi_2 = \omega_1 \amalg \omega_2$ (17), ensemble à
+quatre éléments, et $C \to \mathfrak{P}_{\text{fermé}}(X)$ (18) l'application
+évidente, d'image $\{\Sigma_1^{+}, \Sigma_1^{-}, \Sigma_2^{+}, \Sigma_2^{-}\}$
+(19). Elle est injective si et seulement si les quatre hémisphères sont
+distincts. On sait déjà ($*$) $\Sigma_i^{+} \neq \Sigma_i^{-}$, par (3), et
+($**$) $\Sigma_1^{+} \neq \Sigma_2^{+}$, parties disjointes non vides. On lit
+sur (14) :
+\[
+\begin{array}{ll}
+\text{a) } (\Sigma_1^{+} = \Sigma_2^{-}) \Longleftrightarrow E_1 = \Sigma_{12} & (\Rightarrow E_2 = \emptyset), \\
+\text{b) } (\Sigma_2^{+} = \Sigma_1^{-}) \Longleftrightarrow E_2 = \Sigma_{12} & (\Rightarrow E_1 = \emptyset)
+\end{array}
+\qquad (*{*}*),
+\]
+et les deux ne peuvent avoir lieu ensemble, qui donneraient $\Sigma_{12} =
+E_1 = E_2 = \emptyset$, contre (16)\footnote{Dans la première relation, le
+signe entre $\Sigma_1^{+}$ et $\Sigma_2^{-}$ est un $=$ repassé en $\neq$, ou
+l'inverse ; la seconde et la suite demandent $=$.}. Enfin
+\[
+(\Sigma_1^{-} = \Sigma_2^{-}) \Longleftrightarrow (\Sigma_1^{-} =
+\Sigma_2^{-} = X) \Longleftrightarrow \Sigma_{12} = X \qquad (*{*}{*}*),
+\]
+cas qui exclut chacun des deux précédents, puisque $E_1 = \Sigma_{12} = X$
+contredirait (3).
+
+\textbf{Proposition (page 35).} \emph{Les quatre hémisphères sont distincts
+si et seulement si l'on n'est dans aucun des trois cas suivants, qui
+s'excluent mutuellement :}
+\[
+\text{a) } E_1 = \Sigma_{12}; \qquad \text{a') } E_2 = \Sigma_{12}; \qquad
+\text{b) } \Sigma_{12} = X, \text{ i.e. } \Sigma_1^{-} = \Sigma_2^{-} = X
+\qquad (20).
+\]
+\emph{Dans chacun, l'ensemble (19) a trois éléments.} Dans le cas b), on a
+$E_1 = \Sigma_1^{+}$ et $E_2 = \Sigma_2^{+}$.
+
+\textbf{Corollaire (page 36).} \emph{Si les quatre hémisphères sont
+distincts et si $\Sigma_1^{-} \neq X$, $\Sigma_2^{-} \neq X$, les seules
+inclusions entre eux, hors les égalités, sont $\Sigma_1^{+} \subset
+\Sigma_2^{-}$ et $\Sigma_2^{+} \subset \Sigma_1^{-}$.} Les inclusions
+inverses donneraient des égalités ; $\Sigma_1^{+} \subset \Sigma_1^{-}$
+donnerait $\Sigma_1^{-} = X$, et $\Sigma_1^{-} \subset \Sigma_1^{+}$
+donnerait $\Sigma_1^{+} = X$, impossible puisque $\Sigma_2^{+}$ est non vide
+et disjoint de $\Sigma_1^{+}$\footnote{La page conclut « on aurait
+$\Sigma_1^{-} = X$ » pour les deux inclusions ; pour la seconde c'est
+$\Sigma_1^{+} = X$, exclu pour la raison dite.} ; de même pour l'indice 2 ;
+$\Sigma_1^{+}$ et $\Sigma_2^{+}$ sont disjoints et non vides ; et
+$\Sigma_1^{-} \subset \Sigma_2^{-}$ donnerait $\Sigma_2^{-} \supset
+\Sigma_1^{-} \cup \Sigma_1^{+} = X$. La marge reformule : ce sont les
+seules inclusions non triviales si et seulement si les quatre sont distincts
+et $\Sigma_1^{-} \neq X$, $\Sigma_2^{-} \neq X$.
+
+\textbf{Définition (page 36).} $\Pi_1$ et $\Pi_2$ sont \emph{strictement non
+parallèles} si elles sont non parallèles, si les quatre hémisphères sont
+distincts, et si $\Sigma_1^{-} \neq X$, $\Sigma_2^{-} \neq X$ ; autrement
+dit, si les seules inclusions entre les quatre sont $\Sigma_1^{+} \subset
+\Sigma_2^{-}$ et $\Sigma_2^{+} \subset \Sigma_1^{-}$ ; autrement dit encore,
+\[
+\Sigma_1^{-} \neq X, \quad \Sigma_2^{-} \neq X \quad (\Pi_1, \Pi_2
+\text{ \emph{propres}}), \qquad E_1 \neq \Sigma_{12}, \quad E_2 \neq
+\Sigma_{12} \qquad (21).
+\]
+
+\pagerange{37}{38}
+\subsection*{1.3. Familles non parallèles et leur ensemble ordonné (pages 37 et 38)}
+
+Que la condition stricte soit remplie ou non, on munit l'ensemble à quatre
+éléments $C = \{\varepsilon_1^{+}, \varepsilon_1^{-}, \varepsilon_2^{+},
+\varepsilon_2^{-}\}$ (17) de l'ordre dont les seules relations strictes sont
+\[
+\varepsilon_1^{+} < \varepsilon_2^{-}, \qquad \varepsilon_2^{+} <
+\varepsilon_1^{-} \qquad (22),
+\]
+que la page dessine :
+
+\begin{tikzcd}[column sep=small, row sep=small]
+\varepsilon_{1}^{-} & \varepsilon_{2}^{-} \\
+\varepsilon_{1}^{+} \arrow[ur] & \varepsilon_{2}^{+} \arrow[ul]
+\end{tikzcd}
+
+Soit maintenant $(\Pi_\alpha)_{\alpha \in A}$, $\Pi_\alpha =
+\{\Sigma_\alpha^{\varepsilon}\}_{\varepsilon \in \omega_\alpha}$ (23), un
+ensemble de décompositions binaires de $X$ deux à deux non parallèles (24).
+\textbf{Définition (page 37).} On dit que la famille est \emph{non
+parallèle}, et, si $\operatorname{card} A = n$, que c'est une
+\emph{décomposition $n$-aire} non parallèle de $X$ ;
+terminologie analogue pour « strictement »\footnote{La marge note que c'est
+un élément de $\mathfrak{P}(\mathfrak{P}_2(\mathfrak{P}(X)))$ : un ensemble
+de paires de parties.}. Considérons
+\[
+C = \coprod_{\alpha \in A} \omega_\alpha \qquad (25),
+\]
+l'involution sans point fixe $\sigma$ qui échange les deux éléments de chaque
+$\omega_\alpha$, et la relation définie, pour $x \in \omega_\alpha$ et $y \in
+\omega_\beta$, par
+\[
+x < y \ \Longleftrightarrow\ \alpha \neq \beta \ \text{ et } \
+\Sigma_\alpha^{x} \cap \Sigma_\beta^{\sigma y} = \emptyset \qquad (26),
+\]
+c'est-à-dire par l'ordre (22) de la paire $\{\Pi_\alpha, \Pi_\beta\}$.
+
+\textbf{C'est un ordre}, ce que la marge demande de vérifier\footnote{« Il
+faut vérifier que c'est transitif … d'ordre », en marge. La vérification
+est de nous.}. L'antisymétrie vient de l'unicité du couple disjoint
+(proposition de la page 34) : $x < y$ et $y < x$ désigneraient comme couple
+disjoint de $\Pi_\alpha \times \Pi_\beta$ à la fois $(x, \sigma y)$ et
+$(\sigma x, y)$. Pour la transitivité, $x < y < z$ donne $\Sigma^{x} \subset
+X \smallsetminus \Sigma^{\sigma y} \subset \Sigma^{y}$ et $\Sigma^{y} \cap
+\Sigma^{\sigma z} = \emptyset$, donc $\Sigma^{x} \cap \Sigma^{\sigma z} =
+\emptyset$ ; et $x$, $z$ ne sont pas dans le même $\omega_\alpha$, car $z = x$
+contredirait l'antisymétrie et $z = \sigma x$ donnerait $\Sigma^{x} =
+\emptyset$.
+
+L'involution $\sigma$ \emph{renverse l'ordre} : $x < y$ entraîne $\sigma y <
+\sigma x$, la condition (26) étant symétrique. L'application
+\[
+\varphi \colon C \to \mathfrak{P}_{\text{fermé}}(X), \qquad (\alpha, x)
+\mapsto \Sigma_\alpha^{x} \qquad (27)
+\]
+est croissante, et c'est un isomorphisme d'ensembles ordonnés sur son image
+(ordonnée par inclusion) si et seulement si la famille est strictement non
+parallèle. Cela résulte du corollaire de la page 36 appliqué à chaque paire,
+et, pour $x$ et $\sigma x$, qui sont incomparables dans $C$, de ce que
+$\Sigma^{x}$ et $\Sigma^{\sigma x}$ ne sont comparables que si l'un vaut $X$,
+ce que « propre » exclut\footnote{La page affirme l'énoncé sans
+démonstration ; celle-ci est de nous.}.
+
+\pagerange{38}{39}
+\subsection*{Les quartettes ordonnés (pages 38 et 39)}
+
+« Inversement », la page pose la définition abstraite de ce qu'elle vient
+d'obtenir.
+
+\textbf{Définition (page 38).} Un \emph{quartette ordonné} est un ensemble
+fini $C$ muni d'une involution sans point fixe $\sigma$ et d'une relation
+d'ordre, tels que :
+\begin{enumerate}
+  \item[a)] pour $x, y \in C$, les éléments $x$ et $y$ sont comparables si et
+  seulement si $\sigma x$ et $y$ ne le sont pas ;
+  \item[b)] $\sigma$ renverse l'ordre : $x < y$ entraîne $\sigma y < \sigma
+  x$.
+\end{enumerate}
+L'ensemble ordonné $C$ d'une famille non parallèle est un quartette ordonné :
+pour $\alpha \neq \beta$, des quatre paires $\{x, y\}$, $\{\sigma x, y\}$,
+$\{x, \sigma y\}$, $\{\sigma x, \sigma y\}$, exactement deux, échangées par
+$\sigma$, sont comparables ; et $x$ est comparable à lui-même, non à $\sigma
+x$\footnote{« Fini » est une lecture incertaine, et « ordonné » est biffé
+puis, semble-t-il, récrit. La condition b) est biffée sur la page, mais son
+contenu revient dans le NB qui suit (« $\sigma$ est un antiautomorphisme de
+l'ens.\ ordonné $C$ »), sans qu'on puisse lire s'il est posé ou déduit. Il
+faut le poser : a) seul ne l'entraîne pas. Contre-exemple (de nous) : $C =
+\{x, \sigma x, y, \sigma y\}$ avec pour seules relations $x < y$ et $\sigma x
+< \sigma y$ vérifie a), et $\sigma$ n'y renverse pas l'ordre.}.
+
+Ce sont exactement, dans le vocabulaire d'aujourd'hui, les « pocsets » finis
+dont deux murs quelconques sont emboîtés ; et un tel pocset est l'ensemble
+des demi-arbres d'un arbre fini, ordonné par inclusion\footnote{Le terme
+« pocset » (ensemble ordonné muni d'une involution qui renverse l'ordre,
+$x$ et $\sigma x$ incomparables) est de M.~Roller (1998) ; la construction
+d'un arbre à partir d'une famille emboîtée de parties est de M.~J.~Dunwoody
+(1979), et l'on retrouve le cube complexe de M.~Sageev (1995) quand on lève
+l'emboîtement. Tout cela est postérieur ou contemporain ; rien n'indique que
+Grothendieck l'ait connu. L'identification des quartettes ordonnés aux
+pocsets emboîtés, et donc aux arbres finis, est de nous. Elle donnerait la
+réciproque qu'annonce « Inversement » : tout quartette ordonné provient d'une
+famille strictement non parallèle, celle de la réalisation topologique de
+son arbre (page 28). La page ne l'énonce pas.}. La réciproque de la
+construction des pages 27 à 29 est ainsi à portée : c'est là, semble-t-il,
+que la rédaction voulait aller.
+
+\textbf{Proposition (page 39), telle qu'énoncée.} \emph{Soit $(C, \sigma, <)$
+un quartette ordonné. Pour tout $x \in C$, les ensembles $C_{\geqslant x} =
+\{y \mid y \geqslant x\}$ et $C_{\leqslant x} = \{y \mid y \leqslant x\}$
+sont totalement ordonnés.}
+
+\emph{L'énoncé est faux.} Prenons trois cordes disjointes d'un disque qui
+entourent un triangle, et les trois décompositions binaires qu'elles
+définissent, de calottes $c_1$, $c_2$, $c_3$ et de grands côtés $c_1'$,
+$c_2'$, $c_3'$. La famille est strictement non parallèle, et son quartette
+est $C = \{c_1, c_2, c_3, c_1', c_2', c_3'\}$, avec $\sigma c_i = c_i'$ et
+pour seules relations $c_i < c_j'$ ($i \neq j$). Alors $C_{\geqslant c_1} =
+\{c_1, c_2', c_3'\}$, et $c_2'$, $c_3'$ sont incomparables. Ce qui est vrai
+est plus faible :
+\begin{itemize}
+  \item \emph{tout intervalle $[x, z] = \{y \mid x \leqslant y \leqslant z\}$
+  est totalement ordonné} ;
+  \item \emph{$C_{\geqslant x}$ est totalement ordonné pour tout $x$ si et
+  seulement si l'arbre du quartette est une chaîne}, c'est-à-dire si toutes
+  les coupures sont « en file », comme des cordes parallèles au sens usuel\footnote{Le
+  contre-exemple et les deux énoncés vrais sont de nous. Le graphe du
+  quartette de trois cordes autour d'un triangle est un tripode, qu'on
+  trouve dessiné, en « Y » épais, page 11.}.
+\end{itemize}
+Pour le premier point : si $x \leqslant y, y' \leqslant z$ avec $y$, $y'$
+incomparables, a) rend $\sigma y$ et $y'$ comparables ; $\sigma y \leqslant
+y' \leqslant z$ rendrait $y$ et $\sigma y$ tous deux comparables à $z$, et
+$y' \leqslant \sigma y$ rendrait $y$ et $\sigma y$ tous deux comparables à
+$x$, ce que a) interdit dans les deux cas.
+
+La démonstration de la page suit exactement ce chemin, et s'arrête là où il
+n'y a plus rien à trouver. Elle se ramène, par dualité, à voir que $x < y$,
+$x < z$, $y \neq z$ entraînent $y$, $z$ comparables. Elle note que $y$ et $z$
+ne sont pas conjugués, puis suppose $y$, $z$ incomparables : alors $\sigma y$
+et $z$ sont comparables ; $z \leqslant \sigma y$ est exclu, car il donnerait
+$x \leqslant \sigma y$ ; donc $\sigma y < z$, d'où $\sigma z < y$ --- et la
+phrase s'arrête sur « d'où $\sigma z <$ »\footnote{La page invoque deux fois
+une condition « (28 a) », qu'on ne trouve pas sur la page 38 transcrite. Les
+deux usages sont des conséquences de a) et de b) : $x < y$ et $x \leqslant
+\sigma y$ rendraient $\sigma x$ comparable à $y$. On identifie donc (28 a) à
+la condition a) ; le numéro n'est pas lisible sur la page.}. Dans l'exemple
+des trois cordes, avec $x = c_1$, $y = c_2'$, $z = c_3'$, on a bien $\sigma y
+= c_2 < c_3' = z$ et $\sigma z = c_3 < c_2' = y$, sans contradiction.
+
+\pagerange{40}{52}
+\section*{VI. Relations d'équivalence non parallèles (pages 40 à 52)}
+
+La chemise de la page 40 porte « relations d'équi.\ non parallèles ». Les
+pages qui suivent laissent l'espace topologique et ne gardent que les
+extrémités des coupures : des points rangés sur un cercle.
+
+\pagerange{41}{42}
+\subsection*{Polygones et segments (pages 41 et 42)}
+
+Soit $S$ un ensemble fini de cardinal $N \geqslant 3$, muni d'une
+\emph{structure polygonale} ou \emph{bi-circulation} $\{u, u^{-1}\}$, où $u$
+est une permutation circulaire de $S$\footnote{La page ne dit pas que $u$
+est circulaire, c'est-à-dire transitif ; c'est ce que veulent dire
+« polygonale » et tout ce qui suit. C'est la troisième description d'un
+polygone combinatoire du dossier 89 (pages 19 et 20), où une orientation
+est le choix de l'une des deux permutations.}. Une partie $T$ de cardinal $i$
+est un \emph{segment} si $0 < i < N$ et s'il existe $s_0 \in S$ avec
+\[
+T = \{s_0, u s_0, \ldots, u^{i-1} s_0\} ;
+\]
+avec $t_0 = u^{i-1} s_0$ on a aussi $T = \{t_0, v t_0, \ldots, v^{i-1} t_0\}$,
+où $v = u^{-1}$. \emph{Exemples} : les singletons, les paires de sommets
+voisins (les « parties-arêtes »). Propriétés :
+\begin{itemize}
+  \item $T$ est un segment si et seulement si $S \smallsetminus T$ en est un ;
+  \item l'intersection de deux segments contenus dans un même segment est un
+  segment si elle n'est pas vide ;
+  \item la réunion de deux segments qui se rencontrent et ne recouvrent pas
+  $S$ est un segment ;
+  \item les \emph{extrémités} de $T$, $\partial T = \{s_0, t_0\}$, sont
+  distinctes si et seulement si $T$ n'est pas un singleton ; une orientation
+  (le choix de $u$) les distingue en origine et extrémité.
+\end{itemize}
+Une orientation étant choisie, $(s_0, i) \mapsto \{s_0, \ldots, u^{i-1}
+s_0\}$ est une bijection de $S \times [1, N-1]$ sur l'ensemble des
+segments, qui en a donc $N(N-1)$\footnote{La page écrit « l'ens.\
+$(S,[1,N-1]_{\mathbb{N}})$ » pour le produit. Le décompte est de nous.}.
+
+\textbf{Composantes d'une partie.} Soit $S' \subsetneq S$. Deux segments
+contenus dans $S'$ qui se rencontrent ont pour réunion un segment contenu
+dans $S'$. Tout segment contenu dans $S'$ est donc contenu dans un plus grand
+segment contenu dans $S'$ ; ces segments maximaux, les \emph{segments
+composants} de $S'$, forment une partition de $S'$ : ce sont les suites
+maximales de sommets consécutifs de $S'$. Si l'on réalise le polygone par un
+cercle $X$ portant les points de $S$, les segments composants de $S'$
+correspondent aux composantes connexes de $X \smallsetminus (S \smallsetminus
+S')$ qui rencontrent $S'$\footnote{La marge introduit
+$\operatorname{Segm}_{S'}(S)$, l'ensemble des segments de $S$ contenus dans
+$S'$ ; elle est en grande partie illisible.}.
+
+\pagerange{42}{43}
+\subsection*{Parties non parallèles (pages 42 et 43)}
+
+\textbf{Proposition (pages 42 et 43).} \emph{Soient $A$, $B$ deux parties
+disjointes de $S$, non vides et distinctes de $S$. Les conditions suivantes
+sont équivalentes :}
+\begin{enumerate}
+  \item[a)] \emph{il existe des segments disjoints $\overline{A} \supset A$ et
+  $\overline{B} \supset B$ ;}
+  \item[b)] \emph{pour $a \neq a'$ dans $A$ et $b \neq b'$ dans $B$, les
+  sommets $a$ et $a'$ sont voisins dans le polygone à quatre sommets $\{a, a',
+  b, b'\}$ muni de la bi-circulation induite --- ce qui équivaut à ce que $b$
+  et $b'$ le soient, ou à ce que $a$ et $a'$ n'y soient pas opposés ;}
+  \item[c)] \emph{$B$ est contenu dans un seul segment composant de $S
+  \smallsetminus A$ ;}
+  \item[c')] \emph{$A$ est contenu dans un seul segment composant de $S
+  \smallsetminus B$.}
+\end{enumerate}
+\emph{On dit alors que $A$ et $B$ sont non parallèles.}
+
+En termes de cordes, b) dit que les cordes $aa'$ et $bb'$ ne se croisent
+jamais. Les implications se vérifient ainsi\footnote{La page énonce les
+équivalences sans les démontrer ; l'argument est de nous.}. De a) à c) :
+$\overline{B}$ est un segment contenu dans $S \smallsetminus A$, donc dans
+l'un de ses segments composants. De c) à a) : si $B$ est dans le composant
+$K$, on prend $\overline{B} = K$ et $\overline{A} = S \smallsetminus K$. De c)
+à b) : si $b$ et $b'$ sont dans le même composant de $S \smallsetminus A$, un
+des deux arcs qui les joignent ne contient aucun point de $A$. De b) à c) :
+si $b$ et $b'$ sont dans deux composants différents, chacun des deux arcs
+qui les joignent contient un point de $A$, et ces deux points alternent avec
+$b$, $b'$. La symétrie de a) donne c').
+
+Il y a un plus petit couple de segments $(\overline{A}, \overline{B})$ comme
+dans a) : $A$ est dans un composant $K'$ de $S \smallsetminus B$, qui est
+totalement ordonné par $u$, et l'on prend pour $\overline{A}$ le plus petit
+segment de $K'$ contenant $A$ ; de même pour $\overline{B}$ ; ces deux
+segments sont disjoints, car deux arcs d'un cercle dont aucun ne contient
+les extrémités de l'autre ne se rencontrent pas s'ils ne recouvrent pas le
+cercle\footnote{La page s'arrête sur « il existe un plus petit… », et la
+marge parle des « plus petits » segments. La construction est de nous.}.
+
+\emph{Exemple.} Si $A$ ou $B$ est un singleton, la condition b) est vide :
+un point est non parallèle à toute partie qui ne le contient pas. En
+général, $A$ et $B$ sont non parallèles si et seulement si toute paire
+$A' \in \mathfrak{P}_2(A)$ est non parallèle à toute paire $B' \in
+\mathfrak{P}_2(B)$\footnote{La page ajoute entre parenthèses « (plus
+généralement si $A \cap B$ est un segment) », qu'on ne sait pas
+interpréter ; on ne la reprend pas. L'exemple des singletons est à demi
+illisible.}.
+
+\textbf{La marge d).} Si les points de $S$ sont placés, dans l'ordre,
+sur une courbe convexe du plan --- en position convexe ---, et si $P_A$
+désigne l'enveloppe convexe de $A$, alors $A$ et $B$ sont non parallèles si
+et seulement si $P_A \cap P_B = \emptyset$. C'est l'image qui a donné leur
+nom actuel à ces parties : on les dit \emph{non croisées}\footnote{La note
+marginale est écrite en rotation et en partie surchargée ; on n'en garde que
+l'énoncé qui ressort. « Réalisé comme partie convexe du bord d'un disque » est
+une lecture incertaine.}.
+
+\pagerange{44}{44}
+\subsection*{Structure à étudier (page 44)}
+
+\emph{Structure à étudier} : les partitions $(S_\alpha)_{\alpha \in J}$ de
+$S$ en parties deux à deux non parallèles, qu'il appelle \emph{partitions non
+parallèles}\footnote{La marge porte un exemple, « partitions … (au moins
+deux) … de $S$ », en grande partie illisible.}. Ce sont les \emph{partitions non croisées} d'un cycle, étudiées
+sous ce nom par G.~Kreweras en 1972\footnote{G.~Kreweras, « Sur les
+partitions non croisées d'un cycle », \emph{Discrete Mathematics} 1 (1972).
+Elles sont comptées par les nombres de Catalan et forment un treillis ; la
+page ne compte ni n'ordonne. Rien n'indique que Grothendieck ait connu ce
+travail. Le vocabulaire « non croisé » est invariant par renversement du
+cycle, comme la bi-circulation l'exige.}.
+
+\emph{Intuition} : à un ensemble bi-circulé de cardinal $N$ muni d'une
+partition non parallèle correspondrait, « essentiellement », un ensemble
+bi-circulé de cardinal pair $N' \leqslant N$ muni d'une partition non
+parallèle en classes à deux éléments --- une famille de cordes sans
+croisement qui en couvre tous les points\footnote{L'intuition n'est pas
+précisée, et un mot qui en limiterait la portée est illisible. On connaît
+aujourd'hui une bijection entre partitions non croisées d'un $N$-gone et
+appariements non croisés d'un $2N$-gone, où chaque point est dédoublé ; elle
+ne réalise pas l'inégalité $N' \leqslant N$ de la page, et l'on ne sait pas
+quelle correspondance il avait en vue.}. Sous ce texte, un grand cercle, sans
+marque.
+
+\pagerange{45}{47}
+\subsection*{Familles emboîtées de segments et leurs cœurs (pages 45 à 47)}
+
+Soit $\Sigma$ un ensemble de segments de $S$ tel que :
+\begin{enumerate}
+  \item[($\sigma_1$)] deux éléments de $\Sigma$ qui se rencontrent sont
+  emboîtés ;
+  \item[($\sigma_2$)] si $A \subsetneq B$ dans $\Sigma$, alors $A$ ne contient
+  aucune extrémité de $B$.
+\end{enumerate}
+La condition ($\sigma_1$) fait de $\Sigma$ une famille \emph{laminaire}. Pour
+$A \in \Sigma$, posons
+\[
+A^{*} = A \smallsetminus \bigcup_{B \in \Sigma,\ B \subsetneq A} B,
+\]
+le \emph{cœur} de $A$. Par ($\sigma_2$), $A^{*} \supset \partial A$, donc
+$A^{*} \neq \emptyset$.
+
+\textbf{Proposition (marge de la page 45).} \emph{Si $A \neq B$ dans
+$\Sigma$, alors $A^{*} \cap B^{*} = \emptyset$ ; en particulier $A \mapsto
+A^{*}$ est injectif. De plus $\bigcup_{A \in \Sigma} A = \bigcup_{A \in
+\Sigma} A^{*}$.} Si $A \cap B = \emptyset$, c'est clair ; sinon, par
+($\sigma_1$), disons $A \subsetneq B$, et $B^{*}$ ne rencontre pas $A$ par
+définition. Pour la seconde assertion, un point $x$ d'un élément de $\Sigma$
+appartient au cœur du plus petit élément de $\Sigma$ qui le contient, les
+éléments qui contiennent $x$ formant une chaîne\footnote{La marge dit « si
+$x \in \bigcup A$, alors $\Sigma(x)$ … non vide … $A \in \Sigma(x)$ minimal
+… $x \in A^{*}$ », avec des mots illisibles ; on a complété.}.
+
+\textbf{Conséquences (page 46).} Deux cœurs distincts sont non parallèles :
+si $A$ et $B$ sont disjoints, $A$ et $B$ sont des segments disjoints qui les
+contiennent ; si $A \subsetneq B$, ce sont $A$ et $S \smallsetminus A$. Si les
+cœurs recouvrent $S$, ils forment donc une partition non parallèle de
+$S$\footnote{La page qualifie cette partition d'un mot lu, avec doute,
+« par-dessus ». La non-parallélité des cœurs, qu'elle n'établit pas ici,
+est affirmée page 51 (« $A^{*}$ et $B^{*}$ non parallèles ») ; la
+démonstration est de nous.}. Sinon, posons
+\[
+Z = S \smallsetminus \bigcup_{A \in \Sigma} A^{*} = S \smallsetminus
+\bigcup_{A \in \Sigma} A, \qquad \widehat{\Sigma} = \Sigma \cup \{Z\},
+\qquad Z^{*} = Z ;
+\]
+$Z$ n'est pas en général un segment, mais il est non parallèle à chaque
+cœur, qui est contenu dans un élément maximal $M$ de $\Sigma$ quand $Z$ est
+dans le segment $S \smallsetminus M$. La famille $\widehat{\Sigma}^{*} =
+\{A^{*} \mid A \in \widehat{\Sigma}\}$ est alors une partition non parallèle
+de $S$\footnote{La page note $R$ l'ensemble résiduel, et $\widehat{\Sigma} =
+\Sigma$ si $R = \emptyset$ ; on le note $Z$ pour réserver $R$ à la relation
+d'équivalence des pages 47 à 50.}.
+
+Si $Z$ est lui-même un segment, $\widehat{\Sigma}$ satisfait encore
+($\sigma_1$) et ($\sigma_2$), et $Z$ y est isolé ; la même partition provient
+alors de deux familles. Pour l'éviter, on impose
+\begin{enumerate}
+  \item[($\sigma_3$)] $Z = S \smallsetminus \bigcup_{A \in \Sigma} A$ n'est
+  pas un segment
+\end{enumerate}
+(c'est le cas si $Z = \emptyset$, qui n'est pas un segment).
+
+\textbf{La famille ne se retrouve pas à partir de la partition (page 47).}
+Peut-on reconstruire $A \in \Sigma$ à partir de $\widehat{\Sigma}^{*}$ ? Le
+segment $A$ contient $A^{*}$ et en est un segment minimal, puisque $A^{*}
+\supset \partial A$ ; mais cela ne le caractérise pas --- le segment
+complémentaire de l'intérieur de $A$ contient aussi $\partial A$. Il a en
+outre la propriété que tout cœur $B^{*}$ est contenu dans $A$ ou disjoint de
+$A$. Même ainsi, et même sous ($\sigma_1$) à ($\sigma_3$), la réponse est
+non. Soit $S$ l'hexagone $a_1, b, a_2, a_2', b', a_1'$ --- trois cordes
+parallèles $a_1 a_1'$, $b b'$, $a_2 a_2'$ tracées dans un cercle ---, et $R$
+la partition en $\{a_1, a_1'\}$, $\{b, b'\}$, $\{a_2, a_2'\}$. La famille
+$\Sigma_1 = \{\{a_1, a_1'\}, \{a_2, a_2'\}, \{a_1, a_1', b, b'\}\}$ et sa
+symétrique $\Sigma_2 = \{\{a_1, a_1'\}, \{a_2, a_2'\}, \{a_2, a_2', b, b'\}\}$
+satisfont ($\sigma_1$) à ($\sigma_3$) et ont la même partition $R$ de
+cœurs\footnote{On a vérifié l'exemple de la page : les deux paires $\{a_i,
+a_i'\}$ sont des segments de l'hexagone, le grand segment de $\Sigma_1$ est
+$b', a_1', a_1, b$, et $\{a_1, a_1'\}$ en est intérieur ; son cœur est $\{b,
+b'\}$, et $Z = \emptyset$. La suite, un « exemple plus général », est
+barrée.}. C'est la même rangée de cordes parallèles, en plus court, que celle
+que la page 9 marque d'un « ? ».
+
+\pagerange{48}{50}
+\subsection*{Relations non parallèles et anglets (pages 48 à 50)}
+
+Soit $R$ une relation d'équivalence sur $S$ dont les classes $S_i$ sont deux
+à deux non parallèles --- une partition non croisée. Un segment est
+\emph{saturé} s'il est réunion de classes. Le complémentaire d'un segment
+saturé est saturé ; la réunion et l'intersection de deux segments saturés
+qui se rencontrent sans recouvrir $S$ le sont aussi. Pour une classe $S_i$,
+les segments composants de $S \smallsetminus S_i$ sont saturés : c'est la
+condition c) de la page 43. Leurs complémentaires, qui sont les segments
+minimaux contenant $S_i$, le sont donc aussi\footnote{Les pages 48 à 50 sont
+à l'encre brune, d'une main rapide, dont les formules portent et la prose
+souvent pas. On a gardé ce qui s'y démontre.}.
+
+\textbf{Proposition (page 48).} \emph{Les segments saturés minimaux sont les
+classes de $R$ qui sont des segments.} Il les appelle \emph{anglets}.
+
+Une classe qui est un segment est un segment saturé, évidemment minimal.
+Réciproquement, soit $A$ un segment saturé minimal, qu'on regarde comme un
+intervalle ordonné par $u$, et soit $S_k$ la classe qui contient la première
+extrémité de $A$. Les éléments de $A$ qui suivent le dernier point de $S_k$
+forment, s'il y en a, un segment saturé strictement contenu dans $A$ : une
+classe qui aurait des points de part et d'autre de ce dernier point
+croiserait $S_k$. Par minimalité, $S_k$ contient donc les deux extrémités
+de $A$ ; et un segment composant de $S \smallsetminus S_k$ contenu dans $A$
+serait encore un segment saturé strictement plus petit. Donc $S_k =
+A$\footnote{La page raisonne sur deux classes $S_i$, $S_j$ contenues dans $A$
+et sur « le segment composant » de l'une qui contient l'autre, en affirmant
+qu'il est contenu dans $A$. Ce n'est pas toujours le cas : si $S_i$ et $S_j$
+sont côte à côte dans $A$, le composant de $S \smallsetminus S_j$ qui contient
+$S_i$ déborde de $A$. La démonstration donnée ici est de nous.}.
+
+\textbf{Corollaire (page 49).} \emph{Tout segment saturé contient un anglet.
+Si $R$ n'est pas la relation grossière, il y a au moins deux anglets.} Il y
+a en effet alors deux segments saturés complémentaires : un composant de $S
+\smallsetminus S_i$, pour une classe $S_i \neq S$, et son complémentaire.
+
+C'est, pour les partitions non croisées, l'analogue du fait qu'un arbre à au
+moins deux sommets a au moins deux feuilles ; le mot « anglet » dit bien
+qu'une telle classe occupe un coin du polygone\footnote{L'analogie est de
+nous. « Anglet » est la lecture retenue pour un mot écrit six fois.}.
+
+\textbf{L'effeuillage (pages 49 et 50).} Soit $T_1$ la réunion des anglets
+et $S_1 = S \smallsetminus T_1$. Si $S_1 \neq \emptyset$, il a au moins deux
+segments composants : sinon $S_1$, complémentaire du saturé $T_1$, serait un
+segment saturé, et contiendrait un anglet\footnote{La page écrit « sinon,
+$R$, serait un segment contenant deux anglets, absurde ». On lit : « $S_1$
+serait un segment saturé, contenant donc un anglet ». Sur cette page, $R_1$
+désigne tantôt la relation induite sur $S_1$, tantôt $S_1$ lui-même ; on
+écrit $S_1$ et $R_1 = R|_{S_1}$.}. Aucune classe contenue dans $S_1$ n'est
+contenue dans un seul segment composant de $S_1$ : sinon, n'étant pas un
+segment, elle laisserait entre deux de ses points un segment saturé contenu
+dans $S_1$, qui contiendrait un anglet. Alors :
+\begin{itemize}
+  \item si $\operatorname{card} S_1 = 2$, $S_1$ est une classe, et $R$ est
+  formée des anglets et de $S_1$ ;
+  \item si $\operatorname{card} S_1 \geqslant 3$, $S_1$ muni de l'ordre
+  circulaire induit est un polygone, et $R_1 = R|_{S_1}$ y est une relation
+  non parallèle ; si elle est grossière, $R$ est formée des anglets et de
+  $S_1$ ; sinon on recommence avec les anglets de $R_1$, qui sont au moins
+  deux.
+\end{itemize}
+La page 50 esquisse la tour qui en résulte, une suite
+$\Sigma_1, \Sigma_2, \ldots$ d'ensembles de segments saturés deux à deux
+disjoints, de réunions $T_1 \subset T_2 \subset \cdots$, chaque élément de
+$\Sigma_i$ contenant au moins un segment composant de $T_{i-1}$ et ayant ses
+extrémités hors de $T_{i-1}$. Les conditions qu'elle écrit ne sont pas
+menées à terme\footnote{Plusieurs conditions sont écrites puis biffées
+($\operatorname{card} \Sigma_1 \geqslant 2$, $\operatorname{card} S_1
+\geqslant 2$), et la dernière, $\operatorname{card} \pi_0(S_2) \neq 1$,
+termine la page ; on n'essaie pas de reconstituer la définition visée.}.
+C'est une description récursive des partitions non croisées par retrait
+successif des classes d'angle, comme on élague un arbre par ses feuilles.
+
+\pagerange{51}{52}
+\subsection*{La reprise sur un quasi-segment (pages 51 et 52)}
+
+Les pages 51 et 52, à l'encre noire, reprennent les notions des pages 41 à 47
+pour un \emph{quasi-segment} $I$ : un ensemble fini totalement ordonné (à
+renversement près) d'au moins deux éléments, comme un polygone qu'on aurait
+ouvert le long d'une arête\footnote{« Quasi-segment », « fini » et
+« sommets » sont des lectures incertaines ; la description comme polygone
+ouvert est de nous. Les notions qui suivent n'ont de sens que si $I$ est
+ordonné de la sorte.}. Pour $\varepsilon \in \mathfrak{P}_2(I)$, soit
+$I_\varepsilon$ le segment (l'intervalle) qu'il détermine. Deux paires
+$\varepsilon$, $\varepsilon'$ sont \emph{non parallèles} si elles sont
+disjointes et si $I_\varepsilon$ et $I_{\varepsilon'}$ sont disjoints ou
+emboîtés ; deux parties $A$, $A'$ le sont si elles sont disjointes et que
+toute paire de l'une est non parallèle à toute paire de l'autre. Cela revient
+à dire que $A'$ est contenu dans l'un des composants de $I \smallsetminus A$,
+ou dans la réunion des deux composants extrêmes (ceux qui contiennent les
+extrémités de $I$), quand ils sont deux.
+
+\textbf{Partitions non parallèles de $I$.} Soit $\Sigma$ un ensemble de
+segments de $I$ tel que :
+\begin{enumerate}
+  \item[a)] deux éléments de $\Sigma$ sont disjoints ou emboîtés ;
+  \item[b)] si $B \subsetneq A$ dans $\Sigma$, alors $B \cap \partial A =
+  \emptyset$ ;
+  \item[c)] $\partial I \subset \bigcup_{A \in \Sigma} A$, donc $\partial I
+  \subset \bigcup_{A \in \Sigma} \partial A$\footnote{Le signe de b) est
+  surchargé ; la lecture retenue est celle de ($\sigma_2$). Le « donc » de c)
+  est juste : le plus petit élément de $\Sigma$ qui contient une extrémité de
+  $I$ l'a pour extrémité.}.
+\end{enumerate}
+Les cœurs $A^{*}$ sont non vides et deux à deux non parallèles ; avec $I' =
+\bigcup A = \bigcup A^{*}$, $Z = I \smallsetminus I'$, $Z^{*} = Z$ et
+$\widehat{\Sigma}$ comme plus haut, $\widehat{\Sigma}^{*}$ est une partition
+non parallèle de $I$.
+
+\emph{NB} (page 52) : toute partition non parallèle s'obtient ainsi, et de
+plusieurs façons. C'est vrai : la famille des enveloppes (plus petits
+segments contenants) des classes convient, car ces enveloppes sont
+disjointes ou emboîtées, une classe emboîtée dans l'enveloppe d'une autre
+n'en touche pas les extrémités, et le cœur de l'enveloppe d'une classe est
+cette classe. Sur $I = \{1, \ldots, 5\}$, la partition $\{1\}, \{2, 4\},
+\{3\}, \{5\}$ provient aussi de $\Sigma = \{\{1\}, \{3\}, \{5\}\}$, avec $Z =
+\{2, 4\}$\footnote{La vérification et l'exemple sont de nous ; la page
+affirme le NB sans le démontrer.}.
+
+Soit enfin $\Sigma_{\max}$ l'ensemble des éléments maximaux de $\Sigma$ :
+deux d'entre eux sont disjoints, et $I' = \bigcup_{A \in \Sigma_{\max}} A$. La
+page s'arrête là, après quatre lignes.
+
+\pagerange{53}{54}
+\section*{VII. Attachement de deux arêtes (pages 53 et 54)}
+
+Une feuille carrée revient aux cartes. Appelons \emph{binaire} une arête
+bordée par deux faces distinctes, \emph{monaire} une arête bordée des deux
+côtés par la même face. On part de deux cartes connexes $M'$, $M''$ sur des
+surfaces orientées compactes, de genres $g'$, $g''$, à $f'$ et $f''$ faces,
+et d'une arête dans chacune. La page ne décrit pas l'opération ; ses bilans
+sont ceux de l'opération suivante\footnote{La reconstitution est de nous.
+Elle est soutenue par les croquis : « bi » et « bi », « mon » et « bi »,
+« mon » et « mon », avec des doubles flèches entre les lobes, et, page 54, un
+disque relié par un tube court à une feuille rectangulaire. La condition de
+la première ligne, « $(a,\omega)$, $(a',\omega)$ et $(a,\overline{\omega})$,
+$(a',\overline{\omega})$ sont des paires associées », d'une lecture
+incertaine, paraît fixer quelle rive de $a$ va avec quelle rive de $a'$.} :
+on coupe les deux arêtes $a = xy$ et $a' = x'y'$ en leur milieu et l'on
+raccorde les moitiés en croix, de sorte qu'elles deviennent $xy'$ et $x'y$ ;
+sur les surfaces, on relie les deux arêtes par un tube planté en leur
+milieu. Les sommets et les arêtes s'ajoutent, $V = V' + V''$ et $E = E'
++ E''$, et seules changent les faces qui bordent $a$ et $a'$ :
+\begin{itemize}
+  \item \emph{deux arêtes binaires} : les quatre faces qui les bordent se
+  raccordent deux à deux, « 4 faces deviennent 2 », et
+  \[
+  f = f' + f'' - 2, \qquad g = g' + g'' ;
+  \]
+  \item \emph{une arête monaire, une binaire} : « trois faces deviennent 1 »,
+  et encore $f = f' + f'' - 2$, $g = g' + g''$\footnote{La page écrit ici
+  $f^{*}$ là où les deux autres lignes ont $f$.} ;
+  \item \emph{deux arêtes monaires}, incidentes à des faces distinctes : la
+  face qui borde $a$ et celle qui borde $a'$ se raccordent en une région qui
+  se recoupe en deux faces, « deux faces deviennent 2 », et
+  \[
+  f = f' + f'', \qquad g = g' + g'' - 1 .
+  \]
+\end{itemize}
+Le genre se déduit de la formule d'Euler $V - E + f = 2 - 2g$ pour une carte
+connexe : dans les deux premiers cas $2 - 2g = (2 - 2g') + (2 - 2g'') - 2$,
+dans le troisième $2 - 2g = (2 - 2g') + (2 - 2g'')$\footnote{Dans le
+troisième cas, la formule suppose que la carte obtenue est connexe, ce que
+la page ne dit pas. Si $a$ et $a'$ sont deux isthmes --- arêtes dont le
+retrait déconnecte, toujours monaires ---, le raccord en croix produit deux
+cartes, et $g' + g'' - 1$ peut valoir $-1$ ; il faut qu'au moins l'une des
+deux arêtes monaires ne soit pas un isthme, ce qui demande un genre au moins
+égal à $1$. La condition est de nous.}. Dans le troisième cas, la région
+formée par le tube n'est plus un disque, et la carte, redessinée sur la
+surface qu'elle définit, en perd une anse.
+
+C'est, sur les cartes combinatoires, le pendant du recollement que le
+dossier 67 étudie pour les surfaces conformes (pages 2 et 3, puis 53 à
+60)\footnote{Le rapprochement est de nous ; aucune des deux séries ne cite
+l'autre.}. La page 54 ne porte que des croquis au crayon de la même
+opération en volume.
+
+\end{document}
