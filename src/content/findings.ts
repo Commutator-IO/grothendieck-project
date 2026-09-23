@@ -1995,4 +1995,114 @@ export const FINDINGS: Finding[] = [
     settle:
       'Only physical or documentary evidence would narrow it: the paper and ink of pages 24–30 against dated leaves of the fonds, and a comparison with Ladegaillerie’s thesis and his Topology 23 (1984) paper — its notation, its model surfaces and whether it states Th 1, Th 2 and the Question of page 29 — and with G. A. Jones and D. Singerman, « Theory of maps on orientable surfaces » (Proc. London Math. Soc., 1978), all cited from memory. A resemblance would show a shared subject, not an order. This entry exists to stop the next reader taking « well before the Esquisse » or « reviendra » as a date, or treating these pages as placed before or after a student’s or anyone’s published account. Whatever is found, priority is not a claim this project makes, about anyone.',
   },
+  {
+    id: '162-5-formal-categories-flat-conormal-de-rham',
+    cote: '162-5',
+    pages: '21–26',
+    kind: 'mathematical',
+    claim:
+      'Over a scheme X₀ of characteristic 0, the functor sending an I-adic formal category over X₀ (a complete pro-ring with augmentation and a coassociative, counital Δ, no inverse being assumed) to the differential graded algebra (Λ^•Ω, δ) on its conormal Ω = I/I² is an equivalence between such formal categories with Ω flat and the De Rham complexes on Λ^•Ω with Ω flat, with no finiteness hypothesis on Ω and no smoothness hypothesis on X₀.',
+    basis:
+      'Page 26 (§ 6) states it as « Th. de Quillen », without proof or reference: the functor A ↦ (Ω*, δ) « induit une équivalence entre la catégorie des catégories formelles I-adiques sur X₀ dont le Ω est plat, et la catégorie des complexes de De Rham … dont le Ω est plat », and it « contient le th. de Cartan sur les groupes formels en car. nulle ». Pages 21–22 define the formal categories and the degree-0 differential; page 21 asks in brackets, without answering, whether such a category is necessarily a groupoid. « I-adiques » and the characteristic-0 hypothesis are ink additions, « lorsque » being an uncertain reading. The bracket saying that the A in question are those for which Sym Ω → Gr(A) is an isomorphism rests on the uncertain readings « isomorphisme » and « signifie ».',
+    ours:
+      'The page names no morphisms; the variance (covariant in the pro-ring A, contravariant in the category) and the covariant equivalence 𝒞 ↦ 𝔤^𝒞 with Lie algebroids when Ω is locally free of finite type are the reading’s. The reading takes the bracket as a description of the A concerned and says it does not know whether, in characteristic 0, flatness of Ω implies Sym Ω ≃ gr A; the claim inherits that uncertainty about which formal categories are meant. The page’s Remarque 1 (pp. 22–23), that δ² = 0 follows from α)–γ), is false, and the reading corrects it. The claim uses the definition of a De Rham complex, in which δ² = 0 is required, and not the Remarque.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'The equivalence of formal groupoids with Lie algebroids in characteristic 0, for Ω locally free of finite rank, is expected to be in the books, and that case alone does not settle the entry. The question is the flat, non-finite case, and categories with no inverse assumed. Look in Grothendieck, « Crystals and the de Rham cohomology of schemes » (Dix exposés, 1968), on formal groupoids and stratifications; P. Berthelot, Cohomologie cristalline des schémas de caractéristique p > 0 (LNM 407, 1974), chapter II; L. Illusie, Complexe cotangent et déformations II (LNM 283, 1972); M. Kapranov, « Free Lie algebroids and the space of paths » (Selecta Math. 13, 2007); D. Gaitsgory and N. Rozenblyum, A Study in Derived Algebraic Geometry, vol. II (2017), on formal groupoids and Lie algebroids. For X₀ a point with Ω infinite-dimensional, look in the literature on Lie coalgebras (W. Michaelis) and on formal groups (Dieudonné, Lazard, and Milnor and Moore, 1965). All are cited from memory. If any of them states the equivalence with Ω flat and no finiteness, or proves that a formal category in this sense is automatically a groupoid, mark matched. No web search was available for this pass (2026-09-23), so nothing has been read.',
+  },
+  {
+    id: '162-5-de-rham-hochschild-flat-formal-category',
+    cote: '162-5',
+    pages: '27–30',
+    kind: 'mathematical',
+    claim:
+      'Under the same hypotheses (X₀ of characteristic 0, a formal category 𝒞 over X₀ with flat conormal Ω), descent data on an 𝒪-module M relative to 𝒞 correspond to integrable Ω-connections on M, and the De Rham complex Λ^•Ω ⊗ M is canonically quasi-isomorphic, in the derived category, to the Hochschild (Čech–Alexander) complex C^•(𝒞, M).',
+    basis:
+      'Page 30 (§ 11) states both parts, without proof, « sous les conditions du th. de Quillen ». § 7 (p. 27) shows how descent data give the operator δ_M and says its square vanishes by the descent condition, and asks without answering whether order 2 suffices. A slanted margin asks to relate the comparison to the « th. fondamental du dévissage des cristaux », its last line uncertain. A word before « (dans la catégorie dérivée) » is illegible, and the notes stop on the heading « Variante à puissances divisées ».',
+    ours:
+      'The page says « Ω-connexions », without « intégrables »; the adjective is the reading’s, required by § 7. The page does not define C^•(𝒞, M); the cobar complex on strings of composable arrows is the reading’s, taken from the two names the page uses. The reading identifies two special cases: for 𝒞 the completed diagonal of a smooth X₀ over ℚ, the comparison of de Rham and infinitesimal cohomology in Grothendieck’s notes on crystals; for X₀ a point, the cohomology of a formal group against that of its Lie algebra. Those are matches and are not the claim.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'The question is only a general formal category with flat, not necessarily finite, Ω. Look in Grothendieck’s « Crystals » exposé (1968), on Čech–Alexander complexes; P. Berthelot and A. Ogus, Notes on Crystalline Cohomology (1978); M. Crainic, « Differentiable and algebroid cohomology, van Est isomorphisms, and characteristic classes » (Comment. Math. Helv. 78, 2003); and Gaitsgory and Rozenblyum, vol. II (2017), on the cohomology of formal groupoids. All are cited from memory. If the comparison is stated for formal groupoids, or for formal categories, with flat Ω over a base of characteristic 0, mark matched. No web search was available for this pass (2026-09-23), so nothing has been read.',
+  },
+  {
+    id: '162-5-bordism-correspondences-universal',
+    cote: '162-5',
+    pages: '43–45',
+    kind: 'mathematical',
+    claim:
+      'On closed manifolds with homotopy classes of maps, the category 𝐁 whose morphisms X → Y are unoriented bordism classes of manifolds over X × Y is universal among categories receiving a covariant and a contravariant functor that agree on objects and satisfy base change for transverse cartesian squares: any such pair (F′_•, F′^•) already identifies bordant correspondences, a correspondence Z → X × Y with components p, q going to F′_•(q) ∘ F′^•(p).',
+    basis:
+      'Pages 43–45 (the annotated copy; the same typescript is at pp. 12–14 of the photocopy) pose the universal problem, say « Quillen prouve » that 𝐁 solves it, define the factorisation on arrows by X′ → Z′ → Y′, and sketch why it is well defined. The bordism T is doubled into a manifold T̄ over S¹, transverse over two points with fibres Z₀ and Z₁, and the two composites are compared through the cartesian square of inclusions X_s → X over S¹ × X, whose lower arrow i_s does not depend on s up to homotopy. The sketch ends « Le reste est sans doute l’AQT », with nothing on compatibility with composition or on uniqueness. The labels of the composite and the arrows of the square are ink in blanks of the typing; the first label is read α_i without a visible asterisk, and batch 3 leaves the labels of the composite doubtful.',
+    ours:
+      'The page does not say « compactes »; the reading adds closed manifolds, which the pushforwards and the composition in 𝐁 need, and only the photocopy carries a margin « (compactes ?) ». The composition law of 𝐁, the contravariant F^• : 𝒱° → 𝐁 (the typing has C → 𝐁), and the order of the base-change identity α_{s•}α_s^• = Γ^• i_{s•} are the reading’s. That the factorisation is unique, because every morphism of 𝐁 is F_•(q) ∘ F^•(p), is the edition’s, made for this entry; the page asserts the universal property without saying so.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Without the bordism relation this is the universal property of spans with base change: look in R. Dawson, R. Paré and D. Pronk, « Universal properties of Span » (Theory Appl. Categ. 13, 2004), and in J. Bénabou (1967). The candidate is only that homotopy invariance and transverse base change force bordant correspondences to act alike. Look in D. Quillen, « Elementary proofs of some results of cobordism theory using Steenrod operations » (Adv. Math. 7, 1971), § 1; W. Fulton and R. MacPherson, Categorical Framework for the Study of Singular Spaces (Mem. Amer. Math. Soc. 243, 1981), on the universal bivariant theory; S. Yokura, « Oriented bivariant theories, I » (Internat. J. Math. 20, 2009); H. Emerson and R. Meyer, « Bivariant K-theory via correspondences » (Adv. Math. 225, 2010); and M. Levine and F. Morel, Algebraic Cobordism (2007), chapter 2. All are cited from memory. If any of them states this universal property of the bordism correspondence category, mark matched. No web search was available for this pass (2026-09-23), so nothing has been read.',
+  },
+  {
+    id: '162-5-photocopy-taken-after-ink',
+    cote: '162-5',
+    pages: '2–17, 32–41, 43–48',
+    kind: 'codicological',
+    claim:
+      'The folder’s two copies of the typescript « Tapis de Quillen » are one typed top copy in two states: pages 32–41 and 43–48 are the top copy with its handwritten layer, and pages 2–17 a black photocopy of it taken after that layer was written, which then received about a dozen marks of its own. Folder 111, a third reproduction of the typescript, carries the same marks in the same strokes.',
+    basis:
+      'Batch 1’s header, as revised against the annotated copy, records the same line breaks and typewriter x-outs, the right edge clipped on most leaves of the photocopy, and the annotated copy’s handwriting reproduced on it: the date, the framed note of p. 8, the margins of pp. 9, 11 and 17, the insertions of pp. 12–17. It lists the marks only the photocopy carries: « Si ! » (p. 4), « t une » and « cond. » (p. 9), « (compactes ?) » (p. 12), « NB H*(X) » and « i.e. l’enveloppe “karoubienne” » (p. 14), « = karoubienne + additive », « en » and two Λ in blanks (p. 15), « él. des » (p. 16), the struck t of « Quillent » and « cf exposé Karoubi à Bourbaki ! » (p. 17). Its note on each says the annotated copy does not carry it. Folder 111’s revised header describes its own handwritten layer as the annotated copy’s ink photocopied plus these marks, with the same breaks, slant and wavy underline, and records text at the right edge (pp. 7, 13) that the photocopy of 162-5 has lost.',
+    ours:
+      'The relation between the witnesses is the transcriptions’, set out in the revised headers of 162-5 batch 1 and of 111, and the reading adopts it. Batch 3’s header, written before those revisions, calls 111’s notes « pencil notes » and says the two handwritten layers differ; 111’s revised header says the pencil is not supported, and the entry follows the revision. The reading counts five notes proper to the photocopy; batch 1 lists more, and the entry follows batch 1. The transcriptions do not say whether the marks proper to the photocopy were written on it or on an intermediate from which both it and 111 were taken. No facsimile was consulted.',
+    literature: [
+      'Transcription 162-5, batch 1 (batch-01.fr.tex), header and the notes to pages 4, 9 and 12–17',
+      'Transcription 162-5, batches 2 and 3 (batch-02.fr.tex, batch-03.fr.tex), headers',
+      'Transcription 111, batch 1 (batch-01.fr.tex), header, « Relation to folder 162-5 »',
+      'Modernised reading 162-5 (162-5.modern.tex), header, « Les deux exemplaires du tapuscrit » and « La photocopie et ses notes propres »',
+    ],
+    status: 'candidate',
+    settle:
+      'A person lays the three witnesses side by side on the facsimiles and checks whether the marks proper to the photocopy are ink on its paper or part of the photocopied image. If they are ink on it, 111 was taken from the photocopy before its right edge was lost; if they are image on both, the photocopy and 111 descend from a lost annotated intermediate.',
+  },
+  {
+    id: '162-5-karoubi-note-later-than-typescript',
+    cote: '162-5',
+    pages: '17',
+    kind: 'codicological',
+    claim:
+      'If the note « cf exposé Karoubi à Bourbaki ! » at the foot of page 17, proper to the photocopy, points to M. Karoubi’s Bourbaki exposé « Cobordisme et groupes formels (d’après D. Quillen et T. tom Dieck) » of 1971–1972, it is later than that exposé and so later than the « notes du 10.9.68 » it annotates; nothing in the folder says whether the other marks proper to the photocopy were written with it.',
+    basis:
+      'Batch 1 transcribes the note, underlined, at the foot of page 17, and says the annotated copy does not carry it; folder 111 carries it at the foot of its page 16. The note gives no year, no title and no number. The questions of page 45 on the lift H^•(X) → B_•(X) and on its compatibility with products and Gysin maps concern the subject of that exposé, as the reading notes. Neither batch 1 nor 111 says that the marks proper to the photocopy share one ink or one campaign.',
+    ours:
+      'The identification with the exposé of 1971–1972 is the reading’s, which gives it as « selon toute vraisemblance » and as « une inférence, non une date lue ». The reading draws from it that the notes proper to the photocopy are all later than the exposé; the entry narrows that to this note. The title, number and date of the exposé are cited from memory. No facsimile was consulted.',
+    literature: [
+      'Transcription 162-5, batch 1 (batch-01.fr.tex), header and page 17',
+      'Transcription 111, batch 1 (batch-01.fr.tex), header and page 16',
+      'Modernised reading 162-5 (162-5.modern.tex), « La photocopie et ses notes propres » and the footnote on Quillen’s 1969 note in section III',
+    ],
+    status: 'candidate',
+    settle:
+      'A person checks the list of Karoubi’s exposés at the Séminaire Bourbaki (the one on Quillen and tom Dieck is, from memory, no. 408, February 1972) for any other the note could mean, and compares on the facsimile the ink and hand of the note with the other marks proper to the photocopy. If they are one campaign, that whole layer is bounded below by the exposé; the inventory’s « 1968-[à partir de 1970] » and its « copies de tapuscrits (1968, s.d.) » already leave room for that. Whatever is found, priority is not a claim this project makes, about anyone.',
+  },
+  {
+    id: '162-5-annotated-copy-ink-undated',
+    cote: '162-5',
+    pages: '32, 39, 41, 45–46, 48',
+    kind: 'codicological',
+    claim:
+      'Nothing in the folder dates the handwritten layer of the annotated copy. It is not one campaign, since the answer on page 39 is in another ink, and the one date on the typescript, « notes du 10.9.68 », names the notes. The margins that turn two typed results into questions (p. 45) and those that answer typed questions (pp. 39, 41, 46, 48) are therefore bounded below by the typing, and above only by the photocopy of pages 2–17 that reproduces them, which is itself undated.',
+    basis:
+      'Batch 2 gives « notes du 10.9.68 » as a margin at the head of page 32, and notes on page 39 that the answer « non, on a un foncteur pl. fidèle (?) mais pas ess. surjectif » is « d’une autre encre ». Batch 3 gives, on page 45, « il est douteux qu’il soit » over « compatible avec multiplication » and « [Quillen ignore si » over a struck « Le », which turn the typed a) and b) from results into a doubt and a question; on page 41, « oui » against the question whether Quillen has a more direct simplicial definition of the K_i; on page 46, the struck question on the noetherianity of Λ answered by « qui est abélienne bien que Λ ne soit pas noethérien … »; on page 48, « oui, car son anneau affine … » against « d’après Quillen, il serait pro-unipotent ». None carries a date. Batch 1 finds each of them reproduced on the photocopy.',
+    ours:
+      'The reading’s footnote on page 45 says the two questions are those Quillen’s 1969 note on the formal group laws of cobordism would settle, and that « ces notes du 10 septembre 1968 ne pouvaient pas le savoir »; its résumé reads the margins as « une conversation mathématique en train de se faire ». Both take the ink to be of the typescript’s date, and the entry adopts neither. The reading’s footnote on the « oui » of page 41, « la marge n’est pas datée », is the limit of what the folder supports. Batch 2’s header says the date is in his hand; batch 3 and the reading attribute no hand, and the entry attributes none. No facsimile was consulted.',
+    literature: [
+      'Transcription 162-5, batch 2 (batch-02.fr.tex), header and pages 32 and 39',
+      'Transcription 162-5, batch 3 (batch-03.fr.tex), header and pages 41, 45, 46 and 48',
+      'Transcription 162-5, batch 1 (batch-01.fr.tex), header',
+      'Modernised reading 162-5 (162-5.modern.tex), résumé and the footnotes to part III on the relèvement and to part II on the « oui »',
+    ],
+    status: 'candidate',
+    settle:
+      'Only physical evidence would narrow it: how many inks the annotated copy carries, and which margins share the ink of the date on page 32, checked on the facsimile. A comparison of the answers with Quillen’s « On the formal group laws of unoriented and complex cobordism theory » (Bull. Amer. Math. Soc. 75, 1969), cited from memory, would show a shared subject, not an order. This entry exists to stop the next reader taking the typescript’s date as the date of its margins. Whatever is found, priority is not a claim this project makes, about anyone.',
+  },
 ];
