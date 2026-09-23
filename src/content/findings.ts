@@ -2252,4 +2252,39 @@ export const FINDINGS: Finding[] = [
     settle:
       'A person checks the envelope of page 2 for a postmark, reads the typed sides of pages 3 and 5 in full, and looks for the page behind page 5 in the typescript of Pursuing Stacks. A match would bound the handwriting of page 5 below by that typed page, if the typing came first, and would say nothing about pages 6–16. Whatever is found, priority is not a claim this project makes, about anyone.',
   },
+  {
+    id: '106-section-criterion-span-faithfulness',
+    cote: '106',
+    pages: '9–15',
+    kind: 'mathematical',
+    claim:
+      'For a category with weak equivalences W and cofibrations satisfying Baues’s axioms C1–C3 in which every object is cofibrant, the folder asserts that the functor to W⁻¹C from the category whose arrows x → y are the connected components of the category of spans x → ỹ ← y, the first arrow a cofibration and the second in W, is faithful — hence an isomorphism — if and only if, for every f : x → y in W with two sections i and i′, the spans (1_x, i) and (1_x, i′) lie in the same component.',
+    basis:
+      'Page 9 defines q : C̃ → W⁻¹C, (f, i) ↦ [i]⁻¹[f], and proves it bijective on objects and full for page 5’s spans, whose backward arrow is in cof ∩ W; page 11 says its faithfulness « n’est pas clair », doubts that inverting W ∩ cof suffices, and moves the cofibration condition to the numerator (f ∈ cof, i ∈ W); page 13 factors a map as a cofibration followed by a weak equivalence with a section; page 15, with the pushout squares in the margin of page 14, compares two factorisations through a third, states (**), and closes « Cette condition est (nec. et) suffis. pour que C̃ → W⁻¹C soit fidèle (donc un iso) ». No proof of sufficiency is written. Page 13 is almost wholly illegible and its marginal note is not restored; the reduction on page 15 that leads to (**) stands among illegible words; « deux i, i′ ∈ W » in (**) is an interlinear addition.',
+    ours:
+      'The reading reconstructs page 13’s construction « dans la forme que les pages 14 et 15 permettent de reconstituer », supplies the necessity argument (f i = 1_y gives q′(1_x, i) = [f] = q′(1_x, i′)) and the fullness of the rectified functor, and renders the page’s « [f_0, i] = [id_ȳ, i] ∘ (f, id_ȳ) » as (f_0, i) = (id_ȳ, i) ∘ (f_0, id_ȳ) without a footnote. The composition of the rectified spans is written neither on the page nor in the reading; it needs the pushout of a weak equivalence along a cofibration to be one. This pass reads the literature differently from the reading on one point and says so: the reading’s last footnote says the literature describes these arrows by fractions « à homotopie près, et non à composante connexe près d’une catégorie de diagrammes », « à notre connaissance »; from memory, the homotopy calculus of fractions of W. G. Dwyer and D. M. Kan and M. Weiss’s hammock localisation in Waldhausen categories describe the hom-spaces of the localisation by nerves of categories of such spans, whose π₀ would then be the hom-sets of W⁻¹C — in Weiss, under cylinder hypotheses and perhaps with the backward arrow a trivial cofibration, as in page 5’s first definition, the one page 11 abandons. If so, faithfulness is matched for that variant, and what remains is the criterion (**) and the rectified variant. Whether (**) holds under C1–C3 is not decided here. Written on Opus 5.5 against a reading made on Opus 5.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'If a source proves, under C1–C3 or for cofibration categories with every object cofibrant, that W⁻¹C(x, y) is π₀ of the category of spans x → ỹ ← y with f ∈ cof and i ∈ W, then (**) follows by the necessity argument and the entry is matched. Look in W. G. Dwyer and D. M. Kan, « Calculating simplicial localizations » (J. Pure Appl. Algebra 18, 1980), on homotopy calculi of fractions; M. Weiss, « Hammock localization in Waldhausen categories » (J. Pure Appl. Algebra 138, 1999); D.-C. Cisinski, « Catégories dérivables » (Bull. SMF 138, 2010), § 3; A. Rădulescu-Banu, Cofibrations in Homotopy Theory (arXiv, 2006), chapter 6; K. S. Brown, « Abstract homotopy theory and generalized sheaf cohomology » (Trans. AMS 186, 1973); and H.-J. Baues, Algebraic Homotopy (1989), chapter II. All are cited from memory. If only the trivial-cofibration variant is there, the criterion (**) and the rectified variant stay unsearched. No web search was available for this pass (2026-09-23), so nothing has been read.',
+  },
+  {
+    id: '106-listing-dates-not-notebook',
+    cote: '106',
+    pages: '1–16',
+    kind: 'codicological',
+    claim:
+      'The machine dates « 24 AUG 82 » and « 25 AUG 82 » printed on the listing sheets of pages 12 and 14 bound below only his handwriting on those two sheets; nothing in the folder dates the eight notebook leaves (pages 1, 3, …, 15, his 1 to 8), and nothing orders the pushout squares in the margin of page 14 relative to the diagram of page 15 that uses the same squares.',
+    basis:
+      'The transcription describes the folder as eight spiral-notebook leaves in ink, recto only, under his pagination 1) to 8), interleaved with sheets of a computer listing used as scrap; it records the machine date 24 AUG 82 on page 12, whose bottom margin carries two unlabelled trial figures of his, and 25 AUG 82 on page 14, whose right margin carries the three pushout squares; it records no date for the listing of page 2 and none on any notebook leaf. Page 15’s diagram, x ∨ x → ȳ ⊔ ȳ′ over ∇_x with the left square marked « cocart », shares the pattern of page 14’s squares; neither page refers to the other.',
+    ours:
+      'The transcription’s note on page 12 says the printed dates of pages 12 and 14 « datent le dossier », and its header calls page 14’s squares « the block of amalgamated-sum squares that page 15 uses »; the reading’s résumé says the notebook leaves were « écrits en août 1982 ou après », and its footnote calls page 14’s block « la préparation de ce diagramme ». These take the interleaving of the sheets and a shared diagram for a date and an order; the entry adopts neither. The interleaving may be his filing or the archive’s. The inventory’s « [à partir de 1982] » is not contradicted. The reading cites Baues’s axioms from Algebraic Homotopy (1989); that is its own reference, the leaves write only « C1 : C3 de Baues » and do not say which text of Baues he used, so it dates nothing either. No facsimile was consulted. Written on Opus 5.5 against a reading made on Opus 5.',
+    literature: [
+      'Transcription 106, batch 1 (batch-01.fr.tex), header and pages 2, 12, 14 and 15',
+      'Modernised reading 106 (106.modern.tex), « Résumé », the footnote on Baues’s axioms in « Le fil du dossier, et les conventions », and the footnote on page 14’s block',
+    ],
+    status: 'candidate',
+    settle:
+      'A person checks on the facsimile whether the listing of page 2 carries a date, whether the notebook leaves show any physical tie to the listing sheets — ink offset, a shared fold, writing that runs from one onto the other — and compares the ink of page 14’s margin with that of page 15. A physical tie would bound the notebook leaves by the listing; a shared ink would suggest one sitting, not an order. Whatever is found, priority is not a claim this project makes, about anyone.',
+  },
 ];
