@@ -1314,4 +1314,71 @@ export const FINDINGS: Finding[] = [
     settle:
       'A person checks on the facsimile that page 39’s last line and page 41’s first join, that pages 30 and 31 carry nothing but their titles, and that the two dates read as transcribed. Whether « 6.1.1966 » is a slip for 1967 is not something the leaves settle; Coates’s own papers, or the notes of the talk both letters comment on, would.',
   },
+  {
+    id: '12-immersion-level-bound',
+    cote: '12',
+    pages: '115, 117, 119',
+    kind: 'mathematical',
+    claim:
+      'For an immersion f : X → Y with X regular and n the dimension of the closure of f(X), the folder bounds the constituents of R^i f_* ℚ_ℓ by weight ≤ 2 inf(i, n) and level ≤ inf(i, n − 1), the level rising from 0 and falling back to 0 at weight 2n — one less than the level 2n − i allowed for H^i of an n-dimensional smooth variety when i ≥ n.',
+    basis:
+      'Page 115 factors f as an open immersion g into a regular Y′ with normal-crossings complement Z = ΣZᵢ followed by a proper h, writes R^q g_* ℚ_ℓ = ⊕ ℚ_ℓ(−q) on the q-fold intersections, and bounds each E₂^{pq} = R^p h_*(R^q g_* ℚ_ℓ); pages 117 and 119 tabulate weight and level of each term for i ≤ n − 1 and i ≥ n, and page 119 boxes the result. The whole argument is conditional on resolution, purity and the Weil conjectures, as the folder’s notes of pages 104–114 are.',
+    ours:
+      'The boxed bound is legible and is the page’s; the table entries leading to it are written fast and overwritten, and neither the transcription nor the reading verifies them column by column, so the entry rests on the box, not on the tables. That the bounds on the E₂ terms pass to the abutment (stability of « effectively admissible » under subquotients and extensions, Proposition 4.2 a) of page 112) is not written on the sheets. One check is the edition’s, made for this entry and not in the reading: for Y the affine cone over a curve C of genus ≥ 1 and X = Y minus the vertex (n = 2), the stalk of R²f_* at the vertex is H¹(C)(−1), of weight 3 and level 1 = n − 1, so the n − 1 is attained there. The two extensions that follow on page 119 — « + j » for F strictly special of weight j, and the relative case with n = d_y(f) — carry his own « ? » and are not part of the claim.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Translate « level ≤ ν » into Hodge types p, q ≥ (w − ν)/2 on a weight-w piece, or into divisibility of Frobenius eigenvalues by q^{(w − ν)/2}, and look for the bound inf(i, n − 1) on R^i j_* for an open immersion in Deligne, Théorie de Hodge III §8.2, in Durfee, « Mixed Hodge structures on punctured neighborhoods » (Duke 1983), in Steenbrink’s work on the mixed Hodge structure of links, and ℓ-adically in SGA 7 exposé XXI §5. If the bound is stated there, mark matched. A web search was attempted for this pass on 2026-09-23 and refused by the network, so nothing has been read yet.',
+  },
+  {
+    id: '12-weights-paper-typescript',
+    cote: '12',
+    pages: '95–98',
+    kind: 'codicological',
+    claim:
+      'The folder holds the typed introduction, credited « par A. GROTHENDIECK » and corrected in his hand, and the handwritten ten-section plan of a paper « Filtration et poids des espaces de cohomologie des variétés algébriques », under a cover of his reading « Poids et niveaux d’espaces de cohomologie ℓ-adiques (base var. quelconque) »; only the introduction is drafted on these leaves, and its reference list has empty brackets.',
+    basis:
+      'Page 95 is the cover; pages 96–97 are the typescript § 0, which states the method (weight arguments reducing geometric statements to a finite base field), says the idea « remonte à 1964 », and cites SGA 7 and Deligne’s Hodge theory; page 98 is the plan, §§ 0–9 with a doubled « 8 », and six references — SGA 4, Deligne / Hodge, Tate / conjectures, Kleiman conj. standart, Weil conj., SGA 7 — each behind « [ ] ».',
+    ours:
+      'The reading’s identification of pages 103–121 as the working notes behind this plan is the edition’s inference from their content, not something the leaves say. The entry claims only what the leaves carry; it makes no claim about when the paper was planned, and no claim that it was never published.',
+    literature: ['Transcription 12, batch 5 (batch-05.fr.tex), pages 95–98'],
+    status: 'unsearched',
+    settle:
+      'Look the title up in the published lists of his writings (for instance the bibliography in The Grothendieck Festschrift, vol. I, 1990) and in the Montpellier inventory for another copy of the typescript or of its later sections. If the paper or any section of it appears there, record where.',
+  },
+  {
+    id: '12-deligne-report-one-text',
+    cote: '12',
+    pages: '122, 120',
+    kind: 'codicological',
+    claim:
+      'The two typed French leaves presenting Deligne’s work are consecutive pages of one report, to be read 122 then 120: page 122 carries its point 4 (the degeneration of the Leray spectral sequence of a smooth projective morphism) and ends « la « théorie des motifs », qui se », and page 120 opens « une sorte de synthèse géométrico-arithmétique des nombreuses théories cohomologiques » before its point 5 (Deligne’s λ-structure on K•(X) of perfect complexes).',
+    basis:
+      'The numbering 4) on page 122 and 5) on page 120, and the sentence that runs from the foot of one into the head of the other. Both leaves are typed in French and corrected by hand; page 122 names the writer as « rapporteur » in one of its two occurrences.',
+    ours:
+      'The join is the reading’s; the transcription gives each leaf as isolated. The last word of page 122 is overwritten by hand and transcribed as « se » followed by an illegible stretch, so the continuous sentence rests on an unread word — which is why the status is no higher. The numbering 4) → 5) supports the order independently but not that no leaf is missing between them.',
+    literature: ['Transcription 12, batches 6 and 7 (batch-06.fr.tex p. 120, batch-07.fr.tex p. 122)', 'Modernised reading 12, section XI'],
+    status: 'unsearched',
+    settle:
+      'A person reads the overwritten last word of page 122 on the facsimile and checks that the two leaves are the same paper and typeface. Separately, whether points 1 to 3 of the report survive elsewhere in the fonds would say what the report was for; the leaves do not.',
+  },
+  {
+    id: '12-positive-forms-leaves-order',
+    cote: '12',
+    pages: '158–167',
+    kind: 'codicological',
+    claim:
+      'The last run of the folder, on positive forms on motives, is bound with page 158 before page 160 although page 160 poses the axioms (i)–(iii) that page 158 already uses; in the text order 160, 158, 162, 164, 166, the typed pages on the other faces run VII.20, VII.19, VII.18, VII.17, VII.15 — descending — which fits a stack of someone else’s typescript written on in order with its first two leaves swapped.',
+    basis:
+      'Page 158 discusses the sign changes φᵢ ↦ εᵢφᵢ and finds that (i) and (iii) survive while (ii) forces εᵢεⱼ = εᵢ₊ⱼ, which is the tensor-product axiom (ii) of page 160; page 162 opens as the direct sequel of page 160. The typed faces are recorded as VII.19 on page 159 (batch 8) and VII.20, VII.18, VII.17, VII.15 on pages 161, 163, 165, 167 (batch 9), an English typescript on Brauer groups of regular domains with nothing of his on it.',
+    ours:
+      'The logical order 160 → 158 is the transcription’s and the reading’s. The pairing of each handwritten face with the typed face that follows it in the scan (158 with 159, 160 with 161, and so on) is the edition’s assumption, made for this entry; with the other pairing (159 with 160, …) the typed numbers are not monotone and the observation lapses.',
+    literature: [
+      'Transcription 12, batch 8 (batch-08.fr.tex), header and notes on pages 158, 159, 160',
+      'Transcription 12, batch 9 (batch-09.fr.tex), header and note on page 162',
+    ],
+    status: 'candidate',
+    settle:
+      'A person checks on the facsimile which typed face backs which handwritten one on pages 158 to 167. If 158|159, 160|161, … are leaves, the swap of the first two leaves is confirmed; if not, only the logical order 160 → 158 stands.',
+  },
 ];
