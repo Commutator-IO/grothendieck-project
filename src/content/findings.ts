@@ -2489,4 +2489,76 @@ export const FINDINGS: Finding[] = [
     settle:
       'A person checks on the facsimile whether the cover, any leaf or the typescript carries a date, a stamp or a watermark, and whether pages 2, 4, 5, 7 and 8 share paper and ink with the typescript leaves. A physical tie would bound his leaves by the typescript from below only. Whatever is found, priority is not a claim this project makes, about anyone.',
   },
+  {
+    id: '134-1-picard-sign-sequence',
+    cote: '134-1',
+    pages: '3–5',
+    kind: 'mathematical',
+    claim:
+      'The folder asserts, as heuristic, that for abelian sheaves M, N on a topos there is a canonical distinguished triangle E(M,N) → E′(M,N) → Hom(M, ₂N)[−2], with E(M,N) = τ≤2 RHom(M,N), whence an exact sequence of sheaves 0 → Ext²(M,N) → P(M,N) → Hom(M, ₂N) → 0 in which P(M,N) is the sheaf of Picard stacks pinned by M, N up to equivalence and the last map is the symmetry invariant of L ⊗ L; and that this sequence can be built « à la main » without the triangle.',
+    basis:
+      'Page 3 defines E(M,N) and draws (T), the arrow running from E to E′, with no shift marked on the return arrow; page 4 writes (*), names its middle term P(M,N), and reads E′ heuristically as the strict Picard 2-stack of not necessarily strict Picard stacks pinned by M, N, and E as the strict ones; pages 4–5 say (*) is built canonically by hand, its middle term the sheaf of pinned Picard stacks up to equivalence and σ the symmetry of L ⊗ L read as a section of ₂N. E′ is never defined on the page. The word before « à « équivalence » près » is read « données » as uncertain (folder 103’s copy of the same leaves reads « classes », also uncertain), and « (T) » in the closing question is uncertain.',
+    ours:
+      'The reading supplies, each flagged as its own, a definition of E′ as τ≤2 RHom computed over the sphere spectrum, the pinning isomorphisms, the sheafification of P(M,N), the proof that σ is additive and killed by 2, the shift on the return arrow, and the correction of page 4’s « invariants … ceux de E(M,N) en degré i+2 ». This pass reads its proof of (T) differently from the reading and says so: truncating the triangle RHom_HZ(HM, HN) → RHom_𝕊(HM, HN) → RHom_HZ(F, HN), F the fibre of HZ ∧ HM → HM, does not give a triangle whose third term is Hom(M, ₂N)[−2]; its long exact sequence runs 0 → Ext²(M,N) → P(M,N) → Hom(M, ₂N) → Ext³(M,N) as sheaves, and the reading’s « L’exactitude à droite est gratuite … H³(E) = 0 » assumes the triangle it is proving. Exactness on the right is the page-5 claim (see 134-1-sign-realisation-universal-argument), not a consequence of truncation. What stands without it is the left part, 0 → Ext² → P(M,N) → Hom(M, ₂N), with a pinned stack strict exactly when σ = 0. From memory, over a point this is the classification of Picard categories by π₀, π₁ and a homomorphism π₀/2 → π₁, with Ext² = 0; on a topos it is the low corner of the spectral sequence Ext^p(π_q(HZ ∧ HM), N) ⇒ Ext^{p+q}_𝕊(HM, HN). Written on Opus 5.5 against a reading made on Opus 5.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Look for the sheaf-level statement — pinned Picard stacks, strict or not, up to equivalence, as an extension of (a subsheaf of) Hom(M, ₂N) by Ext²(M,N) — in SGA 4, exposé XVIII, 1.4 (Deligne); P. Deligne, « Le déterminant de la cohomologie » (Contemp. Math. 67, 1987), § 4; Hoàng Xuân Sính, Gr-catégories (thèse, Paris VII, 1975); L. Breen, « Extensions du groupe additif » (Publ. Math. IHÉS 48, 1978), on the spectral sequence for stable Ext; L. Breen, « On the classification of 2-gerbes and 2-stacks » (Astérisque 225, 1994); N. Johnson and A. M. Osorno, « Modeling stable one-types » (Theory Appl. Categ. 26, 2012). If the left-exact part is there for stacks on a topos, mark matched. All are cited from memory. No web search was available for this pass (2026-09-23), so nothing has been read.',
+  },
+  {
+    id: '134-1-sign-realisation-universal-argument',
+    cote: '134-1',
+    pages: '5',
+    kind: 'mathematical',
+    claim:
+      'The folder asserts, « sauf erreur » and without the argument, that on any topos every homomorphism M → ₂N is the symmetry invariant of a Picard stack pinned by M, N — the a priori obstruction in Ext³(X; M, N) being killed by a « universal » argument — so that every section of Hom(M, ₂N) over any object U lifts to P(M,N), and even to ℍ²(U, E′(M,N)).',
+    basis:
+      'Page 5: « Je sais prouver (sauf erreur) que tout hom. M → ₂N provient d’un champ de Picard convenable (épinglé par M, N) (a priori l’obstruction est dans Ext³(X; M, N), mais un argument « universel » prouve qu’elle est nulle) », followed by the « section ensembliste » and the refinement to ℍ²(U, E′(M,N)), where « i.e. » before ℍ² is uncertain. No word of the statement itself is illegible; the page gives no argument.',
+    ours:
+      'The reading endorses the statement, gives the obstruction group as ℍ³(X, E(M,N)) ⊂ Ext³(X; M, N), and reconstructs the « universal » argument as its own: realise q by hand for M free, on the split stack M × BN with an antisymmetric form b such that b(eᵢ, eᵢ) = q(eᵢ), then pass to general M « par une résolution ». This pass reads the statement differently and says so, from memory and without having checked it: the passage through a resolution is where it fails, since the construction depends on a basis. On the classifying topos of abelian groups (functors from finitely presented abelian groups to sets), a Picard stack pinned by the generic group U and U/2U with σ the projection is a pseudo-functor A ↦ P(A) whose values have invariants (A, A/2A, projection), that is, Moore spectra truncated above π₁; it would make Moore spectra functorial on finitely presented groups, since the truncation does not change maps between them, whereas the homotopy category of Moore spectra is, as this pass recalls, a non-split linear extension of that of abelian groups. If so, the obstruction does not vanish universally, and (*) is not exact on the right on that topos. The statement does hold over a point and for M constant and free. Neither Grothendieck’s argument nor a counterexample is on the page, and the question is not decided here. Written on Opus 5.5 against a reading made on Opus 5.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Decide whether Moore spectra truncated above π₁ admit a functorial choice on finitely presented abelian groups — equivalently, whether the universal obstruction in Ext³ on the classifying topos of abelian groups vanishes. Look in H.-J. Baues, Homotopy Type and Homology (Oxford, 1996), on the homotopy category of Moore spaces as a linear extension; H.-J. Baues and W. Dreckmann, « The cohomology of homotopy categories and the general linear group » (K-Theory 3, 1989); M. Jibladze and T. Pirashvili, « Cohomology of algebraic theories » (J. Algebra 137, 1991), for Mac Lane cohomology as Ext in functor categories; L. Breen, « Extensions du groupe additif » (Publ. Math. IHÉS 48, 1978); P. Deligne, « Le déterminant de la cohomologie » (Contemp. Math. 67, 1987), § 4. If a functorial choice exists, the page’s claim stands and this pass’s doubt is withdrawn; if not, the page’s statement holds over a point and for free M only. All are cited from memory. No web search was available for this pass (2026-09-23), so nothing has been read.',
+  },
+  {
+    id: '134-1-first-four-of-eight-pages',
+    cote: '134-1',
+    pages: '3–6',
+    kind: 'codicological',
+    claim:
+      'The folder holds only the first four pages of the letter headed « Lodève le 27.8.74 »: folder 103 keeps a reproduction of the same leaves, page break for page break, that runs four pages beyond the closing question of page 6 — relative cohomology for a morphism of topoi, a question for Illusie, Gr-stacks pinned by (G, N) — so page 6 is not the end of the letter, and no signature is transcribed on this copy.',
+    basis:
+      'This folder’s transcription ends page 6 on the question to « les compétents » and records no signature; its header says folder 103’s copy is « four pages longer ». Folder 103’s transcription gives its pages 8–11 as this folder’s pages 3–6, with the same page breaks (« à « équivalence » près des » at the foot of the second page, ℍ² at the foot of the third), and reads its pages 8–11, 14–15, 12–13 as continuous, the leaf after its page 13 missing there too.',
+    ours:
+      'The transcription’s header also calls pages 3–6 « a single letter, complete », and the reading’s résumé says the folder holds « une seule lettre, de quatre pages », whose last section says the letter « s’achève » on its question, and « Elle ne conclut pas : elle demande »; the reading of pages 3–6 is not affected, but these descriptions are not borne out by folder 103 and are not adopted. Whether Deligne forwarded only these four pages or the rest was separated later, neither transcription says; the entry adopts neither. Folder 103’s transcription is a Fable 5.1 pass and is used here only as a record of what that copy carries. No facsimile was consulted. Written on Opus 5.5 against a reading made on Opus 5.',
+    literature: [
+      'Transcription 134-1, batch 1 (batch-01.fr.tex), header and pages 3–6',
+      'Modernised reading 134-1 (134-1.modern.tex), « Résumé » and « La question, et ce qu’on en sait aujourd’hui »',
+      'Transcription 103, batch 1 (batch-01.fr.tex), header and pages 8–15',
+    ],
+    status: 'candidate',
+    settle:
+      'A person compares on the two facsimiles pages 3–6 here with pages 8–11 of folder 103, and checks whether page 6 here, at its foot or on its back, shows any trace of the pages that follow in folder 103. The answer says what Breen received, not when.',
+  },
+  {
+    id: '134-1-margin-notes-forwarding-undated',
+    cote: '134-1',
+    pages: '1–6',
+    kind: 'codicological',
+    claim:
+      'The two reproductions of the letter do not carry the same marginalia — Deligne’s signed note to Breen runs up the left margin of page 3 here and is not on folder 103’s copy, whose first page carries instead « Je n’ai pas retrouvé la lettre sur les Gr-champs que tu cites », absent here — so, unless a margin was cropped, neither note was on the leaves when the other copy was made; neither note is dated, so nothing in the folder dates the forwarding to Breen, and the cover’s « Lettres Breen 75, 76 » is a date neither of this letter, headed 27.8.74, nor of its forwarding.',
+    basis:
+      'The transcription records Deligne’s note as a marginal on page 3, running vertically in the left margin, in another hand than the letter’s and signed « P. Deligne », and records the cover of page 1 as carrying only « Lettres Breen 75, 76 »; folder 103’s transcription records on its page 8 the other note, vertical in the left margin, in a hand it does not distinguish from the letter’s, and says the page does not say whose it is. The date reads « 27.8.74 » here with « 8.74 » uncertain, and on folder 103’s copy with the « 2 » uncertain. The docket « 9/74 Envoyé par Grothendieck » of folder 103 is on the typescript of its page 1, not on the letter.',
+    ours:
+      'The transcription’s header says the two copies show « the same strokes line for line »; that holds for the letter, not for the margins. The reading gives the date as 27.8.74 and footnotes its reading; it says the date « s’accorde » with folder 103’s letter of 23 June 1974, which is consistency, not a date for the forwarding. Its footnote on page 6 calls « η s’envoie sur {−1} » a standard fact « postérieur en tout cas à la mise en forme de la lettre », an order in time that nothing in either folder supports and that is not adopted. The entry places neither the letter nor its forwarding before or after any publication; the reading itself abstains on who knew what and when in its closing section. No facsimile was consulted. Written on Opus 5.5 against a reading made on Opus 5.',
+    literature: [
+      'Transcription 134-1, batch 1 (batch-01.fr.tex), header, cover and page 3',
+      'Modernised reading 134-1 (134-1.modern.tex), the footnotes on the date (page 3) and on the example (page 6)',
+      'Transcription 103, batch 1 (batch-01.fr.tex), header and pages 1 and 8',
+    ],
+    status: 'candidate',
+    settle:
+      'A person checks on the two facsimiles whether each margin note is in ink on its copy or reproduced with the leaves, and whether either copy’s left margin is cropped; and looks in the other parts of folder 134 for the letters of 1975–76 the cover names. None of this would place the letter before or after anything published. Whatever is found, priority is not a claim this project makes, about anyone.',
+  },
 ];
