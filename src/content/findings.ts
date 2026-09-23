@@ -2105,4 +2105,116 @@ export const FINDINGS: Finding[] = [
     settle:
       'Only physical evidence would narrow it: how many inks the annotated copy carries, and which margins share the ink of the date on page 32, checked on the facsimile. A comparison of the answers with Quillen’s « On the formal group laws of unoriented and complex cobordism theory » (Bull. Amer. Math. Soc. 75, 1969), cited from memory, would show a shared subject, not an order. This entry exists to stop the next reader taking the typescript’s date as the date of its margins. Whatever is found, priority is not a claim this project makes, about anyone.',
   },
+  {
+    id: '10-hodgian-polarisations-torsor',
+    cote: '10',
+    pages: '11–16',
+    kind: 'mathematical',
+    claim:
+      'For a real algebraic group G with homomorphisms 𝔾_m → G → 𝔾_m (i, then ε), η = i(−1) and G′ = Ker ε, the folder shows that two elements C, C′ of G′(ℝ) with C² = C′² = η that both define polarisations of Rep(G) are, after conjugation by G′(ℝ)°, related by C′ = zC with z central of order dividing 2, and that z ≠ 1 gives a different polarisation, so that the polarisations definable by such a C (« hodgiennes ») form a torsor under a 2-torsion group of central elements; and that on any graded ⊗-category over K ⊂ ℝ the ⊗-automorphisms z of the identity with z² = 1 acting trivially on K(1) act freely on the set of polarisations.',
+    basis:
+      'Page 11 defines C-polarisations (φ(x, Cy) symmetric positive definite) and proves they are Weil forms; page 12 shows they form a polarisation when ε(C) = 1; page 13 proves the centraliser of C in G′(ℝ) is a maximal compact subgroup; page 15 argues that C and C′ can be conjugated so that gCg⁻¹C′⁻¹ lies in the centre, that z² = 1, and that for z ≠ 1 a representation where z acts by −id gives φ^{C′} = −φ^C, « absurde », and concludes « forme un torseur sous ₂Z(ℝ) »; page 16 proves u^{*(φ^z, ψ^z)} = u^{*(φ,ψ)} for z in ₂Aut_⊗(id) and concludes that ₂Z′(ℝ) « opère librement sur Pol(ℳ) », then asks whether Pol(ℳ) is a pseudo-torsor under ₂Z(ℝ). The conjugacy step of page 15 is three abbreviated lines with four illegible words and « des groupes compacts maximaux » uncertain; the representation where z acts by −id is qualified « fidèle », an uncertain word; the freeness on page 16 rests on « ne peut », uncertain, followed by an illegible word.',
+    ours:
+      'The page moves between ₂Z′(K), ₂Z′(ℝ) and ₂Z(ℝ) (Z the centre of G, Z′ that of G′); for zP to be defined z must commute with G, and for the Tate object to be respected it must lie in G′, so this pass takes the acting group to be the 2-torsion of Z ∩ G′ — that reading is the edition’s, made for this entry. The reading says « torseur sous la 2-torsion de Z(ℝ) » on page 15 and « la 2-torsion de ce groupe opère librement » on page 16, following the page; this pass reads the page differently on this point and says so here. The reading drops « fidèle » from page 15, rightly: a faithful representation need not have z acting by −id, and what the argument needs is an irreducible one on which the central z acts by −1. The maximality of the centraliser (page 13), which the transitivity uses, is reconstructed by the reading from a page with long cancelled passages. The open question of page 16 is not part of the claim. Written on Opus 5.5 against a reading made on Opus 5.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'The link between a polarisation of Rep(G) and a Cartan involution given by C is expected to be in the books, and the reading footnotes it; the question is only the torsor statement and the free action. Look in N. Saavedra Rivano, Catégories tannakiennes (LNM 265, 1972), chapters V–VI on polarisations; in P. Deligne and J. S. Milne, « Tannakian categories » (LNM 900, 1982), § 5, on polarisations of Rep(G) attached to an element C with C² central; and in P. Deligne, « La conjecture de Weil pour les surfaces K3 » (Invent. Math. 15, 1972), § 2, on Weil forms. All are cited from memory. If any of them says how the polarisation depends on C, up to conjugation and central elements of order 2, mark matched. No web search was available for this pass (2026-09-23), so nothing has been read.',
+  },
+  {
+    id: '10-numerical-character-rank-one-torus',
+    cote: '10',
+    pages: '62–65',
+    kind: 'mathematical',
+    claim:
+      'A tannakian category over a field k whose band is a one-dimensional torus is determined up to equivalence by its « numerical characters » — the set Σ of classes of simple objects, the structure constants of K(𝓜), the pairs (Z_σ, ξ_σ ∈ Br(Z_σ)) of centres and Brauer classes of the endomorphism algebras, and the rank — because for the norm-one torus G of a quadratic extension Z/k the map H²(k, G) → H²(k, R_{Z/k}𝔾_m) = Br(Z) is injective.',
+    basis:
+      'Pages 62–63 define the four numerical characters and warn that they do not in general determine the category, even for representations of a finite group; pages 64–65 treat a band G of multiplicative type, recover G = D(Γ) from the numerical data, write u_σ : G → Z_σ* ≃ ∏_{Z_σ/k} 𝔾_m with u_σ(ξ) = ξ_σ, and reduce the question to whether the class ξ ∈ H²(k, G) of the tannakian gerbe is known from the u_σ(ξ); « C’est le cas pour G diagonalisable (pro-dénombrable ?) ». Exemple 1 takes G a one-dimensional torus, split by a quadratic Z, writes 0 → G → Z* → 𝔾_m → 0 with the norm, and concludes by Hilbert 90 that Ker(H²(k, G) → H²(k, Z*)) is zero, « Donc dans le cas envisagé, le caractère numérique détermine 𝓜 à équivalence près ». Exemple 2 is cancelled and the typescript stops. The statements used carry no uncertain or illegible word.',
+    ours:
+      'The page asserts u_σ(ξ) = ξ_σ and the equivalence between the numerical character and the data (G, u_σ(ξ)) with « on vérifie aussitôt » and no argument. That the embedding G → Z* of Exemple 1 is one of the u_σ — the orbit {1, −1} of the character group ℤ, on which Galois acts by −1, with Z_σ = Z — is checked by this entry and not by the page. The reading’s example of the dihedral and quaternion groups of order 8, for the negative statement, is the edition’s and no part of the claim. The general question for bands of multiplicative type is left open by the page and is not part of the claim.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'The injectivity itself is a one-line consequence of Hilbert 90; the question is whether the determination of a tannakian category, or a gerbe with abelian band, by these numerical data has been stated. Look in J. Giraud, Cohomologie non abélienne (1971), IV.3, on gerbes with abelian band; in Saavedra, Catégories tannakiennes (LNM 265, 1972), chapter III; in Deligne–Milne (LNM 900, 1982), § 3; for the general case, in J.-J. Sansuc, « Groupe de Brauer et arithmétique des groupes algébriques linéaires sur un corps de nombres » (J. reine angew. Math. 327, 1981), on H² of tori; and, for the finite-group side, in P. Etingof and S. Gelaki, « Isocategorical groups » (IMRN 2001). All are cited from memory. If the rank-one case, or a general criterion containing it, is there, mark matched. No web search was available for this pass (2026-09-23), so nothing has been read.',
+  },
+  {
+    id: '10-split-ring-ga-rtimes-gm',
+    cote: '10',
+    pages: '187–188, 191–197',
+    kind: 'mathematical',
+    claim:
+      'Over a field of characteristic 0, for G = 𝔾_a ⋊ 𝔾_m with 𝔾_m acting by λ ↦ λ^p (p ≥ 1), the folder classifies the indecomposable rational representations as the e_{n,k} = σ_n ⊗ e_{0,k} (n ∈ ℤ, k ≥ 1), e_{0,k} being k[Z]/Z^k with the generator of Lie 𝔾_a acting by Z and weights 0, p, …, p(k−1), pairwise inequivalent, with dual e_{−n−p(k−1),k}; and shows that the ring of classes of representations with basis the indecomposables is the polynomial ring ℤ[ℤ][ξ] over the group ring of ℤ, ξ = e_{0,2}, with ξ̌ = σ_{−p}ξ.',
+    basis:
+      'Page 191 writes the Lie algebra relation [Y, X] = pX, decomposes V = ΣV_n under Y, and gets X_{ji} = 0 unless j − i = p; page 192 shows the non-zero V_n of an indecomposable are the V_{n+pk}, forms the chain u_i : E_i → E_{i+1} and states Lemme 1 (injective); page 193 proves it by splitting off Σ E″_j; page 194 concludes that the u_i are bijections and the E_i one-dimensional, and states the Proposition with e_{n,k} = σ_n ⊗ e_{0,k} and ě_{n,k} = e_{−n−p(k−1),k}. Pages 195–197 compare R(H) → R(G) → R(F), use R(F) = ℤ[e_2] from pages 187–188, show that ξ^n = Σ_{i ≤ n+1} c_{ni} e_{0i} with c_{n,n+1} = σ_α, and prove α = 0 by weights. The characteristic-0 hypothesis on page 191 stands among illegible words; the head of page 193 is cancelled; the proof of Lemme 2 is a line of illegible words; much of page 197’s argument is illegible, with « poids » uncertain.',
+    ours:
+      'p ≥ 1 is the edition’s; the page never states it, and for p = 0 the reduction « mod p » of page 192 has no sense. The reading supplies that V restricted to 𝔾_m is semisimple by case II, reconstructs the supplements of Lemme 1 from three successive states of which two are struck, and gives no argument for Lemme 2; the classification therefore rests partly on the edition. On page 197 the page writes « pα ≤ pn, d’où α ≤ 0 », and the reading repeats it; as written this gives α ≤ n. This pass reads the inequality as α + pn ≤ pn — the highest weight of e_{α,n+1} against n times the highest weight p of ξ — which page 196 writes as « α + pn »; and it reads the page’s « c_{p,p+1} » and « e_{0,p+1} », where p is the weight, as c_{n,n+1} and e_{0,n+1}. On both points this pass reads the folder differently from the reading. Written on Opus 5.5 against a reading made on Opus 5.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'The one-variable case R(𝔾_a) = ℤ[ξ], the Clebsch–Gordan rule for nilpotent Jordan blocks, is expected to be classical, and the reading footnotes it; the question is the semi-direct product. Rep(G) is the category of finite-dimensional ℤ-graded k[X]-modules with X of degree p acting nilpotently, and for p = 2 (resp. p = 1) G is a Borel subgroup of SL₂ (resp. PGL₂). Look for the decomposition of tensor products of graded Jordan blocks and for the split Grothendieck (Green) ring of graded k[X]-modules: A. Martsinkovsky and A. Vlassov, « The representation rings of k[x] » (from memory, c. 2004); J. C. Jantzen, Representations of Algebraic Groups, part II, on representations of B; and work on the Jordan type of tensor products in graded settings. All are cited from memory. If the ring ℤ[ℤ][ξ] or the list e_{n,k} with its tensor products is there, mark matched. No web search was available for this pass (2026-09-23), so nothing has been read.',
+  },
+  {
+    id: '10-sga3-typescript-cites-1966-67',
+    cote: '10',
+    pages: '32–57, 47, 110',
+    kind: 'codicological',
+    claim:
+      'The typescript of pages 32–57, numbers 10 and 11 of an exposé of SGA 3, was not typed, at least on page 47, before a seminar of « 1966/67 » could be cited: its Remarque 11.10.1 sends the reader, in the typed layer, to « un exposé de Serre dans SGA (1966/67) », which a handwritten correction first completes as « SGA 6 » and then strikes, putting in its place J.-P. Serre, « Sur les Groupes de Grothendieck des schémas en groupes réductifs déployés », Pub. Math. n° [34], p. 37–52.',
+    basis:
+      'Batch 3 transcribes page 47 with « voir à ce sujet un exposé de Serre dans SGA (1966/67) » struck, « 6 » added after « SGA », and the Publ. Math. reference added; its header says both typescripts of the batch are corrected in his hand and that the Remarque replaces « a reference to a seminar by the Publ. Math. paper ». The number « 34 » is marked uncertain; the year 1966/67 is typed and not in doubt. The typescript refers throughout to other exposés of the same work (Exp. I 4.2, IV 4.4.3, VI_A 2.1.1, VIII 5.5) and to its own §§ 1, 3, 6, 7 and 9. Page 110, in his hand, cites « SGAD VI_B 11.2 » for C(G) ≃ Ind C_f(G); in the typescript that statement is Corollaire 11.10, and 11.2 is the compatibility of X ⇝ Spec 𝒜(X) with finite products.',
+    ours:
+      'That the typescript is Exposé VI_B of SGA 3 is inferred from its internal references and from page 110, and the identification of the published text is from memory; the transcriptions and the reading say « SGA 3, n° 10 et 11 ». That Serre’s article appeared in Publ. Math. IHÉS 34 in 1968 is from memory, unchecked. The bound is on the typing of page 47 and on its correction, not on the other leaves of the typescript, and not on the mathematics. The mismatch between page 110’s « 11.2 » and the typescript’s numbering is recorded, not explained: it may be a slip, or a numbering other than that of the leaves filed here. The inventory’s « [à partir de 1958] » for the shelfmark is not contradicted. No facsimile was consulted.',
+    literature: [
+      'Transcription 10, batch 2 (batch-02.fr.tex), header and pages 32–40',
+      'Transcription 10, batch 3 (batch-03.fr.tex), header and pages 41–57, in particular page 47',
+      'Transcription 10, batch 6 (batch-06.fr.tex), page 110',
+      'Modernised reading 10 (10.modern.tex), « Deux numéros de SGA 3 » and its footnote on Remarque 11.10.1',
+    ],
+    status: 'candidate',
+    settle:
+      'A person reads on the facsimile the number of the Publ. Math. volume and checks whether « 6 » and the replacement are in the same ink as the other corrections of the typescript; then compares the leaves with SGA 3, Exposé VI_B (LNM 151, 1970), §§ 10–11, including what its 11.2 and 11.10 say and whether Remarque 11.10.1 there cites Serre’s article. The contents of SGA 6 decide whether an exposé of Serre was ever part of it. None of this dates the mathematics; priority is not a claim this project makes, about anyone.',
+  },
+  {
+    id: '10-polarisation-leaves-undated-against-p108',
+    cote: '10',
+    pages: '3–30, 101–108',
+    kind: 'codicological',
+    claim:
+      'Nothing in the folder dates the handwritten axiomatics of polarisations (pages 3–16) or the « Notes anciennes » (pages 18–30) relative to the typed programme of page 108 — « Il y a lieu de faire une étude axiomatique abstraite d’une telle notion de polarisation […] On pourra en rediscuter à l’occasion » — or to the work of Saavedra, to whom the typescript of pages 101–108 is addressed: no leaf carries a date, and « anciennes » is his heading, older than nothing it names.',
+    basis:
+      'Batch 1 describes pages 3–16 as one blue-ink draft under the cover « Polarisations sur les ⊗-catégories graduées », numbered by him 1) to 19), and pages 18 and 20 as black ink on yellowed paper headed « Notes anciennes » in his hand; batch 2 continues these at pages 22–30; neither records a date. Batch 6 transcribes page 107 (« Je laisse le soin à Saavedra de déterminer … ») and page 108, item 6), which calls for the axiomatic study; batch 5 gives the cover « Notes Saavedra » of page 99. All batches copy the inventory’s « [à partir de 1958] » for the whole shelfmark.',
+    ours:
+      'The reading says of page 108 « Cette étude axiomatique est faite : ce sont les pages 3 à 16 » and that it « explique pourquoi les trente premiers feuillets du dossier existent », and describes pages 18–30 as written « d’une encre et d’un papier plus anciens »; batch 1’s header calls them « a second, older run » with « une notation plus ancienne ». These take the subject, the heading and the yellowing of the paper for an order; the entry adopts none of them. The typed « il y a lieu de faire » fits a study not yet written and a study already sketched and proposed to someone else equally. That Saavedra’s thesis has chapters on polarisations and filtrations is from memory and no part of the claim. No facsimile was consulted.',
+    literature: [
+      'Transcription 10, batch 1 (batch-01.fr.tex), header and pages 3–20',
+      'Transcription 10, batch 2 (batch-02.fr.tex), header and pages 22–30',
+      'Transcription 10, batch 5 (batch-05.fr.tex), header and page 99',
+      'Transcription 10, batch 6 (batch-06.fr.tex), header and pages 101–108',
+      'Modernised reading 10 (10.modern.tex), « Les stations » and « 6) La polarisation, renvoyée »',
+    ],
+    status: 'candidate',
+    settle:
+      'Only physical evidence would narrow it: the paper and ink of pages 3–16 against those of pages 18–30 and of the typescript of pages 101–108. A comparison of pages 3–16 — Weil forms, compatibility, prepolarisation, C-polarisation, « hodgien » — with N. Saavedra Rivano, Catégories tannakiennes (LNM 265, 1972), chapters V–VI, cited from memory, would show a shared subject, not an order. This entry exists to stop the next reader taking page 108 as the occasion of pages 3–16, or those pages as written before or after Saavedra’s account. Whatever is found, priority is not a claim this project makes, about anyone.',
+  },
+  {
+    id: '10-cover-140-and-dictionary-order',
+    cote: '10',
+    pages: '117–136, 140, 142–179',
+    kind: 'codicological',
+    claim:
+      'The cover of page 140 names the two handwritten runs bound after it in the reverse of their binding order — its first line, « Structures supplémentaires sur des vectoriels, et algèbres de Hopf top. », fits pages 156–179, and its second, « Anneaux des représentations de certains groupes algébriques », pages 142–154 — and nothing in the folder dates the run of pages 156–179 relative to the typescript « ⊗-catégories » of pages 117–136.',
+    basis:
+      'Batch 7 transcribes the brown cover of page 140 with a struck first line beginning « Fasc… », then the two titles, « top. » uncertain; batch 8’s header says the batch opens the run announced by the cover’s second line. Pages 156–160 build the complete linearly topologised algebra U of an abelian class of k-modules, with « Première structure supplémentaire » (p. 158) and « Autres structures supplémentaires » (p. 160); pages 161–179 add duality, a diagonal U → U ⊗̂ U, an augmentation and an involution, and end on « K-catégorie ⟺ K-bigèbre U ⟺ hyperalgèbre commutative A ». No leaf of pages 117–179 is dated; page 136 of the typescript refers to « mes notes sur les ⊗-catégories » without saying which.',
+    ours:
+      'That the first line names pages 156–179 is the edition’s, made for this entry from the vocabulary of those pages; neither transcription assigns it, and batch 7’s header speaks of the cover as naming « the run that begins after this batch ». The reading does not mention the cover. It calls pages 156–179 « le dictionnaire refait à la main », « la seconde construction du dictionnaire, faite de rien », « en repartant de zéro », and the typed pages the « dictionnaire énoncé » of which these are the « démontré »; that is an order of the binding and of the argument, which the reading also says are « indépendamment » established, and the entry adopts it as neither. Which notes page 136 means is not said, and the entry does not guess. No facsimile was consulted.',
+    literature: [
+      'Transcription 10, batch 7 (batch-07.fr.tex), header and pages 136 and 140',
+      'Transcription 10, batch 8 (batch-08.fr.tex), header and pages 142–160',
+      'Transcription 10, batch 9 (batch-09.fr.tex), header and pages 161–179',
+      'Modernised reading 10 (10.modern.tex), « Le dictionnaire, construit deux fois » and « Le dictionnaire refait à la main »',
+    ],
+    status: 'candidate',
+    settle:
+      'A person checks on the facsimile whether the cover of page 140 physically wraps pages 142–179, reads « top. » and the struck line, and compares the paper and ink of pages 156–179 with those of pages 142–154 and with the typescript of pages 117–136. A shared wrapper would make the reversed order one of filing, not of the titles; nothing of this would order the handwritten run and the typescript in time.',
+  },
 ];
