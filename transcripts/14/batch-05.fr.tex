@@ -1,0 +1,633 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 14, batch 5 (pages 81-100).
+% Established from the facsimile archives/batches/14/batch-05.pdf (a mirror of
+% https://grothendieck.umontpellier.fr/14.pdf), per the skill
+% transcribe-grothendieck. The batch file carries no cover sheet: PDF page N
+% is page 80+N, as the Montpellier footer printed on each PDF page confirms.
+% The archivists' pencil numbers bottom-left agree with that position on every
+% leaf where they are legible (81 on the first, 100 on the last), so \page{}
+% takes them as they are. No pagination of his own on these leaves.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-09-23 — first pass, unchecked against the pages by a human.
+%
+% What the batch is. Loose leaves in his hand on abelian varieties and on
+% rings of cycle classes, alternating with typed versos that are not the
+% mathematics of this folder.
+%   81, 83, 85, 87, 89
+%           Skipped. Typed leaves (its pp. 18-23) of a typescript on sites and
+%           C-acyclic sheaves (Proposition 3.3, condition (CMC), continuous
+%           functors u : C -> C'), scanned upside down; the backs of 82-88.
+%           Nothing on them in his hand; unrelated to cycles.
+%   82      Continues p. 80 (batch 4) mid-sentence: u : A -> A' a
+%           homomorphism of abelian varieties, dim n and n', d the degree
+%           defined on p. 80. The multivector of degree 2(n'-n) on T(A');
+%           0 -> K -> H^1(A') -> H^1(A) -> 0 and the top exterior powers; the
+%           characteristic class times the dual class u_*(1_A) is d times that
+%           of A'. Poincaré duality H^i(A) = /\^{2n-i} T_{Q_l}(A)(-n), and
+%           u_* : H^i(A) -> H^{i+2(n'-n)}(A')(n'-n) identified with
+%           /\^{2n-i} u_1 (x) Q_l(-n).
+%   84      u_*(1_A) recovered as the image of the fundamental class under
+%           /\^{2n} u_1; so u_*(1) determines the image of T_l(A) in T_l(A')
+%           when u_1 is injective. Lower half blank.
+%   86      « Relations entre hom. de V.A. et groupes de N.S. »: the square
+%           C^1(A) -> H^2(A)(1), Hom(A,A*) -> Hom(H^1(A*),H^1(A)), the graph
+%           map Hom(A,A*) -> C^n(A x A*) (« pas additive ! »); the graph
+%           embedding (id_A, u) and its maps on cohomology.
+%   88      A homomorphism is known from the class of its graph (T_{Q_l} of
+%           the graph); likewise an abelian subvariety; the isomorphism
+%           C^1(A x B)/C^1(A) x C^1(B) = Hom(A, B*) read cohomologically;
+%           question on the algebraicity of classes in H^1(A)(x)H^1(B)(1).
+%   90      Cover in his hand, « Tableau des classes de cycles ... ». No
+%           \page; its words are the section heading.
+%   91      « Anneaux de classes de cycles sur une variété projective non
+%           singulière sur un corps k alg. clos »: a diagram of the rings
+%           A_num, A_tau, A_alg, A_{Q_l-hom}, A_{Z_l-hom} (« théorie
+%           discrète ») and A_pic, A_alb, A_lin (« théorie continue »), with
+%           G_top K, G_alg K, CK; conjectural isomorphisms marked « ? »;
+%           braces « groupe libre de type fini ? », « groupe fini ? »,
+%           « V.A. ? »; a note on further equivalences « définies par
+%           Liebermann ». Transcribed as a tikzcd plus his annotations.
+%   92      Cover in his hand, « Mumford-Nakai / Cycles algébriques
+%           amples ..... ». No \page; its words are the section heading.
+%   93-94   « Th. de Mumford-Nakai »: L invertible on X projective over k;
+%           equivalent conditions a), b), b'), b''), c), c'), c'') (Euler
+%           characteristic, resp. dim H^0, of L^n on integral subschemes);
+%           d), d') cancelled by a lattice of strokes; margin: the numerical
+%           criterion D.C > 0, D^d > 0 « (intersection calculée dans
+%           GK(X) !) ». P. 94: the implications, induction on dim X, Lemme 1
+%           (vanishing of H^i, i >= 2), Lemme 2, « cf. lettre de Mumford »;
+%           questions (drop the section hypothesis in d), d'); drop
+%           projectivity).
+%   95      Cones in the Néron-Severi space of a surface: P^+ (effective),
+%           Q^+ (x^2 >= 0, x.a >= 0), R (ample), interiors, closures and
+%           polars; « x in R <=> x.P > 0 et x^2 > 0 (th. de Nakai) »; the
+%           question x.P > 0 => x in R, reduced to x^2 != 0 and attacked by
+%           Riemann-Roch on a divisor with D^2 = 0 (« par Mumford »). A
+%           sketch of three nested cones.
+%   96, 98, 100
+%           Skipped. Typed leaves of his comments on a redaction about
+%           complete local rings (« paragraphe Cohen », « je suggère... ») and
+%           a typed draft « § IV Différentielles et dérivations », with
+%           corrections and inked arrows; the backs of 97 and 99. Not the
+%           mathematics of this folder, and the handwriting on them belongs to
+%           that typescript.
+%   97      Higher-dimensional cones: D^d > 0, D.C > 0 <=> D in P_1^{+o},
+%           alpha_{d-1} D^{d-1} in P_1^+; « Question alpha_{d-1}(P_{d-1}^{+o})
+%           c P_1^+ »; boxed maps alpha_i : A^i -> A_{d-i} between cones and
+%           their polars; c_i(E).
+%   99      The same: D^i X_i >= 0 ?; D in P_1^{+o} => D^i in P_i^{+o}
+%           (induction hypothesis); P_i^{+o}.P_{d-i}^{+o} >= 0 ? equivalent to
+%           the two inclusions alpha_i(P_i^{+o}) c P_{d-i}^+ and its mirror,
+%           implied by P_i^{+o} P_j^{+o} c P_{i+j}^{+o}; the threefold case,
+%           (D'+nD)^3 expanded, boxed « D^3 >= 0 ». Sketches of cones.
+%
+% Notation fixed for the batch. Blackboard letters for Q, Z (Q_\ell, Z_\ell,
+% \mathbb{P}). His exterior powers, written \Lambda with the degree set
+% above, are \bigwedge^{k}. His A* for the dual abelian variety is A^{*}. His
+% cones: a small circle *above* a letter is the interior (\mathring{P}), a
+% small circle *after* the exponent is the polar cone (P^{+\circ}), a bar is
+% the closure. The script letter of pp. 97 and 99 (a rounded « a ») is
+% \mathcal{A}. His « G » before K on pp. 91 and 93 is kept as G (G_top K,
+% GK(X)). The index of the second ring of p. 91 is read \tau; a \note says it
+% is doubtful. His underlining in prose is \emph.
+%
+% Legibility. 82, 84, 86 and 88 are written fair and read almost through;
+% 93-95 are a fast draft whose formulas carry and whose connective prose
+% sometimes does not; 91 is a diagram whose small labels are partly lost;
+% 97 and 99 are formulas and boxes.
+%
+% Batch edges. P. 82 opens mid-sentence: it continues the last line of p. 80
+% (batch 4), « ... on trouve un multivecteur de degré 2(n'-n) = dim coker u_1,
+% qui définit une forme 2(n'-n)-fois linéaire alternée sur T_Q(A') ». P. 99
+% ends on formulas; nothing runs over into batch 6 that the leaf shows.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{14}
+\batch{5}
+\pages{81}{100}
+\dating{1965-[vers 1971]}
+\watermark{Édition de démonstration}
+\foldertitle{Théorie des cycles algébriques : conjectures de Hodge, Tate, Lefschetz, Weil : notes manuscrites (s.d.), lettre (1965).}
+
+\begin{document}
+
+\page{82}
+\note{la page continue la dernière phrase de la page 80, qui s'achève sur
+« une forme $2(n'-n)$-fois linéaire alternée sur $T_{\mathbb{Q}}(A')$ » ; $u$
+y est un homomorphisme $A \to A'$ de variétés abéliennes de dimensions $n$ et
+$n'$, et $d$ le degré défini à la même page}
+nulle sur $\mathbb{Q}_{\ell}(A)$ (on peut la \uncertain{choisir} \ill{} un
+scalaire près) et tel que, si
+\[
+  0 \longrightarrow K \longrightarrow H^{1}(A'^{*}) \longrightarrow H^{1}(A)
+  \longrightarrow 0
+\]
+\uncertain{1ère}
+\note{l'astérisque qui suit $A'$, ici et à la ligne suivante, est petit ; la
+page 80 écrit déjà $H^{1}(A'^{*}) \to H^{1}(A)$ ; plus bas, $H^{2n'}(A')$ est
+sans astérisque}
+\[
+  \begin{array}{ccccc}
+    \bigwedge^{2n'} H^{1}(A'^{*}) & \simeq & \bigwedge^{2n} H^{1}(A) & \otimes
+    & \bigwedge^{2(n'-n)} K \\
+    \wr & & \wr & & \\
+    H^{2n'}(A') & & H^{2n}(A) & &
+  \end{array}
+\]
+\ill{} la classe caractéristique de $H^{2n}(A)(n)$ fois la classe duale
+$u_{*}(1_{A})$ de $\bigwedge^{2(n'-n)} K\,(n'-n)$ corresponde à \emph{$d$
+fois} la classe caractéristique de $H^{2n'}(A')(n')$. \emph{N.B.} $d$ est
+aussi le contenu de $T_{\mathbb{Z}_{\ell}}(A)$ dans $T_{\mathbb{Z}_{\ell}}(A')$.
+\note{les deux $\mathbb{Z}_{\ell}$ de cette dernière ligne sont encerclés}
+
+\[
+  H^{i}(A) \times H^{2n-i}(A) \longrightarrow H^{2n}(A) \simeq
+  \mathbb{Q}_{\ell}(-n)
+\]
+est une dualité, d'où
+\[
+  H^{i}(A) \simeq H^{2n-i}(A)'(-n) \simeq \bigwedge^{2n-i}
+  T_{\mathbb{Q}_{\ell}}(A)\,(-n)
+\]
+\struck{En particulier,} Ceci posé, l'hom.\ \struck{$u_{*}$}
+\[
+  \begin{array}{rccc}
+    u_{*} : & H^{i}(A) & \longrightarrow & H^{i+2(n'-n)}(A')(n'-n) \\
+    & \wr & & \\
+    & \bigwedge^{2n-i} T_{\mathbb{Q}_{\ell}}(A)\,(-n) & \longrightarrow &
+    \bigwedge^{2n-i} T_{\mathbb{Q}_{\ell}}(A')\,(-n)
+  \end{array}
+\]
+\note{l'exposant $2(n'-n)$ de la première ligne est écrit en surcharge}
+s'identifie : $\bigwedge^{2n-1} u_{1} \otimes \mathbb{Q}_{\ell}(-n)$.
+\note{l'exposant se lit $2n-1$ et non $2n-i$ ; un premier $\otimes$ est
+biffé}
+
+\page{84}
+De cette façon, on retrouve $u_{*}(1_{A})$, où
+$1_{A} \in H^{0}(A) = \bigl(\bigwedge^{2n} T_{\mathbb{Q}_{\ell}}(A)\bigr)(-n)$,
+\struck{à partir de} $u_{*}(1_{A}) \in \bigwedge^{2n}
+T_{\mathbb{Q}_{\ell}}(A')(-n)$, et
+$u_{1} : T_{\mathbb{Q}_{\ell}}(A) \to T_{\mathbb{Q}_{\ell}}(A')$, en prenant
+\[
+  \bigwedge^{2n} u_{1} \otimes \mathbb{Q}_{\ell}(-n) : \bigwedge^{2n}
+  T_{\mathbb{Q}_{\ell}}(A)(-n) \longrightarrow \bigwedge^{2n}
+  T_{\mathbb{Q}_{\ell}}(A')(-n)
+\]
+en prenant l'image de la classe fondamentale du premier \struck{\ill{}}
+\ill{}.
+\note{« à partir de » est biffé et la formule qui donne $u_{*}(1_{A})$
+écrite au-dessous ; le mot biffé sous « premier » et le mot qui suit ne se lisent
+pas}
+On voit ainsi que la connaissance de $u_{*}(1)$ détermine l'image de
+$u_{1} : T_{\ell}(A) \to T_{\ell}(A')$, dans le cas où cet hom.\ est injectif.
+
+\page{86}
+\emph{Relations entre hom.\ de V.A.\ et groupes de N.S.}
+
+\begin{tikzcd}[column sep=tiny, row sep=normal, nodes={font=\scriptsize}]
+  C^{1}(A) \arrow[rr] \arrow[d] & & H^{2}(A) \otimes \mathbb{Q}_{\ell}(1) = H^{2}(A, \mathbb{Q}_{\ell}(1)) = \bigwedge^{2} H^{1}(A) \otimes \mathbb{Q}_{\ell}(1) \arrow[d, "\text{dualité}"] & \\
+  \mathrm{Hom}(A, A^{*}) \arrow[rr] \arrow[dr, "\text{graphe}"'] & & \mathrm{Hom}(H^{1}(A^{*}), H^{1}(A)) \arrow[dr] & \\
+  & C^{n}(A \times A^{*}) \arrow[rr] & & H^{2n}(A \times A^{*}) \otimes \mathbb{Q}_{\ell}(n)
+\end{tikzcd}
+
+\note{les étiquettes sont abrégées dans le diagramme ; sur la page, la flèche
+verticale de droite porte « dualité de l'accouplement
+$H^{1}(A) \times H^{1}(A^{*}) \to \mathbb{Q}_{\ell}(1)$ », et la diagonale de
+gauche « \uncertain{injection} “graphe” (pas additive !) »}
+
+($n = \dim A$)
+
+\[
+  \bar{u} = (\mathrm{id}_{A}, u) \qquad A \longrightarrow A \times A^{*}
+\]
+\[
+  H^{*}(A) \xrightarrow{\ \bar{u}_{*}\ } H^{*}(A \times A^{*})(\cdot\cdot)
+  \qquad\qquad
+  H^{*}(A) \xleftarrow{\ \bar{u}^{*}\ } H^{*}(A \times A^{*})
+\]
+\note{sous la seconde flèche, un premier mot biffé, illisible, précède
+$(\bar{u}^{*})$}
+\[
+  \begin{array}{ccc}
+    H^{0}(A) & \longrightarrow & H^{2n}(A \times A^{*})(n) \\
+    \times & & \times \\
+    H^{2n}(A) & \longleftarrow & H^{2n}(A \times A^{*}) \\
+    \wr & & \wr \\
+    \mathbb{Q}_{\ell}(-n) & & \mathbb{Q}_{\ell}(-n)
+  \end{array}
+\]
+\[
+  H^{1}(A) \xleftarrow{\ (\mathrm{id}_{H^{1}(A)},\, u^{1})\ }
+  H^{1}(A \times A^{*}) = H^{1}(A) \times H^{1}(A^{*})
+\]
+\[
+  \bar{u}_{*}(1)
+\]
+
+\page{88}
+Un homomorphisme $u : A \to B$ de V.A.\ est connu quand on connaît la classe
+de cohomologie associée à son graphe dans $A \times B$, (\struck{en cette
+\ill{}} Ceci si on la connaît \ill{} \ill{} dans la \uncertain{coh.}
+cohomologique $\ell$-adique), car alors on connaît le graphe
+$\Gamma \subset A \times B$ de $u$ car
+$T_{\mathbb{Q}_{\ell}}(\Gamma) \subset T_{\mathbb{Q}_{\ell}}(A \times B)$ est
+alors connu.
+
+De même, une ss-V.A.\ de $A$ est connue quand on connaît sa classe de
+cohomologie.
+
+L'« interprétation » cohomologique de l'isom.
+\[
+  C^{1}(A \times B) / C^{1}(A) \times C^{1}(B) \simeq \mathrm{Hom}(A, B^{*})
+\]
+est bien claire, vu
+\[
+  \begin{array}{c}
+    \bigwedge^{2}\bigl(H^{1}(A) \times H^{1}(B)\bigr)(1) \big/
+    \bigwedge^{2} H^{1}(A)(1) \times \bigwedge^{2} H^{1}(B)(1) \simeq
+    \bigl(H^{1}(A) \otimes H^{1}(B)\bigr)(1) \\
+    \wr \\
+    \mathrm{Hom}\bigl(T_{\ell}(A), T_{\ell}(B^{*})\bigr)
+  \end{array}
+\]
+\note{la barre de fraction de la première formule surcharge un signe
+illisible}
+
+\emph{Question} Prouver que \ill{} \ill{} élts de
+$\bigl(H^{1}(A) \otimes H^{1}(B)\bigr)(1) \subset H^{2}(A \times B)(1)$ sont
+algébriques
+
+\section{Tableau des classes de cycles …}
+\note{ces mots sont de sa main, seuls sur le feuillet 90, qui sert de chemise
+à la page suivante}
+
+\page{91}
+\emph{Anneaux de classes de cycles sur une variété projective non singulière
+sur un corps $k$ alg.\ clos}
+
+\begin{tikzcd}[column sep=small, row sep=small, nodes={font=\scriptsize}]
+  & & A_{\mathrm{num}} & \\
+  & & A_{\tau} \arrow[u, "\overset{?}{\simeq}"'] \arrow[r, "\overset{?}{\simeq}"] & A_{\mathbb{Q}_{\ell}\text{-hom}} \\
+  & & A_{\mathrm{alg}} \arrow[u] \arrow[r, "\overset{?}{\simeq}"] & A_{\mathbb{Z}_{\ell}\text{-hom}} \arrow[u] \\
+  & & A_{\mathrm{pic}} \arrow[u] & \\
+  G_{\mathrm{top}}K \arrow[uuurr] \arrow[uurrr, dashed, "?"'] & & A_{\mathrm{alb}} \arrow[u, "\simeq ?"'] & \\
+  G_{\mathrm{alg}}K \arrow[u] & & A_{\mathrm{lin}} \arrow[u, "\simeq ?"'] \arrow[ull, "\text{surj}"'] & \\
+  & CK \arrow[ul, "\text{surj}"] \arrow[ur] & &
+\end{tikzcd}
+
+\note{diagramme redessiné d'après la page. Un cadre, désigné « théorie
+discrète », entoure $A_{\mathrm{num}}$, $A_{\tau}$, $A_{\mathrm{alg}}$,
+$A_{\mathbb{Q}_{\ell}\text{-hom}}$ et $A_{\mathbb{Z}_{\ell}\text{-hom}}$ ; un
+second, « théorie continue », entoure $A_{\mathrm{pic}}$, $A_{\mathrm{alb}}$,
+$A_{\mathrm{lin}}$. L'indice lu $\tau$ est douteux. Les signes portés sur les
+flèches verticales, écrits de côté (une sorte de « z » accompagné de « ? »),
+sont lus comme $\simeq$ tourné ; sur les flèches horizontales, $\simeq$ est
+surmonté de « ? ». La flèche de $G_{\mathrm{top}}K$ vers $A_{\tau}$ est un
+long trait qui monte le long du bord gauche et s'incurve vers $A_{\tau}$. À
+droite du cadre, une première position des nœuds
+$A_{\mathbb{Q}_{\ell}\text{-hom}}$ et $A_{\mathbb{Z}_{\ell}\text{-hom}}$,
+reliés par une flèche verticale, est couverte de hachures ; les nœuds ont été
+repris dans le cadre. Les « $G$ » devant $K$, les deux « surj », et
+l'accolade du bas à gauche sont d'une autre encre}
+
+Accolades et renvois, de sa main, autour du diagramme :
+\begin{itemize}
+  \item à gauche de $A_{\mathrm{num}}$ et $A_{\tau}$ : « groupe libre de type
+  fini ? » ;
+  \item à gauche de $A_{\tau}$ et $A_{\mathrm{alg}}$ : « Groupe fini ? » ;
+  \item à gauche de $A_{\mathrm{alg}}$ et $A_{\mathrm{pic}}$ : « V.A. ? » ;
+  \item sous $A_{\mathrm{pic}}$, $A_{\mathrm{alb}}$, $A_{\mathrm{lin}}$ :
+  « flèches toutes surjectives » ;
+  \item sous $G_{\mathrm{top}}K$, $G_{\mathrm{alg}}K$, $CK$ : « flèches qui
+  sont des isom.\ mod torsion » ;
+  \item un trait fin part d'un petit sigle encerclé, \ill{}, posé contre la
+  flèche $A_{\mathrm{alg}} \to A_{\mathbb{Z}_{\ell}\text{-hom}}$, et mène à :
+  « car.\ 0 » (encerclé) « ou \uncertain{meilleure} théorie
+  \uncertain{intégrale} ».
+\end{itemize}
+
+\marginal{Autres équivalences : l'équivalence \ill{} $r$ et les équivalences
+de Weil $wh$ et $W$ définies par Liebermann …..}
+
+\section{Mumford-Nakai. Cycles algébriques amples …..}
+\note{ces mots sont de sa main, seuls sur le feuillet 92, qui sert de chemise
+aux pages suivantes}
+
+\page{93}
+\marginal{N.B. le critère implique le critère d'\uncertain{amplitude} de
+A. Weil …..}
+\note{en tête du feuillet, au-dessus du titre ; une double flèche le
+rattache à l'énoncé}
+
+\emph{Th.\ de Mumford-Nakai} $X$ schéma projectif sur corps $k$, $L$ faisceau
+inv.\ sur $X$. Conditions équivalentes :
+\begin{itemize}
+  \item[a)] $L$ ample
+  \item[b)] Pour tout \struck{sous-préschéma fermé intègre $Z$ de $X$}
+  faisceau cohérent $F$ sur $X$ \struck{\ill{}} de dimension $F \geqslant 1$,
+  on a
+  \[
+    \chi(F \otimes L^{\otimes n}) \longrightarrow +\infty \quad \text{si }
+    n \longrightarrow +\infty
+  \]
+  \note{« faisceau cohérent $F$ sur $X$ » est écrit au-dessus de la
+  rédaction biffée ; au-dessus du passage biffé qui suit, un mot, peut-être
+  « tels »}
+  \item[b')] Comme b), avec $F$ de la forme $\mathcal{O}_{Z}$, $Z$ un
+  sous-préschéma intègre de $X$ de dim $\geqslant 1$.
+  \marginal{on peut se borner à $Z$ \uncertain{normaux}}
+  \item[b'')] Pour tout sous-préschéma intègre $Z$ de $X$, tel que
+  $\dim Z = 1$ (resp.\ $\dim Z \geqslant 2$) il existe un entier
+  $n = n_{Z} > 0$ tel que $\chi(L^{\otimes n} \otimes \mathcal{O}_{Z})
+  \geqslant 2$ (resp.\ $\chi(L^{\otimes n} \otimes \mathcal{O}_{Z})
+  \geqslant 1$).
+  \item[c)] Comme b), en remplaçant $\chi$ par \struck{$H^{0}$} $\dim H^{0}$
+  \item[c')] Comme b')
+  \item[c'')] Pour tout sous préschéma intègre $Z$ de $X$ tel que
+  $\dim Z = 1$ ($\dim Z \geqslant 2$), existe un entier $n = n_{Z} > 0$ tel
+  que $\dim H^{0}(Z, L^{\otimes n} \otimes \mathcal{O}_{Z}) \geqslant 2$
+  (resp.\ $\geqslant 1$).
+  \note{« tel que $\dim Z = 1$ ($\dim Z \geqslant 2$) » est ajouté dans une
+  accolade au-dessus de la ligne}
+  \item[d)] \struck{Il existe un entier $n > 0$ tel que $L^{\otimes n}$
+  admette une section $\neq 0$ ; et pour tout sous-préschéma intègre $Z$ de
+  $X$, de dim 1, il existe un entier $n > 0$ tel que
+  $\dim H^{0}(Z, L^{\otimes n} \otimes \mathcal{O}_{Z}) \geqslant 2$.}
+  \item[d')] \struck{Il existe un entier $n > 0$ tel que $L^{\otimes n}$
+  admette une section $\neq 0$, et pour tout sous-préschéma intègre $Z$ de
+  $X$, de dim 1, on a $\deg(L|Z) > 0$.}
+\end{itemize}
+\note{d) et d') sont barrés d'un treillis de traits obliques ; ils restent
+lisibles. Dans d), « il existe un » est biffé après « $Z$ de $X$ », et « de
+dim 1, il existe » est récrit au-dessus ; dans d'), un premier « Pour » est
+biffé}
+
+\marginal{N.B. \emph{Critère numérique} ($X$ irréd.\ de dim $d$) :
+$D \cdot C > 0$ si $C$ courbe irréd.\ \struck{\ill{}} $> 0$ ; $D^{d} > 0$
+(intersection calculée dans $GK(X)$ !)}
+\note{écrit de bas en haut dans la marge gauche ; les deux inégalités sont
+réunies par une accolade}
+
+\page{94}
+a) $\Longrightarrow$ (b) $+$ c)) bien connu (on peut supposer $L$ très ample,
+et on applique la théorie du pol.\ de Hilbert)
+
+b) $\Longrightarrow$ b') $\Longrightarrow$ b'') trivial
+
+c) $\Longrightarrow$ c') $\Longrightarrow$ c'') trivial
+
+On prouve les autres assertions par récurrence sur \struck{\ill{}}
+$\dim X = d$, c'est trivial si $d = 0$, et bien connu si $d = 1$. Supposons
+$d \geqslant 2$.
+
+b'') $\Longrightarrow$ c'') Grâce au
+\note{le « c'') » surcharge un autre signe ; la phrase s'arrête là}
+
+\emph{Lemme 1} Si les \struck{conditions b''), \ill{} $n_{0} > 0$}
+restrictions de $L$ aux sous-préschémas intègres $Z$ de $X$ de dim $< d$ sont
+amples, alors $\exists\, n_{0}$ tel que
+\[
+  n \geqslant n_{0} \Longrightarrow H^{i}(X, L^{\otimes n}) = 0 \quad
+  \text{pour } i \geqslant 2
+\]
+\struck{\ill{}}
+\note{« restrictions de $L$ aux sous-préschémas intègres » est écrit
+au-dessus de la rédaction biffée}
+\marginal{\uncertain{par des} restrictions aux \uncertain{diviseurs}. Mais il
+faut supposer $X$ projectif}
+
+cf.\ lettre de Mumford.
+
+\struck{d) $\Longrightarrow$ c) trivial ; d) $\Longleftarrow$ d') d'après
+\ill{} \ill{} \ill{} \ill{} $d = 1$}
+\note{deux lignes barrées de grandes croix}
+
+c'') $\Longrightarrow$ a) On peut supposer grâce à EGA III … que $X$ est
+intègre. \struck{\ill{}} Soit $f$ une section de $L^{\otimes n}$,
+\struck{\ill{}} $D$ l'ens.\ de ses zéros, alors $D \neq \emptyset$ car $L$
+n'est pas trivial, donc $\dim D = d - 1$. On \uncertain{peut} \ill{}
+
+\emph{Lemme 2} Sous les conditions du Lemme 1, supposons $\exists\, n$ tel
+que $L^{\otimes n}$ ait une section. Alors $\exists\, n_{0}$ tel que
+\[
+  \text{pour } n \geqslant n_{0} \Longrightarrow X \dashrightarrow
+  \mathbb{P}\, H^{0}(X, L^{\otimes n}) \text{ partout défini}
+\]
+et non constant.
+\marginal{$d \geqslant 2$}
+\note{« $\exists\, n$ tel que » est ajouté au-dessus de la ligne ; sa flèche
+porte un point au-dessus, qu'on rend par $\dashrightarrow$}
+
+cf.\ lettre Mumford …
+
+\emph{Questions} Dans les énoncés d) et d') peut-on supprimer l'hyp.\ d'existence
+ d'une section $\neq 0$ ?? \struck{\ill{}} Peut-on supprimer
+l'hyp.\ que $X$ projectif ??
+
+\page{95}
+\[
+  \begin{array}{ccccc}
+    \mathring{P}^{+} & \subset & P^{+} & \subset & \overline{P^{+}} \\
+    \cup & & & & \cup \\
+    \mathring{Q}^{+} & \subset & Q^{+} & = & \overline{Q^{+}} \\
+    \cup & & & & \cup \\
+    \mathring{R} & = & R & \subset & \overline{R}
+  \end{array}
+\]
+\note{les exposants $+$ du haut de la page sont repassés et surchargés,
+comme les trois $R$ ; on les lit $+$ et $R$ partout}
+
+$\boxed{\mathring{Q}^{+} \subset P^{+}}$ d'où
+$Q^{+} = \overline{\mathring{Q}^{+}} \subset \overline{P^{+}}$
+\quad \emph{Prop.\ de \ill{}}
+
+(donc $\mathring{Q}^{+} \subset \mathring{\overline{P^{+}}} =
+\mathring{P}^{+}$)
+
+d'où par \uncertain{polarité}, comme $Q^{+} = Q^{+\circ}$
+\[
+  \overline{P^{+}}^{\,\circ} = P^{+\circ} \subset Q^{+}
+\]
+
+\[
+  P^{+} \ni x \iff \exists\, C > 0,\ n > 0, \text{ tel que }
+  \gamma(C) = n x \iff \ell(nx) \geqslant 2 \text{ si } n \text{ grand}
+\]
+\note{« $n > 0$ » est ajouté au-dessus ; la dernière condition est encerclée,
+sous un premier essai biffé et illisible}
+\[
+  Q^{+} \ni x \iff \left\{\begin{array}{l} x^{2} \geqslant 0 \\ x \cdot a
+  \geqslant 0 \end{array}\right. , \qquad \mathring{Q}^{+} \ni x \iff
+  x^{2} > 0,\ x \cdot a \geqslant 0
+\]
+[$a$ choisi dans $\mathring{Q}^{+}$, p.\ ex.\ $a$ dans $R$]
+\note{le $\mathring{Q}^{+}$ du crochet surcharge un $R$}
+\[
+  R \ni x \iff \exists\, C \text{ \textit{ample}},\ n > 0, \text{ tel que }
+  \gamma(C) = n x
+\]
+
+\[
+  \boxed{\ x \in R \iff x \cdot P > 0 \text{ et } x^{2} > 0\ }
+\]
+\note{avant « $x \cdot P$ », quelques signes biffés, illisibles}
+\marginal{th.\ de Nakai}
+\note{« th.\ de Nakai » est écrit sous la double flèche. À droite, un croquis :
+trois cônes emboîtés de même sommet, marqués $P$, $Q$, $R$ de l'extérieur vers
+l'intérieur}
+
+\[
+  \overline{R} \subset \overline{P}^{\,\circ} \cap Q = P^{\circ} =
+  \overline{P}^{\,\circ},
+\]
+\struck{\ill{}} d'où
+\note{le premier $\overline{P}$ porte au-dessus un signe surchargé, peut-être
+une barre reprise}
+
+\struck{$R \neq \mathring{P}$ \ill{}}
+\note{encadré, puis barré}
+
+$R = \mathring{\overline{R}} \subset \mathring{\overline{P^{\circ}}}$, je dis
+qu'on a \emph{égalité}, car
+\[
+  \mathring{P}^{\circ} \subset \mathring{Q}
+\]
+et on applique le critère de Nakai
+\[
+  \boxed{\begin{array}{l}
+    R = \mathring{\overline{R}} = \mathring{\overline{P^{\circ}}} \subset
+    \mathring{Q} \\
+    \overline{R} = P^{\circ} = \overline{P}^{\,\circ} \subset Q
+  \end{array}}
+\]
+
+\emph{Question} $x \cdot P > 0 \overset{?}{\Longrightarrow} x \in R$
+
+Par Nakai, il reste à voir si $x^{2} > 0$. Donc $x^{2} \geqslant 0$, il reste
+à voir $x^{2} \neq 0$. On peut supposer que $x$ provient de $D$ div.\ tel que
+$D^{2} = 0$. Mais alors
+$\chi(L(nD)) = \chi(X) + n\chi(D)$ et
+$h^{0}(L(nD)) \geqslant \chi(L(nD))$ pour $n$ grand par Mumford, on doit donc
+avoir $\chi(D) \leqslant 0$
+\note{le signe de la dernière inégalité est surchargé}
+
+\page{97}
+\[
+  H^{2}(L^{\otimes n} \otimes K^{\otimes(2n-1)})
+\]
+\note{l'exposant de $K$ est surchargé ; la lecture $2n-1$ est douteuse. Un
+trait sépare cette ligne de ce qui suit}
+
+\struck{$D^{d}$}
+\[
+  \boxed{\left\{\begin{array}{l} D^{d} > 0 \\ D \cdot C > 0 \text{ si }
+  C > 0 \end{array}\right.}
+\]
+\[
+  \Big\Updownarrow
+\]
+\[
+  \boxed{\ D \in P_{1}^{+\circ},\quad \alpha_{d-1} D^{d-1} \in P_{1}^{+}\ }
+\]
+\[
+  D \in P_{1}^{+\circ} \Longrightarrow \alpha D^{d-1} \in P_{d-1}^{+\circ}
+\]
+\marginal{hyp.\ de réc.}
+\note{la dernière implication est une flèche qui part d'une accolade sous
+« $D \in P_{1}^{+\circ}$ » dans le cadre ; « hyp.\ de réc. » y est rattaché
+par un trait}
+
+\emph{Question} $\alpha_{d-1}(P_{d-1}^{+\circ}) \subset P_{1}^{+}$
+
+\[
+  \boxed{\begin{array}{ccccccc}
+    P_{i}^{+\circ} & \subset & \mathcal{A}^{i} & \xrightarrow{\ \alpha_{i}\ } &
+    \mathcal{A}_{d-i} & \supset & P_{d-i}^{+} \\
+    \Vert & & & & & & \\
+    P^{i}_{+} & & & & & & \\[1ex]
+    P_{d-i}^{+\circ} & \subset & \mathcal{A}^{2d-i} &
+    \xrightarrow{\ \alpha_{d-i}\ } & \mathcal{A}_{i} & \supset & P_{i}^{+}
+    \\[1ex]
+    & & \mathrm{int}\bigl(P_{i}^{+\circ}\bigr) & \longrightarrow &
+    P_{d-i}^{+} & &
+  \end{array}}
+\]
+\note{les indices $d-i$ de $\mathcal{A}_{d-i}$ et des $P_{d-i}$ surchargent
+un signe antérieur ; $\mathcal{A}^{2d-i}$ est écrit ainsi}
+
+\[
+  c_{i}(E)
+\]
+
+\page{99}
+\[
+  D \cdot C \geqslant 0 \text{ si } C > 0
+\]
+\note{l'exposant de ce premier $D$ est surchargé et illisible}
+\[
+  \Big\Downarrow ?
+\]
+\[
+  D^{i} X_{i} \geqslant 0 \text{ si } X_{i} > 0 \quad ??
+\]
+
+\[
+  D \in P_{1}^{+\circ} \Longrightarrow D^{i} \in P_{i}^{+\circ} \quad
+  \text{pour } i \leqslant d-1
+\]
+\emph{hyp.\ de réc.}
+\struck{\ill{}} \ill{} $D^{d} \in P_{d}^{+\circ}$ i.e.\ $D^{d} \geqslant 0$ ??
+
+On a
+\[
+  \begin{array}{ccc}
+    D^{d} = & D^{i} & D^{d-i} \\
+    & \cap & \cap \\
+    & P_{i}^{+\circ} & P_{d-i}^{+\circ}
+  \end{array}
+  \qquad (0 < i < d)
+\]
+\note{les $\cap$ sont les signes $\in$ couchés}
+
+\[
+  \begin{array}{ccc}
+    \boxed{P_{i}^{+\circ} \cdot P_{d-i}^{+\circ} \geqslant 0 \ ?} & &
+    \\[1ex]
+    \Big\Updownarrow & \Longleftarrow & P_{i}^{+\circ}\, P_{j}^{+\circ}
+    \subset P_{i+j}^{+\circ} \\[1ex]
+    \boxed{\alpha_{i}(P_{i}^{+\circ}) \subset P_{d-i}^{+}} & & \\[1ex]
+    \boxed{\alpha_{d-i}(P_{d-i}^{+\circ}) \subset P_{i}^{+}} & &
+  \end{array}
+\]
+\note{les deux derniers cadres sont accolés et joints par un signe
+d'intégrale, qui les réunit ; un croquis de surface et une courbe occupent le
+milieu de la page}
+
+\[
+  \begin{array}{l}
+    D \cdot C \geqslant 0 \text{ si } C \geqslant 0 \\
+    D^{2} \cdot D' \geqslant 0 \text{ si } D' \geqslant 0 \\
+    \quad \Big\Downarrow ? \\
+    D^{3} \geqslant 0
+  \end{array}
+\]
+\note{dans la deuxième ligne, un facteur est biffé entre $D^{2}$ et $D'$}
+
+\[
+  P_{1}^{+\circ} \subset \mathcal{A}^{1} \longrightarrow \mathcal{A}_{2}
+  \supset P_{2}^{+}
+\]
+\struck{\ill{}} $D' + nD \in P_{2}^{+}$
+\[
+  (D' + nD)^{3} = D'^{3} + 3n D'^{2} D + 3n^{2} D' D^{2} + n^{3} D^{3}
+\]
+\struck{$D + \tfrac{1}{n} D'$} $D' + nD \simeq$
+\[
+  \boxed{D^{3} \geqslant 0}
+\]
+\note{des arcs relient les termes du développement au cadre final ; au-dessous
+à gauche, un croquis de cône dont un point intérieur est marqué, étiqueté
+$P_{2}^{+}$}
+
+\end{document}
