@@ -1936,4 +1936,63 @@ export const FINDINGS: Finding[] = [
     settle:
       'Only physical or documentary evidence would narrow it: the paper and ink of pages 22–28 against dated leaves elsewhere in the fonds, and whether he or the archivists put the leaves with the offprints. A comparison of the notation — ℳ^BT, T_cr, T_DR, T_Hdg, the torsors 𝔓 and Q, the data 1)–6) — with his Nice address « Groupes de Barsotti-Tate et cristaux » (Actes du Congrès international des mathématiciens, 1970) and his Montréal lectures Groupes de Barsotti-Tate et cristaux de Dieudonné (from the summer course of 1970, published 1974), both cited from memory, would show a resemblance, not a date. This entry exists to stop the next reader taking the reading’s future tense as placing the leaves before 1970, or before or after anyone’s published account. Whatever is found, priority is not a claim this project makes, about anyone.',
   },
+  {
+    id: '161-6-leaves-12-15-reversed',
+    cote: '161-6',
+    pages: '12–15',
+    kind: 'codicological',
+    claim:
+      'Pages 12–15 are bound in the reverse of the order in which both of their layers run: the ink computation on the fifth roots of unity passes from page 14 to page 12, and the pencil run on ordered sets from page 15 to page 13 and then, by « TSVP », to the foot of page 12 — so in each layer the text on pages 14–15 comes before the text on pages 12–13.',
+    basis:
+      'Batch 1 transcribes page 14 ending on the norm « N γ = γγ^α = (ζ + ζ⁻¹)(ζ² + ζ⁻²) = », left at the sign, and page 12 opening on « ζ³ + ζ⁻¹ + ζ + ζ⁻³ = ζ + ζ² + ζ³ + ζ⁴ = −1 », which is that product expanded, followed by « L’équation de γ est donc γ² + γ − 1 = 0 ». It notes that the last computation of page 15, γ̄(W ∧ W′) = …, continues at the head of page 13, which goes on with the point γ) after the α) and β) of page 15; that page 13 ends « TSVP »; and that the continuation is, « selon toute apparence », the two pencil lines d) and e) at the foot of page 12, written head to tail with respect to the ink, as page 13 is. Pages 15 and 13 are crossed by a long diagonal; pages 12 and 14 are ink.',
+    ours:
+      'The ink order 14 → 12 is the reading’s (section III, which says the transcription does not record it); the pencil order 15 → 13 → foot of 12 is the transcription’s. Putting the two together, and inferring from « TSVP » that pages 12 and 13 are the two faces of one leaf, is the edition’s, made for this entry. Neither file records which faces are rectos and versos, nor whether pages 14 and 15 are one leaf; the claim is about the order of the text, not of the sheets. Which layer was written first is not claimed. No facsimile was consulted.',
+    literature: [
+      'Transcription 161-6, batch 1 (batch-01.fr.tex), header and pages 12–15 with their notes',
+      'Modernised reading 161-6 (161-6.modern.tex), « Le fil du dossier », section III and its first footnote, section V',
+    ],
+    status: 'candidate',
+    settle:
+      'A person checks on the facsimile whether pages 12/13 and 14/15 are the two faces of two sheets. If they are, both the ink and the pencil were written with the sheet of pages 14–15 first, and the pencil run’s orientation and its order 15 → 13 → foot of 12 are what one gets by writing on the pair turned over and upside down; the archivists’ order then reverses the two sheets, and pages 14, 12 and 15, 13 should be read in that order.',
+  },
+  {
+    id: '161-6-om-run-opening-missing',
+    cote: '161-6',
+    pages: '12–13, 15',
+    kind: 'codicological',
+    claim:
+      'The pencil run of pages 15, 13 and the foot of page 12 begins on a leaf that is in no transcribed folder of the fonds: the name « (OM) » occurs nowhere else in the transcriptions, and neither do the two-factor hypotheses a)–d) that page 15 invokes; the nearest matches are 161-2, page 80, whose item (4″) describes in his words the category the run uses, without that name, and 161-3, page 11, which uses the same restricted product ∏′ with all but finitely many entries equal to the top element.',
+    basis:
+      'Page 15 opens « Alors α, β : I → K, J → K [font de K une somme de I, J dans (OM)] », with a margin « sont dans (OM) (grâce à a) b)) », and later cites « en vertu de d) »; batch 1 says the run begins before page 15 and that its hypotheses are not in the batch, and batch 2 (pp. 21–33) does not contain them. Page 13 sets the infinite form over ∏′ I_λ, « formée des (V_λ) tels que V_λ = 1_{I_λ} pour presque tout λ ». In 161-2, batch 4, page 80 lists among the cases to treat « (4″) Cat. préordonnées avec inf finis, sup quelconques, que inf distributifs par sup quelc., foncteurs commutant aux inf finis et sup quelc. ». In 161-3, batch 1, page 11 runs the infinite-product argument on « ∏′ 𝒪_{X_i} », families with « U_i = X_i … pour presque tout i ». The letters (OM) are marked uncertain on page 13 and read without doubt on page 15.',
+    ours:
+      'The reading identifies (OM) with the category of frames from what the proofs use and says so; the match with 161-2 page 80 (4″), which is independent evidence in his hand for that identification, is the edition’s, made for this entry, as is the link to 161-3. That the run’s hypothesis e) is, for frames of opens, the kind of statement 161-3 pages 10–12 prove for spaces is the edition’s reading and no part of the claim. The search was a text search of the 77 transcribed folders for « OM » as a category name and for the phrases « Inf finis » and « Sup quelc. »; untranscribed folders were not searched. No facsimile was consulted.',
+    literature: [
+      'Transcription 161-6, batch 1 (batch-01.fr.tex), header and pages 12, 13 and 15; batch 2 (batch-02.fr.tex), header',
+      'Transcription 161-2, batch 4 (batch-04.fr.tex), page 80',
+      'Transcription 161-3, batch 1 (batch-01.fr.tex), pages 10–12',
+      'Modernised reading 161-6 (161-6.modern.tex), section V and its footnotes',
+    ],
+    status: 'candidate',
+    settle:
+      'A person looks, as further folders are transcribed and on the facsimiles of 161-2, 161-3 and 161-6, for a pencil leaf that names (OM) and states the two-factor hypotheses a)–d), and reads the two letters on pages 13 and 15. If the opening turns up in 161-3, the run is the frame-side half of that folder’s argument on products of spaces, and the two shelfmarks bear on each other as 161-4 and 161-6 do through 161-4-topos-leaves-continue-161-6.',
+  },
+  {
+    id: '161-6-graph-embeddings-dating-cannot-support-precedence',
+    cote: '161-6',
+    pages: '24–30',
+    kind: 'codicological',
+    claim:
+      'Nothing in the folder dates the pages on isotopy classes of embeddings of a 1-complex in an oriented surface, pages 24–30, relative to Y. Ladegaillerie’s work on the same subject or to the Esquisse d’un programme (1984): no leaf carries a date, and the inventory’s « [à partir de 1973-vers 1977] » is the archivists’ estimate for the shelfmark, not a reading of these pages.',
+    basis:
+      'Batch 2’s header describes pages 24–30 as loose leaves with no pagination of his own and records no date on any of them; both batches copy the inventory’s dating line, which batch 2 calls « the inventory’s own, for the shelfmark and its group ». The pages cite no one: « groupe de Teichmüller » (p. 28) is the only name, and they give no reference for Th 1, Th 2 or the classification of planar embeddings.',
+    ours:
+      'Batch 2’s header calls pages 24–30 the « graphes » of the folder title « well before the Esquisse »; the reading’s résumé and its footnote on rotation systems say that Grothendieck « reviendra » to these objects in the Esquisse, « un contexte postérieur ». Both take the inventory’s estimate as a date for these leaves, and the entry adopts neither. The reading’s footnote names Ladegaillerie’s « Classes d’isotopie de plongements de 1-complexes dans les surfaces » (Topology, 1984), « issu d’un travail fait à Montpellier dans les années 1970 », « sans pouvoir dire s’il y a un lien »; the entry adds nothing to that. That Ladegaillerie was Grothendieck’s doctoral student at Montpellier is from memory, unchecked, and no part of the claim. No facsimile was consulted.',
+    literature: [
+      'Transcription 161-6, batch 2 (batch-02.fr.tex), header and pages 24–30',
+      'Modernised reading 161-6 (161-6.modern.tex), résumé and section VII with its footnotes',
+    ],
+    status: 'candidate',
+    settle:
+      'Only physical or documentary evidence would narrow it: the paper and ink of pages 24–30 against dated leaves of the fonds, and a comparison with Ladegaillerie’s thesis and his Topology 23 (1984) paper — its notation, its model surfaces and whether it states Th 1, Th 2 and the Question of page 29 — and with G. A. Jones and D. Singerman, « Theory of maps on orientable surfaces » (Proc. London Math. Soc., 1978), all cited from memory. A resemblance would show a shared subject, not an order. This entry exists to stop the next reader taking « well before the Esquisse » or « reviendra » as a date, or treating these pages as placed before or after a student’s or anyone’s published account. Whatever is found, priority is not a claim this project makes, about anyone.',
+  },
 ];
