@@ -79,11 +79,19 @@ to be taken down, it will be taken down.** No argument, no delay. The contact
 for the fonds is the Service des Archives,
 [dcsph-archives@umontpellier.fr](mailto:dcsph-archives@umontpellier.fr).
 
-## Open questions
+## Open questions, and what was decided
 
-The scope of what the fonds' open-access designation permits, and who holds
-the right to authorise publication of derivative works from it, have not been
-settled with the University. That is tracked in
-[issue #23](https://github.com/Commutator-IO/grothendieck-project/issues/23),
-and no deposit of `transcripts/` to an archive with a permanent identifier
-should happen before it is.
+**No part of `transcripts/` will be deposited on Zenodo or in any archive that
+mints a permanent identifier.** The project stays on GitHub and on the site,
+both of which can be taken down at any time; that is what the takedown
+commitment above relies on, and a DOI would break it. Weights of any model
+trained on these transcriptions fall under the same rule.
+
+What the fonds' open-access designation permits, and who holds the right to
+authorise derivative works from it, have not been settled with the
+University. The question was put in writing to the Service des Archives and
+has not been answered yet. Until it is, this project reads the open-access
+designation as covering a watermarked, retractable demonstration edition,
+and defers to any request for removal. The reasoning, and each question it
+leaves open, is in
+[issue #23](https://github.com/Commutator-IO/grothendieck-project/issues/23).
