@@ -565,6 +565,36 @@ function inline(text) {
 }
 
 /**
+ * Ends a block after every heading's closing brace.
+ *
+ * The heading's argument is found by matching braces. Splitting only *before*
+ * a heading, as this used to, let a `\note{}` on the line under a
+ * `\section{}` — no blank line between — fall inside the <h2>, with a stray
+ * `}` printed after it; twenty-eight files had the pattern when folder 14
+ * turned it up. Kept identical in scripts/tei.mjs, whose view check-tei
+ * compares against this one.
+ */
+function isolateHeadings(text) {
+  const re = /\\(?:sub)?section\*?\{/g;
+  let out = '';
+  let from = 0;
+  let m;
+  while ((m = re.exec(text))) {
+    let depth = 1;
+    let i = m.index + m[0].length;
+    for (; i < text.length && depth; i++) {
+      if (text[i] === '\\') i++;
+      else if (text[i] === '{') depth++;
+      else if (text[i] === '}') depth--;
+    }
+    out += `${text.slice(from, m.index)}\n\n${text.slice(m.index, i)}\n\n`;
+    from = i;
+    re.lastIndex = i;
+  }
+  return out + text.slice(from);
+}
+
+/**
  * The page marker, which is what makes the two panes one workspace.
  *
  * `\page{47}` becomes an anchor carrying `data-page`. The reading view watches
@@ -745,11 +775,10 @@ function render(tex, edition) {
     },
   );
 
-  const blocks = lifted
+  const blocks = isolateHeadings(lifted)
     // A page marker always starts a block, even mid-paragraph: a page turns
     // where the paper turns, not where the argument does.
     .replace(/\\page\{/g, '\n\n\\page{')
-    .replace(/(\\(?:sub)?section\*?\{)/g, '\n\n$1')
     .split(/\n\s*\n+/)
     .map((b) => b.trim())
     .filter(Boolean)

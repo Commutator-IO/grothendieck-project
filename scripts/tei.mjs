@@ -70,6 +70,32 @@ const escapeAttr = (s) => escapeXml(s).replace(/"/g, '&quot;');
 const marker = (i) => `\ue000MATH${i}\ue000`;
 const MARKED = () => /\ue000MATH(\d+)\ue000/g;
 
+/**
+ * Ends a block after every heading's closing brace \u2014 the same function as in
+ * scripts/render.mjs, which says why: a `\note{}` on the line under a
+ * `\section{}` used to fall inside the heading. The two must cut blocks
+ * identically, or check-tei reports the difference.
+ */
+function isolateHeadings(text) {
+  const re = /\\(?:sub)?section\*?\{/g;
+  let out = '';
+  let from = 0;
+  let m;
+  while ((m = re.exec(text))) {
+    let depth = 1;
+    let i = m.index + m[0].length;
+    for (; i < text.length && depth; i++) {
+      if (text[i] === '\\') i++;
+      else if (text[i] === '{') depth++;
+      else if (text[i] === '}') depth--;
+    }
+    out += `${text.slice(from, m.index)}\n\n${text.slice(m.index, i)}\n\n`;
+    from = i;
+    re.lastIndex = i;
+  }
+  return out + text.slice(from);
+}
+
 function liftMath(tex) {
   const held = [];
   const keep = (raw, display) => {
@@ -347,11 +373,10 @@ function convert(tex) {
    */
   function renderBlocks(src, top, mixed = false) {
     const { text: lifted, kept } = liftEnvs(src);
-    const blocks = lifted
+    const blocks = isolateHeadings(lifted)
       // A page marker always starts a block, even mid-paragraph: a page turns
       // where the paper turns, not where the argument does.
       .replace(/\\page\{/g, '\n\n\\page{')
-      .replace(/(\\(?:sub)?section\*?\{)/g, '\n\n$1')
       .split(/\n\s*\n+/)
       .map((b) => b.trim())
       .filter(Boolean);
