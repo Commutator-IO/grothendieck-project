@@ -1,0 +1,933 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 101, batch 1 (pages 1-20).
+% Established from the facsimile archives/batches/101/batch-01.pdf (a mirror of
+% https://grothendieck.umontpellier.fr/101.pdf), per the skill
+% transcribe-grothendieck. The batch file carries no cover sheet: PDF page N
+% is page N of the folder; the archivists' pencil numbers bottom-left agree
+% wherever legible (« 10 », « 11 », « 12 », « 14 », « 17 », « 18 », « 19 »,
+% « 20 »).
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-09-24 — first pass, unchecked against the pages by a human.
+%
+% The folder sits in the inventory group "69-89" « Géométrie et topologie
+% combinatoire », whose subject does not match this folder's (as for folder
+% 100); the folder has its own date, which \dating{} carries verbatim.
+% Nothing is concluded here from the group.
+%
+% Fifteen of the twenty pages are transcribed. Absent:
+%   - pages 1, 5 and 16, sheets of buff card blank but for his words top
+%     right — covers; their words head the three \section{} (hand.md §5):
+%     « Relations entre cohomologie locale et projective (via les cônes) »,
+%     « Dualité locale pour Modules non quasi cohérents », « Notes antiques
+%     1958 (Caractérisation des Coh. Mac., des Gorenstein etc) »;
+%   - pages 9 and 13, typed pages of some other French text (page « - 85 - »,
+%     on « faisceaux fins », and page « II - 18 - », on modules of fractions
+%     A[S^-1]), scanned upside down, with no mark of his hand. Pages 8 and 12
+%     are versos of typescripts too, but are covered with his own notes and
+%     are transcribed; the typed text under them is not.
+% No page carries other people's text that he annotated, so nothing is
+% summarised under the folder-100/71 rule.
+%
+% What the batch is. Three runs, each opened by its own cover.
+%   2-4    « Relations entre cohomologie locale et globale »: the punctured
+%          cone X' = Spec(S) - Y over X = Proj(S), and the comparison of
+%          Ext with supports on the cone with graded sums of Ext_T(F, G(n))
+%          on X (boxed formula p. 2); passage to the affine cone and to
+%          completions, two pairs of spectral sequences (p. 4). Rapid hand,
+%          much struck, many connecting words lost.
+%   6-15   « Dualité locale pour Modules non quasi cohérents »: p. 6, Ext on
+%          Spf A computed by Ext_A(M, N) (Prop. 1, Cor. 2, two proofs); p. 7,
+%          Ext_Y on a formal prescheme, broken off; p. 8, scattered notes in
+%          black ink (duality for group schemes with values in Q/Z, and
+%          pairings H^i_Y(M) x Ext(M, A) -> I in dimension 1); pp. 10-15,
+%          local duality Ext^{n-i}(X; F, O_X) -> Hom(H^i_x(F), I) for an
+%          arbitrary O_X-Module F on Spec of a complete regular local ring:
+%          reduction to F = i_!(O_U), the case n = 1 (triples (M_0, M_1, u),
+%          facts a)-c), Ext^1_A(K, A) = 0 for A complete), scratch on
+%          adèles and idèle classes (p. 12), and the case n = 2 (pp. 14-15),
+%          where phi: A_f -> D(H^2_x(F)) is injective but not surjective —
+%          one must take topological duals.
+%   17-20  « Notes antiques 1958 »: p. 17 a plan (§ 1 the functors H^i_C,
+%          § 2 dualising functors and modules, local duality, Gorenstein
+%          rings, § 3 the functors H_i and dualising complexes); p. 18 the
+%          Definition of a « module fondamental » Omega (finite type,
+%          D(Omega) = H^n(A)) and Theorem 4; p. 19 (cancelled by two long
+%          diagonals, transcribed) the Complement to Th. 3 and the pairings
+%          H^p(M) x Ext^{n-p}(M, Omega) -> H^n(Omega) -> I; p. 20
+%          Corollaries 1-3: the pairing is perfect for all p iff A is
+%          Cohen-Macaulay of dimension n; Ext^i(k, Omega) = 0 for i != n,
+%          Ext^n(k, Omega) = k; Omega Cohen-Macaulay, Ext^i(Omega, Omega) = 0
+%          for i != 0, Hom(Omega, Omega) = A.
+% Notation fixed for the batch: D( ) is his duality functor, I the dualising
+% (injective hull) module H^n_x(O_X); \underline{Ext} his sheaf Ext; H^i(M)
+% for the local cohomology H^i_x(M) where he drops the x. Throughout, the
+% connective prose is fast and often not recoverable; the formulas are.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{101}
+\batch{1}
+\pages{1}{20}
+\dating{[à partir de 1967-1968]}
+\watermark{Édition de démonstration}
+\foldertitle{Cohomologie locale : notes manuscrites (s.d.).}
+
+\begin{document}
+
+\section{Relations entre cohomologie locale et projective (via les cônes)}
+\note{titre de sa main, en haut à droite du feuillet 1, une chemise de papier
+bistre par ailleurs vierge, qui ne reçoit pas de numéro de page}
+
+\page{2}
+\textbf{Relations entre cohomologie locale et globale}
+\note{titre souligné, en tête du feuillet ; il diffère de celui de la chemise
+(« projective » y est remplacé par « globale »)}
+
+$Y$ préschéma de base, $\mathcal{S}$ Algèbre graduée quasi-cohérente sur $Y$,
+à degrés $\geqslant 0$, engendrée par $\mathcal{S}_1$ de type fini,
+$X = \operatorname{Proj}(\mathcal{S})$, $X' = \operatorname{Spec}(\mathcal{S})
+- Y$ le cône épointé, $\overline{X'}$ le cône affine. Donc
+\[
+  X' \simeq \mathbf{V}(\mathcal{O}_X(1)) - \sigma(X)
+  = \operatorname{Spec} \struck{\ill{}} \Bigl(\coprod_{n \in \mathbf{Z}}
+  \mathcal{O}(-n)\Bigr).
+\]
+\note{le début de la ligne, avant « $\mathbf{V}$ », est d'une lecture
+incertaine ; le mot biffé après « $\operatorname{Spec}$ » commence peut-être
+par « Sym »}
+
+Soit $Z$ une partie fermée de $X$, $Z'$ son image inverse dans $X'$,
+$\overline{Z'}$ son adhérence [définie aussi au moyen de l'Idéal homogène
+\uncertain{définissant} $Z$]. $U$ \uncertain{un ouvert} de $X$, $U'$ son image
+inverse dans $X'$, $\overline{U'}$ dans $\overline{X'}$. Soient $F$, $G$ deux
+Modules [quasi-cohérents] sur \struck{$U$} $X$, $F'$, $G'$ \ill{} \uncertain{les
+images inverses} sur $U'$.
+\note{le début de la plupart des lignes de ce paragraphe, au bord gauche, est
+d'une lecture incertaine ; les crochets sont de lui}
+
+\[
+\begin{aligned}
+  \operatorname{Ext}^{\bullet}_{Z' \cap U' = T'}(X'; F'; G')
+  &= H^{\bullet}\, \struck{\ill{}}\; \underline{\operatorname{Hom}}_{Z' \cap U'\,
+  T'}(F'; C(G'))\\
+  &= H^{\bullet}\, \struck{\ill{}}\; \underline{\operatorname{Hom}}_{Z \cap U\,
+  T}(F, p_{U*} C(G'))\\
+  &= H^{\bullet}\, \underline{\operatorname{Hom}}_{Z \cap U\, T}(F,
+  C(p_{U*} G'))\\
+  &= \operatorname{Ext}^{\bullet}_{Z \cap U\, T}\Bigl(F, \coprod_{n \in
+  \mathbf{Z}} G(n)\Bigr)
+\end{aligned}
+\]
+\marginal{$G$ q.-coh.}
+\marginal{$G$ q.-coh., $F$ de type fini}
+\note{les deux marginales sont reliées par des accolades aux deux dernières
+égalités ; les indices « $Z' \cap U'$ » et « $Z \cap U$ » sont soulignés par
+une accolade horizontale qui les renomme $T'$ et $T$ ; deux passages de la
+première et de la deuxième ligne sont biffés en hachures serrées et ne se
+lisent pas}
+
+À gauche, en regard :
+\[
+  T = U \cap Z \ \text{(loc. fermé dans $X$)}, \qquad T' = U' \cap Z',
+\]
+\[
+  p : X' \longrightarrow X, \qquad p_U : U' \longrightarrow U.
+\]
+
+Encadré :
+\[
+  \operatorname{Ext}^i_{\struck{\ill{}}\,T',\, \mathcal{O}_{X'}}(X'; F', G')
+  \simeq \coprod_{n \in \mathbf{Z}} \operatorname{Ext}^i_{T\,
+  \struck{\ill{}}}(F, G(n)).
+\]
+\note{l'indice de gauche est surchargé ; « $\mathcal{O}_{X'}$ » est écrit
+dessous d'une encre plus claire}
+
+\page{3}
+Localisons sur $Y$, \ill{} \ill{}.
+\[
+  \underline{\operatorname{Ext}}^{\bullet}_{\overline{T'}\,
+  \struck{\ill{}},\, \mathcal{O}_{\overline{X'}}}(\overline{X'}/Y;
+  \overline{F'}, \overline{G'}) \simeq \coprod_{n \in \mathbf{Z}}
+  \underline{\operatorname{Ext}}^{i}_{\struck{\ill{}},\, \mathcal{O}_U}(X/Y;
+  F, G(n))
+\]
+\note{les indices sont en partie biffés ; au second membre on lit
+« $\struck{X}\,X/Y$ » ; une accolade isolée, en dessous, porte
+« $\underline{\operatorname{Ext}}_{Z' \cap U'}$ »}
+
+\marginal{N.B. \ill{} \ill{} \ill{}\,…}
+\note{note cerclée dans la marge gauche, écrite en biais, que nous ne lisons
+pas au-delà de « N.B. » ; au-dessous, un croquis du cône : la droite
+$\overline{Z'}$, le cône $\overline{X'}$ et, cerclé, le sommet au-dessus
+de $y$}
+
+\struck{D'autre part, on aura \ill{} $W$ \ill{} pour simplifier $W = X$, donc
+$U' = X'$, $\overline{U'} = \overline{X'}$.}
+\struck{$\operatorname{Ext}^{\bullet}_{Z', \mathcal{O}_{X'}}(X'; F', G')
+\Leftarrow H^p(X', \underline{\operatorname{Ext}}^q_{Z'}(F', G'))$}
+\note{ces deux lignes sont barrées de traits obliques ; la dernière porte une
+flèche de suite spectrale}
+
+\[
+  \operatorname{Ext}^{\bullet}_{\overline{T'}}(\overline{X'}; \overline{F'},
+  \overline{G'})
+  \ \Big\uparrow\
+  \operatorname{Ext}^{\bullet}_{\widehat{T'}}(\widehat{X'}; \widehat{F'},
+  \widehat{G'})
+\]
+\note{la flèche verticale va du second vers le premier ; à gauche, deux
+croquis : la droite $\overline{Z'}$ coupant $\overline{X'} - \overline{U'}$
+en un point marqué, puis $\overline{Z'}$ privé d'un point}
+
+\[
+  H^p\bigl(\overline{Z'} - \overline{R'},\ \underline{\operatorname{Ext}}^q_{\overline{Z'}}
+  (\overline{F'}, \overline{G'})\bigr)
+\]
+\marginal{\uncertain{Justifier} \ill{} \ill{} \ill{} \uncertain{compatibilité}
+\ill{} \uncertain{extension} \ill{} \ill{}\,…}
+\note{note cerclée, rattachée par un crochet à « $\overline{Z'} -
+\overline{R'}$ »}
+
+\[
+  H^p(\overline{Z'} - \overline{R'}, \overline{E})
+  \overset{(2)}{\longleftrightarrow}
+  H^p(\widehat{Z'} - \widehat{R'}, \widehat{E})
+\]
+\marginal{bij.-bij. \uncertain{par localisation}}
+\note{à gauche, deux croquis de plans : l'un traversé par une droite épaisse
+portant un point, l'autre marqué d'un seul point}
+
+Le \uncertain{lemme} des \uncertain{cinq} \ill{} \ill{}
+$H^p_{\overline{Z'}}(\overline{R'}, \overline{E})$, \ill{} \ill{}
+\uncertain{donnera} \ill{} \ill{} $H^p_{\overline{Z'}}(\overline{X'},
+\overline{E})$.
+
+\struck{Mais ceci} $\longrightarrow$ [Dégageons un \emph{lemme} \ill{} les
+données de base \uncertain{plutôt} \ill{} \ill{} \ill{}
+$\underline{\operatorname{Ext}}^{\bullet}_T(X, F, G)$.]
+\note{ce crochet est écrit à droite, au bas du feuillet, et ne se lit qu'en
+partie}
+
+\page{4}
+\[
+\begin{aligned}
+  \operatorname{Ext}^{\bullet}_{T, \mathcal{O}_X}(X, F, G(n))
+  &\Longleftarrow H^p\bigl(U, \underline{\operatorname{Ext}}^q_{T,
+  \mathcal{O}_U}(F, G(n))\bigr)\\
+  \operatorname{Ext}_{T', \mathcal{O}_{X'}}(\overline{X'}; \overline{F'},
+  \overline{G'})
+  &\Longleftarrow H^p\bigl(U', \underline{\operatorname{Ext}}_{T',
+  \mathcal{O}_{U'}}(\overline{F'}, \overline{G'})\bigr)
+\end{aligned}
+\]
+\note{les deux lignes sont reliées, terme à terme, par des signes « $=$ »
+verticaux}
+
+[\uncertain{Compatibles} \ill{} \uncertain{formations} des
+$\underline{\operatorname{Ext}}^q_{T}(F, G)$ et
+$\underline{\operatorname{Ext}}^q_{T'}(F', G')$]
+\note{l'indice du premier $\underline{\operatorname{Ext}}$ est surchargé
+d'une tache}
+
+\[
+\begin{aligned}
+  \operatorname{Ext}^{\bullet}_{T, \mathcal{O}_X}(X; F, G(n))
+  &\Longleftarrow H^p_T\bigl(\struck{X}\, X,
+  \underline{\operatorname{Ext}}^q(F, G)(n)\bigr)\\
+  \operatorname{Ext}_{T', \mathcal{O}_{X'}}(\overline{X'}, \overline{F'},
+  \overline{G'})
+  &\Longleftarrow H^p_{T'}\bigl(\overline{X'},
+  \underline{\operatorname{Ext}}^q(F', G')(n)\bigr)
+\end{aligned}
+\]
+\note{sous le premier membre de la première ligne, un signe « $\vee$ » ;
+sous le second, un « $=$ » vertical}
+
+\marginal{N.B. les deux \uncertain{suites spectrales} \ill{} \ill{} \ill{}
+\uncertain{restrictions} \ill{} \ill{} \ill{} \uncertain{graduées}}
+\note{note de la marge gauche, écrite en biais, reliée par deux accolades aux
+deux paires de suites spectrales}
+
+\uncertain{Cas particuliers} lorsque $F = \mathcal{O}_X$\,…
+\note{le feuillet s'arrête sur ces points de suspension}
+
+\section{Dualité locale pour Modules non quasi cohérents}
+\note{titre de sa main, en haut à droite du feuillet 5, une chemise de papier
+bistre par ailleurs vierge, qui ne reçoit pas de numéro de page ; « non quasi
+cohérents » est souligné}
+
+\page{6}
+\textbf{Proposition 1.} Soit $A$ un anneau \uncertain{adique} noethérien.
+\ill{} \uncertain{supposé} \uncertain{séparé} \uncertain{complet}, $M$,
+\struck{$N$} $N$ deux $A$-modules de type fini, et $\mathfrak{X} =
+\operatorname{Spf} A$, $\mathcal{M}$, $\mathcal{N}$ les Modules cohérents sur
+$\mathfrak{X}$ définis par $M$, $N$. Alors on a des isomorphismes canoniques
+\[
+  \operatorname{Ext}^i(\mathfrak{X}; \mathcal{M}, \mathcal{N}) \simeq
+  \operatorname{Ext}^i_A(M, N).
+\]
+\note{écriture rapide ; la fin de la première ligne est d'une lecture très
+incertaine}
+
+\textbf{Corollaire 2.} On a
+\[
+  \underline{\operatorname{Ext}}^i(\mathcal{M}, \mathcal{N}) \simeq
+  \operatorname{Ext}^i_A(M, N)^{\Delta}\,\struck{\ill{}}.
+\]
+
+[En effet, on sait que les $\underline{\operatorname{Ext}}^i(\mathcal{M},
+\mathcal{N})$ sont cohérents, donc \ill{} \uncertain{par} la nullité \ill{}
+\ill{} de la suite spectrale \ill{} \ill{} cohérents sur $\mathfrak{X}$,
+\ill{} \ill{}
+\[
+  \operatorname{Ext}^i_{\mathfrak{X}}(\mathcal{M}, \mathcal{N}) \simeq
+  H^0\bigl(\mathfrak{X}, \underline{\operatorname{Ext}}^i(\mathcal{M},
+  \mathcal{N})\bigr)
+\]
+\struck{et comme $\operatorname{Ext}^i(\mathfrak{X}, \mathcal{M}, \mathcal{N})
+\simeq \operatorname{Ext}^i_A(M, N)$, \ill{} \ill{}}
+d'où
+\[
+  H^0\bigl(\mathfrak{X}, \underline{\operatorname{Ext}}^i(\mathcal{M},
+  \mathcal{N})\bigr) \simeq \operatorname{Ext}^i_A(M, N) \quad \text{pour
+  tout } i,
+\]
+d'où le cor.~2 comme $\underline{\operatorname{Ext}}^i(\mathcal{M},
+\mathcal{N})$ est \uncertain{cohérent}.]
+\note{ce crochet est une démonstration de la proposition 1 par le corollaire,
+qu'il reprend ensuite dans l'autre sens}
+
+Il suffit en effet de prendre une résolution \struck{finie} de $M$ par des
+modules libres de type fini \uncertain{pour} \uncertain{démontrer} le
+résultat. \uncertain{Autre} procédé : comme $\mathfrak{X} \to X =
+\operatorname{Spec} A$ est plat, les foncteurs \ill{} \uncertain{commutent} à
+la formation des $\underline{\operatorname{Ext}}^i$, d'où
+\[
+  \underline{\operatorname{Ext}}^i_{\mathcal{O}_{\mathfrak{X}}}(\mathcal{M},
+  \mathcal{N}) \simeq
+  \underline{\operatorname{Ext}}^i_{\mathcal{O}_X}(\widetilde{M},
+  \widetilde{N})^{\wedge} \quad \text{\ill{}}\ \
+  \underline{\operatorname{Ext}}^i(\widetilde{M}, \widetilde{N})
+  = \operatorname{Ext}^i_A(M, N)^{\sim} \ \ (\text{\uncertain{cq}}),
+\]
+d'où
+\[
+  \underline{\operatorname{Ext}}^i_{\mathcal{O}_{\mathfrak{X}}}(\mathcal{M},
+  \mathcal{N}) \simeq \operatorname{Ext}^i_A(M, N)^{\Delta}
+\]
+(c'est le cor.~2) et en prenant les sections, on trouve à nouveau la
+prop.~1.
+
+\page{7}
+Soit \struck{\ill{}} $\mathfrak{X}$ un préschéma formel localement noethérien,
+$Y$ une partie fermée de $\mathfrak{X}$, $\mathcal{F}$, $\mathcal{G}$ deux
+Modules \ill{} \uncertain{cohérents} sur $\mathfrak{X}$, \ill{} \ill{}
+\ill{} \ill{}
+\[
+  \operatorname{Ext}^i_Y(\mathfrak{X}; \mathcal{F}, \mathcal{G})
+  \Longleftarrow H^p_Y\bigl(\mathfrak{X},
+  \underline{\operatorname{Ext}}^q(\mathcal{F}, \mathcal{G})\bigr),
+\]
+en particulier \ill{} \ill{} \ill{}, \ill{} \ill{} \ill{} lesquels il
+\uncertain{faut} \uncertain{préciser} \ill{} \ill{} \ill{} limite projective
+\[
+  \varprojlim_n \operatorname{Ext}^i_Y(\mathfrak{X}, \mathcal{F},
+  \mathcal{G}_n).
+\]
+Notons d'ailleurs que $\operatorname{Ext}^{*}_Y(\mathfrak{X}, \mathcal{F},
+\mathcal{G}_n)$
+\note{la phrase s'arrête là ; le reste du feuillet est blanc}
+
+\page{8}
+\note{notes éparses à l'encre noire, sur le verso d'un tapuscrit
+sans rapport}
+\struck{$E(\mathcal{U},$} \quad \struck{$H^i$}
+\[
+\left\{
+\begin{aligned}
+  \underline{E}_{U/k}(G, {}_{\infty}\mu) &\simeq \underline{E}_k(N^i_{U/k}\,G,
+  \mathbf{Q}/\mathbf{Z})\\
+  \underline{E}_{S/k}(G, {}_{\infty}\mu) &\simeq
+  \underline{E}_k(N^i_{Y/k}(G), \mathbf{Q}/\mathbf{Z})\\
+  \underline{E}_{Y/k}(G, {}_{\infty}\mu) &\simeq E_k(N^i_{S/k}(G),
+  \mathbf{Q}/\mathbf{Z}).
+\end{aligned}
+\right.
+\]
+\note{les indices $Y/k$ et $S/k$ des deux dernières lignes se croisent
+ainsi sur la page ; nous les laissons tels quels}
+
+\struck{$\operatorname{Ext}^{*}_K(G, K)$}
+
+$Y \subset S$
+\[
+\begin{array}{ccc}
+  0 & & \\
+  \downarrow & & \\
+  H^0_Y(M) & \text{---} & \operatorname{Ext}^1_Y(S; M, A)\\
+  \downarrow & & \uparrow\\
+  H^0(S, M) & \text{---} & \operatorname{Ext}^i_Y(S; M, A)\\
+  \downarrow & & \\
+  H^0(U, M) & &
+\end{array}
+\]
+\note{deux colonnes accouplées terme à terme par des tirets ; l'exposant
+« $1$ » de la première ligne de droite est surchargé}
+
+$k \leftarrow V \rightarrow K$
+
+\[
+\begin{array}{ccccc}
+  0 & & & & \\
+  \downarrow & & & & \\
+  H^0(M) & \times & \operatorname{Ext}^{\ill{}}(M, A) & \longrightarrow &
+  I\\
+  \downarrow & & \uparrow & & \\
+  M & \times & \operatorname{Ext}^{\ill{}}(M, A) & \longrightarrow & I\\
+  \downarrow & & \uparrow & & \\
+  M \otimes K & \times & \operatorname{Hom}(M_K, K) & \longrightarrow & I\\
+  \downarrow & & \uparrow & & \\
+  H^1(M) & \times & \operatorname{Ext}^0(M, A) & \longrightarrow & I\\
+  \downarrow & & \uparrow & & \\
+  0 & & 0 & &
+\end{array}
+\]
+\note{à droite de la troisième ligne : « \uncertain{Hom}$(K, I) \simeq K$ »
+; sous le tableau, isolé, « $\operatorname{Ext}^i$ » ; les exposants des
+deux premiers $\operatorname{Ext}$ ne se lisent pas, et le « $M \otimes K$ »
+est surchargé}
+
+\[
+  \operatorname{Ext}_Y(M, A) \simeq \operatorname{Hom}(H^i_Y(X, M), I)
+\]
+
+\page{10}
+\textbf{\emph{Dualité locale.}} $A$ anneau local noethérien \emph{complet}
+\emph{régulier} de dimension $n$, $X = \operatorname{Spec} A$, $x$ son point
+fermé, $F$ Module variable sur $X$ (\emph{pas nécessairement
+quasi-cohérent}\,!)
+\[
+  H^i_x(F) \times \operatorname{Ext}^{n-i}(X; F, \mathcal{O}_X)
+  \longrightarrow H^n_x(\mathcal{O}_X) = I \qquad (I \text{ module
+  \uncertain{dualisant}})
+\]
+d'où
+\[
+  \boxed{\operatorname{Ext}^{n-i}(X; F, \mathcal{O}_X) \longrightarrow
+  \operatorname{Hom}(H^i_x(F), I)}
+\]
+Je dis que ce sont des \emph{isomorphismes} pour \emph{tout $i$}, \emph{à
+\uncertain{priori}} \ill{} \emph{\uncertain{chaque} pris} \ill{}.
+\note{« pas nécessairement quasi-cohérent » est doublement souligné ; la fin
+de la phrase « Je dis que » est écrite sur deux lignes et soulignée par
+morceaux}
+
+On est ramené : la question \ill{} \ill{} pour un faisceau $F$ de la forme
+$\mathcal{O}_{U,X} = i_!(\mathcal{O}_U)$, où $U$ est un ouvert \ill{} \ill{}
+de $X$ (\uncertain{voire} \ill{} de la forme $X_f$) et $i : U \to X$.
+L'isomorphisme \ill{} \uncertain{canonique} \ill{} \ill{} alors
+\[
+  \operatorname{Ext}^{n-i}(U; \mathcal{O}_X, \mathcal{O}_X)
+  \xrightarrow{\ \sim\ } \operatorname{Hom}(H^i_x(\mathcal{O}_{U,X}), I),
+\]
+i.e.
+\[
+\left\{
+\begin{aligned}
+  &H^i_x(\mathcal{O}_{U,X}) = 0 \quad \text{si } i \neq n,\\
+  &D\bigl(H^n_x(\mathcal{O}_{U,X})\bigr) \simeq \struck{\operatorname{Hom}}\,
+  \Gamma(U, \mathcal{O}_X) = A_f.
+\end{aligned}
+\right.
+\]
+\struck{\ill{}} On a \ill{} si $U = X$, \ill{} \ill{}, \uncertain{Reste} $U
+\neq X$, \ill{}.
+
+\struck{$H^0_x$}
+
+1) $n = 0$ \ill{} obtient une Tautologie.
+
+2) $n = 1$, il suffit de prendre $U =$ \uncertain{ouvert} \uncertain{principal},
+et le faisceau \uncertain{devient}, puisque $H^0_x(\mathcal{O}_{U,X}) = 0$,
+$H^1_x(\mathcal{O}_{U,X}) = K$,
+\[
+  \operatorname{Hom}(K, K/A) \simeq K
+\]
+(autodualité bien \uncertain{connue}\,!). Notons que \struck{pour} la
+catégorie des $\mathcal{O}_X$-Modules est \uncertain{équivalente} à la
+catégorie des triplets $(M_0, M_1, u)$, où $M_0$ est un $A$-module, $M_1$ un
+$K$-module [resp.\ $F_x$ et $F_{x'}$, où $x'$ est le point générique] et
+\[
+  u : M_0 \longrightarrow M_1
+\]
+un $(A \to K)$-homomorphisme. On aura
+\[
+  H^0_x(F) = \operatorname{Ker} u, \quad H^1_x(F) = \operatorname{Coker} u
+  \qquad [H^0(X, F) \simeq M_0,\ H^i(X, F) = 0 \ i \neq 0]
+\]
+\note{sous le crochet, une ligne biffée qui ne se lit pas}
+
+\page{11}
+D'autre part, on a une résolution injective \uncertain{globale} de
+$\mathcal{O}_X$ \uncertain{par}
+\[
+  \mathcal{O}_X \longrightarrow \underbrace{\underline{K}_X \longrightarrow
+  \underline{K}_X/\mathcal{O}_X \longrightarrow 0 \longrightarrow 0
+  \longrightarrow \cdots}_{K^{\bullet}}
+\]
+d'où
+\[
+  \operatorname{Ext}^{*}(X; F, \mathcal{O}_X) \simeq H^{*}\bigl(0
+  \longrightarrow \underset{0}{\operatorname{Hom}(M_1, K)} \longrightarrow
+  \underset{1}{\operatorname{Hom}(M_0, K/A)} \longrightarrow 0 \cdots\bigr)
+\]
+i.e.\ nuls en \uncertain{dimension} $\neq 0, 1$ et
+\[
+\begin{aligned}
+  \operatorname{Ext}^0(X; F, \mathcal{O}_X) &\simeq
+  \operatorname{Ker}\bigl(\operatorname{Hom}(M_1, K) \to
+  \operatorname{Hom}(M_0, K/A)\bigr)\\
+  \operatorname{Ext}^1(X; F, \mathcal{O}_X) &\simeq
+  \operatorname{Coker}(\quad \text{id} \quad)
+\end{aligned}
+\]
+Dans le \uncertain{cas} \ill{} les \uncertain{homomorphismes} dualité
+deviennent
+\[
+\begin{aligned}
+  E^0 &\overset{\varphi^0}{\longrightarrow}
+  \operatorname{Hom}(\operatorname{Coker} u, K/A)\\
+  E^1 &\overset{\varphi^1}{\longrightarrow}
+  \operatorname{Hom}(\operatorname{Ker} u, K/A)
+\end{aligned}
+\]
+\uncertain{Faisons} \uncertain{usage} des faits suivants :
+
+a) Tout homomorphisme $M_1 \to A$ est nul (l'image étant un sous-module
+\uncertain{qui est} $K$-\uncertain{module} de $A$) \uncertain{donc}
+$\varphi^0$ injectif.
+
+b) Tout homomorphisme $M_1 \to K/A$ se relève en $M_1 \to K$, i.e.\
+$\operatorname{Ext}^1_A(M_1, A) = 0$, \uncertain{ou} \uncertain{aussi}
+$\underline{\operatorname{Ext}^1_A(K, A) = 0}$ [\uncertain{Pour} le
+\uncertain{voir}, \uncertain{utilisons} la résolution injective $A \to$ \ill{}
+$A$ \ill{} $\to K \to K/A \to 0$, \ill{} \ill{} \uncertain{exacte}
+\[
+  0 \longrightarrow \underset{\substack{\wr\\ K}}{\operatorname{Hom}_A(K,
+  K)} \longrightarrow \operatorname{Hom}(K, K/A) \longrightarrow 0,
+\]
+\uncertain{qui} \ill{} \uncertain{utilise} \uncertain{l'autodualité} de
+$K$ \ill{}]. \uncertain{Donc}
+\note{au-dessus de « $K$ », en fin de crochet, une insertion
+« $\widehat{K} = K$ » ; sous « autodualité », une remarque entre parenthèses,
+« \uncertain{on} \ill{} \uncertain{fait} \uncertain{que} $A$
+\uncertain{complet} », rattachée par un trait}
+
+$\varphi^0$ surjectif.
+
+c) $K/A$ \uncertain{est} injectif, \uncertain{donc} tout homomorphisme
+$\operatorname{Ker} u \to K/A$ \uncertain{s'étend} : $M_0 \to K/A$, donc
+$\varphi^1$ est surjectif, et tout homomorphisme de $M_0/\operatorname{Ker} u
+\subset M_1$ dans $K/A$ \uncertain{s'étend} \ill{} \ill{} $M_1 \to K/A$,
+\uncertain{qui} \ill{} \uncertain{vient} \uncertain{donc} \uncertain{d'un}
+\ill{} $M_1 \to K$, donc $\varphi^1$ est injectif.
+\note{la fin de c) ne se lit qu'en partie ; l'ordre des deux conclusions
+« surjectif » et « injectif » pour $\varphi^1$ est celui du feuillet}
+
+\page{12}
+\note{feuillet de brouillon, notes éparses à l'encre sur le verso d'un
+tapuscrit sans rapport ; nous les donnons dans l'ordre où elles se
+présentent, de haut en bas}
+
+$\Phi_x$ \quad $\mathcal{O}_y$ \quad $\mathcal{O}_{X,u}$ \quad $K$
+\[
+  \operatorname{Ext}^i(K, A) = 0 \qquad \operatorname{Ext}^i(K, A)
+\]
+$H^0_x$ \quad $H^1_x$
+\note{ces premières notes sont isolées par un trait horizontal et un filet
+vertical qui les encadrent}
+
+\uncertain{résolution} de $A$
+\[
+  0 \longrightarrow K \longrightarrow \coprod_{p} K/A_p \longrightarrow I
+  \longrightarrow 0
+\]
+\[
+  0 \longrightarrow K \longrightarrow \prod_{p}{}^{\wedge}\, \widehat{K}_p
+  \longrightarrow \operatorname{Hom}(K, I) \longrightarrow 0
+\]
+\note{une accolade au-dessus de la première suite la désigne comme la
+résolution de $A$ ; sous « $\prod^{\wedge} \widehat{K}_p$ », entre
+guillemets, « produit restreint », puis « i.e.\ \uncertain{adèles} », doublement
+souligné ; sous « $\operatorname{Hom}(K, I)$ », un « $=$ » vertical et
+« $\varinjlim_{f \in A - 0} f I$ »}
+
+\[
+  \operatorname{Ext}^i_A(K, A) \qquad \operatorname{Ext}^i(A,\ \ )
+  \qquad \operatorname{Hom}(K, A) = 0
+\]
+\struck{$\operatorname{Ext}^i$} \quad \struck{$\operatorname{Ext}^i$}
+\[
+  \operatorname{Ext}^1(K, A) \qquad 0 \longrightarrow A \longrightarrow E
+  \longrightarrow K \longrightarrow 0
+\]
+\[
+  0 \longrightarrow A \longrightarrow K \longrightarrow \coprod
+  \qquad \operatorname{Hom}(K, A/\mathfrak{m}^n)
+\]
+\[
+  \operatorname{Ext}^1(K,\ \ ) \qquad \operatorname{Ext}^i \qquad
+  \operatorname{Ext}^1(\underline{K}, A^{(I)})
+\]
+
+\[
+\begin{array}{ccc}
+  K & \longrightarrow & \prod \widehat{K}_p\\
+  \uparrow & & \uparrow\\
+  A & \longrightarrow & \prod \widehat{A}_p
+\end{array}
+\qquad
+\left|
+\begin{array}{ll}
+  0 & \text{Classes d'idèles}\\[4pt]
+  1 & \text{Classes d'\uncertain{idéaux}}
+\end{array}
+\right.
+\]
+\note{sous chacun des deux produits, un indice abrégé que nous ne lisons
+pas ; plus bas, isolé, un « $A$ » souligné}
+
+\page{14}
+$n = 2$) \quad $U = X_f$, $f \in \mathfrak{m}_A$, $f \neq 0$, \quad $F =
+\mathcal{O}_{X,U}$. Soit $X' = X - x$, \struck{$X$} $Y = V(f)$, $Y' = Y \cap
+X'$, $x$ : le point fermé, en \uncertain{conséquence} de $Y$, \ill{}.
+\note{« $Y' = Y \cap X'$ » est ajouté en haut à droite, sous un
+« $F = \ill{}\,X'$ » biffé}
+\[
+  H^0_x(F),\ H^1_x(F) = \operatorname{Ker} \text{ et } \operatorname{Coker}
+  \text{ de } \underset{\substack{\|\\ 0}}{H^0(X, F)} \longrightarrow
+  \underset{\substack{\|\\ 0}}{H^0(X', F)} \quad \text{\uncertain{nuls}}.
+\]
+$H^i_x(F) = 0$ pour $i > 2$ pour \uncertain{raison} de dimension
+\uncertain{cohomologique}.
+
+\uncertain{Reste} : calculer $H^2_x(F)$ et comparer à son dual : $A_f =
+H^0(U, \mathcal{O}_U)$.
+
+\uncertain{Comme} \struck{\ill{} \ill{}} pour $H^i(X, F) = 0$ pour \struck{$H$}
+$i \neq 0$, $\underline{\forall F}$,
+\[
+  H^2_x(F) \simeq H^1(X', F).
+\]
+Soit \struck{$\mathcal{O}_Y$ $F$} $i : Y' \to X'$ l'injection, et $G =
+i^{*}\mathcal{O}_X$, \ill{}, \ill{} \uncertain{suite} exacte
+\[
+  0 \longrightarrow F \longrightarrow \mathcal{O}_{X'} \longrightarrow G
+  \longrightarrow 0,
+\]
+\uncertain{et} \uncertain{cohomologie} \ill{} $Y'$, l'ensemble
+\uncertain{fini} \emph{discret} $Y'$. D'où la suite
+\uncertain{exacte} \uncertain{longue}
+\[
+  0 \to \underset{\substack{\|\\ A}}{H^0(X', \mathcal{O}_{X'})}
+  \xrightarrow{\alpha^0}
+  \underset{\substack{\|\\ \prod \mathcal{O}_{x_i}\\ \|\\ \varinjlim_g A
+  g^{-1}}}{H^0(Y'; G)}
+  \xrightarrow{\partial}
+  \underset{\substack{\|\\ H^2_x(F)}}{H^1(X'; F)}
+  \xrightarrow{\alpha^1}
+  \underset{\substack{\|\\ I}}{H^1(X'; \mathcal{O}_{X'})} \to 0
+\]
+\marginal{$g$ \uncertain{variant} \uncertain{dans} \ill{} $x_i$, i.e.\ \ill{}
+\ill{} $f$, i.e.\ $(f, g)$ \uncertain{engendrant} \uncertain{un} idéal primaire
+pour $\mathfrak{m}$}
+\note{la marginale est écrite à gauche, en regard de la limite inductive
+sur $g$}
+
+Prenant les \uncertain{duaux} : \ill{} \uncertain{dans} $I$, \ill{}
+\uncertain{trouve}
+
+\begin{tikzcd}[column sep=small]
+0 & I \arrow[l] & \varprojlim_g gI \arrow[l, "\alpha^{0*}"'] & D(H^2_x(F)) \arrow[l, "\partial^{*}"'] & A \arrow[l, "\alpha^{1*}"'] \arrow[dl, dashed] & 0 \arrow[l] \\
+ & & & A_f \arrow[u, "\varphi"] \arrow[ul, dashed, "d"] & &
+\end{tikzcd}
+
+\note{sous « $I$ », « $= 1 \cdot I$ » ; sous « $A_f$ », « $=
+\varinjlim_m A f^{-m}$ » ; la flèche pointillée de $A$ vers $A_f$ porte
+« en $A$-modules »}
+
+L'application $A_f \to \varprojlim_g gI$ s'explicite par
+\[
+  d_g : h \longmapsto [h]\bigl[\tfrac{1}{g}\bigr].
+\]
+Le noyau de $d_g$ est donc l'image de $A \to A_f$, donc \ill{}
+$\varphi$ \emph{est injection}. \uncertain{Le} \ill{} \ill{} l'image de
+$d$ est $\neq \operatorname{Ker} \alpha^{0*}$ ; $\varphi$ \emph{n'est pas
+surjective} ; la raison en est qu'il \uncertain{faut} prendre les \emph{duaux
+topologiques} et non seulement
+\note{« est injection » et « n'est pas surjective » sont soulignés, le
+second doublement ; la phrase continue au feuillet suivant}
+
+\page{15}
+algébriques, \ill{} \uncertain{mettant} \uncertain{sur} $H^0(Y'; G) =
+\struck{\ill{}} \prod_i \mathcal{O}_{x_i}$ la topologie \struck{produit
+\uncertain{des} topologies} naturelle \ill{} l'\uncertain{anneau}
+\uncertain{local}, [topologie \uncertain{fonctionnelle} \ill{}
+\uncertain{produit}], et \uncertain{dans} $H^1(X'; F)$ \uncertain{une}
+topologie \uncertain{quotient}, \uncertain{et} \uncertain{dans} \ill{}
+\uncertain{discrète} \ill{} \ill{} $I$ \uncertain{pour} la topologie
+\uncertain{quotient} \uncertain{sur} $\prod_i \mathcal{O}_{x_i}$ [N.B.\ $A$
+\ill{} \ill{} \ill{} \ill{} \ill{} \ill{} \uncertain{complétion} \ill{} \ill{}
+$\prod_i \mathcal{O}_{x_i}/A$ \ill{} \uncertain{séparé}].
+\note{une incise cerclée, au-dessus de la cinquième ligne, ne se lit pas ;
+tout le paragraphe est d'une écriture rapide}
+
+\uncertain{Question} : \uncertain{dualité}\,…
+
+\uncertain{Autres} \uncertain{questions} : $\operatorname{Ext}^i(K, A) = 0$
+pour $i\,$ [$A$ anneau local \uncertain{noethérien} \uncertain{intègre}
+complet, de \uncertain{corps} \uncertain{des fractions} $K$]
+\note{le reste du feuillet est blanc}
+
+\section{Notes antiques 1958 (Caractérisation des Cohen-Macaulay, des Gorenstein etc.)}
+\note{titre de sa main, en haut à droite du feuillet 16, une chemise de
+papier bistre par ailleurs vierge, qui ne reçoit pas de numéro de page ;
+« Coh.\ Mac. » est abrégé sur la chemise}
+
+\page{17}
+\note{un plan, sur un feuillet coupé ; une grande accolade au crayon, dans la
+marge gauche, embrasse les § 1 et 2}
+
+\textbf{§ 1. \emph{Les foncteurs} $H^i_{\mathfrak{C}}$}
+
+\begin{enumerate}
+  \item Sur les foncteurs $A$-linéaires (de modules et modules
+  \uncertain{topologiques}).
+  \item Définition des $H^i_{\mathfrak{C}}(M)$, premières propriétés.
+  \item Fonctorialité pour les $H^i_{\mathfrak{C}}(M)$ (y inclus
+  cup-produit).
+  \item Cas d'un anneau local $A$ [\struck{premières propriétés spéciales},
+  \emph{caractérisation} des $H^i$ ; relations avec la codim.\ coh.].
+  \item Rappels sur les Modules de Cohen-Macaulay.
+  \item Résultats auxiliaires sur certains $\operatorname{Ext}^i_A(N, M)$
+  [$M$ de C.-M., \ill{} supp.\ (\uncertain{par} $A$)].
+  \item Cas particuliers.
+\end{enumerate}
+\note{« (y inclus cup-produit) » est cerclé ; le crochet de l'article 4 est
+encadré, et une flèche le rattache à l'article 5, dont le numéro est
+surchargé, comme celui de l'article 7}
+
+\textbf{§ 2. \emph{Foncteurs et modules dualisants}} (théorie locale).
+\emph{Le th.\ de dualité locale}.
+
+\begin{enumerate}
+  \item Définition et premières propriétés des foncteurs et modules
+  dualisants.
+  \item Extension du foncteur dualisant.
+  \item Th.\ d'existence et unicité ; exemples.
+  \item \struck{La théorie de dualité locale} Structure des $H^i(M)$.
+  \item Module fondamental et \emph{th.\ de dualité locale}.
+  \item Anneaux de Gorenstein.
+\end{enumerate}
+
+\textbf{§ 3. \emph{Les Foncteurs} $H_i$, \emph{et les complexes
+dualisants}}
+
+\page{18}
+\struck{Remarque : \ill{} question de dualité, \ill{} \ill{} \ill{} la
+validité de (iii) \ill{} \ill{} \ill{}, \ill{} \ill{} signifie que \ill{}
+\ill{} $\dim A \leqslant \ill{}$\,\ill{}}
+\struck{\ill{} donne \ill{}} \quad Théorème 4
+\note{le début du feuillet est barré de longs traits obliques ; les mots
+« Théorème 4 », encadrés, renvoient à l'énoncé plus bas}
+
+\marginal{\uncertain{introduire} \ill{} \uncertain{définition} (iii)
+\uncertain{et} certaines propriétés \ill{} de foncteurs $M \to
+\operatorname{Hom}(M, \ill{})$}
+\note{marginale écrite en oblique dans la marge gauche, en regard de la
+définition, avec une flèche vers le « (ii) » ; lecture très incertaine}
+
+\textbf{\emph{Définition.}} Soit $A$ un anneau \struck{local} noethérien
+\uncertain{local} de dimension $n$. Un module $\Omega$ sur $A$ est dit un
+« module fondamental » si il satisfait les deux conditions \struck{\ill{}
+\ill{} \ill{}} suivantes :
+
+(i) $\Omega$ est de type fini ;
+
+(ii) \struck{\ill{}} $D(\Omega) \simeq H^n(A)$.
+
+Un tel $\Omega$ est unique à \uncertain{isomorphisme} près \struck{si}
+\uncertain{si} $\Omega = D(H^n(A))$ \struck{\ill{}} $=$ ($A$ étant local (ou
+semi-local)), mais que \ill{}. On le note $\Omega_A$. D'autre part si $A$
+est \uncertain{local} \emph{complet}, un tel $\Omega_A$ existe
+(\uncertain{on} prend $D(H^n(A))$). Il existe \uncertain{aussi} et
+\uncertain{équivalemment} si $A$ régulier : prendre $\Omega = A$\,!
+\note{« local » est ajouté au-dessus de « complet » ; « et
+équivalemment » est rattaché par une accolade à « si $A$ régulier »}
+
+\struck{L'existence de $\Omega$ \ill{}} \struck{\ill{} \ill{}}
+\struck{D'après le th.~3,} \struck{\ill{} \ill{} \ill{} \ill{} \ill{}}
+\struck{Proposition. Soit $A$ un \ill{}\,…}
+\struck{\ill{} $H^n(A) = \ill{}$}
+\note{un bloc de lignes biffées et encadrées, entre la définition et le
+théorème 4 ; une flèche le renvoie vers le haut}
+
+Si $A$ \uncertain{est} \uncertain{cohen-macaulay}, alors module
+\uncertain{fondamental} $=$ module dualisant.
+\note{ajout encadré à droite, souligné}
+
+\textbf{\emph{Théorème 4.}} Soit $A$ (\uncertain{local}) noethérien,
+\uncertain{de dimension} $n$, muni d'un \struck{module dualisant}
+\emph{\uncertain{fondamental}} $\Omega$. \uncertain{Le} \ill{} \ill{}
+\uncertain{homomorphisme}
+\[
+  H^n(\Omega) \simeq H^n(A) \otimes \Omega \xrightarrow{\ \eta\ } I
+\]
+[\uncertain{déduit} de \uncertain{un} isomorphisme $H^n(A) \Rightarrow
+D(\Omega)$], \uncertain{définit} \ill{} \uncertain{accouplement}
+\uncertain{\ill{}}, \uncertain{qui} \uncertain{est} \ill{} \ill{}
+$\Phi$\,\ill{} que \ill{} \uncertain{suite} \ill{}
+\note{« local » est cerclé et ajouté au-dessus de « $A$ » ; le bas du
+feuillet est d'une lecture de plus en plus incertaine}
+
+\page{19}
+\note{le feuillet entier est barré de deux longs traits obliques ; il se lit
+néanmoins en grande partie}
+
+\textbf{Complément au th.~3.} Si $A$ est de dimension $n$, [le foncteur $M
+\mapsto H^n(M)$ \uncertain{est} exact à droite, et \struck{\ill{}}
+\uncertain{il} \uncertain{commute} \ill{}
+\[
+  H^n(M) \xleftarrow{\ \sim\ } H^n(A) \otimes \underline{M}\,]
+\]
+\note{le crochet est de lui}
+
+\textbf{Corollaire 2.} \struck{Corollaire 2 : si $D(\Omega) \simeq H^n(A)$,
+\ill{} \ill{} \ill{}} \struck{\ill{} \ill{}}
+\uncertain{et} \uncertain{si} \uncertain{on} a $\operatorname{Ext}^i(k, M)
+\neq 0$, \uncertain{alors} \ill{} $\operatorname{Ext}^j(k, M) = 0$ pour $j >
+i$ \ill{}, $\operatorname{Ext}^q(k, M) \neq 0$ …
+\note{la ligne du corollaire, biffée d'un trait, porte au-dessus des
+reprises qui ne s'accordent pas ; à droite, biffé : « $H^n(\Omega) \simeq
+D(\operatorname{Hom}(\Omega, \Omega))$ »}
+
+Soit \uncertain{donc} $\Omega$ \uncertain{dualisant}, \uncertain{et}
+\[
+  H^n(\Omega) \simeq \struck{\ill{}}\, H^n(A) \otimes \Omega
+  \xrightarrow{\ \varphi\ } I
+\]
+\struck{\ill{} \ill{}} Je \uncertain{suppose} \ill{} \ill{} \ill{} \ill{}
+$\Omega \xrightarrow{\varphi_2} D(H^n(A))$
+\[
+  \ill{}\quad H^n(A) \xrightarrow{\varphi_1} D(\Omega).
+  \quad \uncertain{Un} \ill{} \ill{}
+\]
+\uncertain{Accouplements}
+\[
+  H^p(M) \times \operatorname{Ext}^{n-p}(M, \Omega) \longrightarrow
+  H^n(\Omega) \rightsquigarrow I
+\]
+d'où
+\[
+  H^p(M) \longrightarrow D(\operatorname{Ext}^{n-p}(M, \Omega))
+\]
+\uncertain{Explicitons} \ill{} \ill{} \uncertain{dimension} cohomologique
+\[
+  H^n(M) \simeq \struck{\ill{}}\, H^n(A) \otimes M \longrightarrow
+  D(\operatorname{Hom}(M, \Omega)) \simeq D(\Omega) \otimes M
+\]
+\struck{\ill{} \ill{}} \uncertain{précisément} : $\varphi_1 \otimes
+\operatorname{id}_M$ ; \uncertain{pour} \uncertain{que} \ill{}
+\uncertain{isomorphisme} pour \uncertain{tout} $M$, il \uncertain{faut}
+\uncertain{et} \uncertain{il suffit} \ill{} \uncertain{soit} \ill{}
+\uncertain{isomorphisme}. \uncertain{Considérons} le \ill{} $M = \Omega$,
+\ill{} \uncertain{donne}
+\[
+  \struck{H^n(\Omega) \ill{}(A)}
+\]
+\[
+  H^n(\Omega) \times \widehat{\operatorname{Hom}(\Omega, \Omega)}
+  \longrightarrow H^n(\Omega) \longrightarrow I
+\]
+d'où
+\[
+  \operatorname{Hom}(\Omega, \Omega) \xrightarrow{\ \sim\ } D(H^n(\Omega))
+\]
+\uncertain{transformant} l'identité en $\varphi$. \uncertain{On}
+\uncertain{dira} \struck{\ill{} \ill{} \ill{} \ill{} \ill{} :}
+
+\struck{(i) $H^n(\Omega)$ \ill{} dualisant \ill{}}
+
+\struck{(ii) $\operatorname{Hom}(\Omega, \Omega) \simeq A$} \quad (iii)
+\marginal{\uncertain{utiles} \uncertain{tous} ?}
+\note{la marginale, dans la marge gauche, porte un trait vertical qui
+embrasse le bas du feuillet ; le « (iii) » final est relié par un trait
+sinueux aux lignes biffées (i) et (ii)}
+
+\page{20}
+\uncertain{isomorphisme} pour les \uncertain{dimensions} $p \geqslant k$
+($k$ \uncertain{entier} \uncertain{donné} $\leqslant n$), il faut et il
+suffit \uncertain{qu'on} \uncertain{ait}
+\[
+  H^i(A) = 0 \quad \text{pour } k \leqslant i < n.
+\]
+\note{ce premier alinéa, qui continue le feuillet précédent, est marqué
+d'un trait vertical dans la marge}
+
+\textbf{\emph{Corollaire 1.}} \uncertain{Pour} que \ill{} \ill{} \uncertain{soit}
+\uncertain{un} \uncertain{isomorphisme} pour \struck{\ill{}} \uncertain{tout}
+$p$, il \uncertain{faut} et il suffit que \uncertain{les}
+\uncertain{composantes} \uncertain{de} $A$ \uncertain{soient}
+\struck{\ill{}} \uncertain{anneaux} de Coh.\ Mac.\ de dimension $n$.
+\note{« Composantes » est ajouté au-dessus de la ligne ; un mot biffé et
+souligné d'une ondulation précède « anneaux »}
+
+\struck{\ill{}} \textbf{\emph{Corollaire 2}} \struck{Proposition~2}. Soit $A$
+\uncertain{un} anneau \uncertain{local} de Coh.\ Mac., $\Omega$ un module
+\struck{dualisant} \uncertain{fondamental} \ill{} \uncertain{sur} $A$.
+\uncertain{Alors} \ill{} :
+\[
+\left\{
+\begin{aligned}
+  &\operatorname{Ext}^i(k, \Omega) = 0 \quad \text{si } i \neq n\\
+  &\operatorname{Ext}^n(k, \Omega) \simeq k
+\end{aligned}
+\right.
+\]
+\note{« Corollaire 2 » est écrit au-dessus de « Proposition 2 », biffé ;
+« loc. » est ajouté au-dessus de la ligne, « fond. » au-dessus de
+« dualisant », biffé}
+
+\uncertain{En} \uncertain{effet}, $\operatorname{Ext}^i(k, \Omega)$ est
+\uncertain{dual} de $H^{n-i}(k)$, \uncertain{qui} est \uncertain{nul} si
+$n - i \neq 0$, et \uncertain{qui} est $\simeq \underline{k}$ si $n - i =
+0$.
+\note{une accolade dans la marge embrasse ces deux lignes}
+
+\uncertain{En} \uncertain{particulier}
+
+\textbf{\emph{Corollaire 3.}} $A$, $\Omega$ \uncertain{comme} \ill{}
+\uncertain{ci-dessus}. \uncertain{Alors} $\Omega$ est un module de
+Coh.\ Mac.\ (\uncertain{sur} $A$, \uncertain{de} \uncertain{dimension}
+$n$), \uncertain{et} \ill{} :
+\[
+\left\{
+\begin{aligned}
+  &H^i(\Omega_{\ill{}}) = 0 \quad \text{si } i \neq n\\
+  &H^n(\Omega_{\ill{}}) \text{ \uncertain{est} \uncertain{dualisant}}
+\end{aligned}
+\right.
+\]
+De plus, \struck{$\Omega_A$ \uncertain{est} \ill{} \ill{} fidèle}
+\[
+\left\{
+\begin{aligned}
+  &\operatorname{Ext}^i(\Omega, \Omega) = 0 \quad \text{si } i \neq 0\\
+  &\struck{\operatorname{Ext}}\ \operatorname{Hom}(\Omega, \Omega) \simeq A
+\end{aligned}
+\right.
+\]
+\note{l'indice de $\Omega$ dans les deux lignes de la première accolade est
+surchargé : peut-être un astérisque, peut-être un « $A$ »}
+
+\end{document}
