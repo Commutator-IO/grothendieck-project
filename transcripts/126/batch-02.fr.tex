@@ -1,0 +1,612 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 126, batch 2 (pages 21-34).
+% Established from the facsimile archives/batches/126/batch-02.pdf, prepared from
+% a copy of 126.pdf supplied by the user (PDF page k = archivists' page 20+k,
+% no cover sheet), per the skill transcribe-grothendieck. The folder is
+% thirty-four pages; this is the second and last batch (pages 1-20 are batch 1,
+% transcribed separately and in parallel, so the notation below was fixed from
+% these pages alone).
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-09-24 — first pass, unchecked against the pages by a human.
+%
+% Pages skipped: 24, a blank sheet of the typist's letterhead (M. Dufour,
+% varitypiste) with nothing in his hand; 25 and 30, blank sheets (only
+% show-through). No page is summarised.
+%
+% Pages transcribed: 21-23, 26-29, 31-34, all from his hand. Pages 21-23 are
+% blue ink on the typist's letterhead paper (the letterhead shows through
+% from the verso) and are very fast drafting: the formulas and the lemma
+% statements carry, most of the connective prose does not and is left \ill{}.
+% Pages 26-29 and 31-34 are black ink and somewhat steadier. He does not
+% paginate; no internal cross-reference to a page number occurs.
+%
+% What the batch is about. Two runs on descent.
+% (1) Pages 21-23 (the start of the run is presumably at the end of batch 1):
+% descent of étale coverings along a finite radicial-type surjection Y' -> Y,
+% by successive extensions; a « Lemme 2 » (a finite surjective Y' -> Y over
+% which X' = X x_Y Y' splits into components of (separable?) degree 1 over Y)
+% and a « Lemme 3 » (an étale surjective Y* -> Y with the same property),
+% the trivial covering Y* x I built on the set I of connected components,
+% and the descent data compared on it; the page ends with « À formuler... »
+% about finite universally open morphisms with connected (?) fibres, and a
+% question: characterising functors representable by étale coverings.
+% (2) Pages 26-29: descent « generically ». S noetherian, T/S of finite type
+% and flat, U dense constructible in T x_S T, V dense constructible in the
+% triple product, F a fibred category, X in F_S, and phi an isomorphism
+% (X x_S T)|U -> (T x_S X)|U satisfying the cocycle condition over V.
+% Proposition: there is a dense constructible T' in T and a genuine descent
+% datum phi' on X x_S T' agreeing with phi over U cap (T' x_S T'). Proof by
+% shrinking U, V, T; W = p12^{-1}(U) cap p23^{-1}(U) with pi = p13 : W -> T x T;
+% psi : pi^*(X_1) -> pi^*(X_2) as the composite through the middle factor;
+% compatibility with pi checked through the five-point scheme W' (the
+% diagram of page 27) and the equality phi_{t2 t'} phi_{t' t1} =
+% phi_{t2 t''} phi_{t'' t1}; phi' obtained because W -> T x_S T is a morphism
+% of F-descent; cocycle for phi' through a six-point scheme W''' (diagram of
+% page 28). A « Condition de représentation » closes it. (3) Pages 31-34: the
+% question of descent along a faithfully flat morphism that is not finite.
+% Typical case: T finite étale Galois over S with group G, s a closed point,
+% T' = T - (f^{-1}(s) - (t)). T x_S T is a disjoint union of the graphs U_g of
+% the elements of G; T' x_S T' is the diagonal plus copies of T'' =
+% T - f^{-1}(s); the same for the triple product with V_{g,g'}. Conclusion
+% (underlined): a descent datum on X over T' -> S is the same thing as an
+% action of G on X|T'' compatible with that on T''; effectivity reduces to
+% extending X_0 over S - s across s.
+%
+% Words he underlines are set in \emph (the reading view has no text
+% underline). Notation fixed once for the batch: his script U is \mathcal{U} (on pages 26-
+% 29 and in the diagrams, where the arrows are labelled with it), V and W
+% roman; p^{(3)}_{ij} for the projections of the triple product (he writes
+% the (3) as a superscript, the -1 after it); \varphi_{t_2 t'} and the like
+% for the components of phi at points, as he writes them; the asterisks of
+% X^*, Y^*, X'^* as written; \Delta_T and \Delta_3 T as written on
+% pages 31-32; X|T'' for his restriction bar.
+%
+% Readings to check first: the whole prose of pages 21-23 (the ink is pale
+% and the hand very fast); the numbering of the two lemmas on pages 21-22;
+% « À formuler » on page 23; the heavily corrected line « F catégorie
+% fibrée ... » on page 26; the tuple lists defining W' (page 27) and W'''
+% (page 28); the last words of page 28 (a name?); « Condition de
+% représentation » on page 29; the formula T x_S T = Delta_T ... (G x G) on
+% page 31, where a symbol before (G x G) is struck.
+%
+% The dating is the inventory's, copied verbatim: the folder itself is s.d.,
+% and its inventory group « Descentes » carries the date quoted. The title in
+% \foldertitle is the archivists' (not bracketed in the inventory).
+
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{126}
+\batch{2}
+\pages{21}{34}
+\dating{s.d. — le groupe « Descentes » (126 à 133) est daté [avant 1970]}
+\watermark{Édition de démonstration}
+\foldertitle{Descente fidèlement plate. Divers : notes manuscrites (s.d.).}
+
+\begin{document}
+
+\section*{Revêtements étales et descente}
+
+\note{les pages 21 à 23 sont d'une écriture très rapide, à l'encre bleue ;
+les formules et les énoncés passent, la plus grande partie de la prose de
+liaison non}
+
+\page{21}
+
+Faisons \uncertain{une} \uncertain{extension}, de la \ill{} \ill{}
+\uncertain{successives} $Y_1 = X$, [d'où $X_1^{*} = X \times_Y Y_1$,
+$X_1 = X_{(1)} \amalg X^{(1)}$, puis $Y_2 = X^{(1)}$] \ill{} \ill{}
+
+\uncertain{Lemme} 2. Il existe un $Y'_2$ \uncertain{fini} sur $Y$, avec
+$Y'_2 \to Y$ surjectif [et \struck{\uncertain{radiciel}}
+\uncertain{universellement ouvert} \ill{} \ill{}] tel que
+$X' = X \times_Y Y'$ se \uncertain{décompose} \ill{} \ill{} \ill{}
+\uncertain{réunion} $X'_i$ \uncertain{connexes} de degré
+\struck{\uncertain{fini}} \uncertain{séparable} 1 sur $Y$.
+\note{énoncé encadré d'un trait vertical à gauche ; l'indice de $Y'_2$ est
+écrit, puis omis dans $X' = X \times_Y Y'$}
+
+Soit $I$ l'ensemble des composantes connexes de $X'$, considérons
+$Y' \times I$ comme \ill{} rev.\ étale de $Y'$. Il en \uncertain{résulte}
+\ill{} \ill{} \ill{} $X'_0 = Y' \times I$ \ill{} \ill{} \ill{} de descente
+\uncertain{relatives} : $Y' \to Y$, d'où un \emph{rev.}\
+\emph{étale} $X$ de $Y$, \ill{} $X'^{*}_0$ \uncertain{par}
+\uncertain{image} \uncertain{inverse}. Soit $Y^{*}_{\ill{}}$ un
+\uncertain{rev.} \emph{étale} [\uncertain{disons} \ill{}] de $Y$ qui
+\uncertain{déploie} $X_0$ complètement, \uncertain{puis} l'\ill{} \ill{}
+de la situation \uncertain{sur}
+
+\note{schéma dans la marge gauche :}
+
+\begin{tikzcd}[column sep=small, row sep=small]
+X_0^{*} \arrow[d] & X'^{*}_0 \arrow[l] \arrow[d] \\
+Y & Y' \arrow[l] \\
+Y^{*}_{\ill{}} \arrow[u] & Y'^{*}_{\ill{}} \arrow[l] \arrow[u]
+\end{tikzcd}
+
+\note{les flèches verticales du haut descendent de $X^{*}_0$, $X'^{*}_0$
+vers $Y$, $Y'$ ; celles du bas montent vers $Y$, $Y'$. Les indices sous
+$Y^{*}$ et $Y'^{*}$ sont surchargés ; la lettre $Y$ du bas à gauche est
+repassée}
+
+\page{22}
+
+$Y^{*}_{\ill{}}$. Donc maintenant \ill{} \ill{} \ill{} \ill{} \ill{} la
+\ill{} de descente de $X'^{*}$ donne un $Y'^{*}$ complètement
+\uncertain{décomposé}. Il en résulte aisément que les composantes connexes
+de $X'^{*}$ sont les images inverses des composantes connexes de $X^{*}$
+(\uncertain{cf.}\ \emph{\uncertain{lemme}} 3) compte tenu
+\uncertain{que} \struck{\ill{}} $Y'^{*} \to Y^{*}$ est
+\uncertain{radiciel} \uncertain{surjectif}.
+
+Donc
+
+\emph{\uncertain{Lemme}} \uncertain{3}. Il existe un rev.\ étale
+surjectif $Y^{*} \to Y$ tel que $X^{*} = X \times_Y Y^{*}$ ait des
+composantes connexes qui \uncertain{soient} de degré 1 sur $Y^{*}$.
+\note{énoncé encadré d'un double trait vertical}
+
+Le morphisme canonique
+\[
+X^{*} \longrightarrow Y^{*} \times I = X^{*}_0
+\]
+[$I$ \ill{} \ill{} \ill{} \uncertain{composantes} \uncertain{connexes} de
+$X^{*}$] est compatible \struck{\ill{}} \uncertain{avec} les
+\uncertain{données} de descente sur $Y^{*} \times I$, (et $X^{*}$),
+\ill{}
+
+\page{23}
+
+\uncertain{donc} \uncertain{définit} un \uncertain{morphisme}
+\struck{\ill{}}
+\[
+X \longrightarrow X_0
+\]
+\ill{} \ill{} \uncertain{surjectif} \uncertain{radiciel} \uncertain{fini}.
+\uncertain{Pour} \uncertain{montrer} que \ill{} \uncertain{morphisme} est
+bien \ill{}, \ill{} \uncertain{universel} que \ill{} \ill{} \ill{}
+\uncertain{dit}, \uncertain{on} \uncertain{voit} que \ill{} $X^{*}$ \ill{}
+\ill{} $Y^{*}$, un \uncertain{morphisme} \ill{} \ill{} \ill{} $X'^{*}$ et
+$Y^{*}$ \ill{} \ill{} \ill{} \ill{}
+\[
+X^{*} \longrightarrow X^{*}_0 \longrightarrow Y'^{*}
+\]
+[et \uncertain{si} $Y'^{*}$ \uncertain{provient} d'un $Y'$
+\uncertain{morphisme} \struck{\ill{}} \ill{} \ill{} \ill{}
+\struck{\ill{}} \ill{} \ill{} \ill{}, $X^{*}_0 \to Y'^{*}$ \ill{} \ill{}].
+\uncertain{Pour} \uncertain{vérifier} \ill{} \ill{} \ill{} \ill{} \ill{}
+\ill{}, \ill{} \ill{} \ill{} $X^{*}_0 = Y^{*}$, \ill{} \ill{}
+\uncertain{immédiat} \ill{} (\ill{} \ill{}).
+
+\emph{À \struck{\ill{}} \uncertain{formuler}} \ill{} \ill{} \ill{}
+\ill{} \ill{} : \ill{} \struck{\ill{}} \emph{\uncertain{univ.}!\
+\uncertain{ouvert}} $X \to Y$ \ill{} \ill{} \uncertain{connexité}
+\uncertain{géométrique} \uncertain{des} \uncertain{fibres}
+(\uncertain{ouvert} \uncertain{réduit} \uncertain{fini} \ill{}),
+« \ill{} \ill{} \ill{} » i.e.\ \ill{} \ill{} \uncertain{ouvert}
+\struck{\ill{}}
+
+\emph{\uncertain{Question}} \uncertain{Caractérisation} des foncteurs
+représentables par des rev.\ étales ???
+
+\section*{Descente générique}
+
+\page{26}
+
+$S$ schéma noethérien
+
+$T/S$ de type fini, \struck{\ill{}} plat
+
+$\mathcal{U}$ partie \uncertain{constructible} dense de $T \times_S T$,
+$V$ partie \uncertain{constructible} dense de $T \times_S T \times_S T$,
+$V \subset \bigcap_{i \neq j} p^{(3)-1}_{ij}(\mathcal{U})$
+
+$F$ catégorie fibrée sur la catégorie des $S$-schémas de type fini, on
+suppose \struck{\ill{}} \uncertain{les} morphismes \struck{\uncertain{fid.\
+plats} et \ill{} \ill{} \ill{} \ill{}} \ill{} \struck{\uncertain{$F$-descente}}
+\struck{\ill{}}
+\note{ligne très surchargée : plusieurs mots biffés, un ajout
+interlinéaire « \uncertain{$S$-schémas de type fini} » et un second
+passage biffé d'un double trait ; on ne donne que ce qui se lit}
+
+$X \in F_S$
+\[
+\varphi \colon (X \times_S T)|\mathcal{U} \xrightarrow{\ \sim\ }
+(T \times_S X)|\mathcal{U}
+\]
+on suppose $p_{13}^{*}(\varphi) = p_{23}^{*}(\varphi)\, p_{12}^{*}(\varphi)$
+au-dessus de $V$.
+
+\emph{Proposition}. Sous ces conditions, il existe une partie
+\uncertain{constructible} dense $T'$ de $T$, \struck{$\mathcal{U}'$ \ill{}
+de $T \times_S T$ telle que $\varphi | \mathcal{U}'$ soit} et une
+\emph{donnée de descente}
+\[
+\varphi' \colon X \times_S T' \xrightarrow{\ \sim\ } T' \times_S X
+\]
+telle que $\varphi = \varphi'$ \struck{\ill{}} au-dessus de
+$\mathcal{U} \cap (T' \times_S T') = \mathcal{U}'$.
+\note{énoncé encadré d'un trait vertical à gauche}
+
+On peut supposer $\mathcal{U}$, $V$ \uncertain{ouverts} \ill{}
+\emph{\uncertain{ou} \ill{} \uncertain{génériques}}.
+
+Il existe une partie \uncertain{ouverte} dense $\mathcal{U}_1$ de
+$\mathcal{U}$ telle que
+\[
+\tau \in \mathcal{U}_1 \Rightarrow V \cap p^{(3)-1}_{ij}(\tau)
+\ \text{dense dans}\ p^{(3)-1}_{ij}(\tau)
+\]
+pour tout couple $(i,j)$ tel que $i \neq j$ [cf.\ \ill{} \ill{} \ill{}
+\ill{} \ill{} \ill{}]. Remplaçant $\mathcal{U}$ par $\mathcal{U}_1$, on
+\ill{} \ill{} \ill{} \ill{} que
+$\tau \in \mathcal{U} \Rightarrow V \cap p^{(3)-1}_{ij}(\tau)$
+\ill{} \ill{} \ill{} \uncertain{pour} \uncertain{tout} $(i,j)$ tel que
+$i \neq j$. De même, \ill{} \ill{} \uncertain{partie}
+\uncertain{constructible} $T'$ de $T$ telle que
+\[
+t \in T' \Rightarrow p_i^{-1}(t) \cap \mathcal{U}
+\ \text{est dense dans}\ p_i^{-1}(t) \quad \text{pour } i = 1, 2 .
+\]
+Remplaçant $T$ par $T'$ (ce qui est \uncertain{loisible}) on peut
+\uncertain{supposer} que
+\[
+t \in T \Rightarrow \mathcal{U} \cap p_i^{-1}(t) \ \text{dense dans}\ \ill{}
+\quad \text{pour } i = 1, 2 .
+\]
+\struck{Enfin, on peut supposer \ill{} $\mathcal{U}$
+\uncertain{symétrique}}
+
+On désigne par $\xi$ un schéma de type fini variable sur $S$ [\ill{}
+\ill{} \ill{} \ill{} : \ill{} \ill{} $\xi$]. On pose
+\[
+W = p^{(3)-1}_{12}(\mathcal{U}) \cap p^{(3)-1}_{23}(\mathcal{U})
+\]
+et \uncertain{on} \uncertain{considère}
+\[
+\pi \colon W \longrightarrow T \times T
+\]
+induit par $p_{13}$.
+
+\page{27}
+
+On considère $X_i = p_i^{*}(X)$ ($i = 1, 2$), et va définir un
+isomorphisme
+\[
+\psi \colon \pi^{*}(X_1) \xrightarrow{\ \sim\ } \pi^{*}(X_2)
+\]
+compatible avec la \uncertain{projection} $\pi \colon W \to T \times_S T$,
+i.e.\ \ill{} \ill{} \ill{} \ill{} $W \times_{\pi} W$ \ill{} \ill{}
+\uncertain{isos}.
+
+\struck{Pour cela, on \ill{} que}
+\[
+\pi^{*}(X_1) \simeq p^{(3)*}_{12}(X \times_S T | \mathcal{U}), \qquad
+\pi^{*}(X_2) \simeq p^{(3)*}_{23}(T \times_S X | \mathcal{U})
+\]
+\note{ces deux formules, encadrées, sont barrées de deux traits obliques}
+
+Pour cela, on considère les $p^{(3)*}_i(X)$ ($i = 1, 2, 3$), \ill{} on
+\uncertain{note} que $p^{(3)*}_1(X) = \pi^{*}(X_1)$,
+$p^{(3)*}_3(X) \simeq \pi^{*}(X_2)$, et \uncertain{prenons} \ill{} \ill{}
+le composé
+\[
+p^{(3)*}_1(X) \xrightarrow{\ \sim\ } p^{(3)*}_2(X) \xrightarrow{\ \sim\ }
+p^{(3)*}_3(X) .
+\]
+Pour prouver la compatibilité de $\psi$ avec $\pi$, \struck{on \ill{}
+$W$} on \uncertain{écrit}
+\[
+W \times_{T \times_S T} W \subset T \times_S T \times_S T \times_S T ,
+\]
+\note{sous le produit, il écrit $t_1, t', t'', t_2$ pour les quatre
+facteurs}
+et on \uncertain{considère} le \struck{\uncertain{produit}}
+\uncertain{sous-schéma} $W'$ de
+$T \times_S T \times_S T \times_S T \times_S T$
+(points $t_1, t', t'', t_2, t'''$), \struck{\ill{}} formé des
+$(t_1, t', t'', t_2, t''')$ tels que
+\[
+(t''', t', t_1),\ (t''', t', t_2),\ (t''', t'', t_1),\ (t''', t'', t_2),\
+(t''', t_1, t_2) \in V .
+\]
+\note{au-dessous, une première liste biffée : « $(t''', t_1), (t''', t_2),
+(t''', t')$ \ill{} \ill{} $\mathcal{U}(\xi)$ » ; dans la liste retenue un
+couple $(t''', t'')$ est aussi biffé, et $(t''', t_1, t_2)$ est ajouté en
+indice à la fin}
+
+On aura donc, si $t_1, t', t'', t_2, t'''$ sont comme il est spécifié
+\uncertain{ci-dessus} : \struck{\ill{}}
+\note{suit une formule biffée, commençant par
+$\varphi_{t_2 t'} \varphi_{t' t_2} = (\varphi_{t_2 \ldots}$, que la page 28
+reprend}
+
+\begin{tikzcd}[column sep=small, row sep=small]
+ & t' \arrow[dr, "\mathcal{U}"] & \\
+t_1 \arrow[ur, "\mathcal{U}"] \arrow[r, "\mathcal{U}"] \arrow[dr, "\mathcal{U}"'] & t''' \arrow[u, "\mathcal{U}"'] \arrow[d, "\mathcal{U}"] \arrow[r, "\mathcal{U}"] & t_2 \\
+ & t'' \arrow[ur, "\mathcal{U}"'] &
+\end{tikzcd}
+\note{schéma dans la marge gauche, en bas de la page ; la flèche de $t'''$
+vers $t'$ est très repassée. Dans la marge gauche, en diagonale et
+souligné : « \uncertain{Question} \ill{} \uncertain{rédaction} » ; plus
+haut, des mots illisibles et « $p_i^{(3)}$ »}
+
+\page{28}
+
+\[
+\varphi_{t_2 t'} \varphi_{t' t_1}
+= \varphi_{t_2 t'} (\varphi_{t' t'''} \varphi_{t''' t_1})
+= (\varphi_{t_2 t'} \varphi_{t' t'''}) \varphi_{t''' t_1}
+= \varphi_{t_2 t'''} \varphi_{t''' t_1}
+\]
+On voit de même que
+\[
+\varphi_{t_2 t''} \varphi_{t'' t_1} = \varphi_{t_2 t'''} \varphi_{t''' t_1}
+\]
+d'où la compatibilité
+\[
+\varphi_{t_2 t'} \varphi_{t' t_1} = \varphi_{t_2 t''} \varphi_{t'' t_1} .
+\]
+
+On \uncertain{voit}, \uncertain{sauf} \uncertain{erreur}
+(\ill{} \ill{}) que
+$W' \to$ \struck{\ill{}} $W \times_{T \times_S T} W \simeq T^4$ \ill{}
+\emph{\uncertain{surjectif}}.
+\note{« $W \times_{T \times_S T} W \simeq T^4$ » est ajouté au-dessus de la
+ligne, à la place d'un mot biffé}
+
+Il s'ensuit, \uncertain{grâce} \ill{} \ill{} \ill{} \ill{} un morphisme de
+$F$-descente, \ill{} que $\psi$ est bien compatible avec la
+\uncertain{projection} $\pi \colon W \to T \times_S T$. On \uncertain{sait}
+\uncertain{d'autre} \uncertain{part} que
+\emph{$W \to T \times_S T$ est \uncertain{surjectif}}, \ill{}
+\uncertain{plat}, il s'ensuit que c'est un morphisme de $F$-descente, donc
+$\psi$ provient d'un \uncertain{isomorphisme}
+\[
+\varphi' \colon X_1 \xrightarrow{\ \sim\ } X_2 .
+\]
+
+Montrons que c'est une \struck{\ill{}} \uncertain{donnée} de descente,
+\uncertain{donc} que
+\[
+\varphi'_{t_3 t_2} \varphi'_{t_2 t_1} = \varphi'_{t_3 t_1}
+\quad (\text{sur } T \times_S T \times_S T) .
+\]
+\uncertain{Pour} \uncertain{cela}, on regarde la \struck{\uncertain{partie}}
+\ill{} \ill{} \ill{} $W'''$ \struck{$W''$} de $T^6$ formée des
+$t_1, t_2, t_3, t', t'', t'''$ tels que
+\[
+(t_1, t'),\ (t', t_2),\ (t_2, t'''),\ (t''', t_3) \in \mathcal{U},
+\quad \text{et} \quad
+(t_1, t', t'''),\ (t'', t''', t_3) \in V .
+\]
+On a $W''' \to T \times_S T \times_S T$, \ill{} \ill{} \ill{} \ill{} la
+\uncertain{relation} \ill{} \ill{} : \ill{} \ill{} \ill{} \ill{} \ill{}
+\ill{}.
+
+\begin{tikzcd}[column sep=small, row sep=small]
+ & & t''' \arrow[ddrr, bend left=40, "\mathcal{U}"] & & \\
+ & t' \arrow[ur] \arrow[dr] & & t'' \arrow[ul, no head] \arrow[dr] & \\
+t_1 \arrow[uurr, bend left=40, "\mathcal{U}"] \arrow[ur] & & t_2 \arrow[ur] & & t_3
+\end{tikzcd}
+\note{schéma dans la marge gauche ; le trait de $t''$ vers $t'''$ est
+sans pointe}
+
+\page{29}
+
+\uncertain{Par} \uncertain{définition}, le \uncertain{premier}
+\uncertain{membre} \uncertain{est} \ill{}
+\[
+(\varphi_{t_3 t''} \varphi_{t'' t_2})(\varphi_{t_2 t'} \varphi_{t' t_1})
+\]
+On \uncertain{a} :
+\[
+\varphi_{t'' t_2} \varphi_{t_2 t'} = \varphi_{t'' t'''} \varphi_{t''' t'}
+\qquad [= \varphi'_{t'' t'}]
+\]
+\uncertain{donc} le \struck{\ill{}} \uncertain{premier}
+\uncertain{membre} \ill{} \ill{} :
+\[
+(\varphi_{t_3 t''} \varphi_{t'' t'''})(\varphi_{t''' t'} \varphi_{t' t_1})
+\]
+La première parenthèse, \uncertain{puisque} $(t''', t'', t_3) \in V$,
+\ill{} $\varphi_{t_3 t'''}$, et la \uncertain{deuxième} \uncertain{est}
+\uncertain{égale} à $\varphi_{t''' t_1}$ ; d'où le \ill{} \uncertain{est}
+$\varphi'_{t_3 t_1}$ \uncertain{par} \uncertain{définition}.
+\note{petit schéma dans la marge gauche : $t'$ au-dessus de $t_1$ et $t_2$, relié à eux}
+
+Enfin, \uncertain{remarquons} que \ill{} \ill{} \struck{\ill{}} \ill{}
+\ill{} au-dessus de $\mathcal{U}$, $\varphi$ et $\varphi'$
+\uncertain{coïncident} : \struck{\ill{}} \ill{} \ill{} \ill{} \ill{}
+\ill{} \uncertain{que}
+\[
+V \xrightarrow{\ p_{13}\ } \mathcal{U}
+\]
+est surjectif, \struck{\uncertain{donc}} \ill{} \ill{} \ill{} \ill{}
+\uncertain{ramené} à prouver l'\uncertain{assertion} \ill{} \ill{}
+\uncertain{que} \ill{} \ill{} \ill{} $V$, \uncertain{laquelle} est
+\uncertain{triviale}.
+
+\uncertain{La} \uncertain{démonstration} \ill{} \ill{} \ill{}, \ill{}
+\uncertain{facile}.
+
+\emph{Condition \ill{} \uncertain{représentation}}. Supposons que pour
+\uncertain{toute} partie \uncertain{constructible} \ill{} $T'$ de $T$,
+\ill{} \ill{} $S'$ (\ill{}) de $S$, $T' \to S'$ \uncertain{soit}
+\uncertain{un} morphisme de $F$-descente \emph{\uncertain{stricte}}.
+Alors \uncertain{moyennant} \uncertain{remplacement} \ill{} $T'$ de $T$,
+\ill{} \ill{}, on \uncertain{peut} \uncertain{trouver}
+$Y \in F_{S'}$, \struck{\ill{}} \ill{} \uncertain{isom.}
+\[
+X \simeq Y \times_{S'} T' ,
+\]
+\uncertain{compatible} avec les \uncertain{données} de
+\uncertain{descente}.
+\note{« $\in F_{S'}$ » : le $S$ indicé est surchargé ; un ajout
+interlinéaire à la fin de la page, sous la ligne, se lit
+« \uncertain{descente} »}
+
+\section*{Descente pour un morphisme fidèlement plat non fini}
+
+\page{31}
+
+\uncertain{Question} de la \uncertain{possibilité} de \uncertain{descente}
+\uncertain{pour} \uncertain{un} \uncertain{morphisme} fid.\ plat
+\emph{non fini}. \uncertain{Un} cas typique est le suivant :
+\struck{\ill{}} $T$ \struck{\uncertain{plat}} \uncertain{étale}
+\uncertain{gal.}\ fini sur $S$, de \uncertain{groupe} $G$, et
+\struck{\ill{}} \uncertain{soit} $T'$ l'\uncertain{ouvert}
+\struck{\ill{} $T$, \ill{}} $T - \Phi$, \uncertain{où}
+\[
+\Phi = f^{-1}(s) - (t) \qquad (f(t) = s)
+\]
+\ill{} $s$ \ill{} \uncertain{un} pt fermé de $S$.
+\struck{\uncertain{On} \uncertain{a} \ill{} \ill{} $f^{-1}(s)$ \ill{}
+$t^{c}$)} \uncertain{Alors} $T' \times_S T' \to$ \ill{}
+
+\begin{tikzcd}[column sep=small, row sep=small]
+ & X \arrow[d] \\
+s \in S & T \arrow[l]
+\end{tikzcd}
+\note{schéma dans la marge gauche ; à gauche de $X$, un symbole
+surchargé et une double flèche verticale, biffés}
+
+On a
+\[
+T \times_S T = \Delta_T \times (G \times G)
+\]
+\note{entre $\Delta_T$ et $(G \times G)$, un signe de produit indicé
+$G$, barré d'une croix ; le $T$ en indice de $\Delta$ est repassé}
+\uncertain{formé} \ill{} \ill{} \ill{} \ill{} \ill{} \ill{}
+\[
+\mathcal{U}_g = (g \times e)\, \Delta_T ,
+\]
+\struck{\ill{}} \ill{} \ill{} \ill{} \uncertain{isomorphe}
+\uncertain{à} $T$ \uncertain{par} \ill{}
+\struck{\ill{} \ill{} $T \to \Delta_T \xrightarrow{g \times e}$}
+\note{la fin de la phrase est remplacée par un ajout au-dessus de la
+ligne, en partie illisible}
+\uncertain{montrant}
+
+\begin{tikzcd}
+T \arrow[r, "\varphi_g"] \arrow[d, "\Delta"'] & \mathcal{U}_g \arrow[d, "\mathrm{ind.}"] \\
+T \times_S T \arrow[r, "g \times e"'] & T \times_S T
+\end{tikzcd}
+
+et \uncertain{pour} \ill{} les \ill{} \uncertain{correspondants}
+\uncertain{aux} \uncertain{projections} de $\varphi_g$ \ill{}
+\ill{} \uncertain{respectivement} $g$ et l'identité, \ill{} \ill{}
+\[
+\varphi_g^{-1}\bigl(\mathcal{U}_g \cap (T' \times_S T')\bigr)
+= g^{-1}(T') \cap T' .
+\]
+\uncertain{Il} \uncertain{est} \ill{} \ill{} $T'$ si $g = e$,
+\uncertain{et} $T - f^{-1}(s) = T''$ si $g \neq e$.
+\emph{Ainsi}, $T' \times_S T'$ \emph{est}
+\struck{\uncertain{réunion}} \uncertain{somme} \ill{}
+\emph{\ill{} \uncertain{sa} \uncertain{diagonale}} $\simeq T$ ; et
+\emph{d'\uncertain{ouverts}}
+$\mathcal{U}'_g$ ($g \neq e$) \emph{\ill{} \uncertain{isomorphes}} :
+$T'' = T - f^{-1}(s)$.
+\uncertain{Une} \uncertain{donnée} de descente \uncertain{sur}
+\uncertain{un} $X / T'$ \uncertain{relativement} \ill{} : \ill{}
+\ill{} \ill{}
+\note{à la fin de la page le tracé se lit « $X / T'$ » ; « $T''$ » est
+souligné}
+
+\page{32}
+
+\struck{un \ill{} \uncertain{isomorph.}\ d'\uncertain{isomorphismes}}
+\ill{} \uncertain{isom.}
+\[
+X \times_S T' \simeq T' \times_S X
+\]
+i.e.\ un \uncertain{syst.}\ d'isomorphismes des deux
+\uncertain{images} \uncertain{inverses} de $X$ sur les
+$\mathcal{U}'_g$ ; sur la \uncertain{diagonale} $\mathcal{U}'_e$, ce
+\uncertain{doit} être l'identité, et pour $g \neq e$, \uncertain{ce}
+doit être un isomorphisme
+\[
+X | T'' \simeq g^{*}(X | T'') .
+\]
+Il \uncertain{faut} écrire la condition \ill{} \ill{} \ill{}
+\uncertain{transitivité}. \ill{} \ill{}
+\[
+T \times_S T \times_S T \simeq \Delta_3 T \times (G \times G \times G) .
+\]
+\note{ici encore le signe de produit indicé $G$ devant
+$(G \times G \times G)$ est barré d'une croix}
+\uncertain{Soit}
+\[
+V_{g, g'} = (g \times g' \times e) \Delta_3 T ,
+\]
+il s'identifie par $(g \times g' \times e) \circ \Delta$ avec $T$,
+\uncertain{les} \ill{} \ill{} \ill{} \ill{} \ill{} \ill{} $g, g', e$ ;
+\ill{}
+\[
+V'_{g, g'} = V_{g, g'} \cap (T' \times_S T' \times_S T')
+\]
+s'identifie \uncertain{à}
+\[
+g^{-1}(T') \cap g'^{-1}(T') \cap T' ,
+\]
+\ill{} \ill{} $T''$ \uncertain{sauf} \uncertain{pour} $g = g' = e$,
+\ill{} \ill{} \ill{} la diagonale $\simeq T'$.
+$T' \times_S T' \times_S T'$ \uncertain{est} \ill{} \ill{} \ill{}
+$V'_{g,g'}$, \ill{} \ill{} \ill{} \uncertain{isomorphes} \uncertain{à}
+$T''$. On \uncertain{constate} \ill{} que la
+\emph{transitivité},
+
+\page{33}
+
+\uncertain{vérification} \ill{} \uncertain{pour} \uncertain{deux}
+\uncertain{morphismes} \ill{} \uncertain{précédemment} \uncertain{sur}
+$T' \times_S T' \times_S T'$ \uncertain{soient} \uncertain{identiques},
+\uncertain{étant} \ill{} \uncertain{acquis} \uncertain{sur} la
+\uncertain{diagonale} $V'_{e,e}$, \ill{} il \uncertain{suffit} à
+l'exprimer \uncertain{sur} les \uncertain{autres}
+\uncertain{composantes}. Mais \uncertain{alors} il ne \uncertain{porte}
+que sur les $T''$, \uncertain{et} \struck{la \uncertain{superposition}
+\ill{}} \ill{} \ill{} \ill{} \struck{\ill{}} une \uncertain{donnée} de
+\uncertain{descente} \struck{\ill{} \ill{}} \ill{} sur $X | T''$,
+\ill{} \ill{} \uncertain{une} \uncertain{donnée} de descente, i.e.\
+\uncertain{les} \uncertain{isom.}
+\[
+g^{-1}(X) \simeq X
+\]
+\uncertain{proviennent} d'\uncertain{opérations} de $G$ sur $X | T''$,
+compatibles avec \uncertain{ses} \uncertain{opérations}
+\struck{\uncertain{sur}} \struck{$X$} $T''$. \emph{Ainsi, une
+donnée de descente sur $X$ pour $f \colon T' \to S$ \uncertain{est} la
+même chose qu'une donnée de descente sur $X | T''$, i.e.\ que \struck{\ill{}}
+la donnée d'\uncertain{opérations} de $G$ sur $X | T''$, compatibles avec
+ses \uncertain{opérations} sur $T''$}. Si p.ex.\ $X$ est
+\uncertain{proj.}\ sur $T'$, \uncertain{cela} \ill{} \ill{} \ill{}
+\uncertain{que} la \uncertain{donnée} d'un \uncertain{isom.}
+\[
+X | T'' \simeq X_0 \times_{S''} T''
+\]
+où $S'' = S - (s)$, $X_0$ \uncertain{étant} un schéma
+\uncertain{proj.}\ sur $S''$.
+
+\page{34}
+
+La \uncertain{question} d'effectivité de la \uncertain{descente}
+\uncertain{est} \uncertain{donc} \uncertain{équivalente} à la
+\uncertain{suivante} :
+
+\uncertain{On} \uncertain{a} $X'_0$ sur $S - s$, on \uncertain{étend}
+\[
+X'_0 \times_{S - s} \bigl(T - f^{-1}(s)\bigr)
+\]
+en un point $t$ de $f^{-1}(s)$ de façon à \uncertain{obtenir} $X$ sur
+\[
+T' = \bigl(T - f^{-1}(s)\bigr) \cup \{t\} ,
+\]
+\uncertain{par} \uncertain{exemple} \uncertain{sur} $T$ !
+\uncertain{Montrer} que $X$ \uncertain{est} \uncertain{isomorphe} à
+l'image \uncertain{réciproque} d'un $X_0$ sur $S$ \uncertain{prolongeant}
+$X_0$.
+\note{le dernier $X_0$ est à lire, semble-t-il, comme le $X'_0$ du début
+du paragraphe}
+
+\end{document}
