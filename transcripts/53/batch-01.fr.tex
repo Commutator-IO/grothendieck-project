@@ -1,0 +1,888 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 53, batch 1 (pages 1-20).
+% Established from the facsimile archives/batches/53/batch-01.pdf, cut from a
+% copy of 53.pdf the user uploaded (PDF page k = archivists' page k, no cover
+% sheet), per the skill transcribe-grothendieck. The folder is thirty-three
+% pages; this is the first of two batches. Pages 21-33 are batch 2, done in
+% parallel by another pass; its notation (Dist, \check{A}, V(M), W(M), the
+% coaction u_0) was aligned with here where the two overlap (page 15).
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-09-24 — first pass, unchecked against the pages by a human.
+%
+% Pages skipped: 16-20. Pages 16-19 are the 1973 letter named in the folder
+% title: an English letter to him, dated « June 15, 1973 », paginated -2- to
+% -4- by its writer, signed from Dalhousie University, Halifax, N.S. (the
+% signature is not read here), by someone attending his course on algebraic
+% groups. It objects to part b) of « the last proposition stated in the
+% course » (an affine algebraic monoid of finite type over a field embeds as
+% a closed submonoid of GL(n)): the antipode of the coalgebra of GL(n) would
+% pass to the quotient and force a group; the counter-example is the monoid
+% {0,1} represented by A = k x k with comultiplication
+% (a,b) -> (a,b)(x)(1,0) + (1,1)(x)(0,b), and he suggests GL(n) « should be
+% changed to End_k(M) ». Nothing on these four leaves is in Grothendieck's
+% hand, so by the rule for letters from others they are skipped, not
+% summarised. The point matters to the folder all the same: page 21 (batch 2)
+% opens with his « Rectification » — a monoid of finite type embeds in M_n,
+% not GL_n — which is his answer to this letter. Page 20 is the letter's
+% last sheet, blank but for « Prof Grothendieck » in the writer's hand.
+% Page 1 is a tan folder cover inscribed in pencil « Groupes algébriques. »,
+% repeated on its tab; the hand is not clearly his. It takes no \page marker
+% and its words become the section heading, with a \note.
+%
+% Pages summarised: none. Pages transcribed: 2-15, all in his hand — ink
+% (black, then blue from page 6), page 4 and parts of 5 in pencil; page 3's
+% upper half carries unrelated jottings struck through in pencil, given in
+% a note. He does not paginate these leaves; no date is written on them.
+%
+% What the batch is about. Notes for a course on algebraic groups over a
+% field (the course the letter mentions). Pages 2-3: group actions and
+% pseudo-torsors — G x G -> G and G x X -> X universally open, U.V open,
+% stable under generisation and specialisation, hence the connected
+% components of X are open, closed and quasi-compact, and irreducible; a
+% cancelled Lemma on homogeneous spaces. Page 4 (pencil): a plan —
+% radicial groups, e ⊂ G°_red ⊂ G° ⊂ G, the commutative case (abelian
+% varieties, semisimple, tori, G_a), height-one groups and p-Lie algebras,
+% discrete groups. Page 5: morphisms of groups — generising homomorphisms,
+% u(G) ⊃ H°, closed image, a monomorphism of finite type is a closed
+% immersion; a plan of discrete/profinite/locally compact groups and of
+% connected groups (Chevalley's extension). Pages 6-7: geometric
+% regularity, smoothness, geometric normality; a group is geometrically
+% normal iff smooth. Page 8: Cor. 2-3, irreducible = connected components,
+% UV ⊃ G°, U.V open and closed. Pages 9-10: a « Rectificatif » on a
+% criterion of geometric irreducibility, with the counter-example
+% x^2 + y^2 over R; the dictionary Et(k) = pi-sets and the construction of
+% pi_0(X/k) (pro-étale). Pages 11-13: separability (geometrically reduced),
+% geometric irreducibility, connectedness, integrity, each with its field
+% condition (perfect, separably closed, separably closed, algebraically
+% closed), stability under products; G° and U.V^{-1} ⊃ G°. Page 14: étale
+% schemes over k as pi-sets and the morphism X -> T to the scheme of
+% geometric connected components. Page 15: Cartier duality — Hom(G, G_m)
+% represented by Spec of the dual algebra, finite locally free commutative
+% groups reflexive, mu_n <-> Z/nZ, alpha_p <-> alpha_p, D(M) <-> M_S, and
+% Ext^1(G, G_m).
+%
+% Notation fixed for the batch: \mathbf{G}_m, \mathbf{G}_a, \mu_n, \alpha_p;
+% G^0 for the neutral component (he writes G°, and on p. 5 once H_0); G_red
+% as \mathrm{réd}; \bar k for the algebraic (or separable) closure as he
+% writes k with a bar; \pi both for the action morphism (pp. 2-3) and for
+% the Galois group (pp. 10, 13-14), as on the page; \pi_0(X/k) for his
+% underlined pi_0; \check{A} and \mathrm{Dist}(G) on p. 15, as in batch 2.
+% « ps. torseur » is kept as he abbreviates « pseudo-torseur ».
+%
+% Hardest pages: 3 (dense, struck and overwritten proof), 2 (whole blocks
+% cancelled by diagonal strokes), 8 and 13 (proofs rewritten in the
+% interlines), and the rotated margins of 5, 6, 11 and 14. The formulas and
+% the statements carry; connective words are often left \ill{}.
+%
+% The dating is the inventory's own for the folder (« 1973 », the date of
+% the letter on pages 16-19); the notes themselves carry no date.
+
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{53}
+\batch{1}
+\pages{1}{20}
+\dating{1973}
+\watermark{Édition de démonstration}
+\foldertitle{Groupes algébriques : notes manuscrites (s.d.), lettre (1973)}
+
+\begin{document}
+
+\section*{Groupes algébriques}
+\note{inscrit au crayon au milieu de la chemise (page 1) et répété sur son
+onglet ; la main n'est pas sûrement la sienne ; la chemise ne reçoit pas de
+numéro de page}
+
+\page{2}
+\struck{\textbf{Déf}}\quad \struck{\textbf{Prop}\quad $G \times G \xrightarrow{\ p\ } G$ ouvert}
+
+\struck{\textbf{Cor.}\quad Si $P$ un \add{ps.}\ torseur sous $G$
+($G \times P \xrightarrow{\sim} P \times P$, $(g,x) \mapsto (gx, x)$) alors
+$\pi : G \times P \to P$ ouvert}
+
+\struck{\textbf{Lemme}\quad Soit $X$ schéma sur $k$ sur lequel $G$ opère. Conditions équivalentes}
+\begin{itemize}
+  \item[a)] \struck{$\forall$ $S$ sur $k$, et section $a$ de $X_S$ sur $S$, le morphisme $G_S \to X_S$, $g \mapsto ga$, $a : (g,x) \mapsto (gx, x)$, est ouvert (resp.\ ouvert surjectif)}
+  \item[b)] \struck{Le morphisme $G \times X \to X \times X$ est univ.\ ouvert (resp.\ univ.\ ouvert et surjectif)}
+  \item[c)] \struck{$\exists$ un $S$ sur $k$, $S \neq \emptyset$, et une \ill{} section $a$ de $X_S$ sur $S$, tels que}
+\end{itemize}
+\note{tout ce début de page est barré de grands traits obliques ; au-dessus
+de « ouvert » dans b), un ajout cerclé « univ.\ sur $X$ » ; dans la marge
+gauche, un mot biffé illisible ; sous c), « schéma » souligné, relié à la
+ligne par un trait}
+
+\textbf{Cor}\quad $G$ groupe sur corps. Alors $G$ séparé.
+
+\textbf{Prop}\quad $G$ groupe sur un corps. Alors $\pi : G \times G \to G$
+\add{univ.}\ ouvert. Plus gén.,
+
+\struck{\ill{}} Si $X$ ps.\ torseur sous $G$. Alors $G \times X \xrightarrow{\ \pi\ } X$ est \add{univ.}\ ouvert.
+
+\struck{\textbf{Lemme}\quad Soit $G$ opérant sur $X$. Soit $a$ S'il $\exists$
+un corps $k'/k$ et $a \in X(k')$ tel que $G_{k'} \to X_{k'}$, $g \mapsto ga$
+est ouvert (resp.\ \uncertain{univ.\ ouvert} surjectif) \ill{} vrai pour tt autre
+pt de $X$ à valeurs dans un $k''/k$, et \ill{} sur un $S$.}
+\struck{On dit que $X$ est un espace homogène}
+\note{ce lemme est barré de traits obliques, et sa dernière ligne d'un trait
+horizontal}
+
+\textbf{Prop}\quad \struck{Supposons que $G \times X \xrightarrow{\ \pi\ } X$
+soit ouvert (p.\,ex.\ $X$ un ps.\ torseur).} Alors pour $U \subset G$,
+$V \subset X$, $U$, $V$ ouverts, \ldots
+\begin{itemize}
+  \item[a)] $U.V$ ouverte si $\pi$ ouvert (p.\,ex.\ $X$ un ps.\ tors.)
+  \item[b)] $U.V$ stable par \uncertain{générisation} \struck{\ill{}} [\uncertain{si} les
+    $\varphi_x : G_{k'} \to X_{k'}$ \uncertain{générisants}, \struck{\ill{}}]
+  \item[c)] $UV$ stable par spécialisation (si \struck{\ill{}} $x \in X(k')$) \struck{\uncertain{p.\,ex.\ ouvert}})
+  \item[c')] Si $U$, $V$ qu.\ cpts (et $X$ \add{sép.}\ séparé), ou $X$ loc.\ noeth.,
+    $U \times V$ est fermé.
+    \add{interligne : et $X$ \uncertain{quasi-sép.}\ (p.\,ex.\ $X$ un ps.\ torseur)}
+\end{itemize}
+\marginal{\uncertain{composantes irréd., etc.}}
+\note{« $G_0$ » surmonté d'une flèche dans b) est lu comme une abréviation de
+« générisation » ; dans c'), « $U \times V$ » est écrit tel quel là où
+l'on attendrait $U.V$}
+
+\textbf{Cor}\quad Supposons \struck{\ill{}} $\pi : G \times X \to X \times X$
+ouvert (p.\,ex.\ \ldots). Alors $X$ est réunion \ill{} de parties
+\uncertain{qu.\ cptes} $W_i$ \struck{\ill{}} qui sont à la fois ouvertes, fermées,
+et quasi-compactes [donc stables par $G^0$]. En particulier, les comp.\
+connexes de $X$ sont quasi-compactes.
+
+2.\quad (Cor.\ \ill{}) Les composantes connexes de $X$ sont les comp.\ irréductibles
+
+\page{3}
+\note{la moitié supérieure du feuillet porte, au crayon et barrées au crayon
+de grands traits obliques, des notations sans rapport avec ce qui suit :
+$\mu_r$, $G$, $G^0$, $k[[t]]$, $K$, $G_{\mathrm{réd}}$ ; $\mathcal{R} =
+\mathrm{Ab}(\mathcal{C})^{\mathrm{op}}$, $\mathrm{Ab}(\mathcal{C})$ ;
+$\sigma = \lbrace G^n\rbrace$, $G^n \to G^m$, $G^n \to G$ ; $\Delta_0 \supset \Delta$ ;
+$\underline{\mathrm{Hom}}(\sigma, (\mathrm{ENS}))$ et $(\mathrm{ENS})_{/R}$
+reliés par des flèches marquées « top. » ; puis, à l'encre et barrée de
+traits obliques, la fin d'une démonstration étrangère au propos, sur des
+couples $(C'_i, \lambda'_i) = (C_{\varphi(i)}, \lambda_{\varphi(i)})$ et des
+flèches « $\lambda'_i$-précisantes », close par « cqfd »}
+
+\textbf{Dém}\quad prop\quad a) est trivial
+
+b) \struck{Soit $x$} OPS $U, V \neq \emptyset$, \struck{\ill{} à prouver} on
+est ramené à prouver que si \struck{$x \in W = U.V$, $W(k)$}
+$x = u_0 v_0$ ($u_0 \in U(k)$, $v_0 \in V(k)$) \struck{($W = U.V$)}, alors
+l'image inverse de $U.V$ dans $G$ par $G \xrightarrow{\ \varphi\ } X$,
+$\varphi(g) = g.x$, \struck{est stable} contient $G_0$, i.e.\ que pour
+$g \in G^0$, on a $gx = u.v$ (pour ext.\ de $k$ \ill{},
+\struck{\ill{}} $u \in U(k')$, $v \in V(k')$). \struck{\ill{}} On aura
+$u^{-1} g x \in V$ i.e.\ $u^{-1} g \in \varphi^{-1}(V) = W$, i.e.\
+\struck{$u \in g$} $u \in g W^{-1}$, donc il suffit de voir que
+$g W^{-1} \cap U \neq \emptyset$. Or soit $T = G^0 u_0$, alors
+\struck{\ill{}} $T$ est irréductible et \struck{\ill{}}
+\[
+  T \cap U \ni u_0 , \qquad g W^{-1} \cap T \ni g u_0
+\]
+[car $g u_0 \in T$, $g u_0 \in g W^{-1}$ i.e.\ $u_0 \in W^{-1}$ ou
+$u_0^{-1} \in W$ car $u_0^{-1}.x = v_0 \in V$]. Mais alors $g W^{-1} \cap T$
+et $U \cap T$ sont des ouverts non vides de $T$ irréductible, donc
+\uncertain{d'intersection} $\neq \emptyset$, cqfd.
+
+c) Résulte de la partie a) \uncertain{dans}
+
+\textbf{Lemme}\quad \struck{Soit $T$ \ill{}, partie de $X$ stable \ill{}}
+\add{interligne : \uncertain{si} les $\varphi_x : G_{k'} \to X_{k'}$ \uncertain{générisants}}
+\struck{\ill{} générisants} (p.\,ex.\ $X$ \ill{})
+Une partie $W$ de $X$ \ill{}, stable par $G^0$, est-elle \ill{} stable par
+spécialisation et par générisation (i.e., si $X$ loc.\ noeth., est-elle
+ouverte et fermée)
+
+\textbf{Dém}\quad 1) Supposons $W$ stable par $G^0$, \struck{\ill{}}
+i.e.\ $\pi$ induit $G^0 \times W \to W$, donc \struck{\ill{} $x, y \in X$ \ill{},
+$G^0 \times W \to W \times W$} \ldots\ $x \in W \Leftrightarrow y \in W$.
+\struck{\ill{} Si $W$ est st.} \struck{Mais alors \ill{}} Mais $G^0 \times W \to$
+\ill{}. Montrons que si $y \in W$, $x$ générisant $y$, alors $x \in W$. On
+OPS $y \in W(k)$, et on a alors $\varphi : g \mapsto gy$, $G^0 \to W$,
+induisant \ill{} ; or $\varphi$ est générisant et $G^0$ stable par
+générisation, donc $\varphi(G^0)$ stable par générisation. On a prouvé que
+$W$ est stable par générisation, donc $\complement W$ l'est aussi, donc $W$
+est stable par spécialisation.
+\marginal{Or $G \times W \to W \times W$ \uncertain{est générisant} et $G$ \ill{}}
+\note{les lignes du milieu de cette démonstration sont reprises plusieurs
+fois, barrées et encadrées ; seul ce qui se lit est donné}
+
+\page{4}
+\note{page au crayon}
+
+3)\quad \underline{Groupes \struck{\ill{}} radiciels}\qquad Structure des \uncertain{types}
+de groupes radiciels \add{interligne : \ill{}}
+
+Données ($k$ parfait)
+
+\[
+  e \subset G^0_{\mathrm{réd}} \subset G^0 \subset G
+  \qquad (G \text{ qu.-cpt} \Leftrightarrow G/G^0 \text{ cpt})
+\]
+\note{sous la chaîne, trois accolades : sous $e \subset G^0_{\mathrm{réd}}$,
+« groupe \uncertain{lisse} » ; sous $G^0_{\mathrm{réd}} \subset G^0$,
+« radiciel \ill{} » ; sous $G^0 \subset G$, « loc.\ cpts sép. »}
+
+\struck{\ill{} $\mu_p$, $\alpha_p$ \quad Cas commutatif}
+
+Structure cas lisse connexe assez bien connue. Déc.\ en
+$\underline{\text{V.A}}$, $\underline{\text{SS}}$, \struck{\ill{}} tore,
+\struck{\ill{} groupes} $\mathbf{G}_a^s$
+\add{interligne : tore $\mathbf{G}_m^r$ tordu \ldots\ tordus (?)}
+
+Structure des \struck{radiciels} groupes \struck{\ill{}} radiciels :
+dévissage en groupes de hauteur 1, qui sont décrits par des $p$-algèbres
+de Lie \uncertain{resp.}
+
+Structure des groupes discrets (finis)
+
+\underline{Cas abéliens}\qquad VA, $\mathbf{G}_a$, $\mathbf{G}_m$,
+$\mathbb{Z}/n\mathbb{Z}$, $\mu_p$, $\alpha_p$
+
+\page{5}
+4) Réciproquement, si $W$ est \struck{ouvert et fermé} stable par
+spécialisation, alors $\pi^{-1}(W) \subset G^0 \times W$ \struck{est ouvert et fermé}
+\add{interligne : \uncertain{aussi}}, donc stable par $G^0$, et contenant
+$e \times W$, il contient $G^0 \times W$\ldots\ (Ici, on n'utilise pas
+l'hyp.\ sur les $\varphi$)
+
+\struck{\textbf{Prop}\quad Soit $G \xrightarrow{\ u\ } H$ \ill{} hom de gr.\
+\uncertain{alg.}, \ill{} (générisant) (univ.\ générisant). Si $u$ est plat sur
+un \uncertain{ouvert}, il est plat \ill{}, donc \ill{} $u(G)$ stable par
+\ill{} générisat.}
+
+\struck{\textbf{Cor}\quad Supposons qu'il existe un pt maximal $x$ de $H$ tel
+que $G_x \neq \emptyset$ (p.\,ex.\ $u$ dominant et $G$ qu.-cpt) alors si $H$
+est réduit, $u$ est plat, donc générisant (donc générisant \ldots). Si on ne
+suppose pas $H$ réduit, $u$ est générisant, \ill{} l'image $u(H)$ est stable
+par générisation \ill{}.}
+\note{Prop.\ et Cor.\ sont encadrés ensemble et barrés de traits obliques}
+\marginal{Il \uncertain{faut un argument} pour « univ. » \uncertain{générisant}}
+
+\textbf{Cor}\quad Conditions équivalentes sur $u$
+\begin{itemize}
+  \item[a)] $u$ est \add{univ.}\ générisant \quad --- \quad a') $u$ générisant en un point.
+  \item[b)] $u(G) \supset H^0$.
+  \item[c)] $\exists$ un point maximal $x$ de $G$ tel que $u^{-1}(x) \neq \emptyset$. \struck{\ill{}}
+\end{itemize}
+Sous ces conditions, $u(G)$ est stable par spécialisation \struck{(\ill{})}.
+\note{dans c), « de $G$ » est écrit, là où l'on attendrait « de $H$ »}
+
+\textbf{Dém}\quad a)$\Leftrightarrow$a') connu, a')$\Leftarrow$c) \struck{\ill{}}
+trivial, b)$\Rightarrow$c) trivial, prouvons a)$\Rightarrow$b. Or
+$W = u(G)$ est stable par $H_0$, donc \uncertain{les} \ill{} étant générisant, il
+est stable par spécialisation, \struck{\ill{}} donc b) devient trivial.
+
+\textbf{Cor}\quad Si $G$ qu.-cpt, \uncertain{Im $u$ est fermée}
+\struck{dominant \ill{}} \quad \uncertain{$H$ l.\,t.\,f.}
+
+\textbf{Prop.}\quad Si $G \to H$ un mono, avec $G$ \struck{\ill{}} de t.f.,
+alors $u$ est une immersion fermée.
+\marginal{\uncertain{Est-il vrai que} \ill{} stable par spécialisation ? \ill{}}
+\note{note marginale au crayon, écrite en biais dans la marge gauche, en
+face des deux énoncés qui précèdent}
+
+1)\quad $\left\lbrace\begin{array}{l}
+  \text{Groupes discrets (ou tordus)} \\
+  \text{Groupes profinis (------)} \\
+  \text{Groupes loc.\ cpts (tot.\ discontinus) (ou tordus)}
+\end{array}\right.$ \quad groupes séparables tot.\ discontinus
+
+$\simeq$ groupes topologiques loc.\ compacts tot.\ discont.\ avec opérations
+continues de $\pi$, $\pi \times G \to G$ continue.
+
+2)\quad \underline{Groupes connexes}, \underline{Séparables}
+[sont qu.-cpts]\quad | \quad sur corps parfait : Extension (can.) d'une VA
+par un groupe connexe lisse affine $\Longleftrightarrow \varprojlim G_i$,
+les $G_i$ de type fini, \ill{}
+
+\page{6}
+\struck{\ill{}} \textbf{Prop}\quad Soit $X$ schéma \struck{\ill{}} sur
+corps $k$ \struck{\ill{}} parfait. Soit $k'$ une extension de $k$, supposons
+que \struck{\ill{}} $X$ soit loc.\ de t.f.\ sur $k$ ou $k'$ ext.\ de type fini
+de $k$, de sorte que les anneaux locaux de $X_{k'}$ sont noeth. Alors
+$X_{k'}$ est régulier.
+\note{au-dessus de la ligne biffée de tête, « régulier » remplace un mot biffé}
+
+\textbf{Corollaire}\quad Soit $A$ un anneau local régulier sur $k$, $k'$
+une extension de $k$. On suppose que $k' \otimes A$ \uncertain{ess.} de t.f.\
+sur $k$. \struck{$A$ \ill{} de t.f.\ \ill{}} Alors $A \otimes_k k'$ est régulier.
+
+\textbf{Prop}\quad $X$ schéma \add{ess.\ loc.\ de t.f.}\ sur $k$, $k$ ext.\
+\uncertain{parfait}. Conditions équivalentes
+\begin{itemize}
+  \item[a)] $\forall$ schéma $Y$ sur $k$, $Y$ régulier $\Rightarrow X \times_k Y$ régulier
+  \item[b)] $\forall$ ext.\ $k'/k$, $X_{k'}$ est régulier
+  \item[c)] \struck{$\forall$} $X_{\bar k}$ régulier
+  \item[d)] $\forall$ ext.\ finie \struck{\ill{}} radicielle $k'$ de $k$, $X_{k'}$ est régulier.
+\end{itemize}
+\note{les implications sont fléchées dans la marge entre les lettres a) à d) ;
+le long de la marge gauche, une note tournée de sa main, en grande partie
+illisible : « \ill{} si $X$ \uncertain{loc.\ de t.f.}\ sur $k$, \ill{}
+$X \otimes k'$ \ill{} extensions \ill{} radicielles \ill{} »}
+
+\textbf{Dém}\quad b)$\Rightarrow$a) car si $A \to B$ hom.\ local
+\add{plat} d'anneaux loc.\ noeth., $A$ régulier et $B/\mathfrak{m}B$
+régulier \ldots\ c)$\Rightarrow$b) car si $A \to B$ hom.\ local \uncertain{fid.}\
+plat d'anneaux loc.\ noeth., \ill{} $B$ régulier $\Rightarrow A$ régulier\ldots\
+d)$\Rightarrow$c) \uncertain{par passage à la limite}.
+
+\textbf{Déf}\quad On dit \struck{alors que} $X$ géom.\ régulier [ou lisse
+sur $k$ si $X$ est loc.\ de t.f.\ sur $k$]
+
+$X$ \struck{géom.\ régulier} \add{géom.\ régulier} $\Longrightarrow X$ régulier.
+La réciproque est vraie pour tt $X$ sur $k$ (on \uncertain{prenant} $X = \mathrm{Spec}\,k'$,
+$k'$ ext.\ finie radicielle de $k$) ssi $k$ est parfait.
+
+$X$ \struck{lisse} \add{géom.\ rég.}$/k \Longleftrightarrow X_{k'}$ géom.\ régulier sur $k'$
+
+\struck{Si} $X$ et $Y$ \struck{lisses} \add{géom.\ rég.}\ sur $k \Longrightarrow X \times_k Y$ géom.\ réguliers sur $k$.
+
+\textbf{NB}\quad $X$ \struck{\ill{}} géom.\ régulier$/k$ en un \underline{point} $x \in X$ :
+$\mathrm{Loc}_x(X)$ est géom.\ rég.\ sur $k$
+\add{interligne : ou $\underline{O}_{X,x}$ est géom.\ rég.} On a les
+\uncertain{résultats} analogues au précédent.
+\quad \textbf{NB}\quad Si $k(x)$ est séparable sur $k$, régulier $\Rightarrow$ géom.\ rég.
+
+\struck{\textbf{Théorème}\quad L'ens.\ des pts de $X$ où $X$ est géom.\
+régulier est \ill{}. [On est ramené au cas où $k$ est parfait (\ill{} alg.\ clos)].}
+
+\textbf{Prop}\quad (\uncertain{Critère jacobien}) \quad $X$ \add{loc.\ de t.f.\ sur $k$}
+\struck{est géom.\ régulier} \add{lisse} en $x$ ssi il existe un
+\add{\uncertain{voisinage ouvert $U$ et un}} morphisme
+\[
+  f : U \longrightarrow E^n_k \qquad (U \text{ vois.\ ouvert de } x)
+\]
+tel que $f$ soit « étale » en $x$, i.e.\ [loc.\ de prés.\ finie] plat et à
+fibres étales
+
+\textbf{Corollaire}\quad L'ens.\ des pts où $X$ est \struck{géom.} lisse sur $k$ est ouvert.
+
+\page{7}
+\textbf{Corollaire.}\quad Cet ouv.\ est dense ssi pour \struck{\ill{}} tt pt
+\underline{maximal} $x \in X$, $\underline{O}_{X,x}$ est réduit et $k(x)$ est
+une extension \underline{séparable} de $k$ [$\Leftrightarrow$ extension étale
+d'une extension transcend.\ \uncertain{pure}]
+\add{interligne : \uncertain{au-dessus d'une} ext.\ de t.f.}
+
+\textbf{Corollaire}\quad Si $k$ est parfait, l'ens.\ des pts où $X$ est
+lisse est un ouvert dense.
+
+\textbf{NB}\quad On a une série analogue pour la \underline{normalité géométrique},
+sans condition de finitude. Si $X$ est \struck{géom.\ \ill{}} loc.\ de t.f.\
+sur $k$, l'ens.\ des pts où $X$ est géom.\ normal sur $k$ est ouvert,
+\add{et dense si $k$ est parfait} [Une extension d'un corps est géom.\
+normale ssi elle est séparable]
+
+\textbf{Proposition}\quad $G$ groupe sur corps $k$. Conditions équivalentes
+\begin{itemize}
+  \item[a)] $G$ \struck{\ill{}} séparable$/k$ en un pt \quad a') $G$ sép.\ \struck{\ill{}}
+  \item[b)] $G$ géom.\ normal sur $k$
+  \item[c)] (Si $G$ loc.\ de t.f.\ sur $k$) $G$ lisse$/k$
+\end{itemize}
+\marginal{marche aussi si $X$ un \struck{\ill{}} schéma sur lequel $G$ opère
+\struck{$G \times X$} et tel que $G \times X \to X \times X$,
+$(g,x) \mapsto (gx, x)$ surjectif ($X$ \uncertain{universellement homogène})}
+
+On a évidemment c)$\Rightarrow$b)$\Rightarrow$a') \struck{$\Rightarrow$a) \ill{}}.
+
+a)$\Rightarrow$b)\quad Soit $g \in G$, \struck{un pt maximal de $G$ tel que
+$G$ est séparable \ill{}. Donc $k(g)$ est une ext.\ séparable de $k$, donc
+$G$ est géom.\ normal en $g$. Donc, quitte à faire une extension de la base,
+on est ramené à le voir pour $g$ rat.\ sur $k$.} \struck{Soit $g'$ un pt
+maximal de $G$, on sait que $G$ est géom.\ normal en $g'$ ; faisant une
+extension} Donc $G$ a un pt $g$ où il est géom.\ normal. Prouvons qu'il en
+est de même pour tt autre pt $g'$. Par ext.\ de la base, on est ramené au
+cas $g$, $g'$ rat.\ /$k$. Mais alors ils sont conjugués par translation !
+\marginal{NB Si $G$ de t.f.\ sur $k$, alors $G$ \uncertain{réduit}
+$\Rightarrow G$ sép.\ ? (\uncertain{supposé} \ill{})}
+
+b)$\Rightarrow$a)\quad Esq.\ de démonstration.
+
+\textbf{Corollaire 1}\quad Soit $k$ parfait. Alors $G_{\mathrm{réd}}$ est
+géom.\ normal (resp.\ lisse, si $G$ est loc.\ de t.f.\ sur $k$)
+
+\page{8}
+\struck{\ill{}} \textbf{Corollaire 2}\quad \struck{\ill{}} \add{Les} composantes
+irréductibles de $G$ \struck{sont les composantes} connexes. En particulier,
+$G^0$ est irréductible \struck{(\ill{} loc.\ de t.f.)}
+\marginal{C'est \uncertain{dans}}
+
+On peut supposer $k$ parfait, $G$ réduit donc normal (resp.\ lisse). Mais
+alors c'est vrai pour tt schéma normal \add{(lisse)} sur $k$\ldots\ On a
+supposé ici $G$ loc.\ de t.f. \struck{On peut s'en} \ill{} Sinon on peut dire
+que $G_0$, la comp.\ irréd.\ de $e$, est stable par générisation, donc
+contient $\mathrm{Loc}_e(G)$.
+\marginal{\ill{} loc.\ de t.f.\ \ill{} $G$ \ill{} loc.\ de t.f.}
+
+\textbf{Corollaire 3}\quad Pour deux ouverts $U$, $V$ de $G$,
+\struck{\ill{}} $UV$ est une partie à la fois \add{ouverte et fermée de $G$
+(si \uncertain{de plus} qu.-cpts)}, \struck{contenant $G^0$ si $U$, $V$ sont des
+ouverts de $G$ qui contiennent $e$, $UV \supset G^0$}, donc stable par
+translation par $G^0$.
+\struck{\ill{} conséquence immédiate de 2 premières \ill{}}
+\add{\uncertain{supposons} \uncertain{$U$, $V$ qu.\ cpts ou $G$ loc.\ de t.f.}}
+
+\struck{\ill{}} l'implique : $W = U \cap U^{-1} \cap V \cap V^{-1}$.
+\struck{\ill{}} Pour prouver \struck{\ill{}} OPS par descente que $U$ contient
+pt rat.\ /$k$, et par translation que $U \ni e$.
+\struck{$UU^{-1} \supset G^0$. \ill{} Soit $g \in G^0$, il faut montrer que
+(pour une ext.\ $k'$ de $k(g)$) $g = uv^{-1}$, avec $u, v \in U(k')$, i.e.
+$(gU \cap U)(k') \neq \emptyset$, \ill{} il suffit de prouver que
+($k_1 = k(g)$)} \struck{\ill{}} or $gU \cap G^0$ et $U \cap G^0$ sont des
+ouverts non vides de $G^0$ (contenant $g$ et $e$), donc ont une intersection
+non vide, puisque $G^0$ est irréd.
+\struck{Autre dém.\quad $G \times G \to G$ est plat (\uncertain{projection} :
+$G \times G \xrightarrow{\ \mathrm{pr}_1\ } G$) donc générisant, donc
+\ill{} l'image de $U \times V$ est stable par générisation, donc si $G$ est
+loc.\ de t.f.}
+La démonstration montre que $U.V$ stable par translation par $G^0$, donc
+étant qu.-cpt il est \struck{stable} ouvert et fermé. \struck{\ill{}}
+$U.V$ ouvert comme image de $U \times_k V \subset G \times_k G$ par
+$G \times_k G \to G$, qui est ouvert [dém.\ : $G \times G \xrightarrow{\ \mathrm{pr}_1\ } G$ qui l'est]. D'autre part, pour prouver que $U.V$ est
+fermé, il suffit, comme $U.V$ est \struck{\ill{}} qu.-cpt donc
+\uncertain{rétrocompact} (tant que $G$ \underline{séparé}), \struck{\ill{}}
+de voir que $x \in U.V$, $y \in \overline{\lbrace x\rbrace}$, alors $y \in U.V$.
+\struck{\ill{} $x \in U.V$}
+On est ramené à \struck{\ill{}} le prouver pour $x$
+\note{la page est un palimpseste : plusieurs passages encadrés et barrés de
+traits obliques, des reprises dans l'interligne ; l'ordre de lecture retenu
+suit les renvois de sa main ; dans la marge gauche, une note encadrée,
+en grande partie illisible, où se lit « \ill{} $G$ \ill{} \uncertain{supposons}
+\ill{} loc.\ de t.f. »}
+
+\page{9}
+\textbf{Rectificatif sur critère d'irréductibilité géom.}
+
+
+\begin{tikzcd}[column sep=small, row sep=small]
+  Z \arrow[r, "f"] & X & X' \arrow[l, "p"'] & Z' \arrow[l, "f'"'] \\
+  k \arrow[rr, no head] & & k' &
+\end{tikzcd}
+
+\note{le schéma est redessiné d'après un croquis de marge, où $Z'$ et $p$
+sont notés au-dessus de la flèche $X' \to X$ ; sous $k'$, « \struck{séparable} »}
+
+Supposons
+\begin{itemize}
+  \item[a)] $Z$ géom.\ irréd,
+  \item[b)] $f(Z)$ non contenu dans l'un des points \struck{\ill{}} où
+    passent plusieurs comp.\ irréd.\ géom.\ (p.\,ex.\ $f(Z)$ contient un pt
+    géom.\ normal, \add{univ.} \struck{\ill{}} géom.\ régulier, de $X_{\mathrm{réd}}$).
+\end{itemize}
+Alors $X$ géom.\ irréductible.
+
+\textbf{Dém}\quad [OPS $Z$ réduit à un pt $a$ de $X$ \struck{\ill{} $X$ irréd}]
+Soit $k'$ \struck{clôture séparable} \add{ext.\ finie galoisienne} de $k$,
+\struck{alors} $X'_i$ une composante irréductible de $X'$. \struck{Elle domine}
+contenant $f'(Z')$. \struck{Ses transformées par} $\pi$ sont des
+composantes irréductibles contenant $f'(Z')$, donc sont égales à
+\struck{\ill{}} $X'_i$. Donc $X'_i$ est l'image inverse d'une partie fermée
+irréductible de $X$, savoir de $p(X'_i)$, or $p(X'_i) = X$ [$p$ ouvert
++ $p$ fermé], donc $X'_i = X'$, donc $X'$ est irréd.
+
+Contre-exemple si on laisse tomber b)\qquad
+$X = \mathbb{R}[x,y]/(x^2 + y^2)$, $Z = \mathrm{Spec}\,\mathbb{R}$,
+\[
+  Z \to X, \qquad \mathbb{R} \longleftarrow \mathbb{R}[x,y]/\text{---},
+  \qquad 0 \longleftarrow\!\shortmid x, y
+\]
+
+\struck{\ill{} $\pi_0(X/k)$}
+
+\textbf{Remarque}\quad Dans l'équivalence
+$\mathrm{Et}(k) \simeq (\pi\text{-Ens})$, $X \mapsto E$ :
+\begin{itemize}
+  \item $X$ quasi-compact (de degré $n$) \quad --- \quad $E$ fini (d'ordre $n$)
+  \item \struck{\ill{}} $X$ connexe [ou : irréductible, ou : $X = \mathrm{Spec}\,K$,
+    $K$ ext.\ finie sép.] \quad --- \quad $\pi$ transitif sur $E$
+  \item Décomposition de $X$ en somme de composantes connexes \quad --- \quad
+    décomposition de $E$ en somme d'orbites
+  \item $\varprojlim$ finies de schémas \quad --- \quad $\varprojlim$ finies de $\pi$-ens.
+  \item $\varinjlim$ \struck{\ill{}} de schémas \quad --- \quad $\varinjlim$ de $\pi$-ens.
+  \item mono $X \to Y$ (\uncertain{resp.}\ épi) \quad --- \quad $F$ injectif (resp.\ surjectif)
+  \item $[$ $X$ un torseur sous $G$ \struck{\ill{}} groupe fini ordinaire \quad --- \quad
+    $E$ un torseur à droite sous $G$ ; les opérations de $G$ commutant à
+    l'action de $\pi$ [dans ce cas, la structure est définie par un hom
+    continu $\pi \to G$] $]$
+\end{itemize}
+\note{dans la marge gauche, en face du tableau, un mot biffé illisible}
+
+\underline{Rappel sur la construction de $\pi_0(X/k)$} lorsque
+\struck{\ill{}} \struck{\ill{}} $X_{k'}$ ($k'$ clôture \ill{} de $k$) est
+localement connexe, \struck{dont les} \add{et les} composantes connexes
+définissables sur des ext.\ finies de $k$ (p.\,ex.\ $X$ qu.-cpt, ou $X$
+loc.\ de t.\ finie sur $k$)
+
+\page{10}
+$(*)$ Les pts de $\underline{\pi}_0(X/k)$ correspondent aux
+\underline{composantes} \underline{connexes} de $X$, pour toute telle
+composante $X_{(x)}$, $k(x)$ est la plus grande sous-algèbre
+\struck{\ill{}} séparable de $\Gamma(X_{(x)}, \underline{O}_{X_{(x)}})$
+\uncertain{sur $k(x)$}.
+
+Que se passe-t-il pour $X = \mathrm{Spec}\,k'$ ?
+
+On a $k' = \varinjlim k_i \Rightarrow X = \varprojlim X_i$, $X_i = \mathrm{Spec}\,k_i$
+\marginal{sous-cat.\ galoisienne finie de $k'$}
+\[
+  X' = \varprojlim X'_i = \varprojlim_i (\pi_i)_k = (\pi)_k , \qquad
+  \pi_0(X') = \pi \quad (\text{isom.\ \underline{topologique}})
+\]
+\note{la note « sous-cat.\ galoisienne finie de $k'$ » est cerclée et reliée
+par un trait à $k_i$}
+
+\struck{Ce n'est plus un schéma étale sur $k$}
+
+Schéma proétale sur $k$ [\struck{\ill{}} $=$ entier séparable $=$ réduit à
+cat.\ résiduelles alg.\ sép.]
+
+[Schéma loc.\ proétale sur $k$]
+\[
+  \left\lbrace\begin{array}{l}
+    \mathrm{Proét}(k) \simeq \pi\text{-esp.\ \uncertain{prof.}\ disc.} \simeq \text{\uncertain{Alg.\ sép.}}(k) \\
+    \mathrm{Locproét}(k) \simeq \pi\text{-esp.\ loc.\ cpt disc.}
+  \end{array}\right.
+\]
+
+Si $X$ qu.-cpt sur $k$ (pour simplifier) on construit une algèbre
+\uncertain{proétale} $\to k$, comme suit
+\begin{itemize}
+  \item[a)] $A =$ limite \struck{inductive} des sous-algèbres étales de
+    $\Gamma(X, \underline{O}_X)$ $=$ \struck{limite} plus grande sous-alg.\
+    ind-étale de $\Gamma(X, \underline{O}_X)$.
+    \[
+      X \longrightarrow \mathrm{Spec}(A) \overset{\text{déf}}{=} \underline{\pi}_0(X/k)
+    \]
+  \item[b)] Pour toute ext.\ \struck{finie} \add{étale} $k_i \subset k'$ de $k$,
+    on désigne par $A_i$ l'anneau des fonctions loc.\ constantes sur
+    $X_{k_i}$, à valeurs dans $k_i$. Soit
+    $\overline{A} = \varinjlim_i A_{i,k'}$ \struck{$=$ fonctions loc.\
+    constantes sur $X_{k'}$} \add{fonctions loc.\ constantes sur $X_{k_i}$
+    à val.\ dans $k'$}, à valeurs dans $k'$, alors $\overline{A}$ est
+    réduite et $\pi$ opère dessus par transport de structure, on pose
+    $A = (\overline{A})^{\pi}$.
+\end{itemize}
+
+$\left\lbrace\begin{array}{ll}
+  \text{a)} & \struck{\ill{}}\ \underline{\pi}_0(X/k) \text{ est proétale et }
+    X \to \underline{\pi}_0(X/k) \text{ \struck{est} surj.\ à fibres géom.\ connexes} \\
+  \text{b)} & \underline{\pi}_0(X/k) \text{ fonctoriel en } X \\
+  \text{c)} & \underline{\pi}_0(X/k) \text{ commute aux produits} \\
+  \text{d)} & \underline{\pi}_0(X/k) \text{ commute à l'extension de la base \ldots}
+\end{array}\right.$
+
+\textbf{NB}\quad $\underline{\pi}_0(X/k)$ peut se définir comme schéma
+loc.\ proétale, \struck{\ill{}} si tout pt de $X$ a un voisinage ouvert et
+fermé $U$, tel que \struck{la} décomposition de $U_{\bar k}$ en somme
+\struck{soit} soit finie (p.\,ex.\ $U$ qu.-cpt).
+
+\page{11}
+\subsection*{Schémas sur un corps.}
+\struck{Rappels} \struck{\ill{} parfaits \ill{}}
+
+\marginal{\textcircled{\small 1} Séparabilité}
+
+\textbf{Rappel}\quad Soit $k$ un corps. Conditions équivalentes
+\begin{itemize}
+  \item[a)] $k$ parfait i.e.\ \struck{\ill{}} car.\ 0, ou (car.\ $p > 0$)
+    $x \mapsto x^p$ bijectif)
+  \item[b)] un produit tensoriel d'algèbres réduites sur $k$ \uncertain{est} réduit
+  \item[b')] $\Longrightarrow$ Un produit sur $k$ de schémas réduits
+    \uncertain{est réduit} \add{interligne : \ill{}}
+  \item[c)] Pour toute extension finie $k'$ de $k$,
+    \struck{\ill{}} $k' \otimes_k k'$ est réduit \ill{} extension
+    \uncertain{parfaite} de $k$.
+\end{itemize}
+
+Soit $A$ une algèbre sur un corps $k$, Propriétés équivalentes
+\begin{itemize}
+  \item[a)] $\forall$ extension $k'$ de $k$, $A \otimes_k k'$ réduit
+  \item[b)] $\forall$ $k$-algèbre réduite $B$, $A \otimes_k B$ réduit
+  \item[c)] $A \otimes_k \bar k$ est réduit
+  \item[d)] $\forall$ ext.\ finie radicielle \struck{\ill{}} $k'$ de $k$,
+    $A \otimes_k k'$ est réduit.
+\end{itemize}
+\marginal{faire \uncertain{gaffe} : \ill{} limite \ill{} que $A \otimes_k k'$ \uncertain{réduit}}
+\note{une flèche relie d) à b)}
+
+\textbf{Déf}\quad On dit alors que $A$ est \underline{séparable} sur $k$ (ou
+géom.\ \underline{réduit})
+
+\textbf{Cor}\quad Soit $X$ schéma sur $k$. Propriétés équiv.
+\begin{itemize}
+  \item[a)] \struck{\ill{}} Pour tout $k$-schéma réduit $Y$, $X \times_k Y$ réduit
+  \item[b)] Pour toute \struck{\ill{}} extension $k'$ de $k$, $X_{k'}$ réduit
+  \item[c)] $X_{\bar k}$ est réduit
+  \item[d)] (Si $X = \bigcup X_i$, les $X_i$ affines d'anneaux $A_i$) les
+    $A_i$ sont séparables$/k$
+\end{itemize}
+
+\textbf{Déf}\quad On dit alors que $X$ est sép.\ sur $k$, ou encore
+\add{géom.}\ réduit. Ainsi, \struck{\ill{}} tt schéma \add{géom.}\
+\struck{réduit} sur $k$ est \struck{géom.}\ réduit, la réciproque étant
+vraie ssi $k$ est parfait.
+
+\textbf{NB}\quad Si $k'/k$ est une extension de $k$, $X$ sép.\ sur $k$
+$\Longleftrightarrow X_{k'}$ sép.\ $/k'$
+
+C'est un critère « géométrique ». \hfill \underline{Stabilité par produit}
+
+\marginal{\textcircled{\small 2} \struck{\ill{}} Irréductibilité}
+
+\textbf{Rappel}\quad Soit $k$ \struck{\ill{}} un corps. Conditions équivalentes
+\begin{itemize}
+  \item[a)] $k$ sép.\ clos i.e.\ \struck{\ill{}} cat.\ finie séparable de $k$ est $\simeq k$
+  \item[b)] Si $A$ et $B$ sont deux $k$-\struck{\ill{}} algèbres
+    \struck{\ill{}} intègres, $A \otimes B / \mathrm{Nil}$ est intègre
+  \item[] [b')] Si $X$, $Y$ sont deux $k$-schémas irréd, alors $X \times_k Y$ est irréd]
+  \item[c)] Si \struck{\ill{}} $k'$ est une extension finie de $k$,
+    $k' \otimes_k k' \to$ \struck{\ill{}} a un noyau nilpotent
+\end{itemize}
+\marginal{Toute \uncertain{limite} \ill{} d'irréd.\ (\uncertain{univ.}\ connexe)
+\ill{} irréd.\ (\uncertain{univ.}\ connexe)}
+
+Soit $X$ schéma sur corps $k$, $\bar k$ une extension alg.\ close de $k$.
+\underline{Conditions équivalentes}
+\begin{itemize}
+  \item[a)] $\forall$ $Y$ sur $k$, $Y$ irréductible, $X \times_k Y$ est irréductible
+  \item[b)] $\forall$ extension $k'$ de $k$, $X_{k'}$ est irréductible
+  \item[c)] $X_{\bar k}$ est irréductible
+  \item[d)] \struck{\ill{}} $\forall$ \struck{\ill{}} cat.\ finie \struck{\ill{}}
+    $k'$ de $k$, $X \otimes_k k'$ irréd.
+\end{itemize}
+\marginal{faire \uncertain{gaffe} : la limite \ill{} (\ill{} limite d'irréd.\
+par des morphismes \uncertain{dominants} \ill{})}
+
+\page{12}
+\textbf{Déf}\quad On dit alors que $X$ est géom.\ irréductible.
+
+Ainsi \struck{\ill{}} tout $k$-schéma irréductible est géom.\ irréductible,
+réciproque \uncertain{vraie} ssi $k$ est sép.\ clos.
+\note{lu tel quel : l'énoncé attendu est « géom.\ irréductible $\Rightarrow$
+irréductible, la réciproque étant vraie ssi $k$ est sép.\ clos » ; la ligne
+porte un début biffé illisible}
+
+\textbf{NB}\quad Si $k'/k$ une extension, $X/k$ géom.\ irréd
+$\Longleftrightarrow X_{k'}/k'$ géom.\ irréd. \hfill / Stabilité par produit
+
+\marginal{\textcircled{\small 3} \struck{\ill{}}}
+
+\textbf{Th}\quad Soit $k$ un corps sép.\ clos. Si $X$ et $Y$ sont deux
+$k$-schémas connexes, $X \times_k Y$ est connexe.
+
+\textbf{Dém.}\quad dans le cas où $X$ et $Y$ sont loc.\ de t.f.\ sur $k$.
+(Cas général utilise technique de descente), plus précisément que
+$X \times Y \to Y$ la top.\ de $Y$ est quotient de celle de $X \times Y$.
+\begin{itemize}
+  \item[a)] Si $X$ est connexe, $X_{k'}$ est connexe \add{non vide} pour toute
+    extension $k'$ de $k$ [en effet, les fibres de $X_{k'} \to X$ sont
+    connexes \add{non vides}]
+  \item[b)] Les fibres de $X \times Y \to Y$ étant connexes \add{non vides}
+    et $Y$ connexe, $X \times Y$ est connexe
+\end{itemize}
+
+\textbf{NB}\quad Si $k$ est un corps tel que pour tout $X$ \add{connexe} fini
+sur $k$, $X \times_k X$ est connexe, alors $k$ est sép.\ clos.
+
+\textbf{Prop}\quad Soit $k$ un corps, $\bar k$ une cat.\ \struck{\ill{}} sép.\
+close, $X$ un $k$-schéma. Conditions équivalentes
+\begin{itemize}
+  \item[a)] $\forall$ $k$-schéma $Y$, $X \times_k Y$ est connexe
+  \item[b)] $\forall$ ext.\ $k'$ de $k$, $X_{k'}$ est connexe
+  \item[c)] \struck{\ill{}} $X_{\bar k}$ est connexe.
+  \item[d)] $\forall$ ext.\ finie \struck{gal.} $k'$ de $k$, $X_{k'}$ est connexe.
+\end{itemize}
+\marginal{\ill{} limite \ill{} \uncertain{séparante} \ill{}
+$\mathrm{Spec}\,k_i \to \mathrm{Spec}\,k'$ \ill{} ouvert.}
+
+\textbf{Déf.}\quad On dit alors que $X$ est \underline{géom.\ connexe} sur $k$.
+
+Ainsi \struck{\ill{}} géom.\ connexe sur $k$ $\Rightarrow$ connexe, la
+réciproque vraie ssi $k$ sép.\ clos.
+
+\textbf{NB}\quad $X_{k'}$ géom.\ connexe$/k'$ $\Longleftrightarrow X$ géom.\
+connexe sur $k'$. \quad Stabilité par produit.
+\note{« sur $k'$ » à la fin de la ligne, là où l'on attendrait « sur $k$ »}
+
+\marginal{\textcircled{\small 4} intégrité}
+
+$k$ un corps. Conditions équivalentes
+\struck{a) Si $X$ et $Y$ deux $k$-algèbres intègres}
+\begin{itemize}
+  \item[a)] $k$ alg.\ clos
+  \item[b)] Si $A$, $B$ sont deux $k$-algèbres intègres, $A \otimes_k B$ intègre
+  \item[b')] \struck{Soit} $X$, $Y$ intègres $\Rightarrow X \times_k Y$ int.
+  \item[c)] Pour toute ext.\ finie $k'$ de $k$, $k' \otimes_k k'$ intègre.
+\end{itemize}
+
+\page{13}
+\textbf{Prop}\quad Soit $X$ un schéma sur corps $k$, $\bar k$ une cat.\
+alg.\ close de $k$. Cond.\ équiv.
+\begin{itemize}
+  \item[a)] $\forall$ $k$-schéma intègre $Y$, $X \times_k Y$ intègre.
+  \item[b)] $\forall$ ext.\ $k'$ de $k$, $X_{k'}$ intègre
+  \item[c)] \struck{$\forall$} $X_{\bar k}$ intègre
+\end{itemize}
+
+\textbf{Déf}\quad On dit alors que $X$ est géom.\ intègre
+($\Leftrightarrow$ géom.\ irréd.\ et géom.\ réduit)
+
+Ainsi géom.\ intègre $\Rightarrow$ intègre, réciproque vraie ssi $k$ alg.\ clos.
+
+$X/k$ géom.\ int.\ $\Longleftrightarrow X_{k'}/k'$ géom.\ intègre
+
+Stabilité par produits
+
+\textbf{Prop}\quad Soit $X$ sur corps $k$, $Z \xrightarrow{\ u\ } X$, $X$
+connexe, $Z$ géom.\ connexe \add{non vide} (p.\,ex.\ $Z$ \uncertain{rationnel}$/k$)
+\struck{(géom.\ irréductible)}. Alors $X$ est géom.\ connexe
+\struck{(géom.\ irréd)}.
+
+Soit $k'$ \struck{la clôture séparable de $X$} \add{extension finie
+galoisienne}. Alors $\pi = \mathrm{Gal}(k'/k)$ opère sur
+$X_{k'} = X \times_k \mathrm{Spec}(k')$ et sur $Z_{k'}$, de façon à
+commuter à $u_{k'} : Z_{k'} \to X_{k'}$. \struck{Les} \add{Soit $U$}
+\add{parties} ouvertes et fermées de $X_{k'}$, \struck{\ill{}}
+\add{\ill{} $\neq \emptyset$ \ill{} $X_k$} \ill{} qu'elle est stable sous
+l'action de $\pi$. En effet \struck{\ill{} $U$ contient} quitte à
+remplacer $U$ par $\complement U$, on peut supposer que $U$ contient
+$u_{k'}(Z_{k'})$, qui est stable par $\pi$, donc l'intersection
+\struck{des ouverts fermés qui contiennent $u_{k'}(Z_{k'})$ est stable sous
+$\pi$,} \add{des} transformés de $U$ par le gr.\ $\pi$ est un ouvert stable
+\struck{tel que} \struck{donc c'est l'image inverse d'une partie de $X$}
+non vide, provenant donc d'un ouvert \struck{\ill{}} de $X$, \uncertain{cqfd}.
+
+\textbf{Ex}\quad Composante neutre \add{$G^0$} d'un groupe algébrique
+\struck{Elle est quasi-compacte} [Quand elle est ouverte, p.\,ex.\ $G$ loc.\
+de t.f.\ sur $S$, alors on a \ill{} de la structure induite]
+
+$G_{\mathrm{réd}}$ pour $k$ \underline{parfait} : un sous-groupe fermé de $G$
+
+$G^0_{\mathrm{réd}}$ \quad id.
+
+$\left[\begin{array}{l}
+  \text{Soient } U, V \text{ \add{deux} ouverts de } G, \text{ alors }
+  U.V^{-1} \supset G^0 \ [\Rightarrow \text{ et si } U, V \text{ contiennent} \\
+  \text{l'élément neutre, } UV \supset G^0]
+\end{array}\right]$
+
+[Cor.\ $G^0$ quasi-compact]
+
+\page{14}
+Schémas (finis) étales sur un corps $k$ : la catégorie est équivalente : la
+catégorie des $\pi$-ensembles (finis), $\pi = \mathrm{Gal}(\bar k/k)$.
+
+\underline{Application}\quad Soit $X$ un schéma sur $k$, supposons d'abord
+que $X_{\bar k}$ est loc.\ connexe [p.\,ex.\ loc.\ noeth., ou avec des
+composantes irréductibles loc.\ finies ; tel est le cas si $X$ est loc.\ de
+t.f.\ sur $k$]. Alors $I = \pi_0(X_{\bar k})$ est un ens.\ discret, et on a
+un \add{\ill{}} morphisme de $\bar k$-schémas
+
+\begin{tikzcd}
+  X_{\bar k} \arrow[d] \\
+  I_{\bar k}
+\end{tikzcd}
+
+(il est universel pour les morphismes de $X$ dans des schémas constants).
+D'ailleurs $\pi$ opère sur \struck{\ill{}} $I$, donc $I_{\bar k}$ provient
+d'un \struck{\ill{}} schéma étale $T$ sur $k$ [si on prouve que $\pi$ opère
+continûment --- ce sera le cas en tous cas si $X$ est quasi-compact]. Alors
+la théorie de la descente nous prouve que $X \simeq X_{\bar k}/\pi$,
+$T = I_{\bar k}/\pi$, (dans catégorie des schémas) donc on trouve
+
+\begin{tikzcd}
+  X \arrow[d, "f"] \\
+  T
+\end{tikzcd}
+
+$T$ étant étale sur $k$, \struck{\ill{}} on \ill{} que $f$ est surjectif et à
+fibres géom.\ connexes --- et ceci suffit à caractériser $X$ \add{$T$}. On
+peut aussi décrire comme le morphisme universel de $X$ dans un schéma
+étale sur $k$.
+\marginal{i.e.\ \uncertain{les composantes connexes} de $X_{\bar k}$ \ill{}
+définies sur une ext.\ finie de $k$. C'est vrai si $X$ \uncertain{qu.-cpt},
+\struck{\ill{}}}
+
+Tout-à-fait le schéma des composantes connexes géom.\ de $X$. Un pt
+\ill{} $X_\xi$, \ill{}
+
+
+\begin{tikzcd}[column sep=small, row sep=small]
+  X \arrow[d] & X' \arrow[d, no head] \\
+  T \arrow[d] & T' \arrow[d, no head] \\
+  S = \mathrm{Spec}\,k \arrow[r, no head] & S'
+\end{tikzcd}
+
+\uncertain{val.}\ dans un $S'/k$ « \uncertain{est} » une partie ouverte et fermée
+de \ill{} $X_{S'}$
+\note{le schéma est dessiné dans la marge gauche ; la ligne qui le commente
+court sous le paragraphe précédent}
+
+\underline{Généralisation}\quad On suppose $X$ quasi-compact, ou somme de
+schémas qu.-cpts : On trouve un $T$ \add{affine} proétale, ayant les mêmes
+propriétés qu'avant. Le foncteur qu'il représente est un peu plus subtil à
+décrire\ldots.
+
+\page{15}
+$\left\lbrace\begin{array}{l}
+  \text{Groupes sur des bases } S \text{ quelconques. Prendre base } S
+  \text{ ou prendre base } k \text{ ?} \\
+  \text{Groupes non-affines OK.}
+\end{array}\right.$
+
+Représentations linéaires de $D(M)$ [cas particulier : $\mathbf{G}_m$, $\mu_n$]
+
+Application : homomorphismes $D(M) \to \mathbf{G}_m$ : on trouve que $M_S$
+est « réflexif » vis à vis de $\mathbf{G}_m$.
+
+\underline{Dualité de Cartier}\quad $\underline{\mathrm{Hom}}(G, \mathbf{G}_m)$
+\struck{\ill{}} représentable ? Cela l'est si $G$ diagonalisable, mais
+\add{\uncertain{non} (\uncertain{p.\,ex.} $G = \mathbf{G}_a$)} \struck{pas pour un}
+\add{gr.} \struck{schéma en} groupe affine \uncertain{lisse} de t.f.). Par
+contre, si $G$ est fini loc.\ libre sur $S$, on a
+\[
+  \underline{\mathrm{Hom}}_{\mathrm{gr}}(G, \mathbf{G}_m) \subset
+  \underline{\mathrm{Hom}}_{\underline{O}\text{-alg}}(\underline{O}_S[T, T^{-1}], \mathcal{A})
+  \simeq W(\mathcal{A})^{*},
+\]
+et le \struck{sous} foncteur est celui des \struck{$g$} $u \in W(\mathcal{A})^{*}(S')$ tels que
+\[
+  \pi(u) = u \otimes u , \qquad \varepsilon(u) = 1
+\]
+[NB On \uncertain{peut} \ill{} les conditions \ill{} car
+$\underline{\mathrm{Hom}}_{\mathrm{gr}}(G, \mathbf{G}_m) =
+\underline{\mathrm{Hom}}_{\mathrm{mon}}(G, \underline{O}^{*})$]
+\marginal{$\underline{\mathrm{Hom}}_{\mathrm{gr}}(G, H)$ représentable si
+$G \to$ fini loc.\ libre, $H$ affine (\ill{})}
+
+\struck{\ill{}} La représentabilité est claire, mais de plus on reconnaît que
+c'est $\mathrm{Spec}(\check{\mathcal{A}})$, $\check{\mathcal{A}}$
+\add{$= \mathrm{Dist}(G)_S$} étant une algèbre grâce à la structure de
+coalgèbre de $\mathcal{A}$. D'autre part, la structure de coalgèbre de
+$\check{\mathcal{A}}$ provient du fait que le foncteur qu'il représente est
+un foncteur-groupe.
+\marginal{$\check{\mathcal{A}}$ comm.\ \uncertain{car} $G$ comm.\ \ill{}
+$\underline{\mathrm{Hom}}(\check{\mathcal{A}}, k')$ \ill{}
+$(\check{\mathcal{A}})_{\mathrm{ab}}$ \ill{}}
+
+\underline{Th.}\quad Tout groupe comm.\ fini loc.\ libre \add{$G$} est réflexif
+pour \add{$\mathbf{G}_m$}. I.e.\ Son dual $G^{*}$ est fini loc.\ libre comm.,
+d'où une \underline{involution} $G \mapsto G^{*}$ de la catégorie des
+groupes comm.\ loc.\ libres. Elle correspond à la dualité des bialgèbres
+bicommutatives sur $S$.
+
+\underline{Ex}\quad $\mu_n \leftrightarrow \mathbb{Z}/n\mathbb{Z}$,\quad
+$\alpha_p \leftrightarrow \alpha_p$ \quad | \quad Mais aussi
+$D(M) \longleftrightarrow M_S$
+
+Marche $\pm$ pour les schémas en \underline{groupes} \struck{affines} \ill{}
+sur $S$ \struck{tels que} \add{\ill{}} \ill{} un groupe fini loc.\ libre,
+groupes discrets, groupes diagonalisables, et variétés \struck{discrètes}
+tordues\ldots\ Si on veut inclure le groupe $\mathbf{G}_a$, il faut\ldots
+
+La dualité de Cartier domine la théorie des groupes algébriques (ou
+formels) commutatifs, affines ou non --- mais, il faut la compléter par la
+considération de $\underline{\mathrm{Ext}}^1(G, \mathbf{G}_m)$ alors.
+
+\end{document}
