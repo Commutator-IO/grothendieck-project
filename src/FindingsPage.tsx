@@ -85,6 +85,34 @@ const KIND: Record<Finding['kind'], string> = {
   codicological: 'about the object',
 };
 
+/**
+ * « Most checkable first »: an order on what the rows already record, never
+ * on a judgement of importance, which nothing in the data carries and which a
+ * machine pass must not be seen to make. Mathematical before codicological;
+ * then by status, a person's check first and a searched candidate before an
+ * unsearched one; then the rows the plain-language summary restates; then the
+ * rows the page carries alone before those where the edition supplied steps,
+ * since there a mistake is likelier ours; then the more sources searched.
+ * Ties keep the order of `findings.ts`.
+ */
+const STATUS_RANK: Record<Finding['status'], number> = {
+  confirmed: 0,
+  candidate: 1,
+  unsearched: 2,
+  matched: 3,
+};
+const FEATURED = new Set(PLAIN.flatMap((p) => p.rows));
+
+function byCheckable(a: Finding, b: Finding) {
+  return (
+    Number(a.kind !== 'mathematical') - Number(b.kind !== 'mathematical') ||
+    STATUS_RANK[a.status] - STATUS_RANK[b.status] ||
+    Number(!FEATURED.has(a.id)) - Number(!FEATURED.has(b.id)) ||
+    Number(a.ours !== null) - Number(b.ours !== null) ||
+    b.literature.length - a.literature.length
+  );
+}
+
 /** Shelfmarks in the order the entries first mention them. */
 function cotesOf(list: Finding[]) {
   const seen: string[] = [];
@@ -140,10 +168,19 @@ function Field({
  * one case where the card would otherwise be alone at the top of the window
  * with nothing naming its folder.
  */
-function Row({ n }: { n: Finding }) {
+function Row({ n, withCote }: { n: Finding; withCote?: boolean }) {
+  const c = withCote ? BY_ID.get(n.cote) : undefined;
   return (
     <li id={n.id} className="card group scroll-mt-16 p-5">
       <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1.5">
+        {/* Without the group heading above, the card has to name its folder
+            itself — the one case where the repetition the heading saves is
+            the only place the shelfmark appears. */}
+        {withCote && (
+          <span className="tabular text-[12.5px] font-semibold text-ink-700" title={c?.title}>
+            Cote n° {n.cote}
+          </span>
+        )}
         <span className="tabular text-[12.5px] font-semibold text-ink-700">
           pages {n.pages}
         </span>
@@ -233,10 +270,12 @@ function Section({
   title,
   note,
   rows,
+  flat,
 }: {
   title: string;
   note?: string;
   rows: Finding[];
+  flat?: boolean;
 }) {
   if (rows.length === 0) return null;
   return (
@@ -247,9 +286,17 @@ function Section({
       {note && (
         <p className="mt-2 max-w-[44em] text-[13.5px] leading-relaxed text-ink-500">{note}</p>
       )}
-      {cotesOf(rows).map((cote) => (
-        <CoteGroup key={cote} cote={cote} rows={rows.filter((n) => n.cote === cote)} />
-      ))}
+      {flat ? (
+        <ul className="mt-3 space-y-3">
+          {[...rows].sort(byCheckable).map((n) => (
+            <Row key={n.id} n={n} withCote />
+          ))}
+        </ul>
+      ) : (
+        cotesOf(rows).map((cote) => (
+          <CoteGroup key={cote} cote={cote} rows={rows.filter((n) => n.cote === cote)} />
+        ))
+      )}
     </section>
   );
 }
@@ -353,6 +400,7 @@ export function FindingsPage() {
 
   const [query, setQuery] = useState('');
   const [only, setOnly] = useState<string | null>(null);
+  const [order, setOrder] = useState<'folder' | 'checkable'>('folder');
 
   const cotes = useMemo(() => {
     const counts = new Map<string, number>();
@@ -435,6 +483,32 @@ export function FindingsPage() {
               <span className="text-ink-400"> · {closed.length} already looked up</span>
             )}
           </p>
+          <div
+            role="group"
+            aria-label="Order"
+            className="ml-auto flex items-center gap-1 text-[12px]"
+            title="Most checkable first: mathematical rows, then by status, then the rows restated in plain words, then those the page carries alone. An order on what each row records — not a ranking of importance."
+          >
+            <span className="mr-1 text-ink-400">Order</span>
+            {(
+              [
+                ['folder', 'by folder'],
+                ['checkable', 'most checkable first'],
+              ] as const
+            ).map(([k, label]) => (
+              <button
+                key={k}
+                type="button"
+                aria-pressed={order === k}
+                onClick={() => setOrder(k)}
+                className={`rounded-full px-2.5 py-1 transition-colors ${
+                  order === k ? 'bg-ink-800 text-white' : 'bg-ink-100 text-ink-600 hover:bg-ink-200'
+                }`}
+              >
+                {label}
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* Both an index and a filter. Sixteen shelfmarks is more than a
@@ -486,12 +560,13 @@ export function FindingsPage() {
           </p>
         )}
 
-        <Section title="Open" rows={open} />
+        <Section title="Open" rows={open} flat={order === 'checkable'} />
 
         <Section
           title="Looked up and found"
           note="Candidates that turned out to be in the literature. They stay here on purpose: a killed candidate saves the next reader the search, and a list that only ever grows is not being checked."
           rows={closed}
+          flat={order === 'checkable'}
         />
 
         <section className="mt-12 max-w-[44em] text-[13.5px] leading-relaxed text-ink-500">
