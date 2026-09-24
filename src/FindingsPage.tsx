@@ -3,8 +3,9 @@ import { useMemo, useState } from 'react';
 import { useHashTarget } from './components/Anchors.tsx';
 import { Footer, Header } from './components/Frame.tsx';
 import { FINDINGS } from './content/findings.ts';
+import { PLAIN } from './content/summary.ts';
 import { BY_ID } from './content/catalogue.ts';
-import type { Finding } from './lib/types.ts';
+import type { Finding, PlainItem } from './lib/types.ts';
 import { notation } from './lib/notation.tsx';
 
 /**
@@ -253,6 +254,100 @@ function Section({
   );
 }
 
+/**
+ * The plain-language summary (#29): a dozen rows restated for a reader who is
+ * not a specialist, above the list they come from.
+ *
+ * Every figure in the preamble is counted from `FINDINGS`, and every badge is
+ * read from the rows an item restates, so the summary cannot drift from the
+ * list. The caveats are printed on each item and not only here — a reader who
+ * arrives on one item by its anchor must not be able to miss them.
+ */
+function PlainSummary() {
+  const maths = FINDINGS.filter((n) => n.kind === 'mathematical');
+  const count = (s: Finding['status']) => maths.filter((n) => n.status === s).length;
+  const surveyed = cotesOf(FINDINGS).length;
+
+  return (
+    <section id="in-plain-words" className="mt-10 scroll-mt-16">
+      <h2 className="text-[11px] font-bold uppercase tracking-[0.12em] text-ink-400">
+        In plain words — {PLAIN.length} items
+      </h2>
+      <div className="mt-2 max-w-[44em] space-y-2 text-[14px] leading-relaxed text-ink-600">
+        <p>
+          A dozen items from the list below, restated for a reader who is not a specialist
+          in the field. They were chosen for being statable and worth checking, not ranked
+          by importance. Every one is a <strong>hypothesis, not a result</strong>: a
+          language model flagged a statement that might not be in the literature, and
+          nobody has yet shown that it is not.
+        </p>
+        <p>
+          Of the {maths.length} mathematical rows on this page, {count('candidate')} have
+          been looked up and not found, {count('unsearched')} have not been looked up at
+          all, and {count('matched')} turned out to be in the books. The survey covers{' '}
+          {surveyed} folders; the other transcribed folders have not been looked at, and
+          this page says nothing about them.
+        </p>
+      </div>
+      <ol className="mt-5 space-y-3">
+        {PLAIN.map((p) => (
+          <PlainCard key={p.id} p={p} />
+        ))}
+      </ol>
+    </section>
+  );
+}
+
+function PlainCard({ p }: { p: PlainItem }) {
+  const rows = p.rows
+    .map((id) => FINDINGS.find((n) => n.id === id))
+    .filter((n): n is Finding => n !== undefined);
+  // One badge per status present, so two rows that agree print one badge.
+  const statuses = [...new Set(rows.map((n) => n.status))];
+  const c = BY_ID.get(p.cote);
+
+  return (
+    <li id={`plain-${p.id}`} className="card scroll-mt-16 p-5">
+      <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1.5">
+        <span className="tabular text-[12.5px] font-semibold text-ink-700">
+          Cote n° {p.cote}
+        </span>
+        {c && <span className="text-[12px] text-ink-500">{c.title}</span>}
+        {statuses.map((s) => (
+          <span
+            key={s}
+            title={STATUS[s].help}
+            className={`rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide ${STATUS[s].className}`}
+          >
+            {STATUS[s].label}
+          </span>
+        ))}
+      </div>
+      <h3 className="mt-2.5 text-[16px] font-semibold leading-snug text-ink-900">{p.title}</h3>
+      <p className="mt-2 max-w-[42em] text-[15px] leading-relaxed text-ink-800">{p.what}</p>
+      <dl className="mt-3.5 space-y-2 border-t border-ink-100 pt-3.5 text-[13px] leading-relaxed">
+        <Field label="Ours, not his">{p.ours}</Field>
+        <Field label="What would settle it">{p.settle}</Field>
+        <Field label="Caveats" muted>
+          First pass by a language model; not checked against the leaves by a person; in
+          any dispute the transcription governs. Nothing here says who was first.
+        </Field>
+      </dl>
+      <p className="mt-3 text-[12.5px] text-ink-500">
+        {rows.length === 1 ? 'The row in full: ' : 'The rows in full: '}
+        {rows.map((n, i) => (
+          <span key={n.id}>
+            {i > 0 && ', '}
+            <a href={`#${n.id}`} className="text-brand-700 underline underline-offset-2">
+              {n.id}
+            </a>
+          </span>
+        ))}
+      </p>
+    </li>
+  );
+}
+
 export function FindingsPage() {
   useHashTarget();
 
@@ -307,6 +402,8 @@ export function FindingsPage() {
             edition supplied rather than the page, and what would settle it.
           </p>
         </header>
+
+        <PlainSummary />
 
         {/* The three badges are not guessable from their wording alone, and a
             tooltip is not read. Named once, here — the same decision the

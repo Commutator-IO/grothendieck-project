@@ -304,3 +304,25 @@ export interface Finding {
   /** The one check that would decide it. */
   settle: string;
 }
+
+/**
+ * One item of the plain-language summary above the findings list (#29).
+ *
+ * It restates rows of `FINDINGS` for a reader who is not a specialist, and
+ * never adds a claim they do not make: `rows` names them, and their status is
+ * read from them at render time rather than copied here, so the summary cannot
+ * go on saying « not looked up » after someone has.
+ */
+export interface PlainItem {
+  id: string;
+  cote: string;
+  /** The `Finding.id`s this item restates. */
+  rows: string[];
+  title: string;
+  /** What the folder seems to hold, in words a non-specialist can follow. */
+  what: string;
+  /** What the edition supplied — where a mistake would be ours, not his. */
+  ours: string;
+  /** The one check that would decide it, shortened. */
+  settle: string;
+}
