@@ -1,0 +1,1030 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 131
+% (pages 1-41, the whole folder).
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried moves into a
+% footnote. It is held to being mathematically correct as it stands; where the
+% manuscript is loose or mistaken, the true statement is what appears here and
+% the footnote says what the page has. In any dispute of substance the
+% transcription governs: whoever cites Grothendieck must cite batch-01.fr.tex
+% (pp. 1-20) or batch-02.fr.tex (pp. 21-40).
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-09-24 — first pass, unchecked against the pages by a human.
+% The folder was read whole, its three batches together; this is one document
+% for the shelfmark. It was made on Opus 5.5 and has not been measured against
+% the reference reading of folder 115 (made on Opus 5). The literature named
+% in the footnotes is cited from memory and was not checked against the
+% sources.
+%
+% Scope. Batch 3 is page 41 alone, a leaf of a foreign typescript with nothing
+% in his hand; its transcription has an empty body and no \page, and nothing
+% here reads it (no \pagerange names page 41). The same holds for pages 7, 9,
+% 12, 20 and the odd pages 23-39 (typed leaves by others, « n° 371 » and
+% « n° 392 »), and for the blank pages 10, 18, 21. Page 17 carries two words.
+%
+% Spine. One theorem and its tools, written in the reverse of their logical
+% order. Pages 22-40 are the « notes précédentes » that pages 3-5 cite: the
+% « cor 2 à prop. 1 » of page 3 is the Corollaire 2 of page 28, the « prop. 2
+% des notes » is the Proposition 2 of pages 30-32, the « prop. 3 des notes
+% préc. » and its « condition de constructibilité » are the Prop. 3 of page
+% 32. The identification is ours, from the numbering and the content; the
+% pages do not say where the earlier notes are. The two marginal programmes of
+% page 32 (« Transformer 4°) en une [condition] plus facile à vérifier, avec
+% ... dim 1 » and « Transformer en une condition de modularité générique »)
+% are what the « critère de modularité a) locale / b) générique » of page 1
+% (conditions 7°, 8°) carry out.
+%   pp. 1-2    first list of eight conditions
+%   pp. 3-5    proof by induction on dim S, citing pp. 28, 30-32, 32
+%   pp. 6, 8   axioms (A), (B), (C) (page 6 reformulates page 8's C_1)
+%   p. 11      the list for the unramified case, with (9°) = (RG)
+%   pp. 13-16  the Théorème, corollaries, (RG), examples, applications
+%   p. 19      proof of (A) and (B)
+%   pp. 22-40  Prop. 1, Cor. 1, Cor. 2, Prop. 2, Prop. 3, modular pairs,
+%              proof of Prop. 3
+%
+% Notation fixed for the folder. « préschéma » is written « schéma ». The
+% conditions of the Théorème are numbered (1)-(8) as on page 13; page 1's
+% numbering is translated through a concordance given in the spine section,
+% and page 1's 4° (no counterpart on page 13) is called (E). The conditions of
+% pages 22-32 are written (L1)-(L4), (R_loc), (R_0): the arrows he draws
+% under the L and the two small circles on L_3, L_4 are dropped (footnoted).
+% « Modulaire » is the notion of page 34, fixed in the spine section and used
+% from page 1 on.
+%
+% Substantive departures, each footnoted where it occurs:
+%   - p. 15, Cor. 2 b): the bracket « tel que I_p = 0 » makes the condition
+%     fail already for a closed immersion (counterexample given); the reading
+%     states it with Spec A_p schematically dense (page 6's marginal
+%     « d'adhérence schématique ») and I only nilpotent;
+%   - p. 34: « Hom_k(k(t'), k(t)) » has its variance reversed; the reading
+%     writes Hom_k(k(t), k(t'));
+%   - p. 26: the step u'p_1 = u'p_2 invokes the injectivity of 1°) for
+%     T' x_T T', which is not local essentially of finite type; the reading
+%     supplies the extension of injectivity through (L2);
+%   - p. 30: the construction of xi_1^* needs F(B^) -> lim F(B_n) surjective,
+%     which (L4) as stated on p. 24 (injective) does not give; the reading
+%     assumes bijectivity, as condition (4) of page 13 does;
+%   - p. 4, step (3): effectivity of the descent datum is asserted; the
+%     reading says what makes it hold in the quasi-compact case and flags the
+%     rest;
+%   - p. 16: « un schéma abélien ... est projectif » is false in general
+%     (Raynaud); the reading says so;
+%   - p. 38: the Lemme's « eta in F(S) » is read eta in F(Z);
+%   - pp. 8 and 19: fibre products over S of S'-schemes are read over S'.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{131}
+\pages{1}{41}
+\dating{[vers 1971]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Foncteurs représentables par schéma quasi fini : notes manuscrites (s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Ces feuillets cherchent à reconnaître un espace géométrique à la seule manière
+dont il répond quand on l'interroge.
+
+Voici le problème. En géométrie algébrique, beaucoup d'objets qu'on voudrait
+étudier — les courbes d'un certain type, les fibrés en droites sur une
+variété, les morphismes entre deux variétés abéliennes — ne sont d'abord
+connus que par un « questionnaire » : pour chaque espace test $T$, on sait dire
+quelles sont les familles de ces objets paramétrées par $T$. Un tel
+questionnaire s'appelle un foncteur $F$. On voudrait qu'il existe un vrai
+espace $X$, un schéma, tel que se donner une famille paramétrée par $T$
+revienne exactement à se donner une application de $T$ dans $X$ : on dit alors
+que $X$ \emph{représente} $F$, et $X$ est l'« espace de modules » du problème.
+Mais on ne peut presque jamais construire $X$ d'un coup. La question est donc :
+quelles propriétés, vérifiables sur le questionnaire lui-même, garantissent
+qu'un tel $X$ existe ?
+
+Le dossier y répond dans un cas précis : celui où $X$ serait « discret
+au-dessus de la base », c'est-à-dire n'aurait, au-dessus de chaque point, que
+des points isolés en nombre fini localement — un schéma \emph{localement quasi
+fini}. C'est le cas des foncteurs qu'il appelle non ramifiés : les morphismes
+d'une variété abélienne dans une autre, les sous-groupes d'un groupe, les
+composantes connexes des fibres d'un morphisme.
+
+L'idée se comprend par une analogie avec les fonctions analytiques. Pour
+savoir qu'une fonction est analytique, on regarde d'abord, en chaque point,
+son développement de Taylor — une donnée purement formelle, qui ne dit rien de
+ce qui se passe à distance finie ; puis on vérifie que la série converge sur
+un petit disque ; puis on recolle les disques. Le dossier procède de même, en
+trois étages. On interroge d'abord $F$ sur les « points épaissis »
+(les anneaux artiniens) : si $F$ vient d'un espace $X$, les réponses doivent
+reconstituer, point par point, un développement formel de $X$. On demande
+ensuite que ce développement formel « converge » : qu'un paramétrage qui est
+universel en un point le reste dans tout un voisinage. C'est ce que le dossier
+appelle être \emph{modulaire}, et les deux conditions centrales du théorème —
+un critère de modularité local et un critère générique — disent exactement que
+la modularité se propage. Enfin des propositions « formelles » recollent les
+morceaux. La démonstration monte alors en dimension : sur une base de
+dimension zéro tout est formel ; sur une base locale complète on recolle le
+point fermé au reste, déjà connu par récurrence ; on redescend du complété à
+l'anneau local, puis de l'anneau local au voisinage.
+
+Le dossier est un atelier, rangé à l'envers. Les outils — cinq énoncés de
+recollement et une définition de la modularité — sont aux pages 22 à 40 ; le
+théorème qui s'en sert est aux pages 1 à 19, et il les cite comme « les notes
+précédentes ». En marge des outils, deux programmes sont notés : remplacer une
+hypothèse difficile à vérifier par une condition « de dimension 1 », et une
+hypothèse de constructibilité par une condition « générique ». Le théorème des
+premières pages est l'exécution de ces deux programmes. Et à peine le
+théorème écrit, les questions viennent en marge : lesquelles de ces conditions
+sont vraiment nécessaires ? donner l'exemple type qui montre que l'une ne
+découle pas des autres ; limiter la classe des anneaux sur lesquels il faut
+les vérifier. C'est la manière d'un mathématicien qui ne tient pas un énoncé
+pour acquis tant qu'il n'en a pas éprouvé chaque hypothèse.
+
+Tout n'est pas établi : la dernière étape de la démonstration s'arrête sur
+« on est ramené à vérifier la condition de constructibilité », et le
+recollement final des pages 38 à 40 renvoie à « une autre proposition
+formelle » qui n'est pas écrite. Les applications annoncées — la projectivité
+des schémas abéliens, l'existence du schéma de Picard — ne sont qu'annoncées,
+et la première, telle qu'elle est écrite, est fausse en général.
+
+Pour aller plus loin, les noms d'aujourd'hui : critères de représentabilité
+d'Artin, foncteur localement de présentation finie, pro-représentabilité et
+critère de Schlessinger, effectivité des déformations formelles, espaces
+algébriques et relations d'équivalence étales, foncteurs non ramifiés, schéma
+de Picard.
+
+\keywords{representable functor, locally quasi-finite morphism, Artin's
+representability criteria, limit-preserving functor, pro-representable
+functor, formal effectivity, fpqc descent, valuative criterion of
+separatedness, unramified functor, étale morphism, open immersion,
+constructible set, étale equivalence relation, algebraic space, Hom scheme
+of abelian schemes, Picard scheme}
+\end{resume}
+
+\pagerange{1}{41}
+\section*{Le fil du dossier, et les conventions}
+
+\subsection*{Les stations}
+
+Le dossier compte quarante et une pages, dont vingt-quatre de sa main ; les
+autres sont blanches ou sont des feuillets de tapuscrits étrangers au sujet
+(des rédactions numérotées « n° 371 » et « n° 392 »), au dos desquels il a
+parfois écrit.\footnote{Pages blanches : 10, 18, 21. Tapuscrits sans trace de
+sa main, non lus ici : 7, 9, 12, 20, les pages impaires de 23 à 39, et 41, qui
+forme à elle seule le dernier lot du dossier. La page 17 ne porte que les deux
+mots « Façon d'exprimer ».} Il est ordonné à l'envers de sa logique, et il faut
+le savoir avant d'y entrer.
+
+\begin{itemize}
+\item \textbf{Le théorème et sa démonstration} — pages 1 à 5 : une première
+liste de huit conditions sur un foncteur $F$, puis la démonstration, par
+récurrence sur la dimension de la base, qu'elles suffisent pour que $F$ soit
+représentable par un schéma localement quasi fini et séparé.
+\item \textbf{Des reformulations} — pages 6 et 8 (la page 6 reformule la
+page 8, et lui est donc postérieure), puis leur preuve à la page 19 : les
+conditions de modularité réécrites avec des épaississements nilpotents et des
+immersions ouvertes.
+\item \textbf{Le cas non ramifié} — page 11 : une seconde liste, qui est le
+brouillon du Corollaire 2 de la page 15.
+\item \textbf{L'énoncé au net} — pages 13 à 16 : le Théorème, deux
+corollaires (le cas étale, le cas non ramifié), deux remarques, des exemples
+et des « applications en vue ».
+\item \textbf{Les outils} — pages 22 à 40 : la Proposition 1 et ses deux
+corollaires (un foncteur est représentable dès qu'il l'est sur les anneaux
+locaux, puis sur les anneaux artiniens), la Proposition 2 (recoller le point
+fermé d'une base locale complète au reste), la Proposition 3 (passer des
+anneaux locaux de la base à la base entière), et la notion de paire
+\emph{modulaire}.
+\end{itemize}
+
+Que les pages 22 à 40 soient les « notes précédentes » que citent les pages 3
+à 5, les numéros le disent : la démonstration de la page 3 renvoie au
+« cor 2 à prop. 1 », qui est le Corollaire 2 de la page 28 ; à la « prop. 2
+des notes », qui est la Proposition 2 des pages 30 à 32 ; à la « prop. 3 des
+notes préc. » et à sa « condition de constructibilité », qui sont la Prop. 3
+de la page 32.\footnote{L'identification est la nôtre : les pages ne disent
+pas où se trouvent les notes qu'elles citent. Mais les trois renvois tombent
+chacun sur l'énoncé qui fait exactement ce que la démonstration lui demande.}
+Et les deux programmes notés en marge de la page 32 — « transformer 4°) en une
+condition plus facile à vérifier », avec une condition de dimension 1, et
+« transformer en une condition de modularité générique » — sont réalisés par
+le « critère de modularité a) locale » et « b) générique » de la page 1. Les
+conditions (2) et (4) du Théorème de la page 13 sont, de même, écrites pour
+nourrir le Corollaire 1 de la page 24 : elles ne sont demandées que pour
+$B \to \widehat{B}$ et $\widehat{B} = \varprojlim B_n$, qui sont les deux
+flèches de ce corollaire.
+
+La datation est celle de l'inventaire, « vers 1971 » ; le dossier est rangé
+dans le groupe « Descentes », que l'inventaire date « avant 1970 ». Les deux
+ne s'accordent pas, et rien dans les pages ne tranche.
+
+\subsection*{Les conventions}
+
+\emph{Schémas et foncteurs.} Le manuscrit dit « préschéma » ; on écrit
+« schéma ». $S$ est un schéma localement noethérien, $\mathbf{Sch}_{/S}$ la
+catégorie des $S$-schémas, et $F : \mathbf{Sch}_{/S}^{\mathrm{op}} \to
+\mathbf{Ens}$ un foncteur. Pour un $S$-schéma $S'$, $F_{S'}$ est la
+restriction de $F$ aux $S'$-schémas. Pour $a \in S$, on pose $S_a =
+\operatorname{Spec} \mathcal{O}_{S,a}$ et $F_a = F_{S_a}$. On identifie un
+anneau $A$ au-dessus de $S$ à $\operatorname{Spec} A$, et l'on écrit $F(A)$.
+
+\emph{Les numéros des conditions.} Les conditions du Théorème sont numérotées
+(1) à (8) comme à la page 13. La liste de la page 1 est numérotée autrement ;
+la concordance est la suivante :
+\begin{itemize}
+\item page 1, 1° a) et b) : conditions (1) et (2) ;
+\item page 1, 2° et 3° : conditions (3) et (4) ;
+\item page 1, 4° : sans équivalent à la page 13 ; on l'appelle (E) ;
+\item page 1, 5° à 8° : conditions (5) à (8).
+\end{itemize}
+Aux pages 22 à 40, les conditions portent d'autres noms, qu'on garde :
+(L1) à (L4), (R$_{\mathrm{loc}}$), (R$_0$).\footnote{Il trace sous chaque
+$L$ une flèche, tournée vers la gauche, sauf pour $L_4$ aux pages 24 et 28 où
+elle est tournée vers la droite, et marque $L_3$, $L_4$ de deux petits
+cercles. La lecture ne leur prête aucun sens et les omet. (L1) est la
+condition (1), (L2) la condition (3), (L3) et (L4) des formes faibles
+(injectivité seulement) de (2) et (4).}
+
+\emph{Modulaire.} C'est la notion centrale du dossier ; elle n'est définie
+qu'à la page 34, mais elle est employée dès la page 1, et on la fixe ici. Soit
+$T$ un $S$-schéma local, de point fermé $t$ au-dessus de $s \in S$, et $\eta
+\in F(T)$. On dit que $(T, \eta)$ est \emph{modulaire} si, en gros, $\eta$ est
+l'élément universel de $F$ au voisinage du point qu'il définit : tout
+élément de $F$ sur un schéma local qui « passe par le même point » provient de
+$\eta$ par un unique morphisme local (définition exacte à la page 34, plus
+bas). Pour $\xi \in F(Z)$ et $z \in Z$, on dit que $\xi$ est modulaire en
+$z$ si $(\operatorname{Spec} \mathcal{O}_{Z,z}, \xi_z)$ l'est. Lorsque $F_a$
+est représentable par un schéma $X_a$ localement de type fini, $\xi$ définit
+$u : Z \to X_a$ près de $z$, et $\xi$ est modulaire en $z$ si et seulement si
+$\mathcal{O}_{X_a, u(z)} \to \mathcal{O}_{Z,z}$ est un isomorphisme : $u$ est
+un isomorphisme local en $z$. C'est plus fort qu'« étale en $z$ », qu'il
+écrit souvent entre crochets comme forme affaiblie (« modulaire [ou tout au
+moins, étale] »).\footnote{Un morphisme étale en $z$ à extension résiduelle
+triviale n'est pas pour autant un isomorphisme local : un revêtement étale de
+degré 2 de la droite affine a des points rationnels au-dessus de points
+rationnels. Les deux notions coïncident pour un monomorphisme, et aussi, à la
+page 6, pour une section d'un foncteur non ramifié sur un sous-schéma fermé :
+c'est là qu'il écrit « modulaire [i.e. étale] », à bon droit.}
+\emph{Pro-modulaire}, qu'il emploie aux pages 4, 8 et 13 sans le définir, est
+lu ici comme la même condition restreinte aux $T'$ artiniens : le complété de
+$\mathcal{O}_{Z,z}$ pro-représente $F$ au point considéré. Enfin « étale »,
+pour $\xi : Z \to F$ lorsque $F$ n'est pas représentable, s'entend au sens de
+le relèvement infinitésimal (formellement étale et localement de
+présentation finie).
+
+\subsection*{Ce que le dossier annonce et n'établit pas}
+
+\begin{itemize}
+\item la suffisance des conditions du Théorème repose sur la démonstration
+des pages 3 à 5, dont la dernière étape s'arrête sur « on est ramené à
+vérifier la condition de constructibilité » : la déduction de cette
+condition à partir de (8) n'est pas écrite ;
+\item à la même démonstration, l'effectivité de la donnée de descente de
+l'étape (3) est affirmée sans argument ;
+\item le Lemme de la page 38 est énoncé sans démonstration, et la
+« proposition formelle » qui recolle les $X^{(x)}$ à la page 40 est nommée,
+pas écrite ;
+\item la page 14 (« Immersion ouverte »), la Remarque 4 de la page 16, la
+condition (D) de la page 6 et la page 17 s'interrompent ;
+\item l'« exemple type » réclamé en marge de la page 13, qui montrerait que
+(8) ne découle pas des autres conditions, n'est pas donné ;
+\item les deux « applications en vue » de la page 16 sont annoncées, et la
+première est fausse telle qu'elle est écrite.
+\end{itemize}
+
+\pagerange{1}{2}
+\section*{Une première liste de conditions (pages 1 et 2)}
+
+La page 1, marquée d'un « A » cerclé, pose huit conditions sur $F$. On les
+donne dans la forme où la suite les emploie.
+\begin{enumerate}
+\item[1°] $F$ est un faisceau pour la topologie fpqc, c'est-à-dire : a) $F$
+est de nature locale pour la topologie de Zariski, et b) $F$ satisfait la
+descente pour les morphismes fidèlement plats quasi compacts affines.
+\item[2°] $F$ commute aux limites inductives filtrantes d'anneaux (propriété
+relative à $S$) : $F$ est \emph{localement de présentation finie}.
+\item[3°] $F$ commute aux limites projectives adiques d'anneaux artiniens :
+pour $B$ local noethérien complet, $F(B) \to \varprojlim F(B/\mathfrak{m}^n)$
+est bijective.
+\item[4°] Exactitude (E) : pour tout anneau local artinien $A$ au-dessus de
+$S$ et toute $A$-algèbre finie locale $A' \supset A$ de même corps résiduel,
+avec $A'/A$ de longueur 1 comme $A$-module, la suite
+$F(A) \to F(A') \rightrightarrows F(A' \otimes_A A')$ est exacte.
+\item[5°] Pour tout corps $k$ au-dessus de $S$ et tout $\xi \in F(k)$, $F_k$
+est pro-représentable en $\xi$, et l'anneau qui le pro-représente est
+\emph{fini} sur $k$.
+\item[6°] $F$ est séparé sur $S$, au sens du critère valuatif.
+\item[7°] Critère de modularité local : pour tout $S$-schéma local
+noethérien complet $S'$, tout $S'$-schéma local fini $Z$ de point fermé $t$,
+et tout $\xi \in F(Z)$ modulaire pour $F_{S'}$ en $t$, $\xi$ est modulaire
+(ou au moins étale) en tout point de $Z$.
+\item[8°] Critère de modularité générique : pour tout $S$-schéma noethérien
+irréductible $S'$, tout $S'$-schéma fini $Z$ et tout $\xi \in F(Z)$ modulaire
+pour $F_{S'}$ en un point $z$ au-dessus du point générique de $S'$, il existe
+un voisinage ouvert $U$ de $z$ dans $Z$ en tout point duquel $\xi$ est
+modulaire (ou au moins étale).
+\end{enumerate}
+
+Les quatre premières sont réunies sur la page par une accolade et une mention
+au crayon, « conditions d'exactitude » ; deux notes marginales qualifient 5°
+de condition de « finitude ou discrétion » et 6° de « séparation ». Ce sont
+toutes des conditions \emph{nécessaires} : un foncteur représentable par un
+schéma localement quasi fini et séparé les satisfait.\footnote{Pour (E), qui
+est la seule dont ce ne soit pas immédiat, l'argument, que la page ne donne
+pas, est le suivant. Un morphisme de $\operatorname{Spec} A'$ dans $X$ tombe
+dans un ouvert affine, et l'on est ramené à voir que $A$ est l'égalisateur de
+$A' \rightrightarrows A' \otimes_A A'$. Si $a' \in A' \smallsetminus A$
+vérifiait $a' \otimes 1 = 1 \otimes a'$, l'image de ces deux éléments par
+$\mathrm{id} \otimes \pi : A' \otimes_A A' \to A' \otimes_A (A'/A)$ serait
+$0$ d'un côté, et de l'autre la classe de $1$ dans $A'/\mathfrak{m}_A A'$,
+puisque $A'/A \simeq A/\mathfrak{m}_A$ est engendré par l'image de $a'$ ; or
+cette classe n'est pas nulle, par Nakayama. La page écrit la condition avec
+« ext.\ résiduelles triviales » et « long$_A A'/A = 1$ » entre crochets ; la
+lecture en fait les hypothèses.} Pour 5°, le mot « corps » est une correction
+au-dessus d'un premier « anneau local » biffé. Pour 7°, une note marginale
+ajoute qu'on peut se borner à $S'$ irréductible de dimension 1, et un petit
+diagramme place $\xi$ au-dessus de $F_{S'} \to F$ :
+
+\begin{tikzcd}
+F \arrow[d] & F_{S'} \arrow[l] \arrow[d] & \\
+S & S' \arrow[l, no head] & Z \arrow[l] \arrow[ul, "\xi"']
+\end{tikzcd}
+
+Une note au crayon, en travers de la ligne de 5°, sur $F(k) \to F(X)$, est
+presque entièrement illisible et n'est pas lue ici.
+
+La page 2, au crayon, indique ce qui change pour les foncteurs non ramifiés :
+remplacer 5° par la non-ramification de $F$, et simplifier 4° et 5° en
+conséquence. C'est ce que fera le Corollaire 2 de la page 15.
+
+\pagerange{3}{5}
+\section*{La démonstration par récurrence sur la dimension (pages 3 à 5)}
+
+Les conditions sont stables par changement de base, et toutes, sauf (3), (5)
+et (6), sont de nature locale sur $F$.\footnote{La page dit « sauf 2°, 5°,
+6° » dans la numérotation de la page 1 ; c'est (3), (5), (6) dans celle du
+Théorème. Dans cette section, tous les numéros de la page sont traduits
+selon la concordance donnée plus haut.} La démonstration traite d'abord le
+cas $\dim S < +\infty$, par récurrence, en quatre étapes.
+
+\emph{(1) $\dim S = 0$.} On se ramène à $S$ local artinien. Grâce à (E) et
+(5), on construit un schéma $X$ localement quasi fini sur $S$ — une somme de
+spectres d'anneaux artiniens finis sur $S$ — et, grâce à (1) à (4), il
+représente $F$. C'est le Corollaire 2 de la page 28, qui est cité (« cf.\
+notes précédentes, cor 2 à prop.\ 1 »). Seules les conditions (1) à (5) et
+(E) ont servi.
+
+\emph{(2) $\dim S = n > 0$, $S$ local complet.} Soit $s$ le point fermé et
+$U = S \smallsetminus \{s\}$. Par l'hypothèse de récurrence, $F_U$ est
+représentable par un $X_U$.\footnote{Entre crochets : « où 1° à 5° suffisent
+si $S$ de dim 1 ». Une note marginale ajoute que si $\dim S = 1$, l'hypothèse
+(8) est inutile.} Grâce à (3) et (5), et parce que $S$ est complet, on
+construit une famille de $S$-schémas \emph{finis} $X_i =
+\operatorname{Spec} B_i$, un par point de $F_s$ ; grâce à (4), des morphismes
+$u_i : X_i \to F$. La Proposition 2 des pages 30 à 32 ramène alors à
+vérifier que les restrictions $u_i|_U : X_{i,U} \to X_U$ sont des immersions
+ouvertes, d'images deux à deux disjointes.
+
+C'est là qu'interviennent (6) et (7). Par (7), il suffit que $u_i$ soit
+modulaire au point fermé $x_i$ de $X_i$. Sa restriction à la fibre fermée
+l'est, de sorte que le corps $k(x_i)$ est un corps de définition du point
+qu'il définit, et il reste la condition de modularité proprement dite. Il la
+contourne en démontrant d'abord le théorème sous une forme renforcée de (7),
+où l'on suppose seulement $\xi$ \emph{pro-modulaire} en $z$ : c'est le cas de
+$u_i$ par construction, puisque $B_i$ pro-représente $F$.\footnote{Une note
+marginale dit au contraire qu'on n'utilise « pour l'instant » qu'« une
+version affaiblie » de 7° ; la lecture de ces mots est douteuse. Comme
+condition sur $F$, exiger la conclusion de (7) sous l'hypothèse plus faible
+de pro-modularité est une condition plus forte. Elle reste nécessaire : si $X$
+est localement quasi fini sur $S'$ local complet, donc hensélien,
+l'anneau local $\mathcal{O}_{X,x}$ en un point au-dessus du point fermé est
+fini sur $\mathcal{O}_{S'}$ (théorème principal de Zariski), donc complet, et
+pro-modulaire y équivaut à modulaire. Le théorème n'est donc pas affecté.} Le
+reste de l'étape — que les $u_i|_U$ soient des monomorphismes d'images
+disjointes, d'où des immersions ouvertes puisqu'ils sont étales — se fait par
+l'argument de la page 19 (plus bas) : le produit fibré $X_i \times_F X_j$ est
+un sous-schéma fermé de $X_i \times_S X_j$, fini sur le complet $S$, qui
+coïncide formellement avec la diagonale si $i = j$ et est formellement vide si
+$i \neq j$ ; il est donc égal à la diagonale, ou vide.\footnote{La page
+s'arrête sur « Ce dernier point provient de l'hypothèse 6° » et « utilisant
+la condition 7° » ; l'enchaînement par $X_i \times_F X_j$ est emprunté à la
+page 19, qui fait ce raisonnement pour l'axiome (A). Le « 6° » entouré en tête
+de la page 4 achève la phrase de la page 3 et ne désigne pas une étape.} Enfin
+$X$ est localement quasi fini sur $S$ par construction, et séparé par (6).
+
+\emph{(3) $\dim S = n$, $S$ local.} Par l'étape (2), $F_{\widehat{S}}$ est
+représentable par un $X_{\widehat{S}}$ localement quasi fini et séparé sur
+le complété $\widehat{S}$. La donnée de descente canonique relative à
+$\widehat{S} \to S$ est effective, d'où un $X$ sur $S$, localement quasi fini
+et séparé ; par (2), il représente $F$.\footnote{La page affirme l'effectivité
+sans argument. Sur une partie quasi compacte, un schéma séparé et quasi fini
+est quasi affine (théorème principal de Zariski), et la descente fidèlement
+plate des schémas quasi affines est effective (SGA 1, VIII). Pour un
+$X_{\widehat{S}}$ qui n'est pas quasi compact, il faudrait le recouvrir par
+des ouverts quasi compacts stables par la donnée de descente ; la page ne le
+fait pas, et la présente lecture non plus.}
+
+\emph{(4) $S$ quelconque.} On utilise le
+
+\textbf{Lemme.} Si $F_{S_a}$ est représentable pour tout $a \in S$, alors
+$F$ est représentable.
+
+La page 4 renvoie pour cela à la Proposition 3 de la page 32, et la page 5,
+une seule ligne au crayon, conclut : compte tenu de (1) et (3), on est ramené
+à vérifier la condition de constructibilité de cette proposition. Le dossier
+s'arrête là. La condition (8), le critère de modularité générique, est faite
+pour fournir cette constructibilité — la note marginale de la page 32 le dit
+en toutes lettres —, mais la déduction n'est écrite nulle part.\footnote{Le
+Lemme tel qu'il est énoncé n'est vrai que sous les autres conditions du
+théorème (il s'agit du « $F$ comme dessus ») ; ce sont celles de la
+Proposition 3 qu'il utilise.}
+
+\pagerange{6}{8}
+\section*{Épaississements et immersions ouvertes (pages 6 et 8)}
+
+Les deux pages reformulent les critères de modularité. La page 8 est la
+première : la page 6 renvoie à ses axiomes (A) et (B).
+
+\subsection*{Les axiomes (A), (B), (C) (page 8)}
+
+Il garde les conditions (1) à (6) et remplace (7) et (8) par :
+
+\textbf{(A)} Si $S'$ est local noethérien complet (de dimension 1 si l'on
+veut), $X$ fini sur $S'$, et $\xi : X \to F_{S'}$ pro-modulaire en un point
+$z$ au-dessus du point fermé $s'$ de $S'$, alors $\xi$ est une immersion
+ouverte — pourvu que $F$ soit représentable au-dessus de $S' \smallsetminus
+\{s'\}$.
+
+\textbf{(B)} Si $S'$ est noethérien sur $S$, $\xi : X \to F_{S'}$ et $x \in
+X$ tels que $\xi$ soit modulaire en $x$, il existe un voisinage ouvert $U$ de
+$x$ tel que $\xi|_U : U \to F_{S'}$ soit une immersion ouverte.\footnote{Entre
+crochets, il précise : « on veut dire simplement » que la condition porte sur
+le changement de base à $\operatorname{Spec} \mathcal{O}_{S',s'}$. Le mot qui
+suit « $X$ » dans l'hypothèse est illisible ; on lit $X$ de type fini sur
+$S'$, ce qu'exige la conclusion.}
+
+Pour $F \to S$ un monomorphisme, (A) et (B) contiennent la condition (C) :
+pour tout $S'$ noethérien sur $S$ et tout $\xi : X \to F_{S'}$, l'ensemble
+des points de $X$ où $\xi$ est étale est ouvert.\footnote{Un long trait
+oblique traverse ce passage, du « (i) » biffé à « l'ens des » ; on ne sait
+s'il le biffe. La lecture le garde, parce que la suite de la page le
+reprend.} Un lemme permet de supposer, dans (A) et (B), que $X \to S'$ est une
+immersion fermée, définie si l'on veut par un idéal de carré nul. Si $F \to S$
+est non ramifié, (A) et (B) se réduisent donc à :
+
+\textbf{(C)} Pour tout $S'$ noethérien sur $S$, toute immersion fermée $S'_0
+\to S'$ et tout $\xi : S'_0 \to F_{S'}$, l'ensemble $U$ des points où $\xi$
+est étale (et injectif) est ouvert ; c'est-à-dire :
+\begin{itemize}
+\item[(C$_1$)] $U$ est stable par générisation (condition équivalente à (A),
+dit-il) ;
+\item[(C$_2$)] pour tout $x \in U$, $U \cap \overline{\{x\}}$ est un
+voisinage de $x$ dans $\overline{\{x\}}$.
+\end{itemize}
+L'équivalence est exacte dans un espace noethérien.\footnote{Si $U$ vérifie
+(C$_1$) et (C$_2$), son complémentaire $V$ est stable par spécialisation ;
+le point générique d'une composante irréductible de $\overline{V}$ ne peut
+être dans $U$, sans quoi (C$_2$) enlèverait à cette composante un ouvert non
+vide ; donc $\overline{V}$ est réunion des adhérences de points de $V$, et
+$V$ est fermé. La page dit « inj.\ étale » ; on lit « étale et injectif ».}
+La condition (C) est automatique si $F \to S$ est étale.
+
+\subsection*{La reformulation de la page 6}
+
+La page 6 réécrit (C$_1$) comme un critère d'extension, sous la forme d'une
+nouvelle condition 7° :
+
+\emph{Pour tout $S$-schéma $S'$ local noethérien complet irréductible de
+dimension 1, d'ouvert $U = S' \smallsetminus \{\text{point fermé}\}$
+schématiquement dense dans $S'$, pour tout sous-schéma $S'_0$ défini par un
+idéal nilpotent (de carré nul), et tout $S'$-morphisme $\xi_0 : S'_0 \to
+F_{S'}$ : si $\xi_0|_{U_0}$ se prolonge en $\xi_U : U \to F_{S'}$, alors
+$\xi_0$ se prolonge en $\xi : S' \to F_{S'}$.}
+
+Elle est vide si $F \to S$ est étale : le relèvement le long d'un
+épaississement nilpotent existe alors toujours. Et (C$_2$) se met sous la
+forme d'une nouvelle 8° : si $S'$ est noethérien irréductible de point
+générique $x$, $S'_0$ un sous-schéma fermé contenant $x$ et $\xi : S'_0 \to
+F_{S'}$ modulaire — c'est-à-dire ici étale — en $x$, alors $\xi$ est
+modulaire sur un voisinage de $x$.\footnote{« d'adhérence schématique $S'$ »
+est une note entourée dans la marge, reliée à « $U \subset S'$ » ; la
+lecture en fait l'hypothèse de densité schématique. Elle est nécessaire au
+sens de la condition : sans elle, $U_0 = U$ dès que l'idéal de $S'_0$ est à
+support dans le point fermé, et la condition exigerait qu'on relève tout, ce
+que ne fait pas même une immersion fermée (voir le Corollaire 2, page 15).}
+
+Suit, « revenant au cas général (pas nécessairement non ramifié) », une
+condition (D) qui devait remplacer (A) et (B) : pour $S'$ noethérien sur $S$,
+$X$ fini sur $S'$ et $\xi : X \to F_{S'}$, l'ensemble des points où $\xi$ est
+étale est ouvert, et de même pour $X \times_{F_{S'}} X$ sur $S'$, via la
+diagonale $F \to F \times_S F$. Le bas de la page est un palimpseste où
+seuls quelques mots se lisent, et la condition n'est pas achevée.
+
+\pagerange{11}{11}
+\section*{Le cas non ramifié : une seconde liste (page 11)}
+
+La page 11 est le brouillon du Corollaire 2 de la page 15. Elle reprend (1) à
+(6) (la nature locale, la descente fidèlement plate quasi compacte, la
+commutation aux limites inductives, aux limites projectives d'anneaux
+artiniens, la pro-représentabilité universelle, la séparation), remplace (7)
+par « $F$ non ramifié », et (8) par une condition d'extension sur les anneaux
+locaux de dimension 1, qu'on retrouvera sous sa forme juste à la page 15. Une
+condition (6°) sur les points à valeurs dans une extension $K$, qui devaient
+provenir d'une sous-extension finie, est biffée.
+
+Elle ajoute une condition nouvelle, numérotée (9°) :
+
+\textbf{(RG)} Pour tout $T$ noethérien irréductible sur $S$, il existe un
+ouvert non vide $U \subset T$ tel que $F_U$ soit représentable.
+
+C'est la condition de représentabilité générique que la page 16 nommera
+(RG). Une note marginale indique qu'elle peut se formuler plus faiblement,
+par une impossibilité de prolongement. Deux colonnes de notes verticales,
+dans la marge gauche, ne se lisent pas.
+
+\pagerange{13}{13}
+\section*{Le théorème (pages 13 à 16)}
+
+\subsection*{L'énoncé}
+
+\textbf{Théorème.} Soient $S$ un schéma localement noethérien et $F :
+\mathbf{Sch}_{/S}^{\mathrm{op}} \to \mathbf{Ens}$. Pour que $F$ soit
+représentable par un $S$-schéma $X$ localement quasi fini et séparé sur $S$,
+il faut et il suffit que $F$ satisfasse les conditions suivantes :
+\begin{enumerate}
+\item[(1)] $F$ est de nature locale (un faisceau Zariski) ;
+\item[(2)] $F$ est compatible à la descente fidèlement plate quasi compacte ;
+il suffit de le demander pour $B \to \widehat{B}$, où $B$ est un anneau local
+noethérien au-dessus de $S$ ;
+\item[(3)] $F$ commute aux limites inductives filtrantes d'anneaux ;
+\item[(4)] $F$ commute aux limites projectives d'anneaux artiniens de la forme
+$\widehat{B} = \varprojlim B_n$, $B$ comme dans (2) ;
+\item[(5)] au-dessus de tout anneau artinien $A$ sur $S$, $F$ est
+pro-représentable, et les anneaux qui le pro-représentent sont finis sur $A$ ;
+\item[(6)] $F$ est séparé (critère valuatif) ;
+\item[(7)] pour tout anneau local noethérien complet $A$ sur $S$, tout
+homomorphisme local fini $A \to B$ et tout $\xi \in F(B)$ modulaire au point
+fermé, $\xi_{\mathfrak{p}} \in F(B_{\mathfrak{p}})$ est modulaire pour tout
+$\mathfrak{p} \in \operatorname{Spec} B$ ;
+\item[(8)] pour tout $S$-schéma noethérien irréductible $S'$, tout
+$S'$-schéma fini $Z$, tout $\xi \in F(Z)$ et tout point $z \in Z$ au-dessus du
+point générique de $S'$ en lequel $\xi$ est modulaire, il existe un voisinage
+ouvert $U$ de $z$ dans $Z$ tel que $\xi$ soit modulaire (ou simplement étale)
+en tout point de $U$.
+\end{enumerate}
+
+Sur la page, les trois premières conditions viennent dans l'ordre 1°, 3°,
+2° ; la dernière commence à la page 13 et s'achève en tête de la page
+15.\footnote{La page 15 écrit « en $Z$ » là où l'on attend le point $z$, et
+« une partie ouverte non vide $U$ de $Z$ ». Comme $Z$ est fini sur $S'$, un
+point au-dessus du point générique de $S'$ est générique dans $Z$, et, $Z$
+étant irréductible comme le précise la page 1, un ouvert non vide le
+contient : les deux formes disent la même chose. On écrit la plus claire.}
+La nécessité se vérifie condition par condition.\footnote{Pour (7) : si
+$\xi : \operatorname{Spec} B \to X$ induit $\mathcal{O}_{X,x} \simeq B$ au
+point fermé, c'est le morphisme canonique $\operatorname{Spec}
+\mathcal{O}_{X,x} \to X$, qui est un isomorphisme local en chaque point. Pour
+(8) : un isomorphisme d'anneaux locaux entre schémas localement de
+présentation finie sur $S'$ se prolonge en un isomorphisme de voisinages
+(EGA IV, 8). La page n'écrit pas ces vérifications.} La suffisance est ce que
+démontrent les pages 3 à 5, avec les lacunes dites plus haut.
+
+Il ajoute trois remarques. D'abord, dans (7), l'hypothèse porte sur $\xi$
+modulaire, « et l'on verra que cela implique pro-modulaire » ; en marge : « en
+fait, cela suffit, et cela signifie que $\xi : \operatorname{Spec} B \to F$
+est étale ». Ensuite, qu'on pourrait montrer que (1) à (6) et (7) impliquent
+l'analogue de (7) sans l'hypothèse de dimension 1 — ce qui confirme que (7)
+était pensée d'abord sur une base de dimension 1, comme le disait la marge de
+la page 1. Enfin, une question : « Donner l'exemple type [$S$ de dim 1]
+montrant que (8°) n'est pas conséquence des autres. Est-ce que 6° et 7°
+[suffisent] ? \emph{Non} ». L'exemple n'est pas donné.\footnote{Deux notes
+obliques, dans la marge gauche, dont plusieurs mots sont illisibles ; les
+crochets de cette phrase sont nôtres.}
+
+\pagerange{14}{14}
+\subsection*{Immersion ouverte (page 14)}
+
+Sur un feuillet isolé, le début d'un corollaire pour les immersions
+ouvertes : sous (1) à (4), et si de plus $F \to S$ est un monomorphisme étale
+pour les arguments artiniens, $F$ devrait être représentable par un ouvert de
+$S$. La conclusion n'est pas écrite.
+
+\pagerange{15}{16}
+\subsection*{Les deux corollaires (page 15)}
+
+\textbf{Corollaire 1.} Pour que $F$ soit représentable par un $S$-schéma
+\emph{étale} et séparé, il faut et il suffit qu'il satisfasse (1), (2), (3),
+(4), (6), et :
+
+(Ét) $F$ est étale (ou seulement étale pour les arguments artiniens).
+
+La liste omet (5), (7) et (8) : qu'elles découlent alors des autres, la page
+ne le démontre pas, et une note marginale dit seulement que ce cas est « plus
+direct et plus facile ».
+
+\textbf{Corollaire 2.} Pour que $F$ soit représentable par un $S$-schéma
+\emph{non ramifié} et séparé, il faut et il suffit que $F$ satisfasse (1) à
+(6), et la forme simplifiée suivante de (7) :
+\begin{itemize}
+\item[a)] $F$ est non ramifié (les anneaux qui le pro-représentent dans (5)
+sont non ramifiés sur $A$) ;
+\item[b)] pour tout anneau local noethérien $A$ de dimension 1 sur $S$, de
+spectre irréductible, d'idéal premier minimal $\mathfrak{p}$, tel que $A \to
+A_{\mathfrak{p}}$ soit injectif, pour tout idéal nilpotent $I$ de $A$ et tout
+$\eta \in F(A/I)$ : si l'image $\eta_{\mathfrak{p}}$ de $\eta$ dans
+$F(A_{\mathfrak{p}}/I_{\mathfrak{p}})$ provient de $F(A_{\mathfrak{p}})$,
+alors $\eta$ provient de $F(A)$.
+\end{itemize}
+
+La condition b) est corrigée ici.\footnote{La page porte, entre crochets,
+« [idéal] $I$ [tel que $I_{\mathfrak{p}} = 0$] », sans hypothèse sur les
+idéaux associés de $A$. Sous cette forme, $\eta_{\mathfrak{p}}$ provient
+toujours de $F(A_{\mathfrak{p}})$, et la condition exige que $F(A) \to
+F(A/I)$ soit surjective pour tout $I$ nilpotent nul en $\mathfrak{p}$ : c'est
+faux déjà pour une immersion fermée. Soit $A = k[[t, \varepsilon]]/
+(\varepsilon^2, t\varepsilon)$, de dimension 1, de spectre irréductible, de
+premier minimal $\mathfrak{p} = (\varepsilon)$, et $I = (\varepsilon)$, qui
+est nul dans $A_{\mathfrak{p}}$ puisque $t$ y est inversible ; soit $S =
+\operatorname{Spec} A$ et $F$ le foncteur représenté par le sous-schéma fermé
+$\operatorname{Spec} A/I$ de $S$, qui est non ramifié et séparé. Alors
+$F(A/I)$ n'est pas vide, et $F(A)$ l'est. La lecture suit la page 11 (« tout
+idéal $I$ de $A$ nilpotent ») et la note marginale de la page 6
+(« d'adhérence schématique ») : $A \to A_{\mathfrak{p}}$ injectif, $I$
+nilpotent quelconque. Sous cette forme la condition est nécessaire : un
+schéma non ramifié est localement fermé dans un schéma étale, le relèvement
+dans le schéma étale existe et est unique le long de $A \to A/I$, et il se
+factorise par le fermé parce qu'il le fait génériquement et que $A \to
+A_{\mathfrak{p}}$ est injectif. Que $\mathfrak{p}$ soit le premier minimal
+est aussi une lecture : la page ne dit pas quel idéal premier.} Une note
+marginale veut qu'on explique ici la condition (8) par une impossibilité de
+prolongement ; c'est ce que fait b).
+
+\subsection*{Deux remarques (pages 15 et 16)}
+
+\textbf{Remarque 3.} La condition (8) est conséquence des autres, pour autant
+que $F$ satisfasse :
+
+\textbf{(RG)} pour tout sous-schéma fermé irréductible réduit $S'$ de $S$, il
+existe un ouvert non vide $U \subset S'$ tel que $F_U$ soit représentable par
+un schéma localement de type fini sur $U$.\footnote{La phrase de la Remarque 3
+est en partie illisible ; que (RG) en soit l'hypothèse est une reconstruction,
+appuyée sur la place de (RG) en tête de la page suivante et sur l'argument de
+nécessité de (8), qui ne demande que la représentabilité au voisinage du point
+générique.}
+
+\textbf{Remarque 4.} Il faudrait limiter les anneaux $A$, $B$ et les schémas
+$S'$ qui doivent être envisagés dans les conditions (2), (4), (5), (7), (8).
+La remarque s'arrête sur un tiret.
+
+\pagerange{16}{17}
+\subsection*{Exemples et applications en vue (page 16)}
+
+Il dresse la liste des foncteurs non ramifiés auxquels le Corollaire 2 doit
+s'appliquer :
+\begin{itemize}
+\item les quotients $G/H$ d'un schéma en groupes par un sous-groupe fermé
+$H$, sous une hypothèse qui les rende non ramifiés ;\footnote{Il avait écrit
+« ouvert et fermé », puis biffé « ouvert ». Le premier mot de la ligne,
+qualifié de « triviaux », est illisible. $G/H$ n'est pas non ramifié pour tout
+$H$ fermé ; il l'est, par exemple, si $H$ est ouvert et fermé : la relation
+d'équivalence est alors ouverte dans $G \times_S G$, et la diagonale de $G/H$
+est une immersion ouverte.}
+\item les classes de correspondances divisorielles, sous une hypothèse de
+platitude ;
+\item les foncteurs $\operatorname{Hom}$ à valeurs dans un groupe
+commutatif, et en particulier les $\operatorname{Hom}$ de schémas abéliens,
+non ramifiés par rigidité ;
+\item les immersions, qui s'introduisent dans les problèmes de modules par
+exemple via les isogénies, et en particulier la diagonale $F \to F \times_S
+F$ ;
+\item les sous-schémas en groupes d'un schéma en groupes ;
+\item la décomposition des fibres d'un morphisme en composantes connexes (ou
+irréductibles), qui donne même des foncteurs étales ;
+\item la factorisation d'un morphisme fini.
+\end{itemize}
+
+Puis deux « applications en vue ». La première : un schéma abélien sur une
+base localement noethérienne connexe serait projectif, en utilisant le schéma
+des correspondances divisorielles sur $X \times_S X$. Sous cette forme,
+l'énoncé est faux.\footnote{Raynaud (\emph{Faisceaux amples sur les schémas
+en groupes}, 1970) a construit des schémas abéliens qui ne sont pas
+projectifs sur leur base ; un schéma abélien est projectif localement pour la
+topologie de Zariski lorsque la base est normale. Référence citée de mémoire.
+La page ne cite pas Raynaud, et l'on ne dit rien ici de l'ordre des deux
+textes. Le mot « connexe » est d'une lecture douteuse.} La seconde :
+l'existence du schéma de Picard d'un schéma propre sur un corps, attribuée
+entre crochets à « Chevalley-Seshadri-Grothendieck-Murre », et plus
+généralement, sur une base $S$, son existence au-dessus d'un ouvert non vide.
+La phrase s'arrête sur un tiret.\footnote{Le théorème d'existence sur un
+corps est aujourd'hui attribué à Murre (1964). Les « correspondances
+divisorielles » de ces deux lignes sont les points d'un foncteur non ramifié
+de la liste ci-dessus, ce qui explique leur place ici.}
+
+La page 17 ne porte que « Façon d'exprimer », et rien ne dit ce qui devait
+suivre.
+
+\pagerange{19}{19}
+\section*{La preuve de (A) et (B) (page 19)}
+
+La page 19 démontre les axiomes de la page 8. On étudie d'abord la diagonale
+$F \to F \times_S F$ : elle est représentable, et, grâce à (6), c'est une
+immersion fermée.\footnote{L'argument de représentabilité de la diagonale
+est illisible sur la page ; la lecture ne le reconstruit pas.} Alors, dans
+(A), $X \times_{F_{S'}} X$ est un sous-schéma \emph{fermé} de $X
+\times_{S'} X$, fini sur $X$, qui coïncide formellement avec la diagonale
+$X \to X \times_{S'} X$ — c'est ce que dit la pro-modularité — et lui est
+donc égal, puisque tout est fini sur la base locale complète $S'$ et qu'un
+schéma fini sur un anneau local complet est la somme de ses complétés en ses
+points fermés. Donc $X \to F$ est un monomorphisme ; il est d'autre part
+étale ; c'est une immersion ouverte.\footnote{La page écrit $X \times_S X$ ;
+$X$ étant un $S'$-schéma, c'est le produit au-dessus de $S'$ qui est en jeu.
+L'argument que « formellement égal » entraîne « égal » est nôtre ; la page
+dit seulement « donc lui est identique ».}
+
+Pour (B), on prouve de façon analogue qu'il existe un voisinage ouvert $U$ de
+$x$ tel que $\xi|_U$ soit un monomorphisme ; la fin de la phrase, qui devait
+conclure par « étale », est illisible.
+
+\pagerange{22}{24}
+\section*{Les notes précédentes : critères formels (pages 22 à 40)}
+
+Ces pages sont logiquement les premières du dossier. Elles établissent, sans
+hypothèse de finitude sur $X$, qu'un morphisme $\xi : X \to F$ est un
+isomorphisme dès qu'il l'est sur des arguments de plus en plus petits : les
+schémas locaux, puis les schémas artiniens.
+
+\subsection*{Proposition 1 : des arguments locaux au cas général (pages 22 et 24)}
+
+\textbf{Proposition 1.} Soient $S$ un schéma, $F :
+\mathbf{Sch}_{/S}^{\mathrm{op}} \to \mathbf{Ens}$, $X$ un $S$-schéma
+localement de présentation finie et $\xi \in F(X)$. On suppose :
+\begin{itemize}
+\item[(L1)] $F$ est de nature locale ;
+\item[(L2)] $F$ commute aux limites inductives filtrantes d'anneaux ;
+\item[(R$_{\mathrm{loc}}$)] $(X, \xi)$ représente $F$ sur les $S$-schémas
+locaux essentiellement de type fini sur $S$ dont le point fermé a une
+extension résiduelle finie sur $S$.
+\end{itemize}
+Alors $(X, \xi)$ représente $F$ : $\xi : h_X \to F$ est un isomorphisme.
+
+\emph{Démonstration.} Par (L1), on peut supposer $S$ affine ; par (L2), et
+parce que $h_X$ commute aussi aux limites filtrantes ($X$ étant localement de
+présentation finie), il suffit de montrer que $\operatorname{Hom}_S(T, X) \to
+F(T)$ est bijective pour $T$ de présentation finie sur $S$. Appelons
+\emph{admissibles} les points $t \in T$ dont l'extension résiduelle est finie
+sur $S$ ; tout fermé non vide de $T$ en contient un (un point fermé de sa
+fibre), de sorte qu'un ouvert contenant tous les points admissibles est
+$T$ tout entier.
+
+\emph{Injectivité.} Si $u, v : T \to X$ ont même image dans $F(T)$, ils ont
+par (R$_{\mathrm{loc}}$) même restriction à $\operatorname{Spec}
+\mathcal{O}_{T,t}$ pour tout $t$ admissible, donc — $X$ étant localement de
+présentation finie — coïncident sur un voisinage de chaque tel $t$, donc
+partout.\footnote{La page dit seulement « d'où la conclusion ». Le passage
+par les points admissibles et le voisinage est nôtre.}
+
+\emph{Surjectivité.} Soit $\eta \in F(T)$. Pour $t$ admissible, il existe par
+(R$_{\mathrm{loc}}$) un $u_t : \operatorname{Spec} \mathcal{O}_{T,t} \to X$,
+unique par ce qui précède, qui induit $\eta_t$. Comme $X$ est localement de
+présentation finie, $u_t$ s'étend en $v_t : U_t \to X$ sur un voisinage
+ouvert $U_t$ de $t$, et, par (L2), quitte à rétrécir $U_t$, on a
+$F(v_t)(\xi) = \eta|_{U_t}$. Par l'injectivité, $v_t$ et $v_{t'}$ coïncident
+sur $U_t \cap U_{t'}$ ; les $U_t$ recouvrent $T$ ; les $v_t$ se recollent en
+$v : T \to X$, et par (L1), $F(v)(\xi) = \eta$.\footnote{La page renvoie à
+« a) » et « b) », qui sont les premières étiquettes, biffées, de (L1) et
+(L2).}
+
+\pagerange{24}{28}
+\subsection*{Corollaire 1 : des arguments artiniens aux arguments locaux (pages 24 à 28)}
+
+\textbf{Corollaire 1.} Sous les hypothèses préliminaires de la Proposition 1,
+supposons de plus $S$ localement noethérien, et, pour tout anneau local $B$
+essentiellement de type fini sur $S$ à extension résiduelle finie, de
+complété $\widehat{B} = \varprojlim B_n$ :
+\begin{itemize}
+\item[(L3)] $F(B) \to F(\widehat{B})$ est injective ;
+\item[(L4)] $F(\widehat{B}) \to \varprojlim F(B_n)$ est injective ;
+\item[(R$_0$)] $(X, \xi)$ représente $F$ sur les arguments artiniens
+essentiellement de type fini sur $S$, à extension résiduelle finie.
+\end{itemize}
+Si (L1), (L2), (L3), (L4) et (R$_0$) sont satisfaites, $(X, \xi)$ représente
+$F$.\footnote{(L3) est très raturée sur la page : posée d'abord sur un
+complété, biffée ligne à ligne ; la note marginale en donne la forme retenue,
+« $F(B) \to F(\widehat{B}) \to \varprojlim$, injectif ».}
+
+\emph{Démonstration.} Il suffit de vérifier (R$_{\mathrm{loc}}$). Soit $T =
+\operatorname{Spec} B$ comme ci-dessus, $T_n = \operatorname{Spec} B_n$, $T' =
+\operatorname{Spec} \widehat{B}$, $f : T' \to T$, et $\eta' = F(f)(\eta)$.
+
+\emph{Injectivité.} Si $F(u)(\xi) = F(v)(\xi)$, les restrictions $u_n, v_n$ à
+$T_n$ ont même image, donc sont égales par (R$_0$) ; donc $u = v$, car $B$
+est noethérien et $B \subset \widehat{B}$.
+
+\emph{Surjectivité.} Par (R$_0$), il existe des $u_n : T_n \to X$ induisant
+les $\eta_n$, uniques, donc compatibles, d'où $u' : T' \to X$ qui les induit,
+et, par (L4), $F(u')(\xi) = \eta'$.\footnote{La page invoque ici une condition
+dont l'indice est « loc » ; c'est (L4) qui donne l'égalité, deux éléments de
+$F(\widehat{B})$ ayant même image dans $\varprojlim F(B_n)$.} Soient $p_1, p_2
+: T' \times_T T' \rightrightarrows T'$ les deux projections :
+\[
+T' \times_T T' \;\rightrightarrows\; T' \xrightarrow{\ f\ } T,
+\qquad u' : T' \to X .
+\]
+On a $F(u' p_1)(\xi) = F(p_1)(\eta') = F(p_2)(\eta') = F(u' p_2)(\xi)$,
+puisque $f p_1 = f p_2$. Il en conclut $u' p_1 = u' p_2$ « en vertu de
+1°) », c'est-à-dire de l'injectivité.\footnote{Telle qu'elle est prouvée,
+l'injectivité ne vaut que pour des schémas locaux essentiellement de type
+fini, et $T' \times_T T' = \operatorname{Spec}(\widehat{B} \otimes_B
+\widehat{B})$ n'en est pas un. Elle s'étend pourtant : par l'argument de la
+Proposition 1, elle vaut pour tout $T$ de présentation finie sur $S$, puis,
+par (L2) et parce que $X$ est localement de présentation finie, pour tout
+$S$-schéma affine, deux morphismes vers $X$ se factorisant par un même
+$T_i$ de présentation finie dans une présentation en limite. La lecture
+supplée cette extension, que la page ne fait pas.} Comme $f$ est fidèlement
+plat, $u'$ descend : il existe $u : T \to X$ avec $u' = u f$. Enfin
+$\eta = F(u)(\xi)$, car par (L3) il suffit de le vérifier après $F(f)$, où
+cela s'écrit $\eta' = F(u')(\xi)$.
+
+\emph{N.B.} Il note qu'il serait plus naturel d'énoncer ces deux résultats
+pour un morphisme de foncteurs $G \to F$ satisfaisant les conditions
+envisagées pour $F$, et de conclure que c'est un isomorphisme.
+
+\pagerange{28}{30}
+\subsection*{Corollaire 2 : une base artinienne (pages 28 et 30)}
+
+\textbf{Corollaire 2.} Soit $S$ un schéma artinien. Pour que $F$ soit
+représentable par un $X$ localement quasi fini sur $S$, il faut et il suffit
+que :
+\begin{itemize}
+\item[1°)] $F$ soit pro-représentable, et que les anneaux locaux qui
+interviennent dans la pro-représentation soient artiniens, c'est-à-dire finis
+sur $S$ ;
+\item[2°)] $F$ satisfasse (L1), (L2), (L3), (L4).
+\end{itemize}
+
+En effet, par 1°) et (L1), les anneaux de la pro-représentation donnent un
+$X = \coprod_i \operatorname{Spec} B_i$ et un $\xi \in F(X)$ qui vérifient
+(R$_0$) ; le Corollaire 1 conclut.\footnote{« Pro-représentable » au sens de
+Grothendieck (\emph{Technique de descente II}, Séminaire Bourbaki 195) : sur
+les anneaux artiniens, $F$ est somme de foncteurs pro-représentables par des
+anneaux locaux, $F(A) = \coprod_i \operatorname{Hom}_{\mathrm{loc}}(B_i, A)$
+pour $A$ local. La réciproque — qu'un $X$ localement quasi fini sur $S$
+artinien est une somme de spectres d'anneaux artiniens finis sur $S$ — n'est
+pas écrite.} C'est l'étape (1) de la démonstration de la page 3.
+
+\pagerange{30}{32}
+\subsection*{Proposition 2 : recoller le point fermé (pages 30 et 32)}
+
+\textbf{Proposition 2.} Soient $A$ un anneau local noethérien complet, $S =
+\operatorname{Spec} A$, $S' = S \smallsetminus \{\text{point fermé}\}$ et $F
+: \mathbf{Sch}_{/S}^{\mathrm{op}} \to \mathbf{Ens}$. On suppose :
+\begin{itemize}
+\item[1°)] $F_{S'}$ est représentable par un schéma $X'$ localement de type
+fini sur $S'$ ;
+\item[2°)] la restriction de $F$ aux $A$-algèbres artiniennes finies est
+pro-représentable, par des anneaux locaux \emph{finis} sur $A$ ;
+\item[3°)] $F$ satisfait (L1), (L2), (L3), et (L4) sous la forme forte :
+$F(\widehat{B}) \to \varprojlim F(B_n)$ est bijective.
+\end{itemize}
+
+Grâce à 2°) et 3°), on construit $X_1 = \coprod_i \operatorname{Spec} B_i$,
+où les $B_i$ sont les anneaux de la pro-représentation, et $\xi_1 \in
+F(X_1)$.\footnote{Pour passer du système compatible que donne la
+pro-représentation à un élément de $F(B_i)$, il faut que $F(\widehat{B}) \to
+\varprojlim F(B_n)$ soit \emph{surjective} : c'est l'effectivité des objets
+formels, que (L4), telle qu'elle est écrite à la page 24, ne donne pas. La
+lecture l'ajoute à l'hypothèse 3°). La condition (4) du Théorème de la page
+13 la demande, puisqu'elle dit « commute ». Sur la page 30, la flèche sous le
+quatrième $L$ paraît d'ailleurs tournée dans l'autre sens qu'aux pages 24 et
+28. La page écrit aussi $X_1^{*}$, $\xi_1^{*}$, puis $X_1$ sans l'étoile ; on
+n'en garde qu'une notation.} Soient $X'_1 = X_1 \times_S S'$ et $\xi'_1$ la
+restriction de $\xi_1$ ; par 1°), $\xi'_1 = F(u)(\xi')$ pour un unique
+morphisme $u : X'_1 \to X'$. On suppose enfin :
+\begin{itemize}
+\item[4°)] $u$ est une immersion ouverte.
+\end{itemize}
+Alors $F$ est représentable. En effet, on recolle $X_1$ et $X'$ le long de
+$u$ ; on obtient $X$, et, par (L1), un $\xi \in F(X)$ qui induit $\xi_1$ et
+$\xi'$. Le Corollaire 1 s'applique : un argument artinien d'extension
+résiduelle finie est au-dessus du point fermé, où $X$ se réduit à $X_1$, ou
+au-dessus de $S'$, où il se réduit à $X'$ ; (R$_0$) est donc satisfaite, et
+$(X, \xi)$ représente $F$.
+
+Deux notes marginales accompagnent la proposition. L'une, d'une autre plume,
+la reformule : sont donnés $X_U \simeq F_U$ sur l'ouvert $U$ et $Z \to F$ sur
+$S$, avec $Z_U \to X_U$ une immersion ouverte et $Z_0 \to F_0$ un
+isomorphisme sur la fibre fermée. L'autre est un programme : « transformer
+4°) en une condition plus facile à vérifier », avec une condition de
+dimension 1. C'est le critère de modularité local (7).
+
+\pagerange{32}{36}
+\subsection*{Proposition 3 et les paires modulaires (pages 32 à 36)}
+
+\textbf{Proposition 3.} Soit $F : \mathbf{Sch}_{/S}^{\mathrm{op}} \to
+\mathbf{Ens}$. On suppose :
+\begin{itemize}
+\item[1°)] pour tout $a \in S$, $F_a$ est représentable par un schéma $X_a$
+localement de type fini sur $S_a$ ;
+\item[2°)] pour tout $S$-schéma $T$ localement de type fini et tout $\eta \in
+F(T)$, l'ensemble $M(T, \eta)$ des $t \in T$ en lesquels $\eta$ est modulaire
+est une partie \emph{constructible} de $T$ ;
+\item[3°)] $F$ satisfait (L1) et (L2).
+\end{itemize}
+Alors $F$ est représentable.
+
+En marge de 2°) : « Transformer en une condition de modularité
+\emph{générique} ». C'est le critère (8).
+
+\emph{Définition (page 34).} Soit $T$ un $S$-schéma local, de point fermé
+$t$ au-dessus de $s \in S$, $k = k(s)$, et $\eta \in F(T)$, de valeur $\beta =
+\eta(t) \in F(k(t))$ au point fermé. On dit que $(T, \eta)$ est
+\emph{modulaire} si :
+\begin{itemize}
+\item[1°)] pour tout $S$-schéma local $T'$, de point fermé $t'$, l'application
+$\operatorname{Hom}_{\mathrm{loc}, S}(T', T) \to F(T')$ définie par $\eta$
+est une bijection sur l'ensemble des $\eta' \in F(T')$ dont la valeur
+$\eta'(t') \in F(k(t'))$ est dans l'image de
+\[
+\operatorname{Hom}_k\bigl(k(t), k(t')\bigr) \longrightarrow F(k(t')),
+\]
+l'application étant définie par $\beta$ ;\footnote{La page écrit
+$\operatorname{Hom}_k(k(t'), k(t))$ ; mais c'est un $k$-plongement de $k(t)$
+dans $k(t')$ qui transporte $\beta \in F(k(t))$ dans $F(k(t'))$, et c'est la
+variance qu'exige la phrase. La lecture la rétablit.}
+\item[2°)] $L = k(t)$ est un \emph{corps de définition} de $\beta$ : pour tout
+diagramme commutatif de corps
+\end{itemize}
+
+\begin{tikzcd}
+L \arrow[r, "j"] \arrow[dr, dashed, "\lambda"] & M \\
+k \arrow[u, "i"] \arrow[r, "i'"'] & L' \arrow[u, "j'"']
+\end{tikzcd}
+
+où $i$, $i'$ sont les homomorphismes canoniques, et tout $\beta' \in F(L')$
+tel que $F(j')(\beta') = F(j)(\beta)$, on a $j'(L') \supset j(L)$ — d'où
+$\lambda : L \to L'$ avec $j' \lambda = j$ — et $\beta' = F(\lambda)(\beta)$.
+
+Ce diagramme est le (Q) de la page. La définition dit, sans supposer $F$
+représentable, que $\eta$ est l'élément universel au voisinage d'un point
+dont le corps résiduel est exactement $k(t)$. Elle se lit au mieux quand
+$F_a$ est représentable par $X_a$ ($a$ le point de $S$ sous $t$) : $\eta$
+définit $u : T \to X_a$, et, $x = u(t)$, $(T, \eta)$ est modulaire si et
+seulement si $\mathcal{O}_{X_a, x} \to \mathcal{O}_{T,t}$ est un
+isomorphisme (page 36). Un croquis, dans la marge de la page 34, dispose
+$A \to B$, $A \to B'$, $k$, $L$, $L'$ autour d'une courbe séparant $t \in T$
+de $t' \in T'$ ; plusieurs lettres y sont biffées, et on ne le reproduit pas.
+
+\emph{N.B.} Si $\eta \in F(T)$ et $\eta' \in F(T')$ sont modulaires et qu'il
+existe un diagramme (Q) avec $F(j)(\eta(t)) = F(j')(\eta'(t'))$, alors (et
+seulement alors) il existe un unique $\varphi : T \to T'$ tel que $\eta =
+F(\varphi)(\eta')$ : deux paires modulaires qui passent par le même point
+sont isomorphes.\footnote{« et alors seulement » et « unique » sont des
+lectures douteuses.}
+
+\pagerange{36}{40}
+\subsection*{La démonstration de la Proposition 3 (pages 36 à 40)}
+
+On peut supposer $S$ noethérien. Par 1°), $M(T, \eta)$ est stable par
+générisation : si $\eta$ est modulaire en $t$, l'anneau local en une
+générisation de $t$ est un localisé de $\mathcal{O}_{T,t} \simeq
+\mathcal{O}_{X_a,x}$. Étant constructible par 2°), il est donc ouvert. Par
+(L2), pour $a \in S$ et $x \in X_a$ au-dessus de $a$, il existe un $S$-schéma
+$X^{(x)}$ de type fini et un $\eta^{(x)} \in F(X^{(x)})$ modulaire en tous
+les points de $X^{(x)}$.\footnote{On étale un voisinage affine de $x$ dans
+$X_a$, avec son élément universel, au-dessus d'un voisinage de $a$ — c'est ce
+que permet (L2) — puis on se restreint à l'ouvert de modularité. La page
+écrit « il existe [\ldots] un $X^{(x)}$ noethérien, de type fini sur $S$ »,
+avec deux mots illisibles.} Un premier essai pour recoller les $X^{(x)}$ —
+par les ensembles $X^{(a,b)}$ des points de $X^{(a)}$ « apparentés » à un
+point de $X^{(b)}$ — est encadré et barré. Il passe par un lemme :
+
+\textbf{Lemme.} Soient $Z$ un $S$-schéma localement de type fini et $\eta \in
+F(Z)$ modulaire en tout point de $Z$. Considérons $\eta : h_Z \to F$. Alors
+$h_Z \times_F h_Z \subset h_{Z \times_S Z}$ est représentable par un
+sous-schéma $Z'$ de $Z \times_S Z$, et les deux projections $Z'
+\rightrightarrows Z$ sont des isomorphismes locaux, qui font de $Z'$ un
+graphe d'équivalence dans $Z$.\footnote{La page écrit « $\eta \in F(S)$ » ;
+on lit $\eta \in F(Z)$, seule lecture qui donne un sens à $h_Z \to F$. Le
+lemme est suivi de l'abréviation « AQT », non résolue, et n'est pas
+démontré ; la présente lecture ne le certifie pas.}
+
+Prenons $Z = X^{(x)}$. Au-dessus de $S_a$, la relation $Z'_a
+\rightrightarrows Z_a$ est la relation d'équivalence \emph{triviale} ; elle
+l'est donc aussi au-dessus d'un voisinage ouvert convenable $U$ de
+$a$.\footnote{Pour que la relation soit triviale au-dessus de $S_a$, il faut
+que $Z_a \to X_a$ soit injectif ; c'est le cas si $X^{(x)}$ est obtenu en
+étalant un ouvert de $X_a$, comme on l'a fait. C'est ce que la page appelle
+prendre $X^{(x)}$ « assez petit ».} Autrement dit, quitte à prendre $X^{(x)}$
+assez petit, $(X^{(x)}, \eta^{(x)})$ est « presque modulaire » : $h_{X^{(x)}}
+\to F$ est une immersion ouverte. Alors « une autre proposition formelle »
+permet de recoller les $X^{(x)}$ en un $(X, \xi)$ qui représente $F$, grâce à
+(L2). Cette proposition n'est pas dans le dossier.
+
+C'est sur cette phrase que finit la main de Grothendieck dans le dossier ; la
+page 41, qui le clôt, est un feuillet de tapuscrit étranger. Et c'est sur cette
+proposition que s'appuie, par le Lemme de la page 4, la dernière étape de la
+démonstration du Théorème : les deux bouts du dossier se rejoignent là, sur
+ce qui n'est pas écrit.
+
+\end{document}
