@@ -1,0 +1,662 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 98, batch 1 (pages 1-20).
+% Established from the facsimile archives/batches/98/batch-01.pdf (a mirror of
+% https://grothendieck.umontpellier.fr/98.pdf), per the skill
+% transcribe-grothendieck, read from pdftoppm renders at 200-600 dpi (the
+% tiles were still being cut). The batch file carries no cover sheet: PDF
+% page k is folder page k, and the archivists' pencil numbers bottom-left
+% agree wherever legible (« 8 », « 10 », « 11 », « 12 », « 13 », « 15 »,
+% « 17 », « 18 », « 19 », « 20 »).
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-09-24 — first pass, unchecked against the pages by a human.
+%
+% The folder sits in the inventory group "69-89" « Géométrie et topologie
+% combinatoire », whose subject does not match this folder's (as for folder
+% 100); the folder has its own date, which \dating{} carries verbatim.
+% Nothing is concluded here from the group.
+%
+% Pages transcribed: 2, 4, 6, 8, 10, 11, 12, 13, 15, 17, 19 (his manuscript)
+% and 18 (summarised, see below). Absent:
+%   - page 1, a buff card cover blank but for his pencil « Formalisation des
+%     Normes » and « Cf aussi SGA 4 XVIII »; the words head the \section and
+%     are quoted in a \note (hand.md §5);
+%   - pages 3, 5, 7, 9, typed pages « - 39 - », « - 35 - », « - 37 - »,
+%     « - 36 - » of a French typescript « n° 329 » on general topology
+%     (product and quotient spaces), not by him, scanned upside down as the
+%     versos of his sheets, with no mark of his hand found and no bearing on
+%     norms: skipped under the folder 100/71 rule;
+%   - pages 14, 16, 20, typed pages « - 99 - » (n° 266), « - 96 - » and
+%     « - 89 - » (n° 268) of a French typescript on abelian varieties
+%     (theorem of the square, divisors, linear systems), not by him, with no
+%     mark of his (page 20's script letters are inked in by the typist's
+%     side, not annotations): skipped for the same reason.
+%   - Page 18 is typed page « - 90 - » of the same n° 268 typescript, upside
+%     down, carrying pencil annotations (« Prouver ! », « utile au cas non
+%     singulier) », a word replacing a struck « théorème », underlinings).
+%     Per the rule it is kept: the typed text summarised in one French \note,
+%     the pencil marks in \marginal. They are attributed to him only because
+%     nothing on the leaf points elsewhere; a reviewer should confirm the hand.
+%     Page 11 is a double leaf photographed open (two sheets side by side).
+%
+% What the batch is. Pages 2-8 (black ink): a formalisation of norms.
+% Page 2 starts from the linear algebra — A a ring, M free of rank n,
+% L_A(T^n M) = T^n L_A(M) ⊃ TS^n, endomorphisms of ⊗^n M commuting with the
+% symmetries acting on Λ^n M — and passes to X^n_S → Symm^n_S(Y). Page 4 is
+% a sheet of scattered diagrams for a norm N^α_{F/T/S} : Γ(G/T) → Γ(F/S)
+% attached to a finite T → S of degree r and a symmetric map, with the boxed
+% transitivity N^γ_{(G⊗F)/U/S} = N^α_{F/T/S} ∘ N^β_{G/U/T}. Page 6 lists the
+% properties wanted of the canonical section Can^φ_F: S → Y — cases r = 0, 1,
+% functoriality, additivity, transitivity — and page 8 states the
+% transitivity for Z-morphisms, boxed: N^φ_{G/X/Z}(cα') =
+% N^χ_{F/Y/Z}(N^ψ_{G/X/Y}(α')). Pages 10-13 (blue ink) axiomatise it:
+% « Théorie axiomatique des morphismes … »: a category with finite sums, a
+% class N of morphisms stable by identity, composition, base change, sums,
+% with quotients (X×_Y…×_Y X)/G for G ⊂ S_r; a degree function (i bis)-(v
+% bis) with deg of the quotient = card(E^n/G); canonical morphisms
+% Can_{X/Y}: Y → Σ^r(X/Y) with (i ter)-(iv ter). Examples: I, G-sets
+% (Can from the fibres of cardinal r); II, finite flat morphisms of schemes
+% of rank r; III, analytic and topological variants, the latter via X ×_Γ E
+% for a group Γ acting on X. Pages 15, 17, 19 turn to the cohomological
+% side: C_G the G-sets with E/G finite, hyperfunctors on C_G and their
+% equivalence with G-sets, the boxed spectral sequence (A)
+% H^*(G,A) ⇐ H^p(T/e, H^q(A)) with H^q(A)(G/F) = H^q(F,A), then its
+% generalisation (B) H^*(−/S,Φ) ⇐ H^p(T/S, H^q(Φ)) (« suite spectrale de
+% Leray-Čech ») and the case F' ⊂ F ⊂ G, ending « Tout ceci est à
+% généraliser aux hyperfaisceaux quelconques ».
+%
+% Readings to know. The symbol read \mathrm{Can} on page 6 looks like « Cm »
+% there and is settled by page 10; the page-13 and page-15 marginal
+% « ; dualement » is a doubtful reading; \underline{\mathcal{H}} renders his
+% underlined script H. The connective prose of pages 10-19 is fast and much
+% of it is left \ill{}; the formulas read.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{98}
+\batch{1}
+\pages{1}{20}
+\dating{[à partir de 1966-1967]}
+\watermark{Édition de démonstration}
+\foldertitle{Schémas de Hilbert. Normes : notes manuscrites (s.d.).}
+
+\begin{document}
+
+\section{Formalisation des normes}
+\note{titre et renvoi écrits au crayon de sa main sur la couverture cartonnée
+(page 1), seuls mots de la feuille : « Formalisation des Normes », et au-dessous
+« Cf aussi SGA 4 XVIII ».}
+
+\page{2}
+\marginal{Normes}
+
+$A$ un anneau \ill{}
+
+$M$ $A$-module libre de rang $n$
+
+$1_M \in L_A(M)$ \quad d'où \quad $1_A \otimes \cdots$
+
+\struck{$M \otimes = 0$}
+
+$L_A\bigl(\overset{n}{\otimes}_A M\bigr) = \overset{n}{\otimes}_A L_A(M) \supset$ \ill{}
+
+\[
+  L_A\bigl(T^n_A(M)\bigr) \simeq T^n_A\bigl(L_A(M)\bigr) \supset TS^n_A\bigl(L_A(M)\bigr)
+\]
+
+Endomorphismes de $\overset{n}{\otimes}_A M$ qui commutent aux opérations de
+symétrie / Ils opèrent en particulier sur la partie
+\struck{$\otimes$} $\overset{n}{\Lambda}_A M$ de $\overset{n}{\otimes}_A M$
+stable \uncertain{par} symétrie, d'où —
+
+$X \;\; \overset{n}{\boxtimes}_S X \struck{\ill{}} \longrightarrow Y$,
+$\mathrm{Cart}^n_S(X)$, $X \to Y$ \note{flèche verticale, $X$ au-dessus de $Y$.}
+
+$S$, \quad $\overset{n}{\otimes} F$, \quad $B$, \quad $A$
+\note{lettres isolées, écrites l'une sous l'autre, sans flèche.}
+
+$X \longrightarrow \overset{n}{\boxtimes} X$ \qquad $\overset{n}{\Lambda}_S F$
+
+\begin{tikzcd}
+X & X^n_S \arrow[r] & Z \\
+Y \arrow[u] & Y^n_S \arrow[u] \arrow[r] & \mathrm{Symm}^n_S(Y) \arrow[u] \\
+S & &
+\end{tikzcd}
+
+\note{$S$ est écrit sous $Y$, séparé de lui par un point, sans flèche.}
+
+\page{4}
+\note{page de diagrammes épars, sans prose ; ils sont donnés de haut en bas
+et de gauche à droite.}
+
+\begin{tikzcd}
+G & \\
+S \arrow[u, no head] & T \arrow[l]
+\end{tikzcd}
+
+\note{une flèche monte de $T$, sans but écrit ; à droite de $T$, une flèche
+double vers \struck{$S$}, biffée.}
+
+\[
+  N^F_{T/S} : \Gamma(G_T/T) \longrightarrow \Gamma(G/S)
+\]
+
+\begin{tikzcd}
+\struck{G} & G' \arrow[l] & G \arrow[l, "r"'] \\
+& S \arrow[u, no head] & T \arrow[l, no head] \arrow[u, no head]
+\end{tikzcd}
+
+\note{à droite de $T$, isolée, la lettre $U$.}
+
+\begin{tikzcd}
+G & G^r_S \arrow[l] & G^r_T \arrow[l] \\
+S \arrow[u, no head] & & T
+\end{tikzcd}
+
+$G^r$ \qquad \struck{$N^{r,}_{T/S}($}
+
+\begin{tikzcd}
+F & G \arrow[l, "\alpha(r)"'] \\
+S \arrow[u] & T \arrow[l] \arrow[u]
+\end{tikzcd}
+
+\[
+  N^{\alpha}_{F/T/S}(\varphi)
+\]
+\[
+  N^{\alpha}_{F/T/S} : \Gamma(G/T) \to \Gamma(F\ill{}
+\]
+\note{la ligne s'arrête au bord droit de la feuille.}
+
+\begin{tikzcd}
+X \arrow[d, no head] & Y \arrow[l, "\alpha\ (r)"'] \arrow[d] & Z \arrow[l, "\beta\ (s)"'] \arrow[d] \arrow[ll, bend right=30, "(rs)"'] \\
+S & T \arrow[l] & U \arrow[l] \\
+& F & G \\
+& & G \otimes_T F
+\end{tikzcd}
+
+\note{sur les flèches horizontales du haut, $(r)$ et $(s)$ sont écrits
+au-dessus, $\alpha$ et $\beta$ au-dessous ; l'arc de $Z$ vers $X$ porte
+$(rs)$. Les lettres $F$, $G$ et $G \otimes_T F$ sont écrites sous $T$ et
+$U$, sans flèche.}
+
+\[
+  \boxed{\;N^{\gamma}_{(G \otimes_T F)/U/S}(\varphi)
+  = N^{\alpha}_{F/T/S}\bigl(N^{\beta}_{G/U/T}(\varphi)\bigr)\;}
+\]
+\note{dans l'indice du membre de gauche, une lettre surchargée après
+$(G \otimes_T F)/$.}
+
+\begin{tikzcd}
+& X_2 & \\
+X & \times \arrow[l] & \\
+& X_1 \arrow[d] & Y \arrow[l, "r_1"] \arrow[uul, "r_2"'] \arrow[d] \\
+& S & T \arrow[l]
+\end{tikzcd}
+
+\note{sous $T$ : « $r_1, r_2$ ». Le signe $\times$ est écrit entre $X_2$ et
+$X_1$, une flèche allant de lui vers $X$ : on lit $X \leftarrow X_2 \times
+X_1$.}
+
+\page{6}
+$\overset{n}{\Lambda} M$
+
+\begin{enumerate}
+  \item[(i)] $X^r_S \to Y$ ; \quad $X \to X'$, \quad $Y \to Y'$ ;
+  \item[(ii)] $F$ au-dessus de $X \to S$, \quad $X^r_S \xrightarrow{\varphi} Y$ ; $F'$ au-dessus de $X' \to S'$, \quad $X'^r_{S'} \xrightarrow{\varphi'} Y'$.
+\end{enumerate}
+\note{(i) et (ii) sont réunis par une accolade, dont un trait descend vers
+la ligne b) ; les flèches $X \to S$ et $X' \to S'$ sont dessinées
+verticalement, $F$ et $F'$ écrits au-dessus de $X$ et $X'$.}
+
+a) Cas où $r = 0$, $r = 1$
+
+b) Fonctorialité en $X, Y, S$
+
+\begin{tikzcd}
+X^n_S \arrow[r, "\varphi"] \arrow[d] & Y \arrow[d] & S \arrow[l, "\mathrm{Can}^{\varphi}_F"'] \\
+X'^n_{S'} \arrow[r, "\varphi'"'] & Y' & S' \arrow[l, "\mathrm{Can}^{\varphi'}_{F'}"]
+\end{tikzcd}
+
+\note{dans le carré de gauche : « comm. par hyp. » ; entre les deux flèches
+de droite, un signe d'égalité surchargé et « $\mathrm{Can}^{\varphi', n}$ ».
+Le symbole transcrit $\mathrm{Can}$ revient tout au long de la page
+(une section $S \to Y$ attachée à $\varphi$ et à $F$) ; il est écrit ici
+serré, presque « Cm », et se lit sur la page 10, plus nette
+($\mathrm{Can}_u = \mathrm{Can}_{X/Y}$). Au bas du
+diagramme, le $S$ est surchargé en $S'$.}
+
+\begin{tikzcd}
+Y & Y' \arrow[l] \\
+S \arrow[u, "\mathrm{Can}^{\varphi}_F"] & S' \arrow[l] \arrow[u, "\mathrm{Can}^{\varphi'}_{F'}"']
+\end{tikzcd}
+
+\note{dans le carré : « comm. », avec un signe $\equiv$.}
+
+c) Additivité en $M$
+
+\begin{tikzcd}
+X^{r_1+r_2}_S \arrow[r, "\varphi"] & Y & S \arrow[l, "\mathrm{Can}^{\varphi}_{F_1 \times F_2}"'] \\
+X^{r_1}_S \times_S X^{r_2}_S \arrow[u, "\wr\ \mathrm{canon.}"] \arrow[r, "\varphi_1 \times_S \varphi_2"'] & Y_1 \times_S Y_2 \arrow[u, "u"'] & S \arrow[l, "\mathrm{Can}^{\varphi_1}_{F_1} \times \mathrm{Can}^{\varphi_2}_{F_2}"] \arrow[u, no head]
+\end{tikzcd}
+
+\note{dans le carré de gauche, « comm. » suivi de mots surchargés et
+biffés, \ill{} ; les deux $S$ de droite sont reliés par un double trait
+vertical, l'égalité.}
+
+d) Transitivité.
+
+\begin{tikzcd}
+G & X \arrow[d, "r"] & G \otimes_Y F \\
+F & Y \arrow[d, "s"] & \\
+& Z &
+\end{tikzcd}
+
+\note{$G$ est écrit contre la flèche $r$, $F$ contre la flèche $s$ ; un trait
+oblique porte $rs$ de $X$ à $Z$, sous $G \otimes_Y F$. À droite, derrière
+un trait vertical : « Cas où \ill{} ».}
+
+\begin{itemize}
+  \item $X^r_Y \xrightarrow{\ \varphi\ } \mathfrak{X}_r$ ($Y$-\uncertain{morphisme})
+  \item $Y^s_Z \xrightarrow{\ \psi\ } \mathfrak{Y}_s$ ($Z$-\uncertain{morphisme})
+  \item $X^r_Z \xrightarrow{\ \chi\ } \mathfrak{Z}_r$ ($Z$-\uncertain{morphisme})
+  \item $\mathfrak{X}^s_Z \xrightarrow{\ u\ } \mathfrak{Z}$ ($Z$-\uncertain{morphisme})
+\end{itemize}
+\note{les quatre lignes sont encadrées ; deux traits obliques barrent les
+parenthèses, et le cadre se ferme sur « \ill{} comm. ». Les lettres
+$\mathfrak{X}$, $\mathfrak{Y}$, $\mathfrak{Z}$ transcrivent des capitales
+cursives ; l'exposant de la troisième ligne est lu $r$, peut-être $rs$.}
+
+\begin{tikzcd}
+X^{rs}_Z \arrow[r, "\chi"] & \mathfrak{Z} \\
+(X^r_Y)^s_Z \arrow[u, "\mathrm{can}"] \arrow[r, "\varphi^s_Z"'] & \mathfrak{X}^s_Z \arrow[u, "u"']
+\end{tikzcd}
+
+\note{ce carré est entouré d'un trait qui le relie à « \uncertain{Fixés}
+\ill{} », en haut à gauche, et à « Commutativité », en bas.}
+
+\page{8}
+$G^{rs}_Z \xrightarrow[\text{symm}]{\ \varphi\ } G'$ \quad d'où diagramme comm.
+
+\begin{tikzcd}
+(G_Y)^{rs}_Y \arrow[r, "\varphi_Y"] \arrow[d, no head] & G'_Y \arrow[d] \\
+G^{rs}_Z \arrow[r, "\varphi"'] & G'
+\end{tikzcd}
+
+\note{contre la flèche verticale de droite, un signe \ill{}.}
+
+On \uncertain{suppose} \uncertain{qu'il} \ill{} ainsi
+
+$(G_Y)^s \xrightarrow[\text{symm}]{\ \psi\ } G''$ \quad d'où
+
+\struck{$(G_Y$\ill{}}
+
+$G''^{s}_Z \xrightarrow[\text{symm}]{\ \chi\ } G'$ \qquad $Z$-morphisme
+\uncertain{rendant} commutatif
+
+\begin{tikzcd}
+(G_Y)^{rs} \arrow[r, "\psi^s_Y"] \arrow[dr, "\mathrm{can}\,\varphi_Y"'] & G''^{s}_Z \arrow[d, "\chi"] \\
+& G'
+\end{tikzcd}
+
+\note{sous $(G_Y)^{rs}$, une flèche verticale biffée.}
+
+Conclusion. $\alpha : X \to G$ un $Z$-morphisme, d'où
+\[
+  N^{\varphi}_{G/X/Z}(\alpha) : Z \longrightarrow G'
+\]
+\marginal{\ill{} $\alpha = c\alpha'$}
+Mais aussi un $Y$-morphisme $\alpha' : X \to G_Y$, d'où
+\[
+  N^{\psi}_{G/X/Y}(\alpha') : Y \longrightarrow G''
+\]
+et \ill{}, en \uncertain{appliquant} $\chi$, on \uncertain{trouve}
+\[
+  N^{\chi}_{F/Y/Z}\bigl(N^{\psi}_{G/X/Y}(\alpha')\bigr) : Z \longrightarrow G'
+\]
+Je dis que
+\[
+  \boxed{\;N^{\varphi}_{G/X/Z}(c\alpha') = N^{\chi}_{F/Y/Z}\bigl(N^{\psi}_{G/X/Y}(\alpha')\bigr)\;}
+\]
+\note{dans le cadre, l'indice $F/Y/Z$ est écrit par-dessus un premier
+$F/X/Z$.}
+
+\page{10}
+\subsection{Théorie axiomatique des morphismes \ill{}}
+
+Soit $\mathcal{C}$ une catégorie, où les sommes finies existent, et
+soit $\mathcal{N}$ un ensemble de \struck{\ill{}} morphismes de
+$\mathcal{C}$, ayant les propriétés suivantes
+\note{« où les sommes finies existent » et « ayant les propriétés
+suivantes » sont ajoutés au-dessus de la ligne.}
+\begin{enumerate}
+  \item[(i)] Si $X \in \mathcal{C}$, alors $\mathrm{id}_X \in \mathcal{N}$
+  \item[(ii)] Si $u, v \in \mathcal{N}$ sont composables, alors $vu \in \mathcal{N}$
+  \item[(iii)] Si $u : X \to Y$ est dans $\mathcal{N}$, et si $Y' \to Y$ est
+  quelconque, alors $X' = X \times_Y Y'$ existe et
+  $u' : \struck{X \times_Y} X' \to Y'$ est $\in \mathcal{N}$
+  \item[(iv)] Si $u_i : X_i \to Y$ ($i = 1, 2$) sont $\in \mathcal{N}$, alors
+  $(u_1, u_2) : X_1 \amalg X_2 \to Y$ est dans $\in \mathcal{N}$ ; de plus,
+  l'extension de \ill{}
+  \note{fin de (iv) très corrigée : mots biffés, ajouts interlinéaires,
+  \ill{}.}
+  \item[(v)] Si $u : X \to Y$ est $\in \mathcal{N}$, alors \ill{} tout
+  sous-groupe $G$ de $\mathfrak{S}_r$, le quotient
+  $\bigl(\overbrace{X \times_Y \cdots \times_Y X}^{r}\bigr)/G$ existe,
+  \uncertain{et il est} \ill{}
+  \note{ces derniers mots sont entourés au crayon rouge, avec un « ? ».}
+\end{enumerate}
+
+Soit $\deg$ une fonction sur $\mathcal{N}$, \ill{} : $\deg(X/Y)$
+ayant les propriétés suivantes
+\begin{enumerate}
+  \item[(i bis)] $\deg(\mathrm{id}_X) = 1$
+  \item[(ii bis)] $\deg(vu) = \deg v \deg u$
+  \item[(iii bis)] $\deg(u) = \deg(u^{Y'})$
+  \item[(iv bis)] $\deg(u, v) = \deg u + \deg v$
+  \item[(v bis)] Le quotient envisagé par (v) a \ill{} degré qui \uncertain{se}
+  calcule ainsi : Soit \struck{$\deg(X/Y)$, \ill{}}
+  $r = \deg(X/Y)$, \ill{} $E = [1, r]$,
+  \struck{$E = \Lambda^r$, $F = (\overset{r}{\otimes} E)/G$}
+  Soit $F = E^n/G$, alors \struck{$\deg((X/Y)^n/G)$} le degré de
+  $\bigl(\underbrace{X \times_Y \cdots \times_Y X}_{n}\bigr)/G$ est égal à
+  $\mathrm{card}(E^n/G)$.
+\end{enumerate}
+\note{à la place de « Soit », un premier essai encadré et biffé, \ill{}.}
+
+Enfin, pour \struck{\ill{}} morphisme $u \in \mathcal{N} : X \to Y$
+de degré $r$, on se donne un morphisme
+\[
+  \mathrm{Can}_u = \mathrm{Can}_{X/Y} : Y \to \Sigma^r X
+\]
+(\struck{\ill{}} \uncertain{canonique} de $u$, ou de $X/Y$), avec les
+propriétés suivantes
+\note{« de degré $r$ » est ajouté au-dessus de la ligne, relié par une
+accolade ; un trait de crayon rouge part de là vers la marge.}
+\begin{enumerate}
+  \item[(i ter)] $\mathrm{Can}_{X/X} = \mathrm{id}_X$
+  \item[(ii ter)] \ill{} commutativité dans le diagramme suivant :
+\end{enumerate}
+
+\page{11}
+\note{deux feuillets photographiés côte à côte ; celui de gauche continue
+directement la page 10, celui de droite ouvre l'Exemple I, que la page 12
+poursuit.}
+
+(où $X \xrightarrow[r]{u} Y \xrightarrow[s]{v} Z$ sont des morphismes
+$\in \mathcal{N}$, de degrés $r, s$) :
+\note{à droite de cette ligne, isolé : $Y \longrightarrow \Sigma^r(X/Y)$.}
+
+\begin{tikzcd}[column sep=small, nodes={font=\scriptsize}]
+Z \arrow[r, "\mathrm{Can}_{Y/Z}"] \arrow[drr] \arrow[ddrr, "\mathrm{Can}_{X/Z}"'] & \Sigma^s(Y/Z) \arrow[r, "\Sigma^s(\mathrm{Can}_{X/Y}/Z)"] & \Sigma^s(\Sigma^r(X/Y)/Z) \arrow[d, "\mathrm{can}"] \\
+& & \Sigma^s(\Sigma^r(X/Z)/Z) \arrow[d, "\mathrm{can}"] \\
+& & \Sigma^{sr}(X/Z)
+\end{tikzcd}
+
+\note{sous l'étiquette $\mathrm{Can}_{Y/Z}$, un premier $\mathrm{Can}_{X/Z}$
+biffé ; le terme du milieu de la colonne de droite est écrit par-dessus un
+premier terme, peut-être $\Sigma^{s+r}$. Les deux flèches obliques issues de $Z$ sont
+chacune doublées d'un trait ondulé.}
+
+(iii ter) Soit $u : X \to Y$ dans $\mathcal{N}$, et $Y' \to Y$
+  quelconque, alors $Y' \xrightarrow{\mathrm{Can}_{X'/Y'}}$ est « l'image
+  inverse » de $\mathrm{Can}_{X/Y}$ par $Y' \to Y$, i.e. le diagramme
+
+\begin{tikzcd}
+\Sigma^r(X/Y) & Y \arrow[l, "\mathrm{Can}_{X/Y}"'] \\
+\Sigma^r(X'/Y') \arrow[u, "\mathrm{can}"] & Y' \arrow[l, "\mathrm{Can}_{X'/Y'}"] \arrow[u]
+\end{tikzcd}
+
+est commutatif
+
+(iv ter) Soient $u_i : X_i \to Y$ ($i = 1, 2$) dans $\mathcal{N}$.
+  Soit $X = X_1 \amalg X_2$, $u = (u_1, u_2)$ ; donc pour tout
+  \struck{entier} $r$, on a
+  \[
+    \Sigma^r(X/Y) = \struck{\ill{}} \coprod_{\substack{i+j=r\\ i,j \geqslant 0}}
+    \Sigma^i(X_1/Y) \times \Sigma^j(X_2/Y)
+  \]
+  en particulier, si $r_i = \deg u_i$ et $r = r_1 + r_2 = \deg u$, on a un
+  morphisme d'\ill{} canonique
+  $\Sigma^{r_1}(X_1/Y) \times \Sigma^{r_2}(X_2/Y) \to \Sigma^r(X/Y)$.
+  Ceci dit, on a commutativité dans
+
+\begin{tikzcd}
+Y \arrow[r, "{(\mathrm{Can}_{X_1/Y}, \mathrm{Can}_{X_2/Y})}"] \arrow[dr, "\mathrm{Can}_{X/Y}"'] & \Sigma^{r_1}(X_1/Y) \times \Sigma^{r_2}(X_2/Y) \arrow[d] \\
+& \Sigma^r(X/Y)
+\end{tikzcd}
+
+\note{« d'\ill{} » est ajouté au-dessus de la ligne.}
+
+\textbf{Exemple I}. Soit $G$ un groupe, et $\mathcal{C}$ la catégorie des
+ensembles où $G$ opère. Un morphisme $u : X \to Y$ en $\mathcal{C}$ sera
+\struck{\ill{} dans $\mathcal{N}$ s'il existe \ill{}} dit de degré $r$ si
+pour tout $y \in Y$, \struck{\ill{}} on a $\mathrm{card}(u^{-1}(y)) = r$.
+Un morphisme est dans $\mathcal{N}$ s'il existe $r$ tel qu'il soit de degré
+$r$. Les conditions (i) à (v) et (i bis) à (v bis) sont trivialement
+vérifiées. [N.B. \struck{\ill{}} de produits fibrés et \ill{} : un \ill{}
+quelconques existent dans $\mathcal{C}$, \ill{} de même le quotient d'un
+objet de $\mathcal{C}$ par un groupe d'automorphismes $G$]. Soit
+$u : X \to Y$ de degré $r$. Montrons que $\Sigma^r(X/Y)$ est
+\ill{} l'ensemble \struck{\ill{}} réunion des $\Sigma^r(u^{-1}(y))$
+($y \in Y$) ; comme $u^{-1}(y)$ a exactement $r$ éléments,
+\struck{\ill{}} il y a dans $\Sigma^r(u^{-1}(y))$ un élément privilégié,
+classe de la \ill{} de ses éléments rangés dans un ordre quelconque). D'où
+une application canonique
+\[
+  Y \to \Sigma^r(X/Y),
+\]
+qui évidemment \ill{} aux morphismes de 2 situations, donc \ill{}
+\ill{} sur un \struck{\ill{}} \ill{} de $\mathcal{C}$. Si \ill{}
+\note{les deux dernières lignes du feuillet droit, au bord de la feuille,
+sont en partie hors de l'image.}
+
+\page{12}
+le diagramme pour $\mathrm{Can}_{X/Y}$, on vérifie aussitôt les conditions
+(i ter) à (iv ter).
+
+\marginal{\uncertain{Expliquer} \ill{} relation \ill{} $\mathcal{C}$ \ill{}
+en général, \ill{} \ill{} \uncertain{géométriques} \uncertain{spéciaux}
+\ill{} \ill{}}
+\textbf{Exemple II}. Soit $\mathcal{C}$ la catégorie des schémas,
+(\ill{} \ill{} \ill{}.) Un morphisme $u : X \to Y$ fini et plat est dit
+de degré $r$ s'il correspond à un \struck{\ill{}} faisceau
+\struck{\ill{}} \ill{} d'algèbres sur $Y$, loc. libre de
+\struck{degré} rang $r$ en tout point. Soit $\mathcal{N}$ l'ensemble des
+morphismes qui sont finis et plats et \ill{} \ill{} de degré \ill{}. Les
+conditions (i) à (v) et (i bis) à (v bis) se vérifient,
+\uncertain{comme} \ill{} \struck{\ill{}} très facilement. De plus, on
+peut définir de façon naturelle \struck{des applications} un morphisme
+$\mathrm{Can}_{X/Y}$, vérifiant les conditions (i) à (iv).
+\note{la parenthèse après « schémas » est ajoutée au-dessus de la ligne ;
+« $u : X \to Y$ » l'est aussi. La note marginale, à gauche, est reliée à
+l'intitulé de l'exemple.}
+
+\textbf{Exemples III} \struck{\ill{}} (Variantes). En géométrie
+analytique, on a une variante évidente. En topologie, prenant les
+revêtements \uncertain{non} \uncertain{ramifiés} \ill{} \ill{}, on
+trouve une variante analogue ; elle est très voisine de l'exemple I,
+\struck{\ill{}} \ill{} précisément, soit $X$ un espace topologique
+\uncertain{fixé}, \struck{\ill{}} \ill{} \ill{}
+
+\page{13}
+Soit $X \in \mathcal{C}$, avec un groupe $\Gamma$ d'automorphismes
+\uncertain{discret} ; \ill{} \ill{} \ill{} pour tout sous-groupe $H$
+de $G$, \struck{\ill{} $H$ \ill{}} $X/H$ existe, et que pour
+$H' \subset H$ \uncertain{invariant} d'indice fini dans $H$,
+\struck{$X/H' \to X/H$ soit de \ill{} \ill{} degré $r$} (\ill{} \ill{}
+\ill{} \ill{} \ill{} \ill{}, \ill{} \ill{}) \ill{} \ill{}
+$X/H'$ sur \ill{} \ill{} fini $H/H'$ soit \emph{non ramifié}, et
+$X/H' \to X/H = (X/H')/(H/H')$ est $\in \mathcal{N}$. Soit
+$\mathcal{C}'$ la catégorie des ensembles $E$ où $\Gamma$ opère, tels que
+$E/\Gamma$ soit fini. Alors pour \struck{\ill{}} $E \in \mathcal{C}'$,
+$X \times_{(\Gamma)} E$ existe, soit $\Phi(E) = X \times_{(\Gamma)} E$.
+\note{la lettre du groupe est d'abord $\Gamma$, puis $G$ et $H$ ; on
+transcrit comme écrit. Le passage biffé entre parenthèses est entouré d'un
+cadre relié par un trait à la ligne précédente.}
+
+$\Phi$ est donc un foncteur $\mathcal{C}' \to \mathcal{C}$,
+\ill{} aux sommes finies, et on suppose que $\Phi$ transforme
+morphismes de degré $r$ en morphismes de degré $r$ (i.e. fonctions
+\uncertain{sur} $\mathcal{N}$). De plus, il transforme
+\struck{morphismes} \uncertain{canoniques} en \ill{} \ill{}
+\marginal{; \uncertain{dualement} \ill{}}
+\note{ce dernier alinéa est marqué d'un trait vertical dans la marge
+gauche, auquel la note marginale est reliée. La page s'arrête au bas de la
+feuille.}
+
+\page{15}
+Soit $G$ un groupe, $\mathcal{C}_G$ la catégorie des ensembles $E$ où $G$
+opère \struck{à droite} \uncertain{à gauche}, et tels que $E/G$ soit fini.
+\ill{} \ill{} par la catégorie des hyper-foncteurs \ill{} ensembles sur
+$\mathcal{C}_G$ (\struck{\ill{}} les épimorphismes dans $\mathcal{C}_G$
+\ill{} \ill{} morphismes de descente) est équivalente
+\marginal{; \uncertain{dualement}} à la catégorie des ensembles
+\struck{\ill{}} où $G$ opère \struck{à droite} \uncertain{à gauche} ; si
+$A$ est un tel, $\Phi_A$ l'hyperfoncteur associé, on a
+\[
+  \Phi_A(X) = \struck{\ill{}} \operatorname{Hom}_G(X, E)
+\]
+\note{les deux dernières lignes (« la catégorie des ensembles … ») sont
+tenues par une accolade dans la marge, où s'écrit la note marginale. Dans
+la formule, un premier membre de droite, où se lisent $A$, $X$, $(G)$, est
+biffé ; le $X$ du membre de gauche est surchargé. Le membre de droite
+porte $E$ et non $A$.}
+
+\struck{Ainsi \ill{}, \ill{} :}
+Et si $\Phi$ est un hyperfoncteur, alors l'ensemble à opérateurs associé
+est
+\[
+  A = \Phi(G_s)
+\]
+où $G_s$ désigne $G$ considéré comme ens. à groupe d'opérateurs :
+\ill{} $G$ sur lui-même \ill{} \ill{}
+\note{l'indice de $G_s$ est surchargé, peut-être $s$ sur $d$.}
+
+\struck{Soit $F$ un sous-groupe de $G$, et \ill{} $\mathcal{C}_{G;F}$ la
+sous-catégorie de $\mathcal{C}_G$ formée des $X \in \mathcal{C}_G$ tels que
+$F$ \uncertain{opère} \uncertain{trivialement} ; c'est une sous-catégorie
+stable par les opérations habituelles [sommes, \ill{}, produits fibrés,
+quotients et \ill{} \ill{}].}
+\note{ce dernier alinéa est barré de trois grands traits obliques.}
+
+\page{17}
+\[
+  \text{(A)}\qquad
+  \boxed{\;H^*(G, A) \Longleftarrow H^p\bigl(T/e, \underline{\mathcal{H}}^q(A)\bigr)\;}
+  \qquad (T \neq \emptyset)
+\]
+\marginal{\uncertain{s'obtient} \ill{} la suite spectrale de Leray d'un
+\emph{recouvrement} d'un \uncertain{objet}}
+\note{la note marginale est écrite en oblique dans la marge gauche, contre
+le cadre ; le « A » est cerclé.}
+
+où $\underline{\mathcal{H}}^q(A)$ est l'hyperfoncteur sur $\mathcal{C}_G$
+\struck{défini par $\underline{\mathcal{H}}^q(A)(G/F) = H^q(F, A)$}
+dont la valeur sur $S \in \mathcal{C}_G$ est donnée par
+\[
+  \underline{\mathcal{H}}^q(A)(S) = R^q_A\bigl(\struck{A}\,
+  \struck{\operatorname{Hom}_{(G)}}(S, A)\bigr)
+\]
+[et \ill{} donc défini \ill{} par les conditions de \struck{\ill{}}
+\ill{} \ill{} \uncertain{finies} \ill{} précédente, et \ill{} \ill{}
+pour $S = F\backslash G$, on a
+\[
+  \underline{\mathcal{H}}^q(A)(F\backslash G) = H^q(F, A)\;]
+\]
+\note{dans la formule, $\operatorname{Hom}$ et son indice $(G)$ sont
+barrés en même temps qu'un premier $A$ ; ce qui reste lisible est
+$R^q_A(\ldots(S, A))$.}
+
+\ill{} : \uncertain{utilisé} \ill{} les faits suivants
+\begin{enumerate}
+  \item[(i)] $T \to e$ est un morphisme de descente, \ill{} pour un
+  hyperfoncteur, \ill{} \ill{} \struck{\ill{}} \ill{}
+  $\Phi$, on a $\Phi(e) = H^0(T/e, \Phi)$
+  \item[(ii)] Si $\Phi$ est \uncertain{un hyperfoncteur} injectif, alors
+  $H^p(T/e, \Phi) = 0$ pour $p > 0$ (il suffit de prouver
+  $\Phi = \Phi_A$, où $A = \operatorname{Hom}_{\mathbb{Z}}(\mathbb{Z}(G), M) = M^G$,
+  alors $\Phi(S) = $ \ill{} \uncertain{applications} de $S$ \ill{} $M$ ;
+  donc
+  $H^p(T/e, \Phi) = H^p($complexe de \ill{} \ill{} défini par $T$ ;
+  $M) = 0$ pour \ill{} \ill{} $p > 0$.
+\end{enumerate}
+\note{« un hyperfoncteur » est ajouté au-dessus de « injectif », relié par
+une accolade. La parenthèse ouverte en (ii) ne se ferme pas.}
+
+\page{18}
+\note{feuillet d'un tapuscrit qui n'est pas de lui, retourné à l'envers
+au dos de la page 17 : page « - 90 - » d'un texte numéroté « n° 268 » sur
+les variétés abéliennes. Il achève la preuve d'un théorème (une base
+$f_0, \ldots, f_n$ de $L(D)$, développements en série de puissances au
+point $P$, rang de la matrice des coefficients, d'où un diviseur $X$
+rationnel sur $K$, « Ceci démontre notre théorème »), puis énonce un
+théorème : soit $D$ un diviseur positif sur un produit $A \times V$ d'une
+variété de groupe commutatif et d'une variété $V$ complète sans
+singularités de codimension 1, rationnel sur un corps de définition $k$
+tel que $V$ possède un point simple $P$ rationnel sur $k$ ; alors il
+existe une variété de groupe commutatif $B$ et un … — l'énoncé
+continue au feuillet suivant, absent du lot. Seules les marques au crayon
+sont transcrites ; elles sont d'une autre encre que la page 17, et rien
+sur la feuille ne les attribue à une autre main.}
+
+\marginal{\ill{}} \note{écrit à la place du mot « théorème », biffé au
+crayon dans « Ceci démontre notre théorème ».}
+
+\marginal{utile au cas non singulier)}
+\note{en regard des lignes « tés de codimension 1 » et « lequel $D$ soit
+rationnel », dont les mots « complète sans singularités de codimension 1 »
+et « point simple $P$ rationnel » sont soulignés au crayon.}
+
+\marginal{Prouver !}
+\note{sous l'énoncé, relié par un trait à « nel sur $k$ ».}
+
+\page{19}
+Plus généralement \struck{\ill{}} posons
+\[
+  \underline{\mathcal{H}}^q(\Phi)(S) = H^q(-/S, \Phi) =
+  \left\{\begin{array}{l}
+    \text{valeurs en } \Phi \text{ des foncteurs dérivés } q\text{-ièmes}\\
+    \text{de } \Phi \to \Phi(S)
+  \end{array}\right.
+\]
+\marginal{\uncertain{identités} ; \uncertain{dualement}}
+\note{la note marginale est reliée par une flèche à la formule. Sous le
+signe $=$, une flèche renvoie à un ajout interlinéaire : « définition
+\struck{valeurs en $\Phi|S$} des foncteurs dérivés de $\Gamma S$ sur la
+catégorie des \struck{\ill{}} \ill{} \ill{} sur $S$ ; il n'intervient
+\uncertain{Čech} \ill{} ».}
+
+On montre que
+\begin{enumerate}
+  \item[(i)] $\underline{\mathcal{H}}^q(\Phi)$ est un
+  hyper-préfaisceau qui \struck{\ill{}} \ill{} \uncertain{finies}
+  \ill{} produits
+  \item[(ii)] $\underline{\mathcal{H}}^q(\Phi_A)(G/F) = H^q(F, A)$
+\end{enumerate}
+\note{(i) et (ii) sont tenus par une accolade à gauche.}
+
+Sous ces conditions on a la suite spectrale suivante, si $T \to S$ est
+\emph{surjectif} (dans $\mathcal{C}_G$)
+\[
+  \text{(B)}\qquad
+  \boxed{\;H^*(-/S, \Phi) \Longleftarrow H^p\bigl(T/S, \underline{\mathcal{H}}^q(\Phi)\bigr)\;}
+\]
+\marginal{suite spectrale de Leray-\uncertain{Čech}}
+\note{le « B » est cerclé ; la note, à droite, est encadrée.}
+
+Si $F' \subset F \subset G$, on peut prendre
+$T = G/F'$, $S = G/F$ et on obtient, si $A$ est un $G$-module,
+\[
+  H^*(F, A) \Longleftarrow H^p\bigl(F \bmod F' ; \underline{\mathcal{H}}^q(A)\bigr)
+\]
+\note{les deux $A$ de cette formule sont surchargés ; un exposant illisible
+suit le premier $F$ du second membre.}
+
+La suite spectrale est la \ill{} \ill{} \ill{}, \uncertain{utilisée} sur
+$A$ la structure de $G$-module, et ne retient que celle de $F$-module
+\ill{}. La suite spectrale (B) \ill{} \ill{} \ill{} plus générale que (A).
+
+Tout ceci est à généraliser aux hyperfaisceaux quelconques - - - -
+\note{la phrase est marquée de trois traits verticaux dans la marge
+gauche ; elle finit sur une ligne de tirets, et la page s'arrête là.}
+
+\end{document}

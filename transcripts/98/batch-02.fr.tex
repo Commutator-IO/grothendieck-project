@@ -1,0 +1,683 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 98, batch 2 (pages 21-40).
+% Established from the facsimile archives/batches/98/batch-02.pdf (a mirror of
+% https://grothendieck.umontpellier.fr/98.pdf), per the skill
+% transcribe-grothendieck, read from the tiles under archives/tiles/98/ and
+% from 300-600 dpi crops of the batch PDF. The batch file carries no cover
+% sheet: PDF page k is folder page 20+k, and the archivists' pencil numbers
+% (« 23 », « 26 » ... « 40 ») agree wherever legible.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-09-24 — first pass, unchecked against the pages by a human.
+%
+% The folder sits in the inventory group "69-89" « Géométrie et topologie
+% combinatoire », whose subject does not match this folder's (as for folder
+% 100); \dating{} carries the folder's own date verbatim. Nothing is
+% concluded from the group.
+%
+% Seventeen of the twenty pages are transcribed: 21, 23, 26-40. Absent:
+%   - pages 22 and 24: typed leaves of someone else's typescript (French,
+%     scanned upside down, headed « n° 268 », paginated « -87- » and
+%     « -95- »), on abelian and Picard varieties. Neither carries a mark in
+%     his hand and neither bears on these notes: skipped under the rule of
+%     folders 100 and 71 (other people's text with no mark of his);
+%   - page 25: an otherwise blank sheet carrying, in his hand, « Familles
+%     limitées » and « cf. SGA 6 XIII ». It is a cover: no \page{}, and his
+%     words become the section heading, with a \note.
+% No page is summarised; everything transcribed is his manuscript.
+%
+% What the batch is.
+%   21, 23  Two isolated sheets of spectral sequences: the exact sequence of
+%           low degree for H^*(-/S, G_m) (Brauer group, d_3), then a table of
+%           four fibrations and their spectral sequences (Leray,
+%           Leray-Cartan, Hochschild-Serre), H^*(X) <= H^p(Y, H^q(F)) etc.
+%   25-27   « Familles limitées »: sheaves F_i quotients of a fixed E with
+%           fixed Hilbert polynomials; induction on the dimension of the
+%           support via cycles of bounded degree; « Résultat de Chow »
+%           (cycles of bounded degree in P^n_Z form a limited family).
+%   28-33   k-equivalence of algebraic sheaves defined over different
+%           extensions of k (Définition 1, Proposition 1), the set 𝔉(X/k) of
+%           classes, its description as a quotient by Aut(K~/k) for K~
+%           algebraically closed of infinite transcendence degree; set-valued
+%           operations T(F_1,...,F_n) compatible with extension of the base
+%           field and the induced 𝔉(A_1,...,A_n); a list of examples
+%           (Hom, ⊗, Tor, Ext, extensions, primary components ...).
+%   34-40   Stability of limited families: (a) A ⊗ B, Hom(A,B), Tor_i,
+%           Ext^i of limited families are limited (proof by stratifying the
+%           base), a lemma on a complex of coherent sheaves whose cohomology
+%           commutes with base change on a finite stratification, (b) f^*
+%           and Tor^{O_Y}(A, O_X); then base change for Tor: a Proposition
+%           (dense open U, S' = U_red), a Lemme via the spectral sequence
+%           Tor^{B'}_*(M'_1,...,M'_n) <= Tor^A_p(Tor^B_q(M_1,...,M_n), A'),
+%           a Corollaire (finite stratification of S), and the start of the
+%           same Proposition for Ext, which batch 3 (page 41) continues.
+%
+% Notation fixed for the batch: underlined Hom, Tor, Ext (sheaf versions)
+% are \mathcal{H}om, \mathcal{T}or, \mathcal{E}xt, as in batch 3; his
+% gothic F for the set of classes of sheaves is \mathfrak{F}; X~, K~ are
+% \widetilde{X}, \widetilde{K}. The hand on pages 26-27 and 31-36 is a fast
+% draft: statements and formulas come through, the connective prose is
+% often lost and stays \ill{}.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{98}
+\batch{2}
+\pages{21}{40}
+\dating{[à partir de 1966-1967]}
+\watermark{Édition de démonstration}
+\foldertitle{Schémas de Hilbert. Normes : notes manuscrites (s.d.).}
+
+\begin{document}
+
+\section{[Suites spectrales]}
+\note{titre de l'éditeur, entre crochets : les pages 21 et 23 sont deux
+feuillets isolés, sans titre, sans lien apparent avec ce qui les entoure.}
+
+\page{21}
+$H^{*}(-/S, \mathbf{G}_m) \Leftarrow$
+\struck{$\cdot\ H^2(-/S, \mathbf{G}_m)$}
+
+\[
+  \cdot \to H^2(T/S, \mathbf{G}_m) \to H^2(-/S, \mathbf{G}_m) \to
+  H^0(T/S, \mathcal{H}^2(\mathbf{G}_m)) \xrightarrow{\ d_3\ }
+  H^3(T/S, \mathbf{G}_m) \to H^3(-/S, \mathbf{G}_m)'
+\]
+\[
+  \to H^1(T/S, \mathcal{H}^2(\mathbf{G}_m)) \xrightarrow{\ d_3\ }
+  H^4(T/S, \mathbf{G}_m) \to E_4^{4,0} \to 0
+\]
+\note{la première ligne est encadrée ; la seconde est écrite sous le
+cadre et la prolonge. Devant $E_4^{4,0}$, une flèche double biffée. Le
+signe $\mathbf{G}_m$ de $H^4$ est récrit sur une tache. À gauche, un
+schéma $T \leftarrow T \times_S T$ au-dessus de $S$, sans autre texte.}
+
+Au pied de la page, un carré de corps :
+
+\begin{tikzcd}
+  k \arrow[r, no head, "\mathrm{rad}"] \arrow[d, no head] & k' \arrow[d, no head] \\
+  k'' \arrow[r, no head, "\mathrm{rad}"'] & k'k''
+\end{tikzcd}
+
+\note{les quatre côtés sont des traits sans flèche ; les deux côtés
+horizontaux portent « rad », les verticaux une marque qu'on lit
+\uncertain{sép}. À côté, isolé, $H^2(\ /k, \mathbf{G}_m)$.}
+
+\page{23}
+\marginal{\emph{Leray}}
+
+\begin{tikzcd}
+  F \arrow[r, hook] & X \arrow[d] \\
+  & Y
+\end{tikzcd}
+
+application fibrée (au sens de \ill{}) générale
+\[
+  H^{*}(X) \Leftarrow H^p(Y, H^q(F))
+\]
+
+\marginal{\emph{Leray-Cartan}}
+
+\begin{tikzcd}
+  X \arrow[d] \\
+  Y \arrow[d] \\
+  B_F
+\end{tikzcd}
+
+$F$ un groupe, fibré principal $\leftarrow$ d'une fibration générale
+\[
+  H^{*}(Y) \Leftarrow H^p(B_F, \{H^q(X)\})
+\]
+N.B. $\{H^q(X)\}$ est un système \uncertain{local}
+\uncertain{déterminé} par les opérations de $\pi_0(F)$ sur $H^q(X)$.
+\note{« \uncertain{déterminé} » est écrit au-dessus d'un mot souligné
+qu'on ne lit pas.}
+
+\begin{tikzcd}
+  Y \arrow[d] \\
+  B_F \arrow[d] \\
+  B_{\struck{X}}
+\end{tikzcd}
+
+\struck{$X$} $Y$ un groupe, $F$ un s.-groupe, d'une fibration générale
+\[
+  H^{*}(B_F) \Leftarrow H^p(B_{\struck{X}}, \{H^q(Y)\})
+\]
+N.B. $\{H^q(Y)\}$ est un système défini par les op.\ de $\pi_0(X)$ sur
+$H^q(X/F)$ \ill{} \ill{} \ill{} $\pi_0(X)$ sur $\pi_0(X/F)$.
+\note{ici, et dans le schéma au-dessus, il écrit $X$ là où il vient de
+nommer le groupe $Y$ ; le $X$ de $B_X$ est biffé, celui du N.B. ne l'est
+pas. Laissé tel quel.}
+
+\struck{\ill{}}
+\marginal{Sch.\ \ill{}}
+Si $Y$ est discret, \ill{} \ill{} d'isomorphismes \ill{} \ill{} de $B_F$,
+et telle \ill{} de $B_G$ \ill{} $F$ \ill{} \ill{} \ill{} :
+[à \ill{} \ill{} \ill{} $F$, $G$ \ill{} discrets]
+\note{trois lignes serrées, d'écriture rapide, sous une ligne biffée ;
+seuls les signes mathématiques se lisent. $G$ apparaît ici pour la
+première fois.}
+
+\marginal{\emph{Hochschild-Serre}} \marginal{\uncertain{Leray-Čech}}
+
+\begin{tikzcd}
+  B_F \arrow[d] \\
+  B_{\struck{X}} \arrow[d] \\
+  B_Y
+\end{tikzcd}
+
+$X$ un groupe, $F$ un sous-groupe distingué, $Y$ le groupe
+\uncertain{quotient}, d'une fibration générale
+\[
+  H^{*}(B_G) \Leftarrow H^p(B_Y, H^q(B_F))
+\]
+\note{les quatre intitulés sont écrits en oblique dans la marge gauche,
+soulignés, chacun en face de son schéma ; le troisième schéma n'en a
+pas. Le $B_G$ de la dernière suite est tel quel sur la page.}
+
+\section{Familles limitées}
+\note{« Familles limitées », et au-dessous « cf.\ SGA 6 XIII », sont ses
+mots, seuls sur la page 25, qui sert de couverture à ce qui suit.}
+
+\page{26}
+Il y a deux variantes : \uncertain{pr}\ill{}
+
+\emph{\uncertain{Assez naturel}} : Si des $F_i$ sont quotients d'un
+[$\ill{} = L$], et si \ill{}, les cycles associés, de dimension $d$, de
+degrés bornés, alors les $F_i$ sont limités ;
+
+\struck{Les variantes $L = \mathcal{O}(-n)^k$ et \ill{}}
+
+\struck{$L = \ill{}$,} $E = \ill{}$, lorsque \ill{}
+
+$F_i$ \ill{} : \ill{} bornée, \ill{} \ill{} la \ill{} de \struck{\ill{}}
+\ill{}, soit $l$. Si $l \le 0$ rien à prouver, \ill{} \ill{} $l$.
+
+\struck{Il faut \ill{} \ill{}} Si $l = 1$, dans les \ill{} \ill{},
+\ill{} \struck{$F_i$ \ill{}} \ill{} l'\ill{} \ill{} extension de faisceaux
+\ill{} \ill{} limités.
+
+\marginal{(e)} limités, \struck{reste} \ill{}
+
+Si $l = 1$, $F_i \subset \struck{\ill{}}\ \mathcal{O}_{Z_i}$, $Z_i$ un
+cycle \uncertain{borné} \ill{} \ill{} de degré \ill{} $L$.
+\struck{Le résidu \ill{}} \ill{} $\mathcal{O}_Z$.
+
+\marginal{(d)} \ill{} limités, \ill{} \ill{} fini ; (\ill{} d'un \ill{}
+\ill{} faisceaux $L$ dans $\mathcal{O}_Z$).
+On \ill{} \ill{} fini, \ill{} \ill{}
+
+\marginal{(f)} Chow \uncertain{général} \ill{}
+\note{page d'écriture très rapide, sur sa largeur ; les lettres (d), (e),
+(f) cerclées sont dans la marge gauche, en face des lignes où elles sont
+données. Seuls les signes mathématiques et quelques mots se lisent.}
+
+\page{27}
+faisceaux $F_i$ quotients d'un faisceau donné $E$, et \struck{\ill{}}
+à $P_{F_i}$ \uncertain{donnés} \struck{\ill{}} fixés. On \ill{} prouver
+que les $(F_i)$ sont limités. \struck{Réciproque}
+
+\struck{\ill{}}
+4°) \emph{Résultat de Chow} : les \emph{cycles} de $\mathbf{P}^n_{\mathbf{Z}}$
+de degré \struck{\ill{}} borné \uncertain{sont en nombre limité} (i.e.\
+\struck{\ill{} fini} \struck{\ill{} fini} \uncertain{fibres} d'une
+\struck{\ill{}} $\Gamma \subset \mathbf{P}^n_T \to T$, où $T$ de type fini
+sur $\mathbf{Z}$).
+\note{« cycles » est doublement souligné. Entre $\mathbf{P}^n$ et la
+flèche vers $T$, un indice noirci.}
+
+c) récurrence sur $\sup \dim \operatorname{Supp} F_i = d$, trivial si
+$d < 0$. Si $d \ge 0$ on regarde les \ill{}
+\[
+  0 \to F''_i \to F_i \to F'_i \to 0
+\]
+où $\dim F''_i < d$ et $F'_i$ \struck{\ill{}} \uncertain{cycles} \ill{}
+de dim $d$ \ill{} de $L$, dans un nombre fini \ill{}
+
+\marginal{(d)} Les $F'_i$ sont limités \ill{} $= L''$ \ill{} $= L''$ et
+leurs \uncertain{Hilb.} \struck{\ill{} \ill{} dans \ill{}} \ill{}
+\uncertain{j'y reviendrai}. Dans les conditions $F_i$ et $F'_i$ limités, les
+$P_{F'_i}$ sont en nb fini ; $P_{F''_i} = P_{F_i} - P_{F'_i}$ en nb fini ;
+\ill{} les $F''_i$ sont quotients d'un \ill{} et \uncertain{Hilb.} en nb
+fini, donc \ill{}
+
+\marginal{(e)} les $F''_i$ sont limités.
+\note{(d) et (e) cerclés en marge ; le « c) » qui précède est écrit dans
+le corps, non cerclé. La lettre (d) répond à celle de la page 26 : les
+deux pages reprennent le même plan.}
+
+\section{[Classes de faisceaux sur les extensions du corps de base]}
+\note{titre de l'éditeur, entre crochets.}
+
+\page{28}
+\textbf{Définition 1.} Soient $X$ un préschéma \struck{Ag} sur un corps $k$,
+$F_i$ \struck{et $G_i$} ($i = 1, 2$) un faisceau algébrique sur
+$X_i = X \otimes_k K_i$, où $K_i$ ext.\ de $k$. On dit $F_1$, $F_2$
+\emph{$k$-équivalents} s'il existe une extension $K'$ de $k$, des
+$k$-homom.\ $u_i : K_i \to K'$, tels que les faisceaux algébriques
+$F_i \otimes_{K_i} K'$ sur $X \otimes_k K' \simeq X_i \otimes_{K_i} K'$
+soient isomorphes. \struck{La classe d'équivalence} \ill{} de faisceaux.
+\note{« $F_i \otimes_{K_i} K'$ » est interligné. Dans la marge gauche, un
+petit croquis : une nappe marquée $X$, des verticales, $K'$ ; un trait
+vertical borde la définition.}
+
+Les \ill{} \uncertain{géométrique} de \ill{}. On vérifie facilement que
+c'est une \uncertain{relation d'équivalence}. Classe d'équivalence de
+couples $(K, F)$ \struck{faisceaux} \ill{} : $K$ ext.\ de $k$, $F$
+faisceau algébrique sur $X \otimes_k K$ \ill{} pour la transitivité
+\ill{} extension \ill{} des $K$ \ill{} \ill{} choisie.
+
+\emph{Si $X$ est de type fini sur $k$,}
+
+\textbf{Proposition 1.} Tout faisceau algébrique sur $X \otimes_k K'$ est
+équivalent à un faisceau alg.\ sur $X \otimes_k K$, où $K$ sous-ext.\ de
+$K'$ de type fini sur $k$. Si $F_1$ sur $X \otimes_k K_1$ et $F_2$ sur
+$X \otimes_k K_2$ sont deux faisceaux équivalents, \struck{\ill{}},
+$K_i$ de type fini sur $k$, \struck{de déf.\ \ill{}} \ill{}
+
+\page{29}
+dans la définition 1 on peut prendre pour $K'$ une extension de type fini
+de $K$.
+
+\emph{Cor.} \ill{} résulte de Chap.\ V, § 1. \emph{Question} :
+\uncertain{peut-on prendre} $K'$ \ill{} quelle extension \ill{}
+\uncertain{universelle} ?
+
+\emph{Cor.} \ill{} l'ens.\ des classes de faisceaux \ill{}, est en bij.\
+\uncertain{canonique} avec \ill{} faisceaux « définis » sur des extensions
+de type fini de $k$. [qui est un ens.\ au sens de \ill{}] [\ill{} dans
+$L$ = réunion \ill{} $k$, $X$]. \ill{} $\mathfrak{F}(X/k)$.
+\note{$\mathfrak{F}(X/k)$ est encadré.}
+
+\struck{\textbf{Définition.} \ill{} corps de base $k$ en $K'$. $E$ \ill{}
+$\mathfrak{F}(X/k) \to \ill{}$ \ill{} $X/k$, par $k$.}
+\note{bloc barré de trois diagonales ; seuls ces mots s'y lisent.}
+\marginal{plus bas \uncertain{complété}}
+
+\ill{} que l'on $\mathfrak{F}(X/k)$ \ill{}, \ill{} \uncertain{foncteur
+contravariant} \ill{} si $h$ \ill{} $k$, il \ill{}
+
+\page{30}
+\textbf{Corollaire} \uncertain{5}. Soit $\widetilde{K}$ une extension
+algébrique\uncertain{ment close} de $k$ \ill{} transcendance \ill{}, et
+$\widetilde{X} = X \otimes_k \widetilde{K}$. Alors l'ens.\
+$\mathfrak{F}(X/k)$ \struck{iden} s'identifie à un ens.\ quotient de
+l'ens.\ des classes de faisceaux \add{coh.}\ $F$ sur $\widetilde{X}$
+\ill{} relation : \struck{\ill{}} $F$ et $G$ sont $k$-équivalents ssi il
+existe un automorphisme $\sigma$ de $\widetilde{K}/k$ tel que
+($\sigma_{\widetilde{X}}$ désignant l'automorphisme
+$\mathrm{id}_X \times \sigma$ de $\widetilde{X}$)
+$F \simeq \sigma_{\widetilde{X}}(G)$. En d'autres termes
+$\mathfrak{F}(X/k)$ s'identifie à l'ens.\ quotient de l'ens.\ des classes
+de faisceaux coh.\ sur $\widetilde{X}$ par $\operatorname{Aut}(\widetilde{K}/k)$
+y opérant de façon évidente.
+\note{« coh. » est interligné.}
+
+Ceci dit, soit $\Omega$ une \ill{}, et $\Phi$ une \ill{} de \ill{}
+$\mathfrak{F}(X \otimes_k K)$, \ill{} $X$ \ill{} préschéma algébrique sur
+un corps alg.\ clos, \struck{quelconque} \uncertain{fonction}
+
+\marginal{\uncertain{Supposons} $X$ et $Y$ sur $k$ donnés, et pour tt
+$K/k$ donné ($K$ alg.\ clos), une partie $\Psi(X \otimes_k K)$ de
+$\mathfrak{F}(X \otimes_k K)$ \ill{} extension de base \ill{}}
+\note{note écrite en oblique dans l'angle inférieur gauche.}
+
+\page{31}
+un ensemble $T(F_1, \ldots, F_n)$ de \uncertain{classes}
+\uncertain{choisies} de faisceaux (\ill{}) sur $X$, de façon que :
+
+(i) si les $F_i$ sont remplacés par des faisceaux $F'_i$ isomorphes,
+$T(F'_1, \ldots, F'_n)$ \uncertain{est inchangé} \struck{: $T(E\ill{})$}
+un faisceau $G \in T(F_1, \ldots, F_n)$ ;
+
+(ii) la compatibilité avec l'extension du corps de base :
+$T(F_1 \otimes k', \ldots, F_n \otimes k')$ \uncertain{est} (à isomorphie
+près) l'ens.\ des faisceaux $G \otimes k'$ où $G \in T(F_1, \ldots, F_n)$.
+\marginal{(i) \uncertain{Généralisation}}
+
+\struck{\textbf{Déf.}} Si alors $A_i$ sont des parties
+(\uncertain{$i = 1, \ldots, n$}) de $\mathfrak{F}(X/k)$, on désigne par
+$\mathfrak{F}(A_1, \ldots, A_n)'$ \uncertain{l'ens.}\ des classes
+\uncertain{dans} $\mathfrak{F}(X/k)$ des cl.\ des $T(F_1, \ldots, F_n)$,
+où $F$ \uncertain{sont} \ill{} sur $\widetilde{X}$ et
+$\mathrm{cl}_K(F_i) \in A_i$ pour tt $i$.
+\note{« Déf. » est encadré et biffé.}
+
+On voit \struck{\ill{}} facilement que la définition ne dépend pas du
+choix de $\widetilde{K}$ ; en effet si \ill{} une extension
+$\widetilde{K}'$ de $\widetilde{K}$ \ill{} ayant les mêmes propriétés, et
+il en \ill{} facile de démontrer \ill{}. D'ailleurs, facile de \ill{}
+direct de $\mathfrak{F}(A_1, \ldots, A_n)$ \ill{}, [définition \ill{}
+$\widetilde{K}$, \ill{} l'un des \ill{}]
+\marginal{\uncertain{propriété}}
+\note{la page, d'écriture rapide, prolonge la page 30 : le $T$ est
+l'opération « de $n$ faisceaux » annoncée au bas de celle-ci. Une note
+oblique dans la marge inférieure gauche ne se lit pas.}
+
+\page{32}
+$\mathfrak{F}(F_1, \ldots, F_n)$, où les $F_i$ sont des faisceaux sur
+$\widetilde{X} = X \otimes_k K$, \add{$K$ alg.\ clos,} $\mathrm{cl}_k F_i
+\in A_i$.
+\note{« $K$ alg. clos » est interligné.}
+
+D'ailleurs, si on prend \struck{\ill{}} \ill{} pour définir des faisceaux
+$F_i$ sur des extensions \emph{distinctes} $K_i/k$, $F_i$ de classe
+$\xi_i \in \mathfrak{F}(X/k)$, on obtient $\mathfrak{F}(\xi_1, \ldots,
+\xi_n)$ en prenant de \ill{} \ill{} qui \uncertain{fait} \ill{} une
+extension composée des $K_i$ sur $k$, et désignant \struck{$K$} $L_\alpha$,
+et \ill{} l'une des \ill{} en \ill{} de \ill{} de $\mathfrak{F}(X/k)$,
+\struck{$\mathfrak{F}(F_1^{(\alpha)}, \ldots, F_n^{(\alpha)})$} \ill{}
+$\mathfrak{F}(F_1 \otimes_k L_\alpha, \ldots, F_n \otimes_k L_\alpha)$.
+
+Si $\mathfrak{F}$ est défini aussi pour des faisceaux sur $X_K$,
+\uncertain{seulement} $K$ alg.\ clos, \ill{} satisfaisant
+\uncertain{correspondantes} des (i) et (ii), \ill{} \ill{} \ill{} \ill{}
+les \struck{\ill{}} \ill{} complications précédentes de \ill{} $K$ alg.\
+clos, et \struck{prenant} \ill{} ; \ill{} obtenons \ill{} algébriquement un
+\uncertain{extension}, \ill{} \uncertain{correspondants}.
+
+\marginal{pour 2 faisceaux $F_i$ \uncertain{remplacés} \ill{} \ill{}
+\ill{} \ill{} ! \ill{} $X_i$ \ill{} \ill{}}
+\note{note oblique dans la marge gauche, presque entièrement illisible.}
+
+\page{33}
+\emph{Exemples.}
+
+a) foncteurs $\mathcal{H}om$, $\otimes$, et leurs dérivés.
+[2 arguments, $X = Y$] et leurs \uncertain{conjugués} en \ill{}
+
+(d) Si $F$ et $G$ sont \ill{} des faisceaux, \ill{} l'ensemble
+$N(F, G)$ des \ill{} \ill{} [\ill{} $=$ \ill{} \ill{}, kif kif, \ill{}
+\ill{} \ill{} identifié \ill{} précédemment \ill{}]. [2 arg., $X = Y$]
+
+(b) F\ill{} \ill{} \ill{} \ill{} (1 arg., $f : X \to Y$ donné).
+
+(c) F\ill{} \ill{} \ill{} et foncteurs dérivés (1 arg., $f : X \to Y$
+\struck{\ill{}} donné).
+
+(e) Ens.\ des extensions de $F$ par $G$ (2 arg., $X = Y$).
+
+(f) Ens.\ des \ill{} \ill{} : 2 \ill{} \ill{} \ill{}, \ill{} ;
+décroissante, de $F$ (1 arg., $X = Y$).
+
+(f) \add{$F$.\ill{}} \struck{Ens.\ des \ill{}}
+$\mathcal{O}_{(\mathrm{S}\ill{}\, F)_{\mathrm{red}}}$ ($K$ alg.\ clos, 1
+arg., $X = Y$).
+
+(h) Ens.\ des \struck{\ill{}} \struck{faisceaux} composantes primaires de
+$F$ associées aux composantes de son support ($K$ alg.\ clos, \ill{},
+$X = Y$).
+
+\struck{(i) \ill{}}
+\note{les lettres sont les siennes, dans cet ordre : a, (d), (b), (c),
+(e), (f), (f), (h) ; (d), (e) et le second (f) sont précédés d'un
+astérisque, et des traits dans la marge gauche relient (d) à (e) et (b)
+à (f). La dernière ligne, (i), est entièrement biffée.}
+
+\section{[Stabilité des familles limitées ; Tor et changement de base]}
+\note{titre de l'éditeur, entre crochets.}
+
+\page{34}
+\marginal{(a)}
+Soient $A, B \subset \mathfrak{F}(X/S)$, $A$ et $B$ limités, alors
+$A \otimes B$ et $\mathcal{H}om(A, B)$ sont limités, \ill{} \ill{} \ill{}
+$\mathcal{T}or_i(A, B)$ et $\mathcal{E}xt^i(A, B)$.
+
+\struck{Dém.} \ill{}, supposons
+\[
+  \begin{cases}
+    A = \struck{\mathfrak{F}}\ \mathcal{E}(F), & F \text{ \uncertain{défini} sur } X \times_S S' \\
+    B = \mathcal{E}(G), & G \text{ --- } X \times_S S''
+  \end{cases}
+\]
+
+\struck{\ill{} \ill{}} \emph{Avec} \uncertain{ces notations},
+$H = F \otimes_X G$ sur $X \times_S S'''$, $S''' = S' \times_S S''$.
+Alors tt \uncertain{type} d'extension \uncertain{composée} d'un $k(s')$ et
+$k(s'')$, sur $k(s)$, [$s' \mapsto s$, $s'' \mapsto s$ ;
+$s' \in S'$, $s'' \in S''$] provient d'un (\uncertain{unique})
+$s''' \in S'''$, $s''' \mapsto s'$, $s''' \mapsto s''$ ;
+\ill{} \ill{} \ill{}
+\[
+  (F_{s'} \otimes_{k(s')} K) \otimes_{\struck{X}\, X_{s'} \otimes_{k(s)} K}
+  (G_{s''} \otimes_{k(s'')} K) \simeq H_{s'''} .
+\]
+\note{dans la marge gauche, les huit sommets d'un cube, $X$, $X'$, $X''$,
+$X'''$ au-dessus de $S$, $S'$, $S''$, $S'''$, reliés par des traits sans
+flèche.}
+
+Comme $S'''$ est de type fini sur $S$, la \uncertain{conclusion} \ill{}
+$\otimes$ s'ensuit, on a bien prouvé
+\[
+  \struck{\ill{}\ \mathcal{E}(F) \otimes}\ \mathcal{E}_{X/S}(F) \otimes
+  \mathcal{E}_{X/S}(G) \subset \mathcal{E}_{X/S}(H) .
+\]
+
+Pour $\mathcal{H}om$, \ill{} \struck{\ill{} \uncertain{supposons} $X'$ et
+$F$ $S'$-plats} \ill{} ; $\bar{F} = F \otimes_{S'} S'''$,
+$\bar{G} = G \otimes_{S'} S'''$ et \ill{} \ill{} [\ill{}] \ill{} on
+\uncertain{trouve} \ill{} une partition \ill{} de $S'''$ en \ill{}
+$\to T_i$ \ill{} ; posant $F_i = \bar{F} \otimes_{S'''} T_i =
+F \otimes_{S'} T_i$, $G_i = \bar{G} \otimes_{S'''} T_i =
+G \otimes_{S''} T_i$, $X_i^{*} = X''' \times_{S'''} T_i = X \times_S T_i$,
+\note{dans $\bar{G} = G \otimes_{S'} S'''$, l'indice $S'$ est tel quel sur
+la page, là où l'on attend $S''$ (comme dans $G \otimes_{S''} T_i$
+ensuite).}
+
+\page{35}
+la formation de $\mathcal{H}om_{X_i}(F_i, G_i)$ commute à
+\uncertain{tt} changement de base $T' \to T_i$ \ill{} \ill{} extension de
+base [\uncertain{pour ceci}, écrivons \ill{} \ill{}
+\uncertain{présentation} libre de type fini
+$L_1 \to L_0 \to \bar{F} \to 0$,
+\struck{\ill{} \ill{} $0 \to Z_1 \to L_1 \to Z_0 \to 0$}
+\[
+  0 \to Z_0 \to L_0 \to \bar{F} \to 0
+\]
+et \struck{\ill{}} \ill{}, $Z_i$ \uncertain{localement} \uncertain{libres}
+\ill{} et \ill{} \ill{} \ill{}
+$\operatorname{Ker}\bigl(\mathcal{H}om(L_0, F) \to
+\mathcal{H}om(L_1, F)\bigr)$ \ill{} \ill{}.
+\note{la suite $0 \to Z_0 \to L_0 \to \bar{F} \to 0$ est encadrée.}
+
+\ill{} \ill{} \ill{} \ill{} \uncertain{convenable} \ill{} \ill{} \ill{}
+de $S'''$ \ill{} \ill{} $T_i$, dans \ill{} \ill{} \ill{} \ill{}
+\uncertain{décomposition} : $T_i$, la formation \ill{}, je \ill{} \ill{}
+\ill{} \ill{} \ill{} \ill{} Ker \ill{} \ill{} \ill{} \ill{} base \ill{}
+\uncertain{composé}. \ill{} \ill{} \ill{} \ill{} \ill{}.]
+
+Le cas des $\mathcal{T}or_i$ et $\mathcal{E}xt^i$ \ill{} \ill{} \ill{},
+\ill{} \ill{} \ill{} \ill{} \ill{}.
+
+\emph{Lemme.} Soit $Y$ de type fini sur $T$ \uncertain{noethérien},
+$K^{\bullet}$ un \ill{} \ill{} \ill{} faisceaux cohérents, \ill{} \ill{}
+\ill{} de degré $+1$ \ill{} \ill{} \ill{} \ill{} \ill{}, $N$ \ill{}
+\ill{}. Mais il y a une décomposition de $T$ en $T_i$ loc.\ fermés tels
+que
+\marginal{\ill{} $L_i$ \ill{} \uncertain{localement} \ill{} \ill{} IV,
+§ 3}
+\note{note oblique dans la marge gauche ; seul « IV, § 3 » se lit
+sûrement.}
+
+\page{36}
+\struck{\ill{}} \ill{} \uncertain{posant}
+$K^{(i)} = K \times_T T_i$, \uncertain{pour} \struck{\ill{}}
+$T' \to T_i$, \ill{} \ill{} \ill{} \uncertain{homomorphismes} canoniques
+\[
+  H^q(K^{(i)} \otimes_{T_i} T') \longleftarrow H^q(K^{(i)}) \otimes_{T_i} T'
+\]
+\uncertain{soient} \ill{} \uncertain{isomorphismes} pour $|q| \le N$.
+
+Démonstration, \ill{} \ill{} \ill{} \ill{} \ill{}
+\uncertain{nilpotent}\ill{} \ill{} $T$, \ill{} \ill{} \ill{} \ill{} :
+\ill{} \ill{} \ill{} \ill{} \ill{} \ill{} \ill{} $U$ \ill{} \ill{} \ill{}
+$T$, $T$ \uncertain{est} \uncertain{réduit} \ill{} [\uncertain{ouvert}
+\ill{} \ill{} \ill{} et $T_i$, (\ill{} \ill{}, \ill{}] \ill{} \ill{} \ill{}
+\ill{} [\uncertain{choisi} \ill{}] \uncertain{tels} \ill{} \ill{} \ill{}
+$B_i \otimes_T U$ \ill{}
+\[
+  K^{i-1} \xrightarrow{\ d^{i-1}\ } K^i \to K^{i+2}
+\]
+\struck{$(\operatorname{Coker} d^i) \times_T U$ \ill{} \ill{} \ill{}}
+\ill{} si $i \le N+1$ \struck{[$U$ \ill{} \ill{} \ill{} \ill{} \ill{}]}
+$U$\ill{} $U$-\ill{}, pour $|i| \le N+1$ \ill{}
+\note{la flèche de droite va bien de $K^i$ à $K^{i+2}$ sur la page.}
+
+\marginal{(b)}
+Soit $f : X \to Y$ un $S$-morphisme de préschémas de type finis. Soit
+$A \subset \mathfrak{F}(Y/S)$ un \uncertain{ensemble} limité, alors
+$f^{*}(A)$ et les $\mathcal{T}or_{*}^{\mathcal{O}_Y}(A, \mathcal{O}_X)$
+sont limités.
+
+Il y a \uncertain{un énoncé} analogue \ill{} : \ill{} \ill{} \ill{}
+proposition \ill{} \ill{} le produit, \ill{} $X$ et $Z$ sur $Y$,
+\struck{\ill{}} $A \in \mathfrak{F}(X/S)$, $B \in \mathfrak{F}(Z/S)$, et
+les $\mathcal{T}or_i^{\mathcal{O}_Z}(A, B)$.
+\note{l'indice de ce dernier $\mathcal{T}or$ se lit $\mathcal{O}_Z$ ;
+on attendrait $\mathcal{O}_Y$. Laissé tel quel.}
+
+\page{37}
+Soient $X_i$ \uncertain{sur} $Y$ ($1 \le i \le n$), des $F_i$ sur les
+$X_i$, \struck{\ill{}} un \uncertain{changement} de base $Y' \to Y$,
+\struck{\ill{}} \ill{} \uncertain{homomorphisme}
+\[
+  \mathcal{T}or_{*}^{\mathcal{O}_Y}(F_1, \ldots, F_n) \otimes_Y Y'
+  \quad\text{et}\quad
+  \mathcal{T}or_{*}^{\mathcal{O}_{Y'}}(F'_1, \ldots, F'_n)
+\]
+\note{dans la marge gauche, en colonnes, les lettres $X_1\ X_2$,
+$X'_1\ X'_2$, $Y$, $Y'$, $S$, $S'$, sans traits.}
+
+On \uncertain{sait} \ill{} \ill{} \ill{} \ill{} un homomorphisme canonique
+du \uncertain{premier} dans le second. À quelle condition \ill{} \ill{}
+\ill{} un isomorphisme ?
+
+C\struck{\ill{} \ill{} \ill{} \ill{} \ill{} \ill{} \ill{}} \ill{},
+\uncertain{limités} \uncertain{pour} tous (\ill{} \ill{} \ill{} \ill{})
+\uncertain{que}
+\[
+  \mathrm{Tor}_p^{\mathcal{O}_S}\bigl(\mathrm{Tor}_q^{\mathcal{O}_Y}(F_1, \ldots, F_n)
+  \otimes_{\ill{}} \ldots, \mathcal{O}_{S'}\bigr)
+\]
+il suffit que les $\mathrm{Tor}_q^{\mathcal{O}_Y}(F_1, \ldots, F_n)$
+soient $Y$-plats.
+\note{une ligne entière barrée ; au-dessus, interligné, « de = \ill{} ».
+Le signe entre les deux $\mathrm{Tor}$ est surchargé d'une tache.}
+
+\page{38}
+\emph{Proposition.} $X_i$ ($1 \le i \le n$) de type fini sur $Y$ de type
+fini sur $S$ noeth., $F_i$ coh.\ sur $X_i$, $N$ un entier. Alors il existe
+un \struck{\ill{}} \uncertain{ouvert dense} $U$ de $S$, tel que,
+\uncertain{posant} $S' = U_{\mathrm{red}}$, $X'_i = X_i \times_S S'$,
+$Y' = Y \times_S S'$, $F'_i = F_i \otimes_S S'$, on ait ceci : pour tout
+changement de base $T \to S'$, les homomorphismes canoniques
+\[
+  \mathrm{Tor}_p^{\mathcal{O}_{S'}}(F'_1, \ldots, F'_n) \otimes_{S'} T
+  \longrightarrow
+  \mathrm{Tor}_p^{\mathcal{O}_T}(F'_{1T}, \ldots, F'_{nT})
+\]
+(où $F'_{\alpha T} = F'_\alpha \otimes_{S'} T$) soient des
+\emph{isomorphismes} pour $p \le N$.
+\note{un trait vertical borde l'énoncé. Dans $S' = U_{\mathrm{red}}$, le
+$S$ et les $S$ des produits fibrés sont récrits sur d'autres lettres
+noircies. Les $\mathrm{Tor}$ sont pris sur $\mathcal{O}_{S'}$ et
+$\mathcal{O}_T$ tels qu'écrits.}
+
+On utilise \ill{} \uncertain{ceci} \ill{}
+\add{Avec les notations précédentes mais \ill{} conditions de finitude,}
+\struck{\ill{} \ill{} \ill{} \ill{}}
+\note{l'ajout est interligné et barré avec la ligne qu'il surmonte ; la
+page 41 (lot 3) reprend « Avec les notations précédentes, mais sans
+conditions de finitude ».}
+
+\marginal{Faut-il \ill{} ? \ill{}}
+\emph{Lemme} (\uncertain{Important}\ill{}). Supposons que $Y$ soit plat
+sur $S$, \uncertain{et} les $X_i$ plats sur $S$, et que les
+$\mathrm{Tor}_i^{\mathcal{O}_Y}(F_1, \ldots, F_n)$ pour $i \le N$ soient
+plats sur $S$. Alors pour \ill{} changement de base $T \to S$,
+l'homomorphisme canonique
+\[
+  \mathrm{Tor}_i^{\mathcal{O}_S}(F_1, \ldots, F_n) \times_S T \longrightarrow
+  \mathrm{Tor}_i^{\mathcal{O}_T}(F_{1(T)}, \ldots, F_{n(T)})
+\]
+est un isomorphisme pour $i \le N$.
+\note{au-dessus de « Supposons », un ajout interligné illisible. Le
+premier $\mathrm{Tor}$ du lemme porte $\mathcal{O}_Y$, celui de la flèche
+$\mathcal{O}_S$ : tels qu'écrits.}
+
+\page{39}
+\struck{\ill{}} Pour la \uncertain{preuve}, on \uncertain{peut}
+supposer \ill{} $S$, $Y$, les $X_i$, \uncertain{affines} d'anneaux $A$,
+$B$, $B_i$, $A'$, ($F_i$ \uncertain{définis} par \struck{$M$} des
+$B_i$-modules $M_i$. Soit $L^{(i)}$ une résolution libre de $M_i$
+\uncertain{par} $B_i$-modules \ill{}, \uncertain{posons}
+\[
+  K = \bigotimes_{\substack{B \\ 1 \le i \le n}} L^{(i)} .
+\]
+
+Alors \struck{\ill{}}, les $L^{(i)}$ sont \emph{\uncertain{plats} sur $A$},
+$M_i$ \uncertain{est} \struck{plat} sur $A$, il en \uncertain{résulte} que
+$L'^{(i)} = L^{(i)} \otimes_A A'$ est une résolution de
+$M'_i = M_i \otimes_A A'$, \uncertain{considéré} comme $B'_i$-module (où
+$B'_i = B_i \otimes_A A'$). D'où la \uncertain{conclusion} que
+\[
+  K' = K \otimes_A A' = \bigotimes_{\substack{B' \\ 1 \le i \le n}}
+  L^{(i)} \otimes_B B' = \bigotimes_{\substack{B' \\ 1 \le i \le n}} L^{(i)\prime}
+\]
+\ill{} \ill{} que $\mathrm{Tor}_{*}^{B'}(M'_1, \ldots, M'_n)$. Or
+$K^{\bullet}$ \uncertain{est un complexe} $A$-plat,
+\uncertain{on a donc} une suite spectrale
+\[
+  H_{*}(K \otimes_A A') \Longleftarrow \mathrm{Tor}_p^A(H_q(K), A')
+\]
+i.e.
+\[
+  \mathrm{Tor}_{*}^{B'}(M'_1, \ldots, M'_n) \Longleftarrow
+  \mathrm{Tor}_p^A\bigl(\mathrm{Tor}_q^B(M_1, \ldots, M_n), A'\bigr) .
+\]
+Il \uncertain{suffit} donc que les $\mathrm{Tor}_q^{\ill{}}(M_1, \ldots,
+M_n)$ \uncertain{soient} $A$-plats pour $q \le N$, \uncertain{pour}
+l'\uncertain{homomorphisme} \ill{} \ill{} \ill{} \ill{}
+\note{dans la chaîne $K' = \ldots$, un terme intermédiaire est noirci. Dans
+la marge gauche, en colonnes, $M_1\ M_2$, $M'_1\ M'_2$ ; $B_1\ B_2$,
+$B'_1\ B'_2$ ; $B$, $B'$ ; $A$, $A'$, cernés d'un trait courbe ; plus
+bas, une note oblique : « \ill{} \ill{} \ill{} spectrale, i.e.\ \ill{}
+\ill{} \ill{} ».}
+
+\page{40}
+\[
+  \mathrm{Tor}_p^B(M_1, \ldots, M_n) \otimes_A A' \longrightarrow
+  \mathrm{Tor}_p^{B'}(M'_1, \ldots, M'_n)
+\]
+est un isomorphisme pour $p \le N$. On \ill{} \uncertain{ainsi} \ill{}
+la proposition.
+
+\struck{Si \ill{} les conditions de la \uncertain{prop.}}
+
+\textbf{Corollaire.} Il existe une décomposition de $S$ en \ill{} loc.\
+fermés $S_\alpha$ \uncertain{en nombre fini}, ($1 \le i \le n$) tels que,
+posant $X_i^{(\alpha)} = X_i \times_S S_\alpha$,
+\add{$Y^{(\alpha)} = Y \times_S S_\alpha$,}
+$F_i^{(\alpha)} = F_i \otimes_S S_\alpha$, \struck{on ait \ill{}} \ill{}
+pour \ill{} $T \to S_\alpha$, l'homomorphisme canonique
+\[
+  \mathrm{Tor}_p^{\mathcal{O}_{S_\alpha}}(F_1^{(\alpha)}, \ldots, F_n^{(\alpha)})
+  \otimes_{S_\alpha} T \longrightarrow
+  \mathrm{Tor}_p^{\mathcal{O}_T}(F^{(\alpha)}_{1(T)}, \ldots, F^{(\alpha)}_{n(T)})
+\]
+soit un isomorphisme pour $|p| \le N$.
+
+\textbf{Proposition.} $X$ de type fini sur $S$ noeth., $F$ et $G$
+\add{coh.}\ faisceaux \uncertain{cohérents} sur $X$. \add{$N$ un entier.}
+Il existe \ill{} un \uncertain{ouvert dense} $U$ de $S$, telle que,
+posant $S' = U_{\mathrm{red}}$, $X' = X \times_S S'$,
+$F' = F \times_S S'$, $G' = G \times_S S'$, on ait ceci : pour tout
+changement de base $T \to S$, l'homomorphisme canonique
+\[
+  \mathcal{E}xt^p_{\mathcal{O}_{S'}}(F', G') \otimes_{S'} T \longrightarrow
+  \mathcal{E}xt^p_{\mathcal{O}_T}(F'_{(T)}, G'_{(T)})
+\]
+soit un isomorphisme pour $|p| \le N$.
+\note{« $N$ un entier » est interligné. Les deux énoncés sont bordés d'un
+trait vertical. La page 41 (lot 3) continue avec le lemme correspondant
+pour les $\mathcal{E}xt$.}
+
+\end{document}
