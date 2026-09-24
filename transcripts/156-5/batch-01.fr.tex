@@ -1,0 +1,511 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 156-5, batch 1 (pages 1-20).
+% Established from the facsimile archives/batches/156-5/batch-01.pdf (a mirror of
+% https://grothendieck.umontpellier.fr/156-5.pdf; no cover sheet in the batch, so
+% PDF page k = folder page k), per the skill transcribe-grothendieck.
+%
+% All twenty leaves are mathematics and all are transcribed; there is no cover
+% and no unrelated verso. His own pagination 1-20 runs across the top of the
+% leaves and coincides with the archivists'. Page 1 carries, boxed and slanted
+% in the top-left corner, the chapter title « Algèbre des figures », and in the
+% top-right corner « GF V » (Géométrie des formes, chapter V, after folders
+% 156-1 to 156-4). Two dated headings: « (14.6.86) » against the opening section
+% on page 1, and « 15 juin » in the margin of page 17. The inventory's bracketed
+% « [Chapitre] » is the archivists'; the title itself is his.
+%
+% Content. Pages 1-5: for a family 𝔏 of subsets of a set L, with |𝔏| the union,
+% ∂A the union of the members strictly inside A and A° = A ∖ ∂A, Proposition 1
+% proves equivalent (1°) every 𝔏_x = {A ∋ x} has a least element A(x);
+% (2°) α: A ∩ B is a union of members, β: every x lies in some A°; (3°) γ: the
+% A° (A° ≠ ∅) partition |𝔏|, δ: each A is saturated, η: A° ⊂ B ⇒ A ⊂ B.
+% « Préadmissible » = these; « admissible » = moreover every A° ≠ ∅. An
+% admissible family is equivalently an ordered set I with a surjection
+% φ : S → I; with the order topology, the members are the closures of the
+% strata, closed / open / locally closed unions of strata match closed / open /
+% locally closed parts of I, and the boolean algebra they generate is that of
+% the « 𝔏-constructible » parts. Pages 6-11: admissible sub-families (= closed
+% sub-families), compatibility of two admissible families (a) 𝔏 ∪ Ψ admissible
+% with both closed in it, b), c), later d)), corollaries; the ordered set 𝔉 of
+% « figures ensemblistes » (admissible families, ordered by « is a closed
+% sub-family of »), with C 1 (bounded sups exist), irreducibles = those with a
+% greatest element (« multiplicités ensemblistes »), C 2 (every figure is the
+% sup of its irreducibles 𝔏_X), C 3 (compatibility checked on irreducibles).
+% Pages 12-14: 𝓜 (the multiplicities) is connected, via the product
+% F ⊠ G = {A ∪ B} of figures with disjoint supports; hence his axiom C 4 is
+% automatic. Page 15: supports and complement; disjointness is set-theoretic
+% disjointness of supports. Page 16: what the ordered set recovers of L, and a
+% passage towards topological spaces (regular open sets U = int(Ū)). Pages
+% 17-19 (15 June): subclasses of 𝔉 cut out by topological conditions (closed,
+% compact, connected, i-connected strata, the density condition A = cl(A°)),
+% finite and finite-type figures, cellular realisations X_A = ∪ X_x of an
+% ordered L. Pages 19-20: raffinement and subdivision of figures; a
+% proposition (a) each A ∈ F has a least B ∈ G containing it, plus a closedness
+% condition; b) A° ⊂ B° for a unique B, with φ increasing) whose proof of
+% b) ⇒ a) breaks off at the foot of page 20.
+%
+% Reading hazards fixed once here. 𝔏, Ψ, Σ, 𝔉 are his script capitals for
+% families and for the set of figures; 𝓜 for multiplicities; « ⊠ » is his boxed
+% product. His underlining is set in bold. The hand is fast drafting, with
+% heavy overwriting on pages 3 (the counter-example, cancelled), 8, 10 (the
+% last third, cancelled), 16 (ink blots, fragmentary reading) and 20; slanted
+% left-margin notes on pages 1, 3, 4, 7, 10, 11, 16, 17, 18, 20 were turned and
+% read in part.
+%
+% Readings flagged and not settled: « Sorite » in the page-1 heading; the
+% ordering of the overwritten segments of page 6's proof; the split between a)
+% and a') on page 7; most of page 16 after its first paragraph; the page-17
+% margin. Variances on the page and not repaired: « ∀x ∈ 𝔏 » for x ∈ |𝔏|
+% (p. 1); « ≤ F » for ≤ 𝔛 (p. 12); the braces of {{A}, {{x}}, A ∪ {x}}
+% (p. 12); « card L ≥ 1 » where > 1 is meant (p. 13); « A ∩ F » for A ∩ B
+% (p. 20). Cross-references to GF VIII pp. 37, 44-45 (pp. 1, 3) are to a later
+% chapter and are transcribed as written.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-09-24 — first pass, unchecked against the pages by a human.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{156-5}
+\batch{1}
+\pages{1}{20}
+\dating{1986}
+\watermark{Édition de démonstration}
+\foldertitle{[Chapitre] V. Algèbre des figures : notes manuscrites (14/06/1986).}
+
+\begin{document}
+\page{1}
+\section{Algèbre des figures}
+
+\note{titre de sa main, écrit en oblique dans l'angle supérieur gauche de la page 1 et encadré ; dans l'angle supérieur droit, dans un coin tracé à la plume, « GF V »}
+
+\subsection{\uncertain{Sorite} ensembliste (14.6.86)}
+
+Soient $L$ un ens., $\mathfrak{L} \subset \mathfrak{P}(L)$ un ens. de parties de $L$. Posons
+\[
+  |\mathfrak{L}| = \bigcup_{A \in \mathfrak{L}} A
+\]
+et pour $A \in \mathfrak{L}$
+\[
+  \partial A = \bigcup_{\substack{B \in \mathfrak{L} \\ B \subset A}} B , \qquad A^{\circ} = A \smallsetminus \partial A .
+\]
+\note{sous la réunion, « $B \subset A$ » ; l'inclusion doit s'entendre stricte, faute de quoi $A^{\circ}$ serait vide}
+
+\marginal{Voir variante « in extenso », \textbf{formellement plus forte}, voir GF VIII p. 37…}
+
+\textbf{Proposition 1} Les conditions suivantes sont équivalentes :
+
+1°) Pour tout $x \in L$, \struck{dans l'ens. $\mathfrak{L}_x$ des} l'ensemble
+\[
+  \mathfrak{L}_x = \{ A \in \mathfrak{L} \mid x \in A \}
+\]
+admet un plus petit élément, (noté $A(x)$).
+
+2°) \struck{On a} les deux conditions
+
+$\alpha$) $\forall A, B \in \mathfrak{L}$, on a $A \cap B = \bigcup_{C \in \mathfrak{L},\ C \subset A \cap B} C$
+
+$\beta$) $\forall x \in \mathfrak{L}$, il existe un élément \textbf{minimal} de $\mathfrak{L}_x$ i.e. un $A \in \mathfrak{L}$ tel que $x \in A^{\circ}$ — i.e. $\bigcup_{A \in \mathfrak{L}} A^{\circ} = |\mathfrak{L}|$.
+\note{« $\forall x \in \mathfrak{L}$ » est sur la page ; on attend $x \in |\mathfrak{L}|$}
+
+3°) On a les \struck{deux} trois conditions suivantes (où \struck{$\mathfrak{L}'$} on a posé
+\[
+  \mathfrak{L}' = \{ A \in \mathfrak{L} \mid A^{\circ} \neq \emptyset \} )
+\]
+
+$\gamma$) La famille $\{A^{\circ}\}_{A \in \mathfrak{L}'}$ forme une \textbf{partition} de $|\mathfrak{L}|$, i.e. $\forall x \in |\mathfrak{L}|$, \struck{$\exists$} il existe un \textbf{unique} $A \in \mathfrak{L}'$ tel que $x \in A^{\circ}$, i.e. $\bigcup_{A \in \mathfrak{L}'} A^{\circ} = |\mathfrak{L}|$ et $(A, B \in \mathfrak{L}',\ A^{\circ} \cap B^{\circ} \neq \emptyset) \Rightarrow (A = B)$
+
+$\delta$) \struck{Tout} $\forall A \in \mathfrak{L}$, $A$ est saturé dans $|\mathfrak{L}|$ pour la relation d'équivalence précédente.
+
+$\eta$) Si $A, B \in \mathfrak{L}$, $A^{\circ} \subset B$ et $A^{\circ} \neq \emptyset$ (i.e. $A \in \mathfrak{L}'$) $\Rightarrow A \subset B$
+
+\marginal{NB On peut remplacer $\delta$, $\eta$ par ($\delta'$) $\forall A \in \mathfrak{L}$, on a $A = \bigcup_{B \in \mathfrak{L},\ B \subset A} B^{\circ}$}
+
+\page{2}
+\textbf{Dém}
+
+$1^{\circ} \Rightarrow 2^{\circ}$ Supposons 1°, prouvons $\alpha$) et $\beta$)
+
+$\alpha$) Soit $x \in A \cap B$, donc $A(x) \subset A$, $A(x) \subset B$, donc $x \in C \subset A \cap B$ d'où $A \cap B = \bigcup_{C \in \mathfrak{L},\ C \subset A, B} C$
+
+$\beta$) trivial
+
+$2^{\circ}) \Rightarrow 3^{\circ})$ Prouvons $\gamma$), $\delta$), $\eta$),
+
+$\gamma$) On sait $\bigcup_{A \in \mathfrak{L}'} A^{\circ} = \bigcup_{A \in \mathfrak{L}} A^{\circ} = |\mathfrak{L}|$ par $\beta$), prouvons que $A, B \in \mathfrak{L}$, $A^{\circ} \cap B^{\circ} \neq \emptyset \Rightarrow A = B$. Soit $x \in A^{\circ} \cap B^{\circ}$. Prouvons $A = B$ il suffit de prouver que $x \in A^{\circ}$ \struck{$\Rightarrow$ $A$ plus petit} i.e. $A$ minimal dans $\mathfrak{L}_x$, implique que $A$ est un plus petit élément de $\mathfrak{L}_x$. Soit $B \in \mathfrak{L}_x$\note{écrit en surcharge}, donc $x \in \struck{B^{\circ}} \Rightarrow x \in A^{\circ} \cap B \subset A \cap B = \bigcup_{C \in \mathfrak{L},\ C \subset A, B} C$, comme $x \in C$, que $C \subset A$, \uncertain{minimalité de} $A$ $\Rightarrow$ $C = A$, comme $C \subset B$, \uncertain{ainsi} $A \subset B$, OK.
+
+$\delta$) Soit $A \in \mathfrak{L}$, $x \in A$, \struck{prouvons que \ill{} considérons $A(x)$, i.e. $B \in$} il faut, si $B$ l'unique $B \in \mathfrak{L}'$ tel que $x \in B^{\circ}$, prouver que $B^{\circ} \subset A$, or on vient de voir que \struck{$B$ est i.e.} $x \in B^{\circ} \Rightarrow B$ est plus petit élément dans $\mathfrak{L}_x$, donc \struck{$B$} $B \subset A$, donc $B^{\circ} \subset A$, qed.
+
+$\eta$) A été vu en cours de route : si $x \in A^{\circ}$, $x \in B$, alors $A \subset B$.
+
+$3^{\circ} \Rightarrow 1^{\circ}$. On suppose $\gamma$, et $\delta$, prouvons 1°). Soit $x \in |\mathfrak{L}|$, par $\gamma$) $x$ appartient à un unique $A^{\circ}$ ($A \in \mathfrak{L}'$), prouvons que $A$ est plus petit élt de $\mathfrak{L}_x$. Soit $B \in \mathfrak{L}$ tel que $x \in B$, il faut prouver $A \subset B$. \struck{Comme} Par $\delta$ $B$ est saturé donc $x \in B$, $x \in A^{\circ} \Rightarrow A^{\circ} \subset B$. \struck{Il suffit donc de prouver que $A^{\circ}$} Par $\eta$, on a $A \subset B$.
+
+\page{3}
+\textbf{Remarques} \struck{Si dans 1°) 2°)} La condition $\beta$) de 2° est automatique si $\mathfrak{L}$ finie, plus généralement si $\mathfrak{L}$ est « artinienne » pour $\subset$, i.e. s'il n'existe pas de suite str. décroissante illimitée de $\mathfrak{L}$
+\[
+  A_1 \supset A_2 \supset \cdots
+\]
+Si par contre $\mathfrak{L}$ est réduite à \struck{\ill{}} les termes d'une telle suite, \struck{\ill{}} alors $\alpha$ est satisfaite mais non $\beta$ si $\bigcap A_i \neq \emptyset$.
+
+\note{toute la remarque 2°) qui suit, avec son exemple et ses croquis, est annulée par plusieurs longs traits obliques et verticaux ; on transcrit ce qui se lit sous les ratures}
+\struck{2°) Dans 3°, \struck{il suffit de supposer} la condition $\eta$) n'est pas \uncertain{conséquence} de}
+\[
+  \struck{\Bigl\{ \bigcup_{A \in \mathfrak{L}'} A^{\circ} = |\mathfrak{L}| , \quad \forall A \in \mathfrak{L}, \text{ on a } A = \bigcup_{B \in \mathfrak{L} \text{ tq. } B^{\circ} \subset A} B^{\circ}}
+\]
+\struck{\ill{}, comme on voit dans l'exemple suivant : $\mathfrak{L} = \{A, B, C, D\}$, $L = \{x, y, z, t\}$}
+
+\note{croquis : les points $x$, $y$, $z$, $t$ ; une courbe marquée $A$ entoure $x$ et $z$, une accolade marquée $C$ réunit $z$ et $y$, $z$ seul est marqué $D$}
+
+\struck{et $B = \{x, y, z, t\}$ ; $A^{\circ} = \{x\}$, $C^{\circ} = \{y\}$, $D^{\circ} = \{z\}$, $B^{\circ} = \{t\}$ ;} \struck{$\mathfrak{L} = \{A, B, C, D\}$, $A \cap C = D$, \ill{} $\subset B$ ; donc} \struck{$D^{\circ} = D$, $A^{\circ} = A \smallsetminus D$,} \struck{$C^{\circ} = C \smallsetminus D$, $B^{\circ} = B \smallsetminus (A \cup C)$.} \struck{On a $A^{\circ} \subset B$ mais non que $A \subset B$. \ill{} les $X^{\circ}$ ($X \in \mathfrak{L}$) sont non vides.}
+
+\note{après « donc », un premier « $A^{\circ} = A \smallsetminus D$ » est barré avant d'être récrit plus loin ; à droite, un petit schéma d'inclusions : $D$ contenu dans $A$ et dans $C$, un $B$ raturé au-dessous}
+
+\marginal{Exemple idiot — mais voir contre-exemple correct GF VIII pp. 44, 45 [\ill{} \uncertain{infini}]}
+
+\marginal{[\uncertain{Idem} si $A \in \mathfrak{L} \Rightarrow A \neq \emptyset$ ??]}
+
+\textbf{Définition} On dit que $\mathfrak{L}$ est \textbf{préadmissible}, si elle satisfait les conditions équivalentes 1°, 2°, 3°. On dit qu'elle est \textbf{admissible} si de plus
+
+\page{4}
+\struck{pour} $\forall A \in \mathfrak{L}$, on a $A^{\circ} \neq \emptyset$. (Donc l'ens. d'indices de la partition de 3°) $\gamma$ est $\mathfrak{L}$ lui-même)
+
+\struck{\textbf{Proposition 2} Soient $\mathfrak{L}$, $\Psi$ deux familles préadmissibles} \ill{} Conditions équivalentes :
+\note{« Proposition 2 » et le début de l'énoncé sont barrés de traits obliques ; une insertion oblique entre les lignes n'est pas lue}
+
+Se donner dans $L$ une famille admissible $\mathfrak{L}$ de parties, revient au même que de se donner
+
+a) Un ens. ordonné $I$ (une copie de l'ensemble $\mathfrak{L}$)
+
+b) Une partie $S$ de $L$ \quad ($S = |\mathfrak{L}|$)
+
+c) Une application surjective $\varphi : S \to I$ \quad ($x \mapsto A(x)$)
+
+\marginal{Se donner \ill{} de plus \ill{} \uncertain{précision} \ill{} $S \to I$ \ill{} [NB \ill{}] une famille \textbf{préadmissible}, c'est se donner un système a), b), c) comme dessus (\struck{\ill{}} où $I = \mathfrak{L}' = \{A \in \mathfrak{L} \mid A^{\circ} \neq \emptyset\}$) et de plus, un ens. \ill{} \struck{de parties} $\Psi$ de parties fermées de $I$ (pour \ill{} aux éléments de \uncertain{$\mathfrak{L} \smallsetminus \mathfrak{L}'$})}
+\note{longue note oblique dans la marge gauche, surchargée d'insertions interlinéaires en partie illisibles}
+
+Prenons sur $I$ la top. associée à l'ordre (i.e. les fermés sont les réunions quelconques d'ens. $I_{\leq i}$, les ouverts les réunions quelc. d'ens. $I_{\geq i}$) — donc $J \subset I$ est fermé ssi ($i \in J$, $j \leq i \Rightarrow j \in J$)) et sur $S$ la top. image inverse (qui est aussi celle définie par la préordre induit de l'ordre de $I$ via $\varphi$), \struck{les} on récupère $\mathfrak{L}$ comme
+\[
+  \mathfrak{L} = \bigl\{ \overline{\varphi^{-1}(i)} = \varphi^{-1}(\overline{\{i\}} = I_{\leq i}) \bigr\}_{i \in I}
+\]
+(vérification facile). Les parties fermées de $S$ sont les réunions quelconques des « strates fermées » i.e. d'éléments de \uncertain{$\mathfrak{L}$}, elles correspondent \struck{bijectivement} biunivoquement \add{par image inv. par $\varphi$} aux parties fermées $J$ de $I$ (ou de $\mathfrak{L}$), \struck{les parties ouvertes \ill{}}
+\[
+  A_J = \bigcup_{i \in J} A_i = \bigcup_{A \in J} A = \underbrace{\coprod_{i \in J} A_i^{\circ}}_{\text{réunion disjointe de parties non vides}}
+\]
+\note{sous le deuxième membre : « si on identifie $I = \mathfrak{L}$, donc $J \subset \mathfrak{L}$ »}
+
+\textbf{NB} \struck{Si on regarde les} De même, les parties ouvertes sont \uncertain{d'ailleurs} de
+
+\page{5}
+la forme
+\[
+  (1) \qquad A_J = \bigcup_{i \in J} A_i^{\circ} = \varphi^{-1}(J)
+\]
+où $J$ est une partie ouverte de $I$ (ou de $\mathfrak{L} \simeq I$) (\uncertain{Cette} fois-ci, cette fois dans $\bigcup_{i \in J}$ il n'est pas question de remplacer $A_i^{\circ}$ par $A_i$ !). Les parties loc. fermées sont de même les
+\[
+  A_J = \varphi^{-1}(J) = \bigcup_{i \in J} A_i^{\circ}
+\]
+où cette fois $J$ est une partie loc. fermée de $I$, i.e. telles que
+\[
+  (*) \qquad i \leq j \leq k, \quad i, k \in J \Longrightarrow j \in J
+\]
+(les $I_{\geq i}$, $i \in J$, sont des ouverts de $I$ recouvrant $J$, et \add{pour chacun} \struck{dans} de ces ouverts, $J \cap I_{\geq i}$ est fermé dans $I_{\geq i}$, à cause de $(*)$, donc $J$ est bien loc. fermé d'après $(*)$, l'inv. étant encore plus évident…)
+
+\textbf{NB} On peut aussi dire, \add{si $\mathfrak{L}$ finie,} que les $A^{\circ}$ ($A \in \mathfrak{L}$) sont les \struck{\ill{}} fibres de l'algèbre de Boole engendrée par les $A \in \mathfrak{L}$ dans $\mathfrak{P}(S)$ ($S = |\mathfrak{L}|$). Les ens. obtenus à partir des $A \in \mathfrak{L}$, par réunions, intersections et complémentations dans $S = |\mathfrak{L}|$, sont exactement ceux saturés pour la rel. d'équiv. dans $S$ définie par les $A^{\circ}$ i.e. celle définie par $\varphi$. Donc ils correspondent biunivoquement aux parties quelc. de $I$, par la formule
+\[
+  J \longmapsto A_J = \varphi^{-1}(J) = \bigcup_{i \in J} A_i^{\circ} .
+\]
+On appellera les ens. ainsi \uncertain{obtenus} les parties \textbf{$\mathfrak{L}$-modérées} ou \textbf{$\mathfrak{L}$-constructibles} de $\mathfrak{L}$.
+
+\page{6}
+\textbf{Sous-familles} \add{(\ill{})} \textbf{admissibles} d'un ens. admissible $\mathfrak{L} \subset \mathfrak{P}(L)$ : par définition, c'est une $\Psi \subset \mathfrak{L}$ qui est \textbf{fermée} dans $\mathfrak{L}$. Alors pour $A \in \Psi$, \struck{\ill{}} on a
+\[
+  \partial_{\Psi} A = \partial_{\mathfrak{L}} A \quad \text{donc} \quad A^{\circ (\Psi)} = A^{\circ (\mathfrak{L})} ,
+\]
+ce qui montre que $|\Psi|$ est une partie saturée de $|\mathfrak{L}|$, pour la rel. d'équiv. $R_{\mathfrak{L}}$ de $|\mathfrak{L}|$. \struck{La top. de $\Psi$ est induite} En fait, avec les notations précédentes, on a
+\[
+  |\Psi| = A_{\Psi}
+\]
+\struck{Donc, il est évident que pour \ill{}} Soit $x \in |\Psi|$, donc $\exists A \in \Psi$ tel que $x \in A$, \struck{$x \in |\Psi| \Longrightarrow$} et donc $x \in A(x) \subset A$ (puisque $A(x)$ est le plus petit des éléments de $\mathfrak{L}$ qui $\ni x$) donc $A(x) \in \Psi$ ($\Psi$ étant fermé). Donc $A(x)$ est aussi le plus petit élément de $\Psi$ qui contient $x$. Ainsi, $\Psi$ est préadmissible, et de plus il est évident qu'il est admissible (les $A^{\circ(\Psi)} \neq \emptyset$, d'après $A^{\circ(\Psi)} = A^{\circ \mathfrak{L}}$).
+\note{les segments de ce raisonnement sont écrits en surcharge les uns des autres ; l'ordre donné ici est celui qu'impose l'argument}
+
+\textbf{Prop.} Soit $\mathfrak{L} \subset \mathfrak{P}(L)$ un ens. de parties admissible, et soit $\Psi \subset \mathfrak{P}(L)$. Conditions équivalentes :
+
+a) $\Psi \subset \mathfrak{L}$, et $\Psi$ est une partie fermée de $\mathfrak{L}$ \add{$|\Psi|$ est saturé dans $|\mathfrak{L}|$ pour $R_{\mathfrak{L}}$}
+\note{cette dernière précision est écrite au-dessus de la ligne, soulignée d'un trait courbe}
+
+b) $\Psi \subset \mathfrak{L}$, $\Psi$ est admissible, et la relation d'équivalence $R_{\Psi}$ dans $|\Psi| \subset |\mathfrak{L}|$ définie par $\Psi$ est celle induite par $R_{\mathfrak{L}}$
+
+\page{7}
+On vient de voir que a) $\Rightarrow$ b), prouvons l'inverse, supposons b) prouvons a) i.e. soient
+\[
+  A \in \Psi, \quad B \in \mathfrak{L}, \quad B \subset A \quad \text{prouvons } B \in \Psi
+\]
+Considérons $B^{\circ}$, on a $B^{\circ} \neq \emptyset$ ($\mathfrak{L}$ adm.) et comme $R_{\Psi} = R_{\mathfrak{L}} \bigm| |\Psi|$ \add{$|\Psi|$ saturé}, on a $B^{\circ} = C^{\circ}$ pour $C \in \Psi$ convenable, puis cela implique $B = C$, donc $B \in \Psi$, qed.
+
+On dit que $\Psi$ est une \textbf{sous-famille admissible}. \add{(\uncertain{aussi comme ens. ordonnés})}
+
+\textbf{Scholie} Elles correspondent (\ill{} aux) parties fermées de $\mathfrak{L}$, ou de $|\mathfrak{L}|$. Elles sont stables par $\bigcup$ et $\bigcap$ quelc. dans $|\mathfrak{L}|$.
+
+\textbf{Proposition} Soient $\mathfrak{L}, \Psi \subset \mathfrak{P}(L)$ deux ens. de parties admissibles. Conditions équiv. :
+
+a) $\mathfrak{L} \cup \Psi$ est admissible, et $\mathfrak{L}$, $\Psi$ en sont \add{deux sous-ens. admissibles (i.e. fermés)} \struck{\ill{}}
+
+\struck{a)} a') $\mathfrak{L}$ et $\Psi$ sont \struck{sous-familles adm.} \add{deux sous-familles adm.} d'une \add{\ill{}} famille \add{adm.} $\Sigma$
+\note{a) et a') sont écrits l'un dans l'autre, avec des insertions interlinéaires ; la répartition ici proposée est incertaine}
+
+b) $\mathfrak{L} \cap \Psi$ est $\mathfrak{L}$-fermé dans $\mathfrak{L}$ et \add{$\Psi$-fermé} dans $\Psi$, et
+\[
+  |\mathfrak{L}| \cap |\Psi| = |\mathfrak{L} \cap \Psi|
+\]
+
+c) $|\mathfrak{L}| \cap |\Psi|$ est $\mathfrak{L}$-fermé dans $|\mathfrak{L}|$ et $\Psi$-fermé dans $\Psi$, et \struck{toute $A \in \mathfrak{L}$ telle} pour $A \subset |\mathfrak{L}| \cap |\Psi|$, $A \in \mathfrak{L}$ \struck{donc $\mathfrak{L}$} ssi $A \in \Psi$, (i.e. ssi $A \in \mathfrak{L} \cap \Psi$).
+
+\struck{d) $\forall A \in \mathfrak{L}$, $B \in \Psi$, on ait $A \cap \mathfrak{L}_{\subset A}$ et $\Psi_{\subset}$ \ill{}}
+
+\marginal{Condition \uncertain{équiv.} \ill{} « (i.e. » \ill{} genre d), « str. \ill{} str. \ill{} »}
+\note{note oblique dans la marge gauche, en regard de la condition d) barrée}
+
+a') $\Longleftrightarrow$ a) évident par les sorites précédents, de même que a) implique b) et c). Reste à prouver $b \Rightarrow c$, $c \Rightarrow a$.
+
+Prouvons d'abord $b \Rightarrow c$. Comme $|\mathfrak{L}| \cap |\Psi| = |\mathfrak{L} \cap \Psi|$ par b), et $\mathfrak{L} \cap \Psi$ fermé dans $\mathfrak{L}$ et
+
+\page{8}
+fermé dans $\Psi$, il s'ensuit que $|\mathfrak{L} \cap \Psi|$ est fermé dans $|\mathfrak{L}|$, et fermé dans $|\Psi|$. Soit $A \in \mathfrak{L}$, $A \subset |\mathfrak{L}| \cap |\Psi| = |\mathfrak{L} \cap \Psi|$, on a donc par le sorite préliminaire (comme $\mathfrak{L} \cap \Psi$ fermé dans $\Psi$) que $A \subset \bigcup_{B \in \mathfrak{L} \cap \Psi} B$, cela implique (comme les $B$ dans $\mathfrak{L}$) que \struck{$A$ $\exists$} $\exists B \in \mathfrak{L} \cap \Psi$ tel que $A \subset B$. \struck{Appliquant le raisonnement \ill{} $B$ (qui est $\in \mathfrak{L} \cap \Psi$ donc $\mathfrak{L} \cap \Psi$ est \ill{} $\subset |\mathfrak{L} \cap \Psi| = |\mathfrak{L}| \cap |\Psi|$)} Mais comme \ill{} $\Psi$ fermé dans $\Psi$, on en conclut $A \in \Psi$, qed.
+
+$c \Rightarrow a$ On suppose c), prouvons a).
+
+1°) $\mathfrak{L} \cup \Psi$ est admissible. Soit $x \in |\mathfrak{L} \cup \Psi| = |\mathfrak{L}| \cup |\Psi|$, \struck{soit $A(x)$ le plus} si $x \in |\mathfrak{L}| \cap |\Psi|$, soit $A(x)$ le plus petit élément de $\mathfrak{L}$ tel que $x \in A(x)$, et itou $B(x)$ de $\Psi$ tel que $x \in B(x)$. Comme $T = |\mathfrak{L}| \cap |\Psi|$ est $\mathfrak{L}$-fermé dans $|\mathfrak{L}|$, on a $A(x) \subset T$, et de même $B(x) \subset T$. On doit donc avoir (par c) \struck{$A(x) \in \mathfrak{L} \cap \Psi$, et} donc par définition \add{soit $C$} $A(x) \in \Psi$ i.e. $B(x) \subset A(x)$, et $= A(x) \subset B(x)$), donc $B(x) = A(x)$. \struck{donc} Cela montre que $C$ est le plus petit élément de $\mathfrak{L} \cup \Psi$ qui contient $x$ \add{aussi !}. Il reste à prouver que si $A \in \mathfrak{L} \cup \Psi$, alors
+\[
+  \bigcup_{\substack{B \in \mathfrak{L} \cup \Psi \\ B \subsetneq A}} B \neq A .
+\]
+\struck{Mais} \struck{Ainsi \ill{}} Il suffit pour \ill{} \add{\ill{} $A \in \mathfrak{L}$} \struck{$A \in \mathfrak{L}$, \ill{} $B \subset A$} prouvons que
+\note{la fin de la page est chargée de ratures et d'insertions interlinéaires qui ne sont lues qu'en partie ; sous la réunion, l'inclusion est stricte}
+
+\page{9}
+les $B$ en question sont dans $\mathfrak{L}$, i.e. que $\mathfrak{L}$ est fermé dans $\mathfrak{L} \cup \Psi$ (\uncertain{itou} pour le cas $A \in \Psi$, avec $\Psi$ fermé de $\mathfrak{L} \cup \Psi$). Donc il reste
+
+2°) $\mathfrak{L}$ fermé dans $\mathfrak{L} \cup \Psi$ : $A \in \mathfrak{L}$, $B \in \Psi$,
+\[
+  B \subset A \Longrightarrow B \in \mathfrak{L} .
+\]
+Mais on a \struck{\ill{}} $B \subset |\mathfrak{L}| \cap |\Psi|$, donc $B \in \mathfrak{L} \Rightarrow B \in \Psi$ OK.
+
+\textbf{Définition} On dit alors que $\mathfrak{L}$ et $\Psi$ \textbf{compatibles}.
+
+\textbf{Corollaire !} Quand ces conditions sont satisfaites, $|\mathfrak{L}| \cap |\Psi|$ est une partie de $|\mathfrak{L}|$ qui est $\mathfrak{L}$-saturée, et une partie de $|\Psi|$ qui est $\Psi$-saturée, et les deux relations d'équiv. induites par $|\mathfrak{L}|$ et par $|\Psi|$ sont les mêmes.
+
+Mais attention, cette dernière condition ne suffit \uncertain{nullement} à impliquer que $\mathfrak{L}$ et $\Psi$ compatibles. Exemple : $\mathfrak{L}$ et la famille \add{$\mathfrak{L}^{\circ}$} des $A^{\circ}$ ont même support, et définissent la même relation d'équiv. sur $|\mathfrak{L}|$, mais elles ne sont compatibles que si elles sont \textbf{égales} \struck{(car} i.e. $\mathfrak{L}$ formé d'ens. deux à deux disjoints. En effet \struck{(car la relation d'ordre sur $\mathfrak{L}$ et sur $\mathfrak{L}^{\circ}$ c'est la même que si}
+
+\textbf{Corollaire 2} Supposons $\mathfrak{L}$ et $\Psi$ compatibles. Alors
+\[
+  |\mathfrak{L}| \subset |\Psi| \ \text{ssi}\ \mathfrak{L} \subset \Psi , \qquad |\mathfrak{L}| = |\Psi| \ \text{ssi}\ \mathfrak{L} = \Psi .
+\]
+
+\page{10}
+En effet, c'est connu pour les sous-familles admissibles d'une famille (ici $\mathfrak{L} \cup \Psi$) — cf. Scholie p. 7.
+
+\textbf{Cor 3} Si $\mathfrak{L}$, $\Psi$ comp., alors pour $\mathfrak{L}' \leq \mathfrak{L}$, $\Psi' \leq \Psi$ (parties fermées) $\mathfrak{L}'$ et $\Psi'$ sont admissibles, et $\mathfrak{L}' \cup \Psi'$ est fermé (ss-famille adm.) de $\mathfrak{L} \cup \Psi$.
+
+Soit $\mathfrak{F}$ l'ens. de \struck{toutes} les parties \textbf{admissibles} $\mathfrak{L}$ de $\mathfrak{P}(L)$. On ordonne $\mathfrak{F}$ par
+\[
+  \mathfrak{L} \leq \Psi \overset{\text{déf}}{\Longleftrightarrow} \mathfrak{L} \text{ est une sous-famille admissible de } \Psi .
+\]
+
+\marginal{On a ici l'\uncertain{algèbre} de $\mathfrak{F}$ « figures ensemblistes »}
+\note{note oblique dans la marge gauche, en regard de la définition de $\mathfrak{F}$ ; « figures » est souligné}
+
+Alors on a
+
+\textbf{C 1} $\mathfrak{F}$ admet des Sup majorés, \add{\uncertain{en effet}} si $\mathfrak{L}_i \in \mathfrak{F}$, $\mathfrak{L}_i \leq \Psi$ des ss-ens. fermés d'un $= \Psi$, donc $\bigcup_i \mathfrak{L}_i$ est un sous-ens. fermé de $\Psi$, qui est le sup.
+
+\note{la suite de la page est barrée de plusieurs longs traits obliques, et chargée d'insertions interlinéaires qui ne sont lues qu'en partie}
+\struck{C'est \ill{} (\ill{} parties fermées) d'un $\Psi$ \ill{} ; pour ceci, il faut prouver que $\mathfrak{F}$ \ill{} des sup finis, on montre que (\uncertain{de l'ens. vide}, sup vide !) $\emptyset \subset \mathfrak{P}(L)$ est admissible (! c'est la seule famille admissible $\mathfrak{L}$ telle que $|\mathfrak{L}| = \emptyset$) — la seule famille admissible $\in \mathfrak{F}$ ; et que si $\mathfrak{L}, \Psi, \Sigma \in \mathfrak{F}$ sont tels que ($\mathfrak{L}$ et $\Psi$ sont admissibles, donc $\Sigma$ qui) $(\mathfrak{L}, \Psi)$ compatibles, alors $\Sigma$ est compatible avec $\mathfrak{L} \cup \Psi$ ssi il l'est avec $\mathfrak{L}$ et avec $\Psi$.}
+
+\marginal{La sup. \uncertain{relative} \ill{} pour la relation $\leq$ \ill{}}
+\marginal{\uncertain{compatibles} \ill{}}
+
+\page{11}
+Les éléments irréductibles de $\mathfrak{F}$ sont les $\mathfrak{L} \in \mathfrak{F}$ qui ont \struck{un} un plus grand élément : (un ens. fermé est irréductible (au sens top.) ssi il a un plus grand élément.)
+
+\marginal{Appelons-les « multiplicités ensemblistes »}
+
+Dém
+
+\textbf{C 2} Tout $\mathfrak{L} \in \mathfrak{F}$ est le sup des objets irréductibles de $\mathfrak{F}$, à savoir des
+\[
+  \mathfrak{L}_X = \{ Y \in \mathfrak{L} \mid Y \leq X \} , \quad \text{pour } X \in \mathfrak{L}
+\]
+
+\textbf{C 3} Soient $F, G \in \mathfrak{F}$. Pour que $F$ et $G$ soient compatibles (i.e. $F$, $G$ majorés) il f. et s. que \struck{$X \in F$,} $\forall X \leq F$ et $Y \leq G$, \struck{\ill{}} $X$ et $Y$ \struck{\ill{}} irréductibles, on ait $X$ et $Y$ compatibles.
+
+En d'autres termes, que pour $X \in F$, $Y \in G$, $F_X$ et $G_Y$ soient compatibles :
+
+\textbf{Remarque à prop. p. 7} : Cond. équiv. à a) b) c)
+
+d) \struck{Compos} $\forall A \in \mathfrak{L}$, $B \in \Psi$, $A \cap B$ est fermé dans $A$ (pour $\mathfrak{L}$ i.e. pour $\mathfrak{L}_A$) et dans $B$ (pour $\Psi$ i.e. pour $\Psi_B$), et si \struck{$A \cap C \in \mathfrak{L}$ ou} $C$ est une partie de $A \cap B$, alors $C \in \mathfrak{L}$ ($\Leftrightarrow C \in \mathfrak{L}_A$) ssi $C \in \Psi$ ($\Leftrightarrow C \in \Psi_B$) i.e. $\mathfrak{L}_{A \cap B} = \Psi_{A \cap B}$
+
+\page{12}
+\struck{et que}
+
+\textbf{Composantes connexes} de $\mathcal{M} =$ ens. des multiplicités. Les éléments minimaux de $\mathcal{M}$ sont ceux qui sont réduits à un seul ensemble $A$, \struck{(qui peut être} $A \neq \emptyset$ (NB $\mathfrak{L} = \{\emptyset\}$ n'est pas une famille admissible !) \add{Si $\mathfrak{L}$ est admissible, $\emptyset \notin \mathfrak{L}$,} puisque $A \in \mathfrak{L} \Rightarrow A^{\circ} \neq \emptyset$ a fortiori $A \neq \emptyset$)
+\[
+  \mathfrak{L} = \{A\}
+\]
+\struck{($A \cap B \in \mathfrak{L} \Rightarrow \neq \emptyset$ !)}
+
+Si $\mathfrak{X} \in \mathcal{M}$, \add{$\mathfrak{X} \subset \mathfrak{P}(L)$} et si $\mathfrak{X}$ admet un \struck{\ill{}} élément minimal $A$ (p. ex. $\mathfrak{X}$ fini) \add{\ill{} $X \neq \emptyset$}, donc
+\[
+  \mathfrak{X}_A = \{A\} \leq F
+\]
+\note{on attend $\leq \mathfrak{X}$ ; le $F$ est sur la page}
+\struck{d'autre part,} $\mathfrak{X}$ et $\{A\}$ dans la même comp. connexe. D'autre part, \struck{\ill{}} si $A \neq L$, et si $x \in L \smallsetminus A$, $\{A\}$ et $\{\{x\}\}$ sont dans la même composante connexe, car ils sont majorés par la multiplicité
+\[
+  \bigl\{ \{A\}, \{\{x\}\}, A \cup \{x\} \bigr\}
+\]
+\note{les accolades sont celles de la page ; on attend la multiplicité $\{A, \{x\}, A \cup \{x\}\}$}
+Et pour $\{\{x\}\}$ \add{\ill{} pour tous les $x$} \struck{\ill{}} de $L$ sont dans \ill{} même comp. connexe de $\mathfrak{L}$. En \ill{} les $X \in \mathcal{M}$ qui ont un plus petit élément $A$ sont dans une même composante connexe, du moment que $A \neq L$, i.e. du moment que $X$ ne se réduit pas à $\{A\} = \{L\}$. Mais celui-ci aussi, si \struck{\ill{}} $L \neq \emptyset$, est dans la
+
+\page{13}
+même comp. connexe que les $\{\{x\}\}$, comme on voit à l'aide de la multiplicité
+\[
+  \bigl\{ \{\{x\}\}, \{L \smallsetminus \{x\}\} \bigr\}
+\]
+Si $L$ \struck{de card. 1}, $= \emptyset$, \struck{$\mathfrak{P}(L)$ est de cardinal} alors $\mathcal{M} = \emptyset$, et $\mathcal{M}$ est connexe. Si $\operatorname{Card} L = 1$, $\mathfrak{P}(L) = \{\emptyset, L\}$, et les $\mathfrak{L} \subset \mathfrak{P}(L)$ \struck{qui sont dans} telles que \struck{\ill{} ne contiennent pas $\emptyset$} $\emptyset \notin \mathfrak{L}$ sont $\emptyset$ et $\{L\}$. Donc
+\[
+  \mathcal{M} = \{\{L\}\}
+\]
+a un seul élément, et est connexe.
+
+Donc
+
+\textbf{Prop.} Si $\operatorname{card} L \leq 1$, $\mathcal{M}$ est connexe (il est vide si $L = \emptyset$, il est de card 1 donc connexe si $\operatorname{card} L = 1$). Si $\operatorname{card} L \geq 1$, alors les $X \in \mathcal{M}$ qui ont un élément minimal sont dans une même comp. connexe. Donc si l'on se borne aux \struck{familles} figures \add{ou} multiplicités \textbf{finies} (ce qui \uncertain{suffira}, \uncertain{j'imagine}) $\mathcal{M}$ \ill{} est connexe. Donc l'axiome C 4 \struck{est ici de} relatif à la décomposition de $\mathcal{M}$ en comp. connexes (que $X$, $Y$ appartenant à des composantes différentes sont compatibles) est automatique.
+\note{« $\operatorname{card} L \geq 1$ » est sur la page ; le cas traité est $\operatorname{card} L > 1$}
+
+\page{14}
+Si on ne se borne aux familles finies, on a encore connexité. En effet, si $X \in \mathcal{M}$ est $\neq \{L\}$, soit $A \in X$ tel que $A \neq L$. Alors $X$ et $X_A$ dans même comp. connexe et
+\[
+  |X_A| = A
+\]
+donc si \struck{\ill{}} $x \in L \smallsetminus A$, on trouve une multiplicité en prenant
+\[
+  Z = \bigl\{ B, B \cup \{x\}, \{x\} \bigm| B \in X_A \bigr\} ,
+\]
+
+\textbf{NB} \struck{Construction} qui a servi ici plusieurs fois : Soient $F \in \mathfrak{F}$, $G \in \mathfrak{F}$\note{écrits en surcharge sur d'autres lettres}, $|F| \cap |G| = \emptyset$, posons
+\[
+  F \boxtimes G = \bigl\{ A \cup B \bigm| \underbrace{A \in F, B \in G}_{A \text{ et } B \text{ pouvant être } \emptyset} \bigr\} ,
+\]
+alors
+\[
+  (A \cup B)^{\circ} = A^{\circ} \cup B^{\circ} , \qquad \partial(A \cup B) = (\partial A \cup B) \cup (A \cup \partial B)
+\]
+— si $F$ et $G$ sont des multiplicités i.e. \struck{ont un} ont plus grand élément $A_0$, $B_0$ alors $A_0 \cup B_0$ est plus grand élément de $F \boxtimes G$, qui est une multiplicité. \struck{Cette construction \ill{}} $F \boxtimes G$ contient $F \amalg G$ comme sous-figure. Donc, si $F$ et $G$ sont des multiplicités « disjointes » elles sont dans la même comp. connexe car elles sont majorées par $F \boxtimes G$. Donc en tous cas, \ill{} $\mathcal{M}$ connexe (et de même si on se limite aux \struck{familles} figures ensemblistes finies).
+
+\page{15}
+\textbf{Supports et complément.} $F$ et $G$ dans $\mathfrak{F}$ sont \textbf{disjoints} (au sens de $\leq$) ssi
+\[
+  |F| \cap |G| = \emptyset .
+\]
+Donc les $F$ disjoints d'une famille de figures $G_i$, sont celles qui sont \struck{sont} telles que $|F| \subset L'$, où
+\[
+  L' = L \smallsetminus \bigcup_i |G_i| .
+\]
+Donc, \uncertain{moyennant} que les supports correspondent aux parties quelconques $L'$ de $L$, la notion de complémentarité est la notion ensembliste.
+
+\struck{Les $\mathfrak{F}(L')$} L'ens. des figures de support $\subset L'$ \struck{est} \add{de $L'$} s'identifie aux figures de $L'$, i.e. on trouve les
+\[
+  \mathfrak{F}(L') \subset \mathfrak{F}(L)
+\]
+comme sous-ens. saturés (au sens de $\leq$ et de la disjonction…).
+
+\page{16}
+On récupère l'ens. $\mathfrak{P}(L)$ des fermés de $L_{\leq}$, ou de $(\mathcal{M}_{\leq}, \text{compatibilité})$, et on retrouve la relation d'ordre sur $\mathfrak{P}(L)$ en termes de la relation d'ordre sur les supports, et itou pour les \uncertain{disjonctions}. Mais cela ne redonne \struck{\ill{}} complètement.
+\marginal{\textbf{NB} $\mathfrak{F}$ est formé des \textbf{limites} (ou parties fermées de $\mathcal{M}$) \struck{\ill{}} dont deux éléments quelc. sont comp.}
+
+Mais $\widehat{L}$ le \uncertain{complété} ou divers \uncertain{types} de $L$, mais $L$ \uncertain{apparaissant} comme l'ens. de \uncertain{points} ($L$ se récupère \uncertain{par} $\widehat{L}$). \uncertain{Leurs ingrédients} des points \textbf{isolés} \ill{}.
+
+\uncertain{Les} \uncertain{hypothèses} en termes d'un espace \uncertain{top.} $X$, et \uncertain{remplacant} \struck{\ill{}} la disjonction en \uncertain{comptant} \ill{} dans $X$ \uncertain{prenant} $\mathfrak{F}$ \struck{familles} admissibles \uncertain{fermées} de \textbf{fois} \textbf{ouvertes} et \textbf{fermées}, fermées d'un \ill{} ; la fois \ill{} \uncertain{Si} on se \uncertain{permet} que les \struck{\ill{}} \textbf{\uncertain{parties} \struck{\ill{}} figures finies}, \struck{\ill{}} \uncertain{les supports} s'identifient \ill{} dans les supports \ill{} de $X$. Mais \ill{} à la fois \ill{} \ill{} des parties \ill{} des \uncertain{efigures} \uncertain{infinies} \ill{} des \ill{} si on \struck{prend} \ill{} les \uncertain{efigures} \uncertain{infinies} \ill{} dans \ill{} en \ill{} \textbf{\uncertain{constructions}} \struck{\ill{}} des parties \uncertain{fermées} \struck{quelconques} \ill{}.
+\note{cette partie de la page, surchargée et tachée d'encre, n'est lue que par fragments ; l'ordre des phrases est incertain}
+
+\marginal{au lieu d'un espace \ill{} \ill{} des figures \ill{}}
+
+Les \struck{\ill{}} \uncertain{couples} \ill{} de $X$, \ill{} les \struck{\ill{}} couples $(\mathcal{U}, \mathcal{V})$ d'ouverts de $X$, s'identifient aux \struck{\ill{}} $\overline{\mathcal{U}}$
+\[
+  \mathcal{U} = \operatorname{int}(\complement \mathcal{V}) = \operatorname{ext} \mathcal{V} , \qquad \mathcal{V} = \operatorname{int}(\complement \mathcal{U}) = \operatorname{ext} \mathcal{U} ,
+\]
+\[
+  X \smallsetminus (\mathcal{U} \cup \mathcal{V}) = \partial \mathcal{U} \cap \partial \mathcal{V} ,
+\]
+\note{la dernière égalité est écrite $\overline{\mathcal{U}} \cap \overline{\mathcal{V}} = X \smallsetminus (\mathcal{U} \cup \mathcal{V})$, avec des traits au-dessus qui peuvent être des barres de fermeture doubles}
+i.e. les ouverts $\mathcal{U}$ tels que $\mathcal{U} = \operatorname{int}(\overline{\mathcal{U}})$
+
+\page{17}
+\marginal{\textbf{15 juin}}
+On peut remplacer $\mathfrak{F}$ par divers sous-ensembles ordonnés, stables par \struck{$\leq$ et par Sup} \add{\uncertain{passage} à une} sous-figure \add{(i.e. fermé dans $\mathfrak{F}$)} \struck{\ill{}} et par Sup.
+
+\textbf{Exemples} : Si $L$ est un espace \add{(\uncertain{éventuellement} \ill{})}, \struck{\ill{}} on peut soumettre les $A \in F$ \struck{\ill{}} (\add{$F \in \mathfrak{F}$} figure) à des conditions de nature topologique, comme d'être fermés, ou \struck{\ill{}} compactes, ou fermés et connexes. Toute condition portant sur la nature des objets $A \in F$ (en tant que partie de $L$, et non en tant que multiplicités…) va \uncertain{se} sur les natures des multiplicités $F_A$ ($A \in F$), définit une sous-ens. admissible de $\mathfrak{F}$ ayant les propriétés de stabilité voulues.
+
+\textbf{NB} Signalons, i.e. $A^{\circ} = A \smallsetminus \partial A$ en propriétés \struck{\ill{}} (la définition \uncertain{utilisant} $A^{\circ}$ dépend de la multiplicité $F_A$) on \uncertain{comme} celle d'être \struck{non vide} \struck{connexe}, \ill{} \uncertain{de} $F$ \ill{} \struck{$\mathfrak{L}$} connexe, ou plus gén. $i$-connexe, \ill{} de $A$ \uncertain{pour} les $A$ \ill{} \struck{(\ill{}) connexe \ill{} vide}
+\[
+  0 \leq i \leq +\infty ,
+\]
+\struck{$\mathfrak{D}$} \uncertain{idem}. Où on peut demander aux $|\partial A|$ d'être des \uncertain{sphères} \uncertain{topologiques}, etc.
+
+\marginal{\struck{Mais il n'y aurait pas d'intérêt \ill{} \ill{} d'imposer à la fois \ill{} et \ill{}} Aussi, la condition de \textbf{densité} $A = \overline{A^{\circ}}$ \add{i.e.} $A \subset B \Rightarrow A^{\circ} \subset \overline{B^{\circ}}$}
+\note{note oblique dans la marge gauche ; sa première partie est barrée de deux traits parallèles}
+
+Si $L$ est \uncertain{muni d'une} \add{\uncertain{\ill{}} \ill{}} modérée, on se bornera aux $\mathfrak{L} \subset \mathfrak{P}(L)$ pour lesquels $A \in \mathfrak{L} \Rightarrow A$ partie modérée de $L$.
+
+On peut envisager aussi des conditions de nature plus globale sur $\mathfrak{L}$, avec toujours
+
+\page{18}
+$L$ est muni d'une topologie, comme celle d'être \textbf{localement fini}. Le sous-ens. ordonné $\mathfrak{F}'$ \struck{\ill{}} de $\mathfrak{F}$ est alors stable par sup finis, mais pas par \uncertain{généralisé} par sup. quelc. \textbf{Figure finie} : \struck{\ill{}} $F$ fini en tant qu'ensemble, i.e. un ens. fini de parties. Figures de type fini : contenue dans une réunion finie de ss-figures $F_A$. \struck{Si les structures d'une} Une figure \struck{est de t.} finie \struck{\ill{}} si et seulement si elle est de t. f. et ses strates sont finies.
+
+\textbf{Autre cas} : Supposons $L$ muni d'une structure d'ordre — il \uncertain{définit} donc une réalisation \add{(\uncertain{fermée})} $X_x$ ($x \in L$) « \textbf{cellulaire} » dans un espace topologique, par des « cellules » dans un espace top. $X$ triangulable compact \uncertain{modéré}. Alors \struck{\ill{}} les $A \subset L$ correspondent les $X_A = \bigcup_{x \in A} X_x$.
+
+\marginal{Les $X_x$ forment une famille admissible de parties de $X$, i.e. une figure \ill{} \ill{}}
+\note{note oblique dans la marge gauche, reliée par une flèche au texte}
+
+On se bornera alors aux parties $A$ de $L$, \uncertain{de} \uncertain{façon} que \struck{$\ill{}$}
+\[
+  A \longmapsto X_A
+\]
+soit une \uncertain{\textbf{application}} bijective de l'ens. des parties \uncertain{considérées} de $L$ (les p. \textbf{fermées}) avec un ens. \struck{\ill{}} des parties \add{fermées} de $X$ \struck{\ill{}} stables par la relation d'équivalence induite \struck{par la relation} par les $(X_x^{\circ})_{x \in L}$ (en fait, toutes les parties
+
+\page{19}
+en ont si $L$ est fini). Donc on se bornera aux $\mathfrak{L} \in \mathfrak{F}$ telles que les $A \in \mathfrak{L}$ soient fermés dans $L$, i.e. telles que
+\[
+  \mathfrak{L} \subset \mathfrak{P}_{\text{fermés}}(L)
+\]
+Les éléments de $\mathfrak{F}'$ ainsi obtenus peuvent s'interpréter en termes de $X$, comme des familles admissibles \add{(\uncertain{maximales})} \add{de familles de} parties \add{fermées} de $X$, \textbf{stables} par la relation d'équiv. \struck{cellulaire} \add{\uncertain{définie}} \uncertain{définie} par les $X_x^{\circ}$, i.e. dont chacune \uncertain{soit} réunion de strates fermées de $X$. \struck{\ill{}} Dans une terminologie qui sera développée \add{admettant} \struck{\ill{}} dans \struck{\ill{}} \uncertain{la} \uncertain{recouvrement} \uncertain{cellulaire}, elles \struck{sont} \uncertain{sont} de \uncertain{modérées} de $X$ comme une \uncertain{sorte} de \add{\uncertain{choix}} \uncertain{modèle} de leurs « subdivisions » (ou plutôt, induit sur leurs supports dans $X$)
+
+Soient $F$ et $G$ deux figures ensemblistes dans $L$. On veut définir quand $F$ est un \textbf{raffinement}, et quand c'est une \textbf{subdivision} de $G$.
+
+\textbf{Proposition} Conditions équivalentes
+
+a) [$\forall A \in F$, désignons par $G^{A}$ l'ens. des $B \in G$ tels que $A \subset B$, $G^{A}$ a un plus petit élément $\varphi(A)$. (On trouve donc une application $\varphi : F \to G$, qui est bien sûr croissante.)] De plus
+
+\marginal{et \uncertain{exiger} $|F| \subset |G|$}
+
+\page{20}
+pour tout $A \in F$, $B \in G$, $A \cap F$ est \struck{\ill{}} une partie $F$-fermée de $|F|$, i.e. réunion de strates de $F$.
+\note{« $A \cap F$ » est sur la page ; on attend $A \cap B$}
+
+b) Pour tout $A \in F$, $\exists B \in G$ telle que $A^{\circ} \subset B^{\circ}$ (\add{\uncertain{soit} $\varphi(A)$}, B étant évidemment unique), l'application \struck{$\varphi : F \to G$} ainsi obtenue est croissante (\struck{$A' \subset A$, et $A \subset A'$, $A^{\circ} \subset B^{\circ}$}) \struck{$A'^{\circ}$ et $A' \subset A$} \uncertain{i.e.} $A, A' \in F$, $B, B' \in G$,
+\[
+  A^{\circ} \subset B^{\circ} , \quad A'^{\circ} \subset B'^{\circ} , \quad A' \subset A \Longrightarrow B' \subset B .
+\]
+
+\marginal{\textbf{NB} Le « de plus » implique dans la première condition, \uncertain{si} on ajoute que $|F| \subset |G|$, et cela équivaut à la \textbf{continuité} $|F| \to |G|$ (\uncertain{où} \ill{})}
+\marginal{b') \ill{} condition \ill{} $A^{\circ}$ \ill{}}
+\note{notes obliques dans la marge gauche, en haut de la page}
+
+$a) \Rightarrow b)$ \struck{\ill{}} Supposons a) prouvons b). Soit $A \in F$, par a) $\exists B \in G$ \add{$= \varphi(A)$} \struck{\ill{}} qui soit plus petit dans $G^{A}$. Prouvons \struck{\ill{}} $A^{\circ} \subset B^{\circ}$. Soit $x \in A^{\circ}$, il faut prouver que $B' \in G$, $B' \subset B$, et $x \in B' \Longrightarrow B' = B$. \struck{Soit} Considérons $B' \cap A$, c'est une partie de $A$ réunion d'objets de $F$, i.e. \ill{} \ill{} donc $\exists A' \in F$, telle que $x \in A' \subset B' \cap A$. Comme $x \in A^{\circ}$ et $A' \in F_A$, on a $A' = A$ et \uncertain{comme} $A' = A \subset B' \cap A$, on a $A \subset B'$. D'après \uncertain{la} condition minimale de $B$, on a donc $B' = B$ qed. D'autre part, on a \ill{} dans \ill{} \ill{} vu que l'application $\varphi$ est croissante. Donc établit b).
+
+$b) \Rightarrow a)$. Supposons b, prouvons a). Soit $A \in F$, soit $B \in G$ tel que $A^{\circ} \subset B^{\circ}$, \uncertain{prouvons} que $B$ est plus petit élément dans $G^{A}$. Donc $A \subset B$ \struck{prouvons que si \ill{} $B' \in G$ tel que $A \subset B'$}, \struck{comme $A^{\circ} \subset B^{\circ} \subset B$,} \struck{Soit} On a
+\[
+  A = \bigcup_{\substack{A' \in F \\ A' \subset A}} A'^{\circ}
+\]
+\struck{\ill{}} il suffit donc de prouver que \ill{} \ill{} \ill{} $A'^{\circ}$ sont $\subset B$.
+
+\marginal{Lemme (cf. p. 7) \ill{} $A \in F$, \ill{} $B \in G$, $A^{\circ} \subset B$ \ill{} $A \subset B$}
+\note{note oblique dans la marge inférieure gauche, en partie raturée ; la page s'arrête au milieu de la démonstration}
+
+\end{document}
