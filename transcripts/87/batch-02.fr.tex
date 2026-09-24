@@ -1,0 +1,872 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 87, batch 2 (pages 21-40).
+% Established from the facsimile archives/batches/87/batch-02.pdf (a mirror of
+% https://grothendieck.umontpellier.fr/87.pdf; no cover sheet, PDF page k =
+% folder page 20+k), per the skill transcribe-grothendieck, with the 700 dpi
+% tiles of archives/tiles/87/ and 230-450 dpi re-crops.
+%
+% Nineteen of the twenty leaves are transcribed. Page 31 is skipped: it carries
+% nothing in his hand (only page 32 showing through the sheet), and the gap in
+% the page numbers is the record. There is no typescript and nobody else's text
+% in the batch. No pagination of his own is visible.
+%
+% What the batch is about. It continues batch 1's « géométrie des convexes »
+% and runs from the cube to the combinatorial polyhedron. Pages 21-22: the
+% category of « épures de n-cubes » — a set B of 2n elements with a free
+% involution (a relation R with orbits of two) — is equivalent to that of
+% k-modules E split into free rank-one summands E_i each carrying a pair
+% B_i = -B_i of generators, via E = coprod B_i wedge_{+-1} k; then omega_E ~=
+% omega_I wedge bigwedge B_i. Pages 23-26: the combinatorial polyhedron of a
+% convex polyhedron (facets ordered by F in closure(F')); the facets of the
+% cube C(B,R) are the partial sections of B over I = B/R, order-reversed, and
+% an exercise recovers B -> I from the ordered set of partial sections; the
+% real cube C_n, Aut_aff(R^n, C_n) = Aut(B_n, sigma_n), so convex n-cubes and
+% (oriented) épures of n-cubes are equivalent categories. Pages 27-29: facets
+% of a convex set via the relation « x, y interior to one open segment », their
+% properties for a polyhedral set (finite, unique maximal facet, closures,
+% dimension drop by one, faces of intervals Pi_{F',F''} are again Fac(K)),
+% then a first axiomatic definition of a combinatorial polyhedron as a finite
+% lattice with the diamond condition. Page 30 counts the low dimensions. Pages
+% 32-36: the dimension-2 case as a « carte lisse combinatoire » X_0 = S,
+% X_1 = A, X_2 = F with the flags A^{L->} = vec(A) x_A A^{up}, the involutions
+% sigma_1, sigma_2, sigma, epsilon, the oriented objects S~, A~, F~ and a
+% diagram of the projections; the lattice axiom D is unpacked into d_1, d_2,
+% d'_1, d'_2 (p. 34), a lemma on Sup/Inf in an ordered set (p. 35), and
+% corollaries: every vertex has at least three edges and every face at least
+% three sides, faces are sups of their vertices (p. 36). Pages 37-38: for a
+% finite ordered set whose lower intervals realise to spheres (condition R),
+% delta(x) = dim |X_{<=x}| is strictly increasing, jumps by one exactly at
+% successors, and open intervals realise to spheres of dimension
+% delta(y)-delta(x)-2; a lemma for |Y| a topological d-manifold. Pages 39-40:
+% the diamond condition (Sigma) defines sigma_{x,z}(y); n-repères x_0 < ... <
+% x_n by successors, R_n -> R_{n-1}, and the involutions sigma_0 ... sigma_{n-1}
+% with the Coxeter-type commutations; the upper half of page 40 is cancelled.
+%
+% Notation fixed for the batch: the cursive X of pages 32-40 is \mathfrak{X}
+% (noted at first use); the flag set he writes A with a corner-and-arrow
+% exponent is A^{\llcorner\!\to}; the set of arcs « tangents » is \vec{A}, the
+% « transverses » A^{\uparrow}. The d-list of page 34 follows the page's own
+% labels d_1), d_2), d'_1), d'_2).
+%
+% Notable uncertainties: the margin of page 21 (« épure de n-cube », « cube »
+% uncertain) and of page 22 (« vérifier »); page 27's cancelled bracket and
+% its circled items (5)-(6), crammed obliquely into the lower-left corner and
+% mostly \ill; page 29's (2°) « Pi_{F',F''} … Pi_F » as written; page 33's
+% label sigma_2 on the second arrow of the diagram; page 34's cancelled
+% paragraph on axiom D, read in part; page 39's cancelled two and a half
+% lines and its sideways margin; page 40's cancelled upper half.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-09-24 — first pass, unchecked against the pages by a human.
+
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{87}
+\batch{2}
+\pages{21}{40}
+\dating{s.d. — le groupe « Géométrie et topologie combinatoire » (69 à 102) est daté 1976-[vers 1986]}
+\watermark{Édition de démonstration}
+\foldertitle{Polyèdres convexes : notes manuscrites (s.d.)}
+
+\begin{document}
+
+\page{21}
+
+Soit $n$ un entier, $k$ un anneau \uncertain{comm.}\note{le mot est récrit
+au-dessus de la ligne} où $2$ inv. ds $k$.
+
+$C_n$ catégorie formée des
+
+\begin{itemize}
+  \item[] $k$-module $E$
+  \item[] \struck{\ill{}}\note{un « 1 » souligné est écrit au-dessus du mot
+    biffé} $(E_i)_{i\in I}$ de sous-modules libres de $E$
+  \item[] $\forall\, i \in I$, partie $B_i$ de $E_i$ ;
+\end{itemize}
+
+avec axiomes
+
+\begin{itemize}
+  \item[a)] $E$ somme directe des $E_i$ ;
+  \item[b)] $\operatorname{card} B_i = 2$ — ($\forall\, i \in I$)
+  \item[c)] $\forall\, b \in B_i$, $\{b\}$ base de $E_i$
+  \item[d)] $B_i = -B_i$.
+\end{itemize}
+
+$\mathcal{D}_n$ catégorie formée des ens. $B$ de card. $2n$, munis d'une
+relation d'équiv. $R$ à orbites de cardinal $2$ (donc $B/R = I$ de card. $n$)
+\marginal{épure \struck{\ill{}} de $n$-\uncertain{cube} \struck{combinatoire}} — ou encore des ens. de card. $2n$, avec
+\struck{\ill{}} $\{\pm 1\}$ opérant librement i.e. avec une involution sans pts
+fixes.
+
+\[
+  C_n \longrightarrow \mathcal{D}_n \qquad \text{par} \quad
+  \bigl(E, (E_i), (B_i)_{i\in I}\bigr) \longmapsto \Bigl\{\textstyle\bigcup B_i, \ldots\Bigr\}
+\]
+
+Mais on a aussi
+\[
+  \mathcal{D}_n \longrightarrow C_n \quad \text{en prenant} \quad
+  E = \coprod_{i\in I} B_i \wedge_{\{\pm 1\}} k
+\]
+où $\{\pm 1\}$ opère sur $k$ par homothéties. Donc les deux catégories sont
+équivalentes.
+
+\marginal{$0 \to E \to k^{B} \to k^{I} \to 0$}\note{entouré, à gauche de la formule}
+\marginal{ou aussi $E \subset k^{(B)}$ formé des $\sum_{b\in B} \lambda_b e_b$
+avec $\lambda_{-b} = -\lambda_b$ \ill{}}
+
+\page{22}
+
+En fait, le $E$ ainsi \uncertain{associé} a \struck{nécessairement} une forme
+quadratique canonique, sur chaque $B_i \wedge_{\{\pm 1\}} k$ : la forme
+\uncertain{bilinéaire} \add{\uncertain{de produit scalaire}} $(x,y) = xy$.
+
+\uncertain{Je dis} qu'on a un isom. canonique
+\[
+  \omega_E \simeq \omega_I \wedge \bigwedge_{i\in I} B_i .
+\]
+En effet, par la formule d'associativité on a
+\[
+  \omega_E \simeq \omega_I \wedge \bigwedge_{i\in I} \omega_{E_i}
+\]
+et d'autre part
+\[
+  \omega_{E_i} \simeq \struck{\ill{}}\, B_i .
+\]
+
+\marginal{\ill{} \uncertain{vérifier} :}[On a en effet, comme $B_i \subset$
+ens. des bases \add{sur $\mathbb{R}$}\note{un petit « $R$ » est écrit sous la
+ligne après « bases »} de $E_i$, $B_i \to \omega_{E_i}$, et on voit que c'est inj,
+donc bijectif ……]
+
+\marginal{épure de $n$-cube \struck{Cube combinatoire} orienté}\note{à droite,
+en bas de la page, souligné comme un titre}
+
+\page{23}
+
+\emph{Polyèdre combinatoire} associé à un polyèdre convexe : l'ens. des
+facettes \add{$\neq$ l'unique facette \uncertain{maxim.} ?}\note{ajout
+interlinéaire}, \struck{\ill{}} ordonné par $F \subset \overline{F'}$.
+
+[La dim d'une facette se retrouve sur le polyèdre combinatoire comme une dim.
+combinatoire (d'un él. d'un ens. ordonné) : sup des longueurs des chaînes
+\uncertain{croissantes}
+\[
+  F_0 \lneq F_1 \lneq \cdots \lneq F_n = F
+\]
+— ou longueur commune des chaînes maximales …]
+
+\[
+  \Phi_0 \quad \Phi_1 \quad \ldots \quad \Phi_{n-1}\struck{\ill{}}
+  \qquad (n = \dim C)
+\]
+où $\Phi_i$ = ens. des facettes de dim. $i$.
+
+Entre $\Phi_i$ et $\Phi_{i+1}$ ($0 \leq i \leq n$) relation d'incidence $R_i$.
+
+La relation d'ordre sur $\Phi = \coprod_{0\leq i\leq n} \Phi_i$ se reconstitue à
+partir des $R_i$.
+
+\emph{Proposition} Les facettes $\neq \emptyset$ du \struck{\ill{}} cube
+$C(B,\mathcal{R})$ sont en corr. biunivoque avec l'ens. des sections
+partielles de $\mathcal{B}$ sur $I = B/\mathcal{R}$. Si
+$\sigma : J \subset I \to \mathcal{B}$ est une telle section, la facette
+\emph{fermée} (ouverte) associée est l'ens. des
+\[
+  \sum_{b\in B} \lambda_b . b \quad \text{avec} \quad
+  \lambda_{-b} = -\lambda_b, \quad \lambda_{\sigma(j)} = +1, \quad \text{et}
+\]
+$|\lambda_b| \leq 1$ (resp. $|\lambda_b| < 1$) pour $b \in I \setminus J$.
+
+\page{24}
+
+Soient $\lambda = \sum_{b\in B} \lambda_b e_b$, $\mu = \sum_{b\in B} \mu_b e_b$
+deux éléments de $C$ ($\lambda_{-b} = -\lambda_b$, $|\lambda_b| \leq 1$, idem
+pour $\mu$) quand a-t-on $R(\lambda,\mu)$ (relation d'équiv. des facettes ?)
+
+Si $\lambda \neq \mu$, on veut que \struck{\ill{}}
+$\exists\, t \in \mathbb{R}$, $t\lambda + (1-t)\mu \in C$, avec au choix $t < 0$,
+ou $t > 1$. \struck{\ill{}} On veut \struck{$t\lambda_b$} donc
+$|t\lambda_b + (1-t)\mu_b| \leq 1$. Si $\lambda_b = \mu_b$, aucun pb, si
+$|\lambda_b|, |\mu_b| < 1$, non plus ; le seul pb si $\lambda_b \neq \mu_b$,
+et $\lambda_b$ ou $\mu_b = \pm 1$.
+
+Il faut donc $|\lambda_b| = 1 \Leftrightarrow |\mu_b| = 1$
+\[
+  \underset{-1}{\bullet} \!\!\!\longrightarrow\!\!\!
+  \underset{\lambda_b}{\bullet} \!\!\!\longrightarrow\!\!\!
+  \underset{+1 = \mu_b}{\bullet}
+  \qquad \Longrightarrow \qquad \lambda_b = \mu_b \quad \text{donc}
+\]
+\note{le croquis est un segment de $-1$ à $+1$ portant $\lambda_b$ à
+l'intérieur et $\mu_b$ à l'extrémité $+1$ ; il est rendu ici par des points
+alignés}
+
+Donc \struck{a) L'ens. $J(\lambda)$ des $\lambda$}
+\begin{itemize}
+  \item[a)] Soit $J(\lambda) = \{\, b \in B \mid \lambda_b = \pm 1 \,\}$. On veut
+    $J(\lambda) = J(\mu)$, soit $J$
+  \item[b)] Si $j \in J$, on veut $\lambda_b = \mu_b$
+\end{itemize}
+
+La proposition s'ensuit.
+
+\emph{Corollaire} La relation d'ordre entre facettes de $C = C(B,R)$ est
+inverse de la relation de prolongement entre sections partielles de $B$ sur
+$I = B/\mathcal{R}$.
+
+La facette maximale correspond à la section partielle vide ($J = \emptyset$).
+Les facettes sous-maximales correspondent aux éléments de $B$. Deux facettes
+sous-maximales distinctes \uncertain{ne}\note{ajout interlinéaire} se
+rencontrent pas (« sont $/\!/$ ») ssi elles correspondent à des élts $x, y$ de
+$B$ qui sont conjugués par $R$.
+
+\page{25}
+
+\emph{Exercice} Soit $B \xrightarrow{p} I$ une application surjective\note{« surjective » est écrit au-dessus de la ligne}
+\struck{telle que $\forall\, i \in I$, $\operatorname{card} p^{-1}(i) \geq 2$}.
+Soit $\mathcal{P}$ l'ens. des sections partielles définies de $B$ sur (des
+parties de) $I$, \struck{\ill{}} ordonné par la relation de prolongement.
+\struck{Montrons que les} Ainsi l'ens. des él. maximaux \struck{et \ill{}} de
+$\mathcal{P}$ s'identifie à
+\[
+  C = \prod_{i\in I} B_i \qquad \bigl(B_i = p^{-1}(i)\bigr)
+\]
+l'ens. des éléments sous-minimaux\note{récrit au-dessus d'un mot biffé}
+s'identifie à $B$. Pour tt $b \in B$, soit $C_b \subset C$ l'ens. des él.
+maximaux \struck{tels que} qui majorent $b$, i.e. l'ens. des sections $\sigma$
+de $B$ sur $I$ telles que $\sigma(p(b)) = b$. Soient $b, b' \in B$,
+$b \neq b'$, alors
+\[
+  C_b \cap C_{b'} = \emptyset \iff p(b) = p(b') .
+\]
+Donc si $b, b' \in B$, on a
+\[
+  \bigl(p(b) = p(b')\bigr) \iff \bigl(b = b' \ \text{ou}\ C_b \cap C_{b'} = \emptyset\bigr)
+\]
+Cela nous permet de reconstruire $B$ et la relation d'équivalence $R$ définie
+par $p$ \struck{\ill{}} (donc $I = B/R$ et $p$), à isom. près, en termes de
+$\mathcal{P}$.
+
+\emph{Cor.} La cat. des $B \xrightarrow{p} I$ ($p$ surjectif) (pour les isos)
+équivalente à une s-catégorie pleine de celle des ens. ordonnés en associant :
+à $p$ \ill{} $\mathcal{P}(p)$ ci-dessus.
+
+\page{26}
+
+\subsection*{Cube}
+
+(A)\note{la lettre est entourée} \emph{Pt de vue géométrie des} \struck{\ill{}} \emph{convexes}
+(sur $\mathbb{R}$)
+
+\begin{itemize}
+  \item[(a)] Cube standard (réel) :
+    \[
+      C_n \subset \mathbb{R}^n, \qquad
+      C_n = \bigl\{\, x = (x_i)_{1\leq i\leq n} \in \mathbb{R}^n \bigm| |x_i| \leq 1 \,\bigr\}
+    \]
+  \item[(b)] Cube $C$ d'un \struck{vectoriel} espace affine réel $E$ (de dim
+    finie $n$) : partie telle qu'il existe isom. \struck{aff} $u : \mathbb{R}^n
+    \xrightarrow{\sim} E$ avec $u(C_n) = C$.
+  \item[(c)] Catégorie des $n$-cubes \struck{de dim $n$} convexes (dans
+    \struck{vectoriels} $\mathbb{R}$-espaces affines de dim. $n$) : c'est une
+    groupoïde connexe avec objet marqué $(\mathbb{R}^n, C_n)$, donc équivalent à
+    la catégorie des torseurs sous
+    \[
+      W_n = \operatorname{Aut}_{\text{affin.}}(\mathbb{R}^n, C_n)
+    \]
+\end{itemize}
+
+\marginal{explicitons en termes de $B \xrightarrow{p} I = B/\mathcal{R}$ :
+$E = \operatorname{Hom}_{\{\pm 1\}}(B, \mathbb{R})$,
+$C = \{\, \lambda \in \operatorname{Hom}_{\{\pm 1\}}(B, \mathbb{R}) \mid
+|\lambda(b)| \leq 1 \ \forall\, b \in B \,\}$}\note{encadré, écrit en long dans
+la marge gauche, en regard de la proposition}\emph{Prop} Soit
+$B_n = \{\, \pm e_i \mid 1 \leq i \leq n \,\} \subset \mathbb{R}^n$. Alors
+\[
+  \operatorname{Aut}_{\text{aff}}(\mathbb{R}^n, C_n) = \operatorname{Aut}_{\text{vect}}(\mathbb{R}^n, B_n)
+  \xrightarrow{\ \sim\ } \operatorname{Aut}(B_n, \uncertain{\sigma_n})
+\]
+où $\sigma_n$ est l'involution $b \mapsto -b$ de $B_n$. \struck{relat}
+
+\struck{Dém} Dém. laissée comme exercice. [pas évident, mais pas dur : fait
+$\subset$ ; on peut noter que $B_n$ est l'ens. des \emph{pts extrémaux} du
+convexe $C_n$ …]
+
+\emph{Corollaire} Catégorie des $n$-cubes convexes équivalente à la catégorie
+des épures de\note{« épures de » est écrit au-dessus de la ligne} $n$-cubes
+\struck{combinatoires}.
+
+\emph{Corollaire} Cat. des $n$-cubes orientés $\approx$ cat. des épures\note{même
+ajout interlinéaire} $n$-cubes \struck{combinatoires} orientés.
+
+\page{27}
+
+\emph{Facettes} d'un ens. convexe $C$ (dans vectoriel réel) : partie
+\struck{\ill{}} non vide $F$ de $C$ telle que
+\struck{[$x \in F$, $y \in C - F$ implique que $x$ \add{ou $y$} soit une
+extrémité de $C \cap D_{xy}$ ($D_{xy}$ = la droite qui passe par $x$ et $y$,
+i.e. l'ens. des $tx + (1-t)y$ ($t \in \mathbb{R}$))]}\note{le passage entre
+crochets est encadré et barré de traits obliques ; les deux ajouts
+interlinéaires qui le suivent, « ou $y \in F$ si » et « ou $y$ », se
+rapportent à la même rédaction} \struck{\ill{} convexe} : pour $x \in F$,
+$y \in C - \{x\}$, \struck{\ill{}} si $x$ \struck{\ill{}} est une extrémité de
+$C \cap D_{xy}$ (i.e. s'il existe $x', y' \in C \cap D_{xy}$ tels que
+\[
+  \underset{x'}{\bullet}\!-\!\underset{x}{\bullet}\longrightarrow y \longrightarrow y'
+\]
+\struck{$x, y$ soient} $x, y$ soient \add{intérieurs} entre $x'$ et $y'$) alors
+$y \in F$. On peut l'exprimer aussi en disant que tt intervalle ouvert
+$\subset C$ qui rencontre $F$ est contenu ds $F$.
+
+\emph{Prop.} Toute facette de $C$ est convexe. $C$ est réunion disjointe de ses
+facettes \add{(non vides)}.
+
+Considérons la relation dans $C$
+\[
+  R(x,y) : \ (x = y) \ \text{\emph{ou}} \ \bigl(x \text{ ni } y \text{ ne sont extrémités de } C \cap D_{xy}\bigr)
+\]
+i.e. $x, y \in$ \struck{\ill{}} intervalle ouvert $\subset C$ ; c'est une
+relation d'équivalence : \struck{symétrie} \uncertain{réflexivité et} symétrie
+évident\add{s} ; transitivité facile. Il en découle aussi que
+
+\[
+  \underset{x'}{\bullet}\,\underset{x}{\bullet} \ \ldots \ \underset{y''}{\bullet}\,\underset{y}{\bullet}\,\underset{y'}{\bullet} \ \ldots \ \underset{z}{\bullet}\,\underset{z'}{\bullet}
+\]
+\note{le croquis est un triangle de sommets approximatifs $x', y', z'$,
+chaque sommet précédé d'un point intérieur $x, y, z$, avec $y''$ près de $y$ ;
+il illustre la transitivité et n'est donné ici que par ses étiquettes}
+
+$\forall\, x \in C$, l'ens. des $y \in C$ tels que $R(x,y)$\note{restitution
+approximative : la ligne commence par un mot biffé, puis « $x \in C$ »} est
+l'unique facette qui contient $x$.
+
+\marginal{ou encore : int. \emph{finie} de demi-espaces fermés …}
+\emph{Prop.} \struck{\ill{}} Soit $C$ un \emph{polyèdre} convexe (i.e. un ens.
+convexe qui est réunion finie d'ensembles \struck{\ill{}} convexes de partie
+finie de l'espace affine $E$) alors : (1)\note{les numéros de cette proposition sont entourés sur la page} l'ens. des facettes est
+fini. (2) $\exists$ unique facette maximale $\Phi$, qui est
+l'intérieur de $C$ dans \uncertain{son espace} \uncertain{engendré par} $C$.
+(3) Pour tt facette $F$, $\overline{F}$ est une réunion de
+facettes, et $F$ est l'unique facette $\subset \overline{F}$ de dimension max
+$(= \dim \overline{F})$ \struck{\ill{} $\overline{E} = \overline{F}$
+$(F, F'$ facettes$)$ … $F = F'$} (4) Si $\dim F = d$,
+$\exists$ facette $\subset \overline{F}$ de dim $d-1$ ; si $F, F'$ sont des
+facettes, $\overline{F} = \overline{F'} \Rightarrow F = F'$
+\marginal{(5) $C$ est l'env. convexe de la réunion des facettes
+minimales, i.e. \uncertain{des} pts extrémaux (6) \ill{} bar. des
+\ill{} l'ens. des \ill{} \uncertain{caractérise} \ill{}}\note{les deux articles
+(5) et (6) sont écrits en oblique dans le coin
+inférieur gauche, serrés, et se lisent mal au-delà de leurs premiers mots}
+Relation d'ordre entre facettes
+
+\page{28}
+
+$C \subset E$, $C$ partie polyédrale de l'espace affine $E$,
+$\dim C = d$
+
+$A_C = \operatorname{Aff}(C)$ espace affine engendré par $C$
+
+$C^0 = \operatorname{Int}_{A_C}(C)$ est la facette maximale (de dim maximale),
+$C = \overline{C^0}$.
+
+Les autres facettes \add{fermées} \struck{sont} les intersections \add{$H \cap C$
+avec $C$} d'hyperplans $H$ de $A_C$ ne rencontrant pas $C^0$ \struck{\ill{}}.
+Les facettes \struck{fermées} \struck{telles que} de dim $d-1$ correspondent
+\add{1-1} aux $H$ tels que l'intérieur de $H \cap C$ dans $H$ soit
+$\neq \emptyset$, et les intérieurs en question sont les facettes
+\add{ouvertes} de dim $d-1$. Soit $C^1$ leur réunion.
+
+Les facettes fermées de dim $\leq d-2$ sont les int. avec $C$ de
+sous-espaces affines de dim $d-2$ de $A_C$ ne rencontrant pas
+$C^0 \cup C^1 \ldots$
+
+Les facettes fermées de dim $\leq d-i$ sont les int. \add{$F \cap C$} avec
+$C$ des sous-espaces affines $F$ de $A_C$ de dim $d-i$ \add{(i.e. codim. $i$)}
+\struck{\ill{}} ne rencontrant pas $C^0 \cup C^1 \cup \cdots \cup C^{i-1}$.
+Les facettes fermées de dim $d-i$ sont en corr. 1-1 avec les $F$ tels que
+$\operatorname{int}_F F \cap C \neq \emptyset$, et les
+$\operatorname{int}_F F \cap C$ sont les facettes de dim $d-i$.
+
+Intersection de deux facettes fermées est une facette fermée [c'est une partie
+convexe de $C$ et c'est une réunion de facettes, il reste à prouver).
+
+\emph{Prop} Les facettes \add{fermées} de $C$ sont les réunions de facettes qui
+sont convexes et fermées.
+
+Soit
+
+\page{29}
+
+$F$ facette, alors \struck{\ill{}}
+\begin{itemize}
+  \item[a)] $F = \operatorname{int}_{A_F} \overline{F}$ \ ($A_F = A_{\overline{F}}$),
+    \ $\overline{F} = A_F \cap C$ = \struck{\ill{} facettes},
+  \item[b)] $F' \subset C$ alors
+    $\underbrace{F' \text{ facette de } F}_{\Updownarrow}$ \
+    $F'$ facette de $C$, $F' \subset F$ \
+    [$\Rightarrow \overline{F}$ réunion de facettes]
+  \item[c)] Soit \struck{\ill{}} $K \subset C$. Pour que $K$ soit une facette
+    fermée, il faut et s. que $K$ soit convexe, fermé et une réunion de
+    facettes. ($\Rightarrow$ une intersection de deux facettes est une facette)
+  \item[d)] \struck{\ill{}} Soit $\operatorname{Fac}(C) = \Pi$, \add{l'ens.
+    ordonné des facettes}. Alors
+\end{itemize}
+
+\begin{itemize}
+  \item[1°)] $\Pi^{\circ}$ (l'ens. ordonné opposé) est
+    \uncertain{isomorphe} à un ens. $\operatorname{Fac}(C')$, où $C'$ est
+    une \add{partie polyédrale} \struck{convexe} \struck{\ill{}} dans $E$ de
+    $=$ dim.
+  \item[2°)] Soient $F', F'' \in \Pi$, \add{avec $F' < F''$},
+    $\Pi_{F',F''}$ l'ens. ordonné des $F \in \Pi$ tels que
+    $F' \leq F \leq F''$. Alors $\Pi_F$ est \add{$\simeq$ à un ens.
+    ordonné} de la forme \struck{\ill{}} $\operatorname{Fac}(K)$, où $K$ un
+    \add{polyèdre} convexe de dim $\delta = \dim F'' - \dim F' - 1$
+\end{itemize}
+
+\emph{Cor} Si \struck{\ill{}} $\dim F'' - \dim F' = 2$, alors
+\struck{card} l'ens. des $F$ tels que $F' < F < F''$ est de card. $2$.
+
+\marginal{\ill{}}\note{à gauche, un petit croquis : quatre segments issus d'un
+point, dans un cercle, deux d'entre eux repassés à l'encre}
+\emph{Polyèdre combinatoire} : ens. ordonné fini $I$ satisfaisant les
+conditions
+\begin{itemize}
+  \item[a)] $I$ a des inf et des sup finis [plus petit et plus grand élément,
+    et $i \wedge j$ et $i \vee j$]
+  \item[b)] $I$ satisfait condition des chaînes
+  \item[c)] Si $i < j < k$ et si $j$ succ. \struck{immédiat} de $i$, $k$ succ.
+    de $j$
+\end{itemize}
+
+\page{30}
+
+alors $\exists\, j' \in I$ tel que $j' \neq j$, $j'$ succ. de $i$, $k$ succ. de
+$j'$
+
+\begin{itemize}
+  \item[$\Rightarrow$ d)] \struck{\ill{}} $\forall\, i \in I$,
+    \add{$i$ non minimal} \struck{\ill{}}
+    $i = \sup\,(\, j \in I \mid j < i \,)$ ;
+    \add{$i$ non max-imal} $\Rightarrow$ $i = \operatorname{Inf}\,(\, j \in I \mid j > i \,)$
+\end{itemize}
+\note{la condition d) est reliée par une flèche à la condition c), dont elle
+découle ; les deux ajouts « $i$ non minimal », « $i$ non maximal » remplacent
+une incise biffée où se lit « plus petit »}
+
+\emph{dim $-1$} — $I$ a un seul élément ($0 = 1$).
+
+\emph{dim $0$} — $I$ a deux éléments distincts ($0$ et $1$, $0 \neq 1$)
+
+\emph{dim $1$} — $I$ a \struck{trois} quatre éléments $0$, $1$ et deux
+incomp. $x, y$ \struck{($x \neq y$ \ill{})}
+
+\begin{tikzcd}[column sep=small, row sep=small]
+  & 1 & \\
+  x \arrow[ur, no head] & & y \arrow[ul, no head] \\
+  & 0 \arrow[ul, no head] \arrow[ur, no head] &
+\end{tikzcd}
+
+\emph{dim $2$}
+\begin{itemize}
+  \item[] dim $-1$ — $0$
+  \item[] dim $0$ — $x_0 \ x_1 \ldots x_{n-1}$
+  \item[] dim $1$
+  \item[] dim $2$ — $1$ — contours dont les comp. connexes ont au moins
+    $3$ sommets
+\end{itemize}
+\note{à droite, deux polygones dessinés, un hexagone dont un sommet est
+marqué et un pentagone}
+
+\emph{dim $3$} — On voudrait que si $x$ est un sommet les $y > x$,
+\struck{\ill{}} \add{$y \neq 1$}, forment un contour \emph{convexe} et si $x$
+est une face les $y < x$, $y \neq 0$, forment un \emph{contour}
+($\uncertain{\pi_0 = 0}$)
+\begin{itemize}
+  \item[] $-1$ — $0$
+  \item[] $0$ — sommets
+  \item[] $1$ — arêtes
+  \item[] $2$ — faces
+  \item[] $3$ — $1$
+\end{itemize}
+
+\emph{dim $4$}
+
+\page{32}
+
+\begin{tikzcd}[column sep=small, row sep=small]
+  & \vec{A} \arrow[dl] \arrow[dr] & & A^{\uparrow} \arrow[dl] \arrow[dr] & \\
+  S = \mathfrak{X}_0 & & A = \mathfrak{X}_1 & & F = \mathfrak{X}_2
+\end{tikzcd}
+
+\note{sur la page, les égalités $S = \mathfrak{X}_0$, $A = \mathfrak{X}_1$,
+$F = \mathfrak{X}_2$ sont écrites verticalement sous $S$, $A$, $F$ ; la lettre
+rendue $\mathfrak{X}$ est un $X$ cursif, et $A^{\llcorner\!\to}$ ci-dessous
+rend un exposant qui réunit la flèche verticale de $A^{\uparrow}$ et la
+flèche horizontale de $\vec{A}$}
+
+\begin{itemize}
+  \item[a)] $\vec{A} \hookrightarrow S \times A$, \struck{$\forall$}
+    $\vec{A} \to A$ de rang $2$
+  \item[a')] $A^{\uparrow} \hookrightarrow A \times F$, \ $A^{\uparrow} \to A$
+    de rang $2$
+  \item[b)] $A^{\llcorner\!\to} = \vec{A} \times_A A^{\uparrow} \to S \times F$
+    est de rang $2$ sur son image
+  \item[c)] $\forall\, s \in S$, l'ens $\mathfrak{X}_{\geq s}$ des $a \in A$ et
+    $f \in F$ incidents à $s$ (qui est un \emph{graphe} de sommets $A$,
+    d'arêtes $F$, grâce à b), et un \emph{contour} grâce à a')) est un
+    \emph{polygone} (i.e. est un contour \add{$\neq \emptyset$}
+    \emph{connexe})
+  \item[c')] $\forall\, f \in F$, l'ens $\mathfrak{X}_{\leq f}$ des $a \in A$
+    et $s \in S$ incidents à $f$ (qui est un graphe … grâce à a), et un
+    \emph{contour} grâce à b)) est un \emph{polygone} (i.e. est un contour
+    \add{$\neq \emptyset$} \emph{connexe})
+\end{itemize}
+
+Version \uncertain{commune} (en introduisant $\mathfrak{X}_{-1} = \{\emptyset\}$,
+$\mathfrak{X}_3 = \{1\}$ (plus grand et plus petit élément))
+
+Si $-1 \leq i < j \leq 3$, \add{avec} \uncertain{$\delta =$} $j - i \geq 2$,
+et \struck{\ill{}} $(i,j) \neq (-1,3)$, si $x_i \in \mathfrak{X}_i$,
+$y_j \in \mathfrak{X}_j$, et $\mathfrak{X}_{\,]x_i,y_j[}$ est l'ens ordonné
+des $x \in \mathfrak{X}$ tels que $x_i < x < y_j$, alors la réalisation
+topologique de $\mathfrak{X}_{\,]x_i,y_j[}$ est homéomorphe à
+\struck{\ill{}} $S^{\delta-1}$ (sphère de dim $\delta - 1$). [Se généralise aux
+polyèdres lisses de dim quelconque, cf plus bas …]
+\note{« $\delta =$ » est entouré, et « avec » écrit au-dessus ; l'indice de
+$\mathfrak{X}$, deux fois, est lu d'après la définition qui le suit}
+
+Les conditions a), a'), b) permettent de définir sur $A^{\llcorner\!\to}$ les
+opérations $\sigma_1, \sigma_2$ et $\varepsilon$ [avec
+$\sigma_1\sigma_2 = \sigma_2\sigma_1$ \struck{\ill{}}, soit $\sigma$, et
+$\sigma_1, \sigma_2, \varepsilon$ étant des involutions,
+$\sigma_1, \sigma_2, \sigma, \varepsilon$ étant ss pts fixes —] les conditions
+c), c') assurent que $S$, $F$ « sont » bien les ens de sommets et des faces de
+la carte lisse combinatoire ainsi définie …
+
+\page{33}
+
+On trouve ensuite
+\begin{itemize}
+  \item[] $\widetilde{S} = A^{\llcorner\!\to}/\rho_s \simeq$ ens des couples
+    $(s,\omega)$, $s \in S$, $\omega$ une orientation du \struck{\ill{}}
+    polygone $\mathfrak{X}_{\geq s}$ des $a \in A$ et $f \in F$ incidents à
+    $s$ [i.e. un \add{des 2} ordres circulaires sur l'ens des $a \in A$
+    incidents à $s$, qui définissent sa structure polygonale]
+  \item[] $\widetilde{F} = A^{\llcorner\!\to}/\rho_f$ : ens des couples
+    $(f,\varpi)$, $f \in F$, $\varpi$ une orientation du polygone
+    $\mathfrak{X}_{\leq f}$ des \struck{\ill{}} $a \in A$ et $s \in S$
+    incidents à $f$, [i.e. un des 2 ordres circ. sur l'ens. des $a \in A$
+    incidents à $f$, qui définissent sa structure polygonale]
+  \item[] $\widetilde{A} = A^{\llcorner\!\to}/\sigma$ = ens des couples
+    $(a,u)$, $a \in A$, $u \in \vec{A}(a) \wedge A^{\uparrow}(a)$, où
+    $\vec{A}(a)$ ($A^{\uparrow}(a)$) est l'ens des arcs tang. (ou
+    transverses) \uncertain{portés} par l'arête $a$.
+\end{itemize}
+
+\[
+  A^{\wedge} = \operatorname{Im}(A^{\llcorner\!\to} \to S \times F)
+  = \text{rel. d'incidence entre $S$ et $F$}
+\]
+
+\begin{tikzcd}[column sep=small, row sep=small]
+  & & A^{\llcorner\!\to} \arrow[dll, "\rho_S"'] \arrow[dl, "\uncertain{\sigma_2}"'] \arrow[d, "\sigma"] \arrow[dr, "\sigma_1"] \arrow[drr, "\rho_F"] & & \\
+  \widetilde{S} \arrow[d, "\sigma_1"'] & \vec{A} \arrow[dl] \arrow[dr, "\sigma_1"] & \widetilde{A} & A^{\uparrow} \arrow[dl, "\sigma_2"'] \arrow[dr] & \widetilde{F} \arrow[d, "\sigma_2"] \\
+  S & & A & & F
+\end{tikzcd}
+
+\note{sous $\widetilde{A}$ est écrit « $\sigma_1 \updownarrow \sigma_2$ »,
+sans flèche qui le rattache au reste du diagramme}
+
+\begin{tikzcd}[column sep=small, row sep=small]
+  & A^{\llcorner\!\to} \arrow[dl] \arrow[d] \arrow[dr] & \\
+  \widetilde{S} \arrow[d] & A^{\wedge} \arrow[dl] \arrow[dr] & \widetilde{F} \arrow[d, no head] \\
+  S & & F
+\end{tikzcd}
+
+\note{le trait de $\widetilde{F}$ à $F$ n'a pas de pointe sur la page}
+
+\begin{align*}
+  A^{\llcorner\!\to} &\simeq \widetilde{S} \times_S \vec{A} \simeq \struck{\ill{}}\, A^{\uparrow} \times_F \widetilde{F} \\
+  &\simeq \vec{A} \times_A A^{\uparrow} \\
+  &\simeq \vec{A} \times_A \widetilde{A} \simeq \widetilde{A} \times_A A^{\uparrow} \\
+  &\simeq \widetilde{S} \times_S A^{\wedge} \simeq A^{\wedge} \times_F \widetilde{F}
+\end{align*}
+
+$A^{\llcorner\!\to}$ s'identifie aux rel. d'incidence entre $(S, A, F)$
+simultanées
+\begin{itemize}
+  \item[] entre $\widetilde{S}$, $\widetilde{A}$,
+  \item[] entre $\widetilde{A}$, $\widetilde{F}$,
+  \item[] entre $\widetilde{S}$, $\widetilde{F}$,
+\end{itemize}
+
+\page{34}
+
+Explicitons l'axiome
+
+D) Toute \add{partie} \struck{\ill{}} minorée \add{$\neq \emptyset$}
+\struck{\ill{}} de
+$\mathfrak{X}_{**} = \mathfrak{X}_0 \cup \mathfrak{X}_1 \cup \mathfrak{X}_2$
+admet un inf, ($\Leftrightarrow$ toute partie majorée \add{$\neq \emptyset$}
+de $\mathfrak{X}_{**}$ admet un sup).
+
+\struck{Comme il résulte de ce que les él. minimaux de $\mathfrak{X}_{**}$
+sont les él. de $S$, les parties minorées de $\mathfrak{X}_{**}$ sont
+celles contenues dans un \add{(ou plus petit él.)} $\mathfrak{X}_{\geq s}$.
+Or comme un ordonné \ill{} est un polygone, et dans un polygone
+\uncertain{satisfait} la condition \add{d'existence} de borne inférieure ses
+\ill{} \ill{} \ill{} est $\geq 3$ (dans le cas excluant alors $n = 2$
+ici …) Donc la condition D se réduit :}\note{ce paragraphe est encadré et
+barré de traits obliques}
+
+\struck{d) $\forall\, s \in S$, il y a au moins trois arêtes \add{$a \in A$}
+incidentes à $s$.}
+
+Il suffit d'exprimer que deux él. distincts \add{minimaux distincts
+\uncertain{majorés}} de $\mathfrak{X}_{**}$ \ill{} ont un inf. Si l'un des
+deux est $\in \mathfrak{X}_0$ (i.e. est minimal) c'est trivialement
+satisfait. Il reste : 3 \uncertain{cas}
+\begin{itemize}
+  \item[1°)] \emph{Deux arêtes} : on trouve que 2 arêtes qui ont \ill{}
+    sommets sont égales, i.e. $(S, A, \vec{A})$ est un graphe strict
+  \item[2°)] \emph{Deux faces} : on trouve \struck{qu'elles \ill{}}
+    \struck{que les deux faces distinctes de $(F, A, A^{\uparrow})$} \add{qui
+    ont en commun deux sommets}, \struck{elles-mêmes} ceux-ci sont liés
+    \struck{\ill{}} par l'arête qui les joint, \add{\ill{} \uncertain{fait}}
+    \struck{et l'un d'eux \ill{} sommet}
+  \item[3°)] Une arête \add{$a$} et une face \add{$f$} \struck{non} incident\add{e}s
+    — mais ayant un sommet commun : \struck{il} faut exprimer que le deuxième
+    sommet de $a$ n'est pas dans $f$, ou encore \struck{\ill{}} : si $f$ est
+    incidente aux deux sommets d'une arête, elle est incidente à l'arête.
+\end{itemize}
+
+Regroupons, on trouve
+
+\marginal{toute arête est le sup de l'ens. de ses 2 extrémités}\note{en
+regard de d$_1$) et d$_2$), qu'une accolade réunit}
+\begin{itemize}
+  \item[d$_1$)] Une arête est déterminée par \struck{ses deux} l'ens de ses
+    extrémités
+  \item[d$_2$)] Une face contenant les 2 extr. d'une arête contient celle-ci
+\end{itemize}
+
+\marginal{toute arête est le Inf de l'ens des deux faces incidentes}\note{en
+regard de d$'_1$) et d$'_2$), qu'une accolade réunit}
+\begin{itemize}
+  \item[d$'_1$)] Une arête est déterminée par l'ens des deux faces incidentes
+  \item[d$'_2$)] Les deux faces incidentes à une arête n'ont d'autre sommet
+    incident commun que ses extrémités
+\end{itemize}
+
+\page{35}
+
+[$\mathfrak{X}$ un ordonné, $A \subset \mathfrak{X}$, $B$ l'ens des
+$b \in \mathfrak{X}$ qui majorent $A$ \struck{\ill{}} Par définition,
+$\operatorname{Sup}_{\mathfrak{X}} A$ existe ssi $B$ a un plus petit élément
+$\beta$, et on pose \struck{\ill{}} $\operatorname{Sup}_{\mathfrak{X}} A = \beta$.
+Si p. ex. $A$ est vide, $B = \mathfrak{X}$, et
+$\operatorname{Sup}_{\mathfrak{X}} \emptyset$ existe ssi $\mathfrak{X}$ a un
+plus petit élément (qui est alors $\operatorname{Sup}_{\mathfrak{X}} \emptyset$).
+On définit dualement $\operatorname{Inf}_{\mathfrak{X}} A \ldots$
+
+\emph{Prop 1} Si $A$ a un plus grand élément \add{$\alpha$}, il a un sup, et c'est
+$\alpha$ (Trivial)\note{la Prop 1 est écrite serrée entre les lignes, au-dessus
+de la Prop 2}
+
+\emph{Prop 2} Pour que $\operatorname{Sup}_{\mathfrak{X}} A$ existe, i.e. $B$
+ait un plus petit él., il f. et s. que $\operatorname{Inf}_{\mathfrak{X}} B$
+existe, et alors $\operatorname{Inf}_{\mathfrak{X}} B = \operatorname{Sup}_{\mathfrak{X}} A$.
+
+
+C'est évidemment \uncertain{néc.} d'après prop. 1. Suff ? Soit
+$\widetilde{A}$ l'ens des $a \in \mathfrak{X}$ qui minorent $B$. Donc
+$A \subset \widetilde{A} < B$. Par hypothèse (B admet un Inf) $\widetilde{A}$ a
+un plus grand él. $\alpha$, et que majorant de $\widetilde{A}$ et a fortiori
+\uncertain{majorant} de $A$, donc $\alpha \in B$, et étant dans
+$\widetilde{A}$ il minore $B$, donc il est un plus petit él. de $B$, cqfd.
+
+\emph{Cor} Si tte partie de $\mathfrak{X}$ admet un Inf, alors tte partie de
+$\mathfrak{X}$ admet un Sup, et réciproquement. \add{\uncertain{conj.
+\ill{}}} Si tte partie \struck{\ill{}} minorée \add{de $\mathfrak{X}$} admet un
+Inf, alors tte partie non vide (majorée) de $\mathfrak{X}$ admet un Sup, et
+réciproquement. Donc pour que tte partie min. non vide de $\mathfrak{X}$
+admette un Inf, il f. et s. que tte partie majorée non vide de
+$\mathfrak{X}$ admette un Sup.]
+
+\page{36}
+
+Montrons que l'axiome $D = $ d) + d') implique
+
+\emph{Corollaire 1} (moyennant l'axiome D) pour tt $s \in S$,
+\struck{\ill{}} $p(s) = \operatorname{Card}\bigl(A\{s\} = \{\, a \in A \mid a \geq s \,\}\bigr) \geq 3$,
+et pour tout $f \in F$,
+$q(f) = \operatorname{Card}\bigl(A\{f\} = \{\, a \in A \mid a \leq f \,\}\bigr) \geq 3$.
+
+En effet, \struck{on aurait} $p(s) \neq 0$, en vertu de c). Si on avait
+$p(s) = 1$, on aurait par c) une \add{unique} seule face incidente à l'arête
+$a$ incidente à $s$, contrairement à b). Si on avait $p(s) = 2$, en vertu de
+c) les deux arêtes issues de $s$ seraient incidentes simultanément aux deux
+faces incidentes à $s$, contrairement à d$'_1$). Donc $p(s) \geq 3$. La relation
+$q(f) \geq 3$ s'établit de même.
+\marginal{\emph{NB} $p(s) \geq 2$ est indépendant de D, de même
+$q(f) \geq 2$.}
+
+\emph{Corollaire 2} (moyennant l'axiome D) : toute face $f \in F$ est le sup
+de l'ens de ses sommets, et le sup de l'ens de ses arêtes. Tout sommet est le
+inf de l'ens des faces qui y sont incidentes, et le inf de l'ens des arêtes
+incidentes.
+
+\page{37}
+
+Soit $\mathfrak{X}$ un ens. ordonné fini (on ne suppose pas qu'il ait un plus
+petit ou plus grand élément). On note \add{$|\mathfrak{X}| =$}
+réal.$(\mathfrak{X})$ sa réalisation topologique (avec sa décomposition \ill{}
+canonique, permettant d'identifier $\mathfrak{X}$ à un ens. ordonné de parties
+fermées de $\mathfrak{X}$ \add{recouvrant $\mathfrak{X}$}). Pour tt
+$x \in \mathfrak{X}$, soit
+$\mathfrak{X}_{<x} = \struck{\ill{}}\ \{\, y \mid y \in \mathfrak{X},\ y < x \,\}$.
+Faisons l'hypothèse :
+
+(R) $\forall\, x \in \mathfrak{X}$, $|\mathfrak{X}_{<x}|$ est une sphère
+topologique.
+
+Soit $\delta(x) = \dim |\mathfrak{X}_{<x}| + 1 = \dim |\mathfrak{X}_{\leq x}|$.
+On trouve
+
+\emph{Proposition} Si $x < y$, on a $\delta(x) < \delta(y)$ (i.e.
+$\delta : \mathfrak{X} \to \mathbb{N}$ est strictement croissante). Pour qu'on
+ait \struck{\ill{}} $\delta(y) = \delta(x) + 1$ il f. et s. que $y$ soit un
+successeur de $x$.
+
+Première assertion claire, compte tenu que $\dim \underbrace{C(X)}_{\text{cône sur } X} = \dim X + 1$,
+et $\dim$ est une fonction croissante … L'assertion « il faut » en
+résulte, prouvons « il suffit ». Supposons que $y$ soit un successeur de $x$.
+Considérons $S = |\mathfrak{X}_{<y}|$ sphère de dim
+$d = \delta(y) - 1 \geq \delta(x)$, contenant $|\mathfrak{X}_{\leq x}|$, qui
+est une facette maximale, donc de dim $= d$, donc $\delta(x) = \delta(y) - 1$,
+cqfd. [Pour qu'on ait $\delta(y) = \delta(x) + 1$, il suffit que $y$ soit
+succ. de $x$ et $|\mathfrak{X}_{<y}|$ une \emph{variété} topologique]
+\marginal{vérifier en général pour variété}
+
+\page{38}
+
+\emph{Cor} Moyennant (R), $\mathfrak{X}$ satisfait la condition des chaînes, et
+$\delta$ est l'unique fonction $\mathfrak{X} \to \mathbb{N}$ telle que
+\begin{itemize}
+  \item[a)] $\delta(y) = \delta(x) + 1$ si $y$ est un successeur de $x$
+  \item[b)] $\delta(x) = 0$ si $x$ élément minimal de $\mathfrak{X}$.
+\end{itemize}
+
+\emph{Prop} \add{(Moyennant R)} Soit $x < y$, alors
+$|\mathfrak{X}_{x<\cdot<y}|$ est une sphère topologique de dim.
+$\delta(y) - \delta(x) - 2$ (on convient de considérer l'espace vide comme
+sphère top. de dim. $-1$)\note{dans la marge gauche, en regard de cette
+proposition et du lemme qui suit, deux signes serrés que l'on ne lit pas}
+
+Ceci résulte du
+
+\emph{Lemme} Soit $\mathfrak{Y}$ un ens ordonné fini tel que $|\mathfrak{Y}|$
+est une $d$-variété topologique. Alors
+\begin{itemize}
+  \item[a)] $\forall\, x \in \mathfrak{Y}$, $|\mathfrak{Y}_{>x}|$ est une sphère
+    top. de dim $d - \delta(x) - 2$
+  \item[b)] $\forall\, x \in \mathfrak{Y}$, $|\mathfrak{Y}_{<x}|$ est une sphère
+    top. de dim $\delta(x) - 1$ (i.e. $\mathfrak{Y}$ satisfait la condition
+    (R))
+  \item[c)] $\forall\, z, x \in \mathfrak{Y}$, $z < x$, $|\mathfrak{Y}_{z<\cdot<x}|$
+    \struck{satisfait} est une sphère topologique de dim
+    $\delta(x) - \delta(z) - 2$.
+\end{itemize}
+
+\page{39}
+
+$\mathfrak{X}$ un ordonné fini. On suppose qu'il satisfait la condition
+\add{$\overline{\mathfrak{X}} = \mathfrak{X} \cup$ plus petit él.}
+
+($\Sigma$) Soient $x \in \overline{\mathfrak{X}}$, $y$ un successeur de $x$,
+$z$ un successeur de $y$. Alors il existe un unique $y' \in \mathfrak{X}$, tel
+que $y' \neq y$, $x < y' < z$ ;
+\struck{\ill{} $y'$ est un successeur de $x$ et \ill{} minimal de
+$\mathfrak{X}$, $z$ un successeur, $\exists\, y' \in \mathfrak{X}$ tel que
+$y' < z$ \ill{} et $y'$ est minimal et $z$ un successeur de $y'$}\note{deux
+lignes et demie barrées, avec un ajout interlinéaire lui-même barré, où se lit
+« si $y$ est un él. »}
+
+Le $y'$ en question (noté $\sigma_{x,z}(y)$) est un successeur de $x$, et $z$
+en est un successeur. En effet, si on avait \add{p. ex.} $x < y'' < y'$, on
+aurait $x < y'' < z$, donc (comme $y'' \neq y'$) $y'' = y$ donc
+$y < y' < z$, contrairement à l'hyp. que $z$ est un succ. de $y$.
+
+\begin{tikzcd}[column sep=small, row sep=small]
+  & y' \arrow[dr] & \\
+  x \arrow[ur] \arrow[dr] & & z \\
+  & y \arrow[ur] &
+\end{tikzcd}
+
+\note{croquis en marge gauche ; au-dessus, un premier croquis du même
+losange, raturé}
+
+\marginal{\emph{On suppose} pour $x \in \mathfrak{X}$ les chaînes
+\struck{\ill{}} \add{\uncertain{issues de $x$}} \struck{\ill{}} maximales
+\struck{\ill{}} toutes de longueur $n$.}\note{écrit en long dans la marge
+gauche, en regard de ce qui suit}
+Un \emph{repère} de $\mathfrak{X}$ \add{($n \geq 0$)} : suite
+$x_0, x_1, \ldots, x_n$ d'éléments de $\mathfrak{X}$, tels que
+\begin{itemize}
+  \item[a)] $x_0$ pt minimal de $\mathfrak{X}$
+  \item[b)] $\forall\, 0 \leq i \leq n-1$, $x_{i+1}$ est un successeur de $x_i$.
+\end{itemize}
+Soit $R_n(\mathfrak{X})$ l'ens des $n$-repères.
+
+\emph{Structures}
+\begin{itemize}
+  \item[a)] $R_n \xrightarrow{p_n} R_{n-1}$ — ($n \geq 1$)
+  \item[b)] Opérations $\sigma_0, \sigma_1, \ldots, \sigma_{n-1}$ — (si $n \geq 1$)
+\end{itemize}
+
+\emph{Propositions}
+\begin{itemize}
+  \item[a)] Les $\sigma_i$ sont des involutions ($n \geq 1$)
+  \item[b)] Soit $n \geq 3$, et $0 \leq i < j \leq n-1$, avec $j \neq i+1$,
+    alors $\sigma_i$ et $\sigma_j$ commutent \struck{\ill{}} (dans $R_n$).
+  \item[c)] Soit $0 \leq i_1 < i_2 < \cdots < i_\nu \leq n-1$, \add{($\nu \geq 1$)}
+    avec $i_{\alpha+1} \neq i_\alpha + 1$ $\forall\, \alpha = 1, \ldots, \nu-1$.
+    Alors $\sigma_{i_1}\sigma_{i_2}\cdots\sigma_{i_\nu}$ (qui est une
+    involution de $R_n$) est sans pt fixe.
+  \item[d)] $R_n \xrightarrow{p_n \cdots p_{p+1}} R_p$ commute à
+    $\sigma_{n-1}, \ldots, \sigma_{p+1}$ et $\sigma_{p-1}, \ldots, \sigma_0$
+\end{itemize}
+
+\page{40}
+
+\note{la moitié supérieure de la page, jusqu'à « 2 sommets … », est
+barrée de trois longs traits obliques ; elle se lit néanmoins et est donnée
+ici. En marge, plusieurs petits croquis de sommets et d'arêtes, dont un
+losange, un éventail hachuré et un faisceau de flèches, qui ne sont pas
+reproduits}
+
+\struck{$\mathfrak{X}_0 = S$, $\mathfrak{X}_1 = A$, $\mathfrak{X}_2 = F$}\note{les égalités sont écrites verticalement, chaque
+$\mathfrak{X}_i$ au-dessus de sa lettre}
+
+\marginal{$x_0 \ldots x_p\ x_{p+1} \ldots x_{n-1}\ x_n$}\marginal{$y_1 - y_2 \ldots y_n$}\marginal{$x_0 - x_1 - x_2 \ldots - x_n$}\note{en
+haut à droite, trois suites superposées dans cet ordre ; une accolade est
+tracée sous $x_{p+1} \ldots$, et la suite des $y_i$ se raccorde par un trait
+à $x_0$}
+
+\struck{a) $\forall\, f \in F$, les $s \in S$ et $a \in A$ incidents : $F$ forme
+un polygone, donc a) si $a < f$ ($a \in A$) $a$ a exactement 2 sommets b) si
+$s < f$ ($s \in S$) il y a exactement 2 arêtes entre $s$ et $f$) c) Condition
+de connexité}
+
+\struck{On trouve aussi que les arêtes incidentes à une face (\ill{} ou autour
+de $|\mathfrak{X}|$ des pts au voisinage desquels $|\mathfrak{X}|$ est de dim
+1 !) et \ill{} on conclut que les arêtes a exactement 2
+sommets …}
+
+… en faisant que $\sigma_{n-1}, \ldots, \sigma_{p+1}$ triviales sur $R_p$
+$(n > p \geq 0)$\note{cette ligne, non barrée, paraît compléter l'article d)
+de la page 39}
+
+\end{document}

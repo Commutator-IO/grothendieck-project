@@ -1,0 +1,611 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 87, batch 1 (pages 1-20).
+% Established from the facsimile archives/batches/87/batch-01.pdf (a mirror of
+% https://grothendieck.umontpellier.fr/87.pdf), per the skill
+% transcribe-grothendieck. The folder is forty pages; this is the first of two
+% batches.
+%
+% Sixteen of the twenty leaves carry his hand; fifteen are transcribed. Page 1
+% is a tan wrapper sheet with nothing on it, and pages 16 and 20 are blank tan
+% sheets of the same kind: all three are skipped, the gaps in the page numbers
+% being the record. Page 15 is a tan cover carrying, in ink in the top right
+% corner, the single word « Cubes », and in pencil, circled, « (13 p.) » — the
+% latter is not obviously his and is not reproduced as his. The page takes no
+% \page marker; « Cubes » becomes the heading of the second run and a \note
+% says where it comes from. The inventory's title « Polyèdres convexes » is
+% the archivists' (unbracketed); the first run's own heading, on page 2, is
+% « Géométrie des convexes ». No pagination of his own on any leaf.
+%
+% Two runs. Pages 2-14 are a course-like development of the geometry of convex
+% sets in a real affine space. Page 2 is a programme: convex parts, stability,
+% barycentric description, the line case, the interior, and the radial
+% homeomorphism between two compact convex bodies. Pages 3-5 define the
+% facettes of a convex C as the classes of the relation R(x,y) « x = y or x
+% and y interior to D_{x,y} n C », with E_F the affine span, the order F' < F
+% iff F' c \bar F, finite sups (F_x = sup F_{x_i} for x a positive barycentre),
+% extreme points, Krein-Milman in finite dimension, and finiteness of the
+% facettes of a polyhedral part. Pages 5-6 take up polars (A° = {x' | <x,x'>
+% >= -1 on A}), the bipolar theorem A°° = closed convex hull of A u {0}, and
+% Hahn-Banach in finite dimension, proved on page 7 by reduction to the plane.
+% Pages 7-10 prove that « secteurs polyédraux » (finite intersections of
+% closed half-spaces = closed convex hulls of finitely many points and closed
+% half-lines) are exchanged by polarity, via a lemma (page 9) that a finite
+% intersection of half-spaces has finitely many extreme points. Pages 10-14:
+% « Polarité et facettes » — a bijection F |-> F^0 between affine subspaces not
+% through the origin, a theorem that polarity induces an order-reversing
+% bijection between facettes of polar sectors, hence an anti-isomorphism
+% Fac(C) = Fac(C') for polar polytopes; Corollary 3 that for a « polyèdre
+% combinatoire strict » Phi, Phi° and the intervals Phi_{x,y} are again such;
+% the dimension function (successor iff dimension goes up by one, Cor. 4-6);
+% and Cor. 7, the « diamond » property: an interval of length two has exactly
+% two middle elements, because a one-dimensional polytope is a segment. The
+% notion « polyèdre combinatoire strict » is used on pages 12 and 14 without a
+% definition on these leaves.
+%
+% Pages 17-19 (under « Cubes »): an intrinsic characterisation of an n-cube by
+% its set Phi of affine subspaces (the affine spans of its faces), through
+% axioms a)-e) — Phi contains the empty set and E, every element of Phi** is
+% an intersection of maximal ones; each maximal F has a unique « opposite » F'
+% with Inf(F,F') = empty, an involution sigma without fixed point on the set B
+% of maximal elements; Phi \ {empty} -> Gamma_part(B/I) bijective; a margin
+% says a)-c) mean Phi is a « cube combinatoire ». Then the reconstruction: the
+% directions of the hyperplanes split the translation space T as a product of
+% lines T_i, E as a product of T_i-torsors E_i, each carrying a two-point B_i,
+% with T_i = Ker(k^{B_i} -> k), E_i = eps^{-1}(1), T = Ker(k^B -tr-> k^I). It
+% breaks off at the foot of page 19 (« Si J c I, on considère »), and
+% presumably continues in batch 2.
+%
+% Readings to check first: the abbreviation read as Fac(C) throughout (« F..(C) »
+% on the leaves); the superscript on pages 10-11 read as ^0 (for the affine
+% correspondence), distinct from the polar °; the superscript read as ** on
+% Phi** (page 17); the letter read as \mathbb{H} on page 18; the word opening
+% « Dém. » on page 7 (twice, \ill); the cancelled block on page 8 (a) => b),
+% given as one \struck{\ill{}}); page 13 « dim C = 0 ou -1 ».
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-09-24 — first pass, unchecked against the pages by a human.
+
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{87}
+\batch{1}
+\pages{1}{20}
+\dating{s.d. — le groupe « Géométrie et topologie combinatoire » (69 à 102) est daté 1976-[vers 1986]}
+\watermark{Édition de démonstration}
+\foldertitle{Polyèdres convexes : notes manuscrites (s.d.)}
+
+\begin{document}
+\section{Géométrie des convexes}
+
+\page{2}
+
+\note{le titre est de sa main, souligné, en tête de la page 2. Ses rubriques
+ouvertes par un astérisque sont rendues ici en liste sur cette page, puis en
+sous-sections à partir de la page 3}
+
+\begin{itemize}
+  \item Partie convexe d'un espace affine réel : définition, stabilité par
+    intersection, partie convexe \emph{engendrée} --- description en termes de
+    combinaisons barycentriques, en termes de simplexes, comparaison avec
+    espace affine \emph{engendré}. Enveloppe convexe d'\uncertain{une}
+    \struck{\uncertain{réun.}} famille d'ens. convexes. Stabilité par images
+    inv. et directes par appl. affines, par sommes.
+  \item Cas de \struck{$\mathbf{R}$} droite : parties convexes sont les
+    \emph{intervalles}. \struck{Une} partie \struck{convexe} $C$ d'un
+    \struck{espace} espace affine réel $E$ est convexe ssi son intersection
+    avec toute droite est un intervalle de ladite.
+
+    Dimension d'un convexe.
+  \item Intérieur d'un convexe (engendrant $E$ affinement) \uncertain{i.e.} de
+    dim $E$
+\end{itemize}
+
+\begin{itemize}
+      \item[a)] $\mathring{C} \neq \emptyset$
+      \item[b)] Si $x \in \mathring{C}$, alors
+        \[
+          \mathring{C} = \bigcap_{\substack{D \text{ droite de } E \\ \text{passant par } x}} \operatorname{int}_D (D \cap C)
+        \]
+        \[
+          \dot{C} = \bigcap_D \operatorname{bnd}_D (D \cap C)
+        \]
+        \[
+          \overline{C} = \bigcap_D \overline{D \cap C}
+        \]
+        \note{à droite de ces formules, un croquis : une région $C$ hachurée
+        par deux familles de droites parallèles. Le signe devant
+        $\operatorname{bnd}_D$ est bien une intersection sur la page, là où
+        l'on attendrait une réunion}
+      \item[c)] Si $C$, $C'$ convexes compacts engendrant $E$, $x \in
+        \mathring{C}$, $x' \in \mathring{C}'$, $\exists$ homéom. unique
+        $h : C \simeq C'$ avec $h(x) = x'$, $h$ étant \struck{linéaire}
+        affine sur les demi-droites issues de $x$ et les transformant en
+        demi-droites \uncertain{parallèles}.
+\end{itemize}
+
+\page{3}
+
+\subsection{Facettes d'un convexe}
+
+$R(x,y)$ : ($x = y$ ou $x$ et $y$ sont intérieurs à $D_{x,y} \cap C$) est une
+relation d'équivalence. Une partie $F$ de $C$ est dite une \emph{facette} si
+$\forall x \in F$, on a $F = \{ y \in C \mid R(x,y) \}$
+--- \struck{\uncertain{on exclut}} \uncertain{donc} les $F \neq \emptyset$
+\struck{\uncertain{facettes}} --- $F$ est une classe suivant $R$. Notations
+$E_C$, $E_F$\note{sous-espaces affines engendrés ; l'indice du premier $E$
+est un $C$ appuyé. L'ensemble des facettes est noté par une abréviation lue
+$\mathrm{Fac}(C)$ dans tout le lot}.
+
+\emph{Point extrémal} $x$ : \struck{facette réduite à} $\{x\}$ est facette
+$\Leftrightarrow$ $\forall D$ droite passant par $x$, $x$ n'est pas intérieur
+à $D \cap C$ dans $D$.
+
+(1) Supposons $C$ de dim finie $d$. $\exists !$ facette de dim $d$, c'est
+$\operatorname{int}_{E_C}(C)$.
+
+(2) Soit $F \in \mathrm{Fac}(C)$. \struck{Alors} $E_F \cap C$ est une réunion
+de facettes de $C$, et \struck{\ill{}} les facettes de $C$ contenues dans
+$E_F \cap C$ sont les facettes de $E_F \cap C$. Si $E$ de dim finie, on a
+$E_F \cap C = \overline{F} \cap C$ ($= \overline{F}$ si $C$ fermé), et
+$F = \operatorname{int}_{E_F}(E_F \cap C)$, \struck{Pour deux}
+
+(3) Pour deux facettes $F$, $F'$, conditions équivalentes :
+\[
+  \begin{array}{ll}
+    E_{F'} \subset E_F & \\
+    E_{F'} \cap C \subset E_F \cap C & (\text{ou } E_{F'} \cap C \subset E_F) \\
+    F' \subset E_F \cap C & (\text{ou } F' \subset E_F) \\
+    F' \subset \overline{F} \cap C & (\text{ou } F' \subset \overline{F}) \\
+    \overline{F'} \subset \overline{F} &
+  \end{array}
+\]
+\note{une accolade réunit les deux dernières lignes, avec « si $E$ de dim
+finie »}
+
+C'est là une \emph{relation d'ordre} dans l'ens. $\mathrm{Fac}(C)$ des
+facettes de $C$. Si $x, y \in C$, \struck{\ill{}}
+\[
+  F_x \prec F_y \Leftrightarrow
+  \bigl[ x = y \text{ ou } x \neq y \text{ et }
+  y \in \operatorname{Int}_{D_{xy}} (D_{xy} \cap C) \bigr]
+\]
+\note{un mot est noirci devant $F_x$}
+
+\page{4}
+
+(4) Soient $(x_i)_{i \in I}$ une famille finie de pts de $C$,
+$(\lambda_i)_{i \in I}$ avec $\lambda_i > 0$, $\sum \lambda_i = 1$, donc
+$x = \sum \lambda_i x_i \in C$. Ceci dit, on a
+\[
+  F_x = \sup F_{x_i}.
+\]
+(Par suite, dans $\mathrm{Fac}(C)$ les sup finis existent --- donc les sup
+quelconques \uncertain{aussi} \uncertain{pourvu} que $\dim C < +\infty$).
+
+(5) Soit $C' \subset C$ une partie de $C$ réunion de facettes, et soit
+$\Phi \subset \mathrm{Fac}(C)$ défini par
+\[
+  \Phi = \{ F \in \mathrm{Fac}(C) \mid F \subset C' \}
+\]
+Pour que $C'$ soit convexe, il faut et suffit que $\Phi$ soit stable par sup
+finis ; pour que $C'$ soit \struck{convexe et} fermé \uncertain{relat.} dans
+$C$ (car dim $E < \infty$) il faut et suffit que $\Phi$ \struck{soit stable
+par sup finis et} qu'avec une facette il contienne celles qui sont
+\uncertain{majorées}. \struck{(5)} (Dim finie), (6) Pour que $C'$ soit de la
+forme $\overline{F} \cap C$ ($F \in \mathrm{Fac}(C)$) il faut et suffit que
+$\Phi$ soit fermé, convexe et \struck{soit} \struck{\ill{}}
+\uncertain{réunion} de facettes. L'ens. des facettes \uncertain{relat.}
+\uncertain{fermées} de $C$ \struck{\ill{}} est stable par intersections
+quelconques (donc il y a des inf quelconques dans l'ens. des facettes de $C$).
+
+\page{5}
+
+(7) Supposons $C$ \uncertain{de} dim finie compact. Alors $C$ est l'enveloppe
+convexe de l'ens. de ses pts extrémaux.
+
+(8) Supposons $C$ partie polyédrale dans $E$ de dim finie (i.e. $C$ réunion
+finie de simplexes $\Leftrightarrow$ réunion finie d'enveloppes convexes de
+parties finies de $E$). Alors l'ens. des facettes de $C$ est fini.
+
+\emph{Cor.} Polyèdres convexes : parties convexes compactes telles que
+$\mathrm{Fac}(C)$ (ou $\mathrm{Fac}_0(C)$, ens. des pts extrémaux) soit fini.
+\struck{Polaires}
+
+\subsection{Polaires}
+
+$E$, $E'$ espaces vectoriels duals l'un de l'autre. Pour partie $A$ de $E$,
+on pose
+\[
+  A^\circ = \{ x' \in E' \mid \langle x, x' \rangle \geq -1 \ \forall x \in A \}
+  = \bigcap_{x \in A} H(x)
+  \qquad (\text{où } H(x) = \{ x' \in E' \mid \langle x, x' \rangle \geq -1 \})
+\]
+De même on définit $A'^\circ \subset E$ pour $A' \subset E'$.
+
+\emph{Th. 1} Pour $A \subset E$, … $A^{\circ\circ}$ = env. conv. fermée
+de $A \cup \{0\}$.
+
+\emph{Corollaire} $A \mapsto A^\circ$ et $A' \mapsto A'^\circ$ sont des appl.
+bijectives inv. l'une de l'autre entre l'ens. des parties convexes fermées de
+$E$ contenant $0$, et l'ens. analogue
+
+\page{6}
+
+pour $E'$. \struck{En} De plus, pour de telles parties
+\[
+  A_1 \subset A_2 \Longleftrightarrow A_2^\circ \subset A_1^\circ
+\]
+(i.e. la bijection précédente renverse l'ordre)
+
+\emph{Cor}
+\[
+  \overline{\mathrm{Env}}(A_1, A_2) = A_1^\circ \cap A_2^\circ
+\]
+\[
+  (A_1 \cap A_2)^\circ = \overline{\mathrm{Env}}(A_1, A_2)
+\]
+\note{ainsi sur la page : aucun signe de polaire sur le membre de gauche de
+la première formule ni sur les arguments du second membre de la seconde}
+
+\emph{Cor} \struck{$A$} $0 \in \operatorname{int}(A) \Longleftrightarrow
+A^\circ$ compact
+
+$A$ \uncertain{cpct} $\Longleftrightarrow 0 \in$ \struck{\ill{}}
+$\operatorname{int}(A^\circ)$
+
+Le théorème est conséquence \struck{du théo.} \ill{} est équivalent :)
+\note{la ligne est marquée à gauche d'un grand crochet}
+
+\emph{Théorème 1'} Soit $C$ une partie de $E$. Pour que $C$ soit convexe et
+fermé, il faut et suffit que $C$ soit intersection de demi-espaces fermés.
+
+Résulte du
+
+\emph{Théorème 1''} (Hahn-Banach) Soit $U$ une partie \emph{convexe ouverte}
+de l'espace vectoriel réel $E$ de dim finie, $F \subsetneq E$ un sous-espace
+vectoriel de $E$ tel que $F \cap U = \emptyset$, alors $\exists$ hyperplan $H$
+de $E$ contenant $F$, tel que $H \cap U = \emptyset$.
+
+\page{7}
+
+\struck{Résultats} \emph{Dém.} \ill{} : remplaçant $U$ par
+$\bigcup_{\lambda > 0} \lambda U$, OPS $U$ un \emph{cône} (i.e. stable par
+multiplication par $\lambda > 0$) Il suffit de prouver que si $F$ n'est pas
+un hyperplan, $\exists F' \supset F$, $F$ de codim 1 dans $F'$ i.e.
+$\dim F' = \dim F + 1$. OPS $\dim E = \dim F + 2$. \ill{} : passant au
+quotient par $F$, on se ramène au cas $\dim E = 2$, $F = 0$. OPS
+$U \neq \emptyset$.\note{le même mot, non lu, ouvre les deux phrases}
+
+On montre alors que ou bien $U$ est un demi-espace ouvert, ou bien $\exists$
+base $e_1, e_2$ telle que
+\[
+  U = \{ \lambda_1 e_1 + \lambda_2 e_2 \mid \lambda_1, \lambda_2 > 0 \}
+\]
+\note{dans la marge gauche, deux axes perpendiculaires issus d'un point}
+
+Dans les deux cas on gagne …
+
+\subsection{Secteurs polyédraux}
+
+\emph{Prop.} Soit $C$ partie de $E$ (espace affine de dim finie) Conditions
+équivalentes :
+\begin{itemize}
+  \item[a)] $C$ intersection finie de demi-espaces fermés
+  \item[b)] $C$ enveloppe convexe fermée d'un ens. fini de pts et de
+    demi-droites fermées (qu'on peut supposer \struck{\uncertain{partant}}
+    \uncertain{issues} \uncertain{d'une origine} un pt $x \in C$ donné à
+    l'avance …)
+  \item[b')] (si compact) $C$ est un polyèdre convexe
+\end{itemize}
+
+\page{8}
+
+\emph{Dém.} Si $C = \emptyset$ les deux conditions sont satisfaites. Donc OPS
+$C \neq \emptyset$. \struck{Soit $x \in C$, on le prend comme origine} OPS
+$C$ convexe fermé, et \struck{OPS $C = C^{\circ\circ}$, \ill{} $C' =
+C^\circ$ \ill{}} \uncertain{$C$ engendre $E$} (car on voit que les deux
+conditions sur $C$ \uncertain{ne changent pas} si on remplace $E$ par $E_C$).
+Soit $x \in \mathring{C}$, on le prend comme origine, on aura
+\[
+  C = C'^\circ, \quad C' = C^\circ.
+\]
+D'où $C'$ est compact.
+
+\struck{\ill{}}\note{suit un long passage, encadré et barré de traits
+obliques, qui commence par « a) $\Rightarrow$ b) » et où se lisent
+« convexe fermée d'un ens. fini de pts et de demi-droites fermées », « b)
+$\Rightarrow$ a) », « enveloppe convexe », « d'un ens. fini de pts »,
+« intersection d'un ens. fini de demi-espaces fermés » et « on gagne par
+polarité » ; il est remplacé par ce qui suit et par la page 9}
+
+b) $\Rightarrow$ a) Si b) est vrai pour $C$, alors par polarité $C'$ est
+int. finie de $\frac{1}{2}$-espaces fermés, donc (lemme ci-dessous) étant
+compact, c'est un polyèdre convexe, i.e. env. conv. \struck{finie de} d'un
+ens. fini de $E'$, d'où a) par polarité.
+
+\page{9}
+
+a) $\Rightarrow$ b) On sait (par polarité) que $C'$ est \struck{\ill{}} env.
+conv. fermée d'un ens. fini de pts, donc d'après ce qui précède\struck{,
+\ill{}} il est intersection finie de demi-espaces fermés\struck{\ill{}}
+donc par polarité on trouve b) pour $E$, sous forme précisée.
+\note{dans la marge gauche, un croquis : une bande entre deux droites
+parallèles, un point marqué sur l'une, et une ligne brisée en zigzag entre
+les deux}
+
+\emph{Lemme} Soit $C$ \uncertain{compact} intersection finie de
+demi-espaces fermés. Alors \struck{$C$ est un polyèdre convexe}
+l'ens. des pts extrémaux de $C$ est fini (donc $C$ est un polyèdre convexe
+s'il est compact). \struck{En d'autres termes, $C$ \ill{} est \ill{} fini de
+pts extrémaux.}
+
+Récurrence sur $\dim E$ (trivial si $\dim E = 0$) puis sur le
+\struck{\ill{}} nb de demi-espaces \uncertain{qui entrent}. Trivial si
+$\nu = 0, 1$ \struck{(\ill{} $n = 1$) Supposons}\note{le $\nu$ renvoie à une
+ligne barrée, « sur $\nu = n + \dim E$ »} On est ramené au cas d'un convexe
+$C_1$ n'ayant qu'un nb fini de pts extrémaux, et où on a
+\[
+  C = C_1 \cap H
+  \qquad (H \text{ demi-espace fermé, limité par l'hyperplan } H_0)
+\]
+Soit $x \in C$ \struck{un pt extrémal}. Si $x \notin H_0$, alors $x$ est pt
+extrémal de $C$ ssi il est pt extrémal de $C_1$. Si $x \in H_0$,
+\struck{alors} $x$ est pt extrémal de $C$, ssi il est pt extrémal de
+\struck{$C_1$ \ill{}} $H_0 \cap C$. On gagne.
+
+\page{10}
+
+\emph{Définition} \emph{Secteur polyédral} : partie satisfaisant aux
+conditions équivalentes précédentes.
+
+\emph{Prop.} $E$, $E'$ vectoriels de dim finie en dualité. Alors par
+$A \mapsto A^\circ$, $A' \mapsto A'^\circ$ on trouve des correspondances 1-1
+inverses l'une de l'autre entre secteurs polyédraux de $E$
+\uncertain{contenant} l'origine, et sect. pol. de $E'$ contenant l'origine.
+
+\subsection{Polarité et facettes}
+
+$E$, $E'$ vectoriels de dim finie en dualité. Correspondance biunivoque
+entre sous-espaces affines $F$ de $E$ ne contenant pas l'origine, et
+sous-espaces affines $F'$ de $E'$ ne contenant pas l'origine, avec
+\[
+  \dim F + \dim F^{0} = n - 1 \qquad (n = \dim E = \dim E')
+\]
+\marginal{Notations $F^{0}$,}\note{l'exposant de $F^{0}$ est un petit rond
+ouvert, tracé autrement que le $^\circ$ des polaires ; il est rendu $^{0}$
+ici et page 11}
+
+Correspondance caractérisée par les propriétés :
+\begin{itemize}
+  \item[a)] Renverse la relation d'incidence
+  \item[b)] À $x \in E - \{0\}$ correspond
+    $\{x\}^{0} = H(x)^{\bullet} = (\{x\}^\circ)^{\bullet}$
+    \note{le point en exposant désigne sans doute le bord, comme
+    $\dot{C}$ page 2}
+\end{itemize}
+
+\page{11}
+
+\emph{Terminologie} Variété d'appui d'un convexe $C$ = variété affine de la
+forme $E_F$. Les variétés d'appui sont en corr. 1-1 avec les facettes,
+relation d'ordre \uncertain{et} relation d'incidence
+
+\emph{Th} Soit $C$, $C'$ deux secteurs polyédraux polaires l'un de l'autre de
+$E$, $E'$ resp.t Alors il existe une unique \struck{\ill{}} application
+$\varphi$ de l'ens. des facettes $F$ de $C$ telles que $0 \notin
+\overline{F}$ (i.e. $0 \in E_F$) dans l'ens. des facettes $F'$ de $C'$ telles
+que $0 \notin \overline{F'}$ (i.e. $0' \in E_{F'}$), caractérisée par la
+propriété que \struck{si $F' = \varphi(F)$}
+\[
+  E_{\varphi(F) = F'} = (E_F)^{0}
+\]
+\note{les deux « i.e. » portent $\in$ et non $\notin$ sur la page. Devant
+la formule, un mot et un $E$ sont barrés}
+
+Cette application est bijective, et renverse la relation d'ordre entre
+facettes
+
+\emph{Cor. 1} L'ens. des facettes d'un secteur polyédral est fini (prendre
+l'origine \emph{intérieure} au secteur polyédral, et appliquer dualité)
+
+\emph{Cor. 2} Supposons $C$, $C'$ cpts \struck{\ill{}} i.e. \struck{$E$}
+$0_E$, $0_{E'}$ intérieurs à $C$, $C'$ resp.t, i.e. $C$, $C'$ des polyèdres.
+Alors $\varphi : \mathrm{Fac}(C) \simeq \mathrm{Fac}(C')$
+
+\page{12}
+
+(antiisomorphisme d'ens. ordonnés).
+
+\emph{Corollaire 3} Soit $\Phi$ un polyèdre combinatoire strict. Alors
+\begin{itemize}
+  \item[a)] $\Phi^\circ$ est un pol. combinatoire strict
+  \item[b)] Si $x, y \in \Phi$, avec $x \leq y$, alors l'ens. ordonné
+    $\Phi_{x,y} = \{ z \in \Phi \mid x \leq z \leq y \}$ est un polyèdre
+    combinatoire strict.
+\end{itemize}
+\note{la notion de polyèdre combinatoire strict n'est pas définie sur ces
+feuillets}
+
+\emph{Dém.} a) Résulte de Cor. 2. On sait que $\Phi_{0,x}$ est un polyèdre
+combinatoire strict, ($0$ plus petit élt) donc par dualité aussi $\Phi_{x,1}$
+($1$ plus grand él.) $= (\Phi^\circ_{0,x})^\circ$. Appliquant ce dernier
+résultat à $x \in \Phi_{0,y}$, on trouve que $\Phi_{xy}$ est un polyèdre
+combinatoire strict.
+
+\struck{Cor. 4 Soient $x, y$ deux facettes}
+
+\struck{Cor. 4 Soit $F$ une facette d'un p. $C$ un polyèdre convexe, $F$ une
+facette dudit, $i \in \mathbf{Z}$ tel que $-1 \leq i \leq d = \dim F$. Alors
+$\exists$ facette de $F'$ incidente à $F$ telle que $\dim F' =$}
+
+\page{13}
+
+\struck{Si $d = -1$ ou $d = 0$, c'est évident. Supposons $d \geq 1$, i.e.
+$F \neq \emptyset$, on sait que $\overline{F}$ est l'enveloppe convexe de
+l'ens. de ses pts extrémaux, donc $\exists F' \in \mathrm{Fac}(C)$ avec
+$\dim F' = 0$, et $F' \leq F$, \ill{} $F' < F$.}\note{ce passage et le
+corollaire barré de la page 12 sont encadrés et barrés de traits obliques ;
+l'énoncé revient page 14 comme Cor. 6}
+
+\subsection{Application à la fonction dimension}
+
+\emph{Cor. 4} Soient $C$ un polyèdre convexe, $F_1, F_2 \in \mathrm{Fac}(C)$
+avec $F_1 < F_2$. Pour que $F_2$ soit un \emph{successeur} de $F_1$ (i.e.
+qu'il n'existe pas $F$ tel que $F_1 < F < F_2$) il faut et suffit qu'on ait
+\[
+  \dim F_2 = \dim F_1 + 1
+\]
+
+Comme $\dim F$ est fonction \emph{strictement} croissante sur
+$\mathrm{Fac}(C)$, la suffisance est claire. Pour la nécessité,
+\struck{\ill{} dans \ill{} $\dim F$ \ill{}} OPS (\uncertain{dualité})
+$F_2 =$ \struck{$\mathring{C}$} $1$ (plus grande facette), \struck{et $F_2$}
+puis en passant aux polaires (échangeant les rôles de $F_1$ et $F_2$) que
+$F_1 =$ \struck{$\emptyset$} $0$ (plus petite facette), et :
+\uncertain{à nouveau} $F_2 = 1$. Donc l'assertion devient maintenant : Pour
+qu'il n'existe aucune facette distincte de $\mathring{C}$ et de la facette
+vide, il faut et suffit que $\dim C \uncertain{=} 0$ ou $-1$ i.e. que $C$
+\uncertain{vide} \struck{\uncertain{réduit}} à un pt. \struck{\ill{}}
+(\uncertain{trivial}, en effet, on prend pts extrémaux !)
+
+\emph{Cor. 5} La fonction $d : F \mapsto \dim F$ sur $\mathrm{Fac}(C)$ (du
+cor. 4) est caractérisée par les conditions :
+\begin{itemize}
+  \item[a)] $d(F_2) = d(F_1) + 1$ si $F_2$ est un successeur de $F_1$
+  \item[b)] $d(\emptyset) = -1$ ($\emptyset$ plus petit él.). De plus $d$ est
+    str. croissant
+\end{itemize}
+
+\page{14}
+
+\emph{Cor. 6} Soit $F \in \mathrm{Fac}(C)$ ($C$ polyèdre convexe) Alors pour
+tout $-1 \leq i \leq d = \dim F$, existe $F' \leq F$ telle que
+$\dim F' = i$.
+
+\struck{Clair si $d = -1$ ou $0$, sinon \ill{}} \struck{Récurrence sur $d$,
+clair si $d = -1, 0$. Si $d > 0$, $\exists F'$ tel que $F' \neq \emptyset,
+F$, $\emptyset < F' < F$ (cor. 4) Donc $\dim F' = d' < d$. Si $i \leq d'$
+on gagne par hyp. de récurrence appliquée à $F'$ \ill{} sinon on gagne par
+l'hyp. de récurrence}\note{bloc encadré et barré de traits obliques}
+
+\uncertain{Formel} à partir du cor. 5, qui implique que si $x \leq y$,
+$x, y \in \mathrm{Fac}(C)$, alors $\exists$ chaîne
+$x_0 = x < x_1 < \cdots < x_n = y$, avec $x_{i+1}$ succ. de $x_i$
+($0 \leq i \leq n-1$), et qu'alors \struck{$d(y) - d(x) = n$}
+\struck{\ill{}} $d(x_i) - d(x_0) = i$ i.e. $d(x_i) = d(x_0) + i$.
+[On prend $y = F$, $x = \emptyset$ …]
+
+\emph{Cor. 7} Soit $\Phi$ un polyèdre combinatoire strict, $d$ une fonction
+dimension sur $\Phi$ (cf cor. 5) Soient $x, y \in \Phi$, $x < y$,
+$d(y) = d(x) + 2$. Alors l'ens. des $z \in \Phi$ tels que $x < z < y$ est de
+cardinal 2.
+
+$\Phi_{xy}$ est un polyèdre combinatoire strict de dim $(-1) + 2 = 1$, donc
+provient d'un polyèdre convexe de dim 1, i.e. d'un segment. Celui-ci a
+exactement 2 extrémités !
+
+\section{Cubes}
+
+\note{« Cubes », à l'encre, est le seul mot de sa main sur la couverture de
+papier brun qu'est la page 15 ; elle porte aussi, au crayon et entourée, la
+mention « (13 p.) »}
+
+\page{17}
+
+Caractérisation intrinsèque d'un \uncertain{$n$-cube}, déterminée par un ens.
+\[
+  \Phi \subset \mathrm{Espaff}(E)
+\]
+\note{la notation est lue « $\mathrm{Espaff}$ » avec doute}
+de sous-espaces affines d'un espace affine sur $k$ :
+
+\begin{itemize}
+  \item[a)] $\Phi$ \struck{a un plus petit et un plus grand élément, et}
+    contient $\emptyset$ et $E$ (qui sont donc un plus petit et un plus grand
+    élément), et dans $\Phi^{**} = \Phi - \{ 0_\Phi, 1_\Phi \}$ ($\Phi$ privé
+    de son plus petit et plus grand élément) tout élément est intersection
+    d'éléments maximaux (pour la rel. d'ordre).\note{l'exposant de
+    $\Phi^{**}$ est fait de deux petits signes, lus $**$}
+  \item[b)] Pour tout élément maximal $F$ de $\Phi^{**}$, $\exists !$ él.
+    maximal $F'$ tel que $\operatorname{Inf}_{\Phi^{**}}(F, F') = \emptyset$
+    [i.e. $(F, F')$ non minoré dans $\Phi^{**}$ i.e. $F \cap F'$ ne contient
+    aucun él. de $\Phi$ différent de $\emptyset$] [Ainsi l'ens. $B$ des él.
+    maximaux de $\Phi^{**}$ est muni d'une involution : $F \mapsto F'$ ss pt
+    fixe …]
+  \item[c)] Si \struck{:} à \uncertain{tout} $V \in \Phi^{**}$
+    \struck{$V \neq \emptyset$} on associe l'ens. \struck{\ill{}} $B_V$ des
+    $b \in B$ qui le majorent, on trouve une partie $A$ de $B$ telle que
+    $b \in A \Rightarrow \sigma b \notin A$ (i.e. une section partielle
+    \uncertain{définie} de $B$ sur $I = B/\sigma$). Ceci posé, l'application
+    \[
+      \Phi \setminus \{\emptyset\} \longrightarrow \Gamma_{\mathrm{part}}(B/I)
+    \]
+    ainsi définie, qui est injective par b), est bijection.
+    \marginal{NB a), b), c) signifient que l'ens. ordonné $\Phi$ est un cube
+    combinatoire}
+  \item[d)] Si $n = \dim \mathrm{comb}\, \Phi$, on a \struck{$E$}
+    $n =$ \struck{\ill{}} $\dim E = \frac{1}{2} \operatorname{card} B$ et
+    $\forall V \in \Phi$, $\dim_\Phi V = \dim_E V$, \ill{}
+    [a) : dit implique que \uncertain{la} $\operatorname{Inf}$
+    \struck{\uncertain{dans} $\Phi$} \uncertain{d'une} partie minorée de
+    $\Phi \setminus \{0\}$ est aussi son intersection (en tant
+    \uncertain{qu'ens.} de points de $E$) et que les hyperplans $\in \Phi$
+    \ill{}. Mais cela n'implique pas que le
+\end{itemize}
+\note{la fin de la page, écrite serrée et en partie en surcharge, n'est lue
+que par fragments}
+
+\page{18}
+
+$\operatorname{Inf}$ d'une partie de $\Phi$ (dans $\Phi$) est $\emptyset$,
+i.e. \uncertain{si} son intersection ne contient pas d'él. de
+$\Phi \setminus \{\emptyset\}$, que cette intersection soit vide. Ex : un
+\uncertain{quadrilatère} qui n'est pas un parallélogramme\note{suit un
+petit croquis d'un quadrilatère dont deux côtés se coupent hors de lui}.
+L'axiome qui suit assure qu'il en est pourtant ainsi …]
+
+\begin{itemize}
+  \item[e)] Si $b$, $b'$ sont des él. maximaux de \uncertain{$\Phi^{**}$}
+    (i.e. $b, b' \in B$) dont l'inf est $\emptyset$ (i.e. $b' = \sigma b$),
+    alors \struck{\ill{}} $b \cap b' = \emptyset$ (i.e., \struck{\ill{}} par
+    d), \struck{\ill{}} $b$, $b'$ sont des \uncertain{parallèles} i.e.
+    hyperplans affines parallèles …).
+\end{itemize}
+
+Dans l'espace des translations $T$ de $V$, les \struck{\ill{}} espaces
+directeurs $\mathbb{H}_i$ ($i \in I$) des \struck{\ill{}} 2
+\struck{sous-espaces \ill{}} hyperplans \ill{} $b \in B$ sont lin. indép.,
+et correspondent donc à une décomposition
+\[
+  T \simeq \prod T_i \qquad (T_i = T/\mathbb{H}_i)
+\]
+de $T$ en produit de droites. La donnée du $T$-torseur $E$ revient à la
+donnée d'une famille $(E_i)_{i \in I}$ de $T_i$-torseurs,
+$E_i \simeq E/\mathbb{H}_i$. De plus, dans chaque $E_i$ il y a
+\uncertain{une partie de} deux pts distincts, \struck{\ill{}} $B_i$,
+(isom. à la fibre de $B/I$ en $i \in I$). Or on vérifie que la donnée
+\struck{d'une} (pour $i$\note{la lettre rendue $\mathbb{H}$ est un $H$
+barré de traits verticaux}
+
+\page{19}
+
+fixé) d'un $T_i$, $E_i$, $B_i \subset E_i$ équivaut en fait à la donnée de
+$B_i$ (comme torseur sous $\pm 1$ !) en prenant
+\[
+  T_i = \operatorname{Ker}(k^{B_i} \xrightarrow{\varepsilon} k), \quad
+  E_i = \varepsilon^{-1}(1)
+\]
+Donc la donnée \struck{des} d'une famille $(T_i, E_i, B_i)_{i \in I}$
+($\operatorname{card} I = n$) équivaut à la donnée d'une \ill{} de
+$n$-cube. Montrons que cette donnée permet de reconstruire le $n$-cube,
+comme le produit de la famille (indexée par $I$) de 1-cubes …
+
+On a aussi
+\[
+  T = \operatorname{Ker}(k^B \xrightarrow{\mathrm{tr}} k^I), \qquad
+  E = \mathrm{tr}^{-1}(1)
+\]
+\note{« trace » est écrit au-dessus de la flèche, relié à « tr »}
+
+Si $J \subset I$, on considère
+
+\end{document}
