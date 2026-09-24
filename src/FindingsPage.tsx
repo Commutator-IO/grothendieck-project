@@ -335,8 +335,13 @@ function PlainSummary() {
           {surveyed} folders; the other transcribed folders have not been looked at, and
           this page says nothing about them.
         </p>
+        <p>
+          <a href="#full-list" className="text-brand-700 underline underline-offset-2">
+            Skip to the full list, its search and its order ↓
+          </a>
+        </p>
       </div>
-      <ol className="mt-5 space-y-3">
+      <ol className="mt-5 space-y-2">
         {PLAIN.map((p) => (
           <PlainCard key={p.id} p={p} />
         ))}
@@ -354,43 +359,53 @@ function PlainCard({ p }: { p: PlainItem }) {
   const c = BY_ID.get(p.cote);
 
   return (
-    <li id={`plain-${p.id}`} className="card scroll-mt-16 p-5">
-      <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1.5">
-        <span className="tabular text-[12.5px] font-semibold text-ink-700">
-          Cote n° {p.cote}
-        </span>
-        {c && <span className="text-[12px] text-ink-500">{c.title}</span>}
-        {statuses.map((s) => (
-          <span
-            key={s}
-            title={STATUS[s].help}
-            className={`rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide ${STATUS[s].className}`}
-          >
-            {STATUS[s].label}
+    <li id={`plain-${p.id}`} className="card scroll-mt-16">
+      {/* Folded to one line, so the twelve items fit on a screen and the list
+          and its search are not a dozen screens down. The claim and its
+          caveats open together: nothing can be read without the other. */}
+      <details className="group/plain">
+        <summary className="flex cursor-pointer list-none flex-wrap items-baseline gap-x-3 gap-y-1.5 px-5 py-3.5 marker:content-none">
+          <span aria-hidden="true" className="inline-block text-ink-400 transition-transform group-open/plain:rotate-90">
+            ▸
           </span>
-        ))}
-      </div>
-      <h3 className="mt-2.5 text-[16px] font-semibold leading-snug text-ink-900">{p.title}</h3>
-      <p className="mt-2 max-w-[42em] text-[15px] leading-relaxed text-ink-800">{p.what}</p>
-      <dl className="mt-3.5 space-y-2 border-t border-ink-100 pt-3.5 text-[13px] leading-relaxed">
-        <Field label="Ours, not his">{p.ours}</Field>
-        <Field label="What would settle it">{p.settle}</Field>
-        <Field label="Caveats" muted>
-          First pass by a language model; not checked against the leaves by a person; in
-          any dispute the transcription governs. Nothing here says who was first.
-        </Field>
-      </dl>
-      <p className="mt-3 text-[12.5px] text-ink-500">
-        {rows.length === 1 ? 'The row in full: ' : 'The rows in full: '}
-        {rows.map((n, i) => (
-          <span key={n.id}>
-            {i > 0 && ', '}
-            <a href={`#${n.id}`} className="text-brand-700 underline underline-offset-2">
-              {n.id}
-            </a>
+          <span className="text-[15px] font-semibold leading-snug text-ink-900">{p.title}</span>
+          <span className="tabular text-[12px] text-ink-500" title={c?.title}>
+            cote {p.cote}
           </span>
-        ))}
-      </p>
+          {statuses.map((s) => (
+            <span
+              key={s}
+              title={STATUS[s].help}
+              className={`rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide ${STATUS[s].className}`}
+            >
+              {STATUS[s].label}
+            </span>
+          ))}
+        </summary>
+        <div className="px-5 pb-5">
+          {c && <p className="text-[12px] text-ink-500">{c.title}</p>}
+          <p className="mt-2 max-w-[42em] text-[15px] leading-relaxed text-ink-800">{p.what}</p>
+          <dl className="mt-3.5 space-y-2 border-t border-ink-100 pt-3.5 text-[13px] leading-relaxed">
+            <Field label="Ours, not his">{p.ours}</Field>
+            <Field label="What would settle it">{p.settle}</Field>
+            <Field label="Caveats" muted>
+              First pass by a language model; not checked against the leaves by a person; in
+              any dispute the transcription governs. Nothing here says who was first.
+            </Field>
+          </dl>
+          <p className="mt-3 text-[12.5px] text-ink-500">
+            {rows.length === 1 ? 'The row in full: ' : 'The rows in full: '}
+            {rows.map((n, i) => (
+              <span key={n.id}>
+                {i > 0 && ', '}
+                <a href={`#${n.id}`} className="text-brand-700 underline underline-offset-2">
+                  {n.id}
+                </a>
+              </span>
+            ))}
+          </p>
+        </div>
+      </details>
     </li>
   );
 }
@@ -452,6 +467,8 @@ export function FindingsPage() {
         </header>
 
         <PlainSummary />
+
+        <div id="full-list" className="scroll-mt-16" />
 
         {/* The three badges are not guessable from their wording alone, and a
             tooltip is not read. Named once, here — the same decision the
