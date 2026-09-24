@@ -1,0 +1,1302 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 145, pages 1-37.
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried moves into a
+% footnote. It is held to being mathematically correct as it stands; where the
+% manuscript is loose or mistaken the true statement appears and the footnote
+% says what the page has. In any dispute of substance the transcription
+% governs: whoever cites Grothendieck cites batch-01.fr.tex and batch-02.fr.tex.
+%
+% Scope: the folder is thirty-seven pages in two batches (1-20, 21-37), both
+% transcribed, read whole before any of this was written, and written as ONE
+% file for the whole shelfmark.
+%
+% The spine. Three loose sheets (1-3), then two MOUTURES of one text, kept
+% distinct because their difference is content:
+%   - first draft, pages 4-14 (his pp. 1-3 and following): outer « loop »
+%     automorphisms of the profinite pi^_{0,3}, computed in Aut(pi^) with the
+%     relation l_0 l_1 l_inf = 1; ends on the quasi-square roots eps_i and a
+%     struck, false relation eps_0 eps_1 eps_inf = 1;
+%   - second draft, pages 14-37 (« Critique des notations et de l'approche »,
+%     his pp. 7-17): the discrete extension E_{0,3} of Gamma_{0,3} = S_3 x Z/2
+%     by pi_{0,3}, built geometrically on the Riemann sphere with the relation
+%     l_inf l_1 l_0 = 1; then the profinite E^, the group E^^ = Aut_lac(pi^),
+%     and the extension S E^^ by Z^^{0,1,inf} of the last pages.
+% Page 20 (no number of his) carries (13)-(16), which follow (11)-(12) of page
+% 21 (his p. 9): it is read after page 21.
+%
+% Notation fixed for the whole folder. pi = pi_{0,3} is the discrete free
+% group, pi^ its profinite completion (the first draft's Pi^ and the Pi of pages
+% 15-20 are both written pi / pi^). int(g)(x) = g x g^-1; automorphisms compose
+% as maps. Autext is written Out. Aut_lac, Out_lac: automorphisms permuting the
+% three inertia classes with one multiplier p. The centraliser of S_3 in
+% Out_lac(pi^) is written bold Gamma throughout: page 10 calls it Pi, page 23
+% bold Gamma; they are the same group. The superscript ! means « pure » (sigma =
+% 1). In S E^^ the convention of page 32, u(l_i) = int(g_i)(l_{sigma(i)}^p), is
+% used everywhere; pages 23-24 write int(g_i^-1) (the -1 added later) and are
+% translated.
+%
+% Every identity in Aut(pi) asserted below as true was checked by machine in
+% the free group of rank 2 (script outside the repository), in each draft's own
+% convention; these checks decided the following departures.
+%
+% Substantive departures from the pages, each footnoted where it occurs:
+%   - p. 5: the fixed points of rho(z) = 1/(1-z) are -j and -j^2 = e^{±i pi/3},
+%     not « ± j »;
+%   - pp. 7, 9: alpha, q, r range over Z^, not Z^*;
+%   - p. 9 margin: the page has beta = r, gamma = -q; in fact beta = -r = q and
+%     beta = gamma, as page 11 writes (sigma_inf(g^-1) = l_0^beta g l_1^beta),
+%     so the invariant (q, r) of page 9 is one number, r = -q;
+%   - pp. 13-14 (struck): eps_0 eps_1 eps_inf = 1 and sigma_inf sigma_1 sigma_0
+%     = 1 are false; eps_0 eps_1 eps_inf = sigma_1 is true, which is what the
+%     unstruck « Sans doute » line at the foot of page 14 reads, and its three
+%     circular conjugation relations are true;
+%   - p. 17 margin: sigma_0(l_0) = l_inf^-1 l_1^-1 (page 19), not l_0^-1 l_1^-1;
+%   - p. 19: (4)-(6) is not a presentation of E^+ (its abelianisation is too
+%     big); with rho sigma_i rho^-1 = sigma_rho(i) added it is, and E^+ =
+%     <sigma_0, rho | sigma_0^2 = rho^3 = 1> = PSL_2(Z) (identification ours);
+%   - p. 20: phi(S_3) is Gamma_P (the isotropy group of P), not Gamma;
+%   - p. 21, (10): the fourth line must read eps_1^2 where eps_inf^2 is read;
+%   - p. 25: the covariance is gamma_rho(i)(rho~ u rho~^-1) = rho(gamma_i(u)),
+%     as (15) of page 36 gives, not gamma_i(...) = gamma_{i+1}(u);
+%   - p. 29: sigma_0 sigma_1 = rho tau_inf tau_1 = tau_0 tau_inf rho (relation (2)
+%     of page 17), not tau_inf tau_1 rho;
+%   - p. 30: the relation [rho, sigma_0][rho^-1, tau_0] = 1 is false (already
+%     modulo pi); the true defining relation is (sigma_0 tau_0 rho)^2 = 1, and E
+%     is then the Coxeter group (2,3,inf), i.e. PGL_2(Z) (identification ours);
+%   - p. 32 margin: the kernel of S E^^ -> Aut_lac(pi^) is i(Z^^3), not i(pi^);
+%   - p. 35: (13) must read l_sigma(inf)^p l_sigma(1)^p l_sigma(0)^p = 1 (the
+%     order of (2) and (14)); the page reverses it;
+%   - p. 35, « Exercice ! »: proved here by a dihedral quotient;
+%   - p. 36, (16): the automorphism applied to the g_i is sigma~_0 (the one
+%     underlying sigma~'_0 of (12)), written sigma_0 on the page;
+%   - p. 1: H is the commensurator of pi; « pi', pi'' of the same index » needs
+%     u to preserve a finite covolume; « H_n is a subgroup » is not evident and
+%     is not asserted;
+%   - p. 2: the boxed relations (1), (2) are reported, not checked (the sheet
+%     does not fix its conventions); the algebra that follows them is checked.
+%
+% Announced and never established in the folder: whether Out_lac(pi^) = S_3 x
+% bold Gamma (page 23, « j'ignore »); a criterion for (p, g) to give an
+% automorphism (page 8, « Ça semble délicat »); generators and relations for
+% S Gamma and S E (pages 31, 36, « je ne vais pas m'y attarder »); the
+% commutation modulo inner automorphisms announced on the last line of page 37.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-09-24 — first pass, unchecked against the pages by a human.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{145}
+\pages{1}{37}
+\dating{1981}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Printemps 81 (vieille rédaction) : notes manuscrites (s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Ces trente-sept pages étudient un seul objet, le plus petit qui ne soit pas
+trivial : la sphère de Riemann privée de trois points, $0$, $1$ et $\infty$.
+Une fourmi qui s'y promène peut tourner autour de chacun des trous, et ses
+trajets de retour au point de départ forment un groupe, le \emph{groupe
+fondamental}. Ici il est libre à deux générateurs : un lacet autour de $0$, un
+lacet autour de $1$ ; le lacet autour de $\infty$ s'en déduit, car faire le
+tour des trois trous l'un après l'autre revient à ne rien faire.
+
+La question du dossier est celle des symétries. La sphère trouée en a de
+visibles : six transformations qui permutent les trois points (les
+« permutations » $z \mapsto 1-z$, $z \mapsto 1/z$, etc.), et la conjugaison
+complexe, qui la retourne comme un miroir. Chacune agit sur les lacets. Mais le
+groupe des lacets, surtout quand on le « complète » en y ajoutant toutes les
+limites possibles de lacets — c'est le groupe \emph{profini}, qui voit tous les
+revêtements finis à la fois —, a beaucoup plus de symétries que la sphère n'en
+montre. On demande seulement à ces symétries cachées de respecter la trace des
+trous : envoyer un petit lacet autour d'un point sur un petit lacet autour d'un
+point, éventuellement parcouru un nombre « $p$ » de fois, le même pour les
+trois, que Grothendieck appelle le \emph{multiplicateur}. Qui sont-elles, et
+comment s'accordent-elles avec les six permutations visibles ? C'est le
+problème des pages 4 à 14 : il y écrit une symétrie cachée comme un couple
+$(p, g)$, un multiplicateur et un élément du groupe, et traduit « commuter aux
+permutations » en deux équations sur $g$.
+
+Puis il s'arrête. Un calcul vient de lui donner une relation qu'il juge
+« inquiétante », et elle est en effet fausse ; la page suivante s'ouvre sur une
+« Critique des notations et de l'approche ». Ce qu'elle demande tient en une
+phrase : ne plus calculer à l'aveugle dans le groupe complété, mais d'abord
+dans le groupe ordinaire, avec la géométrie sous les yeux — la sphère, ses axes
+de rotation, ses grands cercles, et des chemins tracés dessus. La seconde
+rédaction (pages 14 à 37) le fait, et c'est son intérêt : chaque signe qui, dans
+la première, se décidait par un calcul qu'on pouvait rater, se lit désormais
+sur un dessin. Les symétries visibles et les lacets s'y assemblent en un seul
+groupe discret, qu'on sait aujourd'hui être le \emph{groupe modulaire étendu}
+$PGL_2(\mathbb{Z})$ ; ses sous-groupes finis correspondent aux points de la
+sphère fixés par une symétrie, et le dossier les passe en revue un à un. On y
+croise, sous le nom de « groupe cartographique de Malgoire », le groupe qui
+décrit les cartes tracées sur une surface. Les dernières pages reviennent au
+groupe complété, avec un dispositif plus fin : chaque symétrie cachée y est
+accompagnée d'un choix de « rectificateurs », un par trou, et l'on obtient une
+description en coordonnées où il ne reste qu'une équation à écrire. Le dossier
+s'achève sur un exercice qu'il se donne, et que nous résolvons.
+
+Le dossier ne dit pas pourquoi ces symétries l'intéressent, mais le titre de la
+chemise — « Printemps 81 » — le situe : c'est le moment de \emph{La Longue
+Marche à travers la théorie de Galois}. Le groupe de Galois des nombres
+algébriques agit sur ce groupe de lacets complété, et cette action est
+fidèle : c'est le théorème de Belyi (1979). Chaque symétrie arithmétique est
+donc une des symétries cachées qu'on cherche ici, avec pour multiplicateur son
+action sur les racines de l'unité. Mesurer le groupe de toutes ces symétries
+cachées, c'est mesurer, de l'extérieur, le groupe de Galois lui-même. Dix ans
+plus tard, Drinfeld et Ihara en ont fait le \emph{groupe de
+Grothendieck--Teichmüller} ; les équations des pages 6 à 11 sont de la famille
+des deux premières de ses trois relations de définition.
+
+Pour aller plus loin : groupe fondamental de la droite projective moins trois
+points, automorphismes préservant l'inertie, groupe de
+Grothendieck--Teichmüller, groupe modulaire étendu, groupe fondamental
+orbifold, groupe cartographique, commensurateur.
+
+\keywords{thrice-punctured sphere, free profinite group, inertia-preserving automorphism, outer automorphism group, Grothendieck–Teichmüller group, anharmonic group, orbifold fundamental group, extended modular group, cartographic group, group extension, crossed homomorphism, commensurator}
+\end{resume}
+
+\pagerange{1}{37}
+\section*{Le fil du dossier, et les conventions}
+
+\subsection*{Les stations}
+
+\begin{itemize}
+\item \textbf{Trois feuillets épars (pages 1 à 3)}, sur trois papiers
+différents, sans pagination de sa main : le groupe $H$ des éléments qui
+descendent en isomorphismes entre revêtements finis (un commensurateur,
+page 1) ; les automorphismes à lacets commutant à $\sigma_0$ (page 2) ; une
+page barrée sur les espaces classifiants et les automorphismes compatibles à
+un morphisme (page 3).
+\item \textbf{Première rédaction (pages 4 à 14, ses pages 1 à 3 et suivantes)} :
+« Automorphismes extérieurs des groupes à lacets profinis ». L'action
+extérieure de $\mathfrak{S}_3 \times \mathbb{Z}/2$ sur $\widehat{\pi}$ ; les
+automorphismes extérieurs commutant à $\rho$, puis à $\mathfrak{S}_3$, décrits
+par $(p, g)$ ; les racines quasi-carrées $\varepsilon_i$.
+\item \textbf{Seconde rédaction, le groupe discret (pages 14 à 22)} : la
+critique de la page 14 ; la sphère et ses symétries ; l'extension
+$\mathcal{E} = \mathcal{E}_{0,3}$ « à la Malgoire » ; sa présentation ; le
+relèvement canonique du stabilisateur de $P$ ; le groupe cartographique.
+\item \textbf{Le complété et les automorphismes à lacets (pages 22 à 25)} :
+$\widehat{\mathcal{E}} \subset \hat{\hat{\mathcal{E}}} =
+\mathrm{Aut}_{\mathrm{lac}}(\widehat{\pi})$, le centralisateur
+$\boldsymbol{\Gamma}$ de $\mathfrak{S}_3$, la première forme de
+$S\hat{\hat{\mathcal{E}}}$.
+\item \textbf{Scindages partiels et présentations de $\mathcal{E}$ (pages 26 à
+31)} : les sous-groupes finis, points fixes par points fixes ; une
+présentation par trois générateurs.
+\item \textbf{Le groupe $S\hat{\hat{\mathcal{E}}}$ (pages 32 à 37, ses pages 15 à
+17)} : description en coordonnées, loi de groupe, le sous-groupe des
+« rectificateurs » triviaux, l'exercice de la page 35, les centralisateurs de
+$\tilde\rho$ et $\tilde\sigma_0$.
+\end{itemize}
+
+Les deux rédactions ne sont pas deux versions à fusionner. La première
+calcule dans $\mathrm{Aut}(\widehat{\pi})$ avec la relation
+$l_0 l_1 l_\infty = 1$ ; la seconde construit un groupe discret à partir de
+chemins sur la sphère, et la même géométrie lui impose l'ordre opposé,
+$l_\infty l_1 l_0 = 1$ — il le souligne (« et non $l_0 l_1 l_\infty = 1$ ! »).
+Les éléments $\sigma_i$, $\rho$, $\varepsilon_i$ ne sont donc pas les mêmes
+d'une rédaction à l'autre, et chacune est lue ici dans ses propres
+conventions.
+
+La page 20, sans numéro de sa main, porte les formules (13) à (16) ; elles
+suivent (11) et (12), qui sont à la page 21 (sa page 9). On lit donc la page 20
+après la page 21.
+
+\subsection*{Les conventions}
+
+\emph{Groupes.} $\pi = \pi_{0,3} = \pi_1(\mathbb{P}^1_{\mathbb{C}} \setminus
+\{0,1,\infty\})$ est le groupe discret, libre sur deux des trois lacets
+$l_0, l_1, l_\infty$ ; $\widehat{\pi}$ est son complété profini, libre profini
+de rang $2$\footnote{Le dossier écrit $\hat\Pi$ et $\hat\pi$ indifféremment aux
+pages 2 à 14 pour le groupe profini, et $\Pi$ pour le groupe discret aux pages
+15 à 20 ; à partir de la page 21, $\pi$ et $\hat\pi$. On s'en tient à $\pi$ et
+$\widehat{\pi}$.}. $L_i$ désigne le sous-groupe (fermé) engendré par $l_i$,
+isomorphe à $\widehat{\mathbb{Z}}$ dans $\widehat{\pi}$. On écrit
+$\mathrm{int}(g)(x) = g x g^{-1}$, et les automorphismes se composent comme des
+applications ; comme $\widehat{\pi}$ est de centre trivial, $g \mapsto
+\mathrm{int}(g)$ identifie $\widehat{\pi}$ à un sous-groupe de
+$\mathrm{Aut}(\widehat{\pi})$, et l'on écrit souvent $g$ pour $\mathrm{int}(g)$,
+comme le fait le dossier.
+
+\emph{Symétries visibles.} $\mathfrak{S}_3$ est le groupe des permutations de
+$\{0, 1, \infty\}$ ; $\rho$ est la permutation circulaire $0 \mapsto 1 \mapsto
+\infty \mapsto 0$, et $\sigma_i$ la transposition qui fixe $i$. Sur la sphère,
+$\rho(z) = 1/(1-z)$, $\sigma_0(z) = z/(z-1)$, $\sigma_1(z) = 1/z$,
+$\sigma_\infty(z) = 1-z$, et $\tau(z) = \bar z$. On pose $\Gamma =
+\Gamma_{0,3} = \mathfrak{S}_3 \times \mathbb{Z}/2$, le second facteur engendré
+par $\tau$ ; quand il faut distinguer un élément de $\Gamma$ de ses relèvements,
+on le pointe : $\dot\sigma_i$, $\dot\rho$.
+
+\emph{Automorphismes à lacets.} Un automorphisme $u$ de $\widehat{\pi}$ est
+\emph{à lacets} s'il existe $\sigma \in \mathfrak{S}_3$ et $p \in
+\widehat{\mathbb{Z}}^{*}$ tels que $u(l_i)$ soit conjugué à $l_{\sigma(i)}^{p}$
+pour $i = 0, 1, \infty$ ; $p = \chi(u)$ est son \emph{multiplicateur}. On note
+$\mathrm{Aut}_{\mathrm{lac}}(\widehat{\pi})$ leur groupe, et
+$\mathrm{Out}_{\mathrm{lac}}(\widehat{\pi})$ son image dans
+$\mathrm{Out}(\widehat{\pi})$\footnote{Le dossier écrit « Aut ext » (ici
+$\mathrm{Out}$), avec l'indice « lac », et ne définit nulle part d'un seul
+tenant les automorphismes « à lacets » ; la définition ci-dessus est celle que
+les formules (1) à (3) de la page 32 rendent explicite. Qu'un même exposant $p$
+serve pour les trois lacets n'est pas une hypothèse : si $u(l_i)$ est conjugué
+à $l_{\sigma(i)}^{p_i}$, l'abélianisé $\widehat{\mathbb{Z}}^2$, où $\bar l_0 +
+\bar l_1 + \bar l_\infty = 0$ et où $\bar l_0, \bar l_1$ forment une base,
+force $p_0 = p_1 = p_\infty$. Le nom d'aujourd'hui est « automorphisme
+préservant l'inertie ».}. Le centralisateur de $\mathfrak{S}_3$ dans
+$\mathrm{Out}_{\mathrm{lac}}(\widehat{\pi})$ est noté $\boldsymbol{\Gamma}$ dans
+tout le document\footnote{La page 10 le note $\Pi$ (« $\mathrm{Autext}_{\mathrm{lac}}
+(\hat\pi_{0,3}, \mathfrak{S}_3) \overset{\text{déf}}{=} \Pi$ »), la page 23
+$\boldsymbol{\Gamma}$ ; c'est le même groupe, et $\Pi$ est pris par ailleurs pour
+le groupe discret aux pages 15 à 20.}. L'exposant $!$ du dossier
+($\hat{\hat{\mathcal{E}}}^{!}$, $\hat{\hat\Gamma}^{!}$) désigne la partie
+« pure », où $\sigma = 1$.
+
+\pagerange{1}{3}
+\section*{Trois feuillets épars (pages 1 à 3)}
+
+\pagerange{1}{1}
+\subsection*{Le groupe $H$ : un commensurateur (page 1)}
+
+Soit $U$ une courbe, $D = \widetilde{U(\mathbb{C})}$ le revêtement universel de
+$U(\mathbb{C})$, $\pi$ le groupe des automorphismes de $D$ au-dessus de
+$U(\mathbb{C})$, et $G$ un groupe d'automorphismes de $D$ contenant
+$\pi$\footnote{La page n'écrit que « $\pi \subset G$ » et ne dit pas ce qu'est
+$G$ ; le diagramme qui précède, barré de grandes croix, porte une tour de
+revêtements $\overline{U}_{J,\alpha} \to U_{J,\alpha}$ qui n'est pas reprise.}.
+La page définit
+\[
+H = \bigl\{\, u \in G \bigm| \exists\, \pi', \pi'' \subset \pi \text{ d'indice
+fini et } v : D/\pi' \xrightarrow{\sim} D/\pi'' \text{ avec } p'' u = v p'
+\,\bigr\},
+\]
+où $p' : D \to D/\pi'$ et $p'' : D \to D/\pi''$ sont les projections :
+$u$ \emph{descend} en un isomorphisme entre deux revêtements finis de
+$U(\mathbb{C})$. Alors $u \pi' u^{-1} = \pi''$, et l'isomorphisme $v_* : \pi'
+\to \pi''$ induit est la conjugaison par $u$. Inversement, si $u \pi u^{-1}
+\cap \pi$ est d'indice fini dans $\pi$ et dans $u\pi u^{-1}$, on prend $\pi' =
+\pi \cap u^{-1}\pi u$ et $\pi'' = u\pi' u^{-1}$. Donc $H$ est le
+\emph{commensurateur} de $\pi$ dans $G$\footnote{Le mot n'est pas sur la page, et
+rien n'indique qu'il l'ait eu en tête. Pour $U = \mathbb{P}^1 \setminus \{0, 1,
+\infty\}$, $D$ est le demi-plan de Poincaré et $\pi$ est d'indice fini dans
+$PSL_2(\mathbb{Z})$ ; dans $G = PSL_2(\mathbb{R})$ son commensurateur est alors
+celui de $PSL_2(\mathbb{Z})$, l'image de $GL_2^{+}(\mathbb{Q})$, fait classique
+— c'est lui qui rend $\pi$ « arithmétique » au sens du critère de Margulis.}.
+Les remarques de la page se lisent ainsi :
+
+\begin{itemize}
+\item $\pi'$ et $\pi''$ ont le même indice dans $\pi$ quand $u$ préserve une
+mesure pour laquelle $D/\pi$ est de volume fini — par exemple quand $u$ est
+une isométrie hyperbolique : $D/\pi'$ et $D/\pi''$ ont alors même aire,
+$[\pi:\pi']$ et $[\pi:\pi'']$ fois celle de $D/\pi$\footnote{La page dit
+« on aura d'ailleurs $\pi'$ et $\pi''$ de même indice dans $\pi$ », lecture
+incertaine, sans hypothèse ; celle-ci est ajoutée. Pour un groupe $G$
+quelconque, les deux indices peuvent différer.} ;
+\item $v$ fixé, $u$ n'est connu qu'à multiplication à gauche près par un élément
+de $\pi''$ (les automorphismes du revêtement $D \to D/\pi''$), et $H$ contient
+$\pi$ ;
+\item $v$ est déterminé, à homotopie près, par $v_*$ à conjugaison près,
+puisque les $D/\pi'$ sont des $K(\pi', 1)$\footnote{La page dit « $v$ est connu
+quand on connaît $v_*$ », avec une réserve illisible entre parenthèses (lue
+« cas connexe ») ; la précision « à homotopie près » est de cette édition.}.
+\end{itemize}
+
+Pour $n \geq 1$, $H_n$ est l'ensemble des $u$ pour lesquels on peut prendre
+$\pi'$, $\pi''$ d'indice $n$ ; $H = \bigcup_n H_n$ et $H_n = H_n^{-1}$. La
+page affirme que $H_n$ est un sous-groupe et s'arrête sur « et $\pi$
+d'indice » ; ce n'est pas évident — pour un produit $uw$ on ne dispose a
+priori que de sous-groupes d'indice au plus $n^2$ — et nous ne
+l'affirmons pas\footnote{Le paragraphe central (« $H/\pi$ … s'identifie à un
+sous-\ldots{} de l'un des “groupoïdes” d'isom. \ldots ») ne se lit que par
+fragments ; on n'en tire rien.}.
+
+\pagerange{2}{2}
+\subsection*{Automorphismes à lacets commutant à $\sigma_0$ (page 2)}
+
+La page cherche les automorphismes à lacets $u$ de $\widehat{\pi}$ qui
+commutent exactement à $\sigma_0$ et, à un automorphisme intérieur près, à
+$\rho$. Commuter à $\sigma_0$, qui échange $l_1$ et $l_\infty$, force la forme
+\[
+u(l_1) = \mathrm{int}(g_1)(l_1^{p}), \qquad
+u(l_\infty) = \mathrm{int}\bigl(\sigma_0(g_1)\bigr)(l_\infty^{p}),
+\]
+avec $p \in \widehat{\mathbb{Z}}^{*}$ et $g_1 \in \widehat{\pi}$ défini modulo
+$L_1$ à droite. Posant $h_1 = \sigma_0(g_1)^{-1} g_1$, la page énonce deux
+conditions encadrées, où $\beta, \gamma \in \widehat{\mathbb{Z}}$ sont « uniquement
+déterminés par $g_1, p$ » :
+\[
+\begin{aligned}
+(1)\quad & l_\infty^{p} \cdot \mathrm{int}(h_1)(l_1^{p}) \cdot
+\mathrm{int}\bigl(h_1 l_1^{-\gamma} \rho^{-1}(h_1)\bigr)(l_0^{p}) = 1, \\
+(2)\quad & \rho(h_1)\, l_\infty^{-\gamma}\, h_1\, l_1^{-\gamma}\, \rho^{-1}(h_1)
+= l_0^{\beta}.
+\end{aligned}
+\]
+La feuille ne fixe ni l'ordre de la relation fondamentale ni la normalisation
+qui définit $\gamma$, et ces deux relations ne sont pas vérifiées
+ici\footnote{Une note marginale en oblique donne aussi
+$u(l_0) = \mathrm{int}\bigl(g_1 l_1 \rho^{-1}(h_1)\bigr)(l_0^{p})$ ; deux autres
+ne se lisent que par fragments. L'indice de $u(l_1)$ est surchargé.}. Ce qui
+suit en découle, et l'algèbre en est juste : (2) s'écrit $h_1 l_1^{-\gamma}
+\rho^{-1}(h_1) = l_\infty^{\gamma} \rho(h_1)^{-1} l_0^{\beta}$, et comme
+$l_0^{\beta}$ commute à $l_0^{p}$, (1) devient
+\[
+(1')\qquad l_\infty^{p} \cdot \mathrm{int}(h_1)(l_1^{p}) \cdot
+\mathrm{int}\bigl(l_\infty^{\gamma} \rho(h_1)^{-1}\bigr)(l_0^{p}) = 1 .
+\]
+Enfin, changer $g_1$ en $g_1 l_1^{\mu}$ change $h_1$ en $h'_1 = l_\infty^{-\mu}
+h_1 l_1^{\mu}$, puisque $\sigma_0(l_1) = l_\infty$ ; la page en conclut que
+$\gamma$ se décale et que $\beta$ ne change pas\footnote{« (i.e. $\gamma' =
+\gamma \ldots$ » se termine par un signe gratté ; la dernière formule de la
+page a ses exposants surchargés.}.
+
+\pagerange{3}{3}
+\subsection*{Automorphismes compatibles à un morphisme (page 3, barrée)}
+
+La page entière est barrée de deux longs traits. Elle place côte à côte les
+espaces classifiants $B_{\pi,\Gamma} \leftarrow B_\pi$ d'une extension et
+ceux d'un quotient $\varphi : \pi \to \pi'$, et pose la question suivante : si
+$u \in \mathrm{Aut}(\pi)$ est « compatible avec $\varphi$ », existe-t-il un unique
+$u' \in \mathrm{Aut}(\pi')$ tel que $u' \varphi = \varphi u$ ? L'unicité est
+vraie dès que $\varphi$ est surjectif, et l'existence équivaut alors à
+$u(\ker \varphi) = \ker \varphi$\footnote{La page n'énonce pas d'hypothèse sur
+$\varphi$, et passe par des essais barrés ($u' \varphi u^{-1} =
+\mathrm{int}(g)\,\varphi u$, etc.) qui envisagent la version à automorphisme
+intérieur près. Les deux suites exactes de groupes « doublement complétés » qui
+terminent la page, $1 \to \pi \to \hat{\hat{\mathfrak{S}}}(\pi, I') \to$ et $1 \to
+\pi' \to \hat{\hat{\mathcal{E}}}(\pi') \to$, portent des lettres rondes que la
+transcription ne distingue pas sûrement ; elles annoncent, sans le définir, le
+$\hat{\hat{\mathcal{E}}}$ des pages 22 et suivantes.}. Le sous-groupe
+$\mathcal{E}_\varphi$ de ces $u$ est défini et la page s'arrête.
+
+\pagerange{4}{14}
+\section*{Première rédaction : automorphismes extérieurs à lacets de
+$\widehat{\pi}_{0,3}$ (pages 4 à 14)}
+
+\pagerange{4}{6}
+\subsection*{L'action extérieure de $\Gamma_{0,3}$ (pages 4 à 6)}
+
+Dans toute cette rédaction, $\widehat{\pi}$ est présenté par $l_0, l_1,
+l_\infty$ et la relation
+\[
+l_0\, l_1\, l_\infty = 1 .
+\]
+Un endomorphisme est donné par trois éléments $l'_0, l'_1, l'_\infty$
+satisfaisant la même relation, et c'est un automorphisme dès qu'ils engendrent
+topologiquement $\widehat{\pi}$ : un groupe profini de type fini est hopfien,
+tout endomorphisme surjectif est bijectif\footnote{La page dit « sauf erreur ce
+sera un automorphisme s'ils engendrent $\pi$ (topologiquement) » ; c'est exact,
+et la raison est ajoutée.}.
+
+La permutation circulaire $\rho(l_0) = l_1$, $\rho(l_1) = l_\infty$,
+$\rho(l_\infty) = l_0$ est un automorphisme d'ordre $3$. La transposition
+$\sigma_\infty$ est définie par
+\[
+\sigma_\infty(l_0) = l_1, \qquad \sigma_\infty(l_1) = l_0, \qquad
+\sigma_\infty(l_\infty) = l_0^{-1} l_1^{-1} = \mathrm{int}(l_0^{-1})(l_\infty),
+\]
+et $\sigma_\infty^2 = \mathrm{id}$ ; on pose $\sigma_0 = \rho\,\sigma_\infty\,
+\rho^{-1}$ et $\sigma_1 = \rho\,\sigma_0\,\rho^{-1}$, de sorte que $\rho
+\sigma_i \rho^{-1} = \sigma_{\rho(i)}$. Explicitement, $\sigma_0$ échange $l_1$
+et $l_\infty$ et envoie $l_0$ sur $l_1^{-1} l_\infty^{-1}$. Le sous-groupe
+$\mathfrak{S}_3^{+} \simeq \mathbb{Z}/3$ agit donc vraiment. Mais pas
+$\mathfrak{S}_3$ : dans $\mathfrak{S}_3$ on a $\sigma_0\sigma_1 =
+\sigma_1\sigma_\infty = \sigma_\infty\sigma_0 = \rho$, tandis que dans
+$\mathrm{Aut}(\widehat{\pi})$
+\[
+\sigma_0\sigma_1 = \mathrm{int}(l_1^{-1})\,\rho, \qquad
+\sigma_1\sigma_\infty = \mathrm{int}(l_\infty^{-1})\,\rho, \qquad
+\sigma_\infty\sigma_0 = \mathrm{int}(l_0^{-1})\,\rho .
+\]
+$\mathfrak{S}_3$ n'agit que par automorphismes extérieurs. Pour le groupe
+discret, on ne peut pas mieux faire : une action vraie de $\mathfrak{S}_3$ sur
+$\pi$ relevant cette action extérieure scinderait l'extension correspondante,
+et les sous-groupes finis de celle-ci fixent un point du revêtement universel ;
+or $\mathfrak{S}_3$ n'a pas de point fixe sur $\mathbb{P}^1_{\mathbb{C}}
+\setminus \{0, 1, \infty\}$\footnote{L'argument par les sous-groupes finis est
+de cette édition ; la page invoque seulement l'absence de point fixe.}. Si
+$\mathbb{Z}/3$ agit vraiment, c'est que son action sur la sphère a deux points
+fixes, $-j$ et $-j^2 = -\bar j$, les racines primitives sixièmes de
+l'unité $e^{\pm i\pi/3}$, et qu'on peut prendre l'un d'eux pour point
+base\footnote{La page écrit « savoir $\pm j$ (racine primitive troisième de
+1) ». Mais $\rho(z) = 1/(1-z)$ a pour points fixes les racines de $z^2 - z + 1
+= 0$, soit $e^{\pm i\pi/3} = -j^2, -j$ ; $j$ lui-même n'est pas fixe.}.
+
+La conjugaison complexe, élément du groupe de Teichmüller $\Gamma_{0,3}$,
+agit par
+\[
+\tau(l_0) = l_0^{-1}, \qquad \tau(l_1) = l_1^{-1}, \qquad \tau(l_\infty) =
+l_1 l_0 = \mathrm{int}(l_1)(l_\infty^{-1}),
+\]
+automorphisme à lacets de multiplicateur $-1$, avec $\tau^2 = 1$. Il commute à
+$\mathfrak{S}_3$ modulo automorphismes intérieurs, d'où une action extérieure
+de $\mathfrak{S}_3 \times \{\pm 1\} = \Gamma_{0,3}$, qui est l'action
+canonique\footnote{« Groupe de Teichmüller » est le nom qu'il donne à
+$\Gamma_{0,3}$ ; c'est le groupe modulaire étendu (« extended mapping class
+group ») de la sphère à trois trous. Que ce soit tout
+$\mathrm{Out}_{\mathrm{lac}}(\pi)$ pour le groupe discret est le théorème de
+Dehn--Nielsen--Baer.}.
+
+\pagerange{6}{11}
+\subsection*{Les automorphismes extérieurs qui commutent à $\mathfrak{S}_3$
+(pages 6 à 11)}
+
+\emph{Normalisation.} Tout automorphisme extérieur à lacets de multiplicateur
+$p$ et de permutation triviale sur $0$ se représente par un $u$ tel que
+\[
+(*)\qquad u(l_0) = l_0^{p},
+\]
+et ce représentant est unique à composition près par $\mathrm{int}(\lambda)$,
+$\lambda \in L_0$, puisque le normalisateur de $L_0$ dans $\widehat{\pi}$ est
+$L_0$\footnote{La page dit que $u$ « normalise $L_0$ », puis « la classe de
+conj. de $l_0$ », et affirme l'unicité sans la justifier. Le fait utilisé — un
+sous-groupe d'inertie d'un groupe libre profini est son propre normalisateur —
+est classique.}.
+
+\emph{Commutation à $\rho$.} Si la classe de $u$ commute à celle de $\rho$, il
+existe un unique $g \in \widehat{\pi}$ tel que
+\[
+(**)\qquad u\,\rho = \mathrm{int}(g)\,\rho\, u ,
+\]
+et remplacer $u$ par $\mathrm{int}(\lambda) u$, $\lambda = l_0^{\alpha}$,
+remplace $g$ par
+\[
+\lambda\, g\, \rho(\lambda)^{-1} = l_0^{\alpha}\, g\, l_1^{-\alpha},
+\qquad \alpha \in \widehat{\mathbb{Z}}.
+\]
+L'exposant $\alpha$ parcourt $\widehat{\mathbb{Z}}$, puisque $\lambda$
+parcourt $L_0$\footnote{La page écrit $\alpha \in \widehat{\mathbb{Z}}^{*}$.}.
+Réciproquement, $(*)$ et $(**)$ déterminent $u$ en fonction de $p$ et $g$ :
+\[
+u(l_0) = l_0^{p}, \qquad u(l_1) = \mathrm{int}(g)(l_1^{p}), \qquad u(l_\infty)
+= \mathrm{int}\bigl(g\rho(g)\bigr)(l_\infty^{p}),
+\]
+car $u(l_1) = u\rho(l_0) = \mathrm{int}(g)\rho(l_0^{p})$ et $u(l_\infty) =
+u\rho(l_1) = \mathrm{int}(g)\,\mathrm{int}(\rho(g))\,\rho(l_1^{p})$ ; $(**)$ est
+alors vraie, les deux membres coïncidant sur $l_0$ et $l_1$. Pour que ces
+formules définissent un endomorphisme, il faut et il suffit de la relation
+\[
+\boxed{\; l_0^{p} \cdot \mathrm{int}(g)(l_1^{p}) \cdot
+\mathrm{int}\bigl(g\rho(g)\bigr)(l_\infty^{p}) = 1 \;}
+\]
+soit, en développant puis en conjuguant par $g^{-1}$,
+$\mathrm{int}(g^{-1})(l_0^{p})\cdot l_1^{p} \cdot
+\mathrm{int}(\rho(g))(l_\infty^{p}) = 1$. Pour un automorphisme, il faut de plus
+que les trois images engendrent $\widehat{\pi}$ ; « Ça semble délicat… », dit
+la page, et le dossier n'y revient pas\footnote{Il n'y a en effet pas de
+critère maniable de génération topologique pour un groupe libre profini ;
+c'est une des raisons pour lesquelles la théorie ultérieure travaille avec des
+paires $(\lambda, f)$ dont on \emph{impose} l'inversibilité.}.
+
+Pour $\tau$, $p = -1$ et $g = l_1$ : on vérifie $\tau\rho = \mathrm{int}(l_1)\,
+\rho\,\tau$.
+
+\emph{Commutation à $\sigma_\infty$.} $\mathfrak{S}_3$ étant engendré par $\rho$
+et $\sigma_\infty$, reste à écrire qu'il existe $h \in \widehat{\pi}$ avec
+$u\,\sigma_\infty = \mathrm{int}(h)\,\sigma_\infty\, u$, et il suffit de
+l'évaluer en $l_0$ et $l_1$. En $l_0$ : $\mathrm{int}(g)(l_1^{p}) =
+\mathrm{int}(h)(l_1^{p})$, donc $g^{-1}h$ centralise $l_1^{p}$, donc est dans
+$L_1$ : $h = g\, l_1^{q}$ avec $q \in \widehat{\mathbb{Z}}$. En $l_1$ :
+$l_0^{p} = \mathrm{int}\bigl(h\,\sigma_\infty(g)\bigr)(l_0^{p})$, d'où la
+condition
+\[
+\boxed{\; g\, l_1^{q}\, \sigma_\infty(g) = l_0^{r} \;} \qquad (q, r \in
+\widehat{\mathbb{Z}}),
+\]
+qui ne dépend que de $g$, pas de $p$\footnote{La page 9 écrit « $\exists\, q, r
+\in \hat{\mathbb{Z}}^{*}$ » ; la page 8 avait correctement $q \in
+\hat{\mathbb{Z}}$. Les deux exposants sont dans $\widehat{\mathbb{Z}}$ ; pour
+$\tau$ ce sont des unités, mais rien ne l'impose en général.}. Le changement
+$g \mapsto l_0^{\alpha} g l_1^{-\alpha}$ la laisse invariante avec les mêmes
+$(q, r)$ — ils ne dépendent que de l'automorphisme extérieur. Pour $\tau$, $l_1
+l_1^{q} l_0 = l_0^{r}$ donne $q = -1$, $r = 1$.
+
+La note marginale de la page 9 propose d'écrire plutôt la relation sous la
+forme $\sigma_\infty(g^{-1}) = l_0^{\beta} g\, l_1^{\gamma}$. Tirant
+$\sigma_\infty(g) = l_1^{-q} g^{-1} l_0^{r}$ et inversant, on trouve $\beta =
+-r$ et $\gamma = q$\footnote{La marge écrit « i.e. $\beta = r$, $\gamma = -q$ » :
+les deux signes sont à changer. La page 10 donne d'ailleurs, pour $\tau$,
+« $\beta = -1$ », ce qui est $-r$.}. Mieux : $\beta = \gamma$. En appliquant
+l'involution $\sigma_\infty$ à la relation, on obtient $g\, l_1^{\beta-\gamma}
+g^{-1} = l_0^{\beta-\gamma}$, et dans l'abélianisé, où $\bar l_0$ et $\bar l_1$
+sont indépendants, cela force $\beta = \gamma$. La relation de commutation à
+$\mathfrak{S}_3$ est donc
+\[
+\sigma_\infty(g^{-1}) = l_0^{\beta}\, g\, l_1^{\beta},
+\]
+exactement comme l'écrit la page 11, et le couple $(q, r)$ de la page 9 est
+un seul invariant : $r = -q = -\beta$\footnote{La page 11 conclut « Ce qui
+détermine $\beta$ de façon unique en fonction de $g$ » ; l'égalité $\beta =
+\gamma$ n'y est pas justifiée, et la réduction de $(q, r)$ à un seul nombre
+n'est pas dite. Pour $\tau$ : $\beta = -1$, et en effet $\sigma_\infty(l_1^{-1})
+= l_0^{-1} = l_0^{-1}\, l_1\, l_1^{-1}$.}.
+
+\emph{Le cas discret.} Pour le groupe discret $\pi$, les seules solutions sont
+l'identité et $\tau$ : le groupe des automorphismes extérieurs à lacets de
+$\pi$ est $\Gamma_{0,3}$ (Dehn--Nielsen--Baer), et le centralisateur de
+$\mathfrak{S}_3$ dans $\mathfrak{S}_3 \times \mathbb{Z}/2$ est $\{1, \tau\}$.
+La page décrit la classe de $g$ pour $\tau$ : $g = l_0^{a} l_1^{b}$ avec $a + b
+= 1$, orbite de $l_1$ sous $g \mapsto l_0^{a} g l_1^{-a}$\footnote{La page note
+$\alpha, \beta$ ces deux exposants, ce qui télescope le $\beta$ de la
+relation ; on les renomme. La fin de la seconde ligne du système (« au moins,
+$\beta = -1$ ») se lit mal.}.
+
+\emph{Le groupe $\boldsymbol{\Gamma}$.} Normaliser en $L_1$ plutôt qu'en $L_0$
+revient à remplacer $u$ par $\mathrm{int}(g^{-1})u$, et $g$ par $\rho(g)$ :
+on vérifie $\mathrm{int}(g^{-1})u\,\rho = \mathrm{int}(\rho(g))\,\rho\,
+\mathrm{int}(g^{-1})u$. Sur le groupe $\boldsymbol{\Gamma}$ des automorphismes
+extérieurs à lacets commutant à $\mathfrak{S}_3$ on a donc le multiplicateur
+$\chi : \boldsymbol{\Gamma} \to \widehat{\mathbb{Z}}^{*}$, l'invariant $\beta$ à
+valeurs dans $\widehat{\mathbb{Z}}$, et la classe $\gamma(u)$ de $g$ dans
+l'ensemble des orbites de $\widehat{\mathbb{Z}}$ agissant sur $\widehat{\pi}$
+par $\varphi(\alpha)\cdot g = l_0^{\alpha} g\, l_1^{-\alpha}$. L'application
+\[
+(\gamma, \chi) : \boldsymbol{\Gamma} \longrightarrow
+\widehat{\pi}/\varphi(\widehat{\mathbb{Z}}) \times \widehat{\mathbb{Z}}^{*}
+\]
+est injective, puisque $(p, g)$ détermine $u$, et son image est formée des
+$(g, p)$ satisfaisant les deux relations encadrées (et la condition de
+génération)\footnote{La page écrit le but $\pi/\hat{\mathbb{Z}} \times
+\hat{\mathbb{Z}}^{*}$ ; ce n'est pas un quotient de groupe mais un ensemble
+d'orbites. La note marginale de la page 10 (« $\gamma : E_0 \to \pi$ \ldots{}
+cocycle ») ne se lit que par fragments ; la structure de cocycle est reprise
+proprement aux pages 24 et 36.}.
+
+On reconnaît là, vingt ans avant, la forme des deux premières relations de
+définition du groupe de Grothendieck--Teichmüller $\widehat{GT}$ : dans la
+présentation de Drinfeld (1990), un élément $(\lambda, f)$ agit par $x \mapsto
+x^{\lambda}$, $y \mapsto f^{-1} y^{\lambda} f$, et ses relations (I) et (II)
+traduisent la commutation, modulo automorphismes intérieurs, à la transposition
+$x \leftrightarrow y$ et à la permutation circulaire\footnote{Le rapprochement
+est de cette édition. La normalisation diffère : ici $g$ est fixé par $(**)$,
+non par la condition « $f$ dans le groupe dérivé » de Drinfeld, de sorte que
+les équations ne se superposent pas terme à terme. La troisième relation de
+$\widehat{GT}$, le pentagone, porte sur $\pi_{0,5}$ et n'a pas de trace dans
+ce dossier. Grothendieck ne pouvait connaître ni Drinfeld (1990) ni Ihara
+(1991).}.
+
+\pagerange{11}{14}
+\subsection*{Les racines quasi-carrées $\varepsilon_i$ (pages 11 à 14)}
+
+Dans l'extension de $\mathfrak{S}_3$ par $\widehat{\pi}$ que forment, dans
+$\mathrm{Aut}(\widehat{\pi})$, les $\mathrm{int}(g)$ et les $\sigma_i$, la page
+cherche de « plus jolis générateurs » que les six $l_i, \sigma_i$ : pour chaque
+$i$, un élément $\varepsilon_i$ au-dessus de $\sigma_i$, qui fixe $l_i$ et dont le
+carré est $l_i$. Puisque $\mathrm{int}(l_0)\sigma_\infty$ fixe $l_\infty$, on
+cherche $\varepsilon_\infty = l_0\,\sigma_\infty\, l_\infty^{\alpha}$, et
+$\varepsilon_\infty^2 = l_\infty$ impose $\alpha = 1$\footnote{La page passe par
+plusieurs essais barrés, dont un « prenons $\alpha = 1$ ? » en marge, un calcul
+refusé (« Non ! ») et un calcul accepté (« ok »). La note « doit écrire
+$\varepsilon_0^2 = l_\infty$ » a son indice mal lu : la relation cherchée est
+$\varepsilon_\infty^2 = l_\infty$.}. D'où, par $\rho$,
+\[
+\varepsilon_\infty = l_0\,\sigma_\infty\, l_\infty, \qquad
+\varepsilon_0 = l_1\,\sigma_0\, l_0, \qquad
+\varepsilon_1 = l_\infty\,\sigma_1\, l_1, \qquad \varepsilon_i^2 = l_i,
+\]
+et $\rho\,\varepsilon_i\,\rho^{-1} = \varepsilon_{\rho(i)}$. On a en retour
+$\sigma_0 = \varepsilon_0 \varepsilon_1^2$, $\sigma_1 = \varepsilon_1
+\varepsilon_\infty^2$, $\sigma_\infty = \varepsilon_\infty \varepsilon_0^2$, et
+les relations
+\[
+\varepsilon_0^2\,\varepsilon_1^2\,\varepsilon_\infty^2 = 1, \qquad
+(\varepsilon_0\varepsilon_1^2)^2 = (\varepsilon_1\varepsilon_\infty^2)^2 =
+(\varepsilon_\infty\varepsilon_0^2)^2 = 1 .
+\]
+De $\rho = l_1\sigma_0\sigma_1$ on tire $\rho = \varepsilon_1^2\,\varepsilon_0\,
+\varepsilon_1\, \varepsilon_0^{-2}$, et ses deux conjugués circulaires. En
+multipliant les trois expressions et en écrivant $\rho^3 = 1$, on trouve
+\[
+(\varepsilon_0\,\varepsilon_1\,\varepsilon_\infty)^2 = 1 .
+\]
+
+La page juge cela « inquiétant, car il n'y a pas d'élément d'ordre fini dans le
+groupe discret », en conclut $\varepsilon_0\varepsilon_1\varepsilon_\infty = 1$,
+puis $\sigma_\infty\sigma_1\sigma_0 = 1$, « relation inattendue » — et barre
+tout ce passage. Il a raison de le barrer : les deux relations sont fausses. Le
+produit $\varepsilon_0\varepsilon_1\varepsilon_\infty$ n'est pas dans
+$\widehat{\pi}$, il est au-dessus de la transposition $\sigma_0\sigma_1
+\sigma_\infty = \sigma_1$, et une extension de $\mathfrak{S}_3$ a bien des
+éléments d'ordre $2$ ; en fait
+\[
+\varepsilon_0\,\varepsilon_1\,\varepsilon_\infty = \sigma_1 ,
+\]
+comme le dit la ligne non barrée qui suit (« Sans doute
+$\varepsilon_0\varepsilon_1\varepsilon_\infty = \sigma_1$ »), et
+$\sigma_\infty\sigma_1\sigma_0$ est une transposition, non l'identité. Avec
+$\sigma_1 = \varepsilon_1\varepsilon_\infty^2$, cette égalité équivaut à
+$\varepsilon_0 = \varepsilon_1\varepsilon_\infty\varepsilon_1^{-1}$, et l'on a
+de même
+\[
+\varepsilon_0 = \varepsilon_1\,\varepsilon_\infty\,\varepsilon_1^{-1}, \qquad
+\varepsilon_1 = \varepsilon_\infty\,\varepsilon_0\,\varepsilon_\infty^{-1},
+\qquad \varepsilon_\infty = \varepsilon_0\,\varepsilon_1\,\varepsilon_0^{-1},
+\]
+les trois relations que la page écrit à sa dernière ligne avant la
+critique\footnote{Le second membre de « Sans doute » est un signe court, que la
+transcription lit $\sigma_1$ « sans conviction » ; le calcul confirme cette
+lecture. Toutes les identités de cette section ont été vérifiées dans le
+groupe libre de rang $2$, dans la convention $l_0 l_1 l_\infty = 1$ de cette
+rédaction.}.
+
+\pagerange{14}{22}
+\section*{Seconde rédaction : l'extension discrète $\mathcal{E}_{0,3}$ (pages 14
+à 22)}
+
+\pagerange{14}{16}
+\subsection*{La critique, et la géométrie de la sphère (pages 14 à 16)}
+
+« Critique des notations et de l'approche » : les éléments $l_i$, $\sigma_i$,
+$\varepsilon_i$, $\rho$ vivent dans le groupe discret, qu'il faut distinguer du
+groupe profini, et pour le groupe discret — et, dans une certaine mesure, pour
+le profini — il faut utiliser le langage géométrique du groupoïde fondamental.
+
+On munit $\mathbb{P}^1(\mathbb{C})$ de sa structure de sphère orientée pour
+laquelle $\rho$ est la rotation d'angle $+2\pi/3$ autour de l'axe $P\overline{P}$,
+où $P, \overline{P} = e^{\pm i\pi/3}$ sont ses deux points fixes ; les
+$\sigma_i$ sont les demi-tours autour des axes $(0, 2)$, $(1, -1)$ et
+$(\infty, \frac12)$, et $\tau$ la symétrie par rapport au plan du cercle réel.
+On pose $U = U_{0,3} = \mathbb{P}^1(\mathbb{C}) \setminus \{0, 1, \infty\}$ et
+$\pi = \pi_1(U, P)$.
+
+\emph{Le groupe fondamental mixte.} L'extension $\mathcal{E} =
+\pi_1(U, \Gamma; P)$ de $\Gamma = \mathfrak{S}_3 \times \mathbb{Z}/2$ par $\pi$
+est définie « à la Malgoire » : ses éléments sont les couples $(\gamma, l)$ d'un
+$\gamma \in \Gamma$ et d'une classe d'homotopie de chemins $l$ de $P$ à
+$\gamma^{-1}(P)$, avec
+\[
+(\gamma, l)(\gamma', l') = \bigl(\gamma\gamma',\; \gamma'^{-1}(l) \circ l'\bigr),
+\]
+les chemins se composant comme des fonctions\footnote{La page note d'abord la
+classe $(\gamma, \lambda)$, puis $(\gamma, l)$. La convention « comme des
+fonctions » est celle qui fait opérer le groupoïde fondamental à gauche sur
+les fibres d'un revêtement. J. Malgoire est son collègue de Montpellier ; le
+dossier ne dit pas à quel texte il renvoie — vraisemblablement aux
+\emph{Cartes cellulaires} de Malgoire et C. Voisin (1977).}. C'est ce qu'on
+appelle aujourd'hui le groupe fondamental orbifold (ou équivariant) de $U$ sous
+$\Gamma$ : le $\pi_1$ de la construction de Borel $U_{h\Gamma}$, qui s'insère
+dans $1 \to \pi \to \mathcal{E} \to \Gamma \to 1$. Comme $\pi$ est de centre
+trivial et que le centralisateur de $\pi$ dans $\mathcal{E}$ est trivial,
+$\mathcal{E}$ se plonge dans $\mathrm{Aut}(\pi)$, et c'est là qu'on vérifie les
+relations ci-dessous.
+
+\emph{Les lacets.} On relève les $\sigma_i$ en des éléments de $\mathcal{E}$ en
+les accompagnant du demi-grand cercle de $P$ à $\overline{P} = \sigma_i(P)$
+fixé par la symétrie $\tau\sigma_i$ ; $\rho$ se relève avec le chemin constant.
+Soit $l_i$ le lacet de $P$ qui va vers $i$ par un arc de grand cercle, en fait
+le tour dans le sens direct et revient. Alors
+\[
+(1)\qquad l_\infty\, l_1\, l_0 = 1,
+\]
+« et non $l_0 l_1 l_\infty = 1$ ! » : la composition « comme des fonctions »
+renverse l'ordre de la première rédaction.
+
+\pagerange{17}{19}
+\subsection*{Présentation de $\mathcal{E}^{+}$, et les $\varepsilon_i$ revus
+(pages 17 à 19)}
+
+On note $\mathcal{E}^{+}$ l'image inverse de $\mathfrak{S}_3$. Les relevés
+satisfont
+\[
+(2)\qquad \sigma_0^2 = \sigma_1^2 = \sigma_\infty^2 = 1, \qquad
+\sigma_0\sigma_1 = \rho\, l_0, \quad \sigma_1\sigma_\infty = \rho\, l_1, \quad
+\sigma_\infty\sigma_0 = \rho\, l_\infty,
+\]
+avec $\rho\sigma_i\rho^{-1} = \sigma_{\rho(i)}$, et les conjugaisons
+\[
+(7)\qquad \mathrm{int}(\rho)(l_i) = l_{\rho(i)}, \qquad
+\mathrm{int}(\sigma_0) : l_1 \leftrightarrow l_\infty,\;
+l_0 \mapsto l_\infty^{-1} l_1^{-1} = \mathrm{int}(l_1)(l_0),
+\]
+et de même, par $\rho$, pour $\sigma_1$ et $\sigma_\infty$\footnote{Les seconds
+membres de (2) sont récrits sur la page : on y devine une première écriture
+$l_0\rho$, $l_1\rho$, $l_\infty\rho$, corrigée en $\rho\, l_0$, $\rho\, l_1$,
+$\rho\, l_\infty$. La correction est juste ; la première écriture reviendra à
+la page 29. La note marginale de la page 17 donne $\sigma_0(l_0) = l_0^{-1}
+l_1^{-1}$, qui n'est pas compatible avec (1) ; celle de la page 19 donne la
+bonne valeur $l_\infty^{-1} l_1^{-1}$. La formule qui introduit (7) (« comme
+$\sigma_i = \ldots$ ») est mal lue.}.
+
+On ne voit pas d'expression de $\rho$ par les seuls $\sigma_i$, et pour cause :
+une première affirmation, que les relations d'une présentation de
+$\mathfrak{S}_3$ jointes à (1) et (2) présentent $\mathcal{E}^{+}$, est barrée et
+jugée « fausse » en marge. La page 19 propose alors : générateurs $\sigma_0,
+\sigma_1, \sigma_\infty, \rho$, et relations
+\[
+(4)\quad (\rho^{-1}\sigma_\infty\sigma_0)(\rho^{-1}\sigma_1\sigma_\infty)
+(\rho^{-1}\sigma_0\sigma_1) = 1, \qquad
+(5)\quad \sigma_0^2 = \sigma_1^2 = \sigma_\infty^2 = 1, \qquad
+(6)\quad \rho^3 = 1,
+\]
+où (4) est (1) après élimination des $l_i$ par (2). Ces relations sont vraies
+dans $\mathcal{E}^{+}$, mais elles ne le présentent pas : le groupe qu'elles
+définissent a pour abélianisé $(\mathbb{Z}/2)^3 \times \mathbb{Z}/3$, alors que
+celui de $\mathcal{E}^{+}$ est $\mathbb{Z}/6$. Il faut ajouter les relations
+$\rho\sigma_i\rho^{-1} = \sigma_{\rho(i)}$ — ce que dit la note marginale de la
+même page (« Il faut ajouter la relation \ldots{} $\rho\sigma_0\rho^{-1} =
+\sigma_1$ »). Elles rendent $\sigma_1, \sigma_\infty$ superflus, et (4) devient
+alors conséquence de $\sigma_0^2 = \rho^3 = 1$ ; il reste
+\[
+\mathcal{E}^{+} = \langle\, \sigma_0, \rho \mid \sigma_0^2 = \rho^3 = 1 \,\rangle
+\simeq \mathbb{Z}/2 * \mathbb{Z}/3 \simeq PSL_2(\mathbb{Z}) .
+\]
+En effet, la fonction modulaire $\lambda$ identifie $U$ au quotient du
+demi-plan de Poincaré par l'image $\overline{\Gamma(2)}$ du sous-groupe de
+congruence $\Gamma(2)$, et l'action anharmonique de $\mathfrak{S}_3$ sur $U$ à
+celle de $PSL_2(\mathbb{Z})/\overline{\Gamma(2)} \simeq PSL_2(\mathbb{F}_2)$ ;
+le groupe des relèvements au demi-plan, qui est $\mathcal{E}^{+}$, est donc
+$PSL_2(\mathbb{Z})$. Celui-ci est engendré par $\sigma_0$ et $\rho$, ce qui
+donne une surjection de $\mathbb{Z}/2 * \mathbb{Z}/3$ sur un groupe qui lui est
+isomorphe ; comme il est de type fini et résiduellement fini, donc hopfien,
+c'est un isomorphisme\footnote{Cette identification, et l'argument, sont de
+cette édition ; le dossier ne nomme pas $PSL_2(\mathbb{Z})$. La remarque de la
+page 19 — si l'on fait $\sigma_i = 1$ il ne reste que $\rho^3 = 1$, « ce qui
+prouve que $\rho$ n'est pas » exprimable par les $\sigma_i$ — est juste, et
+vaut aussi pour la présentation complétée : le quotient par le sous-groupe
+distingué engendré par $\sigma_0$ est $\mathbb{Z}/3$.}.
+
+\emph{Les $\varepsilon_i$, seconde version (page 18).} Dans les nouvelles
+conventions,
+\[
+(8)\qquad \varepsilon_0 = l_0\,\sigma_0\, l_1, \qquad
+\varepsilon_1 = l_1\,\sigma_1\, l_\infty, \qquad
+\varepsilon_\infty = l_\infty\,\sigma_\infty\, l_0,
+\]
+avec $\varepsilon_i^2 = l_i$ (la page le vérifie pour $\varepsilon_0$, par
+$\sigma_0(l_1 l_0) = l_1^{-1}$) et $\rho\varepsilon_i\rho^{-1} =
+\varepsilon_{\rho(i)}$\footnote{Dans le premier (8), barré, de la page 19 comme
+dans celui de la page 18, les exposants des $l$ sont surchargés et illisibles ;
+la vérification « on a bien $\varepsilon_0^2 = l_0$ » de la page 18 fixe les
+exposants à $1$. La page note que « les $\varepsilon_i$ ici sont les
+$\varepsilon_i^{-1}$ de tantôt », ce qui tient au renversement de l'ordre des
+lacets entre les deux rédactions.}. On a aussi $\varepsilon_1 =
+\sigma_0\,\rho$ : les $\varepsilon_i$ sont, dans $PSL_2(\mathbb{Z})$, les
+générateurs paraboliques des stabilisateurs de pointes, dont les carrés
+engendrent ceux de $\overline{\Gamma(2)}$ — c'est pourquoi ils sont « racines
+carrées » des lacets. Le calcul de la page donne
+\[
+(9)\qquad
+\varepsilon_0\varepsilon_1 = l_0\, l_\infty^2\, \rho\, l_0\, l_\infty, \qquad
+\varepsilon_1\varepsilon_\infty = l_1\, l_0^2\, \rho\, l_1\, l_0, \qquad
+\varepsilon_\infty\varepsilon_0 = l_\infty\, l_1^2\, \rho\, l_\infty\, l_1,
+\]
+et, en éliminant les $l_i = \varepsilon_i^2$, la page 21 écrit le système
+\[
+(10)\qquad \rho^3 = 1, \quad
+\varepsilon_\infty^2\varepsilon_1^2\varepsilon_0^2 = 1, \quad
+\begin{aligned}
+\varepsilon_1 &= \varepsilon_0\,\varepsilon_\infty^{4}\,\rho\,\varepsilon_0^{2}\,\varepsilon_\infty^{2},\\
+\varepsilon_\infty &= \varepsilon_1\,\varepsilon_0^{4}\,\rho\,\varepsilon_1^{2}\,\varepsilon_0^{2},\\
+\varepsilon_0 &= \varepsilon_\infty\,\varepsilon_1^{4}\,\rho\,\varepsilon_\infty^{2}\,\varepsilon_1^{2},
+\end{aligned}
+\]
+qui est exactement (1) et (9) récrits\footnote{Le système (10) est lu « tel quel
+et très incertain » ; les exposants lus $4$ sont ceux que (9) impose. À la
+deuxième des trois dernières lignes, la transcription lit (avec doute)
+$\varepsilon_\infty^2$ au pénultième facteur ; (9) exige $\varepsilon_1^2$, et
+c'est ce qui est écrit ici. Les trois lignes ont été vérifiées dans le groupe
+libre.}. La note marginale de la page 21 demande d'y ajouter « (au moins !) »
+les relations $\rho\varepsilon_0\rho^{-1} = \varepsilon_1$, etc. ; avec elles,
+$\mathcal{E}^{+} = \langle \varepsilon_1, \rho \mid \rho^3 =
+(\varepsilon_1\rho^{-1})^2 = 1 \rangle$, puisque $\sigma_0 =
+\varepsilon_1\rho^{-1}$.
+
+\pagerange{20}{21}
+\subsection*{Le relèvement canonique du stabilisateur de $P$ (pages 21 et 20)}
+
+Le stabilisateur de $P$ dans $\Gamma$ est d'ordre $6$ : $\{1, \dot\rho,
+\dot\rho^2, \dot\sigma_0\tau, \dot\sigma_1\tau, \dot\sigma_\infty\tau\}$, car
+les $\sigma_i$ et $\tau$ échangent $P$ et $\overline{P}$. C'est l'image de la
+section
+\[
+(11)\qquad \varphi : \mathfrak{S}_3 \longrightarrow \Gamma, \qquad \sigma
+\longmapsto \bigl(\sigma, \tau^{\,(1-\operatorname{sg}\sigma)/2}\bigr),
+\]
+qu'on note $\Gamma_P$. Puisque $P$ est fixe, ses éléments se relèvent
+canoniquement dans $\mathcal{E}$, avec le chemin constant :
+\[
+(12)\qquad \sigma \longmapsto \tilde\sigma : \mathfrak{S}_3 \longrightarrow
+\mathcal{E}, \qquad \tilde\rho = \rho,
+\]
+et $\tilde\sigma_i$ est la symétrie par rapport au plan $(P, \overline{P},
+i)$. On a donc
+\[
+(13)\qquad \tilde\sigma_0^2 = \tilde\sigma_1^2 = \tilde\sigma_\infty^2 = 1,
+\qquad \tilde\sigma_0\tilde\sigma_1 = \tilde\sigma_1\tilde\sigma_\infty =
+\tilde\sigma_\infty\tilde\sigma_0 = \rho,
+\]
+d'où $\rho^3 = 1$, et l'image inverse de $\Gamma_P$ dans $\mathcal{E}$ est le
+produit semi-direct $\pi \rtimes \mathfrak{S}_3$\footnote{La page 20 écrit
+« l'image inverse $\widetilde\Sigma$ de $\varphi(\mathfrak{S}_3) = \Gamma$ » ;
+$\varphi(\mathfrak{S}_3)$ est $\Gamma_P$, d'indice $2$ dans $\Gamma$. La
+parenthèse « (ss-groupe diédral 2) » est incertaine.}. Les $\tilde\sigma_i$
+renversent l'orientation, donc les lacets :
+\[
+(14)\qquad \tilde\sigma_0\, l_0\, \tilde\sigma_0^{-1} = l_0^{-1}, \qquad
+\tilde\sigma_0\, l_1\, \tilde\sigma_0^{-1} = l_\infty^{-1}, \qquad
+\tilde\sigma_0\, l_\infty\, \tilde\sigma_0^{-1} = l_1^{-1},
+\]
+et de même, par $\rho$, pour $\tilde\sigma_1, \tilde\sigma_\infty$. Les
+relations (13), (14) et (1) présentent cette image inverse. Enfin
+\[
+(15)\qquad \tau_i = \sigma_i\,\tilde\sigma_i = \tilde\sigma_i\,\sigma_i
+\qquad (i = 0, 1, \infty), \qquad (16)\qquad \tau_i^2 = 1,
+\]
+trois relevés de $\tau$ dans $\mathcal{E}$, avec $\rho\,\tau_i\,\rho^{-1} =
+\tau_{\rho(i)}$\footnote{Que $\sigma_i$ et $\tilde\sigma_i$ commutent est
+affirmé par la page et vérifié ici ; les trois notes marginales en oblique de
+la page 20 ne se lisent que par fragments.}.
+
+\pagerange{22}{22}
+\subsection*{Le groupe cartographique (page 22)}
+
+L'image inverse $\mathcal{E}_\tau$ de $\{1, \tau\}$ est engendrée par $\tau_0,
+\tau_1, \tau_\infty$, avec
+\[
+(17)\qquad l_0 = \tau_\infty\,\tau_1, \qquad l_1 = \tau_0\,\tau_\infty, \qquad
+l_\infty = \tau_1\,\tau_0,
+\]
+et les seules relations (16) : $\mathcal{E}_\tau \simeq \mathbb{Z}/2 *
+\mathbb{Z}/2 * \mathbb{Z}/2$, et $\pi$ est le noyau du morphisme $\tau_i \mapsto
+-1$ vers $\{\pm 1\}$, libre sur les $l_i$ définis par (17). C'est le
+« groupe cartographique de Malgoire » : le groupe qui décrit les cartes tracées
+sur une surface par son action sur les drapeaux, et dont le sous-groupe
+d'indice $2$ des mots de longueur paire est $\pi_{0,3}$\footnote{Deux mots du
+nom (« groupe cartographique “\ldots{} \ldots” de Malgoire ») sont illisibles.
+Le groupe cartographique est exposé dans l'\emph{Esquisse d'un programme}
+(1984) ; la relation $l_\infty l_1 l_0 = 1$ découle de (17) et de (16).}.
+
+\pagerange{22}{25}
+\section*{Le complété et les automorphismes à lacets (pages 22 à 25)}
+
+Soit $\widehat{\mathcal{E}}$ le complété profini de $\mathcal{E}$, extension de
+$\widehat{\Gamma} = \Gamma$ par $\widehat{\pi}$, et $\hat{\hat{\mathcal{E}}} =
+\mathrm{Aut}_{\mathrm{lac}}(\widehat{\pi})$, extension de $\hat{\hat\Gamma} =
+\mathrm{Out}_{\mathrm{lac}}(\widehat{\pi})$ par $\widehat{\pi}$ :
+\[
+(18)\qquad 1 \longrightarrow \widehat{\pi} \longrightarrow
+\hat{\hat{\mathcal{E}}} \longrightarrow \hat{\hat\Gamma} \longrightarrow 1,
+\]
+qui contient $\widehat{\mathcal{E}}$ comme sous-extension. Soit
+$\boldsymbol{\Gamma}$ le centralisateur de $\mathfrak{S}_3$ dans
+$\hat{\hat\Gamma}$ — le groupe des pages 6 à 11 — et $\mathbf{E}$ son image
+inverse dans $\hat{\hat{\mathcal{E}}}$. Alors $\Gamma \cap \boldsymbol{\Gamma}
+= \{1, \tau\}$ et $\boldsymbol{\Gamma} \cap \mathfrak{S}_3 = \{1\}$, puisque
+$\mathfrak{S}_3$ est de centre trivial\footnote{La lecture « $\Gamma \cap
+\boldsymbol{\Gamma}$ » est incertaine : le second $\Gamma$, à double jambage,
+recouvre un $\mathfrak{S}_3$.}.
+
+Un élément de $\boldsymbol{\Gamma}$ agit trivialement sur les trois classes
+d'inertie (sa permutation commute à tout $\mathfrak{S}_3$), donc
+$\boldsymbol{\Gamma} \subset \hat{\hat\Gamma}^{!}$, la partie pure ; et comme
+$\mathfrak{S}_3$ se relève dans $\hat{\hat\Gamma}$, $\hat{\hat\Gamma} =
+\hat{\hat\Gamma}^{!} \rtimes \mathfrak{S}_3 \supset \mathfrak{S}_3 \times
+\boldsymbol{\Gamma}$. La note marginale de la page 23 dit : « j'ignore si
+elles coïncident », c'est-à-dire si $\boldsymbol{\Gamma} =
+\hat{\hat\Gamma}^{!}$ — si tout automorphisme extérieur à lacets pur commute à
+$\mathfrak{S}_3$. Le dossier ne tranche pas, et nous non plus\footnote{La page
+écrit « si $\hat{\hat\Gamma}^{!} \to \boldsymbol{\Gamma}$ est une égalité » ;
+la flèche est l'inclusion $\boldsymbol{\Gamma} \subset \hat{\hat\Gamma}^{!}$.
+L'exposant $!$ n'est pas défini sur la page ; il est lu d'après la suite
+(pages 23 à 25), où $\hat{\hat{\mathcal{E}}}^{!}$ est décrit sans permutation.
+L'action du groupe de Galois de $\overline{\mathbb{Q}}/\mathbb{Q}$ tombe dans
+$\boldsymbol{\Gamma}$, puisque les $\sigma_i$ sont définis sur $\mathbb{Q}$.}.
+
+\emph{Description symétrique.} Pour décrire $\hat{\hat{\mathcal{E}}}^{!}$ sans
+privilégier $L_0$, on donne $u$ par son multiplicateur et trois éléments :
+\[
+(19)\quad p = \chi(u) \in \widehat{\mathbb{Z}}^{*}, \qquad
+(20)\quad g_i \in \widehat{\pi}, \qquad
+(21)\quad u(l_i) = \mathrm{int}(g_i)(l_i^{p}) \quad (i = 0, 1, \infty),
+\]
+liés par
+\[
+(22)\qquad \mathrm{int}(g_\infty)(l_\infty^{p})\cdot
+\mathrm{int}(g_1)(l_1^{p})\cdot \mathrm{int}(g_0)(l_0^{p}) = 1,
+\]
+et par la condition que les trois facteurs engendrent
+$\widehat{\pi}$\footnote{Aux pages 23 et 24 la page écrit
+$\mathrm{int}(g_i^{-1})$, l'exposant $-1$ ajouté après coup d'un crayon plus
+noir ; aux pages 32 à 37 il a disparu. Les formules (23) et (24), et la phrase
+sur $\mathrm{int}(g)\circ u$, ne sont justes que \emph{sans} l'exposant ; on
+adopte donc partout la convention des pages 32 et suivantes.}. Pour $u$ donné,
+$p$ est unique et chaque $g_i$ est défini à multiplication à droite près par
+un élément de $L_i$ ; composer $u$ avec $\mathrm{int}(g)$ garde $p$ et remplace
+les $g_i$ par les $g\,g_i$\footnote{La page dit « à multiplication à gauche
+près » ; c'est à gauche dans sa convention avec $g_i^{-1}$, à droite dans
+celle-ci.}. Si $v$ est donné par $q$ et $(h_i)$,
+\[
+(23)\qquad vu(l_i) = \mathrm{int}\bigl(v(g_i)\, h_i\bigr)(l_i^{pq}).
+\]
+
+\emph{L'extension $S\hat{\hat{\mathcal{E}}}^{!}$.} Soit
+$S\hat{\hat{\mathcal{E}}}^{!}$ le groupe des systèmes $(p, g_0, g_1, g_\infty)
+\in \widehat{\mathbb{Z}}^{*} \times \widehat{\pi}^{\{0, 1, \infty\}}$ satisfaisant
+(22) et la condition de génération, avec la loi que donne (23). C'est une
+extension de $\hat{\hat{\mathcal{E}}}^{!}$ par $\widehat{\mathbb{Z}}^{\{0,1,\infty\}}$
+(le choix des $g_i$ modulo $L_i$), et les trois fonctions $\gamma_i :
+(u, (g_j)) \mapsto g_i$ satisfont
+\[
+(24)\qquad \gamma_i(\tilde v\tilde u) = \tilde v\bigl(\gamma_i(\tilde u)\bigr)\,
+\gamma_i(\tilde v) :
+\]
+$(\gamma_i)$ est un $1$-cocycle de $S\hat{\hat{\mathcal{E}}}^{!}$ à valeurs dans
+$\widehat{\pi}^{\{0,1,\infty\}}$\footnote{Avec le produit dans cet ordre, c'est
+$(\gamma_i^{-1})$ qui satisfait la règle usuelle $c(vu) = c(v)\,v(c(u))$ des
+homomorphismes croisés pour l'action à gauche. Deux premières écritures du
+second membre de (24) sont biffées sur la page.}. Le noyau de
+$S\hat{\hat{\mathcal{E}}}^{!} \to \mathrm{Out}^{!}_{\mathrm{lac}}(\widehat{\pi})$
+s'identifie au produit
+\[
+\widehat{\pi} \times \prod_{i} L_i \simeq \widehat{\pi} \times
+\widehat{\mathbb{Z}}^{\{0,1,\infty\}}, \qquad (g, (\alpha_i)) \longmapsto
+\bigl(1, (g\, l_i^{\alpha_i})_i\bigr).
+\]
+
+La page 25 se donne pour tâche d'expliciter l'action des $\sigma_i$, des
+$\varepsilon_i$ et de $\rho$ sur ces groupes, et en particulier la
+« covariance » des $\gamma_i$ par $\rho$. La formule juste est celle que
+donnera (15) à la page 36 :
+\[
+\gamma_{\rho(i)}\bigl(\tilde\rho\,\tilde u\,\tilde\rho^{-1}\bigr) =
+\rho\bigl(\gamma_i(\tilde u)\bigr).
+\]
+C'est la forme que prend la covariance\footnote{La page écrit
+$\gamma_i(\rho\tilde u\rho^{-1}) = \gamma_{i+1}(\tilde u)$ : il manque
+l'application de $\rho$, et le décalage d'indice est dans l'autre sens. Elle
+est d'ailleurs énoncée comme un programme (« il faudrait expliciter \ldots{} et en
+particulier \ldots »), non comme un résultat.}.
+Une note marginale annonce aussi le groupe $S\widehat{\mathcal{E}}$, extension
+de $\widehat{\mathcal{E}}$ par $\widehat{\mathbb{Z}}^{\{0,1,\infty\}}$, et les
+relèvements des $\sigma_i$ et de $\rho$ dans ce groupe.
+
+\pagerange{26}{31}
+\section*{Scindages partiels et présentations de $\mathcal{E}$ (pages 26 à 31)}
+
+\pagerange{26}{28}
+\subsection*{Les sous-groupes finis, point fixe par point fixe (pages 26 à 28)}
+
+Les classes de conjugaison de scindages partiels maximaux de $\mathcal{E}$ —
+de ses sous-groupes finis maximaux — correspondent aux points de $U$ fixés par
+un élément non trivial de $\Gamma$, et aux composantes connexes des lieux fixes
+des involutions antiholomorphes\footnote{La page énumère $\dot\rho\tau$ parmi
+ces dernières ; $\dot\rho\tau$ est d'ordre $6$ et sans point fixe, et la page
+dit d'ailleurs « éventuellement ».}. La page les passe en revue.
+
+\begin{itemize}
+\item \textbf{Les points $P$, $\overline{P}$}, fixes de $\dot\rho$, de
+stabilisateur $\Gamma_P$ d'ordre $6$. Le relèvement correspondant est celui des
+pages 21 et 20 ; ceux relatifs à $\overline{P}$ s'en déduisent en conjuguant par
+un élément de $\mathcal{E}$ au-dessus d'un élément de $\Gamma$ qui envoie $P$
+sur $\overline{P}$ ($\dot\sigma_i$, $\tau$, $\tau\dot\rho$, $\tau\dot\rho^2$).
+\item \textbf{Les points $0' = 2$, $1' = -1$, $\infty' = \frac12$}, seuls points
+fixes dans $U$ de $\dot\sigma_0, \dot\sigma_1, \dot\sigma_\infty$ (l'autre point
+fixe, $0$, $1$ ou $\infty$, est ôté). Leurs stabilisateurs $\Gamma_{i'} =
+\langle \dot\sigma_i, \tau\rangle \simeq \mathbb{Z}/2 \times \mathbb{Z}/2$ se
+relèvent par $\dot\sigma_i \mapsto \sigma_i$, $\tau \mapsto \tau_i$ ; pour
+$0'$, le chemin est le quart de grand cercle qui joint $P$ au milieu $2$ de
+l'arc $(1, \infty)$ opposé à $0$\footnote{Sur la page, l'indice de
+$\Gamma_{\frac12}$ ressemble à un $2$ ; il est lu d'après le point fixe nommé
+juste avant. La phrase qui justifie le relèvement (page 27) est très lacunaire.}.
+\item \textbf{Le lieu fixe de $\tau$} : $U^{\tau}$ a trois composantes, les arcs
+$(0,1)$, $(1,\infty)$, $(\infty, 0)$ du cercle réel, contenant chacun un seul
+des points $\infty', 0', 1'$ ; les relèvements correspondants de $\{1, \tau\}$
+sont $\tau_\infty$, $\tau_0$, $\tau_1$, et ne donnent rien de nouveau.
+\item \textbf{Le lieu fixe de $\tau\dot\sigma_1$}, $z \mapsto 1/\bar z$ : c'est
+$\{|z| = 1\} \setminus \{1\}$, connexe, contenant $P$ et $\overline{P}$ ; il
+redonne le relèvement $\tilde\sigma_1$ de $\dot\sigma_1\tau$. De même, par
+$\rho$, pour $\tau\dot\sigma_\infty$ et $\tau\dot\sigma_0$.
+\end{itemize}
+
+\pagerange{28}{30}
+\subsection*{Présentations de $\mathcal{E}$ (pages 28 à 30)}
+
+Un premier essai, par un générateur $\rho'$ d'ordre $6$ avec $\rho'^3 = \tau$,
+est barré\footnote{Le générateur est écrit sur une rature ; la transcription le
+note $\rho'$, les exposants lus « 16 » et « 13 » étant vraisemblablement
+$\rho'^6$ et $\rho'^3$. Le paragraphe qui achève la phrase, en haut de la page
+29, est barré lui aussi.}. La page 29 part de la présentation de $\Gamma$ par
+$\dot\sigma_0, \dot\sigma_1, \dot\sigma_\infty, \dot\rho, \tau$ et relève en
+$\sigma_i, \rho, \tau_i$. Les relations vraies dans $\mathcal{E}$ sont
+\[
+\begin{gathered}
+\sigma_i^2 = \tau_i^2 = 1, \qquad \rho^3 = 1, \qquad
+\rho\,\tau_i\,\rho^{-1} = \tau_{\rho(i)}, \qquad
+\rho\,\sigma_i\,\rho^{-1} = \sigma_{\rho(i)}, \qquad
+\tau_i\,\sigma_i = \sigma_i\,\tau_i, \\
+\sigma_0\sigma_1 = \rho\,\tau_\infty\tau_1 = \tau_0\tau_\infty\,\rho, \qquad
+\sigma_1\sigma_\infty = \tau_1\tau_0\,\rho, \qquad
+\sigma_\infty\sigma_0 = \tau_\infty\tau_1\,\rho,
+\end{gathered}
+\]
+la dernière ligne étant (2) récrite par (17), $\rho\, l_0 = l_1\,\rho$\footnote{La
+page écrit $\sigma_0\sigma_1 = \tau_\infty\tau_1\rho = l_0\,\rho$, et de même
+pour les deux autres : c'est la première écriture, corrigée, des seconds
+membres de (2) à la page 17. Elle est fausse dans $\mathcal{E}$ : $l_0\rho \neq
+\rho\, l_0$. Les relations $\rho\sigma_i\rho^{-1} = \sigma_{\rho(i)}$ sont
+ajoutées en marge (« Il faut ajouter \ldots »), et une seconde note marginale
+retrouve (17).}.
+
+La page 30 réduit les générateurs à $\rho, \sigma_0, \tau_0$, les autres s'en
+déduisant par conjugaison par $\rho$. La relation qui reste, tirée de
+$\sigma_0\sigma_1 = \rho\,\tau_\infty\tau_1$ avec $\sigma_1 = \rho\sigma_0
+\rho^{-1}$, $\tau_\infty = \rho^2\tau_0\rho^{-2}$, $\tau_1 = \rho\tau_0\rho^{-1}$,
+est
+\[
+\sigma_0\,\rho\,\sigma_0\,\rho^{-1} = \tau_0\,\rho^{-1}\,\tau_0\,\rho^{-1},
+\qquad \text{soit} \qquad (\sigma_0\,\tau_0\,\rho)^2 = 1 ,
+\]
+et
+\[
+\mathcal{E} = \bigl\langle\, \rho, \sigma_0, \tau_0 \bigm| \sigma_0^2 =
+\tau_0^2 = (\sigma_0\tau_0)^2 = \rho^3 = (\sigma_0\tau_0\rho)^2 = 1
+\,\bigr\rangle ,
+\]
+quotient du produit libre $(\mathbb{Z}/2 \times \mathbb{Z}/2) * \mathbb{Z}/3$
+par une seule relation, comme le dit la page\footnote{La page aboutit à
+$[\rho, \sigma_0][\rho^{-1}, \tau_0] = 1$. Cette relation est fausse, et pas
+seulement dans $\mathcal{E}$ : son image dans $\Gamma$ est $\dot\rho^{-1} \neq 1$.
+Deux glissements y mènent : l'ordre $l_0\rho$ de la page 29, puis, au passage à
+« i.e. », un $\rho$ écrit pour $\rho^{-1}$. La relation vraie a été vérifiée
+dans le groupe libre ; l'accolade de la page sous $\sigma_0\rho\sigma_0^{-1}
+\rho^{-1}$ porte « $\sigma_1$ », là où c'est $\sigma_0\sigma_1$.}. Avec
+$a = \tau_0$, $b = \tilde\sigma_0 = \sigma_0\tau_0$ et $c = \tilde\sigma_1 =
+\tilde\sigma_0\,\rho$, c'est la présentation du groupe de Coxeter
+$\langle a, b, c \mid a^2, b^2, c^2, (ab)^2, (bc)^3 \rangle$ du triangle
+d'angles $\pi/2, \pi/3, 0$, c'est-à-dire du groupe modulaire étendu
+$PGL_2(\mathbb{Z})$. En effet, les relations valant dans $\mathcal{E}$, on
+a un morphisme surjectif de ce groupe de Coxeter sur $\mathcal{E}$ ; il envoie
+le sous-groupe d'indice $2$ des mots pairs, engendré par $ab = \sigma_0$ et
+$bc = \rho$ et classiquement isomorphe à $\mathbb{Z}/2 * \mathbb{Z}/3$,
+isomorphiquement sur $\mathcal{E}^{+}$ (page 19), et il est compatible aux
+deux morphismes vers $\mathbb{Z}/2$ ; c'est donc un isomorphisme\footnote{L'identification à $PGL_2(\mathbb{Z})$ est de cette édition.}.
+
+La page remarque enfin une symétrie qui échange $\sigma_0$ et $\tau_0$, et
+$\rho$ et $\rho^{-1}$ ; elle respecte bien les relations ci-dessus, puisque
+$\tilde\sigma_0$ conjugue $\rho$ en $\rho^{-1}$. Mais elle n'est pas compatible
+avec la structure d'extension : si elle préservait $\pi$, elle induirait sur
+$\Gamma$ un automorphisme échangeant $\tau$, central, et $\dot\sigma_0$, qui ne
+l'est pas\footnote{La page le dit « comme on voit de suite », avec une
+parenthèse incertaine sur le passage au quotient ; l'argument par le centre est
+de cette édition.}.
+
+\pagerange{31}{31}
+\subsection*{L'extension $S\Gamma$ (page 31)}
+
+Il faudrait encore expliciter l'extension $S\Gamma = S\Gamma_{0,3}$ de $\Gamma$
+par $\mathbb{Z}^{\{0,1,\infty\}}$, d'où, par produit fibré, $S\mathcal{E} =
+S\Gamma \times_\Gamma \mathcal{E}$. La page s'arrête là ; la suite
+(pages 32 à 37) construit d'abord le groupe complété et revient à
+$S\mathcal{E}$ par restriction.
+
+\pagerange{32}{37}
+\section*{Le groupe $S\hat{\hat{\mathcal{E}}}$ (pages 32 à 37)}
+
+\pagerange{32}{33}
+\subsection*{Coordonnées et loi de groupe (pages 32 et 33)}
+
+« (2) Le groupe $S\hat{\hat{\mathcal{E}}}$ » : c'est l'ensemble des systèmes
+\[
+(1)\qquad \tilde u = (p, \sigma, g_0, g_1, g_\infty), \qquad p \in
+\widehat{\mathbb{Z}}^{*},\ \sigma \in \mathfrak{S}_3,\ g_i \in \widehat{\pi},
+\]
+satisfaisant
+\[
+(2)\qquad \mathrm{int}(g_\infty)(l_{\sigma(\infty)}^{p}) \cdot
+\mathrm{int}(g_1)(l_{\sigma(1)}^{p}) \cdot \mathrm{int}(g_0)(l_{\sigma(0)}^{p})
+= 1,
+\]
+et tels que les trois facteurs engendrent $\widehat{\pi}$ ; à $\tilde u$ est
+associé l'automorphisme à lacets
+\[
+(3)\qquad u(l_i) = \mathrm{int}(g_i)(l_{\sigma(i)}^{p}), \qquad
+(4)\qquad S\hat{\hat{\mathcal{E}}} \longrightarrow \hat{\hat{\mathcal{E}}} =
+\mathrm{Aut}_{\mathrm{lac}}(\widehat{\pi}), \quad \tilde u \mapsto u .
+\]
+Le morphisme
+\[
+(5)\qquad i : \widehat{\pi} \times \widehat{\mathbb{Z}}^{\{0,1,\infty\}}
+\longrightarrow S\hat{\hat{\mathcal{E}}}, \qquad
+(6)\qquad i(g; \alpha_0, \alpha_1, \alpha_\infty) = (1, 1, g\, l_0^{\alpha_0},
+g\, l_1^{\alpha_1}, g\, l_\infty^{\alpha_\infty}),
+\]
+est un homomorphisme injectif du produit direct, et (7) l'image de
+$i(g; \alpha)$ par (4) est $\mathrm{int}(g)$. Donc (4) est surjectif, de noyau
+$i(\{1\} \times \widehat{\mathbb{Z}}^{\{0,1,\infty\}})$, et
+$i(\widehat{\pi} \times \widehat{\mathbb{Z}}^{\{0,1,\infty\}})$ est le noyau du
+composé $S\hat{\hat{\mathcal{E}}} \to
+\mathrm{Out}_{\mathrm{lac}}(\widehat{\pi})$\footnote{La note marginale dit que
+(4) « a comme noyau $i(\hat\pi)$ » ; ce n'est ni l'un ni l'autre de ces deux
+noyaux.}. La multiplication est
+\[
+(8)\qquad (p, \sigma, g_0, g_1, g_\infty)\,(p', \sigma', g'_0, g'_1, g'_\infty)
+= \bigl(pp',\ \sigma\sigma',\ (u(g'_i)\, g_{\sigma'(i)})_{i}\bigr),
+\]
+comme on le vérifie en appliquant $u$ à $u'(l_i) = \mathrm{int}(g'_i)
+(l_{\sigma'(i)}^{p'})$. Elle n'est pas « entièrement explicite », note la page,
+puisqu'elle fait intervenir $u(g'_i)$, calculable seulement quand $g'_i$ est
+donné comme un mot (ou une limite de mots) en les $l_j$. Elle l'est quand le
+premier facteur est dans l'image de $i$ :
+\[
+(9)\qquad i(g; \alpha)\,(p, \sigma, g_i) = \bigl(p, \sigma, (g\, g_i\,
+l_{\sigma(i)}^{\alpha_{\sigma(i)}})_i\bigr),
+\]
+ce qui pour $\sigma = 1$ donne (9') $(p, 1, (g\, g_i\, l_i^{\alpha_i})_i)$ ; et
+l'action de $S\hat{\hat{\mathcal{E}}}$ par conjugaison sur l'image de $i$ ne
+dépend que de $u$ :
+\[
+(10)\qquad \tilde u\; i(g; \alpha_0, \alpha_1, \alpha_\infty)\; \tilde u^{-1}
+= i\bigl(u(g);\ p\,\alpha_{\sigma^{-1}(0)},\ p\,\alpha_{\sigma^{-1}(1)},\
+p\,\alpha_{\sigma^{-1}(\infty)}\bigr),
+\]
+avec la même réserve sur l'explicitation de $u(g)$\footnote{Les indices de (8)
+et (9) sont lus avec peine ; ceux qui sont écrits ici sont ceux que le calcul
+impose, et ils coïncident avec la lecture de la transcription. Le point
+d'insertion de « mais ils s'explicitent ainsi », page 33, n'est pas sûr.}. En
+particulier $i(\widehat{\pi})$ est distingué, et le quotient
+$S\hat{\hat{\mathcal{E}}}/i(\widehat{\pi})$ est une extension de
+$\mathrm{Out}_{\mathrm{lac}}(\widehat{\pi})$ par
+$\widehat{\mathbb{Z}}^{\{0,1,\infty\}}$ dont $S\hat{\hat{\mathcal{E}}}$ est le
+produit fibré avec $\hat{\hat{\mathcal{E}}}$ : c'est la forme complétée du
+$S\mathcal{E} = S\Gamma \times_\Gamma \mathcal{E}$ de la page 31\footnote{Cette
+remarque est de cette édition. Les $g_i$ jouent le rôle de chemins du point
+base vers chacune des trois pointes ; la notion de point base tangentiel
+(Deligne, 1989), qui les rendrait canoniques, n'est pas dans le dossier.}.
+
+\pagerange{34}{35}
+\subsection*{Les rectificateurs triviaux (pages 34 et 35)}
+
+On regarde la partie $S\widehat{\mathcal{E}}$ de $S\hat{\hat{\mathcal{E}}}$ au-dessus
+de $\Gamma \subset \hat{\hat\Gamma}$, et les éléments $\rho$, $\sigma_i$, $\tau_i$,
+qui sont même dans $\mathcal{E}$. Le relèvement multiplicatif $\dot\rho \mapsto
+\rho$, $\dot\sigma_0\tau \mapsto \tilde\sigma_0 = \sigma_0\tau_0$ de $\Gamma_P$
+dans $\mathcal{E}$ se remonte à $S\mathcal{E}$ par
+\[
+(11)\qquad \varphi : \Gamma_P \longrightarrow S\mathcal{E}, \qquad
+(12)\qquad
+\begin{aligned}
+\dot\rho &\longmapsto (1, \rho, 1, 1, 1) =: \tilde\rho,\\
+(\dot\sigma_i, \tau) &\longmapsto (-1, \sigma_i, 1, 1, 1) =: \tilde\sigma'_i ,
+\end{aligned}
+\]
+où $\tilde\rho$ est la permutation $l_i \mapsto l_{\rho(i)}$ et
+$\tilde\sigma'_i$ l'automorphisme $l_j \mapsto l_{\sigma_i(j)}^{-1}$ — pour
+$i = 0$, celui de (14)\footnote{La page note $\Gamma^{*}_P$ ce qui est ici
+$\Gamma_P$, et écrit les éléments de $\Gamma_P$ comme $(\dot\sigma, \pm 1)$.}.
+
+L'ensemble des $(p, \sigma, 1, 1, 1)$ est un sous-groupe (par (8)), formé des
+$(p, \sigma)$ tels que
+\[
+(13)\qquad l_{\sigma(\infty)}^{p}\, l_{\sigma(1)}^{p}\, l_{\sigma(0)}^{p} = 1
+\]
+— c'est (2) avec $g_i = 1$\footnote{La page écrit (13) dans l'ordre inverse,
+$l_{\sigma(0)}^{p} l_{\sigma(1)}^{p} l_{\sigma(\infty)}^{p} = 1$ ; pour $\sigma
+= 1$, $p = 1$ ce serait $l_0 l_1 l_\infty = 1$, faux sous (1). L'ordre juste est
+celui de (2) et de (14).}. Dans $S\mathcal{E}$, où $p = \pm 1$, les solutions
+sont exactement les $(\operatorname{sg}\sigma, \sigma)$ : pour $p = 1$, il faut
+que $(\sigma(\infty), \sigma(1), \sigma(0))$ soit une permutation circulaire de
+$(\infty, 1, 0)$, et pour $p = -1$, que $(\sigma(0), \sigma(1),
+\sigma(\infty))$ le soit. Le sous-groupe $\tilde\Gamma_P = \varphi(\Gamma_P)$
+est donc caractérisé dans $S\mathcal{E}$ comme celui des automorphismes qui
+préservent $L_0, L_1, L_\infty$, affectés des « rectificateurs » $g_0 = g_1 =
+g_\infty = 1$.
+
+\emph{L'exercice.} La page conjecture (« Sans doute ») que le même résultat vaut
+dans $S\hat{\hat{\mathcal{E}}}$, c'est-à-dire que (13) force $p = \pm 1$, le
+ramène — quitte à multiplier par un $\tilde\sigma'_i$ pour rendre $\sigma$
+paire, ce qui change $p$ en $-p$ — à l'énoncé : pour $p \in
+\widehat{\mathbb{Z}}^{*}$,
+\[
+(14)\qquad l_\infty^{p}\, l_1^{p}\, l_0^{p} = 1 \quad\Longrightarrow\quad p = 1,
+\]
+et le laisse en « Exercice ! ». C'est vrai, et voici une solution\footnote{La
+solution est de cette édition. La phrase de la page qui opère la réduction
+(« Je pense qu'on peut [quitte : corriger par un $\tilde\sigma_i$, ou $\sigma \in
+\Gamma_P$)] revient au $\equiv$ de dire\ldots ») est lue avec peine ; la réduction
+elle-même est juste, les $\sigma$ paires donnant des conjugués de (14).}. Par
+(1), $l_\infty = (l_1 l_0)^{-1}$, et (14) s'écrit $(l_1 l_0)^{p} = l_1^{p}
+l_0^{p}$. Si $p \neq 1$, il existe un entier $N \geq 3$ tel que $p \not\equiv 1
+\pmod N$. Envoyons $l_0, l_1$ — c'est permis, $\widehat{\pi}$ étant libre profini
+sur eux — sur deux réflexions $x, y$ du groupe diédral d'ordre $2N$ dont le
+produit $r = yx$ est une rotation d'ordre $N$. Comme $p$ est impair, $x^{p} = x$
+et $y^{p} = y$, donc $l_1^{p} l_0^{p} \mapsto r$, tandis que $(l_1 l_0)^{p}
+\mapsto r^{p} \neq r$. Donc (14) entraîne $p = 1$, et (13) entraîne $p = \pm 1$
+et $(\sigma, p) \in \Gamma_P$ dans $S\hat{\hat{\mathcal{E}}}$ aussi.
+
+\pagerange{36}{37}
+\subsection*{Relèvements des $2$-Sylow ; centralisateurs de $\tilde\rho$ et
+$\tilde\sigma_0$ (pages 36 et 37)}
+
+Les $2$-sous-groupes de Sylow $\langle \dot\sigma_i, \tau \rangle \simeq
+\mathbb{Z}/2 \times \mathbb{Z}/2$ de $\Gamma$, qui se relèvent dans
+$\mathcal{E}$ (pages 26 à 28), ne se relèvent \emph{pas} dans $S\mathcal{E}$ :
+déjà $\dot\sigma_0$ ne se relève pas en un élément d'ordre $2$. L'argument de la
+page est que l'extension locale en $0$ n'est pas scindée : aucun élément
+d'ordre $2$ de $\mathcal{E}$ au-dessus de $\dot\sigma_0$ ne centralise $L_0$. En
+effet le centralisateur de $L_0$ dans $\mathcal{E}^{+} \simeq
+PSL_2(\mathbb{Z})$ est le stabilisateur d'une pointe, infini cyclique engendré
+par $\varepsilon_0$, sans torsion. Et si $\tilde u = (1, \sigma_0, g_0, g_1,
+g_\infty)$ était d'ordre $2$ dans $S\mathcal{E}$, (8) donnerait $u^2 = 1$ et
+$u(g_0)\,g_0 = 1$, et $w = \mathrm{int}(g_0^{-1})\,u$ serait un élément de
+$\mathcal{E}$ au-dessus de $\dot\sigma_0$, fixant $l_0$, avec $w^2 =
+\mathrm{int}\bigl((u(g_0)g_0)^{-1}\bigr) = 1$ — contradiction\footnote{Ce
+raccord entre $S\mathcal{E}$ et l'extension locale est de cette édition ; la
+page le donne comme connu (« on sait bien »). Elle écrit $\Gamma^{+}_0$ pour le
+sous-groupe $\langle\dot\sigma_0\rangle$ et $\mathbb{Z}_0$ pour le quotient de
+$\mathbb{Z}^{\{0,1,\infty\}}$ par $\mathbb{Z}^{\{1,\infty\}}$ ; « de Sylow » est
+un ajout interlinéaire.}.
+
+Plutôt que de présenter $S\Gamma$ et $S\mathcal{E}$ par générateurs et
+relations (« je ne vais pas m'y attarder »), la page donne l'action des
+automorphismes intérieurs de $\tilde\rho$ et $\tilde\sigma'_0$ :
+\[
+\begin{aligned}
+(15)\quad & \mathrm{int}(\tilde\rho)(p, \sigma, g_0, g_1, g_\infty) =
+\bigl(p,\ \rho\sigma\rho^{-1},\ \rho(g_\infty),\ \rho(g_0),\ \rho(g_1)\bigr),\\
+(16)\quad & \mathrm{int}(\tilde\sigma'_0)(p, \sigma, g_0, g_1, g_\infty) =
+\bigl(p,\ \sigma_0\sigma\sigma_0,\ \tilde\sigma_0(g_0),\ \tilde\sigma_0(g_\infty),\
+\tilde\sigma_0(g_1)\bigr),
+\end{aligned}
+\]
+où, dans (16), $\tilde\sigma_0$ désigne l'automorphisme (14) de $\widehat{\pi}$
+sous-jacent à $\tilde\sigma'_0$\footnote{La page écrit $\sigma_0(g_i)$ dans (16),
+et le second terme de (15) est surchargé (lu $\dot\rho\sigma\dot\rho^{-1}$ par
+analogie). Les deux formules se déduisent de (8).}. D'où :
+
+\begin{enumerate}
+\item[a)] $\tilde u$ commute à $\tilde\rho$ si et seulement si $\sigma$ commute
+à $\rho$, soit $\sigma \in \mathfrak{S}_3^{+} = \{1, \rho, \rho^2\}$, et
+\[
+(17)\qquad g_1 = \rho(g_0), \qquad g_\infty = \rho(g_1), \qquad g_0 =
+\rho(g_\infty),
+\]
+où la troisième égalité suit des deux premières, $\rho$ étant d'ordre $3$. Ces
+$\tilde u$ correspondent donc aux $(p, \sigma, g_0) \in
+\widehat{\mathbb{Z}}^{*} \times \mathfrak{S}_3^{+} \times \widehat{\pi}$ tels que
+\[
+(18)\qquad \mathrm{int}\bigl(\rho^2(g_0)\bigr)(l_{\sigma(\infty)}^{p}) \cdot
+\mathrm{int}\bigl(\rho(g_0)\bigr)(l_{\sigma(1)}^{p}) \cdot
+\mathrm{int}(g_0)(l_{\sigma(0)}^{p}) = 1,
+\]
+et que les trois facteurs engendrent $\widehat{\pi}$ — l'analogue, dans les
+nouvelles coordonnées, de la relation encadrée de la page 7.
+\item[b)] $\tilde u$ commute à $\tilde\sigma'_0$ si et seulement si $\sigma \in
+\{1, \sigma_0\}$ et $g_0 = \tilde\sigma_0(g_0)$, $g_\infty = \tilde\sigma_0(g_1)$
+(donc $g_1 = \tilde\sigma_0(g_\infty)$)\footnote{Une note marginale en oblique,
+face à b), dit « variante intéressante pour la suite » ; la suite n'est pas
+dans le dossier.}.
+\end{enumerate}
+
+Le dossier s'arrête sur une phrase qui annonce le vrai problème, et n'est pas
+suivie : « À vrai dire, nous nous intéressons plutôt à la commutation dans
+$\hat{\hat\Gamma}$, i.e. la commutation modulo automorphismes intérieurs » —
+c'est-à-dire au groupe $\boldsymbol{\Gamma}$ des pages 6 à 11 et 23, qu'il
+s'agissait de décrire dans les nouvelles coordonnées.
+
+\end{document}
