@@ -481,7 +481,7 @@ function Contributors() {
  * The per-batch *costs*, though, are still those of the first five passes —
  * folders 115, 161-1 and the three of 135 — and that is now a much weaker
  * base than it was: they were measured over five batches and the count has
- * since passed a hundred and twenty. They are kept rather than guessed at,
+ * since passed two hundred and forty. They are kept rather than guessed at,
  * and the staleness is said here rather than hidden. A re-measurement over a
  * recent run is owed.
  *
@@ -515,17 +515,18 @@ const FIRST_BATCH = '2026-08-08';
 
 const PILOT = {
   /** Transcribed so far, counted off `public/manifest.json` and excluding the
-      specimen: sixty folders, 1,938 pages. The batch list that used to stand
+      specimen: ninety-eight folders, 4,054 pages (25 September 2026). The batch list that used to stand
       here was rewritten at every pass and went stale between them; the
       manifest is the record, and this figure is read off it. */
-  batchesTranscribed: 123,
+  batchesTranscribed: 244,
   /** Batches belonging to a folder that has a modernised reading. The reading
       is written per folder, taken whole, and covers every batch of it, so a
-      folder is either wholly in this count or wholly out. Fifty-three folders
-      are read; seven transcribed folders are not — 4, 5, 97, 102, 103, 111 and
-      139. The last of those will stay out: it is two photographs of a medal,
-      and there is no mathematics to restate. */
-  batchesModernised: 114,
+      folder is either wholly in this count or wholly out. Seventy-two folders
+      are read; twenty-six transcribed folders are not — 4, 5, 32, 53, 56, 71,
+      75, 87, 97, 98, 100, 101, 102, 103, 105, 109, 111, 118, 122, 123, 126,
+      130, 139, 143, 156-3 and 156-5. The one that will stay out is 139: it is
+      two photographs of a medal, and there is no mathematics to restate. */
+  batchesModernised: 188,
   /** Per batch. `contextM` is every token the pass sent or received, cache
       reads included; `writtenK` is output alone; hours are model-active time,
       gaps over five minutes dropped. Transcription is the mean of the five
@@ -608,8 +609,8 @@ function CostAndHorizon({ manifest }: { manifest: ReturnType<typeof useManifest>
       <H2 id="cost">Cost, and the horizon</H2>
       <P id="cost-measured" className="prose-fonds mt-3">
         <strong>{PILOT.batchesTranscribed} batches</strong> have been transcribed, across
-        sixty folders, and <strong>{PILOT.batchesModernised}</strong> of them have their
-        modernised reading — seven transcribed folders are not yet read, and folder 139 never
+        ninety-eight folders, and <strong>{PILOT.batchesModernised}</strong> of them have their
+        modernised reading — twenty-six transcribed folders are not yet read, and folder 139 never
         will be: it is two photographs of a medal. At the per-batch means below that comes to
         about{' '}
         <strong>{hoursDone.toFixed(1)} h</strong> of model-active time,{' '}
