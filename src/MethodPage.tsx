@@ -478,12 +478,17 @@ function Contributors() {
  * arithmetic rather than estimation, and the batch counts below are read off
  * the manifest.
  *
- * The per-batch *costs*, though, are still those of the first five passes —
- * folders 115, 161-1 and the three of 135 — and that is now a much weaker
- * base than it was: they were measured over five batches and the count has
- * since passed two hundred and forty. They are kept rather than guessed at,
- * and the staleness is said here rather than hidden. A re-measurement over a
- * recent run is owed.
+ * The per-batch *costs* were re-measured on 25 September 2026 over the run
+ * of 24–25 September: twelve transcription passes (140-1#2, 27#2, 122, 143,
+ * 75, 53 and 126, both batches of each of the last five) and four
+ * modernised readings (145, 140-1, 27 and 131, nine batches between them).
+ * Each pass left its full log; the figures are sums over those logs, with
+ * each message's usage counted once, at its final value — a streamed message
+ * logs its usage several times, and counting the first record undercounts
+ * what was written by an order of magnitude. The first measurement, over
+ * five passes on 115, 161-1 and 135, gave the same context and hours but
+ * about three times the output; which way that one was counted is not
+ * recorded, so the difference is said here rather than explained.
  *
  * One thing a recent run does settle, because it needs no token accounting:
  * wall-clock time per batch varies by an order of magnitude and does not
@@ -528,24 +533,29 @@ const PILOT = {
       two photographs of a medal, and there is no mathematics to restate. */
   batchesModernised: 188,
   /** Per batch. `contextM` is every token the pass sent or received, cache
-      reads included; `writtenK` is output alone; hours are model-active time,
-      gaps over five minutes dropped. Transcription is the mean of the five
-      passes — the two most recent, folder 135's dense twenty-page batches,
-      ran heavier at 40M and 340k, and are the better guide for a hard hand.
-      Modernisation is one clean measurement (161-1, under the skill): it
-      works from the transcription's text alone and never opens an image,
-      which is the whole of the difference. */
-  transcribe: { hoursPerBatch: 0.3, contextM: 26, writtenK: 230 },
+      reads included; `writtenK` is output alone. Transcription is the mean of
+      twelve passes (25 September 2026): hours are model-active time, gaps
+      over five minutes dropped, and range 0.13–0.57 h; context ranges 6–46 M
+      and output 33–131k, the light end being batches half made of skipped
+      typed versos (75#2, 122#2), the heavy end 143's dense pages. */
+  transcribe: { hoursPerBatch: 0.3, contextM: 25, writtenK: 75 },
   /** One typed batch, measured the same way: folder 29#1, cut at the render
       and PDF check before the session went on to other work. It is the
       cheapest transcription measured so far, and the reason is in the crops,
-      not in the twenty page images — see the paragraph below. */
+      not in the twenty page images — see the paragraph below. It belongs to
+      the first measurement, whose output count is not comparable with the
+      re-measured means above; its context figure is. */
   transcribeTyped: { hoursPerBatch: 0.3, contextM: 15, writtenK: 105 },
-  modernize: { hoursPerBatch: 0.15, contextM: 9, writtenK: 60 },
+  /** Four readings (145, 140-1, 27, 131), divided by the nine batches they
+      cover. Hours here are elapsed time, not model-active time: a reading
+      writes its file in one long generation, which the five-minute gap rule
+      would drop as idle. It works from the transcription's text alone and
+      never opens an image, which is the whole of the difference. */
+  modernize: { hoursPerBatch: 0.15, contextM: 2.3, writtenK: 53 },
   /** Sum of the two steps — the scope table below multiplies this. */
   hoursPerBatch: 0.45,
-  contextM: 35,
-  writtenK: 290,
+  contextM: 27,
+  writtenK: 130,
   /** Dense continuous prose (the Long March) will run slower and heavier
       than folder 115's formula-dominated pages; the range reflects that. */
   spread: 1.6,
@@ -616,8 +626,9 @@ function CostAndHorizon({ manifest }: { manifest: ReturnType<typeof useManifest>
         <strong>{hoursDone.toFixed(1)} h</strong> of model-active time,{' '}
         <strong>{fmtM(contextDoneM)} tokens</strong> of context and{' '}
         <strong>{fmtSmallM(writtenDoneK / 1000)}</strong> written. That total is the batch
-        count times a measured mean, not a sum over every pass: seven passes have been
-        metered end to end, and the rest are assumed to resemble them.
+        count times a measured mean, not a sum over every pass: the means come from the
+        sixteen passes of 24–25 September, metered end to end, and the rest are assumed to
+        resemble them.
       </P>
       <P id="cost-pace" className="prose-fonds mt-3">
         The figure a reader actually wants is not hours but weeks, so here it is, observed the
@@ -636,7 +647,7 @@ function CostAndHorizon({ manifest }: { manifest: ReturnType<typeof useManifest>
       <P id="cost-context-vs-written" className="prose-fonds mt-3">
         Those last two numbers are the same work counted twice, and keeping them apart is the
         point. A pass holds twenty page images and its own growing draft in context and sends
-        the lot again at every step, so it <em>re-reads</em> roughly a hundred times what it{' '}
+        the lot again at every step, so it <em>re-reads</em> roughly three hundred times what it{' '}
         <em>writes</em>. Context is billed at a fraction of fresh input and output at several
         times it, so the two columns below do not add up to anything and should not be added:
         the left one says how big the job is, the right one says how much of it is the
@@ -649,9 +660,9 @@ function CostAndHorizon({ manifest }: { manifest: ReturnType<typeof useManifest>
         The split between the two steps is the other useful fact: transcription carries
         almost all of the cost, because it reads page images — the batch at full page scale,
         then dozens of high-resolution crops to settle a word — while the modernised reading
-        works from the transcription's text and never opens an image. Folder 135's batches
-        ran heaviest, at about 40 M each: twenty dense pages, two hands, and a manuscript
-        half in English. Treat the ranges below as a first anchor, to be corrected by the
+        works from the transcription's text and never opens an image. The heaviest
+        passes run near 45 M: folder 135's batches at about 40 M each (twenty dense pages,
+        two hands, a manuscript half in English) and folder 143's at 41 and 46 M. Treat the ranges below as a first anchor, to be corrected by the
         next batches.
       </P>
       <P id="cost-typed" className="prose-fonds mt-3">
