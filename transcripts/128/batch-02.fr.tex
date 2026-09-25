@@ -1,0 +1,453 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 128, batch 2 (pages 21-31).
+% Established from the facsimile archives/batches/128/batch-02.pdf, prepared
+% from a copy of 128.pdf supplied by the user (PDF page k = archivists' page
+% 20+k, no cover sheet), per the skill transcribe-grothendieck. The folder is
+% thirty-one pages; this is the second and last batch. Batch 1 (pages 1-20)
+% is transcribed separately and in parallel by another pass and may not
+% exist yet, so the notation below was fixed from these pages and from
+% folder 126, the first folder of the same « Descentes » group.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-09-25 — first pass, unchecked against the pages by a human.
+%
+% Dating: the folder is « s.d. » in src/content/catalogue.ts; its inventory
+% group « Descentes » (cotes 126 to 133) is dated [avant 1970], and \dating
+% says both, per the skill's group rule. Nothing on these leaves dates them.
+%
+% Pages skipped: 30, a blank tan sheet (presumably the back cover of the
+% run), nothing in anyone's hand.
+%
+% Pages summarised: 31. It is a single sheet in another hand — neat, in
+% English (« "equivalence ideal" in A' ⊗_k A' », « be a set of generators »,
+% « This is still set of generators », « Next I ⊂ Δ ») — on a square-zero
+% algebra A' = k + V = k[X_1..X_n]/(X_i)^2 and a cocycle condition
+% p13(I) ⊂ p12(I) + p23(I) on an ideal in A' ⊗ A'. Given the folder title
+% (« Cf Notes Murre-Levelt ») it is presumably a leaf of those notes, but
+% nothing on it names its author, and the file does not name one. It is
+% other people's text: one French \note, no transcription. No mark in
+% Grothendieck's hand was found on it.
+%
+% Pages transcribed: 21-29, all his, blue ink on white paper, fast drafting.
+% The statements and formulas carry; much connective prose does not and is
+% left \ill{}. His pagination: none visible, except the circled letters
+% (a), (b), (c) on pp. 26, 27, 29, which number the parts of the proof of
+% the Théorème of p. 25 and are kept as he wrote them.
+%
+% What the batch is about. Descent along a finite algebra A -> A' through
+% infinitesimal neighbourhoods, with the non-abelian H^1 of the Amitsur
+% (Čech) complex. Pages 21-22: Corollaires 2 and 3 of a « lemme 1 » that is
+% presumably at the end of batch 1 (not seen here): for the matrix sheaf
+% M_n and Gl_n = M_n^*, and more generally for End(E), Aut(E) with E free,
+% the kernels of H^1(A'/A, -) -> H^1(A'_0/A_0, -) correspond bijectively,
+% under a hypothesis « End = Aut + Im End_B » of which he gives a footnote;
+% hence H^1(A'/A, Gl_n) = {e} iff H^1(A'/A, G_a) = {e} when the reduction
+% is trivial. Pages 23-24: Lemme 2 and a variant, the local-algebra lemma
+% that makes that hypothesis hold (infinite residue fields, radicial
+% residue extensions: every matrix over C can be made invertible by adding
+% one coming from B), with an N.B. on a transcendental residue extension
+% k(t). Page 25: the Théorème — A semi-local noetherian with radical m,
+% A' finite over A, A_n = A/m^{n+1}, A'_n = A' ⊗ A_n: a) equivalence of
+% (i) H^1(A'_n/A_n) = 0 for all n, (ii_1), (ii_m) H^1(A'_n/A_n, Gl) trivial,
+% (iii) Spec A'_n -> Spec B^(n), B^(n) = H^0(A'_n/A_n), of effective
+% descent for flat quasi-coherent modules; b) consequences at the limit
+% for A'/A, with B = H^0(A'/A) and modules flat of finite type; c) A
+% artinian: X' -> X of effective descent for flat modules. Pages 26-29:
+% the proof, by induction on n and the lemmas, then passage to the limit
+% by Mittag-Leffler (« M.L. ») on C^.(A'/A) = lim C^.(A'_n/A_n). The last
+% line of p. 29 is an isolated A -> A' ⇉ A''.
+%
+% Notation fixed once for the batch: \mathbb{M}_n for his double-struck M
+% (the matrix sheaf), \mathrm{Gl}_n, \mathrm{Gl}(n, C_0); \underline{\mathrm{Aut}},
+% \underline{\mathrm{End}}, \underline{\mathrm{Hom}} where he underlines;
+% C^{\cdot}(A'/A, -) for his (doubled) C of cochains, C^{\cdot}_D and
+% H^0_D where he puts a D under them (descent data); \varprojlim for his
+% lim with a left arrow under it. Words he underlines are \emph.
+%
+% Readings to check first: p. 21 the symbol read Z (Z C^.(A'/A, M_n)) and
+% the end of the proof; p. 22 the exponents (N) and N of the bracketed
+% term, overwritten; p. 23 the proof of Lemme 2 (the theorem invoked);
+% p. 24 nearly all of it; the diagonal N.B. in the margin of p. 25 and
+% the fraction « qu. cohér. / plats »; p. 26 middle; p. 27 the bracket.
+
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{128}
+\batch{2}
+\pages{21}{31}
+\dating{s.d. — le groupe « Descentes » (126 à 133) est daté [avant 1970]}
+\watermark{Édition de démonstration}
+\foldertitle{Descente non plate. Modules formels. Cf Notes Murre-Levelt : notes manuscrites (s.d.)}
+
+\begin{document}
+
+\section*{Descente le long des voisinages infinitésimaux (suite)}
+\note{titre de l'éditeur, qui ne figure pas sur les feuillets ; le lemme 1
+et le corollaire 1 auxquels renvoient les pages 21 et 22 précèdent ce
+lot et n'y figurent pas}
+
+\page{21}
+
+\emph{Corollaire 2.} Sous les conditions du lemme~1/, soit
+$n \geqslant 1$ un entier, $\mathbb{M}_n$ le faisceau « matrices carrées de
+degré $n$ à coeff. dans \ill{} », $\mathrm{Gl}_n = \mathbb{M}_n^{*}$, alors
+on a une bijection \uncertain{respectant} l'unité
+\[
+  \mathrm{Ker}\bigl(H^1(A'/A, \mathrm{Gl}_n) \to H^1(A'_0/A_0, \mathrm{Gl}_n)\bigr)
+  \to
+  \mathrm{Ker}\bigl(H^1(A'/A, \mathbb{M}_n) \to H^1(A'_0/A_0, \mathbb{M}_n)\bigr) .
+\]
+Par suite, si \struck{$H^1(A'/A, \mathrm{Gl}_n) = e$, alors}
+$H^1(A'_0/A_0, \mathrm{Gl}_n) = \{e\}$,
+$H^1(A'_0/A_0, \mathbb{M}_n) = \{e\}$, on a une bijection
+\[
+  H^1(A'/A, \mathrm{Gl}_n) \xrightarrow{\ \sim\ } H^1(A'/A, \mathbb{M}_n)
+  = \mathbb{M}_n\bigl(H^1(A'/A)\bigr)
+\]
+donc pour que $H^1(A'/A, \mathrm{Gl}_n) = \{e\}$, il f.\ et s.\ que
+$H^1(A'/A, G_a) = \{e\}$.
+\note{sous « $H^1(A'_0/A_0, \mathbb{M}_n) = \{e\}$ » une accolade et une
+double flèche verticale renvoient à « $H^1(A'_0/A_0) = 0$ » ; devant
+$\mathbb{M}_n(H^1(A'/A))$ un symbole biffé, illisible}
+
+\emph{Démonstration.} Les deux membres sont égaux respectivement à :
+\[
+  H^1\bigl(Z C^{\cdot}(A'/A, \mathbb{M}_n)\bigr) / \mathrm{Gl}(n, C_0)
+\]
+et à :
+\[
+  H^1\bigl(Z C^{\cdot}(A'/A, \mathbb{M}_n)\bigr) / \mathbb{M}_n(C_0)
+\]
+\note{le symbole lu $Z$ devant $C^{\cdot}$ est douteux dans les trois
+occurrences}
+et les opérations de $\mathrm{Gl}(n, C_0)$ sur
+$H^1(Z C^{\cdot}(A'/A, \mathbb{M}_n))$ sont induites par celles de
+$\mathbb{M}_n(C_0)$. De plus un élément de $\mathbb{M}_n(C_0)$ provenant de
+$\mathbb{M}_n(B)$ opère trivialement. Donc il suffit \ill{} \ill{} \ill{}
+\add{en} utilisant l'hypothèse \struck{\ill{} que}
+\note{« utilisant l'hypothèse » en interligne ; la phrase s'arrête sur le
+trait qui sépare la note de bas de page}
+
+\marginal{/ On suppose que
+$\mathbb{M}_n(C_0) = \mathbb{M}_n(C_0)^{*} + \mathrm{Im}\bigl(\mathbb{M}_n(B) \to \mathbb{M}_n(C_0)\bigr)$
+[ce qui est vérifié sous les conditions signalées en N.B.\ au lemme~1]}
+\note{note de bas de page de sa main, sous un trait, appelée par la barre
+oblique placée après « lemme~1 » dans l'énoncé ; devant « Im » un mot
+noirci}
+
+\page{22}
+
+\emph{Corollaire 3.} Soit $N$ un ens.\ d'indices, \struck{et} supposons
+$E = A^{(N)}$, et supposons que l'on ait
+\[
+  \mathrm{End}_{C_0}(E_{C_0}) = \mathrm{Aut}_{C_0}(E_{C_0})
+  + \mathrm{Im}\bigl(\mathrm{End}_{B_0}(E_{B_0}) \to \mathrm{End}_{C_0}(E_{C_0})\bigr) .
+\]
+Sous ces conditions, on a une bijection can., respectant les éléments
+unités,
+\[
+  \mathrm{Ker}\bigl(H^1(A'/A, \underline{\mathrm{Aut}}(E)) \to H^1(A'_0/A_0, \underline{\mathrm{Aut}}(E))\bigr)
+  \to
+\]
+\[
+  \mathrm{Ker}\bigl(H^1(A'/A, \underline{\mathrm{End}}(E)) \to H^1(A'_0/A_0, \underline{\mathrm{End}}(E))\bigr)
+\]
+\[
+  \simeq \Bigl[\bigl(\mathrm{Ker}(H^1(A'/A) \to H^1(A'_0/A_0))\bigr)^{(N)}\Bigr]^{N}
+\]
+\note{le $\simeq$ est écrit verticalement sous le second noyau ; les
+exposants $(N)$ et $N$ sont repassés à l'encre foncée}
+
+[Donc le noyau du premier nous est connu [i.e.\ les données de descente
+sur $E_{A'}$ qui sont \uncertain{triviales} sur $E_{A'_0}$
+\struck{\ill{}} \add{et} donnant un Module libre
+\struck{$\simeq E_{C_0}$} sur $C_0$], ses éléments sont effectives et
+donnent un Module libre $\simeq E_B$ sur $B$] \uncertain{lesquels} \ill{}
+\ldots\ $\mathrm{Ker}(H^1(A'/A) \to H^1(A'_0/A_0)) = 0$]
+\note{« telles que sur $E_{A'_0}$ » (lecture douteuse du premier mot) et
+un mot au-dessus de « effectives », biffé, sont en interligne ; les
+crochets ne se referment pas tous nettement}
+
+En particulier, si $H^1(A'_0/A_0, \underline{\mathrm{Aut}}(E)) = \{e\}$ et
+$H^1(A'_0/A_0) = 0$, on a une bijection
+\[
+  H^1(A'/A, \underline{\mathrm{Aut}}(E)) \simeq H^1(A'/A, \underline{\mathrm{End}}(E))
+  \simeq \Bigl[H^1(A'/A)^{(N)}\Bigr]^{N} .
+\]
+\note{dans $H^1(A'/A, \underline{\mathrm{End}}(E))$ les indices $0$ de
+$A'_0/A_0$ semblent effacés par des pâtés d'encre ; le second $\simeq$ est
+vertical}
+
+\emph{Démonstration.} Même principe que précédemment, en utilisant les
+suites exactes de groupes simpliciaux
+
+\begin{tikzcd}[column sep=small, row sep=small, nodes={font=\scriptsize}]
+e \arrow[r] & C^{\cdot}(A'/A, \underline{\mathrm{Hom}}(E, IE)) \arrow[r] \arrow[d] & C^{\cdot}(A'/A, \underline{\mathrm{Aut}}(E)) \arrow[r] \arrow[d] & C^{\cdot}(A'_0/A_0, \underline{\mathrm{Aut}}(E)) \arrow[r] & e \\
+0 \arrow[r] & C^{\cdot}(A'/A, \underline{\mathrm{Hom}}(E, IE)) \arrow[r] & C^{\cdot}(A'/A, \underline{\mathrm{End}}(E)) \arrow[r] & C^{\cdot}(A'_0/A_0, \underline{\mathrm{End}}(E)) \arrow[r] & 0
+\end{tikzcd}
+
+\note{la flèche verticale de droite n'est pas dessinée sur la page ; les
+deux autres le sont}
+
+\page{23}
+
+\emph{Lemme 2.} Soit $B$ un anneau ½ local, $C$ une algèbre finie sur $B$,
+telle que $C$ soit ½ local, et les idéaux maximaux \struck{\ill{}}
+$\mathfrak{n}$ de $C$ sont induits par les idéaux maximaux \struck{\ill{}}
+$\mathfrak{m}$ de $B$. Supposons les conditions suivantes satisfaites :
+\begin{itemize}
+  \item[(i)] Les corps $k(\mathfrak{m})$ sont infinis.
+  \item[(ii)] Deux idéaux maximaux $\mathfrak{n}, \mathfrak{n}'$ distincts de
+  $C$ induisent des idéaux maximaux $\mathfrak{m}, \mathfrak{m}'$ distincts de
+  $B$, et pour tout $\mathfrak{n}$, l'extension résiduelle
+  $k(\mathfrak{n})/k(\mathfrak{m})$ est radicielle (p.ex.\ $C$ fini et
+  radiciel sur $B$ ½ local).
+\end{itemize}
+Alors pour tout $n \geqslant 1$, et tout élément $u \in \mathbb{M}_n(C)$,
+$\exists\, v \in \mathbb{M}_n(B)$ tel que $u + \varphi(v) \in \mathbb{M}_n(C)^{*}$.
+\note{« $\mathfrak{n}$ » et « $\mathfrak{m}$ » sont écrits en interligne
+au-dessus de deux mots biffés}
+
+\emph{Dém.} Soient $\mathfrak{m}_i$ \uncertain{(resp.\ $\mathfrak{n}_i$)}
+les idéaux maximaux de $B$ \ill{} \ill{} \ill{} de $C$. \ill{} \ill{}
+\ill{} $\to$ fini ; \ill{} \ill{} donc par th.\ \ill{} \ill{} \ill{}
+d'éléments $v_i \in \mathbb{M}_n(k(\mathfrak{m}_i))$, il existe un
+$v \in \mathbb{M}_n(B)$ qui les donne. D'ailleurs pour $u' \in
+\mathbb{M}_n(C)$, le fait que ce soit \uncertain{inversible} ne dépend que
+de l'inversibilité de ses images dans $\mathbb{M}_n(C/\mathrm{rad}\,C)$ !
+Cela nous ramène au cas où $C$ est un \uncertain{produit} de corps, et $B$
+aussi. \uncertain{On} \ill{} \ill{} au cas $B$ un corps, $B = k$.
+
+\page{24}
+
+\ill{} --- $v \in \mathrm{End}_C(E_C)$
+
+Il existe $u \in \mathrm{End}_B(E)$ tel que $v + \struck{\ill{}}\, u_C$
+soit \emph{inversible}.
+
+\emph{Dém.} Si $E \simeq B^{(N)}$, \ill{} \ill{}
+$\mathrm{End}_B(E) \simeq E^{N}$, donc la \uncertain{remarque} \ill{}
+\uncertain{l'élément} $u \in \underline{\mathrm{End}}(E)(B)$ \ill{}
+\ill{}
+$\underline{\mathrm{End}}(E)(k(\mathfrak{m}_i))$ \ill{} \ill{}
+[\,\ill{} \ill{} \ill{} : \ill{} \ill{} \ill{}
+$\alpha_i \in E(k(\mathfrak{m}_i))$, et \ill{} \ill{} \ill{}, \ill{} :
+$E \simeq B^{(I)}$, \ill{} \ill{} \ill{} \ill{} \ill{} dans
+$k(\mathfrak{m}_i)$ \ill{} $\Rightarrow$\,]. \ill{} \ill{}, \ill{} ?
+\ill{} l'hypothèse \ill{} \ill{} \ill{}$(C)$ \ill{}, \ill{}
+\ill{} \ill{} \ill{} \ill{} \ill{}$(C)$. Car \ill{} \ill{} \ill{}
+\ill{} \ill{} \ill{} $C$ \ill{} $B$, \ill{} \ill{} \ill{} \ill{}
+\struck{\ill{}}, \ill{} : l'hypothèse \ill{}, \ill{} \ill{} \ill{}
+\ill{} \ill{} $u = \mathrm{id}_E - v$.
+\struck{\ill{} \ill{} \ill{} $B \rightrightarrows C$, \ill{} $B$ \ill{}
+\ill{} ; \ill{} (i), \ill{} \ill{} $u = \lambda\, \mathrm{id}_E$ \ill{}}
+\note{page très rapide ; trois lignes à la fin de la démonstration sont
+biffées d'un trait ; au-dessus de l'une d'elles un $C$ en interligne}
+
+N.B. Il faudrait \uncertain{dégager} la possibilité d'une extension
+résiduelle transcendante $k(t)$, qui \uncertain{fera} \ill{} \ill{}
+\ill{} en (i) \ldots
+
+\page{25}
+
+\emph{Théorème.} $A$ anneau \struck{artinien} ½ local noethérien,
+\struck{\ill{}} $\mathfrak{m}$ son radical, $A'$ une algèbre finie sur $A$.
+Pour tout entier $n$, on pose $A_n = A/\mathfrak{m}^{n+1}$,
+$A'_n = A'/\mathfrak{m}^{n+1}A' = A' \otimes_A A_n$.
+\note{« ½ local noethérien » est écrit au-dessus d'« artinien », biffé}
+
+[a) Soit $m$ un entier $\geqslant 1$. Les conditions suivantes sont
+équivalentes
+\begin{itemize}
+  \item[(i)] $\forall n$, on a $H^1(A'_n/A_n) = 0$
+  \item[(ii$_1$)] $\forall n$, on a $H^1(A'_n/A_n, \mathrm{Gl}_1) = 0$
+  \item[(ii$_m$)] $\forall n$ on a $H^1(A'_n/A_n, \mathrm{Gl}(m)) = \{e\}$
+  \item[(iii)] $\forall n$, désignant par $B^{(n)}$ l'anneau
+  $H^0(A'_n/A_n)$, le morphisme $\operatorname{Spec} A'_n \to
+  \operatorname{Spec} B^{(n)}$ est un morphisme de descente effective pour
+  la catégorie fibrée des Modules \uncertain{qu.\ cohér.}\,/\,plats.
+\end{itemize}
+\note{un crochet vertical embrasse les deux lignes « a) Soit $m$\ldots » et
+« $A'\otimes_A A_n$ » ; « qu.\ cohér. » et « plats » sont écrits l'un
+au-dessus de l'autre, séparés par un trait, comme une fraction}
+
+b) Ces conditions impliquent
+\begin{itemize}
+  \item[(i)] $H^1(A'/A) = 0$
+  \item[(ii)] $H^1(A'/A, \mathrm{Gl}_m) = 0$, plus généralement pour tout
+  entier $m$ $H^1(A'/A, \mathrm{Gl}(m)) = \{e\}$
+  \item[(iii)] Désignant par $B$ l'anneau $H^0(A'/A)$, le morphisme
+  $\operatorname{Spec}(A') \to \operatorname{Spec}(B)$ est un morphisme de
+  descente effective pour la catégorie des modules plats \emph{de type
+  fini}.
+\end{itemize}
+\note{« de type fini » est souligné et entouré au crayon}
+
+c) Supposons $A$ artinien, et les conditions de a) satisfaites. Alors pour
+tout $B$-\uncertain{préschéma} $X$ plat sur $B$, posant
+$X' = X \otimes_B A'$, le morphisme $X' \to X$ est un morphisme de descente
+effective pour la catégorie fibrée des Modules plats quasi-cohérents.
+\note{« artinien » est entouré au crayon}
+
+\marginal{N.B. Dans a) les \uncertain{hypothèses} \ill{} \ill{} \ill{}
+\ill{} \ill{} \ill{} \ill{} \ill{} \ill{} [$A$ anneau \struck{\ill{}}
+\ill{} \uncertain{local noethérien} \uncertain{quelconque}, $A'$ \ill{}
+$A$ \ldots]}
+\note{écrit en diagonale dans la marge gauche, de bas en haut, face à
+(ii)--(iii) de a) ; un mot souligné d'un double trait. Plus bas, dans la
+même marge et en diagonale, un mot \ill{} qui semble relié à la ligne
+« morphisme de descente » de (iii)}
+
+\page{26}
+
+(a)\ \emph{Démonstration.} Par les lemmes 1 et 2, l'équivalence
+des conditions (i) \struck{(ii)} (ii$_m$) \struck{(iii)} est immédiate par
+récurrence sur $n$, compte tenu que (i) elle est vraie pour $n = 0$
+(\emph{descente fid.\ plate}) (ii) les conditions
+\[
+  \mathbb{M}_m(B^{(n)}) = \mathbb{M}_m(B^{(n)})^{*} + \mathrm{Im}\,\mathbb{M}_m(B^{(n)})
+\]
+\struck{relatif à} sont satisfaites pour tout $n$, en vertu du lemme~2 (ii)
+\ill{} \ill{} et de la théorie des anneaux artiniens \ldots
+\note{au-dessus de « et 2 », « cor.~2 » en interligne, relié par une
+accolade ; la seconde égalité est écrite de façon très serrée et son
+dernier terme est douteux}
+
+La condition (ii$_m$) signifie que $\forall n$,
+$\operatorname{Spec} A'_n \to \operatorname{Spec} B^{(n)}$ est un
+morphisme de descente effective \struck{\ill{}} pour la catégorie des
+Modules \uncertain{qu.\ coh.}\ \emph{libres} de \struck{type fini}
+\uncertain{rang fini}. Cela signifie aussi que tout $A'_n$-module
+\uncertain{$A'^{\,m}_n$} muni d'une donnée de descente relative à
+$A'_n/B^{(n)}$, est effectif et donne un module \ill{} $E_{B^{(n)}}$ sur
+$B^{(n)}$ (\uncertain{qui} \ill{} \ill{} après changement de base
+$B^{(n)} \to A'_n$). \ill{} \ill{} \ill{} \ill{} \ill{} \ill{} \ill{}
+\note{« rang fini » en interligne au-dessus de « type fini », biffé ; la
+parenthèse est en interligne, reliée par un trait}
+
+Je dis que les modules descendus \ill{} \ill{} \ill{} \ill{} \ill{},
+\ill{} \ill{} $\mathrm{Ker}(B^{(n)})$ l'est, \ill{} \ill{} \ill{}
+\ill{} \ill{} \ill{} \ill{} \ill{}, \ill{} corps, \ill{} \ill{}
+\ill{} \ill{} \ill{} \ldots
+\marginal{\ill{} : \ill{}}
+\note{en marge gauche, séparés du texte par un trait vertical, deux mots
+de sa main ; « de corps, puis » en interligne au-dessus d'un mot}
+
+Donc il est clair que (iii) $\Longrightarrow$ (ii$_m$). Pour voir que
+
+\page{27}
+
+\struck{(iii)} (i) $\Longrightarrow$ (iii) pour \ill{} \ill{} donné ;
+[\,\ill{} \ill{} que (i) est stable par changement de base, et (iii) est
+\emph{invariant} par changement \struck{plat} \emph{fid.}\ plat de la base.
+Cela nous ramène au cas où les extensions résiduelles de $A'/A$ sont
+triviales. \struck{Mais \ill{}}
+$A = A_n = \underline{B}^{(n)}$, et
+\uncertain{on} peut supposer [$A$ local [en le remplaçant par ses
+localisés]. Alors on sait que $E_{A'_n}$ \struck{plat sur} $A'_n$ est muni
+d'une donnée de descente, \struck{\ill{}} relative à $A'_n/A_n$ [i.e.\ :
+$A'_n/B^{(n)}$]
+\note{un crochet ouvert devant « \ill{} \ill{} que (i) » ; « fid. » en
+interligne au-dessus de « plat », biffé ; « $A = A_n = B^{(n)}$, et » en
+interligne, relié par un trait}
+
+\ill{} $A'_n$-module \emph{libre} [car il est \ill{} \ill{} \ill{}
+\ill{} sur un anneau local \ill{} \ill{} \ill{} défini par \ill{} \ill{}
+$\ill{}$, on peut \ill{} ramener au cas \ill{} la \uncertain{spectre}
+d'un corps, \ill{} \ill{} \ill{} \ill{} \ill{} \ill{} \ill{} de
+descente.]
+
+Je dis que \uncertain{ces} effectivités par $A'_n/B^{(n)}$ ; donc
+\uncertain{celles} \ill{} \ill{} \ill{} \ill{} \ill{} sur $B^{(n)}$ :
+cela résulte des lemme~1, cor.~3, compte tenu du lemme~2.
+
+\uncertain{On} a ainsi prouvé a).
+
+(b)\ Pour prouver (i), \uncertain{prenons} la formation de
+$H^1(A'/A)$ commutant : l'extension plate de la base, on peut supposer $A$
+\emph{complet}. Alors \struck{\ill{}}
+
+\page{28}
+
+\[
+  C^{\cdot}(A'/A) = \varprojlim_n C^{\cdot}(A'_n/A_n) ,
+\]
+donc en vertu de M.L.\ on a
+\[
+  H^1(A'/A) = H^1\bigl(C^{\cdot}(A'/A)\bigr)
+  = \varprojlim H^1\bigl(C^{\cdot}(A'_n/A_n)\bigr)
+  = \varprojlim_n H^1(A'_n/A_n) = 0 .
+\]
+
+On peut aussi \uncertain{déduire} formellement (i) de (iii) sans difficulté
+(en faisant $m = 1$, et $m = 2$).
+
+(ii) \uncertain{Vm} résulte de (iii), par le même argument que dans a).
+
+(iii) \struck{\ill{}} On voit comme dans (i) que l'on peut supposer $A$
+\struck{\emph{local}} \emph{complet}, \struck{et évidemment}
+\struck{Enfin, on} On peut aussi supposer $A = B$, et $A$ \emph{local}. Soit
+$E' = E_{A'}$ plat de type fini sur $A'$, muni d'une donnée de descente, et
+soit
+\[
+  E = H^0_D(A'/A, E') .
+\]
+Il faut prouver 1°) $E$ plat sur $A$ 2°) $E \otimes_A A' \to E'$ est un
+isomorphisme. Or on a
+\[
+  C^{\cdot}_D(A'/A, E') \simeq \varprojlim_n C^{\cdot}_D(A'_n/A_n, E'_n)
+\]
+d'où par M.L.
+\[
+  E = H^0_D(A'/A, E') = \varprojlim_n H^0(A'_n/A_n, E'_n) .
+\]
+\note{dans « $E' = E_{A'}$ », l'indice de $E'$ est noirci}
+
+Posons
+\[
+  E^{(n)} = H^0(A'_n/A_n, E'_n)
+\]
+alors grâce à l'hypothèse a), sous la forme (iii), on sait que $E^{(n)}$
+est un $B^{(n)}$-module plat de t.f., et
+$E^{(n)} \otimes_{B^{(n)}} A'_n \to E'_n$ est un isom.
+
+\page{29}
+
+Moyennant un lemme facile de passage à la limite, on en déduit que
+$E = \varprojlim E^{(n)}$ est plat sur $A = \varprojlim_n B^{(n)}$.
+\uncertain{Pour} voir enfin que $E \otimes_A A' \to E'$ est un
+isomorphisme, on note que les deux membres sont \uncertain{respectivement}
+les $\varprojlim$ des $E^{(n)} \otimes_{B^{(n)}} A'_n$ et des
+$E'_n = E' \otimes_A A'_n$, et l'homomorphisme est la $\varprojlim$ des
+\uncertain{isomorphismes} $E^{(n)} \otimes_{B^{(n)}} A'_n \to E'_n$, donc
+est un \emph{isomorphisme}.
+
+(c)\ \uncertain{Montrons} que $X' \to X$ est un morphisme de
+descente pour la catégorie en question, \uncertain{puis} que c'est un
+morphisme de descente effective, \ill{} \ill{} [De plus, on peut supposer
+évidemment $A = B$ \ill{}, \ill{} \ill{} \ill{} \ill{} \ill{} pour les
+$A_n$ \ldots, \ill{} l'hypothèse sous la forme a) (iii) \ldots\,]
+
+\[
+  A \longrightarrow A' \rightrightarrows A''
+\]
+\note{ligne isolée au bas de la page, sans texte}
+
+\page{31}
+
+\note{feuillet d'une autre main, écrit proprement en anglais, sans
+intervention de Grothendieck repérée ; vu le titre du dossier, il s'agit
+vraisemblablement d'une page des notes Murre--Levelt, mais rien sur la
+feuille n'en nomme l'auteur. Pour $A' = k + V = k[X_1, \ldots, X_n]/(X_i)^2$
+et $I$ un « equivalence ideal » de $A' \otimes_k A'$, engendré par des
+$F_\alpha(X, Y) = L'_\alpha(X) + L''_\alpha(Y) + Q_\alpha(X, Y)$ (parties
+linéaires et bilinéaire), la condition $p_{13}(I) \subset p_{12}(I) +
+p_{23}(I)$ fournit des $G_{\alpha\beta}$, $H_{\alpha\gamma}$ tels que
+$F_\alpha(X, Z) \equiv \sum_\beta F_\beta(X, Y) G_{\alpha\beta}(X, Y, Z) +
+\sum_\gamma F_\gamma(Y, Z) H_{\alpha\gamma}(X, Y, Z)$ modulo les carrés ;
+on en tire une expression de $Q_\alpha(X, Z)$ par des formes linéaires
+$g_{\alpha\beta}$, $h_{\alpha\gamma}$, on remplace les générateurs par
+$F'_\alpha = F_\alpha - \sum_\beta F_\beta\, g_{\alpha\beta} - \ldots$,
+qui engendrent encore $I$, et, si $I \subset \Delta$, on conclut que
+$F'_\alpha(X, Y) = L'_\alpha(X) - L'_\alpha(Y)$}
+
+\end{document}
