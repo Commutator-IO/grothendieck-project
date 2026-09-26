@@ -61,9 +61,15 @@ const STYLE = `
   .dg .tr-src pre { white-space: pre-wrap; text-align: left; font-size: 11.5px; }
 ${CAROUSEL_STYLE}`;
 
+/** The reading view of the batch, at the page's own anchor (id="page-N"). */
+const transcriptHref = (d) =>
+  `/transcripts/${d.folder}/batch-${String(d.batch).padStart(2, '0')}.fr.html${d.page ? `#page-${encodeURIComponent(d.page)}` : ''}`;
 const figureOf = (d, i, n, withFolder) =>
   `<figure class="dg" id="d${i + 1}">` +
-  `<figcaption><a href="/#${d.folder}/${d.batch}" target="_top">${withFolder ? `n° ${d.folder} · ` : ''}batch ${d.batch}${d.page ? ` · p. ${escapeHtml(d.page)}` : ''} — lire la page</a>` +
+  `<figcaption><span>${withFolder ? `n° ${d.folder} · ` : ''}batch ${d.batch}${d.page ? ` · p. ${escapeHtml(d.page)}` : ''} — ` +
+  // The transcription at its page, and the batch beside Montpellier's facsimile.
+  `<a href="${transcriptHref(d)}" target="_blank" rel="noopener">la transcription${d.page ? `, p. ${escapeHtml(d.page)}` : ''} ↗</a> · ` +
+  `<a href="/#${d.folder}/${d.batch}" target="_top">avec le fac-similé</a></span>` +
   `<span class="dg-n">${i + 1} / ${n} · ${d.symbols} symboles distincts, ${d.size} écrits</span></figcaption>` +
   `<div class="ltx_p">\\[${escapeHtml(display(d.env, d.body, d.raw))}\\]</div>` +
   `<details class="tr-src"><summary>LaTeX</summary><pre>${escapeHtml(d.raw)}</pre></details></figure>`;
