@@ -1,0 +1,227 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 156-1, batch 2 (pages 21-26).
+% Established from the facsimile archives/batches/156-1/batch-02.pdf (a copy of
+% 156-1.pdf fetched through the project's relay; no cover sheet in the batch,
+% so PDF page k = folder page 20+k), per the skill transcribe-grothendieck. The
+% folder is twenty-six pages; this is the second and last batch, six pages.
+% Batch 1 (pages 1-20) is transcribed separately and in parallel; its last
+% pages (glanced at here only for context, not transcribed) introduce a
+% « modèle de 1-forme » given by an order relation, locally strictly filtering
+% increasing and decreasing, which « vérifie axiomes F1 : F5 ».
+%
+% All six leaves are mathematics in his hand and all are transcribed; nothing
+% is skipped and nothing is summarised. Page 26 carries four lines only, the
+% rest of the leaf blank. His own pagination runs 19-24 across the top of the
+% leaves (19 overwrites an earlier figure, as does 20 on page 22); it is noted
+% once per page. One date in his hand: « (7 juin) » opening page 23 — a day
+% later than the 6 June heading of chapter II (folder 156-2), so this chapter
+% was still being written after the next one had begun. The inventory's
+% bracketed « [Chapitre] » is the archivists'; this batch carries no title.
+%
+% What the batch is about. Page 21: two examples of ordered sets, the first
+% (L = (Q ∩ ]-∞,r]) ⊔ (Q ∩ [r,+∞]) × E, r irrational, card E ≥ 2, with maps
+% p to Q and q to E ⊔ {0}) broken off and cancelled by four diagonals; the
+% second, L = L_0 ⊔ ∐ L_i with L_0 below every L_i, satisfies the local
+% conditions but is not filtering increasing (« n'est pas filtrante
+% croissante ! »). Page 22: axiom F_6 — two segments I, J with x in ∂I ∩ ∂J
+% that define the same branch at x (I_{x,y} = J_{x,y} for some y ∈ I° ∩ J°)
+% lie in a common K ∈ S with x ∈ ∂K; i.e. the I° with x ∈ ∂I defining a
+% given branch form an increasing filtering family (compare F3); consequence
+% a) (criterion) and b) (otherwise I_{x,u} ∩ I_{x,v} = {x}); a slanted NB in
+% the left margin, read only in part. Page 23 (7 June): a model of 1-form
+% satisfying F_1 : F_6 is called a « réseau »; nœuds (critical or singular
+% lieux), lignes (« de préférence : arêtes »), composantes, ordre or
+% multiplicité of a nœud (2 for a regular lieu); « divisible » (I° ≠ ∅ for
+% every segment) and « réduit » (card I = 2, all lieux nœuds, L_r = ∅).
+% Page 24: a reduced réseau on L is the same as a part S of P_2(L), i.e. a
+% reduced graph (« les axiomes F1) : F6) sont vides ! »); then, turning to
+% regular connected réseaux, two consecutive segments I, J meeting at y with
+% br_y(I) ≠ br_y(J): case I) I ∩ J = {y} gives by the recollement axiom a
+% unique K ⊃ I ∪ J (« situation bien comprise »); a first case II) is
+% cancelled. Pages 25-26: case II) I ∩ J ≠ {y} restarted with w ∈ I ∩ J,
+% w ≠ y, reducing to the situation ∂I = ∂J = {x,y}: he shows
+% br_x(I) ≠ br_x(J) by F_6, then I ∩ J = {x,y}, and the argument through the
+% axiom of regular points (F5) breaks off at « on aurait br_t » on page 26.
+%
+% Reading hazards fixed once here. His script L is \mathcal{L}; where he
+% writes a plain L (P(L), P_2(L)) it is kept plain. P, P_2 are \mathfrak{P}.
+% The interior of a segment is I^{\circ} (he writes a small raised circle),
+% its boundary ∂I. « br_y » (branche en y) and the sub-segments I_{x,y} are
+% his. He writes « = » for « même » in running text (page 22, and apparently
+% page 21); it is kept and glossed once. His underlining is set in \emph.
+% The hand is fast drafting; the arcs of pages 24-25 are set as tikz-cd bent
+% arrows, following the arrowheads on the page.
+%
+% Readings flagged and not settled: « non vide » inserted on page 21 and the
+% x' < a < a'' there (presumably x' < x < x''); the insertion over « un même
+% L_i » on page 21; « l'ens. des I° » on page 22; « On a donc » opening the
+% page-22 consequence; most of the page-22 margin NB; the word after
+% « divisible » on page 23; the index r of L_r on page 23; the first letter
+% (x or y) of the page-24 margin « ∈ ∂I ∩ ∂J » (the figure suggests y); the
+% page-25 margin NB on w. Variances on the page and not repaired: page 22's
+% b) writes I_{x,u} ∩ I_{x,v} where J_{x,v} is expected; page 25 writes
+% J = K_{x,y} for the same K_{x,y} as I, which is his point (« donc I = J »).
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-09-26 — first pass, unchecked against the pages by a human.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{156-1}
+\batch{2}
+\pages{21}{26}
+\dating{1986}
+\watermark{Édition de démonstration}
+\foldertitle{[Chapitre] I. Vers une géométrie des formes (topologiques) : notes manuscrites (05/06/1986).}
+
+\begin{document}
+
+\page{21}
+\note{p. 19 de sa pagination (le chiffre surcharge un chiffre antérieur). Le premier exemple, jusqu'à « $x < y \Longleftrightarrow px < py$ et », est barré de quatre traits obliques et s'interrompt là}
+
+\struck{\emph{Exemple} : Considérons un nb réel irrationnel $r$, et considérons l'ens}
+\[
+  \mathcal{L} = \underbrace{\bigl(\mathbb{Q} \cap {]{-\infty}, r]}\bigr)}_{L_1} \amalg \underbrace{\bigl(\mathbb{Q} \cap [r, +\infty]\bigr)}_{L_2} \times E
+\]
+\struck{où $E$ est un ens \struck{\ill{}} quelconque de card $\geq 2$. On \struck{pose} a donc}
+\[
+  \mathcal{L} \xrightarrow{\;p\;} \mathbb{Q} \quad (\text{surjectif}), \qquad
+  \mathcal{L} \xrightarrow{\;q\;} E \amalg \{0\}, \quad q(x) = 0 \text{ si } x \in \mathcal{L}
+\]
+\note{l'indice de ce dernier $\mathcal{L}$ (on attend $L_1$) n'est pas visible}
+\struck{et si $x, y \in \mathcal{L}$, on pose}
+\[
+  x < y \Longleftrightarrow px < py \ \underline{\text{et}}
+\]
+\note{« $px$ » : la première lettre surcharge un autre signe ; la phrase reste inachevée}
+
+\emph{Ex} Soit $\mathcal{L}_0$ un ordonné \add{\uncertain{non vide}} \struck{filtrant} \struck{croissant et filtrant} \struck{str. filtrant.} loc. str. \struck{filtrant} croiss. et décroissant, et telle que $\exists\, x \in \mathcal{L}_0$, $\exists\, x' < a < a''$, et soit $\mathcal{L}_i$ ($i \in I$) une famille d'ens ordonnés, satisfaisant les mêmes conditions. Soit $\mathcal{L} = \mathcal{L}_0 \amalg \coprod_i \mathcal{L}_i$. On munit $\mathcal{L}$ de la relation d'ordre
+\note{« non vide » est inséré au-dessus de la ligne, après un mot biffé ; « $x' < a < a''$ » : sic, on attend $x' < x < x''$}
+\[
+  x < y \ \text{ssi} \ \left|\ \begin{array}{l}
+    \text{ou bien } x, y \text{ dans un même } \mathcal{L}_i, \text{ et } x < y \text{ dans cet } \mathcal{L}_i \\
+    \text{ou bien } x \in \mathcal{L}_0,\ y \in \mathcal{L}_i \ (i \in I)
+  \end{array}\right.
+\]
+\note{la première ligne porte des corrections : « dans \struck{$\mathcal{L}_0$ ou} », avec au-dessus une insertion lue « $= \mathcal{L}_0$ ou » d'une lecture incertaine ; « un même » est écrit « un $=$ » ; « cet » surcharge « \ill{} »}
+
+Elle satisfait les mêmes conditions que $\mathcal{L}_0$, $\mathcal{L}_i$ mais n'est pas filtrante croissante !
+
+\page{22}
+\note{p. 20 de sa pagination, surchargeant un chiffre antérieur}
+
+F$_6$) Soient $I, J \in S$, \add{$x \in \mathcal{L}$} tels que $x \in \partial I$, $x \in \partial J$, et que $I$, $J$ définissent la $=$ branche i.e. $\exists\, y \in I^{\circ} \cap J^{\circ}$, \add{$y \neq x$}, tel que $I_{x,y} = J_{x,y}$. Alors $\exists\, K \in S$ tel que $x \in \partial K$, $I^{\circ} \cup J^{\circ} \subset K^{\circ}$.
+\note{« $x \in \mathcal{L}$ » et « $y \neq x$ » sont écrits au-dessus de la ligne ; « = » est mis pour « même », comme ailleurs}
+
+En d'autres termes, l'\uncertain{ens.} des $I^{\circ}$, $I \in S$ tels que $x \in \partial I$, et que $I$ définisse une branche donnée, est filtrant croissant pour l'inclusion. (on comparera avec F3)
+\note{« $I^{\circ}$ » est inséré au-dessus de la ligne}
+
+\marginal{\emph{NB} On n'exige pas \ill{} que les \uncertain{intersections} \struck{\ill{}} $I \cap J$ des $I$ \uncertain{soient} dans \struck{\ill{}} $K$. Mais \struck{\ill{}} on \ill{} celles de ces \uncertain{extrémités} \ill{} \uncertain{régulières} \ill{} \struck{dans} $K$. Comme on \ill{} \uncertain{une des propriétés} \ill{} (cor. 2 p. 7)}
+\note{note oblique dans la marge gauche, à une cinquantaine de degrés, très raturée ; lue en partie seulement}
+
+On \uncertain{a donc} : Soient $I, J \in S$, $x \in \mathcal{L}$ tels que $x \in \partial I \cap \partial J$. Alors
+
+a) Pour qu'il existe $y \in I^{\circ} \cap J^{\circ}$ tel que $I_{x,y} = J_{x,y}$, il f. et s. qu'il existe $K \in S$ tel que $x \in \partial K$, $I \cup J \subset K$.
+
+b) Si cette condition \uncertain{n'est pas} vérifiée, alors $\exists\, u \in I^{\circ}$, $v \in J^{\circ}$ tels que
+\[
+  I_{x,u} \cap I_{x,v} = \{x\}.
+\]
+\note{sic : on attend $J_{x,v}$}
+
+\page{23}
+\note{p. 21 de sa pagination}
+
+(7 juin) Un\struck{e} modèle de 1-forme au sens précédent (ensemble de lieux $\mathcal{L}$, avec ens de « segments » $S \subset \mathfrak{P}(L)$, et $\forall\, I \in S$, un $\partial I \in \mathfrak{P}_2(I)$, \struck{\ill{}} de façon à satisfaire les conditions (F$_1$) : (F$_6$)) est appelé un \emph{réseau}.
+
+Les lieux critiques \add{ou singuliers} ou de branchement sont appelés aussi \emph{nœuds} du réseau. Les comp. connexes de $\mathcal{L}_r \smallsetminus \underbrace{\mathcal{L}_s}_{\text{nœuds}}$ sont appelées les \emph{lignes} du réseau (de préférence : arêtes). Composantes connexes : les \emph{composantes} du réseau.
+\note{« ou singuliers » est écrit au-dessus de la ligne ; l'indice $r$ de $\mathcal{L}_r$ est d'une lecture incertaine}
+
+On parlera de l'\emph{ordre} ou de la \emph{multiplicité} d'un nœud (plus généralement, d'un lieu du réseau --- elle est égale à 2 pour un lieu régulier).
+
+On dira qu'un \struck{segment} réseau est \emph{divisible} \uncertain{si} \ill{} pour tt segment $I$, $I^{\circ} \neq \emptyset$. On dira qu'il est \emph{réduit} si pour tt segment $I$, $I^{\circ} = \emptyset$ i.e. $I = \partial I$ i.e. $\operatorname{card} I = 2$, \add{(ou encore si $\mathcal{L}_r = \emptyset$)}, i.e. tous ses lieux sont des nœuds.
+\note{« ou encore si $\mathcal{L}_r = \emptyset$ » est inséré sous la ligne}
+
+\page{24}
+\note{p. 22 de sa pagination}
+
+La donnée d'une structure de réseau réduit sur $\mathcal{L}$ revient à celle d'une \struck{structure} partie $S$ de $\mathfrak{P}_2(L)$ [les axiomes F$_1$) : F$_6$) sont vides !] donc une structure de \emph{graphe} réduit.
+
+\note{un trait horizontal sépare ici deux passages}
+
+[Je reviens : l'étude des réseaux réguliers \add{et} connexes (et non vides, i.e. 0-connexes)]
+
+\struck{Lemme} On va étudier les cas de figure de deux segments « consécutifs »
+\marginal{Rappelons que \ill{} $y$ \emph{régulier}}
+
+\begin{tikzcd}
+x \arrow[r, no head, "I"] & y \arrow[r, no head, "J"] & z
+\end{tikzcd}
+
+$y \in \mathcal{L}_r$. \marginal{$y \in \partial I \cap \partial J$ avec} $\operatorname{br}_y(I) \neq \operatorname{br}_y(J)$, Je distingue deux cas :
+\note{sur la figure, le trait de $I$ porte une pointe vers $x$ ; la première lettre de la note marginale peut se lire $x$ ou $y$, la figure suggère $y$}
+
+I) $I \cap J = \{y\}$ alors \struck{\ill{}} par axiome de recollement, $\exists !\, K \in S$, $K \supset I \cup J$, $\partial K = \{x, z\}$, et $I = K_{x,y}$, $J = K_{\struck{x}y,z}$. Situation bien comprise.
+
+\struck{II) $I \cap J \neq \{y\}$. \struck{On} Soit \ill{}}
+
+\struck{a) $x = z$ \quad \ill{} $= \{y, x\}$}
+
+\begin{tikzcd}
+x \arrow[r, bend left=50, "I"] & y \arrow[l, bend left=50]
+\end{tikzcd}
+
+\note{cette figure est barrée d'un trait horizontal, comme les lignes qui l'entourent}
+
+\struck{b) $I \cap J \neq \{y, x\}$ \ill{} ($\partial \neq \{y\}$)} \struck{\ill{}}
+
+\struck{$\exists\, t \in I \cap J$, $t \neq y$.}
+\note{les lignes b) sont couvertes de hachures obliques ; le cas II) est repris à la page suivante}
+
+\page{25}
+\note{p. 23 de sa pagination}
+
+II) $I \cap J \neq \{y\}$ \quad \struck{Deux cas}
+
+\struck{a) \ill{}}
+
+\begin{tikzcd}
+x \arrow[r, bend left=50, "I"] & y \arrow[l, bend left=50, "J"]
+\end{tikzcd}
+
+\note{figure barrée de traits obliques}
+
+\struck{b) $x \neq y$} Soit $w \in I \cap J$, $w \neq y$ et considérons $\underbrace{J_{y,w}}_{\in S} \subset J$, $I_{w,y}$
+
+\begin{tikzcd}
+w \arrow[r, bend left=50, "I_{w,y}"] & y \arrow[l, bend left=50, "J_{y,w}"]
+\end{tikzcd}
+
+\note{dans la marge gauche, une petite figure analogue : un cercle passant par $x$, $t$ et $y$, flèches sur l'arc supérieur vers $y$}
+\marginal{\emph{NB} $w$ régulier \uncertain{sauf} si \struck{$w \in \{x, z\}$} $w = x = z$ \struck{\ill{}} i.e. si on a $x \overset{I}{\frown} z$}
+
+\struck{Je dis que $I_{w,y} \cap$} Je vais donc étudier d'abord la situation
+
+\begin{tikzcd}
+& t \arrow[dr, bend left=20, "I"] \arrow[d, dashed, no head] & \\
+x \arrow[ur, bend left=20, no head] & t \arrow[l, bend left=20, "J"] & y \arrow[l, bend left=20, no head]
+\end{tikzcd}
+
+\note{figure redessinée : un cercle, $x$ à gauche, $y$ à droite ; l'arc supérieur $I$ passe par un point $t$ et est fléché vers $y$, l'arc inférieur $J$ passe par un point $t$ et est fléché vers $x$ ; les deux $t$ sont reliés par un trait pointillé vertical}
+\marginal{$\operatorname{br}_y I \neq \operatorname{br}_y J$ \quad \emph{NB} On ne va plus supposer $y$ régulier}
+
+\struck{$I \cap J$} : $\partial I = \partial J$, $I \cap J = ?$
+
+Je dis que $\operatorname{br}_x(I) \neq \operatorname{br}_x(J)$. Sinon, en vertu de l'axiome F$_6$, existerait \ill{} $K \in S$, tel que $x \in \partial K$, et $I = K_{x,y}$, $J = K_{x,y}$ donc $I = J$, donc $\operatorname{br}_y(I) = \operatorname{br}_y J$, absurde.
+
+Je dis que $I \cap J = \{x, y\}$. Si en effet $t \in I \cap J$, $t \notin \{x, y\}$, alors $t \in I^{\circ} \cap J^{\circ}$, on applique ce qui précède à $I_{x,t}$, $J_{x,t}$
+
+\page{26}
+\note{p. 24 de sa pagination ; la page ne porte que ces quatre lignes}
+
+(où $\underset{\substack{\parallel \\ \operatorname{br}_x I}}{\operatorname{br}_x I_{x,t}} \neq \underset{\substack{\parallel \\ \operatorname{br}_x (J)}}{\operatorname{br}_x J_{x,t}}$) on aurait
+\[
+  \operatorname{br}_t I_{x,t} \neq \operatorname{br}_t J_{x,t},
+\]
+donc en vertu de l'axiome des \struck{branches} pts réguliers (F$_5$) on aurait $\operatorname{br}_t$
+\note{le texte s'arrête ici}
+
+\end{document}
