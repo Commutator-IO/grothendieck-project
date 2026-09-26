@@ -171,6 +171,41 @@ function explain(run) {
   return 'only in the .tex view — missing from the TEI export';
 }
 
+/**
+ * The two insertions, counted in the source and in the XML.
+ *
+ * \supplied is the transcriber's and \add is Grothendieck's, and the whole
+ * point of having two macros is that the export keeps them apart: a
+ * <supplied> where the source says \add credits his text to the transcriber.
+ * The text comparison cannot see that — both views print what they are given
+ * — so the elements are counted against the macros. A mark inside a formula
+ * stays in its TeX, verbatim, so it is counted there: every one in the source
+ * must come out either as its element or still as the macro.
+ */
+async function insertionCounts(folder, file) {
+  let tex;
+  let xml;
+  try {
+    tex = await readFile(resolve(SOURCE, folder, file.replace(/\.html$/, '.tex')), 'utf8');
+    xml = await readFile(resolve(OUT, folder, file.replace(/\.html$/, '.xml')), 'utf8');
+  } catch {
+    return [];
+  }
+  const body = (/\\begin\{document\}([\s\S]*)\\end\{document\}/.exec(tex)?.[1] ?? '').replace(/(?<!\\)%.*$/gm, '');
+  const n = (s, re) => (s.match(re) ?? []).length;
+  const out = [];
+  for (const [macro, element] of [['supplied', /<supplied\b/g], ['add', /<add>/g]]) {
+    const re = new RegExp(`\\\\${macro}\\{`, 'g');
+    const inTex = n(body, re);
+    const asElement = n(xml, element);
+    const inFormulas = n(xml, re);
+    if (inTex !== asElement + inFormulas) {
+      out.push(`\\${macro}: ${inTex} in the .tex, ${asElement} <${macro}> and ${inFormulas} inside formulas in the XML`);
+    }
+  }
+  return out;
+}
+
 /** Constructs in the source the TEI export does not carry at all. */
 async function sourceGaps(folder, file) {
   let tex;
@@ -267,6 +302,8 @@ for (const folder of folders.sort((a, b) => a.localeCompare(b, 'en', { numeric: 
 
     const gaps = await sourceGaps(folder, name);
     if (gaps.length) lines.push(`  not carried by the TEI export: ${gaps.join(', ')}`);
+
+    for (const m of await insertionCounts(folder, name)) lines.push(`  insertions miscounted — ${m}`);
 
     const counts = `${a.pages.length} page segment(s), ${formulas(article(teiHtml)).length} formulas`;
     if (lines.length) {

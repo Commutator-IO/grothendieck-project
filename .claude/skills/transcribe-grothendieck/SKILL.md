@@ -271,6 +271,17 @@ In priority order:
    maintains the repository, is English.
 6. **What he struck out stays**, as `\struck{}`. A deletion often shows where
    the thought changed direction.
+7. **What he inserted is his; what you supply is yours.** A word he wrote
+   above the line with a caret, a symbol written over a struck one
+   (`\struck{$\varphi$} \add{$\alpha_{i}$}`), his ink on a typescript: all
+   `\add{}`, and the TEI credits them to him. The end of a word he wrote short
+   or the copier clipped, a letter he left out, a word the sentence plainly
+   needs and the page does not carry: `\supplied{}`, and the TEI credits it
+   to the transcriber. The two were one macro until 26 September 2026, and
+   the export was crediting his insertions to the pass. Ask of each one
+   *whose ink is this?* — if it is on the page, it is `\add{}`; if it is not,
+   it is `\supplied{}`. A supply usually completes a word and sits glued to
+   it (`can\supplied{onique}`); an insertion usually stands free.
 
 #### The apparatus, kept to what earns its place
 
@@ -279,13 +290,14 @@ In priority order:
 | `\page{47}` | page 47 begins (archivists' numbering) — this is what turns the facsimile as you scroll |
 | `\ill{}` | illegible — **never guessed** |
 | `\uncertain{word}` | a reading offered, and flagged as doubtful |
-| `\add{s}` | an editorial addition: a missing letter, an implied word |
+| `\add{word}` | **his** insertion: above the line, over a struck word, his ink on a typescript |
+| `\supplied{s}` | **ours**: a missing letter, a clipped word-end, an implied word the page does not carry |
 | `\struck{word}` | struck out by Grothendieck |
 | `\note{…}` | the transcriber's note — **about the mathematics**, not about the paper |
 | `\marginal{…}` | a marginal note **of his**, distinct from the body |
 
 `\note{}` and `\marginal{}` are not interchangeable: the first is ours, the
-second is his.
+second is his. `\supplied{}` and `\add{}` are the same pair — ours, his.
 
 `\note{}` has become the easiest macro to overuse. It is for something a reader
 of the mathematics needs — "the next step is missing", "author's p. 213", "the
@@ -302,7 +314,7 @@ outside makes rendering fail loudly, which is the wanted behaviour.
 Allowed: `\section` `\subsection` · paragraphs separated by a blank line ·
 `\emph` `\textbf` `\textit` `\texttt` · `itemize` `enumerate` `quote` ·
 `summary` · `tikzcd` (arrow syntax below) · `$…$` `\(…\)` `\[…\]` `equation`
-`align` `gather` `cases` `array` and the matrix environments · the seven macros
+`align` `gather` `cases` `array` and the matrix environments · the eight macros
 above.
 
 Apparatus macros may contain mathematics — `\note{the $\varphi_{*}$ here is

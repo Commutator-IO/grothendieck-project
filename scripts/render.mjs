@@ -476,7 +476,11 @@ const BRACED = [
   // exercise: what was read, what was guessed, what was added, what was
   // crossed out by Grothendieck himself.
   ['uncertain', (a) => `<span class="tr-uncertain" title="uncertain reading">${a}</span>`],
-  ['add', (a) => `<span class="tr-add" title="editorial addition">[${a}]</span>`],
+  // Two kinds of insertion, kept apart because the authority differs: what the
+  // transcriber supplies goes in square brackets, what Grothendieck inserted
+  // himself in corner brackets — angle brackets would read as a pairing.
+  ['supplied', (a) => `<span class="tr-supplied" title="supplied by the transcriber">[${a}]</span>`],
+  ['add', (a) => `<span class="tr-add" title="inserted by the author">\u231c${a}\u231d</span>`],
   ['struck', (a) => `<span class="tr-struck" title="struck out by the author">${a}</span>`],
   ['note', (a) => `<span class="tr-note" title="transcriber's note">${a}</span>`],
   ['marginal', (a) => `<span class="tr-marginal" title="marginal note">${a}</span>`],
@@ -919,7 +923,7 @@ export function readingPage({ meta, lang, name, html, extraStyle = '' }) {
   @media (max-width: 46rem) { .tr-page { float: none; margin: 0 .5rem 0 0; } }
   .tr-ill { color: #b53d1d; }
   .tr-uncertain { border-bottom: 1px dotted #b53d1d; }
-  .tr-add { color: #38539d; }
+  .tr-supplied, .tr-add { color: #38539d; }
   .tr-struck { text-decoration: line-through; color: #9d9787; }
   .tr-note, .tr-marginal { display: block; margin: .4rem 0; padding-left: .7rem;
              border-left: 2px solid var(--rule); font-size: .88em; color: var(--ink3); }
@@ -1005,19 +1009,23 @@ ${html}
 // the marker. Screen and PDF must agree about which words were read.
 var TR_MACROS = {
   '\\\\ill': '\\\\textcolor{#b53d1d}{[\\\\ldots]}',
-  // The other three apparatus macros reach math too — he strikes a single
+  // The other apparatus macros reach math too — he strikes a single
   // symbol, doubts a single operator — and KaTeX drops what it does not know
   // *silently*, so without these the strike simply disappears on screen while
   // the PDF prints it. Same rule as \\ill: screen and PDF must agree.
   '\\\\struck': '\\\\sout{#1}',
   '\\\\uncertain': '\\\\underline{#1}',
-  // The colour goes through \\addcolour rather than sitting in \\add's body.
-  // KaTeX counts the #N in a macro body to infer how many arguments it takes,
+  // The colour goes through \\addcolour rather than sitting in the bodies of
+  // \\add and \\supplied. KaTeX counts the #N in a macro body to infer how many arguments it takes,
   // and #38539d reads as parameter 3: \\add came out a three-argument macro
   // and threw at expansion, killing every diagram on the page. \\ill escapes
   // this only because #b is not a digit.
   '\\\\addcolour': '#38539d',
-  '\\\\add': '\\\\textcolor{\\\\addcolour}{[#1]}',
+  '\\\\supplied': '\\\\textcolor{\\\\addcolour}{[#1]}',
+  // The corners are math symbols, wrapped as \\text{$…$} so that \\add works
+  // both in a formula and inside a \\text{} within one, where a bare
+  // \\ulcorner is refused.
+  '\\\\add': '\\\\textcolor{\\\\addcolour}{\\\\text{$\\\\ulcorner$}#1\\\\text{$\\\\urcorner$}}',
 };
 
 document.addEventListener('DOMContentLoaded', function () {

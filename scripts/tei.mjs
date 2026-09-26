@@ -7,7 +7,7 @@
  *
  * Why a second serialisation of the same file. The `.tex` is the source of
  * record and stays so: it is what gets corrected and compiled, and this script
- * reads nothing else — not the facsimile, not the HTML. But LaTeX with seven
+ * reads nothing else — not the facsimile, not the HTML. But LaTeX with eight
  * private macros is legible only to this repository. TEI is what an archive,
  * a library deposit (HAL, Nakala) or another editor can take in without our
  * rendering chain, and its header carries what our header comment carries —
@@ -21,7 +21,8 @@
  *                                                     PDF page is one ahead
  *   \ill{}             <gap reason="illegible"/>
  *   \uncertain{x}      <unclear>x</unclear>
- *   \add{x}            <supplied resp="#pass">x</supplied>
+ *   \supplied{x}       <supplied resp="#pass">x</supplied>   the transcriber's
+ *   \add{x}            <add>x</add>                        Grothendieck's own
  *   \struck{x}         <del>x</del>
  *   \note{x}           <note type="editorial" resp="#pass">x</note>
  *   \marginal{x}       <note type="authorial" place="margin">x</note>
@@ -141,7 +142,8 @@ function dropMathBack(xml, held) {
  */
 const BRACED = [
   ['uncertain', (a) => `<unclear>${a}</unclear>`],
-  ['add', (a) => `<supplied resp="#pass">${a}</supplied>`],
+  ['supplied', (a) => `<supplied resp="#pass">${a}</supplied>`],
+  ['add', (a) => `<add>${a}</add>`],
   ['struck', (a) => `<del>${a}</del>`],
   ['note', (a) => `<note type="editorial" resp="#pass">${a}</note>`],
   ['marginal', (a) => `<note type="authorial" place="margin">${a}</note>`],
@@ -539,13 +541,23 @@ function document(meta, body) {
         l'apparat, rien du support. Correspondance avec l'apparat de la source :
         <hi rend="monospace">\\ill</hi> devient <hi rend="monospace">gap[@reason='illegible']</hi>
         (jamais deviné) ; <hi rend="monospace">\\uncertain</hi> devient
-        <hi rend="monospace">unclear</hi> ; <hi rend="monospace">\\add</hi> devient
-        <hi rend="monospace">supplied</hi> ; <hi rend="monospace">\\struck</hi> devient
+        <hi rend="monospace">unclear</hi> ; <hi rend="monospace">\\supplied</hi> devient
+        <hi rend="monospace">supplied</hi> (restitué par le transcripteur) ;
+        <hi rend="monospace">\\add</hi> devient <hi rend="monospace">add</hi>
+        (ajout de l'auteur, en interligne ou sur un mot biffé) ;
+        <hi rend="monospace">\\struck</hi> devient
         <hi rend="monospace">del</hi> (biffé par l'auteur) ;
         <hi rend="monospace">\\note</hi> devient <hi rend="monospace">note[@type='editorial']</hi>
         (du transcripteur) ; <hi rend="monospace">\\marginal</hi> devient
         <hi rend="monospace">note[@type='authorial'][@place='margin']</hi> (de l'auteur) ;
         <hi rend="monospace">\\page</hi> devient <hi rend="monospace">pb</hi>.</p>
+        <p>Restitution et ajout de l'auteur n'ont longtemps fait qu'une macro. Ils
+        ont été séparés le 26 septembre 2026 par une règle vérifiable dans le
+        fichier, non par une relecture : un ajout accolé au mot qu'il complète
+        est une restitution (<hi rend="monospace">supplied</hi>), un ajout
+        isolé est de l'auteur (<hi rend="monospace">add</hi>). Certains
+        <hi rend="monospace">add</hi> sont donc encore des restitutions du
+        transcripteur, que seuls les fac-similés départageront.</p>
         <p>Les mathématiques sont transportées en TeX dans
         <hi rend="monospace">formula[@notation='TeX']</hi>, les diagrammes
         commutatifs en <hi rend="monospace">formula[@notation='tikz-cd']</hi>,

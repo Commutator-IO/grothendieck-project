@@ -140,8 +140,23 @@
 % A doubtful reading: the word is given, and flagged as uncertain.
 \newcommand{\uncertain}[1]{\uline{#1}}
 
-% An editorial addition — a missing letter, an implied word.
-\newcommand{\add}[1]{\textcolor{blue!50!black}{[#1]}}
+% The transcriber supplies what the page does not carry: a missing letter, the
+% end of a word he wrote short or the copier clipped, an implied word. The
+% authority is the transcriber's and the TEI says so, with @resp.
+\newcommand{\supplied}[1]{\textcolor{blue!50!black}{[#1]}}
+
+% Grothendieck's own insertion — a word above the line with a caret, a symbol
+% written over a struck one, his ink on a typescript. It is his text, not the
+% transcriber's, and the TEI encodes it as <add>. Corner brackets rather than
+% angle ones, which in this mathematics would read as a pairing.
+%
+% The two were one macro, declared as the supply, until 26 September 2026,
+% when most of its uses turned out to be his. They were separated by a rule
+% that can be checked in the file: an \add glued to the word it completes (a
+% word character immediately before or after it) became \supplied; one
+% standing free stayed \add. The free ones have not been read again against
+% the facsimiles, so some are still the transcriber's supply.
+\newcommand{\add}[1]{\textcolor{blue!50!black}{\ensuremath{\ulcorner}#1\ensuremath{\urcorner}}}
 
 % Struck out by Grothendieck himself. What he crossed out is part of the
 % document: a deletion often shows where the thought changed direction.

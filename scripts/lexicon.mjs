@@ -25,11 +25,12 @@
  * guess would launder itself into an authority:
  *
  * — **Sure prose** — his words as read plainly, plus `\struck{}` (struck out
- *   but read) and `\marginal{}` (his margin, not ours).
+ *   but read), `\add{}` (his own insertion) and `\marginal{}` (his margin,
+ *   not ours).
  * — **Doubtful prose** — the contents of `\uncertain{}`, counted separately
  *   and reported separately. A word appearing *only* here is a reading this
  *   project has never once been confident about, and the file says so.
- * — **Ours, and therefore excluded** — `\note{}`, `\add{}`, every section
+ * — **Ours, and therefore excluded** — `\note{}`, `\supplied{}`, every section
  *   heading, and the whole preamble. That prose is the transcriber's French,
  *   not Grothendieck's, and it would otherwise swamp the list with the
  *   vocabulary of the apparatus itself.
@@ -235,7 +236,7 @@ async function build(min) {
     // Ours, and out. Headings included: they are the transcriber's summary of
     // a run, not anything he wrote.
     let his = dropMacro(body, 'note');
-    his = dropMacro(his, 'add');
+    his = dropMacro(his, 'supplied');
     his = his.replace(/\\(?:sub)?section\*?\{[^}]*\}/g, ' ');
     his = his.replace(/\\(?:folder|batch|pages|dating|watermark|foldertitle|keywords)\{[^}]*\}/g, ' ');
 
@@ -244,8 +245,10 @@ async function build(min) {
     const uncertainText = [...macroBodies(his, 'uncertain')].map((c) => c.body).join('\n');
     his = dropMacro(his, 'uncertain');
 
-    // His, and kept: struck out is still written, and his margin is his.
+    // His, and kept: struck out is still written, what he inserted is his, and
+    // his margin is his.
     his = unwrapMacro(his, 'struck');
+    his = unwrapMacro(his, 'add');
     his = unwrapMacro(his, 'marginal');
     his = his.replace(/\\ill\b\{?\}?/g, ' ');
 
@@ -315,11 +318,11 @@ Built from **${x.files} batch files across ${x.folders.length} folders, ${x.page
 > stroke you cannot read. Never cite it as evidence that a particular page says
 > a particular word — that is exactly the claim it cannot support.
 
-Counted from his prose only. The transcriber's \`\\note{}\`, the editorial
-\`\\add{}\`, the section headings and the preamble are excluded, or the list
-would describe the apparatus rather than the material. \`\\struck{}\` and
-\`\\marginal{}\` are counted — struck out is still written, and his margin is
-his. Only \`.fr.tex\` is read: the modernised readings are in current French by
+Counted from his prose only. The transcriber's \`\\note{}\` and
+\`\\supplied{}\`, the section headings and the preamble are excluded, or the
+list would describe the apparatus rather than the material. \`\\struck{}\`,
+\`\\add{}\` and \`\\marginal{}\` are counted — struck out is still written,
+what he inserted is his, and so is his margin. Only \`.fr.tex\` is read: the modernised readings are in current French by
 design.
 
 **The corpus is bilingual, and not all of it is his.** Whole runs are in English

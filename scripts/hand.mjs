@@ -18,7 +18,10 @@
  * Kept apart on purpose:
  *   - the transcriber's `\note{}` is ours, not his, and is left out of every
  *     count except the drawings (a drawing is recorded as a note);
- *   - `\marginal{}` is his, and is counted both as his words and as a margin.
+ *   - `\marginal{}` is his, and is counted both as his words and as a margin;
+ *   - `\add{}` is his insertion and `\supplied{}` the transcriber's, counted
+ *     apart. A supply completes one of his words (`eff\supplied{t}`), so its
+ *     letters are joined back to the word rather than counted as a word.
  */
 import { readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
@@ -117,7 +120,8 @@ for (const d of readdirSync(T, { withFileTypes: true })) {
     const count = (name) => groups(his, name).length;
     const prose = mathless(his);
     const words = prose
-      .replace(/\\(ill|uncertain|struck|add|marginal|emph|textbf|textit|texttt|underline|section\*?|subsection\*?|item)\b/g, ' ')
+      .replace(/\\supplied\{([^{}]*)\}/g, '$1')
+      .replace(/\\(ill|uncertain|struck|add|supplied|marginal|emph|textbf|textit|texttt|underline|section\*?|subsection\*?|item)\b/g, ' ')
       .replace(/\\[a-zA-Z]+\*?(\[[^\]]*\])?/g, ' ')
       .replace(/[{}]/g, ' ')
       .match(/[\p{L}][\p{L}'’-]*/gu) ?? [];
@@ -134,6 +138,7 @@ for (const d of readdirSync(T, { withFileTypes: true })) {
       uncertain: count('uncertain'),
       struck: count('struck'),
       add: count('add'),
+      supplied: count('supplied'),
       marginal: count('marginal'),
       diagrams: (his.match(/\\begin\{tikzcd\}/g) ?? []).length,
       drawings: notes.filter((n) => FIGURE.test(n)).length,
@@ -145,7 +150,7 @@ for (const d of readdirSync(T, { withFileTypes: true })) {
 batches.sort((a, b) => byShelfmark(a.folder, b.folder) || a.batch - b.batch);
 
 // Per folder: the sums, and the inventory's dating for the chronology.
-const KEYS = ['pages', 'words', 'ill', 'uncertain', 'struck', 'add', 'marginal', 'diagrams', 'drawings'];
+const KEYS = ['pages', 'words', 'ill', 'uncertain', 'struck', 'add', 'supplied', 'marginal', 'diagrams', 'drawings'];
 const folders = [...new Set(batches.map((b) => b.folder))].map((id) => {
   const bs = batches.filter((b) => b.folder === id);
   const sum = Object.fromEntries(KEYS.map((k) => [k, bs.reduce((a, b) => a + b[k], 0)]));
@@ -185,5 +190,5 @@ const out = {
 writeFileSync(OUT, `${JSON.stringify(out, null, 1)}\n`);
 const t = Object.fromEntries(KEYS.map((k) => [k, folders.reduce((a, f) => a + f[k], 0)]));
 process.stdout.write(
-  `${batches.length} batches, ${folders.length} folders — ${t.words} words, ${t.ill} \\ill, ${t.uncertain} \\uncertain, ${t.struck} \\struck, ${t.diagrams} diagrams, ${t.drawings} drawings → src/content/hand.json\n`,
+  `${batches.length} batches, ${folders.length} folders — ${t.words} words, ${t.ill} \\ill, ${t.uncertain} \\uncertain, ${t.struck} \\struck, ${t.add} \\add, ${t.supplied} \\supplied, ${t.diagrams} diagrams, ${t.drawings} drawings → src/content/hand.json\n`,
 );

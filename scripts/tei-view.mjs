@@ -25,7 +25,8 @@
  *
  * The apparatus is additionally tagged with `tei-*` classes, and two root
  * classes on `<html>` switch it: `.reading` hides deletions and prints
- * supplied and unclear text plain; `.no-notes` hides the transcriber's notes.
+ * supplied, added and unclear text plain; `.no-notes` hides the transcriber's
+ * notes.
  * Nothing sets them yet except `?view=reading,no-notes` on the file's own URL,
  * for testing.
  *
@@ -215,8 +216,11 @@ function inlineNode(n, where) {
     case 'supplied':
       // The brackets are text, as in the `.tex` view, so the two read the same;
       // wrapped so `.reading` can drop them.
-      return '<span class="tr-add tei-supplied" title="editorial addition">' +
+      return '<span class="tr-supplied tei-supplied" title="supplied by the transcriber">' +
         `<span class="tei-br">[</span>${inner()}<span class="tei-br">]</span></span>`;
+    case 'add':
+      return '<span class="tr-add tei-add" title="inserted by the author">' +
+        `<span class="tei-br">\u231c</span>${inner()}<span class="tei-br">\u231d</span></span>`;
     case 'del':
       return `<span class="tr-struck tei-del" title="struck out by the author">${inner()}</span>`;
     case 'note':
@@ -365,7 +369,7 @@ function renderList(list, where) {
 const TEI_STYLE = `  /* TEI view: the apparatus, switchable from the root. */
   .reading .tei-del { display: none; }
   .reading .tei-br { display: none; }
-  .reading .tei-supplied { color: inherit; }
+  .reading .tei-supplied, .reading .tei-add { color: inherit; }
   .reading .tei-unclear { border-bottom: 0; }
   .no-notes .tei-note-editorial { display: none; }
   .tei-underline { text-decoration: underline; }

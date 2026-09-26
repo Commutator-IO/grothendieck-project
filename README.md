@@ -171,9 +171,10 @@ versioned. HTML, PDF and TEI are derived, and rebuilt.
 
 `npm run tei` writes `batch-NN.fr.xml` beside each transcription's HTML and
 PDF, and the download row offers it as **TEI**. It is produced from the `.tex`
-alone, mechanically, and re-reads no page: the seven apparatus macros map one
+alone, mechanically, and re-reads no page: the eight apparatus macros map one
 to one onto TEI's own elements — `\ill{}` to `<gap reason="illegible"/>`,
-`\uncertain{}` to `<unclear>`, `\add{}` to `<supplied>`, `\struck{}` to
+`\uncertain{}` to `<unclear>`, `\supplied{}` to `<supplied>`, `\add{}` to
+`<add>`, `\struck{}` to
 `<del>`, `\note{}` to an editorial `<note>`, `\marginal{}` to an authorial one
 in the margin, `\page{}` to `<pb>` with a `facs` link into Montpellier's PDF at
 the right offset. Mathematics travels untouched as TeX inside `<formula>`;
@@ -221,7 +222,7 @@ images; the modernised reading works from text.
 
 ### The critical apparatus is the point
 
-`transcripts/preamble/grothendieck.sty` defines seven macros for the
+`transcripts/preamble/grothendieck.sty` defines eight macros for the
 transcription, and they carry the whole honesty of the exercise:
 
 | Macro | Meaning |
@@ -229,10 +230,21 @@ transcription, and they carry the whole honesty of the exercise:
 | `\page{47}` | page 47 begins here — this is what turns the facsimile as you scroll |
 | `\ill{}` | illegible; **never guessed** |
 | `\uncertain{…}` | a reading offered, and flagged as doubtful |
-| `\add{…}` | an editorial addition |
+| `\add{…}` | an insertion **of his** — above the line, over a struck word, his ink on a typescript; set in ⌜corners⌝ |
+| `\supplied{…}` | what the transcriber supplies and the page does not carry — a missing letter, a clipped word-end; set in [brackets] |
 | `\struck{…}` | struck out by Grothendieck — a deletion often shows where the thought turned |
 | `\note{…}` | the transcriber's note on the state of the page |
 | `\marginal{…}` | a marginal note **of his**, distinct from the body |
+
+`\add{}` and `\supplied{}` were one macro, declared as the supply, until 26
+September 2026, when most of its 6,144 uses turned out to be his insertions and
+the TEI was crediting them to the transcriber. They were separated by a rule
+checkable in the file, not by a fresh reading: a use glued to the word it
+completes (a letter or digit immediately before or after it) became
+`\supplied{}` (529), one standing free stayed `\add{}` (5,615). That residue is
+the rule's guess — a free-standing supply, such as an expanded « = » for
+« même », still reads as his — and only a person with the facsimiles will
+settle it.
 
 A transcription that smooths over a gap has destroyed the only thing it was
 for: an invented word that reads like the others is the worst possible outcome,
