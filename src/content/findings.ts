@@ -2561,4 +2561,25 @@ export const FINDINGS: Finding[] = [
     settle:
       'A person checks on the two facsimiles whether each margin note is in ink on its copy or reproduced with the leaves, and whether either copy’s left margin is cropped; and looks in the other parts of folder 134 for the letters of 1975–76 the cover names. None of this would place the letter before or after anything published. Whatever is found, priority is not a claim this project makes, about anyone.',
   },
+  {
+    id: '27-semicontinuity-proof',
+    cote: '27',
+    pages: '27–36',
+    kind: 'mathematical',
+    claim:
+      'For a smooth, separated group scheme of finite presentation over any base, the dimension of the affine part, the nilpotent, affine-nilpotent and unipotent ranks are upper semicontinuous and the abelian rank, the abelian-plus-reductive rank and the semisimple rank lower semicontinuous — with a proof, where SGA 3 X 8.7 states these inequalities without one.',
+    basis:
+      'Page 28 fixes the invariants of a smooth connected group over an algebraically closed field through its Chevalley decomposition; page 29 numbers the inequalities (1)–(10) and the implications between them; page 31 states the theorem; pages 31–36 prove it by reduction to a discrete valuation ring, a split maximal torus in the special fibre, the prolongation of its n-torsion to finite étale subgroups H(n) whose centralisers give a Cartan subgroup, and — for the abelian rank — the action of the fundamental group of a henselian trait on the Tate module through the cyclotomic character.',
+    ours:
+      'The modernised reading supplies the two examples that show which way the inequalities go (an elliptic curve degenerating to G_m, and Spec A[x, (1 + πx)⁻¹]); it notes that the page\'s « comme d\'habitude » reduction to a trait assumes the invariants locally constructible, which neither the page nor the reading checks; and it cannot justify the equivalence (3) ⇔ (9) the page asserts. The comparison with SGA 3 was made by reading the texts side by side on 26 September 2026, not by a specialist.',
+    literature: [
+      'SGA 3, Exp. X 8.7 (Gille–Polo re-edition) — the inequalities ρ_ab ≤ ρ′_ab, ρ_r + ρ_ab ≤ ρ′_r + ρ′_ab, d_s ≤ d′_s, ρ_n ≥ ρ′_n, ρ_u ≥ ρ′_u stated without proof; editors\' note (71): « Donner une référence pour ces résultats ? »',
+      'SGA 3, Exp. XV 4.2 and 8.19 — the result invoked as « annoncée dans Exp. X 8.7 »',
+      'SGA 3, Exp. XII 1.7 — the affine case, ρ_r and ρ_n only, proved',
+      'FGA, TDTE VI (Bourbaki 236), Remarque 2.8 — α ≤ α′, λ ≥ λ′ conjectured for group preschemes',
+    ],
+    status: 'candidate',
+    settle:
+      'Look for a published proof of X 8.7 outside SGA 3 — SGA 7 IX (Néron models and semi-stable reduction), Bosch–Lütkebohmert–Raynaud, Néron Models, chapter 7, and the literature on Chevalley decompositions over a base (Conrad, Brion) — and check whether the Gille–Polo re-edition answers its own note (71) elsewhere. If a proof is there, mark matched and say whether it takes this route; if not, what an expert should judge is the argument on pages 32–36, and in particular the constructibility the reduction to a trait takes for granted.',
+  },
 ];
