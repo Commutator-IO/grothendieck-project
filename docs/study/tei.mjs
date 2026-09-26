@@ -795,6 +795,9 @@ const served = resolve(root, 'public/article');
 mkdirSync(served, { recursive: true });
 copyFileSync(xmlPath, resolve(served, 'grothendieck-jtei.xml'));
 copyFileSync(resolve(here, 'article.pdf'), resolve(served, 'grothendieck-jtei.pdf'));
+// The second article, for the Revue d'histoire des mathématiques, is served
+// beside it: a PDF only, since that journal takes LaTeX and not TEI.
+copyFileSync(resolve(root, 'docs/rhm/article.pdf'), resolve(served, 'grothendieck-rhm.pdf'));
 
 const elements = [...new Set([...xml.matchAll(/<([a-zA-Z]+)[\s>/]/g)].map((m) => m[1]))].sort();
 process.stdout.write(

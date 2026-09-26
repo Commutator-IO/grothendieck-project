@@ -326,6 +326,36 @@ export function MethodPage() {
             </a>
             .
           </p>
+
+          <P id="article-rhm" className="prose-fonds mt-6">
+            <em>
+              Dater, reprendre, déplacer. Ce que les notes de travail d'Alexandre Grothendieck
+              (fonds de Montpellier, 1949–1991) donnent à voir d'une pratique mathématique
+            </em>{' '}
+            — a second paper, in French, prepared for the{' '}
+            <a
+              href="https://smf.emath.fr/publications/revue-dhistoire-des-mathematiques"
+              target="_blank"
+              rel="noreferrer"
+              className="font-medium text-brand-600 underline decoration-brand-200 underline-offset-2 hover:text-brand-700"
+            >
+              Revue d'histoire des mathématiques
+            </a>
+            . Not about the method but about what the notes show: how the fonds came to be dated,
+            how he wrote, and what recurs and what stops across thirty years. Its quotations have
+            not yet been checked against the facsimile, and it says so.
+          </P>
+          <p className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-2 text-[13px]">
+            <a
+              href="/article/grothendieck-rhm.pdf"
+              className="rounded-full border border-ink-200 px-3 py-1 text-ink-700 transition hover:border-brand-400 hover:text-brand-700"
+            >
+              PDF
+            </a>
+            <span className="text-ink-400">
+              built from <code className="text-[12px]">docs/rhm/article.tex</code>
+            </span>
+          </p>
         </section>
       </main>
 
