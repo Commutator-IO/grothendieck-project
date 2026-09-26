@@ -90,6 +90,30 @@ const ROWS: Row[] = COTES.flatMap((c) => {
 }).sort((a, b) => a.from - b.from || a.to - b.to || byShelfmark(a.id, b.id));
 const UNDATED = COTES.filter((c) => !parseDating(c.date));
 
+/**
+ * Lanes: a folder goes in the first lane whose last bar, fade included, ends
+ * before its own starts. One row per folder made the figure 150 rows tall
+ * for a chart whose busiest year has about fifty; packed, it is as tall as
+ * the overlap actually is, and still read left to right in order of start.
+ */
+const GAP = 0.8; // years of white between two bars in a lane
+const LANE: number[] = [];
+{
+  const ends: number[] = [];
+  for (const r of ROWS) {
+    // A leaf dated outside its folder's range widens the folder's claim on the
+    // lane, so its dot never lands on a neighbour's bar.
+    const ls = r.leaves.map((l) => frac(l.iso as string));
+    const start = Math.min(r.from, ...ls);
+    const end = Math.max(r.open ? r.to + 5 : r.to, ...ls.map((v) => v + 0.3));
+    let k = ends.findIndex((e) => e + GAP <= start);
+    if (k < 0) k = ends.push(-Infinity) - 1;
+    ends[k] = end;
+    LANE.push(k);
+  }
+}
+const LANES = Math.max(...LANE) + 1;
+
 function H2({ id, children }: { id: string; children: React.ReactNode }) {
   return (
     <h2 id={id} className="scroll-mt-16 text-[11px] font-bold uppercase tracking-[0.12em] text-ink-400">
@@ -122,7 +146,7 @@ function Ranges() {
   const R = 16;
   const TOP = 26;
   const ROW = 9;
-  const H = TOP + ROWS.length * ROW + 24;
+  const H = TOP + LANES * ROW + 24;
   const x = (y: number) => L + ((y - Y0) / (Y1 - Y0)) * (W - L - R);
   const decades = [1950, 1955, 1960, 1965, 1970, 1975, 1980, 1985, 1990];
 
@@ -130,7 +154,8 @@ function Ranges() {
     <section className="mt-10">
       <H2 id="ranges">Every dated folder: the inventory's range, and the dates on the leaves</H2>
       <p className="mt-2 max-w-[44em] text-[13.5px] leading-relaxed text-ink-600">
-        One row per folder, ordered by where its dating starts. A dark bar is a dating the
+        One bar per folder, placed by where its dating starts; folders that do not overlap share
+        a row. A dark bar is a dating the
         archivists read on the pages; a light one is a dating they deduced, in their square
         brackets; a bar that fades is open-ended — « à partir de 1982 », from 1982 with no end
         given. The dots are dates written on the leaves themselves, found by the transcriptions.
@@ -186,7 +211,7 @@ function Ranges() {
             </line>
           ))}
           {ROWS.map((r, i) => {
-            const y = TOP + i * ROW;
+            const y = TOP + LANE[i] * ROW;
             const on = sel === null || sel === r;
             const fill = r.read ? DARK : LIGHT;
             return (
@@ -196,7 +221,7 @@ function Ranges() {
                 onMouseEnter={() => setSel(r)}
                 style={{ cursor: 'pointer' }}
               >
-                <rect x={L} y={y} width={W - L - R} height={ROW} fill="#fff" fillOpacity={0} />
+                <rect x={x(r.from)} y={y} width={x(r.open ? r.to + 5 : r.to) - x(r.from)} height={ROW} fill="#fff" fillOpacity={0} />
                 {r.openStart && <rect x={x(r.from)} y={y + 1} width={x(r.from + 4) - x(r.from)} height={ROW - 2} fill="url(#fade-in)" />}
                 <rect
                   x={x(r.openStart ? r.from + 4 : r.from)}
@@ -245,7 +270,7 @@ function Ranges() {
           </>
         ) : (
           <p className="text-ink-400">
-            Hover a row for the folder, its dating as the inventory writes it, and the dates on its
+            Hover a bar for the folder, its dating as the inventory writes it, and the dates on its
             leaves. The ticks along the foot are the events listed below. {UNDATED.length} folders are
             « s.d. », undated, and are not drawn.
           </p>
@@ -336,7 +361,7 @@ function Calendar() {
   const sparse = [...perYear].filter(([, k]) => k < 5).sort((a, b) => a[0] - b[0]);
   const [sel, setSel] = useState<string | null>(null);
   if (!years.length) return null;
-  const C = 11;
+  const C = 10;
   const max = Math.max(...[...days.values()].map((v) => v.length));
   const shade = (n: number) => (n === 0 ? 'var(--color-ink-100)' : ['#dfe6f6', '#97afe1', '#6b8ad0', '#4a6bbd', '#38539d', '#223154'][Math.min(5, Math.ceil((5 * n) / max))]);
 
@@ -348,7 +373,7 @@ function Calendar() {
         A darker cell, more dated leaves that day. The late notebooks are why this exists: some runs are dated day by
         day, and the calendar shows the rhythm of the work as the ranges above cannot.
       </p>
-      <div className="mt-3 space-y-3 overflow-x-auto">
+      <div className="mt-3 space-y-1.5 overflow-x-auto">
         {years.map((y) => {
           const jan1 = new Date(Date.UTC(y, 0, 1));
           const offset = (jan1.getUTCDay() + 6) % 7; // Monday first
