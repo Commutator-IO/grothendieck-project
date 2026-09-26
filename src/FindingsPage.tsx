@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 
 import { useHashTarget } from './components/Anchors.tsx';
 import { FoldersToPrint, LineageToFolders } from './components/ConnectionGraphs.tsx';
+import { PeopleNetwork } from './components/PeopleNetwork.tsx';
 import { Footer, Header } from './components/Frame.tsx';
 import { FINDINGS } from './content/findings.ts';
 import { PLAIN } from './content/summary.ts';
@@ -717,6 +718,8 @@ export function FindingsPage() {
         <FoldersToPrint />
 
         <LineageToFolders />
+
+        <PeopleNetwork />
 
         <section className="mt-12 max-w-[44em] text-[13.5px] leading-relaxed text-ink-500">
           <h2 className="text-[11px] font-bold uppercase tracking-[0.12em] text-ink-400">
