@@ -55,10 +55,11 @@ jobs:
 
       # The TEI export is derived from the same .tex, for the same reason: a
       # committed XML would drift from its source. Like the renderer, it fails
-      # on a construct it refuses — an unknown environment, or a control
-      # sequence it would otherwise leave as text.
+      # on a construct it refuses — an unknown environment, a control sequence
+      # it would otherwise leave as text, a header line it cannot read.
       - name: Export TEI
         run: npm run tei
+
       # Well-formed is not valid. Every exported file is validated with jing
       # against unmodified TEI P5 (tei_all, pinned at 4.12.0 by digest) and
       # against the RELAX NG derived from tei/grothendieck.odd with the TEI
@@ -73,7 +74,6 @@ jobs:
           restore-keys: tei-schema-
       - name: Validate the TEI
         run: npm run tei:validate
-
 
       # The TEI button opens a reading view rendered from that XML, not the
       # raw file. It fails the deploy rather than ship a button that 404s.

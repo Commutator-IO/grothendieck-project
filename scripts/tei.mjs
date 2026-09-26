@@ -36,10 +36,11 @@
  * exponent) stays inside the TeX, where KaTeX and the PDF both read it.
  *
  * Same discipline as scripts/render.mjs: the subset is the documented one,
- * and anything outside it is refused: an unknown environment, or a control
- * sequence that would stand in the TEI as literal text. A refused file is
- * reported and the run exits non-zero, so the deploy stops. Output goes to
- * public/transcripts/, derived and unversioned like the HTML and the PDF.
+ * and anything outside it is refused: an unknown environment, a control
+ * sequence that would stand in the TEI as literal text, a pass record in the
+ * header that cannot be read. A refused file is reported and the run exits
+ * non-zero, so the deploy stops. Output goes to public/transcripts/, derived
+ * and unversioned like the HTML and the PDF.
  *
  * Every file names the schema it is written against — the RELAX NG derived
  * from tei/grothendieck.odd, in an <?xml-model?> — and the ODD itself, in
@@ -314,13 +315,86 @@ function splitItems(body) {
   return items;
 }
 
+/**
+ * The models that have read pages of the fonds, by the name the headers give
+ * them. A revision line of the short form — `% Revised 2026-09-23 (Opus 5.5)`
+ * — names the model without its identifier, and the identifier is taken from
+ * here; a model not listed is refused, not guessed.
+ */
+const MODELS = {
+  'Fable 5': 'claude-fable-5',
+  'Fable 5.1': 'claude-fable-5-1',
+  'Opus 5': 'claude-opus-5',
+  'Opus 5.5': 'claude-opus-5-5',
+};
+
+/**
+ * Every pass the header comment records: the first, and each revision since.
+ *
+ * The first pass is one line, `% Pass: Opus 5.5 (claude-opus-5-5), 2026-09-22
+ * — first pass, …`. A revision is a line in one of two forms, the long one
+ * like the pass line (`% Revised: Opus 5.5 (claude-opus-5-5), 2026-09-22 — …`
+ * or `% Revision: …`) and the short one most revisions were written in
+ * (`% Revised 2026-09-23 (Opus 5.5), after the find-novelty pass: …`). What
+ * the revision did is the rest of that line and of the comment paragraph it
+ * opens, up to a blank comment line or the next record.
+ *
+ * The export used to read the first `% Pass:` line and nothing else, so a
+ * file revised three times said it had been read once. And a record this
+ * cannot read is refused rather than skipped: any comment line opening on
+ * `Pass:`, `Revised` or `Revision` is a record, and a record the TEI header
+ * silently drops is the failure this function exists to end.
+ */
+function readPasses(tex) {
+  const head = tex.slice(0, tex.indexOf('\\begin{document}')).split('\n');
+  const ids = { ...MODELS };
+  const LONG = /^%\s*(Pass|Revised|Revision):\s*([^(\n]+?)\s*\(([^)\n]+)\)\s*,\s*(\d{4}-\d{2}-\d{2})\s*(?:—\s*)?(.*)$/;
+  const SHORT = /^%\s*Revised\s+(\d{4}-\d{2}-\d{2})\s*\(([^)\n]+)\)\s*[,:.]?\s*(.*)$/;
+  const RECORD = /^%\s*(Pass:|Revised\b|Revision\b)/;
+  const records = [];
+  for (let i = 0; i < head.length; i++) {
+    if (!RECORD.test(head[i])) continue;
+    let rec;
+    const long = LONG.exec(head[i]);
+    const short = !long && SHORT.exec(head[i]);
+    if (long) {
+      const [, kind, model, id, date, text] = long;
+      if (ids[model] && ids[model] !== id) {
+        throw new Error(`header line ${i + 1}: ${model} is ${ids[model]}, not ${id}`);
+      }
+      ids[model] = id;
+      rec = { first: kind === 'Pass', model, id, date, text: [text] };
+    } else if (short) {
+      const [, date, model, text] = short;
+      rec = { first: false, model, id: null, date, text: [text] };
+    } else {
+      throw new Error(
+        `header line ${i + 1} is a pass record the export cannot read:\n    ${head[i].slice(0, 100)}\n` +
+          '  write it as « % Revised: <model> (<id>), <YYYY-MM-DD> — <what changed> » ' +
+          '(or % Pass: in the same form, for the first pass)',
+      );
+    }
+    for (let j = i + 1; j < head.length && /^%\s*\S/.test(head[j]) && !RECORD.test(head[j]); j++) {
+      rec.text.push(head[j].replace(/^%\s*/, ''));
+    }
+    records.push(rec);
+  }
+  for (const r of records) {
+    r.id ??= ids[r.model];
+    if (!r.id) throw new Error(`a revision names ${r.model}, which is not a model the export knows (MODELS in scripts/tei.mjs)`);
+    r.text = r.text.join(' ').replace(/\s+/g, ' ').trim();
+  }
+  const firsts = records.filter((r) => r.first);
+  if (firsts.length > 1) throw new Error(`${firsts.length} % Pass: lines — a file has one first pass`);
+  return { pass: firsts[0] ?? null, revisions: records.filter((r) => !r.first) };
+}
+
 function readMeta(tex) {
   const one = (name) => new RegExp(`\\\\${name}\\{([^{}]*)\\}`).exec(tex)?.[1] ?? '';
   const pages = /\\pages\{(\d+)\}\{(\d+)\}/.exec(tex);
-  // The header comment names the pass: `% Pass: Fable 5.1 (claude-fable-5-1),
-  // 2026-09-03 — first pass, …`. It is the only place the model is recorded,
-  // which is why the export copies it into a structured statement.
-  const pass = /^%\s*Pass:\s*([^(\n]+?)\s*\(([^)\n]+)\)\s*,\s*(\d{4}-\d{2}-\d{2})/m.exec(tex);
+  // The header comment names the passes. It is the only place the models are
+  // recorded, which is why the export copies them into a structured header.
+  const { pass, revisions } = readPasses(tex);
   return {
     folder: one('folder'),
     batch: one('batch'),
@@ -329,9 +403,10 @@ function readMeta(tex) {
     watermark: one('watermark').replace(/\\\\/g, ' — '),
     first: pages?.[1] ?? '',
     last: pages?.[2] ?? '',
-    model: pass?.[1] ?? '',
-    modelId: pass?.[2] ?? '',
-    passDate: pass?.[3] ?? '',
+    model: pass?.model ?? '',
+    modelId: pass?.id ?? '',
+    passDate: pass?.date ?? '',
+    revisions,
   };
 }
 
@@ -468,6 +543,36 @@ function document(meta, body) {
     ? `<name xml:id="pass" type="model">${t(meta.model)}${meta.modelId ? ` (${t(meta.modelId)})` : ''}</name>`
     : `<name xml:id="pass" type="model">modèle non enregistré dans l'en-tête</name>`;
 
+  // Each revision points at the model that made it: #pass when it is the
+  // model of the first pass, and otherwise a name of its own, declared once
+  // per model in a respStmt of its own.
+  const who = (r) => (r.id === meta.modelId ? '#pass' : `#rev-${r.id}`);
+  const dates = (rs) => rs.map((r) => `<date when="${t(r.date)}">${t(r.date)}</date>`).join(', ');
+  const byPass = meta.revisions.filter((r) => who(r) === '#pass');
+  const others = [...new Map(meta.revisions.filter((r) => who(r) !== '#pass').map((r) => [r.id, r])).values()];
+  const reviserLines = others
+    .map((m) => {
+      const theirs = meta.revisions.filter((r) => r.id === m.id);
+      return `
+        <respStmt>
+          <resp>révision automatique, non vérifiée contre les pages par une personne (${dates(theirs)})</resp>
+          <name xml:id="rev-${t(m.id)}" type="model">${t(m.model)} (${t(m.id)})</name>
+        </respStmt>`;
+    })
+    .join('');
+  // Most recent first, as the Guidelines ask of revisionDesc. A revision's
+  // account is the header comment's own words, which are English.
+  const changes = [
+    `<change when="${today}" who="#ed">Export TEI depuis la source LaTeX.</change>`,
+    ...meta.revisions
+      .map((r, i) => ({ r, i }))
+      .sort((a, b) => b.r.date.localeCompare(a.r.date) || b.i - a.i)
+      .map(({ r }) => `<change when="${t(r.date)}" who="${who(r)}" xml:lang="en">${t(r.text || 'Revised.')}</change>`),
+    ...(meta.passDate
+      ? [`<change when="${t(meta.passDate)}" who="#pass">Première passe de transcription.</change>`]
+      : []),
+  ];
+
   return `<?xml version="1.0" encoding="UTF-8"?>
 <?xml-model href="${RNG_URL}" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
 <TEI xmlns="${TEI_NS}" xml:lang="fr">
@@ -479,9 +584,9 @@ function document(meta, body) {
         <respStmt>
           <resp>transcription automatique — première passe, non vérifiée contre les pages par une personne${
             meta.passDate ? ` (<date when="${t(meta.passDate)}">${t(meta.passDate)}</date>)` : ''
-          }</resp>
+          }${byPass.length ? ` ; révisée par le même modèle (${dates(byPass)})` : ''}</resp>
           ${modelLine}
-        </respStmt>
+        </respStmt>${reviserLines}
         <respStmt>
           <resp>procédure, outillage, export TEI</resp>
           <orgName xml:id="ed">grothendieck.commutator.io (Commutator, Paris)</orgName>
@@ -590,16 +695,16 @@ function document(meta, body) {
     </encodingDesc>
     <profileDesc>
       <langUsage>
-        <language ident="fr">français, avec la notation mathématique de l'auteur</language>
+        <language ident="fr">français, avec la notation mathématique de l'auteur</language>${
+          meta.revisions.length
+            ? `
+        <language ident="en">anglais : le compte rendu des révisions, cité de l'en-tête de la source</language>`
+            : ''
+        }
       </langUsage>
     </profileDesc>
     <revisionDesc>
-      ${
-        meta.passDate
-          ? `<change when="${t(meta.passDate)}" who="#pass">Première passe de transcription.</change>`
-          : ''
-      }
-      <change when="${today}" who="#ed">Export TEI depuis la source LaTeX.</change>
+      ${changes.join('\n      ')}
     </revisionDesc>
   </teiHeader>
   <text>

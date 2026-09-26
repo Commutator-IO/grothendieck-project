@@ -438,6 +438,16 @@ Corrections go in the `.tex`, never in the HTML or the PDF, which are derived.
 A correction to a reading is also a correction to the translation: take both
 files up together, or they drift.
 
+Record the revision in the header, under the `% Pass:` line, in the same form:
+`% Revised: Opus 5.5 (claude-opus-5-5), <date> — <what changed>.` — the model
+actually used, as for the pass. The account may run on over the following
+comment lines, up to a blank `%` line. The short form `% Revised <date>
+(Opus 5.5), <what changed>` is also read. Each such line becomes a `<change>`
+in the TEI header, so any comment line opening on `Pass:`, `Revised` or
+`Revision` must be one of these forms: `npm run tei` refuses a file with a
+record it cannot read, and the deploy fails. Prose about a revision that is
+already recorded opens on something else (« The revision of <date>… »).
+
 On the notebook page a batch's state changes with a click — `Drafted` once the
 LaTeX exists, `Checked` only after page-by-page comparison. It is a
 declaration, not an observation: the site verifies nothing. Only tick `Checked`

@@ -179,14 +179,16 @@ to one onto TEI's own elements — `\ill{}` to `<gap reason="illegible"/>`,
 in the margin, `\page{}` to `<pb>` with a `facs` link into Montpellier's PDF at
 the right offset. Mathematics travels untouched as TeX inside `<formula>`;
 commutative diagrams as `tikz-cd` inside `<figure>`. The header carries what
-the file's comment carries — the model that read the pages, the date, the
-« Édition de démonstration » status, the shelfmark and the inventory's dating —
-as structured statements, so a file deposited in HAL or Nakala keeps its
+the file's comment carries — the model that read the pages and the date, and
+every revision since (each `% Revised` line becomes a `<change>` in
+`<revisionDesc>`, pointing at the model that made it), the « Édition de
+démonstration » status, the shelfmark and the inventory's dating — as
+structured statements, so a file deposited in HAL or Nakala keeps its
 provenance without this site. The export holds the transcription's line of
 not being a diplomatic edition: it encodes what the macros encode and nothing
 about the paper. A construct outside the subset — an unknown environment, a
-control sequence that would be left as text — fails the run, as it fails
-`npm run render`.
+control sequence that would be left as text, a `% Pass:` or `% Revised` line
+it cannot read — fails the run, as it fails `npm run render`.
 
 The export is written against a customisation of its own,
 [`tei/grothendieck.odd`](tei/grothendieck.odd): the sixty-four elements it
