@@ -61,15 +61,12 @@ const STYLE = `
   .dg .tr-src pre { white-space: pre-wrap; text-align: left; font-size: 11.5px; }
 ${CAROUSEL_STYLE}`;
 
-/** The reading view of the batch, at the page's own anchor (id="page-N"). */
-const transcriptHref = (d) =>
-  `/transcripts/${d.folder}/batch-${String(d.batch).padStart(2, '0')}.fr.html${d.page ? `#page-${encodeURIComponent(d.page)}` : ''}`;
 const figureOf = (d, i, n, withFolder) =>
   `<figure class="dg" id="slide-${i + 1}">` +
-  `<figcaption><span>${withFolder ? `n° ${d.folder} · ` : ''}batch ${d.batch}${d.page ? ` · p. ${escapeHtml(d.page)}` : ''} — ` +
-  // The transcription at its page, and the batch beside Montpellier's facsimile.
-  `<a href="${transcriptHref(d)}" target="_blank" rel="noopener">the transcription${d.page ? `, p. ${escapeHtml(d.page)}` : ''} ↗</a> · ` +
-  `<a href="/#${d.folder}/${d.batch}${d.page ? `/p${encodeURIComponent(d.page)}` : ''}" target="_top">beside the facsimile</a></span>` +
+  // One link: the page in the side-by-side view, the transcription on the
+  // left and Montpellier's facsimile on the right, both at this page.
+  `<figcaption><a href="/#${d.folder}/${d.batch}${d.page ? `/p${encodeURIComponent(d.page)}` : ''}" target="_top">` +
+  `${withFolder ? `n° ${d.folder} · ` : ''}batch ${d.batch}${d.page ? ` · p. ${escapeHtml(d.page)}` : ''} — read it beside the facsimile</a>` +
   `<span class="dg-n">${i + 1} / ${n} · ${d.symbols} distinct symbols, ${d.size} written</span></figcaption>` +
   // Wrapped as the reading views wrap a display, whose styles KaTeX's
   // stretchy glyphs rely on.

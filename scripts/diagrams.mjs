@@ -98,16 +98,13 @@ const enlarge = (htmlOf, k) =>
     .replace(/column-gap:([\d.]+)rem;row-gap:([\d.]+)rem/, (_, c, r) => `column-gap:${(c * k).toFixed(2)}rem;row-gap:${(r * k).toFixed(2)}rem`)
     .replace('<span class="tr-cd" ', `<span class="tr-cd" style="font-size:${(15.5 * k).toFixed(1)}px" `);
 
-/** The reading view of the batch, at the page's own anchor (id="page-N"). */
-const transcriptHref = (d) =>
-  `/transcripts/${d.folder}/batch-${String(d.batch).padStart(2, '0')}.fr.html${d.page ? `#page-${encodeURIComponent(d.page)}` : ''}`;
 /** One slide: the caption names the folder only on the pages that mix folders. */
 const figureOf = (d, i, n, withFolder) =>
   `<figure class="dg" id="slide-${i + 1}">` +
-  `<figcaption><span>${withFolder ? `n° ${d.folder} · ` : ''}batch ${d.batch}${d.page ? ` · p. ${escapeHtml(d.page)}` : ''} — ` +
-  // The transcription at its page, and the batch beside Montpellier's facsimile.
-  `<a href="${transcriptHref(d)}" target="_blank" rel="noopener">the transcription${d.page ? `, p. ${escapeHtml(d.page)}` : ''} ↗</a> · ` +
-  `<a href="/#${d.folder}/${d.batch}${d.page ? `/p${encodeURIComponent(d.page)}` : ''}" target="_top">beside the facsimile</a></span>` +
+  // One link: the page in the side-by-side view, the transcription on the
+  // left and Montpellier's facsimile on the right, both at this page.
+  `<figcaption><a href="/#${d.folder}/${d.batch}${d.page ? `/p${encodeURIComponent(d.page)}` : ''}" target="_top">` +
+  `${withFolder ? `n° ${d.folder} · ` : ''}batch ${d.batch}${d.page ? ` · p. ${escapeHtml(d.page)}` : ''} — read it beside the facsimile</a>` +
   `<span class="dg-n">${i + 1} / ${n}${withFolder ? ` · ${d.nodes} nodes, ${d.arrows} arrows, ${d.symbols} symbols` : ''}</span></figcaption>` +
   `<div class="ltx_p">${enlarge(renderDiagram(d.raw), scale(d))}</div></figure>`;
 
