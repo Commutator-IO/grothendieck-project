@@ -459,11 +459,15 @@ function ExistingEditions() {
       </ul>
 
       <p className="mt-6 max-w-[48em] text-[12.5px] leading-relaxed text-ink-400">
-        Compiled from the{' '}
+        Compiled from the Grothendieck Circle's pages of{' '}
         <a href="https://webusers.imj-prg.fr/~leila.schneps/grothendieckcircle/unpubtexts.php" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-brand-600">
-          Grothendieck Circle
+          unpublished
         </a>{' '}
         and{' '}
+        <a href="https://webusers.imj-prg.fr/~leila.schneps/grothendieckcircle/pubtexts.php" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-brand-600">
+          published texts
+        </a>
+        , and from{' '}
         <a href="https://webusers.imj-prg.fr/~georges.maltsiniotis/ps.html" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-brand-600">
           Georges Maltsiniotis' pages
         </a>
