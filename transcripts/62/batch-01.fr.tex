@@ -1,0 +1,786 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 62, batch 1 (pages 1-20).
+% Established from the facsimile archives/batches/62/batch-01.pdf (a copy of
+% 62.pdf fetched through the project relay, no cover sheet: PDF page k =
+% archivists' page k), per the skill transcribe-grothendieck. The folder is
+% ninety-six pages in five batches; this is the first.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-09-26 — first pass, unchecked against the pages by a human.
+%
+% Pages skipped: 2 and 17, blank cream sheets (show-through only); 19, the
+% upside-down leaf of a typescript (« - 20 - », « n° 276 », §2 « Anneaux
+% m-adiques noethériens », Artin-Rees) with nothing in his hand — an unrelated
+% typed verso, skipped by the settled rule. Page 1 is a tan cover inscribed
+% top right « Courbes elliptiques »; it takes no \page marker and its words
+% become the section heading, with a \note.
+%
+% Pages summarised: none. Pages 18 and 20 are scratch sheets (tan paper, the
+% other sides of typed leaves) carrying isolated computations among doodles;
+% the computations are given in page order, the doodles are not transcribed.
+%
+% His pagination: none visible on these leaves; the only numbers are the
+% archivists' pencilled ones bottom left. Numbered runs of his own:
+% « Proposition 1 » (p. 4), « Proposition 2 » (p. 5), « Proposition 3 »
+% (p. 6), with unnumbered Propositions and Corollaires between them; recorded
+% where they fall.
+%
+% What the batch is about. Pages 3-16 are a connected draft, headed
+% « Modules des courbes elliptiques » (p. 3): for an elliptic curve C over a
+% locally noetherian S with unit section s, the invertible sheaf L = O(D) of
+% the unit section, L_{C/S} = s^*(L) (the Lie sheaf), E_n = f_*(L^{⊗n});
+% Prop. 1 (ranks of E_n by Riemann-Roch, L^{⊗n} ample iff n >= 1, very ample
+% iff n >= 3); the filtration E_0 = E_1 ⊂ E_2 ⊂ E_3 ⊂ ..., the graded pieces
+% L_n = E_n/E_{n-1} ≅ L^{⊗n} for n >= 2 and the graded algebra; Prop. 3 on
+% the maps L ⊗ L_n -> L_{n+1} and the characteristic (a two-corollary block
+% cancelled); the embedding C -> P(E_3), C as a cubic divisor, the inflexion
+% tangent at the unit section; bases 1, y, x of E_3 adapted to the flag and
+% the Weierstrass-type equation x^2 + a y^3 + bxy + cy^2 + dx + ey + f = 0,
+% the discriminant delta, and the Proposition: an elliptic curve with a
+% « base spéciale » of E_3 is the same as sections a..f with delta a unit;
+% the affine scheme M = Spec Z[A..F][delta^{-1}] with the action of the
+% triangular group, representing curves with special base (pp. 10-12); a
+% finer normalisation by a trivialisation of L (group of pairs
+% (lambda, triangular with lambda^2, lambda^3), equation x^2 - y^3 + ... ,
+% remarks on 12th/24th roots of delta, p. 14); in residue characteristic
+% ≠ 2 the symmetry x -> -x reduces the equation to x^2 = y^3 + ay^2 + by + c,
+% C as a double cover of a Brauer-Severi scheme ramified along the section
+% at infinity and an étale divisor of degree 3 (pp. 15-16). Page 18: j and
+% j - 1 units, the cases j ≡ 1, j ≡ 0 with Kummer extensions of group Z/3,
+% Z/2, b^3/c^2 = 27 (j-1)/j and the cubic x^3 + 27 (j-1)/j (x+1) = 0.
+% Page 20: the discriminant of a cubic as prod f'(x_i), for a = 0,
+% j = -27c^2/Delta and « Delta = b^3 - 27c^2 ? ».
+%
+% Notation fixed once for the batch: underlined sheaves as \underline{L},
+% \underline{O}_S, \underline{V}_{C/S}; L_{C/S} as \mathcal{L}; E_n as
+% \mathcal{E}_n and the graded pieces as \mathcal{L}_n (he underlines them
+% irregularly; kept as written where it is clear); the gothic M of p. 10
+% as \mathfrak{M}; affine space as \mathbf{E}^6_{\mathbf{Z}}. Inside
+% formulas an illegible index or exponent is written « ? » (said in a note
+% on p. 8), since \ill{} cannot sit in math.
+%
+% Hardest pages: 4-7 (the proof sketches between the statements), 11-12 and
+% 14 (fast connective prose), 16 (a struck, boxed passage and a ten-line
+% slanted marginal note). Readings to check first: the exponent of x on
+% p. 8 and of Y in BXY^2 on p. 11; « P^3_S » on p. 9; the sign in
+% delta(...) ≠ 0 on p. 10; the second fraction « (1/(j-1))^3 » on p. 18.
+
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{62}
+\batch{1}
+\pages{1}{20}
+\dating{[à partir de 1963]}
+\watermark{Édition de démonstration}
+\foldertitle{Courbes elliptiques (généralités - vieille rédaction) : notes manuscrites (s.d.)}
+
+\begin{document}
+
+\section*{Courbes elliptiques}
+
+\note{inscrit de sa main, en haut à droite du feuillet de garde (page 1), qui ne
+porte rien d'autre ; le feuillet ne reçoit pas de numéro de page}
+
+\section*{Modules des courbes elliptiques}
+
+\note{titre de sa main, souligné, en tête de la page 3}
+
+\page{3}
+Soit $C$ une « courbe elliptique » homogène sur $S$ loc. noethérien. La section
+unité $s$ définit un bon diviseur $D$ \add{transversal aux fibres}\note{« transversal
+aux fibres » est écrit au-dessus de la ligne et appelé par un trait} sur $C$,
+\uncertain{d'où} un \struck{fibré} \add{faisceau inv.\ $\underline{L}$}, dont les
+\add{germes de} sections sont des \struck{fonctions} germes de fonctions sur $C$
+(précisément celles qui sont des « \uncertain{multiples} » de $D$). Notons que
+\struck{$s^*(\underline{L}) \simeq$}, $C$ étant un schéma en groupes
+\note{la formule inachevée $s^*(\underline{L})\simeq$ est barrée de hachures ; la
+ligne suivante, « Proposition 1 Les $\underline{L}^n$ ($n\in\mathbf{Z}$) sont
+\ill{} \ill{} [plats sur les \ill{}] », est biffée d'un trait, et « Proposition 1 »
+est relié par une boucle au mot « dimension » plus bas, où la proposition est
+reprise à la page 4}
+\[
+\underline{V}_{C/S} = f^*\bigl(s^*(\underline{V}_{C/S})\bigr) = f^*(\mathcal{L}_{C/S})
+\qquad [\,\mathcal{L} = \text{faisceau de Lie}\,]
+\]
+\[
+s^*(\underline{L}) \simeq s^*(\underline{L}\otimes_{C}\underline{O}_{S'})
+\simeq s^*(\underline{N}_{C/S'}) \simeq s^*(\underline{V}_{C/S}) = \mathcal{L}
+\]
+\note{le $S'$ désigne manifestement la section unité vue comme sous-schéma de $C$ ;
+le dernier signe, au bord de la feuille, se lit mal}
+ce faisceau sera noté $\mathcal{L}_{C/S}$ [« Lie »]. On a
+\[
+s^*(\underline{L}^{\otimes n}) \simeq \mathcal{L}_{C/S}^{\otimes n}.
+\]
+On a une section \uncertain{canonique} de $\underline{L}$, savoir la section
+constante $1$ de $\underline{O}_C$,
+\[
+\sigma\colon \underline{O}_C \longrightarrow \underline{L}, \qquad
+\sigma\in\Gamma(C,\underline{L})
+\]
+qui définit des homomorphismes (\uncertain{d'ailleurs injectifs})
+\[
+\cdots \longrightarrow \underline{L}^{\otimes n} \longrightarrow
+\underline{L}^{\otimes(n+1)} \longrightarrow \cdots \longrightarrow
+\underline{L}^{\otimes(n+k)} \longrightarrow \cdots
+\]
+\marginal{$\subset$ faisceau des fonctions \uncertain{rationnelles} \ill{} sur $C/S$}
+d'où \struck{\ill{}} des homomorphismes
+\[
+\cdots \longrightarrow f_*(\underline{L}^{\otimes n}) \longrightarrow
+f_*(\underline{L}^{\otimes(n+1)}) \longrightarrow \cdots
+\]
+i.e.
+\[
+\cdots \longrightarrow \mathcal{E}_n \longrightarrow \mathcal{E}_{n+1} \longrightarrow \cdots
+\]
+en posant
+\[
+\mathcal{E}_n = f_*(\underline{L}^{\otimes n}).
+\]
+
+\page{4}
+\emph{Proposition 1.} Les faisceaux $\underline{L}^{\otimes n}$ sont coh.\ plats en
+toute dimension. Le faisceau $f_*(\underline{L}^{\otimes n})$ est localement libre,
+de rang $0$ si $n<0$, $1$ si $n=0$ ou $1$, $n$ si $n\geqslant 1$. \struck{\ill{}} Le
+faisceau $\underline{L}$ est ample, et de façon précise $\underline{L}^{\otimes n}$
+est \struck{très} \emph{ample} \struck{pour} ssi $n\geqslant 1$, très ample ssi
+$n\geqslant 3$.
+\note{la proposition est encadrée d'un trait vertical à gauche ; « ssi » est écrit
+au-dessus d'un « pour » biffé}
+
+La formule de RR, où $g=1$, d'où $2g-2=0$, nous montre que \emph{tout faisceau}
+\struck{loc.\ libre} inversible sur $C$, de degré \add{relatif}\note{« relatif » en
+interligne} $d\neq 0$, est coh.\ plat, et que sa dimension est donc nulle si
+$d<0$, et $d$ \struck{\ill{}} si $d\geqslant 1$. Donc la première assertion est
+démontrée pour $n\neq 0$, et pour $n=0$ elle est connue par ailleurs, car
+$\underline{L}^{\otimes 0}=\underline{O}_C$. \ill{} \ill{} \ill{} \ill{} faisceau
+inv.\ sur $C$ de degré relatif \ill{} \ill{} ssi $d\geqslant 0$, donc
+$\underline{L}^{\otimes n}$ \ill{} \ill{} ssi $n\geqslant 1$.
+\struck{Et pour \ill{} \ill{} $\underline{L}$ \ill{} de degré relatif $d>0$, il
+\ill{} \ill{}, \ill{} \ill{} \ill{} $\underline{L}^{\otimes n}$ est \ill{} pour
+$n\geqslant 0$.}
+Si $\underline{L}^{\otimes n}$ est très ample, on a $n\geqslant 1$, d'ailleurs on
+ne peut avoir $n=1,2$ car alors $\mathbf{P}(f_*(\underline{L}^{\otimes n}))$ serait
+de \uncertain{dimension} relative $0$ ou $1$, donc $C$ ne pourrait s'y immerger
+(car il y serait isomorphe, absurde), donc il faut $n\geqslant 3$. \ill{} \ill{},
+on \ill{} \ill{} \ill{} \ill{} $2$ \ill{} \ill{}, \ill{} \ill{} \ill{} \ill{} \ill{}
+$S$-\uncertain{géom}. \ill{}, \ill{} \ill{} \uncertain{composés} \add{\ill{}}.
+\struck{Mais alors D'ailleurs,} \struck{\ill{} $\underline{L}$ est \ill{} \ill{}
+\ill{} \ill{} \ill{}}
+Mais \struck{alors} comme $3 > (2g-2)+2 = 2g = 2$, un raisonnement \ill{} n'utilisant
+que RR donne le résultat.
+\marginal{prop.\ \uncertain{préliminaire} \ill{} \ill{} faisceau \ill{} \ill{}}
+\note{note marginale en biais, à gauche, au crayon ; tout le passage depuis
+« La formule de RR » est marqué d'un trait vertical}
+
+\page{5}
+\emph{Proposition.} On a une suite \ill{} \struck{\ill{}} d'injections
+\[
+\mathcal{E}_0 = \mathcal{E}_1 \subset \mathcal{E}_2 \subset \mathcal{E}_3 \subset \cdots
+\]
+les $\mathcal{E}_i$ sont des faisceaux loc.\ libres de rang $i$
+pour $i\geqslant 1$. D'ailleurs
+\[
+\mathcal{E}_0 = \underline{O}_S .
+\]
+
+\emph{Proposition 2.} $\mathcal{E}_0=\mathcal{E}_1=\underline{O}_S$, d'autre part
+pour $i\leqslant j$ l'injection
+$\mathcal{E}_i \to \mathcal{E}_j$ est \struck{loc.}\ universellement injective.
+\struck{(pour $n\geqslant 1$, \ill{}) \ill{} \ill{} \ill{}} \ill{} alors \ill{}
+\ill{} \ill{} $\otimes$ \ill{} isomorphisme
+\note{passage surchargé d'ajouts et de ratures en interligne, lu seulement par
+fragments}
+Soit \struck{\ill{} faisceau}
+\[
+\mathcal{L}_n \simeq \mathcal{E}_{n}/\mathcal{E}_{n-1}
+\]
+\struck{\ill{} isomorphe à $\mathcal{L}$}
+\struck{et $\mathcal{E}_{n+1}/\mathcal{E}_n$ est isomorphe à $\mathcal{L}^{\otimes n}$}
+\[
+\mathcal{L}_n\otimes\mathcal{L}_m \simeq \mathcal{L}_{m+n} \quad \text{si } n,m
+\underset{\neq 1}{\geqslant 0}
+\]
+\struck{\ill{} \ill{}} \add{correspondant} sur $\coprod_{n\geqslant 0}\mathcal{L}_n$
+\struck{\ill{}} d'algèbre graduée comm.
+\note{l'indice de $\mathcal{E}_{n}$ au numérateur est surchargé ; les lettres
+$\mathcal{L}$ de cette page sont soulignées}
+
+Pour la première assertion, \uncertain{because} la platitude coh.\ \ill{} \ill{}
+\ill{} \ill{} d'une \ill{}, c'est trivial car \ill{} \ill{} une injection.
+Notons que
+\[
+\mathcal{E} = \varinjlim \mathcal{E}_n = f_*(\varinjlim \underline{L}^{\otimes n})
+\]
+est d'ailleurs une $\underline{O}_S$-\emph{algèbre}, dont la connaissance
+\uncertain{équivaut} à la connaissance de
+$\underline{\Gamma}_*(f,\underline{L})=\coprod \mathcal{E}_n$\note{un signe illisible en exposant de $\Gamma$}, \ill{} on a
+\[
+\mathcal{E}_m\times\mathcal{E}_n \longrightarrow \mathcal{E}_{m+n}
+\]
+\ill{} précisément induisent la multiplication de $\mathcal{E}$. On a, \ill{}
+\ill{} \ill{} \uncertain{gradué associé} à la filtration croissante donnée, une
+algèbre \ill{} $\coprod_{n\geqslant 0}\underline{\mathcal{L}}_n$, où
+$\underline{\mathcal{L}}_n \simeq \mathcal{E}_n/\mathcal{E}_{n-1}$ pour
+$n\geqslant 0$, \ill{} \ill{} pour $n=0$ \ill{} $\underline{O}_S$. Il faut prouver
+que
+\[
+\underline{\mathcal{L}}_n\otimes\underline{\mathcal{L}}_m \longrightarrow
+\underline{\mathcal{L}}_{n+m}, \qquad n,m \underset{\neq 1}{\geqslant 0},
+\]
+\struck{\ill{}} est bien isom, ou encore surjectif, \struck{\ill{} \ill{}
+\ill{}} \struck{\ill{} \ill{} \ill{} \ill{}} \ill{} \ill{} $n,m\geqslant 2$, d'où
+\ill{} \ill{}.
+\note{les deux dernières lignes de la page sont en partie biffées et se
+chevauchent}
+
+\page{6}
+\ill{} \ill{} à \ill{}.
+
+\emph{Corollaire.} Si $n\geqslant 2$, $\underline{\mathcal{L}}_n$ est isomorphe par
+l'homomorphisme induit à $\underline{\mathcal{L}}_2^{\otimes n'}$ si $n$ pair, à
+$\underline{\mathcal{L}}_2^{\otimes n'}\otimes\underline{\mathcal{L}}_3$ si $n$
+impair (où $n'\geqslant 1$ dans le premier cas, $n'\geqslant 0$ dans le deuxième).
+
+Mais on a plutôt intérêt à prouver directement ceci : on est ramené aussitôt par
+platitude coh.\ au cas où $S=\operatorname{Spec}(k)$, on peut alors \ill{} \ill{}
+\ill{} de \ill{} \ill{} \ill{}, \ill{} \ill{} de \ill{} \ill{} \ill{}, \ill{}
+\ill{} \ill{} \ill{} \ill{} \ill{} \ill{} \ill{} \ill{}.
+
+\emph{Corollaire.} $\mathcal{E}_3$ engendre $\Gamma_*(f,\underline{L})$.
+
+Considérons les opérations de $\underline{V}$ sur les germes de fonctions
+\uncertain{rationnelles} sur $C$ [\uncertain{rendre ceci défini}], on constate que
+$\underline{V}$ \ill{} opérations \uncertain{induisent} des homomorphismes
+\[
+\underline{\mathcal{L}}\otimes\underline{\mathcal{L}}_n \longrightarrow
+\underline{\mathcal{L}}_{n+1}, \qquad n\geqslant 2 .
+\]
+
+\emph{Proposition 3.} \struck{(Les)} \add{Soit $s\in S$, $p$ l'exposant car.\ de
+$k(s)$.}\note{ajout en interligne, relié par un trait ; la lettre lue $s$ est
+écrite comme un $\beta$} \add{Les} homomorphismes
+$\underline{\mathcal{L}}\otimes\underline{\mathcal{L}}_n\to\underline{\mathcal{L}}_{n+1}$
+\ill{} isomorphismes (\uncertain{voir} \struck{\ill{}} \ill{} \ill{}) \ill{}
+\ill{} ssi $p$ est premier à $n$.
+\note{l'énoncé est marqué d'un trait vertical à gauche ; « isomorphismes » est
+souligné}
+
+On est ramené au cas où \ill{} \ill{} $S=\operatorname{Spec}(k)$, et alors
+c'est une vérification locale : si $D$ \ill{} une \struck{diff} dérivation
+\ill{} \ill{} \ill{} \ill{} \ill{}, \add{$x\in C$} \ill{} si $f\in{}$\ill{} sur $C$
+\ill{} \ill{} $x$ \ill{} \ill{} \ill{} \ill{},
+
+\page{7}
+\struck{\ill{} divisible par $p$} alors \struck{$Df$} $Df$ \ill{} \ill{} $x$
+\ill{} pôle d'ordre \ill{} \ill{} \ill{}, et \ill{} : \ill{} ssi $p\nmid n$.
+
+\struck{\emph{Corollaire 1}\quad Si $k(s)$ est de car.\ nulle, alors}
+\[
+\underline{\mathcal{L}}\otimes\underline{\mathcal{L}}_n \simeq
+\underline{\mathcal{L}}_{n+1} \quad \text{pour } n\geqslant 2, \text{ donc}
+\]
+\struck{$\underline{\mathcal{L}}_3\otimes\mathcal{L}\otimes\underline{\mathcal{L}}_2$,
+$\mathcal{L}_4$} \add{$\mathcal{L}_4\simeq\mathcal{L}_2\otimes\mathcal{L}^2$}
+\[
+\mathcal{L}_n \simeq \mathcal{L}^{n-2}\otimes\mathcal{L}_2, \qquad \text{donc pour }
+n\geqslant 2,
+\]
+\struck{donc \ill{} $\mathcal{L}_2$ \ill{}}
+
+\emph{Corollaire 2}\quad Si $k(s)$ est de car.\ $p\neq 2$, alors
+\struck{$\mathcal{L}_3\simeq\mathcal{L}_2\otimes\mathcal{L}$}, 
+$\underline{\mathcal{L}}_4\simeq\underline{\mathcal{L}}_3\otimes\mathcal{L}$,
+$\mathcal{L}_6\simeq\underline{\mathcal{L}}_5\otimes\underline{\mathcal{L}}$ etc.
+[$\underline{\mathcal{L}}_{2n}=\underline{\mathcal{L}}_{2n-1}\otimes\mathcal{L}$ si
+$n\geqslant 2$], \ill{} \ill{}
+\[
+\mathcal{L}_2 \simeq \mathcal{L}^{\otimes 2} .
+\]
+\note{les deux corollaires sont encadrés ensemble, et le cadre est traversé par
+deux longs traits courbes, dont l'un part du titre biffé « Corollaire 1 » : le
+bloc paraît annulé en entier. Dans « $\mathcal{L}_2\simeq\mathcal{L}^{\otimes 2}$ »
+l'indice est surchargé. Sous cette page, $\mathcal{L}$ sans indice est
+$\mathcal{L}_{C/S}$ de la page 3, écrit tantôt souligné, tantôt non}
+
+\emph{Corollaire.} Si $S$ est de car.\ $p>0$ [i.e.\ $p\,\underline{O}_S=0$] et
+si $n$ est un multiple de la caractéristique, alors
+$\mathcal{L}\otimes\underline{\mathcal{L}}_n\to\underline{\mathcal{L}}_{n+1}$ est
+\emph{nul}.
+
+\struck{Prop.}\ Considérons la suite exacte canonique
+\[
+\cdots\longrightarrow\underline{L}^{\otimes n}\longrightarrow
+\underline{L}^{\otimes(n+1)}\longrightarrow
+(\underline{V}_{C/S})^{\otimes(n+1)}\otimes_{\underline{O}_C}\underline{O}_{S'}
+\longrightarrow 0
+\]
+on en conclut la suite exacte
+\[
+0\longrightarrow\mathcal{E}_n\longrightarrow\mathcal{E}_{n+1}\longrightarrow
+\mathcal{L}^{\otimes(n+1)}\longrightarrow R^1f_*(\underline{L}^{\otimes n})
+\]
+\note{au-dessous du dernier terme, « $\| \; 0$ si $n\geqslant 1$ »}
+d'où
+\[
+\boxed{\ \mathcal{L}_{n+1}\simeq\mathcal{L}^{\otimes(n+1)} \qquad n\geqslant 2\ }
+\]
+\marginal{intervertir avec la prop.\ 2}
+et la multiplication dans $\mathcal{A}$ \ill{} \ill{}, \uncertain{envisagée}
+dans prop.\ 2 \ill{} \ill{} par la multiplication \uncertain{évidente} \ill{}
+\ill{} \ill{} des $\mathcal{L}_n$, $n\geqslant 2$
+\note{dans l'encadré, l'indice $n+1$ de $\mathcal{L}_{n+1}$ est surchargé ; la
+lettre après « dans » est lue $\mathcal{A}$ sous réserve}
+
+\page{8}
+Considérons maintenant l'immersion projective
+\[
+C \longrightarrow \mathbf{P}(\mathcal{E}_3)
+\]
+définie par $L^{\otimes 3}$ en vertu de prop.\ 1. Alors, $C$ devient un diviseur
+positif sur $\mathbf{P}(\mathcal{E}_3)$ \add{de degré relatif 3,} simple sur $S$,
+il est donc défini par une \add{section sur $S$} \struck{élément} de l'espace
+\uncertain{projectif} des 3-formes
+\[
+\mathbf{P}_3(\mathbf{P}(\mathcal{E}_3)) \simeq
+\mathbf{P}(\operatorname{Symm}_3(\check{\mathcal{E}}_3)) .
+\]
+\struck{De plus, comme} \struck{Supposons que l'on se soit donné une}
+\struck{trivialisation}\note{ce dernier mot, en tête de ligne, est encadré et
+barré d'une diagonale}
+Considérons la section \add{$s$} de $C$ \add{\uncertain{et} la droite relative $D$}
+\note{« et la droite relative $D$ » est écrit en interligne}
+\ill{} $\mathbf{P}(\mathcal{E}_3)$ et la \struck{droite \ill{} \ill{} \ill{}
+\ill{}} \ill{} de $\mathbf{P}(\mathcal{E}_3)$ définis comme
+$\mathbf{P}(\mathcal{E}_3/\mathcal{E}_2)$ et
+$\mathbf{P}(\mathcal{E}_3/\mathcal{E}_1)$, alors on constate que $s$ est une section
+de $C$, et que $D$ est une « tangente d'inflexion » \ill{} \uncertain{en ce}
+point.
+\marginal{croquis : une courbe et sa tangente d'inflexion}
+
+\ldots
+
+Considérons une \struck{trivialisation} \add{base de $\mathcal{E}_3$ compatible avec
+le} \add{et commençant par $1_S\in\Gamma(S,\underline{O}_S)$} drapeau
+$0\subset\mathcal{E}_1\subset\mathcal{E}_2\subset\mathcal{E}_3$ de
+$\mathcal{E}_3$ [elle \struck{\ill{} \ill{} \ill{} $X,Y,X$} i.e.\ une base
+$1,Y,X$ « dépend de $(3+3-1)$ ($=5$) paramètres »], \struck{\ill{} \ill{}}
+\ill{} multiplication près \ill{},
+\note{les ajouts en interligne sont appelés par des accolades ; les trois
+inclusions du drapeau sont soulignées}
+\struck{la forme $\varphi$ (définie à \ill{} près) prend la forme [si on remplace
+$Z$ par $1$]}
+\[
+a x^{?} + b y^3 + c xy + d y^2 + e x + f y + g = 0
+\]
+\note{le passage « la forme $\varphi$ \ldots\ $=0$ » est encadré et annulé par des
+traits ondulés qui le traversent ; l'exposant de $x$ est surchargé (un $2$ sur
+un $3$, ou l'inverse) et noté « ? » ; dans les formules de ce lot, « ? » marque
+un indice ou un exposant qu'on ne peut lire. Sous le cadre, une ligne coupée par le bord : « $x^3\,y^2$
+\ldots\ \ill{} \ill{} \ill{} $\mathcal{E}_1$ \ill{} de $\mathcal{E}_2$ dans
+$\mathcal{E}_3$ »}
+\marginal{$\begin{pmatrix} 1 & \alpha & \beta \\ & \mu & \gamma \\ & & \nu \end{pmatrix}$}
+\note{matrice triangulaire en marge gauche, à hauteur du cadre : le changement
+de base compatible avec le drapeau}
+
+\page{9}
+\struck{qui est aussi la relation (unique} \add{\struck{à multiple près}}
+\struck{, \ill{} \ill{} vérifiée aussi bien a priori) vérifiée par}
+\uncertain{Remarquons} que
+\[
+1,\ y,\ x,\ y^2,\ xy,\ y^3
+\]
+forment une base de $\mathcal{E}_6$ (adaptée à sa filtration), \ill{} aura
+donc une équation
+\[
+\varphi(x,y) = \boxed{\,x^2 + a y^3 + b xy + c y^2 + d x + e y + f = 0\,}
+\]
+\marginal{$\Delta(a,b,c,d,e,f)\in\mathcal{L}^{\otimes 12}$}
+\note{cette formule, entourée d'un ovale, est à gauche sous $\varphi(x,y)$ ; le
+signe devant $a y^3$ est surchargé}
+qui est d'ailleurs une équation valable dans $\mathcal{E}_6$ considéré comme
+composant de $\Gamma_*(f,\underline{L}^{?}) = \coprod_{i\geqslant 0}\mathcal{E}_i$,
+\add{à valeurs dans $\mathcal{E}_{?}$}
+satisfaite par les sections $x$, $y$ de $\mathcal{E}_3$
+\struck{$x_1, x_2, x_3$} \add{\ill{} \ill{} $2$, $2$, section $1$}
+\note{ajout en interligne, lu par fragments}
+\struck{Cette équation} Si on désigne \ill{} \add{par} \struck{\ill{}} \add{cette}
+équation \add{écrite sous la forme} \ill{} \ill{}
+$\mathcal{E}_{?}=\mathcal{E}_1\otimes\mathcal{E}_{?}$ \ill{} \ill{}
+\[
+\Phi(x,y,z) = x^2 z + a y^3 + b xyz + c y^2 z + d x z^2 + f z^3 = 0
+\]
+\note{ainsi sur la page : le terme en $yz^2$ ne figure pas ; les exposants de
+$x^2z$ et de $dxz^2$ sont surchargés, et un $z$ après $ay^3$ est biffé}
+on \emph{constate} alors que $\Phi$ est la forme \ill{} définit
+\struck{\ill{}} $C$ dans $\mathbf{P}(\mathcal{E}_3)$ de degré $3$ qui définit
+\ill{} $\simeq\mathbf{P}^{3}_S$\note{l'exposant $3$ est douteux ; on attendrait $2$}. En effet si $\Phi'$ est la forme qui
+définit $C$, alors $\Phi$ est un \emph{multiple de $\Phi'$} et
+\struck{\ill{} \ill{}} donc un multiple par quelque \ill{} \ill{} inversible,
+puisque $\Phi$ est « \ill{} \ill{} » en tout pt de $S$ \ill{} \ill{}
+\uncertain{coefficient} des $1$ \ill{}.
+\marginal{d'ailleurs, et \uncertain{éventuellement} \ill{}}
+\marginal{\uncertain{précision} \ill{} pt \ill{} intersection complète}
+\note{deux notes en biais dans la marge gauche, la première séparée du texte
+par un trait vertical}
+
+\page{10}
+Réciproquement, partons d'une équation \ill{} \ill{}, où les \add{coeff.}
+\struck{\ill{}} sont des sections de $\underline{O}_S$. On sait qu'\add{une telle
+équation} \struck{\ill{}} définit un diviseur relatif \add{positif} de
+$\mathbf{P}^2_S/S$, soit $C$. Il reste à écrire que c'est là une \emph{courbe
+lisse} sur $S$. On sait qu'il faut pour cela que le discriminant de la forme
+\[
+\delta(a,b,c,d,e,f)
+\]
+soit une \emph{unité} partout. Ici le discriminant s'explicite : \ldots
+
+On a obtenu un résumé
+
+\emph{Proposition.} La donnée d'une courbe elliptique sur $S$, \add{munie}
+\struck{\ill{}} d'une \add{« base spéciale »} \struck{« base adaptée »} de
+$\mathcal{E}_3(C/S)$, \struck{\ill{}} est équivalente à la donnée de sections
+$a,b,c,d,e,f$ de $\underline{O}_S$ satisfaisant $\delta(a,b,c,d,e,f)\neq 0$ ;
+cette correspondance est compatible avec \struck{\ill{}} l'image inverse.
+\note{l'énoncé est marqué d'un trait vertical à gauche. le signe
+devant $0$ dans « $\delta(\ldots)\neq 0$ » est lu $\neq$ sous réserve ; il tient
+lieu de la condition, dite plus haut, que $\delta$ soit une unité}
+
+Les termes de ceci : Considérons le schéma affine de type fini sur $\mathbf{Z}$
+\[
+\mathfrak{M} = \operatorname{Spec}\bigl(\mathbf{Z}[A,B,C,D,E,F][\delta^{-1}]\bigr)
+\]
+qui est un \ill{} \ill{} affine de $\operatorname{Spec}\mathbf{Z}[A,B,C,D,E,F]
+\simeq \mathbf{E}^6_{\mathbf{Z}}$. \struck{Faisons opérer dans \ill{}}
+\note{la lettre gothique est lue $\mathfrak{M}$ ; $\mathbf{E}^6_{\mathbf{Z}}$ est
+l'espace affine de dimension $6$, écrit avec un $\mathbb{E}$ ajouré}
+
+\page{11}
+\struck{puis \ill{} le groupe $G$, de type fini sur $\mathbf{Z}$, qui \ill{} est
+représenté \ill{} \ill{} par} $\mathbf{E}_{\mathbf{Z}}$\note{ou
+$\underline{O}_{\mathbf{Z}}$ ; la lettre, en tête de ligne, est surchargée}.
+Considérons le sous-schéma en groupes de $\mathrm{GL}(3)_{\mathbf{Z}}$ qui
+correspond aux matrices de la forme
+\[
+\begin{pmatrix} 1 & \alpha & \gamma \\ 0 & \lambda & \beta \\ 0 & 0 & \mu \end{pmatrix}
+\]
+(avec $\lambda\mu$ une unité donc), \add{il opère sur $\mathfrak{M}$} de la façon
+évidente qui consiste à interpréter $A,B,C,D,E,F$ comme coeff.\ d'une forme
+\struck{$X^3+AXY^2$}
+\[
+X^2 + AY^3 + BXY^{2} + CY^2 + DX + EY + F
+\]
+\note{l'exposant $2$ de $Y$ dans $BXY^2$ est une lecture douteuse ; la page 9 a $bxy$}
+et à faire sur $X, Y$ la substitution affine
+\[
+Y' = \lambda Y + \alpha, \qquad X' = \mu X + \beta Y + \gamma
+\]
+\note{la première lettre de chacune des deux formules est surchargée, un $Y$
+écrit sur un $X$ semble-t-il}
+[\ill{} \ill{} \ill{} \ill{} \ill{} \ill{} \ill{}, \ill{} \ill{} \ill{}
+\ill{} le vectoriel $\mathbf{E}_3$, donc dans $\mathbf{P}_3(\mathbf{E}_3)$, et qui
+laisse invariant le \uncertain{sous-}\ill{} \struck{\ill{}} \add{\ill{}} de
+\add{\uncertain{les lettres}} \struck{\ill{}} \ill{} $6$ des formes qui \ill{}
+de la forme dite], d'où les opérations de $G$ sur $\mathfrak{M}$.
+Alors le foncteur \add{\uncertain{l'un des} \ill{} \ill{} \ill{} près} qui à tout
+$S$ \uncertain{associe} \ill{} \ill{} des courbes elliptiques « \uncertain{standard} »
+\ill{} \ill{} sur $S$, est \emph{représentable} par $\mathfrak{M}$.
+\marginal{\struck{Prop}}
+De plus, pour deux \ill{} \ill{}
+
+\page{12}
+$\mathfrak{M}(S)$ définissant des courbes elliptiques isomorphes (\ill{}
+\ill{}) il faut que \struck{\ill{}} \ill{} se \ill{} en une opération de
+$G(S)$, \ill{} $G$ \ill{} \ill{} \ill{} sur $S$. Enfin, pour \struck{\ill{}}
+toute courbe elliptique $C$ sur $S$, il existe une extension \struck{fid.\ plate}
+\add{\uncertain{finie} \ill{} de type fini} $S'$ de $S$ [savoir le fibré
+principal associé à $\mathcal{E}_3$ \ill{} le drapeau qui \ill{} \ill{} sur
+$\mathcal{E}_3$] telle que $C_{S'}$ « provienne » d'un élément de
+$\mathfrak{M}(S')$.
+
+Ainsi, \ill{} \ill{} \ill{} \ill{}, le foncteur « \ill{} \ill{} à isomorphisme
+près des courbes elliptiques sur $S$ » est \struck{\ill{}}
+\uncertain{pro-}représentable, où $\mathfrak{D}$ désigne la catégorie des
+morphismes simples surjectifs.
+\note{la lettre gothique, $\mathfrak{D}$ sous réserve, est écrite sur un mot
+biffé}
+Si ce n'était pas pour \ill{} \uncertain{d'ailleurs}, \ill{} \ill{} \ill{}
+\ill{} \ill{} \ill{} \ill{} \ill{}, \emph{car} \ill{} \ill{} \ill{} un
+\uncertain{raisonnement} \ill{} \ill{} \ill{} \ill{} \ill{} \ill{} \ill{}
+\ill{} \ill{} \ill{} $\delta$ \ill{} $C$ \ill{} \ill{} \ill{} \ill{} \ill{}
+\ill{} \ill{} \ill{} \ill{} \ldots).
+
+\page{13}
+Une normalisation \ill{} \ill{} plus \uncertain{précise} est obtenue ainsi : on se
+donne une trivialisation de $\mathcal{L}$ par une section partout \ill{} \ill{}
+$D$ de $\mathcal{L}$, [dérivation invariante], on choisit alors la base $1, x, y$
+de $\mathcal{E}_3$ de façon que l'image de $x$ dans $\mathcal{L}_2$ soit
+$i_2(D)$, celle de $x$ dans $\mathcal{L}_3$ soit $i_3(D)$.
+\struck{\ill{}}
+\note{ainsi sur la page : « $x$ » les deux fois ; la seconde est sans doute
+à lire $y$}
+[i.e.\ on prend comme structure auxiliaire la donnée d'un \add{\ill{}}
+$\mathcal{L}$, d'un $\mathcal{E}$ loc.\ libre de rang $3$, \ill{} \ill{} \ill{}
+\ill{} \ill{} \ill{} \ill{} \ill{} \ill{} isom avec
+$\mathcal{L}^0, \mathcal{L}^2, \mathcal{L}^3$ respectivement.
+Le groupe d'automorphismes de cette structure est \struck{\ill{}} \ill{} le
+sous-groupe de $\mathbf{G}_m\times\mathrm{GL}(3)$, formé des \add{couples}
+\struck{\ill{}} de la forme
+\[
+\left(\lambda,\ \begin{pmatrix} 1 & \alpha & \beta \\ 0 & \lambda^2 & \gamma \\ 0 & 0 & \lambda^3 \end{pmatrix}\right)
+\qquad
+\begin{array}{l}
+\lambda\in\Gamma(\mathbf{G}_{m,S}/S)=\Gamma(S,\underline{O}_S^*)\\
+\alpha,\beta,\gamma\in\Gamma(S,\underline{O}_S)
+\end{array}
+\]
+\struck{Le \ill{} de la structure ainsi \ill{} à \ill{} \ill{} \ill{} \ill{}}
+\add{isomorphe} \struck{\ill{}} au sous-groupe \struck{\ill{}} des
+\[
+\begin{pmatrix} 1 & \alpha & \beta \\ 0 & \lambda & \gamma \\ 0 & 0 & \mu \end{pmatrix}
+\quad\text{pour}\quad
+\lambda = \left(\frac{\mu}{\lambda}\right)^2, \quad
+\mu = \left(\frac{\mu}{\lambda}\right)^3 \qquad\text{i.e.}\quad
+\boxed{\mu^2 - \lambda^3 = 0}
+\]
+\note{les exposants de $\mu^2-\lambda^3$, dans le cadre, sont surchargés}
+L'équation de $C$ pour une telle base \struck{prend alors la forme}
+[caractérisée par la condition $\underline{x^2-y^3\in\mathcal{E}_5}$] prend la
+forme
+\[
+x^2 - y^3 + bxy + cy^2 + dx + ey + f = 0
+\]
+[i.e.\ on peut \uncertain{prendre} $a=-1$ dans l'équation plus haut
+\add{\uncertain{avec} $\delta(b,c,d,e,f)$ une unité}]
+\note{l'ajout est entouré, sous la ligne}
+
+\page{14}
+Il ne semble pas qu'on puisse obtenir de normalisation locale sans
+\struck{\ill{}} restriction \ill{} \ill{} qui fasse intervenir moins de
+paramètres, [si on veut qu'elle soit \uncertain{indépendante} \ill{} \ill{}
+constantes \struck{\ill{}} \ill{} \ill{} \ill{} \ill{}, on \ill{} \ill{}]. Si on
+\ill{} \ill{} \ill{} \ill{} de base finis et plats, on peut prendre la
+normalisation plus fine en exigeant que $\delta(b,c,d,e,f)=1$ \ill{} \ill{}
+\add{(intrinsèquement)} \ill{} \ill{} \ill{} trivialisation de $\mathcal{L}$
+\struck{\ill{}} \ill{} \ill{} \ill{} sections \ill{} \ill{} \ill{}
+\add{puissance} $12$-ième (\ill{} \ill{} $24$-ième) \add{de $\delta^{-1}$,
+\uncertain{où} $\delta$ est} \struck{\ill{}} discriminant. \ill{} \ill{}
+\ill{} \ill{} des \struck{\ill{}} normalisations plus poussées en car.\
+$\neq 2$, puis en car.\ $\neq 3$, puis en \ill{}.
+\note{le $12$ est écrit sur un $11$ ; le passage entier, dense et vite écrit,
+se lit par fragments}
+
+\page{15}
+Transformons l'équation
+\[
+x^2 = y^3 + axy + by^2 + cx + dy + e
+\]
+par $s$, \ill{} en remplaçant par $sx=-x$, $sy=y$, on trouve
+\[
+x^2 = y^3 - axy + by^2 - cx + dy + e
+\]
+et en comparant on trouve $a=c=0$, donc l'équation \ill{} \ill{} \ill{} \ill{},
+la forme
+\[
+\boxed{\,x^2 = y^3 + ay^2 + by + c\,}
+\]
+\note{dans l'encadré, les lettres $a$ et $b$ sont écrites sur d'autres ; $s$
+est manifestement la symétrie $x\mapsto -x$, dont l'introduction n'est pas sur
+cette page}
+avec comme condition $\delta(a,b,c)\neq 0$, qui ici se \uncertain{traduit} par :
+les \uncertain{solutions} de $P(y)=y^3+ay^2+by+c$ sont distinctes en tout pt de $S$.
+
+Géométriquement, \struck{\ill{}} l'équation \uncertain{s'interprète} ainsi : la
+\ill{} $C/\mathbf{Z}_2$ est un schéma de Brauer--Severi
+\add{$P$}\note{le $P$ est écrit au-dessus de la barre de « Brauer--Severi »}
+sur $S$, muni d'une section (correspondant à la section unité de $C$ sur $S$),
+donc \struck{\ill{} et Brauer-\ill{}} \add{correspond} à un espace
+\struck{\ill{}} \ill{} principal homogène sous un \struck{\ill{} \ill{} \ill{}}
+fibré vectoriel \struck{\ill{}} \add{inversible} [il correspond à
+$\underline{L}^{\otimes 2}$]. $C$ est un revêtement \struck{\ill{}} double
+\uncertain{ramifié} \ill{} un diviseur \add{de $P/S$} étale sur $S$, qui se
+décompose en la section à l'infini, et en un diviseur \add{de $P/S$} étale sur
+$S$, \struck{\ill{} \ill{} \ill{}} de
+$\underline{V}(\underline{L}^{\otimes 2})/S$ étale sur $S$, de degré relatif $3$.
+\marginal{\ill{}}
+\note{un mot en biais dans la marge gauche, en face du paragraphe, que borde un
+trait vertical}
+
+\page{16}
+\struck{Supposons \ill{} \ill{} les corps résiduels de}
+Notons que $\uncertain{-1}$\note{le symbole après « Notons que » est peu net}
+\ill{} de $C$ sur $S$ \ill{} \ill{} \ill{} \ill{} \ill{} \ill{}, \ill{}
+$C$ est un schéma abélien sur $S$. Cet \ill{} \ill{}
+\add{est \uncertain{d'ordre} $2$, il} opère sur les $\mathcal{E}_i$ [de façon
+compatible avec les structures, \add{et les opérations de $\mathcal{L}$ sur
+$\mathcal{E}_\infty$} multiplication] et induit \struck{\ill{}} sur $\mathcal{L}$
+le changement de signe.
+\struck{\ill{} \ill{} \ill{} \ill{} \ill{} \ill{} \ill{} \ill{} les
+caractéristiques résiduelles de \ill{} \ill{} $\mathcal{E}_1$, de $\mathcal{E}_2$
+\ill{} il y aura \ill{} \ill{} \ill{} \ill{} \ill{} \ill{} \ill{}}
+\note{deux lignes et demie barrées et entourées d'un long trait}
+Supposons les car.\ résiduelles de $S$ $\neq 2$. Alors
+\struck{1) Il existe un supplémentaire unique \ill{} \ill{} de $\mathcal{E}_1$
+dans $\mathcal{E}_2$ \ill{} \ill{} qui \ill{} \ill{} \ill{} $s$ \ill{}}
+\ill{} \ill{} \ill{} \ill{} \ill{} \ill{} $s$ qui \uncertain{trivialise} dans
+$\mathcal{E}_2$ [\ill{} \ill{} \ill{} \ill{} \ill{}], et \ill{} restriction \ill{}
+\ill{} \ill{} \ill{}, \add{$L_3$ \ill{}} \ill{} \ill{} $\mathcal{E}_2$ dans
+$\mathcal{E}_3$ \add{\ill{}} il existe un supplémentaire \ill{} \ill{} $s$
+\ill{} \ill{} \uncertain{symétrie}, \struck{\ill{}} qui \ill{} \ill{} \ill{} $L_3$.
+\ill{} \ill{} : $\mathcal{L}.\,\mathcal{E}_2$, \ill{} \ill{} \ill{} $L_3$.
+\struck{Alors $L_3^{\otimes 2}$ \ill{} un supplémentaire \ill{} de $\mathcal{E}_5$
+dans $\mathcal{E}_6$, \ill{} $L_6$. \ill{} \ill{}}
+\note{cette ligne et la suivante sont barrées et encadrées ; le mot « À
+\uncertain{compléter} » est écrit dans le cadre}
+\marginal{N.B.\ la \uncertain{condition} de $\mathbf{P}(\mathcal{E}_2)$ \ill{}
+\ill{} \ill{} \ill{} \ill{} \ill{} \ill{} \ill{} \ill{} \ill{} \ill{} \ill{}
+$\mathcal{L}^{\otimes 3}\otimes\mathcal{E}_3$ \ill{} \ill{} \ill{} \ill{}}
+\note{note en biais dans la marge gauche, sur une dizaine de lignes, lue par
+fragments ; un trait vertical la sépare du texte}
+\ill{} \ill{} \ill{} \ill{} \ill{} \ill{} \ill{} \ill{} \ill{} \ill{} les
+bases \uncertain{admissibles} de $\mathcal{E}_3$, \ill{} exigeant que $x$ soit
+\struck{\ill{}} \ill{} de $\mathcal{E}_3$ ; donc le groupe des \ill{} \ill{}
+base \ill{} est \ill{} \ill{} la forme
+\[
+\begin{pmatrix} 1 & \alpha & 0 \\ 0 & \lambda^2 & 0 \\ 0 & 0 & \lambda^3 \end{pmatrix}
+\quad\text{i.e.}\quad
+\begin{pmatrix} 1 & \alpha & 0 \\ 0 & u & 0 \\ 0 & 0 & v \end{pmatrix}
+\quad\text{avec}\quad u^3 - v^2 = 0 .
+\]
+\note{dans la seconde matrice les deux coefficients diagonaux sont surchargés ;
+$u$ et $v$ sont lus d'après l'équation qui suit}
+\ill{} \ill{} \ill{} \ill{} \ill{} \ill{} \ill{} \emph{\ill{} \ill{} \ill{}
+\ill{} \ill{}}.
+
+Quelle est la normalisation correspondante de l'équation de $C$ ?
+
+\page{18}
+\note{feuille de brouillon, à l'encre, sans rédaction suivie : calculs isolés
+répartis sur la page, séparés par des traits horizontaux, parmi des dessins
+qui ne sont pas des mathématiques et ne sont pas transcrits. On les donne dans
+l'ordre de la page, de haut en bas}
+
+\struck{\ill{}} b
+
+\emph{$j$ et $j-1$ unités}
+\note{souligné deux fois}
+
+\marginal{Cas $A$ \ill{} \emph{\ill{}}}
+\begin{itemize}
+\item $j$ non unité, \uncertain{puis} $j-1$, (\ill{} \ill{})
+\quad $(1-j^{-1})^2\in A^6A^*$
+\item $j-1$ non unité, $j$ \ill{} (\ill{} \ill{})
+\quad $\bigl(\tfrac{\uncertain{1}}{j-1}\bigr)^3\in A^6A^*$
+\end{itemize}
+\note{les deux lignes sont réunies par une accolade ; l'exposant « $A^*$ » se lit
+en indice au bord droit}
+
+\begin{itemize}
+\item $j\equiv 1$ \quad $b^3=0$, $c$ inversible \quad // si $A$ \ill{} \ill{}
+\ill{} \ill{}, \ill{} \ill{} $c\in A^*/A^{*(3)}$
+\item $j\equiv 0$ \quad $c^2=0$, $b$ inversible \quad // si $A$ \ill{} \ill{}
+\ill{} \ill{}, \ill{} \ill{} $b\in A^*/A^{*(2)}$
+\end{itemize}
+\marginal{Ext.\ Kummer de gr $\mathbf{Z}/3$ \quad (flèche vers $j\equiv 1$)}
+\marginal{Ext.\ Kummer de gr $\mathbf{Z}/2$ \quad (flèche vers $j\equiv 0$)}
+\marginal{à vérifier / \uncertain{compléter}}
+
+\[
+j\equiv 1 \quad \Bigl(\frac{t}{t-1}\Bigr)^3 \in O^6O^* \qquad
+\Bigl(\frac{t-1}{t}\Bigr)^2 \in O^6O^* \qquad
+\sqrt[6]{\frac{t}{t-1}}
+\]
+\note{au-dessus, isolé à droite, « 1– » ; « \ill{} \ill{} » souligné à droite de la première formule ; un signe entre
+les deux formules, qu'on ne peut lire}
+
+\[
+\sqrt[2]{\frac{t}{t-1}} \qquad \sqrt[3]{\frac{t-1}{t}} \qquad \tfrac12 \qquad \tfrac13
+\]
+\[
+\lambda^{3/6}\cdot\lambda^{-2/6} = \lambda^{1/6} \qquad
+s^6 = \frac{t}{t-1}
+\]
+\[
+\frac{-27c^2}{b^3-27c^2} = j \qquad 27c^2(j-1) = b^3 j \qquad
+\frac{b^3}{c^2} = j
+\]
+\[
+\begin{array}{ccc} L & L^2 & L^3 \\ & b & c \end{array}
+\qquad
+\boxed{\ \frac{b^3}{c^2} = 27\,\frac{j-1}{j}\ }
+\]
+\[
+b = 27\,\frac{j-1}{j} \qquad c = 27\,\frac{j-1}{j}
+\]
+\[
+\boxed{\ x^3 + 27\,\frac{j-1}{j}\,(x+1) = 0\ }
+\]
+\note{dans « $b=27\frac{j-1}{j}$ » l'exposant de $b$ est une tache ; dans
+« $27c^2(j-1)$ » le $1$ est surchargé}
+
+\struck{$\underline{\mathrm{Hom}}(E,\ \ )$} \quad $f_*(\check{E})$ \qquad
+$\underline{\mathrm{Hom}}_{\underline{O}}(E,\underline{O})$
+\[
+\underline{\mathrm{Hom}}_{\underline{A}}(E,\underline{A})\times
+\underline{\mathrm{Hom}}_{\underline{O}}(\underline{A},\underline{O})
+\]
+\note{une flèche monte de cette dernière formule vers
+$\underline{\mathrm{Hom}}_{\underline{O}}(E,\underline{O})$}
+
+\page{20}
+\note{feuille de calcul à l'encre, sur le même papier que la page 18 : le
+discriminant du polynôme cubique}
+
+\struck{$(x_1-x_2)(x_3$}
+\[
+\prod_{i\neq j}(x_i-x_j) = \prod_i \Bigl(\frac{f(x)}{x-x_i}\Bigr)_{x\to x_i}
+= \prod_i f'(x_i)
+\]
+\note{dans la fraction, le numérateur $f(x)$ et le $x$ du dénominateur sont
+surchargés}
+\marginal{$(y+u)^3 + a(y+u)^2$ \quad $3u+a$ \quad $u=-\frac{a}{3}$}
+\note{calcul en haut à droite, isolé par un trait courbe ; le premier $y$ est
+écrit sur une autre lettre}
+\[
+f(x_i) =
+\]
+\[
+3x^2 + 2ax + b
+\]
+\[
+(3x_1^2+2ax_1+b)(3x_2^2+2ax_2+b)(3x_3^2+2ax_3+b)
+\]
+
+Supposons $\underline{\underline{a=0}}$ \ill{} \ill{}
+\[
+j = -\frac{27c^2}{\Delta}
+\]
+\marginal{$x_1x_2 \quad x_2x_3 \quad x_3x_1$ \quad // \quad $x_1x_2 \quad x_2x_3$}
+\[
+\Delta = \prod(3x_i^2+b) = 27(x_1x_2x_3)^2 + 9b\bigl(\textstyle\sum(x_1x_2)^2
++ 3b^2\sum x_i^2\bigr) + b^3
+\]
+\struck{$= -27c^2 + 9b(b^2 - 2\sum x_1^2x_2x_3$}
+\[
+(x_1x_2x_3)^2 = c^2
+\]
+\[
+\textstyle\sum(x_1x_2)^2 = \bigl(\sum x_1x_2\bigr)^2 - 2\sum x_1^2x_2x_3
+\]
+\[
+\textstyle\sum x_i^2x_2x_3 = \bigl(\sum x_i^2\bigr)\bigl(\sum x_2x_3
+\]
+\[
+\boxed{\ \Delta = b^3 - 27c^2\ }\ ?
+\qquad x_1^2x_2^2 + \qquad \textstyle\prod 3x_i^2+b
+\]
+\struck{$\bigl(\sum x_i^2\bigr)^2$}
+\[
+3\textstyle\sum(x_1x_2)^2 + \bigl(\sum x_1x_2\bigr)\bigl(\sum x_i^2\bigr)
+\]
+\struck{\ill{}} \struck{$x_1x_2$}
+\note{ainsi sur la page : la parenthèse de $3b^2\sum x_i^2$ est fermée par une
+accolade, celle de $(\sum x_2x_3$ ne l'est pas ; dans le cadre, un chiffre
+devant $b^3$ est biffé, et le point d'interrogation est de sa main}
+
+\end{document}
