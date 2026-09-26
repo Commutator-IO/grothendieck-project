@@ -1,0 +1,908 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 76, batch 3 (pages 41-60).
+% Established from the facsimile archives/batches/76/batch-03.pdf, cut from a
+% copy of 76.pdf fetched through the project's relay
+% (https://grothendieck-relay.onrender.com/source/76.pdf); PDF page k =
+% archivists' page 40+k, no cover sheet. Per the skill transcribe-grothendieck.
+% The folder is sixty-two pages in four batches (1-20, 21-40, 41-60, 61-62),
+% transcribed in parallel; batches 2 and 4 were read for notation and
+% alignment once they existed (p. 41 continues batch 2's run on the
+% categories F_n and the functor psi_n; p. 60's « Prop » is the one batch 4's
+% two corollaries on p. 61 follow).
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-09-26 — first pass, unchecked against the pages by a human.
+%
+% Dating and title. The dating is the folder's own, copied verbatim from the
+% catalogue; the group « Géométrie et topologie combinatoire » (69-89) holds
+% it, and since the folder has a date of its own the group's range is not
+% added. The title is the catalogue's, without its final full stop.
+%
+% Pages skipped: 44 and 48 (blank), 46 (blank but for show-through of p. 47).
+% Page 43 is a cover in his hand (« 2-cartes cellulaires » struck, « cube
+% combinatoire » above; « (16 p) » in pencil, perhaps not his): no \page{},
+% its words are the section heading, with a note. Pages summarised: none;
+% nothing is typed and nothing is by another hand.
+%
+% Pages transcribed: 41-42 (blue ink on perforated listing paper, the end of
+% the programme of numbered theorems begun in batch 2), 45 (listing paper:
+% small sets as finite geometries over F_2, F_3, F_4, F_5; card G(F_q) for
+% Chevalley groups via the cells of G/B, with a hand-drawn table), 47
+% (« Sujets DEA », four numbered subjects), 49-60 (black felt-tip, the cube
+% run). The hand is fast but mostly legible in the cube run; the connective
+% prose of pp. 45, 55-56 and 58 is the weakest.
+%
+% His pagination: none on the leaves. Numbered runs: Th. 5, 6, 7 (pp. 41-42)
+% continue his Th. 1-4 of batch 2; « Sujets DEA » 1)-4) (p. 47); on p. 57 a
+% struck « 1°) »; p. 58-59 cases a) and b) (« cas tordu »); p. 59 example
+% with 1°)-2°) and circled (+), (-); p. 60 two runs 1°)-4°) (under b), two
+% cycles, and c), three cycles), each case carrying in the left margin a
+% sign and a count (« -, 6 », « +, 1 » ...), recorded as \marginal. No
+% « cf. p. N » cross-reference; « cf cor. précédent » on p. 50.
+%
+% What the batch is about. Pp. 41-42 close the programme on cellular n-maps:
+% barycentric subdivision of psi_n(C_n) (Th. 5), the simplicial complex of
+% the twice-subdivided triangulation in terms of the cascade (Th. 6), the
+% essential image of F_n° in combinatorial terms, linked to recognising
+% spheres and « l'hyp. de Poincaré » (Th. 7), and further points (flags,
+% duality, products, fibrations). P. 45 is an aside. From p. 49 the run
+% « cube combinatoire »: the cube C(B, sigma) of a finite set B with a
+% fixed-point-free involution, E = Hom_{±1}(B, R); faces <-> partial
+% sections of B over I = B/sigma (order-reversing); isomorphisms of
+% (B, sigma) = affine isomorphisms of cubes = isomorphisms of their face
+% posets; Aut(C) simply transitive on flags (the lemma: an automorphism of a
+% convex polytope fixing a flag is the identity), cubes <-> right
+% G_0-torsors, G_0 = {±1}^n · S_n; the antipody and the centre of Aut(C);
+% f-vector c_d = binom(n,d) 2^{n-d} and Euler-Poincaré; orientations
+% (sigma acts by (-1)^n; a combinatorial definition of orientation via
+% « repères »); regular and homogeneous polytopes (N | N_c | R); conjugacy
+% classes of Aut(C_n) by two sequences alpha_i^±, the fixed faces
+% (generating function prod (1+2t^i)^{alpha_i^+}), the ten classes for
+% n = 3; and the « Prop » (u x = ±x for all vertices => u = ±id, n >= 3)
+% whose corollaries open batch 4.
+%
+% Notation fixed for the batch, following batches 1, 2 and 4: \mathbb{B} for
+% his double-stroked B; \Phi for his barred I (Phi_0(C), Phi_{≤x}); Fac(C)
+% and Comb(C) for the face poset as he writes it; Rep(C), Drap(C);
+% \mathfrak{S} for the symmetric group; \mathcal{F}_n, (Casc)_n, psi_n,
+% \widetilde{X}_i as in batch 2.
+%
+% Apparatus: 81 \ill{}, 64 \uncertain{}. Hardest pages 45 (dense, two unrelated blocks),
+% 55-56 (the connectivity argument and the counting), 58 (the tableau and
+% the right-hand note).
+
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{76}
+\batch{3}
+\pages{41}{60}
+\dating{[vers 1977]}
+\watermark{Édition de démonstration}
+\foldertitle{n-cartes cellulaires : notes manuscrites (s.d.)}
+
+\begin{document}
+
+\page{41}
+\note{la page continue le programme de théorèmes numérotés de la page 40
+(Th.\ 1 à 4, construction de $\psi_n : (\mathrm{Casc})_n \to
+\mathcal{F}_n$ par « multicône ») ; les numéros 5, 6, 7 sont les siens}
+
+Enfin, on devrait donner un
+
+\emph{Th.\ 5} Subdivisions barycentriques de $\psi_n(C_n)$, et description
+par ens.\ \uncertain{pseudo-simpliciaux}\ldots
+\note{un trait vertical dans la marge gauche accompagne ces deux lignes}
+
+\emph{NB} La donnée d'un homéom.\ $X_n \simeq \psi_n\varphi_n(X_n)$
+revient à la donnée, pour tout $i$ et toute composante connexe
+$\widetilde{X}_i^\alpha$ de $\widetilde{X}_i$ (« $i$-cellules ») d'un
+homéomorphisme
+\[
+  \widetilde{X}_i^\alpha \xrightarrow{\ \sim\ }
+  \mathrm{C\hat{o}n}(\partial\widetilde{X}_i^\alpha)
+\]
+induisant l'identité sur le bord. [La subdivision barycentrique se fait
+\uncertain{par dessus} une triangulation. On pourrait expliciter la
+subdivision barycentrique itérée 2 fois, qui correspond, elle, à une
+triangulation. Il faudrait donc expliciter le \uncertain{complexe}
+simplicial (ensemble $+$ ens.\ de parties finies, stable par inclusion) de
+cet espace triangulé, en termes de la cascade $C_n$, et donner une
+description \ill{} \ill{} \ill{} de la filtration \ill{} \ill{} sa
+réalisation topologique. Cela fera bien encore un th.\ 6 (et peut-être un
+th.\ 7\ldots)
+\note{« par dessus » : lecture incertaine ; le crochet ouvrant est tracé
+en équerre, sans crochet fermant sur la page}
+
+\page{42}
+Je veux dire : caractérisons l'image essentielle de
+$\mathcal{F}_n^\circ$ (\uncertain{$C_n \to$ ens.}) [en termes
+combinatoires ! Voire, ce qui revient au même : étudier si un espace
+triangulé est homéom.\ à une sphère --- \struck{mais déjà que \ill{}}
+\add{cela semble lié : l'hyp.} \add{de Poincaré !}] ; on en conclura aussi
+la caractérisation de l'image essentielle de $\mathcal{F}_n \to C_n$. On
+aura ainsi un
+
+\emph{Th.\ 7}
+\note{ici « Th.\ 7 » est doublement souligné et n'est suivi d'aucun
+énoncé ; la « lettre » $\mathcal{F}_n$ est son F gras, avec un petit
+cercle en exposant la première et la dernière fois ; « cela semble lié :
+l'hyp.\ de Poincaré ! » est écrit au-dessus de la ligne, sur les mots
+biffés}
+
+Autres points : examiner
+\begin{itemize}
+  \item[$*$] Relations avec ensembles ordonnés (polyèdres combinatoires)
+  via drapeaux\ldots
+  \item[$*$] Dualité dans $\mathcal{F}_n^\circ$
+  \item[$*$] Produits d'espaces : filtrations admissibles
+  \item[$*$] Fibrations ?
+\end{itemize}
+
+\section*{Cube combinatoire}
+\note{titre tiré de la page 43, une feuille de couverture de sa main :
+« \struck{2-cartes cellulaires} » biffé, remplacé par « cube combinatoire
+» ; en haut à gauche de la même feuille, au crayon et entre parenthèses,
+« (16 p) », qui pourrait ne pas être de sa main}
+
+\page{45}
+\note{feuille de listing perforée, encre bleue ; la page porte deux
+blocs sans lien apparent avec les cubes : en haut des petits ensembles
+identifiés à des géométries finies, en bas le dénombrement de groupes
+linéaires sur $\mathbf{F}_q$}
+
+\emph{Ens de card 2} : \uncertain{torseur} sous $\mathbf{F}_2$ i.e.\
+\add{droite} \struck{\ill{}} affine \struck{\ill{}} $\mathbf{F}_2$
+
+\emph{Ens de card 3} : droite affine sur $\mathbf{F}_3$ / éléments non nuls
+d'un vectoriel de dim 2 sur $\mathbf{F}_2$ / droite projective sur
+$\mathbf{F}_2$ / $+$ orientation : \struck{\ill{}}
+
+\emph{Ens de card 4} : \uncertain{plan} affine sur $\mathbf{F}_2$ / droite
+projective sur $\mathbf{F}_3$ / \emph{orientation} : droite affine
+\uncertain{sur} $\mathbf{F}_4$ ?
+
+\emph{Ens de card 5} ($\leftrightarrow$ droite projective sur
+$\mathbf{F}_5$, les 6 pts \ill{} les \ill{} des \ill{}
+\uncertain{icosaèdre} \ill{} à $E$)
+
+\emph{Ens orientés de card 5} droites projectives sur $\mathbf{F}_4$ ---
+l'ens.\ :
+\note{la ligne s'arrête sur les deux points ; sur la ligne « card 3 », un
+court mot est souligné sous « orientation » ; la fin de la ligne « card 5
+» est très serrée}
+
+Cas $G = GP(2, \mathbf{F}_q)$, ($N = 3$, \add{$r = 2$} $d_\lambda = 2, 3$)
+\[
+  \boxed{\ \mathrm{card}\, G(\mathbf{F}_q) = q^N (q-1)^r
+  \prod_{1 \leqslant \lambda \leqslant r}
+  \frac{q^{d_\lambda} - 1}{q - 1}\ }
+\]
+\note{au-dessus du produit, une accolade renvoie à « \uncertain{légende}
+$q^{d_\lambda - 1}$ » ; « $r = 2$ » est ajouté au-dessus de la parenthèse}
+\[
+  P_{G/B} = \frac{(1 - T^2)^r}{\prod_\lambda (1 - T^{2d_\lambda})}
+\]
+\[
+  Sl(3, \mathbf{F}_q) \quad \mathrm{card} \ \sum_i b\, q^{d(i)} \qquad
+  b = q^3 (q-1)^2 \sum_{0 \leqslant i \leqslant 3} b_{2i}\, q^i
+\]
+\[
+  \Bigl(1 : P_{G/B}(\sqrt{q})\Bigr) = \frac{(1-q)^r}{\prod_\lambda (1 -
+  q^{d_\lambda})} = \frac{(q-1)^r}{\prod_\lambda (q^{d_\lambda} - 1)}
+\]
+\[
+  \mathrm{card}\, G(\mathbf{F}_q) = q^N (q-1)^r\, \mathrm{card}\,
+  G/B(\mathbf{F}_q)
+\]
+\note{sous « $G(\mathbf{F}_q)$ », une ligne reliée par un trait :
+« \uncertain{gr.\ de Chevalley} » ; au-dessous : « $N$ = nb de racines
+\uncertain{pos.}\ $= \dim G/B = \dim B$\,\ill{} », « $r = \mathrm{rg}\,G$ » ;
+un premier facteur devant $q^N$ est biffé}
+\[
+  \mathrm{card}\, G/B(\mathbf{F}_q) = \sum_{\substack{\alpha \text{
+  cellules} \\ (d(\alpha) = \text{dim})}} q^{d(\alpha)} = \sum_{0
+  \leqslant i \leqslant N} b_{2i}\, q^i = P_{G/B}(\sqrt{q})
+\]
+\[
+  B \supset T, \quad G/T \simeq G/B \qquad P_{B_G} \cdot P_{G/B} = P_{B_T}
+\]
+\note{sous la dernière égalité : $\bigl(\frac{1}{1-T^2}\bigr)^r$ sous
+$P_{B_T}$, relié par une double flèche à $\prod_\lambda
+\frac{1}{1-T^{2d_\lambda}}$ sous $P_{B_G}$ ; un mot court sur la flèche,
+illisible ; les indices $B_G$, $B_T$ (espaces classifiants) sont des
+lectures \uncertain{incertaines}}
+
+\[
+  \begin{array}{c|cccc|l}
+    q & 2 & 3 & 4 & 5 & \\
+    \hline
+    & 1 & 2 & 3 & 4 & Gl(1, \mathbf{F}_q) \\
+    & 2 & 6 & 12 & 20 & \mathrm{Aff}(1, \mathbf{F}_q) \\
+    & 6 & 24 & 60 & 120 & Sl(2, \mathbf{F}_q) \\
+    & 6 & 24 & 60 & 120 & GP(1, \mathbf{F}_q) \\
+    & 6 & 48 & 180 & 480 & Gl(2, \mathbf{F}_q) \\
+    & 24 & 9\cdot 48 & 16 \cdot 180 & 25 \cdot 480 & \mathrm{Aff}(2,
+    \mathbf{F}_q)
+  \end{array}
+\]
+\note{le tableau est tracé à la main ; la dernière ligne est écrite à
+part, à droite du tableau, et « $16 \cdot 180$ » est souligné ; dans la
+première ligne, le nom du groupe est surchargé (un premier « $Sl$ »
+récrit) ; en marge des lignes $Sl(2)$ et $GP(1)$, une flèche marquée
+« \uncertain{1, 2} »}
+\begin{align*}
+  Gl(1, \mathbf{F}_q) &\simeq \mathbf{F}_q^* \simeq \mathbf{Z}/(q-1),
+  && \mathrm{card}\ q - 1 \\
+  \mathrm{Aff}(1, \mathbf{F}_q) &\simeq \mathbf{F}_q^* \cdot \mathbf{F}_q
+  && \mathrm{card}\ q(q-1) \\
+  GP(1, \mathbf{F}_q) &\simeq Gl(2, \mathbf{F}_q)/\mathbf{F}_q^*
+\end{align*}
+\[
+  \mathrm{card}\ Sl(2, \mathbf{F}_q) = \sum_{\text{cell.\ } i} b\,
+  q^{d(i)} \qquad b = q(q-1) \qquad \mathrm{card}\ Sl(2, \mathbf{F}_q) =
+  q(q-1)(q+1)
+\]
+\[
+  \mathrm{card}\ GP(1, \mathbf{F}_q) = (q+1)q(q-1), \qquad \mathrm{card}\
+  \mathrm{Aff}(2, \mathbf{F}_q) = q^3 (q-1)^{2} (q+1)
+\]
+\[
+  \mathrm{card}\ Gl(2, \mathbf{F}_q) = q(q-1)^2(q+1)
+\]
+\note{dans « card $Sl(2, \mathbf{F}_q) = \sum$ », « card » est ajouté
+au-dessus ; dans « card $GP(1)$ » le premier facteur est surchargé
+($q+1$ récrit) ; l'exposant $2$ de $(q-1)$ dans card $\mathrm{Aff}(2)$
+est une lecture \uncertain{incertaine} (un petit trait)}
+
+\page{47}
+\emph{Sujets DEA}
+\begin{enumerate}
+  \item[1)] Catégorie isotopique des 1-compl.\ top.\ cpcts avec groupe
+  fini d'automorphismes (et plus de morphismes que les seuls
+  isomorphismes)
+  \item[2)] Catégorie isotopique des cartes cellulaires
+  \item[3)] Examiner la notion de convexité du point de vue de la
+  géométrie projective. Question : pour $A$ convexe dans un espace
+  projectif réel, y a-t-il un hyperplan qui ne le rencontre pas ?
+  \item[4)] Géométrie des cubes et espaces homogènes de
+  $\mathfrak{S}_4$.
+\end{enumerate}
+
+\page{49}
+$(\mathbb{B}, \sigma)$ \quad $\mathbb{B}$ ens.\ fini, \struck{\ill{}}
+involution dans $\mathbb{B}$ sans pt fixe
+\[
+  \downarrow
+\]
+\begin{align*}
+  E &= E(\mathbb{B}, \sigma) = \mathrm{Hom}_{\lbrace \pm 1
+  \rbrace}(\mathbb{B}, \mathbf{R}) \\
+  C &= C(\mathbb{B}, \sigma) = \lbrace \varphi \in E \mid |\varphi(j)|
+  \leqslant 1 \ \forall j \in \mathbb{B} \rbrace
+  \qquad \mathbb{B} \hookrightarrow C \hookrightarrow E
+\end{align*}
+
+\emph{Proposition} Pour toute section partielle $I' \subset \mathbb{B}$ de
+$\mathbb{B}$ sur $I = \mathbb{B}/\sigma$, soit
+\[
+  F(I') = \lbrace \varphi \in C \mid \varphi(j) = 1 \ \forall j \in I',\
+  \varphi(j) \neq \pm 1 \ \forall j \in \mathbb{B} - I' - \sigma I'
+  \rbrace
+\]
+Alors l'application $I' \mapsto F(I')$ est une application bijective,
+renversant l'ordre
+\[
+  \mathrm{Spd}(\mathbb{B}/I) \xrightarrow{\ \sim\ } \bigl(\mathrm{Fac}(C)
+  - \lbrace \emptyset \rbrace\bigr)
+\]
+\note{la seconde condition de $F(I')$ est écrite sous la première, après
+un mot biffé ; « Spd » (sections partielles) est tel qu'il l'écrit ; sous
+« Fac », un mot biffé illisible, et « Fac » lui-même est surchargé}
+
+Ceci précise de façon simple le polyèdre combinatoire associé au polyèdre
+$C = C(\mathbb{B}, \sigma)$ en termes de $(\mathbb{B}, \sigma)$, comme
+étant (\uncertain{moyennant} l'addition d'un plus petit élément) l'ens.\
+ordonné opposé de l'ens.\ des parties $I'$ de $\mathbb{B}$ telles que $I'
+\cap \sigma I' = \emptyset$.
+
+\marginal{\emph{NB} Dans le cas du cube ($p$ de degré 2 ?) les él.\ de
+$\mathbb{B}$ correspondent aux facettes de codim 1, et pour une telle
+facette $F$, $\sigma F$ est l'unique facette de codim 1 qui ne rencontre
+pas $F$ (en fait, les hyperpl.\ d'appui correspondants sont
+\uncertain{parallèles})}
+\note{note écrite verticalement dans la marge gauche, séparée du texte par
+un trait ; « de codim 1 » est ajouté au-dessus de la ligne}
+
+\emph{Proposition} Soit $\mathbb{B} \xrightarrow{p} I$ une application
+surjective, et soit $\mathcal{P}(p)$ l'ens.\ ordonné par inclusion des
+sections partielles de $\mathbb{B}$ sur $I$. Alors $p \mapsto
+\mathcal{P}(p)$ est un foncteur pl.\ fidèle du groupoïde des surjections
+\struck{\ill{}} (on a comme morphismes les isom.
+\[
+  \begin{array}{ccc}
+    \mathbb{B} & \xrightarrow{\ \sim\ } & \mathbb{B}' \\
+    \downarrow p & & \downarrow p' \\
+    I & \xrightarrow{\ \sim\ } & I'
+  \end{array}
+\]
+) dans la catégorie des ens.\ ordonnés. On reconstitue
+\[
+  \mathbb{B} \hookrightarrow \mathcal{P}
+\]
+ens.\ des pts \struck{\ill{}} minimaux de $\mathcal{P} - \lbrace \emptyset
+\rbrace$, et la relation d'équivalence définie par $p$ par
+\[
+  p(b) = p(b') \Longleftrightarrow (b = b' \text{ ou } C_b \cap C_{b'} =
+  \emptyset),
+\]
+où $\forall b \in \mathbb{B}$, $C_b$ est \struck{l'ens.\ des éléments}
+\add{le sous-ens.\ de l'ens.\ $S$} maximaux de $\mathcal{P}$ ($S \simeq
+\prod_{i \in I} \mathbb{B}_i$) \struck{\ill{}} qui majorent $b$.
+\note{il écrit $\mathcal{P}(p)$ avec un P d'écriture ; le mot biffé devant
+« minimaux » est illisible ; la correction « sous-ens.\ de l'ens.\ $S$ »
+est écrite au-dessus de « des éléments », qu'elle remplace}
+
+\page{50}
+\struck{Ainsi, si $S$ est l'ens.\ des sommets du cube $C(\mathbb{B},
+\sigma)$ --- correspondant aux sections de $\mathbb{B}$ sur $I =
+\mathbb{B}/\sigma$, \ill{} \ill{} $\in S$ \ill{} l'intersection des
+facettes}
+\note{ce paragraphe est encadré et barré de traits obliques}
+
+\emph{Corollaire} Soient $(\mathbb{B}, \sigma)$, $(\mathbb{B}', \sigma')$
+deux \struck{\ill{}} \add{\ill{}} \ill{}, \struck{Alors} définissant les
+cubes $C$, $C'$, on sait que l'on a
+\[
+  \mathrm{Isom}\bigl((\mathbb{B}, \sigma), (\mathbb{B}', \sigma')\bigr)
+  \xrightarrow{\ \alpha\ } \mathrm{Isom}_{\mathrm{aff}}(C, C')
+  \xrightarrow{\ \beta\ } \mathrm{Isom}_{\mathrm{ord}}\bigl(\mathrm{Comb}(C),
+  \mathrm{Comb}(C')\bigr)
+\]
+Ces applications sont des bijections. En particulier, on a
+\[
+  \mathrm{Aut}\bigl((\mathbb{B}, \sigma)\bigr) \xrightarrow{\ \sim\ }
+  \mathrm{Aut}_{\mathrm{aff}}(C) \xrightarrow{\ \sim\ }
+  \mathrm{Aut}_{\mathrm{ord}}\bigl(\mathrm{Comb}(C)\bigr)
+\]
+\[
+  \begin{array}{l}
+    \quad \| \\
+    \text{commutant de } \sigma \text{ dans } \mathfrak{S}_{\mathbb{B}} \\
+    \quad \cdots \\
+    \mathfrak{S}_I \cdot \lbrace \pm 1 \rbrace^I
+  \end{array}
+\]
+\note{un trait vertical dans la marge gauche accompagne l'énoncé ; entre
+« commutant » et $\mathfrak{S}_I \cdot \lbrace \pm 1 \rbrace^I$, une ligne
+courte (« \ill{} com.\ »)}
+
+\emph{Dém} On sait déjà que $\beta\alpha$ est un isomorphisme (cf cor.\
+précédent). Je veux : prouver que $\beta$ l'est. On en sait déjà que
+$\beta$ est surjectif ($\beta\alpha$ bij), or il est injectif (car un isom
+$C \to C'$ est connu quand on connaît son effet sur les seuls pts
+extrémaux) --- cqfd.
+
+\emph{NB} Au lieu de $\mathrm{Isom}_{\mathrm{aff}}(C, C')$ on peut aussi
+écrire $\mathrm{Isom}_{\mathrm{proj}}(C, C')$
+
+\marginal{\ill{}}
+\emph{Corollaire} Les facettes d'un cube sont des cubes
+\note{dans la marge, devant une accolade, un mot court illisible ; la
+phrase s'arrête au bas de la page}
+
+\page{51}
+\emph{Prop} Le groupe $\mathrm{Aut}(C)$ est simplement transitif sur
+$\mathrm{Drap}(C)$ (qui est donc un torseur sous $\mathrm{Aut}(C)$)
+\note{« Prop » est surchargé sur un premier mot ; un trait vertical dans
+la marge accompagne l'énoncé}
+
+(On dit que $C$ est un pol.\ (convexe) \emph{régulier} pour dire qu'il en
+est ainsi\ldots)
+
+\struck{$\mathrm{Card}(\mathrm{Drap}(C)) = 2^n \cdot 2^{\cdots}$}
+\note{l'exposant du second facteur biffé est illisible : \ill{}}
+
+Le nb de facettes de dim $d+1$ \uncertain{contenant} une facette donnée
+de dim $d$ est \struck{\ill{}}$(n-d)$, donc le nb des \add{drap.}\
+\struck{drapeaux} est
+\[
+  2^n \cdot n \cdot (n-1) \cdots 2 \cdot 1 = 2^n n!
+\]
+qui est aussi l'ordre de $\mathrm{Aut}(C)$. Il suffit de prouver que
+$\mathrm{Aut}(C)$ opère librement sur $\mathrm{Drap}(C)$, ce qui est vrai
+pour tt polyèdre convexe :
+\note{le signe entre $d$ et $1$ est peu lisible, lu $+$ d'après le compte
+$(n-d)$}
+
+\emph{Lemme} Soit $C$ un polyèdre convexe, $u$ un autom.\ de $C$ fixant un
+drapeau de $C$. Alors $u$ est l'identité.
+
+Récurrence sur dim $C$. \uncertain{Pour} $\dim C = 0$, c'est
+\uncertain{trivial}. Soit $D = (F_0, \dots, F_{n-1}, F_n = C)$ le drapeau
+fixé. Par hyp.\ de récurrence, $u$ est l'identité sur $F_{n-1}$, car il
+fixe un \add{\uncertain{drap.}} \struck{drapeau} $(F_0, \dots, F_{n-2},
+F_{n-1})$. Donc $u$ est un automorphisme affine de $E_C = E$ qui
+\struck{\ill{}} \add{induit} l'identité sur un hyperplan $H = E_{F_{n-1}}$,
+et qui est d'ordre fini --- or ces seules familles \ill{} c'est ou bien
+l'identité, ou bien une « symétrie » --- mais alors elle échange les deux
+$\frac12$-espaces déterminés par $H$, donc elle ne pourrait respecter $C$,
+OK.
+\note{à gauche de la fin de la démonstration, une petite figure : un
+parallélogramme (un plan) traversé par un segment oblique marqué d'un
+point, l'hyperplan $H$ et une droite qui le perce}
+
+\emph{Corollaire} Soit $C_0$ un cube de dim $n$, $D_0$ un drapeau dudit,
+\struck{Al} $C$ un cube de dim $n$. Alors $u \mapsto u(D_0)$
+\[
+  \mathrm{Isom}(C_0, C) \xrightarrow{\ \sim\ } \mathrm{Drap}(C)
+\]
+
+\page{52}
+donc $\mathrm{Drap}(C)$ est un torseur \emph{à droite} sous $G_0 =
+\mathrm{Aut}(C_0)$ (et un torseur à gauche sous $G = \mathrm{Aut}(C)$, qui
+est le \uncertain{commutant} de $G_0$\ldots)
+
+Le foncteur
+\[
+  \begin{array}{ccc}
+    C & \longmapsto & \mathrm{Drap}(C) \\
+    n\text{-Cubes} & \longrightarrow & G_0\text{-tors.\ à dr.}
+  \end{array}
+\]
+est une équivalence de catégories.
+\note{un double trait vertical dans la marge gauche accompagne la fin de la
+page précédente et ces lignes ; la page commence au milieu de la phrase
+du corollaire de la page 51}
+
+\emph{NB} $(C_0, D_0)$ est défini à isom.\ unique près --- donc aussi
+$G_0$. Si on veut, on prend pour $C_0$ le cube standard $C_n$,
+\struck{qui \uncertain{dans} \ill{} \ill{}} \add{qui \ill{} \ill{}} de
+une combinaison \uncertain{canonique} : $\mathbb{B} = [1, n] \times
+\lbrace \pm 1 \rbrace$, avec comme drapeau celui défini par la section cte
+de valeur 1, et ses restrictions aux sous-intervalles $[1, i]$ ($0
+\leqslant i \leqslant n$). Ainsi on trouve un isom.\ can.
+\[
+  G_0 \simeq \lbrace \pm 1 \rbrace^n \cdot \mathfrak{S}_n \simeq
+  \mathrm{Aut}(C_n)
+\]
+\uncertain{produit} ½ direct
+\note{la ligne « qui … » est biffée d'un trait et récrite au-dessus, très
+cursivement ; « ½ direct » : il écrit ½ pour « semi- »}
+
+\page{53}
+Symétrie des cubes : c'est l'homothétie \struck{\ill{}} $-\mathrm{id}$.
+Du pt de vue combinatoire, c'est l'automorphisme $I' \mapsto \sigma I'$
+dans l'ens.\ des « sections partielles » de $\mathbb{B}$ sur $I$. Du pt de
+vue \uncertain{maquette} des cubes, c'est l'automorphisme $\sigma$ de
+$(\mathbb{B}, \sigma)$. C'est l'unique automorphisme \add{\uncertain{un}}
+\uncertain{laissant} le\ldots
+\note{la phrase reste en suspens en fin de ligne}
+
+\struck{\emph{Prop} Soient $F$, $F'$ deux facettes \add{fermées} non vides,
+Alors $F \cap F' \neq \emptyset$ \emph{ou} $F \cap \sigma F' \neq
+\emptyset$. (Ceci caractérise l'autom.\ $\sigma$ ?) \ill{} \ill{} Cl.\
+revient à ceci : si $I'$, $I'' \subset \mathbb{B}$ sont deux sections
+partielles de $\mathbb{B}$ sur $I = \mathbb{B}/\sigma$, alors \ill{}}
+\note{tout ce bloc est encadré et barré de traits obliques ; « fermées »
+est ajouté au-dessus de « non vides »}
+
+\ldots\ \struck{\ill{}} propriété : si $F$ est une facette de codim 1
+(une hyperfacette), alors $\sigma F$ est une hyperfacette
+\uncertain{ne} rencontrant pas $F$. Plus généralement, pour une facette $F$
+\struck{de dimension} \add{\ill{}} à part celle de dim $n$, $F$ et $\sigma
+F$ ne se rencontrent pas (en fait les hyperplans d'appui ne se rencontrent
+pas et \uncertain{sont} \ill{})
+\note{le début de ce paragraphe est pris dans l'encadré biffé ; « \ill{}
+propriété » paraît en être la reprise ; « de dimension » est biffé et
+remplacé par un mot illisible}
+
+\marginal{$/\!/$\,)}
+Aussi : le centr.\ de $\mathrm{Aut}(C)$ est le groupe $\lbrace 1, \sigma
+\rbrace$ [\emph{NB} si $n \geqslant 3$, le centre de $\mathfrak{S}_I$ est
+$\lbrace 1 \rbrace$\ldots], donc $\sigma$ est l'unique élément central $\neq
+1$.
+\note{« $/\!/$ ) » : deux traits obliques et une parenthèse dans la marge,
+devant la ligne qui finit par « ne se rencontrent pas » ; un trait
+vertical accompagne le paragraphe « Aussi »}
+
+\marginal{\ill{}}
+Nb des facettes de dim $d$ ($0 \leqslant d \leqslant n$)
+\[
+  c_d = \binom{n}{d} 2^{n-d}
+\]
+On a la formule d'EP
+\begin{align*}
+  \sum_0^n (-1)^d c_d &= \sum (-1)^d \binom{n}{d} 2^{n-d} = (-1)^n \sum
+  \binom{n}{d} 1^d (-2)^{n-d} \\
+  &= (-1)^n (1-2)^n = 1 \qquad \text{i.e.}
+\end{align*}
+\[
+  \boxed{\ \sum_0^n (-1)^d c_d = 1\ }
+\]
+(\emph{valable en fait pour tt polyèdre convexe de dim $n$} !)
+\note{un mot court dans la marge gauche, devant une accolade qui embrasse
+le calcul, illisible (le même que devant le corollaire de la page 50) ;
+« EP » : Euler--Poincaré ; le signe $\leqslant$ devant le second $n$ de
+« $0 \leqslant d \leqslant n$ » est repassé ; le $\sum$ de la seconde
+somme est surchargé}
+
+\page{54}
+\struck{Ens.}\ d'orientations des cubes (ou de l'espace affine qu'il
+engendre, ce sera provisoirement notre définition ici\ldots)
+\[
+  \omega_C \overset{\text{déf}}{=} \omega_E \simeq \omega_I \wedge
+  \bigwedge_{i \in I} \mathbb{B}_i
+\]
+\note{au-dessus du premier signe, « déf » et un mot court,
+\uncertain{« prov »} (provisoire) ; « Ens. » est surchargé en tête de
+ligne}
+
+L'effet de $\sigma$ sur $\omega_C$ est $(-1)^n$, donc
+
+\emph{Prop} L'antipodisme conserve l'orientation ssi $n$ pair (donc la
+renverse ssi $n$ impair)
+
+\emph{Cor} Soit $n$ impair, $\mathrm{Aut}(C) \simeq \mathrm{Aut}^+(C)
+\times \lbrace \pm 1 \rbrace$
+\note{le $\simeq$ est repassé}
+
+\emph{NB} (Thème de modélisation géométrique) : Soit $C$ un polyèdre
+convexe \struck{\ill{}} \add{engendrant l'}espace affine $E$. Alors l'ens.\
+à 2 él.\ $\omega_E$ peut se décrire canoniquement en termes des polyèdres
+combinatoires $\mathrm{Comb}(C)$.
+
+\emph{Indication} L'\struck{\ill{}} orientation de $E$ permet de définir
+l'ens.\ \struck{$D(\omega)$} (des \add{repères} \struck{drapeaux} directs »
+$F_0 \subset F_1 \subset \cdots \subset F_{n-1} \subset F_n = C$
+(\add{\uncertain{des}} facettes) du polyèdre $C$, et elle est définie par
+le sous-ens.\ de \add{$D(\omega)$} \struck{\ill{}}. Il faut donc
+décrire, en termes de la seule structure d'ensemble ordonné de
+$\Phi = \mathrm{Comb}(C)$, ce qu'on appellera les parties de
+\add{$D(\Phi)$} \struck{$\mathrm{Comb}(C)$} (l'ens.\ des \add{repères}
+\struck{drapeaux} de $\Phi$) qui sont des $D(\omega)$ [définition
+combinatoire de l'orientation]. \emph{Solution} Soit $D^+ \subset D$,
+$D^- = D - D^+$, on veut que \add{les} $\sigma_i$ ($1 \leqslant i
+\leqslant n$) sur $D$ transforment $D^+$ en $D^-$ (donc $D^-$ en
+$D^+$\ldots). [En fait, il y a exactement 2 telles partitions : $D^+$ et
+$D^-$ !
+\note{$\Phi$ est son I barré ; la parenthèse ouvrante devant « des
+repères » se ferme avant « directs », le guillemet ouvrant manque ; le
+« $D(\omega)$ » biffé à la première ligne de l'indication est ajouté
+plus bas au-dessus d'un passage biffé illisible ; la dernière ligne est
+serrée sous la précédente, et son crochet ne se ferme pas}
+
+\page{55}
+\emph{Drapeaux d'un polyèdre convexe --- drapeaux d'un ens.\ ordonné.
+Repères d'un polyèdre convexe}
+\note{une petite flèche vers la gauche au-dessus du titre}
+
+\emph{Prop.} Soit $C$ un polyèdre convexe, $\mathrm{Fac}(C)$ le polyèdre
+combinatoire associé, $\mathrm{Rep}(C) = \mathrm{Rep}(\mathrm{Fac}(C))$
+l'ens.\ des repères. Alors les \struck{applications} homom.\ de groupes
+\[
+  \mathrm{Aut}(C) \xrightarrow{\ \alpha\ }
+  \mathrm{Aut}_{\mathrm{ord}}(\mathrm{Fac}(C)) \xrightarrow{\ \beta\ }
+  \mathrm{Aut}_{\mathrm{ens}}\, \mathrm{Rep}(C)
+\]
+sont injectifs. Plus précisément par $\beta$,
+$\mathrm{Aut}_{\mathrm{ord}}(\mathrm{Fac}(C))$ opère \emph{librement} sur
+$\mathrm{Rep}(C)$ (a fortiori, $\alpha$ étant injectif, $\mathrm{Aut}(C)$
+opère librement)
+\note{sous $\mathrm{Aut}(C)$, un « $\cdot H$ » peu clair ; le premier
+indice de $\mathrm{Aut}$ au-dessus de $\mathrm{Rep}(C)$ est surchargé ;
+« Fac » est lu comme à la page 49}
+
+En effet, $\alpha$ est inj.\ car un auto.\ \uncertain{d'un} polyèdre
+convexe $C$ est connu quand on connaît sa restriction aux pts extrémaux.
+
+Soit $u$ un automorphisme de $\Phi = \mathrm{Fac}(C)$, fixant un drapeau
+$(F_0, \dots, F_{n-1}, F_n)$. Par hyp.\ de récurrence, il \struck{fixe}
+\struck{$P$\ill{}} est l'identité sur $\Phi_{\le F_{n-1}}$. D'autre
+part, s'il est l'identité sur une \struck{facette} $\Phi_{\le x}$, $x$ une
+facette de dim $n-1$, et si $y$ est une facette telle que $x \wedge y$ soit
+de dim $n-2$, alors il est l'identité sur $\Phi_{\le y}$ --- car il fixe
+un drapeau de $\Phi_{\le y}$. Il \add{\uncertain{faut voir}} \struck{\ill{}}
+que le \uncertain{rel.\ d'équiv.}\ engendrée par « $x$ et $y$ ont une
+facette de dim $n-2$ en commun » est la relation grossière. \struck{\ill{}
+\ill{}} Argument topologique de connexité\ldots
+\note{il écrit $\Phi_x$, $\Phi_y$ (son I barré, indice $x$ ou $y$), lu ici
+$\Phi_{\le x}$ pour « la partie de $\Phi$ au-dessous de $x$ » ; au-dessus de
+la ligne, « \struck{\ill{}}$_{n-1}$ » ; la fin de la phrase « Il
+\ldots\ grossière » est très cursive}
+
+\emph{Déf} $C$ \struck{\ill{}} est dit polyèdre \emph{régulier} si
+$\mathrm{Aut}_{\mathrm{aff}}(C)$ est \uncertain{transitif} (\uncertain{donc}
+simplement transitif) sur $\mathrm{Rep}(C)$, homogène si pour tt $0
+\leqslant i \leqslant n-1$, $\exists\ d_i \in \mathbf{N}$ tel que $\forall F
+\in \mathrm{Fac}_{i+1}(C)$, le cardinal des
+\note{la page s'arrête sur « des » ; l'indice de $\mathrm{Aut}$ est lu
+$\mathrm{aff}$ avec doute, et la borne $n-1$ est surchargée}
+
+\page{56}
+l'ens.\ des \struck{facettes} $y \in \mathrm{Fac}_{i}(C)$ qui majorent $x$
+soit $d_i$. (Donner des ex.\ \ill{}.)
+\[
+  \mathrm{card}\, \mathrm{Rep}(C) = d_0 d_1 \cdots d_{n-1} = d_0 \cdots
+  d_{n-1}
+\]
+(car $d_n = 1$). \struck{Dans ce cas, si $N = \mathrm{card}\,
+\mathrm{Aut}(C)$, $N_c = \mathrm{card}\, \mathrm{Aut}(\mathrm{Fac}(C))$}
+\note{un trait vertical dans la marge accompagne la fin de la définition
+de la page 55 ; les indices $i+1$, $i$ sont peu lisibles ; dans le produit
+central l'un des indices est surchargé}
+
+Évidemment régulier $\Rightarrow$ homogène. \struck{Évidemment, \ill{}}
+\struck{$N \mid N_c \mid \mathrm{card}\, \Phi$}
+\note{« $N \mid N_c \mid$ card » est biffé et repris plus bas}
+
+Soit
+\begin{align*}
+  N &= \mathrm{card}\, \mathrm{Aut}(C) \\
+  N_c &= \mathrm{card}\, \mathrm{Aut}(\mathrm{Fac}(C)) \\
+  R &= \mathrm{card}\, \mathrm{Rep}(C),
+\end{align*}
+on a
+\[
+  N \mid N_c \mid R
+\]
+et $C$ régulier $\Longleftrightarrow$ $N = R$ (donc $R = N_c$), dans les
+autres cas \uncertain{combinatoires} \ill{} (\uncertain{même} \ill{}
+\uncertain{dimension}). Dans ce cas on a \ldots
+
+\uncertain{une} \uncertain{décomposition}
+\[
+  N = N_c = d_0 \cdots d_{n-1}
+\]
+\note{les deux lignes « dans les autres cas \ldots\ Dans ce cas on a
+\ldots » sont très cursives ; un double trait horizontal sépare ce qui
+précède de la suite}
+
+\emph{Orientation d'un polyèdre} \add{convexe} $C$ : par définition, ce
+sera une orientation de l'espace affine $E_C$ qu'il engendre.
+\struck{\ill{} de ses \ill{} \ill{}}
+(\struck{Mais on montre que} l'ens.\ $\omega(C)$ en dépend, à isom.\
+canonique près, \uncertain{que} de $\Phi(C) = \mathrm{Fac}(C)$ (polyèdre
+combinatoire strict associé)). Donc il y a \struck{\ill{}}
+\[
+  \mathrm{Isom}_{\mathrm{ord}}\bigl(\Phi(C), \Phi(C')\bigr) \longrightarrow
+  \mathrm{Isom}\bigl(\omega(C), \omega(C')\bigr)
+\]
+\[
+  \mathrm{Aut}_{\mathrm{ord}}\bigl(\Phi(C)\bigr) \longrightarrow \lbrace
+  \pm 1 \rbrace = \mathrm{Aut}_{\mathrm{ens}}\bigl(\omega(C)\bigr) \qquad
+  (\text{hom.\ de groupes})
+\]
+Cas où $C$ admet une antipodisme : sa sign.\ est $(-1)^n$
+\note{« convexe » est ajouté au-dessus de la ligne ; le passage biffé
+« Mais on montre que », au-dessus duquel un premier ajout est lui aussi
+biffé, reste en partie illisible ; l'indice de $\mathrm{Aut}_{\mathrm{ens}}$
+est surchargé}
+
+\page{57}
+\emph{Automorphismes des $n$-cubes.}
+
+Considérons le $n$-cube de la maquette $(\mathbb{B}, \sigma)$, soit $I =
+\mathbb{B}/\sigma$. Un automorphisme correspond : un automorphisme $u$ de
+la maquette, \uncertain{induisant} un autom.\ $u_I$ de $I$, d'où une
+décomposition de $I$ en orbites
+\[
+  I = \coprod_{\alpha} I_\alpha
+\]
+($u_I$ est connu à conjugaison près quand on connaît les cardinaux des
+$I_\alpha$, rangés par ordre croissant\ldots) Soit $\mathbb{B}_\alpha$
+l'image inverse de $I_\alpha$, donc $\mathbb{B}_\alpha$ est stable par $u$,
+\struck{donc \ill{} d'orbites, il y a des \ill{}} \struck{\ill{} sur
+$I_\alpha$ \ill{} \ill{} degré \ill{}. Donc} \struck{2 cas se
+présentent :} \struck{1°) $\mathbb{B}_\alpha$ est une orbite. Soit
+$n_\alpha$}
+\note{ces lignes sont barrées ; à droite, reliée par une accolade :
+« la situation est \uncertain{$\sim$} somme des
+$(\mathbb{B}_\alpha, u_\alpha = u|\mathbb{B}_\alpha)$ sur $I_\alpha =
+\mathbb{B}_\alpha / (\sigma|\mathbb{B}_\alpha)$ »}
+
+et on est ramené à étudier chacun de ces cas.
+\note{un mot court à la fin de la ligne, surchargé, illisible}
+(Géométriquement, $C = \prod C_\alpha$, où $C_\alpha$ est le cube associé à
+$(\mathbb{B}_\alpha, \sigma|\mathbb{B}_\alpha)$, et $u = \prod u_\alpha$,
+\ldots). Cela nous ramène à étudier le cas où $u_I$ est transitif sur $I$.
+
+$\mathbb{B}$ est réunion d'orbites, dont chacune s'envoie sur $I$
+(l'unique orbite \struck{\ill{}} de $u_I$ dans $I$), \uncertain{avec} un
+degré déterminé. Donc il y a 2 cas
+
+a) Deux orbites isomorphes : $I \xrightarrow{\ \sim\ }$ par $p : \mathbb{B}
+\to I$. Alors, si \struck{\ill{}} $\varepsilon$ est l'ens.\ des 2 orbites,
+\ldots.\ on a canoniquement
+\[
+  \mathbb{B} \simeq \varepsilon \times I, \qquad u =
+  \mathrm{id}_\varepsilon \times u_I
+\]
+\note{« a) » est lu sur un signe peu net ; dans « $I \xrightarrow{\sim}$
+par $p$ », la flèche est un long trait sous lequel « par » est écrit ;
+le $\mathrm{id}$ devant $u_I$ est biffé en surcharge ; la paire
+$(\mathbb{B}_\alpha, \sigma|\mathbb{B}_\alpha)$ est lue sous une rature}
+
+\page{58}
+où $u_\varepsilon$ est l'\struck{\ill{}} permutation \ill{} identique de
+$\varepsilon$ (toutes les fibres sont canoniquement isom.\ par les
+itérés de $u$)
+
+\marginal{« \uncertain{cas tordu} »}
+b) Il y a une seule orbite dans $\mathbb{B}$. Cette situation est aussi
+uniquement déterminée (\uncertain{connaissant} \add{$I \to$} \struck{\ill{}}
+\uncertain{à isom.\ près} une fois $I$, $u_I$ donné, \uncertain{modulo}
+\uncertain{isom.} une fois $n = \mathrm{card}\, I$ donné).
+\[
+  \begin{array}{c}
+    \phantom{u b_n =}\ \overset{u b_1}{\|} \qquad\qquad
+    \overset{u^{n-1} b_n}{\|} \\
+    \begin{array}{r|cccc}
+      & b_1 & b_2 & \cdots & b_n \\
+      u b_n = & b'_1 & b'_2 & \cdots & b'_n \\
+      \hline
+      & i_1 & i_2 & \cdots & i_n
+    \end{array} \\
+    \phantom{u b_n = i_1}\ \underset{u i_1}{\|} \qquad\quad
+    \underset{u^{n-1} i_1}{\|}
+  \end{array}
+\]
+\note{tableau à deux lignes $b_1, \dots, b_n$ et $b'_1, \dots, b'_n$ (les
+deux éléments de chaque fibre) au-dessus d'un trait, et $i_1, \dots, i_n$
+au-dessous ; il note $b_2 = u b_1$, $b_n = u^{n-1} b_1$ (lu $u^{n-1}b_n$,
+surchargé), $b'_1 = u b_n$, $i_2 = u i_1$, $i_n = u^{n-1} i_1$ ; la mise en
+place des signes $=$ verticaux est approximative}
+
+\marginal{\emph{NB} Classification des \uncertain{fibrés} $\mathbb{B} \to
+\overline{I}$ ($\mathrm{card}\, I$) \uncertain{décrits} \uncertain{par}
+\uncertain{$\mathbf{Z}$-ens.}\ à \uncertain{\ill{}} finis}
+\note{note de la moitié droite de la page, séparée par un trait
+vertical ; la barre sur $I$ est surchargée}
+
+Ainsi, pour $n = \mathrm{card}\, I$ fixé, les classes d'isom.\ des
+automorphismes d'un $n$-cube (i.e.\ les classes de conjugaison d'éléments de
+\[
+  \mathrm{Aut}(C_n) = \lbrace \pm 1 \rbrace^n \cdot \mathfrak{S}_n\,)
+\]
+sont données par 2 suites d'entiers \uncertain{naturels}
+\[
+  \left.
+  \begin{array}{l}
+    \alpha_1^+ \ \cdots\ \alpha_n^+ \in \mathbf{N} \\
+    \alpha_1^- \ \cdots\ \alpha_n^- \in \mathbf{N}
+  \end{array}
+  \right| \quad
+  \begin{array}{l}
+    \alpha_i^+ \ (\alpha_i^-) = \text{nb des cycles de long.\ } i \\
+    \text{de } u_I \text{ au-dessus desquels il y a} \\
+    \text{un cycle de long.\ } i \ (\text{resp.\ } 2i)
+  \end{array}
+\]
+satisfaisant
+\[
+  \sum_i i \underbrace{(\alpha_i^+ + \alpha_i^-)}_{\alpha_i} = n
+\]
+\note{le $\alpha_i^+$ de la colonne de droite est surchargé ;
+« (resp.\ $2i$) » est lu \uncertain{« (resp.\ 2i) »} ; le symbole devant
+$i(\alpha_i^+ + \alpha_i^-)$ est un $\Sigma$ surmonté d'une barre}
+
+\emph{Étude des facettes fixes} ($\neq \emptyset$) \struck{\ill{}}
+Correspondent aux parties non vides \add{$\mathbb{B}'$} de $\mathbb{B}$ qui
+a) stables par $I$ b) sections partielles. Au-dessus de chaque $I_\alpha$
+correspondant au \uncertain{cas} \uncertain{tordu},
+\note{la page s'arrête sur une virgule ; « a) stables par $I$ » tel
+qu'écrit (on attend « par $u$ »)}
+
+\page{59}
+$\mathbb{B}'$ doit être vide, au-dessus de chaque $I_\alpha$ non tordu, il
+est vide ou une des deux orbites de $\mathbb{B}_\alpha$ sur $I_\alpha$
+(trois cas), de sorte que le nb des \add{\uncertain{telles}} facettes
+\struck{\ill{}} (y compris la facette $C$) \struck{\ill{}} est
+\[
+  3^{\sum \alpha_i^+}
+\]
+\note{devant $3^{\sum \alpha_i^+}$, une formule biffée de plusieurs
+traits, illisible}
+
+Les facettes de codimension donnée $d$ correspondent aux parties
+$\mathbb{B}'$ telles que \struck{\ill{}} $\mathrm{card}\, \mathbb{B}' = d$.
+On trouve, si $f_d$ est le nb de ces facettes
+\[
+  \boxed{\ \sum_{i=0}^n f_d\, t^d = \prod_{i=1}^n (1 + 2t^i)^{\alpha_i^+}\ }
+\]
+\note{la somme porte l'indice $i = 0$ tel qu'écrit, pour $d$}
+
+\marginal{$+, 8$ \quad $-, 8$}
+\emph{Exemple} Automorphismes de $C_3$
+« indécomposables »
+\[
+  \left\lbrace
+  \begin{array}{lll}
+    1^\circ)\ \text{non tordu :} & e_1 \to e_2 \to e_3 \to e_1 & (+) \\
+    2^\circ)\ \text{tordu} & e_1 \to e_2 \to e_3 \to -e_1 & (-)
+  \end{array}
+  \right.
+\]
+\note{les signes $(+)$ et $(-)$ sont cerclés, en marge droite ; dans la
+marge gauche, devant un trait vertical, « $+, 8$ » et « $-, 8$ » l'un
+sous l'autre}
+
+Le premier est une rotation \add{d'ordre 3} autour de la diagonale
+joignant $e_1 + e_2 + e_3$ et $-e_1 - e_2 - e_3$. Il y a (sans compter la
+facette pleine) 2 \emph{facettes} fixes, savoir les deux sommets
+précédents.
+
+Le deuxième est d'ordre 6, c'est \add{\uncertain{(mod.\ conj.)}}
+\struck{\ill{}} le produit du précédent avec l'antipodisme [\emph{NB}
+cette relation entre cas tordu et non tordu vaut chaque fois que la dim $n$
+est impair]
+\note{« (mod.\ conj.) » est écrit au-dessus de la ligne et relié par un
+trait à « le » ; « l'antipodisme » est écrit sur un premier mot surchargé}
+
+b) Autom.\ décomposables : deux cycles (dans $I$)
+\struck{$\alpha_1^+\ \alpha_1^+\ \alpha_2$\ill{}}
+\note{la page s'achève sur une formule biffée de hachures, illisible}
+
+\page{60}
+\marginal{$-, 6$ \quad $+, 6$ \quad $+, 6$ \quad $-, 6$}
+\begin{itemize}
+  \item[1°)] Non tordus tous deux \qquad $e_1 \to e_1$, $e_2 \to e_3$, $e_3
+  \to e_2$ ---
+  symétrie autour plan diagonal (\emph{ordre 2})
+  \item[2°)] 1 tordu, 2 non tordu \qquad $e_1 \to -e_1$, $e_2 \to e_3$,
+  $e_3 \to e_2$ ---
+  symétrie autour, \uncertain{composée} du préc.\ avec antip.\
+  (\emph{ordre 2})
+  \item[3°)] 1 non tordu, 2 tordu \qquad $e_1 \to e_1$, $e_2 \to e_3$,
+  $e_3 \to -e_2$ \quad (ordre 4) ---
+  rotation d'un quart de tour autour de l'axe perpendiculaire : \ill{}
+  face (\uncertain{axe}-face)
+  \item[4°)] 1 tordu, 2 tordu \qquad $e_1 \to -e_1$, $e_2 \to e_3$, $e_3
+  \to -e_2$ \quad (ordre 4) ---
+  (conjugué au précédent, suivi de \struck{\ill{}} \add{antipodisme})
+\end{itemize}
+\note{dans la marge gauche, devant un trait vertical, un signe et un
+nombre en face de chaque cas : « $-, 6$ », « $+, 6$ », « $+, 6$ »,
+« $-, 6$ », comme à la page 59 (« $+, 8$ », « $-, 8$ ») et plus bas ;
+la ligne « symétrie autour, composée du préc.\ avec antip. » est écrite
+sur une première ligne biffée et récrite, en partie illisible}
+
+c) Autom.\ décomposables à trois cycles (déterminé par $\alpha_1^+$ et
+$\alpha_1^-$, $\alpha_1^+ + \alpha_1^- = 3$)
+
+\marginal{$+, 1$ \quad $-, 3$ \quad $+, 3$ \quad $-, 1$}
+\begin{itemize}
+  \item[1°)] $\alpha_1^+ = 3$ \qquad identité
+  \item[2°)] $\alpha_1^+ = 2$ \qquad $e_1 \to e_1$, $e_2 \to e_2$, $e_3 \to
+  -e_3$ \quad symétrie par rapport à un plan \struck{\ill{}} coord.
+  \item[3°)] $\alpha_1^+ = 1$ \qquad $e_1 \to e_1$, $e_2 \to -e_2$, $e_3
+  \to -e_3$ \quad sym.\ par rapport à un axe coord.
+  \item[4°)] $\alpha_1^+ = 0$ \qquad antipodisme
+\end{itemize}
+\note{les deux « symétries » des cas 2°) et 3°) sont écrites à droite,
+reliées aux formules par un trait courbe ; « par rapport à » est une
+lecture \uncertain{incertaine}}
+
+En tout il y a 10 classes ? \quad ($10 = 2 + 4 + 4$)
+\note{le « 0 » de « 10 » est repassé sur un premier chiffre}
+
+\note{un trait horizontal barre la page ; ce qui suit est la « Prop »
+dont la page 61 tire deux corollaires}
+
+\emph{Prop} Soit $u$ un automorphisme de $C$ tel que pour tout sommet $x$,
+on ait $ux = \pm x$. Alors \add{(si $n \geqslant 3$)} $u$ est l'identité
+ou l'antipodisme.
+
+Donc
+\[
+  \mathrm{Aut}(C)/(\pm 1) \hookrightarrow
+  \mathrm{Aut}\bigl(\Phi_0(C)/\sigma\bigr)
+\]
+donc si $C$ de dim impaire
+\[
+  \mathrm{Aut}^+(C) \hookrightarrow
+  \mathrm{Aut}\bigl(\Phi_0(C)\bigr)
+\]
+\note{un trait vertical dans la marge accompagne l'énoncé ; « (si $n
+\geqslant 3$) » est écrit au-dessus de la ligne et relié à « $u$ est » ;
+$\Phi$ est son I barré ; sous la première flèche, un court mot suivi d'un
+signe $=$ doublement souligné, « l'$=$ », peu clair}
+
+\end{document}
