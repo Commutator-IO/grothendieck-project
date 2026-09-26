@@ -81,7 +81,7 @@ export const SLIDES = `<script>
       if (k < 1) {
         k = Math.max(0.5, k);
         cd.style.fontSize = (cd.dataset.fs * k) + 'px';
-        grid.setAttribute('style', cd.dataset.gs.replace(/([\d.]+)rem/g, function (_, v) { return (v * k).toFixed(2) + 'rem'; }));
+        grid.setAttribute('style', cd.dataset.gs.replace(/([\\d.]+)rem/g, function (_, v) { return (v * k).toFixed(2) + 'rem'; }));
         draw();
       }
       return;
