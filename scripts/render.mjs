@@ -1038,6 +1038,10 @@ document.addEventListener('DOMContentLoaded', function () {
     macros: TR_MACROS,
   });
   drawDiagrams();
+  // A link to #page-47 lands before KaTeX and the diagrams have grown the
+  // page, and the anchor slides away beneath it; land again once they have.
+  var target = /^#page-/.test(location.hash) && document.getElementById(decodeURIComponent(location.hash.slice(1)));
+  if (target) requestAnimationFrame(function () { target.scrollIntoView({ block: 'start', behavior: 'instant' }); });
 });
 
 /**

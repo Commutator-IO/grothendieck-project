@@ -121,6 +121,58 @@ export function TranscriptPane({
   }, [present, isCommunity, url]);
 
   /**
+   * Land on the page the fragment names — #140-1/2/p28, as the diagram and
+   * formula galleries link — once the frame has it. The frame grows as KaTeX
+   * typesets and the diagrams are drawn, so the page is aligned again a few
+   * times over the first seconds, and not once the reader has scrolled.
+   */
+  useEffect(() => {
+    if (!present || isCommunity) return;
+    const want = /\/p([\w-]+)$/.exec(location.hash)?.[1];
+    const el = frame.current;
+    if (!want || !el) return;
+    let tries = 0;
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    let moved = false;
+    const stop = () => {
+      moved = true;
+    };
+    addEventListener('wheel', stop, { passive: true });
+    addEventListener('touchmove', stop, { passive: true });
+    addEventListener('keydown', stop);
+    const started = Date.now();
+    const align = () => {
+      if (moved || Date.now() - started > 8000) return;
+      const mark = el.contentDocument?.getElementById(`page-${want}`);
+      // Instant: the site scrolls smoothly, and a smooth scroll restarted by
+      // every realignment never arrived.
+      if (!mark) return;
+      scrollTo({ top: el.getBoundingClientRect().top + scrollY + mark.getBoundingClientRect().top - 72, behavior: 'instant' });
+      // The facsimile follows the scroll; a realignment that moved nothing
+      // fired no scroll event, and left it on the page the frame first showed.
+      dispatchEvent(new Event('scroll'));
+    };
+    // Every time the frame grows — it is sized to its content — and on a
+    // slow tick besides, for the first eight seconds.
+    const grown = new ResizeObserver(align);
+    grown.observe(el);
+    const go = () => {
+      align();
+      if (tries++ < 20) timer = setTimeout(go, 400);
+    };
+    el.addEventListener('load', go);
+    if (el.contentDocument?.readyState === 'complete') go();
+    return () => {
+      grown.disconnect();
+      el.removeEventListener('load', go);
+      removeEventListener('wheel', stop);
+      removeEventListener('touchmove', stop);
+      removeEventListener('keydown', stop);
+      clearTimeout(timer);
+    };
+  }, [present, isCommunity, url]);
+
+  /**
    * Scrolling the transcript turns the facsimile's pages.
    *
    * The transcript marks each source page with `data-page="47"`. Whichever
