@@ -1,0 +1,463 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 60, batch 3 (pages 41-60).
+% Established from the facsimile archives/batches/60/batch-03.pdf (PDF page k =
+% archivists' page 40+k, no cover sheet), cut from a copy of 60.pdf fetched
+% through the project's relay
+% (https://grothendieck-relay.onrender.com/source/60.pdf); tiles in
+% archives/tiles/60/p41-p60. Per the skill transcribe-grothendieck. The folder
+% is sixty-nine pages in four batches (1-20, 21-40, 41-60, 61-69), transcribed
+% in parallel; this is the third. Batch 2 (transcripts/60/batch-02.fr.tex) was
+% read first and its notation is kept.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-09-26 — first pass, unchecked against the pages by a human.
+%
+% Pages skipped: 41, 43, 45, 47, 49, 51, 53, 55, 57, 59 — the typed versos of
+% the sheets (Bourbaki rédaction n° 392, pages 4-34 to 4-42 and 6-24, 6-25),
+% with nothing in his hand: skipped without description by the settled rule.
+%
+% Pages summarised: none. Pages transcribed: 42, 44, 46, 48, 50, 52, 54, 56,
+% 58, 60 — ten rectos in ink. His own pagination: none visible (the pencilled
+% numbers bottom left are the archivists'). No numbered formulas; his only
+% labelled run is the list of problems a), b), c) on p. 54, which p. 58
+% refers back to (« c) est ramené ... au cas de b) »). Boxed formulas are
+% kept boxed. Fast drafting: formulas carry, the connective prose of pp. 42,
+% 44, 46 and 60 much less so.
+%
+% What the batch is about. It continues the « Suite de la remarque » of
+% batch 2 (the averaging E -> E^I, written E^natural). P. 42: the image of
+% R(D/U,k) in R(D,k); cl(E)^natural defined as soon as some open U of finite
+% index in I acts unipotently; continuous representations; a struck
+% paragraph on D/I = Z. P. 44: the trace formula Tr_{E^natural}(phi) =
+% (1/N) sum over the lifts psi_alpha in D/U of phi of Tr_E(psi_alpha), via
+% the projector pi = (1/N) sum_{I/U} e_i. P. 46: geometric case: D = D_x,
+% I = I_x, D_x/I_x = Z^ (generator f_x); the virtual sheaf E_eta^natural =
+% i_!(E_U) + sum_{x in Y} j_{x*}(E_eta^{natural(x)}). Pp. 48-50: its dual,
+% D(E_eta^natural) = E_eta^natural-check(1) + sum_x j_{x*}(mu_x(E)), with
+% alpha_x(E_eta) = E_eta^{natural(x)} - E_eta(x) and mu_x(E) =
+% alpha_x(E_eta)^v - alpha_x(E_eta-check)(1); NB alpha_x is not additive,
+% mu_x is; with weight rho, (rho+1) twists. P. 52: the resulting functional
+% equation L_{E_eta}(1/qt) = prod lambda_x(E)(t) delta^natural^{-1}
+% (-qt)^{chi^natural} L_E(t), q = p^{1+rho}, lambda_x = L_{mu_x}, with a
+% bracketed doubt « delta^natural(E_eta)^2 = q^{chi^natural} ?? ». P. 54: the
+% same written as L(1/qt) = A(t) L(t), local factors A_x; NB that writing
+% lambda_x as a monomial loses additivity; « Pb » a) construct alpha_x in
+% the classical cases, b) a general (Shafarevich-)Ogg formula for
+% chi^natural, c) a formula for delta^natural (geometric vs arithmetic
+% invariants). P. 56: from the dual formula, epsilon^natural(E_eta)^2 as a
+% product of local terms, epsilon^natural = ± prod epsilon_x p^{-chi/2}.
+% P. 58: c) reduces (up to a sign) to b), i.e. to chi^natural, known via
+% Artin representations. P. 60: « cohomologie à l'infini »: R^i_infty f(F)
+% = R^i fbar_*(R i_*(F)|Y), the long exact sequence
+% R^i f_! -> R^i f_* -> R^i_infty f -> R^{i+1} f_!, and a second triangle
+% R j^! R i_! F -> R i_! F -> R i_* F on Xbar.
+%
+% Notation, as in batch 2: the averaging operation is written \natural (his
+% glyph is shaped like a lightning flash); E_\eta^{\natural(x)} for the local
+% average at x, \chi^\natural, \delta^\natural, \varepsilon^\natural; \check E
+% for the contragredient; D is both the dualising functor and (p. 42-46) the
+% decomposition group, as on the page; R without blackboard bold, as in
+% batches 1-2 (he writes an outline R on pp. 48 and 60). The letter written
+% \chi_x on pp. 52-56 is overwritten and may be \beta_x; one note each.
+%
+% Readings to check first: the prose of pp. 42 and 44; the Q_l on p. 48
+% (mu_x); the \rho read where the ink looks like \varphi on pp. 50-56; the
+% name « Chafarevitch » on p. 54; the verbs of the last paragraph of p. 60.
+
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{60}
+\batch{3}
+\pages{41}{60}
+\dating{[à partir de 1962- à partir de 1971]}
+\watermark{Édition de démonstration}
+\foldertitle{Fonctions L / Équation fonctionnelle des fonctions L (cas géométrique) : notes manuscrites (s.d.)}
+
+\begin{document}
+
+\page{42}
+D'autre part, on a
+\[
+  R(D/U, k) \longrightarrow R(D, k)
+\]
+et l'image de $R(D/U, k)$ dans $R(D, k)$ \ill{} \uncertain{précisément}
+formé\add{e} des classes de $E$ satisfaisant la condition \ill{}. Pour un
+tel $E$, on a donc une opération $\natural$ sur la \emph{classe} de $E$.
+Donc $\mathrm{cl}(E)^{\natural}$ est défini dès qu'il existe un sous-groupe
+\struck{\ill{}} $U$ d'indice fini dans $I$ tel que \struck{$D/U$} $U$ opère
+sur $E$ de façon unipotente.
+\note{la barre oblique qui suit « unipotente » est de sa main et sépare les
+deux alinéas}
+Si on prend \ill{} \ill{} de repr.\ \emph{continues} (\ill{} \ill{}
+\ill{} corps top.) on \struck{prendra} \add{obtiendra} \ill{} \ill{}
+$\mathrm{cl}(E)^{\natural}$ comme \ill{} de repr.\ \emph{continues} de
+$D/I$. Compatibilité avec ext.\ des corps de base.
+\note{« obtiendra » est écrit au-dessus du mot biffé ; le signe qui précède
+$\mathrm{cl}(E)^{\natural}$ ressemble à un $=$ surchargé}
+
+\struck{Supposons que $D/I \simeq \mathbb{Z}$, et donc toute \ill{} \ill{}
+de repr.\ \ill{} $D/I$ \ill{} déterminé par sa série form.\
+$L_{E^{\natural}}(t)$. Comme \ill{} \ill{}}
+\note{ce dernier alinéa, au bas de la page, est barré de trois grands
+traits verticaux}
+
+\page{44}
+Calculons la \emph{trace} de la représentation \ill{}, on trouve pour
+$\varphi \in D/I$
+\[
+  \operatorname{Tr}_{E^{\natural}}(\varphi) = \sum_i \operatorname{Tr}_{E_i^{\natural}}(\varphi)
+\]
+\note{après le premier membre, un symbole est noirci ; le $\varphi$ de
+« pour $\varphi \in D/I$ » surcharge une autre lettre}
+Or si \struck{\ill{}} $U$ opère trivialement sur $E$, \uncertain{opérons}
+alors \ill{} \uncertain{modules} sur $D/U$, \ill{} \ill{}
+\[
+  \ill{}\ E^{\natural} = \operatorname{Im} \pi , \qquad
+  \pi = \frac{1}{N} \sum_{i \in I/U} e_i , \qquad N = \operatorname{Card} I/U
+\]
+\note{sous $\operatorname{Im}\pi$, une lettre biffée et un $L$ indicé d'un
+mot, peut-être « régulière » ; l'indice de $\pi$ est biffé}
+donc si $g \in I/U \mapsto \varphi$ \ldots\ \ldots
+\[
+  \operatorname{Tr}_{E^{\natural}}(\varphi) = \operatorname{Tr}_E(\pi g)
+  \struck{= \frac{1}{N} \sum \operatorname{Tr}_E(\ill{})}
+\]
+\note{la suite de la ligne, une somme indicée par $g \mapsto \varphi$, est
+effacée de boucles ; à droite, un mot isolé, peut-être « d'où »}
+\[
+  \boxed{\operatorname{Tr}_{E^{\natural}}(\varphi) = \frac{1}{N}
+    \sum_{\substack{\psi_\alpha \in D/U \\ \psi_\alpha \mapsto \varphi \in D/I}}
+    \operatorname{Tr}_E \psi_\alpha}
+\]
+Comme \struck{cette} \add{les deux membres de la} formule \struck{\ill{}}
+\uncertain{linéaire} en $E$, \ill{} \ill{} \uncertain{valable} pour
+\uncertain{tout} $E$ ; il faut simplement noter que $\operatorname{Tr}_E \psi$
+\ill{} défini \struck{\ill{}} pour $\psi \in D/U$, si $U$ opère de façon
+unipotente, comme $\operatorname{Tr}_E(\psi')$ pour $\psi' \in D$ se
+\uncertain{relevant} en $\psi$ : cette valeur ne \emph{dépend pas} du
+\note{l'ajout est écrit au-dessus de la ligne, dans une boucle ; la phrase
+continue page 46}
+
+\page{46}
+choix de $\psi'$ relevant $\psi$, comme on \uncertain{voit} \ill{} :
+\ill{} \ill{} la suite de composition.
+
+Revenons au cas géométrique, on prendra pour $D$ le groupe de
+décomposition $D_x$ d'un pt $x \in X$, $I$ le groupe d'inertie, donc
+$D_x/I_x \simeq \pi_x \simeq \hat{\mathbb{Z}}$ (générateur $f_x$). On
+prendra
+\[
+  E_\eta(x) = E_\eta^{\natural(x)} \quad \text{comme module sur } \pi_x .
+\]
+\struck{On posera} Il vient alors, comme \ill{} de \ill{} faisceau virtuel
+sur $X$, on posera
+\[
+  E_\eta^{\natural} = i_{!}(E_U) + \sum_{x \in Y} j_{x*}\bigl(E_\eta^{\natural(x)}\bigr)
+\]
+où $U$ est un ouvert dense de $X$ sur lequel $E_\eta$ est non ramifié,
+$E_U$ est l'image de $E_\eta$ sur $U$, ($i : U \to X$ \add{$Y = X - U$,}
+\add{et $j : Y \to X$} désignant les immersions canoniques),
+$j_x : \operatorname{Spec} k(x) \to X$.
+\note{les deux ajouts sont écrits au-dessus de la ligne, sur des arcs}
+
+\page{48}
+Calculons \uncertain{le} $D(E_\eta^{\natural})$ :
+\[
+  \begin{aligned}
+    D(E_\eta^{\natural}) &= D\bigl(i_{!}(E_U)\bigr)
+      + \sum_{x \in Y} D\bigl(j_{x*}(E_\eta^{\natural(x)})\bigr) \\
+    &= R i_{*}(D E_U) + \sum_{x \in Y} j_{x*}\bigl(D(E_\eta^{\natural(x)})\bigr)
+  \end{aligned}
+\]
+Or la formation de $\natural$ local commute au passage au dual, d'autre
+part on a
+\[
+  D(E_U) = \check E_U(1)[2] \quad \struck{E_U(\rho+1)} , \quad \text{d'où}
+\]
+\note{le $[2]$ est surchargé et comme encadré ; l'expression qui suit est
+barrée de plusieurs traits}
+\[
+  \begin{aligned}
+    D(E_\eta^{\natural}) &= \bigl(R i_{*}(\check E_U)\bigr)(1)
+      + \sum_{x \in Y} j_{x*}\bigl(\check E_\eta^{\natural(x)}\bigr) \\
+    &= R i_{!}(\check E_U)(1) + \sum_{x \in Y} j_{x*}\Bigl[\check E_\eta^{\natural(x)}
+      + j_x^{*} R i_{*}(\check E_U)(1)\Bigr] \\
+    &= \check E_\eta^{\natural}(1) + \sum_{x \in Y} j_{x*}\bigl(\mu_x(E)\bigr)
+  \end{aligned}
+\]
+\note{dans les deux premières lignes, devant le $1$ de $(1)$, un signe est
+noirci ; au-dessus de $R i_{!}$ un mot biffé, et un $=$ isolé sur la ligne
+précédente ; devant la dernière ligne, « Il y a donc » est biffé ; l'indice
+de $\mu$ surcharge une autre lettre}
+\[
+  \mu_x(E) = \check E_\eta^{\natural(x)} \otimes \bigl(\mathbb{Q}_\ell - \mathbb{Q}_\ell(1)\bigr)
+    + j_x^{*} R i_{\eta}(\check E_\eta)(1)
+\]
+\note{devant le premier $\mathbb{Q}_\ell$, des lettres surchargées et
+biffées : la lecture $\mathbb{Q}_\ell$ est \uncertain{douteuse}}
+\struck{\ill{}} Or par \uncertain{dualité} locale, \struck{\ill{}}
+\[
+  j_x^{*}\bigl(R i_{\eta}(\check E_\eta)\bigr) = \check E_\eta(x) - \bigl(E_\eta(x)\bigr)^{\vee}(-1)
+\]
+\note{l'indice de $\check E_\eta(x)$ porte un astérisque noirci}
+
+\page{50}
+Posons
+\[
+  \boxed{\alpha_x(E_\eta) = E_\eta^{\natural(x)} - E_\eta(x)}
+\]
+Alors
+\[
+  \boxed{\mu_x(E) = \alpha_x(E_\eta)^{\vee} - \alpha_x(\check E_\eta)(1)}
+\]
+[\uncertain{donc}
+\[
+  \mu_x(\check E) = \alpha_x(\check E_\eta)^{\vee} - \alpha_x(E_\eta)(1)
+  = -\mu_x(E)^{\vee}(1) \quad \text{i.e.}
+\]
+\[
+  \struck{\mu_x(\check E) = \mu_x}
+\]
+\[
+  \left\lbrace
+  \begin{array}{l}
+    \mu_x(\check E) = -\mu_x(E)^{\vee}(1) \\
+    \mu_x(E) = -\mu_x(\check E)^{\vee}(1)
+  \end{array}
+  \right.
+\]
+]
+\note{le crochet ouvert devant « donc » se ferme loin à droite, après les
+deux formules en accolade}
+
+Donc on trouve
+\[
+  \boxed{
+  \left\lbrace
+  \begin{array}{l}
+    D(E_\eta^{\natural}) = \check E_\eta^{\natural}(1)
+      + \displaystyle\sum_{x \in X^{(0)}} j_{x*}\bigl(\mu_x(E)\bigr) \\[10pt]
+    \mu_x(E) = \alpha_x(E_\eta)^{\vee} - \alpha_x(\check E_\eta)(1) \qquad
+    \alpha_x(E_\eta) = E_\eta^{\natural(x)} - E_\eta(x)
+  \end{array}
+  \right.}
+\]
+
+\emph{NB}. $\alpha_x(E_\eta)$ n'est \emph{pas} additif en $E_\eta$,
+\emph{mais} $\mu_x(E_\eta)$ \emph{l'est}.
+\note{« mais » et « l'est » sont soulignés deux fois}
+
+Si $\check E_\eta = E_\eta(\rho)$, on trouve
+\note{ici et dans l'encadré qui suit, la lettre ressemble à un $\varphi$ ;
+on lit le $\rho$ des pages précédentes}
+\[
+  \boxed{
+  \begin{array}{l}
+    D(E_\eta^{\natural}) = E_\eta^{\natural}(\rho+1)
+      + \displaystyle\sum_{x \in X^{(0)}} j_{x*}\bigl(\mu_x(E)\bigr) \\[10pt]
+    \mu_x(E) = \alpha_x(E_\eta)^{\vee} - \alpha_x(E_\eta)(\rho+1)
+  \end{array}}
+\]
+
+\page{52}
+L'équation fonctionnelle devient alors
+\[
+  L_{\check E_\eta}(p^{-1} t) \prod_x \lambda_x(E)
+  = (-t)^{-\chi^{\natural}(E_\eta)}\, \delta^{\natural}(E_\eta)\, L_{E_\eta}(t^{-1})
+\]
+\marginal{à droite : i.e., remplaçant $t$ par $pt$}
+\note{le $\lambda_x$ surcharge une autre lettre}
+\[
+  \left\lbrace
+  \begin{array}{l}
+    L_{E_\eta}\Bigl(\dfrac{1}{pt}\Bigr) = \prod_x \lambda_x(E)\,
+      (-pt)^{\chi^{\natural}(E_\eta)}\, \delta^{\natural}(E_\eta)^{-1}\, L_{\check E_\eta}(t) \\[10pt]
+    \chi^{\natural}(E_\eta) = \chi(E_\eta^{\natural}) \qquad \text{à déterminer} \ldots \\[4pt]
+    \delta^{\natural}(E_\eta) = \delta(E_\eta^{\natural}) \qquad \text{à déterminer} \ldots \\[4pt]
+    \lambda_x(E) = L_{\mu_x(E)}(t) = L_{\alpha_x(E_\eta)^{\vee}}(t) / L_{\alpha_x(\check E_\eta)}(p^{-1} t)
+      = (-t)^{\chi_x(E_\eta)}\, \delta_x(E_\eta)\,
+      \dfrac{L_{\alpha_x(E_\eta)}(t^{-1})}{L_{\alpha_x(\check E_\eta)}(t)}
+  \end{array}
+  \right.
+\]
+\note{au premier membre, le signe de contragrédiente sur $E_\eta$ paraît
+biffé d'un point ; une accolade réunit $(-pt)^{\chi^{\natural}(E_\eta)}$ et
+$\delta^{\natural}(E_\eta)^{-1}$ ; dans la dernière ligne, l'exposant et
+l'argument de $\delta_x$ sont surchargés et noircis}
+
+Supposons $E$ de poids $\rho$, donc
+\[
+  \check E \simeq E(\rho) , \qquad L_{\check E}(t) = L_E(p^{-\rho} t) ,
+\]
+d'où il vient, en remplaçant $t$ par $p^{\rho} t$
+\[
+  \boxed{L_{E_\eta}\Bigl(\frac{1}{qt}\Bigr) = \Bigl(\prod_x \lambda_x(E)(t)\Bigr)\,
+    \delta^{\natural}(E_\eta)^{-1}\, (-qt)^{\chi^{\natural}(E_\eta)}\, L_E(t)}
+\]
+\note{devant $q$, dans $(-qt)$, une lettre est biffée}
+\[
+  \Bigl[\delta^{\natural}(E_\eta)^{-1} q^{\chi^{\natural}(E_\eta)}
+    \overset{?}{=} \struck{\varepsilon(E)}\ \delta^{\natural}(E_\eta)
+    \quad \text{i.e.} \quad
+    \delta^{\natural}(E_\eta)^2 = q^{\chi^{\natural}(E_\eta)} \ ??\Bigr]
+    \longleftarrow ??
+\]
+\note{le point d'interrogation au-dessus du $=$ est entouré ; devant $q$, un
+symbole est noirci}
+\marginal{à gauche, biffés : $q = p^{\ill{}}$ et $\lambda_x$}
+\[
+  \left\lbrace
+  \begin{array}{l}
+    q = p^{1+\rho} \\[4pt]
+    \lambda_x(E_\eta) = L_{\mu_x(E_\eta)}(t)
+      = (-t)^{-\chi_x(E_\eta)}\, \delta_x(E_\eta)\,
+      \dfrac{L_{\alpha_x(E_\eta)}(t^{-1})}{L_{\alpha_x(E_\eta)}(p^{-\rho} t)} \\[10pt]
+    \chi_x(E_\eta) = \chi\bigl(\alpha_x(E_\eta)\bigr) \\[4pt]
+    \delta_x(E_\eta) = \delta\bigl(\alpha_x(E_\eta)\bigr)
+  \end{array}
+  \right.
+\]
+\marginal{à droite de $\lambda_x$ :
+$\mu_x(E_\eta) = \alpha_x(E_\eta)^{\vee} - \alpha_x(E_\eta)(\rho+1)$}
+\note{un premier membre de droite de $\lambda_x(E_\eta)$ est lourdement
+biffé ; la lettre notée ici $\chi_x$, dans l'exposant et dans la définition,
+est surchargée et pourrait être un $\beta_x$}
+
+\page{54}
+\[
+  L_{E_\eta}\Bigl(\frac{1}{qt}\Bigr) = A(t)\, L_{E_\eta}(t)
+\]
+\[
+  A(t) = \prod_x \frac{L_{\alpha_x(E_\eta)}(t^{-1})}{L_{\alpha_x(E_\eta)}(p^{-\rho} t)}\;
+    (-t)^{\chi^{\natural}(E_\eta) - \sum_x \chi_x(E_\eta)}\;
+    \frac{q^{\chi^{\natural}(E_\eta)}}{\delta^{\natural}(E_\eta) \prod_x \delta_x(E_\eta)^{-1}}
+\]
+\note{la fraction sous le produit est entourée ; un trait la relie à
+« $= A_x(t^{-1})^{-1}$ », écrit au-dessous}
+\[
+  L_{\alpha_x(E_\eta)}\Bigl(\frac{1}{p^{\rho} t}\Bigr) = A_x(t)\, L_{\alpha_x(E_\eta)}(t)
+\]
+\note{au-dessous, un début de ligne, $L_{\alpha_x(E_\eta)} \ldots
+L_{\alpha_x(E_\eta)}($, est biffé}
+
+N.B. Ayant écrit $\lambda_x(E_\eta)(t)$ comme un \uncertain{monôme}, on en
+perd le \emph{caractère additif}, il vaut sans doute mieux ne pas faire ce
+\uncertain{changement} \ldots
+\note{l'argument de $\lambda_x$ surcharge une première écriture}
+
+\emph{Pb} a) Dans les cas géométriques classiques, construire les
+$\alpha_x(E_\eta)$ qui déterminent les $\mu_x$, donc les
+$\lambda_x(E_\eta)(t)$. Déterminer en particulier $\chi_x(E_\eta)$,
+$\delta_x(E_\eta)$, les valeurs absolues des val.\ propres de Frobenius.
+
+b) Donner une formule générale (\uncertain{Chafarevitch}--Ogg) pour
+$\chi^{\natural}(E_\eta)$
+
+c) Donner une formule pour $\delta^{\natural}(E_\eta)$
+\marginal{des flèches relient $\chi_x(E_\eta)$ et $\chi^{\natural}(E_\eta)$
+à « invariant géom. », $\delta_x(E_\eta)$ et $\delta^{\natural}(E_\eta)$ à
+« invariant arithm. », ces deux mots soulignés deux fois}
+
+\page{56}
+Sur la formule virtuelle donnant $D(E_\eta^{\natural})$, on lit
+\[
+  \delta^{\natural}(E_\eta)^{-1} = \delta^{\natural}(E_\eta)\,
+    p^{-\chi^{\natural}(E)(\rho+1)} \prod_x \delta_x\bigl(\mu_x(E)\bigr)
+\]
+Or
+\[
+  \begin{aligned}
+    \delta\bigl(\mu_x(E)\bigr) &= \delta\bigl(\alpha_x(E_\eta)\bigr)^{-1}
+      \Bigl[\delta\bigl(\alpha_x(E_\eta)\bigr)\, p^{-\chi_x(E_\eta)(\rho+1)}\Bigr]^{-1} \\
+    &= \delta_x(E_\eta)^{-2}\, q^{+\chi_x(E_\eta)}
+  \end{aligned}
+\]
+d'où
+\[
+  \Bigl\lbrace \prod_x \frac{\delta_x(E_\eta)^2}{q^{\chi_x(E_\eta)}} \Bigr\rbrace
+  = \delta^{\natural}(E_\eta)^2\, q^{\sum \chi_x(E_\eta)}
+\]
+\note{l'accolade ouvrante est surchargée}
+\[
+  \left\lbrace
+  \begin{array}{l}
+    \dfrac{\delta^{\natural}(E_\eta)^2}{q^{\chi^{\natural}(E)}}
+      = \displaystyle\prod_x \frac{\delta_x(E_\eta)^2}{q^{\chi_x(E_\eta)}} \\[14pt]
+    \qquad \parallel \\[2pt]
+    \varepsilon^{\natural}(E_\eta)^2
+      = \displaystyle\prod_x \frac{\delta_x(E_\eta)^2}{q^{\chi_x(E_\eta)}}
+  \end{array}
+  \right.
+\]
+\note{après $\delta^{\natural}(E_\eta)^2$, un premier « $= q^{\chi^{\natural}(E)}$ »
+est biffé d'un trait oblique et remplacé par le dénominateur ; à droite de
+la première ligne, un mot, peut-être « on aura », ne se lit pas sûrement}
+\[
+  \varepsilon^{\natural}(E_\eta)
+  = \pm \prod_x \frac{\delta_x(E_\eta)}{q^{\chi_x(E_\eta)/2}}
+  = \Bigl(\prod_x \frac{\delta_x(E_\eta)}{p^{\rho\chi_x(E_\eta)/2}}\Bigr) \frac{1}{p^{\chi/2}}
+\]
+\[
+  \varepsilon^{\natural}(E_\eta) = \frac{\delta^{\natural}(E_\eta)}{q^{\chi^{\natural}(E_\eta)/2}}
+  \qquad\qquad
+  \chi = \sum_x \chi_x(E_\eta)
+\]
+\note{le signe $\parallel$ vertical, sous $\varepsilon^{\natural}(E_\eta)$,
+renvoie à sa définition ; deux flèches mènent de $\chi = \sum_x \chi_x(E_\eta)$
+aux exposants $\chi/2$}
+\[
+  \varepsilon^{\natural}(E_\eta) = \pm \Bigl(\prod_x \varepsilon_x(E_\eta)\Bigr) p^{-\chi/2}
+\]
+\note{la lettre notée $\chi_x$ sur cette page, comme page 52, est
+surchargée à plusieurs endroits et pourrait être un $\beta_x$}
+
+\page{58}
+On voit donc que c) est ramené (\emph{moyennant un signe}) au cas de b),
+donc à déterminer $\chi^{\natural}(E_\eta)$. Or cette détermination est
+faite, en utilisant les représentations d'Artin \ldots
+\note{« moyennant un signe » est souligné ; le reste de la page est
+blanc}
+
+\page{60}
+Cohomologie à l'infini :
+\note{la fin de cette ligne porte quelques points de suspension, à droite}
+
+$R^{i}_{\infty} f(F)$ pour $f$ compactifiable en $\bar f$.
+On \uncertain{envisage} la suite exacte
+
+\begin{tikzcd}
+R i_{!}(F) \arrow[r] & R i_{*}(F) \arrow[r] & R i_{*}(F)|Y \arrow[ll, bend right=20]
+\end{tikzcd}
+
+\note{la flèche courbe, du troisième terme vers le premier, est le
+morphisme de degré $+1$ du triangle ; l'indice du premier terme est
+surchargé ($!$ sur $*$)}
+d'où en \uncertain{appliquant} $R \bar f_{*}$ une suite exacte
+\[
+  \boxed{\cdots \to R^{i} f_{!}(F) \to R^{i} f_{*}(F) \to R^{i}_{\infty} f(F)
+    \to R^{i+1} f_{!}(F) \to \cdots}
+\]
+en posant
+\[
+  R^{i}_{\infty} f(F) = R^{i} \bar f_{*}\bigl(R i_{*}(F)|Y\bigr)
+\]
+On peut aussi considérer la suite exacte de \uncertain{dualisation}
+\note{ce dernier mot est écrit au-dessus de la ligne, sous « On peut »}
+\uncertain{pour} $R i_{!}(F)$ sur $\bar X$, et l'ouvert $X$ et
+$Y = \bar X - X$, \struck{\ill{}} \uncertain{\ill{}} \ill{} :
+\note{sous « $R i_{!}(F)$ », un $R i_{*}(F)$ est biffé ; le $X$ de « l'ouvert
+$X$ » surcharge une autre lettre ; la fin de la ligne est surchargée et se
+lit mal}
+
+\begin{tikzcd}
+R j^{!}\bigl(R i_{!}(F)\bigr) \arrow[r] & R i_{!}(F) \arrow[r] & R i_{*}(F) \arrow[ll, bend right=20]
+\end{tikzcd}
+
+\note{au-dessous, une ligne commencée
+« $R^{i} \ldots R^{i} f_{!}(F) \to R^{i} f_{*}(F) \to$ » est biffée d'un
+long trait}
+et on \uncertain{identifie} d'une \uncertain{manière} \uncertain{précise},
+$R i_{*}(F)|Y$ à \uncertain{décalé} près \uncertain{par}
+$R j^{!} R i_{!}(F)$ \ldots
+\note{la page s'arrête sur un tiret}
+
+\end{document}
