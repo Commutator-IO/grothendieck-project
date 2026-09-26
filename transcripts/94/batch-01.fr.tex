@@ -1,0 +1,829 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 94, batch 1 (pages 1-20).
+% Established from the facsimile archives/batches/94/batch-01.pdf (a copy of
+% 94.pdf fetched through the project's relay,
+% https://grothendieck-relay.onrender.com/source/94.pdf; PDF page k =
+% archivists' page k, no cover sheet), per the skill transcribe-grothendieck.
+% The folder is twenty-three pages; this is the first of two batches (pages
+% 21-23 are batch 2, transcribed separately; it was read before this file was
+% finished and its notation is followed: f_*, V(F), \underline{\mathrm{Hom}},
+% \underline{\mathrm{Ext}}, statement numbers running on to 18-21).
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-09-26 — first pass, unchecked against the pages by a human.
+%
+% Pages skipped: 11 and 13, typed leaves unrelated to the notes and with
+% nothing in his hand (a typescript chapter on valued fields, and a typed
+% report on a redaction). Page 1 is a brown cover inscribed in ink, top right;
+% it takes no \page marker, its words become the section heading, with a \note.
+%
+% Pages summarised: none. No typed leaf carries his ink.
+%
+% Pages transcribed from his hand: 2-10, 12, 14-20. Blue ink, fast drafting;
+% pp. 10 and 12 on darker (tan) paper. Formulas and numbered statements carry;
+% part of the connecting prose does not (pp. 6, 7, 17 margin, 19 end are the
+% worst).
+%
+% His pagination: none on the leaves. His numbering of statements runs
+% through the batch and on into batch 2: Lemmes 1-2, Prop. 3-4, Lemme 5,
+% Remarque 5 bis, Lemme 6, "Cor. Main" 7, Lemme 8, "Cor. Main" 9, 10, a
+% cancelled 11 (p. 12) and a new 11 (p. 14), Théorème 12, Remarque 13,
+% Théorème 14, Lemmes 15, 16, 17; batch 2 carries 18-21.
+%
+% What the batch is about. One run, not two. The cover (p. 1) reads
+% « Construction des Modules cohérents par leurs foncteurs représentatifs.
+% Application à la représentabilité d'un foncteur ... », and p. 2 is headed
+% « Construction de faisceaux de modules », the second half of the folder
+% title. Nothing on these pages is headed « Dualité des modules »; the duality
+% material (a « faisceau fondamental » Omega on a Cohen-Macaulay scheme,
+% injective hulls, pp. 8-14) sits inside the same numbered run as a tool, so
+% the title's first part may name another leaf or the archivists' reading of
+% this one. Despite the inventory group « Géométrie et topologie combinatoire »,
+% this is algebraic geometry: representability of functors
+% F : Mod(A) -> (Ens) by finitely generated modules. Lemma 1: descent along a
+% faithfully flat B. Lemma 2 / Prop. 3: A noetherian, criteria (left
+% exactness, commutation with filtered colimits, completion condition, F_f and
+% F_{A/f^n} representable); Prop. 4 for A local via injective hulls; Lemma 5:
+% pro-representability with stationary localisations; Remarque 5 bis:
+% constructibility of p -> rank F(k(p)) instead. Lemma 6, Cor. 7, Lemmas 8-11:
+% generic Tor-vanishing against regular sequences, and Hom into a dualising
+% Omega commuting with reduction mod a system of parameters, used to show a
+% pro-system is stationary. Théorème 12 (A noetherian, quotient of a regular
+% ring): F representable by a module of finite type iff (ii) left exact, (i)
+% filtered colimits, (iii) a/b completion conditions, (iv) finiteness, (v)
+% constructibility, (vi) base change of F(Omega) mod parameter systems.
+% Théorème 14: for f : X -> S proper of finite presentation, F, G of finite
+% presentation, G S-flat, there is P of finite presentation on S with
+% Hom(P, M) = f_* Hom(F, G (x) M), compatible with base change; proof by
+% th. 12, with Lemmas 15-17 (generic base change for Ext^i, Tor, R^j f_*) —
+% the P that batch 2's Théorème 19 uses.
+%
+% Readings to check first: the cover's second paragraph (p. 1); the end of
+% p. 5 and the proof on p. 6; the middle of p. 7; the letter read Q on p. 9
+% (probably Omega); the marginal NB of p. 17; the cancelled « condition (v) »
+% block on p. 17; the end of p. 19. Batch 2's references to « th. 12 » and to
+% its condition (ii) as left exactness agree with p. 15.
+%
+% Apparatus count: 85 \ill{}, 49 \uncertain{}.
+
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{94}
+\batch{1}
+\pages{1}{20}
+\dating{[à partir de 1965]}
+\watermark{Édition de démonstration}
+\foldertitle{Dualité des modules / Construction de faisceaux de modules : notes manuscrites (s.d.)}
+
+\begin{document}
+
+\section*{Construction des Modules cohérents par leurs foncteurs représentatifs}
+\note{titre repris de la couverture (page 1), de sa main, à l'encre, dans
+l'angle supérieur droit d'un feuillet brun par ailleurs vierge : « Construction
+des Modules cohérents \struck{et de schémas finis sur d'autres par descente}
+par leurs foncteurs représentatifs », puis, sous un trait : « Application à la
+représentabilité d'un foncteur $G/S$ \ill{} \ill{} d'une section, à la
+définition des invariants $\Omega^{1}(y)$\,\ldots ». Le $G$ est suivi d'une
+lettre biffée ; « $\Omega^{1}(y)$ » est une lecture incertaine.}
+
+\page{2}
+\note{la page porte en tête, soulignée, « Construction de faisceaux de
+modules » — la seconde moitié du titre du dossier.}
+
+\subsection*{Construction de faisceaux de modules}
+
+$A$ anneau \struck{noeth.}
+
+$F \colon \mathrm{Mod}(A) \to (\mathrm{Ens})$ foncteur.
+
+Pour toute algèbre $B$ sur $A$, on en conclut un foncteur
+\[
+  F_B \colon \mathrm{Mod}(B) \to (\mathrm{Ens})
+\]
+(composé de la restriction $\mathrm{Mod}(B) \to \mathrm{Mod}(A)$ et de $F$).
+Si $F$ repr.\ par $P$, $F_B$ l'est par $P_B$.
+\note{le composé est dessiné : une flèche oblique « restr. » de
+$\mathrm{Mod}(B)$ vers $\mathrm{Mod}(A)$, puis une flèche montante vers
+$(\mathrm{Ens})$.}
+
+Si $f \in A$, on pose $F_f = $ \uncertain{le} \uncertain{nom} de $F_{A_f}$.
+
+\emph{Lemme 1.} \struck{Supposons $F$ exact à gauche, et soit} Soit $B$ une
+$A$-algèbre fid.\ plate. Alors
+\[
+  F \text{ représentable (resp.\ par un $A$-module de type fini, de prés.\ finie)}
+\]
+\[
+  \Updownarrow
+\]
+\[
+  F \text{ exact à gauche, et } F_B \text{ représentable (resp.\ par un $B$-module de type fini, de prés.\ finie).}
+\]
+\note{« Soit $B$ une $A$-algèbre fid.\ plate » est écrit au-dessus de la
+ligne biffée ; « $A$- » et « $B$- » devant « module » sont ajoutés en
+interligne.}
+
+\emph{Lemme 2.} Soit $f \in A$, supposons $A$ noeth. Alors $F$ repr.\
+\struck{\ill{}} par \struck{un} $A$-module de t.f.\ ssi il satisfait :
+\begin{itemize}
+  \item[(i)] $F$ exact à gauche ;
+  \item[(ii)] $F(\widehat{M}) \xrightarrow{\ \sim\ } \varprojlim F(M/f^{n}M)$
+    si $M$ un $A$-module de t.f.\ \struck{($\widehat{M} = \varprojlim M/f^{n}M$)}
+    ($\widehat{A} = \varprojlim A/f^{n}A$) ;
+  \item[(iii)] $F$ commute aux $\varinjlim$ filtrantes ;
+  \item[(iv)] $F_f$ repr.\ \struck{par $A$} ;
+  \item[(v)] $\forall n$, $F_{A/f^{n}A}$ représentable.
+\end{itemize}
+\note{« Lemme 2 » est écrit au-dessus d'un « Corollaire 2 » biffé. Dans (ii),
+le chapeau est sur le $M$ de $F(\widehat{M})$ ; la parenthèse biffée et la
+précision « de t.f. » sont en interligne, la définition de $\widehat{A}$
+ajoutée à droite et reliée par un trait.}
+
+Nécessité claire, (iii) exprimant le fait que \struck{le} module $P$ qui
+représente $F$ est de t.f.\ (donc de prés.\ finie).
+
+\page{3}
+\emph{Suffisance.} \uncertain{Grâce} à (ii) et Lemme 1 on est ramené à voir que
+$F_{\widehat{A}}$ est représentable, car posant $B = \widehat{A} \times A_f$,
+$F_B$ sera alors représentable en vertu de (iv), donc $F$ l'est ; le $P$ le
+représentant sera alors de t.f.\ grâce à (iii).
+\note{les numéros de conditions de cette page sont entourés ; le premier est
+lu (ii) sans certitude.}
+
+Pour tout $n$, $F_{A/f^{n+1}A}$ est représentable, par (v), par un module
+$P_n$ sur $A_n$ \struck{\ill{}} de type fini grâce à (iii). Soit
+$\widehat{P} = \varprojlim P_n$, qui est de t.f.\ sur $\widehat{A}$ (N.B.\ les
+$P_n$ « se recollent »). \struck{\ill{}} Utilisant (ii), on trouve que
+$\widehat{P}$ représente $F_{\widehat{A}}$ sur la catégorie des $A$-modules de
+t.f., et utilisant (iii), on trouve que $\widehat{P}$ représente
+$F_{\widehat{A}}$ partout.
+\note{« (v) », entouré, est ajouté au bout de la ligne ; $A_n$, en interligne
+sous l'indice $A/f^{n+1}A$ qu'il souligne, abrège cet anneau.}
+
+\emph{Proposition 3.} $A$ noeth. Pour que $F$ soit repr.\ par un module de
+t.f., il faut et il suffit que $F$ satisfasse aux conditions suivantes :
+\begin{itemize}
+  \item[(i)] $F$ exact à g. ;
+  \item[(ii)] $F$ commute aux $\varinjlim$ \uncertain{monomorphes} filtrantes ;
+  \item[(iv)] Pour tout quotient $B$ de $A$, \struck{et tout $f \in B$,} il
+    existe un $f \in B$, non nilpotent, tel que $F_{B_f}$ soit représentable ;
+  \item[(iii)] Pour tout $f \in A$, et tout module de type fini $M$ sur
+    $\widehat{A}$ ($\widehat{A} = \varprojlim A/f^{n+1}A$),
+    \[
+      F(M) \xrightarrow{\ \sim\ } \varprojlim F(M/f^{n+1}M)
+    \]
+    \struck{où $\widehat{M} = \varprojlim M/f^{n+1}M$.}
+\end{itemize}
+\note{la condition numérotée (iv), d'abord écrite (iii), précède sur la page
+la condition (iii) ; une flèche en marge ramène (iii) au-dessus d'elle. Dans
+(iii), le $F(M)$ est écrit en surcharge d'un $F(\widehat{M})$. Le mot sous
+« $\varinjlim$ » en (ii) est ajouté en interligne.}
+
+\page{4}
+Nécessité claire. Pour la suffisance, on note que les conditions sont stables
+par passage à une algèbre quotient $B$. Par récurrence noeth., on peut donc
+supposer que pour tout tel quotient $B = A/J$, avec $J \neq 0$, $F_B$ est
+représentable (par un module de t.f.). On peut supposer aussi $A \neq 0$. Il
+existe par (iv) un $f \in A$ non nilpotent, tel que $F_f$ soit repr. D'autre
+part, l'hyp.\ de récurrence noeth., prenant pour tout $n$, où
+$f^{n+1} \neq 0$, montre que $F_{A/f^{n+1}A}$ est repr. On peut donc appliquer
+le Lemme 2, qui donne la conclusion.
+\note{le « (iv) » est entouré ; l'indice de $F_f$ est repassé.}
+
+En pratique, la condition (iv) est parfois difficile à vérifier. On va donner
+d'autres conditions.
+\note{un double trait horizontal sépare ce paragraphe de ce qui précède.}
+
+\emph{Proposition 4.} $A$ local noeth. Pour que $F$ soit repr.\ par module de
+t.f., il faut et il suffit que $F$ satisfasse les conditions
+\begin{itemize}
+  \item[(i)] $F$ exact à gauche ;
+  \item[(ii)] $F$ commute aux $\varinjlim$ ;
+  \item[(iii)] Pour tout $\widehat{A}$-module de t.f.\ $M$,
+    \[
+      F(\widehat{M}) \xrightarrow{\ \sim\ } \varprojlim F(M/\mathfrak{m}^{n+1}M),
+    \]
+    et
+  \item[(iv)] $F(\widehat{M})$ est de t.f.\ sur $\widehat{A}$ (il suffit
+    \ill{} si $M$ est \uncertain{fini} sur $A$).
+\end{itemize}
+Nécessité claire. Pour suffisance, grâce au Lemme 1 et condition (ii), on
+peut supposer $A$ complet.
+\note{dans (iii) et (iv), le chapeau de $\widehat{M}$ est ajouté après coup ;
+un premier mot de (iv) est biffé.}
+
+\page{5}
+En vertu de (ii), sa restriction aux modules finis sur $A_n = A/\mathfrak{m}^{n+1}$
+\struck{\ill{}} est pro-représentable, \struck{par $(P_n)$, $P_n$ module sur
+$A_n$,} et en vertu de la condition (iv), testée avec l'injectif
+indécomposable $I_n$ de $A_n$, on trouve qu'il est représentable,
+\struck{\ill{} par $P_n$,} par un module $P_n$ de t.f.\ sur $A_n$. Les $P_n$
+se recollent, soit $P = \varprojlim P_n$, qui est un $A$-module de t.f. On
+conclut de (iii) que $P$ représente $F$ sur les modules de t.f., et en vertu
+de (ii) sur tous les modules, cqfd.
+\note{« finis sur $A_n = A/\mathfrak{m}^{n+1}$ » est ajouté au-dessus de la
+ligne, en remplacement d'un mot biffé ; l'indice de $\mathfrak{m}$ est lu sans
+certitude. Le « (ii) » de la dernière phrase est repassé et pourrait être un
+autre numéro.}
+
+\emph{Lemme 5.} $A$ noeth. \struck{Conditions équivalentes.}
+Supposons qu'il \uncertain{satisfait} les conditions
+\begin{itemize}
+  \item[(i)] $F$ exact à g. ;
+  \item[(ii)] $F$ commute aux $\varinjlim$ filtrantes ;
+  \item[(iii)] $\forall\, \mathfrak{p} \in \operatorname{Spec} A$, et tout $M$
+    de t.f.\ \uncertain{sur} $\widehat{A}_{\mathfrak{p}}$, on a
+    \[
+      F(M) \xrightarrow{\ \sim\ } \varprojlim F(M/\mathfrak{m}_{\mathfrak{p}}^{n+1}M) ;
+    \]
+  \item[(iv)] $\forall$ module de \struck{type fini} longueur finie $M$ sur
+    $A_{\mathfrak{p}}$, $F(M)$ est un $A_{\mathfrak{p}}$-module de t.f. ;
+  \item[(v)] $\forall$ idéal premier $\mathfrak{p}$, $\exists\, f \in
+    A/\mathfrak{p}$ \uncertain{non nul} tel que $F_{(A/\mathfrak{p})_f}$ soit
+    représentable.
+\end{itemize}
+Alors $F$ pro-représentable par un syst.\ projectif strict $(P_i)$ de modules
+de t.f., tel que pour tout $\mathfrak{p} \in \operatorname{Spec} A$, le syst.\
+des $(P_i)_{\mathfrak{p}}$ soit stationnaire (i.e.\ $F_{\mathfrak{p}}$ est
+représentable par un module de t.f.\ sur $A_{\mathfrak{p}}$).
+\note{sur la page, la conclusion (« $F$ pro-représentable \ldots ») est écrite
+d'abord, sous « Lemme 5 » (qui surcharge « Proposition », biffé), et un long
+trait courbe la renvoie après « Alors », qui suit (v) ; la phrase introduisant
+les conditions (« Supposons qu'il \ldots\ les conditions ») est écrite au-dessus
+d'un « 2) \ill{} » biffé. Le « $(P_i)$ » est ajouté au-dessus de la ligne ;
+la parenthèse « (i.e.\ \ldots) » est dans la marge de droite. En (i), le mot
+« exact » est repassé. En (v), les « $A/\mathfrak{p}$ » sont lus sur des
+« $A_{\mathfrak{p}}$ » surchargés.}
+
+\emph{Dém.} Pour tout $\mathfrak{p} \in S = \operatorname{Spec} A$, la prop.~4
+indique que $F_{\mathfrak{p}}$ est représentable par $P_{\mathfrak{p}}$ de
+t.f.\ sur $A_{\mathfrak{p}}$ (grâce à (iii) à (iv)). Les $P_{\mathfrak{p}}$
+sont \ill{} par
+
+\page{6}
+généralisation. Pour \uncertain{prouver} la \uncertain{pro}-repr., il suffit
+de prouver (\uncertain{compte} tenu de (i) et (ii)) que pour tout
+$\alpha \in F(M)$, $M$ de t.f.\ sur $A$, il existe un « \uncertain{module} de
+définition $N$ », i.e.\ un plus petit sous-module $N$ de $M$ tel que
+$\alpha \in \operatorname{Im}(F(N) \to F(M))$. Or on a pour tout
+$\mathfrak{p} \in S$ un $N_{\mathfrak{p}} \subset M_{\mathfrak{p}}$
+($= \operatorname{Im}(\alpha_{\mathfrak{p}} \colon P_{\mathfrak{p}} \to
+M_{\mathfrak{p}})$). \struck{Soit $U$} Il suffit de vérifier que le système des
+$N_{\mathfrak{p}}$ provient d'un sous-module $N$ de $M$ (on sait alors aisément
+qu'il convient). Soit $U \subset S$ \uncertain{le} plus grand \ill{} sur
+lequel se \uncertain{recolle}, soit $\underline{N}_U \subset \widetilde{M}|U$ ;
+\struck{\ill{}} si on avait $U \neq S$, soit $x \in S - U$ un pt maximal de
+$S - U$. Soit $S' = \operatorname{Spec} \mathcal{O}_{S,x}$,
+\struck{Il existe un voisinage \ill{}} $U' = U \cap S'$, \struck{alors}
+$N_{S'} = \widetilde{N}_x$ (N.B.\ $x = \mathfrak{p}$ !), alors
+$\widetilde{N}_x | U' = \underline{N}_U | U'$, donc $\exists$ voisinage
+\uncertain{ouvert} $V$ de $x$, \struck{\ill{}} et un
+$\underline{N}' \subset \widetilde{M}|V$, tel que
+$\underline{N}'_x = N_x \subset M_x$ et
+$\underline{N}' | V \cap U = \underline{N}_U | V$, i.e.
+\[
+  \begin{cases}
+    \underline{N}'_x = N_x \subset M_x \\
+    \underline{N}'_s = N_s \subset M_s & \text{si } s \in U \cap V.
+  \end{cases}
+\]
+\note{« et (ii) », au-dessus de la première ligne, est ajouté en interligne ;
+les deux numéros sont entourés. « $\underline{N}_U \subset \widetilde{M}|U$ »
+est ajouté au-dessus de la ligne ; le mot biffé sous « on avait » est lu
+\uncertain{complètement}. « (N.B.\ $x = \mathfrak{p}$ !) » : le
+« $x = \mathfrak{p}$ » est entouré. La première ligne du système,
+« $\underline{N}'_x = N_x \subset M_x$ », est aussi écrite, un peu plus haut,
+avec un point sur le $M$.}
+
+Prenant $V$ ($= \operatorname{Spec} A_f$) assez petit, on peut supposer que
+\struck{la condition (v)} $F_{(A/\mathfrak{p})_f}$ est représentable
+(\uncertain{grâce} à la condition (v)), \struck{\ill{} Il s'ensuit que}
+\uncertain{et} on veut tout de suite \ill{} (quitte à \ill{} encore $V$) que,
+$\alpha_V \in F(\underline{N}')$ donc \ill{} $N_s \subset \underline{N}'_s$
+pour tout $s \in V$ ; \uncertain{or} \ill{} $\underline{N}'_s$ \ill{}
+l'image de $N_s$ dans $M_s$ \struck{est égal} est tout \uncertain{entier}
+$\ldots\ \mathfrak{p}$, donc est tout pour $s \in V(\mathfrak{p})$ par
+Nakayama. Cela \uncertain{suffit}.
+\marginal{$\longrightarrow$ Donc on est ramené au cas $\underline{N}' = M$
+\struck{\ill{}}}
+\note{la fin de la page est très remaniée : « $= \operatorname{Spec} A_f$ »
+est au-dessus du $V$, « (v) \ill{} » en interligne relié à « la condition » ;
+à droite, un cadre porte « $\alpha_V \in F(\underline{N}')$ donc
+$N_s \subset \underline{N}'_s$ \ill{} pour tout $s \in V$ ». L'ordre de
+lecture des fragments est incertain ; la note marginale, à gauche, est reliée
+au passage par une flèche.}
+
+\page{7}
+\emph{Remarque 5 bis.} Avec les notations du lemme~5, et en présence des
+conditions (i) à (iv), la condition (v) équivaut à la condition suivante, qui
+se prête mieux à une vérification directe :
+\begin{itemize}
+  \item[(v bis)] La fonction $\mathfrak{p} \mapsto
+    \operatorname{rang}_{k(\mathfrak{p})} F(k(\mathfrak{p}))$ sur
+    $\operatorname{Spec} A$ est constructible.
+\end{itemize}
+Il faut cependant supposer que $A$ satisfait à la condition : pour tout
+quotient intègre $B$ de $A$, $\mathrm{Nor}(B)$ contient un ouvert non vide.
+\note{cette dernière phrase est ajoutée en interligne, serrée, et reliée par un
+trait courbe ; « $\mathrm{Nor}(B)$ » est une lecture incertaine (lieu normal ?).}
+
+Le fait que (v) $\Rightarrow$ (v bis) est trivial.
+
+En sens inverse, on utilise le fait que $F$ définit un « syst.\ local » de
+modules $P_{\mathfrak{p}}$. Dans le cas $A$ intègre, \struck{\ill{}} si le
+rang des $P_{\mathfrak{p}} \otimes k(\mathfrak{p})$ est constant et égal à $n$
+(dans un ouvert non vide), \struck{\ill{}} on peut pour
+$\mathfrak{p} \in U$ \uncertain{\ill{}} \ill{} les $P_{\mathfrak{p}}$
+($\mathfrak{p} \in U$) sont libres de rang $n$. D'ailleurs, \struck{\ill{}}
+comme $F$ commute aux $\varinjlim$, \uncertain{on voit} qu'on peut \ill{} un
+\ill{} $\subset N$, \uncertain{avec} \ill{} que ces $P_{\mathfrak{p}}$ soient
+\uncertain{tous} $\subset N$, avec $N$ \ill{} \ill{} $M$. Utilisant le fait
+que \struck{\ill{}} $F(N)$ est de type fini, on trouve aisément que pour tous
+les $\mathfrak{p} \in U$ de \uncertain{codimension} 1, sauf un nombre fini, on
+a $P_{\mathfrak{p}} = N_{\mathfrak{p}}$. Quitte à restreindre $U$, on peut
+supposer que ceci est vrai pour tous les $\mathfrak{p}$ de codim.\ 1 de $U$.
+Mais alors, si on prend $U$ \uncertain{normal}, on conclut que
+$P_{\mathfrak{p}} = N_{\mathfrak{p}}$ pour \emph{tout} $\mathfrak{p} \in U$,
+\struck{donc} d'où facilement que $N$ représente $F|U$.
+\note{la page est d'une lecture difficile au milieu : l'ordre des phrases
+autour de « D'ailleurs » est incertain. « sauf un nombre fini » est souligné
+d'un trait qui le relie à la ligne suivante.}
+
+\page{8}
+\emph{Lemme 6.} Soient $S$ schéma loc.\ noeth., $F$ \struck{\ill{}} coh.\ sur $S$.
+
+a) Soit $J$ le nilradical de $\mathcal{O}_S$ ($S_0 = S_{\mathrm{red}}$). Il
+existe un ouvert dense $U$ de $S$ tel que \struck{\ill{}}
+$\mathrm{gr}_J(\mathcal{O}_S)$ et $\mathrm{gr}_J(F)$ loc.\ libres sur $U_0$.
+
+b) Soit $U$ comme dessus. Alors pour tout $s \in U$, et \struck{toute} suite
+$\mathcal{O}_{S,s}$-régulière $f_1 \ldots f_n$ de $\mathfrak{m}_s$,
+\struck{posant $M = \mathcal{O}_{S,s}/(f_1, \ldots, f_n)$}, on a
+\[
+  \mathrm{Tor}_i^{\mathcal{O}_{S,s}}\bigl(F_s,\ \mathcal{O}_{S,s}/(f_1, \ldots, f_n)\bigr) = 0
+  \quad \text{pour } i > 0 .
+\]
+\note{« loc. » (devant « noeth. ») surcharge un mot biffé ;
+« $S_0 = S_{\mathrm{red}}$ » et « et $\mathrm{gr}_J(F)$ » sont ajoutés en
+interligne, ce dernier en remplacement d'une rature illisible. Dans le Tor,
+l'indice de $F_s$ surcharge un autre symbole.}
+
+\emph{Dém.} L'assertion a) est triviale. Pour b), on est ramené au cas où
+$S = U$, et où $S = \operatorname{Spec} \mathcal{O}_{S,s}$, \struck{et $F$
+provient d'un faisceau loc.\ libre sur $S_0$}. Pour calculer les
+$\mathrm{Tor}_i$ on utilise le complexe de chaînes de Koszul
+$K_{\cdot}(\underline{f})$, qui est une résolution de $A/(f_1, \ldots, f_n)$
+($A = \mathcal{O}_{S,s}$). On est ramené à prouver que les images
+$f_1 \ldots f_n$ des $f_i$ dans $A_0$ forment \struck{aussi} une suite
+$M$-régulière. En fait, on prouve un peu plus que, posant
+$N = M/(f_1, \ldots, f_n)M$, on a $\mathrm{gr}_J(N)$ \struck{loc.\ libre}
+libre. C'est bien standard si $n = 1$, et on continue par récurrence.
+\note{« et où $S = \operatorname{Spec} \mathcal{O}_{S,s}$ » est ajouté en
+interligne. Le $M$ de « $M$-régulière » n'est pas défini ailleurs que dans la
+ligne biffée de l'énoncé ; il faut sans doute y lire le module $F_s$ ou son
+image.}
+
+\emph{\uncertain{Cor. Main} 7.} $S$ schéma noethérien, $P$ et $\Omega$
+faisceaux cohérents. Alors $\exists$ ouvert dense $U$ de $S$ tel que pour tout
+$s \in U$ et toute \uncertain{suite} $\mathcal{O}_{S,s}$-régulière
+$f_1 \ldots f_n$,
+\note{le titre, souligné, est lu comme au dossier~90 (« CorMain ») ; ce peut
+être une abréviation de « Corollaire ».}
+
+\page{9}
+l'hom.\ naturel
+\[
+  \underline{\mathrm{Hom}}(P, \Omega)_s \otimes \mathcal{O}_{S,s}/(f_1, \ldots, f_n)
+  \longrightarrow
+  \underline{\mathrm{Hom}}_{\mathcal{O}_{S,s}}\bigl(P_s,\ \Omega_s/(f_1, \ldots, f_n)\Omega_s\bigr)
+\]
+soit un isom.
+
+\emph{Dém.} On peut supposer $S$ affine, d'anneau $A$, donc
+\uncertain{\ill{}} \struck{résolution} présentation
+\[
+  L_1 \to L_0 \to P
+\]
+avec $L_1$, $L_0$ libres de t.f., donc $\underline{\mathrm{Hom}}(P, Q)$ est le
+$H^0$ du complexe
+\[
+  K^{\cdot} \colon\quad 0 \to \check{L}_0 \otimes Q \to \check{L}_1 \otimes Q \to 0
+\]
+(de degrés 0 et 1), tandis que $\mathrm{Hom}(P, Q \otimes M)$ est le $H^0$ du
+complexe $K^{\cdot} \otimes M$. Une condition \uncertain{pour} que l'hom.\
+naturel
+\[
+  H^0(K^{\cdot}) \otimes M \to H^0(K^{\cdot} \otimes M)
+\]
+soit bijectif est \uncertain{que l'on ait}
+\[
+  \mathrm{Tor}_1(M, H^1(K^{\cdot})) = \mathrm{Tor}_1(M, Z^1(K^{\cdot})) = 0 .
+\]
+Or $H^1(K) = R$ et $Z^1(K) = S$ sont des modules de t.f.\ sur $A$, auxquels on
+peut appliquer le \struck{corollaire} lemme~6, b), en faisant
+$M = \mathcal{O}_{S,s}/(f_1, \ldots, f_n)$, on gagne.
+\note{la lettre notée ici $Q$ (dans $\underline{\mathrm{Hom}}(P, Q)$, dans
+$K^{\cdot}$ et dans $Q \otimes M$) est un rond ouvert ; c'est sans doute le
+$\Omega$ de l'énoncé, écrit vite. Dans $K^{\cdot}$ elle est lue sur ce qui
+ressemble à un $P$. Les indications « degré 0 », « degré 1 » sont écrites
+au-dessus des deux termes. Les lettres $R$ et $S$ (ce dernier sans rapport avec
+le schéma $S$) sont lues telles qu'elles sont écrites.}
+
+\page{10}
+\struck{\emph{Lemme.} Soit $X$ un préschéma régulier} $\Longleftrightarrow$ les
+$\Omega/(f_1, \ldots, f_n)\Omega$ sont \struck{\ill{} \ill{}} les injectifs
+indécomposables \ill{}
+\note{ligne d'en-tête biffée et surchargée ; au-dessus, en interligne :
+« $\Omega$ \ill{} \ill{} \uncertain{définissables} par un C.M. ». Le passage
+n'est lu qu'en partie.}
+
+\emph{Lemme 8.} Soit $X$ un préschéma de Cohen--Macaulay, $\Omega$ un faisceau
+fondamental sur $X$, alors pour toute suite $(f_1, \ldots, f_n)$ de sections
+de $\mathcal{O}_X$ qui est $\mathcal{O}_X$-régulière,
+$\Omega/(f_1, \ldots, f_n)\Omega$ est un faisceau fondamental sur le
+préschéma \struck{noeth.}\ CM \struck{\ill{}} $V(f_1, \ldots, f_n)$.
+
+\emph{\uncertain{Cor. Main} 9.} Soit $x \in X$ et $f_1, \ldots, f_n \in
+\mathcal{O}_{X,x}$ un syst.\ de paramètres de $\mathcal{O}_{X,x}$, alors
+$\Omega/(f_1, \ldots, f_n)\Omega$ est \struck{\ill{}} l'injectif
+indécomposable dans la catégorie des modules sur
+$\mathcal{O}_{X,x}/(f_1, \ldots, f_n)$.
+
+\emph{\uncertain{Cor. Main} 10.} Soit $X$ un préschéma loc.\ noeth.\ qui est
+localement immergeable dans un régulier. Alors il existe un ouvert dense $U$
+de $X$, et un Module coh.\ $\Omega$ sur $X$, ayant les propriétés suivantes
+\begin{itemize}
+  \item[a)] Les anneaux locaux de $U$ sont C.M.
+  \item[b)] Pour tout $x \in U$, et tout syst.\ de paramètres
+    $f_1$, \ldots, $f_n$ de $\mathcal{O}_{X,x}$, le module
+    $\Omega/(f_1, \ldots, f_n)\Omega$ sur
+    $\mathcal{O}_{X,x}/(f_1, \ldots, f_n)$ est
+\end{itemize}
+\marginal{il suffit \uncertain{que} \ill{} soit excellent, ou seulement qu'il
+satisfasse la condition de EGA IV 6.11.8.}
+\note{la page est d'un papier plus foncé, mais la numérotation des énoncés
+continue celle des pages précédentes. « localement immergeable dans un
+régulier » est souligné d'un trait ondulé ; la note marginale, oblique dans la
+marge de gauche, s'y rattache. Le « 10 » surcharge un autre numéro.}
+
+\page{12}
+l'injectif indécomposable.
+
+Ces conditions impliquent la suivante
+\begin{itemize}
+  \item[c)] Pour tout homom.\ $u \colon R \to R'$ surjectif de modules de type
+    fini sur un $\mathcal{O}_x$ ($x \in U$), tel que
+    \[
+      \mathrm{Hom}\bigl(R',\ \Omega_x/(f_1, \ldots, f_n)\Omega_x\bigr) \to
+      \mathrm{Hom}\bigl(R,\ \Omega_x/(f_1, \ldots, f_n)\Omega_x\bigr)
+    \]
+    soit un isomorphisme pour tout syst.\ de paramètres $f_1, \ldots, f_n$ de
+    $\mathcal{O}_{X,x}$, \uncertain{alors} $u$ est un isomorphisme.
+\end{itemize}
+\note{« pour tout syst.\ de paramètres \ldots\ de $\mathcal{O}_{X,x}$ » est
+ajouté en interligne et renvoyé par un trait ; $R$ et $R'$ sont repassés.}
+
+\struck{\emph{\uncertain{Cor. Main} 11.} \struck{Supposons} Supposons que
+$U$, $\Omega$ soient comme dans Cor.~10. Soit $x \in U$, et soit
+$u \colon R \to R'$ un homom.\ surjectif de modules de type fini sur
+$\mathcal{O}_{X,x}$, \struck{\ill{} C.M.} tels que $R$ et $R'$ satisfassent la
+condition suivante pour les foncteurs
+$\mathfrak{L}_R(M) = \mathrm{Hom}(R, M)$ et
+$\mathfrak{L}_{R'}(M) = \mathrm{Hom}(R', M)$ :}
+\begin{itemize}
+  \item[a)] \struck{$\mathfrak{L}(\Omega) \otimes A/(f_1, \ldots, f_n) \to
+    \mathfrak{L}(\Omega \otimes A/(f_1, \ldots, f_n))$ est un isomorphisme
+    pour les suites $A$-régulières $(f_1, \ldots, f_n)$ sur
+    $\mathcal{O}_{X,x}$ (où $\mathfrak{L} = \mathfrak{L}_R$ ou
+    $\mathfrak{L}_{R'}$) ;}
+  \item[b)] \struck{$\mathfrak{L}_{R'}(\Omega) \xrightarrow{\ \sim\ }
+    \mathfrak{L}_R(\Omega)$.}
+\end{itemize}
+\struck{Sous ces conditions, $u$ est un \emph{isom}.}
+\marginal{à expliciter d'une autre façon}
+\note{tout le Corollaire~11 est barré de longs traits obliques croisés. Dans
+les définitions de $\mathfrak{L}_R$, $\mathfrak{L}_{R'}$, une première
+écriture ($\mathrm{Hom}(R, \Omega \otimes M)$ ?) est biffée ; « suites
+$A$-régulières » remplace « syst.\ de paramètres », biffé. La note marginale
+est reliée par un trait vertical à la condition a).}
+
+\page{14}
+\struck{\emph{Cor.~11.} Supposons maintenant qu'on ait un syst.\ projectif
+filtrant strict $(R_i)_{i \in I}$ de Modules coh.\ sur $U$, puis affine
+$U = \operatorname{Spec} A$, et \struck{supposons} soit $F$ le foncteur sur
+les $\mathcal{O}_U$-Modules $F = \ldots$}
+\note{ce premier état est encadré et barré de longs traits obliques ; un
+dernier « $F =$ » est laissé inachevé.}
+
+\emph{\uncertain{Cor. Main} 11.} Soient $U$, $\Omega$ comme dessus,
+\struck{\ill{} supposons} \uncertain{supposons} $S = U = \operatorname{Spec} A$,
+soit $(P_i)$ un \struck{famille} syst.\ projectif de $A$-modules, et $F$ le
+foncteur qu'il pro-représente. Supposons que l'on ait les deux conditions
+suivantes
+\begin{itemize}
+  \item[(i)] $F(\Omega)$ est un $A$-Module de t.f.
+  \item[(ii)] Pour tout $\mathfrak{p} \in S$ et tout syst.\ de paramètres
+    $(f_1, \ldots, f_n)$ de $A_{\mathfrak{p}}$, l'application canonique
+    \[
+      F(\Omega) \otimes A_{\mathfrak{p}}/(f_1, \ldots, f_n) \to
+      F\bigl(\Omega \otimes A_{\mathfrak{p}}/(f_1, \ldots, f_n)\bigr)
+    \]
+    est bijective.
+\end{itemize}
+Alors le syst.\ projectif $(P_i)$ est stationnaire.
+
+De façon précise, (i) \struck{\ill{}} équivaut à dire que le système inductif
+des $\mathrm{Hom}(P_i, \Omega)$ est stationnaire. Soit $i_0$ tel que
+$\mathrm{Hom}(P_{i_0}, \Omega) \xrightarrow{\ \sim\ } \mathrm{Hom}(P_i, \Omega)$
+pour $i \geq i_0$. Alors $P_i \simeq P_{i_0}$ pour $i \geq i_0$.
+
+\emph{Dém.} \uncertain{Le} diagramme
+\note{« le diagramme » est suivi d'un mot souligné en interligne et d'un
+« $\varinjlim_i$ » renvoyé devant le premier terme ; dans la seconde colonne,
+$\Omega/f\Omega_{\mathfrak{p}}$ est écrit
+$\Omega_{\mathfrak{p}}/\underline{f}\,\Omega_{\mathfrak{p}}$ en bas.}
+
+\begin{tikzcd}[column sep=small, nodes={font=\small}]
+\varinjlim_i \mathrm{Hom}(P_i, \Omega) \otimes A_{\mathfrak{p}}/\underline{f} A_{\mathfrak{p}} \arrow[r, "\sim"] & \varinjlim_i \mathrm{Hom}(P_i, \Omega/\underline{f}\Omega_{\mathfrak{p}}) \\
+\mathrm{Hom}(P_{i_0}, \Omega) \otimes A_{\mathfrak{p}}/\underline{f} A_{\mathfrak{p}} \arrow[r] \arrow[u] & \mathrm{Hom}(P_{i_0}, \Omega_{\mathfrak{p}}/\underline{f}\Omega_{\mathfrak{p}}) \arrow[u, "\alpha"]
+\end{tikzcd}
+
+\page{15}
+montre que $\alpha$ est un isom., et comme les morphismes de transition de la
+dernière $\varinjlim$ sont injectifs, il s'ensuit que
+\[
+  \mathrm{Hom}(P_{i_0}, \Omega/\underline{f}\Omega) \to
+  \mathrm{Hom}(P_i, \Omega_{\mathfrak{p}}/\underline{f}\Omega_{\mathfrak{p}})
+\]
+est bijectif pour $i \geq i_0$, donc $P_i \to P_{i_0}$ localisé en
+$\mathfrak{p}$ est un isom.\ (Cor.~10), donc $P_i \to P_{i_0}$ est bijectif.
+
+Mettant ensemble prop.~3, lemme~5, \struck{lemme~6} Remarque~5 bis, et le
+corollaire~10, on trouve
+\note{« Remarque 5 bis » est écrit au-dessus de « lemme 6 », biffé.}
+
+\emph{Théorème 12.} $A$ anneau noeth.\ quotient d'un régulier, $F$ un foncteur
+$\mathrm{Mod}\,A \to (\mathrm{Ens})$. Pour que $F$ soit représentable par un
+module de t.f., il faut et il suffit qu'il satisfasse aux conditions
+suivantes :
+\begin{itemize}
+  \item[(ii)] $F$ exact à gauche ;
+  \item[(i)] $F$ commute aux $\varinjlim$ filtrantes ;
+  \item[(iii)] a) $\forall\, \mathfrak{p} \in \operatorname{Spec} A$, et tout
+    $M$ de t.f.\ sur $\widehat{A}_{\mathfrak{p}}$,
+    \[
+      F(M) \xrightarrow{\ \sim\ } \varprojlim F(M/\mathfrak{m}_{\mathfrak{p}}^{n+1}M) ;
+    \]
+    b) $\forall\, f \in A$, et tout module de t.f.\ sur
+    $\widehat{A} = \varprojlim A/f^{n+1}A$,
+    \[
+      F(M) \xrightarrow{\ \sim\ } \varprojlim F(M/f^{n+1}M) ;
+    \]
+  \item[(iv)] $\forall\, M$ de t.f.\ sur $A$, $F(M)$ est de t.f.\ sur $A$ ;
+  \item[(v)] La fonction $\mathfrak{p} \mapsto
+    \operatorname{rang}_{k(\mathfrak{p})} F(k(\mathfrak{p}))$ sur
+    $\operatorname{Spec} A$ est constructible ;
+  \item[(vi)] Pour tout quotient \ill{} $B$ de $A$, et tout $B$-Module de t.f.\
+    $\Omega$, $\exists\, f \in B$, \uncertain{non} nilpotent, tel que pour
+    tout $\mathfrak{p} \in \operatorname{Spec} B_f$, et tout système
+    \struck{de} paramètres $f_1, \ldots, f_n$ de $B_{\mathfrak{p}}$,
+    l'application canonique
+\end{itemize}
+\note{« par un module de t.f. » est ajouté sous la ligne et renvoyé par un
+trait. Les deux premières conditions sont écrites dans l'ordre (ii), (i), le
+numéro (i) de la seconde surchargeant un autre chiffre ; un trait courbe en
+marge les relie, sans doute pour les intervertir. C'est l'exactitude à gauche
+qui porte le numéro (ii), comme dans la Remarque~18 (page 21). En (vi), un mot
+ajouté au-dessus de « quotient » n'est pas lu, et « nilpotent » est
+surchargé ; la condition se poursuit page suivante.}
+
+\page{16}
+\[
+  F(\Omega) \otimes B_{\mathfrak{p}}/\underline{f} B_{\mathfrak{p}}
+  \longrightarrow
+  F(\Omega \otimes B_{\mathfrak{p}}/\underline{f} B_{\mathfrak{p}})
+\]
+est bijective.
+
+\emph{Dém.} La nécessité claire, celle de (vi) résultant du \struck{lemme} 6,
+\uncertain{cor.\ Main} 7, et du fait qu'on peut choisir $f$ tel que $B_f$ soit
+CM (alors $\underline{f} = (f_1, \ldots, f_n)$ est nécessairement une suite
+\struck{\ill{}} $B_{\mathfrak{p}}$-régulière).
+
+\emph{Suffisance.} On voit que les conditions envisagées sont stables par
+passage à un $F_B$ ($B$ quotient de $A$). Cela nous permet de
+\struck{supposer, par récurrence noeth., que $F_B$ est représentable par un
+$B$-module de t.f., si $B \neq A$.} \struck{\ill{}} Grâce à prop.~3, on est
+ramené à trouver un $f \in A$ non nilpotent, tel que $F_f$ soit repr.
+\marginal{(i) (ii) (iii b) (iv)}
+
+Notons que le lemme~5 et Remarque~5 bis impliquent déjà que $F$ est
+pro-représentable par un système projectif strict $(P_i)$, les $P_i$ de t.f.
+On \uncertain{peut} \uncertain{maintenant} \ill{} $f$, non nilpotent, tel que
+le syst.\ $P_{i,f}$ soit stationnaire.
+\marginal{(i) (ii) (iii a) (iv) (v)}
+
+On conclut aussitôt par la \struck{condition} condition (vi), compte tenu du
+cor.~11. \marginal{(vi)}
+
+cqfd.
+\note{les trois groupes de numéros de conditions sont écrits dans la marge de
+gauche, en face des phrases qui les utilisent. « et Remarque 5 bis » et
+« strict » sont ajoutés en interligne. Le passage biffé (deux lignes) est
+encadré.}
+
+\emph{Remarque 13.} Supposons que pour tout quotient intègre $B$ de $A$,
+$\exists\, f \in B - 0$ tel que $B_f$ soit régulier. Cette condition rend
+\struck{évidemment} inutile celle que $A$ soit quotient d'un régulier, et
+entraîne que dans th.~12, (vi) $\Rightarrow$ (v), \struck{et dans (vi)}
+
+\page{17}
+\emph{Théorème 14.} Soient $f \colon X \to S$ propre de prés.\ finie, $F$, $G$
+Modules de prés.\ finie sur $X$, avec $G$ $S$-plat. Alors,
+\struck{\ill{}} il existe un Module $P$ sur $S$, de présentation finie, et un
+isom.\ de foncteurs en le $\mathcal{O}_S$-Module quasi-cohérent $M$
+\[
+  \underline{\mathrm{Hom}}(P, M) \simeq
+  f_{*}\,\underline{\mathrm{Hom}}(F,\ G \otimes_{\mathcal{O}_S} M)
+\]
+[En prenant les $\Gamma$, l'isom.\ fonctoriel en $M$
+\[
+  \mathrm{Hom}(P, M) \simeq \mathrm{Hom}(F,\ G \otimes_{\mathcal{O}_S} M),
+\]
+montre que $P$ est déterminé à isom.\ unique près comme représentant un
+foncteur en $M$ des \uncertain{Modules} \ill{}.] La formation de $P$ commute
+au changement de base quelconque $S' \to S$.
+\marginal{\emph{NB}. Il y a le même \uncertain{énoncé} de
+représentabilité, par un $W(\ldots)$ (d'où \ill{} \ill{}), pour $F$ de
+prés.\ finie, $G$ quasi-cohérent ; \ill{} \ill{} \ill{} \ill{}
+\uncertain{représentable} par un $P$ \ill{} \ill{} \ill{} de prés.\ finie
+\ill{}.}
+\note{la note marginale, oblique et serrée dans la marge de gauche, n'est lue
+qu'en partie ; un « $F$ » y est repassé en surcharge. Le crochet ouvert devant
+« En prenant les $\Gamma$ » est fermé après « près ».}
+
+On voit facilement qu'on peut supposer $S = \operatorname{Spec} A$ affine, et
+tout est une question de représentabilité d'un foncteur
+$\mathrm{Mod}(A) \to (\mathrm{Ens})$. On est ramené comme d'habitude au cas
+d'un $A$ de type fini sur $\mathbb{Z}$, donc quotient d'un régulier. On peut
+donc faire appel au th.~12.
+
+Les conditions (i) à (iv) sont standard. \struck{\ill{} \ill{}} En vertu de
+la remarque~13, il reste à vérifier la condition (vi).
+\struck{Condition (v) : \ill{} \ill{} \ill{} que $A$ est intègre,
+$\exists$ ouvert non vide $U$ de $S = \operatorname{Spec} A$ tel que sur $U$,
+la fonction $s \mapsto \dim \mathrm{Hom}(F_s, G_s)$ soit \uncertain{constante}.
+Or \ill{} \ill{} $\mathrm{Hom}(F_s, G_s) = \Gamma(X_s,
+\underline{\mathrm{Hom}}(F_s, G_s))$, d'autre part pour \ill{} On peut
+supposer $B = A$.}
+\note{« En vertu de la remarque 13, il reste à vérifier la condition (vi) »
+est écrit en interligne au-dessus de deux lignes biffées ; tout le passage
+suivant est encadré et barré de trois longs traits obliques, sauf « On peut
+supposer $B = A$ », qui semble laissé.}
+
+\page{18}
+En fait, sauf pour la condition (ii) d'exactitude à gauche, nous pouvons
+vérifier les conditions du th.~12 \struck{pour} pour un foncteur de la forme
+\[
+  M \longmapsto R^{q} f_{*}\bigl(\underline{\mathrm{Ext}}^{i}(F,\ G \otimes_{\mathcal{O}_S} M)\bigr)
+\]
+(sans supposer $G$ plat$/S$ ici) [ou aussi
+$M \mapsto R^{q} f_{*}(R\,\underline{\mathrm{Hom}}(F,\ G \otimes_{\mathcal{O}_S} M))$],
+i.e.\ dans le cas affine, pour des foncteurs
+\[
+  M \longmapsto H^{q}\bigl(X,\ \underline{\mathrm{Ext}}^{i}(F,\ G \otimes_{\mathcal{O}_S} M)\bigr)
+\]
+[ou $M \mapsto \mathrm{Ext}^{q}(X;\ F,\ G \otimes_{\mathcal{O}_S} M)$].
+La vérification se fait en deux coups.
+\note{« (sans supposer $G$ plat$/S$ ici) » est écrit en bout de ligne, à
+droite ; le crochet fermant de la dernière formule est suivi d'un astérisque
+sans renvoi visible.}
+
+\emph{Lemme 15.} Soit $f \colon X \to S = \operatorname{Spec} A$, $f$ de t.f.\
+et $A$ noeth., et $F$, $G$ \struck{\ill{}} des cohérents sur $X$, $\Omega$
+cohérent sur $S$, $N$ entier. Alors il existe un ouvert dense $U$ de $S$ tel
+que pour $\mathfrak{p} \in U$ et $f_1, \ldots, f_n$ \struck{\ill{}} suite
+$A_{\mathfrak{p}}$-régulière, on ait
+\[
+  \underline{\mathrm{Ext}}^{i}(F,\ G \otimes_{\mathcal{O}_S} \Omega) \otimes A_{\mathfrak{p}}/\underline{f} A_{\mathfrak{p}}
+  \xrightarrow{\ \sim\ }
+  \underline{\mathrm{Ext}}^{i}(F,\ G \otimes_{\mathcal{O}_S} \Omega \otimes A_{\mathfrak{p}}/\underline{f} A_{\mathfrak{p}})
+\]
+pour $i \leq N$.
+\note{l'énoncé est marqué d'un trait vertical dans la marge ; « entier » est
+ajouté en interligne.}
+
+\emph{Dém.} On peut supposer $X$ affine $= \operatorname{Spec} B$. Alors $F$ a
+une résolution $L_{\cdot}$ par des modules libres de t.f.\ sur $B$, et
+\[
+  \underline{\mathrm{Ext}}^{i}(F,\ \underbrace{G \otimes_A \Omega}_{G'})
+  = H^{i}\bigl(\underline{\mathrm{Hom}}^{\cdot}(L_{\cdot},\ G \otimes_{\mathcal{O}_S} \Omega)\bigr)
+  = H^{i}\bigl(\underbrace{(\check{L}_{\cdot} \otimes_B G) \otimes_{\mathcal{O}_S} \Omega}_{K^{\cdot}}\bigr)
+\]
+tandis que
+\[
+  \underline{\mathrm{Ext}}^{i}(F,\ (G \otimes_{\mathcal{O}_S} \Omega) \otimes_A M) = H^{i}(K^{\cdot} \otimes M),
+\]
+et on veut des conditions pour que
+\[
+  \underline{\mathrm{Ext}}^{i}_{\mathcal{O}_X}(F, G') \otimes_{\mathcal{O}_S} M
+  \xrightarrow{\ \sim\ }
+  \underline{\mathrm{Ext}}^{i}_{\mathcal{O}_X}(F,\ G' \otimes_A M)
+\]
+\marginal{cette réduction \ill{} \ill{} \ill{} fait\ldots}
+\note{dans la seconde formule, $\Omega$ est suivi d'un « $\otimes_A M$ »
+surchargé ; l'accolade « $K^{\cdot}$ » est sous
+$(\check{L}_{\cdot} \otimes G) \otimes \Omega$ ; les indices $A$ et
+$\mathcal{O}_S$ sont souvent surchargés l'un de l'autre.}
+
+\page{19}
+i.e.
+\[
+  H^{i}(K^{\cdot}) \otimes_A M \xrightarrow{\ \sim\ } H^{i}(K \otimes_A M)
+  \quad \text{si } i \leq N .
+\]
+Pour ceci, quitte à tronquer $K^{\cdot}$ en laissant tomber les $K^{j}$ pour
+$j \geq N + 2$, on peut supposer $K^{\cdot}$ borné. Il suffit que l'on ait
+\[
+  \begin{cases}
+    \mathrm{Tor}_i^{A}(K^{j}, M) = 0 & \text{pour } i > 0, \text{ tout } j \\
+    \mathrm{Tor}_i^{A}(H^{j}(K^{\cdot}), M) = 0 & \text{pour } i > 0, \text{ tout } j.
+  \end{cases}
+\]
+Comme les modules $K^{j}$, $H^{j}(K^{\cdot})$ sont de t.f., on est ramené à
+\struck{prouver le} prouver le
+
+\emph{Lemme 16.} [Soit $R$ cohérent sur $X$.] $\exists\, U$ dense dans
+$S = \operatorname{Spec} A$ tel que $\mathfrak{p} \in U$, $f_1 \ldots f_n$
+\struck{\ill{}} suite $A_{\mathfrak{p}}$-régulière, implique que
+\[
+  \mathrm{Tor}_i^{A}(F,\ A_{\mathfrak{p}}/\underline{f} A_{\mathfrak{p}}) = 0
+  \quad \text{pour } i > 0 .
+\]
+\note{« Soit $R$ cohérent sur $X$. » est ajouté en interligne au-dessus de
+l'énoncé, et relié par un trait ; la formule garde pourtant $F$.}
+
+Or, pour prouver ceci, il suffit, d'après la démonstration du lemme~6, de
+savoir que $\mathrm{gr}_J(\mathcal{O}_X)$ et $\mathrm{gr}_J(A)$ soient plats
+sur $A/J$ aux points de $U$ ($J$ = nilradical de $A$). Or on peut choisir $U$
+ainsi, par le \emph{th.\ de platitude générique}.
+\note{« et $\mathrm{gr}_J(A)$ soient » est ajouté en interligne.}
+
+Le lemme \struck{15} 15 montre que \struck{quitte à} \ill{}
+\struck{\ill{} \ill{} \ill{} \ill{}, pour traiter le cas de}
+$R^{q} f_{*}(\underline{\mathrm{Ext}}^{i}(F, G \otimes \Omega))$,
+\struck{\ill{}} à prouver le
+\note{la fin de la page est raturée et inachevée ; un « $\varinjlim$ » est
+écrit au-dessus du mot biffé « quitte ».}
+
+\page{20}
+\emph{Lemme 17.} Soit $f \colon X \to S$ propre, $S$ noeth., et soit $E$
+cohérent sur $X$. Alors il existe un ouvert dense $U$ de $S$ tel que
+$\forall\, s \in U$, et $\underline{f} = f_1, \ldots, f_n$ suite
+$\mathcal{O}_{S,s}$-régulière, l'hom.\ naturel
+\[
+  R^{j} f_{*}(E)_s \otimes \mathcal{O}_{S,s}/\underline{f}\,\mathcal{O}_{S,s}
+  \longrightarrow
+  R^{j} f^{(s)}_{*}\bigl(E^{(s)} \otimes \mathcal{O}_{S,s}/\underline{f}\,\mathcal{O}_{S,s}\bigr)
+\]
+soit un isom.\ pour tout $j$. ($f^{(s)} \colon X^{(s)} = X \times_S
+\operatorname{Spec} \mathcal{O}_{S,s} \to \operatorname{Spec}
+\mathcal{O}_{S,s}$, $E^{(s)}$ induit par $E$ sur $X^{(s)}$.)
+\note{« $S$ noeth. » est ajouté en interligne ; l'énoncé est marqué d'un trait
+vertical dans la marge.}
+
+\emph{Dém.} Utilisant le lemme~16, on voit qu'on peut supposer déjà que
+\[
+  E^{(s)} \otimes \mathcal{O}_{S,s}/\underline{f}\,\mathcal{O}_{S,s}
+  \simeq
+  E^{(s)} \overset{\mathbb{L}}{\otimes} \mathcal{O}_{S,s}/\underline{f}\,\mathcal{O}_{S,s} .
+\]
+D'autre part, on peut supposer \struck{\ill{}} (faisant $X = S$, et
+représentant $Rf_{*}(E)$ par un complexe borné à composantes cohérentes
+$K^{\cdot}$ sur $S$) que
+\[
+  K^{\cdot} \otimes \mathcal{O}_{S,s}/\underline{f}\,\mathcal{O}_{S,s}
+  = K^{\cdot} \overset{\mathbb{L}}{\otimes} \mathcal{O}_{S,s}/\underline{f}\,\mathcal{O}_{S,s} .
+\]
+Cela montre que l'hom.\ $\alpha$, qui est l'isom.\ de régularité
+(où $M = A_{\mathfrak{p}}/\underline{f} A_{\mathfrak{p}}$)
+\[
+  Rf_{*}\bigl(\underbrace{E \overset{\mathbb{L}}{\otimes}_{\mathcal{O}_S} M}_{E \otimes_{\mathcal{O}_S} M}\bigr)
+  \longrightarrow
+  \underbrace{Rf_{*}(E) \overset{\mathbb{L}}{\otimes}_{\mathcal{O}_S} M}_{K^{\cdot} \overset{\mathbb{L}}{\otimes} M \,=\, K^{\cdot} \otimes M},
+\]
+s'identifie à
+\[
+  H^{j}(K^{\cdot}) \otimes M \to H^{j}(K^{\cdot} \otimes M) .
+\]
+Si on restreint encore $U$, on peut supposer
+\[
+  \mathrm{Tor}_i^{\mathcal{O}_S}(H^{j}(K^{\cdot}), M) = 0 \quad \text{pour } i > 0,\ \text{tout } j,
+\]
+et on sait que cela implique que l'hom.\ précédent est un isom.\ pour tout $j$.
+cqfd.
+\note{les produits tensoriels dérivés sont écrits $\otimes$ surmonté d'un
+$\mathbb{L}$ ; « (où $M = A_{\mathfrak{p}}/\underline{f}A_{\mathfrak{p}}$) » est
+ajouté en interligne. Dans les accolades, l'écriture est serrée et la lecture
+de la seconde (« $K^{\cdot} \overset{\mathbb{L}}{\otimes} M = K^{\cdot}
+\otimes M$ ») est incertaine.}
+
+\end{document}
