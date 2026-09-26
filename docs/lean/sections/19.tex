@@ -1,0 +1,98 @@
+\section[Cote 19 : le théorème de comonadicité 1.12 et le théorème de Gabriel--Popescu]{Cote 19 : le théorème de comonadicité 1.12 et le théorème de Gabriel--Popescu\protect\verifie{Folder19}}\label{sec:19}
+
+La cote 19, \emph{Topos : notes manuscrites (s.d.)}, quatre-vingt-quinze pages que l'inventaire date \q{[à partir de 1958-1973]} et range dans le groupe Théorie des motifs, est un dossier de travail en neuf liasses. La première, « Tapis cartésiens » (pages~3 à~11), étudie la comonade d'une adjonction et ses coalgèbres ; la page~4 énonce le \q{Théorème 1.12}, suivi d'un nom propre que la transcription lit \q{Beck} avec doute, écrit \q{il faut et il suffit} pour~b), et porte en marge la restriction \q{il suffit de regarder les doubles flèches $u, v$ de $A$ telles que $\mathrm{Ker}(f(u), f(v))$ existe \quad (condition C)} (\lot{19}{1}{4}). La deuxième, « Cohomologie relative », s'ouvre pages~14 et~15 sur la représentabilité : pour une catégorie à générateur $U$, elle affirme une équivalence avec les modules sur $\mathrm{End}(U)$, \q{[détails laissés au lecteur]} (\lot{19}{1}{15}).
+
+\noindent\emph{Conventions.} On note, comme la lecture, $f : A \to B$ l'adjoint à gauche de $g : B \to A$, $\eta : \mathrm{id}_A \to gf$ l'unité, $\varepsilon : fg \to \mathrm{id}_B$ la coünité, et $\varphi = fg$ la comonade, de comultiplication $\delta_X = f(\eta_{gX})$. Une $\varphi$-coalgèbre est un couple $(X, a)$, $a : X \to \varphi X$, tel que $\varepsilon_X \circ a = 1_X$ et $\delta_X \circ a = \varphi(a) \circ a$ ; un morphisme $(X, a) \to (X', a')$ est une flèche $t : X \to X'$ telle que $a' \circ t = \varphi(t) \circ a$. Le foncteur de comparaison $h : A \to \varphi\text{-}\mathbf{Coalg}$ envoie $Y$ sur $(fY, f(\eta_Y))$ et $\psi$ sur $f(\psi)$. Le \emph{noyau} $\mathrm{Ker}(u, v)$ d'une double flèche est son égalisateur, et $f$ \emph{y commute} s'il envoie un noyau de $(u, v)$ sur un noyau de $(fu, fv)$. On utilise les identités triangulaires $\varepsilon_{fY} \circ f(\eta_Y) = 1$ et $g(\varepsilon_X) \circ \eta_{gX} = 1$, et la bijection d'adjonction $t \mapsto t^\flat = g(t) \circ \eta_Y$, de $\operatorname{Hom}_B(fY, X)$ sur $\operatorname{Hom}_A(Y, gX)$, d'inverse $s \mapsto \varepsilon_X \circ f(s)$.
+
+\begin{definition}
+Le foncteur $f$ vérifie la \emph{condition~C} si, pour toute double flèche $(u, v)$ de $A$ telle que $\mathrm{Ker}(fu, fv)$ existe, $\mathrm{Ker}(u, v)$ existe et $f$ y commute. Un triplet $(e, s, t)$ formé de $e : E \to Y$, $s : Y \to E$ et $t : Z \to Y$ est un \emph{noyau scindé} de $u, v : Y \rightrightarrows Z$ si $ue = ve$, $se = 1_E$, $tu = 1_Y$ et $tv = es$. Une double flèche $(u, v)$ de $A$ est \emph{$f$-scindée} si $(fu, fv)$ admet un noyau scindé.
+\end{definition}
+
+\begin{enonce}[Théorème 1.12, page 4]
+Soit $f \dashv g$ une adjonction, $\varphi = fg$, et $h$ le foncteur de comparaison.
+\begin{enumerate}
+\item[a)] Si les noyaux de doubles flèches existent dans $A$ et si $f$ y commute, alors $h$ est essentiellement surjectif.
+\item[b)] $h$ est une équivalence si et seulement si $f$ est conservatif et si, pour toute double flèche $(u, v)$ de $A$ telle que $\mathrm{Ker}(fu, fv)$ existe, $\mathrm{Ker}(u, v)$ existe et $f$ y commute.
+\end{enumerate}
+La restriction portée en marge --- il suffit de considérer les doubles flèches $(u, v)$ dont l'image par $f$ a un noyau --- est la condition~C.
+\end{enonce}
+
+\begin{lemme}\label{lem:19-scinde}
+Si $(e, s, t)$ est un noyau scindé de $(u, v)$, alors $e$ est un noyau de $(u, v)$, et l'image de $(e, s, t)$ par tout foncteur est un noyau scindé de l'image de $(u, v)$.
+\end{lemme}
+
+\begin{proof}
+Soit $z : T \to Y$ avec $uz = vz$. Alors $z = tuz = tvz = e(sz)$, donc $z$ se factorise par $e$, et de façon unique, puisque $ez' = ez''$ entraîne $z' = sez' = sez'' = z''$. Les quatre conditions sont des égalités entre composés, qu'un foncteur conserve.
+\end{proof}
+
+\begin{lemme}\label{lem:19-paire}
+Pour toute coalgèbre $(X, a)$, la double flèche $(\eta_{gX}, g(a)) : gX \rightrightarrows gfgX$ est $f$-scindée : $(a, \varepsilon_X, \varepsilon_{fgX})$ est un noyau scindé de $(f(\eta_{gX}), fg(a))$. Elle est de plus coréflexive : $g(\varepsilon_X)$ est une rétraction commune de $\eta_{gX}$ et de $g(a)$.
+\end{lemme}
+
+\begin{proof}
+On a $f(\eta_{gX}) \circ a = \delta_X \circ a = \varphi(a) \circ a = fg(a) \circ a$ par coassociativité ; $\varepsilon_X \circ a = 1_X$ par l'axiome de coünité ; $\varepsilon_{fgX} \circ f(\eta_{gX}) = 1$ par l'identité triangulaire en $gX$ ; et $\varepsilon_{fgX} \circ fg(a) = a \circ \varepsilon_X$ par naturalité de $\varepsilon$. Enfin $g(\varepsilon_X) \circ g(a) = g(\varepsilon_X \circ a) = 1$ et $g(\varepsilon_X) \circ \eta_{gX} = 1$.
+\end{proof}
+
+\begin{lemme}\label{lem:19-comp}
+Supposons que, pour toute coalgèbre $(X, a)$, la double flèche $(\eta_{gX}, g(a))$ ait un noyau $e_X : R(X, a) \to gX$ et que $f$ y commute.
+\begin{enumerate}
+\item Pour tout $Y \in A$, $t \mapsto t^\flat$ induit une bijection entre les morphismes de coalgèbres $hY \to (X, a)$ et les flèches $k : Y \to R(X, a)$, par $t^\flat = e_X \circ k$.
+\item Pour toute coalgèbre $(X, a)$, la flèche $\theta = \varepsilon_X \circ f(e_X)$ est un isomorphisme de coalgèbres de $h(R(X, a))$ sur $(X, a)$ ; en particulier $h$ est essentiellement surjectif.
+\item Si de plus $f$ est conservatif, $h$ est une équivalence.
+\end{enumerate}
+\end{lemme}
+
+\begin{proof}
+(1) Soit $t : fY \to X$. Les transposées des deux membres de $a \circ t = \varphi(t) \circ f(\eta_Y)$ sont $g(a) \circ t^\flat$ et, puisque $\varphi(t) \circ f(\eta_Y) = f(t^\flat)$, $gf(t^\flat) \circ \eta_Y = \eta_{gX} \circ t^\flat$ par naturalité de $\eta$. La transposition étant bijective, $t$ est un morphisme de coalgèbres si et seulement si $t^\flat$ égalise $(\eta_{gX}, g(a))$, c'est-à-dire se factorise, de façon unique, par $e_X$.
+
+(2) Posons $E = R(X, a)$. Par~(1) appliqué à $k = 1_E$, la flèche $\theta$, de transposée $e_X$, est un morphisme de coalgèbres $hE \to (X, a)$, et $a \circ \theta = \varphi(\theta) \circ f(\eta_E) = f(\theta^\flat) = f(e_X)$. Or $a$ est un noyau de $(f(\eta_{gX}), fg(a))$ par les lemmes~\ref{lem:19-scinde} et~\ref{lem:19-paire}, et $f(e_X)$ en est un par hypothèse ; donc $\theta$ est un isomorphisme. Son inverse est un morphisme de coalgèbres :
+\[
+\varphi(\theta^{-1}) \circ a = \varphi(\theta^{-1}) \circ a \circ \theta \circ \theta^{-1} = \varphi(\theta^{-1}) \circ \varphi(\theta) \circ f(\eta_E) \circ \theta^{-1} = f(\eta_E) \circ \theta^{-1}.
+\]
+
+(3) Soit $Y' \in A$. La flèche $\eta_{Y'}$ égalise $(\eta_{gfY'}, gf(\eta_{Y'}))$, par naturalité de $\eta$ ; c'est la double flèche attachée à la coalgèbre $hY' = (fY', f(\eta_{Y'}))$, et l'on a donc $\eta_{Y'} = e_{hY'} \circ k_{Y'}$ pour une flèche $k_{Y'} : Y' \to R(hY')$. Appliquons $f$ : $f(\eta_{Y'})$ est un noyau de l'image de cette double flèche (lemmes~\ref{lem:19-scinde} et~\ref{lem:19-paire}, avec $a = f(\eta_{Y'})$), $f(e_{hY'})$ aussi par hypothèse, et $f(e_{hY'}) \circ f(k_{Y'}) = f(\eta_{Y'})$ ; donc $f(k_{Y'})$ est un isomorphisme, et $k_{Y'}$ aussi, $f$ étant conservatif. Pour $\psi : Y \to Y'$, la transposée de $h(\psi) = f(\psi)$ est $gf(\psi) \circ \eta_Y = \eta_{Y'} \circ \psi = e_{hY'} \circ (k_{Y'} \circ \psi)$ : dans la bijection~(1), $h(\psi)$ correspond à $k_{Y'} \circ \psi$. Comme $\psi \mapsto k_{Y'} \circ \psi$ est bijective, $h$ est pleinement fidèle ; il est essentiellement surjectif par~(2), c'est donc une équivalence.
+\end{proof}
+
+\begin{proof}[Démonstration de a) et de la suffisance de b)]
+Si $f$ vérifie la condition~C, chaque double flèche $(\eta_{gX}, g(a))$ a un noyau auquel $f$ commute, puisque son image a un noyau (lemmes~\ref{lem:19-paire} et~\ref{lem:19-scinde}). Le lemme~\ref{lem:19-comp}\,(2) donne alors a) sous la forme de la marge, et la forme du texte s'en déduit, car si tous les noyaux existent dans $A$ et que $f$ y commute, la condition~C est vérifiée. Si de plus $f$ est conservatif, $h$ est une équivalence par le lemme~\ref{lem:19-comp}\,(3).
+\end{proof}
+
+\begin{proof}[La nécessité de b) est fausse]
+Soit $B$ la catégorie des couples d'ensembles $(X, Y)$, et $A$ la sous-catégorie pleine des couples tels que $Y \neq \varnothing$ entraîne $X \neq \varnothing$ ; $f$ est l'inclusion. Posons $g(X, Y) = (X, Y)$ si $X \neq \varnothing$ et $g(X, Y) = (\varnothing, \varnothing)$ sinon ; $g(X, Y)$ est dans $A$. Pour $(X', Y') \in A$, une flèche $(p, q) : (X', Y') \to (X, Y)$ de $B$ se factorise de façon unique par $g(X, Y) \to (X, Y)$ : si $Y' \neq \varnothing$, alors $X' \neq \varnothing$, donc $X \neq \varnothing$ ; si $Y' = \varnothing$, $q$ est l'application vide. Ainsi $f \dashv g$, et $f$ est une inclusion coréflexive. Une telle inclusion est pleinement fidèle, donc conservative, et comonadique : c'est classique --- la comonade est idempotente, et ses coalgèbres sont, à isomorphisme près, les objets de $A$. Le foncteur $h$ est donc une équivalence.
+
+Mais $f$ ne vérifie pas la condition~C. Soient $u, v : (\ast, \ast) \rightrightarrows (\{0, 1\}, \ast)$ les flèches de $A$ qui envoient le point de la première composante sur $0$ et sur $1$ et sont l'identité sur la seconde. Leur noyau dans $B$ existe, c'est $(\varnothing, \ast)$. Si $K \to (\ast, \ast)$ était un noyau de $(u, v)$ dans $A$ auquel $f$ commute, $K$ serait isomorphe à $(\varnothing, \ast)$, de seconde composante non vide ; étant dans $A$, il aurait un point $x$ dans sa première composante, et $u$ et $v$ l'enverraient sur le même élément, c'est-à-dire $0 = 1$ : c'est absurde. Le noyau de $(u, v)$ dans $A$ est $(\varnothing, \varnothing)$, et $f$ n'y commute pas.
+\end{proof}
+
+\begin{enonce}[Théorème de Beck, forme exacte]
+Le foncteur $h$ est une équivalence si et seulement si $f$ est conservatif et si, pour toute double flèche $f$-scindée $(u, v)$ de $A$, $\mathrm{Ker}(u, v)$ existe et $f$ y commute.
+\end{enonce}
+
+\begin{proof}
+La condition est suffisante par les lemmes~\ref{lem:19-paire} et~\ref{lem:19-comp}\,(3), qui n'utilisent que des doubles flèches $f$-scindées. Elle est nécessaire. Si $f(\psi)$ est inversible, $h(\psi)$ est un morphisme de coalgèbres dont la flèche sous-jacente est inversible, donc un isomorphisme de coalgèbres (le calcul de~(2) ci-dessus), et $\psi$ est inversible parce que $h$, pleinement fidèle, reflète les isomorphismes. Que le foncteur d'oubli des coalgèbres, donc $f$, crée les noyaux des doubles flèches $f$-scindées est la partie classique du théorème de Beck, que la preuve vérifiée invoque.
+\end{proof}
+
+\begin{enonce}[Pages 14 et 15, dans la forme corrigée de la lecture]
+Soient $C$ une catégorie de Grothendieck, $U$ un générateur de $C$ et $R = \mathrm{End}_C(U)$. Le foncteur $\operatorname{Hom}_C(U, -) : C \to \mathbf{Mod}_R$, à valeurs dans les $R$-modules à droite, est pleinement fidèle, et son adjoint à gauche $- \otimes_R U$ est exact.
+\end{enonce}
+
+\begin{proof}
+La fidélité de $\operatorname{Hom}_C(U, -)$ est la définition d'un générateur. La pleine fidélité et l'exactitude à gauche de $- \otimes_R U$ sont le théorème de Gabriel--Popescu (1964), classique, que la preuve vérifiée invoque ; l'exactitude à droite vient de ce que $- \otimes_R U$ est un adjoint à gauche.
+\end{proof}
+
+\begin{remarque}
+Sous la forme de la marge, a) n'utilise que la condition~C, et non la conservativité ; la suffisance de b) est le théorème de comonadicité de Beck.
+\end{remarque}
+
+\begin{remarque}
+La nécessité de b), que la page affirme par \q{il faut et il suffit}, est fausse : l'exemple ci-dessus est une adjonction comonadique dont l'adjoint à gauche ne vérifie pas la condition~C. L'erreur est sur la page ; la lecture la reproduisait et y voyait le théorème de Beck sous sa forme précise, et elle a été corrigée le 27 septembre 2026.
+\end{remarque}
+
+\begin{remarque}
+Toute double flèche $f$-scindée est une double flèche dont l'image a un noyau (lemme~\ref{lem:19-scinde}), et non l'inverse : la condition~C est plus forte que celle de Beck, suffisante sans être nécessaire.
+\end{remarque}
+
+\begin{remarque}
+Pour un générateur seul, la page affirme une équivalence $C \simeq \mathbf{Mod}_R$ ; seul le plongement pleinement fidèle est acquis, et c'est la forme que la lecture retient.
+\end{remarque}
+
+\noindent Ne sont pas démontrés ici : la Conclusion des pages~4 à~6 (adjonctions vérifiant la condition~C et comonades), que la même réserve atteint ; la reconstruction de l'adjonction à partir d'une comonade ; l'énoncé de Morita (équivalence si et seulement si $U$ est petit et projectif).

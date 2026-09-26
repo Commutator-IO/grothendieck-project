@@ -1,0 +1,73 @@
+\section[Cote 114 : les localisateurs fondamentaux et la proposition 4]{Cote 114 : les localisateurs fondamentaux et la proposition 4\protect\verifie{Folder114}}\label{sec:114}
+
+La cote 114, \emph{Asphéricité : notes manuscrites (s.d.)}, cinq pages que l'inventaire date \q{[1983]} et range dans le groupe Autour de Pursuing stacks, contient quatre feuillets manuscrits et une page dactylographiée, numérotée~350, de \emph{À la poursuite des champs}. La page~2 pose la question \q{$0$-connexité totale $\Rightarrow$ asphéricité totale ?} (\lot{114}{1}{2}) ; la page~350 y répond par la proposition~4, précédée de l'aveu \q{After a minute's thought, I feel very silly} et suivie d'une démonstration de trois lignes, dont les signes d'implication ont été laissés en blanc et qui s'interrompt sur \q{namely} (\lot{114}{1}{3}). La page énonce la proposition pour \q{$W$ a basic localizer satisfying Loc 4)} et appelle $W_0$ \q{the coarsest basic localizer satisfying Loc 4)}.
+
+\begin{definition}
+On fixe un univers ; une petite catégorie est une catégorie dont les objets et les flèches forment des ensembles de cet univers, et $e$ désigne la catégorie ponctuelle. Pour des foncteurs $v : A \to B$ et $w : B \to C$ et un objet $c$ de $C$, on note $A_{/c}$ la catégorie des couples $(a, \gamma : wv(a) \to c)$, $B_{/c}$ celle des couples $(b, \beta : w(b) \to c)$, et $v_{/c} : A_{/c} \to B_{/c}$ le foncteur $(a, \gamma) \mapsto (v(a), \gamma)$. Un \emph{localisateur fondamental} est une classe $W$ de foncteurs entre petites catégories qui vérifie :
+\begin{enumerate}
+\item[LA] $W$ est faiblement saturée : elle contient les identités, vérifie le deux-sur-trois, et si $i : A \to B$ et $r : B \to A$ vérifient $ri = 1_A$ et $ir \in W$, alors $r \in W$ ;
+\item[LB] si $A$ a un objet final, $A \to e$ est dans $W$ ;
+\item[LC] si, pour $v : A \to B$ et $w : B \to C$, tous les $v_{/c}$ sont dans $W$, alors $v \in W$.
+\end{enumerate}
+Ce sont les axiomes usuels ; la lecture n'en donne qu'une description, \q{faiblement saturée}, \q{les foncteurs $A \to e$ pour toute $A$ ayant un objet final}, \q{une condition du type « théorème A » de Quillen}, qu'ils précisent. Une petite catégorie $A$ est \emph{$W$-asphérique} si $A \to e$ est dans $W$, et \emph{totalement $W$-asphérique} si de plus, pour tous objets $a, b$ de $A$, la catégorie $A_{/a \times b}$ des éléments du préfaisceau $a \times b$ --- les couples $(c, (p, q))$ avec $p : c \to a$, $q : c \to b$ --- est $W$-asphérique. Un préfaisceau $X$ est \emph{$0$-connexe} si $A_{/X}$ est non vide et connexe. On note $\pi_0(A)$ l'ensemble des composantes connexes de $A$, $W_0$ la classe des foncteurs $u$ tels que $\pi_0(u)$ soit bijective, et $W_\infty$ la classe des foncteurs qui appartiennent à tout localisateur fondamental.
+\end{definition}
+
+\begin{enonce}[Proposition 4, page 3]
+Soient $A$ une petite catégorie, $W$ un localisateur fondamental, $W_\infty$ le localisateur fondamental le plus fin. Les conditions suivantes sont équivalentes :
+\begin{enumerate}
+\item[(i)] $A$ est totalement $W_\infty$-asphérique ;
+\item[(ii)] $A$ est totalement $W$-asphérique ;
+\item[(iii)] $A$ est non vide et, pour tous objets $a, b$ de $A$, le produit $a \times b$ est $0$-connexe dans $\hat A$.
+\end{enumerate}
+La démonstration repose sur l'encadrement $W_\infty \subseteq W \subseteq W_0$, où $W_0$ est le localisateur fondamental le plus grossier, celui pour lequel un foncteur est une équivalence dès qu'il induit une bijection sur les composantes connexes.
+\end{enonce}
+
+\begin{lemme}\label{lem:114-W0}
+La classe $W_0$ est un localisateur fondamental.
+\end{lemme}
+
+\begin{proof}
+Comme $\pi_0$ est un foncteur, LA se ramène à des énoncés sur les bijections. Les identités sont bijectives, et si deux des applications $\pi_0(u)$, $\pi_0(u')$, $\pi_0(u'u)$ sont bijectives, la troisième l'est. Si $ri = 1_A$ et $\pi_0(i)\pi_0(r)$ est bijective, $\pi_0(r)$ est injective par la seconde relation et surjective par la première. Pour LB, une catégorie à objet final est non vide et connexe, et $\pi_0(A) \to \pi_0(e)$ est une bijection entre deux ensembles à un élément.
+
+Pour LC, supposons tous les $\pi_0(v_{/c})$ bijectifs. Pour $b \in B$, choisissons, par surjectivité de $\pi_0(v_{/w(b)})$, un objet $(a_b, \gamma_b)$ de $A_{/w(b)}$ dont l'image est dans la composante de $(b, 1_{w(b)})$, et posons $s(b) = [a_b] \in \pi_0(A)$. D'abord, $s(v(a)) = [a]$ pour tout $a \in A$ : dans $A_{/wv(a)}$, les objets $(a_{v(a)}, \gamma_{v(a)})$ et $(a, 1)$ ont leurs images dans la composante de $(v(a), 1)$ ; par injectivité, ils sont dans la même composante, et l'oubli $(a', \gamma) \mapsto a'$ envoie un zigzag de $A_{/wv(a)}$ sur un zigzag de $A$. Ensuite, $s(b) = s(b')$ pour toute flèche $\beta : b \to b'$. La composition avec $w(\beta)$ définit des foncteurs $A_{/w(b)} \to A_{/w(b')}$ et $B_{/w(b)} \to B_{/w(b')}$ compatibles à $v_{/\cdot}$ ; l'image de $(a_b, w(\beta)\gamma_b)$ par $v_{/w(b')}$ est donc dans la composante de $(b, w(\beta))$, que la flèche $\beta : (b, w(\beta)) \to (b', 1)$ relie à celle de $(b', 1)$, où se trouve aussi l'image de $(a_{b'}, \gamma_{b'})$. Par injectivité, $(a_b, w(\beta)\gamma_b)$ et $(a_{b'}, \gamma_{b'})$ sont dans la même composante de $A_{/w(b')}$, d'où $[a_b] = [a_{b'}]$. Par suite $s$ est constante sur les zigzags de $B$ et induit $\bar s : \pi_0(B) \to \pi_0(A)$ avec $\bar s \circ \pi_0(v) = \mathrm{id}$ : $\pi_0(v)$ est injective. Elle est surjective, car l'oubli envoie le zigzag de $B_{/w(b)}$ qui relie $(v(a_b), \gamma_b)$ à $(b, 1)$ sur un zigzag de $v(a_b)$ à $b$ dans $B$.
+\end{proof}
+
+\begin{lemme}\label{lem:114-asph}
+Une petite catégorie est $W_0$-asphérique si et seulement si elle est non vide et connexe. Elle est totalement $W_0$-asphérique si et seulement si elle vérifie~(iii).
+\end{lemme}
+
+\begin{proof}
+L'application $\pi_0(A) \to \pi_0(e)$ va dans un ensemble à un élément ; elle est bijective si et seulement si $\pi_0(A)$ a exactement un élément, c'est-à-dire si $A$ est non vide et connexe. Pour la seconde assertion, être totalement $W_0$-asphérique, c'est donc être non vide et connexe, avec chaque $A_{/a \times b}$ non vide et connexe, ce qui entraîne~(iii). Réciproquement, sous~(iii), $A$ est non vide, et pour $a, b \in A$ un objet $(c, (p, q))$ de $A_{/a \times b}$ fournit le zigzag $a \xleftarrow{p} c \xrightarrow{q} b$ ; $A$ est donc connexe. C'est le \q{(iii) implies that $A$ is $0$-connected} de la page.
+\end{proof}
+
+\begin{lemme}\label{lem:114-min}
+La classe $W_\infty$ est un localisateur fondamental, contenu dans tout localisateur fondamental.
+\end{lemme}
+
+\begin{proof}
+La seconde assertion est la définition. Chacun des axiomes LA à LC dit que certains foncteurs sont dans $W$ dès que d'autres y sont ; si ces derniers sont dans $W_\infty$, ils sont dans chaque localisateur fondamental $W$, les premiers aussi, et donc dans $W_\infty$.
+\end{proof}
+
+\begin{proof}[Démonstration de (i) $\Rightarrow$ (ii), et de (ii) $\Rightarrow$ (iii) si $W \subseteq W_0$]
+L'asphéricité totale croît avec le localisateur : si $W \subseteq W'$, une catégorie totalement $W$-asphérique est totalement $W'$-asphérique, les foncteurs vers $e$ en jeu étant dans $W$, donc dans $W'$. Comme $W_\infty$ est contenu dans $W$ (lemme~\ref{lem:114-min}), (i) entraîne~(ii). Si $W \subseteq W_0$, (ii) entraîne que $A$ est totalement $W_0$-asphérique, c'est-à-dire~(iii) par le lemme~\ref{lem:114-asph}.
+\end{proof}
+
+\begin{proof}[Deux localisateurs fondamentaux non contenus dans $W_0$]
+La classe de tous les foncteurs vérifie trivialement LA à LC. Soit $W_{-1}$ la classe des foncteurs $u : A \to B$ tels que $A$ soit vide si et seulement si $B$ l'est. Elle contient les identités, et le deux-sur-trois vaut, l'équivalence « $A$ vide $\iff$ $B$ vide » étant transitive. Si $ri = 1_A$, $A$ et $B$ sont vides ensemble, par $i$ et par $r$. Une catégorie à objet final n'est pas vide. Pour LC, si $A$ n'est pas vide, $B$ ne l'est pas ; si $b \in B$, $B_{/w(b)}$ contient $(b, 1)$, donc $A_{/w(b)}$ n'est pas vide, et $A$ non plus. Le foncteur de la catégorie discrète à deux objets vers $e$ est dans ces deux classes et n'est pas dans $W_0$.
+
+Pour $W = W_{-1}$, soit $A = B(\mathbb Z/2)$ la catégorie à un objet $\ast$ dont le monoïde d'endomorphismes est le groupe $G = \mathbb Z/2$. Elle est non vide, et $A_{/\ast \times \ast}$ contient $(\ast, (1, 1))$ : $A$ est totalement $W_{-1}$-asphérique. Mais les objets de $A_{/\ast \times \ast}$ sont les couples $(p, q) \in G \times G$, et une flèche $g : (p', q') \to (p, q)$ vérifie $(p', q') = (pg, qg)$, de sorte que $p^{-1}q$ est constant sur chaque composante ; $(1, 1)$ et $(1, \sigma)$, où $\sigma$ est l'élément non neutre, sont dans des composantes distinctes. Donc~(iii) est en défaut, et~(i) aussi : par les lemmes~\ref{lem:114-W0} et~\ref{lem:114-min}, $W_\infty \subseteq W_0$, et (i) entraînerait~(iii) par ce qui précède. Pour la classe de tous les foncteurs, la catégorie vide est totalement asphérique et ne vérifie pas~(iii).
+\end{proof}
+
+\begin{remarque}
+L'inclusion $W \subseteq W_0$ est fausse pour les localisateurs fondamentaux définis par LA à LC seuls, et avec elle les implications (ii) $\Rightarrow$ (iii) et (ii) $\Rightarrow$ (i) ; c'est la version de la lecture, qui avait omis la condition \q{satisfying Loc 4)} de la page ; sa correction du 27 septembre 2026 le signale. La condition Loc~4) est définie ailleurs dans \emph{À la poursuite des champs}, hors de cette chemise ; savoir si elle exclut les deux contre-exemples n'est pas tranché ici.
+\end{remarque}
+
+\begin{remarque}
+La lecture identifie $W_0$ à la classe des foncteurs bijectifs sur $\pi_0$ ; cette classe est un localisateur fondamental (lemme~\ref{lem:114-W0}), mais qu'elle soit le plus grossier de ceux qui vérifient Loc~4) n'est pas établi ici.
+\end{remarque}
+
+\begin{remarque}
+L'implication (iii) $\Rightarrow$ (i), que la page affirme, est réfutée dans la littérature par la catégorie des cubes (Maltsiniotis 2005, Cisinski 2006).
+\end{remarque}
+
+\noindent Ne sont pas démontrés ici : que $W_\infty$ soit la classe des équivalences faibles d'homotopie usuelles, théorème de Cisinski (2004) sur lequel la page s'appuie ; l'implication (iii) $\Rightarrow$ (i), non traitée ; les conditions et le complément sur les catégories test strictes qui précèdent la proposition, page~3 ; le programme et la liste des catégories test candidates (pages~1 et~2) ; le NB sur les foncteurs asphériques, la dominance et le critère de séparation (page~4) ; les deux contre-exemples sur la partie asphérique d'un modélisateur (pages~4 et~5) et la question de la page~5.

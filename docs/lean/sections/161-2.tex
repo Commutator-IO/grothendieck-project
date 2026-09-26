@@ -1,0 +1,61 @@
+\section[Cote 161-2 : monadicité, descente, caractérisation de Gabriel--Ulmer]{Cote 161-2 : monadicité, descente, caractérisation de Gabriel--Ulmer\protect\verifie{Folder161_2}}\label{sec:161-2}
+
+La cote 161-2, \emph{Algèbre universelle [ou catégories] : notes manuscrites (s.d.)}, cent onze pages que l'inventaire date \q{[vers 1963-1973]} et range parmi les dossiers rassemblés par Grothendieck sur différentes thématiques, cherche ce qu'est une espèce de structure algébrique dans une catégorie, et en quoi les modèles déterminent la théorie. Deux feuilles de travail, pages~33 et~34, notent le critère de reconnaissance d'un foncteur \q{tripleable}, avec trois noms que la transcription lit avec doute, \q{Beck, Barr, Linton} (\lot{161-2}{2}{33}), puis le critère de descente pour un morphisme de topos, conclu par \q{$B_\pi \xrightarrow{\ \simeq\ } B$ (th)} (\lot{161-2}{2}{34}). La page~60 énonce un corollaire sur les catégories cocomplètes, \q{Ce sont ces $E$ qu'il faudrait appeler « accessibles »} (\lot{161-2}{3}{60}), que la page~61 démontre (\lot{161-2}{4}{61}) ; la page~77 établit, pour les théories définies par limites finies, le lemme $\mathrm{Ind}(\Sigma) \simeq S$ (\lot{161-2}{4}{77}).
+
+\noindent\emph{Conventions.} Les notations de la section~\ref{sec:19} valent ici : pour une adjonction $f \dashv g$, $f : A \to B$, $h : A \to \varphi\text{-}\mathbf{Coalg}$ est le foncteur de comparaison vers les coalgèbres de $\varphi = fg$ ; dualement, pour $F \dashv U$, $U : A \to B$, le foncteur de comparaison va de $A$ dans les algèbres de la monade $\mathbb T = UF$. Une double flèche est \emph{réflexive} si ses deux flèches ont une section commune, \emph{coréflexive} si elles ont une rétraction commune.
+
+\begin{enonce}[Théorème de monadicité, page 33]
+Un foncteur $U : A \to B$ admettant un adjoint à gauche $F$ est monadique ($A \simeq \mathrm{Alg}(\mathbb T)$, $\mathbb T = UF$) si $U$ est conservatif et si $A$ a et $U$ préserve les coégalisateurs des paires réflexives.
+\end{enonce}
+
+\begin{enonce}[Critère de descente, page 34]
+Soit $f$ un morphisme de topos, d'image inverse $f^* : B' \to B$, et $\pi = f^* f_*$. Si $f^*$ est conservatif, le foncteur de comparaison $B' \to B_\pi$, $X \mapsto f^* X$, vers la catégorie des $\pi$-coalgèbres, est une équivalence.
+\end{enonce}
+
+\begin{lemme}\label{lem:161-2-grossier}
+Soit $f \dashv g$ une adjonction, $f : A \to B$. Si $f$ est conservatif, si $A$ a les noyaux des doubles flèches coréflexives et si $f$ y commute, le foncteur de comparaison $h$ est une équivalence.
+\end{lemme}
+
+\begin{proof}
+Pour toute coalgèbre $(X, a)$, la double flèche $(\eta_{gX}, g(a))$ est coréflexive (lemme~\ref{lem:19-paire}) ; elle a donc un noyau, auquel $f$ commute. Le lemme~\ref{lem:19-comp}\,(3) conclut. C'est le théorème de comonadicité « grossier » de Beck, classique.
+\end{proof}
+
+\begin{proof}[Démonstration du théorème de monadicité]
+C'est l'énoncé dual. Le foncteur $U^\circ : A^\circ \to B^\circ$ est adjoint à gauche de $F^\circ$ ; la monade $UF$ sur $B$ devient la comonade $U^\circ F^\circ$ sur $B^\circ$, dont les coalgèbres sont les opposées des $\mathbb T$-algèbres, et le foncteur de comparaison devient celui du lemme~\ref{lem:161-2-grossier}. Les coégalisateurs de paires réflexives de $A$ sont les noyaux de paires coréflexives de $A^\circ$, et $U^\circ$ est conservatif. Le lemme~\ref{lem:161-2-grossier} s'applique.
+\end{proof}
+
+\begin{proof}[Démonstration du critère de descente]
+On démontre davantage : soit $f^* \dashv f_*$ une adjonction quelconque, $f^* : B' \to B$, où $B'$ a les limites finies et $f^*$ est exact à gauche et conservatif. Alors $B'$ a les noyaux de toutes les doubles flèches, en particulier des coréflexives, et $f^*$, exact à gauche, y commute. Le lemme~\ref{lem:161-2-grossier} donne l'équivalence $B' \simeq B_\pi$. Pour un morphisme de topos, $B'$ a les limites finies et $f^*$ est exact à gauche par définition.
+\end{proof}
+
+\begin{definition}
+Soient $E$ une catégorie localement petite et $\kappa$ un cardinal régulier. Un objet $X$ de $E$ est \emph{$\kappa$-présentable} si $\operatorname{Hom}_E(X, -)$ commute aux limites inductives $\kappa$-filtrantes, et \emph{présentable} s'il l'est pour un $\kappa$ ; c'est l'\q{accessible} de la page. Une sous-catégorie pleine $\mathcal C$ de $E$ est \emph{dense} si, pour tout $X$, la flèche canonique $\varinjlim_{\mathcal C_{/X}} Y \to X$ est un isomorphisme ; c'est la condition~a) par laquelle la page~56 définit une sous-catégorie \q{strictement génératrice}. La catégorie $E$ est \emph{localement présentable} si elle est cocomplète et s'il existe un cardinal régulier $\kappa$ et un petit ensemble d'objets $\kappa$-présentables dont tout objet est limite inductive $\kappa$-filtrante ; c'est ce que dit \q{$E$ est équivalente à un $\mathrm{Ind}_\pi(\mathcal C)$, $\mathcal C$ petite}.
+\end{definition}
+
+\begin{enonce}[Corollaire, pages 60 et 61]
+Une catégorie localement petite et cocomplète $E$ est localement présentable si et seulement si elle admet une petite sous-catégorie pleine dense formée d'objets présentables.
+\end{enonce}
+
+\begin{proof}
+Supposons $E$ localement $\kappa$-présentable. La sous-catégorie pleine $P$ des objets $\kappa$-présentables est essentiellement petite et dense : c'est classique (Gabriel--Ulmer, Adámek--Rosický). Soit $Q \subseteq P$ une petite sous-catégorie pleine contenant un représentant de chaque classe d'isomorphisme ; l'inclusion $Q \to P$ est une équivalence, et le composé d'une équivalence et d'un foncteur dense est dense, donc $Q$ est dense dans $E$. Ses objets sont $\kappa$-présentables, donc présentables.
+
+Réciproquement, soit $P$ une petite sous-catégorie pleine dense dont chaque objet $X$ est $\kappa_X$-présentable pour un cardinal régulier $\kappa_X$. Comme $P$ est petite, la famille des $\kappa_X$ est majorée par un cardinal $c$. Soit $\kappa_0$ le successeur de $\max(c, \aleph_0)$ ; c'est un cardinal régulier, comme tout successeur d'un cardinal infini. Toute limite inductive $\kappa_0$-filtrante étant $\kappa_X$-filtrante, chaque $X \in P$ est $\kappa_0$-présentable. Une sous-catégorie dense est fortement génératrice (classique). Or une catégorie cocomplète qui admet un petit ensemble fortement générateur d'objets $\kappa_0$-présentables est localement $\kappa_0$-présentable : c'est le théorème~1.20 d'Adámek et Rosický, classique. Donc $E$ est localement présentable.
+\end{proof}
+
+\begin{enonce}[Lemme, page 77]
+Soient $R$ une petite catégorie à limites finies, $S = \underline{\mathrm{Hom}}_{\mathrm{lex}}(R, \mathrm{Ens})$ et $\Sigma \simeq R^\circ \subset S$ la sous-catégorie pleine des structures représentables. Le foncteur d'inclusion $\Sigma \to S$ induit une équivalence $\mathrm{Ind}(\Sigma) \simeq S$.
+\end{enonce}
+
+\begin{proof}
+On identifie $S$ aux préfaisceaux $X : \Sigma^\circ \to \mathrm{Ens}$ exacts à gauche, la catégorie $\Sigma = R^\circ$ ayant les limites inductives finies, et $\mathrm{Ind}(\Sigma)$ à la sous-catégorie pleine des préfaisceaux sur $\Sigma$ qui sont limites inductives filtrantes de représentables. Il suffit de montrer que ces deux sous-catégories pleines ont les mêmes objets. Un représentable est exact à gauche, et les limites inductives filtrantes commutent aux limites projectives finies dans $\mathrm{Ens}$ ; tout ind-objet est donc exact à gauche. Réciproquement, soit $X$ exact à gauche. Tout préfaisceau est la limite inductive des représentables sur sa catégorie des éléments $\Sigma_{/X}$, et celle-ci est filtrante : elle est non vide, car $X$ envoie l'objet initial de $\Sigma$ sur un point ; deux éléments $x \in X(a)$, $y \in X(b)$ proviennent de $X(a \sqcup b) = X(a) \times X(b)$ ; deux flèches $u, v : (a, x) \rightrightarrows (b, y)$ sont égalisées par la flèche vers le coégalisateur $c$ de $u, v$, puisque $X(c)$ est le noyau de $X(u), X(v) : X(b) \rightrightarrows X(a)$, qui contient $y$. C'est le fait classique que les ind-objets d'une petite catégorie à limites inductives finies sont ses préfaisceaux exacts à gauche (SGA~4, exposé~I, §~8), que la preuve vérifiée invoque.
+\end{proof}
+
+\begin{remarque}
+Le critère de descente n'utilise pas la structure de topos : il vaut pour tout foncteur exact à gauche et conservatif, adjoint à gauche, défini sur une catégorie à limites finies. L'équivalence a pour source $B'$, et non $B$ comme l'écrit la page ; la lecture l'a corrigé.
+\end{remarque}
+
+\begin{remarque}
+Le corollaire est le théorème de caractérisation des catégories localement présentables de Gabriel et Ulmer ; il est démontré ici pour la notion moderne, non pour le $\mathrm{Ind}_\pi(\mathcal C)$ de SGA~4 que la page emploie. Le lemme de la page~77 est le cas des limites finies de la dualité de Gabriel--Ulmer.
+\end{remarque}
+
+\noindent Ne sont pas démontrés ici : l'adjonction de la page~33 entre les modèles d'une théorie de Lawvere et les algèbres d'une monade, que la page n'énonce pas ; le théorème de la page~54, le corollaire de la page~55 et la non-accessibilité de $(\mathrm{Ens})^\circ$ et $(\mathrm{Ab})^\circ$ ; la liste de la page~56 ; le lemme de la page~59 sur $\mathrm{Ind}_\pi(\mathcal C)$ et les filtrations cardinales ; le corollaire de la page~77 ; les théorèmes de la $\Delta$-enveloppe (pages~3 à~31), les théories algébriques et leurs topos classifiants (pages~17 à~24 et~36 à~52), les compléments et exemples des pages~62 à~76 et~78 à~91, le corps universel (pages~92 à~95), la copie au net (pages~97 à~106) et les pages~108 à~111.

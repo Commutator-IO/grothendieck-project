@@ -1,0 +1,69 @@
+\section[Cote 106 : catégories à cofibrations, relèvement faible et factorisation de Brown]{Cote 106 : catégories à cofibrations, relèvement faible et factorisation de Brown\protect\verifie{Folder106}}\label{sec:106}
+
+La cote 106, \emph{[Champs (stacks) 3] : notes manuscrites (s.d.)}, seize pages que l'inventaire date \q{[à partir de 1982]} et range dans le groupe Autour de Pursuing stacks, est faite de huit feuillets de bloc entre lesquels sont intercalées des feuilles de listing, dont certaines portent les dates d'impression des 24 et 25~août 1982. Elle s'ouvre sur \q{Soit $(\mathcal{C}, W, \mathrm{cof})$ une catégorie satisfaisant à C1 : C3 de Baues}, construit le remplacement cofibrant et invoque le \q{weak lifting lemma} (\lot{106}{1}{1}) ; la page~9 factorise une équivalence faible entre objets cofibrants et note en marge \q{On utilise $y \in \mathcal{C}_{\mathrm{cof}}$ ici} (\lot{106}{1}{9}) ; la page~11 écrit : \q{Mais je doute qu'il ne suffise d'inverser les équiv.\ faibles \emph{cofibrantes}, pour que les équiv.\ faibles deviennent inversibles !} (\lot{106}{1}{11}).
+
+\begin{definition}
+Une \emph{catégorie à cofibrations} est une catégorie $\mathcal C$ à objet initial $\emptyset$, munie de deux classes de flèches, les équivalences faibles $W$ et les cofibrations $\mathrm{cof}$, qui vérifient les axiomes C1 à C3 tels que la lecture les rappelle : C1, les isomorphismes sont dans $W$ et dans $\mathrm{cof}$, les composés de cofibrations sont des cofibrations, et $W$ satisfait au deux-sur-trois ; C2, pour une cofibration $c : b \to a$ et une flèche $u : b \to y$, la somme amalgamée $a \vee_b y$ existe, la flèche $y \to a \vee_b y$ est une cofibration, et une équivalence faible si $c$ en est une, et la flèche $a \to a \vee_b y$ est une équivalence faible si $u$ en est une ; C3, toute flèche se factorise en une cofibration suivie d'une équivalence faible. Un objet $x$ est \emph{cofibrant} si $\emptyset \to x$ est une cofibration. On note $W_0 = W \cap \mathrm{cof}$.
+\end{definition}
+
+\begin{enonce}[Remplacement cofibrant et relèvement faible, page 1]
+Pour tout objet $x$, il existe $\alpha_x : \widetilde x \to x$ dans $W$ avec $\widetilde x$ cofibrant. Soient $f : x \to y$, et $\alpha_x : \widetilde x \to x$, $\alpha_y : \widetilde y \to y$ dans $W$ avec $\widetilde x$ et $\widetilde y$ cofibrants. Il existe $i : \widetilde y \to \widetilde y'$ dans $\mathrm{cof} \cap W$, $\alpha'_y : \widetilde y' \to y$ dans $W$ avec $\alpha_y = \alpha'_y\, i$, et $\widetilde f : \widetilde x \to \widetilde y'$ avec $\alpha'_y \widetilde f = f \alpha_x$.
+\end{enonce}
+
+\begin{enonce}[Factorisation, page 9]
+Soient $x, y$ cofibrants et $f : x \to y$ dans $W$. En factorisant $(f, 1_y) : x \sqcup y \to y$ en une cofibration $x \sqcup y \to \bar x$ suivie d'une équivalence faible $\alpha : \bar x \to y$, et en notant $i$ et $g$ les composés de $x \to x \sqcup y$ et $y \to x \sqcup y$ avec $x \sqcup y \to \bar x$, on a $\alpha i = f$, $\alpha g = 1_y$ et $i, g \in \mathrm{cof} \cap W$.
+\end{enonce}
+
+\begin{enonce}[Le doute levé, page 11]
+Si tous les objets de $\mathcal C$ sont cofibrants, le foncteur $W_0^{-1}\mathcal C \to W^{-1}\mathcal C$ est un isomorphisme de catégories.
+\end{enonce}
+
+\begin{lemme}\label{lem:106-cof}
+Si $x$ est cofibrant et $i : x \to z$ une cofibration, $z$ est cofibrant.
+\end{lemme}
+
+\begin{proof}
+Par initialité, $\emptyset \to z$ est le composé de $\emptyset \to x$ et de $i$, qui est une cofibration par C1.
+\end{proof}
+
+\begin{lemme}\label{lem:106-somme}
+Soient $p : a \to y$ et $q : b \to y$, avec $b$ cofibrant. La somme $a \sqcup b$ existe ; factorisons $(p, q) : a \sqcup b \to y$ par C3 en une cofibration $c : a \sqcup b \to z$ suivie de $w : z \to y$ dans $W$, et notons $j_a$, $j_b$ les composés de $c$ avec les injections de $a$ et de $b$. Alors $w j_a = p$, $w j_b = q$, $j_a$ est une cofibration, et $j_b$ en est une si $a$ est cofibrant.
+\end{lemme}
+
+\begin{proof}
+La somme $a \sqcup b$ est la somme amalgamée de $\emptyset \to b$ et de $\emptyset \to a$ ; comme $\emptyset \to b$ est une cofibration, elle existe par C2, et l'injection $a \to a \sqcup b$ est une cofibration. Donc $j_a$ en est une par C1. Les égalités $w j_a = p$ et $w j_b = q$ résultent de $wc = (p, q)$. Si $a$ est cofibrant, le même carré, lu dans l'autre sens, fait de $b \to a \sqcup b$ une cofibration, et $j_b$ en est une.
+\end{proof}
+
+\begin{proof}[Démonstration du remplacement cofibrant et du relèvement faible]
+Par C3, $\emptyset \to x$ se factorise en une cofibration $\emptyset \to \widetilde x$ suivie de $\alpha_x : \widetilde x \to x$ dans $W$ ; par initialité, la cofibration est la flèche $\emptyset \to \widetilde x$, et $\widetilde x$ est cofibrant.
+
+Pour le relèvement, appliquons le lemme~\ref{lem:106-somme} à $a = \widetilde y$, $b = \widetilde x$, $p = \alpha_y$ et $q = f \alpha_x$ ; c'est la factorisation de $(\alpha_y, f\alpha_x) : \widetilde y \vee \widetilde x \to y$ que propose la lecture. Posons $\widetilde y' = z$, $i = j_a$, $\alpha'_y = w$ et $\widetilde f = j_b$. Alors $i$ est une cofibration, parce que $\widetilde x$ est cofibrant ; $\alpha'_y \in W$ ; $\alpha'_y\, i = \alpha_y$ et $\alpha'_y \widetilde f = f\alpha_x$. Comme $\alpha'_y$ et $\alpha'_y\, i = \alpha_y$ sont dans $W$, $i$ y est par deux-sur-trois. Enfin $\widetilde y'$ est cofibrant par le lemme~\ref{lem:106-cof}, puisque $\widetilde y$ l'est.
+\end{proof}
+
+\begin{proof}[Démonstration de la factorisation]
+Appliquons le lemme~\ref{lem:106-somme} à $a = x$, $b = y$, $p = f$ et $q = 1_y$, et posons $\bar x = z$, $\alpha = w$, $i = j_a$, $g = j_b$. Alors $\alpha i = f$ et $\alpha g = 1_y$ ; $i$ est une cofibration parce que $y$ est cofibrant, et $g$ en est une parce que $x$ l'est. Comme $\alpha$ et $\alpha g = 1_y$, isomorphisme, sont dans $W$, $g \in W$ par deux-sur-trois ; comme $\alpha$ et $\alpha i = f$ sont dans $W$, $i \in W$.
+\end{proof}
+
+\begin{proof}[Démonstration de l'énoncé de la page 11]
+Montrons d'abord que tout foncteur $F : \mathcal C \to \mathcal D$ qui rend inversibles les flèches de $W_0$ rend inversibles celles de $W$. Soit $f : x \to y$ dans $W$ ; $x$ et $y$ sont cofibrants, et la factorisation de la page~9 donne $f = \alpha i$ et $\alpha g = 1_y$ avec $i, g \in W_0$. Alors $F(g)$ est inversible et $F(\alpha) F(g) = 1$, donc $F(\alpha) = F(g)^{-1}$ est inversible, et $F(f) = F(\alpha) F(i)$ aussi.
+
+Soient $Q_0 : \mathcal C \to W_0^{-1}\mathcal C$ et $Q : \mathcal C \to W^{-1}\mathcal C$ les foncteurs de localisation. Comme $W_0 \subseteq W$, $Q$ rend inversibles les flèches de $W_0$, et la propriété universelle de $Q_0$ donne un unique $\bar F : W_0^{-1}\mathcal C \to W^{-1}\mathcal C$ tel que $\bar F Q_0 = Q$. Par ce qui précède, $Q_0$ rend inversibles les flèches de $W$, d'où un unique $\bar G : W^{-1}\mathcal C \to W_0^{-1}\mathcal C$ tel que $\bar G Q = Q_0$. Alors $\bar G \bar F Q_0 = Q_0$ et $\bar F \bar G Q = Q$, et l'unicité dans les deux propriétés universelles donne $\bar G \bar F = \mathrm{id}$ et $\bar F \bar G = \mathrm{id}$.
+\end{proof}
+
+\begin{remarque}
+Dans le relèvement faible, l'hypothèse $\alpha_x \in W$ ne sert pas, et $\widetilde y$ cofibrant ne sert qu'à rendre $\widetilde y'$ cofibrant, ce que la lecture utilise sans le dire en plaçant $[i]^{-1}[\widetilde f]$ dans $W_{\mathrm{cof}}^{-1}\mathcal C_{\mathrm{cof}}$.
+\end{remarque}
+
+\begin{remarque}
+Dans la factorisation, $f \in W$ ne sert qu'à mettre $i$ dans $W$ : pour toute $f$ entre objets cofibrants, on obtient encore $i \in \mathrm{cof}$, $g \in \mathrm{cof} \cap W$ et $\alpha \in W$. C'est le lemme de factorisation de K.~S. Brown (1973), classique.
+\end{remarque}
+
+\begin{remarque}
+De C2, seules servent l'existence des sommes amalgamées le long d'une cofibration et la stabilité des cofibrations par changement de base ; les deux clauses de C2 sur les équivalences faibles, et la clause de C1 qui fait des isomorphismes des cofibrations, ne servent nulle part.
+\end{remarque}
+
+\begin{remarque}
+Le doute de la page~11 n'est pas fondé lorsque tous les objets sont cofibrants, ce qui est le cadre de la page depuis la réduction de la page~5 ; l'argument est celui de la lecture, et tous ses éléments sont sur la page~9.
+\end{remarque}
+
+\noindent Ne sont pas démontrés ici : l'équivalence $W_{\mathrm{cof}}^{-1}\mathcal C_{\mathrm{cof}} \simeq W^{-1}\mathcal C$ de la page~1 et la proposition de la page~5 ($\Psi$ est une équivalence si et seulement si la condition~$(\star)$ est vérifiée) ; la réduction à $\mathcal C_{\mathrm{cof}}$ ; les catégories $\mathrm{Ch}_0(x, y)$ et $\widetilde{\mathcal C}$, et la plénitude du foncteur $q$ (pages~5 à~9) ; la définition rectifiée $\mathrm{Ch}'_0(x, y)$, la comparaison des factorisations et le critère $(\star\star)$ des pages~11 à~15, dont la suffisance n'est pas établie par le dossier.
