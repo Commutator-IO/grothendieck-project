@@ -1,0 +1,845 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 82, batch 1 (pages 1-20).
+% Established from the facsimile archives/batches/82/batch-01.pdf, cut from a
+% copy of 82.pdf fetched through the project's relay
+% (https://grothendieck-relay.onrender.com/source/82.pdf); PDF page k =
+% archivists' page k, no cover sheet. Per the skill transcribe-grothendieck.
+% The folder is seventy-eight pages in four batches (1-20, 21-40, 41-60,
+% 61-78), transcribed in parallel by four passes; only batch 3 existed when
+% this one was written, and it was read for notation only.
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-09-26 — first pass, unchecked against the pages by a human.
+%
+% Dating and title. \dating is the folder's own catalogue date, copied
+% verbatim; the folder belongs to the group « Géométrie et topologie
+% combinatoire » (69-89), but since it has a date of its own the group's range
+% is not added. \foldertitle is the catalogue title without its final full
+% stop.
+%
+% Pages skipped: none. Page 1 is a pink cover inscribed in pencil, top right,
+% « Algèbres de Lie de rang 3 associées aux formes bil. symétriques de rang
+% 3 », with « (29 p) » in lighter pencil at its left (whose hand is not
+% certain); by the cover rule it takes no \page marker and its words become
+% the \section* heading, with a \note. Pages summarised: none. Pages 2-20 are
+% transcribed from his hand, all in blue felt-tip, fair copy for the most part
+% (the formulas carry throughout; some connective prose does not).
+% Drawings: one small diagram on p. 3 (a triangle of bijections through
+% Hom(E, E')), set as a tikzcd.
+%
+% His pagination: none on the leaves. The « (29 p) » of the cover would take
+% the run from p. 2 to p. 30, i.e. into batch 2. His numbered run: equations
+% (1)-(72), one continuous run across pp. 2-20 (from (1) the duality
+% E x E' -> O_S to (72) the adjoint action in the basis X~, H~, Y~), with
+% primed and « bis/ter » variants; the label (3) is used twice on p. 2 (the
+% second time as a back-reference), (36) twice (pp. 8 and 9), (60) appears
+% only in the margin of p. 18, and on p. 5 the label (11) is reused for the
+% matrix of phi while p. 3 may already use it (doubtful). All left as
+% written.
+%
+% Order of the leaves. The argument runs 15 -> 17 -> 16 -> 18, not in the
+% archivists' order: p. 15 ends « on interprète (52) comme » and p. 17 opens
+% « exprimant qu'un certain automorphisme… »; p. 17 ends « La formule (56)
+% s'écrit, [en prenant le] » and p. 16 opens with the struck « produit
+% scalaire avec z… »; p. 16 ends on formula (52) rewritten and p. 18 opens
+% « qui n'est autre que la définition (58)… ». Transcribed in the archivists'
+% order, with a \note at each seam. The struck block at the foot of p. 13
+% likewise continues nothing that survives on p. 14. Pages 4 and 5 are also
+% reversed: p. 5 carries (11)-(15) and ends « et », p. 4 opens « que l'effet
+% d'une permutation circulaire… » and carries (16)-(19).
+%
+% What the batch is about. S a scheme, E, E' vector bundles of rank 3 in
+% duality, « special » (a basis omega of det E given). Via Lambda^2 E ~ E'
+% (alpha) and Lambda^2 E' ~ E (alpha'), a bilinear form phi on E (i.e. f :
+% E -> E') gives an alternating algebra structure [ , ]_phi on E'; in a basis
+% with phi = (a r q' / r' b p / q p' c), the Jacobi identity reduces to (18),
+% i.e. to the symmetry of the 2x2 minors, so symmetric forms give Lie
+% algebras (Proposition, p. 6). The example q = xy + z^2 gives the « universal »
+% Lie algebra [H,X] = X, [H,Y] = -Y, [X,Y] = 2H of GP(1) over Z (p. 6).
+% Discriminants and « divided discriminant » delta'(q); definition of a
+% special orthogonal structure (q, omega) by delta'(q) = -omega^(-2), and in
+% rank 2n, 2n+1 by (-1)^n (pp. 7-8); locally existing iff q smooth, a torsor
+% under mu_2. Dually f' = Lambda^2 f (the cofactor map) gives phi' and a
+% Lie structure [ , ]_phi' on E; Cramer's formulas f'f = Delta id, f'' =
+% Delta f; f is a Lie homomorphism (49)-(50); the Lie algebra E' acts on E by
+% rho_E (51)-(56), via the adjoint representation and its contragredient
+% (57)-(59). The example again: E becomes sl(2) with [H~,X~] = 2X~, …, f is
+% the isogeny SL(2) -> GP(1) of kernel mu_2, and the action of E' on E the
+% adjoint action (pp. 18-20).
+%
+% Hardest pages: 10-12 (the prose on the non-symmetry of f, f', and on
+% scaling by lambda, mu), 16 (struck blocks) and the two long margins, pp. 15
+% and 18, written up the left edge in two or three columns and read from the
+% upright margin tiles; their prose is partly lost. Notation fixed for the
+% batch: \Lambda^2 for his exterior power with the exponent written above;
+% \underline{\det} for his underlined det; \mathcal{O}_S for his O_S; his
+% dual basis e'_i, the basis of Lambda^2 as \bar e_i; \rho_E, \tilde\rho_E as
+% written; GP(1) as \mathrm{GP}(1), sl(2) as \mathfrak{sl}(2).
+
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{82}
+\batch{1}
+\pages{1}{20}
+\dating{[vers 1982]}
+\watermark{Édition de démonstration}
+\foldertitle{SO(3) ≃ GP(1) : notes manuscrites (s.d.)}
+
+\begin{document}
+
+\section*{Algèbres de Lie de rang 3 associées aux formes bil.\ symétriques de rang 3}
+\note{titre écrit au crayon par Grothendieck sur la couverture rose (page 1), en haut à droite ; à sa gauche, d'un crayon plus pâle, « (29 p) ».}
+
+\page{2}
+\subsection*{Formes quadratiques de rang trois et algèbres de Lie}
+\note{titre encadré, en tête de la page.}
+
+$S$ schéma, $E, E'$ Modules vectoriels de rang 3 sur $S$, en dualité par
+accouplement
+\[
+  (1) \qquad E \times E' \longrightarrow \mathcal{O}_S \qquad (x, x') \longmapsto \langle x, x' \rangle
+\]
+d'où accouplement
+\[
+  (2) \qquad \underline{\det}(E) \otimes \underline{\det}(E') \simeq \mathcal{O}_S
+\]
+(où on pose
+\[
+  \underline{\det} E \simeq \Lambda^3 E \quad )
+\]
+Notons que les accouplements
+\[
+  \begin{array}{ll}
+    E \times \Lambda^2 E \longrightarrow \Lambda^3 E = \underline{\det} E & (x, \omega) \longmapsto x \wedge \varphi = \varphi \wedge x \\
+    E' \times \Lambda^2 E' \longrightarrow \Lambda^3 E' = \underline{\det} E' & (x', \varphi') \longmapsto x' \wedge \varphi' \; (= \varphi' \wedge x')
+  \end{array}
+\]
+\note{dans la première ligne, un premier couple entre parenthèses est biffé et remplacé au-dessus par $(x, \omega)$, alors que l'image est écrite $x \wedge \varphi$.}
+sont aussi dualisants, donc on a des isomorphismes
+\[
+  (3) \qquad
+  \begin{cases}
+    \Lambda^2 E \overset{\alpha_0}{\simeq} \check{E} \otimes \underline{\det} E \simeq E' \otimes \underline{\det}(E) \\
+    \Lambda^2 E' \overset{\alpha'_0}{\simeq} \check{E}' \otimes \underline{\det} E' \simeq E \otimes \underline{\det}(E')
+  \end{cases}
+\]
+Supposons maintenant $E$ « spécial » i.e.\ muni d'une \emph{base}
+\[
+  (4) \qquad \omega \in \Gamma(S, \underline{\det}(E))
+\]
+définissant donc un isomorphisme
+\[
+  (5) \qquad \mathcal{O}_S \xrightarrow{\ \sim\ } \underline{\det}(E) \qquad \lambda \longmapsto \lambda\omega
+\]
+et une base duale
+\[
+  (4') \qquad \omega' = \omega^{-1} \in \Gamma(S, \underline{\det}(E'))
+\]
+\note{la lecture « $\omega^{-1}$ » est douteuse : l'exposant est mal formé.}
+définissant
+\[
+  (5') \qquad \mathcal{O}_S \xrightarrow{\ \sim\ } \underline{\det}(E') \qquad \lambda \longmapsto \lambda\omega'
+\]
+Compte tenu des iso (5) (5'), les isom.\ (3) définissent des iso.
+\[
+  (6) \qquad
+  \begin{cases}
+    \Lambda^2 E \xrightarrow[\sim]{\ \alpha\ } E' \\
+    \Lambda^2 E' \xrightarrow[\sim]{\ \alpha'\ } E
+  \end{cases}
+\]
+définis donc par
+\[
+  (7) \qquad \langle x, \alpha(\varphi) \rangle\, \omega = x \wedge \varphi , \qquad
+  \langle \alpha'(\varphi'), x' \rangle\, \omega' = \varphi' \wedge x'
+\]
+\note{avant la seconde formule de (7), une première rédaction est biffée.}
+
+\page{3}
+Si $E$ est muni d'une base
+\[
+  (8) \qquad (e_1, e_2, e_3) \qquad (e_i \in \Gamma(S, E))
+\]
+définissant la base duale
+\[
+  (8') \qquad (e'_1, e'_2, e'_3) \qquad (e'_i \in \Gamma(S, E'))
+\]
+par
+\[
+  \langle e_i, e'_j \rangle = \delta_{ij} \qquad (\text{symb.\ de Kronecker})
+\]
+on a des bases de $\Lambda^2 E$, $\Lambda^2 E'$ par
+\[
+  (9) \qquad
+  \begin{cases}
+    \bar{e}_1 = e_2 \wedge e_3 ,\ \bar{e}_2 = e_3 \wedge e_1 ,\ \bar{e}_3 = e_1 \wedge e_2 & (\text{base de } \Lambda^2 E) \\
+    \bar{e}'_1 = e'_2 \wedge e'_3 ,\ \bar{e}'_2 = e'_3 \wedge e'_1 ,\ \bar{e}'_3 = e'_1 \wedge e'_2 & (\text{--- } \Lambda^2 E')
+  \end{cases}
+\]
+et on a
+\[
+  (10) \qquad
+  \begin{cases}
+    \alpha(\bar{e}_i) = e'_i \\
+    \alpha'(\bar{e}'_i) = e_i
+  \end{cases}
+\]
+\note{les numéros (9) et (10) sont surchargés ; (10) est confirmé par le renvoi de la page 5.}
+
+Notons \struck{\ill{}}
+
+\emph{Observation.} Si $E$ est un Module vectoriel « spécial » de rang 3,
+alors on a \struck{une} bijections canoniques
+
+\begin{tikzcd}[column sep=small, row sep=small, nodes={font=\scriptsize}]
+  \text{Formes bilinéaires } E \times E \to \mathcal{O}_S \arrow[rr, "\sim"] \arrow[dr, "\sim"'] & & \text{structures d'algèbre alternée sur } E' \\
+  & \mathrm{Hom}_{\mathcal{O}_S}(E, E') \arrow[ur, "\sim"'] &
+\end{tikzcd}
+
+où $\searrow$ associe à $\varphi(x, y)$ l'application $f : E \to E'$ définie
+par \uncertain{(11)}
+\[
+  f(x)(y) \; \bigl(= \langle y, f(x) \rangle\bigr) = \varphi(x, y)
+\]
+\note{le numéro (11), serré contre la formule et relié par un trait à « l'application $f : E \to E'$ », est douteux ; le numéro (11) sert de nouveau à la page 5.}
+et où $\nearrow$ est l'application qui à $f$ associe la structure d'algèbre alternée
+\[
+  (12) \qquad (x', y') \longmapsto [x', y']_{\varphi} = f\alpha'(x' \wedge y')
+\]
+
+\page{4}
+\note{les pages 4 et 5 se suivent à rebours : la page 5 (formules (11) à (15)) précède la page 4 (formules (16) à (19)), qui commence au milieu de la phrase terminant la page 5.}
+que l'effet d'une permutation circulaire des vecteurs de base sur la matrice
+$\varphi$ s'obtient par une permutation circulaire sur les \add{trois groupes de}
+lettres $(a, b, c)$, $(p, q, r)$, $(p', q', r')$. Ceci posé, les formules
+(13), (13 bis) se récrivent
+\[
+  (16) \qquad
+  \begin{cases}
+    [[e'_1 \wedge e'_2], e'_3] = (ap' - qr')e'_1 + (p'r - bq)e'_2 + (p'q' - pq)e'_3 \\
+    [[e'_2 \wedge e'_3], e'_1] = (q'r' - qr)e'_1 + (bq' - rp')e'_2 + (q'p - cr)e'_3 \\
+    [[e'_3, e'_1], e'_2] = (r'q - ap)e'_1 + (r'p' - rp)e'_2 + (cr' - pq')e'_3
+  \end{cases}
+\]
+d'où
+\[
+  (17) \qquad \mathrm{Jac}(e_1, e_2, e_3) = [[e_1, e_2], e_3] + [[e_2, e_3], e_1] + [[e_3, e_1], e_2]
+\]
+\[
+  = [a(p' - p) + (q'r' - qr)]e'_1 + [b(q' - q) + (r'p' - rp)]e'_2 + [c(r' - r) + (p'q' - pq)]e'_3
+\]
+\note{dans la première ligne de (17) les accents des $e_i$ ne sont pas écrits.}
+Donc, pour que l'algèbre $E'_{\varphi}$ (le crochet de $[\ ,\ ]_{\varphi}$) soit une
+algèbre de Lie, il faut et il suffit qu'elle satisfasse les conditions
+\[
+  (18) \qquad
+  \begin{cases}
+    a(p' - p) + (q'r' - qr) = 0 & \text{ou } (ap' - qr) - (ap - q'r') = 0 \\
+    b(q' - q) + (r'p' - rp) = 0 & \text{ou } (bq' - rp) - (bq - r'p') = 0 \\
+    c(r' - r) + (p'q' - pq) = 0 & \text{ou } (cr' - pq) - (cr - p'q') = 0
+  \end{cases}
+\]
+\emph{NB} Avec la notation évidente pour les mineurs d'ordre 2
+$\mathrm{Min}^{ij}_{kl}(\varphi)$ d'une matrice $\varphi$, les premiers membres des
+équations (18), i.e.\ les coefficients de l'alternateur jacobien (17), sont
+\[
+  (19) \qquad
+  \begin{cases}
+    \mathrm{Min}^{12}_{13}(\varphi) - \mathrm{Min}^{12}_{13}({}^{t}\varphi) \\
+    \mathrm{Min}^{23}_{21}(\varphi) - \mathrm{Min}^{23}_{21}({}^{t}\varphi) \\
+    \mathrm{Min}^{31}_{32}(\varphi) - \mathrm{Min}^{31}_{32}({}^{t}\varphi)
+  \end{cases}
+\]
+\note{la disposition des indices des mineurs (en haut et en bas) est lue sur l'encre et reste incertaine.}
+
+\page{5}
+En termes des bases (8)/(8'), $\varphi$ sera donnée par une matrice (notée
+\struck{\ill{}})
+\[
+  (11) \qquad \varphi = (\varphi_{ij})_{1 \leq i, j \leq 3} \qquad \varphi_{ij} = \varphi(e_i, e_j)
+\]
+-- la matrice de $f$ est alors \emph{transposée} de la matrice $\varphi$ -- et on
+trouve que la structure d'algèbre alternée correspondante est donnée par
+\[
+  [e'_2, e'_3]_{\varphi} = \varphi\alpha'(e'_2 \wedge e'_3) = \varphi\alpha'(\bar{e}'_1) \underset{(10)}{=} \varphi(e_1) = \sum_j \varphi_{1j}\, e'_j
+\]
+et de même pour les deux autres crochets \struck{produits}
+\[
+  (12) \qquad
+  \begin{cases}
+    [e'_2, e'_3]_{\varphi} = \sum_j \varphi_{1j}\, e'_j \\
+    [e'_3, e'_1]_{\varphi} = \sum_j \varphi_{2j}\, e'_j \\
+    [e'_1, e'_2]_{\varphi} = \sum_j \varphi_{3j}\, e'_j
+  \end{cases}
+\]
+Ceci posé, on trouve (laissant tomber l'indice $\varphi$ dans les crochets)
+\[
+  (13) \qquad [[e'_1 \wedge e'_2], e'_3] = \sum_j (\varphi_{32}\varphi_{1j} - \varphi_{31}\varphi_{2j})\, e'_j
+\]
+et de même pour les expressions déduites par permutations circulaires
+\[
+  (13\ \text{bis}) \qquad
+  \begin{cases}
+    [[e'_2 \wedge e'_3], e'_1] = \sum_j (\varphi_{13}\varphi_{2j} - \varphi_{12}\varphi_{3j})\, e'_j \\
+    [[e'_3 \wedge e'_1], e'_2] = \sum_j (\varphi_{21}\varphi_{3j} - \varphi_{23}\varphi_{1j})\, e'_j
+  \end{cases}
+\]
+Les \struck{coefficient} symétries des formules apparaissent mieux en posant
+\struck{$\varphi_{11} = a$, $\varphi$}
+\[
+  (14) \qquad
+  \begin{cases}
+    \varphi_{11} = a ,\ \varphi_{22} = b ,\ \varphi_{33} = c \\
+    \varphi_{23} = p ,\ \varphi_{31} = q ,\ \varphi_{12} = r \\
+    \varphi_{32} = p' ,\ \varphi_{13} = q' ,\ \varphi_{21} = r'
+  \end{cases}
+\]
+i.e.\ en écrivant
+\[
+  (15) \qquad \varphi = \begin{pmatrix} a & r & q' \\ r' & b & p \\ q & p' & c \end{pmatrix}
+\]
+de sorte que la matrice transposée de $\varphi$ s'obtient en échangeant $p$ avec
+$p'$, $q$ avec $q'$, $r$ avec $r'$, et
+\note{la phrase continue en tête de la page 4.}
+
+\page{6}
+On trouve en particulier
+
+\emph{Proposition.} Les formes bilinéaires \emph{symétriques} $\varphi$ sur $E$
+définissent des structures d'\emph{algèbre de Lie} sur $E'$.
+
+\emph{Exemple} \emph{identification} (20) $E \simeq \mathcal{O}_S^3$. Prenons
+$E$ muni de la base (8), \add{d'où} \struck{\ill{}}, \uncertain{dirons} sur $E$
+la forme quadratique
+\[
+  (21) \qquad q(x, y, z) = xy + z^2
+\]
+correspondant à la forme bilinéaire associée
+\[
+  (22) \qquad \varphi\bigl((x, y, z), (x', y', z')\bigr) = (xy' + yx') + 2zz'
+\]
+donc
+\[
+  (23) \qquad
+  \begin{cases}
+    q(e_1) = q(e_2) = 0 ,\ q(e_3) = 1 \\
+    \varphi(e_1, e_2) = 1 ,\ \varphi(e_2, e_3) = \varphi(e_3, e_1) = 0 \\
+    \varphi(e_1, e_1) = \varphi(e_2, e_2) = 0 \qquad \varphi(e_3, e_3) = 2
+  \end{cases}
+\]
+\marginal{\emph{NB} $\varphi(\xi, \xi) = 2q(\xi)$}
+(ou encore
+\[
+  (23\ \text{bis}) \qquad
+  \begin{cases}
+    a = b = 0 ,\ c = 1 \\
+    p = p' = q = q' = 0 \quad r = r' = 1
+  \end{cases} ,
+  \quad \varphi = \begin{pmatrix} 0 & 1 & 0 \\ 1 & 0 & 0 \\ 0 & 0 & 2 \end{pmatrix}
+\]
+\note{la matrice porte $\varphi_{33} = 2$ alors que la ligne précédente donne $c = 1$ ; laissé tel quel.}
+Les formules (12) deviennent alors \struck{\ill{}}
+\[
+  (24) \qquad
+  \begin{cases}
+    [e'_2, e'_3] = e'_2 \\
+    [e_3, e'_1] = e'_1 \\
+    [e'_1, e'_2] = 2e'_3
+  \end{cases}
+\]
+\marginal{\emph{NB} $f(e_1) = e'_2$, $f(e_2) = e'_1$, $f(e_3) = 2e'_3$}
+\note{la note « NB » est encadrée à droite de (24) ; dans la deuxième ligne de (24), l'accent du premier $e_3$ n'est pas écrit.}
+ou encore, posant
+\[
+  (25) \qquad X = e'_1 ,\ Y = e'_2 ,\ H = e'_3
+\]
+on reconnaît les formules familières
+\[
+  (26) \qquad [H, X] = X ,\ [H, Y] = -Y ,\quad [X, Y] = 2H
+\]
+de l'algèbre de Lie \struck{de} « universelle » (sur les entiers) de $\mathrm{GP}(1)$.
+
+\page{7}
+Notons que pour une forme bilinéaire
+\[
+  \varphi(x, y) = \sum_{1 \leq i, j \leq 3} \varphi_{ij}\, x_i y_j
+\]
+on a le discriminant de $\varphi$ (ou de la forme quadratique $q$, si $\varphi$ est
+associée à une telle forme)
+\[
+  (27) \qquad \delta(\varphi) = \det(\varphi_{ij})\, \omega'^{\otimes 2} \qquad (\text{où } \omega' = e'_1 \wedge e'_2 \wedge e'_3)
+\]
+\note{un trait horizontal précède « det » ; ce n'est vraisemblablement pas un signe moins, que le calcul de (30) exclut.}
+et si $\varphi$ est associée à une forme quadratique
+\[
+  (28) \qquad q(x, y, z) = ax^2 + by^2 + cz^2 + pyz + qzx + rxy
+\]
+de sorte que la matrice de $\varphi$ est
+\[
+  (29) \qquad \varphi = \begin{pmatrix} 2a & r & q \\ r & 2b & p \\ q & p & 2c \end{pmatrix}
+\]
+on a
+\[
+  (30) \qquad \delta(q) = \delta(\varphi) = 2(4abc + pqr - ap^2 - bq^2 - cr^2)\, \omega'^{\otimes 2}
+\]
+et le « discriminant divisé » $\delta'(q)$ de $q$ est donné par
+\[
+  (31) \qquad \delta'(q) = (4abc + pqr - ap^2 - bq^2 - cr^2)\, \omega'^{\otimes 2} ,
+\]
+\struck{ce qui} Dans le cas de la forme $q$ de (21) d'où (23 bis), on trouve donc
+\[
+  (32) \qquad \delta'(q) = -\omega'^{\otimes 2} \qquad (\omega' = e'_1 \wedge e'_2 \wedge e'_3)
+\]
+En s'inspirant de cette circonstance, on définit une structure \emph{spéciale
+orthogonale} sur un Module \struck{quadratique} vectoriel de rang 3, comme la
+donnée d'un couple $(q, \omega)$, où $q$ est une forme quadratique sur $E$,
+$\omega$ une base de $\underline{\det} E$, satisfaisant
+
+\page{8}
+\[
+  (33) \qquad \delta'(q) = -\omega^{\otimes(-2)} .
+\]
+\emph{NB} Si $E$ était de rang $2n$ ou $2n+1$, on \struck{satisferait} exigerait
+\[
+  (34) \qquad \delta'(q) = (-1)^n \omega^{\otimes(-2)}
+\]
+de sorte que pour la forme standard sur $\mathbf{Z}$
+\[
+  (35) \qquad q(x) = \sum_1^n x_{2i} x_{2i+1} \quad \text{resp.} \quad q(x) = \sum_1^n x_{2i} x_{2i+1} + x_{2n+1}^2
+\]
+dont le discriminant resp.\ le discriminant divisé est
+\[
+  (36) \qquad \delta'(q) = (-1)^n \omega^{\otimes(-2)} \qquad \omega = e_1 \wedge \cdots \wedge e_N
+\]
+($N = 2n$ ou $2n+1$), on puisse trouver effectivement une structure spéciale
+orthogonale associée. On voit que, dans le cas général, il existe
+\add{loc.}\ une structure sp.\ orthogonale associée à $q$ ssi $q$ est lisse (i.e.\
+$\delta'(q)$ est une base de $\underline{\det}(E)^{\otimes(-2)}$), et que les
+structures en question, \ill{} \uncertain{base} \uncertain{variable}, forment un
+\emph{torseur} sous $\mu_2$.
+
+
+
+Les développements précédents sur les structures d'algèbre alternées sur $E'$
+associées aux formes bilinéaires sur $E$ (i.e.\ aux applications linéaires
+$f : E \to E'$) peuvent s'appliquer en échangeant les rôles de $E, E'$, de
+sorte qu'on associe une structure d'algèbre alternée \add{sur $E$} à toute forme
+bil.\ $\varphi$ sur $E' \times E'$, i.e.\ à toute appl.\ lin.\ $f' : E' \to E$.
+
+\page{9}
+Or, tirant parti de $\varphi$ i.e.\ de
+\[
+  (36) \qquad f : E \longrightarrow E'
+\]
+on peut lui associer
+\[
+  (37) \qquad \Lambda^2 f : \Lambda^2 E \longrightarrow \Lambda^2 E'
+\]
+qui en vertu des isom.\ (6), définit une application linéaire
+\[
+  (38) \qquad f' = \alpha \circ \Lambda^2 f \circ \alpha^{-1} : E' \longrightarrow E
+\]
+\note{d'après (6) et (39) on attend $\alpha' \circ \Lambda^2 f \circ \alpha^{-1}$ ; l'accent du premier $\alpha$ ne se voit pas.}
+\struck{De sorte} Par définition, on a donc
+\[
+  (39) \qquad f'\bigl(\alpha(x \wedge y)\bigr) = \alpha'\bigl(f(x) \wedge f(y)\bigr) \qquad x, y \in \Gamma(S, E)
+\]
+\note{dans (39), un $\varphi$ biffé devant $x \wedge y$.}
+i.e.
+\[
+  (40) \qquad \bigl\langle f'\bigl(\alpha(x \wedge y)\bigr), x' \bigr\rangle\, \omega' = f(x) \wedge f(y) \wedge x' \qquad (x' \in \Gamma(S, E'))
+\]
+En fait, en termes d'une base (8) et de sa duale, les coefficients de la matrice
+$f'$ sont les 9 mineurs de la matrice de $f$ -- ce qui montre en particulier que
+si $f$ \struck{forme} \add{bil.} est associée à $\varphi$ symétrique, il en est de même
+de la forme $\varphi'$ associée à $f'$. Donc la structure d'algèbre de $E$ associée
+$[\ ,\ ]_{\varphi'}$ (qui n'est autre que
+\[
+  (40\ \text{bis}) \qquad [x, y]_{\varphi'} = \alpha'\Lambda^2 f(x \wedge y) = \alpha'\bigl(f(x) \wedge f(y)\bigr)
+\]
+explicité par (40), qui s'écrit
+\[
+  (40\ \text{ter}) \qquad \bigl\langle [x, y]_{\varphi'}, x' \bigr\rangle\, \omega' = f(x) \wedge f(y) \wedge x' \quad )
+\]
+est \add{encore} une structure d'\emph{algèbre de Lie}.
+\note{« en termes d'une base (8) et de sa duale » : « (8) » et « et de sa duale » sont insérés, avec sous la ligne un mot, « exprimons », qui n'est pas rattaché ; « ter » est écrit au-dessus de « bis » biffé.}
+
+\page{10}
+\emph{Remarques} \struck{Des formules de}
+\[
+  (41) \qquad \underset{(\text{discriminant})}{\delta(\varphi)} = \Delta\, \omega^{\otimes -2} , \qquad \Delta \in \Gamma(S, \mathcal{O}_S)
+\]
+et les formules de Kramer donnent alors
+\[
+  (42) \qquad
+  \begin{cases}
+    f'f = \Delta\, \mathrm{id}_E \\
+    ff' = \Delta\, \mathrm{id}_{E'}
+  \end{cases}
+\]
+On se gardera de croire que les relations entre $f, f'$ sont symétriques. P.ex.\
+si $f$ est de rang $\leq 1$ (i.e.\ les mineurs de rang 2 de $f$ sont nuls) $f'$
+est \emph{nul}, et réciproquement, tandis que si $f$ est nul, $f'$ est
+\ill{} \ill{} \ill{} \ill{} de rang $\leq 1$)!
+\note{la fin de la phrase se lit mal ; la parenthèse fermante et le point d'exclamation sont sûrs.}
+
+Notons que si $\omega$ est multiplié par $\lambda \in \Gamma(S, \mathcal{O}_S^{*})$
+($\varphi$ donc $f$ restant invariant) $\Delta$ et $f'$ sont multipliés l'un et
+l'autre par $\lambda^2$ -- tandis que le crochet $[\ ,\ ]_{\varphi}$ est multiplié
+par $\lambda$, et \add{le crochet} $[\ ,\ ]_{\varphi'}$ sur $E'$, \uncertain{pour}
+$\varphi'$ fixée (indépendamment d'une $\varphi$ sur $E$) est multiplié (comme
+$\omega' = \omega^{\otimes -1}$) par $\lambda^{-1}$. Mais si $\varphi'$ est la forme
+associée à $f$ via $f'$, comme \add{$f'$ donc} $\varphi'$ est \struck{multiplié}
+\add{remplacé} par $\lambda^2\varphi'$, $[\ ,\ ]_{\varphi'}$ est remplacé par
+$\lambda [\ ,\ ]_{\varphi'}$ : Ainsi $[\ ,\ ]_{\varphi}$ \add{sur $E$} et
+$[\ ,\ ]_{\varphi'}$ sur $E'$, associés à un couple
+\note{« sur $E'$ » est écrit sous « $\lambda^2$ » dans la ligne « multipliés l'un et l'autre par $\lambda^2$ » ; les attributions « sur $E$ », « sur $E'$ » de cette page sont transcrites comme écrites, bien que (12) et (40 bis) placent $[\ ,\ ]_{\varphi}$ sur $E'$ et $[\ ,\ ]_{\varphi'}$ sur $E$. Un trait vertical dans la marge gauche marque le bas de la page et le haut de la suivante.}
+
+\page{11}
+$(\varphi, \omega)$ ($\varphi$ forme bilinéaire sur $E$, $\omega$ base de
+$\underline{\det} E$) se trouvent multipliés par un même facteur $\lambda$, quand
+$\omega$ est multiplié par $\lambda$ \add{et $\varphi$ restant fixée}. D'autre part,
+pour $\omega$ fixé et $\varphi$ variable, le produit $[\ ,\ ]_{\varphi}$ sur $E'$
+dépend linéairement de $\varphi$, tandis que le crochet $[\ ,\ ]_{\varphi'}$ sur $E$
+(\uncertain{déduit} comme $f'$ linéairement) dépend \emph{quadratiquement} de
+$\varphi$ ; ainsi, si $\varphi$ est \struck{multiplié} \add{remplacé} par $\mu\varphi$
+($\mu \in \Gamma(S, \mathcal{O}_S)$) $[\ ,\ ]_{\varphi}$ est multiplié par $\mu$, et
+$[\ ,\ ]_{\varphi'}$ par $\mu^2$\ldots
+
+Échangeant les rôles de $E, E'$, on voit de ce qui \uncertain{précède} que
+$f' : E' \to E$ est associée \uncertain{avec} $(f')' = f'' : E \to E'$ -- mais en
+général celle-ci \emph{n'est pas} $f$. De façon précise, si
+\struck{$\delta(\varphi')$}
+\[
+  (43) \qquad \delta(\varphi') = \Delta' . \omega'^{\otimes 2} \qquad \Delta' \in \Gamma(S, \mathcal{O}_S)
+\]
+on aura
+\[
+  (44) \qquad
+  \begin{cases}
+    f'f'' = \Delta'\, \mathrm{id}_E \\
+    f''f' = \Delta'\, \mathrm{id}_{E'}
+  \end{cases}
+\]
+ce qui \struck{\ill{}} implique, si $\Delta$ est une unité i.e.\ $f$ un iso, donc
+$\Lambda^2 f$ et $f'$ aussi, donc $\Delta'$ une unité [et inversement, car si $f'$
+est un iso les formules (42)
+
+\page{12}
+montrent que $f$ l'est aussi\ldots]), \ill{} on trouve
+\[
+  (45) \qquad f' = \Delta f^{-1} , \qquad f'' = \Delta' f'^{-1} = (\Delta'\Delta^{-1}) f
+\]
+ce qui s'écrit
+\[
+  (45\ \text{bis}) \qquad \Delta f'' = \Delta' f
+\]
+(d'après le « principe de conservation des identités algébriques », cette
+identité reste vraie sans la condition \struck{\ill{}} $\Delta$ une unité).
+
+De plus, dans le cas de validité de (45) ($\Delta$ unité) on tire
+\[
+  \det(f') = \Delta^3 \det(f)^{-1} = \Delta^3 (\Delta\omega^{\otimes -2})^{-1}
+\]
+i.e.
+\[
+  (47) \qquad \det f' = \Delta^2 \omega^{\otimes 2}
+\]
+\[
+  \Delta' = \Delta^2 \quad \text{i.e.}
+\]
+\note{le numéro (47) est surchargé (peut-être (46)) ; le numéro de la ligne $\Delta' = \Delta^2$ est biffé.}
+\struck{\ill{}} de sorte que (45 bis) devient
+\[
+  (48) \qquad f'' = \Delta f
+\]
+D'après le principe de conservation des identités \emph{algébriques}, cette
+identité reste valable pour \uncertain{tout} $f$ (non seulement \uncertain{si} $f$
+est un isomorphisme). \uncertain{Ceci} \struck{\ill{}} \struck{montre} \ldots{} que
+si $\Delta = 1$ i.e.\ $f$ un iso et $\omega = \det f$, alors la relation entre $f$ et
+$f'$ est symétrique. Mais nous,
+
+\page{13}
+nous intéresserons surtout au cas (21), où $\Delta = 2$, sans pour autant
+interdire de spécialiser en car.\ 2 i.e.\ au cas où $\Delta = 0$\ldots
+
+Revenons toujours à la situation $(E, \omega, \varphi)$, donnant naissance à :
+$f : E \to E'$, $f' : E' \to E$, d'où $\varphi' : E' \times E' \to \mathcal{O}_S$,
+enfin à $[\ ,\ ]_{\varphi}$ sur $E'$ et $[\ ,\ ]_{\varphi'}$ sur $E$. On va montrer
+que $f : E \to E'$ est un hom.\ d'algèbres, et \add{(si $\varphi$ symétrique)} on va
+faire opérer l'algèbre de Lie $E'$ sur $E$ par dérivations \add{d'algèbre} qui
+invarient $\varphi$, de façon que $f$ commute avec l'action de l'algèbre de Lie $E'$
+sur $E$ et $E'$. Enfin, lorsque $\varphi$ \add{(ainsi que $\varphi'$)} est associé à une
+forme quadratique lisse spéciale, on trouvera une interprétation de la situation
+d'algèbres de Lie en termes d'un homomorphisme de schémas en groupes lisses
+$G \to G'$ et d'une opération de $G'$ sur $G$. \struck{Prenons} \add{Vérifions}
+d'abord
+\[
+  (49) \qquad f[x, y]_{\varphi'} = [f(x), f(y)]_{\varphi} ;
+\]
+\struck{en prenant le produit scalaire des deux membres avec un $z \in \Gamma(S, E)$,
+la formule à vérifier devient}
+\note{ces deux lignes sont encadrées et barrées de traits obliques ; au-dessus, une insertion reliée au second membre de (49) : « $\overset{\text{déf (12)}}{=} f\alpha'(f(x) \wedge f(y))$ ».}
+
+\page{14}
+En vertu de la déf.\ (12), le deuxième membre est
+\[
+  f\alpha'\bigl(f(x) \wedge f(y)\bigr) ,
+\]
+de sorte qu'il suffit de prouver
+\[
+  (50) \qquad [x, y]_{\varphi'} = \alpha'\bigl(f(x) \wedge f(y)\bigr)
+\]
+\note{devant $\alpha'$, quelques signes biffés.}
+ce qui n'est autre que la définition (40 bis).
+
+\emph{NB} En général, $f' : E' \to E$ n'est pas compatible aux structures
+d'algèbres, \uncertain{sauf} si $f$ est un isomorphisme i.e.\ $\Delta$ une unité.
+Dans ce cas, comme $f' = \Delta f^{-1}$ (45), donc $f^{-1}$ est \struck{\ill{}} isom.\
+d'algèbres comme inverse d'un isomorphisme, i.e.\ on a
+\[
+  f^{-1}\bigl([x', y']\bigr) = [f^{-1}(x'), f^{-1}(y')]
+\]
+Si $f' = \Delta f^{-1}$ était un hom.\ d'algèbres, la \struck{\ill{}} formule
+précédente resterait valable en y remplaçant $f^{-1}$ par $\Delta f^{-1}$, i.e.\ on
+aurait à la fois $a = b$ et $\Delta a = \Delta^2 b$\note{l'exposant de $\Delta$ dans $\Delta^2 b$ se lit aussi comme un accent, $\Delta' b$.} i.e.\ $a = \Delta b$,
+donc $\Delta a = a$. \struck{Si} On en conclut aisément (comme les $[x', y']$
+engendrent $E'$ localement\ldots) que $\Delta = 1$, \struck{Donc} i.e.\
+$f' = f^{-1}$. Donc dès que $\Delta \neq 1$, $\Delta$ inversible, $f'$ n'est pas un
+hom.\ d'algèbres\ldots
+
+\page{15}
+On se propose maintenant, à tout $x' \in \Gamma_S(E')$ d'associer
+\[
+  (51) \qquad \rho_E(x') : E \longrightarrow E
+\]
+\struck{dérivation} endomorphisme de $E$ qui invarie $\varphi$ (donc
+$[\ ,\ ]_{\varphi}$) infinitésimalement :
+\[
+  (52) \qquad \varphi\bigl(\rho_E(x')x, y\bigr) + \varphi\bigl(x, \rho_E(x')y\bigr) = 0 \qquad \text{ce qui implique}
+\]
+\[
+  (53) \qquad \rho_E(x')[x, y]_{\varphi'} = [\rho_E(x')x, y]_{\varphi'} + [x, \rho_E(x')y]_{\varphi'}
+\]
+de sorte qu'on obtient un hom
+\[
+  (54) \qquad E' \xrightarrow{\ \rho_E\ } \underline{\mathrm{Hom}}^{\varphi}(E, E)
+\]
+(endom.\ de $E$ invariant infinitésimalement $\varphi$)
+qui en fait est un hom.\ d'algèbres de Lie
+\[
+  (55) \qquad \rho_E\bigl([x', y']_{\varphi'}\bigr) = [\rho_E(x'), \rho_E(y')] .
+\]
+\note{le second membre est souligné d'une accolade portant « crochet d'endomorphismes ».}
+\struck{(56)} et que l'on ait
+\[
+  (56) \qquad f\bigl(\rho_E(x')x\bigr) = \mathrm{ad}_{[\ ,\ ]_{\varphi}}(x')\, f(x) \quad
+  \Bigl(\overset{\text{déf}}{=} [x', f(x)]_{\varphi} \underset{(12)}{=} f\alpha'\bigl(x' \wedge f(x)\bigr)\Bigr)
+\]
+i.e.\ $f : E \to E'$, en tant que hom.\ d'algèbres de Lie, commute aux
+\struck{opérations} $\rho_E$ et $\mathrm{ad}_{[\ ,\ ]_{\varphi}}$ de l'algèbre de Lie
+$E'$ sur l'une et l'autre.
+
+\emph{NB} Le fait que (52) -- pour toute base -- implique (53), est standard par
+« transport de structure » ; on interprète (52) comme
+\note{la phrase continue en tête de la page 17.}
+
+\marginal{On a oublié une formule naturelle, en introduisant l'opération
+adjointe $\tilde{\rho}_E$ de $E$ sur lui-même, et l'opération $\tilde{\rho}_{E'}$
+déduite de $f : E \to E'$ et de l'op.\ adj.\ de $E'$ sur $E'$
+($\tilde{\rho}_E(x).y = [x, y]_{\varphi'}$,
+$\tilde{\rho}_{E'}(x).x' = \rho_{E'}(f(x)).x' = [f(x), x']_{\varphi}$). C'est la
+formule (56 bis) exprimant que $\rho_E(f(x')) = \tilde{\rho}_E(x')$ \ill{}
+\ill{} évidente de $E$ sur lui-même \ill{} i.e.\ $\rho_E$ « prolongeant »
+\struck{\ill{}} \ill{} $\tilde{\rho}_E$ \ill{}}
+\note{note écrite en remontant le long du bord gauche, sur plusieurs colonnes, lue sur la marge redressée ; l'ordre des fragments et les accents de $x'$ dans « $\rho_E(f(x')) = \tilde{\rho}_E(x')$ » sont incertains.}
+
+\page{16}
+\note{cette page fait suite à la page 17 : elle commence par la fin, biffée, de la phrase qui clôt celle-ci (« La formule (56) s'écrit, en prenant le »).}
+\struck{produit scalaire avec $z \in \Gamma_S(E)$, et posant $z' = {}^{t}f(z)$
+$\langle \rho_E(\xi').x, z' \rangle = \langle f\alpha'(x' \wedge f(x)), z' \rangle$}
+\note{ce bloc est encadré et barré de quatre traits obliques.}
+\struck{on exige} $f\bigl(\rho_E(\xi').x\bigr) = f\bigl(\alpha'(\xi' \wedge f(x))\bigr)$
+elle résulte de la formule plus précise
+\[
+  (56\ \text{bis}) \qquad \rho_E(\xi').x = \alpha'\bigl(\xi' \wedge f(x)\bigr)
+\]
+qui s'écrit, en prenant le produit scalaire avec $x'$ dans $E'$ et explicitant le
+premier membre grâce à (59 bis) :
+\[
+  -\bigl\langle x, [\xi', x']_{\varphi'} \bigr\rangle = \bigl\langle \alpha'(\xi' \wedge f(x)), x' \bigr\rangle
+\]
+\struck{on a encore}
+\[
+  -\bigl\langle x, f\alpha'(\xi' \wedge x') \bigr\rangle
+\]
+\[
+  = -\bigl\langle \alpha'(\xi' \wedge x'), {}^{t}f(x) \bigr\rangle
+\]
+\note{entre les deux dernières lignes, une ligne entièrement biffée et illisible.}
+ou en multipliant par $\omega$ et utilisant la définition (7) de $\alpha'$, et
+utilisant ${}^{t}f = f$ i.e.\ \struck{$-\varphi(\alpha'(\xi' \wedge x'), x)$} $\varphi$
+symétrique
+\[
+  -\xi' \wedge x' \wedge f(x) = \xi' \wedge f(x) \wedge x'
+\]
+ce qui est bien vrai, hurrah ! Dans le formulaire \add{(52) à (56)}, il reste à
+vérifier (52), qui s'écrit
+\[
+  \bigl\langle y, f(\rho_E(\xi').x) \bigr\rangle + \bigl\langle \rho_E(\xi').y, f(x) \bigr\rangle = 0
+\]
+Or on vient de prouver $f(\rho_E(\xi')x) = \rho_{E'}(\xi')f(x)$,
+\struck{\ill{}} de sorte que la formule devient
+\[
+  \bigl\langle y, \rho_{E'}(\xi')f(x) \bigr\rangle + \bigl\langle \rho_E(\xi')y, f(x) \bigr\rangle = 0
+\]
+\note{la phrase continue en tête de la page 18.}
+
+\page{17}
+\note{cette page fait suite à la page 15 : elle achève la phrase « on interprète (52) comme ».}
+exprimant qu'un certain \emph{automorphisme} de $E_{\tilde{S}}$ ($\tilde{S}$ =
+schéma des nombres duaux) défini par $f(x)$ invarie $\varphi_{\tilde{S}}$ -- donc
+invarie $[\ ,\ ]_{\varphi_{\tilde{S}}}$ -- et en interprétant (53) de façon analogue.
+
+\emph{Construction.} L'algèbre de Lie \struck{\ill{}} $\mathfrak{g} = E'$ opérant
+sur le module $E'$ par représentation adjointe
+\[
+  (57) \qquad \rho_{E'}(\xi')x' \overset{\text{déf}}{=} [\xi', x']_{\varphi'} ,
+\]
+on la fait opérer sur $E = \check{E}'$ par contragrédiente,
+\[
+  (58) \qquad \rho_E(\xi') = -{}^{t}\rho_{E'}(\xi')
+\]
+\note{dans (57) et (59 bis) l'indice du crochet est écrit $\varphi$ suivi d'un signe épais, lu ici comme un accent ; il pourrait s'agir d'un astérisque.}
+i.e.\ en exigeant
+\[
+  (59) \qquad \bigl\langle \rho_E(\xi')x, x' \bigr\rangle + \bigl\langle x, \rho_{E'}(\xi')x' \bigr\rangle = 0
+\]
+i.e.
+\[
+  (59\ \text{bis}) \qquad \bigl\langle \rho_E(\xi')x, x' \bigr\rangle = -\bigl\langle x, \underbrace{[\xi', x']_{\varphi'}}_{f\alpha'(\xi' \wedge x')} \bigr\rangle
+  = -\varphi\bigl(\alpha'(\xi' \wedge x'), x\bigr)
+\]
+Le fait que $\mathfrak{g}$ opère sur $E'$ de façon compatible avec les crochets
+implique qu'il opère sur $E \simeq \check{E}'$, i.e.\ prouve (55).
+
+La formule (56) s'écrit, \struck{en prenant le}
+\note{la suite est en tête de la page 16.}
+
+\page{18}
+\note{cette page fait suite à la page 16.}
+ce qui n'est autre que la définition (58) explicitée par (59), (en posant
+$f(x) = y'$).
+
+
+
+Reprenons l'exemple de la forme quadratique (21) et la forme $\varphi$ associée
+(22), d'où la structure d'algèbre de Lie (26) sur $E'$ de base
+\[
+  X = e'_1 ,\ Y = e'_2 ,\ H = e'_3 , \quad \text{et}
+\]
+\[
+  (61) \qquad \omega' = -X \wedge H \wedge Y
+\]
+(\uncertain{Au lieu de $\omega$} \struck{on aurait} \uncertain{on aurait pu}
+choisir $\omega' = -\omega = X \wedge H \wedge Y$ sans inconvénient, on aurait
+toujours une structure orthogonale spéciale $(q, \omega')$\ldots)
+
+Explicitons dans ce cas toutes les opérations précédentes. On posera aussi
+\[
+  (62) \qquad \tilde{X} = e_2 ,\ \tilde{Y} = e_1 ,\ \tilde{H} = e_3
+\]
+et quand on regarde $E$ ($\simeq \mathcal{O}_S^3$) comme une Algèbre de Lie, nous
+préférons \uncertain{les} notations pour la base, qu'on prendra dans l'ordre
+\[
+  (63) \qquad \tilde{X}, \tilde{H}, \tilde{Y}
+\]
+donc
+\[
+  (64) \qquad \omega = \tilde{X} \wedge \tilde{H} \wedge \tilde{Y}
+\]
+(\emph{NB} il y a un signe ici !)
+On trouve
+\[
+  (65) \qquad f(\tilde{X}) = X ,\ f(\tilde{Y}) = Y ,\ f(\tilde{H}) = 2H
+\]
+Ici, en vertu de (32)
+\[
+  \Delta = -2
+\]
+d'où on trouve
+
+\marginal{\emph{NB} Faisant $x = y$ dans (52), on trouve \struck{\ill{}}
+$2\varphi(x, \rho_{E'}(\xi')x) = 0$, en fait \ill{} même (52 bis)
+$\varphi(x, \rho_{E'}(\xi').x) = 0$ (se déduit de la précédente, par principe de
+prolongement \ill{} \ldots{} une forme quadratique \ill{} cette forme
+quadratique \ill{} \ldots) ; quand $\varphi$ est associée \ill{} (52 bis) signifie
+que l'action \ill{} \ill{}}
+\marginal{Notons enfin
+(60) $\mathrm{Tr}\, \rho_E(\xi') = 0$ (qui exprime que $\rho_E(\xi')$
+« invarie » $\omega$) (idem pour $\rho_{E'}, \tilde{\rho}_E$, \ldots)}
+\note{deux notes écrites en remontant le long du bord gauche, lues sur la marge redressée ; la formule (60) n'existe que dans cette marge. Dans la première, l'indice de $\rho$ (écrit $E'$) et plusieurs mots entre les formules restent illisibles.}
+
+\page{19}
+\[
+  (66) \qquad f'(X) = 2\tilde{X} ,\ f'(Y) = 2(\tilde{Y}) ,\ f'(H) = \tilde{H}
+\]
+La forme bilinéaire \add{$\varphi'$ correspondante sur $E'$} \struck{associée} est
+donc définie par
+\[
+  (67) \qquad
+  \begin{cases}
+    \varphi'(X, X) = \varphi'(Y, Y) = 0 & \varphi'(H, H) = 1 \\
+    \varphi'(X, H) = \varphi'(Y, H) = 0 & \varphi'(X, Y) = 2
+  \end{cases}
+\]
+i.e.\ en termes de
+\[
+  \xi = xX + hH + yY , \qquad \xi' = x'X + h'H + y'Y
+\]
+la forme $\varphi'$ s'explicite par
+\[
+  (68) \qquad \varphi'(\xi, \xi') = \varphi\bigl((x, h, y); (x', h', y')\bigr) = hh' + 2(xy' + yx')
+\]
+la forme quadratique associée $q'$ étant donnée par
+\[
+  (69) \qquad q'(\xi) = \varphi'(\xi, \xi) = h^2 + 4xy
+\]
+\struck{\ill{}} « \add{\uncertain{Si 2 non inversible sur $S$},} $\varphi'$ n'est pas
+associée à une forme quadratique, \struck{\ill{}} car en car.\ 2 la forme $q'(\xi)$
+se réduit à $h^2$, qui est non nulle\ldots{} On entend que dans les coordonnées
+naturelles choisies, \ill{} d'expressions $q, \varphi, \varphi'$ \ill{} à
+\add{\ill{}} expressions polynomiales à coefficients entiers, aucune de ces
+expressions n'est divisible par un entier $> 1$ -- i.e.\ les coeff.\ sont premiers
+entre eux. Cela signifie aussi que \struck{\ill{}} \add{si $S$ est le spectre d'un
+corps} (de car.\ quelc.), ces quantités fonctions sont $\neq 0$.
+
+\page{20}
+Calculant la loi de crochet sur $E$, on trouve
+\[
+  (70) \qquad [\tilde{H}, \tilde{X}] = 2\tilde{X} ,\ [\tilde{H}, \tilde{Y}] = -2\tilde{Y} ,\ [\tilde{X}, \tilde{Y}] = \tilde{H}
+\]
+qui est la loi bien connue du crochet de l'algèbre de Lie $\mathfrak{sl}(2)_S$
+spéciale linéaire, qui est l'algèbre de Lie de $\mathrm{SL}(2)_S$.
+\uncertain{Comme} $f$, \ill{} comme l'homomorphisme d'algèbres de Lie
+correspondant à l'\struck{homom.} \add{isogénie} bien connue
+\[
+  (71) \qquad \mathrm{SL}(2)_S \longrightarrow \mathrm{GP}(1)_S
+\]
+\struck{qui $f$} de noyau $\mu_2$ \add{(qui est le centre de $\mathrm{SL}(2)_S$)}.
+Comme : l'opération de $E'$ sur $E$, elle correspond à l'opération bien connue de
+$\mathrm{GP}(1)_S$ sur $\mathrm{SL}(2)_S$, déduite par passage au quotient de la
+représentation adjointe de $\mathrm{SL}(2)$ sur lui-même (qui est bien triviale
+sur le centre $\mu_2$\ldots). En termes des bases précédentes, on a
+\struck{(72) $\rho_X = \tilde{\rho}$}
+\[
+  (72) \qquad
+  \begin{cases}
+    \rho_E(X) = \tilde{\rho}_E(\tilde{X}) : & \tilde{X} \mapsto 0 ,\ \tilde{Y} \mapsto \tilde{H} ,\ \tilde{H} \mapsto -2\tilde{X} \\
+    \rho_E(Y) = \tilde{\rho}_E(\tilde{Y}) : & \tilde{X} \mapsto -\tilde{H} ,\ \tilde{Y} \mapsto 0 ,\ \tilde{H} \mapsto 2\tilde{Y} \\
+    \rho_E(H)\ (= \tfrac{1}{2}\tilde{\rho}_{\tilde{H}}\ \text{sic}) : & \tilde{X} \mapsto \tilde{X} ,\ \tilde{Y} \mapsto -\tilde{Y} ,\ \tilde{H} \mapsto 0
+  \end{cases}
+\]
+(\uncertain{Ici} le plus commode était d'utiliser la « formule oubliée »
+(56 bis)\ldots)
+\note{la « formule oubliée » est celle de la note marginale de la page 15.}
+
+\end{document}
