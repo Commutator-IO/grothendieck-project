@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import citationRaw from '../content/citation-map.json';
+import { shownAt, TimeScrubber, useMoment } from './TimeScrubber.tsx';
 import mathRaw from '../content/math-map.json';
 
 /**
@@ -35,6 +36,8 @@ interface Drawn {
   bold?: boolean;
   always?: boolean;
   square?: boolean;
+  /** Not yet in the moment the time control is set to. */
+  hidden?: boolean;
 }
 
 /** The shared drawing: links, then nodes, labels haloed so lines never cut them. */
@@ -50,7 +53,7 @@ function Canvas({
   width: number;
   height: number;
   nodes: Drawn[];
-  links: { s: number; t: number; width: number; stroke: string }[];
+  links: { s: number; t: number; width: number; stroke: string; hidden?: boolean }[];
   sel: number | null;
   onSel: (i: number | null) => void;
   label: string;
@@ -76,6 +79,7 @@ function Canvas({
           const on = sel === null || l.s === sel || l.t === sel;
           return (
             <line
+              style={{ transition: 'opacity 300ms' }}
               key={i}
               x1={nodes[l.s].x}
               y1={nodes[l.s].y}
@@ -83,7 +87,7 @@ function Canvas({
               y2={nodes[l.t].y}
               stroke={l.stroke}
               strokeWidth={l.width}
-              opacity={on ? (sel === null ? 0.3 : 0.8) : 0.05}
+              opacity={l.hidden ? 0 : on ? (sel === null ? 0.3 : 0.8) : 0.05}
             />
           );
         })}
@@ -91,16 +95,16 @@ function Canvas({
           <g
             key={n.key}
             tabIndex={0}
-            onMouseEnter={() => onSel(i)}
-            onFocus={() => onSel(i)}
-            style={{ cursor: 'pointer', outline: 'none' }}
-            opacity={lit(i) ? 1 : 0.2}
+            onMouseEnter={() => !n.hidden && onSel(i)}
+            onFocus={() => !n.hidden && onSel(i)}
+            style={{ cursor: 'pointer', outline: 'none', transition: 'opacity 300ms', pointerEvents: n.hidden ? 'none' : undefined }}
+            opacity={n.hidden ? 0 : lit(i) ? 1 : 0.2}
           >
             <circle cx={n.x} cy={n.y} r={n.r + 6} fill="#fff" fillOpacity={0} />
             {n.square ? (
-              <rect x={n.x - n.r} y={n.y - n.r} width={2 * n.r} height={2 * n.r} rx={3} fill={n.fill} stroke="#fff" strokeWidth="2" />
+              <rect style={{ transition: 'all 300ms' }} x={n.x - n.r} y={n.y - n.r} width={2 * n.r} height={2 * n.r} rx={3} fill={n.fill} stroke="#fff" strokeWidth="2" />
             ) : (
-              <circle cx={n.x} cy={n.y} r={n.r} fill={n.fill} stroke="#fff" strokeWidth="2" />
+              <circle style={{ transition: 'r 300ms' }} cx={n.x} cy={n.y} r={n.r} fill={n.fill} stroke="#fff" strokeWidth="2" />
             )}
             {(n.always || sel === i || (sel !== null && nb[sel].has(i))) && (
               <text
@@ -165,7 +169,11 @@ const MATH = mathRaw as unknown as {
 export function MathMap() {
   const [sel, setSel] = useState<number | null>(null);
   const [mode, setMode] = useState<'community' | 'dating'>('community');
+  const [moment, setMoment] = useMoment();
   const { nodes, links, coverage } = MATH;
+  const on = shownAt(moment);
+  const allFolders = [...new Set(nodes.flatMap((n) => n.folders.map((f) => f.id)))];
+  const seen = nodes.map((n) => n.folders.filter((f) => on(f.id)).length);
   const maxW = Math.max(...links.map((l) => l.w));
   const maxF = Math.max(...nodes.map((n) => n.folders.length));
 
@@ -189,17 +197,19 @@ export function MathMap() {
     key: n.term,
     x: n.x,
     y: n.y,
-    r: 5 + 13 * Math.sqrt(n.folders.length / maxF),
+    r: 5 + 13 * Math.sqrt(Math.max(1, seen[nodes.indexOf(n)]) / maxF),
     fill: mode === 'community' ? colour(n.cluster) : dating(n.year),
     label: n.short,
     bold: n.folders.length >= 15,
     always: true,
+    hidden: seen[nodes.indexOf(n)] === 0,
   }));
   const lines = links.map((l) => ({
     s: l.s,
     t: l.t,
     width: 0.5 + (3 * l.w) / maxW,
     stroke: mode === 'community' && nodes[l.s].cluster === nodes[l.t].cluster ? colour(nodes[l.s].cluster) : 'var(--color-ink-300)',
+    hidden: !l.folders.some(on),
   }));
   const n = sel === null ? null : nodes[sel];
 
@@ -245,6 +255,14 @@ export function MathMap() {
           </p>
         </>
       )}
+
+      <TimeScrubber
+        value={moment}
+        onChange={setMoment}
+        counted={allFolders.filter(on).length}
+        total={allFolders.length}
+        noun="folders"
+      />
 
       <Canvas
         width={MATH.width}
@@ -315,7 +333,18 @@ const CIT = citationRaw as unknown as {
 
 export function CitationMap() {
   const [sel, setSel] = useState<number | null>(null);
+  const [moment, setMoment] = useMoment();
   const { nodes, links } = CIT;
+  const on = shownAt(moment);
+  // A volume is on the map once a folder shown cites it, and as large as
+  // the references to it from the folders shown.
+  const linkOn = links.map((l) => {
+    const f = nodes[l.s].kind === 'folder' ? nodes[l.s] : nodes[l.t];
+    return on(f.id);
+  });
+  const shownN = nodes.map((x, i) =>
+    x.kind === 'folder' ? (on(x.id) ? x.n : 0) : links.reduce((a, l, j) => a + ((l.s === i || l.t === i) && linkOn[j] ? l.n : 0), 0),
+  );
   const maxN = Math.max(...links.map((l) => l.n));
   const maxT = Math.max(...nodes.filter((x) => x.kind === 'text').map((x) => x.n));
   const maxF = Math.max(...nodes.filter((x) => x.kind === 'folder').map((x) => x.n));
@@ -326,18 +355,20 @@ export function CitationMap() {
     key: `${n.kind}:${n.id}`,
     x: n.x,
     y: n.y,
-    r: n.kind === 'text' ? 7 + 9 * Math.sqrt(n.n / maxT) : 4 + 5 * Math.sqrt(n.n / maxF),
+    r: n.kind === 'text' ? 7 + 9 * Math.sqrt(Math.max(1, shownN[nodes.indexOf(n)]) / maxT) : 4 + 5 * Math.sqrt(n.n / maxF),
     fill: colour(n.cluster),
     label: n.kind === 'text' ? n.id : `n° ${n.id}`,
     bold: n.kind === 'text',
     always: n.kind === 'text' || n.n >= 6,
     square: n.kind === 'text',
+    hidden: shownN[nodes.indexOf(n)] === 0,
   }));
   const lines = links.map((l) => ({
     s: l.s,
     t: l.t,
     width: 0.6 + (2.6 * Math.log2(1 + l.n)) / Math.log2(1 + maxN),
     stroke: nodes[l.s].cluster === nodes[l.t].cluster ? colour(nodes[l.s].cluster) : 'var(--color-ink-300)',
+    hidden: !linkOn[links.indexOf(l)],
   }));
   const n = sel === null ? null : nodes[sel];
 
@@ -352,6 +383,14 @@ export function CitationMap() {
         forms are caught — « SGA 4 VIII », « SGA A », « EGA IV 16.9 », « TDTE » — and a volume given only by a year, or an
         exposé without its seminar, is not. Folder 162-1, a register of papers lent, is left out.
       </p>
+
+      <TimeScrubber
+        value={moment}
+        onChange={setMoment}
+        counted={nodes.filter((x) => x.kind === 'folder' && on(x.id)).length}
+        total={folders}
+        noun="folders"
+      />
 
       <Canvas
         width={CIT.width}

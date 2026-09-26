@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import evidenceRaw from '../content/people-evidence.json';
 import networkRaw from '../content/people-network.json';
+import { shownAt, TimeScrubber, useMoment } from './TimeScrubber.tsx';
 
 /**
  * Who is named together in the same folder — a co-occurrence map in the
@@ -60,7 +61,11 @@ const byShelfmark = (a: string, b: string) => {
 
 export function PeopleNetwork() {
   const [sel, setSel] = useState<number | null>(null);
+  const [moment, setMoment] = useMoment();
   const { nodes, links, width: W, height: H } = NET;
+  const on = shownAt(moment);
+  const seen = nodes.map((n) => n.folders.filter(on).length);
+  const linkOn = links.map((l) => l.folders.some(on));
 
   const neighbours = useMemo(() => {
     const m = nodes.map(() => new Set<number>());
@@ -85,7 +90,7 @@ export function PeopleNetwork() {
   const surname = (n: string) => n.split(' ').slice(-1)[0];
 
   const maxW = Math.max(...links.map((l) => l.w));
-  const radius = (n: Node) => 4 + 3.2 * Math.sqrt(n.folders.length);
+  const radius = (n: Node) => 4 + 3.2 * Math.sqrt(Math.max(1, seen[nodes.indexOf(n)]));
   const lit = (i: number) => sel === null || sel === i || neighbours[sel].has(i);
   const node = sel === null ? null : nodes[sel];
   const records = node
@@ -133,6 +138,14 @@ export function PeopleNetwork() {
         )}
       </ul>
 
+      <TimeScrubber
+        value={moment}
+        onChange={setMoment}
+        counted={nodes.filter((_, i) => seen[i] > 0).length}
+        total={nodes.length}
+        noun="people"
+      />
+
       <div className="mt-3 overflow-x-auto" onMouseLeave={() => setSel(null)}>
         <svg
           viewBox={`0 0 ${W} ${H}`}
@@ -141,7 +154,7 @@ export function PeopleNetwork() {
           aria-label="People named together in the same folders, grouped into communities"
         >
           {links.map((l, i) => {
-            const on = sel === null || l.s === sel || l.t === sel;
+            const lineOn = sel === null || l.s === sel || l.t === sel;
             return (
               <line
                 key={i}
@@ -151,7 +164,8 @@ export function PeopleNetwork() {
                 y2={nodes[l.t].y}
                 stroke={nodes[l.s].cluster === nodes[l.t].cluster ? colour(nodes[l.s].cluster) : 'var(--color-ink-300)'}
                 strokeWidth={0.6 + (2.4 * l.w) / maxW}
-                opacity={on ? (sel === null ? 0.35 : 0.8) : 0.06}
+                style={{ transition: 'opacity 300ms' }}
+                opacity={!linkOn[i] ? 0 : lineOn ? (sel === null ? 0.35 : 0.8) : 0.06}
               />
             );
           })}
@@ -159,14 +173,14 @@ export function PeopleNetwork() {
             <g
               key={n.name}
               tabIndex={0}
-              onMouseEnter={() => setSel(i)}
-              onFocus={() => setSel(i)}
-              style={{ cursor: 'pointer', outline: 'none' }}
-              opacity={lit(i) ? 1 : 0.2}
+              onMouseEnter={() => seen[i] > 0 && setSel(i)}
+              onFocus={() => seen[i] > 0 && setSel(i)}
+              style={{ cursor: 'pointer', outline: 'none', transition: 'opacity 300ms', pointerEvents: seen[i] > 0 ? undefined : 'none' }}
+              opacity={seen[i] === 0 ? 0 : lit(i) ? 1 : 0.2}
             >
               {/* a hit area larger than the mark */}
               <circle cx={n.x} cy={n.y} r={radius(n) + 6} fill="#fff" fillOpacity={0} />
-              <circle cx={n.x} cy={n.y} r={radius(n)} fill={colour(n.cluster)} stroke="#fff" strokeWidth="2" />
+              <circle style={{ transition: 'r 300ms' }} cx={n.x} cy={n.y} r={radius(n)} fill={colour(n.cluster)} stroke="#fff" strokeWidth="2" />
               {(n.folders.length >= 2 || sel === i || (sel !== null && neighbours[sel].has(i))) && (
                 <text
                   x={n.x}
