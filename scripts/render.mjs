@@ -642,8 +642,12 @@ function renderBlock(block) {
         const label = takeBracketed(body);
         if (!label) return `<li class="ltx_item">${inline(body)}</li>`;
         tagged = true;
+        // `\item[{[17]}]` is how LaTeX takes a label that itself holds
+        // brackets; the braces are grouping, not text, as tei.mjs already
+        // treats them.
+        const arg = /^\{([\s\S]*)\}$/.exec(label.arg)?.[1] ?? label.arg;
         return `<li class="ltx_item ltx_item_tagged">`
-          + `<span class="ltx_tag">${inline(label.arg)}</span>`
+          + `<span class="ltx_tag">${inline(arg)}</span>`
           + `${inline(label.rest.trim())}</li>`;
       })
       .join('\n');
