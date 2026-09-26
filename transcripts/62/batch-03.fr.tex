@@ -1,0 +1,513 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 62, batch 3 (pages 41-60).
+% Established from the facsimile archives/batches/62/batch-03.pdf (a copy of
+% 62.pdf fetched through the project relay, no cover sheet: PDF page k =
+% archivists' page 40+k), per the skill transcribe-grothendieck. The folder is
+% ninety-six pages in five batches; this is the third. Batch 1's notation is
+% kept (underlined sheaves \underline{L}, \underline{O}_S; the Lie sheaf as
+% \mathcal{L}; E_n as \mathcal{E}_n; « ? » for an unreadable index in a
+% formula). His gothic S is set \mathfrak{S}_3, as elsewhere in the fonds.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-09-26 — first pass, unchecked against the pages by a human.
+%
+% Pages skipped: 44, 48, 50, 52, 54 — leaves of the same unrelated
+% typescript as batch 1's page 19 and batch 2's pp. 21-40 (« n° 276 »,
+% typed pp. 16, 13 upside down, 27, 26, 25: complétés, anneaux de
+% Zariski), the other sides of his manuscript sheets, with nothing of his
+% on them; 55, a blank sheet. Page 42 (typed p. 17) carries one pencilled
+% marginal word, « topologiques », called into the text by a stroke; as
+% batch 2 does for its pencilled typed pp. 21 and 23, it is kept with one
+% \note, the attribution to him flagged as uncertain. Page 46 is a leaf of that typescript (its p. 15)
+% carrying a few ink jottings of his, written sideways in the margin
+% ((0,1,∞), (X', X''), ...), which belong to the S_3 discussion of
+% pp. 41-49: it gets one \note and his jottings, nothing of the typed text.
+% Page 58 is a tan cover sheet inscribed in pencil top right « Théorie
+% transcendante (Généralités classiques) »: no \page marker, its words become
+% a section heading with a \note.
+%
+% Pages summarised: none. Pages 56 and 57 (blue paper) are scratch sheets
+% of isolated formulas, given in page order.
+%
+% His pagination: none visible on these leaves. Batch 2's numbered-formula
+% run 1)-(12) (pp. 27-39) does not continue here: no numbered formula on
+% pp. 41-53. Numbered runs: on p. 60,
+% « Théorème II », « Théorème III », a theorem whose numeral is an ink blot,
+% « Théorème IV », « Théorème V » (Théorème I is not labelled on the page:
+% a cross stands before « Si une fonction elliptique n'a pas de pôles... »).
+% No date on any page.
+%
+% What the batch is about. Pages 41-53 continue batch 1's description of an
+% elliptic curve in residue characteristics ≠ 2,3 as a double cover of a
+% Brauer-Severi scheme: X a Brauer-Severi scheme (conic) over S with a
+% non-ramified trisection X' (p. 41); such data are classified by
+% H^1(S, S_3), X' gives an « associated » X''; in char. ≠ 2,3 a unique
+% isomorphism X -> P^1_S sending X', X'', X_1 to 0, ∞, 1 (p. 43); with a
+% section s disjoint from X' one gets the invariant j, a section of O_S; if
+% j and j-1 are units, the inverse image of j : S -> P^1_S is the Galois
+% S_3-cover defining X; j = 0 reduces the structure group to Z/2 (H^1(S,Z/2)),
+% j = 1 to Z/3 (H^1(S,Z/3)); the factorisation X -> P^1_S -> P^1_S,
+% t -> j t^2 (pp. 45-47); the description by an S_3-torsor S' and
+% t in Γ(S', O_S') with t, t-1 units and σ.t = φ_σ(t) (λt = 1/t,
+% μt = 1-t), « fonctoriel », and the example S = Spec(O), O complete local
+% with algebraically closed residue field (p. 49); « Autre façon de
+% procéder » (p. 51): X - s_∞ = Λ a principal homogeneous bundle under the
+% line bundle L, the trisection giving a barycentric section, hence
+% Λ ≅ L and the data become an invertible sheaf L with a non-ramified
+% trisection of V(L) of sum zero (p. 53). Page 56: scratch on the
+% Weierstrass form (D_ξ u_ξ)^2 = 4u_ξ^3 + b_ξ u_ξ + c_ξ, its behaviour under
+% ξ -> λξ (weights 2, 4, 6), the flag E_1 ⊂ E_2 ⊂ ... and powers of a sheaf
+% written as a triangle. Page 57: a flatness/descent computation with
+% B ⊗_A B and Nakayama. Pages 59-60 (brown ink, a different, earlier-looking
+% fair hand, under the cover of p. 58): classical elliptic functions —
+% definition, period parallelograms, Théorèmes I-V (Liouville, residues,
+% order, zeros/poles, sum of zeros, algebraic relation).
+%
+% Hardest pages: 41, 45, 51, 53 (a very fast abbreviated hand: formulas
+% carry, connective prose often does not); the slanted, partly struck margin
+% note on 53. Counts: 238 \ill{}, 41 \uncertain{}. Readings to check first:
+% « sur X » at the end of the trisection's definition (p. 41, one expects
+% S); « t ↦ j t^2 » (p. 47); the exponents in « Δ^n ≃ L^18 » (p. 56).
+
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{62}
+\batch{3}
+\pages{41}{60}
+\dating{[à partir de 1963]}
+\watermark{Édition de démonstration}
+\foldertitle{Courbes elliptiques (généralités - vieille rédaction) : notes manuscrites (s.d.)}
+
+\begin{document}
+
+\page{41}
+Soit $S$ un schéma de base, et soit $X$ un schéma de Br.-Severi sur $S$ muni d'une
+\emph{trisection} non ramifiée $X'$, i.e.\ un sous-schéma \add{\uncertain{fini}}
+de $X$ qui est un revêtement \uncertain{étale} sur $X$, de degré $3$ sur $X$.
+\note{ainsi sur la page : « sur $X$ » les deux fois ; on attendrait $S$. Le mot
+en interligne, en haut à droite, se lit mal}
+Un tel truc peut être considéré comme un \ill{} objet : \ill{} structure
+$\mathfrak{S}_3$, puisque \ill{} $\mathbf{P}^1_S$ \ill{} \ill{} il a été dit. La
+classification des tels objets \ill{} \ill{} \ill{} $=$ \ill{} la classification
+des \ill{} de $H^1(S,\mathfrak{S}_3)$ des \struck{\ill{}} \add{\uncertain{gal.}}
+\emph{\uncertain{rev.\ non ramifiés}} \ill{} groupe $\mathfrak{S}_3$ de $S$. De plus,
+on définit \ill{} $X$ une \ill{} \ill{}\add{\uncertain{involutive}}, \ill{} \ill{}
+\ill{} \ill{} $X'$ en un $X''$, dit \emph{associé} à $X'$.
+\note{le mot souligné est lu « associé » ; le mot écrit au-dessus de la ligne et
+appelé par un trait est douteux}
+Évidemment, \ill{} \ill{} \ill{} \ill{} $(X,X'')$, \ill{} \ill{} \ill{} \ill{}, et
+\ill{} \ill{} $X'$ [\ill{} \ill{} \ldots]. De plus, on \uncertain{obtient}
+[\ill{} \uncertain{descente} \ldots] une \emph{bisection}, \ill{}
+\uncertain{ramifiée} \struck{[\ill{} \ill{}} \ill{} \ill{} \ill{} \ill{} $S$ \ill{}
+car.\ $\neq 2,3$] \ldots. \ill{} \ill{} \ill{} \ill{} \ill{}, \struck{\ill{}} \ill{}
+$\mathfrak{S}_3$, \ill{} \ill{} \ill{} \ill{} :
+\[
+\mathbf{P}^1_S \xrightarrow{\ p\ } \mathbf{P}^1_S
+\]
+(\ill{} \ill{} $\mathfrak{S}_3$ \ill{}
+
+\page{42}
+\note{page 17 du même tapuscrit « n° 276 » (complété d'un groupe topologique
+abélien, Lemme 1 sur les suites exactes de groupes métrisables), sans rapport
+direct avec les courbes elliptiques. Il porte au crayon, dans la marge gauche,
+en face de « suite de groupes abéliens », un mot appelé par un trait dans le
+texte, d'une main qui paraît être la sienne, sans certitude}
+\marginal{\uncertain{topologiques}}
+
+\page{43}
+\ill{} \ill{} \ill{} \ill{} \ill{} \ill{} \ill{}) \ill{} \uncertain{isomorphisme}
+\uncertain{unique} [\ill{} $x$ \emph{\uncertain{pt} de car.\ $\neq 2,3$}]
+\[
+X \xrightarrow{\ f\ } \mathbf{P}^1_S
+\]
+qui est \uncertain{caractérisé} \ill{} les sections $0$, $\infty$, $1$
+\add{\ill{} de $\infty$ dans $X'$} \struck{\ill{}} exclusivement : l'image
+\ill{} \ill{} \ill{} \ill{} \ill{}, celle de $\infty$ est $X''$, celle de $1$ est
+$X_1$.
+\note{l'ajout est écrit sous « $0,\infty,1$ », entre deux traits ; le début de la
+phrase suivante, « l'image \ldots », se lit mal. Après cette phrase, une croix
+isolée sépare les deux parties de la page}
+
+\uncertain{Supposons} maintenant qu'on se donne, en plus, une donnée
+\uncertain{supplémentaire}, une section $s$ de $X$ \struck{\ill{}} sur $S$,
+\ill{} \ill{} par $X'$ [i.e.\ une section de $X-X'$ sur $S$]. Son image par $f$ est
+une section de $\mathbf{P}^1_S-(\infty)$, i.e.\ une section de $\underline{O}_S$,
+appelée l'\emph{invariant} de $(X,X',s)$, soit $j$.
+\note{dans $(X,X',s)$ une lettre est biffée devant le $s$}
+\uncertain{Supposons} par \ill{} que l'invariant $j$ ne prenne pas les valeurs
+$0$, $1$, i.e.\ soit inversible, ainsi que $j-1$. Alors l'image inverse dans
+$\mathbf{P}^1_S$ \struck{\ill{}} de $j\colon S\to\mathbf{P}^1_S$ définit un
+\emph{\struck{\ill{}} \add{revêtement} galoisien de $S$, non ramifié, de groupe
+$\mathfrak{S}_3$}, \struck{\ill{}} et c'est \emph{celui qui définit $X$}. [À
+l'inverse des faisceaux
+
+\page{45}
+catégoriques généraux \ldots].
+
+Dans ce cas, l'invariant suffit à reconstituer \struck{\ill{}} la structure
+$(X,X',s)$.
+
+Dans le cas où $X$ est \ill{}, \ill{}, et où \emph{$j$ n'est pas identiquement
+égal à $0$ ou $1$}, \ill{} \ill{} \ill{} \ill{} \ill{} \struck{\ill{}} \ill{}
+\ill{} \ill{} $X$ \ill{} \ill{} $U$ \ill{} c'est \ill{} \ill{} [$\mathbf{P}^1_S$
+\ill{}], \ill{} \ill{} \ill{} \ill{}, d'où reconstitution de $(X,X')$ ; \ill{}
+\ill{} \ill{}, on \ill{} $s$ \ill{} $U$, donc ($X$ \ill{}) partout.
+\note{le passage souligné sous « $j$ n'est pas identiquement égal à $0$ ou $1$ »
+est souligné en deux traits séparés}
+Dans \ill{} \ill{}, il faut des $H$ \emph{\uncertain{supplémentaires}}. \ill{}
+\uncertain{en particulier}, \ill{} \ill{} \ill{} \ill{} : \uncertain{quelle} \ill{}
+\uncertain{convenablement} ??
+Il faut exprimer (i) qu'une certaine extension de corps \ill{} de degré $3$
+\ill{} du corps des fonctions de $X$ est non ramifiée sur $X$ (ii) qu'une
+certaine application \uncertain{rationnelle} de $X$ qui se déduit \ill{}
+\uncertain{définie} \ldots
+
+\page{46}
+\note{feuillet du tapuscrit sans rapport (n° 276, p. 15 : corollaires sur les
+anneaux noethériens) ; seules sont données les notations qu'il y a jetées à
+l'encre dans la marge droite, écrites de biais}
+\marginal{$(2,\ \tfrac12(2-1))$ \quad $(x',\ x'')$ \quad $(0,1,\infty)$}
+\note{chacune est entourée d'une accolade ; sur le tapuscrit, $X_1$ est barré
+d'une croix à l'encre dans « $K[[X_1,\ldots,X_r]]$ »}
+
+\page{47}
+\struck{\uncertain{Supposons} \ill{} \ill{} \ill{} \ill{} \ill{}}
+
+En tous cas, si $j=0$, la situation est décrite par le fait que l'on a fait une
+réduction de \ill{} structural de $\mathfrak{S}_3$ à $\mathbf{Z}/2$
+\add{[$X''$ \struck{\ill{} $X'$} \ill{} une section \ill{} !]}, et \ill{} \ill{}
+est déterminée par la donnée d'un élément de $H^1(S,\mathbf{Z}/2)$.
+\struck{\ill{} \ill{}} \add{Et, si $j=1$}, \ill{} la situation est décrite
+\ill{} \ill{} \ill{} \ill{} une réduction du groupe structural :
+$\mathbf{Z}/3\subset\mathfrak{S}_3$ [\ill{} : une section \ill{}
+\add{la bisection} $X_1$] et la situation est décrite par la donnée d'un élément
+de $H^1(S,\mathbf{Z}/3)$.
+\note{« Et, si $j=1$ » est écrit au-dessus d'un mot biffé ; « la bisection » est
+en interligne au-dessus de $X_1$}
+
+\struck{\ill{}} En tous les cas, si $j$ est inversible, alors faisant opérer
+$\mathfrak{S}_3$ dans $\mathbf{P}^1_S/(\mathbf{Z}/3)$ \ill{} \ill{} \ill{}
+\uncertain{critique}, \ill{} \ill{} dans \struck{\ill{}} \add{\ill{}
+\ill{}} \add{(\ill{} de $X'$, $X''$ et $s$)} trois \emph{sections} distinctes,
+\ill{} \ill{} \ill{} \ill{} \ill{} $\infty$, $0$, $1$, d'où une identification de
+ce dernier à $\mathbf{P}^1_S$ ; et $X\to\mathbf{P}^1_S$ se factorise par
+\[
+\begin{array}{ccccc}
+X & \longrightarrow & \mathbf{P}^1_S & \longrightarrow & \mathbf{P}^1_S \\
+ & & \infty,0,1 & \longmapsto & \infty,0,j
+\end{array}
+\qquad t\mapsto jt^2 ;
+\]
+la bisection naturelle \ill{} \ill{} s'identifie donc \ill{} : $\sqrt{j}$,
+\note{le $S$ du premier $\mathbf{P}^1_S$ est surchargé ; « $t\mapsto jt^2$ » est
+écrit au-dessous de la flèche, la lettre lue $j$ sous réserve}
+
+\page{49}
+\struck{\ill{}} \uncertain{façon}
+
+Ceci nous a permis de donner de façon très explicite \ill{} \ill{} la
+« courbe \add{\ill{}} » de \uncertain{genre} $0$ sur $S$, munie d'une section et
+d'une trisection non ramifiée, disjointes. [\struck{\ill{}} $=$ revêtement
+\add{$\mathfrak{S}_3$} \struck{\ill{}} galoisien \add{$S'$} de groupe
+$\mathfrak{S}_3$ de $S$ \struck{\ill{}} \uncertain{pour} une section $t$ \struck{\ill{}}
+disjointe de $0,1,\infty$, \emph{invariante}
+\struck{\ill{}}
+\[
+S'\times_{(S,\mathfrak{S}_3)}\mathbf{P}^1_S
+\]
+par le groupe $\mathfrak{S}_3$, i.e.\ \struck{une section}
+\[
+t\in\Gamma(S',\underline{O}_{S'}),
+\]
+inversible et telle que $t-1$ soit inversible, et satisfaisant à
+\[
+\sigma.t = \varphi_\sigma(t) \qquad \sigma\in\mathfrak{S}_3
+\]
+i.e.
+\[
+\begin{cases} \lambda t = \dfrac{1}{t} \\[1ex] \mu t = 1-t \end{cases}
+\]
+\note{« invariante » est écrit sous une accolade qui embrasse « une section $t$
+disjointe de $0,1,\infty$ » ; devant $S'\times_{(S,\mathfrak{S}_3)}\mathbf{P}^1_S$,
+deux essais sont biffés. Le $\varphi_\sigma$ est écrit sur une autre lettre}
+
+\begin{tikzcd}
+X & \mathbf{P}^1_{S'} \arrow[l] \arrow[d] \\
+S & S' \arrow[l, "\mathfrak{S}_3"]
+\end{tikzcd}
+
+\note{carré en marge gauche ; $X\to S$ est tracé d'une flèche fine, et un long
+trait vertical, portant en biais « fonctoriel », borde le passage depuis le
+crochet ouvrant}
+\marginal{fonctoriel}
+
+\emph{Exemple} $S=\operatorname{Spec}(\mathcal{O})$, $\mathcal{O}$ anneau
+local \emph{complet} \add{(de car.\ $\neq 2,3$)} à corps résiduel alg.\ clos
+\struck{\ill{}}. Alors \struck{\ill{} \ill{}} $\pi_1(S)=0$, donc la situation
+équivaut, \add{\uncertain{Dém.} \ill{} \ill{}} \ill{} à la donnée d'un
+$t\in\mathcal{O}^*$ tel que \struck{\ill{}} $t(t-1)\in\mathcal{O}^*$, deux
+tels $t$, $t'$ donnant des \uncertain{objets} \uncertain{isomorphes}
+\struck{\ill{}} s.s.s.\ $t'$ \ill{} de $t$ par \ill{} $\varphi_\sigma(t)$,
+$\sigma\in\mathfrak{S}_3$.
+\marginal{non fonctoriel}
+\note{« non fonctoriel », en biais dans la marge gauche, est souligné deux
+fois ; l'ajout « Dém.\ \ldots » est entouré au-dessus de la ligne}
+
+\section*{Autre façon de procéder}
+
+\note{titre de sa main, souligné, en tête de la page 51}
+
+\page{51}
+Prenons la section privilégiée comme section $\infty$, donc
+$X-s_\infty=\Lambda$ apparaît comme un $S$-fibré principal \struck{projectif}
+homogène de groupe $\mathcal{L}$, où $\mathcal{L}$ est un \ill{} \ill{} \ill{},
+associé à un \struck{fibré} faisceau inversible $\underline{L}$ [\ldots\ \ill{}
+explique de façon bien précise.
+\note{un double trait vertical, dans la marge gauche, borde les lignes qui
+suivent}
+\ill{} schéma de Brauer--Severi et une section dans le dernier \ldots]. Alors la
+\emph{trisection} de $\Lambda$ permet de construire, \ill{} \ill{} [\ldots] une
+section de $\Lambda^3$, d'où [$3$ \uncertain{étant} inversible] une section de
+$\Lambda$, i.e.\ la \emph{section barycentrique} [\ill{} explique \ill{} \ill{}
+\ill{}, \ill{} \ill{} \ill{} \ill{} \ill{} inversible \ill{} un schéma \ill{}
+\add{\uncertain{défini}}, \ill{} $\mathcal{L}$ \ill{} \ill{} \ill{} une
+\ill{}-section \ill{} \ill{} fibré principal $\Lambda$ de groupe $\mathcal{L}$].
+Cela définit un isomorphisme
+\[
+\Lambda \simeq \mathcal{L}
+\]
+\emph{global}, identifiant $X'$ à une
+
+\page{53}
+trisection de $\mathcal{L}$, de « somme » nulle.
+
+\emph{La \struck{classification} \add{donnée} d'un système} \struck{privilégié}
+\emph{\ill{} \add{portés} sur $S$} \ill{} \ill{} \uncertain{équivalente}
+\emph{\ill{}} à \emph{celle d'un faisceau} \struck{\ill{}} \emph{inversible}
+\struck{\ill{}} $\underline{L}$ \add{\emph{non ramifiée}} \emph{sur $S$, et d'une
+trisection} $X'$ \emph{de} $\mathcal{L}=V(\underline{L})$, \emph{de}
+\struck{\ill{}} \emph{« somme » nulle} \struck{\ill{}}
+\struck{$V(\underline{L})^{\otimes 3}$}.
+\note{la phrase est soulignée par morceaux ; « non ramifiée », entouré, est
+écrit sous « inversible $\underline{L}$ » et relié par un trait à « $X'$ »}
+Mais on peut aussi éliminer les \add{\ill{}} \ill{}, symétriques \ill{}
+\struck{\ill{}} \ill{} trisection.
+\marginal{\ill{} \ill{} \ill{} \ill{} \ill{} \ill{} \ill{} \ill{}}
+\note{note en biais dans la marge gauche, sur une dizaine de lignes courtes,
+en partie biffée d'un trait oblique ; on y distingue $\mathfrak{S}_3$ et une
+croix, sans pouvoir la lire}
+
+\page{56}
+\note{feuille de brouillon (papier bleuté) : formules isolées, données dans
+l'ordre de la page ; un petit rectangle griffonné en haut à gauche, portant
+$\Delta^2$, $\Delta^3$, $y$, $x$ aux coins, n'est pas repris}
+
+\[
+(D_\xi u_\xi)^2 = 4u_\xi^3 + b_\xi u_\xi + c_\xi
+\]
+\struck{$(D_\xi x_\xi)^2 = 4\ldots$} \quad \struck{$u_\xi\in\Delta^?$}
+\[
+(D_{\lambda\xi}u_{\lambda\xi})^2 = 4u_{\lambda\xi}^3 + b_{\lambda\xi}u_{\lambda\xi}
++ c_{\lambda\xi}
+\]
+\[
+u_\xi = 6x_{\xi^2} \qquad\qquad u_{\lambda\xi} = \rho\, u_\xi
+\]
+\note{une lettre biffée devant $u_{\lambda\xi}=\rho u_\xi$}
+\[
+C \,\big|\, \underline{O}\to\underline{O}(1) \qquad
+f_*(\underline{O}(n)) = E_n \qquad\Big|\qquad
+\lambda^2\rho^2(D_\xi u_\xi)^2 = 4\rho^3u_\xi^3 + \rho b_{\lambda\xi}u_\xi
++ c_{\lambda\xi}
+\]
+\note{$C$ au-dessus d'une flèche verticale vers $S$ ; sous le dernier membre,
+un signe d'égalité vertical}
+\[
+\underline{O} = E_1 \subset E_2 \subset E_3 \subset E_4 \subset E_5 \subset E_6
+\subset \cdots \subset E_n
+\]
+\[
+\underline{O} = \Delta^0 \qquad L_2 \qquad L_3 \qquad\Big|\qquad L_2^2 \qquad
+L_2L_3 \qquad L_2^3
+\]
+\note{sous chaque inclusion une petite accolade, qui en désigne le quotient ;
+sous $L_3$, « $\simeq \Delta L_2$ » ; sous $L_2^2$, $L_2L_3$, $L_2^3$, des
+termes en $\Delta$ ($\Delta L_3$, $\Delta^3 L_2$, \ldots) couverts de hachures ;
+sous $L_2$ trois lignes illisibles, où l'on lit $\omega_1,\omega_2,\omega_3$, et
+sous le tout une accolade marquée « \uncertain{pairs} »}
+\[
+y^2 = 4x^3 + bx + c \qquad\qquad \frac{y}{x} = D
+\]
+\note{une lettre biffée devant $y^2$, et sous « $\frac{y}{x}$ » le $x$ est
+barré}
+\[
+(D_\xi u_\xi)^2 = 4\,\frac{\rho}{\lambda^2}\,u_\xi^3 +
+\frac{1}{\rho\lambda^2}\,b_{\lambda\xi}u_\xi + \frac{c_{\lambda\xi}}{\lambda^2\rho^2}
+\]
+\[
+\rho = \lambda^2 \qquad
+\begin{cases}
+u_{\lambda\xi} = \lambda^2 u_\xi\\
+b_{\lambda\xi} = \lambda^4 b_\xi\\
+c_{\lambda\xi} = \lambda^6 c_\xi
+\end{cases}
+\qquad
+\begin{array}{l}
+u_\xi \in L_2 \simeq \Delta^2\\
+b_\xi \in \Delta^0\\
+c_\xi \in \Delta^0
+\end{array}
+\]
+\note{ainsi sur la page : $\Delta^0$ pour $b_\xi$ et $c_\xi$ ; l'exposant de
+$b_\xi$ est surchargé}
+\[
+\Delta^4\longrightarrow\underline{O}_S \qquad \Delta^6\longrightarrow\underline{O}_S
+\qquad \Delta^2\longrightarrow\Delta^2 \qquad\qquad
+\begin{array}{l} \Delta^{?}\simeq\mathcal{L}^{18}\\ \Delta^2\simeq\mathcal{L}^3 \end{array}
+\]
+\note{les deux relations de droite, plus petites, se lisent mal ; l'exposant de
+$\mathcal{L}$ est lu $18$ sous réserve}
+\[
+\begin{cases}
+b\in\Delta^{-4}\\
+c\in\Delta^{-6}\\
+u \ \text{scalaire}
+\end{cases}
+\qquad\qquad u_\xi = \xi^2
+\]
+\note{sous « $u_\xi=\xi^2$ », un trait horizontal prolongé d'une oblique, et
+$\xi^2$ au-dessous}
+
+\page{57}
+\note{feuille de brouillon (papier bleuté), dans l'ordre de la page}
+
+\[
+\begin{array}{c} X\\[1ex] \\ S \end{array} \qquad
+X\times_S X \supset R \qquad\qquad
+\begin{array}{ccc}
+\mathcal{B} & & A\\
+X & \longrightarrow & Y\\
+\nearrow & & \nearrow\\
+X\times_Y X & \longrightarrow & X
+\end{array}
+\qquad x_i :
+\]
+\[
+B\otimes_A B
+\]
+\[
+\begin{array}{c} B\\ | \\ A \end{array} \qquad
+A \longrightarrow B\otimes_A B \qquad B
+\]
+$x_i\otimes 1$ base de $B\otimes B$ sur $B\otimes B$ \quad / \ill{} \ill{} $\mathfrak{m}\subset A$
+\note{les $\otimes$ de cette ligne sont surchargés ; « $\mathfrak{m}\subset A$ »
+est lu sous réserve}
+
+$x_i\otimes 1$ \quad --- \quad $L\otimes_K L$ sur $1\otimes L$
+
+$x_i$ base de $L$ sur $k$
+
+$x_i$ générateurs de $B$ sur $A$ par Nakayama.
+\[
+\sum\lambda_i x_i = 0 \qquad \lambda_i\in A
+\]
+\struck{$\sum\lambda_i x_i$}
+\[
+\Bigl(\sum\lambda_i x_i\Bigr)\otimes_A 1 =
+\sum(x_i\otimes 1)(1\otimes\lambda_i) = 0
+\]
+$1\otimes\lambda_i=0$ pour \uncertain{tout} $i$ ;
+
+\uncertain{Utilisant} $B\otimes_A B\to B$, on trouve
+\struck{$\lambda_i\otimes 1 = 0$ \quad $1\otimes\lambda_i = \lambda_i\otimes 1$}
+\[
+\lambda_i = 0 \ \text{dans}\ B
+\]
+
+\section*{Théorie transcendante (Généralités classiques)}
+
+\note{inscrit au crayon, de sa main, en haut à droite du feuillet de garde
+(page 58), qui ne porte rien d'autre ; le feuillet ne reçoit pas de numéro de
+page. Les pages 59--60, sur papier brun, sont d'une encre brune et d'une
+écriture posée, plus ancienne d'aspect}
+
+\page{59}
+\emph{Fonction elliptique.} C'est une fonction méromorphe dans le plan à
+distance finie, et admettant deux périodes distinctes $\omega_1$ et $\omega_2$.
+\struck{\ill{}} En particulier, une constante est une fonction elliptique. Si
+$f(z)$ n'est pas une constante, le rapport de $\omega_1$ et $\omega_2$ n'est pas
+réel \struck{imaginaire}.
+\add{Définition de la période ($\omega_1$ et $\omega_2$ donnent \ill{} \ill{}
+\ill{} \uncertain{parallélogramme}). Mais il faut remplacer « $\omega_1$ et
+$\omega_2$ » !}
+\add{le domaine d'une fonction elliptique n'est \uncertain{certain} \ill{} \ill{}
+\ill{}}
+\note{deux lignes serrées en interligne, au-dessus de « \ldots\ correspondant du
+plan » ; lues par fragments}
+\ill{} correspondant du plan. On peut définir un réseau de parallélogrammes
+correspondants aux périodes $\omega_1$ et $\omega_2$ et à un sommet $a$ arbitraire.
+Ils sont déterminés par leurs sommets de la forme $a+n_2\omega_2+n_1\omega_1$ ;
+tout point qui n'est pas de la forme $a+n\omega_2+\lambda\omega_1$, ou
+$a+\lambda\omega_2+n\omega_1$ ($\lambda$ et $n$ réels, $n$ entier) appartient : $1$
+et $1$ seul de ces parallélogrammes \add{il \uncertain{bien} \ill{}} \struck{\ill{}},
+tout point qui est de la forme parallèle, mais non de la forme
+$a+n_1\omega_2+n_1\omega_1$ ($=a+\omega$), \struck{\ill{}} appartient : deux et
+deux seulement de ces par., il appartient aux côtés, non au sommet ; enfin, un
+point de la forme $a+n_1\omega_2+n_2\omega_1$ appartient : $4$ et $4$ seulement de
+tels par., il appartient : leurs sommets.
+\note{ainsi sur la page : $n_1$ deux fois dans la deuxième forme ; les indices
+varient d'une forme à l'autre}
+
+Si on se donne un parallélogramme de périodes, tout point est l'homologue soit
+d'un pt intérieur $\xi$, soit de deux pts sur les côtés, et non les sommets,
+soit de $4$ sommets.
+\add{En particulier, deux pts intérieurs d'un même par.\ de périodes ne sont pas
+homologues}
+\struck{Si on se donne la fonction}
+
+On peut trouver des par.\ des périodes, tels que sur leurs côtés ne se trouve
+aucun zéro, pôle etc. ; dans ce cas, la \struck{\ill{}} \add{liste} des zéros
+(pôles) avec leur ordre de multiplicité, est indépendante du par.\ considéré. Il
+en est ainsi en toute généralité, si on \uncertain{compte} une seule fois
+\struck{\ill{}} les zéros de tout groupe de zéros homologues
+(\struck{situés} ils ont situés sur les sommets --- auquel cas on les divise par
+$4$ --- autrement où les divise par deux).
+
+\page{60}
+L'ens.\ des val.\ prises par $f(z)$ dans un par.\ des périodes est égal à
+l'ensemble des valeurs prises dans tout le plan.
+
+$\times$ Si une fonction elliptique n'a pas de pôles, elle est constante.
+\note{la croix est dans la marge, devant la phrase}
+
+Remarque que la somme, le produit, le quotient, la dérivée, de fonctions
+elliptiques de m.\ périodes sont de m.\ périodes.
+
+\emph{Théorème II} La somme des résidus d'une fonction elliptique dans un par.\
+de périodes est nulle.
+
+Donc une fonction elliptique \ill{} admet dans un par.\ de périodes au moins
+deux pôles (chacun compté avec son ordre de multiplicité).
+
+\emph{Théorème III} Le nombre des zéros et le \uncertain{nombre} des pôles d'une
+fonction elliptique dans un parallélogramme des périodes est le même (en
+supposant toujours que sur les côtés \ldots) ; il en est de même du nombre de
+fois qu'il prend \struck{la valeur} \add{une valeur} donnée (sous les m.\
+réserves).
+
+Le nombre est appelé ordre de la fonction elliptique.
+
+\emph{Théorème \ill{}} Deux fonctions elliptiques de m.\ périodes, qui ont mêmes
+zéros et mêmes pôles, avec le m.\ ordre de multiplicité, sont égales à un
+facteur constant près. Elles sont égales à une constante additive près, si elles
+ont m.\ périodes, et m.\ pôles, avec m.\ partie principale.
+\note{le chiffre romain de ce théorème est recouvert d'une tache d'encre ; un
+long trait courbe, dans la marge gauche, le relie au théorème II}
+
+\emph{Théorème IV} La somme des zéros d'une fonction \struck{toute} elliptique
+dans un parallélogramme de périodes égale la somme de ses pôles, à une période
+près.
+
+\emph{Théorème V.} Entre deux fonctions elliptiques de m.\ périodes existe une
+relation algébrique.
+
+\end{document}
