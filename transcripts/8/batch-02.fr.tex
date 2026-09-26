@@ -1,0 +1,794 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 8, batch 2 (pages 21-40).
+% Established from the facsimile archives/batches/8/batch-02.pdf, cut from a
+% copy of 8.pdf fetched through the project's own relay
+% (https://grothendieck-relay.onrender.com/source/8.pdf) rather than from
+% grothendieck.umontpellier.fr directly; per the skill transcribe-grothendieck.
+% The batch file carries no cover sheet: PDF page k is the archivists' page
+% 20+k, and their pencil numbers bottom-left agree throughout. The folder is
+% eighty pages; this is the second of four batches (the others are
+% transcribed separately by other passes).
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-09-26 — first pass, unchecked against the pages by a human.
+%
+% The folder sits in the inventory group "4-9" « Cristaux »; it has its own
+% date in the catalogue, which \dating{} carries verbatim, with no group
+% sentence.
+%
+% Pages skipped: 22, an upside-down typed leaf « - 53 - » on the variation of
+% the amplitude of z along a path (complex analysis), nothing in his hand;
+% 23, 27 and 32, blank cream sheets carrying only show-through from the
+% neighbouring leaves; 34, 36, 38 and 40, upside-down typed leaves « n° 382 »
+% (pp. 81-84, jets and fibrations of C^r manifolds, §7.1-7.2), nothing in his
+% hand (the one handwritten footnote on p. 36 is in the duplicated ink of the
+% stencil itself). All are unrelated versos, skipped by the settled rule.
+%
+% Pages given as typescript, one French \note, with the hand-made
+% interventions in full: 31, an upside-down typed leaf (numbered 34 at top
+% right) of a French text on semi-stable and good virtual reduction of
+% abelian varieties and Barsotti-Tate groups (proof of a statement a)-c),
+% then Remarque 5.13.1). It is not identified here, nor is the hand of the
+% corrections asserted. It is not a leaf of the proper-base-change
+% typescript found in batch 1.
+%
+% Pages transcribed from his hand: 21, 24-26, 28-30, 33, 35, 37, 39. Fast
+% drafting in blue-black ink (p. 21 in pencil, p. 28 partly in pencil, p. 29
+% ball-point with sketches); formulas carry, much of the connective prose
+% does not and is left \ill{}.
+%
+% His pagination: none on these leaves.
+%
+% What the batch is about. P. 21: a Hom computation around the triangle
+% l -> Delta -> l'[1] and hypercohomology exact sequences, the sequence
+% 0 -> n_{G*} -> D*(G)^v -> t_G -> omega_{G*} -> D*(G*) -> nu_G -> 0 and a
+% non-injectivity H^1(n_{G*}) -> H^1_cris. Pp. 24-26 « Groupes de
+% Barsotti-Tate ordinaires »: over a smooth S_0/k lifted to a formal S/W with
+% a Frobenius lift F_S, the category C of sextuples (P', Q', M, nabla, F_M,
+% Fil_0) and the Dieudonné functor D : BTO(S_0)° -> C (« Question : est-ce
+% une équivalence ? »); in a splitting phi, M is described by Phi and omega
+% in Gamma(T (x) O_S), T = P'^v (x) Q', with change of splitting
+% Phi' = Phi + (pL - F_S^*(L)), omega' = omega - dL and conditions
+% d omega = 0, F_S^*(omega) - p omega = d Phi, Phi_0 = 0. P. 28: the same
+% for a free module E_S with connection matrix A: d Phi = Phi A^sigma - A Phi,
+% dA + [A,A] = 0, Psi Phi = p^i. P. 29: sketches on atlases of C^r families
+% (canonical, regular, natural, normal families) — unrelated differential
+% topology, transcribed as written. P. 30: morphisms, the rank-one case
+% (d phi = phi(omega^sigma - omega), d omega = 0) and a classifying complex.
+% Pp. 33-39 « Détermination du module de Dieudonné filtré du groupe de
+% Barsotti-Tate »: K/Q_p finite, A its integers, k = F_q, q = p^f,
+% h = ef; BT groups G_0 over k with A-action and pi_{G_0} = F^f;
+% A (x) W = A^Sigma, M = (M_nu) with maps phi_nu, M_nu invertible,
+% phi_nu = pi^{r_nu}, r_nu <= e, dim G_0 = sum r_nu; Proposition:
+% dim G_0 = 1 iff F^f = pi_{G_0} for a uniformiser pi iff M is given by a
+% triple (Omega, nu, pi); homomorphisms G_0 -> G'_0.
+%
+% Notation, aligned with batch 1: \check\ell'_\bullet, \ell_\bullet for his
+% « l. » complexes, \Delta^* for his triangle-shaped Delta, \mathbb{D}^*(G)
+% for his double-stroked D, \varphi for the splittings and for the maps
+% phi_nu; \Phi for his barred-circle letter on pp. 25-28 (F_M in a splitting),
+% \Psi for its quasi-inverse; \varpi for his « curly pi » on pp. 37-39
+% (F^f = varpi); \Omega for the invertible A-module of pp. 35-39;
+% \underline{O} for his underlined O.
+%
+% Hardest pages and readings to check first: p. 21 throughout (pencil, no
+% connective prose, the accents and superscripts of the l's); the margin of
+% p. 25; p. 28 top (pencil computation, the boxed « v o omega = du + omega'
+% o u »); p. 30 (the list after « compatible avec », the classifying
+% complex); the margins of pp. 35 and 39 (mostly \ill{}); p. 37 (the
+% boxed « dim G_0 = 1 » equivalences and their small print).
+
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{8}
+\batch{2}
+\pages{21}{40}
+\dating{[vers 1967- vers 1971]}
+\watermark{Édition de démonstration}
+\foldertitle{Cristaux (1970). Gribouillis et calculs divers : notes manuscrites (s.d.)}
+
+\begin{document}
+
+\page{21}
+
+\note{page entière au crayon, sans une phrase suivie : suites exactes et
+triangles notés l'un sous l'autre}
+
+\begin{tikzcd}[column sep=small, row sep=small]
+ & \check{\ell}'_\bullet[1] \arrow[dl] & \\
+\ell \arrow[rr] & & \Delta \arrow[ul]
+\end{tikzcd}
+
+\[
+0 \to \ell \to \Delta \to \check{\ell}'_\bullet[1] \to 0
+\]
+\[
+0 \to 0 \to \Theta \xrightarrow{\ \sim\ } \Theta \to 0
+\]
+\[
+\begin{array}{ll}
+\operatorname{Fil}^0 \Theta = \Theta & \operatorname{Fil}^0(\Delta) = \Delta \\
+\operatorname{Fil}^1 \Theta = 0 & \operatorname{Fil}^1(\Delta) = \ell \\
+ & \operatorname{Fil}^2(\Delta) = 0
+\end{array}
+\qquad
+\left.\begin{array}{l} \Delta \to \Theta \\ \ell \to 0 \end{array}\right]
+\ \text{i.e.}\ \check{\ell}'_\bullet[1] \to \Theta
+\]
+modulo les diff.\ d'\uncertain{homotopie} \ill{} \ill{} \uncertain{tels que}
+\ill{}
+
+\[
+\begin{array}{c}
+\operatorname{Hom}_{D(X)}(\check{\ell}'_\bullet[1], \Theta) \to \operatorname{Hom}(\Delta, \Theta) \\
+\downarrow \\
+\operatorname{Hom}_{D(X_{\mathrm{cris}})}(\varphi^{*}(\check{\ell}'_\bullet[1]), \varphi^{*}(\Theta))
+\end{array}
+\]
+\[
+\Theta = \underline{O}_X[1]
+\]
+\struck{$\operatorname{Hom}_{D(X)}$}
+
+\[
+\begin{array}{c}
+\mathbb{H}^0(\ell_\bullet) \to \mathbb{H}^0(\Delta^*) \\
+\downarrow \\
+\mathbb{H}^0 \varphi^{*}(\ell_\bullet)
+\end{array}
+\]
+\note{l'exposant de $\Delta$ dans $\mathbb{H}^0(\Delta^*)$ est
+surchargé ; à droite, biffé : « $\to \mathbb{H}^1(\ell_\bullet)$ »}
+
+\[
+0 \to \ell_\bullet \to \check{\Delta}^* \to \check{\ell}_\bullet[1] \to 0
+\]
+\note{lecture incertaine des accents et des exposants de cette ligne}
+\[
+0 \to n_{G^{*}} \to \mathbb{D}^{*}(G)^{\vee} \to t_G \to \omega_{G^{*}} \to
+\mathbb{D}^{*}(G^{*}) \to \nu_G \to 0
+\]
+\note{la dernière lettre, « $\nu_G$ », est une lecture incertaine}
+\[
+\begin{gathered}
+0 \to \mathbb{H}^1(\ell_\bullet) \to \mathbb{H}^1(\Delta^*) \to
+\mathbb{H}^1(\check{\ell}_\bullet[-1]) \to \mathbb{H}^0(\ell_\bullet) \to
+\mathbb{H}^0(\Delta^*) \to \mathbb{H}^0(\check{\ell}_\bullet[1]) \to 0 \\
+0 \to L_1 \to L_0 \to 0
+\end{gathered}
+\]
+\note{un trait relie $\mathbb{H}^1(\check{\ell}_\bullet[-1])$ à $t_G$ dans la
+ligne du dessus}
+\[
+\underbrace{\Gamma(\mathbb{D}^{*}(G)^{\vee}) \to \Gamma(t_G)}\to \mathbb{H}^0(\ell_\bullet)
+\qquad
+H^1(n_{G^{*}}) \to H^1_{\mathrm{cris}}(n_{G^{*}})
+\]
+\[
+0 \to \underbrace{n_{G^{*}} \to \mathbb{D}^{*}(G)^{\vee}} \to Q \to 0
+\]
+\[
+\to \omega \to \mathbb{D}^{*}(G)
+\]
+\[
+\begin{cases}
+H^1(\mathbb{D}^{*}(G)^{\vee}) = 0 \\
+\operatorname{Ker}\bigl(H^1(n_{G^{*}}) \to H^1_{\mathrm{cris}}(n_{G^{*}})\bigr) \neq 0
+\end{cases}
+\]
+
+\page{24}
+
+\section*{Groupes de Barsotti-Tate ordinaires.}
+
+$S_0$ schéma lisse sur $k$, corps parfait, $S_0 = \operatorname{Spec} A_0$
+si on veut
+
+$S$ schéma formel formell.\ lisse sur $W$ relevant $S_0$
+
+$F_S$, endom.\ \struck{relevant} du schéma formel $S$, compatible avec
+$\sigma$ sur $W(k)$ (automorphisme de Frobenius) et prolongeant $F_{S_0}$
+(endom.\ de Frob.\ absolu)
+
+$\mathrm{BTO}(S_0)$ catégorie des groupes de BT ordinaires sur $S_0$
+
+$C = \mathbf{C}_{S, F_S}$, catégorie des \struck{\uncertain{quadruplets}}
+\uncertain{sextuples} $(P', Q', M, \nabla, F_M, \operatorname{Fil}_0)$,
+formés de
+\begin{itemize}
+\item $P'$, $Q'$ \struck{faisceaux} $p$-adiques constants tordus \ill{}
+loc.\ libres de t.f.\ sur $S$
+\item $M$ extension de $P' \otimes_{\mathbb{Z}_p} \mathcal{O}_S$ par
+$Q' \otimes_{\mathbb{Z}_p} \mathcal{O}_S$
+\[
+0 \to Q' \otimes_{\mathbb{Z}_p} \mathcal{O}_S \to M \to
+P' \otimes_{\mathbb{Z}_p} \mathcal{O}_S \to 0
+\]
+\item $\nabla$ connexion à courbure nulle sur $M$, compatible avec
+\struck{induisant sur} la structure d'extension ($Q' \otimes \mathcal{O}_S$
+et $P' \otimes \mathcal{O}_S$ munis de leur connexion canonique \ldots)
+\item $F_M : F_S^{*}(M) \to M$ homomorphisme d'extensions, compatible avec
+les connexions, induisant \struck{sur $Q' \otimes$} respectivement
+\[
+\begin{aligned}
+F_{Q'} &: F_S^{*}(Q' \otimes_{\mathbb{Z}_p} \mathcal{O}_S) \to
+Q' \otimes_{\mathbb{Z}_p} \mathcal{O}_S \\
+p \cdot F_{P'} &: F_S^{*}(P' \otimes_{\mathbb{Z}_p} \mathcal{O}_S) \to
+P' \otimes_{\mathbb{Z}_p} \mathcal{O}_S ,
+\end{aligned}
+\]
+$F_{P'}$ ($F_{Q'}$) étant l'isom.\ canonique
+\item $\operatorname{Fil}$ un \struck{filtration} splitting
+(\struck{\ill{}} \uncertain{spéc.}\ comp.\ aux connexions)
+\struck{\ill{} de $M_0 = M \otimes \mathcal{O}_{S_0}$} / de l'extension
+$M_0$ de $P'_0 \otimes_{\mathbb{F}_p} \mathcal{O}_{S_0}$ par
+$Q'_0 \otimes_{\mathbb{F}_p} \mathcal{O}_{S_0}$, compatible à l'hom
+$F_{M_0}$
+\end{itemize}
+
+On a un foncteur canonique (« module de Dieudonné »)
+\[
+\mathbb{D} : \mathrm{BTO}(S_0)^{\circ} \longrightarrow C .
+\]
+
+\emph{Question} : Est-ce une équivalence de catégories ?
+\note{la question est soulignée d'un trait ondulé}
+
+\page{25}
+
+\marginal{on peut \uncertain{prendre} un splitting $\varphi$ compatible avec
+le splitting $\operatorname{Fil}_0$ sur $S_0$, ce qui conduira à des $L$
+\ill{} \emph{nuls} sur $S_0$ et des $\Phi$ itou \ldots}\note{note de marge
+écrite en oblique à gauche des dix premières lignes}
+
+1) Description de la catégorie $C$.
+
+Considérons un objet $(P', Q', M, \nabla, F_M, \operatorname{Fil})$
+\struck{\ill{} $\nabla$}. Choisissons un splitting de l'extension $M$,
+disons un isom
+\[
+\varphi : M \xrightarrow{\ \sim\ } P' \otimes_{\mathbb{Z}_p} \mathcal{O}_S +
+Q' \otimes_{\mathbb{Z}_p} \mathcal{O}_S
+\]
+Un autre splitting définira un \struck{\ill{}} isom $\varphi'$
+\[
+\varphi' : M \simeq \ldots
+\]
+donnant lieu à un diagramme commutatif
+
+\begin{tikzcd}
+M \arrow[r, "\varphi"] \arrow[d, no head] &
+P' \otimes \mathcal{O}_S + Q' \otimes \mathcal{O}_S \arrow[d, "u"] \\
+M \arrow[r, "\varphi'"] &
+P' \otimes \mathcal{O}_S + Q' \otimes \mathcal{O}_S
+\end{tikzcd}
+
+\note{le trait vertical de gauche est une égalité ; les flèches horizontales sont des isomorphismes, marqués $\sim$}
+
+où $u = \begin{pmatrix} \mathrm{id} & L \\ 0 & \mathrm{id} \end{pmatrix}$,
+\quad $u(x, y) = (x, y + Lx)$
+
+avec
+\[
+L \in \Gamma\bigl(\underbrace{\check{P}' \otimes_{\mathbb{Z}_p} Q'}_{T}
+\otimes_{\mathbb{Z}_p} \mathcal{O}_S\bigr)
+\]
+
+\struck{En termes de} et $I_{\varphi}$, $I_{Q'}$,\note{lecture
+incertaine ; ces mots, reliés par un trait à la ligne suivante, semblent
+ajoutés après coup}
+Utilisant $\varphi$, $F_S^{*}(\varphi)$
+\[
+F_S^{*}(M) \xrightarrow[\ \sim\ ]{F_S^{*}(\varphi)}
+P' \otimes \mathcal{O}_S + Q' \otimes \mathcal{O}_S
+\]
+et $F_M$ est donné par la commutativité de
+
+\begin{tikzcd}
+F_S^{*}(M) \arrow[r, "F_S^{*}(\varphi)"] \arrow[d, "F_M"'] &
+P' \otimes \mathcal{O}_S + Q' \otimes \mathcal{O}_S \arrow[d, "F_{M,\varphi}"] \\
+M \arrow[r, "\varphi"] &
+P' \otimes \mathcal{O}_S + Q' \otimes \mathcal{O}_S
+\end{tikzcd}
+
+\[
+F_{M,\varphi} = \begin{pmatrix} \mathrm{id} & \Phi \\ 0 & p\,\mathrm{id} \end{pmatrix},
+\qquad F_{M,\varphi}(x, y) = (px, y + \Phi x)
+\]
+\note{tel quel : la matrice porte $\mathrm{id}$ en haut et $p\,\mathrm{id}$
+en bas, la formule donne $px$ sur la première composante}
+où
+\[
+\boxed{\ \Phi = \Phi_{M,\varphi} \in \Gamma(T \otimes_{\mathbb{Z}_p} \mathcal{O}_S)\ }
+\]
+\note{le $T$ est écrit par-dessus un $\check{P}$ ; le $\Phi$ est la lettre
+barrée de sa main que l'on rend ainsi sur toute la page}
+
+On veut comparer $\Phi$ avec $\Phi' = \Phi_{M,\varphi'}$, on trouve
+\[
+F_{M,\varphi'}\, F_S^{*}(u) = u\, F_{M,\varphi} \qquad \text{i.e.,}
+\]
+\struck{\ill{}}
+\[
+\Phi' + F_S^{*}(L) = \Phi + pL
+\]
+
+\page{26}
+
+i.e.
+\[
+\boxed{\ \Phi' = \Phi + \bigl(pL - F_S^{*}(L)\bigr)\ }
+\]
+
+On voit de même, si $\omega = \omega_{M,\varphi} \in
+\Gamma\bigl(\hat{\Omega}^1_{S/W} \otimes (T \otimes_{\mathbb{Z}_p}
+\mathcal{O}_S)\bigr)$ donne la forme connexion $\nabla \in
+\Gamma(\hat{\Omega}^1_{S/W} \otimes M)$ via $\varphi$,
+\[
+\nabla_{M,\varphi} = \begin{pmatrix} 0 & \omega_{M,\varphi} \\ 0 & 0 \end{pmatrix}
+\qquad
+\boxed{\ \omega = \omega_{M,\varphi} \in \Gamma\bigl(\hat{\Omega}^1_{S/W}
+\otimes (T \otimes_{\mathbb{Z}_p} \mathcal{O}_S)\bigr)\ }
+\]
+que on a, si $\omega' = \omega_{M,\varphi'}$, que :
+\[
+\boxed{\ \omega' = \omega - dL\ }
+\]
+\note{un indice de $\omega'$ est biffé}
+
+Écrivons les conditions portant sur \struck{\ill{}} $\Phi = \Phi_{M,\varphi}$
+et $\omega = \omega_{M,\varphi}$ qui assurent qu'on a bien un objet de $C$.
+Ce sont
+\[
+\begin{cases}
+\boxed{d\omega = 0} & \text{exprime que la connexion } \nabla
+\text{ définie par } \omega \text{ est à courbure nulle} \\
+\boxed{F_S^{*}(\omega) - p\omega = d\Phi} & \text{exprime que } F_M
+\text{ est compatible à la connexion} \\
+\boxed{\Phi_0 = 0} & \text{exprimant que } (F_M)_0 \text{ respecte }
+\operatorname{Fil}_0 .
+\end{cases}
+\]
+\note{la dernière glose porte un mot biffé entre « respecte » et
+« $\operatorname{Fil}_0$ »}
+
+\page{28}
+
+\note{en haut, au crayon, un calcul en partie biffé ; première ligne biffée
+« $(i+p-1)p - (i+p-2)p$ » (lecture douteuse), puis}
+\[
+(i+p)(p+1) - (i+p-1)p = \ldots = \underline{2p+i}
+\]
+\note{les termes intermédiaires se détruisent deux à deux et sont barrés un à
+un ; à côté, au crayon et encadré :}
+\[
+E \xrightarrow{\ u\ } F, \quad \omega, \ \omega' \qquad
+\boxed{\ v \circ \omega = du + \omega' \circ u\ }
+\]
+\note{le $v$ de l'encadré est une lecture douteuse (on attend $u$)}
+
+\struck{$E_{0,S} \to E_S$}\note{ligne barrée d'un trait sur toute la
+largeur ; en dessous, une autre esquisse biffée, $E_{0,S}$}
+
+\begin{tikzcd}[column sep=small, row sep=small]
+S_0 \arrow[r, no head] \arrow[d, no head] & S \arrow[d, no head] \\
+k \arrow[r, no head] & W
+\end{tikzcd}
+\qquad $F_S$, \struck{$F_S^{*}$} $\lambda$
+
+\begin{tikzcd}[column sep=small, row sep=small]
+S \arrow[r, "F_S"] \arrow[d, no head] & S \arrow[d, no head] \\
+\operatorname{Spf} W \arrow[r, "F_W"] \arrow[dr, no head] &
+\operatorname{Spf}(W) \arrow[d, no head] \\
+ & \operatorname{Spf} \mathbb{Z}_p
+\end{tikzcd}
+
+$M = E_W$, \quad $E$ module libre de t.f.
+
+\struck{$F_S^{*}(E_W) = E^{\sigma}_W$}
+
+\begin{tikzcd}
+F_S^{*}(E_S) \arrow[r, "F_M"] & E_S \\
+E_S \arrow[u, no head, "\wr"] \arrow[ur, "\Phi"'] &
+\end{tikzcd}
+
+$\Phi$ \emph{induit un isom après} $\otimes_{\mathbb{Z}_p} \mathbb{Q}_p$
+\note{souligné deux fois}
+
+\[
+A \in \Gamma\bigl(\hat{\Omega}^1_{S/W} \otimes \operatorname{End}(E_S)\bigr)
+\]
+\[
+A' = F_S^{*}(\nabla) \in \Gamma\bigl(\hat{\Omega}^1_{S/W} \otimes
+\underbrace{\operatorname{End}(F_S^{*}(E_S))}_{\simeq\, \operatorname{End}(E_S)}\bigr)
+\]
+\struck{$\Phi \circ \nabla$}
+
+\[
+\Phi \circ A^{\sigma} = d\Phi + A \circ \Phi
+\]
+i.e.
+\[
+\boxed{\ d\Phi = \Phi \circ A^{\sigma} - A \circ \Phi\ }
+\quad \text{exprime que } F_M \text{ est compatible à la connexion}
+\]
+\struck{$K(A)E$}
+\[
+\boxed{\ dA + [A, A] = 0\ }
+\quad \text{exprime que la connexion } \nabla \text{ définie par } A
+\text{ est à courbure nulle}
+\]
+\struck{$\Phi^{-1}$} \quad $\exists\, \Psi : E_S \to E_S$, et $i$, tel que
+\[
+\boxed{\ \Psi \Phi = p^i\, \mathrm{id}\ }
+\]
+
+\page{29}
+
+\note{page au stylo à bille, occupée pour moitié par des croquis :
+une région notée $C^1$ contenant des feuilles $\Phi_m$, $\Phi_n$ enroulées,
+un petit ouvert $U \supset V$ envoyé par $\sigma$ vers $\mathbb{R}^m$ (avec
+$\mathbb{R}^n$ dessiné dedans) ; ailleurs « $C^0$ », « $\emptyset$ »,
+« $C^{\infty}$ » (surchargé), « $m-n$ », « $n-1$ »}
+
+\[
+\sigma(V) = \sigma(U) \cap \mathbb{R}^n
+\]
+\[
+\mathcal{A}_0 = \bigl\lbrace (\sigma_i, (U_i, V_i)) \bigr\rbrace \quad C^r,
+\qquad V_i \subset U_i
+\]
+
+\begin{enumerate}
+\item Familles canoniques $C^r$, $r \geq 0$
+\item Familles \uncertain{régulières} (quasi-régulières), $C^r$, $r \geq 1$
+\item Familles naturelles, $r \geq 1$
+\item Familles normales, $r \geq 1$
+\end{enumerate}
+\note{3) et 4) sont réunies par une accolade marquée $C^{r-1}$ ; 1) est
+entourée}
+
+\[
+(\sigma_1, (U_1, V_1)) \qquad (\sigma_2, (U_2, V_2))
+\]
+\begin{enumerate}
+\item $V_1 \cap V_2 \neq \emptyset$
+\item $(\sigma'_1, (U_1 \cap U_2, V_1 \cap V_2))$,\quad
+$(\sigma'_2, (U_1 \cap U_2, V_1 \cap V_2))$
+\end{enumerate}
+\[
+U_1 \cap V_2 = V_1 \cap V_2, \qquad U_2 \cap V_1 = V_1 \cap V_2
+\]
+\note{à droite, un croquis : deux ouverts $U_1$, $U_2$ traversés par une
+sous-variété (trait épais) le long de laquelle sont $V_1$, $V_2$ ; $\sigma_1$,
+$\sigma_2$ les envoient dans $\mathbb{R}^m$, où $\sigma_1(V_1)$ et
+$\sigma_2(V_2)$ sont posés sur $\mathbb{R}^n$}
+
+\page{30}
+
+\[
+M = E_S \xrightarrow{\ u\ } E'_S = M' \quad \text{compatible avec}
+\quad \nabla_M, \nabla_{M'}, F_M, F_{M'} \ ?
+\]
+\note{la liste après « compatible avec » est écrite en surcharge et se lit
+mal}
+\[
+u \circ A = du + A' \circ u
+\]
+\[
+\boxed{\ du = u \circ A - A' \circ u\ }
+\]
+
+\begin{tikzcd}
+E_S \arrow[r, "u"] & E'_S \\
+E_S \arrow[u, "F_M"] \arrow[r, dashed, "F_S^{*}(u) = u^{\sigma}"'] &
+E'_S \arrow[u, "F_{M'}"']
+\end{tikzcd}
+\qquad
+$\boxed{F_{M'}\, u^{\sigma} = u\, F_M}$
+
+\emph{Ex} \quad \emph{Modules inversibles}. $M$ : \quad
+$\Phi = \varphi \in \Gamma(\underline{O}_S)$, \quad
+$A = \omega \in \Gamma(\hat{\Omega}^1_{S/W})$
+\[
+\boxed{\begin{aligned}
+d\varphi &= \varphi(\omega^{\sigma} - \omega) \\
+d\omega &= 0 \\
+\varphi \psi &= p^{i}
+\end{aligned}}
+\]
+\note{l'exposant de $p$ est une lecture douteuse}
+
+Si \ill{} on a $M'$ $= (\varphi', \omega')$, \ill{} \ill{}
+
+$\exists\, u \in \Gamma \underline{O}_S^{*}$ satisfaisant
+\struck{$\frac{du}{u} = \omega - \omega'$}
+\[
+\boxed{\begin{cases}
+\omega' - \omega = -\dfrac{du}{u} \\[4pt]
+\varphi'/\varphi = u/u^{\sigma}
+\end{cases}}
+\]
+
+D.\ \emph{Classification des données} par la cohomologie du
+\uncertain{complexe}
+\[
+\Gamma(\underline{O}_S^{*}) \to \Gamma(\hat{\Omega}^1_{S/W}) \times
+\Gamma(\underline{O}_S)^{!} \to \Gamma(\Omega^2_{S/W}) \times
+\Gamma(\Omega^1_S)[1/p]
+\]
+\[
+u \mapsto \Bigl(\frac{du}{u},\ u/u^{\sigma}\Bigr) \qquad
+(\varphi, \omega) \mapsto \Bigl(d\omega,\ \frac{d\varphi}{\varphi} -
+(\omega^{\sigma} - \omega)\Bigr)
+\]
+\note{sous $\varphi$ : « \uncertain{élts} inversibles dans $A[1/p]$ » ; le
+« ! » après $\Gamma(\underline{O}_S)$ est tel quel ; un $\Omega$ biffé devant
+$\hat{\Omega}^1_{S/W}$}
+
+\page{31}
+
+\note{feuillet de tapuscrit dactylographié (ruban bleu), scanné tête-bêche,
+sans rapport direct avec les notes manuscrites voisines ; il est gardé parce
+qu'il porte des interventions à la main, et le texte tapé n'est pas recomposé.
+Il contient la « Démonstration » d'un énoncé à trois volets a), b), c) : a)
+renvoie à 5.10 ; pour b), réduction au cas $\ell \neq p$ et choix d'une
+extension finie séparable $K'$ de $K$ correspondant à un sous-groupe ouvert
+$\pi'$ de $\pi = \operatorname{Gal}(\bar K/K)$ dont l'intersection avec le
+groupe d'inertie $I$ est contenue dans le noyau de la représentation de $I$ sur
+$T_\ell(A_K(\bar K))$ (cf.\ 5.12.1) ; pour c), $1) \Rightarrow 2)$ (5.12.2),
+$2) \Rightarrow 3)$ trivial, et pour $3) \Rightarrow 1)$ : si $\ell \neq p$ le
+critère galoisien de réduction semi-stable 3.5, si $\ell = p$ un $\ell' \neq
+p$ auxiliaire, $S$ strictement local (3.4.0), $K'/K$ galoisienne finie de
+groupe $G$ telle que $A_{K'}$ ait réduction semi-stable, trivialité de la
+représentation de $G$ sur les trois quotients de (4.1.1), c'est-à-dire de sa
+trace, indépendante de $\ell'$ (4.3 a)), calculée en termes de $T_p(A_K)$ en
+6.4 ; puis « Remarque 5.13.1 », sur un groupe de Barsotti-Tate $X_\eta$ sur
+$\eta$ à bonne réduction virtuelle sur $S$ et à bonne réduction virtuelle
+essentielle d'échelon $n$. Les $\ell$, les flèches $\Rightarrow$ et le $\pi$
+sont tracés à la main dans les blancs du tapuscrit ; les passages biffés à la
+machine ne sont pas relevés. Interventions à la main : en haut, « 55 \ill{} »
+(à l'encre) ; « le » ajouté au-dessus devant « critère » ; le chiffre final de
+« 6.4 » repassé à l'encre ; un trait reliant « 4.1. » à « Supposons » par-dessus
+une ligne biffée à la machine ; « (pro-$\ell$-) » ajouté et entouré devant
+« groupe de Barsotti-Tate » ; à la fin, après « d'échelon $n$. », la
+parenthèse « (C'est \struck{ce qui avait été utilisé, pour} vrai pour
+$\ell \neq p$.) »}
+
+\page{33}
+
+\section*{Détermination du module de Dieudonné filtré du groupe de
+Barsotti-Tate.}
+
+$K$ extension finie de $\mathbb{Q}_p$, anneau d'entiers $A$, corps résiduel
+$k = \mathbb{F}_q$, $q = p^f$, $[K : \mathbb{Q}_p] = h = ef$,
+$\pi \in A$ uniformisante
+
+\begin{tikzcd}[column sep=small, row sep=small]
+\mathbb{Z}_p \arrow[r, no head] \arrow[d, no head] & A \arrow[d, no head] \\
+\mathbb{Q}_p \arrow[r, no head] & K
+\end{tikzcd}
+
+$W = W_\infty(k)$ vecteurs de Witt,
+\[
+\mathbb{Z}_p \underset{(f)}{\hookrightarrow} W \underset{(e)}{\overset{i}{\hookrightarrow}} A
+\]
+
+On veut déterminer d'abord les groupes de B.T.\ $G_0$ (de hauteur
+$(= \uncertain{\mathrm{rang}})\ \ldots$) \note{un mot après « rang » est
+illisible ; « d'abord » et « $G_0$ » sont ajoutés au-dessus de la ligne}
+$h$ sur \struck{\ill{}} $k$, avec opération de $A$ dessus [telles que
+\[
+\pi_{G_0} = F^f \quad (\text{automorphisme de Frobenius de } G_0/\mathbb{F}_q)\ ]
+\]
+Par la théorie de Dieudonné, ils correspondent aux modules libres $M$ (de
+rang $h$) sur $W$, avec endom $\sigma$-linéaire ($\sigma$ automorphisme de
+Frob.\ de $W$) $F_M$, et opération de $A$ sur $M$ ($\lambda \mapsto
+\lambda_M$) par $W$-endomorphismes commutant à $F_M$, satisfaisant
+\[
+\Bigl[ (*) \quad F_M^f = \pi_M \Bigr]
+\qquad (*')\ \exists\, V_M \text{ t.q. } F_M V_M = V_M F_M = p
+\]
+\note{devant $F_M^f$ dans (*), un mot biffé illisible}
+
+\begin{tikzcd}[column sep=small, row sep=small]
+A \arrow[r, no head] \arrow[d, no head] &
+A \otimes_{\mathbb{Z}_p} W \arrow[d, no head] \\
+\mathbb{Z}_p \arrow[r, no head] & W
+\end{tikzcd}
+
+Les deux structures de modules sur $M$ correspondent à une structure de module
+sur $A_W = A \otimes_{\mathbb{Z}_p} W$. Soit \struck{\ill{}} $\sigma_A$
+l'automorphisme de $A_W = A \otimes_{\mathbb{Z}_p} W$ donné par
+\[
+\sigma_A(\lambda \otimes w) = \lambda \otimes \sigma w
+\]
+Alors la donnée de $F_M$ équivaut à la donnée d'un endom $\sigma_A$-linéaire,
+satisfaisant (*) (*').
+
+\page{35}
+
+On a $A \otimes_{\mathbb{Z}_p} W$ \uncertain{étale} sur $A$, ext.\ résiduelle
+$k \otimes_{\mathbb{F}_p} k \simeq k^{\Sigma}$, $\Sigma = \operatorname{Aut} k
+= \operatorname{Aut} W$
+\[
+A \otimes_{\mathbb{Z}_p} W \xrightarrow{\ \sim\ } A^{\Sigma}, \qquad
+\Sigma \simeq \mathbb{Z}/f\mathbb{Z}
+\]
+en correspondance bijective canonique avec $[0, f-1]$ par
+$\nu \mapsto \sigma^{\nu}$ \struck{\ill{}}
+
+Donc
+\[
+\sigma_A(x_0, x_1, \ldots, x_{f-1}) = (x_1, \ldots, x_{f-1}, x_0)
+\]
+La donnée d'un module libre sur $A \otimes_{\mathbb{Z}_p} W$ $M$ équivaut à
+la donnée de modules $(M_\nu)_{\nu \in \Sigma}$ sur $A$, le rang de $M$ est
+la somme des rangs des $M_\nu$ (ou à une ég.\ \uncertain{à} $h$)
+\struck{. La donnée d'un} La donnée d'un endom $F_M$ $\sigma_A$-linéaire
+équivaut à la donnée d'hom.\ $A$-linéaires
+\[
+M_0 \xrightarrow{\varphi_0} M_1 \xrightarrow{\varphi_1} \cdots \to
+M_{f-1} \xrightarrow{\varphi_{f-1}} M_0
+\]
+\note{la phrase « (on a une ég.\ \ldots) » est ajoutée au-dessus de la ligne
+et reliée par un trait ; la lecture en est douteuse}
+
+La condition (*) \struck{\ill{}} indique que les $f$ composés circulaires sont
+des isogénies, donc les $\varphi_i$ sont injectifs, donc les $\varphi_i$ des
+isogénies (ou les rangs des $M_\nu$ tous égaux \ldots). \struck{Donc} ---
+Utilisant maintenant le fait que la somme des rangs des $M_\nu$ est $h$, on
+trouve que les $M_\nu$ sont inversibles.
+\marginal{ce serait aussi une conséquence de (*1) \ldots\ de (*) seul \ldots\
+avec $\pi$ \uncertain{uniformisante} \uncertain{quelconque} de $A$}\note{note
+de marge écrite en oblique, en partie repassée à l'encre bleue ; plusieurs
+mots sont illisibles}
+\struck{On peut donc trouver un unique module inversible}
+On peut donc identifier tous les $M_\nu$ à \struck{$M_0 = \Omega$}
+\struck{$\Omega$ sur $A$},
+$M_0 = t$, \struck{\ill{}} en choisissant \struck{\ill{}} pour $M_\nu$
+($0 \le \nu \le f-1$) \uncertain{les} isom.\
+\[
+M_0 \xrightarrow{\ \sim\ } M_\nu
+\]
+donnés par
+\[
+\pi^{-m_\nu}(\varphi_{\nu-1} \varphi_{\nu-2} \cdots \varphi_0), \quad
+\text{où } m_\nu \text{ est un entier} \geq 0 \text{ uniquement déterminé}
+\]
+($0 = m_0 \le m_1 \le \cdots \le m_{f-1}$). On trouve donc un \uncertain{iso}
+can.
+\[
+M \simeq \Omega \otimes_{\mathbb{Z}_p} W = \Omega \otimes_A
+(A \otimes_{\mathbb{Z}_p} W)
+\]
+\note{le module noté ici $\Omega$ est celui que la ligne précédente appelle
+$t$ ; les deux lettres sont telles quelles}
+
+\page{37}
+
+\struck{Alors $F_M$ est donné par les entiers $m_i$ \ill{} \ill{}, les
+$m_{i+1} - m_i$ \ill{}}\note{deux lignes biffées en tête de page ; lecture
+douteuse}
+
+On a choisi les isom de telle façon que chaque $\varphi_\nu$
+($0 \le \nu \le f-2$) soit de la forme
+\[
+\varphi_\nu = \pi^{r_\nu}\, \mathrm{id}_{\Omega} \qquad
+(r_\nu \geq 0, \ 0 \le \nu \le f-2)
+\]
+et $\varphi_{f-1}$ est donné par
+\[
+\varphi_{f-1} = \lambda\, \mathrm{id}_{\Omega}, \qquad \lambda \in A, \quad
+\text{soit } \lambda = \pi^{r_{f-1}} u,\ u \in A^{*}
+\]
+\struck{\ill{}} On a donc
+\[
+F_M^{\,f} = \pi^{r_0 + \cdots + r_{f-2} + r_{f-1}} u = \varpi, \qquad u \in A^{*}
+\]
+\struck{On aura \quad $M/F_M M \simeq A/\pi^{r_{f-1}}A + A/\pi^{r_0}A + \cdots +
+A/\pi^{r_{f-2}}A$}
+
+La condition (*)$'$ s'écrit \struck{\ill{}} \struck{$d_{K}$}
+\[
+p \ \text{divisible par } \pi^{r_\nu} \text{ pour } 0 \le \nu \le f-2,
+\text{ par } u\pi^{r_{f-1}}
+\]
+i.e.
+\[
+\boxed{\ r_\nu \le e\ } \quad \text{pour } 0 \le \nu \le f-1
+\]
+\note{sous l'encadré, un second encadré entièrement griffonné}
+
+On a
+\[
+M/F_M M = A/u\pi^{r_{f-1}}A + A/\pi^{r_0}A + \cdots + A/\pi^{r_{f-2}}A
+\]
+et \struck{\ill{}} la longueur \marginal{$\operatorname{long} A(\varpi A)$}
+\[
+\boxed{\ \dim G_0 = r_0 + \cdots + r_{f-2} + r_{f-1}\ }
+\qquad (\le fe = h)
+\]
+\note{dans l'encadré, un premier membre biffé illisible devant $r_0$, et la parenthèse qui suit $r_{f-1}$ biffée ;
+« $\operatorname{long} A(\varpi A)$ », entouré, est une lecture douteuse}
+
+\struck{Supposons maintenant}
+
+Donc on trouve
+\[
+\boxed{\begin{aligned}
+&\dim G_0 = 1 \iff F_M^{\,f} = \varpi_M,\ \varpi \text{ uniformisante de } A \\
+&\iff \text{tous les } r_\nu \text{ sauf un seul } r_{\nu_0} \text{ sont nuls},
+\ r_{\nu_0} = 1,\ u \text{ une unité}
+\end{aligned}}
+\]
+\note{à droite de la première ligne de l'encadré : « (\uncertain{puisque} \ill{}
+\ill{} $= \pi$, \uncertain{quitte} à changer $\pi$ !) »}
+\note{sous « une unité », en petit : « ($u = 1$ \ill{} \ill{} $\varpi = \pi$) »}
+
+G\ldots\note{la page s'arrête sur une lettre isolée}
+
+\page{39}
+
+Donc \uncertain{lorsque} on \uncertain{trouve} \ldots
+
+\emph{Proposition}. $A$, $k$, $W$, $e$, $f$, $h = ef$, comme plus haut.
+Soit $G_0$ un groupe de B.T.\ (de hauteur $h$) sur $k$ sur lequel $A$ opère,
+\struck{Alors si} $M$ son module de Dieudonné (\uncertain{un} module libre de
+rang $h$ sur $W$). $F_{G_0}^{\,f}$ est de la forme $\varpi_{G_0}$, où
+$\varpi \in A$, et on a $\dim G_0 = \operatorname{long}_A A/\varpi A =
+v(\varpi)$.
+
+Alors \struck{conditions équivalentes}
+
+conditions équivalentes :
+\begin{enumerate}
+\item[(i)] $\dim G_0 = 1$
+\item[(ii)] $F_{G_0}^{\,f} = \pi_{G_0}$, $\pi$ une uniformisante de $A$
+(uniquement déterminée !)
+\item[(iii)] Le module de Dieudonné $M$ de $G_0$ (sur $W$), avec $F_M$ et
+l'opération de $A$, est donné par un triple $(\Omega, \nu, \pi)$, où
+$\Omega$ est un module inversible sur $A$, $0 \le \nu \le f-1$, $\pi$ une
+uniformisante de $A$ : \uncertain{on a}
+\[
+\begin{cases}
+M = \Omega \otimes_{\mathbb{Z}_p} W = \Omega \otimes_A (A \otimes_{\mathbb{Z}_p} W)
+\quad (\text{comme } A \otimes_{\mathbb{Z}_p} W\text{-mod.}) \\
+F_M = \mathrm{id}_\Omega \otimes_{\mathbb{Z}_p} \sigma + \mathrm{pr}_\nu
+\bigl[(\pi - 1) \otimes \sigma\bigr]
+\end{cases}
+\]
+où $\mathrm{pr}_\nu$ est le \struck{facteur} projecteur de $M$ sur le
+$\nu$-ième facteur (correspondant à la décomposition
+$A \otimes_{\mathbb{Z}_p} W \simeq A^{[0, f-1]}$).
+\end{enumerate}
+\note{« comme » dans la première ligne est une lecture douteuse ; « $\mathrm{pr}_\nu$ » est écrit sur un mot biffé ; une rature suit le
+crochet}
+
+\marginal{N.B. Tous ces groupes (\uncertain{pour} $\nu$ \ill{} \ill{}) sont
+\uncertain{isomorphes} \ldots\ \ill{} \ldots\ par transformations
+\uncertain{d'opérations} \ldots\ $f$ \ldots\ $\mathbb{F}_q = \mathbb{F}_{p^f}$}
+\note{note de marge écrite en oblique à gauche de (iii) ; la plupart des mots
+sont illisibles}
+
+\emph{N.B.} Revenons au cas général (\ill{} $G_0$ de hauteur \ldots)
+\struck{\ill{}} dim $G_0 = 1$. Soit $G'_0$ défini comme ci-dessus par
+$\Omega'$, les $r'_\nu$ ($0 \le \nu \le f-1$), $u' \in A^{*}$.
+On cherche les homomorphismes de $G_0$ dans $G'_0$ compatibles avec
+l'opération de $A$ \ldots, i.e.\ les hom de $M'$ dans $M$, compatibles avec
+\uncertain{les} structures de $A \otimes_{\mathbb{Z}_p} W$-module, et avec
+$F_M$, $F_{M'}$. On trouve facilement que pour qu'il existe un tel hom qui
+\struck{\ill{}} soit $\neq 0$ ($\iff$ une isogénie), il faut et il suffit
+qu'on ait $\varpi = \varpi'$ i.e.\ $F_{G_0}^{\,f} = F_{G'_0}^{\,f}$ (dans $A$).
+Dans ce cas, les \uncertain{groupes} des hom en question, comme $A$-modules,
+sont isomorphes au \ill{} sous-$A$-module $H \subset \operatorname{Hom}(\Omega',
+\Omega)$ formé des $v_0 : \Omega' \to \Omega$ tels que pour tout $0 \le \nu
+\le f-2$ on ait
+\[
+v_0\, \pi^{(\sum_0^{\nu} r_i) - (\sum_0^{\nu} r'_i)} \in
+\operatorname{Hom}(\Omega', \Omega), \quad \text{i.e.} \quad
+\operatorname{val}(v_0) + \sum_0^{\nu} r_i - \sum_0^{\nu} r'_i \geq 0
+\]
+\note{les primes sur les $r_i$ des deux sommes ne se distinguent pas
+nettement ; lecture douteuse de leur place}
+
+\end{document}
