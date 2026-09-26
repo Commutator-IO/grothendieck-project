@@ -1,9 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 
 import { useHashTarget } from './components/Anchors.tsx';
-import { FoldersToPrint, LineageToFolders } from './components/ConnectionGraphs.tsx';
-import { PeopleNetwork } from './components/PeopleNetwork.tsx';
-import { CitationMap, MathMap } from './components/FondsMaps.tsx';
 import { Footer, Header } from './components/Frame.tsx';
 import { FINDINGS } from './content/findings.ts';
 import { PLAIN } from './content/summary.ts';
@@ -716,15 +713,14 @@ export function FindingsPage() {
 
         <Pager page={current} count={ordered.length} onPage={turn} />
 
-        <FoldersToPrint />
-
-        <LineageToFolders />
-
-        <PeopleNetwork />
-
-        <MathMap />
-
-        <CitationMap />
+        <p className="mt-12 max-w-[44em] text-[13.5px] leading-relaxed text-ink-500">
+          The figures that used to close this page — folders and what is in print, the lineage,
+          who is named together, the mathematics by subject, what the folders cite — are on{' '}
+          <a href="/maps/" className="text-brand-700 underline decoration-brand-200 underline-offset-2">
+            Maps
+          </a>
+          .
+        </p>
 
         <section className="mt-12 max-w-[44em] text-[13.5px] leading-relaxed text-ink-500">
           <h2 className="text-[11px] font-bold uppercase tracking-[0.12em] text-ink-400">

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Builds two maps for the Findings tab, the same way as the people network
+ * Builds two maps for the Maps page, the same way as the people network
  * (scripts/lib/network.mjs): fixed positions, modularity clusters, computed
  * once.
  *

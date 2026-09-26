@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Builds the people network the Findings tab draws: who is named together in
+ * Builds the people network the Maps page draws: who is named together in
  * the same folder.
  *
  *   npm run people-network

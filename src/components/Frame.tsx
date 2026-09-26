@@ -9,20 +9,66 @@ import { BOOKS } from '../content/books.ts';
  * transcription stretches over months.
  */
 
-const OTHER_PAGES: { path: string; label: string }[] = [
+/**
+ * The two ways into the site.
+ *
+ * The site began as five notebooks — two inventory groups and three groupings
+ * of our own — and the header was their row of tabs. It now reads the whole
+ * fonds, and the pages that read it (the inventory, the index, the timeline,
+ * the letters, the hand, the maps) are not a sixth notebook: they cut across
+ * all 178 folders. Filing them beside the notebooks made them look like one
+ * more grouping, so the header switches between the two first and shows each
+ * one's own pages second — the choice the Hopper site made for its ledgers and
+ * diaries. Every URL is what it was.
+ */
+type Collection = 'fonds' | 'notebooks';
+
+const COLLECTIONS: { id: Collection; label: string; path: string }[] = [
+  { id: 'fonds', label: 'Fonds', path: '/archive/' },
+  { id: 'notebooks', label: 'Notebooks', path: '/' },
+];
+
+// The readings of the whole fonds, and then — after a rule — the pages about
+// the project rather than about the folders.
+const FONDS_PAGES: { path: string; label: string }[] = [
   { path: '/archive/', label: 'Whole fonds' },
-  { path: '/method/', label: 'Method & progress' },
+  { path: '/maps/', label: 'Maps' },
   { path: '/findings/', label: 'Findings' },
+];
+const PROJECT_PAGES: { path: string; label: string }[] = [
+  { path: '/method/', label: 'Method' },
   { path: '/contribute/', label: 'Contribute' },
 ];
+
+// The home page introduces the notebooks, so it sits on their side.
+export const collectionOf = (path: string): Collection => {
+  const h = path.endsWith('/') ? path : `${path}/`;
+  return h === '/' || BOOKS.some((b) => b.path === h) ? 'notebooks' : 'fonds';
+};
 
 function isCurrent(path: string, here: string): boolean {
   const h = here.endsWith('/') ? here : `${here}/`;
   return path === h;
 }
 
+function Tab({ path, label, here }: { path: string; label: string; here: string }) {
+  const on = isCurrent(path, here);
+  return (
+    <a
+      href={path}
+      aria-current={on ? 'page' : undefined}
+      className={`whitespace-nowrap rounded-full px-2 py-1 transition xl:px-2.5 ${
+        on ? 'bg-ink-100 font-semibold text-ink-900' : 'hover:bg-ink-50 hover:text-brand-700'
+      }`}
+    >
+      {label}
+    </a>
+  );
+}
+
 export function Header({ path }: { path: string }) {
   const [open, setOpen] = useState(false);
+  const collection = collectionOf(path);
 
   // Escape closes the folded-out menu. On a tablet it opens by tap rather than
   // hover, so without this there is no way out of it.
@@ -35,48 +81,54 @@ export function Header({ path }: { path: string }) {
 
   // The folded-out menu has room for the full titles; only the inline row is
   // short of space.
-  const links = [...BOOKS.map((b) => ({ path: b.path, label: b.title })), ...OTHER_PAGES];
+  const notebookLinks = (full: boolean) =>
+    BOOKS.map((b) => ({ path: b.path, label: full ? b.title : (b.navTitle ?? b.title) }));
 
   return (
     <header className="sticky top-0 z-40 border-b border-ink-200 bg-white/93 backdrop-blur-md backdrop-saturate-150">
       <div className="mx-auto flex max-w-6xl items-center gap-4 px-5 py-2.5">
         <a href="/" className="flex min-w-0 items-center gap-2.5">
           <Mark />
-          <span className="min-w-0 truncate text-[13px] font-semibold tracking-tight text-ink-900">
+          <span className="min-w-0 truncate text-[13px] font-semibold tracking-tight text-ink-900 lg:hidden xl:inline">
             Grothendieck Archives
           </span>
         </a>
 
-        <nav className="ml-auto hidden items-center gap-0.5 text-[13px] text-ink-500 lg:flex">
-          {BOOKS.map((b) => (
+        <div
+          role="navigation"
+          aria-label="Collection"
+          className="hidden shrink-0 items-center rounded-full border border-ink-200 p-0.5 text-[12px] lg:flex"
+        >
+          {COLLECTIONS.map((c) => (
             <a
-              key={b.path}
-              href={b.path}
-              aria-current={isCurrent(b.path, path) ? 'page' : undefined}
-              className={`rounded-lg px-2.5 py-1.5 transition ${
-                isCurrent(b.path, path)
-                  ? 'font-semibold text-ink-900'
-                  : 'hover:bg-ink-50 hover:text-brand-700'
+              key={c.id}
+              href={c.path}
+              aria-current={c.id === collection ? 'true' : undefined}
+              className={`rounded-full px-2.5 py-0.5 transition ${
+                c.id === collection
+                  ? 'bg-ink-900 text-white'
+                  : 'text-ink-500 hover:bg-ink-100 hover:text-ink-900'
               }`}
             >
-              {b.navTitle ?? b.title}
+              {c.label}
             </a>
           ))}
-          <span aria-hidden="true" className="mx-1.5 h-4 w-px bg-ink-200" />
-          {OTHER_PAGES.map((p) => (
-            <a
-              key={p.path}
-              href={p.path}
-              aria-current={isCurrent(p.path, path) ? 'page' : undefined}
-              className={`rounded-lg px-2.5 py-1.5 transition ${
-                isCurrent(p.path, path)
-                  ? 'font-semibold text-ink-900'
-                  : 'hover:bg-ink-50 hover:text-brand-700'
-              }`}
-            >
-              {p.label}
-            </a>
-          ))}
+        </div>
+
+        <nav className="ml-auto hidden items-center gap-0.5 text-[12.5px] text-ink-500 lg:flex xl:text-[13px]">
+          {collection === 'fonds' ? (
+            <>
+              {FONDS_PAGES.map((p) => (
+                <Tab key={p.path} {...p} here={path} />
+              ))}
+              <span aria-hidden="true" className="mx-1.5 h-4 w-px bg-ink-200" />
+              {PROJECT_PAGES.map((p) => (
+                <Tab key={p.path} {...p} here={path} />
+              ))}
+            </>
+          ) : (
+            notebookLinks(false).map((p) => <Tab key={p.path} {...p} here={path} />)
+          )}
         </nav>
 
         <button
@@ -91,14 +143,22 @@ export function Header({ path }: { path: string }) {
 
       {open && (
         <nav className="border-t border-ink-200 bg-white px-5 py-2 lg:hidden">
-          {links.map((p) => (
-            <a
-              key={p.path}
-              href={p.path}
-              className="block rounded-lg px-2 py-2 text-[14px] text-ink-700 hover:bg-ink-50"
-            >
-              {p.label}
-            </a>
+          {COLLECTIONS.map((c) => (
+            <div key={c.id} className="py-1">
+              <p className="px-2 py-1 text-[11px] font-semibold uppercase tracking-wider text-ink-400">
+                {c.label}
+              </p>
+              {(c.id === 'fonds' ? [...FONDS_PAGES, ...PROJECT_PAGES] : notebookLinks(true)).map((p) => (
+                <a
+                  key={p.path}
+                  href={p.path}
+                  aria-current={isCurrent(p.path, path) ? 'page' : undefined}
+                  className="block rounded-lg px-2 py-2 text-[14px] text-ink-700 hover:bg-ink-50 aria-[current=page]:font-semibold"
+                >
+                  {p.label}
+                </a>
+              ))}
+            </div>
           ))}
         </nav>
       )}

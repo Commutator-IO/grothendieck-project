@@ -5,7 +5,7 @@ import lineageRaw from '../content/lineage.json';
 import publicationsRaw from '../content/publications.json';
 
 /**
- * Two figures for the Findings page, both bipartite, both drawn by hand.
+ * Two figures for the Maps page, both bipartite, both drawn by hand.
  *
  * A force layout would have been one dependency and a different picture on
  * every load; a figure whose whole point is "which folder touches which text"
