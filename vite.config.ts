@@ -142,6 +142,7 @@ export default defineConfig({
         contribute: resolve(import.meta.dirname, 'contribute/index.html'),
         findings: resolve(import.meta.dirname, 'findings/index.html'),
         maps: resolve(import.meta.dirname, 'maps/index.html'),
+        hand: resolve(import.meta.dirname, 'hand/index.html'),
       },
     },
   },
