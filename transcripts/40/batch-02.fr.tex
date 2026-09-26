@@ -1,0 +1,289 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 40, batch 2 (pages 21-27).
+% Established from the facsimile archives/batches/40/batch-02.pdf, cut from a
+% copy of the folder fetched through the project's own relay
+% (https://grothendieck-relay.onrender.com/source/40.pdf), not uploaded by the
+% user; PDF page k is the archivists' page 20+k, with no cover sheet. Per the
+% skill transcribe-grothendieck. The folder is twenty-seven pages; this is the
+% second and last of its two batches. Batch 1 (pages 1-20) was being
+% transcribed in parallel and was not available, so the notation below is
+% fixed from these seven pages alone and may need aligning with batch 1.
+%
+% Pages skipped: none. Pages summarised: none. All seven pages (21-27) are
+% his hand, blue ink, fast drafting; page 27 carries only its first ten lines.
+% No pagination of his is visible on these leaves, and no date.
+%
+% What the batch is about. Principal bundles (« fibrés principaux »,
+% « espaces homogènes principaux ») under the infinitesimal group B — the
+% kernel of Frobenius on the additive group in characteristic p (alpha_p in
+% later notation) — over a ring A, described by derivations. Page 21 opens on
+% a cancelled proof (boxed and struck through) that the powers u^i,
+% 0 <= i <= p-1, are free over A, applying D^alpha to a relation; then, for
+% u^p = a, C' = A[U]/(U^p - a) with the derivation D U = 1 is a principal
+% B-bundle, the map C' -> C, U |-> u, is a B-homomorphism and hence an
+% isomorphism, with a bracketed general argument (a G-homomorphism E -> E' of
+% principal bundles is an isomorphism, via the square G x E -> G x E' over
+% E x E -> E' x E') and the question whether A must be noetherian. Page 22:
+% « Théorème » H^1(A, B) = A/A^p, the class of a in A corresponding to
+% C_a = A[U]/(U^p - a) with D_a U = 1, C_a = C_b iff a = b mod A^p; every
+% principal B-space is some C_a; the additive law of H^1 is not proved to be
+% that of A/A^p. « Corollaire » (pp. 22-23): a commutative A-algebra C carries
+% a principal B-structure iff it has a one-element p-basis over A; such
+% structures are classes of u mod A, equivalently derivations D with Du = 1;
+% sub-A-hyperalgebras U' of the C-hyperalgebra in Hom_A(C, C) with U' = B
+% correspond to the classes au + b (a unit, b in A), i.e. to points of the
+% projective space P_A(C/A) = (C/A)/A^*. Pages 24-26, « Autre façon d'obtenir
+% ces résultats, et des résultats globaux »: on a preschema X over Z/pZ the
+% exact sequence 0 -> B_X -> G_{a,X} -> G_{a,X} -> 0 (Frobenius), the
+% hyperalgebra O[T] with Delta T = T (x) 1 + 1 (x) T, Phi(T) = T^p, the kernel
+% O[T]/T^p O[T]; surjectivity of Phi « in a sufficient technical sense »
+% (with a « ? » in the margin); the long cohomology sequence
+% 0 -> H^0(X, B_X) -> A -> A -> H^1(X, B_X) -> H^1(X, O_X) -> H^1(X, O_X),
+% whence H^1(X, B_X) as an extension of the Frobenius-kernel of H^1(X, O_X) by
+% A/A^p, and, for X complete over an algebraically closed field, H^1(X, B_X)
+% the subspace of H^1(X, O_X) killed by Frobenius. « Remarque » (pp. 26-27):
+% over A = k[[X]], the degree-p radicial covers A[T]/(T^p - X^n); regular
+% iff n = 1; for p = 3, n = 2, A[X^{2/3}] is the subring of k[[X^{1/3}]] of
+% series with no Y-term, yet as B-covers it is the « sum » of two regular ones
+% (adjoining p-th roots of X and of -X + X^2), whose fibre product over A is
+% already non-regular (it has nilpotents).
+%
+% Notation fixed once for the batch. His B for the group is kept as B on pages
+% 21-23 (it is sometimes drawn with a doubled stem, e.g. « B-fibré » on
+% p. 22); from page 24 the sheaf is the ornate letter, set \mathcal{B}_X, and
+% the « \mathcal{B}-revêtements » of page 26 keep it. The C with a doubled
+% stroke of pages 22-23 is read as the same algebra C and set C. The additive
+% group is set G_{a,X} as he writes it (plain G). The underlined O of the
+% structure sheaf is \underline{O}. Frobenius on the hyperalgebra is Phi
+% (\Phi), labelled with a lower-case phi over the arrow of page 24 and kept so;
+% the arrows of the cohomology sequence carry a bold F, set F.
+%
+% Readings to check first: the whole boxed paragraph of page 21 (the
+% condition after « pourvu que », the underlined « monomis », the parenthesis
+% to the right of the square); « espace » in « espace homogène principal »
+% (pp. 21-22); the end of p. 22 (« ne paraît être pas facile ») and
+% « réduite à un élément »; the symbol before « C » on p. 23 (read \ill{});
+% « sous-schéma » and « section unité » on p. 24; the opening of the
+% surjectivity claim on p. 25 and its margin; « annulé » on p. 26 and the
+% word written above « revêtements ».
+% Apparatus: 63 \ill{}, 31 \uncertain{}.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-09-26 — first pass, unchecked against the pages by a human.
+
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{40}
+\batch{2}
+\pages{21}{27}
+\dating{[années 1960-1970]}
+\watermark{Édition de démonstration}
+\foldertitle{Calculs [affines sur des] fibrés principaux affines : notes manuscrites (s.d.)}
+
+\begin{document}
+
+\page{21}
+
+\struck{$A$ est local.} \struck{Montrons d'abord que les $u^i$
+($0 \leq i \leq p-1$) sont libres sur $A$. Soit \ill{} \ill{}
+$\sum_0^{p-1} \lambda_i u^i = 0$ une relation non triviale entre les $u^i$
+($\lambda_i \in A$), et soit $\lambda_\alpha$ le premier coefficient non nul
+($0 \leq \alpha \leq p-1$). Appliquons $D^\alpha$, il vient \ill{}
+\uncertain{$\alpha!\,\lambda_\alpha = 0$}, d'où $\lambda_\alpha = 0$,
+absurde.}\note{tout ce début de page est encadré et barré de trois longues
+diagonales ; « $A$ est local » est en outre biffé à part}
+
+Soit $u^p = a$, et soit $C' = A[U]/(U^p - a)$. \struck{\ill{}}
+\struck{\ill{} \ill{} \ill{}} Soit $D'$ \add{une dérivation} dans $C'$ définie par
+$DU = 1$, alors muni \uncertain{de} $D$, $C'$ devient un \uncertain{espace}
+homogène principal sous $B$ [cf ci-dessous] ! Or l'homomorphisme $C' \to C$
+défini par $U \mapsto u$, est donc un $B$-homomorphisme. Il en résulte que
+\struck{\ill{}} $C' \to C$ est un isomorphisme\note{« une dérivation » est ajouté
+au-dessus de la ligne ; « $C' \to C$ est » est écrit au-dessus d'un mot
+biffé}
+
+[de façon générale, si $E, E'$ sont deux \uncertain{espaces} fibrés
+principaux sous $G$, et \emph{si} \struck{\ill{}} on a un $G$-homom.
+$E \to E'$, alors \struck{\ill{} \ill{} \ill{} dans} c'est un isomorphisme,
+\uncertain{pourvu que} $G \times E \to G \times E'$ dans la catégorie
+$\mathcal{C}$, \ill{} le \uncertain{diagramme} \emph{\uncertain{monomis}}
+\ill{}
+
+\begin{tikzcd}
+G \times E \arrow[r] \arrow[d, "\wr"'] & G \times E' \arrow[d, "\wr"] \\
+E \times E \arrow[r, "\sim"] & E' \times E'
+\end{tikzcd}
+
+(\uncertain{comme} \ill{} \uncertain{flèches} : \uncertain{opération} \ill{}
+\ill{} \uncertain{loi}\ill{}). Or \struck{et d'autre part
+$E \times E \to E' \times E'$ est un}\note{la mise en page du crochet est
+confuse : « pourvu que », « le diagramme » et le mot souligné lu
+« monomis » sont enfermés dans un cadre qui renvoie au carré, la parenthèse
+de droite est cernée d'un trait, et la dernière ligne est biffée ; l'ordre
+de lecture proposé est incertain}
+c'est le cas ici en prenant pour $\mathcal{C}$ la catégorie des anneaux finis
+sur $A$ --- [pourvu que $A$ soit noethérien ? ---]
+
+\page{22}
+
+On a ainsi prouvé le
+
+\emph{Théorème}. $H^1(A, B)$ s'identifie \struck{à $A$} au groupe additif
+$A/A^p$ (où $A^p$ est l'ens. des $x^p$, avec $x \in A$). Si \struck{\ill{}}
+$a \in A$, il lui correspond la classe
+de la $A$-algèbre $C_a = A[U]/(U^p - a)$, munie de la $A$-dérivation $D_a$
+définie par $D_a U = 1$, et $C_a \simeq C_b$ si et seulement si
+$a \equiv b \ (A^p)$. Soit $C$ un $B$-\uncertain{espace} homogène principal,
+alors il existe dans $C$ un \struck{\ill{}} $u$ tel que $Du = 1$, et
+\struck{\ill{} $a \in$ \ill{}} on a $u^p = a \in A$, $C \simeq C_a$ en tant
+que \struck{fibré} $B$-fibré ; $u$ est bien déterminé mod addition d'un
+élément de $A$.\note{un exposant est biffé sur le $A$ de « $a \in A$ »}
+
+On n'a pas prouvé que la loi additive naturelle de $H^1(A; B)$ correspond à
+celle de $A/A^p$, mais \ill{} \ill{} \uncertain{paraît} être \uncertain{pas}
+facile.
+
+\emph{Corollaire}. Soit $C$ une $A$-algèbre commutative. Pour
+\struck{qu'il \ill{}} qu'il existe sur $C$ une structure de fibré \add{homogène} principal sous
+$B$, il faut
+et il suffit que $C$ ait une $p$-base sur $A$ \uncertain{réduite} \uncertain{à}
+un élément, i.e. un $u \in C$ tel que les $u^i$ ($0 \leq i \leq p-1$)
+forment une base de $C$ sur $A$. La donnée d'une telle structure de
+$B$-fibré \add{homogène} principal sur $C$\note{« qu'il » est récrit au-dessus du mot biffé ;
+« homogène » est ajouté deux fois au-dessus de la ligne, avec un renvoi}
+
+\page{23}
+
+équivaut à la donnée d'une classe de tels $u$ mod addition d'un élément de
+$A$, i.e. à la donnée d'un élément de $C/A$ tel que, si $u$ en est un
+représentant, $(u^i)$ forme une $p$-base de $C$ sur $A$ ; choisi $u$, la
+$B$-structure correspondante est définie par la $A$-dérivation $D$ de $C$
+telle que $Du = 1$, et inversement, donnée $D$, $u$ est déterminé (mod $A$)
+par la condition $Du = 1$.
+
+Enfin, la donnée d'une \struck{restriction des scalaires}
+sous-$A$-hyperalgèbre
+$\mathcal{U}'$ de
+la $C$-hyperalgèbre \uncertain{formée} \uncertain{des}
+$\mathrm{Hom}_A(C, C)$, telle que \ill{}${}_A$ $C$ devienne
+\struck{\ill{}} homogène principal sous $\mathcal{U}'$ et que
+$\mathcal{U}' \simeq B$ --- équivaut à la donnée d'une
+\struck{\ill{} $\in$ $p$-base de $u$} classe de $p$-bases $(u)$ réduites à un élément $u$, \ill{}
+\uncertain{multiplicativement} \ill{}, la \ill{} donnée par $u$ \ill{} les
+éléments $v = au + b$, avec $a \in A^*$ (unités de $A$) et $b \in A$ ; i.e.
+l'une des ces données est en correspondance biunivoque avec les éléments
+de l'espace \add{projectif}
+$\mathbf{P}_A(C/A) = (C/A)/A^*$ associé au $A$-module $C/A$.\note{« sous-$A$-hyperalgèbre », « classe de » et « projectif » sont
+écrits au-dessus de la ligne, les deux premiers sur des mots biffés ; le
+$\mathcal{U}'$ qui suit « sous-$A$-hyperalgèbre » est porté dans la marge de
+gauche}
+
+\page{24}
+
+Autre façon d'obtenir ces résultats, et des résultats \emph{globaux}.
+
+Soit $X$ un \struck{schéma} préschéma
+sur $\mathbb{Z}/p\mathbb{Z}$ ($p$ un nb premier).\note{« préschéma » est
+écrit au-dessus du mot biffé} On a sur $X$ une suite
+exacte de faisceaux de groupes commutatifs
+\[
+0 \longrightarrow \mathcal{B}_X \longrightarrow G_{a,X}
+\xrightarrow{\ \Phi\ } G_{a,X} \longrightarrow 0
+\qquad \Phi = \text{Frobenius}
+\]
+$G_{a,X}$ correspond à l'hyperalgèbre $\underline{O}[T]$ munie de
+\[
+\Delta T = T \otimes 1 + 1 \otimes T .
+\]
+L'homom. de Frobenius sur \struck{cette} l'hyperalgèbre est donné par
+\[
+\underline{O}[T] \xleftarrow{\ \varphi\ } \underline{O}[T]
+\]
+\struck{\ill{}}
+\[
+\Phi(T) = T^p
+\]
+[on vérifie de suite que c'est compatible avec $\Delta$]. Son « noyau » est
+le \uncertain{sous-schéma} de $G_{a,X}$ « image inverse » par $\Phi$ de la
+\uncertain{section} unité de $G_{a,X}$, \struck{\ill{}} i.e. correspond au
+quotient $\underline{O}[T]/\Phi(\mathrm{Ker}\,\varepsilon)$ où
+$\varepsilon$ est l'augmentation dans $\underline{O}[T]$, donc ce noyau est
+bien $\underline{O}[T]/T^p\underline{O}[T]$ (car $\mathrm{Ker}\,\varepsilon$
+est engendré par $T^p$). Je dis
+\ill{} que \struck{$G$} $\Phi \colon G_{a,X} \to G_{a,X}$ est
+\emph{surjectif}\note{« engendré par $T^p$ » est lu tel quel ; c'est $T$ qui
+engendre $\mathrm{Ker}\,\varepsilon$, et $T^p = \Phi(T)$ qui engendre
+$\Phi(\mathrm{Ker}\,\varepsilon)$}
+
+\page{25}
+
+en un sens technique suffisant : tout $X$-\uncertain{morphisme}
+$G_{a,X} \to Y$ (où $Y$ est un préschéma sur $X$) \uncertain{qui est} un
+$G_{a,X}$-hom. (quand $G_{a,X}$ opère sur le premier facteur grâce à $\Phi$,
+et sur $Y$ trivialement) est une \emph{section} de $Y$, i.e. se factorise
+en
+\[
+G_{a,X} \xrightarrow{\ \mathrm{proj}\ } X \longrightarrow Y .
+\]
+Cela se voit p.ex. sur les \struck{faisceaux} \ill{} d'hyperalgèbres $\Phi$, en montrant que
+\uncertain{admettant} \ill{} \ill{} est injectif [du moins si $Y$ est
+affine ; \struck{\ill{} \ill{}}, \ill{} \ill{} dans ce
+cas].\marginal{?}\note{un gros point d'interrogation dans la marge de
+gauche, en regard du crochet ; le mot illisible après « faisceaux » est
+écrit au-dessus de ce mot biffé}
+
+On en conclut \ill{} la \struck{\ill{}} suite exacte de
+cohomologie, qui s'écrit\marginal{: \uncertain{justifier} ?
+\ill{}}\note{dans la marge de gauche, écrit de biais, avec une flèche vers
+le texte ; le passage est marqué d'un trait vertical}
+\struck{$0 \to A[T]/T^p \to$}
+\[
+0 \to H^0(X, \mathcal{B}_X) \to A \xrightarrow{\ F\ } A \longrightarrow
+H^1(X, \mathcal{B}_X) \to H^1(X, \underline{O}_X) \xrightarrow{\ F\ }
+H^1(X, \underline{O}_X)
+\]
+\note{le premier départ de la suite, biffé, est au-dessus de la ligne
+définitive ; la première étiquette $F$ récrit une étiquette biffée}
+[où $\Phi$ provient de Frobenius \struck{\ill{}}, est \ill{} \ill{} pour
+$A$ : $H^1(X, \underline{O}_X)$] d'où $H^1(X, \mathcal{B}_X)$ comme
+extension \ill{} \struck{\ill{}} du sous-groupe
+\struck{\ill{} \ill{} $H^1(X, \underline{O}_X)$ \ill{}} par $A/A^p$. Si
+p.ex. $X$ est une variété complète sur un corps algébriquement clos, on
+obtient que
+
+\page{26}
+
+$H^1(X, \mathcal{B}_X)$ est le \uncertain{sous-espace} vectoriel de
+l'espace de dim.\ finie $H^1(X, \underline{O}_X)$, \uncertain{annulé} par le
+Frobenius.
+
+\emph{Remarque}. Soit $A = k[[X]]$, où $k$ est un corps algébriquement clos.
+Les revêtements \struck{\ill{}} \ill{} \struck{ramifiés} de $A$ obtenus par extraction d'une racine $p$-ième
+de $A$ sont \ill{} \uncertain{isomorphes} [\uncertain{à condition de}
+changer l'uniformisante, au besoin] à
+\[
+A[X^{n/p}] \simeq A[T]/(T^p - X^n),
+\]
+où \ill{}${} \leq n \leq p-1$ \struck{\ill{}} [pour $n = 0$, on
+obtiendrait $\simeq A[T]/T^pA[T]$]. Si $n = 1$, c'est un anneau local
+régulier. Sinon, il ne l'est pas, comme on voit facilement. Par exemple, si
+$p = 3$, \struck{\ill{} $A$ \ill{}} et si on prend $n = 2$, on obtient
+\[
+A[T]/(T^3 - X^2) = A[X^{2/3}],
+\]
+qui est isomorphe au sous-anneau de \struck{\ill{}}
+$k[[Y]] = k[[X^{1/3}]]$ formé des séries formelles dont le coefficient de
+$Y$ est nul. Pourtant, \ill{} \uncertain{point} \ill{} \uncertain{vue} des
+$\mathcal{B}$-\struck{fibrés} revêtements,\note{« revêtements » est écrit au-dessus du mot biffé ; plus
+haut, le mot illisible après « Les revêtements » est écrit au-dessus d'un
+mot biffé}
+
+\page{27}
+
+le revêtement envisagé est la somme de deux revêtements réguliers,
+correspondants resp.\ à l'adjonction d'une racine $p$-ième de $X$, et de
+$-X + X^2$ ; mais le produit fibré de ces deux anneaux
+$C_1, C_2$ sur $A$ est déjà un anneau non régulier [car isomorphe à
+$C_1[T]/(T^p)$, qui a des éléments nilpotents]\note{« $C_1, C_2$ » est
+ajouté au-dessus de la ligne}
+
+\end{document}
