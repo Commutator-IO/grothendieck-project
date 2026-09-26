@@ -1056,6 +1056,7 @@ addEventListener('resize', function () {
   resizeTimer = setTimeout(drawDiagrams, 120);
 });
 
+var cdSeq = 0;
 function drawDiagram(cd) {
   var grid = cd.querySelector('.tr-cd-grid');
   var svg = cd.querySelector('.tr-cd-svg');
@@ -1080,12 +1081,17 @@ function drawDiagram(cd) {
   svg.setAttribute('width', base.width);
   svg.setAttribute('height', base.height);
   svg.setAttribute('viewBox', '0 0 ' + base.width + ' ' + base.height);
+  // Each diagram's own marker ids. With one id shared by every diagram of a
+  // page, every arrow took its head from the first diagram's <defs> — and
+  // when that diagram was hidden (a gallery slide not shown), no arrow on the
+  // page had a head at all.
+  var uid = cd.dataset.cdId || (cd.dataset.cdId = String(++cdSeq));
   svg.innerHTML =
-    '<defs><marker id="cdhead" viewBox="0 0 10 10" refX="9" refY="5" ' +
+    '<defs><marker id="cdhead-' + uid + '" viewBox="0 0 10 10" refX="9" refY="5" ' +
     'markerWidth="7" markerHeight="7" orient="auto-start-reverse">' +
     '<path d="M0,1 L9,5 L0,9" fill="none" stroke="currentColor" stroke-width="1.4"/>' +
     '</marker>' +
-    '<marker id="cdhead2" viewBox="0 0 14 10" refX="13" refY="5" ' +
+    '<marker id="cdhead2-' + uid + '" viewBox="0 0 14 10" refX="13" refY="5" ' +
     'markerWidth="10" markerHeight="7" orient="auto-start-reverse">' +
     '<path d="M4,1 L13,5 L4,9" fill="none" stroke="currentColor" stroke-width="1.4"/>' +
     '<path d="M0,1 L9,5 L0,9" fill="none" stroke="currentColor" stroke-width="1.4"/>' +
@@ -1174,7 +1180,7 @@ function drawDiagram(cd) {
       return p;
     }
 
-    var head = a.twoHeads ? 'url(#cdhead2)' : 'url(#cdhead)';
+    var head = a.twoHeads ? 'url(#cdhead2-' + uid + ')' : 'url(#cdhead-' + uid + ')';
     if (a.style === 'double') {
       line(1.6);
       line(-1.6).setAttribute('marker-end', head);
@@ -1221,11 +1227,19 @@ function drawDiagram(cd) {
       // about which arrow a name belonged to.
       var mx = ctrl ? (p1.x + 2 * ctrl.x + p2.x) / 4 : (p1.x + p2.x) / 2;
       var my = ctrl ? (p1.y + 2 * ctrl.y + p2.y) / 4 : (p1.y + p2.y) / 2;
-      var off = a.desc ? 0 : a.flip ? 13 : -13;
-      span.style.left = mx - uy * off + 'px';
-      span.style.top = my + ux * off + 'px';
+      // Typeset first, then placed: the label is pushed off the shaft by
+      // half its own extent across the arrow, plus a gap. A fixed 13px did
+      // for a one-letter label beside a horizontal arrow and let a long one
+      // beside a vertical arrow sit on the line; the extent is the box's
+      // half-height for a horizontal shaft, its half-width for a vertical
+      // one, and a blend of the two between.
       grid.appendChild(span);
       katex.render(a.label, span, { throwOnError: false, macros: TR_MACROS });
+      var ext = Math.abs(ux) * span.offsetHeight / 2 + Math.abs(uy) * span.offsetWidth / 2;
+      var gap = Math.max(3, 0.25 * span.offsetHeight);
+      var off = a.desc ? 0 : (a.flip ? 1 : -1) * Math.max(13, ext + gap);
+      span.style.left = mx - uy * off + 'px';
+      span.style.top = my + ux * off + 'px';
     }
   });
 
