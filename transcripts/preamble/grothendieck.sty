@@ -48,6 +48,15 @@
 \setlength{\emergencystretch}{3em}
 \usepackage{hyperref}
 \hypersetup{colorlinks=true,linkcolor=black,urlcolor=black,pdfborder={0 0 0}}
+% A section title is written out again — to the PDF's bookmarks and its
+% table of contents — and amsmath's \varinjlim and \varprojlim, built with
+% \underrightarrow, break when they are: folder 107 heads a section « Question
+% des $\varinjlim$ filtrantes dans Hot » and the PDF failed with « Illegal
+% parameter number in definition of \reserved@a ». Made robust for the
+% rewriting, and spelt « lim » in the bookmarks, which carry no mathematics.
+\usepackage{etoolbox}
+\robustify{\varinjlim}\robustify{\varprojlim}
+\pdfstringdefDisableCommands{\def\varinjlim{lim}\def\varprojlim{lim}}
 
 % --- Batch metadata ---------------------------------------------------------
 % Taken as they stand by the rendering script, which shows them at the head of
