@@ -2,7 +2,7 @@
 
 # His lexicon, counted from the transcriptions
 
-Built from **247 batch files across 99 folders, 3272 transcribed pages**, by `scripts/lexicon.mjs`. Words appearing fewer than 3 times are omitted here; `lexicon.json` carries the full counts.
+Built from **255 batch files across 103 folders, 3367 transcribed pages**, by `scripts/lexicon.mjs`. Words appearing fewer than 3 times are omitted here; `lexicon.json` carries the full counts.
 
 > **This is a witness to vocabulary, not to ink.** It is derived from first-pass
 > machine transcriptions, **none of which has been checked against the leaves by
@@ -28,126 +28,126 @@ Grothendieck's. Grammar words of both languages are filtered; the rest stands.
 
 | word | n | word | n | word | n |
 |---|---|---|---|---|---|
-| catégorie | 1300 | exact | 180 | bis | 108 |
-| cas | 1111 | suppose | 178 | comp | 108 |
-| foncteur | 960 | théorie | 178 | fonction | 108 |
-| d'un | 936 | fibres | 177 | opérations | 108 |
-| deux | 786 | structures | 177 | complexe | 107 |
-| groupe | 769 | unique | 177 | s'il | 107 |
-| fini | 724 | correspondant | 174 | veut | 107 |
-| conditions | 649 | ait | 172 | compact | 106 |
-| type | 646 | part | 172 | dépend | 106 |
-| c'est | 602 | implique | 171 | donner | 106 |
-| structure | 573 | gauche | 170 | prend | 106 |
-| d'une | 572 | iv | 170 | gr | 105 |
-| d'où | 541 | injectif | 168 | prendre | 105 |
-| non | 508 | top | 168 | clos | 104 |
-| existe | 506 | supposer | 167 | via | 104 |
-| nb | 479 | théorème | 167 | enfin | 103 |
-| trouve | 470 | pts | 166 | ensemble | 103 |
-| condition | 468 | sous-groupe | 164 | noeth | 103 |
-| morphisme | 457 | topologie | 164 | simple | 103 |
-| donnée | 454 | torseur | 164 | voisinage | 103 |
-| foncteurs | 447 | trivial | 164 | suivantes | 102 |
-| corps | 445 | classes | 163 | dém | 101 |
-| finie | 403 | satisfaisant | 163 | noyau | 101 |
-| supposons | 399 | finis | 161 | abélien | 100 |
-| ii | 397 | mod | 161 | formé | 100 |
-| groupes | 387 | picard | 161 | préschéma | 100 |
-| hom | 386 | étale | 160 | localement | 99 |
-| suite | 372 | l'homomorphisme | 160 | pl | 99 |
-| soient | 371 | faisceaux | 159 | prenant | 99 |
-| corollaire | 368 | quand | 159 | trouver | 99 |
-| isom | 363 | application | 158 | ayant | 98 |
-| suffit | 351 | finies | 158 | fid | 98 |
-| canonique | 346 | connexes | 156 | l'autre | 98 |
-| resp | 344 | signifie | 156 | opération | 98 |
-| schéma | 341 | résulte | 155 | propriété | 98 |
-| loc | 334 | sous-catégorie | 155 | trois | 98 |
-| qu'il | 332 | cohomologie | 154 | composé | 97 |
-| partie | 329 | d'ailleurs | 154 | données | 97 |
-| défini | 328 | espace | 153 | gerbe | 97 |
-| catégories | 324 | formule | 152 | l'un | 97 |
-| ens | 319 | l'ensemble | 152 | ext | 96 |
-| modules | 319 | l'on | 152 | couple | 95 |
-| n'est | 319 | points | 151 | tore | 95 |
-| forme | 318 | relations | 151 | l'identité | 94 |
-| connexe | 315 | valeurs | 148 | lorsque | 94 |
-| module | 315 | d'autre | 147 | remarque | 94 |
-| faut | 314 | équivalentes | 147 | bord | 93 |
-| topos | 310 | composantes | 146 | dessus | 93 |
-| anneau | 291 | petit | 146 | libre | 93 |
-| dim | 290 | cf | 145 | linéaire | 93 |
-| considérons | 288 | correspond | 145 | notes | 93 |
-| objet | 287 | inverse | 144 | pose | 93 |
-| élément | 286 | exacte | 143 | variété | 93 |
-| prouver | 284 | exemple | 143 | équivalente | 92 |
-| qu'on | 281 | réduit | 143 | factorise | 92 |
-| stable | 278 | descente | 142 | posons | 92 |
-| lemme | 277 | projectif | 141 | provient | 92 |
-| base | 276 | parties | 140 | d'après | 91 |
-| isomorphisme | 275 | régulier | 139 | géom | 91 |
-| termes | 275 | dimension | 137 | maximal | 91 |
-| l'ens | 271 | dire | 137 | pleinement | 91 |
-| façon | 270 | général | 137 | fermés | 90 |
-| définit | 268 | déduit | 136 | niveau | 90 |
-| effet | 266 | engendré | 136 | équiv | 89 |
-| fidèle | 265 | équivaut | 136 | restriction | 89 |
-| iii | 265 | sens | 136 | topologique | 89 |
-| objets | 263 | hodge | 135 | unité | 89 |
-| relation | 262 | pleine | 135 | nulle | 88 |
-| fermé | 256 | l'application | 134 | direct | 87 |
-| ex | 253 | d'ordre | 133 | isomorphe | 87 |
-| th | 251 | déjà | 133 | limite | 87 |
-| extension | 249 | propre | 133 | rel | 87 |
-| ouvert | 245 | construction | 131 | vide | 87 |
-| compatible | 239 | définir | 131 | moins | 86 |
-| plat | 237 | prouvons | 130 | réunion | 86 |
-| point | 237 | sait | 130 | sauf | 86 |
-| voit | 234 | commute | 129 | sorte | 86 |
-| équivalence | 231 | idéal | 129 | admissible | 85 |
-| alg | 227 | motifs | 129 | algébriques | 85 |
-| cat | 227 | système | 129 | correspondent | 85 |
-| section | 227 | grand | 128 | galois | 85 |
-| lisse | 225 | lieu | 128 | représentable | 85 |
-| local | 224 | premier | 128 | résultat | 85 |
-| quotient | 222 | satisfait | 128 | dualité | 84 |
-| dit | 221 | doit | 127 | inversible | 84 |
-| morphismes | 219 | revient | 127 | normal | 84 |
-| opère | 217 | choix | 126 | stables | 84 |
-| question | 217 | fermée | 125 | tot | 84 |
-| droite | 213 | notons | 125 | irréductible | 83 |
-| affine | 212 | associé | 124 | iso | 83 |
-| famille | 210 | image | 124 | types | 83 |
-| faisceau | 209 | notion | 124 | dis | 82 |
-| cor | 206 | propriétés | 124 | récurrence | 82 |
-| produit | 205 | aura | 123 | surface | 82 |
-| l'image | 204 | admet | 121 | formel | 81 |
-| degré | 203 | démonstration | 121 | géométrique | 81 |
-| éléments | 203 | maintenant | 121 | sections | 81 |
-| prop | 202 | reste | 121 | vectoriel | 81 |
-| particulier | 199 | ok | 120 | flèche | 80 |
-| algèbre | 198 | utilisant | 119 | haut | 80 |
-| schémas | 196 | category | 118 | situation | 80 |
-| induit | 195 | présentation | 117 | abélienne | 79 |
-| proposition | 195 | puisque | 117 | aurait | 79 |
-| ssi | 194 | entier | 116 | est-il | 79 |
-| homomorphisme | 193 | rang | 116 | l'est | 79 |
-| commutatif | 192 | coh | 115 | prouve | 79 |
-| définition | 192 | contient | 115 | s'identifie | 79 |
-| diagramme | 192 | forment | 115 | évidemment | 78 |
-| classe | 191 | nul | 115 | bas | 77 |
-| donné | 189 | seulement | 115 | dernier | 77 |
-| pt | 187 | ramené | 114 | projective | 77 |
-| muni | 186 | vérifier | 114 | bijectif | 76 |
-| donne | 184 | filtration | 113 | désigne | 76 |
-| définie | 183 | formée | 113 | images | 76 |
-| flèches | 183 | produits | 113 | l'hom | 76 |
-| poids | 183 | somme | 113 | posant | 76 |
-| algébrique | 182 | vrai | 113 | relative | 76 |
-| fibre | 181 | composition | 109 | vertu | 76 |
-| surjectif | 181 | grâce | 109 | affines | 75 |
-| tt | 181 | suivant | 109 | cycles | 75 |
+| catégorie | 1305 | structures | 183 | somme | 113 |
+| cas | 1144 | algébrique | 182 | fonction | 112 |
+| foncteur | 969 | exact | 180 | composition | 110 |
+| d'un | 952 | suppose | 180 | dépend | 110 |
+| deux | 824 | implique | 179 | prendre | 110 |
+| groupe | 808 | part | 179 | s'il | 110 |
+| fini | 730 | théorie | 179 | suivant | 110 |
+| conditions | 658 | fibres | 178 | comp | 109 |
+| type | 654 | correspondant | 177 | complexe | 109 |
+| c'est | 612 | ait | 175 | bis | 108 |
+| structure | 589 | gauche | 174 | prend | 108 |
+| d'une | 584 | top | 172 | veut | 108 |
+| d'où | 565 | iv | 170 | clos | 107 |
+| non | 519 | injectif | 168 | donner | 107 |
+| existe | 514 | pts | 168 | gr | 107 |
+| nb | 503 | satisfaisant | 168 | trois | 107 |
+| trouve | 491 | supposer | 168 | compact | 106 |
+| condition | 476 | théorème | 168 | prenant | 106 |
+| donnée | 463 | trivial | 168 | enfin | 105 |
+| corps | 459 | sous-groupe | 167 | noyau | 105 |
+| morphisme | 457 | classes | 166 | formé | 104 |
+| foncteurs | 448 | mod | 166 | abélien | 103 |
+| hom | 439 | torseur | 166 | dém | 103 |
+| supposons | 406 | connexes | 165 | ensemble | 103 |
+| groupes | 405 | application | 164 | l'autre | 103 |
+| finie | 404 | quand | 164 | noeth | 103 |
+| ii | 397 | topologie | 164 | simple | 103 |
+| suite | 386 | finis | 163 | trouver | 103 |
+| corollaire | 383 | d'ailleurs | 162 | voisinage | 103 |
+| isom | 379 | l'homomorphisme | 162 | données | 102 |
+| soient | 374 | étale | 161 | suivantes | 102 |
+| canonique | 361 | picard | 161 | localement | 101 |
+| suffit | 355 | faisceaux | 160 | préschéma | 101 |
+| resp | 344 | finies | 160 | composé | 100 |
+| schéma | 342 | résulte | 160 | l'un | 99 |
+| connexe | 340 | inverse | 158 | pl | 99 |
+| ens | 339 | signifie | 157 | ayant | 98 |
+| qu'il | 335 | espace | 156 | couple | 98 |
+| défini | 334 | cohomologie | 155 | fid | 98 |
+| loc | 334 | l'ensemble | 155 | opération | 98 |
+| partie | 333 | relations | 155 | propriété | 98 |
+| n'est | 326 | sous-catégorie | 155 | gerbe | 97 |
+| catégories | 324 | formule | 153 | libre | 97 |
+| faut | 322 | l'on | 153 | l'identité | 96 |
+| modules | 320 | points | 153 | remarque | 96 |
+| module | 319 | d'autre | 152 | linéaire | 95 |
+| forme | 318 | valeurs | 152 | lorsque | 95 |
+| topos | 311 | équivalentes | 150 | tore | 95 |
+| considérons | 297 | exacte | 150 | dessus | 94 |
+| l'ens | 297 | composantes | 149 | posons | 94 |
+| dim | 295 | cf | 148 | sauf | 94 |
+| élément | 294 | régulier | 147 | variété | 94 |
+| anneau | 292 | correspond | 146 | bord | 93 |
+| prouver | 289 | petit | 146 | d'après | 93 |
+| objet | 288 | réduit | 146 | équivalente | 93 |
+| qu'on | 288 | exemple | 145 | factorise | 93 |
+| stable | 286 | parties | 145 | notes | 93 |
+| base | 281 | équivaut | 144 | pose | 93 |
+| termes | 281 | d'ordre | 143 | provient | 93 |
+| définit | 279 | descente | 142 | vide | 93 |
+| lemme | 279 | général | 141 | géom | 92 |
+| façon | 277 | projectif | 141 | pleinement | 92 |
+| isomorphisme | 276 | dimension | 140 | maximal | 91 |
+| extension | 273 | dire | 140 | fermés | 90 |
+| effet | 272 | déduit | 139 | moins | 90 |
+| objets | 270 | sens | 139 | niveau | 90 |
+| relation | 270 | déjà | 138 | restriction | 90 |
+| fidèle | 267 | engendré | 138 | topologique | 90 |
+| iii | 265 | l'application | 137 | équiv | 89 |
+| fermé | 258 | hodge | 135 | iso | 89 |
+| th | 255 | pleine | 135 | nulle | 89 |
+| ex | 254 | sait | 135 | unité | 89 |
+| compatible | 251 | premier | 134 | isomorphe | 88 |
+| ouvert | 245 | définir | 133 | rel | 88 |
+| voit | 244 | image | 133 | sorte | 88 |
+| point | 240 | propre | 133 | direct | 87 |
+| opère | 237 | choix | 132 | dualité | 87 |
+| plat | 237 | construction | 132 | limite | 87 |
+| section | 233 | lieu | 132 | correspondent | 86 |
+| équivalence | 232 | commute | 130 | galois | 86 |
+| dit | 230 | prouvons | 130 | réunion | 86 |
+| cat | 229 | satisfait | 130 | admissible | 85 |
+| quotient | 229 | idéal | 129 | algébriques | 85 |
+| alg | 228 | motifs | 129 | représentable | 85 |
+| lisse | 226 | revient | 129 | résultat | 85 |
+| local | 226 | système | 129 | tot | 85 |
+| droite | 223 | aura | 128 | dis | 84 |
+| morphismes | 220 | doit | 128 | évidemment | 84 |
+| l'image | 219 | grand | 128 | inversible | 84 |
+| question | 219 | notons | 127 | normal | 84 |
+| affine | 212 | propriétés | 127 | stables | 84 |
+| faisceau | 212 | associé | 125 | types | 84 |
+| éléments | 210 | fermée | 125 | haut | 83 |
+| famille | 210 | reste | 125 | irréductible | 83 |
+| cor | 209 | admet | 124 | aurait | 82 |
+| particulier | 207 | maintenant | 124 | est-il | 82 |
+| produit | 207 | notion | 124 | flèche | 82 |
+| induit | 206 | démonstration | 122 | récurrence | 82 |
+| ssi | 206 | utilisant | 122 | s'identifie | 82 |
+| degré | 204 | contient | 121 | sections | 82 |
+| prop | 204 | ok | 120 | situation | 82 |
+| homomorphisme | 201 | ext | 119 | sommets | 82 |
+| proposition | 201 | nul | 119 | surface | 82 |
+| algèbre | 200 | via | 119 | formel | 81 |
+| schémas | 196 | category | 118 | géométrique | 81 |
+| commutatif | 195 | puisque | 118 | l'est | 81 |
+| diagramme | 194 | rang | 118 | vectoriel | 81 |
+| donné | 194 | forment | 117 | abélienne | 79 |
+| définition | 193 | présentation | 117 | couples | 79 |
+| classe | 191 | seulement | 117 | prouve | 79 |
+| pt | 191 | vrai | 117 | automorphismes | 78 |
+| donne | 189 | entier | 116 | dernier | 78 |
+| muni | 189 | ramené | 116 | images | 78 |
+| tt | 186 | vérifier | 116 | bas | 77 |
+| unique | 186 | coh | 115 | bijectif | 77 |
+| définie | 185 | grâce | 114 | posant | 77 |
+| surjectif | 185 | filtration | 113 | projective | 77 |
+| flèches | 184 | formée | 113 | relative | 77 |
+| fibre | 183 | opérations | 113 | tate | 77 |
+| poids | 183 | produits | 113 | désigne | 76 |
 
 ## Abbreviations
 
@@ -155,46 +155,46 @@ Half of how he writes, and what most defeats a reader coming to the hand cold.
 
 | abbr. | n | abbr. | n | abbr. | n |
 |---|---|---|---|---|---|
-| i.e. | 1692 | op. | 41 | orème. | 17 |
-| ens. | 546 | gén. | 39 | qu.-coh. | 17 |
-| resp. | 326 | qu. | 38 | rep. | 17 |
-| isom. | 304 | néc. | 36 | A. | 16 |
-| N. | 251 | p. | 36 | épim. | 15 |
-| hom. | 223 | V. | 34 | om. | 15 |
-| loc. | 223 | can. | 33 | par. | 15 |
-| alg. | 169 | imm. | 33 | re. | 15 |
-| car. | 152 | irréd. | 33 | alg. équiv. | 14 |
-| cat. | 145 | Exp. | 31 | fond. | 14 |
-| t.f. | 138 | prés. | 31 | inj. | 14 |
-| th. | 132 | coeff. | 30 | M. | 14 |
-| top. | 131 | exc. | 30 | bre. | 13 |
-| s. | 106 | cqfd. | 28 | duit. | 13 |
-| hyp. | 93 | él. | 28 | hol. | 13 |
-| p. ex. | 88 | pl. fid. | 28 | néral. | 13 |
-| équiv. | 87 | P. | 27 | près. | 13 |
-| comp. | 84 | repr. | 27 | comp. conn. | 12 |
-| cf. | 82 | O. | 26 | cond. | 12 |
-| ext. | 81 | univ. | 26 | I. | 12 |
-| géom. | 77 | e. | 25 | loc. cit. | 12 |
-| tot. | 69 | val. | 25 | qu.-sép. | 12 |
-| pl. | 66 | asph. | 24 | R. | 12 |
-| fid. | 61 | ess. | 23 | rec. | 12 |
-| Dém. | 59 | est. | 23 | s.th. | 12 |
-| rel. | 58 | rev. | 23 | alg. clos. | 11 |
-| noeth. | 54 | autre. | 22 | comp. irréd. | 11 |
-| f. | 52 | Chap. | 22 | même. | 11 |
-| p.ex. | 51 | comm. | 22 | ment. | 11 |
-| syst. | 50 | bij. | 21 | int. | 10 |
-| str. | 48 | corr. | 21 | les. | 10 |
-| homom. | 45 | S. | 21 | p.r. | 10 |
-| quelc. | 44 | aussi. | 20 | Par. | 10 |
-| g. | 43 | conj. | 20 | réc. | 10 |
-| le. | 43 | es. | 20 | rique. | 10 |
+| i.e. | 1749 | Mac. | 41 | H. | 17 |
+| ens. | 576 | gén. | 40 | orème. | 17 |
+| resp. | 326 | qu. | 38 | qu.-coh. | 17 |
+| isom. | 319 | néc. | 36 | rep. | 17 |
+| N. | 255 | p. | 36 | épim. | 16 |
+| hom. | 240 | can. | 34 | om. | 15 |
+| loc. | 223 | V. | 34 | par. | 15 |
+| alg. | 170 | imm. | 33 | re. | 15 |
+| car. | 157 | irréd. | 33 | alg. équiv. | 14 |
+| cat. | 145 | coeff. | 32 | fond. | 14 |
+| t.f. | 138 | él. | 32 | inj. | 14 |
+| th. | 134 | Exp. | 31 | M. | 14 |
+| top. | 134 | prés. | 31 | bre. | 13 |
+| ext. | 112 | exc. | 30 | duit. | 13 |
+| s. | 108 | cqfd. | 29 | hol. | 13 |
+| hyp. | 94 | pl. fid. | 28 | néral. | 13 |
+| p. ex. | 88 | P. | 27 | près. | 13 |
+| équiv. | 87 | repr. | 27 | s.th. | 13 |
+| comp. | 85 | O. | 26 | B. | 12 |
+| cf. | 82 | univ. | 26 | comp. conn. | 12 |
+| géom. | 78 | val. | 26 | cond. | 12 |
+| tot. | 70 | e. | 25 | I. | 12 |
+| pl. | 66 | asph. | 24 | loc. cit. | 12 |
+| fid. | 61 | ess. | 24 | qu.-sép. | 12 |
+| Dém. | 60 | autre. | 23 | R. | 12 |
+| rel. | 58 | comm. | 23 | rec. | 12 |
+| noeth. | 54 | corr. | 23 | alg. clos. | 11 |
+| f. | 52 | est. | 23 | appl. | 11 |
+| p.ex. | 52 | rev. | 23 | comp. irréd. | 11 |
+| syst. | 50 | Chap. | 22 | même. | 11 |
+| str. | 48 | isom. can. | 22 | ment. | 11 |
+| homom. | 47 | bij. | 21 | les. | 10 |
+| op. | 44 | es. | 21 | p.r. | 10 |
+| quelc. | 44 | S. | 21 | Par. | 10 |
+| g. | 43 | aussi. | 20 | réc. | 10 |
+| le. | 43 | conj. | 20 | rique. | 10 |
+| etc. | 42 | gorie. | 20 | surj. | 10 |
 | inv. | 42 | t.m. | 20 | t.q. | 10 |
-| loc. noeth. | 42 | gorie. | 19 | adm. | 9 |
-| autom. | 41 | isom. can. | 19 | ainsi. | 9 |
-| etc. | 41 | proj. | 18 | appl. | 9 |
-| Mac. | 41 | H. | 17 | C. | 9 |
+| loc. noeth. | 42 | proj. | 18 | adm. | 9 |
+| autom. | 41 | A. | 17 | ainsi. | 9 |
 
 ## Notation
 
@@ -202,46 +202,46 @@ Macros counted inside mathematics — what the notation of this fonds actually c
 
 | macro | n | macro | n | macro | n |
 |---|---|---|---|---|---|
-| \mathrm | 7898 | \Omega | 949 | \varinjlim | 345 |
-| \in | 5361 | \mathbf | 939 | \dim | 334 |
-| \mathbb | 5113 | \infty | 913 | \Psi | 334 |
-| \mathcal | 5060 | \nu | 867 | \Rightarrow | 328 |
-| \arrow | 4852 | \delta | 850 | \exists | 319 |
-| \to | 4633 | \neq | 794 | \cup | 314 |
-| \underline | 3667 | \varepsilon | 776 | \prod | 310 |
-| \text | 3383 | \tilde | 766 | \Bigl | 301 |
-| \alpha | 3337 | \Lambda | 758 | \Bigr | 299 |
-| \otimes | 2773 | \tau | 756 | \left | 290 |
-| \varphi | 2755 | \sum | 739 | \right | 290 |
-| \qquad | 2696 | \widehat | 738 | \underbrace | 283 |
-| \pi | 2632 | \gamma | 735 | \dot | 281 |
-| \mathfrak | 2459 | \omega | 732 | \boxed | 272 |
-| \operatorname | 2415 | \hat | 729 | \underset | 270 |
-| \times | 2377 | \ldots | 721 | \Longrightarrow | 266 |
-| \lambda | 2174 | \frac | 681 | \Theta | 241 |
-| \begin | 2084 | \mu | 630 | \longmapsto | 235 |
-| \end | 2080 | \emph | 604 | \smallsetminus | 230 |
-| \simeq | 1997 | \Phi | 583 | \scriptsize | 229 |
-| \sigma | 1976 | \sim | 583 | \mid | 216 |
-| \longrightarrow | 1937 | \emptyset | 570 | \theta | 214 |
-| \rho | 1854 | \cdots | 556 | \supset | 213 |
-| \xi | 1618 | \wedge | 536 | \textbf | 212 |
-| \subset | 1603 | \eta | 522 | \big | 211 |
-| \Gamma | 1406 | \leqslant | 514 | \Longleftrightarrow | 204 |
-| \circ | 1393 | \Pi | 513 | \colon | 199 |
-| \quad | 1379 | \forall | 504 | \dots | 185 |
-| \Sigma | 1269 | \psi | 498 | \vee | 182 |
-| \bigl | 1268 | \mapsto | 469 | \hookrightarrow | 179 |
-| \bigr | 1261 | \page | 465 | \bigcup | 176 |
-| \overline | 1251 | \geq | 427 | \coprod | 173 |
-| \leq | 1193 | \geqslant | 395 | \zeta | 164 |
-| \xrightarrow | 1180 | \overset | 383 | \tag | 161 |
-| \ell | 1170 | \bullet | 372 | \int | 155 |
-| \widetilde | 1137 | \check | 371 | \substack | 154 |
-| \Delta | 1133 | \partial | 359 | \setminus | 143 |
-| \bar | 1103 | \varprojlim | 358 | \chi | 142 |
-| \cap | 1088 | \cdot | 350 | \det | 139 |
-| \beta | 986 | \item | 347 | \tfrac | 132 |
+| \mathrm | 8150 | \Omega | 974 | \varinjlim | 346 |
+| \in | 5504 | \mathbf | 963 | \Psi | 340 |
+| \mathbb | 5203 | \infty | 928 | \dim | 339 |
+| \arrow | 5175 | \nu | 870 | \Rightarrow | 332 |
+| \mathcal | 5151 | \delta | 865 | \exists | 327 |
+| \to | 4849 | \tilde | 837 | \cup | 319 |
+| \underline | 3860 | \neq | 821 | \prod | 312 |
+| \text | 3534 | \varepsilon | 789 | \Bigl | 309 |
+| \alpha | 3424 | \omega | 777 | \Bigr | 307 |
+| \pi | 2961 | \tau | 772 | \left | 304 |
+| \varphi | 2956 | \Lambda | 770 | \right | 304 |
+| \otimes | 2812 | \gamma | 748 | \underbrace | 296 |
+| \qquad | 2752 | \sum | 746 | \dot | 288 |
+| \operatorname | 2634 | \widehat | 738 | \boxed | 287 |
+| \mathfrak | 2586 | \hat | 734 | \underset | 283 |
+| \times | 2508 | \ldots | 730 | \Longrightarrow | 269 |
+| \lambda | 2235 | \frac | 683 | \longmapsto | 246 |
+| \begin | 2203 | \mu | 670 | \Theta | 241 |
+| \end | 2199 | \Pi | 668 | \smallsetminus | 240 |
+| \simeq | 2114 | \sim | 618 | \scriptsize | 233 |
+| \sigma | 2091 | \Phi | 617 | \theta | 224 |
+| \longrightarrow | 1983 | \wedge | 609 | \mid | 222 |
+| \rho | 1868 | \emph | 606 | \supset | 218 |
+| \subset | 1635 | \emptyset | 577 | \textbf | 216 |
+| \xi | 1618 | \cdots | 561 | \big | 214 |
+| \circ | 1464 | \eta | 522 | \vee | 209 |
+| \Gamma | 1437 | \forall | 520 | \Longleftrightarrow | 208 |
+| \quad | 1437 | \leqslant | 516 | \colon | 199 |
+| \bigl | 1334 | \psi | 504 | \det | 190 |
+| \bigr | 1327 | \mapsto | 483 | \hookrightarrow | 188 |
+| \Sigma | 1291 | \page | 477 | \dots | 186 |
+| \overline | 1281 | \geq | 442 | \coprod | 180 |
+| \widetilde | 1266 | \geqslant | 403 | \bigcup | 176 |
+| \ell | 1246 | \overset | 403 | \tag | 166 |
+| \xrightarrow | 1236 | \bullet | 387 | \zeta | 164 |
+| \leq | 1203 | \check | 373 | \int | 155 |
+| \Delta | 1194 | \cdot | 369 | \substack | 154 |
+| \bar | 1161 | \partial | 368 | \setminus | 144 |
+| \cap | 1092 | \varprojlim | 363 | \chi | 142 |
+| \beta | 1000 | \item | 347 | \langle | 134 |
 
 ## Read only as doubtful, never plainly
 
@@ -251,19 +251,19 @@ candidate list is a reason to look harder at the page, not a reason to accept it
 
 | word | n | word | n | word | n |
 |---|---|---|---|---|---|
-| pólya | 15 | décomposables | 2 | permutable | 2 |
-| neumann | 10 | déconnectant | 2 | réalisables | 2 |
-| semi-finie | 5 | déployée | 2 | retrouve-t-on | 2 |
-| spectralement | 5 | diagonalisation | 2 | rigoureux | 2 |
-| tresses | 3 | efigures | 2 | semi-continuité | 2 |
-| typiquement | 3 | gaffe | 2 | sommables | 2 |
-| analogie | 2 | harmonique | 2 | tentant | 2 |
-| azumaya | 2 | inégales | 2 | trouve-t-on | 2 |
-| beck | 2 | isotrope | 2 | ul | 2 |
-| cancelé | 2 | l'hermitien | 2 | unitairement | 2 |
-| cart | 2 | limitation | 2 | vérif | 2 |
-| cofini | 2 | logique | 2 | vgr | 2 |
-| composées | 2 | minimalité | 2 | vraisemblable | 2 |
-| comprise | 2 | normique | 2 | weakly | 2 |
-| contractions | 2 | nullement | 2 |  |  |
-| contrexemple | 2 | orthonormales | 2 |  |  |
+| pólya | 15 | contractions | 2 | nullement | 2 |
+| neumann | 10 | contrexemple | 2 | orthonormales | 2 |
+| semi-finie | 5 | décomposables | 2 | permutable | 2 |
+| spectralement | 5 | déconnectant | 2 | retrouve-t-on | 2 |
+| réalisables | 3 | déployée | 2 | rigoureux | 2 |
+| tresses | 3 | diagonalisation | 2 | semi-continuité | 2 |
+| typiquement | 3 | efigures | 2 | sommables | 2 |
+| analogie | 2 | gaffe | 2 | tentant | 2 |
+| azumaya | 2 | harmonique | 2 | trouve-t-on | 2 |
+| beck | 2 | inégales | 2 | ul | 2 |
+| bordant | 2 | isotrope | 2 | unitairement | 2 |
+| cancelé | 2 | l'hermitien | 2 | vérif | 2 |
+| cart | 2 | limitation | 2 | vgr | 2 |
+| cofini | 2 | logique | 2 | vraisemblable | 2 |
+| composées | 2 | minimalité | 2 | weakly | 2 |
+| comprise | 2 | normique | 2 |  |  |
