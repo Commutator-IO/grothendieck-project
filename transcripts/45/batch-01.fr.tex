@@ -1,0 +1,663 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 45, batch 1 (pages 1-20).
+% Established from the facsimile archives/batches/45/batch-01.pdf, cut from a
+% copy of 45.pdf fetched through the project's relay
+% (https://grothendieck-relay.onrender.com/source/45.pdf); PDF page k =
+% archivists' page k, no cover sheet. Per the skill transcribe-grothendieck.
+% The folder is seventy-nine pages in four batches (1-20, 21-40, 41-60,
+% 61-79); this is the first, the others are done by separate passes.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-09-26 — first pass, unchecked against the pages by a human.
+%
+% Covers, no \page marker: page 1, the tan folder cover, inscribed in brown
+% ink top right « Groupes semi-simples »; page 2, a sheet blank but for
+% « Application des s.-alg. de Cartan aux corps de dim. 1 » top right, in his
+% hand; page 15, a sheet blank but for a struck line and « Cas non ½simple :
+% Question de rationalité du radical, définition de la "variété des
+% drapeaux" etc. ». Their words become section headings, with a \note each.
+%
+% Pages skipped: none beyond the three covers. Pages summarised: none.
+% Pages transcribed: 3-14 and 16-20, all in his hand (page 16, a small white
+% card in a rounder, careful hand, is noted as such). There is no typescript
+% in this batch: the 1961 annotated typescript of the folder title does not
+% appear in pages 1-20, so no decision on its authorship is made here.
+%
+% His pagination: none. The archivists' numbers only. Pages 3-14 are one
+% run in blue ink on tan paper (Lemmes 1-5 and two Théorèmes, then noyaux);
+% pages 17-20 are on thin grey paper, 17, 18 and 20 cancelled by long
+% diagonal strokes (recorded once per page). The connective prose of pages
+% 9-14 is a fast hand; formulas and statements carry, much prose is \ill{}.
+%
+% Notation fixed for the batch: K kernel, G -> G' épimorphisme; H^i(k,-)
+% Galois / flat cohomology; pi the Galois group of \bar k/k; the gothic
+% letters h, k, g as \mathfrak{h}, \mathfrak{k}, \mathfrak{g}; his round L
+% (Lie algebra of B) as \mathfrak{L}; the figure-3 gothic Z (centre) as
+% \mathfrak{Z}; the sheaf of classes of subgroups as \mathcal{V}(K) and the
+% band's outer group as \Pi(K), both doubtful readings of the letters; H^2(-)'
+% the neutral elements (his prime).
+%
+% What the batch is about. Galois cohomology of algebraic groups over fields
+% of dimension <= 1, and the neutrality of H^2 for bands (liens). Page 3:
+% Lemme 1 — if H^2(k,K) = 0 for K a torus, finite étale, an abelian variety,
+% commutative unipotent killed by p, then H^1(k,G) -> H^1(k,G') is surjective
+% for e -> K -> G -> G' -> e, with a sketch by maximal tori and dévissage
+% (pages 3-4, using the Schreier-Serre argument for H^2(pi,A)). Page 4-6:
+% Corollaire (H^2(k,K) = 0 for all finite K suffices), torsion of H^i,
+% Lemme 2 (the kernel of H^i(k,G) -> H^i(k^{p^-n},G) equals that of the
+% iterated Frobenius, with a diagram), its Corollaire. Pages 6-7: Lemme 3
+% (reduction of surjectivity to the smooth and radicial cases, with two
+% diagrams); Lemme 4 (radicial kernels, height one). Page 8: Cartan
+% subalgebras, N_G(h).K = G. Page 9: Lemme 5 (Br(k') = 0 for finite
+% radicial k' gives H^i(k,K) = 0, i >= 2, via tori and Tate-Nakayama;
+% alpha_p), Théorème for cd(k) <= 1. Page 10: Théorème, H^2(k,K') reduced
+% to the neutral class for a form K' of K. Pages 11-14: bands on a site X —
+% does K come from a sheaf of groups, i.e. is c(K) in H^2(X,Pi(K))'? Two
+% « principes de réduction » (normalisers of sections of V(K); injective
+% homomorphisms K -> K'), then for K algebraic over a Tsen field H^2(k,K) is
+% one neutral element, by dimension 0 (étale / radicial, Cartan
+% subalgebras) and positive dimension (tori, unipotent, commutators).
+% Page 16: an example in characteristic 2 of a group G defined over k whose
+% centre = radical Z is not. Pages 17-19: Borel subgroups as their own
+% normalisers, B normalises its Lie algebra, Drap(G) -> Grass(g) a
+% monomorphism (fails for SL(2) in characteristic 2), the corollary on
+% K in a group of multiplicative type, Chevalley's lemma, and the question
+% for Drap_T(G). Page 20: Théorème — a subgroup scheme H with connected
+% fibres containing a Cartan subgroup C is determined by C and its Lie
+% algebra (Demazure's exposé), continued in batch 2.
+
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{45}
+\batch{1}
+\pages{1}{20}
+\dating{1961-[vers 1970]}
+\watermark{Édition de démonstration}
+\foldertitle{Groupes semi-simples : notes manuscrites (s.d.), tapuscrit annoté (1961)}
+
+\begin{document}
+
+\section*{Groupes semi-simples}
+
+\note{« Groupes semi-simples », inscrit à l'encre brune en haut à droite de
+la chemise (page 1), qui ne porte rien d'autre. Le feuillet ne reçoit pas de
+numéro de page}
+
+\subsection*{Application des \uncertain{s.-alg.} de Cartan \uncertain{aux} corps de dim.~1}
+
+\note{inscrit en haut à droite d'un feuillet par ailleurs blanc (page 2),
+de sa main ; ce feuillet de garde ne reçoit pas de numéro de page}
+
+\page{3}
+
+\emph{Lemme 1}. Soit $k$ un corps, et supposons que les conditions suivantes
+soient vérifiées \marginal{($K$ commutatif)} :
+
+\ill{} On a $H^2(k,K)=0$ dans les cas suivants
+\begin{itemize}
+  \item[a)] $K$ un tore
+  \item[b)] $K$ \struck{\ill{}} fini étale sur $k$
+  \item[c)] $K$ une V.A.
+  \item[d)] $K$ groupe unipotent \uncertain{commutatif} \ill{} \uncertain{annulé par} $p$.
+\end{itemize}
+\note{le signe qui ouvre la ligne « On a … » est un numéro surchargé, peut-être
+un chiffre entouré ; il n'est pas lu. Les $K$ des quatre cas sont repassés}
+
+Alors pour toute \struck{\ill{}} \add{suite} exacte \uncertain{de schémas en
+groupes alg.}
+\[
+e \to K \to G \to G' \to e
+\]
+\ill{} \uncertain{commutatifs}) tels que $K$ \add{$G$, $G'$} \uncertain{simples}$/k$,
+\ill{}, $H^1(k,G) \to H^1(k,G')$ \emph{surjectif}.
+\note{« $G$, $G'$ » est ajouté au-dessus de la ligne, avec une accolade}
+
+\marginal{Inutile de supposer \ill{} \ill{} algébrique \ill{}}
+\note{note écrite en biais dans la marge gauche, en bas du premier tiers ;
+lecture très incomplète}
+
+\emph{Principe de démonstration}. On \uncertain{prend un tore maximal}
+$T$ de $K$ défini sur $k$, et utilisant le th.\ de conjugaison, on voit que
+$N_G(T) \to G'$ est \struck{injectif} \add{\uncertain{épim.}}, donc on a
+\[
+e \to N_K(T) \to N_G(T) \to G' \to e
+\]
+\ill{} on peut supposer $T$ \emph{invariant dans $G$}, \ill{} fonction dans
+$K$. On \uncertain{se ramène aux deux} cas 1) $K$ est un tore 1') $K$ est
+\struck{\ill{}} \add{\uncertain{de dim.}} nilpotent. Par dévissage, on
+\uncertain{se ramène} au cas \uncertain{évident} : 2) $K$ est fini étale$/k$
+1'') $K$ \ill{}, et \uncertain{quotient} \ill{} d'une VA \ill{}
+\uncertain{unipotent}. Par dévissage avec les \uncertain{commutateurs
+successifs}, \ill{} \ill{}
+
+\marginal{\ill{} $K$ \ill{} ??? \ill{} dévissage \ill{} fini \ill{}
+commutatifs \ill{}}
+\note{longue note en biais dans la marge gauche de la moitié inférieure,
+en plusieurs lignes ; seuls quelques mots se lisent}
+
+\page{4}
+
+\marginal{dans 1'')}
+\note{au-dessus de la première ligne, avec un trait qui renvoie au cas 1'')
+de la page 3}
+au cas d'un groupe commutatif, et par dévissage encore au cas où ce groupe
+\struck{\ill{}}, soit $pK = K$, soit $pK = 0$, i.e.\ les cas 3) $K$ une VA.
+4) $K$ unipotent comm.\ connexe annulé par $p$.
+
+Reste le cas 2), i.e.\ $K$ fini étale sur $k$, pas néc.\ commutatif, on note
+que l'on a une suite exacte (où $\bar k$ est la clôture \struck{algébrique}
+séparable de $k$)
+\[
+e \to K(\bar k) \to G(\bar k) \to G'(\bar k) \to e
+\]
+et on \uncertain{conclut} de l'argument de \ill{}-Serre, \ill{}
+$H^1(\pi, G(\bar k)) \to H^1(\pi, G'(\bar k))$ surjectif si $H^2(\pi,A)=0$ pour
+\struck{tt} tt $\pi$-module fini $A$. Or cette hypothèse signifie $H^2(k,K)$
+\add{$=0$} pour tt $K$ fini étale sur $k$, et \ill{} un \ill{} $G$ \ill{}
+simple sur $k$, \ill{}
+\[
+H^i(k,G) \simeq H^i(\pi, G(\bar k))
+\]
+\marginal{pour tt $i$, en particulier \ill{}}
+\note{encadré à droite de la formule, qui est soulignée d'un trait ondulé}
+\ill{} le lemme.
+
+\emph{Corollaire}. Supposons que $H^2(k,K)=0$ pour tt $K$ fini sur $k$ (pas
+néc.\ étale$/k$). Alors les \struck{conditions} hyp.\ du lemme 1 sont vérifiées,
+donc aussi la conclusion.
+
+Notons d'abord que si $G$ \uncertain{simple} sur $k$, alors les $H^i(k,G)$
+sont de torsion pour $i>0$ [car $= H^i(\pi, G(\bar k))$] donc
+\struck{\ill{}} tt $\xi \in$
+
+\page{5}
+
+$H^i(k,G)$ provient d'un $H^i(k, {}_nG)$. Or si $G$ est une VA ou un tore,
+${}_nG$ est fini sur $k$. Cela montre que les conditions du lemme 1 sont
+vérifiées pour a) b) c). Reste à vérifier d). Pour ceci, on ne
+\struck{suppose} utilise \struck{\ill{}} le fait que $H^2(k,U)$ devient nul
+sur une extension de $k$ de la forme $k^{p^{-n}}$, [car $U$ splitte sur une
+telle extension en groupes additifs] et on va prouver le
+
+\emph{Lemme 2}. Pour tt schéma en groupes $G$ sur $k$, le noyau de
+$H^i(k,G) \to H^i(k^{p^{-n}},G)$ est égal à celui de
+$H^i(k,G) \xrightarrow{F^n} H^i(k, G^{(p^n)})$ défini par $F^n$ ($F = $ Frob).
+Plus précisément, on a commutativité dans le diagramme
+
+\begin{tikzcd}
+H^i(k,G) \arrow[r] \arrow[dr, "F^n"'] & H^i(k^{p^{-n}}, G) \arrow[d, "\wr"] \\
+ & H^i(k, G^{(p^n)})
+\end{tikzcd}
+
+\note{à la suite de $H^i(k^{p^{-n}},G)$, sur la même ligne, un
+« $\simeq H^i(k, G^{(p^n)})$ » biffé, remplacé par la flèche verticale}
+
+[Pour le voir, on est ramené au cas des $H^0$, où c'est trivial \ill{}.
+On \uncertain{n'a pas besoin} que $G$ soit \uncertain{représentable} \ldots].
+
+\marginal{Pour \ill{} utiliser \ill{} \ill{} \ill{} cas \ill{} groupe
+\ill{} ???}
+\marginal{\struck{F.N.B.}}
+\note{note en biais dans la marge gauche, en face de l'énoncé du lemme 2,
+séparée du texte par un trait vertical ; lecture très incomplète. En dessous,
+dans la même marge, le diagramme suivant}
+
+\begin{tikzcd}
+G \arrow[d, "p"'] & G^{(p^n)} \arrow[l, "p^n"'] \arrow[d] & G \arrow[l, "F^n"'] \arrow[dl, "p"] \\
+S & S \arrow[l, "\varphi_S"] &
+\end{tikzcd}
+
+\note{dessiné dans la marge : un arc $\varphi_G$ va de la dernière colonne
+à la première au-dessus du rang supérieur ; « cart. » est écrit dans le
+carré de gauche ; sous les deux $S$ : « $= \mathrm{Spec}(k)$ » et
+« $\lambda \mapsto \lambda^{p^n}$ ». L'étiquette de la flèche du haut à gauche
+est douteuse}
+
+\page{6}
+
+\emph{Corollaire}. Ledit noyau est aussi égal à l'image de
+$H^i(k, \mathrm{Ker}(F_G^n))$, $F_G^n : G \to G^{(p^n)}$ le Frobenius itéré.
+
+Or si $G$ est \uncertain{simple}$/k$, alors $F_G^n$ est radiciel, donc son
+noyau est radiciel$/k$, \ill{} \uncertain{fini}. Cela achève de prouver le
+Corollaire du lemme 1.
+
+\emph{Lemme 3}. Pour que $H^1(k,G) \to H^1(k,G')$ soit \uncertain{surjectif}
+pour tt \uncertain{épim.} $G \to G'$ de schémas en groupes algébriques, il suffit
+qu'il en soit ainsi dans les deux cas suivants :
+\begin{itemize}
+  \item[a)] $G$, \struck{\ill{}} et $K = \mathrm{Ker}$ \add{(comme $G'$)}
+  \struck{\ill{}} simples$/k$
+  \item[b)] $K$ est radiciel.
+\end{itemize}
+
+\emph{Dém.} Dans le cas \uncertain{général}, il existe un \uncertain{plus
+grand} sous-groupe radiciel \add{$I$} de $G$ [noyau d'un Frobenius itéré
+convenable] tel que $G/I$ \struck{\ill{}} et $K/I \cap K$ sont simples$/k$.
+Considérons
+
+\begin{tikzcd}
+e \arrow[r] & K \arrow[r] \arrow[d] & G \arrow[r, "d"] \arrow[d, "u"] & G/K \arrow[r] \arrow[d, "v"] & e \\
+e \arrow[r] & K/K \cap I \arrow[r] & G/I \arrow[r, "d'"] & G/KI \arrow[r] & e
+\end{tikzcd}
+
+\struck{Notons} d'\ill{}
+
+\page{7}
+
+\begin{tikzcd}
+H^1(k,I) \arrow[r] \arrow[d] & H^1(k, I/I \cap K) \arrow[d] \\
+H^1(k,G) \arrow[r, "d_1"] \arrow[d, "u_1"'] & H^1(k, G/K) \arrow[d, "v_1"] \\
+H^1(k, G/I) \arrow[r, "d_1'"] & H^1(k, G/KI)
+\end{tikzcd}
+
+Par l'hypothèse \add{a)}, $u_1$ et $d_1'$ sont \uncertain{surjectifs}, et
+$d_1' u_1 = v_1 d_1$. \uncertain{Soit}, donc, $\xi' \in H^1(k, G/K)$, il
+\uncertain{existe} $\xi \in H^1(k,G)$ tel que $\xi'$ et $d_1(\xi)$
+\uncertain{aient même image} dans $H^1(k, G/KI)$. \uncertain{Compte tenu}
+\ill{} formes \uncertain{tordues}, on peut supposer $\xi' = 0$ [?], donc
+que $v_1(\xi) = 0$, donc \ill{} \ill{} \ill{} \uncertain{provient} d'un
+$\eta \in H^1(k, KI/K) = H^1(k, I/I \cap K)$. Or par hypothèse b),
+\struck{\ill{}} $\eta$ est dans l'image de $H^1(k,I)$, et \ill{} \ill{}.
+\note{la lecture « $\xi' = 0$ » est douteuse ; les lettres grecques de ce
+passage se distinguent mal de celles de la ligne précédente}
+
+\emph{Lemme 4}. Supposons que \ill{} \struck{\ill{}}
+
+c) $H^2(k,K) = 0$ si $K$ groupe \add{(commutatif)} fini radiciel sur $k$.
+\note{« (commutatif) » est ajouté au-dessus de la ligne, dans une accolade}
+
+Alors pour toute \struck{\ill{}} suite exacte de groupes algébriques
+\[
+e \to K \to G \to G' \to e
+\]
+avec $K$ \emph{radiciel} [\uncertain{pas nécessairement commutatif} !], \ill{}
+$H^1(k,G) \to H^1(k,G')$ \emph{surjectif}.
+
+Par dévissage, on peut supposer $K$ « de hauteur 1 ». Soit $\mathfrak{k}$
+\uncertain{son algèbre de}
+
+\page{8}
+
+Lie, donc $G$ \uncertain{opère} sur $\mathfrak{k}$. Soit $\mathfrak{h}$ une
+\uncertain{sous-algèbre} de Cartan [existe toujours], et considérons
+$N_G(\mathfrak{h})$, alors l'argument déjà utilisé \uncertain{montre} que
+$N_G(\mathfrak{h}) . K = G$, donc \ill{} \struck{\ill{}} . \ill{} suite exacte
+\[
+e \to N_K(\mathfrak{h}) \to N_G(\mathfrak{h}) \to G' \to e
+\]
+et \ill{} peut donc supposer que $G$ \emph{normalise} $\mathfrak{h}$.
+Mais alors $K$ normalise $\mathfrak{h}$, \uncertain{donc} $\mathfrak{k}$
+\ill{}, \uncertain{donc} $\mathfrak{h} = \mathfrak{k}$, \uncertain{donc}
+$\mathfrak{k}$ est \emph{nilpotente}. \ill{} $\mathfrak{k}$ \uncertain{se
+divise} \ill{} \ill{}, donc [\ill{} \ill{} \ill{} \ill{}] $K$ aussi
+\uncertain{se divise} en groupes \uncertain{commutatifs} [NB.
+$[\mathfrak{h},\mathfrak{h}]$ est un \ill{} de Lie \ill{} \uncertain{correspondant}
+\ill{} \ill{}]. \ill{} \ill{} $K$ \uncertain{commutatif}, OK.
+\note{$\mathfrak{h}$ et $\mathfrak{k}$ sont écrits en gothique ; le
+$K$ de $N_K(\mathfrak{h})$ est repassé en noir sur un premier indice}
+
+\marginal{\uncertain{puisque} \ill{} \ill{} \uncertain{conjugaison} \ill{}
+\uncertain{sous-algèbres} de Cartan}
+\note{note de la marge gauche, en face de la suite exacte, en cinq lignes
+soulignées ; elle se rattache par un trait à la phrase biffée}
+
+\page{9}
+
+\emph{Lemme 5}. \uncertain{Supposons} que pour tte extension \add{\uncertain{radicielle}}
+\struck{\ill{}} \add{\uncertain{finie}} $k'$ de $k$, on ait
+$\mathrm{Br}(k') = 0$. Alors \ill{} $H^i(k,K) = 0$ pour $i \geq 2$, $K$
+groupe commutatif fini \ill{} $k$. \note{le $K$ de « $H^i(k,K)$ » et le mot
+« Br » sont repassés ; « Br » surcharge une autre lettre}
+
+\uncertain{En effet}, \ill{} \ill{} \uncertain{extension} \ill{}
+$\mathrm{Br}(K') = 0$. \struck{\ill{}} \ill{} \ill{} \ill{} \ill{}
+\uncertain{fini}, \ill{} que $K$ \ill{} \ill{}, \ill{} \ill{} \ill{}
+\uncertain{dévissage}, \ill{}. \struck{\ill{} \ill{} \ill{} \ill{}}
+\note{deux lignes au moins sont biffées ici, dont une interlinéaire ; elles
+ne sont pas lues}
+
+$K$ \ill{} \ill{} \ill{} \ill{} \ill{} \uncertain{soit} \ill{} de t.m.\
+\ill{} $k$, \struck{\uncertain{soit} \ill{} \ill{} \ill{} \ill{}}
+\ill{} \uncertain{isomorphes} : \uncertain{ex.} \ill{} \ill{} \ill{} \ill{}
+\ill{} $\ldots$ \ill{} \ill{}. \ill{} \ill{} \ill{}
+\[
+e \to K \to G \to G' \to e
+\]
+\ill{} $G$, $G'$ \ill{} \uncertain{tores}, et \ill{} \ill{} Tate--Nakayama
+\[
+H^i(k,G) = H^i(k,G') = 0 \quad \text{pour } i > 0
+\]
+[NB. \ill{} \ill{} \ill{} = cohomologie \uncertain{galoisienne} \ill{}]. On en
+conclut $H^i(k,K) = 0$ pour $i \geq 2$.
+
+\uncertain{D'où} le cas \ill{} \ill{} $\alpha_p$ : il est \uncertain{bien
+connu} \ill{} $H^i(k, \alpha_p) = 0$ \uncertain{tt} $i$.
+
+\marginal{\ill{} \ill{} \ill{} $H^i(k,\mathcal{U}) = 0$ \ill{} $i \geq 2$
+\ill{} $\mathcal{U}$ \ill{} \ill{} \ill{} \ill{} \ill{} \ill{}}
+\note{longue note en biais dans la marge gauche, reliée par une flèche au
+bas de l'énoncé du lemme 5 ; le $\mathcal{U}$ est ronde}
+
+\emph{Théorème}. Soit $k$ un \uncertain{corps} \ill{} \ill{}
+$\mathrm{cd}(k) \leq 1$. \struck{\ill{} \ill{} $e \to K \to G \to G'$}
+\add{\uncertain{Alors} \ill{} épim.\ $G \to G'$ de} \ill{} $k$.
+$H^1(k,G) \to H^1(k,G')$ \ill{} \ill{}
+\emph{\uncertain{épimorphisme}}.
+\note{« $G \to G'$ de » est écrit au-dessus d'une ligne biffée qui portait
+une suite exacte}
+
+\page{10}
+
+\marginal{Soit $k$ un corps \ill{} \ill{}}
+\note{au-dessus de l'énoncé, relié à lui par un trait}
+
+\emph{Théorème}. Soit $K$ un \uncertain{groupe algébrique} sur $k$, et $K'$
+une \uncertain{forme} sur $k$, localement isomorphe \ill{} $K$. Alors
+\[
+H^2(k,K') = H^2(k,K')' = \{\ill{}\} \ \text{\uncertain{universellement}}.
+\]
+\note{l'élément de l'ensemble entre accolades est surchargé}
+
+En effet, $K'$ provient d'un \uncertain{élément} de
+$H^1(k, \mathrm{Aut\,Ext}(K))$, \uncertain{qui} \ill{} \ill{}
+\uncertain{précisément} (\uncertain{localement} \ill{} \uncertain{fini} \ill{})
+$\ldots$
+$\mathrm{Aut}(K)$ \ill{} \ill{} \ill{} \ill{} \ill{} \uncertain{algébrique}
+\ill{}) \note{$\mathrm{Aut\,Ext}$ est souligné, avec « Aut » biffé puis
+réécrit ; le second « Aut(K) » est souligné}
+\uncertain{provient} d'un \ill{} de $H^1(k, \mathrm{Aut}(K))$, \ill{}
+\uncertain{prouve} que la \ill{} $K'$ \ill{} \ill{} \ill{} \ill{} $K$,
+[\ill{} \ill{} : $K$], \struck{\ill{} \ill{}} $H^2(k,K')' \neq \emptyset$.
+\struck{$H^2(k,$} \ill{} $H^2(k,K') \neq \emptyset$ \ill{} \ill{} \ill{}
+\uncertain{principal} \ill{} $H^2(k,\mathfrak{Z})$, $\mathfrak{Z}$ le
+\uncertain{centre} de $K'$ ; \ill{} \ill{} $K$, \ill{} \ill{} \ill{} \ill{}
+$H^2(k,\mathfrak{Z}) = 0$. \ill{} $H^2(k,K')$ \ill{} : \ill{} \ill{}, \ill{}
+$H^2(k,K')'$ \ill{} [\ill{} \ill{} \ill{} \ill{} \ill{} \ill{}].
+\note{le $\mathfrak{Z}$ du centre est une lettre gothique en forme de 3,
+transcrite une fois pour toutes ainsi}
+
+\page{11}
+
+Noyau $K$ sur le site $X$. Question : $K$ provient-il d'un faisceau en
+groupes, i.e.\ $c(K) \in H^2(X, \Pi(K))$ est-il un
+\struck{\ill{}} $H^2(X,\Pi(K))'$ ???
+
+\struck{Supposons que l'on puisse \ill{} \ill{} \ill{}}
+
+À un noyau $K$, est associé le \emph{faisceau} $\mathcal{V}(K)$ des
+\emph{classes de sous-groupes de $K$}. \struck{Supposons \ill{} \ill{}
+\ill{} $\mathcal{V}(K) \to \mathcal{V}(K)$, \ill{} \ill{}}
+\struck{\ill{} \ill{} \ill{} \ill{} \ill{} \ill{} \ill{} \ill{} $\mathcal{V}(K)$.}
+\struck{Alors on peut \ill{} \ill{} \ill{} \ill{} \ill{} $\mathcal{V}(K)$,}
+\note{un passage de trois lignes est biffé, avec des boucles de renvoi ; au-dessus,
+une insertion elle aussi biffée porte « $\mathcal{V}(\varphi)$ »}
+Chaque fois \uncertain{qu'on a} un \ill{} de noyaux $K_0 \to K$
+\struck{\ill{} « injectif »}, il définit une section de $\mathcal{V}(K)$
+[noyau \uncertain{image} \ldots]
+
+\struck{D'ailleurs} Mais une section de $\mathcal{V}(K)$ ne \uncertain{provient}
+en général pas d'un sous-noyau de $K$, \uncertain{sauf} celles qui sont
+stables par l'opération $\mathrm{Nor}$ [« \uncertain{Normalisateur} »]. Plus
+généralement, si $\varphi$ est une section de $\mathcal{V}(K)$, alors
+$\mathrm{Nor}(\varphi)$ provient d'un sous-noyau de $K$, soit
+$\underline{\mathrm{Nor}}(\varphi)$, \uncertain{exemple} $\mathfrak{Z}(K) =
+\underline{\mathrm{Nor}}(e)$.
+
+\struck{Supposons que} \ill{} \ill{}, \ill{} \uncertain{trouve} une
+\uncertain{classe} \uncertain{canonique} \ill{} $H^2(X, \underline{\mathrm{Nor}}(\varphi))$
+\ill{} l'image \ill{} $H^2(X, \Pi(K))$ \ill{} \ill{} $c(K)$ :
+\struck{\ill{}} \ill{} \ill{} \ill{} \ill{} \ill{} catégorie \uncertain{locale}
+
+\page{12}
+
+2-catégorie \uncertain{des} faisceaux en groupes, \uncertain{munis} d'un
+\ill{} de \emph{noyaux} \uncertain{avec} $K$, $\pm$ d'un \uncertain{sous-faisceau}
+en groupes \ill{} \ill{} \ill{} \uncertain{indiqués} par $\varphi$.
+
+Si $c(K,\varphi) \in H^2(X, \underline{\mathrm{Nor}}(\varphi))'$, alors
+$c(K) \in H^2(X, \Pi(K))'$ !
+
+[Principe de \uncertain{réduction} du \ill{}]
+
+Autre principe de \uncertain{réduction}. Supposons que \ill{} \ill{}
+\uncertain{un} \uncertain{homom.}\ de noyaux \add{« injectif »}
+$K \to K'$, et \ill{} \ill{} \ill{} \ill{} $K' = \widetilde{F'}$, \ill{}
+$F'$ \ill{} un faisceau en groupes.
+
+\struck{Alors il existe} \ill{} \uncertain{Considérons} la
+\uncertain{catégorie locale} des faisceaux en groupes $F$, \uncertain{munis}
+d'un \struck{\ill{}} $F \to F'$, et d'un \uncertain{isom.}\
+$\widetilde{F} \simeq K$, compatibles \ill{} $K \to K'$ et
+$K' \simeq \widetilde{F'}$. C'est une catégorie \ill{}, et correspond à un
+noyau $K''$ \ill{} \ill{} \uncertain{lié} \ill{} \ill{} suite exacte
+\[
+e \to K'' \to \Pi(K) \to \Pi(K') \to e .
+\]
+\struck{Alors} Considérons la classe $c' \in H^2(X, K'')$. Son image dans
+\struck{$\Pi(K)$} $H^2(X, \Pi(K))$ est définie et est $c(K)$, donc si
+$c' \in H^2(X,K'')'$, alors $c \in H^2(X, \Pi(K))'$.
+\note{$\Pi(K)$ est écrit avec un $\Pi$ majuscule repassé, qu'on garde
+tel quel ; la lecture reste douteuse. De même le $\mathcal{V}$ du faisceau
+des classes de sous-groupes}
+
+\page{13}
+
+$K$ noyau algébrique sur $k$ corps de \uncertain{Tsen}. On veut prouver
+$H^2(k,K) = H^2(k,K)' \simeq$ un élément [résultera \uncertain{formellement}
+de $\underline{\underline{H^2(k,K)' \neq \emptyset}}$, compte tenu que
+$H^2(k, \mathfrak{Z}(K)) = 0$ !] \struck{\ill{} \ill{}}
+\struck{\ill{} \ill{} $K$, \ill{} \ill{} \ill{}}
+
+a) $\dim K = 0$. On raisonne par récurrence sur le degré de $K$. Trivial si
+est égal à $1$. S'il est $>1$, par dévissage \add{(2e principe de
+réduction)}, on est ramené aux cas suivants
+\begin{itemize}
+  \item[(i)] $K$ étale et on \uncertain{est dans} \ill{} cas
+  \item[(ii)] $K$ radiciel et \uncertain{indécomposable} par dévissage
+\end{itemize}
+\marginal{$K$ \struck{\ill{}} \ill{} (\uncertain{trivial}) $[K,K] = K$ en
+particulier $K$ \uncertain{sans} centre.}
+\note{accolade à droite du cas (i), en marge}
+$K$ radiciel de hauteur $1$ et $[K,K] = 1$ en particulier $K$ \uncertain{sans
+centre}.
+
+Le cas (i) correspond à une \uncertain{homom.}\ de $\pi$ [groupe de Galois
+top.\ de $\bar k/k$] dans $\mathrm{Autext}(A)$, $A$ groupe fini
+\uncertain{convenable}. On \uncertain{sait} qu'il se \uncertain{remonte} à un
+\uncertain{homom.}\ $\pi \to \mathrm{Aut}(A)$, [Schreier, Serre] donc
+\ill{} \ill{} \ldots
+
+Dans le cas (ii), on considère les sections $\varphi$ de $\mathcal{V}(K)$
+correspondant aux « \uncertain{s.-groupes} de Cartan \add{infinitésimaux} »
+\struck{\ill{} \ill{}} qui satisfont $\mathrm{Nor}(\varphi) = \varphi$.
+\struck{\ill{}} Par le principe de réduction $1$, on est
+
+\page{14}
+
+ramené au cas où $K$ correspond à des \uncertain{p-algèbres} de Lie
+nilpotentes, puis, par le principe 2, au cas où $K$ est commutatif, \ill{}
+\uncertain{OK}.
+
+b) $\dim K > 0$. Par le principe \struck{1} \ill{} on est ramené
+(\uncertain{grâce aux} \uncertain{commutateurs}) au cas où $K$ est soit
+commutatif [\uncertain{alors} OK], soit $K = [K,K]$, qui implique $K$
+\uncertain{affine}. \struck{\ill{}} Par le principe [\uncertain{divisant}
+par un noyau de Frobenius, et utilisant le cas a)] on est ramené au cas où
+$K$ est \uncertain{simple}$/k$.
+
+\struck{Enfin, si \ill{} \ill{}, on peut \ill{} \ill{}}
+Prenant alors, la section $\varphi$ de $\mathcal{V}(K)$ correspondant aux
+tores maximaux, on \struck{\ill{}} \ill{} ramené \add{par le principe 1} au
+cas où le tore maximal est \struck{\ill{}} invariant, donc par le principe 2
+aux \struck{deux} \add{trois} cas suivants : a) $K$ \uncertain{fini}, déjà
+traité b) $K$ \uncertain{unipotent} connexe
+\struck{\ill{} \ill{} \ill{} \ill{} \ill{} \ill{} \ill{} \ill{}}
+\struck{\ill{}, \ill{} \ill{} \ill{},} \ill{}
+Alors on est ramené par dévissage \uncertain{par} \uncertain{commutateurs},
+au cas commutatif, qui est OK.
+\note{deux lignes biffées, reliées par des traits de renvoi, précèdent
+« Alors on est ramené » ; un cadre vide dans la marge gauche les accompagne.
+Le troisième cas annoncé n'est pas lu}
+
+\subsection*{Cas non \uncertain{semi-simple}}
+
+\note{inscrit en haut à droite d'un feuillet par ailleurs blanc (page 15),
+de sa main, sous une ligne biffée (« Égalité \ill{} \ill{} ») ; le feuillet ne
+reçoit pas de numéro de page. « semi- » est écrit avec le signe ½, son abréviation habituelle. Le texte continue :}
+\marginal{Question de rationalité du radical, définition de la « variété des
+drapeaux » etc.}
+
+\page{16}
+
+Soient $a \in k$, et $G$ le groupe
+\[
+G = \left\lbrace
+\begin{pmatrix} x & ay & & \\ y & x & & \\ & & u & v \\ & & w & z \end{pmatrix}
+\;\middle|\;
+\begin{vmatrix} x & ay \\ y & x \end{vmatrix}
+= \begin{vmatrix} u & v \\ w & z \end{vmatrix} \neq 0
+\right\rbrace .
+\]
+\[
+\begin{pmatrix} x & ay & & \\ y & x & & \\ & & u & v \\ & & w & z \end{pmatrix}
+\rightsquigarrow
+\begin{pmatrix} u & v \\ w & z \end{pmatrix} \big/ (\text{centre})
+\]
+est un homom.\ sur $GP(2)$ dont le noyau est
+\[
+Z = \left\lbrace
+\begin{pmatrix} x & ay & & \\ y & x & & \\ & & u & 0 \\ & & 0 & u \end{pmatrix}
+\;\middle|\;
+x^2 - ay^2 = u^2 \neq 0
+\right\rbrace
+= \text{centre de } G = \text{radical de } G .
+\]
+$G$ est déf.\ sur $k$, mais si caract.\ $= 2$, $a \notin k^2$, $Z$ ne
+l'est pas.
+
+$\exists$ exemples analogues pour chaque caract.\ $p \neq 0$.
+\note{fiche blanche de petit format, écrite d'une main posée, plus ronde
+que celle des pages voisines ; les blancs des matrices sont des zéros sur
+la page. « $GP(2)$ » est lu tel quel}
+
+\page{17}
+
+\marginal{Borel \uncertain{est} \uncertain{son propre} normalisateur}
+\note{encadré en haut de la page}
+
+(i) $B$ normalisateur de $\mathfrak{L}$ $\iff$ (ii) $\mathfrak{L}$
+normalisateur de $\mathfrak{L}$ $\iff$ (iii)
+$\mathrm{Drap}(G) \to \mathrm{Grass}(\mathfrak{g})$ \uncertain{immersion}
+\note{la troisième équivalence est une flèche double tracée en biais de
+(i)--(ii) vers (iii). Sous $\mathrm{Drap}(G)$, « $= G/B$ » ; sous
+$\mathrm{Grass}(\mathfrak{g})$, « $\supset G/\mathrm{Nor}_G(\mathfrak{L})$ »,
+relié par un trait à $\mathrm{Drap}(G)$. $\mathfrak{L}$ est l'algèbre de
+Lie de $B$, écrite en ronde}
+
+(i) $\Rightarrow$ (ii) trivial, car \add{pour \uncertain{grp.}\ \uncertain{alg.}\ $B$}
+$\mathrm{Lie}\, N_G(B) = \mathrm{Nor}_{\mathfrak{g}} \mathfrak{L}$.
+
+(ii) $\Rightarrow$ (i), on \uncertain{sait} $B'$ le normalisateur $B' \supset B$,
+s'il \uncertain{a} \ill{} algèbre de Lie alors $B = B'^0$, donc $B'$
+normalise $B$ \uncertain{connexe}, donc $B = B'$ \uncertain{connexe}, donc
+$B = B'$.
+
+\struck{(iii) $\Leftarrow$ (ii)} \struck{\ill{} \ill{}} \add{trivial} \ill{}
+\uncertain{définitions} \ill{} \ill{}
+\note{la suite est prise dans un cadre et barrée de deux longues diagonales ;
+elle se lit en partie}
+\ill{} \uncertain{tores} maximaux \uncertain{localisés} \ill{} $B$ \ill{}
+$\mathfrak{L}$,
+\[
+\mathfrak{g}/\mathfrak{L} \longrightarrow \mathrm{Grass}(\mathfrak{g})
+\ (\ill{}) , \qquad \check{H}\ldots(\mathfrak{L}, \mathfrak{g}/\mathfrak{L})
+\]
+\ill{} $X$ \ill{} $D_X(\mathfrak{L})$, \struck{\ill{} \ill{}} \ill{}
+\uncertain{est égal} à $\mathrm{Nor}_{\mathfrak{g}}(\mathfrak{L})/\mathfrak{L}$.
+Donc (iii) signifie que $\mathrm{Drap}(G) \to \mathrm{Grass}(\mathfrak{g})$
+\uncertain{est} \ill{} \uncertain{vérifiée}, \struck{\ill{}} il en résulte
+que \ill{} \ill{}, \ill{} \ill{} normalisateur \ill{}
+
+Ces conditions ne sont pas \uncertain{toujours} vérifiées, \uncertain{par ex.}\
+$SL(2)$ en car.\ $2$ les \uncertain{met} en défaut.
+
+\page{18}
+
+\marginal{\uncertain{pas} \ill{} \uncertain{fermé}}
+\note{en haut à droite, relié par un trait à « $K \subset G$ »}
+
+\emph{Corollaire}. Dans le cas où $K \subset G$, $G$ de t.\ multiplicatif
+de t.f.\ sur $S$, [$\exists$ \ill{} tel que $K \subset {}_nG$, où ${}_nG$ est
+fini sur $S$] $K$ est fini sur $S$.
+
+Donc si \ill{} \ill{} \ill{} \ill{} \ill{} \ill{} \uncertain{résidu} \ill{}
+\ill{} kif kif \ill{} \ill{} \ill{} Nakayama !
+
+\note{la page est barrée de deux longues diagonales}
+
+Reste : \uncertain{prouver} le lemme \ill{} \ill{} \ill{} \ill{}
+\uncertain{sous-groupe} \ill{} \ill{} \ill{}. On utilise le
+
+\emph{Lemme de Chevalley}. Soit $G$ groupe \add{\uncertain{de t.f.}}
+\uncertain{affine} sur $k$, $H$ ss-groupe de $G$. Alors $\exists$ \uncertain{repr.}\
+linéaire de $G$ sur un \uncertain{espace} $V$, et un $x \in V^{*}$, tel que
+$H$ soit le stabilisateur de $\bar x$ dans le \uncertain{proj.}\
+correspondant \ldots
+
+\page{19}
+
+1) $B$ normalisateur de $\mathfrak{L}$ $\iff$ $\mathfrak{L}$ normalisateur de
+$\mathfrak{L}$ $\iff$ ($\mathrm{Drap}(G) \to \mathrm{Grass}(\mathfrak{g})$)
+monomorphisme [faux par \uncertain{ex.}\ pour $G$ \uncertain{semi-simple}
+\uncertain{non} \ill{} \uncertain{(excepté} $Gl(2,k)$, $k$ de car.\ $2$)]
+
+\struck{b) $B$ \ill{} \ill{} \ill{} $\mathfrak{L}$}
+
+1') $\mathrm{Drap}(G) \to \mathrm{Grass}(\mathfrak{g})$ injectif ??
+\marginal{\uncertain{pas} radiciel}
+C'est vrai pour $G = Sl(2)$ \struck{\ill{}}, mais \uncertain{moins}
+\uncertain{intéressant} \ill{} \ill{} \ill{} \ill{} monomorphisme
+
+2) $T \subset G$ \add{\uncertain{tore maximal}} donné, $\mathrm{Drap}_T(G)$
+schéma des Borels \uncertain{contenant} $T$, est-il vrai que
+$\mathrm{Drap}_T(G) \to \mathrm{Grass}(\mathfrak{g})$ est un
+\emph{monomorphisme} ?
+\note{« tore maximal » est encerclé au-dessus de « donné » ; la question
+est entourée d'une longue boucle qui continue sur la ligne suivante}
+\struck{Comme} Il suffit \ill{} \ill{} \ill{} \ill{} $k$] que \ill{} \ill{}
+\uncertain{fini} \uncertain{soit} \emph{injectif}. \ill{} \ill{}, que
+$\mathrm{Drap}(G) \to \mathrm{Grass}(\mathfrak{g})$ \uncertain{soit}
+\ill{} \ill{}
+
+\ill{}, \struck{si $B \supset T$} On est ramené au cas $G$
+\uncertain{semi-simple}, et \ill{} \ill{} \uncertain{certain} que
+$B$ \uncertain{est} \struck{\ill{}} $T . \prod_{\alpha \in S} P_\alpha$, où
+\add{les} \struck{\ill{}} $P_\alpha$ \struck{\ill{}} \uncertain{correspondant}
+\struck{\ill{}} \ill{} $P_\alpha$ \ill{} \ill{} \ill{}
+$\mathfrak{g}_\alpha \subset \mathfrak{L}$, \ill{} déterminés par $B$.
+
+\page{20}
+
+\emph{Théorème}. $G$ \ill{} \uncertain{réductif}, $C$ un sous-groupe de Cartan,
+$H$ un \uncertain{sous-schéma} en groupes de $G$, simple$/S$, à fibres
+connexes, \emph{contenant $C$}, $\mathfrak{h}$ \add{$\subset \mathfrak{g}$}
+\struck{\ill{}} sa \uncertain{sous-alg.}\ de Lie. Alors $H$ est déterminé de
+façon unique par $C$ et $\mathfrak{h}$ et les conditions
+\uncertain{précédentes}, i.e.\ tout autre \add{ss-}groupe $H_1$ satisfaisant
+aux conditions et tel que $\mathfrak{h}_1 = \mathfrak{h}$, est égal à $H$.
+
+\struck{Lorsque les} Soit $T$ le tore maximal de $C$. \ill{} les
+\uncertain{conditions} \uncertain{infinitésimales} [\ill{} un
+$\mathfrak{t} = \mathrm{Lie}(T)$] de $T$ opérant sur $\mathfrak{g}/\mathfrak{h}$
+\ill{} $\neq 0$ sur chaque fibre, \ill{} \ill{} que \ill{} chaque fibre
+$\mathfrak{h}$ est \uncertain{son propre} normalisateur, alors par
+Exposé \ill{} Demazure, il s'ensuit que $H = \mathrm{Nor}_G(\mathfrak{h})^0$,
+\uncertain{et} \ill{} \uncertain{rigide}. Dans le cas \uncertain{général}
+\uncertain{soit} $\mathfrak{Z}$ le centre réductif de $G$, \uncertain{contenu}
+dans $T$, \uncertain{donc} dans $H$. \uncertain{Ceci} \ill{} : divisant par
+$\mathfrak{Z}$, \struck{\ill{}} on est ramené à la situation où
+$\mathfrak{Z} = 0$. Alors $\mathfrak{t}$ opère \uncertain{fidèlement}
+\note{la page est barrée de deux longues diagonales ; la phrase s'arrête au
+bas du feuillet et continue dans le lot suivant}
+
+\end{document}
