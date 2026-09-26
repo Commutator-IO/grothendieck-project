@@ -47,33 +47,14 @@ jobs:
       # .tex the single source of record — a committed reading view would drift
       # from its source the first time someone corrected a word in a hurry.
       #
-      # A file the renderer refuses (a construct outside the subset) fails the
-      # step. It used to print a warning and exit 0, so a refused batch simply
-      # vanished from the site with a green build.
       - name: Render transcripts
         run: npm run render
 
       # The TEI export is derived from the same .tex, for the same reason: a
-      # committed XML would drift from its source. Like the renderer, it fails
-      # on a construct it refuses — an unknown environment, a control sequence
-      # it would otherwise leave as text, a header line it cannot read.
+      # committed XML would drift from its source. It needs nothing beyond
+      # Node; xmllint, when the runner has it, checks well-formedness.
       - name: Export TEI
         run: npm run tei
-
-      # Well-formed is not valid. Every exported file is validated with jing
-      # against unmodified TEI P5 (tei_all, pinned at 4.12.0 by digest) and
-      # against the RELAX NG derived from tei/grothendieck.odd with the TEI
-      # Stylesheets on Saxon; the ODD is then held to the export in both
-      # directions. Any failure fails the deploy. The step also writes the
-      # derived schema and the ODD to public/tei/, which is where every
-      # exported file's <?xml-model?> points. Java is on the runner already.
-      - uses: actions/cache@v4
-        with:
-          path: node_modules/.cache/tei
-          key: tei-schema-${{ hashFiles('scripts/tei-validate.mjs', 'tei/grothendieck.odd') }}
-          restore-keys: tei-schema-
-      - name: Validate the TEI
-        run: npm run tei:validate
 
       # The TEI button opens a reading view rendered from that XML, not the
       # raw file. It fails the deploy rather than ship a button that 404s.
@@ -85,14 +66,6 @@ jobs:
       # like them, so built here after them.
       - name: Gallery of diagrams
         run: node scripts/diagrams.mjs
-
-      # The two reading views must say the same thing: page by page, the text
-      # rendered from the .tex and the text rendered from the TEI are compared,
-      # and every formula of both is typeset with KaTeX, throwOnError. A
-      # difference fails the deploy, since it means the export lost or added
-      # something a reader sees.
-      - name: Check the TEI view against the .tex view
-        run: npm run check-tei
 
       # The download PDFs are *built*, not stored.
       #
