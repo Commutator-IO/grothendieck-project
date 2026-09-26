@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { Footer, Header } from './components/Frame.tsx';
 import handRaw from './content/hand.json';
+import quotesRaw from './content/quotes.json';
 
 /**
  * The hand, measured: what the transcriptions could read, what they could
@@ -70,6 +71,95 @@ function H2({ id, children }: { id: string; children: React.ReactNode }) {
     <h2 id={id} className="scroll-mt-16 text-[11px] font-bold uppercase tracking-[0.12em] text-ink-400">
       {children}
     </h2>
+  );
+}
+
+/* ---------- 0. in his words ---------- */
+
+interface Quote {
+  folder: string;
+  batch: number;
+  page: string;
+  lang: string;
+  text: string;
+  en: string | null;
+  theme: Theme;
+  context: string;
+  weight: number;
+}
+type Theme = 'working' | 'understanding' | 'error' | 'vision' | 'others' | 'self' | 'world';
+// The heaviest first, then in shelfmark order.
+const QUOTES = [...(quotesRaw as unknown as { quotes: Quote[] }).quotes].sort((a, b) => b.weight - a.weight);
+const THEMES: [Theme, string][] = [
+  ['working', 'At work'],
+  ['error', 'Getting it wrong'],
+  ['understanding', 'Understanding'],
+  ['vision', 'Seeing ahead'],
+  ['others', 'On others’ work'],
+  ['self', 'On himself'],
+  ['world', 'Teaching, and the rest'],
+];
+
+/**
+ * What he says, rather than what he proves: passages in his own words with
+ * little or no mathematics, chosen by reading and each sent to its page. The
+ * choice is a reader's; the words are the transcription's, unchecked.
+ */
+function InHisWords() {
+  const [theme, setTheme] = useState<Theme | 'all'>('all');
+  const [english, setEnglish] = useState(false);
+  const [all, setAll] = useState(false);
+  const chosen = theme === 'all' ? QUOTES : QUOTES.filter((q) => q.theme === theme);
+  // A dozen at first: the section sits above the counts, and should not bury them.
+  const list = all ? chosen : chosen.slice(0, 12);
+  const chip = (on: boolean) =>
+    `rounded-full border px-2.5 py-0.5 ${on ? 'border-ink-900 bg-ink-900 text-white' : 'border-ink-200 text-ink-600 hover:bg-ink-100'}`;
+  return (
+    <section className="mt-12">
+      <H2 id="words">In his words</H2>
+      <p className="mt-2 max-w-[44em] text-[13.5px] leading-relaxed text-ink-600">
+        {QUOTES.length} passages where the notes stop proving and say something — about the work,
+        his mistakes, what he hoped for, what he made of others’ work. Chosen by reading, from{' '}
+        {new Set(QUOTES.map((q) => q.folder)).size} folders; letters already printed in the
+        correspondence with Serre are left out, and so are texts in other hands. The words are the
+        machine transcription’s: each links to its page, beside Montpellier’s facsimile.
+      </p>
+      <div className="mt-3 flex flex-wrap items-center gap-1.5 text-[12px]">
+        <button type="button" onClick={() => setTheme('all')} aria-pressed={theme === 'all'} className={chip(theme === 'all')}>
+          all
+        </button>
+        {THEMES.map(([k, label]) => (
+          <button key={k} type="button" onClick={() => setTheme(k)} aria-pressed={theme === k} className={chip(theme === k)}>
+            {label}
+          </button>
+        ))}
+        <label className="ml-auto flex items-center gap-1.5 text-ink-500">
+          <input type="checkbox" checked={english} onChange={(e) => setEnglish(e.target.checked)} style={{ accentColor: GREEN }} />
+          English translation
+        </label>
+      </div>
+      <div className="mt-4 grid gap-3 md:grid-cols-2">
+        {list.map((q) => (
+          <figure key={`${q.folder}-${q.batch}-${q.page}-${q.text.slice(0, 16)}`} className="card flex flex-col px-4 py-3">
+            <blockquote lang={english && q.en ? 'en' : q.lang} className="titre text-[15px] leading-relaxed text-ink-900">
+              « {english && q.en ? q.en : q.text} »
+            </blockquote>
+            {english && q.en && <p className="mt-1 text-[11.5px] text-ink-400">Translated from the {LANG[q.lang] ?? q.lang}.</p>}
+            <figcaption className="mt-auto pt-2 text-[12px] leading-snug text-ink-500">
+              <a href={`/#${q.folder}/${q.batch}/p${encodeURIComponent(q.page)}`} className="font-semibold text-ink-800 hover:text-brand-700">
+                n° {q.folder} · p. {q.page}
+              </a>{' '}
+              — {q.context}
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+      {chosen.length > list.length && (
+        <button type="button" onClick={() => setAll(true)} className="mt-3 text-[12.5px] font-medium text-brand-600 hover:text-brand-700">
+          Show all {chosen.length} ↓
+        </button>
+      )}
+    </section>
   );
 }
 
@@ -456,6 +546,7 @@ export function HandPage() {
           <Kpi value={n(t.drawings)} label="drawings" help="figures described in a note, not redrawn" />
         </div>
 
+        <InHisWords />
         <LegibilityOverTime />
         <Multiples />
         <FolderTable />
