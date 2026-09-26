@@ -1,0 +1,556 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 46, batch 2 (pages 21-40).
+% Established from the facsimile archives/batches/46/batch-02.pdf (cut from a
+% copy of 46.pdf fetched through the project relay,
+% https://grothendieck-relay.onrender.com/source/46.pdf; PDF page k =
+% archivists' page 20+k, no cover sheet), per the skill transcribe-grothendieck.
+% The folder is ninety-four pages in five batches; this is the second.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-09-26 — first pass, unchecked against the pages by a human.
+%
+% Pages skipped, and why:
+%   - 22: a stencilled (blue) typescript, « CHAPITRE II. STRUCTURES
+%     UNIFORMES », scanned upside down, the other face of the leaf of page 21;
+%     unrelated to the mathematics in hand and carrying no ink of his.
+%   - 34 and 36: two typed leaves (the second numbered « 11 ») on the
+%     restriction maps H^n(X,F) -> H^n(Y,h(F)) for torsion sheaves, with
+%     their arrows left blank for inking; they are the other faces of the
+%     leaves of pages 33 and 35 (the typing shows through), i.e. scrap paper
+%     for the Frobenius notes. No ink of his on them; skipped as unrelated
+%     versos, per the brief. Their text was not identified against a
+%     published source in this pass.
+%   - 38: back of a folder (the tan sheet of page 37); its only mark is the
+%     word « Steinberg », upside down at the foot; recorded in a \note with
+%     page 37's cover.
+% Covers, no \page marker, words as headings with a \note: 27 (« Frobeniuseries
+% pour faisceaux étales »), 37 (inscription cancelled), 39 (« Brauer-Severi.
+% Dans Chap VI »).
+%
+% Typescript (the folder's « tapuscrit (s.d.) »): pages 23-26, « Définition du
+% morphisme Verschiebung », typed pages [1], -2, -3, -4. Decision: NOT his. The
+% text is a letter-note addressed to him in the second person (« Je ne sais
+% pas exactement ce que tu veux que je définisse. Cependant, comme tu affirmes
+% avoir perdu mon tapis de l'année dernière, je vais essayer de te le
+% revendre ») by a correspondent who is not named on these pages; it answers a
+% request, which is exactly the request formulated on page 21 (margin: define
+% the « Verschiebung » V_S(X)). The symbols (tensor signs, arrowheads, Delta)
+% are inked in blue into blanks left by the typewriter, as the typist-author
+% would; nothing on the four pages is identifiably an annotation of his. The
+% author is not guessed. Each page therefore gets one French \note (content
+% identified, no re-setting), per the brief.
+%
+% Pages summarised: none of his. The typescript pages 23-26 are described,
+% not transcribed (see above). Page 28 (cancelled lines on a folder) is a
+% \page with a single \note.
+%
+% His pagination: none on the manuscript leaves. The typescript pages carry
+% « -2 », « -3 », « -4 » at top right.
+%
+% What the batch is about. Page 21 (continuing the Frobenius notes of batch 1,
+% though not the local question on which page 20 breaks off): a problem sheet
+% — define for X over S of char. p a Cartier-type operation on Omega^1_{X/S}
+% transposed to D -> D^p on S-derivations, compatible with base change; in the
+% margin, b) define a « Verschiebung » V_S(X). Pages 23-26: a colleague's
+% typed answer defining V for a commutative affine k-group via the symmetric
+% tensors Sigma^p A, with F.V = p and V.F = p. Pages 29-33, under the cover
+% « Frobeniuseries pour faisceaux étales »: the relative Frobenius of an étale
+% sheaf, Fr_{F/X} : Fr_X^*(F) -> F (and its adjoint Fr_{X*}(F) -> F), built
+% from U -> U^{(p/X)} for U étale over X; Prop. 1) Fr_{F/X} is an isomorphism,
+% functorial in X, F and compatible with base change; 2) characterisation of
+% Frobenius-type maps by these conditions (for X = Spec F_p, Fr_X = id);
+% « Théorème de trivialité cohomologique du Frobenius absolu »: Fr acts as the
+% identity on H^0, H^1, and on RΓ_X of complexes in D(A); a formal proof via
+% the fact that Fr_X^* on the étale topos is canonically isomorphic to the
+% identity functor. Page 35 revisits the argument and notes its failure
+% points. Page 40, under the cover « Brauer-Severi »: definition of a
+% Brauer-Severi scheme P/S, Propositions 1-2 (smoothness, projectivity; the
+% invertible sheaf omega^{-1}; P a projective bundle iff an invertible sheaf of
+% relative degree 1 exists), a section implies projective bundle.
+%
+% Notation fixed once for the batch, as in batch 1: his double-struck F with
+% r is set \mathrm{Fr} (Fr_X absolute, Fr_{X'/X} relative, Fr_{F/X} for a
+% sheaf F); X^{(p/X)}, U^{(p/X)} as written; underlined sheaves
+% (\underline{\Omega}, \underline{\omega}) keep their underline in math.
+% The étale topos is X_{\text{ét}}, with a tilde where he writes one.
+%
+% Readings to check first: the whole of page 21 (fast, heavily worked); the
+% margins of pages 21, 31 and 33; the cancelled top of page 35; page 32's
+% « Corollaire 2 » line; page 40's margin.
+
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{46}
+\batch{2}
+\pages{21}{40}
+\dating{[vers 1966-vers 1972]}
+\watermark{Édition de démonstration}
+\foldertitle{Schémas en groupes et fibrés principau[x] (Divers) : notes manuscrites (s.d.), tapuscrit (s.d.)}
+
+\begin{document}
+
+\page{21}
+
+\emph{Pb} \quad $X$ sur $S$ de car.\ $p > 0$.
+
+a) Définir une opération \uncertain{« de Cartier »}\ldots\ \uncertain{$p$-linéaire}
+\[
+  \underline{\Omega}^1_{X/S} \longrightarrow\ ?\ \struck{\ill{}}(\underline{\Omega}^1_{X/S})
+\]
+qui soit transposée dans un sens convenable \ill{} de
+$\struck{\ill{}}\ \partial \mapsto \partial^{p}$ sur les $S$-dérivations, et
+compatible avec les \uncertain{changements} de base
+
+\begin{tikzcd}[column sep=small, row sep=small]
+X \arrow[d] & X' \arrow[l] \arrow[d] \\
+S & S' \arrow[l]
+\end{tikzcd}
+
+Il faudrait que lorsque \ill{} \ill{} \ill{} \ill{} formule, on trouve
+\uncertain{quelque} chose dans \struck{\ill{}}
+$\boxed{\underline{\Omega}^1_{X/S}{}^{(p)}}$ \uncertain{Symétrisons}
+(\uncertain{Frobeniusienne} de $\underline{\Omega}^1_{X/S}$), ce qui
+\uncertain{est} l'opération de Cartier. Si les $\omega_i$, $d_j$ sont duales, \ill{}
+\ill{} \ill{} \ill{} par $d$, $[\,,\,]$, et \ill{} \ill{} relation
+$\langle \omega_i, d_j \rangle = \ldots$ \ill{} soit : \ill{} \ill{}
+\[
+  \boxed{\mathrm{Symm}^{p}(\underline{\Omega}^1_{X/S})}\ .
+\]
+
+b) \uncertain{Montrer} \ill{} \ill{} \ill{} \ill{} \uncertain{infinitésimaux} \ill{}
+\ill{} $1$ sur $S$ \ill{} \ill{} $\Omega$ \uncertain{qu.\ coh.}\ sur $S$, avec
+\[
+  C : \Omega \to \mathrm{Symm}^{p}_{\mathcal{O}_S}(\Omega), \qquad
+  d_1 : \Omega \to {\textstyle\bigwedge}^{2}_{\mathcal{O}_S} \Omega
+\]
+\marginal{\ill{} \ill{} \uncertain{structures analogues} \ill{}}
+
+\marginal{\ill{} \uncertain{identification} \ill{} $d_1 = 0$ \ldots\
+« \uncertain{Verschiebung} » $V_S(X) : P_S(G) \to G$ \ldots\ \ill{} groupe
+\uncertain{commutatif} $G$ sur $S$.}
+\note{la page est écrite vite, à l'encre noire, sur le verso d'une feuille
+ronéotypée ; la moitié des mots de liaison ne se lit pas. La note
+« Verschiebung » est écrite verticalement dans la marge gauche, en trois lignes
+très effacées, avec un « b) » ; la notation $P_S$ est celle de la page 11. La
+demande de définir la Verschiebung est celle à laquelle répond le tapuscrit
+des pages 23 à 26}
+
+\page{23}
+
+\note{Tapuscrit d'une autre main, « Définition du morphisme Verschiebung »,
+adressé à Grothendieck au tutoiement (« Je ne sais pas exactement ce que tu
+veux que je définisse. Cependant, comme tu affirmes avoir perdu mon tapis de
+l'année dernière, je vais essayer de te le revendre ») ; l'auteur n'est pas
+nommé. Page 1 : base le spectre d'un corps $k$ de caractéristique $p > 0$ ; cas
+d'un $k$-groupe commutatif affine $G$ d'anneau $A$ ; notations $A^{(p)}$,
+$F : A^{(p)} \to A$, $G^{(p)}$, $\otimes^{p}A$, $\Delta^{p}$, $m^{p}$. Les
+symboles ($\otimes$, $\Delta$, pointes de flèches) sont ajoutés à l'encre bleue
+dans les blancs laissés par la machine ; aucune annotation de sa main}
+
+\page{24}
+
+\note{Tapuscrit, suite (p.~-2) : $\Sigma^{p}A$ (tenseurs symétriques),
+$S^{p}A$ (image dans l'algèbre symétrique), les applications
+$i : \Sigma^{p}A \to \otimes^{p}A$, $q : \otimes^{p}A \to S^{p}A$,
+$b : S^{p}A \to A$, $r : \Sigma^{p}A \to A^{(p)}$ et
+$j : A^{(p)} \to S^{p}A$, calculées sur une base de $A$. Aucune annotation de
+sa main}
+
+\page{25}
+
+\note{Tapuscrit, suite (p.~-3) : $q.i = j.r$ (renvoi à Serre, \emph{Groupes
+algébriques et corps de classes}, preuve du lemme 11, p.~62) ; diagramme
+commutatif d'algèbres ; l'homomorphisme $\underline{r}$ ; définition de la
+Verschiebung $V$ par $F.V = \underline{p}$ ; $F$ et $V$ s'échangent dans la
+dualité de Cartier ; passage aux variétés algébriques. Aucune annotation de sa
+main}
+
+\page{26}
+
+\note{Tapuscrit, fin (p.~-4) : diagramme
+$G \to \Sigma^{p}G \to G^{(p)}$ (diagonale, symétrisation) ; « Le diagramme
+ci-dessus est donc défini pour tout groupe algébrique commutatif, affine ou
+non. On posera donc $V = a.r$ et on aura $V.F = p$. » Aucune annotation de sa
+main}
+
+\section*{Frobeniuseries pour faisceaux étales}
+
+\note{inscrit et souligné en haut à droite d'une chemise (page 27), qui ne
+reçoit pas de numéro de page}
+
+\page{28}
+
+\note{au bas du feuillet (le dos de la chemise), quatre lignes de sa main
+barrées d'un quadrillage de traits obliques, avec « XV » \uncertain{} souligné
+à droite ; illisibles sous les ratures}
+
+\page{29}
+
+\emph{\uncertain{Proposition}}
+
+Considérons un préschéma $X/\mathbb{F}_p$, et
+\[
+  X \xleftarrow{\ \mathrm{Fr}_X\ } X
+\]
+Comme $\mathrm{Fr}_X$ est un \uncertain{homéom.\ univ.}, on conclut que pour un
+faisceau $F$ sur $X$ et un faisceau $G$ sur $X$ (\uncertain{pour top.\ étale}),
+la donnée de $G \xrightarrow{\ \alpha\ } \mathrm{Fr}_X^{*}(F)$
+\uncertain{équivaut} à la donnée de $\mathrm{Fr}_{X*}(G) \xrightarrow{\ \beta\ }
+F$ (car $\mathrm{Fr}_{X*}$ et $\mathrm{Fr}_X^{*}$ sont \uncertain{inverses}
+\ill{} foncteurs adjoints \ill{} \ill{} \uncertain{habituel}).
+
+Ainsi, la donnée de $\alpha$ \ill{}
+\[
+  \mathrm{Fr}_{X*}(G) \xrightarrow{\ \mathrm{Fr}_{X*}(\alpha)\ }
+  \mathrm{Fr}_{X*}\mathrm{Fr}_X^{*}(F) \xrightarrow[\ \sim\ ]{\ \mathrm{can}^{-1}\ } F ,
+\]
+et \uncertain{inversement} la donnée de $\beta$ définit
+\[
+  G \xrightarrow[\ \sim\ ]{\ \mathrm{can}^{-1}\ }
+  \mathrm{Fr}_X^{*}\mathrm{Fr}_{X*}(G) \xrightarrow{\ \mathrm{Fr}_X^{*}(\beta)\ }
+  \mathrm{Fr}_X^{*}(F) .
+\]
+Nous \uncertain{allons} \struck{\uncertain{identifier}} \ill{} \ill{} \ill{} \ill{}
+\ill{} \ill{} \ill{} \ill{} \ill{} \ill{} \ill{} \ill{}
+\note{deux lignes entourées, d'une écriture très petite, ne se lisent pas}
+\ill{} \ill{} \ill{} \ill{} $= G$, \uncertain{définir} un hom.\
+\emph{\uncertain{canonique}}
+\begin{align*}
+  &(1) \qquad F \xleftarrow{\ \mathrm{Fr}_{F/X}\ } \mathrm{Fr}_X^{*}(F) \qquad \text{i.e.} \\
+  &(2) \qquad \mathrm{Fr}_{X*}(F) \xrightarrow{\ \mathrm{Fr}_{F/X*}\ } F
+\end{align*}
+(qui \uncertain{sera} d'ailleurs un isom., mais \ill{} \ill{} \ill{}
+\ill{} \ill{} \ill{} cas !). \ill{} \ill{} \ill{} (2) \ill{} \ill{}
+\uncertain{définition} \uncertain{faisceau}\ldots
+\note{une accolade dans la marge gauche embrasse la première moitié de la
+page ; la flèche de (1) a une pointe à chaque bout, la pointe droite plus
+appuyée}
+
+\page{30}
+
+\ill{} \ill{} \ill{} \uncertain{évident}. \ill{} \ill{}, si $U$ \uncertain{est}
+étale sur $X$
+\[
+  \mathrm{Fr}_{X*}(F)(U) = F(\mathrm{Fr}_X^{*}(U)) = F(U^{(p/X)})
+\]
+\struck{or $\mathrm{Fr}_X^{*}(U) \simeq U^{(p/X)}$} or \ill{} \ill{} \ill{}
+\emph{isom} canonique fonctoriel en $U$
+\[
+  U \xrightarrow[\ \sim\ ]{\ \mathrm{Fr}_{U/X}\ } U^{(p/X)}
+\]
+qui donne un isom.\ fonctoriel en $U$
+\[
+  \mathrm{Fr}_{X*}(F)(U) = F(U^{(p/X)}) \xrightarrow{\ \sim\ } F(U)
+\]
+\ill{} qui \uncertain{est} l'hom.\ cherché
+\[
+  \boxed{\mathrm{Fr}_{F/X*} : \mathrm{Fr}_{X*}(F) \longrightarrow F}
+\]
+\note{dans la marge gauche, un petit carré : $U \to X$ au-dessus de
+$U \to X$, flèches verticales $\mathrm{Fr}_X$ et $\mathrm{Fr}_U$}
+
+\struck{Supposons que $F$ soit représenté par $X'$ étale sur $X$. \ill{}
+\ill{} \ill{} \ill{} \ill{}}
+\struck{Considérons \ill{} \ill{} correspondante}
+\[
+  \struck{\mathrm{Fr}_{F/X}^{*} : \ill{}\,F \to \mathrm{Fr}_X^{*}F} \qquad
+  \struck{\mathrm{Fr}_X^{*}\mathrm{Fr}_{X*}(F) \nearrow}
+\]
+\struck{Si $U$ est un \ill{} étale sur $X$, \ill{} définir
+$F(U) \to \mathrm{Fr}_X^{*}(F)(U)$ \ill{} \ill{} $U$ \ill{} \ill{} de
+$\mathrm{Fr}_X^{*}(V)$, $V$ étale \ill{} $X$, \ill{} \ill{}
+$\mathrm{Fr}_X^{*}\mathrm{Fr}_{X*}(F)(U) \xrightarrow{\sim}
+\mathrm{Fr}_{X*}(F)(V)$}
+\note{ce passage, dans un cadre, est barré de grands traits obliques}
+
+\emph{Prop} 1) $\mathrm{Fr}_{F/X}^{*} : \mathrm{Fr}_X^{*}(F) \longrightarrow F$
+\uncertain{pour} $X$, $F$ variables \uncertain{est} compatible aux
+\uncertain{extensions} de la base quelconques \ill{}
+\uncertain{commutativité} dans
+
+\begin{tikzcd}[column sep=small, row sep=small]
+X \arrow[d, "\mathrm{Fr}_X"'] & X' \arrow[l, "g"'] \arrow[d, "\mathrm{Fr}_{X'}"] \\
+X & X' \arrow[l, "g"]
+\end{tikzcd}
+
+$X' \xrightarrow{\ g\ } X$, i.e.\ \ill{}
+\[
+  g^{*}(\mathrm{Fr}_X^{*}(F)) \xleftarrow{\ g^{*}(\mathrm{Fr}_{F/X}^{*})\ }
+  g^{*}(F) \overset{\text{df}}{=} F'
+\]
+\[
+  \mathrm{Fr}_{X'}^{*}(g^{*}(F)) = \mathrm{Fr}_{X'}^{*}(F')
+  \xleftarrow{\ \mathrm{Fr}_{F'/X'}^{*}\ } F'
+\]
+\note{les deux lignes sont reliées par « $\simeq$ trans.\ » entre
+$g^{*}(\mathrm{Fr}_X^{*}(F))$ et $\mathrm{Fr}_{X'}^{*}(g^{*}(F))$, et une flèche
+oblique va de $F'$ vers la première ligne ; le sens des flèches est tel
+qu'écrit, en désaccord avec celui de l'énoncé}
+
+\page{31}
+
+D'autre part, si $F$ est un faisceau constant, de la forme $I_X$, \uncertain{on a}
+\[
+  \mathrm{Fr}_X^{*}(I_X) \simeq I_X
+  \xleftrightarrow{\ \mathrm{Fr}_{F/X}^{*} = \mathrm{id}_{I_X}\ } I_X
+\]
+
+2) \struck{Ces conditions} \struck{\ill{} $X$ \ill{} il suffit \ill{}
+\ill{}} Ces conditions (pour $X$, $F$ variables) \ill{} $X'$ étale sur $X$ \ill{}
+et la fonctorialité en $F$, \emph{caractérisent} les hom.\
+$\mathrm{Fr}_{F/X}$.
+
+\marginal{NB. La \uncertain{condition} \ill{} : $I_X$ \ill{} \ill{} \ill{}
+\uncertain{identité}, on \ill{} \ill{} \ill{} $I$ \ill{} \ill{} \ill{}
+\ill{} \ill{} \ill{} \ill{}, on \ill{} \ill{} faisceau \ill{} \ill{}
+\uncertain{endomorphismes} !}\note{dans la marge gauche, de biais}
+
+Prouvons l'assertion 2°). Comme \uncertain{tout} $F$ \ill{} \ill{}
+\uncertain{quotient} d'un $G$ représentable, \ill{} \ill{} \ill{} \ill{}
+
+\begin{tikzcd}[column sep=small, row sep=small]
+\mathrm{Fr}_X^{*}(G) \arrow[d] & G \arrow[l] \arrow[d, "\text{épim}"] \\
+\mathrm{Fr}_X^{*}(F) & F \arrow[l]
+\end{tikzcd}
+
+\ill{} \uncertain{déterminer} $\mathrm{Fr}_{F/X}^{*}$ pour $F$ représentable.
+La condition de fonctorialité \ill{} $X$ \struck{\uncertain{variable}} (\ill{}
+\ill{} $F$) \uncertain{permet} de nous \uncertain{localiser} sur $F$ et sur $X$,
+ce qui nous ramène au cas où $F \to X$ est une \uncertain{immersion ouverte},
+\uncertain{puis} un isom., qui est justiciable de la $2^{\text{e}}$ condition
+énoncée dans 1).
+
+\marginal{$2$}\note{un grand « 2 » est écrit dans la marge gauche, en regard
+du paragraphe suivant}
+
+\uncertain{Supposons} $\mathrm{Fr}_X = \mathrm{id}$ (ce qui signifie que $X$ est
+défini par un \uncertain{anneau} loc.\ \ill{} \ill{} discontinu --- \ill{}
+\ill{} \ill{} \ill{} \ill{} \ill{} \ill{} faisceau \ill{} \ill{}
+\ill{} : \ill{} \ill{} $\mathbb{F}_p$ ---) p.\ ex.\
+$X = \operatorname{Spec} \mathbb{F}_p$. Alors \ill{} \ill{} \ill{} \ill{}
+\ill{} \ill{} \ill{}
+$\mathrm{Fr}_X^{*}(F) = \mathrm{id}_X^{*}(F) \simeq F$, et
+$\mathrm{Fr}_{F/X}$ \uncertain{devient} \ill{} \emph{\uncertain{automorphisme}} de
+$F$. \ill{} \ill{} \ill{} \ill{} \uncertain{évident} : \ill{} \ill{}
+l'\uncertain{identité} \ill{} \ill{} $F$ \ill{} \ill{} sur
+$X = \operatorname{Spec} \mathbb{F}_p$\ldots
+\note{la fin de la page, serrée au bas du feuillet, est en partie
+surchargée}
+
+\page{32}
+
+\emph{Prop} \uncertain{Autre caractérisation} de $\mathrm{Fr}_{F/X}^{*}$, pour
+$X$ fixé :
+\begin{quote}
+c'est un hom.\ fonctoriel en $F$, et pour $F$ \emph{représentable}
+\add{\uncertain{par $X'$ étale$/X$}}, c'est l'hom.\ de Frobenius habituel noté
+$\mathrm{Fr}_{X'/X}$.
+\end{quote}
+
+\emph{Théorème de trivialité cohomologique du Frobenius absolu.}
+\begin{quote}
+L'hom.
+\[
+  H^0(X, F) \longrightarrow H^0(X, F), \qquad
+  H^0(X, F) \simeq H^0(X, \mathrm{Fr}_{X*}(F))
+  \xrightarrow{\ H^0(\mathrm{Fr}_{F/X})\ } H^0(X, F)
+\]
+est l'\emph{identité}, pour tout faisceau $F$ sur $X_{\text{ét}}$.
+\end{quote}
+
+\emph{Corollaire 1} Si $F$ est un faisceau en groupes,
+\[
+  H^1(X, F) \simeq H^1(X, \mathrm{Fr}_{X*}(F))
+  \xrightarrow{\ H^1(\mathrm{Fr}_{F/X})\ } H^1(X, F)
+\]
+est l'\emph{identité}.
+
+\emph{Corollaire 2} Si $F^{\bullet}$ est un
+\add{\uncertain{complexe de}} faisceaux \struck{\uncertain{abéliens}}
+\add{\uncertain{de $A$-Modules}}, (\struck{$A$ un faisceau \ill{} \ill{}
+\ill{}} $A$ un \uncertain{anneau} \ill{} \ill{}),
+\[
+  R\Gamma_X(F^{\bullet}) \simeq R\Gamma_X(\mathrm{Fr}_{X*}(F^{\bullet}))
+  \xrightarrow{\ R\Gamma_X(\mathrm{Fr}_{F^{\bullet}/X})\ } R\Gamma_X(F^{\bullet})
+\]
+est l'\emph{identité} \add{\uncertain{dans}} la catégorie dérivée $D(A)$ de la
+catégorie des $A$-modules. En particulier $H^i(X, F) \to H^i(X, F)$ est
+l'identité.
+\note{dans chacun des trois énoncés, la flèche oblique
+$H^0(\mathrm{Fr}_{F/X})$ (resp.\ $H^1$, $R\Gamma_X$) part de la ligne inférieure
+et aboutit au second terme de la ligne supérieure ; on l'a mise en ligne}
+
+Les corollaires résultent du th.\ en utilisant le calcul de $R^1\Gamma_X$
+\uncertain{resp.}\ de $R\Gamma_X$ par \uncertain{résolutions}. / Pour prouver le
+th., on \ill{} \struck{\ill{} \ill{} \ill{} \ill{} \ill{} \ill{}}
+\struck{\ill{} \ill{} \ill{} \ill{}} l'hom.
+\[
+  H^0(X, F) \xrightarrow{\ H^0(\mathrm{Fr}_{F/X})\ } H^0(X, F)
+\]
+\ill{} \emph{fonctoriel} en $F$. \uncertain{Quand} \ill{}, \ill{} \ill{}
+\ill{}, c'est l'identité, \uncertain{puisque} si $F$ \ill{} le faisceau
+\ill{} \ill{} \ill{} \ill{} \ill{} \uncertain{trivial}\ldots\ \ill{} \ill{}
+\ill{} \ill{} \ill{} \ill{} \ill{} \uncertain{condition}.
+
+\page{33}
+
+$\mathbb{S}$ \uncertain{catégorie} \ill{} \uncertain{produits fibrés}.
+$\mathcal{M}$ \uncertain{ens.}\ de morphismes \ill{} \ill{} \ill{} \ill{}, \ill{}
+\uncertain{changements} de base (\uncertain{un} \ill{} \ill{}), défini pour tout
+$X \in \mathrm{Ob}\,\mathbb{S}$ une catégorie $X_{\text{ét}}$. (\ill{} \ill{}
+\uncertain{topologie} \uncertain{standard}),
+
+\uncertain{Supposons} \uncertain{que} $X_{\text{ét}}$, \ill{} \ill{} \ill{} \ill{}
+\ill{} \ill{} \ill{} pour tout $f : X \to Y$ dans $\mathbb{S}$, \ill{}
+foncteur
+\[
+  Y_{\text{ét}} \xrightarrow{\ f^{*}\ } X_{\text{ét}}
+\]
+\uncertain{compatible} \ill{} « \uncertain{cartésien} ».
+\uncertain{Considérons} \struck{\ill{}} \uncertain{un} \ill{} $\mathbf{F}$ endom.\
+du foncteur identique de $\mathbb{S}$.
+
+a) \uncertain{Pour} tout $X \in \mathbb{S}$, $\mathbf{F}_X : X \to X$ \ill{}
+\uncertain{une} \uncertain{équivalence} \ill{}
+$\mathbf{F}_X^{*} : \widetilde{X}_{\text{ét}} \to \widetilde{X}_{\text{ét}}$ \ill{}
+\ill{} \uncertain{et} $p : X' \to X$ \uncertain{dans} $\mathcal{M}$, \ill{} \ill{}
+$X' \to X'^{(p/S)}$ \ill{} \ill{} \ill{}, i.e.\ le \ill{} :
+
+\begin{tikzcd}[column sep=small, row sep=small]
+X' \arrow[d, "p"'] & X'^{(p/X)} \arrow[l] \arrow[d] & X' \arrow[l, "\mathrm{Fr}_{X'/X}"'] \arrow[dl, "p"] \arrow[ll, bend right=30, "\mathbf{F}_{X'}"'] \\
+X & X \arrow[l, "\mathbf{F}_X"] &
+\end{tikzcd}
+
+\begin{tikzcd}[column sep=small, row sep=small]
+X' \arrow[d, "\mathbf{F}_{X'}"'] & X' \arrow[l, "\mathbf{F}_{X'}"'] \arrow[d, "p"] \\
+X & X \arrow[l, "\mathbf{F}_X"]
+\end{tikzcd}
+
+\uncertain{est} \uncertain{cartésien}.
+
+\marginal{\uncertain{b) $\Longleftrightarrow$ que}}\note{entouré, au-dessus de
+« Dém. »}
+\emph{Dém.} \uncertain{Le} foncteur
+$\mathbf{F}_X^{*} : X_{\text{ét}} \to X_{\text{ét}}$ \uncertain{est isomorphe}
+\uncertain{au} \uncertain{foncteur} \uncertain{identique}, \uncertain{d'où}
+\uncertain{résulte} que le \uncertain{morphisme}
+$\mathbf{F}_X^{*} : \widetilde{X}_{\text{ét}} \to \widetilde{X}_{\text{ét}}$
+\uncertain{est une} \uncertain{équivalence}, \uncertain{qui} \uncertain{induit}
+\ill{} \uncertain{isomorphisme} \ill{} \ill{} \ill{} \uncertain{foncteurs}
+\uncertain{identiques} \ill{}, \ill{} \ill{} \ill{} \uncertain{isomorphismes}
+\uncertain{donnés} \uncertain{par} \ill{} \ill{} $\mathbf{F}_{-/X}$ sur les
+\uncertain{faisceaux} \uncertain{représentables}. Donc b) $\Longrightarrow$ a).
+\marginal{\ill{} \uncertain{de Topos}}\note{à droite de la ligne de
+« Dém. », souligné, avec un signe de vérification}
+\note{la page est de la même encre bleue que les précédentes, sur le verso
+d'un feuillet dactylographié. La lettre notée ici $\mathbf{F}$ (un F double,
+proche de son $\mathrm{Fr}$ sans le r) désigne un endomorphisme du foncteur
+identique qu'il distingue du Frobenius ; lecture de la notation incertaine}
+
+\page{35}
+
+\struck{$\mathbf{F}_{\alpha}^{*}(\mathbf{F}_{X}^{*}(X')) \longrightarrow
+\mathbf{F}_{\alpha}^{*}(X')$}\quad
+\struck{$\mathbf{F}_{X}^{*}(F)$}
+\note{deux lignes en haut à gauche, raturées ; au-dessus de la première,
+« $\mathbf{F}_{\alpha'}$ » et une flèche courbe}
+
+\marginal{$\mathbf{F}_X$ ?}\note{un signe dans la marge, à gauche du
+paragraphe suivant, peut-être un renvoi}
+\uncertain{Peut-être} que a) \uncertain{implique} aussi b), \ill{} \ill{} \ill{}
+\uncertain{s'en} \ill{} \ill{} \ill{} \uncertain{renforce} a) \ill{}
+\uncertain{exigeant} que $\mathbf{F}_X$ \uncertain{commute} \ill{}
+\uncertain{propriétés} dites \ill{} \uncertain{tout} changement de base (\ill{}
+\ill{} \ill{}, \ill{} \ill{} \ill{} \ill{} $\mathbf{F}_X : X \to X$ !).
+
+\begin{tikzcd}[column sep=small, row sep=small]
+X' \arrow[d, "p"'] & X'^{(p/S)} \arrow[l] \arrow[d] & X' \arrow[l, "\sim"'] \arrow[dl, "p"] \\
+X & X \arrow[l, "\mathbf{F}_X"] &
+\end{tikzcd}
+
+\note{au-dessus du diagramme, « $\exists$ isom » et une flèche courbe
+$\mathbf{F}_{X'}$, barrée}
+
+La \uncertain{définition} de $\mathbf{F}_{X'/X}^{*}$
+\add{\uncertain{$(X' \in \mathrm{Ob}\,X_{\text{ét}})$}} (\uncertain{comme}
+\ill{}) \uncertain{faisceaux} \ill{} $\mathbf{F}_{F/X}$ \ill{} \ill{} \ill{}
+\uncertain{fonctoriel} en $F$ \ill{} \ill{} \ill{}
+\uncertain{conditions}, \ill{} \ill{} \ill{} \ill{} \ill{} \ill{}
+\uncertain{identité} \ill{} \ill{} \uncertain{propriétés}).
+\ill{} \ill{} \ill{} \uncertain{faisceaux} \uncertain{constants} :
+\[
+  \mathbf{F}_X^{*}(I_{X'}) = I_X \xrightarrow[\ \mathrm{id}_{I_X}\ ]{\ \mathbf{F}_{F/X}^{*}\ } I_X
+\]
+\ill{} \ill{} \ill{} \uncertain{en} \uncertain{remplaçant} \ill{} \ill{} \ill{}
+\ill{} \ill{}. \uncertain{Car} \ill{} \struck{\uncertain{fonctorialité}}
+$I \to$ \uncertain{identité}\ldots\ \uncertain{compatibilité} \ill{}
+$\mathbf{F}_{F/X}$ par changement de base \uncertain{compatibilité} \ill{}
+changement de base \ill{} \emph{\uncertain{quelconques}}. Le
+\uncertain{compatibilité} \ill{} \ill{} \ill{} $F$, \ill{} : la
+\uncertain{caractérisation}.
+\begin{quote}
+\ill{}, + \uncertain{fonctorialité} \ill{} \ill{} \ill{}
+
+\uncertain{également} \struck{\ill{} \ill{} \ill{} \ill{} \ill{} \ill{}}
+\end{quote}
+\struck{\ill{} \ill{} \ill{} \ill{} \ill{}}
+\note{les deux lignes réunies par un trait vertical à gauche sont en partie
+biffées d'un long trait ondulé}
+Il \uncertain{implique} l'identité sur les $H^0$, \ill{} \ill{} \ill{} $H^i$,
+$R\Gamma_X$\ldots
+
+\note{chemise (page 37) : en haut à droite, un titre souligné, barré et
+illisible, puis trois lignes, « Variances \ill{} / \ill{} $G$-\ill{}-\ill{} /
+(\ill{} \ill{}) », barrées d'un quadrillage de traits obliques ; le feuillet ne
+reçoit pas de numéro de page. Au dos (page 38), seul, à l'envers au bas du
+feuillet : « Steinberg »}
+
+\section*{Brauer-Severi}
+
+\note{inscrit et souligné en haut d'une chemise (page 39), avec au-dessous
+« Dans Chap \emph{VI} » ; le feuillet ne reçoit pas de numéro de page}
+
+\page{40}
+
+\struck{\ill{}}\quad \emph{\struck{Systèmes linéaires et \ill{}}}
+\emph{\add{Schémas} de Brauer-Severi}
+
+\emph{Déf} \emph{Schéma de Brauer-Severi} \struck{\ill{}} $P/S$ : il devient
+un fibré projectif loc.\ \uncertain{fppf}.
+
+\struck{Remarques}
+
+\emph{Proposition 1} Un tel $P$ est \uncertain{projectif} et lisse sur $S$.
+Le faisceau \struck{\ill{}} $\underline{\omega}^{-1}_{X/S}$ est ample rel.\ à
+$S$.
+
+\emph{Proposition 2} \struck{Si $P/S$ \ill{} \ill{} \ill{} une section, alors
+$P$} Pour que $P$ soit un fibré projectif, il \struck{faut et suffit} faut et
+suffit qu'il existe un $\underline{P}$ \ill{} \ill{} de degré $1$ sur
+\ill{} faisceau inversible \struck{\ill{} \ill{}} de degré $1$ sur chaque fibre,
+\ill{} \ill{} \ill{} \ill{} \ill{} $=$, \ill{} \ill{} \ill{}
+$\underline{L}^{\otimes(r+1)} \otimes \underline{\Omega}^{r}_{X/S}$ soit
+\uncertain{trivial} : \ill{} \ill{} \uncertain{l'image} \uncertain{inverse}
+d'un faisceau \uncertain{inv.}\ sur $S$.
+
+\quad Cela signifie \ill{} que le \uncertain{résultat} de classification donné
+au \ill{} I pour $\mathrm{Pic}(P)$ \struck{\ill{}} \uncertain{reste}
+valable\ldots\ \emph{Corollaire} \uncertain{Les} \ill{} \ill{} \ill{}
+\ill{}\ \uncertain{signification}.
+
+\marginal{Construction de $\underline{\mathrm{Div}}^{1}_{P/S} = \check{P}$ et
+\ill{} \ill{} \uncertain{projective} / \emph{Déf} $P/S$ \uncertain{projectivement}
+\ill{}, \ill{} \ill{} \ill{} \ill{} \ill{}}\note{dans la marge gauche,
+écrit verticalement, dans deux cadres reliés par une accolade au texte des
+propositions}
+
+[\emph{Proposition}] Si $P$ admet une section \add{sur $S$}, c'est un fibré
+projectif : utiliser le théorème de descente \add{(et dualité des
+projectifs)}.
+
+\ldots\ \uncertain{Toutefois} \ill{} \ill{} si \uncertain{tout} Module loc.\
+libre sur $S$ est libre (p.\ ex.\ $S$ local) \struck{\ill{} \ill{} \ill{}
+\ill{}} \struck{\ill{} \ill{} \ill{}}.
+\note{la dernière ligne est barrée en deux reprises, avec au-dessus
+« \uncertain{principal} » ; la page s'arrête ici}
+
+\end{document}
