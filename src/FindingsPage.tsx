@@ -3,6 +3,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { useHashTarget } from './components/Anchors.tsx';
 import { Footer, Header } from './components/Frame.tsx';
 import { FINDINGS } from './content/findings.ts';
+import { PROOFS } from './content/proofs.ts';
 import { PLAIN } from './content/summary.ts';
 import { BY_ID } from './content/catalogue.ts';
 import type { Finding, PlainItem } from './lib/types.ts';
@@ -468,11 +469,68 @@ function Pager({
   );
 }
 
+/**
+ * The statements of the readings proved in Lean. The one check on this page
+ * that needs no second reader, and the narrowest: a proof says the reading's
+ * statement holds, under the hypotheses written and those alone — not that
+ * the reading is what the page says.
+ */
+function ProvedInLean() {
+  const link = 'text-brand-700 underline decoration-brand-200 underline-offset-2';
+  return (
+    <section id="lean" className="mt-10 scroll-mt-16">
+      <h2 className="text-[11px] font-bold uppercase tracking-[0.12em] text-ink-400">Proved in Lean</h2>
+      <p className="mt-2 max-w-[44em] text-[13.5px] leading-relaxed text-ink-600">
+        Where a reading states something crisp in commutative algebra, finite combinatorics or
+        elementary category theory, the statement is proved in the Lean proof assistant against
+        mathlib, as the reading gives it, with no hypothesis added. What that checks is the
+        reading’s mathematics — a false statement, a hidden hypothesis, one that is not needed —
+        never its fidelity to the page. The statements with their proofs written out are in{' '}
+        <a href="/article/grothendieck-lean.pdf" className={link}>
+          a PDF (in French)
+        </a>
+        ; the Lean files in{' '}
+        <a href="https://github.com/Commutator-IO/grothendieck-project/tree/main/lean" className={link}>
+          lean/
+        </a>
+        , checked on every change.
+      </p>
+      <div className="mt-4 space-y-3">
+        {PROOFS.map((p) => (
+          <article key={p.lean} className="card px-4 py-3">
+            <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+              <a href={`/#${p.folder}/${p.batch}/p${p.page}`} className="text-[14px] font-semibold text-ink-900 hover:text-brand-700">
+                n° {p.folder} · {p.name}
+              </a>
+              <span className="text-[12.5px] text-ink-500">{BY_ID.get(p.folder)?.title.replace(/\s*:.*$/, '')}</span>
+              <span className="ml-auto rounded-full bg-ink-800 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white">
+                {p.verdict}
+              </span>
+            </div>
+            <p className="mt-2 text-[14px] leading-relaxed text-ink-800">{notation(p.statement)}</p>
+            <p className="mt-2 text-[13px] leading-relaxed text-ink-600">
+              <span className="font-semibold text-ink-700">What the proof found. </span>
+              {notation(p.found)}
+            </p>
+            <p className="mt-2 text-[12px] text-ink-400">
+              <a href={`https://github.com/Commutator-IO/grothendieck-project/blob/main/${p.lean}`} className="hover:text-brand-700">
+                {p.lean}
+              </a>{' '}
+              · {p.theorems.map((t) => <code key={t} className="mr-1.5 text-[11.5px]">{t}</code>)}
+            </p>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 export function FindingsPage() {
   useHashTarget();
 
   const [query, setQuery] = useState('');
   const [only, setOnly] = useState<string | null>(null);
+  const [status, setStatus] = useState<Finding['status'] | null>(null);
   const [order, setOrder] = useState<'folder' | 'checkable'>('folder');
 
   const cotes = useMemo(() => {
@@ -484,6 +542,7 @@ export function FindingsPage() {
   const needle = query.trim().toLowerCase();
   const visible = FINDINGS.filter((n) => {
     if (only && n.cote !== only) return false;
+    if (status && n.status !== status) return false;
     if (!needle) return true;
     // The whole row, not just the claim: a reader who remembers « Abhyankar »
     // or « Johnstone » has a handle on the basis or on the sources searched,
@@ -512,7 +571,7 @@ export function FindingsPage() {
   const here = (rows: Finding[]) => rows.filter((n) => onPage.has(n.id));
 
   // A new search, folder or order starts again at the first page.
-  useEffect(() => setPage(0), [query, only, order]);
+  useEffect(() => setPage(0), [query, only, status, order]);
 
   // A link to a row — from the plain-words cards, or pasted — turns to the
   // page that holds it, clearing the filters first if they hide it.
@@ -528,6 +587,7 @@ export function FindingsPage() {
         pending.current = id;
         setQuery('');
         setOnly(null);
+        setStatus(null);
         return;
       }
       setPage(Math.floor(i / PAGE));
@@ -578,44 +638,44 @@ export function FindingsPage() {
             archivist's guess from a verso. So each row says what was searched, what the
             edition supplied rather than the page, and what would settle it.
           </p>
-          {/* The one kind of check that needs no second reader: statements of
-              the readings proved in Lean (lean/, issue #26), written out. */}
-          <p className="mt-4 rounded-[var(--radius-card)] border border-ink-200 bg-ink-50 px-4 py-3 text-[13.5px] leading-relaxed text-ink-600">
-            <strong className="font-semibold text-ink-800">Proved in Lean.</strong> Some statements of
-            the modernised readings are proved in the Lean proof assistant against mathlib — each with
-            its statement, the page it comes from and a written-out proof:{' '}
-            <a href="/article/grothendieck-lean.pdf" className="text-brand-700 underline decoration-brand-200 underline-offset-2">
-              the statements proved (PDF, in French)
-            </a>
-            , and the proofs in{' '}
-            <a
-              href="https://github.com/Commutator-IO/grothendieck-project/tree/main/lean"
-              className="text-brand-700 underline decoration-brand-200 underline-offset-2"
-            >
-              lean/
-            </a>
-            . A proof says the reading holds together, not that it is what the page says.
-          </p>
         </header>
 
         <PlainSummary />
 
+        <ProvedInLean />
+
         <div id="full-list" className="scroll-mt-16" />
 
-        {/* The three badges are not guessable from their wording alone, and a
+        {/* The badges are not guessable from their wording alone, and a
             tooltip is not read. Named once, here — the same decision the
-            archive page makes about its two row washes, for the same reason. */}
+            archive page makes about its two row washes, for the same reason.
+            Each is also a filter: click one to see only its rows, again to
+            see all. */}
         <ul className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-2 text-[12.5px] text-ink-500">
-          {(['unsearched', 'candidate', 'matched', 'refuted'] as const).map((k) => (
-            <li key={k} className="flex items-center gap-2">
-              <span
-                className={`rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide ${STATUS[k].className}`}
-              >
-                {STATUS[k].label}
-              </span>
-              <span className="max-w-[26em]">{STATUS[k].help}</span>
-            </li>
-          ))}
+          {(['unsearched', 'candidate', 'matched', 'refuted'] as const).map((k) => {
+            const n = FINDINGS.filter((f) => f.status === k).length;
+            const on = status === k;
+            return (
+              <li key={k}>
+                <button
+                  type="button"
+                  aria-pressed={on}
+                  onClick={() => setStatus(on ? null : k)}
+                  title={on ? 'Show every status' : `Show only « ${STATUS[k].label} »`}
+                  className={`flex items-center gap-2 rounded-lg px-1.5 py-1 text-left transition-colors ${
+                    on ? 'bg-white ring-1 ring-ink-800' : status ? 'opacity-50 hover:opacity-100' : 'hover:bg-ink-100'
+                  }`}
+                >
+                  <span
+                    className={`shrink-0 rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide ${STATUS[k].className}`}
+                  >
+                    {STATUS[k].label} <span className="tabular font-normal">{n}</span>
+                  </span>
+                  <span className="max-w-[26em]">{STATUS[k].help}</span>
+                </button>
+              </li>
+            );
+          })}
         </ul>
 
         <div className="mt-7 flex flex-wrap items-center gap-3">
@@ -701,6 +761,7 @@ export function FindingsPage() {
               onClick={() => {
                 setQuery('');
                 setOnly(null);
+                setStatus(null);
               }}
             >
               Clear the filters
