@@ -21,7 +21,7 @@ out="${TMPDIR:-/tmp}/Axioms.lean"
   done
 } > "$out"
 n=$(grep -c '^#print' "$out")
-res=$(lake env lean "$out")
+res=$(lake env lean "$out" | perl -0pe 's/,\n\s+/, /g')
 echo "$res"
 standard='(propext|Classical\.choice|Quot\.sound)'
 if [ "$(echo "$res" | grep -c "axioms")" -ne "$n" ] ||
