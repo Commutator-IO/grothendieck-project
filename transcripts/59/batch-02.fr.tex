@@ -1,0 +1,318 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 59, batch 2 (pages 21-27).
+% Established from the facsimile archives/batches/59/batch-02.pdf (PDF page k =
+% archivists' page 20+k, no cover sheet), cut from a copy of 59.pdf that was
+% fetched through the project's own relay
+% (https://grothendieck-relay.onrender.com/source/59.pdf), not uploaded by the
+% user; tiles in archives/tiles/59/p21-p27. Per the skill transcribe-grothendieck.
+% The folder is twenty-seven pages; this is the second and last batch (pages
+% 1-20 are batch 1, transcribed separately and in parallel, so the notation
+% here is fixed from these pages alone).
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-09-26 — first pass, unchecked against the pages by a human.
+%
+% Pages skipped: 21, a blank cream sheet carrying nothing but the faint
+% show-through of the next leaf — no mathematics of his, skipped without
+% description.
+%
+% Pages summarised: none. Pages transcribed: 22-27, six leaves in blue-black
+% ink, his own pagination 1 to 6 (top right, pencil or ink). Page 24 (his 3)
+% carries only two lines and the rest of the leaf is blank. Fast drafting:
+% formulas carry, some connective words do not; interlinear insertions
+% linked by strokes are placed where the stroke sends them, with a \note.
+% His underlined words are set in \emph.
+%
+% What the batch is about. X/S proper, flat, of finite presentation, with
+% f_*(O_X) = O_S universally and Pic^0_{X/S} an abelian scheme B; A =
+% Pic^0_{B/S}. Pages 22-24: construction of the A-torsor Alb^1_{X/S} and of
+% psi : X -> Alb^1_{X/S}, equivalently delta(x,y) = psi(y) - psi(x) with
+% delta(x,x) = 0, given on sections by N_y N_x^{-1} for a Weil sheaf N on
+% X x_S B; universal property for S-morphisms of X into torsors under abelian
+% schemes (« ou plus généralement ... schémas en groupes commutatifs
+% quelconques ? »); the inverse solution (Q^{-1}, psi^{-1}) and the resulting
+% « convention de signe » for A = Pic^0_{B/S}, the first one being adopted.
+% For X smooth of relative dimension 1: Pic^1_{X/S} is a solution of the
+% Albanese problem via the diagonal, whence an isomorphism c : B -> A,
+% c(psi(y) - psi(x)) = N_y N_x^{-1}; the open question whether c is the
+% Theta-polarisation or (« sans doute ») its symmetric, reduced to a
+% geometric question over an algebraically closed field, u(t) = class of
+% t.Theta - Theta. Pages 25-27, « Schémas abéliens polarisés principaux »:
+% for delta in NS_{A/S}, the torsor P^delta = Pic^delta_{A/S} under B and the
+% sheaf L on A x P^delta; for delta a polarisation, pr_{2*}(L) locally free
+% of rank chi(delta), the canonical divisor D_delta when chi(delta) = 1, its
+% descent to Theta on P^delta; a Proposition in parts (a unlabelled), b), c),
+% d): existence and uniqueness of (P, Theta) with deg Theta^g / g! = 1 for a
+% polarisation of degree 1; Theta relatively ample; P = Pic^delta_{A/S}; for
+% A = Alb^0 of a curve of genus g, P^delta = Pic^{g-1} = Alb^{g-1} with Theta
+% going to W_{g-1}, and a boxed marginal « question de signe ! ». Then a
+% framed and cancelled restart of the set-up (a symmetric divisorial
+% correspondence C on X x_S X), and « (c bis) »: the isomorphism
+% sigma_P : P -> P^{-1}, Theta^{-*} = sigma_P(Theta), a unique A-torsor
+% isomorphism K between P^{-1} and P with K(Theta) = Theta^{-*}, K viewed as
+% a section of P^{(x)_A 2}, and for the Jacobian case K comes from
+% Omega^1_{X/S} under P^{(2)} = Pic^{2g-2}_{X/S}; a margin note asks to check
+% that this is the canonical section for every delta in NS_{A/S}.
+%
+% Notation fixed once for the batch (from these pages; the Picard notation of
+% the fonds, grepped from transcripts/): \underline{\mathrm{Pic}},
+% \underline{\mathrm{Alb}}, \underline{\mathrm{NS}} — he underlines all three
+% as representable functors; \mathcal{O}, \mathcal{L}, \Omega^1_{X/S}
+% underlined as he writes it; \Theta for his barred or circled theta, which
+% are the same letter throughout; \mathrm{cl} for « cl ». On page 25 the map
+% A -> B defined by delta is written first with a tilde, later with a bar,
+% and both are kept as written.
+%
+% Readings to check first: the interlinear words of p. 22 around « on prend »;
+% « à faire » at the foot of p. 22; the layered corrections of the question
+% on p. 23 (« Non, c'est sans doute la symétrique de la Theta-polarisation »);
+% « correspondant » p. 23; the struck formula on p. 24; « donc d'un » and
+% « a la vertu » on p. 25; the bracket « toute ... section de A qui invarie
+% Theta est la section unité » on p. 26; the interlinear « comme A-torseur »
+% of d); « ce qui le caractérise » at the head of p. 27; the letter of
+% « (c bis) » and the superscript of Theta^{-*}; the cancelled frame and the
+% margin note of p. 27.
+
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{59}
+\batch{2}
+\pages{21}{27}
+\dating{[années 1960-1970]}
+\watermark{Édition de démonstration}
+\foldertitle{Construction des faisceaux inversibles sur schémas de Picard : notes manuscrites (s.d.)}
+
+\begin{document}
+
+\page{22}\note{paginé 1 par l'auteur}
+
+Soit $X/S$ propre, plat, de présentation finie, $f_{*}(\mathcal{O}_X) \simeq
+\mathcal{O}_S$ univ.\add{ersellement}, $\underline{\mathrm{Pic}}^{0}_{X/S}$ un
+schéma abélien $B$. Soit $A = \underline{\mathrm{Pic}}^{0}_{B/S}$. On définit
+alors un \struck{schéma} $A$-torseur $\underline{\mathrm{Alb}}^{1}_{X/S}$, et un
+$S$-morphisme
+\[
+  \psi : X \longrightarrow \underline{\mathrm{Alb}}^{1}_{X/S} ,
+\]
+ou ce qui revient au même, un homomorphisme
+\[
+  \delta : X \times_S X \longrightarrow A \qquad \delta(x,y) = \psi(y) - \psi(x)
+\]
+tel que
+\[
+  \delta(x,x) = 0 .
+\]
+Pour ceci, on prend, \uncertain{étant données} deux sections $x, y$ de $X$ sur $S$,
+\[
+  \delta(x,y) = N_y N_x^{-1} \quad \text{dans } \underline{\mathrm{Pic}}^{0}_{B/S}(S)
+\]
+où $N$ est un module inversible de Weil sur $X \times_S B$ (qui existe grâce
+à l'existence d'une section de $X$ sur $S$).\note{« étant données » est
+écrit en interligne sous « on prend », et un trait le relie à la formule ; la
+lecture en est douteuse}
+
+On prouve la propriété universelle de $(Q = \underline{\mathrm{Alb}}^{1}_{X/S},
+\psi)$ pour les $S$-morphismes de $X$ dans les \struck{schémas} torseurs sous
+schémas abéliens (ou plus généralement, sous des schémas en groupes
+commutatifs quelconques ?).
+
+Si on définit $Q'$ par $\delta' = \delta^{-1}$, on trouve un isomorphisme
+$Q' = Q^{-1}$, $\psi' = \psi^{-1}$, et $(Q', \psi')$ est une autre solution
+au \struck{\ill{}} PB universel, canoniquement isomorphe au premier. Donc,
+lorsqu'on définit $(\underline{\mathrm{Alb}}^{1}, \psi)$ comme solution du PB
+universel, avec $A$ le schéma abélien des translations de
+$\underline{\mathrm{Alb}}^{1}$, il y a une \emph{convention de signe}
+\uncertain{à faire} pour définir un isomorphisme $A \simeq
+\underline{\mathrm{Pic}}^{0}_{B/S}$. \emph{Nous prendrons la première
+convention de signe}.
+
+\page{23}\note{paginé 2 par l'auteur}
+
+Supposons donc $X$ lisse de dim.\ relative $1$.\note{« lisse » est ajouté en
+interligne ; un crochet en marge ouvre l'alinéa} On peut considérer alors
+$\underline{\mathrm{Pic}}^{1}_{X/S}$, torseur sous $B =
+\underline{\mathrm{Pic}}^{0}_{X/S}$, (correspondant aux faisceaux inv.\ sur
+$X/S$ de degré relatif $1$.\note{« torseur sous $B = \ldots$ » est écrit en
+interligne et renvoyé ici par un trait ; la parenthèse n'est pas fermée} Il
+y a un morphisme canonique
+\[
+  X \xrightarrow{\ \psi\ } \underline{\mathrm{Pic}}^{1}_{X/S} ,
+\]
+\struck{et celui-ci} défini par la diagonale de $X \times_S X$, qui est un
+diviseur relatif sur le deuxième facteur.
+
+\begin{tikzcd}
+X & X \times_S X \arrow[l, no head, "\mathrm{pr}_1"'] \arrow[d, no head, "\mathrm{pr}_2"] \\
+S \arrow[u, no head] & X \arrow[l, no head]
+\end{tikzcd}
+
+\note{carré dessiné en marge gauche, à traits sans flèches}
+
+Il fait de $\underline{\mathrm{Pic}}^{1}_{X/S}$ une solution du pb universel
+d'Albanese. Il s'ensuit, grâce à la première convention de signe, un isom
+\[
+  c : B \xrightarrow{\ \sim\ } A = \underline{\mathrm{Pic}}^{0}_{B/S} ,
+\]
+qui s'explicite ainsi : si $y, x$ sont deux sections de $X$ sur $S$, alors
+$\psi(y) - \psi(x)$ est une section de $\underline{\mathrm{Pic}}^{0}_{X/S}$
+correspondant au diviseur relatif $y(S) - x(S)$, et on a
+\[
+  c(\psi(y) - \psi(x)) = c(\mathrm{cl}(y(S)) - \mathrm{cl}(x(S))) = N_y N_x^{-1}
+\]
+où $N$ est un faisceau de Weil sur $X \times_S B$.
+
+\emph{Question à tirer au clair} : Cet isom $c$ définit-il la \struck{\ill{}}
+$\Theta$-\emph{polarisation} sur $B$ ? \struck{(ou la symétrique \ill{})}
+Non, c'est sans doute la \emph{symétrique} \struck{(\uncertain{polarisation}
+\ill{})} de la $\Theta$-polarisation.\note{« Non, c'est sans doute la » est
+écrit en interligne au-dessus de la parenthèse biffée ; « symétrique »,
+souligné, surmonte une seconde parenthèse biffée : on donne l'état final de
+la phrase, les biffures à leur place}
+
+C'est une question « géométrique », dans laquelle on peut supposer $S$
+spectre d'un corps alg.\ clos. On a une polarisation de $B$ par le diviseur
+$\Theta$. L'homom \uncertain{correspondant} $u : B \to A$ est défini par
+\[
+  u(t) = \text{classe de } t.\Theta - \Theta .
+\]
+\note{« correspondant » est en interligne, relié par un trait ; un signe
+empâté précède $t$ dans $u(t)$}
+Si
+
+\page{24}\note{paginé 3 par l'auteur ; le feuillet ne porte que ces deux
+lignes}
+
+$t$ est de la forme $\mathrm{cl}((y) - (x))$, on aura donc
+\[
+  u((y) - (x)) = \text{classe de } \ldots
+\]
+\struck{\ill{}}\note{à la suite, une formule en $\Theta$ est biffée d'un
+trait épais, illisible sous la biffure}
+
+\page{25}\note{paginé 4 par l'auteur}
+
+\section*{Schémas abéliens polarisés principaux}
+
+\note{titre souligné, de sa main, en tête de la page}
+
+Soit $A/S$ un schéma abélien, muni d'une section $\delta$ de
+$\underline{\mathrm{NS}}_{A/S}$, d'où un torseur $P^{\delta} =
+\underline{\mathrm{Pic}}^{\delta}_{A/S}$ sous le schéma abélien dual $B =
+\underline{\mathrm{Pic}}^{0}_{A/S}$, et un faisceau inversible $\mathcal{L}$
+sur $A \times P^{\delta}$ \ldots\ D'autre part, $\delta$ définit
+$\tilde{\delta} : A \to B$, et les opérations de $A$ sur $P^{\delta}$ via
+$\tilde{\delta}$ sont celles déduites par transport de structure des
+opérations de $A$ sur lui-même par translations.
+
+Supposons que $\delta$ soit une polarisation, \struck{on} alors on sait que
+les $H^i$ des $\mathcal{L}_x$ ($x \in P^{\delta}$) sont nuls pour $i > 0$, et
+que \struck{\ill{}} $\mathrm{pr}_{2*}(\mathcal{L})$ est donc un module loc.\
+libre de rang $\chi(\delta)$. Si $\chi(\delta) = 1$, c'est un module
+inversible sur $P^{\delta}$, et il lui est associé un diviseur canonique
+$D_{\delta}$ \struck{$\Theta$} sur $A \times P^{\delta}$ relativement à
+$P^{\delta}$. D'autre part, $\bar{\delta} : A \to B$ est donc un isom., et
+$P^{\delta}$ peut être regardé comme un $A$-torseur.
+
+\struck{\ill{} d'un \ill{}} Le diviseur $D_{\delta}$ est stable par
+opérations de $A$ opérant diagonalement sur $A \times P^{\delta}$.
+\struck{Donc il} [Il provient \uncertain{donc d'un} diviseur sur le quotient
+$(A \times P^{\delta})/A = P^{\delta}$, noté \struck{\ill{}} $\Theta$. Ce
+dernier \uncertain{a la vertu} que $\chi(\Theta_{\delta}) = 1$.\note{le
+crochet ouvert devant « Il provient » n'est pas refermé}
+
+\emph{Proposition}. Soit $A$ un schéma abélien$/S$, de dim.\ relative $g$,
+soit $\delta$ une polarisation sur $A$ de degré $1$. Alors il existe un
+$A$-torseur\note{« de dim.\ relative $g$, soit » est ajouté en interligne et
+renvoyé par un trait}
+
+\page{26}\note{paginé 5 par l'auteur}
+
+$P$, et un diviseur relatif positif $\Theta$ sur $P$, [tel que $\deg
+\Theta^{g}/g! = 1$] et que la polarisation $\delta$ soit égale à celle
+déduite de la polarisation de $P$ par le diviseur $\Theta$.\note{« relatif
+positif » est en interligne ; la première partie de la proposition ne porte
+pas de lettre a), les suivantes sont b), c), d)} \struck{\ill{}} Et
+donnés $P'$ et $\Theta'$ ayant les mêmes vertus que $P$ et $\Theta$, il
+existe un unique $A$-isom de $P$ sur $P'$, transformant $\Theta$ en
+$\Theta'$ [en d'autres termes \uncertain{toute} \struck{\ill{}} section de
+$A$ qui \uncertain{invarie} $\Theta$ est la section unité].
+
+b) Si on a un torseur $P$ sous $A$, muni d'un diviseur relatif positif
+$\Theta$ tel que $\deg \Theta^{g}/g! = 1$ \struck{de degré de polarisation
+$1$}, alors $\Theta$ est ample rel$/S$ [et définit \struck{donc} une
+polarisation de $P/S$ donc \struck{degré} de $A/S$. Cette dernière est de
+degré de polarisation $1$.
+
+c) Sous les conditions de b), considérons l'homom de composition $A \times P
+\to P$, et soit $\Theta'$ l'image inverse de $\Theta$ dans $A \times P$.
+Alors $\Theta$ est un diviseur positif relatif sur $A \times P/P$ et définit
+donc un \struck{\ill{}} faisceau inversible sur $A \times P$, donc un homom
+$P \to \underline{\mathrm{Pic}}_{A/S}$. Ce dernier est un isom de $P$ sur
+$\underline{\mathrm{Pic}}^{\delta}_{A/S}$, où $\delta$ est la polarisation de
+$A/S$ définie par \struck{\ill{}} $\Theta$ sur $P$.\note{« Alors $\Theta$ » :
+sans prime sur la page, là où l'on attend $\Theta'$ ; « $/P$ » est ajouté en
+interligne après $A \times P$}
+
+d) Supposons que $A = \underline{\mathrm{Alb}}^{0}_{X/S}$, où $X/S$ est une
+courbe propre et lisse relative de \emph{genre} $g$. \struck{Alors}
+Considérons la polarisation canonique $\delta$ de $A$ \struck{définie par
+$B$}, \struck{\ill{} \ill{}} le diviseur diagonal sur $X \times_S X$. Cette
+polarisation est de degré $1$, et $P^{\delta}$ est canoniquement isomorphe,
+\uncertain{comme} $A$-torseur, à $\underline{\mathrm{Pic}}^{g-1}_{X/S} =
+\underline{\mathrm{Alb}}^{g-1}_{X/S}$, cet isomorphisme\note{« le diviseur
+diagonal », « est de degré $1$ » et « comme $A$-torseur » sont écrits en
+interligne, au-dessus de passages biffés ; l'ordre des mots est restitué
+d'après les traits de renvoi}
+\marginal{question de signe !}\note{encadré, en marge gauche au bas de la
+page, relié par un trait à la dernière ligne}
+
+\page{27}\note{paginé 6 par l'auteur}
+
+transformant $\Theta$ en $W_{g-1}$ (\uncertain{ce qui le caractérise}).
+
+\note{un trait horizontal suit. Vient ensuite un passage encadré, barré de
+longs traits obliques, que l'on donne comme biffé}
+\struck{Soit $X/S$ propre plat de prés.\ finie, $f_{*}(\mathcal{O}_X) \simeq
+\mathcal{O}_S$ univ.\add{ersellement}, $\underline{\mathrm{Pic}}^{0}_{X/S}$ un
+schéma abélien $B$, de dual $A = \underline{\mathrm{Alb}}^{0}_{X/S}$.
+Supposons donnée sur \ill{} $(X \times_S X)$ une correspondance divisorielle
+symétrique $C$, définissant donc une correspondance divisorielle symétrique
+\ill{} $A$, donc une polarisation $\gamma$ de $A$, \uncertain{section} de
+$\underline{\mathrm{NS}}_{A/S}$, soit $\gamma$.}\note{à l'intérieur du cadre,
+les deux « symétrique » sont en interligne et plusieurs mots sont biffés
+séparément avant la biffure d'ensemble}
+
+\struck{\ill{} bis} (\uncertain{c} bis) Soit $(P, \Theta)$ comme dans b).
+Considérons \struck{$P^{-1}$, $\Theta^{-1}$} $P^{-1}$, et l'isom (compatible
+avec la \emph{symétrie} sur $A$)
+\[
+  P \xrightarrow{\ \sigma_P\ } P^{-1} ,
+\]
+et soit $\Theta^{-*} = \sigma_P(\Theta)$. Alors la polarisation définie par
+$\Theta^{-*}$ sur $A$ est égale à celle définie par $\Theta$, donc il y a un
+isomorphisme unique de $A$-torseurs
+\[
+  K : P \xleftarrow{\ \sim\ } P^{-1}
+\]
+tel que $K(\Theta) = \Theta^{-*}$. On peut aussi considérer $K$ comme une
+section de $P^{\overset{A}{\otimes} 2}$
+\[
+  K \in \Gamma(S, P^{\overset{A}{\otimes} 2}) .
+\]
+\note{l'exposant de $\Theta^{-*}$ est lu douteusement : un signe moins suivi
+d'une étoile ou d'un petit signe surchargé ; la lettre de « (c bis) » peut
+se lire e. Dans $K : P \leftarrow P^{-1}$, le $P$ est surchargé}
+
+Lorsque $A = \underline{\mathrm{Alb}}^{0}_{X/S}$, $X$, $\delta$ comme dans
+d), donc $P \simeq \underline{\mathrm{Pic}}^{g-1}_{X/S}$ \struck{$\simeq
+\underline{\mathrm{Alb}}$}, \struck{$K$ est la} moyennant l'isom.\ $P \simeq
+\underline{\mathrm{Pic}}^{g-1}_{X/S}$, d'où $P^{(2)} \simeq
+\underline{\mathrm{Pic}}^{2g-2}_{X/S}$, $K$ est la section provenant du
+\struck{\ill{}} faisceau $\underline{\Omega}^{1}_{X/S}$ sur
+$X$.\note{« $P \simeq$ » est ajouté en interligne}
+
+\marginal{Vérifier que c'est la section \struck{\ill{}} canonique \ill{}
+$(\underline{\mathrm{Pic}}^{\ill{}}_{A/S})$ \ill{} pour toute section $\delta$
+de $\underline{\mathrm{NS}}_{A/S}$ \ldots}\note{en marge gauche, en oblique,
+reliée par un long trait courbe à « Lorsque » et à la ligne de $K$}
+
+\end{document}
