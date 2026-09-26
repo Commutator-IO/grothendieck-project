@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 import { useHashTarget } from './components/Anchors.tsx';
 import { FoldersToPrint, LineageToFolders } from './components/ConnectionGraphs.tsx';
@@ -255,7 +255,7 @@ function Row({ n, withCote }: { n: Finding; withCote?: boolean }) {
 }
 
 /** The rows of one shelfmark, under a heading that names the folder once. */
-function CoteGroup({ cote, rows }: { cote: string; rows: Finding[] }) {
+function CoteGroup({ cote, rows, total }: { cote: string; rows: Finding[]; total: number }) {
   const c = BY_ID.get(cote);
   return (
     <section className="mt-6 first:mt-3">
@@ -264,7 +264,7 @@ function CoteGroup({ cote, rows }: { cote: string; rows: Finding[] }) {
         {c && <span className="text-[12.5px] text-ink-500">{c.title}</span>}
         {c && <span className="tabular text-[12px] text-ink-400">{c.date}</span>}
         <span className="tabular text-[12px] text-ink-400">
-          · {rows.length} {rows.length === 1 ? 'finding' : 'findings'}
+          · {total} {total === 1 ? 'finding' : 'findings'}
         </span>
       </h3>
       <ul className="mt-2.5 space-y-3">
@@ -276,22 +276,30 @@ function CoteGroup({ cote, rows }: { cote: string; rows: Finding[] }) {
   );
 }
 
+/**
+ * One section of the list — open, found, refuted — showing only the rows of
+ * the current page, `all` being the section's rows across every page. The
+ * counts in the headings are the section's and the folder's whole totals, so
+ * paging never makes a folder look as if it had fewer findings than it has.
+ */
 function Section({
   title,
   note,
   rows,
+  all,
   flat,
 }: {
   title: string;
   note?: string;
   rows: Finding[];
+  all: Finding[];
   flat?: boolean;
 }) {
   if (rows.length === 0) return null;
   return (
     <section className="mt-10">
       <h2 className="text-[11px] font-bold uppercase tracking-[0.12em] text-ink-400">
-        {title} — {rows.length}
+        {title} — {all.length}
       </h2>
       {note && (
         <p className="mt-2 max-w-[44em] text-[13.5px] leading-relaxed text-ink-500">{note}</p>
@@ -304,7 +312,12 @@ function Section({
         </ul>
       ) : (
         cotesOf(rows).map((cote) => (
-          <CoteGroup key={cote} cote={cote} rows={rows.filter((n) => n.cote === cote)} />
+          <CoteGroup
+            key={cote}
+            cote={cote}
+            rows={rows.filter((n) => n.cote === cote)}
+            total={all.filter((n) => n.cote === cote).length}
+          />
         ))
       )}
     </section>
@@ -422,6 +435,40 @@ function PlainCard({ p }: { p: PlainItem }) {
   );
 }
 
+const PAGE = 10;
+
+/** Previous · 11–20 of 143 · Next. Rendered above and below the list. */
+function Pager({
+  page,
+  count,
+  onPage,
+}: {
+  page: number;
+  count: number;
+  onPage: (p: number) => void;
+}) {
+  const pages = Math.max(1, Math.ceil(count / PAGE));
+  if (pages <= 1) return null;
+  const from = page * PAGE + 1;
+  const to = Math.min(count, (page + 1) * PAGE);
+  const btn =
+    'rounded-full px-3 py-1 text-[12.5px] transition-colors disabled:cursor-default disabled:opacity-40 bg-ink-100 text-ink-700 hover:enabled:bg-ink-200';
+  return (
+    <nav aria-label="Pages of findings" className="mt-6 flex items-center gap-3">
+      <button type="button" className={btn} disabled={page === 0} onClick={() => onPage(page - 1)}>
+        ← Previous
+      </button>
+      <span className="tabular text-[12.5px] text-ink-500">
+        {from}–{to} of {count}
+        <span className="text-ink-400"> · page {page + 1} of {pages}</span>
+      </span>
+      <button type="button" className={btn} disabled={page >= pages - 1} onClick={() => onPage(page + 1)}>
+        Next →
+      </button>
+    </nav>
+  );
+}
+
 export function FindingsPage() {
   useHashTarget();
 
@@ -450,6 +497,61 @@ export function FindingsPage() {
   const open = visible.filter((n) => n.status !== 'matched' && n.status !== 'refuted');
   const closed = visible.filter((n) => n.status === 'matched');
   const refuted = visible.filter((n) => n.status === 'refuted');
+
+  // The list in the order it is read — open, then found, then refuted, each
+  // grouped by folder or sorted by checkability — so that a page is ten
+  // consecutive rows of what the reader would otherwise scroll through.
+  const inOrder = (rows: Finding[]) =>
+    order === 'checkable'
+      ? [...rows].sort(byCheckable)
+      : cotesOf(rows).flatMap((c) => rows.filter((n) => n.cote === c));
+  const ordered = [...inOrder(open), ...inOrder(closed), ...inOrder(refuted)];
+  const [page, setPage] = useState(0);
+  const pages = Math.max(1, Math.ceil(ordered.length / PAGE));
+  const current = Math.min(page, pages - 1);
+  const onPage = new Set(ordered.slice(current * PAGE, (current + 1) * PAGE).map((n) => n.id));
+  const here = (rows: Finding[]) => rows.filter((n) => onPage.has(n.id));
+
+  // A new search, folder or order starts again at the first page.
+  useEffect(() => setPage(0), [query, only, order]);
+
+  // A link to a row — from the plain-words cards, or pasted — turns to the
+  // page that holds it, clearing the filters first if they hide it.
+  const orderedRef = useRef(ordered);
+  orderedRef.current = ordered;
+  const pending = useRef<string | null>(null);
+  useEffect(() => {
+    const go = () => {
+      const id = decodeURIComponent(location.hash.slice(1));
+      if (!FINDINGS.some((n) => n.id === id)) return;
+      const i = orderedRef.current.findIndex((n) => n.id === id);
+      if (i < 0) {
+        pending.current = id;
+        setQuery('');
+        setOnly(null);
+        return;
+      }
+      setPage(Math.floor(i / PAGE));
+      requestAnimationFrame(() => document.getElementById(id)?.scrollIntoView({ block: 'start' }));
+    };
+    go();
+    window.addEventListener('hashchange', go);
+    return () => window.removeEventListener('hashchange', go);
+  }, []);
+  useEffect(() => {
+    const id = pending.current;
+    if (!id) return;
+    const i = ordered.findIndex((n) => n.id === id);
+    if (i < 0) return;
+    pending.current = null;
+    setPage(Math.floor(i / PAGE));
+    requestAnimationFrame(() => document.getElementById(id)?.scrollIntoView({ block: 'start' }));
+  });
+
+  const turn = (p: number) => {
+    setPage(p);
+    requestAnimationFrame(() => document.getElementById('full-list')?.scrollIntoView({ block: 'start' }));
+  };
 
   return (
     <>
@@ -590,21 +692,27 @@ export function FindingsPage() {
           </p>
         )}
 
-        <Section title="Open" rows={open} flat={order === 'checkable'} />
+        <Pager page={current} count={ordered.length} onPage={turn} />
+
+        <Section title="Open" rows={here(open)} all={open} flat={order === 'checkable'} />
 
         <Section
           title="Looked up and found"
           note="Candidates that turned out to be in the literature. They stay here on purpose: a killed candidate saves the next reader the search, and a list that only ever grows is not being checked."
-          rows={closed}
+          rows={here(closed)}
+          all={closed}
           flat={order === 'checkable'}
         />
 
         <Section
           title="Shown false as stated"
           note="Candidates that a counterexample, from the literature or checked in the row, shows to be false as written. Kept for the same reason as the matched ones — and because the folder's statement is still the folder's: what is refuted is the claim, and the row says what part of it still stands."
-          rows={refuted}
+          rows={here(refuted)}
+          all={refuted}
           flat={order === 'checkable'}
         />
+
+        <Pager page={current} count={ordered.length} onPage={turn} />
 
         <FoldersToPrint />
 
