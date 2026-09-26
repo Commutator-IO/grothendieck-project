@@ -40,15 +40,20 @@
  * sequence that would stand in the TEI as literal text. A refused file is
  * reported and the run exits non-zero, so the deploy stops. Output goes to
  * public/transcripts/, derived and unversioned like the HTML and the PDF.
- * Every file is checked well-formed with xmllint where it exists; validation
- * against tei_all.rng is a separate step (see the README) because the schema
- * is a megabyte nobody wants vendored.
+ *
+ * Every file names the schema it is written against — the RELAX NG derived
+ * from tei/grothendieck.odd, in an <?xml-model?> — and the ODD itself, in
+ * <schemaRef>. The ODD declares exactly the elements this script emits, and
+ * scripts/tei-validate.mjs (`npm run tei:validate`) holds every file to it
+ * and to unmodified tei_all on every deploy. xmllint, where it exists, checks
+ * well-formedness here as the files are written.
  */
 
-import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
+import { copyFile, mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 import { resolve, basename } from 'node:path';
+import { ODD_URL, RNG_URL } from './tei-validate.mjs';
 
 const exec = promisify(execFile);
 
@@ -59,6 +64,10 @@ const MONTPELLIER = 'https://grothendieck.umontpellier.fr';
 const SITE = 'https://grothendieck.commutator.io';
 const REPO = 'https://github.com/Commutator-IO/grothendieck-project';
 const TEI_NS = 'http://www.tei-c.org/ns/1.0';
+// The customisation every file is written against, and its derived schema:
+// tei/grothendieck.odd, published under /tei/ and checked by
+// scripts/tei-validate.mjs, which writes the schema.
+const ODD_SOURCE = resolve(ROOT, 'tei', 'grothendieck.odd');
 
 // ---------------------------------------------------------------------------
 // Lifting math out and putting it back, as the renderer does.
@@ -460,6 +469,7 @@ function document(meta, body) {
     : `<name xml:id="pass" type="model">modèle non enregistré dans l'en-tête</name>`;
 
   return `<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="${RNG_URL}" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
 <TEI xmlns="${TEI_NS}" xml:lang="fr">
   <teiHeader>
     <fileDesc>
@@ -571,11 +581,12 @@ function document(meta, body) {
         faute évidente est signalée par une note, jamais corrigée.</p>
       </editorialDecl>
       <appInfo>
-        <application ident="grothendieck-tei" version="1">
+        <application ident="grothendieck-tei" version="2">
           <label>scripts/tei.mjs</label>
           <ref target="${REPO}">${REPO}</ref>
         </application>
       </appInfo>
+      <schemaRef type="ODD" url="${ODD_URL}"/>
     </encodingDesc>
     <profileDesc>
       <langUsage>
@@ -667,8 +678,11 @@ async function main() {
     }
   }
 
+  await mkdir(resolve(ROOT, 'public', 'tei'), { recursive: true });
+  await copyFile(ODD_SOURCE, resolve(ROOT, 'public', 'tei', 'grothendieck.odd'));
+
   process.stdout.write(
-    `${n} TEI files → public/transcripts/` +
+    `${n} TEI files → public/transcripts/, and the ODD at /tei/grothendieck.odd` +
       (checked ? ` (${checked} checked well-formed by xmllint)` : ' (xmllint not found; not checked)') +
       '\n',
   );

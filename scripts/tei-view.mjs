@@ -143,7 +143,7 @@ const HEADER_ELEMENTS = new Set([
   'settlement', 'repository', 'collection', 'idno', 'head', 'msContents', 'summary',
   'history', 'origin', 'origDate', 'note', 'additional', 'surrogates', 'bibl', 'hi',
   'encodingDesc', 'projectDesc', 'editorialDecl', 'appInfo', 'application', 'label',
-  'profileDesc', 'langUsage', 'language', 'revisionDesc', 'change',
+  'schemaRef', 'profileDesc', 'langUsage', 'language', 'revisionDesc', 'change',
 ]);
 
 function find(el, name) {

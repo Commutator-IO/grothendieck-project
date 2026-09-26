@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="https://www.tei-c.org/Vault/P5/4.12.0/xml/tei/custom/schema/relaxng/tei_all.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xml:lang="en">
+  <teiHeader>
+    <fileDesc>
+      <titleStmt>
+        <title>Fonds Alexandre Grothendieck, transcriptions: the TEI customisation the export uses</title>
+        <author>Commutator</author>
+      </titleStmt>
+      <publicationStmt>
+        <publisher>Commutator</publisher>
+        <availability status="free">
+          <p>This file is the maintainers' own work, under the licence of the
+             repository's code (see LICENSE). It describes the encoding of
+             transcriptions of a fonds that is under rights — see RIGHTS.md —
+             and reproduces none of it.</p>
+        </availability>
+        <ref target="https://grothendieck.commutator.io/tei/grothendieck.odd">https://grothendieck.commutator.io/tei/grothendieck.odd</ref>
+      </publicationStmt>
+      <sourceDesc>
+        <p>Written against the export produced by
+           <ref target="../scripts/tei.mjs">scripts/tei.mjs</ref> from the
+           transcriptions in <ref target="../transcripts/">transcripts/</ref>,
+           which are the source of record.</p>
+      </sourceDesc>
+    </fileDesc>
+    <encodingDesc>
+      <p>An ODD in the ordinary sense: one document from which both the schema
+         and the documentation of this customisation are derived.</p>
+    </encodingDesc>
+  </teiHeader>
+
+  <text>
+    <body>
+
+      <div>
+        <head>What this declares</head>
+
+        <p>TEI P5 has some six hundred elements. The export of this corpus uses
+           sixty-four, and they are not a sample of the six hundred: they are
+           the exact reach of a mechanical conversion from a LaTeX subset of
+           eight private macros, a handful of list and heading commands, and
+           mathematics carried as TeX. Every element in the body exists because
+           a macro maps onto it; every element in the header exists because
+           <ref target="../scripts/tei.mjs">scripts/tei.mjs</ref> writes it.
+           Nothing in the export is a judgement the <code>.tex</code> did not
+           already make.</p>
+
+        <p>The list below is therefore a promise: these elements and no others,
+           these attribute values and no others. <ref target="../scripts/tei-validate.mjs">scripts/tei-validate.mjs</ref>
+           holds the export to it on every deploy, in both directions. An
+           element used and not declared is an error. An element declared and
+           used nowhere is an error too, because a declaration nobody reads is
+           a claim about the corpus that is not true, and a subset that can
+           only grow ends up as the full schema again. A value outside a closed
+           list is an error, which keeps <att>type</att> on a
+           <gi>div</gi> from turning into a free-text field one batch at a
+           time.</p>
+
+        <p>The customisation is a pure subset. It removes elements and closes
+           value lists; it adds nothing, renames nothing and changes no content
+           model. A file valid against it is therefore also valid against
+           unmodified TEI P5, and the validator checks both.</p>
+      </div>
+
+      <div>
+        <head>What the apparatus distinguishes</head>
+
+        <p>The transcriptions are not diplomatic. They encode the mathematics
+           and a critical apparatus, and nothing about the paper. The apparatus
+           makes five distinctions, and each has its own element:</p>
+        <list>
+          <item><gi>gap</gi>: a word read as illegible, never guessed
+             (<code>\ill</code>);</item>
+          <item><gi>unclear</gi>: a reading offered with doubt
+             (<code>\uncertain</code>);</item>
+          <item><gi>supplied</gi>: a word restored by the transcriber
+             (<code>\supplied</code>), and <gi>add</gi>: a word added by
+             Grothendieck himself, between the lines or over a struck word
+             (<code>\add</code>);</item>
+          <item><gi>del</gi>: a word he struck out (<code>\struck</code>);</item>
+          <item><gi>note</gi>: the transcriber's remark
+             (<code>\note</code>), or his own marginal note
+             (<code>\marginal</code>), which <att>type</att> tells
+             apart.</item>
+        </list>
+        <p>Mathematics is carried as TeX, untouched, in <gi>formula</gi>, and
+           commutative diagrams as tikz-cd source in a <gi>formula</gi> inside a
+           <gi>figure</gi>. An apparatus mark inside a formula (an illegible
+           exponent, a struck symbol) stays inside the TeX, under the same
+           macros, where both the PDF and the reading view typeset it.</p>
+      </div>
+
+      <div>
+        <head>The customisation</head>
+
+        <schemaSpec ident="grothendieck" start="TEI" prefix="tei_"
+                    source="https://www.tei-c.org/Vault/P5/4.12.0/xml/tei/odd/p5subset.xml">
+
+          <!-- Infrastructure: the classes and macros every schema needs. It
+               declares no element this export emits. -->
+          <moduleRef key="tei"/>
+
+          <!-- The document and its divisions: one division per batch, and a
+               division for each \section and \subsection inside it. -->
+          <moduleRef key="textstructure" include="TEI body div text"/>
+
+          <!-- The reading: text, lists, headings, page breaks, and the
+               apparatus. -->
+          <moduleRef key="core"
+                     include="add author bibl date del gap head hi item label list name note p pb
+                              pubPlace publisher quote ref resp respStmt title unclear"/>
+
+          <!-- Provenance: which model read the pages and when, every revision
+               since, the export, and the legal status. -->
+          <moduleRef key="header"
+                     include="appInfo application availability change edition editionStmt
+                              editorialDecl encodingDesc fileDesc idno langUsage language
+                              profileDesc projectDesc publicationStmt revisionDesc schemaRef
+                              sourceDesc teiHeader titleStmt"/>
+
+          <!-- The folder at Montpellier, as the university identifies it, and
+               its facsimile. -->
+          <moduleRef key="msdescription"
+                     include="additional collection history msContents msDesc msIdentifier
+                              origDate origin repository summary surrogates"/>
+          <moduleRef key="namesdates" include="country orgName settlement"/>
+
+          <!-- Mathematics, and the diagrams that hold it. -->
+          <moduleRef key="figures" include="figure formula"/>
+
+          <!-- The transcriber's restorations. -->
+          <moduleRef key="transcr" include="supplied"/>
+
+          <!-- The closed value lists. They are the part a consumer can rely
+               on: a value here is drawn from a list, not invented per file,
+               and the validator refuses anything outside it. -->
+
+          <elementSpec ident="div" module="textstructure" mode="change">
+            <attList>
+              <attDef ident="type" mode="change" usage="opt">
+                <desc>What the division is. Absent on the one division a
+                   batch opens when a <code>\subsection</code> comes before
+                   any <code>\section</code>: that division stands in for
+                   the section the transcription does not name.</desc>
+                <valList type="closed" mode="replace">
+                  <valItem ident="batch">
+                    <desc>The whole batch: twenty pages or fewer of one folder,
+                       the unit a transcription covers.</desc>
+                  </valItem>
+                  <valItem ident="section">
+                    <desc>A heading of the transcription
+                       (<code>\section</code>): his own title where the page
+                       has one, the edition's where it does not, and the
+                       <gi>head</gi> or an editorial note says which.</desc>
+                  </valItem>
+                  <valItem ident="subsection">
+                    <desc>A heading one level down
+                       (<code>\subsection</code>).</desc>
+                  </valItem>
+                </valList>
+              </attDef>
+            </attList>
+          </elementSpec>
+
+          <elementSpec ident="figure" module="figures" mode="change">
+            <attList>
+              <attDef ident="type" mode="change" usage="req">
+                <valList type="closed" mode="replace">
+                  <valItem ident="diagram">
+                    <desc>A commutative diagram, carried as tikz-cd source in
+                       the <gi>formula</gi> it contains. The only figure the
+                       export has: the transcription reproduces no drawing.</desc>
+                  </valItem>
+                </valList>
+              </attDef>
+            </attList>
+          </elementSpec>
+
+          <elementSpec ident="formula" module="figures" mode="change">
+            <attList>
+              <attDef ident="notation" mode="change" usage="req">
+                <valList type="closed" mode="replace">
+                  <valItem ident="TeX">
+                    <desc>LaTeX mathematics, as written in the source, under
+                       the macros of the repository's preamble.</desc>
+                  </valItem>
+                  <valItem ident="tikz-cd">
+                    <desc>A <code>tikzcd</code> environment, whole.</desc>
+                  </valItem>
+                </valList>
+              </attDef>
+              <attDef ident="rend" mode="change" usage="opt">
+                <valList type="closed" mode="replace">
+                  <valItem ident="display">
+                    <desc>Set apart on its own line. Absent on inline
+                       formulas.</desc>
+                  </valItem>
+                </valList>
+              </attDef>
+            </attList>
+          </elementSpec>
+
+          <elementSpec ident="gap" module="core" mode="change">
+            <attList>
+              <attDef ident="reason" mode="change" usage="req">
+                <valList type="closed" mode="replace">
+                  <valItem ident="illegible">
+                    <desc>Looked at and not read. The transcription never
+                       guesses under this mark; a guess is
+                       <gi>unclear</gi>.</desc>
+                  </valItem>
+                </valList>
+              </attDef>
+            </attList>
+          </elementSpec>
+
+          <elementSpec ident="note" module="core" mode="change">
+            <attList>
+              <attDef ident="type" mode="change" usage="opt">
+                <desc>Whose note it is. The distinction is the point: an
+                   <val>authorial</val> note is writing on the leaf, an
+                   <val>editorial</val> one is not. Present on every note in
+                   the text; absent only on the two notes the header writes
+                   itself, on the inventory's dating and on the facsimile's
+                   cover sheet, which belong to the edition and not to the
+                   apparatus.</desc>
+                <valList type="closed" mode="replace">
+                  <valItem ident="editorial">
+                    <desc>The transcriber's remark, always with
+                       <att>resp</att>.</desc>
+                  </valItem>
+                  <valItem ident="authorial">
+                    <desc>Grothendieck's own note in the margin, always with
+                       <att>place</att>.</desc>
+                  </valItem>
+                </valList>
+              </attDef>
+              <attDef ident="place" mode="change" usage="opt">
+                <valList type="closed" mode="replace">
+                  <valItem ident="margin"/>
+                </valList>
+              </attDef>
+            </attList>
+          </elementSpec>
+
+          <elementSpec ident="hi" module="core" mode="change">
+            <attList>
+              <attDef ident="rend" mode="change" usage="req">
+                <desc>The typography of the transcription, which carries his
+                   own emphasis where the page has it.</desc>
+                <valList type="closed" mode="replace">
+                  <valItem ident="italic"/>
+                  <valItem ident="bold"/>
+                  <valItem ident="monospace"/>
+                  <valItem ident="sup"/>
+                </valList>
+              </attDef>
+            </attList>
+          </elementSpec>
+
+          <elementSpec ident="list" module="core" mode="change">
+            <attList>
+              <attDef ident="rend" mode="change" usage="req">
+                <desc>The LaTeX environment the list came from. His own
+                   numbering, where a list carries one, is a <gi>label</gi>
+                   before the item and not implied by this value.</desc>
+                <valList type="closed" mode="replace">
+                  <valItem ident="itemize"/>
+                  <valItem ident="enumerate"/>
+                </valList>
+              </attDef>
+            </attList>
+          </elementSpec>
+
+          <elementSpec ident="idno" module="header" mode="change">
+            <attList>
+              <attDef ident="type" mode="change" usage="req">
+                <valList type="closed" mode="replace">
+                  <valItem ident="cote">
+                    <desc>The folder's shelfmark in the inventory of the
+                       Université de Montpellier.</desc>
+                  </valItem>
+                </valList>
+              </attDef>
+            </attList>
+          </elementSpec>
+
+          <elementSpec ident="name" module="core" mode="change">
+            <attList>
+              <attDef ident="type" mode="change" usage="req">
+                <valList type="closed" mode="replace">
+                  <valItem ident="model">
+                    <desc>A language model that read the pages, named as the
+                       transcription's header names it, with its identifier.
+                       The only person-like agent the export names: no human
+                       has checked a transcription against the pages.</desc>
+                  </valItem>
+                </valList>
+              </attDef>
+            </attList>
+          </elementSpec>
+
+          <elementSpec ident="schemaRef" module="header" mode="change">
+            <attList>
+              <attDef ident="type" mode="change" usage="req">
+                <valList type="closed" mode="replace">
+                  <valItem ident="ODD">
+                    <desc>This file, at its published URL.</desc>
+                  </valItem>
+                </valList>
+              </attDef>
+            </attList>
+          </elementSpec>
+
+        </schemaSpec>
+      </div>
+
+      <div>
+        <head>How the schema is derived, and how the export is held to it</head>
+
+        <p>This ODD is the source. The RELAX NG schema is derived from it on
+           every deploy and is not kept in the repository, for the reason no
+           other derived file is kept: a copy that can drift from its source
+           will. It is published beside this file, at
+           <ref target="https://grothendieck.commutator.io/tei/grothendieck.rng">https://grothendieck.commutator.io/tei/grothendieck.rng</ref>,
+           and every exported file names it in an <code>xml-model</code>
+           processing instruction, so an XML editor that opens a transcription
+           validates it against this customisation without being told to.</p>
+
+        <p>The derivation uses the Consortium's own stylesheets,
+           <code>odd2odd.xsl</code> then <code>odd2relax.xsl</code>, from TEI
+           Stylesheets 7.61.0 on Saxon-HE 12.5, against the
+           <code>p5subset.xml</code> of TEI P5 4.12.0 named in the
+           <att>source</att> of the <gi>schemaSpec</gi> above. All four are
+           fetched at pinned versions and checked against SHA-256 digests
+           recorded in <ref target="../scripts/tei-validate.mjs">scripts/tei-validate.mjs</ref>,
+           which runs <code>npm run tei:validate</code>:</p>
+        <list>
+          <item>this ODD, against unmodified <code>tei_all.rng</code> of
+             TEI P5 4.12.0, with jing;</item>
+          <item>every exported file, against the same <code>tei_all.rng</code>
+             and against the schema derived from this ODD, with jing;</item>
+          <item>the export against this file directly: every element used is
+             declared, every element declared is used, and every value of an
+             attribute with a closed list is on it.</item>
+        </list>
+        <p>Any failure fails the deploy. The Schematron constraints that
+           <code>tei_all</code> embeds are not run over the corpus; the ones
+           that bear on this subset are the pointer checks, and the export
+           writes every pointer it uses (<code>#pass</code>, <code>#ed</code>
+           and one per revising model) together with its target.</p>
+      </div>
+
+      <div>
+        <head>What this rests on</head>
+        <listBibl>
+          <bibl><author>TEI Consortium</author>. <title level="m">TEI P5:
+             Guidelines for Electronic Text Encoding and Interchange</title>,
+             version 4.12.0, 28 July 2026.
+             <ref target="https://www.tei-c.org/Vault/P5/4.12.0/">www.tei-c.org/Vault/P5/4.12.0/</ref>.
+             The version the corpus is validated against, by the Vault URL
+             rather than the moving one.</bibl>
+          <bibl><author>Rahtz, Sebastian</author> and
+             <author>Burnard, Lou</author>. <title level="a">Reviewing the TEI
+             ODD System</title>. In <title level="m">DocEng '13: Proceedings of
+             the 2013 ACM Symposium on Document Engineering</title>,
+             pp. 193–196. New York: ACM, 2013.
+             <ref target="https://doi.org/10.1145/2494266.2494321">doi:10.1145/2494266.2494321</ref>.</bibl>
+          <bibl>The customisation of the Hopper ledgers,
+             <ref target="https://hopper.commutator.io/tei/hopper.odd">hopper.commutator.io/tei/hopper.odd</ref>,
+             on which this one is modelled.</bibl>
+        </listBibl>
+      </div>
+
+    </body>
+  </text>
+</TEI>

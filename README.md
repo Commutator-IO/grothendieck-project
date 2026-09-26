@@ -184,17 +184,30 @@ the file's comment carries — the model that read the pages, the date, the
 as structured statements, so a file deposited in HAL or Nakala keeps its
 provenance without this site. The export holds the transcription's line of
 not being a diplomatic edition: it encodes what the macros encode and nothing
-about the paper.
+about the paper. A construct outside the subset — an unknown environment, a
+control sequence that would be left as text — fails the run, as it fails
+`npm run render`.
 
-Every file is checked well-formed with `xmllint` when it is installed. To
-validate against the TEI schema itself, fetch `tei_all.rng` once from
-tei-c.org and run:
+The export is written against a customisation of its own,
+[`tei/grothendieck.odd`](tei/grothendieck.odd): the sixty-four elements it
+emits and no others, with closed value lists for the attributes that carry
+meaning (`@type` on `div`, `figure` and `note`, `@notation` on `formula`,
+`@reason` on `gap`, `@rend`). Each file names the RELAX NG derived from it in
+an `<?xml-model?>` and the ODD in `<schemaRef>`, both served under
+[/tei/](https://grothendieck.commutator.io/tei/grothendieck.odd), so an XML
+editor validates a downloaded file without being told how. The deploy runs
 
 ```bash
-for x in public/transcripts/*/batch-*.fr.xml; do xmllint --noout --relaxng tei_all.rng "$x"; done
+npm run tei:validate
 ```
 
-On 5 September 2026 all 53 files validated.
+which validates every file, with jing, against unmodified `tei_all` and
+against the schema derived from the ODD (TEI Stylesheets on Saxon, every
+input pinned by version and SHA-256), then checks the ODD against the export
+in both directions — no element used and undeclared, none declared and
+unused. Any failure fails the deploy; so does `npm run check-tei`, which
+compares the TEI reading view with the `.tex` one page by page. Locally it
+needs Java.
 
 **Fifty-two batches are transcribed so far — twenty-six folders, 661 pages.**
 The first five ran under Fable 5: folder 115 (fourteen pages — functorial
