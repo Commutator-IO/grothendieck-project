@@ -1,0 +1,597 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 156-1, batch 1 (pages 1-20).
+% Established from the facsimile archives/batches/156-1/batch-01.pdf (a copy of
+% 156-1.pdf fetched through the project's relay; no cover sheet in the batch,
+% so PDF page k = folder page k), per the skill transcribe-grothendieck. The
+% folder is twenty-six pages; this is the first of two batches (pages 21-26 are
+% batch 2, transcribed separately; its notation — \mathcal{L}, \mathfrak{P},
+% \mathfrak{P}_2, ∂I, I^{\circ}, I_{x,y}, underlining as \emph — is the one
+% used here).
+%
+% All twenty leaves are mathematics in his hand and all are transcribed;
+% nothing is skipped and nothing is summarised. Page 1 carries the title
+% « Vers une géométrie des formes (topologiques) », « (Juin 86) » beneath it,
+% and « GF I » in the top-left corner; the body opens « (5 juin) », the date
+% the inventory gives. A second date, « 7.6. », heads the slanted margin note
+% of page 3. His own pagination starts again with the second draft: page 3 is
+% his 2, and pages 4-20 run his 3-18 (page 10 shows no number); it is noted
+% once per page. The inventory's bracketed « [Chapitre] » is the archivists';
+% the title is his.
+%
+% Moutures kept apart. Pages 1-2 (each struck by one long diagonal) are a first
+% draft: a « modèle de dimension 1 » as a list of data (1)-(8) — lieux, lieux
+% critiques, relations « disjoints », « adjacents », « spécialisation »,
+% segments with extremities δI and lieux Ĩ — then axiom E_1 (the points of the
+% form as a quotient of the critical lieux). Pages 3-4 are a second draft (two
+% base sets L, S, maps I ↦ Ĩ and ∂ : S → P_2(L); regular and singular lieux;
+% axioms F_1-F_3), most of page 4 cancelled by a large X. Page 5 starts a
+% third draft, « Modèle d'une forme 1-dimensionnelle », which runs to the end
+% of the batch: F1 (divisibility: for z ∈ Ĩ ∖ x a unique I_{x,z} ⊂ I),
+% F2 (Ĩ° ≠ ∅, Ĩ_{x,z} ∩ Ĩ_{y,z} = {z}), corollaries 1-4 (Ĩ° infinite;
+% injectivity of J ↦ ∂J on S_I; Ĩ = J̃ ⇒ I = J, so S ⊂ P(L)); page 6: F3
+% « axiome des branches », the equivalence R_x on segments issuing from x,
+% the set of branches B_x = S_x/R_x and the order of a lieu; page 7: regular
+% and singular lieux, F4 « axiome de recollement »; page 8: F5 « axiome des
+% lieux réguliers » (a regular lieu has order two), F'_5 (filter base).
+% Pages 9-13: remarks (trivial models; restriction to L' ⊂ L); a
+% « modèle-segment » is the same as a « biordre » — a pair of opposite orders
+% with distinct least and greatest elements, divisible, locally filtering and
+% cofiltering (page 10's first attempt at the order is cancelled and redone on
+% page 11). Page 14: orientation; regular models (L = L_r), connected
+% components π_0(𝔛). Pages 15-17: for a regular connected model, a theorem
+% (stated, the proof deferred: « il doit être immédiat ») that the ∂I and the
+% B_x are identified with one another through a set ω of at most two
+% « orientations »; the relation x ≺ y (x origin, y end of a segment) and the
+% cases I) linear (≺ transitive) and circular. Pages 18-20: in the linear case
+% ≺ is an order, filtering in both directions, locally filtering, divisible;
+% the proof that it is strictly filtering increasing, by induction on chains,
+% reduces to a « filtration relative » (two Hasse sketches, drawn in tikz-cd
+% with headless lines); the batch ends on the remark that a connected order
+% satisfying the local conditions defines a regular connected model but need
+% not be filtering — the counter-example opens batch 2 (page 21).
+%
+% Reading hazards fixed once here. He writes Ĩ (tilde) for the set of lieux on
+% a segment in these pages and it is kept (\widetilde{I}, \widetilde{I}^{\circ});
+% batch 2, after his identification of I with Ĩ, drops it. On pages 1-2 the
+% boundary is δI, from page 3 ∂I; both are kept as written (\delta, \partial).
+% The order is written with a curly ≼ (\preccurlyeq) on pages 10-11, with ≤
+% and < from page 12. The hand is fast drafting and the left margins of pages
+% 1, 4, 6, 8 and 12 carry slanted notes, several of them cancelled, that are
+% read only in part; what they will not support is \ill{}.
+%
+% Readings flagged and not settled: most of the margin notes of pages 1, 6, 8
+% and 12; « équivalence » and « unique » in the page-1 margin; « divisibilité »
+% in the page-5 margins; « ou » in condition 2) of page 6; « Apparemment » on
+% page 4; « y reviendra » on page 6; « mutuellement » on page 10; the end of
+% the Cor 1 line on page 7 (« avec y' ≠ x »); « ainsi … orienté » and
+% « sortant » on page 17; the alternating inequalities on page 19. Variances
+% on the page and not repaired: page 9 writes Ĩ ⊂ I where J̃ ⊂ Ĩ is meant;
+% page 15 writes ω_𝔛 then ω_L for the same quotient; page 4 numbers two
+% axioms F_2 (the second over a struck numeral).
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-09-26 — first pass, unchecked against the pages by a human.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{156-1}
+\batch{1}
+\pages{1}{20}
+\dating{1986}
+\watermark{Édition de démonstration}
+\foldertitle{[Chapitre] I. Vers une géométrie des formes (topologiques) : notes manuscrites (05/06/1986).}
+
+\begin{document}
+\page{1}
+\section{Vers une géométrie des formes (topologiques)}
+
+\note{titre de sa main, en tête de la page 1, que sa pagination numérote « 1 » ; dans l'angle supérieur gauche, séparé par un trait, « GF I ». Sous le titre, entre parenthèses et souligné, « (Juin 86) », le 6 récrit sur un 5. Les pages 1 et 2 sont barrées chacune d'un long trait oblique : c'est une première mouture, reprise à la page 3}
+
+(5 juin) Approche vers une construction récurrente (sur l'entier naturel $n$) d'une « géométrie des formes de dimension $\leq n$ ».
+
+Une \struck{\ill{}} « forme de dim 0 » sera par définition un ensemble discret dont les éléments sont appelés les « lieux » de la forme.
+\marginal{Un modèle d'une forme de dim 0 sera un ensemble $\mathcal{L}$ (« lieux ») muni \ill{} \ill{} d'\uncertain{équivalence} \ill{} (« \ill{} ») \ill{} « disjoints »). i.e. \ill{} \ill{} modèle est l'\uncertain{unique} \ill{}}
+\note{note oblique dans la marge gauche, à quarante-cinq degrés environ, entremêlée aux débuts de lignes du texte ; en partie seulement lue}
+Un \struck{\ill{}} tel modèle $\mathfrak{X}$ comporte
+
+\subsection{\struck{Forme} Modèle de dimension 1}
+
+\begin{itemize}
+  \item[(1)] Un ensemble des « \emph{lieux} » de la forme, $\mathcal{L}$.
+  \item[(2)] Un sous-ensemble $\mathcal{L}_0$ de $\mathcal{L}$, formé des lieux dits « \emph{critiques} » ou « \emph{de branchement} ».
+  \item[3)] Une relation \add{symétrique}\note{« symétrique » est écrit au-dessus de la ligne} dans $\mathcal{L}$ (i.e.\ $R \subset \mathcal{L} \times \mathcal{L}$) « $x$ et $y$ sont \emph{disjoints} », impliquant la relation « $x$ et $y$ sont distincts ».
+  \item[4)] Une relation \add{symétrique} plus fine « $x$ et $y$ sont \emph{adjacents} »
+  \item[(5)] Une \struck{ensemble de parties de $\mathcal{L}$, appelés} \struck{\ill{}} \struck{« segments »} relation plus fine encore \struck{« $x$ est s} (non nécessairement symétrique) « $x$ \struck{\ill{}} est spécialisation de $y$ » (qui implique que $x$ est critique, et $y$ n'est pas critique).
+  \item[(6)] Un ensemble $S$, \struck{de parties de $\mathcal{L}$} \struck{dont les éléments, $\mathfrak{X}$, \ill{} des segments}
+  \item[(7)] \add{appelés « \emph{segments} »} Pour tout segment \struck{\ill{}}, $I$, deux parties $\delta I$ de
+\end{itemize}
+\note{les numéros 1, 2, 5, 6, 7 sont cerclés, 3 et 4 ne le sont pas. En (5), « $S$ » est écrit au-dessus de « relation » ; en (6)--(7), plusieurs ajouts interlinéaires barrés se chevauchent et la lecture de leur ordre est incertaine}
+
+\page{2}
+deux éléments de $\mathcal{L}$, appelés « extrémités » \add{du segment} (\emph{adjacents} l'un de l'autre)
+\begin{itemize}
+  \item[(8)] Une partie $\widetilde{I}$ de $\mathcal{L}$ (l'\uncertain{ens.} des lieux dits \struck{\ill{}} « \emph{sur} le segment ») contenant $\delta I$.
+\end{itemize}
+
+\textbf{NB} 1) Si $x, y \in \mathcal{L}$, alors $x, y$ sont adjacents ssi $\exists\, I \in S$ tel que $\{x,y\} = \delta I$. Donc, la donnée (4) \struck{est inutile} résulte des autres (dans 7) il faut dire que si $\delta I = \{x,y\}$, $x$ et $y$ sont disjoints\ldots)
+
+2) Je présume que si $x, y \in \mathcal{L}$ sont adjacents, il y aura au plus deux segments $I$ tels que $\delta I = \{x,y\}$. (Il y en aura effectivement deux ssi $x, y$ appartiennent à \uncertain{un anneau} : une « composante connexe » de $\mathfrak{X}$ qui est un (modèle d'un) cercle.
+
+3) Je ne sais s'il faut supposer que $I$ est connu quand on connaît $\delta I$ et $\widetilde{I}$, i.e.\ si on peut considérer $S \subset \mathfrak{P}_2(\mathcal{L}) \times \mathfrak{P}(\mathcal{L})$.
+
+\subsection{Axiomes}
+
+(au vrai) \struck{On dit que la forme est de dim. 0} \struck{définie par la}\note{la ligne barrée porte, au-dessus, un ajout lui-même barré}
+
+\begin{itemize}
+  \item[E$_1$] Dans $\mathcal{L}_0$, la relation « $x$ et $y$ \struck{\ill{}} ne sont \ill{} disjoints » est une relation d'équivalence.\note{entre « sont » et « disjoints », un signe barré qui ressemble à $\neq$}
+\end{itemize}
+
+L'ensemble \struck{critiques, ou pts} quotient \add{appelé l'}ens. des \emph{points} \struck{(de branchement)} de la forme.
+
+(\struck{\ill{}} (\struck{NB} plusieurs lieux critiques différents peuvent définir le même point critique)
+
+\page{3}
+\note{p. 2 de sa pagination}
+\struck{Deux Un ensemble $\mathcal{L}$ (\ill{}}
+\begin{itemize}
+  \item[1)] \emph{Deux} ensembles de base $\mathcal{L}$ (ensemble des \emph{lieux} du modèle) et $S$ (ensemble des \emph{segments} du modèle)\note{l'indice de $\mathcal{L}$ est surchargé et n'a pas été lu}
+  \item[2)] Une application $S \to \mathfrak{P}(\mathcal{L})$, $I \mapsto \widetilde{I}$ (lieux sur un \struck{segment}) --- i.e.\ une relation entre $S$ et $\mathcal{L}$.
+  \item[3)] Une application $\partial : S \to \mathfrak{P}_2(\mathcal{L})$, $I \mapsto \partial I$, telle que $\partial I \subset \widetilde{I}$.
+\end{itemize}
++ axiomes
+
+\textbf{NB} J'ignore s'il faut supposer que $I$ est connu quand on connaît $\widetilde{I}$ et $\partial I$, i.e.\ s'il faut supposer $I \to \mathfrak{P}(\mathcal{L}) \times \mathfrak{P}_2(\mathcal{L})$ injectif.
+\marginal{7.6. On va supposer que $I$ est connu quand on connaît \uncertain{$\widetilde{I}$}, i.e.\ identifier $I$ à $\widetilde{I}$, et $S$ à un \uncertain{sous-ensemble} de $\mathfrak{P}(\mathcal{L})$}
+\note{note oblique dans la marge gauche, datée « 7.6. » ; elle est reliée au texte par une accolade}
+
+Si $I$ est un segment, les éléments de $\partial I$ sont appelés ses \emph{extrémités}, et ceux de $\widetilde{I} \smallsetminus \partial I$ \add{($\overset{\text{déf}}{=} \mathring{\widetilde{I}}$)} les lieux intérieurs au segment.\note{l'ajout interlinéaire, relié par une flèche, est en partie surchargé ; la lecture $\mathring{\widetilde I}$ s'appuie sur la notation $\widetilde I^{\circ}$ de la page suivante}
+
+Un lieu est dit \emph{régulier} s'il est intérieur \add{(au moins)} à un segment, \emph{singulier} (\struck{\ill{}} ou critique, ou lieu de branchement) sinon.
+\[
+  \mathcal{L}_r = \bigcup_{I \in S} (\widetilde{I} \smallsetminus \partial I), \qquad \mathcal{L}_s = \mathcal{L} \smallsetminus \mathcal{L}_r
+\]
+Ainsi, pour tout $I \in S$, on a
+\[
+  \widetilde{I} \cap \mathcal{L}_s \subset \partial I
+\]
+
+\page{4}
+\note{p. 3 de sa pagination}
+Soient $x, y \in \mathcal{L}$, on dit que $y$ est une \emph{spécialisation} de $x$ si \struck{$\exists$} a) $y$ est singulier, et b) $\exists\, I \in S$ tel que $x \in \widetilde{I}^{\circ}$, $y \in \partial I$.
+
+\subsection{Axiomes}
+\note{à partir d'ici, presque toute la page est annulée : un grand X la traverse, et le bas est en outre haché de traits obliques ; on transcrit ce qui se lit sous ces traits}
+
+\begin{itemize}
+  \item[F$_1$)] Soit $I \in S$, alors \struck{$\exists$} $\widetilde{I}^{\circ}$ ($\overset{\text{déf}}{=} \widetilde{I} \smallsetminus \partial I$) est non vide, et si $z \in \widetilde{I}^{\circ}$, \struck{$\exists$} $\partial I = \{x,y\}$, $\exists !\, I_{x,z} \in S$, $I_{y,z} \in S$ tels que
+  \[
+    \widetilde{I}_{x,z},\ \widetilde{I}_{y,z} \subset \widetilde{I}, \qquad \partial I_{x,z} = \{x,z\}, \quad \partial I_{y,z} = \{y,z\}
+  \]
+  De plus, on a alors
+  \[
+    \widetilde{I}_{x,z} \cap \widetilde{I}_{y,z} = \{z\}
+  \]
+\end{itemize}
+\marginal{décomposition des segments}
+\marginal{\emph{décomposition des segments}}
+\marginal{Mais attention, il \ill{} \ill{} dire $\widetilde{I} = \widetilde{I}_{x,z} \cup \widetilde{I}_{y,z}$ !!!}
+\marginal{\uncertain{Apparemment} : $\forall\, J \in S$ tel que $\widetilde{J} \subset \widetilde{I}$, $\partial J \ni z$, on a $\widetilde{J} \subset \widetilde{I}_{x,z}$ \ill{} $\widetilde{J} \subset \widetilde{I}_{y,z}$ \ill{}}
+\note{les trois premières notes sont obliques dans la marge gauche, la deuxième soulignée deux fois ; la quatrième est serrée dans la marge droite, au niveau de « De plus »}
+
+\begin{itemize}
+  \item[F$_2$)] \struck{Soient $x, y$ lieux singuliers.} \add{Soient $I \in S$, et $\Phi \in \widetilde{I}^{\circ}$.} \struck{Alors, \ill{}} \struck{Si existe $I \in S$ tel que $x, y \in \widetilde{I}^{\circ}$, alors} $\exists$ \struck{\ill{}} $I' \in S$ tel que a) \struck{$x$,} $\Phi \in \widetilde{I}'^{\circ}$, b) $\widetilde{I}' \subset \widetilde{I}^{\circ}$.
+\end{itemize}
+\note{l'énoncé primitif portait sur deux lieux singuliers $x, y$ ; il est récrit en interligne avec $\Phi$ et un segment $I$. Le « 2 » de F$_2$ est lui-même barré d'un trait oblique}
+
+\textbf{\emph{Corollaire 1}} $\widetilde{I}$ est infini
+
+\textbf{\emph{Corollaire 2}} Si $S \neq \emptyset$, $S$ est infini \struck{$\widetilde{J} \subset \widetilde{I}$} (car l'\ill{} des $J \in S$ tels que $\widetilde{J} \subset \widetilde{I}$ \ill{} infini\ldots)
+
+\begin{itemize}
+  \item[F$_2$)] (Réciproque de F$_1$) Soient $I', I'' \in S$, tels que
+  \[
+    \widetilde{I}' \cap \widetilde{I}'' = \struck{\ill{}}, \qquad \partial I' \cap \partial I'' = \{z\},
+  \]
+  avec $z$ \emph{régulier}. Alors $\exists !\, I \in S$, tel que $\widetilde{I}' \cup \widetilde{I}'' \subset \widetilde{I}$ et $\partial I = (\partial I' \cup \partial I'') \smallsetminus \{z\}$, et on a $I' = I_{x,z}$, $I'' = I_{y,z}$.
+\end{itemize}
+\marginal{\emph{recollement des segments}}
+\marginal{\struck{Filtration}}
+
+\struck{(F$_3$) Soit \ill{} si $\partial I' = \{x,z\}$, $\partial I'' = \{y,z\}$, \ill{} tels que \ill{} $x \neq \ill{}$ \ill{}} \struck{bien \ill{} filtrant : $\exists\, I$ tel que $x \in \widetilde{I}^{\circ} \subset \widetilde{I}'^{\circ} \cap \widetilde{I}''^{\circ}$ \ill{} si $x \in I'^{\circ} \cap I''^{\circ}$}
+\note{deux lignes et demie de variantes interlinéaires, barrées, qui semblent énoncer une condition de filtration ; l'ordre des fragments n'est pas sûr}
+
+\begin{itemize}
+  \item[F$_3$)] Soit $I \in S$, $\Phi$ partie finie de $\widetilde{I}^{\circ}$. Alors $\exists\, I' \in S$ tel que $\widetilde{I}^{\circ} \supset \widetilde{I}' \supset \Phi$.
+\end{itemize}
+\marginal{Il en résulte qu'il existe \ill{} $I$ \ill{} $\widetilde{I} \subset \widetilde{I}'^{\circ} \cap \widetilde{I}''^{\circ}$ \ill{} $x \in \widetilde{I}^{\circ}$}
+\note{note serrée dans le coin inférieur droit, en partie sous les hachures}
+\note{devant ce F$_2$, un premier numéro est barré}
+
+\page{5}
+\note{p. 4 de sa pagination. Nouvelle mouture}
+\subsection{Modèle d'une forme 1-dimensionnelle}
+
+$\mathcal{L}$, ensemble des « \emph{lieux} »
+
+$S$, \add{ensemble des} « segments »\note{un trait horizontal tient lieu de « ensemble des »}
+
+\[
+  \begin{array}{lll}
+    S \to \mathfrak{P}(\mathcal{L}), & I \mapsto \widetilde{I} & (\widetilde{I}\text{, ens. des lieux \emph{sur} le segment } I) \\
+    S \to \mathfrak{P}_2(\mathcal{L}) & I \mapsto \partial I & (\partial I\text{, ens. des deux lieux \emph{extrémités} de } I)
+  \end{array}
+\]
+avec $\partial I \subset \widetilde{I}$
+
+\begin{itemize}
+  \item[F1)] Soient $I \in S$, $\partial I = \{x,y\}$. \struck{\ill{} Alors \ill{}} [Soit $S_{I,x}$ l'ens.\ des $J \in S$ tels que $\widetilde{J} \subset \widetilde{I}$, $\partial J \ni x$, et soit $S_{I,x} \to \widetilde{I} \smallsetminus \{x\}$ défini par $J \mapsto z$ tel que $\partial J = \{x,z\}$. Cette application est bijection, i.e.] $\forall\, z \in \widetilde{I} \smallsetminus x$, $\exists !\, J \in S$, \struck{\ill{}} soit $I_{x,z}$, tel que $\widetilde{I}_{x,z} \subset \widetilde{I}$, $\partial I_{x,z} = \{x,z\}$
+\end{itemize}
+\marginal{axiome de \uncertain{divisibilité}}
+\note{note verticale dans la marge gauche, en face du crochet, qu'une accolade relie au passage}
+
+\textbf{NB} $I_{x,y} = I_{y,x} = I$
+
+\struck{De plus,}
+
+\begin{itemize}
+  \item[F2)] Soit $I \in S$, alors \struck{si $z \in$} $\widetilde{I}^{\circ} \neq \emptyset$, et si $z \in \widetilde{I}^{\circ}$ \struck{(i.e.\ $z \in \widetilde{I} \smallsetminus \{x,y\}$)},
+  \[
+    \widetilde{I}_{x,z} \cap \widetilde{I}_{y,z} = \{z\}.
+  \]
+  Et si $J \in S$ est tel que $\widetilde{J} \subset \widetilde{I}$, $z \in \partial J$, on a
+  \[
+    \widetilde{J} \subset \widetilde{I}_{x,z} \quad\text{ou}\quad \widetilde{J} \subset \widetilde{I}_{y,z}.
+  \]
+\end{itemize}
+\marginal{(F.C.) Faire \ill{} \ill{} \ill{} de \uncertain{divisibilité}}
+\note{note oblique dans la marge gauche ; un ajout barré, « $\neq \emptyset$ », y est relié par une flèche}
+
+\emph{Cor.~1} $\forall\, I \in S$, $\widetilde{I}^{\circ}$ est infini [découle de la condition de divisibilité]\note{le « $\forall$ » est marqué d'un astérisque}
+
+\emph{Cor.~2} Dans F2), les relations $\widetilde{J} \subset \widetilde{I}_{x,z}$ et $\widetilde{J} \subset \widetilde{I}_{y,z}$ s'excluent l'une l'autre
+
+\emph{Cor 3} Soit $I \in S$, \struck{\ill{}} $S_I = \lbrace J \in S \mid \widetilde{J} \subset \widetilde{I} \rbrace$, et
+\[
+  S_I \to \mathfrak{P}_2(\widetilde{I}), \qquad J \mapsto \partial J.
+\]
+Alors \struck{cette} a) cette application est injective b) Son image contient les $\varepsilon \in \mathfrak{P}_2(\widetilde{I})$ tels que $\varepsilon \cap \partial I \neq \emptyset$.
+
+\page{6}
+\note{p. 5 de sa pagination}
+c) Si $\{u,v\} \in \mathfrak{P}_2(\widetilde{I})$ tel que $\{u,v\} \cap \partial I = \emptyset$ (i.e.\ $\{u,v\} \in \mathfrak{P}_2(\widetilde{I}^{\circ})$) alors conditions équivalentes \struck{\ill{}} $\exists\, J \in S_I$ tel que $\partial J = \{u,v\}$
+\begin{itemize}
+  \item[2)] On a $v \in \widetilde{I}_{x,u}$ \uncertain{ou} $v \in \widetilde{I}_{y,u}$
+  \item[3)] On a $u \in \widetilde{I}_{y,v}$ ou $u \in \widetilde{I}_{x,v}$
+\end{itemize}
+\note{la première condition ne porte pas de numéro lisible ; le mot entre « 2) On a $v \in \widetilde I_{x,u}$ » et « $v \in \widetilde I_{y,u}$ » est souligné deux fois}
+
+[\textbf{NB} on sait donc que $u$ et $v$ sont \add{des lieux} \emph{disjoints} sur le segment $I$ \ill{} \uncertain{y reviendra}\ldots]
+
+\emph{Cor.~4} Si $\widetilde{I} = \widetilde{J}$ alors $I = J$ [Donc on peut identifier $S$ à une partie de $\mathfrak{P}(\mathcal{L})$]
+
+\marginal{\textbf{NB} \ill{} $u \in \widetilde{I}_{x,u} \Leftrightarrow u \in \widetilde{I}_{y,v} \Leftrightarrow u \in \widetilde{I}_{x,w}$ \ill{} \ill{}}
+\note{dans le coin supérieur gauche, plusieurs lignes obliques de formules, la plupart raturées ou hachurées ; seule la première est à peu près lue}
+
+\begin{itemize}
+  \item[F 3)] Soient $I, J \in S$, \struck{tels que} $x \in \partial I \cap \partial J$.\note{« $x \in I$ » est écrit au-dessus, relié par un trait} Alors, \struck{ou bien $\exists\, z \in \widetilde{I}^{\circ} \cap \widetilde{J}^{\circ}$ tel que $I_{x,z} = J_{x,z}$, ou bien} \struck{\ill{}} $\exists$ \emph{$u \in \widetilde{I}^{\circ}$, $v \in \widetilde{J}^{\circ}$} tels que \struck{$I_{x,}$} l'on ait
+  \[
+    \left\lbrace
+    \begin{array}{l}
+      I_{x,u} = J_{x,v} \quad (\text{donc } u = v \text{ et } u = v \in \widetilde{I}^{\circ} \cap \widetilde{J}^{\circ}) \\
+      \underline{\underline{\text{ou}}} \quad \widetilde{I}_{x,u} \cap \widetilde{J}_{x,v} = \{x\}
+    \end{array}
+    \right.
+  \]
+\end{itemize}
+\marginal{devrait plutôt $u \in I \smallsetminus \{x\}$, $v \in J \smallsetminus \{x\}$ (sinon \ill{} \ill{} par condition de divisibilité)}
+\marginal{\emph{Axiome des branches}}
+\note{la première note est à droite, sous « $v \in \widetilde J^{\circ}$ », qu'elle souligne ; la seconde, oblique et soulignée deux fois, dans la marge gauche en face de F 3. Plus bas à droite, un court passage relié par une flèche, avec un $I_x$, est haché et n'est pas lu}
+
+\textbf{NB} Ces deux relations \add{$\widetilde{I}_{x,u}^{\circ} \cap \widetilde{J}_{x,v}^{\circ} \neq \{x\}$ \ill{}}\note{ajout interlinéaire, relié par une flèche, lu en partie} s'excluent mutuellement.
+
+\struck{La première, \ill{}} La condition \add{$\exists\, z \in \widetilde{I}^{\circ} \cap \widetilde{J}^{\circ}$ tel que $I_{x,z} = J_{x,z}$}\note{la condition est écrite en interligne, avec des indices surchargés} est une relation \emph{d'équivalence} \add{($R_x$)} dans \uncertain{l'ensemble} $S_x$ des segments $I \in S$ tels que \ill{} $x \in \partial I$. L'ensemble quotient
+\[
+  B_x = S_x / R_x
+\]
+\uncertain{s'appelle} l'ens.\ des \emph{branches en $x$}, son cardinal l'ordre de $x$. Ordre $0$ :
+
+\marginal{Il manque (6) de F3 \ill{} \ill{} à partir de (F$'_3$) : Soit $I \in S$, $u, v \in \widetilde{I}^{\circ}$, alors \ill{} $\exists\, w \in \widetilde{I}_{x,w}$ \ill{} \ill{}}
+\note{note oblique dans le coin inférieur gauche, très serrée ; « 6 » et « F$'_3$ » y sont cerclés. Plus haut dans la même marge, deux autres fragments obliques ne sont pas lus}
+
+\page{7}
+\note{p. 6 de sa pagination}
+lieu isolé, ordre $1$ : lieu-bout.
+
+Ordre fini.
+
+\struck{Point \uncertain{rég}} \add{\struck{Lieu}}
+
+Lieu régulier $x$ : $\exists\, I \in S$ t.q.\ $x \in \widetilde{I}^{\circ}$.
+
+$\mathcal{L}_r =$ ens.\ des lieux réguliers $= \bigcup_{I \in S} \widetilde{I}^{\circ}$
+
+$\mathcal{L} \smallsetminus \mathcal{L}_r = \mathcal{L}_s$ lieux singuliers, ou critiques, ou de branchement.
+
+\begin{itemize}
+  \item[F$_4$)] Soient $I', I'' \in S$, $z \in \mathcal{L}$, tels que
+  \[
+    \widetilde{I}' \cap \widetilde{I}'' = \partial I' \cap \partial I'' = \{z\}, \quad \text{avec } z \text{ \emph{régulier}.}
+  \]
+  Posons $\partial I' = \{x,z\}$, $\partial I'' = \{y,z\}$. Alors $\exists !\, I \in S$ tel que $\widetilde{I} \supset \widetilde{I}' \cup \widetilde{I}''$ (on \uncertain{a} \ill{} \uncertain{l'égalité}\,!) et $\partial I = \{x,y\}$ [donc on a, cf.\ F1, $I' = I_{x,z}$, $I'' = I_{y,z}$]
+\end{itemize}
+\marginal{\emph{Axiome de recollement}}
+\note{note oblique dans la marge gauche, soulignée}
+
+\textbf{\emph{Cor 1}}\note{« Cor 1 » est écrit au-dessus d'un mot haché} Soit $I \in S$, $x \in \partial I \cap \mathcal{L}_r$ \struck{\ill{}} ($x$ \emph{régulier}), \struck{$x \in \partial J$} \struck{Alors $\exists\, J \in S$ tel que $\widetilde{J} \cap \widetilde{I} = \ill{} \{x\}$.} Posons $\partial I = \{x,y\}$. Alors $\exists\, J \in S$, tel que $\widetilde{J} \supset \widetilde{I}$, et $\partial J = \{y',y\}$ avec $y' \neq x$ \add{$y' \neq y$}\note{la fin de la ligne, « avec $y' \neq x$ », est surchargée ; la lecture reste incertaine} i.e.\
+\[
+  \partial J \cap \partial I = \{y\} \qquad (\text{et } x \in \widetilde{J}^{\circ})
+\]
+(On utilise F$_1$, F$_2$ pour conclure que l'ordre de $x$ est $\geq 2$, puis F\,3) pour trouver $K \in S$ avec $\widetilde{K} \cap \widetilde{I} = \partial K \cap \partial I = \{x\}$, puis on applique F$_4$)
+\marginal{\struck{\ill{}} Ind.\ \ill{} \ill{} \uncertain{d'une} \ill{} \ill{} \ill{}}
+\note{note oblique dans le coin inférieur gauche, en partie barrée, non lue}
+
+\page{8}
+\note{p. 7 de sa pagination}
+\emph{Cor.~2} Soit $I \in S$ tel que $\partial I \subset \mathcal{L}_r$. Alors $\exists\, J \in S$ tel que $\widetilde{I} \subset \widetilde{J}^{\circ}$.
+\marginal{\uncertain{pour} \ill{} \struck{\ill{}} \ill{} \uncertain{segments} \struck{\ill{}} \uncertain{à extrémités singulières}}
+\note{note oblique dans le coin supérieur gauche, deux lignes barrées ; lecture très incertaine}
+
+\begin{itemize}
+  \item[F$_5$)] L'ordre d'un lieu régulier (on sait qu'il est $\geq 2$) est égal à deux.
+\end{itemize}
+Équivalent à :
+\begin{itemize}
+  \item[F$'_5$)] Soit $x \in \mathcal{L}_r$, et considérons les $\widetilde{I}^{\circ}$ ($I \in S$) tels que $x \in \widetilde{I}^{\circ}$ ; ceux-ci forment une base de filtre \ill{} \ill{}, si $I', I'' \in S$ tels que $x \in \widetilde{I}'^{\circ} \cap \widetilde{I}''^{\circ}$, $\exists\, I \in S$ tel que
+  \[
+    x \in \widetilde{I}^{\circ} \subset \widetilde{I}'^{\circ} \cap \widetilde{I}''^{\circ}
+  \]
+  (\textbf{NB} \struck{\ill{}} $\Longrightarrow$ $\widetilde{I} \subset \widetilde{I}'^{\circ} \cap \widetilde{I}''^{\circ}$).
+\end{itemize}
+\marginal{\emph{Axiome des \struck{deux} lieux réguliers}}
+\marginal{(l'ordre \ill{} \ill{} considérés (\ill{}) \ill{} F$'_5$) \ill{} (F.G.) si on \ill{} \ill{} \ill{} \ill{} \ill{} \uncertain{les} \ill{} \ill{} $[0,1]$ \ill{} \ill{} F$_2$) \ill{} F$_5$) \ill{}}
+\note{la marge gauche, en face de F$_5$ et F$'_5$, est couverte de six ou sept lignes obliques très serrées, dont seuls quelques mots sont lus ; le premier titre y est souligné. Le numéro de F$'_5$ est récrit sur un autre}
+
+\emph{Remarque} Soit $S_0 \subset S$, et soit
+\[
+  \mathcal{L}' = \bigcup_{I \in S_0} \widetilde{I}, \qquad S' = \lbrace I \in S \mid \widetilde{I} \subset \mathcal{L}' \rbrace
+\]
+(donc $S' \supset S_0$). On a donc
+\[
+  \begin{array}{ll}
+    S' \to \mathfrak{P}(\mathcal{L}') & I \mapsto \widetilde{I} \\
+    S' \to \mathfrak{P}_2(\mathcal{L}') & I \mapsto \partial I
+  \end{array}
+\]
+Les axiomes F$_1$) à F$_5$) \uncertain{sont-ils} satisfaits\,?
+\note{la remarque est traversée de deux longs traits obliques}
+
+\page{9}
+\note{p. 8 de sa pagination}
+\emph{Remarques} 1) L'ens.\ des axiomes F1 à F5 est trivialement satisfait si $S = \emptyset$ (i.e.\ si $\mathcal{L}_r = \emptyset$ i.e.\ tous les lieux sont singuliers). Alors la structure envisagée se réduit à celle d'un ens.\ $\mathcal{L}$. On sera amené tantôt d'\ill{} dans la structure, en introduisant (dans le cas général) une relation d'équivalence sur $\mathcal{L}_s$\ldots
+
+2) Soit $\mathcal{L}' \subset \mathcal{L}$, partie quelc.\ de $\mathcal{L}$, et soit $S' = \lbrace I \in S \mid \widetilde{I} \subset \mathcal{L}' \rbrace$. On a donc
+\[
+  \begin{array}{ll}
+    S' \to \mathfrak{P}(\mathcal{L}'), & I \mapsto \widetilde{I} \\
+    S' \to \mathfrak{P}_2(\mathcal{L}'), & I \mapsto \partial I .
+  \end{array}
+\]
+Ceci dit, pour cette structure, $(\mathcal{L}', S')$ est un modèle de forme de dim $1$, i.e.\ les axiomes F$_1$--F$_5$ sont satisfaits.
+
+Cas particulier : soit $I \in S$, $\mathcal{L}' = \widetilde{I}$, alors $S'$ est l'ens.\ \add{$S_I$} des segments tels que $\widetilde{I} \subset I$, et s'identifie donc à une partie de $\mathfrak{P}_2(\mathcal{L}')$.
+\note{« $\widetilde I \subset I$ » est tel sur la page ; on attend $\widetilde J \subset \widetilde I$. « $S_I$ » est écrit au-dessus de la ligne}
+
+\page{10}
+Un modèle est dit \emph{modèle-segment} si $\exists\, I \in S$ tel que $\widetilde{I} = \mathcal{L}$. \struck{Alors} [Alors $\mathcal{L}_r = \widetilde{I}^{\circ} = \mathcal{L} \smallsetminus \partial I$.] \struck{\ill{}} Cet $I$ est unique. Choisissons un $x_0 \in \partial I$, soit $x_1$ l'autre élément de $\partial I$. Je vais définir une relation \add{d'}ordre sur $\mathcal{L}$. \struck{Je dis que} \struck{\ill{}} pour
+\note{à partir d'ici jusqu'à « c'est immédiat », le passage est cerné d'un trait et barré de plusieurs longues obliques}
+
+\struck{$x \preccurlyeq y$ si} $x \preccurlyeq y$ ssi \struck{$x \preccurlyeq y$ ou $[x_0,x] \cap [y,x_1] = \ill{}$} $y \in [x,x_1]$ (\uncertain{mutuellement} exclusif)
+
+où on a posé
+\[
+  [x_0,x] = \widetilde{I}_{x_0,x}, \qquad [y,x_1] = \widetilde{I}_{x_1,y}.
+\]
+Prouvons la transitivité
+\[
+  x \preccurlyeq y,\ y \preccurlyeq z \Longrightarrow x \preccurlyeq z
+\]
+\struck{OPS $x \neq y$, $y \neq z$} i.e.
+\[
+  y \in [x,x_1] \text{ et } z \in [y,x_1] \Longrightarrow z \in [x,x_1]
+\]
+i.e.\ $[y,x_1] \subset [x,x_1]$ c'est immédiat,\ldots
+\marginal{\textbf{NB} $y \in [x,x_1]$ \uncertain{équivaut} \ill{} $x \in [x_0,y]$}
+
+\struck{$\mathcal{L}$ \ill{}} Cette relation \struck{est}
+
+\emph{Proposition} Soient $x, y \in \mathcal{L}$. Conditions équivalentes
+\begin{itemize}
+  \item[(i)] $y \in [x,x_1]$
+  \item[(ii)] $[y,x_1] \subset [x,x_1]$
+  \item[(i bis)] $x \in [x_0,y]$
+  \item[(ii bis)] $[x_0,x] \subset$
+\end{itemize}
+\note{la dernière ligne s'arrête là. À droite, en face de l'énoncé, une définition :}
+\[
+  [x,x_1] \overset{\text{déf}}{=}
+  \left\lbrace
+  \begin{array}{ll}
+    \widetilde{I}_{x_1,x} & \text{si } x \neq x_0, x_1 \\
+    \widetilde{I} & \text{si } x = x_0 \\
+    \{x_1\} & \text{si } x = x_1
+  \end{array}
+  \right.
+\]
+\note{le membre de gauche n'est pas écrit : la définition est rattachée par « $\overset{\text{déf}}{=}$ » à la condition (i) ; nous restituons $[x,x_1]$. Deux traits obliques traversent aussi ce bas de page}
+
+\page{11}
+\note{p. 9 de sa pagination}
+\struck{\ill{}} Notations pour $x \in \mathcal{L}$
+\[
+  [x_0,x] = \left\lbrace
+  \begin{array}{ll}
+    \{x_0\} & \text{si } x = x_0 \\
+    \mathcal{L} = \widetilde{I} & \text{si } x = x_1 \\
+    \widetilde{I}_{x_0,x} & \text{si } x \in \widetilde{I}^{\circ} = \mathcal{L} \smallsetminus \{x_0,x_1\}
+  \end{array}
+  \right.
+\]
+On définit de même
+\[
+  [x,x_1] = \lbrace \cdots
+\]
+(en échangeant les rôles de $x_0$, $x_1$)
+
+\emph{Proposition} Soient $x, y \in \mathcal{L}$. Conditions équivalentes
+\begin{itemize}
+  \item[(i)] $[x_0,x] \subset [x_0,y]$
+  \item[(ii)] \struck{\ill{}} $x \in [x_0,y]$
+  \item[(i bis)] $[x,x_1] \supset [y,x_1]$
+  \item[(ii bis)] \struck{\ill{}} $y \in [x,x_1]$
+\end{itemize}
+Si on \struck{\ill{}} désigne par
+\[
+  x \preccurlyeq y
+\]
+cette relation en $x, y$, on trouve une relation de préordre [évident sur (i) ou (i bis)] et \uncertain{même} d'ordre (puisque $[x_0,x] = [x_0,y]$ \struck{$\widetilde{I}_{x_0,x} = \widetilde{I}_{x_0,y}$} \struck{d'où $x = y$} si les deux \struck{\ill{}} sont réduits à $x_0$, ou bien $\widetilde{I}_{x_0,x} = \widetilde{I}_{x_0,y}$ d'où en passant aux $\partial$ $x = y$)
+\note{« ou bien $x = x_0$, $y = x_0$ » est écrit au-dessus de la ligne, à droite}
+
+\page{12}
+\note{p. 10 de sa pagination}
+Cette relation d'ordre a un plus petit élément, $x_0$, et un plus grand élément, $x_1$. Elle permet de reconstituer la structure de modèle de 1-forme. En effet, l'ens.\ des segments \struck{est} \add{s'identifie} à l'ens.\ des couples $\{x,y\}$ tels que $x < y$, et pour un tel segment $I_{x,y}$, on a
+\[
+  \widetilde{I}_{x,y} = \lbrace z \in \mathcal{L} \mid x \leq z \leq y \rbrace, \qquad \partial I_{x,y} = \{x,y\}
+\]
+Cette relation d'ordre est « infiniment divisible » i.e.\ si $x, y$ sont tels que $x < y$, $\exists\, z$ tel que $x < z < y$. Elle est localement filtrante \add{décroissante}, i.e.\ si $x < y_1, y_2$ $\exists\, y$ tel que $x < y \leq y_1, y_2$, et \struck{\ill{}} \add{\ill{} filtrante croissante}\note{la fin de cette phrase, surchargée d'ajouts interlinéaires, est lue en partie ; un astérisque renvoie à la note marginale} (et \uncertain{loc.}\ bifiltrante sur $\mathcal{L}$), \struck{\ill{}} relation d'ordre divisible, \ill{} \ill{} un plus petit élément $x_0$ et un plus grand élément $x_1$, définit (avec la notion précédente de segment \add{$I_{x,y}$} et la description de $\widetilde{I}_{x,y}$ et $\partial I_{x,y}$)
+\marginal{* Mais \ill{} \ill{} \ill{} si $x < z < y$ alors $\widetilde{I}_{x,z} \subset \widetilde{I}_{x,y}$ \ill{} \ill{} F$_3$) \ill{} \ill{} $\exists\, \ill{} \in \widetilde{I}$ \ill{}}
+\note{note oblique dans le coin inférieur gauche, très serrée, reliée par une flèche au texte ; lecture fragmentaire}
+
+\page{13}
+\note{p. 11 de sa pagination, à peine visible}
+une structure de modèle de 1-forme, et plus précisément, de 1-segment, avec $\partial\mathcal{L} = \{x_0,x_1\}$.
+
+Si on échange les rôles de $x_0, x_1$ (i.e.\ choisit une autre « origine » du modèle de segment), alors la relation d'ordre est remplacée par son opposée (\textbf{NB} les conditions de divisibilité et de bifiltration \add{loc.} sont autoduales). Ainsi une structure de \add{modèle de} segment équivaut à une structure de \emph{biordre} (paire d'ordres opposés) qui soit telle que pour chacun \add{(ou l'un)} des ordres qui la composent, il y ait un plus petit et plus grand élément distincts l'un de l'autre (i.e.\ $\operatorname{Card} \mathcal{L} > 1$ --- en fait, $\operatorname{card} \mathcal{L} = \infty$), divisible, et loc\add{alemen}t filtrante et cofiltrante.
+
+\page{14}
+\note{p. 12 de sa pagination}
+\emph{Orientation} du \emph{segment} : choix d'une des extrémités, ou encore, d'un des deux ordres qui définit la structure de segment.
+
+\note{un court trait horizontal sépare ce qui suit}
+
+[Application aux modèles réguliers i.e.\ tels que $\mathcal{L} = \mathcal{L}_r$]. Considérons la relation sur $\mathcal{L}$, en $x, y$
+\[
+  \exists\, I \in S \text{ tel que } x, y \in \widetilde{I}
+\]
+[en vertu du cor.~2 à F$_4$), \add{si $\mathcal{L} = \mathcal{L}_r$, cela équivaut} à
+\[
+  \exists\, I \in S \text{ tel que } x, y \in \widetilde{I}^{\circ}\ ].
+\]
+Cette relation est réflexive et symétrique. Considérons la relation d'équivalence engendrée. L'ens.\ des classes d'équivalence est noté $\pi_0(\mathfrak{X})$ (composantes connexes). On a une notion évidente de somme disjointe de modèles de 1-formes, et on voit que toute 1-forme s'identifie
+
+\page{15}
+\note{p. 13 de sa pagination}
+à la somme disjointe de ses comp.\ connexes. \struck{\ill{}} Si $\mathfrak{X} = (\mathcal{L}, S, \partial)$ est régulier, \add{\uncertain{et}} ses comp.\ connexes le sont. Donc l'étude des modèles $\mathfrak{X}$ réguliers \struck{est} se ramène à celle des modèles réguliers connexes.
+\note{sous $S$, un « $\cap$ » renvoie à « $\mathfrak{P}(\mathcal{L})$ » : $S \subset \mathfrak{P}(\mathcal{L})$ ; de même plus bas}
+
+Soit $(\mathcal{L}, S, \partial : \struck{\ill{}}\, S \to \mathfrak{P}_2(\mathcal{L}))$, $S \subset \mathfrak{P}(\mathcal{L})$, un modèle régulier connexe. On va définir un système transitif de bij.\ entre les $\partial I$ ($I \in S$), et entre les $B_x$ ($x \in \mathcal{L}$) et entre les uns et les autres. \struck{Soient $I, J \in S$} \struck{Soit} \struck{$x \in \mathcal{L}$, $y \in \mathcal{L}$.}
+
+\textbf{\emph{Th}} On peut trouver, \add{(de façon unique)}, un syst.\ transitif d'iso.\ entre les $\partial I$ ($I \in S$) avec un quotient $\omega_S$, et un syst.\ transitif d'iso.\ entre les $B_x$ ($x \in \mathcal{L}$), avec un quotient $\omega_{\mathfrak{X}}$, et une bijection $\omega_S \simeq \omega_{\mathcal{L}}$ (soit $\underline{\omega}$ le quotient) --- donc un système d'iso.\ $\underline{\omega} \simeq \partial I$, $\underline{\omega} \simeq B_x$, de façon que ces conditions
+\note{dans la marge gauche, en face du théorème, un petit croquis : un arc portant un point épais et deux flèches dans le même sens. On garde $\omega_{\mathfrak{X}}$ puis $\omega_{\mathcal{L}}$ comme sur la page}
+
+\page{16}
+\note{p. 14 de sa pagination}
+suivantes soient satisfaites
+
+a) Si $I \supset J$ \add{\uncertain{\ill{}} des segments}, et si \struck{$x_0 \in \partial I$, ou} \add{$\Phi$ est un des} \add{deux} ordres canoniques sur $I$, \struck{alors $\partial I \simeq \partial J$} \struck{\ill{} fait correspondre l'unique $y_0 \in \partial J$ dont $y_0 = \ill{}$ est un des deux ordres qui soit le plus petit élément de} [canonique sur $J$, alors $\partial I \simeq \partial J$ \struck{\ill{} ordre}] associe au plus petit élément de $I$ le plus petit élément de $J$ (et idem pour le plus grand, par conséquent en remplaçant $\Phi$ par l'ordre opposé)
+\note{les premières lignes de a) sont récrites plusieurs fois, en interligne et avec ratures ; l'ordre des fragments n'est pas sûr}
+
+b) Si $I \in S$, et si $x_0 \in \partial I$ \struck{\ill{}} est le plus petit élément pour \add{l'\ill{}} ordre canonique $\Phi$ sur $I$, alors la \add{\ill{}} $x_0 \in \partial I$ correspond la branche en $x_0$ définie par $I$.
+
+Il faut voir que la relation d'équivalence $R$ définie dans
+\[
+  \coprod_{I \in S} \partial I \;\amalg\; \coprod_{x \in \mathcal{L}} B_x
+\]
+par les relations élémentaires (a), (b)\note{« (a) » et « (b) » cerclés, écrits au-dessus d'un « $\rho_a$, $\rho_b$ » barré}
+\[
+  (I,x) \underset{(a)}{\sim} (J,y) \Longleftrightarrow J \subset I
+\]
+et $x$ et $y$ se correspondent par le premier
+\[
+  (I,x) \underset{(b)}{\sim} (x, \beta(I,x))
+\]
+\note{$x \in \partial I$ est écrit sous chaque $(I,x)$ ; sous $\beta(I,x)$, souligné : « branche en $x$ définie par $I$ ». L'indice cerclé sous le premier $\sim$ est surchargé, lu (a)}
+admet exactement deux \emph{classes}, et que
+
+\page{17}
+\note{p. 15 de sa pagination}
+\add{(les deux éléments de $\partial I$, $I \in S$ (fixé), \uncertain{aboutissant} à des classes distinctes ($\Longleftrightarrow$ \uncertain{jetés} par les deux éléments des $B_x$, $x \in \mathcal{L}$))}\note{ajout de deux lignes serrées en tête de page, lu en partie}
+\ill{} \ill{} pas \ill{} \uncertain{vérifier} ici. Si c'était faux, il faudrait le mettre en axiome. S'il est vrai, il doit être immédiat que \struck{il y a} le nb de classes est $1$ ou $2$.
+
+\struck{On est arrivé} L'ens.\ quotient $\underline{\omega}$ est l'ens.\ des orientations de $\mathfrak{X}$. \struck{Ex.} On a \uncertain{ainsi} $\mathfrak{X}$ \uncertain{orienté} quand on a choisi $w \in \underline{\omega}$. Alors chaque $I$ a une origine, et pour chaque $x \in \mathcal{L}$, on a un germe de segment issu de $x$ \add{ou orienté}\note{« ou orienté » est écrit au-dessus, souligné, en fin de ligne} et d'origine $x$ (la branche \uncertain{sortant} de $x$).
+
+Considérons alors la relation \struck{\ill{}}
+\[
+  x \prec y \overset{\text{déf}}{\Longleftrightarrow} \bigl(\exists\, I \in S \text{ tel que } x \in \operatorname{or}(I),\ y \in \operatorname{ex}(I)\bigr)
+\]
+\note{« $\operatorname{or}(I)$ », « $\operatorname{ex}(I)$ » : l'origine et l'extrémité du segment orienté, écrites l'une au-dessus de l'autre}
+Distinguons deux cas suivant que cette relation est transitive (\emph{cas linéaire}) ou non (cas circulaire).
+
+I) Relation $x \prec y$ est transitive, donc \uncertain{la relation} $x \preccurlyeq y$ ($\overset{\text{déf}}{\Longleftrightarrow}$ $x = y$ ou $x \prec y$) est un préordre.
+
+\page{18}
+\note{p. 16 de sa pagination}
+Je dis que c'est un \emph{ordre} i.e.\ qu'on ne peut avoir $x \prec y$ et $y \prec x$ (en effet, on aurait $x \prec x$, ce qui est faux, ou $x \prec y$ implique $x \neq y$). Les segments sont les $[x,y]$, pour $x \prec y$, et pour \struck{\ill{}} \add{tel} segment, son origine est $x$ (pour l'orientation choisie) \add{\uncertain{et son extrémité $y$}}. Ainsi, la structure de modèle \add{connexe} orienté de 1-forme régulier est connue quand on connaît la structure d'ordre. Celle-ci \struck{est} satisfait les conditions : elle est \add{str.} filtrante croissante (i.e.\ $\forall\, x, y \in \mathcal{L}$, $\exists\, z \in \mathcal{L}$ t.q.\ $x, y < z$) et str.\ filtrante décroissante, elle est \add{str.} loc.\ filtrante décroissante et loc.\ filtrante \struck{\ill{}} croissante (si $x \leq y, z$ \struck{\ill{}}, $\exists\, u$ tel que $x \leq u \leq y, z$, et \uncertain{de même} \uncertain{dual})
+\marginal{donc \uncertain{n'a} ni plus grand ni plus petit élément}
+\marginal{implique que \uncertain{c'est} divisible, i.e.\ si $x < y$, $\exists\, z$ avec $x < z < y$}
+\note{deux notes obliques dans la marge gauche ; les formules de la parenthèse finale sont surchargées}
+
+Prouvons p.\,ex.\ qu'elle est str.\ filtrante croissante.
+
+\page{19}
+\note{p. 17 de sa pagination}
+Soit $x, y \in \mathcal{L}$. $\exists$ chaîne $x_0, x_1, \ldots, x_n$ avec $x_0 = x$, $x_n = y$ et $x_i, x_{i+1} \in \widetilde{I}_i^{\circ}$. \struck{\ill{}} Quitte à répéter $I_i$, \struck{\ill{}} quitte à \ill{} Posons $y_i = \operatorname{or}(I_i)$, alors \ldots
+\[
+  x_i \geqslant y_i \leqslant x_{i+1} \geqslant y_{i+1} \leqslant x_{i+2}
+\]
+\note{les signes d'inégalité sont repassés et surchargés ; la lecture $\geqslant$, $\leqslant$ alternés est incertaine}
+donc $\mathcal{L}$ en tant que ens.\ ord.\ est connexe : on peut connecter deux éléments quelconques par une chaîne d'inégalités. On va raisonner sur la longueur. Si la chaîne est de longueur $\leq 1$, donc $x \leq y$ il suffit de \struck{prouver} \add{noter} qu'il existe $z$ avec $y < z$ (prouvons de fait que $y$ régulier\ldots). Supposons qu'on ait prouvé pour $n-1$, \struck{\ill{}} $\exists$ prouvons le pour $n$. \struck{\ill{}} On suppose donc $\exists\, z$
+\[
+  x \underset{n-1}{\sim} z, \qquad z \underset{1}{\sim} y .
+\]
+Par l'hypothèse de récurrence, $\exists\, x'$ tel que \struck{\ill{}} $x, z < x'$. Si $z \geq y$ alors $x' > x, y$ on gagne. Si $z \leq y$ la suite qu'on\ldots
+\note{« $\underset{n-1}{\sim}$ » : reliés par une chaîne de longueur $n-1$ ; un mot devant la formule n'est pas lu. La page s'arrête sur « la suite qu'on », sans suite lisible}
+
+\page{20}
+\note{p. 18 de sa pagination. En tête, un croquis d'ordre, sans flèches : $z$ en bas, relié à $y$ et à $x'$ au-dessus de lui ; $x'$ relié à $x$ plus bas à droite ; au-dessus de $y$ et de $x'$, un « ? » relié à chacun par un pointillé}
+
+\begin{tikzcd}[column sep=small, row sep=small]
+  & ? & & \\
+  y \arrow[ur, no head, dashed] & & x' \arrow[ul, no head, dashed] & \\
+  & z \arrow[ul, no head] \arrow[ur, no head] & & x \arrow[ul, no head]
+\end{tikzcd}
+
+et il suffit de trouver $t$ tel que $t > x', y$. Donc on est ramené à prouver ceci (filtration relative)
+
+Si
+
+\begin{tikzcd}[column sep=small, row sep=small]
+  & v \\
+  u \arrow[ur, no head] \arrow[dr, no head] & \\
+  & w
+\end{tikzcd}
+
+on peut compléter en
+
+\begin{tikzcd}[column sep=small, row sep=small]
+  & v \arrow[dr, no head] & \\
+  u \arrow[ur, no head] \arrow[dr, no head] & & t \\
+  & w \arrow[ur, no head] &
+\end{tikzcd}
+
+\note{les deux croquis sont redessinés d'après la page, où ils sont tracés en traits libres, sans flèches ; dans le second, le trait de $u$ à $w$ n'est qu'esquissé}
+
+\struck{Il \ill{} que visiblement} \struck{\ill{}}
+
+Mais on voit qu'une relation d'ordre connexe qui est \emph{loc.}\ str.\ croissante et str.\ décroissante, et telle que pour tout élément $a$, $\exists\, a' < a < a''$, définit une structure de modèle de forme régulière connexe (on vérifie axiomes F1 à F5). Mais une telle structure n'est pas nécessairement filtrante croissante \uncertain{(dites)}
+\note{la page s'arrête sur « (dites) », d'une lecture incertaine ; la suite est à la page 21, dans le second lot}
+
+\end{document}
