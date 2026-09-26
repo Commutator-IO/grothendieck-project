@@ -70,6 +70,14 @@ const STATUS: Record<
     help: 'Looked up and found. Kept on the page so nobody searches for it twice.',
     className: 'border border-ink-300 text-ink-500',
   },
+  refuted: {
+    /* Killed like `matched`, but the opposite answer: not « already known »
+       but « not true as written ». Printing the two alike would tell a reader
+       a false statement is in the books. The site's warning ramp. */
+    label: 'refuted',
+    help: 'Shown false as stated — by a counterexample from the literature, or one checked in the row. Kept so nobody takes it for a result.',
+    className: 'bg-alerte-100 text-alerte-700',
+  },
   confirmed: {
     /* The site's proofreading green, the one it already uses for a batch
        compared against the facsimile page by page. It meant the same thing
@@ -101,6 +109,7 @@ const STATUS_RANK: Record<Finding['status'], number> = {
   candidate: 1,
   unsearched: 2,
   matched: 3,
+  refuted: 4,
 };
 const FEATURED = new Set(PLAIN.flatMap((p) => p.rows));
 
@@ -332,7 +341,9 @@ function PlainSummary() {
         <p>
           Of the {maths.length} mathematical rows on this page, {count('candidate')} have
           been looked up and not found, {count('unsearched')} have not been looked up at
-          all, and {count('matched')} turned out to be in the books. The survey covers{' '}
+          all, {count('matched')} turned out to be in the books
+          {count('refuted') > 0 && <>, and {count('refuted')} turned out to be false as stated</>}.
+          The survey covers{' '}
           {surveyed} folders; the other transcribed folders have not been looked at, and
           this page says nothing about them.
         </p>
@@ -436,8 +447,9 @@ export function FindingsPage() {
       .includes(needle);
   });
 
-  const open = visible.filter((n) => n.status !== 'matched');
+  const open = visible.filter((n) => n.status !== 'matched' && n.status !== 'refuted');
   const closed = visible.filter((n) => n.status === 'matched');
+  const refuted = visible.filter((n) => n.status === 'refuted');
 
   return (
     <>
@@ -475,7 +487,7 @@ export function FindingsPage() {
             tooltip is not read. Named once, here — the same decision the
             archive page makes about its two row washes, for the same reason. */}
         <ul className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-2 text-[12.5px] text-ink-500">
-          {(['unsearched', 'candidate', 'matched'] as const).map((k) => (
+          {(['unsearched', 'candidate', 'matched', 'refuted'] as const).map((k) => (
             <li key={k} className="flex items-center gap-2">
               <span
                 className={`rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide ${STATUS[k].className}`}
@@ -584,6 +596,13 @@ export function FindingsPage() {
           title="Looked up and found"
           note="Candidates that turned out to be in the literature. They stay here on purpose: a killed candidate saves the next reader the search, and a list that only ever grows is not being checked."
           rows={closed}
+          flat={order === 'checkable'}
+        />
+
+        <Section
+          title="Shown false as stated"
+          note="Candidates that a counterexample, from the literature or checked in the row, shows to be false as written. Kept for the same reason as the matched ones — and because the folder's statement is still the folder's: what is refuted is the claim, and the row says what part of it still stands."
+          rows={refuted}
           flat={order === 'checkable'}
         />
 

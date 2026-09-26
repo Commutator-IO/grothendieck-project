@@ -387,7 +387,7 @@ const CONTRIBUTORS: { name: string; url?: string; work: string }[] = [
   },
   {
     name: 'Georges Maltsiniotis',
-    url: 'https://webusers.imj-prg.fr/~georges.maltsiniotis/groth.html',
+    url: 'https://webusers.imj-prg.fr/~georges.maltsiniotis/ps.html',
     work:
       'Editor of Pursuing Stacks \u2014 volume I published by the Soci\u00e9t\u00e9 ' +
       'math\u00e9matique de France as Documents math\u00e9matiques 20 \u2014 and co-editor of ' +

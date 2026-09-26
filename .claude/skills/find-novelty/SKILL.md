@@ -129,7 +129,7 @@ candidate:
 | `basis` | what in the folder supports it, in a sentence |
 | `ours` | what the edition supplied, or `null` when the page carries it alone |
 | `literature` | the sources actually searched, by name and section |
-| `status` | `candidate` · `unsearched` · `matched` · `confirmed` |
+| `status` | `candidate` · `unsearched` · `matched` · `refuted` · `confirmed` |
 | `settle` | the one check that would decide it |
 
 `codicological` entries — leaves bound out of order, two manuscripts
@@ -146,6 +146,12 @@ was checked against the facsimile, and what was not.
   reference. A killed candidate is the most useful thing on the page: it stops
   the next reader spending a day on it, and it is evidence the list is being
   pruned rather than grown.
+- **`refuted`** — shown false as stated, by a counterexample or a
+  contradiction: from the literature (cite it, by number) or checked in the
+  row itself (say so, and say it is the pass's own step, in `ours`). Keep the
+  entry; rewrite `claim` to say what the folder asserts and that, as stated,
+  it fails, and say in `settle` what still stands. Not for a proof with a gap
+  — a gap is a `settle`, not a refutation.
 - **`confirmed`** — a person has checked it. Only a person may set this. Never
   set it from a pass.
 
