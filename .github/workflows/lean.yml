@@ -37,20 +37,9 @@ jobs:
         with:
           lake-package-directory: lean
 
-      # The axioms the lemmas rest on, in the build log: anything beyond Lean's
-      # three standard ones fails.
+      # The axioms every theorem rests on, in the build log: anything beyond
+      # Lean's three standard ones fails. The names are read from the files.
       - name: List the axioms
         working-directory: lean
         shell: bash
-        run: |
-          {
-            echo 'import Grothendieck'
-            for t in Folder42.lemme2_1 Folder42.lemme2_2; do echo "#print axioms Grothendieck.$t"; done
-          } > "$RUNNER_TEMP/Axioms.lean"
-          lake env lean "$RUNNER_TEMP/Axioms.lean" | tee "$RUNNER_TEMP/axioms.txt"
-          standard='(propext|Classical\.choice|Quot\.sound)'
-          if [ "$(wc -l < "$RUNNER_TEMP/axioms.txt")" -ne 2 ] ||
-             grep -qvE "^'[^']+' (depends on axioms: \[$standard(, $standard)*\]|does not depend on any axioms)$" "$RUNNER_TEMP/axioms.txt"; then
-            echo "::error::a lemma depends on a non-standard axiom, or was not found."
-            exit 1
-          fi
+        run: ./axioms.sh
