@@ -8,10 +8,10 @@
  */
 export const carouselNav = (n, label) =>
   `<nav class="dg-nav" aria-label="${label}">` +
-  `<button type="button" id="dg-prev" aria-label="Précédent">‹</button>` +
+  `<button type="button" id="dg-prev" aria-label="Previous">‹</button>` +
   `<span class="dg-count"><span id="dg-i">1</span> / ${n}</span>` +
-  `<input type="range" id="dg-range" min="1" max="${n}" value="1" aria-label="Aller à">` +
-  `<button type="button" id="dg-next" aria-label="Suivant">›</button>` +
+  `<input type="range" id="dg-range" min="1" max="${n}" value="1" aria-label="Go to">` +
+  `<button type="button" id="dg-next" aria-label="Next">›</button>` +
   `</nav>\n`;
 
 export const CAROUSEL_STYLE = `
@@ -65,4 +65,7 @@ export const SLIDES = `<script>
   });
 })();
 </script>`;
-export const withSlides = (page) => page.replace('</body>', `${SLIDES}</body>`);
+// The galleries' chrome is in English; the reading-view shell they reuse
+// heads its pages in French for the transcriptions.
+export const withSlides = (page) =>
+  page.replace('</body>', `${SLIDES}</body>`).replace('Datation de l’inventaire', 'Inventory dating');

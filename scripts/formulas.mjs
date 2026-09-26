@@ -68,11 +68,11 @@ const figureOf = (d, i, n, withFolder) =>
   `<figure class="dg" id="d${i + 1}">` +
   `<figcaption><span>${withFolder ? `n° ${d.folder} · ` : ''}batch ${d.batch}${d.page ? ` · p. ${escapeHtml(d.page)}` : ''} — ` +
   // The transcription at its page, and the batch beside Montpellier's facsimile.
-  `<a href="${transcriptHref(d)}" target="_blank" rel="noopener">la transcription${d.page ? `, p. ${escapeHtml(d.page)}` : ''} ↗</a> · ` +
-  `<a href="/#${d.folder}/${d.batch}" target="_top">avec le fac-similé</a></span>` +
-  `<span class="dg-n">${i + 1} / ${n} · ${d.symbols} symboles distincts, ${d.size} écrits</span></figcaption>` +
+  `<a href="${transcriptHref(d)}" target="_blank" rel="noopener">the transcription${d.page ? `, p. ${escapeHtml(d.page)}` : ''} ↗</a> · ` +
+  `<a href="/#${d.folder}/${d.batch}${d.page ? `/p${encodeURIComponent(d.page)}` : ''}" target="_top">beside the facsimile</a></span>` +
+  `<span class="dg-n">${i + 1} / ${n} · ${d.symbols} distinct symbols, ${d.size} written</span></figcaption>` +
   `<div class="ltx_p">\\[${escapeHtml(display(d.env, d.body, d.raw))}\\]</div>` +
-  `<details class="tr-src"><summary>LaTeX</summary><pre>${escapeHtml(d.raw)}</pre></details></figure>`;
+  `<details class="tr-src"><summary>LaTeX source</summary><pre>${escapeHtml(d.raw)}</pre></details></figure>`;
 
 const page = (meta, name, items, withFolder) =>
   withSlides(
@@ -80,7 +80,7 @@ const page = (meta, name, items, withFolder) =>
       meta,
       lang: 'fr',
       name,
-      html: carouselNav(items.length, 'Formules') + items.map((d, i) => figureOf(d, i, items.length, withFolder)).join('\n'),
+      html: carouselNav(items.length, 'Formulas') + items.map((d, i) => figureOf(d, i, items.length, withFolder)).join('\n'),
       extraStyle: STYLE,
     }),
   );
@@ -128,7 +128,7 @@ for (const f of folders) {
     resolve(OUT, `${f}.html`),
     page(
       { folder: f, first: Math.min(...seen), last: Math.max(...seen), title: cote.title, dating: cote.date, watermark: 'Édition de démonstration' },
-      `${found.length} formule${found.length > 1 ? 's' : ''}`,
+      `${found.length} displayed formula${found.length > 1 ? 's' : ''}`,
       found,
       false,
     ),
@@ -149,11 +149,11 @@ const RICHEST = [...ALL].sort((a, b) => richness(b) - richness(a)).slice(0, 200)
 writeFileSync(
   resolve(OUT, 'richest.html'),
   page(
-    { folder: 'tous', first: 1, last: RICHEST.length, title: 'les formules les plus riches du fonds', dating: '', watermark: 'Édition de démonstration' },
-    `${RICHEST.length} formules`,
+    { folder: 'tous', first: 1, last: RICHEST.length, title: 'by distinct symbols, then size', dating: '', watermark: 'Édition de démonstration' },
+    `the ${RICHEST.length} richest displayed formulas`,
     RICHEST,
     true,
-  ).replace(/Cote n° tous(, | · )pages 1–\d+/g, 'Tout le fonds'),
+  ).replace(/Cote n° tous(, | · )pages 1–\d+/g, 'The whole fonds'),
 );
 
 writeFileSync(

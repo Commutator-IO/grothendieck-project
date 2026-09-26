@@ -106,9 +106,9 @@ const figureOf = (d, i, n, withFolder) =>
   `<figure class="dg" id="d${i + 1}">` +
   `<figcaption><span>${withFolder ? `n° ${d.folder} · ` : ''}batch ${d.batch}${d.page ? ` · p. ${escapeHtml(d.page)}` : ''} — ` +
   // The transcription at its page, and the batch beside Montpellier's facsimile.
-  `<a href="${transcriptHref(d)}" target="_blank" rel="noopener">la transcription${d.page ? `, p. ${escapeHtml(d.page)}` : ''} ↗</a> · ` +
-  `<a href="/#${d.folder}/${d.batch}" target="_top">avec le fac-similé</a></span>` +
-  `<span class="dg-n">${i + 1} / ${n}${withFolder ? ` · ${d.nodes} nœuds, ${d.arrows} flèches, ${d.symbols} symboles` : ''}</span></figcaption>` +
+  `<a href="${transcriptHref(d)}" target="_blank" rel="noopener">the transcription${d.page ? `, p. ${escapeHtml(d.page)}` : ''} ↗</a> · ` +
+  `<a href="/#${d.folder}/${d.batch}${d.page ? `/p${encodeURIComponent(d.page)}` : ''}" target="_top">beside the facsimile</a></span>` +
+  `<span class="dg-n">${i + 1} / ${n}${withFolder ? ` · ${d.nodes} nodes, ${d.arrows} arrows, ${d.symbols} symbols` : ''}</span></figcaption>` +
   `<div class="ltx_p">${enlarge(renderDiagram(d.raw), scale(d))}</div></figure>`;
 
 const ALL = [];
@@ -144,7 +144,7 @@ for (const f of folders) {
 
   const cote = COTE.get(f);
   const html =
-    carouselNav(found.length, 'Diagrammes') +
+    carouselNav(found.length, 'Diagrams') +
     found.map((d, i) => figureOf(d, i, found.length, false)).join('\n');
   const pagesSeen = found.map((d) => Number(d.page)).filter(Number.isFinite);
   writeFileSync(
@@ -159,7 +159,7 @@ for (const f of folders) {
         watermark: 'Édition de démonstration',
       },
       lang: 'fr',
-      name: `${found.length} diagramme${found.length > 1 ? 's' : ''} commutatif${found.length > 1 ? 's' : ''}`,
+      name: `${found.length} commutative diagram${found.length > 1 ? 's' : ''}`,
       html,
       extraStyle: DG_STYLE,
     })),
@@ -186,12 +186,12 @@ writeFileSync(
   resolve(OUT, 'richest.html'),
   withSlides(
     readingPage({
-      meta: { folder: 'tous', first: 1, last: RICHEST.length, title: 'les diagrammes les plus riches du fonds', dating: '', watermark: 'Édition de démonstration' },
+      meta: { folder: 'tous', first: 1, last: RICHEST.length, title: 'by nodes, arrows and distinct symbols', dating: '', watermark: 'Édition de démonstration' },
       lang: 'fr',
-      name: `${RICHEST.length} diagrammes commutatifs`,
-      html: carouselNav(RICHEST.length, 'Diagrammes') + RICHEST.map((d, i) => figureOf(d, i, RICHEST.length, true)).join('\n'),
+      name: `the ${RICHEST.length} richest commutative diagrams`,
+      html: carouselNav(RICHEST.length, 'Diagrams') + RICHEST.map((d, i) => figureOf(d, i, RICHEST.length, true)).join('\n'),
       extraStyle: DG_STYLE,
-    }).replace(/Cote n° tous(, | · )pages 1–\d+/g, 'Tout le fonds'),
+    }).replace(/Cote n° tous(, | · )pages 1–\d+/g, 'The whole fonds'),
   ),
 );
 
