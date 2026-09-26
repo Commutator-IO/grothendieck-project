@@ -1,0 +1,786 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 62, batch 5 (pages 81-96).
+% Established from the facsimile archives/batches/62/batch-05.pdf (a copy of
+% 62.pdf fetched through the project relay, no cover sheet: PDF page k =
+% archivists' page 80+k), per the skill transcribe-grothendieck. The folder is
+% ninety-six pages in five batches; this is the fifth and last (sixteen pages).
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-09-26 — first pass, unchecked against the pages by a human.
+%
+% Pages skipped: none. All sixteen pages carry his mathematics, in ink; there
+% is no typed leaf (no « n° 276 » or « n° 272 ») in this batch.
+%
+% Pages summarised: none. Page 90 (tan paper) is a recapitulation sheet of
+% notations and formulas, given in page order.
+%
+% His pagination: none; the only page numbers are the archivists' pencilled
+% ones bottom left. No dates. Numbered runs, recorded in notes where they
+% fall: the section numbers of batch 4's draft « Fonctions elliptiques »
+% continue — 4) « fonction \sigma z » (p. 81), 5) « Formules d'addition des
+% fonctions elliptiques » (p. 82) and a second 5) « fonctions \wp u - e_i »
+% (p. 83); the circled formula numbers continue batch 4's (7)-(11) of p. 80
+% as (12)-(26), with (20 bis), (21 bis), pp. 81-84. Under the boxed heading
+% « Les fonctions \Theta » (p. 84) a new run (1)-(15), with (12 bis),
+% pp. 85-89 (a lone « 1 » stands before the Fourier expansion of \sigma on
+% p. 84). Page 93, « Fonctions elliptiques de Legendre », restarts at
+% (1)-(3); pp. 94-96 carry no numbers.
+%
+% What the batch is about. The end of the classical transcendental theory
+% begun on p. 58 (batch 3's cover « Théorie transcendante (Généralités
+% classiques) ») and continued in batch 4: Hermite's decomposition of an
+% elliptic function by \zeta and the derivatives of \wp (12); \sigma as a
+% Weierstrass product, its expansion and quasi-periodicity (13)-(16);
+% Jacobi's formula f = c \prod\sigma(u-a_i)/\prod\sigma(u-b_i) (17); the
+% addition formulas (18)-(22); \sqrt{\wp u - e_i} = \sigma_i u/\sigma u and
+% its periods (23)-(26); the theta function \Theta(v|t) obtained from the
+% Fourier expansion of \sigma, its quasi-periodicity, the heat equation and
+% the transformation formula t -> -1/t (1)-(12 bis), numerical use, the
+% \Theta_i and the Jacobi \vartheta_i, e_i and \eta_1 in terms of thetas
+% (13)-(15); a recapitulation of \omega_i, g_2, g_3, c_1, c_2, e_i (p. 90);
+% the modular function J(\tau) = g_2^3/\Delta, its invariance under the
+% modular group, the elliptic points i and 1/2 + i\sqrt3/2, Picard
+% (pp. 91-92); Legendre's sn, cn, dn: differential equations, Taylor
+% expansions, periods, zeros, poles, half-period shifts and a table of
+% values (pp. 93-94); relations with Weierstrass's functions and with the
+% thetas; addition formulas for sn, cn, dn (pp. 95-96).
+%
+% Notation, aligned with batch 4: lattice \mathfrak{P} (his gothic P),
+% \mathfrak{P}^* the non-zero periods; \wp; sn, cn, dn in \mathrm; his
+% \vartheta_i as \vartheta; his script R and J (real and imaginary parts)
+% as \Re, \Im; « ? » for an unreadable index in a formula, as in batches 1-4.
+% His sign between the two factors of (8) on p. 86 looks like « + » and is
+% read as a product (\times), flagged.
+%
+% Hardest pages: 81 (fast prose on grey paper), 84-88 (the connective prose
+% of the theta section), 91-92 (fast prose on the modular function). The
+% formulas carry throughout; much connective prose is \ill{}. Readings to
+% check first: the exponent in (16) (2i\pi as written, i\pi expected, as in
+% (26)); h^{2n} in the recurrence of p. 84; the coefficient 1/2 of e_3 in
+% (15) (1/3 expected); the sign of g_2 in terms of the e_i on p. 90; the
+% pairing J(i), J(1/2 + i\sqrt3/2) with 0, 1 and with g_2 = 0, g_3 = 0 on
+% p. 92 (swapped against the usual values, as written); dn = 1/th for k = 1
+% on p. 93 (1/ch expected); the first term of 3e_2 on p. 95.
+
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{62}
+\batch{5}
+\pages{81}{96}
+\dating{[à partir de 1963]}
+\watermark{Édition de démonstration}
+\foldertitle{Courbes elliptiques (généralités - vieille rédaction) : notes manuscrites (s.d.)}
+
+\begin{document}
+
+\page{81}
+(on \uncertain{calcule} $\int z\wp z$ le long d'un parallélogramme de
+périodes auquel \ill{} \ill{} l'origine)
+\note{suite de la section 3) « Fonction $\zeta(u)$ » de la page 80}
+
+\emph{Formule d'Hermite}. Si $f$ \ill{} fonction elliptique $f(z)$, dans le
+parallélogramme des périodes $\mathfrak{P}$, \ill{} \ill{} \ill{} \ill{} de
+pôles $a_i$, de parties principales
+\[
+\frac{A_{i,1}}{z-a_i} + \frac{A_{i,2}}{(z-a_i)^2} + \cdots +
+\frac{A_{i,k_i}}{(z-a_i)^{k_i}}
+\]
+\ldots
+\struck{$f(z) = c^{te} + \sum_i \bigl(A_{i,1}\zeta(z-a_i) + A_{i,2}\wp(z-a_i)\bigr)$}
+\[
+(12)\quad f(z) = c^{te} + \sum_i \Bigl(A_{i,1}\,\zeta(z-a_i) + A_{i,2}\,\wp(z-a_i)
++ \cdots + \frac{(-1)^{k_i}}{(k_i-1)!}\,A_{i,k_i}\,\wp^{(?)}(z-a_i)\Bigr)
+\]
+\note{le numéro (12) est entouré ; dans le dernier terme, le signe et la
+factorielle sont noircis et récrits, et l'ordre de dérivation de $\wp$ se lit
+mal}
+(le deuxième membre est elliptique, grâce à $\sum A_i = 0$)
+\note{une ligne horizontale traverse la page après cette phrase}
+
+\emph{4) Fonction $\sigma z$}
+\note{titre encadré ; le numéro « 4) » est en marge}
+\[
+(13)\quad \sigma z = z \prod_{\omega\in\mathfrak{P}^*}
+\Bigl(1 - \frac{z}{\omega}\Bigr) e^{\frac{z}{\omega} + \frac{z^2}{2\omega^2}}
+\]
+\note{sous « $\sigma z = z$ », quelques signes biffés}
+\[
+(14)\quad \frac{\sigma' z}{\sigma z} = (\log\sigma z)' = \zeta z \qquad
+\sigma z = z\, e^{\int_0^z (\zeta u - \frac{1}{u})\,du}
+\]
+$\sigma$ est fonction entière impaire, ayant les $\omega\in\mathfrak{P}$ pour
+\struck{\ill{}} zéros simples (et pas d'autres zéros)
+\[
+(15)\quad \sigma u = u - c_1\frac{u^5}{12} - c_2\frac{u^7}{30}
+\]
+\note{les numéros (13), (14), (15) sont entourés}
+
+\page{82}
+\[
+(16)\quad \sigma(u+2\omega_i) = \sigma u\, e^{2\eta_i(u+\omega_i) + 2i\pi}
+\]
+\note{ainsi sur la page : $2i\pi$ dans l'exposant ; en (26), page 84, et dans
+la relation analogue de la page 84, il écrit $i\pi$}
+
+\emph{Formule de Jacobi}. $f$ fonction elliptique, $(a_i)$ et $(b_j)$
+$(i=1,\ldots p)$ système \uncertain{fondamental} de zéros et de pôles, tel que
+$\sum a_i = \sum b_i$. Alors
+\[
+(17)\quad f(z) = c^{te}\times\frac{\prod\sigma(u-a_i)}{\prod\sigma(u-b_i)}
+\]
+(le deuxième membre \uncertain{est en effet} elliptique, grâce à (16), et à
+$\sum a_i = \sum b_i$)
+
+\emph{5) Formules d'addition des fonctions elliptiques}
+\note{titre encadré}
+
+La formule de Jacobi, appliquée à la fonction de $u$ $\wp u - \wp v$, donne
+facilement
+\[
+(18)\quad \wp u - \wp v = -\frac{\sigma(u+v)\,\sigma(u-v)}{\sigma^2 u\,\sigma^2 v}
+\]
+Prenant la dérivée logarithmique en $u$, en $v$ \ill{} \ill{}, il vient
+\[
+(19)\quad \left\lbrace
+\begin{aligned}
+\frac{\wp' u}{\wp u - \wp v} &= \zeta(u+v) + \zeta(u-v) - 2\zeta u\\
+-\frac{\wp' v}{\wp u - \wp v} &= \zeta(u+v) - \zeta(u-v) - 2\zeta v
+\end{aligned}
+\right.
+\]
+\[
+(20)\quad \zeta(u+v) - \zeta u - \zeta v = \frac{1}{2}\,\frac{\wp' u - \wp' v}{\wp u - \wp v}
+\]
+faisant $v=u$ :
+\[
+(20\ \mathrm{bis})\quad \zeta(2u) - 2\zeta u = \frac{1}{2}\,\frac{\wp'' u}{\wp' u}
+\]
+Autres formules
+\note{les numéros (16) à (20) sont entourés ; « (20 bis) » ne l'est pas}
+
+\page{83}
+\[
+(21)\quad \wp(u+v) + \wp u + \wp v = \frac{1}{4}\Bigl(\frac{\wp' u - \wp' v}{\wp u - \wp v}\Bigr)^2
+\]
+(on \uncertain{dérive} en $u$ et $v$ \ill{} l'expression de
+$\frac{\wp' u}{\wp u - \wp v}$, et y remplaçant $\wp''$ en fonction de $\wp$)
+faisant $v=u$
+\[
+(21\ \mathrm{bis})\quad \wp(2u) + 2\wp u = \frac{1}{4}\Bigl(\frac{\wp'' u}{\wp' u}\Bigr)^2
+\]
+L'application de la formule d'Hermite à $\wp(2u)$ donne
+\[
+(22)\quad 4\wp(2u) = \wp u + \wp(u+\omega_1) + \wp(u+\omega_2) + \wp(u+\omega_3)
+\]
+
+\emph{5) Fonctions $\wp u - e_i$}
+\note{titre encadré ; le numéro « 5) » est répété, après la section 5) de la
+page 82}
+
+L'application de la formule d'Hermite à $\wp u - e_i$ donne
+\[
+(23)\quad \frac{1}{\wp u - e_i} = \frac{\wp(u+\omega_i) - e_i}{(e_j - e_i)(e_k - e_i)}
+\qquad (i,j,k \ \text{permutation de}\ 1,2,3)
+\]
+(compte tenu de $e_1 + e_2 + e_3 = 0$)
+
+La racine carrée de cette fonction est une fonction \ill{} méromorphe ; la
+formule d'addition précédente \ill{}
+\[
+(24)\quad \wp u - e_i = -\frac{\sigma(u+\omega_i)\,\sigma(u-\omega_i)}{\sigma^2 u\,\sigma^2\omega_i}
+= \Bigl(\frac{\sigma_i u}{\sigma u}\Bigr)^2 \quad\text{où}
+\]
+\[
+(25)\quad \sigma_i u = \frac{1}{\sigma\omega_i}\,\sigma(u+\omega_i)\,e^{-\eta_i u}
+\]
+On \uncertain{démontre} que $\sqrt{\wp u - e_i} = \frac{\sigma_i u}{\sigma u}$ a les
+périodes $2\omega_i$ et $4\omega_j$ (mais non $2\omega_i$ et $2\omega_j$) --- $i\neq j$ ;
+elle change de signe \ill{} \ill{} \uncertain{ajoute} $2\omega_j$ à $u$. En
+d'autres termes
+\note{les numéros (23), (24), (25) sont entourés}
+
+\page{84}
+\[
+(26)\quad \left\lbrace
+\begin{aligned}
+\sigma_i(u+2\omega_i) &= \sigma_i u\, e^{2\eta_i(u+\omega_i) + i\pi}\\
+\sigma_i(u+2\omega_j) &= \sigma_i u\, e^{2\eta_j(u+\omega_j)} \qquad (j\neq i)
+\end{aligned}
+\right.
+\]
+Ainsi $\sqrt{\wp u - e_1}$ a $2\omega_1$, $4\omega_2$ comme système fondamental de
+périodes, $\sqrt{\wp u - e_2}$ admet $2\omega_2$, $4\omega_3$, et
+$\sqrt{\wp u - e_3}$ admet $2\omega_3$, $4\omega_1$.
+
+La fonction $\sigma_i u$ est paire, $\sigma_i(0) = 1$.
+\note{un double trait horizontal traverse la page ici}
+
+\section*{Les fonctions $\Theta$}
+\note{titre encadré, de sa main, au milieu de la page 84}
+
+S'introduisent pour le calcul numérique des fonctions elliptiques ;
+introduisent une dissymétrie entre $\omega_1$ et $\omega_2$.
+
+Par la substitution $u\to u+2\omega_1$, $\sigma u$ et \struck{\ill{}}
+$e^{\frac{\eta_1 u^2}{2\omega_1} - \frac{i\pi u}{2\omega_1}}$ sont multipliés par le
+même facteur $e^{2\eta_1(u+\omega_1) - i\pi}$, donc leur quotient admet la
+période $2\omega_1$, et se développe donc en série de Fourier ; il en résulte
+\[
+\sigma u = e^{\frac{\eta_1 u^2}{2\omega_1}} \sum_{-\infty}^{+\infty}
+A_n\, e^{(2n-1)i\pi\frac{u}{2\omega_1}}
+\]
+\note{un « 1 » isolé, dans la marge, devant cette formule}
+En exprimant que $\sigma(u+2\omega_2) = \sigma u\, e^{2\eta_2(u+\omega_2) - i\pi}$,
+on obtient une relation de récurrence
+\[
+A_{n+1} = -h^{2n}A_n, \quad\text{où}\quad h = e^{i\pi\frac{\omega_2}{\omega_1}}
+\qquad \Bigl(\Im\frac{\omega_2}{\omega_1} > 0\Bigr),
+\]
+\note{l'exposant de $h$, petit, est lu $2n$ sous réserve ; le $h$ est
+surchargé}
+ce qui détermine les $A_n$ \struck{\ill{}} au facteur $A_0$ près.
+L'expression de $\sigma u$ amène à introduire la fonction
+
+\page{85}
+\[
+(1)\quad \Theta(v|t) = -\frac{1}{i}\sum_{-\infty}^{+\infty}(-1)^n
+e^{(n-\frac{1}{2})^2 i\pi t + (2n-1)i\pi v}
+\]
+série qui peut aussi s'écrire, en \struck{groupant} distinguant les termes en
+$\sum_1^\infty$ et $\sum_{-\infty}^{0}$ et groupant les termes deux à deux
+\[
+(2)\quad \Theta(v|t) = 2\sum_{1}^{\infty}(-1)^{n-1} e^{(n-\frac{1}{2})^2 i\pi t}
+\sin(2n-1)\pi v
+\]
+\note{devant le $2$ de (2), une lettre biffée}
+On a alors, par construction, $\Theta$ est définie \add{et holomorphe} pour
+$\Im t > 0$ et pour $v$ quelconque
+\[
+(3)\quad \sigma(u|\omega_1,\omega_2) = \frac{2\omega_1}{\Theta'_v(0|\frac{\omega_2}{\omega_1})}\,
+e^{\frac{\eta_1 u^2}{2\omega_1}}\,\Theta\Bigl(\frac{u}{2\omega_1}\Big|\frac{\omega_2}{\omega_1}\Bigr)
+\]
+La fonction $\Theta$ est exprimée par une série très rapidement convergente. ---
+$\Theta(v|t)$ est fonction impaire de $v$, et on a
+\[
+(4)\quad \left\lbrace
+\begin{aligned}
+&\Theta(v+1|t) = -\Theta(v|t) \qquad \Theta(v+2|t) = \Theta(v|t)\\
+&\Theta(v+t|t) = \Theta(v|t)\, e^{-2i\pi v - i\pi t - i\pi}
+\end{aligned}
+\right.
+\]
+Ces relations caractérisent $\Theta$ à un facteur constant près, pour $t$ donné
+(comme on voit par le calcul qui avait donné $\Theta$).
+
+Notons aussi la formule (vérification immédiate)
+\[
+(5)\quad \Theta(v|t+4) = -\Theta(v|t), \quad\text{d'où}\quad \Theta(v|t+8) = \Theta(v|t)
+\]
+Les zéros de $\Theta(v|t)$ sont déterminés par ceux de $\sigma u$, ce sont les
+nombres $v = m_1 + m_2 t$. --- \ill{} \ill{} expression de (1), (2), \ill{}
+\ill{} \ill{}, on pose \uncertain{souvent} $h(t) = h = e^{i\pi t}$ ; alors
+\note{les numéros (1) à (5) sont entourés, et de même (1), (2) dans la
+dernière phrase}
+
+\page{86}
+\[
+(6)\quad \left\lbrace
+\begin{aligned}
+\Theta(v|t) &= -\frac{1}{i}\sum_{-\infty}^{\infty}(-1)^n\, h(t)^{(n-\frac12)^2}
+e^{(2n-1)i\pi v}\\
+&= 2\sum_{1}^{\infty}(-1)^{n-1}\, h(t)^{(n-\frac12)^2}\sin(2n-1)\pi v\\
+&= 2\bigl[h(t)^{\frac14}\sin\pi v - h(t)^{\frac94}\sin 3\pi v + \cdots\bigr]
+\end{aligned}
+\right.
+\]
+\note{devant le $2$ de la dernière ligne, quelques signes biffés}
+On peut poser $t = iT$, où $\Re T > 0$, et on a
+\[
+\Theta(v|iT) = 2\sum_{1}^{+\infty}(-1)^{n-1} e^{-(n-\frac12)^2\pi T}\sin(2n-1)\pi v
+\]
+\note{la borne inférieure de la somme est surchargée ; une lettre biffée à la
+fin de l'exposant}
+
+La fonction $\Theta(v|t)$ (et les séries analogues qui vont suivre) permet
+d'exprimer la somme d'une série de la forme
+$\sum_{-\infty}^{+\infty} e^{-an^2+bn+c}$ où $\Re a > 0$, --- et
+réciproquement bien \uncertain{entendu}. On a
+\[
+(7)\quad \sum_{-\infty}^{+\infty} e^{-an^2+bn+c} = -e^{c+\frac{b}{2}-\frac{a}{4}}\,
+\Theta\Bigl(\frac{b-a-i\pi}{2i\pi}\Big|\frac{ia}{\pi}\Bigr)
+\]
+
+\emph{Formule de transformation pour $t\to -\frac{1}{t}$}
+
+En exprimant que $\sigma(u|\omega_1,\omega_2) = \sigma(u|\omega_2,-\omega_1)$, on
+obtient une identité fonctionnelle pour $\Theta$
+\[
+(8)\quad \Theta(v|t) = e^{-\frac{i\pi v^2}{t}}\,
+\Theta\Bigl(\frac{v}{t}\Big|-\frac{1}{t}\Bigr) \times
+\frac{\Theta'_v(0|t)}{\Theta'_v(0|-\frac{1}{t})}
+\]
+\note{le signe devant la fraction ressemble à un $+$ ; il est lu comme un
+produit, et le même signe précède la fraction de la ligne suivante}
+Pour expliciter $\frac{\Theta'_v(0|t)}{\Theta'_v(0|-\frac1t)} = H(t)$, on note
+d'abord que \emph{$\Theta(v|t)$ est solution de l'équation de la chaleur} :
+\[
+(9)\quad \frac{\partial^2\Theta}{\partial v^2} = 4i\pi\,\frac{\partial\Theta}{\partial t}
+\]
+\note{les numéros (6) à (9) sont entourés}
+
+\page{87}
+(vérification immédiate par la série). En appliquant au deuxième membre de
+(8), où $\frac{\Theta'_v(0|t)}{\Theta'_v(0|-\frac1t)}$ se laisse sous forme
+\uncertain{indéterminée}, on trouve une relation sur $H(t)$ :
+$\frac{H'(t)}{H(t)} = -\frac{1}{2t}$, d'où suit que $H(t)$ est proportionnel à
+$\frac{1}{\sqrt t}$ ; le facteur de proportionnalité s'obtient en faisant
+dans
+\[
+\Theta(v|t) = e^{-\frac{i\pi v^2}{t}}\,\Theta\Bigl(\frac{v}{t}\Big|-\frac{1}{t}\Bigr)\frac{a}{\sqrt t},
+\]
+$t = i$ (d'où $t = -\frac{1}{t}$) et $v = \ill{}$, on trouve $a = \sqrt i$,
+d'où enfin
+\[
+(10)\quad \boxed{\ \Theta(v|t) = e^{-\frac{i\pi v^2}{t}}\,
+\Theta\Bigl(\frac{v}{t}\Big|-\frac{1}{t}\Bigr)\, i\sqrt{\frac{i}{t}}\ }
+\]
+(\uncertain{bien} la détermination de $\sqrt{\frac{i}{t}}$ est celle
+\ill{} \ill{} \uncertain{comprise} \ill{}
+$-\frac{\pi}{?}\leq\operatorname{Arg}\frac{i}{t}\leq+\frac{\pi}{?}$).
+Comparant avec (8), on trouve donc
+\note{les dénominateurs des deux bornes se lisent mal}
+\[
+(11)\quad \Theta'_v(0|t) = \frac{i}{t}\sqrt{\frac{i}{t}}\;\Theta'_v\Bigl(0\Big|-\frac{1}{t}\Bigr)
+\]
+\note{le $i$ du numérateur est écrit sur un $1$}
+Relation \uncertain{exprimée} généralement, faisant $t = iT$ (où $\Re T > 0$)
+\[
+(12)\quad \sum_{1}^{\infty}(-1)^{n-1}(2n-1)\,e^{-(n-\frac12)^2\pi T}
+= \frac{1}{T^{\frac32}}\sum_{1}^{\infty}(-1)^{n-1}(2n-1)\,e^{-(n-\frac12)^2\frac{\pi}{T}}
+\]
+\note{le second membre est surchargé (le facteur $\frac{1}{T^{3/2}}$ et le signe
+$(-1)^{n-1}$ récrits)}
+(car
+\[
+(12\ \mathrm{bis})\quad \Theta'_v(v|t) = 2\pi\sum_{1}^{\infty}(-1)^{n-1}(2n-1)\,
+e^{(n-\frac12)^2 i\pi t}\cos(2n-1)\pi v
+\]
+d'où
+\[
+\Theta'_v(0|iT) = 2\pi\sum_{1}^{\infty}(-1)^{n-1}(2n-1)\,e^{-(n-\frac12)^2\pi T}
+\]
+\note{dans (12 bis), le premier membre se lit $\Theta'_v(0|t)$ et le cosinus est
+écrit sous l'exponentielle ; le numéro « (12 bis) » est entouré, comme (10),
+(11), (12)}
+
+\page{88}
+La formule (10) est importante pour le calcul numérique des fonctions
+$\Theta$, car ramène le calcul de $\Theta(v|iT)$ à celui de
+$\Theta(v|\frac{i}{T})$ ; si donc $\Re T \ngtr 1$, alors \ill{}
+$\Re\frac{1}{T} > 1$ \add{\uncertain{ou} $\Re T > 1$}, d'où résulte que dans
+l'expression
+\[
+\Theta(v|iT) = 2\sum_{1}^{\infty}(-1)^{n-1}h^{(n-\frac12)^2}\sin(2n-1)\pi v,
+\quad\text{où}\quad h = e^{-\pi T}\ \text{ou}\ e^{-\frac{\pi}{T}},
+\]
+on peut supposer $|h| \leq e^{-\pi} \mathbin{\#} \frac{1}{10}$ ; comme l'exposant de
+$h$ augmente rapidement, on voit qu'on a bien une série très rapidement
+convergente.
+\note{le numéro (10) est entouré ; « $\Re T>1$ » est écrit en bout de ligne ;
+dans $e^{-\frac{\pi}{T}}$ l'exposant est noirci ; « $\#$ » est son signe
+d'approximation}
+
+\emph{Autres fonctions $\Theta$ liées aux fonctions elliptiques}
+
+Les fonctions $\Theta_i$ $(i=1,2,3)$ se définissent par
+\[
+(13)\quad \sigma_i u = e^{\frac{\eta_1 u^2}{2\omega_1}}\,
+\frac{\Theta_i(\frac{u}{2\omega_1}|\frac{\omega_2}{\omega_1})}{\Theta_i(0|\frac{\omega_2}{\omega_1})}
+\]
+et s'expriment par une série du type $\Theta$ :
+\[
+(14)\quad \left\lbrace
+\begin{aligned}
+\Theta_1(v|t) &= \sum_{-\infty}^{\infty} e^{(n-\frac12)^2 i\pi t + (2n-1)i\pi v}\\
+&= 2\sum_{1}^{\infty} e^{(n-\frac12)^2 i\pi t}\cos(2n-1)\pi v = \vartheta_2(v)\\
+\Theta_2(v|t) &= \sum_{-\infty}^{+\infty}(-1)^n e^{n^2 i\pi t + 2ni\pi v}\\
+&= 1 + 2\sum_{1}^{\infty} e^{n^2 i\pi t}\cos 2n\pi v = \vartheta_0(v)
+\end{aligned}
+\right.
+\]
+\note{devant la première somme, un $2$ biffé ; à droite de la troisième ligne,
+un griffonnage couvert de hachures ; la quatrième ligne est ainsi sur la
+page, sans $(-1)^n$}
+
+\page{89}
+\[
+\left\lbrace
+\begin{aligned}
+\Theta_3(v|t) &= \sum_{-\infty}^{+\infty} e^{n^2 i\pi t + 2ni\pi v}
+= 1 + 2\sum_{1}^{\infty} e^{n^2 i\pi t}\cos 2n\pi v = \vartheta_3(v)
+\end{aligned}
+\right.
+\]
+($\Theta(v|t) = \vartheta_1(v)$ --- $\vartheta_i$, fonctions de
+\uncertain{Weierstrass})
+\note{suite de l'accolade de (14)}
+
+Les autres quantités de la théorie des fonctions elliptiques se calculent
+aussi au moyen des fonctions $\Theta$, une fois fixés $\omega_1$ et
+$t = \frac{\omega_2}{\omega_1}$. Le calcul des $e_i$ par exemple donne
+\[
+e_i = \Bigl(\frac{1}{2\omega_1}\Bigr)^2\Bigl(\frac{1}{3}\,\frac{\Theta'''0}{\Theta'0}
+- \frac{\Theta''_i 0}{\Theta_i 0}\Bigr)
+\]
+\ill{} \ill{}
+\[
+(15)\quad \left\lbrace
+\begin{aligned}
+e_1 &= \frac13\Bigl(\frac{\pi}{2\omega_1}\Bigr)^2\bigl[(\Theta_2 0)^4 + (\Theta_3 0)^4\bigr]\\
+e_2 &= \frac13\Bigl(\frac{\pi}{2\omega_1}\Bigr)^2\bigl[-(\Theta_1 0)^4 - (\Theta_3 0)^4\bigr]\\
+e_3 &= \frac12\Bigl(\frac{\pi}{2\omega_1}\Bigr)^2\bigl[(\Theta_1 0)^4 - (\Theta_? 0)^4\bigr]
+\end{aligned}
+\right.
+\]
+\note{ainsi sur la page : $\frac12$ devant $e_3$, où l'on attendrait
+$\frac13$ ; les indices des $\Theta$ de $e_2$, $e_3$ se lisent mal}
+Signalons les relations
+\[
+2\eta_1\omega_1 = -\frac{\Theta'''0}{6\,\Theta'0}\ ; \qquad
+\Theta'0 = \pi\,\Theta_1 0\;\Theta_2 0\;\Theta_3 0
+\]
+\note{le $\Theta_2$ du dernier produit est noirci}
+
+\page{90}
+\note{feuille récapitulative (papier brun clair), donnée dans l'ordre de la
+page}
+\[
+\omega_1\ \ \omega_2 \qquad \Bigl[\frac{\omega_1}{\omega_2}\notin\mathbf{R}\Bigr]
+\]
+\[
+g_2\ \ g_3 \qquad \boxed{\ g_2 = 20c_1 \quad g_3 = 28c_2\ } \qquad
+\bigl(g_2^3 - 27g_3^2 \neq 0\bigr)
+\]
+\[
+c_1\ \ c_2
+\]
+\[
+e_1\ \ e_2\ \ e_3 \qquad 4z^3 - g_2 z - g_3 = 4(z-e_1)(z-e_2)(z-e_3)
+\quad (\text{les } e_i \text{ distincts})
+\]
+\note{un trait sépare cet en-tête du reste de la page}
+
+Expression en fonction de $\omega_1$, $\omega_2$
+\[
+c_1 = 3\sum_{\omega\in\mathfrak{P}^*}\Bigl(\frac{1}{2\omega}\Bigr)^4 \qquad
+c_2 = 5\sum_{\omega\in\mathfrak{P}^*}\Bigl(\frac{1}{2\omega}\Bigr)^6
+\]
+\[
+g_2 = 20c_1 \qquad g_3 = 28c_2
+\]
+\[
+e_i = \wp\omega_i = \frac{1}{\omega_i^2} + \sum_{\omega\in\mathfrak{P}^*}
+\frac{1}{(\omega_i + 2\omega)^2}
+\]
+\note{ainsi sur la page ; le $2\omega$ du dénominateur est surchargé}
+
+Expression en fonction de $g_2$, $g_3$ \struck{$e_3$}
+\[
+c_1 = \frac{1}{20}\,g_2\,, \qquad c_2 = \frac{1}{28}\,g_3
+\]
+$e_1$, $e_2$, $e_3$ racines de l'équation $4z^3 - g_2 z - g_3 = 0$
+\[
+\omega_i = \int_\infty^{e_i}\frac{dz}{\sqrt{4z^3 - g_2 z - g_3}}
+\qquad (i,j,k\ \uncertain{distincts})
+\]
+déterminations telles que $\sum_{i=1,2,3}\omega_i = 0$
+\note{la somme est surchargée ; au-dessus, « $\omega_1+\omega_2+\omega_3=0$ »}
+
+Expression en fonction de $e_1$, $e_2$, $e_3$ :
+$\omega_i = \int_{e_j}^{e_k}\frac{dz}{\sqrt{4z^3 - g_2 z - g_3}}$ pour des
+déterminations convenables.
+\[
+g_2 = 4(e_2e_3 + e_3e_1 + e_1e_2) \qquad g_3 = 4e_1e_2e_3
+\]
+les autres choses comme ci-dessus
+\note{ainsi sur la page, sans signe $-$ devant le $4$ de $g_2$ ; le premier
+$+$ est surchargé. Dans l'intégrale, le radicande est lu sous réserve}
+
+Expression en fonction de $c_1$, $c_2$
+\[
+g_2 = 20c_1\,, \qquad g_? = 20\,c_?\,,
+\]
+le reste comme ci-dessus.
+\note{ainsi sur la page, semble-t-il : $20$, où l'on attendrait
+$g_3 = 28c_2$}
+
+\page{91}
+\emph{Fonction modulaire}
+
+En considérant $g_2$, $g_3$ comme fonctions de $\omega_1$, $\omega_2$, où
+$\Im\frac{\omega_2}{\omega_1} > 0$, qui sont homogènes de degré $2$ et $3$
+respectivement, on peut former la fonction
+\[
+\frac{g_2^3}{g_2^3 - 27g_3^2}
+\]
+(\uncertain{bien} \ill{} puisque $\Delta = g_2^3 - 27g_3^2 \neq 0$), qui est
+homogène de degré zéro, donc une fonction de $\tau = \frac{\omega_2}{\omega_1}$.
+On l'appelle fonction modulaire, notation $J(\tau)$ ; $J(\tau)$ est holomorphe
+pour $\Im\tau > 0$, et par définition, on a pour $\tau = \frac{\omega_2}{\omega_1}$
+\[
+J(\tau) = \frac{g_2^3}{\Delta} = \frac{1}{1 - 27\frac{g_3^2}{g_2^3}}
+\]
+\note{ainsi sur la page : « de degré $2$ et $3$ »}
+Comme $g_2$ et $g_3$ peuvent être pris arbitraires, \ill{} \struck{\ill{}} la
+condition $\Delta = g_2^3 - 27g_3^2 \neq 0$ près, $J(\tau)$ prend
+\struck{\ill{}} les valeurs ; de plus, le fait que $g_2$ et $g_3$ ne dépendent
+que du groupe engendré par $\omega_1$ et $\omega_2$ s'exprime par le fait que
+$J(\tau)$ est invariant par le \struck{\ill{}} groupe arithmétique ou modulaire
+--- groupe des substitutions $\tau\to\frac{a\tau+b}{c\tau+d}$, où $a,b,c,d$ sont
+entiers, et $ad - bc = 1$. De plus,
+
+\page{92}
+il est immédiat que la donnée de $J\tau = a$ ($a$ arbitraire dans $\mathbf{C}$)
+détermine $\tau$ à une transformation arithmétique près, (car il détermine à une
+homothétie près le groupe des périodes engendré par $\omega_1$ et $\omega_2$,
+comme on vérifie très facilement). Il suit aussitôt que $J$ est
+\struck{\ill{}} \add{biunivoque} au voisinage de \struck{tout} point du
+demi-plan supérieur qui n'est point double d'aucune transformation
+$\bigl(\begin{smallmatrix} a & b\\ c & d\end{smallmatrix}\bigr)$ arithmétique, et en
+ces points seulement. \struck{Des autres} \add{On} \uncertain{voit} \ill{}
+d'autre part qu'il y a exactement deux classes de points doubles, savoir $i$
+($i = -\frac{1}{i}$) et $\frac12 + i\frac{\sqrt3}{2}$. Par suite, les seuls
+points \struck{singuliers} \add{\ill{}} de la fonction inverse $\tau(J)$ de
+$J(\tau)$ sont les deux points $J(i)$ et $J(\frac12 + i\frac{\sqrt3}{2})$.
+Le calcul donne respectivement $0$ et $1$, i.e.\ $g_2 = 0$ et $g_3 = 0$ (car en
+partant de $g_2 = 0$ resp.\ $g_3 = 0$, on trouve bien
+$\frac{\omega_2}{\omega_1} = i$ resp.\ $\frac{\omega_2}{\omega_1} = \frac12 + i\frac{\sqrt3}{2}$,
+par un calcul d'intégrale très simple). --- Ces propriétés sont à la base des
+théorèmes de Picard sur les fonctions entières.
+\note{ainsi sur la page : $J(i)$ est apparié à $0$ et à $g_2 = 0$, $J(\frac12 +
+i\frac{\sqrt3}{2})$ à $1$ et à $g_3 = 0$ ; avec la normalisation
+$J = g_2^3/\Delta$ on a d'ordinaire $J(i) = 1$ ($g_3 = 0$) et
+$J(\frac12 + i\frac{\sqrt3}{2}) = 0$ ($g_2 = 0$). Le mot écrit au-dessus de
+« singuliers » biffé ne se lit pas}
+
+\page{93}
+\emph{Fonctions elliptiques de Legendre}
+
+$\mathrm{sn}\,u$ est fonction inverse de
+$\int_0^u\frac{dx}{\sqrt{(1-x^2)(1-k^2x^2)}}$, impaire.
+
+On pose
+\[
+(1)\quad \left.
+\begin{aligned}
+&\mathrm{cn}^2u + \mathrm{sn}^2u = 1\\
+&\mathrm{dn}^2u + k^2\mathrm{sn}^2u = 1\\
+&(\mathrm{dn}^2u - k^2\mathrm{cn}^2u = 1 - k^2 = k'^2)
+\end{aligned}
+\right\rbrace \quad
+\begin{aligned}
+&\mathrm{sn}\,0 = 0\\
+&\mathrm{cn}\,0 = \mathrm{dn}\,0 = 1
+\end{aligned}
+\]
+(cn et dn sont uniformes, paires)
+
+On a les équations différentielles
+\[
+(2)\quad \left\lbrace
+\begin{aligned}
+\mathrm{sn}'u &= \sqrt{(1-\mathrm{sn}^2u)(1-k^2\mathrm{sn}^2u)} = \mathrm{cn}\,u\,\mathrm{dn}\,u\\
+\mathrm{cn}'u &= \sqrt{(1-\mathrm{cn}^2u)(k'^2+k^2\mathrm{cn}^2u)} = -\mathrm{sn}\,u\,\mathrm{dn}\,u\\
+\mathrm{dn}'u &= \sqrt{(1-\mathrm{dn}^2u)(\mathrm{dn}^2u-k'^2)} = -k^2\mathrm{sn}\,u\,\mathrm{cn}\,u
+\end{aligned}
+\right.
+\]
+Les développements de Taylor sont, en $0$
+\[
+(3)\quad \left\lbrace
+\begin{aligned}
+\mathrm{sn}\,u &= u - \frac{2\alpha k}{3!}u^3 + \frac{4k^2(\alpha^2+3)}{5!}u^5
+- \frac{8k^3(\alpha^3+33\alpha)}{7!}u^7 + \cdots\\
+\mathrm{cn}\,u &= 1 - \frac{u^2}{2!} + \frac{1+4k^2}{4!}u^4
+- \frac{1+44k^2+16k^4}{6!}u^6 + \cdots\\
+\mathrm{dn}\,u &= 1 - \frac{k^2u^2}{2!} + \frac{k^2(4+k^2)}{4!}u^4
+- k^2\,\frac{16+44k^2+k^4}{6!}u^6 + \cdots
+\end{aligned}
+\right.
+\]
+\[
+\Bigl(\alpha = \frac12\Bigl(k + \frac1k\Bigr)\Bigr)
+\]
+\note{les numéros (1), (2), (3) sont entourés}
+
+\uncertain{Dégénérescence}
+\[
+\left\lbrace
+\begin{aligned}
+&k = 0 \quad \mathrm{sn} = \sin \quad \mathrm{cn} = \cos, \quad \mathrm{dn} = 1,\\
+&k = 1 \quad \mathrm{sn} = \mathrm{th} \quad \mathrm{cn} = \frac{1}{\mathrm{ch}} \quad
+\mathrm{dn} = \frac{1}{\mathrm{th}}
+\end{aligned}
+\right.
+\]
+\note{ainsi sur la page : $\mathrm{dn} = \frac{1}{\mathrm{th}}$ pour $k=1$, où
+l'on attendrait $\frac{1}{\mathrm{ch}}$}
+
+\emph{Périodes} \add{\emph{et valeurs remarquables}}
+Posons
+\[
+K = \int_0^1\frac{dx}{\sqrt{(1-x^2)(1-k^2x^2)}} \qquad
+K' = \int_0^1\frac{dx}{\sqrt{(1-x^2)(1-k'^2x^2)}}
+\]
+$\mathrm{sn}\,u, \ldots$ ont les périodes $4K$ et $4iK'$. Posons
+$K'' = -K - iK'$, ($4K''$ est une autre période)
+\note{« Périodes » est souligné deux fois ; « et valeurs remarquables » est
+écrit dessous, dans la marge gauche, et souligné deux fois}
+
+\page{94}
+\[
+\begin{array}{llll}
+\mathrm{sn}\,u & \text{périodes} & 4K\quad 2iK' & \\
+ & \text{zéros} & 2mK + 2m'iK' & \\
+ & \text{pôles} & iK' + 2mK + 2m'iK' & \\[1ex]
+\mathrm{cn}\,u & \text{périodes} & 4K,\ -2K'' & \\
+ & \text{zéros} & K + 2mK + 2m'iK & \\
+ & \text{pôles} & iK' + 2mK + 2m'iK' & \\[1ex]
+\mathrm{dn}\,u & \text{périodes} & 2K,\ 4iK' & \\
+ & \text{zéros} & K'' + 2mK + 2m'iK & \\
+ & & iK' + 2mK + 2m'iK' &
+\end{array}
+\]
+\note{chaque fonction porte une accolade ; pour dn, le mot « pôles » manque
+devant la troisième ligne ; dans les zéros de cn et de dn, le dernier terme
+se lit $2m'iK$}
+\marginal{si \struck{\ill{}} $k<1$ : $\mathrm{sn}\,u$ n'a pas de zéros ni de
+pôles pour $u$ réel, et période $4K$ \quad | \quad pas de pôles pour $u$ réel,
+zéros $K + 2mK$ ; période $4K$ \quad | \quad pas de pôles ni de zéros pour
+$u$ réel, période réelle $2K$}
+\note{trois colonnes à droite, en face de sn, cn, dn, séparées par des traits
+verticaux ; ainsi sur la page : « n'a pas de zéros » pour sn}
+
+sn, cn, dn sont, pour \ill{} \ill{} périodes, \ill{}, d'ordre $2$ ; pour
+\ill{} \ill{} périodes communes, d'ordre $4$.
+\[
+\left\lbrace
+\begin{aligned}
+&\mathrm{sn}(u+2K) = -\mathrm{sn}\,u && \mathrm{cn}(u+2K) = -\mathrm{cn}\,u
+&& \mathrm{dn}(u+2K) = \mathrm{dn}\,u\\
+&\mathrm{sn}(u+2iK') = \mathrm{sn}\,u && \mathrm{cn}(u+2iK') = -\mathrm{cn}\,u
+&& \mathrm{dn}(u+2iK') = -\mathrm{dn}\,u\\
+&\mathrm{sn}(u+2K'') = -\mathrm{sn}\,u && \mathrm{cn}(u+2K'') = \mathrm{cn}\,u
+&& \mathrm{dn}(u+2K'') = -\mathrm{dn}\,u
+\end{aligned}
+\right.
+\]
+\note{les $2$ de $2K''$ sont surchargés}
+\[
+\left\lbrace
+\begin{aligned}
+&\mathrm{sn}(u+K) = \frac{\mathrm{cn}\,u}{\mathrm{dn}\,u}
+&& \mathrm{cn}(u+K) = -k'\frac{\mathrm{sn}\,u}{\mathrm{dn}\,u}
+&& \mathrm{dn}(u+K) = \frac{k'}{\mathrm{dn}\,u}\\
+&\mathrm{sn}(u+iK') = \frac{1}{k\,\mathrm{sn}\,u}
+&& \mathrm{cn}(u+iK') = -\frac{i}{k}\frac{\mathrm{dn}\,u}{\mathrm{sn}\,u}
+&& \mathrm{dn}(u+iK') = -i\,\frac{\mathrm{cn}\,u}{\mathrm{sn}\,u}\\
+&\mathrm{sn}(u+K'') = -\frac{1}{k}\frac{\mathrm{dn}\,u}{\mathrm{cn}\,u}
+&& \mathrm{cn}(u+K'') = -\frac{ik'}{k\,\mathrm{cn}\,u}
+&& \mathrm{dn}(u+K'') = ik'\frac{\mathrm{sn}\,u}{\mathrm{cn}\,u}
+\end{aligned}
+\right.
+\]
+\note{dans $\mathrm{sn}(u+K'')$ un $2$ est écrit puis noirci devant $K''$ ;
+les numérateurs de $\mathrm{cn}(u+iK')$, $\mathrm{dn}(u+iK')$ et
+$\mathrm{dn}(u+K'')$ sont surchargés}
+\[
+\left\lbrace
+\begin{aligned}
+\mathrm{sn}(iu|k) &= i\,\frac{\mathrm{sn}(u|k')}{\mathrm{cn}(u|k')}\\
+\mathrm{cn}(iu|k) &= \frac{1}{\mathrm{cn}(u|k')}\\
+\mathrm{dn}(iu|k) &= \frac{\mathrm{dn}(u|k')}{\mathrm{cn}(u|k')}
+\end{aligned}
+\right.
+\]
+\[
+\begin{array}{c|c|c|c|c|c|c|c|c|c|c}
+ & 0 & K & 2K & 3K & iK' & 2iK' & 3iK' & K'' & 2K'' & 3K''\\
+\hline
+\mathrm{sn}\,u & 0 & 1 & 0 & -1 & \infty & 0 & \infty & -\frac1k & 0 & \frac1k\\
+\mathrm{cn}\,u & 1 & 0 & -1 & 0 & \infty & -1 & \infty & -i\frac{k'}{k} & 1 & -i\frac{k'}{k}\\
+\mathrm{dn}\,u & 1 & k' & 1 & k' & \infty & -1 & \infty & 0 & -1 & 0
+\end{array}
+\]
+\note{tableau au bas de la page ; la case d'angle est hachurée ; après $3K$ et
+après $3iK'$, une colonne commencée ($4K$, $4iK'$ ?) est biffée et fermée par
+un trait épais ; un signe biffé suit $3K''$}
+
+\page{95}
+\emph{Relations entre les fonctions de Weierstrass et de Legendre}
+
+Supposons $\omega_1$ réel, $\omega_2$ purement imaginaire ($\Im\omega_2 > 0$),
+alors les $e_i$ sont réels ; prenons $e_2 < e_3 < e_1$, posons
+$k = \sqrt{\frac{e_3-e_2}{e_1-e_2}}$, $M = \sqrt{e_1-e_2}$. Alors
+\[
+\left\lbrace
+\begin{aligned}
+\mathrm{sn}(u|k) &= M\,\frac{\sigma(\frac{u}{M}|\omega_1,\omega_2)}{\sigma_2(\frac{u}{M}|\omega_1,\omega_2)}\\
+\mathrm{cn}(u|k) &= \frac{\sigma_1(\frac{u}{M}|\omega_1,\omega_2)}{\sigma_2(\frac{u}{M}|\omega_1,\omega_2)}\\
+\mathrm{dn}(u|k) &= \frac{\sigma_3(\frac{u}{M}|\omega_1,\omega_2)}{\sigma_?(\frac{u}{M}|\omega_1,\omega_2)}
+\end{aligned}
+\right.
+\]
+\note{le trait de fraction de sn est repassé ; devant la fraction de cn, un
+signe biffé ; devant celle de dn, une virgule ; l'indice du dénominateur de dn se lit mal}
+\[
+\wp(u|\omega_1,\omega_2) = e_2 + \frac{M^2}{\mathrm{sn}^2(Mu|k)}
+\]
+\[
+K = M\omega_1,\quad iK' = M\omega_2,\quad K'' = M\omega_3
+\]
+(Pour \ill{} \ill{}, pour \ill{} des fonctions $\mathrm{sn}(u|k)\ldots$ aux
+fonctions de Weierstrass, on prend $M$ arbitraire, puis on détermine
+$\omega_1$, $\omega_2$, $\omega_3$ par $K = M\omega_1$, $iK' = M\omega_2$,
+$K'' = M\omega_3$, et on a les formules ci-dessus ; \struck{\ill{}} alors
+$e_1$, $e_2$, $e_3$ sont donnés par
+\[
+3e_1 = (1+k'^2)M^2 \qquad 3e_2 = (?+k'^2)M^2 \qquad 3e_3 = (1-2k'^2)M^2
+\]
+\note{le premier terme de $3e_2$ est surchargé (un $2$ sur un autre signe)}
+On prend souvent \add{\uncertain{\ill{}}} pour \uncertain{convenance}
+$M = \frac12$, donc prenant des périodes $2\omega_1 = 4K$, $2\omega_2 = 4iK'$ ;
+alors sn, cn, dn sont fonctions elliptiques d'ordre $4$ pour les périodes
+$2\omega_1$, $2\omega_2$)
+
+\page{96}
+\emph{Fonctions de Legendre et fonctions $\Theta$}
+\[
+\left\lbrace
+\begin{aligned}
+\mathrm{sn}(u|k) &= \frac{1}{\sqrt k}\,
+\frac{\Theta(\frac{u}{2K}|\frac{iK'}{K})}{\Theta_2(\frac{u}{2K}|\frac{iK'}{K})}\\
+\mathrm{cn}(u|k) &= \sqrt{\frac{k'}{k}}\,
+\frac{\Theta_1(\frac{u}{2K},\frac{iK'}{K})}{\Theta_2(\frac{u}{2K},\frac{iK'}{K})}\\
+\mathrm{dn}(u|k) &= \sqrt{k'}\,
+\frac{\Theta_3(\frac{u}{2K},\frac{iK'}{K})}{\Theta_2(\frac{u}{2K},\frac{iK'}{K})}
+\end{aligned}
+\right.
+\]
+\note{deux traits horizontaux ferment ce bloc}
+
+\emph{Formules d'addition}
+\[
+\mathrm{sn}(u+v) = \frac{\mathrm{sn}\,u\,\mathrm{cn}\,v\,\mathrm{dn}\,v
++ \mathrm{sn}\,v\,\mathrm{cn}\,u\,\mathrm{dn}\,u}{1 - k^2\mathrm{sn}^2u\,\mathrm{sn}^2v}
+\]
+\[
+\mathrm{cn}(u+v) = \frac{\mathrm{cn}\,u\,\mathrm{cn}\,v
+- \mathrm{sn}\,u\,\mathrm{sn}\,v\,\mathrm{dn}\,u\,\mathrm{dn}\,v}{1 - k^2\mathrm{sn}^2u\,\mathrm{sn}^2v}
+\]
+\[
+\mathrm{dn}(u+v) = \frac{\mathrm{dn}\,u\,\mathrm{dn}\,v
+- k^2\mathrm{sn}\,u\,\mathrm{sn}\,v\,\mathrm{cn}\,u\,\mathrm{cn}\,v}{1 - k^2\mathrm{sn}^2u\,\mathrm{sn}^2v}
+\]
+\note{la page s'arrête ici ; c'est la dernière du dossier}
+
+\end{document}
