@@ -90,7 +90,7 @@ export function DiagramsPage() {
             a page, crammed between two formulas; the transcriptions set each one in{' '}
             <code className="rounded bg-ink-100 px-1 text-[13px]">tikz-cd</code>. Here are all{' '}
             {DG.total.toLocaleString('en-GB')} of them from the {DG.folders.length} folders that have
-            any, a folder at a time, each linked back to the page it stands on.
+            any, a folder at a time and one diagram at a time — the arrow keys turn them — each drawn larger than on its page and linked back to it.
           </p>
         </header>
 

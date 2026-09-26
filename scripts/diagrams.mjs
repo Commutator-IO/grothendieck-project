@@ -54,6 +54,45 @@ function size(raw) {
   return { nodes, arrows, rows: rows.length };
 }
 
+/**
+ * The carousel: shows one figure, redraws its arrows, and follows the hash
+ * (#d12), the arrow keys and the range. Registered after the reading view's
+ * own DOMContentLoaded handler, which typesets the nodes and draws every
+ * diagram — the hidden ones against no geometry, which is why the one shown
+ * is drawn again here.
+ */
+const SLIDES = `<script>
+(function () {
+  var figs, cur = 0;
+  function show(i) {
+    if (!figs.length) return;
+    cur = Math.max(0, Math.min(figs.length - 1, i));
+    figs.forEach(function (f, j) { f.classList.toggle('on', j === cur); });
+    document.getElementById('dg-i').textContent = cur + 1;
+    document.getElementById('dg-range').value = cur + 1;
+    document.getElementById('dg-prev').disabled = cur === 0;
+    document.getElementById('dg-next').disabled = cur === figs.length - 1;
+    history.replaceState(null, '', '#d' + (cur + 1));
+    var cd = figs[cur].querySelector('.tr-cd');
+    if (cd && typeof drawDiagram === 'function') requestAnimationFrame(function () { drawDiagram(cd); });
+  }
+  document.addEventListener('DOMContentLoaded', function () {
+    figs = Array.prototype.slice.call(document.querySelectorAll('.dg'));
+    var m = /^#d(\\d+)$/.exec(location.hash);
+    document.getElementById('dg-prev').onclick = function () { show(cur - 1); };
+    document.getElementById('dg-next').onclick = function () { show(cur + 1); };
+    document.getElementById('dg-range').oninput = function (e) { show(Number(e.target.value) - 1); };
+    addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft') show(cur - 1);
+      if (e.key === 'ArrowRight') show(cur + 1);
+    });
+    addEventListener('resize', function () { show(cur); });
+    show(m ? Number(m[1]) - 1 : 0);
+  });
+})();
+</script>`;
+const withSlides = (page) => page.replace('</body>', `${SLIDES}</body>`);
+
 const folders = readdirSync(T, { withFileTypes: true })
   .filter((d) => d.isDirectory() && COTE.has(d.name))
   .map((d) => d.name)
@@ -84,19 +123,40 @@ for (const f of folders) {
   total += found.length;
 
   const cote = COTE.get(f);
-  const html = found
-    .map(
-      (d, i) =>
-        `<figure class="dg" id="d${i + 1}">` +
-        `<figcaption><a href="/#${f}/${d.batch}" target="_top">batch ${d.batch}${d.page ? ` · p. ${escapeHtml(d.page)}` : ''}</a>` +
-        `<span class="dg-n">${i + 1}</span></figcaption>` +
-        `<div class="ltx_p">${renderDiagram(d.raw)}</div></figure>`,
-    )
-    .join('\n');
+  // One diagram per slide leaves room to draw it larger, and larger is what
+  // makes a diagram legible: the node text and the gaps between nodes grow
+  // together, so the arrows lengthen and their labels clear the nodes. A
+  // square of four nodes is drawn at 1.7 times the reading view's size; a
+  // diagram of eight rows or columns stays at 1, or it would not fit.
+  const scale = (d) => {
+    const cols = Math.max(...d.raw.replace(/^\\begin\{tikzcd\}(\[[^\]]*\])?/, '').split(/\\\\(?![a-zA-Z])/).map((r) => r.split('&').length));
+    const dim = Math.max(cols, d.rows);
+    return dim <= 2 ? 1.7 : dim <= 3 ? 1.5 : dim <= 4 ? 1.3 : dim <= 6 ? 1.15 : 1;
+  };
+  const enlarge = (htmlOf, k) =>
+    htmlOf
+      .replace(/column-gap:([\d.]+)rem;row-gap:([\d.]+)rem/, (_, c, r) => `column-gap:${(c * k).toFixed(2)}rem;row-gap:${(r * k).toFixed(2)}rem`)
+      .replace('<span class="tr-cd" ', `<span class="tr-cd" style="font-size:${(15.5 * k).toFixed(1)}px" `);
+  const html =
+    `<nav class="dg-nav" aria-label="Diagrammes">` +
+    `<button type="button" id="dg-prev" aria-label="Diagramme précédent">‹</button>` +
+    `<span class="dg-count"><span id="dg-i">1</span> / ${found.length}</span>` +
+    `<input type="range" id="dg-range" min="1" max="${found.length}" value="1" aria-label="Aller au diagramme">` +
+    `<button type="button" id="dg-next" aria-label="Diagramme suivant">›</button>` +
+    `</nav>\n` +
+    found
+      .map(
+        (d, i) =>
+          `<figure class="dg" id="d${i + 1}">` +
+          `<figcaption><a href="/#${f}/${d.batch}" target="_top">batch ${d.batch}${d.page ? ` · p. ${escapeHtml(d.page)}` : ''} — lire la page</a>` +
+          `<span class="dg-n">${i + 1} / ${found.length}</span></figcaption>` +
+          `<div class="ltx_p">${enlarge(renderDiagram(d.raw), scale(d))}</div></figure>`,
+      )
+      .join('\n');
   const pagesSeen = found.map((d) => Number(d.page)).filter(Number.isFinite);
   writeFileSync(
     resolve(OUT, `${f}.html`),
-    readingPage({
+    withSlides(readingPage({
       meta: {
         folder: f,
         first: Math.min(...pagesSeen),
@@ -126,8 +186,20 @@ for (const f of folders) {
   /* The arrow layer sits at z-index -1, under the nodes. Without a stacking
      context of its own it went under the card's white background too, and
      every arrow was painted and hidden. */
-  .dg .tr-cd { isolation: isolate; }`,
-    }),
+  .dg .tr-cd { isolation: isolate; }
+  /* A carousel: one diagram at a time, the others kept out of the flow. */
+  .dg { display: none; min-height: 22rem; }
+  .dg.on { display: flex; flex-direction: column; }
+  .dg .ltx_p { flex: 1; display: flex; align-items: center; justify-content: center; padding: 1.5rem 0; }
+  .dg-nav { position: sticky; top: 0; z-index: 2; display: flex; align-items: center; gap: .75rem;
+            margin: 0 0 .8rem; padding: .5rem 0; background: #fff; font-size: 13px; color: var(--ink3); }
+  .dg-nav button { border: 1px solid var(--rule); background: #fff; border-radius: 999px; width: 2.2rem; height: 2.2rem;
+                   font-size: 18px; line-height: 1; color: var(--ink2); cursor: pointer; }
+  .dg-nav button:hover { background: var(--surf3); }
+  .dg-nav button:disabled { opacity: .35; cursor: default; }
+  .dg-nav input { flex: 1; accent-color: #128557; }
+  .dg-count { font-variant-numeric: tabular-nums; min-width: 4.5rem; text-align: center; }`,
+    })),
   );
 
   const byBatch = {};
