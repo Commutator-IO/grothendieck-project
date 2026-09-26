@@ -1,0 +1,337 @@
+\documentclass[11pt]{article}
+\usepackage{fontspec}\setmainfont{Charter}\setmonofont{Menlo}[Scale=0.82]
+\usepackage{polyglossia}\setmainlanguage{french}\setotherlanguage{english}
+\usepackage{microtype}
+\usepackage[a4paper,margin=27mm]{geometry}
+\usepackage{booktabs,longtable,array}
+\usepackage{setspace}\setstretch{1.1}
+\usepackage[hidelinks]{hyperref}
+\usepackage{amsmath,amssymb}
+\usepackage[font=small,labelfont=bf]{caption}
+
+\newcommand{\q}[1]{«\,#1\,»}
+% Une cote, un lot, une page : l'adresse de toute affirmation.
+\newcommand{\cote}[1]{\mbox{n\textsuperscript{o}\,#1}}
+\newcommand{\lot}[3]{\href{https://grothendieck.commutator.io/\##1/#2}{#1, lot #2, p.~#3}}
+\raggedbottom\emergencystretch=1.5em
+
+\title{\Large Dater, reprendre, déplacer.\\ Ce que les notes de travail d'Alexandre Grothendieck\\ (fonds de Montpellier, 1949--1991) donnent à voir d'une pratique mathématique}
+\author{Michel Hua\\ \small Chercheur indépendant, Paris\\ \small \texttt{michel@commutator.io}}
+\date{\small Version de travail du 26 septembre 2026, préparée pour la \emph{Revue d'histoire des mathématiques}}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent Le fonds Alexandre Grothendieck de l'université de Montpellier réunit 178 cotes librement consultables, soit 16\,074 pages de notes de travail écrites entre 1949 et 1991. Cet article en propose une première lecture d'ensemble, fondée sur une transcription intégrale des 130 cotes commencées à ce jour (4\,955 pages), établie par un modèle de langage sous des règles éditoriales explicites, et dont chaque affirmation renvoie à la cote, au lot et à la page du fac-similé. Il en tire trois constats. La chronologie du fonds est en majorité reconstruite : 111 des 153 datations de l'inventaire comportent une part déduite, plusieurs bornes coïncident avec la date d'un papier réemployé, et Grothendieck n'a daté ses feuillets de travail de sa main que dans treize cotes, presque toutes des années 1983--1986. Sa pratique d'écriture se laisse décrire avec précision dans ces suites datées : séances datées, recommencements conservés et numérotés, erreurs reconnues sur la page, fils menés en alternance. Enfin, les notes font voir des continuités que l'œuvre publiée ne montre pas --- le topos devenu langage de l'homotopie et des stratifications, un fil homotopique daté de 1968 à 1991 --- et une rupture : dans les notes tardives du corpus, l'œuvre imprimée n'est plus citée et les motifs n'apparaissent plus. Les transcriptions n'ont pas encore été vérifiées par une personne ; l'article dit, pour chaque constat, ce qui en dépend.
+\end{abstract}
+
+\begin{english}
+\begin{abstract}
+\noindent\emph{Dating, restarting, displacing: what Alexandre Grothendieck's working notes (Montpellier fonds, 1949--1991) show of a mathematical practice.} The Grothendieck fonds at the University of Montpellier holds 178 openly accessible folders, 16,074 pages of working notes written between 1949 and 1991. This article offers a first reading of the whole, based on a complete transcription of the 130 folders begun so far (4,955 pages), made by a large language model under explicit editorial rules, every claim of which is addressed to the folder, batch and page of the facsimile. Three findings follow. The chronology of the fonds is mostly reconstructed: 111 of the inventory's 153 datings are in part deduced, several of its bounds coincide with the date of reused paper, and Grothendieck dated his working leaves in his own hand in only thirteen folders, nearly all of 1983--1986. His writing practice can be described precisely in those dated runs: dated sessions, restarts kept and numbered, errors acknowledged on the page, threads worked in alternation. And the notes show continuities the published work does not --- the topos turned into a language for homotopy and stratifications, a homotopical thread dated from 1968 to 1991 --- and a break: in the late notes of the corpus the printed work is no longer cited and motives no longer appear. The transcriptions have not yet been checked by a person; the article states, for each finding, what depends on them.
+\end{abstract}
+\end{english}
+
+\noindent\textbf{Mots-clés.} Alexandre Grothendieck ; manuscrits de travail ; archives mathématiques ; chronologie ; pratique d'écriture ; théorie des topos ; algèbre homotopique ; transcription assistée par machine.
+
+\noindent\textbf{Keywords.} Alexandre Grothendieck; working manuscripts; mathematical archives; chronology; writing practice; topos theory; homotopical algebra; machine-assisted transcription.
+
+\noindent\textbf{Classification MSC 2010.} 01A60, 01A70, 14-03, 18-03.
+
+\section{Introduction}
+
+Quand Alexandre Grothendieck quitta Montpellier en 1991, il laissa ses papiers mathématiques à Jean Malgoire, qui les remit à l'université. Catalogué en 2015 et 2016 par Hélène Rodriguez et Frédéric Troilo sous la direction de Sophie Dikoff, le fonds est en partie numérisé et librement consultable : 178 cotes, rangées en vingt-deux groupes dans l'ordre où il les avait classées, soit 16\,074 pages selon le compte de l'inventaire (Université de Montpellier s.d.). Il s'agit de notes de travail. Grothendieck y écrit pour lui-même, à l'encre et au crayon, par-dessus et entre ses propres lignes ; il reprend un chapitre quatre fois ; il abandonne une démonstration et la retrouve trente pages plus loin ; il écrit au dos de lettres administratives, de listings d'ordinateur et de tapuscrits d'autrui.
+
+Une partie de ce qu'il a écrit est publiée, et souvent par des mathématiciens qui ont transcrit ses manuscrits à la main pendant des années : la correspondance avec Serre (Colmez et Serre 2001), \emph{À la poursuite des champs} (Maltsiniotis 2022), la première partie de \emph{La Longue Marche à travers la théorie de Galois} (Grothendieck 1995), \emph{Les Dérivateurs} (Künzer, Malgoire et Maltsiniotis s.d.), les textes réunis par le Grothendieck Circle (Grothendieck Circle s.d.). L'histoire de son œuvre publiée a ses travaux de référence, du côté de la théorie des catégories (Krömer 2007) comme de l'algèbre homotopique (Maltsiniotis 2005 ; Cisinski 2006), et sa biographie un récit devenu classique (Jackson 2004). Ce qui manque est une lecture des notes de travail prises ensemble : non pas un texte après l'autre, mais le fonds comme un corpus, qu'on puisse interroger sur ses dates, sur les gestes d'écriture qu'il enregistre et sur ce qui, d'une décennie à l'autre, y revient.
+
+Cet article propose une telle lecture, à partir d'une transcription intégrale des cotes commencées à ce jour --- 130 cotes, 4\,955 pages transcrites --- établie par un modèle de langage sous des règles éditoriales explicites, et publiée à côté du fac-similé. Il ne s'appuie pas sur l'autorité de cette transcription, qui n'en a pas : aucune page n'en a encore été relue par une personne. Il s'appuie sur ce qu'elle rend possible, à savoir compter, dater et comparer sur l'ensemble d'un fonds, en adressant chaque affirmation à une page que le lecteur peut ouvrir. La question est celle que posent tous les fonds de travail : que disent les brouillons qu'aucun texte publié ne dit ? Elle reçoit ici trois réponses, qui organisent l'article après une présentation du fonds (section~2) et de la méthode (section~3) : la chronologie du fonds est pour l'essentiel reconstruite, et la manière dont elle l'a été se laisse décrire (section~4) ; les suites datées permettent de décrire une pratique d'écriture avec une précision inhabituelle (section~5) ; les notes font voir des continuités et une rupture que l'œuvre imprimée ne montre pas (section~6). Trois études de cas confrontent des cotes précises à l'imprimé (section~7) ; la discussion (section~8) et les limites (section~9) disent ce que ces constats changent, et ce qui en dépend.
+
+Une convention court sur tout l'article. Les citations des notes sont données telles que la transcription les établit, avec son apparat quand il porte sur le passage cité ; elles n'ont pas été collationnées sur le fac-similé par l'auteur, et chacune renvoie à la page où le lecteur peut le faire. L'annexe~B dit ce que cette vérification doit comprendre avant publication.
+
+\section{Le fonds, son inventaire et ses lectures}
+
+\subsection{Un inventaire d'archive}
+
+L'inventaire de Montpellier est complet et rigoureux, et il est fait pour une archive. Chaque cote porte un numéro (\texttt{19}, \texttt{140-2}, \texttt{156-9}), un titre --- le sien, écrit sur la chemise, ou celui des archivistes, entre crochets quand la chemise n'en portait pas ---, une datation et un nombre de pages. Les groupes vont de \emph{Cristaux} et \emph{Théorie des motifs} à la \emph{Longue Marche}, à \emph{Vers une géométrie des formes} et aux \emph{Dérivateurs}. Trois numérotations se superposent sur chaque page : la sienne, quand il paginait (la \emph{Longue Marche} court de 1 à 787 sur quatre boîtes) ; celle des archivistes, portée au crayon au pied de chaque feuillet, qui est celle que compte l'inventaire et que suit cet article ; et celle du fichier numérique, décalée d'une unité par une page de garde. Toute page citée ici l'est dans la numérotation des archivistes.
+
+Sur les quelque 28\,000 pages du fonds, environ 18\,000 peuvent être communiquées ; la correspondance de tiers ne peut l'être sans autorisation. Les 178 cotes en libre accès représentent 16\,074 pages. Vingt d'entre elles, soit 5\,129 pages, sont déjà éditées par des mathématiciens --- les \emph{Dérivateurs}, la \emph{Longue Marche}, \emph{À la poursuite des champs}, l'\emph{Esquisse d'un programme} --- et la transcription présentée ici les laisse de côté. C'est une limite de corpus qu'il faudra garder à l'esprit : les grands ensembles datés au jour des années 1980 (\emph{À la poursuite des champs}, cotes \cote{134-2} à \cote{134-8} ; les \emph{Dérivateurs}, \cote{157-1} à \cote{157-5}) sont connus ici par l'inventaire et par leurs éditions, non par la transcription.
+
+\subsection{Ce qui a été lu}
+
+À la date de cet article, 130 cotes ont été commencées, dont 128 transcrites entièrement, en 362 lots de vingt pages au plus ; 4\,955 pages portent une transcription, les autres (1\,187 pages de ces mêmes cotes) ayant été écartées comme ne portant pas de mathématiques --- versos administratifs, feuillets blancs, papiers d'autrui. Soixante-douze cotes ont en outre reçu une \q{lecture modernisée}, dont il sera question à la section suivante.
+
+\section{Une lecture intégrale assistée par machine : ce qu'elle permet et ce qu'elle interdit}
+
+La méthode de transcription est décrite en détail ailleurs (Hua 2026) ; on n'en retient ici que ce qui règle l'usage historique qu'on peut en faire.
+
+\subsection{Le protocole}
+
+Un lot de vingt pages est lu par un modèle de langage (Claude, d'Anthropic, dans plusieurs versions successives) dans un contexte neuf, et transcrit dans un \LaTeX{} restreint dont chaque macro répond à une question éditoriale : \verb|\ill{}| pour un mot illisible, jamais deviné ; \verb|\uncertain{}| pour une lecture proposée et signalée ; \verb|\struck{}| pour ce qu'il a barré, qui est conservé ; \verb|\add{}| pour ses insertions et \verb|\supplied{}| pour ce que le transcripteur restitue ; \verb|\marginal{}| pour ses notes de marge et \verb|\note{}| pour celles du transcripteur, qui ne sont jamais comptées comme les siennes. Chaque fichier porte en tête le modèle et la date de la passe, et la mention qu'elle n'a pas été vérifiée sur les pages par une personne. Le texte n'est ni normalisé ni corrigé : son orthographe, sa ponctuation et ses lapsus sont conservés et signalés. Les pages sans mathématiques ne sont pas transcrites, et le saut dans la numérotation en est la trace.
+
+Deux textes sont produits pour chaque cote lue entièrement. La \emph{transcription} donne les pages comme il les a écrites. La \emph{lecture modernisée} reformule ensuite la cote en notation et en vocabulaire actuels, avec un résumé pour un lecteur qui ne connaît pas le sujet ; elle est dérivée de la transcription et jamais de la main, et elle est tenue d'être mathématiquement correcte, ce qui l'autorise à dire ce que la page ne dit pas. Pour l'historien, la distinction est capitale : seule la transcription témoigne de ce que la page porte. La lecture modernisée est une interprétation, utile pour comprendre, et qu'on ne cite pas comme on cite une source. On verra à la section~9 qu'elle se trompe parfois.
+
+\subsection{Ce que la méthode rend possible}
+
+Une transcription écrite dans une langue contrainte peut être interrogée par programme, et c'est ce qui rend possible une lecture d'ensemble. Les dates écrites sur les feuillets ont été relevées dans un registre où chacune renvoie au fichier et à la ligne qui la portent (160 dates, dans 52 cotes) ; les lettres, dans un registre de même forme (42 lettres) ; les renvois de sa main à EGA, SGA et FGA, par volume, exposé et numéro ; les notions, par les mots-clés des lectures modernisées rangés sous trente sujets ; les ratures, les ajouts et les illisibles, par cote et par lot. Aucun de ces registres ne dit plus que la transcription ; tous rendent visibles, sur 130 cotes, des régularités qu'aucune lecture cote par cote ne ferait apparaître.
+
+\subsection{Ce qu'elle interdit}
+
+Elle interdit trois choses, et l'article s'y tient. La première est de tenir une lecture pour sûre : 7,2\,\% des mots lus ont été laissés illisibles, environ cinq lectures pour cent mots sont marquées douteuses, et une lecture fausse qui n'a pas été signalée ne laisse aucune trace ; seule une personne devant le fac-similé la trouve. La deuxième est d'attribuer une priorité : une affirmation de nouveauté porte sur la littérature, qu'on peut interroger mais non épuiser, et une affirmation d'antériorité exige une date que les feuillets n'ont presque jamais. La troisième est de confondre les trois couches de datation que la section suivante distingue.
+
+\section{Dater des notes qui ne le sont pas}
+
+\subsection{Une chronologie reconstruite}
+
+Sur les 178 cotes, 25 sont \q{s.d.} Des 153 autres, 111 ont une datation dont une partie au moins est entre les crochets par lesquels les archivistes signalent une date déduite, et 98 l'ont entièrement ; près de neuf titres sur dix déclarent au moins une composante non datée. Du côté des feuillets, le registre des dates relève 160 dates écrites, dans 52 des 130 cotes transcrites : 78 cotes transcrites, soit six sur dix, n'en portent aucune. Sur ces 160 dates, 59 sont de sa main, 33 dactylographiées, 47 imprimées par une machine --- tampons, cachets postaux, bannières de listings ---, les autres d'une autre main ou indéterminées.
+
+Surtout, les dates de sa main portées sur des feuillets \emph{de travail}, et non sur des lettres, sont au nombre de 45 dans treize cotes seulement (\cote{7}, 28, 66, 67, 117, 148, 150, 154, 156-1, 156-2, 156-3, 156-5, 162-5). Huit sont des années 1960, deux des années 1970, trente-cinq des années 1983--1986. Trente-trois sont au jour près ; douze sont écrites sans année, jour et mois seulement. La datation par l'auteur de ses propres notes est donc un phénomène tardif et rare ; pour les années 1960 et 1970, la chronologie du fonds repose sur les lettres, sur les supports et sur les déductions des archivistes. Aucune des seize cotes transcrites \q{s.d.} ne porte de date relevée.
+
+\subsection{Confirmer, resserrer, contredire}
+
+Confrontées aux feuillets, les datations de l'inventaire se trouvent confirmées, resserrées ou contredites (tableau~\ref{tab:datation}). Elles sont confirmées au jour près pour les chapitres transcrits de \emph{Vers une géométrie des formes} (1986), dont les dates d'inventaire sont exactement celles de ses en-têtes. Elles sont resserrées pour 154, où une fourchette 1983--1984 se réduit à quatre semaines, pour 117 et 148, réduits à quelques semaines de l'automne 1983, et pour 28, où une date déduite \q{[vers 1970]} devient deux journées de travail, le 5 janvier et le 12 février 1970. Elles sont contredites dans quatre cas au moins : 7, dont le titre dit \q{novembre-décembre 1967} quand les feuillets portent le 15 novembre et le 6 décembre 1966 --- lectures douteuses, à vérifier ; 101, daté \q{[à partir de 1967-1968]}, dont une chemise de sa main porte \q{Notes antiques 1958} ; 151, intitulé \q{(1981)}, dont quatre feuillets sont écrits au dos d'une lettre du 6 décembre 1990 ; 162-1, où une entrée datée du 10 janvier 1966 précède d'un an la borne de l'inventaire.
+
+\begin{table}[htbp]\centering\small
+\caption{Datations de l'inventaire confrontées aux dates écrites sur les feuillets : quelques cas. Les dates des feuillets sont celles de la transcription, non vérifiées sur le fac-similé.}\label{tab:datation}
+\begin{tabular}{>{\raggedright\arraybackslash}p{1.3cm}>{\raggedright\arraybackslash}p{3.2cm}>{\raggedright\arraybackslash}p{6.2cm}>{\raggedright\arraybackslash}p{2.4cm}}\toprule
+Cote & Inventaire & Feuillets & Verdict\\\midrule
+154 & 1983--1984 & de sa main, du 23.12.83 (p.~11) au 7.1.1984 (p.~47), puis 18.1.84 (p.~1), sur des listings imprimés en août 1982 & resserré\\
+156-1 à 156-5 & 5, 6, 8 et 14 juin 1986 & \q{(5 juin)}, \q{(6 Juin)}, \q{(8 Juin 86)}, \q{(14.6.86)} en tête, dates internes jusqu'au 18 juin & confirmé et prolongé\\
+7 & 1966--1967 ; titre \q{novembre-décembre 1967} & 15.11.66 (p.~35), 6.12.1966 (p.~56), \q{Nov. Déc. 196?} (p.~20) & titre contredit (lectures douteuses)\\
+16 & 1966--1967 & deux carbones à Coates, 4.1.67 (p.~43) et 6.1.1966 (p.~47), le second continuant le premier & lapsus probable\\
+28 & [vers 1970] & \q{Demazure 5.1.1970}, \q{Demazure 12.2.70} & resserré\\
+101 & [à partir de 1967-1968] & chemise \q{Notes antiques 1958} (p.~16) & borne contredite\\
+117 & 1983 & \q{(24.11.83)} (p.~4), \q{déc. 83} (p.~1) & resserré\\
+148 & 1983 & \q{Oct. 1983} (p.~40), \q{(29.11.83)} (p.~1) & resserré\\
+151 & [à partir de 1981-à partir de 1990] ; titre \q{(1981)} & quatre feuillets au dos d'une lettre du 6.12.1990 & titre contredit\\
+67 & [à partir de 1977]-1984 & chemise \q{(1978 ou 77 ?)} ; cachet du 20.12.77 ; 11 au 15.1.84 ; lettre du 15.4.1984 & confirmé et précisé\\\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Un mécanisme : la borne du papier}
+
+Dans neuf cotes au moins, la borne entre crochets \q{[à partir de X]} coïncide avec la date d'un support réemployé : un mémoire d'une autre main daté de juillet 1976 (\cote{71}), des avis de l'université de mai et juin 1981 (80, 116), un avis de soutenance de novembre 1980 (141), un verso daté du 4 janvier 1973 (108), et, pour cinq cotes datées \q{[à partir de 1982]} (105, 106, 107, 113, 115), des listings imprimés au centre de calcul de Montpellier entre juin et septembre 1982. Les archivistes ne le disent pas ; la transcription le relève, et le qualifie pour ce qu'il est : une borne inférieure, non une date.
+
+L'écart entre le papier et l'écriture peut être grand. Dans 154, des listings d'août 1982 portent des notes datées de décembre 1983 et de janvier 1984, seize mois plus tard ; dans 148, un listing de juin 1982 voisine avec \q{Oct. 1983} ; pour les circulaires universitaires, l'écart observé est plus court (148 : circulaires d'octobre 1983, feuillet daté du 29 novembre). Une datation \q{[à partir de 1982]} ne dit donc rien de plus que \q{pas avant l'été 1982}. Le cas de 108 montre ce qu'une telle borne peut cacher : sa seule date est au verso, sans rapport avec le recto, qui pose des questions sur les \q{modélisateurs} et les \q{catégories test} --- un vocabulaire qu'on associe à \emph{À la poursuite des champs}, dix ans après la borne. Le rapprochement est une inférence, que la section~6 reprend avec prudence.
+
+\subsection{Ce que le fonds ne permet pas de dire}
+
+Il ne permet pas de dater la plupart des cotes ; il ne permet pas de transférer la date d'un feuillet à sa cote, puisqu'un support daté ne borne que la feuille qui le porte ; il ne permet pas de lire l'ordre de composition dans l'ordre d'archivage --- dans 154, la première page est la plus tardive, et dans 29 la lettre de 1959 est à la page~124 ; et il ne permet pas, faute d'examen matériel des encres, de dater les couches d'annotation. Une chemise n'est pas une date : 2, daté \q{[1957]} et intitulé \q{Notes antiques}, contient des \q{Modules sur un topos annelé} (\lot{2}{1}{13}), notion qui ne se trouve pas avant les années 1960.
+
+\section{Une pratique d'écriture}
+
+\subsection{Dater une séance, non une page}
+
+Dans les années 1980, il date le début d'une séance de travail, en tête d'une suite ou dans la marge à hauteur d'un alinéa : \q{23.12.83} souligné, \q{(24.11.83)} en marge, \q{12.1.} dans la marge gauche à hauteur d'un titre de section. On trouve une date toutes les dix à vingt pages, et l'année est souvent omise : la date sert à se retrouver dans une suite, non à l'archive. Il date aussi ses ajouts : une note oblique de la marge de 156-1, p.~3, page écrite le 5 juin 1986, porte \q{7.6.}, et c'est donc une couche postérieure de deux jours. Dans les années 1960, les dates sont rares, au crayon, souvent en fourchettes de mois (\q{Juillet-Août 1967}), et la datation des lettres, avec leur lieu, est la seule systématique. Deux lapsus d'année, \q{6.1.1966} deux jours après \q{4.1.67} (\cote{16}) et un 6 récrit sur un 5 dans \q{(Juin 86)} (156-1), relèvent vraisemblablement du même geste.
+
+\subsection{Recommencer sans effacer}
+
+Les recommencements sont conservés et, souvent, numérotés. Le 5 juin 1986, il reprend trois fois la même axiomatique en cinq pages : les pages~1 et~2 sont barrées d'un long trait oblique, les pages~3 et~4 donnent un second jet, la page~5 une \q{Nouvelle mouture} qui court jusqu'à la fin du lot, et sa propre pagination recommence au second jet (\lot{156-1}{1}{1--5}). À l'échelle du groupe \emph{Vers une géométrie des formes}, l'inventaire compte quatre \q{moutures} d'\emph{Analysis situs}, les chapitres IV, VI, VII et VIII, 420 pages en vingt-cinq jours ; elles ne se remplacent pas, elles reçoivent chacune un numéro de chapitre et s'intercalent avec un chapitre d'un autre sujet. Le geste est ancien : dès 1953, une \q{seconde mouture} reprend sur un feuillet plus petit les propositions de pages antérieures (\lot{1}{2}{33}). À l'échelle du corpus, la proportion de passages entièrement barrés est d'environ douze pour cent pages dans toutes les périodes : le recommencement n'est pas une manière tardive, c'est la manière.
+
+\subsection{L'erreur sur la page}
+
+Les erreurs sont reconnues sur la page, parfois avec véhémence --- \q{Faux ! idiot !} en marge d'une page du 6 juin 1986 (\lot{156-2}{1}{10}), \q{C'est ultra faux} suivi d'un contre-exemple à trois éléments (\lot{156-5}{3}{48}) --- et parfois comme un bilan. Le 3 janvier 1984, après onze jours sur les pseudo-droites, il écrit :
+
+\begin{quote}
+je m'étais mélangé les pinceaux \emph{deux} fois, il me semble : (\lot{154}{4}{67})
+\end{quote}
+
+\noindent et, reprenant le sujet le 18 janvier : \q{Je ne suis plus trop dans le coup, et devrait reconsulter des notes des semaines précédentes} (\lot{154}{1}{6}). Les notes sont aussi une mémoire de travail qu'il relit.
+
+\subsection{Relire en avant}
+
+Le cas le plus net d'une relecture est dans le chapitre V de \emph{Vers une géométrie des formes}, daté du 14 juin 1986, dont deux marges renvoient à \q{GF VIII p.~37} et à un \q{contre-exemple correct GF VIII pp.~44, 45} (\lot{156-5}{1}{1 et 3}). Le chapitre VIII est daté par l'inventaire du 26 juin au 4 juillet. Si cette datation est juste, ces marges sont postérieures d'au moins douze jours au texte qu'elles annotent : il relit et corrige les chapitres antérieurs pendant qu'il écrit les suivants. L'encre et la main de ces deux marges sont à vérifier sur le fac-similé.
+
+\subsection{Le papier des autres}
+
+Il écrit sur ce qu'il a sous la main : versos de tapuscrits d'autrui, lettres reçues, enveloppes (l'une au cachet de Nagoya du 20 décembre 1977, \lot{67}{1}{13}), circulaires de l'université et surtout, au début des années 1980, les listings en accordéon du centre de calcul de Montpellier, sur lesquels il écrit en paysage, sur deux colonnes, et dessine en couleur par-dessus les bannières d'impression ; 154 est presque entièrement sur ce papier. La même lettre administrative de décembre 1990 sert de brouillon dans 151 et dans 158, ce qui rattache ces feuillets à la période des \emph{Dérivateurs}.
+
+Les tapuscrits appellent une distinction. Les siens, il les révise en auteur : les corrections à l'encre d'un tapuscrit de 36 sont \q{mathématiques et substantielles}, non celles d'un lecteur. Ceux des autres, il les annote : dans 10, deux tapuscrits qui ne sont pas de lui sont corrigés de sa main, renumérotations et références substituées, et une correction rétablit l'énoncé exact d'un théorème de Lazard contre un énoncé dactylographié inversé (\lot{10}{2}{44}). Entre les deux, 162-5 donne un cas rare de passage du manuscrit au tapuscrit : des notes manuscrites sur les exposés de Quillen datées du 6 septembre 1968, puis le tapuscrit \q{Tapis de Quillen} daté de sa main du 10 septembre, en deux témoins annotés différemment, dont 111 conserve un troisième. Pour l'histoire de la rédaction collective, le point à retenir est que sa main intervient sur les tapuscrits au niveau de la numérotation et des références autant qu'à celui des énoncés.
+
+\subsection{Rythmes}
+
+Les suites datées permettent d'estimer un rythme. Dans 154, du 23 décembre 1983 au 5 janvier 1984, environ 76 feuillets sont datables, soit cinq par jour en moyenne, avec un pic d'environ quatorze le 23 décembre et des jours creux entre le 26 et le 30. En juin 1986, le 8 porte vingt pages et le 14 seize ; sur l'ensemble du cycle \emph{Vers une géométrie des formes} (691 pages du 5 juin au 15 juillet selon l'inventaire), la moyenne est d'environ dix-sept pages par jour, et les chapitres se chevauchent : le chapitre~I est encore écrit le 7 juin, alors que le~II est commencé depuis la veille. Ces chiffres sont des ordres de grandeur, en pages d'archivistes.
+
+\subsection{L'hiver 1983--1984 en coupe}
+
+Mis bout à bout, les feuillets datés de l'hiver 1983--1984 donnent une coupe synchronique rare (tableau~\ref{tab:hiver}). Au moins quatre fils y sont menés en alternance sur quelques semaines --- groupes de Teichmüller, structure des dérivateurs, pseudo-droites, chirurgie des surfaces conformes ---, pendant que se poursuit la correction du tapuscrit d'\emph{À la poursuite des champs}, et dans les semaines où fut écrite l'\emph{Esquisse d'un programme} (Grothendieck 1997), datée de janvier 1984. Le corpus montre la simultanéité ; il ne donne pas d'ordre entre ces fils, ni de lien démontré entre les notes et l'\emph{Esquisse}.
+
+\begin{table}[htbp]\centering\small
+\caption{L'hiver 1983--1984 d'après les feuillets datés de sa main (F) et l'inventaire (I).}\label{tab:hiver}
+\begin{tabular}{>{\raggedright\arraybackslash}p{3.4cm}>{\raggedright\arraybackslash}p{7.8cm}l}\toprule
+Période & Travail & Source\\\midrule
+22.10 -- 12.11.1983 & \emph{À la poursuite des champs}, ch. VII, tapuscrit annoté & I (134-8)\\
+octobre -- 29.11.1983 & groupes de Teichmüller & F (148)\\
+24.11 -- décembre 1983 & \q{Structure des dérivateurs}, théories homotopiques & F (117)\\
+décembre 1983 & courbes elliptiques réelles & F (67)\\
+23.12.1983 -- 7.1.1984 & pseudo-droites, surface de déploiement & F (154)\\
+11 -- 15.1.1984 & chirurgie des surfaces conformes, Teichmüller & F (67)\\
+18.1.1984 & pseudo-droites, reprise & F (154)\\
+15.4.1984 & lettre à Lipman Bers & F (67)\\\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Continuités et déplacements}
+
+\subsection{De l'objet à la catégorie des objets}
+
+Un geste organise les notes de toutes les périodes, et il est explicité sur une page de 1967. Cherchant à définir un revêtement quand on autorise la ramification, il constate que toute \q{donnée de ramification} qu'on se donne d'avance est arbitraire, et conclut, par analogie avec le couple site--topos :
+
+\begin{quote}
+il semble qu'on soit infailliblement conduit à prendre comme catégorie $\underline{C}$ la catégorie $\mathrm{Rev}^{\underline{R}}$ elle-même qu'on se propose de construire et d'étudier ! (\lot{29}{2}{24})
+\end{quote}
+
+\noindent Le même mouvement --- remplacer l'objet par la catégorie de ses objets, une structure par son foncteur d'oubli, un groupe par ses représentations, une théorie par ses modèles --- organise 10 (un groupe est-il connu quand on connaît ses représentations ?), 19 (ce qui a été perdu par un foncteur d'oubli peut-il être rangé quelque part ?) et 161-2 (une espèce de structure est une recette, et son topos classifiant la range). Ce n'est pas une découverte sur Grothendieck ; c'est la forme sous laquelle un lieu commun de l'historiographie apparaît dans les brouillons, daté et situé.
+
+\subsection{Le topos change de fonction}
+
+Les topos sont la continuité la mieux attestée du corpus et le déplacement le plus net. Dans les années 1960, ils sont l'outil de la cohomologie étale et de SGA~4 : les cotes 19 et 31 portent des \q{résidus de rédaction} du séminaire, 161-3 en fait un cours qui justifie les topos par les topos classifiants, avec en anglais cette formule : \q{(possibly all): algebra $=$ topology!} (\lot{161-3}{2}{36}). Dans les années 1980, le topos devient un langage de l'homotopie et des stratifications : dans 116, le recollement d'un topos est le \emph{cylindre} d'un morphisme ; dans 151, le plan annonce des \q{Topos canoniques associés à une stratification} (\lot{151}{1}{1}) ; dans 158, vers 1990, topos induits et morphismes asphériques servent la théorie des localisateurs fondamentaux. L'outil reste ; l'usage se déplace de la cohomologie vers l'homotopie.
+
+\subsection{Un fil homotopique daté, de 1968 à 1991}
+
+Le fil le mieux daté du corpus va de Quillen aux \emph{Dérivateurs}. En septembre 1968, des notes sur les exposés de Quillen (\cote{162-5}) retiennent que catégories et ensembles simpliciaux ont la même théorie de l'homotopie, et décrivent une catégorie de Picard comme \q{à peu de chose près un complexe de groupes abéliens de longueur un}. Une liste de dix-sept questions, bornée par un verso de 1973 mais sans doute plus tardive, porte sur les modélisateurs, les catégories test et les \q{contracteurs} (\cote{108}). En 1983, la cote 114 contient une page dactylographiée paginée 350 d'\emph{À la poursuite des champs} et quatre feuillets autour ; en novembre--décembre 1983, un feuillet porte le titre, de sa main et encadré, \q{Structure des dérivateurs}, avec en marge \q{déc. 83} (\lot{117}{1}{1}). Vers 1990--1991, la cote 158 étudie les localisateurs fondamentaux. Le mot \q{dérivateur} figure donc sur une page datée de décembre 1983, sept ans avant le manuscrit des \emph{Dérivateurs} ; il faudra vérifier s'il apparaît déjà dans les dernières sections d'\emph{À la poursuite des champs}.
+
+\subsection{Le fil galoisien : de la généralité à un seul objet}
+
+Le groupe fondamental traverse le fonds de 1959 à 1984, mais son objet change. En 1959, une lettre à Serre construit un groupe fondamental avec \q{partie infinitésimale} par les torseurs pointés (\lot{29}{7}{124--129}) --- construction que la littérature attribue déjà à Grothendieck, et que Nori a publiée (Nori 1976, 1982). En 1967, les revêtements modérés et l'axiomatique galoisienne de SGA~1 sont en chantier (section~7.3). Autour de 1980--1981, le même geste se concentre sur un seul objet arithmético-topologique, la droite projective privée de trois points : automorphismes du groupe fondamental profini préservant l'inertie, \q{printemps 81} (\cote{145}) ; cartes sphériques et fractions rationnelles à coefficients algébriques sous l'action de $\mathrm{Aut}(\overline{\mathbb{Q}})$ (\cote{81}) ; brouillon de la \emph{Longue Marche} (\cote{140-1}). En 1983--1984 viennent Teichmüller et les questions anabéliennes (\cote{67}). Le vocabulaire arithmétique migre même dans la topologie : dans 151, deux groupes d'un théorème de van Kampen stratifié sont baptisés \q{inertie} et \q{décomposition} (\lot{151}{2}{33}).
+
+\subsection{Un programme hors du texte publié : stratifications et topologie modérée}
+
+Une série de cotes forme, de 1974 à 1990, un programme dont seule l'\emph{Esquisse} donne une trace publiée : axiomatique d'une topologie \q{modérée} (\cote{120}, \cote{121}, cette dernière datée de 1974), \q{déploiement} des espaces stratifiés en tubes de recollement (\cote{150}, décembre 1981 -- janvier 1982), tubes et tubes épointés, théorème de recollement énoncé sans démonstration (\cote{151}), systèmes de pseudo-droites et leur \q{surface de déploiement} (\cote{80}, \cote{154}), et, en juin 1986, une \q{géométrie des formes} fondée sur des ensembles de \q{lieux} et des relations d'adjacence et de spécialisation plutôt que sur des espaces topologiques, où le mot \q{modéré} apparaît comme terme technique (\cote{156-3}). Le mot commun \q{déploiement} relie 150 et 154 ; c'est une filiation de vocabulaire, non une filiation démontrée. La comparaison doit se faire avec la littérature postérieure sur la topologie modérée (van den Dries 1998) et sur l'homotopie stratifiée, et elle n'a encore rien établi.
+
+\subsection{De petits invariants autant que des programmes}
+
+Les continuités passent aussi par des objets minuscules. Un signe d'ordre deux, l'obstruction à un produit tensoriel sans ordre dans une catégorie de Picard, est isolé dans 161-1 (non daté), réapparaît dans les notes de 1968 sur Quillen, puis vers 1974 dans le travail sur la thèse de Hoàng Xuân Sính (\cote{135}), et en 1974 dans une lettre à Deligne où, transposant cette thèse \q{dans le langage des champs}, il retombe sur un invariant de signe (section~7.1). La cote 135 se termine sur le programme d'une discipline \q{qui pourrait bien prendre le nom d'« algèbre homologique non commutative »} (\lot{135}{3}{44}).
+
+\subsection{L'œuvre publiée cesse d'être citée}
+
+Les renvois de sa main à ses propres traités dessinent une rupture. Trente-deux cotes citent au moins un volume d'EGA, de SGA ou de FGA ; EGA~IV l'est dans seize, SGA~4 dans neuf. Toutes sont datées par l'inventaire entre 1953 et 1974 environ, et dans les années 1960 les renvois sont des numéros précis employés comme lemmes (\q{EGA IV 18.12.17}, \q{SGA 4 I 9.1.1 c)}) : EGA et SGA y fonctionnent comme une mémoire de travail, et beaucoup de ces cotes sont le chantier même de l'imprimé --- matière d'un paragraphe d'EGA~III annoncé et jamais publié (\cote{21}), errata d'EGA~IV (\cote{23}), plans d'EGA~VI et~VII (\cote{26}, \cote{48}), versions de travail de SGA~3 et~4 (\cote{27}, \cote{56}, \cote{19}, \cote{31}). Dans vingt-huit cotes tardives examinées, aucun renvoi de sa main à EGA, SGA ou FGA ne se rencontre ; le dernier renvoi du corpus, vers 1974, figure dans la bibliographie du tapuscrit de Sính, non de sa main. La continuité conceptuelle des sections précédentes survit à cette rupture citationnelle : les notes des années 1980 construisent de nouveaux cadres sans s'adosser à l'édifice imprimé.
+
+\subsection{Une rupture thématique, à vérifier}
+
+Rangés par sujet, les mots-clés des lectures modernisées font apparaître une seconde rupture. Motifs, cycles algébriques et conjectures standard, théorie de Hodge, conjectures de Weil et groupes $p$-divisibles sont denses dans les cotes datées jusque vers 1972, et absents de toutes les cotes tardives du corpus. Or \emph{Récoltes et semailles} (Grothendieck 2022) place les motifs au cœur de sa rétrospective. L'écart entre l'autoportrait publié et la trace manuscrite est un objet d'enquête, et rien de plus pour l'instant : les mots-clés sont une interprétation, les datations de l'inventaire des fourchettes, et plusieurs ensembles tardifs ne sont pas encore transcrits. Mais c'est exactement le genre de question qu'une lecture d'ensemble permet de poser, et qu'aucune lecture cote par cote ne ferait apparaître.
+
+\section{Trois études de cas}
+
+\subsection{Les lettres de 1974 : une thèse, un jury, un programme}
+
+Deux lettres de 1974, conservées dans les cotes 103 et 134-1, sont les pièces les plus sûres du corpus pour un propos historique : datées, localisées, très lisibles (au plus trois mots illisibles par page), et conservées en deux copies qui se contrôlent l'une l'autre. La première, dactylographiée, \q{Villecun le 23.6.1974}, adressée à Deligne, Giraud et Verdier et signée \q{Schurik}, rappelle que Hoàng Xuân Sính travaille depuis 1967 sur un sujet qu'il lui a proposé --- théorie de structure des Gr-catégories ---, qu'il a reçu son manuscrit mis au net et envoyé un rapport aux autorités vietnamiennes, et que \q{Mme Sinh, avec mon accord, a demandé à présenter ce travail comme thèse de doctorat, et à faire sa soutenance en France} (\lot{103}{1}{16}). Il demande aux trois destinataires de siéger au jury et envisage une soutenance à l'automne. La thèse fut soutenue en 1975 à l'université Paris VII (Hoàng 1975) ; l'écart entre ce projet et la soutenance effective reste à documenter.
+
+La seconde lettre, de sa main, \q{Lodève le 27.8.74}, à Deligne, transpose les résultats de la thèse dans le langage des champs et pose, pour deux faisceaux abéliens sur un topos, un triangle et une suite exacte dont le terme médian classe des champs de Picard non nécessairement stricts. Elle ne revendique rien ; elle demande :
+
+\begin{quote}
+Le triangle exact $(T)$ et la suite exacte $(*)$ sont ils connus par les \emph{compétences} (Quillen, Breen, Illusie …) ? (\lot{103}{1}{11})
+\end{quote}
+
+\noindent Le mot \q{compétences} est une lecture douteuse (la lecture modernisée de l'autre copie lit \q{compétents}). La copie de 134-1, sous une chemise \q{Lettres Breen 75, 76}, porte en marge une note signée de Deligne qui la transmet à Breen : \q{j'imagine que tu sais ce que le maître demande, mais n'ai pu néanmoins lui répondre}. On voit ainsi, sur quelques feuillets, un mathématicien qui a quitté l'IHÉS diriger à distance une thèse commencée au Vietnam, en organiser le jury, et en tirer aussitôt un programme --- les champs de Picard non stricts, les Gr-champs, les 2-gerbes --- qu'il soumet à ses anciens élèves, lesquels se le transmettent. Le rattachement de ces pièces par les archivistes au groupe \q{Autour de \emph{Pursuing stacks}} suggère une filiation avec 1983 que les lettres rendent plausible et qu'il faudrait démontrer sur les textes.
+
+\subsection{La cote 27 : une rédaction abandonnée de SGA 3}
+
+La cote 27, intitulée par les archivistes \q{SGA D [SGA 3]. Compléments XII à XVII} et portant sur sa chemise \q{Divers [pour] XII à XIV}, contient cinq feuillets dactylographiés numérotés 6 à 10, marqués au crayon \q{[Co] Exp XIII} : une Proposition~1.3 et sa démonstration, pour un groupe algébrique opérant sur un schéma $V$ et un sous-schéma $W$, suivie de trois corollaires et d'une remarque qui définit des \q{points $W$-réguliers} ; le texte s'arrête au milieu d'une phrase (\lot{27}{1}{2--6}). Ses interventions à l'encre ne sont pas cosmétiques : il remplace \q{lisse sur $k$} par \q{génériquement réduit}, ajoute une hypothèse de normalité, précise une séparabilité. Une comparaison avec l'exposé XIII imprimé (SGA~3, 1970), faite par machine sur sa réédition récente, indique que le §~1 publié ne contient qu'un lemme et que les énoncés généraux n'y reparaissent qu'en cas particulier. Si cela se confirme, ces feuillets documentent un cadre général sacrifié au seul cas utile. Toute la thèse repose sur une comparaison qu'une personne doit refaire, sur l'édition de 1970 et sur la réédition. Les pages~27 à~36 de la même cote, sous une seconde chemise \q{Théorème de ½ continuité}, esquissent une démonstration d'inégalités de semi-continuité que l'exposé X, 8.7, énonce sans preuve ; c'est un candidat, sur des pages très raturées, qu'on ne mentionne ici que pour dire qu'il attend l'avis d'un spécialiste.
+
+\subsection{La cote 29 : SGA 1 en fabrication en 1967}
+
+La cote 29, \q{Groupe fondamental [Autour de SGA 4 et SGA 7]}, 216 pages, contient une correspondance de 1967 avec Jacob Murre, lisible sans aucun mot illisible, qui montre SGA~1 encore ouvert quatre ans avant son impression (SGA~1, 1971). Murre rédige pour le séminaire de 1960--1961 un exposé sur le groupe fondamental modéré ; le 29 mars 1967, il envoie son manuscrit et s'inquiète d'avoir retardé \q{the publication date of your first volume}. La réponse de Grothendieck énumère des énoncés faux dans les notes qu'il lui avait données, et en prend la responsabilité :
+
+\begin{quote}
+I am all the more sorry that by my own fault, there is a number of misstatements which, I am affraid, will force you to do a serious recasting of the whole exposition. (\lot{29}{1}{7})
+\end{quote}
+
+\noindent Le 29 avril, il envoie une esquisse dactylographiée des \q{données de ramification}, qui naît de l'échec de la première rédaction, et un plan en six paragraphes ; en 1969, Murre lui soumet une version préliminaire de notes sur les revêtements formels modérément ramifiés. L'exposé ne figure pas dans SGA~1 imprimé, et la matière semble avoir abouti au volume de Grothendieck et Murre de 1971 (Grothendieck et Murre 1971) ; le rapprochement reste à vérifier sur le texte. Le cas montre l'école au travail : un collaborateur rédige, le maître relit, se corrige, et réécrit le cadre.
+
+\section{Discussion}
+
+Trois choses changent, ou peuvent changer, quand on lit le fonds comme un corpus.
+
+La première concerne la chronologie. Une part de ce qu'on croit savoir des dates des notes vient de l'inventaire, et l'inventaire, pour l'essentiel, a déduit : du papier, des lettres, des voisinages. Les feuillets datés de sa main sont rares, tardifs, et concentrés dans quelques cotes. Il en résulte une règle de méthode plutôt qu'un résultat : toute affirmation d'antériorité fondée sur une fourchette d'inventaire est à écarter, et toute datation d'une cote doit dire de quelle couche elle vient --- l'inventaire, le feuillet, ou une inférence. Le registre des dates des feuillets en donne l'instrument.
+
+La deuxième concerne la période qui suit 1970. Le récit courant, qui s'appuie en grande partie sur \emph{Récoltes et semailles}, fait de ces années celles d'un retrait. Les notes n'y contredisent pas le retrait institutionnel ; elles montrent une production mathématique continue et dense, menée en fils parallèles, datée au jour dans ses moments les plus intenses (l'hiver 1983--1984, juin 1986), et une activité de direction et d'échange --- Murre en 1967, Sính et Deligne en 1974, Bers en 1984 --- que la biographie mentionne sans pouvoir la montrer. Elles montrent aussi une œuvre qui ne se cite plus elle-même, et d'où les motifs, au moins dans le corpus transcrit, ont disparu.
+
+La troisième concerne le rapport entre le souvenir et la trace. \emph{Récoltes et semailles} est un témoignage, et un témoignage se lit avec ses sources. Le fonds de Montpellier est la source principale de ce témoignage, et une lecture d'ensemble permet de confronter l'un à l'autre sur des points précis : ce qui, dans les notes, revient ; ce qui cesse ; ce qui est daté quand. Ce n'est pas le lieu d'engager cette confrontation, qui demande des transcriptions vérifiées et le reste du fonds ; c'est celui de dire qu'elle est devenue possible.
+
+\section{Limites}
+
+Toutes les transcriptions citées sont des premières passes faites par machine et non vérifiées sur les fac-similés par une personne. Les taux d'illisible et de lecture douteuse sont des bornes de ce que la machine a déclaré ne pas lire, non de ce qu'elle a mal lu sans le dire ; ils dépendent en outre de l'outil, puisque la densité des lectures marquées douteuses varie d'un facteur sept d'une version du modèle à l'autre. La répartition entre ses insertions et les restitutions du transcripteur a été faite par une règle mécanique, et reste à vérifier sur les pages.
+
+Les lectures modernisées, qui ont servi à comprendre et non à citer, se trompent parfois, et deux erreurs ont été trouvées en préparant cet article : le résumé de la cote 114 présente comme vraie une proposition d'\emph{À la poursuite des champs} (la proposition~4 de la page~350) que la littérature réfute par un contre-exemple, la catégorie des cubes (Cisinski 2006 ; Maltsiniotis 2005) ; celui de la cote 47 affirme que la cote précède d'au moins dix ans des travaux de 1981 et 1983, ce que sa datation ne permet pas de dire. Ni l'une ni l'autre n'est reprise ici.
+
+Le corpus est un échantillon : 130 cotes sur 178, et, parmi les cotes laissées de côté parce qu'éditées ou non encore transcrites, les grands ensembles datés des années 1980. Toute affirmation d'absence --- les motifs dans les notes tardives, les renvois à EGA et SGA après 1974 --- vaut pour ce corpus seulement. Les comparaisons avec l'imprimé ont été faites par machine et sont des pistes. Enfin, aucune image du fonds n'est reproduite, faute d'autorisation, et les citations sont brèves : le lecteur est renvoyé, pour chacune, au fac-similé que l'université publie.
+
+\section{Conclusion}
+
+Les notes de travail de Grothendieck ne sont pas un texte ; elles en sont le chantier, et un chantier se lit autrement qu'un livre. Lues ensemble, elles montrent une chronologie à reconstruire plutôt qu'à reprendre, une manière de travailler qui garde ses recommencements et date ses séances quand elle s'y met, et une pensée dont certaines lignes traversent trente ans pendant que d'autres s'arrêtent. Ces constats reposent sur une transcription qu'aucune personne n'a encore relue, et l'article a dit, pour chacun, ce qui en dépend. La vérification des passages cités est la condition de leur publication ; celle du reste du fonds est un travail d'historiens et de mathématiciens, que la transcription ne remplace pas, et qu'elle rend enfin possible à l'échelle du fonds.
+
+\section*{Déclaration sur l'usage de l'intelligence artificielle}
+
+Les transcriptions et les lectures modernisées sur lesquelles repose cet article ont été produites par des modèles de langage (Claude Opus~5, Opus~5.5, Fable~5 et Fable~5.1, d'Anthropic), sous des règles éditoriales écrites par l'auteur, et n'ont pas été vérifiées sur les fac-similés par une personne. Les registres de dates, de lettres et de citations, et les dossiers de preuves dont l'article est tiré, ont été établis par les mêmes modèles, sous la direction de l'auteur, à partir des transcriptions ; chaque entrée renvoie au fichier et à la ligne qui la fondent. Le texte de l'article a été rédigé avec l'aide de ces modèles sous la direction de l'auteur, qui en a relu et corrigé le contenu et en assume l'entière responsabilité. Aucune formalisation dans un assistant de preuve n'a été faite pour ce travail.
+
+\section*{Sources et données}
+\begingroup\sloppy
+
+Le fonds : Université de Montpellier, \emph{Archives Grothendieck}, \url{https://grothendieck.umontpellier.fr/}. Les transcriptions, les lectures modernisées, les registres et les sources de cet article sont publiés dans le dépôt \url{https://github.com/Commutator-IO/grothendieck-project} et consultables à côté du fac-similé sur \url{https://grothendieck.commutator.io}, où chaque référence de la forme \q{cote, lot, page} de cet article est un lien. Les transcriptions sont des documents de travail non autorisés, retirés sur demande ; aucune image du fonds n'y est conservée.\par\endgroup
+
+\section*{Bibliographie}
+\begin{list}{}{\setlength{\leftmargin}{1.5em}\setlength{\itemindent}{-1.5em}\setlength{\itemsep}{3pt}}
+\item Cisinski, Denis-Charles. 2006. \emph{Les préfaisceaux comme modèles des types d'homotopie}. Astérisque 308. Paris : Société mathématique de France.
+\item Colmez, Pierre, et Jean-Pierre Serre (éd.). 2001. \emph{Correspondance Grothendieck--Serre}. Documents mathématiques 2. Paris : Société mathématique de France.
+\item Grothendieck, Alexandre. 1995. \emph{La Longue Marche à travers la théorie de Galois}, t.~1, éd. Jean Malgoire. Montpellier : Université Montpellier II.
+\item Grothendieck, Alexandre. 1997. « Esquisse d'un programme ». Dans Leila Schneps et Pierre Lochak (éd.), \emph{Geometric Galois Actions 1}, 5--48. London Mathematical Society Lecture Note Series 242. Cambridge : Cambridge University Press.
+\item Grothendieck, Alexandre. 2022. \emph{Récoltes et semailles. Réflexions et témoignage sur un passé de mathématicien}. 2 vol. Paris : Gallimard, coll. « Tel ».
+\item Grothendieck, Alexandre, et Jacob P. Murre. 1971. \emph{The Tame Fundamental Group of a Formal Neighbourhood of a Divisor with Normal Crossings on a Scheme}. Lecture Notes in Mathematics 208. Berlin : Springer.
+\item Grothendieck Circle. s.d. \emph{Published texts}, éd. Leila Schneps. \url{https://webusers.imj-prg.fr/~leila.schneps/grothendieckcircle/pubtexts.php}.
+\item Hoàng Xuân Sính. 1975. \emph{Gr-catégories}. Thèse de doctorat d'État, Université Paris VII.
+\item Hua, Michel. 2026. « A Machine Reads Grothendieck's Working Notes: Transcribing and Encoding Mathematical Manuscripts ». Prépublication, soumise au \emph{Journal of the Text Encoding Initiative}. \url{https://grothendieck.commutator.io/article/grothendieck-jtei.pdf}.
+\item Jackson, Allyn. 2004. « Comme appelé du néant --- As If Summoned from the Void: The Life of Alexandre Grothendieck ». \emph{Notices of the American Mathematical Society} 51 (9) : 1038--1056 et 51 (10) : 1196--1212.
+\item Krömer, Ralf. 2007. \emph{Tool and Object: A History and Philosophy of Category Theory}. Science Networks. Historical Studies 32. Bâle : Birkhäuser.
+\item Künzer, Matthias, Jean Malgoire et Georges Maltsiniotis (éd.). s.d. Alexandre Grothendieck, \emph{Les Dérivateurs}. Édition en ligne.
+\item Maltsiniotis, Georges. 2005. \emph{La théorie de l'homotopie de Grothendieck}. Astérisque 301. Paris : Société mathématique de France.
+\item Maltsiniotis, Georges (éd.). 2022. Alexandre Grothendieck, \emph{À la poursuite des champs}, vol.~I. Documents mathématiques 20. Paris : Société mathématique de France.
+\item Nori, Madhav V. 1976. « On the Representations of the Fundamental Group ». \emph{Compositio Mathematica} 33 : 29--41.
+\item Nori, Madhav V. 1982. « The Fundamental Group-Scheme ». \emph{Proceedings of the Indian Academy of Sciences (Mathematical Sciences)} 91 : 73--122.
+\item SGA 1. 1971. Alexandre Grothendieck, \emph{Revêtements étales et groupe fondamental}. Lecture Notes in Mathematics 224. Berlin : Springer.
+\item SGA 3. 1970. Michel Demazure et Alexandre Grothendieck (dir.), \emph{Schémas en groupes}. Lecture Notes in Mathematics 151--153. Berlin : Springer.
+\item Université de Montpellier. s.d. \emph{Archives Grothendieck}. \url{https://grothendieck.umontpellier.fr/}.
+\item van den Dries, Lou. 1998. \emph{Tame Topology and o-minimal Structures}. London Mathematical Society Lecture Note Series 248. Cambridge : Cambridge University Press.
+\end{list}
+
+\appendix
+\section{Cotes citées}
+
+\begin{longtable}{>{\raggedright\arraybackslash}p{1.3cm}>{\raggedright\arraybackslash}p{8.2cm}>{\raggedright\arraybackslash}p{4.2cm}}
+\caption{Les cotes citées, avec leur datation d'inventaire, reproduite telle quelle.}\label{tab:cotes}\\\toprule
+Cote & Titre (inventaire) & Datation (inventaire)\\\midrule\endfirsthead
+\toprule Cote & Titre (inventaire) & Datation (inventaire)\\\midrule\endhead
+1 & Analyse fonctionnelle & 1953\\
+2 & Théorème de Riemann-Roch / RR [Riemann-Roch] Notes Antiques (antérieur[es à] 1958) & [1957]\\
+7 & Notes laïus novembre-décembre 1967 (Cristaux) & 1966-1967\\
+10 & Catégories tensorielles & [à partir de 1958]\\
+16 & Formalisme algébrique des correspondances et algèbres de Poincaré-Hodge (cf conjectures standard) & 1966-1967\\
+19 & Topos & [à partir de 1958-1973]\\
+27 & SGA D [SGA 3]. Compléments XII à XVII : tapuscrit annoté (s.d.), notes manuscrites (s.d.). & [vers 1962-1970]\\
+28 & [Groupes algébriques (SGA 3)] & [vers 1970]\\
+29 & Groupe fondamental [Autour de SGA 4 et SGA 7] : lettres (1959, 1967, 1969), tapuscrits et copies de tapuscrit annotés (s.d.), notes manuscrites (s.d.). & 1959-1969\\
+67 & Chirurgie des surfaces conformes & [à partir de 1977]-1984\\
+101 & Cohomologie locale & [à partir de 1967-1968]\\
+103 & Courrier [Correspondance sur la thèse de Sinh] : copies d'article annoté (1974), lettres (1974). & 1974\\
+108 & Divers, liste questions & [à partir de 1973]\\
+114 & Asphéricité & [1983]\\
+117 & Théories homotopiques & 1983\\
+134-1 & Lettres Breen 75,76 [correspondance avec Larry Breen, Pierre Deligne et Daniel Quillen] : lettres et copies de lettre (1974-1976, 1984). & 1974-1984\\
+135 & Catégories [et Gr-catégories] & [vers 1974]\\
+148 & Teichmüller (1983) & 1983\\
+150 & Espaces stratifiés et voisinages côniques (ou : déploiement des espaces stratifiés) & 1981-1982\\
+151 & Topos stratifié (1981) & [à partir de 1981-à partir de 1990]\\
+154 & [Système de pseudo-droites] & 1983-1984\\
+156-1 & [Chapitre] I. Vers une géométrie des formes (topologiques) & 1986\\
+156-2 & [Chapitre] II. Réalisations topologiques des réseaux & 1986\\
+156-3 & [Chapitre] III. Réseaux via découpages & 1986\\
+156-5 & [Chapitre] V. Algèbre des figures & 1986\\
+158 & [Autour des Dérivateurs] & [vers 1990-1991]\\
+161-3 & Topos & [vers 1963-1973]\\
+162-5 & Tapis de Quillen : tapuscrit et copies de tapuscrits (1968, s.d.), notes manuscrites (1968), tiré à part (1968). & 1968-[à partir de 1970]\\\bottomrule
+\end{longtable}
+
+\section{Ce que doit comprendre la vérification avant publication}
+
+Chaque citation et chaque date de cet article doivent être collationnées sur le fac-similé, à la page indiquée, par l'auteur et, pour les passages mathématiques, par un spécialiste. En particulier : les dates de 7 et de 154, dont plusieurs sont marquées douteuses ; la date \q{27.8.74} de la lettre à Deligne, dont un chiffre a presque disparu sur l'une des copies ; le mot \q{compétences} de la même lettre ; l'encre et la main des marges de 156-5 renvoyant au chapitre VIII ; la comparaison de 27 avec l'exposé XIII imprimé et réédité ; le rapprochement de la correspondance de 1967 avec le volume de Grothendieck et Murre ; la présence de la lettre à Serre de 1959 dans la \emph{Correspondance} publiée. Les registres de dates et de lettres du dépôt portent, pour chaque entrée, le fichier et la ligne qui la fondent, et une liste de contrôle des vérifications qui ne demandent qu'un lecteur de l'écriture est tenue dans le dépôt.
+
+\end{document}
