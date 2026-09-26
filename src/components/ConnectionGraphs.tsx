@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import { BY_ID } from '../content/catalogue.ts';
+import { evidence, useManifest } from '../lib/batches.ts';
 import lineageRaw from '../content/lineage.json';
 import publicationsRaw from '../content/publications.json';
 
@@ -50,13 +51,40 @@ interface Evidence {
   detail: string;
   where: string;
 }
+interface ArchiveRole {
+  role: string;
+  what: string;
+  year: string | null;
+  cotes: string[];
+  source: string;
+}
+interface ArchivePerson {
+  name: string;
+  mgp: number | null;
+  roles: ArchiveRole[];
+}
 const LIN = lineageRaw as unknown as {
   source: string;
   root: Person & { advisors: { id: number; name: string }[] };
   people: Person[];
   secondGenerationTotal: number;
   edges: Evidence[];
+  archive: { source: string; people: ArchivePerson[] };
 };
+
+/**
+ * The folders an edition covers come as runs — 134-1 to 134-8 for Pursuing
+ * Stacks — and drawn one by one they would fill the column with eight rows
+ * saying the same thing. A run is one node; the lines into it still say, in
+ * the panel below, which folder of the run each one means.
+ */
+const RUNS = ['134', '140', '157'];
+const RUN: Record<string, { span: string; title: string }> = {
+  '134': { span: '134-1–8', title: 'Pursuing Stacks' },
+  '140': { span: '140-1–4', title: 'La Longue Marche' },
+  '157': { span: '157-1–5', title: 'Les Dérivateurs' },
+};
+const runOf = (cote: string) => RUNS.find((r) => cote.startsWith(`${r}-`)) ?? cote;
 
 const mgp = (id: number) => `https://www.mathgenealogy.org/id.php?id=${id}`;
 const folderHref = (id: string) => `/archive/#${id}/1`;
@@ -338,67 +366,127 @@ export function FoldersToPrint() {
 /* ------------------------------------------------------------------------ */
 
 export function LineageToFolders() {
-  type Sel = { person: number } | { folder: string } | null;
+  type Sel = { key: string } | { folder: string } | null;
   const [sel, setSel] = useState<Sel>(null);
+  const manifest = useManifest();
 
-  // Students in the order of their first degree, and each second-generation
-  // person directly under the student they descend through.
-  const students = useMemo(() => {
-    const gen1 = LIN.people.filter((p) => p.generation === 1).sort((a, b) => (a.year ?? 0) - (b.year ?? 0) || a.name.localeCompare(b.name));
-    const out: Person[] = [];
+  // Students in the order of their first degree, each second-generation
+  // person directly under the student they descend through; then, under a
+  // rule, everyone who has worked on the archives without being in the line —
+  // those whose work covers folders first, the rest after.
+  const rows = useMemo(() => {
+    const gen1 = LIN.people
+      .filter((p) => p.generation === 1)
+      .sort((a, b) => (a.year ?? 0) - (b.year ?? 0) || a.name.localeCompare(b.name));
+    const out: { key: string; kind: 'student' | 'grandstudent' | 'archive'; name: string; year: string; p?: Person; a?: ArchivePerson }[] = [];
     for (const s of gen1) {
-      out.push(s);
-      for (const g of LIN.people.filter((p) => p.generation === 2 && p.parent === s.id)) out.push(g);
+      out.push({ key: `m${s.id}`, kind: 'student', name: s.name, year: String(s.year ?? ''), p: s });
+      for (const g of LIN.people.filter((p) => p.generation === 2 && p.parent === s.id))
+        out.push({ key: `m${g.id}`, kind: 'grandstudent', name: g.name, year: String(g.year ?? ''), p: g });
     }
+    const covers = (a: ArchivePerson) => a.roles.some((r) => r.cotes.length > 0);
+    const first = (a: ArchivePerson) => Math.min(...a.roles.map((r) => Number.parseInt(r.year ?? '9999', 10) || 9999));
+    for (const a of [...LIN.archive.people].sort(
+      (x, y) => Number(covers(y)) - Number(covers(x)) || first(x) - first(y) || x.name.localeCompare(y.name),
+    ))
+      out.push({ key: `a${a.name}`, kind: 'archive', name: a.name, year: '', a });
     return out;
   }, []);
-  const folders = useMemo(() => [...new Set(LIN.edges.map((e) => e.folder))].sort(byShelfmark), []);
 
-  const rows = Math.max(students.length, folders.length);
-  const H = TOP * 2 + (rows - 1) * 22;
+  type Line = { key: string; folder: string; cote: string; kind: PersonKind | 'archive'; detail: string; source?: string };
+  const lines = useMemo(() => {
+    const out: Line[] = LIN.edges.map((e) => ({
+      key: `m${e.person}`,
+      folder: runOf(e.folder),
+      cote: e.folder,
+      kind: e.kind,
+      detail: e.detail,
+    }));
+    for (const a of LIN.archive.people)
+      for (const r of a.roles) {
+        // One line per person and run, whatever the number of folders in it.
+        for (const run of new Set(r.cotes.map(runOf)))
+          out.push({
+            key: `a${a.name}`,
+            folder: run,
+            cote: r.cotes.filter((c) => runOf(c) === run).join(', '),
+            kind: 'archive',
+            detail: `${r.role}${r.year ? `, ${r.year}` : ''}: ${r.what}`,
+            source: r.source,
+          });
+      }
+    return out;
+  }, []);
+
+  const folders = useMemo(() => [...new Set(lines.map((l) => l.folder))].sort(byShelfmark), [lines]);
+  const firstCote = (f: string) => (RUNS.includes(f) ? `${f}-1` : f);
+  const transcribed = (f: string) =>
+    manifest !== null && (RUNS.includes(f) ? [1, 2, 3, 4, 5, 6, 7, 8].some((k) => evidence(manifest, `${f}-${k}`, 1).transcribed) : evidence(manifest, f, 1).transcribed);
+
+  const GAP = 2; // blank rows between the line and the others, one of them the heading
+  const firstArchive = rows.findIndex((r) => r.kind === 'archive');
+  const slot = (i: number) => (i >= firstArchive ? i + GAP : i);
+  const n = Math.max(rows.length + GAP, folders.length);
+  const STEP = 21;
+  const H = TOP * 2 + (n - 1) * STEP;
   const W = 800;
-  const XR = 70; // Grothendieck
-  const XP = 150; // students' dot
+  const XR = 58; // Grothendieck
+  const XP = 130; // students' dot
   const XE = 372; // where a person's lines leave
   const XF = 540; // folders
-  const yP = (i: number) => TOP + i * ((H - 2 * TOP) / Math.max(students.length - 1, 1));
+  const yP = (i: number) => TOP + slot(i) * STEP;
   const yF = (i: number) => TOP + i * ((H - 2 * TOP) / Math.max(folders.length - 1, 1));
-  const pi = new Map(students.map((p, i) => [p.id, i]));
+  const ri = new Map(rows.map((r, i) => [r.key, i]));
   const fi = new Map(folders.map((f, i) => [f, i]));
-  const yRoot = H / 2;
+  const lastStudent = firstArchive - 1;
+  const yRoot = (TOP + yP(lastStudent)) / 2;
 
-  const evidenceOf = (id: number) => LIN.edges.filter((e) => e.person === id);
-  const on = (e: Evidence) =>
-    sel === null || ('person' in sel ? sel.person === e.person : sel.folder === e.folder);
-
-  const person = sel && 'person' in sel ? LIN.people.find((p) => p.id === sel.person) : null;
-  const shown = sel === null ? [] : LIN.edges.filter(on);
+  const on = (l: Line) => sel === null || ('key' in sel ? sel.key === l.key : sel.folder === l.folder);
+  const style = (k: Line['kind']) =>
+    k === 'archive'
+      ? { stroke: 'var(--color-relu-600)', dash: undefined as string | undefined }
+      : PERSON_STYLE[k];
+  const row = sel && 'key' in sel ? rows[ri.get(sel.key)!] : null;
+  const shown = sel === null ? [] : lines.filter(on);
 
   return (
     <section id="lineage" className="mt-12 scroll-mt-16">
       <h2 className="text-[11px] font-bold uppercase tracking-[0.12em] text-ink-400">
-        His students, and the folders they appear in
+        His students, the people who have worked on the archives, and the folders they meet
       </h2>
       <p className="mt-2 max-w-[44em] text-[13.5px] leading-relaxed text-ink-600">
-        Grothendieck's {LIN.root.students} doctoral students as the Mathematics Genealogy Project
-        records them, with those of their own students who turn up in these folders — {LIN.root.descendants}{' '}
-        descendants in all, most of whom do not. A line to a folder means something on the leaves or
-        in a finding below: a letter, a text of theirs, his naming them, or their published work as
-        what would settle a finding. It says nothing about influence, and nothing about who has been
-        or will be asked to read anything.
+        Above the rule, Grothendieck's {LIN.root.students} doctoral students as the Mathematics
+        Genealogy Project records them, with those of their own students who turn up in these
+        folders — {LIN.root.descendants} descendants in all, most of whom do not. Below it, the
+        people who have worked on the archives without being in that line: who kept the fonds,
+        catalogued it, edited or transcribed what came out of it. A line to a folder means
+        something on the leaves or in a finding below — a letter, a text of theirs, his naming
+        them, their published work as what would settle a finding — or, for the second group, a
+        documented piece of work covering that folder. It says nothing about influence, and
+        nothing about who has been or will be asked to read anything.
       </p>
-      <Key kinds={['letter', 'typescript', 'named', 'literature'] as PersonKind[]} style={PERSON_STYLE} />
+      <Key
+        kinds={['letter', 'typescript', 'named', 'literature', 'archive'] as (PersonKind | 'archive')[]}
+        style={{
+          ...PERSON_STYLE,
+          archive: {
+            stroke: 'var(--color-relu-600)',
+            label: 'worked on it',
+            help: 'an edition, transcription or translation of theirs covers the folder',
+          },
+        }}
+      />
 
       <div className="mt-3 overflow-x-auto" onMouseLeave={() => setSel(null)}>
-        <svg viewBox={`0 0 ${W} ${H}`} className="w-full min-w-[640px]" role="img" aria-label="Grothendieck, his students, and the folders each appears in">
-          {/* The tree: root to students, students to theirs. */}
-          {students.map((p, i) => {
-            const fromY = p.generation === 1 ? yRoot : yP(pi.get(p.parent!)!);
-            const fromX = p.generation === 1 ? XR + 8 : XP;
+        <svg viewBox={`0 0 ${W} ${H}`} className="w-full min-w-[640px]" role="img" aria-label="Grothendieck, his students, the people who have worked on the archives, and the folders each meets">
+          {rows.map((r, i) => {
+            if (r.kind === 'archive') return null;
+            const p = r.p!;
+            const fromY = p.generation === 1 ? yRoot : yP(ri.get(`m${p.parent}`)!);
             return (
               <path
-                key={`t${p.id}`}
-                d={p.generation === 1 ? curve(fromX, fromY, XP - 5, yP(i)) : `M${fromX},${fromY} V${yP(i)} H${XP + 10}`}
+                key={`t${r.key}`}
+                d={p.generation === 1 ? curve(XR + 8, fromY, XP - 5, yP(i)) : `M${XP},${fromY} V${yP(i)} H${XP + 10}`}
                 fill="none"
                 stroke="var(--color-ink-200)"
                 strokeWidth="1.2"
@@ -406,20 +494,23 @@ export function LineageToFolders() {
             );
           })}
 
-          {LIN.edges.map((e, i) => {
-            const s = PERSON_STYLE[e.kind];
-            // One column where every person's lines leave, past the longest
-            // name, so a short name does not grow a longer line.
-            const x1 = XE;
+          {/* The rule, and the second group's heading. */}
+          <line x1={XR - 40} x2={XE} y1={yP(firstArchive) - STEP * 1.5} y2={yP(firstArchive) - STEP * 1.5} stroke="var(--color-ink-200)" />
+          <text x={XR - 40} y={yP(firstArchive) - STEP * 0.7} style={{ fontSize: 10.5, fontWeight: 700, letterSpacing: '0.08em', fill: 'var(--color-ink-400)' }}>
+            WORKED ON THE ARCHIVES
+          </text>
+
+          {lines.map((l, i) => {
+            const s = style(l.kind);
             return (
               <path
                 key={i}
-                d={curve(x1, yP(pi.get(e.person)!), XF - 8, yF(fi.get(e.folder)!))}
+                d={curve(XE, yP(ri.get(l.key)!), XF - 8, yF(fi.get(l.folder)!))}
                 fill="none"
                 stroke={s.stroke}
-                strokeWidth={on(e) && sel !== null ? 2.4 : 1.4}
+                strokeWidth={on(l) && sel !== null ? 2.4 : 1.4}
                 strokeDasharray={s.dash}
-                opacity={on(e) ? 0.95 : 0.1}
+                opacity={on(l) ? 0.95 : 0.1}
               />
             );
           })}
@@ -435,84 +526,108 @@ export function LineageToFolders() {
             <title>{`${LIN.root.name} — thesis ${LIN.root.year}, advisors ${LIN.root.advisors.map((a) => a.name).join(' and ')} (MGP)`}</title>
           </a>
 
-          {students.map((p, i) => {
-            const has = evidenceOf(p.id).length > 0;
-            const lit = sel === null || ('person' in sel ? sel.person === p.id : LIN.edges.some((e) => e.person === p.id && on(e)));
-            const x = p.generation === 1 ? XP : XP + 14;
+          {rows.map((r, i) => {
+            const has = lines.some((l) => l.key === r.key);
+            const lit = sel === null || ('key' in sel ? sel.key === r.key : lines.some((l) => l.key === r.key && on(l)));
+            const x = r.kind === 'grandstudent' ? XP + 14 : XP;
+            const href =
+              r.kind === 'archive'
+                ? r.a!.mgp
+                  ? mgp(r.a!.mgp)
+                  : r.a!.roles[0].source
+                : mgp(r.p!.id);
+            const dot = !has ? 'var(--color-ink-300)' : r.kind === 'archive' ? 'var(--color-relu-600)' : 'var(--color-brand-600)';
             return (
-              <a
-                key={p.id}
-                href={mgp(p.id)}
-                target="_blank"
-                rel="noopener noreferrer"
-                onMouseEnter={() => setSel({ person: p.id })}
-                onFocus={() => setSel({ person: p.id })}
-              >
-                <circle cx={x} cy={yP(i)} r={p.generation === 1 ? 4 : 3} fill={has ? 'var(--color-brand-600)' : 'var(--color-ink-300)'} />
+              <a key={r.key} href={href} target="_blank" rel="noopener noreferrer" onMouseEnter={() => setSel({ key: r.key })} onFocus={() => setSel({ key: r.key })}>
+                <circle cx={x} cy={yP(i)} r={r.kind === 'grandstudent' ? 3 : 4} fill={dot} />
                 <text
                   x={x + 9}
                   y={yP(i)}
                   dominantBaseline="middle"
                   style={{
-                    fontSize: p.generation === 1 ? 12 : 11,
-                    fontStyle: p.generation === 1 ? 'normal' : 'italic',
+                    fontSize: r.kind === 'grandstudent' ? 11 : 12,
+                    fontStyle: r.kind === 'grandstudent' ? 'italic' : 'normal',
                     fill: !lit ? 'var(--color-ink-300)' : has ? 'var(--color-ink-800)' : 'var(--color-ink-400)',
                   }}
                 >
-                  {p.name}
+                  {r.name}
                   <tspan dx="5" className="tabular" style={{ fontSize: 10.5, fill: 'var(--color-ink-400)' }}>
-                    {p.year ?? ''}
+                    {r.year}
                   </tspan>
                 </text>
               </a>
             );
           })}
 
-          {folders.map((f, i) => (
-            <FolderLabel
-              key={f}
-              id={f}
-              x={XF}
-              y={yF(i)}
-              anchor="start"
-              dim={sel !== null && !LIN.edges.some((e) => e.folder === f && on(e))}
-              onFocus={() => setSel({ folder: f })}
-            />
-          ))}
+          {folders.map((f, i) => {
+            const dim = sel !== null && !lines.some((l) => l.folder === f && on(l));
+            const here = transcribed(f);
+            return (
+              <a key={f} href={folderHref(firstCote(f))} onMouseEnter={() => setSel({ folder: f })} onFocus={() => setSel({ folder: f })}>
+                <text x={XF} y={yF(i)} dominantBaseline="middle" className="tabular" style={{ fontSize: 12, fill: dim ? 'var(--color-ink-300)' : 'var(--color-ink-800)' }}>
+                  <tspan style={{ fontWeight: 600, fill: dim ? 'var(--color-ink-300)' : here ? 'var(--color-ink-800)' : 'var(--color-ink-400)' }}>
+                    {RUN[f]?.span ?? f}
+                  </tspan>
+                  <tspan dx="6" style={{ fill: dim || !here ? 'var(--color-ink-300)' : 'var(--color-ink-500)' }}>
+                    {RUN[f]?.title ?? shortTitle(firstCote(f))}
+                  </tspan>
+                  <title>{`n° ${RUN[f]?.span ?? f} — ${RUN[f]?.title ?? BY_ID.get(firstCote(f))?.title ?? ''}${here ? '' : ' (not transcribed here yet)'}`}</title>
+                </text>
+              </a>
+            );
+          })}
         </svg>
       </div>
 
       <div className="mt-2 min-h-[4.5em] text-[12.5px] leading-relaxed text-ink-600">
         {sel === null ? (
           <p className="text-ink-400">
-            Hover a name for their thesis and every line from them, or a folder for everyone it
-            touches. Names open their page on the Mathematics Genealogy Project; grey names have no
-            line to a transcribed folder yet.
+            Hover a name for what ties them to the folders, or a folder for everyone it meets.
+            Students' names open their page on the Mathematics Genealogy Project; the others open
+            it where they have one, or the source of their work. Grey names have no line to a
+            folder; grey folders are not transcribed here yet.
           </p>
         ) : (
           <>
-            {person && (
+            {row?.p && (
               <p>
-                <span className="font-semibold text-ink-900">{person.name}</span>
-                {person.year && <span className="tabular"> · {person.year}</span>}
-                {person.school && <span> · {person.school}</span>}
-                {person.thesis && <span className="italic"> · {person.thesis}</span>}
-                {person.students ? (
+                <span className="font-semibold text-ink-900">{row.p.name}</span>
+                {row.p.year && <span className="tabular"> · {row.p.year}</span>}
+                {row.p.school && <span> · {row.p.school}</span>}
+                {row.p.thesis && <span className="italic"> · {row.p.thesis}</span>}
+                {row.p.students ? (
                   <span className="tabular text-ink-400">
                     {' '}
-                    · {person.students} {person.students === 1 ? 'student' : 'students'} of their own on MGP
+                    · {row.p.students} {row.p.students === 1 ? 'student' : 'students'} of their own on MGP
                   </span>
                 ) : null}
               </p>
             )}
-            {shown.length > 0 && (
+            {row?.a && (
+              <>
+                <p className="font-semibold text-ink-900">{row.a.name}</p>
+                <ul className="mt-0.5 space-y-0.5">
+                  {row.a.roles.map((r, i) => (
+                    <li key={i}>
+                      <span style={{ color: 'var(--color-relu-700)' }}>{r.role}</span>
+                      {r.year && <span className="tabular"> · {r.year}</span>} — {r.what}
+                      {r.cotes.length > 0 && <span className="tabular text-ink-400"> (n° {r.cotes.join(', ')})</span>}{' '}
+                      <a href={r.source} target="_blank" rel="noopener noreferrer" className="text-brand-700 underline underline-offset-2">
+                        source ↗
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
+            {!row?.a && shown.length > 0 && (
               <ul className="mt-1 space-y-0.5">
-                {shown.map((e, i) => (
+                {shown.map((l, i) => (
                   <li key={i}>
-                    <span className="tabular font-semibold text-ink-900">n° {e.folder}</span>
-                    {!person && <> · {LIN.people.find((p) => p.id === e.person)?.name}</>} ·{' '}
-                    <span style={{ color: PERSON_STYLE[e.kind].stroke }}>{PERSON_STYLE[e.kind].label}</span> —{' '}
-                    {e.detail}
+                    <span className="tabular font-semibold text-ink-900">n° {l.cote}</span>
+                    {!row && <> · {rows[ri.get(l.key)!].name}</>} ·{' '}
+                    <span style={{ color: style(l.kind).stroke }}>{l.kind === 'archive' ? 'worked on it' : PERSON_STYLE[l.kind].label}</span> —{' '}
+                    {l.detail}
                   </li>
                 ))}
               </ul>
@@ -524,8 +639,9 @@ export function LineageToFolders() {
       <p className="mt-3 max-w-[44em] text-[12px] leading-relaxed text-ink-400">
         Lineage from the Mathematics Genealogy Project, read {LIN.source.slice(-10)}, every name
         linked to the page it was read from; {LIN.secondGenerationTotal} second-generation students
-        were read, and only those with a line here are drawn. The lines come from the transcriptions
-        and the findings, each traceable to a line of a file in the repository.
+        were read, and only those with a line here are drawn. {LIN.archive.source} The lines come
+        from the transcriptions, the findings and those sources, each traceable to a line of a file
+        in the repository or to a cited page.
       </p>
     </section>
   );

@@ -298,9 +298,11 @@ export interface Finding {
   /**
    * `unsearched` nobody looked it up · `candidate` searched, not found ·
    * `matched` found in the literature, kept as a killed candidate ·
+   * `refuted` shown false as stated — a counterexample or a contradiction,
+   * from the literature or checked in the row — kept as a killed candidate ·
    * `confirmed` a person checked it. Only a person may set the last.
    */
-  status: 'unsearched' | 'candidate' | 'matched' | 'confirmed';
+  status: 'unsearched' | 'candidate' | 'matched' | 'refuted' | 'confirmed';
   /** The one check that would decide it. */
   settle: string;
 }
