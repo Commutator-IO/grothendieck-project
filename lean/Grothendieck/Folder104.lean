@@ -1,0 +1,235 @@
+import Mathlib.CategoryTheory.Subobject.Basic
+import Mathlib.Data.Finset.Sort
+import Mathlib.Data.Fintype.Pi
+import Mathlib.Data.Fintype.Option
+import Mathlib.Data.Fintype.Powerset
+import Mathlib.LinearAlgebra.Finsupp.Defs
+import Mathlib.Algebra.BigOperators.Ring.Finset
+import Mathlib.Algebra.Order.BigOperators.Ring.Finset
+import Mathlib.Data.Nat.Choose.Sum
+
+/-!
+# Folder 104: categories of models, their three examples, and the globular complex
+
+The modernised reading `transcripts/104/104.modern.tex` (pages 4 and 6–10)
+considers a category `M` such that
+
+> (i) toute flèche de `M` est un monomorphisme ;
+> (ii) tout endomorphisme d'un objet de `M` est l'identité
+
+(a direct category all of whose arrows are monic), and states:
+
+* (*) `Hom_M(D', D) → D̃`, `u ↦ u(D')`, is injective (`etoile_injective`);
+* the preorder "there is an arrow" on isomorphism classes is an order: two
+  arrows `D' → D → D'` are inverse isomorphisms (`isIso_of_aller_retour`);
+* two sub-objects `x ⊆ y` of the same type are equal, whence
+  `τ_n⁻¹(n) = {d_n}` and the strict monotonicity of `τ_n`
+  (`sousObjet_eq_of_meme_type`);
+* in the converse construction, `u_{d_n} = id` follows from the composition
+  law and bijectivity (`id_of_idempotent_bijective`);
+* **Example 1**, the finite total orders `Δ_n` and strictly increasing maps —
+  the category whose presheaves are the *semi*-simplicial sets — satisfies (i)
+  and (ii) (`DeltaInj`, `deltaInj_mono`, `deltaInj_end`), and
+  `Card I_n = 2^{n+1} - 1` (`card_I_simplexe`);
+* **Example 2**, the cube: `Card I_n = Σ_k C(n,k) 2^k = 3^n`
+  (`card_I_cube`, `somme_faces_cube`);
+* **Example 3**, the hemispherical disc, `I_n = (Δ_{n-1} × {±1}) ⊔ {d_n}` with
+  `(k, ε) < (k', ε')` iff `k < k'`: this is an order (`Hemi`), with
+  `Card I_n = 2n + 1` (`card_I_hemi`) and two elements of each type `k < n`
+  (`card_type_hemi`); with the leaf's « ordre chaotique » on `{±1}` the
+  product is only a preorder (`chaotique_non_antisymetrique`);
+* page 4: `ℤ[F_{n+1}] → ℤ[F_n] → ℤ[F_{n-1}]`, with differential `t - s`, is a
+  complex by the globular identities (`globulaire_complexe`).
+
+All are proved as the reading states them, after its own two corrections
+(Example 3: `Δ_{n-1}`, not the leaf's `Δ_n`, and the order, not the chaotic
+preorder), which the formalisation confirms: with `Δ_n` the count is
+`2n + 3`, and the chaotic product is not antisymmetric.
+
+What the formalisation found: nothing wrong. Two remarks. Property (i) is not
+needed for the order on classes nor for `u_{d_n} = id`; (ii) alone gives them.
+And (i) is needed in (*) only to make `u ↦ u(D')` land in sub-objects at all.
+Not formalised: the equivalence `M ≃ M₀` and its converse (pages 8–10), the
+sphericity claims a) b) of page 10 (geometric realisations), and the
+question of page 11.
+-/
+
+namespace Grothendieck.Folder104
+
+open CategoryTheory
+
+/-! ### 1. Categories of models -/
+
+section Modeles
+
+variable {M : Type*} [Category M]
+  (hmono : ∀ {X Y : M} (f : X ⟶ Y), Mono f)
+  (hend : ∀ {X : M} (f : X ⟶ X), f = 𝟙 X)
+
+include hend in
+/-- (*) `Hom(D', D) → D̃`, `u ↦ u(D')`, is injective. The `Mono` instances are
+what (i) supplies in `M` (`hmono u`); only (ii) is used in the proof. -/
+theorem etoile_injective {D' D : M} (u v : D' ⟶ D) [Mono u] [Mono v]
+    (h : Subobject.mk u = Subobject.mk v) : u = v := by
+  have e := Subobject.ofMkLEMk_comp h.le
+  rw [hend (Subobject.ofMkLEMk u v h.le), Category.id_comp] at e
+  exact e.symm
+
+include hmono hend in
+/-- (*) in `M` itself, where every arrow is monic by (i). -/
+theorem etoile_injective' {D' D : M} (u v : D' ⟶ D)
+    (h : @Subobject.mk _ _ _ _ u (hmono u) = @Subobject.mk _ _ _ _ v (hmono v)) : u = v :=
+  @etoile_injective _ _ hend _ _ u v (hmono u) (hmono v) h
+
+include hend in
+/-- Two arrows `D' → D → D'` are inverse isomorphisms: the preorder on classes
+is an order. -/
+theorem isIso_of_aller_retour {A B : M} (f : A ⟶ B) (g : B ⟶ A) : IsIso f :=
+  ⟨g, hend _, hend _⟩
+
+include hend in
+/-- Two sub-objects `x ⊆ y` of the same type (there is an arrow `y → x`) are
+equal. In particular `τ_n⁻¹(n) = {d_n}`, and `τ_n` is strictly increasing. -/
+theorem sousObjet_eq_of_meme_type {D : M} {x y : Subobject D} (hxy : x ≤ y)
+    (g : (y : M) ⟶ (x : M)) : x = y := by
+  refine le_antisymm hxy (Subobject.le_of_comm g ?_)
+  rw [← Subobject.ofLE_arrow hxy, ← Category.assoc, hend (g ≫ Subobject.ofLE x y hxy),
+    Category.id_comp]
+
+/-- In the converse construction: the composition law gives `u_d ∘ u_d = u_d`,
+and `u_d` being bijective it is the identity. -/
+theorem id_of_idempotent_bijective {α : Type*} (f : α → α) (hf : Function.Bijective f)
+    (h : f ∘ f = f) : f = id := by
+  funext x
+  exact hf.1 (congrFun h x)
+
+end Modeles
+
+/-! ### 2. The three examples -/
+
+/-- **Example 1.** The finite total orders `Δ_n = {0, …, n}` and the strictly
+increasing maps. -/
+structure DeltaInj where
+  /-- `Δ_n` is `{0, …, n}`. -/
+  n : ℕ
+
+instance : Category DeltaInj where
+  Hom a b := {f : Fin (a.n + 1) → Fin (b.n + 1) // StrictMono f}
+  id _ := ⟨id, strictMono_id⟩
+  comp f g := ⟨g.1 ∘ f.1, g.2.comp f.2⟩
+
+/-- (i) for `Δ`: every arrow is a monomorphism. -/
+theorem deltaInj_mono {m n : DeltaInj} (f : m ⟶ n) : Mono f :=
+  ⟨fun _ _ H => Subtype.ext <| funext fun x =>
+    f.2.injective (congrFun (congrArg Subtype.val H) x)⟩
+
+/-- (ii) for `Δ`: every endomorphism is the identity. -/
+theorem deltaInj_end {a : DeltaInj} (f : a ⟶ a) : f = 𝟙 a := by
+  have hcard : (Finset.univ : Finset (Fin (a.n + 1))).card = a.n + 1 := by simp
+  have h1 := Finset.orderEmbOfFin_unique hcard (f := f.1) (fun _ => Finset.mem_univ _) f.2
+  have h2 := Finset.orderEmbOfFin_unique hcard (f := id) (fun _ => Finset.mem_univ _)
+    strictMono_id
+  exact Subtype.ext (h1.trans h2.symm)
+
+/-- **Example 1**: `I_n = 𝔓*(Δ_n)`, the non-empty subsets, has `2^{n+1} - 1`
+elements. -/
+theorem card_I_simplexe (n : ℕ) :
+    ((Finset.univ : Finset (Finset (Fin (n + 1)))).filter (·.Nonempty)).card = 2 ^ (n + 1) - 1 := by
+  have : (Finset.univ : Finset (Finset (Fin (n + 1)))).filter (·.Nonempty) =
+      Finset.univ.erase ∅ := by
+    ext s; simp [Finset.nonempty_iff_ne_empty]
+  rw [this, Finset.card_erase_of_mem (Finset.mem_univ _), Finset.card_univ,
+    Fintype.card_finset, Fintype.card_fin]
+
+/-- **Example 2**: a face of `[0,1]^n` fixes some coordinates to `0` or `1` and
+leaves the others free — a partial section of `Δ_{n-1} × {±1} → Δ_{n-1}` —
+so `Card I_n = 3^n`. -/
+theorem card_I_cube (n : ℕ) : Fintype.card (Fin n → Option Bool) = 3 ^ n := by
+  simp
+
+/-- Page 5: `1 + n·2 + C(n,2)·2² + ⋯ + 2ⁿ = (1 + 2)ⁿ`. -/
+theorem somme_faces_cube (n : ℕ) :
+    ∑ k ∈ Finset.range (n + 1), n.choose k * 2 ^ k = 3 ^ n := by
+  have := (add_pow (2 : ℕ) 1 n).symm
+  simp only [one_pow, mul_one] at this
+  rw [show (2 : ℕ) + 1 = 3 from rfl] at this
+  rw [← this]
+  exact Finset.sum_congr rfl fun k _ => mul_comm _ _
+
+/-- **Example 3**, the hemispherical disc `D_n`: `I_n = (Δ_{n-1} × {±1}) ⊔ {d_n}`
+(`none` is `d_n`). -/
+def Hemi (n : ℕ) : Type := Option (Fin n × Bool)
+
+instance (n : ℕ) : Fintype (Hemi n) := inferInstanceAs (Fintype (Option (Fin n × Bool)))
+
+instance (n : ℕ) : DecidableEq (Hemi n) := inferInstanceAs (DecidableEq (Option (Fin n × Bool)))
+
+/-- The order of the cells: `(k, ε) < (k', ε')` iff `k < k'`, `d_n` on top. -/
+def Hemi.le {n : ℕ} : Hemi n → Hemi n → Prop
+  | _, none => True
+  | none, some _ => False
+  | some a, some b => a = b ∨ a.1 < b.1
+
+instance (n : ℕ) : PartialOrder (Hemi n) where
+  le := Hemi.le
+  le_refl a := by cases a <;> simp [Hemi.le]
+  le_trans a b c := by
+    cases a <;> cases b <;> cases c <;> simp only [Hemi.le, imp_self, implies_true,
+      IsEmpty.forall_iff]
+    rename_i a b c
+    rintro (rfl | h₁) (rfl | h₂)
+    · exact Or.inl rfl
+    · exact Or.inr h₂
+    · exact Or.inr h₁
+    · exact Or.inr (h₁.trans h₂)
+  le_antisymm a b := by
+    cases a <;> cases b <;> simp only [Hemi.le, IsEmpty.forall_iff, forall_const]
+    · rfl
+    rename_i a b
+    rintro (rfl | h₁) (h₂ | h₂)
+    · rfl
+    · rfl
+    · exact h₂.symm ▸ rfl
+    · exact absurd (h₁.trans h₂) (lt_irrefl _)
+
+/-- `Card I_n = 2n + 1` (with the leaf's `Δ_n` it would be `2n + 3`). -/
+theorem card_I_hemi (n : ℕ) : Fintype.card (Hemi n) = 2 * n + 1 := by
+  change Fintype.card (Option (Fin n × Bool)) = _
+  simp [mul_comm]
+
+/-- For `k < n` there are exactly two sub-objects of type `k`, the two
+hemispheres of dimension `k`: `Hom(D_k, D_n)` has two elements (counted on the
+carrier `Option (Fin n × Bool)` of `Hemi n`). -/
+theorem card_type_hemi (n : ℕ) (k : Fin n) :
+    ((Finset.univ : Finset (Option (Fin n × Bool))).filter
+      (fun x => ∃ e : Bool, x = some (k, e))).card = 2 := by
+  have : (Finset.univ : Finset (Option (Fin n × Bool))).filter (fun x => ∃ e : Bool, x = some (k, e)) =
+      Finset.univ.image (fun e : Bool => (some (k, e) : Option (Fin n × Bool))) := by
+    refine Finset.ext fun x => ?_
+    rw [Finset.mem_filter, Finset.mem_image]
+    simp only [Finset.mem_univ, true_and]
+    exact ⟨fun ⟨e, h⟩ => ⟨e, h.symm⟩, fun ⟨e, h⟩ => ⟨e, h.symm⟩⟩
+  rw [this, Finset.card_image_of_injective _ (fun e e' h => by
+    simpa using (Option.some.inj h : ((k, e) : Fin n × Bool) = (k, e')))]
+  rfl
+
+/-- With `{±1}` carrying the chaotic preorder, `(k, ε) ≤ (k', ε')` iff `k ≤ k'`,
+and the product is not antisymmetric: it is a preorder, not an order. -/
+theorem chaotique_non_antisymetrique (n : ℕ) (k : Fin n) :
+    let R : Fin n × Bool → Fin n × Bool → Prop := fun a b => a.1 ≤ b.1
+    R (k, true) (k, false) ∧ R (k, false) (k, true) ∧ (k, true) ≠ (k, false) := by
+  simp
+
+/-! ### 3. Page 4: the globular complex -/
+
+/-- Page 4. For sources and targets `sₙ, tₙ : Fₙ → Fₙ₋₁` satisfying the globular
+identities `sₙ₋₁ sₙ = sₙ₋₁ tₙ`, `tₙ₋₁ sₙ = tₙ₋₁ tₙ`, the maps
+`tₙ - sₙ : ℤ[Fₙ] → ℤ[Fₙ₋₁]` compose to zero. -/
+theorem globulaire_complexe {F₂ F₁ F₀ : Type*} (s₂ t₂ : F₂ → F₁) (s₁ t₁ : F₁ → F₀)
+    (hs : s₁ ∘ s₂ = s₁ ∘ t₂) (ht : t₁ ∘ s₂ = t₁ ∘ t₂) :
+    (Finsupp.lmapDomain ℤ ℤ t₁ - Finsupp.lmapDomain ℤ ℤ s₁) ∘ₗ
+      (Finsupp.lmapDomain ℤ ℤ t₂ - Finsupp.lmapDomain ℤ ℤ s₂) = 0 := by
+  simp only [LinearMap.sub_comp, LinearMap.comp_sub, ← Finsupp.lmapDomain_comp, hs, ht]
+  exact sub_self _
+
+end Grothendieck.Folder104
