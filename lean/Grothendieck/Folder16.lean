@@ -37,7 +37,7 @@ from the `𝔰𝔩₂` (Hodge) normalisation, and a fourth about the manuscript'
 * `commutateur_pseudo_inverse` — the commutator formula, from `(6.7)` alone.
 * `lambda0_L0_un`, `lambda0_L0_un_ne_un` — in the exterior algebra `Λ M₀`,
   `M₀ = R^{2n}`, `ξ₀ = ∑ e_{2k-1} ∧ e_{2k}`: `Λ₀ L₀ (1) = n`, hence `≠ 1` for
-  `n ≠ 1` in characteristic `0`. This is the reading's correction of page 16,
+  `n ≠ 1` in characteristic `0`. This is the reading's correction of page 13,
   where the manuscript identifies the contraction `Λ₀` with the `Λ₀` of `(6.15)`.
 
 **What the formalisation finds.** Nothing false: the reading's comparison of the

@@ -34,6 +34,6 @@ of every theorem and fails on any beyond Lean's three standard ones.
 | 39 | `Folder39.lean` | adic preparation, partial | nothing wrong |
 | 19 | `Folder19.lean` | Théorème 1.12, Gabriel–Popescu | **the « only if » of 1.12 b) is false on the page**; condition C is not Beck's |
 | 161-2 | `Folder161_2.lean` | monadicity, descent, Gabriel–Ulmer, Ind(Σ), partial | descent needs no topos |
-| 16 | `Folder16.lean` | sl₂ against (6.7), algebra only | confirms the reading's correction of p. 16 |
+| 16 | `Folder16.lean` | sl₂ against (6.7), algebra only | confirms the reading's correction of p. 13 |
 | 106 | `Folder106.lean` | cofibration categories, Brown, W₀⁻¹C ≅ W⁻¹C | several axioms and hypotheses unused |
 | 114 | `Folder114.lean` | Proposition 4, minimal localiser, partial | the reading dropped « satisfying Loc 4) »; without it W ⊆ W₀ fails |

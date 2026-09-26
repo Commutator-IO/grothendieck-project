@@ -226,7 +226,7 @@ export const PROOFS: Proof[] = [
     statement:
       'On a primitive vector of weight μ, ΛL^{k+1}x = (k+1)(μ−k)L^k x; the sl₂ Λ satisfies (6.7)’s ΛLx = x only when μ = 1; the commutator [L, Λ] follows from (6.7); in the exterior algebra, Λ₀L₀(1) = n.',
     found:
-      'Nothing false; the last identity confirms the reading’s correction of p. 16, where the page identifies the contraction Λ₀ with the Λ₀ of (6.15). Only the algebra is proved; Hard Lefschetz and the geometry are not.',
+      'Nothing false; the last identity confirms the reading’s correction of p. 13, where the page identifies the contraction Λ₀ with the Λ₀ of (6.15). Only the algebra is proved; Hard Lefschetz and the geometry are not.',
     verdict: 'partly proved',
     lean: 'lean/Grothendieck/Folder16.lean',
     theorems: ['sl2_normalisation', 'identification_seulement_si', 'commutateur_pseudo_inverse', 'lambda0_L0_un_ne_un'],
