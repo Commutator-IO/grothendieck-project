@@ -1,0 +1,476 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 60, batch 2 (pages 21-40).
+% Established from the facsimile archives/batches/60/batch-02.pdf (PDF page k =
+% archivists' page 20+k, no cover sheet), cut from a copy of 60.pdf fetched
+% through the project's relay
+% (https://grothendieck-relay.onrender.com/source/60.pdf); tiles in
+% archives/tiles/60/p21-p40, with tighter pdftoppm crops for doubtful words.
+% Per the skill transcribe-grothendieck. The folder is sixty-nine pages in
+% four batches (1-20, 21-40, 41-60, 61-69), transcribed in parallel; this is
+% the second. Batch 1 (transcripts/60/batch-01.fr.tex) was read first and its
+% notation is kept.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-09-26 — first pass, unchecked against the pages by a human.
+%
+% Pages skipped: 21, 23, 25, 27, 29, 31, 33, 35, 37, 39 — the typed versos of
+% the sheets (Bourbaki material: pages of rédaction n° 392 and the
+% « Compléments au chapitre VII d'Algèbre », rédaction n° 397, one of them
+% scanned upside down), with nothing in his hand: skipped without
+% description by the settled rule.
+%
+% Pages summarised: none. Pages transcribed: 22, 24, 26, 28, 30, 32, 34, 36,
+% 38, 40 — ten rectos in ink, on the backs of the typescripts. His own
+% pagination: none visible (the pencilled numbers bottom left are the
+% archivists'). No numbered formulas in this batch: the run (1)-(3) of
+% batch 1 is not continued; his boxed formulas are kept boxed. Fast drafting
+% on pp. 36-40: formulas carry, much of the connective prose does not.
+%
+% What the batch is about. It continues batch 1 (functional equation of
+% L-functions over F_p, delta(E), chi(E), the correction factor A(t) at
+% infinity). P. 22: for a « motif » E, chi(E) and delta(E) in terms of the
+% virtual Betti numbers beta_i(E) and the virtual components h^i_!(E),
+% delta(h^i_!) = eps_i p^{i beta_i/2}, whence delta(E) = eps(E)
+% p^{(1/2) sum (-1)^i i beta_i}. P. 24: the term at infinity
+% R_infty f(E) = R f_* j^*(R i_*(E)); by local duality
+% D R_infty f(E) = R_infty f(D E)[1] (« 1 ou -1 ! »), and for E lisse of
+% weight rho on X smooth of dim n, the functional equation of L^infty_E:
+% L^infty_E(1/(p^{n+rho} t)) L^infty_E(t) (-t)^{chi_infty} delta_infty = 1.
+% P. 26: chi_infty(E) = 0, delta_infty(E) = p^{(n+rho)chi} delta^{-2} =
+% eps(E)^{-2}; a boxed list of « invariants arithmétiques intéressants »
+% delta, delta', eps, delta_infty with q = p^{n+rho}. Pp. 28-30: consistency
+% check: B(t) = A(t) delta(E) (-t)^chi satisfies B(t)B(1/(qt)) = 1, which is
+% again the equation of L^infty; with xi_E(t) = t^{chi/2} L_E(t),
+% xi_E(1/(qt)) = A(t) eps'(E) xi_E(t), eps'(E) = eps(E)(-1)^chi; X complete:
+% A = 1, eps' = ±1. Pp. 32-34: the case of a curve: X smooth projective
+% over F_p with function field K, E_eta a Q_l-sheaf on eta = Spec K,
+% L^*_{E_eta} := L_{i_* E_eta}, D(i_* E_eta) = i_*(E_eta^v)(1), the
+% functional equation of L^* and of xi^* with q = p^{1+rho}; remark that L^*
+% is not additive in E_eta: a correction by prod_x P_{Q_x}(t) at the points
+% of ramification. Pp. 36-40: attempts to make it additive (via composition
+% series, not local in (E,x)); a group D, a normal subgroup I with an open
+% subgroup U acting unipotently; the « moyenne » E -> E^I from Mod(D/U,k) to
+% Mod(D/I,k), exact in characteristic 0, inducing homomorphisms of
+% representation rings R(D/U,k) -> R(D/I,k) compatible for V ⊂ U (a small
+% triangle, drawn with tikzcd).
+%
+% Notation, as in batch 1: f for Frobenius; \check E for the contragredient;
+% D for the dualising functor on p. 22-34, but on pp. 38-40 D is a group
+% (décomposition) — both are his; R f_*, R f_!, R_\infty f with plain R; he
+% writes R_\infty f and R^*_\infty f on p. 24 and both are kept; L^\infty_E;
+% \varepsilon for the Euler characteristic of a complex on p. 26, as on
+% batch 1 p. 20; \mathcal-free E_\eta, \eta = Spec K. The map symbol shaped
+% like a lightning flash on p. 40 is rendered \natural_U, with a note.
+%
+% Readings to check first: « \uncertain{toujours} entier » on p. 22; the top
+% line and the right-hand prose of p. 24; the last box of p. 26 (the sign of
+% the exponent of q in eps(E) = delta'(E) q^{-chi/2}); the superscript on
+% A(t) on p. 30; the looped insertion on p. 34; the heading and margin NB
+% of p. 38; nearly all the prose of pp. 36 and 40.
+
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{60}
+\batch{2}
+\pages{21}{40}
+\dating{[à partir de 1962- à partir de 1971]}
+\watermark{Édition de démonstration}
+\foldertitle{Fonctions L / Équation fonctionnelle des fonctions L (cas géométrique) : notes manuscrites (s.d.)}
+
+\begin{document}
+
+\page{22}
+\emph{Dans le cas d'un motif $E$},
+\note{ces mots sont entourés d'un trait en haut de la page ; « motif » est souligné}
+on va exprimer $\delta(E)$ et $\chi(E)$ en termes des \struck{\ill{}}
+composantes virtuelles des $R f_{!}(E)$ (utilisant les conj.\ de Weil), on
+trouve
+\[
+  \left\lbrace
+  \begin{array}{l}
+    \chi(E) = \sum (-1)^i \beta_i(E) \\[6pt]
+    \delta(E) = \prod_i \delta\bigl(h^i_{!}(E)\bigr)^{(-1)^i}
+  \end{array}
+  \right.
+\]
+\marginal{en face : $\beta_i(E)$ les nbs de Betti virtuels à coeff.\ dans $E$}
+Or $h^i_{!}(E)$ donne \uncertain{des} valeurs propres de val.\ absolue
+$p^{i/2}$, donc
+\[
+  \delta\bigl(h^i_{!}(E)\bigr) = \varepsilon_i\, p^{\frac{i \beta_i}{2}}
+\]
+(NB. $i\beta_i/2$ \uncertain{toujours} entier)
+\note{devant $\delta(h^i_{!}(E))$, un premier départ est biffé}
+où \struck{\ill{}} $\varepsilon_i$ est défini comme un signe de déterminant
+virtuel, et $\varepsilon_i$ est $= +1$ si $i$ est impair. On trouve donc
+\[
+  \left\lbrace
+  \begin{array}{l}
+    \delta(E) = \varepsilon(E)\, p^{\frac{1}{2}\sum_i (-1)^i i\, \beta_i(E)} \\[6pt]
+    \varepsilon(E) = \prod_i \varepsilon_i(E)
+  \end{array}
+  \right.
+\]
+\note{entre $\delta(E) =$ et $\varepsilon(E)$, un premier membre de droite,
+une puissance de $p$, est lourdement biffé}
+\marginal{en face : $\varepsilon(E)$ et les $\varepsilon_i(E)$ sont $\pm 1$,
+$\varepsilon_i(E) = +1$ si $i$ impair.}
+
+\page{24}
+\ill{} \ill{} de $L_E$ et $L^{\infty}_{DE}$ \ldots
+\struck{$R f_{*}\, j^{*} R i_{*}(E)$}
+\[
+  R_{\infty} f(E) = R f_{*}\, j^{*}\bigl(R i_{*}(E)\bigr)
+\]
+\[
+  \begin{aligned}
+    D\, R_{\infty} f(E) &= D\, R f_{*}(\quad) \\
+      &= R f_{*}\, D(\quad) \\
+      &= R f_{*}\, R j^{!}\bigl(D\, R i_{*}(E)\bigr) \\
+      &= R f_{*}\Bigl(R j^{!}\bigl(R i_{!}(D E)\bigr)\Bigr)
+  \end{aligned}
+\]
+\marginal{une accolade embrasse les deuxième et troisième lignes : \emph{dualité locale}}
+\note{les parenthèses des deux premières lignes sont laissées vides ; sous
+la dernière, une accolade renvoie à $j^{*}\bigl(R i_{*}(D(E))\bigr)[1]$}
+\[
+  \boxed{D\, R^{*}_{\infty} f(E) = R^{*}_{\infty} f\bigl(D(E)\bigr)\, [1]}
+\]
+\marginal{en face : \ill{} \ill{} \ill{} $1$ ou $-1$ !}
+\note{une ligne suivante, $L^{\infty}_E \ldots L^{\infty}_{\check E} \ldots = 1$,
+est biffée de plusieurs traits}
+
+$L^{\infty}_{D(E)}$ \struck{Supposons \ldots\ $D(E) \simeq \check E(n+\rho)$,
+on trouve}
+
+Supposons $E$ loc.\ ct.\ \add{de poids $\rho$} et $X$ lisse de dim.\ \ill{}
+\ill{}, \ill{} \ill{} \ill{} :
+\note{« de poids $\rho$ » est écrit au-dessus de la ligne ; la fin de la
+phrase, à droite, se lit mal}
+\[
+  D(E) \simeq \check E(n) \simeq E(n + \rho)
+\]
+d'où
+\[
+  \boxed{D\, R^{*}_{\infty} f(E) \simeq R^{*}_{\infty} f(E)\,(n + \rho)\,[1]}
+\]
+donc \ill{} l'équation fonctionnelle
+\[
+  (-t)^{-\chi_{\infty}(E)}\, \delta_{\infty}(E)\, L^{\infty}_E(t^{-1})
+  = L^{\infty}_E\bigl(p^{-(n+\rho)} t\bigr)^{-1}
+\]
+\note{devant $(-t)$, un signe biffé}
+i.e.
+\[
+  \boxed{L^{\infty}_E\Bigl(\frac{1}{p^{n+\rho}\, t}\Bigr) L^{\infty}_E(t)\,
+    (-t)^{\chi_{\infty}(E)}\, \delta_{\infty}(E) = 1}
+\]
+
+\page{26}
+\emph{NB}
+\[
+  \chi_{\infty}(E) = \varepsilon\bigl(R f_{*}(E)\bigr) - \varepsilon\bigl(R f_{!}(E)\bigr)
+\]
+or on a vu que les deux $\varepsilon$ sont égaux, donc
+$\chi_{\infty}(E) = 0$. \uncertain{D'autre part}
+\note{comme page 20, $\varepsilon$ note ici la caractéristique d'Euler du
+complexe}
+\[
+  \delta_{\infty}(E) = \delta\bigl(R f_{*}(E)\bigr)\, \delta\bigl(R f_{!}(E)\bigr)^{-1}
+\]
+et on a vu que
+\[
+  p^{(n+\rho)\chi(E)}\, \delta\bigl(R f_{*}(E)\bigr)^{-1} = \delta\bigl(R f_{!}(E)\bigr)
+\]
+d'où
+\[
+  \left\lbrace
+  \begin{array}{l}
+    \delta_{\infty}(E) = p^{(n+\rho)\chi(E)}\, \delta(E)^{-2} = \varepsilon(E)^{-2} \\[6pt]
+    \varepsilon(E) = \delta(E)\, p^{-(n+\rho)\chi(E)/2}
+  \end{array}
+  \right.
+\]
+\note{après $\varepsilon(E)^{-2}$, une expression est lourdement biffée ; le
+$\varepsilon$ de ces deux lignes est tracé en gras}
+($= \pm 1$ si $X$ est \struck{\ill{}} propre)
+
+(qui est bien $1$ lorsque $X$ est complet !)
+
+d'où l'équation fonctionnelle
+\[
+  \boxed{L^{\infty}_E\Bigl(\frac{1}{p^{n+\rho}\, t}\Bigr) L^{\infty}_E(t)\,
+    \delta_{\infty}(E) = 1}
+\]
+\[
+  \Bigl(\delta_{\infty}(E) = p^{(n+\rho)\chi(E)}\, \delta(E)^{-2} = \varepsilon(E)^{-2}\Bigr)
+\]
+\note{avant le dernier signe $=$, un symbole est biffé}
+
+[Invariants arithmétiques \uncertain{intéressants}, (moyennant la
+connaissance de l'invariant géométrique $\chi(E)$, et de $q = p^{n+\rho}$) :
+\[
+  \delta(E) = \delta^{*}_{!}(E) , \quad
+  \delta'(E) = \delta^{*}_{*}(E) , \quad
+  \varepsilon(E) , \quad
+  \delta_{\infty}(E) ]
+\]
+\note{dans $q = p^{n+\rho}$, le $q$ surcharge une autre lettre}
+\[
+  \boxed{\delta(E)\,\delta'(E) = q^{\chi(E)}}
+  \qquad
+  \boxed{\varepsilon(E) = \delta(E)\, q^{-\chi(E)/2} = \delta'(E)\, q^{-\chi(E)/2}}
+\]
+\[
+  \boxed{\delta_{\infty}(E) = q^{\chi(E)}\, \delta(E)^{-2} = q^{-\chi(E)}\, \delta'(E)^{2}
+    = \varepsilon(E)^{-2}}
+\]
+\marginal{une flèche part du signe $=$ de la deuxième formule encadrée :
+variance avec $E$, $X$ !!}
+\marginal{dans un ovale, à gauche : NB.\ $\varepsilon(E) = \pm 1$ si $X$ complet}
+\note{la page écrit bien $\delta'(E)\, q^{-\chi(E)/2}$ dans la deuxième
+formule encadrée ; d'après la première, on attendrait
+$\delta'(E)^{-1} q^{\chi(E)/2}$. On transcrit tel quel. L'exposant $2$ de
+$\delta'(E)$ dans la troisième formule, au bord de la feuille, est douteux}
+
+\page{28}
+Comparons cette équation fonctionnelle avec celle pour la fonction $L_E$, on
+trouve, en \struck{substituant} posant pour simplifier $p^{n+\rho} = q$, et
+$A(t)\, \delta(E)\, (-t)^{\chi(E)} = B(t)$ :
+\[
+  L\Bigl(\frac{1}{qt}\Bigr) = B(t)\, L(t)
+\]
+et faisant $t \mapsto \frac{1}{qt}$ dedans, on trouve
+\[
+  L(t) = B\Bigl(\frac{1}{qt}\Bigr) L\Bigl(\frac{1}{qt}\Bigr)
+  = B\Bigl(\frac{1}{qt}\Bigr) B(t)\, L(t)
+\]
+d'où
+\[
+  B(t)\, B\Bigl(\frac{1}{qt}\Bigr) = 1 .
+\]
+Remplaçant $B$ par sa valeur, on trouve
+\[
+  L^{\infty}_E\Bigl(\frac{1}{qt}\Bigr)^{-1} \delta(E)\, (-t)^{\chi(E)}\,
+  L^{\infty}_E(t)^{-1}\, \delta(E) \Bigl(\frac{1}{qt}\Bigr)^{\chi(E)} = 1
+\]
+\note{dans le premier argument, un $p$ biffé précède $qt$ ; le dernier
+facteur est surchargé et pourrait porter un signe $-$}
+i.e.
+\[
+  L^{\infty}_E(t)\, L^{\infty}_E\Bigl(\frac{1}{qt}\Bigr) = \delta(E)^2\, q^{-\chi(E)}
+\]
+\note{devant $q^{-\chi(E)}$, un petit symbole biffé ; au-dessous, une ligne
+commençant par $L^{\infty}_E\bigl(\frac{1}{p^{n+\rho} t}\bigr)$ est biffée}
+C'est précisément l'équation fonctionnelle explicitée plus haut.
+
+Posons
+\[
+  \xi_E(t) = t^{\frac{\chi(E)}{2}} L_E(t)
+\]
+alors
+\[
+  \begin{aligned}
+    \xi_E\Bigl(\frac{1}{qt}\Bigr)
+      &= \Bigl(\frac{1}{qt}\Bigr)^{\chi(E)/2} L_E\Bigl(\frac{1}{qt}\Bigr)
+       = \Bigl(\frac{1}{qt}\Bigr)^{\chi(E)/2} A(t)\, \delta(E)\, (-t)^{\chi(E)} L_E(t) \\
+      &= q^{-\chi(E)/2} A(t)\, \delta(E)\, (-1)^{\chi(E)}\; t^{\chi(E)/2} L_E(t)
+  \end{aligned}
+\]
+i.e.
+\note{sous la dernière ligne, deux accolades : l'une sous
+$q^{-\chi(E)/2} \ldots (-1)^{\chi(E)}$, l'autre sous $t^{\chi(E)/2} L_E(t)$,
+légendée $\xi_E(t)$}
+
+\page{30}
+\[
+  \boxed{\xi_E\Bigl(\frac{1}{qt}\Bigr) = A(t)\, \varepsilon'(E)\, \xi_E(t)}
+  \qquad q = p^{n\rho}
+\]
+\note{$A$ porte un petit exposant qui ne se lit pas ; la page écrit
+$q = p^{n\rho}$, sans signe $+$ visible, là où les pages 26-28 ont
+$q = p^{n+\rho}$}
+\[
+  \left\lbrace
+  \begin{array}{l}
+    A(t) = L^{\infty}_E\Bigl(\dfrac{1}{qt}\Bigr)^{-1} \\[8pt]
+    \varepsilon'(E) = \varepsilon(E)\, (-1)^{\chi(E)}
+  \end{array}
+  \right.
+  \qquad
+  \varepsilon(E) = \delta(E)\, q^{-\chi(E)/2}
+\]
+\note{dans la dernière formule, un premier membre de droite est biffé}
+
+Si \struck{\ill{}} $X$ complète
+$\left\lbrace
+\begin{array}{l}
+  A(t) = 1 \\
+  \varepsilon'(E) = \pm 1
+\end{array}
+\right.$
+
+\page{32}
+Cas d'une courbe alg.
+
+$X$ \add{\uncertain{courbe},} lisse projective [\uncertain{irréd.}] sur
+$\mathbb{F}_p$, \struck{\ill{}} corps de fonctions $K$.
+\note{le mot entre virgules et le crochet sont écrits au-dessus de la ligne}
+
+$E_\eta$ $\mathbb{Q}_\ell$-faisceau constr.\ sur $\eta = \operatorname{Spec} K$.
+
+On veut lui associer une « fonction $L$ ». C'est \uncertain{raisonnable},
+car $K$ détermine $X$.
+
+Prenons d'abord $E = i_{*}(E_\eta)$, où $i : \eta \to X$.
+
+On sait alors que
+\[
+  D(E) = i_{*}(\check E_\eta)(1)
+\]
+\struck{Donc si on suppose} Donc si on pose
+$L^{*}_{E_\eta}(t) = L_{i_{*}(E_\eta)}(t)$, on aura
+\[
+  L^{*}_{\check E_\eta}\Bigl(\frac{1}{pt}\Bigr)
+  = (-t)^{\chi^{*}(\check E_\eta)}\, \delta^{*}(E_\eta)\, L^{*}_{E_\eta}(t)
+\]
+\note{devant $\bigl(\frac{1}{pt}\bigr)$, un symbole biffé}
+si on pose
+\[
+  \chi^{*}(E_\eta) = \chi\bigl(i_{*}(E_\eta)\bigr) , \qquad
+  \delta^{*}(E_\eta) = \delta\bigl(i_{*}(E_\eta)\bigr)
+\]
+Supposons qu'on ait
+\[
+  \check E_\eta = E_\eta(\rho) \qquad \text{d'où} \qquad
+  i_{*}(\check E_\eta) = i_{*}(E_\eta)(\rho)
+\]
+alors on trouve,
+\[
+  \boxed{L^{*}_{E_\eta}\Bigl(\frac{1}{qt}\Bigr)
+    = (-t)^{\chi^{*}(E_\eta)}\, \delta^{*}(E_\eta)\, L^{*}_{E_\eta}(t)}
+  \qquad (q = p^{1+\rho}
+\]
+
+\page{34}
+Posant
+\[
+  \xi^{*}_{E_\eta}(t) = t^{\chi^{*}(E_\eta)/2} L^{*}_{E_\eta}(t)
+\]
+on trouve
+\[
+  \boxed{\xi^{*}_{E_\eta}\Bigl(\frac{1}{qt}\Bigr)
+    = \varepsilon'^{*}(E_\eta)\, \xi^{*}_{E_\eta}(t)}
+\]
+\[
+  \left\lbrace
+  \begin{array}{l}
+    \varepsilon'^{*}(E_\eta) = \delta^{*}(E_\eta)\, q^{-\chi^{*}(E_\eta)/2}\, (-1)^{\chi^{*}(E_\eta)} \\[6pt]
+    q = p^{1+\rho}
+  \end{array}
+  \right.
+\]
+\marginal{en face : \ill{} \ill{} \ill{}}
+
+\emph{Une remarque} : \uncertain{fonction} $L^{*}_{E_\eta}(t)$ :
+\emph{\ill{} \ill{} \ill{}} \emph{additif} en $E$. De façon précise, si on a
+\[
+  0 \to E'_\eta \to E_\eta \to E''_\eta \to 0
+\]
+on en conclut
+\[
+  0 \to i_{*}(E'_\eta) \to i_{*}(E_\eta) \to i_{*}(E''_\eta) \to Q \to 0
+\]
+où
+\struck{$Q = \operatorname{Ker}\bigl(R^1 i_{*}(E'_\eta) \to R^1 i_{*}(E_\eta)\bigr)$}
+\[
+  Q \simeq \coprod_{x \text{ pt ramifié de } E''_\eta} j_x(\ill{})
+\]
+\note{la formule biffée est remplacée par l'expression $\coprod$, inscrite
+dans une boucle qui renvoie à la fin de la ligne}
+est \ill{} \ill{} \ill{} \ill{} de « ramification » de $E''_\eta$.
+
+D'où
+\[
+  \left\lbrace
+  \begin{array}{l}
+    L^{*}_{E_\eta}(t) = L^{*}_{E'_\eta}(t)\, L^{*}_{E''_\eta}(t)\, L_Q(t)^{-1}
+      = L^{*}_{E'_\eta}(t)\, L^{*}_{E''_\eta}(t) \prod_x P_{Q_x}(t) \\[8pt]
+    Q_x = \operatorname{Coker}(E_x \to E''_x)
+  \end{array}
+  \right.
+\]
+\marginal{en bas à droite, sous un arc :
+$H^2(\bar X, E) =$ dual de $H^0(\bar X, E(\ill{}))(\ill{})$}
+
+\page{36}
+On peut songer à la rendre additive, en la définissant d'abord sur les
+$E_\eta$ simples (ou \uncertain{abst.}\ simples, quitte à prendre des
+extensions finies de $\mathbb{Q}_\ell$) et en prolongeant par linéarité ou
+plus \uncertain{simplement} à définir les facteurs locaux dans
+$L_{E_\eta}(t)$ par $L_{E_\eta(x)}(t)$, en posant
+$E_\eta(x) = \sum E^{i*}_\eta(x)$, les $E^{i}_\eta$ étant les facteurs
+simples dans une suite de composition de $E$. Ceci n'est pas encore
+satisfaisant, car les $E_\eta(x)$ ainsi construits ne sont pas de nature
+locale en $(E, x)$, i.e.\ ne commutent pas à l'extension étale
+\struck{sur $X$} (i.e.\ ext.\ résiduellement \add{\ill{}} triviale) sur $X$.
+\note{l'indice de $E^{i*}_\eta(x)$ est douteux ; au-dessus de
+« triviale », un mot ajouté, puis un mot biffé}
+
+\page{38}
+\section{Suite de la \uncertain{remarque}}
+\note{titre souligné, de sa main, en haut de la page}
+\marginal{dans un cadre, en haut à droite : NB. S'il s'agit de \ill{} des
+\ill{} galoisiens, et $U$ est \uncertain{ouvert} dans $I$, alors il
+s'ensuit qu'il contient un s-gpe ouvert \uncertain{de} $U$, qui est
+\emph{invariant} par $D$}
+
+$D$ groupe, $I$ sous-groupe distingué, $E$ vectoriel de dim.\ finie sur un
+corps $k$, sur lequel $D$ opère. On suppose que $I$ admet un sous-groupe
+d'indice fini $U$, \add{invariant par $D$,} tel que pour $g \in U$, $g$
+opère sur $E$ de façon \emph{unipotente}, i.e.\ valeurs propres toutes $1$.
+Alors le groupe algébrique d'automorphismes de $E$ engendré par les
+$g \in U$ est « unipotent », donc \struck{\ill{}} $E$ admet une suite de
+composition sous $U$ telle que \add{\uncertain{$E$ quot.}} \ill{} \ill{}
+facteurs. \struck{soit stable par $E$.} De façon précise, on peut prendre la
+suite de composition formée par les $E^U$, $(E/E^U)^U$, \ldots. Cette suite
+est stable par les opérations de $D$, si \struck{(comme il est loisible)}
+\struck{on suppose} \add{puisque} $U$ dans $I$ invariant par les $D$. Donc il
+existe une suite de composition de $E$ \emph{sous $D$} telle que sur chaque
+facteur $E_i$, \struck{\ill{}} $U$
+\note{« invariant par $D$ » est ajouté au-dessus de la ligne ; la fin de la
+proposition sur les facteurs, entourée d'une boucle, se lit mal ; la
+phrase continue page 40}
+
+\page{40}
+opère trivialement, \add{(et \uncertain{respectant} bien \ill{})} \ill{}
+\ill{} \ill{} \ill{} au virtuel, \add{et pour $U$ fixé,} les modules $E$
+envisagés sont assimilables à ceux pour lesquels \struck{il existe un s-gpe
+\ill{}} $U$ opère trivialement sur $E$.
+\note{les deux ajouts sont écrits au-dessus de la ligne}
+
+\ill{} \ill{} $E$ sur lequel $U$ opère trivialement, on peut prendre
+l'opération moyenne
+\[
+  E \mapsto E^{I} \quad \text{de} \quad
+  \mathrm{Mod}(D/U, k) \to \mathrm{Mod}(D/I, k)
+\]
+et si $k$ est de car.\ $0$, c'est le \uncertain{seul} foncteur exact. Il
+induit un \ill{} \struck{\ill{} opération additive, \ill{} \ill{} \ill{}}
+\struck{\ill{}} naturel \struck{\ill{}} $E \mapsto E^{I}$
+\[
+  \natural_U : R(D/U, k) \to R(D/I, k)
+\]
+\note{le symbole de l'application a la forme d'un éclair ; on le rend
+conventionnellement par $\natural$}
+\uncertain{On a} compatibilité, pour $V \subset U$, par les foncteurs
+$E \mapsto E^{I}$, d'où par les $\natural_U$ et $\natural_V$ :
+
+\begin{tikzcd}
+R(D/U, k) \arrow[r, "\natural_U"] \arrow[d] & R(D/I, k) \\
+R(D/V, k) \arrow[ur, "\natural_V"'] &
+\end{tikzcd}
+
+\note{la flèche verticale porte une légende de deux mots qui ne se lisent
+pas}
+
+\end{document}
