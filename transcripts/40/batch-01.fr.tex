@@ -1,0 +1,813 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 40, batch 1 (pages 1-20).
+% Established from the facsimile archives/batches/40/batch-01.pdf, cut from a
+% copy of the folder fetched through the project's own relay
+% (https://grothendieck-relay.onrender.com/source/40.pdf), not uploaded by the
+% user; PDF page k is the archivists' page k, with no cover sheet. Per the
+% skill transcribe-grothendieck. The folder is twenty-seven pages; this is the
+% first of its two batches (pages 21-27 are batch 2, transcribed in parallel
+% by another pass and already in transcripts/40/batch-02.fr.tex, whose
+% notation this file follows).
+%
+% Pages skipped: none. Pages summarised: none; the diagrams of page 13 are
+% given in part (first and last column of each computation), the middle
+% columns being described in a \note. All twenty pages are his hand, blue
+% ink, fast drafting; page 15 carries only three lines. No pagination of his
+% is visible and no date. Page 1 carries, top left, a diagonal title in red
+% crayon, « Calculs sur des fibrés principaux affines » (the last word under
+% red strokes), and a circled « Hopf » in black ink; whether the red crayon is
+% his hand cannot be told from the scan. It is very probably what the
+% archivists' title « Calculs [affines sur des] fibrés principaux affines »
+% was taken from; their bracketed words are theirs, not his, and the heading
+% is given here as a \marginal with a \note, not as a title.
+%
+% What the batch is about. Affine group schemes over a commutative ring A
+% and their principal homogeneous spaces (« fibrés principaux homogènes »),
+% worked out on algebras. P. 1: a group in the dual of the category of
+% commutative A-algebras — B with diagonal p_B : B -> B (x)_A B, augmentation
+% epsilon (J = Ker epsilon), antipode x -> x-check, with its properties;
+% when B is free of finite rank, the dual structure on U. P. 2: U as a
+% unital coalgebra with Delta_U, eta_U, an associative unital algebra
+% structure compatible with it, and the antipode; then an A-algebra C with
+% B as « groupe d'opérateurs à gauche ». Pp. 3-4: the coaction q_C : C ->
+% B (x) C (associativity and unit diagrams, q_C(y) in 1 (x) y + J (x) C);
+% with B free of finite rank, q_C as q_U : U -> Hom_A(C, C'), and C as a
+% U-module algebra (u(xy) = sum (v_i x)(w_i y)). Pp. 4-5 (much cancelled):
+% C principal homogeneous iff C (x) C -> B (x) C, (q_C, p_2), is an
+% isomorphism, iff there is g_C : B -> C (x) C making (*) and (**) commute.
+% Pp. 5-8: the quotient of C by B in the category is the subalgebra C' of
+% invariants (« primitifs », then « invariants »); a warning (p. 7) that the
+% quotient in the affine category can differ from that in schemes (E/G for
+% G a Borel subgroup: a point); for C principal homogeneous and A a direct
+% factor of C, C' = A; the N.B. of p. 8, C = B/JB, where the invariants are
+% A/J. P. 9: with C free, phi : C (x) C -> Hom(U, C) is an isomorphism iff
+% psi : C (x) U -> Hom(C, C), psi(x (x) u).y = x u(y), is one (margin « ? »),
+% with a cancelled base-change argument (A' = C). P. 10: the same in terms of
+% U, with the convolution v * w on Hom_A(U, C). Pp. 11-15: the categorical
+% definition (E formally principal homogeneous under G iff (q_E, p_2) is an
+% isomorphism, iff g_E exists with (i), (ii)); translated into algebras;
+% psi : Hom_A(B, C) -> Hom_A(C, C), psi(v) = Delta_C (v (x) id_C) q_C, is an
+% isomorphism if phi is, with inverse psi'(w) = Delta_C (w (x) id_C) g_C,
+% verified by the column diagrams of p. 13; the converse (pp. 14-15) when C
+% has a finite basis, via rho : Hom(Hom(C, C), C) -> C (x) C, left off at
+% « Pour ceci, ---- » with « ??? » in the margin. Pp. 16-20: the example
+% that batch 2 continues — the hyperalgebra U = A[X]/X^p A[X] in
+% characteristic p (Delta X = X (x) 1 + 1 (x) X, epsilon(X) = 0, X-check =
+% -X), dual of the group B of batch 2; an action of U on C is an A-derivation
+% D with D^p = 0; C principal homogeneous iff the D^i (0 <= i <= p-1) form a
+% C-basis of Hom_A(C, C); for C = A[u]/(u^p - a), Du = 1, the matrix of the
+% D^i, triangular with determinant 0!1!...(p-1)!, gives the « Proposition »
+% (p. 18): an A-algebra with a one-element p-basis is principal homogeneous
+% under U; « Questions » (hyperalgebras in Hom_A(C, C), restricted
+% enveloping algebras); p. 19, « 2) » the classification of principal
+% homogeneous spaces under B begins: the elements killed by D are A, via a
+% lemma on direct-factor submodules M and their orthogonals M° in
+% Hom(C, C); p. 20: existence and uniqueness mod A of u with Du = 1, the
+% local argument (image of D free of rank p-1, containing A), x^p in A, and
+% « si Du = 1 les u^i forment une base de C sur A » — continued on p. 21 of
+% batch 2 by the struck proof « A est local. Montrons d'abord que les u^i
+% ... sont libres sur A ».
+%
+% Notation fixed once for the batch, aligned with batch 2. The group algebra
+% is B (plain, as on pp. 21-23 of batch 2); the category is \mathcal{C}. His
+% U with a curled stroke, the dual hyperalgebra, is set \mathcal{U}, as batch
+% 2 sets \mathcal{U}' on p. 23. The script letter he uses on pp. 5-6 for a
+% second algebra (« h : D -> C ») is \mathcal{D}. His Delta_C on pp. 10-13
+% is the multiplication C (x) C -> C and is kept so; Delta_U is the
+% diagonal of U. eta_U is his augmentation of U (a hooked eta), epsilon that
+% of B. The antipode is \check{x}. Tensor products are over A unless he
+% writes otherwise. On p. 4 he writes q_U in the first condition and p_U in
+% the second: kept, with a note. His underlinings are \emph.
+%
+% Readings to check first: the red heading on p. 1 and whether « affines »
+% is struck; the first words of p. 2 (« D\ill{} de cogèbre ») and of p. 3;
+% the whole cancelled block at the top of p. 5 and the closing sentence of
+% p. 5 (« Nous \ill{} ... si C soit fibré principal ... »); « on voit qu'on a
+% tout ce qu'il faut » on p. 6; the first paragraph of p. 7 (the example
+% with the Borel subgroup: « groupe linéaire », « réduit au point »); the
+% bracket of p. 8 (« ayant une base contenant 1_C »); the cancelled lower
+% half of p. 9; the word before « e » on p. 11 (left \ill{}); « on démontre » on p. 12; the
+% « Questions » of p. 18; the margins and the lemma of p. 19; the framed
+% local argument and the rotated left margin of p. 20.
+% Apparatus: 109 \ill{}, 45 \uncertain{}.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-09-26 — first pass, unchecked against the pages by a human.
+
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{40}
+\batch{1}
+\pages{1}{20}
+\dating{[années 1960-1970]}
+\watermark{Édition de démonstration}
+\foldertitle{Calculs [affines sur des] fibrés principaux affines : notes manuscrites (s.d.)}
+
+\begin{document}
+
+\page{1}
+
+\marginal{Calculs sur des fibrés principaux \uncertain{affines}}\note{au
+crayon rouge, en diagonale dans le coin supérieur gauche, le dernier mot
+sous des traits rouges ; on ne peut dire d'après la reproduction si ce
+crayon est de sa main. Tout près, à l'encre noire, « Hopf » cerclé, et deux
+traits obliques qui séparent le coin du texte}
+
+On se place dans la catégorie duale de la catégorie des algèbres $B$
+(commutatives avec unité) sur l'anneau comm. $A$. Une telle $B$ est un
+groupe de la catégorie si c'est une \emph{$A$-algèbre commutative unitaire},
+s'est donné un \emph{hom. d'algèbres}
+\[
+p_B : B \longrightarrow B \otimes_A B
+\]
+(« application diagonale ») qui soit « \emph{associative} »,\note{« d'algèbre »
+est écrit sous « associative », souligné avec lui} pour laquelle il
+\emph{existe} une \emph{augmentation} $\varepsilon : B \to A$
+\struck{\ill{}} telle que
+\[
+\delta_B x = p_B x - (x \otimes 1 + 1 \otimes x) \in J \otimes J
+\]
+(où $J = \operatorname{Ker} \varepsilon$) --- cette augmentation est
+alors unique --- et un \emph{hom d'algèbres} $x \mapsto \check{x}$
+satisfaisant à la condition
+\[
+x \in B, \quad p_B x = \sum y_i z_i \;\Longrightarrow\;
+\sum \check{y}_i z_i = \sum y_i \check{z}_i = \varepsilon(x) . 1
+\]
+\uncertain{un} tel hom d'algèbres est alors unique, et est une involution.
+De plus on a
+\[
+\varepsilon(\check{x}) = \varepsilon(x)
+\]
+si $p_B x = \sum y_i \otimes z_i$, alors
+$p_B \check{x} = \sum_i \check{z}_i \otimes \check{y}_i$.
+
+\emph{Si} $B$ est libre de rang fini sur \uncertain{$B$},\note{sic ; on
+attend $A$} alors ces structures se \uncertain{reflètent} directement dans
+$\mathcal{U}$ par la donnée \struck{d'une} \struck{loi} \struck{d'algèbre} \struck{(non} \struck{nécessairement} \struck{commutative)} \struck{associative} \struck{unitaire} \struck{sur} \struck{$A$,} \struck{telle} \struck{que} \struck{\ill{}} \struck{il} \struck{existe} \struck{\ill{}} \struck{$x \mapsto \check{x}$}\note{les deux dernières lignes de la page sont
+encadrées et barrées ; au-dessus de la dernière, un ajout biffé lui aussi,
+\ill{}}
+
+\page{2}
+
+D\ill{} de cogèbre \add{unitaire} sur $A$, \struck{\ill{}} donnée
+par\note{« unitaire », souligné, est ajouté au-dessus de la ligne avec un
+renvoi}
+\[
+\Delta_{\mathcal{U}} : \mathcal{U} \longrightarrow \mathcal{U} \otimes_A \mathcal{U},
+\qquad
+\eta_{\mathcal{U}} : \mathcal{U} \longrightarrow A
+\]
+augmentation (surjective)
+\struck{compatibles} \struck{avec} \struck{\ill{}} \struck{\ill{}} \struck{\ill{}} \struck{\ill{}} \struck{d'une} \struck{augmentation} \struck{$\delta_{\mathcal{U}} x$} \struck{${}= \Delta_{\mathcal{U}} x -{}$} \struck{\ill{}}\note{trois lignes
+encadrées et barrées d'une ligne ondulée}
+qui soit \emph{commutative}, \emph{associative}, d'une \emph{structure
+d'$A$-algèbre} sur $\mathcal{U}$ qui soit \emph{associative},
+\emph{unitaire} (non nécessairement commutative) et telle que
+$\mathcal{U} \otimes_A \mathcal{U} \to \mathcal{U}$ soit un hom de cogèbres
+unitaires [ou, ce qui revient au même, que $\Delta_{\mathcal{U}}$ est un hom
+d'algèbres associatives unitaires]. Enfin on suppose qu'il existe un hom
+\add{de cogèbres unitaires} $x \mapsto \check{x}$, ayant la propriété
+suivante :\note{« de cogèbres unitaires », souligné, est ajouté au-dessus de
+la ligne}
+\[
+x \in \mathcal{U}, \quad \Delta_{\mathcal{U}} x = \sum y_i \otimes z_i
+\;\Longrightarrow\;
+\sum y_i \check{z}_i = \sum \check{y}_i z_i = \eta_{\mathcal{U}}(x) . 1_{\mathcal{U}} .
+\]
+Alors $x \mapsto \check{x}$ est un antiautomorphisme involutif de la
+structure d'algèbre de $\mathcal{U}$, et \struck{\ill{}} il est défini de
+façon unique par les conditions ci-dessus.
+
+Soit maintenant $C$ une $A$-algèbre. On veut \uncertain{expliciter} ce que
+signifie que $C$ admet $B$ comme « groupe d'opérateurs à \struck{droite}
+gauche » dans la catégorie $\mathcal{C}$. Cela signifie ceci :
+
+\page{3}
+
+\uncertain{On se donne} un \emph{hom. d'algèbres unitaires}
+\[
+q_C : C \longrightarrow B \otimes_A C
+\]
+satisfaisant aux conditions suivantes :
+
+\emph{Associativité} (on a commutativité du diagramme
+
+\begin{tikzcd}
+B \otimes B \otimes C & B \otimes C \arrow[l, "\mathrm{id}_B \otimes q_C"'] \\
+B \otimes C \arrow[u, "p_B \otimes \mathrm{id}_C"] & C \arrow[l, "q_C"] \arrow[u, "q_C"']
+\end{tikzcd}
+
+\emph{Unité} (on a commutativité du
+
+\begin{tikzcd}
+A \otimes C = C & B \otimes C \arrow[l, "\varepsilon \otimes \mathrm{id}_C"'] \\
+ & C \arrow[ul, "\sim"] \arrow[u, "q_C"']
+\end{tikzcd}
+
+i.e. on a $q_C(y) \in 1 \otimes y + J \otimes C$ (où
+$J = \operatorname{Ker} \varepsilon$).
+
+Supposons encore que $B$ soit libre de rang fini, de sorte qu'on peut lui
+substituer $\mathcal{U}$. Alors la donnée d'un $A$-hom
+$q'_C : C \to B \otimes_A C'$ équivaut (pour tous les $A$-modules $C$, $C'$)
+à un $A$-hom $q_{\mathcal{U}} : \mathcal{U} \to \mathrm{Hom}_A(C, C')$ [car
+$B \otimes_A C' \simeq \mathrm{Hom}_A(\mathcal{U}, C')$].\note{sur l'indice
+de $q_{\mathcal{U}}$, des lettres surchargées} Si $C$, $C'$ sont des
+$A$-algèbres unitaires, alors dire que $q_C$ est un hom de $A$-algèbres
+unitaires signifie que l'on a les conditions
+
+\page{4}
+
+\[
+\left\lbrace
+\begin{array}{l}
+q_{\mathcal{U}}(y) . 1_C = \eta_{\mathcal{U}}(y) . 1_{C'} \\[4pt]
+x, y \in C,\ u \in \mathcal{U},\ \Delta_{\mathcal{U}} u = \sum v_i \otimes w_i
+\;\Longrightarrow\;
+p_{\mathcal{U}}(u)(xy) = \sum \bigl(p_{\mathcal{U}}(v_i) x\bigr)\bigl(p_{\mathcal{U}}(w_i) y\bigr)
+\end{array}
+\right.
+\]
+\note{$q_{\mathcal{U}}$ dans la première ligne, $p_{\mathcal{U}}$ dans la
+seconde, pour le même homomorphisme : tel sur la page}
+
+Si enfin $C = C'$, alors \struck{\ill{}} les \uncertain{conditions}
+d'associativité et d'unité signifient que \struck{$\mathcal{U}$ \ill{}}
+$\mathcal{U} \to \mathrm{Hom}_A(C, C)$ est un \emph{hom de $A$-algèbres
+unitaires}. Considérant alors $C$ comme un \emph{$\mathcal{U}$-module}
+\add{unitaire} (i.e. \ill{}), les deux conditions \uncertain{précédentes}
+s'écrivent ainsi :
+\[
+\left\lbrace
+\begin{array}{l}
+u . 1_C = \eta(u) . 1_C \\[4pt]
+x, y \in C,\ u \in \mathcal{U},\ \Delta_{\mathcal{U}} u = \sum v_i \otimes w_i
+\;\Longrightarrow\; u(xy) = \sum (v_i x)(w_i y)
+\end{array}
+\right.
+\]
+
+Nous voulons maintenant exprimer que $C$, considérée comme ayant un groupe
+d'opérateurs $B$ dans la catégorie $\mathcal{C}$ des $A$-algèbres comm. avec
+unité, est \struck{principal \ill{} \ill{}} \add{fibré} principal
+\add{homogène} \struck{de base}\note{« fibré » et « homogène » sont écrits
+au-dessus de la ligne, sur des mots biffés}
+\struck{(i.e.} \struck{\ill{}} \struck{est} \struck{une} \struck{$A$-algèbre} \struck{commutative).} \struck{Cela} \struck{signifie} \struck{donc} \struck{qu'il} \struck{existe} \struck{un} \struck{hom} \struck{de} \struck{$A$-algèbres} \struck{unitaires} \struck{$C \otimes_A C \leftarrow
+B$}\note{ces lignes sont encadrées et barrées de deux lignes ondulées ; le
+cadre descend jusqu'à la flèche $C \otimes_A C \leftarrow B$}
+
+\page{5}
+
+\struck{On} \struck{suppose} \struck{donc} \struck{\ill{}} \struck{\ill{}} \struck{\ill{}} \struck{$A$-algèbres} \struck{\ill{}} \struck{que} \struck{$f : \mathcal{D} \to C$} \struck{\ill{}} \struck{un} \struck{hom} \struck{de} \struck{$A$-algèbres} \struck{unitaires} \struck{$g_C : B \to C \otimes C$} \struck{\ill{}} \struck{\ill{}} \struck{le} \struck{diagramme} \struck{suivant} \struck{$\leftarrow B \otimes C \xleftarrow{q_C} C$} \struck{ayant} \struck{la} \struck{propriété} \struck{suivante} \struck{:}\note{le haut de la page est barré de lignes horizontales et de
+cinq longues diagonales ; lecture très incomplète}
+l'hom composé
+\[
+B \otimes C \xleftarrow{\ \mathrm{id}_B \otimes \Delta_C\ } B \otimes C \otimes C
+\xleftarrow{\ q_C \otimes \mathrm{id}_C\ } C \otimes C
+\]
+[i.e. l'hom $C \otimes C \xrightarrow{(q_C, p_2)} B \otimes C$] est un
+\emph{isomorphisme} (de $A$-algèbres). Il revient au même de dire qu'il
+\emph{existe} un \emph{hom de $A$-algèbres unitaires}
+$g_C : B \to C \otimes C$ tel que l'on ait commutativité des
+
+(*)
+
+\begin{tikzcd}
+C \otimes C & B \otimes C \arrow[l, "{(g_C, p_2)}"'] & C \arrow[l, "q_C"'] \arrow[ll, bend left=30, "p_1"]
+\end{tikzcd}
+
+(**)
+
+\begin{tikzcd}
+B \otimes C & C \otimes C \arrow[l, "{(q_C, p_2)}"'] & B \arrow[l, "g_C"'] \arrow[ll, bend left=30, "p_1"]
+\end{tikzcd}
+
+\note{dans (*), entre $C \otimes C$ et $B \otimes C$, un groupe biffé
+illisible ; au-dessus, $(g_C, p_2)$ récrit sur une première étiquette ; une
+boucle de crayon relie (**) au début de la ligne suivante}
+
+Nous \ill{} \uncertain{examinons} \ill{} \ill{} les conditions, il est
+\uncertain{bien} \uncertain{certain} que $C$ soit fibré principal
+\uncertain{hom.} sous $G$, \ill{} \struck{\ill{}} \ill{} l'objet unité $A$
+de $\mathcal{C}$. Supposons donc \ill{} un hom de $A$-algèbres
+\add{commutatives unitaires}
+\[
+h : \mathcal{D} \longrightarrow C
+\]
+rendant commutatif le diagramme
+
+\page{6}
+
+\begin{tikzcd}
+B \otimes C & C \arrow[l, "q_C"'] \\
+C \arrow[u, "\mathrm{pr}_2"] & \mathcal{D} \arrow[l, "h"] \arrow[u, "h"']
+\end{tikzcd}
+
+\struck{i.e. \ill{}}
+
+est-il vrai qu'on peut factoriser $h$ \uncertain{à} l'aide de
+$h' : \mathcal{D} \to A$ (une augmentation) par la formule
+\[
+h(x) = h'(x) . 1_C \qquad ??
+\]
+
+La commutativité du diagramme ci-dessus signifie simplement que $h$ prend
+ses valeurs dans la sous-algèbre $C'$ de $C$ \struck{formée des $x \in$}
+définie par
+\[
+x \in C' \iff q_C x = 1_B \otimes x
+\]
+\note{avant $q_C x$, un groupe biffé illisible}
+i.e. les \emph{éléments} \add{invariants} (\emph{primitifs}) de $C$ (rel.
+à $B$).\note{« invariants », souligné, est ajouté au-dessus de
+« primitifs », entouré} $C'$ est une sous-$A$-algèbre de $C$, \ill{} on
+voit \uncertain{qu'on a tout ce qu'il faut} (\ill{} si $C$ \ill{} un fibré
+principal).\note{lecture de cette ligne très incertaine}
+
+\emph{Le quotient de $C$ par le groupe d'opérateurs $B$ dans la catégorie
+$\mathcal{C}$ existe, et est donné par la sous-algèbre $C'$ de $C$ formée
+des éléments} \add{invariants} \struck{\ill{}} \emph{primitifs} de $C$
+(\uncertain{par.} à $B$).
+
+\page{7}
+
+Mais attention, ce résultat ne dit pas \uncertain{grand-chose} : si on se
+place dans la catégorie des \emph{Schémas} sur $\mathrm{Spec}(A)$, il
+\ill{} par l'\uncertain{existence} des quotients dans cette catégorie,
+\struck{\ill{}} si le quotient y existe, il peut être distinct de celui
+\ill{} de la définition. Supposons par ex. $A$ = corps alg. clos,
+$C$ = algèbre \ill{} \ill{} \uncertain{linéaire} $E$, $B$ = algèbre
+\ill{} d'un sous-groupe de Borel $G$. \uncertain{Alors} $E/G$ dans la
+catégorie des schémas existe bien et est une variété complète. Il en
+résulte que le quotient dans la catégorie des \uncertain{variétés affines}
+est \uncertain{réduit au point}.\note{un grand crochet en marge gauche
+embrasse ce paragraphe}
+
+Le cas \uncertain{qui nous intéresse}, \struck{\ill{}}
+
+\marginal{$\|$}
+[\emph{$C$ étant principal homogène}] \struck{les éléments} \emph{$C'$ est
+isomorphe à $A$} [\emph{par $\lambda \mapsto \lambda 1_C$}].\note{les deux
+lignes sont soulignées d'un trait ondulé et marquées d'un double trait
+vertical en marge}
+
+En effet, si $x$ est semi-primitif, alors le diagramme commutatif (*)
+donne
+\[
+x \otimes 1_C = 1_C \otimes x \quad\text{dans } C \otimes C
+\]
+
+\page{8}
+
+\emph{Supposons que} $\lambda \mapsto \lambda 1_C$ soit un isomorphisme de
+$A$ sur un facteur direct du $A$-module $C$ [pour ceci, il suffit, comme on
+voit facilement, que $C$ soit un $A$-module \struck{libre de type}
+\ill{} \uncertain{ayant une base contenant} $1_C$, \uncertain{par ex.} que
+$C$ soit un $A$-module libre de type fini]. Alors la condition précédente
+implique facilement $x = \lambda 1_C$, où $\lambda \in A$ est déterminé de
+façon unique. Dans ce cas, on a donc bien ce qu'on voulait.
+
+\emph{N.B.} En général, \struck{\ill{}} il ne sera pas vrai que le quotient
+de $C$ par $B$ (dans $\mathcal{C}$) soit $A$, si les conditions \ill{}
+\uncertain{pas remplies} : par exemple \uncertain{prenant} $C = B/JB$, où
+$J$ est un idéal de $A$, \struck{\ill{}} \struck{et définissant} en prenant
+la $q_C$ structure d'algèbre quotient, i.e. en définissant
+$q_C : C \to B \otimes C$ i.e.
+\[
+q_C : B/JB \longrightarrow (B \otimes B)/J.(B \otimes B)
+\]
+en réduisant $p_B$ mod $J$. Les axiomes restent vérifiés, cependant
+l'algèbre des primitifs de $C$ est $A/J$, et non $A$\ldots
+
+\page{9}
+
+Supposons maintenant que $C$ soit lui aussi un $A$-module libre (cela
+montre que la condition relative aux \uncertain{quasi}-primitifs est une
+conséquence de l'autre condition). Je dis que pour que \struck{$\varphi$}
+\[
+\text{(**)} \qquad \varphi : C \otimes_A C \longrightarrow \mathrm{Hom}_A(\mathcal{U}, C)
+\]
+\emph{soit un isomorphisme}, \emph{il faut et il suffit que l'hom
+analogue défini en $\varphi$}
+\[
+\psi : C \otimes \mathcal{U} \longrightarrow \mathrm{Hom}(C, C)
+\]
+\emph{par la condition}
+\[
+\boxed{\ \psi(x \otimes u) . y = x\, u(y)\ }
+\]
+\emph{soit un isomorphisme}.\marginal{?}\note{la première lettre de
+$C \otimes_A C$ est surchargée ; « (**) » est écrit à gauche de la ligne
+de $\psi$, sans qu'on voie auquel des deux homomorphismes il se rapporte}
+[Donc, si $B$ et $C$ sont libres de type fini, on a deux caractérisations
+\add{équivalentes} \struck{\ill{} \ill{} pour que $C$ soit} du fait que
+$C$ est un fibré principal homogène sous \uncertain{$C$}]\note{sic ; on
+attend $B$. « équivalentes » est écrit au-dessus du passage biffé}
+
+\struck{Supposons} \struck{en} \struck{effet} \struck{que} \struck{$\varphi$} \struck{soit} \struck{un} \struck{isomorphisme,} \struck{i.e.} \struck{\ill{}} \struck{\ill{}} \struck{:} \struck{$A' = C$,} \struck{donc} \struck{$C^{A'} \otimes_{A'} C^{A'}$} \struck{${}\to{}$} \struck{$\mathrm{Hom}_{A'}(\mathcal{U}^{A'}, C^{A'})$} \struck{\ill{}} \struck{$B^{A'}$} \struck{est} \struck{«} \struck{fibré} \struck{hom.} \struck{principal} \struck{sous} \struck{$B = \mathcal{U}'$} \struck{»} \struck{dans} \struck{la} \struck{catégorie} \struck{des} \struck{$A$-algèbres} \struck{\ill{}.} \struck{Faisant} \struck{le} \struck{produit} \struck{\ill{}} \struck{dans} \struck{la} \struck{catégorie} \struck{des} \struck{$A'$-algèbres} \struck{\ill{}} \struck{le} \struck{fibré} \struck{\ill{}} \struck{$A' = C$,} \struck{\ill{}} \struck{$C^{A'}$} \struck{${}= C \otimes_A A'$} \struck{sur} \struck{$B^{A'}$} \struck{${}= \mathcal{U}' \otimes_A A'$} \struck{${}= (\mathcal{U}^{A'})'$} \struck{est} \struck{isomorphe} \struck{:} \struck{[\uncertain{car}} \struck{on} \struck{a} \struck{pris} \struck{$A' = C$].}\note{toute la moitié inférieure de la page est barrée de
+longues diagonales ; lecture très incomplète}
+
+\page{10}
+
+Supposons \struck{à} nouveau que $B$ soit libre de type fini sur $A$,
+\struck{alors} et exprimons le fait que $C$ est un fibré principal
+\emph{homogène} à l'aide de $\mathcal{U}$, \ill{}. Cela doit donc
+exprimer d'abord que l'hom d'algèbres
+\[
+\varphi : C \otimes C \longrightarrow \mathrm{Hom}_A(\mathcal{U}, C)
+\]
+[où la structure d'algèbre du deuxième membre est définie par
+
+\begin{tikzcd}
+\mathcal{U} \arrow[r, "\Delta_{\mathcal{U}}"] \arrow[rrr, bend right=20, "v * w"'] & \mathcal{U} \otimes \mathcal{U} \arrow[r, "v \otimes w"] & C \otimes C \arrow[r, "\Delta_C"] & C
+\end{tikzcd}
+
+]
+qui est défini par
+\struck{$\varphi(1_C \otimes x) . (u) = \eta(u) x$}
+\struck{$\varphi(x \otimes 1_C)(u) = u . x$}
+\[
+\boxed{\ \varphi(x \otimes y) . u = u(x) . y\ }
+\]
+est un \emph{isomorphisme} de $C \otimes C$ sur
+$\mathrm{Hom}_A(\mathcal{U}, C)$.
+
+De plus, on veut que l'hom $\lambda \mapsto \lambda . 1_C$ soit un
+\emph{isomorphisme} de $A$ sur l'ens. des éléments semi-primitifs de $C$,
+i.e. tels que
+\[
+u . x = \eta(u) . x
+\]
+\note{les deux derniers alinéas sont embrassés par un grand crochet en
+marge gauche ; la formule est soulignée d'un trait ondulé}
+
+\page{11}
+
+Catégorie $\mathcal{C}$ avec unité : \ill{} $e$, et produits.
+
+$G$ groupe dans $\mathcal{C}$ \quad $p_G : G \times G \to G$
+
+$E$ $\mathcal{C}$-espace : $\mathcal{C}$-groupe $G$ opérant :
+\quad $q_E : G \times E \to E$
+
+On dit que $E$ est formellement \emph{hom. principal} si l'hom
+\[
+G \times E \xrightarrow{\ (q_E, p_2)\ } E \times E
+\]
+est un \emph{isomorphisme}.\marginal{$x = g(x, y)\, y$} Cela signifie
+aussi que l'on peut trouver un hom
+\[
+E \times E \xrightarrow{\ g_E\ } G ,
+\]
+tel que
+
+(i)
+
+\begin{tikzcd}
+E \times E \arrow[r, "{(g, p_2)}"] \arrow[rr, bend right=30, "p_1"'] & G \times E \arrow[r, "q_E"] & E
+\end{tikzcd}
+
+est commutatif
+
+(ii)
+
+\begin{tikzcd}
+G \times E \arrow[r, "{(q_E, p_2)}"] \arrow[rr, bend right=30, "p_1"'] & E \times E \arrow[r, "g_E"] & G
+\end{tikzcd}
+
+est commutatif
+
+Si $\mathcal{C}$ est la catégorie des $A$-algèbres (commutatives avec
+unité), alors $G$, $E$ correspondent à des $A$-algèbres \struck{\ill{}}
+$B$, $C$, et on a
+\[
+\text{(*)} \qquad
+\left\lbrace
+\begin{array}{l}
+p_B : B \longrightarrow B \otimes B \\
+q_C : C \longrightarrow B \otimes C
+\end{array}
+\right.
+\]
+et le fait que $E$ soit formellement \emph{un} fibré hom. principal
+signifie que
+\[
+\varphi : C \otimes C \xrightarrow{\ (q_C, p_2)\ } B \otimes C
+\]
+est un isomorphisme, i.e. qu'il existe
+\[
+g_C : B \longrightarrow C \otimes C
+\]
+
+\page{12}
+
+rendant commutatifs les diagrammes
+
+(i)
+
+\begin{tikzcd}
+C \arrow[r, "q_C"] \arrow[rr, bend right=30, "p_1"'] & B \otimes C \arrow[r, "{(g_C, p_2)}"] & C \otimes C
+\end{tikzcd}
+
+(ii)
+
+\begin{tikzcd}[column sep=large]
+B \arrow[r, "g_C"] \arrow[rr, bend right=30, "p_1"'] & C \otimes C \arrow[r, "{\varphi = (q_C, p_2)}"] & B \otimes C
+\end{tikzcd}
+
+D'autre part, \uncertain{on démontre} en définissant
+\[
+\psi : \mathrm{Hom}_A(B, C) \longrightarrow \mathrm{Hom}_A(C, C)
+\]
+en posant $\psi(v) = \Delta_C (v \otimes \mathrm{id}_C) q_C$ :
+
+\begin{tikzcd}
+C \arrow[r, "q_C"] \arrow[rrr, bend right=20, "\psi(v)"'] & B \otimes C \arrow[r, "v \otimes \mathrm{id}_C"] & C \otimes C \arrow[r, "\Delta_C"] & C
+\end{tikzcd}
+
+Je dis que \emph{si} $\varphi$ \emph{est un isomorphisme}, $\psi$
+\emph{en est un}. On va en effet construire, utilisant $g_C$, un hom
+\[
+\psi' : \mathrm{Hom}(C, C) \longrightarrow \mathrm{Hom}(B, C)
+\]
+qui sera inverse de $\psi$. On pose
+$\psi'(w) = \Delta_C (w \otimes \mathrm{id}_C) g_C$ :
+
+\begin{tikzcd}
+B \arrow[r, "g_C"] \arrow[rrr, bend right=20, "\psi'(w)"'] & C \otimes C \arrow[r, "w \otimes \mathrm{id}_C"] & C \otimes C \arrow[r, "\Delta_C"] & C
+\end{tikzcd}
+
+On doit prouver $\psi'(\psi(v)) = v$, $\psi \psi'(w) = w$. C'est facile :
+\struck{$\psi\psi'(w) = {}$} \struck{$\Delta_C\bigl[(\Delta_C (w \otimes \mathrm{id}) g_C)$} \struck{$\otimes \mathrm{id}_C\bigr] q_C$}
+
+\page{13}
+
+1°) \emph{$\psi \psi'(w) = w$}\note{devant « 1° », un signe griffonné}
+
+\begin{tikzcd}[column sep=small, row sep=small, nodes={font=\scriptsize}]
+C \arrow[d, "q_C"] & & C \arrow[d, "p_1"] \\
+B \otimes C \arrow[d, "g_C \otimes \mathrm{id}_C"] & & C \otimes C \arrow[d, "w \otimes \mathrm{id}_C"] \\
+C \otimes C \otimes C \arrow[d, "w \otimes \mathrm{id}_{C \otimes C}"] & & C \otimes C \arrow[d, "\Delta_C"] \\
+C \otimes C \otimes C \arrow[d, "\Delta_C \otimes \mathrm{id}_C"] & & C \\
+C \otimes C \arrow[d, "\Delta_C"] & & \\
+C & &
+\end{tikzcd}
+
+\note{colonne de gauche : la première, où les deux flèches de chaque étage
+sont écrites côte à côte ($g_C$ et $\mathrm{id}_C$, $w$ et
+$\mathrm{id}_{C \otimes C}$, $\Delta_C$ et $\mathrm{id}_C$), les facteurs
+concernés marqués d'accolades ; colonne de droite : la dernière des six.
+Entre elles, quatre colonnes intermédiaires, reliées par des accolades, où
+l'on échange l'ordre des étapes : $C \otimes C \otimes C$ par
+$\mathrm{id}_C$ et $\Delta_C$ vers $C \otimes C$ puis $\Delta_C$ ;
+$C \otimes C \otimes C$ par $w$ et $\Delta_C$ ; $C \otimes C \otimes C$ par
+$\mathrm{id}_C$, $\Delta_C$, puis $w$, $\mathrm{id}_C$ ; $C \to B \otimes C
+\xrightarrow{(g_C, p_2)} C \otimes C \to C$. Deux fins de colonne sont
+biffées de hachures}
+
+Sur la dernière colonne, on reconnaît aussitôt qu'on a un composé
+identique à $w$.
+
+2°) $\psi' \psi(v) = v$
+
+\begin{tikzcd}[column sep=small, row sep=small, nodes={font=\scriptsize}]
+B \arrow[d, "g_C"] & & B \arrow[d, "p_1"] \\
+C \otimes C \arrow[d, "q_C \otimes \mathrm{id}_C"] & & B \otimes C \arrow[d, "v \otimes \mathrm{id}_C"] \\
+B \otimes C \otimes C \arrow[d, "v \otimes \mathrm{id}_{C \otimes C}"] & & C \otimes C \arrow[d, "\Delta_C"] \\
+C \otimes C \otimes C \arrow[d, "\Delta_C \otimes \mathrm{id}_C"] & & C \\
+C \otimes C \arrow[d, "\Delta_C"] & & \\
+C & &
+\end{tikzcd}
+
+\note{même disposition : la première et la dernière des six colonnes ; les
+intermédiaires passent par $C \otimes C \otimes C \to C \otimes C \to C$,
+$B \otimes C \otimes C \xrightarrow{v,\ \Delta_C} B \otimes C$ (sic),
+$B \otimes C \otimes C \xrightarrow{\mathrm{id}_B,\ \Delta_C} B \otimes C
+\xrightarrow{v,\ \mathrm{id}_C} B \otimes C$ (sic), et
+$C \otimes C \xrightarrow{(q_C, p_2)} B \otimes C$ ; les « $B$ » de ces
+colonnes intermédiaires, là où l'on attend $C$, sont tels sur la page}
+
+Sur la dernière colonne, on voit aussitôt que le composé est identique à
+$v$.
+
+\page{14}
+
+Réciproquement, supposons $\psi$ \emph{un isomorphisme}, \emph{montrons
+qu'alors} $\varphi$ \emph{est un isomorphisme}, du moins si on admet que
+$C$ admet une base finie sur $A$. Soit en effet $\psi'$ l'isomorphisme
+inverse de $\psi$
+\[
+\psi' : \mathrm{Hom}_A(C, C) \longrightarrow \mathrm{Hom}(B, C)
+\]
+il s'identifie à un hom
+\struck{\ill{}}
+\[
+\mathrm{Hom}(C, C) \otimes B \longrightarrow C
+\]
+i.e. à un hom
+\[
+\psi'_1 : B \longrightarrow \mathrm{Hom}(\mathrm{Hom}(C, C), C)
+\]
+On veut en tirer un hom $B \to C \otimes C$ en utilisant un hom naturel
+\[
+\rho : \mathrm{Hom}(\mathrm{Hom}(C, C), C) \longrightarrow C \otimes C
+\]
+Pour construire ce dernier, on note que le premier est isomorphe :
+\[
+(C' \otimes C)' \otimes C = C \otimes C' \otimes C
+\]
+\note{à la suite, un groupe biffé : \struck{\ill{} $\mathrm{Hom}(C, C)$}}
+\struck{[En} \struck{général,} \struck{on} \struck{a} \struck{\ill{}} \struck{$P \otimes \mathrm{Hom}(Q, R)$} \struck{${}\to{}$} \struck{$\mathrm{Hom}(\mathrm{Hom}(P, Q), R)$} \struck{i.e.} \struck{$P \otimes \mathrm{Hom}(Q, R)$} \struck{${}\otimes \mathrm{Hom}(P, Q)$} \struck{${}\to R$,} \struck{défini} \struck{par} \struck{$(p, v, u)$} \struck{${}\mapsto (v \circ u)(p)$]},\note{ce crochet est
+barré d'un trait en zigzag} or l'élément unité de
+\uncertain{$C$} définit un $A$-hom naturel
+\[
+\varepsilon : C' \longrightarrow A
+\]
+d'où un hom $\rho = \mathrm{id}_C \otimes \varepsilon \otimes \mathrm{id}_C$.
+
+\page{15}
+
+Il faut prouver alors que, posant
+\[
+g_C = \rho \circ \psi'_1 : B \longrightarrow C \otimes C
+\]
+l'hom $g_C$ satisfait les relations (i) et (ii).\marginal{???}
+
+Pour ceci, ----\note{le reste de la page est blanc}
+
+\page{16}
+
+Considérons l'hyperalgèbre
+\[
+\mathcal{U} = A[X] / X^p A[X]
+\]
+sur l'anneau $A$ \add{de car. $p$} \add{avec} donnée par
+\[
+\boxed{\ \Delta X = X \otimes 1 + 1 \otimes X\ }
+\]
+[cela définit d'abord $A[X] \to A[X] \otimes A[X]$, mais
+$\Delta X^p = X^p \otimes 1 + 1 \otimes X^p$ est \uncertain{multiple} dans
+l'idéal $A[X] \otimes X^p A[X] + X^p A[X] \otimes A[X]$], l'augmentation
+étant définie par \struck{\ill{}} $\boxed{\varepsilon(X) = 0}$, et
+l'\,$\vee$ par $\boxed{\check{X} = -X}$.\note{« de car. $p$ » et « avec »
+sont ajoutés au-dessus de la ligne, le premier avec un renvoi}
+
+Cette hyperalgèbre est \uncertain{isomorphe} à sa duale, \struck{à
+l'aide} on la regarde comme \struck{\ill{} des opérateurs} duale d'un
+groupe dans la catégorie des $A$-algèbres commutatives.
+
+Soit $C$ une $A$-algèbre commutative. Se faire opérer l'hyperalgèbre
+$\mathcal{U}$ sur $C$ revient à définir l'image $D$ de $X$, i.e. à se
+donner un opérateur $D$ $A$-linéaire de $C$. De plus
+\begin{itemize}
+  \item[(i)] $D^p = 0$ (exprime que $D$ définit une représentation
+  d'$A$-algèbre de $A[X]/X^p A[X]$ dans $L_A(C, C)$),
+  \item[(ii)] $D(xy) = x Dy + y Dx$ (exprime que cette représentation est
+  compatible avec $\Delta$)
+\end{itemize}
+donc \ill{} \uncertain{trouvé} : la donnée d'une \emph{$A$-dérivation de
+puissance $p$-ième nulle}.
+
+On veut exprimer maintenant que $C$ est un $B$-espace
+\emph{principal homogène} dans la catégorie des $A$-algèbres commutatives.
+On suppose d'abord \struck{que \ill{}} que $C$ \struck{\ill{}} \add{est
+libre} un $A$-module libre (ce qui semble d'ailleurs une\note{la lettre
+$B$ est surchargée et porte un accent ou un prime}
+
+\page{17}
+
+conséquence de notre hypothèse), et \struck{\ill{}} rang égal nécessairement
+$p$. Ceci dit il faut exprimer que les
+\[
+D^i \quad (0 \leq i \leq p-1) \quad \text{forment une \emph{base} du $C$-module } \mathrm{Hom}_A(C, C)
+\]
+[où on pose $(\lambda u)(y) = \lambda(u(y))$].
+
+\struck{Soit \ill{}} Supposons par ex. que $C$ admette une $p$-base
+\add{sur $A$} (réduite à un élément $u$), donc que
+\[
+C \simeq A[u]/(u^p - a), \qquad \text{où } a \in A .
+\]
+\struck{Posons} \struck{$D u$} Alors une $A$-dérivation de $C$ est connue
+quand on connaît sa valeur sur $u$, qui peut être choisie arbitrairement.
+Définissons alors la $A$-dérivation $D$ dans $C$ par
+\[
+Du = 1
+\]
+d'où
+\[
+Du^n = n u^{n-1} .
+\]
+On a donc $D^p = 0$, donc $C$ est un $\mathcal{U}$-module. De plus,
+\struck{la matrice des} identifions, grâce à la base
+$(u^i)_{0 \leq i \leq p-1}$, $\mathrm{Hom}(C, C)$ à $C^p$, par
+$v \mapsto (v(u^i))_{0 \leq i \leq p-1}$ [c'est un isom. de $C$-modules].
+\struck{Alors} La matrice des opérations des $D^i$
+($0 \leq i \leq p-1$) est
+\[
+\begin{pmatrix}
+1 & u & u^2 & u^3 & \cdots & u^{p-1} \\
+0 & 1 & 2u & 3u^2 & \cdots & (p-1) u^{p-2} \\
+0 & 0 & 2.1 & 3.2.u & \cdots & (p-1)(p-2) u^{p-3} \\
+0 & 0 & 0 & 3.2.1 & \cdots & (p-1)(p-2)(p-3) u^{p-4} \\
+\vdots & & & & \ddots & \vdots \\
+0 & 0 & 0 & 0 & \cdots & (p-1) \cdots 1
+\end{pmatrix}
+\]
+\note{la dernière colonne est séparée des autres par un double trait
+vertical ; la ligne des points de suspension est notre}
+
+\page{18}
+
+Son déterminant est égal à
+\[
+0!\, 1!\, 2! \cdots (p-1)!
+\]
+qui provient donc d'un élément non nul de $\mathbb{Z}/p\mathbb{Z}$, donc
+est inversible dans $C$, i.e. les $D^i$ ($0 \leq i \leq p-1$) forment bien
+une base de $\mathrm{Hom}_A(C, C)$ sur $C$. \struck{Donc}
+
+\emph{Proposition}. Soit $C$ une $A$-algèbre ayant une $p$-base réduite à
+un élément. Alors $C$ est un espace homogène fibré principal sous
+$\mathcal{U} = A[X]/X^p A[X]$ (de la façon explicitée plus
+haut).\note{un trait vertical en marge gauche embrasse l'énoncé ; sous
+lui, un double trait ondulé}
+
+\emph{Questions}. 1) Soit $C$ comme plus haut. Déterminer les façons
+possibles de \struck{\ill{} \ill{}} \add{$C$} \uncertain{définir} la
+$C$-hyperalgèbre \struck{Hom} formée $\mathrm{Hom}_A(C, C)$ à partir d'une
+sous-$A$-hyperalgèbre $\mathcal{U}$ (libre de rang $p$ sur $A$).
+Déterminer les $\mathcal{U}$ \struck{pour lesquels} qui sont isomorphes à
+l'algèbre \uncertain{enveloppante} \add{\ill{} $A$, \ill{} \ill{}}
+\ill{} d'une $p$-algèbre de Lie \add{\uncertain{telle}} (libre de rang 1,
+d'une) $p$-algèbre pour \uncertain{une} puissance $p$-ième
+nulle.\note{les ajouts interlinéaires de ces deux dernières lignes sont
+serrés et en partie illisibles ; l'ordre de lecture est incertain}
+
+\page{19}
+
+2) Déterminons les classes \uncertain{à} isomorphismes près d'espaces
+\struck{\ill{}} principaux homogènes sous $B$.\note{sous la ligne, un
+double trait de séparation}
+
+Soit $C$ une $A$-algèbre \add{libre de rang $p$}, munie d'une
+$A$-dérivation $D$ telle que $D^p = 0$, et que les $D^i$
+($0 \leq i \leq p-1$) forment une \emph{base} de
+$\mathrm{Hom}_A(C, C)$ sur $C$. Alors \emph{l'ensemble des éléments de
+$C$ annulés par $D$ est $A$}. En effet, tout sous-$A$-module $M$ de $C$
+qui est \add{libre de rang $m$ et} \emph{facteur direct} dans $C$,
+s'identifie à l'ensemble des zéros de \add{$(M^\circ)^\circ$} l'ens.
+$M^\circ$ des $v \in \mathrm{Hom}(C, C)$ qui s'annulent sur $M$
+(évident), et $M^\circ$ est un sous-$C$-module libre de rang $p - m$ dans
+$\mathrm{Hom}(C, C)$, \struck{\ill{}} qui est facteur direct \ill{} des
+sous-$C$-modules ; \ill{} \ill{} \emph{si} \ill{} \ill{} $u_i$ dans
+$M^\circ$ \add{forment la base d'un sous-module $L$ de
+$\mathrm{Hom}(C, C)$} \struck{libre de \ill{} \ill{}} qui \ill{} facteurs
+directs, alors nécessairement $L = M^\circ$, d'où $M = L^\circ$, i.e.
+$M$ est l'ens. des éléments de $C$ annulés par les $u_i$. \ill{}
+\uncertain{applique} ceci\note{en marge gauche, deux notes tournées,
+reliées au texte par une accolade : « \ill{} \ill{} sous-$A$-modules
+\ill{} $A$ : $C$ » et, plus bas, « Lemme \ill{} » ; lecture très
+incertaine}
+
+\page{20}
+
+: $M = A$, et on a $u_i = D^i$ ($1 \leq i \leq p-1$) \ill{}, etc ----
+
+\struck{S'il existe des} \struck{Corollaire} \emph{Il existe dans $C$ un
+élément} \add{$u$} \struck{\ill{}} \emph{tel que $Du = 1$, et $u$ est
+unique à addition près d'un élément de $A$.}\note{un trait vertical en
+marge gauche embrasse l'énoncé}
+
+L'unicité résulte du fait que \struck{\ill{} \ill{} \ill{}}
+$D(u - u') = 0$ \struck{\ill{}} \uncertain{implique} $u - u' \in A$.
+
+Montrons enfin que l'on peut trouver $u$ avec $Du = 1$.
+\struck{En effet, la question étant locale, on} \ill{}
+$A$ local, l'image de $D$ est donc un sous-$A$-module de $C$,
+\uncertain{isomorphe} à $C / \operatorname{Ker} D \simeq C/A$, donc
+\emph{libre} de rang $p - 1$. Je dis qu'il contient $A$, i.e. que
+$D(C)^\circ$ \uncertain{contenu} dans $A^\circ$, i.e. que si
+$v = \sum_{0 \leq i \leq p-1} \lambda_i D^i$ est nul sur $D(C)$, alors
+$\lambda_0 = 0$. Or l'hypothèse sur $v$ signifie que $vD = 0$, i.e.
+$\lambda_0 = \lambda_1 = \cdots = \lambda_{p-2} = 0$, OK.\note{tout ce
+passage, depuis « $A$ local », est entouré d'un cadre et traversé de deux
+longues obliques ; il n'est pas clair qu'il soit annulé}
+
+\uncertain{Si} $x \in C$, on a $x^p \in A$ \uncertain{si} $x \in C$ car
+$Dx^p = 0$.
+
+\emph{Si} $u$ est tel que $Du = 1$, alors les $u^i$
+($0 \leq i \leq p-1$) \emph{forment une base} de $C$ sur $A$.
+\struck{\ill{} \ill{} \ill{} est locale, \ill{}}
+
+\marginal{En effet, il existe \add{tel} un $A$-endomorphisme $\Theta$ de
+$C$ tel que $\Theta(1) = 0$ et $\Theta(u) = 1$ (\ill{} $C$ \ill{}). On a
+$\Theta = \sum \lambda_i D^i = \ill{}$ \ill{} $Du = 1$, \ill{}
+$u = \Theta \ill{}$, $1 \leq i \leq p-1$}\note{note écrite dans la marge
+de gauche, tournée d'un quart de tour ; elle se rapporte à la preuve de
+l'existence de $u$ ; lecture très incomplète. La suite, « $A$ est local.
+Montrons d'abord que les $u^i$ \ldots\ sont libres sur $A$ », ouvre la
+page 21 (lot 2)}
+
+\end{document}
