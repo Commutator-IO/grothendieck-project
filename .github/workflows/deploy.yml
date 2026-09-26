@@ -47,12 +47,17 @@ jobs:
       # .tex the single source of record — a committed reading view would drift
       # from its source the first time someone corrected a word in a hurry.
       #
+      # A file the renderer refuses (a construct outside the subset) fails the
+      # step. It used to print a warning and exit 0, so a refused batch simply
+      # vanished from the site with a green build.
       - name: Render transcripts
         run: npm run render
 
       # The TEI export is derived from the same .tex, for the same reason: a
-      # committed XML would drift from its source. It needs nothing beyond
-      # Node; xmllint, when the runner has it, checks well-formedness.
+      # committed XML would drift from its source. Like the renderer, it fails
+      # on a construct it refuses — an unknown environment, or a control
+      # sequence it would otherwise leave as text. xmllint, when the runner has
+      # it, checks well-formedness.
       - name: Export TEI
         run: npm run tei
 
@@ -66,6 +71,14 @@ jobs:
       # like them, so built here after them.
       - name: Gallery of diagrams
         run: node scripts/diagrams.mjs
+
+      # The two reading views must say the same thing: page by page, the text
+      # rendered from the .tex and the text rendered from the TEI are compared,
+      # and every formula of both is typeset with KaTeX, throwOnError. A
+      # difference fails the deploy, since it means the export lost or added
+      # something a reader sees.
+      - name: Check the TEI view against the .tex view
+        run: npm run check-tei
 
       # The download PDFs are *built*, not stored.
       #

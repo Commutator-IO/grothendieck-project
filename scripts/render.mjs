@@ -1313,6 +1313,7 @@ async function main() {
   if (only.length) folders = folders.filter((f) => only.includes(f));
 
   let n = 0;
+  const refused = [];
   for (const folder of folders) {
     const files = (await readdir(resolve(SOURCE, folder))).filter((f) => f.endsWith('.tex'));
     if (!files.length) continue;
@@ -1329,7 +1330,8 @@ async function main() {
       // drifting apart unnoticed.
       const m = /^(?:batch-(\d+)|(.+?))\.(fr|modern)\.tex$/.exec(file);
       if (!m || (m[2] !== undefined && m[2] !== folder)) {
-        process.stderr.write(`  ⚠ ${folder}/${file}: name outside the convention, skipped\n`);
+        refused.push(`${folder}/${file}`);
+        process.stderr.write(`  ✗ ${folder}/${file}: name outside the convention, skipped\n`);
         continue;
       }
       const tex = await readFile(resolve(SOURCE, folder, file), 'utf8');
@@ -1353,12 +1355,21 @@ async function main() {
         );
         n += 1;
       } catch (e) {
-        process.stderr.write(`  ⚠ ${folder}/${file}: ${e.message}\n`);
+        refused.push(`${folder}/${file}`);
+        process.stderr.write(`  ✗ ${folder}/${file}: ${e.message}\n`);
       }
     }
   }
 
   process.stdout.write(`${n} reading views → public/transcripts/\n`);
+  // A refused file used to be a warning on a green run: the batch simply had
+  // no reading view, and the deploy published the site without it. The
+  // refusal is the renderer saying the transcription left the subset, and
+  // that is fixed in the .tex, so the run fails and says where.
+  if (refused.length) {
+    process.stderr.write(`${refused.length} file(s) refused: ${refused.join(', ')}\n`);
+    process.exit(1);
+  }
 }
 
 // Run only when invoked, not when scripts/tei-view.mjs imports the helpers.

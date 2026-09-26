@@ -35,12 +35,14 @@
  * not try to encode it, and an apparatus mark *inside* a formula (an illegible
  * exponent) stays inside the TeX, where KaTeX and the PDF both read it.
  *
- * Same discipline as scripts/render.mjs: the subset is the documented one, an
- * unknown environment raises, and an unknown inline macro is reported rather
- * than silently flattened. Output goes to public/transcripts/, derived and
- * unversioned like the HTML and the PDF. Every file is checked well-formed
- * with xmllint where it exists; validation against tei_all.rng is a separate
- * step (see the README) because the schema is a megabyte nobody wants vendored.
+ * Same discipline as scripts/render.mjs: the subset is the documented one,
+ * and anything outside it is refused: an unknown environment, or a control
+ * sequence that would stand in the TEI as literal text. A refused file is
+ * reported and the run exits non-zero, so the deploy stops. Output goes to
+ * public/transcripts/, derived and unversioned like the HTML and the PDF.
+ * Every file is checked well-formed with xmllint where it exists; validation
+ * against tei_all.rng is a separate step (see the README) because the schema
+ * is a megabyte nobody wants vendored.
  */
 
 import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
@@ -147,15 +149,18 @@ const BRACED = [
   ['struck', (a) => `<del>${a}</del>`],
   ['note', (a) => `<note type="editorial" resp="#pass">${a}</note>`],
   ['marginal', (a) => `<note type="authorial" place="margin">${a}</note>`],
-  ['keywords', (a) => `<seg type="keywords">${a}</seg>`],
   ['emph', (a) => `<hi rend="italic">${a}</hi>`],
   ['textit', (a) => `<hi rend="italic">${a}</hi>`],
   ['textbf', (a) => `<hi rend="bold">${a}</hi>`],
   ['texttt', (a) => `<hi rend="monospace">${a}</hi>`],
   ['textsuperscript', (a) => `<hi rend="sup">${a}</hi>`],
-  // He underlines a word to stress it; in prose the renderer leaves the macro
-  // alone and the PDF draws the line. Here it is a rendition, not apparatus.
-  ['underline', (a) => `<hi rend="underline">${a}</hi>`],
+  // Not \keywords, \underline or the resume environment. The first and last
+  // belong to the modernised readings, which this script does not export; an
+  // \underline in prose is a slip (it is legitimate only inside mathematics,
+  // under an apparatus macro, where it stays in the TeX). Mapping them made
+  // the export able to emit <seg>, <div type="summary"> and <hi
+  // rend="underline">, which no batch does and tei/grothendieck.odd does not
+  // declare; unmapped, each is refused if it ever turns up.
   ['selectlanguage', () => ''],
 ];
 
@@ -228,8 +233,8 @@ function makeInline(unknown) {
     let out = expandBraced(escapeXml(text));
     for (const [re, to] of INLINE) out = out.replace(re, to);
     // Whatever control sequence is still standing was not in the subset.
-    // Reported once per file rather than thrown: the renderer tolerates the
-    // same residue, and the two derived views should disagree about nothing.
+    // Collected for the whole file, so that main() can name every one of them
+    // in a single refusal rather than stop at the first.
     for (const m of out.matchAll(/\\([a-zA-Z]+)/g)) unknown.add(m[1]);
     return out.trim();
   };
@@ -251,7 +256,7 @@ function liftEnvs(text) {
   const kept = [];
   let out = '';
   let i = 0;
-  const openRe = /\\begin\{(itemize|enumerate|quote|resume)\}/g;
+  const openRe = /\\begin\{(itemize|enumerate|quote)\}/g;
   for (;;) {
     openRe.lastIndex = i;
     const m = openRe.exec(text);
@@ -261,7 +266,7 @@ function liftEnvs(text) {
     }
     out += text.slice(i, m.index);
     // Scan forward for the matching \end, counting every block environment.
-    const tok = /\\(begin|end)\{(itemize|enumerate|quote|resume)\}/g;
+    const tok = /\\(begin|end)\{(itemize|enumerate|quote)\}/g;
     tok.lastIndex = m.index + m[0].length;
     let depth = 1;
     let end = -1;
@@ -286,7 +291,7 @@ function splitItems(body) {
   const items = [];
   let depth = 0;
   let cur = null;
-  const tok = /\\(begin|end)\{(itemize|enumerate|quote|resume)\}|\\item(?![a-zA-Z])/g;
+  const tok = /\\(begin|end)\{(itemize|enumerate|quote)\}|\\item(?![a-zA-Z])/g;
   let t;
   while ((t = tok.exec(body))) {
     if (t[1] === 'begin') depth++;
@@ -353,8 +358,6 @@ function convert(tex) {
         .join('\n');
       return `<list rend="${list[1]}">\n${items}\n</list>`;
     }
-    const resume = /^\\begin\{resume\}([\s\S]*)\\end\{resume\}$/.exec(block);
-    if (resume) return `<div type="summary">\n${renderBlocks(resume[1], false).join('\n')}\n</div>`;
     const quote = /^\\begin\{quote\}([\s\S]*)\\end\{quote\}$/.exec(block);
     if (quote) return `<quote>${renderItem(quote[1])}</quote>`;
     throw new Error(`unexpected environment block: ${block.slice(0, 40)}`);
@@ -628,6 +631,7 @@ async function main() {
 
   let n = 0;
   let checked = 0;
+  const refused = [];
   for (const folder of folders) {
     // Transcriptions only. The modernised reading is another edition with
     // another apparatus (footnotes), and an export of it would be a different
@@ -646,15 +650,19 @@ async function main() {
         await writeFile(target, xml, 'utf8');
         const ok = await checkWellFormed(target);
         if (ok) checked++;
+        // A control sequence outside the subset would stand in the TEI as
+        // literal text. That is a refusal like any other: the file is written,
+        // so the residue can be looked at, but the run fails.
         if (unknown.size) {
-          process.stderr.write(
-            `  ⚠ ${folder}/${file}: control sequences left as text: ` +
-              [...unknown].map((u) => `\\${u}`).join(' ') + '\n',
+          throw new Error(
+            'control sequences outside the subset, left as text: ' +
+              [...unknown].map((u) => `\\${u}`).join(' '),
           );
         }
         n += 1;
       } catch (e) {
-        process.stderr.write(`  ⚠ ${folder}/${file}: ${e.message}\n`);
+        refused.push(`${folder}/${file}`);
+        process.stderr.write(`  ✗ ${folder}/${file}: ${e.message}\n`);
       }
     }
   }
@@ -664,6 +672,12 @@ async function main() {
       (checked ? ` (${checked} checked well-formed by xmllint)` : ' (xmllint not found; not checked)') +
       '\n',
   );
+  // Refused files used to be a warning on a green run, and a batch that
+  // failed to convert simply had no TEI. Now the run fails, and says which.
+  if (refused.length) {
+    process.stderr.write(`${refused.length} file(s) refused: ${refused.join(', ')}\n`);
+    process.exit(1);
+  }
 }
 
 main().catch((e) => {
