@@ -264,13 +264,25 @@ f(v)\bigr)$ existe, $\mathrm{Ker}(u,v)$ existe et $f$ y commute.
 La restriction portée en marge — il suffit de considérer les doubles flèches
 $(u,v)$ dont l'image par $f$ a un noyau — est la condition que le manuscrit
 appelle \emph{condition C}, et c'est elle qui fait la force de l'énoncé : on ne
-demande rien de $A$ en général, seulement de ce que $f$ voit déjà. C'est le
-théorème de comonadicité de Beck, sous sa forme précise.\footnote{La page porte
+demande rien de $A$ en général, seulement de ce que $f$ voit déjà. La
+suffisance de b), comme a), est le théorème de comonadicité de Beck ; la
+nécessité, telle que la page l'écrit, est fausse.\footnote{Correction du 27
+septembre 2026. Soit $B$ la catégorie des couples d'ensembles $(X, Y)$ et $A$ la
+sous-catégorie pleine des couples où $Y \neq \varnothing$ entraîne
+$X \neq \varnothing$ ; l'inclusion $f$ a un adjoint à droite, elle est donc
+comonadique, et conservative. Les deux flèches $(\ast, \ast) \rightrightarrows
+(\{0, 1\}, \ast)$ qui envoient le point sur $0$ et sur $1$ ont pour noyau
+$(\varnothing, \ast)$ dans $B$, et $(\varnothing, \varnothing)$ dans $A$ : $f$ ne
+commute pas à ce noyau. La condition nécessaire et suffisante est celle de Beck,
+qui ne porte que sur les doubles flèches dont l'image a un noyau \emph{scindé}.
+Vérifié en Lean, \texttt{lean/Grothendieck/Folder19.lean}.} C'est le
+théorème de comonadicité de Beck, à la condition près.\footnote{La page porte
 un nom propre entre parenthèses après « Théorème 1.12 », que la transcription
 lit « Beck » sans certitude. La forme monadique du théorème est celle de la
 thèse de Jon Beck (1967) ; la forme comonadique, qui est celle-ci, s'en déduit
-par dualité. Les doubles flèches dont $f$ voit le noyau sont, dans le
-vocabulaire d'aujourd'hui, les paires $f$-scindées.}
+par dualité. Les doubles flèches dont $f$ voit le noyau ne sont pas les paires
+$f$-scindées d'aujourd'hui : la condition C porte sur toutes celles dont l'image
+a un noyau, et c'est pourquoi elle est suffisante sans être nécessaire.}
 
 \pagerange{4}{6}
 \subsection*{La réciproque : reconstruire l'adjonction}
@@ -315,7 +327,7 @@ par le procédé du paragraphe précédent.
 \textbf{Conclusion.} Pour $B$ fixée, se donner une catégorie $A$ et une
 adjonction $f \dashv g$ entre $A$ et $B$, avec $f$ conservatif et satisfaisant
 à la condition C, revient essentiellement à se donner une comonade
-$(\varphi, \varepsilon, \delta)$ sur $B$.\footnote{Le manuscrit écrit ici « la
+$(\varphi, \varepsilon, \delta)$ sur $B$.\footnote{Dans un sens seulement : une telle adjonction est comonadique, mais toute comonade ne provient pas ainsi d'une adjonction satisfaisant à la condition C --- l'exemple donné plus haut est celui d'une comonade idempotente. (Correction du 27 septembre 2026.)}\footnote{Le manuscrit écrit ici « la
 donnée d'un foncteur $g$ dans $B$, avec les données de Godement $\alpha$,
 $\lambda$ » ; c'est $\varphi$, endofoncteur de $B$, qu'il faut lire, et non
 l'adjoint $g$, qui n'a plus de sens une fois $A$ oubliée.}
