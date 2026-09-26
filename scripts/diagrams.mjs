@@ -64,7 +64,7 @@ function size(raw) {
 
 const DG_STYLE = `
   .dg { margin: 0 0 1.4rem; padding: .9rem 1rem 1rem; border: 1px solid var(--rule); border-radius: 10px;
-        break-inside: avoid; background: #fff; }
+        break-inside: avoid; }
   .dg figcaption { display: flex; justify-content: space-between; font-size: 12px; color: var(--ink3);
                    margin-bottom: .5rem; }
   .dg figcaption a { color: var(--ink2); text-decoration: none; font-weight: 600; }
@@ -103,7 +103,7 @@ const transcriptHref = (d) =>
   `/transcripts/${d.folder}/batch-${String(d.batch).padStart(2, '0')}.fr.html${d.page ? `#page-${encodeURIComponent(d.page)}` : ''}`;
 /** One slide: the caption names the folder only on the pages that mix folders. */
 const figureOf = (d, i, n, withFolder) =>
-  `<figure class="dg" id="d${i + 1}">` +
+  `<figure class="dg" id="slide-${i + 1}">` +
   `<figcaption><span>${withFolder ? `n° ${d.folder} · ` : ''}batch ${d.batch}${d.page ? ` · p. ${escapeHtml(d.page)}` : ''} — ` +
   // The transcription at its page, and the batch beside Montpellier's facsimile.
   `<a href="${transcriptHref(d)}" target="_blank" rel="noopener">the transcription${d.page ? `, p. ${escapeHtml(d.page)}` : ''} ↗</a> · ` +

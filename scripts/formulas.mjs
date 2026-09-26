@@ -51,7 +51,7 @@ const size = (tex) => (tex.match(/\\[a-zA-Z]+|[A-Za-z0-9+\-=<>|/*!()[\]]/g) ?? [
 const display = (env, body, raw) => (env ? raw : body);
 
 const STYLE = `
-  .dg { margin: 0 0 1.4rem; padding: .9rem 1rem 1rem; border: 1px solid var(--rule); border-radius: 10px; background: #fff; }
+  .dg { margin: 0 0 1.4rem; padding: .9rem 1rem 1rem; border: 1px solid var(--rule); border-radius: 10px; }
   .dg figcaption { display: flex; justify-content: space-between; gap: 1rem; font-size: 12px; color: var(--ink3); margin-bottom: .5rem; }
   .dg figcaption a { color: var(--ink2); text-decoration: none; font-weight: 600; }
   .dg figcaption a:hover { text-decoration: underline; }
@@ -65,13 +65,15 @@ ${CAROUSEL_STYLE}`;
 const transcriptHref = (d) =>
   `/transcripts/${d.folder}/batch-${String(d.batch).padStart(2, '0')}.fr.html${d.page ? `#page-${encodeURIComponent(d.page)}` : ''}`;
 const figureOf = (d, i, n, withFolder) =>
-  `<figure class="dg" id="d${i + 1}">` +
+  `<figure class="dg" id="slide-${i + 1}">` +
   `<figcaption><span>${withFolder ? `n° ${d.folder} · ` : ''}batch ${d.batch}${d.page ? ` · p. ${escapeHtml(d.page)}` : ''} — ` +
   // The transcription at its page, and the batch beside Montpellier's facsimile.
   `<a href="${transcriptHref(d)}" target="_blank" rel="noopener">the transcription${d.page ? `, p. ${escapeHtml(d.page)}` : ''} ↗</a> · ` +
   `<a href="/#${d.folder}/${d.batch}${d.page ? `/p${encodeURIComponent(d.page)}` : ''}" target="_top">beside the facsimile</a></span>` +
   `<span class="dg-n">${i + 1} / ${n} · ${d.symbols} distinct symbols, ${d.size} written</span></figcaption>` +
-  `<div class="ltx_p">\\[${escapeHtml(display(d.env, d.body, d.raw))}\\]</div>` +
+  // Wrapped as the reading views wrap a display, whose styles KaTeX's
+  // stretchy glyphs rely on.
+  `<div class="ltx_p"><span class="ltx_Math ltx_display">\\[${escapeHtml(display(d.env, d.body, d.raw))}\\]</span></div>` +
   `<details class="tr-src"><summary>LaTeX source</summary><pre>${escapeHtml(d.raw)}</pre></details></figure>`;
 
 const page = (meta, name, items, withFolder) =>
