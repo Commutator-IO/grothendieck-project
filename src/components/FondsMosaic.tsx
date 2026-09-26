@@ -10,7 +10,7 @@ type FolderState = 'here' | 'community' | 'untouched';
  * Our own status first, then everybody else's. There is no « being read now »
  * state: a pass in flight shows as untouched until its batch lands.
  */
-const folderState = (id: string, transcribedHere: boolean, hasEdition: boolean): FolderState =>
+const folderState = (transcribedHere: boolean, hasEdition: boolean): FolderState =>
   transcribedHere ? 'here' : hasEdition ? 'community' : 'untouched';
 
 /**
@@ -192,7 +192,7 @@ export function FondsMosaic({
       const cells: Cell[] = ordered.map((c, k) => {
         return {
           cote: c,
-          state: folderState(c.id, transcribedHere(c.id), hasEdition(c.id)),
+          state: folderState(transcribedHere(c.id), hasEdition(c.id)),
           batches: batchCount(c.pages),
           x: inner.x + boxes[k].x,
           y: inner.y + boxes[k].y,
