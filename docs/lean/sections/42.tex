@@ -1,0 +1,37 @@
+\section{Cote 42 : le lemme 2, localisés d'un anneau noethérien}\label{sec:42}\verifie{Folder42}
+
+La cote 42, \emph{Réseaux d'anneaux locaux : notes manuscrites (s.d.)}, six pages que l'inventaire date \q{[années 1960-1970]} et range dans le groupe du Séminaire de géométrie algébrique, demande si une application entre préschémas localement noethériens est déterminée, et peut être construite, point par point, à partir des anneaux locaux reliés par les générisations. La page~3 ramène la question à une condition~(H) d'injectivité des flèches de générisation entre fibres d'un faisceau ; pour le faisceau structural, la page~4 enchaîne : \q{Il reste à vérifier que les conditions de la prop.\ sont vérifiées}, et isole un fait d'algèbre commutative, dont la démonstration court sur le bas de la page~4 et le haut de la page~5 (\lot{42}{1}{4}). La page y glose le noyau de $A \to A_{\mathfrak p}$ comme \q{l'annulateur de $A - p$}, le premier mot étant lu avec doute, et traite la seconde assertion en se ramenant au cas $f = 1$, \q{car $A_p = (A_f)_{p A_f}$} (\lot{42}{1}{5}).
+
+\begin{enonce}[Lemme 2, pages 4 et 5]
+Soient $A$ un anneau noethérien et $\mathfrak p$ un idéal premier de $A$.
+\begin{enumerate}
+\item Il existe $f \in A \setminus \mathfrak p$ tel que $A_f \to A_{\mathfrak p}$ soit injectif.
+\item Si de plus $A \to A_{\mathfrak p}$ est injectif, alors $A_{\mathfrak q} \to A_{\mathfrak p}$ est injectif pour tout idéal premier $\mathfrak q \supseteq \mathfrak p$.
+\end{enumerate}
+\end{enonce}
+
+\noindent\emph{Conventions.} Pour une partie multiplicative $S$ de $A$, on note $S^{-1}A$ le localisé et $a \mapsto a/1$ le morphisme canonique. On rappelle que $a/1 = 0$ dans $S^{-1}A$ si et seulement s'il existe $s \in S$ avec $sa = 0$ ; que tout élément $z$ de $S^{-1}A$ vérifie $z \cdot (s/1) = a/1$ pour un $a \in A$ et un $s \in S$ ; et que si $g : A \to B$ est un morphisme d'anneaux qui envoie $S$ dans les inversibles de $B$, il existe un unique morphisme $\bar g : S^{-1}A \to B$ tel que $\bar g(a/1) = g(a)$. Les flèches du lemme sont de cette forme : $A_f = \{f^n\}^{-1}A$ et $A_{\mathfrak q} = (A \setminus \mathfrak q)^{-1}A$, et $g$ est dans les deux cas le morphisme canonique $A \to A_{\mathfrak p}$, qui inverse $f$ puisque $f \notin \mathfrak p$, et qui inverse tout élément hors de $\mathfrak q$ lorsque $\mathfrak p \subseteq \mathfrak q$, un tel élément étant a fortiori hors de $\mathfrak p$.
+
+\begin{lemme}\label{lem:42-lift}
+Soient $S \subseteq A$ une partie multiplicative et $g : A \to B$ un morphisme d'anneaux envoyant $S$ dans les inversibles de $B$. Si, pour tout $a \in A$, $g(a) = 0$ entraîne $a/1 = 0$ dans $S^{-1}A$, alors $\bar g : S^{-1}A \to B$ est injectif.
+\end{lemme}
+
+\begin{proof}
+Comme $\bar g$ est additif, il suffit de montrer que son noyau est nul. Soit $z \in S^{-1}A$ avec $\bar g(z) = 0$, et écrivons $z \cdot (s/1) = a/1$ avec $a \in A$ et $s \in S$. En appliquant $\bar g$, on obtient $g(a) = \bar g(z)\, g(s) = 0$, donc $a/1 = 0$ par hypothèse, c'est-à-dire $z \cdot (s/1) = 0$. Comme $s/1$ est inversible dans $S^{-1}A$, $z = 0$.
+\end{proof}
+
+\begin{proof}[Démonstration de (1)]
+Soit $J$ le noyau de $A \to A_{\mathfrak p}$ : c'est l'ensemble des $a \in A$ tels que $sa = 0$ pour \emph{au moins un} $s \notin \mathfrak p$. L'anneau $A$ étant noethérien, l'idéal $J$ est engendré par un nombre fini d'éléments $x_1, \dots, x_n$. Pour chaque $i$, l'appartenance $x_i \in J$ fournit un $s_i \notin \mathfrak p$ tel que $s_i x_i = 0$. Posons $f = s_1 \cdots s_n$ ; comme $\mathfrak p$ est premier, son complémentaire est stable par produit, et $f \notin \mathfrak p$.
+
+Montrons que $fy = 0$ pour tout $y \in J$. L'ensemble des $y \in A$ tels que $fy = 0$ est un idéal de $A$. Il contient chaque $x_i$ : on a $f = s_i c_i$ avec $c_i = \prod_{j \neq i} s_j$, donc $f x_i = c_i (s_i x_i) = 0$. Il contient donc l'idéal engendré par les $x_i$, qui est $J$.
+
+Appliquons alors le lemme~\ref{lem:42-lift} à $S = \{f^n\}$ et au morphisme canonique $g : A \to A_{\mathfrak p}$. Si $g(a) = 0$, alors $a \in J$, donc $fa = 0$ ; comme $f \in S$, cela signifie $a/1 = 0$ dans $A_f$. Le morphisme $A_f \to A_{\mathfrak p}$ est donc injectif.
+\end{proof}
+
+\begin{proof}[Démonstration de (2)]
+Appliquons le lemme~\ref{lem:42-lift} à $S = A \setminus \mathfrak q$ et au morphisme canonique $g : A \to A_{\mathfrak p}$, qui inverse $S$ puisque $\mathfrak p \subseteq \mathfrak q$. Si $g(a) = 0$, alors $a = 0$ par l'injectivité supposée de $g$, et a fortiori $a/1 = 0$ dans $A_{\mathfrak q}$. Le morphisme $A_{\mathfrak q} \to A_{\mathfrak p}$ est donc injectif.
+\end{proof}
+
+\paragraph{Ce que la vérification a établi.} Les deux assertions tiennent telles que la lecture les énonce, et aucune hypothèse ne manque. La seconde n'utilise pas l'hypothèse noethérienne : elle vaut pour tout anneau commutatif. La première ne l'utilise que pour rendre de type fini le noyau de $A \to A_{\mathfrak p}$, et la démonstration exige de ce noyau la description exacte --- les éléments annulés par \emph{un} élément hors de $\mathfrak p$ ---, qui est celle que la lecture substitue, en note, à la glose de la page : l'annulateur de $A \setminus \mathfrak p$, formé des éléments annulés par \emph{tous} les éléments hors de $\mathfrak p$, est en général plus petit et ne conviendrait pas. La démonstration de la page, qui prend un annulateur par générateur, suit en fait la bonne description. La forme que la page donne à la seconde assertion, l'injectivité de $(A_f)_{\mathfrak q} \to A_{\mathfrak p}$ pour un premier $\mathfrak q$ de $A_f$ au-dessus de $\mathfrak p$, s'en déduit en appliquant~(2) à l'anneau $A_f$, par l'identification $A_{\mathfrak p} = (A_f)_{\mathfrak p A_f}$ que la page invoque ; cette dernière déduction n'a pas été vérifiée formellement. Le lemme est un fait classique d'algèbre commutative.
+
+\paragraph{Ce qui reste.} L'issue~\#26 range aussi au premier niveau, pour cette cote, le lemme~1 de la page~3 (le lieu où une section coïncide avec une famille cohérente de germes est ouvert) et le corollaire~1 de la page~4 ($\Gamma(X, \mathcal O_X)$ comme limite des anneaux locaux le long de l'ordre de spécialisation) : ni l'un ni l'autre n'a été vérifié. Ils demandent le critère \q{constructible et stable par générisation, donc ouvert} dans un espace noethérien sobre et le passage d'un faisceau à ses fibres le long de la spécialisation, qu'il aurait fallu mettre en place d'abord ; la proposition de la page~3, dont ils découlent, ne l'est pas davantage. Rien non plus des pages~5 et~6 : le lemme~3 et les corollaires~2 et~3 --- le théorème de la page~2, pleine fidélité du passage au réseau d'anneaux locaux ---, qui mettent en jeu la séparation, les morphismes schématiquement dominants et les théorèmes de passage à la limite d'EGA~IV, ni le contre-exemple de la droite à origine dédoublée que la lecture donne au lemme~3 sans hypothèse de séparation, ni celui de la page~6 qui montre que la condition~(H) ne peut être supprimée.

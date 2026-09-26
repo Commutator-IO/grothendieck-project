@@ -1,0 +1,47 @@
+\section{Cote 21 : injectifs de $I$-torsion (proposition 2.15 et corollaire 2.16)}\label{sec:21}\verifie{Folder21}
+
+La cote 21, \emph{[Chapitre] 0 III : tapuscrit et copies de tapuscrit annotés (s.d.), notes manuscrites (s.d.)}, datée par l'inventaire \q{[vers 1960-1967]}, s'ouvre sur un tapuscrit corrigé à la main qui étudie, pour un anneau noethérien $A$ et un idéal $I$, les foncteurs contravariants sur la catégorie $\underline{C}$ des $A$-modules de type fini annulés par une puissance de $I$, et les représente par des modules $H$ dont tout élément est annulé par une puissance de $I$ (2.9 à 2.14). La proposition~2.15, énoncée page~11, caractérise ceux de ces modules qui sont injectifs ; sa démonstration, page~13, invoque le critère de Baer sous le nom de \q{Tohoku} et, pour l'étape décisive, écrit \q{En vertu de \emph{Krull}, $I^n N$ contient une intersection $N \cap I^m N$}, avec $N$ là où la ligne suivante, et l'argument, demandent $M$ (\lot{21}{1}{13}). Le corollaire~2.16 suit, puis une ligne biffée à la machine : \q{Si on rejette tout ce numéro (comme il me semble raisonnable)}.
+
+La vérification a dû expliciter deux notions que la lecture prend dans les numéros précédents.
+
+\begin{definition}
+Un $A$-module $H$ est \emph{de $I$-torsion} si tout élément de $H$ est annulé par une puissance de $I$. Le foncteur $\operatorname{Hom}(-, H)$ est \emph{exact à droite sur $\underline{C}$} si, pour tout $M \in \underline{C}$ et tout sous-module $N \subseteq M$, tout homomorphisme $N \to H$ se prolonge en un homomorphisme $M \to H$. Pour un $A$-module $K$, on note $H^0_I(K)$ le sous-module des éléments de $K$ annulés par une puissance de $I$.
+\end{definition}
+
+\begin{enonce}[Proposition 2.15]
+Soient $A$ un anneau noethérien, $I$ un idéal de $A$ et $H$ un $A$-module de $I$-torsion. Pour que $H$ soit un $A$-module injectif, il faut et il suffit que le foncteur $T_H(M) = \operatorname{Hom}(M, H)$ sur la catégorie $\underline{C}$ des $A$-modules de type fini annulés par une puissance de $I$ soit exact à droite, donc exact.
+\end{enonce}
+
+\begin{enonce}[Corollaire 2.16]
+Soit $K$ un $A$-module. Si $K$ est injectif, $H^0_I(K)$ l'est aussi.
+\end{enonce}
+
+\begin{lemme}\label{lem:21-puissance}
+Soient $H$ un module de $I$-torsion, $M$ un module de type fini et $g : M \to H$ un homomorphisme. Il existe $n$ tel que $a\,g(x) = 0$ pour tout $a \in I^n$ et tout $x \in M$.
+\end{lemme}
+
+\begin{proof}
+Soient $s_1, \dots, s_k$ des générateurs de $M$, et $e_i$ tel que $I^{e_i}$ annule $g(s_i)$. Posons $n = \max_i e_i$ ; comme $I^n \subseteq I^{e_i}$, $I^n$ annule chaque $g(s_i)$. L'ensemble des $x \in M$ tels que $I^n$ annule $g(x)$ est un sous-module (il contient $0$, est stable par somme, et par multiplication par $c \in A$ puisque $a\,g(cx) = c\,(a\,g(x))$) ; il contient les générateurs, donc c'est $M$. C'est la phrase du feuillet : l'image de $u$ est \q{un sous-module de type fini de $H$, donc annulé par une puissance de $I$}.
+\end{proof}
+
+\begin{proof}[Démonstration de la proposition 2.15]
+\emph{Nécessité.} Si $H$ est injectif, tout homomorphisme d'un sous-module $N$ de $M$ vers $H$ se prolonge à $M$, pour tout $M$, a fortiori pour $M \in \underline{C}$.
+
+\emph{Suffisance.} Supposons $\operatorname{Hom}(-, H)$ exact à droite sur $\underline{C}$. Par le critère de Baer, il suffit de montrer que, pour tout idéal $J$ de $A$, tout homomorphisme $g : J \to H$ se prolonge à $A$. L'idéal $J$ est de type fini ($A$ est noethérien) ; par le lemme~\ref{lem:21-puissance}, il existe $n$ tel que $I^n$ annule $g(J)$, et donc $g$ est nul sur $I^n J$, qui est engendré par les produits $a y$ avec $a \in I^n$, $y \in J$, et sur lesquels $g(ay) = a\,g(y) = 0$.
+
+Par le lemme d'Artin--Rees, appliqué au module $A$, à son sous-module $J$ et à l'idéal $I$, il existe $k$ tel que $J \cap I^{p} = I^{p-k}(J \cap I^{k})$ pour tout $p \geqslant k$. Posons $m = n + k$ ; alors
+\[
+  J \cap I^m = I^n (J \cap I^k) \subseteq I^n J .
+\]
+C'est l'inclusion $N \cap I^m M \subseteq I^n N$ de la lecture, pour $M = A$ et $N = J$.
+
+Soit $\varphi : J \to A/I^m$ la composée de l'inclusion et de la projection. Son noyau est $J \cap I^m$, contenu dans $I^n J$, sur lequel $g$ est nul. Donc $g$ se factorise par l'image de $\varphi$ : il existe $u' : \varphi(J) \to H$ avec $u'(\varphi(x)) = g(x)$ pour $x \in J$. Le module $A/I^m$ est de type fini et annulé par $I^m$, donc dans $\underline{C}$, et $\varphi(J) \simeq J/(J \cap I^m)$ en est un sous-module. Par hypothèse, $u'$ se prolonge en $w : A/I^m \to H$. La composée de la projection $A \to A/I^m$ et de $w$ prolonge $g$ : pour $x \in J$, elle envoie $x$ sur $w(\varphi(x)) = u'(\varphi(x)) = g(x)$.
+\end{proof}
+
+\begin{proof}[Démonstration du corollaire 2.16]
+Le module $H^0_I(K)$ est de $I$-torsion par définition. Vérifions que $\operatorname{Hom}(-, H^0_I(K))$ est exact à droite sur $\underline{C}$. Soient $M \in \underline{C}$, annulé par $I^n$, $N \subseteq M$ et $f : N \to H^0_I(K)$. Comme $K$ est injectif, la composée de $f$ et de l'inclusion $H^0_I(K) \subseteq K$ se prolonge en $v : M \to K$. Pour $x \in M$ et $a \in I^n$, $a\,v(x) = v(ax) = v(0) = 0$ : $v$ prend ses valeurs dans $H^0_I(K)$, et fournit le prolongement cherché. La proposition~2.15 conclut.
+\end{proof}
+
+\paragraph{Ce que la vérification a établi.} Les deux énoncés tiennent tels que la lecture les donne. L'inclusion d'Artin--Rees dont la démonstration a besoin est $N \cap I^m M \subseteq I^n N$, avec le module ambiant dans l'intersection, comme la lecture le rétablit : l'inclusion écrite sur la page, $N \cap I^m N \subseteq I^n N$, est vraie trivialement dès que $m \geqslant n$ et ne sert à rien ; et c'est le lemme d'Artin--Rees, non le théorème d'intersection de Krull, qui la fournit, comme la note de la lecture le dit. Deux remarques de plus. L'hypothèse que les objets de $\underline{C}$ sont de type fini n'est employée qu'à travers les modules monogènes $A/I^m$ : il suffit, pour conclure à l'injectivité, que les homomorphismes vers $H$ se prolongent le long des inclusions $J/(J \cap I^m) \hookrightarrow A/I^m$. Et l'argument de 2.16 n'emploie aucune finitude de $M$, seulement qu'il est annulé par une puissance de $I$ ; la noethérianité ne sert, dans le corollaire, qu'à invoquer 2.15, c'est-à-dire Artin--Rees.
+
+\paragraph{Ce qui reste.} Le reste du tapuscrit n'est pas vérifié : les numéros~2.1 à~2.14 (foncteurs cohomologiques sur une catégorie abélienne, systèmes de générateurs, théorème d'Eilenberg--Watts, représentation d'un foncteur exact à gauche sur $\underline{C}$ par $H = \varinjlim T(A/I^n)$ en~2.9 et~2.10, critère d'annulation en bas degré en~2.12 et~2.13, premiers associés du module représentant en~2.14), l'équivalence de catégories que 2.15 énonce en seconde forme, les remarques~2.17 sur les préschémas noethériens et la ind-représentabilité, et toute la seconde moitié de la cote, pages~15 à~28 (conditions $(P_1)$, $(P_2)$, $(P_3)$ de prolongement à travers un fermé, pour les faisceaux d'ensembles puis pour les catégories fibrées, et le cas des torseurs). La profondeur le long d'un fermé et les énoncés de prolongement de type Hartogs, que l'issue~\#26 range dans son premier niveau pour les cotes~21 et~125, n'ont pas été vérifiés : ils demandent la cohomologie locale des faisceaux sur un préschéma, qui manque à la théorie disponible sous la forme où la cote s'en sert.

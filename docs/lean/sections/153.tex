@@ -1,0 +1,54 @@
+\section{Cote 153 : polynômes à valeurs entières et modules libres}\label{sec:153}\verifie{Folder153}
+
+La cote 153, \emph{Analyseurs : notes manuscrites (s.d.)}, dix pages que l'inventaire date \q{[à partir de 1982]}, cherche la structure abstraite d'un anneau d'opérations muni d'une composition --- ce qu'on appelle aujourd'hui une pléthorie ---, et y arrive par les polynômes à valeurs entières. La page~3 fixe une inclusion d'anneaux commutatifs $k_0 \subset K_0$ et l'anneau $\Omega = \{F \in K_0[T] \mid F(\lambda) \in k_0 \ \forall \lambda \in k_0\}$ ; pour que les co-opérations $F(x + y) = \sum_i G_i(x) H_i(y)$ et $F(xy) = \sum_\alpha J_\alpha(x) K_\alpha(y)$ soient des éléments \q{bien déterminés} de $\Omega \otimes_{k_0} \Omega$, elle énonce un lemme, le mot \q{Lemme} lui-même étant lu sans certitude : le sous-ensemble des $F \in K_0[T] \otimes_{k_0} M$ tels que $F(x) \in M$ pour tout $x \in k_0$ \q{s'identifie à $\Omega \otimes_{k_0} M$} (\lot{153}{1}{3}). La lecture précise : coordonnée par coordonnée dans une base de $M$.
+
+\begin{definition}
+Soit $K_0$ une $k_0$-algèbre commutative ; on note $\iota : k_0 \to K_0$ le morphisme structural. On pose $\Omega = \{F \in K_0[T] \mid F(\iota(\lambda)) \in \iota(k_0) \ \forall \lambda \in k_0\}$ ; c'est une sous-$k_0$-algèbre de $K_0[T]$, les valeurs d'une somme et d'un produit étant la somme et le produit des valeurs, et un polynôme constant $\iota(c)$ y appartenant. Pour un $k_0$-module $M$, $x \in k_0$ et $F \in K_0[T] \otimes_{k_0} M$, on note $F(x) \in K_0 \otimes_{k_0} M$ l'image de $F$ par $\mathrm{ev}_x \otimes \mathrm{id}_M$, où $\mathrm{ev}_x : K_0[T] \to K_0$ est l'évaluation en $\iota(x)$, et l'on dit que $F(x) \in M$ lorsque $F(x)$ est dans l'image de $M \to K_0 \otimes_{k_0} M$, $m \mapsto 1 \otimes m$. On note $\Omega_M$ l'ensemble des $F$ tels que $F(x) \in M$ pour tout $x \in k_0$. Enfin \q{$\Omega_M$ s'identifie à $\Omega \otimes_{k_0} M$} est lu : l'application canonique $\Omega \otimes_{k_0} M \to K_0[T] \otimes_{k_0} M$ est injective, et son image est $\Omega_M$.
+\end{definition}
+
+\begin{enonce}[Lemme, page 3]
+Soit $M$ un $k_0$-module libre, de base $(e_i)_{i \in I}$, et écrivons tout $F \in K_0[T] \otimes_{k_0} M$ sous la forme $\sum_i F_i \otimes e_i$, les $F_i \in K_0[T]$ étant presque tous nuls.
+\begin{enumerate}
+\item $F \in \Omega_M$ si et seulement si $F_i \in \Omega$ pour tout $i$.
+\item L'application canonique $\Omega \otimes_{k_0} M \to K_0[T] \otimes_{k_0} M$ est injective.
+\item Son image est exactement $\Omega_M$.
+\end{enumerate}
+\end{enonce}
+
+Dans ce qui suit, $N$ et $P$ désignent des $k_0$-modules et $f : N \to P$ une application $k_0$-linéaire. La base $(e_i)$ donne, pour tout $N$, un isomorphisme $c_N : N \otimes_{k_0} M \to N^{(I)}$ sur les familles presque nulles d'éléments de $N$, qui envoie $n \otimes m$ sur $(m_i\, n)_i$, où les $m_i$ sont les coordonnées de $m$ ; c'est l'isomorphisme $N \otimes_{k_0} k_0^{(I)} \simeq N^{(I)}$. On appelle $c_N(t)_i$ la $i$-ième coordonnée de $t$.
+
+\begin{lemme}\label{lem:153-nat}
+Les coordonnées sont naturelles : pour $t \in N \otimes_{k_0} M$, la $i$-ième coordonnée de $(f \otimes \mathrm{id}_M)(t)$ est $f(c_N(t)_i)$.
+\end{lemme}
+
+\begin{proof}
+Les deux membres sont additifs en $t$, et il suffit de le vérifier sur un tenseur pur $n \otimes m$ : la $i$-ième coordonnée de $f(n) \otimes m$ est $m_i f(n) = f(m_i n)$.
+\end{proof}
+
+\begin{lemme}\label{lem:153-image}
+Un élément $t$ de $P \otimes_{k_0} M$ est dans l'image de $f \otimes \mathrm{id}_M$ si et seulement si chacune de ses coordonnées est dans l'image de $f$.
+\end{lemme}
+
+\begin{proof}
+Si $t = (f \otimes \mathrm{id})(s)$, ses coordonnées sont les $f(c_N(s)_i)$ par le lemme~\ref{lem:153-nat}. Réciproquement, supposons $c_P(t)_i = f(g_i)$ pour tout $i$, et prenons $g_i = 0$ hors du support, fini, de $c_P(t)$ ; la famille $(g_i)$ est presque nulle, et soit $s = c_N^{-1}\bigl((g_i)_i\bigr)$. Par le lemme~\ref{lem:153-nat}, les coordonnées de $(f \otimes \mathrm{id})(s)$ sont les $f(g_i)$, qui valent $c_P(t)_i$ sur le support et $0 = c_P(t)_i$ ailleurs ; $c_P$ étant injectif, $(f \otimes \mathrm{id})(s) = t$.
+\end{proof}
+
+\begin{lemme}\label{lem:153-un}
+L'image de $M \to K_0 \otimes_{k_0} M$, $m \mapsto 1 \otimes m$, est l'image de $\iota \otimes \mathrm{id}_M : k_0 \otimes_{k_0} M \to K_0 \otimes_{k_0} M$.
+\end{lemme}
+
+\begin{proof}
+La première application est la composée de l'isomorphisme $M \simeq k_0 \otimes_{k_0} M$, $m \mapsto 1 \otimes m$, et de $\iota \otimes \mathrm{id}_M$.
+\end{proof}
+
+\begin{proof}[Démonstration du lemme de la page 3]
+(1) Soit $x \in k_0$. Par le lemme~\ref{lem:153-un}, $F(x) \in M$ signifie que $(\mathrm{ev}_x \otimes \mathrm{id})(F)$ est dans l'image de $\iota \otimes \mathrm{id}$, c'est-à-dire, par le lemme~\ref{lem:153-image}, que chacune de ses coordonnées est dans $\iota(k_0)$. Par le lemme~\ref{lem:153-nat}, sa $i$-ième coordonnée est $\mathrm{ev}_x(F_i) = F_i(\iota(x))$. Ainsi $F \in \Omega_M$ si et seulement si $F_i(\iota(x)) \in \iota(k_0)$ pour tout $x$ et tout $i$, c'est-à-dire si et seulement si $F_i \in \Omega$ pour tout $i$.
+
+(2) Un module libre est plat, fait classique ; le produit tensoriel par $M$ conserve donc l'injectivité de l'inclusion $\Omega \hookrightarrow K_0[T]$.
+
+(3) Par le lemme~\ref{lem:153-image} appliqué à l'inclusion $\Omega \hookrightarrow K_0[T]$, $F$ est dans l'image de $\Omega \otimes_{k_0} M$ si et seulement si chaque $F_i$ est dans $\Omega$, c'est-à-dire, par~(1), si et seulement si $F \in \Omega_M$.
+\end{proof}
+
+\paragraph{Ce que la vérification a établi.} Le lemme tient tel que la lecture l'énonce, avec la lecture de \q{s'identifie} donnée ci-dessus. Une hypothèse de la page n'est pas utilisée : que $k_0 \to K_0$ soit une inclusion. La démonstration vaut pour toute $k_0$-algèbre commutative $K_0$, $\Omega$ étant alors l'ensemble des polynômes qui envoient $k_0$ dans l'image de $k_0$. La liberté de $M$ sert deux fois, comme la lecture le dit : par sa platitude pour l'injectivité, et par une base pour la description coordonnée par coordonnée. L'énoncé est élémentaire.
+
+\paragraph{Ce qui reste.} Le lemme est l'énoncé de la cote que l'issue~\#26 range au premier niveau, et il est fait. Ce qu'il prépare ne l'est pas : l'identification $K_0[X] \otimes_{k_0} K_0[Y] = K_0[X, Y]$ sous l'hypothèse $K_0 \otimes_{k_0} K_0 = K_0$ que la lecture ajoute, et, sous elle et la liberté de $\Omega$, l'existence et l'unicité des co-opérations dans $\Omega \otimes_{k_0} \Omega$ et les deux règles $F \circ (P + Q) = \sum_i (G_i \circ P)(H_i \circ Q)$, $F \circ (PQ) = \sum_\alpha (J_\alpha \circ P)(K_\alpha \circ Q)$ de la page~3. Rien non plus des pages~2, 5, 7 et~9 : la base binomiale de $\mathrm{Int}(\mathbf Z)$ (théorème de Pólya) et la formule de Vandermonde, la décomposition $\Omega = \Omega_0 \oplus \Omega^0$ par les constantes, les exemples et contre-exemples de la page~7 --- dont l'égalité $(\Omega_A)_0 \simeq \Gamma A$ pour un anneau d'un topos, et la non-injectivité de $\Omega \to \Omega_{\Omega_0}$ pour $k[T]$ sur un corps fini ---, ni les analyseurs des puissances divisées et des $\lambda$-anneaux, que la page~9 nomme sans les construire. Ces vérifications n'ont pas été entreprises ; seule la page~7 fait intervenir une théorie, celle des topos, qui manque.

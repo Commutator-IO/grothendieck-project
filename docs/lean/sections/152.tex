@@ -1,0 +1,41 @@
+\section{Cote 152 : le dictionnaire entre graphes circularisés et contours}\label{sec:152}\verifie{Folder152}
+
+La cote 152, \emph{Catégorie des types de mots [dont arbres plans] : notes manuscrites (s.d.)}, douze pages que l'inventaire date \q{[à partir de 1982]}, décrit un arbre plan de trois manières et montre qu'elles reviennent au même. Les pages~4 à~12, sous sa pagination $1, 1', 2, 2', 3, 3'$, forment un texte suivi : on découpe la surface le long d'un graphe circularisé, on obtient un \emph{contour} --- une réunion de polygones, un par face ---, et les pages~7 et~9 écrivent le dictionnaire entre les deux données. Il y est écrit trois fois, et les trois formes ne s'accordent pas : la page~7 encadre des formules où la rotation seule intervient ; la page~9 pose en tête \q{$\sigma_\Gamma = \sigma_C$, $\rho_\Gamma = \rho_C$}, puis dresse un tableau dont les deux dernières lignes associent $\rho_\Gamma \sigma_\Gamma$ à $\rho_C$ et $\rho_\Gamma$ à $\rho_C \sigma_C$ ; elle encadre enfin un critère pour qu'un graphe soit un arbre, dont les deux derniers mots ne se lisent pas (\lot{152}{1}{9}). La lecture retient la convention du tableau.
+
+\begin{definition}
+Soit $D$ un ensemble, celui des arcs --- arêtes orientées, ou demi-arêtes. Un \emph{graphe circularisé sans sommet isolé} sur $D$ est la donnée d'une involution sans point fixe $\sigma_\Gamma$ de $D$ (le renversement des arcs) et d'une permutation $\rho_\Gamma$ de $D$ (l'arc suivant autour de l'origine) ; ses sommets sont les orbites de $\rho_\Gamma$. Un \emph{contour} sur $D$ est la donnée d'une permutation $\rho_C$ de $D$ (l'arête suivante sur le contour orienté) et d'une involution sans point fixe $\sigma_C$ de $D$ (le recollement) ; ses polygones, ou faces, sont les cycles de $\rho_C$. Le graphe est \emph{connexe} si deux arcs quelconques sont reliés par une suite de pas $x \mapsto \rho_\Gamma x$ et $x \mapsto \sigma_\Gamma x$, parcourus dans un sens ou dans l'autre. Comme la lecture, on identifie l'ensemble $A(C)$ des arêtes du contour à celui des arcs par l'application \q{arête droite}.
+\end{definition}
+
+\begin{enonce}[Équivalence, pages 7 et 9, sur les objets]
+Sur un même ensemble $D$, les applications
+\[
+  (\sigma_\Gamma, \rho_\Gamma) \longmapsto (\rho_C, \sigma_C) = (\rho_\Gamma \sigma_\Gamma,\ \sigma_\Gamma),
+  \qquad
+  (\rho_C, \sigma_C) \longmapsto (\sigma_\Gamma, \rho_\Gamma) = (\sigma_C,\ \rho_C \sigma_C)
+\]
+sont des bijections réciproques entre graphes circularisés sans sommet isolé et contours munis d'une involution de recollement sans point fixe. Les trois formules $\sigma_C = \sigma_\Gamma$, $\rho_C = \rho_\Gamma \sigma_\Gamma$, $\rho_\Gamma = \rho_C \sigma_C$ valent ensemble, et les orbites de $\rho_C \sigma_C$ sont les sommets du graphe.
+\end{enonce}
+
+\begin{enonce}[Connexité, dans la démonstration du critère de la page 9]
+Si $D$ est fini et que $\rho_C$ n'a qu'un cycle, le graphe est connexe.
+\end{enonce}
+
+\begin{remarque}
+La tête de la page~9, $\rho_\Gamma = \rho_C$, est incompatible avec le tableau dès que $D$ n'est pas vide : jointe à $\rho_C = \rho_\Gamma \sigma_\Gamma$, elle forcerait $\sigma_\Gamma = \mathrm{id}$.
+\end{remarque}
+
+\begin{proof}[Démonstration de l'équivalence]
+Tout repose sur $\sigma^2 = \mathrm{id}$ pour une involution. Partant de $(\sigma_\Gamma, \rho_\Gamma)$, on obtient le contour $(\rho_\Gamma \sigma_\Gamma, \sigma_\Gamma)$, dont l'involution est sans point fixe puisque c'est $\sigma_\Gamma$, puis le graphe $(\sigma_\Gamma, \rho_\Gamma \sigma_\Gamma \sigma_\Gamma) = (\sigma_\Gamma, \rho_\Gamma)$. Partant de $(\rho_C, \sigma_C)$, on obtient le graphe $(\sigma_C, \rho_C \sigma_C)$, puis le contour $(\rho_C \sigma_C \sigma_C, \sigma_C) = (\rho_C, \sigma_C)$. Les deux premières formules sont les définitions, et la troisième en résulte : $\rho_C \sigma_C = \rho_\Gamma \sigma_\Gamma \sigma_\Gamma = \rho_\Gamma$. Les permutations $\rho_C \sigma_C$ et $\rho_\Gamma$ étant égales, elles ont les mêmes orbites, qui sont les sommets.
+\end{proof}
+
+\begin{proof}[Démonstration de la connexité]
+Soient $a, b \in D$. Comme $\rho_C$ n'a qu'un cycle et que $D$ est fini, il existe un entier $k \geq 0$ tel que $b = \rho_C^{\,k}(a)$. Raisonnons par récurrence sur $k$. Pour $k = 0$, $b = a$. Si $\rho_C^{\,k}(a)$ est relié à $a$, alors $\rho_C^{\,k+1}(a) = \rho_\Gamma\bigl(\sigma_\Gamma(\rho_C^{\,k}(a))\bigr)$ l'est aussi, par un pas $\sigma_\Gamma$ suivi d'un pas $\rho_\Gamma$.
+\end{proof}
+
+\begin{proof}[Démonstration de la remarque]
+Si $\rho_\Gamma = \rho_\Gamma \sigma_\Gamma$, la composition à gauche par $\rho_\Gamma^{-1}$ donne $\sigma_\Gamma = \mathrm{id}$, et tout arc serait un point fixe de $\sigma_\Gamma$, ce qui est exclu dès qu'il y a un arc.
+\end{proof}
+
+\paragraph{Ce que la vérification a établi.} La convention que la lecture retient est cohérente : les trois formules tiennent ensemble parce que le renversement est une involution, et rien d'autre n'est demandé. La note de la lecture selon laquelle la tête de la page~9 ne peut être combinée avec son tableau est confirmée. Le premier pas de la démonstration que la lecture donne au critère de la page~9 --- le graphe est connexe puisque $\rho_C$ n'a qu'un cycle --- tient tel quel pour un ensemble fini d'arcs. Ce qui est démontré est la moitié combinatoire du dossier, et elle est élémentaire : c'est le dictionnaire classique des cartes combinatoires, où les faces sont les cycles du produit de la rotation et de l'involution. L'équivalence n'est établie que sur les objets, les deux données vivant sur le même ensemble ; les morphismes ne sont pas examinés, pas plus que la page ne les examine.
+
+\paragraph{Ce qui reste.} Pour cette cote, l'issue~\#26 range au premier niveau la correspondance entre plongements d'un graphe dans une surface orientée et circularisations, qui est la proposition de la page~4 : elle n'est pas vérifiée, faute d'une théorie des surfaces topologiques, des plongements et de leur classification. Le critère encadré de la page~9 --- un graphe circularisé est un arbre non ponctuel si et seulement si son contour est un seul polygone dont l'involution de recollement ne croise pas --- ne l'est pas non plus : la démonstration de la lecture passe par la formule d'Euler et le genre de la surface recollée, c'est-à-dire par la théorie du genre des cartes combinatoires. Rien non plus de l'énoncé de la page~2 sur les types de mots et les disques découpés par cordes, de la notion d'admissibilité de la page~3, de la fonctorialité des équivalences, ni des deux équivalences finales des pages~10 et~12 entre arbres plans, polygones à involution sans croisement et disques découpés par des cordes qui ne se croisent pas.

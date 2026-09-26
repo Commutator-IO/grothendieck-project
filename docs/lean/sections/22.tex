@@ -1,0 +1,73 @@
+\section{Cote 22 : produits de modules plats (lemme 3.3, corollaires 3.4 et 3.5)}\label{sec:22}\verifie{Folder22}
+
+La cote 22, \emph{[EGA IV]. [Chapitre] 0 IV. Cohen, différentielles, algèbres formellement simples (Compléments)}, datée par l'inventaire \q{1963-[vers 1967]}, réunit des tirés à part, un tapuscrit annoté et des notes manuscrites. Les pages~9 à~17 sont un tapuscrit paginé de sa main 24 à 32, le numéro~3 d'un chapitre adressé à un correspondant qu'il tutoie, corrigé à l'encre. Avant le théorème central du numéro, la page~10 (sa page~25) place trois énoncés dont la fonction est dite en une phrase : \q{il nous sera commode d'avoir un critère permettant de déduire de la propriété P une propriété de platitude} (\lot{22}{1}{10}). Dans la démonstration du lemme~3.3, les mots \q{de type fini}, qui qualifient les modules libres de la présentation, sont une addition manuscrite ; dans l'énoncé du corollaire~3.5, un passage biffé portait \q{de $A$-modules projectifs de type fini}.
+
+\begin{enonce}[Lemme 3.3]
+Soient $A$ un anneau, $(P_i)_{i \in I}$ une famille de $A$-modules, $P = \prod_i P_i$ leur produit, et $M$ un $A$-module de présentation finie. Alors l'homomorphisme canonique $M \otimes_A P \to \prod_i (M \otimes_A P_i)$ est un isomorphisme.
+\end{enonce}
+
+\begin{enonce}[Corollaire 3.4]
+Supposons que tout $A$-module de type fini soit de présentation finie --- par exemple $A$ noethérien. Alors tout produit de $A$-modules plats est plat.
+\end{enonce}
+
+\begin{enonce}[Corollaire 3.5]
+Supposons $A$ comme en 3.4, par exemple noethérien. Soit $P$ un $A$-module isomorphe à la limite projective d'un système projectif strict, admettant un système cofinal dénombrable, de $A$-modules projectifs. Alors $P$ est un $A$-module plat.
+\end{enonce}
+
+\noindent Le corollaire~3.5 a été vérifié sous la forme à laquelle la lecture le ramène : un système $(P_n)_{n \in \mathbb N}$ dont les applications de transition $\pi_n : P_{n+1} \to P_n$ sont surjectives, sa limite étant le sous-module de $\prod_n P_n$ formé des suites $(x_n)$ telles que $\pi_n(x_{n+1}) = x_n$ pour tout $n$.
+
+Pour un homomorphisme $g : M \to N$, notons $c_M : M \otimes P \to \prod_i (M \otimes P_i)$ l'homomorphisme canonique, $m \otimes (p_i)_i \mapsto (m \otimes p_i)_i$. Il est naturel en $M$ : $c_N \circ (g \otimes P) = \bigl(\prod_i (g \otimes P_i)\bigr) \circ c_M$, comme on le voit sur les tenseurs purs.
+
+\begin{lemme}\label{lem:22-libre}
+Pour tout entier $n$, $c_{A^n}$ est bijectif.
+\end{lemme}
+
+\begin{proof}
+Pour tout module $N$, on a l'isomorphisme $\psi_N : A^n \otimes N \to N^n$, $f \otimes x \mapsto (f_j x)_j$. Montrons que, pour $z \in A^n \otimes P$ et $i \in I$, la $j$-ième composante de $\psi_{P_i}(c_{A^n}(z)_i)$ est la $i$-ième composante de la $j$-ième composante de $\psi_P(z)$. Les deux membres sont additifs en $z$ ; sur un tenseur pur $f \otimes (p_i)_i$, ils valent tous deux $f_j p_i$. Ainsi, à travers les isomorphismes $\psi$, l'application $c_{A^n}$ devient l'identification évidente de $(\prod_i P_i)^n$ avec $\prod_i P_i^n$, qui est bijective.
+\end{proof}
+
+\begin{proof}[Démonstration du lemme 3.3]
+C'est celle du feuillet. Le module $M$ étant de présentation finie, il existe une suite exacte $A^m \xrightarrow{f} A^n \xrightarrow{g} M \to 0$ de modules libres \emph{de type fini}. Le produit tensoriel étant exact à droite, on obtient deux suites exactes
+\[
+  A^m \otimes P \to A^n \otimes P \to M \otimes P \to 0,
+  \qquad
+  \prod_i (A^m \otimes P_i) \to \prod_i (A^n \otimes P_i) \to \prod_i (M \otimes P_i) \to 0,
+\]
+la seconde parce qu'un produit de suites exactes est exact (on choisit un antécédent composante par composante). Les homomorphismes $c_{A^m}$, $c_{A^n}$, $c_M$ forment un morphisme de la première suite dans la seconde, par naturalité de $c$. Les deux premiers sont bijectifs par le lemme~\ref{lem:22-libre}. Le lemme des cinq, sous sa forme pour des suites exactes à droite (surjectivité à gauche, bijectivité au milieu), montre que $c_M$ est bijectif.
+\end{proof}
+
+\begin{proof}[Démonstration du corollaire 3.4]
+On démontre en fait davantage : il suffit que tout idéal de type fini de $A$ soit de présentation finie. Soient $(P_i)$ des modules plats et $P = \prod_i P_i$. Par le critère classique de platitude par les idéaux, il suffit de voir que, pour tout idéal $J$ de type fini de $A$, l'application $J \otimes P \to A \otimes P$ induite par l'inclusion $\iota : J \to A$ est injective. Par naturalité,
+\[
+  \Bigl(\prod_i (\iota \otimes P_i)\Bigr) \circ c_J = c_A \circ (\iota \otimes P).
+\]
+Le membre de gauche est injectif : $c_J$ l'est par le lemme~3.3, $J$ étant de présentation finie, et chaque $\iota \otimes P_i$ l'est parce que $P_i$ est plat. Donc $\iota \otimes P$ est injectif. Sous l'hypothèse de 3.4, tout idéal de type fini, module de type fini, est de présentation finie, et l'on conclut.
+\end{proof}
+
+\begin{lemme}\label{lem:22-hyp}
+Tout $A$-module de type fini est de présentation finie si et seulement si $A$ est noethérien.
+\end{lemme}
+
+\begin{proof}
+Si $A$ est noethérien, le noyau d'une surjection $A^n \to N$ est un sous-module de $A^n$, donc de type fini. Réciproquement, soit $J$ un idéal de $A$. Le module $A/J$ est de type fini, donc de présentation finie par hypothèse, et le noyau $J$ de la surjection $A \to A/J$, d'un module de type fini sur un module de présentation finie, est de type fini (fait classique). Tout idéal de $A$ est donc de type fini.
+\end{proof}
+
+\begin{lemme}\label{lem:22-prod2}
+Le produit de deux modules plats est plat.
+\end{lemme}
+
+\begin{proof}
+Pour un idéal $J$, l'isomorphisme $J \otimes (M \times N) \simeq (J \otimes M) \times (J \otimes N)$, naturel en $J$, identifie $J \otimes (M \times N) \to A \otimes (M \times N)$ au produit des deux applications injectives $J \otimes M \to M$ et $J \otimes N \to N$.
+\end{proof}
+
+\begin{proof}[Démonstration du corollaire 3.5, pour un système indexé par $\mathbb N$]
+Chaque $\pi_n : P_{n+1} \to P_n$ est surjective et $P_n$ est projectif, donc $\pi_n$ admet une section $s_n : P_n \to P_{n+1}$, $\pi_n \circ s_n = \mathrm{id}$. Le noyau $K_n$ de $\pi_n$ est un facteur direct de $P_{n+1}$, un projecteur sur $K_n$ étant $\mathrm{id} - s_n \circ \pi_n$ ; il est donc projectif, en particulier plat. Soit $\Phi : \varprojlim_n P_n \to P_0 \times \prod_n K_n$ l'application
+\[
+  (x_n)_n \longmapsto \bigl(x_0,\ (x_{n+1} - s_n(x_n))_n\bigr),
+\]
+bien définie car $\pi_n(x_{n+1} - s_n(x_n)) = x_n - x_n = 0$, et linéaire. Elle est injective : si deux suites ont même image, elles ont même terme d'indice $0$, et par récurrence, $x_{n+1} = s_n(x_n) + k_n$ déterminant $x_{n+1}$ à partir de $x_n$, mêmes termes à tout indice. Elle est surjective : étant donnés $y \in P_0$ et $(k_n) \in \prod_n K_n$, la suite définie par $x_0 = y$ et $x_{n+1} = s_n(x_n) + k_n$ vérifie $\pi_n(x_{n+1}) = x_n + 0$, est donc dans la limite, et a pour image $(y, (k_n))$. Ainsi $\varprojlim P_n \simeq P_0 \times \prod_n K_n$. Par le corollaire~3.4, $\prod_n K_n$ est plat ; par le lemme~\ref{lem:22-prod2}, $P_0 \times \prod_n K_n$ l'est, et la platitude passe à un module isomorphe.
+\end{proof}
+
+\paragraph{Ce que la vérification a établi.} Le lemme~3.3 tient sur tout anneau commutatif, sans autre hypothèse, et la démonstration du feuillet est la bonne : l'addition manuscrite \q{de type fini} est exactement ce qui la fait marcher, puisque la réduction se fait au cas des modules $A^n$, comme la lecture le relève. Le corollaire~3.4 tient sous son hypothèse, mais celle-ci n'est pas plus générale que la noethérianité : elle lui est \emph{équivalente} (lemme~\ref{lem:22-hyp}), de sorte que le \q{par exemple $A$ noethérien} de la page, repris par la lecture, laisse croire à une classe plus large qu'il n'y en a. La classe que l'argument atteint réellement est plus large, en revanche : la démonstration n'applique le lemme~3.3 qu'à des idéaux de type fini, et il suffit donc que ceux-ci soient de présentation finie, c'est-à-dire que $A$ soit cohérent. Que les produits de modules plats soient plats sur un anneau cohérent est un théorème de Chase (1960) ; l'hypothèse du tapuscrit est strictement plus forte. Le corollaire~3.5 tient, sous l'hypothèse de 3.4, pour un système indexé par $\mathbb N$ à transitions surjectives, et l'argument que la lecture écrit à la place du \q{on voit facilement} du feuillet est celui qui a été vérifié.
+
+\paragraph{Ce qui reste.} Pour 3.5, la réduction d'un système projectif strict admettant un système cofinal dénombrable à un système indexé par $\mathbb N$ n'est pas vérifiée. Le reste de la cote ne l'est pas : le lemme~3.2 et le théorème~3.6 sur la lissité formelle des algèbres topologiques, la définition~3.7 et les corollaires~3.8 à~3.12 sur les algèbres de Cohen, le critère~3.13 des homomorphismes réguliers, l'obstruction différentielle sur $\mathbb Q((x_i))$, les annotations des notes de Jouanolou (pages~1 à~8), les questions des pages~18 à~20 et les notes manuscrites des pages~21 à~28. Ils demandent les topologies préadiques et la régularité géométrique, qui manquent à la théorie disponible. L'issue~\#26 range dans son premier niveau, pour cette cote, \q{formal smoothness, unramifiedness, étaleness and their lifting criteria} : rien de cela n'est vérifié ici ; les énoncés vérifiés sont les énoncés de platitude qui préparent le théorème central.

@@ -1,0 +1,68 @@
+\section{Cote 161-1 : la partie fixe d'une adjonction, les adjonctions idempotentes, les objets locaux}\label{sec:161-1}\verifie{Folder161_1}
+
+La cote 161-1, \emph{Catégories : notes manuscrites (s.d.)}, dix-neuf pages sans date, appartient au groupe des dossiers rassemblés par Grothendieck sur différentes thématiques, que l'inventaire date \q{[après 1961-vers 1977]}. Les pages~3 à~7 regardent ce qu'un couple de foncteurs adjoints $E \rightleftarrows F$ induit entre les deux catégories. La page~3 s'ouvre sur \q{Foncteurs adjoints [demander Schanuel]}, écrit le critère~(1) de pleine fidélité sur une sous-catégorie pleine et porte en marge \q{donner un exemple montrant que cette condition n'est pas surabondante, avec $E'$ réduit à un élément} (\lot{161-1}{1}{3}) ; la page~5 dresse la liste des conditions équivalentes qui définissent aujourd'hui une adjonction idempotente (\lot{161-1}{1}{5}) ; la page~7 se demande si une sous-catégorie réflexive se reconnaît comme lieu des objets locaux pour les flèches que le réflecteur inverse, et conclut \q{Or c'est vrai sauf erreur…} (\lot{161-1}{1}{7}). On note, comme la lecture, $u$ l'adjoint à gauche de $v$, $\eta : \mathrm{id}_E \to vu$ l'unité et $\varepsilon : uv \to \mathrm{id}_F$ la coünité (le manuscrit écrit $i$ et $j$).
+
+\begin{enonce}[(1), page 3]
+Soient $E' \subset E$ une sous-catégorie pleine et $\overline{E}'$ sa clôture par isomorphie. Alors
+\[
+  \begin{gathered}
+  u|E' \text{ est pleinement fidèle et } vu(E') \subset \overline{E}' \\
+  \iff \text{pour tout } Y \in E',\ \eta_Y : Y \to vu(Y) \text{ est un isomorphisme.}
+  \end{gathered}
+\]
+La seconde condition du membre de gauche n'est pas surabondante : la pleine fidélité de $u|E'$ ne force pas $vu$ à ramener $E'$ dans $\overline{E}'$.
+\end{enonce}
+
+\begin{enonce}[Adjonctions idempotentes, page 5]
+Les conditions \q{$\eta v : v \to vuv$ est un isomorphisme} et \q{$\varepsilon u : uvu \to u$ est un isomorphisme} de la condition~2 du manuscrit sont redondantes : chacune des quatre conditions ($\eta v$, $v\varepsilon$, $\varepsilon u$, $u\eta$ inversible) implique les trois autres.
+\end{enonce}
+
+\begin{enonce}[Objets locaux, pages 6 et 7]
+Soient $\alpha : E_1 \to E$ un foncteur pleinement fidèle admettant un adjoint à gauche $\alpha'$, et $\Sigma$ la classe des flèches de $E$ que $\alpha'$ rend inversibles. Une flèche $f : X \to Y$ est dans $\Sigma$ si et seulement si $\operatorname{Hom}_E(Y, \alpha Z_1) \to \operatorname{Hom}_E(X, \alpha Z_1)$ est bijective pour tout $Z_1 \in E_1$ ; et un objet $\xi$ de $E$ tel que $\operatorname{Hom}_E(-, \xi)$ transforme les flèches de $\Sigma$ en bijections (un objet $\Sigma$-local) est dans l'image essentielle de $\alpha$.
+\end{enonce}
+
+On rappelle que la bijection d'adjonction $\operatorname{Hom}_F(uX, P) \simeq \operatorname{Hom}_E(X, vP)$ envoie $g$ sur $\eta_X \circ v(g)$ (on compose de gauche à droite : $\eta_X$, puis $v(g)$), et qu'on a les identités triangulaires $\eta_{vP}\,;v(\varepsilon_P) = \mathrm{id}_{vP}$ et $u(\eta_X)\,;\varepsilon_{uX} = \mathrm{id}_{uX}$. Dans les démonstrations qui suivent, on écrit $f\,;g$ pour « $f$ puis $g$ ».
+
+\begin{lemme}\label{lem:161-1-hom}
+Pour $X, Y \in E$, l'application $\operatorname{Hom}_E(X, Y) \to \operatorname{Hom}_F(uX, uY)$, $f \mapsto u(f)$, est bijective si et seulement si l'application $f \mapsto f\,;\eta_Y$, de $\operatorname{Hom}_E(X, Y)$ dans $\operatorname{Hom}_E(X, vuY)$, l'est.
+\end{lemme}
+
+\begin{proof}
+La seconde application est la composée de la première et de la bijection d'adjonction : celle-ci envoie $u(f)$ sur $\eta_X\,;vu(f)$, qui vaut $f\,;\eta_Y$ par naturalité de $\eta$. C'est la phrase de la page~3 : l'application \q{se déduit de l'application $i(Y) : Y \to vu(Y)$ au moyen de $\mathrm{Hom}(X, i(Y))$}.
+\end{proof}
+
+\begin{proof}[Démonstration de (1)]
+Supposons que $\eta_Y$ soit un isomorphisme pour tout $Y \in E'$. Pour $X, Y \in E'$, la composition avec $\eta_Y$ est alors bijective, et $u|E'$ est pleinement fidèle par le lemme~\ref{lem:161-1-hom} ; et $vu(Y)$, isomorphe à $Y$, est dans $\overline{E}'$.
+
+Réciproquement, soit $Y \in E'$ ; par hypothèse il existe $Z \in E'$ et un isomorphisme $e : vu(Y) \to Z$. Le lemme~\ref{lem:161-1-hom}, appliqué aux couples $(Z, Y)$ et $(Y, Y)$ d'objets de $E'$, dit que $f \mapsto f\,;\eta_Y$ est bijective de $\operatorname{Hom}(Z, Y)$ sur $\operatorname{Hom}(Z, vuY)$ et de $\operatorname{Hom}(Y, Y)$ sur $\operatorname{Hom}(Y, vuY)$. Par la surjectivité de la première, il existe $g : Z \to Y$ avec $g\,;\eta_Y = e^{-1}$. Posons $s = e\,;g : vu(Y) \to Y$. D'une part $s\,;\eta_Y = e\,;e^{-1} = \mathrm{id}_{vuY}$. D'autre part $(\eta_Y\,;s)\,;\eta_Y = \eta_Y\,;(s\,;\eta_Y) = \eta_Y = \mathrm{id}_Y\,;\eta_Y$, et l'injectivité de la seconde bijection donne $\eta_Y\,;s = \mathrm{id}_Y$. Donc $\eta_Y$ est un isomorphisme, d'inverse $s$.
+\end{proof}
+
+\begin{proof}[L'exemple demandé en marge]
+Prenons pour $E$ la catégorie des ensembles, pour $F$ la catégorie ponctuelle, pour $u$ l'unique foncteur $E \to F$ et pour $v$ le foncteur qui pointe un ensemble à un élément $\{*\}$ ; on a $u \dashv v$ parce que $\{*\}$ est final. Soit $E' = \{\varnothing\}$, réduite à un objet. Alors $u|E'$ est pleinement fidèle, puisque $\operatorname{Hom}(\varnothing, \varnothing)$ et $\operatorname{Hom}(u\varnothing, u\varnothing)$ ont chacun un seul élément ; mais $vu(\varnothing) = \{*\}$ n'est pas isomorphe à $\varnothing$, et $\eta_\varnothing : \varnothing \to \{*\}$ n'est pas un isomorphisme. La condition $vu(E') \subset \overline{E}'$ est donc nécessaire à l'équivalence~(1).
+\end{proof}
+
+\begin{proof}[Démonstration de l'énoncé sur les adjonctions idempotentes]
+On note (a) $\eta_{vP}$ inversible pour tout $P$, (b) $v(\varepsilon_P)$ inversible pour tout $P$, (c) $\varepsilon_{uX}$ inversible pour tout $X$, (d) $u(\eta_X)$ inversible pour tout $X$. On utilise que si $f\,;g$ est une identité et que l'une de $f$, $g$ est un isomorphisme, l'autre en est un, inverse de la première.
+
+(a)~$\Leftrightarrow$~(b) et (c)~$\Leftrightarrow$~(d) résultent de là et des identités triangulaires $\eta_{vP}\,;v(\varepsilon_P) = \mathrm{id}$ et $u(\eta_X)\,;\varepsilon_{uX} = \mathrm{id}$.
+
+(a)~$\Rightarrow$~(c). Soit $X \in E$. Par (a)~$\Rightarrow$~(b) en $P = uX$, $v(\varepsilon_{uX})$ est inversible. Or $vu(\eta_X)$ et $\eta_{vuX}$ en sont deux sections : $vu(\eta_X)\,;v(\varepsilon_{uX}) = v\bigl(u(\eta_X)\,;\varepsilon_{uX}\bigr) = \mathrm{id}$, et $\eta_{vuX}\,;v(\varepsilon_{uX}) = \mathrm{id}$ par l'identité triangulaire ; elles sont donc égales. Montrons que $u(\eta_X)$ est inverse de $\varepsilon_{uX}$. On a déjà $u(\eta_X)\,;\varepsilon_{uX} = \mathrm{id}$. La naturalité de $\varepsilon$ appliquée à $u(\eta_X) : uX \to uvuX$ donne
+\[
+  \varepsilon_{uX}\,;u(\eta_X) = uv\bigl(u(\eta_X)\bigr)\,;\varepsilon_{uvuX} = u(\eta_{vuX})\,;\varepsilon_{uvuX} = \mathrm{id},
+\]
+la deuxième égalité par ce qui précède, la troisième par l'identité triangulaire en $vuX$.
+
+(c)~$\Rightarrow$~(a) est l'énoncé dual. Soit $P \in F$. Par (c)~$\Rightarrow$~(d) en $X = vP$, $u(\eta_{vP})$ est inversible ; $uv(\varepsilon_P)$ et $\varepsilon_{uvP}$ en sont deux rétractions ($u(\eta_{vP})\,;uv(\varepsilon_P) = u(\eta_{vP}\,;v(\varepsilon_P)) = \mathrm{id}$, et l'identité triangulaire), donc sont égales. Alors $\eta_{vP}\,;v(\varepsilon_P) = \mathrm{id}$, et la naturalité de $\eta$ appliquée à $v(\varepsilon_P)$ donne $v(\varepsilon_P)\,;\eta_{vP} = \eta_{vuvP}\,;vuv(\varepsilon_P) = \eta_{vuvP}\,;v(\varepsilon_{uvP}) = \mathrm{id}$.
+
+Les quatre conditions sont donc équivalentes ; en particulier la condition~2 du manuscrit, $\eta v$ \emph{et} $\varepsilon u$ inversibles, équivaut à sa première moitié.
+\end{proof}
+
+\begin{proof}[Démonstration de l'énoncé sur les objets locaux]
+\emph{Caractérisation de $\Sigma$.} C'est un fait classique de la théorie des sous-catégories réflexives. Par l'adjonction $\alpha' \dashv \alpha$, $\operatorname{Hom}_E(Y, \alpha Z_1) \simeq \operatorname{Hom}_{E_1}(\alpha' Y, Z_1)$ naturellement en $Y$, de sorte que la composition avec $f$ à la source correspond à la composition avec $\alpha'(f)$. Par le lemme de Yoneda, $\alpha'(f)$ est un isomorphisme si et seulement si $\operatorname{Hom}_{E_1}(\alpha' Y, Z_1) \to \operatorname{Hom}_{E_1}(\alpha' X, Z_1)$ est bijective pour tout $Z_1$. En particulier tout objet $\alpha Z_1$, et tout objet qui lui est isomorphe, est $\Sigma$-local.
+
+\emph{Un objet local est dans l'image essentielle.} Soit $\xi$ un objet $\Sigma$-local et $\eta = \eta_\xi : \xi \to \alpha\alpha'\xi$ l'unité. Pour tout $Z_1$, la composition avec $\eta$, de $\operatorname{Hom}_E(\alpha\alpha'\xi, \alpha Z_1)$ dans $\operatorname{Hom}_E(\xi, \alpha Z_1)$, est bijective : c'est la bijection d'adjonction $\operatorname{Hom}_{E_1}(\alpha'\xi, Z_1) \simeq \operatorname{Hom}_E(\xi, \alpha Z_1)$ lue à travers la pleine fidélité de $\alpha$. Par la caractérisation qui précède, $\eta \in \Sigma$. Comme $\xi$ est local, la composition avec $\eta$, de $\operatorname{Hom}(\alpha\alpha'\xi, \xi)$ dans $\operatorname{Hom}(\xi, \xi)$, est bijective ; il existe donc $r : \alpha\alpha'\xi \to \xi$ avec $\eta\,;r = \mathrm{id}_\xi$. Alors $\eta\,;(r\,;\eta) = \eta = \eta\,;\mathrm{id}$, et comme la composition avec $\eta$ est injective sur les flèches à valeurs dans l'objet local $\alpha\alpha'\xi$, $r\,;\eta = \mathrm{id}$. Ainsi $\xi \simeq \alpha(\alpha'\xi)$. Avec la dernière phrase du paragraphe précédent, on obtient que les objets $\Sigma$-locaux sont exactement ceux de l'image essentielle de $\alpha$.
+\end{proof}
+
+\paragraph{Ce que la vérification a établi.} Rien de faux et aucune hypothèse manquante dans ces trois énoncés. L'équivalence~(1) ne demande rien au-delà de l'adjonction ; la réponse de la lecture à la question de la marge, « Elle l'est », est juste, et l'exemple ci-dessus en est un témoin avec $E'$ réduit à un élément, comme la marge le demandait. Les quatre conditions d'idempotence sont équivalentes, comme la note de la lecture l'affirme, de sorte que les paires du manuscrit sont redondantes. L'énoncé de la page~7 tient pour une sous-catégorie réflexive quelconque ; la caractérisation de $\Sigma$ est un fait classique, et l'identification des objets locaux à l'image essentielle, qui est le \q{Or c'est vrai} de la page, en est aujourd'hui un lemme de base.
+
+\paragraph{Ce qui reste.} L'énoncé dual~(2) sur les sous-catégories $F' \subset F$, qui se déduit formellement de~(1) par passage aux catégories opposées mais n'a pas été vérifié séparément ; la correspondance entre sous-catégories vérifiant~(1) et~(2) et les cinq conditions équivalentes de la page~3 ; l'équivalence $E_0 \simeq F_0$ entre les parties fixes (page~4) ; les conditions~1), 3) et~4) de la page~5 et la reconstruction d'une adjonction idempotente à partir d'une sous-catégorie réflexive, d'une coréflexive et d'une équivalence entre elles ; la question de descente d'adjoints de la page~6. Au-delà, rien des pages~9 à~19 n'est vérifié : la propriété universelle de la catégorie monoïdale symétrique libre $\Phi(A)$ et le produit non parenthésé, les contractions, le signe $\varepsilon(L)$ et les catégories de Picard, les théories de la page~13, l'extension de Kan, le critère de Giraud et le calcul de densité des pages~15 à~19. L'issue~\#26 range dans son premier niveau, pour cette cote, \q{the lemma on idempotent adjunctions and colimit preservation} : la moitié sur les adjonctions idempotentes est faite, la préservation des colimites par l'extension de Kan des pages~17 et~19 ne l'est pas.

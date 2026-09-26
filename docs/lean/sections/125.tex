@@ -1,0 +1,60 @@
+\section{Cote 125 : la carte des équivalences et le lemme du feuillet III-18}\label{sec:125}\verifie{Folder125}
+
+La cote 125, \emph{Dualité projective : notes manuscrites (s.d.)}, datée par l'inventaire \q{[avant 1970]}, compte huit feuillets, dont une chemise titrée de sa main \q{Dualité locale et dualité \dots\ projective}. Le feuillet~2 n'est pas une rédaction mais une carte : six énoncés encadrés, reliés par des doubles flèches verticales, pour $\mathbf P^n \supset X^r \supset Y^m$, $r > m > 0$, avec au départ la suite exacte de cohomologie locale, marquée d'une astérisque, et, sur la flèche qui relie le deuxième encadré au troisième, le seul mot du feuillet, \q{dualité}, entouré (\lot{125}{1}{2}). Le feuillet~3 est une page d'un tapuscrit numérotée III-18, annotée d'une autre main, qui établit qu'un homomorphisme $u : A^n \to B$ bijectif sur les germes en un point l'est sur un voisinage, avec en marge la justification \q{puisque $Y$ est noethérien et $B$ de type fini par hypothèse} (\lot{125}{1}{3}). La lecture modernisée donne les trois premiers étages de la carte et ce lemme ; ce sont les seules parties du dossier qui ne dépendent ni de la dualité de Serre ni du complété formel, et ce sont elles qui ont été vérifiées.
+
+\begin{enonce}[Feuillet 2, trois premiers étages]
+Soient $X$ une variété projective de dimension $r$, $Y \subset X$ un fermé de dimension $m$, $F$ un faisceau cohérent sur $X$. Les énoncés suivants sont équivalents :
+\begin{enumerate}
+\item (premier étage) $H^p(X - Y, F) = 0$ pour $p \geqslant m$ ;
+\item (deuxième étage) $H^p_Y(X, F) \to H^p(X, F)$ est bijectif pour $p > m$ et surjectif pour $p = m$ ;
+\item (troisième étage) $\mathrm{Ext}^q_{\mathcal O_X}(F, \Omega^r_{X/k}) \to \mathrm{Ext}^q_{\mathcal O_{\widehat X}}(\widehat F, \widehat\Omega^r_{X/k})$ est bijectif pour $q < r - m$ et injectif pour $q = r - m$.
+\end{enumerate}
+Le deuxième étage est \q{le premier étage lu à travers la suite exacte} ; le troisième lui est équivalent par la dualité, qui met $H^p$ et $\mathrm{Ext}^{r-p}(-, \Omega^r)$ en accouplement parfait, et \q{les bornes se répondent comme il faut : $p \geqslant m$ d'un côté, $q < r - m$ de l'autre, et $p + q = r$}.
+\end{enonce}
+
+La vérification porte sur la forme abstraite de ces deux passages. Pour le premier, on se donne une suite exacte longue quelconque indexée par les entiers naturels,
+\[
+  \cdots \to L^p \xrightarrow{\ a_p\ } G^p \xrightarrow{\ b_p\ } C^p \xrightarrow{\ \delta_p\ } L^{p+1} \xrightarrow{\ a_{p+1}\ } \cdots
+\]
+de groupes abéliens, exacte en chaque terme ; $L^p$ tient lieu de $H^p_Y(X,F)$, $G^p$ de $H^p(X,F)$, $C^p$ de $H^p(X-Y,F)$. Pour le second, la dualité de Serre n'est pas démontrée : elle est prise pour donnée sous la forme que lui prête la lecture, à savoir que, sur le corps $k$, la flèche de comparaison des $\mathrm{Ext}$ en degré $q = r - p$ s'identifie à la transposée ${}^t a_p : (G^p)^\vee \to (L^p)^\vee$ de $a_p$.
+
+\begin{lemme}\label{lem:125-etage12}
+Soit $m \in \mathbb N$. On a $C^p = 0$ pour tout $p \geqslant m$ si et seulement si $a_p$ est bijectif pour tout $p > m$ et $a_m$ est surjectif.
+\end{lemme}
+
+\begin{proof}
+Supposons $C^p = 0$ pour $p \geqslant m$. Pour $p \geqslant m$, $b_p$ est nul, donc son noyau, qui est l'image de $a_p$ par exactitude en $G^p$, est $G^p$ tout entier : $a_p$ est surjectif, en particulier pour $p = m$. Soit $p > m$ ; écrivons $p = q + 1$ avec $q \geqslant m$. Par exactitude en $L^{q+1}$, le noyau de $a_{q+1}$ est l'image de $\delta_q$, qui est nulle puisque $C^q = 0$ : $a_p$ est injectif, donc bijectif.
+
+Réciproquement, supposons $a_p$ bijectif pour $p > m$ et $a_m$ surjectif, et soient $p \geqslant m$ et $c \in C^p$. D'abord $a_p$ est surjectif : si $p > m$ parce qu'il est bijectif, si $p = m$ par hypothèse. Par exactitude en $L^{p+1}$, $a_{p+1}(\delta_p(c)) = 0$ ; comme $p + 1 > m$, $a_{p+1}$ est injectif et $\delta_p(c) = 0$. Par exactitude en $C^p$, il existe $y \in G^p$ avec $c = b_p(y)$, puis, $a_p$ étant surjectif, $x \in L^p$ avec $y = a_p(x)$. Alors $c = b_p(a_p(x)) = 0$ par exactitude en $G^p$.
+\end{proof}
+
+\begin{lemme}\label{lem:125-etage23}
+Soient $k$ un corps, $(a_p : L^p \to G^p)_{p \in \mathbb N}$ des applications $k$-linéaires, et $m \leqslant r$ des entiers. Les conditions suivantes sont équivalentes :
+\begin{enumerate}
+\item $a_p$ est bijectif pour $m < p \leqslant r$ et $a_m$ est surjectif ;
+\item ${}^t a_{r-q}$ est bijectif pour $q < r - m$ et ${}^t a_{m}$ est injectif.
+\end{enumerate}
+De plus, si $p + q = r$, on a $p \geqslant m \Leftrightarrow q \leqslant r - m$ et $p > m \Leftrightarrow q < r - m$.
+\end{lemme}
+
+\begin{proof}
+On utilise deux faits classiques d'algèbre linéaire sur un corps, valables en dimension quelconque : une application linéaire $a$ est surjective si et seulement si sa transposée ${}^t a$ est injective, et elle est bijective si et seulement si ${}^t a$ l'est. (Le premier est immédiat dans un sens, et dans l'autre repose sur le fait qu'un sous-espace strict est contenu dans le noyau d'une forme linéaire non nulle ; le second en découle, avec l'énoncé dual : $a$ injective si et seulement si ${}^t a$ surjective, par prolongement des formes linéaires à partir d'un sous-espace.)
+
+Les deux conditions sur $a_m$ se correspondent donc. Pour les autres : si $q < r - m$, l'entier $p = r - q$ vérifie $m < p \leqslant r$, et ${}^t a_{r-q}$ est bijectif puisque $a_p$ l'est ; si inversement $m < p \leqslant r$, l'entier $q = r - p$ vérifie $q < r - m$ et $r - q = p$, et $a_p$ est bijectif puisque ${}^t a_p$ l'est. L'assertion sur les bornes est de l'arithmétique : sous $p + q = r$, $p \geqslant m$ équivaut à $r - q \geqslant m$, soit $q \leqslant r - m$, et de même avec des inégalités strictes.
+\end{proof}
+
+Le lemme du feuillet~3 est vérifié sous sa forme affine : $Y = \operatorname{Spec} R$ et le voisinage cherché est un ouvert $D(f)$.
+
+\begin{enonce}[Feuillet 3, III-18, forme affine]
+Soient $R$ un anneau noethérien, $\mathfrak p$ un idéal premier de $R$, $B$ un $R$-module de type fini et $u : R^n \to B$ une application $R$-linéaire telle que $u_{\mathfrak p} : R^n_{\mathfrak p} \to B_{\mathfrak p}$ soit bijective. Il existe $f \in R \setminus \mathfrak p$ tel que $u_f : R^n_f \to B_f$ soit bijective.
+\end{enonce}
+
+\begin{proof}
+Le module $B$, de type fini sur un anneau noethérien, est de présentation finie : le noyau d'une surjection $R^s \to B$ est un sous-module de $R^s$, donc de type fini. Il suffit alors de démontrer l'énoncé classique suivant, où l'anneau commutatif $R$ est quelconque : \emph{si $M$ est de type fini, $B$ de présentation finie et $u : M \to B$ bijective en $\mathfrak p$, alors $u_f$ est bijective pour un $f \notin \mathfrak p$.}
+
+Le conoyau $Q$ de $u$ est de type fini, quotient de $B$, et $Q_{\mathfrak p} = 0$ puisque la localisation est exacte. Chacun de ses générateurs $y_1, \dots, y_t$ est donc annulé par un $g_i \notin \mathfrak p$, et $g = g_1 \cdots g_t \notin \mathfrak p$ annule $Q$ : $Q_g = 0$, c'est-à-dire que $u_g : M_g \to B_g$ est surjective. Son noyau $K$ est de type fini : $M_g$ est de type fini sur $R_g$, $B_g$ de présentation finie, et le noyau d'une surjection d'un module de type fini sur un module de présentation finie est de type fini (fait classique : si $0 \to K \to M' \xrightarrow{\ \pi'\ } B' \to 0$ est exacte, avec $M'$ de type fini et $B'$ de présentation finie, choisissons une surjection $\pi : R^s \to B'$ de noyau $N$ de type fini et relevons-la en $\varphi : R^s \to M'$ avec $\pi' \varphi = \pi$ ; chaque générateur de $M'$ s'écrit $\varphi(x_j) + k_j$ avec $k_j \in K$, et tout $k \in K$ s'écrit $\varphi(x) + \sum c_j k_j$ où $\pi(x) = \pi'(k) = 0$, de sorte que $K = \varphi(N) + \sum_j R k_j$). Comme $K_{\mathfrak p}$ est le noyau de $u_{\mathfrak p}$, il est nul ; le même argument fournit $h \notin \mathfrak p$ tel que $K_h = 0$. Avec $f = gh \notin \mathfrak p$, $u_f$ est surjective et injective.
+\end{proof}
+
+\paragraph{Ce que la vérification a établi.} Le passage du premier au deuxième étage vaut pour toute suite exacte longue, avec exactement les bornes du feuillet : rien de $X$, de $Y$ ni de $F$ n'y sert, et \q{lu à travers la suite exacte} est littéralement exact. Le passage du deuxième au troisième, la dualité étant admise sous la forme d'une transposition, fixe quelle borne répond à quelle autre : la bijectivité pour $p > m$ répond à la bijectivité pour $q < r - m$, la surjectivité en $p = m$ à l'injectivité en $q = r - m$. Les énoncés encadrés des trois étages sont donc cohérents entre eux. La phrase de la lecture qui les commente ne l'est pas tout à fait : elle apparie $p \geqslant m$ avec $q < r - m$, alors que, sous $p + q = r$, $p \geqslant m$ équivaut à $q \leqslant r - m$ ; la plage $p \geqslant m$ du premier étage répond à la plage entière du troisième, partie bijective et cas limite injectif réunis. C'est un glissement du commentaire, non de la carte. Le lemme III-18, enfin, est un fait classique sur les modules de présentation finie, vrai sur tout anneau commutatif, la source étant seulement supposée de type fini ; la noethérianité de $Y$ et la finitude de $B$, que la marge invoque, servent exactement à rendre $B$ de présentation finie, et à rien d'autre.
+
+\paragraph{Ce qui reste.} La dualité de Serre elle-même, et donc le passage du deuxième au troisième étage autrement que sous la forme admise ; les quatrième et cinquième étages, qui comparent la cohomologie de $X$ à celle de son complété formel $\widehat X$ ; les annulations pour $\mathcal O(n)$, $n$ grand, des feuillets~2 et~7 et l'énoncé sur la dimension cohomologique de $P - X$ ; le dictionnaire des feuillets~4 et~5 (limites inductives et projectives d'$\mathrm{Ext}$) ; la proposition du feuillet~6 (III-5) sur le calcul de la cohomologie d'un complémentaire par le complexe de Koszul ; et, pour III-18, le passage de la forme affine à un faisceau cohérent sur un préschéma noethérien. Le complété formel, la dualité cohérente et la cohomologie des faisceaux sur les schémas projectifs manquent à la théorie disponible. Les énoncés de profondeur le long d'un fermé et de prolongement de type Hartogs que l'issue~\#26 associe à cette cote, avec la cote~21, n'ont pas non plus été vérifiés ici.
