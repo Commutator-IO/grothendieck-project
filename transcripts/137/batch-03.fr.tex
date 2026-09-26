@@ -1,0 +1,938 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 137, batch 3 (pages 41-60).
+% Established from the facsimile archives/batches/137/batch-03.pdf (a copy of
+% 137.pdf fetched through the project's relay,
+% https://grothendieck-relay.onrender.com/source/137.pdf; PDF page k is
+% archivists' page 40+k, no cover sheet), per the skill transcribe-grothendieck.
+% The folder is eighty-five pages in five batches; this is the third
+% (pages 41-60). Batches 1, 2, 4 and 5 were transcribed in parallel and were
+% not available to this pass, so the notation of pages 41-43 (C, A, K, C^•,
+% alpha^•) is read off these pages alone.
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-09-26 — first pass, unchecked against the pages by a human.
+%
+% Pages skipped: 47, a blank tan sheet carrying only a stray pencil figure
+% (a « 2 »?) at the top — nothing of the mathematics.
+%
+% Pages summarised: none. Page 56 carries only three lines at its head (the
+% end of page 55, which closes on « TSVP »); the rest of that sheet is blank
+% music-ruled paper. Page 58 is written upside down relative to the scan and
+% was read turned; it is loose jottings (a struck line, a scheme of arrows
+% between Hom_{Σ-sex}, B^• and Hom_sex, Ext^1(L^•, M) ⇐ 0, and
+% Hom_{Σ-ex}(P, B) ≈ Hom_{Σ-ex}(P_0, B)), given as far as it reads. Page 51 is
+% cancelled by one long pencil stroke and page 42 by long diagonals over one
+% paragraph; both are transcribed.
+%
+% His pagination: none in this batch. There are no page numbers of his own on
+% these leaves. Numbered runs: his statements run Ex 2 (p. 41), Prop 2
+% (p. 42), Prop. 3 (p. 43, referring back to « prop. 1 »), Ex 3 (p. 45),
+% Proposition 4 (p. 45, barely legible), Prop 5 (p. 46); then a theorem
+% « Th » with parts a), b) (p. 50), the axioms « Sex 1) », « Sex 2) » for a
+% class of exact sequences (p. 48), and on p. 57 a fresh start, « Construction
+% canonique de P (k-lin.) », with conditions a), b), c), continued d), e) on
+% pp. 59-60. A large pencil « 1 » in the top-left margin of p. 50 is noted
+% where it stands; it is not clear that it numbers a run. All of this is
+% recorded in \note{}s in place.
+%
+% Transcription conventions for this batch. The source category written with
+% a doubled K is \mathbb{K} (it plays the role of the C of p. 41); his
+% blackboard C for the universal complex is \mathbb{C}^•, \mathbb{C}^i;
+% \Psi^i, \Phi^• as he writes them from p. 51 on; Σ-sex / Σ-ex for his
+% « Σ-exact à gauche / Σ-exact » indices, as on the page. Hand: fast blue ink,
+% much connective prose lost; formulas carry. Hardest pages: 45 (margin notes
+% and the Dold-Puppe diagram), 49-50 and 59-60 (pale, fast, interlinear
+% substitutions).
+%
+% What the batch is about. Universal properties of categories of perfect
+% chain complexes over k. From the full embedding C^° → Ab_k^• given by
+% Hom(-, C^•) (Ex. 1-2, p. 41) and its dual (p. 42), he shows (Prop. 3) that
+% a k-linear functor F out of K is recovered from the complex C^•_F = F(C^•)
+% as F(x) ≅ Hom^•_k(α^•(x), C^•_F); via Dold-Puppe (Ex 3, Prop 5, pp. 45-46)
+% the same holds with semi-simplicial objects, F ↦ F(C^*) being an equivalence
+% onto B^* for B karoubian. From p. 48 he introduces a class Σ of exact
+% sequences (Sex 1-2), Σ-monos, Σ-epis, Σ-resolutions, and states (Th a-b,
+% p. 50) that on the category P_• of bounded complexes of finite free modules
+% the restriction F ↦ F(C^•) identifies Σ-left-exact functors with B^• and
+% Σ-exact ones with Σ-resolutions; pp. 51-56 prove it by an adjunction ρ ⊣ σ
+% and dévissage along the canonical filtration (extensions of the Ψ^i).
+% Pages 57-60 restart with an intrinsic characterisation of P by conditions
+% a)-e) (Ψ^0 representing Hom(-, C^0)^∨, Φ^• a Σ-resolution, amalgamated sums
+% and fibre products, successive extensions of the Ψ^i).
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{137}
+\batch{3}
+\pages{41}{60}
+\dating{[vers 1975-1976]}
+\watermark{Édition de démonstration}
+\foldertitle{Dévissage des complexes ½ simpliciaux ∂ - parfaits et structures multiplicatives… (1975 ou 1976) : notes manuscrites (s.d.)}
+
+\begin{document}
+
+\page{41}
+On trouve donc un foncteur pl.\ fid.
+\[
+\mathcal{C}^{\circ} \xhookrightarrow{\ \alpha^{\bullet}\ } \mathit{Ab}_k^{\bullet}
+\]
+\note{l'étiquette $\alpha^{\bullet}$ est écrite sur un premier symbole biffé ; une étoile, apparemment biffée, suit l'exposant de $\mathit{Ab}_k$}
+qui associe à tout \struck{\ill{}} $L_*$ le complexe de cochaînes
+$\operatorname{Hom}_{\mathcal{C}}(L_*, C^{\bullet}_*)$
+\[
+0 \to \operatorname{Hom}(L_*, C^0_*) \to \operatorname{Hom}(L_*, C^1_*) \longrightarrow \cdots ,
+\]
+et dont la restriction à $\mathcal{A}$ est donnée par
+\[
+\alpha^{\bullet}(C^i_*) = \bigl( 0 \to 0 \to \cdots 0 \to \underset{\text{degré } i}{k} \xrightarrow{\ \mathrm{id}\ } \underset{\text{degré } i+1}{k} \to 0 \to \cdots \bigr) = K^i_{\bullet}
+\]
+\note{le membre de droite est surchargé : un premier symbole est biffé et $K^i_{\bullet}$ récrit au-dessus ; la lecture vient de la ligne suivante}
+et par la loi
+\[
+\begin{array}{ccc}
+\alpha^{\bullet}(C^i_*) & \xleftarrow{\ \alpha^{\bullet}(d^i)\ } & \alpha^{\bullet}(C^{i+1}_*) \\
+\| & & \| \\
+K^i_{\bullet} & \longrightarrow & K^{i+1}_{\bullet}
+\end{array}
+\qquad k \to 0
+\]
+\note{sous ce carré, un schéma des deux complexes en colonnes, les degrés $i$, $i+1$, $i+2$ notés à gauche : la colonne $K^i_{\bullet}$ porte $0, k, k, 0$, la colonne $K^{i+1}_{\bullet}$ porte $0, 0, k, k$ ; les flèches horizontales vont de droite à gauche, $k \leftarrow 0$ en degré $i$, $k \xleftarrow{\mathrm{id}} k$ en degré $i+1$, $0 \Leftarrow k$ en degré $i+2$. La flèche de la ligne $K^i_{\bullet} \to K^{i+1}_{\bullet}$ pointe vers la droite, à l'inverse de celle du dessus ; le « $k \to 0$ » écrit à droite est isolé}
+
+L'image essentielle \add{de} $\mathcal{C}^{\circ}$ \add{par $\alpha^{\bullet}$} est la catégorie des
+$K^{\bullet} \in \operatorname{Ob} \mathit{Ab}_k^{\bullet}$ qui sont libres de t.\,f.\
+en toute dimension, et qui sont \ill{} \uncertain{nulles}
+\ill{} \ill{} \ill{} \ill{} d'un libre de t.\,f.\ \uncertain{sont} itou.
+\note{ce paragraphe est écrit à droite du schéma, séparé du reste par un trait ; « $K^i$ » est ajouté au-dessus de la première ligne avec un signe d'insertion, et la fin, en écriture très rapide, n'est lue qu'en partie}
+
+\marginal{commentaire \uncertain{pour} Ex~2}
+
+\emph{Ex 2} Faisons $\mathcal{B} = \mathit{Ab}_k^{\circ}$, (qui est \struck{\ill{}}
+\uncertain{k-linéaire} \ill{} \ill{} \ill{} commutatif), et pour tout
+$L_* \in \operatorname{Ob} \mathcal{C}$ on considère le foncteur contrav.\ qu'il
+représente, interprété comme foncteur k-lin.
+\[
+\mathcal{C}^{\circ} \longrightarrow \mathit{Ab}_k^{*}, \qquad M_* \longmapsto \operatorname{Hom}_{\mathcal{C}}(M_*, L_*)
+\]
+\note{avant $\mathit{Ab}_k^{*}$, un premier but est biffé et illisible}
+on trouve ainsi un foncteur pl.\ fid.\ \uncertain{covariant}
+\[
+\begin{array}{ccc}
+\mathcal{C} \hookrightarrow \underline{\operatorname{Hom}}_{k\text{-lin}}(\mathcal{C}^{\circ}, \mathit{Ab}_k^{\bullet}) & \xrightarrow{\ \sim\ } & \underline{\operatorname{Hom}}_{k\text{-lin}}(\mathcal{C}, \mathit{Ab}_k^{\circ})^{\circ} \\
+\downarrow{\scriptstyle \wr} & & \downarrow{\scriptstyle \wr} \\
+\underline{\operatorname{Hom}}_{k\text{-lin}}(\mathcal{A}^{\circ}, \mathit{Ab}_k^{\bullet}) & \xrightarrow{\ \sim\ } & \underline{\operatorname{Hom}}_{k\text{-lin}}(\mathcal{A}, \mathit{Ab}_k^{\circ})^{\circ} \\
+\downarrow & & \downarrow{\scriptstyle \wr} \\
+\lbrace \mathit{Ab}_k^{*} \rbrace^{\circ} & & (\mathit{Ab}_k^{\circ *})^{\circ}
+\end{array}
+\]
+\note{en bas à gauche, après $\lbrace \mathit{Ab}_k^{*} \rbrace^{\circ}$, une identification $\simeq (\mathit{Ab}_k \ldots)^{\circ}$ est biffée de hachures ; les exposants de ce coin sont surchargés d'étoiles}
+on trouve un foncteur pl.\ fid.
+\[
+\mathcal{C}^{\circ} \xhookrightarrow{\ \beta^{\bullet}\ } \mathit{Ab}_{k*}
+\]
+\note{l'étiquette $\beta^{\bullet}$ est écrite sur un premier symbole biffé}
+
+\page{42}
+On trouve ici que
+\[
+\beta_{\bullet}(\mathbb{C}^i) = \bigl( \cdots 0 \to \cdots 0 \to \underset{i-1}{k} \to \underset{i}{k} \to 0 \to \cdots \to 0 \bigr) \quad \text{pour } i \geqslant 1
+\]
+\note{un premier symbole après le signe $=$ est biffé ; les deux indices au-dessus des $k$ sont récrits à l'encre plus foncée et se lisent mal : « $i-1$ », « $i$ » ou « $i+1$ »}
+\[
+\beta_{\bullet}(C^0) = \bigl( 0 \to \underset{\text{degré } 0}{k} \to 0 \bigr)
+\]
+\note{la parenthèse commençait par un $k$, biffé ; sous ce $k$, « degré $0$ » est lui aussi biffé et reporté sous le second}
+et $\beta_{\bullet}(d^i) : C^i_{\bullet} \xrightarrow{\ d^i_{\bullet}\ } C^{i+1}_{\bullet}$ est donné par
+\[
+(d^{i+1}_{i}) = \mathrm{id}_k \qquad i \geqslant \uncertain{0}
+\]
+\note{les indices de $d$ sont surchargés ; la condition se lit « $i \geqslant 10$ », sans doute « $i \geqslant 0$ » ; au-dessous, une ligne commençant par $d$ et finissant par « $i = 0$ » est biffée}
+
+\struck{On donne ainsi \ill{} \ill{} la cat.\ (des \ill{}) \ill{} \ill{} de chaînes
+\ill{} qui \ill{} \ill{} comme possibilité de construction d'un exemple de
+$(\mathcal{C}, (\mathbb{C}^{\bullet}))$.}
+\note{ce paragraphe est annulé par de longs traits obliques}
+\marginal{Ceci n'est pas \uncertain{bon} \ill{} \ill{} l'irrégularité \ill{} \ill{} $i \geqslant 0$}
+\note{note oblique de la marge gauche, en face du passage annulé, lue en partie ; plus bas dans la même marge, deux mots, peut-être « pour plus tard »}
+
+\section*{Passage de l'exemple 1 à l'exemple 2}
+
+Considérons le foncteur
+\[
+M \longmapsto \check{M}, \qquad \mathit{Ab}_k^{\circ} \longrightarrow \mathit{Ab}_k
+\]
+qui induit une équivalence de la catégorie des \add{$k$-}modules libres de t.f.\ avec elle-même.
+\note{« $k$- » est ajouté au-dessus de « modules »}
+
+Cela donne aussi une équivalence entre les cat.\ de complexes de chaînes et de
+cochaînes \struck{\ill{}} \ill{} libres de t.f., et aussi celles où les $Z^{\bullet}$
+(et $Z^i$) sont libres de t.f., et \ill{}
+\struck{\ill{} \ill{} \ill{} une cat.\ finie. \ill{} \ill{}}
+\struck{\ill{} \ill{} \ill{}}
+On a donc \ill{} $\alpha^{\bullet}_{\bullet}(\mathbb{K}) \overset{\text{dual}}{=} \alpha_{\bullet}(x)^{\vee}$
+\struck{\ill{} \ill{}}, un diagramme d'équivalences
+\note{ce passage est surchargé de biffures horizontales ; seules les formules et quelques mots se lisent}
+
+\begin{tikzcd}
+\mathcal{C} \arrow[r, "\alpha_{\bullet}\ \approx"] \arrow[d, "(\alpha^{\bullet})^{\circ}\ \wr"'] & \mathbb{K}_{\bullet} \\
+\mathbb{K}^{\bullet \circ} \arrow[ur, no head, "\approx\ \vee"'] &
+\end{tikzcd}
+
+\note{un $\mathbb{K}_{\bullet}$ isolé, à l'encre foncée, est écrit à gauche de $\mathcal{C}$ ; la diagonale entre $\mathbb{K}^{\bullet\circ}$ et $\mathbb{K}_{\bullet}$, marquée $\approx$ et $\vee$, n'a pas de pointe visible}
+
+\struck{Il \ill{} de \uncertain{définir} une \ill{} \ill{} \ill{}}
+\struck{Restriction à $\mathcal{A}$ de \ill{} qui est trivial.}
+\note{ces deux lignes sont barrées et en partie encadrées}
+
+\emph{Explications quand \ill{}}
+
+\marginal{donc $\alpha_n(x) \simeq \operatorname{Hom}(\mathbb{C}^{n-1}, x)$ si $n \geqslant 1$, et les hom
+$\alpha_n(x) \to \alpha_{n-1}(x)$ pour $n \geqslant 2$ sont donnés par transposition \ill{} de
+$\mathbb{C}^{n-1} \to \mathbb{C}^n$. Mais $\alpha_0(x) \simeq \operatorname{Hom}(x, \mathbb{C}^0)^{\vee}$
+et $\alpha_1(x) \to \alpha_0(x)$ donné par
+$\operatorname{Hom}(\mathbb{C}^0, x) \to \operatorname{Hom}(x, \mathbb{C}^0)^{\vee}$ qu'on devine.}
+\note{note écrite verticalement le long de la marge gauche, dans un cadre qui la sépare de « Explications » et de la Prop.~2 ; l'indice du second $\alpha$ (« $n-1$ » ou « $n+1$ ») n'est pas sûr}
+
+\emph{Prop 2} On a une dualité parfaite fonctorielle en $M \in \operatorname{Ob} \mathbb{K}$ ($n \geqslant 0$ fixé)
+\[
+\begin{array}{ccc}
+\operatorname{Hom}(\mathbb{C}^{n}, x) \times \operatorname{Hom}(x, \mathbb{C}^{n+1}) & \longrightarrow & \operatorname{Hom}(\mathbb{C}^{n}, \mathbb{C}^{n+1}) \simeq k \\
+(u, v) & \longmapsto & vu
+\end{array}
+\]
+\note{au-dessus, une première ligne, $\alpha_n(M)_{\bullet} \times \alpha^n(M) \to k$, est biffée ; les exposants des $\mathbb{C}$ de la seconde ligne sont petits et incertains}
+
+\page{43}
+Revenant à la prop.~1. Soit $C^{\bullet}$ \add{$\in \operatorname{Ob} \mathcal{B}^{\bullet}$} un complexe
+de cochaînes de $\mathcal{B}$, comment reconstituer le foncteur $k$-lin.
+\[
+F_{C^{\bullet}} : \mathbb{K} \longrightarrow \mathcal{B}
+\]
+i.e.\ comment « calculer » $F_{C}(x)$ pour $x \in \operatorname{Ob} \mathbb{K}$ ?
+Il faut qu'on dise comment on « repère » $x$, disons par
+$\alpha^{\bullet}(x) \in \mathit{Ab}_k^{\bullet}$. Ceci dit, on trouve
+\note{« $\in \operatorname{Ob} \mathcal{B}^{\bullet}$ » est ajouté au-dessus de « un complexe », avec une accolade. La lettre de la catégorie source, ici et page 42 (« $M \in \operatorname{Ob} \mathbb{K}$ »), est un K à haste doublée ou bouclée, transcrit $\mathbb{K}$ ; elle tient la place de la catégorie notée $\mathcal{C}$ page 41}
+
+\emph{Prop.~3} On a un isom.\ bifonctoriel en $F, x$
+($x \in \operatorname{Ob} \mathbb{K}$, $F \in \operatorname{Ob} \underline{\operatorname{Hom}}_{k\text{-lin}}(\mathcal{C}, \mathcal{B})$)
+\[
+F(x) \xrightarrow{\ \sim\ } \operatorname{Hom}^{\bullet}_k(\alpha^{\bullet}(x), F(\mathbb{C}^{\bullet}))
+= \operatorname{Hom}^{\bullet}_k(\alpha^{\bullet}(x), \mathcal{C}^{\bullet}_F),
+\]
+\note{dans la parenthèse, un premier $\mathcal{B}$ est biffé avant « Ob » ; le $x$ de « $x \in$ » n'est pas sûr. Le second membre est écrit sous le premier, relié par un signe $=$ vertical}
+[où on définit, pour un $K^{\bullet} \in \operatorname{Ob} \mathit{Ab}_k^{\bullet}$ et
+$\mathcal{C}^{\bullet} \in \operatorname{Ob} \mathcal{B}^{\bullet}$, l'objet
+$\operatorname{Hom}^{\bullet}_k(K^{\bullet}, \mathcal{C}^{\bullet})$ de $\mathcal{B}$ (s'il existe)
+par l'isom.\ fonctoriel en $b \in \operatorname{Ob} \mathcal{B}$
+\[
+\operatorname{Hom}(b, \operatorname{Hom}^{\bullet}(K^{\bullet}, \mathcal{C}^{\bullet}))
+\simeq \operatorname{Hom}_{\mathcal{B}^{\bullet}}(b \otimes_k K^{\bullet}; C^{\bullet}) ;
+\]
+si les $K^i$ sont libres de type fini, $b \otimes_k K^{\bullet}$ est bien défini, donc
+$b \mapsto \operatorname{Hom}_{\mathcal{B}^{\bullet}}(b \otimes_k K^{\bullet}; \mathbb{C}^{\bullet})$
+l'est, et la question est si ce foncteur est représentable ; il se trouve qu'il l'est si
+$K^{\bullet} \in \operatorname{Ob} \mathbb{K}^{\bullet}$.
+\note{sous « $K^{\bullet}$ », un mot biffé (« \ill{} ») ; dans « $\in \operatorname{Ob}$ », un premier $\mathit{Ab}_k$ est biffé et remplacé par $\mathbb{K}^{\bullet}$}
+[Mais de façon générale, c'est le sous-foncteur de
+$\prod_i \operatorname{Hom}_k(K^i, C^i)$ ($\in \operatorname{Ob} \mathcal{B}$) noyau de
+\[
+\prod_i \operatorname{Hom}_k(K^i, C^i) \xrightarrow{\ \delta\ } \prod_i \operatorname{Hom}_k(K^i, C^{i+1})
+\]
+($\delta(u^i) = du^i - u^{i+1}d$) \ill{} qui \struck{est représ.} \ill{} si $\mathcal{B}$
+\add{stable par Ker}, si les $\operatorname{Hom}_k(K^i, C^i)$ sont repr.\ (p.\ ex.\
+\struck{\ill{}} $K^i$ de prés.\ finie) et les deux
+\note{la flèche $\delta$ est doublée d'un second trait, comme un couple de flèches ; « stable par Ker » est écrit au-dessus d'un mot souligné qu'il remplace}
+\marginal{\ill{} avant \ill{} Prop.~3}
+\note{note de la marge gauche, séparée du texte par un trait vertical, en face de « de façon générale »}
+
+\page{44}
+produits $\prod_i$ aussi --- ce qui est \ill{} automatique si les $K^i$ sont nuls sauf un
+nb fini\ldots]
+
+\struck{Comme le foncteur $\operatorname{Hom}^{\bullet}_k(K^{\bullet}, \mathcal{C}^{\bullet})$
+($\mathcal{B}^{\circ} \to (\mathit{Ab})$) dépend de façon additive des $K^i$, sa
+représentabilité pour $K^{\bullet}$}
+\note{passage encadré et barré de traits obliques ; il s'interrompt sans conclure}
+
+Définissons un hom dans $\widehat{\mathcal{B}}$
+\[
+(1) \qquad F(x) \longrightarrow \operatorname{Hom}^{\bullet}_k(\alpha^{\bullet}(x), C^{\bullet}_F)
+= \operatorname{Hom}^{\bullet}_k(\alpha^{\bullet}(x), F(\mathbb{C}^{\bullet}))
+\]
+i.e.\ un hom dans $\mathcal{B}^{\bullet}$
+\[
+(1') \qquad F(x) \otimes \alpha^{\bullet}(x) \longrightarrow C^{\bullet} = F(\mathbb{C}^{\bullet})
+\]
+\note{$F$ et $\alpha^{\bullet}$ sont récrits à l'encre foncée sur une première lettre. Une accolade sous $F(x) \otimes \alpha^{\bullet}(x)$ renvoie à un mot écrit dessous, « repère », suivi d'un signe $=$ vertical qui mène à la ligne suivante}
+\marginal{rep.\ car les $\alpha^i(x)$ sont libres de t.\,f.}
+\[
+(1'') \qquad \underset{\in \mathcal{B}}{F(x)} \otimes \underset{\in \mathit{Ab}_k^{\bullet}}{\operatorname{Hom}(x, \mathbb{C}^{\bullet})} \xrightarrow{\ \mathrm{can}\ } F(\mathbb{C}^{\bullet})
+\]
+qui provient de l'hom fonctoriel en $x, C \in \operatorname{Ob} \mathbb{K}$
+\[
+F(x) \otimes \operatorname{Hom}(x, C) \longrightarrow F(C)
+\]
+Comme (1''), donc (1) est fonctoriel en $x$, et les deux membres sont des foncteurs
+additifs en $x$, pour prouver que \struck{\ill{}} (1) est un iso, $\forall F$, il suffit
+de le voir pour $x$ de la forme $\mathbb{C}^i$. Or alors
+\[
+(2) \qquad F(\mathbb{C}^i) \longrightarrow \operatorname{Hom}^{\bullet}_k(\mathbb{C}^{\bullet}_i, F(\mathbb{C}^{\bullet}))
+\]
+\note{dans le second argument, un premier symbole est biffé devant $F$}
+et on a évidemment
+\[
+\operatorname{Hom}^{\bullet}_k(\mathbb{C}^{\bullet}_i, \underset{\in \operatorname{Ob} \mathcal{B}^{\bullet}}{\mathcal{C}^{\bullet}}) \simeq C^i
+\]
+et on voit de suite que \ill{} \ill{} est \ill{}, \ill{} évidemment, cqfd.
+
+\page{45}
+\emph{Ex 3} La théorie de Dold-Puppe nous donne \struck{équivalences de catégories}
+équivalence de catégories (pour \uncertain{toute} catégorie additive \ill{} \ill{}
+foncteurs \uncertain{directs})
+\[
+\mathcal{B}_{\bullet} \underset{\mathrm{DP}^{*}}{\overset{\mathrm{ND}_{\bullet}}{\rightleftarrows}} \mathcal{B}_{*}
+\qquad \text{donc aussi (en appliquant à } \mathcal{B}^{\circ}\text{)} \qquad
+\mathcal{B}^{\bullet} \underset{\mathrm{DP}_{*}}{\overset{\mathrm{ND}^{\bullet}}{\rightleftarrows}} \mathcal{B}^{*}
+\]
+\note{les deux paires sont écrites $\approx$ avec une flèche $\mathrm{DP}$ vers la droite et une flèche courbe $\mathrm{ND}$ revenant vers la gauche ; une première écriture, $\mathit{Ab}_k^{\bullet} \simeq \mathit{Ab}_k \ldots$, est biffée de zigzags en tête de la ligne}
+en particulier
+\[
+\mathit{Ab}_{k\bullet} \xrightarrow{\ \approx\ } \mathit{Ab}_{k*}, \qquad \mathit{Ab}_k^{\bullet} \xrightarrow{\ \approx\ } \mathit{Ab}_k^{*}
+\]
+\marginal{NB le foncteur DP \ill{} \ill{} \ill{} \ill{} (additives karoubiennes)}
+\marginal{$\mathrm{ND} = $ \uncertain{normalisé} \ill{} ; $\mathrm{DP} = $ Dold-Puppe}
+\marginal{\ill{} \ill{} \ill{} avec foncteurs additifs}
+\note{trois notes obliques dans la marge gauche, en face de ces lignes ; une ligne relie la dernière au $\mathcal{B}_{\bullet}$ de la formule}
+
+\struck{Il est \ill{} \ill{}}
+
+\ill{} l'image essentielle de $\mathbb{K}^{\bullet}$ et $\mathbb{K}_{\bullet}$ par \ill{}
+deux foncteurs \ill{} notées $\mathbb{K}_{*}$ et $\mathbb{K}^{*}$. On a donc un diagramme
+d'équivalences canoniques
+\marginal{$\mathbb{K}$ \ill{} \ill{} \ill{} \ill{} \ill{} \ill{} $K(k)$ \ill{} \ill{} \ill{} $\circ^{*}$}
+\note{note oblique de la marge gauche, presque entièrement illisible. Au-dessous, un premier diagramme --- $\mathbb{K}_{\bullet} \rightleftarrows \mathit{Ab}_{k*}$ marqué $\mathrm{ND}$, $\mathrm{DP}$, au-dessus de $\mathit{Ab}_k^{\bullet} \rightleftarrows \mathit{Ab}_k^{*}$ --- est annulé par de longs traits en boucle}
+
+\begin{tikzcd}[column sep=large]
+\mathbb{K}_{\bullet} \arrow[rr, bend left=10, "\mathrm{DP}^{*}"] \arrow[dd, leftrightarrow, "\vee\ \circ"'] & & \mathbb{K}_{*} \arrow[ll, bend left=10, "\mathrm{ND}_{\bullet}"'] \arrow[dd, leftrightarrow, "\vee\ \circ"] \\
+& \mathbb{K} \arrow[ul, "\alpha_{\bullet}"] \arrow[ur, "\alpha_{*}"'] \arrow[dl, "\alpha^{\bullet}\ \circ"] \arrow[dr, "\alpha^{*}\ \circ"'] & \\
+\mathbb{K}^{\bullet} \arrow[rr, bend right=10, "\mathrm{DP}^{*}_{\bullet}"'] & & \mathbb{K}^{*} \arrow[ll, bend right=10, "\mathrm{ND}^{\bullet}"]
+\end{tikzcd}
+
+\note{les étiquettes $\mathrm{ND}$ sont au-dessus des flèches vers la gauche, les $\mathrm{DP}$ au-dessous des flèches vers la droite ; sur chaque flèche verticale, marquée $\vee$, le petit rond est surchargé d'un trait horizontal, et les flèches $\alpha^{\bullet}$, $\alpha^{*}$ portent aussi un petit rond}
+
+où les flèches \struck{\ill{}} marquées d'un signe $\circ$ sont des foncteurs \emph{contravariants}.
+
+\marginal{Convention d'écriture. Pour un objet $C$ de $\mathbb{K}$, on note $C_{\bullet}$, $C_{*}$, $C^{\bullet}$, $C^{*}$ les objets correspondants obtenus en \ill{} $\alpha_{\bullet}$, $\alpha_{*}$, $\alpha^{\bullet}$, $\alpha^{*}$, et ses composantes \ill{} $C_n$, $C_{[n]}$, $C^n$, $C^{[n]}$ (attention : \ill{} \ill{} \ill{} \ill{} $[\ ]$ en $\mathbb{C}^{\bullet}_{\bullet}$, $\mathbb{C}_{*}$, $\mathbb{C}^{\bullet}$, $\mathbb{C}^{*}$, $\mathbb{C}^{\bullet}$)}
+\note{longue note de la marge gauche, à côté du diagramme, séparée du texte par un trait vertical ; la fin de la liste de symboles n'est pas sûre}
+
+On a
+
+\emph{Proposition 4} \struck{\ill{}} On a \ill{} \ill{} \ill{} \ill{} \ill{} \ill{} \uncertain{compatibles} \ill{}
+
+Bien compris que
+
+\page{46}
+\[
+\alpha_{*}(\mathbb{C}^i) \simeq \mathrm{DP}(C^{i}_{\bullet}) \simeq \overset{i+1}{\Lambda} \Phi_{*}
+\]
+(d'où
+\[
+\alpha^{*}(\mathbb{C}^i) \simeq \mathrm{DP}(C^{\bullet}_{i}) \simeq \overset{i+1}{\Lambda} \check{\Phi}_{*} \ )
+\]
+\note{la page 45 s'achève sur « Bien compris que », qui introduit ces formules ; la place des indices de $C$ (en haut ou en bas) n'est pas sûre}
+
+\struck{L'iso défini entre les $\alpha_{\bullet}(\mathbb{C}^i)$ et \ill{} \ill{} $T_{*}\Lambda$ \ill{} les foncteurs $\mathrm{ND} : \mathbb{K}_{*} \to \mathbb{K}_{\bullet}$ \ill{} \ill{} donné \ill{} \ill{} de $\overset{i+1}{\Lambda} \Phi_{*}$ \ill{}}
+\struck{Par suite}
+\struck{\emph{Cor.~1} Les foncteurs \ill{} \ill{} $\mathrm{DP} : \mathit{Ab}_{k\bullet} \to \mathit{Ab}_{k*}$ \ill{}}
+\note{ce passage, écrit en partie entre les lignes, est barré et encadré}
+
+Appliquant la théorie de Dold-Puppe à $\mathcal{B}$ (qui est bien additive et
+\struck{\ill{}} karoubienne pourvu que ses sommes directes, \struck{\ill{}} du moins pour les $k$
+\struck{\ill{} \ill{} \ill{}} en particulier, $k$ \ill{} \ill{}
+\uncertain{sont}\ldots, $k = \mathbb{Z}$), on trouve dans $\mathbb{K}$ un complexe
+\note{plusieurs mots de ces lignes sont barrés de traits obliques}
+\[
+\struck{\ill{}} \qquad \mathbb{C}^{*} = \mathrm{DP}(\mathbb{C}^{\bullet})
+\]
+\struck{(qui est dans \ill{}, pour \ill{}} défini dans \struck{\ill{}} $K(k)$ quel que
+soit \add{$k$}), d'où pour toute $\mathcal{B}$ \add{$k$}-additive
+
+\begin{tikzcd}
+\underline{\operatorname{Hom}}_{k\text{-lin}}(\mathbb{K}, \mathcal{B}) \arrow[d, "\wr\ \mathrm{restr}"'] \arrow[ddr, bend left=20, "F \mapsto F(\mathbb{C}^{*})"] & \\
+\underline{\operatorname{Hom}}_{k\text{-lin}}(\mathcal{A}, \mathcal{B}) \arrow[d, "\wr\ F \mapsto F(\mathbb{C}^{\bullet})"'] & \\
+\mathcal{B}^{\bullet} \arrow[r, hook, "\mathrm{DP}"] & \mathcal{B}^{*}
+\end{tikzcd}
+
+\note{le $\mathcal{A}$ du deuxième $\underline{\operatorname{Hom}}$ est surchargé}
+
+donc un foncteur $F \mapsto F(\mathbb{C}^{*})$ qui est pl.\ fid.
+
+Si $\mathcal{B}$ est karoubienne, $\mathrm{DP}_{\mathcal{B}}$ est une équivalence, donc aussi
+$F \mapsto F(\mathbb{C}^{*})$. Donc
+
+\ill{} \ill{} un objet simplicial \emph{universel}
+$\mathbb{C}^{*}$ \uncertain{covariant} \ill{} dans cat.\ $k$-additive karoubienne
+
+\emph{Prop 5} Si $\mathcal{B}$ est $k$-additive karoubienne, alors
+$F \mapsto F(\mathbb{C}^{*})$ est une équivalence
+\[
+\underline{\operatorname{Hom}}_{k\text{-lin}}(\mathbb{K}, \mathcal{B}) \longrightarrow \mathcal{B}^{*}
+\]
+On a un isom.\ canonique \add{bifonctoriel} en
+$F \in \operatorname{Ob} \underline{\operatorname{Hom}}_{k\text{-lin}}(\mathbb{K}, \mathcal{B})$ et $x \in \operatorname{Ob} \mathbb{K}$
+\note{« bifonctoriel » est écrit au-dessus d'un mot biffé}
+
+\page{48}
+\marginal{Il y a une construction universelle \ill{} \ill{} $\mathcal{C}$, \ill{} \ill{} $\mathcal{C}^{\bullet}$, $\mathcal{C}$ « $\mathcal{C}^{*}$ » \ill{} $\mathbb{K}$ \ill{} \ill{}}
+\note{note oblique, en plusieurs lignes, dans l'angle supérieur gauche ; un point d'exclamation dans la marge en face de la fin du premier paragraphe}
+Soit $\mathcal{P}_{\bullet}$ la catégorie des complexes de ch-chaînes $L_{\bullet}$ de
+$\mathcal{C}$ qui sont libres de t.f.\ en chaque dim., et qui n'ont qu'un nb fini de
+composantes \uncertain{non nulles}. Une suite
+\[
+0 \to L'_{\bullet} \to L_{\bullet} \to L''_{\bullet} \to 0
+\]
+d'homs dans $\mathcal{P}_{\bullet}$ est dit exact spécial, si $\forall n \geqslant 0$, la suite
+\[
+0 \to L'_n \to L_n \to L''_n \to 0 \longrightarrow
+\]
+est exacte. Soit $\Sigma_{\bullet}$ la classe de ces suites. Ainsi $\mathcal{P}_{\bullet}$ est muni de
+$\mathbb{C}^{\bullet}$ (complexe de cochaînes) et de $\Sigma_{\bullet}$. On va voir que
+$\mathcal{P}_{\bullet}$, \uncertain{muni} de ces données, il est sol.\ d'un pb universel.
+
+\struck{Soit} Soit $\mathcal{B}$ une cat.\ additive. Un ens.\ $\Sigma$ de suites
+\[
+(*) \qquad 0 \to A' \xrightarrow{\ q\ } A \xrightarrow{\ p\ } A'' \to 0
+\]
+dans $\mathcal{B}$ est dit « une classe de suites exactes » si elle satisfait aux conditions
+
+Sex 1) Si $(*) \in \Sigma$, alors $A' \xrightarrow{\ \sim\ } \operatorname{Ker} p$,
+$\operatorname{Coker} q \xrightarrow{\ \sim\ } A''$, i.e.\ les suites
+$0 \to A' \to A \to A''$ et $A' \to A \to A'' \to 0$ sont exactes (i.e.\
+$\forall B \in \operatorname{Ob} \mathcal{B}$, les suites de groupes
+\[
+\left\lbrace
+\begin{array}{l}
+0 \to \operatorname{Hom}(B, A') \to \operatorname{Hom}(B, A) \to \operatorname{Hom}(B, A'') \\
+0 \to \operatorname{Hom}(A'', B) \to \operatorname{Hom}(A, B) \to \operatorname{Hom}(A', B)
+\end{array}
+\right.
+\]
+sont exactes).
+
+Sex 2) $\Sigma$ est stable par isos, par sommes finies, et contient les suites de la forme
+\[
+0 \to A \xrightarrow{\ \mathrm{id}\ } A \to 0 \to 0, \qquad 0 \to 0 \to A \xrightarrow{\ \mathrm{id}\ } A \to 0
+\]
+(donc aussi les suites de la forme
+$0 \to A \xrightarrow{\ i_1\ } A \oplus B \xrightarrow{\ \mathrm{pr}_2\ } B \to 0$).
+\note{les étiquettes $i_1$ et $\mathrm{pr}_2$ se lisent « $i_1$ », « $\mathrm{pr}.$ »}
+
+\page{49}
+Un \struck{\ill{}} $\Sigma$-monomorphisme (resp.\ \ill{}) \ill{} $A \to B$ de $\mathcal{B}$ est un
+morphisme qui s'insère dans une suite $\in \Sigma$
+\[
+0 \to A \to B \to K \to 0 \qquad (\text{resp.\ } 0 \to P \to A \to B \to 0)
+\]
+Un morphisme \add{$A \to B$} est dit \add{$\Sigma$-}\struck{strict}\add{strict}, s'il a un
+\struck{\ill{}} \add{\uncertain{objet} \uncertain{Image} $\xrightarrow{\ \sim\ }$ \ill{}},
+noyau $P$ et un conoyau $Q$, et si $P \to A$ \struck{\ill{}} est un $\Sigma$-mono
+($\Sigma$-épi), il revient au \ill{} de dire qu'il y a
+\note{la définition est surchargée : « strict » est biffé et « $\Sigma$- » ajouté au-dessus ; une ligne interlinéaire, en partie biffée, porte « objet Image $\xrightarrow{\sim}$ » ; l'objet au-dessus de « $A \to B$ » est ajouté}
+des suites $\in \Sigma$
+\[
+0 \to P \to A \to R \to 0, \qquad 0 \to R \to B \to Q \to 0
+\]
+telles que $A \to B$ soit le composé $A \to R \to B$.
+(Il faut peut-être exiger qu'un composé de $\Sigma$-monos (resp.\ $\Sigma$-épis) en soit itou.)
+\marginal{\ill{} \ill{} \ill{} \ill{} \uncertain{définir} $\Sigma$}
+\note{deux notes obliques de la marge gauche, en face du début de la page, presque illisibles}
+
+On définit de façon évidente les $\Sigma$-projectifs \add{\uncertain{objets}} et
+$\Sigma$-injectifs. Un \struck{\ill{} suite dit \ill{} complexe de cochaînes (\ill{})}
+\struck{\ill{} $C^{i-1} \to C^i \to C^{i+1}$ \ill{} \ill{} \ill{} \ill{} est dit spécial}
+\[
+A \xrightarrow{\ u\ } B \xrightarrow{\ v\ } C
+\]
+est dite $\Sigma$-spéciale \struck{\ill{}} si elle \struck{\ill{} \ill{}} \ill{}
+\struck{\ill{} \ill{} \ill{} des suites (de $\Sigma$) \ill{} \ill{} $vu = 0$, \ill{} \ill{} \ill{} \ill{} \ill{}}
+\ill{} suites exactes $\in \Sigma$
+\[
+\begin{array}{l}
+0 \to \operatorname{Ker} u \to A \to \operatorname{Coim} u \to 0 \\
+\qquad\qquad \operatorname{Coim} u \simeq \operatorname{Im} u \\
+\qquad 0 \to \operatorname{Im} u \to \operatorname{Ker} v \to H \to 0 \\
+\qquad\qquad\qquad 0 \to \operatorname{Ker} v \to B \to \operatorname{Coim} v \to 0 \\
+\qquad\qquad\qquad\qquad \operatorname{Coim} v \simeq \operatorname{Im} v \\
+\qquad\qquad\qquad 0 \to \operatorname{Im} v \to C \to \operatorname{Coker} v \to 0
+\end{array}
+\]
+\note{les quatre suites sont disposées en escalier, reliées par des signes $\simeq$ verticaux ($\operatorname{Coim} u \simeq \operatorname{Im} u$, $\operatorname{Ker} v$ de la deuxième et de la troisième, $\operatorname{Coim} v \simeq \operatorname{Im} v$) ; la dernière suite, en bout de ligne, est surchargée et en partie coupée par le bord}
+
+(\uncertain{c'est une notion auto-duale}) On dit qu'un complexe $C^{\bullet}$ de $\mathcal{B}$ est
+\emph{$\Sigma$-spécial} si \ill{}, \ill{} $\Sigma$-\emph{acyclique} si \ill{} \ill{} \ill{} les
+$H^i(C^{\bullet})$ sont nuls ; une $\Sigma$-résolution d'\ill{} est un complexe de cochaînes
+($C^i = 0$ si $i < 0$) et $H^i = 0$ pour $i \geqslant 0$
+\note{la fin de la page est d'écriture très pâle ; le dernier « $i \geqslant 0$ » est surchargé d'une tache}
+
+\page{50}
+\note{un grand « 1 », au crayon, dans la marge gauche en haut du feuillet ; il n'est pas clair qu'il numérote une suite}
+Il faudrait prouver le
+
+\emph{Th} Soit $\mathcal{B}$ une cat.\ \struck{additive} $k$-additive \add{où tout \uncertain{projecteur} a un noyau},
+\struck{\ill{}} $\Sigma$ une famille $\Sigma$ de suites exactes, soit
+\add{i.e.\ $\mathcal{B}$ cat.\ \uncertain{exacte}}
+$\underline{\operatorname{Hom}}_{k, \Sigma\text{-ex}}(\mathcal{P}_{\bullet}, \mathcal{B})$ la
+\add{$k$-}catégorie \struck{\ill{}} des foncteurs « $\Sigma$-exacts »
+\marginal{$\Sigma$ \ill{} les suites exactes}
+\note{la parenthèse « où tout projecteur a un noyau » et « i.e.\ $\mathcal{B}$ cat.\ exacte » sont écrits au-dessus de la ligne ; la note, reliée par un trait, est à droite}
+$\underline{\operatorname{Hom}}_k(\mathcal{P}_{\bullet}, \mathcal{B})$ formée des
+i.e.\ transformant suites de $\Sigma_{\bullet}$ en suites de $\Sigma$,
+\struck{Considérons le foncteur restriction}
+\struck{Soit $\underline{\operatorname{Hom}}_{\Sigma\text{-ex}}(\mathcal{P}_{\bullet}, \mathcal{B})$ la sous-catégorie pleine}
+$\underline{\operatorname{Hom}}_{k, \Sigma\text{-ex}}(\mathcal{P}_{\bullet}, \mathcal{B})$ la sous-catégorie pleine de
+celle \add{\uncertain{formée des foncteurs}} qui \struck{transforment \ill{} en $\Sigma$-\ill{}}
+\add{\uncertain{commutent} aux $\Sigma$-noyaux}.
+
+a) Le foncteur restriction $F \longmapsto F(\mathbb{C}^{\bullet})$
+\[
+\underline{\operatorname{Hom}}_{k, \Sigma\text{-ex}}(\mathcal{P}_{\bullet}, \mathcal{B}) \hookrightarrow \mathcal{B}^{\bullet}
+\]
+\note{après la flèche, un premier but, $\underline{\operatorname{Hom}}_{k\text{-lin}}(\mathbb{K}, \mathcal{B})$, est biffé de hachures ; $\mathcal{B}^{\bullet}$ est écrit à sa suite}
+\struck{est une équivalence de catégories} est pleinement fidèle,
+\struck{\ill{} \ill{} foncteurs} (\struck{\ill{} \ill{}} son image essentielle est
+\add{\uncertain{formée des}} $C^{\bullet} \in \operatorname{Ob} \mathcal{B}^{\bullet}$ tels que les
+\struck{d}\add{$d^i$} : $C^i \to C^{i+1}$ admettent des $\Sigma$-noyaux, \uncertain{qui}
+\marginal{\ill{} \ill{} \ill{} \ill{}}
+[\ill{} \ill{} \ill{} un prend les noyaux \ill{} impliquent les foncteurs \struck{\ill{}}
+$\Sigma$-exacts $\mathcal{G}$.]
+\note{la parenthèse et le crochet sont d'écriture très pâle ; une accolade verticale à gauche les relie à une note oblique de la marge, illisible}
+
+b) Le foncteur \uncertain{restriction} $F \longmapsto F(\mathbb{C}^{\bullet})$
+\[
+\underline{\operatorname{Hom}}_{k\text{-}\Sigma\text{ex}}(\mathcal{P}_{\bullet}, \mathcal{B}) \hookrightarrow \mathcal{B}^{\bullet}
+\]
+(qui est pl.\ fid.\ par a)) a comme image essentielle la \uncertain{catégorie} des
+$C^{\bullet} \in \operatorname{Ob} \mathcal{B}^{\bullet}$ qui sont des $\Sigma$-résolutions (i.e.\
+$\Sigma$-spéciaux de \uncertain{cochaînes} avec $H^i(C^{\bullet}) = 0$ si $i > 0$).
+\struck{[\uncertain{donc} le triple $(\mathcal{P}_{\bullet}, \mathbb{C}^{\bullet}, \Sigma_{\bullet})$ \uncertain{pouvait} comme universel parmi les $(\mathcal{B}, C^{\bullet}, \Sigma)$ tels que $C^{\bullet}$ soit \uncertain{construite} une $\Sigma$-résolution, --- les}
+\note{le crochet final, entouré d'un trait, est barré de deux longs traits obliques ; il se poursuit en bas de la page, d'écriture pâle}
+
+\page{51}
+\note{toute la page est barrée d'un long trait oblique au crayon, qui descend du haut vers le bas en s'incurvant}
+foncteurs admissibles itou maintenant les foncteurs $\Sigma$-exacts\ldots)
+
+\emph{Indications sur dém.}
+
+Dans $\mathcal{P}_{\bullet}$, il est évident que \emph{$\mathbb{C}^{\bullet}$ est une
+$\Sigma_{\bullet}$-\struck{spéciale} résolution}. De façon précise, si
+\[
+\to \Psi^{i}_{\bullet} = \struck{H^i(C^{\bullet})} \ k[i] \quad \text{placé en degré } i,
+\]
+on voit que \ill{} $\to 0$ des suites $\in \Sigma$.
+\[
+0 \to \Psi^0_{\bullet} \to C^0_{\bullet} \to \Psi^1_{\bullet} \to 0
+\]
+\[
+0 \to \Psi^1_{\bullet} \to C^1_{\bullet} \to \Psi^2_{\bullet} \to 0
+\]
+\[
+0 \to \Psi^2_{\bullet} \to C^2_{\bullet} \to \Psi^3_{\bullet} \to \cdots
+\]
+\note{après le signe $=$, une première écriture, $H^i(C^{\bullet})$, est biffée de hachures ; la lecture « $k[i]$ » de ce qui suit n'est pas sûre}
+
+De plus, on voit que pour $L_{\bullet} \in \operatorname{Ob} \mathcal{P}_{\bullet}$,
+$L_{\bullet}$ peut s'écrire comme extension successive d'objets de la forme
+$(\Psi^i_{\bullet})^{f_i}$ pour la filtration canonique
+\[
+\operatorname{Fil}_i(L_{\bullet})_j = \left\lbrace
+\begin{array}{ll}
+L_j & \text{si } j \leqslant i \\
+0 & \text{si } j > i
+\end{array}
+\right.
+\]
+\note{l'exposant $f_i$ est surmonté d'un trait : sans doute le rang de $L_i$}
+on a un isom.\ canon.
+\[
+\struck{\operatorname{Fil}} \operatorname{Gr}_i(L_{\bullet}) \simeq L_i \ \text{placé en degré } i
+\ \underset{\mathrm{can}}{\simeq} \ \Psi^i_{\bullet} \otimes L_i \ \underset{\text{non can}}{\simeq} \ (\Psi^i_{\bullet})^{f_i}
+\]
+
+\emph{Enfin}, les $C^i_{\bullet}$ sont $\Sigma$-projectifs.
+
+Soit $\mathcal{B}^{\bullet}_{\Sigma\text{-sex}}$ (resp.\ $\mathcal{B}^{\bullet}_{\Sigma\text{-ex}}$) la
+sous-catégorie pleine de $\mathcal{B}^{\bullet}$ décrite dans a) (resp.\ b)).
+On va définir des foncteurs
+\[
+\begin{array}{ccc}
+\mathcal{B}^{\bullet}_{\Sigma\text{-sex}} & \longrightarrow & \underline{\operatorname{Hom}}_{\Sigma\text{-sex}}(\mathcal{P}_{\bullet}, \mathcal{B}) \\
+\cup & & \cup \\
+\mathcal{B}^{\bullet}_{\Sigma\text{-ex}} & \longrightarrow & \underline{\operatorname{Hom}}_{\Sigma\text{-ex}}(\mathcal{P}_{\bullet}, \mathcal{B})
+\end{array}
+\]
+(le premier induisant le deuxième)
+\note{l'indice « $\Sigma$-sex » est surchargé aux deux premières occurrences ; les inclusions verticales sont écrites comme des $\cup$ couchés}
+
+\page{52}
+\struck{Soit $\mathcal{B} \supset \mathbb{K}$ une sous-catégorie $k$-additive.}
+\[
+\begin{array}{ccc}
+\underline{\operatorname{Hom}}_{k\text{-lin}}(\mathcal{P}_{\bullet}, \mathcal{B}) & \underset{\sigma}{\overset{\rho}{\rightleftarrows}} & \mathcal{B}^{\bullet} \\
+\underline{\operatorname{Hom}}_{k\text{-lin}}(\mathcal{P}_{\bullet}, \widehat{\mathcal{B}}) & & \\
+\downarrow & \nwarrow{\scriptstyle \sigma} & \\
+\underline{\operatorname{Hom}}_{k\text{-lin}}(\mathcal{P}_{\bullet}, \mathcal{B}) & \xrightarrow{\ \rho\ } & \mathcal{B}^{\bullet}
+\end{array}
+\qquad \text{$\mathcal{B}$ cat.\ additive avec $\Sigma$ classe de suites exactes et $\Sigma$-noyaux}
+\]
+\note{ce premier diagramme est barré de trois longs traits obliques ; la flèche $\sigma$ oblique part de $\mathcal{B}^{\bullet}$ en bas à droite vers le $\underline{\operatorname{Hom}}$ du milieu. Dans la marge gauche, en face, un signe biffé}
+
+$\mathcal{B}$ catégorie additive, \struck{avec classe $\Sigma$ de suites exactes \ill{} noyaux de flèches}, où
+\uncertain{les} \ill{} \ill{} admettent des $\Sigma$-noyaux
+\marginal{Non, il faut condition de platitude ?}
+\note{note au crayon, d'une autre main ou d'un autre moment, écrite en travers à droite du diagramme suivant}
+\[
+\underline{\operatorname{Hom}}_{k, \Sigma\text{-sex}}(\mathcal{P}_{\bullet}, \mathcal{B})
+\underset{\sigma}{\overset{\rho}{\rightleftarrows}} \mathcal{B}^{\bullet}
+\]
+\note{l'indice de $\underline{\operatorname{Hom}}$ est surchargé ; sous la flèche $\sigma$, un mot vertical, peut-être « \uncertain{adj} »}
+cat.\ des foncteurs $k$-lin.\ $F : \mathcal{P}_{\bullet} \to \mathcal{B}$ qui transforment suites
+$\in \Sigma_{\bullet}$ en suites exactes à $g$
+\[
+\left\lbrace
+\begin{array}{l}
+\rho(F) = F(\mathbb{C}^{\bullet}) \\
+\sigma(C^{\bullet})(L_{\bullet}) \simeq \operatorname{Hom}^{\bullet}_k(\check{L}_{\bullet}, C^{\bullet})
+\end{array}
+\right.
+\]
+\note{à la suite de la seconde ligne, reliée par une flèche, une variante $\operatorname{Hom}_k(\operatorname{Hom}(L_{\bullet}, \mathbb{C}^{\bullet}), C^{\bullet})$ ; sous la ligne, reliée par une accolade : « définie grâce à l'existence des $\Sigma$-noyaux »}
+
+Formule d'adjonction
+\[
+\operatorname{Hom}(\rho(F), C^{\bullet}) \xrightarrow{\ \sim\ } \operatorname{Hom}(F, \sigma(C^{\bullet}))
+\]
+\[
+\operatorname{Hom}(\rho(F), C^{\bullet}) \simeq \operatorname{Hom}(F(\mathbb{C}^{\bullet}), C^{\bullet})
+\]
+\note{le second isomorphisme est écrit sous le premier membre, relié par un $\simeq$ vertical}
+
+Le deuxième membre est formé des homs fonctoriels en $L_{\bullet}$
+\[
+F(L_{\bullet}) \longrightarrow \operatorname{Hom}^{\bullet}_k(\check{L}_{\bullet}, C^{\bullet})
+\]
+i.e.\ des homs « fonctoriels en $L_{\bullet}$ »
+\[
+\check{L}^{\bullet} \otimes_k F(L_{\bullet}) \longrightarrow C^{\bullet}
+\]
+\note{au-dessus de $\check{L}_{\bullet}$ dans le texte, un « $L^{\bullet}$ » ajouté en encre foncée ; dans la formule, le signe $\otimes_k$ est surchargé d'un trait courbe}
+Or on a $L^i \simeq \operatorname{Hom}(L_{\bullet}, \mathbb{C}^i)$
+\[
+F(L) \otimes L^i \simeq \operatorname{Hom}(L_{\bullet}, \mathbb{C}^i) \otimes F(L_{\bullet}) \longrightarrow F(\mathbb{C}^i)
+\]
+\note{après $L^i$, un premier « $\otimes F(L_{\bullet})$ » est biffé de hachures ; au-dessus de la flèche finale, le mot « \uncertain{tout} »}
+et on trouve que \ill{} \ill{} ainsi \ill{} « \struck{fonctorielle} » compatible \ill{}
+\uncertain{composé} \uncertain{effectivement} en $L^{\bullet}$ et $C^{\bullet}$, et « fonctoriel »
+
+\page{53}
+en $L_{\bullet}$ », ce qui donne si on veut
+\[
+F \xrightarrow{\ u\ } \sigma\rho F
+\]
+hom fonctoriel en $F$, \struck{\ill{}} \add{i.e.\ un} \struck{\ill{}} hom
+\ill{} l'adjonction pour \uncertain{elle}
+\[
+\begin{array}{ccc}
+\operatorname{Hom}(\rho F, C^{\bullet}) & \longrightarrow & \operatorname{Hom}(F, \sigma C^{\bullet}) \\
+& \searrow & \nearrow{\scriptstyle \alpha \mapsto \alpha \circ u} \\
+& & \operatorname{Hom}(\sigma\rho F, \sigma C^{\bullet})
+\end{array}
+\]
+\note{la flèche descendante est en pointillé}
+à prouver que c'est un iso --- vérification facile.
+
+L'hom \uncertain{dans}
+\[
+\rho\sigma C^{\bullet} \longrightarrow C^{\bullet}
+\]
+est un iso, i.e.\ $\sigma$ est pl.\ fid.\ En effet,
+\[
+\rho(\sigma(C^{\bullet})) = \sigma(C^{\bullet})(\mathbb{C}^{\bullet}) = \bigl(\underbrace{\sigma(C^{\bullet})(\mathbb{C}^i)}_{\operatorname{Hom}^{\bullet}_k(\mathbb{C}^{\bullet}_i,\, C^{\bullet}) \,=\, C^i}\bigr)_i \simeq (C^i)_i \quad \text{ok.}
+\]
+\note{sous l'accolade, $\operatorname{Hom}^{\bullet}_k(\mathbb{C}^{\bullet}_i, C^{\bullet})$ est écrit au-dessus d'un $\|$ vertical qui mène à $C^i$}
+
+Ainsi on a un \ill{} \ill{} pl.\ fidèle
+\[
+\mathcal{B}^{\bullet} \xhookrightarrow{\ \sigma\ } \underline{\operatorname{Hom}}_{k, \Sigma\text{-sex}} \subset \underline{\operatorname{Hom}}_{k\text{-lin}}
+\]
+où $\Sigma$-sex désigne les foncteurs qui transforment suites de $\Sigma$ en suites exactes à g.
+
+Quelle est l'image essentielle de $\mathcal{B}^{\bullet}$ ?
+(On donnera des exemples tantôt de foncteurs dans l'image ou non) est-ce tout
+$\underline{\operatorname{Hom}}_{k, \Sigma\text{-sex}}$ ? Elle sont formée des $F$ tels que
+\[
+F \xrightarrow{\ u\ } \sigma\rho(F)
+\]
+soit un iso. Or on a
+
+\page{54}
+\[
+F(\mathbb{C}^i_{\bullet}) \to \sigma(\rho(F))(\mathbb{C}^i_{\bullet}) = \operatorname{Hom}^{\bullet}_k(\mathbb{C}^{\bullet}_i, \underset{= F(\mathbb{C}^{\bullet})}{\rho(F)}) \simeq F(\mathbb{C}^i_{\bullet})
+\]
+\[
+\begin{aligned}
+F(\Psi^i_{\bullet}) \to \operatorname{Hom}^{\bullet}_k(\Psi^{\bullet}_i, F(\mathbb{C}^{\bullet})) &\simeq Z^i(F(\mathbb{C}^{\bullet})) \\
+&\simeq \operatorname{Ker}(F(\mathbb{C}^i_{\bullet}) \to F(\mathbb{C}^{i+1}_{\bullet})) \\
+&\simeq F(\underbrace{\operatorname{Ker}(\mathbb{C}^i \to \mathbb{C}^{i+1})}_{\Sigma\text{-Ker}\,!}) \simeq F(\Psi^i_{\bullet})
+\end{aligned}
+\]
+\note{le dernier signe, devant $F(\Psi^i_{\bullet})$, est un $\doteq$ ; l'exposant de $\Psi$ dans $\operatorname{Hom}^{\bullet}_k$ est surchargé}
+
+\emph{Donc} on voit que $u(L_{\bullet}) : F(L_{\bullet}) \to \sigma\rho(F)(L_{\bullet})$
+est un iso, non seulement pour les $\mathbb{C}^i$ et les $\Psi^i_{\bullet}$ de \ill{}, mais
+pour \struck{la} la cat.\ additive $\mathcal{P}_{\bullet} \supset \mathbb{K}$ des sommes
+\uncertain{ensemble} (\uncertain{i.e.} \uncertain{dans} \uncertain{les} \uncertain{sommes}
+\uncertain{à l'intervalle} \struck{\ill{}} $[p, q]$ de \uncertain{tels}.) $\mathcal{P}_{\bullet}$
+\uncertain{engendrée} par les $L_{\bullet}$, par la longueur \uncertain{d'un} $L_{\bullet}$,
+\uncertain{tel} que $L_i = 0$ si $i \notin [p, q]$. ($L_{\bullet}$ somme
+$\simeq (\Psi^i_{\bullet})^{n_i}$), on \uncertain{fait} \uncertain{récurrence} sur $n$ si
+$n = 0$, \ill{} \ill{} $n > 0$ et \uncertain{soit} \ill{} que \ill{} \uncertain{fait} pour $n - 1$.
+\note{ce paragraphe est d'une écriture rapide et interlinéaire ; « $\simeq (\Psi^i_{\bullet})^{n_i}$ » est souligné et surchargé ; seules les formules sont sûres}
+\[
+\left.
+\begin{array}{c}
+\cdots \to 0 \to L_p \xrightarrow{\ \mathrm{id}\ } L_p \to 0 \\
+\uparrow{\scriptstyle d_{p+1}} \qquad \uparrow{\scriptstyle d_p} \\
+\cdots \to L_{p+n} \to L_{p+n-1} \to \cdots \to L_{p+1} \to L_p \to 0 \to 0
+\end{array}
+\right\rbrace
+\qquad
+\begin{array}{c}
+(\mathbb{C}^{p}_{\bullet})^{r} \\
+\uparrow \\
+L_{\bullet}
+\end{array}
+\]
+\note{sous la ligne du bas, une accolade embrasse $L_{p+n}, \ldots, L_{p+1}$, marquée « tronqué $L'$ ! » ; l'exposant de $(\mathbb{C}^p_{\bullet})$ est surchargé. Dans la ligne du bas, la flèche vers $L_{p+1}$ est tracée en pointillé}
+\ill{} dans \ill{} \ill{} de suites exactes (où $L_p \simeq k^r$)
+\[
+\begin{array}{ccccccccc}
+0 \to & (\Psi^p_{\bullet})^r & \to & L_{\bullet} & \longrightarrow & L'_{\bullet} & \to 0 \\
+& \| & & \downarrow & & \downarrow & \\
+0 \to & (\Psi^p_{\bullet})^r & \to & (\mathbb{C}^p_{\bullet})^r & \longrightarrow & (\Psi^{p+1}_{\bullet})^r & \to 0
+\end{array}
+\]
+qui exprime $L_{\bullet}$ comme produit fibré de $L'_{\bullet}$ et $(\mathbb{C}^p_{\bullet})^r$ sur
+$(\Psi^{p+1}_{\bullet})^r$ (i.e.\ comme noyau d'un hom \struck{\ill{}} $\Sigma$-\emph{épi}
+$(\mathbb{C}^p_{\bullet})^r \times L'_{\bullet} \to (\Psi^{p+1}_{\bullet})^r$). Donc on conclut par
+\note{le premier terme de la ligne du haut s'écrit « $(\Psi^p_{\bullet})^r$ » ; la dernière flèche du diagramme part d'un $L'_{\bullet}$ surchargé}
+
+\page{55}
+l'hyp.\ de récurrence. Ceci donne \uncertain{donc}
+\[
+\underline{\operatorname{Hom}}_{k, \Sigma\text{-sex}}(\mathcal{P}_{\bullet}, \mathcal{B}) \xrightarrow{\ \approx\ } \mathcal{B}^{\bullet}
+\]
+(si $\mathcal{B}$ \ill{} \struck{catégorie} \add{classe $\Sigma$} de suites exactes telles que
+\uncertain{tout} morphisme de $\mathcal{B}$ admette un $\Sigma$-noyau)
+
+\emph{NB} Si on suppose \struck{seulement que $\mathcal{B}$ admette \ill{}} \struck{\ill{} $\Sigma$ de suites exactes, \ill{} \ill{}}
+\add{\ill{}} pour \uncertain{dire} que \uncertain{tout} morphisme de $\mathcal{B}^{\bullet}$ admette un noyau,
+l'argument donne \uncertain{encore} \uncertain{tout} \uncertain{seulement} que le foncteur
+évident $F \mapsto F(\mathbb{C}^{\bullet})$
+\[
+\underline{\operatorname{Hom}}_{k, \Sigma\text{-sex}}(\mathcal{P}_{\bullet}, \mathcal{B}) \xrightarrow[\rho]{\ \approx\ } \mathcal{B}^{\bullet}
+\]
+est pl.\ fid.\ (\uncertain{ayant} adjoint $\sigma$ comme dessus, mais à valeurs dans
+$\underline{\operatorname{Hom}}_{k, \Sigma\text{-sex}}(\mathcal{P}_{\bullet}, \widehat{\mathcal{B}})$ ;
+on a \uncertain{néanmoins} $\sigma\rho \simeq \mathrm{id}$ i.e.
+\note{« seulement que $\mathcal{B}$ admette » et la ligne suivante sont barrés ; l'indice du dernier $\underline{\operatorname{Hom}}$ est surchargé}
+\[
+F(L_{\bullet}) \simeq \operatorname{Hom}^{\bullet}_k(L^{\bullet}, \underbrace{F(\mathbb{C}^{\bullet})}_{= C^{\bullet}})
+\]
+pour $F \in \underline{\operatorname{Hom}}_{k, \Sigma\text{-sex}}$.\note{un premier « $F(L_{\bullet}) \simeq$ » est biffé en tête de la formule}
+
+\emph{Re NB} On \struck{\ill{}} vérifie facilement, sous les conditions de NB, que si
+$F \mapsto C^{\bullet} = F(\mathbb{C}^{\bullet})$ se correspondent
+($F \in \operatorname{Ob} \underline{\operatorname{Hom}}_{k, \Sigma\text{-sex}}$), alors
+$F$ est $\Sigma$-exact ssi $C^{\bullet}$ est une $\Sigma$-résolution.
+(des noyaux si $\mathcal{B}$ est cat.\ abélienne avec $\Sigma$ les suites exactes\ldots)
+
+\emph{Ex} Soit $\lambda_{\bullet} \in \mathit{Ab}_{k\bullet}$, considérons
+$\mathcal{P}_{\bullet} \to \mathit{Ab}_k$, foncteur $L_{\bullet} \mapsto \operatorname{Hom}_{\mathit{Ab}_{k\bullet}}(\lambda_{\bullet}, L_{\bullet})$,
+(il est $\Sigma$-exact à g (et même exact à g)) --- on fait
+\note{le $\mathcal{P}_{\bullet}$ est récrit sur un premier symbole ; le « exact à g » final est souligné. Sous la dernière ligne, à droite, quatre lettres majuscules, peut-être « TSVP », dans un cadre ouvert}
+
+\page{56}
+la vérification de la formule
+\[
+\operatorname{Hom}_{\bullet}(\lambda_{\bullet}, L_{\bullet}) \xrightarrow{\ \sim\ } \operatorname{Hom}(L^{\bullet}, \check{\lambda}_{\bullet})
+\]
+est évidente ---
+\note{ces trois lignes, en haut du feuillet, achèvent la page 55 (dont la dernière ligne portait « TSVP ») ; le reste du feuillet est blanc}
+
+\page{57}
+\emph{Construction canonique de $\mathcal{P}$} ($k$-lin.)
+\note{le titre n'est pas souligné sur la page ; il est mis en relief ici parce qu'il ouvre une nouvelle suite}
+
+$\mathcal{P} \supset \mathbb{K}$, et satisfait les conditions
+
+a) Le foncteur covariant
+\[
+L \longmapsto \operatorname{Hom}(L, \mathbb{C}^0)^{\vee}
+\]
+est représentable par un \uncertain{objet} $\Psi^0$.
+Considérons l'hom $\Psi^0 \to \mathbb{C}^0$ transposé de
+\[
+\begin{array}{ccc}
+\operatorname{Hom}(\Psi^0, L) & \longleftarrow & \operatorname{Hom}(\mathbb{C}^0, L) \quad \bigl[\longleftarrow \operatorname{Hom}(\mathbb{C}^1, L)\bigr] \\
+\wr & & \\
+\operatorname{Hom}(L, \mathbb{C}^0)^{\vee} & &
+\end{array}
+\]
+\note{sous $\operatorname{Hom}(\mathbb{C}^0, L)$, un point d'interrogation}
+déduit de l'accouplement
+\[
+\operatorname{Hom}(\mathbb{C}^0, L) \times \operatorname{Hom}(L, \mathbb{C}^0) \longrightarrow \operatorname{Hom}(\mathbb{C}^0, \mathbb{C}^0) \simeq k, \qquad (u, v) \longmapsto vu
+\]
+\note{dans le second facteur, un premier symbole est biffé devant $\mathbb{C}^0$}
+
+\begin{tikzcd}[column sep=small, row sep=small]
+& \mathbb{C}^0 \arrow[dl, "d"'] \arrow[dr, "u"] & & \\
+\mathbb{C}^1 \arrow[rr, "u'"'] & & L \arrow[dr, "v"] & \\
+& & & \mathbb{C}^0
+\end{tikzcd}
+
+On a \struck{\ill{}} $u' : \mathbb{C}^1 \to L$, considérons $u = u' \circ d^0$, et
+$v \circ u = v \circ (u' \circ d) = (v \circ u') \circ d$, \uncertain{comme}
+$v \circ u' = 0$, \uncertain{il vient} donc $v \circ u = 0$, donc
+$\mathbb{C}^0$ le composé \uncertain{est} \ill{}
+\[
+\operatorname{Hom}(\Psi^0, L) \longleftarrow \operatorname{Hom}(\mathbb{C}^0, L) \longleftarrow \operatorname{Hom}(\mathbb{C}^1, L)
+\]
+\note{le premier $v \circ u$ est récrit sur un autre symbole ; « $= (v \circ u') \circ d$ » est ajouté au-dessus de la ligne}
+\marginal{fonction \ill{} $\operatorname{Hom}(\mathcal{P}, L)$ \uncertain{pour} $L$}
+\note{note oblique dans la marge gauche, reliée par une flèche}
+(ce qui signifie aussi que
+\[
+\Psi^0 \longrightarrow \mathbb{C}^0 \longrightarrow \mathbb{C}^1
+\]
+est nul, donc que $\mathbb{C}^{\bullet}$ est $\Psi^0$-augmenté.
+\struck{Nb) \ill{} \ill{}} Soit $\Phi^{\bullet}$ le complexe de cochaînes qu'il forme.
+Soit $\mathcal{P}_0$ la sous-catégorie
+\struck{b) La famille des $\mathbb{C}^i$ et $\Psi^0$ est génératrice stricte}
+\struck{c) $\Phi^{\bullet}$ est une résolution de}
+$k$-lin.\ \struck{engendrée} formée des sommes finies \uncertain{d'objets}
+\note{ce passage est remanié : « Soit $\mathcal{P}_0$ la sous-catégorie » est ajouté au-dessus de la ligne, relié par un trait ; b) et c) sont barrés, et récrits plus bas}
+dans la forme $\mathbb{C}^i$, $\Psi^0_0$, i.e.\ les expressions de la forme
+\[
+L + (\Psi^0)^r, \qquad r \in \mathbb{N},\ L \in \operatorname{Ob} \mathbb{K}
+\]
+
+On a \emph{b)} Les suites
+\[
+0 \to L' \to L \to L'' \qquad \bigl(\ldots L' \to L \to L''\bigr)
+\]
+\note{une deuxième écriture, en partie biffée, « $\to L'' \to 0$, $L' \to L \to L'' \to 0$ », est écrite dessous}
+telles que les $\ldots$ $\rho \in \mathcal{P}_0$ \uncertain{sont} \uncertain{exactes} \ill{}
+\uncertain{fournit} \ill{} i.e.\ telles que $0 \to L' \to L \to L'' \to 0$ soit exactes \struck{\ill{}}
+soit exactes, soit \struck{$\Sigma$}\add{$\Sigma$} la classe de ces suites
+\marginal{plus bas \ill{} \ill{} \ill{}}
+\note{note oblique de la marge gauche, reliée par un trait courbe à « On a » ; deux traits verticaux dans la marge, en bas}
+
+\emph{c)} Le complexe augmenté $(\Phi^{\bullet}, \Psi^0, \varepsilon)$ est une
+$\Sigma$-résolution, i.e.\ $\Phi^{\bullet}$ est $\Sigma$-acyclique.
+
+\page{58}
+\note{notes éparses, sans suite continue, sur la moitié du feuillet ; la première ligne et la formule qui la suit sont barrées de traits obliques, et un long trait au crayon traverse la page}
+\struck{Il faut prouver que \ill{} l'hom
+$\operatorname{Hom}^{\bullet}_k(L^{\bullet}, C) \to Z^n(C^{\bullet}) \ldots (C^n)^f$}
+admet un $\Sigma$-noyau
+\[
+\underline{\operatorname{Hom}}_{\Sigma\text{-sex}} \longrightarrow \mathcal{B}^{\bullet} \longrightarrow \underline{\operatorname{Hom}}_{\mathrm{sex}} \longrightarrow \underline{\operatorname{Hom}}_{\mathrm{sex}}
+\]
+($\mathcal{B}$ cat.\ abélienne, $\Sigma$ suites exactes ordinaires)
+\note{schéma de flèches incurvées, partant de $\underline{\operatorname{Hom}}_{\Sigma\text{-sex}}$ vers $\mathcal{B}^{\bullet}$, puis de $\mathcal{B}^{\bullet}$ vers deux $\underline{\operatorname{Hom}}_{\mathrm{sex}}$ dont les premiers arguments sont surchargés et biffés ; à gauche, une flèche courbe mène de $\mathcal{B}^{\bullet}$ à la ligne suivante, et une autre à « $\mathcal{B}^{\bullet}_{\mathrm{rés}}$ » (lecture incertaine) en bas ; l'accolade de droite relie la parenthèse sur $\mathcal{B}$ au dernier $\underline{\operatorname{Hom}}_{\mathrm{sex}}$}
+\[
+\underline{\operatorname{Hom}}_{\Sigma\text{-ex}} \simeq \mathcal{B}^{\mathrm{rés}}
+\]
+\[
+\operatorname{Ext}^1(L^{\bullet}, M) \Longleftarrow 0
+\]
+\[
+\underline{\operatorname{Hom}}_{\Sigma\text{-ex}}(\mathcal{P}, \mathcal{B}) \xrightarrow{\ \approx\ } \underline{\operatorname{Hom}}_{\Sigma\text{-ex}}(\mathcal{P}_0, \mathcal{B})
+\]
+si $\mathcal{B}$ \struck{\ill{}} admet \add{$\Sigma$-}noyaux.
+
+\page{59}
+Cela signifie que l'on a une kyrielle de suites $\Sigma$-exactes (dans $\mathcal{P}$)
+\[
+\begin{array}{l}
+0 \to \Psi^0 \to \mathbb{C}^0 \to \Psi^1 \to 0 \\
+\qquad 0 \to \Psi^1 \to \mathbb{C}^1 \to \Psi^2 \to 0 \\
+\qquad\qquad 0 \to \Psi^2 \to \mathbb{C}^2 \to \Psi^3 \to 0 \\
+\qquad\qquad\qquad \cdots
+\end{array}
+\]
+Par hyp.\ on sait que $\Psi^i_{\bullet} = k$ placé en dim.\ $i$.
+
+On trouve ainsi \uncertain{maintenant} les \struck{\ill{} (\ill{}} \add{homs} $\Phi$ \ill{} les
+$\Psi^j$, $\Phi^i$, et les \struck{\ill{}}
+\[
+\Phi^i \to \Psi^j, \qquad \Psi^i \to \Phi^j, \qquad \Psi^i \to \Psi^j \qquad (\Phi^i \to \Phi^j \text{ déjà connus})
+\]
+\marginal{doit être \ill{} \uncertain{mis} \uncertain{avant} a)}
+\note{note oblique de la marge gauche. Les lettres $\Phi$ de cette ligne sont récrites à l'encre foncée sur des $\mathbb{C}$, conformément à la notation $\Phi^{\bullet}$ de la page 57 ; la lecture de chaque indice n'est pas sûre}
+on peut résumer ces \uncertain{situations} en disant que \uncertain{si} $\mathcal{C}$ \uncertain{la} sous-cat.\ pleine
+$\mathcal{P}_1 \subset \mathcal{P}$ formée des objets isomorphes à des sommes
+de $\Phi^i$ et de $\Psi^j$, le foncteur $L \mapsto L_{\bullet} =$
+$\operatorname{Hom}(\Phi^{\bullet}, L)$ est pl.\ fidèle. Son image essentielle
+est formée des complexes de chaînes $L_{\bullet}$ \struck{\ill{}} \add{$L_i$ libres} $\Sigma_i$ et
+\uncertain{les} \uncertain{composantes} \add{$L_i$} libres de t.f.
+\note{la fin de la phrase est surchargée d'ajouts interlinéaires, en partie soulignés ; la lecture de l'ensemble est incertaine}
+\struck{\ill{}} \struck{$\operatorname{Hom}(\ill{})$} \ill{} \uncertain{soient} \ill{} le \struck{\ill{}}
+$(\mathcal{P}_1, \mathbb{C}^{\bullet}, \Psi^0, \varepsilon, \Sigma_{\mathcal{P}_1})$
+(On peut dire que \ill{} \ill{} cat.\ $k$-additive
+est universelle pour \emph{classe} $\Sigma$ de suites ex.\ et
+munie d'une \ill{} \ill{}
+d'une $\Sigma$-résolution d'un objet $\Psi^0 \to Z^0 \ldots$).
+
+On va maintenant supposer de plus
+
+d) Pour \uncertain{toute} suite $\Sigma$-exacte de $\mathcal{P}$
+\[
+0 \to L^0 \to M \to N \to 0
+\]
+\uncertain{et} tout hom $L \to L'$ (resp.\ $N' \to N$)
+la suite \struck{\ill{}} déduite par somme amalgamée (resp.\ \uncertain{par} produit fibré) existe dans $\mathcal{P}$
+\marginal{il suffit d'\ill{} l'\ill{} des \uncertain{premiers} p.\ ex.}
+\note{note oblique de la marge gauche, en bas ; « $\Sigma$- » est ajouté au-dessus de « exacte » ; l'exposant de $L^0$ n'est pas sûr}
+
+\page{60}
+\uncertain{et} est $\Sigma$-exacte.
+
+(Variante : \uncertain{si} $L \xrightarrow{\ u\ } M$ est \struck{\ill{}} \add{un} $\Sigma$-épi,
+\struck{\ill{} il \ill{} a un} \uncertain{i.e.}\ $\operatorname{Hom}(\Phi^i, u)$ surjectif
+\uncertain{épi} $\forall i$ (i.e.\ $u : L_{\bullet} \to M_{\bullet}$ épi) alors $u$
+\struck{\ill{}} admet un noyau (donc on a une suite $\Sigma$-exacte
+\[
+0 \to R \to L \to M \to 0\ )
+\]
+\note{« un » est ajouté au-dessus de « $\Sigma$-épi », qui remplace un mot biffé ; dans la marge gauche, en face de ces lignes, un double trait vertical}
+
+Utilisant ceci, on construit des objets de $\mathcal{P}$ par ext.\ successive d'objets
+$(\Psi^i_{\bullet})^{h_i}$ --- et on voit que $L \mapsto L_{\bullet} =$
+$\operatorname{Hom}(\Phi^{\bullet}, L)$ est ess.\ surjectif.
+
+e) Tout objet de $\mathcal{P}$ est extension successive
+d'objets de la forme $\Psi^i$ [qui ne peut
+s'\uncertain{écrire} de \uncertain{façon} \uncertain{canonique}, dans
+une filtration \uncertain{croissante} \add{\uncertain{universelle}} de $\mathcal{P}$ ---
+\uncertain{laquelle} sera \uncertain{alors} \uncertain{canonique}.]
+\note{« b/ » est écrit au-dessus de « objets de » ; « universelle » est ajouté au-dessus de la ligne, avec un trait d'insertion}
+
+Je dis \uncertain{y} \uncertain{cela} \uncertain{avec} \uncertain{maintenant}
+pour conclure que le foncteur
+\[
+L \longmapsto L_{\bullet} = \operatorname{Hom}(\Phi^{\bullet}, L)
+\]
+est pl.\ fid.\ et \uncertain{a} l'image essentielle les $L_{\bullet}$ tels
+que les $L_i$, $Z_i$, $B_i$, $H_i$ soient libres. \uncertain{Il}
+\add{\uncertain{suffit}} \uncertain{que} \struck{\ill{}} \uncertain{le} \uncertain{soient} \ill{} \ill{} fini.
+\note{la dernière ligne est surchargée ; le reste du feuillet est blanc}
+
+\end{document}
