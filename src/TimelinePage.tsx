@@ -134,7 +134,7 @@ const LIFE: { year: number; what: string; source: string }[] = [
   { year: 1970, what: 'Leaves the IHÉS', source: MACTUTOR },
   { year: 1973, what: 'Professor at the University of Montpellier', source: MACTUTOR },
   { year: 1988, what: 'Retires', source: MACTUTOR },
-  { year: 1991, what: 'Leaves Montpellier; his papers stay with Jean Malgoire, and later form this fonds', source: FONDS },
+  { year: 1990, what: 'Hands his mathematical papers to Jean Malgoire — a second part follows on 28 July 1995 — which later form this fonds', source: FONDS },
 ];
 
 /* ---------- figure 1: the ranges and the dots ---------- */
