@@ -578,6 +578,24 @@ export function FindingsPage() {
             archivist's guess from a verso. So each row says what was searched, what the
             edition supplied rather than the page, and what would settle it.
           </p>
+          {/* The one kind of check that needs no second reader: statements of
+              the readings proved in Lean (lean/, issue #26), written out. */}
+          <p className="mt-4 rounded-[var(--radius-card)] border border-ink-200 bg-ink-50 px-4 py-3 text-[13.5px] leading-relaxed text-ink-600">
+            <strong className="font-semibold text-ink-800">Proved in Lean.</strong> Some statements of
+            the modernised readings are proved in the Lean proof assistant against mathlib — each with
+            its statement, the page it comes from and a written-out proof:{' '}
+            <a href="/article/grothendieck-lean.pdf" className="text-brand-700 underline decoration-brand-200 underline-offset-2">
+              the statements proved (PDF, in French)
+            </a>
+            , and the proofs in{' '}
+            <a
+              href="https://github.com/Commutator-IO/grothendieck-project/tree/main/lean"
+              className="text-brand-700 underline decoration-brand-200 underline-offset-2"
+            >
+              lean/
+            </a>
+            . A proof says the reading holds together, not that it is what the page says.
+          </p>
         </header>
 
         <PlainSummary />

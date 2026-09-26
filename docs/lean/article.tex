@@ -1,0 +1,93 @@
+\documentclass[11pt]{article}
+\usepackage{fontspec}\setmainfont{Charter}\setmonofont{Menlo}[Scale=0.8]
+\usepackage{polyglossia}\setmainlanguage{french}\setotherlanguage{english}
+\usepackage{microtype}
+\usepackage[a4paper,margin=27mm]{geometry}
+\usepackage{setspace}\setstretch{1.1}
+\usepackage[hidelinks]{hyperref}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{fancyvrb}
+\usepackage{booktabs}
+
+\newcommand{\q}[1]{«\,#1\,»}
+\newcommand{\lot}[3]{\href{https://grothendieck.commutator.io/\##1/#2/p#3}{n\textsuperscript{o}\,#1, lot #2, p.~#3}}
+\newcommand{\gh}[1]{\href{https://github.com/Commutator-IO/grothendieck-project/blob/main/#1}{\texttt{#1}}}
+\newtheorem*{enonce}{Énoncé}\newtheorem{lemme}{Lemme}[section]
+\theoremstyle{remark}\newtheorem*{trouve}{Ce que la formalisation a trouvé}
+\DefineVerbatimEnvironment{lean}{Verbatim}{fontsize=\small,frame=leftline,framesep=3mm,xleftmargin=2mm}
+\raggedbottom\emergencystretch=1.5em
+
+\title{\Large Énoncés des notes de travail de Grothendieck\\ démontrés en Lean}
+\author{Michel Hua\\ \small \texttt{michel@commutator.io}}
+\date{\small Version du 26 septembre 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent Les lectures modernisées du fonds Grothendieck de Montpellier, publiées sur \url{https://grothendieck.commutator.io}, reformulent en langage actuel ce que disent ses notes de travail. Ce document réunit les énoncés de ces lectures qui ont été démontrés dans l'assistant de preuve Lean~4, contre la bibliothèque mathlib : pour chacun, l'énoncé tel que la lecture le donne, la page du manuscrit d'où il vient, l'énoncé Lean, l'idée de la preuve, et ce que la formalisation a trouvé. Il est tenu à jour à mesure que des preuves s'ajoutent.
+\end{abstract}
+
+\section*{Ce qu'une preuve établit ici}
+
+Une preuve Lean établit que ce que la lecture modernisée énonce \emph{tient} : que l'énoncé est vrai, sous les hypothèses écrites et sous elles seules. Elle n'établit pas que la lecture est fidèle au manuscrit. Un énoncé parfaitement formalisé peut être une lecture parfaitement fausse de la page, et aucune page du fonds n'a encore été relue par une personne. La formalisation est donc un contrôle des lectures, non des transcriptions, et elle vient après elles : elle décèle un énoncé faux tel qu'il est écrit, une hypothèse sous-entendue, une inclusion donnée pour une égalité, et, à l'inverse, une hypothèse dont la preuve se passe.
+
+{\sloppy Les preuves sont dans le répertoire \gh{lean/} du dépôt. Elles sont vérifiées à chaque modification par une compilation (\texttt{lake build}) où tout avertissement est une erreur, de sorte qu'aucun \texttt{sorry} ne passe, et le journal de compilation liste les axiomes dont dépend chaque énoncé : seuls les trois axiomes usuels de Lean (\texttt{propext}, \texttt{Classical.choice}, \texttt{Quot.sound}) sont admis. Les énoncés Lean sont reproduits tels qu'ils figurent dans les fichiers ; les démonstrations sont rédigées ici en langage mathématique, en suivant pas à pas celles que Lean vérifie.\par}
+
+\section{Cote 42 : le lemme 2, localisés d'un anneau noethérien}
+
+\begin{description}\setlength{\itemsep}{0pt}\small
+\item[Manuscrit] \emph{Réseaux d'anneaux locaux}, années 1960--1970 selon l'inventaire, pages~4 et~5 (\lot{42}{1}{4}).
+\item[Lecture] \gh{transcripts/42/42.modern.tex}
+\item[Lean] \gh{lean/Grothendieck/Folder42.lean}
+\end{description}
+
+\medskip
+\noindent Le dossier cherche quand une fonction globale sur un préschéma est déterminée par ses germes, reliés entre eux par les générisations. Pour le faisceau structural, il isole un fait d'algèbre commutative.
+
+\begin{enonce}[Lemme 2]
+Soient $A$ un anneau noethérien et $\mathfrak p$ un idéal premier de $A$.
+\begin{enumerate}
+\item Il existe $f \in A \setminus \mathfrak p$ tel que $A_f \to A_{\mathfrak p}$ soit injectif.
+\item Si de plus $A \to A_{\mathfrak p}$ est injectif, alors $A_{\mathfrak q} \to A_{\mathfrak p}$ est injectif pour tout idéal premier $\mathfrak q \supseteq \mathfrak p$.
+\end{enumerate}
+\end{enonce}
+
+\noindent En Lean, les deux flèches sont les morphismes induits par la propriété universelle de la localisation (\texttt{IsLocalization.lift}), nommés \texttt{awayToAtPrime} et \texttt{atPrimeToAtPrime}.
+
+\begin{lean}
+theorem lemme2_1 [IsNoetherianRing A] :
+    ∃ (f : A) (hf : f ∉ p), Function.Injective (awayToAtPrime p f hf)
+
+theorem lemme2_2 (hinj : Function.Injective (algebraMap A (Localization.AtPrime p)))
+    (q : Ideal A) [q.IsPrime] (hpq : p ≤ q) :
+    Function.Injective (atPrimeToAtPrime p q hpq)
+\end{lean}
+
+\noindent\emph{Conventions.} Pour une partie multiplicative $M$ de $A$, on note $M^{-1}A$ le localisé et $a \mapsto a/1$ le morphisme canonique. Rappelons que $a/1 = 0$ dans $M^{-1}A$ si et seulement s'il existe $m \in M$ avec $ma = 0$, que tout élément de $M^{-1}A$ s'écrit $a/m$, et que si $g : A \to P$ envoie $M$ dans les inversibles de $P$, il existe un unique morphisme $\bar g : M^{-1}A \to P$ avec $\bar g(a/1) = g(a)$. Les flèches du lemme sont de cette forme : $A_f = \{f^n\}^{-1}A$ et $A_{\mathfrak q} = (A \setminus \mathfrak q)^{-1}A$, avec $g$ le morphisme canonique $A \to A_{\mathfrak p}$, qui inverse $f \notin \mathfrak p$ et, si $\mathfrak p \subseteq \mathfrak q$, tout élément hors de $\mathfrak q$, a fortiori hors de $\mathfrak p$.
+
+\begin{lemme}\label{lem:lift}
+Soient $M \subseteq A$ une partie multiplicative et $g : A \to P$ un morphisme d'anneaux envoyant $M$ dans les inversibles de $P$. Si, pour tout $a \in A$, $g(a) = 0$ entraîne $a/1 = 0$ dans $M^{-1}A$, alors $\bar g : M^{-1}A \to P$ est injectif.
+\end{lemme}
+
+\begin{proof}
+Comme $\bar g$ est un morphisme de groupes additifs, il suffit de voir que son noyau est nul. Soit $z \in M^{-1}A$ avec $\bar g(z) = 0$ ; écrivons $z \cdot (m/1) = a/1$ avec $a \in A$ et $m \in M$. En appliquant $\bar g$, on obtient $g(a) = \bar g(z)\, g(m) = 0$, donc $a/1 = 0$ par hypothèse, c'est-à-dire $z \cdot (m/1) = 0$. Comme $m/1$ est inversible dans $M^{-1}A$, $z = 0$.
+\end{proof}
+
+\begin{proof}[Démonstration de (1)]
+Soit $J$ le noyau de $A \to A_{\mathfrak p}$ : c'est l'ensemble des $a \in A$ tels que $sa = 0$ pour \emph{au moins un} $s \notin \mathfrak p$. L'anneau $A$ étant noethérien, $J$ est engendré par un nombre fini d'éléments $x_1, \dots, x_n$. Pour chaque $i$, $x_i \in J$ fournit $s_i \notin \mathfrak p$ avec $s_i x_i = 0$. Posons $f = s_1 \cdots s_n$. Comme $\mathfrak p$ est premier, son complémentaire est stable par produit, donc $f \notin \mathfrak p$.
+
+Montrons que $f y = 0$ pour tout $y \in J$. L'ensemble des $y \in A$ tels que $fy = 0$ est un idéal de $A$ ; il contient chaque $x_i$, puisque $f = s_i c_i$ avec $c_i = \prod_{j \neq i} s_j$ et donc $f x_i = c_i (s_i x_i) = 0$. Il contient donc l'idéal engendré par les $x_i$, qui est $J$.
+
+Appliquons alors le lemme~\ref{lem:lift} à $M = \{f^n\}$ et à $g : A \to A_{\mathfrak p}$. Si $g(a) = 0$, alors $a \in J$, donc $fa = 0$ ; comme $f \in M$, cela signifie $a/1 = 0$ dans $A_f$. Le morphisme $A_f \to A_{\mathfrak p}$ est donc injectif.
+\end{proof}
+
+\begin{proof}[Démonstration de (2)]
+Appliquons le lemme~\ref{lem:lift} à $M = A \setminus \mathfrak q$ et à $g : A \to A_{\mathfrak p}$, qui inverse $M$ puisque $\mathfrak p \subseteq \mathfrak q$. Si $g(a) = 0$, alors $a = 0$ par l'injectivité supposée de $g$, et a fortiori $a/1 = 0$ dans $A_{\mathfrak q}$. Le morphisme $A_{\mathfrak q} \to A_{\mathfrak p}$ est donc injectif. L'hypothèse noethérienne n'a pas servi.
+\end{proof}
+
+\begin{trouve}
+Les deux énoncés tiennent tels que la lecture les donne ; aucune hypothèse ne manque. La partie~(2) n'utilise pas l'hypothèse noethérienne : elle vaut pour tout anneau commutatif. La partie~(1) ne l'utilise que pour rendre le noyau de $A \to A_{\mathfrak p}$ de type fini, et la preuve exige de ce noyau la description exacte --- les éléments annulés par \emph{un} élément hors de $\mathfrak p$ ---, qui est celle que la note de la lecture substitue à la glose de la page, \q{l'annulateur de $A - \mathfrak p$}.
+\end{trouve}
+
+\end{document}

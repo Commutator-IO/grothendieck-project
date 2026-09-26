@@ -798,6 +798,9 @@ copyFileSync(resolve(here, 'article.pdf'), resolve(served, 'grothendieck-jtei.pd
 // The second article, for the Revue d'histoire des mathématiques, is served
 // beside it: a PDF only, since that journal takes LaTeX and not TEI.
 copyFileSync(resolve(root, 'docs/rhm/article.pdf'), resolve(served, 'grothendieck-rhm.pdf'));
+// The third, the readings' statements proved in Lean (lean/), with their
+// proofs written out: linked from /findings/.
+copyFileSync(resolve(root, 'docs/lean/article.pdf'), resolve(served, 'grothendieck-lean.pdf'));
 
 const elements = [...new Set([...xml.matchAll(/<([a-zA-Z]+)[\s>/]/g)].map((m) => m[1]))].sort();
 process.stdout.write(
