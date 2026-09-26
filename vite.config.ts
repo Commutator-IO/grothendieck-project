@@ -147,6 +147,7 @@ export default defineConfig({
         letters: resolve(import.meta.dirname, 'letters/index.html'),
         timeline: resolve(import.meta.dirname, 'timeline/index.html'),
         notebooks: resolve(import.meta.dirname, 'notebooks/index.html'),
+        diagrams: resolve(import.meta.dirname, 'diagrams/index.html'),
       },
     },
   },
