@@ -143,6 +143,7 @@ export default defineConfig({
         findings: resolve(import.meta.dirname, 'findings/index.html'),
         maps: resolve(import.meta.dirname, 'maps/index.html'),
         hand: resolve(import.meta.dirname, 'hand/index.html'),
+        fondsIndex: resolve(import.meta.dirname, 'index/index.html'),
       },
     },
   },

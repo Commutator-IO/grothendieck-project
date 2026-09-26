@@ -32,6 +32,7 @@ const COLLECTIONS: { id: Collection; label: string; path: string }[] = [
 // the project rather than about the folders.
 const FONDS_PAGES: { path: string; label: string }[] = [
   { path: '/archive/', label: 'Whole fonds' },
+  { path: '/index/', label: 'Index' },
   { path: '/hand/', label: 'The hand' },
   { path: '/maps/', label: 'Maps' },
   { path: '/findings/', label: 'Findings' },
