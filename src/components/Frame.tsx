@@ -33,6 +33,7 @@ const COLLECTIONS: { id: Collection; label: string; path: string }[] = [
 const FONDS_PAGES: { path: string; label: string }[] = [
   { path: '/archive/', label: 'Whole fonds' },
   { path: '/index/', label: 'Index' },
+  { path: '/letters/', label: 'Letters' },
   { path: '/hand/', label: 'The hand' },
   { path: '/maps/', label: 'Maps' },
   { path: '/findings/', label: 'Findings' },

@@ -144,6 +144,7 @@ export default defineConfig({
         maps: resolve(import.meta.dirname, 'maps/index.html'),
         hand: resolve(import.meta.dirname, 'hand/index.html'),
         fondsIndex: resolve(import.meta.dirname, 'index/index.html'),
+        letters: resolve(import.meta.dirname, 'letters/index.html'),
       },
     },
   },
