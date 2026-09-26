@@ -26,6 +26,8 @@
 import { mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { escapeHtml, readingPage, renderDiagram } from './render.mjs';
+import { symbols } from './lib/symbols.mjs';
+import { CAROUSEL_STYLE, carouselNav, withSlides } from './lib/carousel.mjs';
 
 const ROOT = resolve(import.meta.dirname, '..');
 const T = resolve(ROOT, 'transcripts');
@@ -51,48 +53,59 @@ function size(raw) {
     .flatMap((r) => r.split('&'))
     .map((c) => c.replace(/\\arrow\[[^\]]*\]/g, '').trim())
     .filter(Boolean).length;
-  return { nodes, arrows, rows: rows.length };
+  // The symbols of the nodes and of the arrows' labels — not the arrows'
+  // options, which say how an arrow is drawn, not what it names.
+  const labels = [...body.matchAll(/\\arrow\[([^\]]*)\]/g)].flatMap((m) => [...m[1].matchAll(/"((?:[^"\\]|\\.)*)"/g)].map((q) => q[1]));
+  const syms = symbols(body.replace(/\\arrow\[[^\]]*\]/g, ' ') + ' ' + labels.join(' ')).size;
+  return { nodes, arrows, rows: rows.length, symbols: syms };
 }
 
-/**
- * The carousel: shows one figure, redraws its arrows, and follows the hash
- * (#d12), the arrow keys and the range. Registered after the reading view's
- * own DOMContentLoaded handler, which typesets the nodes and draws every
- * diagram — the hidden ones against no geometry, which is why the one shown
- * is drawn again here.
- */
-const SLIDES = `<script>
-(function () {
-  var figs, cur = 0;
-  function show(i) {
-    if (!figs.length) return;
-    cur = Math.max(0, Math.min(figs.length - 1, i));
-    figs.forEach(function (f, j) { f.classList.toggle('on', j === cur); });
-    document.getElementById('dg-i').textContent = cur + 1;
-    document.getElementById('dg-range').value = cur + 1;
-    document.getElementById('dg-prev').disabled = cur === 0;
-    document.getElementById('dg-next').disabled = cur === figs.length - 1;
-    history.replaceState(null, '', '#d' + (cur + 1));
-    var cd = figs[cur].querySelector('.tr-cd');
-    if (cd && typeof drawDiagram === 'function') requestAnimationFrame(function () { drawDiagram(cd); });
-  }
-  document.addEventListener('DOMContentLoaded', function () {
-    figs = Array.prototype.slice.call(document.querySelectorAll('.dg'));
-    var m = /^#d(\\d+)$/.exec(location.hash);
-    document.getElementById('dg-prev').onclick = function () { show(cur - 1); };
-    document.getElementById('dg-next').onclick = function () { show(cur + 1); };
-    document.getElementById('dg-range').oninput = function (e) { show(Number(e.target.value) - 1); };
-    addEventListener('keydown', function (e) {
-      if (e.key === 'ArrowLeft') show(cur - 1);
-      if (e.key === 'ArrowRight') show(cur + 1);
-    });
-    addEventListener('resize', function () { show(cur); });
-    show(m ? Number(m[1]) - 1 : 0);
-  });
-})();
-</script>`;
-const withSlides = (page) => page.replace('</body>', `${SLIDES}</body>`);
 
+
+const DG_STYLE = `
+  .dg { margin: 0 0 1.4rem; padding: .9rem 1rem 1rem; border: 1px solid var(--rule); border-radius: 10px;
+        break-inside: avoid; background: #fff; }
+  .dg figcaption { display: flex; justify-content: space-between; font-size: 12px; color: var(--ink3);
+                   margin-bottom: .5rem; }
+  .dg figcaption a { color: var(--ink2); text-decoration: none; font-weight: 600; }
+  .dg figcaption a:hover { text-decoration: underline; }
+  .dg-n { font-variant-numeric: tabular-nums; color: var(--ink4); }
+  .dg .ltx_p { margin: 0; text-align: center; overflow-x: auto; }
+  /* The reading views set a diagram as a block, left-aligned, and draw its
+     arrows in an SVG laid over the box from its top-left corner. Centred as
+     a block here, the grid moved and the arrows stayed at the left edge of a
+     full-width box, drawn away from the nodes they join. Shrink-wrapped, the
+     box is the grid, and the arrows fall where they belong. */
+  .dg .tr-cd { display: inline-block; text-align: left; vertical-align: top; }
+  /* The arrow layer sits at z-index -1, under the nodes. Without a stacking
+     context of its own it went under the card's white background too, and
+     every arrow was painted and hidden. */
+  .dg .tr-cd { isolation: isolate; }
+${CAROUSEL_STYLE}`;
+
+// One diagram per slide leaves room to draw it larger, and larger is what
+// makes a diagram legible: the node text and the gaps between nodes grow
+// together, so the arrows lengthen and their labels clear the nodes. A
+// square of four nodes is drawn at 1.7 times the reading view's size; a
+// diagram of eight rows or columns stays at 1, or it would not fit.
+const scale = (d) => {
+  const cols = Math.max(...d.raw.replace(/^\\begin\{tikzcd\}(\[[^\]]*\])?/, '').split(/\\\\(?![a-zA-Z])/).map((r) => r.split('&').length));
+  const dim = Math.max(cols, d.rows);
+  return dim <= 2 ? 1.7 : dim <= 3 ? 1.5 : dim <= 4 ? 1.3 : dim <= 6 ? 1.15 : 1;
+};
+const enlarge = (htmlOf, k) =>
+  htmlOf
+    .replace(/column-gap:([\d.]+)rem;row-gap:([\d.]+)rem/, (_, c, r) => `column-gap:${(c * k).toFixed(2)}rem;row-gap:${(r * k).toFixed(2)}rem`)
+    .replace('<span class="tr-cd" ', `<span class="tr-cd" style="font-size:${(15.5 * k).toFixed(1)}px" `);
+
+/** One slide: the caption names the folder only on the pages that mix folders. */
+const figureOf = (d, i, n, withFolder) =>
+  `<figure class="dg" id="d${i + 1}">` +
+  `<figcaption><a href="/#${d.folder}/${d.batch}" target="_top">${withFolder ? `n° ${d.folder} · ` : ''}batch ${d.batch}${d.page ? ` · p. ${escapeHtml(d.page)}` : ''} — lire la page</a>` +
+  `<span class="dg-n">${i + 1} / ${n}${withFolder ? ` · ${d.nodes} nœuds, ${d.arrows} flèches, ${d.symbols} symboles` : ''}</span></figcaption>` +
+  `<div class="ltx_p">${enlarge(renderDiagram(d.raw), scale(d))}</div></figure>`;
+
+const ALL = [];
 const folders = readdirSync(T, { withFileTypes: true })
   .filter((d) => d.isDirectory() && COTE.has(d.name))
   .map((d) => d.name)
@@ -116,43 +129,17 @@ for (const f of folders) {
     const pages = [...body.matchAll(/\\page\{([^}]*)\}/g)].map((m) => ({ at: m.index, n: m[1] }));
     for (const m of body.matchAll(/\\begin\{tikzcd\}[\s\S]*?\\end\{tikzcd\}/g)) {
       const page = pages.filter((p) => p.at < m.index).pop()?.n ?? null;
-      found.push({ batch, page, raw: m[0], ...size(m[0]) });
+      found.push({ folder: f, batch, page, raw: m[0], ...size(m[0]) });
     }
   }
   if (!found.length) continue;
   total += found.length;
+  ALL.push(...found);
 
   const cote = COTE.get(f);
-  // One diagram per slide leaves room to draw it larger, and larger is what
-  // makes a diagram legible: the node text and the gaps between nodes grow
-  // together, so the arrows lengthen and their labels clear the nodes. A
-  // square of four nodes is drawn at 1.7 times the reading view's size; a
-  // diagram of eight rows or columns stays at 1, or it would not fit.
-  const scale = (d) => {
-    const cols = Math.max(...d.raw.replace(/^\\begin\{tikzcd\}(\[[^\]]*\])?/, '').split(/\\\\(?![a-zA-Z])/).map((r) => r.split('&').length));
-    const dim = Math.max(cols, d.rows);
-    return dim <= 2 ? 1.7 : dim <= 3 ? 1.5 : dim <= 4 ? 1.3 : dim <= 6 ? 1.15 : 1;
-  };
-  const enlarge = (htmlOf, k) =>
-    htmlOf
-      .replace(/column-gap:([\d.]+)rem;row-gap:([\d.]+)rem/, (_, c, r) => `column-gap:${(c * k).toFixed(2)}rem;row-gap:${(r * k).toFixed(2)}rem`)
-      .replace('<span class="tr-cd" ', `<span class="tr-cd" style="font-size:${(15.5 * k).toFixed(1)}px" `);
   const html =
-    `<nav class="dg-nav" aria-label="Diagrammes">` +
-    `<button type="button" id="dg-prev" aria-label="Diagramme précédent">‹</button>` +
-    `<span class="dg-count"><span id="dg-i">1</span> / ${found.length}</span>` +
-    `<input type="range" id="dg-range" min="1" max="${found.length}" value="1" aria-label="Aller au diagramme">` +
-    `<button type="button" id="dg-next" aria-label="Diagramme suivant">›</button>` +
-    `</nav>\n` +
-    found
-      .map(
-        (d, i) =>
-          `<figure class="dg" id="d${i + 1}">` +
-          `<figcaption><a href="/#${f}/${d.batch}" target="_top">batch ${d.batch}${d.page ? ` · p. ${escapeHtml(d.page)}` : ''} — lire la page</a>` +
-          `<span class="dg-n">${i + 1} / ${found.length}</span></figcaption>` +
-          `<div class="ltx_p">${enlarge(renderDiagram(d.raw), scale(d))}</div></figure>`,
-      )
-      .join('\n');
+    carouselNav(found.length, 'Diagrammes') +
+    found.map((d, i) => figureOf(d, i, found.length, false)).join('\n');
   const pagesSeen = found.map((d) => Number(d.page)).filter(Number.isFinite);
   writeFileSync(
     resolve(OUT, `${f}.html`),
@@ -168,37 +155,7 @@ for (const f of folders) {
       lang: 'fr',
       name: `${found.length} diagramme${found.length > 1 ? 's' : ''} commutatif${found.length > 1 ? 's' : ''}`,
       html,
-      extraStyle: `
-  .dg { margin: 0 0 1.4rem; padding: .9rem 1rem 1rem; border: 1px solid var(--rule); border-radius: 10px;
-        break-inside: avoid; background: #fff; }
-  .dg figcaption { display: flex; justify-content: space-between; font-size: 12px; color: var(--ink3);
-                   margin-bottom: .5rem; }
-  .dg figcaption a { color: var(--ink2); text-decoration: none; font-weight: 600; }
-  .dg figcaption a:hover { text-decoration: underline; }
-  .dg-n { font-variant-numeric: tabular-nums; color: var(--ink4); }
-  .dg .ltx_p { margin: 0; text-align: center; overflow-x: auto; }
-  /* The reading views set a diagram as a block, left-aligned, and draw its
-     arrows in an SVG laid over the box from its top-left corner. Centred as
-     a block here, the grid moved and the arrows stayed at the left edge of a
-     full-width box, drawn away from the nodes they join. Shrink-wrapped, the
-     box is the grid, and the arrows fall where they belong. */
-  .dg .tr-cd { display: inline-block; text-align: left; vertical-align: top; }
-  /* The arrow layer sits at z-index -1, under the nodes. Without a stacking
-     context of its own it went under the card's white background too, and
-     every arrow was painted and hidden. */
-  .dg .tr-cd { isolation: isolate; }
-  /* A carousel: one diagram at a time, the others kept out of the flow. */
-  .dg { display: none; min-height: 22rem; }
-  .dg.on { display: flex; flex-direction: column; }
-  .dg .ltx_p { flex: 1; display: flex; align-items: center; justify-content: center; padding: 1.5rem 0; }
-  .dg-nav { position: sticky; top: 0; z-index: 2; display: flex; align-items: center; gap: .75rem;
-            margin: 0 0 .8rem; padding: .5rem 0; background: #fff; font-size: 13px; color: var(--ink3); }
-  .dg-nav button { border: 1px solid var(--rule); background: #fff; border-radius: 999px; width: 2.2rem; height: 2.2rem;
-                   font-size: 18px; line-height: 1; color: var(--ink2); cursor: pointer; }
-  .dg-nav button:hover { background: var(--surf3); }
-  .dg-nav button:disabled { opacity: .35; cursor: default; }
-  .dg-nav input { flex: 1; accent-color: #128557; }
-  .dg-count { font-variant-numeric: tabular-nums; min-width: 4.5rem; text-align: center; }`,
+      extraStyle: DG_STYLE,
     })),
   );
 
@@ -210,9 +167,27 @@ for (const f of folders) {
     date: cote.date,
     n: found.length,
     byBatch,
-    diagrams: found.map((d) => ({ batch: d.batch, page: d.page, nodes: d.nodes, arrows: d.arrows, rows: d.rows })),
+    diagrams: found.map((d) => ({ batch: d.batch, page: d.page, nodes: d.nodes, arrows: d.arrows, rows: d.rows, symbols: d.symbols })),
   });
 }
+
+// The richest across the fonds: by what a reader has to take in — nodes,
+// arrows, and twice the distinct symbols, since a square of four letters
+// and a square of four different categories are not the same drawing.
+const richness = (d) => d.nodes + d.arrows + 2 * d.symbols;
+const RICHEST = [...ALL].sort((a, b) => richness(b) - richness(a)).slice(0, 60);
+writeFileSync(
+  resolve(OUT, 'richest.html'),
+  withSlides(
+    readingPage({
+      meta: { folder: 'tous', first: 1, last: RICHEST.length, title: 'les diagrammes les plus riches du fonds', dating: '', watermark: 'Édition de démonstration' },
+      lang: 'fr',
+      name: `${RICHEST.length} diagrammes commutatifs`,
+      html: carouselNav(RICHEST.length, 'Diagrammes') + RICHEST.map((d, i) => figureOf(d, i, RICHEST.length, true)).join('\n'),
+      extraStyle: DG_STYLE,
+    }).replace(/Cote n° tous(, | · )pages 1–\d+/g, 'Tout le fonds'),
+  ),
+);
 
 writeFileSync(
   JSON_OUT,
