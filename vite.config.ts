@@ -145,6 +145,7 @@ export default defineConfig({
         hand: resolve(import.meta.dirname, 'hand/index.html'),
         fondsIndex: resolve(import.meta.dirname, 'index/index.html'),
         letters: resolve(import.meta.dirname, 'letters/index.html'),
+        timeline: resolve(import.meta.dirname, 'timeline/index.html'),
       },
     },
   },
