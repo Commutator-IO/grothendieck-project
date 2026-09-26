@@ -17,7 +17,7 @@ export interface Proof {
   /** What the formalisation turned up — the point of doing it. */
   found: string;
   /** The verdict in one word, for the badge. */
-  verdict: 'holds' | 'holds, more generally' | 'holds; the gloss was false' | 'partly proved' | 'already in mathlib';
+  verdict: 'holds' | 'holds, more generally' | 'holds; the gloss was false' | 'false on the page' | 'the reading dropped a hypothesis' | 'partly proved' | 'already in mathlib';
   lean: string;
   theorems: string[];
 }
@@ -191,5 +191,70 @@ export const PROOFS: Proof[] = [
     verdict: 'partly proved',
     lean: 'lean/Grothendieck/Folder39.lean',
     theorems: ['preparation_adique', 'preparation_discrete'],
+  },
+  {
+    folder: '19',
+    batch: 1,
+    page: '4',
+    name: 'Théorème 1.12; Gabriel–Popescu',
+    statement:
+      'For an adjunction f ⊣ g with comparison functor h: a) if A has equalizers and f preserves them, h is essentially surjective; b) h is an equivalence if and only if f is conservative and, for every pair (u, v) whose image under f has an equalizer, the equalizer of (u, v) exists and f preserves it (condition C).',
+    found:
+      'a) and the « if » of b) hold — Beck’s theorem. The « only if » of b) is false as the page states it: the inclusion of the pairs of sets (X, Y) with Y ≠ ∅ ⇒ X ≠ ∅ is coreflective, hence comonadic and conservative, yet the pair (∗, ∗) ⇉ ({0, 1}, ∗) has equalizer (∅, ∗) below and (∅, ∅) above. The reading had called condition C Beck’s f-split condition; it is not, and the reading is corrected. Gabriel–Popescu holds in the reading’s form and is classical.',
+    verdict: 'false on the page',
+    lean: 'lean/Grothendieck/Folder19.lean',
+    theorems: ['theoreme_a', 'theoreme_b_suffisance', 'theoreme_b_necessite_fausse', 'beck_iff', 'gabriel_popescu'],
+  },
+  {
+    folder: '161-2',
+    batch: 2,
+    page: '33',
+    name: 'Monadicity, descent, Gabriel–Ulmer',
+    statement:
+      'The crude monadicity theorem (p. 33); the descent criterion (p. 34); a cocomplete category is locally presentable iff it has a small dense subcategory of presentable objects (p. 61); for Σ with finite colimits, Ind(Σ) is the category of left-exact presheaves on Σ (p. 77).',
+    found:
+      'Nothing false. The descent criterion needs no topos: it holds for any left-exact conservative left adjoint out of a category with finite limits. Not proved: the p. 54 theorem on π-accessible categories and the non-accessibility of (Ens)° and (Ab)°.',
+    verdict: 'partly proved',
+    lean: 'lean/Grothendieck/Folder161_2.lean',
+    theorems: ['monadicite', 'descente', 'caracterisation_gabriel_ulmer', 'lemme_ind'],
+  },
+  {
+    folder: '16',
+    batch: 1,
+    page: '9',
+    name: 'sl₂ against (6.7)',
+    statement:
+      'On a primitive vector of weight μ, ΛL^{k+1}x = (k+1)(μ−k)L^k x; the sl₂ Λ satisfies (6.7)’s ΛLx = x only when μ = 1; the commutator [L, Λ] follows from (6.7); in the exterior algebra, Λ₀L₀(1) = n.',
+    found:
+      'Nothing false; the last identity confirms the reading’s correction of p. 16, where the page identifies the contraction Λ₀ with the Λ₀ of (6.15). Only the algebra is proved; Hard Lefschetz and the geometry are not.',
+    verdict: 'partly proved',
+    lean: 'lean/Grothendieck/Folder16.lean',
+    theorems: ['sl2_normalisation', 'identification_seulement_si', 'commutateur_pseudo_inverse', 'lambda0_L0_un_ne_un'],
+  },
+  {
+    folder: '106',
+    batch: 1,
+    page: '9',
+    name: 'Brown factorisation; W₀⁻¹C ≅ W⁻¹C',
+    statement:
+      'In a cofibration category (Baues’s C1–C3): cofibrant replacement, weak lifting, and Brown’s factorisation of a weak equivalence between cofibrant objects; when every object is cofibrant, inverting W₀ = W ∩ cof inverts W, so W₀⁻¹C ≅ W⁻¹C.',
+    found:
+      'Nothing false; the last statement answers the doubt the page raises on p. 11, as the reading says. Hypotheses unused: α_x ∈ W in the weak lifting, f ∈ W except for i ∈ W, the two weak-equivalence clauses of C2 and « isomorphisms are cofibrations ».',
+    verdict: 'holds, more generally',
+    lean: 'lean/Grothendieck/Folder106.lean',
+    theorems: ['remplacementCofibrant', 'relevementFaible', 'factorisationDeBrown', 'localisation_W₀_iso_localisation_W'],
+  },
+  {
+    folder: '114',
+    batch: 1,
+    page: '3',
+    name: 'Proposition 4 and the minimal localiser',
+    statement:
+      'For fundamental localisers W∞ ⊆ W ⊆ W₀: (i) A totally W∞-aspheric ⇒ (ii) totally W-aspheric ⇒ (iii) A non-empty and every a × b 0-connected; W₀-aspheric means 0-connected, and the minimal fundamental localiser exists.',
+    found:
+      'W₀ is a fundamental localiser, totally W₀-aspheric is exactly (iii), and the minimal localiser exists; (i) ⇒ (ii) holds for all W, (ii) ⇒ (iii) for W ⊆ W₀. The reading had dropped the page’s « satisfying Loc 4) »: without it, W ⊆ W₀ fails (all functors; functors reflecting emptiness, for which B(ℤ/2) satisfies (ii) but not (iii)). (iii) ⇒ (i) is refuted in the literature and not treated.',
+    verdict: 'the reading dropped a hypothesis',
+    lean: 'lean/Grothendieck/Folder114.lean',
+    theorems: ['W₀_localisateurFondamental', 'totalementAspherique_W₀_iff', 'Wmin_inclus', 'proposition4_ii_iii', 'contreExemple_proposition4'],
   },
 ];
