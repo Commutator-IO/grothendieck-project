@@ -37,6 +37,7 @@ const FONDS_PAGES: { path: string; label: string }[] = [
   { path: '/letters/', label: 'Letters' },
   { path: '/hand/', label: 'The hand' },
   { path: '/diagrams/', label: 'Diagrams' },
+  { path: '/formulas/', label: 'Formulas' },
   { path: '/maps/', label: 'Maps' },
   { path: '/findings/', label: 'Findings' },
 ];

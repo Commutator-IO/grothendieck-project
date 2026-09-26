@@ -148,6 +148,7 @@ export default defineConfig({
         timeline: resolve(import.meta.dirname, 'timeline/index.html'),
         notebooks: resolve(import.meta.dirname, 'notebooks/index.html'),
         diagrams: resolve(import.meta.dirname, 'diagrams/index.html'),
+        formulas: resolve(import.meta.dirname, 'formulas/index.html'),
       },
     },
   },
