@@ -1,0 +1,602 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 150, batch 1 (pages 1-20).
+% Established from the facsimile archives/batches/150/batch-01.pdf (a copy of
+% 150.pdf fetched through the project's relay,
+% https://grothendieck-relay.onrender.com/source/150.pdf; PDF page k =
+% archivists' page k, no cover sheet), per the skill transcribe-grothendieck.
+% The folder is 98 pages in five batches (1-20, 21-40, 41-60, 61-80, 81-98);
+% this is the first, done in parallel with the other four.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-09-26 — first pass, unchecked against the pages by a human.
+%
+% Pages skipped: 5 and 10, blank sheets; 8, an unrelated typed administrative
+% verso with nothing of his. They are simply absent.
+%
+% Pages summarised: none. Page 9 carries only a drawing (the stratified disc of
+% page 6 redrawn in the X-notation) and is given as a description in a \note.
+% Page 20 is cancelled by two long diagonals but reads, and is transcribed.
+%
+% His pagination and numbered runs, recorded in \note{}s:
+%  - pages 2, 3, 4 are double sheets numbered by him « 1 », « 3 », and « 5) »
+%    (a « 4) » appears to head the right half of page 3), on specialisation
+%    preorders, pseudo-partitions and stratifications;
+%  - a second run, headed « Espaces stratifiés (étude par voisinages coniques) »
+%    and marked « (I) »: sheets numbered 1) p. 11, 2) p. 13, 3) p. 15,
+%    4) p. 17, 5) p. 19, the unnumbered pages 12, 14, 16, 18 being their
+%    continuations (probably versos). Within it, circled paragraph numbers
+%    (1)-(5) and numbered formulas (1)-(15); page 20 is a restart of
+%    paragraph (5), numbered after a struck circled number.
+% Date: page 1 carries, top left, « déc. 81 - janv. 82 » (the month
+% « déc. » doubtful), which agrees with the catalogue's 1981-1982; it is
+% recorded in a \note there and not in \dating{}, which is the catalogue's.
+%
+% What the batch is about. Page 1: the plan of « déploiement » of a
+% stratified space — for a flag i<j<k, unfolded strata Sigma_i, gluing tubes
+% Sigma_ij, junctions Sigma_ijk, with a hexagonal diagram of bordant
+% inclusions and (proper, equisingular) fibrations, cartesian diamonds, and
+% the general statement for Sigma_d, d a flag: a manifold with boundary whose
+% boundary is the union of the Sigma_d' for d' ⊃ d cofinal, and
+% Sigma_d -> Sigma_delta fibrant with compact manifold-with-boundary fibres.
+% Pages 2-4: the adjunction Esp ⇄ Préord (specialisation preorder, Alexandrov
+% topology), pseudo-partitions phi : X -> I, when the order of I is
+% recovered from the partition (quotient topology, phi open, loc. closed
+% pieces), « partitions stratifiantes » = strict stratifications (conditions
+% 1°-4°), the characterisation of open maps, stability under restriction to
+% open sets, and a minimality argument for condition a) (X_J^* closed ⇒ J
+% closed); tame topology is mentioned (smallest tame stratification refining
+% a partition). Pages 6, 7, 9: the three-strata case — Sigma_0, Sigma_1,
+% Sigma_2 with Sigma_01, Sigma_12, Sigma_02 and Sigma_012 = (Sigma_01 x
+% Sigma_2) ∩ (Sigma_0 x Sigma_12), axioms a)-f) (injective bordant maps,
+% cartesian squares, transversality, smooth fibrations), and the tube
+% construction Sigma_i = X_i minus the open tubes of lower strata. Pages
+% 11-19: a fair run on conical neighbourhoods — a conical neighbourhood T of
+% Y as an action of the monoid I = [0,1] with 0.T ⊂ Y, T the mapping cone of
+% f : dot T -> Y; the T_lambda, the epsilon-thickenings E_epsilon(T),
+% bordant (cylindrical) subspaces, strict conical neighbourhoods
+% (equivalent conditions a, b, b', c), conical subspaces, compatibility and
+% strict compatibility with families of closed parts, equisingularity (dot T
+% -> Y locally trivial, simultaneously for the dot T_i), the alternative
+% (14), and a Proposition: equivalence between systems (X, Y, (X_i), T) and
+% (X*, dot X, (X_i*), Y, dot X -> Y). Page 20: a cancelled restart defining
+% « conification » of a finite stratification (X_i)_{i in I} with a bordant
+% dot X strictly compatible with it, by recursion on I.
+%
+% Notation fixed once for the batch: \dot T for the boundary of the tube,
+% \overset{\circ}{T} for its interior, \mathbf{I} for the monoid [0,1] (he
+% writes a heavy I), \mathcal{C}(f) for the cone, X_i^{*} for the pieces of a
+% pseudo-partition and X_i for the closed unions, \bar\imath and \tilde\imath
+% for the closure of {i} in I and in I°, X_j^{\bullet} for the frontier of a
+% piece, \ddot T on page 20 as written. His underlinings in running text are
+% \emph{}; circled numerals are (n) with a \note.
+%
+% Hardest pages: 2-4 (fast double sheets, dense interlinear corrections and a
+% cramped right margin), the marginal notes of pages 11-18 written sideways,
+% and the cancelled page 20. The mathematical statements carry; much of the
+% sideways marginalia does not and is left \ill{}.
+
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{150}
+\batch{1}
+\pages{1}{20}
+\dating{1981-1982}
+\watermark{Édition de démonstration}
+\foldertitle{Espaces stratifiés et voisinages côniques (ou : déploiement des espaces stratifiés) : notes manuscrites (s.d.)}
+
+\begin{document}
+
+\section*{Espaces stratifiés et voisinages côniques (ou : déploiement des espaces stratifiés)}
+
+\page{1}
+\note{Le titre ci-dessus est le sien, écrit en haut à droite de ce premier feuillet et souligné ; en haut à gauche, la date : « \uncertain{déc.} 81 -- janv. 82 ».}
+
+\begin{tikzcd}[column sep=small, row sep=normal]
+ & \Sigma_{ik} \arrow[dl, "{(F_{ik})}"'] \arrow[rr, hook] & & \Sigma_{k} & \\
+\Sigma_{i} & & \Sigma_{ijk} \arrow[ul, hook] \arrow[rr, hook] \arrow[dl] & & \Sigma_{jk} \arrow[ul, hook] \arrow[dl, "{(F_{jk})}"] \\
+ & \Sigma_{ij} \arrow[ul, "{(F_{ij})}"] \arrow[rr, hook] & & \Sigma_{j} &
+\end{tikzcd}
+
+\note{Les deux losanges de droite, $\Sigma_{ik}\,\Sigma_{k}\,\Sigma_{jk}\,\Sigma_{ijk}$ et $\Sigma_{ijk}\,\Sigma_{jk}\,\Sigma_{j}\,\Sigma_{ij}$, portent chacun la mention « cart. » (carré cartésien). Les flèches $\Sigma_{ijk}\to\Sigma_{ik}$ et $\Sigma_{jk}\to\Sigma_{k}$ sont tracées obliques, le crochet d'inclusion du côté de la source.}
+
+$(i<j<k)$
+\begin{itemize}
+  \item $\Sigma_i\ \Sigma_j\ \Sigma_k$ : strates déployées
+  \item $\Sigma_{ij}\ \Sigma_{jk}\ \Sigma_{ik}$ : tubes de raccord des strates 2 à 2
+  \item $\Sigma_{ijk}$ : jonction en $i,j,k$
+\end{itemize}
+
+fibres $F_{ij}, F_{jk}, F_{ik}$ : fibres de raccord des strates 2 : 2.
+
+les flèches $\hookrightarrow$ sont bordantes
+
+les flèches $\to$ sont des fibrations (propres) (cas équisingulier)
+
+($F_{ijk}$, fibré sur $F_{ij}$, fibre $F_{jk}$ : fibre-jonction en $i,j,k$
+
+$\Sigma_i$ est la strate \add{déployée} « âme » du tube de raccord $\Sigma_{ij}$, $\Sigma_j$ en est la strate déployée ambiante\note{« déployée » est ajouté au-dessus de la ligne.}
+
+Cas non singulier : a) $\Sigma_i$ variété à bord, dont le bord est la réunion des $\Sigma_{ji}$ ($j<i$)\note{indices tels qu'écrits : $\Sigma_{ji}$, $j<i$, alors que la légende ci-dessus ordonne les indices $i<j$.}
+
+b) $\Sigma_{ik}\to\Sigma_k$ fibrations : fibres des variétés à bord \add{compactes}, le fibré des bords est la réunion des $\Sigma_{ijk}$ pour $i<j<k$.
+
+Plus généralement, a) $\Sigma_{i_0 i_1\cdots i_n}=\Sigma_d$ est une variété à bord, dont le bord est la réunion des $\Sigma_{d'}$, avec $d'$ drapeau $\supset d$, cofinal à $d$ (il suffit de les prendre de la forme $d'=d\cup\lbrace j\rbrace$, avec $j\in I_{<i_0}\amalg I_{i_0<\cdot<i_1}\amalg\cdots\amalg I_{i_{n-1}<\cdot<i_n}$)
+
+b) $\Sigma_{i_0\cdots i_n}=\Sigma_d\longrightarrow\Sigma_{i_0\cdots i_p}=\Sigma_\delta$ est fibrant, à fibres des variétés à bord compactes, le fibré des bords est réunion des $\Sigma_{d'}$ avec $d'\supset d$, $d$ cofinal dans $d'$, $\delta$ segment initial de $d'$ -- il suffit de prendre $d'=d\cup\lbrace j\rbrace$, avec $j\in I_{i_p<\cdot<i_{p+1}}\amalg\cdots\amalg I_{i_{n-1}<\cdot<i_n}$.
+
+\section*{Espaces et ensembles préordonnés ; pseudo-partitions}
+
+\page{2}
+\note{Feuillet double, écrit sur les deux moitiés ; un « 1 » de sa main en haut à gauche. Ce feuillet et les deux suivants (pages 3 et 4, marquées 3 et « 5) ») forment une suite numérotée par lui.}
+
+$X$ espace topologique $\Rightarrow$ \add{pré}ordonné par spécialisation : $\mathrm{Spéc}(X)$\note{lecture du nom : « S\uncertain{péc}(X) », les lettres sont surchargées.}
+\[
+x\le y\ \overset{\text{déf}}{\Longleftrightarrow}\ \overline{\lbrace x\rbrace}\subset\overline{\lbrace y\rbrace}
+\]
+(ordonné ssi $X$ satisfait l'axiome de séparation $T_0$)
+
+$I$ ens. \add{pré}ordonné $\Rightarrow$ espace top., fermés les $A\subset I$ t.q. $x\in A$, $y\le x\Rightarrow y\in A$ ; ouverts les ens. fermés dans $I^{\circ}$ (opposé à $I$) ; base d'ouverts : les ens $I_{\ge x}=\widetilde{\lbrace x\rbrace}$ (\uncertain{ou} désigne l'adh. pour $I^{\circ}$)
+
+$\mathrm{Esp}(I)$ \qquad \struck{\ill{} fondamentales}\note{en marge gauche, deux mots biffés, puis « Vue » (?) également biffé.}
+
+\emph{NB 1} : si $I,J$ préordonnés, $f:I\to J$ une application, alors $f$ croissante ssi $f$ continue.
+
+$\overline{\lbrace x\rbrace}=I_{\le x}=\lbrace y\in I\mid y\le x\rbrace$ donc $x\le y\Longleftrightarrow\overline{\lbrace x\rbrace}\subset\overline{\lbrace y\rbrace}\Longleftrightarrow x\in\overline{\lbrace y\rbrace}$
+
+(Plus gén. $I\to X$ continue ssi elle est croissante)\note{ajout entre les lignes, relié par un long trait à « NB 1 ».}
+
+\emph{NB 2} Une topologie sur un ens $I$ est associée à une préordre (\uncertain{nécessairement} unique, \struck{\ill{}} à savoir celle de la spécialisation) ssi les réunions quelc. de fermés sont fermés $\Longleftrightarrow$ \struck{\ill{}} intersection d'ouverts \uncertain{est} ouvert (i.e. $\exists$ une « topologie grossière » !)\note{lecture de « grossière » douteuse.}
+
+Cas \uncertain{de} deux foncteurs
+\[
+\mathcal{E}=(\mathrm{Esp})\ \underset{\mathrm{Esp}}{\overset{\mathrm{Ord}}{\rightleftarrows}}\ (\mathrm{Préord})=\mathcal{O}
+\]
+avec $\mathrm{Ord}\circ\mathrm{Esp}=\mathrm{id}_{\mathcal{E}}$, $\mathrm{Esp}\circ\mathrm{Ord}\to\mathrm{id}_{\mathcal{O}}$
+\note{sous $(\mathrm{Esp})$ et $(\mathrm{Préord})$ il écrit, reliés par $\in$ renversé, $X$ et $I$. Les indices $\mathrm{id}_{\mathcal{E}}$ et $\mathrm{id}_{\mathcal{O}}$ sont écrits dans cet ordre, alors que la composée $\mathrm{Ord}\circ\mathrm{Esp}$ est un endofoncteur de $\mathcal{O}$ : transcrit tel quel.}
+
+car l'application $\mathrm{id}_X:X\to X$ est continue de $\mathrm{Esp}\,\mathrm{Ord}\,X$ dans $X$ (et est $\simeq$ ssi $X$ satisfait la cond. du NB 2)
+\[
+\mathrm{Hom}_{\mathcal{E}}(\mathrm{Esp}(I),X)\ \xrightarrow{\ \sim\ }\ \mathrm{Hom}_{\mathcal{O}}(I,\mathrm{Ord}(X))
+\]
+adjonction
+$I\to X$ est continue ssi elle est croissante
+
+
+
+Considérons maintenant $\varphi:X\to I$, i.e. \struck{une} pseudo-partition $X=\bigcup_{i\in I}X_i^{*}$ (les $X_i^{*}$ mutuellement disjoints). \add{Posons $X_J^{*}=\varphi^{-1}(J)$, les} \struck{continue ssi} $\varphi^{-1}(I_{\ge i})$ ouverts i.e. ssi les $X_{\tilde\imath}^{*}=\bigcup_{j\ge i}X_j^{*}$ sont ouverts, i.e. ssi les \struck{$X$} $X_{\complement\tilde\imath}^{*}=\bigcup_{j\in I,\ j\not\ge i}X_j^{*}$ sont fermés. Il \uncertain{faut} \add{donc} pour ceci que les
+\[
+X_i\overset{\text{déf}}{=}X_{\bar\imath}^{*}=\bigcup_{j\le i}X_j
+\]
+soient fermés, et cette condition est suffisante si $I$ est fini (car tt fermé \add{de $I$} est alors \uncertain{réunion} finie de fermés de la forme $\bar\imath$) plus généralement si $\varphi$ est « loc\textsuperscript{t} finie » i.e. loc. \uncertain{dans} $X$ \ill{} \uncertain{va} fini (\emph{NB} Si $I'\subset I$, la top. de $I'$ associée au préordre induit est la top. induite par $I$)\note{dans la formule, l'indice de la réunion est bien $X_j$ ; on attendrait $X_j^*$.}
+
+
+
+\note{Moitié droite du feuillet. Tout en haut, dans la marge abîmée, une ligne presque effacée où se lit « $\Longleftrightarrow\overline{\lbrace x\rbrace}\subset\overline{\lbrace y\rbrace}$ ».}
+
+\marginal{* \uncertain{moyennant} \ill{} que la top. de $I$ \ill{} \ill{}, la question est une pure \ill{} : quelles conditions \ill{} que \ill{} les $X_i^{*}$ \ill{}}\note{note ajoutée en haut à droite, appelée par l'astérisque du texte ; lecture très incertaine.}
+
+Dans quel cas l'\add{pré}ordre de l'ens $I$ est-il déterminé par l'application $\varphi$ i.e. * \add{\uncertain{par}} la famille $(X_i)_{i\in I}$ \struck{\ill{}} \add{Plus précisément} par $(X_i^{*})_{i\in I}$ (dans le cas $\varphi$ continue) ? quand \struck{\ill{}} existe-t-il un ordre sur $I$ qui rende $\varphi$ continue, et quand cet ordre est-il unique ? Pour l'unicité, il est clair que si $X=\emptyset$ il faut que card $I\le 1$, et si $X\neq\emptyset$ que $\varphi$ soit surjective i.e. les $X_i^{*}\neq\emptyset$. \struck{Supposons} \uncertain{Supposons} donc $\varphi$ surj. i.e. $X_i^{*}\neq\emptyset$. On aimerait que la top. de $I$ soit la top. \emph{quotient} i.e. que $X_J$ fermé ssi $J$ fermé dans $I$ ; cette topologie sur $I$ est bien telle que \uncertain{les} réunions de fermés \add{(cas $\varphi$ loc. finie)} sont fermés donc est associée à un ordre unique de $I$. Pour cet ordre, on aurait donc $i\le j$ ssi \struck{\ill{}} $\forall J\subset I$ tel que $X_J^{*}$ fermé et $j\in J$, on a $i\in J$. À quelles conditions ceci provient-il d'un ordre (\emph{NB} « en général » ce préordre \uncertain{sera} loin d'être \uncertain{discrétique} !) Il faut et il suffit que les $\bar\imath$ soient localement fermés dans $I$, ce qui indique que les $X_i^{*}$ soient \add{loc\textsuperscript{t}} fermés. \struck{\ill{}} \struck{\ill{}} \add{\uncertain{bien}} il faut et il suffit que \add{\uncertain{\ill{}}} l'on ait \struck{\ill{}} $X_{\bar\imath}^{*}\cap X_{\tilde\imath}^{*}=X_i^{*}$ (puisque $\lbrace i\rbrace=\bar\imath\cap\tilde\imath$) ce qui équivaut à \struck{\ill{}} \ldots\ \add{$\supset X_i^{*}$ \ill{}}, or $X_{\bar\imath}^{*}$ est le plus petit fermé de $X$ « saturé » pour la relation d'équivalence loc. finie associée, et $X_{\tilde\imath}^{*}$ est le plus petit ouvert saturé $\supset X_i^{*}$. On pourrait appeler « stratification fidèle » de $X$ une relation d'équiv. loc\textsuperscript{t} finie telles que l'ens préordonné quotient $I$ soit \emph{ordonné} -- ils correspondent aux familles \add{indexées par $I$ ordonné} \struck{\ill{}} $(X_i^{*})_{i\in I}$ \add{\uncertain{partition}}, \uncertain{constituée} de $X_i$ \struck{\ill{}} disjoints et telles que pour $J\subset I$, on ait $X_J$ fermé ssi $J$ fermé. donc telles que a) les $X_i\overset{\text{déf}}{=}\bigcup_{j\le i}X_j^{*}$ fermés \add{(i.e. $J$ fermé $\Rightarrow X_J$ fermé $\Rightarrow$ les $X_i^{*}$ loc. f.)}
+
+b) Si $X_J$ est fermé, alors $J$ l'est.\note{Dans cette moitié, les passages de la marge droite sont très serrés et en partie hors du cadre de l'image ; les \ldots\ marquent des mots coupés ou illisibles.}
+
+\page{3}
+\note{Feuillet double, écrit sur les deux moitiés ; « 3 » de sa main en haut à gauche, et en tête de la moitié droite un numéro suivi d'une parenthèse, \uncertain{4)}. En haut à droite, quelques signes isolés (« $\ni x$ », « $x>\bar x$ », deux $\Sigma$ soulignés) sans lien lisible avec le texte.}
+
+Conditions plus fortes : \struck{la topologie de $I$ est quotient de} \add{\uncertain{puis}} l'application \add{(\uncertain{co-finie}, surjection)} $\varphi$ est \add{ouverte} \struck{\ill{}} $\Longleftrightarrow$ $\varphi^{-1}(\bar J)=\overline{\varphi^{-1}(J)}$ $\Longleftrightarrow$ $\varphi^{-1}(\bar J)=\overline{\varphi^{-1}(J)}$ i.e.
+\[
+\bigcup_{j\in\bar J}X_j^{*}\ \ \Big\Vert \qquad \overline{\bigcup_{j\in J}X_j^{*}}=\bigcup_{j\in J}\overline{X_j^{*}}
+\]
+\[
+\overline{X_j^{*}}=\bigcup_{i\in\bar j}X_i^{*}\ \Big(\overset{\text{déf}}{=}X_j\Big).
+\]
+\note{les deux égalités de la première ligne sont chacune surmontée d'un signe $=$ vertical renvoyant à la ligne du dessous : la première à $\bigcup_{j\in\bar J}X_j^*$, la seconde à $\overline{\bigcup_{j\in J}X_j^*}$.}
+
+Conditions pour une pseudo-partition $(X_i^{*})_{i\in I}$ \add{loc. finie} (indexée par un ens. préordonné $I$, i.e. $\varphi:X\to I$ application, on suppose $\varphi$ continue, \uncertain{i.e.} les $X_i=\bigcup_{j\le i}X_j^{*}$ fermés (donc les $X_i^{*}$ loc. fermés))
+
+1°) Top. de $I$ est finale pour $\varphi$ (i.e. quotient si $\varphi$ surjective) $\Longleftrightarrow$ ($X_J^{*}$ fermé $\Rightarrow$ $J$ fermé) $\Longleftrightarrow$ ($X_L^{*}$ ouvert $\Rightarrow$ $L$ ouvert)
+
+\marginal{si $\varphi$ surj. $\Uparrow$} 3°) $\overline{X_j^{*}}=\bigcup_{j\le i}X_i^{*}$ pour tt $j\in I$ i.e. $\varphi$ est ouverte\note{sous la réunion, l'indice est écrit « $j\le i$ » et l'on lit $X_j^*$ ou $X_i^*$ : \uncertain{$X_i^*$}.}
+
+2°) $\varphi$ surj. i.e. les $X_i^{*}\neq\emptyset$
+
+\emph{NB} Moyennant 1°, 2°, \uncertain{on} récupère l'ordre sur $I$ comme la relation d'inclusion entre les $\overline{X_i^{*}}$\ldots
+
+Une donnée $(X_i^{*})_{i\in I}$ satisfaisant 1°) à 3°) équivaut à une \struck{\ill{}} : \uncertain{à une} relation d'équiv. \emph{loc\textsuperscript{t} finie} et \emph{ouverte} \struck{telle que les fermés soient \ill{}} (\ill{} \ill{}) \uncertain{et} $I$ est l'ensemble quotient \ill{} comme la relation de \add{pré}ordre \emph{\uncertain{i.e.}} l'ens. $I$ est \emph{ordonné} \struck{\ill{}} ssi de spécialisation), (\,$\forall i,j$, $\overline{X_i^{*}}=\overline{X_j^{*}}\Rightarrow i=j$\,) $\Longleftrightarrow$ (les $X_i$ sont loc. fermés).
+
+\marginal{si $I$ ordonné} $\Updownarrow$ \emph{stratification stricte} \add{\uncertain{évanescente}}
+
+famille loc. finie $(X_i)_{i\in I}$ de fermés, telle que $j<i$ implique que $X_j$ \uncertain{rencontre} $X_i$, et $\forall i,j\in I$, on ait
+\[
+X_i\cap X_j=\bigcup_{k\in\bar i\cap\bar j}X_k .
+\]
+
+
+
+Dans le cadre de la top. modérée, il faut voir comment pour toute partition par des parties loc. fermées \emph{modérées}, il existe une plus petite \add{stratification modérée} \struck{partition} \struck{stricte} (\uncertain{formée}) \ill{} celles qui \struck{majorent} la partition donnée.
+
+
+\note{Moitié droite du feuillet.}
+
+$(X_i^{*})_{i\in I}$ une \add{partition indexée} \struck{famille} (loc. finie \add{de $X$} \struck{en parties disjointes de $X$, de réunion $X$ (i.e. \ill{} $X\to I$)}). Cond. équiv.
+
+a) $\forall i\in I$, \struck{$X_i^{*}\neq\emptyset$ (on suppose, i.e. vraie partition),} $\overline{X_i^{*}}$ est saturé \struck{\ill{} $X_i^{*}$ est loc. fermé}
+
+b) $\exists$ \struck{une relation} \add{\uncertain{pré}}ordre sur $I$, telle que l'on ait $\forall i\in I$
+\[
+\overline{X_i^{*}}=\bigcup_{j\le i}X_j^{*}
+\]
+(cette relation \struck{\ill{}} d'ordre est unique, \ldots)
+$i\le j\Longleftrightarrow \overline{X_i^{*}}\subset\overline{X_j^{*}}$ ($\Longleftrightarrow X_i^{*}\subset\overline{X_j^{*}}$)
+
+c) La top. quotient de $I$ est telle que $\varphi:X\to I$ soit ouverte, i.e. $\forall U\in\mathrm{Ouv}(X)$, le saturé est ouvert
+
+Sous ces conditions, la top. quotient de $I$ est celle \ill{} associée à \struck{la relation d'ordre} \uncertain{préordre}, qui est \uncertain{aussi} la relation de spécialisation pour cette topologie. Pour que $I$ soit ordonné, il faut et il suffit que les $X_i^{*}$ soient loc\textsuperscript{t} fermés, on dit alors que la partition est \emph{stratifiante} (i.e. \ill{} loc. finie, formée \uncertain{de parties} loc. fermées, relation d'équiv. ouverte). \struck{On a une \ill{}} On a une correspondance 1-1 entre les partitions \add{stratifiantes} \add{de $X$} \struck{\ill{}} et les relations d'équivalence loc. finies \uncertain{à classes loc. fermées} et ouvertes, et l'ens. des familles (à iso. près) $(X_i)_{i\in I}$ indexées par un ens. ordonné $I$, \emph{loc. finies}, 1°) familles \emph{croissantes} de parties fermées de $X$, \struck{\ill{}} recouvrant $X$, et 2°) $\forall i,j\in I$,
+\[
+X_i\cap X_j=\bigcup_{k\in\bar i\cap\bar j}X_k ,
+\]
+\add{4°) \struck{$X_k$} $\forall i,j\in I$, $j<i$ \ill{}} \add{3°) $\forall i$, $X_i^{*}\neq\emptyset$ \ ($X_i^{*}\overset{\text{déf}}{=}X_i\setminus\bigcup_{j<i}X_j$)}\note{3°) et 4°) sont des ajouts encadrés et reliés par des traits au texte ; l'énoncé de 4°) est coupé par la marge.}
+
+$\Longrightarrow$ \struck{\ill{}} $X_j$ \ill{} dans $X_i$ \ldots\ ($\forall i,j$, $X_i^{*}=X_i$)\note{ligne ajoutée entre les deux formules, en partie biffée ; lecture très incertaine.}
+
+\marginal{\emph{NB} \ill{}} Moyennant 1°) à 2°), en posant $X_i^{*}=X_i\setminus\bigcup_{j<i}X_j$, les $X_i^{*}$ forment une ps. partition \add{loc. finie} de $X$ par des ens. loc. fermés, celle-ci satisfait les conditions d'une \emph{partition stratifiante stricte} \add{avec l'ordre donné sur $I$} ssi on a 3°) et 4°).\note{Le long de la marge gauche de cette moitié, une note verticale presque entièrement illisible, où l'on distingue « NB », « si », « stratifi\ldots ».}
+
+\emph{Stratification} : conditions 1°) et 2°). \emph{Strat. stricte} : « fidèle » (i.e. 3°) et condition de densité (4°) : Partitions stratifiantes $\Longleftrightarrow$ strat. strictes.
+
+\page{4}
+$\varphi:X\to Y$, \ $\varphi$ ouverte $\overset{\text{déf}}{\Longleftrightarrow}$ ($U$ ouvert dans $X\Rightarrow\varphi(U)$ ouvert)
+$\Longleftrightarrow$ \struck{\ill{}} ($\forall B\subset Y$, $\varphi^{-1}(\bar B)=\overline{\varphi^{-1}(B)}$) (\emph{NB} $\subset$ est l'essentiel)
+
+i.e. $\forall x\in X$, $\varphi(x)\in\bar B\Rightarrow x\in\overline{\varphi^{-1}(B)}$ i.e. $\forall U\ni x$, $U\cap\varphi^{-1}(B)\neq\emptyset$ i.e. $\forall U\in\mathrm{Ouv}(x)$, $\varphi(U)\cap B\neq\emptyset$ i.e. $\forall(B\in\mathfrak{P}(Y),\ x\in X,\ U\in\mathrm{Ouv}_x(X))$, $\varphi(x)\in\bar B\Rightarrow\varphi(U)\cap B\neq\emptyset$ i.e. $\forall(U\in\mathrm{Ouv}(X))$ $\forall(y\in V=\varphi(U),\ B\subset Y)$, $y\in\bar B\Rightarrow V\cap B\neq\emptyset$ i.e. $V\cap B=\emptyset\Rightarrow\bar B\not\ni y$ \ ($B\subset X\setminus V$)\note{le « $V=$ » est écrit au-dessus de $\varphi(U)$ ; sous « $V\cap B=\emptyset$ », la précision « $B\subset X\setminus V$ », où l'on attendrait $Y\setminus V$.}
+
+
+
+5)\note{« 5) » est en marge gauche : sa numérotation.} Les conditions 1° et 2°) sont stables par images inverses par $X'\to X$, mais pas 3°) bien sûr (par ex. pour un plongement ouvert), ni 4°) (mais si \ill{} ouvert). Les 4°) est stable par induction sur un ouvert. Les relations d'équivalence ouvertes, par contre, s'induisent \uncertain{bien} sur un ouvert (mais la partition $I$ \uncertain{serait} bien sur un ouvert (mais \ill{}) en principe). \struck{Au fait (supposons \ldots) \ldots\ $\forall i,j\in I$, $X_i\subset X_j$ \ldots\ 1° 2° (3°) \ldots\ $\Rightarrow i\le j$} La condition 3° bis (\uncertain{au plus} de 1° et 2°) \ldots\ la « fidélité » : $X_i\subset X_j\Longrightarrow i\le j$ (i.e. l'indexation par $I$ est \ill{} \add{\uncertain{l'injection}} \struck{\ill{}} des $X_i$). \struck{\ill{} \ldots\ fidélité, \ldots\ si $X_i^{*}=\emptyset$ i.e. $X_i=\bigcup_{j<i}X_j$} n'est pas vrai, exemple $I=$ \struck{\ill{}} $\lbrace a,b<c\rbrace$\note{le dessin de $I$ est biffé ; on voit $a$ et $b$ reliés par deux flèches montantes à un sommet $c$.}
+$X_c=X=X_a\amalg X_b$, \struck{\ill{}} alors $X_a,X_b\neq\emptyset$, alors\ldots
+fidèle, \add{les $X_i\neq\emptyset$,} mais $X_c^{*}=\emptyset$.
+
+On \uncertain{suppose} \add{\uncertain{désormais}} 1°) 2°) 3° bis). Si $U\subset X$ est un ouvert, les $X_i\cap U=U_i$ \add{($i\in I$ tels que $\neq\emptyset$)} \struck{\ill{}} forment un \uncertain{ouvert} $I_U$ de $U$, et \struck{\ill{}} $(U_i)_{i\in I_U}$ est une stratification \struck{\ill{}} ps-fidèle de $U$. (Si on partait d'une stratification stricte, on aurait une stratification stricte sur $U$.) Ainsi, les strat. ps. fidèles des ouverts de $X$ forment un préfaisceau, dont les sections sont appelées les stratifications locales.
+
+
+\note{Moitié droite du feuillet. Le haut en est un passage encadré puis biffé en diagonale ; on en donne ce qui se lit.}
+
+\struck{Supposons} \add{\uncertain{Soit}} $J$ tel que $X_J$ fermé, $J$ non fermé. \add{Prenons $J$ minimal \ldots} \struck{Donc $\exists j\in J$ tel que $\bar j\not\subset J$. Soit $j$ minimal parmi ces éléments. Donc \ldots\ $j\in J$, $\bar j\not\subset J$, et $i<j$, $i\in J\Rightarrow \bar\imath\subset J$, $\bar j\cap J=$ \ill{} $\lbrace j\rbrace\cup\bigcup$ \ill{}} $J'=\bar J\cap J$, \struck{donc $X_{J'}=X_{\bar J}\cap X_J$ \ldots\ est fermé, alors que $J'$ n'est pas fermé.} \struck{Considérons \ldots} $J$ \uncertain{est} minimal \add{\uncertain{parmi}} les tels $J$ (on suppose $I$ fini, pour simplifier) \add{\uncertain{dans} $I$} \ill{} pour tt $K\subset I$, $K$ fermé et $K\cap J$ non fermé, \ldots\ $K\supset J$. En particulier, $\forall j\in J$ tel que $\bar j\not\subset J$, \ldots\ $J\subset\bar j$ i.e. $j$ est plus grand élément de $J$. \struck{Donc} $J$ a un plus grand élément $j$, tel que pour tt autre élément $j'$ de $J$, on ait $\overline{j'}\subset J$. Donc
+\struck{$J_0$}
+\[
+J_0=J\setminus\lbrace j\rbrace=\bigcup_{j'\in J\setminus\lbrace j\rbrace}\overline{j'}
+\]
+est fermé.
+Donc $J=J_0\cup\lbrace j\rbrace$, $J_0$ fermé, \uncertain{et} $J_0\subset\bar j$, $j\in I\setminus J_0$, $\exists\, i\in I\setminus J_0$ avec $i<j$. \struck{$\bar j\cap I$} On a donc
+$X_J^{*}=X_{J_0}^{*}\cup X_j^{*}$ (réunion disjointe) qui est fermé, donc
+\[
+X_j^{\bullet}\overset{\text{déf}}{=}\overline{X_j^{*}}\setminus X_j^{*}\subset X_{J_0}^{*}=X_{J_0}=\bigcup_{i\in J_0}X_i ,
+\]
+\uncertain{bien} que \uncertain{pour autant} $\bar j\subset J_0\cup\lbrace j\rbrace$.
+
+Soit $I'$ une partie \emph{fermée} de $I$, minimale pour la propriété : $\exists J\subset I'$, $J$ non fermé, avec $X_J$ fermé. Soit, pour $I'$ fixé, $J$ une \struck{\ill{}} \add{\uncertain{partie}} de $I'$ minimale pour la propriété précédente. On a $J\neq\emptyset$, \struck{et} $J=J_0\cup\lbrace j\rbrace$, \struck{\ill{}} $J_0$ fermé, $j\notin J_0$, \struck{\ill{}} $J\subset\bar j$, $\bar j\not\subset J$ \uncertain{de}, i.e. l'inclusion $J=J_0\cup\lbrace j\rbrace\subset(J_0\cup\bar j=\bar j)$ \struck{\ill{}} est stricte. \struck{Donc $I'$} Pour \ldots\ Comme $\bar j\setminus\lbrace j\rbrace$ est encore fermé, d'après la condition \add{minimale} de $I'=\bar j$ il s'ensuit que pour tt $J'\subset I'\setminus\lbrace j\rbrace$, $X_{J'}^{*}$ fermé $\Rightarrow J'$ fermé.\note{En marge gauche, un petit dessin : une tache marquée $J_0$ entourée de points, et un point $j$ à côté, sous le mot \uncertain{« partie »}.}
+
+\struck{\uncertain{particulier}, pour \ill{} partie fermée}
+
+3 conditions équiv. :
+
+a) $X_J^{*}$ fermé $\Rightarrow J$ fermé
+
+b) $X_L^{*}$ ouvert $\Rightarrow L$ ouvert
+
+c) $\Big(\underbrace{X_j^{\bullet}\overset{\text{déf}}{=}\overline{X_j^{*}}\setminus X_j^{*}\subset X_{J_0},\ J_0\ \text{fermé}}_{X^{*}_{J_0\cup\lbrace j\rbrace}\ \text{fermé}}\Big)\Rightarrow \bar j\subset J_0\cup\lbrace j\rbrace$ (i.e. $J_0\cup\lbrace j\rbrace$ fermé) (\emph{NB} $\Rightarrow J_0\subset\bar j$), et pour tout $J'\subset\bar j\setminus\lbrace j\rbrace$, $X^{*}_{J'}$ fermé $\Rightarrow J'$ fermé\note{Dans ces lignes le trait et la taille de la lettre ne distinguent pas toujours $\bar j$ (adhérence du point $j$) de $\bar J$ ; on a lu $\bar j$ partout où l'argument, qui porte sur le plus grand élément $j$ de $J$, le demande.}
+
+
+\section*{Tubes et voisinages : premiers dessins}
+
+\page{6}
+\note{En haut à droite, de sa main, « S ». Sous ce titre de l'éditeur, deux dessins. À gauche, un disque épais : au centre un point $\Sigma_0$, d'où part un rayon marqué $c_{01}$ ; sur le bord, les arcs $\Sigma_{02}$ (en haut), $\Sigma_{012}$ (deux fois), $\Sigma_{01}$ ; hors du disque partent vers la droite trois demi-droites parallèles marquées $\Sigma_{12}$, $\Sigma_1$, $\Sigma_{12}$, et au-dessus de tout, $\Sigma_2$. À droite, un petit graphe de cinq points reliés par des flèches, sans légende lisible.}
+
+$\Sigma_{i_0i_1\cdots i_n}$ \ \struck{\ill{}} fonctions continues \uncertain{variant} par rapport au drapeau variable $(i'_0,\ldots,i'_n)$
+\[
+\Sigma_i=X'_i=X_i\setminus\Big(X_i\cap\bigcup_{k<i}\overset{\circ}{\mathrm{Tub}}(X_k,X_i)\Big)
+\]
+\[
+\Sigma_{(i,j)}=\struck{\ill{}}\,\mathrm{Tub}^{\bullet}\Big(X'_i,\,X_j\setminus\bigcup\mathrm{Tub}(X_k,X_j)\Big)\hookrightarrow X'_j=\Sigma_j
+\]
+\note{sous la seconde réunion, un indice longuement raturé ; ce qui reste lisible est « $i<k<j$ », repris seul plus bas sur la page.}
+
+$i<k<j$
+
+\[
+\struck{\Sigma_{i,j}=T.}
+\]
+\[
+V_{i,j}=V(X_i^{*},X_j)\setminus\bigcup_{i<k<j}V(X_i^{*},X_j)\cap X_k\hookrightarrow X_j^{*}
+\]
+\note{sous $V_{i,j}$, une flèche descend vers $X_i^{*}$, avec $X$ écrit à gauche ; $V_{ijk}$ est écrit seul en dessous.}
+
+\begin{tikzcd}
+V_{ijk} \arrow[r] \arrow[d] & V_{jk} \arrow[d] & X_k^{*} \arrow[l, hook'] \arrow[d] \\
+V_{ij} \arrow[r, hook] \arrow[d] & V(X_j^{*},X_k) & X_k \\
+X_i^{*} & &
+\end{tikzcd}
+
+\note{Entre $V_{jk}$, $X_k^*$, $V(X_j^*,X_k)$ et $X_k$, une flèche en pointillé marquée $r$ part de la flèche verticale $X_k^*\to X_k$ vers la gauche ; son but n'est pas marqué. Après $V(X_j^*,X_k)$, une flèche vers $X_k$ est biffée avec un mot illisible. La flèche $X_k^*\to V_{jk}$ est tracée « $\subset$— », sans pointe.}
+
+\marginal{$\Sigma_{\delta'}\to\Sigma_{d'}$ au-dessus de $\Sigma_{\delta}\to\Sigma_{d}$, reliés par deux inclusions verticales ; $\delta'\subset\bar\delta$ \ill{}, $d\supset\delta$}\note{en marge gauche, écrit en travers ; les indices sont d'une lecture incertaine.}
+
+\marginal{\ill{} $=$ \ill{} $\le\Sigma(\lambda',\lambda'')$}\note{en bas à gauche, en travers, une formule où l'on distingue $\lambda'$, $\lambda''$, $T''$ ; illisible pour le reste.}
+
+
+\section*{Trois strates : les données $\Sigma_0,\Sigma_1,\Sigma_2$}
+
+\page{7}
+$\Sigma_0,\Sigma_1,\Sigma_2$ espaces top.
+
+$\Sigma_{01}\subset\Sigma_{0}\times\Sigma_1$, $\Sigma_{12}\subset\Sigma_1\times\Sigma_2$, $\Sigma_{02}\subset\Sigma_0\times\Sigma_2$ \ fermés\note{il écrit « $\Sigma_{01}\subset\Sigma_{01}$ » ; le second indice est sans doute un lapsus pour $\Sigma_0\times\Sigma_1$, rétabli d'après les deux inclusions voisines.}
+
+\struck{a)} Posons
+\[
+\Sigma_{012}\subset\Sigma_0\times\Sigma_1\times\Sigma_2,\qquad
+\Sigma_{012}=(\Sigma_{01}\times\Sigma_2)\cap(\Sigma_0\times\Sigma_{12})
+\]
+
+a) On suppose que $\mathrm{Im}(\Sigma_{012}\to\Sigma_0\times\Sigma_2)\subset\Sigma_{02}$ de sorte qu'on a un diagramme commutatif
+
+\begin{tikzcd}
+ & \Sigma_{02} \arrow[dl] \arrow[r, hook] & \Sigma_{2} \\
+\Sigma_0 & \Sigma_{012} \arrow[l, "{[l]}"'] \arrow[u] \arrow[r, hook] \arrow[d, "{[l]}"'] & \Sigma_{12} \arrow[u] \arrow[d, "{(l)}"] \\
+ & \Sigma_{01} \arrow[ul, "{[l]}"] \arrow[r, hook] & \Sigma_1
+\end{tikzcd}
+
+\note{Les deux carrés de droite portent chacun la mention « cart » (le haut en partie raturé). Les crochets d'inclusion, en haut, au milieu et en bas, sont repassés en pointillé. On lit « [l] » (ou « (l) ») sur quatre flèches, sans doute pour « lisse », qui apparaît en toutes lettres à f).}
+
+\marginal{signifie que $\Sigma=\Sigma_0\amalg\Sigma_1\amalg\Sigma_2$ \uncertain{est} muni d'une relation d'ordre au-dessus de $[0,1,2]$}\note{écrit en travers dans la marge gauche, à la hauteur du diagramme ; lecture de « au-dessus » incertaine.}
+
+b) $\Sigma_{01}\to\Sigma_1$, $\Sigma_{02}\to\Sigma_2$, $\Sigma_{12}\to\Sigma_2$ sont injectifs (et \emph{bordants}) (donc $\Sigma_{012}\to\Sigma_{12}$ aussi) \struck{(}$\Sigma_{012}\to\Sigma_{02}$ \add{et \uncertain{fortement}} \struck{est injectif} (\struck{\ill{}} $\Sigma_{012}\to\Sigma_{02}$). \add{donc aussi}\note{le « donc aussi » souligné est ajouté sous « (et bordants) » et relié au début de la ligne suivante.}
+
+c) \struck{est injectif), et de plus}\note{sous la ligne biffée, un mot souligné, peut-être « \uncertain{en outre} ».} On a
+\[
+\Sigma_{012}=\Sigma_{02}\cap\Sigma_{12}
+\]
+dans $\Sigma_{12}$ i.e.
+le carré sup. est aussi cartésien
+
+d) $\Sigma_{12}\to\Sigma_1$ est transversal par \uncertain{rapport} aux morphismes bordants $\Sigma_{01}\to\Sigma_1$ (cela signifie que $\Sigma_{012}\to\Sigma_{12}$ est aussi bordant)
+
+e) $\Sigma_{02}$ et $\Sigma_{12}$ sont (transversales dans $\Sigma_2$ \add{parties bordantes}) (donc $\Sigma_{012}\hookrightarrow\Sigma_{02}$ est aussi bordant)
+
+f) $\Sigma_{01}\xrightarrow{[\text{lisse}]}\Sigma_0$, $\Sigma_{02}\to\Sigma_0$, $\Sigma_{12}\xrightarrow{(\text{lisse}]}\Sigma_1$ fibrants (donc $\Sigma_{012}\xrightarrow{[\text{lisse}]}\Sigma_{02}$ fibrant \struck{\ill{}} et $\Sigma_{0,12}\xrightarrow{[\text{lisse}]}\Sigma_{01}$ aussi)
+
+\marginal{(f) Quand $\Sigma$ en ensembles, on a la condition que dans le diagramme $\Sigma_{01}\leftarrow\Sigma_{012}\to\Sigma_{02}$ \ldots\ \ill{} \ldots\ au-dessus de $\Sigma_0$.}\note{Note écrite verticalement dans la marge gauche, en bas ; lecture très incertaine. Plus haut dans la même marge, « $W$ » et « $\delta$ » isolés.}
+
+
+\page{9}
+\note{La page ne porte qu'un dessin, le même que celui de la page 6 dans la notation des $X$ : en haut, $X_2^{*}$ ; un disque au centre duquel un point marqué $\underline{X}_0=X_0^{*}$ ; un rayon, puis une demi-droite épaisse sortant du disque, marqués $X_{01}$ et $\underline{X}_1$ (l'indice est repassé, \uncertain{$X_1^*$}) ; de part et d'autre, deux demi-droites parallèles marquées $X_{12}$.}
+
+
+\section*{Espaces stratifiés (étude par voisinages coniques)}
+
+\page{11}
+\note{Le titre est le sien, en tête du feuillet : « Espaces stratifiés (étude par voisinages \struck{tubulaires} coniques) ». En haut à gauche, « 1) » : c'est le premier feuillet d'une suite qu'il numérote, que la page 13 poursuit sous le numéro « 2) » ; au-dessous, un « I » cerclé, que l'on rend par « (I) », comme les numéros cerclés « (1) » à « (4) » des paragraphes.}
+
+(I)
+
+(1) Soit $Y$ un espace topologique. Un \emph{voisinage} \struck{tubulaire} \emph{conique} (« \uncertain{absolu} ») de \struck{$Y$} (ou « cône sur $Y$ ») \struck{est un espace} est un espace topologique $T$ \struck{\ill{}} contenant $Y$, (le « \emph{tube} »), muni d'une partie fermée $\dot T$ (le « bord du tube ») et d'une opération du monoïde topologique $\mathbf{I}=[0,1]$ (pour la multiplication) sur $T$, notée
+\[
+(1)\qquad (\lambda,t)\longmapsto\lambda t\qquad \mathbf{I}\times T\longrightarrow T
+\]
+satisfaisant :
+
+a) $\lambda y=y$ \ $\forall y\in Y$
+
+b) $0.\,T\subset Y$ \struck{\ill{}}
+
+\marginal{donc les $\lambda_T:T\to T$ ($0\le\lambda\le1$) forment une homotopie de l'identité $\mathrm{id}_T$ (pour $\lambda=1$) à l'application \uncertain{\ill{}} de $T$ \uncertain{une} \emph{rétraction} de $T$ sur $Y$, laissant les pts de $Y$ fixes \uncertain{au cours} de l'homotopie}\note{à droite de a) b), réunis par une accolade.}
+
+c) Le \struck{applicat\ldots} diagramme d'applications
+
+\begin{tikzcd}[column sep=large]
+\mathbf{I}\times\dot T \arrow[r, "{(\lambda,x)\mapsto\lambda x}"] & T \\
+\lbrace 0\rbrace\times\dot T \arrow[u, hook] \arrow[r, "{(0,x)\mapsto 0.x}"'] & Y \arrow[u, hook, "\mathrm{inc}"']
+\end{tikzcd}
+
+\note{La flèche de gauche est tracée $\updownarrow$, l'inclusion étant évidente ; sur la flèche du haut, un $f$ \uncertain{biffé}.}
+
+est \emph{cocartésien}*, i.e. identifie $T$ au cône de l'application
+\[
+f:\dot T\longrightarrow Y\qquad f(x)=0.x
+\]
+\[
+(4)\qquad T\simeq\mathcal{C}(f)
+\]
+Dans cette identification, $Y\hookrightarrow T\hookleftarrow\dot T$ correspondent aux applications canoniques \struck{\ill{}} \uncertain{but} $Y\hookrightarrow\mathcal{C}(f)\hookleftarrow$ source, et l'opération de $\mathbf{I}$ sur $T$ provient de l'opération de $\mathbf{I}$ sur $\mathcal{C}(f)$, définie par passage au quotient de l'opération évidente de $\mathbf{I}$ sur $\mathbf{I}\times\dot T$, et de l'op. triviale de $\mathbf{I}$ sur $Y$. Les axiomes a) b) c) signifient donc que la situation $(Y\to T\hookleftarrow\dot T,\ \mathbf{I}\times T\to T)$ est isomorphe : celle d'un $\mathcal{C}(f)$ avec $f:\dot T\to Y$.
+
+\marginal{\emph{NB} La condition b) \uncertain{peut se} formuler \uncertain{plus faiblement} $0.\dot T\subset Y$, alors la condition c) (qui \struck{\ill{}} donne \ill{}) \ill{} \ill{} \ill{} :
+(3) \uncertain{l'application} $\mathbf{I}_{]0,1]}\times\dot T\to T\setminus Y$ \struck{\ill{}} \uncertain{est} \ill{}}\note{note écrite en travers dans la marge gauche, à la hauteur de b) et c) ; une partie est biffée, et elle est en grande partie illisible.}
+
+\marginal{* Cela signifie que \uncertain{$T$} \uncertain{est} \ill{} \ill{} \uncertain{quotient} de $\mathbf{I}\times\dot T$ et \ill{} (3)}\note{note appelée par l'astérisque, écrite en travers en marge gauche, sous la précédente.}
+
+\emph{Notons} que $\dot T$ est connu quand on connaît l'opération de $\mathbf{I}$ sur $T$, \struck{\ill{}} en posant
+\[
+(5)\qquad \overset{\circ}{T}=T\setminus\dot T
+\]
+(\emph{intérieur} du tube) et notant que $\overset{\circ}{T}=\bigcup_{\lambda\in[0,1[}\lambda T$
+
+
+\page{12}
+\note{Feuillet sans numéro de sa main ; il continue le texte de la page 11, avant le feuillet « 2) » de la page 13 ; de même la page 14 entre « 2) » et « 3) » (page 15).}
+
+\struck{2. Soit $X$ un espace, $Y$ un sous-espace fermé.}
+
+(6) \struck{Soit $T$} \emph{NB} Les $T_\lambda$ ($\lambda\in[0,1]$) forment une famille croissante de parties fermées de $T$, les $\overset{\circ}{T}_\lambda\overset{\text{déf}}{=}\lambda\overset{\circ}{T}$ ($\lambda\in\,]0,1]$) une famille croissante de parties ouvertes. Si $\lambda\in\,]0,1[$, alors $\overset{\circ}{T}_\lambda$ est bel et bien l'intérieur \add{topologique} \struck{de} $T_\lambda$ dans $T$, mais bien sûr $\overset{\circ}{T}_1=\overset{\circ}{T}$ n'est pas l'intérieur \add{top.} de $T_1$ dans l'espace topologique $T_1=T$, i.e. on n'a pas $\overset{\circ}{T}_1=T$ \uncertain{sauf} si $\dot T=\emptyset$ i.e. $Y=T$.\note{Un double trait vertical en marge gauche accompagne ce passage.}
+
+Posons, pour $\lambda\in\,]0,1[$
+\[
+\left\lbrace
+\begin{array}{l}
+T\setminus\overset{\circ}{T}_\lambda\overset{\text{déf}}{=}E_{1-\lambda=\varepsilon}(T)\\[4pt]
+\dot E_\varepsilon(T)\overset{\text{déf}}{=}\dot T\cup(1-\varepsilon)\dot T
+\end{array}
+\right.
+\]
+« épaississement d'indice $\varepsilon$ » du bord $\dot T$ dans $T$
+
+\emph{NB} La frontière de $E_\varepsilon$ dans $T$ est $(1-\varepsilon)\dot T$, et $E_\varepsilon$ est un voisinage de $\dot T$. On a
+\[
+(7)\qquad E_\varepsilon(T)\simeq[\underbrace{1-\varepsilon}_{\lambda},1]\times\dot T
+\]
+
+\marginal{\emph{NB} Si \struck{$\dot T$} $Y$ (\uncertain{ou} \ill{}), les $T_\varepsilon$ ($\varepsilon\in\,]0,1]$) forment \uncertain{un} \ill{} \uncertain{de} voisinages de $Y$ dans $T$, (\struck{\ill{}}) \uncertain{\ill{}} \uncertain{tubulaires}}\note{Note écrite en travers dans la marge gauche, en grande partie illisible ; une seconde note, plus bas dans la même marge, se lit « \ldots\ un \uncertain{système} fondamental de voisinages \ldots\ \uncertain{$T$ fermé} ($T$ \uncertain{compact}) \ldots\ ».}
+
+(2) Soit $Y\hookrightarrow X$ une inclusion fermée d'espaces topologiques. Un \emph{voisinage conique de $Y$ dans $X$} est un voisinage $T$ de $Y$ dans $X$ muni d'une opération (1) $\mathbf{I}\times T\to T$ \struck{faisant de $T$ un vois.} \add{conique} \struck{\ill{}} \struck{absolu de $Y$} \struck{satisfaisant les conditions dites.} Alors les $\lambda T=T_\lambda$ ($\lambda\in\,]0,1]$) forment d'autres voisinages tubulaires de $Y$ dans $X$ (famille croissante) et on voit que pour $\lambda\in\,]0,1[$, on a
+\[
+(8)\qquad \dot T_\lambda=\lambda\dot T
+\]
+est la frontière de $T_\lambda=\lambda T$ dans $X$.\note{Le numéro « (8) » est surchargé ; on lit aussi « absolu de $Y$ » dans la ligne biffée, dont « conique » est ajouté au-dessus.}
+
+
+\page{13}
+\note{En haut à gauche, « 2) » de sa main : le feuillet de la page 12, qui ne porte pas de numéro, s'intercale donc entre ses feuillets 1) et 2), vraisemblablement comme verso du premier.}
+
+Mais on ne peut pas dire \add{en général} que $\dot T$ soit la frontière de $T$ dans $X$, i.e. (8) devient faux si $\lambda=1$ (prendre $X=T$, \uncertain{\ill{}}, $\dot T\neq0$).
+
+\struck{Disons} \add{\emph{Évitons}} \uncertain{enfin} de dire qu'une partie fermée \struck{$Z$} $Y$ d'un espace topologique $X$ est une « \emph{partie bordante} » s'il existe un \emph{voisinage} \struck{\ill{}} \struck{\emph{collant}} \add{\emph{cylindrique}} de $Y$ dans $X$, i.e. un voisinage \struck{tubulaire} conique $T$ tel que $\dot T\to Y$ soit un homéomorphisme -- ou ce qui revient au même, \struck{s'il tel que l'on} s'il existe un voisinage $T$ de $Y$ dans $X$ et un homéomorphisme
+\[
+(9)\qquad T\simeq Y\times\mathbf{I}
+\]
+rendant commutatif le diagramme
+
+\begin{tikzcd}
+Y \arrow[r, hook] \arrow[dr, "{y\mapsto(y,0)}"'] & T \arrow[d, "\wr"] \\
+ & Y\times\mathbf{I}
+\end{tikzcd}
+
+(10)\note{Dans ce diagramme, l'isomorphisme vertical est noté par un « $\wr$ » couché (≀) sans pointe ; on l'a mis en flèche descendante.}
+
+\marginal{\uncertain{définir} le \uncertain{voisinage} \ill{} \uncertain{de frontière} \ldots\ $E\simeq Y\times[0,1]$ \ldots\ $y\mapsto(y,0)$}\note{note en travers dans la marge gauche, en grande partie illisible.}
+
+Par exemple, si $T$ est un voisinage \struck{tubulaire} conique \add{(absolu)} de \struck{\ill{}} $Y$, alors $\dot T$ est un sous-espace bordant de $T$, et un sous-espace bordant de $T_\lambda$ ; \struck{$E$} $\dot T$, $(1-\varepsilon)\dot T$ et $\dot T\cup(1-\varepsilon)\dot T$ sont des sous-espaces bordants de $E_\varepsilon(T)$. \struck{Dans} Si $X$ est un espace \emph{compact}, et $(Y_i)_{i\in I}$ une partie finie de parties fermées disjointes de $X$, alors $Y=\bigcup_{i\in I}Y_i$ est un sous-espace bordant ssi les $Y_i$ le sont.\note{« une partie finie » : lire \uncertain{une famille finie}.}
+
+
+\page{14}
+\note{Feuillet sans numéro de sa main, entre les feuillets « 2) » (page 13) et « 3) » (page 15).}
+
+\struck{On dit} \add{Soit} $T$ un voisinage \struck{tubulaire} \add{conique} de $Y\subset X$ dans $X$, posons
+\[
+(11)\qquad X^{*}=X\setminus\overset{\circ}{T}=(X\setminus T)\cup\dot T
+\]
+c'est une partie fermée de $X$. \struck{On dit que}
+
+\emph{Prop.} Conditions équivalentes (\uncertain{si} $\lambda\in\,]0,1[$ \uncertain{donné}) :
+
+a) $\dot T$ est une partie bordante de $X^{*}=X\setminus\overset{\circ}{T}$
+
+b) Il existe un homéomorphisme de $X$ sur lui-même, transformant $T,\dot T$ en $(T_\lambda,\dot T_\lambda)$
+
+b') Comme b, mais en supposant de plus que l'homéomorphisme induise l'identité sur $T_{\lambda'}$ (\uncertain{si} \struck{$0<\lambda'<\lambda$} $\lambda'$ est donné, $0<\lambda'<\lambda$).
+
+c) Il existe un voisinage \struck{tubulaire} conique $T'$ de $Y$ dans $X$, \struck{tel que et \ill{}} tel que $T=\lambda T'$, d'isomorphismes étant compatibles avec les structures de voisinages coniques.
+
+On dit alors que $T$ est un vois. \struck{tub.} conique \emph{strict} dans $X$
+
+\emph{Corollaire} Quand $T$ est vois. \struck{tub.} con. strict dans $X$, $\dot T$ est la frontière de $T$ dans $X$.
+
+\emph{Corollaire} Si \struck{\ill{}} $T$ \add{est un} voisinage \struck{tubulaire} \add{conique} de $Y$ dans $X$, les $T_\lambda$ ($\lambda\in\,]0,1[$) sont des voisinages \struck{tubulaires} \add{coniques} stricts
+
+\marginal{Il vaut mieux \uncertain{partir} de \uncertain{la} \uncertain{notion} de voisinage \uncertain{conique} strict comme \uncertain{fondamentale}, \uncertain{et} définir les voisinages \emph{\uncertain{stricts}} \ill{} \ldots\ $T$ \uncertain{partie} $E_\varepsilon(T)$ \ldots\ ($\varepsilon>0$)}\note{note écrite en travers dans la marge gauche, en bas ; lecture très incertaine, l'ordre des mots l'est aussi.}
+
+\note{Le bas du feuillet est blanc ; le texte s'arrête sur ce second corollaire.}
+
+
+\page{15}
+\note{En haut à gauche, « 3) » de sa main : troisième feuillet de la suite numérotée (pages 11, 13, 15), les pages 12 et 14, sans numéro, en étant vraisemblablement les versos.}
+
+(3)\note{numéro cerclé.} Soit \struck{$X\supset Y$, $X$ \ill{} de \ill{} espaces} $T$ un voisinage \struck{tub.} conique absolu de $Y$. Soient $T'\subset T$. On dit que $T'$ est \emph{sous-espace conique} dans $T$ si on a
+
+(12) \ a) $T'$ stable par les multiplications $\lambda\in\mathbf{I}$ \struck{\ill{}}
+
+b) Pour cette opération, $T'$ est un voisinage \struck{tubulaire} conique de $Y$.\note{a) et b) sont réunis par une accolade, numérotée (12).}
+\note{au bout de la ligne a), un mot biffé, peut-être « \uncertain{absolu} ». Dans b), le $T'$ du début est surchargé.}
+
+\emph{NB} On a nécessairement $\dot T'=T'\cap\dot T$, $T'_\lambda=T'\cap T_\lambda$, \struck{si $(T_i)_{i\in I}$ est une famille,} \add{la donnée de $T'$ équivaut à celle} d'un sous-espace $T'$ \struck{\ill{}} de \ill{} $Y$, fermé \struck{\ill{}} et d'un sous-espace $Y'$ de $Y$, tels que $Y'\supset0.\dot T'$, et, \uncertain{on a}
+\[
+T'=\mathrm{Im}(\mathbf{I}\times\dot T'\to T)\cup Y'.
+\]
+\note{Ligne très raturée : les ajouts interlinéaires se lisent « la donnée de $T'$ équivaut à celle » et « $\dot T'$ de $\dot T$ » ; la phrase que l'on donne est une lecture d'ensemble, incertaine dans le détail. On attend « d'un sous-espace fermé $\dot T'$ de $\dot T$ ».}
+
+\marginal{On dit que $T'$ est \uncertain{conique} \uncertain{strict} si $\dot T'\cap Y=0.\dot T'$ \ldots\ \uncertain{i.e.} $T'$ \ill{} \uncertain{ouvert} et fermé \ldots}\note{note en travers dans la marge gauche ; lecture incertaine.}
+
+On dira qu'une structure conique sur un $T\supset Y$ est \emph{compatible} avec des sous-espaces \add{fermés} $T_i$ de $T$ ($i\in I$) si ces derniers sont coniques pour cette structure.
+
+Soit $T$ un voisinage conique de $Y\subset X$ dans $X$, soit $X'$ \struck{\ill{}} partie fermée de $X$. On dit que $T$ est \emph{compatible}\,* avec $X'$ si $X'\cap T$ est conique dans $T$. On dit qu'il est \emph{strictement compatible}\,* avec $T$, si $T$ est voisinage conique strict, et s'il existe un voisinage cylindrique de $\dot T$ dans $X^{*}=X\setminus\overset{\circ}{T}$, compatible avec $X'^{*}=X'\cap X^{*}$, ou ce qui revient au même, s'il existe un voisinage $E$ de $\dot T$ dans $X^{*}$, et un iso\ldots
+
+\marginal{* \struck{\ill{}} \ill{} \emph{\uncertain{tautologie}} \struck{\ill{}} \ill{} \ldots\ \uncertain{définition} \uncertain{des} voisinages coniques \uncertain{stricts} \ldots}\note{Notes en travers dans la marge gauche, appelées par les astérisques ; en partie biffées, presque illisibles. Le feuillet s'arrête sur « un iso\ldots » ; la suite n'est pas dans ce lot de pages.}
+
+
+\page{16}
+\note{Suite de la page 15, sans numéro de sa main.}
+\[
+(13)\qquad E\simeq\dot T\times[0,1]
+\]
+rendant commutatif
+
+\begin{tikzcd}
+\dot T \arrow[r, hook] \arrow[dr, "{t\mapsto(t,0)}"'] & E \arrow[d, "\wr"] \\
+ & \dot T\times[0,1]
+\end{tikzcd}
+
+il faut que $X'^{*}\cap E$ s'identifie à une partie de $\dot T\times[0,1]$ de la forme $X'_0\times[0,1]$, où $X'_0$ est une partie fermée de $\dot T$.\note{Il écrit d'abord $X^{*}$, surchargé en $X'^{*}$ (lecture incertaine de l'exposant).}
+
+Soit $B$ une partie bordante stricte de l'espace topologique $X$. Considérons un vois. cylindrique $E$ \struck{\ill{} de} \add{de} $B$ dans $X$. On dit qu'une partie \add{fermée} $X'$ de $X$ est \emph{compatible} avec $E$ -- i.e. avec l'homéomorphisme
+\[
+E\simeq B\times[0,1]
+\]
+si $X'\cap E$ s'identifie à $B'\times[0,1]$ ($\ldots$ $B'=X'\cap B$). On fera \uncertain{attention} que la définition dans la « \struck{compatibilité} \add{\uncertain{transversalité}} \struck{dans le cas} cylindrique » n'est pas un cas particulier de celle dans le \struck{cas} \add{\uncertain{compatibilité}} conique, \struck{\ill{}} \add{\uncertain{mais en}} \struck{\ill{} exigeant que \ill{}} \add{\uncertain{bien exigeant}} : \uncertain{correspond} au cas où on \uncertain{\ill{}} devait \struck{\uncertain{\ill{}}} $X'\cap E\simeq B'\times[0,1]\cup B\times\lbrace0\rbrace$ \add{$T'\cap Y=0.\dot T'$}\note{Les trois dernières lignes sont raturées et surchargées ; la formule $X'\cap E\simeq B'\times[0,1]\cup B\times\lbrace0\rbrace$ est biffée d'un trait, et « $T'\cap Y=0.\dot T'$ », entouré, est ajouté au-dessous. Lecture d'ensemble incertaine.}
+
+\marginal{Il \uncertain{importe} \ill{} \ill{} \ill{} \uncertain{que} $B\cap X'$ \uncertain{soit} \ill{} \ldots\ $X'$}\note{notes en travers dans la marge gauche ; on lit aussi, plus haut, « \uncertain{transversal} ».}
+
+On définit de même la compatibilité pour une famille \struck{finie} \struck{de} parties $(X_i)_{i\in I}$.
+
+
+\page{17}
+\note{En haut à gauche, « 4) » de sa main : quatrième feuillet de la suite.}
+
+On dit qu'une partie bordante \add{$B$ de $X$} \struck{est} est \emph{compatible} avec une famille de parties $X_i$ de $X$, s'il existe un voisinage cylindrique \add{(ou \uncertain{semi-cylindrique})} qui est compatible avec chacune des $X_i$.
+
+\marginal{\uncertain{utiliser} \uncertain{plutôt} \uncertain{la} terminologie \uncertain{« transversale »}}\note{note en travers dans la marge gauche, en haut, soulignée.}
+
+Revenons : $Y\subset X$ et un voisinage conique \add{strict} $T$ de $Y$. On dit que $T$ est \add{\emph{strictement}} \emph{compatible} avec une famille de $X_i\subset X$ \add{s'il est compatible avec chaque $X_i$ ($X_i\cap T=\mathbf{I}.\,X_i\cap\dot T\ldots$)}, et si $\dot T$ est un sous-espace bordant de $X^{*}=X\setminus\overset{\circ}{T}$, compatible avec la famille des $X_i^{*}=X^{*}\cap X_i$. \emph{Dans} \uncertain{ce cas} \uncertain{implique} que $X_i\cap\dot T$ est un sous-espace bordant (non seulement de $X_i\cap T$, mais aussi) de $X_i^{*}$.
+
+\marginal{\struck{\ill{}} \ldots\ $X_i^{*}$ \ldots\ \uncertain{transversal} \ldots\ $\dot X_i\cap Y=0.\dot X_i$ \ldots\ \uncertain{transversaux} \ldots\ \uncertain{dire} \uncertain{strict} \ldots\ $0.\dot X_i=X_i\cap Y$ i.e. $\dot X_i=X_i\setminus X_i\cap Y$}\note{Notes en travers dans la marge gauche, en partie biffées, superposées ; lecture très incertaine, sauf les formules $0.\dot X_i=X_i\cap Y$ et, soulignée, $\dot X_i=X_i\setminus X_i\cap Y$.}
+
+(4)\note{numéro cerclé.} \struck{Soit} Un voisinage conique (absolu) $T$ de $Y$ est dit \emph{équisingulier} si $\dot T\to Y$ est une fibration loc. triviale. Il est dit \emph{équisingulier pour une famille de $T_i\subset T$}, si de \emph{plus} les $T_i$ sont coniques, et $\dot T_i\to Y$ sont des fibrations localement triviales -- et \uncertain{\ill{}}\note{Le feuillet s'arrête sur ce mot, en partie biffé.}
+
+
+\page{18}
+\note{Suite de la page 17, sans numéro de sa main.}
+
+mieux, si la \emph{famille} des $\dot T_i\subset\dot T$ au-dessus de $Y$ est \emph{globalement} loc. triviale. On étend cette définition au cas de $X_i\subset X$, et d'un voisinage \struck{tubulaire} \add{conique} $T$ de $Y$ dans $X$ : on dit \add{qu'il est} équisingulier pour les $(X_i)$, si $T$ l'est pour les $(X_i\cap T\subset T)_i$. Cela \uncertain{implique} \struck{\ill{}} que si $\forall i$, $X_i\cap Y$ est une partie \uncertain{ouverte} et fermée de $Y$, \add{et,} si $Y$ est connexe, que \struck{$X_i\cap Y$} \uncertain{l'on ait} l'alternative
+\[
+(14)\qquad X_i\cap T=\emptyset\quad\text{ou}\quad X_i\supset Y .
+\]
+
+\marginal{on dit \emph{strictement} \ill{} \ldots\ \emph{strict} \ldots\ si $T$ \uncertain{équisingulier} \ldots\ les $\lambda T$ \ldots\ $\lambda\in\,]0,1[$}\note{notes en travers dans la marge gauche, en partie biffées ; lecture très incertaine.}
+
+(5)\note{numéro cerclé, surchargé.} On dit aussi que $X,(X_i)_{i\in I}$ est \add{(globalement)} \emph{équisingulier le long de $Y$}, s'il existe un voisinage conique \struck{\ill{}} $T$ de $Y$ dans $X$, qui est équisingulier p.r. \struck{\ill{}} \add{aux} $(X_i)$ -- ce qui équivaut à ce que les $\lambda T$ ($\lambda\in\,]0,1[$) soient \emph{strictement} équisinguliers.\note{Au-dessus de « $T$ », un point : il a d'abord écrit $\dot T$ ou surchargé la lettre. Le bas du feuillet est blanc.}
+
+
+\page{19}
+\note{En haut à gauche, « 5) » de sa main : cinquième feuillet de la suite.}
+
+\emph{Proposition} Considérons la cat. des systèmes $(X,Y,(X_i)_{i\in I},T)$ où $X$ espace top., $Y,(X_i)_{i\in I}$ des sous-espaces fermés, $T$ voisinage \struck{conique} \add{\uncertain{conique}} de \struck{$Y$} \add{\uncertain{$Y$}} \add{compatible} \struck{compatible} avec $(X_i)$ (morphismes les iso), et la catégorie des systèmes $(X^{*},\dot X,(X_i^{*}),Y,\ \dot X\to Y)$, $X^{*}$, $Y$ espaces top., $\dot X$ et $X_i^{*}$ parties fermées de $X$, $\dot X\to Y$ application continue. Ces deux catégories sont équivalentes. \add{Si $T$ voisinage conique \emph{strict}} \struck{Pour que $T$ soit strictement} \add{\uncertain{transversal}} \struck{compatible \ill{} avec} \add{\uncertain{aux}} $X_i$, il faut et il suffit que $\dot X$ soit un sous-espace bordant de $X^{*}$, compatible avec les $X_i^{*}$. Pour que $T$ soit équisingulier pour $(X_i)$, il faut et il suffit que
+\[
+\begin{array}{c}\dot X\longrightarrow Y,\\ \cup\\ (\dot X_i)\end{array}
+\]
+soit une fibration localement triviale simultanée (où on pose $\dot X_i=X_i\cap\dot X$)\note{Les ajouts interlinéaires du milieu (« Si $T$ voisinage conique strict », « transversal ») remplacent « Pour que $T$ soit strictement compatible avec les $X_i$ » ; la syntaxe de la phrase corrigée n'est pas entièrement rétablie sur la page. Dans la seconde catégorie, $\dot X$ et $X_i^{*}$ sont dits « parties fermées de $X$ » : on attendrait $X^{*}$. Le bas du feuillet est blanc.}
+
+
+\page{20}
+\note{Page entière biffée de deux longues diagonales ; elle se lit néanmoins et on la donne. En haut à gauche, un numéro cerclé biffé, puis « (5) » cerclé : c'est un nouveau départ du paragraphe (5) de la page 18.}
+
+(5)\note{numéro cerclé, écrit à côté d'un premier numéro cerclé biffé.} Soient $X$ un espace topologique, $I$ un ens. ordonné \struck{\ill{}} fini,
+\[
+(15)\qquad (X_i)_{i\in I}
+\]
+une famille \add{croissante} de parties fermées de $X$. \struck{On suppose} (stratification de type $I$). \struck{On}
+\struck{a) la famille des $X_i$ est loc\textsuperscript{t} finie} \struck{suppose} \struck{b) $i\le j\Longrightarrow X_i\subset X_j$} \struck{que} Pour faire des récurrences dans nos constructions, \struck{On pose, pour $\forall i\in I$} \struck{(16) $X_i^{*}=X_i\setminus\ldots$} on supposera donnée de plus une sous-espace bordant $\dot X$ de $X$, \emph{strictement} compatible avec la famille des $X_i$. On veut définir la notion de \emph{conification} \add{(compatible avec $\dot X$)} (de la stratification). Si $I$ est vide, c'est une structure vide. Si $I=\lbrace i\rbrace$, $X_i=Y$, c'est par définition un \struck{\ill{}} voisinage \struck{\ill{}} \add{conique strict} \add{\ill{}} de $Y$ dans $X$, \struck{\ill{}} tel que \add{la partie bordante} $\dot X$ soit \struck{strict} compatible avec celui-ci, \add{i.e.} que $\dot X\cap T$ \add{$\overset{\text{déf}}{=}\ddot T$} soit un sous-espace bordant de $\dot T$, \add{qui soit} \struck{$0.(\dot X\cap\dot T)$} $0.\ddot T=\dot X\cap Y$ \add{$=\dot Y$} (\struck{\ill{}}, que $\dot T$ soit un sous-espace bordant de $Y$), et que $\dot T\to Y$ soit \ldots\ dans un sens à préciser.\note{Le passage final, depuis « que $\dot X\cap T$ », est encadré et en partie barré de traits croisés ; « $\dot T$ soit un sous-espace bordant de $Y$ » est lu tel quel, alors que l'on attendrait $\ddot T$ ou $\dot Y$. Lecture d'ensemble incertaine.}
+
+\end{document}
