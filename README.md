@@ -24,12 +24,12 @@ window.
 
 | Page | Contents |
 |---|---|
-| [`/`](https://grothendieck.commutator.io/) | What the fonds is, how Grothendieck wrote, and the five notebooks |
+| [`/`](https://grothendieck.commutator.io/) | What the fonds is, where the work stands, and all 178 folders in Grothendieck's filing order, searchable |
+| [`/notebooks/`](https://grothendieck.commutator.io/notebooks/) | The five notebooks, and how Grothendieck wrote |
 | [`/topos/`](https://grothendieck.commutator.io/topos/) | **Cahier de Topos** — folders 19, 161-3, the categorical footing, SGA 4, the late stratified topos *(our grouping)* |
 | [`/motifs/`](https://grothendieck.commutator.io/motifs/) | **Cahier de Motifs** — the inventory's *Théorie des motifs*, folders 10–18, 946 pages *(the archive's grouping)* |
 | [`/longue-marche/`](https://grothendieck.commutator.io/longue-marche/) | **La Longue Marche** — 1,584 pages through Galois theory, plus the Teichmüller notes around it *(the archive's grouping)* |
 | [`/tardifs/`](https://grothendieck.commutator.io/tardifs/) | **Cahiers tardifs** — *Vers une géométrie des formes* (1986) and *Dérivateurs* (1990–91) *(our grouping)* |
-| [`/archive/`](https://grothendieck.commutator.io/archive/) | All 178 folders, in Grothendieck's filing order, searchable |
 | [`/notes-dispersees/`](https://grothendieck.commutator.io/notes-dispersees/) | **Notes techniques dispersées** — the 35 folders belonging to no work, 1953–1984 *(our grouping)* |
 | [`/method/`](https://grothendieck.commutator.io/method/) | How he took notes, how transcription proceeds, what this site does not claim |
 

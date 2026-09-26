@@ -24,14 +24,14 @@ import { BOOKS } from '../content/books.ts';
 type Collection = 'fonds' | 'notebooks';
 
 const COLLECTIONS: { id: Collection; label: string; path: string }[] = [
-  { id: 'fonds', label: 'Fonds', path: '/archive/' },
-  { id: 'notebooks', label: 'Notebooks', path: '/' },
+  { id: 'fonds', label: 'Fonds', path: '/' },
+  { id: 'notebooks', label: 'Notebooks', path: '/notebooks/' },
 ];
 
 // The readings of the whole fonds, and then — after a rule — the pages about
 // the project rather than about the folders.
 const FONDS_PAGES: { path: string; label: string }[] = [
-  { path: '/archive/', label: 'Whole fonds' },
+  { path: '/', label: 'Whole fonds' },
   { path: '/index/', label: 'Index' },
   { path: '/timeline/', label: 'Timeline' },
   { path: '/letters/', label: 'Letters' },
@@ -44,10 +44,10 @@ const PROJECT_PAGES: { path: string; label: string }[] = [
   { path: '/contribute/', label: 'Contribute' },
 ];
 
-// The home page introduces the notebooks, so it sits on their side.
+// The front page is the whole fonds; the notebooks have their own landing.
 export const collectionOf = (path: string): Collection => {
   const h = path.endsWith('/') ? path : `${path}/`;
-  return h === '/' || BOOKS.some((b) => b.path === h) ? 'notebooks' : 'fonds';
+  return h === '/notebooks/' || BOOKS.some((b) => b.path === h) ? 'notebooks' : 'fonds';
 };
 
 function isCurrent(path: string, here: string): boolean {
@@ -86,7 +86,7 @@ export function Header({ path }: { path: string }) {
   // The folded-out menu has room for the full titles; only the inline row is
   // short of space.
   const notebookLinks = (full: boolean) =>
-    BOOKS.map((b) => ({ path: b.path, label: full ? b.title : (b.navTitle ?? b.title) }));
+    [{ path: '/notebooks/', label: 'All five' }, ...BOOKS.map((b) => ({ path: b.path, label: full ? b.title : (b.navTitle ?? b.title) }))];
 
   return (
     <header className="sticky top-0 z-40 border-b border-ink-200 bg-white/93 backdrop-blur-md backdrop-saturate-150">

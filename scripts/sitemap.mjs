@@ -59,6 +59,9 @@ async function walk(dir) {
  * reader would ever land on.
  */
 function locOf(rel) {
+  // /archive/ is a door to the front page since the whole fonds moved there,
+  // kept for the links that carry it; it is not a page of its own.
+  if (rel === 'archive/index.html') return null;
   if (basename(rel) === 'index.html') {
     const dir = posix.dirname(rel);
     return dir === '.' ? '/' : `/${dir}/`;

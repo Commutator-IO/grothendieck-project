@@ -1,10 +1,10 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import './index.css';
-import { ArchivePage } from './ArchivePage.tsx';
+import { NotebooksPage } from './NotebooksPage.tsx';
 
 createRoot(document.getElementById('root') as HTMLElement).render(
   <StrictMode>
-    <ArchivePage />
+    <NotebooksPage />
   </StrictMode>,
 );

@@ -248,7 +248,7 @@ function Ranges() {
         {sel ? (
           <>
             <p>
-              <a href={`/archive/#${sel.id}/1`} className="tabular font-semibold text-ink-900 hover:text-brand-700">
+              <a href={`/#${sel.id}/1`} className="tabular font-semibold text-ink-900 hover:text-brand-700">
                 n° {sel.id}
               </a>{' '}
               {shortTitle(sel.title)} <span className="text-ink-500">· inventory: « {sel.dating.raw} »</span>
@@ -419,7 +419,7 @@ function Calendar() {
             {(days.get(sel) ?? []).map((l, i) => (
               <li key={i}>
                 <span className="tabular text-ink-900">{sel}</span> ·{' '}
-                <a href={`/archive/#${l.folder}/${l.batch}`} className="tabular font-semibold text-ink-900 hover:text-brand-700">
+                <a href={`/#${l.folder}/${l.batch}`} className="tabular font-semibold text-ink-900 hover:text-brand-700">
                   n° {l.folder}
                 </a>{' '}
                 p. {l.page} — « {l.written} », {l.context}
@@ -457,7 +457,7 @@ function Register() {
             <ul className="pl-4">
               {ls.map((l, i) => (
                 <li key={i}>
-                  <a href={`/archive/#${l.folder}/${l.batch}`} className="tabular hover:text-brand-700">
+                  <a href={`/#${l.folder}/${l.batch}`} className="tabular hover:text-brand-700">
                     p. {l.page}
                   </a>{' '}
                   « {l.written} » <span className="text-ink-400">— {l.kind}, {l.context} · {l.where}</span>

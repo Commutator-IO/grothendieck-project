@@ -46,7 +46,7 @@ function FolderRef({ id, batches, extra }: { id: string; batches: number[]; extr
   return (
     <li className="text-[12.5px] leading-relaxed text-ink-600">
       <a
-        href={`/archive/#${id}/${batches[0] ?? 1}`}
+        href={`/#${id}/${batches[0] ?? 1}`}
         className="tabular font-semibold text-ink-900 hover:text-brand-700"
         title={BY_ID.get(id)?.title}
       >
@@ -60,7 +60,7 @@ function FolderRef({ id, batches, extra }: { id: string; batches: number[]; extr
           {batches.map((b, i) => (
             <span key={b}>
               {i > 0 && ', '}
-              <a href={`/archive/#${id}/${b}`} className="hover:text-brand-700">
+              <a href={`/#${id}/${b}`} className="hover:text-brand-700">
                 {b}
               </a>
             </span>
@@ -142,7 +142,7 @@ function Subjects({ list }: { list: Subject[] }) {
                   {k.folders.map((f, j) => (
                     <span key={f}>
                       {j > 0 && ', '}
-                      <a href={`/archive/#${f}/1`} className="hover:text-brand-700" title={BY_ID.get(f)?.title}>
+                      <a href={`/#${f}/1`} className="hover:text-brand-700" title={BY_ID.get(f)?.title}>
                         {f}
                       </a>
                     </span>

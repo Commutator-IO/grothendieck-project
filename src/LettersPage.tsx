@@ -151,7 +151,7 @@ function ByYear() {
               <li key={letterKey(l)}>
                 <span className="tabular text-ink-900">{l.date}</span> · {DIR[l.direction].label}
                 {l.direction !== 'other' && `, ${l.direction === 'from' ? 'to' : 'from'} ${who(l)}`} ·{' '}
-                <a href={`/archive/#${l.folder}/${l.batch}`} className="tabular font-semibold text-ink-900 hover:text-brand-700">
+                <a href={`/#${l.folder}/${l.batch}`} className="tabular font-semibold text-ink-900 hover:text-brand-700">
                   n° {l.folder}
                 </a>
               </li>
@@ -248,7 +248,7 @@ function Register({ picked }: { picked: string | null }) {
               return (
                 <tr key={i} className="border-b border-ink-100 align-top last:border-0">
                   <td className="whitespace-nowrap px-3 py-2">
-                    <a href={`/archive/#${l.folder}/${l.batch}`} className="tabular font-semibold text-ink-900 hover:text-brand-700" title={BY_ID.get(l.folder)?.title}>
+                    <a href={`/#${l.folder}/${l.batch}`} className="tabular font-semibold text-ink-900 hover:text-brand-700" title={BY_ID.get(l.folder)?.title}>
                       n° {l.folder}
                     </a>
                     <span className="tabular text-ink-400"> p. {l.pages}</span>

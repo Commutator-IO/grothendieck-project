@@ -163,7 +163,7 @@ function LegibilityOverTime() {
       <p className="mt-2 min-h-[3em] text-[12.5px] leading-relaxed text-ink-600">
         {sel ? (
           <>
-            <a href={`/archive/#${sel.id}/1`} className="tabular font-semibold text-ink-900 hover:text-brand-700">
+            <a href={`/#${sel.id}/1`} className="tabular font-semibold text-ink-900 hover:text-brand-700">
               n° {sel.id}
             </a>{' '}
             {shortTitle(sel.title)} <span className="text-ink-400">· {sel.date || 's.d.'}</span>
@@ -235,7 +235,7 @@ function FolderTable() {
             {rows.map((f) => (
               <tr key={f.id} className="border-b border-ink-100 last:border-0 hover:bg-ink-50">
                 <td className="w-[15rem] whitespace-nowrap px-3 py-1.5">
-                  <a href={`/archive/#${f.id}/1`} className="tabular font-semibold text-ink-900 hover:text-brand-700">
+                  <a href={`/#${f.id}/1`} className="tabular font-semibold text-ink-900 hover:text-brand-700">
                     {f.id}
                   </a>{' '}
                   <span className="text-ink-500" title={f.title}>
@@ -366,7 +366,7 @@ function Languages() {
       <ul className="mt-2 grid gap-x-6 gap-y-1 text-[12.5px] text-ink-600 sm:grid-cols-2">
         {mixed.map((f) => (
           <li key={f.id}>
-            <a href={`/archive/#${f.id}/1`} className="tabular font-semibold text-ink-900 hover:text-brand-700">
+            <a href={`/#${f.id}/1`} className="tabular font-semibold text-ink-900 hover:text-brand-700">
               n° {f.id}
             </a>{' '}
             {shortTitle(f.title).slice(0, 44)} <span className="text-ink-400">— {f.languages.map((l) => LANG[l] ?? l).join(', ')}</span>

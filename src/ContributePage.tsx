@@ -309,10 +309,10 @@ function RunABatch() {
       <p className="prose-fonds mt-3">
         Pick a folder with no blue rule on{' '}
         <a
-          href="/archive/"
+          href="/#folders"
           className="font-medium text-brand-600 underline decoration-brand-200 underline-offset-2 hover:text-brand-700"
         >
-          the archive page
+          the list of folders
         </a>{' '}
         — and check the green ones first: where a scholarly edition already exists it is better
         than anything produced here, and re-transcribing it wastes your afternoon.

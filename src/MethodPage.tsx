@@ -432,10 +432,10 @@ function Contributors() {
         who knew the mathematics. Where their edition exists it is better than anything produced
         here and should be used instead — the{' '}
         <a
-          href="/archive/"
+          href="/#folders"
           className="font-medium text-brand-600 underline decoration-brand-200 underline-offset-2 hover:text-brand-700"
         >
-          archive page
+          list of folders
         </a>{' '}
         marks which folders those are. This site is for the rest.
       </P>

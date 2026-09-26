@@ -270,7 +270,7 @@ export function MathMap() {
             <ul className="mt-1 space-y-0.5">
               {n.folders.map((f) => (
                 <li key={f.id}>
-                  <a href={`/archive/#${f.id}/1`} className="tabular font-semibold text-ink-900 hover:text-brand-700">
+                  <a href={`/#${f.id}/1`} className="tabular font-semibold text-ink-900 hover:text-brand-700">
                     n° {f.id}
                   </a>{' '}
                   <span className="text-ink-500">{f.title}</span> — <span className="italic">{f.keywords.join(', ')}</span>
@@ -367,7 +367,7 @@ export function CitationMap() {
         {n?.kind === 'folder' ? (
           <>
             <p>
-              <a href={`/archive/#${n.id}/1`} className="font-semibold text-ink-900 hover:text-brand-700">
+              <a href={`/#${n.id}/1`} className="font-semibold text-ink-900 hover:text-brand-700">
                 n° {n.id}
               </a>{' '}
               <span className="text-ink-500">{n.title}</span>
@@ -388,7 +388,7 @@ export function CitationMap() {
             {(n.by ?? []).map((f, i) => (
               <span key={f}>
                 {i > 0 && ', '}
-                <a href={`/archive/#${f}/1`} className="tabular text-ink-800 hover:text-brand-700">
+                <a href={`/#${f}/1`} className="tabular text-ink-800 hover:text-brand-700">
                   n° {f}
                 </a>
               </span>

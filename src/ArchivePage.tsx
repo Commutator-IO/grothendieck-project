@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { Footer, Header } from './components/Frame.tsx';
 import { FacsimilePane } from './components/FacsimilePane.tsx';
+import { FondsIntro } from './components/FondsIntro.tsx';
 import { FondsMosaic } from './components/FondsMosaic.tsx';
 import { Reader, useReader } from './components/Reader.tsx';
 import { BOOKS } from './content/books.ts';
@@ -120,7 +121,7 @@ export function ArchivePage() {
           openBatch ? 'lg:pr-[var(--pane,0px)]' : ''
         }`}
       >
-        <Header path="/archive/" />
+        <Header path="/" />
 
         <main className="mx-auto max-w-6xl px-5 py-10">
           {openBatch && openCote ? (
@@ -140,8 +141,10 @@ export function ArchivePage() {
             />
           ) : (
             <>
-              <header className="max-w-[48em]">
-                <h1 className="titre text-[34px] leading-tight text-ink-900">The whole fonds</h1>
+              <FondsIntro manifest={manifest} />
+
+              <header id="folders" className="mt-14 max-w-[48em] scroll-mt-16">
+                <h2 className="titre text-[30px] leading-tight text-ink-900">The whole fonds</h2>
                 <p className="mt-3 text-[15.5px] leading-relaxed text-ink-700">
                   All {COTES.length} folders in open access, in the twenty-two groups the archivists
                   recorded, in Grothendieck's filing order. Titles in [brackets] were supplied by the

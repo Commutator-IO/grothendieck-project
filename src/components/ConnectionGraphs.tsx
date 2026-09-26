@@ -87,7 +87,7 @@ const RUN: Record<string, { span: string; title: string }> = {
 const runOf = (cote: string) => RUNS.find((r) => cote.startsWith(`${r}-`)) ?? cote;
 
 const mgp = (id: number) => `https://www.mathgenealogy.org/id.php?id=${id}`;
-const folderHref = (id: string) => `/archive/#${id}/1`;
+const folderHref = (id: string) => `/#${id}/1`;
 
 /** Shelfmark order: 1 < 2 < … < 134-1 < 161-3, not string order. */
 function byShelfmark(a: string, b: string) {

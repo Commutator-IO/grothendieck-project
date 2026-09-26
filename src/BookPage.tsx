@@ -213,7 +213,7 @@ function Excluded({ items }: { items: { cote: Cote; edition: PublishedEdition }[
       </p>
       <p className="mt-1.5 text-[12px] leading-relaxed text-ink-400">
         The folders remain in the fonds and can be opened beside their pages from{' '}
-        <a href="/archive/" className="underline underline-offset-2 hover:text-brand-600">
+        <a href="/" className="underline underline-offset-2 hover:text-brand-600">
           the whole fonds
         </a>
         , which lists every folder whether or not anyone has edited it.

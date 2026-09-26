@@ -204,7 +204,7 @@ export function PeopleNetwork() {
             <ul className="mt-1 space-y-0.5">
               {records.map((r, i) => (
                 <li key={i}>
-                  <a href={`/archive/#${r.folder}/1`} className="tabular font-semibold text-ink-900 hover:text-brand-700">
+                  <a href={`/#${r.folder}/1`} className="tabular font-semibold text-ink-900 hover:text-brand-700">
                     n° {r.folder}
                   </a>{' '}
                   · {KIND[r.kind]} — {r.detail}
