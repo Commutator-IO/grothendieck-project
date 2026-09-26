@@ -265,6 +265,68 @@ export function MethodPage() {
             </LI>
           </ul>
         </section>
+
+        {/* The article, served rather than described — as the Hopper edition
+            serves its own. A method page that explains the method and then
+            sends a reader to a repository for the paper about it withholds
+            the one document written for somebody outside the project. Two
+            forms, because they are not the same thing: the PDF is for
+            reading, and the TEI is the file the journal is sent, encoded
+            against the journal's own schema and validated on every build. */}
+        <section className="mt-14 max-w-[52em]">
+          <H2 id="article">The article</H2>
+          <P id="article-what" className="prose-fonds mt-3">
+            <em>
+              A Machine Reads Grothendieck's Working Notes: Mathematics as TeX inside TEI, Two
+              Registers, and an Edition That Keeps None of Its Witness
+            </em>{' '}
+            — the paper on this edition's method, prepared for the{' '}
+            <a
+              href="https://journal.tei-c.org/"
+              target="_blank"
+              rel="noreferrer"
+              className="font-medium text-brand-600 underline decoration-brand-200 underline-offset-2 hover:text-brand-700"
+            >
+              Journal of the Text Encoding Initiative
+            </a>
+            . It describes the fonds, the transcription rules, the two registers, how the TEI
+            carries the mathematics, the facsimile the edition does not hold, and the registers
+            derived from the reading — and then what the method does not do, which is the half
+            worth reading. Licensed CC BY 4.0.
+          </P>
+          <p className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-2 text-[13px]">
+            <a
+              href="/article/grothendieck-jtei.pdf"
+              className="rounded-full border border-ink-200 px-3 py-1 text-ink-700 transition hover:border-brand-400 hover:text-brand-700"
+            >
+              PDF
+            </a>
+            <span className="text-ink-400">to read</span>
+            <a
+              href="/article/grothendieck-jtei.xml"
+              className="ml-3 rounded-full border border-ink-200 px-3 py-1 text-ink-700 transition hover:border-brand-400 hover:text-brand-700"
+            >
+              TEI
+            </a>
+            <span className="text-ink-400">
+              the submission file, encoded against the journal's schema,{' '}
+              <code className="text-[12px]">tei_jtei</code>, and valid on every build
+            </span>
+          </p>
+          <p className="mt-3 text-[12.5px] leading-relaxed text-ink-500">
+            Both are rebuilt from <code className="text-[12px]">docs/study/article.tex</code> by{' '}
+            <code className="text-[12px]">npm run article-tei</code> and are no more current than
+            the last build; its figures are drawn from the same derived files this site shows, and
+            each names the day it was generated. Its companion on the Hopper ledgers is at{' '}
+            <a
+              href="https://hopper.commutator.io/method/"
+              className="font-medium text-brand-600 underline decoration-brand-200 underline-offset-2 hover:text-brand-700"
+            >
+              hopper.commutator.io
+            </a>
+            .
+          </p>
+        </section>
       </main>
 
       <Footer />

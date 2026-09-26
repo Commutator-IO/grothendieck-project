@@ -91,6 +91,19 @@ jobs:
       - name: Compile transcript PDFs
         run: npm run pdf || true
 
+      # The jTEI article the site serves from /method/: the PDF to read, and
+      # the TEI the journal is sent, encoded against its own schema and
+      # validated in both halves — RELAX NG with jing, Schematron with SchXslt
+      # on Saxon — so that the file served is one the journal's validator
+      # accepts. Java is on the runner already; poppler rasterises the
+      # figures and ImageMagick trims them. Unlike the transcripts' PDFs, a
+      # failure here fails the deploy: an invalid submission file should not
+      # be published as a valid one.
+      - name: Install poppler and ImageMagick
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils imagemagick
+      - name: The article, in TEI against tei_jtei
+        run: npm run article-tei
+
       # `npm run build` chains `npm run manifest`, `tsc -b` and `vite build`,
       # so type errors fail this step.
       #
