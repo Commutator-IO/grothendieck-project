@@ -116,7 +116,17 @@ for (const f of folders) {
   .dg figcaption a { color: var(--ink2); text-decoration: none; font-weight: 600; }
   .dg figcaption a:hover { text-decoration: underline; }
   .dg-n { font-variant-numeric: tabular-nums; color: var(--ink4); }
-  .dg .ltx_p { margin: 0; text-align: center; overflow-x: auto; }`,
+  .dg .ltx_p { margin: 0; text-align: center; overflow-x: auto; }
+  /* The reading views set a diagram as a block, left-aligned, and draw its
+     arrows in an SVG laid over the box from its top-left corner. Centred as
+     a block here, the grid moved and the arrows stayed at the left edge of a
+     full-width box, drawn away from the nodes they join. Shrink-wrapped, the
+     box is the grid, and the arrows fall where they belong. */
+  .dg .tr-cd { display: inline-block; text-align: left; vertical-align: top; }
+  /* The arrow layer sits at z-index -1, under the nodes. Without a stacking
+     context of its own it went under the card's white background too, and
+     every arrow was painted and hidden. */
+  .dg .tr-cd { isolation: isolate; }`,
     }),
   );
 
