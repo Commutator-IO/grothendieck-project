@@ -1,0 +1,56 @@
+name: lean
+
+# The Lean proofs in lean/ (issue #26): statements of the modernised readings,
+# proved against mathlib. Runs when lean/ changes, and by hand. It does not
+# gate the deploy — a proof checks a reading, not the site.
+on:
+  push:
+    branches: [main]
+    paths: ['lean/**', '.github/workflows/lean.yml']
+  pull_request:
+    paths: ['lean/**']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lean:
+    name: lake build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # `sorry` is caught by the build, since lakefile.toml makes every warning
+      # an error; `native_decide` trusts the compiler and an `axiom` is an
+      # assumption, so neither may appear.
+      - name: No sorry, native_decide or axiom
+        run: |
+          if grep -rnE '\b(sorry|native_decide)\b|^axiom ' lean/Grothendieck --include='*.lean'; then
+            echo "::error::a proof must be proved and kernel-checked."
+            exit 1
+          fi
+
+      # Installs the toolchain lean/lean-toolchain names, fetches mathlib's
+      # prebuilt cache, and runs `lake build`.
+      - uses: leanprover/lean-action@v1
+        with:
+          lake-package-directory: lean
+
+      # The axioms the lemmas rest on, in the build log: anything beyond Lean's
+      # three standard ones fails.
+      - name: List the axioms
+        working-directory: lean
+        shell: bash
+        run: |
+          {
+            echo 'import Grothendieck'
+            for t in Folder42.lemme2_1 Folder42.lemme2_2; do echo "#print axioms Grothendieck.$t"; done
+          } > "$RUNNER_TEMP/Axioms.lean"
+          lake env lean "$RUNNER_TEMP/Axioms.lean" | tee "$RUNNER_TEMP/axioms.txt"
+          standard='(propext|Classical\.choice|Quot\.sound)'
+          if [ "$(wc -l < "$RUNNER_TEMP/axioms.txt")" -ne 2 ] ||
+             grep -qvE "^'[^']+' (depends on axioms: \[$standard(, $standard)*\]|does not depend on any axioms)$" "$RUNNER_TEMP/axioms.txt"; then
+            echo "::error::a lemma depends on a non-standard axiom, or was not found."
+            exit 1
+          fi
