@@ -1,0 +1,574 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 7, batch 1 (pages 1-20).
+% Established from the facsimile archives/batches/7/batch-01.pdf, cut from a
+% copy of 7.pdf fetched through the project's own relay
+% (https://grothendieck-relay.onrender.com/source/7.pdf) rather than from
+% grothendieck.umontpellier.fr directly; per the skill transcribe-grothendieck.
+% The batch file carries no cover sheet: PDF page k is the archivists' page k,
+% and their pencil numbers bottom-left agree throughout. The folder is
+% seventy-one pages; this is the first of four batches (the others are
+% transcribed in parallel by other passes).
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-09-26 — first pass, unchecked against the pages by a human.
+%
+% The folder sits in the inventory group "4-9" « Cristaux »; it has its own
+% date in the catalogue, which \dating{} carries verbatim, with no group
+% sentence.
+%
+% Pages skipped: 1 and 19, blank cream sheets carrying nothing but
+% show-through from the neighbouring leaves (no word of his on either).
+%
+% Pages summarised: none. Everything from 2 to 18 and page 20 is his own
+% manuscript and is transcribed in full, as far as the hand allows.
+%
+% His pagination and dates. None of the leaves carries a page number of his.
+% Two runs, each dated by him at the top right in pencil:
+%   2-18  « Juillet-Août 1967 » (the third digit is barely formed; read 1967,
+%         flagged \uncertain), titled « Anneaux simpliciaux canoniques et
+%         modules stratifiés », with numbered paragraphs 1-6 (pp. 2, 4, 6-7,
+%         10, 13), then, on p. 16, an unnumbered « § -- Commentaires sur la
+%         définition d'une cohomologie p-adique en car. p > 0 » running to
+%         p. 18 (« Tests décisifs »). Blue ink from p. 6 on.
+%   20    « Nov. Déc. 196? » — the last digit is written over in red and is
+%         not read with certainty (the catalogue title says novembre-décembre
+%         1967); a new run numbered « 1. » at the top, « Cohomologie de De
+%         Rham des var. alg. », which continues into batch 2.
+%
+% What the batch is about. For X -> S a scheme, the formal completions
+% X^{[n]^} of X^{[n]} = X x_S ... x_S X along the diagonal give a
+% cosimplicial ring P^* (principal parts), P^0 = O_X; the shifted
+% cosimplicial ring Q^* = SP^*, (SP)^i = P^{i+1}, with alpha : P^* -> (SP)^*
+% (for X = Spec A over k: Gamma P^i = A^{(x)(i+1)}, alpha^i(x_0...x_i) =
+% x_0 (x) ... (x) x_i (x) 1). For a Module M, P^i[M] = P^i (x) M via the
+% extreme-right structure (pro-objects in general), Q^*[M] a cosimplicial
+% Module over Q^*; stratifications as descent data; Q^0[M] is the
+% pro-Module of principal parts of M, stratified, functor in Mod(X/S)
+% (Artin-Rees). Then H^*(X,M) = H^*(X, lQ^*[M]) with a spectral sequence,
+% a limit formula, the extension to complexes M^. in D^+(X/S), the
+% « formalisation » of complexes of differential operators; §5 the
+% sheaves V^q = H^q(lQ^0[M^.]) as stratified Modules and the spectral
+% sequence H^p_str(X, V^q) => H^*(X, M^.), with the corollary for V^q = 0,
+% q != q_0; §6 the De Rham complex Omega^.(V) of a stratified Module and
+% H^*_DR(X/S, V) = H^*_str(X/S, V) for X/S smooth (« lemme de Poincaré
+% formel »). Pp. 16-18: comments on crystalline cohomology over W(k) and
+% its torsion defects, and his proposal to enlarge the crystalline site by
+% triples (U_0, W, i : U_0 -> W) with W « affine formal » and a nilpotent
+% ideal, with « tests décisifs » a) and b). Page 20 opens a talk on the De
+% Rham cohomology of algebraic varieties: 1) differentiable manifolds,
+% 2) complex analytic manifolds (Hodge-to-De Rham spectral sequence),
+% 3) algebraic varieties and the comparison with H^*(X^an, C).
+%
+% Notation fixed once for the batch: \mathcal{P} for his script P (sheaves
+% of principal parts), \mathcal{Q} for the curly Q of pp. 5-14 (= SP);
+% X^{[n]} and X^{\widehat{[n]}} as he writes the brackets; \mathbb{H} for
+% his double-stroked H (hypercohomology), \mathcal{H} for his script H
+% (cohomology sheaves); \underline{V} underlined as written (a stratified
+% Module); \mathcal{O}_X for his O_X, whether or not he underlines it.
+%
+% Hardest pages and readings to check first: the connective prose of pp.
+% 2-4 and 6-8 (fast drafting in black ink; formulas carry, sentences often
+% do not); the clause after « exceptionnelles » on p. 4; « (Artin-Rees) » on
+% p. 6; the circled margin of p. 9 (« Mention ... +1 ... »); the dates on
+% pp. 2 and 20.
+
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{7}
+\batch{1}
+\pages{1}{20}
+\dating{1966-1967}
+\watermark{Édition de démonstration}
+\foldertitle{Notes laïus novembre-décembre 1967 (Cristaux) : notes manuscrites (1966-1967)}
+
+\begin{document}
+
+\page{2}
+
+\marginal{Juillet-Août \uncertain{1967}}\note{au crayon, en haut à droite ;
+le troisième chiffre de l'année est à peine formé}
+
+\section*{Anneaux \struck{\ill{}} simpliciaux canoniques et modules stratifiés}
+
+\struck{\ill{}} [Formellement, les développements qui suivent sont
+indépendants des \struck{\ill{}} histoires de sites cristallins ou
+\uncertain{stratifiants}].
+
+1. Soit $X \to S$ un préschéma relatif. Pour tout entier $n \geq 0$, soit
+\[
+  X^{[n]} = \underbrace{X \times_S \cdots \times_S X}_{n+1},
+\]
+considéré comme objet \struck{\ill{}} de $(\mathrm{Sch})_{/S}$ \ill{} \ill{}
+\struck{diag} l'immersion \struck{diag} $X \to X^{[n]}$\note{le mot « diag »,
+d'abord écrit, est biffé deux fois, dans la phrase et au-dessus de la
+flèche}. Soit $X^{\widehat{[n]}}$ le complété formel \ill{} le long de $X$.
+Pour $n \geq 0$ variable, on \ill{} un objet simplicial : \ill{} des
+\ill{} un objet simplicial \ill{} aux $X^{\widehat{[n]}}$, \ill{} dans
+$\mathrm{Sch}f/X$, les espaces sous-jacents étant d'ailleurs tous égaux à
+$\mathrm{esp}(X)$. Soit $\mathcal{P}^n$ \struck{\ill{}} le faisceau
+structural de $X^{\widehat{[n]}}$, \uncertain{Ann}-pro-objet de \struck{\ill{}}
+\struck{\ill{}} considéré comme \ill{} de la catégorie des faisceaux d'anneaux
+$\mathrm{Pro}(\mathrm{Ann}(\mathrm{esp}(X)))$ \ill{} $\mathrm{esp}(X)$,
+\ill{} Pour $n$ variable, on trouve ainsi un Anneau cosimplicial
+$\mathcal{P}^{*}$ sur $\mathrm{esp}(X)$, avec
+\[
+  \mathcal{P}^{0} = \mathcal{O}_X .
+\]
+Faire mention que \emph{\uncertain{certains}}
+
+\page{3}
+
+\ill{} un $\mathcal{O}_X$-Algèbre cosimpliciale, ainsi les deux \ill{}
+$\mathcal{O}_X = \mathcal{P}^{[0]} \rightrightarrows \mathcal{P}^{[1]}$ sont en
+général distincts, et mettent sur $\mathcal{P}^{[1]}$ deux structures
+\emph{distinctes} de $\mathcal{O}_X$-algèbres.
+
+Considérons l'objet \uncertain{décalé} $\mathcal{SP}$, défini par
+\[
+  (\mathcal{SP})^{i} = \mathcal{P}^{i+1}
+\]
+\ill{} fonctoriellement \ill{}
+\[
+  (\mathcal{SP})(I) = \mathcal{P}(I \sqcup e)
+\]
+\ill{} un ensemble \ill{} à un élément. L'homomorphisme \add{fonctoriel}
+$I \to I \sqcup e$ définit $\mathcal{P}(I) \to \mathcal{P}(I \sqcup e)$,
+i.e.
+\[
+  \alpha^{*} : \mathcal{P}^{*} \to (\mathcal{SP})^{*}
+  \qquad \text{i.e.}\quad \alpha^{i} : \mathcal{P}^{i} \to \mathcal{P}^{i+1} .
+\]
+Si p.\,ex.\ $S = \operatorname{Spec} k$ ($k$ un anneau), $X = \operatorname{Spec} A$,
+$X$ étant tel que $X \to X \times_S X$ soit une immersion nil-\ill{}
+[p.\,ex.\ $X$ radiciel et \ill{} sur $S$], alors, \ill{} aux sections,
+\[
+  \Gamma \mathcal{P}^{i} = \bigotimes_{k}^{i+1} A
+  = \underbrace{A \otimes_k A \otimes \cdots \otimes_k A}_{i+1},
+\]
+les opérations simpliciales \ill{} \ill{} \ill{}, et l'homomorphisme $\alpha$
+étant donné par
+\[
+  \underbrace{A \otimes \cdots \otimes A}_{i+1}
+  \longrightarrow
+  \underbrace{A \otimes \cdots \otimes A}_{i+2},
+  \qquad
+  \alpha^{i}(x_0 \otimes \cdots \otimes x_i) = x_0 \otimes \cdots \otimes x_i \otimes 1 .
+\]
+
+\page{4}
+
+2. Soit \struck{$(M, \ill{})$} un Module sur $X$. \struck{stratifié} \ill{}
+On pose pour $i \geq 0$
+\[
+  \mathcal{P}^{i}[M] = \mathcal{P}^{i} \otimes_{\mathcal{O}_X} M ,
+\]
+où $\mathcal{P}^{i}$ est considéré comme Algèbre sur $\mathcal{O}_X$ par sa
+structure \emph{extrême-droite}. \struck{Donc $\mathcal{P}^{i}(M)$ est un}
+Par définition, le produit tensoriel doit être interprété comme un
+pro-objet [de même que $\mathcal{P}^{i}$] --- sauf dans des conditions
+exceptionnelles \ill{} que \ill{} \ill{} $X$ loc.\ noeth.,
+\ill{} [\ill{} $M$ \uncertain{lisse} de type fini, si $X$ \ill{}
+$\Omega_{X/S}$ et $M$ de type fini sur $X$] qui \ill{} \ill{} \ill{}
+d'interpréter les $\mathcal{P}^{i}$ et $\mathcal{P}^{i}[M]$ comme des
+faisceaux au lieu de profaisceaux [car dans ces cas au lieu de
+\ill{}, on remplace les profaisceaux \ill{} par leur \struck{\ill{}}
+$\varprojlim$]. On notera que les $\mathcal{P}^{i}(M)$ est un
+$\mathcal{P}^{i}$-Module, dépendant fonctoriellement de $M$ variable dans
+$\mathrm{Mod}(\mathcal{O}_X)$. \ill{} on prend comme \ill{} de $M$ \ill{}
+
+\page{5}
+
+\ill{} $\mathcal{O}_X$ sur les $\mathcal{Q}^{i} = \mathcal{P}^{i+1}$
+\ill{} \ill{} à cette structure. Il s'ensuit que les
+\[
+  \mathcal{Q}^{i}[M] = \mathcal{Q}^{i} \otimes_{\mathcal{O}_X} M
+\]
+[str.\ ext.\ dr.]\note{écrit sous le signe $\otimes$, avec un trait qui l'y
+rattache : le produit tensoriel est pris pour la structure extrême-droite}
+sont les composantes d'\ill{} \struck{\ill{}} cosimplicial, noté
+$\mathcal{Q}^{*}[M]$, \ill{} \ill{} qui est en fait un \emph{Module}
+cosimplicial sur l'anneau cosimplicial $\mathcal{Q}^{*}$. Ce
+$\mathcal{Q}^{*}[M]$ dépend également de façon fonctorielle de $M$, quand
+$M$ parcourt $\mathrm{Mod}(X/S)$.
+
+3. Notons une conséquence \uncertain{importante} \ill{} de \ill{} des Modules
+cosimpliciaux \ill{} $\mathcal{Q}^{*}[M]$ sur $\mathcal{P}^{*}$ : \struck{\ill{}}
+\ill{} \ill{} $\mathcal{Q}^{i}[M]$ \ill{} \struck{\ill{}} c'est que les
+\ill{} \ill{} \ill{} autres \ill{} \ill{} \ill{} \ill{} les opérations
+\ill{} \ill{} changement de base \ill{} les \uncertain{opérations}
+simpliciales $\mathcal{P}^{i} \to \mathcal{P}^{j}$ [\ill{} \ill{} \ill{}
+\struck{\ill{}} \ill{} \ill{} d'un $\varprojlim$, non seulement
+
+\page{6}
+
+d'un [~~]. Formellement, [de façon précise \ill{} cela plus \ill{} \ill{}
+des pro-Modules \ill{} \ill{} de Modules \ill{} \ill{}] on voit que
+$\mathcal{Q}^{0}[M]$ est un (pro)Module stratifié sur $X$ rel $S$, et les
+$\mathcal{Q}^{i}[M]$ sont les composantes des (pro)Modules \struck{\ill{}}
+cosimplicial correspondant.\marginal{\ill{} \ill{} \ill{}}\note{le
+passage « on voit que \ldots{} correspondant » est marqué d'un double trait
+vertical dans la marge gauche ; l'ajout au-dessus de la ligne suivante,
+entouré et relié à $\mathcal{Q}^{0}[M]$, n'est pas lu}
+Ce pro-Module stratifié $\mathcal{Q}^{0}[M]$ \ill{} \ill{} fonctoriellement
+de $M$ parcourant $\mathrm{Mod}(X/S)$ [Modules sur $X$ \ill{}
+\uncertain{rel $S$} \ill{} \emph{\uncertain{ordre} borné}]\note{« rel $S$ »
+est écrit au-dessus d'un mot biffé ; « ordre borné » est souligné}, on
+\ill{} \ill{} \ill{} \ill{} \ill{} comme \ill{} \ill{} \ill{}
+\uncertain{Artin-Rees}. De plus, on \uncertain{récupère} $M$ à partir de
+$\mathcal{Q}^{0}[M]$ [\ill{} : stratification] \ill{} \ill{} \ill{} \ill{}
+le sous-faisceau des \emph{sections \ill{}} [\ill{} la
+structure\note{le passage « Ce pro-Module stratifié \ldots{} la structure »
+est lui aussi marqué d'un trait vertical dans la marge gauche}
+
+\page{7}
+
+de $\mathcal{O}_X$-Module \ill{} de l'extrême droite [N.B. Les structures
+extrême-droites des $\mathcal{Q}^{i}[M]$ sont compatibles avec les op.\
+simpliciales, i.e.\ $\mathcal{Q}^{i}[M]$ est un Module cosimplicial sur
+$\mathcal{O}_X$ \ill{} \ill{}, \ill{} \ill{} \ill{} extrême-droites ; mais
+\ill{} \ill{} \ill{} \ill{} \ill{} structures \ill{} \ill{} \ill{}
+conservée par les \ill{} $M \to N$ qui \ill{} \ill{} $\mathcal{O}_X$-\ill{}
+(\ill{} \ill{} \ill{} \ill{} diff.\ rel $S$ \ill{})]. \ill{} \ill{} un
+\ill{} $\mathrm{Mod}(X/S) \to$ \ill{} $D : M \to N$ \ill{}
+$\mathcal{Q}^{0}[D] : \mathcal{Q}^{0}[M] \to \mathcal{Q}^{0}[N]$ \ill{}
+\ill{} \ill{} \ill{} comme l'\ill{} \ill{} \ill{} les
+\uncertain{sous}-faisceaux des \struck{\ill{}} \add{sections}
+\uncertain{horizontales}.
+
+4. Une façon \uncertain{équivalente} d'obtenir $\mathcal{Q}^{*}[M]$ \ill{}
+de considérer
+\[
+  X^{\widehat{[2]}} \rightrightarrows X^{\widehat{[1]}}
+  \xrightarrow{\widehat{\mathrm{pr}}_2} X^{\widehat{[0]}} = X
+\]
+et les \uncertain{images} \ill{}, [dans les cat.\ \ill{} \ill{} formels sur
+$X$], \struck{\ill{}} c'est ainsi
+
+\page{8}
+
+\ill{} \ill{} l'anneau \add{cosimplicial} $\mathcal{Q}^{*}$, et
+\[
+  \mathcal{Q}^{*}[M] = \mathcal{Q}^{*} \otimes_{\mathcal{O}_X} M .
+\]
+Comme $X^{\widehat{[1]}}$ \ill{} \ill{} section sur $X^{\widehat{[0]}}$, on
+obtient aussitôt que \emph{$\mathcal{Q}^{*}[M]$ est une résolution de $M$}
+[\ill{} \ill{} \ill{} \ill{} les $\mathcal{Q}^{i}[M]$ les structures
+extrêmes droites de $\mathcal{O}_X$-Modules]. Il faut \ill{} \ill{}
+cependant \ill{} \ill{} \ill{} \ill{} \ill{} \ill{} \ill{} cette expression
+[les A.R.-pro-modules \ill{} \ill{} catégorie abélienne\,?\,\ldots]
+\ill{}-il \ill{} \ill{} \ill{} faut \ill{} \ill{} \ill{} \ill{} \ill{}
+hypothèse de quasi-cohérence sur $M$. En tout cas, \struck{\ill{}}
+\uncertain{désignant} par \ill{} \ill{} \ill{} le \ill{} \ill{}
+$\varprojlim$ des \ill{}, \ill{} \ill{} projets, on trouve que
+$l\mathcal{Q}^{*}[M]$ est une résolution de $M$ \ill{} $M$ \ill{}.
+
+\page{9}
+
+et par suite on trouve un bon cas
+\[
+  H^{*}(X, M) \simeq \mathbb{H}^{*}(X, l\mathcal{Q}^{*}[M])
+  \Longleftarrow
+  E_2^{pq} = H^{p}\bigl(i \mapsto H^{q}(X, l\mathcal{Q}^{i}[M])\bigr)
+\]
+[Sous des conditions convenables, \ill{} aura
+\[
+  H^{q}(X, l\mathcal{Q}^{i}[M]) = \varprojlim_{n}
+  H^{q}(X, \mathcal{Q}^{i}_{\uncertain{n}}[M]_{(n)})
+  \;\bigl(\simeq H^{q}(X^{\widehat{[i+1]}}_{n}, M)\bigr)
+\]
+\ill{} \ill{} \ill{}
+\[
+  \mathcal{Q}^{i}[M] = \varprojlim_{n} \mathcal{Q}^{i}[M]_{(n)}, \quad
+  \mathcal{Q}^{i}[M]_{(n)} = \mathcal{Q}^{i}_{(n)} \otimes_{\mathcal{O}_X} M, \quad
+  \mathcal{Q}^{i}_{(n)} = \mathcal{P}^{i+1}_{(n)} = \cdots\;]
+\]
+\note{la parenthèse $(\simeq H^{q}(X^{\widehat{[i+1]}}_n, M))$ est ajoutée
+au-dessus de la ligne et entourée ; en bout de ligne, un
+« $= H^{q}(X^{[i]}, M)$ » est biffé}\marginal{Mention \ill{} $+1$ \ill{}\,!
+\struck{$X^{[i+1]}$} $= [X/S]^{i+2}$ \ill{} \ill{}\,!)}\note{dans la marge
+gauche, entouré ; le « $+1$ » est lui-même entouré}
+
+Si \ill{} complexe $M^{\cdot}$ \ill{} \ill{} \emph{\ill{}} $M^{\cdot}$ de
+\struck{\ill{}} $D^{+}(\mathrm{Mod}(X/S)) = D^{+}(X/S)$, on obtient un
+bicomplexe $\mathcal{Q}^{*}[M^{\cdot}]$, tel que $l\mathcal{Q}^{*}[M^{\cdot}]$
+est une résolution de $M^{\cdot}$, et par suite
+\[
+  \mathbb{H}^{*}(X, M^{\cdot}) \simeq \mathbb{H}^{*}(X, \mathcal{Q}^{*}[M^{\cdot}])
+  \simeq \mathbb{H}^{*}(X_{\mathrm{str}}, \mathcal{Q}^{0}[M^{\cdot}]) .
+\]
+[$\mathcal{Q}^{0}[M^{\cdot}]$ s'\uncertain{appelle} la
+\emph{formalisation} des complexes \struck{\ill{}} d'op.\ différentiels
+$M$.]\note{ce crochet est marqué d'un triple trait vertical dans la marge}
+
+\page{10}
+
+5. Soit \uncertain{toujours} $M^{\cdot} \in \mathrm{ob}\, D^{+}(X/S)$, et
+considérons le complexe $\mathcal{Q}^{0}[M^{\cdot}]$ \struck{de}
+\struck{$l\mathcal{Q}^{0}[$} de (pro-\struck{$\mathcal{O}_X$-Modules})
+à stratifications, \ill{} \ill{} \ill{} \ill{} \ill{} \ill{} que celle de
+$M^{\cdot}$ : \ill{} \ill{} \ill{} \ill{} \ill{} complexe \ill{} additif
+d'abord, en \ill{} \ill{} \ill{} faisceaux de sections
+\uncertain{Artiniennes}, puis \ill{} \ill{} $\mathcal{O}_X$-structures sur
+les $M^{\cdot}$ comme \ill{} des structures extrêmes droites des
+$\mathcal{Q}^{0}[M^{i}]$ (lesquelles, rappelons-le, \ill{}, ne sont
+cependant pas respectées par l'op.\ diff.\ de $\mathcal{Q}^{0}[M^{\cdot}]$).
+Considérons les $\mathcal{H}^{i}(l\mathcal{Q}^{0}[M^{\cdot}])$, et supposons
+que leur formation commute aux changements de base \struck{\ill{}}
+cosimpliciaux $\mathcal{P}^{0} \to \mathcal{P}^{\uncertain{n}}$ ; ceci
+\ill{} \ill{} \ill{} par des \uncertain{hypothèses}
+
+\page{11}
+
+de \add{type} platitude sur les $\mathcal{Q}^{0}[M^{\cdot}]$ et les
+$\mathcal{H}^{i}(\mathcal{Q}^{0}[M^{\cdot}])$, \struck{\ill{}} \ill{} (plus
+économiques, \ill{} \ill{}, \ill{} que \ill{} ne \ill{} \ill{} \ill{}
+\ill{} de platitude sur $\mathcal{O}_X$ de $\mathcal{Q}^{0}[M^{\cdot}]$
+\ill{} \ill{} de $X^{\widehat{[1]}} \to X^{0}$] \ill{} un hypothèse
+\ill{} « platitude \uncertain{infinitésimale} de $X/S$ », \ill{} \ill{}
+\add{\uncertain{sur} platitude \ill{}}
+$X^{\widehat{[1]}} \to X$ --- p.\,ex.\ $X/S$ \uncertain{lisse}
+\ldots{} [critères : \uncertain{diagonale}]. Alors\note{ce passage est
+marqué d'un double trait vertical dans la marge}
+\begin{enumerate}
+\item[1°)] Les $V^{i} = \mathcal{H}^{i}(l\mathcal{Q}^{0}[M])$ sont de
+\ill{} \struck{\ill{}} façon naturelle des $\mathcal{O}_X$-Modules (par la
+\add{$\mathcal{O}_X$-}structure \uncertain{produit}) \emph{stratifiés}.
+\item[2°)] Dans le bicomplexe $l\mathcal{Q}^{*}[M^{\cdot}]$, prenant la
+\add{\uncertain{première}} \struck{cohomologie} suivant l'op.\ diff.\
+provenant de $M^{\cdot}$, \ill{} \ill{} \struck{\ill{}} complexes
+\ill{} \ill{} \uncertain{fournissant} les stratifications
+\struck{\ill{}} des $V^{i}$, $C^{\cdot}(V^{i})$ \ill{} \ill{}
+\item[3°)] Par suite, on trouve une suite spectrale
+\end{enumerate}
+
+\page{12}
+
+\[
+  \mathbb{H}^{*}(X, M^{\cdot}) \simeq \mathbb{H}^{*}(X, \mathcal{Q}^{*}[M^{\cdot}])
+  \Longleftarrow E_2^{pq} = \mathbb{H}^{p}(X, C^{\cdot}(V^{q}))
+\]
+(vérif.\ à \uncertain{EGA} $0_{\mathrm{III}}$\,?). On \ill{} \ill{}
+l'écrire, en \ill{} la définition, \ill{} \ill{} Module stratifié
+$\underline{V}$ relativement à $S$,
+\[
+  \mathbb{H}^{p}_{\mathrm{str}}(X/S, \underline{V})
+  = \mathbb{H}^{p}(X, C^{\cdot}_{\mathrm{str}}(\underline{V})) ,
+\]
+\note{l'indice « str » est entouré et relié par un trait à la place d'un
+« $X/S$ » biffé dans le premier membre}
+sous la forme
+\[
+  \boxed{\;
+  \mathbb{H}^{*}(X, M^{\cdot}) \Longleftarrow
+  E_2^{pq} = \mathbb{H}^{p}_{\mathrm{str}}(X, V^{q}(M^{\cdot})),
+  \quad\text{où}\quad
+  V^{q}(M^{\cdot}) = \mathcal{H}^{q}(\mathcal{Q}^{0}[M^{\cdot}])
+  \;}
+\]
+
+\emph{Corollaire}. Supposons que l'on ait
+\[
+  V^{q}(M^{\cdot}) = 0 \quad \text{pour } q \neq q_0 ,
+\]
+alors on \ill{} \ill{} des isom.\ canoniques
+\[
+  \mathbb{H}^{n}(X, M^{\cdot}) \simeq
+  \mathbb{H}^{n-q_0}_{\mathrm{str}}(X, V^{q_0}(M^{\cdot})) .
+\]
+Ceci montre, (\add{supposant p.\,ex.\ que $q_0 = 0$,}\note{ajouté au-dessus
+de la ligne}) que le premier \ill{}
+
+\page{13}
+
+ne dépend que du Module stratifié $\underline{V} = V^{q_0}(M^{\cdot})$ et de
+\struck{\ill{}} $q_0$, mais pas du complexe différentiel particulier choisi
+pour « résoudre » $\underline{V}$.
+
+6. Or, \struck{\ill{}} \uncertain{Soit} \ill{} \struck{\ill{}} \ill{} \ill{}
+\ill{} d'un Module stratifié $\underline{V}$ sur $X$ rel $/S$, \ill{}
+\ill{} \ill{} lui associer de façon naturelle un \emph{complexe de De Rham},
+\ill{} \ill{} l'objet gradué sous-jacent est
+\[
+  \Omega^{\cdot}_{X/S} \otimes \underline{V} = \Omega^{\cdot}(\underline{V})
+\]
+et on vérifie, \emph{lorsque} (\add{$X$ est lisse sur $S$ et} $S$ \ill{} de
+\emph{\ill{}})\note{la parenthèse est ajoutée au-dessus de la ligne}, que ce
+complexe \emph{\ill{}}, que \ill{} \ill{} « résolution différentielle » \ill{}
+bien \ill{} de $\underline{V}$. Dans ce cas, on trouve donc une
+interprétation \ill{} de la\marginal{« Lemme de Poincaré formel »}\note{dans
+la marge gauche, entouré, avec un triple trait vertical ; plus bas, un
+second mot entouré, « différentielle », à demi couvert d'une tache d'encre}
+
+\page{14}
+
+coh.\ de De Rham de $X/S$
+\[
+  H^{*}_{\mathrm{DR}}(X/S, \underline{V}) \simeq H^{*}_{\mathrm{str}}(X/S, \underline{V})
+\]
+au \ill{} \ill{} \ill{} que il \ill{} plus question de \struck{cohomologie}
+\add{formes} différentielles\,! Si on ne fait plus d'hyp.\ de lissité
+\ill{} de caractéristique, il \ill{} \ill{} \ill{} \ill{} \ill{} un
+\add{\uncertain{homomorphisme} \ill{}}
+\uncertain{canoniques}
+\[
+  \underline{V} \to \mathcal{H}^{0}(l\mathcal{Q}^{0}[\Omega^{\cdot}(\underline{V})])
+\]
+\note{l'insertion « un homomorphisme \ldots{} », au-dessus de la ligne, est
+reliée par une accolade à cette formule}
+\ill{} \ill{} \ill{} complexes de Modules stratifiés
+\[
+  \underline{V} \longrightarrow l\mathcal{Q}^{0}[\Omega^{\cdot}(\underline{V})]
+\]
+\ill{} \ill{} \ill{} au \uncertain{Cstr} des \ill{} \ill{} \ill{}, un
+\emph{hom.\ can.}
+\[
+  \boxed{\;
+  H^{*}_{\mathrm{str}}(X, \underline{V}) \longrightarrow
+  H^{*}_{\mathrm{DR}}(X/S, \underline{V})
+  \;}
+\]
+\note{l'indice « str » est entouré et relié à la place d'un mot biffé après
+$X$}
+
+\page{15}
+
+qui est dans un \ill{} \ill{} $X/S$ est différentiellement lisse et $S$ de
+car.\ nulle.
+
+Je doute que ce soit \ill{} \ill{} \ill{} (p.\,ex.\ une \struck{\ill{}}
+courbe elliptique)\note{la parenthèse est ajoutée au-dessus de la ligne ;
+« doute » est entouré, et un long trait le relie à la marge} \struck{\ill{}}
+\ill{} $X$ est \emph{lisse et projectif} [sur $S$ spectre d'un corps (alg.\
+clos \ill{} \ill{}) de car.\ $p > 0$, et $\underline{V} = \mathcal{O}_X$
+avec stratification canonique. Dans ce cas particulier,] il n'est pas
+\ill{} clair à priori que les $H^{i}_{\mathrm{str}}$ soient de dim.\ finie,
+ni qu'ils \ill{} nuls pour $i$ grand. Situation à éclaircir\,!
+
+\emph{Remarque}. L'intérêt de relier la cohomologie de De Rham : la
+\struck{\ill{}} $H_{\mathrm{str}}$ \ill{} que celle-ci, s'interprète comme
+\ill{} \ill{} tour, \ill{} \ill{} « site stratifiant » \ill{} cohomologie
+d'un \ill{} \ill{} variante \ill{} convenable, \ill{} \ill{} conduire à
+la « coh.\ \uncertain{p-adique} en car.\ $p$ » \ill{}\marginal{C'est
+\uncertain{sûrement} faux\,! (calculs \ill{} \ill{} \ill{} $X$ \ill{}
+\uncertain{abélien}\,!)}\note{dans la marge gauche, dans un cadre ; la
+première ligne au crayon, les suivantes à l'encre bleue, avec un triple
+trait vertical}
+
+\page{16}
+
+\section*{§\,-- Commentaires sur la définition d'une cohomologie
+\uncertain{p-adique} en car.\ $p > 0$}
+
+$X_0$ schéma sur un corps parfait $k$ de car.\ $p > 0$,
+$S = \operatorname{Spec} W(k)$. Alors
+\[
+  H^{*}(X_0/S_{\mathrm{cris}}, \mathcal{O}_{X_0\,\mathrm{cris}})
+\]
+est un $W$-module gradué. \struck{\ill{}} Mon espoir initial était qu'il
+soit \struck{un} « le » bon candidat pour une cohomologie \uncertain{p-adique}.
+Une première \ill{} \ill{} en \ill{}, c'est que lorsque $X_0$ \add{est
+lisse sur $k$, \ill{} bien \ill{}} [se relève en un $X$ \struck{\ill{}}
+\add{\ill{}} lisse sur $k$, alors d'après l'exposé précédent, on trouve
+ainsi
+\[
+  H^{*}((X_0/S)_{\mathrm{cris}}, \mathcal{O}) = \varprojlim_{n}
+  H^{*}((X_n/S_n)_{\mathrm{cris}}, \mathcal{O})
+\]
+et j'espérais qu'à la limite, on trouverait (pour certains modules
+\uncertain{tensoriels}) la même chose que
+$\varprojlim H^{*}_{\mathrm{DR}}(X_n/S_n) \simeq H^{*}_{\mathrm{DR}}(X/S)$.
+(Il y \struck{\ill{}} a un \ill{} en tous cas\,!). C'est faux
+malheureusement. Par exemple si $X_0/k$ est un schéma abélien
+« ordinaire » i.e.\ \ill{} du point de vue formel est un tore, on trouve
+que
+\[
+  H^{i}((X_0/S)_{\mathrm{cris}}, \mathcal{O}) = 0 \quad \text{si } i > \dim X_0\,!
+\]
+(Pourtant le $\varprojlim$ des coh.\ de De Rham est excellent\,!)
+\struck{\ill{}} Quand on regarde dans le \uncertain{cas}
+
+\page{17}
+
+affine, on constate que les ennuis proviennent du fait que le passage à la
+limite projective ne commute pas à la localisation par $p$
+\[
+  W \longrightarrow W[1/p] = K\,! .
+\]
+
+Je propose d'imaginer l'expédient suivant, consistant à remplacer le site
+cristallin par un site plus gros, formé avec des « épaississements » pas
+forcément infinitésimaux : objets les triples
+$(U_0, \mathcal{W}, i : U_0 \to \mathcal{W})$, où $U_0$ un ouvert affine de
+$X_0$, $\mathcal{W}$ un \struck{\ill{}} affine \add{(d'anneau $A_0$)}
+formel complet \ill{}, i.e.\ \struck{\ill{}} correspondant à une
+$W$-alg.\ $B$ sur $W$, $U_0 \to \mathcal{W}$ une \ill{} de $W$-alg.\
+\struck{\ill{}} un morphisme \struck{\ill{}} induisant un \struck{\ill{}}
+\emph{isomorphisme} \emph{nilpotent} $U_0 \to \mathcal{W} \times_S S_0$
+(Cela correspond à un $W$-hom.\ surjectif $B \to A_0$ tel que
+$B/pB \to A_0$ soit à noyau nilpotent). Comme topologie, une variante
+convenable de la zariskienne (en \ill{} \ill{} : \ill{} d'ensembles
+\ill{} \uncertain{par} les traces des ouverts sur $X_0$).
+
+\page{18}
+
+\emph{Tests décisifs} :
+a) Si $X_0$ lisse \add{affine} sur $k$, on doit retrouver la définition de
+\uncertain{W.M.}\note{« affine » est ajouté au-dessus de la ligne}
+b) Si $X_0$ lisse et propre, et se relève en $X$ lisse et propre, on doit
+retrouver (au moins modulo torsion) la cohomologie de De Rham
+$H_{\mathrm{DR}}(X/S)$.
+
+Il s'agit d'une première \struck{\ill{}}. \struck{\ill{}} Même si elle
+réussit, il faudra beaucoup l'\uncertain{accomplir}, on \ill{} désire une
+théorie cohomologique \ill{} \ill{} le projet, et \ill{} \ill{}
+\uncertain{puisse} \ill{} \ill{} coup la \ill{} des \ill{}. Il y \ill{}
+\ill{} \ill{} \ill{} \ill{} perspective\,!
+
+\page{20}
+
+\marginal{Nov.\ Déc.\ 196\uncertain{6}}\note{au crayon, en haut à droite ;
+le dernier chiffre est repassé à l'encre rouge et le chiffre sous-jacent
+n'est pas lu avec certitude}
+
+\section*{1. Cohomologie de De Rham des var.\ alg.}
+
+\note{« 1. » est écrit au-dessus du titre}
+[But : faire sentir un complexe de \uncertain{pbs} gravitant autour de la
+coh.\ de De Rham des V.A., et proposer un point de vue qui \struck{\ill{}}
+me semble permettre de \uncertain{les} grouper et de les étudier. D'où un
+(gros) programme de travail proposé.]\note{ce paragraphe, à l'encre bleue,
+est ajouté entre le titre et le §\,1, et encadré}
+
+§\,1. \emph{Yoga cohomologie de De Rham}
+
+1) \emph{Variétés différentiables}. Énoncé du th.\ de De Rham. Son
+explication en termes de théorie des faisceaux : \struck{\ill{}}
+$\Omega^{\cdot}_{X}$ est une \emph{résolution} de $\mathbb{C}_X$ (lemme de
+Poincaré), et les $\Omega^{i}_{X}$ sont fins, donc à cohomologie nulle en
+dim $> 0$ (N.B. $X$ est supposé \uncertain{séparé}\ldots).
+
+2) \emph{Variétés analytiques complexes}. Ça \ill{} \ill{} tel quel pour
+les Stein : lemme de Poincaré (local) valable, mais il faut
+$H^{j}(X, \Omega^{i}_{X}) = 0$ pour $j > 0$. En général, il faut prendre
+l'hypercohomologie, on trouve
+\[
+  H^{*}(X, \mathbb{C}) \overset{\text{12}}{=}
+  \mathbb{H}^{*}(X, \Omega^{\cdot}_{X})
+  \Longleftarrow E_1^{pq} = H^{q}(X, \Omega^{p}_{X})
+\]
+\note{« 12 » est écrit au-dessus d'une ligne verticale qui relie
+$H^{*}(X,\mathbb{C})$ à $\mathbb{H}^{*}(X,\Omega^{\cdot}_X)$ écrit
+au-dessous ; lecture du chiffre douteuse}
+
+3) \emph{Variétés algébriques} (non singulières). Travaillons avec la
+top.\ de Zariski. Considérons
+\[
+  \mathbb{H}^{*}(X, \Omega^{\cdot}_{X}) \qquad \text{(hypercohomologie)}
+\]
+est-il isomorphe à $H^{*}(X^{\mathrm{an}}, \mathbb{C})$\,? On a en tous cas
+\[
+  \mathbb{H}^{*}(X, \Omega^{\cdot}_{X}) \longrightarrow
+  \mathbb{H}^{*}(X^{\mathrm{an}}, \Omega^{\cdot}_{X^{\mathrm{an}}})
+  \simeq H^{*}(X^{\mathrm{an}}, \mathbb{C})
+\]
+
+\end{document}
