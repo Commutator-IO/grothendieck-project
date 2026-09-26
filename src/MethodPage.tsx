@@ -277,8 +277,8 @@ export function MethodPage() {
           <H2 id="article">The article</H2>
           <P id="article-what" className="prose-fonds mt-3">
             <em>
-              A Machine Reads Grothendieck's Working Notes: Mathematics as TeX inside TEI, Two
-              Registers, and an Edition That Keeps None of Its Witness
+              A Machine Reads Grothendieck's Working Notes: Transcribing and Encoding Mathematical
+              Manuscripts
             </em>{' '}
             — the paper on this edition's method, prepared for the{' '}
             <a
