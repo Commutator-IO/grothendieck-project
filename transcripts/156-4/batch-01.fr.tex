@@ -1,0 +1,493 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 156-4, batch 1 (pages 1-20).
+% Established from the facsimile archives/batches/156-4/batch-01.pdf (a copy of
+% 156-4.pdf fetched through the project's relay; no cover sheet in the batch, so
+% PDF page k = folder page k), per the skill transcribe-grothendieck. The folder
+% is eighty-eight pages in five batches; this is the first.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-09-26 — first pass, unchecked against the pages by a human.
+%
+% Pages skipped: none. Pages summarised: none. All twenty leaves are
+% mathematics in his hand and all are transcribed.
+%
+% His pagination 1-20 runs across the top of the leaves and coincides with the
+% archivists'. Page 1 carries the heading « Analysis situs (première mouture) »,
+% under it « (10 Juin 1986) », and top right « GF IV » (Géométrie des formes,
+% chapter IV). A second date, « (11 juin) », underlined, stands in the left
+% margin of page 18. Both are given in \note{}s where they occur. His numbered
+% runs: « 1. » and « I) Figures » on page 1 (conditions a)-d), f), and a
+% marginal e)); the structure data (1)-(4) on page 9 (circled), extended by (5)
+% on page 15 and a cancelled (6); axioms Fig_1 (p. 10), Fig_2 (p. 11); for a
+% « contrée », data 1°)-4°) (p. 17) and axioms Contr_1 (p. 17), Contr_2
+% (p. 18, a first version cancelled), Contr_3 (p. 20, begun and cancelled).
+% The bracketed « [Chapitre] » of the inventory title is the archivists'.
+%
+% What the batch is about. The first draft of chapter IV. The model is a
+% (tame) topological space: a « figure » is a closed part X with a locally
+% finite decomposition into closed strata X_i (non-empty, locally connected,
+% X_i rare in X_j for X_i ⊊ X_j, ∂X_i the union of smaller strata, int X_i a
+% connected manifold, X_i ∩ X_j a union of strata), identified with its set
+% of strata, so 𝔉 ⊂ 𝔓(𝔓_f(X)); Σ_F the ordered set of strata and Σ = ∐ Σ_F
+% (p. 2). Sub-figures correspond to down-closed parts of Σ_F; « figures
+% élémentaires » (one greatest stratum) form an ordered set 𝔉_él, and a figure
+% is recovered as the closed part Σ'_F of 𝔉_él (pp. 3-4). F-saturated parts
+% and compatibility of two figures (open strata disjoint or equal, a) ⇔ b)
+% sketched by induction on dimension; pp. 5-7), configurations, locally finite
+% configurations as an antifilter, and the resulting axiomatic structure (1)-(4)
+% on 𝔉_él (pp. 7-10); axioms Fig_1, Fig_2 and combinatorial dimension,
+% dimension-0 figures = submanifolds (pp. 10-12). Subdivision and a second
+% order « F' ≪ F » (F' raffine F) on figures, with subdivision = maximal
+% refinement of same support, and an attempted justification that runs into
+% « un pb, qui a l'air intéressant » of topology of a stratified space inside a
+% manifold (pp. 13-16). Page 17 abstracts a « contrée » from (𝔉_él, ≪, 𝓡,
+% locally finite parts); geometric dimension via chains X_0 < … < X_{n-1} ≪ X_n
+% (p. 18); page 19 renames « figure élémentaire » as « multistrate » and
+% defines the « lieux » as the ≪-minimal multistrates, ℒ ⊂ 𝓜; page 20 sets
+% up ℒ_X, ℒ̂_X and ℒ_F, ℒ̂_F to reconstruct ≪ and compatibility from them, and
+% breaks off on a cancelled Contr_3.
+%
+% Notation fixed once. The ambient space of page 1, a boxed/crossed X, is set
+% \mathbb{X}; from page 10 on the elementary figures (multistrates) are a
+% barred X, set \mathbf{X} (the bar is not always written, and plain X is kept
+% where he writes plain X). 𝔉, 𝔉_él, 𝔓 are \mathfrak; his barred cursive
+% capital for a part of 𝔉_él is \Phi; compatibility is \mathcal{R}; the
+% lieux and multistrates \mathcal{L}, \mathcal{M}; the figure on page 20
+% \mathcal{F}. His underlining is set \emph. His circled numerals are given as
+% (n) with a note.
+%
+% Hard pages: 5 (top half cancelled, long unread margin), 6 (the proof of
+% a) ⇒ b), heavily corrected), 16 (full-margin note unread), 18 (lower half a
+% palimpsest of oblique insertions, read only as a main thread). Readings
+% flagged and not settled include « contrée » vs its first use on p. 17 (settled
+% by p. 1, where it is clear), « décomposées » (p. 12), « se déduit » (p. 14),
+% « canonique » (p. 16). Variances on the page kept as written: « {X_i} ∈
+% 𝔓(Y) » for a part called X (p. 1); « raffine F' » for raffine F (p. 15);
+% 𝔉 for 𝔉_él (p. 12); 𝔓(𝔓(X)) for 𝔓(𝔓(ℒ)) (p. 20).
+
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{156-4}
+\batch{1}
+\pages{1}{20}
+\dating{1986}
+\watermark{Édition de démonstration}
+\foldertitle{[Chapitre] IV. Analysis situs (première mouture) : notes manuscrites (10/06/1986)}
+
+\begin{document}
+\page{1}
+\section{Analysis situs (première mouture)}
+
+\note{titre de sa main, souligné, en tête de la page 1, suivi de « (première mouture) » ; dessous, la date de sa main « (10 Juin 1986) ». Dans l'angle supérieur droit, dans un angle tracé à la plume, « GF IV » (le chiffre souligné) : Géométrie des formes, chapitre IV. Il numérote ses pages de 1 à 20 en haut des feuillets ; sa numérotation coïncide ici avec celle des archivistes}
+
+1. Comme modèle « ensembliste topologique » de l'axiomatique d'un « modèle de formes \add{topologiques} » (cas d'une « \emph{contrée} »), considérons les notions suivantes. Modèle : un « espace » $\pm$ ordinaire.
+\note{« topologiques » est écrit sous la ligne et renvoyé par un trait après « formes »}
+
+On suppose ici que $\mathbb{X}$ \supplied{est} un espace topologique séparé, \uncertain{ou} un espace modéré (pas néc. compact) pour une théorie modérée donnée. Dans ce cas « partie fermée » signifie « partie fermée \uncertain{modérée} ».
+\note{l'espace ambiant est noté par un X double, encadré ou barré, rendu ici $\mathbb{X}$ ; le mot sous « partie fermée », à la fin de la ligne, est surchargé}
+
+I) \emph{Figures}. Une \emph{figure} $F$ / de $\mathbb{X}$ est une partie fermée $X$, \emph{munie} d'une décomposition de $Y$ en \struck{\ill{}} \add{parties} $X_i$ :
+\[
+  \{X_i\} \in \mathfrak{P}(Y) \qquad X = \bigcup X_i
+\]
+appelées les \emph{strates fermées}. On fait les hypothèses
+\note{« de $Y$ », « $\mathfrak{P}(Y)$ » : sic, pour la partie fermée appelée $X$ une ligne plus haut}
+\marginal{$X$ est appelé \struck{\ill{}} le \uncertain{support} de la figure $|F|$}
+\note{note oblique dans la marge gauche, en face de la définition ; lue en partie}
+
+\begin{itemize}
+  \item[a)] Les $X_i$ fermés \add{non vides et loc. connexes} (pas néc. \uncertain{connexes}) \struck{\ill{}} \ill{}
+  \marginal{(loc. c'est automatique si $\mathbb{X}$ l'est, \ill{} i.e. $\mathbb{X}$ \ill{})}
+  \note{la note de marge est entre accolades sur la page}
+  \item[b)] La famille des $X_i$ est loc. finie
+  \item[c)] Si \struck{\ill{}} \add{(dans \uncertain{hyp.} a) b))} \struck{\ill{}} \add{$\Rightarrow$ réunion \ill{} de strates est fermée} $X_i \subset X_j$, $X_i \neq X_j$ (i.e. $i < j$) alors $X_i$ \emph{rare} dans $X_j$
+  \item[d)] Posant $\partial X_i = \struck{\ill{}} \bigcup_{j < i} X_j$ (dans $X_i$
+\end{itemize}
+\note{les ajouts à a) et c) sont écrits au-dessus de la ligne, serrés contre le bord droit ; la fin de la ligne a) est surchargée et n'est lue qu'en partie}
+\marginal{NB on pose $i \leq j \Leftrightarrow X_i \subset X_j$, \quad $i < j \Leftrightarrow X_i \subsetneq X_j$}
+
+\page{2}
+est fermé dans tous \uncertain{les} $X_i$, par a) b) c)) alors
+\[
+  \mathrm{int}(X_i) = X_i \smallsetminus \partial X_i
+\]
+(qui est donc un ouvert \add{rel.} dans $X_i$ \add{\ill{} $(X_j)$}, et non vide puisque $X_i$ l'est) \struck{\ill{}} \add{soit} 1°) une \emph{variété} 2°) \emph{connexe}. (NB dans le cas $\mathbb{X}$ modéré, on prend « variété » au sens modéré, \uncertain{entendu}.)
+\note{« soit » et « $(X_j)$ » sont écrits au-dessus de la ligne ; « variété » est souligné deux fois}
+
+f) $X_i \cap X_j$ est réunion \add{de} $F$, $X_k$.
+\note{lettre « f) » écrite sur un autre signe ; le « $F$ » gras est écrit au-dessus de « de », sans doute pour « de strates de $F$ »}
+\marginal{e) Si \struck{$X_i < X_j$}, alors \uncertain{dim} \ill{} $(X_{ij})$ \ill{} \uncertain{les} \ill{}}
+\note{la condition e) est écrite en oblique dans la marge gauche, en partie biffée, avec un trait fléché et les signes « $+1$ », « $+0$ » près d'un gribouillis ; elle n'est lue que par fragments}
+
+Donc une figure \add{$F$} peut s'identifier à l'ens. de ses strates, qui est un ens. de parties fermées de $X$
+\[
+  F \subset \mathfrak{P}_f(X) \qquad \text{i.e.} \qquad F \in \mathfrak{P}(\mathfrak{P}_f(X))
+\]
+($X$ se reconstituant \add{$\{X_i\}$} comme $\bigcup X_i$), satisfaisant certaines conditions \add{(qui \uncertain{vérifient} \ill{}, a) à d))}. On a donc l'ens. des figures, \struck{\ill{}} soit $\mathfrak{F}$, qui est donc un ens. de parties de $\mathfrak{P}_f(X)$
+\[
+  \mathfrak{F} \subset \mathfrak{P}(\mathfrak{P}_f) \qquad \text{i.e.} \qquad \mathfrak{F} \in \mathfrak{P}(\mathfrak{P}(\mathfrak{P}_f(X)))
+\]
+\note{$\mathfrak{P}_f(X)$ : l'indice $f$ semble désigner ici les parties fermées ; à la page 2 le $X$ de $\mathfrak{P}_f(X)$ est écrit en gras}
+
+À chaque $F \in \mathfrak{F}$ est associé l'ens. \emph{ordonné} $\Sigma_F$ de ses strates. L'ens. somme
+\[
+  \Sigma = \coprod_{F \in \mathfrak{F}} \Sigma_F \longrightarrow \mathfrak{F}
+\]
+s'identifie à l'ens. des couples $(F, X_i)$, \struck{\ill{}} où $F$ est une figure et $X_i$ est une strate de $F$ i.e. $X_i \in F$.
+\note{la flèche est verticale sur la page, de $\Sigma$ vers $\mathfrak{F}$}
+\marginal{les fibres sont les $\Sigma_F$}
+\marginal{\emph{NB} Dans le cas d'espèce, \ill{} à $\Sigma_F = F$ \struck{mais \ill{} \ill{}}}
+
+\page{3}
+Si $F$, $F'$ sont deux figures, on dit que $F'$ est une \emph{sous-figure} de $F$, si toute strate de $F'$ est une strate de $F$, i.e. $F' \subset F$. Donc \struck{le support} \uncertain{on a} \struck{$\sigma(F)$} et
+\[
+  |F'| \subset |F|
+\]
+\emph{NB} Si $X_i \in F'$, et $Y_j \in F$ est tel que $Y_j \subset X_i$, alors $Y_j \in F'$ \struck{En effet \ill{} $Y \in$ \ill{} $(Y_j)$, alors} \struck{La relation}
+
+On écrit $F' \leq F$ pour cette relation, qui est une relation d'ordre dans $\mathfrak{F}$. L'ens. des sous-figures de $F$ est en corr. 1-1 avec l'ens. des parties $\Phi$ \add{($\subset \Sigma_F$)} de \struck{$\Sigma$} $\Sigma_F$ \add{(ens. des strates)} qui ont la propriété que \add{($i, j \in \Sigma_F$, $i \in \Phi$)}
+\[
+  j \leq i \Longrightarrow j \in \Phi
+\]
+(idéaux \struck{\ill{}} « \uncertain{fermés} » de l'ens. \struck{\ill{}} ordonné, pour la top. \ill{} \add{sur $\Sigma_F = \Sigma$} \struck{de fermés} \struck{d'ouverts} / \add{décroissants les} les $\Sigma_{\leq i}$).
+\note{$\Phi$ rend une capitale cursive barrée, la même qu'aux pages 5, 8-11 pour une partie de $\mathfrak{F}_{\mathrm{él}}$. La fin de la parenthèse est surchargée : l'indice de $\Sigma_{\leq i}$ est écrit sur un signe biffé}
+
+\struck{Ainsi, on a une relation d'ordre sur}
+\marginal{\uncertain{11.6.} \uncertain{plus loin} \quad on dira « \uncertain{multistrate} »}
+\note{dans la marge gauche, en oblique, « 11.6. » souligné, puis quelques mots ; ils semblent renvoyer au 11 juin (page 18) et au terme « multistrate » que la page 19 substitue à « figure élémentaire »}
+\emph{Figure élémentaire} : qui a une strate maximale i.e. $\Sigma_F$ a un plus grand élément. Soit $\mathfrak{F}_{\mathrm{él}}$ l'ens. des figures élémentaires. \struck{Alors}
+\note{$\mathfrak{F}_{\mathrm{él}}$ est entouré d'un cercle}
+
+Pour \uncertain{toute} figure $F$, les sous-figures élémentaires sont en corr. 1-1 avec les
+
+\page{4}
+strates de $F$. \struck{Donc on peut dire}
+\begin{itemize}
+  \item[] $F$ figure
+  \item[] $\Sigma_F$ ens. de ses strates
+  \item[] $\Sigma'_F$ ens. des sous-figures élémentaires.
+\end{itemize}
+On a :
+\[
+  \Sigma'_F \simeq \Sigma_F, \qquad \Sigma'_F \subset \mathfrak{F}_{\mathrm{él}}
+\]
+\note{l'inclusion $\Sigma'_F \subset \mathfrak{F}_{\mathrm{él}}$ est écrite verticalement sous $\Sigma'_F$}
+$F$ est connu quand on connaît $\Sigma'_F \subset \mathfrak{F}_{\mathrm{él}}$, car $F$ est l'ens. des strates des $F' \in \Sigma'_F$.
+
+Mais la relation d'inclusion entre figures s'interprète comme une relation d'inclusion entre parties de $\mathfrak{F}_{\mathrm{él}}$.
+
+\struck{Donc} Considérons la relation d'inclusion $\leq$ entre figures élémentaires. \struck{Alors} \add{Ainsi,} $\mathfrak{F}_{\mathrm{él}}$ est un ens. ordonné. \add{Si} \struck{Donc} $F$ est une figure, $\Sigma'_F$ est une \struck{figure dont \uncertain{dites}} partie fermée de l'ens. ordonné $\mathfrak{F}_{\mathrm{él}}$. L'inclusion entre figures est l'inclusion entre ces parties fermées.
+\note{au-dessus de la ligne biffée, « $F$ est une figure » est récrit ; « Ainsi » et « Si » sont écrits au-dessus des mots biffés}
+
+\page{5}
+\struck{Pour qu'une partie $\Phi$ de $\mathfrak{F}_{\mathrm{él}}$ soit de la forme $\Sigma'_F$, il faut et \uncertain{suffit} :}
+
+\struck{a) Que $\Phi$ soit une partie fermée de $\mathfrak{F}_{\mathrm{él}}$}
+
+\struck{b) Que la \struck{famille} \ill{} \ill{} $|\varphi|$, \ill{}}
+
+\struck{\add{$F$, $F'$} Deux figures \ill{} \uncertain{dites}}
+
+\struck{Considérons deux figures $F$, $F'$, \uncertain{vérifiant} les conditions $|F| \cap |F'|$}
+\note{le haut de la page, jusqu'à « $|F| \cap |F'|$ », est barré de longs traits obliques, les dernières lignes étant de plus enfermées dans un contour}
+
+Soit $F$ une figure, une partie $A$ de $|F| = \mathrm{supp}\, F$ est dite \struck{\ill{}} \emph{$F$-saturée}, si saturée (pour $F$) i.e. elle est saturée pour la relation d'équivalence définie par les \struck{$X_i$} $\mathrm{int}(X_i)$ \add{(strates « ouvertes »)}. Si \ill{} $(X_i)$ est l'ens. des strates), cela signifie que \ill{} réunion de strates (fermées)
+
+\marginal{\ill{} relation \ill{} $\cap$, $\cup$ \ill{} $|F|$ \ill{} $A$ \ill{} $F'$ \ill{} $A$ \ill{} $|F|$ \ill{} figure \ill{} $F' \subset (F')$ \ill{} $|F'|$ \ill{}}
+\note{une longue note oblique couvre la marge gauche du bas de la page ; seuls des fragments en sont lus}
+
+Soient $F$, $F'$ deux figures. Considérons les conditions
+
+\struck{a) $|F| \cap |F'|$ est $F$-saturée et $F'$-saturée}
+
+a) $\forall\, X \in \Sigma_F$, $X' \in \Sigma_{F'}$, $X \cap X'$ est \struck{\ill{}} $F_X$-saturée \struck{dans $F_X$} et $F'_{X'}$-saturée
+
+\page{6}
+\struck{c) $\exists$ \struck{sous-}figure $F''$, telle que}
+
+\struck{1°) $F''$ sous-figure de $F$, et de $F'$}
+
+\struck{2°) \struck{\ill{}} $(|F| \cap |F'|) = |F''|$}
+
+\struck{Si \struck{$X$} $U$ strate \uncertain{connexe} de $F$, $U'$ strate}
+\note{ces lignes sont barrées de traits obliques}
+
+b) Si $U_i$ est une \struck{cellule} \add{strate} ouverte de $F$, $U'_j$ strate ouverte de $F'$, alors on a
+\[
+  U_i \cap U'_j = \emptyset \quad \text{\emph{ou}} \quad U_i = U'_j .
+\]
+
+Ces conditions sont équivalentes
+
+\struck{b $\Rightarrow$ a trivial (puisque $|F| = \bigcup X_i$, $|F'| = \bigcup X'_j$)}
+
+\struck{\ill{}} b) $\Longrightarrow$ a) trivial, prouvons
+
+a) $\Longrightarrow$ b) \struck{Si} Supposons que \add{prouvons $U_i = U'_j$,} $U_i \cap U'_j \neq \emptyset$, \struck{$U_i \neq U'_j$ donc} \struck{\ill{} $X_i \neq X'_j$ Considérons $X_i \cap X'_j$ ($\neq \emptyset$),} soit \add{$x \in$} $U_i \cap U'_j$, Considérons $X_i \cap X'_j$, est \add{fermée} $F_{X_i}$-saturée, \struck{\ill{}} \add{et} \struck{et le \ill{}} \ill{} $x \in U_i$, \ill{} $X_i \subset X_i \cap X'_j$, \struck{\ill{} $X_i \cap X'_j$} i.e. $X_i \subset X'_j$. \ill{} $= X'_j \subset X_i$
+\[
+  X_i = X'_j .
+\]
+\struck{Donc} On en conclut \ill{} directement \struck{\ill{}} $\partial X_i = \partial X'_j$. Mais \struck{$X_i$} $U_i = U'_j$, \struck{on a} \add{i.e. a) $\Rightarrow$ b)} On \struck{le} prouve \add{par récurrence sur} $\sup(\dim F, \dim F')$ (on est \struck{\ill{}} \struck{ramené} \add{ramené} au cas des figures $F_{X_i}$, $F'_{X'_j}$ \add{de dim.} i.e. \uncertain{finie}\ldots)
+\note{le raisonnement est écrit vite et beaucoup corrigé : plusieurs débuts de ligne, dans la marge gauche, sont biffés ; l'ordre des ajouts interlinéaires n'est pas sûr}
+
+\page{7}
+On dit que $F$, $F'$ sont \emph{compatibles} si les conditions en question sont satisfaites. Pour ceci, il faut et il suffit que pour toutes $F_0 \in \Sigma'_F$, $F'_0 \in \Sigma'_{F'}$, $F_0$ et $F'_0$ soient compatibles.
+
+Donc, dans l'ens. \add{ordonné $\mathfrak{F}_{\mathrm{él}}$} des figures élémentaires, on a introduit une relation symétrique, réflexive)
+\[
+  \mathcal{R} \subset \mathfrak{F}_{\mathrm{él}} \times \mathfrak{F}_{\mathrm{él}}
+\]
+\marginal{\struck{\ill{}} $F_0$ comp. avec $F'_0$}
+ou encore
+\[
+  S \subset \mathfrak{P}_2(\mathfrak{F}_{\mathrm{él}})
+\]
+\marginal{paires compatibles}
+\note{les deux gloses sont écrites à droite des formules ; devant la première, un mot est raturé}
+
+\emph{NB} Si \struck{\ill{}} $F_0$, $F'_0$ sont des fig. él. telles que $F_0 \leq F'_0$, alors elles sont compatibles. Mieux, si $F'_0, F''_0 \leq F$, \uncertain{alors} $F_0$ et $F'_0$ sont compatibles entre elles
+\note{sic : « $F_0$ et $F'_0$ » après « si $F'_0, F''_0 \leq F$ » ; la fin de la phrase est écrite sous la ligne}
+
+\emph{Configuration} Ens. de figures deux à deux compatibles. Configuration élémentaire : ens. de figures élémentaires deux à deux compatibles.
+
+\page{8}
+Soit $F$ une figure, \struck{$\Sigma'$}
+\[
+  \Sigma'_F = \Phi \subset \mathfrak{F}_{\mathrm{él}}
+\]
+la partie de $\mathfrak{F}_{\mathrm{él}}$ associée. \struck{Alors} On a les conditions
+\begin{itemize}
+  \item[a)] $\Phi$ est fermée dans l'ens. ordonné $\mathfrak{F}_{\mathrm{él}}$
+  \item[b)] Si \struck{$F_0, F'_0 \in$} $\mathfrak{F}_1, \mathfrak{F}_2 \in \Phi$, \add{$\mathfrak{F}_1 \neq \mathfrak{F}_2$} alors $\mathfrak{F}_1$, $\mathfrak{F}_2$ sont compatibles, i.e. $\Phi$ est une \emph{configuration}
+  \item[c)] $\Phi$ est « loc. fini » en un sens convenable.
+\end{itemize}
+\note{$\mathfrak{F}_1$, $\mathfrak{F}_2$ : il écrit ici deux éléments de $\mathfrak{F}_{\mathrm{él}}$ avec la même capitale cursive que $\mathfrak{F}$}
+
+\ill{} si on veut exclure le cas des figures infinies, il faut aussi considérer dans $\mathfrak{F}_{\mathrm{él}}$ \ill{} donnée des parties loc. finies (i.e. dont la famille des supports dans $X$ est loc. finie) qui forment un antifiltre dans $\mathfrak{F}_{\mathrm{él}}$.
+
+Inversement, tout $\Phi$ satisfaisant a) b) c) provient d'une figure et d'une seule.
+
+\page{9}
+Ainsi, on est arrivé à la structure suivante
+\begin{itemize}
+  \item[(1)] $\mathfrak{F}_{\mathrm{él}}$ ens. des « figures élémentaires »
+  \item[(2)] relation d'ordre sur $\mathfrak{F}_{\mathrm{él}}$, $\leq$ (inclusion des figures)
+  \item[(3)] relation symétrique réflexive $\mathcal{R}$ \struck{\ill{}} « $F$ et $G$ \emph{compatibles} ». \struck{\ill{}} \add{\emph{Configuration} (élémentaire) partie de $\mathfrak{F}_{\mathrm{él}}$ formée d'él. deux à deux compatibles}
+  \item[(4)] \struck{Antifiltre sur $\mathfrak{F}_{\mathrm{él}}$ des parties} Parmi les configurations, \struck{\ill{}} \struck{\ill{}} celles qui sont « loc. finies », \struck{un} \add{\ill{} de l'ens.}
+  \[
+    \mathrm{Conf}_{\mathrm{l.f.}} \subset \mathfrak{P}(\mathfrak{F}_{\mathrm{él}})
+  \]
+\end{itemize}
+\note{les nombres (1) à (4) sont cerclés sur la page. La définition de « configuration » dans (3) est écrite au-dessus et à droite de la ligne, par-dessus un mot biffé}
+\marginal{\ill{} deux à deux compatibles \ill{}}
+\note{note oblique dans la marge gauche, en face de (3) et (4), lue en partie}
+
+\struck{Avec} propriétés d'antifiltre :
+\begin{itemize}
+  \item[a)] Toute configuration réduite à une seule figure él. est loc. finie
+  \item[b)] Si $\Phi$ est une configuration, $\Phi$ loc. finie ssi la \struck{\ill{}} partie fermée (pour la rel. d'ordre $\leq$) \ill{}
+  \item[c)] Si $\Phi$ est une configuration, \struck{$\Phi$, $\Psi$} loc. finie dans \uncertain{la}, \uncertain{toute} $\Psi \subset \Phi$ est loc. finie
+  \item[d)] Si $\Phi$ est une configuration, $\Phi = \bigcup \Phi_i$ (réunion finie) où les $\Phi_i$ sont loc. finies, alors $\Phi$ \uncertain{aussi}.
+\end{itemize}
+\note{au-dessus de c), un mot (« l'\ill{} ») rattaché à la fin de b), qui porte peut-être sur la partie fermée engendrée par $\Phi$}
+\marginal{(les \uncertain{configurations} \ill{} « \ill{} ») : loc. finies \ill{} \ill{} $X$ \ill{} finies}
+\note{seconde note oblique dans la marge gauche, en face de a)--d), lue par fragments}
+
+\page{10}
+On définit dans l'ens. $\mathfrak{F}$ des \emph{figures}, comme l'ens. des parties $\Phi = \Sigma'_F$ de $\mathfrak{F}_{\mathrm{él}}$, qui sont
+\begin{itemize}
+  \item[a)] des configurations
+  \item[b)] fermées pour la relation d'ordre
+  \item[c)] loc. finies.
+\end{itemize}
+\note{un « $F$ » est écrit au-dessus de « figures »}
+\emph{Figures finies} : parties finies de $\mathfrak{F}_{\mathrm{él}}$ satisfaisant a) et b).
+\marginal{\uncertain{satisfaisant} a) \ill{} c) \ill{} \ill{} $X \ill{} \mathfrak{F}_{\mathrm{él}}$ \ill{} figures \ill{} \ill{}}
+\note{deux notes obliques couvrent la marge gauche en face de ces lignes, en partie sur « \emph{finies} » ; elles ne sont lues que par fragments}
+
+Notons encore une propriété, en plus des propriétés a) à d) \add{(p. 9)} ci-dessus, de la relation entre (2) et (3)
+\note{(2) et (3) sont cerclés ; ils renvoient aux données (2), (3) de la page 9, dont viennent aussi les propriétés a) à d)}
+
+\struck{Axiome d.}
+
+\emph{Fig$_1$} Si $\mathbf{X}_1, \mathbf{X}_2 \leq \mathbf{X}$ sont des fig. él. alors $\{\mathbf{X}_1, \mathbf{X}_2\} \in \mathcal{R}$ i.e. $\{\mathbf{X}_1, \mathbf{X}_2\}$ est une configuration. [Dans l'ens. \add{des $\mathbf{X}'$} $\mathbf{X}' \leq \mathbf{X}$ est une configuration, et en vertu de a) b) c) donc est une \emph{figure} : la figure associée à $F$\ldots]
+\note{à partir d'ici il note les figures élémentaires par un $X$ barré, rendu $\mathbf{X}$ ; le premier $\mathbf{X}_1$ est écrit sur un signe biffé. Le « $F$ » de la fin est sic, pour $\mathbf{X}$}
+\marginal{\ill{} figure élémentaire associée \ill{}}
+\note{note oblique dans la marge gauche, en face du crochet, lue en partie}
+
+\page{11}
+\emph{Fig$_2$} \add{Soit $\mathbf{X} \in \mathfrak{F}_{\mathrm{él}}$,} Considérons l'ens. ordonné des $\mathbf{X}' \leq \mathbf{X}$ est \emph{de dim. comb. finie}, i.e. il existe un entier $n$, tel que les parties finies \struck{\ill{}} majorées par $\mathbf{X}$, \add{et tot. ordonnées} sont de cardinal $\leq n$.
+\note{l'ajout « Soit $\mathbf{X} \in \mathfrak{F}_{\mathrm{él}}$, » est écrit au-dessus de la ligne et renvoyé devant « Considérons » ; « et tot. ordonnées » est écrit au-dessus de la ligne. Fig$_1$ et Fig$_2$ sont réunis par un trait vertical dans la marge}
+
+La \emph{dimension combinatoire} d'un $\mathbf{X} \in \mathfrak{F}_{\mathrm{él}}$ est le Sup des cardinaux des parties finies $\Phi$ précédentes, diminués de 1. Donc la dim combinatoire est $\geq 0$, et elle est nulle ssi $\mathbf{X}$ est un élément \emph{minimal} de $\mathfrak{F}_{\mathrm{él}}$.
+
+Dans les exemples types, \uncertain{ce} les figures élémentaires minimales correspondent aux parties fermées de $X$ qui sont des \emph{variétés connexes}.
+
+Si $\Phi \subset \mathfrak{F}_{\mathrm{él}}$ est une figure, sa \emph{dim combinatoire} est le dim combinatoire, en tant qu'ens. ordonné, i.e. c'est le sup des dim combin. $\mathbf{X}$, pour $\mathbf{X} \in \Phi$. Elle est nulle ssi $\Phi \neq \emptyset$ et \struck{$\Phi$ est formé de \ill{}} la relation
+
+\page{12}
+d'ordre sur $\Phi$ est discrète i.e. $\Phi \neq \emptyset$ et formé d'éléments minimaux de $\mathfrak{F}$.
+\note{sic : $\mathfrak{F}$, pour $\mathfrak{F}_{\mathrm{él}}$}
+
+Ce sont donc les \struck{ens.} \struck{configurations} parties de $\mathfrak{F}_{\mathrm{él}\,\mathrm{min}}$ qui ont les propriétés suivantes
+\note{« formé de fig. él. » est écrit à droite, au bout de la ligne}
+\begin{itemize}
+  \item[a)] c'est une configuration, i.e. \add{mutuellement} \struck{dis} compatibles, et elle est non vide
+  \item[b)] Elle est loc. finie.
+\end{itemize}
+
+Dans les exemples types, ceci correspond aux parties \add{fermées} $Y$ de $X$ qui sont des sous-variétés \add{non vides}, \uncertain{décomposées} en strates par les composantes connexes.
+
+Ainsi, les figures de dim $\leq 0$ s'identifient les \emph{sous-variétés} (en sens strict, i.e. avec stratification triviale). La sous-variété vide correspond à la configuration vide.
+
+\page{13}
+\emph{Subdivision d'une figure}. \struck{\ill{}} On se reporte au cas-type. Soit une figure $F$, fermée de $X$ et de \struck{\ill{}} de ses strates $X_i$. Une \struck{subdivision} de figure $F'$ qui est une subdivision de $F$ est \struck{\ill{}} définie par les propriétés
+\note{le $\mathfrak{F}$ en tête de la ligne suivante est barré ; « fermée de $X$ et de ses strates $X_i$ » : sic, la phrase n'est pas achevée}
+
+a) $|F'| = |F|$ \qquad b) la relation d'équiv. dans $X = |F|$ définie par $F'$ est plus fine que celle définie par $F$.
+
+La condition b) implique
+
+b') $\forall\, X_i$, strate (fermée) de $X$ pour $F$, $X_i$ est réunion de strates de $X$ pour $F'$, et \add{elle} \struck{\ill{}} est $=$ équivalente. Ainsi, les strates pour $F'$ qui sont $\subset X_i$, forment une figure, qui \add{est une subdivision de $F_{X_i}$} \add{élémentaire} \struck{\ill{}} (la figure \add{induite} par $F$ sur $X_i$) Mais en fin de compte cette figure, de support $X_i$, n'est pas nécessairement élémentaire (une subdivision d'une figure élém. peut n'être pas élémentaire)
+\note{« est une subdivision de $F_{X_i}$ », « élémentaire » et « induite » sont écrits au-dessus des lignes ; leur place exacte dans la phrase n'est pas sûre}
+
+\page{14}
+On va dire les choses autrement, en introduisant une autre relation d'ordre dans $\mathfrak{F}_{\mathrm{él}}$, plus fine que l'inclusion. \struck{\ill{}}
+
+Soient $F$, $F'$ deux fig. \struck{élémentaires}. Je dis que $F' \ll F$ (que $F'$ \emph{raffine} $F$) si \struck{toute} \struck{cellule} strate \emph{ouverte} de $F'$ est contenue dans une \add{(unique, bien sûr)} strate ouverte de $F$. \emph{NB} On a aussi \struck{\ill{}} donc $|F'| \subset |F|$, mais pas nécessairement $|F'| = |F|$) C'est une relation \emph{d'ordre} sur l'ens. des figures, plus forte que celle d'inclusion (qui signifie \struck{\ill{}} que toute \add{strate} \struck{cellule} ouverte de $F'$ est une \add{strate} \struck{cellule} ouverte de $F$). Cette relation \ill{} \ill{} \struck{\ill{}} \ill{} \uncertain{se déduit} de la relation d'ordre induite sur l'ens. des figures élémentaires, $\mathfrak{F}_{\mathrm{él}}$, \ill{} on a
+\note{dans la première formule, les indices et exposants de $F$, $F'$ sont surchargés (restes d'une notation $F_0$, $F'_0$ abandonnée) ; on garde la lecture finale $F' \ll F$. Au-dessus de la ligne, une parenthèse fermante renvoie après « $|F'| = |F|$ »}
+
+$F'$ raffine $F$ ssi pour tout \struck{$F'_{X'}$} ($X' \in \Sigma_{F'}$), $\exists\, X \in \Sigma_F$, telle que $F'_{X'}$ raffine $F_X$
+
+\page{15}
+Ceci dit, une figure $F'$ est une \emph{subdivision} d'une figure $F$ ssi elle \emph{raffine} $F'$, et \add{si} elle a \emph{même support}. Mais (cf plus bas) cela équivaut : \add{ssi} $F$ est \emph{maximale} \add{par} \struck{parmi} les figures qui raffinent $F$. \struck{\ill{}} Ainsi, on trouve \ldots{} \ill{} \ill{} de structure :
+\note{sic : « raffine $F'$ », pour « raffine $F$ ». Cette phrase est très corrigée : « ssi », « Mais (cf plus bas) », « par » sont écrits au-dessus de la ligne ; « la relation $\leq$, \struck{pour} tout \ill{} les » est intercalé et n'est lu qu'en partie}
+
+\begin{itemize}
+  \item[(5)] Une relation d'ordre $\ll$ sur $\mathfrak{F}_{\mathrm{él}}$ (« raffinement »), impliquée par $\leq$, d'où une relation, pour deux figures $F \subset \mathfrak{F}_{\mathrm{él}}$ et $F' \subset \mathfrak{F}_{\mathrm{él}}$, \emph{$F$ raffine $F'$} :
+  \[
+    \struck{\ill{}}\ \forall\, X \in F, \quad \exists\, X' \in F' \text{ telle que } X \ll X'.
+  \]
+\end{itemize}
+\note{(5) est cerclé, à la suite des données (1) à (4) de la page 9. Devant $\forall$ et devant $F$, des signes sont raturés}
+
+Ceci posé : $X \leq X'$ ssi \add{Pour $X, X' \in \mathfrak{F}_{\mathrm{él}}$, on a :} \struck{$F_{X'}$ \ill{}} $\{X, X'\}$ comp. et $X \ll X'$.
+
+\struck{(6) On appellera subdivision d'une figure $F$, $F' \subset \mathfrak{F}_{\mathrm{él}}$, on a \ill{} des figures $F \ll F'$}
+
+\struck{Conséquence $\Longrightarrow$ $F$, $F'$ compatibles, et}
+
+\struck{$F \leq F'$}
+\note{un (6) cerclé ouvrait ces lignes ; le passage est barré de plusieurs traits}
+\marginal{Dans les structures (3) et (5), \ill{} structure (1) \ill{}}
+\note{note oblique dans la marge gauche, en face du passage biffé ; (3), (5), (1) y sont cerclés}
+
+Ceci posé, on dira qu'une figure $F'$ est une \emph{subdivision} d'une autre $F$, si c'est un \emph{raffinement}, et si elle est maximale, pour la relation $\subset$, parmi les raffinements de $F$.
+
+\page{16}
+\emph{Justification} (?) Revenons au cas type, \add{de $F$} $F'$ un raffinement, tel que $|F'| \neq |F|$. Montrons que $F'$ n'est pas \add{pour $\leq$,} maximal, parmi les raffinements de $F$. On va définir un raffinement \uncertain{canonique} \add{$F''$} de $F$, qui est \struck{\ill{}} une subdivision, et qui contient la figure $F'$. (donc \uncertain{strictement}, puisque $\underbrace{|F'|}_{X'} \neq \underbrace{|F|}_{X} = |F''|$) Les \struck{cellules} strates ouvertes de $F''$ seront
+\begin{itemize}
+  \item[a)] les strates \add{$U'_j$} ouvertes de $F'$
+  \item[b)] Les comp. connexes \add{$V_{i\alpha}$} des \struck{\ill{}} $U_i \smallsetminus U_i \cap X'$ ($U_i$ est une strate ouverte de $F$) (i.e. chaque \uncertain{fois} que ce n'est pas $\emptyset$)
+\end{itemize}
+\note{« $U'_j$ » et « $V_{i\alpha}$ » sont écrits au-dessus des lignes a), b), rattachés par un trait ; « $U_i \cap X'$ » est souligné d'une accolade}
+Il faut prouver les conditions \struck{\ill{}} de stratification, et pour commencer \struck{\ill{}} d'une
+\[
+  \partial V_{i\alpha} \overset{\mathrm{déf}}{=} \overline{V_{i\alpha}} \smallsetminus V_{i\alpha} \quad \text{est réunion de strates}
+\]
+Donc dire que $\partial V_{i\alpha} \cap U_i \subset$ \uncertain{Frontière} de $V_{i\alpha}$ dans $U_i$ \add{$\subset X' \cap U_i$} il y a un pb, qui a l'air intéressant, de topologie d'un espace stratifié \add{$(X' \cap U_i)$} dans une \emph{variété} (top. ou modérée) $(U_i)$
+\note{la fin de la page est serrée et en partie surchargée ; « topologie » est écrit au-dessus d'un mot biffé}
+
+\marginal{À \ill{} \ill{}, \ill{} \ill{} raffinement \ill{} \ill{} subdivision \ill{} \ill{} \ill{} $F'$ \ill{} \ill{} $X'$ \ill{} $U_i \cap F \cup$ \ill{} $F''$ \ill{} figure \ill{} $F'$ \ill{}}
+\note{une longue note oblique occupe toute la marge gauche de la page ; elle n'est lue que par fragments}
+
+\page{17}
+Une \emph{contrée} est définie par la \add{donnée} \ill{}
+\begin{itemize}
+  \item[1°)] Un ensemble de « figures élémentaires », $\mathfrak{F}_{\mathrm{él}}$
+  \item[2°)] Une relation d'ordre \struck{$\leq$} $\ll$ \struck{\ill{}} (raffinement) parmi les figures élémentaires
+  \item[3°)] Une relation réflexive symétrique $\mathcal{R}$ (« compatibilité ») parmi \add{les} figures élémentaires
+  \item[\uncertain{4°)}] \ill{} un antifiltre \uncertain{dans} l'ens. des parties de $\mathfrak{F}_{\mathrm{él}}$, appelées loc. « \uncertain{finies} » -- dans le cas de nos « contrées » finies, ce sont les parties \emph{finies} qui sont des « configurations » i.e. formées de figures él. deux à deux compatibles, satisfaisant à des conditions convenables, à dégager. Il y a déjà celle-ci :
+\end{itemize}
+\note{au-dessus de 1°) et 2°), des mots obliques (« \uncertain{régulière} » ?) et, entre les lignes 2°) et 3°), une insertion oblique « $\leq$ ou \ill{} » ne sont lus qu'en partie ; « compatibilité » est écrit sur un mot biffé ; le numéro « 4°) » est dans la note de marge et n'est pas sûr}
+\marginal{\emph{NB} \ill{} \ill{} \ill{} \ill{} 4°) \ill{} \ill{} configuration \ill{} \ill{} \ill{} contrée finie \ill{} plutôt « configuration » \ill{} figure \ill{}}
+\note{longue note oblique dans la marge gauche, lue par fragments}
+
+\emph{Contr$_1$} Si \add{Soient} deux fig. élémentaires $\mathbf{X}$, $X'$, on \uncertain{pose} $X' \leq \mathbf{X}$ ssi (déf) $X' \ll X$, et $X'$ et $X$ sont comp. alors on trouve une relation \emph{d'ordre},
+
+De plus, en termes de cette relation d'ordre, on a les propriétés Fig$_1$ \add{et $\mathrm{Fig}_2$}
+\[
+  (\Longleftrightarrow [\text{si } X', X'' \ll X, \text{ sont compatibles à } X \text{, ils sont compatibles entre eux}])
+\]
+Fig$_2$ (dim combinatoire finie) On va
+\note{« et Fig$_2$ » (ou « Fig$_{1,2}$ ») est écrit sous « Fig$_1$ » ; « et à $X$, $X'$ » est écrit au-dessus de « sont compatibles ». Un double trait vertical marque la ligne entre crochets dans la marge}
+
+\page{18}
+la \struck{raffinement} \add{renforcer}. \struck{--}
+\note{« renforcer » est écrit au-dessus du mot biffé ; il continue « On va » de la page 17}
+
+\struck{Contr$_2$ Si $\mathbf{X} \in \mathfrak{F}_{\mathrm{él}}$, dans l'ens. \struck{\ill{}} \struck{\ill{}} $\{X' \in \mathfrak{F}_{\mathrm{él}} \mid X' \ll \mathfrak{F}_{\mathrm{él}}\}$}
+\note{ces lignes sont barrées de traits obliques ; sic, « $X' \ll \mathfrak{F}_{\mathrm{él}}$ »}
+
+\emph{Contr$_2$} Pour $\forall\, \mathbf{X} \in \mathfrak{F}_{\mathrm{él}}$, considérons la dim comb. (pour $\leq$) des $X' \in \mathfrak{F}_{\mathrm{él}}$ \struck{tel que} qui raffinent $\mathbf{X}$. Alors les dim. comb. de ces $X'$ est majorée.
+
+\struck{\ill{}} Leur borne sup. s'appelle la \emph{dimension} \add{(géom.)} de $X$. La dim géom d'une figure, est par déf. le sup des \struck{\ill{}} dim géom. des figures élémentaires constituantes. C'est donc le sup \add{des $n$} pour \add{les} \uncertain{longueurs} des \uncertain{chaînes} $(X_0, X_1, \ldots, X_n)$ avec
+\[
+  X_0 < X_1 < \cdots < X_{n-1} \ll X_n \in F .
+\]
+\marginal{\struck{Donc la dimension \ill{}}}
+\note{le « $\ll$ » est écrit plus gras que les « $<$ » ; au bout de la ligne, une insertion serrée (« Elle \ill{} \ill{} \ill{} $F$ \ill{} $F$ raffine $F$, élément \ill{} subdivision ») n'est lue qu'en partie}
+
+\marginal{\emph{(11 juin)}}
+\note{date de sa main, soulignée, dans la marge gauche en face de ce paragraphe : « (11 juin) », c'est-à-dire le 11 juin 1986, le lendemain du 10 juin de la page 1}
+On aurait pu dire \ill{} « \ill{} » \ill{} un \ill{} la notion de parties \add{(\struck{\ill{}})} \emph{constructibles}, et \struck{\ill{}} admissions \add{\ill{} figures \ill{}} \struck{\ill{}} \struck{\ill{}} \uncertain{constructibles} \struck{\ill{}} comme \struck{\ill{}} \ill{} \ill{} \add{d'une figure} \uncertain{de} \uncertain{variétés} \add{à une figure} \ill{} donnée \uncertain{par} \ill{} \ill{}
+\[
+  \ll, \quad \text{compatibilité sur } \mathfrak{F}_{\mathrm{él}} \struck{\ill{}}.
+\]
+\ill{} sérieusement. Pour la \uncertain{peine} ultérieurement, j'ai envie de pousser \struck{\ill{}} un peu dans la direction $\ll$, compatibilité
+\marginal{\uncertain{Aussi} \ill{} \ill{} \ill{} figures \ill{} \ill{} \ill{} \ill{}}
+\note{le bas de la page est un palimpseste : plusieurs lignes d'insertions obliques, en partie biffées, se chevauchent au-dessus du texte principal et dans la marge gauche ; seul le fil principal est donné, par fragments}
+
+\page{19}
+\uncertain{j'en} arrive à la notion de lieu, et d'interprétation des \uncertain{domaines} en termes de lieux.
+
+Mais \uncertain{en} terminologie, au lieu de « figure élémentaire », je préfère dorénavant « \emph{multistrate} », plus parlant. Donc une figure quelconque est un ens. de multistrates mutuellement compatibles, fermé pour $\leq$, et loc. fini.
+
+\struck{\ill{}} On appelle \struck{multi} \emph{lieux} de la contrée, un multistrate qui est minimal pour $\ll$, i.e. qui n'a d'autre raffinement que lui-même. \struck{C'est donc} \struck{C'est donc} \struck{Dans les} (Dans les exemples-types, ils \uncertain{sont} \uncertain{réduits} à une \ill{} \ill{} de parties de $\mathbf{X}$, réduits à une seule partie, qui est ponctuelle -- donc les lieux sont les pts de $X$ --) Ce sont donc aussi des multistrates minimaux pour $\leq$, \struck{\ill{}} \add{i.e. \uncertain{faits} des} « variétés » \struck{\ill{} non vides} -- ce sont les sous-variétés $0$-connexes qui n'ont pas de raffinement autre qu'elle-même.
+\note{à droite des deux lignes biffées « C'est donc », quelques mots raturés dans la marge. $\mathbf{X}$ est ici l'$X$ barré ; « $0$-connexes » : lecture du chiffre sûre, du sens non}
+
+Soit $\mathcal{L}$ l'ensemble des lieux,
+\[
+  \struck{\text{Pour tout}}\ \mathcal{L} \subset \mathcal{M} \quad (= \mathfrak{F}_{\mathrm{él}} = \text{ensemble des multistrates})
+\]
+\note{sous « Pour tout » biffé, un mot (« donc » ?) ; $\mathcal{M}$ est sa capitale cursive M}
+
+\page{20}
+\struck{toute} Pour tout multistrate $X$, soit $\mathcal{L}_X$ \add{$\in \mathfrak{P}(\mathcal{L})$} \struck{l'ens.} des lieux qui raffinent $X$. \marginal{$\widehat{\mathcal{L}}_X$} et soit
+\[
+  \widehat{\mathcal{L}}_X \subset \mathfrak{P}(X) \qquad \text{i.e.} \qquad \widehat{\mathcal{L}}_X \in \mathfrak{P}(\mathfrak{P}(X))
+\]
+l'ensemble des \struck{\ill{}} $\mathcal{L}_Y$ pour $Y \leq X$ ($Y$ sous-multistrate de $X$). \struck{Considérons} \struck{les} J'aimerais reconstituer les structures $\ll$ et comp. sur $\mathcal{M}$, en termes de l'application
+\[
+  X \longmapsto \widehat{\mathcal{L}}_X \qquad \mathcal{M} \longrightarrow \mathfrak{P}(\mathfrak{P}(X)) .
+\]
+\note{le chapeau de $\widehat{\mathcal{L}}_X$ est écrit par-dessus un signe raturé ; $\mathfrak{P}(X)$ : sic, on attendrait $\mathfrak{P}(\mathcal{L})$, comme plus bas}
+
+\struck{\emph{Contr$_3$}} Notons que pour $\mathcal{F} \subset \mathfrak{P}(\mathcal{M})$, \uncertain{sous-ens.} figures, on pose
+\[
+  \struck{\ill{}}\ \mathcal{L}_{\mathcal{F}} = \text{ens. des lieux qui raffinent } \mathcal{F} \quad \text{i.e.} \quad \mathcal{L}_{\mathcal{F}} = \bigcup_{X \in \mathcal{F}} \mathcal{L}_X \in \mathcal{L}
+\]
+\[
+  \widehat{\mathcal{L}}_{\mathcal{F}} = \{\mathcal{L}_X \mid X \in \mathcal{F}\} \in \mathfrak{P}(\mathcal{L}) \qquad \text{i.e.} \in \mathfrak{P}(\mathfrak{P}(\mathcal{L}))
+\]
+qui nous donne
+\[
+  \mathcal{F} \longmapsto \widehat{\mathcal{L}}_{\mathcal{F}} \qquad \mathcal{F} \longrightarrow \mathfrak{P}(\mathfrak{P}(X))
+\]
+\note{il note ici une figure $\mathcal{F}$ par sa capitale cursive F ; « sous-ens. » est écrit au-dessus de la ligne, lecture douteuse. Sic : « $\in \mathcal{L}$ » pour $\subset \mathcal{L}$, « $\in \mathfrak{P}(\mathcal{L})$ » corrigé en « $\in \mathfrak{P}(\mathfrak{P}(\mathcal{L}))$ », et $\mathfrak{P}(\mathfrak{P}(X))$ en fin de page}
+
+\struck{\emph{Contr$_3$} a) Pour que $X \ll Y$ \struck{faut-il} $X, Y \in$}
+
+\struck{Soient $X$, $Y$ deux multistrates. \struck{Si} Supposons $X \ll Y$. Alors pour tout $X_i \leq X$, \ill{}}
+\note{ces dernières lignes sont barrées de traits obliques ; la page s'arrête là}
+
+\end{document}
