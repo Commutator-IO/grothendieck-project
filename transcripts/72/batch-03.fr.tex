@@ -1,0 +1,1467 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 72, batch 3 (pages 41-60).
+% Established from the facsimile archives/batches/72/batch-03.pdf (cut from a
+% copy of 72.pdf fetched through the project's relay,
+% https://grothendieck-relay.onrender.com/source/72.pdf), per the skill
+% transcribe-grothendieck. The folder is 112 pages in six batches (1-20, 21-40,
+% 41-60, 61-80, 81-100, 101-112), transcribed in parallel; this is the third.
+% The raw scan's cover sheet is not in the batch file: PDF page k is
+% archivists' page 40+k, and the pencilled numbers bottom-left (« 41 » ...
+% « 60 ») agree.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-09-27 — first pass, unchecked against the pages by a human.
+%
+% Seventeen of the twenty pages carry a \page marker. Absent: page 43, a
+% wrapper sheet inscribed top right in his hand « Calculs de discriminants
+% etc. », and page 55, a pink wrapper sheet inscribed top right « Calculs
+% antérieurs » (second word read with some doubt); both take no \page and
+% their words become \section* headings with a \note. Page 59, a typed USTL
+% « avis de soutenance » (thèse de 3e cycle in biochemistry) dated
+% Montpellier, 26 juin 1978, upside down, with nothing in his hand, skipped
+% by the settled rule; it is consistent with the archivists' « [à partir de
+% 1978] » and says nothing more.
+%
+% Pages summarised: none. Page 57 is cancelled by a large cross and is
+% given entire under \struck, being legible. On page 54 the last paragraph
+% (« Supposons n pair, n = 2m ... ») is cancelled by two diagonals and is
+% given the same way. Page 58 is a half-size slip in pencil.
+%
+% His pagination: none visible on these leaves; the order is the
+% archivists'. No date in his hand.
+%
+% What the batch is about. Not polytopes directly but the linear algebra
+% under them: a quadratic module (E, V, f) over a base S with a flag of
+% vectors s_i, a_i = s_{i+1} - s_i, the reflections tau_i, and the dual basis
+% a'_i, a*_i. Pages 41-42 end an argument on u = id - (2/rho) pi' (x) pi and
+% state a Proposition: if sigma rho~ is invertible there is a unique section
+% of U_rho, everywhere != 1, respecting f^eps (the conic Q_X), the
+% « antipodisme »; equivalent conditions otherwise (characteristic 2).
+% Under « Calculs de discriminants etc. », pages 44-52 and 56, 58, 60: the
+% Gram values f(a_i) = (alpha_0+2)...(alpha_{i-1}+2) = c_{i-1},
+% phi(a_i, a_{i+1}) = -c_i; the tridiagonal determinants
+% Delta_n(c_0..c_{n-1}) with Delta_n = 2c_0 Delta_{n-1} - c_1^2 Delta_{n-2}
+% (checked, with Delta_1..Delta_3); the substitution c_i = beta_0...beta_i
+% giving delta_n = B_0^n B_1^{n-1}...B_{n-1} L_n(B_1..B_{n-1}), the recurrence
+% L_n = 2L_{n-1} - B_1 L_{n-2}, the expansion of L over sets of pairwise
+% non-consecutive indices, its values mod 2 (pages 49-50); the coordinates
+% xi_i of the vector c~ orthogonal to the a'_i, xi_{n-i} = L_i(beta_{n-1},
+% ..., beta_{n-i+1}), rho = L_{n+1}, sigma = L_n (page 51); smoothness of f_eps
+% and f_V in terms of sigma', rho' (page 52); the « Antipodisme »
+% a = -id + pi (x) c' and the plane spanned by s_0 and c~ in the cases n
+% even / odd, 2 invertible / characteristic 2 (pages 53-54); the dual
+% formulas a*_i = sum rho_{i+1,j} a'_j and a'*_j with rho_{ij} = L(beta_i ..
+% beta_j) (page 60). Page 57 (cancelled) looks for varieties invariant under
+% the reflections, in terms of hyperplanes H_i and points h_i.
+%
+% His arithmetic, checked where it can be: the values of F_1..F_3 / Delta_1..3
+% (pages 45, 48), xi_{n-1}..xi_{n-4} (page 47), L_2..L_4 (page 49), delta_2,
+% delta'_3 (page 49) are right. Flagged in \note: the term « B_3 B_4 » in L_4
+% (page 49); an equality of page 56 that omits a sign (-1)^{n+1}; index slips
+% on page 60 (« rho_{2,2} a'_3 », « 2a_2 »); page 48's first matrix equals
+% -Delta_n, not Delta_n (a blot may hide the sign).
+%
+% Notation, fixed once. His vector written like a small sigma with a tilde,
+% and its normalisations, are read c~, c = c~/rho, c' (as on page 47, where
+% « c = c'/rho » is plain, and page 53, « 2 pi (x) c = pi (x) c' »); a \note
+% says so on page 52. His underlined a (the antipodism) is \underline{a} in
+% math. The script E is \mathcal{E}; the subscript of delta_eps and f_eps is
+% read epsilon (it can look like Sigma). Q_X, U_rho, f^eps as written.
+% Display formulas never carry apparatus: what he struck inside a formula is
+% given in a \note right after it.
+%
+% The dating is the folder's own; the group « Géométrie et topologie
+% combinatoire » (69-89) holds it.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{72}
+\batch{3}
+\pages{41}{60}
+\dating{[à partir de 1978]}
+\watermark{Édition de démonstration}
+\foldertitle{Polyèdres réguliers et hyperpolyèdres réguliers (Calculs en dimension quelconque) : notes manuscrites (s.d.).}
+
+\begin{document}
+
+\page{41}
+\note{la page commence au point « $\beta$) » d'un raisonnement dont le début
+précède cette page ; écriture très rapide, dont une bonne part de la prose ne
+se lit pas}
+
+$\beta$) Car on voit que $\rho = \tilde{\rho}$, $\sigma = 2\tilde{\sigma}$,
+l'équation s'écrit
+\[
+\tilde{\sigma}\,(2 + \lambda\rho) = 0 .
+\]
+Donc si $\sigma$ $(= 2\tilde{\sigma})$ et $\rho$ $(= \tilde{\rho})$
+\uncertain{sont} \ill{}, \struck{\ill{}} $\exists !$ \ill{} $u$ de
+$U_\rho$, \ill{} $\neq 1$, \struck{\ill{}} qui \uncertain{respecte} $f$,
+\ill{} qui revient \ill{} $Q$ \ill{}
+\[
+u = \mathrm{id} - \frac{2}{\rho}\, \pi' \otimes \pi
+\]
+\note{sous la formule, une accolade et deux ou trois mots illisibles
+(\uncertain{antipodisme} ?)}
+
+D'autres \uncertain{pas} \ill{} \uncertain{équivalentes}\struck{\ill{}}
+$(\Leftarrow \sigma\rho)$ :
+\note{« $(\Leftarrow \sigma\rho)$ » est écrit au-dessus de la ligne ; la
+lecture en est incertaine}
+
+a) $2\tilde{\sigma} = \sigma = 0$ et $\tilde{\sigma}\rho = 0$
+
+[\emph{NB} si 2 inv., \uncertain{équivaut} à : $\sigma = 0$ ; si $2$
+\ill{}, \uncertain{équivaut} à : $\tilde{\sigma}\rho = 0$]
+
+b) $U_\rho$ \uncertain{respecte} $f^{\varepsilon}$
+
+c) $U_\rho$ --- $Q_X$
+\note{le tiret est le sien : il répète le verbe de la ligne précédente}
+
+Si \struck{de plus} $\rho = 0$, ces conditions \uncertain{équivalent aussi}
+à :
+
+d) $\exists$ \uncertain{loc.} \uncertain{section} de $U_\rho$
+\uncertain{partout} $\neq 1$ qui \uncertain{respecte} $f^{\varepsilon}$
+(ou encore, $Q_X$)
+
+\marginal{\emph{NB} si $\tilde{\sigma}$ \uncertain{inv.} \ill{} $\sigma$ \ill{}
+\ill{} (car 2) on a \ill{} \uncertain{unique solution} \ill{} $\lambda$,
+\uncertain{savoir} $\lambda = -\frac{2}{\rho}$, mais, \uncertain{pour}
+celle-ci \ill{} \ill{} \ill{} \ill{}. Donc \ill{} \ill{} 1°) et 2°)
+\ill{} \ill{} [$\sigma\rho$ \uncertain{inversible}]}
+\note{note écrite en diagonale dans la marge gauche, montant vers la droite ;
+les derniers mots sont encadrés. Plus bas dans la marge, « \uncertain{i.e.} »}
+
+\page{42}
+[\emph{Ex.} $n = 1$, $\rho = 4 - \beta = 2 - \alpha$,
+$\sigma = \struck{\ill{}}\ 2$, $\tilde{\sigma} = 1$. Donc
+
+\struck{Par} 1°) si \struck{\ill{}}$\rho$ inv.
+\add{i.e. $U_\rho = \mathbb{G}_m$,}
+\struck{alors} $\exists !$ $u \in U_{\rho = 2 - \alpha}$ \ill{} $\neq 1$,
+telle que $u$ \uncertain{respecte} $f^{\varepsilon}$ (ou ce qui revient au
+même, \struck{$Q_X$} la conique $Q_X$) savoir l'antipodisme, qui est l'unique
+\uncertain{solution} \ill{} telle que $u^2 = 1$, $u_\rho \neq 1$
+\ill{}.
+\note{« $U_\rho = \mathbb{G}_m$ » : lecture incertaine du second membre}
+
+2°) Conditions équivalentes
+
+a) $\rho = 0$ et \struck{car} $S$ de car $2$ $(2 \cdot 1_S = 0)$
+
+b) $U_\rho$ \uncertain{respecte} $f^{\varepsilon}$
+
+c) $U_\rho$ --- $Q_X$
+
+d) $\rho = 0$ et $\exists$ loc. section \uncertain{partout} $\neq 1$, qui
+\uncertain{respecte} $f^{\varepsilon}$ (\uncertain{ou encore}, $Q_X$).]
+
+\emph{Proposition} 1) Si $\sigma\tilde{\rho}$ inversible, $\exists !$ section
+$u$ de $U_\rho$, partout $\neq 1$, qui \uncertain{respecte} $f^{\varepsilon}$
+i.e. $Q_X$, savoir l'antipodisme.
+
+2) Conditions équivalentes
+
+a) $\sigma = 0$ et $\tilde{\sigma}\tilde{\rho} = 0$ (cette dernière condition
+conséquence de la première \ill{} \ill{} 2 inv.)
+
+b) $U_\rho$ \uncertain{respecte} $f^{\varepsilon}$
+
+c) $U_\rho$ \uncertain{respecte} $Q_X$
+
+d) (si $\tilde{\sigma}\tilde{\rho} = 0$) $\exists$ loc. section de $U_\rho$
+\uncertain{partout} $\neq 1$, qui \uncertain{respecte} $f^{\varepsilon}$
+(ou $Q_X$)
+\note{un grand « 2 », tracé plus appuyé, à gauche de d) ; la condition
+« si $\tilde{\sigma}\tilde{\rho} = 0$ » est doublement soulignée}
+
+\section*{Calculs de discriminants etc.}
+\note{inscrit à l'encre en haut à droite d'un feuillet de garde (page 43),
+qui ne porte rien d'autre ; ces mots sont de sa main et donnent sans doute le
+titre des feuillets qui suivent}
+
+\page{44}
+\[
+\begin{cases}
+f(s_i) = 0 \\
+\varphi(s_i, s_j) = -(\alpha_0 + 2) \cdots (\alpha_{i-1} + 2) & 0 \leqslant i < j \leqslant n+1
+\end{cases}
+\]
+
+$f$ caractérisée par les conditions a) $f$ inv. par les $\tau_i$ ;
+b) $f(s_0) = 0$ ($\Leftrightarrow$ $f$ nulle sur les \uncertain{sommets
+fixés} \uncertain{au} $\tau_i$) ; c) $f(a_0) = 1$ ($\Leftrightarrow$
+\struck{\ill{}} \uncertain{vecteurs} \uncertain{cités} \uncertain{sont
+unitaires}).
+
+\[
+\begin{aligned}
+& f(a_i) = (\alpha_0 + 2) \cdots (\alpha_{i-1} + 2) && 0 \leqslant i \leqslant n \\
+& \varphi(a_i, a_j) = 0 && 0 \leqslant i < j \leqslant n,\ i, j \text{ non consécutifs} \\
+& \varphi(a_i, a_{i+1}) = -(\alpha_0 + 2) \cdots (\alpha_i + 2) \\
+& \varphi(s_0, a_i) = 0 && 1 \leqslant i \leqslant n \\
+& \varphi(s_0, a_0) = -1 \\
+& \varphi(s_j, a_i) = 0 && 0 \leqslant j < i \leqslant n \\
+& \varphi(s_j, a_j) = -(\alpha_0 + 2) \cdots (\alpha_{j-1} + 2) && 0 \leqslant j \leqslant n \\
+& \varphi(s_j, a_{j-1}) = +(\alpha_0 + 2) \cdots (\alpha_{j-2} + 2) && 1 \leqslant j \leqslant n+1 \\
+& \varphi(s_j, a_i) = 0 && 0 \leqslant i < j-1 \leqslant n
+\end{aligned}
+\]
+\note{après « $0 \leqslant j < i \leqslant n$, » un mot biffé, illisible ;
+entre les deux dernières lignes, une ligne biffée :
+« \struck{$\alpha_i + 2$ \uncertain{inversibles} $0 \leqslant i \leqslant n-1$
+$\Leftrightarrow$} »}
+
+À droite :
+\[
+\begin{cases}
+\varphi(s_0, s_1) = \varphi(s_0, a_1) = -1 \\
+\varphi(s_1, a_0) = f(a_0) = 1 \\
+\tau_0 \text{ str. orth.}
+\end{cases}
+\]
+\note{au-dessus de « $-1$ », qui est encadré, il écrit « $= \varphi(s_0, a_0) =$ »,
+qui semble corriger le second membre : la liste de gauche donne
+$\varphi(s_0, a_1) = 0$ et $\varphi(s_0, a_0) = -1$}
+
+$\tau_i$ réflexion strictement orthogonale $\Longleftrightarrow$
+$(\alpha_0 + 2), \ldots, (\alpha_{i-1} + 2) \in k^{*}$
+
+$(\tau_i$ str. orth. $\forall\, 0 \leqslant i \leqslant n)$ $\Longleftrightarrow$
+$(\alpha_i + 2) \in k^{*}$ $\forall\, 0 \leqslant i \leqslant n-1$
+
+\page{45}
+\[
+\begin{cases}
+f(s_i) = 0 \qquad \varphi(s_i, s_i) = 0 \\
+\varphi(s_i, s_j) = -(\alpha_0 + 2) \cdots (\alpha_{i-1} + 2) & 0 \leqslant i < j \leqslant n+1
+\end{cases}
+\]
+
+\[
+\begin{cases}
+f(a_{-1}) = 0, \quad f(a_i) = (\alpha_0 + 2) \cdots (\alpha_{i-1} + 2) = c_{i-1} \\
+\varphi(a_i, a_i) = 2 f(a_i) = 2(\alpha_0 + 2) \cdots (\alpha_{i-1} + 2)
+\quad (0 \leqslant i \leqslant n) \\
+\varphi(a_i, a_j) = 0 \qquad -1 \leqslant i < j \leqslant n,\ i, j \text{ non consécutifs} \\
+\varphi(a_i, a_{i+1}) = -(\alpha_0 + 2) \cdots (\alpha_i + 2) = -c_i \qquad -1 \leqslant i \leqslant n-1
+\end{cases}
+\]
+\note{à gauche de l'accolade, « $f(a_0)$ » biffé ; au-dessus de la première
+ligne, un début biffé et « $= c_{-2}$ » (lecture incertaine). Au-dessus de
+« $= c_{i-1}$ », une remarque : « \uncertain{attention au décalage des
+notations} ». Un mot biffé et souligné avant « $i, j$ non consécutifs »}
+
+Matrice de $f$ pour la base $(a_i)_{-1 \leqslant i \leqslant n}$
+\note{un premier départ de la matrice, à gauche, est biffé de traits
+ondulés ; seule la matrice de droite est donnée}
+\[
+f = \begin{pmatrix}
+0 & -1 & & & & & \\
+-1 & 2 & -c_0 & & & & \\
+ & -c_0 & 2c_0 & -c_1 & & & \\
+ & & -c_1 & 2c_1 & -c_2 & & \\
+ & & & -c_2 & 2c_2 & -c_3 & \\
+ & & & & -c_3 & 2c_3 & \ddots \\
+ & & & & & \ddots & \ddots \\
+ & & & & & & 2c_{n-2} \quad -c_{n-1} \\
+ & & & & & & -c_{n-1} \quad 2c_{n-1}
+\end{pmatrix}
+\]
+
+\[
+\quad
+\delta(f) = \det \begin{pmatrix}
+-1 & -c_0 & 0 & 0 & \\
+0 & 2c_0 & -c_1 & 0 & \\
+0 & -c_1 & 2c_1 & -c_2 & \\
+ & 0 & -c_2 & 2c_2 & \ddots \\
+ & & & -c_3 & \ddots \quad 2c_{n-1} \\
+0 & 0 & 0 & &
+\end{pmatrix}
+\]
+\[
+= -1 \det \begin{pmatrix}
+2c_0 & -c_1 & & \\
+-c_1 & 2c_1 & -c_2 & \\
+ & -c_2 & \ddots & -c_{n-1} \\
+ & & -c_{n-1} & 2c_{n-1}
+\end{pmatrix}
++ c_0 \det \underbrace{\begin{pmatrix}
+0 & \cdots \\
+0 & \cdots \\
+\vdots & \\
+0 & \cdots
+\end{pmatrix}}_{0}
+\]
+\note{dans la formule précédente, biffé : « \struck{$\det M_f$} »}
+\note{matrices recopiées dans leur forme ; les entrées de la première, écrites
+en escalier, sont partiellement surchargées}
+
+\[
+\det \begin{pmatrix}
+2c_{-1} & -c_0 & 0 & 0 & \cdots & 0 \\
+-c_0 & 2c_0 & -c_1 & & & \\
+0 & -c_1 & 2c_1 & \ddots & & \vdots \\
+\vdots & & \ddots & \ddots & & 0 \\
+ & & & & & -c_{n-1} \\
+0 & \cdots & & 0 & -c_{n-1} & 2c_{n-1}
+\end{pmatrix}
+= F_{n+1}(\underbrace{c_{-1}, \ldots, c_{n-1}}_{n+1 \text{ arguments}})
+\]
+
+\[
+-\delta(f) = F_n(c_0, \ldots, c_{n-1}) = 2c_0\, F_{n-1}(c_1, \ldots, c_{n-1})
++ c_1 \det \begin{pmatrix}
+-c_1 & -c_2 & 0 & 0 & \\
+0 & 2c_2 & -c_3 & 0 & \\
+\vdots & -c_3 & 2c_3 & -c_4 & \\
+0 & & -c_4 & 2c_4 & -c_5 \\
+0 & 0 & & \ddots & c_{n-1}
+\end{pmatrix}
+\]
+\[
+= 2c_0\, F_{n-1}(c_1, \ldots, c_{n-1}) - c_1^2\, F_{n-2}(c_2, \ldots, c_{n-1})
+\]
+\note{il écrit d'abord « $= 2c_0$ ( », une tache, puis « $c_1^2 F_{n-2}(c_2,
+\ldots, c_{n-1})$ », et reporte « $F_{n-1}(c_1 - c_{n-1})$ » au-dessus avec un
+trait de renvoi ; le signe moins est sous la tache. La récurrence
+$F_n = 2c_0 F_{n-1} - c_1^2 F_{n-2}$ est exacte}
+
+\[
+0 \to 1 \to 2 \to 3 \cdots \to n-1 \to 0
+\]
+\uncertain{permutation circulaire} \ill{} \ill{}
+\note{les derniers mots sont soulignés}
+
+\[
+F_1(c_0) = 2c_0 \qquad
+F_2(c_0, c_1) = 4c_0c_1 - c_1^2 = c_1(4c_0 - c_1)
+\]
+\[
+F_3(c_0, c_1, c_2) = 2c_0(4c_1c_2 - c_2^2) - 2c_1^2 c_2
+\;\;
+= 2c_2(4c_0c_1 - c_0c_2 - c_1^2)
+\]
+\note{dans la formule précédente, biffé : « \struck{$= 8c_0c_1c_2$} »}
+\note{les coefficients de la dernière parenthèse sont écrits sur d'autres,
+biffés. Les trois valeurs sont exactes : $F_3 = 2c_0 F_2(c_1, c_2) - c_1^2
+F_1(c_2)$}
+\page{46}
+\[
+\det\bigl((c_{ij})_{1 \leqslant i, j \leqslant n}\bigr) \overset{?}{=}
+\qquad [c_{ij} = 0 \text{ si } i \neq j,\ i, j \text{ non consécutifs}]
+\]
+\[
+\Vert
+\]
+\[
+\sum_{\sigma \in \mathfrak{S}_n} \varepsilon_\sigma \prod_i c_{i\sigma(i)}
+\]
+nulle, sauf si $\sigma$ est tel que $\forall\, i \in [1, n]$,
+$\sigma i \in \lbrace i-1, i, i+1 \rbrace$
+\note{au-dessus de cette condition, soulignée : « $\sigma$ admissible »}
+
+Supposons $n \geqslant 2$, alors les cycles de $\sigma$ sont de longueur 1 ou
+2, et les cycles de long. 2 sont formés d'entiers consécutifs, donc $\sigma$
+est de la forme
+\[
+\tau_{i_1} \tau_{i_2} \cdots \tau_{i_p} \qquad
+1 \leqslant i_1 < i_2 < \cdots < i_p \leqslant n-1
+\]
+($\tau_i$ est la transposition de $i, i+1$) \uncertain{où} $i_1, i_2, \ldots,
+i_p$ sont \ill{} non consécutifs.
+\drawing{dans la marge gauche, un petit segment gradué « $i \geqslant 2$,
+$i-1$, $i$ », deux arcs joignant les points voisins}
+
+\[
+\underbrace{1 + \alpha_0}_{i_1} \qquad
+\underbrace{3 + \alpha_0 + \alpha_1}_{i_2} \qquad
+\underbrace{5 + \alpha_0 + \alpha_1 + \alpha_2}_{i_3} \qquad \cdots \qquad
+\underbrace{(2p-1) + \alpha_0 + \cdots + \alpha_{p-1}}_{i_p}
+\]
+\note{les constantes 3 et 5 sont écrites sur d'autres chiffres biffés, et la
+troisième expression commence par « $i_1 +$ » ; lecture incertaine des
+surcharges}
+
+\struck{$\displaystyle\sum_{\substack{i_1, i_2, \ldots, i_p \\ \text{strict. cr.} \\ \text{distincts}}}$}
+\note{cette somme, à gauche, est barrée d'un trait oblique}
+
+\struck{$1 \leqslant i_1 \quad 1 + \alpha_1 + \cdots + \alpha_{p-1} \leqslant$}
+
+\[
+\alpha_i \in \mathbb{N} \qquad \alpha_0 + \cdots + \alpha_{p-1} \leqslant n - 2p
+\]
+
+\[
+\sum_{1 \leqslant p \leqslant [\frac{n}{2}]} (-1)^p
+\sum_{\substack{(\alpha_0, \ldots, \alpha_p) \in \mathbb{N}^p \\ \sum \alpha_i = n - 2p}}
+\prod_{\substack{1 \leqslant i \leqslant n \\ \text{non de la forme}}} c_{ii}
+\]
+\[
+\prod_{1 \leqslant r \leqslant p}
+\bigl(c_{2r-1+(\alpha_1 + \cdots + \alpha_r),\, 2r+(\alpha_1 + \cdots + \alpha_r)}\,
+c_{2r+(\alpha_1 + \cdots + \alpha_r),\, 2r-1+(\alpha_1 + \cdots + \alpha_r)}\bigr)
+\]
+\note{dans la formule précédente, un terme biffé, illisible}
+avec, sous le premier produit :
+\[
+\begin{cases}
+(2r-1) + (\alpha_p + \cdots + \alpha_r) & 1 \leqslant r \leqslant p+1 \\
+2r + (\alpha_p + \cdots + \alpha_n)
+\end{cases}
+\]
+\note{les indices sont reproduits comme écrits ; ils passent de
+$\alpha_0, \ldots, \alpha_{p-1}$ à $\alpha_1, \ldots, \alpha_r$ d'une ligne à
+l'autre, et plusieurs sont surchargés. La lecture des bornes sous le premier
+produit est incertaine}
+
+Si la matrice est symétrique, et $c_{i\,i+1} = -c_{i+1}$, $c_{ii} = 2c_i$, on
+trouve
+\[
+\det\bigl((c_{ij})_{1 \leqslant i, j \leqslant n}\bigr)
+= \sum_{1 \leqslant p \leqslant [\frac{n}{2}]} (-1)^p\, 2^{n-2p}
+\sum_{\substack{\alpha_* \in \mathbb{N}^p \\ \alpha_1 + \cdots + \alpha_p \leqslant n - 2p}}
+\prod_i c_i \prod_{1 \leqslant r \leqslant p} \bigl(c_{2r + \alpha_1 + \cdots + \alpha_r}\bigr)^2
+\]
+\note{l'exposant $n - 2p$ de $2$ est entouré. La somme part de $p = 1$ : le
+terme $p = 0$ (la permutation identique, $2^n \prod c_i$) n'est pas écrit ;
+le produit $\prod_i c_i$ n'a pas de bornes sur la page}
+
+\drawing{un segment horizontal gradué, des points et de petits traits, les
+premiers repères notés $c_1, c_2, c_3$, le dernier $c_n$ ; en dessous, un
+« C » isolé}
+\page{47}
+\[
+\langle a_i, a'_j \rangle =
+\begin{cases}
+0 & \text{si } i \neq j,\ i \text{ et } j \text{ non consécutifs} \\
+1 & \text{si } i = j-1 \\
+\lambda_j - 1 & \text{si } i = j \\
+-\lambda_j + 1 + \alpha_j & i = j+1
+\end{cases}
+\]
+\note{dans les trois dernières lignes, un mot biffé devant chaque condition,
+et un début biffé devant « $\lambda_j - 1$ » (\uncertain{$2\lambda_j$})}
+
+$a_i = s_{i+1} - s_i$.
+
+$a'_j = s^{*}_j + \lambda_j s^{*}_{j+1} + (1 + \alpha_j)(s^{*}_{j+2} + \cdots
++ s^{*}_{n+1})$ \quad $0 \leqslant j \leqslant n$
+\note{lecture incertaine des indices de la dernière parenthèse ; la ligne
+suivante, « $a'_n =$ », est laissée sans second membre}
+
+\[
+\begin{cases}
+a'_j = a^{*}_{j-1} + \underbrace{(\lambda_j - 1)}_{-2 \text{ si } \lambda_j = -1} a^{*}_j
++ \underbrace{(1 - \lambda_j + \alpha_j)}_{\beta_j = 2 + \alpha_j \text{ si } \lambda_j = -1} a^{*}_{j+1}
+& 0 \leqslant j \leqslant n-1 \\
+a'_n = a^{*}_{n-1} + (\lambda_n - 1) a^{*}_n \\
+\pi = a^{*}_{-1} \\
+s_j = a_{-1} + \cdots + a_{j-1} & 0 \leqslant j \leqslant n+1
+\end{cases}
+\]
+
+\note{en haut à droite, un cadre dont le contenu est barré de traits
+obliques :} \struck{$\psi(a_{-1}) = -a^{*}_0$ ; $\psi(a_n) = -c_{n-2}
+a^{*}_{n-1} + 2c_{n-1} a^{*}_n$}
+
+$f(a_i)$\struck{\ill{}}\ill{} $+ \psi(a'_i) = 0$
+\note{lecture très incertaine}
+
+\[
+f\Bigl(\sum_{-1}^{n} \xi_i a_i\Bigr) = \sum_{i=0}^{n} c_{i-1} \xi_i^2
+- \sum_{-1 \leqslant i \leqslant n-1} c_i \xi_i \xi_{i+1}
+\]
+
+\struck{$\psi(a_i) = -c_{i-1} a^{*}_{i-1} + 2c_{i-1} a^{*}_i - c_i a^{*}_{i+1}$}
+\quad $0 \leqslant i \leqslant n-1$
+
+Cas du \uncertain{bon} \struck{\ill{}} :
+\[
+c_{-1} = 1, \quad c_0 = (\alpha_0 + 2), \ldots\quad
+c_i = (2 + \alpha_0) \cdots (2 + \alpha_i) \quad (0 \leqslant i \leqslant n-1),
+\quad c_n = c_{n+1} = 0
+\]
+
+Coordonnées \struck{projectives} du $c$, orth. aux $a'_i$ (en fait
+$\lambda_i = -1$ pour $0 \leqslant i \leqslant n$)
+\[
+c' = \sum_{-1}^{n} \xi_i a_i \quad (\xi_n = 1)
+\]
+\[
+\begin{aligned}
+&\xi_{n-1} - 2\xi_n = 0
+&& \boxed{\xi_n = 1,\ \xi_{n-1} = 2} \\
+&\xi_{n-2} - 2\xi_{n-1} + (\alpha_{n-1} + 2)\xi_n = 0
+&& \boxed{\xi_{n-2} = -(\alpha_{n-1} - 2)} \\
+&\xi_{n-3} - 2\xi_{n-2} + (\alpha_{n-2} + 2)\xi_{n-1} = 0
+&& \boxed{\xi_{n-3} = -2(\alpha_{n-1} + \alpha_{n-2})} \\
+&\qquad 2(\alpha_{n-1} - 2) + (\alpha_{n-2} + 2)2 = 2(\alpha_{n-1} + \alpha_{n-2}) \\
+&\xi_{n-4} - 2\xi_{n-3} + (\alpha_{n-3} + 2)\xi_{n-2} = 0
+\\
+&\qquad \boxed{\xi_{n-4} = -4 - 2(\alpha_{n-1} + 2\alpha_{n-2} + \alpha_{n-3})
++ \alpha_{n-1}\alpha_{n-3}} \\
+&\qquad 4(\alpha_{n-1} + \alpha_{n-2}) - (\alpha_{n-3} + 2)(\alpha_{n-1} - 2) \\
+&\qquad 2\alpha_{n-1} + 4\alpha_{n-2} + 4 - \alpha_{n-1}\alpha_{n-3} + 2\alpha_{n-3} \\
+&\xi_{n-5} = \cdots
+\end{aligned}
+\]
+\note{les lignes en retrait sont écrites sous des accolades et calculent
+l'opposé de la valeur encadrée ; « $\xi_{n-1} = 2$ » est d'abord écrit puis
+biffé à gauche du premier cadre ; dans le dernier cadre, un premier second
+membre est biffé. Le signe devant $(\alpha_{n-3} + 2)$ est sous une tache.
+Les quatre valeurs encadrées sont exactes}
+
+\[
+\pi = a^{*}_{-1}
+\]
+\[
+\pi(c') = \underbrace{\rho(\alpha_0, \ldots, \alpha_{n-1})}_{A} = \rho = \xi_{-1}
+\qquad \rho \in \mathbb{Z}[A_0, \ldots, A_{n-1}]
+\]
+\[
+c = \frac{c'}{\rho}
+\]
+\[
+f(c') = \sigma(\alpha_0, \ldots, \alpha_{n-1}) = \sigma, \qquad
+\sigma \in \mathbb{Z}[A_0, \ldots, A_{n-1}]
+\]
+\[
+f(c) = \sigma / \rho^2 \qquad 2\sigma = -\xi_0 \xi_{-1} = -\rho\,\xi_0
+\]
+
+À droite :
+\[
+2f(c') = \langle c', \psi(c') \rangle \overset{?}{=}
+\]
+\struck{$\lambda\pi = \psi(c') = \lambda a^{*}_{-1}$ \quad
+$\lambda = \langle a_{-1}, \psi(c') \rangle = \varphi(a_{-1}, c')$}
+\[
+\langle a_i, \psi(c') \rangle = \varphi(a_i, c') = \langle c', \psi(a_i) \rangle
+= -f(a_i) \langle c', a'_i \rangle = 0
+\]
+\note{sous « $\psi(a_i)$ » : « $= -f(a_i)\, a'_i$ si $0 \leqslant i \leqslant n$ » ;
+quelques signes biffés en fin de ligne}
+\[
+\langle a_{-1}, \psi(c') \rangle = \langle c', \psi(a_{-1}) \rangle = -\xi_0
+\qquad (\psi(a_{-1}) = -a^{*}_0)
+\]
+\[
+\psi(c') = -\xi_0 a^{*}_{-1}
+\qquad
+2f(c') = \langle c', -\xi_0 a^{*}_{-1} \rangle = -\xi_0 \xi_{-1}
+\]
+\page{48}
+\note{page très chargée, écrite serrée ; les matrices sont recopiées dans leur
+forme, les annotations de marge regroupées là où elles se rattachent}
+
+\[
+\Delta_{n+2}(0, 1, c_0, \ldots, c_{n-1})
+\]
+\[
+\ \Delta_n(\underbrace{c_0, \ldots, c_{n-1}}_{n \text{ arg.}})
+= \det \underbrace{\begin{pmatrix}
+0 & -1 & 0 & 0 & \cdots & 0 \\
+-1 & 2 & -c_0 & 0 & \cdots & 0 \\
+0 & -c_0 & 2c_0 & -c_1 & \cdots & \vdots \\
+0 & 0 & -c_1 & 2c_1 & -c_2 \ \cdots & \\
+\vdots & & & & \ddots & -c_{n-1} \\
+0 & 0 & \cdots & 0 & -c_{n-1} & 2c_{n-1}
+\end{pmatrix}}_{\text{ordre } n+2}
+\]
+\[
+= \det \underbrace{\begin{pmatrix}
+2c_0 & -c_1 & 0 & 0 & \cdots & 0 \\
+-c_1 & 2c_1 & -c_2 & 0 & & \\
+0 & -c_2 & 2c_2 & -c_3 & & \vdots \\
+0 & 0 & -c_3 & 2c_3 & -c_4 & \\
+ & & & & \ddots & -c_{n-1} \\
+0 & 0 & 0 & \cdots & -c_{n-1} & 2c_{n-1}
+\end{pmatrix}}_{\text{ordre } n}
+\]
+\note{dans la formule précédente, un terme biffé, illisible}
+\note{« $\Delta_{n+2}(0, 1, c_0, \ldots, c_{n-1})$ » est écrit au-dessus de
+$\Delta_n$ avec un signe « $\Vert$ » ; devant « $\det$ », une tache qui peut
+couvrir un signe. Par la récurrence encadrée ci-dessous, le déterminant
+d'ordre $n+2$ vaut $-\Delta_n(c_0, \ldots, c_{n-1})$ (cf. page 45, où
+$\delta(f) = -F_n$). Les entrées de la troisième ligne de la première matrice
+sont surchargées ; la page porte « $2c_2$ » là où l'on attend $2c_1$}
+
+\[
+\boxed{\Delta_n(c_0, \ldots, c_{n-1}) = 2c_0\, \Delta_{n-1}(c_1, \ldots, c_{n-1})
+- c_1^2\, \Delta_{n-2}(c_2, \ldots, c_{n-1})}
+\]
+\note{le signe moins est sous une tache ; l'indice du dernier $\Delta$ est
+d'une lecture incertaine ($n-2$ ou $n-1$)}
+
+\[
+\Delta'_n(c_0, \ldots, c_{n-1}) =
+\begin{cases}
+\Delta_n(c_0, \ldots, c_{n-1}) & \text{si } n \text{ pair} \\
+\frac{1}{2} \Delta_n(c_0, \ldots, c_{n-1}) & \text{si } n \text{ impair}
+\end{cases}
+\]
+\note{« pair » est écrit sur un mot biffé ; les valeurs de $\Delta'_1$ et
+$\Delta'_3$ plus bas confirment que le facteur $\frac{1}{2}$ va aux $n$
+impairs}
+
+Posons
+\[
+\left.
+\begin{aligned}
+c_0 &= \beta_0 \\
+c_1 &= \beta_0 \beta_1 \\
+&\cdots \\
+c_{n-1} &= \beta_0 \beta_1 \cdots \beta_{n-1}
+\end{aligned}
+\right\rbrace \ n \text{ arguments } \beta_i
+\]
+\note{le nombre d'arguments, « $n$ », est d'une lecture incertaine}
+\[
+\delta_n(\beta_0, \ldots, \beta_{n-1}) = \Delta_n(\beta_0, \beta_0\beta_1, \ldots,
+\beta_0\beta_1 \cdots \beta_{n-1})
+\]
+\[
+\delta'_n(\beta_0, \ldots, \beta_{n-1}) = \Delta'_n(\cdots) =
+\begin{cases}
+\delta_n(\beta_0, \ldots, \beta_{n-1}) & \text{si } n \text{ pair} \\
+\frac{1}{2} \delta_n(\beta_0, \ldots, \beta_{n-1}) & \text{si } n \text{ impair}
+\end{cases}
+\]
+
+\[
+\begin{aligned}
+&\Delta_n,\ \Delta'_n,\ \overline{\Delta'_n} \in \mathbb{Z}[C_0, \ldots, C_{n-1}]
+&\qquad& \Delta'_n[C_0, \ldots, C_{n-1}] = C_{n-1}\, \overline{\Delta'_{n}}(C_0, \ldots, C_{n-2}) \\
+&\delta_n,\ \delta'_n,\ \overline{\delta'_n} \in \mathbb{Z}[B_0, \ldots, B_{n-1}]
+&& \delta'_n[B_0, \ldots, B_{n-1}] = B_{n-1}\, \overline{\delta'_n}(B_0, \ldots, B_{n-2})
+\end{aligned}
+\]
+\note{dans la première ligne, un premier $\overline{\Delta'_n}$ est biffé et
+récrit au-dessus ; les indices des seconds membres sont d'une lecture
+incertaine}
+
+\[
+\begin{aligned}
+&\Delta_1(c_0) = 2c_0, \quad \Delta'_1(c_0) = c_0 \quad \overline{\Delta'_1}(c_0) = 1 \\
+&\Delta_2(c_0, c_1) = 4c_0c_1 - c_1^2 = c_1(4c_0 - c_1) \quad
+\overline{\Delta'_2}(c_0, c_1) = 4c_0 - c_1 \\
+&\Delta_3(c_0, c_1, c_2) = 2c_2(4c_0c_1 - c_0c_2 - c_1^2), \quad
+\Delta'_3 = c_2(4c_0c_1 - c_0c_2 - c_1^2), \\
+&\qquad \overline{\Delta'_3}(c_0, c_1, c_2) = 4c_0c_1 - c_0c_2 - c_1^2 \\
+&\cdots
+\end{aligned}
+\]
+\note{dans « $\Delta'_3 = c_2(\ldots)$ », un « 2 » est biffé devant $c_2$.
+Valeurs conformes à celles de la page 45}
+
+\[
+\Delta_n(C_0, \ldots, C_{n-1}) = \sum_{0 \leqslant p \leqslant [\frac{n}{2}]}
+(-1)^p\, 2^{n-2p} \sum \ \prod_{i \in J'} C_i \prod_{j \in J''} C_j^2
+\]
+la seconde somme portant sur les suites de $p$ \struck{\ill{}} él. de
+$\mathfrak{P}_2[0, n-1]$ disjointes $J_1, \ldots, J_p$ \struck{\ill{}},
+\[
+J = \bigcup_{1 \leqslant i \leqslant p} J_i, \qquad
+J' = [0, n-1] \smallsetminus J,
+\]
+$J''$ = ens. des derniers éléments des $J_i$
+$(J'' \in \mathfrak{P}_p[0, \ldots, n-1])$.
+\note{dans la marge gauche, une flèche vers $\Delta_n(C_0, \ldots)$ et
+« \uncertain{décalage} \uncertain{notations} », puis trois mots illisibles
+(\uncertain{en} \uncertain{origine} \uncertain{des} \uncertain{paires})}
+
+\marginal{\emph{NB} Il n'y a pas de cancellation de termes}
+
+\struck{\ill{}} Le monôme $M = \prod_{i \in J'} C_i \prod_{j \in J''} C_j^2$
+s'écrit aussi
+\[
+\qquad
+B_0^n\, B_1^{n-1+\varepsilon_2}\, B_3^{n-3+\varepsilon_3} \cdots B_{n-1}^{\varepsilon_n}
+\qquad \varepsilon_k \in \lbrace 0, 1 \rbrace \quad 2 \leqslant k \leqslant n
+\]
+\note{dans la formule précédente, biffé : « \struck{$\delta_n(c_1, \ldots, c_n) = B_0^n$} »}
+$\varepsilon_k = 1$ ssi $k \in J'''$ (il y a $p$ tels $k$)
+\note{indices et exposants tels qu'on les lit, sans le $B_2$ attendu entre
+$B_1$ et $B_3$ ; lecture incertaine}
+\[
+M = \prod_{1 \leqslant i \leqslant n} C'_i \qquad
+C'_i = \begin{cases}
+C_i & \text{si } i \in J' \\
+C_j & \text{si } j \in J'' \\
+C_{j-1} & \text{si } j \in \ldots
+\end{cases}
+\]
+\note{la fin de la troisième ligne, après « $j \in$ », est illisible}
+$C'_i$ contient en facteur $B_k$ (et \ill{} \ill{} : il y a \ill{} 1
+\ill{}) ssi \struck{\ill{}} $i \geqslant k$, \emph{ou} $i = k - 1$ \emph{et}
+$i \in J''$ i.e. $k \in \overline{J}$
+\drawing{un segment gradué de $1$ à $n$, le point $k$ marqué}
+
+\[
+\delta_n(B_0, \ldots, B_n) = B_0^n\, B_1^{n-1} \cdots B_{n-1}^{\,\cdot}\;
+L_{n-1}(B_1, \ldots, B_{n-1})
+\]
+\note{l'exposant de $B_{n-1}$ est illisible (marqué ici d'un point). « $L_{n-1}(B_1, \ldots, B_{n-1})$ » et son dernier argument sont
+entourés, avec une bulle « \uncertain{attention} $p \geqslant 0$ ! » et une
+annotation biffée ; sous la formule, une ligne biffée illisible}
+
+\[
+L_{n-1}(B_1, \ldots, B_{n-1}) = \sum_{0 \leqslant p \leqslant [\frac{n}{2}]}
+(-1)^p\, 2^{n-2p} \sum_{\substack{J \in \mathfrak{P}_p([1, n-1]) \\
+J \text{ ne contenant pas 2} \\ \text{entiers consécutifs}}} B_J
+\]
+\[
+= 2^n - 2^{n-2} \sum_{1 \leqslant i \leqslant n-1} B_i
++ 2^{n-4} \sum_{\substack{1 \leqslant i < j \leqslant n-1 \\ j \neq i+1}} B_i B_j
+- 2^{n-6} \sum_{1 \leqslant i < j < k \leqslant n} B_i B_j B_k + \cdots
+\]
+\note{sous la seconde somme, plusieurs essais d'indexation biffés ; la
+condition de la dernière somme est pointée de deux « ! », avec un renvoi :
+« \uncertain{les} \ill{} \ill{} \ill{} » ; la borne $n$ (au lieu de
+$n-1$) est telle qu'on la lit}
+\page{49}
+\struck{$\displaystyle \Pi_p(B_1, \ldots, B_n) = \sum_{J \in \mathfrak{P}_p[1, n]}$}
+\qquad $B_i = B'_i + 4$
+
+\struck{$\Sigma$}\quad $B'_1 B'_2 = B'_2 B'_3 = \cdots = B'_n B'_{n+1} = 0$
+\note{lecture incertaine des derniers indices}
+
+\[
+\Bigl(2 - \frac{B_1}{2}\Bigr)\Bigl(2 - \frac{B_2}{2}\Bigr) \cdots
+\Bigl(2 - \frac{B_n}{2}\Bigr) = \frac{(-1)^n}{2^n} .
+\]
+
+\[
+\begin{aligned}
+L_1 &= 2 \qquad L'_1 = 1 \\
+L_2 &= 4 - B_1  = -(\alpha_1 - 2) \\
+L_3 &= 8 - 2(B_1 + B_2 ) = -2\bigl[(\alpha_1 + \alpha_2) \bigr] \\
+L_4 &= 16 - 4(B_1 + B_2 + B_3 )
++ \Bigl(\sum_{1 \leqslant i < j \leqslant 3} B_i B_j - (B_1 B_2 + B_2 B_3 + B_3 B_4)\Bigr)
+\end{aligned}
+\]
+\note{dans la formule précédente, un terme biffé, illisible ; un terme biffé, illisible ; un terme biffé, illisible ; un terme biffé, illisible}
+\note{la ligne de $L_2$ porte après $4 - B_1$ un calcul biffé en
+$\alpha_0$ ; l'indice de $\alpha$ dans le résultat est d'une lecture
+incertaine. Dans $L_4$ le dernier terme soustrait est lu « $B_3 B_4$ » :
+avec trois arguments $B_1, B_2, B_3$ il n'existe pas, et la formule de la
+page 48 ne retire que $B_1 B_2$ et $B_2 B_3$, ce qui laisse $B_1 B_3$ ; le
+calcul qui suit, lui, garde exactement $B_1 B_3$}
+
+\struck{$\Bigl(2 - \frac{B_1}{2}\Bigr)\Bigl(2 - \frac{B_2}{2}\Bigr)$}
+
+\[
+-4(\alpha_1 + \alpha_2 + \alpha_3 ) -  +
+\bigl[ + (\alpha_0 + 2)(\alpha_2 + 2)
+\bigr]
+\]
+\note{dans la formule précédente, un terme biffé, illisible ; un terme biffé, illisible ; biffé : « \struck{$(\alpha_0 + 2)(\alpha_1 + 2)$} » ; un terme biffé, illisible}
+\note{suit une ligne entièrement biffée,
+« \struck{$= -4 - 4(\alpha_0 + \alpha_1 + \alpha_2) + 2(\ldots) + \alpha_0\alpha_2
++ \alpha_0\alpha_3 + \alpha_1\alpha_3$} », avec au-dessous
+« $2\alpha_0 + 2\alpha_1 + \alpha_2 + 2\alpha_3$ »}
+
+\[
+= -4 - 2(\alpha_1 + 2\alpha_2 + \alpha_3) + \alpha_1\alpha_3 
+= (\alpha_1 - 2)(\alpha_3 - 2) - 4(\alpha_2 + 2)
+\]
+\note{dans la formule précédente, un terme biffé, illisible}
+\note{« $2\alpha_2 +$ » est ajouté au-dessus, entouré ; l'indice du premier
+$\alpha$ ressemble à un $p$ et se lit $1$ par le calcul. Le résultat est
+exact : avec $B_i = \alpha_i + 2$,
+$16 - 4(B_1 + B_2 + B_3) + B_1 B_3 = (\alpha_1 - 2)(\alpha_3 - 2) - 4(\alpha_2
++ 2)$ ; c'est la forme de $\xi_{n-4}$ page 47}
+
+\emph{NB} $L_{n-1}(B_1, \ldots, B_{n-1}) = L_{n-1}(B_{n-1}, \ldots, B_1)$
+
+\[
+\det \underbrace{\begin{pmatrix}
+2 & -c_0 & 0 & & & \\
+-c_0 & 2c_0 & -c_1 & 0 & & \\
+0 & -c_1 & 2c_1 & & & \\
+0 & 0 & -c_2 & \ddots & & 0 \\
+ & & & & c_{n-3} & -c_{n-1} \\
+ & \cdots & & 0 & -c_{n-1} & 2c_{n-1}
+\end{pmatrix}}_{\text{ordre } n+1}
+\]
+\[
+= \Delta_{n+1}(\underbrace{1, c_0, \ldots, c_{n-1}}_{n+1 \text{ arg}})
+= 2\Delta_n(c_0, \ldots, c_{n-1}) - c_0^2\, \Delta_{n-1}(c_1, \ldots, c_{n-1})
+\]
+\note{la première entrée, « 2 », est écrite sur un autre signe ; l'entrée
+« $c_{n-3}$ » de l'avant-dernière ligne est telle qu'on la lit}
+
+\[
+= \delta_{n+1}(1, B_0, \ldots, B_{n-1}) = B_0^n B_1^{n-1} \cdots B_{n-1}\,
+L_{n+1}(B_0, \ldots, B_{n-1})
+\]
+\struck{$L_2(1, B_0) = 4 -$}
+
+\struck{\ill{} $\delta_{n+1}(1, B_0, \ldots, B_{n-1})$} \quad $L_3(1, B_0,$
+
+\[
+\begin{aligned}
+\delta_2(1, B_0)  &= B_0 L_2(1, B_0) = B_0(4 - B_0)
+= -(\alpha_0 + 2)(\alpha_0 - 2) = 4 - \alpha_0^2 \\
+\delta'_3(1, B_0, B_1) &= B_0^2 B_1\, L'_3(B_0, B_1) = 
+- B_0^2 B_1 (\alpha_0 + \alpha_1) \\
+\delta_4(1, B_0, B_1, B_2) &= B_0^3 B_1^2 B_2\,
+\underbrace{L_4(B_0, B_1, B_2)}_{(\alpha_0 - 2)(\alpha_2 - 2) - 4(\alpha_1 + 2)}
+\end{aligned}
+\]
+\note{dans la formule précédente, un terme biffé, illisible ; un terme biffé, illisible}
+\note{les valeurs de $\delta_2$ et $\delta'_3$ sont exactes (avec
+$\Delta_3$ de la page 48, $\delta_3(1, B_0, B_1) = 2B_0^2 B_1(4 - B_0 - B_1)$).
+Dans l'angle inférieur droit, un calcul serré biffé de hachures et d'une
+longue diagonale, qui se termine par « $= B_0^2 B_1 (4 - B_1)$ »}
+\page{50}
+\[
+\begin{cases}
+\delta_n(B_0, \ldots, B_{n-1}) = B_0^n B_1^{n-1} \cdots B_{n-1}\, L_n(B_1, \ldots, B_{n-1}) \\
+\delta_{n+1}(1, B_0, \ldots, B_{n-1}) = B_0^n B_1^{n-1} \cdots B_{n-1}\, L_{n+1}(B_0, B_1, \ldots, B_{n-1})
+\end{cases}
+\]
+\[
+\begin{cases}
+\delta'_n(B_0, \ldots, B_{n-1}) = B_0^n B_1^{n-1} \cdots B_{n-1}\, L'_n(B_1, \ldots, B_{n-1}) \\
+\delta'_{n+1}(1, B_0, \ldots, B_{n-1}) = B_0^n B_1^{n-1} \cdots B_{n-1}\, L'_{n+1}(B_0, B_1, \ldots, B_{n-1})
+\end{cases}
+\]
+
+\struck{$n$ pair} \quad
+\struck{$L_n(B_1, \ldots, B_{n-1}) \equiv B_1 B_3 \cdots B_{n-1}$} \quad
+\struck{$\delta_n$}
+\note{à la suite de la ligne biffée, une rangée de points et de chiffres
+(« $1$, $2$, $3$, $4$, \ldots, $2m$ »)}
+
+\[
+L_{2m}(B_1, \ldots, B_{2m-1}) \equiv B_1 B_3 \cdots B_{2m-1}
+\qquad \underline{\underline{\bmod 2}}
+\]
+\[
+L'_{2m+1}(B_1, \ldots, B_{2m}) \equiv (B_2 B_4 \cdots B_{2m} + B_1 B_3 \cdots B_{2m-1})
++ \sum_{1 \leqslant i \leqslant m-1} (B_1 \cdots B_{2i-1})(B_{2i+2} \cdots B_{2m})
+\]
+
+\[
+\begin{cases}
+\delta'_{2m}(B_0, \ldots, B_{2m-1}) \equiv
+\;
+\underbrace{(B_0 B_1)^{2m} (B_2 B_3)^{2(m-1)} \cdots (B_{2m-2} B_{2m-1})}_{[(B_0 B_1)^m (B_2 B_3)^{m-1} \cdots (B_{2m-2} B_{2m-1})]^2} \\[2ex]
+\delta'_{2m+1}(B_0, \ldots, B_{2m-1}) \equiv B_0^{2m} B_1^{2m-1} \cdots B_{2m-1}
+\bigl[B_0 B_2 \cdots B_{2m-2} + B_1 B_3 \cdots B_{2m-1} \\
+\qquad\qquad + \sum_{1 \leqslant i \leqslant m-1} (B_0 \cdots B_{2i-2})(B_{2i+1} \cdots B_{2m-1})\bigr]
+\end{cases}
+\]
+\note{dans la formule précédente, biffé : « \struck{$B_0^{2m} B_1^{2m-1} \cdots 2B_{2m-1}$} »}
+\note{l'exposant de $(B_2 B_3)$ est d'une lecture incertaine ; « $2(m-1)$ »
+est ce que demande le crochet au carré sous l'accolade, et ce que donne la
+congruence de $L_{2m}$. La seconde ligne a pour arguments
+« $(B_0, \ldots, B_{2m-1})$ » sur la page ; par la forme du second membre, c'est
+$\delta'_{2m+1}(1, B_0, \ldots, B_{2m-1})$ qu'elle calcule}
+
+\[
+\begin{cases}
+\delta'_{2m+1}(B_0, \ldots, B_{2m}) \equiv B_0^{2m+1} B_1^{2m} \cdots B_{2m}
+\bigl[B_2 B_4 \cdots B_{2m} + B_1 B_3 \cdots B_{2m-1} \\
+\qquad\qquad + \sum_{1 \leqslant i \leqslant m-1} (B_1 \cdots B_{2i-1})(B_{2i+1} \cdots B_{2m})\bigr] \\[1ex]
+\delta_{2m+2}(1, B_0, \ldots, B_{2m}) \equiv \;
+\bigl[B_0^{m+1} (B_1 B_2)^m \cdots (B_{2m-1} B_{2m})\bigr]^2
+\end{cases}
+\]
+\note{dans la formule précédente, un terme biffé, illisible}
+\note{le bas de la page est blanc}
+\page{51}
+\[
+\Delta_n(C_0, \ldots, C_{n-1}) = 2C_0\, \Delta_{n-1}(C_1, \ldots, C_{n-1})
+- C_1^2\, \Delta_{n-2}(C_2, \ldots, C_{n-1})
+\]
+\note{les lettres de cette ligne sont surchargées ($B$ et $C$ l'une sur
+l'autre) ; « $\Vert$ » la relie à la ligne suivante}
+\[
+\begin{aligned}
+\delta_n(B_0, \ldots, B_{n-1}) &= 2B_0\, \delta_{n-1}(B_0B_1, B_2, \ldots, B_{n-1})
+- (B_0B_1)^2\, \delta_{n-2}(B_0B_1B_2, B_3, \ldots, B_{n-1}) \\
+&= 2B_0 (B_0B_1)^{n-1} B_2^{n-2} B_3^{n-3} \cdots B_{n-1}\,
+L_{n-1}(B_2, B_3, \ldots, B_{n-1}) \\
+&\qquad - B_0^2 B_1^2 (B_0B_1B_2)^{n-2} B_3^{n-3} \cdots B_{n-1}\,
+L_{n-2}(B_3, \ldots, B_{n-1}) \\
+&= B_0^n B_1^{n-1} \cdots B_{n-1}\,
+\bigl[2L_{n-1}(B_2, \ldots, B_{n-1}) - B_1 L_{n-2}(B_3, \ldots, B_{n-1})\bigr]
+\end{aligned}
+\]
+\note{dans la formule précédente, biffé : « \struck{$B_0$} »}
+\note{dans la marge gauche, relié au premier membre par « $\Vert$ » :
+« $B_0^n \cdots B_{n-1} L_n[B_1, \ldots, B_{n-1}]$ »}
+
+\[
+\boxed{L_n(B_1, \ldots, B_{n-1}) = 2L_{n-1}(B_2, \ldots, B_{n-1})
+- B_1 L_{n-2}(B_3, \ldots, B_{n-1})}
+\]
+
+\[
+\begin{cases}
+L'_{2m}(B_1, \ldots, B_{2m-1}) = 4L'_{2m-1}(B_2, \ldots, B_{2m-1})
+- B_1 L_{2m-2}(B_3, \ldots, B_{2m-1}) \\
+L'_{2m+1}(B_1, \ldots, B_{2m}) = \, L_{2m}(B_2, \ldots, B_{2m})
+- B_1 L'_{2m-1}(B_3, \ldots, B_{2m})
+\end{cases}
+\]
+\note{dans la formule précédente, biffé : « \struck{$2$} »}
+\note{l'accent du premier $L'_{2m}$ est surchargé. Les deux relations
+suivent de la récurrence encadrée et de la définition de $\Delta'_n$ (page 48),
+qui double le coefficient pour $n$ impair}
+
+Calcul du $\tilde{c}$ défini par
+\[
+\begin{cases}
+\xi_n = 1 \\
+\langle \tilde{c}, a'_i \rangle = 0 & 0 \leqslant i \leqslant n
+\end{cases}
+\qquad
+\tilde{c} = \xi_{-1} a_{-1} + \xi_0 a_0 + \cdots + \xi_n a_n
+\]
+\note{la seconde expression est écrite sous « $\tilde{c}$ », reliée par
+« $\Vert$ »}
+
+i.e.
+\[
+\begin{cases}
+\xi_n = 1 \\
+\xi_{n-1} = 2 \\
+\xi_{i-1} - 2\xi_i + \beta_i \xi_{i+1} = 0 & 0 \leqslant i \leqslant n-1 \\
+\xi_{i-1} = 2\xi_i - \beta_i \xi_{i+1}
+\end{cases}
+\]
+
+\[
+\xi_n = 1, \quad \xi_{n-1} = 2, \quad \xi_{n-2} = 4 - \beta_{n-1}, \quad
+\xi_{n-3} = 2(4 - \beta_{n-1}) - 2\beta_{n-2} = 8 - 2(\beta_{n-1} + \beta_{n-2})
+\]
+
+\[
+\boxed{\xi_{n-i} = L_i(\underbrace{\beta_{n-1}, \ldots, \beta_{n-i+1}}_{i-1 \text{ arguments}})}
+\qquad 1 \leqslant i \leqslant n+1
+\]
+en particulier
+\[
+\rho = \xi_{-1} = \pi(\tilde{c}) = L_{n+1}(\beta_{n-1}, \ldots, \beta_0)
+= L_{n+1}(\beta_0, \ldots, \beta_{n-1})
+\]
+\[
+\sigma = \xi_0 = \langle \tilde{c}, a^{*}_0 \rangle
+\Bigl[= -\langle \tilde{c}, \psi(a_{-1}) \rangle = -\varphi(\tilde{c}, a_{-1})
+\Bigr]
+= L_n(\beta_{n-1}, \ldots, \beta_1) = L_n(\beta_1, \ldots, \beta_{n-1})
+\]
+\note{dans la formule précédente, un terme biffé, illisible}
+\note{au-dessus du crochet : « $= -\langle a_{-1}, \psi(\tilde{c}) \rangle$ » ;
+sous $\psi(a_{-1})$, un renvoi illisible. Le « $=$ » final est écrit
+« $\equiv$ » ; les deux dernières égalités sont superposées en fin de ligne}
+\page{52}
+\[
+\begin{aligned}
+\rho &= L_{n+1}(\beta_0, \ldots, \beta_{n-1}) &\qquad \rho' &= L'_{n+1}(\beta_0, \ldots, \beta_{n-1}) \\
+\sigma &= L_n(\beta_1, \ldots, \beta_{n-1}) & \sigma' &= L'_n(\beta_1, \ldots, \beta_{n-1})
+\end{aligned}
+\]
+\[
+\begin{cases}
+\delta_\varepsilon = (\overbrace{\beta_0^n \beta_1^{n-1} \cdots \beta_{n-1}}^{B})\,\sigma \\
+\delta_V = (\underbrace{\beta_0^n \beta_1^{n-1} \cdots \beta_{n-1}}_{B})\,\rho
+\end{cases}
+\qquad
+\begin{cases}
+\delta'_\varepsilon = (\overbrace{\beta_0^n \beta_1^{n-1} \cdots \beta_{n-1}}^{B})\,\sigma' \\
+\delta'_V = (\underbrace{\beta_0^n \beta_1^{n-1} \cdots \beta_{n-1}}_{B})\,\rho'
+\end{cases}
+\]
+\note{l'indice de $\delta_\varepsilon$ peut se lire $\Sigma$ ; on le lit
+$\varepsilon$, comme le $f^{\varepsilon}$ des pages 41-42 et le $f_\varepsilon$
+plus bas}
+
+\[
+\tilde{c} = \rho\, a_{-1} + \sigma a_0 + \xi_1 a_1 + \cdots + \xi_n a_n
+\qquad (\xi_n = 1,\ \xi_{n-1} = 2 \ldots)
+\]
+\note{la lettre notée ici $\tilde{c}$ (comme à la page 51) est une petite
+boucle fermée surmontée d'un tilde, qu'on pourrait lire $\tilde{\sigma}$ ;
+on la lit $c$ d'après la page 47, où le vecteur est $c'$ et $c = c'/\rho$,
+et d'après la ligne suivante}
+
+\[
+\rho = \xi_{-1} = \pi(\tilde{c}) = \langle \tilde{c}, a^{*}_{-1} \rangle
+\quad\Big|\quad c = \tilde{c}/\rho \qquad
+c' = 2c =
+\begin{cases}
+\,\tilde{c}/\rho' & n \text{ pair} \\
+2\tilde{c}/\rho = 2\tilde{c}/\rho' & n \text{ impair}
+\end{cases}
+\]
+\note{dans la formule précédente, un terme biffé, illisible}
+\[
+\sigma = \xi_0 = \langle \tilde{c}, a^{*}_0 \rangle = -\varphi(s_0, \tilde{c})
+\quad\Big|\quad \psi(\tilde{c}) = -\sigma a^{*}_{-1} = -\sigma\pi
+\]
+\[
+f(\tilde{c}) = \Bigl[\tfrac{1}{2} \langle \tilde{c}, \psi(\tilde{c}) \rangle
+= -\tfrac{1}{2} \langle \tilde{c}, \sigma\pi \rangle
+= -\tfrac{1}{2} \sigma\, \pi(\tilde{c}) = -\tfrac{1}{2} \sigma\rho\Bigr]
+= -\sigma'\rho'
+\]
+\[
+\Bigl[f(c') = f(\tilde{c}/\rho') = -\frac{\sigma'\rho'}{\rho'^2} = -\frac{\sigma'}{\rho'}\Bigr]
+\qquad (n \text{ pair})
+\]
+\note{« ($n$ pair) » est écrit sous $f(c')$ ; quelques chiffres surchargés
+dans les deux lignes. L'égalité $\frac{1}{2}\sigma\rho = \sigma'\rho'$ tient
+parce que, de $L_n$ et $L_{n+1}$, un seul est divisé par 2 dans le passage à
+$L'$}
+
+$f_\varepsilon$ lisse $\Longleftrightarrow$ les $\beta_i$
+$(0 \leqslant i \leqslant n-1)$ inversibles, et $\sigma'$ inv.
+
+\qquad $\Longleftrightarrow$ (si 2 inv. ou $n$ pair) les $\beta_i$ inv. et
+$\psi(\tilde{c}) \neq 0$
+
+$f_V$ lisse $\Longleftrightarrow$ les $\beta_i$ $(0 \leqslant i \leqslant n-1)$
+inversibles et $\rho'$ inv.
+
+\qquad $\Longleftrightarrow$ (si 2 inv. ou $n$ impair) les $\beta_i$ inv. et
+$\pi(\tilde{c}) \neq \struck{\ill{}}$
+\note{sous « $\pi(\tilde{c}) \neq$ », une accolade : « condition à dist.
+finie sur la fibre »}
+
+$(\mathcal{E}, V, f)$ \uncertain{birégulier} $\Longleftrightarrow$ les
+$\beta_i$ $(0 \leqslant i \leqslant n-1)$ inv. \emph{et} $f(\tilde{c})$
+\emph{inv.}
+
+\struck{\emph{NB} (si \uncertain{$n$ impair}) $\pi(c') = \pi(\tilde{c}/\rho')
+= \rho/\rho' = 2$}
+\note{ligne couverte de hachures}
+\page{53}
+Antipodisme
+\[
+\]
+\note{dans la formule précédente, biffé : « \struck{$x \longmapsto 2c\,\pi(x) - x$} »}
+\[
+\underline{a} = -\mathrm{id} + \ 2\pi \otimes c = -\mathrm{id} + \pi \otimes c'
+\]
+\note{dans la formule précédente, un terme biffé, illisible}
+\[
+-\underline{a} = \mathrm{id} - \pi \otimes c'
+\]
+\note{son $\underline{a}$ souligné est gardé tel quel. Ici encore la lettre
+$c$ est tracée comme un $\sigma$ ; « $2\pi \otimes c = \pi \otimes c'$ »
+confirme la lecture $c' = 2c$ (page 52)}
+
+\emph{NB} $\underline{a}$ défini ssi $c'$ défini i.e. ssi $\rho'$ inversible
+(c'est le cas si $f_V$ lisse). Notons que $\rho' c' = \tilde{c}$
+\ill{}\ \ill{},
+\[
+\langle c', \pi \rangle = 2,
+\]
+donc $-\underline{a}$ est une réflexion, sauf si en certains pts on a car.
+$= 2$, \emph{et} \struck{\ill{}} \struck{\ill{}} $n$ impair.
+\note{au-dessus de « $\rho' c' = \tilde{c}$ » : « si $n$ \uncertain{pair} »}
+
+$\underline{a}$ commute aux $\tau_i$, il invarie $c'$, \uncertain{c'est
+clair}.
+
+\[
+\underline{a}(s_0) = \underline{a}(a_{-1}) = \ c' - s_0 = \tilde{s}_0
+\]
+\note{dans la formule précédente, un terme biffé, illisible}
+
+\marginal{\emph{Attention} il n'y a pas que $c'$ \ill{} à dist. finie,
+mais c'est \ldots}
+\marginal{$\rho' c' = \tilde{c}$ \ill{} $\neq 0$ donc $c'$ \ill{} $\neq 0$
+donc \ill{} $c' =$ \ill{} $\tilde{c}$ ; \ill{} conditions pour les
+\uncertain{parties} si 2 inv. Mais en car 2 pour $n$ \uncertain{impair},
+\ill{} $\sigma' = 0$ d'où $\underline{a} = \mathrm{id}$}
+\marginal{\emph{NB} Si $n$ pair ou $2$ inv., alors : $\underline{a}$ défini
+\emph{et} une réflexion \uncertain{orth.} $\Longleftrightarrow$ \ill{} i.e.
+$\sigma'\rho'$ inv.}
+\note{la première note est en haut à droite, soulignée « Attention » ; la
+deuxième, à droite, derrière une accolade ; la troisième, écrite en diagonale
+dans la marge gauche}
+
+\emph{NB} Dans $\mathcal{E}$, l'ens. des pts fixes de $\underline{a}$ est
+\struck{\ill{}} la droite engendrée par $c'$ si 2 inv. --- si $2 \cdot 1_S =
+0$ i.e. $S$ de car. 2, alors c'est \uncertain{l'ens.} des pts fixes est $V$.
+
+Dans $\mathbb{P}(\mathcal{E})$, l'ens. des pts fixes est $\mathbb{P}(V) \cup
+\lbrace c' \rbrace$ --- qui se réduit à $\mathbb{P}(V)$ en car. 2.
+
+Donc $s_0 \neq \tilde{s}_0 = \underline{a}\, s_0$ dans $\mathbb{P}(\mathcal{E}) = X$.
+
+Considérons le \struck{droite} plan engendré par $s_0$ et $\tilde{c}$
+\struck{\ill{}}
+\[
+g(\lambda, \mu) = f(\lambda s_0 + \mu\tilde{c}) = \
+\lambda\mu \underbrace{\varphi(s_0, \tilde{c})}_{-\xi_0 = -\sigma}
++ \mu^2 f(\tilde{c}) = -\sigma\lambda\mu - \sigma'\rho'\mu^2
+= -\mu(\sigma\lambda + \sigma'\rho'\mu)
+\]
+\note{dans la formule précédente, un terme biffé, illisible}
+
+1) \emph{$n$ pair} : $\sigma = \sigma'$, $\rho = 2\rho'$
+\qquad $f(\lambda s_0 + \mu\tilde{c}) = -\mu\sigma(\lambda + \rho'\mu)$
+
+\quad c'est $= 0$ ssi $\sigma = 0$
+
+\quad c'est $\neq 0$ en chaque fibre $\Longleftrightarrow$ \struck{ssi}
+$\sigma$ inv. i.e. $\sigma'$ inv.
+
+\quad $\Longleftrightarrow$ \struck{dans le cas}, $Q_X \cap D_0$ est un rev.
+étale de degré 2 de $S$, dont $s_0$ est une section, [$\underline{a}_X s_0$
+$\to$ la section complémentaire, quand $\underline{a}_X$ est défini]
+
+\quad $\Longleftrightarrow$ $Q_X \not\supset D_0$ en ch. fibre (c'est le cas
+si $f_\varepsilon$ lisse)
+
+\quad $\Longleftrightarrow$ $\psi(\tilde{c}) \neq 0$ chaque fibre
+$\Longleftrightarrow$ $(\tilde{c})^{\perp} \neq V$ chaque fibre
+\note{le dernier signe peut se lire $=$ ou $\neq$}
+
+\marginal{Si $\sigma$ inv. \struck{\ill{}} \emph{NB} $f(\lambda s_0 +
+\mu\tilde{c}) = 0$, \struck{\ill{}} $\mu$ inv. ssi $\lambda + \rho'\mu = 0$
+i.e. $\lambda = -\rho'\mu$ i.e. $(\lambda, \mu) \parallel (-\rho', 1)$ donc
+$\lambda s_0 + \mu\tilde{c}$ multiple de $-\rho' s_0 + \tilde{c}$ ou encore
+(si $\rho'$ inv.) de $-s_0 + \frac{\tilde{c}}{\rho'} = -s_0 + c' =
+\tilde{s}_0$}
+\note{écrit dans la colonne de gauche, en regard des équivalences
+précédentes}
+
+2) \emph{$n$ impair} \quad $\sigma = 2\sigma'$, $\rho = \rho'$,
+\quad $f(\lambda s_0 + \mu\tilde{c}) = -\mu\sigma'(2\lambda + \rho'\mu)$
+\page{54}
+A) \emph{2 inv.} \struck{Alors $f(\lambda s_0 + \mu\tilde{c}) = 0$
+$\forall \lambda, \mu$ ssi $\sigma$} Alors, indépendamment de la parité de $n$,
+on peut écrire $g(\lambda, \mu) = -\sigma\mu(\lambda + \frac{\rho}{2}\mu)$, et
+les équivalences décrites dans 1°) sont valables, en y remplaçant $\rho'$ par
+$\rho/2$. Les solutions de $g(\lambda, \mu) = 0$, avec $\mu$ inv., sont
+multiples de $(-\frac{\rho}{2}, 1)$ et correspondent à
+\[
+-\frac{\rho}{2} s_0 + \tilde{c} \quad \text{ou encore}\quad 
+\quad (\text{si } \rho \text{ inv. i.e. } \underline{a} \text{ défini})
+\]
+\note{dans la formule précédente, un terme biffé, illisible}
+\[
+-s_0 + 2\frac{\tilde{c}}{\rho} = c' - s_0 = \underline{a}\, s_0
+\]
+\note{au-dessus de la phrase biffée, un autre début biffé :
+« \struck{$g(\lambda, \mu)$ \ill{} id. nul} »}
+
+\struck{B) $S$ de car. 2}
+
+B) $2 \cdot 1_S = 0$ i.e. $S$ de car. 2. On trouve alors
+\struck{$f(\lambda s_0 + \mu\tilde{c})$}
+\[
+g(\lambda, \mu) = f(\lambda s_0 + \mu\tilde{c}) = \,(\sigma'\rho')\mu^2
+\]
+\note{dans la formule précédente, biffé : « \struck{$-$} »}
+c'est $\equiv 0$ ssi $\sigma'\rho' = 0$
+
+c'est $\neq 0$ en toute fibre ssi $\sigma'\rho'$ inv. i.e. $\sigma'$ et $\rho'$
+inv.
+
+\quad i.e. $\sigma'$ inv. et $\underline{a}$ défini (c'est le cas si
+$(\mathcal{E}, V, f)$ \uncertain{birégulier}). \struck{\ill{}} Cela signifie
+aussi $D_0 \not\subset Q_X$ en ch. fibre, et implique que $D_0$ est
+\emph{tangent} à $Q_X$
+
+\marginal{$\underline{a}\, x = x + c' = x$ \quad
+\struck{$f(x + c') = f(x) + f(c') + \langle x, \psi(c') \rangle$} \quad
+\ill{} \ill{} $\rho = \rho'$ ; \ill{}}
+\note{à gauche, en regard de B) ; la lecture de la première formule est
+incertaine}
+
+\struck{Supposons $n$ pair, $n = 2m$. On s'intéresse aux systèmes
+$(X, \tau_{*} = (\tau_i)_{0 \leqslant i \leqslant n}, s_0)$ \ill{} non
+dégénérés, et tels que $\sigma$ $(= \sigma')$ soit inv. [Si on suppose déjà
+les $\beta_i$ $(0 \leqslant i \leqslant n-1)$ inv., cela signifie
+$f_\varepsilon$ lisse.] Ceci définit donc $(X, Q_X, \tau^X_{*})$, où
+maintenant les $\tau_i$ $(0 \leqslant i \leqslant n)$ sont des automorphismes
+\ill{} involutifs de $(X, Q_X)$. Considérons la restriction :
+$(C, Q_C, \tau^C_{*})$ ---}
+\note{ce dernier alinéa, séparé du précédent par un double trait, est barré
+de deux longues diagonales ; il est lisible et donné entier. On y lit aussi
+« \struck{Ceci définit donc} », biffé à part, et au-dessus de « sont des
+automorphismes » une insertion : « \uncertain{bien que} \uncertain{dégénérés} »}
+\section*{Calculs \uncertain{antérieurs}}
+\note{inscrit à l'encre en haut à droite d'un feuillet de garde rose
+(page 55), qui ne porte rien d'autre ; ces mots sont de sa main et donnent sans
+doute le titre des feuillets qui suivent}
+
+\page{56}
+\[
+\begin{array}{ll}
+V & a_0 \quad a_1 \ \cdots\ a_{n-1} \quad a_n \\
+V' & a'_0 \quad a'_1 \ \cdots\ a'_n
+\end{array}
+\qquad a'_0 \text{ défini } -2a^{*}_0 + \beta_0 a^{*}_1
+\]
+\note{entre les deux lignes, des traits obliques marqués « 1 » joignent
+chaque $a_i$ au $a'$ voisin}
+
+\note{à gauche, une petite matrice biffée de traits ondulés ; puis une matrice
+écrite en esquisse, dont on lit la première ligne
+$1, 0, 0, \ldots, 0, 0, -2$ (le $-2$ sur un $1$), la dernière colonne
+$-2, \beta_0, 0, \ldots$, la première colonne $1, -2, \beta_1, 0, \ldots, 0$,
+la deuxième $0, 1, -2, \beta_2, 0, \ldots$, et en bas à droite les entrées
+$1, -\beta_{n-1}$ (surchargé), $\beta_{n-2}, -2$ ; elle n'est pas recomposée}
+
+\begin{tikzcd}
+V \arrow[r] \arrow[rr, bend left=30, "f"] & V' \arrow[r, "c_i"'] & \check{V}
+\end{tikzcd}
+
+\note{la flèche courbe $f$ va de $V$ à $\check{V}$ au-dessus des deux autres ;
+au-dessus de $V'$, « $\psi$ » et un signe illisible. L'étiquette $c_i$ est
+sous la seconde flèche}
+
+\[
+a_i \longmapsto (\beta_0 \cdots \beta_{i-1})\, a'_i \longmapsto
+c_i\,(a^{*}_{i-1} - 2a^{*}_i + \beta_i a^{*}_{i+1})
+\]
+\[
+a_1 \longmapsto c_1(a^{*}_0 - 2a^{*}_1 + \beta_1 a^{*}_2)
+\]
+\[
+a_2 \longmapsto c_2(a^{*}_1 -
+\]
+\note{les deux signes moins devant $2a^{*}$ sont écrits sur des taches ;
+la ligne de $a_2$ s'arrête là}
+
+À droite :
+\[
+\begin{cases}
+a_0 \longmapsto a'_0 \\
+a_1 \longmapsto \beta_0 a'_1 \\
+a_n \longmapsto (\beta_0 \cdots \beta_{n-1})\, a'_n
+\end{cases}
+\qquad \beta_0^{n} \beta_1^{n-1} \cdots \beta_{n-1}
+\]
+\note{les exposants de $\beta_0$ et $\beta_1$ sont écrits sur d'autres,
+biffés}
+
+\[
+\det \begin{pmatrix}
+-2 & 1 & 0 & 0 & \cdots & 0 & 0 \\
+\beta_0 & -2 & 1 & 0 & & 0 & 0 \\
+0 & \beta_1 & -2 & 1 & & 0 & 0 \\
+0 & 0 & \beta_2 & -2 & \ddots & 0 & 0 \\
+0 & 0 & 0 & \beta_3 & \ddots & 0 & 0 \\
+\vdots & & & & \ddots & 1 & 0 \\
+ & & & & & -2 & 1 \\
+0 & & & & & \beta_{n-1} & -2
+\end{pmatrix}
+= L_{n+1}(\beta_0, \ldots, \beta_{n-1}) = \rho
+\]
+\note{matrice d'ordre $n+1$. Par la récurrence de la page 51, son
+déterminant est $(-1)^{n+1} \rho$ ; l'égalité écrite omet ce
+signe, qui vaut $1$ pour $n$ impair. En bas à gauche, une
+petite marque hachurée}
+\page{57}
+\note{toute la page est barrée d'une grande croix (deux longues diagonales),
+et une troisième diagonale fine la traverse ; elle est lisible pour
+l'essentiel et donnée ici}
+
+\drawing{en haut à gauche, trois droites : $H_0$ et $H_1$, et une troisième
+qui les coupe ; un point $h_0$ sur celle-ci, un point $h_1$ à l'intersection
+de $H_0$ et de cette droite}
+
+\struck{$h_0 \notin H_1 \qquad \alpha = -2$}
+
+\struck{$h_0$ --- $H_0$}
+\note{« $h_0$ » et « $H_0$ » sont reliés par un trait qui les barre}
+
+\struck{$h_i \in \struck{\ill{}}\ L$ (dernier) \qquad
+$h_j \notin L$ si $j > i$ \qquad donc $L \subset H_j$ si $j > i$}
+\[
+\]
+\note{dans la formule précédente, biffé : « \struck{$L \subset \underbrace{H_{i+1} \cap H_{i+2} \cap \cdots \cap H_{n-1}}_{Z}$} »}
+
+\struck{$h_0 \ h_1 \ h_2$ \quad $H_0 \ H_1 \ H_2$} \quad
+\struck{pts invariants} \quad \struck{\ill{}} \quad \struck{$X$}
+
+\struck{Variétés invariantes \quad a) Contenues dans aucun des $H_i$ :
+\struck{$X$} doit contenir les $h_i$, c'est $X$}
+
+\struck{b) Contenues dans \struck{\ill{}} un et un seul des $H_i$.}
+
+\struck{1) Contenue dans $H_0$, pas $H_1$, $H_2$, donc contient $h_1$, $h_2$ ;
+il faut donc $\underline{h_1, h_2 \in H_0}$ i.e. $\boxed{\beta_0 = 0}$ ;
+on trouve \struck{\ill{}} $\mathrm{dr}(h_1, h_2)$
+[\struck{$2, \beta_1$ \ill{}} mais les \struck{\ill{}} \uncertain{plus nuls}
+\ill{} $Z \subset H_1$]}
+\note{à droite du crochet, un mot entouré, illisible}
+
+\struck{2) Contenue dans $H_1$, pas dans $H_0$, $H_2$ \ill{}.}
+
+\struck{$Z \subset H_i \Longrightarrow Z \subset H_{j-1}$ \uncertain{ou encore},
+car si $Z \not\subset H_{j-1}$, \ldots\ $Z \ni h_{j-1}$ donc $h_{i-1}
+\in H_i$, absurde}
+
+\struck{$\displaystyle Z \subset \underbrace{H_0 \cap \cdots \cap H_i}_{\dim\, n+1-(i+1) = n-i}$
+\qquad $Z \ni h_i \Longrightarrow Z \not\ni h_{i+1}$ (sinon $Z \subset H_{i+1}$,
+d'où $h_i$ \ill{})}
+
+\struck{$\cup$ \quad $V(h_{i+1}, \ldots, h_{n-1})$ \quad $\dim\, (n-i) - 1 = n-i-1$}
+\note{dans cette dernière ligne, deux chiffres sont écrits sur d'autres}
+\page{58}
+\note{demi-feuillet, au crayon}
+
+\struck{$\langle s_0, a'_0 \rangle$} \qquad \struck{$s_i, a_i$}
+\qquad\qquad \uncertain{$\rho_{ij} = \rho'_{ji}$}
+
+\[
+\langle a_i, a'_j \rangle =
+\begin{cases}
+0 & \text{si } j \neq i-1, i, i+1 \\
+1 & \text{si } j = i+1 \\
+\mu_i = \lambda_i - 1 & \text{si } j = i \\
+\beta_j & \text{si } j = i-1
+\end{cases}
+\]
+\note{même table qu'à la page 47, où $\beta_j = 1 - \lambda_j + \alpha_j$}
+
+À droite :
+\[
+\underbrace{\begin{array}{cccc}
+b_0 & b_1 & b_n & b_{n+1} \\
+\Vert & \Vert & \vert & \Vert \\
+a'_0 & a'_1 & b'_n & a'_{n+1}
+\end{array}}
+\]
+
+\drawing{deux rangées de sommets : en haut $a_{-1}, a_0, a_1, a_2, \ldots,
+a_{n-1}, a_n$ (une accolade $V$ au-dessus de $a_0, \ldots, a_n$ ; un
+astérisque sur $a_1$), en bas $a'_0, a'_1, a'_2, \ldots, a'_{n-1}, a'_n,
+a'_{n+1}$ ; chaque $a_i$ est joint verticalement à $a'_i$ par un trait marqué
+$\lambda_i - 1$ ($\lambda_0 - 1, \lambda_1 - 1, \lambda_2 - 1, \ldots,
+\lambda_{n-1} - 1, \lambda_n - 1$), et en diagonale à $a'_{i+1}$ par un trait
+marqué $1$ (de $a_{-1}$ à $a'_0$, \ldots, de $a_n$ à $a'_{n+1}$) ; une
+accolade sous $a'_0, \ldots, a'_n$, prolongée d'un trait ondulé jusqu'à
+$a'_{n+1}$, avec un mot biffé}
+
+\drawing{au-dessous, la même rangée $a_{-1}, a_0, a_1, a_2, \ldots, a_{n-1},
+a_n$ et, décalée, $a'_0$, $a'_1$, \ldots, $a'_{n-1}$, $a'_n$, $a'_{n+1}$ ;
+seuls sont tracés les traits montant de $a'_i$ à $a_{i+1}$, marqués
+$\beta_0$, $\beta_1$, \ldots, $\beta_{n-1}$ ; un signe biffé après $a'_n$}
+
+\[
+\mathcal{E} \supset V \qquad \mathcal{E}' \supset V' \qquad
+\underline{\mathcal{O}_S} \to \mathcal{E} \to \underline{\mathcal{O}_S}
+\]
+\[
+V \simeq \underline{\mathcal{O}_S}^{\,n+1} \qquad b_0 \ b_1 \ \text{---}\ b_{n+2}
+\]
+\[
+V' \simeq \underline{\mathcal{O}_S}^{\,n+1} \qquad b' \ \text{---}\ b'_0
+\]
+\note{l'exposant de la dernière ligne est d'une lecture incertaine
+($n+1$ ou $n-1$)}
+\page{60}
+\[
+0 \leqslant i \leqslant j \leqslant n-1 \qquad
+\rho_{ij} = L_{j-i+2}(\beta_i, \beta_{i+1}, \ldots, \beta_j)
+= L_{j-i+1}(\beta_j, \beta_{j-1}, \ldots, \beta_i)
+\]
+\note{« $i \leqslant j$ » est écrit sur « $i < j$ ». L'indice du second $L$
+se lit $j - i + 1$ ; la symétrie de $L$ (page 49) demande le même indice
+$j - i + 2$ des deux côtés. En haut à droite, un début biffé :
+« \struck{$\tilde{\rho}_{ij} =$ \ill{}} »}
+
+\[
+\rho = \rho_{0,n-1}, \quad \sigma = \rho_{1,n-1}, \quad \sigma' = \rho_{0,n-2},
+\quad \gamma = \rho_{1,n-2}
+\]
+\note{les accents de cette ligne ne sont pas ceux de la page 52 : ici
+$\sigma'$ est $\rho_{0,n-2}$. La lettre notée $\gamma$ pourrait être un
+$\nu$}
+
+On pose aussi $\rho_{i,i-1} = 2$, $\rho_{i,i-2} = 1$ \qquad
+$\rho'_{ji} = \rho_{ij}$ $(j \geqslant i)$
+\note{les indices de $\rho'_{ji}$ et $\rho_{ij}$ sont écrits sur d'autres}
+
+\[
+\boxed{a^{*}_i = a'_{i+1} + 2a'_{i+2} + \cdots + \rho_{i+1,i+j}\, a'_{i+j+2} + \cdots
++ \rho_{i+1,n-1}\, a'_{n+1}}
+\qquad -1 \leqslant i \leqslant n
+\]
+
+\struck{$a^{*}_j =$} \quad en particulier pour $i = -1$, $i = 0$
+\[
+\begin{cases}
+a^{*}_{-1} = \pi' = a'_0 + 2a'_1 + \overbrace{\rho_{0,0}}^{4 - \beta_0 = 2 - \alpha_0} a'_2
++ \rho_{0,1} a'_3 + \cdots + \overbrace{\rho_{0,n-2}}^{\sigma'} a'_n
++ \overbrace{\rho_{0,n-1}}^{\rho} a'_{n+1} \\
+a^{*}_0 = -\psi(a_{-1}) = -\psi(s_0) = a'_1 + 2a'_2 + \rho_{1,1} a'_3 + \cdots
++ \overbrace{\rho_{1,n-2}}^{\gamma} a'_n + \overbrace{\rho_{1,n-1}}^{\sigma} a'_{n+1} \\
+\bigl[\, a^{*}_1 = a'_2 + 2a'_3 + \rho_{2,2} a'_3 + \cdots + \rho_{2,n-2} a'_n
++ \rho_{2,n-1} a'_{n+1} \\
+\cdots \\
+a^{*}_{n-2} = a'_{n-1} + 2a'_n + \underbrace{\rho_{n-1,n-1}}_{4 - \beta_{n-1} = 2 - \alpha_{n-1}} a'_{n+1} \\
+a^{*}_{n-1} = a'_n + 2a'_{n+1} \\
+a^{*}_n = a'_{n+1}
+\end{cases}
+\]
+\note{dans la ligne de $a^{*}_1$ on lit « $\rho_{2,2}\, a'_3$ », où la formule
+encadrée donne $\rho_{2,2}\, a'_4$ ; l'indice de $a^{*}_{n-2}$ est écrit sur un
+autre. Un long trait relie ce bloc à la formule encadrée}
+
+\[
+\tilde{\rho}_{ij} =
+\begin{cases}
+\rho_{ij} & \text{si } j - i \text{ pair} \\
+\frac{1}{2} \rho_{ij} & \text{si } j - i \text{ impair}
+\end{cases}
+\]
+\note{formule entourée ; les mots « pair » et « impair » sont écrits sur
+d'autres, biffés}
+
+Dualement
+\[
+\boxed{a'^{*}_j = a_{j-1} + 2a_{j-2} + \rho'_{j-2,j-2}\, a_{j-3} + \cdots
++ \rho'_{j-2,j-i}\, a_{j-i-1} + \cdots + \rho'_{j-2,0}\, a_{-1}}
+\]
+\note{de petits astérisques paraissent sur les $a$ du second membre ; les
+indices du terme général sont surchargés et d'une lecture incertaine}
+
+\[
+\begin{cases}
+a'^{*}_{n+1} = \pi = a_n + 2a_{n-1} + \underbrace{\rho'_{n-1,n-1}}_{4 - \beta_{n-1} = 2 - \alpha_{n-1}} a_{n-2}
++ \cdots + \overbrace{\rho'_{n-1,1}}^{\sigma} a_0 + \overbrace{\rho'_{n-1,0}}^{\rho} a_{-1} \\
+a'^{*}_n = -\psi'(a'_{n+1}) = a_{n-1} + 2a_{n-2}
++ \underbrace{\rho'_{n-2,n-2}}_{4 - \beta_{n-2} = 2 - \alpha_{n-2}} a_{n-3} + \cdots
++ \overbrace{\rho'_{n-2,1}}^{\gamma} a_0 + \overbrace{\rho'_{n-2,0}}^{\sigma'} a_{-1} \\
+\cdots \\
+a'^{*}_2 = a_1 + 2a_2 + \underbrace{\rho'_{0,0}}_{4 - \beta_0 = 2 - \alpha_0} a_{-1} \\
+a'^{*}_1 = a_0 + 2a_{-1} \\
+a'^{*}_0 = a_{-1}
+\end{cases}
+\]
+\[
+\boxed{\langle \pi, \pi' \rangle = \rho}
+\]
+\note{dans la ligne de $a'^{*}_2$ on lit « $2a_2$ », là où la formule
+encadrée donne $2a_0$}
+
+\[
+\begin{cases}
+\psi(a_i) = -(\beta_0 \cdots \beta_{i-1})\, a'_i & 0 \leqslant i \leqslant n \\
+\psi(a_{-1}) = -a^{*}_0 = -\bigl[a'_1 + 2a'_2 + \rho_{11} a'_3 + \cdots
++ \overbrace{\rho_{1,n-2}}^{\gamma} a'_n + \overbrace{\rho_{1,n-1}}^{\sigma} a'_{n+1}\bigr] \\
+f(a_i) = \beta_0 \cdots \beta_{i-1} & 0 \leqslant i \leqslant n \\
+\qquad f(a_0) = 1,\ f(a_1) = \beta_0, \ldots, f(a_n) = \beta_0 \cdots \beta_{n-1} = \beta \\
+f(a_{-1}) = 0 \qquad \varphi(a_i, a_{i+1}) = -\beta_0 \cdots \beta_i & 0 \leqslant i \leqslant n-1 \\
+\psi'(\pi) = -\sigma\pi' \qquad f(\pi) = -\tilde{\sigma}\tilde{\rho} & (0
+\end{cases}
+\]
+\note{dans $\varphi(a_i, a_{i+1})$, un exposant est biffé sur $\beta_0$ ; la
+dernière ligne s'interrompt sur « (0 »}
+
+\end{document}
