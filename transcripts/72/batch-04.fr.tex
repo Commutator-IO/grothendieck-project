@@ -1,0 +1,941 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 72, batch 4 (pages 61-80).
+% Established from the facsimile archives/batches/72/batch-04.pdf (cut from a
+% copy of https://grothendieck.umontpellier.fr/72.pdf fetched through the
+% project's relay), per the skill transcribe-grothendieck. The batch file
+% carries no cover sheet: PDF page k is archivists' page 60+k; the pencilled
+% numbers bottom-left (« 61 » ... « 80 ») agree.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-09-27 — first pass, unchecked against the pages by a human.
+%
+% Thirteen pages carry a \page marker: 62, 64, 66, 68, 70, 72-77, 79, 80.
+% Absent: pages 61, 63, 65, 67 and 69, typed USTL
+% documents (avis de soutenance dated 1er and 3 juillet and 28 juin 1978, a
+% « Recueil n° 16 » of Conseil de l'Université decisions of mai 1978
+% addressed to him, and a torn half-sheet of the same kind, page 69), with
+% nothing in his hand; they are consistent with the archivists'
+% « [à partir de 1978] » and say nothing more. Pages 71 and 78 are coloured
+% wrapper sheets bearing only a title in his hand, top right; they take no
+% \page marker and their words become the two \section headings, each with
+% a \note: page 71 « Calculs centrés en σ (si centre à dist. finie, i.e.
+% ρ inv.) », page 78 « Sous-espaces invariants ».
+%
+% Pages summarised: none. No pagination of his own on these leaves.
+%
+% What the batch is about. The linear algebra of a « réalisation
+% géométrique » of the string (linear) Coxeter diagram: generators τ_0 ... τ_n
+% acting as (pseudo-)reflections on V (or X = P(V)), basis vectors a_{-1},
+% a_0 ... a_n and a'_j, the parameters α_i, β_i = 2 + α_i, the products
+% β = β_0...β_{n-1}, σ, σ', γ, ρ, ρ' (continuants L_k(β_1, ..., β_{n-2})),
+% the invariant quadratic form f with φ(a_i, a_{i+1}) = -β_0...β_i.
+%   62-66  The maps ψ, ψ': ψ'ψ = β id + γ π'⊗π, the boxed identity
+%          σσ' = β + γρ, the inverse Θ = βσ ψ^{-1}, the vectors s_i, s'_i,
+%          t_i = Θ(s'_i), f(t_{n+1}) = βσγ/2, then u = s_0 + s_1,
+%          v = t_n + t_{n+1} with f(u) = -1, f(v) = βσ(2γ - σ).
+%   68     Examples n = 1 and n = 2 (checked against 62-66; they agree).
+%   70     ρ invertible: the centre c = π/ρ, the projections p_λ, the
+%          normalised s̃_i, ũ, t̃_i and coefficient computations.
+%   72-77  (« Calculs centrés en σ ») Reformulation when the centre is at
+%          finite distance: data (V, f_V, φ_G), conditions 1°-3°, s̃_0 as a
+%          basis of D_0 = ∩ H_i, formula (*) -ρ s̃_0 = Σ ξ_i a_i with
+%          ξ_0 = σ, ξ_i = L_{n-i}(...); C) invariant forms, normalisation
+%          f_V(a_0) = 1; discriminant δ(f_V) = Bρ ω_V^{⊗-2}; the
+%          circumscribed quadric f_V = λ with λ = σ'/4ρ' (n even) or σ'/ρ'
+%          (n odd); D), E): equivalence with triples (C, Q_C, φ^C_G) for
+%          n ≠ 2; page 77 recomputes f_V(s̃_0), f_V(s'_0) = ρ'σ' and the
+%          homothety ratio λ = 2√(1 - ρ'/σ') or 2√(1 - ρ'/4σ').
+%   79-80  (« Sous-espaces invariants ») Theorem over a field k: the
+%          G-invariant projective subspaces are ∅, X, {c}, C and, for each i
+%          with β_i = 0, Z'_i = H_0 ∩ ... ∩ H_i and Z*_i = Lin(h_{i+1}, ..., h_n);
+%          the two chains Z*_n ⊂ ... ⊂ Z*_{-1}, Z'_n ⊂ ... ⊂ Z'_{-1};
+%          when they coincide; corollaries (at most 2(n+2) invariant
+%          subspaces; when only the trivial four), a cancelled and a
+%          restarted d) on stable subspaces of C, breaking off.
+%
+% Arithmetic. His computations were checked where the page allows: 66
+% (f(u), f(v)), 68 (both examples), 70 (coefficients of a_n, a_{n-1}: some
+% signs on the page disagree with the computation, noted), 74 and 77 (λ,
+% f_V(s'_0 + s'_1), the two square roots: correct). Apparent slips and
+% sign inconsistencies are flagged in \note{}s, never corrected (62, 70).
+%
+% Notation, fixed once. His tilde and prime are kept as written; his
+% « a'^* » is a'^{*}; his « a^∨ » (a small v over the letter) is a^\vee;
+% the looped σ of page 77 is kept as σ with a note (it plays the role of
+% the centre c of page 70). Z^{*}_i renders a small looped exponent read
+% as a star. Hands: dark and blue ink; his interlinear insertions on his
+% own leaves are integrated into the line, a few marked \add{}.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{72}
+\batch{4}
+\pages{61}{80}
+\dating{[à partir de 1978]}
+\watermark{Édition de démonstration}
+\foldertitle{Polyèdres réguliers et hyperpolyèdres réguliers (Calculs en dimension quelconque) : notes manuscrites (s.d.).}
+
+\begin{document}
+
+\page{62}
+\note{la page commence au milieu d'un calcul dont le début n'est pas dans ce
+lot : deux applications linéaires $\psi$, $\psi'$ (et $f'$, lettre en forme de
+$f$ allongé, distincte du $\varphi$ bouclé plus bas), des bases $a_j$, $a'_j$,
+des vecteurs $\pi$, $\pi'$ et des scalaires $\beta_j$, $\sigma$, $\sigma'$,
+$\gamma$, $\rho$.}
+
+\[
+\begin{cases}
+\psi'(a'_j) = -(\beta_{n-1} \cdots \beta_j)\, a_j \\
+\psi'(a'_{n+1}) = -a'^{*}_n = -\Bigl[ a_{n-1} + \uncertain{2}\,a_{n-2} + \rho'_{n-1,n-2} + \cdots + \overbrace{\rho'_{n-1,1}}^{\gamma}\, a_0 + \overbrace{\rho'_{n-2,0}}^{\sigma'}\, a_{-1} \\
+f'(a'_j) = \beta_{n-1} \cdots \beta_j \quad (n \geq j \struck{\geq \ill{}}) \\
+f'(a'_{n+1}) = 0
+\end{cases}
+\]
+\note{la crochet ouvert à la deuxième ligne n'est pas refermé sur la page.
+En regard, en haut à droite : \struck{$n+1 > j > 0$} \struck{$0 \leq j \leq n+1$}
+$(n \geq j \geq 0)$, et sous cette ligne
+$\uncertain{4} - \beta_{n-2} = 2 - \alpha_{n-2}$, relié par une accolade au
+terme $\rho'_{n-1,n-2}$. À droite de la troisième ligne :
+$f'(a'_n) = 1$, $f'(a'_{n-1}) = \beta_{n-1}$, \ldots,
+$f'(a'_0) = \beta_{n-1} \cdots \beta_0 = \beta$ (la fin débordant sur la marge).}
+
+\[
+\psi'(\pi') = -\sigma'\pi, \qquad f'(\pi') = -\tilde{\sigma}\tilde{\rho}
+\]
+\note{le premier $\tilde{\ }$ porte peut-être sur une surcharge ; lecture
+douteuse.}
+
+\[
+\begin{cases}
+\psi'\psi(a_i) = \beta a_i \quad \text{si } \uncertain{0 \leq i \leq n} \\
+\psi'\psi(\pi) = \sigma\sigma'\pi
+\end{cases}
+\qquad (\beta = \beta_0 \cdots \beta_{n-1})
+\]
+
+\[
+\psi'\psi = \beta\, \mathrm{id}_E + \gamma\, \pi' \otimes \pi,
+\qquad
+\psi\psi' = \beta\, \mathrm{id}_{E'} + \gamma\, \pi \otimes \pi',
+\qquad
+\boxed{\sigma\sigma' = \beta + \gamma\rho}
+\]
+
+\note{la suite, jusqu'au trait ondulé, est barrée de deux longues diagonales.}
+
+\[
+a_{-1} = s_0, \quad a'_{n+1} = s'_0, \qquad
+\struck{-a'^{*}_n} = t_0 \struck{\psi'(a'_{n+1}) =}
+\]
+
+\[
+\begin{array}{l}
+s_0 = a_{-1},\ s_1 = \tau_0 s_0 = a_{-1} + a_0,\ s_2 = \tau_1\tau_0 s_0 = s_0 + (a_0 + a_1) = a_{-1} + a_0 + a_1,\ \ldots,\\
+\qquad s_{n+1} = (\tau_n \cdots \tau_0) s_0 = s_0 + (a_0 + \cdots + a_n) = a_{-1} + a_0 + \cdots + a_n \\
+s'_0 = a'_{n+1},\ s'_1 = \tau_n s'_0 = s'_0 + a_n,\ s'_2 = \tau_{n-1}\tau_n s'_0 = s'_0 + a_n + a_{n-1},\ \ldots,\\
+\qquad s'_{n+1} = \tau_0 \cdots \tau_n s'_0 \struck{= s'_0 + (a_n + \cdots + a_0)}
+\end{array}
+\]
+\note{encadré à droite ; les indices de la deuxième ligne sont surchargés
+($s'_{n+1}$ écrit sur un autre indice) et la dernière égalité est barrée.
+Les $a_j$ de cette ligne sont sans accent sur la page.}
+
+\[
+t_0 \overset{\text{df}}{=} \psi'(s'_0) = \psi'(a'_{n+1}) \overset{\text{df}}{=} -a'^{*}_n
+= -\bigl[ a_{n-1} + a_{n-2} + (\uncertain{4} - \beta_{n-1})\, a_{n-3} + \cdots + \gamma a_0 + \sigma' a_{-1} \bigr]
+\]
+\note{au-dessus du premier $\overset{\text{df}}{=}$, barré :
+\struck{$a'_{n+1} =$}. Les coefficients de cette ligne ne coïncident pas
+avec ceux de la deuxième ligne du premier système ($2a_{n-2}$, $\beta_{n-2}$) ;
+lecture douteuse de part et d'autre.}
+
+$t_0$ \ill{} : $s_0 \cdots s_n$ \ill{} : $a_{-1}, a_0, \ldots, a_n$ ?
+
+\[
+\boxed{\langle s_i, \pi' \rangle = 1 \qquad \langle \pi, s'_i \rangle = 1 \qquad 0 \leq i \leq n+1}
+\]
+
+\[
+\varphi(t_0, s_i) = \langle s_i, \psi(t_0) \rangle = \langle s_i, \psi\psi'(s'_0) \rangle
+= \langle s_i, \beta \underset{s'_0}{a'_{n+1}} + \gamma \underbrace{\langle \pi, s'_0 \rangle}_{1} \pi' \rangle
+= \gamma \struck{\ 0 \leq i \leq n}
+\]
+\[
+= \begin{cases} \gamma & \text{si } 0 \leq i \leq n \\ \beta + \gamma & \text{si } i = n+1 \end{cases}
+\]
+\note{sous $\psi\psi'(s'_0)$, un renvoi \uncertain{$\beta s'_0$} peu lisible ;
+devant l'accolade, deux signes barrés illisibles.}
+
+\[
+\varphi(\pi, s_i) = \langle s_i, \psi(\pi) \rangle = \langle s_i, -\sigma\pi' \rangle = -\sigma.
+\]
+
+$\sigma t_0 + \gamma\pi$ orthogonal aux $s_i$, $0 \leq i \leq n$ :
+\[
+\begin{array}{r}
+\gamma a_n + \uncertain{2}\gamma a_{n-1} + \gamma\rho'_{n-1,n-1} a_{n-1} + \cdots + \overbrace{\gamma\rho'_{n-1,1}}^{\sigma} a_0 + \overbrace{\gamma\rho'_{n-1,0}}^{\rho} a_{-1} \\
+- \sigma\gamma a_0 - \sigma\sigma' a_{-1} \\
+\hline
+0 \cdot a_0 \quad - \beta a_{-1}
+\end{array}
+\]
+\note{la deuxième ligne commence par $-\sigma a_{n-1} \ldots \sigma a_{n-2}$,
+en partie illisible ; les indices sont incertains. Le report est
+cohérent avec l'encadré $\sigma\sigma' = \beta + \gamma\rho$ :
+$\gamma\rho - \sigma\sigma' = -\beta$.}
+
+\uncertain{Dén.} de $\psi^{-1}$ est $\beta\sigma$, et
+\[
+\beta\sigma\,\psi^{-1} = \sigma\psi' + \gamma\,\pi \otimes \pi \overset{\text{df}}{=} \Theta',
+\qquad
+\beta\sigma'\,\psi'^{-1} = \sigma'\psi + \gamma\,\pi' \otimes \pi' \overset{\text{df}}{=} \Theta
+\]
+\[
+\Theta\psi = \beta\sigma\,\mathrm{id}, \quad \psi\Theta = \beta\sigma\,\mathrm{id}
+\qquad
+\Theta(\pi') = -\beta\pi, \quad \Theta'(\pi) = -\beta\pi'
+\]
+\note{« Dén. » : sans doute « dénominateur » ; lecture douteuse. Les $\otimes$ de ces lignes et les primes de $\Theta$,
+$\Theta'$ sont tels que sur la page, où les deux définitions semblent
+croisées (l'accolade relie la seconde à l'encadré
+$\Theta\psi = \beta\sigma\,\mathrm{id}$) ; non corrigé.}
+
+\page{64}
+\[
+\begin{cases}
+s_0 = a_{-1},\ s_1 = a_{-1} + a_0,\ s_2 = a_{-1} + a_0 + a_1,\ \ldots,\ s_{n+1} = a_{-1} + a_0 + \cdots + a_n \\
+s_{i+1} = \tau_i s_i \qquad 0 \leq i \leq n
+\end{cases}
+\]
+\[
+\begin{cases}
+s'_{n+1} = a'_{n+1},\ s'_n = a'_{n+1} \uncertain{+} a'_n,\ s'_{n-1} = a'_{n+1} + a'_n + a'_{n-1},\ \ldots,\ s'_0 = a'_{n+1} + a'_n + \cdots + a'_0 \\
+s'_i = \tau_i s'_{i+1} \qquad 0 \leq i \leq n.
+\end{cases}
+\]
+\note{les indices de la seconde accolade sont ceux de la page, où
+$s'_{n+1} = a'_{n+1}$ remplace le $s'_0 = a'_{n+1}$ de la page 62 :
+la numérotation des $s'_i$ est renversée d'une page à l'autre.}
+
+\[
+\langle s_i, \pi' \rangle = 1, \qquad \langle \pi, s'_i \rangle = 1,
+\qquad
+\langle s_i, s'_j \rangle =
+\begin{cases}
+0 & \text{si } \struck{j > i}\ 0 \leq i < j \leq n+1 \\
+1 & \text{si } i = j, \quad 0 \leq i \leq n+1
+\end{cases}
+\]
+\[
+\langle s_i, \pi' \rangle = 1 \qquad \langle \pi, s'_i \rangle = 1 \qquad 0 \leq i \leq n+1
+\]
+
+\[
+\begin{cases}
+t_i = \Theta(s'_i) & 0 \leq i \leq n+1 \\
+\langle t_i, \pi \rangle = -\beta \\
+t_i = \tau_i t_{i+1} & 0 \leq i \leq n
+\end{cases}
+\]
+
+\[
+\boxed{
+\begin{aligned}
+t_{n+1} = \Theta(s'_{n+1}) &= -\sigma a'^{*}_n + \gamma\pi = -\sigma a'^{*}_n + \gamma a'^{*}_{n+1} \\
+&= \gamma a_n + (\uncertain{2\gamma} - \sigma)\, a_{n-1} + (\rho'_{n-1,n-1}\gamma - 2\sigma)\, a_{n-2} + \cdots \\
+&\quad + (\rho'_{n-1,n-1-j}\gamma - \rho'_{n-2,n-1-j}\sigma)\, a_{n-j-2} + \cdots \\
+&\quad + (\rho'_{n-1,2}\gamma - \rho'_{n-2,2}\sigma)\, a_1 + 0 \cdot a_0 - \beta a_{-1}
+\end{aligned}}
+\]
+\note{sous $0 \cdot a_0$, un point d'exclamation. Dans la troisième ligne,
+un mot biffé illisible entre $\gamma$ et $\rho'_{n-2,n-1-j}$, et
+l'indice $n-1-j$ du second $\rho'$ est surchargé. Les étoiles de la
+première ligne sont surchargées.}
+
+\[
+\boxed{\Theta(a'_j) = -\sigma(\beta_{n-1} \cdots \beta_j)\, a_j \qquad 0 \leq j \leq n}
+\]
+
+\[
+t_i = t_{n+1} + \Theta(a'_n + \cdots + a'_i)
+= t_{n+1} - \sigma \bigl[ a_n + \beta_{n-1} a_{n-1} + \beta_{n-1}\beta_{n-2} a_{n-2} + \cdots + (\beta_{n-1} \cdots \beta_i)\, a_i \bigr]
+\]
+
+\emph{NB} $t_i = 0$ (pour \uncertain{un} $i$ ($j \geq 0$)) ssi $\sigma = \gamma = 0$
+(et ceci implique que $\beta = 0$). Si $\beta$ inv. (mais \uncertain{sans que
+néc.} $\sigma$ inv. i.e. $\psi$ iso) alors on \uncertain{peut} définir
+$-\frac{1}{\beta}\, t_i \in E \subset X$ \ldots
+
+\[
+\begin{array}{ll}
+\varphi(t_{n+1}, s_i) = 0 & 0 \leq i \leq n \\
+\varphi(t_{n+1}, a_i) = 0 & \uncertain{-1} \leq i \leq n-1
+\end{array}
+\qquad
+\varphi(t_{n+1}, s_{n+1}) = \varphi(t_{n+1}, a_n) = \beta\sigma
+\]
+\[
+\struck{\langle t_{n+1}, \psi(a_n) \rangle = (-2\gamma + 2\gamma - \sigma)\beta \ldots}
+\qquad
+\struck{= \beta a_n\ \psi t_{n+1}}\ \langle a_n, \psi(t_{n+1}) \rangle
+\]
+\[
+f(t_{n+1}) = \tfrac{1}{2} \langle t_{n+1}, \psi(\underbrace{t_{n+1}}_{\beta\sigma\, s'_{n+1}}) \rangle
+= \frac{\beta\sigma}{2}\,\gamma = \beta\tilde{\sigma}\tilde{\gamma}
+\]
+\note{le bas de la page est en partie biffé et surchargé : la ligne
+$\langle t_{n+1}, \psi(a_n) \rangle = \ldots$ est entourée et barrée, et une
+accolade ramène $\beta\sigma$ de la ligne précédente sous
+$\psi(t_{n+1})$, avec $\beta\sigma\, s'_{n+1}$ (sur un $\beta\sigma$
+barré). Le passage de $\frac{\beta\sigma}{2}\gamma$ à
+$\beta\tilde{\sigma}\tilde{\gamma}$ suppose une convention sur les
+tildes qui n'est pas sur ces pages.}
+
+\page{66}
+\[
+\Theta = (2 - \alpha_1)\rho
+\]
+\[
+\sigma\sigma' - \beta = (\underbrace{2 - \alpha_1}_{\struck{4} - \beta_1})\rho,
+\qquad (\struck{4}\ 1 - \beta_1) = L_2(\beta_1) =
+\]
+\note{en regard : « $n = 3$ \quad $\alpha_0, \alpha_1, \alpha_2$ \ill{} $\alpha$ ».}
+
+\[
+\boxed{\sigma\sigma' - \beta = \underbrace{L_{n-1}(\beta_1, \ldots, \beta_{n-2})}_{\overset{\Vert}{\zeta_1} \;=\; L_{n-1}(\ \ }\,\rho^{\ill{}}}
+\]
+\note{sous l'accolade, « $\zeta_1 = L_{n-1}($ » laissé inachevé, avec
+« $i = n-1$ » au-dessous ; l'exposant de $\rho$ dans l'encadré est
+surchargé. Le haut de la page (jusqu'à $\psi'\psi$) est traversé de
+longues diagonales au crayon.}
+
+\[
+\psi'\psi = \beta\,\mathrm{id} + \gamma\,\tilde{\sigma}' \otimes \tilde{\sigma}
+\qquad
+\begin{cases}
+\beta = \beta_0\beta_1 \cdots \beta_{n-1} \\
+\gamma = L_{n-1}(\beta_1, \ldots, \beta_{n-2})
+\end{cases}
+\quad ?
+\]
+
+\[
+\Theta(a'_{n+1}) = \sigma\psi'(a'_{n+1}) + \gamma
+\]
+\[
+\langle \underbrace{\Theta(\overset{s'_{n+1}}{a'_{n+1}})}_{t_{n+1}}, \pi' \rangle
+= \langle \Theta(\pi'), \underset{a'_{n+1}}{s'_{n+1}} \rangle
+= -\beta \langle \pi, s'_{n+1} \rangle = -\beta
+\]
+
+\[
+u = s_0 + s_1 = 2a_{-1} + a_0 \qquad \struck{f(u) =}\ \langle u, \pi \rangle = 2
+\]
+\[
+v = t_n + t_{n+1} = 2t_{n+1} - \sigma a_n \qquad \langle v, \pi \rangle = -2\beta
+\]
+\note{le signe devant $\sigma a_n$ est une tache ; $-$ est ce que donne
+$t_n = t_{n+1} - \sigma a_n$ (page 64).}
+
+\[
+\begin{cases}
+f(u) = \struck{f(s_0) + f} 4 f(\underbrace{a_{-1}}_{0}) + \underset{1}{f(a_0)} + 2\varphi(\underbrace{a_{-1}, a_0}_{-1}) = -1 \\
+f(v) = 4 \underbrace{f(t_{n+1})}_{2\beta\sigma\gamma} + \sigma^2 \underbrace{f(a_n)}_{\beta} - 2\sigma \underbrace{\varphi(a_n, t_{n+1})}_{\beta\sigma} = \beta\sigma(2\gamma - \sigma) \\[1ex]
+\left.
+\begin{array}{l}
+f(s_0) = 0 \\
+f(t_{n+1}) = \beta\tilde{\gamma}\tilde{\sigma}
+\end{array}
+\right|\ \text{pour mémoire}
+\end{cases}
+\]
+\note{le coefficient de $\varphi(a_{-1}, a_0)$ est surchargé (un $2$ sur
+un $4$ ?). Avec $2$, les deux calculs se vérifient :
+$0 + 1 - 2 = -1$ et $2\beta\sigma\gamma + \beta\sigma^2 - 2\beta\sigma^2
+= \beta\sigma(2\gamma - \sigma)$ ; sous $4f(t_{n+1})$ il écrit la valeur
+de $4f(t_{n+1})$, soit $2\beta\sigma\gamma$ (page 64 :
+$f(t_{n+1}) = \beta\sigma\gamma/2$). « pour mémoire » : lecture
+\uncertain{probable}.}
+
+\page{68}
+\emph{Ex} \quad \emph{$n = 1$} \quad \struck{$t_2 =$}
+$\beta = \beta_0 = 2 + \alpha_0$, $\rho = 4 - \beta = 2 - \alpha$,
+$\sigma = \sigma' = 2$, $\gamma = 1$.
+\note{le $4$ de $\rho = 4 - \beta$ est écrit sur un mot biffé illisible ;
+le $\alpha$ final est sans indice.}
+
+\[
+\begin{cases}
+\beta\sigma\,\psi^{-1} = 2\beta\,\psi^{-1} = 2\psi' + \pi \otimes \pi \\
+t_2 = a_1 - \beta a_{-1} \\
+f(t_2) = \beta
+\end{cases}
+\]
+
+\emph{$n = 2$}, $\beta = \beta_0\beta_1 = (\alpha_0 + 2)(\alpha_1 + 2)$,
+$\rho = -2(\alpha_0 + \alpha_1)$, $\sigma = 2 - \alpha_1$,
+$\sigma' = 2 - \alpha_0$,
+\note{sous $\beta_0$, biffé : « $= \alpha_0 + 2$ » ; le $2$ de
+$\sigma = 2 - \alpha_1$ surcharge un autre chiffre.}
+\[
+\Theta = \beta\sigma\,\psi^{-1} = (4 - \alpha_1^2)(\alpha_0 + 2)\,\psi^{-1} = (2 - \alpha_1)\,\psi' + 2\,\pi \otimes \pi
+\]
+\[
+t_3 = 2a_2 + (\underbrace{2 + \alpha_1}_{\beta_1})\,a_1 + \underset{!}{0 \cdot a_0} - \beta_0\beta_1\, a_{-1}
+\]
+\[
+f(t_3) = (4 - \alpha_1^2)(2 + \alpha_0)
+\]
+\note{les valeurs se vérifient sur les formules des pages 62 à 66 :
+pour $n = 1$, $\sigma\sigma' = 4 = \beta + \gamma\rho$ et
+$f(t_2) = \beta\sigma\gamma/2 = \beta$ ; pour $n = 2$,
+$\sigma\sigma' - \beta = -4(\alpha_0 + \alpha_1) = \gamma\rho$ avec
+$\gamma = 2$ (coefficient de $\pi \otimes \pi$ dans $\Theta$),
+$2\gamma - \sigma = 2 + \alpha_1 = \beta_1$, et
+$f(t_3) = \beta\sigma\gamma/2 = \beta\sigma$.}
+
+\page{70}
+Supposons $\rho$ inv. \uncertain{donc} $E \simeq V \oplus \Delta_0$.
+On définit, pour $\lambda$ inv.,
+\[
+\struck{\ill{}}\ p_\lambda : \lambda E \xrightarrow{\ \sim\ } V, \qquad
+x \longmapsto \frac{1}{\lambda}\, x - \underbrace{\frac{\pi}{\rho}}_{c}
+\]
+\note{$\frac{\pi}{\rho}$ est entouré et nommé $c$ ; à la suite,
+« si \struck{cela existe} », biffé.}
+
+Posons
+\[
+\tilde{s}_i = p_1(s_i) = s_i - c =
+\]
+\[
+\begin{cases}
+\tilde{s}_0 = \ill{} - \dfrac{1}{\rho} \Bigl[ \overbrace{\rho'_{n-1,1}}^{\sigma} a_0 + \rho'_{n-1,2}\, a_1 + \cdots + \rho'_{n-1,n-1}\, a_{n-2} + 2a_{n-1} + a_n \Bigr] \\
+\tilde{s}_i = \tilde{s}_0 - \dfrac{1}{\rho} \bigl[ a_0 + \cdots + a_{i-1} \bigr]
+\end{cases}
+\]
+\note{le début de la ligne de $\tilde{s}_0$ est noirci par des ratures
+(on devine « $a_{-1} + $ » sous elles) ; de même un mot sous
+$\overbrace{\rho'_{n-1,1}}^{\sigma}$.}
+
+\marginal{$2$ inv.}
+\[
+\tilde{u} = p_2(u) = \frac{1}{2}\, u - c = a_{-1} + \frac{1}{2}\, a_0 - c = \frac{1}{2}(\tilde{s}_0 + \tilde{s}_1) = \tilde{s}_0 + \frac{1}{2}\, a_0
+\]
+\note{la dernière égalité ne découle pas de la ligne de $\tilde{s}_i$ :
+avec $\tilde{s}_1 = \tilde{s}_0 - \frac{1}{\rho} a_0$ on trouverait
+$\tilde{s}_0 - \frac{1}{2\rho} a_0$ ; mais $\frac{1}{2}u - c = s_0 + \frac{1}{2}a_0 - c$
+donne bien $\tilde{s}_0 + \frac{1}{2}a_0$. Non corrigé.}
+
+\[
+\boxed{-\rho\,\tilde{s}_0 = \overbrace{\rho'_{n-1,1}}^{\sigma} a_0 + \rho'_{n-1,2}\, a_1 + \cdots + \rho'_{n-1,n-1}\, a_{n-2} + 2a_{n-1} + a_n}
+\]
+\[
+\left[\;
+\begin{aligned}
+-\rho\,\tilde{u} &= -\rho\,\tilde{s}_0 - \tilde{\rho}\, a_0 = (\sigma - \tilde{\rho})\, a_0 + \rho'_{n-1,2}\, a_1 + \cdots + \rho'_{n-1,n-1}\, a_{n-2} + 2a_{n-1} + a_n \\
+-2\rho\,\tilde{u} &= (\uncertain{4}\tilde{\sigma} - \rho)\, a_0 + 2\rho'_{n-1,2}\, a_1 + \cdots + 2\rho'_{n-1,n-1}\, a_{n-2} + 4a_{n-1} + 2a_n
+\end{aligned}
+\right.
+\]
+\note{à droite de la première ligne, souligné : « \uncertain{en vrai}
+($\rho = 2\tilde{\rho}$) » ; de la seconde, « (car \uncertain{d'ailleurs}
+$\sigma = 2\tilde{\sigma}$) ». Les deux premiers membres, $-\rho\tilde{u}$
+et $-2\rho\tilde{u}$, sont écrits sur des lettres surchargées.}
+
+\[
+\tilde{t}_i = p_\beta(t_i) = -\frac{1}{\beta}\, t_i - c
+\qquad
+-\rho\,\tilde{t}_i = +\frac{\rho}{\beta}\, t_i + \pi
+\]
+\note{$p_\beta$ donnerait $+\frac{1}{\beta}t_i$ ; le signe $-$ est sur
+la page, qui applique en fait $p_{-\beta}$ (cf. le
+$-\frac{1}{\beta}t_i$ de la page 64). Non corrigé.}
+
+Si $i = n+1$ :
+\begin{itemize}
+\item coeff. de $a_0 \rightsquigarrow \struck{4}\ \uncertain{1} - \dfrac{1}{\rho}$ ;
+\item coeff. de $a_n \rightsquigarrow -\dfrac{\gamma}{\beta} - \dfrac{1}{\rho} = -\dfrac{\beta + \gamma\rho}{\beta\rho} = -\dfrac{\sigma\sigma'}{\beta\rho}$ ;
+\item coeff. de $a_{n-1}$ : $-\dfrac{2\gamma - \sigma}{\beta} - \dfrac{2}{\rho} = -\dfrac{2\gamma\rho - \sigma\rho - 2\beta}{\beta\rho} = \dfrac{-2\sigma\sigma' \uncertain{-} \sigma\rho}{\beta\rho} = -\dfrac{\sigma}{\beta\rho}\,[2\sigma' \uncertain{+} \rho]$.
+\end{itemize}
+\note{le calcul attendu pour $a_{n-1}$ est
+$-\frac{(2\gamma - \sigma)\rho + 2\beta}{\beta\rho} = -\frac{2\gamma\rho - \sigma\rho + 2\beta}{\beta\rho}
+= -\frac{2\sigma\sigma' - \sigma\rho}{\beta\rho} = -\frac{\sigma}{\beta\rho}(2\sigma' - \rho)$ ;
+les signes devant $\sigma\rho$, $2\beta$ et $\rho$ sont, sur la page, en
+partie surchargés et ne suivent pas tous ce calcul. Une ligne biffée
+plus bas porte d'ailleurs « $2\sigma\sigma' - \rho\sigma = \sigma(2\sigma' - \rho)$ ».}
+
+\[
+-\rho\beta\,\tilde{t}_i = \rho t_i + \beta\pi
+\]
+\[
+-\rho\beta\,\tilde{t}_{n+1} = \struck{\rho t_{n+1} + \beta\pi = (\rho\gamma + \beta)a_n + [\rho(2\gamma - \sigma) + 2\beta]\, a_{n-1} + \cdots}
+= -\rho\sigma\, a'^{*}_n + \underbrace{\rho\gamma\pi + \beta\pi}_{\sigma\sigma'\pi}
+\]
+\[
+\struck{t_{n+1} = \Theta s'_{n+1}} = \sigma\,[\sigma' \underset{a'^{*}_{n+1}}{\pi} - \rho\, a'^{*}_n].
+\]
+\note{sous la ligne biffée, une seconde ligne biffée et noircie
+(« $\rho\sigma a'^{*}_n + \ldots$ »), illisible.}
+\[
+\boxed{-\frac{\rho\beta}{\sigma}\,\tilde{t}_{n+1} = \sigma' a'^{*}_{n+1} - \rho\, a'^{*}_n = \cdots}
+\]
+\[
+-\frac{\rho\beta}{\sigma}\,\tilde{t}_i = -\frac{\rho\beta}{\sigma}\,\tilde{t}_{n+1} + \rho\beta\bigl(a_n + \beta_{n-1} a_{n-1} + \cdots + (\beta_{n-1} \cdots \beta_i)\, a_i\bigr)
+\]
+\note{avec $t_i = t_{n+1} - \sigma[a_n + \cdots + (\beta_{n-1}\cdots\beta_i)a_i]$
+(page 64), on attendrait $-\rho[\ldots]$ au lieu de $+\rho\beta(\ldots)$ ;
+tel sur la page, non corrigé.}
+
+\section{Calculs centrés en $\sigma$ (si centre à dist.\ finie, i.e.\ $\rho$ inv.)}
+\note{titre de sa main, en haut à droite d'une chemise (page 71) placée
+devant les pages 72 à 77.}
+
+\page{72}
+\note{le haut de la page, jusqu'au trait qui précède « On a », est
+encadré et barré de longues diagonales.}
+
+\struck{\emph{Choisissons} (\uncertain{loc.}) (section $s_0$ de $X$
+admissible pour \ill{} syst.\ des $(\xi_i^x)$) (déterminé \uncertain{mod}
+homothéties dans $E = X \smallsetminus C$ \uncertain{moyennant}
+\emph{l'origine} $c$)}
+
+\struck{(car $c \notin C$ en tt pt (\uncertain{si} $n$ impair et $\rho'$
+inv., i.e.\ $\rho$ inv.), $n$ pair (donc $\rho = 2\rho'$) et $2$ inv.)
+— Donc on est dans les conditions suivantes (identifiant $E$ à $V$
+grâce à l'origine $c = 0$) :}
+\begin{itemize}
+\item[a)] \struck{$\varphi^V_G : G \to \ill{}\, \mathrm{O}(f)$)}
+\item[b)] \struck{base $s_0$ de $D_0^{*} = \bigcap_{1 \leq i \leq n} H^!_i$
+($H^!_i = H_i \smallsetminus H_i \cap C$}
+\end{itemize}
+\note{au-dessus de « \emph{Choisissons} », « \uncertain{loc.} » ; dans la
+deuxième parenthèse, « donc est » biffé avant « Donc on est ». Après
+« $G \to$ », un mot noirci illisible.}
+
+On a [dans $\check{V}$] :
+\[
+\begin{aligned}
+a^\vee_0 &= \struck{\ill{}}\ (\lambda_0 - 1)\, a^{*}_0 + \beta_0\, a^{*}_1 \\
+a^\vee_i &= a^{*}_{i-1} + (\lambda_i - 1)\, a^{*}_i + \beta_i\, a^{*}_{i+1} \qquad 1 \leq i \leq n-1 \\
+a^\vee_n &= a^{*}_{n-1} + (\lambda_n - 1)\, a^{*}_n
+\end{aligned}
+\]
+
+\marginal{\emph{NB} $\rho$ inv.\ exprime \ill{} i.e.\ que, \uncertain{si}
+$D_0 = \bigcap_{1 \leq i \leq n} H_i$, i.e.\ $a^\vee_0 \mid D_0 \neq 0$ en
+chaque \uncertain{point} [conséquence de \uncertain{deuxième} condition
+dans $2^\circ$]}
+\note{la note précédente est écrite en oblique dans la marge gauche.}
+
+\struck{\ill{} \quad pour \quad $a_{-1}$}
+
+(\ill{} \uncertain{notation} \ill{} des \uncertain{notations}, il n'y a
+plus de $a_{-1}$, $a^{*}_{-1}$, \ldots)
+
+\[
+(*) \qquad s_0 - \ill{} = \tilde{s}_0 = -\frac{1}{\rho}\,(\xi_0 a_0 + \xi_1 a_1 + \cdots + \xi_n a_n)
+\qquad
+\left[
+\begin{array}{ll}
+\tau^\vee_i(s_0) = s_0 & 1 \leq i \leq n \\
+\text{i.e. } \langle s_0, a^\vee_i \rangle = 0 & 1 \leq i \leq n \\
+\tau^\vee_0 s_0 = s_0 + a_0 & \text{i.e. } \langle s_0, a^\vee_0 \rangle = 1
+\end{array}
+\right]
+\]
+\note{$(*)$ entouré. Entre $s_0$ et $\tilde{s}_0$, une expression
+noircie, illisible.}
+
+\marginal{On suppose pour simplifier maintenant les $\lambda_i = -1$
+($\tau_i$ \emph{réflexions})}
+\[
+\begin{aligned}
+\xi_n &= 1, \qquad \xi_{n-1} = 2, \qquad \xi_i = L_{\uncertain{n-i}}(\beta_{n-1}, \ldots, \beta_{i+1}) \\
+\xi_0 &= L_n(\beta_{n-1}, \ldots, \beta_1) = L_n(\beta_1, \ldots, \beta_{n-1}) = \sigma
+\end{aligned}
+\]
+\note{les deux premières valeurs sont ajoutées au-dessus de la troisième.
+Avec $\xi_0 = \sigma$, $\xi_{n-1} = 2$, $\xi_n = 1$, la ligne $(*)$ est
+celle de l'encadré $-\rho\tilde{s}_0$ de la page 70.}
+
+C) Formes quadratiques invariantes : \struck{\ill{}} \add{elles forment}
+un \struck{torseur} $G$-Module \add{loc.}\ \struck{libre} de rg $1$. On
+normalise par
+\[
+\begin{cases}
+f_V(a_0) = 1 \implies f_V(a_i) = \beta_0\beta_1 \cdots \beta_{i-1} \\
+\varphi(a_i, a_j) = 0 \text{ si } i, j \text{ non consécutifs} \\
+\varphi(a_i, a_{i+1}) = -\beta_0 \cdots \beta_i
+\end{cases}
+\]
+\note{« libre » est peut-être remplacé plutôt que biffé ; « loc. » est
+ajouté au-dessus de la ligne.}
+
+\page{73}
+Reformulation des données lorsque $c \notin C$ en \uncertain{ts} fibres,
+i.e.\ $\rho$ inv.\ ($n$ impair, $\rho'$ inv., ou $n$ pair, $\rho'$ inv.\
+et $2$ inv.)
+
+A) $\varphi_G : G \to \operatorname{Aut}(X)$ ou \uncertain{encore}
+$(\tau^X_i)_{0 \leq i \leq n}$ \uncertain{est} \uncertain{remplacé} par
+$\varphi_G : G \to \operatorname{Aut}(V)$ ou \uncertain{encore}
+$(\tau^V_i)_{0 \leq i \leq n}$.
+
+Conditions
+\begin{itemize}
+\item[$1^\circ$)] Les $\tau^\vee_i$ \uncertain{pseudo-réflexions}
+(\uncertain{c.à.d.} $L_i \subset V_{\ill{}}$, $H_i \subset V_i$)
+\item[$2^\circ$)] $V = \bigoplus_{0 \leq i \leq n} L_i$,
+$\check{V} \simeq \bigoplus \underbrace{H^\circ_i}_{L'_i}$ i.e.\
+$\bigcap_{0 \leq i \leq n} H_i = 0$ \uncertain{chaque} \uncertain{fibre}
+\item[$3^\circ$)] $L_i \subset H_{i+1}$ chaque fibre, $0 \leq i \leq n-1$
+\end{itemize}
+\note{à gauche de $2^\circ$), biffé : « \struck{\ill{}} ». Sous
+$3^\circ$), une ligne biffée où l'on lit
+« \struck{\ldots\ $D_0 = \bigcap_{1 \leq i \leq n} H_i$ \ldots} ».}
+
+B) La donnée de $s_0 \in \struck{\Gamma(X)}$ \ill{} \ill{} \ill{}
+$\varphi_G$ \ill{} \ill{} \ill{}, et \ill{} \uncertain{exprime}
+\[
+\tilde{s}_0 \text{ base de } D_0 = \bigcap_{1 \leq i \leq n} H_i
+\]
+qui \uncertain{s'exprime} \ill{} \uncertain{situation}.
+\struck{On \ill{}} [\ill{}] \ill{} \ill{} \ill{} $n$ \ill{} \ill{} base
+\struck{\ill{} les formes quadratiques} $a'_0$ de $L'_0$ ($V$ \ill{}
+$D_0 \otimes L'_0 \xrightarrow{\sim} \mathcal{O}_S$), \uncertain{par}
+\[
+\boxed{\langle \tilde{s}_0, a'_0 \rangle = 1}
+\]
+ce qui fixe base $a_0$ de $L_0$ par $\tau_0 = \mathrm{id}_V + a'_0 \otimes a_0$,
+et de proche en proche on détermine les $a'_i$, $a_i$ par
+\[
+\bigl[\ \langle a_i, a'_{i+1} \rangle = 1, \qquad \tau_i = \mathrm{id} + a'_i \otimes a_i\ \bigr]
+\]
+\note{le paragraphe B) est d'une écriture rapide ; seules les formules et
+quelques mots se lisent. Le « $\mathcal{O}_S$ » est \uncertain{probable}
+(un $\mathcal{O}$ souscrit d'une lettre).}
+
+\page{74}
+Posant
+\[
+\omega_V = a_0 \wedge \cdots \wedge a_n
+\]
+\ill{}
+\[
+\delta(f_V) = \underbrace{\beta_0^{\,n}\, \beta_1^{\,n-1} \cdots \beta_{n-1}}_{B}\, \rho\, \omega_V^{\otimes -2} = B\rho\, \omega_V^{\otimes -2}
+\]
+\note{les exposants de $\beta_0$ et $\beta_1$ sont petits et douteux
+(\uncertain{$n$}, \uncertain{$n-1$}).}
+($f$ lisse ssi $B$ inv., i.e.\ les $\beta_i$ inv., $0 \leq i \leq \uncertain{n-1}$)
+
+Considérons alors
+\[
+\lambda = f_V(\tilde{s}_0) = \frac{\sigma'\rho'}{\rho^2} =
+\begin{cases}
+(n \text{ pair donc } \rho = 2\rho')\ (2 \text{ inv.}) & \dfrac{\sigma'}{4\rho'} \\[1ex]
+n \text{ impair } \rho = \rho' & \dfrac{\sigma'}{\rho'}
+\end{cases}
+\]
+\note{devant $\sigma'\rho'$, un mot noirci. Les deux valeurs se vérifient :
+$\sigma'\rho'/(2\rho')^2 = \sigma'/(4\rho')$ et $\sigma'\rho'/\rho'^2 = \sigma'/\rho'$.}
+
+La \uncertain{hypersurface} quadrique \uncertain{(sphère)} circonscrite au
+\uncertain{polyèdre} régulier \uncertain{est} \uncertain{donc} donnée par
+\[
+f_V - \lambda = 0.
+\]
+Pour qu'elles soient \struck{\ill{}} \add{respectivement} lisse, il faut que
+les $\beta_i$ et $\sigma'$ soient inv.\ (c'est \uncertain{dans} le cas
+\emph{\uncertain{singulier}})
+
+(D) \emph{NB} Supposons données $V$, $f_V$ et $\varphi^V_G$,
+\uncertain{respectivement} \struck{orth.}
+\[
+G \longrightarrow \mathrm{O}(f_V)
+\]
+\uncertain{transformant} les $\tau_i$ en réflexions \emph{orth.}, et
+satisfaisant \uncertain{des} \uncertain{conditions} $2^\circ$), $3^\circ$)
+plus haut. \uncertain{Celle-ci} \struck{\ill{} \ill{} \ill{} plus}
+\[
+\bigl[\ \struck{f \mid (D_0 = \textstyle\bigcap_{1 \leq i \leq n} H_i)}\ \ f \mid L_0\ \bigr] \neq 0 \quad \text{en ts fibres.}
+\]
+Alors \uncertain{ça provient} donc \ill{} d'une \uncertain{situation} comme
+plus haut. Il suffit de choisir une section $a_0$ de $D_0$ telle que
+$f_V(a_0) = 1$.
+\marginal{(i.e.\ $\tau_0$ est une réflexion orth.\ de $V$)
+$\leftrightarrow$ \struck{\ill{}} conditions \ill{} ?}
+\note{la note de marge, en oblique en bas à gauche, est reliée par une
+double flèche au crochet ; « \uncertain{Celle-ci} » est suivi d'un mot
+entouré et de mots biffés.}
+
+\page{75}
+(L'indétermination \uncertain{vient} d'une section d'un \uncertain{rev.}\
+principal de $S$ de groupe $\mu_2$, \uncertain{définie} \uncertain{mod}
+\uncertain{élément} de $\mu_2(S)$ \ldots). Donc $s_0$ est alors donné par
+la formule $(*)$. (Rien n'empêche d'ailleurs que $f_V(s_0) = 0$.)
+
+\struck{(E) Supposons $n$ impair} Si on a donné une \uncertain{base}
+\[
+\varphi^C_G : G \longrightarrow \operatorname{Aut}(C, Q_C)
+\]
+[$C$ fibré proj.\ de rg $n$, $Q_C$ \add{hyper}\uncertain{quadrique}]
+satisfaisant les conditions
+\begin{itemize}
+\item[1)] Les $\tau^X_i$ réflexions \struck{orth.}\ ($0 \leq i \leq n$)
+(\uncertain{définies} \uncertain{par} $h_i \in \Gamma C$, $H_i$ hyperplans)
+\item[2)] Les $h_i$ engendrent $C$, i.e.\ $\bigcap_{0 \leq i \leq n} H_i = \emptyset$
+\item[3)] \struck{\ill{}} $h_i \notin H_{i+1}$ \quad $0 \leq i \leq n-1$
+\item[\struck{4)}] \struck{$L_0 \notin Q_C$ en chaque fibre}
+\end{itemize}
+
+Pour $n \neq 2$ alors loc.\ (et) \uncertain{ça provient} de
+$(V, f_V, (\tau^\vee_i))$ satisfaisant les conditions de (D), $V$ déterminé
+\uncertain{mod} $\otimes L$ ($L$ inv.), $f_V$ défini \uncertain{mod}
+\uncertain{unité}. On \uncertain{utilise} alors \ill{} : $L_0 \subset V$,
+\ill{} \ill{} « \uncertain{épingles} » i.e.\ éliminer
+l'indét.\ $\otimes L$, \uncertain{en} \uncertain{prenant} $L \simeq \mathcal{O}_S$
+i.e.\ section $a_0$ de $L_0$.
+\marginal{(Si $n = 1$, une réflexion de $C = P(V)$, \uncertain{ne}
+\uncertain{provient} \uncertain{pas} \ill{} $f$ \ill{} d'une réfl.\ de
+$V$ \ldots]}
+\note{la note de marge, écrite en oblique en bas à gauche, est en
+grande partie illisible. L'item 4) est barré d'un grand trait ondulé.}
+
+\page{76}
+\marginal{\emph{NB} $n \neq 2$}
+Et \uncertain{on} normalise alors par $f(a_0) = 1$. On trouve : La
+catégorie des réal.\ géom.\ de $T_1$ \uncertain{non} dég.\ \uncertain{non}
+centr.\ à distance finie, est équivalente : \uncertain{celle} des triples
+$(C, Q_C, \varphi^C_G)$ d'un fibré projectif de rg $n$, d'une
+hyperquadrique $Q_C$ de $C$, d'une rep.\ de $G$ dans $(C, Q_C)$
+satisfaisant les conditions $1^\circ$) à $3^\circ$). (\emph{NB} Si
+$n = 2$ \uncertain{donné} par $Q_C$, \uncertain{conique} \uncertain{ordinaire},
+mais \struck{\ill{}} $Q_C$ est \uncertain{déduite} \uncertain{canoniquement}
+comme \uncertain{unique} hyperq.\ \uncertain{lisse} \ill{}.
+\note{la parenthèse n'est pas refermée ; le reste de la page est blanc.}
+
+\page{77}
+\note{la lettre notée ici $\sigma$ dans $\tilde{s}_0 = s_0 - \sigma$ est
+un $\sigma$ bouclé, ou peut-être un $c$ à boucle : elle tient la place
+du centre $c = \pi/\rho$ de la page 70 (avec $f(\sigma) = -\sigma'\rho'/\rho^2$).
+On garde la lettre de la page.}
+\[
+\tilde{s}_0 = s_0 - \sigma
+\qquad
+\struck{s'_0 = \rho\,\tilde{s}_0 \quad f_V(s'_0)}
+\]
+\[
+f_V(\tilde{s}_0) = f(s_0 - \sigma) = \underset{0}{f(s_0)} + \underbrace{f(\sigma)}_{-\frac{\sigma'\rho'}{\rho^2}} - \underbrace{\varphi(s_0, \sigma)}_{-\frac{\sigma}{\rho}}
+= -\frac{\sigma'\rho'}{\rho^2} + \frac{\sigma}{\rho}
+\]
+\[
+\begin{cases}
+n \text{ pair } \rho = 2\rho',\ \sigma^{\uncertain{2}} = \sigma' \\
+n \text{ impair } \rho = \rho',\ \sigma = 2\sigma'
+\end{cases}
+\qquad
+\begin{cases}
+f_V(\tilde{s}_0) = -\dfrac{1}{4}\dfrac{\sigma'}{\rho'} + \dfrac{1}{2}\dfrac{\sigma'}{\rho'} = \dfrac{1}{4}\dfrac{\sigma'}{\rho'} \\[1.5ex]
+f_V(\tilde{s}_0) = -\dfrac{\sigma'}{\rho'} + 2\dfrac{\sigma'}{\rho'} = \dfrac{\sigma'}{\rho'}
+\end{cases}
+\]
+\note{les deux valeurs retrouvent le $\lambda$ de la page 74. Pour
+$n$ pair, le calcul demande $\sigma = \sigma'$ ; l'exposant lu sur
+$\sigma$ est douteux.}
+
+Soit
+\[
+s'_0 = -\rho\,\tilde{s}_0 = \underset{\sigma}{\xi_0} a_0 + \xi_1 a_1 + \cdots + \underset{1}{\xi_n} a_n
+\qquad
+f_V(s'_0) = \rho\sigma - \rho'\sigma' = \rho'\sigma'
+\]
+\[
+\boxed{f_V(s'_0) = \rho'\sigma'}
+\qquad
+\varphi_V(\tilde{s}_0, a_i) = \varphi_V(s_0 - \sigma, a_i) = \underbrace{\varphi(s_0, a_i)}_{\substack{0 \text{ si } i \neq 0 \\ -1 \text{ si } i = 0}} - \underbrace{\varphi(\sigma, a_i)}_{0\ \uncertain{\text{tjs}}}
+= \begin{cases} -1 & i = 0 \\ 0 & 1 \leq i \leq n \end{cases}
+\]
+\note{l'égalité $\rho\sigma - \rho'\sigma' = \rho'\sigma'$ suppose
+$\rho\sigma = 2\rho'\sigma'$, ce que donnent ses deux cas
+($\rho = 2\rho'$, $\sigma = \sigma'$ ou $\rho = \rho'$, $\sigma = 2\sigma'$).}
+
+\[
+\begin{cases}
+\tilde{s}_i = s_i - \sigma \\
+s'_i = -\rho\,\tilde{s}_i
+\end{cases}
+\qquad
+\begin{cases}
+\tilde{s}_i = \tau^\vee_{i-1}\,\tilde{s}_{i-1} \\
+s'_i = \tau^\vee_{i-1}\, s'_{i-1}
+\end{cases}
+(1 \leq i \leq n)
+\]
+\[
+\varphi_V(s'_0, a_i) = \begin{cases} \rho & i = 0 \\ 0 & 1 \leq i \leq n \end{cases}
+\qquad
+\begin{aligned}
+\langle \tilde{s}_0, a^\vee_i \rangle &= \langle \tilde{s}_0, a'_i \rangle = \langle s_0 - \sigma, a'_i \rangle = \langle s_0, a'_i \rangle \\
+&= \begin{cases} 1 & i = 0 \\ 0 & 1 \leq i \leq n \end{cases}
+\end{aligned}
+\]
+\[
+\begin{cases}
+\tilde{s}_i = (s_i - s_0) + (s_0 - \sigma) = \tilde{s}_0 + (a_0 + \cdots + a_{i-1}) \\
+s'_i = s'_0 - \rho\,(a_0 + \cdots + a_{i-1})
+\end{cases}
+\]
+\[
+s'_1 = s'_0 - \rho\, a_0, \qquad s'_0 + s'_1 = 2s'_0 - \rho\, a_0
+\]
+\[
+f_V(s'_0 + s'_1) = 4\underbrace{f_V(s'_0)}_{\rho'\sigma'} + \rho^2 \underbrace{f_V(a_0)}_{1} - 2\rho \underbrace{\varphi_V(s'_0, a_0)}_{\rho} = 4\rho'\sigma' - \rho^2 =
+\]
+\[
+f_V(s'_0 + s'_1) = \begin{cases} n \text{ pair} : & 4\rho'(\sigma' - \rho') \\ n \text{ impair} : & \rho'(4\sigma' - \rho') \end{cases}
+\]
+\note{le signe entre $s'_0$ et $s'_1$ dans les deux premiers membres est
+mal formé ; c'est la somme $s'_0 + s'_1$ que le calcul évalue. Les deux
+cas se vérifient.}
+
+Donc pour que l'homothétie de rapport $\lambda$ transforme la sphère
+$\Sigma$ circonscrite aux $s'_i$ en celle circonscrite aux
+\uncertain{transformés} des $s'_0 + s'_1$, il faut et suffit que
+\[
+\lambda^2 \rho'\sigma' = \struck{\rho'(4\sigma' - \rho')}
+\begin{cases}
+4\rho'(\sigma' - \rho') & \text{i.e. } \lambda = 2\sqrt{1 - \rho'/\sigma'} \quad n \text{ pair} \\
+\rho'(4\sigma' - \rho') & \struck{\text{i.e. } \lambda =}\ \lambda = 2\sqrt{1 - \rho'/4\sigma'} \quad n \text{ impair}
+\end{cases}
+\]
+\note{les deux racines se vérifient : $\lambda^2 = 4(1 - \rho'/\sigma')$
+et $\lambda^2 = 4 - \rho'/\sigma' = 4(1 - \rho'/4\sigma')$.}
+
+\section{Sous-espaces invariants}
+\note{titre de sa main, en haut à droite d'une chemise (page 78) placée
+devant les pages 79 et 80.}
+
+\page{79}
+On suppose qu'on est sur un corps $k$. \struck{\ill{}}
+
+\emph{Théorème} Soit $Z \subset X$ sous-espace projectif. Pour que $Z$ soit
+invariant par $G$ i.e.\ par les $\tau_i$ ($0 \leq i \leq n$), il faut et
+il suffit qu'on soit dans l'un des cas suivants :
+\begin{itemize}
+\item[a)] $Z$ est égal à l'un des ss-espaces $\emptyset$, $X$, $\{c\}$, $C$.
+\item[b)] $\exists\ 0 \leq i \leq n-1$ tel que $\beta_i$ ($= 2 + \alpha_i$) $= 0$,
+et on a
+\[
+Z = \underbrace{H_0 \cap H_1 \cap \cdots \cap H_i}_{Z'_i\ (\text{de dim } n-i)}
+\quad \text{ou} \quad
+Z = \underbrace{\struck{\ill{}}\operatorname{Lin}(h_{i+1}, \ldots, h_n)}_{\substack{Z^{*}_i \\ (\text{dim } n-i-1)}}
+\]
+\end{itemize}
+\marginal{\emph{NB} $\beta_i = 0 \iff Z_i \subset Z'_i$ \uncertain{codim} $1$}
+\note{l'exposant de $Z^{*}_i$ est un petit signe bouclé, lu ici comme
+une étoile ; le « $\beta_i$ ($= 2 + \alpha_i$) » est \uncertain{probable}.}
+
+(\emph{NB} On pose
+\[
+Z'_n = \underbrace{H_0 \cap \cdots \cap H_n}_{\{c\}} \quad \text{et} \quad Z^{*}_n = \struck{\emptyset}\ \ill{},
+\qquad Z^{*}_{-1} = X, \quad Z'_{-1} = C\,)
+\]
+\note{les indices $-1$ surchargent un autre chiffre ; les deux lignes
+paraissent avoir inversé $Z^{*}_{-1}$ et $Z'_{-1}$ par rapport à la
+chaîne qui suit, où $Z^{*}_{-1} = C$ et $Z'_{-1} = X$. Tel sur la page.}
+
+On a (sans hyp.\ sur \uncertain{aucun} des $\beta_i$)
+\[
+\begin{array}{rcl}
+Z^{*}_n = \emptyset & \subset & Z'_n = \{c\} \\
+\cap & & \cap \\
+Z^{*}_{n-1} = \{h_n\} & \subset & Z'_{n-1} = H_0 \cap \cdots \cap H_{n-1} \\
+\cap & & \cap \\
+Z^{*}_{n-2} = \operatorname{Lin}(h_n, h_{n-1}) & \subset & Z'_{n-2} = H_0 \cap \cdots \cap H_{n-2} \\
+\vdots & & \vdots \\
+Z^{*}_0 = \operatorname{Lin}(h_n, \ldots, h_1) & \subset & Z'_0 = H_0 \\
+\cap & & \cap \\
+Z^{*}_{-1} = C & \subset & Z'_{-1} = X
+\end{array}
+\]
+\note{sur la page, les deux chaînes sont écrites en deux lignes sur toute
+la largeur, $Z^{*}$ au-dessus de $Z'$, reliées par des $\cap$ verticaux ;
+on les redonne ici en colonnes, transposées : les inclusions de la page
+qui vont de gauche à droite se lisent ici de haut en bas, et les $\cap$
+verticaux de la page sont les $\subset$ horizontaux.}
+
+Toutes les inclusions, \uncertain{horizontales}, sont strictes, de
+codim.\ $1$. \struck{Tous} Les $2(n+2)$ espaces $Z^{*}_i$, $Z'_i$
+($-1 \leq i \leq n$) \add{ne} sont \uncertain{pas} distincts ? on
+\uncertain{trouve} une \uncertain{dimension} donnée $-1 \leq d \leq n+1$,
+il y a \struck{\ill{}} \ill{} des $Z^{*}_i$, $Z'_i$ de cette dim si
+$d = -1$ ou $d = n+1$ (savoir $Z^{*}_n$ et $Z'_{-1}$), \add{exactement}
+deux si $0 \leq d \leq n$, savoir $Z'_{n-d} = H_0 \cap \cdots \cap H_{n-d}$
+\struck{\ill{}} et $Z^{*}_{n-d-1} = \operatorname{Lin}(h_n, \ldots, h_{n-d})$,
+et ils \uncertain{sont} égaux ssi $h_{n-d}, h_{n-d+1} \in Z'_{n-d}$, i.e.\
+\[
+h_{n-d} \in H_{n-d} \cap H_{n-d-1}, \qquad h_{n-d+1} \in H_{n-d}
+\]
+\marginal{\emph{NB} Si $c \notin C$ i.e.\ $\rho \neq 0$, alors les $Z_i$,
+$Z'_i$ tous distincts, \uncertain{car} $Z_i \not\subset Z'_i$ \uncertain{pour}
+\uncertain{tout} $i$)}
+\note{pour $d = -1$ et $d = n+1$ il n'y a qu'un espace de la liste
+($Z^{*}_n = \emptyset$, $Z'_{-1} = X$) ; le mot illisible qui précède
+« des » est sans doute ce décompte, et les mots biffés au-dessus
+paraissent une première rédaction. Les dimensions données plus
+haut ($Z'_i$ de dim $n-i$, $Z^{*}_i$ de dim $n-i-1$) donnent bien
+$Z'_{n-d}$ et $Z^{*}_{n-d-1}$ en dimension $d$.}
+
+\page{80}
+i.e.\ ssi on a simultanément (posant $i = n-d$)
+\[
+\begin{cases}
+\mu_i\ (= \lambda_i - 1) = 0 & (\text{i.e. } 2 \cdot 1_k = 0 \text{ dans le cas des réflexions, i.e. car.\ } k = 2) \\
+\beta_i = \beta_{i-1} = 0 & (\text{on vide : la condition } \beta_{i} = 0 \text{ si } i = 0, \text{ et la condition } \beta_{i-1} = 0 \text{ si } i = n)
+\end{cases}
+\]
+\note{« on vide » : lecture \uncertain{douteuse} ; le sens est que
+l'une des deux conditions disparaît aux extrémités $i = 0$ et $i = n$.
+La lettre $\mu_i$ est lue d'après « $= \lambda_i - 1$ ».}
+
+\struck{\emph{Cor} \ill{}} \struck{\emph{Dém}}
+
+\emph{Cor} (b) Il y a au plus $2(n+2)$ sous-espaces projectifs invariants
+par $G$. Pour qu'il y en ait $2(n+2)$, il faut et il suffit que
+$\beta_i = 0$ ($0 \leq i \leq n-1$) et $\mu_i \neq 0$ \struck{\ill{}}
+($0 \leq i \leq n$) (cette condition signifie aussi, dans le cas des
+réflexions, que car.\ $k \neq 2$).
+\note{« (b) » et plus bas « (c) » sont entourés sur la page.}
+
+(c) \struck{\ill{}} Il y a \uncertain{au} \uncertain{moins} les ss-espaces
+invariants $\emptyset$, $X$, $\{c\}$, $C$. Pour que ce soient les seuls,
+il \struck{faut et} suffit que $\beta_i \neq 0$ $0 \leq i \leq n-1$
+(ce qui implique que les $2(n+2)$ espaces $Z_i$, $Z'_i$ sont distincts).
+Il faut \struck{que} \add{et s.}
+\[
+\beta_i \neq 0 \quad \uncertain{0 \leq i < n-1}, \quad \text{et que } (\beta_0 \struck{= \beta_n} = 0 \implies \mu_0 = 0), \quad (\beta_{n-1} = 0 \implies \mu_n = 0)
+\]
+[donc, dans le cas des réflexions, que
+\[
+\begin{cases}
+\text{si car.\ } k \neq 2 : \text{ les } \beta_i \neq 0 \text{ \uncertain{i.e.} } \beta = \prod_{0 \leq i \leq n-1} \beta_i \neq 0 \\
+\text{si car.\ } k = 2 \text{ les } \beta_i \neq 0 \text{ si } 0 < i < n-1.
+\end{cases}
+\]
+\note{la phrase « Pour que ce soient les seuls, il suffit que
+$\beta_i \neq 0$ » est suivie de « Il faut et s. » avec une condition
+plus faible ; les deux énoncés se suivent sur la page sans que le
+premier soit barré.}
+
+\struck{d) Pour que \ill{} la représentation projective \ill{} sous-espace
+\ill{} de $G$ dans $C$ soit irréductible, il faut et suffit que $\rho \neq 0$
+et les $\beta_i \neq 0$, i.e.\ que}
+
+d) Les sous-espaces \uncertain{projectifs} stables de $C$ \struck{\ill{}
+$\{c\}$ (dans \ill{} $c \in C$)} $\neq C$ et $\neq \emptyset$ sont en corr.\
+$1$-$1$ avec les $0 \leq i \leq n-1$ tels que $\beta_i = 0$, à un tel $i$
+correspondant $Z^{*}_i$ (de dim $n-1-i$). Ces sous-
+\marginal{si $c \notin C$ i.e.\ $\rho \neq 0$}
+\note{le d) biffé est barré de plusieurs traits obliques ; la note de marge,
+entourée, est reliée au second d). La page s'arrête sur « Ces sous- ».}
+\end{document}
