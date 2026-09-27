@@ -116,7 +116,8 @@ for (const d of readdirSync(T, { withFileTypes: true })) {
     // Comments out; an escaped \% stays.
     const body = src.slice(at).replace(/(?<!\\)%.*$/gm, '');
     const notes = groups(body, 'note').map((g) => g[2]);
-    const his = strip(body, 'note');
+    const drawn = groups(body, 'drawing').length;
+    const his = strip(strip(body, 'note'), 'drawing');
     const count = (name) => groups(his, name).length;
     const prose = mathless(his);
     const words = prose
@@ -141,7 +142,8 @@ for (const d of readdirSync(T, { withFileTypes: true })) {
       supplied: count('supplied'),
       marginal: count('marginal'),
       diagrams: (his.match(/\\begin\{tikzcd\}/g) ?? []).length,
-      drawings: notes.filter((n) => FIGURE.test(n)).length,
+      // \drawing{} since 2026-09-27; older drawings are still notes that say so.
+      drawings: drawn + notes.filter((n) => FIGURE.test(n)).length,
       math: Number((mathChars / Math.max(1, his.length)).toFixed(3)),
       lang,
     });

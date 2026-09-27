@@ -235,7 +235,7 @@ async function build(min) {
 
     // Ours, and out. Headings included: they are the transcriber's summary of
     // a run, not anything he wrote.
-    let his = dropMacro(body, 'note');
+    let his = dropMacro(dropMacro(body, 'note'), 'drawing');
     his = dropMacro(his, 'supplied');
     his = his.replace(/\\(?:sub)?section\*?\{[^}]*\}/g, ' ');
     his = his.replace(/\\(?:folder|batch|pages|dating|watermark|foldertitle|keywords)\{[^}]*\}/g, ' ');

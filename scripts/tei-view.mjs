@@ -224,6 +224,9 @@ function inlineNode(n, where) {
     case 'del':
       return `<span class="tr-struck tei-del" title="struck out by the author">${inner()}</span>`;
     case 'note':
+      if (n.attrs.type === 'drawing') {
+        return `<span class="tr-note tr-drawing tei-note-editorial" title="drawing, described by the transcriber">${inner()}</span>`;
+      }
       if (n.attrs.type === 'editorial') {
         return `<span class="tr-note tei-note-editorial" title="transcriber's note">${inner()}</span>`;
       }

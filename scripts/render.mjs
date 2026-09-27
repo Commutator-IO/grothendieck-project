@@ -483,6 +483,9 @@ const BRACED = [
   ['add', (a) => `<span class="tr-add" title="inserted by the author">\u231c${a}\u231d</span>`],
   ['struck', (a) => `<span class="tr-struck" title="struck out by the author">${a}</span>`],
   ['note', (a) => `<span class="tr-note" title="transcriber's note">${a}</span>`],
+  // A drawing of his, described rather than redrawn: a note of its own kind,
+  // so that drawings can be counted and listed without guessing from words.
+  ['drawing', (a) => `<span class="tr-note tr-drawing" title="drawing, described by the transcriber">${a}</span>`],
   ['marginal', (a) => `<span class="tr-marginal" title="marginal note">${a}</span>`],
   // The modern vocabulary the folder should be found under. Kept in English
   // inside a French document on purpose: it is a search key, not prose, and
@@ -925,6 +928,7 @@ export function readingPage({ meta, lang, name, html, extraStyle = '' }) {
   .tr-uncertain { border-bottom: 1px dotted #b53d1d; }
   .tr-supplied, .tr-add { color: #38539d; }
   .tr-struck { text-decoration: line-through; color: #9d9787; }
+  .tr-drawing::before { content: "✎ "; color: var(--ink4, #9d9787); }
   .tr-note, .tr-marginal { display: block; margin: .4rem 0; padding-left: .7rem;
              border-left: 2px solid var(--rule); font-size: .88em; color: var(--ink3); }
   /* A list whose items carry his own labels prints those and nothing else.

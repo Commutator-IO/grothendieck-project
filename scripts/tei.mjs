@@ -25,6 +25,7 @@
  *   \add{x}            <add>x</add>                        Grothendieck's own
  *   \struck{x}         <del>x</del>
  *   \note{x}           <note type="editorial" resp="#pass">x</note>
+ *   \drawing{x}        <note type="drawing" resp="#pass">x</note>
  *   \marginal{x}       <note type="authorial" place="margin">x</note>
  *   $…$  \[…\]  envs   <formula notation="TeX">…</formula>, display marked
  *   tikzcd             <figure type="diagram"><formula notation="tikz-cd">
@@ -158,6 +159,7 @@ const BRACED = [
   ['add', (a) => `<add>${a}</add>`],
   ['struck', (a) => `<del>${a}</del>`],
   ['note', (a) => `<note type="editorial" resp="#pass">${a}</note>`],
+  ['drawing', (a) => `<note type="drawing" resp="#pass">${a}</note>`],
   ['marginal', (a) => `<note type="authorial" place="margin">${a}</note>`],
   ['emph', (a) => `<hi rend="italic">${a}</hi>`],
   ['textit', (a) => `<hi rend="italic">${a}</hi>`],
@@ -673,7 +675,9 @@ function document(meta, body) {
         <hi rend="monospace">\\struck</hi> devient
         <hi rend="monospace">del</hi> (biffé par l'auteur) ;
         <hi rend="monospace">\\note</hi> devient <hi rend="monospace">note[@type='editorial']</hi>
-        (du transcripteur) ; <hi rend="monospace">\\marginal</hi> devient
+        (du transcripteur) ; <hi rend="monospace">\\drawing</hi> devient
+        <hi rend="monospace">note[@type='drawing']</hi> (dessin de l'auteur, décrit par le
+        transcripteur) ; <hi rend="monospace">\\marginal</hi> devient
         <hi rend="monospace">note[@type='authorial'][@place='margin']</hi> (de l'auteur) ;
         <hi rend="monospace">\\page</hi> devient <hi rend="monospace">pb</hi>.</p>
         <p>Restitution et ajout de l'auteur n'ont longtemps fait qu'une macro. Ils

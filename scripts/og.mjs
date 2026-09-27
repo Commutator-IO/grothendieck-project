@@ -64,7 +64,7 @@ const PREAMBLE = String.raw`\documentclass{article}
 \usepackage{XCharter}\usepackage{amsmath,amssymb,mathrsfs}\usepackage{tikz-cd}\usepackage{xcolor}\usepackage{adjustbox}\usepackage{varwidth}
 \pagestyle{empty}\setlength{\parindent}{0pt}
 \newcommand{\ill}[1]{\textcolor{black!45}{[\ldots]}}\newcommand{\uncertain}[1]{#1}\newcommand{\struck}[1]{\textcolor{black!40}{#1}}
-\newcommand{\add}[1]{#1}\newcommand{\supplied}[1]{[#1]}\newcommand{\note}[1]{}\newcommand{\marginal}[1]{}
+\newcommand{\add}[1]{#1}\newcommand{\supplied}[1]{[#1]}\newcommand{\note}[1]{}\newcommand{\drawing}[1]{}\newcommand{\marginal}[1]{}
 \definecolor{ink}{RGB}{19,18,16}\definecolor{muted}{RGB}{114,109,95}\definecolor{brand}{RGB}{56,83,157}
 \begin{document}\color{ink}`;
 
