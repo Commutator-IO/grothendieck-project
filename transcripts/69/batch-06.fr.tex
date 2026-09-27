@@ -1,0 +1,1455 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 69, batch 6 (pages 101-119).
+% Established from the facsimile archives/batches/69/batch-06.pdf, cut from a
+% copy of 69.pdf fetched through the project's relay
+% (https://grothendieck-relay.onrender.com/source/69.pdf), per the skill
+% transcribe-grothendieck. The folder is 119 pages in six batches (1-20,
+% 21-40, 41-60, 61-80, 81-100, 101-119), transcribed in parallel; this is the
+% last. The batch PDF carries no cover sheet: PDF page k is page 100+k.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-09-27 — first pass, unchecked against the pages by a human.
+%
+% Numbering. The pencilled archivists' numbers bottom-left read 103 ... 121
+% on these nineteen leaves (e.g. « 106 » on PDF page 4, « 112 » on PDF page
+% 10, « 121 » on PDF page 19): two ahead of the page numbers used here, which
+% follow the batch convention (PDF page k = page 100+k) that the whole
+% folder's batch files share. The \page numbers are therefore the site's, not
+% the pencilled ones; the discrepancy is recorded once, in the \note opening
+% page 101, and should be settled folder-wide rather than batch by batch.
+%
+% Pages skipped: 104 and 106, blank cream separator sheets. Nothing else is
+% skipped, and no page is summarised: every other leaf is his working notes.
+% Pages 110, 111 and 119 are written upside down relative to the pencilled
+% number and are read turned; part of 117 is written sideways and two lines
+% of it upside down. No typed page, no letter, no date in his hand, and no
+% pagination of his own in this batch; page 105 ends with a lone « 12 ».
+%
+% What the batch is about. Not graphs as such but the algebra behind the
+% trivalent vertex: three torsors (or bitorsors) P_1, P_2, P_3 under groups
+% G_1, G_2, G_3 and a « correspondence » Γ ⊂ P_1 × P_2 × P_3, the triangle
+% whose vertices are the P_i and whose sides are the G_i.
+%   101-103  G × G with its three normal subgroups N_1 = δG, N_2, N_3 and
+%            1-cocycles; the tripod Γ → P, Q, R with maps p, q, r, the
+%            relations x ~ y along p(γ), triples (a, b, c) with abc = 1;
+%            a combinatorial table of triples (ā, b̃, r) and the
+%            quantifier statement « ∀ ... ∃ ... tels que l'on ait ».
+%   105      An aside: dim E_7 = 133, the 56 indeterminates x_i, y_i, x_ih,
+%            y_ih and the quartic invariant, the symplectic form.
+%   107-109  G commutative, three G-torsors with a trivialisation of their
+%            Baer product; the functor to quadruples (P_1, P_2, P_3, Γ) is
+%            fully faithful; condition (1), the p_ij are isomorphisms;
+%            Aut(G)·(G×G×G) acting by τ_β τ'_γ u, its kernel
+%            {(int g, g^{-1}, g^{-1}, g^{-1})}, the quotient ≃ Γ(G);
+%            Γ_0 = {xyz = 1} and the change of base point γ → γ'.
+%   110-111  (upside down) x∘y = -x-y on Δ, the operation x∗y, Cayley
+%            tables of Z/4 and Z/5; P_1 ∧ P_2 ∧ P_3 ≃ 1_{G_2}.
+%   112      The clean statement: P_i bitorsors under (G_{i+1}, G_{i+2}),
+%            the opposite bitorsors, trivialisations φ_i of the cyclic
+%            contracted products, Γ an orbit of G_1×G_2×G_3 acting by σ,
+%            the isomorphisms ã_i : G_2 → G_3 etc. attached to a point γ.
+%   113      V of dim 2 over F_2, I of card 3, V-torsors with ∧P_i ≃ 1,
+%            Γ of card 16, double covers P̃_i and Γ̃, a graph structure on
+%            P̃ = ∐ P̃_i (24 vertices), and an « Axiome » on the maps α_ji.
+%   114-116  Counting: Γ = {s} ∪ Γ_1 ∪ Γ_2 ∪ Γ_3 ∪ Γ*, 2n^2 - 3n + 1; the
+%            fibres E_γ ≃ E and u, v, w; φ(x)ψ(y)χ(z) = 1 normalised to
+%            φ' = ψ' = χ'.
+%   117      A drawing of a triangle u, v, w with four pairs of edges at
+%            each vertex (α_i, α'_i), (β_i, β'_i), (γ_i, γ'_i) and the
+%            incidence lists « α_i liés à β_4 » etc.; the computation of
+%            g_3 = ã_1(g_2) and (g_1, g_2, g_3)(a_1, a_2, a_3) = (a_1, a_2, a_3).
+%   118      The group law (u, α, β, γ)(u', α', β', γ') = (uu', αu(α'), ...),
+%            its associativity and inverse.
+%   119      (upside down) Another subject: S^2 × S^2 minus diagonal and
+%            antidiagonal, π_1 computations, E ≃ L ⊕ L', 0 → F → E_p → O(1)
+%            → 0, F ≃ O(-1); many sketches, given in \drawing summaries.
+%
+% Notation, fixed once. His tilde isomorphisms ã_i, the bitorsors with a
+% small circle above (opposite) are \mathring{P}; his contracted product is
+% \wedge with the group written under it; « int » is \operatorname{int};
+% the trivial torsor is \mathbb{1}. Drawings are described in \drawing{},
+% none redrawn. Underlining in running text is \emph.
+%
+% The dating is the folder's own, from the catalogue.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{69}
+\batch{6}
+\pages{101}{119}
+\dating{[à partir de 1976]}
+\watermark{Édition de démonstration}
+\foldertitle{Graphes cubiques : notes manuscrites (s.d.), lettre (s.d.).}
+
+\begin{document}
+
+\page{101}
+\note{les numéros au crayon des archivistes portés sur les feuillets de ce lot vont de 103 à 121 : ils ont deux unités d'avance sur la numérotation des pages du fac-similé, qui est celle suivie ici}
+
+\[
+N_2 \times N_3 \hookleftarrow N_1
+\qquad\qquad
+G \times G = \Gamma \hookleftarrow G
+\]
+\note{à gauche, les indices de $N_2$ et $N_3$ sont repassés sur d'autres chiffres ; la flèche verticale de $N_1$ et celle, à crochet, de $G$ vers $G \times G$ montent sur la page}
+
+\[
+G \times e = N_2 \qquad e \times G = N_3 \qquad \delta G = N_1
+\]
+\note{le $\delta$ de $\delta G$ est écrit sur une autre lettre}
+
+\struck{$(g, h) =$}
+
+$(g, e)$ \quad $(e, h)$ \quad $(k, k)$
+
+\[
+(g, h)(k, k)(g, h)^{-1} = (g k g^{-1}, h k h^{-1})
+\]
+
+\[
+\begin{array}{ccc}
+G & & \\
+\big\uparrow{\scriptstyle \mathrm{pr}_2} & & \\
+G \times G & \xrightarrow{\ \mathrm{pr}_3\ } & G
+\end{array}
+\]
+\note{les indices des deux projections sont repassés ; lecture $\mathrm{pr}_2$, $\mathrm{pr}_3$ incertaine. Au-dessous, $\mathrm{pr}_1$ est tracée comme un arc allant de $G \times G$ vers $G \times G/\delta G$}
+
+\[
+G \times G/\delta G \simeq G \qquad \delta(g, h) = g h^{-1} \qquad (g, h) \mapsto g h^{-1}
+\]
+\note{après $g h^{-1}$, un signe biffé}
+
+$g h^{-1} = g' h'^{-1} \iff$
+
+\[
+(g, h) \longmapsto (g, h, g h^{-1}) \qquad (g, h
+\]
+\[
+\hookrightarrow (g, h^{-1}, h g^{-1})
+\]
+\note{la seconde flèche part, en crochet, de $(g, h)$ ; le « $(g, h$ » de droite reste inachevé}
+
+\struck{$N_1$ — $N_2$} \qquad $N_2 \cdot N_1$
+\note{le trait qui joint $N_1$ à $N_2$ traverse $N_2$ : biffure ou arête, la page ne tranche pas}
+
+$N_2$ opère sur $N_1$
+
+$c : N_2 \to N_1$ 1-cocycle \qquad $x_2 \mapsto x_2 \cdot c(x_2)$
+
+$N_2 \to N_2 \cdot N_1$ \uncertain{$\overset{\sim}{\longleftarrow}$} $N_3$
+
+$N_2 \cap N_3 = 1$ \qquad
+$x_2\, c(x_2) = y_2$ \struck{\ill{}} $\lbrace x_2 = y_2,\ c(x_2) = 1$
+\qquad $\Longrightarrow$ \struck{$x_2 = 1,\ y_2 = 1$}
+
+$x \cdot y\, c(y)$ \qquad $c(x) = 1 \Longrightarrow x = 1$
+
+\struck{$= xy$} $z\, c(y)$ \qquad $z = xy$
+
+$c$ surjectif \qquad 1-cocycle surjectif…
+
+\page{102}
+\[
+\begin{array}{ccccc}
+P & \times & Q & \to & R \\
+e & & e & & e
+\end{array}
+\qquad
+\begin{array}{l}
+Q \simeq R \\
+P \simeq R
+\end{array}
+\]
+
+$G \times G \to G$
+
+\drawing{un tripode : $\Gamma$ au centre, avec $\gamma$ à sa gauche, et trois flèches issues de $\Gamma$, marquées $p$ vers $P$ (en haut, avec $x$), $q$ vers $Q$ (à droite, avec $y$), $r$ vers $R$ (à gauche, avec $z$)}
+
+$p(\gamma)$ \quad $q(\gamma)$ \quad $r(\gamma)$ \qquad $Q \simeq R$
+
+\[
+\left\lbrace
+\begin{array}{l}
+y \underset{p(\gamma)}{\sim} z \\
+z \underset{q(\gamma)}{\rightsquigarrow} x
+\end{array}
+\right.
+\iff
+\begin{array}{l}
+\exists\,(p(\gamma), y, z) \in \Gamma \\
+(x, q(\gamma), z) \in \Gamma
+\end{array}
+\]
+\[
+\overset{?}{\Downarrow}
+\]
+\[
+x \underset{r(\gamma)}{\sim} y \qquad (x, y, r(\gamma)) \in \Gamma
+\]
+\note{le $y$ de la première ligne est écrit sur un $x$, le $z$ repassé ; le $\exists$ est repassé ; la flèche entre $z$ et $x$ est courbe}
+
+\[
+\begin{array}{ccc}
+& \widetilde{P}_u/\sigma & \\
+& \big\uparrow & \\
+& \widetilde{\Gamma}/\sigma & \\
+\swarrow & & \searrow \\
+\widetilde{P}_w/\sigma & & \widetilde{P}_v/\sigma
+\end{array}
+\]
+
+\drawing{un grand triangle de sommets $\tilde a = p(\tilde\gamma)$ (en haut), $\tilde b = q(\tilde\gamma)$ (en bas à droite), $\tilde c = r(\tilde\gamma)$ (en bas à gauche), avec en son centre un petit triangle dont les côtés portent $u$, $v$, $w$ ; chaque sommet du grand est relié au petit par un trait}
+
+\[
+a y z^{-1} = 1 \qquad x^{-1} b z = 1 \qquad x y^{-1} = 1
+\]
+\note{ces trois relations, dans la marge de droite, d'une lecture incertaine}
+
+$(a, b, c)$ \qquad $abc = 1$ \qquad
+$abc = 1$, $c = b^{-1} a^{-1}$
+
+\[
+\left.
+\begin{array}{l}
+a y z = 1 \\
+x b z = 1
+\end{array}
+\right\rbrace
+\overset{?}{\Downarrow}
+\qquad a y = x b \qquad y = a^{-1} x b
+\]
+$x y c = 1$ i.e. \qquad $xy = x a^{-1} x b$
+
+\struck{$x y z =$} \qquad $z = (ay)^{-1}$ \qquad $bca = 1$
+
+$x = (bz)^{-1} = z^{-1} b^{-1} = a y b^{-1}$ \struck{$= ayca$} \qquad $x^{-1} a y c a = 1$
+
+$y = x^{-1} c^{-1} = b y^{-1} a^{-1} c^{-1} = b (c a y)^{-1}$
+\note{ligne très surchargée, précédée à gauche d'un signe interrogatif et de traits ; plusieurs membres intermédiaires biffés, où se lisent \struck{$x y^{-1} c$}, \struck{$aby$}, \struck{$byc^{-1}b$} ; lecture d'ensemble incertaine}
+
+$= b y^{-1} b^{-1} = \operatorname{int}(b)\, y^{-1}$
+
+$b(b y^{-1} b^{-1})$ \qquad \struck{$c^{-1} y^{-1}$} \qquad $a b y^{-1} = a y b^{-1}$
+
+$\operatorname{int}(b) \bigl(\operatorname{int}(b)\, y^{-1}\bigr)^{-1}$
+
+$\operatorname{int}(b)\, \bigl(\operatorname{int}(b)\bigr)(y)$ \qquad
+$b (b y^{-1} b)^{-1} b$ \qquad $b y^{-1} = y b^{-1}$ \qquad $(b y^{-1})^2 = 1$
+
+$b b^{-1} y b^{-1} b$
+
+\page{103}
+\[
+\begin{array}{ccc}
+& G & \\
+& \big\uparrow & \\
+& \Psi(G) & \\
+\swarrow & & \searrow \\
+G & & G
+\end{array}
+\]
+\note{devant $\Psi(G)$, un mot biffé}
+
+\drawing{à gauche, le tripode de la page 102 : $\Gamma$, avec $\gamma_0$, et ses trois flèches vers $P$ (en haut), $Q$ (à droite), $R$ (à gauche). À côté de $P$ sont écrits $a_0, \bar r, \bar\pi, \bar r'$ ; à côté de $Q$, $b_0, \tilde r', \tilde r'', \tilde\sigma$ ; sous $R$, $c_0$ et une liste très surchargée où se lisent $r, r', r''$, $\pi$, $\sigma$, $r(r', r'')$}
+
+\struck{\ill{}}, $b_0$
+
+\struck{$(\bar r, b_0, r)$} \quad $(\bar\pi, b_0, \pi)$ \quad $(\bar r', b_0, r')$
+
+$(a_0, \tilde r', r')$ \quad \struck{$(a_0, \tilde r'', r'')$} \quad $(a_0, \tilde\sigma, \sigma)$ \quad $\Longrightarrow$
+
+$(\bar r, \tilde r', \pi)$ \quad $(\bar\pi, \tilde r'', \rho)$ \quad $(\bar r', \tilde r'', \sigma)$ \quad $\Big|$ \quad $(\bar r, \tilde\sigma, \rho)$ \quad $\iff$
+\note{les biffures sont en croix ; devant $(a_0, \tilde\sigma, \sigma)$, un début biffé, et le $a_0$ écrit au-dessus. Un trait vertical sépare les trois colonnes de gauche du triplet $(\bar r, \tilde\sigma, \rho)$ ; le triplet $(\bar\pi, \tilde r'', \rho)$ est entouré et relié par un trait courbe à la double flèche de droite}
+
+\[
+\begin{array}{l}
+a_0, \bar r, \bar\pi, \bar r' \\
+b_0, \tilde r', \tilde r'', \tilde\sigma \\
+r, r', r'', \pi, \sigma, \rho
+\end{array}
+\]
+
+\drawing{les six lettres $\bar r$, $\tilde r'$, $\bar\pi$, $\tilde r''$, $\bar r'$, $\tilde\sigma$ sur une ligne ; sous les paires, des flèches verticales vers $r$, $r'$, $r''$, $r'$, entre parenthèses, une double flèche horizontale au milieu, et deux arcs descendant vers la ligne $\pi \quad \rho \quad \sigma$}
+
+\[
+\begin{array}{ll}
+\alpha_1 = a_0 & \alpha_2 = \bar r \\
+\beta_2 = \tilde r' & \beta_1 = \tilde\sigma \\
+\gamma_2 = r' & \gamma_1 = \sigma
+\end{array}
+\]
+
+\[
+\begin{array}{l}
+\underline{a_0}, \bar r, \bar\pi, \bar r' \\
+\underline{b_0}, \underline{\tilde r'}, \tilde r'', \tilde\sigma \\
+\underline{r'}, \underline{\pi}, \underline{\sigma}, \underline{\rho}
+\end{array}
+\qquad
+\left\lbrace
+\begin{array}{c|c|c|c|c|c|c|c}
+\bar\pi & \bar r' & a_0 & a_0 & \bar r & \bar r' & \bar\pi & \bar r \\
+b_0 & b_0 & \tilde r' & \tilde\sigma & \tilde r' & \tilde r'' & \tilde r'' & \tilde\sigma \\
+\pi & r' & r' & \sigma & \pi & \sigma & \rho & \rho
+\end{array}
+\right.
+\]
+\note{deux colonnes biffées par hachures entre les colonnes $(\bar r', \tilde r'', \sigma)$ et $(\bar\pi, \tilde r'', \rho)$, et entre celle-ci et la dernière ; les soulignements sont les siens. Une flèche courbe va de ce tableau vers la ligne « tels que l'on ait » ci-dessous}
+
+$a_0, b_0, \bar r, \tilde r'', \bar r'$, \struck{\ill{}} \quad $\Big|$ \quad
+$\tilde r', r'$, $\pi, \sigma, \rho, \bar\pi, \tilde\sigma$
+\note{les deux lettres $\tilde r'', \bar r'$ sont entourées ensemble ; $\tilde r', r'$ sont écrits au-dessus de la seconde liste}
+
+\[
+\forall\;
+\begin{array}{l}
+a_0, \bar r, \bar r' \in P \\
+b_0, \tilde r'' \in Q
+\end{array}
+\quad
+\exists\;
+\begin{array}{l}
+\bar\pi \in P \\
+\tilde r', \tilde\sigma \in Q \\
+r', \pi, \sigma, \rho \in R
+\end{array}
+\]
+tels que l'on ait
+\note{après $\exists$, une première liste biffée par hachures, où se lisent $r', \pi, \sigma, \rho$}
+
+\[
+\begin{array}{l}
+\bar\alpha_0 \\
+\Vert \\
+\alpha_1\ \alpha_2\ \alpha_3\ \alpha_4 \\
+\beta_1\ \beta_2\ \beta_3\ \beta_4 \\
+\gamma_1\ \gamma_2\ \gamma_3\ \gamma_4
+\end{array}
+\qquad
+\begin{array}{l}
+\alpha_1\ \alpha_1\ \alpha_2\ \alpha_2\ \alpha_3\ \alpha_3\ \alpha_4\ \alpha_4 \\
+\beta_1\ \beta_2\ \beta_1\ \beta_2 \\
+\gamma_1\ \gamma_2\ \gamma_3\ \gamma_4
+\end{array}
+\]
+\note{dans la seconde colonne, les indices de $\beta_1$, $\beta_2$ (troisième et deuxième) et de $\gamma_2$ sont repassés}
+
+\page{105}
+$\dim E_7 = 133$ (126 racines)
+
+\[
+\left.
+\begin{array}{llll}
+x_i\ y_i & 1 \leq i \leq 7 & 14 & \\
+x_{ih} & 1 \leq i < h \leq 7 & 21 & x_{ih} = -x_{hi} \\
+y_{ih} & 1 \leq i < h \leq 7 & 21 & y_{ih} = -y_{hi}
+\end{array}
+\right\rbrace
+\ 56 \text{ indéterminées}
+\]
+
+\[
+\sum_{i,j,h,k=1}^{7} x_i y_j x_{ih} y_{jk}
++ \frac{1}{4} \sum_{\lambda,\mu,\nu,\rho=1}^{7} x_{\lambda\mu} x_{\nu\rho} y_{\mu\nu} y_{\lambda\rho}
++ \sum \bigl( x_i y_{\lambda\mu} y_{\nu\rho} y_{\sigma\tau}
++ y_i x_{\lambda\mu} x_{\nu\rho} x_{\sigma\tau} \bigr)
+\]
+\note{les indices du premier terme sont d'une lecture incertaine ($x_i y_j x_{ih} y_{jk}$ ou $x_i y_j x_{ih} y_{jh}$) ; un second signe $\sum$ y est biffé}
+
+$\lbrace i, \lambda, \mu, \nu, \rho, \sigma, \tau \rbrace$ permutation paire de $[1, 7]$
+
+$\mathfrak{L}$ — $\operatorname{End} V_{56}$ \qquad
+\[
+\sum (x_i\, dy_i - y_i\, dx_i) + \sum_{i,h=1}^{7} (x_{ih}\, dy_{ih} - y_{ih}\, dx_{ih})
+\]
+\note{la forme est soulignée par lui. La lettre gothique devant « End » est lue $\mathfrak{L}$ sous réserve}
+
+\uncertain{$\mathfrak{g}$} —
+
+12
+
+\page{107}
+$G$ groupe commutatif.
+
+$P_1$ $P_2$ $P_3$ trois $G$-torseurs, $s : G \times G \times G \to G$
+\uncertain{l'appl. somme}
+
+$P_1 \times P_2 \times P_3 \supset \Gamma$ un sous-torseur sous $\operatorname{Ker} s$
+
+\quad [correspond à une trivialisation
+$P_1 \wedge P_2 \wedge P_3 \overset{t}{\simeq} \mathbb{1}_{\mathrm{Tors}(G)}$]
+
+On va montrer que le foncteur
+\[
+\lbrace G, P_1, P_2, P_3, t \rbrace \longrightarrow (P_1, P_2, P_3, \Gamma)
+\]
+\uncertain{de la catégorie} des systèmes d'un groupe $G$, 3 torseurs
+\struck{sous} \add{$P_i$} sous $G$ et une trivialisation $t$ de leur produit
+\uncertain{de Baer}, vers les quadruplets de 3 ens $P_1, P_2, P_3$ et d'une
+partie $\Gamma$ de $P_1 \times P_2 \times P_3$, est pl. fidèle.
+\note{« $G$ » est ajouté au-dessus de « groupe » ; « $P_i$ » est écrit au-dessus de « torseurs » par-dessus un mot biffé}
+
+Notons $p_i : \Gamma \to P_i$, $p_{ij} : \Gamma \to P_{ij}$ $(i \neq j)$
+
+(1) \emph{Les $p_{ij}$ sont des iso}
+
+Se donner $(P_1, P_2, P_3;$ \struck{\ill{}}$)$ et $\Gamma \subset P_1 \times P_2 \times P_3$
+satisfaisant (1), \uncertain{revient à se donner}
+\[
+P_1 \times P_2 \xrightarrow{\ \pi_3\ } P_3
+\]
+satisfaisant
+\[
+\left\lbrace
+\begin{array}{lll}
+\forall x_1 \in P_1, & x_2 \mapsto \pi_3(x_1, x_2) & P_2 \xrightarrow{\sim} P_3 \\
+\forall x_2 \in P_2, & x_1 \mapsto \pi_3(x_1, x_2) & P_1 \xrightarrow{\sim} P_3
+\end{array}
+\right.
+\]
+
+On trouve ainsi
+\[
+P_1 \xrightarrow{\ h_{23}\ } \operatorname{Isom}(P_2, P_3)
+\]
+et de
+\[
+P_1 \xrightarrow{\ h_{32}\ } \operatorname{Isom}(P_3, P_2)
+\]
+\uncertain{déduit du précédent par symétrie}
+\note{« Isom » est abrégé en un I suivi d'un trait ; « de » est suivi d'un signe d'égalité}
+
+\page{108}
+\struck{$u, \alpha, \beta$}
+
+$(u, 1, 1, 1)(1, \alpha, \beta, \gamma) = (u, u(\alpha), u(\beta), u(\gamma))(u^{-1}, 1, 1, 1)$
+\note{« $(u^{-1}, 1, 1, 1)$ » est aussi écrit au-dessus de la ligne, relié par un trait au membre de droite ; le premier $1$ du second facteur est écrit sur une autre lettre}
+
+\struck{$(1, \alpha, \beta, \gamma)$ (—} \qquad $= (1, u(\alpha), u(\beta), u(\gamma))$
+
+\[
+\operatorname{Aut}(G) \cdot (G \times G \times G) \longrightarrow
+\mathfrak{S}_G \times \mathfrak{S}_G \times \mathfrak{S}_G
+\]
+\[
+(u, \alpha, \beta, \gamma) \longmapsto
+(\tau_\beta \tau'_\gamma u,\ \tau_\gamma \tau'_\alpha u,\ \tau_\alpha \tau'_\beta u)
+\]
+\note{les indices du premier composant sont repassés et d'une lecture incertaine ; on les donne selon la permutation circulaire des deux autres}
+
+noyau formé des $(u, \alpha, \beta, \gamma)$ \uncertain{tels que}
+
+$\alpha = \beta = \gamma$ $(= g^{-1})$, $u = \operatorname{int}(g)$ \qquad
+$N = \lbrace (\operatorname{int}(g), g^{-1}, g^{-1}, g^{-1}) \mid g \in G \rbrace$
+\note{la lettre du noyau, repassée, est lue $N$ sous réserve}
+
+$(\operatorname{int}(g), g^{-1})(\operatorname{int}(g'), g'^{-1}) = (\operatorname{int}(g)\operatorname{int}(g'),\ g(g'^{-1}) g^{-1})$
+\note{membre de droite surchargé et barré d'un long trait oblique, avec au-dessous \struck{$(\operatorname{int}(g'g)^{-1}, g'g)$} ; lecture incertaine}
+
+$G$.
+
+$(u, \alpha, \beta, \gamma)(\operatorname{int}(g), g^{-1}, g^{-1}, g^{-1})(u^{-1}, u^{-1}(\alpha^{-1}), u^{-1}(\beta^{-1}), u^{-1}(\gamma^{-1}))$
+
+$(u \operatorname{int}(g), \alpha u(g)^{-1}, \beta u(g)^{-1}, \gamma u(g)^{-1})\ ( \quad )$
+
+\[
+\bigl(\underbrace{u \operatorname{int}(g) u^{-1}}_{\operatorname{int} u(g)},\
+\alpha u(g)^{-1} (u \operatorname{int}(g))(u^{-1}(\alpha^{-1})), \dots \bigr)
+\]
+\[
+\alpha u(g^{-1})\, \underbrace{u(g u^{-1}(\alpha^{-1}) g^{-1})}_{\alpha\, \alpha^{-1} u(g)^{-1}}
+\]
+\note{sous l'accolade, le premier $\alpha$ est d'une lecture incertaine}
+
+$G \cdot (G \times G \times G)$
+
+\[
+(\operatorname{Int} G) \cdot (G \times G \times G) \big/ \lbrace \operatorname{int}(g), g^{-1}, g^{-1}, g^{-1} \rbrace \simeq \Gamma(G)
+\]
+\[
+\operatorname{Aut} G \cdot (G \times G \times G) \big/ \lbrace \quad \rbrace \simeq \hat\Gamma(G)
+\]
+\note{il écrit les quotients en soulignant le numérateur et en mettant le dénominateur au-dessous ; le second dénominateur est laissé vide. Dans la seconde ligne, un I majuscule est repassé sur « Aut » ; le $\Gamma$ des deux membres de droite est repassé à l'encre plus foncée}
+
+\page{109}
+\uncertain{moyennant} \ill{} \ill{}, \uncertain{on peut} \ill{} \ill{} au cas
+où les $G_i$ sont $=$ \uncertain{groupe} $G$, les $P_i$ aux bitorseurs
+triviaux sous $G$, $G$, $\Gamma$ à
+\[
+\Gamma_0 = \lbrace (x, y, z) \in G \times G \times G \mid xyz = 1 \rbrace
+\]
+(qu'on peut \uncertain{résoudre} en $x, y, z$ —
+\[
+\begin{array}{l}
+x = z^{-1} y^{-1} \\
+y = x^{-1} z^{-1} \\
+z = y^{-1} x^{-1}
+\end{array}
+\]
+)
+
+La condition (A) signifie que $\Gamma$ est \uncertain{linéaire}
+\struck{\ill{} \ill{}}
+\[
+\Gamma = \lbrace (g_2 g_3^{-1}, g_3 g_1^{-1}, g_1 g_2^{-1}) \in G \times G \times G \mid g_1, g_2, g_3 \in G \rbrace
+\]
+\note{la condition (A) n'est pas énoncée sur cette page}
+
+Si $\gamma$ $(= (a_1, a_2, a_3))$ est remplacé par
+\[
+\gamma' = \sigma(\alpha_1, \alpha_2, \alpha_3)(\gamma)
+= (\alpha_2 a_1 \alpha_3^{-1},\ \alpha_3 a_2 \alpha_1^{-1},\ \alpha_1 a_3 \alpha_2^{-1})
+\]
+\note{les $\alpha_i$ de cette formule sont écrits par-dessus des $g_i$}
+
+dans les iso. $\tilde a_1, \tilde a_2, \tilde a_3$ sont remplacés par
+
+\struck{$\operatorname{int}(g_3)^{-1} \tilde a_1 \operatorname{int}(g_2)$}
+\[
+\left\lbrace
+\begin{array}{l}
+\tilde a'_1 = \operatorname{int}(\alpha_3)\, \tilde a_1\, \operatorname{int}(\alpha_2)^{-1} \\
+\tilde a'_2 = \operatorname{int}(\alpha_1)\, \tilde a_2\, \operatorname{int}(\alpha_3)^{-1} \\
+\tilde a'_3 = \operatorname{int}(\alpha_2)\, \tilde a_3\, \operatorname{int}(\alpha_1)^{-1}
+\end{array}
+\right.
+\]
+
+\page{110}
+
+\[
+\begin{array}{ll}
+x_2 \mapsto -x_2 - a_1 & \\
+x_3 \mapsto -x_3 - a_2 & = x_2 + a_1 - a_2 \\
+x_1 \mapsto -x_1 - a_3 & = -x_2 - a_1 + a_2 - a_3
+\end{array}
+\qquad
+\left.
+\begin{array}{l}
+a_1 + x_2 + x_3 = 0 \\
+x_1 + a_2 + x_3 = 0 \\
+x_1 + x_2 + a_3 = 0
+\end{array}
+\right| \Downarrow
+\]
+\note{les termes $-a_1$ et $-a_3$ de la dernière ligne sont soulignés par lui ; l'indice du $x_2$ est repassé}
+
+$= x_2$ ?
+
+$a_2 - x_2 = a_1 + x_2 + a_3$ \qquad $a_1 + a_2 + a_3 = 0$
+
+$2 x_2 = a_2 - a_1 - a_3 = a_2 + a_2 = 2 a_2$
+
+$2(x_2 - a_2) = 0$ \qquad $x + y + z = 0$
+
+\struck{$-x$} \qquad $y \mapsto -x - y$
+
+$x$ \quad $-x$ \qquad $y \to -y$ \qquad $x \mapsto -x$
+
+\[
+\Delta \times \Delta \longrightarrow \Delta \qquad x \mapsto -x - y
+\qquad
+\begin{array}{l}
+x + y + z = 0 \\
+-x - y - z = 0
+\end{array}
+\]
+$(x, y) \mapsto -x, -y$ \qquad $\Delta \subset \operatorname{Aut}(\Delta)$
+\note{les $\Delta$ sont tracés à l'encre épaisse ; la ligne « $-x - y - z = 0$ » est peut-être biffée}
+
+\struck{$(x, y)$} \quad $x \circ y = -x - y$
+
+$(x \circ y) \circ z = x + y - z$
+
+$x \circ (y \circ z) = -x + y + z$
+
+$x \circ x =$ \struck{$2x$ \ill{}}
+
+\[
+\begin{array}{c|cccc}
+& 0 & 1 & 2 & 3 \\
+\hline
+u_0 & 0 & 1 & 2 & 3 \\
+u_1 & 1 & 2 & 3 & 0 \\
+u_2 & 2 & 3 & 0 & 1 \\
+u_3 & 3 & 0 & 1 & 2
+\end{array}
+\]
+\note{plusieurs chiffres de ce tableau, dans l'en-tête et dans la ligne $u_1$, sont repassés à l'encre épaisse}
+
+\struck{$x \ast y$} \quad $u_1$, $0$ \qquad $x \circ y =$ \quad $x \ast y$
+
+$0'$ \qquad $x \ast y = z$ \qquad $x \circ x' = 0$ \quad $(x, x', 0)$
+
+\[
+u_1 \qquad
+\begin{array}{c|cccc}
+& 0 & 1 & 2 & 3 \\
+\hline
+0 & 0 & 1 & 2 & 3 \\
+1 & 1 & 0 & 3 & 2 \\
+1 & 2 & 3 & 1 & 0 \\
+2 & 3 & 2 & 0 & 1
+\end{array}
+\]
+\note{les étiquettes des lignes sont données comme elles se lisent ; devant la deuxième, \struck{$x \ast y$}, et un $x$ devant la troisième. Le « $1$ » de la troisième ligne, troisième colonne, est repassé}
+
+$x \ast y$ \qquad $x \circ y$ \qquad $x \circ \bar x = 0$ \qquad
+$\overline{x \circ y} = x \ast y$ \qquad $\bar x \ast \bar y = \overline{x \circ y}$
+\note{sous $x \circ \bar x = 0$, « $\bar 0 = 0$ » ; au-dessus de $\bar x \ast \bar y$, un trait épais}
+
+$x \ast y$ \qquad $x \ast y$
+\[
+\left\lbrace
+\begin{array}{l}
+x \ast y = y \ast x \\
+0 \ast y = y \\
+x \ast 0 = x \\
+\tau_x \text{ bijectif}
+\end{array}
+\right.
+\]
+\note{entre $\tau_x$ et « bijectif », quelques signes biffés}
+
+\struck{$\tau_x$ \ill{}}
+
+$x \circ y = \overline{x \ast y}$ \qquad $0 \circ y = \bar y$
+
+\page{111}
+
+\[
+(a_1, a_2, a_3) \in \Gamma
+\qquad\qquad
+x_1 \quad x_2 \quad x_3
+\]
+\note{la première lettre du triplet est repassée ; lecture des $a_i$ incertaine}
+
+\[
+\begin{array}{ll}
+o_1 : & x_2 \in P_2 \xrightarrow[\sim]{\ \tilde o_1\ } P_3 \\
+& \qquad o_2 \qquad\ o_3 \\
+& x_1 \in P_1 \xrightarrow[\sim]{\ \tilde o_2\ } P_3 \\
+& \qquad o_1 \qquad\ o_2
+\end{array}
+\qquad
+\tilde o_1(x_1) = \xi_1
+\]
+\note{le « $o_1 :$ » de tête est repassé ; l'indice de $\tilde o_2$ est d'une lecture incertaine}
+
+\struck{$x_1 = \tilde o_1^{-1}($}
+
+\[
+\begin{array}{l}
+(o_1, o_2, o_3) \in \Gamma \\
+(x_1, o_2, u_3) \in \Gamma \\
+(o_1, x_2, v_3) \in \Gamma \\
+\qquad w_3 \in P_3 \\
+(x_1, x_2, y_3) \in \Gamma \\
+(z_1, o_2, y_3) \in \Gamma \\
+(z_1, w_3, p_3) \in \Gamma \\
+(\ \cdot
+\end{array}
+\]
+\note{devant $w_3$, une lettre biffée ; le $y_3$ de la cinquième ligne est écrit sur un autre signe}
+
+\[
+P_3 \times P_3 \longrightarrow P_3 \qquad
+P_3 \times P_3 \times \Gamma \qquad
+P_3 \times \Gamma
+\]
+
+\drawing{au crayon, un triangle dont les sommets sont $P_1$ (en haut, avec $o_1$), $P_2$ (à droite, avec $o_2$) et $P_3$ (à gauche, avec $o_3$) ; les côtés portent $G_2$ (entre $P_1$ et $P_3$), $G_3$ (entre $P_1$ et $P_2$) et $G_1$ (entre $P_3$ et $P_2$). Chaque sommet est cerné d'un arc}
+
+\[
+P_1 \underset{G_3}{\wedge} P_2 \underset{G_1}{\wedge} P_3 \simeq \mathbb{1}_{G_2}
+\qquad
+P_2 \wedge P_3 \wedge P_1 \simeq
+\]
+\note{sous le second membre, « $G_2$ » ; la seconde ligne reste inachevée}
+
+$0, 1, 4$ \qquad $0\ 2$
+
+\note{deux tableaux d'addition sur cinq éléments. Le premier, très repassé, porte en tête $0\ 1\ 2\ 3\ 4$ et une première ligne $0\ 1\ 2\ 3\ 4$ ; ses autres lignes, surchargées, ne se lisent pas sûrement. Au-dessous, un essai de colonnes inachevé ($0\ 1\ 2\ 3\ 4$, puis $1\ 2\ 3\ 4$ …), lui aussi surchargé. Dans la marge, « $5$ : »}
+
+\[
+\begin{array}{c|ccccc}
+& 0 & 1 & 2 & 3 & 4 \\
+\hline
+0 & 0 & 1 & 2 & 3 & 4 \\
+1 & 1 & 2 & 3 & 4 & 0 \\
+2 & 2 & 3 & 4 & 0 & 1 \\
+3 & 3 & 4 & 0 & 1 & 2 \\
+4 & 4 & 0 & 1 & 2 & 3
+\end{array}
+\]
+\note{les zéros de la diagonale secondaire sont reliés par un trait de crayon oblique}
+
+\page{112}
+\drawing{à gauche, un premier triangle très surchargé, aux sommets $P_1$, $P_2$, $P_3$ et aux côtés marqués $G_1$, $G_2$, $G_3$, $G'_3$, dont les indices sont repassés, raturé de plusieurs traits ; à droite, le triangle mis au net : $P_1$ en haut, $P_3$ en bas à gauche, $P_2$ en bas à droite, les côtés marqués $G_2$ (entre $P_1$ et $P_3$), $G_3$ (entre $P_1$ et $P_2$), $G_1$ (entre $P_3$ et $P_2$)}
+
+\[
+\begin{array}{lll}
+P_1 & \text{bitorseur sous} & G_2, G_3 \\
+P_2 & \text{———} & G_3, G_1 \\
+P_3 & \text{———} & G_1, G_2
+\end{array}
+\qquad
+\begin{array}{lll}
+\mathring{P}_1 & \text{bitorseur sous} & G_3, G_2 \\
+\mathring{P}_2 & \text{———} & G_1, G_3 \\
+\mathring{P}_3 & \text{———} & G_2, G_1
+\end{array}
+\]
+\note{une flèche relie $\mathring{P}_1$ à la mention « opposé de $P_1$ »}
+
+$P_1 \wedge P_2 \wedge P_3$ bitorseur sous $G_2, G_2$ \quad // \quad
+$\mathring{P}_3 \wedge \mathring{P}_2 \wedge \mathring{P}_1$ bitors. sous $G_2, G_2$
+\note{au-dessus du premier $G_2$, un mot abrégé, peut-être « etc. »}
+
+\[
+\begin{array}{lcl}
+P_1 \wedge P_2 \wedge P_3 \overset{\varphi_2}{\simeq} \underset{G_2\ G_2}{\mathbb{1}}
+& & \mathring{P}_3 \wedge \mathring{P}_2 \wedge \mathring{P}_1 \overset{\mathring\varphi_2}{\simeq} \underset{G_2\ G_2}{\mathbb{1}} \\
+P_2 \wedge P_3 \wedge P_1 \overset{\varphi_3}{\simeq} \underset{G_3\ G_3}{\mathbb{1}}
+& \Updownarrow & \mathring{P}_1 \wedge \mathring{P}_2 \wedge \mathring{P}_3 \overset{\mathring\varphi_3}{\simeq} \underset{G_3\ G_3}{\mathbb{1}} \\
+P_3 \wedge P_1 \wedge P_2 \overset{\varphi_1}{\simeq} \underset{G_1\ G_1}{\mathbb{1}}
+& & \mathring{P}_2 \wedge \mathring{P}_1 \wedge \mathring{P}_3 \overset{\mathring\varphi_1}{\simeq} \underset{G_1\ G_1}{\mathbb{1}}
+\end{array}
+\]
+\note{plusieurs indices sont repassés, et devant le premier $\mathbb{1}$ de chaque colonne un signe biffé. Dans la colonne de droite, l'ordre des facteurs est celui de la page, qui ne suit pas une seule règle}
+
+\[
+\Gamma \subset P_1 \times P_2 \times P_3 \quad \text{tel que } \Gamma \neq \emptyset
+\]
+\note{« $\Gamma \neq \emptyset$ » est ajouté au-dessus de « tel que »}
+
+\[
+\left.
+\begin{array}{l}
+x = (x_1, x_2, x_3) \in P_1 \times P_2 \times P_3 \\
+g_1 \in G_1,\ g_2 \in G_2,\ g_3 \in G_3
+\end{array}
+\right.
+\Longrightarrow
+\left(
+\begin{array}{l}
+(x_1, x_2, x_3) \in \Gamma \\
+\iff (g_2 x_1 g_3^{-1}, g_3 x_2 g_1^{-1}, g_1 x_3 g_2^{-1}) \in \Gamma
+\end{array}
+\right)
+\]
+
+NB $G_1 \times G_2 \times G_3$ opère sur $P_1 \times P_2 \times P_3$ par
+\[
+\sigma(g_1, g_2, g_3) \cdot (x_1, x_2, x_3) = (g_2 x_1 g_3^{-1}, g_3 x_2 g_1^{-1}, g_1 x_3 g_2^{-1})
+\]
+et l'axiome \uncertain{ci-dessus} signifie que $\Gamma$ \uncertain{est} une
+\uncertain{orbite} \uncertain{sous} $G_1 \times G_2 \times G_3$
+\[
+\Gamma \xrightarrow{\ p_i\ } P_i \quad \text{induit par } \mathrm{pr}_i
+\]
+\note{sous la flèche $p_i$, un mot biffé}
+
+Supposons fixé un pt $\gamma \in \Gamma$, d'où des pts $a_i = p_i(\gamma)$,
+d'où des iso.
+\[
+\begin{array}{ll}
+G_2 \xrightarrow{\ \tilde a_1\ } G_3 & g_2 \text{ et } g_3 \text{ se correspondent ssi } g_2 a_1 = a_1 g_3 \\
+G_3 \xrightarrow{\ \tilde a_2\ } G_1 & g_3 \text{ et } g_1 \ \text{---} \qquad g_3 a_2 = a_2 g_1 \\
+G_1 \xleftrightarrow{\ \tilde a_3\ } G_2 & g_1 \text{ et } g_2 \ \text{---} \qquad g_1 a_3 = a_3 g_2
+\end{array}
+\]
+\note{la troisième flèche porte une pointe à chaque bout ; le dernier exposant de la page, après $g_2$, est surchargé}
+
+C'est une opér. transitive d'iso., \ill{}
+
+\page{113}
+Soit $V$ vectoriel de dim 2 sur $\mathbb{F}_2$
+
+$I$ un ens de card.\ 3
+
+$(P_i)_{i \in I}$ une famille de $V$-torseurs
+
+$\bigwedge_{i \in I} P_i \overset{\varphi}{\simeq} \mathbb{1}$ (torseur trivial) un isom.
+
+$\Gamma \subset \prod_{i \in I} P_i$ formé des $(x_i)_{i \in I}$ tels que
+$\bigwedge_{i \in I} x_i = 0$
+
+\quad (card.\ : 16 éléments)
+
+$\forall i \in I$, $\tilde P_i \xrightarrow{\ \pi_i\ } P_i$ un rev.\ d'ordre 2
+\quad $\Big|$ ou \uncertain{torseurs} d'ordre 2 \uncertain{noté} $\sigma$
+
+$\tilde\Gamma \xrightarrow{\ \pi\ } \Gamma$ un rev d'ordre 2
+
+$\forall i \in I$, un isom
+$\tilde\Gamma \simeq \Gamma \times_{P_i} \tilde P_i$ de rev.\ de $\Gamma$
+\struck{\ill{}} (\uncertain{associé} : $\tilde p_i : \tilde\Gamma_i \to \tilde P_i$)
+
+Soit $\tilde P = \coprod_{i \in I} \tilde P_i$ \quad (de cardinal $3 \times 8 = 24$)
+
+On introduit dans $\tilde P$ une structure de graphe,
+\[
+\tilde x, \tilde y \text{ liés ssi } (x \neq y)
+\left|
+\begin{array}{l}
+\text{ou bien } \exists i \in I \text{ avec } x, y \in \tilde P_i,\ y = \sigma x \text{ i.e. } \pi_i(x) = \pi_i(y) \\
+\text{ou bien } x \in \tilde P_i,\ y \in \tilde P_j \text{ avec } i \neq j, \text{ et } \exists \gamma \in \tilde\Gamma \text{ avec} \\
+\qquad x = \tilde p_i(\gamma),\ y = \tilde p_j(\gamma)
+\end{array}
+\right.
+\]
+\note{dans la seconde alternative, un début biffé, \struck{$\exists \tilde\gamma \in \tilde\Gamma$ \ill{}}, avant « $x \in \tilde P_i$ », ajouté au-dessus}
+
+\emph{NB} le $\gamma$ est unique -- \uncertain{déjà dit}
+
+\struck{\emph{Question}}
+
+Soit $i \neq j$. \struck{Soit $x$} $\forall \tilde x_i \in \tilde P_i$ et $\forall y_j \in P_j$,
+$\exists \tilde y_j \in \tilde P_j$ sur $y_j$ \uncertain{lié} $= \tilde y_{ji}$
+\note{le dernier symbole, écrit sous la ligne, est surchargé ; lecture incertaine}
+
+\[
+\begin{array}{cc}
+\tilde P_i & \tilde P_j \\
+\downarrow & \downarrow \\
+P_i & P_j
+\end{array}
+\]
+
+\emph{Axiome} \quad $\tilde P_i \xrightarrow{\ \alpha_{ji}\ } \Gamma(\tilde P_j / P_j)$ est injectif,
+et \struck{fait} son image est un torseur sous le sous-groupe
+\[
+\Gamma(P_j) = \operatorname{Ker}\bigl(\mathbb{F}_2^{P_j} \xrightarrow[\text{somme}]{} \mathbb{F}_2\bigr)
+\text{ de } \mathbb{F}_2^{P_j}
+\]
+(opérant sur $\Gamma(\tilde P_j / P_j)$ qui devient \uncertain{un} torseur
+\uncertain{sous celui-ci}) et les deux images $\alpha_{ji}$, $\alpha_{jk}$
+\struck{\ill{}} de $\tilde P_i$ et $\tilde P_k$ dans $\Gamma(\tilde P_j / P_j)$
+sont des images disjointes
+\note{« somme » est lu sous la flèche, sous réserve}
+
+\page{114}
+\[
+\begin{array}{ccc}
+& P_3 & \\
+& \big\uparrow & \\
+& \Gamma & \\
+\swarrow & & \searrow \\
+P_1 & & P_2
+\end{array}
+\qquad
+\begin{array}{ccc}
+& P_1 \times P_2 & \\
+\swarrow & & \searrow \\
+P_1 & & P_2 \\
+a_1 & & a_2
+\end{array}
+\qquad
+(x_1, x_2)
+\begin{array}{l}
+\xrightarrow{\ \sim\ } x_1 \\
+\xrightarrow{\ \sim\ } x_2
+\end{array}
+\]
+
+\[
+\begin{array}{ccccc}
+& (x_1, x_2) & \xrightarrow{\ \sim\ } & (a_1, x_2) & \\
+\swarrow{\scriptstyle \sim} & \big\downarrow{\scriptstyle \wr} & \swarrow & \big\downarrow{\scriptstyle \wr} & \\
+x_1 & (x_1, a_2) & \xrightarrow{\ \sim\ } & (a_1, a_2) & \\
+\Vert \ \swarrow{\scriptstyle \sim} & & & & \\
+x_1 & & & &
+\end{array}
+\]
+\note{la diagonale issue de $(a_1, x_2)$ porte $x_2$, écrit sur une autre lettre ; le $a_1$ du coin inférieur droit est repassé}
+
+\[
+\begin{array}{ccc}
+& X \times Y & \\
+\swarrow & & \searrow \\
+X & & Y \\
+a & & b
+\end{array}
+\qquad
+x \xrightarrow[\sim]{\ \alpha_{x,y}\ } y
+\qquad
+\begin{array}{l}
+x \simeq b \\
+y \simeq a
+\end{array}
+\qquad
+\begin{array}{l}
+E_a \simeq E_b \\
+E_y \simeq E_a
+\end{array}
+\qquad
+E_a \simeq E_b \simeq E
+\]
+\note{le $X$ de $X \times Y$ est repassé ; le $E$ de $E_y$ est écrit sur une autre lettre}
+
+\[
+\frac{\Gamma.16.2}{N}
+\qquad\qquad
+x
+\qquad\qquad
+\begin{array}{l}
+E_x \simeq E \\
+E_y \simeq E
+\end{array}
+\]
+\note{« $\Gamma.16.2$ », souligné, au-dessus de « $N$ » ; lecture du premier signe incertaine}
+
+$\alpha_{xy}^{*} : E \to E$
+
+\uncertain{avec} $\alpha^{*}_{a,y} = \alpha^{*}_{x,b} = \mathrm{id}$
+\note{le premier mot est surchargé ; les indices du second membre sont d'une lecture incertaine}
+
+\ill{} \ill{} \ill{} \ill{} pour $\alpha^{*}_{xy}$ \quad
+$(x, y) \in X \times Y - \lbrace a \rbrace \times Y - X \times \lbrace b \rbrace$
+\note{les $X$ de la fin de ligne sont repassés}
+
+\[
+X \times Y \xrightarrow{\ \pi\ } Z
+\qquad
+E_{x,y} \simeq E_{\pi(x,y)}
+\qquad
+xy = x'y' = \pi
+\]
+\note{devant $xy = x'y'$, un signe biffé}
+
+$(e, \pi)$ \quad $(\pi, e)$ \qquad $y = x^{-1}\pi$
+
+\[
+\begin{array}{ccc}
+E_{e,\pi} & \overset{\varphi_{\pi;x}}{\simeq} & E_{x, x^{-1}\pi} \\
+\wr & & \wr \\
+E & & E
+\end{array}
+\qquad \notin \quad x \neq e
+\]
+\note{le signe devant $x \neq e$ est d'une lecture incertaine}
+
+\[
+\left.
+\begin{array}{r}
+n^2 - 2n + 1 \\
++ (n-1) n
+\end{array}
+\right.
+= \underbrace{2n^2 - 3n + 1}
+\qquad\Big|\qquad
+\gamma \in \Gamma \qquad 21 / 42
+\]
+\note{ces deux lignes sont encadrées par lui, en deux cases}
+
+$\gamma \in \Gamma$ \qquad $\alpha_i \in P_i$
+
+\drawing{un petit triangle plein, tracé à l'encre épaisse}
+
+$\bigl(\overline{x_1, a_2}\bigr)$
+
+\[
+\begin{array}{l}
+E_{x_1} \\
+\ \wr \\
+E_\gamma
+\end{array}
+\]
+\note{après $E_{x_1}$, \struck{$= E_{x_2}$}}
+
+\page{115}
+\[
+\begin{array}{ccc}
+& P_3 & \\
+& \big\uparrow & \\
+& \Gamma \quad s & \\
+\swarrow & & \searrow \\
+P_1 & & P_2
+\end{array}
+\qquad
+p_i(s) = a_i
+\qquad
+E = E_s \simeq E_{a_i}
+\]
+
+$x_1 \in P_1$
+
+\[
+\gamma \longmapsto (x_1, a_2)
+\qquad
+\begin{array}{c}
+E_\gamma \simeq E_{x_1} \\
+\wr \\
+E_{a_2} \\
+\big\uparrow \wr \\
+E = E_s
+\end{array}
+\qquad
+\begin{array}{l}
+E_{x_1} \simeq E \\
+E_{x_2} \simeq E \\
+E_{x_3} \simeq E
+\end{array}
+\]
+
+$E_\gamma \simeq E_{p_i(\gamma)}$
+
+\[
+E \xleftarrow{\ u\ } E_\gamma \xrightarrow{\ v\ } E
+\qquad
+E_\gamma \xrightarrow{\ w\ } E
+\qquad\qquad
+E_\gamma \to E \quad \ill{}
+\]
+\note{les trois flèches issues de $E_\gamma$ partent d'un même point, $u$ vers la gauche, $v$ vers le haut à droite, $w$ vers le bas}
+
+\[
+\begin{array}{c}
+E_{x_2} \\
+\nwarrow{\scriptstyle \sim} \\
+E_\gamma \simeq E_{x_2} \\
+\wr \\
+E_{a_1} \\
+\wr \\
+E
+\end{array}
+\qquad
+\gamma \mapsto a_1, x_2, x_3
+\]
+\note{le premier $E_{x_2}$, en haut, est écrit sur une autre lettre ; un trait courbe relie le $E$ du bas à la ligne $E_\gamma \to E$}
+
+$\gamma \neq s$ \qquad $\xi_1^\gamma + \xi_2^\gamma + \xi_3^\gamma = 0$ \qquad \struck{$2n^2 - 1$}
+
+\[
+\begin{array}{l}
+\tilde\Gamma \\
+\big\downarrow \\
+\Gamma \subset G \times G \times G
+\end{array}
+\qquad
+g_1 + g_2 + g_3 = 0
+\qquad
+p_i^{-1}(a_i)
+\]
+
+\[
+\Gamma = \underset{1}{\lbrace s \rbrace} \cup \underset{n^2 - 1}{\Gamma_1} \cup \Gamma_2 \cup \Gamma_3 \cup \Gamma^{*}
+\qquad
+n^2 - 3(n-1) - 1 = n^2 - 3n + 2
+\]
+\note{le cardinal $n^2 - 1$ est écrit au-dessus de $\Gamma_1$ sur un chiffre biffé, et une flèche le reporte sur $\Gamma_2$ ; le calcul de droite, avec une accolade, donne le cardinal de $\Gamma^{*}$}
+
+\[
+\Gamma_i = p_i^{-1}\lbrace a_i \rbrace - \lbrace s \rbrace
+\qquad
+\Gamma^{*} = \bigcap_i p_i^{-1}(P_i - \lbrace a_i \rbrace) = \Gamma - \bigcup \Gamma_i - \lbrace s \rbrace
+\]
+
+\[
+\begin{array}{ll}
+x \xrightarrow{\ \sim\ } y & \\
+0 \to y - x & \\
+0 \to a & \\
+0 \to b & a \to a + b
+\end{array}
+\qquad
+\boxed{3 \cdot (n-1) + 2(n^2 - 3n + 2)}
+\]
+\note{dans la case, un signe biffé après « $3 \cdot$ » ; au-dessous, \struck{$x^2$ \ill{}}}
+
+$2n^2 - 3n + 1$ \qquad $3n - 3 = 3(n - 1)$
+
+$P_2^{*}, P_3^{*}, P_1^{*}$, \quad $\Gamma^{*}$
+
+\[
+\begin{array}{l}
+v u^{-1} = \xi \\
+w u^{-1} = \eta
+\end{array}
+\qquad
+\left\lbrace
+\begin{array}{l}
+u v^{-1} = \xi^{-1} \\
+w v^{-1} = \eta \xi^{-1}
+\end{array}
+\right.
+\]
+
+\page{116}
+$g_2 (\alpha_2 a_1 \alpha_3^{-1}) g_3^{-1} = \alpha_2 a_1 \alpha_3^{-1}$
+
+$(\alpha_2^{-1} g_2 \alpha_2)\, a_1\, (\alpha_3^{-1} g_3 \alpha_3)^{-1} = a_1$
+
+\qquad $\alpha_3^{-1} g_3 \alpha_3 = \tilde a_1 (\alpha_2^{-1} g_2 \alpha_2)$
+
+\qquad \struck{$\operatorname{int}(\alpha_3)$} $g_3 = \bigl[\operatorname{int}(\alpha_3)\, \tilde a_1\, \operatorname{int}(\alpha_2)^{-1}\bigr](g_2)$
+
+\[
+\begin{array}{ccc}
+& P_1 & \\
+& \big\uparrow & \\
+& \Gamma & \\
+\swarrow & & \nwarrow \\
+P_2 & & P_3
+\end{array}
+\qquad
+P_2 \times P_3 \text{ — } P_1
+\qquad
+\begin{array}{ccccc}
+G & \times & G & \to & G \\
+\big|{\scriptstyle \varphi} & & \big|{\scriptstyle \psi} & & \big|{\scriptstyle \chi} \\
+e & \times & G & \to & G
+\end{array}
+\]
+\note{les deux flèches latérales du tripode sont tracées l'une vers $P_2$, l'autre vers $\Gamma$ ; une croix de deux traits sépare $P_2 \times P_3 \text{ — } P_1$ du diagramme de droite ; les traits verticaux, sans pointe, portent $\varphi$, $\psi$, $\chi$ ; celui du milieu est surchargé ($\varphi \cdot \psi$ ?) et le $e$ de la dernière ligne repassé}
+
+\[
+\varphi(x) \psi(y) = \chi(xy)
+\qquad
+\varphi(1) = a,\ \psi(1) = b,\ \chi(1) = c
+\qquad
+ab = c
+\]
+
+\struck{$ab$} \qquad \struck{$a\varphi(x)$} \qquad \struck{$a\varphi$} \qquad $\varphi(x)\psi(1)$
+
+\struck{$\sigma(x)\varphi(x)$} \quad \struck{$xyz = 1$} $\Longrightarrow$
+
+$\varphi(x) \psi(y) \chi(z) = 1$ \qquad $\varphi(1)\psi(1)\chi(1) = 1$
+\note{devant la première de ces égalités, une lettre, peut-être « $t.$ »}
+
+\[
+\begin{array}{ccc}
+\beta\gamma^{-1} & \gamma\alpha^{-1} & \alpha\beta^{-1}
+\end{array}
+\qquad
+\begin{array}{l}
+abc = 1 \\
+a = \beta\gamma^{-1} \quad b = \gamma\alpha^{-1} \\
+abc = \beta\alpha^{-1} c
+\end{array}
+\]
+\note{les trois produits de gauche sont surchargés ; au-dessus du premier, « $H$ » ou un signe voisin. À droite, \struck{$\beta\gamma^{-1} b$} devant la dernière ligne}
+
+$\varphi'(1) = 1$, $\psi'(1) = 1$, $\chi'(1) = 1$ \qquad \struck{$\operatorname{int}\varphi$ \ill{}}
+
+\[
+\begin{array}{c|c|c}
+\tau_\beta^{-1} \varphi \tau_{\gamma^{-1}}' & \tau_{\gamma^{-1}} \psi \tau_\alpha' & \tau_{\alpha^{-1}} \chi \tau_\beta' \\
+\Vert & \Vert & \Vert \\
+\varphi' & \psi' & \chi'
+\end{array}
+\]
+\note{les accents des $\tau'$ sont surchargés, et leur lecture incertaine}
+
+$xyz = 1 \Longrightarrow \varphi'(x)\psi'(y)\chi'(z) = 1$
+
+$yz = 1 \Longrightarrow \psi'(y)\chi'(z) = 1$
+
+$\chi'(z) = \psi'(y)^{-1}$
+
+$\chi'(y^{-1}) = \psi'(y)^{-1}$
+
+$\psi'(y) = \chi'(y^{-1})^{-1}$
+
+\struck{\ill{}} $\varphi' = \psi' = \chi'$
+
+$\varphi$
+
+\[
+\bigl(\beta^{-1} \varphi(x) \gamma\bigr) \bigl(\gamma^{-1} \psi(y) \alpha\bigr) \bigl(\alpha^{-1} \chi(z) \beta\bigr) = 1
+\]
+\note{la parenthèse ouvrante du premier facteur est de trop sur la page ; les deux derniers facteurs sont soulignés d'un trait}
+
+\[
+(u \times u \times u)
+\qquad
+(\tau_\beta u \tau_\gamma'^{-1},\ \tau_\gamma u \tau_\alpha'^{-1},\ \tau_\alpha u \tau_\beta'^{-1})
+\]
+
+\page{117}
+
+\drawing{un triangle de sommets $u$ (en bas à gauche), $v$ (en bas à droite) et $w$ (en haut) ; de chaque sommet partent quatre paires d'arêtes, dessinées comme des pointes effilées ouvertes vers l'extérieur. Autour de $u$ : les paires $(\alpha_i, \alpha'_i)$, groupées par accolades en $a_1, \dots, a_4$ ; autour de $v$ : les paires $(\beta_i, \beta'_i)$, groupées en $b_1, \dots, b_4$ ; autour de $w$ : les paires $(\gamma_i, \gamma'_i)$, groupées en $c_1, \dots, c_4$. Plusieurs étiquettes sont repassées}
+
+12 \uncertain{arêtes}
+\[
+\left\lbrace
+\begin{array}{lll}
+\alpha_1, \alpha_2, \alpha_3, \alpha_4 & \text{liés à} & \beta_4 \\
+\beta_1, \beta_2, \beta_3, \beta_4 & \text{———} & \gamma_4 \\
+\gamma_1, \gamma_2, \gamma_3, \gamma_4 & \text{———} & \alpha_4
+\end{array}
+\right.
+\]
+\note{Le mot après « 12 », très abrégé, est d'une lecture incertaine, ici comme plus bas}
+
+\[
+12 \text{ arêtes}
+\left\lbrace
+\begin{array}{l}
+\alpha_i \text{ lié à } \alpha'_i \\
+\beta_i \text{ lié à } \beta'_i \\
+\gamma_i \text{ lié à } \gamma'_i
+\end{array}
+\right.
+\quad 1 \leq i \leq 4
+\qquad\qquad
+12
+\left\lbrace
+\begin{array}{lll}
+\alpha'_i & \text{liés à} & \beta'_4 \\
+\beta'_i & \text{———} & \gamma'_4 \\
+\gamma'_i & \text{———} & \alpha'_4
+\end{array}
+\right.
+\]
+\note{la borne de « $1 \leq i \leq 4$ » est surchargée. Dans la marge de droite, écrit en travers et relié par un trait : \uncertain{$a_1 \wedge a_2 \wedge a_3 = 1$}}
+
+\[
+\left\lbrace
+\begin{array}{lll}
+\alpha_1 & \text{lié à} & \beta'_1, \beta_2, \beta_3, \beta_4 \\
+\alpha_2 & \text{———} & \beta_1, \beta'_2, \beta_3, \beta_4 \\
+\alpha_3 & \text{———} & \beta_1, \beta_2, \beta'_3, \beta_4 \\
+\alpha_4 & \text{———} & \beta'_1, \beta'_2, \beta'_3, \beta_4
+\end{array}
+\right.
+\qquad
+\alpha_1 \text{ lié à } \beta_1, \beta'_2, \beta'_3, \beta'_4
+\]
+$- - - -$
+
+\[
+\boxed{
+\begin{array}{l}
+\alpha_1 \text{ lié à } \beta'_1 \\
+\alpha_2 \text{ lié à } \beta_2
+\end{array}
+}
+\quad \longleftarrow \quad
+\boxed{\alpha_1 \text{ lié à } \gamma'_4}
+\]
+\note{la ligne de la dernière case est d'une lecture incertaine}
+
+\[
+\begin{array}{l}
+\alpha_1 \text{ lié à } \beta_4 \text{ et } \gamma'_4 \\
+\beta_1 \text{ lié à } \gamma_4 \text{ et } \beta'_4 \\
+\text{or} \ (\alpha_1 \text{ lié à } \beta_1) \Longrightarrow
+\end{array}
+\]
+\note{l'indice du $\beta_4$ de la première ligne est écrit sur une autre lettre ; le « or » de la dernière est lu sous réserve}
+
+\drawing{deux sommets $u$ et $v$ reliés par une arête, avec $w$ au-dessus de $v$ ; de $u$ partent deux arêtes, vers $\alpha$ (marqué « $-\alpha = \alpha$ ») et vers un sommet noté $\alpha_2 = \alpha'_2$ ; de $v$ partent trois arêtes, vers $\beta'_1 = \beta''$, $\beta'_1$ et $\beta'' = \beta_2$ ; lecture des étiquettes incertaine}
+
+\[
+\left\lbrace
+\begin{array}{l}
+\alpha_1, \beta'_1, \gamma'_4 \\
+\alpha_1, \beta_2, \gamma'_3 \\
+\alpha'_2, \beta'_1, \gamma'_3 \\
+\alpha'_2, \beta_2, \gamma_4
+\end{array}
+\right.
+\]
+\note{l'indice du $\gamma'_3$ de la deuxième ligne est repassé}
+
+\note{ce qui suit est écrit en travers de la page}
+
+\[
+P_1 \underset{G_3}{\wedge} (P_2 \underset{G_3}{\wedge} P_3)
+\]
+\note{sous la formule, trois indices : $G_3$, $G_3$, $G_2$ ; à côté, des colonnes de lettres ($\alpha_4$, $\beta_4$ …) liées par « liés à », trop surchargées pour être lues}
+
+\struck{$g_2 a_1 g_3^{-1} = 1$}
+
+$g_2(\alpha_2 a_1 \alpha_3^{-1}) g_3^{-1} = \alpha_2 a_1 \alpha_3^{-1}$
+
+$(g_2 \alpha_2)(g_3 \alpha_3)^{-1} = \alpha_2 a_1 \alpha_3$
+\note{le second facteur est surchargé}
+
+$g_3 \alpha_3 = \tilde a_1 (g_2 \alpha_2)$
+
+$\tilde a_1(g_2)\, \tilde a_1(\alpha_2) = g_3 \alpha_3$
+
+$g_3 =$
+
+\drawing{un pentagone en forme de maison, partagé en triangles par des diagonales, quelques-unes fléchées}
+
+\[
+\tilde A_1(g_2)\, \alpha_3 = \tilde a_1(g_2)\, \tilde a_1(\alpha_2)
+\qquad
+\tilde A_1(g_2) = \tilde a_1(g_2)\, \tilde a_1(\alpha_2)\, \alpha_3^{-1}
+\]
+\note{sous la seconde formule, une accolade vers un $\Psi$, lu sous réserve}
+
+\[
+(g_1, g_2, g_3)(a_1, a_2, a_3) = (a_1, a_2, a_3)
+\]
+\note{sous $(a_1, a_2, a_3)$, une accolade et « $\in \Gamma$ »}
+
+\note{deux lignes au bas de la page, écrites dans l'autre sens ; le dernier membre de la première ligne est surchargé et illisible :}
+\[
+\left.
+\begin{array}{ll}
+g_2 a_1 = a_1 g_3 = \cdots & \text{i.e. } g_2 a_1 g_3^{-1} = a_1 \\
+g_3 a_2 = a_2 g_1 = b_2 & \text{i.e. } g_3 a_2 g_1^{-1} = a_2 \\
+g_1 a_3 = a_3 g_2 &
+\end{array}
+\right.
+\qquad \overset{?}{\Downarrow}
+\qquad a_1, a_2,
+\]
+
+\page{118}
+\struck{$u \in \operatorname{Aut} G$}
+
+$\tau_\beta u \tau_{\gamma^{-1}}'$ \quad $\tau_{\gamma'} u' \tau_{\gamma'}'^{-1}$
+\note{les indices de la seconde expression sont d'une lecture incertaine}
+
+\struck{$\beta u(x) \gamma^{-1}$} \qquad $u'(x \gamma'^{-1})$
+
+$\beta u(x \gamma^{-1})$
+
+$\beta' u'(\beta u(x \gamma^{-1}) \gamma'^{-1})$
+
+$\beta' u'(\beta)\, \underline{u' u}(x)$
+\note{« $u'u$ » est souligné par lui}
+
+\[
+\begin{array}{l}
+\varphi(1) = \beta\gamma^{-1} \\
+\varphi'(x) = \beta^{-1} \varphi(x) \gamma \\
+\psi'(x) = \gamma^{-1} \psi(x) \alpha \\
+\chi'(x) = \alpha^{-1} \chi(x) \beta
+\end{array}
+\qquad
+\varphi'(x) \psi'(x) \chi'(x) = 0
+\qquad
+\varphi = \beta u(x) \gamma^{-1}
+\]
+\note{le $\psi$ de la troisième ligne est écrit sur un $\varphi$, le $\alpha$ de la dernière sur une autre lettre ; les arguments de la ligne « $= 0$ » sont d'une lecture incertaine}
+
+$\operatorname{Aut}(G)$
+
+$G \times G$
+
+\struck{$(u, \beta, \gamma, \beta$ \quad $u, \beta,$} \qquad \struck{$u(x\gamma^{-1})$}
+
+$(u, \alpha, \beta, \gamma)(x, y, z) =$ \quad $\tau_\beta \tau_\gamma'^{-1} u$ \qquad
+$(\tau_\beta \tau'_\gamma u)(\tau_{\beta'} \tau'_{\gamma'} u')$
+\note{au-dessus de la deuxième expression, un « $u$ » ; son exposant est surchargé}
+
+\[
+(u, \alpha, \beta, \gamma)
+\begin{array}{l}
+\nearrow \\
+\longrightarrow \tau_\gamma \tau'_\alpha u \\
+\searrow \tau_\alpha \tau'_\beta u
+\end{array}
+\qquad
+\begin{array}{l}
+\beta u(x) \gamma^{-1} = x \\
+\beta = \gamma
+\end{array}
+\]
+\note{la flèche du haut, repassée à l'encre épaisse, ne porte rien}
+
+$\beta u(\beta' u(x) \gamma'^{-1}) \gamma^{-1} =$
+\note{le premier facteur est surchargé et d'une lecture incertaine}
+
+$\beta u(\beta') u u'(x) (\gamma u(\gamma'))^{-1}$ \qquad
+$u(\alpha') = \alpha^{-1}$, \ $\alpha' = u^{-1}(\alpha^{-1})$
+
+\[
+(u, \alpha, \beta, \gamma)(u', \alpha', \beta', \gamma') = (u u',\ \alpha u(\alpha'),\ \beta u(\beta'),\ \gamma u(\gamma'))
+\]
+
+\[
+\bigl((u, \alpha, \beta, \gamma)(u', \alpha', \beta', \gamma')\bigr)(u'', \alpha'', \beta'', \gamma'')
+= (u u' u'',\ \alpha u(\alpha') u u'(\alpha''), \dots)
+\]
+\[
+(u, \alpha, \beta, \gamma)\bigl(\underbrace{\quad\quad\quad}_{u' u'',\ \alpha' u'(\alpha'') \dots}\bigr)
+\qquad
+(u u' u'',\ \alpha u(\alpha' u'(\alpha'')))
+\]
+\note{dans la première ligne, l'accolade de la parenthèse intérieure est ajoutée d'un trait ; le $\gamma$ du premier facteur est repassé}
+
+$(u, \alpha, \beta, \gamma)(u^{-1}, u^{-1}(\alpha)^{-1}, u^{-1}(\beta)^{-1}, u^{-1}(\gamma^{-1}))$
+
+\page{119}
+\note{page de croquis et de formules éparses, sur un autre sujet ; on donne les formules dans l'ordre de la page et les croquis en bref}
+
+\drawing{en haut, une courbe fermée allongée avec une double flèche ; un « $V$ » dans un parallélogramme ; une ellipse traversée d'une courbe, hachurée sur un bord}
+
+$\Gamma \to S^1$
+
+$S^2 \times S^2 - \text{diag}$ \qquad $S^2 \times S^2 / \pm 1$ \quad $\Delta$
+\note{ces deux lignes sont en partie couvertes d'encre répandue}
+
+\[
+S^2 \times S^2 - \text{diag} - \text{antidiag} = \mathbb{P}
+\qquad
+\begin{array}{c}
+\mathbb{C}^{*} \\
+\big\downarrow \\
+\mathbb{P} \\
+\big\downarrow \\
+S^2
+\end{array}
+\qquad
+\begin{array}{c}
+\pi_1(S^1) = \mathbb{Z} \\
+\big\downarrow{\scriptstyle 2} \\
+\pi_1(\mathbb{C}^{*}) = \mathbb{Z} \\
+\big\downarrow \\
+\pi_1(\mathbb{P}) \\
+\big\downarrow \\
+\pi_1(S^2) = 0
+\end{array}
+\]
+\note{la lettre notée ici $\mathbb{P}$ est repassée et d'une lecture incertaine}
+
+$(x, -y)$ \qquad \struck{$y = x$} $y = -x$ \qquad $S^1 \to S^2$
+
+\drawing{à gauche, plusieurs croquis en perspective : un cône de révolution avec une flèche de rotation ; un plan contenant une ellipse, des vecteurs $a$, $b$, $-a$, $u(t)$, $v(t)$, $\lambda(t)$ issus d'un même point ; une ellipse percée d'un axe vertical, hachurée. Au milieu, une sphère avec trois vecteurs issus du centre}
+
+$\theta(t) : S^1 \to S^2$
+
+\struck{$\mathbb{P}^1 \times \mathbb{P}^1$} $\to \mathbb{P}^1$
+
+\[
+X \times
+\qquad
+\begin{array}{l}
+E \to L \\
+E \to L' \\
+F \xrightarrow{\ \sim\ } L'
+\end{array}
+\qquad
+E \simeq L \oplus L'
+\qquad
+\boxed{p^2 = p \quad \operatorname{Tr} p = 1}
+\]
+\note{un trait relie $F$ à $E$}
+
+\emph{1-Hom}$(L, F)$
+
+\[
+0 \to F \to E_p \to \mathcal{O}(1) \to 0
+\qquad
+F \otimes \mathcal{O}(1) \simeq \mathcal{O}
+\qquad
+F \simeq \mathcal{O}(-1)
+\qquad
+\mathcal{O}(-2)
+\]
+
+$U^{+}$ \quad $U^{-}$ \qquad \struck{\ill{}} $-U^{+} \subset U^{+}$ ? \quad $-U^{-}$
+
+\drawing{en bas, plusieurs courbes fermées : un disque partagé en trois régions numérotées 1, 2, 3 ; deux ovales emboîtés, parcourus de flèches ; un petit cercle avec son centre, relié par un segment à un point $a$}
+
+$\mathbb{R} u \neq \mathbb{R} a, \mathbb{R} b$
+
+\end{document}
