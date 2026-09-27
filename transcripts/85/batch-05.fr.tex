@@ -1,0 +1,622 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 85, batch 5 (pages 81-97).
+% Established from the facsimile archives/batches/85/batch-05.pdf (a copy of
+% 85.pdf fetched through the project's relay,
+% https://grothendieck-relay.onrender.com/source/85.pdf), per the skill
+% transcribe-grothendieck. The folder is ninety-seven pages in five batches;
+% this is the fifth and last, seventeen pages.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-09-26 — first pass, unchecked against the pages by a human.
+%
+% Pages skipped: none as unrelated. Pages 81 and 94 are covers (cream, then
+% yellow card), each inscribed in ink at the top right and counted in pencil
+% at the top: p. 81 « Opérations sur systèmes de Schwartz », « (12 p) »;
+% p. 94 « Classes de ss-groupes de S_5 et de ses sous-groupes », « (3 p) ».
+% They take no \page marker; their words become the section headings, with
+% a \note. The counts match the leaves: twelve (82-93), three (95-97).
+% Pages summarised: none (nothing typed, nothing by another hand). Page 96 is
+% pencil drawings only (a triangular bipyramid, a cluster of tetrahedra); it
+% gets a \page marker and one descriptive French \note, following the brief's
+% rule for drawing pages. Pages 91-93, 95 and 97 are scratch sheets of
+% formulas, tables and figures: labels and formulas are set, figures are
+% described in \note{}s, never redrawn.
+%
+% His pagination: none on the leaves. The two numbered runs are the covers'
+% pencilled counts, « (12 p) » and « (3 p) », recorded in notes. No date in
+% his hand anywhere in the batch.
+%
+% What the batch is about. I (pp. 82-93, « Opérations sur systèmes de
+% Schwartz »): Pi_0 = <l_0, l_1, l_2 | l_0 l_1 l_2 = 1>, its profinite
+% completion; homomorphisms to a group H are triples (rho_0, rho_1, rho_2)
+% with product 1, T(H) in H^3, surjective ones = Schwartz systems Sch(H).
+% Omega_0 = Aut(Pi_0), Omega = Aut(Pi^), the outer groups, action on T(H)/H
+% and Sch(H)/H. S_3 acts on Pi_0 (sigma(l_i) = l_sigma(i)^{±1}), injecting in
+% Omega_0 and Omega~; three actions rho of gamma_0 x gamma_0 (gamma_0 = Z*,
+% gamma = Z^*) by powers on two generators, intrinsically rho^I for 2-element
+% I in {0,1,2}; relations with S_3; the subgroups Omega^+ generated, the
+% « groupe des éliminations » El, Omega^+ = S_3 semidirect El. A
+% « Construction »: S * gamma = S semidirect gamma^(*S) (free product over
+% S). Hence S_3 semidirect (gamma x gamma)^(* S_3/pi_01) -> Omega^+, the
+% reduction to gamma_0, Pi(6) and Omega(6) for groups of exponent dividing 6
+% (A_4), the presentation of the resulting group by S_3 and six involutions
+% rho_sigma, and its action on the 96 Schwartz systems of the tetrahedral
+% group, 8 orbits; an NB generalising to exponent N (6, 12, 30 for A_4, S_4,
+% A_5) with gamma(N) = (Z/NZ)*; then three scratch pages of explicit
+% computations (xi_i, rho_1 = xi_1 xi''_2, the tetrahedron labels rho_f,
+% rho_s, rho_a and the types (3,3,2)^±, (3,3,3)^±). II (pp. 95-97,
+% « Classes de ss-groupes de S_5 »): the conjugacy classes of subgroups of
+% S_5 matched to triangles, squares, points and pentagons of the five-point
+% set T, the count 160 (+2 = 162), lattice diagrams, the list of « 18 »
+% classes with those of A_5, S_4, A_4, S_3, D_4, S~_3, and normaliser /
+% centre identities (F_2 = Z(D_4), D_4 = N(Z_4, S_4), S_4 = N(F_2^2, S_5)).
+%
+% Notation fixed once, aligned on batches 1-3: his circled S and his A as
+% \mathfrak{S}, \mathfrak{A}; double-struck D_n, Z_n, F_2 as \mathbb{D},
+% \mathbb{Z}, \mathbb{F}; the semi-direct product (a dot with ½ beneath) as
+% \cdot_{1/2}; cursive N and Z as \mathcal{N}, \mathfrak{Z}; his underlined
+% generators l_i as \underline{\ell}_i where underlined; « El » as
+% \mathbb{E}\mathrm{l}. « Schwartz » is kept as he spells it on these
+% leaves (batch 1 has « Schwarz »). On p. 91 his curly letter for the
+% elementary operations is set \xi, distinct from rho.
+%
+% Hardest pages: 84 (dense, fast prose between the formulas), 86 and 88
+% (whole lines of connective prose lost), 89 (the orbit count), 92-93 and
+% 95 (scratch sheets with overwriting). Apparatus: 242 \ill{}, 42
+% \uncertain{} (counted on the finished file). Readings to check first: p. 83
+% the placement of the dot in the indices of rho; p. 84 « éliminations »;
+% p. 89 « 72 + 24 = 96 » and the list of eight orbits; p. 95 the margin
+% note on automorphisms; p. 97 « dont 9 abéliens ».
+
+
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{85}
+\batch{5}
+\pages{81}{97}
+\dating{s.d. — le groupe « Géométrie et topologie combinatoire » (69 à 102) est daté 1976-[vers 1986]}
+\watermark{Édition de démonstration}
+\foldertitle{2-polyèdres et 1-polygônes : notes manuscrites (s.d.)}
+
+\begin{document}
+
+\section*{Opérations sur systèmes de Schwartz}
+\note{ces mots sont de sa main, à l'encre, en haut à droite d'un feuillet de couverture (page 81), qui ne porte rien d'autre ; « Schwartz » est ainsi orthographié. En haut, au crayon, « (12 p) », qui compte les douze feuillets suivants (pages 82 à 93). Le feuillet ne reçoit pas de numéro de page}
+
+\page{82}
+\note{première page de la série annoncée par la couverture (page 81) ; les générateurs sont soulignés, et le sont jusqu'à la fin de la série}
+
+\marginal{Soit $\mathcal{T}(H)$ \add{$\subset H^3$} l'ens.\ de ces triples ; $\mathrm{Sch}(H) \subset \mathcal{T}(H)$}
+Soit $\Pi_0$ le groupe engendré par les générateurs $\underline{\ell}_0, \underline{\ell}_1, \underline{\ell}_2$, soumis~:
+\[
+  \underline{\ell}_0\, \underline{\ell}_1\, \underline{\ell}_2 = 1
+\]
+et soit $\widehat{\Pi}$ son complété profini. Un hom.\ de $\Pi_0$ dans un groupe $H$ (ou de $\widehat{\Pi}$ dans un groupe $H$ fini) équivaut~: à la donnée de $\rho_0, \rho_1, \rho_2 \in H$ satisfaisant $\rho_0 \rho_1 \rho_2 = 1$. L'hom.\ $\Pi_0 \to H$ ($\widehat{\Pi} \to H$) est surjectif ssi $(\rho_0, \rho_1, \rho_2)$ est un syst.\ de Schwartz.
+\note{au-dessus du chapeau de $\widehat{\Pi}$, ici et plus bas, deux ou trois petites lettres, biffées la première fois, que nous ne lisons pas ; nous écrivons partout $\widehat{\Pi}$}
+
+Soit \struck{$\Pi$ le groupe des}
+\[
+  \begin{array}{l}
+    \Omega_0 = \mathrm{Aut}(\Pi_0) \\
+    \downarrow \\
+    \Omega = \mathrm{Aut}(\widehat{\Pi})
+  \end{array}
+\]
+Alors $\Omega_0$ (resp.\ $\Omega$, si $H$ fini) opère \add{à droite} sur $\underline{\mathrm{Hom}}(\Pi_0, H)$ \add{$(\simeq \mathcal{T}(H))$} ($\simeq \underline{\mathrm{Hom}}(\widehat{\Pi}, H)$ si $H$ fini) et sur le sous-ensemble $\mathrm{Schw}(H)$. On a
+\[
+  \begin{array}{l}
+    1 \longrightarrow \Pi_0 \longrightarrow \Omega_0 \longrightarrow \widetilde{\Omega}_0 \longrightarrow 1, \qquad \widetilde{\Omega}_0 = \mathrm{Autext}(\Pi_0) \\[4pt]
+    1 \xrightarrow{\ ?\ } \widehat{\Pi} \longrightarrow \Omega \longrightarrow \widetilde{\Omega} \longrightarrow 1, \qquad \widetilde{\Omega} = \mathrm{Autext}(\widehat{\Pi})
+  \end{array}
+\]
+\note{le « ? » est écrit au-dessus de la première flèche de la seconde suite}
+et deux éléments de \struck{$\underline{\mathrm{Hom}}(\Pi_0, H)$} \add{$\mathcal{T}(H)$} ($\widehat{\Pi}$) sont conjugués sous $\Pi$ dans $H$ --- l'inverse étant vrai \uncertain{pour} les élts de $\mathrm{Schw}(H)$. Ainsi $\widetilde{\Omega}_0$ ($\widetilde{\Omega}$) \uncertain{opère} sur $\widetilde{\mathcal{T}}(H) = \mathcal{T}(H)/H$ et sur $\widetilde{\mathrm{Sch}}(H) = \mathrm{Sch}(H)/H = \mathrm{Sch}(H)/\Pi_0$ \add{$\widehat{\Pi}$}.
+\note{« $\widehat{\Pi}$ » est écrit sous « $\Pi_0$ », en variante}
+
+\struck{\ill{}} Dans une \ill{} des syst.\ de Schwartz relatifs à $H$, il convient de tenir compte des opérations (\ill{}) de $\Omega_0$, ou $\Omega$ --- et \ill{} \emph{\ill{}} \ill{} \ill{} par $\widetilde{\Omega}_0$, $\widetilde{\Omega}$ \uncertain{grâce} \ill{} \ill{} $\widetilde{\mathrm{Sch}}(H)$.
+\struck{\ill{}}
+\note{une ligne de formule biffée ferme la page}
+\page{83}
+$\mathfrak{S}_3$ opère [\uncertain{fidèlement}] sur $\Pi_0$ \uncertain{resp.}\ $\widehat{\Pi}$, par
+\[
+  \sigma(\underline{\ell}_i) =
+  \begin{cases}
+    \ell_{\sigma(i)} & \text{si } \sigma \in \mathfrak{S}_3^{+} \\
+    \ell_{\sigma(i)}^{-1} & \text{si } \sigma \in \mathfrak{S}_3^{-}
+  \end{cases}
+\]
+On a donc des injections
+\[
+  \begin{array}{ccc}
+    \mathfrak{S}_3 \hookrightarrow \Omega_0 & \qquad & \mathfrak{S}_3 \hookrightarrow \widetilde{\Omega}_0 \\
+    \searrow \ \ \downarrow & \text{d'où} & \searrow \ \ \downarrow \\
+    \Omega & & \widetilde{\Omega}
+  \end{array}
+\]
+\note{deux triangles : $\mathfrak{S}_3$ s'envoie par une injection (flèche à crochet) dans $\Omega_0$ (resp.\ $\widetilde{\Omega}_0$), puis par la flèche verticale dans $\Omega$ (resp.\ $\widetilde{\Omega}$) ; la diagonale part aussi de $\mathfrak{S}_3$ avec un crochet}
+[l'injectivité $\mathfrak{S}_3 \to \widetilde{\Omega}$ se vérifie immédiatement]
+
+Soit
+\[
+  \gamma_0 = \mathbb{Z}^{*}, \qquad \gamma = \widehat{\mathbb{Z}}^{*}
+\]
+On va définir trois op.\ de $\gamma_0 \times \gamma_0$ sur \struck{\ill{}} $\Omega_0$, et de $\gamma \times \gamma$ sur $\Omega$, \struck{notées $\rho$} \uncertain{i.e.}\ $\varepsilon, \varepsilon' \in \gamma_0 \times \gamma_0$ ou $\gamma \times \gamma$, \ill{} par $\rho_{\cdot\varepsilon,\varepsilon'}$, $\rho_{\varepsilon\cdot\varepsilon'}$, $\rho_{\varepsilon,\varepsilon'\cdot}$ les \ill{} de $(\varepsilon, \varepsilon')$ par ces trois opérations. On pose \add{donc}
+\[
+  \left\lbrace
+  \begin{array}{lll}
+    \rho_{\varepsilon,\varepsilon'\cdot}(\ell_0) = \ell_0^{\varepsilon}, & \rho_{\varepsilon,\varepsilon'\cdot}(\ell_1) = \ell_1^{\varepsilon'}, & \rho_{\varepsilon,\varepsilon'\cdot}(\ell_2) = \ell_1^{-\varepsilon'}\ell_0^{-\varepsilon} \\[3pt]
+    \rho_{\cdot\varepsilon\varepsilon'}(\ell_1) = \ell_1^{\varepsilon}, & \rho_{\cdot\varepsilon\varepsilon'}(\ell_2) = \ell_2^{\varepsilon'}, & \rho_{\cdot\varepsilon\varepsilon'}(\ell_0) = \ell_2^{-\varepsilon'}\ell_2^{-\varepsilon} \\[3pt]
+    \rho_{\varepsilon\cdot\varepsilon}(\ell_2) = \ell_2^{\varepsilon}, & \rho_{\varepsilon'\cdot\varepsilon}(\ell_0) = \ell_0^{\varepsilon'}, & \rho_{\varepsilon'\cdot\varepsilon}(\ell_1) = \ell_0^{-\varepsilon'}\ell_2^{-\varepsilon}
+  \end{array}
+  \right.
+\]
+\note{la place du point dans les indices, qui dit sur quel générateur l'opération agit trivialement, se lit mal et n'est pas toujours la même d'une ligne à l'autre ; nous la donnons telle que nous la voyons, sans l'uniformiser. Le « donc » est écrit au-dessus de la troisième colonne. Deuxième ligne, troisième colonne : on lit deux fois $\ell_2$, où l'on attendrait $\ell_2^{-\varepsilon'}\ell_1^{-\varepsilon}$ ; nous transcrivons tel quel}
+
+\struck{On définit aussi, si $I$ est une partie à deux él.\ de $\lbrace 0, 1, 2\rbrace$}
+De façon plus intrinsèque, si $I$ est une partie à 2 él.\ de $\lbrace 0,1,2\rbrace = \Delta_2$, on définit des hom.
+\[
+  \begin{array}{rcl}
+    \rho_0^{I} : \gamma_0^{I} & \longrightarrow & \Omega_0 \\
+    \downarrow & & \downarrow \\
+    \rho^{I} : \gamma^{I} & \longrightarrow & \Omega
+  \end{array}
+\]
+\struck{\ill{}} un \ill{} $\varepsilon = (\varepsilon_i)_{i \in I}$ \ill{} $\Omega_0$ (resp.\ $\Omega$) par \struck{l'action de $\varepsilon$.}
+\[
+  \rho_0^{I}(\varepsilon)(\underline{\ell}_i) = \underline{\ell}_i^{\,\varepsilon_i} \qquad (i \in I)
+\]
+\struck{et \ill{}} \ill{} qui \ill{} \ill{} \ill{} \ill{} $\Omega_0 \simeq \mathbb{Z}^{(*I)}$ --- \uncertain{puissance} \uncertain{libre}.
+Les relations entre les \ill{} de $\mathfrak{S}_3$ et les $\rho^{I}$
+\page{84}
+\struck{\ill{}} \struck{\ill{}} \add{s'expriment} comme suit~: si $\sigma \in \mathfrak{S}_3$, et $\widetilde{\sigma}_{\Omega}$ est l'op.\ sur $\Omega_0$ (ou $\Omega$), \ldots
+\note{« s'expriment » est écrit au-dessus des mots biffés ; la phrase continue celle qui termine la page 83}
+\[
+  \left\lbrace
+  \begin{array}{l}
+    \widetilde{\sigma}_{\Omega}\, \rho^{I}(\varepsilon)\, \sigma_{\Omega}^{-1} = \rho^{\sigma I}(\sigma\varepsilon) \qquad \text{\uncertain{i.e.}} \\[3pt]
+    \sigma_{\Omega}\, \rho^{I}(\varepsilon) = \rho^{\sigma I}(\sigma\varepsilon)\, \sigma_{\Omega}
+  \end{array}
+  \right.
+\]
+Ceci montre que le \add{s/}groupe \ill{} \ill{} des $\Omega_0$ (\uncertain{resp.}\ $\widetilde{\Omega}_0$, \ldots\ $\Omega$, \ldots\ $\widetilde{\Omega}$) \uncertain{engendré} par $\mathfrak{S}_3$ et \ill{} \ill{} $\rho^{I}(\gamma_0^{I})$ (resp.\ $\rho^{I}(\gamma^{I})$)
+\marginal{[il suffit \ill{} $= \ill{}$ \ill{} $\mathfrak{S}_3$ et \ill{} des $\rho^{I}(\gamma_0^{(i)})$ (\struck{\ill{}} \ill{} \ill{} possibilités)]}
+\struck{\ill{}} par $\mathfrak{S}_3$ et \struck{\ill{}}, les 3 $\rho^{I}(\gamma_0^{I})$ (resp.\ $\rho^{I}(\gamma^{I})$) \ill{} \ill{} $=$, \uncertain{notés} \struck{\ill{}} $\Omega_0^{+}$, $\widetilde{\Omega}_0^{+}$, $\Omega^{+}$, $\widetilde{\Omega}^{+}$~;
+et \struck{\ill{} \ill{} \ill{}} \add{engendré par les $\rho^{I}(\gamma_0^{I})$} ($\rho^{I}(\gamma^{I})$) \ill{} \ill{} \ill{} s/-groupe \ill{} \ill{} \add{$\mathbb{E}\mathrm{l}_0$, $\widetilde{\mathbb{E}\mathrm{l}}_0$, $\mathbb{E}\mathrm{l}$, $\widetilde{\mathbb{E}\mathrm{l}}$}
+\marginal{(groupe des « éliminations »)}
+\note{les quatre noms $\mathbb{E}\mathrm{l}_0, \ldots$ sont écrits au-dessus de la ligne ; la note marginale, en regard, dit d'où vient le nom. La lecture « éliminations » est la nôtre, le mot est entre guillemets sur la page}
+\struck{\ill{}} \ill{} \ill{} \ill{} \ill{} \ill{} un \ill{} groupe quotient \ill{} $\mathfrak{S}_3$ à priori, mais \ill{} \ill{} \ill{} qu'il \ill{} \ill{} [\ill{}~:] $\mathfrak{S}_3$, \ill{} fait d'un produit ½ direct de $\mathfrak{S}_3$ et de \ill{}~:
+\[
+  \left\lbrace
+  \begin{array}{ll}
+    \Omega_0^{+} \simeq \mathfrak{S}_3 \cdot_{1/2} \mathbb{E}\mathrm{l}_0 & \qquad \widetilde{\Omega}_0^{+} \simeq \mathfrak{S}_3 \cdot_{1/2} \widetilde{\mathbb{E}\mathrm{l}}_0 \\[3pt]
+    \Omega^{+} \simeq \mathfrak{S}_3 \cdot_{1/2} \mathbb{E}\mathrm{l} & \qquad \widetilde{\Omega}^{+} \simeq \mathfrak{S}_3 \cdot_{1/2} \widetilde{\mathbb{E}\mathrm{l}}
+  \end{array}
+  \right.
+\]
+\note{il écrit le produit semi-direct $\mathfrak{S}_3 \cdot_{1/2} G$, un point avec « ½ » en indice ; nous gardons son écriture dans toute la série}
+
+\struck{\emph{Questions}} \emph{Construction} Soient $\mathfrak{S}$, $\gamma$ deux groupes. Considérons le produit libre $\mathcal{L} = \mathfrak{S} * \gamma$. On a un hom.
+\[
+  \mathcal{L} = \mathfrak{S} * \gamma \longrightarrow \mathfrak{S}
+\]
+\add{$\mathcal{L} =$} dont le noyau est le ss-groupe \uncertain{normal} de $\mathfrak{S} * \gamma$ engendré par $1 * \gamma \subset \mathfrak{S} * \gamma$. \ill{} \ill{} \ill{} une section \struck{\ill{}} $\mathfrak{S} \hookrightarrow \mathcal{L}$, \ill{}
+\note{« Construction » est souligné deux fois, sous « Questions » biffé}
+
+\page{85}
+une décomposition en produit ½ direct
+\[
+  \mathcal{L} = \mathfrak{S} * \gamma \simeq \mathfrak{S} \cdot_{1/2} \mathcal{E}
+\]
+On va interpréter $\mathcal{E}$ \ill{} \ill{} \ill{} \ill{} \ill{} \ill{} un hom.\ (\ill{})
+\[
+  \gamma \overset{\rho}{\hookrightarrow} \mathcal{E}
+\]
+et une op.\ de $\mathfrak{S}$ sur $\mathcal{E}$, d'où pour $\sigma \in \mathfrak{S}$ un hom.
+\[
+  \gamma \xrightarrow{\ {}^{\sigma}\!\rho\ } \mathcal{E} \qquad {}^{\sigma}\!\rho = \sigma_{\mathcal{E}} \circ \rho \quad \struck{\ill{}}
+\]
+La famille des hom.\ \ill{} \ill{} \uncertain{permet} de définir un hom.
+\[
+  \gamma^{(*\mathfrak{S})} \longrightarrow \mathcal{E}
+\]
+\add{(\uncertain{prod.}\ \uncertain{libre})}
+
+\struck{et une op.\ de} D'ailleurs l'op.\ de $\mathfrak{S}$ sur \ill{} \ill{} $\mathfrak{S}$ permet de faire opérer $\mathfrak{S}$ sur le prod.\ libre $\gamma^{(*\mathfrak{S})}$, et \ill{} \ill{} \ill{} que l'hom.\ précédent est compatible \ill{} \ill{} \struck{\ill{}. En fait, \ill{} \ill{} \ill{}}
+\note{au-dessus de la ligne biffée, deux mots (« D. \ldots », « \ldots ») que nous ne lisons pas}
+\struck{\ill{}}
+\[
+  \mathfrak{S} \cdot_{1/2} \bigl(\gamma^{(*\mathfrak{S})}\bigr) \longrightarrow \mathcal{L} \simeq \mathfrak{S} \cdot_{1/2} \mathcal{E}
+\]
+On voit de suite que cet hom.\ est un \emph{iso} (cf.\ propriété universelle) donc
+\[
+  \gamma^{(*\mathfrak{S})} \xrightarrow{\ \sim\ } \mathcal{E} \qquad \emph{iso}
+\]
+\note{le second « iso » est souligné deux fois}
+
+\page{86}
+En prenant $\mathfrak{S} = \mathfrak{S}_3$, $\gamma = \widehat{\mathbb{Z}}^{*}$ \ill{} \ill{}, on trouve donc
+\marginal{On \uncertain{peut} \uncertain{prendre} \ill{} au \uncertain{sens} \uncertain{profini}\ldots}
+\[
+  \begin{array}{c}
+    \mathfrak{S}_3 * \gamma \simeq \mathfrak{S}_3 \cdot_{1/2} \gamma^{(*\mathfrak{S}_3)} \\
+    \Big\downarrow \ \text{\small via l'op.\ de $\mathfrak{S}_3$ sur $\Omega$ et $\rho_{\varepsilon 1\cdot}$} \\
+    \Omega
+  \end{array}
+\]
+Cet hom.\ n'est pas injectif --- \ill{} \ill{} des relations, \add{notamment} \struck{\ill{}} exprimant la commutation des $\rho_{\varepsilon 1 \cdot}$ et $\rho_{1\varepsilon'\cdot} = \pi \rho_{\varepsilon 1\cdot} \pi^{-1}$ ($\pi = \pi_{01}$ transposition de $0$ et $1$) dont on va définir un \struck{\ill{}} groupe quotient \ill{} par les relations exprimant
+\[
+  \rho^{\pi}_{\varepsilon} \ \text{\uncertain{commutent}} : \quad \rho^{1}(\varepsilon\varepsilon') \qquad (\varepsilon, \varepsilon' \in \gamma)
+\]
+\note{ligne serrée et peu lisible ; la formule de gauche porte sous $\rho$ un indice surchargé}
+On trouve
+\[
+  \mathfrak{S}_3 \cdot_{1/2} \mathcal{E}, \qquad \mathcal{E} \simeq (\gamma^2 * \gamma^2 * \gamma^2) = (\gamma^2)^{(*\mathfrak{S}_3/\pi)} \quad (\uncertain{produit})
+\]
+\note{la flèche « $\simeq$ » part de $\mathcal{E}$, écrit sous le produit semi-direct}
+où $\mathcal{E}$ est le produit libre \emph{\uncertain{des} trois copies} de $\gamma^2$, permutées transitivement entre elles par les op.\ de $\mathfrak{S}_3$, et un hom.
+
+\begin{tikzcd}[column sep=small, row sep=small]
+  \mathfrak{S}_3 \cdot_{1/2} (\gamma \times \gamma)^{(*\mathfrak{S}_3/\pi_{01})} \arrow[r] \arrow[dr] & \Omega^{+} \subset \Omega \arrow[d] \\
+  & \widetilde{\Omega}^{+} \subset \widetilde{\Omega}
+\end{tikzcd}
+
+Il serait intéressant d'examiner les propriétés d'inj.\ et surjectivité \ill{} \ill{} $=$ \uncertain{que} \ill{} \ill{} \ill{}
+
+\begin{tikzcd}[column sep=small, row sep=small]
+  \mathfrak{S}_3 \cdot_{1/2} (\gamma_0 \times \gamma_0)^{(*\mathfrak{S}_3/\pi_{01})} \arrow[r] \arrow[dr] & \Omega_0^{+} \subset \Omega_0 \arrow[d, "\sim"] \\
+  & \widetilde{\Omega}_0^{+} \subset \widetilde{\Omega}_0
+\end{tikzcd}
+
+\marginal{$\gamma_0 = \lbrace \pm 1\rbrace$}
+\note{dans les deux diagrammes la flèche verticale part de $\Omega^{+}$ (resp.\ $\Omega_0^{+}$), et une inclusion « $\cap$ » relie aussi $\Omega$ à $\widetilde{\Omega}$ au-dessus du second terme ; le « $\sim$ » est écrit sur la flèche $\Omega_0 \to \widetilde{\Omega}_0$. La note « $\gamma_0 = \lbrace\pm 1\rbrace$ » est dans le coin inférieur gauche}
+
+\page{87}
+\marginal{?}
+Par \uncertain{exemple}, $=$ de $\Omega^{+}$ \ill{}, il est clair que les images sont les $\Omega^{+}$ \ill{} (mais \ill{} \ill{} \ill{} $\Omega^{+} = \Omega$ \ill{}~?) L'image de $\mathcal{E}$ \add{$= (\gamma \times \gamma)^{(*\mathfrak{S}_3/\pi_{01})}$} (\uncertain{resp.}\ $\mathcal{E}_0$) est évidemment $\mathbb{E}\mathrm{l}$ (resp.\ $\mathbb{E}\mathrm{l}_0$)\ldots
+
+On a un hom.\ d'inclusion $\gamma_0 \to \gamma$, définissant
+\[
+  \begin{array}{ccc}
+    (\gamma_0 \times \gamma_0)^{*(\mathfrak{S}_3/\pi_{01})} & \longrightarrow & (\gamma \times \gamma)^{(*\mathfrak{S}_3/\pi_{01})} \\
+    \| & & \| \\
+    \mathcal{E}_0 & & \mathcal{E}
+  \end{array}
+\]
+et \ill{} \ill{}~:
+
+\begin{tikzcd}[column sep=small, row sep=small]
+  \mathfrak{S}_3 \cdot_{1/2} \mathcal{E}_0 \arrow[r] \arrow[d] & \mathfrak{S}_3 \cdot \mathcal{E} \arrow[d] \\
+  \Omega_0 \arrow[r] & \Omega
+\end{tikzcd}
+
+On a \ill{} \ill{} \ill{}~:
+\[
+  \begin{array}{ccccccc}
+    \gamma = \widehat{\mathbb{Z}}^{*} & \longrightarrow & (\mathbb{Z}/6\mathbb{Z})^{*} & \xrightarrow{\ \sim\ } & (\mathbb{Z}/3\mathbb{Z})^{*} & \simeq & \pm 1 \\
+    \uparrow & & \uparrow \chi_2 & & & & \\
+    \gamma_0 = \mathbb{Z}^{*} & & \chi_0 = \ill{} & & & &
+  \end{array}
+\]
+\note{schéma remanié : sous $\gamma = \widehat{\mathbb{Z}}^{*}$ une double flèche verticale, en partie surchargée, le relie à $\gamma_0 = \mathbb{Z}^{*}$ ; sous $(\mathbb{Z}/6\mathbb{Z})^{*}$ une flèche marquée $\chi_2$ ; de $\gamma_0$ partent un long trait souligné et deux flèches obliques vers $\pm 1$, l'une barrée de gribouillis ; l'expression « $\chi_0 = \ldots$ » est surchargée}
+\ill{} hom.\ $\gamma \to \gamma_0$ \uncertain{inverse} à g.\ de $\gamma_0 \hookrightarrow \gamma$,
+\[
+  \begin{array}{llll}
+    \text{d'où} & \mathcal{E} \longrightarrow \mathcal{E}_0 & \ill{} & \text{inv.\ à g.\ de } \mathcal{E}_0 \to \mathcal{E} \\
+    \text{d'où} & \mathfrak{S}_3 \cdot \mathcal{E} \longrightarrow \mathfrak{S}_3 \cdot \mathcal{E}_0 & &
+  \end{array}
+\]
+\ill{} \ill{} \ill{} \ill{}~: \ill{} \ill{} \ill{}. \ill{} \ill{} \ill{} \ill{} \ill{}
+\uncertain{faut} considérer
+\[
+  \overline{\Pi}(6) = \text{quotient de } \Pi \text{ par \struck{\ill{}} \uncertain{relations}} \ g^{6} = 1 \ (g \in \Pi_0) \qquad (\ill{})
+\]
+\note{les mots « ($\ill{}$) » sont au-dessus de la fin de la ligne ; « $g^{6} = 1$ ($g \in \Pi_0$) » est écrit en dessous, après un mot biffé}
+
+\page{88}
+Et
+\[
+  \begin{array}{l}
+    \Omega(6) = \mathrm{Aut}(\Pi(6)) \\
+    \widetilde{\Omega}(6) = \mathrm{AutExt}(\Pi(6))
+  \end{array}
+\]
+on sait qu'on a des hom.\ induits
+
+\begin{tikzcd}[column sep=small, row sep=small]
+  \Omega \arrow[r] \arrow[d] & \Omega(6) \arrow[d] \\
+  \widetilde{\Omega} \arrow[r] & \widetilde{\Omega}(6)
+\end{tikzcd}
+
+\ill{} \ill{} \ill{}.
+
+Ceci dit, l'hom.\ composé
+
+\begin{tikzcd}[column sep=small, row sep=small]
+  \mathfrak{S}_3 \cdot (\gamma \times \gamma)^{(*\mathfrak{S}_3/\pi_{01})} \arrow[r] \arrow[dr] & \Omega \arrow[r] & \Omega(6) \\
+  & \mathfrak{S}_3 \cdot (\gamma_0 \times \gamma_0)^{(*\mathfrak{S}_3/\pi_{01})} \arrow[ur] &
+\end{tikzcd}
+
+se factorise \ill{} \ill{}
+\note{la flèche oblique descend de la source vers $\mathfrak{S}_3 \cdot (\gamma_0 \times \gamma_0)^{(*\mathfrak{S}_3/\pi_{01})}$, d'où une flèche remonte vers $\Omega(6)$}
+
+\ill{} \ill{} \ill{}, \ill{} au \ill{} \ill{} \ill{} \ill{} \ill{}, i.e.\ les op.\ « \ill{} » \ill{} \ill{} \ill{}, \ill{} \ill{} \ill{} qui \ill{} dans $\Pi(6)$ \ill{} \ill{} de $\Pi$. \ill{} \ill{} dire que si $H$ est un groupe \ill{} $H$ \ill{} \uncertain{d'exposant} divisant $6$ (\uncertain{p.ex.}\ $H \simeq \mathfrak{A}_4$) alors l'op.\ de $\mathfrak{S}_3 \cdot_{1/2} \mathbb{E}\mathrm{l} \simeq \Omega^{+}$ sur l'ens.\ $\mathcal{T}(H)$ \ill{} $\mathrm{Sch}(H)$ se fait par \ill{} \ill{} \ill{} de $\mathfrak{S}_3 \cdot_{1/2} \mathbb{E}\mathrm{l}_0 \simeq \Omega_0^{+}$ --- \ill{} \ill{} par l'intermédiaire de
+\[
+  \mathfrak{S}_3 \cdot_{1/2} (\gamma_0 \times \gamma_0)^{(*\mathfrak{S}_3/\pi_{01})} .
+\]
+
+\page{89}
+Ce groupe est engendré par $\mathfrak{S}_3$ et 6 \uncertain{éléments} $\rho_{\sigma}$ ($\sigma \in \mathfrak{S}_3$) \struck{$\rho_{\sigma} = \sigma$} \uncertain{avec} \uncertain{relations}
+\[
+  \left\lbrace
+  \begin{array}{lll}
+    \rho_{\sigma} = \sigma \rho_1 \sigma^{-1} & (\sigma \in \mathfrak{S}_3) & \bigl[\text{donc } \rho_{\tau\sigma} = \tau \rho_{\sigma} \tau^{-1} \quad (\sigma, \tau \in \mathfrak{S}_3)\bigr] \\[3pt]
+    \rho_1^{2} = 1 & & \bigl[\Longrightarrow \rho_{\sigma}^{2} = 1\bigr] \\[3pt]
+    \rho_1 \rho_{\pi} = \rho_{\pi} \rho_1 & & (\pi = \pi_{01} \text{ transposition de } 0, 1) \\[3pt]
+    & & \bigl[\Longrightarrow \rho_{\sigma} \rho_{\sigma\pi} = \rho_{\sigma\pi} \rho_{\sigma}\bigr]
+  \end{array}
+  \right.
+\]
+\note{les deux parenthèses « ($\sigma \in \mathfrak{S}_3$) » et « ($\sigma, \tau \in \mathfrak{S}_3$) » sont au-dessus de la première ligne et y sont rattachées par des traits}
+Le groupe \struck{\ill{}} (des « opérations élémentaires ») \ill{} \ill{} sur l'ens.\ des \add{$\mathrm{Sch}(H)$} systèmes de Schwartz d'un groupe \ill{} $H$ ($\simeq \mathfrak{A}_4$), \ill{} sur l'ens.\ $\widetilde{\mathrm{Sch}}(H)$
+\[
+  72 + 24 = 96 \ \text{\uncertain{syst.}\ de \ill{}}
+\]
+formé de 8 éléments $\bigl[(3,3,2)^{+}$, $(3,3,2)^{-}$ et les \ill{} \ill{} $\mathfrak{S}_3^{+}$, $(3,3,3)^{+}$ et $(3,3,3)^{-}\bigr]$, \ill{} \ill{} l'ens.\ \ill{} 4 él., les classes \ill{},
+\struck{\ill{} \ill{} \ill{} \ill{} explicit\ill{} \ill{}}
+$\widetilde{H} = \mathrm{Aut}(H)$ ($\simeq \mathfrak{S}_4$), formé de $(3,3,2)$, $(3,2,3)$, $(2,3,3)$, et de $(3,3,3)$.
+\note{la ligne « $72 + 24 = 96$ \ldots » est dans le corps du texte, à gauche, entre « groupe » et « tétr\ldots » ; nous la mettons en formule. Dans la liste $(3,3,2), (3,2,3), (2,3,3)$ le deuxième triple est surchargé}
+Comme \ill{} \ill{} \ill{} explicité l'action de $\mathfrak{S}_3$ sur \ill{} \ill{}, il \ill{} \ill{} \ill{} l'action de $\mathcal{E}_0$, \ill{} \ill{} \ill{} \ill{} \ill{} \ill{} \ill{}, \ill{} $\rho_1$ \ill{} $\rho_{-1,1}$. L'exercice \ill{} \ill{} \ill{} \ill{} \ill{} ce qui a été vu \ill{}. \struck{\ill{}} Il serait intéressant d'expliciter les groupes \ill{} finis de $\mathfrak{S}_3 \cdot \mathcal{E}_0$ qui \ill{} \emph{\ill{}} sur les \ill{} \ill{} précédents\ldots
+\note{le texte s'arrête sur des points de suspension}
+
+\page{90}
+\emph{NB} Si on s'intéresse aux groupes $H$ (finis) dans lesquels chaque él.\ est d'ordre \struck{fini} divisant un certain $N$ fixé ($N = 6$ pour le groupe tétraédral, $N = 12$ pour celui $\mathfrak{S}_4$ de l'octaèdre, $N = 30$ pour celui $\mathfrak{A}_5$ de l'icosaèdre), on est amené à remplacer $\Pi$ par le quotient correspondant $\Pi(N)$, $\Omega$ par $\Omega(N) = \mathrm{Aut}(\Pi(N))$, \struck{et} $\mathfrak{S}_3 \cdot_{1/2} \mathbb{E}\mathrm{l}$ par $\mathfrak{S}_3 \cdot_{1/2} \mathbb{E}\mathrm{l}(N)$, quotient de \struck{$\mathfrak{S}_3 \cdot_{1/2} (\gamma(N) \times \gamma(N))$}
+\[
+  \left\lbrace
+  \begin{array}{l}
+    \mathfrak{S}_3 \cdot_{1/2} \bigl(\gamma(N) \times \gamma(N)\bigr)^{(*\mathfrak{S}_3/\pi_{01})} \\[3pt]
+    \text{où} \quad \gamma(N) = (\mathbb{Z}/N\mathbb{Z})^{*}
+  \end{array}
+  \right.
+\]
+\[
+  \Bigl[\ \gamma(N) \simeq
+  \begin{cases}
+    \pm 1 & \text{pour } \mathfrak{A}_4 \\
+    (\pm 1) \times (\pm 1) & \text{pour } \mathfrak{S}_4 \\
+    (\pm 1) \times (\mathbb{Z}/4) & \text{pour } \mathfrak{A}_5 \\
+    (\pm 1) \times (\pm 1) \times (\mathbb{Z}/4) & \text{pour } \mathfrak{S}_5
+  \end{cases}
+  \quad \text{etc.}
+\]
+\note{« NB » est souligné. Il écrit les groupes alternés d'une lettre qui ressemble à un $G$ ; nous la rendons par $\mathfrak{A}$, comme page 88 ($H \simeq \mathfrak{A}_4$). Le crochet ouvert devant $\gamma(N)$ n'est pas refermé. Le reste du feuillet est vide}
+
+\page{91}
+\note{page de calculs, sans phrases ; la lettre des opérations, un $\xi$ bouclé, n'est pas le $\rho$ des pages précédentes, et nous la rendons par $\xi$}
+\[
+  \begin{array}{l}
+    \xi_1 : (\ell_0, \ell_1, \ell_2) \longmapsto (\ell_0^{-1}, \ell_1, \ell_1^{-1}\ell_0 = \ell_2 \ell_0^{2}) \\
+    \phantom{\xi_1 : (\ell_0, \ell_1,} \| \\
+    \phantom{\xi_1 : (\ell_0,} \ell_1^{-1}\ell_0^{-1} \\[4pt]
+    \xi_2 : (\ell_0, \ell_1, \ell_2) \longmapsto (\ell_0, \ell_1^{-1}, \ell_1 \ell_0^{-1} = \ell_1^{2}\ell_2) \\[4pt]
+    \xi'_1 : (\ell_0, \ell_1, \ell_2) \longmapsto (\ell_2^{-1}\ell_1, \ell_1^{-1}, \ell_2) = \\[4pt]
+    \xi'_2 \\[4pt]
+    \xi''_1 \\[4pt]
+    \xi''_2 : (\ell_0, \ell_1, \ell_2) \longmapsto (\ell_0^{-1}, \ell_0 \ell_2^{-1}, \ell_2^{\ill{}})
+  \end{array}
+\]
+\note{« $\| \ \ell_1^{-1}\ell_0^{-1}$ » est écrit sous $\ell_2$, dans la première ligne ; $\xi'_2$ et $\xi''_1$ restent sans formule ; l'exposant de $\ell_2$ à la dernière ligne est surchargé}
+\[
+  \begin{array}{lllll}
+    \rho_1 = \xi_1 \xi''_2 : & \ell_0 \longmapsto \ell_0^{-1} & \longmapsto \ell_0 & & \\
+    & \ell_1 \longmapsto \ell_0 \ell_2^{-1} & \longmapsto \ell_0^{-1} \ell_0^{-1} \ell_1 & = \ell_0^{-2}\ell_1 & \\
+    & \ell_2 \longmapsto \ell_2 & \longmapsto \ell_1^{-1}\ell_0 & = \ell_2 \ell_0^{2} & \\[6pt]
+    \xi''^{-1}_2 \xi_1^{-1} : & \ell_0 \longmapsto \ell_0^{-1} & \longmapsto \ell_0 & & \\
+    & \ell_1 \longmapsto \ell_1 & \longmapsto \ell_0 \ell_2^{-1} & = \ell_0^{2}\ell_1 & \\
+    & \ell_2 \longmapsto \ell_1^{-1}\ell_0 & \longmapsto \ell_2^{\ill{}}\ell_0^{-1}\ell_0^{-1} & = \ell_2 \ell_0^{-2} &
+  \end{array}
+\]
+\note{dans « $\rho_1 = \xi_1\xi''_2$ » le second facteur surcharge un $\rho$ ; dans le second tableau les flèches sont tracées vers la gauche ($\longleftarrow$), sauf deux, et nous les redressons ; l'exposant de $\ell_2$ à la dernière ligne est surchargé}
+\[
+  (\rho_1 \rho''_2)^{2} \qquad\qquad x,
+\]
+\note{le bas de la page est un brouillon d'algèbre linéaire, que nous ne donnons qu'en partie : $\mathbb{Z}^3 \to \mathbb{Z}^3 \to \mathbb{Z}$ avec $\mathbb{Z} \to \mathbb{Z}^3$ et « $V(\mathbb{Z})$ » ; $(x_0, x_1, x_2) \longmapsto (-x_0, x_1, x_0 - x_1)$ ; la base $e_0, e_1, e_2$, puis $e_1 - e_0$, $e_2 - e_0$ ; un petit dessin de trois demi-droites issues d'un point, avec $e_2 = -e_0 - e_1$ ; un second $\mathbb{Z} \to \mathbb{Z}^3 \to \mathbb{Z}^3$ ($e_1 \mapsto e_2 - e_3$, $e_2 \mapsto$), sous « $\sqrt{I}$ » ; enfin trois paires d'applications entre crochets, en partie biffées, dont nous lisons $(e_0, e_1, e_2) \longmapsto (e_0, e_1 ; e_0 - e_1)$, $(e_1, e_2, e_3) \longmapsto (e_0, e_1 ; e_2 - e_0)$, $(e_0, e_1, e_2) \longmapsto (2e_1 + e_0 - e_1 ; e_2)$, $(e_0, e_1, e_2) \longmapsto (-e_0 - 2e_1, e_1 ; -e_2)$, les deux dernières images étant en partie encadrées et surchargées}
+
+\page{92}
+\note{page de brouillon, sans phrases suivies. En haut à gauche, un petit dessin de tétraèdre, sommets marqués $s$ (en haut) et $s'$ (à droite), une face hachurée ; nous ne le redessinons pas}
+\[
+  \begin{array}{llll}
+    \beta \quad \Sigma_r & (\rho_f, \rho_s, \rho_a) & r \ \emph{\uncertain{direct}} & (3,3,2)^{+} \\
+    & (\rho'_f, \rho'_s, \rho'_a) & r \ \emph{\uncertain{inverse}} & (3,3,2)^{-} \\[4pt]
+    & (\rho_s, \rho_{s'}, \rho_{s''}) & (s, s', s'') \ \text{direct \ill{} \ill{} \ill{}} & (3,3,3)^{+} \\
+    & (\rho'_s, \rho'_{s'}, \rho'_{s''}) & s, s', s'' \ \text{\ill{} \ill{} \ill{} \ill{}} & (3,3,3)^{-} \\
+    & \ \ \| & & \\
+    & \rho_f,\ \rho_{f'},\ \rho_{f''} & &
+  \end{array}
+\]
+\note{les deux mots après $r$ sont soulignés ; « direct » et « inverse » sont des lectures}
+\[
+  \begin{array}{lll}
+    \struck{(\rho_f^{-1}, \rho_s, ?)} & (3,3,2)^{+} \longleftrightarrow (3,3,3)^{+} & (\rho_{s'}^{-1}, \rho_{f'}^{-1}, \rho_{\ill{}}^{-1}) \\
+    \rho_{s'} & (3,3,2)^{-} \longleftrightarrow (3,3,3)^{-} & \ \ \|\qquad \|\qquad \| \\
+    (\rho_f, \rho_s^{-1}, ?) & & \ \rho_{f'} \ \ \rho_{s'} \ \ \rho_{\ill{}} \\
+    \ \ \| & (3,3,2)^{+} \longleftarrow (3,3,3)^{-} & \\
+    \ \ \rho_{f'} & (3,3,2)^{-} \longleftarrow (3,3,3)^{+} &
+  \end{array}
+\]
+\[
+  \begin{array}{ccc}
+    \Sigma_r & & \Sigma'_r \\
+    \mathfrak{S}_3^{+} \times R & \Big\backslash & \struck{\ill{}}\ \mathfrak{S}_3 \times R \\
+    72 & & 24
+  \end{array}
+  \qquad\qquad
+  \begin{array}{cc}
+    \sigma\ \Sigma_r & \Big| \ \Sigma'_r \\
+    \mathfrak{S}_3^{+} \ \ R &
+  \end{array}
+\]
+\[
+  \boxed{\ \sigma \cdot [r] \qquad \lbrace r^{-1} \rbrace\ }
+  \qquad
+  \tau\sigma[r] = \sigma^{\tau}\,\tau[r] \qquad \tau[r] = \Bigl\lbrace
+\]
+\note{la dernière accolade reste vide. Les nombres $72$ et $24$ reprennent la somme $72 + 24 = 96$ de la page 89}
+\[
+  \mathfrak{S}_3 \cdot \mathbb{E}\mathrm{l}_0 \qquad\qquad \ell_0 \quad \ell_0 \ell_1 \ell_0^{-1} \quad \ell_0 \ell_1 \ell_0^{-1}
+\]
+\note{en bas à gauche, un schéma : $\Pi_0 \hookrightarrow \Omega_0$ (flèche marquée « inv. », c'est-à-dire automorphismes intérieurs), sous $\Omega_0$ une flèche vers $\mathfrak{S}_3$, et un trait oblique relie $\mathbb{E}\mathrm{l}_0$ à $\Omega_0$ ; à côté, « $\mathbb{E}\mathrm{l}$ »}
+\[
+  \begin{array}{l}
+    \rho_1 \qquad \rho_{\sigma} = \sigma \rho \sigma^{-1} \\
+    \struck{\rho_1 \rho_{\pi} \quad \rho'_1 \rho'_1} \\
+    \rho_1 \rho_2 \quad \rho'_1 \rho_2 \quad \rho''_1 \rho''_2 \\
+    \struck{\rho_1 : \ell_0 \longmapsto \ell_0^{\ill{}} \ \ldots} \quad \rho_1 \\
+    (-1,1,1)\ (1,-1,1)\ (1,-1,1)\ (1,1,-1)\ (0,0,1)\ (-1,0,0) \\
+    \ \ \rho_1 \qquad\quad \rho_2 \qquad\quad \rho'_1 \qquad\quad \rho'_2 \qquad \rho''_1 \qquad \rho''_2
+  \end{array}
+\]
+\note{au-dessus des trois paires $\rho_1\rho_2$, $\rho'_1\rho_2$, $\rho''_1\rho''_2$ il trace des doubles flèches $\longleftrightarrow$ ; à droite, les mêmes paires $\rho_1\rho''_2$, $\rho'_1\rho_2$, $\rho''_1\rho'_2$ sont entourées, et un segment gradué « $-1 \ \ 1$ » est dessiné ; sous les six triples, une accolade les rattache aux $\rho$. En bas à gauche, un calcul inachevé : « $x + y + z = 0$ », « $-x + y + \ldots$ ». Les signes de plusieurs triples sont surchargés et se lisent avec doute}
+
+\page{93}
+\note{dernière page de la série de douze annoncée par la couverture (pages 82 à 93) : un brouillon en colonnes, dont nous donnons les formules et les quelques mots. En haut, « $\ell_0\ \ell_1\ \ell_2 \longrightarrow$ » suivi de symboles biffés ; en dessous à gauche, un tétraèdre, sommets $s$ (en haut) et $s'$ (à droite), une arête $a$ et une face $f$ marquées, arêtes cachées en pointillé ; nous ne le redessinons pas}
+\[
+  \begin{array}{ll}
+    \overset{3\quad 3\quad 2}{(\rho_f, \rho_s, \rho_a)} & \mathfrak{S}_3 \\[4pt]
+    \rho_{s'} = \rho_f^{-1} \rho_s & \rho_{-1,1\cdot} \ \big| \ (3,3,2) \longleftrightarrow (3,3,3)^{-} \\
+    \rho_f\, \rho_s^{-1} = \rho_{f'} & \rho_{1,-1\cdot} \ \big| \ \struck{\ill{}} \\
+    \struck{\rho_f}\ \rho_s^{-1}\, \rho_a = \rho_{f'}\, \rho_{a'} & \rho_{\cdot\,-1,1} \\[4pt]
+    & \left\lbrace
+      \begin{array}{ll}
+        (3,3,2)^{+} & (3,3,2)^{-} \\
+        (3,3,3)^{+} & (3,3,3)^{-}
+      \end{array}
+    \right.
+  \end{array}
+\]
+\note{dans la colonne de gauche, $\rho_f \rho_s^{-1}$ et $\rho_s^{-1}\rho_a$ sont reliés par des « $\|$ » à $\rho_{f'}$ et $\rho_{a'}$, écrits en dessous ; les chiffres « $3\ 3\ 2$ » sont au-dessus du triple}
+$\mathfrak{S}_3$ \ill{} \ill{} \ill{} \ill{}~: 8 él.
+
+\[
+  \begin{array}{ll}
+    (3,3,2)^{+} \longleftrightarrow (3,3,3)^{+} & \\
+    \quad \struck{\rho_{1,1\cdot}} & \Big|\ \rho_{-1,1\cdot} \\
+    (3,3,2)^{-} \longleftrightarrow (3,3,3)^{-} & \\[4pt]
+    (3,3,2) & \Big|\ \rho_{1,-1\cdot} \\
+    3, 3, 2 &
+  \end{array}
+  \qquad
+  \tau_{01}\, \rho_{\alpha,1\cdot}\, \tau_{01}^{-1} = \rho_{1,\alpha\cdot}
+\]
+\[
+  \begin{array}{c}
+    \mathfrak{S}_3 * \mathbb{Z}/2\mathbb{Z} \\
+    \wr\| \\
+    \struck{\ill{}}\ \mathfrak{S}_3 \cdot (\mathbb{Z}/2\mathbb{Z})^{(*\mathfrak{S}_3)}
+  \end{array}
+  \qquad\qquad
+  \rho^{\sigma}(\varepsilon)
+\]
+$\rho(\varepsilon)$ commute à $\rho^{\sigma}(\varepsilon)$, si $\sigma$ est une \struck{transposition} \add{de 2} \struck{\ill{}} $\pi_{01}, \pi_{02}$ \ill{}.
+\note{« $\pi_{01}, \pi_{02}$ » est écrit au-dessus d'un mot biffé, en fin de phrase}
+\[
+  \begin{array}{l}
+    \struck{\rho_{\cdot}} \\
+    \rho_{\cdot}^{\lbrace 0,1\rbrace}\bigl((\varepsilon, 1)\bigr) \\
+    \rho^{\lbrace 0,1\rbrace}(\varepsilon, \varepsilon') \\
+    \struck{\rho_{\sigma} \ \ \rho} \\[4pt]
+    \varepsilon_{\sigma} \quad (\sigma \in \mathfrak{S}_3) \\
+    \varepsilon_1 = \rho^{\lbrace 0,1\rbrace}\, \struck{\ill{}}\, (-1, 1) = \rho_{-1,1\cdot} \\
+    \pi\, \varepsilon_1\, \pi^{-1} = \rho_{1,-1\cdot} \qquad \pi = \pi_{01}
+  \end{array}
+\]
+
+\section*{Classes de ss-groupes de $\mathfrak{S}_5$ et de ses sous-groupes}
+\note{inscrit à l'encre en haut à droite d'un feuillet de couverture jaune (page 94), qui ne porte rien d'autre ; en haut, au crayon, « (3 p) », qui compte les trois feuillets suivants (pages 95 à 97). Le feuillet ne reçoit pas de numéro de page}
+
+\page{95}
+\note{feuille de schémas, en encre bleue et au crayon, en regard de la liste qui l'ouvre ; nous donnons le texte et les formules, et décrivons les figures sans les redessiner}
+Les ss-groupes \struck{\ill{}}, $\mathbb{Z}_3 = \mathfrak{A}_3$, $\mathbb{Z}_6$, $\mathfrak{S}_2$, $\mathfrak{S}_3$, $\mathbb{D}_3$, $\mathbb{D}_6$, correspondent 1-1 aux triangles de $T$, $\boxed{\mathrm{Tr}(T)}$
+
+les ss-groupes $\mathbb{Z}_2$, $\mathbb{Z}_4$, \struck{\ill{}}, $\mathfrak{S}_{22}$, $\mathbb{D}_4$ correspondent 1-1 aux carrés de $T$, $\boxed{\mathrm{Car}\,T}$
+
+--- \quad $\mathbb{D}_2$, $\mathfrak{A}_4$, $\mathfrak{S}_4$ \quad --- \quad pts de $T$ \quad $\boxed{T}$
+
+--- \quad $\mathbb{Z}_5$, $\mathbb{D}_5$ \quad --- \quad pent.\ de $T$ \quad $\boxed{\mathrm{Pent}(T)}$
+
+--- \quad $1$, $\mathfrak{A}_5$, $\mathfrak{S}_5$ \quad sont invariants
+
+Il y a $160$ ss-groupes $\neq 1, \mathfrak{S}_5$
+\note{les tirets reprennent, ligne à ligne, « les ss-groupes » et « correspondent 1-1 aux » ; $T$ est l'ensemble à cinq éléments sur lequel opère $\mathfrak{S}_5$. Il écrit $\mathfrak{A}_n$ d'une lettre en forme de $G$, comme page 90}
+
+\marginal{déterminer les automorphismes \uncertain{extérieurs} \uncertain{éléments} des groupes $\mathfrak{S}_n$}
+\note{note encerclée d'un trait, à droite ; le troisième mot se lit mal}
+
+\[
+  \begin{array}{rl}
+    \text{\emph{NB} de ss-groupes} & 6 \times 10 = 60 \\
+    + & 4 \times 15 = 60 \\
+    + & 3 \times 5 = 15 \\
+    + & 2 \times 12 = 24 \\
+    + & 3 \times 1 = 3 \\ \hline
+    & 162
+  \end{array}
+\]
+\note{le « 12 » de la quatrième ligne est entouré et porte un petit indice ; le total $162$ compte aussi $1$ et $\mathfrak{S}_5$, d'où les $160$ annoncés plus haut}
+
+\[
+  \boxed{
+  \begin{array}{l}
+    \mathbb{Z}_2 \simeq \mathfrak{S}_2 \\
+    \mathbb{D}_2 \simeq \mathfrak{S}_{2,2} \\
+    \mathbb{D}_3 \simeq \mathfrak{S}_3
+  \end{array}}
+  \qquad
+  \widetilde{\mathfrak{S}}_3 = \mathfrak{S}_3 \times \mathfrak{S}'_2
+\]
+\note{figures. En haut à gauche, un treillis au crayon et à l'encre, en forme de losanges, dont les flèches montent de gauche à droite ; au-dessous et au milieu, un grand treillis encadré d'une courbe fermée, dont les sommets sont $\mathfrak{A}_2 = 1$, $\mathbb{Z}_2$, $\mathfrak{S}_2$, $\mathfrak{S}'_2$, $\mathfrak{S}''_2$, $\mathfrak{S}_{22}$, $\mathfrak{S}^{*}_{22}$, $\mathfrak{A}_3$, $\mathbb{D}_3$, $\mathfrak{S}_3$, $\mathfrak{S}'_3$, $\mathbb{D}'_3$, $\mathbb{Z}_6$, $\mathbb{Z}'_6$, $\widetilde{\mathfrak{S}}_3$, $\widetilde{\mathfrak{S}}'_3$, $\mathfrak{A}_5$, $\mathfrak{S}_5$, avec à gauche un petit losange $\mathbb{D}_4$, $\mathbb{Z}_4$, $\mathbb{D}_2$, $\mathbb{E}_2$ et en dessous $\mathfrak{A}_4$, $\mathfrak{S}_4$, $\mathbb{D}_2$, $\mathbb{D}_4$ ; certaines flèches sont en pointillé. Au milieu, un octaèdre au crayon. À droite, un diagramme d'ensembles : les points $1, 2, 3, 4, 5$ dans des ovales marqués $\mathfrak{S}_2$ (autour de $1, 2$), $\mathfrak{S}'_2$ (autour de $4, 5$), $\mathfrak{S}_3$ et $\mathfrak{S}'_3$}
+\note{en bas, un treillis en perspective, plus soigné, dont les sommets encadrés sont les représentants des classes : $\mathbb{D}_4$ (« $(\mathrm{Car}(T), 15)$ »), $\mathfrak{S}_4$ (« $(T, 5)$ »), $\mathbb{D}_6$ (« $(\mathrm{Tr}(T), 10)$ »), $\mathfrak{S}_5$ (« $1$ »), $\mathbb{D}_5$ (« $(\mathrm{Pent}(T), 12)$ »), $\mathfrak{A}_2 = 1$ ; les autres sommets sont $\mathfrak{S}_{22}$, $\mathbb{Z}_4$, $\mathbb{D}_2$, $\mathfrak{S}_2 \simeq \mathfrak{S}'_2$, $\mathbb{E}_2$, $\mathfrak{A}_4$, $\mathfrak{S}_3$, $\mathbb{Z}_6$, $\mathbb{D}_3$, $\mathfrak{A}_3 = \mathbb{Z}_3$, $\mathfrak{A}_5$, $\mathbb{Z}_5$ ; des arêtes portent les indices $2$, $3$, $5$, $6$, $10$}
+\[
+  \begin{array}{c|ccccc}
+    \mathbb{Z}_1 & \mathbb{Z}_2 & \mathbb{Z}_3 & \mathbb{Z}_4 & \mathbb{Z}_5 & \mathbb{Z}_6 \\
+    & \mathbb{D}_2 & \mathbb{D}_3 & \mathbb{D}_4 & \mathbb{D}_5 & \mathbb{D}_6 \\
+    & \mathfrak{S}_2 & \mathfrak{S}_3 & \mathfrak{S}_4 & \mathfrak{S}_5 & \\
+    \mathfrak{A}_1 = \mathfrak{A}_2 & & \mathfrak{A}_3 & \mathfrak{A}_4 & \mathfrak{A}_5 &
+  \end{array}
+\]
+\note{tableau en bas à droite : tous les noms sont soulignés ; un trait sépare les colonnes, un cadre entoure $\mathbb{D}_3, \ldots, \mathfrak{S}_5$ ; « $\mathfrak{A}_3$ » est répété au-dessus de $\mathbb{Z}_3$ avec des guillemets ditto. Dessous, en partie biffé : $\mathfrak{S}_{22}$, $\mathfrak{S}''_2 \times \mathbb{Z}_2$, $\mathfrak{S}_3 \times \mathbb{Z}_2$. À gauche, une colonne biffée ($\mathbb{Z}_2 \ldots \mathbb{Z}_6$, $\mathbb{D}_2 \ldots \mathbb{D}_5$, $\mathfrak{S}_{22}$, \ldots) préparait le même tableau}
+
+\page{96}
+\note{feuille de dessins au crayon, sans texte : en haut à gauche une bipyramide triangulaire (deux tétraèdres accolés par une face) ; en bas à droite un assemblage de tétraèdres autour d'un sommet commun, esquissé et repassé ; au milieu, quelques traits effacés. Nous ne les redessinons pas}
+
+\page{97}
+Les $18$ \struck{sous-groupes} \add{classes de ss-groupes} de $\mathfrak{S}_5$
+\marginal{dont \uncertain{9} \uncertain{abéliens}}
+\[
+  \begin{array}{rl}
+    [9] & \text{classes de ss-groupes de } \mathfrak{A}_5 \\
+    11 & \text{classes de ss-groupes de } \mathfrak{S}_4 \\
+    5 & \text{classes de ss-groupes de } \mathfrak{A}_4 \\
+    4 & \text{classes de ss-groupes de } \mathfrak{S}_3 \\
+    7 & \text{classes de ss-groupes de } \mathbb{D}_4 \\
+    10 & \text{--- \quad } \widetilde{\mathfrak{S}}_3
+  \end{array}
+\]
+\note{« classes de » est écrit au-dessus de « sous-groupes », biffé ; la note encerclée à gauche est reliée par un trait au nombre $18$, qui surcharge un autre chiffre ; le $[9]$ et le $11$ sont repassés. Sous le $10$, trois traits obliques}
+
+\[
+  \left\lbrace
+  \begin{array}{l}
+    \mathbb{F}_2 = \mathfrak{Z}(\mathbb{D}_4) = \mathfrak{Z}(\mathbb{D}_4, \mathfrak{S}_4) \\
+    \mathbb{D}_4 = \mathcal{N}(\mathbb{F}_2, \mathfrak{S}_4) \\[4pt]
+    \mathbb{F}_2 = 2\cdot\mathbb{Z}_4 = {}_2(\mathbb{Z}_4) \\
+    \mathbb{D}_4 = \mathcal{N}(\mathbb{Z}_4, \mathfrak{S}_4) \\[4pt]
+    \mathbb{Z}_4 = \text{groupe engendré par \ill{} \ill{} des 2 él.\ d'ordre 4 de } \mathbb{D}_4 \\[4pt]
+    \mathfrak{S}_4 = \mathcal{N}(\mathbb{F}_2^{2}, \mathfrak{S}_5) \\
+    \mathbb{F}_2^{2} = \text{seul sous-groupe invariant de } \mathfrak{S}_4 \text{ d'indice } 6
+  \end{array}
+  \right.
+\]
+\note{$\mathfrak{Z}$ : centre (ou centralisateur) ; $\mathcal{N}$ : normalisateur. Dans « $\mathbb{D}_4 = \mathcal{N}(\mathbb{F}_2, \mathfrak{S}_4)$ » la virgule surcharge un signe. Nous lisons « $\mathbb{F}_2^{2}$ » le groupe de Klein, écrit d'un $\mathbb{F}$ double avec un exposant $2$}
+
+\note{figures. En haut à gauche, un grand treillis en perspective des classes de sous-groupes de $\mathfrak{S}_5$, repris de la page 95 et mis au net, dont les sommets sont $\mathfrak{A}_2 = 1$, $\mathfrak{S}_2$, $\mathbb{F}_2$, $\mathfrak{S}_2 \times \mathfrak{S}'_2 = \mathfrak{S}_2 \times \mathbb{F}_2$, $\mathbb{D}_2 = \mathbb{F}_2^{2}$, $\mathbb{Z}_4$, $\mathbb{D}_4$, $\mathfrak{S}_3$, $\mathbb{Z}_6$, $\mathbb{D}_3$, $\mathfrak{S}_3 \times \mathfrak{S}''_2$, $\mathfrak{A}_3 = \mathbb{Z}_3$, $\mathfrak{A}_4$, $\mathfrak{S}_4$, $\mathfrak{A}_5$, $\mathfrak{S}_5$, $\mathbb{D}_5$, $\mathbb{Z}_5$ ; les arêtes portent des indices ($2$, $3$, $5$), certaines en pointillé, et une bande ombrée longe le chemin de $\mathfrak{A}_3$ à $\mathfrak{A}_5$. En bas à gauche, des correspondances marquées de doubles flèches : $\mathbb{F}_2 \leftrightarrow \mathbb{Z}/4 \leftrightarrow \mathbb{D}_4 \leftrightarrow \mathfrak{S}_4 \times \mathbb{F}_2$, $\mathbb{D}_2 \leftarrow \mathfrak{A}_4 \leftrightarrow \mathfrak{S}_4$, $\mathbb{D}_3 \leftrightarrow \mathfrak{S}_3 \leftrightarrow \mathbb{D}_3 \leftrightarrow \mathfrak{S}_3 \times \mathfrak{S}''_2$, $\mathbb{D}_5 \leftrightarrow \mathbb{Z}_5$, $\mathbb{Z}_6$, avec des groupes entourés et une ligne biffée ; tout en bas, deux petits schémas : $\mathfrak{S}_3$ au-dessus de $\mathfrak{A}_3$, et un rectangle $\mathfrak{S}_2$ -- $\mathfrak{S}_3$ -- $\mathfrak{S}_3 \times \mathfrak{S}'_3$, $\mathfrak{A}_3$ -- $\mathbb{D}_3$}
+
+\end{document}
