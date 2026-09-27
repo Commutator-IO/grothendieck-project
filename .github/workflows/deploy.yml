@@ -136,6 +136,13 @@ jobs:
       # be published as a valid one.
       - name: Install poppler and ImageMagick
         run: sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils imagemagick
+      # The Java tools the article step fetches from Maven Central, kept
+      # between runs; the jTEI schema itself is committed (docs/study/schema).
+      - uses: actions/cache@v4
+        with:
+          path: node_modules/.cache/jtei
+          key: jtei-tools-${{ hashFiles('docs/study/tei.mjs') }}
+          restore-keys: jtei-tools-
       - name: The article, in TEI against tei_jtei
         run: npm run article-tei
 
