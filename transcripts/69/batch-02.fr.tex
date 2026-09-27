@@ -1,0 +1,1012 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 69, batch 2 (pages 21-40).
+% Established from the facsimile archives/batches/69/batch-02.pdf, cut from a
+% copy of 69.pdf fetched through the project's relay
+% (https://grothendieck-relay.onrender.com/source/69.pdf), per the skill
+% transcribe-grothendieck. The folder is 119 pages in six batches (1-20,
+% 21-40, 41-60, 61-80, 81-100, 101-119), transcribed in parallel; this is the
+% second. The raw scan's cover sheet was removed from the batch PDFs, so PDF
+% page k of this batch is archivists' page 20+k; the pencilled numbers
+% bottom-left (« 32 » ... « 40 » checked on the leaves) agree.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-09-27 — first pass, unchecked against the pages by a human.
+%
+% Pages skipped: 40, a pink separator sheet (only a pencilled « (23 p) » top
+% right, a page count, not certainly his). Pages summarised: none. Pages
+% 21-39 are his working notes in blue ink on punched listing paper (music-
+% staff ruled from page 33 on), all transcribed.
+%
+% His pagination continues batch 1 (which ends on his « 17 »), circled at the
+% top of each leaf: « 18 bis » (21), « 18 ter » (22), 18 (23), 19 (24), 20
+% (25), 21-23 (26-28), « 24 bis » (29), « 24 ter » (30), 24 (31), 25-32
+% (32-39). Each page opens with a \note giving his number; his cross-
+% references (« p. 8 et 9 », « p. 9, 10 », « p. 10 », « p. 24 bis »,
+% « th. p. 1 ») are to this pagination and are left as he writes them.
+%
+% What the batch is about. The 27-vertex « complexe cubique » C (the graph of
+% the 27 lines on a cubic surface) with a marked sub-configuration, and in
+% each case: the equivalent combinatorial data, the automorphism group as a
+% Weyl group, the root system orthogonal to the configuration, and the
+% counting check card W(E_6) = 2^7.3^4.5.
+%   21-22  « 18 bis/ter »: the double cover Q~ -> Q, the lattice E = Z^Q~/N
+%          with (q~,q~) = -1, q~ + σq~ = 0; for Q = E(u) the roots orthogonal
+%          to u are ±ξ_i ± ξ_j, 40 roots of type D_5.
+%   23-25  Marked edge {v, w} / triangle with a distinguished vertex u:
+%          C ≃ {u} ⊔ {v,w} ⊔ P~_u ⊔ P, rules a)-f) of linkage; Corollary
+%          W_α an extension of S_{P_u} by F_2^{P_u}, ≅ W(B_4); pinning the
+%          origin gives W ≅ W(D_4), 24 roots.
+%   25-28  Marked triangle t: data (t, V, P~) with V a 2-dim F_2-space and
+%          P~ a torsor under the extension Ψ~(V, t); rules a)-d);
+%          Corollary 1 -> Γ~ -> W_t -> S_t × S_{V*} -> 1 (extended Weyl
+%          group of D_4); the 24 roots orthogonal to t; (C, t, b) with b an
+%          orthogonal base ≡ a 6-set with a partition of type (2,2,2),
+%          72 . 15 couples, stabiliser W(B_3).
+%   29-31  Relative position of a triangle and a base (orthogonal, 24; not,
+%          48 = 6 . 8), W(D_3) ≅ W(A_3) = S_4; pairs of disjoint triangles
+%          and hexagonal structures on a 6-set, 72 . 5! triples.
+%   32-33  « balise » (triangle with a pendant edge): group W^(D_3) of
+%          order 48, 45.3.8 balises; pairs of triangles with a common vertex
+%          (« sablier »), 270 of them, group of order 2^6.3.
+%   34-38  Triangular prism and « bitriangle » Δ (type D_7): Δ ≡ a 6-set T
+%          with a partition of type (3,3); Aut Δ = S_2.(S_3 × S_3), order
+%          72; the set V* of three triangles; Lemma 2 and the description
+%          C ≃ Δ ⊔ (F' × V*) with its linkage rule; a priori justification;
+%          bases orthogonal to Δ in bijection with Mon(J, V*); for b fixed
+%          10 bitriangles; an « autodualité » announced.
+%   39     The six bases orthogonal to a bitriangle (notation of his pp.
+%          9-10): the roots α_i - α_j, type A_2; then a programme a)-c) on
+%          relative positions (bitriangle/triangle: 6 + 27 + 12 = 45).
+%
+% Notation, fixed once, following batch 1. E(u) is the set of vertices linked
+% to u, E(u)* = E(u) minus the other two vertices of a triangle; σ is the
+% involution; the symmetric group is \mathfrak{S}; W_α, W_t, W_{E_6} as he
+% indexes them. His double-barred F with a prime on pages 36-38 (the set of
+% « parties Δ' ») is set \mathbb{F}', with a note; his cursive J on pages
+% 37-38 is \mathcal{J}. His small drawings (triangles, a « balise », a
+% « sablier », prisms, a hexagon) are described in \drawing{}, none redrawn.
+% Oblique marginal notes are given as \marginal, mostly \ill{}.
+%
+% Hardest pages: 21-22 (the lattice construction, several cancellations and
+% letters read from context), 25-27 (fast prose, interlinear insertions, long
+% oblique margins), 34-35 and 37 (overwritten letters in the bitriangle
+% description), and the foot of 39.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{69}
+\batch{2}
+\pages{21}{40}
+\dating{[à partir de 1976]}
+\watermark{Édition de démonstration}
+\foldertitle{Graphes cubiques : notes manuscrites (s.d.), lettre (s.d.).}
+
+\begin{document}
+
+\page{21}
+\note{en tête, entouré : « 18 bis » (sa pagination)}
+
+Soit $r$ un entier,
+
+a) $Q$ un ens. de cardinal $r$
+
+b) $\widetilde{Q} \xrightarrow{\pi} Q$ un revêtement d'ordre 2 de $Q$,
+$\Leftrightarrow$ un torseur \struck{$Q$} \add{$\Pi$} sous $\mathbb{F}_2^{Q}$
+
+\note{les trois lignes suivantes, de « c) » à « $D_r$ », sont barrées de
+grands traits obliques}
+
+\struck{c) restriction du groupe structural : $\Psi_Q = \operatorname{Ker}(\mathbb{F}_2^{Q} \to \mathbb{F}_2)$, $(x_i) \mapsto \sum x_i$,}
+
+\struck{La donnée de b), c) moyennant a), revient à la donnée d'un torseur $P$ sous $\Psi_Q$.}
+
+\struck{On va \ill{} : ceci \ill{} un ens. de racines de type $D_r$.}
+
+\uncertain{a)} Soit $(x, y)$ le produit scalaire sur $\mathbb{Z}^{Q}$ défini
+pour $x, y \in Q$ par
+\note{ainsi sur la page, sans tilde, bien que le produit porte sur les
+éléments de $\widetilde{Q}$}
+\[
+x \cdot y =
+\begin{cases}
+0 & \text{si } y \neq x, \sigma x \text{ i.e. } \pi(x) \neq \pi(y) \\
+1 & \text{si } y = \sigma x \\
+-1 & \text{si } y = x
+\end{cases}
+\]
+
+Soit $E$ \struck{$(\Pi)$} $= \mathbb{Z}^{Q} / \lbrace x \in \mathbb{Z}^{Q} \mid xy = 0 \ \forall y \in \mathbb{Z}^{Q} \rbrace$
+
+\struck{Choisissons un élément}
+
+\note{le passage suivant est encadré et barré de traits obliques}
+\struck{ordonnons $Q \simeq [1, r]$ et choisissons un élément
+$\tilde{q}_i \in \widetilde{Q}$ sur chaque $q \in Q$, Soit $\sigma\tilde{q}$
+lié à $\tilde{q}$ dans $E$} \struck{$\tilde{q}_i^{2} = -1$ \quad $\tilde{q}_i \tilde{q}_j = 0$}
+
+je dis que dans $E$, $\tilde{q} + \sigma\tilde{q} = 0$
+\struck{indépendant de $q$, car} \struck{$(\sigma\tilde{q} + \tilde{q}, \tilde{q}') = $}
+car le produit scalaire avec $\tilde{q}$ est $-1+1$, avec $\sigma\tilde{q}$
+est $+1-1$, et avec $\tilde{q}' \neq \tilde{q}, \sigma\tilde{q}$ est $0+0$.
+Donc $E$ est le $\mathbb{Z}$-module libre de rang $r$ engendré par les
+$\tilde{q} \in \widetilde{Q}$, avec
+\[
+\sigma\tilde{q} = -\tilde{q}, \qquad (\tilde{q}, \tilde{q}) = -1, \qquad
+(\tilde{q}, \tilde{q}') = 0 \ \text{si } \tilde{q}' \neq \tilde{q}, \sigma\tilde{q} \ \ldots
+\]
+Les racines sont les différences mutuelles des $\tilde{q} - \tilde{q}'$, avec
+$\tilde{q}' \neq \tilde{q}$, $\sigma\tilde{q} = -\tilde{q}$.
+
+Supposons que $Q = E(u)$, $u$ sommet d'un complexe cubique $C$, OPS $C$
+muni d'une base $(\xi_i)_{1 \leq i \leq 6}$ dans laquelle $u = \xi'_6$, donc
+\[
+E(u) = \begin{pmatrix}
+\xi_1 & \xi_2 & \xi_3 & \xi_4 & \xi_5 \\
+\xi_{16} & \xi_{26} & \xi_{36} & \xi_{46} & \xi_{56}
+\end{pmatrix},
+\]
+\struck{\ill{}} Soit $E' \subset \frac{1}{2} E(C)$ engendré par les
+\struck{$\varepsilon_i = \frac{1}{2}(\eta - 2\xi_i - \xi_{i6}) = \frac{1}{2}(\eta -$}
+\[
+\varepsilon_i = \underbrace{\tfrac{1}{2}(\xi'_6 - \eta)}_{\theta_0} + \xi_i ,
+\]
+alors les diff. mutuelles dans $\hat{E}(C)$ des \uncertain{couples}
+d'éléments non liés de $E(u)$ sont les
+\note{« OPS » : on peut supposer. Les lettres $\xi_i$, $\xi'_6$,
+$\xi_{i6}$ et $\eta$ sont lues d'après le contexte (base d'un complexe
+cubique à 27 sommets) ; le prime de $\xi'_6$ et la lettre $\eta$ sont peu
+nets}
+
+\page{22}
+\note{en tête, entouré : « 18 ter » (sa pagination)}
+
+$\pm \xi_i \pm \xi_j$ $(1 \leq i < j \leq 5)$, et l'on a un isom.
+canonique $E(\Pi) \simeq E$. \uncertain{Il faut remarquer} :
+
+a) les $x + \sigma x$ $(x \in E(u))$ sont tous égaux, soit
+$\theta \in \hat{E}(C)$ [savoir $\theta = \eta - \xi'_6$]
+\note{le dernier terme se lit « $y - \xi_6$ » ou « $\eta - \xi'_6$ »}
+
+b) L'hom. $x \mapsto x - \frac{1}{2}\theta$ de $E(u)$ dans $\hat{E}(C)$
+\struck{\ill{}} un iso de $\mathbb{Z}^{E(u)}/N \simeq E(\Pi)$ \ill{}
+$\hat{E}(C)$, et les différences \struck{\ill{}} \add{mutuelles}
+\struck{qui} \add{dans $E(\Pi)$} d'éléments non liés de $E(u)$ sont
+transformées en les diff. mutuelles de ces éléments dans $\hat{E}(C)$,
+lesquelles forment \uncertain{en} un syst. de \add{(40)} racines de type
+$D_5$ — \ill{} \uncertain{sont aussi} les \add{40} racines de
+$E_6(C) \simeq E(C)$ orthogonales à $u$.
+\note{« (40) » et « 40 » sont ajoutés au-dessus de la ligne ; dans
+« $E(\Pi)$ » de la ligne b), la lettre entre parenthèses est
+surchargée}
+
+\page{23}
+\note{en tête, entouré : « 18 » (sa pagination)}
+
+\emph{À vérifier} : Les racines \emph{orthogonales} à un $u \in C$ (au nb
+de 40) forment un syst. de racines de type $D_5$.
+
+\emph{NB} La donnée de $(C, u, b)$ avec $u \in C$, $b$ base
+« \emph{orthogonale} » à $u$, équivaut à la donnée d'un $I$ de cardinal 6
+(savoir $b$) et d'une partie \add{de $I$} $I_2$ de cardinal 2 et d'une
+autre $I_4$ de cardinal 4. \struck{Le groupe d'automorphismes de
+$(C, u, \lbrace b, b' \rbrace)$}, \struck{il $\mathfrak{S}_2 \times \mathfrak{S}_4$ \ill{}}
+nb $27 \times 40$ — « — \uncertain{bien}
+\note{au-dessus de la phrase barrée, « Groupe d'automorphismes »,
+barré avec elle}
+
+\[
+\operatorname{card} W = (27 \cdot 40) \times (2 \cdot 4!) = 27 \cdot 3^{3} \cdot 5
+\]
+\note{ainsi sur la page ; le produit $(27 \cdot 40) \times (2 \cdot 4!)$ vaut
+$51840 = 2^{7} \cdot 3^{4} \cdot 5$, l'ordre du groupe de Weyl de $E_6$. Le
+premier facteur du membre de droite se lit aussi $2^{7}$}
+
+Pour un syst. $(C, u, \lbrace b, b' \rbrace)$, $\lbrace b, b' \rbrace$ \ill{}
+\add{\uncertain{orth.}} à $u$, il correspond : $(I_2, I_4, J)$ $J$ une ens.
+de card. 2, $\mathfrak{S}_2 \times \mathfrak{S}_4 \times \mathfrak{S}_2$, il
+y en a $27 \cdot \frac{40}{2}$ \ldots
+
+Autom.
+
+\uncertain{Complexes cubiques} : \emph{\uncertain{arête marquée}} (ou :
+triangle marqué avec sommet distingué)
+
+\drawing{dans la marge gauche, un triangle aux sommets $u$ (point
+épais), $v$ et $w$}
+
+La description de cette structure \ill{} \ill{} de la description
+précédente en termes de $\lbrace P_u, P \text{ torseur sous } \Psi_Q \rbrace$
+\ill{} \ill{} de plus un élément fixé \add{$t$} de $Q_u$, de sorte que
+la donnée de $Q_u$ \add{de cardinal 5} revient à celle de
+$Q_u - \lbrace t \rbrace = P_u$ de cardinal 4. Alors
+\[
+\Psi(Q_u) \xrightarrow{\ \sim\ } \mathbb{F}_2^{P_u}
+\qquad (\subset \mathbb{F}_2^{Q_u},\ \text{pr.}),
+\]
+\note{sous la flèche, un petit « $\subset \mathbb{F}_2^{Q_u}$ » relié à
+« pr. » par une flèche montant vers $\mathbb{F}_2^{P_u}$ : l'inclusion et
+la projection}
+\uncertain{donc} la donnée des torseurs $P$ sous $\Psi(Q_u)$ équivaut à celle d'un
+torseur $P$ sous $\mathbb{F}_2^{P_u}$ — i.e.\ \add{$(P_u, P)$ équivaut à}
+un ens. \add{$\widetilde{P}_u$} de cardinal 8 avec $\sigma$ automorphisme
+involutif sans pt fixe.
+
+\struck{Alors} \struck{\ill{}} \add{\uncertain{Conventions}}
+$\varepsilon : \mathbb{F}_2^{P_u} \to \mathbb{F}_2$, alors
+\[
+C \simeq \lbrace u \rbrace \amalg
+\overbrace{\bigl(P \times_{\mathbb{F}_2^{P_u}} (\mathbb{F}_2, \varepsilon)\bigr)}^{\lbrace v, w \rbrace}
+\amalg
+\overbrace{\Bigl(\coprod_{i \in P_u} \bigl(P \times_{\mathbb{F}_2^{P_u}} (\mathbb{F}_2, p_i)\bigr)\Bigr)}^{\widetilde{P}_u}
+\amalg \overbrace{P}^{E}
+\]
+\note{les accolades supérieures portent, de gauche à droite, « $\lbrace v, w
+\rbrace$ », « $\widetilde{P}_u$ » et une lettre lue $E$ ; le décompte
+$1 + 2 + 8 + 16 = 27$ est implicite}
+
+\page{24}
+\note{en tête, entouré : « 19 » (sa pagination)}
+
+a) $u, v, w$ liés deux à deux
+
+b) $u$ lié aux éléments de $\widetilde{P}_u$, $v$ et $w$ non liés à ces
+éléments.
+
+c) $u$ non lié aux él. de \struck{\ill{}} $P$. Si
+$v \in P \times_{\mathbb{F}_2^{P_u}} (\mathbb{F}_2, \varepsilon)$, il est
+lié à $x \in P$ ssi il est dans l'image de $x$ par
+$P \to P \times_{\mathbb{F}_2^{P_u}} (\mathbb{F}_2, \varepsilon)$.
+
+d) Deux éléments de $\widetilde{P}_u$ liés ssi ils sont \ill{} par
+$\sigma$, i.e.\ \struck{\ill{} \ill{}} sont \ill{} dans un même
+$P \times_{\mathbb{F}_2^{P_u}} (\mathbb{F}_2, p_i)$ $(i \in P_u)$ et sont
+distincts (i.e.\ sont distincts \ill{} $\widetilde{P}_u - P_u$)
+
+e) \struck{Deux} Un él. $a$ de $\widetilde{P}_u$ lié à un él. $x$ de $P$
+ssi, si $a \in P \times_{\mathbb{F}_2^{P_u}} (\mathbb{F}_2, p_i)$, $a$ est
+dans l'image de $x$.
+
+f) $x$ et $y \in P$ sont liés ssi, posant $x - y = u$, \ill{}
+\struck{$e'_1, e_2, \ldots$ $e'_i$ $(i \in P_u)$ \ill{}}
+est de la forme
+\[
+e'_i = \sum_{j \in P_u - \lbrace i \rbrace} e_j
+\quad \text{ou} \quad
+e'_0 = \sum_{i \in I} e_i
+\]
+\note{un signe $\Sigma$ biffé précède chacune des deux formules}
+
+\emph{Corollaire} \note{le passage qui suit est marqué d'un trait vertical
+dans la marge gauche}
+Le groupe des autom. de $(C, \lbrace u, w \rbrace)$
+\add{$W_{\lbrace u, w \rbrace} = \alpha$} (où $\lbrace u, w \rbrace$ est une
+arête marquée) est isom. au groupe des couples $(\rho, \varphi)$, où
+$\rho$ \add{$\in \mathfrak{S}_{P_u}$} est un autom. \struck{du groupe} de
+$P_u$, et $\varphi$ un $\bar{\rho}$-autom. \add{(\uncertain{affine})} de
+$P$. Donc on a une suite exacte \uncertain{(splittée)}
+\[
+1 \longrightarrow \bigl(\mathbb{F}_2^{P_u}\bigr)^{F} \longrightarrow W_{\alpha}
+\longrightarrow \mathfrak{S}_{P_u} \longrightarrow 1
+\]
+\note{l'exposant de $(\mathbb{F}_2^{P_u})$ est une lettre repassée, lue
+$F$}
+et $W_{\alpha}$ est isom. au groupe de Weyl $W_{B_4}$ de $B_4$
+$(\simeq SO(9))$.
+
+Ce système de racines $B_4$ a 32 racines \add{(mais pas toutes de
+$=$ longueur !)} qu'on aimerait retrouver \uncertain{plongé} dans $E_6$.
+Je \ill{} \ill{}, par \ill{} les longueurs \ill{} \ill{} la
+situation,
+
+\page{25}
+\note{en tête : « 20 » (sa pagination)}
+
+en épinglant le triangle $u, v, w$ i.e.\ l'arête $(v, w)$,
+\add{\uncertain{non}} par choix d'une « origine » $u$, i.e.\ \ill{}
+d'une \add{$\vec{\alpha}$} plutôt que d'une arête $\alpha$. \struck{Alors},
+Car le graphe associé (\uncertain{comme}
+$\lbrace v, w \rbrace = P \times_{\mathbb{F}_2^{P_u}} (\mathbb{F}_2, \varepsilon)$)
+\uncertain{qu'on} \uncertain{restreint} le groupe structural de
+$\mathbb{F}_2^{P_u}$ :
+$\Psi_{P_u} = \operatorname{Ker}(\mathbb{F}_2^{P_u} \xrightarrow{\varepsilon} \mathbb{F}_2)$.
+\uncertain{Cela} \ill{} \ill{} l'extension splittée
+\[
+1 \longrightarrow \Psi_{P_u} \longrightarrow W_{\vec{\alpha}}
+\overset{= W_t}{\longrightarrow} \mathfrak{S}_{P_u} \longrightarrow 1
+\]
+\note{au-dessus de la flèche centrale, « $= W_t$ », relié par un trait
+courbe à la remarque « autom. de $C$ qui induisent l'identité sur
+$t = \lbrace u, v, w \rbrace$ » ; ce trait se poursuit jusqu'au
+$W_{\vec{\alpha}}$ de la ligne suivante}
+dans
+\[
+W_{\vec{\alpha}} \simeq W_{D_4}
+\]
+groupe de Weyl de $D_4$ $(\simeq SO(8))$. Ce syst. de racines (\uncertain{étant}
+de $=$ \emph{longueur}) :
+\[
+\frac{8 \cdot 7}{2} - 4 = 24 \ \text{racines}.
+\]
+On retrouve $W_t$ \ill{} une description plus symétrique (en
+$u, v, w$) plus bas, ainsi qu'une description \ill{} du syst. de 24
+racines de type $D_4$ associé : un triangle \ldots
+
+\marginal{Complexes cubiques avec \ill{} marqué \uncertain{ou à}
+\struck{\ill{}} \add{triangles} incidents \uncertain{marqués}}
+\drawing{en regard de cette note, dans la marge droite, deux croquis : un
+graphe en Y, centre $u$, branches vers $v$, $w$ (en haut) et $a$ (en bas) ;
+puis deux triangles opposés par le sommet $u$ (point épais), $v, w$ en haut,
+$a, b$ en bas}
+
+\drawing{sous « un triangle \ldots », un grand griffonnage en zigzag,
+qui sert de trait de séparation}
+
+\emph{Complexes cubiques : triangle marqué}, $t = \lbrace u, v, w \rbrace$.
+
+Équivaut : la donnée
+
+a) d'un \struck{\ill{}} ens. $t$ de cardinal 3
+
+b) d'un vectoriel $V$ de dim 2 sur $\mathbb{F}_2$\note{la lettre ressemble à un $N$ ; la page 26 écrit $V$} ($\Longleftrightarrow$ un
+ens. de cardinal 3 \uncertain{savoir} $V^{*}$)
+
+c) Un torseur $\widetilde{P}$ sous l'extension canonique
+
+\page{26}
+\note{en tête, entouré : « 21 » (sa pagination)}
+
+$\widetilde{\Psi}(V, t)$ de
+$\Psi(V, t) = \operatorname{Ker}\bigl(V^{t} \xrightarrow{\varepsilon} V\bigr)$,
+$(x_i)_{i \in t} \mapsto \sum x_i$
+\note{à droite de la ligne, isolé : « $\Gamma \to \mathbb{F}_2$ »,
+lecture incertaine}
+
+\ill{} extension \add{(\uncertain{précisions})} (splitting) dans les
+$N_i = \operatorname{Ker}\bigl(\Psi(V, t) \xrightarrow{p_i} V\bigr)$ $(i \in t)$
+\ill{} \ill{} sous-groupes $\widetilde{N}'_i \subset \widetilde{\Psi}(V, t)$.
+Rappelons que
+\[
+\widetilde{\Psi}(V, t) = \bigwedge_{i \in t} p_i^{*}(\widetilde{V}),
+\]
+où $\widetilde{V}$ est l'ext. de $V$ par $\mathbb{F}_2$ qui ne splitte sur
+aucun sous-groupe $\simeq \mathbb{F}_2$ de $V$. On a alors, pour $i \in t$,
+\[
+\widetilde{P}_i = \widetilde{P} / N'_i
+\]
+\ill{} « \quad
+$P_i = \widetilde{P} / \widetilde{N}_i$ \quad (où $\widetilde{N}_i$ =
+image inverse de $N_i$ dans $\widetilde{\Psi}$
+$= N_i \cdot \lbrace 1, \sigma \rbrace$, $\sigma \neq 1$ dans \ill{}
+$\widetilde{\Psi} \to \Psi$)
+\note{à gauche de la seconde formule, un mot abrégé suivi de guillemets de
+répétition ; au-dessous, un mot surchargé et illisible}
+\[
+C \simeq t \amalg \Bigl(\coprod_{i \in t} \widetilde{P}_i\Bigr)
+\]
+La loi du graphe est définie ainsi :
+
+a) les $i \in t$ sont deux à deux liés
+
+b) $i$ est lié aux él. de $\widetilde{P}_i$, et non à ceux de
+$\widetilde{P}_j$ si $j \neq i$
+
+c) Si \struck{$x \in \widetilde{P}_i$,} $\tilde{x}, \tilde{y} \in \widetilde{P}_i$,
+$x$ et $y$ sont liés ssi $y = \sigma x$
+
+d) Si $\tilde{x} \in \widetilde{P}_i$, $\tilde{y} \in \widetilde{P}_j$,
+$i \neq j$, alors $x$ et $y$ sont liés ssi
+$\exists\, \tilde{\gamma} \in \widetilde{P}$ tel que
+$p_i(\tilde{\gamma}) = \tilde{x}$, $p_j(\tilde{\gamma}) = \tilde{y}$.
+
+\emph{Cor} \note{ce corollaire est marqué d'un trait vertical dans la marge
+gauche}
+Le groupe des autom. de $(C, t)$ est isom. au groupe des
+\struck{couples} \add{triples} $(\tau, \rho, \varphi)$ d'une permutation
+$\tau$ de $t$, d'un autom. $\rho$ de $V$, et d'un \struck{\ill{}}
+$\lambda_{\tau, \rho}$-autom. de $\widetilde{P}$, où $\lambda_{\tau, \rho}$
+est l'autom. de \struck{$\Psi$} $\widetilde{\Psi}(V, t)$ induit par
+\struck{$(\varphi, \tau)$} $(\tau, \rho)$. Donc
+\[
+1 \longrightarrow \widetilde{\Gamma} \longrightarrow W_t \longrightarrow
+\underbrace{\mathfrak{S}_t \times \mathfrak{S}_{V^{*}}}_{\simeq\, \mathfrak{S}_3 \times \mathfrak{S}_3} \longrightarrow 1
+\]
+\note{la lettre après « $1 \to$ » se lit $\widetilde{\Gamma}$ ou
+$\widetilde{P}$ ; « $\simeq \mathfrak{S}_3 \times \mathfrak{S}_3$ » est écrit
+au-dessus de $\mathfrak{S}_t \times \mathfrak{S}_{V^{*}}$}
+
+\marginal{\emph{NB} $\widetilde{P}$ \ill{} \ill{} \ill{} triangles
+\ill{} de $t$, disjoints \ill{} \ill{} $(C, t, t')$ \ill{} \ill{}
+\emph{Cor.} \ill{} \ill{} $t$) triangles disjoints \ill{} $t$ ;
+\ill{} équivaut \ill{} \ill{} $(t, V)$ ($t$ ens. de card. 3, $V$
+vectoriel de dim. 2 sur $\mathbb{F}_2$)}
+\note{note écrite en oblique dans la marge gauche, en regard de d) et du
+corollaire ; lecture très partielle}
+
+\page{27}
+\note{en tête, entouré : « 22 » (sa pagination)}
+
+(extension splittée) Sauf erreur, ce groupe est le groupe de Weyl complété
+(par automorphismes ext.) de $D_4$ (le groupe des automorphismes ext. de
+$D_4$ correspondant à $\mathfrak{S}_t$).
+
+Donc cat. des syst. de racines de type $D_4$ $\approx$ cat. des complexes
+cubiques munis d'un \emph{triangle}.
+\note{cette phrase, d'une encre plus foncée, est ajoutée entre les
+lignes ; le signe $\approx$ est souligné deux fois}
+
+Précisons comment on \ill{} \ill{} un syst. de 24 racines (de type $D_4$)
+à un triangle $t$ dans $C$. \ill{} \ill{} que à la structure
+$(C, t = \lbrace u, v, w \rbrace)$ \ldots{} associé, \struck{\ill{} \ill{}}
+\add{un syst. transitif d'\uncertain{isom.}}
+\struck{\ill{} $\lbrace t, t' \rbrace$,}
+$B(i)$ $(i \in t)$, où $B(i) \subset \mathfrak{P}_2(\widetilde{P}_i)$ :
+toutes les \struck{\ill{}} paires $(\tilde{x}, \tilde{y})$ d'éléments
+\emph{non} liés ; $\lbrace x, y \rbrace \in B(i)$ et
+$\lbrace x', y' \rbrace \in B(j)$ $(i \neq j)$ sont associés ssi
+\struck{\ill{}} $x, y$ \emph{non liés} à $x', y'$. \struck{Si $B$} Si on
+désigne par $B$ l'un \struck{des} « composantes » des $B(i)$, i.e.\ l'un des
+parties \add{$b$} : $b$ élément de $C$ mutuellement non liés (i.e.\ des
+bases) telles que $b \cap E(i)$ \add{$\cong \widetilde{P}_i$} soit une des
+\uncertain{conditions} 2 pour tt $i \in t$, \uncertain{on voit que}
+\add{$\forall i \in t$}
+\[
+B \simeq B(i) \quad \text{par } b \mapsto b \cap E(i),
+\]
+\note{le signe $\simeq$ est surmonté d'un trait ; au-dessus de $E(i)$,
+un astérisque, et sous lui « $\cong \widetilde{P}_i$ »}
+et
+\[
+\operatorname{card} B = \operatorname{card} B(i) = \frac{8 \cdot 6}{2} = 24 .
+\]
+(\struck{La} \add{\uncertain{Précisons}} \struck{condition}
+\uncertain{équivaut} à celle \ldots{} que $b \cap E(i)$ sont de
+\uncertain{cardinal} 2 $\forall i \in t$, [\ill{} \struck{\ill{} \ill{}}
+\add{\ill{}} \uncertain{implique} que $b \cap t = \emptyset$ \struck{\ill{}}
+\struck{\ill{} ($b \cap t$, $= t$, \ill{} \ill{})} \uncertain{car}
+\ill{} $u \in t \cap b$, on aurait card $E(u) \cap b = \emptyset$ ]
+\note{la parenthèse est fermée par un grand crochet dans la marge droite}
+
+\ill{} : \ill{} $b$ \emph{orthogonale} : \ill{} $i \in t$ \ill{} \ill{}
+(\ill{} $t$).
+
+\marginal{\emph{NB} \ill{} $\varepsilon_i = $ \ill{} $\sigma$ \ill{} :
+$t$ \ill{} $i \in t$ \ill{} : \ill{} \ill{} \ill{} \ill{} \ill{}
+$i \notin$ \ill{} i.e.}
+\note{note écrite en oblique dans la marge gauche, en regard des
+dernières lignes ; presque entièrement illisible}
+
+\page{28}
+\note{en tête, entouré : « 23 » (sa pagination)}
+
+Donc il faudrait vérifier que l'ens. des 24 racines \emph{orthogonales} à
+un triangle donné $t$ forment un syst. de racines de type $D_4$ \ldots
+
+\marginal{choisissant un sommet $u \in t$, on prend
+$E(t) \subset \frac{1}{2} E(C)$ engendré par les $x - \frac{1}{2}\theta$
+pour $x \in E(u)^{*}$, et le syst. de racines engendré par les diff.
+$\alpha - \beta$, où $\alpha, \beta \in E(u)^{*}$ sont distincts non
+liés \ldots}
+\note{ajout encadré d'un trait vertical, en petite écriture, à droite de
+la ligne précédente}
+
+\marginal{$D_4$ = « carrousel »}
+\drawing{dans la marge gauche, sous « $D_4$ = « carrousel » » : un
+triangle $u, v, w$ ; de $w$ partent deux traits vers le bas, marqués
+$\lambda_w, \mu_w$ ; de $u$ deux traits vers $\lambda_u, \mu_u$, de $v$
+deux traits vers $\lambda_v, \mu_v$}
+
+Le syst. formé d'un $(C, t, b)$, $t$ triangle du complexe cubique, $b$ base
+orth. à $t$, équivaut à celle de $C$ muni d'une base $b$, avec
+\emph{partition} de $b$ en une ens. de 3 classes de 2 éléments,
+\add{soit} \struck{$c_1, c_2, c_3$} $(\xi_1, \xi_2)$, $(\xi_3, \xi_4)$,
+$(\xi_5, \xi_6)$, le triangle correspondant étant
+$\xi_{12}, \xi_{34}, \xi_{56}$. Pour $b$ fixé, il y a
+\[
+\binom{6}{2}\binom{4}{2}\frac{1}{3!} = 15
+\]
+telles partitions, donc pour $C$ fixé il y a $72 \cdot 15$
+$(= 2^{3} \cdot 3^{3} \cdot 5)$ tels couples $(t, b)$ \struck{\ill{}}
+\struck{\ill{}} (\ill{} \ill{} \ill{} \ill{} \ill{}), avec un groupe de
+stabilité qui est une extension de $\mathfrak{S}_3$ par
+$\mathfrak{S}_2^{3}$ (en fait, groupe de Weyl de $B_3 \simeq SO(7)$) qui
+est d'ordre $3! \, 2^{3} = 48 = 2^{4} \cdot 3$ — on retrouve bien
+\[
+\operatorname{card} W = (2^{3} \cdot 3^{3} \cdot 5)(2^{4} \cdot 3) = 2^{7} \cdot 3^{4} \cdot 5 .
+\]
+\marginal{(on a aussi $45 \times 24$ : nb de $t$, nb de $b$ pour $t$
+fixé)}
+
+La cat. des $(C, t, b)$ équivaut à celle des ens. de cardinal 6
+\emph{munis} d'une partition de type $(2, 2, 2)$, i.e.\ munis d'un
+automorphisme involutif d'ordre 2 sans pt fixe. Si \ill{} a une
+\ill{} \add{$\lbrace b, b' \rbrace$}
+
+\page{29}
+\note{en tête, entouré : « 24 bis » (sa pagination)}
+
+\emph{Position relative d'un triangle $t$ et d'une base $b$.}
+
+On a $\sum_{i \in t} i = \lambda$ \emph{orthogonal} aux racines, donc
+\[
+\sum_{i \in t} i \cdot r_b = 0
+\]
+et comme $i \cdot r_b \in \lbrace 0, 1, -1 \rbrace$ suivant la position
+relative de $r_b$ et $i$ i.e.\ \add{de} $b$ et $i$, on trouve 2
+possibilités (à conjugaison près)
+
+a) $i \cdot r_b = 0$ $\forall i \in t$, i.e.\ \struck{$E$} $r_b$ (ou $b$)
+\emph{orthogonal} à $t$ : cas déjà étudié. L'ens. de ces $b$ est au nb de
+24, stable par passage à l'opposé
+
+b) \struck{$\exists$} $r_b$ non \emph{orthogonal} à $t$. Alors on peut
+écrire $t = \lbrace u, v, w \rbrace$ avec
+\[
+\begin{cases}
+r_b(u) = 1 & \text{i.e. } u \in b \text{ i.e. } E(u) \cap b = \emptyset \\
+r_b(v) = -1 & \text{i.e. } v \in b' \text{ i.e. } E(v) \cap b \text{ de card. } 5 \\
+r_b(w) = 0 & \text{i.e. } w \notin b \cup b' \text{ i.e. } E(w) \cap b \text{ card } 2
+\end{cases}
+\]
+\note{dans la deuxième ligne, $v$ est écrit sur un $u$ ; on lit aussi
+« $r_b(w) = -1$ » avant surcharge}
+
+\marginal{\ill{} les bases \ill{} \ill{} \ill{} \ill{} \ill{}
+\ill{} orth. \ill{} \ill{} \ill{} \ill{}}
+\note{note oblique dans la marge gauche, en regard de a) et b) ;
+illisible pour l'essentiel}
+
+Pour $t$ fixé, le nb de ces $b$ est $72 - 24 = 48$, se groupant en 6
+groupes de 8 bases $b$, pour lesquels $u, v, w$ sont fixés. Comment
+\uncertain{décrire} \add{\uncertain{commodément}} ces 8 bases ? On note que
+$E(w)$ avec $b$ et $b'$ \ill{} de card. 2 il \uncertain{contient}
+exactement un pt $u' \in b'$ et un $v' \in b$, et ces deux sont liés. Donc
+les \struck{\ill{}} choix \uncertain{s'obtiennent} en choisissant
+\struck{1°) le triangle $(w, u', v')$ parmi les quatre triangles
+$\neq (w, v, u)$ ayant $w$ comme sommet 2°)} un des \struck{deux}
+sommets de \add{$E(w)^{*}$} \struck{5 distincts de $u$} \uncertain{comme}
+\ldots{} \uncertain{étant} $u'$, La base $b$ est l'unique base de $C$
+pour laquelle $u \in b$, $u' \in b'$,
+\note{« 6 » est ajouté dans la marge droite, au bout de la ligne barrée}
+
+Le choix d'un couple $(t, b)$ \struck{\ill{}} en position non
+\emph{orthogonale} équivaut donc à celui d'un triangle épinglé
+$\lbrace u, v, w \rbrace$ et d'un $u' \in E(w)^{*}$
+\quad (Nb : $27 \cdot 10 \cdot 1 \cdot 8$)
+\note{ce dernier paragraphe est marqué d'un double trait vertical dans la
+marge droite}
+
+\page{30}
+\note{en tête, entouré : « 24 ter » (sa pagination)}
+
+le groupe d'autom. de $(C, t, b)$ est le sous-groupe de $W_{D_4}$ formé des
+autom. de $(E(w)^{*}, \sigma, -)$ qui invariant $u' \in E(w)^{*}$, c'est
+donc aussi le groupe $W_{D_3}$ des autom. de
+$\bigl(E(w)^{*} - \lbrace u', \sigma u' \rbrace, \sigma\bigr)$ qui
+correspondent à un nb pair de changts de \emph{signes}. Quel est le syst. de
+racines de type $D_3$ associé (formé de 12 racines) ? On trouve
+\struck{\ill{} \ill{}} le syst. des racines de la forme $\alpha - \beta$,
+où $\alpha, \beta \in E(w)^{*} - \lbrace u', \sigma u' \rbrace$ \ldots{}
+\struck{\ill{}} \add{\ill{} \ill{} \ill{} une base -- il en découle
+que \ill{} l'ens. $\lbrace s, t \rbrace$ des} La donnée des $(t, b)$
+équivaut aussi à celle d'une \emph{base} $b$ avec deux éléments fixés
+$\xi_1$ et $\xi_2$ (le triangle $t$ étant alors
+$(\xi_1, \xi'_2, \xi_{12})$, avec $\xi_1 = u$, $\xi'_2 = v$) -- le groupe
+des autom. de $(C, t, b)$ est donc aussi $\mathfrak{S}_4 \simeq W_{A_3}$
+-- on est dans le cas de l'« isom. exceptionnel » $D_3 \simeq A_3$. Le nb de
+ces syst. $t, b$ est
+\[
+72 \cdot 6 \cdot 5 = 2160 = 27 \cdot 10 \cdot 8 \ \text{---}
+\]
+\note{les deux lignes « racines de la forme $\alpha - \beta$ \ldots » et
+« une base \ldots{} des » sont serrées l'une sur l'autre ; la seconde est
+une insertion. Sous $\xi_1$ et $\xi'_2$, des signes $=$ verticaux mènent à
+$u$ et $v$}
+
+\marginal{deux triangles $s, t$ tels que $s \cap t \neq \emptyset$,
+$s \neq t$ (donc card $s \cap t = 1$) \ill{} \ill{} aussi les racines
+orth. à $\lbrace u, v, w, u', v' \rbrace$ $= s \cup t$ i.e.\ orth. à $s$ et
+à $t$}
+\note{note oblique dans la marge gauche, reliée par une accolade et une
+flèche aux lignes « racines de la forme \ldots » et « La donnée des
+$(t, b)$ »}
+
+\page{31}
+\note{en tête, entouré : « 24 » (sa pagination) ; la page semble
+poursuivre la page 30}
+
+au lieu d'une base, il faut en plus se donner un ens. de cardinal 2 (donc
+le groupe des autom. est multiplié par $\mathfrak{S}_2$, le nb d'objets est
+divisé par 2 \ldots).
+
+\drawing{un trait horizontal court sépare ce qui précède de ce qui suit}
+
+\marginal{étudions position relative d'une racine et d'un triangle}
+\note{note entourée dans la marge gauche, en regard du paragraphe
+suivant}
+
+Étudions les triples $(t, t', b)$, où $(t, t')$ sont deux triangles
+disjoints et $b$ une base orthogonale à $t$ \emph{et} $t'$ -- ils
+correspondent à un ens. $I$ de card 6, avec 2 partitions \add{$\Pi, \Pi'$}
+de type $(2, 2, 2)$, sans classe commune. On \uncertain{démontre} que ceci
+correspond à une structure \emph{hexagonale} sur $I$ \add{à
+\uncertain{côtés}-triangles \emph{marqués}} -- avec comme partitions celles
+marquées aux traits \add{$(\Pi = \Pi)$} \struck{---} et
+\add{$(\Pi' = \Pi')$} \struck{\ill{}} \struck{\ill{} par} \ill{}
+\ill{} \ill{} $\lbrace t, t' \rbrace$ au lieu de $(t, t')$, on \ill{}
+\ill{} à choisir des \uncertain{côtés-triangles} dans l'hexagone. On
+trouve que, si $t''$ est le triangle qui complète $\lbrace t, t' \rbrace$
+en un \emph{bitriangle} $\lbrace t, t', t'' \rbrace$, alors $b$ est aussi
+orth. à $t''$ -- en fait \ldots{} la situation d'une base orthogonale à un
+bitriangle cf.\ plus bas. Pour $b$ fixé, le syst. des $(t, t', t'')$
+correspondants est de cardinal $120 = 5!$ (60 pour $\lbrace t, t' \rbrace$
+$= \frac{5!}{2}$ = nb de structures hexagonales sur $I$ de card. 6) ce
+qui fait en tout \struck{$120 \cdot 72 =$}
+\[
+72 \cdot 5! = \operatorname{card} W / 6 \quad \text{tels triples}
+\]
+\note{sous le « 6 » de $\operatorname{card} W / 6$, une flèche vers la
+marge gauche, où on lit « $6 = \operatorname{card} \mathfrak{S}_t$ » ;
+les lignes depuis « Pour $b$ fixé » sont fermées par un crochet dans la
+marge droite}
+
+\uncertain{Ou} aussi en nb
+\[
+45 \cdot 32 \cdot 6
+\]
+\note{sous les facteurs, des flèches et, en petit : « triangles »,
+« triangles disjoints » (lecture incertaine) sous $45$ et $32$ ; à droite
+de $6$, une flèche vers « nb des racines (ou bases) orth. à $t, t'$ »}
+
+\drawing{à gauche du texte, un hexagone de sommets numérotés 1 à 6
+(2 et 1 en haut, 3 à gauche, 6 à droite, 4 et 5 en bas), avec toutes ses
+diagonales ; les côtés 12, 34, 56 sont épaissis à l'encre, les côtés
+23, 45, 61 soulignés d'un trait ondulé}
+
+\marginal{\uncertain{pour} \ill{} \ill{} hexagone, \ill{} dual \ill{}
+\ill{} \ill{} \ill{} côtés sont \ill{} él. de $I$ \ldots}
+\note{note oblique dans la marge gauche, sous l'hexagone}
+
+\page{32}
+\note{en tête, entouré : « 25 » (sa pagination)}
+
+\emph{Complexes cubiques : balise marquée} \add{ou triangles incidents}
+\struck{bitriangle \ill{}} \quad \emph{ou à pâte}
+\drawing{dans le titre, deux petits signes : un triangle posé sur une
+pointe prolongée d'un trait vertical (une « balise »), marqué $D_4$ ; et
+deux triangles opposés par un sommet (un sablier), suivi de « marquée »}
+
+\drawing{avant « Pour », la balise : un triangle, sommet inférieur $u$
+d'où descend un trait, sommets supérieurs $v$ et $w$}
+Pour une balise, on a une arête marquée $\lbrace v, w \rbrace$, i.e.\
+triangle $\lbrace u, v, w \rbrace$ à sommet marqué, correspondant à un
+torseur sous $\mathbb{F}_2^{P_u}$. Il faut de plus se donner un él. de
+$\widetilde{P}_u$, i.e.\ un élément de $P_u$ et une trivialisation du
+$\mathbb{F}_2$-torseur au-dessus -- il reste donc un ens. à 3 éléments
+$R_u = P_u -$ (l'un des 3 triangles de sommet $u$ distincts de
+$\lbrace u, v, w \rbrace = t$ et $\lbrace u, x, y \rbrace = s$) et un rev.
+d'ordre 2 de ce dernier, i.e.\ un torseur sous $\mathbb{F}_2^{R_u}$. La
+catégorie des triples $(C, \text{balise})$ est donc discrète, les autom.
+d'un objet sont un groupe isom. à $\widehat{W}_{D_3}$ groupe de Weyl
+élargi ($=$ tous les autom.) d'un syst. de racines de type $D_3$,
+\add{il est de cardinal $3! \, 2^{3} = 48$} (L'ens. $\lbrace v, w \rbrace$
+se récupère comme le produit \add{des \uncertain{bases}} des 3
+\add{$\mathbb{F}_2$-}torseurs indexés par $R_u$ \ldots).
+\note{« il est de cardinal $3! \, 2^{3} = 48$ » est ajouté au-dessus de
+la ligne}
+
+\drawing{dans la marge gauche, un croquis : le triangle $u, v, w$, un
+trait vertical descendant de $u$ vers $x$, et un trait pointillé de $u$
+vers $y$}
+
+Les racines en question sont les $\alpha - \beta$, où
+$\alpha, \beta \in$ \struck{$E$} $E(u)^{*} - \lbrace x, y \rbrace$ sont
+distincts et non liés.
+
+Le nb des balises dans $C$ est
+\[
+\underbrace{45}_{\text{triangles}} \cdot \underbrace{3}_{\text{sommets de } t} \cdot \underbrace{8}_{\in E(u)^{*}} = \operatorname{card} W_{E_6} : 48 \quad \text{OK.}
+\]
+\struck{\ill{} \ill{} balises}
+\note{les accolades sous les facteurs sont les siennes, avec leurs
+légendes}
+
+\marginal{balise épinglée \ill{} \ill{} groupe d'autom. de
+$(C, \text{bal. ép.})$ \ill{} $W_{D_3}$ qui est le \ill{} \ill{}
+$W_{D_3}$)}
+\note{note oblique dans la marge gauche, en regard de « groupe de Weyl
+élargi »}
+
+\page{33}
+\note{en tête, entouré : « 26 » (sa pagination)}
+
+Pour les \add{paires de} \struck{bi}triangles
+\drawing{un sablier : deux triangles opposés par un sommet}, \uncertain{quitte}
+à noter que cette paire « épinglée » (\uncertain{ce qui} \uncertain{élimine}
+le groupe d'autom. des diagrammes, qui est $\mathbb{Z}/4\mathbb{Z}$)
+équivaut à la balise épinglée (en éliminant le groupe d'autom.
+$\mathfrak{S}_2$ de la balise). \struck{équivaut : \ill{} donc}
+\add{Du pt de vue \ill{}} épinglé : sommet fixé $u$, avec un ens.
+des 2 triangles de sommet $u$, donc
+
+a) un $Q_u$ de cardinal 5, décomposé en $Q'_u$ (de cardinal 2) et
+$Q''_u$ (de cardinal 3)
+
+b) torseur sous
+$\Psi(Q_u, \mathbb{F}_2) = \operatorname{Ker}\bigl(\mathbb{F}_2^{Q'_u \amalg Q''_u} \to \mathbb{F}_2\bigr)$
+
+\emph{Nb} de telles paires
+\[
+\underbrace{27}_{\text{sommets}} \cdot \underbrace{\binom{5}{2}}_{\text{partie à 2 él. dans } Q_u} = 270 = 2 \cdot 3^{3} \cdot 5
+\]
+
+Groupe d'autom. de $(C, \text{sablier})$ :
+\[
+\simeq (\mathfrak{S}_2 \times \mathfrak{S}_3) \cdot \underbrace{\Psi(\mathbb{F}_2)}_{\simeq\, \mathbb{F}_2^{4}}
+\quad \text{de cardinal } 2 \cdot 6 \cdot 16 = 2^{6} \cdot 3
+\]
+on trouve bien comme produit
+\[
+2^{7} \cdot 3^{4} \cdot 5 = \operatorname{card} W_{E_6} \ \ldots
+\]
+\note{une flèche relie $270 = 2 \cdot 3^{3} \cdot 5$ au cardinal
+$2^{6} \cdot 3$ ; « (C, sablier) » : il dessine le sablier dans la
+parenthèse. Le reste de la page est vierge}
+
+\page{34}
+\note{en tête, entouré : « 27 » (sa pagination). Les deux alinéas qui
+suivent sont précédés chacun d'un petit signe entouré, peu lisible}
+
+\emph{Cas du prisme triangulaire} \uncertain{$D$}
+\drawing{à droite du titre, un petit prisme vu de face : un triangle posé
+sur un rectangle, marqué $D$ ; au-dessous, un rectangle au côté supérieur
+épaissi, marqué $C$}
+La donnée de ce diagramme dans $C$ équivaut à celle d'un carré avec un côté
+marqué -- on l'étudiera plutôt avec le carré.
+
+\emph{Complexes cubiques avec \struck{prisme triangulaire}} :
+\emph{\add{bitriangle}} \add{$D_6$} \add{$D_7$} \uncertain{Il} donne
+naissance, par \uncertain{passage} aux triangles sur les arêtes latérales,
+à un bitriangle à paire de triangles \add{disjoints} distinguée
+$\lbrace\lbrace u, v, w \rbrace, \lbrace u', v', w' \rbrace\rbrace$
+(épinglage partiel).
+\note{le titre porte « prisme triangulaire » barré et « $D_6$ » au-dessus ;
+« bitriangle » et « $D_7$ » sont ajoutés sous la ligne}
+
+\drawing{dans la marge gauche, deux croquis. En haut, un prisme
+triangulaire : base $u, v$ (et un troisième sommet $w$ caché), face
+supérieure $u', v', w'$, une diagonale sur la face avant. En dessous, un
+prisme plus grand, sommets $u, v$ en bas, $u', v', w'$ au milieu,
+$u'', v'', w''$ en haut, certaines arêtes et diagonales repassées à
+l'encre plus foncée}
+
+\uncertain{Étudions} d'abord les bitriangles, au nb de 120 (cf.\ p.~10) ;
+\struck{le groupe des autom. d'un diagramme} $\Delta$ $(\simeq D_7)$, est
+\note{« cf.\ p.~10 » renvoie à sa propre pagination}
+
+La donnée d'un diagramme de type $D_7$
+\struck{$\mathfrak{S}_2$}\add{\uncertain{$(\Delta)$}} équivaut à celle
+d'un ens. \add{$\Delta_0$} de cardinal 9, muni de \add{d'un ens.
+$\lbrace \Pi, \Pi' \rbrace$ de} deux partitions de type $(3, 3, 3)$, de
+telle façon que \uncertain{les applications}
+\[
+\Delta_0 \longrightarrow (\Delta_0 / \Pi \times \Delta_0 / \Pi')
+\]
+soit bijective, \uncertain{ou} encore d'un ens. \add{$T$} de cardinal 6
+(l'un des 6 triangles de $\Delta$) et d'une partition de $T$ de type
+$(3, 3)$, i.e.\ d'une application $T \to I$ de degré 3, --
+\struck{\ill{}} card $I = 2$. (\uncertain{Car} \uncertain{alors}
+$\Delta_0 = \prod_{i \in I} T_i \ldots$) Le groupe des autom.
+
+\page{35}
+\note{en tête, entouré : « 28 » (sa pagination)}
+
+de $\Delta$ \struck{est} s'identifie au groupe des autom. de
+$(T \to I)$, \uncertain{une} fois choisi un isom. entre les deux fibres de
+$T \to I$, il s'identifie au produit \uncertain{semi-direct}
+\[
+\underset{\simeq\, \mathfrak{S}_2}{\mathfrak{S}_2} \cdot \prod_{i \in I} \mathfrak{S}_{T_i}
+\]
+de cardinal 72 (égal au nb de racines \ldots).
+
+Si on a un plongement $\Delta_0 \xrightarrow{\ i\ } C$, le groupe des
+\struck{\ill{}} autom. de $(C, i(\Delta) = \Delta)$ \uncertain{induisant}
+\emph{l'identité} sur $\Delta$, le noyau étant d'ordre 6, \uncertain{isomorphe}
+à $\mathfrak{S}_3$. On \uncertain{va} associer, à $i(\Delta)$ un ens.
+$V^{*}$, \uncertain{triple}, \ill{}, qui sera canoniquement isom., pour
+$u \in i(\Delta)$, à \struck{\ill{}} l'ens. \add{$V^{*}(u)$} des trois
+triangles de $C$ de sommet $u$, distincts des 2 triangles $\in \Delta$.
+Il faut donc établir \emph{\ill{}} $\exists$ \uncertain{syst.} transitif
+d'isom. entre les $V^{*}(u)$ $(u \in \Delta)$ tels que si
+$x \in C - \Delta$, et si $x$ est lié à $u, v \in \Delta$, alors les
+triangles $\operatorname{tr}(u, x) \in V^{*}(u)$ et
+$\operatorname{tr}(v, x) \in V^{*}(v)$ se correspondent.
+\note{ce dernier énoncé, de « $V^{*}(u)$ » à « se correspondent », est
+marqué d'un trait vertical à gauche ; le mot souligné avant $\exists$ est
+illisible}
+
+\emph{Utilisons} l'épinglage des p.~8 et 9
+\note{sa pagination}
+
+On trouve que
+\[
+\operatorname{Aut}(C, \Delta) \longrightarrow
+\underset{\mathfrak{S}_2 \cdot (\mathfrak{S}_3 \times \mathfrak{S}_3)}{\underset{\simeq}{\operatorname{Aut}(\Delta)}}
+\times
+\underset{\mathfrak{S}_3}{\underset{\simeq}{\operatorname{Aut}(V^{*})}}
+\]
+soit un isom. Il faut donc expliciter \uncertain{\ill{}} \ldots{}
+\uncertain{réciproquement} \ill{} la situation $(C, \Delta)$
+\note{ces deux dernières lignes sont marquées d'un double trait vertical
+dans la marge gauche}
+
+\page{36}
+\note{en tête, entouré : « 29 » (sa pagination)}
+
+via le diagramme $\Delta$ et le seul ens. $V^{*}$ de cardinal 3.
+
+\emph{Lemme} \uncertain{2} a) $\forall x \in C - \Delta$, soit
+$\Delta(x) = \Delta \cap E(x)$. Alors [card $\Delta(x) = 3$, et] les deux
+applications
+\[
+\prod_{j \in I} T_j \simeq \Delta \longrightarrow T_i \quad (i \in I)
+\]
+définissent des bijections $\Delta(x) \simeq T_i$ i.e.\ $\Delta_x$ est le
+graphe d'une bijection $T_i \simeq T_{i'}$ (si \struck{$i \neq i'$}
+$I = \lbrace i, i' \rbrace$). b) Soit \struck{\ill{}} $\mathbb{F}'$ l'ens.
+des parties \add{$\Delta'$} de $\Delta$ \struck{\ill{}} ayant les
+propriétés précédentes [i.e.\ de cardinal 3 et formées de $2$ à $2$ \add{non}
+liés \ldots], et considérons les applications canoniques
+$(C - \Delta) \to \mathbb{F}'$ et $(C - \Delta) \to V^{*}$, d'où
+\[
+(C - \Delta) \longrightarrow \mathbb{F}' \times V^{*} .
+\]
+Cette application est bijective.
+\note{ici et plus bas, la lettre notée $\mathbb{F}'$ est un F à double
+barre ; le texte l'introduit comme l'ensemble des parties $\Delta'$}
+
+Il faut expliciter la relation de \add{liaison} \struck{\ill{}} dans
+\[
+C \simeq \Delta \amalg (\mathbb{F}' \times V^{*}) .
+\]
+On \uncertain{connaît} déjà la relation de liaison pour deux \add{$x, y$
+si $x, y$} \struck{\ill{}} sont dans $\Delta$, ou si $x \in \Delta$,
+$y = (\Delta(y), v(y)) \in \mathbb{F}' \times V^{*}$ [c'est la relation
+$x \in \Delta(y)$]. Il reste à l'expliciter si $x, y \in \mathbb{F}' \times V^{*}$,
+$x = (\Delta(x), v(x))$, $y = (\Delta(y), v(y))$. On trouve que $x, y$
+\add{distincts} sont liés ssi
+\[
+\begin{cases}
+\text{ou bien} & \Delta(x) \cap \Delta(y) \neq \emptyset,\ v(x) = v(y) \quad (\text{donc card } \Delta(x) \cap \Delta(y) = 1) \\
+\text{ou bien} & \Delta(x) \cap \Delta(y) = \emptyset,\ v(x) \neq v(y)
+\end{cases}
+\]
+
+\page{37}
+\note{en tête, entouré : « 30 » (sa pagination)}
+
+\emph{Justification a priori de cette description} : on considère le
+graphe ainsi construit à l'aide de $\Delta, V^{*}$ ; on vérifie qu'il
+satisfait aux propriétés caractéristiques des complexes cubiques
+(th.\ p.~1) \ldots
+\note{« p.~1 » et, plus bas, « p.~24 bis » renvoient à sa pagination}
+
+\drawing{un court trait horizontal sépare ce qui précède}
+
+\emph{Bases orthogonales} à un bitriangle $\Delta$. Ce sont aussi les bases
+$b \subset C - \Delta$ (cf.\ p.~24 bis), donc les systèmes de 6 éléments
+mutuellement non liés de $\mathbb{F}' \times V^{*}$. Considérons le
+\uncertain{tors.} \add{$\widetilde{I}$} d'ordre 2 de $I$ des permutations
+circulaires sur les fibres de $T \to I$, et considérons
+\[
+\mathcal{J} = \bigwedge_{i \in I} \widetilde{I}_i ,
+\]
+\note{sous le signe $\bigwedge$, entre parenthèses : « \uncertain{produit}
+de Baer » au-dessus de « $i \in I$ »}
+qui \uncertain{est} un ens.\ à 2 él. L'ens. des bases orthogonales est en
+corr.\ 1-1 avec $\operatorname{Mon}(\mathcal{J}, V^{*})$. Si on a une
+injection $\mathcal{J} \overset{\varphi}{\hookrightarrow} V^{*}$, on lui
+associe l'ens. \add{$b_{\varphi}$} des $x = (\Delta(x), v(x)) \in \mathbb{F}' \times V^{*}$
+tels que
+\[
+\varphi(\text{image de } \Delta(x) \text{ dans } \mathcal{J}) = v(x) ,
+\]
+ils sont évidemment de cardinal 6 [$(b_{\varphi} \xrightarrow{\ \sim\ } \mathbb{F}')$
+\uncertain{car} $\ldots$], et ces éléments sont mutuellement non liés
+\uncertain{car} $v(x) = v(y)$ implique que $\Delta(x)$ et $\Delta(y)$
+\uncertain{ont} \uncertain{même} image \uncertain{en} \ldots{} \uncertain{ce
+qui dit} que $\Delta_i \simeq T_j$ ($I = \lbrace i, j \rbrace$), diffèrent
+par un él.\ du groupe \emph{alterné} $A_3$, donc
+$\Delta(x) \cap \Delta(y) = \emptyset$, ce qui implique $x, y$ non liés.
+\note{la lettre notée $\mathcal{J}$ est un J cursif ; $\widetilde{I}_i$
+est lu d'après le contexte. Dans « $\Delta_i \simeq T_j$ », les deux
+lettres sont surchargées et d'une lecture incertaine}
+
+\page{38}
+\note{en tête, entouré : « 31 » (sa pagination)}
+
+Donc la cat. des triples $(C, \Delta, b)$ d'un complexe cubique $C$, muni
+d'un bitriangle $\Delta$ et d'une base $b$ orthogonale à celui-ci,
+\emph{équivaut} à celle des $\Delta$ (car $V^{*}$ se reconstitue comme
+\[
+V^{*} \simeq \mathcal{J} \amalg \lbrace pt \rbrace ) .
+\]
+Donc le groupe des autom. d'une telle structure est
+$\simeq \operatorname{Aut}(\Delta) \simeq \mathfrak{S}_2 \cdot (\mathfrak{S}_3 \times \mathfrak{S}_3)$,
+de card.\ 72.
+
+Pour $C$ fixé, l'ens. des couples $(\Delta, b)$ est de cardinal
+\add{$120 \cdot 6 =$} 720, donc pour $b$ \add{$= \mathbb{F}'$} fixé, l'ens.
+des $\Delta$ correspondants est de cardinal
+$10 = \binom{6}{3} \frac{1}{2}$ = \add{cardinal de l'ens.} des partitions
+\add{$\lbrace \mathbb{F}'_1, \mathbb{F}'_2 \rbrace$} de $\mathbb{F}'$ en
+deux parties à 3 éléments. Or, pour une telle partition, on déduit un
+bitriangle orthogonal à $b$, en prenant \add{l'ens.} des
+$(\xi_{ij})_{i \in \mathbb{F}'_1,\ j \in \mathbb{F}'_2}$, correspondant à
+l'un \add{$T$} des 6 triangles
+\add{$t_{\sigma} = (\xi_{i \sigma i})_{i \in \mathbb{F}'_1}$}, où
+$\sigma \in \operatorname{Isom}(\mathbb{F}'_1, \mathbb{F}'_2)$.
+\struck{Ainsi} \ill{} =
+\note{« pour $b$ \add{$= \mathbb{F}'$} fixé » : l'insertion au-dessus de
+« fixé » est lue ainsi ; les lettres $\mathbb{F}'_1, \mathbb{F}'_2$ sont
+des $T$ ou des F à double barre d'une lecture incertaine}
+
+\uncertain{Longtemps}, on tombe sur une \emph{autodualité} dans la
+catégorie des ens.\ de cardinal 6 munis d'une partition de type
+$(3, 3)$ \ldots
+\note{ce dernier alinéa est marqué d'un double trait vertical, terminé
+par une flèche vers le bas, dans la marge gauche ; le reste de la page
+est vierge}
+
+\page{39}
+\note{en tête, entouré : « 32 » (sa pagination)}
+
+Considérons les 6 \struck{racines, et} \add{bases} orth.\ à un bitriangle
+$(u, v, w,\ u' = \alpha_1,\ v' = \beta_1,\ w' = \gamma_1,\ u'' = \alpha'_1,\ v'' = \beta'_1,\ w'' = \gamma'_1)$
+\struck{\ill{}} avec les notations des p.~9, 10. On trouve les bases
+\struck{\ill{}}
+\[
+b = (\alpha_1, \alpha'_2, \beta_1, \beta'_2, \gamma_1, \gamma'_2)
+\]
+et celles qui s'en déduisent par les \add{6} permutations de
+$\lbrace 1, 2, 3 \rbrace$. La base duale à la \uncertain{précédente}
+$\to b' = (\alpha_2, \alpha'_1, \beta_2, \beta'_1, \gamma_2, \gamma'_1)$,
+la racine correspondante à $b$ est
+\[
+\alpha_2 - \alpha_1 = \alpha'_1 - \alpha'_2 = \beta_2 - \beta_1 = \beta'_1 - \beta'_2 = \gamma_2 - \gamma_1 = \gamma'_1 - \gamma'_2 ,
+\]
+on trouve donc les 6 racines de la forme $\alpha_i - \alpha_j$
+($i \neq j$, $1 \leq i, j \leq 3$). Elles forment évidemment un
+\emph{syst.} de racines de type $A_2$.
+\note{les indices des six lettres de la première ligne se lisent 1 ou 4 ;
+la suite de la page (indices 1, 2, 3) fait lire 1. « p.~9, 10 » : sa
+pagination. Un trait horizontal et un trait ondulé séparent ce qui suit}
+
+\uncertain{Expliciter} a) les positions relatives d'un bitriangle
+$\Delta$ et d'un triangle $t$. \uncertain{Il y en a} trois
+\[
+\begin{cases}
+t \subset \Delta & \text{i.e. card}(t \cap \Delta) = 3 \\
+\operatorname{card}(t \cap \Delta) = 1 & \\
+t \cap \Delta = \emptyset & \text{i.e. card}(t \cap \Delta) = 0
+\end{cases}
+\qquad
+\begin{array}{r}
+6 \\ 3 \cdot 9 \\ 12 \\ \hline 45
+\end{array}
+\]
+\note{la colonne de droite (le décompte $6 + 27 + 12 = 45$ des
+triangles) est séparée par un trait vertical et close par un double
+trait}
+
+b) Les positions relatives d'une base $b$ (\uncertain{il} \ill{}) et
+d'un bitriangle \uncertain{il semble} \add{qu'il y en ait} trois :
+$b$ orthogonale, \struck{\ill{}} \add{\ill{} $\Delta$ \uncertain{mais}}
+$\Delta, b$ \add{\uncertain{orthogonaux}} à au moins un triangle
+\uncertain{exactement} 2 triangles de $\Delta$ (donc il \ill{}
+\ill{} \ill{} dimension est de cardinal 5 \ldots), enfin $b$ \ill{}
+\ill{} \ill{} \ill{} triangle de $\Delta$ \ldots
+\note{les deux dernières lignes, serrées au bas de la feuille, sont d'une
+lecture très partielle}
+
+\marginal{c) Position relative de deux bitriangles ???}
+\note{écrit verticalement dans la marge gauche, en regard de a) et b)}
+
+\end{document}
