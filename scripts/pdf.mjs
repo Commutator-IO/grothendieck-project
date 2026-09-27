@@ -68,8 +68,9 @@ async function main() {
   const only = process.argv.slice(2).filter((a) => !a.startsWith('--'));
   let folders = [];
   try {
+    // preamble/ and figures/ hold what the transcriptions share, not a folder.
     folders = (await readdir(SOURCE, { withFileTypes: true }))
-      .filter((d) => d.isDirectory())
+      .filter((d) => d.isDirectory() && d.name !== 'preamble' && d.name !== 'figures')
       .map((d) => d.name);
   } catch {
     process.stdout.write('No transcripts/ directory yet — nothing to compile.\n');
