@@ -83,6 +83,16 @@ jobs:
       # The gallery of commutative diagrams (/diagrams/): one page per folder,
       # drawn by the reading views' own renderer. Derived and unversioned,
       # like them, so built here after them.
+      # The counts and maps the site reads from src/content/*.json, recomputed
+      # from this checkout's transcriptions so that a new folder shows up on
+      # The hand, the Index and the Maps without a separate commit: the hand
+      # (words read, unread, struck), the subject and citation maps, and the
+      # index of people, works and subjects. Each takes under a second.
+      - name: Derived data from the transcriptions
+        run: |
+          npm run hand
+          npm run fonds-maps
+          npm run fonds-index
       - name: Gallery of diagrams
         run: node scripts/diagrams.mjs
       - name: Gallery of formulas
