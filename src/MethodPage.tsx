@@ -329,8 +329,8 @@ export function MethodPage() {
 
           <P id="article-rhm" className="prose-fonds mt-6">
             <em>
-              Dater, reprendre, déplacer. Ce que les notes de travail d'Alexandre Grothendieck
-              donnent à voir d'une pratique mathématique (fonds de Montpellier, 1949–1991)
+              Dater, reprendre, déplacer. Les notes de travail d'Alexandre Grothendieck et une
+              pratique mathématique (fonds de Montpellier, 1949–1991)
             </em>{' '}
             — a second paper, in French, prepared for the{' '}
             <a
