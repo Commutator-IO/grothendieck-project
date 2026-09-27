@@ -224,6 +224,46 @@ export function MethodPage() {
               times — the mathematics is transcribed and the surrounding prose is summarised, with
               the omission marked. The reverse is easy to produce and worthless.
             </P>
+            <H3 id="checked-on-the-facsimile">Checked on the facsimile, one reading at a time</H3>
+            <P id="checked-readings">
+              A person now reads some pages against Montpellier's facsimile, with the transcription
+              beside it: dates, a doubtful word, whose hand a margin is in, who a letter is from. Each
+              reading settled that way is corrected at its source and carries a note saying who
+              checked it and when («&nbsp;Vérifié sur le fac-similé par…&nbsp;»); the registers of
+              dates and letters follow. It is a check of a reading, not of a batch: a batch is
+              declared <em>checked</em> only when every page of it has been compared, and none has
+              yet. The list of what can be settled this way, by a reader of the hand rather than of
+              the mathematics, is 
+              <a href="https://github.com/Commutator-IO/grothendieck-project/issues/35" className="font-medium text-brand-600 underline decoration-brand-200 underline-offset-2 hover:text-brand-700">
+                issue #35
+              </a>
+              . The first sessions moved dates the articles rely on — folder 154's winter of
+              pseudo-lines runs to 2 February 1984, not 7 January — which is the point of doing it.
+            </P>
+            <H3 id="proved-in-lean">Proved, where the mathematics allows</H3>
+            <P id="proved-in-lean-what">
+              Where a modernised reading states something crisp in commutative algebra, finite
+              combinatorics, elementary category theory or homotopical algebra, the statement is
+              proved in the Lean proof assistant against mathlib, as the reading gives it, with no
+              hypothesis added: eighteen folders so far, every theorem checked by the kernel on
+              each change and resting on Lean's standard axioms only. A proof checks the reading's
+              mathematics, never its fidelity to the page. It has found what it is for — a gloss
+              that was false (158), a hypothesis a reading had dropped (114), and once a statement
+              false on the page itself (19, a necessity in Théorème 1.12) — and it has found many
+              hypotheses that are not needed. The statements with their proofs written out are in 
+              <a href="/article/grothendieck-lean.pdf" className="font-medium text-brand-600 underline decoration-brand-200 underline-offset-2 hover:text-brand-700">
+                an appendix
+              </a> 
+              (in French), each folder a card on 
+              <a href="/findings/#lean" className="font-medium text-brand-600 underline decoration-brand-200 underline-offset-2 hover:text-brand-700">
+                Findings
+              </a>
+              , the Lean files in 
+              <a href="https://github.com/Commutator-IO/grothendieck-project/tree/main/lean" className="font-medium text-brand-600 underline decoration-brand-200 underline-offset-2 hover:text-brand-700">
+                lean/
+              </a>
+              .
+            </P>
           </div>
         </div>
 
@@ -255,7 +295,8 @@ export function MethodPage() {
             <LI id="not-claimed-authoritative">
               <strong>No transcription is authoritative.</strong> A machine pass over
               seventy-year-old handwriting produces a reading, checkable against the facsimile on
-              the same screen. That is its whole value; it is not an edition.
+              the same screen. That is its whole value; it is not an edition. The few readings a
+              person has checked say so where they stand, and no batch is yet checked whole.
             </LI>
             <LI id="not-claimed-whole-fonds">
               <strong>About 10,000 pages of the fonds are not here at all.</strong> Third-party
@@ -274,7 +315,7 @@ export function MethodPage() {
             reading, and the TEI is the file the journal is sent, encoded
             against the journal's own schema and validated on every build. */}
         <section className="mt-14 max-w-[52em]">
-          <H2 id="article">The article</H2>
+          <H2 id="article">The articles</H2>
           <P id="article-what" className="prose-fonds mt-3">
             <em>
               A Machine Reads Grothendieck's Working Notes: Transcribing and Encoding Mathematical
@@ -342,8 +383,9 @@ export function MethodPage() {
               Revue d'histoire des mathématiques
             </a>
             . Not about the method but about what the notes show: how the fonds came to be dated,
-            how he wrote, and what recurs and what stops across thirty years. Its quotations have
-            not yet been checked against the facsimile, and it says so.
+            how he wrote, and what recurs and what stops across thirty years. Several readings it
+            depends on have been checked against the facsimile; the rest are the machine's, and
+            an annex lists what remains to check.
           </P>
           <p className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-2 text-[13px]">
             <a
@@ -354,6 +396,25 @@ export function MethodPage() {
             </a>
             <span className="text-ink-400">
               built from <code className="text-[12px]">docs/rhm/article.tex</code>
+            </span>
+          </p>
+
+          <P id="article-lean" className="prose-fonds mt-6">
+            <em>Annexe. Énoncés des lectures modernisées démontrés</em> — its appendix, in French:
+            for each of the eighteen folders proved in Lean, the leaf in context, the statement as
+            the reading gives it, a proof written out for a mathematician, remarks, and what is not
+            proved; the parts follow the themes of the fonds in chronological order.
+          </P>
+          <p className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-2 text-[13px]">
+            <a
+              href="/article/grothendieck-lean.pdf"
+              className="rounded-full border border-ink-200 px-3 py-1 text-ink-700 transition hover:border-brand-400 hover:text-brand-700"
+            >
+              PDF
+            </a>
+            <span className="text-ink-400">
+              built from <code className="text-[12px]">docs/lean/article.tex</code>; the proofs in{' '}
+              <code className="text-[12px]">lean/</code>
             </span>
           </p>
         </section>
