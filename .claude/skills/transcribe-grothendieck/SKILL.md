@@ -294,7 +294,7 @@ In priority order:
 | `\supplied{s}` | **ours**: a missing letter, a clipped word-end, an implied word the page does not carry |
 | `\struck{word}` | struck out by Grothendieck |
 | `\note{…}` | the transcriber's note — **about the mathematics**, not about the paper |
-| `\drawing{…}` | a drawing **of his**, described rather than redrawn (a sketch, a figure, a page of pictures). A diagram that can be set in `tikz-cd` is set there instead |
+| `\drawing{…}` | a drawing **of his**, described rather than redrawn (a sketch, a figure, a page of pictures). A diagram that can be set in `tikz-cd` is set there instead; a figure that matters to the argument and is not an arrow graph (arcs, faces, pseudo-lines) may be redrawn as a `tikzpicture`, preceded by a `\note{}` saying what the redrawing keeps and drops, then compiled with `npm run tikz` (colours and libraries: `transcripts/preamble/tikz-setup.tex`) |
 | `\marginal{…}` | a marginal note **of his**, distinct from the body |
 
 `\note{}` and `\marginal{}` are not interchangeable: the first is ours, the

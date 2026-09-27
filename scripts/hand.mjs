@@ -85,7 +85,7 @@ function strip(s, name) {
   return out + s.slice(at);
 }
 
-const MATH_ENVS = ['tikzcd', 'array', 'cases', 'aligned', 'align\\*?', 'equation\\*?', 'gather\\*?', '[pbvB]?matrix', 'smallmatrix'];
+const MATH_ENVS = ['tikzcd', 'tikzpicture', 'array', 'cases', 'aligned', 'align\\*?', 'equation\\*?', 'gather\\*?', '[pbvB]?matrix', 'smallmatrix'];
 function mathless(s) {
   let t = s;
   for (const e of MATH_ENVS) t = t.replace(new RegExp(`\\\\begin\\{(${e})\\}[\\s\\S]*?\\\\end\\{\\1\\}`, 'g'), ' ');
@@ -143,7 +143,9 @@ for (const d of readdirSync(T, { withFileTypes: true })) {
       marginal: count('marginal'),
       diagrams: (his.match(/\\begin\{tikzcd\}/g) ?? []).length,
       // \drawing{} since 2026-09-27; older drawings are still notes that say so.
-      drawings: drawn + notes.filter((n) => FIGURE.test(n)).length,
+      // A drawing redrawn in TikZ is still one of his drawings.
+      drawings: drawn + notes.filter((n) => FIGURE.test(n)).length +
+        (his.match(/\\begin\{tikzpicture\}/g) ?? []).length,
       math: Number((mathChars / Math.max(1, his.length)).toFixed(3)),
       lang,
     });

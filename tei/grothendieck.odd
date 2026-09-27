@@ -86,7 +86,9 @@
         </list>
         <p>Mathematics is carried as TeX, untouched, in <gi>formula</gi>, and
            commutative diagrams as tikz-cd source in a <gi>formula</gi> inside a
-           <gi>figure</gi>. An apparatus mark inside a formula (an illegible
+           <gi>figure</gi>. A drawing redrawn in TikZ is a <gi>figure</gi> too,
+           holding its TikZ source and, in <gi>graphic</gi>, the SVG compiled
+           from it. An apparatus mark inside a formula (an illegible
            exponent, a struck symbol) stays inside the TeX, under the same
            macros, where both the PDF and the reading view typeset it.</p>
       </div>
@@ -108,7 +110,7 @@
           <!-- The reading: text, lists, headings, page breaks, and the
                apparatus. -->
           <moduleRef key="core"
-                     include="add author bibl date del gap head hi item label list name note p pb
+                     include="add author bibl date del gap graphic head hi item label list name note p pb
                               pubPlace publisher quote ref resp respStmt title unclear"/>
 
           <!-- Provenance: which model read the pages and when, every revision
@@ -170,7 +172,14 @@
                   <valItem ident="diagram">
                     <desc>A commutative diagram, carried as tikz-cd source in
                        the <gi>formula</gi> it contains. The only figure the
-                       export has: the transcription reproduces no drawing.</desc>
+                       export's figures but one.</desc>
+                  </valItem>
+                  <valItem ident="picture">
+                    <desc>One of his drawings redrawn in TikZ: the
+                       <gi>formula</gi> holds the source, the <gi>graphic</gi>
+                       the SVG compiled from it. Every other drawing is
+                       described in a <gi>note</gi> of type
+                       <val>drawing</val>.</desc>
                   </valItem>
                 </valList>
               </attDef>
@@ -187,6 +196,10 @@
                   </valItem>
                   <valItem ident="tikz-cd">
                     <desc>A <code>tikzcd</code> environment, whole.</desc>
+                  </valItem>
+                  <valItem ident="TikZ">
+                    <desc>A <code>tikzpicture</code> environment, whole, under
+                       the repository's <code>tikz-setup.tex</code>.</desc>
                   </valItem>
                 </valList>
               </attDef>

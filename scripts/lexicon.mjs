@@ -150,6 +150,8 @@ function unwrapMacro(text, name) {
 function splitMath(text) {
   const math = [];
   const prose = text
+    // A picture is our redrawing, in TikZ's commands, not his notation.
+    .replace(/\\begin\{tikzpicture\}[\s\S]*?\\end\{tikzpicture\}/g, ' ')
     .replace(/\\begin\{(equation|align|gather|cases|array|tikzcd|[bpvBV]?matrix)\*?\}[\s\S]*?\\end\{\1\*?\}/g,
       (m) => (math.push(m), ' '))
     .replace(/\\\[[\s\S]*?\\\]/g, (m) => (math.push(m), ' '))

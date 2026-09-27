@@ -24,8 +24,10 @@
  */
 
 import { copyFile, mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
+import { copyFileSync, existsSync, mkdirSync, readFileSync } from 'node:fs';
 import { resolve, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { FIGURES, pictureHash } from './tikz.mjs';
 
 const ROOT = resolve(import.meta.dirname, '..');
 const SOURCE = resolve(ROOT, 'transcripts');
@@ -130,8 +132,9 @@ function liftMath(tex) {
     return marker(held.length - 1);
   };
   const out = tex
-    // tikz-cd first: a commutative diagram contains &, \\ and $-free math that
-    // every later pass would mangle.
+    // Pictures and tikz-cd first: both hold $, &, \\ and braces that every
+    // later pass would mangle.
+    .replace(/\\begin\{tikzpicture\}[\s\S]*?\\end\{tikzpicture\}/g, (m) => keep(m, 'picture'))
     .replace(/\\begin\{tikzcd\}[\s\S]*?\\end\{tikzcd\}/g, (m) => keep(m, 'diagram'))
     .replace(/\\begin\{(equation\*?|align\*?|gather\*?|cases|matrix|pmatrix|bmatrix|array)\}[\s\S]*?\\end\{\1\}/g,
       (m) => keep(m, true))
@@ -199,6 +202,7 @@ function dropMathBack(html, held) {
   return html.replace(MARKED(), (_, i) => {
     const { raw, display } = held[Number(i)];
     if (display === 'diagram') return renderDiagram(raw);
+    if (display === 'picture') return renderPicture(raw);
     // KaTeX's auto-render walks text nodes looking for delimiters, so the
     // delimiters go back in rather than being replaced by markup.
     const body = escapeHtml(expand(raw));
@@ -373,6 +377,37 @@ function cdGap(opts, key, base) {
     );
   }
   return (base * (f ?? 1)).toFixed(2);
+}
+
+/**
+ * A figure redrawn in TikZ: the SVG `npm run tikz` compiled from it, and the
+ * source folded underneath, as for a diagram.
+ *
+ * The browser cannot draw TikZ, so the SVG is looked up by the hash of the
+ * source, in `transcripts/figures/`. None means the picture was written or
+ * changed since the last `npm run tikz`, and the render stops rather than show
+ * a stale figure or none. The SVG is copied beside the reading views, which
+ * all sit one folder down, hence the relative path.
+ *
+ * Its width is TeX's, in points, scaled so that the labels' 10pt Computer
+ * Modern comes out near the size of the text around it.
+ */
+export function renderPicture(raw) {
+  const hash = pictureHash(raw);
+  const svg = resolve(FIGURES, `${hash}.svg`);
+  if (!existsSync(svg)) {
+    throw new Error(`no SVG for the tikzpicture ${hash} — run \`npm run tikz\` (it needs tectonic)`);
+  }
+  mkdirSync(resolve(OUT, 'figures'), { recursive: true });
+  copyFileSync(svg, resolve(OUT, 'figures', `${hash}.svg`));
+  const pt = Number(/<svg[^>]*\swidth="([\d.]+)(?:pt)?"/.exec(readFileSync(svg, 'utf8'))?.[1] ?? 0);
+  const width = pt ? ` style="width:${(pt * 1.6).toFixed(0)}px"` : '';
+  return (
+    `<span class="tr-pic" data-picture="${hash}">` +
+    `<img src="../figures/${hash}.svg" alt=""${width}>` +
+    `<details class="tr-cd-src"><summary>LaTeX source</summary><pre>${escapeHtml(raw)}</pre></details>` +
+    `</span>`
+  );
 }
 
 export function renderDiagram(raw) {
@@ -949,6 +984,8 @@ export function readingPage({ meta, lang, name, html, extraStyle = '' }) {
   .tr-cd-label { position: absolute; font-size: .82em; background: #fff;
              padding: 0 .12em; transform: translate(-50%, -50%); white-space: nowrap;
              z-index: 1; }
+  .tr-pic { display: block; margin: 1.4rem 0; }
+  .tr-pic img { display: block; max-width: 100%; height: auto; margin: 0 auto; }
   .tr-cd-src { margin-top: .5rem; }
   .tr-cd-src summary { font-family: var(--sans); font-size: 10px; font-weight: 600;
              line-height: 1.4; letter-spacing: .07em;

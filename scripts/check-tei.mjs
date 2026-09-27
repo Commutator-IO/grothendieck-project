@@ -65,6 +65,7 @@ function textOf(fragment) {
     .replace(/<p class="tei-source">[\s\S]*?<\/p>/g, '')
     .replace(/<span class="tr-cd" data-cols="(\d+)" data-arrows="([^"]*)">/g,
       (_, c, a) => ` ⟦diagram ${c} cols ${a}⟧ `)
+    .replace(/<span class="tr-pic" data-picture="([0-9a-f]+)">/g, (_, h) => ` ⟦picture ${h}⟧ `)
     .replace(/<span class="tr-cd-node" data-r="(\d+)" data-c="(\d+)" data-tex="([^"]*)">/g,
       (_, r, c, tex) => ` ⟦${r},${c}: ${tex}⟧ `)
     .replace(/<br>/g, ' ')
@@ -218,6 +219,7 @@ async function sourceGaps(folder, file) {
   const prose = body
     .replace(/(?<!\\)%.*$/gm, '')
     .replace(/\\begin\{tikzcd\}[\s\S]*?\\end\{tikzcd\}/g, '')
+    .replace(/\\begin\{tikzpicture\}[\s\S]*?\\end\{tikzpicture\}/g, '')
     .replace(/\\\[[\s\S]*?\\\]|\\\([\s\S]*?\\\)|(?<!\\)\$(?:[^$\\]|\\.)+\$/g, '');
   const gaps = [];
   for (const [re, what] of [

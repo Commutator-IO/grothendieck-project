@@ -37,7 +37,7 @@
 import { readdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { EDITION_LABELS, escapeHtml, readingPage, renderDiagram } from './render.mjs';
+import { EDITION_LABELS, escapeHtml, readingPage, renderDiagram, renderPicture } from './render.mjs';
 
 const ROOT = resolve(import.meta.dirname, '..');
 const OUT = resolve(ROOT, 'public', 'transcripts');
@@ -202,6 +202,10 @@ function inlineNode(n, where) {
     }
     case 'figure': {
       const f = n.children.filter((c) => !blank(c));
+      if (n.attrs.type === 'picture' && f.length === 2 && f[0].name === 'graphic' &&
+          f[1].name === 'formula' && f[1].attrs.notation === 'TikZ') {
+        return renderPicture(textOf(f[1]));
+      }
       if (n.attrs.type !== 'diagram' || f.length !== 1 || f[0].name !== 'formula' ||
           f[0].attrs.notation !== 'tikz-cd') {
         throw unexpected(n, where);

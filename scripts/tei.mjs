@@ -29,6 +29,7 @@
  *   \marginal{x}       <note type="authorial" place="margin">x</note>
  *   $…$  \[…\]  envs   <formula notation="TeX">…</formula>, display marked
  *   tikzcd             <figure type="diagram"><formula notation="tikz-cd">
+ *   tikzpicture        <figure type="picture"><graphic/><formula notation="TikZ">
  *
  * The transcription chose not to be a diplomatic edition, and the export
  * holds that line: it encodes what the macros encode and nothing about the
@@ -56,6 +57,7 @@ import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 import { resolve, basename } from 'node:path';
 import { ODD_URL, RNG_URL } from './tei-validate.mjs';
+import { pictureHash } from './tikz.mjs';
 
 const exec = promisify(execFile);
 
@@ -117,6 +119,7 @@ function liftMath(tex) {
     return marker(held.length - 1);
   };
   const out = tex
+    .replace(/\\begin\{tikzpicture\}[\s\S]*?\\end\{tikzpicture\}/g, (m) => keep(m, 'picture'))
     .replace(/\\begin\{tikzcd\}[\s\S]*?\\end\{tikzcd\}/g, (m) => keep(m, 'diagram'))
     .replace(
       /\\begin\{(equation\*?|align\*?|gather\*?|cases|matrix|pmatrix|bmatrix|array|aligned)\}[\s\S]*?\\end\{\1\}/g,
@@ -138,6 +141,11 @@ function dropMathBack(xml, held) {
     const body = escapeXml(expand(raw).trim());
     if (display === 'diagram') {
       return `<figure type="diagram"><formula notation="tikz-cd">${body}</formula></figure>`;
+    }
+    if (display === 'picture') {
+      // The SVG sits beside the reading views, one folder up from this file.
+      return `<figure type="picture"><graphic url="../figures/${pictureHash(raw)}.svg" mimeType="image/svg+xml"/>` +
+        `<formula notation="TikZ">${body}</formula></figure>`;
     }
     return display
       ? `<formula notation="TeX" rend="display">${body}</formula>`
