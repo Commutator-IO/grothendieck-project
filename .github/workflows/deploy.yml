@@ -91,7 +91,7 @@ jobs:
       # directions. Any failure fails the deploy. The step also writes the
       # derived schema and the ODD to public/tei/, which is where every
       # exported file's <?xml-model?> points. Java is on the runner already.
-      - uses: actions/cache@v4
+      - uses: actions/cache@v6
         with:
           path: node_modules/.cache/tei
           key: tei-schema-${{ hashFiles('scripts/tei-validate.mjs', 'tei/grothendieck.odd') }}
@@ -155,7 +155,7 @@ jobs:
           sudo mv tectonic /usr/local/bin/
           tectonic --version
 
-      - uses: actions/cache@v4
+      - uses: actions/cache@v6
         with:
           path: ~/.cache/Tectonic
           key: tectonic-${{ runner.os }}-v1
@@ -179,7 +179,7 @@ jobs:
         run: sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils imagemagick
       # The Java tools the article step fetches from Maven Central, kept
       # between runs; the jTEI schema itself is committed (docs/study/schema).
-      - uses: actions/cache@v4
+      - uses: actions/cache@v6
         with:
           path: node_modules/.cache/jtei
           key: jtei-tools-${{ hashFiles('docs/study/tei.mjs') }}
