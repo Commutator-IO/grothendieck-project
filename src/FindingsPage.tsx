@@ -477,6 +477,13 @@ function Pager({
  */
 function ProvedInLean() {
   const link = 'text-brand-700 underline decoration-brand-200 underline-offset-2';
+  // Ten cards at a time, as the list below: eighteen folders already.
+  const [page, setPage] = useState(0);
+  const shown = PROOFS.slice(page * PAGE, (page + 1) * PAGE);
+  const turn = (p: number) => {
+    setPage(p);
+    document.getElementById('lean')?.scrollIntoView({ block: 'start' });
+  };
   return (
     <section id="lean" className="mt-10 scroll-mt-16">
       <h2 className="text-[11px] font-bold uppercase tracking-[0.12em] text-ink-400">Proved in Lean</h2>
@@ -496,7 +503,7 @@ function ProvedInLean() {
         , checked on every change.
       </p>
       <div className="mt-4 space-y-3">
-        {PROOFS.map((p) => (
+        {shown.map((p) => (
           <article key={p.lean} className="card px-4 py-3">
             <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
               <a href={`/#${p.folder}/${p.batch}/p${p.page}`} className="text-[14px] font-semibold text-ink-900 hover:text-brand-700">
@@ -521,6 +528,7 @@ function ProvedInLean() {
           </article>
         ))}
       </div>
+      <Pager page={page} count={PROOFS.length} onPage={turn} />
     </section>
   );
 }
