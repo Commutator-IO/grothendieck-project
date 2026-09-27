@@ -43,7 +43,10 @@ const readScript = (s: string, at: number): { body: string; next: number } | nul
 
   // Bare single character. Not a run of them: `X_ij` means `X` sub `i` then a
   // literal `j` in TeX, and silently widening that would change the notation.
-  return { body: s[open], next: open + 1 };
+  // A character, not a UTF-16 unit: `A_𝔭` has a fraktur p outside the BMP,
+  // two units long, and cutting it in half printed two replacement glyphs.
+  const ch = String.fromCodePoint(s.codePointAt(open)!);
+  return { body: ch, next: open + ch.length };
 };
 
 export function notation(text: string): ReactNode {
