@@ -984,8 +984,10 @@ export function readingPage({ meta, lang, name, html, extraStyle = '' }) {
   .tr-cd-label { position: absolute; font-size: .82em; background: #fff;
              padding: 0 .12em; transform: translate(-50%, -50%); white-space: nowrap;
              z-index: 1; }
-  .tr-pic { display: block; margin: 1.4rem 0; }
-  .tr-pic img { display: block; max-width: 100%; height: auto; margin: 0 auto; }
+  /* A redrawn figure scrolls on a narrow screen, as a diagram does, rather than
+     shrinking its labels below reading size. */
+  .tr-pic { display: block; margin: 1.4rem 0; overflow-x: auto; }
+  .tr-pic img { display: block; max-width: none; height: auto; margin: 0 auto; }
   .tr-cd-src { margin-top: .5rem; }
   .tr-cd-src summary { font-family: var(--sans); font-size: 10px; font-weight: 600;
              line-height: 1.4; letter-spacing: .07em;
