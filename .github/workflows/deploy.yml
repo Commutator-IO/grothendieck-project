@@ -8,6 +8,11 @@ on:
   pull_request:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      render_transcripts:
+        description: Render the transcriptions to HTML, TEI and PDF (unticked, the site ships without them)
+        type: boolean
+        default: true
 
 # Token required to deploy to Pages.
 permissions:
@@ -24,6 +29,19 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
+    # The switch for #31: whether the transcriptions are rendered into the
+    # site at all. Off, nothing turns transcripts/*.tex into a reading view, a
+    # TEI file, a PDF or a gallery page, so the deployed site carries none of
+    # their text; the facsimile pane, the catalogue and the rest are
+    # unchanged, and the manifest simply lists no transcript. It deletes
+    # nothing and rewrites no history: the .tex stay in the repository, and
+    # switching back on restores the site at the next deploy.
+    #
+    # Off when the repository variable RENDER_TRANSCRIPTS is `false`
+    # (`gh variable set RENDER_TRANSCRIPTS --body false`, then re-run or push),
+    # or for one manual run by unticking the box. Unset, it is on.
+    env:
+      RENDER_TRANSCRIPTS: ${{ (vars.RENDER_TRANSCRIPTS == 'false' || (github.event_name == 'workflow_dispatch' && !inputs.render_transcripts)) && 'false' || 'true' }}
     steps:
       - uses: actions/checkout@v7
 
@@ -42,6 +60,10 @@ jobs:
       - name: Lint
         run: npm run lint
 
+      - name: Transcriptions switched off
+        if: env.RENDER_TRANSCRIPTS != 'true'
+        run: echo "::notice::RENDER_TRANSCRIPTS is off — no reading view, TEI, PDF or gallery is built from transcripts/"
+
       # The reading views are derived from transcripts/*.tex and are not
       # versioned either. Rendering here rather than committing HTML keeps the
       # .tex the single source of record — a committed reading view would drift
@@ -51,6 +73,7 @@ jobs:
       # step. It used to print a warning and exit 0, so a refused batch simply
       # vanished from the site with a green build.
       - name: Render transcripts
+        if: env.RENDER_TRANSCRIPTS == 'true'
         run: npm run render
 
       # The TEI export is derived from the same .tex, for the same reason: a
@@ -58,6 +81,7 @@ jobs:
       # on a construct it refuses — an unknown environment, a control sequence
       # it would otherwise leave as text, a header line it cannot read.
       - name: Export TEI
+        if: env.RENDER_TRANSCRIPTS == 'true'
         run: npm run tei
 
       # Well-formed is not valid. Every exported file is validated with jing
@@ -73,11 +97,13 @@ jobs:
           key: tei-schema-${{ hashFiles('scripts/tei-validate.mjs', 'tei/grothendieck.odd') }}
           restore-keys: tei-schema-
       - name: Validate the TEI
+        if: env.RENDER_TRANSCRIPTS == 'true'
         run: npm run tei:validate
 
       # The TEI button opens a reading view rendered from that XML, not the
       # raw file. It fails the deploy rather than ship a button that 404s.
       - name: Render TEI reading views
+        if: env.RENDER_TRANSCRIPTS == 'true'
         run: npm run tei-view
 
       # The gallery of commutative diagrams (/diagrams/): one page per folder,
@@ -94,8 +120,10 @@ jobs:
           npm run fonds-maps
           npm run fonds-index
       - name: Gallery of diagrams
+        if: env.RENDER_TRANSCRIPTS == 'true'
         run: node scripts/diagrams.mjs
       - name: Gallery of formulas
+        if: env.RENDER_TRANSCRIPTS == 'true'
         run: node scripts/formulas.mjs
 
       # The two reading views must say the same thing: page by page, the text
@@ -104,6 +132,7 @@ jobs:
       # difference fails the deploy, since it means the export lost or added
       # something a reader sees.
       - name: Check the TEI view against the .tex view
+        if: env.RENDER_TRANSCRIPTS == 'true'
         run: npm run check-tei
 
       # The download PDFs are *built*, not stored.
@@ -120,12 +149,14 @@ jobs:
       # gigabytes. Its package cache is keyed on the lockfile-free bundle URL,
       # hence the explicit cache key.
       - name: Install tectonic
+        if: env.RENDER_TRANSCRIPTS == 'true'
         run: |
           curl -fsSL https://drop-sh.fullyjustified.net | sh
           sudo mv tectonic /usr/local/bin/
           tectonic --version
 
       - uses: actions/cache@v4
+        if: env.RENDER_TRANSCRIPTS == 'true'
         with:
           path: ~/.cache/Tectonic
           key: tectonic-${{ runner.os }}-v1
@@ -134,6 +165,7 @@ jobs:
       # the site is still worth publishing with one PDF missing, and the
       # manifest simply will not list that edition.
       - name: Compile transcript PDFs
+        if: env.RENDER_TRANSCRIPTS == 'true'
         run: npm run pdf || true
 
       # The jTEI article the site serves from /method/: the PDF to read, and
