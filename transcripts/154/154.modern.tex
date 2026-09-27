@@ -372,8 +372,9 @@ du déploiement sont écrits deux fois, pour une surface fermée (page 43) et po
 une surface à bord (page 170) ; et le choix du recollement de deux disques est
 fait une première fois aux pages 37-38, puis refait entièrement aux pages 64 à
 70, où Grothendieck constate qu'il s'était trompé. La moitié des feuillets, à
-partir de la page 80 surtout, sont des dessins en couleur ; ils ne sont pas
-redessinés ici, et chaque section dit en note ce qu'ils montrent.
+partir de la page 80 surtout, sont des dessins en couleur ; chaque section dit
+en note ce qu'ils montrent, et seuls les graphes de flèches des pages 16, 138 et
+156 sont recomposés en diagrammes.
 
 \subsection*{Ce qui est annoncé et ne l'est pas}
 
@@ -656,7 +657,23 @@ sous-stable, exactement deux arrivent ; autour d'un sommet critique, au moins
 quatre arrivent ; et autour des sommets que la page appelle « critiques
 extérieurs », toutes arrivent.\footnote{Ce sont vraisemblablement les positions
 supercritiques, dont toutes les transitions sont des générisations (page 17) ;
-la page ne le dit pas.}
+la page ne le dit pas.} La page dessine en regard une étoile pour chaque type ;
+les flèches épaisses, qui arrivent, sont rendues par $\Rightarrow$.\footnote{Recomposé
+d'après le fac-similé (27 septembre 2026). Le sommet stable est dessiné deux
+fois, avec quatre puis trois flèches sortantes, reliées par $\simeq$ ; nous ne
+reproduisons que la première. L'étoile du sommet critique est celle d'un sommet
+critique quelconque, vers laquelle revient sur la page une flèche courbe.}
+
+\begin{tikzcd}[column sep=small, row sep=small]
+ & \cdot &  & &  & \cdot & \cdot \arrow[dl, Rightarrow] \\
+ & D \arrow[u] \arrow[r] \arrow[dl] \arrow[d] & \cdot & &  & D \arrow[u] \arrow[dr] &  \\
+\cdot & \cdot &  & & \cdot \arrow[ur, Rightarrow] & & \cdot \\
+ & \text{stable} &  & &  & \text{sous-stable} &  \\
+ & \cdot & \cdot \arrow[dl, Rightarrow] & & \cdot \arrow[dr, Rightarrow] & & \cdot \arrow[dl, Rightarrow] \\
+\cdot \arrow[r, Rightarrow] & D \arrow[u] \arrow[d] \arrow[dr] & \cdot \arrow[l, Rightarrow] & &  & D &  \\
+\cdot \arrow[ur, Rightarrow] & \cdot & \cdot & & \cdot \arrow[ur, Rightarrow] & & \cdot \arrow[ul, Rightarrow] \\
+ & \text{critique} &  & &  & \text{critique extérieur} & 
+\end{tikzcd}
 
 Chaque arête reçoit un \emph{poids}, entier $\geqslant 1$ : le nombre d'arêtes
 de $\operatorname{Pol}(D)$ qu'intercepte l'arc de spécialisation. Chaque secteur
@@ -2209,17 +2226,26 @@ impair ».
 
 \subsection*{Les opérations sur un repère}
 
-La page 156 écrit l'action des involutions sur un repère $(D_0, \beta^{*},
-\omega^{*})$ — une position, une coorientation, une orientation :
-\[
-\sigma : (D_0, \beta^{*}, \omega^{*}) \mapsto (D_0, -\beta^{*}, \omega^{*}),
-\quad
-\sigma_0 : \mapsto (D_0, \beta^{*}, -\omega^{*}),
-\quad
-\sigma_2 : \mapsto (D_0, -\beta^{*}, -\omega^{*}),
-\]
-avec $\rho_s = \sigma_2\sigma_1$, $\rho_f = \sigma_1\sigma_0$ et $\rho_s\rho_f =
-\sigma$ — les relations de la page 31, où $\sigma = \sigma_2\sigma_0$. Les
+La page 156 dessine l'action des involutions sur un repère $(D_0, \beta^{*},
+\omega^{*})$ — une position, une coorientation, une orientation : $\sigma$
+change la coorientation, $\sigma_0$ l'orientation, $\sigma_2$ l'une et l'autre ;
+l'effet de $\sigma_1$, comme les repères d'où partent $\rho_s$ et $\rho_f$, n'est
+donné qu'en dessins.\footnote{Recomposé d'après le fac-similé (27 septembre
+2026). Sur la page, les flèches de $\sigma$, $\sigma_0$ et $\sigma_1$ sont des
+flèches à talon, celle de $\sigma_2$ a une pointe aux deux bouts ; les dessins,
+que le diagramme nomme entre parenthèses, sont chacun une paire de
+configurations réunies par « ou » : le croisement orange, la droite $D_0$ en
+tirets d'un côté ou de l'autre, les triangles $T$, $T_1$.}
+
+\begin{tikzcd}
+ & (D_0, -\beta^{*}, \omega^{*}) & \text{(dessins } \rho_s\text{)} \arrow[ddl, bend right, "\rho_s"'] & \text{(dessins } \rho_f\text{)} \arrow[ddll, "\rho_f"'] \\
+ & & & (D_0, \beta^{*}, -\omega^{*}) \\
+ & (D_0, \beta^{*}, \omega^{*}) \arrow[uu, "\sigma"] \arrow[urr, "\sigma_0"] \arrow[rr, "\sigma_1"] \arrow[drr, leftrightarrow, "\sigma_2"'] & & \text{(dessins } \sigma_1\text{)} \\
+ & & & (D_0, -\beta^{*}, -\omega^{*})
+\end{tikzcd}
+
+La page écrit en haut $\rho_s = \sigma_2\sigma_1$, $\rho_f = \sigma_1\sigma_0$ et
+$\rho_s\rho_f = \sigma$ — les relations de la page 31, où $\sigma = \sigma_2\sigma_0$. Les
 orientations $\alpha$ (le long de la droite), $\beta$ (transverse) et $\omega$
 (rotation) sont dites « associées » quand $\omega = \alpha \wedge \beta$ ; celles
 d'un repère ne le sont pas, $\omega^{*} = -\alpha^{*} \wedge \beta^{*}$. La page
