@@ -1,0 +1,1051 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 64, batch 1 (pages 1-20).
+% Established from the facsimile archives/batches/64/batch-01.pdf (a copy of 64.pdf
+% fetched through the project relay, no cover sheet: PDF page k = archivists' page k),
+% per the skill transcribe-grothendieck. The folder is 156 pages in eight batches;
+% this is the first.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-09-27 — first pass, unchecked against the pages by a human.
+%
+% Read in two parts in the same session: pages 2-13 by the main pass, page 1 and
+% pages 14-20 by a parallel pass on the same model, then merged.
+%
+% Pages skipped: none. Page 1 is a cover in his hand (large roman « I », title
+% « Fourbis combinatoires (ens. à 4 éléments, cubes, octaèdres, modules libres de
+% rang 2 sur Z/4Z) »): no \page{1}, his words become the top heading; his numbered
+% sections 1-3 are therefore set as subsections.
+%
+% His pagination: the even archive pages 4-20 carry his numbers 2-10
+% (p. 4 = 2, p. 6 = 3, ..., p. 20 = 10); p. 2 is his first page, unnumbered.
+%
+% What the batch is about: « Fourbis combinatoires », the combinatorics behind
+% level-2 structures. § 1: a 4-element set I is canonically an affine plane over
+% F_2; V the translations, J = V^*, 1 -> V -> S_I -> S_J -> 1, Sylow subgroups,
+% (Ens_4) -> (Gr) fully faithful, the elements of S_4 named after rotations of
+% the cube, orientation sets omega(I) ~ omega(J). § 2: the combinatorial cube,
+% in five equivalent descriptions ((S, A, R), diagonals D = S/a, codiagonals
+% C = A/a, torsors under Gamma); its automorphism group D of order 8, the
+% subgroups V_S ~ F_2^C, V_A ~ F_2^D, D^+ cyclic of order 4, the relation
+% omega_Q ^ C ^ D ~ 1 and the conventions it depends on, the dual cube;
+% Aut D, cubes as torsors under D_4, a boxed « Formulaire ». § 3 (from p. 19):
+% the 2-subgroups of S_4, begun as a classification of all its subgroups.
+%
+% Notation fixed once for the batch: \mathfrak{S}_I symmetric groups;
+% \mathfrak{D} = Aut Q (fraktur) against D the set of diagonals (roman);
+% \mathbb{D}_4 = Aut(Q_0) for the pinned cube; W = \mathfrak{D}_{ab};
+% \underline{\omega} orientation sets; \underline{a} the antipodism; V^* the
+% nonzero elements of V (his *).
+%
+% \ill{}: 123. \uncertain{}: 55.
+%
+% Points to check against the page: p. 6, x -> Cent_G(x) lands on the cyclic
+% subgroups of order 4 as written; p. 9, D^+_ab vs D_ab; p. 10, the last
+% enumeration reads « B, S, omega_Q » where D, C are meant; p. 15, « D -> D^+ »
+% with a clear +; p. 19, the bottom node of the triangle; p. 20 d), V^* where
+% the count points to V. All transcribed as written, with notes.
+%
+
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{64}
+\batch{1}
+\pages{1}{20}
+\dating{[à partir de 1980- 1982]}
+\watermark{Édition de démonstration}
+\foldertitle{Modules courbes elliptiques en caractéristiques ≠2 : notes manuscrites (s.d.)}
+
+\begin{document}
+
+\section{I. Fourbis combinatoires (ens.\ à 4 éléments, cubes, octaèdres, modules libres de rang 2 sur $\mathbb{Z}/4\mathbb{Z}$).}
+
+\note{titre pris sur la page~1, feuillet par ailleurs blanc qui sert de
+couverture à la suite : il est de la main de l'auteur, en haut à droite,
+sous un grand chiffre romain « I ». À gauche, un « (40) » entre parenthèses,
+d'une écriture plus petite, sans doute un compte de pages ; il n'est pas sûr
+qu'il soit de l'auteur.}
+
+\subsection{1. Ens. à quatre éléments.}
+
+\page{2}
+Un ens. à quatre éléments $I$ est muni canoniquement d'une structure
+d\struck{e torseur sous un \ill{}} \add{d'espace affine} de dimension 2
+sur $\mathbb{F}_2$, i.e. d'un sous-groupe $V \subset \mathfrak{S}_I$,
+isomorphe (non canon\supplied{iquement}!) à $\mathbb{F}_2^2$, tel que l'action
+de $V$ sur $I$ en fasse un torseur. Le sous-groupe $V \subset \mathfrak{S}_I$
+est le seul sous-groupe distingué abélien $\neq \{0\}$, \struck{\ill{}} il est
+son propre \struck{normalisateur} \add{centralisateur} i.e.
+$\mathfrak{S}_I/V$ opère fidèlement sur $V$, en fait on a
+\[
+  \mathfrak{S}_I/V \xrightarrow{\;\sim\;} \operatorname{Aut}_{\mathrm{gr}}(V)
+  = \operatorname{Aut}_{\mathbb{F}_2\text{-vect}}(V)
+  \xrightarrow{\;\sim\;} \mathfrak{S}_J
+\]
+i.e. $J = V^*$, la suite exacte
+\[
+  1 \to V \to \mathfrak{S}_I \to \mathfrak{S}_J \to 1
+\]
+\uncertain{étant} \struck{\uncertain{identique}} \add{\uncertain{identifiée}} à la suite
+\[
+  1 \to \underset{\text{translations}}{V} \to \operatorname{Aut}_{\mathrm{aff}}(I)
+  \to \operatorname{Aut}_{\mathbb{F}_2}(V) \to 1 .
+\]
+\note{la parenthèse fermante après « $\operatorname{Aut}_{\mathrm{gr}}(V)$ »
+et « $\operatorname{Aut}_{\mathbb{F}_2\text{-vect}}(V)$ » est écrite comme
+un « $W)$ » ; la lecture $V$ est celle qu'impose le contexte. Le dernier terme
+est surchargé : un mot biffé, encerclé, puis $\mathfrak{S}_J$.}
+
+Les \add{trois} éléments \struck{\ill{}} de $J = V^*$ correspondent aux trois
+partitions de type $(2,2)$ de $I$ (on peut \add{ainsi} dire que les élts de
+$J$ correspondent aux droites \add{vectorielles} dans $V^*$, qui définissent
+\struck{les} donc des \struck{r}relations d'équivalence dans $I$, vers les
+espaces affines quotients de dim $1$) --- les \struck{\ill{}}classes
+\uncertain{inversement} des \uncertain{l'ensemble} de ces \add{3} relations
+d'équivalence correspondent aux 6 \struck{\uncertain{paires}}
+\add{\uncertain{parties}} \uncertain{à} deux éléments de $I$) ou encore
+\struck{aux} aux 6 droites affines dans l'espace affine $I$, l'application
+\[
+  \begin{aligned}
+    \mathfrak{P}_2(I) &\longrightarrow \mathfrak{P}_{2,2}(I) \\
+    A &\longmapsto \{A, I \setminus A\}
+  \end{aligned}
+\]
+\marginal{\uncertain{ou aussi aux trois} translations \ill{} sans pts fixes}
+\note{la note marginale, écrite de biais dans la marge gauche, se rattache à
+« les éléments de $J$ correspondent aux trois partitions de type $(2,2)$ ».
+La phrase du corps, depuis « --- les classes », est d'une lecture peu sûre ;
+le sens mathématique en est clair (les six parties à deux éléments de $I$,
+ou ses six droites affines, s'envoient deux à deux sur les trois partitions
+de type $(2,2)$).}
+
+\page{3}
+s'identifiant à l'application qui associe à une droite affine de $I$ sa
+\emph{direction}, qui est une droite de l'espace des translations $V$. La
+fibre d'un \struck{\ill{}} $i \in \mathfrak{P}_{2,2}(I)$, i.e. l'un des
+\struck{\ill{}} deux classes \add{de cette partition}, est dans l'espace
+quotient $I/(D_i = \{0, \ldots\})$.\note{le second élément de $D_i$ est surchargé et n'est pas lu.}
+
+Le foncteur « oubli de la structure » qui va de la catégorie des espaces
+affines de dim $2$ sur $\mathbb{F}_2$, vers la cat. des ensembles à quatre
+éléments
+\[
+  \mathrm{Aff}_2(\mathbb{F}_2) \xrightarrow{\;\approx\;} (\mathrm{Ens}_4)
+\]
+est une équivalence de catégories --- et \struck{\ill{}}
+\add{i.e., si on définit la notion d'espace affine sur $\mathbb{F}_2$ par la
+donnée d'une structure \struck{\ill{}} sur un $I$ \struck{tel} seul (donnée
+d'un sous-groupe de $\mathfrak{S}_I$ par ex.)} Je dis que le foncteur
+\[
+  \begin{aligned}
+    (\mathrm{Ens}_4) &\longrightarrow (\mathrm{Gr}) \\
+    I &\longmapsto \mathfrak{S}_I
+  \end{aligned}
+\]
+est pleinement fidèle, on en conclut que pour $\forall\, I$,
+$\mathfrak{S}_I$ est un centre trivial et tout automorphisme de
+$\mathfrak{S}_I$ est intérieur. \struck{Pourrais} \add{(\uncertain{il}}
+suffirait bien sûr de l'énoncer pour $\mathfrak{S}_4$ ?). On va définir pour
+ceci un foncteur \ill{}
+\[
+  (\mathrm{Gr})' \longrightarrow (\mathrm{Ens}_4)
+\]
+sur l'image essentielle $(\mathrm{Gr})'$ des groupes isomorphes à
+$\mathfrak{S}_4$. Si \ldots\ est un tel groupe $G$, on considère l'ens.
+\struck{\ill{}} \add{des} \struck{\ill{}} $3$-sous-groupes de Sylow, il y en a
+exactement quatre ! Pour préciser ce point et \uncertain{récapituler}
+\marginal{\ill{} fidèles \ill{}}
+\note{le mot qui précède le foncteur $(\mathrm{Gr})' \to (\mathrm{Ens}_4)$
+commence par un V majuscule (« V\ldots-à-\ldots ») et n'est pas lu ; le
+sens est celui d'un foncteur en sens inverse du précédent. La note marginale
+gauche, écrite de biais et soulignée, se rattache au foncteur
+« oubli de la structure » ; seul « fidèles » s'y lit. Le « \ldots » après
+« Si » est de l'auteur. Devant $(\mathrm{Gr})'$, un « $(\mathrm{Ens})$ » biffé.}
+
+\page{4}\note{p.~2 de l'auteur, chiffrée en tête de page ; il ne numérote
+que les pages paires de l'archive (ici 4, 6, \ldots, 20 portent ses
+numéros 2 à 10), la page 2 étant sa première.}
+la structure de torseur sur cet ens., on considère le sous-groupe abélien
+distingué \struck{\ill{}} unique $V$ de $G$, on sait que $V$ est un
+vectoriel de rang 2 sur $\mathbb{F}_2$ et
+$G/V \xrightarrow{\;\sim\;} \operatorname{Aut}_{\mathbb{F}_2}(V)$, et on
+sait que les \add{$3$-}sous-groupes de Sylow de $G$ correspondent aux
+« relèvements » de l'unique $3$-sous-groupe de Sylow de
+$G/V \simeq \mathfrak{S}_J$ ($J = V^*$), savoir
+$\mathfrak{S}_J^+ = [\mathfrak{S}_J, \mathfrak{S}_J]$, d'indice 2 dans
+$\mathfrak{S}_J$. \struck{\ill{}} L'ens. $I_G$ des $3$-sous-groupes de Sylow
+de $G$ s'identifie donc à l'ens. des scindages de l'extension
+\[
+  1 \to V \to G^+ \to \mathfrak{S}_J^+ \to 1
+\]
+du $3$-groupe $\mathfrak{S}_J^+$ par le $2$-groupe $V$. Sur l'ens. de ses
+scindages, $V$ opère donc transitivement par automorphismes intérieurs,
+d'ailleurs $V^{\mathfrak{S}_J^+} = \{0\}$ ($\mathfrak{S}_J^+$ est le groupe des
+permutations circulaires sur $V^* = J$), donc $I_G$ est bien un torseur sous
+$V$.
+
+Quand on part de $I$ et \struck{\ill{}} $G = \mathfrak{S}_I$, on trouve une
+bijection
+\[
+  \begin{aligned}
+    I &\longrightarrow I_G \\
+    i &\longmapsto \mathfrak{S}^+_{I \setminus \{i\}}
+      = 3\text{-ss-gr.\ de Sylow de } \mathfrak{S}_I
+        \text{ qui fixe } i \,;
+  \end{aligned}
+\]
+Ainsi \struck{les deux foncteurs} \add{\ill{}} foncteurs
+$I \mapsto \mathfrak{S}_I$, $G \mapsto I_G$, et le composé
+$I \to I(\mathfrak{S}_I)$, on a un isom\supplied{orphisme} \ill{} \struck{l'identité}
+le foncteur identique,
+\note{dans la dernière formule, « unique » est biffé à l'intérieur de la
+formule ; la dernière ligne de la page, qui se poursuit page~5, n'est lue
+qu'en partie.}
+
+\page{5}
+Pour le composé dans l'autre sens, on trouve que $G$ opère sur l'ens.\ $I_G$
+de ses \ill{} ss-groupes de Sylow par automorphismes intérieurs, d'où
+\[
+  G \xrightarrow{\;\sim\;} \mathfrak{S}_{I_G}
+\]
+qui est un iso.
+
+\textbf{Éléments de $\mathfrak{S}_I$.}
+
+\begin{enumerate}
+  \item[a)] $1$
+  \item[b)] Les \add{trois} éléments \struck{\ill{}} \add{de} $V^*$, qui forment
+    une orbite $J$ sous $\mathfrak{S}_I$, et correspondant aux élém.\ de
+    $\mathfrak{P}_{2,2}(I)$,
+    \marginal{« translations » (\ill{}) trois axes [sym.\ p.r.\ \ill{} des
+    cubes]}
+  \item[c)] Les \ill{} 8 éléments d'ordre 3, se répartissant en
+    \struck{quatre} \add{deux} \struck{torseurs} \ill{} de 4 qui sont des
+    torseurs (à droite, à gauche) sous $V$, savoir les deux élts $\pm 1$ de
+    $\mathfrak{S}_J^+$. L'ens.\ de ces éléments s'identifie ainsi :
+    \[
+      I \times \underline{\omega}, \quad \text{où } \underline{\omega}
+      = \omega(J)\ \bigl(\simeq \omega(I)\bigr)
+    \]
+    par l'application qui associe à tout $\rho \in \mathfrak{S}_I$ d'ordre 3
+    son unique pt fixe dans $I$ (ou encore, le ss-groupe de Sylow qu'il
+    engendre), \emph{et} l'orientation qu'il détermine \struck{\ill{}} ou
+    encore son image dans $\mathfrak{S}_J^+$ :
+    \marginal{« rotations » (ayant un pt fixe et un seul, lequel \ill{} $I$
+    \ill{} $V$) [« rotations-sommets » des cubes]}
+  \item[d)] Les \struck{\ill{}} \add{6} éléments \add{d'ordre 2} \struck{\ill{}}
+    de $\mathfrak{S}_I$ qui s'envoient dans $\mathfrak{S}_J^-$, en
+    correspondance 1-1 avec l'ens.\ des \emph{transpositions} dans $I$
+    $\mathfrak{P}_2(I)$ --- on sait que les \ill{} qui se groupent
+    \add{\uncertain{3}} \struck{\ill{}} \struck{paires}, par la transposition
+    $\tau_A$, $\tau_{A'}$ \struck{\ill{}} ($A' = I \setminus A$) est l'unique
+    \add{autre} élément d'ordre 2 tel que $\tau_A \tau_{A'} \in V^*$.
+    \marginal{« réflexions » (ayant \struck{\ill{}} deux pts fixes \ill{})
+    [« rotations-arêtes » des cubes]}
+  \item[e)] Les 6 éléments d'ordre 4 de $\mathfrak{S}_I$, correspondant aux
+    6 ordres circulaires sur $I$. \uncertain{Pour}
+    \marginal{[« rotations-faces » des cubes]}
+\end{enumerate}
+\note{les quatre notes marginales de cette page, écrites de biais dans la
+marge gauche, donnent pour chaque classe d'éléments de $\mathfrak{S}_I$ son
+nom dans le groupe des rotations du cube ; elles sont d'une autre encre,
+plus fine. Au point c), le mot souligné devant « 8 » n'est pas sûr. Au
+point d), la phrase après « on sait que » est d'une lecture incertaine ; le
+sens est que les six transpositions se groupent en trois paires $\tau_A$,
+$\tau_{A'}$ avec $\tau_A\tau_{A'} \in V^*$.}
+
+\page{6}\note{p.~3 de l'auteur.}
+\struck{\ill{}} on a $u^2 \in V^*$, donc on a une application
+\[
+  \mathrm{Circ}(I) \longrightarrow V^*
+\]
+de degré 2 \uncertain{sur} (qui définit donc une structure de
+\emph{cube}, \ill{} $V^*$ comme ens.\ des directions des faces,
+$\mathrm{Circ}(I)$ comme l'ens.\ des six faces --- en fait ce cube est
+canoniquement orienté ; cf.\ plus bas.
+\marginal{$\circledast$ On peut dire aussi que les \ill{} éléments d'ordre 4
+\ill{} se répartissent en trois paires $\{u, u^{-1}\}$ \ill{} sous-groupes
+\ill{} de $\mathfrak{S}_I = G$ \ill{} d'ordre 4 \ill{} $V^*$. \ill{} --- $I$
+\uncertain{est l'ens.\ des quatre} diagonales des cubes,}
+
+L'isom.\ canonique
+\[
+  (**) \qquad \underline{\omega}(I) \simeq \underline{\omega}(J)
+\]
+On a
+\[
+  \mathfrak{S}_{I,\mathrm{ab}} \xrightarrow{\;\sim\;} \mathfrak{S}_{J,\mathrm{ab}}
+  \simeq \{\pm 1\}
+\]
+les isom.\ étant donnés par la signature, d'où la possibilité de définir un
+iso.\ \struck{canonique} \add{fonctoriel} $(**)$, \uncertain{moyennant}
+cependant le choix d'une convention (deux choix possibles). Quand on fixe un
+élément $i \in I$, alors on a
+\[
+  \underline{\omega}_i(I) \xrightarrow{\;\sim\;}
+  \underbrace{\underline{\omega}(I \setminus \{i\})}_{\simeq\, \mathfrak{T}_{\mathrm{tot}}}
+\]
+\struck{\ill{}} $\ni$ l'ordre \add{total} \struck{\ill{}} de $I$ en associant à
+un ordre \add{total} \uncertain{sur} $I \setminus \{i\}$ l'ordre donné, et qui
+admet $i$ comme \emph{premier} élément (\uncertain{c'est là} la
+convention \ill{} opposée aurait été de prendre $i$ comme \emph{dernier}
+élément).
+\note{sous l'accolade, « $\simeq \mathfrak{T}_{\mathrm{tot}}$ » est une
+lecture incertaine : un $\mathfrak{T}$ (ou $\mathfrak{I}$) indicé
+« total », pour l'ensemble des ordres totaux ; après
+$\underline{\omega}(I\setminus\{i\})$, une formule biffée
+($\{i\} \amalg \ldots$) n'est pas lue. La note marginale $\circledast$,
+écrite de biais sur une dizaine de lignes courtes dans le coin supérieur
+gauche, est d'une lecture très incertaine ; elle renvoie aux deux schémas du
+bas de la page.}
+
+$*$
+\note{sous un trait tiré en travers du bas de la page, deux schémas de
+correspondances, rattachés par l'astérisque à la note marginale.}
+
+\[
+  \begin{array}{ccc}
+    V^* & \xrightarrow[\;\sim\;]{\;x \,\mapsto\, \mathrm{Cent}_G(x)\;} &
+      \text{sous-groupes cycliques d'ordre 4 de } G = \mathfrak{S}_I \\[4pt]
+    \text{l'unique élément} \neq 1 \text{ de } \Gamma \cap V &
+      \longleftarrow\!\!\!\longrightarrow & \Gamma
+  \end{array}
+\]
+
+\[
+  \begin{array}{c}
+    V^* \longleftrightarrow
+      \text{ss-groupes cycliques d'ordre 4 de } G = \mathfrak{S}_I \\[4pt]
+    x \longmapsto \mathrm{Norm}, \qquad
+    D \longmapsto \text{élément non nul du centre de } D \\[4pt]
+    \text{ss-groupes de Sylow de } G = \mathfrak{S}_I \ (D)
+  \end{array}
+\]
+\note{les deux schémas sont redessinés : dans le second, trois flèches
+relient en triangle $V^*$, les sous-groupes cycliques d'ordre 4 et les
+$2$-sous-groupes de Sylow $D$ (flèche double entre ces deux derniers) ;
+$x \mapsto \mathrm{Norm}$ va de $V^*$ vers les Sylow, et
+$D \mapsto$ « élément non nul du centre de $D$ » en revient, sur un mot
+surchargé illisible. Dans le premier, la page écrit
+$x \mapsto \mathrm{Cent}_G(x)$ vers les sous-groupes cycliques
+d'ordre 4 ; le centralisateur dans $\mathfrak{S}_4$ d'un élément de $V^*$
+est d'ordre 8 (un $2$-Sylow), ce que le second schéma, qui passe par les
+Sylow, semble corriger. Transcrit tel quel.}
+
+\subsection{2. Structures de cube combinatoire.}
+
+\page{7}
+Le cube peut se définir, soit \uncertain{comme} le \uncertain{cas} \ill{}
+des polygones \uncertain{réguliers}) par un système
+\[
+  (1) \qquad (S, A, R)
+\]
+\uncertain{sommets}, arêtes, incidence, satisfaisant les axiomes connus, soit
+\uncertain{comme} utilisant l'\uncertain{antipodisme} $\underline{a}$ de (1)
+en termes de
+\[
+  (2) \qquad
+  \begin{array}{c}
+    S \\
+    \big\downarrow {\scriptstyle \text{degré } 2} \\
+    D \\
+    (\simeq S/\underline{a})
+  \end{array}
+  \quad \text{un des diagonales (de card.\ 2)}
+\]
+\marginal{(2) \ill{} \ill{} \ill{} \ill{} de card.\ $2$, \ill{} \ill{} $D$
+\ill{} $V^*$ \ill{} diagonales)}
+soit en une famille de deux ensembles (les \ill{} de card.\ $2$)
+\uncertain{soit} \uncertain{dualement} par \ill{} de
+\[
+  (3) \qquad
+  \begin{array}{c}
+    A \\
+    \big\downarrow {\scriptstyle \text{degré } 2} \\
+    C \\
+    (\simeq A/\underline{a})
+  \end{array}
+  \quad \text{un des codiagonales}
+\]
+\marginal{\uncertain{ou} ?}
+comme une \struck{\ill{}} famille (\ill{} paires d'\struck{\ill{}} \ill{})
+des codiagonales de card.\ $2$. Chacune des descriptions (1) (2) (3) est
+valable pour décrire le cube --- là \struck{\ill{}} \uncertain{on} \struck{\ill{}}
+\add{\uncertain{décrite} \uncertain{plus loin}}, les \struck{\uncertain{dimensions}}
+\uncertain{entrant} \ill{} \ill{} l'espace, l'ens.\ \uncertain{possible}
+\ill{} point de vue \ill{} « sommets » ; l'autre le point de vue
+« arêtes », \uncertain{comme} \ill{} \ill{} \ill{} \uncertain{bien connus} dans
+l'un et l'autre cas, c'est une \ill{} à quelle élément \ill{}
+\uncertain{l'orientation} \uncertain{explicite}
+\note{page d'une lecture très incertaine, surtout dans ses dernières lignes,
+où la graphie est rapide et où une tache couvre le bas de la page. Les trois
+présentations (1), (2), (3) et les deux flèches « degré 2 » sont sûres ; le
+« $D$ » de (2) et le « $C$ » de (3) sont respectivement les diagonales et
+les « codiagonales », quotients de $S$ et $A$ par l'antipodie
+$\underline{a}$. La note marginale (2), écrite de biais dans la marge
+gauche, n'est lue qu'à l'état de fragments.}
+
+\page{8}\note{p.~4 de l'auteur.}
+fixes qui porte la structure\ldots). On peut aussi décrire ces structures en
+termes de $S$ et de $A$ par la donnée d'un groupe $R$ (« forme » de
+$\mathbb{Z}/4\mathbb{Z}$) opérant sur $S$ resp.\ sur $A$, qui devient un
+torseur sous $\Gamma$
+\[
+  \begin{aligned}
+    &(2\ \text{bis}) \qquad S \text{ torseur sous } \Gamma \\
+    &(3\ \text{bis}) \qquad A \text{ torseur sous } \Gamma
+  \end{aligned}
+\]
+ce qui fait finalement \struck{\ill{}} \add{\uncertain{cinq}} descriptions
+des \struck{\ill{}} structures de « cube ». Je vais expliciter les passages
+de l'une de ces descriptions à l'autre.
+
+\begin{itemize}
+  \item[] $2\,\text{bis}) \Rightarrow 2)$, $3\,\text{bis}) \Rightarrow 3)$ :
+    on prend l'unique élément $\underline{a}$ d'ordre 2 de $\Gamma$, qui est une
+    \uncertain{involution} \uncertain{sans} pts fixes de $S$ (resp.\ $A$), et on
+    pose
+    \[
+      D = S/\underline{a}, \quad \text{resp.} \quad C = A/\underline{a}.
+    \]
+  \item[] $2)$ \struck{bis} $\Rightarrow 1)$ : Soit
+    $A \subset \mathfrak{P}_2(S)$ \add{$\subset \mathfrak{P}(S)$} défini par
+    $A = \mathfrak{P}_2(S) \setminus \operatorname{Im} D$, c'est un ens.\ à
+    4 éléments, \struck{qui} et on a une relation \uncertain{tautologique}
+    $R \subset S \times A$.
+  \item[] $3) \Rightarrow 1)$ : Soit $S \subset \mathfrak{P}_2(A)$ défini
+    par $S = \mathfrak{P}_2(A) \setminus \operatorname{Im} C$, ens.\ à 4
+    éléments et on a une relation tautologique $R' \subset A \times S$
+    d'où ${}^{s}R' \overset{\mathrm{def}}{=} R \subset S \times A$.
+  \item[] $1 \Rightarrow 2\,\text{bis}$, $1 \Rightarrow 3\,\text{bis}$ : On
+    considère
+    \[
+      \mathfrak{D} = \operatorname{Aut} \underline{Q}, \qquad
+      \underline{Q} = \{S, A, R\},
+    \]
+    d'ordre 8, \struck{$\mathfrak{D}_A\, V_Q$ 2-sous-gr.\ de Sylow de
+    $\mathfrak{S}_S$ ou $\mathfrak{S}_A$} l'image inverse des
+    $V_S \subset \mathfrak{S}_S$ et celle de $V_A \subset \mathfrak{S}_A$ sont
+    deux sous-groupes \struck{\ill{}} de $\mathfrak{D}$, notés
+    $\mathbb{F}_2^C \simeq V_S$ et $\mathbb{F}_2^D \simeq V_A$, \ill{}
+    d'ordre 4, \struck{\ill{}} \ill{} \ill{} :
+\end{itemize}
+
+
+\begin{tikzcd}[column sep=small, row sep=small]
+    & \mathfrak{S}_S \\
+    \mathfrak{D} \arrow[ur] \arrow[dr] & \\
+    & \mathfrak{S}_A
+\end{tikzcd}
+
+
+\begin{tikzcd}[column sep=small, row sep=small]
+    \mathbb{F}_2^C \simeq V_S \arrow[r, hook] \arrow[d, hook] & \mathfrak{S}_S \\
+    \mathfrak{D} \arrow[ur, no head] \arrow[dr, hook] & \\
+    \mathbb{F}_2^D \simeq V_A \arrow[u, hook] \arrow[r, hook] & \mathfrak{S}_A
+\end{tikzcd}
+
+\note{les quatre dernières lignes de la page sont biffées d'autant de
+traits ; on y lit, sans certitude, « $V_A$, \ldots\ $S$, $A$ \ldots\
+$\mathbb{F}_2^D$ --- \ldots\ $V_Q$ \ldots\ il y a deux éléments d'ordre 4
+\ldots\ \uncertain{engendrent} \ldots ». Le premier diagramme est à droite
+dans le texte ; le symbole à sa source, surchargé plusieurs fois, se lit
+$\mathfrak{D}$. Le second est dans la marge gauche, en face des lignes
+$1 \Rightarrow 2\,\text{bis}$ ; le trait de $\mathfrak{D}$ vers
+$\mathfrak{S}_S$ y porte un crochet d'inclusion mais pas de pointe.
+« cinq » (descriptions) est ajouté au-dessus d'un mot biffé et n'est pas
+sûr.}
+
+\page{9}
+\struck{\ill{} $\mathfrak{D}^+$ \ill{} sous-groupe cyclique d'ordre 4, et $S$
+et $A$ sont \ill{} \ill{} \ill{} torseurs sous \ill{} $\mathfrak{D}^+$.}
+\note{les trois premières lignes, dans un cadre ouvert à gauche, sont
+barrées d'un grand trait en zigzag.}
+groupe d'ordre 2 \struck{central} qui est le centre, et donc l'élément $\neq 1$
+est l'\emph{antipodisme} $\underline{a}$.
+
+Il y a dans $\mathfrak{D}$ exactement deux éléments $u, u'$ d'ordre 4, inverses
+l'un de l'autre, engendrant l'unique sous-groupe cyclique d'ordre 4, noté
+$\mathfrak{D}^+$ --- et $S$ et $A$ sont des torseurs sous ce même groupe.
+L'antipodisme est l'unique élément d'ordre 2 de $\mathfrak{D}^+$.
+\struck{Le quotient $\mathfrak{D}/\mathfrak{D}^+$ opère} \struck{$\mathfrak{D}^+
+\simeq \mathfrak{D}/\{1, \underline{a}\}$}
+
+Le quotient
+$\mathfrak{D}/V_S$ \struck{\ill{}} $\simeq \mathbb{Z}/2\mathbb{Z}$ opère sur
+$V_S$ par l'identité sur $\{1, \underline{a}\} \simeq \mathbb{F}_2 \subset V_S
+\simeq \mathbb{F}_2^C$, et permute les deux points \struck{\ill{}} sur
+$V_S \setminus \mathbb{F}_2 \simeq C$, et symétriquement
+$\mathfrak{D}/V_A \simeq \mathbb{Z}/2\mathbb{Z}$ opère sur
+$V_A \simeq \mathbb{F}_2^D$, \struck{\ill{}} l'opération par transposition sur
+$D$. \struck{\ill{} \ill{}} \add{\ill{}}
+
+Le quotient $\mathfrak{D}/\mathfrak{D}^+ \simeq \mathbb{Z}/2\mathbb{Z}$ opère
+sur $\mathfrak{D}^+$ par l'automorphisme \struck{\ill{}} $x \mapsto x^{-1}$,
+\struck{\ill{}} \add{en particulier}
+$u \mapsto u' = u^{-1}$ i.e.\ l'opération induit la transposition sur
+l'ens.\ $\simeq \underline{\omega}_Q$ des deux générateurs de $\mathfrak{D}^+$.
+\marginal{$\mathfrak{D}^+ \simeq \mathbb{Z}/4\mathbb{Z} \wedge_{\{\pm 1\}}
+\underline{\omega}_Q$}
+
+On a \struck{\ill{}} \uncertain{finalement}
+$\mathfrak{D}_{\mathrm{ab}} \simeq \mathfrak{D}/\{1, \underline{a}\}$, espace
+vect.\ de rg~2 sur $\mathbb{F}_2$, \uncertain{avec} \uncertain{trois} \ill{}
+$V_S$, $\mathfrak{D}^+$, $V_A$ $\longmapsto$ les images dans les trois
+sous-groupes d'ordre 2 de $\mathfrak{D}^+_{\mathrm{ab}}$ \uncertain{sont}
+\ill{} les trois seuls sous-groupes d'indice 2 de $\mathfrak{D}^+_{\mathrm{ab}}$.
+On a une \uncertain{bonne} \ill{} de $\mathfrak{D}^+_{\mathrm{ab}}$
+\[
+  \mathfrak{D}^+_{\mathrm{ab}} \simeq \mathbb{F}_2 \times \mathbb{F}_2
+\]
+définie par la condition que
+\marginal{$\mathfrak{D}$ opère sur $C$ \uncertain{comme} $D$ par
+\ill{} \ill{} \ill{}, \ill{} $C \amalg D$ \ill{} \ill{} \ill{} $=3$, $D$
+opère sur $C$, $D$ opère sur $C$ \ill{} i.e.\ $c \in C$, $d \in D$
+$\Rightarrow [c, d] = \underline{a}$) d'où \ill{} $\mathfrak{D} \to
+\mathfrak{S}_C \times \mathfrak{S}_D$ \ill{} $\simeq \mathbb{F}_2 \times
+\mathbb{F}_2$ \ill{} \ill{} \ill{} \ill{} $\mathfrak{D}/\{1, \underline{a}\}
+\simeq V_S/\mathbb{F}_2 \times V_A/\mathbb{F}_2$
+\emph{NB} $\mathfrak{D}_{\mathrm{ab}} \simeq
+\mathbb{F}_2^C \times \mathbb{F}_2^D$}
+\note{la note marginale, écrite en travers du coin inférieur gauche sur une
+dizaine de lignes obliques et en partie surchargée de grands traits, est
+d'une lecture très incertaine ; ses formules sont plus sûres que ses mots.
+Le texte parle tantôt de $\mathfrak{D}^+_{\mathrm{ab}}$, tantôt de
+$\mathfrak{D}_{\mathrm{ab}}$ ; le « $+$ » en exposant est net aux deux
+dernières occurrences, bien que le sens (quotient de $\mathfrak{D}$ par son
+centre, de rang 2) soit celui de $\mathfrak{D}_{\mathrm{ab}}$. Transcrit tel
+quel.}
+
+\page{10}\note{p.~5 de l'auteur.}
+\[
+  \left\{
+  \begin{array}{lll}
+    \text{image inverse de} & \mathbb{F}_2 \times \{0\} & \leadsto V_S \\
+    \text{---\,---} & \{0\} \times \mathbb{F}_2 & \leadsto V_A \\
+    \text{---\,---} & \text{diagonale de } \mathbb{F}_2 \times \mathbb{F}_2
+      & \leadsto \mathfrak{D}^+
+  \end{array}
+  \right.
+\]
+on en \uncertain{conclut}
+\[
+  \left\{
+  \begin{array}{lll}
+    \text{image inverse de} & (1, 0) & \leadsto C \subset \mathfrak{D}^* \\
+    \text{---\,---} & (0, 1) & \leadsto D \subset \mathfrak{D}^* \\
+    \text{---\,---} & (1, 1) & \leadsto \underline{\omega}_Q \subset \mathfrak{D}^*
+  \end{array}
+  \right.
+\]
+\note{les $V_S$, $V_A$ du premier tableau sont écrits sur un
+$\mathfrak{D}$ surchargé ; les tirets sont les traits de répétition de
+l'auteur (« idem »). Dans le second tableau, $\mathfrak{D}^*$ est lu pour
+un $\mathfrak{D}$ muni d'un exposant peu net, sans doute $\mathfrak{D}^*$
+au sens des éléments $\neq 1, \underline{a}$.}
+
+Les sous-groupes d'ordre deux de $\mathfrak{D}$ correspondent aux éléments
+d'ordre 2, il y a \uncertain{cinq} :
+
+les éléments
+\begin{itemize}
+  \item[a)] l'antipodisme $\underline{a}$, engendrant le centre
+    $\{1, \underline{a}\}$
+  \item[b)] Les deux éléments de $C = V_S \setminus \{1, \underline{a}\}$,
+    engendrant resp.\ les deux droites-coordonnées de
+    $V_S \simeq \mathbb{F}_2^C$
+  \item[c)] Les deux éléments de $D = V_A \setminus \{1, \underline{a}\}$,
+    engendrant resp.\ les deux droites coordonnées de
+    $V_A \simeq \mathbb{F}_2^D$.
+\end{itemize}
+(NB les \ill{} \uncertain{autres} 3 éléments de $\mathfrak{D}^*$ sont
+d'ordre 4 :
+\[
+  \mathfrak{D} \simeq
+  \underbrace{\{1\} \amalg \{a\} \amalg C \amalg D}_{\text{dic.\ de }
+  \mathfrak{D} \text{ en classes de conjugaison}} \amalg \underline{\omega}_Q
+  \qquad )
+\]
+\note{sous la formule, deux accolades se chevauchent ; la seconde porte
+« \ldots\ orbites sous $\mathrm{Int}(\mathfrak{D})$ » ; leur étendue exacte
+n'est pas sûre.}
+On a donc fait la liste complète des sous-groupes de $\mathfrak{D}$ différents
+de $\{1\}$ et de $\mathfrak{D}$ lui-même, il y en a trois d'ordre 4 i.e.\
+d'indice 2, savoir $V_S$, $V_A$ et $\mathfrak{D}^+$, et cinq d'ordre 2 sauf le
+centre $\{1, \underline{a}\}$, et les \add{2 paquets de 2}
+\struck{\uncertain{4}} sous-groupes d'ordre 2 distincts de ce dernier,
+contenus respectivement dans $V_S$ et dans $V_A$.
+\marginal{NB. On \uncertain{retrouve} par \uncertain{ceci} les éléments
+\uncertain{réunis} \ill{} \ill{} d'un des \ill{} \ill{} \ill{} leurs
+\ill{} \ill{} \ill{} \ill{} \ill{} $\mathfrak{D}$ \ill{} \ill{} $V_A$ et
+$V_S$ \ill{} \ill{} $\mathfrak{D}$, distingués et \uncertain{quotients}
+$\neq \{1\}, \mathfrak{D}$ \ill{} $\{1, \underline{a}\}$) \ill{}
+$V_S$, $V_A$, $\mathfrak{D}^+$, \ill{} \ill{} \ill{}}
+
+On a associé à un cube $Q = (S, A, R)$ trois ensembles \uncertain{bien-gardés}
+de cardinal 2, savoir
+$\{$ \uncertain{$D$}, \uncertain{$C$}, $\underline{\omega}_Q$
+\note{la dernière ligne de la page s'arrête sur cette énumération, que
+la page~11 poursuit (« en plus des deux diagonales et des deux
+codiagonales\ldots »). Les deux premiers symboles ont l'air d'un
+$\mathfrak{B}$ et d'un $S$ ; la suite du texte ($\underline{\omega}_S \simeq
+C$, $\underline{\omega}_A \simeq D$) désigne $D$ et $C$. Le mot qualifiant les
+trois ensembles n'est pas sûr. La note marginale, oblique dans la marge gauche, n'est lue que par
+fragments.}
+
+\page{11}
+(en plus des deux diagonales et les deux codiagonales elles-mêmes, qui font
+aussi \uncertain{partie} \uncertain{des} ensemble : deux éléments, mais
+groupés par paires « indistinguables » \ldots). On a des bijections
+canoniques
+\[
+  \underline{\omega}_S \simeq C, \qquad \underline{\omega}_A \simeq D
+\]
+provenant du fait que\ldots
+\[
+  \underline{\omega}_S \simeq \underline{\omega}_{V_S^*}
+  = \underline{\omega}_{\{\underline{a}\} \amalg C}
+  \simeq \underline{\omega}_C \simeq C
+\]
+la convention pour orienter un ensemble : trois éléments (\uncertain{ici}
+$V_S^*$) dont un élément $x$ (ici $\underline{a}$) est fixé, en termes de
+\uncertain{choix} d'un élément $y$ des \uncertain{deux} \uncertain{autres}
+[ici $V_S^* \setminus \{a\} = C$] étant de prendre l'orientation
+$(a, x, y)$ \struck{($\ldots$ $y \neq a, x$ $\ldots$ $= V_S^* \setminus
+\{a, \ldots$)} i.e.\ $\{y\} = J \setminus \{a, x\}$.
+\note{les lettres $a$, $x$, $y$ de ce passage ne s'accordent pas tout à
+fait : « un élément (ici $\underline{a}$) est fixé » et un « $x$ » écrit
+au-dessus ; transcrit tel quel. Le $J$ de la dernière formule est de
+l'auteur.}
+
+On a une relation remarquable
+\[
+  (*) \qquad \underline{\omega}_Q \wedge C \wedge D \simeq \mathbb{1}_{\mathbb{F}_2}
+\]
+\marginal{i.e.\ une restriction du groupe structural $\mathbb{F}_2^3$ de
+$\underline{\omega}_S \times C \times D$ au sous-groupe $V_3(\mathbb{F}_2)$
+des $x, y, z$ tels que $x + y + z = 0$}
+qui provient du fait que $\underline{\omega}_S$, $C$, $D$ sont les images
+inverses, dans l'extension $\mathfrak{D}$ de
+$\mathfrak{D}/\{1, \underline{a}\} = \mathfrak{D}_{\mathrm{ab}}$ par
+$\{1, \underline{a}\}$, des trois éléments non nuls de
+$\mathfrak{D}_{\mathrm{ab}}$, dont la \struck{produit} somme est nulle.
+\add{Pour} des éléments $\varpi$, $c$, $d$ de
+$\underline{\omega}_Q \times C \times D$ \struck{\ill{}} \ldots
+\[
+  \varpi \wedge c \wedge d = 0 \iff \varpi c d = 1 \text{ dans } \mathfrak{D}
+\]
+[Attention, cette relation \struck{serait} \uncertain{invariante} si \ill{}
+faisait une transposition sur l'ordre des facteurs --- il y a donc
+\struck{\ill{}} des \struck{\ill{}} le choix de l'iso.\ \uncertain{ces} une
+question de convention.
+\note{les deux « $\underline{\omega}_S$ » de ce passage (dans la note
+marginale et dans « qui provient du fait que ») sont écrits ainsi, là où la
+formule $(*)$ porte $\underline{\omega}_Q$.}
+
+Si on passe du cube $Q$ au cube dual $Q'$, le choix de l'iso
+\[
+  \underline{\omega}_{Q'} \wedge C' \wedge D' \simeq \mathbb{1}
+  \ (\simeq \underline{\omega}_Q \wedge D \wedge C) \simeq \mathbb{1}
+\]
+est \emph{opposé} de celui pour $Q$\ldots
+\note{dans la dernière formule, un mot biffé devant $C'$ et un autre
+devant le premier $\mathbb{1}$.}
+
+\page{12}\note{p.~6 de l'auteur.}
+\emph{NB} L'ensemble produit : 4 éléments
+\[
+  C \times D
+\]
+peut s'identifier : l'ensemble quotient $R/\underline{a}$ des repères du cube
+$Q$, modulo antipodisme
+\[
+  C \times D \simeq R/\underline{a} \qquad
+  R = \operatorname{Rep}(Q) \simeq \operatorname{Rep}(Q^\circ)
+\]
+tandis que $\underline{\omega}_Q$ s'identifie à \struck{l'ensemble} un
+ensemble de deux parties de $R$ (« $R^+$ » et « $R^-$ ») complémentaires,
+l'une de l'autre, et stables chacune par l'antipodisme $\underline{a}$ (qui
+conserve l'orientation), ce qui fait que le choix d'un élément de
+$R/\underline{a}$ définit canoniquement une orientation de $Q$,
+\struck{\ill{}} i.e.\ un des deux \struck{\ill{}} ensembles de repères
+$R'$, $R''$. Pour vérifier \struck{que} si cette description
+\[
+  C \wedge D \simeq \underline{\omega}_Q \quad \text{i.e.\ d'une relation}
+  \quad \varpi c d = 1
+\]
+d'une iso. $\underline{\omega}_Q \wedge C \wedge D \simeq \mathbb{1}$
+correspond : \ill{} \struck{$\ldots \wedge \ldots$}, il faut expliciter de
+bout en bout la convention qui nous \struck{\ill{}} conduit aux plongements
+\[
+  C \hookrightarrow V_S \setminus \{1, \underline{a}\} \subset \mathfrak{D},
+  \qquad D \hookrightarrow V_A \setminus \{1, \underline{a}\} \subset \mathfrak{D},
+  \qquad \underline{\omega}_Q \subset \mathfrak{D}^+ \subset \mathfrak{D}
+\]
+Si $c$ est une \add{codiagonale i.e.\ une} paire de côtés opposés du cube,
+je vais lui associer l'automorphisme $\sigma$ du cube qui fixe ces deux
+côtés et qui échange les deux autres i.e.\ la symétrie p.r.\ à l'axe
+transverse. De même, pour une diagonale, je lui associe la symétrie par
+rapport à cette diagonale. Pour une orientation définie par un repère
+\ill{}
+
+\note{dans la marge gauche, trois petites figures : en haut, un carré de
+sommets $s$, $s'$, d'arêtes $a$ (en bas) et $a'$ (en haut) épaissies, et de
+diagonale $d$ tracée de $s$ à $s'$ --- un repère du cube, vu sur une face ;
+en bas, un carré dont deux côtés opposés, épaissis, portent la marque $c$,
+avec en pointillé l'axe transverse qui les coupe en leur milieu ; à droite,
+un carré en pointillé dont la diagonale, prolongée en pointillé au-delà des
+sommets, porte la marque $d$ à ses deux extrémités.}
+
+\page{13}
+\ldots\ je lui associe la rotation du cube qui transforme $s$ en la deuxième
+extrémité de $a$. On vérifie que avec ces conventions, la formule
+$\varpi c d = 1$ est bien la formule qui exprime que $R_\varpi \subset R$
+contient l'image inverse par $R \to R/\underline{a}$ de l'élément $(c, d)$ de
+$R/\underline{a}$. Le fait que si on remplace la $\varpi$-relation par le cube
+dual, on semble obtenir la relation opposée, provient du fait que si on
+identifie le $\varpi$-ensemble $R$ à l'ens.\ des repères de $Q$ \emph{et}
+de $Q^\circ$, \struck{\ill{}} \add{et} le groupe $\mathfrak{D}$ à
+$\operatorname{Aut} Q$ \emph{et} à $\operatorname{Aut}(Q^\circ)$ (ce qui
+était \uncertain{possible} \uncertain{naturellement} conséquence que d'une
+seule façon, i.e.\ ce n'est pas une question de choix de conventions\ldots)
+alors une $\varpi$-\struck{partie} \add{classe} $Q'$ dans $R$
+\struck{\ill{}} (pour la relation d'équivalence de l'orientation),
+considérée comme définissant une orientation de $Q$ \emph{et} une
+orientation de $Q^\circ$, définit deux orientations \emph{opposées},
+en ce sens que les orientations de rotations qu'il définit sur un repère
+$(s, a)$, suivant qu'il est regardé comme un rep.\ de $Q$ ou rep.\ de
+$Q^\circ$, sont \emph{opposées} l'une de l'autre : transformer $s$ en
+$s'$ ou $a$ en $a'$ se font par deux rotations \emph{opposées}.
+
+\note{dans la marge gauche, deux petites figures. En haut, un carré en
+pointillé dont un côté, plein, est marqué $a$, avec le sommet $s$ à son
+extrémité inférieure et une flèche courbe tournant autour de l'autre
+extrémité : la rotation qui envoie $s$ sur l'autre extrémité de $a$. En bas,
+un carré de sommets $s'$ et $s$ en haut, l'arête supérieure $a$ (de $s'$ à
+$s$) épaissie, l'arête droite marquée $a'$, et une flèche courbe au-dessus
+de $s$ : la rotation qui transforme $s$ en $s'$ et $a$ en $a'$.}
+
+\page{14}\note{p.~7 de l'auteur.}
+Considérons le groupe $\mathfrak{D}$ en tant que groupe « abstrait », il est
+canoniquement extension de $\mathfrak{D}_{\mathrm{ab}} = W$
+($\simeq \mathbb{F}_2 \times \mathbb{F}_2$ non canoniquement) par
+$\mathbb{F}_2$. Dans $\mathfrak{D}_{\mathrm{ab}}$ il y a un élément non nul
+distingué $\varpi$, \add{dont l'image} \struck{\ill{} \ill{}} inverse est
+l'ens.\ $\underline{\omega}_Q$ des deux éléments d'ordre 4 de $\mathfrak{D}$.
+On voit aisément que les deux autres éléments non nuls de
+$\mathfrak{D}_{\mathrm{ab}}$ sont interchangés par le groupe des autom.\ de
+$\mathfrak{D}$, on trouve donc
+\[
+  1 \to \underset{\substack{\text{autom.\ de l'ext.\ } \mathfrak{D} \text{ de}\\
+  W \text{ par } \mathbb{F}_2 \text{ qui}\\ \text{induisent l'identité}\\
+  \text{sur } W \text{ et } \mathbb{F}_2}}{\check{W}}
+  \to \operatorname{Aut} \mathfrak{D} \to
+  \underset{\substack{\text{interchange}\\ \text{les deux}\\ \text{éléments de}\\
+  W \setminus \{0, \varpi\}}}{\underbrace{\pm 1}} \to 1
+\]
+\marginal{\emph{NB} on a un iso.\ can.\ $\check{W} \simeq W$ (valable
+pour \uncertain{tt vectoriel} de rg~2 sur $\mathbb{F}_2$)}
+en fait $\operatorname{Aut} \mathfrak{D}$ est produit $\frac12$ direct de
+$\pm 1$ par $\check{W}$, $\pm 1$ opérant par échange des \add{2} éléments non
+\struck{\ill{}} privilégiés de $\check{W} \simeq W$. Quand on tient compte que
+$\mathfrak{D}$ provient d'un cube, donc il y a choix d'un élément
+$\underline{c}$ de $W \setminus \{0, \varpi\}$ (correspondant
+\struck{\ill{}} à $C = V_S \setminus \{1, \underline{a}\}$), l'autre élément
+étant $\underline{d}$ (correspondant à
+$D = V_A \setminus \{1, \underline{a}\}$). Les autom.\ de $\mathfrak{D}$ qui
+respectent cette structure forment le sous-groupe
+$\check{W} \simeq W$ de $\operatorname{Aut} \mathfrak{D}$, formé des autom.\
+qui induisent l'identité sur le quotient $W$. Ce sont aussi les autom.\
+intérieurs, qui forment bien le groupe
+$W \simeq \mathfrak{D}/\underbrace{\{1, \underline{a}\}}_{\text{centre}}$.
+(\add{l'homom.} $\mathfrak{D} \xrightarrow{\;\mathrm{int}\;}
+\operatorname{Aut} \mathfrak{D}$ n'est pas \struck{homom} injectif), on voit
+que la donnée d'un groupe $\mathfrak{D} \simeq \operatorname{Aut} Q$ (qui
+revient : la donnée de $C$ et de $D$, et plus \ill{}
+\struck{\ill{} $\mathfrak{D} = \mathbb{F}_2^{C} \times_{\mathbb{F}_2}
+\mathbb{F}_2^{D}$})
+\note{la phrase de la fin de page est très abrégée. La parenthèse
+« (qui revient : \ldots) » se referme à droite sur la dernière ligne, biffée
+d'un double trait, où on lit $\mathfrak{D} = \mathbb{F}_2^{C}
+\times_{\mathbb{F}_2} \mathbb{F}_2^{D}$ ($\mathbb{F}_2$ écrit sous le signe
+$\times$) ; au-dessus, « et plus » est suivi d'un symbole muni d'un exposant
+$(\underline{a}, s)$, non lu. Au début de la page, le mot qui qualifie
+l'image inverse de $\varpi$ est inséré au-dessus d'un passage biffé.}
+
+\page{15}
+ne peut suffire à reconstruire $Q$ à isom.\ unique près --- mais seulement
+à $Q$ « modulo antipodisme ». Considérons le cube épinglé $Q_0$, et le groupe
+de ses automorphismes
+\[
+  \mathbb{D}_4 = \operatorname{Aut}(Q_0)
+\]
+on a la suite exacte canonique
+\[
+  1 \to \mathbb{F}_2 \to \mathbb{D}_4 \to \mathbb{F}_2^{2} \to 1
+\]
+et la donnée d'un tel $\mathfrak{D}$ revient à celle d'un torseur sous
+$\mathbb{F}_2^{2}$ \add{le quotient de $\mathbb{D}_4$} (i.e.\ de deux ens.\ à
+deux éléments (ce sont en fait $D$ et $C$, dans cet ordre\ldots)), tandis que
+celle d'un cube revient à la donnée d'un torseur sous $\mathbb{D}_4$
+lui-même.
+
+On a une opération \add{(par autom.\ int.)} de $\mathfrak{D}^+$ sur $D$
+\add{$\hookrightarrow \mathfrak{D}^+$}, la donnée de $Q$ (correspondant au
+groupe d'autom.\ $\mathfrak{D}$) \struck{\ill{}} revient à celle d'un
+relèvement de \struck{\ill{}} l'opération \struck{\ill{}} en \struck{les} une
+opération \add{(d'un ens.\ à 4 élts sous $\mathfrak{D}$)} transitive sur un
+ens.\ $S$, avec $S/\underline{a} \simeq D$. Description duale via
+$C \hookrightarrow \mathfrak{D}^+$\ldots
+\note{« $\hookrightarrow \mathfrak{D}^+$ » est écrit au-dessus de $D$, et le
+« $+$ » en exposant est net, bien que $D \subset V_A$ ; de même dans
+« $C \hookrightarrow \mathfrak{D}^+$ ». Transcrit tel quel.}
+
+\emph{Remarque} : Le groupe $\operatorname{Aut}(\mathbb{D}_4)$ est isom.\
+à $\mathbb{D}_4$ (mais pas via autom.\ intérieurs, bien sûr) ce qui indique
+qu'il y a \add{peut-être} une équivalence de groupoïdes
+\[
+  (\text{Cubes}) \xrightarrow{\;\approx\;} (\text{groupes isom.\ à }
+  \mathbb{D}_4)
+\]
+(mais qui n'est pas donnée par \struck{\ill{}} $Q \mapsto \operatorname{Aut}(Q)$ !),
+qui mériterait d'être comprise\ldots
+\note{$\mathbb{D}_4$ est écrit, à sa première occurrence, après un
+$\mathfrak{D}_4$ biffé ; c'est la notation de la page pour le groupe du cube
+épinglé.}
+
+\page{16}\note{p.~8 de l'auteur.}
+Si $\mathfrak{D}$ est un groupe isomorphe à $\mathbb{D}_4$, l'ens.\
+$\mathfrak{S}$ des éléments d'ordre 2 \add{$\neq \underline{a}$ (où
+$\underline{a}$ =} \struck{\ill{}} l'unique élément central $\neq 1$) est à
+quatre éléments, \struck{\ill{} \ill{} déjà classés par translation}
+\add{\ill{} une involution} sans points fixes par
+\[
+  x \longmapsto x \cdot \underline{a} \overset{\mathrm{def}}{=} x'
+\]
+donc à $\mathfrak{D}$ correspond un cube $Q_{\mathfrak{D}}$, dont l'ens.\ des
+sommets est $\mathfrak{S}$, et l'\struck{\ill{} des} \add{\ill{}}
+l'antipodisme sur $S$ est l'involution précédente. Mais le foncteur de
+groupoïdes $\mathfrak{D} \mapsto Q_{\mathfrak{D}}$
+\[
+  (\text{groupes isom.\ à } \mathbb{D}_4) \longrightarrow
+  (\text{cubes combinatoires})
+\]
+\ill{} \ill{} une équivalence de groupoïdes, on \ill{} reconstitue
+\add{$\mathfrak{D}$} à partir de $(\mathfrak{S}, \underline{a}_{\mathfrak{S}}
+\colon x \mapsto x')$ \struck{\ill{}} par la formule
+\[
+  \mathfrak{D} = \Bigl\{ \underbrace{x \in \mathfrak{S},\ \underline{a}}_{
+  \text{générateurs}} \Bigm| \underbrace{[x, y]}_{\substack{\text{commutateur}\\
+  xyx^{-1}y^{-1}}} = \underline{a} \text{ si } y \neq x, x' \Bigr\}
+\]
+\marginal{\emph{NB} Si \uncertain{$Q$} est un cube, \struck{\ill{}} le
+groupe $\mathfrak{D} = \operatorname{Aut}(Q)$, le carré associé à ce groupe, est
+le carré dont l'ens.\ des sommets est $C \amalg D$, l'antipodisme dessus
+\struck{\ill{}} \ill{} $C$ et $D$, i.e.\ les $C$ et $D$. On trouve donc
+\ill{} \ill{} \struck{\ill{}} distinguées\ldots}
+\note{la note marginale, écrite en oblique dans la marge gauche et reliée
+par un trait pointillé à l'accolade de la formule, n'est lue que par
+fragments ; on y lit « carré », non « cube ». L'ensemble des éléments
+d'ordre 2 est noté par une lettre ronde, lue $\mathfrak{S}$, et le $S$ de
+« l'antipodisme sur $S$ » est droit. Le début de la phrase « \ldots\ une
+équivalence de groupoïdes » est surchargé d'ajouts entre les lignes et
+n'est pas lu : on ne peut dire s'il affirme ou nie l'équivalence.}
+
+Si on part, pour décrire la structure de cube, de l'ens.\ des sommets $S$,
+cette structure est définie par la donnée d'un ens.\ \add{$S$} à 4 élément
+--- i.e.\ d'un torseur sous un vectoriel $V_S$ de rang 2 sur $\mathbb{F}_2$
+--- et de une \struck{involution} sans pts fixes de $S$, i.e.\ d'un
+$\underline{a}_S \in V_S^{*}$ \struck{Mais \ill{}} \add{(i.e.\ une}
+\struck{$V_S = V_S^{*}$} partition de type $(2,2)$ de $S$). Mais pour
+
+\page{17}
+un vectoriel \add{$V$} de rg~2 sur $\mathbb{F}_2$, la donnée d'un
+$\underline{a} \in V^{*}$ revient à la donnée d'une partie de $V^{*}$ qui soit
+une base (à savoir $V^{*} \setminus \{\underline{a}\}$) ; donc la donnée d'un
+\add{couple $(V, \underline{a})$ d'un} vectoriel $V$ de rg~2 sur
+$\mathbb{F}_2$, et d'un élément $\underline{a}$ de $V^{*}$, revient à la donnée
+d'un ens.\ $C$ à deux éléments, par $V \simeq \mathbb{F}_2^{C}$,
+$\underline{a}$ l'élément diagonal de $\mathbb{F}_2^{C}$. Ainsi, la donnée
+d'un cube $Q$ \struck{\ill{} \ill{}} (via l'ens.\ des sommets) équivaut à
+celle d'un couple $(C, S)$, où $C$ \struck{\ill{}} est un ens.\ à deux
+éléments, et $S$ est un torseur sous $\mathbb{F}_2^{C}$. Mais la donnée d'un
+tel torseur revient à celle d'une famille de \add{$\mathbb{F}_2$-}torseurs
+indexée par $C$, i.e.\ d'un revêtement de degré 2
+\[
+  A \longrightarrow C,
+\]
+\add{(\ill{} de $C$)} i.e.\ d'un ens.\ $A$ à quatre éléments, et muni d'une
+involution sans pts fixes (qui donne le quotient vers $C$), par la formule
+\[
+  S \simeq \prod_{c \in C} A_c = \text{Ens des sections de } A
+  \text{ sur } C
+\]
+qui donne en même temps un plongement
+\[
+  S \hookrightarrow \mathfrak{P}_2(A)
+\]
+d'où la relation d'incidence entre $S$ et $A$\ldots
+\marginal{ici les \struck{deux} --- $A_c$ ($c \in C$) \ill{}
+\uncertain{comme} \ill{} \uncertain{quotients} de $S$, par les relations qui
+distinguent l'élément \add{$c \in C$} \struck{\ill{}} de $V^{*}$
+\uncertain{considéré} comme involution ss pts fixes de $S$\ldots\ Mais je
+préfère ici prendre $A$ \struck{\ill{}} \ill{} \ill{}}
+\note{la note marginale, oblique sur une dizaine de courtes lignes dans le
+coin inférieur gauche, n'est lue que par fragments. Au début de la page,
+l'$\underline{a}$ de « $\underline{a} \in V^{*}$ » est écrit devant un
+$\mathbb{F}_2^{*}$ surchargé en $V^{*}$. Dans la formule
+$S \simeq \prod_{c \in C} A_c$, un premier symbole biffé précède $A_c$.}
+
+\page{18}\note{p.~9 de l'auteur.}
+Dualement, \struck{$A$ \ill{}} la donnée d'un cube-arêtes
+$A$ s'interprète comme la donnée d'un torseur sous un groupe
+$\mathbb{F}_2^{D}$, ce qui équivaut à la donnée d'une famille de
+\add{$\mathbb{F}_2$-}torseurs $(S_d)_{d \in D}$, \struck{i.e.\ \ill{} \ill{}
+ens.\ $S$}
+\[
+  A \simeq \prod_{d \in D} S_d \qquad (\simeq \text{sections de } S \text{ sur } D)
+\]
+--- la donnée de cette famille équivaut à la donnée d'un ensemble (à quatre
+éléments) $S$ et d'un morphisme de degré 2
+\[
+  S \longrightarrow D
+\]
+qui \ill{} la formule précédente donne
+\[
+  A \hookrightarrow \mathfrak{P}_2(S)
+\]
+et la relation d'incidence entre $S$ et $A$\ldots
+\note{le « Dualement » initial est écrit sur un premier mot surchargé ; le
+début de phrase biffé qui suit n'est pas lu.}
+
+\emph{Formulaire}. Rappelons, pour un cube $Q$, les trois ensembles à
+deux éléments
+\[
+  \underset{\text{codiagonales}}{C}, \quad
+  \underset{\text{diagonales}}{D}, \quad
+  \underset{\text{orientations}}{\underline{\omega}}
+\]
+plus les deux paquets de deux ens.\ à deux éléments (dans \ill{} autres ens.\
+à deux éléments)
+\[
+  S \xrightarrow{\;\deg.\,2\;} D, \qquad A \xrightarrow{\;\deg.\,2\;} C
+\]
+\[
+  (D \simeq S/\underline{a}_S). \qquad (C \simeq A/\underline{a}_A)
+\]
+On a le formulaire d'iso.\ can.
+\note{le symbole du troisième ensemble, souligné, n'est pas net et sa lecture $\underline{\omega}$ est incertaine ; la
+légende « orientations » placée dessous désigne $\underline{\omega}_Q$.}
+
+\page{19}
+\[
+  \begin{array}{ll}
+    (1) & \underline{\omega}_S \simeq C, \quad \underline{\omega}_A \simeq D \\[6pt]
+    (2) & \underline{\omega} \wedge C \wedge D \simeq \mathbb{1}_{\mathbb{F}_2}
+      \quad \text{i.e.} \quad
+      \left\{ \begin{array}{l}
+        \underline{\omega} \simeq C \wedge D \\
+        C \simeq D \wedge \underline{\omega} \\
+        D \simeq \underline{\omega} \wedge C
+      \end{array} \right. \\[18pt]
+    (3) & D \simeq S/\underline{a}_S, \quad C \simeq A/\underline{a}_A \\[6pt]
+    (4) & S \simeq \prod_{c \in C} A_c, \quad A \simeq \prod_{d \in D} S_d \\[6pt]
+    (5) & D \simeq \bigwedge_{c \in C} A_c, \quad C \simeq \bigwedge_{d \in D} S_d
+  \end{array}
+\]
+ces \add{deux} dernières relations proviennent de
+\[
+  \underline{\omega} \simeq \Bigl(\bigwedge_{c \in C} A_c\Bigr) \wedge C
+  \quad \text{d'où} \quad
+  \underbrace{\underline{\omega} \wedge C}_{D \text{ par } (2)} \simeq
+  \bigwedge_{c \in C} A_c .
+\]
+\note{le formulaire est encadré. Dans (3), le $D$ est écrit sur un $C$.}
+
+\subsection{3. Compléments sur les 2-sous-groupes d'un groupe $G = \mathfrak{S}_I$ (card $I = 4$).}
+
+\note{dans le titre, « 2-s-groupes » est écrit sur une première lettre, et
+« de Sylow » qui le suivait est biffé. En marge, en oblique : « À
+\uncertain{compléter} par les 3-sous-groupes de Sylow ».}
+Soit $V$ le sous-groupe distingué $\simeq \mathbb{F}_2^{2}$, de sorte que
+$V^{*} \simeq \mathfrak{P}_{2,2}(I)$. On a
+
+
+\begin{tikzcd}[column sep=large, row sep=huge]
+  V^{*} \arrow[rr, leftrightarrow, "\sim"] \arrow[dr, leftrightarrow, "2"'] & &
+  \text{ss-gr.\ cycliques } \mathfrak{D}^+ \text{ d'ordre 4 de } G \arrow[dl, leftrightarrow, "\sim"] \\
+  & \text{2-ss-gr.\ de Sylow de } G &
+\end{tikzcd}
+
+\begin{itemize}
+  \item[] à gauche de $V^{*}$ : « Ens.\ des structures de cubes $Q$
+    $\simeq V^{*}$ (si $Q$ correspond à $x$, \ill{} \ill{} $\mathfrak{D}$,
+    \ill{} $\operatorname{Aut} Q = \mathfrak{D}$) » ;
+  \item[] sous la flèche horizontale : « pour tt ss gr.\ cyclique
+    $\mathfrak{D}^+$ il y a un unique élt d'ordre 2, qui est dans $V^{*}$, et
+    $\mathfrak{D}^+$ en est le centralisateur » ;
+  \item[] le long de la flèche de gauche : « pour tt sous-groupe de Sylow
+    $\mathfrak{D}$, il y a un unique élément $x$ central $\neq 1$, qui est
+    celui qui est dans $V^{*}$, et $\mathfrak{D}$ est le normalisateur ou le
+    centralisateur de $x$ » ;
+  \item[] le long de la flèche de droite : « tout sous-groupe de Sylow
+    $\mathfrak{D}$ a un unique sous-groupe cyclique d'ordre 4,
+    $\mathfrak{D}^+$, et il en est le normalisateur ».
+\end{itemize}
+\note{le diagramme est redessiné : un triangle à flèches doubles, dont les
+sommets et les légendes sont écrits en toutes lettres ; les légendes sont
+rendues ci-dessus dans l'ordre des flèches. L'étiquette de la flèche de
+gauche est lue « 2 » ; le chiffre initial du sommet du bas ressemble à un
+« 3 », mais les groupes d'ordre 8 visés sont les 2-sous-groupes de Sylow. La
+légende de gauche est séparée de celle de la flèche par un trait.}
+
+\page{20}\note{p.~10 de l'auteur.}
+Quels sont les sous-groupes de $G = \mathfrak{S}_I$ \struck{\ill{}},
+$\neq e$ et $\mathfrak{S}_I$ ?
+
+A) Sous-groupes d'ordre une puissance de 2, i.e.\ contenus dans un
+2-sous-groupe de Sylow $\mathfrak{D}$.
+
+\struck{Sous-groupes cycliques correspondant aux}
+
+1) Sous-groupes d'ordre 2, correspondant aux éléments d'ordre 2 :
+\begin{itemize}
+  \item[a)] les \add{trois} éléments de $V^{*}$, qui forment une orbite
+    \struck{sous} $\operatorname{Int} G$
+  \item[b)] les six transpositions ou \uncertain{réflexions}, qui forment une
+    autre orbite sous $\operatorname{Int} G$, et qui se groupent en trois
+    paquets (indexés par $V^{*}$) de deux, par la relation
+    $\tau\tau' \in V^{*}$, ou par celle d'être contenus dans un même
+    \add{2-}sous-groupe de Sylow. \struck{cycliq}
+\end{itemize}
+\marginal{i.e.\ $\tau$, $\tau'$ \ill{} \ill{} $\mathfrak{S}_I$ \ill{}}
+
+2) Sous-groupes d'ordre 4
+\begin{itemize}
+  \item[c)] \add{les trois} \struck{Sous}-groupes cycliques d'ordre 4, qui
+    \struck{correspondent \ill{}} \add{1-1 aux trois} sous-groupes de Sylow
+    i.e.\ les trois structures de cube sur $I$.
+  \item[d)] Sous-groupes non cycliques d'ordre 4, donc isom.\ à
+    $\mathbb{F}_2 \times \mathbb{F}_2$ --- il y a d'abord $V^{*}$
+  \item[e)] puis \struck{deux} ceux qui ne sont pas distingués, chacun contenu
+    dans un unique 2-Sylow \struck{\ill{}} \add{un} \ill{} groupe de Sylow,
+    dans lequel il y en a un \add{(en plus de $V$, qui y est contenu)} --- il
+    y en a en tout \struck{six} \add{trois} sous-groupes
+    \struck{$\mathbb{F}_2 \times \mathbb{F}_2$} $(2,2)$ non distingués, qui
+    forment une classe de conjugaison \struck{distincte, formant deux \ill{}
+    de trois classes \ill{} savoir les $V_S \subset \mathfrak{D}$ et les
+    $V_A$}, correspondant \ill{}
+\end{itemize}
+
+3) Sous-groupes d'ordre 8 --- ce sont les
+\begin{itemize}
+  \item[f)] trois sous-groupes de Sylow de $G$
+\end{itemize}
+\note{dans la marge gauche, en face des items, deux colonnes : les
+nombres d'éléments $3$, $6$, $3$, $1$, $3$, $3$ (a à f), et les ensembles qui
+les indexent : $V^{*}$, $\widetilde{V}^{*}$, $V^{*}$, ---, $V^{*}$, $V^{*}$.
+En d), la page écrit $V^{*}$, là où le compte « 1 » et le sens désignent le
+sous-groupe $V$ lui-même ; transcrit tel quel. En e), les ajouts entre les
+lignes et les passages biffés se chevauchent ; l'ordre de lecture retenu
+n'est pas sûr.}
+
+\end{document}

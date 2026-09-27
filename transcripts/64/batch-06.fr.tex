@@ -1,0 +1,1025 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 64, batch 6 (pages 101-120).
+% Established from the facsimile archives/batches/64/batch-06.pdf (a copy of 64.pdf
+% fetched through the project relay, no cover sheet: PDF page k = archivists' page 20(N-1)+k),
+% per the skill transcribe-grothendieck. The folder is 156 pages in eight batches.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-09-27 — first pass, unchecked against the pages by a human.
+%
+% Pages skipped: none (all twenty pages carry mathematics).
+% His pagination: a new run starts at p. 101 (his "1"); he numbers only the odd archive
+%   pages: 101 = 1, 103 = 2, 105 = 3, 107 = 4, 109 = 5, 111 = 6. Pages 113-120 carry
+%   no visible author's number. Formula numbers (1)-(89) restart with the run.
+% What the batch is about: the graded algebra F_* = (Gamma(E, n{0_E}))_n of an elliptic
+%   curve E over an algebraically closed k (char != 2); derivation Theta_delta,
+%   involution f -> f(-x), bases 1, p, p' ; the Weierstrass relation
+%   p'^2 = p^3 + a1 p^2 + a2 p + a3, the addition law via a 3x3 determinant, the
+%   involutions sigma_i of P^1 induced by translation by 2-torsion, the fixed points
+%   Z_i (images of 4-torsion x_i with 2x_i = eps_i), the Jacobi condition sum x_i = 0,
+%   then the start of a translation of these data into a "Legendre pinning"
+%   (épinglage de Legendre): omega in underline-omega_J, K : t_E = O_t(1), the families
+%   delta_i = phi_i^omega(delta) delta.
+% Notation fixed once for the batch: \wp for his Weierstrass function (written as a
+%   script p), \mathcal{F}_n for Gamma(E, n{0_E}), \Theta_\delta, \varepsilon_n for the
+%   leading-coefficient map, t_E / \underline{t}_E, J = {}_2E^*, \Sigma_J, \zeta_i =
+%   \wp(\varepsilon_i), Z_i, Z_i', \sigma_i, \underline{\omega}, \dot\imath in \mu_4^*,
+%   \varphi_i^\omega(\delta).
+% \ill{}: 81. \uncertain{}: 58.
+
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{64}
+\batch{6}
+\pages{101}{120}
+\dating{[à partir de 1980- 1982]}
+\watermark{Édition de démonstration}
+\foldertitle{Modules courbes elliptiques en caractéristiques ≠2 : notes manuscrites (s.d.)}
+
+\begin{document}
+
+\page{101}\note{p.~1 de l'auteur, chiffrée en tête de page : une nouvelle suite
+numérotée commence ici, avec ses propres numéros de formules (1), (2), \ldots}
+. Soit $E$ courbe elliptique, sur corps \struck{\uncertain{alg}} alg.\ clos
+\add{$k$}, pour commencer (de car $\neq 2$ comme d'habitude).
+
+On pose, pour $n \in \mathbb{N}$
+\[
+  (1) \qquad \mathcal{F}_n = \Gamma(E, n\{0_E\})
+\]
+par la formule de RR on a
+\[
+  (2) \qquad \operatorname{rg} \mathcal{F}_n = n \quad\text{si } n \geqslant 1
+\]
+et
+\[
+  (3) \qquad \mathcal{F}_0 = \mathcal{F}_1 = k \cdot 1_E .
+\]
+On a \uncertain{évidemment} sur
+\[
+  (4) \qquad \mathcal{F}_\infty \overset{\text{déf}}{=} \varinjlim_n \mathcal{F}_n
+\]
+une loi de multiplication ass.\ comm.\ \uncertain{avec}
+\[
+  (5) \qquad \mathcal{F}_m \cdot \mathcal{F}_n \subset \mathcal{F}_{n+m} ,
+\]
+de sorte que $\mathcal{F}_* = \coprod \mathcal{F}_n$ devient une algèbre graduée,
+dont le Proj est can.\ isomorphe à $E$. On va déterminer $\mathcal{F}_*$.
+
+Notons la suite exacte
+\[
+  (6) \qquad 0 \to \mathcal{F}_{n-1} \to \mathcal{F}_n \xrightarrow{\;\varepsilon_n\;}
+  t_E^{\otimes n} \to 0 \qquad (n \geqslant 2)
+\]
+où
+\[
+  (7) \qquad t_E \overset{\text{déf}}{=} T_{E, 0_E} .
+\]
+On a, pour $\delta \in t_E$, une opération
+
+\page{102}
+\[
+  (8) \qquad \Theta_\delta : \mathcal{F}_n \longrightarrow \mathcal{F}_{n+1}
+  \qquad \text{dérivation de degré $+1$ de l'algèbre graduée } \mathcal{F}_*
+\]
+qui donne lieu à un homom.\ de suites exactes
+(9)
+
+
+\begin{tikzcd}[column sep=small]
+    0 \arrow[r] & \mathcal{F}_{n-1} \arrow[r] \arrow[d, "\Theta_\delta"] &
+    \mathcal{F}_n \arrow[r] \arrow[d, "\Theta_\delta"] &
+    t_E^{\otimes n} \arrow[r] \arrow[d, "\mu_\delta"] & 0 \\
+    0 \arrow[r] & \mathcal{F}_n \arrow[r] & \mathcal{F}_{n+1} \arrow[r] &
+    t_E^{\otimes n+1} \arrow[r] & 0
+  \end{tikzcd}
+
+où $\mu_\delta$ est la multiplication par $\delta$. De façon plus intrinsèque,
+\uncertain{d'où} un homom.
+\[
+  (10) \qquad
+  \begin{aligned}
+    t_E \otimes \mathcal{F}_n &\xrightarrow{\;\delta_n\;} \mathcal{F}_{n+1} \\
+    \delta \otimes \varphi &\longmapsto \Theta_\delta \varphi
+  \end{aligned}
+\]
+qui donne lieu à un homom.\ de suites exactes
+(11)
+
+
+\begin{tikzcd}[column sep=small]
+    0 \arrow[r] & t_E \otimes \mathcal{F}_{n-1} \arrow[r] \arrow[d, "\delta_{n-1}"] &
+    t_E \otimes \mathcal{F}_n \arrow[r] \arrow[d, "\delta_n"] &
+    t_E \otimes t_E^{\otimes n} \arrow[r] \arrow[d, "\wr\ \mathrm{can}"] & 0 \\
+    0 \arrow[r] & \mathcal{F}_n \arrow[r] & \mathcal{F}_{n+1} \arrow[r] &
+    t_E^{\otimes n+1} \arrow[r] & 0
+\end{tikzcd}
+
+pour $n \geqslant 2$
+\note{la flèche verticale de droite de (9) porte un symbole d'une lecture
+incertaine, transcrit $\mu_\delta$ ; le texte dit seulement qu'il s'agit de la
+multiplication par $\delta$.}
+
+On en conclut que pour $n \geqslant 2$, on a $\operatorname{Ker} \delta_n =
+\operatorname{Ker} \delta_{n-1}$, donc
+\[
+  (12) \qquad
+  \begin{cases}
+    \operatorname{Ker} \delta_n = \operatorname{Ker} \delta_1 =
+    t_E \otimes \mathcal{F}_1 = t_E \otimes_k 1_E \\
+    \operatorname{Ker} \Theta_\delta = \mathcal{F}_1 = k \cdot 1_E .
+  \end{cases}
+\]
+\note{dans la première ligne de (12), « $k \cdot 1_E$ » est biffé deux fois
+(après le premier et après le second signe $=$), et « $t_E \otimes$ » est ajouté
+au-dessus de la ligne devant $\mathcal{F}_1$.}
+
+Soit, pour $f \in \mathcal{F}_n$,
+\[
+  (13) \qquad \check f(x) = f(-x)
+\]
+donc
+\[
+  (14) \qquad f \mapsto \check f \qquad \mathcal{F}_* \longrightarrow \mathcal{F}_*
+  \qquad \text{involution de l'algèbre comm.}
+\]
+
+\page{103}\note{p.~2 de l'auteur, chiffrée en tête de page.}
+On trouve
+\[
+  (15) \qquad (\Theta_\delta f)^\vee = \Theta_{\check\delta} \check f =
+  \Theta_{-\delta} \check f = -\Theta_\delta \check f
+\]
+i.e.
+\[
+  \vee \circ \Theta_\delta = -\Theta_\delta \circ \vee .
+\]
+Posons
+\[
+  (16) \qquad
+  \begin{cases}
+    \mathcal{F}_n^+ = \{ f \in \mathcal{F}_n \mid \check f = f \} \\
+    \mathcal{F}_n^- = \{ f \in \mathcal{F}_n \mid \check f = -f \}
+  \end{cases}
+\]
+on a donc
+\[
+  (17) \qquad
+  \left\{
+  \begin{aligned}
+    & \mathcal{F}_n = \mathcal{F}_n^+ \oplus \mathcal{F}_n^- \\
+    & \begin{cases}
+        \Theta_\delta \mathcal{F}_n^+ \subset \mathcal{F}_{n+1}^- , \quad
+        \Theta_\delta \mathcal{F}_n^- \subset \mathcal{F}_{n+1}^+ \\
+        t_E \otimes \mathcal{F}_n^+ \xrightarrow{\;\delta_n\;} \mathcal{F}_{n+1}^- , \quad
+        t_E \otimes \mathcal{F}_n^- \xrightarrow{\;\delta_n\;} \mathcal{F}_{n+1}^+
+      \end{cases} \\
+    & \begin{cases}
+        \mathcal{F}_n^+ \mathcal{F}_m^+ \subset \mathcal{F}_{n+m}^+ \\
+        \mathcal{F}_n^- \mathcal{F}_m^- \subset \mathcal{F}_{n+m}^+
+      \end{cases}
+      \qquad \mathcal{F}_n^+ \mathcal{F}_m^- \subset \mathcal{F}_{n+m}^-
+  \end{aligned}
+  \right.
+\]
+\note{dans les deux lignes centrales de (17), les indices des termes d'arrivée
+sont écrits très court ; $n+1$ est la lecture qu'impose (8).}
+
+On va construire l'\add{alg.\ graduée} $\mathcal{F}_*$, avec la structure
+$\delta_* : t_E \otimes \mathcal{F}_* \to \mathcal{F}_*$, \add{i.e.\
+$t_E \to \operatorname{Der}^{+1}_k(\mathcal{F}_*, \mathcal{F}_*)$,} et la structure
+$\vee$ (automorphisme d'ordre 2).
+
+On a
+\[
+  (18) \qquad \mathcal{F}_2^+ = \mathcal{F}_2 \simeq \Gamma(\Sigma_J, \{t\})
+  \qquad \text{où}\quad
+  \begin{aligned}
+    & J = {}_2E^* \\
+    & \Sigma_J \simeq E/(\pm \mathrm{id}_E) \\
+    & t \text{ image de } 0_E \\
+    & t \in \Sigma_J^* = \Sigma_J \setminus J
+  \end{aligned}
+\]
+plus généralement on a
+
+\page{104}
+\[
+  (19) \qquad \mathcal{F}_{2n}^+ \xrightarrow{\;\sim\;} \mathcal{F}_{2n+1}^+
+  = \Gamma(\Sigma_J, n\{t\})
+\]
+On a d'autre part $\mathcal{F}_n^- = 0$ si $n \leqslant 2$, et
+\[
+  (20) \qquad \mathcal{F}_3^- = \delta_2(t_E \otimes \mathcal{F}_2) \simeq t_E^{\otimes 3}
+\]
+s-complémentaire du \uncertain{vecteur} $1$ de $\mathcal{F}_2 = \mathcal{F}_3^+$ dans
+$\mathcal{F}_3$. On a alors, pour \struck{$n \geqslant 3$} \add{\uncertain{tout}}
+$n \geqslant 1$
+\[
+  (21) \qquad \mathcal{F}_{2n+1}^- \xrightarrow{\;\sim\;} \mathcal{F}_{2n+2}^- \simeq
+  \mathcal{F}_3^- \otimes_k \mathcal{F}_{2n-2}^+
+\]
+Choisissons
+\[
+  (22) \qquad \delta \in t_E
+\]
+et un
+\[
+  (23) \qquad \wp \in \mathcal{F}_2 \qquad \varepsilon_2(\wp) = \delta^{\otimes 2}
+\]
+posons
+\[
+  (24) \qquad \wp' = \Theta_\delta(\wp) \qquad \text{donc}\quad
+  \varepsilon_3(\wp') = \delta^{\otimes 3}
+\]
+Alors
+\[
+  (25) \qquad
+  \begin{cases}
+    1, \wp & \text{base de } \mathcal{F}_2 = \mathcal{F}_2^+ = \mathcal{F}_3^+ \\
+    \wp' & \text{base de } \mathcal{F}_3^- \\
+    1, \wp, \wp' & \text{base de } \mathcal{F}_3 = \mathcal{F}_3^+ \oplus \mathcal{F}_3^- .
+  \end{cases}
+\]
+\[
+  (25') \qquad
+  \begin{aligned}
+    & \{1, \wp, \ldots, \wp^n\} \text{ base de } \mathcal{F}_{2n}^+ \simeq \mathcal{F}_{2n+1}^+ \\
+    & \{\wp', \wp'\wp, \ldots, \wp'\wp^{n-1}\} \text{ base de }
+      \mathcal{F}_{2n+1}^- \simeq \mathcal{F}_{2n+2}^-
+  \end{aligned}
+\]
+\[
+  (26) \qquad \mathcal{F}_{2n+1}^- = \mathcal{F}_{2n+2}^- = \wp'\, \mathcal{F}_{2n-2}^+
+  \qquad \text{pour } n \in \mathbb{N}^* .
+\]
+\note{devant (26), « Propos. » biffé. Dans (25$'$), les derniers exposants
+sont surchargés ; $n-1$ est la lecture qu'impose (26).}
+
+\textbf{Proposition 1} \quad Considérons l'homomorphisme
+\[
+  f \longmapsto f \mid J \qquad \mathcal{F}_3 \longrightarrow k^J
+\]
+Alors on a
+\[
+  (27) \qquad \operatorname{Ker}(\mathcal{F}_3 \to k^J) = \mathcal{F}_3^- = k \cdot \wp'
+\]
+\page{105}\note{p.~3 de l'auteur, chiffrée en tête de page.}
+. Si $f \in \mathcal{F}_3^-$, plus \uncertain{généralement} si
+$f \in \mathcal{F}_n^-$, alors $x = -x$, pour $x \in E(k)$, $x \neq 0$,
+implique $f(x) = -f(-x) = -f(x)$ i.e.\ $2f(x) = 0$ i.e.\ $f(x) = 0$. Ainsi
+$\mathcal{F}_3 \to k^J$ est nulle sur $\mathcal{F}_3^-$, donc il reste à voir
+qu'il est injectif sur $\mathcal{F}_3^+ \simeq \mathcal{F}_2$. Mais on a mieux
+
+\textbf{Corollaire} \quad La matrice \struck{formée} \add{de Vandermonde}
+$\bigl(\wp(e_i)^\alpha\bigr)_{i \in J,\ 0 \leqslant \alpha \leqslant 2}$ est
+inversible, en d'autres termes les $\wp(e_i)$ ($i \in J$) sont tous distincts.
+
+OPS \struck{que \ill{} les pts de} \add{les v\supplied{aleurs} de $J$
+\uncertain{correspondent} \uncertain{aux points} $0, 1, \infty$,} et
+$\Sigma_J =$ \struck{$\mathbb{P}^1$} $\mathbb{P}^1_k$. (Quitte à multiplier par un
+scalaire \ill{} une et \uncertain{ajouter} une constante,) OPS
+\[
+  \wp(z) = \frac{1}{z - t}, \qquad \therefore\ t \in k \setminus \{0, 1\} = U_{0,1}(k)
+\]
+donc
+\[
+  \wp(0) = \frac{1}{-t}, \qquad \wp(1) = \frac{1}{1 - t}, \qquad \wp(\infty) = 0
+\]
+sont tous distincts, O.K.
+\note{les points $e_i$ ($i \in J$) sont ici identifiés à $0, 1, \infty$ de
+$\Sigma_J \simeq \mathbb{P}^1_k$ ; $\wp$ est vue comme fonction de la coordonnée
+$z$ sur $\mathbb{P}^1_k$. Le passage entre parenthèses est écrit au-dessus de la
+ligne, relié par un trait.}
+
+Considérons maintenant
+$\wp'^2 \in \mathcal{F}_6^+ =$ \struck{\ill{}} \add{\uncertain{engendré} par la base}
+\[
+  1, \wp, \wp^2, \wp^3
+\]
+et notons que
+\[
+  \varepsilon_6\, \wp'^2 = \varepsilon_6\, \wp^3 = \delta^6 ,
+\]
+on arrive donc à la relation
+\[
+  (28) \qquad \boxed{\;\wp'^2 = \wp^3 + a_1 \wp^2 + a_2 \wp + a_3\;}
+  \qquad a_1, a_2, a_3 \in k
+\]
+déterminés de façon unique (pour \uncertain{$\delta$} choisi).
+\note{dans la formule encadrée les indices des $a_i$ sont surchargés. La dernière
+ligne, écrite sous la formule, se lit mal : « déterminés de façon unique (pour
+\ldots choisi) ».}
+
+\page{106}
+\textbf{Proposition 2} \quad Les $a_\alpha$ ($1 \leqslant \alpha \leqslant 3$)
+sont caractérisés par la condition que
+$\wp^3 + a_1 \wp^2 + a_2 \wp + a_3 \mid J = 0$.
+
+C'est nécessaire, puisque $\wp' \mid J = 0$. Mais d'après le cor.\ à la prop.\
+précédente, les fonctions $1, \wp, \wp^2$ restreintes à $J$ sont lin.\
+indépendantes, donc la relation précédente sur les $a_i$ (qui s'écrit
+\[
+  (-\wp^3) \mid J = a_1 (\wp^2 \mid J) + a_2 (\wp \mid J) + a_3 (1_E \mid J)\ )
+\]
+caractérise déjà les $a_i$, cqfd.
+
+\textbf{Corollaire 1} \quad Les $(-1)^\alpha a_\alpha$ ($1 \leqslant \alpha
+\leqslant 3$) sont les fonctions sym.\ élémentaires en les $\wp(e_i)$
+($i \in J$) i.e.\ on a
+\[
+  (29) \qquad \wp^3 + a_1 \wp^2 + a_2 \wp + a_3 = \prod_{i \in J} \bigl(\wp - \wp(e_i)\bigr) .
+\]
+\note{dans le produit, un $\wp$ est surchargé devant $\wp(e_i)$.}
+
+\textbf{Corollaire 2} \quad Pour que l'on ait $a_1 = 0$ il f.\ et s.\ que
+$\operatorname{Tr}_{J/k}(\wp \mid J) = 0$ i.e.\ $\sum \wp(e_i) = 0$.
+\note{devant « Corollaire 2 », un chiffre biffé.}
+
+Si car.\ $k \neq 3$, les $\wp \in \mathcal{F}_2$ qui satisfont cette condition
+forment un s-\uncertain{complémentaire} $W_E$ de $\mathcal{F}_1$ dans $\mathcal{F}_2$
+\[
+  (30) \qquad \mathcal{F}_2 \simeq \underbrace{\mathcal{F}_1}_{k \cdot 1_E} \oplus
+  \underbrace{W_E}_{\simeq\, t_E^{\otimes 2}}
+\]
+Les \struck{\uncertain{fonctions}} \add{éléments} de $W_E$ \add{non} \uncertain{nuls}
+\add{\uncertain{sont}} les fonctions de Weierstrass,
+
+\page{107}\note{p.~4 de l'auteur, chiffrée en tête de page.}
+en corr.\ 1-1 avec les éléments de $(t_E^{\otimes 2})^*$.
+
+\textbf{Corollaire 3} \quad On a
+\[
+  (31) \qquad
+  \begin{aligned}
+    \mathcal{F}_\infty &\simeq k[P, P'] \big/ P'^2 - (P^3 + a_1 P^2 + a_2 P + a_3) \\
+    &\simeq k[P][P'] \big/ \bigl(P'^2 - (P^3 + a_1 P^2 + a_2 P + a_3)\bigr)
+  \end{aligned}
+\]
+l'isomorphisme étant \uncertain{donné} par $P \mapsto \wp$, $P' \mapsto \wp'$.
+L'automorphisme $f \mapsto \check f$ correspond à l'automorphisme
+$P' \mapsto -P'$, $P \mapsto P$ de $k[P, P']/\ldots$ . La dérivation
+$\Theta_\delta$ est \uncertain{induite} par \uncertain{passage} aux quotients de
+\struck{\uncertain{l'expression}} \add{la} dérivation
+\[
+  (32) \qquad \Theta_\delta P = P', \qquad \Theta_\delta P' = \tfrac12 (3P^2 + 2a_1 P + a_2)
+\]
+sur $k[P, P']$, qui \uncertain{applique} l'idéal
+$P'^2 - (P^3 + a_1 P^2 + a_2 P + a_3)$ en lui-même.
+\note{dans (31), le $\wp$ de la seconde ligne est surchargé ; dans (32), l'indice
+$\delta$ de $\Theta$ et le premier $P'$ sont surchargés.}
+
+La formule (32) s'obtient en dérivant
+$\wp'^2 = \wp^3 + a_1 \wp^2 + a_2 \wp + a_3$ par $\Theta_\delta$,
+\struck{et en divisant} d'\add{où}
+\[
+  2\wp'\, \Theta_\delta(\wp') = (3\wp^2 + 2a_1 \wp + a_2)\, \wp'
+\]
+et en divisant par $\wp'$ la relation obtenue, d'où
+\[
+  (33) \qquad \wp'' = \tfrac12 (3\wp^2 + 2a_1 \wp + a_2) .
+\]
+
+\textbf{\struck{Corollaire}} \add{\textbf{Remarque}} \quad En termes des bases
+explicites des $\mathcal{F}_n^+$ et $\mathcal{F}_n^-$ (25$'$) dans la \uncertain{décomposition}
+$\mathcal{F}_n = \mathcal{F}_n^+ \oplus \mathcal{F}_n^-$, on voit maintenant comment
+expliciter la loi de multiplication, \add{en termes de $a_1, a_2, a_3$,} ainsi que
+
+\page{108}
+la dérivation $\Theta_\delta$.
+
+Inversement partant de $a_1, a_2, a_3 \in k$, \struck{\uncertain{satisfaisant}}
+\add{tels que} le polynôme
+\[
+  Z^3 + a_1 Z^2 + a_2 Z + a_3 \in k[Z]
+\]
+soit sans racines multiples, i.e.\ tels que
+\[
+  (34) \qquad \underbrace{\Delta(a_1, a_2, a_3)}_{\text{discriminant}} \neq 0 ,
+\]
+on vérifie que les formules précédentes définissent une courbe elliptique sur $k$
+(qu'on peut \struck{définir} \add{construire} comme \ill{} $\operatorname{Proj}(\mathcal{F}_\bullet)$,
+où $\mathcal{F}_\bullet$ est défini par (31)), \struck{\ill{}} \add{\ill{}} que
+\uncertain{revêtement} \struck{\uncertain{quadratique} \ill{}} \add{quadratique} de
+$\mathbb{P}^1_k$ défini par
+\[
+  (35) \qquad \wp : E \longrightarrow \mathbb{P}^1_k \simeq E/\{\pm \mathrm{id}_E\}
+\]
+ramifié en \add{l'origine et en} les trois points \add{$z_i$} de
+$\mathbb{P}^1_{(k)}$ \add{$= k$} \struck{\ill{}} solutions de l'équation
+\[
+  (36) \qquad Z^3 + a_1 Z^2 + a_2 Z + a_3 = 0 ,
+\]
+\struck{l'\uncertain{origine}} \add{\uncertain{l'unique}} \uncertain{pointe} de $E$
+étant au-dessus de \struck{\uncertain{la} \ill{}} \add{\uncertain{l'infini}} $\infty$ de
+$\mathbb{P}^1_k$. \struck{qui est bien} \add{\ill{}}, l'inclusion $J \subset \mathbb{P}^1_k$
+définit un isom.\ canonique
+\[
+  (37) \qquad \Sigma_J \xrightarrow{\;\sim\;} \mathbb{P}^1_k , \qquad t \mapsto \infty .
+\]
+\note{dans (35), la flèche oblique descendant de $E$ vers
+$E/\{\pm\mathrm{id}_E\}$ et la flèche remontant vers $\mathbb{P}^1_k$ ont été
+ramenées ici à un isomorphisme en ligne ; « l'isom. » est écrit à côté. Plusieurs
+mots de ce paragraphe sont surchargés et soulignés ; la lecture n'est pas sûre.
+Dans (37), le point $t$ de $\Sigma_J$ est sans doute celui qui a servi à
+normaliser $\wp$ page~105.}
+
+\page{109}\note{p.~5 de l'auteur, chiffrée en tête de page.}
+. La donnée d'un point $x$ \add{$\neq 0$} de $E(k)$ équivaut à celle de son image
+dans $\mathbb{P}^1_k$, soit \struck{$\wp(x)$}
+\[
+  (38) \qquad \wp(x) = x_0 \in k ,
+\]
+plus la donnée d'une des deux solutions $X'$ de l'équation (\uncertain{distinctes}
+au moins si la 2\textsuperscript{e} \uncertain{membre} est $\neq 0$ i.e.\ si
+$x_0 \notin J =\, _2E^*$ i.e.\ $x_0 \notin D_J \subset \Sigma_J$)
+\[
+  (39) \qquad X'^2 = x_0^3 + a_1 x_0^2 + a_2 x_0 + a_3 ,
+\]
+donnée en termes de $x$ par
+\[
+  (40) \qquad X' = \wp'(x) .
+\]
+
+\textbf{Proposition 3} \quad Soient $x, y, z \in E(k) \setminus \{0\}$,
+\struck{\uncertain{pas}} tous \add{distincts} \struck{\uncertain{égaux}}, alors on a
+\[
+  (41) \qquad x + y + z = 0
+\]
+ssi on a \struck{\ill{} $\wp(x) = \wp(y) = \wp(z)$ \ill{}}
+\[
+  (42) \qquad \det \begin{pmatrix}
+    1 & \wp(x) & \wp'(x) \\
+    1 & \wp(y) & \wp'(y) \\
+    1 & \wp(z) & \wp'(z)
+  \end{pmatrix} = 0
+\]
+\marginal{(\uncertain{cela} \uncertain{implique} \ill{} \ill{}
+$\wp(x) \neq \wp(y) \neq \wp(z) \neq \wp(x)$, car si \ill{}
+$\wp(x) = \wp(y)$, \ill{} $x = y$ \ill{} $x = -y$, \ill{} $z = 0$,
+\ill{})}
+\marginal{NB \struck{Si} \uncertain{Si} \add{deux} \uncertain{parmi} les \ill{}
+$x, y, z$ sont égaux, \uncertain{par} ex.\ \ill{} \ill{} (41) \ill{}, \ill{}
+$\Rightarrow$ \ill{} $x + y + z = 0$ !}
+\marginal{\ill{} condition \ill{} \uncertain{non} \ill{}
+$\exists\, a \in E(k)$, \ill{} \uncertain{algébrique} \ill{} $x + y + z = a$,
+\ill{} \ill{} $a = 0$, et \ill{} \ill{} $x, y, z \neq 0$.}
+\note{la page porte trois annotations en marge : une colonne à droite de (41)--(42)
+et deux blocs écrits de biais dans la marge gauche, l'un autour de
+« Proposition 3 » (commençant par « NB »), l'autre plus bas, en colonnes
+séparées par des traits. Elles ne se lisent que par fragments. Devant (41), un
+renvoi « cf » à la note marginale.}
+
+En effet, la définition de la loi de multiplic\supplied{ation} \uncertain{sur} $E$
+nous donne que si $x, y, z \in E(k)$ \struck{\ill{}} \uncertain{sont} \ill{}
+\struck{$x + y + z = 0$}
+\[
+  x + y + z = 0 \iff (\{x\} - \{0\}) + (\{y\} - \{0\}) + (\{z\} - \{0\})
+  \overset{\text{lin.}}{\sim} 0
+\]
+\[
+  \text{i.e.}\quad \{x\} + \{y\} + \{z\} \overset{\text{lin.}}{\sim} 3\{0\}
+\]
+Si $x, y, z$ sont tous $\neq 0$, cela signifie qu'il existe une fonction rat.\
+sur $E$, ayant $0$ comme pôle d'ordre 3, pas d'autre pôle, (donc
+$f \in \mathcal{F}_3$), et $\{x\} + \{y\} + \{z\}$ comme \struck{pôles} diviseur
+des zéros.
+\note{« loi de multiplication » : c'est la loi de groupe de $E$, notée
+additivement.}
+
+\page{110}
+OPS $f$ de la forme $\wp' + \alpha\wp + \beta$
+(quitte à multiplier par un scalaire)
+\[
+  (43) \qquad
+  \begin{cases}
+    f = \wp' + \alpha \wp + \beta , & \alpha, \beta \in k \\
+    \operatorname{div} f = \{x\} + \{y\} + \{z\} - 3\{0_E\}
+  \end{cases}
+\]
+On aura donc
+\[
+  (44) \qquad f(x) = f(y) = f(z) = 0 \quad\text{i.e.}
+\]
+\[
+  (45) \qquad
+  \begin{cases}
+    \wp'(x) + \alpha \wp(x) + \beta = 0 \\
+    \wp'(y) + \alpha \wp(y) + \beta = 0 \\
+    \wp'(z) + \alpha \wp(z) + \beta = 0
+  \end{cases}
+\]
+ce qui signifie aussi que le vecteur colonne
+$\begin{pmatrix} \wp'(x) \\ \wp'(y) \\ \wp'(z) \end{pmatrix}$ s'exprime comme
+comb.\ lin.\ des vecteurs colonnes
+$\begin{pmatrix} \wp(x) \\ \wp(y) \\ \wp(z) \end{pmatrix}$ et
+$\begin{pmatrix} 1 \\ 1 \\ 1 \end{pmatrix}$, \add{ce} qui implique que ces trois
+vect.\ colonnes sont lin.\ dépendants, d'où (42). Inversement, supposons qu'on ait
+(42), et $x, y, z$ \struck{\ill{}} \add{tous distincts},
+\struck{\ill{} \ill{} \ill{} \ill{}} \add{alors, \ill{} \ill{}} n'a pas
+$\wp(x) = \wp(y) = \wp(z)$ (\uncertain{sinon} \ill{} \ill{} fibre de $\wp$, \ill{}
+\uncertain{deux} \uncertain{points}) \add{\ill{}} les vect.\ colonnes
+$\begin{pmatrix} 1 \\ 1 \\ 1 \end{pmatrix}$,
+$\begin{pmatrix} \wp(x) \\ \wp(y) \\ \wp(z) \end{pmatrix}$ sont lin.\ indép.,
+et (42) signifie qu'il existe $\alpha, \beta \in k$ tels qu'on ait (45), i.e.\
+(44), \add{où} $f$ est donnée par (43) a). \struck{Comme} Comme $x, y, z$ sont
+distincts, on en conclut bien (43) b), d'où (41).
+\note{un passage de deux lignes, surchargé et biffé en partie (« $x, y, z$
+\ldots »), est récrit au-dessus de la ligne ; la lecture en est très incertaine.}
+\page{111}\note{p.~6 de l'auteur, chiffrée en tête de page.}
+. Montrons comment cela permet de calculer $z$, par $z_0 = \wp(z)$ et
+$z' = \wp'(z)$ (reliés par
+\[
+  (46) \qquad z'^2 = z_0^3 + a_1 z_0^2 + a_2 z_0 + a_3 \ ),
+\]
+quand on connaît $x$ et $y$, exprimés à l'aide de
+\struck{$x_0 = \wp(x)$, $x' = \wp'(x)$}
+\[
+  \begin{cases}
+    x_0 = \wp(x), & x' = \wp'(x) \\
+    y_0 = \wp(y), & y' = \wp'(y)
+  \end{cases}
+\]
+(reliés par
+$x'^2 = x_0^3 + a_1 x_0^2 + a_2 x_0 + a_3$,
+$y'^2 = y_0^3 + a_1 y_0^2 + a_2 y_0 + a_3$).
+
+L'équation (42) s'écrit
+\[
+  (*) \qquad z'(x_0 - y_0) + z_0(y' - x') + (x' y_0 - y' x_0) = 0
+\]
+i.e.
+\[
+  (47) \qquad z' = \lambda z_0 + \mu , \quad\text{avec}\quad
+  \lambda = \frac{x' - y'}{x_0 - y_0} , \quad
+  \mu = \frac{y' x_0 - x' y_0}{x_0 - y_0}
+\]
+\struck{Donc} (NB on a $x_0 \neq y_0$ i.e.\ $x_0 - y_0 \neq 0$). De plus $z'$
+satisfait (46), qui équivaut à \struck{l'équation} (compte tenu de (47), qui
+implique $z'^2 = \lambda^2 z_0^2 + 2\lambda\mu z_0 + \mu^2$) : l'équation
+\[
+  (48) \qquad z_0^3 + (a_1 - \lambda^2) z_0^2 + (a_2 - 2\lambda\mu) z_0 +
+  (a_3 - \mu^2) = 0
+\]
+Donc $(z_0, z')$ est lié par (47), (48), a priori on trouve 3 solutions \add{en
+$z_0$} de (48), et qui correspondent trois solutions $(z_0, z')$ via (47). Il
+faut trouver une solution unique, on a rappelé qu'on doit avoir
+\[
+  (49) \qquad z_0 \neq x_0 , \quad z_0 \neq y_0 ,
+\]
+\struck{\ill{}}
+\note{« on a rappelé » : lecture incertaine ; le sens est que la condition (49)
+vient de la Proposition~3 (les trois points ont des images distinctes par $\wp$).}
+
+\page{112}
+alors qu'il est clair que \struck{$z_0$} $z_0 = x_0$, $z_0 = y_0$ sont solutions
+\add{des} solutions de l'équation (48). Si donc $z_0$ est une solution
+$\neq x_0, y_0$, on aura
+\[
+  x_0 + y_0 + z_0 = -(a_1 - \lambda^2) = \lambda^2 - a_1
+  = \Bigl(\frac{x' - y'}{x_0 - y_0}\Bigr)^2 - a_1
+\]
+d'où la solution (sous réserve d'existence d'une solution $z_0 \neq x_0, y_0$,
+on a encore \struck{\ill{}} \add{\uncertain{à} \uncertain{réserver}} que
+\[
+  (50) \qquad x, y \in E \setminus \{0\}, \quad x \neq y , \quad
+  -(x + y) \neq x, y \quad\text{i.e.}\quad
+  \begin{aligned}
+    & 2x + y \neq 0 , \ 2y + x \neq 0 \\
+    & \text{i.e.}\ y \neq -2x , \ x \neq -2y
+  \end{aligned}
+  \ \Bigr) ,
+\]
+la solution
+\[
+  (51) \qquad
+  \begin{cases}
+    z_0 = -x_0 - y_0 + \Bigl(\dfrac{x' - y'}{x_0 - y_0}\Bigr)^2 - a_1 \\[2ex]
+    z' = \lambda z_0 + \mu = \dfrac{x' - y'}{x_0 - y_0}
+    \Bigl[ -x_0 - y_0 + \Bigl(\dfrac{x' - y'}{x_0 - y_0}\Bigr)^2 - a_1 \Bigr]
+    + \dfrac{y' x_0 - x' y_0}{x_0 - y_0} .
+  \end{cases}
+\]
+
+Par principe de prolongement, cette expression, pour $z_0 = \wp(z)$ et
+$z' = \wp'(z)$, pour $z = -(x + y)$, est valable encore dès que
+$x, y \in E(k) \setminus \{0\}$ sont tels que $x_0 \neq y_0$ i.e.\
+$\wp(x) \neq \wp(y)$, i.e.\ dès que \struck{$x \neq$} $y \notin \pm x$, de sorte que
+les formules (51) ont un sens.
+\note{la seconde ligne de (51) est écrite sur deux lignes, le terme
+$\frac{y'x_0 - x'y_0}{x_0 - y_0}$ étant renvoyé au-dessous par une accolade.
+La note $\bigl(\ldots\bigr)$ ouverte avant (50) se ferme après les conditions.}
+\page{113}
+. La fonction $\wp$, considérée comme morphisme
+\[
+  (52) \qquad \wp : E \longrightarrow \mathbb{P}^1_k
+\]
+induit l'iso
+\[
+  (53) \qquad \dot\wp : E/\{\pm \mathrm{id}_E\} \simeq \text{droite projective type } \mathbb{P}^1_k
+\]
+par la condition
+\[
+  (54) \qquad \wp(0_E) = \infty
+\]
+ce qui détermine $\wp$ modulo transformation affine
+\[
+  (55) \qquad \wp \longmapsto \wp_1 = a\wp + b \qquad a \in k^*,\ b \in k .
+\]
+Les points d'ordre 2
+\[
+  (56) \qquad (\varepsilon_i)_{i \in J} , \qquad \varepsilon_i \in {}_2E(k)^*
+\]
+sont transformés par $\wp$ en des points
+\[
+  (57) \qquad \zeta_i = \wp(\varepsilon_i) \in \mathbb{P}^1(k) \setminus \{\infty\} = k
+\]
+\add{\ill{}} qui sont, bien sûr, avec le point $\infty$, les points de
+ramification de $\wp$. La normalisation de Weierstrass, possible en car.\
+$\neq 3$, \struck{qui est}
+\[
+  (58) \qquad \underbrace{\textstyle\sum \zeta_i}_{-a_1} = 0
+\]
+elle détermine $\wp$ modulo transformation
+\[
+  \wp \longmapsto \wp_1 = a\wp \qquad a \in k^* .
+\]
+\marginal{NB on obtient ainsi \ill{} \ill{} $E$, \ill{} $k$ \ill{} \ill{}
+\ill{}}
+\note{le numéro (57) manque sur la page, où la formule
+$\zeta_i = \wp(\varepsilon_i)$ n'est pas numérotée ; il est ajouté ici entre (56)
+et (58). La note marginale, écrite de biais dans la marge gauche et renvoyée par
+un astérisque devant « sont, bien sûr », ne se lit que par fragments.}
+
+En général, on pose
+\[
+  (59) \qquad
+  \begin{cases}
+    a_1 = -\sum \zeta_i \\
+    a_2 = \sum \zeta_i \zeta_j \\
+    a_3 = -\prod \zeta_i
+  \end{cases}
+\]
+\note{après « $a_3 =$ », un symbole biffé et raturé, non lu.}
+
+\page{114}
+de sorte que $\zeta_1, \zeta_2, \zeta_3$ sont les solutions de l'équation
+\[
+  (60) \qquad \underbrace{Z^3 + a_1 Z^2 + a_2 Z + a_3}_{\prod_i (Z - \zeta_i)} = 0
+\]
+\struck{\ill{}}
+On aura, \struck{donc} si
+\[
+  \delta \in t_E = T_{E,0}
+\]
+est une base de $t_E$, liée à $\wp$ mod $k \cdot 1$ par
+\[
+  \varepsilon_2(\wp) = \delta^{\otimes 2}
+\]
+et si
+\[
+  \wp' = \Theta_\delta \wp
+\]
+la relation
+\[
+  \wp'^2 = \wp^3 + a_1 \wp^2 + a_2 \wp + a_3 .
+\]
+Déterminons l'automorphisme involutif $\sigma_i$ de $\mathbb{P}^1_k$ qui échange
+$\zeta_i$ et $\infty$, $\zeta_j$ et $\zeta_k$ --- qui \struck{\ill{}}
+\add{\uncertain{s'identifie}} à l'automorphisme induit par passage au quotient de
+$E \to E$, \struck{$x \mapsto x + \ldots$}
+\[
+  x \longmapsto x + \varepsilon_i .
+\]
+On trouve, \struck{\ill{}}
+\[
+  \sigma_i Z = \frac{aZ + b}{cZ + d}
+\]
+et écrivant $\sigma_i \infty = \zeta_i$, $\sigma_i \zeta_i = \infty$
+\struck{$\sigma_i Z$}
+\[
+  \frac{a}{c} = \zeta_i , \qquad -\frac{d}{c} = \zeta_i
+\]
+soit, faisant $c = 1$
+\[
+  \sigma_i Z = \frac{\zeta_i Z + b}{Z - \zeta_i}
+\]
+et écrivant $\sigma_i \zeta_j = \zeta_k$ on trouve
+\[
+  \frac{\zeta_i \zeta_j + b}{\zeta_j - \zeta_i} = \zeta_k
+  \quad\text{i.e.}\quad b = \zeta_j \zeta_k - \zeta_i(\zeta_j + \zeta_k)
+\]
+\note{sous (60), une première forme du produit est biffée. Dans le dénominateur
+de $\sigma_i Z$ faisant $c = 1$, les deux termes sont surchargés ; la lecture
+$Z - \zeta_i$ est celle qu'impose $-d/c = \zeta_i$.}
+\page{115}
+soit
+\[
+  (61) \qquad \sigma_i Z = \frac{\zeta_i Z +
+  \overbrace{\zeta_j \zeta_k - \zeta_i(\zeta_j + \zeta_k)}^{b_i}}{Z - \zeta_i}
+\]
+On peut transformer $b_i$, en utilisant les fonctions symétriques élémentaires
+$(-1)^\alpha a_\alpha$ des $\zeta$,
+\[
+  b_i = 2\underbrace{\zeta_j \zeta_k}_{-a_3/\zeta_i} -
+  \underbrace{(\zeta_i \zeta_j + \zeta_j \zeta_k + \zeta_k \zeta_i)}_{a_2}
+  = -(a_2 + 2a_3/\zeta_i)
+\]
+\add{(expression valable dès que $\zeta_i \neq 0$ ?)} donc on trouve
+\[
+  (62) \qquad \sigma_i Z = \frac{\zeta_i Z - (a_2 + 2a_3/\zeta_i)}{Z - \zeta_i}
+  = \frac{\zeta_i^2 Z - (a_2 \zeta_i + 2a_3)}{\zeta_i Z - \zeta_i^2}
+\]
+\marginal{\ill{} \ill{} \ill{} $a_3/\zeta_i$ \uncertain{seulement} \ill{} (62)
+\ill{} \ill{} Mais qu'il \ill{} \ill{} \ill{} \ill{} $\zeta_i \neq 0$ \ldots}
+\note{deux notes marginales, écrites de biais dans la marge gauche à la hauteur
+de (62), se lisent mal : la première, « expression valable dès que
+$\zeta_i \neq 0$ ? », se rattache à la formule de $b_i$ ; la seconde, renvoyée
+par une flèche vers (62), n'est lue que par fragments.}
+
+Les \add{\uncertain{points}, div.\ $\Delta_i$ des} points fixes de $\sigma_i$
+est \uncertain{l'ensemble} des solutions de l'équation en $Z_i$
+\[
+  (63) \qquad Z_i^2 - 2\zeta_i Z_i + (a_2 + 2a_3/\zeta_i) = 0
+\]
+dont les solutions sont données par
+\[
+  (64) \qquad Z_i = \zeta_i \pm \sqrt{\zeta_i^2 - a_2 - 2a_3/\zeta_i}
+\]
+L'expression sous le signe $\sqrt{\ }$ s'écrit aussi
+\[
+  \frac{1}{\zeta_i}\bigl(\zeta_i^3 - a_2 \zeta_i - 2a_3\bigr)
+\]
+on aura, compte tenu de \uncertain{(60)}
+\[
+  \zeta_i^3 = -a_1 \zeta_i^2 - a_2 \zeta_i - a_3
+\]
+\struck{le radical} cette expression devient
+\[
+  -\frac{1}{\zeta_i}\bigl(a_1 \zeta_i^2 + 2a_2 \zeta_i + 3a_3\bigr)
+\]
+donc (64) s'écrit aussi
+\[
+  (65) \qquad
+  \begin{cases}
+    (Z_i - \zeta_i)^2 = -\dfrac{1}{\zeta_i}\bigl(a_1 \zeta_i^2 + 2a_2 \zeta_i + 3a_3\bigr) \\[2ex]
+    \text{i.e.}\ Z_i = \zeta_i \pm \sqrt{-\dfrac{1}{\zeta_i}\bigl(a_1 \zeta_i^2 + 2a_2 \zeta_i + 3a_3\bigr)}
+  \end{cases}
+\]
+\marginal{Si $\zeta_i = 0$, on \struck{\ill{} \ill{}} \ill{}
+$-(a_1 \zeta_i^2 + 2a_2 \zeta_i + 3a_3)$ \ill{} l'expr.\ sous le radical \ldots}
+\note{le renvoi « (66) » que porte la page devant $\zeta_i^3 = \ldots$ se lit
+plutôt (60), qui est l'équation dont les $\zeta_i$ sont les racines ; (66) est
+une formule de la page suivante. La note marginale gauche en face de (65),
+renvoyée au numéro encerclé, n'est lue qu'en partie.}
+
+Les deux points \add{d'ordre 4} de $E$ sont donc les points au-dessus des six
+points $Z_i$, donc \struck{définis par} \add{\uncertain{définis} \uncertain{par}}
+
+\page{116}
+points ont obtenus, pour un $i$ et un $Z_i$ fixe ; par le choix d'un $Z_i'$
+satisfaisant
+\[
+  (66) \qquad Z_i'^2 = \underbrace{Z_i^3 + a_1 Z_i^2 + a_2 Z_i + a_3}_{(Z_i - \zeta_i)(Z_i - \zeta_j)(Z_i - \zeta_k)} .
+\]
+Choisir, pour tout $i \in J$, un $x_i \in E(k)$ tel que
+\[
+  (67) \qquad 2x_i = \varepsilon_i
+\]
+revient donc à choisir, pour tout $i$, les quantités
+\[
+  (68\,a) \qquad \wp(x_i) = Z_i
+\]
+soumises à (65), \add{(2 choix possibles)} et ensuite, les quantités $Z_i'$
+\[
+  (68\,b) \qquad \wp'(x_i) = Z_i' ,
+\]
+soumises à (66) --- ce qui fait quatre choix possibles pour tout $i$, comme il se
+doit (vu l'indétermination pour $x_i$ dans ${}_2E(k)$).
+
+Ceci posé la condition d'équilibre de Jacobi relatif d'échelon 4
+\[
+  (69) \qquad \sum_{i \in J} x_i = 0
+\]
+s'exprime par la condition
+\[
+  (70) \qquad
+  \begin{cases}
+    \det \begin{pmatrix} 1 & Z_1 & Z_1' \\ 1 & Z_2 & Z_2' \\ 1 & Z_3 & Z_3' \end{pmatrix} = 0
+    \qquad \text{i.e.} \\[3ex]
+    (Z_1 Z_2' - Z_2 Z_1') + (Z_2 Z_3' - Z_3 Z_2') + (Z_3 Z_1' - Z_1 Z_3') = 0 .
+  \end{cases}
+\]
+(cf.\ prop.~3), qui s'applique, car les $x_i$ sont tous distincts \ldots)
+\note{« points ont obtenus » : la page commence ainsi, à la suite de la phrase
+interrompue page~115 ; la lecture de ce début de phrase est incertaine.
+« condition d'équilibre de Jacobi » : lecture incertaine de « d'équilibre ».}
+\page{117}
+En mettant ensemble les équations pertinentes :
+\[
+  (71) \qquad
+  \begin{cases}
+    (Z_i - \zeta_i)^2 = -\dfrac{1}{\zeta_i}\bigl(a_1 \zeta_i^2 + 2a_2 \zeta_i + 3a_3\bigr)
+    \quad \bigl[= -(a_1 \zeta_i + 2a_2 + 3\zeta_j \zeta_k)\bigr] \\[2ex]
+    Z_i'^2 = Z_i^3 + a_1 Z_i^2 + a_2 Z_i + a_3
+    \quad \bigl[= (Z_i - \zeta_i)(Z_i - \zeta_j)(Z_i - \zeta_k)\bigr] \\[2ex]
+    \det \begin{pmatrix} 1 & Z_1 & Z_1' \\ 1 & Z_2 & Z_2' \\ 1 & Z_3 & Z_3' \end{pmatrix} = 0
+    \\ \quad \text{i.e.}\
+    \underbrace{(Z_2 Z_3' - Z_3 Z_2')}_{\varphi_1} +
+    \underbrace{(Z_3 Z_1' - Z_1 Z_3')}_{\varphi_2} +
+    \underbrace{(Z_1 Z_2' - Z_2 Z_1')}_{\varphi_3} = 0
+  \end{cases}
+\]
+\marginal{$Z_i^2 = 2\zeta_i Z_i - (a_2 + 2\zeta_j \zeta_k)$ $\Longrightarrow$}
+\marginal{NB.\ $\bigl[\varphi_i^\omega = Z_j Z_k' - Z_k Z_j'$, \
+$j = \omega i$, $k = \omega^2 i = \omega^{-1} i \bigr]$}
+qui expriment conjointement les données de
+\[
+  (72) \qquad (x_i)_{i \in J} \in E(k)^J \quad \text{satisfaisant (67), (69),}
+  \qquad 2x_i = \varepsilon_i \ \bigl(\in {}_2E(k)^*\bigr) , \quad \sum x_i = 0
+\]
+via
+\[
+  (73) \qquad Z_i = \wp(x_i) , \quad Z_i' = \wp'(x_i) .
+\]
+\note{la première note marginale, dans la marge gauche en face de (71), est
+reliée par une double flèche à la première ligne de (71) ; la seconde, encadrée
+de crochets, est à la hauteur de « qui expriment ». Dans les crochets de (71),
+les indices sont écrits très court.}
+
+Je voudrais, à une telle donnée$_2$ $(x_i)_{i \in J}$, exprimée calculatoirement
+(via le choix d'un $\delta \in t_E^*$ et $\wp \in \mathcal{F}_2$ associés) par (71),
+associer \add{canoniquement} un \emph{épinglage de Legendre de $E$}, de façon
+fonctorielle en $E$ et compatible avec le changement de corps de base (ou même
+de base \ldots). Je vais pour ceci supposer d'abord fixé un
+\[
+  (74) \qquad \dot\imath \in \mu_4^*(k) ,
+\]
+de sorte que, via ce choix, la première donnée $\alpha$ d'un épinglage de
+Legendre de $E$ s'interprète comme un élément
+\[
+  (75) \qquad \omega \in \underline{\omega} = \underline{\omega}_J
+  \qquad \text{un ordre circulaire sur } J = {}_2E(k)^* = \{\varepsilon_i\} ,
+\]
+\marginal{$\alpha = \dot\imath \wedge \omega$}
+de sorte que la deuxième donnée $K$ s'interprète comme un isomorphisme
+\[
+  (75) \qquad K : \underline{t}_E \simeq \mathcal{O}_{\Sigma_J, t}(1)^{\otimes \,\cdots}
+  \xrightarrow[\sim]{\ \text{via choix de } \dot\imath\ } \mathcal{O}_t(1) ,
+\]
+\note{le numéro (75) est porté deux fois, ici et à la formule précédente ; transcrit tel quel (cette formule est celle que la suite appelle (76)). L'exposant (noté ici $\cdots$) après
+$\mathcal{O}_{\Sigma_J,t}(1)$ n'est pas lu. L'étiquette de la flèche, encerclée et
+renvoyée par une flèche, se lit « via choix de $\dot\imath$ » avec incertitude.
+« donnée$_2$ » : l'indice $2$ est de l'auteur.}
+\page{118}
+satisfaisant à \struck{la} \add{la} condition que son carré $K^{\otimes 2}$
+s'identifie, via les isom.\ canoniques
+\[
+  (77) \qquad \underline{t}_E^{\otimes 2} \simeq T_{\Sigma_J, t} , \qquad
+  \mathcal{O}_t(1)^{\otimes 2} = \mathcal{O}_t(2) \underset{\text{via } \alpha}{\simeq}
+  \mathcal{O}_t(2)(\underline{\omega}) \simeq T_{\Sigma_J, t}
+\]
+à l'isom.\ identique de $T_{\Sigma_J, t}$ --- ce qui, pour $\alpha$ fixé (deux
+choix), détermine $K$ modulo signe. Pour $\alpha$ non fixé, $K$ est déterminé
+modulo multiplication par $\mu_4(k)$.
+\note{« son carré $K^{\otimes 2}$ » : le mot devant $K^{\otimes 2}$ se lit mal ;
+un mot surchargé suit « s' ». La phrase continue celle de la page~117,
+interrompue après (76).}
+
+Rappelons-nous de la suite exacte canonique
+(78)
+
+
+\begin{tikzcd}[column sep=small]
+    0 \arrow[r] & F_t \arrow[r] \arrow[d, no head, "\wr"] &
+    V_J(k) \arrow[r] \arrow[d, no head, "\wr"] & \mathcal{O}_t(1) \arrow[r] & 0 \\
+    & \mathcal{O}_t(-1)(\underline{\omega}) &
+    \Gamma(\Sigma_J, \underline{\mathcal{O}}_{\Sigma_J}(1)) & &
+  \end{tikzcd}
+
+que \struck{par \ill{}} je compare \add{avec}
+\[
+  (79) \qquad 0 \to k \cdot 1_{\Sigma_J} \to
+  \overbrace{\Gamma(\Sigma_J, \underbrace{\underline{\mathcal{O}}_{\Sigma_J}\{t\}}_{\substack{\simeq\, \underline{\mathcal{O}}_{\Sigma_J}(1) \\ \text{non canoniquement}}})}^{\dot\simeq\, \mathcal{F}_2}
+  \to T_{\Sigma_J, t} \to 0
+\]
+On constate que la deuxième suite exacte est canoniquement isom.\ à celle
+déduite de la première, en la tensorisant par
+\[
+  (80) \qquad \check F_t \simeq \mathcal{O}_t(1)(\underline{\omega})
+\]
+(comme on \uncertain{le} \uncertain{voit} \ill{} dès qu'on fixe \ill{} à un Module
+loc.\ libre de rang $2$, $\underline{V}$, \struck{\ill{}} et une section $t$ de
+$\mathbb{P}(\underline{V})$ \ldots) :
+(81)
+
+
+\begin{tikzcd}[column sep=small]
+    0 \arrow[r] & F_t \otimes \check F_t \arrow[r] \arrow[d, "\wr"] &
+    V_J(k) \otimes \check F_t \arrow[r] \arrow[d, "\wr"] &
+    \mathcal{O}_t(1) \otimes \check F_t \arrow[r] \arrow[d, "\wr"] & 0 \\
+    0 \arrow[r] & k \cdot 1_{\Sigma_J} \arrow[r] &
+    \Gamma(\Sigma_J, \underline{\mathcal{O}}_{\Sigma_J}\{t\}) \arrow[r] &
+    T_{\Sigma_J, t} \arrow[r] & 0
+  \end{tikzcd}
+
+\note{dans (78), les isomorphismes sont écrits verticalement (« $\wr$ ») sous
+$F_t$ et $V_J(k)$. Dans (79), l'accolade supérieure porte « $\dot\simeq
+\mathcal{F}_2$ » avec un point sur le signe. Dans (81), le terme
+$\mathcal{O}_t(1) \otimes \check F_t$ porte au-dessus l'identification
+$\underline{\mathcal{O}}_t(2)(\underline{\omega})$, et le terme
+$\Gamma(\Sigma_J, \underline{\mathcal{O}}_{\Sigma_J}\{t\})$ est souligné
+d'une accolade marquée $\mathcal{F}_2$ ; le numéro (81) est écrit sur un
+numéro biffé.}
+\page{119}
+La donnée d'un isom.\ $K : \underline{t}_E \simeq \mathcal{O}_t(1)$ équivaut à
+celle de
+\[
+  \check K : \check{\underline{t}}_E \simeq \underline{\mathcal{O}}_t(1)^\vee \simeq
+  \underline{\mathcal{O}}_t(-1) \xrightarrow[\text{via } \omega]{}
+  \underline{\mathcal{O}}_t(-1)(\underline{\omega}) \simeq F_t
+\]
+\struck{ce qui implique une injection} \add{ou encore à celle d'un}
+monomorphisme
+\[
+  \check t_E \hookrightarrow V_J(k) \hookrightarrow k^J
+\]
+dont l'image soit $F_t$, ou enfin à celle d'un élément non nul de
+\[
+  V_J(\underline{t}_E) = \operatorname{Ker}\bigl(\underline{t}_E^J \xrightarrow[\text{somme}]{} \underline{t}_E\bigr)
+\]
+\note{dans la dernière formule, deux symboles sont raturés, l'un devant
+$V_J(\underline{t}_E)$, l'autre après le signe $=$ ; ils ne sont pas lus.}
+donc on peut considérer que la donnée de $K$ revient à celle d'une famille
+\[
+  (82) \qquad (\delta_i)_{i \in J} \in \underline{t}_E^J
+\]
+satisfaisant certaines relations, savoir
+\[
+  (83) \qquad
+  \begin{cases}
+    \text{a) } \sum \delta_i = 0 \quad \text{exprimant } \delta_i \in V_J(\underline{t}_E) \\
+    \text{b) Relation de proportionnalité, exprimant que l'image de } \\
+    \qquad \check t_E \hookrightarrow V_J(k) \text{ définie par } (\delta_i) \text{ est } F_t , \\
+    \qquad \text{de sorte que } (\delta_i) \text{ définit }
+      K : \underline{t}_E \xrightarrow{\sim} \check F_t \xrightarrow[\text{via } \omega]{\sim} \mathcal{O}_t(1) \\
+    \text{c) Relation de l'épinglage de Legendre, exprimant que } \\
+    \qquad K^{\otimes 2} \text{ est un isom.\ standard déjà connu.}
+  \end{cases}
+\]
+Nous allons expliciter les $\delta_i$ en termes du choix d'un
+$\delta \in \underline{t}_E^*$, \add{en plus du choix de $\omega \in
+\underline{\omega}$,} comme
+\[
+  (83) \qquad \delta_i = \varphi_i^\omega(\delta)\, \delta \qquad
+  \text{où}\quad \varphi_i^\omega(\delta) \in k^* \quad
+  \bigl(i \in J,\ \omega \in \underline{\omega}(J),\ \delta \in \underline{t}_E^*\bigr)
+\]
+La condition d'invariance de $\delta_i$ par rapport au choix de $\delta$
+s'exprime par la relation
+\[
+  (85) \qquad \varphi_i^\omega(\lambda\delta) = \frac{1}{\lambda}\, \varphi_i^\omega(\delta)
+\]
+\note{les numéros (82) à (85) sont écrits de façon peu nette ; le numéro (83) est porté
+deux fois, transcrit tel quel (la seconde formule est la (84) de la suite). Au début de la page, le $K$ de « isom.\ $K$ » est
+surchargé.}
+\page{120}
+la condition (83) a) s'exprime par
+\[
+  (86) \qquad \sum_i \varphi_i^\omega(\delta) = 0
+\]
+la condition b) par la relation
+\[
+  (87) \qquad k \cdot \bigl((\varphi_i^\omega(\delta))_i\bigr) = F_t
+\]
+qui détermine d'ailleurs les $(\varphi_i^\omega(\delta))_i$ à un scalaire inversible
+près --- la condition c les déterminant enfin (pour $\dot\imath$ également choisi)
+au \emph{signe} près. Bien sûr, \struck{\ill{}} \add{la relation entre $K$ et les
+$\varphi_i^\omega(\delta)$ s'explicite par}
+\[
+  (88) \qquad \bigl(\varphi_i^\omega(\delta)\bigr) =
+  \underbrace{\check K(\check\delta)}_{\mathcal{O}_t(-1)} \wedge \omega
+  \in \mathcal{O}_t(-1)(\underline{\omega}) \simeq F_t \subset V_J(k) \subset k^J
+\]
+et la condition c) s'écrit \ldots\ Dieu sait comment --- il faudra \struck{\ill{}}
+y revenir. Reste à exprimer la dépendance par rapport à $\omega$ ; pour
+\struck{\ill{}} trouver l'invariance de l'épinglage de Legendre par rapport au
+choix de $\dot\imath$ i.e.\ \struck{\ill{}} par rapport au choix de
+$\omega = \omega_{\dot\imath}$ ($\alpha : \mu_4^*(k) \simeq \underline{\omega}$
+étant supposé déterminé), on trouve la relation \uncertain{évidente}
+\[
+  (89) \qquad \varphi_i^{\omega'}(\delta) = \dot\imath_\omega\, \varphi_i^\omega(\delta)
+\]
+où
+\[
+  \dot\imath_\omega \overset{\text{déf}}{=} \alpha(\omega) , \qquad
+  \alpha : \mu_4^* \xrightarrow{\ \sim\ } \underline{\omega} \ \text{étant l'iso.}
+\]
+(supposé déterminé) associé à l'épinglage de Legendre cherché.
+
+Posons
+\note{« la condition c les déterminant enfin » : lecture incertaine de ce passage.
+Dans (88), le $\check\delta$ porte un second signe, surchargé. Dans (89), un
+premier facteur est raturé devant $\dot\imath_\omega$, et le $\omega'$ du membre
+de gauche se lit mal. La page s'arrête sur « Posons », sans suite dans ce lot.}
+
+\end{document}
