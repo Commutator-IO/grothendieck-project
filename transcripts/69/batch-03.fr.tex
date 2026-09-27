@@ -1,0 +1,1126 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 69, batch 3 (pages 41-60).
+% Established from the facsimile archives/batches/69/batch-03.pdf (cut from a
+% copy of 69.pdf fetched through the project's relay,
+% https://grothendieck-relay.onrender.com/source/69.pdf, a mirror of
+% https://grothendieck.umontpellier.fr/69.pdf), per the skill
+% transcribe-grothendieck. The raw scan's cover sheet is not in the batch
+% file: PDF page k is archivists' page 40+k, and the pencilled numbers
+% bottom-left (« 41 » ... « 60 ») agree. The folder is 119 pages in six
+% batches (1-20, 21-40, 41-60, 61-80, 81-100, 101-119), transcribed in
+% parallel; this file does not rely on its neighbours.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-09-27 — first pass, unchecked against the pages by a human.
+%
+% Pages skipped: none. Pages summarised: none. All twenty pages are his
+% working notes in blue ink on punched listing paper (staves ruled in grey),
+% and all are transcribed.
+%
+% His pagination. Page 41 opens a run headed « Les 27 droites de la surface
+% cubique, et le syst. de racines E6 », paginated by him 1 to 17 at the top
+% of pages 41-57 (« 1 » over the title, 2-17 circled except 7 and 8). Pages
+% 58-60 carry no number of his and restart under the underlined heading
+% « Graphes cubiques ». Internal references (« (12) à (16) de (I) ») refer to
+% his numbered formulas within the run.
+%
+% What the batch is about. The combinatorics of the 27 lines on a cubic
+% surface and the root system E6, which is where the folder's « graphes
+% cubiques » come from. I (pp. 41-43): P blown up at six general points
+% s_1..s_6; the curves D_i, D'_i (conics), D_ij (lines), their classes
+% eta, xi_i, xi'_i, xi_ij in Pic, the relations (1)-(16), lambda = 3 eta - xi
+% (the cubic embedding, K = -3 lambda in a margin note), each line meeting
+% ten others and any two meeting lines having a unique third. II (pp.
+% 43-48): the same algebra over a ring k, the dual family (eta', xi'_i), the
+% intersection form, the « graphe cubique » Delta on the 27 elements (linked
+% iff product 1), the lemma on the unique third vertex, the definition of a
+% cubic graph as a graph isomorphic to the standard one, the lattice
+% E^(Delta) = k^[Delta]/N(Delta) of rank 7, ordered bases, Isom(Delta_0,
+% Delta) a torsor, the canonical lambda_Delta with lambda.s = 1. III (pp.
+% 49-57): roots as differences of unlinked vertices, the 72 roots in three
+% families r_0, r_ij, r_ijk each tied to a « double six », the reflections
+% s_r, W = Aut(Delta) transitive on roots and bases, Card W = 72.6! =
+% 2^7 3^4 5, the theorem that R(Delta) is a root system of type E6 with
+% simple roots r_1..r_6 and the Dynkin diagram (redrawn in tikz-cd), the
+% highest root r_0, W of index 2 in Aut of the root system, the map
+% i(delta) = 3 delta - lambda to vectors of square -12 and the splitting of
+% Aut(R) as W x Z/2. Pp. 58-60 restart: an intrinsic definition of cubic
+% graphs by conditions a)-e) on two sets I, I' of six vertices, bases and
+% « bibases », the 72 bases listed in four families (i)-(iv), corollaries,
+% and a cancelled attempt (crossed out on p. 60) at « bi-bases » and triples
+% of linked vertices.
+%
+% Notation, fixed once. His gothic P is \mathfrak{P} (P_2(I), sets of pairs);
+% his « E chapeau » is \widehat{E}; the symmetric group is \mathfrak{S}_6.
+% His circled crossed reference marks are rendered (*) with a \note. Formulas
+% where he wrote over earlier symbols are given as the final reading, and
+% the overwriting is noted where the earlier symbol reads. Where a formula on
+% the page disagrees with the computation around it (p. 44, p. 57), it is
+% kept and flagged in a \note, not corrected. Pages 50 (lower half) and 60
+% (lower half) are cancelled by long strokes and transcribed as far as they
+% read, their many overwritings making them the hardest of the batch.
+%
+% DATING: the folder has its own date in the catalogue, copied verbatim; no
+% group sentence.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{69}
+\batch{3}
+\pages{41}{60}
+\dating{[à partir de 1976]}
+\watermark{Édition de démonstration}
+\foldertitle{Graphes cubiques : notes manuscrites (s.d.), lettre (s.d.).}
+
+\begin{document}
+
+\page{41}
+\section{Les 27 droites de la surface cubique, et le syst.\ de racines $E_6$}
+\note{titre de sa main, en tête de la page ; au-dessus de « cubique », un
+chiffre qui se lit « 1 », début de sa pagination de 1 à 17 (pages 41 à 57),
+les suivants étant cerclés}
+
+\textbf{I.} $P$ plan projectif (\uncertain{sur un corps} \ill{} \ill{} \ill{})
+
+$S = \{s_1, \dots, s_6\}$ un ens.\ de $6$ pts de $P$ \struck{\ill{}}
+\struck{trois \ill{} \ill{}} pas \add{trois à trois} alignés et pas
+\struck{\ill{}} \add{tous} sur une conique
+
+$\widetilde{P}$ déduit de $P$ en faisant éclater $S$
+
+$\widetilde{S} = \sum_{1}^{6} D_i$ image inverse de $S$
+
+$D_{ij}$ ($1 \leq i \neq j \leq 6$) image inv.\ propre de la droite qui joint
+$s_i, s_j$
+
+$D'_i$ image inverse propre de \emph{la} conique dans $P$ passant par
+$S - \{s_i\}$
+\marginal{vérifier}
+
+On a
+\[
+(\ast)\quad
+\begin{cases}
+D_i \cap D_j = \emptyset & \text{si } i \neq j \\
+D_i \cap D_{jk} \neq \emptyset & \text{ssi } i \in \{j, k\} \\
+D'_i \cap D'_j = \emptyset & \text{si } i \neq j \\
+D'_i \cap D_{jk} \neq \emptyset & \text{ssi } i \in \{j, k\} \\
+D_i \cdot D'_j \neq \emptyset & \text{ssi } i \neq j \\
+D_{ij} \cdot D_{kl} \neq \emptyset & \text{ssi } \{i,j\} \cap \{k,l\} \text{ de card.\ } 0 \text{ ou } 2
+\end{cases}
+\]
+\note{le signe de renvoi devant l'accolade est un rond plein, rendu ici
+$(\ast)$ ; la condition « ssi $\{i,j\} \cap \{k,l\}$ de card.\ $0$ ou $2$ » est
+écrite au bout de l'avant-dernière ligne et vaut pour la dernière}
+\marginal{vérifier — cf calculs plus bas}
+
+On calcule, \emph{dans} \add{$E$} $\simeq A^1(\widetilde{P}) =
+\operatorname{Pic}(\widetilde{P})$, en désignant par
+\[
+(1) \qquad \eta, \ (\xi_i)_{1 \leq i \leq 6}
+\]
+les images inverses de $\operatorname{cl}(\mathcal{O}_P(1))$ et les classes
+des $D_i$, par $\xi'_i$ les classes des $D'_i$, par $\xi_{ij}$ celles des
+$D_{ij}$. On trouve
+\[
+\begin{aligned}
+&(2) & \xi_{ij} &= \eta - \xi_i - \xi_j \\
+&(3) & \xi'_i &= 2\eta - \sum_{\alpha \neq i} \xi_\alpha = 2\eta - \xi + \xi_i
+\end{aligned}
+\]
+i.e.
+\[
+(3\,\text{bis}) \qquad \xi'_i - \xi_i = 2\eta - \xi
+\]
+en posant
+\[
+(4) \qquad \xi = \sum_{1}^{6} \xi_\alpha
+\]
+Posons aussi
+\[
+(4') \qquad \xi' = \sum_{1}^{6} \xi'_\alpha = 12\eta - 5\xi
+\]
+et définissons $\eta'$ par
+\[
+(5) \qquad 2\eta - \xi = -(2\eta' - \xi') \quad \text{i.e.} \quad
+2(\eta + \eta') = \xi + \xi'
+\]
+i.e.\ (compte tenu de (3 bis)) :
+\[
+(5\,\text{bis}) \qquad \xi_i - \xi'_i = 2\eta' - \xi'
+\]
+On trouve, posant
+\[
+(6) \qquad \lambda = 3\eta - \xi
+\]
+
+\page{42}
+\note{numéro de sa main en tête de page, cerclé : « 2 »}
+les formules
+\[
+(7) \qquad \xi + \xi' = 12\eta - 4\xi = 4\lambda
+\]
+donc (5) s'écrit (en divisant par 2) \struck{$\eta + \eta' = 2\lambda$}
+\[
+(8) \qquad \eta + \eta' = 2\lambda
+\]
+ou encore
+\[
+(8\,\text{bis}) \qquad \eta' = 5\eta - 2\xi
+\]
+Notons que $\lambda$ provient de l'application rationnelle
+$P \to \mathbb{P}^3$ définie par le système des cubiques qui passent par $S$,
+laquelle devient régulière sur $\widetilde{P}$ et définit une immersion
+$\widetilde{P} \hookrightarrow \mathbb{P}^3$ dont l'image est une surface
+cubique. (En particulier, $\lambda$ est ample…) \struck{On}
+\marginal{$K = -3\lambda$ ($K$ \uncertain{classe} canonique) ce qui
+\uncertain{conduit à} \uncertain{définir} $\lambda$ de façon intrinsèque à la
+surface $\widetilde{P} = X$. \uncertain{Donc aussi} l'immersion
+$X \hookrightarrow \mathbb{P}^3$ (\ill{} \ill{} \ill{}) est intrinsèque
+\uncertain{à} $X$, ainsi que les $D_i, D'_i, D_{ij}$, i.e.\ les
+\uncertain{seules} droites de $\mathbb{P}^3$ contenues dans $X$ (\uncertain{
+$\to$ fonctoriel}, les $27$ élts $\xi_i, \xi'_i, \xi_{ij} \in E$ sont
+intrinsèques à $X$)}
+\note{la note marginale est écrite en oblique le long du bord gauche, en face
+des lignes (10) à (13) ; « $K$ » et le « $\lambda$ » qui le suit sont repassés
+d'une encre plus foncée}
+
+Calculons la forme intersection sur $\widetilde{P}$. On a
+\[
+(10) \qquad \eta^2 = 1, \quad \xi_i^2 = -1, \quad \eta \cdot \xi_i = 0,
+\quad \xi_i \xi_j = 0 \ \text{si } i \neq j
+\]
+d'où facilement
+\[
+(11) \qquad \eta'^2 = 1, \quad \xi_i'^2 = -1, \quad \eta' \cdot \xi'_i = 0,
+\quad \xi'_i \xi'_j = 0 \ \text{si } i \neq j .
+\]
+\uncertain{On a} aussi
+\[
+\begin{aligned}
+&(12) & \lambda^2 &= 3 \qquad (= \lambda\eta = \lambda\eta') \\
+&(13) & \lambda\xi_i &= \lambda\xi'_i = \lambda\xi_{ij} = 1
+\end{aligned}
+\]
+La relation (\uncertain{12}) signifie que l'immersion $\widetilde{P} \to \mathbb{P}^3$
+a comme image une surface cubique, la relation (13) que les images dans
+$\mathbb{P}^3$ des $27$ \add{$= 6 + 6 + 15$} courbes $D_i, D'_i, D_{ij}$
+sont des \emph{droites}.
+\note{le second chiffre du premier renvoi est mal formé ; le sens demande (12)}
+
+Notons encore
+\[
+(14) \qquad \xi_i \cdot \xi'_j =
+\begin{cases} 0 & \text{si } i = j \\ 1 & \text{si } i \neq j \end{cases}
+\]
+
+\page{43}
+\note{numéro de sa main en tête de page, cerclé : « 3 »}
+\[
+\begin{aligned}
+&(15) & \xi_i \xi_{jk} = \xi'_i \xi_{jk} &=
+\begin{cases} 0 & \text{si } i \notin \{j, k\} \\ 1 & \text{si } i \in \{j, k\} \end{cases} \\
+&(16) & \xi_{ij} \xi_{kl} &=
+\begin{cases} 0 & \text{si } \operatorname{card}(\{i,j\} \cap \{k,l\}) = 1 \\
+1 & \text{si } \{i,j\} \cap \{k,l\} = \emptyset \end{cases}
+\end{aligned}
+\]
+\note{dans (16), le $0$ est écrit en surcharge sur un autre chiffre}
+
+ce qui précise $(\ast)$ : les \add{$27$} droites, quand deux \struck{elles}
+se rencontrent, se rencontrent en exactement un pt avec int.\ transversale
+(\uncertain{on espère} !)
+
+On vérifie de plus que ch.\ droite parmi les $27$ en rencontre exactement
+$10$ autres ; p.ex.\ $D_i$ rencontre les $D'_j$ \struck{\ill{}} \add{et}
+$D_{ij}$ ($j \neq i$), $D'_i$ les $D_j$ et $D_{ij}$ ($j \neq i$), $D_{12}$
+rencontre $D_1, D_2, D'_1, D'_2$ ; $D_{3,4}$, $D_{5,6}$, $D_{3,5}$,
+$D_{4,6}$, $D_{3,6}$, $D_{4,5}$…. On vérifie aussi que si $\delta,
+\delta'$ parmi \struck{les} \add{l'ens.\ $\Delta$ des} $27$ droites se
+rencontrent, $\exists!\, \delta'' \in \Delta$ \struck{parmi} tel que
+$\delta''$ rencontre $\delta$ et $\delta'$…
+
+\textbf{II)} Soit, sur un anneau $k$ \add{$\neq 0$} (p.ex.\ $k =
+\mathbb{Z}$), un module \struck{engendré} \add{muni} \struck{par} des
+éléments $\bigl[\eta, \xi_i, \eta', \xi'_i \ (1 \leq i \leq 6)\bigr]$
+satisfaisant (posant \struck{$\xi = \sum \xi_i$, $\xi' = \sum \xi'_i$})
+\[
+\begin{aligned}
+&(a)\ (\text{déf}) & \xi &= \sum_{1}^{6} \xi_i, \quad \xi' = \sum_{1}^{6} \xi'_i \\
+&(b) & 2(\eta + \eta') &= \xi + \xi' \quad \text{i.e.} \quad
+2\eta - \xi = -(2\eta' - \xi')
+\end{aligned}
+\]
+et de plus
+\[
+(c) \qquad \xi'_i - \xi_i = 2\eta - \xi \quad \text{i.e.} \quad
+\xi_i - \xi'_i = 2\eta' - \xi'
+\]
+\note{les lettres (a), (b), (c) sont cerclées sur la page}
+Alors on a les relations
+\[
+(d) \quad
+\begin{cases}
+\xi'_i = 2\eta - \xi + \xi_i = 2\eta - \sum_{\alpha \neq i} \xi_\alpha \\
+\xi' = 12\eta - 5\xi
+\end{cases}
+\]
+\note{entre les deux lignes de (d), une ligne biffée, illisible ; à droite,
+après « donc », un bloc biffé en zigzag :
+$\xi + \xi' = \ill{}\,\lambda$ \ill{}, puis
+$\lambda = 3\eta - \xi$, $\lambda' = 3\eta' - \xi'$}
+
+\page{44}
+\note{numéro de sa main en tête de page, cerclé : « 4 »}
+et les relations symétriques
+\[
+(d') \quad
+\begin{cases}
+\xi_i = 2\eta' - \xi' + \xi'_i = 2\eta' - \sum_{\alpha \neq i} \xi'_\alpha \\
+\xi = 12\eta' - 5\xi'
+\end{cases}
+\]
+\note{entre les deux lignes de (d'), une ligne biffée, où se lit encore
+« $\ill{} - 2\eta'$ »}
+d'où
+\[
+(e) \qquad \xi + \xi' = 4\lambda = 4\lambda' \qquad \text{avec} \quad
+\lambda = 3\eta - \xi, \ \lambda' = 3\eta' - \xi'
+\]
+\struck{Donc}, On a donc, \struck{par (e)} $4\lambda = 4\lambda'$ i.e.\
+$4(\lambda' - \lambda) = 0$, mais on suppose en plus que
+\[
+(\ast) \qquad 3\eta - \xi = 3\eta' - \xi' \overset{\text{df}}{=} \lambda
+\]
+\note{le signe de renvoi devant cette formule est une croix cerclée, rendue
+$(\ast)$}
+\marginal{N.B.\ conséquence de ce qui précède si $2$ inv.\ dans $k$ (ou
+\uncertain{de} $M$)}
+\[
+\bigl(3\eta' = 3\eta - \xi + \xi' = 15\eta - 5\xi\bigr)
+\]
+\note{sous la parenthèse, une accolade porte les mots « compte tenu », qui se raccordent à la ligne suivante ;
+d'après (b) et (d), $3\eta - \xi + \xi' = 15\eta - 6\xi$ : le chiffre repassé
+qui se lit $5$, d'une lecture incertaine, ne s'accorde pas avec le calcul}
+et \ill{} \ill{} \add{compte tenu} de (b) donne $2\eta' \struck{\ill{}} = \xi
++ \xi' - 2\eta = 10\eta - 4\xi$
+\[
+(f) \quad
+\begin{cases}
+\eta + \eta' = 2\lambda \\
+\xi + \xi' = 4\lambda
+\end{cases}
+\qquad\qquad
+(g, g') \quad
+\begin{cases}
+\eta' = 5\eta - 2\xi \\
+\eta = 5\eta' - 2\xi'
+\end{cases}
+\]
+\note{de (e) à (f), une longue accolade ondulée dans la marge gauche}
+
+Pour que $(\eta, (\xi_i))$ soit une famille gén.\ (\uncertain{basique}) de
+$M$, il faut et il suffit qu'il en soit de même de $(\eta', (\xi'_i))$.
+\struck{Posons} On a
+\[
+(h) \qquad \eta - \xi_i - \xi_j = \eta' - \xi'_i - \xi'_j
+\quad \bigl(\overset{\text{df}}{=} \xi_{ij}\bigr)
+\]
+Le module engendré par \struck{\ill{} \ill{}} $(\eta, (\xi_i))$ ou par
+$(\eta', (\xi'_i))$, est aussi engendré par la famille de $27$ élts
+$(\xi_i)$ $(\xi'_i)$ $(\xi_{ij})$ [ou même $((\xi_i), \xi_{\alpha\beta})$
+disons] dans les cas…
+
+Supposons qu'il \struck{existe} \add{donnée} sur $M$ une forme sym.\ b.l.,
+notée $x.y$. \struck{telle que} Alors les relations
+\[
+(i) \qquad \eta^2 = 1, \quad \xi_i^2 = -1, \quad \eta\xi_i = 0, \quad
+\xi_i\xi_j = 0 \ \text{si } i \neq j
+\]
+sont équiv.\ aux relations sym.
+\[
+(i') \qquad \eta'^2 = 1, \quad \xi_i'^2 = -1, \quad \eta'\xi'_i = 0, \quad
+\xi'_i\xi'_j = 0 \ \text{si } i \neq j
+\]
+et elles impliquent que $(\eta, (\xi_i))$ forme une famille libre (et
+$(\eta', (\xi'_i))$ aussi) — donc
+
+\page{45}
+\note{numéro de sa main en tête de page, cerclé : « 5 »}
+une base s'ils \struck{\ill{}} \uncertain{la} engendrent. Inversement, si
+ils forment une base, $\exists$ forme bil.\ sym.\ satisfaisant les
+conditions équivalentes (i), (i'). On aura alors les formules (12) à (16) de
+(I). On suppose dorénavant qu'on est dans cette situation.
+
+Considérons les $27$ éléments $\xi_i, \xi'_i, \xi_{ij}$ ($1 \leq i \neq j
+\leq 6$), (qui dans la base $(\eta, (\xi_i))$ s'écrivent
+\[
+\begin{aligned}
+\xi_i &= \xi_i \\
+\xi'_j &= 2\eta - \sum_{\alpha \neq j} \xi_\alpha \\
+\xi_{ij} &= \eta - \xi_i - \xi_j \qquad (i \neq j) \bigr)
+\end{aligned}
+\]
+\uncertain{Soit} \struck{\ill{}} $\Delta$ leur ens.\ ; \uncertain{ils sont}
+tous distincts. On met dessus une structure de graphe en notant
+\struck{\ill{}} que si $\delta, \delta' \in \Delta$, \add{$\delta \neq
+\delta'$} on a $\delta . \delta' = 0$ ou $1$, (N.B.\ $\delta^2 = \delta'^2
+= -1$) \struck{et on considère $\delta, \delta'$ liés ssi $\delta$}
+\[
+(j) \qquad \delta, \delta' \ (\in \Delta, \ \delta \neq \delta') \ \text{liés
+ssi} \ \delta\delta' = 1 \quad \text{i.e.} \quad \delta\delta' \neq 0 .
+\]
+\marginal{N.B.\ \struck{\ill{}} \ill{} engendrent $E$ (il suffit des
+$\xi_i$ et d'\emph{un} $\xi_{ij}$)}
+\note{la lettre de la marge est surmontée d'un accent circonflexe, $\hat{E}$ ;
+le premier mot après « N.B. » peut se lire « tous »}
+
+Donc $\xi_i$ est lié aux él.\ $\xi'_j$ ($j \neq i$) et $\xi_{ij}$ ($j \neq
+i$) exactement (soit $10$ él.), $\xi'_i$ est lié aux él.\ $\xi_j$ ($j \neq
+i$) et $\xi_{ij}$ ($j \neq i$) exactement (soit encore $10$ éléments) et
+$\xi_{ij}$ \add{($i \neq j$)} est lié à $\xi_i, \xi_j$, \add{$\xi'_i,
+\xi'_j$}, et à $\xi_{kl}$ ($k \neq i, j$, $l \neq i, j$, $k \neq l$) en
+nombre $\binom{4}{2} = 6$, donc en tout encore $10$ éléments.
+\struck{\ill{}}
+
+Les \struck{couples} \add{paires} de sommets liés sont donc
+
+\page{46}
+\note{numéro de sa main en tête de page, cerclé : « 6 ». Le bord droit du
+feuillet est déchiré : la fin de la première ligne et deux signes écrits dans
+la marge droite, à la hauteur du lemme, manquent}
+exactement les $\{\xi_i, \xi'_j\}$ ($i \neq j$), $\{\xi_i, \xi_{ij}\}$ ($i
+\neq j$), $\{\xi'_i, \xi_{ij}\}$ ($i \neq$\ill{}) et $\{\xi_{ij},
+\xi_{kl}\}$ avec $\{i,j\} \cap \{k,l\} = \emptyset$. On note \struck{que}
+
+\emph{Lemme}. Si $\delta, \delta'$ sont deux sommets (distincts) liés alors
+$\exists!\, \delta''$ lié à $\delta$ et $\delta'$.
+
+En effet, pour $\{\xi_i, \xi'_j\}$ c'est $\xi_{ij}$, pour $\{\xi_i,
+\xi_{ij}\}$ c'est $\xi'_j$, pour $\{\xi'_i, \xi_{ij}\}$ c'est $\xi_j$ ; pour
+$\{\xi_{ij}, \xi_{kl}\}$ c'est $\xi_{rs}$ où $r, s$ sont les deux autres
+\uncertain{indices} $1 \leq \ \leq 6$ distincts des $i, j, k, l$.
+
+\emph{Définition}. Graphe cubique $=$ graphe isomorphe au graphe standard
+précédent (convenir en prenant $[1,6] \amalg [1,6] \amalg
+\mathfrak{P}_2([1,6])$ comme ens.\ des sommets).
+
+À un tel graphe \add{$\Delta$ (\uncertain{comme} : \uncertain{tel graphe})},
+on associe (pour un anneau commut.\ $k$ donné) la forme bilinéaire
+\add{sym.}\ sur $k^{[\Delta]} \times k^{[\Delta]}$ donnée par
+\[
+\delta\delta' =
+\begin{cases}
+-1 & \text{si } \delta = \delta' \\
+1 & \text{si } \delta \neq \delta', \ \delta \text{ et } \delta' \text{ liés} \\
+0 & \text{si } \delta \neq \delta', \ \delta \text{ et } \delta' \text{ non liés}
+\end{cases}
+\]
+Considérons le noyau \add{$N(\Delta)$} de cette forme, et soit
+\[
+\widehat{E}_k(\Delta) = k^{[\Delta]} / N(\Delta),
+\]
+qui est donc muni d'une forme bilinéaire sym.\ (non dégénérée au sens
+faible). Dans le cas d'un graphe cubique, celle-ci est non dégénérée (et
+$\widehat{E}_k(\Delta)$ est un module libre de rang $7$) comme on voit sur
+le cas standard.
+\note{la lettre de $\widehat{E}_k(\Delta)$ est écrite d'abord comme un carré
+surmonté d'un accent, puis corrigée}
+
+\page{47}
+\note{numéro de sa main en tête de page, non cerclé : « 7 »}
+Base ordonnée $(\alpha_i)_{1 \leq i \leq 6}$ d'un graphe cubique : déduite
+de $(\xi_i)_{1 \leq i \leq 6}$ dans $\Delta_0$ standard par \struck{\ill{}}
+un isom. Base $(\alpha_i)_{i \in I}$ : card $I = 6$, et on peut
+\uncertain{ordonner} \add{$I$, $I \simeq [1,6]$,} de façon que la famille
+devienne une base ordonnée. Partie basique de $\Delta$.
+
+\emph{Prop} (triviale) $u \mapsto u((\xi_i))$ définit une \struck{isom}
+bijection de $\operatorname{Isom}(\Delta_0, \Delta)$ sur l'ens.\ des bases
+ordonnées de $\Delta$ (qui est donc un torseur : à droite sous $W_0 =
+\operatorname{Aut}(\Delta_0)$, à gauche sous $W = \operatorname{Aut}(\Delta)$).
+Considérons l'inclusion évidente $\mathfrak{S}_6 \subset W_0$. Alors $u
+\mapsto u(\{\xi_i\}_{i \in I})$ définit par passage au quotient une
+bijection
+\[
+\operatorname{Isom}(\Delta_0, \Delta) / \mathfrak{S}_6 \ \simeq \
+\text{ens.\ des parties basiques de } \Delta .
+\]
+
+\emph{Dém.} \uncertain{Pour le} premier pt, il suffit de voir que tt
+automorphisme $u$ de $\Delta$ tel que $u(\xi_i) = \xi_i$ \add{$\forall i$}
+est l'identité. Or comme $\xi'_i$ est l'unique élément de $\Delta$
+\struck{distinct de $\xi_i$ et des autres $\xi_j$} qui \struck{\ill{}} soit
+lié à \struck{aucun des} \add{tous les} autres $\xi_j$ \struck{\ill{} est
+\ill{}} $u$ laisse invariants aussi les $\xi'_i$, donc les $\xi_{ij}$
+($\xi_{ij}$ est l'unique élément de $\Delta$ qui est lié à la fois à $\xi_i$
+et $\xi'_j$, ou : à la fois à $\xi_j$ et $\xi'_i$), donc est l'identité.
+\struck{Ce} Le même argument montre que tt automorph.\ de $\Delta_0$ qui
+invar.\ la partie $\{\xi_i\}$ est induit par un $\sigma \in \mathfrak{S}_6$.
+
+\page{48}
+\note{numéro de sa main en tête de page, non cerclé : « 8 »}
+\emph{N.B.} La donnée d'une base $(\alpha_i)_{i \in I}$ de $\Delta$ équivaut
+à la donnée d'un isom
+\[
+\Delta \simeq \underbrace{I \amalg I \amalg \mathfrak{P}_2(I)}_{\substack{\text{avec la structure}\\ \text{de graphe déjà}\\ \text{explicitée}}}
+\]
+On a donc prouvé que tt automorph.\ de $\Delta$ invariant \struck{\ill{}} la
+partie basique correspondante est induit (de façon unique), par transport de
+structure, d'une permutation de $I$.
+
+Base duale $\alpha'$ d'une base $\alpha$ ; notations $\eta(\alpha)$,
+$\xi(\alpha)$.
+
+\emph{Prop} $\exists!\, \lambda_\Delta = \lambda \in \widehat{E}(\Delta)$ tel
+que $\boxed{\lambda . s = 1 \quad \forall s \in \Delta}$.
+
+On a \struck{$\sum_{s \in S} s = 9\lambda$} (pour toute base $\alpha =
+(\alpha_i)_{i \in I}$)
+\[
+\begin{cases}
+\lambda = 3\eta(\alpha) - \xi(\alpha) & 1^\circ) \\
+\eta(\alpha) + \underbrace{\eta(\alpha')}_{= \eta'(\alpha)} = 2\lambda & 2^\circ) \\
+\xi(\alpha) + \underbrace{\xi(\alpha')}_{= \xi'(\alpha)} = 4\lambda & 3^\circ)
+\end{cases}
+\]
+d'où
+\[
+\begin{cases}
+\sum_{ij \in \mathfrak{P}_2} \xi_{ij}(\alpha) = 5\lambda & 4^\circ) \\
+\sum_{s \in S} s = 9\lambda & 5^\circ)
+\end{cases}
+\]
+\note{les numéros $1^\circ$ à $5^\circ$ sont écrits dans la colonne de
+droite ; le dernier est plutôt « $5^\circ$ » que « $3^\circ$ »}
+
+L'unicité est claire, puisque les \add{$s \in S$} engendrent
+$\widehat{E}(S)$ et que la forme sym.\ est non dég. Pour l'existence, et les
+\add{autres} formules écrites (N.B.\ aussi bien la première, que
+\struck{l'une} $2^\circ$ ou $3^\circ$ \uncertain{suffit} : $4^\circ$ ou
+$5^\circ$, \struck{\ill{}} \add{\ill{}} $4^\circ$ et $5^\circ$, caractérisent
+$\lambda$). L'existence est \struck{évidente sur} \add{comme dans} le cas
+standard, qui est évident.
+\add{D'où : $\lambda$ est invariant par autom.}
+
+\emph{Corollaire} (le produit scalaire par $\lambda$ donne une suite exacte
+invariante par autom.
+\[
+0 \to E \to \widehat{E} \to \mathbb{Z} \to 0
+\]
+où $E$ est l'orthogonal de $\lambda$.)
+
+\uncertain{Donc} la formation de \ill{} est \ill{}
+
+\page{49}
+\note{numéro de sa main en tête de page, cerclé : « 9 »}
+\uncertain{commutant} : \ill{} changt de base
+
+\section{III. Relations avec $E_6$}
+\note{le titre est de sa main, souligné, dans le cours de la page}
+
+Soit $\Delta$ un graphe cubique.
+
+\emph{Définition} On appelle \emph{racine} de $\Delta$ \struck{\ill{}}
+différence \add{dans $\widehat{E}$} de sommets distincts non liés
+\add{$\delta' - \delta$} de $\Delta \subset \widehat{E}(\Delta)$. Leur ensemble
+$R(\Delta)$ est considéré comme partie de $E(\Delta) =$ orthogonal de
+$\lambda_\Delta$.
+
+$R(\Delta)$ est stable par $r \mapsto -r$.
+
+\struck{\emph{Théorème} $R(\Delta)$ est un système de racines \ill{}
+($\delta' - \delta$ \ill{} vers une racine, …)}
+
+avec $r = \delta' - \delta$
+\[
+r^2 = \delta'^2 + \delta^2 = -2
+\]
+Faisons la liste, \add{explicitée dans le cas du graphe standard $\Delta_0$,}
+\ill{} \ill{} que les différences \add{\uncertain{non liées}} $\delta' -
+\delta$ se groupent six à six de la façon suivante en termes de sixtes
+\add{(« \uncertain{doubles} »)} $(\alpha_1, \dots, \alpha_6)(\alpha'_1, \dots,
+\alpha'_6)$ \struck{$\xi'_1 - \xi_1 = \xi'_2 - \xi_2 =$} de sommets
+satisfaisant :
+\[
+\begin{cases}
+\alpha_i \text{ lié à } \alpha'_j \text{ ssi } i \neq j, \text{ les } \alpha_i \text{ non liés mutuellement}, \\
+\text{les } \alpha'_i \text{ itou, en prenant } r_\alpha = \alpha'_1 - \alpha_1 = \alpha'_2 - \alpha_2 = \cdots = \alpha'_6 - \alpha_6
+\end{cases}
+\]
+
+Racines :
+\[
+\begin{array}{lll}
+1 & \begin{cases} r_0 = 2\eta - \sum \xi_i = \lambda - \eta \\ r_0 = \xi'_1 - \xi_1 = \xi'_2 - \xi_2 = \cdots = \xi'_6 - \xi_6 \end{cases}
+& \text{déduite des } \begin{cases} (\xi_1, \dots, \xi_6) \\ (\xi'_1, \dots, \xi'_6) \end{cases} \\[3ex]
+15 & \begin{cases} r_{ij} = \xi_i - \xi_j \\ 1 \leq i < j \leq 6 \end{cases}
+& \text{déduites des } \begin{cases} (\xi_j, \xi'_j, (\xi_{ik})_{k \neq i,j}) \\ (\xi_i, \xi'_i, (\xi_{jk})_{k \neq i,j}) \end{cases} \\[3ex]
+20 & \begin{cases} r_{ijk} = \eta - \xi_i - \xi_j - \xi_k \\ 1 \leq i < j < k \leq 6 \end{cases}
+& \text{déduites des } \begin{cases} (\xi_i, \xi_j, \xi_k, \xi_{lm}, \xi_{mn}, \xi_{nl}) \\ (\xi_{jk}, \xi_{ki}, \xi_{ij}, \xi'_l, \xi'_m, \xi'_n) \end{cases}
+\end{array}
+\]
+\note{pour les $r_{ij}$, la première sixte porte à la fin un groupe biffé,
+illisible ; les indices des $\xi'$ et des $\xi_{\cdot k}$ des deux sixtes se
+lisent ainsi, bien que la définition des sixtes demande
+$(\xi_j, \xi'_i, (\xi_{jk})_k)$ et $(\xi_i, \xi'_j, (\xi_{ik})_k)$ ; la
+lecture est incertaine}
+
+avec \struck{$1 \leq l < m < n \leq 6$} $l, m, n$ les trois élts de $[1,6]$
+distincts de $i, j, k$ (en ordre cr.\ p.ex.)
+
+et les \uncertain{opposées}, obtenues en échangeant $\alpha$ et $\alpha'$.
+
+\page{50}
+\note{numéro de sa main en tête de page, cerclé : « 10 »}
+Cela fait $72 = 2 \times 36$ racines, associées aux $27 \times 16 = 6 \times
+72$ \add{$= 432$} couples $(\delta', \delta)$ de sommets distincts non liés.
+
+On vérifie de plus que pour tt racine $r_\alpha$, associée à un système
+$\begin{cases} \alpha = (\alpha_1, \dots, \alpha_6) \\ \alpha' = (\alpha'_1,
+\dots, \alpha'_6) \end{cases}$, on a
+\[
+r_\alpha \alpha_i = (\alpha'_i - \alpha_i)\alpha_i = 0 - (-1) = 1,
+\]
+\add{de même} $r_\alpha(\alpha'_i) = -1$
+
+\[
+\begin{cases}
+r_\alpha . \alpha_i = 1 \\
+r_\alpha \alpha'_i = -1 \\
+r_\alpha \delta = 0 \ \text{si } \delta \in \Delta_0 \text{ distinct des } \alpha_i, \alpha'_i
+\end{cases}
+\]
+\add{(pour un graphe cubique général)}
+\marginal{ceci provient de ce que \struck{$(\alpha'_i, \alpha_i)$ \ill{}}
+\ill{} \ill{} (\ill{} \ill{}) \ill{} tel que $\delta$ \ill{} $\alpha_i,
+\alpha'_i$ i.e.\ \ill{} $\alpha_i, \alpha'_i$ \ill{}}
+\note{la note marginale est écrite en oblique dans l'angle droit, rattachée
+par une flèche à la dernière ligne de l'accolade ; elle est presque
+entièrement illisible}
+
+Donc cela explicite, \add{commutant à une racine} \ill{} $r$ son association
+deux parties $\alpha(r), \alpha'(r)$ de $\Delta$ : l'ens.\ des $s$
+\add{$\in \Delta$} tels que $rs = 1$ resp.\ $-1$ ; On trouve une corr.\
+$1$-$1$ entre ces paires \add{$\alpha$} et les parties \ill{} \ill{} racines,
+la paire \ill{} \ill{} $r$ \ill{} \ill{} échanger $\alpha$ avec $\alpha'$
+donc…
+
+Bien entendu, \struck{les} \add{\ill{}} parties basiques de $\Delta$
+\struck{\ill{}} associées à \struck{\ill{}} \add{une} racine. Pour voir que
+l'assertion est vraie, il suffit de vérifier que les parties écrites
+ci-dessus \add{dans le cas standard} sont basiques (et ils sont groupés
+\uncertain{par} couples de bases duales). \struck{Il reste à vérifier que
+\ill{} dans $\widehat{E}(\Delta_0)$}
+
+\note{à partir d'ici, le reste de la page est barré de longs traits
+obliques ; ce qui se lit est donné tel quel}
+$\boxed{\alpha'_i - \alpha_i = r}$ indépendant de $i$, considérons
+\[
+\eta(\alpha) = \lambda - r(\alpha) = \lambda - r
+\]
+\struck{$r + \sum \alpha_i = r + \xi(\alpha)$}, vérifions qu'ils
+\struck{\ill{} \ill{} par $2$} \struck{$\widehat{E}$ \ill{} $\xi(\alpha)$
+\ill{} $\eta(\alpha) = \frac{1}{2}(r + \xi(\alpha))$} libres \ill{} dans le
+cas
+\[
+\begin{aligned}
+\eta(r_0) &= \eta(\xi_1, \dots, \xi_6) = \eta \\
+\eta(-r_0) &= \eta(\xi'_1, \dots, \xi'_6) = \eta' = 5\eta - 2\xi = 5\eta - 2\textstyle\sum \xi_i \\
+\eta(\xi_i - \xi_j) &= \eta(\xi_j, \xi'_i, (\xi_{ik})) = 3\eta - 2\xi_i - \textstyle\sum_{k \neq i,j} \xi_k \ (= \lambda - \xi_i + \xi_j = \lambda - r)
+\end{aligned}
+\]
+\note{ces trois lignes sont entourées d'un trait qui les rattache à
+l'encadré}
+\struck{$\eta(\alpha)$}
+\[
+r = 2\eta(\alpha) - \underbrace{\sum \alpha_i}_{\xi(\alpha)}
+\quad \text{i.e.} \quad
+\underset{\substack{\Vert \\ \sum \alpha_i}}{\xi(\alpha)} = 2(\lambda - r) - r = 2\lambda - 3r
+\]
+
+\page{51}
+\note{numéro de sa main en tête de page, cerclé : « 11 »}
+(il y a manifestement $4$ cas \struck{à distinguer, \ill{}} $r = r_{ij}$ et
+$r = r_{ijk}$…) dans le cas standard
+$\alpha = \alpha^{ij} = (\xi_i, \xi'_j, (\xi_{ik})_{k \neq i,j})$ et
+$\alpha = \alpha^{i,j,k} = (\xi_i, \xi_j, \xi_k, \xi_{lm}, \xi_{mn}, \xi_{nl})$
+sont des bases, \struck{i.e.} \add{Il faut} si $\alpha = \{\alpha_1, \dots,
+\alpha_6\}$, $\alpha' = \{\alpha'_1, \dots, \alpha'_6\}$,
+\struck{$\Rightarrow \forall\, 1 \leq i < j \leq 6$, $\exists!\,
+\alpha_{ij} \in \Delta$ lié à $\alpha_i$, $\alpha'_j$}
+si $1 \leq i \neq j \leq 6$, $\alpha_i$ et $\alpha'_j$ sont liés, donc
+$\exists!\, \delta \in \Delta_0$ lié à $\alpha_i$ et $\alpha'_j$, soit
+$\alpha_{ij}$. \struck{Les $\alpha_{ij}$} Tout $\delta \in \Delta_0$ distinct
+des $\alpha_i, \alpha'_i$ est-il de la forme $\alpha_{ij}$ i.e.\ est-il lié à
+un des $\alpha_i$ et à un des $\alpha'_j$ ? \struck{S'il n'était lié à aucun
+des}…
+\note{un trait vertical dans la marge gauche, en face des trois premières
+lignes, et un trait oblique qui traverse les deux premières}
+
+\struck{Vérifications fastidieuses}… Meilleur procédé :
+
+Comme pour tte racine $r$ on a $r.r = -2$, l'endomorphisme (« symétrie par
+$r$ »)
+\[
+s_r : x \longmapsto x + (x.r)r \qquad \widehat{E} \to \widehat{E}
+\]
+[dont l'ens.\ des pts fixes est $r^\perp$, et qui transforme $r$ en $-r$]
+est un autom.\ de \struck{orthogonal} \add{($\widehat{E}$, forme quad.)}, qui
+évidemment respecte aussi $\lambda$ (car $r \in E = \lambda^\perp$).
+Montrons qu'elle applique $\Delta_0$ dans $\Delta$. [Il suffit de regarder le
+cas standard, et de regarder dans les trois cas $r = r_0$, $r = r_{ij}$, $r =
+r_{ijk}$.]
+
+\struck{\ill{}} Notons d'abord, de façon générale, que si $r$ est associé à
+$(\alpha_1, \dots, \alpha_6), (\alpha'_1, \dots, \alpha'_6)$ ($r = \alpha'_i
+- \alpha_i$ pour $1 \leq i \leq 6$) on a
+\[
+\boxed{s_r \alpha_i = \alpha'_i, \quad s_r \alpha'_i = \alpha_i}
+\]
+car $\lbrace r.\alpha_i = 1, \ r\alpha'_i = -1$. Il reste à voir l'effet de
+$r$ sur les autres éléments de $\Delta$ — et de montrer que
+\[
+\boxed{s_r \delta = \delta \quad \text{si } \delta \notin \{(\alpha_i), (\alpha'_i)\}}
+\]
+
+\page{52}
+\note{numéro de sa main en tête de page, cerclé : « 12 »}
+\struck{$\Rightarrow$ Cas de $r_0$. Cela provient des relations}
+\add{\struck{relations déjà notées plus haut}}
+
+\struck{$s_{r_0}(\xi'_j) -$}
+
+Soit $W$ le groupe d'autom.\ de $(\widehat{E}, \varphi, \lambda)$
+\add{(\uncertain{ou ce qui revient au même}, de $\Delta$)} engendré par les
+$s_r$. Je dis que $W$ \emph{opère transitivement} sur l'ens.\ des racines,
+donc aussi sur l'ens.\ des parties \add{($\subset \operatorname{Isg}(\Delta)$)}
+\ill{} associées aux racines — qui sont des bases \ill{} parties basiques.
+\note{« $\operatorname{Isg}$ » est une lecture \uncertain{incertaine} ; une
+double barre verticale dans la marge droite, en face des premières lignes}
+
+Pour ceci, notons d'abord que \struck{$s_{r_{ij}}$}
+\struck{$s_{r_{ij}}\, \xi_k = \xi_k$ si $k \neq i,j$}
+
+$s_{r_{ij}}$ est l'autom.\ de $\Delta_0$ \struck{associé à l'élément}
+\struck{par} de $\mathfrak{S}_6$, \struck{une} \struck{permutation}
+\add{transposition} de $i$ et $j$.
+(vérification immédiate) donc
+
+\emph{Corollaire} $W$ contient $\mathfrak{S}_6$
+
+\emph{Corollaire} Les $r_{ij}$ sont conjugués par $W$, et les $r_{ijk}$ sont
+conjugués par $W$.
+
+Il reste donc à voir que $r$ est conjugué à un $r_{ij}$ et à un $r_{ijk}$.
+\struck{Or} On vérifie \struck{\ill{}} de suite
+\[
+s_{r_{ijk}}(r_0) = r_{l,m,n}
+\]
+donc $r_0$ conjugué aux $r_{l,m,n}$
+\[
+s_{r_{ijk}}(r_{il}) = r_{jkl}
+\]
+donc \struck{\ill{}} un des $r_{..}$ ($r_{il}$) conjugué à un des $r_{...}$
+($r_{jkl}$) et on a fini.
+
+On voit donc plus précisément, compte tenu que $W \supset \mathfrak{S}_6$ :
+
+\emph{Corollaire} $W$ est transitif sur l'ens.\ des \struck{bases} racines,
+sur l'ens.\ des \add{\uncertain{sixtes}} \struck{basiques} basiques \add{(qui
+sont en corr.\ $1$-$1$ avec les racines)}, sur l'ens.\ des bases ordonnées, et
+sur l'ens.\ \struck{des} des couples $(\delta', \delta)$ de deux sommets non
+liés. Enfin, $W$ est identique au groupe de tous les automorphismes de
+$\Delta$.
+
+\page{53}
+\note{numéro de sa main en tête de page, cerclé : « 13 »}
+\struck{Proposition}.
+
+\emph{Corollaire} $\operatorname{Card} W = 72 . 6! = 2^7 . 3^4 . 5$
+
+(En effet, $W$ est \struck{simplement} \emph{transitif} sur l'ens.\ des bases
+ordonnées, qui a un card de $72 . 6!$. Car il y a $72$ parties basiques
+i.e.\ $72$ racines…)
+
+\emph{Th} $(E(\Delta), R(\Delta))$ est \struck{un} \add{un système de}
+racines \ill{} $E(\Delta)$ \uncertain{engendré} par $R$, de type $E_6$, et si
+$\alpha = (\xi_1, \dots, \xi_6)$ est une base
+ordonnée de $\Delta$, le système de racines
+\[
+\begin{aligned}
+&r_1 = r_{12} = \xi_1 - \xi_2 \\
+&r_2 = r_{23} = \xi_2 - \xi_3 \\
+&\dots \\
+&r_5 = r_{56} = \xi_5 - \xi_6 \\
+&r_6 = r_{123} = \eta - \xi_1 - \xi_2 - \xi_3
+\end{aligned}
+\]
+\note{en tête de la liste, une première ligne biffée :
+« $\alpha_1 = \xi_1 - \xi_2$ » ; devant le dernier membre de $r_6$, un groupe raturé, illisible ;
+l'indice de $r_5$ est écrit sur un $6$}
+est un système de racines simples, suivant le diagramme
+\note{le diagramme est redessiné ci-dessous : il garde les six sommets, leurs
+noms et les cinq traits sans flèche ; les points marquant les sommets ne sont
+pas repris}
+
+\begin{tikzcd}[column sep=small, row sep=small]
+r_1 \arrow[r, no head] & r_2 \arrow[r, no head] & r_3 \arrow[r, no head] \arrow[d, no head] & r_4 \arrow[r, no head] & r_5 \\
+& & r_6 & &
+\end{tikzcd}
+
+\add{Pour $r \in R$,} (La symétrie $s_r$ \struck{\ill{}} \add{\ill{}}
+rendue… \struck{$\widehat{E}(\Delta)$} est la symétrie associée au
+syst.\ de racines et à $r$ et $W$ (identifié à un groupe d'autom.\ de $E$)
+est \add{donc} le groupe de Weyl du syst.\ de racines. La forme bil.\
+\add{\uncertain{sym.}} $\varphi = \widehat{\varphi} | E$ est caractérisée par
+la propriété d'être invariante \add{par $W$} et de satisfaire $r.r = -2$
+$\forall r \in R$
+\note{un trait vertical dans la marge gauche longe l'énoncé du théorème et
+cette parenthèse, qu'il ne referme pas}
+
+\page{54}
+\note{numéro de sa main en tête de page, cerclé : « 14 »}
+\emph{Dém} \struck{\ill{}}
+
+$E$ est engendré par $R$, et même par $r_1\, r_2\, r_3\, r_4\, r_5\, r_6$
+\add{$1 \leq i \leq 5$}… Car les sommes partielles des $r_i$ donnent
+les $\xi_i - \xi_j$ ($i < j$), et il est clair que les $\xi_i - \xi_1$ ($2
+\leq i \leq 6$) et \struck{$\eta - 2\lambda$} \add{$\eta - 3\xi_1$}
+\struck{$\xi_1 - \eta - \lambda$ (car $\lambda - \eta = r_0 = r_6$)}
+engendrent $E$ ($= \operatorname{Ker}(\widehat{E} \xrightarrow{\lambda.}
+\mathbb{Z})$) puisque $\lambda . \xi_1 = 1$ et $\lambda . \xi_i = 1$,
+$\lambda . \eta = 3$. \struck{Donc $E$ engendré par \ill{} \ill{}}
+\struck{$\eta, \xi_1, \dots, \xi_6$ engendrent $\widehat{E}$ et
+\ill{} $3\lambda$} par \add{les} $\xi_1 - \xi_i$ et \struck{$\eta - 3\xi_1 =
+3\xi_1 - \eta$}
+\note{sous la biffure, un groupe entouré d'une boucle, barré d'un trait
+ondulé}
+\struck{$3\lambda - \eta$} donc par $r_1, \dots, r_5$ et $\eta - 3\xi_1$.
+Reste à prouver que $\eta - 3\xi_1$ est une comb.\ des $r_i$, or
+\[
+r_6 = \eta - \xi_1 - \xi_2 - \xi_3
+= (\eta - 3\xi_1) + (\xi_1 - \xi_2) + (\xi_1 - \xi_3), \ldots
+\]
+\uncertain{cqfd}.
+\note{après « $r_6 =$ », un groupe biffé, illisible ; sous les deux derniers
+termes, reliés par un signe « $\Vert$ », ils sont récrits
+« $(\xi_1 - \xi_2) + (\xi_1 - \xi_3)$ »}
+
+On sait déjà que les $s_r$ transforment $\Delta$ en lui-même, $R$ en
+lui-même, etc.\ comme $s_r$ \add{$(x \mapsto x + (x.r)\,r)$ avec $r^2(r) =
+-2$}, \struck{\ill{}} — On conclut que $R$ est un syst.\ de racines —
+compte tenu que deux racines distinctes non \ill{} sont \add{non}
+proportionnelles. Prouvons que \struck{\ill{}} $\alpha_1 \dots \alpha_6$
+forment un syst.\ de racines simples. \struck{\ill{} \ill{}} On a déjà vu
+\[
+\boxed{r_{ij} = r_i + r_{i+1} + \cdots + r_{j-1} \quad \text{si } i < j}
+\]
+(pour $1 \leq i, j$ \uncertain{…} $\leq 5$)
+On a
+\[
+\begin{aligned}
+r_{ijk} &= \eta - \xi_i - \xi_j - \xi_k = (\eta - \xi_1 - \xi_2 - \xi_3)
++ \underbrace{(\xi_1 - \xi_i)}_{r_{1i}} + \underbrace{(\xi_2 - \xi_j)}_{r_{2j}} + \underbrace{(\xi_3 - \xi_k)}_{r_{3k}} \\
+&= r_{123} + r_{1i} + r_{2j} + r_{3k}
+\end{aligned}
+\]
+\note{au début de la seconde ligne, après le signe $=$, un groupe biffé,
+illisible}
+donc
+\[
+r_{ijk} = r_6 + (r_1 + \cdots + r_{i-1}) + (r_2 + \cdots + r_{j-1}) + (r_3 + \cdots + r_{k-1})
+\]
+
+\page{55}
+\note{numéro de sa main en tête de page, cerclé : « 15 »}
+i.e.
+\[
+\boxed{r_{ijk} = r_6 + (r_1 + \cdots + r_{i-1}) + (r_2 + \cdots + r_{j-1}) + (r_3 + \cdots + r_{k-1})}
+\quad \text{pour } i < j < k
+\]
+\note{les deux premiers signes $+$ sont écrits sur des chiffres raturés ;
+au-dessus de la dernière parenthèse, un groupe raturé où se lit
+« $2r_1 + r_2$ »}
+(\uncertain{poids} $r_{ijk}$ maximum $10$)
+\marginal{poids \struck{\ill{} $+ 3(i-1) + 2(j-i-1) + \ill{}$}
+$= 1 + (i + j + k \ \ill{}) = i + j + k - 5$, maximum : $10$}
+\note{la note, en haut à droite, est à demi raturée par des traits obliques ;
+seuls l'expression finale et le maximum se lisent sûrement}
+
+enfin
+\[
+r_0 = 2\eta - \sum \xi_i = (\eta - \xi_1 - \xi_2 - \xi_3) + (\eta - \xi_4 - \xi_5 - \xi_6)
+\]
+i.e.
+\[
+= r_{123} + r_{456}
+\]
+\note{sous $r_{123}$, une accolade porte « $r_6 + 2r_1 + r_2$ », biffé}
+donc
+\[
+\boxed{r_0 = r_1 + 2r_2 + 3r_3 + 2r_4 + r_5 + 2r_6} \quad (\text{poids } 11)
+\]
+\note{le début du membre de droite est surchargé à plusieurs reprises ; les
+coefficients de $r_1, r_2, r_3$ sont d'une lecture \uncertain{incertaine}, et
+le « $11$ » du poids est écrit sur un autre nombre}
+
+(N.B.\ C'est la « plus grande racine » \struck{\ill{}}).
+
+Donc tte racine est somme \struck{\ill{}} comb.\ à coeff.\ entiers tous de
+même signe de $r_1 \dots r_6$, qui forment donc un système de racines
+simples. Enfin, on vérifie immédiatement que $r_i . r_j = 0$ (sauf dans les
+cas \struck{$j \neq 5$} $j = i + 1 \leq 5$ et le cas $j = 6$, $i = 3$), ce
+qui montre que le diagramme est $E_6$.
+
+\emph{Corollaire} Soit $\widetilde{W}$ le groupe des automorphismes du syst.\
+de racines $(E(\Delta), R(\Delta))$, et considérons l'inclusion canonique
+\[
+W = \operatorname{Aut}(\Delta) \hookrightarrow \widetilde{W}
+\]
+Alors \ill{} image est d'indice $2$ de $\widetilde{W}$.
+
+En effet, on sait que $\widetilde{W}/W \simeq$ groupe des automorphismes du
+diagramme de Dynkin, qui est ici d'ordre $2$.
+
+\page{56}
+\note{numéro de sa main en tête de page, cerclé : « 16 »}
+Donc la donnée de $\Delta$ est un peu plus fine que celle du syst.\ de
+racines associé de type $E_6$ (et a fortiori que la donnée d'une forme bil.\
+sym.\ \add{non dég.} sur un $\mathbb{Z}$-Mod.\ $E$…). On peut
+interpréter cette donnée \uncertain{supplémentaire} comme la donnée
+\struck{\ill{}} d'une des deux sommets
+\drawing{un petit schéma du diagramme : un trait horizontal d'une extrémité
+$\alpha$ à une extrémité $\beta$, avec une branche descendant du milieu}
+$(\alpha, \beta)$ (extrémités longues) « \emph{du} » diagramme de Dynkin de
+$(E, R)$ (i.e.\ d'un des syst.\ simples de racines). Mais on aimerait
+expliciter, en termes de la géométrie interne à \struck{\ill{}} un syst.\
+de racines $(E, R)$ de type $E_6$, comment \struck{\ill{}} \add{\ill{}} de
+structure \uncertain{permet} de récupérer le graphe cubique $\Delta$.
+
+\emph{Définissons}
+\[
+\Delta \xrightarrow{\ i\ } E
+\]
+par
+\[
+i(\delta) = 3\delta - \lambda \qquad (\in E \ \text{car} \ \delta.\lambda = 1, \ \lambda\lambda = 3)
+\]
+de sorte que \uncertain{pour}
+\[
+i(\delta)\, i(\delta') = 9\delta\delta' - 6 + 3 = 9\delta\delta' - 3
+\]
+\note{devant la formule, « $i(\delta)$ » biffé}
+donc
+\[
+\begin{cases}
+i(\delta)^2 = -12 \\
+i(\delta)\, i(\delta') = \begin{cases} 9 & \text{si } \delta, \delta' \text{ liés} \\ -3 & \text{si } \delta \neq \delta' \text{ non liés.} \end{cases}
+\end{cases}
+\]
+Donc $i$ est une bijection de $\Delta$ dans \add{une partie $\Delta'$ de}
+l'ens.\ des \add{(\uncertain{72})} éléments $x$ de $E$ satisfaisant
+\[
+x . x = -12
+\]
+\note{le $12$ est repassé et suivi d'un signe qui peut être un $0$ biffé}
+et dans l'image $\Delta'$ de $\Delta$, \struck{\ill{}} la relation « liés »
+s'exprime par
+\[
+x, x' \ \text{liés} \iff x . x' = 9
+\]
+Bien entendu, $W$ invarie $\Delta'$. \struck{\ill{}} D'ailleurs $R$ est
+déduit de $\Delta'$ \struck{comme} par la condition
+\uncertain{\ill{}}
+
+\page{57}
+\note{numéro de sa main en tête de page, cerclé : « 17 »}
+\[
+3R = \lbrace x' - x \mid x, x' \in \Delta' \rbrace .
+\]
+\note{devant $x' - x$, un groupe biffé, illisible}
+Mais \struck{soit} \struck{$\widetilde{\Delta}$ \uncertain{notons} que
+$\widetilde{\Delta}$} \uncertain{notons} que
+\[
+-\Delta' = \lbrace -(3\delta - \lambda) = \lambda - 3\delta \mid \delta \in \Delta \rbrace
+\]
+est aussi invariant par $W$ et contenu dans $S_{-12}$, d'ailleurs
+\struck{\ill{}} $\Delta' \cap (-\Delta') = \emptyset$ car
+\[
+3\delta - \lambda = \lambda - 3\delta' \ \text{implique} \ 3(\delta + \delta') = 2\lambda = 2(3\eta - \xi)
+\]
+or $2\lambda = 6\eta - 2\xi$ n'est pas divisible par $3$ dans
+$\widehat{E}$ !
+
+\struck{Notons que $W$} Cela montre \struck{que} que $-\operatorname{id}_E
+\notin W$, et comme c'est $\in \widetilde{W}$, on trouve
+\[
+\widetilde{W} \simeq W \times \underbrace{\mathbb{Z}/2\mathbb{Z}}_{\substack{\text{engendré par} \\ \operatorname{id}_E}}
+\]
+\note{ainsi sur la page : « engendré par $\operatorname{id}_E$ », où l'on
+attend $-\operatorname{id}_E$}
+
+\struck{\ill{}} La réunion $\widetilde{\Delta} = \Delta' \cup (-\Delta')$
+est donc \struck{intrinsèque} \add{canonique} associé au syst.\ de racines
+(indépendamment de sa structure par un $\Delta$) et il se décompose en deux
+orbites sous $W$. Le choix d'une orbite équivaut au choix du syst.\ de
+racines. On aimerait l'expliciter, \add{ainsi que $\widetilde{\Delta}$,} via
+la géométrie interne du syst.\ de racines.
+
+\section{Graphes cubiques}
+\note{titre souligné, de sa main, en tête de la page 58, qui ne porte pas de
+numéro de sa pagination}
+
+\page{58}
+Un graphe $\Delta$ est dit \add{graphe} \emph{cubique} si
+\struck{\ill{}} ses arêtes sont déterminées par leurs extrémités, qui sont
+distinctes, et s'il existe \struck{deux} parties $I$, \add{$I'$} de l'ens.\
+des sommets satisfaisant les conditions suivantes
+\begin{itemize}
+\item[a)] \struck{\ill{}} $\operatorname{card} I = \operatorname{card} I' =
+6$, $I$ et $I'$ disjoints
+\item[b)] $\forall\, i \in I$, $\exists!\, i' \in I'$ tel que $i'$ non lié à
+$I$, et $\forall\, i' \in I'$, $\exists!\, i \in I$ tel que $i$ non lié à
+$I$ [donc $I$ et $I'$ sont en corr.\ biunivoque par la relation « $i$ non
+lié à $i'$ », soit $i$ : \struck{\ill{}} $I \cup I' \to I \cup I'$]
+\struck{\ill{}}
+\item[c)] $\forall$ partie $J$ à deux éléments de $I$, $\exists!\, \xi_J =
+\xi_{i,j} \in \Delta$ \add{\struck{$- J \cup i(J)$}} qui soit lié aux
+\struck{deux} éléments \struck{$i, j$ de} de $J \cup i(J)$, et non lié aux
+autres éléments de $I \cup I'$.
+
+\struck{[\ill{} \ill{} $\lambda_J \notin I \cup I'$]}
+
+[Il est clair que $J \mapsto \lambda_J$ est une appl.\ \emph{injective} de
+$\mathfrak{P}_2(I)$ dans $\Delta - (J \cup I')$]
+\item[d)] L'application précédente
+\[
+\mathfrak{P}_2(I) \longrightarrow \Delta - (I \cup I')
+\]
+est \struck{bijective} surjective (donc bijective), i.e.\ $\forall\, \lambda
+\in \Delta - I \cup I'$, \struck{$\exists\, J \in \mathfrak{P}_2(I)$ telle
+que $\lambda$ soit lié à $J \cup i(J)$}, l'ens.\ des éléments de $I \cup I'$
+auxquels $\lambda$ est lié est de cardinal $4$ et stable par $i$.
+\item[e)] Si $J, J' \in \mathfrak{P}_2(I)$, $J \neq J'$, alors $\xi_J$ et
+$\xi_{J'}$ sont liés ssi $J \cap J' = \emptyset$.
+\end{itemize}
+\note{dans b), la page écrit par deux fois « non lié à $I$ », où le sens
+demande « non lié à $i$ », puis « à $i'$ » ; dans c), l'ajout biffé
+« $- J \cup i(J)$ » est écrit au-dessus de la ligne ; c) désigne les mêmes
+éléments tantôt $\xi_J$, tantôt $\lambda_J$, et l'image est dite dans
+« $\Delta - (J \cup I')$ », ainsi sur la page}
+
+Graphe cubique $\Delta(I)$ défini par ens.\ $I$ de card.\ $6$. $\Delta$
+cubique ssi $\Delta \simeq \Delta(I)$ (pour un $I$ de card.\ $6$, ou pour
+tous)
+
+\page{59}
+Pour tt $i \in I$, $i(i) = i'$ est l'unique élément \emph{de $\Delta$} tel
+que $i'$ soit lié à \struck{tous les} \add{\ill{}} él.\ de $I - \{i\}$.
+Donc la connaissance de $I$ implique déjà celle de $I'$. On appelle $I$
+\emph{partie basique}. Si $I$ est telle, $I'$ est aussi partie basique, dite
+\emph{partie basique associée}. Base (ou partie basique ordonnée).
+\note{un double trait vertical dans la marge gauche, en face des deux
+premières lignes}
+
+\struck{\ill{} \ill{} des graphes cubiques}
+
+Bibase ; \struck{Bibase ordonnée \ill{}} \add{élt de}
+$\mathfrak{P}_2(\mathfrak{P}_6(\Delta))$ formée de deux \struck{\ill{}}
+bases associées.
+
+\emph{Prop} a) La cat.\ \add{(\uncertain{pour les isom.})} des graphes
+cubiques munis d'une base (resp.\ base ordonnée) est \add{canoniquement}
+équivalente à la cat.\ $\mathrm{Ens}_6$ des ens.\ à $6$ él.\ (avec isom.)
+(resp.\ à la cat.\ ponctuelle).
+
+b) La catégorie des gr.\ cub.\ munis d'une bibase (resp.\ bibase ordonnée)
+est \add{canoniquement} équivalente à la catégorie
+\add{$(\mathrm{Ens}_6) \times (\mathrm{Ens}_2)$} des couples $(E, b)$ d'un
+ens.\ à six él.\ et d'un ens.\ à $2$ él.
+
+c) Soit $\Delta$ graphe cubique. L'ens.\ des bases ordonnées de $\Delta$ est
+can.\ \uncertain{isom.}\ à $\operatorname{Isom}(\underset{\Delta_0}{\underbrace{\Delta([1,6])}}, \Delta)$, donc est un torseur à
+droite sous $W_0 = \operatorname{Aut} \Delta_0$ \struck{$([1,6])$}, à gauche
+sous $W = \operatorname{Aut}(\Delta)$.
+
+\emph{Th} Considérons $\Delta =$ \struck{$\Delta_0 =$} $\Delta(I)$
+\struck{\ill{}}, \add{les él.\ de $I$ \struck{dans $\Delta$} sont notés
+$\xi_i$} \struck{Alors} avec sa base canonique \struck{\ill{}} $I$ et la base
+associée $I'$. Les bases de $\Delta$ sont les parties \add{obtenues de la
+façon} suivantes
+\marginal{\uncertain{écrire en plus} \ill{} en termes des bibases…}
+\note{la note marginale est écrite en oblique dans l'angle inférieur gauche ;
+un trait part aussi de l'insertion « les él.\ de $I$ … » vers la marge
+droite, où quelques lettres coupées par le bord ne se lisent pas}
+\begin{itemize}
+\item[(i)] $I$ et $I'$ (soit $2$ parties)
+\item[(ii)] $\forall$ \struck{$J \in \mathfrak{P}_2(I)$} $(i,j) \in I \times
+I - \operatorname{diag}$, $B^{(i,j)}$ désigne la partie de $\Delta$ formée
+de $\lbrace \xi_j, \xi'_j, (\xi_{ik})_{k \in I - i - j} \rbrace$ (soit $30$
+parties)
+\item[(iii)] $\forall\, K \in \mathfrak{P}_3(I)$, $B^K$ désigne la partie de
+$\Delta$ formée des $\lbrace \xi_i \ (i \in K), \ \xi_J \ (J \in
+\mathfrak{P}_2(I - K)) \rbrace$ ($20$)
+\item[(iv)] $\forall\, K \in \mathfrak{P}_3(I)$, $B'^K$ désigne la partie de
+$\Delta$
+\end{itemize}
+\note{dans (ii), la page écrit $\xi_j, \xi'_j$, là où la liste de la page 49
+donne $\xi_j, \xi'_i$ ; dans (iii), « $\mathfrak{P}_2(I - K)$ » est suivi de
+« $- \mathfrak{P}_2(I)$ » d'une lecture \uncertain{incertaine}. La page
+s'arrête sur (iv)}
+
+\page{60}
+formée des $\lbrace \xi'_i \ (i \in I - K), \ \xi_J \ (J \in
+\mathfrak{P}_2(K) \subset \mathfrak{P}_2(I)) \rbrace$
+
+La base \struck{\ill{}} \add{associée} à $B^{i,j}$ est $B^{j,i}$,
+\struck{\ill{}} \add{\ill{}} $B^{K}$ est $B'^{K}$.
+\note{un double trait vertical dans la marge droite, en face de ces lignes}
+
+\emph{Corollaire 1} $\operatorname{Card}(\operatorname{Bases}(\Delta)) = 72$,
+\add{$= 8 . 9 = 2^3 3^2$} \struck{$\operatorname{Card} \operatorname{Aut}(\Delta) = 72$}.
+\[
+\operatorname{Card} \underset{\substack{\Vert \\ \operatorname{Aut}(\Delta)}}{W} = 72 . 6! = 2^7 3^4 5
+\]
+\note{le $6$ de $6!$ est repassé ; ainsi écrit, $72 . 6! = 2^7 3^4 5$
+s'accorde avec la page 53}
+
+\emph{Corollaire 2} $W$ est transitif sur $\Delta$ (ens.\ des sommets),
+et \struck{\ill{}} sur l'ens.\ des couples de sommets \add{distincts}
+\struck{non} liés. Si $(\delta, \delta')$ est un couple de sommets distincts
+non liés, $\exists!$ base $I$ telle que $\delta \in I$ \struck{\&} et
+$\delta' \in I'$ base associée (donc $\delta$ et $\delta'$ se correspondent
+par la bijection can.\ $I \simeq I'$)
+
+\emph{Corollaire 3} La cat.\ des \uncertain{graphes} cubiques $\Delta$ munis d'un él.\
+$J \in \mathfrak{P}_2(\Delta)$ formé de $2$ sommets non liés, est équivalente
+à la cat.\ des couples formés d'un ens.\ à cinq éléments et d'un autre à
+deux él.\ (ces derniers étant $J$).
+\note{un trait vertical dans la marge gauche longe l'énoncé}
+
+\note{la suite de la page est barrée de deux grandes croix obliques et
+surchargée d'ajouts à l'encre plus foncée, dans les deux marges comprises ; ce
+qui se lit est donné, sans prétendre restituer l'ordre des ajouts}
+\struck{\ill{} \ill{} partie liée de cardinal :}
+
+Notion de \uncertain{bi}-base, \add{\uncertain{ordonnée}} ($1 \leq i \leq
+6$) : \struck{\ill{}} \add{les} parties liées sup.\ : $3$ él.,
+\struck{\ill{} bibases} \ill{} \uncertain{opérées} par $W$. Pour les telles
+\add{$\Delta$} \ill{} \add{\ill{}} l'ens.\ des élts
+\add{\uncertain{de $\widetilde{\Delta}$}} \struck{\ill{}} liés à tt él.\ de
+\ill{} est de cardinal $6$, et $\exists!$ bibase
+$\lbrace I' \cup I'' \rbrace \simeq I \times \ill{}$ telle que $K \subset I'
+\cup I''$, \struck{\ill{}} \add{et dans $K$ \ill{}} \ill{} l'ens.\ des élts
+de $\Delta$ liés à tt él.\ de \ill{} est de cardinal \ill{} (\ill{}
+\ill{} \ill{} \ill{}…
+
+Si $K$ est non lié à exactement $1$ élément des \ill{}, \ill{} une
+application $K \to \ill{}$, si la bibase est associée à l'ens.\ à $2$ él.\
+$\varepsilon$, on a donc $K \to \Delta' \times \varepsilon$ (ou $K \to I \cup
+I' \to \varepsilon$) qui est un iso.
+\marginal{$I_1 = K \cup \ill{}$ … $K \ill{} \ill{}$}
+\marginal{N.B.\ la relation \ill{} $I$ et $I'$ \ill{} \ill{}}
+\note{les deux notes marginales, à gauche, sont écrites en oblique et
+elles-mêmes prises dans les croix ; à droite, à la hauteur de la bibase,
+« $K = \ill{} \cup K'$ »}
+
+\end{document}
