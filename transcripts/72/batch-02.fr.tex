@@ -1,0 +1,689 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 72, batch 2 (pages 21-40).
+% Established from the facsimile archives/batches/72/batch-02.pdf (cut from a
+% copy of 72.pdf fetched through the project's relay), per the skill
+% transcribe-grothendieck. The folder is 112 pages in six batches (1-20,
+% 21-40, 41-60, 61-80, 81-100, 101-112), transcribed in parallel; this file
+% does not rely on its neighbours. The raw scan's cover sheet is not in the
+% batch file: PDF page k is archivists' page 20+k, and the pencilled numbers
+% bottom-left (« 22 » ... « 40 ») agree.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-09-27 — first pass, unchecked against the pages by a human.
+%
+% Pages skipped: 21, a blank tan wrapper sheet with nothing of his. Pages 26,
+% 31 and 36 are coloured wrapper sheets (pink, orange, yellow) each inscribed
+% top right in his hand; they take no \page marker and their words become the
+% section headings, with a \note each: « Forme hermitienne invariante pour un
+% hyperpolyèdre régulier » (26, with a grey-pencil « (4p) » that may be the
+% archivists'), « détermination de (tau_i) par (rho_i), i.e. d'une repr. de
+% G_n via celle de G_n^+ » (31, pencil), and the formula
+% « U_rho ≃ Aut(X, (tau_i)) » (36). Page 34 carries four lines and is
+% otherwise blank; it is transcribed.
+%
+% Pages summarised: none. No pagination of his own on these leaves, no date.
+%
+% What the batch is about. Not polytopes drawn and counted but their algebraic
+% model: a regular (hyper)polytope realised by reflections in a projective
+% bundle X = P(E) (or its dual) over a base S, with a quadratic, later
+% hermitian, form invariant under the reflection group.
+%   22-25  Continues batch 1: pseudo-reflections u = id + pi ⊗ a of E that are
+%          the identity on V and commute with the tau_i; the condition for u
+%          to be orthogonal, lambda(lambda sigma' rho' + sigma) = 0, split by
+%          the parity of n; the « antipodisme » (6), (7) and a Corollaire on
+%          its existence and uniqueness; then the construction backwards from
+%          0 -> V -> E -> O_S -> 0, lines L_i ⊂ V, L'_i ⊂ V^, the bases a_i,
+%          a'_i fixed by tau_i = id + a'_i ⊗ a_i, <a_i, a'_{i+1}> = 1.
+%   27-30  « Forme hermitienne invariante » : complex reflections with
+%          eigenvalue lambda_i (lambda lambda-bar = 1, mu_i = lambda_i - 1),
+%          the recursion d_{i+1} = beta_i-bar d_i-bar, the rank-2 case tau_0,
+%          tau_1 as 2x2 matrices, the invariant A(u) = (Tr u)^2/det u - 2
+%          taking values -2, -1, 0, alpha, alpha', positivity of the form
+%          (0 < c < mu_1 mu_1-bar = 2 - k_1, k_1 = 2 cos 2pi/nu_1).
+%   32-35  The data (V, f_V, (L_i), a_0) of a « pseudo-sphérique » regular
+%          hyperpolytope, conditions a)-d), the normalisation phi(a_i,
+%          a_{i+1}) = -f(a_{i+1}); the invariants beta_i = 4 cos^2 theta_i,
+%          alpha_i = 2 cos 2 theta_i of the rotations tau_i tau_{i+1};
+%          a queried Proposition (« ?? ») that for G_2 and its rotation
+%          subgroup G_2^+ restriction Hom^!(G_2, G) -> Hom^!(G_2^+, G) is
+%          bijective; reconstruction of tau_i from rho_{i-1}, rho_i.
+%   37-40  The group scheme U_rho = Spec O_S[T]_(1+rho T) with
+%          lambda *_rho lambda' = lambda + lambda' + lambda lambda' rho,
+%          acting on E, E' by id + lambda pi' ⊗ pi, a « Théorème » that
+%          G_m x U_rho -> Aut(E, phi^E) gives isomorphisms, D_0^** a torsor
+%          under U_rho, and again the antipodism for n even.
+%
+% Slips of his flagged in \note, not corrected: page 35 swaps the names
+% alpha_i / beta_i relative to page 33 and writes 2(2cos^2 theta + 1) =
+% 4 cos 2 theta; page 27, d_3 carries d_0 where the recursion gives d_0-bar;
+% page 29, the indices of N(mu_...) look shifted by one.
+%
+% Notation, fixed once. His E (a curly E) is set E; P(E) and its dual as he
+% writes them, \mathbb{P} and \check{\mathbb{P}}; his script U is
+% \mathcal{U}_\rho; underlined Aut is \underline{\mathrm{Aut}}. His own
+% interlinear insertions are \add{}, his cancellations \struck{}. The right
+% edge of page 22 is clipped on the scan. Pages 22-23 and 29 carry heavy
+% overwriting and are the least secure; the prose between formulas is often
+% \ill{}.
+%
+% The dating is the folder's own; no group sentence (skill's group rule).
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{72}
+\batch{2}
+\pages{21}{40}
+\dating{[à partir de 1978]}
+\watermark{Édition de démonstration}
+\foldertitle{Polyèdres réguliers et hyperpolyèdres réguliers (Calculs en dimension quelconque) : notes manuscrites (s.d.).}
+
+\begin{document}
+
+\page{22}
+\note{la page s'ouvre au milieu d'un calcul commencé dans le lot précédent ; les notations $E$, $V$, $X = \mathbb{P}(E)$, $\pi$, $\sigma$, $\rho$, $\tau_i$, $\varphi$, $\psi$ y sont fixées. Le bord droit du feuillet est rogné sur la numérisation : les fins de lignes coupées sont marquées \ill{}.}
+
+(Automorphismes de $X$ ($= \mathbb{P}(E)$) au-dessus de l'identité sur \ill{}
+
+Ils correspondent aux pseudo-réflexions de $E$ qui sont l'identité sur $V$, donc de la forme
+\[
+(1) \qquad u = \mathrm{id} + \pi \otimes a
+\]
+$a$ section de $E$. Si on écrit que $u$ commute aux $\tau_i$, cela s'écrit \uncertain{$\langle a, e'_i\rangle = 0$} ($0 \leq i \leq n$) i.e. $a$ de la forme $\lambda\tilde{\sigma}$
+\[
+(2) \qquad u = \mathrm{id} + \pi \otimes \lambda\tilde{\sigma}
+\]
+Écrivons que $u$ est orthogonal, i.e.
+\[
+\underbrace{\varphi(\lambda\tilde{\sigma})}_{-\lambda^{2}\sigma'\rho'}\,\pi + \underbrace{\psi(\lambda\tilde{\sigma})}_{-\lambda\sigma\pi} = 0
+\]
+ou encore
+\[
+(3) \qquad \lambda(\lambda\sigma'\rho' + \sigma) = 0
+\]
+ce qui suivant la parité de $n$ s'écrit
+\[
+(4) \qquad \begin{cases}
+n \text{ pair } (\rho = 2\rho',\ \underline{\sigma = \sigma'}) & \lambda\sigma'(\lambda\rho' + 1) = 0\\
+n \text{ impair } (\underline{\rho = \rho'},\ \sigma = 2\sigma') & \lambda\sigma'(\lambda\rho' + 2) = 0
+\end{cases}
+\]
+\note{dans la seconde ligne l'accent de $\rho'$ est surchargé d'un trait en étoile ; on lit $\rho'$. Les deux lignes se déduisent bien de (3) avec les valeurs de $\rho$, $\sigma$ indiquées.}
+
+D'autre part, la \struck{\ill{}} \add{condition} que \uncertain{$u$ soit une} réflexion s'écrit $\langle \lambda\tilde{\sigma}, \xi\rangle = -2$ i.e.
+\[
+(5) \qquad \lambda\rho = -2
+\]
+
+\struck{\ill{}}
+
+\emph{Proposition} 1) Si $\sigma' = 0$, toutes les \struck{\ill{}} \add{\uncertain{autres}} pseudo-réflexions \add{commutant aux $\tau_i$} \struck{telles que} fixes sur $V$ sont \uncertain{nulles}.
+
+2) Si $\sigma'$ inv., \struck{\ill{}} \add{la} pseudo-réflexion $u = \mathrm{id} + \lambda\pi\otimes$\ill{}
+
+\page{23}
+est nulle sss elle satisfait : $\lambda\rho' + 1 = 0$ (cas $n$ pair) resp. $\underset{= \lambda\rho' + 2}{\lambda\rho + 2} = 0$ (cas $n$ impair).
+
+Donc
+\begin{enumerate}
+\item[a)] Si $n$ pair, $\exists$ une telle $u$ \add{$\neq \mathrm{id}$ sur les fibres} sss $\rho'$ inv., et on a alors nécessairement :
+\[
+(6) \qquad u = \mathrm{id} - \pi \otimes \sigma' \qquad \sigma' = \frac{1}{\rho'}\,\tilde{\sigma}
+\]
+i.e. $u$ est \emph{l'antipodisme} \add{\uncertain{2 inv.}}
+\item[b)] Si $n$ impair, \struck{$\exists$ une telle, pour qu'il sss $\rho$ inv. \ill{}, $\exists|\,u$ \ill{} f. cl. \ill{} \ill{} $\rho$.} existe une telle $u$, il \add{faut et} suffit que $\rho'$ ($= \rho^{*}$) soit inv., \struck{et 2 inv. cette condition \ill{}} \struck{\ill{} \ill{} \ill{} 2 inv.} On a alors nécessairement,
+\[
+\lambda = -\frac{2}{\rho} = -\frac{2}{\rho'} \quad \text{i.e.}
+\]
+\[
+(7) \qquad u = \mathrm{id} - \pi \otimes \frac{2\tilde{\sigma}}{\rho'}
+\]
+et $u$ est encore \emph{l'antipodisme}.
+\item[c)] \add{$n$ impair,} Si ($S$ de car. 2, \struck{\ill{}} \add{Pour qu'il existe} une telle $u$ il \struck{\ill{}} faut que $\rho$ ($= \rho'$) \struck{\ill{}} \ill{} \struck{\ill{}} \ill{} \struck{$\rho = \rho'$ \ill{}} pseudo-réflexion \ill{} \ill{} sur $V$ et commute : $G$ est orthogonale, \struck{en particulier}
+\end{enumerate}
+\marginal{en marge gauche, écrit de bas en haut : \ill{} en ce cas, $u$ invariant \ill{} automorphismes \ill{} \ill{} \ill{} de $\pi$}
+\marginal{en marge gauche, en face de c) : (Condition \ill{} \ill{} \ill{} \ill{} $\rho' = 0$ \ill{} \ill{})}
+\note{le passage c) est très surchargé (ratures et ajouts interlinéaires entremêlés) ; seuls les mots sûrs sont donnés.}
+
+En particulier
+
+\emph{Corollaire.} Supposons $\sigma'\rho'$ inv. i.e. \uncertain{$f(\tilde{\sigma})$ inv.}, i.e. $c \notin \Gamma(X, Q_X)$, \struck{sur les fibres} i.e. $c \notin Q_X$ sur les fibres, et 2 inv. sur $S$ si $n$ impair. Alors, et dans ce \uncertain{seulement}, \struck{\ill{}} $\exists$ unique $G$-automorphisme $\neq \mathrm{id}$ sur chaque fibre, au-dessus de l'identité sur $C$ et invariant $Q_C$. Ce dernier est l'antipodisme
+
+\page{24}
+\emph{NB} L'antipodisme peut être défini \add{intrinsèquement} indépendamment des deux conditions de caractéristique et \uncertain{parité} que \uncertain{sur} la parité de $n$, dès que $\rho'$ est inversible \add{(qui est (6), (7))}. \struck{(Mais pour qu'il ne soit} \add{Pour qu'il ne soit} l'identité, il faut et suffit que $n$ impair et $S$ de car. 2. Donc pour qu'il soit $\neq \mathrm{id}$ en chaque fibre, il faut et suffit que $n$ pair ou 2 inv. sur $S$.
+
+\note{ici un double trait horizontal sépare deux parties.}
+
+Considérons $G \xrightarrow{\varphi_G} \mathrm{Aut}(X)$ satisfaisant les conditions habituelles (mais on ne demande pas pour l'instant de réal. géom. conv., ni pas de \ill{}~$\dots$). Donc on a $C \subset X$ provenant de construction
+\marginal{$X = \check{\mathbb{P}}(E)$}
+\[
+0 \to V \to E \to \mathcal{O}_S \to 0
+\]
+et on a $L_i \subset V$, $L'_i \subset \check{V}$ ($0 \leq i \leq n$) \struck{$L_i \subset \check{V}$} tels que $V = \bigoplus L_i$, \struck{$\check{V} = \bigoplus L'_i$}, $L_i \otimes L'_{i+1} \simeq \mathcal{O}_S$ pour $0 \leq i \leq n-1$. \struck{En p\ill{} Considérons la} \add{Ainsi} $G$ opère sur $V$ de façon compatible avec son op. sur $C \simeq \check{\mathbb{P}}\uncertain{W}$). On a en outre la donnée de $s_0$ (satisfaisant aux conditions \uncertain{habi}-
+\note{la dernière lettre de $\check{\mathbb{P}}W$ peut aussi être un $V$ mal formé.}
+
+\page{25}
+-tuelles) permet de définir des sections $a_i$, $a'_i$ de $V$, $\check{V}$ -- en fait, $a'_0$ est une section de $L'_0$ définie en termes de \struck{$D_{s_0}$} la \add{section $s_0$ de $E$} \struck{droite} (au-dessus de 1,) \struck{$\Delta_{\xi} \subset E$ engendrée par $s_0$} définissant un \uncertain{splitting} de \ill{} en $E \simeq V \oplus \mathcal{O}_S \dots$) par $\langle s_0, a'_0\rangle = 1$, ce qui permet ensuite de définir de proche en proche les bases $a'_0, a'_1, a_1, \dots, a'_n, a_n$ de $L_0, L'_1, L_1, \dots$ par les conditions
+\[
+\tau_i^{E} = \mathrm{id} + a'_i \otimes a_i, \qquad \langle a_i, a'_{i+1}\rangle = 1 \qquad 0 \leq i \leq n
+\]
+(\emph{NB} il y a lieu de poser $a_{-1} = s_0$)
+
+Inversement, donnons-nous une base $a'_0$ de $L'_0$. \struck{On indique voir} Le plan
+\[
+F = \bigcap_{1 \leq i \leq n} H_i
+\]
+orthogonal aux $L'_i$ $1 \leq i \leq n$ \struck{dans alors si l'équation} \ill{} \struck{$H_0 \cap F$} $F \not\subset H_0$ sur les fibres i.e. $F \cap H_0$ est une droite (la droite $\Delta_c \subset E$ \struck{engendrée} correspondant à $c$), et l'équation
+\[
+\langle s, a'_0\rangle = 1
+\]
+définit dans $F$ une \add{droite \uncertain{affine}} \struck{\ill{}} parallèle à $\Delta$, sans $\Delta'$ (dépendant du choix de $a'_0$ -- \struck{(\emph{NB}. $L'_0 \simeq F/\Delta$ \ill{})}
+Considérons
+\[
+F \xrightarrow{\pi | F} \mathcal{O}_S
+\]
+
+\section{Forme hermitienne invariante pour un hyperpolyèdre régulier}
+\note{ce titre est de sa main, en haut à droite d'un feuillet de couleur (page 26) qui ne porte rien d'autre ; à sa gauche, au crayon gris, « (4p) », qui pourrait n'être pas de lui et compte les quatre pages suivantes.}
+
+\page{27}
+\note{page de calculs en tableau : une colonne à gauche (relations et conventions, en partie encadrées), une colonne à droite (récurrence sur les $d_i$). On les donne dans cet ordre.}
+
+\[
+\varphi(a_j, a_i) = 0 \quad -1 \leq j < i \leq n,\ i \neq j+1, \qquad \varphi(a_{-1}, a_{-1}) = f(a_{-1}) = 0
+\]
+\[
+\begin{array}{ll}
+0 \leq i \leq n & c_i = f(a_i) = \varphi(a_i, a_i)\\
+0 \leq i \leq n & \lambda_i - 1 = \langle a_i, a'_i\rangle\\
+0 \leq i \leq n-1 & \beta_i = \langle a_{i+1}, a'_i\rangle\\
+-1 \leq i \leq n-1 & \langle a_i, a'_{i+1}\rangle = 1
+\end{array}
+\]
+\[
+d_i = \frac{c_i}{\lambda_i - 1} = \varphi(a_{i-1}, a_i) \quad 0 \leq i \leq n \qquad \text{i.e.}\quad c_i = (\lambda_i - 1)\,d_i = \mu_i d_i
+\]
+Encadré :
+\[
+\Bigl\lbrace\, c_i \langle a_j, a'_i\rangle - \overbrace{(\lambda_i - 1)}^{\mu_i}\,\varphi(a_j, a_i) = 0 \qquad \lambda_i\bar{\lambda}_i = 1
+\]
+$0 \leq i \leq n$, $-1 \leq j \leq n$.
+\note{devant $(\lambda_i - 1)$ un signe surchargé, noirci, peut-être une barre double : illisible.}
+\[
+\Bigl[\, f(a)\,a' = \underbrace{\langle a, a'\rangle}_{\mu = \lambda - 1}\,\psi(a) \,\Bigr]
+\qquad
+\tau x = x + \Bigl(\frac{\mu}{f(a)}\,\varphi(x, a)\Bigr)\,a \qquad \lambda\bar{\lambda} = 1
+\]
+\[
+d_{i+1} = \bar{\beta}_i\,\bar{d}_i \qquad \text{donc}
+\]
+\[
+\begin{aligned}
+d_1 &= \bar{\beta}_0\,\bar{d}_0\\
+d_2 &= \bar{\beta}_1\,\beta_0\,d_0\\
+d_3 &= \bar{\beta}_2\,\beta_1\,\bar{\beta}_0\,d_0\\
+&\ \,\cdots\\
+d_{2i} &= \bar{\beta}_{2i-1}\,\beta_{2i-2}\,\bar{\beta}_{2i-3}\cdots\beta_0\,d_0\\
+d_{2i+1} &= \bar{\beta}_{2i}\,\beta_{2i-1}\,\bar{\beta}_{2i-2}\cdots\bar{\beta}_0\,\bar{d}_0\\
+&\ \,\cdots\\
+d_n &= \bar{\beta}_{n-1}\,\beta_{n-2}\,\bar{\beta}_{n-3}\cdots \begin{cases}\beta_0\,d_0 & \text{si } n \text{ pair}\\ \bar{\beta}_0\,\bar{d}_0 & \text{si } n \text{ impair}\end{cases}
+\end{aligned}
+\]
+\note{la ligne $d_3$ porte $\bar\beta_0\,d_0$ sans barre sur $d_0$, alors que la récurrence $d_{i+1} = \bar\beta_i\bar d_i$ donne $\bar\beta_2\beta_1\bar\beta_0\bar d_0$, comme la ligne générale $d_{2i+1}$ ; la barre sur $d_0$ manque peut-être seulement. Dans $d_{2i}$ il avait d'abord écrit un autre indice, surchargé.}
+\[
+d_0 = \frac{c_0}{\lambda_0 - 1} = \frac{c_0}{\mu_0} \qquad \underline{c_0 \in k_0} \qquad \text{OPS } c_0 = 1, \text{ donc } d_0 = \frac{1}{\mu_0}
+\]
+\[
+\begin{aligned}
+f(a_{-1}) &= 0\\
+f(a_0) &= 1\\
+f(a_1) &= \frac{\mu_1}{\bar{\mu}_0}\,\bar{\beta}_0\\
+f(a_2) &= \frac{\mu_2}{\mu_0}\,\bar{\beta}_1\,\beta_0\\
+f(a_3) &= \frac{\mu_3}{\bar{\mu}_0}\,\bar{\beta}_2\,\beta_1\,\bar{\beta}_0\\
+&\ \,\cdots
+\end{aligned}
+\]
+\note{dans $f(a_1)$ et $f(a_2)$ numérateur et dénominateur sont surchargés (indices récrits) ; on lit le dernier état. Il n'est pas sûr que le dénominateur de $f(a_2)$ porte une barre.}
+
+Supposons les $\beta_i \in k_0$, il vient les conditions
+\[
+\mu_i/\mu_0 \in k_0 \quad (i \ \text{pair}), \qquad \mu_i/\bar{\mu}_0 \in k_0 \quad (i \ \text{impair})
+\]
+($\mu_i \in k_0$ \uncertain{$i$ pair})
+
+\struck{\ill{}}
+\[
+\lambda_i - 1 = \varrho_i(\lambda_0 - 1), \qquad \lambda_i = \varrho_i(\lambda_0 - 1) + 1
+\]
+\struck{$\lambda_i$ \ill{}} $= (\lambda_0 - 1)\,\varrho_i$
+\note{la lettre notée $\varrho_i$ est un $\rho$ ou un $q$ de forme lâche.}
+\[
+(\lambda_1 - 1) = c\,(\bar{\lambda}_0 - 1)
+\]
+\note{le $c$ est surchargé sur une autre lettre ; lecture douteuse.}
+\drawing{un cercle, un diamètre horizontal tracé avec son centre, et, de l'extrémité droite du diamètre, une flèche vers un point du cercle en haut : peut-être le cercle unité où vivent les $\lambda_i$.}
+
+\page{28}
+\[
+\tau_0\tau_1 = \begin{pmatrix} \lambda_0 + \beta & \beta\lambda_1\\ 1 & \lambda_1 \end{pmatrix}
+\qquad \mathrm{Tr}\,\tau_0\tau_1 = \lambda_0 + \lambda_1 + \beta
+\]
+\[
+\tau_1\tau_0 = \begin{pmatrix} \lambda_0 & \beta\\ \lambda_0 & \lambda_1 + \beta \end{pmatrix}
+\qquad \mathrm{Tr}\,\tau_1\tau_0 \ (= \mathrm{Tr}\,\tau_0\tau_1) \qquad \det \tau_0\tau_1 = \lambda_0\lambda_1
+\]
+\note{les deux traces sont reliées sur la page par un double trait vertical, l'égalité. Traces et déterminant sont justes.}
+\[
+A(\tau_0\tau_1) = \frac{(\lambda_0 + \lambda_1 + \beta)^2}{\lambda_0\lambda_1} - 2 = \frac{\lambda_0}{\lambda_1} + \frac{\lambda_1}{\lambda_0} + \frac{\beta^2}{\lambda_0\lambda_1} + 2\beta\Bigl(\frac{1}{\lambda_0} + \frac{1}{\lambda_1}\Bigr)
+\]
+\[
+= \underbrace{\lambda_0\bar{\lambda}_1 + \lambda_1\bar{\lambda}_0}_{\in \mathbb{R}} + \beta^2\bar{\lambda}_0\bar{\lambda}_1 + 2\beta(\bar{\lambda}_0 + \bar{\lambda}_1)
+= \begin{cases} -2\\ -1\\ 0\\ \alpha,\ \alpha' \end{cases}
+\]
+\note{devant $A(\tau_0\tau_1)$, dans la marge, un signe barré (peut-être « Ex. 2 ») ; le développement est juste, et la seconde ligne l'est aussi si $\lambda_i\bar\lambda_i = 1$.}
+
+En marge gauche :
+\[
+(\tau_0\tau_1)^2 \neq 1, \qquad \tau_0\tau_1\tau_0\tau_1 = \qquad (\lambda_0\lambda_1)^2 = 1
+\]
+et, sous $\underline{\lambda_0 + \lambda_1 + \beta}$, un petit tableau de chiffres :
+\[
+\begin{array}{ccc} 1 & 2 & 2\\ 3 & 3 & 3\\ 4 & 4 & 4\\ 5 & 5 & 5 \end{array}
+\]
+\note{sans doute les ordres possibles des rotations $\tau_0\tau_1$ ; une parenthèse ouvre la deuxième ligne.}
+\[
+\beta = c\,\frac{(\lambda_0 - 1)}{(\bar{\lambda}_1 - 1)}
+\]
+\note{après $(\lambda_0 - 1)$ au numérateur, un facteur biffé.}
+\[
+(\bar{\lambda}_1 - 1)^2(\lambda_0\bar{\lambda}_1 + \lambda_1\bar{\lambda}_0) + c^2(\lambda_0 - 1)^2\bar{\lambda}_0\bar{\lambda}_1
+\]
+\struck{$+\,2(\lambda_0 - 1)(\bar{\lambda}_1 - 1)$}
+\[
+\lambda_0^2 + \lambda_1^2 + \beta^2 + 2\beta(\lambda_0 + \lambda_1)
+\]
+\[
+(\lambda_0^2 + \lambda_1^2)(2 - k_1)^2 + c^2(\lambda_0 - \bar{\lambda}_0)^2(\lambda_1 - 1)^2 + 2c(2 - k_1)(\lambda_0 - 1)(\lambda_1 - 1)(\lambda_0 + \lambda_1) = k
+\]
+\note{dans le deuxième terme le second facteur entre parenthèses est surchargé : $(\lambda_0 - \bar\lambda_0)$ est une lecture douteuse. La fin de la ligne suivante, « $(\lambda_0 + \lambda_1)$ », est rognée au bord droit.}
+\[
+\frac{c}{2 - k_1} = x
+\]
+En marge gauche :
+\[
+\begin{array}{ccc} \tau_0 & \tau_1 & \tau_\infty\\ p & q & r \end{array}
+\]
+(1) un des trois $p, q, r = 2$ déjà traité,
+\note{le (1) est entouré, et la ligne aussi.}
+\[
+p, q, r \geq 3
+\]
+\[
+x^2 + \Bigl(2\,\frac{\lambda_0 + \lambda_1}{(\lambda_0 - 1)(\lambda_1 - 1)}\Bigr)x + \Bigl[\frac{\lambda_0^2 + \lambda_1^2}{(\lambda_0 - 1)^2(\lambda_1 - 1)^2} - k\Bigr] = 0
+\]
+\note{dans chaque crochet un facteur est biffé devant la fraction, noirci au point d'être illisible.}
+
+\emph{solutions réelles}\note{souligné deux fois.}
+\[
+k = -2, -1, 0, 1, \alpha, \alpha'
+\]
+\note{le $-2$ est écrit sur un autre chiffre.}
+
+\page{29}
+\note{la moitié supérieure de la page est annulée par deux grands traits en croix ; on la donne néanmoins.}
+\[
+A(\tau_0\tau_1) = \frac{1}{\lambda_0\lambda_1}\bigl(\beta^2 + 2(\lambda_0 + \lambda_1)\beta + (\lambda_0^2 + \lambda_1^2)\bigr)
+\]
+\[
+= \underbrace{\frac{(\lambda_0 - 1)^2(\lambda_1 - 1)^2}{\lambda_0\lambda_1}}_{16\sin^2\frac{\theta_0}{2}\sin^2\frac{\theta_1}{2}}
+\Bigl(\beta^2 + \underbrace{2\frac{(\lambda_0 + \lambda_1)}{(\lambda_0 - 1)(\lambda_1 - 1)}}_{\frac{\cos\frac{\theta_1 - \theta_0}{2}}{2\sin\frac{\theta_0}{2}\sin\frac{\theta_1}{2}}}\beta + \underbrace{\frac{\lambda_0^2 + \lambda_1^2}{(\lambda_0 - 1)^2(\lambda_1 - 1)^2}}_{\frac{1}{8}\frac{\cos(\theta_1 - \theta_0)}{\sin^2\frac{\theta_0}{2}\sin^2\frac{\theta_1}{2}}}\Bigr) = k
+\]
+\note{ces trois accolades sont serrées et en partie surchargées ; les coefficients (16, 2, 1/8) sont lus avec doute. Sur la page, le crochet ouvert après $\beta^2$ se ferme avant le dernier terme.}
+\[
+\begin{array}{ll}
+(\lambda_i - 1)^2 & \arg. \theta_i + \pi\\
+(\lambda_0 - 1)^2(\lambda_1 - 1)^2 & \arg\ \underline{\theta_0 + \theta_1} + 2\pi\\
+\lambda_0\lambda_1 & \theta_0 + \theta_1
+\end{array}
+\qquad
+k = -2 + \psi \qquad k + 2 = \psi
+\]
+\struck{$16\sin^2\frac{\theta_0}{2}\sin^2\frac{\theta_1}{2}$}
+\[
+\beta_i = \xi_i(\lambda_i - 1)(\bar{\lambda}_{i+1} - 1) = \xi_i\mu_i\bar{\mu}_{i+1} \qquad \lambda_i - 1 = \mu_i \ \text{unité}
+\]
+\struck{$d_{i+1} = \xi_i(\bar\lambda_i - 1)(\bar\lambda_{i+1} - 1)\,d_i$}
+\note{sous la première formule, une autre ligne biffée et surchargée, illisible. La barre sur $\mu_{i+1}$ est douteuse.}
+\[
+d_{i+1} = \bar{\mu}_i\bar{\mu}_{i+1}\xi_i
+\]
+\note{ici prend fin la partie annulée.}
+\[
+\begin{array}{ll}
+c_i = f(a_i) = \varphi(a_i, a_i) & 0 \leq i \leq n\\
+(c_{-1} = f(a_{-1}) = \varphi(a_{-1}, a_{-1}) = 0) &
+\end{array}
+\]
+\[
+d_i = \frac{c_i}{\mu_i} = \varphi(a_{i-1}, a_i) \qquad \mu_i = \lambda_i - 1
+\]
+\begin{enumerate}
+\item[1)] $\varphi(a_i, a_j) = 0$ \quad $-1 \leq i < j \leq n$, $i, j$ non consécutifs
+\item[2)] $\varphi(a_{i-1}, a_i) = \dfrac{c_i}{\mu_i} = d_i$ \quad $0 \leq i \leq n$
+\item[3)] $d_{i+1} = \bar{\beta}_i\,\bar{d}_i$ \quad $0 \leq i \leq n-1$
+\end{enumerate}
+\struck{donc $c_i = \bar\beta_i\mu_i\,\ill{}\,d_i$}
+
+Encadré :
+\[
+\beta_i = \xi_i\,\mu_i\,\bar{\mu}_{i+1} \qquad \text{i.e.} \qquad \xi_i = \frac{\beta_i}{\mu_i\bar{\mu}_{i+1}} \qquad 0 \leq i \leq n-1
+\]
+\note{les barres de l'encadré sont mal visibles ; la première ligne est $\beta_i = \xi_i\mu_i\mu_{i+1}$ sur la page, avec peut-être une barre.}
+
+i.e.
+\[
+d_{i+1} = \bar{\xi}_i\,\mu_i\,\bar{\mu}_{i+1}\,\bar{d}_i
+\]
+donc
+\[
+\frac{c_{i+1}}{\mu_{i+1}} = \bar{\xi}_i\,\mu_i\,\bar{\mu}_{i+1}\,\frac{\bar{c}_i}{\bar{\mu}_i}
+\qquad \text{i.e.} \qquad c_{i+1} = N(\mu_{i+1})\,\xi_i\,c_i \quad\Rightarrow\ \xi_i \in k
+\]
+\note{la ligne est fortement surchargée (un premier état biffé, $c_{i+1} = N(\mu_{i+1})\ldots$, puis récrit à droite) ; $\bar\xi_i$ / $\xi_i$ et les barres des $\mu$ sont lues avec doute.}
+
+donc \struck{$d_1 = \bar\xi_0\,\bar\mu_0\,\mu_1$}
+
+\struck{$d_2 = \xi_1\,\bar\mu_1\,\bar\mu_2\,\xi_0\,\mu_0\,\mu_1$} \struck{$= (\xi_1\xi_0)\,\bar\mu_2\,N(\mu_1)\,\mu_0$}
+
+\struck{$d_3 = \xi_2\,\bar\mu_2\,\bar\mu_3\,[\quad]$} \struck{$= (\bar\xi_2\xi_1\bar\xi_0)\,\bar\mu_3\,N(\mu_2)\,N(\mu_1)\,\bar\mu_0$}
+
+\[
+\begin{cases}
+c_0 = 1\\
+c_1 = N(\mu_1)\,\xi_0\\
+c_2 = N(\mu_1\mu_2)\,\xi_0\xi_1\\
+c_3 = N(\mu_1\mu_2\mu_3)\,\xi_0\xi_1\xi_2\\
+\cdots\\
+c_n = N(\mu_1 \cdots \mu_n)\,\xi_0 \cdots \xi_{n-1}
+\end{cases}
+\qquad
+\begin{aligned}
+\varphi(a_{i-1}, a_i) &= \frac{c_i}{\mu_i} = N(\mu_0 \cdots \mu_{i-1})\,\bar{\mu}_i\,(\xi_0 \cdots \xi_{i-1})\\
+\varphi(a_i, a_{i+1}) &= N(\mu_0 \cdots \mu_{i-1})\,\mu_i\,(\xi_0 \cdots \xi_{i-1})
+\end{aligned}
+\]
+\note{devant l'accolade un signe surchargé. Dans les deux formules de droite on lit $N(\mu_0 \cdots \mu_{i-1})$ alors que la liste de gauche commence à $N(\mu_1)$ ; et $c_i/\mu_i = N(\mu_1\cdots\mu_i)\,\xi_0\cdots\xi_{i-1}/\mu_i$ donne $N(\mu_1\cdots\mu_{i-1})\,\bar\mu_i\,\xi_0\cdots\xi_{i-1}$ : les indices de $N$ semblent décalés d'un cran, à moins que la lecture $\mu_0$ ne soit fausse. La seconde ligne est aussi mal lue (indices surchargés).}
+
+\section{Détermination de $(\tau_i)$ par $(\rho_i)$, i.e. d'une repr. de $G_n$ via celle de $G_n^{+}$}
+\note{titre de sa main, au crayon, en haut à droite d'un feuillet de couleur (page 31) qui ne porte rien d'autre. Les indices de $\tau$ et $\rho$ sont mal formés, et « d'une » est une lecture douteuse.}
+
+\page{32}
+\[
+(V, f_V, (L_i)_{0 \leq i \leq n}, a_0)
+\]
+\drawing{à gauche, un petit croquis en zigzag : un trait vertical et une ligne brisée qui y revient, avec des marques ($\tau_0$ près de l'angle inférieur).}
+
+$V$ fibré vectoriel rang $n+1$
+
+$f_V$ forme quadratique
+
+$L_i$ sous-fibré vectoriel rg 1 \quad $0 \leq i \leq n$
+
+$a_0$ \struck{base} \add{section} de $L_0$ \struck{(rigidification\ldots)}
+\begin{enumerate}
+\item[a)] $f_V|L_i$ lisse \struck{\ill{}} \quad $0 \leq j \leq$ \ill{}
+\item[b)] $L_i \perp L_j$ si $0 \leq i < j \leq n$, $j \neq i+1$ \ill{}
+\item[c)] $L_i \not\perp L_{i+1}$ sur \struck{aucune} \add{les} fibres ($0 \leq i \leq n-1$)
+\item[d)] $f(a_0) = 1$ (normalisation pour $a_0$ et $f$ ]
+\end{enumerate}
+\note{la ligne a) se poursuit par un long passage biffé en zigzag, illisible ; le crochet fermant de d) répond à un crochet ouvert dans cette rature.}
+
+Correspond aux hyperpolyèdres réguliers \uncertain{pseudo-sphériques} pour lesquels $\beta = \prod \beta_i$ inversible (mais $\tilde{\beta}$ pas nécess. inv., i.e. $f_V$ pas nécess. lisse\ldots)
+
+\drawing{un schéma en zigzag sur deux rangées : en haut $L_0$, $L_1$, \ldots, $L_i$, $L_{i+1}$ ; en bas $L'_0$, $L'_1$, $L'_2$, \ldots, $L'_i$, $L'_{i+1}$ ; des traits obliques relient chaque $L_i$ à $L'_i$ et $L'_{i+1}$, marqués $\tau_0$, $\tau_1$, \ldots, $\tau_i$ ; à gauche un $L_0$ et un $L'_0$ surchargés ; à droite, après un trait vertical, $\beta_i$.}
+\[
+L'_i = \psi_V(L_i)
+\]
+Encadré :
+\[
+\varphi(a_i, a_{i+1}) = -f(a_{i+1}) \qquad \underline{\text{i.e.}}
+\]
+définit de proche en proche les \emph{bases} $a_i$ des $L_i$, à partir de $a_0$ donné
+
+À droite :
+\[
+a_i \in L_i \qquad a'_{i+1} = \psi(b_{i+1})
+\]
+\note{la seconde formule est entourée.}
+\[
+\langle a_i, a'_{i+1}\rangle = 1 \quad \text{i.e.} \quad \boxed{\varphi(a_i, b_{i+1}) = 1}
+\]
+\struck{$a_{i+1}, a'_{i+1}$}
+\[
+\mathrm{id} + a'_{i+1} \otimes a_{i+1} = \tau_{i+1}
+\]
+\note{sous $a'_{i+1}$, une accolade et $\psi(b_{i+1})$ biffé.}
+\[
+\begin{cases}
+a_{i+1} = \xi_{i+1}\,b_{i+1} = -\dfrac{1}{f(b_{i+1})}\,b_{i+1}\\[1ex]
+\xi_{i+1} = -f(a_{i+1}) = -\dfrac{1}{f(b_{i+1})}\\
+\phantom{\xi_{i+1}} = -\xi_{i+1}^2 f(b_{i+1})\\
+1 = -\xi_{i+1} f(b_{i+1})
+\end{cases}
+\qquad
+\begin{aligned}
+a'_{i+1} &= -\frac{1}{f(a_{i+1})}\,\psi(a_{i+1})\\
+&= \psi\Bigl[\underbrace{-\frac{1}{f(a_{i+1})}\,a_{i+1}}_{b_{i+1}}\Bigr]
+\end{aligned}
+\]
+\note{dans la deuxième ligne de l'accolade, un $\xi_i$ ou un $b_i$ biffé après $f(a_{i+1})$. Sous l'accolade de droite, une ligne biffée : $b_{i+1} = a_{i+1} = -1/f(\ldots)$.}
+\[
+\varphi(a_i, a_{i+1}) = \xi_{i+1} = -f(a_{i+1})
+\]
+\note{devant $\xi_{i+1}$, un facteur $\frac{1}{\ldots}$ biffé. Le calcul se tient : avec $\varphi(a_i, b_{i+1}) = 1$ et $a_{i+1} = \xi_{i+1}b_{i+1}$, on a $f(a_{i+1}) = \xi_{i+1}^2 f(b_{i+1}) = -\xi_{i+1}$.}
+
+\page{33}
+\[
+\begin{aligned}
+\varphi(a_i, a_{i+1}) &= -\beta_0 \cdots \beta_i\\
+f(a_i) &= \beta_0 \cdots \beta_{i-1}\\
+f(a_{i+1}) &= \beta_0 \cdots \beta_i
+\end{aligned}
+\qquad
+\frac{\varphi(a_i, a_{i+1})^2}{f(a_i)\,f(a_{i+1})} = \beta_i \ \bigl[= 4\cos^2\theta_i\bigr]
+\]
+\[
+\Bigl[\alpha_i = \beta_i - 2 = 2\,\bigl[\underbrace{2\cos^2\theta_i - 1}_{\cos 2\theta_i}\bigr] = 2\cos 2\theta_i\Bigr]
+\]
+$\alpha_i$ est \emph{l'invariant de $\tau_i\tau_{i+1}$} (rotation\ldots)
+\note{le calcul est juste. Une longue ligne ondulée sépare ensuite le haut de la page du reste.}
+
+\drawing{deux croquis de rayons issus d'un point : le premier, trois demi-droites marquées $\tau_0$, $\tau_1$, $\tau_2$ ; le second, trois demi-droites marquées $\sigma$, $\rho_1$, $\rho_0$, avec de petites flèches courbes de rotation entre elles.}
+\[
+\alpha_0,\ \alpha_1 \qquad \underbrace{\tau_0\,\tau_1}\,\underbrace{\phantom{\tau}\tau_2} \qquad \rho_0 = \tau_0\tau_1, \quad \rho_1 = \tau_1\tau_2
+\]
+\[
+\tau_0 = \rho_0\tau_1 \qquad \tau_2 = \tau_1\rho_1 \qquad \tau_0\tau_2 = \rho_0\rho_1 = \sigma \qquad \sigma^2 = 1
+\]
+i.e. $\tau_0$, $\tau_2$ commutent.
+\[
+\tau_0^2 = \rho_0\tau_1\rho_0\tau_1 = \rho_0\rho_0^{-1} = \mathrm{id}
+\]
+\note{$\rho_0\tau_1\rho_0\tau_1 = \rho_0\rho_0^{-1}$ suppose $\tau_1\rho_0\tau_1 = \rho_0^{-1}$, qui vient de $\tau_1^2 = 1$ et $\tau_0^2 = 1$ ; il le prend comme acquis.}
+
+?? \emph{Prop} Soit
+\[
+G_2 = \bigl(\tau_0, \tau_1, \tau_2 \bigm| \tau_0^2 = \tau_1^2 = \tau_2^2 = (\tau_0\tau_2)^2 = 1\bigr)
+\]
+\[
+\supset G_2^{+} = \bigl(\rho_0, \rho_1 \bigm| (\rho_0\rho_1)^2 = 1\bigr)
+\qquad \rho_0 \mapsto \tau_0\tau_1,\ \rho_1 \mapsto \tau_1\tau_2
+\]
+\note{l'inclusion est une flèche verticale de $G_2^+$ vers $G_2$ ; de même, à droite, des flèches de $\rho_0$ vers $\tau_0\tau_1$ et de $\rho_1$ vers $\tau_1\tau_2$.}
+
+Considérons $X$ fibré projectif sur $S$ \add{de rg $N \geq 1$} et \struck{catégories} $G = \mathrm{Aut}(X)$. \struck{Alors} Soit $\mathrm{Hom}^{!}(G_2, G)$ le sous-ensemble de $\mathrm{Hom}_{\mathrm{gr}}(G_2, G)$ formé des $\varphi$ telles que $\tau_i \overset{\mathrm{df}}{=} \varphi(\tau_i)$ soit une \emph{réflexion} ($i = 0, 1, 2$), et que $(\tau_0, \tau_1)$, $(\tau_1, \tau_2)$ et \ill{} ($\tau_0\tau_1 \overset{\mathrm{df}}{=} \rho_0$, $\tau_1\tau_2 \overset{\mathrm{df}}{=} \rho_1$) \add{fibre par fibre} \ill{} commutent pas (i.e. $\rho_0^2 \neq \mathrm{id}$, $\rho_1^2 \neq \mathrm{id}$, $\rho_0\rho_1 \neq \rho_1\rho_0$ fibre par fibre. Soit $\mathrm{Hom}^{!}(G_2^{+}, G)$ le sous-ensemble de $\mathrm{Hom}_{\mathrm{gr}}(G_2^{+}, G)$ formé des $\varphi^{+}$ telles que [$\rho_0 = \varphi^{+}(\rho_0)$, $\rho_1 = \varphi^{+}(\rho_1)$] on ait : $\rho_0^2 \neq 1$, $\rho_1^2 \neq 1$, $\rho_0\rho_1 \neq \rho_1\rho_0$ sur chaque fibre, et (si $N \geq 2$) $\exists$ loc. sous-fibré projectif $Z$ de $X$, de codim 3, \struck{tel que $\rho_0|X_0 = \rho_1|X_0 = \mathrm{id}$} \add{et des sous-fibrés projectifs $X_0, X_1, X_2 \supset Z$ de codim 2, \uncertain{$X_0 \cap X_1 \cap X_2 = Z$}, tels que $\rho_0$, $\rho_1$, $\sigma = \rho_0\rho_1$ induisent l'identité resp. sur $X_0$, $X_1$, $X_2$ [Si $N = 2, 3$ il faut sans doute se donner les $X_i$ ; si $N \geq 4$ ils sont uniques\ldots)]}. Alors l'application
+\[
+\varphi \longmapsto \varphi^{+} = \varphi \,|\, G_2^{+}
+\]
+est bijective. (?)
+\note{« $N \geq 2$ » : le 2 est écrit sur un 1 à l'encre plus noire. Le passage ajouté sur $X_0, X_1, X_2$ est écrit au pied de la page, sous un trait, et rattaché par un renvoi ; ses premiers mots sont en partie rognés au bord.}
+\marginal{en marge gauche, en oblique : \emph{NB} $\rho_0$ \ill{} $\Rightarrow \tau_1$ et $\sigma$ \ill{} $\Rightarrow \sigma$ \ill{} \ill{} les conditions \ill{} \ill{} que $\tau_0, \tau_2$ \ill{} et $\sigma$ \ill{} \ill{} pour cette \ill{}}
+
+\page{34}
+? D'ailleurs, si $N = 2$, $\exists|$ \struck{quadrique} \add{conique} $Q \subset X$ invariante par $\varphi^{+}$, et elle est invariante par $\varphi$.
+
+[Peut-être faut-il se donner en plus \uncertain{la} \add{hyp. conique lisse} \struck{forme quadratique} invariante\ldots]
+\note{le reste de la page est vide.}
+
+\page{35}
+Supposons les $\beta_i$ \add{($= \alpha_i + 2$)} inv.
+
+forme sur \uncertain{$Q(a_{i-1}, a_i, a_{i+1})$} lisse $\Longleftrightarrow$ $\alpha_{i-1} + \alpha_i$ inv.
+
+forme sur $Q(a_{i-1}, a_i)$ lisse $\Longleftrightarrow$ $2 - \alpha_{i-1}$ inv.
+
+$\longrightarrow$ $Q(a_i, a_{i+1})$ lisse $\Longleftrightarrow$ $2 - \alpha_i$ inv.
+\note{la lettre notée $Q$ (le plan ou la droite engendrés par les $a$) est une boucle à queue, peut-être un $\mathcal{Q}$ ou un $\mathcal{O}$ indicé. La longue flèche de la troisième ligne tient lieu de « forme sur ».}
+
+\struck{Ex.}
+\[
+a_{i-1} \ \underset{2 - \alpha_{i-1}}{\rule{2em}{0.4pt}} \ a_i \ \underset{2 - \alpha_i}{\rule{2em}{0.4pt}} \ a_{i+1}
+\]
+$\alpha_i \neq 2$ (cas \ill{} \ill{} pages 1)
+
+$\alpha_{i-1} \neq 2$
+
+\struck{\ill{}} Si
+\[
+\left.
+\begin{array}{l}
+\beta_0, \ldots, \beta_{n-1} \ \text{inv.}\\
+2(\alpha_{i-1} + \alpha_i) \ \text{inv.}\\
+\alpha_{i-1} - 2,\ \alpha_i - 2 \ \text{inv.}
+\end{array}
+\right\rbrace
+\]
+alors $\tau_i$ se reconstruit à partir de $\rho_{i-1}$, $\rho_i$ ($= \tau_{i-1}\tau_i$, $= \tau_i\tau_{i+1}$), donc aussi $\tau_{i-1} = \rho_{i-1}\tau_i$, $\tau_{i+1} = \tau_i\rho_i$ (pour $1 \leq i \leq n-1$)
+\marginal{entouré, relié par une flèche à la condition $2(\alpha_{i-1} + \alpha_i)$ inv. : dans ce cas $\neq 2$ !}
+
+\marginal{en marge gauche : dans $V$, $f$ \quad $C = \mathbb{P}(W)$, $Q$}
+
+($n \geq 2$) \quad $\tau_i =$ \struck{sym} réflexion associée à la direction
+\[
+\bigl(\underbrace{V^{\rho_{i-1}}}_{\{a_{i-1}, a_i\}^{\perp}} + \underbrace{V^{\rho_i}}_{\{a_i, a_{i+1}\}^{\perp}}\bigr)^{\perp}
+= \{a_{i-1}, a_i\}^{\perp\perp} \cap \{a_i, a_{i+1}\}^{\perp\perp}
+= Q(a_{i-1}, a_i) \cap Q(a_i, a_{i+1})
+\]
+\[
+\alpha_i = \frac{(a_i, a_{i+1})^2}{f(a_i)\,f(a_{i+1})} = 4\cos^2\theta_i
+\]
+\struck{$\alpha_i \cos 2$}
+\[
+\beta_i = \alpha_i + 2 = 2\bigl(\underbrace{2\cos^2\theta_i + 1}_{\cos 2\theta_i}\bigr) = 4\cos 2\theta_i
+\]
+\note{les noms sont ici échangés par rapport à la page 33, où $\beta_i = \varphi(a_i,a_{i+1})^2/f(a_i)f(a_{i+1}) = 4\cos^2\theta_i$ et $\alpha_i = \beta_i - 2 = 2\cos 2\theta_i$ ; ici le même quotient est appelé $\alpha_i$, et $\beta_i = \alpha_i + 2$ comme en tête de page. La dernière ligne est fausse telle qu'elle est écrite : $2\cos^2\theta_i + 1 = \cos 2\theta_i + 2$, non $\cos 2\theta_i$, et $2(2\cos^2\theta_i + 1) = 2\cos 2\theta_i + 4$, non $4\cos 2\theta_i$. Sous l'accolade, un chiffre biffé devant $\cos 2\theta_i$.}
+
+\section{$\mathcal{U}_\rho \simeq \mathrm{Aut}(\mathcal{X}, (\tau_i))$}
+\note{formule de sa main, en haut à droite d'un feuillet de couleur (page 36) qui ne porte rien d'autre. Le $\mathcal{X}$ est surchargé sur une autre lettre ; l'indice de $\tau$ est mal formé.}
+
+\page{37}
+Soit $\rho \in \Gamma(S, \mathcal{O}_S)$, $\mathcal{U}_\rho \subset \mathbb{E}^1_S$ formé des $\lambda$ tels que $1 + \lambda\rho$ inversible i.e.
+\[
+\mathcal{U}_\rho = \underline{\mathrm{Spec}}\ \mathcal{O}_S[T]_{(1 + \rho T)}
+\]
+prenons la multiplication
+\[
+\lambda \mathbin{\underset{\rho}{*}} \lambda' = \lambda + \lambda' + \lambda\lambda'\rho
+\]
+(\uncertain{Assoc. comm.} \ill{} 1) de sorte que $\mathcal{U}_\rho$ est un schéma en groupes ;
+\[
+\lambda \longmapsto 1 + \lambda\rho \qquad \mathcal{U}_\rho \longrightarrow \mathbb{G}_m
+\]
+est un homom. de groupes, qui est un isom. sss $\rho$ inversible.
+\note{l'application $\lambda \mapsto 1 + \lambda\rho$ transforme bien $\lambda \ast_\rho \lambda'$ en produit : $(1 + \lambda\rho)(1 + \lambda'\rho) = 1 + (\lambda + \lambda' + \lambda\lambda'\rho)\rho$.}
+
+Considérons un hyperpolyèdre régulier \add{\uncertain{(conv.)}} pseudo-sphérique sur $S$, de dim. $n$, correspondant ; les invariants $\mu_i$ ($0 \leq i \leq n$) et $\beta_i$ ($0 \leq i \leq n-1$) [avec $\mu_i + 1$ inv. $0 \leq i \leq n$]. Alors \struck{$\rho = L_{n+1}(\mu_0, \lambda_0, \ldots, \beta_{n-1})$}
+\[
+\rho = L_{n+1}(\mu_0, \lambda_0, \ldots, \lambda_{n-1}, \mu_n) = \langle \pi, \pi'\rangle
+\]
+\note{les lettres notées $\lambda_0, \ldots, \lambda_{n-1}$ dans les arguments de $L_{n+1}$ peuvent être des $\beta$ ; la rature juste au-dessus finit par $\beta_{n-1}$.}
+
+\page{38}
+Donc $\mathcal{U}_\rho$ opère \add{fidèlement} sur $E$, $E'$ par
+\[
+\begin{cases}
+u_\lambda^{E} = \mathrm{id} + \lambda\pi' \otimes \pi\\
+u_\lambda^{E'} = \mathrm{id} + \lambda\pi' \otimes \pi
+\end{cases}
+\]
+(opérations \struck{contragrédientes} \add{transposées} l'une de l'autre) laissant $\pi$, $\pi'$ invariants, les $\tau_i$, donc aussi les $\varphi^{E}(s)$, $\varphi^{E'}(s)$ ($s \in G_n$), on trouve
+\[
+(*) \qquad \mathcal{U}_\rho \longrightarrow \underline{\mathrm{Aut}}(E, \varphi^{E})
+\]
+\[
+(*) \qquad \mathcal{U}_\rho \longrightarrow \underline{\mathrm{Aut}}(X, \varphi^{X})
+\]
+et de même avec $E'$. On obtient en fait, en \uncertain{rajoutant} les scalaires
+\[
+(**) \qquad \mathbb{G}_m \times \mathcal{U}_\rho \longrightarrow \underline{\mathrm{Aut}}(E, \varphi^{E})
+\]
+\note{sous $\mathbb{G}_m \times \mathcal{U}_\rho$, un $\mathbb{G}_m$ inclus, et une flèche de ce $\mathbb{G}_m$ vers le but, légendée « opérant par homothéties ».}
+dont ce \ill{} \ill{} \ill{} on passe au quotient. On trouve
+
+\emph{Théorème} Ce \ill{} \uncertain{sont des iso.}
+
+De plus, si $D_0 = (H_1 \cap \cdots \cap H_n)$, $D_0^{**} = D_0 - \{c, d\}$, où $\{d\} = D_0 \cap C$ (\ill{} une section de $X$ sur $S$) \ill{} a que
+\note{ce dernier alinéa est marqué d'un trait vertical en marge gauche.}
+
+\page{39}
+$\mathcal{U}_\rho$ opère (\uncertain{sans unité}) sur $D_0$ et $D_0^{**}$, et que $D_0^{**}$ est un \emph{torseur} sous $\mathcal{U}_\rho$ (trivialisé par $s_0$\ldots)
+
+\note{un trait horizontal sépare deux parties.}
+
+Supposons maintenant les \uncertain{$\mu_i = 2$} de sorte qu'il y a une forme quadratique \emph{inv.} canonique $f$ sur $E$, unique par la condition
+\[
+f(a_{-1}) = 0, \qquad f(a_0) = 1,
+\]
+\struck{Jx de} d'où
+\[
+Q \subset X = \check{\mathbb{P}}(E).
+\]
+On sait que la ps-réfl. $\mathrm{id} + \lambda\pi'\otimes\pi$ ($= \mathrm{id} + \pi' \otimes \lambda\pi$) est \struck{\ill{}} orthogonale ssi sa \uncertain{transformation} corr. dans $X$ conserve $Q$, et ceci signifie que
+\[
+\lambda f(\pi)\,\pi' + \psi(\lambda\pi) = 0 \quad \text{i.e.}
+\]
+\[
+\lambda\bigl[\lambda\underbrace{f(\pi)}_{-\tilde{\sigma}\tilde{\rho}}\pi' + \underbrace{\psi(\pi)}_{-\sigma\pi'}\bigr] = 0 \quad \text{i.e.}
+\]
+\[
+(**) \qquad \lambda(\sigma + \lambda\tilde{\sigma}\tilde{\rho}) = 0
+\]
+\note{dans la première formule, un $\psi$ ou un $\varphi$ biffé au-dessus du $f$, et le $\lambda$ en tête est récrit ; sous l'accolade de $f(\pi)$, une ligne biffée et illisible. Le calcul est juste : on trouve $-\lambda(\sigma + \lambda\tilde\sigma\tilde\rho)\,\pi'$.}
+
+\page{40}
+1) Cas $n$ pair, $\rho = 2\tilde{\rho}$, $\sigma = \tilde{\sigma}$, l'équation s'écrit
+\[
+\lambda\sigma(1 + \lambda\tilde{\rho}) = 0
+\]
+\note{entre $1 +$ et $\lambda\tilde\rho$, un chiffre biffé, peut-être un 2.}
+Si $\sigma$ \struck{\ill{}} \add{et $\tilde{\rho}$} inversibles, la seule solution \emph{inversible} \add{i.e.} (correspondant à une section de $\mathcal{U}_\rho$ partout $\neq 1$) est donnée par
+\[
+\lambda = -\frac{1}{\tilde{\rho}} \qquad \text{d'où} \qquad u = \underbrace{\mathrm{id} - \frac{1}{\tilde{\rho}}\,\pi' \otimes \pi}_{\text{antipodisme}}
+\]
+\note{les deux dénominateurs portent un chiffre surchargé devant $\tilde\rho$ (peut-être un 4 biffé). Avec (**) de la page 39 et $\tilde\sigma = \sigma$, $\tilde\rho$ inversible, on a bien $\lambda = -1/\tilde\rho$ ; « antipodisme » est souligné.}
+
+\struck{Si $\sigma = 0$, $\mathcal{U}_\rho$ invariant $f$, on a que}
+
+D'autre part \struck{\ill{}}, conditions équivalentes \struck{\ill{}} :
+\begin{enumerate}
+\item[b)] $\mathcal{U}_\rho$ invariant $f^{E}$
+\item[b)] $\mathcal{U}_\rho$ invariant $Q_X$
+\item[a)] $\sigma = 0$
+\end{enumerate}
+\note{les deux premières lettres sont surchargées (la première peut-être un c) récrit en b)) ; une flèche courbe renvoie de a) vers la première.}
+
+Enfin, si $\tilde{\rho} = 0$, \struck{deux} \add{\ill{}} conditions équivalentes \ill{} : 2 suivantes
+\struck{a) $\sigma = 0$}
+\begin{enumerate}
+\item[d)] $\exists$ loc. section \struck{\ill{}} de $\mathcal{U}_\rho$ partout $\neq 1$, qui invariant $f^{E}$. \struck{(ou ce qui revient au même, $Q_X$)}
+\end{enumerate}
+\struck{\ill{}}
+
+\end{document}
