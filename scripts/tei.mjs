@@ -427,11 +427,18 @@ function convert(tex) {
   function renderEnv(block) {
     const list = /^\\begin\{(itemize|enumerate)\}([\s\S]*)\\end\{\1\}$/.exec(block);
     if (list) {
-      const items = splitItems(list[2])
-        .map((raw) => {
-          const bodyText = raw.trim();
-          const label = takeBracketed(bodyText);
-          if (!label) return `<item>${renderItem(bodyText)}</item>`;
+      const parsed = splitItems(list[2]).map((raw) => {
+        const bodyText = raw.trim();
+        return { bodyText, label: takeBracketed(bodyText) };
+      });
+      // TEI takes a list either of bare items or of label–item pairs, never
+      // a mix (folder 37, batch 5: a first item unmarked, the rest numbered
+      // by him). Where any item carries a label, an unmarked one gets an
+      // empty <label/>, which says there is no mark rather than inventing one.
+      const labelled = parsed.some((x) => x.label);
+      const items = parsed
+        .map(({ bodyText, label }) => {
+          if (!label) return `${labelled ? '<label/>' : ''}<item>${renderItem(bodyText)}</item>`;
           // His own numbering, where a list carries one, goes in a <label>
           // before the item — TEI's shape for a list whose marks are content.
           // `\item[{[1]}]` braces the label to protect its brackets; the
