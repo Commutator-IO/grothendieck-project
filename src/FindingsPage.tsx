@@ -519,11 +519,11 @@ function ProvedInLean() {
               <span className="font-semibold text-ink-700">What the proof found. </span>
               {notation(p.found)}
             </p>
-            <p className="mt-2 text-[12px] text-ink-400">
+            <p className="mt-2 text-[12px] text-ink-400 [overflow-wrap:anywhere]">
               <a href={`https://github.com/Commutator-IO/grothendieck-project/blob/main/${p.lean}`} className="hover:text-brand-700">
                 {p.lean}
               </a>{' '}
-              · {p.theorems.map((t) => <code key={t} className="mr-1.5 text-[11.5px]">{t}</code>)}
+              · {p.theorems.map((t) => <code key={t} className="mr-1.5 inline-block max-w-full text-[11.5px] [overflow-wrap:anywhere]">{t}</code>)}
             </p>
           </article>
         ))}
