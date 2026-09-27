@@ -148,15 +148,14 @@ jobs:
       # a document uses, so this step costs tens of megabytes instead of
       # gigabytes. Its package cache is keyed on the lockfile-free bundle URL,
       # hence the explicit cache key.
+      # Installed whatever the switch: the jTEI article below compiles with it too.
       - name: Install tectonic
-        if: env.RENDER_TRANSCRIPTS == 'true'
         run: |
           curl -fsSL https://drop-sh.fullyjustified.net | sh
           sudo mv tectonic /usr/local/bin/
           tectonic --version
 
       - uses: actions/cache@v4
-        if: env.RENDER_TRANSCRIPTS == 'true'
         with:
           path: ~/.cache/Tectonic
           key: tectonic-${{ runner.os }}-v1
