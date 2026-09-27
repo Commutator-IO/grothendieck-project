@@ -76,6 +76,11 @@ mkdirSync(out, { recursive: true });
 const TEI_VERSION = '4.12.0';
 const PINS = {
   'tei_jtei.rng': {
+    // Committed beside this script: www.tei-c.org refused the deploy runner's
+    // connection on 27 September 2026 and failed the build with it. The copy
+    // is held to the same digest; the URL is where it came from, and the
+    // fallback if the copy is ever removed.
+    local: resolve(here, `schema/tei_jtei-${TEI_VERSION}.rng`),
     url: `https://www.tei-c.org/Vault/P5/${TEI_VERSION}/xml/tei/custom/schema/relaxng/tei_jtei.rng`,
     sha256: '8f235c66eb565f5891f966155871d1f5a3ef31cd825dab737b0bb6519ebc4a3e',
   },
@@ -102,12 +107,16 @@ const digest = (buf) => createHash('sha256').update(buf).digest('hex');
 
 /** A pinned file, from the cache when its digest matches and from the net otherwise. */
 function pinned(name) {
-  const { url, sha256 } = PINS[name];
+  const { url, sha256, local } = PINS[name];
+  if (local && existsSync(local)) {
+    if (sha256 && digest(readFileSync(local)) !== sha256) throw new Error(`article-tei: ${local} does not match its digest`);
+    return local;
+  }
   const path = resolve(cacheDir, name);
   if (existsSync(path) && (!sha256 || digest(readFileSync(path)) === sha256)) return path;
   mkdirSync(cacheDir, { recursive: true });
   process.stdout.write(`article-tei: fetching ${name}\n`);
-  const body = execFileSync('curl', ['-fsSL', '--proto', '=https', '--tlsv1.2', url], {
+  const body = execFileSync('curl', ['-fsSL', '--proto', '=https', '--tlsv1.2', '--retry', '4', '--retry-all-errors', '--connect-timeout', '20', url], {
     maxBuffer: 64 * 1024 * 1024,
   });
   if (sha256 && digest(body) !== sha256) {

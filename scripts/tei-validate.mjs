@@ -104,7 +104,7 @@ function pinned(name) {
   }
   mkdirSync(cacheDir, { recursive: true });
   process.stdout.write(`tei: fetching ${name}\n`);
-  const body = execFileSync('curl', ['-fsSL', '--proto', '=https', '--tlsv1.2', url], {
+  const body = execFileSync('curl', ['-fsSL', '--proto', '=https', '--tlsv1.2', '--retry', '4', '--retry-all-errors', '--connect-timeout', '20', url], {
     maxBuffer: 64 * 1024 * 1024,
   });
   const got = digest(body);
