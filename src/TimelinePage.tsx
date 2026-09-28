@@ -137,6 +137,166 @@ const LIFE: { year: number; what: string; source: string }[] = [
   { year: 1990, what: 'Hands his mathematical papers to Jean Malgoire — a second part follows on 28 July 1995 — which later form this fonds', source: FONDS },
 ];
 
+/* ---------- the works, sourced ---------- */
+
+const CIRCLE_BIBLIO = 'https://webusers.imj-prg.fr/~leila.schneps/grothendieckcircle/GrothBiblio.pdf';
+const CIRCLE_UNPUB = 'https://webusers.imj-prg.fr/~leila.schneps/grothendieckcircle/unpubtexts.php';
+const NUMDAM = 'https://www.numdam.org/search?Publications%20math%C3%A9matiques%20de%20l%27IH%C3%89S-%22Grothendieck%2C%20Alexander%22-qn';
+const SOURCE_NAME: Record<string, string> = {
+  [CIRCLE_BIBLIO]: 'bibliography, Grothendieck Circle',
+  [CIRCLE_UNPUB]: 'Grothendieck Circle',
+  [NUMDAM]: 'Numdam',
+  [MACTUTOR]: 'MacTutor',
+};
+
+/**
+ * The book-length works, placed on the folders' own axis so that a reader can
+ * see which folders stand beside which treatise. Seminars and runs of talks
+ * are drawn as the years they were held, volumes as the year they appeared;
+ * each carries the reference it is taken from, and where two references
+ * disagree the row says so rather than choosing.
+ */
+interface Work {
+  row: string;
+  label: string;
+  from: number;
+  to?: number;
+  detail: string;
+  source: string[];
+  /** Which of the row's two tracks, and on which side the label goes; above the mark by default. */
+  track?: number;
+  side?: 'left' | 'right';
+}
+const WORKS: Work[] = [
+  { row: 'EGA', label: 'I', from: 1960, detail: 'EGA I, Le langage des schémas — Publ. Math. IHÉS 4 (1960), with Dieudonné', source: [NUMDAM, CIRCLE_BIBLIO] },
+  { row: 'EGA', label: 'II, III₁', from: 1961, detail: 'EGA II, Étude globale élémentaire — IHÉS 8; EGA III, première partie — IHÉS 11 (1961)', source: [NUMDAM, CIRCLE_BIBLIO] },
+  { row: 'EGA', label: 'III₂', from: 1963, detail: 'EGA III, seconde partie — IHÉS 17 (1963)', source: [NUMDAM, CIRCLE_BIBLIO] },
+  { row: 'EGA', label: 'IV₁', from: 1964, detail: 'EGA IV, première partie — IHÉS 20 (1964)', source: [NUMDAM, CIRCLE_BIBLIO] },
+  { row: 'EGA', label: 'IV₂', from: 1965, detail: 'EGA IV, seconde partie — IHÉS 24 (1965)', source: [NUMDAM, CIRCLE_BIBLIO] },
+  { row: 'EGA', label: 'IV₃', from: 1966, detail: 'EGA IV, troisième partie — IHÉS 28 (1966)', source: [NUMDAM, CIRCLE_BIBLIO] },
+  { row: 'EGA', label: 'IV₄', from: 1967, detail: 'EGA IV, quatrième partie — IHÉS 32 (1967)', source: [NUMDAM, CIRCLE_BIBLIO] },
+  { row: 'FGA', label: 'FGA', from: 1957, to: 1962, detail: 'Fondements de la géométrie algébrique: his talks at the Séminaire Bourbaki, 1956/57 to 1961/62, with the « Commentaires » of 1961/62', source: [CIRCLE_BIBLIO] },
+  { row: 'SGA', label: '1', from: 1960, to: 1961, detail: 'SGA 1, Revêtements étales et groupe fondamental — seminar 1960–61; LNM 224 (1971)', source: [CIRCLE_BIBLIO] },
+  { row: 'SGA', label: '2', from: 1961, to: 1962, detail: 'SGA 2, Cohomologie locale des faisceaux cohérents et théorèmes de Lefschetz locaux et globaux — seminar 1961–62; North-Holland (1968)', source: [CIRCLE_BIBLIO] },
+  { row: 'SGA', label: '3', from: 1962, to: 1964, detail: 'SGA 3, Schémas en groupes, with Demazure — seminar 1962–64; LNM 151–153 (1970)', source: [CIRCLE_BIBLIO] },
+  { row: 'SGA', label: '4', from: 1963, to: 1964, detail: 'SGA 4, Théorie des topos et cohomologie étale, with Artin and Verdier — seminar 1963–64; LNM 269, 270, 305 (1972–73)', source: [CIRCLE_BIBLIO] },
+  { row: 'SGA', label: '5', from: 1965, to: 1966, detail: 'SGA 5, Cohomologie ℓ-adique et fonctions L — seminar 1965–66; LNM 589 (1977)', source: [CIRCLE_BIBLIO] },
+  { row: 'SGA', label: '6', from: 1966, to: 1967, detail: 'SGA 6, Théorie des intersections et théorème de Riemann–Roch, with Berthelot and Illusie — seminar 1966–67; LNM 225 (1971)', source: [CIRCLE_BIBLIO] },
+  { row: 'SGA', label: '7', from: 1967, to: 1969, detail: 'SGA 7, Groupes de monodromie en géométrie algébrique — seminar 1967–69; LNM 288 (1972), 340 (1973, Deligne and Katz)', source: [CIRCLE_BIBLIO] },
+  { row: 'Manuscripts', label: 'Longue Marche', from: 1981, track: 0, side: 'left', detail: 'La Longue Marche à travers la théorie de Galois — nearly 800 handwritten double pages; folders 140-1 to 140-4', source: [MACTUTOR, CIRCLE_UNPUB] },
+  { row: 'Manuscripts', label: 'À la poursuite des champs', from: 1983, track: 1, side: 'left', detail: 'À la poursuite des champs (Pursuing Stacks) — folders 134-1 to 134-8', source: [CIRCLE_BIBLIO, MACTUTOR] },
+  { row: 'Manuscripts', label: 'Esquisse', from: 1984, track: 0, side: 'right', detail: "Esquisse d'un programme — folder 119; the bibliography dates it 1984, MacTutor 1983", source: [CIRCLE_BIBLIO, MACTUTOR] },
+  { row: 'Manuscripts', label: 'Dérivateurs', from: 1987, to: 1991, track: 1, detail: 'Les Dérivateurs — folders 157-1 to 157-5; MacTutor gives 1987, the Grothendieck Circle calls it his 1991 manuscript', source: [MACTUTOR, CIRCLE_UNPUB] },
+  { row: 'Other writings', label: 'Récoltes et semailles', from: 1983, to: 1985, side: 'left', detail: 'Récoltes et semailles — written 1983–85; issued by the Université des Sciences et Techniques du Languedoc and the CNRS (1985)', source: [MACTUTOR, CIRCLE_BIBLIO] },
+  { row: 'Other writings', label: 'La Clef des songes', from: 1986, side: 'right', detail: 'La Clef des songes', source: [MACTUTOR] },
+];
+const WORK_ROWS = ['EGA', 'FGA', 'SGA', 'Manuscripts', 'Other writings'];
+
+function Works() {
+  const [sel, setSel] = useState<Work | null>(null);
+  const W = 900;
+  const L = 110;
+  const R = 16;
+  const ROWH = 34;
+  const TOP = 22;
+  const H = TOP + WORK_ROWS.length * ROWH + 8;
+  const x = (y: number) => L + ((y - Y0) / (Y1 - Y0)) * (W - L - R);
+  const decades = [1950, 1955, 1960, 1965, 1970, 1975, 1980, 1985, 1990];
+  // The seminars overlap; they alternate on two tracks of their row. The
+  // manuscripts say which track they take.
+  const track = (w: Work) =>
+    w.track ?? (w.row === 'SGA' ? WORKS.filter((v) => v.row === 'SGA').indexOf(w) % 2 : 0);
+  return (
+    <section className="mt-12">
+      <H2 id="works">The works, on the same years</H2>
+      <p className="mt-2 max-w-[44em] text-[13.5px] leading-relaxed text-ink-600">
+        His treatises, seminars and long manuscripts, on the axis of the folders above: a volume
+        at the year it appeared, a seminar or a run of talks over the years it was held, a
+        manuscript at the date its reference gives. Hover one for its reference; the list under
+        the figure gives them all, with where each date is taken from.
+      </p>
+      <div className="mt-3 overflow-x-auto" onMouseLeave={() => setSel(null)}>
+        <svg
+          viewBox={`0 0 ${W} ${H}`}
+          className="w-full min-w-[640px] rounded-[var(--radius-card)] border border-ink-200 bg-white"
+          role="img"
+          aria-label="EGA, FGA, SGA and his later manuscripts and writings, by year"
+        >
+          {decades.map((d) => (
+            <g key={d}>
+              <line x1={x(d)} x2={x(d)} y1={TOP - 6} y2={H - 6} stroke="var(--color-ink-200)" />
+              <text x={x(d)} y={TOP - 10} textAnchor="middle" className="tabular" style={{ fontSize: 11, fill: 'var(--color-ink-400)' }}>
+                {d}
+              </text>
+            </g>
+          ))}
+          {WORK_ROWS.map((row, i) => (
+            <text key={row} x={10} y={TOP + i * ROWH + ROWH / 2 + 4} style={{ fontSize: 11.5, fill: 'var(--color-ink-600)', fontWeight: 600 }}>
+              {row}
+            </text>
+          ))}
+          {WORKS.map((w) => {
+            const i = WORK_ROWS.indexOf(w.row);
+            const y = TOP + i * ROWH + 8 + track(w) * 13;
+            const on = sel === null || sel === w;
+            const x0 = x(w.from);
+            const x1 = w.to ? x(w.to + 1) : x0;
+            return (
+              <g key={w.row + w.label} opacity={on ? 1 : 0.3} onMouseEnter={() => setSel(w)} style={{ cursor: 'pointer' }}>
+                <rect x={x0 - 4} y={y - 6} width={Math.max(8, x1 - x0) + 8} height={16} fill="#fff" fillOpacity={0} />
+                {w.to ? (
+                  <rect x={x0} y={y} width={x1 - x0} height={5} rx={2} fill="var(--color-ink-700)" />
+                ) : (
+                  <circle cx={x(w.from + 0.5)} cy={y + 2.5} r={3.6} fill="var(--color-ink-700)" />
+                )}
+                <text
+                  x={
+                    w.side === 'left'
+                      ? (w.to ? x0 : x(w.from + 0.5)) - 7
+                      : w.side === 'right'
+                        ? (w.to ? x1 : x(w.from + 0.5)) + 7
+                        : w.to
+                          ? x0 + (x1 - x0) / 2
+                          : x(w.from + 0.5)
+                  }
+                  y={w.side ? y + 6 : y - 2}
+                  textAnchor={w.side === 'left' ? 'end' : w.side === 'right' ? 'start' : 'middle'}
+                  style={{ fontSize: 10, fill: 'var(--color-ink-500)' }}
+                >
+                  {w.label}
+                </text>
+              </g>
+            );
+          })}
+        </svg>
+      </div>
+      <p className="mt-2 min-h-[2.5em] text-[12.5px] leading-relaxed text-ink-600">
+        {sel ? sel.detail : <span className="text-ink-400">Hover a mark for the work and its dates.</span>}
+      </p>
+      <ul className="mt-3 space-y-1.5 text-[13px] text-ink-700">
+        {WORKS.map((w) => (
+          <li key={w.row + w.label} className="flex gap-3">
+            <span className="tabular w-[5.5rem] shrink-0 font-semibold text-ink-900">
+              {w.to ? `${w.from}–${w.to}` : w.from}
+            </span>
+            <span>
+              {w.detail}{' '}
+              {w.source.map((src, k) => (
+                <span key={src}>
+                  {k > 0 && ' · '}
+                  <a href={src} target="_blank" rel="noopener noreferrer" className="text-[12px] text-brand-600 hover:text-brand-700">
+                    {SOURCE_NAME[src]} ↗
+                  </a>
+                </span>
+              ))}
+            </span>
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+}
+
 /* ---------- figure 1: the ranges and the dots ---------- */
 
 function Ranges() {
@@ -496,6 +656,7 @@ export function TimelinePage() {
         </header>
 
         <Ranges />
+        <Works />
         <Strips />
         <Calendar />
         <Register />
