@@ -142,7 +142,9 @@ const LIFE: { year: number; what: string; source: string }[] = [
 const CIRCLE_BIBLIO = 'https://webusers.imj-prg.fr/~leila.schneps/grothendieckcircle/GrothBiblio.pdf';
 const CIRCLE_UNPUB = 'https://webusers.imj-prg.fr/~leila.schneps/grothendieckcircle/unpubtexts.php';
 const NUMDAM = 'https://www.numdam.org/search?Publications%20math%C3%A9matiques%20de%20l%27IH%C3%89S-%22Grothendieck%2C%20Alexander%22-qn';
+const BNF = 'https://archivesetmanuscrits.bnf.fr/ark:/12148/cc126317b';
 const SOURCE_NAME: Record<string, string> = {
+  [BNF]: 'BnF, NAF 29093',
   [CIRCLE_BIBLIO]: 'bibliography, Grothendieck Circle',
   [CIRCLE_UNPUB]: 'Grothendieck Circle',
   [NUMDAM]: 'Numdam',
@@ -188,7 +190,7 @@ const WORKS: Work[] = [
   { row: 'Manuscripts', label: 'Esquisse', from: 1984, track: 0, side: 'right', detail: "Esquisse d'un programme — folder 119; the bibliography dates it 1984, MacTutor 1983", source: [CIRCLE_BIBLIO, MACTUTOR] },
   { row: 'Manuscripts', label: 'Dérivateurs', from: 1987, to: 1991, track: 1, detail: 'Les Dérivateurs — folders 157-1 to 157-5; MacTutor gives 1987, the Grothendieck Circle calls it his 1991 manuscript', source: [MACTUTOR, CIRCLE_UNPUB] },
   { row: 'Other writings', label: 'Récoltes et semailles', from: 1983, to: 1985, side: 'left', detail: 'Récoltes et semailles — written 1983–85; issued by the Université des Sciences et Techniques du Languedoc and the CNRS (1985)', source: [MACTUTOR, CIRCLE_BIBLIO] },
-  { row: 'Other writings', label: 'La Clef des songes', from: 1986, side: 'right', detail: 'La Clef des songes', source: [MACTUTOR] },
+  { row: 'Other writings', label: 'La Clef des songes', from: 1987, to: 1988, side: 'right', detail: 'La Clef des songes — ou Dialogue avec le bon Dieu, April 1987 to April 1988: the corrected typescript is NAF 29093 (1–2) at the BnF (MacTutor gives 1986)', source: [BNF, MACTUTOR] },
 ];
 const WORK_ROWS = ['EGA', 'FGA', 'SGA', 'Manuscripts', 'Other writings'];
 
