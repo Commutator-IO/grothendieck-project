@@ -162,6 +162,15 @@ export interface EditionDocument {
    * `npm run check-editions`, which re-reads the headers.
    */
   framable?: boolean;
+  /**
+   * What the document is to the folder. Absent, it transcribes it — a
+   * community edition. `print` is his own printed text, which the folder
+   * drafts, annotates or holds in offprint: a reference to read the folder
+   * against, not a transcription of it, and never a reason to set it aside.
+   */
+  relation?: 'print';
+  /** For a `print`: which part of the folder the printed text answers, in a sentence. */
+  about?: string;
 }
 
 /** Everything present locally, written by `npm run archive` and `npm run manifest`. */

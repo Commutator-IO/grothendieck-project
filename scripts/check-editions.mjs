@@ -83,7 +83,12 @@ for (const d of docs) {
   try {
     // HEAD rather than GET: these are university servers and the whole point
     // is to be a light check that can be run often.
-    const r = await fetch(d.url, { method: 'HEAD', redirect: 'follow' });
+    let r = await fetch(d.url, { method: 'HEAD', redirect: 'follow' });
+    // Numdam answers HEAD with 405. One byte of a GET says the same thing.
+    if (r.status === 405) {
+      r = await fetch(d.url, { headers: { Range: 'bytes=0-0' }, redirect: 'follow' });
+      await r.body?.cancel();
+    }
     const type = r.headers.get('content-type') ?? '';
     const xfo = r.headers.get('x-frame-options');
     const csp = r.headers.get('content-security-policy');
@@ -120,6 +125,9 @@ for (const d of docs) {
       `${d.title.slice(0, 46).padEnd(46)} ${status}\n`,
   );
 
+  // His printed text is not a transcription of the folder, so it has no
+  // coverage to measure.
+  if (d.relation === 'print') continue;
   const agg = perCote.get(d.cote) ?? { pages: 0, files: 0 };
   agg.pages += d.pages ?? 0;
   agg.files += 1;

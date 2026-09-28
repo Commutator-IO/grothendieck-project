@@ -70,6 +70,9 @@ export function TranscriptPane({
   // bookmarked `#119/1/community` outlives the edition it named, and the pane
   // must fall back to the normal view rather than destructure an empty list.
   const isCommunity = edition === 'community' && community.length > 0;
+  // His own printed text rather than somebody's transcription: the tab says
+  // so, since « Community » would credit Dieudonné's EGA to the community.
+  const printOnly = community.length > 0 && community.every((c) => c.doc.relation === 'print');
   // Which of *our* editions the non-community path is showing. A fragment
   // asking for a community edition that no longer exists lands on the
   // transcription, which is the tab a reader would have opened anyway.
@@ -279,7 +282,11 @@ export function TranscriptPane({
               type="button"
               role="tab"
               aria-selected={isCommunity}
-              title={`${community[0].edition.editors} — read their transcription against the same pages.`}
+              title={
+                printOnly
+                  ? 'His printed text, which this folder drafts or annotates — read it against the same pages.'
+                  : `${community[0].edition.editors} — read their transcription against the same pages.`
+              }
               onClick={() => onEdition('community')}
               className={`rounded-md px-2.5 py-1 text-[12px] font-medium transition ${
                 isCommunity
@@ -287,7 +294,7 @@ export function TranscriptPane({
                   : 'text-relu-600 hover:text-relu-700'
               }`}
             >
-              Community
+              {printOnly ? 'Print' : 'Community'}
             </button>
           )}
         </div>
@@ -427,7 +434,12 @@ function CommunityPane({
             position — so the two panes are aligned at the folder, not the page.
           </>
         )}{' '}
-        {doc.pages && facsimilePages ? (
+        {doc.relation === 'print' ? (
+          <>
+            <strong className="font-semibold text-ink-700">The printed text, not a transcription of folder n° {cote}.</strong>{' '}
+            {doc.about}
+          </>
+        ) : doc.pages && facsimilePages ? (
           <>
             <strong className="font-semibold text-ink-700">
               {doc.pages} typeset pages against {facsimilePages} scanned sheets
@@ -498,8 +510,9 @@ function MissingTranscript({
           folders that conclusion would be wrong. */}
       {community.length > 0 ? (
         <p className="max-w-[40em] rounded-[var(--radius-card)] border border-relu-200 bg-relu-50/60 px-4 py-3 text-[13.5px] leading-relaxed text-ink-700">
-          {community.length === 1 ? 'A transcription of this folder exists' : `${community.length} transcriptions of this folder exist`}
-          , made by {community[0].edition.editors}.{' '}
+          {community.every((c) => c.doc.relation === 'print')
+            ? `His printed text of what this folder drafts is online${community.length > 1 ? `, in ${community.length} volumes` : ''}.`
+            : `${community.length === 1 ? 'A transcription of this folder exists' : `${community.length} transcriptions of this folder exist`}, made by ${community[0].edition.editors}.`}{' '}
           <button
             type="button"
             onClick={() => onEdition('community')}
