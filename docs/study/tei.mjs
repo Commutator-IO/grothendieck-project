@@ -406,9 +406,13 @@ const CITATIONS = [
   { id: 'colmez2001', forms: ['Colmez and Serre 2001'] },
   { id: 'crosilla2025', forms: ['Crosilla, Klic and Colavizza (2025)'] },
   { id: 'cummings2013', forms: ['Cummings and Willcox (2013)'] },
+  { id: 'grothendieck1995', forms: ['Grothendieck 1995'] },
+  { id: 'grothendieck1997', forms: ['Grothendieck 1997'] },
+  { id: 'ega', forms: ['Grothendieck and Dieudonné 1960–1967'] },
   { id: 'circle', forms: ['Grothendieck Circle n.d.'] },
   { id: 'hua2026', forms: ['Hua 2026'] },
   { id: 'humphries2025', forms: ['Humphries and colleagues (2025)'] },
+  { id: 'kunzer', forms: ['Künzer, Malgoire and Maltsiniotis n.d.'] },
   { id: 'maltsiniotis2022', forms: ['Maltsiniotis 2022'] },
   { id: 'stokes2015', forms: ['Stokes 2015'] },
   { id: 'strutz2026', forms: ['Strutz (2026)'] },
@@ -440,9 +444,12 @@ function bibliography() {
       // double quotation marks), the prose with \q{} (the article's
       // guillemets); either way the title carries no delimiters in the TEI.
       const analytic = /\\qq?\{/.test(x);
+      // « In » after the analytic title makes it a chapter, and the
+      // emphasised title the book's, not a journal's.
+      const inBook = /\\qq?\{[^}]*\}\s*In\s+\\emph\{/.test(x);
       x = replaceMacro(x, 'qq', (t) => `<title level="a">${inline(t, { cite: false })}</title>`);
       x = replaceMacro(x, 'q', (t) => `<title level="a">${inline(t, { cite: false })}</title>`);
-      x = replaceMacro(x, 'emph', (t) => `<title level="${analytic ? 'j' : 'm'}">${inline(t, { cite: false })}</title>`);
+      x = replaceMacro(x, 'emph', (t) => `<title level="${analytic && !inBook ? 'j' : 'm'}">${inline(t, { cite: false })}</title>`);
       x = inline(x, { cite: false });
       if (!/\.\s*$/.test(x)) x += '.';
       return `<bibl xml:id="${id}">${x}</bibl>`;
