@@ -1,0 +1,566 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 70, batch 6 (pages 101-120).
+% Established from the facsimile archives/batches/70/batch-06.pdf (a mirror of
+% https://grothendieck.umontpellier.fr/70.pdf, cover sheet excluded), per the
+% skill transcribe-grothendieck, from the tiles in archives/tiles/70/p101-p120.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-09-29 — first pass, unchecked against the pages by a human.
+%
+% Eighteen of the twenty pages are transcribed. Page 112 is a blank pink
+% sheet and is absent. Page 113 is a pink cover inscribed in his hand
+% « Position du pb des 2-polyèdres réguliers / vieille rédaction » and
+% « (10 p) »; per hand.md it takes no \page{} and its words become the
+% section heading.
+%
+% The batch falls into two runs:
+%
+%   Pages 101-111 — the geometric icosahedron in affine 3-space over a base
+%     where alpha^2 + alpha = 1 (alpha' = -1 - alpha): the end of a
+%     computation identifying the quadric through the vertices (f = a q),
+%     the quadratic form q_0 and its discriminant delta = 2, delta' = 1, the
+%     4x4 bordered discriminant (-alpha-3, of norm 5; the characteristic-5
+%     exception); two sheets of different paper and ink on moduli of the
+%     cyclic group mu_n acting on a rank-2 quadratic module (p. 103) and on
+%     V = Sym^2(F) (x) (det F)^{-1} for a rank-2 locally free F (p. 105);
+%     the minors Delta_1-Delta_3 (p. 104); then the Coxeter group
+%     Gamma' = <sigma_0, sigma_1, sigma_2 | ... (sigma_0 sigma_1)^3 =
+%     (sigma_1 sigma_2)^5 ...> realised by three reflections with mirrors
+%     H_0, H_1, H_2 and the "modules" lambda, mu, nu of sigma_1 (pp. 107-108);
+%     definitions of acceptable, regular and faithful affine representations
+%     of the combinatorial icosahedron Pi = (S, A, F; r) and the proposition
+%     that a regular representation is faithful (pp. 109-111).
+%   Pages 114-120 — "Position du pb des 2-polyèdres réguliers", an older
+%     draft: the cartographic group Gamma, universal flags F_H = Gamma/Gamma_H,
+%     the incidence order, regular polyhedra P "scindés" in X/S with
+%     conditions (10)-(11) and numbered axioms [17]-[20], [32]-[33'];
+%     Rep(P), the torsor structure, Gamma_P = Gamma/N ~ Aut(X, P), and the
+%     questions (25)-(29). Page 120, in black ink, is a separate
+%     characterisation of "cocubes" in k^B.
+%
+% The cover's "(10 p)" announces a run 114-123: it runs out past the end of
+% this batch. Page 101 runs in from the previous batch (equation numbers
+% (19)-(22) on p. 102 continue a numbering begun earlier). Both recorded in
+% \note{} where they are observed.
+%
+% Notation fixed for the batch: \alpha, \alpha' (his accent, alpha' =
+% -1-alpha); \mathfrak{F} for his script flag sets; \Psi for the sets of
+% flags of P; \Gamma both for the cartographic group and for sections
+% (Gamma(S, O_S), Gamma_p(B/I)) as he writes them. His underlinings are set
+% with \emph; his boxed numbers as $\boxed{n}$.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{70}
+\batch{6}
+\pages{101}{120}
+\foldertitle{Réalisations géométriques de structures combinatoires (n-polyèdres, n-hyperpolyèdres [2-polyèdres réguliers]…) (Vieilles rédactions) : notes manuscrites (s.d.).}
+\dating{[à partir de 1976]}
+\watermark{Édition de démonstration}
+
+\begin{document}
+
+\section{L'icosaèdre géométrique}
+
+\page{101}
+\note{la page commence au milieu d'un calcul entamé avant ce lot : $v$, $w$, $a$, $b$, la forme $q$ et les sommets $s_0, s_1, s_2$ sont introduits plus haut, dans le lot précédent.}
+
+\struck{\ill{}} \struck{$w = a + \frac{2\alpha}{\alpha'} b = a - 2\alpha^2 b = a - 2(1-\alpha) b$}
+
+Remplaçons $v$ par sa valeur de \uncertain{la formule précédente}, on trouve
+\[
+w = \alpha'\bigl(\alpha' w - (\alpha'-1)a\bigr) - (\alpha'-1)a
+\]
+\[
+\underbrace{(1-\alpha'^2)}_{\alpha'} w = \underbrace{(\alpha'-1)\underbrace{(-\alpha'-1)}_{\alpha}}_{} a
+\qquad \text{i.e. } \alpha' w = \alpha' a \qquad \text{i.e. } \emph{$w = a$}
+\]
+\[
+\struck{1-\alpha}\quad \alpha\alpha' - \alpha = -1-\alpha = \alpha'
+\]
+puis $v = \bigl(\alpha' - (\alpha'-1)\bigr) a = a$, donc
+\[
+\boxed{v = w = a}
+\]
+
+\struck{$f(x,y,z) = a x[\ldots]$} \struck{$a x(x+y+z-1)$} $+\, b\bigl[y(y-\alpha z-1) + z(z-1)\bigr]$, l'accolade donnant $(y^2+z^2-y-z-\alpha yz)$ :
+\[
+f(x,y,z) = a x(x+y+z-1) + b(y^2+z^2-y-z-\alpha yz)
+\]
+\[
+f(a s_2) = 0 \quad\text{i.e.}\quad a\alpha'(-\alpha') + b\Bigl[\struck{\ill{}}\,\add{\alpha'^2} + (1-\alpha')(-\alpha') - \alpha(-\alpha')(1-\alpha')\Bigr] = 0
+\]
+\note{deux accolades regroupent les termes du crochet, l'une étiquetée $1$, l'autre menant à « $=0$ » ; en marge, barré : $\alpha' = \alpha' + \alpha'^2$.}
+\[
+-\alpha'^2 a + \alpha'^2 b = 0 \qquad \boxed{b = a}
+\]
+\[
+f(x,y,z) = a\, q(x,y,z)
+\]
+Il reste : vérifier $q(a s_0) = q(a s_1) = q(a s_2) = 0$.
+
+Mais c'est clair \uncertain{car} $q$ \uncertain{s'annulant}\ldots
+
+\page{102}
+La forme homogène de $q$ est
+\[
+q_0(x,y,z) = x^2 + y^2 + z^2 - \alpha yz + zx + xy \tag{19}
+\]
+dont la matrice est
+\[
+\struck{\ill{}}\;
+\begin{pmatrix} 2 & 1 & 1 \\ 1 & 2 & -\alpha \\ 1 & -\alpha & 2 \end{pmatrix} \tag{20}
+\]
+de discriminant
+\[
+\delta = 8 - 2\alpha - 2 - 2\alpha^2 - 2 = 4 - 2\underbrace{(\alpha^2+\alpha)}_{1} = 2
+\]
+\[
+\delta = 2 \quad\text{donc}\quad \emph{$\delta' = 1$} \tag{21}
+\]
+Forme quadratique \uncertain{très} \emph{\uncertain{parfaite}}, \emph{merveille} !
+
+Quant au discriminant de $q$ homogénéisée par une variable $t$
+\[
+q(x,y,z,t) = x^2 + y^2 + z^2 - \alpha yz + zx + xy - t(x+y+z)
+\]
+c'est le déterminant de la matrice
+\[
+\struck{\ill{}}\;
+\begin{pmatrix} 2 & 1 & 1 & -1 \\ 1 & 2 & -\alpha & -1 \\ -\alpha & -1 & 2 & -1 \\ -1 & -1 & -1 & 0 \end{pmatrix} \tag{22}
+\]
+\note{la troisième ligne est écrite $(-\alpha, -1, 2, -1)$, non symétrique de la deuxième colonne ; transcrit tel quel.}
+dont le discriminant \struck{(à un facteur \uncertain{essentiel} près du calcul)} est \struck{$\boxed{\alpha'}$} \add{$-\alpha-3$}, $N(-\alpha-3) = 5$, \struck{$2$ \ill{} \uncertain{anneau} \ill{}.} \add{sauf erreur} \add{de calcul}.
+
+\add{sauf en car.\ 5 (\emph{NB} en car.\ 5, l'icosaèdre est \uncertain{5-\ill{}}} \struck{Vérifier ! Donc l'icosaèdre est inscrit} \add{dans une orbite de rayon nul, des quadriques \emph{sing.}\,!)}
+\note{les ajouts de cette fin de page sont d'une encre noire, par-dessus le texte bleu ; la phrase bleue biffée se poursuit en tête de la p.~106.}
+
+\page{103}
+\note{feuille d'un autre papier (ligné en biais), à l'encre noire ; sans lien apparent de notation avec les pages voisines, sinon le module quadratique de rang 2 que reprend la p.~105.}
+\[
+W^+_T \simeq \mu_{n\,T} \qquad V_T \simeq D \oplus D^{-1}
+\]
+$\zeta \in \Gamma(\mu_{n\,T})$ opère sur $V_T$ par $\zeta.(x,y) = (\zeta x, \zeta^{-1} y)$
+
+\begin{tikzcd}
+T \arrow[r, no head] \arrow[d] & T\times_S\Omega \arrow[d, no head] \\
+S & \Omega \arrow[l]
+\end{tikzcd}
+
+\[
+\mu^{*}_{n\,T\times_S\Omega} \ni \zeta \qquad \sigma_T\sigma_\omega \qquad \sigma_T\zeta = \zeta^{-1}, \quad \sigma_\omega\zeta = \zeta^{-1}, \quad \sigma_T\sigma_\omega\zeta = \zeta
+\]
+\[
+\mu^{*}_{n\,T\wedge\Omega}
+\]
+\begin{enumerate}
+  \item Module quadratique de rang 2 non dég $(V, q)$
+  \item Section de $\Sigma^{(q)}/\mu_n^{(q)}$
+  \item rev.\ étale quadratique $\Omega$ de $S$ et iso $\mu^{(q)}_{n\,\Omega} \simeq (\struck{\ill{}})_\Omega$
+  \item[\struck{4)}] (i.e.\ section de $\mu^{(q)*}_{n\,\Omega}$
+\end{enumerate}
+
+\drawing{petit croquis biffé : $T$, $S$, $\Omega$ reliés par des traits.}
+\[
+\begin{array}{c} T \\ | \\ S \end{array} \quad \begin{array}{c} A \\ | \\ \mathcal{O}_S \end{array} \quad 1
+\qquad
+\zeta + \zeta^{-1} = c, \qquad \zeta^2 - c\zeta + 1 = 0, \qquad \zeta = \frac{c \pm \sqrt{c^2-4}}{2} \qquad c^2 = 4,\ c = \pm 2
+\]
+\struck{1) $c$ satis}
+
+1) $c \in \Gamma(S, \mathcal{O}_S)$ satisfaisant $\Phi_n(c) = 0$ \hfill $\zeta = \zeta^{-1}$, $\zeta^2 \neq 1$
+
+\quad $\bigl[\Rightarrow$ rev.\ quadratique $R$ de $S$ $\bigl[\operatorname{Spec} \mathcal{O}_S[X]/(X^2 - cX + 1)\bigr]\bigr)$ avec \struck{\ill{}} $\zeta \in \Gamma(R, \mu^{*}_{n\,R})$, $\sigma_R\zeta = \zeta^{-1}$ $\bigr]$
+
+\struck{2) Rev}
+
+$\mathcal{O}_S^2$ \quad $\mu_n$ opère par $\lambda x, \lambda^{-1} x$ \quad $\mu_n.(1,1)$ \qquad $\begin{array}{c} R \\ | \\ S \end{array}$ \quad $A = \mathcal{O}_S[X]/(X^2 - cX + 1)$ au-dessus de $\mathcal{O}_S$
+
+\page{104}
+\[
+\Delta_1 = \det\begin{pmatrix} 1 & 1 & -1 \\ 2 & -\alpha & -1 \\ -\alpha & 2 & -1 \end{pmatrix} = \alpha + \alpha - 4 - (-\alpha^2) \struck{-(-1) - (-2)}
+= 2\alpha + \alpha^2 = \alpha + 1 = -\alpha'
+\]
+\note{la première ligne de la matrice de $\Delta_1$ est écrite petit, au-dessus des deux autres.}
+\[
+\Delta_2 = \det\begin{pmatrix} 2 & 1 & -1 \\ 1 & -\alpha & -1 \\ 1 & 2 & -1 \end{pmatrix} = 2\alpha - 2 \struck{-1} - \alpha \struck{-(-1)} - (-4) = \alpha + 2
+\]
+\[
+\Delta_3 = \det\begin{pmatrix} 2 & 1 & -1 \\ 1 & \struck{2} & -1 \\ 1 & -\alpha & -1 \end{pmatrix} = -4 + \alpha \struck{-1} - (-2) - 2\alpha \struck{-(-1)} = -2 - \alpha
+\]
+\[
+\det(\ ) = \Delta_1 - \Delta_2 + \Delta_3 = \underbrace{-\alpha' - \alpha}_{1} - 2 - \alpha = -1 - \alpha = \alpha'
+\]
+\note{calcul des mineurs du déterminant (22) de la p.~102 ; le résultat $\alpha'$ n'est pas celui, $-\alpha-3$, retenu là-bas. Un petit quadrillage est griffonné à gauche de $\Delta_3$.}
+\marginal{au crayon, le long du bord gauche : \ill{} $X$ \ill{} \uncertain{contractible} \ill{}}
+
+\page{105}
+\note{feuille de listing à perforations, encre bleu sombre ; plusieurs lignes barrées de traits obliques. On donne ce qui se lit.}
+Mod.\ loc.\ libre de rang $2$ \quad $F$ \quad $\mathbb{V}$
+\[
+\mathbb{V} \simeq \struck{\ill{}} \add{\operatorname{Sym}^2(F) \otimes (\det F)^{-1}} \simeq \operatorname{Sym}^2 \check F \otimes (\det \check F)^{-1} \quad \struck{\simeq \ill{} \otimes (\det F)^{\ill{}}}
+\]
+\struck{$X \subset P(\mathbb{V}) = P(\check\Omega)$ \ill{} \ill{}) avec le crochet habituel $[x,y] = xy - yx$. La forme \uncertain{bilinéaire} dite \ill{} sur $\emph{End}(F)$ \ill{} \ill{} \ill{}}
+\[
+\Omega = \check{\mathbb{V}} = \Gamma^2(\check F) \otimes (\det F)^{\ill{}} = \operatorname{Bilsym}(F, F; \det F^{\ill{}})
+\]
+\ill{} \ill{} forme quadratique canonique (le discriminant) (\uncertain{du premier} \ill{})
+\[
+\struck{\operatorname{Sym}^2(F)} \xrightarrow{\ \delta\ } (\struck{\det F})^{\otimes 2}\ \mathcal{O}_S
+\]
+donc
+\[
+\mathbb{V} = \operatorname{Sym}^2(F)(\det F)^{-1} \xrightarrow{\ Q\ } \mathcal{O}_S
+\]
+\ill{} \ill{}, à ce \uncertain{prix}, l'inverse de \ill{} (\uncertain{discriminant} \ill{}). Si \ill{} une base de $F$, $F \simeq \mathcal{O}_S^2$, d'où base de $\det F$, $\operatorname{Sym}^2 F$ \ldots\ \add{dans $\mathbb{V}$} \uncertain{bil.\ sym.} $\mathbb{V}$ s'identifie au Module des formes $-x x' + b(xy' + x'y) + c\,yy'$ et $\delta$ est \uncertain{la forme} \struck{\ill{}} $b^2 - ac$ \ill{} \ill{}, \struck{\ill{}} \ill{} \ill{} \ill{} \ill{} \struck{\ill{}}
+\[
+\struck{\det\Omega \simeq \det\Gamma^2\check F\,(\det F)^{3} \simeq \ill{}\,(\det F)^{-3} \det F^{3} \simeq \mathcal{O}_S}
+\]
+\marginal{le long du bord gauche : \ill{} \ill{} \ill{} $\delta'(Q)$ \ill{}}
+
+\page{106}
+\struck{dans une} quadrique \emph{lisse} en \uncertain{toute} \uncertain{dimension} !
+\note{fin de la phrase bleue biffée au bas de la p.~102 (« Donc l'icosaèdre est inscrit… ») ; le reste de la feuille est vide.}
+
+\page{107}
+\emph{NB} Est-il clair que la condition $\alpha^2 + \alpha - 1 = 0$ est \emph{suffisante} pour avoir une représentation de l'icosaèdre ? On aura une représentation affine du groupe
+\[
+\Gamma' = \bigl\{\sigma_0, \sigma_1, \sigma_2 \bigm| \sigma_0^2 = \sigma_1^2 = \sigma_2^2 = (\sigma_0\sigma_1)^3 = (\sigma_1\sigma_2)^5 = (\sigma_0\sigma_2)^2 = 1\bigr\}
+\]
+\note{la condition est écrite ici $\alpha^2 + \alpha - 1 = 0$, comme à la p.~108 ; aux pp.~101-102 il utilise $\alpha^2 + \alpha = 1$.}
+Le groupe \struck{\ill{}} \uncertain{admet} $\Gamma$ comme un groupe quotient. Si on \struck{savait} \add{utilisait} $\Gamma' \simeq \Gamma$ ..\ \uncertain{ça} marcherait. Sinon il faut des vérifications un peu surabondantes (mais de \uncertain{pure} routine) que \add{l'ens.}\ des six points $s_0, s_1, s_2, s_3, s'_3, s''_3$ et \add{de} leurs « antipodiques » définis « a priori » \struck{est} stables sous $\sigma_0, \sigma_1, \sigma_2$ (i.e.\ sous $\Gamma'$) et \struck{que} plus précisément que les op.\ de $\sigma_0, \sigma_1, \sigma_2$ sur l'ens.\ de ces 12 pts « est la même » que l'op.\ de \uncertain{ceux-ci} sur les 12 pts \emph{de} l'icos.\ comb.\ $\Pi$\ldots
+
+Ici $\sigma_0, \sigma_1, \sigma_2$ sont des réflexions. Les hyperplans correspondants sont \struck{\ill{}}
+\[
+\begin{cases}
+H_0 : & 2x + y + z - 1 = 0 \\
+H_1 : & -x + y + \alpha' z = 0 \\
+H_2 : & \struck{\ill{}}\ y - z = 0
+\end{cases}
+\]
+
+\page{108}
+comme coordonnées affines et \struck{\ill{}} exprimons $\sigma_0, \sigma_1, \sigma_2$ p.r.\ à ces coordonnées — pour $\sigma_0, \sigma_2$ les coefficients sont des entiers bien déterminés (tous égaux à $0$ ou $\pm 1$) ; pour $\sigma_1$ il y a des « modules » indéterminés $\lambda, \mu, \nu$ satisfaisant
+\[
+\text{soit}\ \begin{cases} \nu^2 = 1 \\ \mu = -\nu\lambda \end{cases} \quad \Bigl|\ \text{exprimant } \sigma_1^2 = 1
+\]
+puis $\nu = 1$ (exprimant $u^3 = \mathrm{id}$) et \struck{\ill{}} \add{$\lambda^2 + \lambda - 1 = 0$} \struck{(où $u = \sigma_1\sigma_2$ \ill{} \ill{})} \struck{On a fait les calculs dans le cas $\nu = 1$} exprimant que $u^3 = \mathrm{id}$.
+\struck{$\mu = -\lambda$ (\ill{} \ill{})} — où l'on de $\lambda$ on écrit aussi $\alpha'$ \ldots\ et on a trouvé, exprimant $(\sigma_1\sigma_2)^5 = \mathrm{id}$, l'équation \uncertain{en $\alpha$, ou $\alpha'$, on donne})
+\[
+\alpha^2 + \alpha - 1 = 0
+\]
+on termine en \ill{} \ill{} \ill{} \ill{} vérifie la fidélité.
+\note{les notations $u$, $\lambda$, $\mu$, $\nu$ et les « coordonnées affines » renvoient à ce qui précède ; le début de la phrase n'est pas sur la p.~107, qui s'achève sur les hyperplans.}
+
+\struck{Pour bien faire, il faudrait aussi traiter le cas où l'on n'a pas $\nu = 1$, i.e.\ où $u$ n'est unimodulaire i.e.\ $\sigma_1$ une réflexion (\ill{} cas \uncertain{où} $\neq ?$, cas \uncertain{revient} à prendre $\nu = -1$) Considérons le} \struck{\ill{}} \struck{plan} \add{d'équation $x+y+z=0$} \struck{des $s_1, s_2, s_3$, soit $P$,} \struck{je dis qu'il} \add{montrons qu'il} \struck{contient $s'_3 = (\lambda, \mu, \nu)$ i.e.} \struck{que $\lambda + \mu + \nu = 0$} \ill{}
+\[
+\struck{\lambda + \mu + \nu = 1 \quad\text{i.e.}\quad \lambda - \nu\lambda + \nu = 1 \quad\text{i.e.}} \quad \struck{\ill{}}\quad \struck{(\lambda - 1)(1 - \nu) = 0 \quad ?}
+\]
+\struck{Mais on a, $\nu \neq 1$}
+\note{tout ce dernier paragraphe est barré de grandes diagonales croisées.}
+
+\page{109}
+Si une réalisation est acceptable, \struck{les quatre} quatre pts distincts $s_0, s_1, s_2, s_3$ dont les trois premiers sont sur une même face, leurs réal.\ géom.\ sont aff\supplied{inemen}t indépendantes.
+
+\struck{Considérons} Une représentation est \add{dite} \struck{acceptable} \emph{régulière} si \add{elle est acceptable et si} \struck{Pour tout} $g \in \Gamma$ $\exists\, g_E$ automorphisme affine de $E$ qui le prolonge. \struck{Prenons pour} \add{C'est une} \struck{\ill{} les repr.\ acceptables} propriété de l'application $\rho_S$ en fait, et implique que $\rho_S(S)$ engendre affinement $E$.
+
+\marginal{\emph{NB} la condition « acceptable » revient à exiger que $\rho_S$ soit \ill{}, \ill{} \ill{} $\rho_S(S)$ \ill{}, \ill{} que $\rho_S$ \ill{} \ill{} \ill{} droites\ldots}
+
+\emph{Prop.} Une représentation régulière est \emph{fidèle}.
+
+Soit \struck{$(s_0, s_1, s_2)$} $(\sigma_0, \sigma_1, \sigma_2) \in \Gamma$ les symétries fond.\ associées au repère, $s_0$ le sommet origine,
+\[
+s_1 = \sigma_0 s_0, \quad s_2 = \sigma_1 s_1, \quad s_3 = \sigma_2 s_2
+\]
+\struck{Je dis que} Je dis que $s_0, s_1, s_2, s_3$ sont aff\supplied{inemen}t indép. On sait déjà par hyp.\ que $s_0, s_1, s_2$ le sont. Si on avait $s_3 \in P := \operatorname{Pl}(s_0, s_1, s_2)$, il en résulterait que $P$ — qui est déjà invariant par $\sigma_0, \sigma_1$ — serait invariant par $\sigma_2$ \struck{($\sigma_2 P$)} puisque
+\[
+\sigma_2(P) = \operatorname{Pl}\bigl(\sigma_2(s_0) = s_0,\ \sigma_2(s_1) = s_1,\ \sigma_2(s_2) = s_3\bigr) = P
+\]
+Ceci étant, on peut \struck{\ill{}} choisir $s_0, s_1, s_2, s_3$
+\note{la démonstration s'interrompt au bas de la page ; la p.~110 commence une nouvelle rédaction, sous un titre.}
+
+\subsection{Icosaèdre géométrique et représentations du groupe $\Gamma$}
+\note{titre de sa main, en tête de la p.~110.}
+
+\page{110}
+Soit $\Pi = (S, A, F; r)$ l'icosaèdre combinatoire-type, épinglé par le repère $r = (\struck{\ill{}}\ s_0, \operatorname{Dr}(s_0, s_1), \operatorname{Pl}(s_0, s_1, s_2))$, $\Gamma$ son groupe des automorphismes. Une représentation \add{ou réalisation} affine \struck{régulière} \add{de} $\Pi$ dans un \struck{\ill{}} \add{fibré} affine $E$ (sur schéma $S$) de dim.\ 3 est la donnée d'applications
+\[
+\begin{aligned}
+S &\xrightarrow{\ \rho_S\ } \text{ens.\ des sections de } E \text{ sur } S \\
+A &\xrightarrow{\ \rho_A\ } \text{ens.\ des \add{sous-}fibrés en droites affines de } E \\
+F &\xrightarrow{\ \rho_F\ } \text{ens.\ des sous-fibrés en plans affines}
+\end{aligned}
+\]
+respectant les relations d'incidence \struck{et telle}. On dit qu'elle est \struck{\uncertain{quasi-acceptable}} \struck{\uncertain{non dégénérée}} \add{« acceptable »} si \struck{\ill{}} les sommets d'une face ont des images distinctes \add{\uncertain{deux à deux}} — ce qui implique que $\rho_A, \rho_F$ sont connus quand on connaît $\rho_S$ ! \struck{On dit que $\rho$ est fidèle} \struck{\add{\ill{} fidèle}} \struck{si \ill{} deux facettes de $\Pi$ non incidentes \ill{} ont leurs images réalisations géom.\ \ill{}} \ill{} peut être donnée \emph{arbitrairement}. On dit que $\rho$ est \emph{fidèle}, si \struck{elle est \uncertain{aussi} injective} \struck{elle est acceptable, et si} \add{sur une fibre} \struck{$S, A, F$} deux facettes dont les réalisations \add{sur une fibre} sont incidentes, sont incidentes \struck{\ill{}}
+(Je m'en réfère à l'exigence dans le cas des sommets et arêtes, et sommets et faces \ill{}).
+Ceci implique qu'elles sont acceptables (car si les trois \add{\uncertain{les trois}} $s, s', s''$ d'une face \uncertain{étaient} sur une \uncertain{droite}, ceux-ci seraient incidents : $\rho(\{s', s''\})$ \ill{} \ill{} $\{s', s''\}$), et $\rho_S, \rho_A, \rho_F$ sont injectives (si p.ex.\ $s \neq s'$ et \uncertain{avaient} même image \ill{} \ill{} \ill{} $s$ et $s'$ \uncertain{non} incidents, si on avait $r(s) = r(s')$ on aurait $r(s')$ incident à $r(s)$ et \ill{} \ill{}\ldots)
+
+\page{111}
+\[
+D_0 = H_1 \cap H_2 : \quad y = z,\ x = \alpha' y \quad\text{i.e.}\quad y = z = \alpha x
+\]
+c'est la droite homogène de vecteur directeur $(1, \alpha, \alpha)$ ou $(-\alpha', 1, 1)$.
+\[
+D_1 = H_2 \cap H_0 \quad
+\begin{cases}
+\struck{\ill{}} : & D_1 = \varnothing,\ (\text{i.e. } H_0 /\!/ H_2) \\
+2 \text{ inv.} & \struck{\ill{}}\ y = z = \tfrac{1}{2} - x
+\end{cases}
+\]
+\[
+D_2 = H_0 \cap H_1 \quad
+\begin{cases}
+y = \alpha + (1 - 3\alpha)x \\
+z = (1 - \alpha) - 3(1 - \alpha)x
+\end{cases}
+\]
+\note{les hyperplans $H_0, H_1, H_2$ sont ceux de la fin de la p.~107.}
+
+Se donner une réal.\ géom.\ \emph{régulière} de $\Pi$ revient au même que se donner une représentation affine de rang 3 de $\Gamma$, \add{(dans $E$ l'espace affine)} et un \add{point} \struck{élément} $s_0$ de $E$ telle que
+\[
+\sigma_1 s_0 = \sigma_2 s_0 = s_0 \quad\text{i.e.}\quad s_0 \in E^{\sigma_1} \cap E^{\sigma_2}
+\]
+et telle que de \emph{plus} les quatre pts
+\[
+s_0,\ s_1 = \sigma_0 s_0,\ s_2 = \sigma_1 s_1 = \sigma_1\sigma_0 s_0,\ s_3 = \sigma_2 s_2 = \sigma_2\sigma_1\sigma_0 s_0
+\]
+soient affinement indépendants. \struck{\ill{}}
+
+\struck{points \ill{} \ill{} \ill{}} \emph{\add{deux}} tels $s_0, s'_0$, il y a un automorphisme unique de $E$ commutant à $\Gamma$ qui transforme $s_0$ en $s'_0$.
+
+\marginal{P.\ \ill{} représentations affines fidèles (i.e.\ \uncertain{antipodiques} \ill{} \ill{}) \ill{} le groupe \ill{} \ill{} des conditions d'existence \ill{} 2.\ \ill{} classification des \uncertain{représentations} affines \ill{} des formes de l'icosaèdre\ldots}
+
+\section{Position du pb des 2-polyèdres réguliers — vieille rédaction}
+\note{titre de sa main, sur la feuille de couverture rose (p.~113), avec l'indication « (10 p) » ; la p.~112, rose et vide, la précède. Les dix pages annoncées vont au-delà de ce lot (pp.~114-123).}
+
+\page{114}
+Considérons le groupe cartographique
+\[
+\Gamma = \bigl\{\sigma_0, \sigma_1, \sigma_2 \bigm| \sigma_0^2 = \sigma_1^2 = \sigma_2^2 = (\sigma_0\sigma_2)^2 = 1\bigr\} \tag{1}
+\]
+donc engendré par des gén.\ $\sigma_0, \sigma_1, \sigma_2$ satisfaisant
+\[
+\begin{cases} \sigma_0^2 = \sigma_1^2 = \sigma_2^2 = 1 \\ \sigma_0\sigma_2 = \sigma_2\sigma_0 \end{cases} \tag{2}
+\]
+\struck{On pose} Pour toute partie \add{non vide} \struck{\ill{}} $H$ de $\{0, 1, 2\}$ \add{$(H \neq \varnothing,\ H \subset \{0,1,2\})$} on pose
+\[
+\begin{cases}
+\Gamma_H = \text{ss-groupe engendré par les } \sigma_i \text{ avec } i \notin H \\
+\mathfrak{F}_H = \Gamma/\Gamma_H \quad (\text{espace homogène})
+\end{cases} \tag{3}
+\]
+\struck{donc} donc
+\[
+H \subset K \Rightarrow \Gamma_K \subset \Gamma_H \Rightarrow \mathfrak{F}_K \xrightarrow{\ \varphi_{HK}\ } \mathfrak{F}_H \tag{4}
+\]
+On appelle \emph{drapeaux universels de type $H$} les él.\ de $\mathfrak{F}_H$, et \add{$\mathfrak{F}_H$ ens.\ l'}\struck{\ill{}} ens.\ des \emph{drap.\ univ.\ de type $H$}. L'ens.
+\[
+\mathfrak{F}_{**} = \coprod_{H} \mathfrak{F}_H \tag{5}
+\]
+ou l'ens.\ des drapeaux, il est ordonné par la relation
+\[
+x \in \mathfrak{F}_H,\ y \in \mathfrak{F}_K \qquad x \preccurlyeq y \iff H \subset K,\ x = \varphi_{HK}\, y \tag{6}
+\]
+ce qui est bien une relation d'ordre. Les él.\ minimaux sont les éléments de
+\[
+\mathfrak{F}_{\{0\}} \overset{\text{df}}{=} \mathfrak{F}_0, \quad \mathfrak{F}_{\{1\}} \overset{\text{df}}{=} \mathfrak{F}_1, \quad \mathfrak{F}_{\{2\}} \overset{\text{df}}{=} \mathfrak{F}_2 \tag{7}
+\]
+appelés \struck{\ill{}} sommets, arêtes et faces \emph{universelles}. Sur l'ens.\ des drapeaux minimaux, on a la fonction dim
+\[
+\mathfrak{F}_* = \coprod_{i \in \{0,1,2\}} \mathfrak{F}_i \xrightarrow{\ \dim\ } [0, 2] \qquad \dim(\mathfrak{F}_i) \in \{i\} \tag{8}
+\]
+
+\page{115}
+et on introduit sur l'ens.\ \add{$\coprod_{i \in \{0,1,2\}} \mathfrak{F}_i$} \struck{des} facettes universelles une relation d'ordre (dite d'incidence) par
+\[
+x \leqslant y \iff
+\begin{cases}
+\text{a) } \dim(x) \leqslant \dim(y) \\
+\text{b) } \exists\, z \in \mathfrak{F}_*, \text{ avec } \struck{x, y \preccurlyeq z}\ x, y \preccurlyeq z
+\end{cases} \tag{9}
+\]
+\note{au b) il écrit $\mathfrak{F}_*$ ; le contexte (drapeaux contenant $x$ et $y$) demanderait plutôt $\mathfrak{F}_{**}$. Transcrit tel quel.}
+
+Si $X$ est un \struck{\ill{}} \struck{\ill{}} affine \add{\uncertain{quasi-projectif}} \struck{projectif} (sur une base quelconque, \add{de dim.\ ${} \geqslant$ \ill{}} \struck{\ill{}}), on \add{$(H \subset \{0,1,2\},\ H \neq \varnothing)$} définit les drapeaux de type $H$ \add{de $X$} de façon habituelle, \struck{Une représentation} $\mathfrak{F}_H(X/S)$
+\[
+\mathfrak{F}_{**}(X/S), \quad \mathfrak{F}_*(X/S) \ \ldots
+\]
+Une \add{\uncertain{$P$}} polyèdre \emph{régulier} \add{\struck{splitting} scindé} dans $X$ est la donnée, \add{d'abord}, des trois ens.\ \add{(finis)}
+\[
+\begin{cases}
+S = S_P \subset \mathfrak{F}_0(X/S) = \Gamma(X/S) & \text{ens.\ des sommets} \\
+A = A_P \subset \mathfrak{F}_1(X/S) & \ldots \text{arêtes} \\
+F = F_P \subset \mathfrak{F}_2(X/S) & \ldots \text{faces}
+\end{cases} \tag{10}
+\]
+satisfaisant les conditions
+\[
+\boxed{11}\quad
+\begin{cases}
+\text{(a) } \forall a \in A, \struck{\text{il y a } \ill{} \text{ exactement}} \text{ l'ens.\ des } s \in S \text{ incidents à } a \\
+\quad \text{est de cardinal 2 exactement — et ceci reste vrai après tt chgt de base } S' \to S,\ S' \text{ non vide} \\
+\text{(b) } \forall s \in S,\ f \in F, \text{ l'ens.\ des } a \text{ incidents à } s \text{ et } f \text{ est \add{loc.} de cardinal égal à } 2, \\
+\quad \text{et ceci reste vrai après tt chgt de base } S' \to S,\ S' \neq \varnothing \\
+\text{(c) } \forall a \in A, \text{ l'ens.\ des } f \in F \text{ incidents \struck{\ill{}} est de cardinal } = 2, \\
+\quad \text{et ceci reste vrai après tt chgt de base } S' \to S,\ S' \neq \varnothing
+\end{cases}
+\]
+\marginal{la condition de finitude de \ill{} \ill{} \ill{} \uncertain{potentielles}\ldots}
+
+\page{116}
+Ainsi
+\[
+\boxed{\Psi_* \overset{\text{df}}{=} \Psi_{*P} = S \amalg A \amalg F} \tag{12}
+\]
+devient un ens.\ ordonné du type précis, permettant de construire des ens.\ de drapeaux de tt type $H \subset \{0,1,2\}$, $H \neq \varnothing$, \struck{\ill{}} d'où
+\[
+\boxed{\Psi_H := \Psi_{H P}} \tag{12 bis}
+\]
+s'identifiant à une partie de $\mathfrak{F}_{**}(X)$, \struck{\ill{}} \add{L'ens.\ des} drapeaux de type maximum \struck{i.e.\ de type} $\{0,1,2\}$ \struck{une opération de $\Gamma$ sur $\Psi_{**P}$}, s'appelle l'ens.\ des repères de \struck{$\mathfrak{F}_{**}(X)$, \ill{}} \struck{les conditions, i.e.} $P$
+\[
+\operatorname{Rep}(P) = \Psi_{\{0,1,2\}\,P} \tag{13}
+\]
+et $\Gamma$ y opère par
+\[
+\begin{cases}
+\sigma_0(s, a, f) = (s', a, f) & s' \neq s \\
+\sigma_1(s, a, f) = (s, a', f) & a' \neq a \\
+\sigma_2(s, a, f) = (s, a, f') & f' \neq f
+\end{cases} \tag{14}
+\]
+\struck{Ainsi} D'ailleurs les applications de restriction
+\[
+\operatorname{Rep}(P) \longrightarrow \Psi_H(P) \tag{15}
+\]
+se factorisent en une application canon.
+\[
+\operatorname{Rep}(P)/\Gamma_H \longrightarrow \Psi_H(P) \tag{16}
+\]
+\struck{Ceci fixé} On a besoin de plus :
+
+$\boxed{17}$ Les applications (15) sont surjectives (donc (16) aussi) — ce qui revient au même, \uncertain{pour} \struck{\ill{} \ill{} \ill{} \ill{} (\ill{})} \struck{\ill{} \ill{} \ill{} \ill{} \ill{} (\ill{} \ill{}} \add{\ill{} \ill{} \ill{}} les facettes \struck{\ill{}} de dim.\ 0 \ill{} de dim.\ 2) \ill{} \ill{} \ill{} de dim.\ \ill{} \ill{} \ill{}.
+\note{les trois dernières lignes sont surchargées et barrées en partie ; on n'en donne que ce qui se lit.}
+
+\page{117}
+$\boxed{18}$ L'ens.\ $S$ engendre affinement $X$ fibre par fibre
+
+$\bigl[\ \boxed{19}$ condition de connexité pour l'ens.\ ordonné $\Psi_*(P)$, impliquant que $\Gamma_{\ill{}}$ opère transitivement sur $\operatorname{Rep}(P)$ \add{(grâce à (18), (17))} et que tt automorphisme de $P$ — et \emph{a fortiori} tt autre \emph{combinatoire} de $P$ — qui fixe un repère est l'identité $\bigr]$
+
+\marginal{redondant ? On a certainement \ill{} si on exige \ill{} que $\Psi_*(P)/\Gamma_H \xrightarrow{\sim} \Psi_H(P)$ $\forall H \subset \{0,1,2\}$, \struck{\ill{}} \add{$H \neq \varnothing$} ?}
+
+$\boxed{20}$ $\operatorname{Aut}(X, P)$ opère \emph{transitivement sur} $\operatorname{Rep}(P)$. \add{du $\Gamma$}
+
+On trouve alors que le stabilisateur \add{d'un} repère $r$ est un ss-groupe \emph{invariant} $N$ de $\Gamma$, donc $\Psi(P)$ est un \emph{torseur} sous
+\[
+\boxed{\Gamma/N = \Gamma_P} \tag{21}
+\]
+et par
+\[
+\boxed{\operatorname{Aut}(X, P) \simeq \operatorname{Aut}_{\mathrm{comb}}(P)} \tag{22}
+\]
+\note{le signe « $\simeq$ » et l'indice « comb » sont écrits par-dessus un mot barré.}
+ces deux commutant. Donc le choix d'un repère $r$ définit un isomorphisme
+\[
+\struck{\ill{}}\quad \Gamma_P \xrightarrow{\ \sim\ } G = \operatorname{Aut}(X, P) \tag{23}
+\]
+par
+\[
+\struck{r}\ \gamma \in \Gamma \mapsto \varphi(\gamma) \text{ est l'unique automorphisme de } (X, P) \text{ tel que } \varphi(\gamma)(r) = \gamma.r \tag{24}
+\]
+
+\emph{Questions} \struck{Pour application} $r \in \operatorname{Rep}(P)$ fixé, l'application
+\[
+\Gamma \longrightarrow \operatorname{Rep}(P) \qquad \gamma \mapsto \gamma.r \tag{25}
+\]
+est surjective (par [19]), et \struck{\ill{}} par passage aux quotients des
+\[
+N\backslash\mathfrak{F}_H \struck{\ill{}} = \Gamma_P/\Gamma_H = \Gamma/N.\Gamma_H \longrightarrow \Psi_H(P) \tag{26}
+\]
+
+\page{118}
+surjections, sont-elles en fait \emph{bijectives} ?? Que peut-on dire des ss-groupes \add{inv} $N$ de $\Gamma$, et de l'espace homogène correspondant $\Gamma/N \simeq \Psi_{**}(P)$ ?
+
+On voudrait que ce soit l'ens.\ des \add{5} cartes correspondant aux polyèdres \emph{réguliers} connus — en particulier, on voudrait que ce soit \emph{\uncertain{orientable}} ! Et il faudrait, pour une carte combinatoire donnée (disons de ces cinq types ?) déterminer les polyèdres réguliers épinglés par ce $\mathfrak{F}$ — ce qui est un pb modulaire\ldots
+
+\emph{NB} Si les réponses à la question précédente (26) étaient positives (et sinon, il faudrait renforcer la définition pour qu'elles le deviennent) on récupérerait $P$ par la donnée de
+\[
+\Gamma \xrightarrow{\ \varphi\ } \operatorname{Aut}(X) \tag{27}
+\]
+et de
+\[
+r \struck{=}\ (s_0, a_0, f_0) \in \operatorname{Rep}(X) \tag{28}
+\]
+satisfaisant
+\[
+\struck{\sigma_0(a_0)}\quad
+\begin{cases}
+\sigma_0 a_0 = a_0, & \sigma_0 f_0 = f_0 \\
+\sigma_1 s_0 = s_0, & \sigma_1 f_0 = f_0 \\
+\sigma_2 a_0 = a_0, & \sigma_2(f_0) = f_0
+\end{cases} \tag{29}
+\]
+en prenant pour $S, A, F$ l'ens.\ des transformés de $s_0, a_0, f_0$ sous $\Gamma$.
+
+\page{119}
+Plus précisément, pour fixer les idées sur un corps de base, et voyons sous quelles conditions de telles données définissent bien un polyèdre régulier. Tout d'abord il faut que le ss-groupe \add{invariant}
+\[
+N = \operatorname{Ker} \varphi \subset \Gamma \tag{30}
+\]
+soit \emph{d'indice fini}. Ceci étant, la condition \struck{La cond} (17) est triviale par construction, mais la condition $\boxed{11}$ semble plus sérieuse, et signifie ceci ; on pose
+\[
+s'_0 = \sigma_0(s_0), \quad \struck{\ill{}}\ a'_0 = \sigma_1(a_0), \quad f'_0 = \sigma_2(f_0) \tag{31}
+\]
+\add{on a $s'_0 \neq s_0$, $a'_0 \neq a_0$, $f'_0 \neq f_0$, et}
+
+$\boxed{32}$
+\begin{itemize}
+  \item[a)] Si $\gamma \in \Gamma$ est tel que $\gamma s_0 \prec a_0$, alors $\gamma s_0 \in \{s_0, s'_0\}$
+  \item[b)] Si $\gamma \in \Gamma$ est tel que $s_0 \prec \gamma a_0 \prec f_0$, alors $\gamma a_0 \in \{a_0, a'_0\}$
+  \item[c)] Si $\gamma \in \Gamma$ ——— \struck{$\gamma$} $a_0 \prec \gamma f_0$, alors $\gamma f_0 \in \{f_0, f'_0\}$
+\end{itemize}
+
+[De plus $\boxed{12}$ s'écrit :
+
+$\boxed{33}$ Les \struck{\ill{}} $\gamma s_0$ engendrent affinement $X$ (qui est \uncertain{ordinaire} !)]
+\note{le numéro encadré est surchargé ; il se lit « 33 », comme le suivant.}
+
+$\boxed{33'}$
+\[
+\gamma s_0 \prec \gamma' a_0 \prec \gamma'' \struck{f_0 \Rightarrow}\, f_0 \Longrightarrow \exists\, \gamma''' \in \Gamma, \text{ tel que } \gamma''' s_0 = \gamma s_0,\ \gamma''' a_0 = \gamma' a_0,\ \gamma''' f_0 = \gamma'' f_0
+\]
+(exprime $\boxed{19}$)
+\note{une flèche relie le crochet de « De plus [12] s'écrit » au bas de la page, restée vide.}
+
+\page{120}
+\note{encre noire, écriture posée ; un autre objet que ce qui précède : les « cocubes ».}
+\[
+\begin{array}{c} B \\ | \\ I \end{array}
+\qquad
+\begin{array}{c} k^B \\ \big\downarrow{\scriptstyle t = \operatorname{Tr}} \\ k^I \end{array}
+\xleftarrow{\ \varphi = (\varphi_b)_{b \in B}\ } E = t^{-1}(\{1\})
+\qquad
+H_b = \varphi_b^{-1}(\{1\})
+\]
+\[
+\begin{array}{c} B' \subset B \\ \big\downarrow \\ I \end{array}
+\qquad
+\struck{\ill{}}\ F_{B'} = \bigcap_{b \in B'} H_b
+\]
+\[
+\mathfrak{F} = \{F_{B'}\}_{B' \in \Gamma_p(B/I)} \cup \{\varnothing\}
+\]
+
+\struck{\ill{}} $N \hookrightarrow k^B \longrightarrow k$ \qquad $N = $ sous-module (facteur direct de rang $n-1$) engendré par les $(b + \sigma b) - (b' + \sigma b')$, $b, b' \in B$
+\[
+0 \to W \longrightarrow V \longrightarrow k \to 0 \qquad V = k^B/N, \qquad n\ (\text{sous } W)
+\]
+
+\emph{Caractérisation des cocubes} \quad $\mathfrak{F} \subset E$ \add{ens.\ de sous-var.\ linéaires affines} de dim.\ $n$
+\begin{itemize}
+  \item[a)] $\forall s \in \mathfrak{F}_0$ (él.\ de $\mathfrak{F}$ qui est un sous-espace de $E$ de dim.\ 0, i.e.\ réduit à un point) $\exists!\, s' \in \mathfrak{F}_0$, \add{$s' \neq s$,} tel que la droite joignant $s, s'$ soit $\notin \mathfrak{F}$ \\
+  ($s \mapsto s'$ est donc une involution \uncertain{sans} pt fixe \add{sur} $\mathfrak{F}_0$)
+  \item[b)] Pour tte partie $B' \subset B \overset{(\text{df})}{=} \mathfrak{F}_0$, telle que $B' \in \Gamma_p(B/I)$ (où $I = B/\sigma$), le sous-espace \add{linéaire} affine engendré par $B'$ \add{et de dim.\ égale à $(\operatorname{card} B') - 1$ (i.e.\ $B'$ est aff\supplied{inemen}t libre)} est $\in \mathfrak{F}$ — et on trouve ainsi tous les $\in \mathfrak{F}$, \struck{sous-espaces affines} à l'exception de $E$ (l'élément maximal), qui est $\in \mathfrak{F}$
+  \item[c)] Pour toute $B' \in \Gamma(B/I)$ et $b \in B \smallsetminus B'$, $B' \cup \{b\}$ est aff\supplied{inemen}t libre et engendre aff\supplied{inemen}t $E$
+  \item[d)] Si $b, b' \in B$, on a $b + \sigma b = b' + \sigma b'$.
+\end{itemize}
+\note{« (10 p) » sur la couverture : la rédaction se poursuit au-delà de ce lot.}
+
+\end{document}
