@@ -1,0 +1,92 @@
+name: Transcriptions switch
+
+# Sets the repository variable RENDER_TRANSCRIPTS, then publishes the site with
+# it (#31). Run by hand with the box ticked or not; every day at 16:00 Paris
+# time it switches the transcriptions off and publishes.
+#
+# GITHUB_TOKEN cannot write repository variables, so the variable is set with
+# RENDER_SWITCH_TOKEN, a fine-grained personal access token restricted to this
+# repository with « Variables: Read and write ». Starting and cancelling the
+# deploy uses GITHUB_TOKEN: a workflow_dispatch is one of the events it may
+# trigger.
+
+on:
+  workflow_dispatch:
+    inputs:
+      render_transcripts:
+        description: Show the transcriptions on the site (sets RENDER_TRANSCRIPTS, then publishes)
+        type: boolean
+        default: false
+  # Cron is UTC and Paris changes its offset twice a year: both hours are
+  # scheduled, and the job keeps the one that is 16:00 in Paris that day.
+  schedule:
+    - cron: '0 14 * * *' # 16:00 in Paris in summer time (CEST, UTC+2)
+    - cron: '0 15 * * *' # 16:00 in Paris in winter time (CET, UTC+1)
+
+permissions:
+  actions: write
+  contents: read
+
+concurrency:
+  group: transcripts-switch
+  cancel-in-progress: false
+
+jobs:
+  switch:
+    name: Set RENDER_TRANSCRIPTS and publish
+    runs-on: ubuntu-latest
+    env:
+      REPO: ${{ github.repository }}
+    steps:
+      # A scheduled run can start late, so the decision is taken on which cron
+      # fired and on Paris's offset that day, not on the clock at start.
+      - name: Decide
+        id: decide
+        env:
+          EVENT: ${{ github.event_name }}
+          SCHEDULE: ${{ github.event.schedule }}
+          INPUT: ${{ inputs.render_transcripts }}
+        run: |
+          if [ "$EVENT" = schedule ]; then
+            offset=$(TZ=Europe/Paris date +%z)
+            case "$offset|$SCHEDULE" in
+              "+0200|0 14 * * *"|"+0100|0 15 * * *") value=false ;;
+              *) echo "Not 16:00 in Paris for « $SCHEDULE » (offset $offset): nothing to do."; value= ;;
+            esac
+          else
+            value=$INPUT
+          fi
+          echo "value=$value" >> "$GITHUB_OUTPUT"
+          [ -n "$value" ] && echo "::notice::RENDER_TRANSCRIPTS=$value ($EVENT)" || true
+
+      - name: Set the repository variable
+        if: steps.decide.outputs.value != ''
+        env:
+          GH_TOKEN: ${{ secrets.RENDER_SWITCH_TOKEN }}
+          VALUE: ${{ steps.decide.outputs.value }}
+        run: |
+          if [ -z "$GH_TOKEN" ]; then
+            echo "::error::Secret RENDER_SWITCH_TOKEN missing: a fine-grained token on this repository with « Variables: Read and write »."
+            exit 1
+          fi
+          gh variable set RENDER_TRANSCRIPTS --repo "$REPO" --body "$VALUE"
+          gh variable list --repo "$REPO" | grep RENDER_TRANSCRIPTS
+
+      # A deploy already queued or running took the old value when it was
+      # triggered, and would publish it; it is cancelled before a new one starts.
+      - name: Cancel deploys started with the old value
+        if: steps.decide.outputs.value != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          for id in $(gh run list --repo "$REPO" --workflow deploy.yml --limit 20 \
+                --json databaseId,status -q '.[] | select(.status != "completed") | .databaseId'); do
+            gh run cancel "$id" --repo "$REPO" && echo "cancelled $id"
+          done
+
+      - name: Publish
+        if: steps.decide.outputs.value != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VALUE: ${{ steps.decide.outputs.value }}
+        run: gh workflow run deploy.yml --repo "$REPO" --ref main -f render_transcripts="$VALUE"
