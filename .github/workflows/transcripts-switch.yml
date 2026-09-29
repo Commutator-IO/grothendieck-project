@@ -18,10 +18,15 @@ on:
         type: boolean
         default: false
   # Cron is UTC and Paris changes its offset twice a year: both hours are
-  # scheduled, and the job keeps the one that is 16:00 in Paris that day.
+  # scheduled, and the job keeps the ones that fall at 16:xx in Paris that day.
+  # Off the hour, because GitHub delays and sometimes drops scheduled runs at
+  # minute 0 when it is busy — the first day, neither run at :00 fired. The
+  # :37 run is a backup: it acts only if the variable is still true.
   schedule:
-    - cron: '0 14 * * *' # 16:00 in Paris in summer time (CEST, UTC+2)
-    - cron: '0 15 * * *' # 16:00 in Paris in winter time (CET, UTC+1)
+    - cron: '7 14 * * *'  # 16:07 in Paris in summer time (CEST, UTC+2)
+    - cron: '37 14 * * *' # 16:37, backup
+    - cron: '7 15 * * *'  # 16:07 in Paris in winter time (CET, UTC+1)
+    - cron: '37 15 * * *' # 16:37, backup
 
 permissions:
   actions: write
@@ -46,12 +51,19 @@ jobs:
           EVENT: ${{ github.event_name }}
           SCHEDULE: ${{ github.event.schedule }}
           INPUT: ${{ inputs.render_transcripts }}
+          CURRENT: ${{ vars.RENDER_TRANSCRIPTS }}
         run: |
           if [ "$EVENT" = schedule ]; then
             offset=$(TZ=Europe/Paris date +%z)
             case "$offset|$SCHEDULE" in
-              "+0200|0 14 * * *"|"+0100|0 15 * * *") value=false ;;
-              *) echo "Not 16:00 in Paris for « $SCHEDULE » (offset $offset): nothing to do."; value= ;;
+              "+0200|7 14 * * *"|"+0100|7 15 * * *") value=false ;;
+              "+0200|37 14 * * *"|"+0100|37 15 * * *")
+                if [ "$CURRENT" = false ]; then
+                  echo "Backup run: RENDER_TRANSCRIPTS is already false, the 16:07 run did its work."; value=
+                else
+                  value=false
+                fi ;;
+              *) echo "Not 16:xx in Paris for « $SCHEDULE » (offset $offset): nothing to do."; value= ;;
             esac
           else
             value=$INPUT
