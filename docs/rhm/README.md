@@ -4,8 +4,13 @@ Un article en français pour la *Revue d'histoire des mathématiques* (SMF) :
 une lecture historique et conceptuelle des notes de travail du fonds
 Grothendieck, fondée sur les transcriptions du dépôt. Suivi dans #34.
 
-- `article.tex` — l'article ; `article.pdf` est compilé à partir de lui et
-  versionné (`cd docs/rhm && tectonic -X compile article.tex`).
+- `article.tex` — l'article, composé avec la classe de la SMF `smfart` et le
+  complément `rhm.sty` de la revue ; `article.bib`, sa bibliographie, pour le
+  style `rhmunsrtnat.bst`. Les fichiers de la SMF (`smfart.cls`, `rhm.sty`,
+  `smfthm.sty`, `smfhyperref.sty`, `smfenum.sty`, `rhmunsrtnat.bst`) sont
+  copiés ici tels que la SMF les distribue. `article.pdf` est compilé et
+  versionné (`cd docs/rhm && tectonic -X compile article.tex`, qui lance
+  BibTeX de lui-même).
 - Il est tiré de trois dossiers de preuves (chronologie et pratique
   d'écriture ; concepts récurrents ; études de cas), établis le 26 septembre
   2026 à partir des transcriptions, des registres `src/content/dated-leaves.json`
