@@ -4,13 +4,15 @@ Un article en français pour la *Revue d'histoire des mathématiques* (SMF) :
 une lecture historique et conceptuelle des notes de travail du fonds
 Grothendieck, fondée sur les transcriptions du dépôt. Suivi dans #34.
 
-- `article.tex` — l'article, composé avec la classe de la SMF `smfart` et le
-  complément `rhm.sty` de la revue ; `article.bib`, sa bibliographie, pour le
-  style `rhmunsrtnat.bst`. Les fichiers de la SMF (`smfart.cls`, `rhm.sty`,
-  `smfthm.sty`, `smfhyperref.sty`, `smfenum.sty`, `rhmunsrtnat.bst`) sont
-  copiés ici tels que la SMF les distribue. `article.pdf` est compilé et
-  versionné (`cd docs/rhm && tectonic -X compile article.tex`, qui lance
-  BibTeX de lui-même).
+- `article.tex` — l'article, en classe `article` sur A4, pour la soumission
+  (la SMF accepte « toute classe standard ») ; `article.pdf` est compilé et
+  versionné (`cd docs/rhm && tectonic -X compile article.tex`).
+- Pour l'acceptation, la revue veut de préférence sa classe et du BibTeX. Les
+  fichiers de la SMF (`smfart.cls`, `rhm.sty`, `smfthm.sty`,
+  `smfhyperref.sty`, `smfenum.sty`, `rhmunsrtnat.bst`) sont copiés ici, et
+  `article.bib` reprend les 40 références de la version du 29 septembre 2026 :
+  à remettre à jour sur la liste du texte. Le commit 8e99780 montre la
+  conversion complète (`smfart`, `\citealp`, tableaux à 11,2 cm).
 - Il est tiré de trois dossiers de preuves (chronologie et pratique
   d'écriture ; concepts récurrents ; études de cas), établis le 26 septembre
   2026 à partir des transcriptions, des registres `src/content/dated-leaves.json`
