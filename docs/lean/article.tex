@@ -8,6 +8,7 @@
 \usepackage[a4paper,margin=27mm]{geometry}
 \usepackage{booktabs,longtable,array}
 \usepackage{setspace}\setstretch{1.1}
+\usepackage{xcolor}
 \usepackage[hidelinks]{hyperref}
 \usepackage{amsmath,amssymb,amsthm}
 
@@ -17,6 +18,10 @@
 \newcommand{\lot}[3]{\href{https://grothendieck.commutator.io/\##1/#2/p#3}{#1, lot #2, p.~#3}}
 % Le fichier de la preuve vérifiée, une fois par section.
 \newcommand{\verifie}[1]{\footnote{Preuve vérifiée : \href{https://github.com/Commutator-IO/grothendieck-project/blob/main/lean/Grothendieck/#1.lean}{\texttt{lean/Grothendieck/\detokenize{#1}.lean}}.}}
+% Un énoncé lié à l'un des théorèmes numérotés de la frise des œuvres (onglet
+% Timeline du site) : un losange et le numéro, qui renvoient à la frise.
+\definecolor{frise}{HTML}{2F4DA8}
+\newcommand{\lie}[1]{\,\href{https://grothendieck.commutator.io/timeline/\#works}{\textcolor{frise}{\ensuremath{\blacklozenge}\,\textup{#1}}}}
 \theoremstyle{plain}
 \newtheorem*{enonce}{Énoncé}
 \newtheorem{lemme}{Lemme}[section]
@@ -50,6 +55,8 @@ On trouve ainsi, en parties successives : cycles algébriques et conjectures sta
 Le rangement suit le vocabulaire de la carte, non la nature de chaque énoncé : l'invariance de Morita de la cote~113 y relève de l'analyse fonctionnelle, par le produit tensoriel des catégories linéaires.
 
 Chaque section donne le contexte du feuillet, l'énoncé tel que la lecture le donne, précédé des définitions qu'elle laisse implicites, sa démonstration, des remarques --- hypothèses superflues ou nécessaires, contre-exemples, corrections de la lecture ou de la page --- et la liste des énoncés de la cote qui ne sont pas démontrés ici. La section~\ref{sec:reste} les rassemble dans un tableau.
+
+Le losange \lie{$n$} marque un énoncé lié au théorème numéroté~$n$ de la frise des œuvres que publie le site (\q{The works, on the same years}), où ses principaux théorèmes sont placés à l'année de l'article ou de l'exposé qui les démontre. Trois énoncés le portent. Le feuillet~2 de la cote~125 enchaîne cohomologie locale, complétion formelle et dualité : il relève de la dualité cohérente et de la géométrie formelle (théorème~6, Séminaire Bourbaki n\textsuperscript{o}\,149 et 195, EGA~III\textsubscript{1}) et des théorèmes de Lefschetz par la cohomologie locale (SGA~2, théorème~9). La proposition~2.15 de la cote~21 invoque le critère de Baer sous le nom de \q{Tohoku}, et l'énoncé des pages~14 et~15 de la cote~19 porte sur une catégorie de Grothendieck à générateur : tous deux relèvent de l'article de Tôhoku (théorème~4). Le lien est de sujet, non de démonstration : aucun de ces énoncés n'est l'un des théorèmes de la frise.
 
 \part{Cycles algébriques et conjectures standard}
 \input{sections/16}
