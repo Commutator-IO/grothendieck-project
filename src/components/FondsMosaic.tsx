@@ -36,6 +36,8 @@ const folderState = (transcribedHere: boolean, hasEdition: boolean): FolderState
 interface Cell {
   cote: Cote;
   state: FolderState;
+  /** A modernised reading exists: drawn as hatching over the folder's blue. */
+  modern: boolean;
   batches: number;
   x: number;
   y: number;
@@ -55,6 +57,14 @@ const INK: Record<FolderState, string> = {
   community: '#ffffff',
   untouched: 'var(--color-ink-600)',
 };
+
+/**
+ * Hatching for a folder whose modernised reading exists. A second blue would
+ * have made two states out of one: a modernised folder is still a transcribed
+ * one, and the hatching says « and read again » over the colour that says
+ * « transcribed », rather than replacing it.
+ */
+const HATCH = 'repeating-linear-gradient(135deg, rgb(255 255 255 / 0.42) 0 1.5px, transparent 1.5px 5px)';
 
 const LABEL: Record<FolderState, string> = {
   here: 'transcribed here',
@@ -134,10 +144,12 @@ function squarify(values: number[], width: number, height: number) {
 export function FondsMosaic({
   transcribedHere,
   hasEdition,
+  modernised,
   onOpen,
 }: {
   transcribedHere: (id: string) => boolean;
   hasEdition: (id: string) => boolean;
+  modernised: (id: string) => boolean;
   onOpen: (id: string) => void;
 }) {
   const [hover, setHover] = useState<Cell | null>(null);
@@ -193,6 +205,7 @@ export function FondsMosaic({
         return {
           cote: c,
           state: folderState(transcribedHere(c.id), hasEdition(c.id)),
+          modern: transcribedHere(c.id) && modernised(c.id),
           batches: batchCount(c.pages),
           x: inner.x + boxes[k].x,
           y: inner.y + boxes[k].y,
@@ -202,7 +215,7 @@ export function FondsMosaic({
       });
       return { ...x, box, strip, cells };
     });
-  }, [transcribedHere, hasEdition]);
+  }, [transcribedHere, hasEdition, modernised]);
 
   const cells = groups.flatMap((g) => g.cells);
   const allPages = COTES.reduce((s, c) => s + c.pages, 0);
@@ -232,6 +245,16 @@ export function FondsMosaic({
               {LABEL[s]}
             </li>
           ))}
+        {cells.some((c) => c.modern) && (
+          <li className="flex items-center gap-1.5">
+            <span
+              aria-hidden="true"
+              className="inline-block h-3.5 w-6 border border-ink-900"
+              style={{ background: `${HATCH}, ${FILL.here}` }}
+            />
+            modernised as well
+          </li>
+        )}
       </ul>
 
       {/* The black ground is the rules: every block is inset, so what shows
@@ -282,7 +305,7 @@ export function FondsMosaic({
               onClick={() => onOpen(c.cote.id)}
               onMouseEnter={() => setHover(c)}
               onFocus={() => setHover(c)}
-              title={`n° ${c.cote.id} — ${c.cote.title}`}
+              title={`n° ${c.cote.id} — ${c.cote.title}${c.modern ? ' (modernised)' : ''}`}
               className="absolute overflow-hidden text-left transition-[filter] hover:brightness-110 focus:z-10 focus:outline-2 focus:outline-offset-[-3px] focus:outline-white"
               style={{
                 left: `${c.x}%`,
@@ -292,7 +315,10 @@ export function FondsMosaic({
                 padding: '1px',
               }}
             >
-              <span className="relative block h-full w-full" style={{ background: FILL[c.state] }}>
+              <span
+                className="relative block h-full w-full"
+                style={{ background: c.modern ? `${HATCH}, ${FILL[c.state]}` : FILL[c.state] }}
+              >
                 {big && (
                   <span
                     className="tabular absolute bottom-[2px] left-1 text-[9px] font-semibold leading-none"
@@ -318,6 +344,7 @@ export function FondsMosaic({
             <br />
             <span className="tabular">
               {hover.cote.pages} pages · {hover.batches} {hover.batches === 1 ? 'batch' : 'batches'}
+              {hover.modern && ' · modernised'}
             </span>
           </p>
         ) : (

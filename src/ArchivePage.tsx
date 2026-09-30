@@ -196,6 +196,7 @@ export function ArchivePage() {
                 <FondsMosaic
                   transcribedHere={(id) => (workOn.get(id)?.transcribed ?? 0) > 0}
                   hasEdition={(id) => EDITION_BY_COTE.has(id)}
+                  modernised={(id) => (workOn.get(id)?.modernised ?? 0) > 0}
                   onOpen={(id) => goTo(id, 1)}
                 />
               )}
