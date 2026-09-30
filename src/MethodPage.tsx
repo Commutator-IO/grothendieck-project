@@ -358,14 +358,7 @@ export function MethodPage() {
             Both are rebuilt from <code className="text-[12px]">docs/study/article.tex</code> by{' '}
             <code className="text-[12px]">npm run article-tei</code> and are no more current than
             the last build; its figures are drawn from the same derived files this site shows, and
-            each names the day it was generated. Its companion on the Hopper ledgers is at{' '}
-            <a
-              href="https://hopper.commutator.io/method/"
-              className="font-medium text-brand-600 underline decoration-brand-200 underline-offset-2 hover:text-brand-700"
-            >
-              hopper.commutator.io
-            </a>
-            .
+            each names the day it was generated.
           </p>
 
           <P id="article-rhm" className="prose-fonds mt-6">
