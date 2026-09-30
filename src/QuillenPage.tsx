@@ -55,6 +55,7 @@ const inGroup = (g: string) => NOTEBOOKS.filter((n) => n.group === g);
 const COUNT = new Map(GROUPS.map((g) => [g.id, inGroup(g.id).length]));
 const MAX = Math.max(...YEARS.map((y) => COUNT.get(y) ?? 0));
 const totalGB = (NOTEBOOKS.reduce((s, n) => s + n.bytes, 0) / 1e9).toFixed(1);
+const totalPages = NOTEBOOKS.reduce((s, n) => s + (n.pages ?? 0), 0).toLocaleString('en');
 
 const mb = (b: number) => `${Math.round(b / 1e6)} MB`;
 const short = (n: Notebook) => n.label.replace(new RegExp(`^${n.group}-`), "");
@@ -186,7 +187,7 @@ export function QuillenPage() {
               <em>À la poursuite des champs</em>, which began in 1983 as a
               letter to him. Quillen kept them as a diary, year by year. The
               Clay Mathematics Institute has scanned them since 2013 and
-              publishes them as {NOTEBOOKS.length} PDFs ({totalGB} GB); Glenys
+              publishes them as {NOTEBOOKS.length} PDFs ({totalGB} GB, {totalPages} pages counted); Glenys
               Luke and Graeme Segal are cataloguing them. Each notebook here is
               the Clay's own file, shown from claymath.org and not copied.
             </p>
