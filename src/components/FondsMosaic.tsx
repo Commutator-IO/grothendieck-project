@@ -63,8 +63,14 @@ const INK: Record<FolderState, string> = {
  * have made two states out of one: a modernised folder is still a transcribed
  * one, and the hatching says « and read again » over the colour that says
  * « transcribed », rather than replacing it.
+ *
+ * The stripes are green and cover about 70 % of the block, so that at a
+ * distance the blue and the stripes mix — as light mixes, not paint, which is
+ * why a yellow gave grey — to nearly the community's green: a folder read
+ * twice here is close to the state of one somebody has already edited. Solved
+ * in linear light for #4a6bbd under #1ba86f.
  */
-const HATCH = 'repeating-linear-gradient(135deg, rgb(255 255 255 / 0.42) 0 1.5px, transparent 1.5px 5px)';
+const HATCH = 'repeating-linear-gradient(135deg, #00bb18 0 3.5px, transparent 3.5px 5px)';
 
 const LABEL: Record<FolderState, string> = {
   here: 'transcribed here',
