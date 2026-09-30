@@ -149,6 +149,7 @@ export default defineConfig({
         notebooks: resolve(import.meta.dirname, 'notebooks/index.html'),
         diagrams: resolve(import.meta.dirname, 'diagrams/index.html'),
         formulas: resolve(import.meta.dirname, 'formulas/index.html'),
+        quillen: resolve(import.meta.dirname, 'quillen/index.html'),
       },
     },
   },

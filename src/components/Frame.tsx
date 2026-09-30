@@ -21,12 +21,16 @@ import { BOOKS } from '../content/books.ts';
  * one's own pages second — the choice the Hopper site made for its ledgers and
  * diaries. Every URL is what it was.
  */
-type Collection = 'fonds' | 'notebooks';
+type Collection = 'fonds' | 'notebooks' | 'quillen';
 
 const COLLECTIONS: { id: Collection; label: string; path: string }[] = [
   { id: 'fonds', label: 'Fonds', path: '/' },
   { id: 'notebooks', label: 'Notebooks', path: '/notebooks/' },
+  // A second corpus, Daniel Quillen's notebooks at the Clay (#36): the other
+  // side of the 1968 and 1983 exchanges, with a reading room of its own.
+  { id: 'quillen', label: 'Quillen', path: '/quillen/' },
 ];
+const QUILLEN_PAGES: { path: string; label: string }[] = [{ path: '/quillen/', label: 'Research notebooks' }];
 
 // The readings of the whole fonds, and then — after a rule — the pages about
 // the project rather than about the folders.
@@ -49,6 +53,7 @@ const PROJECT_PAGES: { path: string; label: string }[] = [
 // The front page is the whole fonds; the notebooks have their own landing.
 export const collectionOf = (path: string): Collection => {
   const h = path.endsWith('/') ? path : `${path}/`;
+  if (h.startsWith('/quillen/')) return 'quillen';
   return h === '/notebooks/' || BOOKS.some((b) => b.path === h) ? 'notebooks' : 'fonds';
 };
 
@@ -132,6 +137,8 @@ export function Header({ path }: { path: string }) {
                 <Tab key={p.path} {...p} here={path} />
               ))}
             </>
+          ) : collection === 'quillen' ? (
+            QUILLEN_PAGES.map((p) => <Tab key={p.path} {...p} here={path} />)
           ) : (
             notebookLinks(false).map((p) => <Tab key={p.path} {...p} here={path} />)
           )}
@@ -154,7 +161,7 @@ export function Header({ path }: { path: string }) {
               <p className="px-2 py-1 text-[11px] font-semibold uppercase tracking-wider text-ink-400">
                 {c.label}
               </p>
-              {(c.id === 'fonds' ? [...FONDS_PAGES, ...PROJECT_PAGES] : notebookLinks(true)).map((p) => (
+              {(c.id === 'fonds' ? [...FONDS_PAGES, ...PROJECT_PAGES] : c.id === 'quillen' ? QUILLEN_PAGES : notebookLinks(true)).map((p) => (
                 <a
                   key={p.path}
                   href={p.path}

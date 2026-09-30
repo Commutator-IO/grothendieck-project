@@ -208,6 +208,9 @@ jobs:
         run: npm run build
         env:
           VITE_RELAY: ${{ vars.RELAY_URL }}
+          # Transcriptions of Quillen's notebooks are shown only when this is
+          # true (#36); unset, the Quillen page shows the Clay's facsimiles alone.
+          VITE_RENDER_QUILLEN: ${{ vars.RENDER_QUILLEN == 'true' }}
 
       # GitHub Pages drops the custom domain on deploy unless a CNAME file
       # sits at the root of the artifact. `public/CNAME` is copied verbatim by
