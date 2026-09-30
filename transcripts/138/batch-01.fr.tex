@@ -1,0 +1,623 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 138, batch 1 (pages 1-20).
+% Established from the facsimile archives/batches/138/batch-01.pdf (cover sheet
+% excluded; batch page 1 = archivists' page 1), per the skill
+% transcribe-grothendieck.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-09-30 — first pass, unchecked against the pages by a human.
+%
+% Pages 1-2 (printed leaflet and order form of the review « Topologie
+% Structurale ») carry no mathematics and are absent. Page 3 is a cover in his
+% hand; its words become the section heading and it has no \page{}.
+%
+% Contents, in outline:
+%   Pages 4-13  — numbered §§ 1.1-2.5, formulas (1)-(31): Galois dictionary of
+%                 descent data for a connected scheme X over the separable
+%                 closure of k, via the extension 1 -> Aut_kbar -> Aut_k -> Gamma;
+%                 then the same for a pro-finite Galois cover X' -> X, the
+%                 « favourable case » N invariant, partial splittings, and the
+%                 central extension 1 -> centre -> Z -> Gamma_0.
+%   Pages 14-16 — k = Q, X = projective line minus a finite set S, the cases
+%                 Card S = 0,1 / 2 / 3 / >= 4 (Fermat tower for Card S = 3).
+%   Page 17     — a list of towers to study (Fermat, abelian covers of the
+%                 octahedron, dihedral covers ...).
+%   Pages 18-20 — calculations: the Fermat/Kummer covers z -> z^n, the Belyi-type
+%                 function g(z), Gamma -> Aff(1, Zhat), Kummer theory over Q.
+%
+% Notation fixed for the batch: \mathfrak{X} for his gothic X (the scheme
+% over kbar), \mathfrak{G} for his gothic G (geometric automorphisms),
+% \mathcal{G} for his script G, \mathcal{E} for the curly E, G for the Galois
+% group of X'/X, \mathfrak{z} for the curly z of the centre. His semi-direct
+% product sign (a dot with « 1/2 » beneath) is set \underset{1/2}{\cdot}.
+%
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{138}
+\batch{1}
+\pages{1}{20}
+\foldertitle{Cartes. Etude arithmétique (1976, 77 ?) : bon de commande (s.d.), notes manuscrites (s.d.).}
+\dating{[vers 1976-1978]}
+\watermark{Édition de démonstration}
+
+\begin{document}
+
+\section{dictionnaire galoisien de descentes etc\ldots}
+\note{titre de sa main, seul, en haut d'un feuillet par ailleurs blanc (p.~3), qui sert de chemise aux pages suivantes}
+
+\page{4}
+\textbf{(1.1)}
+
+(1) $k$ corps, $\bar{k}$ clôture séparable, $\Gamma =$ \struck{$\mathrm{Aut}$} $\mathrm{Gal}(\bar{k}/k)$ (groupe profini)
+
+(2) $\mathfrak{X}$ schéma connexe sur $\bar{k}$,
+\[
+  \mathcal{G} = \mathrm{Aut}_{k}(\mathfrak{X}), \qquad
+  \mathfrak{G} = \mathrm{Aut}_{\bar{k}}(\mathfrak{X})
+\]
+\marginal{On suppose que $\bar{k}$ est séparablement clos dans $H^0(\mathfrak{X},\mathcal{O}_{\mathfrak{X}})$, donc $\bar{k}$ est la clôture séparable de $k$ dans $H^0(\mathfrak{X},\mathcal{O}_{\mathfrak{X}})$}
+
+(3) \note{encadré}
+\[
+  1 \to \mathfrak{G} \to \mathcal{G} \to \Gamma .
+\]
+
+\textbf{(1.2)} Si $k \subset k_1 \subset \bar{k}$, alors $k_1 \longleftrightarrow \Gamma_1$ sous-groupe fermé de $\Gamma$
+
+(4) \note{encadré} $\mathcal{G}_1 = \mathrm{Aut}_{k_1}(\mathfrak{X})$ est \uncertain{donc} l'image inverse de $\Gamma_1$ dans $\mathcal{G}$
+\note{un petit signe au-dessus de l'indice de $\mathcal{G}_1$, ici et en (10), n'est pas reproduit}
+
+(5)
+
+\begin{tikzcd}
+  1 \arrow[r] & \mathfrak{G} \arrow[r] \arrow[d, no head, "\parallel" description] & \mathcal{G} \arrow[r] & \Gamma \\
+  1 \arrow[r] & \mathfrak{G} \arrow[r] & \mathcal{G}_1 \arrow[r] \arrow[u, hook, "\mathrm{cart}"'] & \Gamma_1 \arrow[u, hook]
+\end{tikzcd}
+
+\textbf{(1.3)} Une donnée de descente \struck{de} $\mathfrak{X}$ de $\bar{k}$ à $k$ revient à un scindage de (3),
+
+(6)
+
+\begin{tikzcd}
+  1 \arrow[r] & \mathfrak{G} \arrow[r] & \mathcal{G} \arrow[r] & \Gamma \arrow[r, "!"] \arrow[l, bend left=40] & 1
+\end{tikzcd}
+
+qui permet d'écrire
+
+(7)
+\[
+  \mathcal{G} \simeq \Gamma \underset{1/2}{\cdot} \mathfrak{G}
+\]
+Sous réserve \add{de conditions} (d'effectivité, \struck{et vraie} OK si $\mathfrak{X}$ quasi-projectif sur $\bar{k}$) il revient au même de se donner un couple $X/k$ et un iso
+
+(8)
+\[
+  X \otimes_k \bar{k} \simeq \mathfrak{X}
+\]
+
+\page{5}
+\textbf{(1.3.1)} Plus gén., une descente de $\mathfrak{X}$ au corps de base \uncertain{$k_1$} revient à : un \add{$\Gamma_1$-}scindage
+
+(9)
+
+\begin{tikzcd}
+  \mathcal{G} \arrow[r] & \Gamma \\
+  & \Gamma_1 \arrow[u, hook] \arrow[ul, dashed]
+\end{tikzcd}
+
+i.e. à un scindage de
+\[
+  1 \to \mathfrak{G} \to \mathcal{G}_1 \to \Gamma_1
+\]
+d'où une écriture correspondante
+
+(10)
+\[
+  \mathcal{G}_1 = \Gamma_1 \underset{1/2}{\cdot} \mathfrak{G} .
+\]
+
+\textbf{(2.1)} Soit $\widetilde{\mathfrak{X}}$ un rev.\ universel \add{(ou profini)} de $\mathfrak{X}$, \struck{\ill{} rev.\ p.-fini galoisien} \uncertain{dans un sens convenable}, \ill{}
+
+(11)
+\[
+  \mathcal{E} = \mathrm{Aut}_k(\widetilde{\mathfrak{X}} \to \mathfrak{X})
+\]
+
+(12)
+\[
+  1 \to \pi_1 \to \mathcal{E} \to \mathcal{G} \to 1
+\]
+où
+
+(13)
+\[
+  \pi_1 = \mathrm{Aut}(\widetilde{\mathfrak{X}}/\mathfrak{X})
+\]
+est un groupe fondamental de $\mathfrak{X}$ (groupe profini).
+
+\marginal{\emph{NB} $\mathcal{G} \to \mathrm{Autext}(\pi_1)$ est au sens des aut.\ ext.\ des groupes profinis $\pi_1$ (i.e.\ pour $g \in \mathcal{E}$, $\mathrm{int}(g)|\pi_1$ est \uncertain{continu})}
+
+\struck{Ceci vaut \uncertain{aussi}}
+
+\textbf{(2.2)} Considérons un rev.\ p.-fini galoisien $\mathfrak{X}'$ de $\mathfrak{X}$, correspondant à un s-groupe fermé invariant
+
+\uncertain{(12)}
+\note{le numéro porté ici se lit (12), qui est déjà pris ; la suite reprend à (13) en p.~5 puis p.~6}
+\[
+  N \subset \pi_1, \qquad \pi_1/N = G = \mathrm{Aut}(\mathfrak{X}'/\mathfrak{X}),
+  \qquad \mathfrak{X}' = \widetilde{\mathfrak{X}}/N
+\]
+\note{devant $G$, un symbole biffé et illisible}
+
+\page{6}
+Soient
+
+(13)
+\[
+  \mathcal{E}' = \mathrm{Norm}_{\mathcal{E}}(N) \supset \pi_1
+\]
+$=$ stabilisateur dans $\mathcal{E}$ de la relation d'équivalence dans $\widetilde{\mathfrak{X}}$ définie par $\widetilde{\mathfrak{X}} \to \mathfrak{X}'$, i.e.\ par op.\ de $N$\ldots
+
+(14)
+\[
+  \mathcal{G}' = \mathcal{E}'/N
+\]
+de sorte que
+
+(15)
+\[
+  \mathcal{G}' \xrightarrow{\ \sim\ } \mathrm{Aut}_k(\mathfrak{X}' \to \mathfrak{X})
+\]
+et une suite exacte
+
+(16)
+
+\begin{tikzcd}
+  1 \arrow[r] & G \arrow[r] & \mathcal{G}' \arrow[r] & \mathcal{G} \arrow[r, dashed] & \Gamma
+\end{tikzcd}
+
+\marginal{\emph{NB} L'hyp.\ $\bar{k}$ sép.\ clos dans $H^0(\mathfrak{X},\mathcal{O}_{\mathfrak{X}})$ est \struck{\ill{}} \uncertain{préservée} : $\widetilde{\mathfrak{X}}, \mathfrak{X}'$ et l'\uncertain{extension} $\mathcal{G}' \to \mathcal{G} \to \Gamma$ est l'hom.\ déduit de $\mathrm{Aut}_k(\mathfrak{X}') \to \Gamma = \mathrm{Aut}(\bar{k}/k)$}
+
+Dire que $\mathcal{G}' \to \mathcal{G}$ est surj.\ revient à dire que $\mathcal{E}' = \mathcal{E}$, i.e.\ $N$ invariant \emph{dans} $\mathcal{E}$, i.e.\ $N$ \struck{invariant} fixe sous l'action de $\mathcal{G}$ opérant sur l'ens.\ des s-groupes invariants fermés de $\pi_1$. \emph{NB} Si $\pi_1$ est de type fini, il admet un syst.\ fond.\ de voisinages de $1$ formé de s-groupes (ouverts, i.e.\ \uncertain{finis} d'indice fini) invariants \add{\uncertain{caractéristiques}} par \emph{tt} automorphisme, et en particulier par les invariants dans $\mathcal{E}$.
+
+\struck{(2.3) Données de descentes de $\mathfrak{X}' \to \mathfrak{X}$ sur $k$ \ill{}}
+\note{les deux dernières lignes de la page et les premières de la page~7 sont barrées de traits obliques ; on y lit encore « revient à la donnée d'un scindage » et un diagramme $\mathcal{G}' \to \Gamma$ muni d'une section recourbée}
+
+\page{7}
+\textbf{(2.3)} \uncertain{Soit}
+
+(17)
+\[
+  \mathfrak{G}' = \mathrm{Aut}_{\bar{k}}(\mathfrak{X}' \to \mathfrak{X})
+\]
+\struck{Alors $\mathfrak{G}'$ est d'} dans suite exacte
+
+(18)
+\[
+  1 \to G \to \mathfrak{G}' \to \mathfrak{G} ,
+\]
+qui se déduit (via l'iso.\ \uncertain{can.}) de (16) comme
+
+(19)
+\[
+  \begin{aligned}
+    \mathfrak{G}' &\simeq \text{image inverse de } \mathfrak{G} \subset \mathcal{G} \text{ par } \mathcal{G}' \to \mathcal{G} \\
+    &\simeq \mathrm{Ker}(\mathcal{G}' \to \Gamma)
+  \end{aligned}
+\]
+
+Le cas favorable $N$ inv.\ dans $\mathcal{E}$ i.e.\ $\mathcal{G}' \to \mathcal{G}$ surjectif revient à dire : a) $\mathfrak{G}' \to \mathfrak{G}$ surjectif et b) $\mathcal{G}' \to \Gamma$ \struck{surjectif} \add{\uncertain{a même} image} \uncertain{que} $\mathcal{G} \to \Gamma$.
+
+\struck{NB}
+
+\emph{NB} Si $\mathfrak{X}$ de prés.\ finie sur $k$, alors l'image $\Gamma_1$ de $\mathcal{G}$ dans $\Gamma$ est un sous-groupe ouvert, et si de plus $\mathfrak{X}' \to \mathfrak{X}$ fini sur $\mathfrak{X}$ \uncertain{ie} de prés.\ finie sur $k$, alors l'image $\Gamma_1'$ \add{($\subset \Gamma_1$)} de $\mathcal{G}'$ dans $\Gamma$ l'est également.
+
+\page{8}
+\textbf{(2.4)} \struck{\ill{}} Une donnée de descente sur $(\mathfrak{X}' \to \mathfrak{X})/\bar{k}$ de $\bar{k}$ vers $k$, revient à la donnée d'un scindage
+
+(20)
+
+\begin{tikzcd}
+  \mathcal{G}' \arrow[r] & \Gamma \arrow[l, bend left=40]
+\end{tikzcd}
+
+permettant d'écrire
+
+(21)
+\[
+  \mathcal{G}' \simeq \Gamma \underset{1/2}{\cdot} \mathfrak{G}' .
+\]
+
+Plus généralement, si $k \subset k_1 \subset \bar{k}$, correspondant à $\Gamma_1 \subset \Gamma$ ss-groupe fermé, une \add{donnée de} descente de $\bar{k}$ à $k_1$ revient à : un scindage partiel
+
+(22)
+
+\begin{tikzcd}
+  \mathcal{G}' \arrow[r] & \Gamma \\
+  & \Gamma_1 \arrow[u, hook] \arrow[ul]
+\end{tikzcd}
+
+et quelles : introduisons les variantes
+
+\marginal{\uncertain{oubli : à vérifier dans les formules !}}
+
+(23)
+\[
+  \begin{aligned}
+    \mathcal{E}_1 &= \mathrm{Aut}_{k_1}(\widetilde{\mathfrak{X}} \to \mathfrak{X})
+      = \text{l'image inverse de } \Gamma_1 \subset \Gamma \\
+    &\qquad \text{par } \mathcal{E} \to \mathcal{G} \to \Gamma \text{ (composé)} \\
+    \mathcal{E}_1' &= \ldots\ldots = \mathcal{E}' \cap \mathcal{E}_1 \\
+    \mathcal{G}_1' &= \mathrm{Aut}_{k_1}(\mathfrak{X}' \to \mathfrak{X})
+      = \text{l'image inverse de } \Gamma_1 \subset \Gamma \\
+    &\qquad \text{par } \mathcal{G}' \to \mathcal{G} \to \Gamma
+  \end{aligned}
+\]
+\note{le trait vertical qui borde ces trois lignes à gauche les groupe sous le numéro (23)}
+
+il revient au $=$ de se donner un iso.\ \uncertain{compatible} avec la structure\ldots, d'écrire
+\[
+  \mathcal{G}_1' \simeq \Gamma_1 \underset{1/2}{\cdot} \mathfrak{G}'
+\]
+
+\page{9}
+\textbf{(2.5)} Situation où $N$ invariant dans $\mathcal{E}$ i.e.\ inv.\ par $\mathcal{G}$, et $\mathcal{G} \to \Gamma$ est surjectif : $\mathcal{G}'$ \struck{devient} est muni de suite de composition ayant les quotients successifs ($\Gamma, \mathfrak{G}, G$)
+
+(24)
+\[
+  \overbrace{G \quad \mathfrak{G} \quad \Gamma}^{\mathcal{G}'}
+\]
+\[
+  \underbrace{G \quad \mathfrak{G}}_{\mathfrak{G}'} \qquad
+  \underbrace{\mathfrak{G} \quad \Gamma}_{\mathcal{G}}
+\]
+\note{sur la page, une seule rangée $G\ \mathfrak{G}\ \Gamma$ : une accolade au-dessus embrasse les trois termes ($\mathcal{G}'$), deux accolades au-dessous, jointives en $\mathfrak{G}$, embrassent $G\,\mathfrak{G}$ ($\mathfrak{G}'$) et $\mathfrak{G}\,\Gamma$ ($\mathcal{G}$)}
+
+L'extension $\mathfrak{G}'$ de $\mathfrak{G}$ par $G = \mathrm{Aut}(\mathfrak{X}'/\mathfrak{X})$ est de nature « géométrique », l'extension $\mathcal{G}'$ de $\Gamma$ par $\mathfrak{G}'$ exprime les conditions arithmétiques de la situation.
+
+Nous nous \uncertain{intéressons} surtout au cas où $\mathfrak{G}$ et $G$ sont finis, et $\Gamma$ infini, i.e.\ $\bar{k}$ extension infinie de $k$, \struck{Considérons} $\mathfrak{X}$ \uncertain{(donc aussi $\mathfrak{X}'$)} étant de prés.\ finie sur $k$. [On a de plus, $\mathfrak{X}/\bar{k}/k$ \ill{} \uncertain{définissant} $\mathfrak{X}'$ \add{\uncertain{par $N$}} de $\widetilde{\mathfrak{X}}$ \ill{} \ill{} $\cap N = 1$.] On voit \ill{} que \ill{} pour \ill{} un groupe quotient fini \struck{\ill{}} $\gamma_i$ \add{$(= \Gamma/\Gamma_i)$} de $\Gamma$
+
+\page{10}
+et une extension
+
+(25)
+\[
+  1 \to \mathfrak{G}' \to \mathcal{G}_i' \to \gamma_i \to 1
+\]
+dont l'extension $\mathcal{G}'$ provient \add{(\uncertain{à iso près})} par $\Gamma \to \gamma_i$. La donnée de \ill{} de $\gamma_i$ \uncertain{revient}, \uncertain{à} celle d'un ss-groupe distingué \struck{\ill{}} \uncertain{ouvert} $\Gamma_i$ de $\Gamma$ \ill{} d'une ss-ext.\ \struck{galoisienne} finie $k_i$ \add{\struck{\ill{}}} de $\bar{k}/k$ --- \add{complétée de} l'extension (25) et de l'iso.\ d'ext.\ de $\mathcal{G}'$ avec $\mathcal{G}_i' \times_{\gamma_i} \Gamma$ revient à la donnée d'un \struck{relèvement} scindage partiel
+
+(26)
+
+\begin{tikzcd}
+  1 \arrow[r] & \mathfrak{G}' \arrow[r] & \mathcal{G}' \arrow[r] & \Gamma \arrow[r] & 1 \\
+  & & & \Gamma_i \arrow[u, hook] \arrow[ul]
+\end{tikzcd}
+
+dont l'image dans $\mathcal{G}'$ soit un ss-groupe \emph{invariant} de $\mathcal{G}'$ [le quotient par \uncertain{lui} étant précisément $\mathcal{G}_i'$\ldots], ce qui revient au $=$, une \ill{} \emph{commute} \uncertain{à} $\mathfrak{G}'$, i.e.\ \uncertain{qu'il} \emph{\uncertain{centralise}} (\uncertain{pour act.\ int.}) sur $\mathfrak{G}'$. Traduisant en termes géom., cela signifie \uncertain{que} \emph{1°)} une réduction de $\mathfrak{X}' \to \mathfrak{X}$ du corps de base de $\bar{k}$ à $k_i$,
+
+\page{11}
+i.e.\ la donnée d'une situation $X_i' \to X_i$ sur $k_i$, \struck{dont} et un iso.
+\[
+  (\mathfrak{X}' \to \mathfrak{X}) \simeq (X_i' \to X_i) \otimes_{k_i} \bar{k} ;
+\]
+de ceci on déduit une extension de schémas en groupes finis étales sur $k_i$
+
+(27)
+\[
+  1 \to G_i \to \mathfrak{G}_i' \to \mathfrak{G}_i \to 1
+\]
+et on exige que $\mathfrak{G}_i'$ soit un groupe constant [i.e.\ que les automorphismes « géom. » de $\mathfrak{X}' \to \mathfrak{X}$ (sur $\bar{k}$) \struck{soient} « définis sur $k_i$ »\ldots]
+
+Il faut bien noter que pour $k_i$ fixé, il peut y avoir plusieurs données non isomorphes de cette espèce sur $k_i$, i.e.\ plusieurs scindages partiels $\Gamma_i \to \mathcal{E}'$ qui centralisent $\mathfrak{G}_i'$. \struck{La} La propriété d'unicité \struck{consiste} évidente consiste \uncertain{pour} \uncertain{la} \uncertain{s'ignorer}, quelle : \uncertain{prendre} une sous-extension finie \uncertain{assez} grande\ldots
+
+De façon précise, introduisons
+
+(28)
+\[
+  Z = \mathrm{Centr}_{\mathcal{G}'}(\mathfrak{G}')
+\]
+
+\page{12}
+de sorte que
+
+(29)
+\[
+  \mathfrak{z} \overset{\mathrm{df}}{=} Z \cap \mathfrak{G}' = \text{Centre de } \mathfrak{G}'
+\]
+\note{la lettre bouclée (un « z » en forme de 3) est rendue $\mathfrak{z}$}
+et on a une suite exacte \emph{centrale}
+
+(30)
+\[
+  1 \to \mathfrak{z} \longrightarrow Z \longrightarrow \Gamma
+\]
+Donc les solutions de notre pb \add{relatifs à $\Gamma_i \subset \Gamma$} correspondent aux scindages partiels de cette suite exacte
+
+\begin{tikzcd}
+  Z \arrow[r] & \Gamma \\
+  & \Gamma_i \arrow[u, hook] \arrow[ul]
+\end{tikzcd}
+
+Soit $\Gamma_0 \subset \Gamma$ l'image de $Z$ dans $\Gamma$ (qui est un ss-groupe ouvert) \add{($\leftrightarrow k_0$ ss-ext.\ finie de $\bar{k}/k$)}, donc on a une extension centrale
+
+(31)
+\[
+  1 \to \mathfrak{z} \to Z \to \Gamma_0 \to 1 , \qquad \mathfrak{z} = \mathrm{Centre}(\mathfrak{G}')
+\]
+et il s'agit des scindages partiels de cette extension. Si $\mathfrak{z} = 1$ (centre de $\mathfrak{G}'$ trivial) alors il y a unicité pour tt $\Gamma_i$, et existence ssi $\Gamma_i \subset \Gamma_0$ --- donc une solution canonique\ldots
+
+\page{13}
+Si $\mathfrak{z}$ est quelconque, alors l'obstruction pour $\Gamma_i \subset \Gamma_0$ \uncertain{fixé} est dans $H^2(\Gamma_i, \mathfrak{z})$ ($\Gamma_i$ opérant trivialement sur $\mathfrak{z}$), l'indétermination est dans
+\[
+  H^1(\Gamma_i, \mathfrak{z}) = \mathrm{Hom}(\Gamma_i, \mathfrak{z}) \ \ldots\ldots
+\]
+\note{la page s'arrête là ; le paragraphe n'est pas repris dans le lot, la page suivante recommence sur un autre plan}
+
+\section{$k = \mathbb{Q}$ : la droite projective privée d'un nombre fini de points}
+\note{titre de l'éditeur ; la page ne porte pas de titre}
+
+\page{14}
+\struck{$k$ = corps premier}
+
+\struck{$K$ corps \ill{} $k$ = corps premier}, $k = \mathbb{Q}$
+
+$\hat{\mathfrak{X}}$ droite projective sur $\bar{K}$ \note{sic : $\bar{K}$ pour $\bar{k}$}
+
+$S \subset \mathfrak{X}(K)$ \quad $S$ partie finie
+
+$\mathfrak{X} = \hat{\mathfrak{X}} \setminus S$
+
+$\mathfrak{X}'$ rev.\ abélien [« modéré »] maximal de $\mathfrak{X}$.
+
+A) Si $\mathrm{Card}\, S \in \{0,1\}$, alors $\mathfrak{X}' = \mathfrak{X}$ \ldots
+
+B) Si $\mathrm{Card}\, S = 2$, alors $\mathfrak{X}$ est \add{(canoniquement)} un torseur sous une forme de $\mathbb{G}_{m\,\bar{\mathbb{Q}}}$ ; \uncertain{choisir} un des pts de $S$ comme $\infty$ (l'autre \uncertain{devenant} $0$) revient à choisir une \uncertain{\ill{}} du \uncertain{groupe d'op.} \ill{} ; \struck{choisir} \uncertain{choisir} une « origine » (\uncertain{soit} 1) de $\mathfrak{X}$ revient à trivialiser ce torseur. \emph{Ceci étant fait}, \struck{\ill{}} la situation $(\hat{\mathfrak{X}}, \mathfrak{X})$ se descend de $\bar{\mathbb{Q}}$ à $\mathbb{Q}$ en $(\hat{X}, X)$ :
+\[
+  \hat{X} = \mathbb{P}^1_{\mathbb{Q}}, \qquad
+  X = \mathbb{P}^1_{\mathbb{Q}} \setminus \{0,\infty\} = \mathbb{G}_{m\,\mathbb{Q}} .
+\]
+\uncertain{Je} \ill{}
+\[
+  \mathcal{G} = \Gamma \underset{1/2}{\cdot} \bar{\mathbb{Q}}^{*}
+\]
+$\Gamma$ opérant sur $\bar{\mathbb{Q}}^{*}$ de la façon évidente. Le rev.\ \add{\uncertain{-type}} \uncertain{d'indice} $n$ de $X$ est $X_n$ \add{$= X$},
+\[
+  X_n \xrightarrow{\ t \mapsto t^n\ } X ,
+\]
+rev.\ principal de groupe $\mu_{n\,\mathbb{Q}} = \mu_n$.
+\marginal{$X_n \xrightarrow{\ f_n(t) = t^n\ } X$, écrit en colonne}
+On a, pour
+\[
+  \mathcal{G}_n = \mathrm{Aut}_k(\mathfrak{X}_n \to \mathfrak{X}) \xrightarrow{\ \sim\ } \mathrm{Aut}_k(\mathfrak{X}_n) ,
+  \qquad
+  \mathcal{G}_n' = \Gamma \underset{1/2}{\cdot} \bar{\mathbb{Q}}^{*}
+\]
+\note{la flèche d'isomorphisme est tracée verticalement sous $\mathrm{Aut}_k(\mathfrak{X}_n \to \mathfrak{X})$ ; la lecture de l'accent sur $\mathcal{G}_n'$ est incertaine}
+l'homomorphisme canonique
+\[
+  \mathcal{G}_n \longrightarrow \mathcal{G}
+\]
+étant l'identité sur \struck{\ill{}} $\Gamma$, et l'élévation à la $n$ième puiss.\ sur $\mathfrak{G}$ \uncertain{(i.e.\ sur $\bar{\mathbb{Q}}^{*}$)}.
+
+\page{15}
+Passant à la limite projective, on trouve
+\[
+  \mathcal{G}_\infty = \mathrm{Aut}_k(\mathfrak{X}_\infty \to \mathfrak{X}) \simeq \Gamma \cdot T_\infty(\bar{\mathbb{Q}}^{*})
+\]
+\note{sous $\mathfrak{X}_\infty$ : « rev.\ abélien \uncertain{étale} maximal de $\mathfrak{X}$ »}
+\ldots
+
+C) Card $S = 3$ \qquad $\mathfrak{G} \simeq \mathfrak{S}_S$ \ ($\simeq \mathfrak{S}_3$)
+
+il y a une façon canonique de réduire le corps de base à $k$, de façon que $S$ devienne rat./$k$. On est conduit ici à la tour de Fermat :
+\[
+  \mathcal{G}_n = \bigl(\Gamma \times \mathfrak{S}_S\bigr) \cdot \pi_n ,
+  \qquad \pi_n = \mu_n^{S}/\mu_n
+\]
+\struck{\ill{}} \struck{\ill{}} $\mathfrak{G}_{(n)}$
+\note{sous la formule, deux mots biffés puis $\mathfrak{G}_{(n)}$ ; dans le premier facteur, l'indice de $\mathfrak{S}$ est récrit en $S$ sur un $3$}
+
+\ldots
+
+D) Card $S \geq 4$. Soient \struck{\ill{}} $s = (s_0, s_1, s_\infty)$ \add{un triplet de} trois points distincts de $S$, on les utilise pour définir un iso
+\[
+  \hat{\mathfrak{X}} \underset{\varphi_s}{\simeq} \mathbb{P}^1_{\bar{\mathbb{Q}}}
+\]
+transformant $s_0$ en $0$, $s_1$ en $1$, $s_\infty$ en $\infty$. Les autres points \add{de $S$ s'identifient} \struck{\ill{}} à des éléments de $\bar{\mathbb{Q}} \setminus \{0,1\}$, soit $K_s \subset \bar{\mathbb{Q}}$
+
+\page{16}
+le sous-corps (donc corps de nombres) de $\bar{\mathbb{Q}}$ qu'ils engendrent, ext.\ finie de $\mathbb{Q}$. On voit de suite qu'il est indépendant du choix de $s$, et que c'est le plus petit sous-corps $K$ de $\bar{\mathbb{Q}}/\mathbb{Q}$ tel que $\hat{\mathfrak{X}}$ puisse se descendre \add{en $\hat{X}_K$} à $K$ de façon que les pts.\ de $S$ deviennent rat./$K$. De plus la descente en question est unique, à isom.\ unique près. Les automor\add{\uncertain{phismes}} de $(\hat{\mathfrak{X}}, S)$ (ou encore de $\mathfrak{X}$) forment un groupe fini ($\hookrightarrow \mathfrak{S}_S$), et ce groupe opère \uncertain{déjà} sur $\hat{X}_K$.
+\note{la page s'arrête là, aux deux tiers ; le cas D) n'est pas poursuivi dans le lot}
+
+\page{17}
+\note{feuillet de couleur, sans autre texte que cette liste, en haut à droite}
+\begin{itemize}
+  \item Tour des rev.\ de Fermat $C_n$
+  \item Tour des revêtements abéliens de l'octaèdre (\struck{\ill{}} considéré comme carte régulière 3-\uncertain{gonale}(\uncertain{2})) \struck{\ill{}}
+  \item (revêtements abéliens de $\mathbb{P}^1 \setminus \{0,1,\infty\}$, revêtements diédraux et paradiédraux \ldots)
+\end{itemize}
+
+\page{18}
+
+\begin{tikzcd}
+  X' \simeq \mathbb{P}^1_{\mathbb{Q}} \arrow[r, no head] \arrow[d, "\mu_{n\,\mathbb{Q}}"'] & \bar{X}' \arrow[d, no head] \\
+  X = \mathbb{P}^1_{\mathbb{Q}} \arrow[r, no head] \arrow[d, no head] & \bar{X} \arrow[d, no head] \\
+  \mathbb{Q} \arrow[r, no head, "\Gamma"'] & \bar{\mathbb{Q}}
+\end{tikzcd}
+
+\note{à droite de $\bar{X}$ : « $0, 1, \infty, -j, -\bar{j}$ »}
+
+\[
+  f(z) = z^n
+\]
+
+\begin{tikzcd}
+  1 \arrow[r] & \mu_n(\bar{\mathbb{Q}}) \arrow[r] & \mathcal{E}_n \arrow[r] & \Gamma \arrow[r] \arrow[l, bend left=40] & 1
+\end{tikzcd}
+
+\[
+  \mathcal{E}_n = \Gamma \cdot \mu_n(\bar{\mathbb{Q}})
+\]
+
+\[
+  \begin{cases}
+    S_0 = \{0\}, \quad S_1 = \mu_n(\bar{\mathbb{Q}}), \quad S_\infty = \{\infty\} \\
+    E^{+} = \{z \mid z^n = -j\} \\
+    E^{-} = \{z \mid z^n = -\bar{j}\}
+  \end{cases}
+\]
+\struck{$f(z)$}
+\[
+  E = \bigl\{z \mid z^{3n} = -1,\ z^n \neq -1\bigr\}
+\]
+\[
+  \begin{aligned}
+    R' &= \{z \mid z^n = \tfrac{1}{2}\} \\
+    R'' &= \{z \mid z^n = 2\} \\
+    R &= \{z \mid z^n = -1\}
+  \end{aligned}
+\]
+\[
+  E \cup R = \{z \mid z^{3n} = -1\}
+\]
+\[
+  \mathbb{Q}[E \cup R] = \mathbb{Q}[\mu_{6n}(\bar{\mathbb{Q}})] \supset \mathbb{Q}[S_0 \cup S_1 \cup S_\infty]
+\]
+\note{l'inclusion est écrite verticalement, $\mathbb{Q}[S_0 \cup S_1 \cup S_\infty]$ sous $\mathbb{Q}[E\cup R]$}
+\[
+  \mathbb{Q}[R', R''] = \mathbb{Q}[R'] = \mathbb{Q}[\sqrt[n]{2}]
+\]
+\note{avant le premier $=$, un signe biffé et illisible}
+
+\drawing{une ovale sur laquelle sont marqués les points $0$, $1$, $\infty$}
+
+\[
+  1 \to \mu_{n}(\bar{\mathbb{Q}}) \longrightarrow \Gamma' \longrightarrow (\mathbb{Z}/n\mathbb{Z})^{*} \to 1
+\]
+\note{l'indice de $\mu$ se lit \uncertain{$n$}, écrit sur une autre lettre ; après $\Gamma'$ un signe biffé, illisible}
+$\nu$ = ordre de $2$ dans \struck{\ill{}} $K_n^{*}/K_n^{*n}$, où $K_n = \mathbb{Q}(\sqrt[n]{1})$.
+
+\[
+  \begin{aligned}
+    0, 1, \infty &\longmapsto 0 \quad \text{ordre } 2 \\
+    \tfrac{1}{2}, 2, -1 &\longmapsto 1 \quad \text{ordre } 2 \\
+    -j, -\bar{j} &\longmapsto \infty \quad \text{ordre } 3
+  \end{aligned}
+\]
+
+\[
+  g(z) = \frac{27\, z^2 (z-1)^2}{4\,(z^2 - z + 1)^3}
+  \qquad
+  g_n(z) = \frac{27}{4}\,\frac{z^{2n}(z^n - 1)^2}{(z^{2n} - z^n + 1)^3}
+\]
+\note{au numérateur de $g$, le coefficient $27$ est écrit sur un autre chiffre ; au dénominateur un signe est noirci entre $z^2$ et $z$. Le $n$ de $g_n$ est écrit sur une autre lettre}
+\[
+  \lambda \, \frac{4}{27} = 1
+\]
+\[
+  g(z) = 1 \iff 4(z^2 - z + 1)^3 - 27 z^2 (z-1)^2 = 0
+\]
+\[
+  \begin{aligned}
+    4(z^2 - z + 1)^3 - 27 z^2 (z-1)^2
+      &= 4\bigl[(z+1)(z - \tfrac{1}{2})(z-2)\bigr]^2 \\
+      &= 4\bigl[(z+1)(z^2 - \tfrac{5}{2} z + 1)\bigr]^2 \\
+      &= \bigl[(z+1)(2z^2 - 5z + 2)\bigr]^2
+  \end{aligned}
+\]
+\note{la dernière égalité est écrite en petit sous l'avant-dernière}
+
+\page{19}
+
+\begin{tikzcd}
+  D \subset \mathbb{G}_m \arrow[d, "\text{fini}"'] \\
+  \mathbb{Q}
+\end{tikzcd}
+
+\note{à gauche de la flèche verticale, un second trait parallèle}
+
+\[
+  \begin{aligned}
+    \underline{\mathrm{Hom}}(D, \mathbb{G}_m) &= \mathcal{U} \\
+    \downarrow n \qquad & \qquad \downarrow n \\
+    \underline{\mathrm{Hom}}(D, \mathbb{G}_m) &= \mathcal{U}
+  \end{aligned}
+  \qquad \xi
+\]
+\note{à droite, une colonne verticale $\ldots \to \mathcal{U} \to \mathcal{U} \to \ldots$ prolonge ces flèches $n$ vers le haut et vers le bas ; le soulignement sous $\mathrm{Hom}$ est le sien (Hom faisceau)}
+
+\drawing{à gauche, un arc isolé ; plus bas, une ovale traversée par des arcs joignant $S_0$ (en haut) à $S_\infty$ (en bas), passant par des points marqués $R'$, $S_1$, $E$, $E'$, $R''$ sur l'ovale}
+
+\[
+  T(\mathbb{Q}) \ni \xi \qquad H^1(\mathbb{Q}, T_\infty(\mathcal{U}))
+\]
+
+\begin{tikzcd}
+  \Gamma \arrow[r] \arrow[dr] & \mathrm{Aff}(T_\infty(\mathcal{U})) \arrow[d] \\
+  & \mathrm{Aut}(T_\infty(\mathcal{U}))
+\end{tikzcd}
+
+« image de \uncertain{dim.\ $n+1$} ? \quad \uncertain{s-groupe} d'indice fini \uncertain{dans} \uncertain{hom.} \ill{} »
+
+$K$ \quad \uncertain{s-groupe} \uncertain{indép.} \ill{} \uncertain{premier} de 1
+
+\begin{tikzcd}
+  \Gamma \arrow[r] \arrow[dr] & \mathrm{Aff}(n, \hat{\mathbb{Z}}) \arrow[d] \\
+  & \hat{\mathbb{Z}}^{*} \cdot \hat{\mathbb{Z}}^{n}
+\end{tikzcd}
+
+« image de \ldots » \qquad « ($\supset$ \uncertain{s-groupe} d'indice fini ???) »
+
+\page{20}
+\[
+  \mathbb{Q}^{*} \qquad Z^1(\Gamma, \mathbb{Z}/n\mathbb{Z})
+\]
+\note{sous $\mathbb{Q}^{*}$, un indice biffé et illisible}
+\[
+  \frac{\gamma \cdot \sqrt[n]{\xi}}{\sqrt[n]{\xi}} = , \qquad
+  \gamma(\sqrt[n]{\xi}) = \sqrt[n]{\xi} \quad \forall \gamma \in \Gamma
+\]
+\[
+  \Updownarrow
+\]
+\[
+  \sqrt[n]{\xi} \in \mathbb{Q} \qquad \xi \in \mathbb{Q}^{*n}
+\]
+\note{les deux équivalences sont écrites verticalement sous les deux termes de la ligne précédente}
+\[
+  \varprojlim \mathbb{Q}^{*}/\mathbb{Q}^{*n} \longrightarrow Z^1(\Gamma, \hat{\mathbb{Z}})
+\]
+\[
+  0 \to \hat{\mathbb{Z}} \to Z^1(\Gamma, \hat{\mathbb{Z}})
+\]
+\note{écrit en colonne, de bas en haut}
+\[
+  \begin{aligned}
+    \mathbb{Q}^{*}/\mathbb{Q}^{*n} &\xrightarrow{\ \sim\ } H^1(\Gamma, \mathbb{Z}/n\mathbb{Z}) \\
+    \mathbb{Q}^{*}/\mathbb{Q}^{*n} \oplus (\mathbb{Z}/n\mathbb{Z}) &\simeq Z^1(\Gamma, \mathbb{Z}/n\mathbb{Z})
+  \end{aligned}
+\]
+\note{colonne verticale sur la page : $0 \to (\mathbb{Z}/n\mathbb{Z}) \to Z^1(\Gamma,\mathbb{Z}/n\mathbb{Z}) \to H^1(\Gamma,\mathbb{Z}/n\mathbb{Z}) \to 0$, une flèche oblique allant de $\mathbb{Q}^{*}/\mathbb{Q}^{*n}$ à $Z^1$ ; à côté de $(\mathbb{Z}/n\mathbb{Z})$, trois lignes biffées dont se lit encore \uncertain{« d'indice »} et \uncertain{« de groupe »}}
+
+$\mathbb{Z}/2^n\mathbb{Z}$ \qquad $a = na$ si $n$ impair, \quad $2a = 0$
+
+\[
+  \boxed{\ \Gamma \longrightarrow \mathrm{Aff}(1, \hat{\mathbb{Z}})\ }
+\]
+
+\[
+  Z^1(\Gamma, \hat{\mathbb{Z}}) \simeq \varprojlim \mathbb{Q}^{*}/\mathbb{Q}^{*n} \oplus \hat{\mathbb{Z}}
+\]
+\note{la ligne commence par un signe biffé et illisible}
+\[
+  \varprojlim \mathbb{Q}^{*}/\mathbb{Q}^{*n}
+  = \{\pm 1\} + \varprojlim (\mathbb{Z}/n\mathbb{Z})^{P}
+  \qquad
+  \varprojlim (\mathbb{Z}/n\mathbb{Z})^{P} \to \hat{\mathbb{Z}}^{P}
+\]
+\note{les deux égalités de la seconde ligne sont des accolades tracées sous la formule précédente ; $P$ désigne, semble-t-il, l'ensemble des nombres premiers, qui n'est pas nommé sur la page}
+
+$K_{\ell^\infty}$ corps cyclotomiques \qquad $K_{\ell^\infty}^{*}/\mathbb{Q}^{*}$
+
+\note{le calcul s'arrête en bas de la page ; la théorie de Kummer sur $\mathbb{Q}$ et l'image de $\Gamma$ dans $\mathrm{Aff}(1,\hat{\mathbb{Z}})$, amorcées pp.~18--20, se poursuivent au-delà de ce lot}
+
+\end{document}
