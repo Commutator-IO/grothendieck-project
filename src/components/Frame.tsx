@@ -25,7 +25,8 @@ type Collection = 'fonds' | 'notebooks' | 'quillen';
 
 const COLLECTIONS: { id: Collection; label: string; path: string }[] = [
   { id: 'fonds', label: 'Fonds', path: '/' },
-  { id: 'notebooks', label: 'Notebooks', path: '/notebooks/' },
+  // The Notebooks switch is off (2026-09-30): the five notebook pages are still
+  // built and their URLs still work, but the header no longer offers them.
   // A second corpus, Daniel Quillen's notebooks at the Clay (#36): the other
   // side of the 1968 and 1983 exchanges, with a reading room of its own.
   { id: 'quillen', label: 'Quillen', path: '/quillen/' },
