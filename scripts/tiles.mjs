@@ -352,13 +352,14 @@ async function tilePage({ pdf, pdfPage, page, dir, opts }) {
 // ---------------------------------------------------------------------------
 
 function parseArgs(argv) {
-  const opts = { ...DEFAULTS, force: false, pages: null };
+  const opts = { ...DEFAULTS, force: false, pages: null, pdf: null };
   const positional = [];
 
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     if (a === '--force') opts.force = true;
     else if (a === '--dpi') opts.dpi = Number(argv[++i]);
+    else if (a === '--pdf') opts.pdf = argv[++i];
     else if (a === '--overlap') opts.overlap = Number(argv[++i]);
     else if (a === '--grid') {
       const m = /^(\d+)x(\d+)$/.exec(argv[++i] ?? '');
@@ -389,7 +390,8 @@ async function main() {
   if (!cote || !batchArg) {
     process.stderr.write(
       'Usage: npm run tiles -- <folder> <batch> [--pages 164-169] [--dpi 700]\n' +
-        '                       [--grid 3x2] [--overlap 0.15] [--force]\n\n' +
+        '                       [--grid 3x2] [--overlap 0.15] [--force]\n' +
+        '       npm run tiles -- quillen/<group>/<label> <batch> --pdf archives/quillen/<group>/<label>.pdf\n\n' +
         'Writes archives/tiles/<folder>/p<page>/ — the sheet, the tiles,\n' +
         'the left margin upright and turned, and tiles.json with the\n' +
         'rectangles for re-cropping a doubtful word tighter.\n',
@@ -398,7 +400,11 @@ async function main() {
   }
 
   const batch = Number(batchArg);
-  const pdf = resolve(BATCHES, cote, `batch-${String(batch).padStart(2, '0')}.pdf`);
+  // A whole file rather than a mirrored batch — one of Quillen's notebooks,
+  // whose pages are the PDF's own: the batch picks its twenty out of it.
+  const whole = opts.pdf ? resolve(ROOT, opts.pdf) : null;
+  const pdf = whole ?? resolve(BATCHES, cote, `batch-${String(batch).padStart(2, '0')}.pdf`);
+  if (whole && !(await exists(whole))) throw new Error(`${opts.pdf} not found (node scripts/quillen-mirror.mjs)`);
   if (!(await exists(pdf))) {
     throw new Error(
       `${pdf.replace(ROOT + '/', '')} is not mirrored.\n` +
@@ -410,8 +416,9 @@ async function main() {
   await mkdir(TILES, { recursive: true });
 
   const { stdout } = await exec('pdfinfo', [pdf]);
-  const count = Number(/^Pages:\s+(\d+)$/m.exec(stdout)?.[1] ?? 0);
+  const inFile = Number(/^Pages:\s+(\d+)$/m.exec(stdout)?.[1] ?? 0);
   const first = (batch - 1) * BATCH_SIZE + 1;
+  const count = whole ? Math.max(0, Math.min(BATCH_SIZE, inFile - first + 1)) : inFile;
 
   process.stdout.write(
     `folder ${cote}, batch ${batch} — pages ${first}–${first + count - 1}, ` +
@@ -430,7 +437,7 @@ async function main() {
     }
 
     try {
-      const n = await tilePage({ pdf, pdfPage: i + 1, page, dir, opts });
+      const n = await tilePage({ pdf, pdfPage: whole ? page : i + 1, page, dir, opts });
       written += n;
       process.stdout.write(`  page ${page}: ${n} images\n`);
     } catch (e) {

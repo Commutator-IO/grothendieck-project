@@ -1,0 +1,40 @@
+% Preamble for transcriptions of Daniel Quillen's research notebooks.
+%
+% The fonds' preamble, whole — the same apparatus macros, the same tikz-cd set
+% up, the same watermark — so that one day the same renderer can read both. What
+% changes is the language (his notebooks are in English, and so is the edition)
+% and the head of the document, which names the notebook and whose facsimile it
+% was read from.
+%
+% A transcription sits one directory below transcripts-quillen/, as
+% transcripts-quillen/<label>/batch-NN.en.tex, and opens with
+%   \input{../preamble/quillen}
+% The fonds' preamble reaches its tikz set-up by the same relative path, which
+% is why tikz-setup.tex here only forwards to the real one.
+
+\input{../../transcripts/preamble/grothendieck}
+
+\newcommand{\notebook}[1]{\folder{#1}}
+\renewcommand{\drawing}[1]{\par\smallskip{\small\color{gray!60!black}\textit{[Drawing: #1]}}\par\smallskip}
+
+\renewcommand{\grothTitleBlock}{%
+  \selectlanguage{english}%
+  \begin{center}
+    {\large\bfseries Daniel Quillen, research notebooks --- \grothFolder}\\[2pt]
+    \ifx\grothFoldertitle\empty\else{\itshape\grothFoldertitle}\\[4pt]\fi
+    {\small pages \grothFirst--\grothLast
+      \ifx\grothBatch\empty\else\ (batch \grothBatch)\fi}\\[2pt]
+    \ifx\grothDating\empty\else
+      {\small\color{gray!60!black}Filed by the Clay under: \grothDating}\\[2pt]
+    \fi
+    \ifx\grothWatermark\empty\else
+      {\small\bfseries\color{red!45!gray}\grothWatermark}\\[2pt]
+    \fi
+    {\footnotesize\color{gray!60!black}Transcribed from the facsimile published by the
+     Clay Mathematics Institute.\\
+     Uncertain readings are underlined, illegible ones marked [\,\ldots\,],
+     additions in brackets.}
+  \end{center}
+  \vspace{1em}}
+
+\endinput

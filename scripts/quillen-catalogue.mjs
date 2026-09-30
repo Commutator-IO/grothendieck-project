@@ -10,7 +10,7 @@
  * and a « misc » folder — and writes src/content/quillen.json: every PDF with
  * its source URL, its year or group, and its size as the listing gives it.
  * Page counts are added only where a private copy exists to count them in
- * (QUILLEN_MIRROR, default ~/Commutator/quillen, laid out as `index.json`
+ * (QUILLEN_MIRROR, default archives/quillen, written by quillen-mirror.mjs; laid out as `index.json`
  * there says); nothing on the site depends on that copy, and nothing of it is
  * served.
  *
@@ -20,7 +20,6 @@
 
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
-import { homedir } from 'node:os';
 import { resolve, join } from 'node:path';
 
 const ROOT = resolve(import.meta.dirname, '..');
@@ -32,7 +31,7 @@ const ROOT = resolve(import.meta.dirname, '..');
  */
 const LUKE = 'https://www.claymath.org/wp-content/uploads/2023/04/Quillen-index-Luke.pdf';
 const BASE = 'https://www.claymath.org/library/Quillen/';
-const MIRROR = process.env.QUILLEN_MIRROR ?? join(homedir(), 'Commutator', 'quillen');
+const MIRROR = process.env.QUILLEN_MIRROR ?? join(ROOT, 'archives', 'quillen');
 
 const units = { '': 1, K: 1e3, M: 1e6, G: 1e9 };
 const bytes = (s) => {
