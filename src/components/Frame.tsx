@@ -197,34 +197,53 @@ function Mark() {
   );
 }
 
-export function Footer() {
+export function Footer({ collection = 'fonds' }: { collection?: 'fonds' | 'quillen' }) {
+  const quillen = collection === 'quillen';
   return (
     <footer className="mt-16 border-t border-ink-200 bg-white">
       <div className="mx-auto max-w-6xl px-5 py-8 text-[12.5px] leading-relaxed text-ink-500">
-        <p className="max-w-[52em]">
-          Facsimiles come from the{' '}
-          <strong className="font-semibold text-ink-700">Alexandre Grothendieck fonds</strong> at
-          the University of Montpellier, given by Jean Malgoire and catalogued in 2015–2016 by
-          Hélène Rodriguez and Frédéric Troilo under the direction of Sophie Dikoff. Of the fonds'
-          some 28,000 pages, about 18,000 may be circulated: third-party correspondence cannot be,
-          without permission.
-        </p>
-        <p className="mt-3 max-w-[52em]">
-          This site neither hosts nor redistributes the fonds. It gives the inventory, and reads
-          the files one has downloaded from Montpellier oneself.
-        </p>
+        {quillen ? (
+          <>
+            <p className="max-w-[52em]">
+              Facsimiles come from the{' '}
+              <strong className="font-semibold text-ink-700">Clay Mathematics Institute</strong>,
+              which has scanned Daniel Quillen's research notebooks since 2013 and publishes them
+              on claymath.org; Glenys Luke and Graeme Segal are cataloguing them. The notebooks
+              are in copyright: Quillen died in 2011, and the scans are the Clay's.
+            </p>
+            <p className="mt-3 max-w-[52em]">
+              This site neither hosts nor redistributes them. Each notebook is shown from
+              claymath.org, as the Clay serves it, and no transcription of them is published.
+            </p>
+          </>
+        ) : (
+          <>
+            <p className="max-w-[52em]">
+              Facsimiles come from the{' '}
+              <strong className="font-semibold text-ink-700">Alexandre Grothendieck fonds</strong> at
+              the University of Montpellier, given by Jean Malgoire and catalogued in 2015–2016 by
+              Hélène Rodriguez and Frédéric Troilo under the direction of Sophie Dikoff. Of the fonds'
+              some 28,000 pages, about 18,000 may be circulated: third-party correspondence cannot be,
+              without permission.
+            </p>
+            <p className="mt-3 max-w-[52em]">
+              This site neither hosts nor redistributes the fonds. It gives the inventory, and reads
+              the files one has downloaded from Montpellier oneself.
+            </p>
+          </>
+        )}
         {/* The source on one side, whose site this is on the other. The arrow
             marks a reference one leaves for; the way back to commutator.io
             carries none, and opens in this tab, because it is a return rather
             than a citation. */}
         <p className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1">
           <a
-            href="https://grothendieck.umontpellier.fr/"
+            href={quillen ? 'https://www.claymath.org/online-resources/quillen-notebooks/' : 'https://grothendieck.umontpellier.fr/'}
             target="_blank"
             rel="noopener noreferrer"
             className="font-medium text-brand-600 underline decoration-brand-200 underline-offset-2 hover:text-brand-700"
           >
-            grothendieck.umontpellier.fr ↗
+            {quillen ? 'claymath.org · Quillen notebooks ↗' : 'grothendieck.umontpellier.fr ↗'}
           </a>
           <span aria-hidden="true" className="text-ink-300">
             ·

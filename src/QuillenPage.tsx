@@ -206,6 +206,10 @@ export function QuillenPage() {
 
           <div className="card overflow-hidden">
             <iframe key={nb.url} src={nb.url} title={`Daniel Quillen, notebook ${nb.label} — Clay Mathematics Institute`} className="h-[78vh] w-full border-0 bg-white" />
+            <p className="border-t border-ink-200 bg-ink-50 px-4 py-2.5 text-[12px] leading-relaxed text-ink-500">
+              Facsimile: <strong className="font-semibold text-ink-700">Clay Mathematics Institute</strong>, served
+              from claymath.org, not copied here.
+            </p>
           </div>
         </section>
 
@@ -216,7 +220,7 @@ export function QuillenPage() {
         </p>
       </main>
 
-      <Footer />
+      <Footer collection="quillen" />
     </>
   );
 }
