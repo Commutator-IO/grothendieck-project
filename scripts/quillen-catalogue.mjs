@@ -24,6 +24,13 @@ import { homedir } from 'node:os';
 import { resolve, join } from 'node:path';
 
 const ROOT = resolve(import.meta.dirname, '..');
+/**
+ * Glenys Luke's index of the notebooks, which the Clay publishes: for each
+ * notebook, its dates and what it works on. It is the collection's own
+ * organisation, so the page follows it — each notebook shows the start of its
+ * entry, credited, with the whole index one click away.
+ */
+const LUKE = 'https://www.claymath.org/wp-content/uploads/2023/04/Quillen-index-Luke.pdf';
 const BASE = 'https://www.claymath.org/library/Quillen/';
 const MIRROR = process.env.QUILLEN_MIRROR ?? join(homedir(), 'Commutator', 'quillen');
 
@@ -83,6 +90,61 @@ function pagesFrom(url) {
 
 const natural = (a, b) => a.localeCompare(b, 'en', { numeric: true });
 
+/**
+ * Luke's entries, keyed as the catalogue labels its files.
+ *
+ * The index is set per year (« Contents 1968 ») and each entry opens on the
+ * notebook's name alone on its line. The year of the heading wins over the
+ * one in the name, which the index sometimes mistypes (« 1986-9 » among the
+ * notebooks of 1968); a line naming several notebooks (« 1976-1, 1976-2,
+ * 1976-3 ») gives its entry to each; « Lecure » and « Lectyre » are read as
+ * « Lecture ».
+ */
+async function lukeIndex() {
+  const r = await fetch(LUKE, { headers: { 'User-Agent': 'grothendieck-archives catalogue' } });
+  if (!r.ok) throw new Error(`${LUKE}: HTTP ${r.status}`);
+  const tmp = join(ROOT, 'node_modules', '.cache', 'quillen-index.pdf');
+  execFileSync('mkdir', ['-p', join(ROOT, 'node_modules', '.cache')]);
+  writeFileSync(tmp, Buffer.from(await r.arrayBuffer()));
+  const text = execFileSync('pdftotext', ['-layout', tmp, '-'], { encoding: 'utf8' });
+  const entries = new Map();
+  let year = null;
+  let keys = [];
+  for (const line of text.split('\n')) {
+    const heading = /^\s*Contents\s+(\d{4})\s*$/.exec(line);
+    if (heading) {
+      year = heading[1];
+      keys = [];
+      continue;
+    }
+    const t = line.trim();
+    const names = /^((?:19|20)\d\d-[^:]*?)(?::)?$/.test(t) && t.length < 60 && !/[.;]\s/.test(t.slice(8))
+      ? t.replace(/:$/, '').split(/,\s*/)
+      : null;
+    if (names && names.every((n) => /^(19|20)\d\d-/.test(n))) {
+      keys = names.map((n) => `${year ?? n.slice(0, 4)}-${n.slice(5)}`.replace(/Lec(?:ure|tyre)/, 'Lecture'));
+      for (const k of keys) entries.set(k, []);
+      continue;
+    }
+    if (keys.length && t && !/^\d{1,3}$/.test(t)) for (const k of keys) entries.get(k).push(t);
+  }
+  return entries;
+}
+
+const squash = (s) => s.toLowerCase().replace(/[\s_]+/g, '');
+
+/** A notebook's entry: the same name, or a name the index shortens (« 1983-Lecture Notes 5 » for « … 5 Quillen »). */
+function entryFor(label, entries, byName) {
+  const own = byName.get(squash(label));
+  if (own) return own;
+  for (const [k, v] of entries) {
+    const q = squash(k);
+    if (q.length > 8 && squash(label).startsWith(q) && /\d$/.test(q) && !/\d/.test(squash(label).slice(q.length, q.length + 1))) return v;
+    if (squash(label).startsWith(q) && /[a-z]$/.test(q)) return v;
+  }
+  return null;
+}
+
 const files = (await walk(BASE)).filter((f) => /\.pdf$/i.test(f.url));
 // Some year directories hold a copy of another year's folder (quillen 1987/
 // quillen 1981/…). Where the same notebook also sits in its own year, that
@@ -100,8 +162,13 @@ for (const f of files) {
     if (had.filed && !nb.filed) byId.set(id, nb);
   } else byId.set(id, nb);
 }
+const entries = await lukeIndex();
+const byName = new Map([...entries].map(([k, v]) => [squash(k), v]));
 const notebooks = [...byId.values()]
-  .map((nb) => ({ ...nb, pages: pagesFrom(nb.url) }))
+  .map((nb) => {
+    const lines = entryFor(nb.label, entries, byName);
+    return { ...nb, pages: pagesFrom(nb.url), index: lines ? lines.join(' ').replace(/\s+/g, ' ').trim() : null };
+  })
   .sort((a, b) => natural(a.group, b.group) || natural(a.label, b.label));
 
 const out = {
@@ -109,11 +176,13 @@ const out = {
   built: new Date().toISOString().slice(0, 10),
   source: 'https://www.claymath.org/online-resources/quillen-notebooks/',
   files: BASE,
+  index: LUKE,
   notebooks,
 };
 writeFileSync(resolve(ROOT, 'src/content/quillen.json'), JSON.stringify(out, null, 1) + '\n');
 const counted = notebooks.filter((n) => n.pages).length;
+const indexed = notebooks.filter((n) => n.index).length;
 process.stdout.write(
   `${notebooks.length} PDFs (${doubles} copies filed under another year left out), ` +
-    `${(notebooks.reduce((s, n) => s + n.bytes, 0) / 1e9).toFixed(2)} GB, ${counted} with a page count → src/content/quillen.json\n`,
+    `${(notebooks.reduce((s, n) => s + n.bytes, 0) / 1e9).toFixed(2)} GB, ${counted} with a page count, ${indexed} with an entry in Luke's index → src/content/quillen.json\n`,
 );

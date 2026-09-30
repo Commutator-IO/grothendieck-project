@@ -62,6 +62,27 @@ export interface OpenBatch {
   wholeFolder?: boolean;
   /** Whether the relay is up yet — the frame waits rather than racing it. */
   relay: RelayState;
+  /**
+   * A file that is not Montpellier's — one of Quillen's notebooks at the Clay.
+   *
+   * The pane is the same reading room, so the same component: width, handle,
+   * batch bar, page anchor. What differs is where the file comes from, how
+   * its pages are counted (no cover sheet in front), and whose it is, which the
+   * header, the source link and the credit line all say. Absent, everything is
+   * as it always was for the fonds.
+   */
+  source?: {
+    /** The PDF to frame, served by its owner. */
+    file: string;
+    /** Where a reader opens it in a tab of its own. */
+    original: string;
+    /** The header's first line, in place of « Cote n° … ». */
+    heading: string;
+    /** The line under the frame, saying whose facsimile this is. */
+    credit: string;
+    /** Pages in the file before the first page counted (Montpellier's cover sheet is one). */
+    pageOffset: number;
+  };
 }
 
 function clamp(w: number): number {
@@ -81,7 +102,9 @@ function clamp(w: number): number {
  * a batch wants to be.
  */
 function address(b: OpenBatch): string {
-  const url = facsimileUrl(b.cote);
+  const url = b.source ? b.source.file : facsimileUrl(b.cote);
+  // Pages not counted: no batch to open on, the file from its first page.
+  if (b.source && b.pages <= 0) return url;
   // The window a page marker may name: the batch normally, the whole folder
   // when the reading open on the left is itself folder-wide. The file behind
   // this frame is the folder either way, so widening the clamp is all it takes.
@@ -89,7 +112,7 @@ function address(b: OpenBatch): string {
     ? { first: 1, last: b.pages }
     : batchRange(b.batch, b.pages);
   const page = b.page ? Math.min(Math.max(b.page, first), last) : first;
-  return `${url}#page=${pdfIndexOf(page)}`;
+  return `${url}#page=${b.source ? page + b.source.pageOffset : pdfIndexOf(page)}`;
 }
 
 /**
@@ -174,8 +197,8 @@ export function FacsimilePane({
     };
   }, [widthCss]);
 
-  const count = batchCount(open.pages);
-  const { first, last } = batchRange(open.batch, open.pages);
+  const count = Math.max(1, batchCount(open.pages));
+  const { first, last } = batchRange(open.batch, Math.max(open.pages, 1));
 
   // Escape closes; the arrows step through batches. Those are the two gestures
   // one makes without thinking when working through a 695-page folder.
@@ -276,7 +299,7 @@ export function FacsimilePane({
     <aside
       className="fixed right-0 top-0 z-50 hidden h-dvh flex-col border-l border-ink-200 bg-white shadow-[-8px_0_24px_-16px_rgb(19_18_16/.35)] lg:flex"
       style={{ width: widthCss }}
-      aria-label={`Facsimile — folder ${open.cote}, pages ${first} to ${last}`}
+      aria-label={open.source ? `Facsimile — ${open.title}` : `Facsimile — folder ${open.cote}, pages ${first} to ${last}`}
     >
       <div
         role="separator"
@@ -299,20 +322,25 @@ export function FacsimilePane({
       <header className="flex shrink-0 items-start gap-3 border-b border-ink-200 px-4 py-2.5 pl-5">
         <div className="min-w-0 flex-1">
           <p className="text-[10.5px] font-bold uppercase tracking-[0.1em] text-ink-400">
-            Cote n° {open.cote} · {open.date || 's.d.'}
+            {open.source ? open.source.heading : `Cote n° ${open.cote} · ${open.date || 's.d.'}`}
           </p>
           <p className="truncate text-[13px] font-medium text-ink-800" title={open.title}>
             {open.title}
           </p>
         </div>
         <a
-          href={sourceUrl(open.cote)}
+          href={open.source ? open.source.original : sourceUrl(open.cote)}
           target="_blank"
           rel="noopener noreferrer"
-          title="The whole folder, served by Montpellier (expired certificate: the browser will warn)"
+          title={
+            open.source
+              ? 'The file, served by its owner'
+              : 'The whole folder, served by Montpellier (expired certificate: the browser will warn)'
+          }
           className="mt-0.5 shrink-0 rounded-lg border border-ink-200 px-2.5 py-1 text-[12px] font-medium text-ink-600 transition hover:border-brand-500 hover:text-brand-700"
         >
-          Source ↗<span className="sr-only"> (new tab, at the University of Montpellier)</span>
+          Source ↗
+          <span className="sr-only">{open.source ? ' (new tab)' : ' (new tab, at the University of Montpellier)'}</span>
         </a>
         <button
           type="button"
@@ -323,6 +351,9 @@ export function FacsimilePane({
         </button>
       </header>
 
+      {/* A notebook whose page count is not known yet has no batches to step
+          through: the viewer's own controls turn its pages. */}
+      {open.pages > 0 && (
       <BatchBar
         batch={open.batch}
         count={count}
@@ -332,6 +363,7 @@ export function FacsimilePane({
         page={open.page}
         onBatch={onBatch}
       />
+      )}
 
       {/* The frame is mounted only once the relay has answered with a PDF.
           Pointed at a relay still starting up, it would frame the host's own
@@ -346,7 +378,7 @@ export function FacsimilePane({
           // why remounting on every marker a scroll passes is not cheap.
           key={src}
           src={src}
-          title={`Folder ${open.cote}, pages ${first} to ${last}`}
+          title={open.source ? open.title : `Folder ${open.cote}, pages ${first} to ${last}`}
           className={`min-h-0 flex-1 border-0 bg-ink-100 ${isDragging ? 'pointer-events-none' : ''}`}
         />
       ) : open.relay === 'waking' ? (
@@ -356,8 +388,9 @@ export function FacsimilePane({
       )}
 
       <p className="shrink-0 border-t border-ink-100 bg-ink-50 px-5 py-2 text-[11.5px] leading-relaxed text-ink-500">
-        Facsimile from the Grothendieck fonds, University of Montpellier. Scanned versos are often
-        unrelated to the notes and may appear upside down.
+        {open.source
+          ? open.source.credit
+          : 'Facsimile from the Grothendieck fonds, University of Montpellier. Scanned versos are often unrelated to the notes and may appear upside down.'}
       </p>
     </aside>
   );
