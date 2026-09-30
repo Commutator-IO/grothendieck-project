@@ -143,11 +143,15 @@ const CIRCLE_BIBLIO = 'https://webusers.imj-prg.fr/~leila.schneps/grothendieckci
 const CIRCLE_UNPUB = 'https://webusers.imj-prg.fr/~leila.schneps/grothendieckcircle/unpubtexts.php';
 const NUMDAM = 'https://www.numdam.org/search?Publications%20math%C3%A9matiques%20de%20l%27IH%C3%89S-%22Grothendieck%2C%20Alexander%22-qn';
 const BNF = 'https://archivesetmanuscrits.bnf.fr/ark:/12148/cc126317b';
+const BOREL_SERRE = 'https://www.numdam.org/item/BSMF_1958__86__97_0/';
+const DE_RHAM = 'https://www.numdam.org/item/PMIHES_1966__29__95_0/';
 const SOURCE_NAME: Record<string, string> = {
   [BNF]: 'BnF, NAF 29093',
   [CIRCLE_BIBLIO]: 'bibliography, Grothendieck Circle',
   [CIRCLE_UNPUB]: 'Grothendieck Circle',
   [NUMDAM]: 'Numdam',
+  [BOREL_SERRE]: 'Borel–Serre, Numdam',
+  [DE_RHAM]: 'Numdam',
   [MACTUTOR]: 'MacTutor',
 };
 
@@ -191,8 +195,23 @@ const WORKS: Work[] = [
   { row: 'Manuscripts', label: 'Dérivateurs', from: 1987, to: 1991, track: 1, detail: 'Les Dérivateurs — folders 157-1 to 157-5; MacTutor gives 1987, the Grothendieck Circle calls it his 1991 manuscript', source: [MACTUTOR, CIRCLE_UNPUB] },
   { row: 'Other writings', label: 'Récoltes et semailles', from: 1983, to: 1985, side: 'left', detail: 'Récoltes et semailles — written 1983–85; issued by the Université des Sciences et Techniques du Languedoc and the CNRS (1985)', source: [MACTUTOR, CIRCLE_BIBLIO] },
   { row: 'Other writings', label: 'La Clef des songes', from: 1987, to: 1988, side: 'right', detail: 'La Clef des songes — ou Dialogue avec le bon Dieu, April 1987 to April 1988: the corrected typescript is NAF 29093 (1–2) at the BnF (MacTutor gives 1986)', source: [BNF, MACTUTOR] },
+  // The theorems, at the year of the paper or talk that proves them, as his
+  // bibliography dates it — not the year the idea came, which nobody can date.
+  // Numbered on the figure, since a dozen names would not fit its decade.
+  { row: 'Theorems', label: '1', from: 1955, detail: '① Nuclear spaces and the approximation property: every nuclear space has it — Produits tensoriels topologiques et espaces nucléaires, his thesis (defended 1953), Mem. AMS 16 (1955)', source: [CIRCLE_BIBLIO, MACTUTOR] },
+  { row: 'Theorems', label: '2', from: 1956, detail: "② Grothendieck's inequality, the « théorème fondamental de la théorie métrique des produits tensoriels » — Résumé de la théorie métrique des produits tensoriels topologiques, Bol. Soc. Mat. São Paulo 8 (1956)", source: [CIRCLE_BIBLIO] },
+  { row: 'Theorems', label: '3', from: 1957, detail: '③ Every holomorphic vector bundle on the Riemann sphere is a sum of line bundles — Sur la classification des fibrés holomorphes sur la sphère de Riemann, Amer. J. Math. 79 (1957)', source: [CIRCLE_BIBLIO] },
+  { row: 'Theorems', label: '4', from: 1957, track: 1, detail: '④ Tôhoku: abelian categories with enough injectives, sheaf cohomology as a derived functor, its vanishing above the dimension, the spectral sequence of a composite functor — Sur quelques points d\'algèbre homologique, Tôhoku Math. J. 9 (1957)', source: [CIRCLE_BIBLIO] },
+  { row: 'Theorems', label: '5', from: 1958, track: 1, detail: "⑤ Grothendieck–Riemann–Roch, for a projective morphism of smooth quasi-projective varieties — his theorem of 1957, first written up by Borel and Serre, Bull. SMF 86 (1958); in full generality SGA 6 (1966–67)", source: [BOREL_SERRE, MACTUTOR] },
+  { row: 'Theorems', label: '6', from: 1959, track: 0, detail: '⑥ Coherent duality, then the existence theorem in formal geometry — Séminaire Bourbaki n° 149 (1956/57) and n° 195 (1959/60); the theorem on formal functions, EGA III₁ (1961)', source: [CIRCLE_BIBLIO] },
+  { row: 'Theorems', label: '7', from: 1961, track: 1, detail: '⑦ Hilbert and Quot schemes exist — Séminaire Bourbaki n° 221 (1960/61); the Picard scheme, n° 232 and 236 (1961/62)', source: [CIRCLE_BIBLIO] },
+  { row: 'Theorems', label: '8', from: 1960, track: 0, detail: '⑧ The étale fundamental group, and the prime-to-p fundamental group of a curve, known from its lift to characteristic 0 — SGA 1 (1960–61)', source: [CIRCLE_BIBLIO, MACTUTOR] },
+  { row: 'Theorems', label: '9', from: 1962, track: 1, detail: '⑨ Lefschetz theorems, local and global, for the Picard group and the fundamental group — SGA 2 (1961–62)', source: [CIRCLE_BIBLIO] },
+  { row: 'Theorems', label: '10', from: 1965, track: 0, detail: '⑩ The Lefschetz trace formula in ℓ-adic cohomology and the rationality of L-functions — Formule de Lefschetz et rationalité des fonctions L, Séminaire Bourbaki n° 279 (1964/65); SGA 5 (1965–66)', source: [CIRCLE_BIBLIO] },
+  { row: 'Theorems', label: '11', from: 1966, track: 1, detail: '⑪ Algebraic de Rham cohomology computes the cohomology of the complex variety — On the de Rham cohomology of algebraic varieties, Publ. Math. IHÉS 29 (1966)', source: [DE_RHAM] },
+  { row: 'Theorems', label: '12', from: 1968, track: 0, detail: "⑫ The ℓ-adic local monodromy theorem: monodromy is quasi-unipotent — SGA 7 (1967–69), exposé I", source: [CIRCLE_BIBLIO] },
 ];
-const WORK_ROWS = ['EGA', 'FGA', 'SGA', 'Manuscripts', 'Other writings'];
+const WORK_ROWS = ['EGA', 'FGA', 'SGA', 'Theorems', 'Manuscripts', 'Other writings'];
 
 function Works() {
   const [sel, setSel] = useState<Work | null>(null);
@@ -214,7 +233,8 @@ function Works() {
       <p className="mt-2 max-w-[44em] text-[13.5px] leading-relaxed text-ink-600">
         His treatises, seminars and long manuscripts, on the axis of the folders above: a volume
         at the year it appeared, a seminar or a run of talks over the years it was held, a
-        manuscript at the date its reference gives. Hover one for its reference; the list under
+        manuscript at the date its reference gives. The row of theorems, numbered, puts his main
+        results at the paper or talk that proves them. Hover one for its reference; the list under
         the figure gives them all, with where each date is taken from.
       </p>
       <div className="mt-3 overflow-x-auto" onMouseLeave={() => setSel(null)}>
@@ -222,7 +242,7 @@ function Works() {
           viewBox={`0 0 ${W} ${H}`}
           className="w-full min-w-[640px] rounded-[var(--radius-card)] border border-ink-200 bg-white"
           role="img"
-          aria-label="EGA, FGA, SGA and his later manuscripts and writings, by year"
+          aria-label="EGA, FGA, SGA, his main theorems, and his later manuscripts and writings, by year"
         >
           {decades.map((d) => (
             <g key={d}>
@@ -246,8 +266,10 @@ function Works() {
             return (
               <g key={w.row + w.label} opacity={on ? 1 : 0.3} onMouseEnter={() => setSel(w)} style={{ cursor: 'pointer' }}>
                 <rect x={x0 - 4} y={y - 6} width={Math.max(8, x1 - x0) + 8} height={16} fill="#fff" fillOpacity={0} />
-                {w.to ? (
-                  <rect x={x0} y={y} width={x1 - x0} height={5} rx={2} fill="var(--color-ink-700)" />
+                {w.row === 'Theorems' && !w.to ? (
+                  <rect x={x(w.from + 0.5) - 3.2} y={y - 0.7} width={6.4} height={6.4} transform={`rotate(45 ${x(w.from + 0.5)} ${y + 2.5})`} fill="var(--color-brand-600)" />
+                ) : w.to ? (
+                  <rect x={x0} y={y} width={x1 - x0} height={5} rx={2} fill={w.row === 'Theorems' ? 'var(--color-brand-600)' : 'var(--color-ink-700)'} />
                 ) : (
                   <circle cx={x(w.from + 0.5)} cy={y + 2.5} r={3.6} fill="var(--color-ink-700)" />
                 )}
@@ -261,7 +283,8 @@ function Works() {
                           ? x0 + (x1 - x0) / 2
                           : x(w.from + 0.5)
                   }
-                  y={w.side ? y + 6 : y - 2}
+                  // The theorems' second track labels below its marks, clear of the first track's.
+                  y={w.side ? y + 6 : w.row === 'Theorems' && track(w) === 1 ? y + 15 : y - 2}
                   textAnchor={w.side === 'left' ? 'end' : w.side === 'right' ? 'start' : 'middle'}
                   style={{ fontSize: 10, fill: 'var(--color-ink-500)' }}
                 >
