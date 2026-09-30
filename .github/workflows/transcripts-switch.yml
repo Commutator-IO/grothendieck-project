@@ -17,16 +17,16 @@ on:
         description: Show the transcriptions on the site (sets RENDER_TRANSCRIPTS, then publishes)
         type: boolean
         default: false
-  # Cron is UTC and Paris changes its offset twice a year: both hours are
-  # scheduled, and the job keeps the ones that fall at 16:xx in Paris that day.
-  # Off the hour, because GitHub delays and sometimes drops scheduled runs at
-  # minute 0 when it is busy — the first day, neither run at :00 fired. The
-  # :37 run is a backup: it acts only if the variable is still true.
+  # Cron is UTC and Paris changes its offset twice a year: both UTC hours are
+  # scheduled, and a run acts only if it starts between 16:00 and 17:59 in Paris.
+  # Four slots an hour, off the hour: GitHub delays scheduled runs and drops
+  # some when it is busy — on 29 and 30 September not one of the :00, :07 or
+  # :37 runs fired. Any slot that finds RENDER_TRANSCRIPTS still true switches
+  # it off and publishes; the others do nothing, so the extra slots cost only
+  # a few seconds each.
   schedule:
-    - cron: '7 14 * * *'  # 16:07 in Paris in summer time (CEST, UTC+2)
-    - cron: '37 14 * * *' # 16:37, backup
-    - cron: '7 15 * * *'  # 16:07 in Paris in winter time (CET, UTC+1)
-    - cron: '37 15 * * *' # 16:37, backup
+    - cron: '7,22,37,52 14 * * *' # 16:07–16:52 in Paris in summer time (CEST, UTC+2)
+    - cron: '7,22,37,52 15 * * *' # 16:07–16:52 in Paris in winter time (CET, UTC+1)
 
 permissions:
   actions: write
@@ -43,8 +43,10 @@ jobs:
     env:
       REPO: ${{ github.repository }}
     steps:
-      # A scheduled run can start late, so the decision is taken on which cron
-      # fired and on Paris's offset that day, not on the clock at start.
+      # A scheduled run acts on the Paris clock when it starts. GitHub starts
+      # them late, sometimes by most of an hour, so 17:xx still counts; a slot
+      # of the other UTC hour (15:xx Paris in winter, 17:xx in summer for the
+      # 15 UTC line) is before 16:00 or finds the variable already false.
       - name: Decide
         id: decide
         env:
@@ -54,17 +56,14 @@ jobs:
           CURRENT: ${{ vars.RENDER_TRANSCRIPTS }}
         run: |
           if [ "$EVENT" = schedule ]; then
-            offset=$(TZ=Europe/Paris date +%z)
-            case "$offset|$SCHEDULE" in
-              "+0200|7 14 * * *"|"+0100|7 15 * * *") value=false ;;
-              "+0200|37 14 * * *"|"+0100|37 15 * * *")
-                if [ "$CURRENT" = false ]; then
-                  echo "Backup run: RENDER_TRANSCRIPTS is already false, the 16:07 run did its work."; value=
-                else
-                  value=false
-                fi ;;
-              *) echo "Not 16:xx in Paris for « $SCHEDULE » (offset $offset): nothing to do."; value= ;;
-            esac
+            hour=$(TZ=Europe/Paris date +%H)
+            if [ "$hour" != 16 ] && [ "$hour" != 17 ]; then
+              echo "Not 16:00–17:59 in Paris ($(TZ=Europe/Paris date +%H:%M), « $SCHEDULE »): nothing to do."; value=
+            elif [ "$CURRENT" = false ]; then
+              echo "RENDER_TRANSCRIPTS is already false: nothing to do."; value=
+            else
+              value=false
+            fi
           else
             value=$INPUT
           fi
