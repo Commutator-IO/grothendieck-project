@@ -74,7 +74,7 @@ const HATCH = 'repeating-linear-gradient(135deg, var(--color-relu-500) 0 1.6px, 
 const LABEL: Record<FolderState, string> = {
   here: 'transcribed here',
   community: 'edited by the community',
-  untouched: 'untouched',
+  untouched: 'in progress',
 };
 
 /** Canvas height, in the same units as the width of 100. */
