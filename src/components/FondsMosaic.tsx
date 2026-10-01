@@ -1,5 +1,7 @@
 import { useMemo, useState } from 'react';
 import { BY_ID, COTES, GROUPS } from '../content/catalogue.ts';
+import { FINDINGS } from '../content/findings.ts';
+import { THEOREM_LINKS } from '../content/theorem-links.ts';
 import { batchCount } from '../lib/batches.ts';
 import type { Cote } from '../lib/types.ts';
 
@@ -44,6 +46,23 @@ interface Cell {
   w: number;
   h: number;
 }
+
+/**
+ * Where the mathematics is, over where the work is (#29): the same two marks as
+ * the Lean appendix. A blue lozenge on a folder whose proved statement bears on
+ * a theorem of the Timeline; a red one on a folder with open candidates on the
+ * Findings tab — statements that may not be in the literature, not established.
+ */
+const OPEN = new Map<string, number>();
+for (const f of FINDINGS)
+  if (f.kind === 'mathematical' && (f.status === 'candidate' || f.status === 'unsearched'))
+    OPEN.set(f.cote, (OPEN.get(f.cote) ?? 0) + 1);
+const CIRCLED = ['', '①', '②', '③', '④', '⑤', '⑥', '⑦', '⑧', '⑨', '⑩', '⑪', '⑫'];
+const Lozenge = ({ color }: { color: string }) => (
+  <svg viewBox="0 0 10 10" className="h-[12px] w-[12px]" aria-hidden="true">
+    <path d="M5 0.6 9.4 5 5 9.4 0.6 5Z" fill={color} stroke="#fff" strokeWidth="1" />
+  </svg>
+);
 
 const FILL: Record<FolderState, string> = {
   here: 'var(--color-brand-500)',
@@ -260,6 +279,20 @@ export function FondsMosaic({
             modernised as well
           </li>
         )}
+        <li className="flex items-center gap-1.5">
+          <Lozenge color="var(--color-brand-600)" />a proved statement bears on a theorem of the{' '}
+          <a href="/timeline/#works" className="underline decoration-ink-300 underline-offset-2 hover:text-ink-800">
+            Timeline
+          </a>
+        </li>
+        <li className="flex items-center gap-1.5">
+          <Lozenge color="var(--color-alerte-500)" />
+          open candidates on{' '}
+          <a href="/findings/" className="underline decoration-ink-300 underline-offset-2 hover:text-ink-800">
+            Findings
+          </a>
+          , not established
+        </li>
       </ul>
 
       {/* The black ground is the rules: every block is inset, so what shows
@@ -324,6 +357,12 @@ export function FondsMosaic({
                 className="relative block h-full w-full"
                 style={{ background: c.modern ? `${HATCH}, ${FILL[c.state]}` : FILL[c.state] }}
               >
+                {(THEOREM_LINKS[c.cote.id] || OPEN.has(c.cote.id)) && (
+                  <span className="absolute right-[3px] top-[3px] flex gap-[2px]">
+                    {THEOREM_LINKS[c.cote.id] && <Lozenge color="var(--color-brand-600)" />}
+                    {OPEN.has(c.cote.id) && <Lozenge color="var(--color-alerte-500)" />}
+                  </span>
+                )}
                 {big && (
                   <span
                     className="tabular absolute bottom-[2px] left-1 text-[9px] font-semibold leading-none"
@@ -350,6 +389,10 @@ export function FondsMosaic({
             <span className="tabular">
               {hover.cote.pages} pages · {hover.batches} {hover.batches === 1 ? 'batch' : 'batches'}
               {hover.modern && ' · modernised'}
+              {THEOREM_LINKS[hover.cote.id] &&
+                ` · bears on theorem ${THEOREM_LINKS[hover.cote.id].map((n) => CIRCLED[n]).join(' ')} of the Timeline`}
+              {OPEN.has(hover.cote.id) &&
+                ` · ${OPEN.get(hover.cote.id)} open candidate${OPEN.get(hover.cote.id) === 1 ? '' : 's'} on Findings`}
             </span>
           </p>
         ) : (
