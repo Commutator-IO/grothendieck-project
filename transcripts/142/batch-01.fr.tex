@@ -1,0 +1,352 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 142, batch 1 (pages 1-20).
+% Established from the facsimile archives/batches/142/batch-01.pdf (cover sheet
+% excluded; batch page 1 = archivists' page 1), per the skill
+% transcribe-grothendieck.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-02 — first pass, unchecked against the pages by a human.
+%
+% Page 1 is a cover in his hand (« Catégories de Galois-Teichmüller d'un corps
+% alg. clos. », with a pencilled « 19 pages »); its words become the section
+% heading and it has no \page{}. Pages 2-20 are his run numbered 1-10, a single
+% essay. His leaves are out of order in the scan: the text runs p. 3 -> p. 5 ->
+% p. 4 -> p. 6 (recorded in \note{}s).
+%
+% Contents, in outline:
+%   Pages 2-7   — the isotopy category of oriented topological surfaces of finite
+%                 type with finite étale maps; Prop. 1 (isotopic maps differ by an
+%                 automorphism isotopic to the identity), Prop. 2 (anabelian case:
+%                 a finite-order automorphism isotopic to id is id), Corollaries
+%                 1-3 (torsors under A°_X, contractible components, finite
+%                 stabilisers of the Teichmüller group T_X).
+%   Pages 8-13  — profinite completion of Hom_ét (12); axiomatic version: a
+%                 category with profinite Aut groups, condition (*) (16), the
+%                 completion C_0 -> \hat C_0 (17), factorisation (19) and the
+%                 composition (21)-(22).
+%   Pages 14-16 — the Teichmüller-Galois category of an algebraically closed
+%                 field k, functorial in k; the « programme » for k = Qbar.
+%   Pages 17-20 — the missing « bouchage de trous » morphisms (23)-(25) and why
+%                 they do not fit the profinite picture.
+%
+% Notation fixed for the batch: A_X, A°_X the homeomorphism group of X and its
+% subgroup isotopic to id; T_X = A_X/A°_X; \widehat{Hom}_ét; C_0, \hat C_0;
+% \chi_! for the Euler characteristic with compact support; (g,\nu) genus and
+% number of holes.
+%
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{142}
+\batch{1}
+\pages{1}{20}
+\foldertitle{Action de Galois sur Teichmüller : notes manuscrites (s.d.).}
+\dating{[à partir de 1978]}
+\watermark{Édition de démonstration}
+
+\begin{document}
+
+\section{Catégories de Galois-Teichmüller d'un corps alg. clos.}
+\note{titre de sa main, seul en haut d'un feuillet par ailleurs blanc (p.~1), qui sert de chemise aux pages suivantes ; une mention au crayon « 19 pages » figure dans l'angle}
+
+\page{2}
+\note{p.~1 de sa main}
+Soient $X$ et $Y$ deux surfaces topologiques \add{(connexes pour simplifier)} orientées « de type fini » (i.e. déduites de surfaces compactes en enlevant un ens. fini de points). On considère
+\[
+  (1)\qquad \mathrm{Hom}_{\mathrm{isot}}(X,Y)=\text{ensemble des composantes connexes}
+\]
+\add{par arcs} de l'espace des applications finies étales de $X$ dans $Y$ \struck{\uncertain{respectant} l'orientation}. Si $f$ et $g$ sont deux applications finies étales de $X$ dans $Y$, \add{sont isotopes i.e.} alors $f$ et $g$ définissent la \struck{même application} \add{même} \uncertain{flèche} de $X$ dans $Y$ dans la cat. isotopique, ssi nous pouvons trouver une application continue \uncertain{homotopie} \struck{$F$ de $X\times I$}
+\[
+  (2)\qquad F\colon X\times I\longrightarrow Y\times I,\qquad I=[0,1]
+\]
+commutant aux projections sur $I$, et telle que
+\[
+  (3)\qquad F(x,0)=(f(x),0),\qquad F(x,1)=(g(x),1)\qquad\forall x\in X .
+\]
+Comme le foncteur
+\[
+  Y'\longmapsto Y'\times I
+\]
+des rev. finis étales de $Y$ vers les rev. finis étales de $Y\times I$ est pl. fidèle, on voit qu'il \struck{existe} pour $F$ donné, il doit exister un rev. fini étale $Y'$ de $Y$, unique à isom. unique près, et un homéom.
+\[
+  (4)\qquad \alpha\colon X\times I\xrightarrow{\ \sim\ }Y'\times I
+\]
+rendant commutatif le diagramme
+
+\begin{tikzcd}
+X\times I \arrow[rr, "\alpha\,\sim"] \arrow[dr, "F"'] & & Y'\times I \arrow[dl, "p\times\mathrm{id}_{I}"] \\
+ & Y\times I &
+\end{tikzcd}
+
+\note{diagramme (5) ; en marge : « où $p\colon Y'\to Y$ est la projection »}
+
+
+\page{3}
+En d'autres termes, on a $f\overset{\text{isot.}}{\sim}g$ ssi il existe un rev. \add{fini} étale (unique à isom. unique près) $Y'$ de $Y$, de telle façon que l'on ait
+\[
+  (6)\qquad f=pf_{0},\qquad g=pg_{0}\qquad (p\colon Y'\to Y\ \text{la projection}),
+\]
+où
+\[
+  (7)\qquad f_{0}\colon X\xrightarrow{\ \sim\ }Y',\qquad g_{0}\colon X\xrightarrow{\ \sim\ }Y'
+\]
+sont des homéomorphismes de $X$ sur $Y'$ qui sont isotopes, ou ce qui revient au même, tels que l'on ait
+\[
+  (8)\qquad g_{0}=f_{0}\circ u,
+\]
+où
+\[
+  (9)\qquad u\colon X\xrightarrow{\ \sim\ }X
+\]
+est un homéom. de $X$ sur lui-même isot. à l'identité. On aura donc, par (6) et (8),
+\[
+  g=pg_{0}=p(f_{0}\circ u)=(pf_{0})u=f\circ u .
+\]
+Donc on trouve
+
+\textbf{Proposition 1.} Pour que deux \struck{applications} \add{morphismes} finis étales $f,g\colon X\to Y$ soient isotopes, il faut et suffit qu'ils soient conjugués sous le groupe des automorphismes de $X$ isotopes à l'identité ; i.e. $g=fu$, avec $u$ comme ci-dessus.
+\note{les mots « de $X$ isotopes : l'identité » sont répétés à la ligne suivante}
+
+Soit une \struck{classe} d'morphismes finis $X\to Y$ dans la catégorie isotopique (1), peut-on la
+\note{la phrase se poursuit à la page~5 (« factoriser canoniquement »), non à la page~4}
+
+
+\page{4}
+\note{p.~2 de sa main}
+(ce qui est toujours vrai, et \struck{dans} la \uncertain{notion} d'une \uncertain{sous-}\uncertain{groupe} de $\gamma$) on est \uncertain{ramené} au cas précédent, en \emph{\uncertain{remplaçant}} \uncertain{simplement} $Y'$ par $Y'\setminus S'$, où $S'$ est l'ens. fini des pts de ramification pour l'action de $\gamma$. \ill{} \uncertain{Si} p.\,ex. $Y'=\mathbb{C}^{*}$, ou $Y'=\mathbb{U}\times\mathbb{U}$
+\note{lecture de $\mathbb{U}\times\mathbb{U}$ incertaine}
+\ill{}, alors les translations, par des \uncertain{points} d'ordre fini, sont isotopes à l'identité, sans être \uncertain{nécessairement} égales à l'identité ! Mais \uncertain{on} \uncertain{a} \uncertain{ceci} :
+
+\textbf{Proposition 2.} Soit $Y'$ une surface orientée de t.f. \add{\uncertain{connexe}} (compacte -- \uncertain{un} nb fini de pts) \emph{anabélienne}, i.e. telle que pour \uncertain{toute} comp. connexe $Y'_{i}$ de $Y'$, on ait $\chi_{!}(Y'_{i})<0$ (i.e. on ait $2g_{i}+\nu_{i}\geq 3$, où $g_{i}$ est le genre de $Y'_{i}$ et $\nu_{i}$ le nb de trous…). Alors tout automorphisme \add{$\gamma$} d'ordre fini de $Y'_{i}$ qui est isotope à l'identité est l'identité.
+
+Comme $\gamma$ \uncertain{respecte} les composantes connexes, \uncertain{on} \uncertain{peut} \uncertain{supposer} $Y'$ connexe. En fait, il suffit que $\gamma$ opère trivialement sur \add{les} \uncertain{$H_{1}$} \add{\uncertain{\ill{}}} (à coefficients dans $\mathbb{Z}$, ou dans $\mathbb{Z}/n\mathbb{Z}$ avec $n\geq 3$) pour
+
+
+\page{5}
+\note{suite directe de la page~3 ; la page~4 (sa p.~2) fait suite à celle-ci}
+factoriser \emph{canoniquement} en
+\[
+  (10)\qquad X\xrightarrow[\ \sim\ ]{\ f_{0}\ }Y'\xrightarrow{\ p\ }Y
+\]
+où $Y'$ est un rev. étale fini de $Y$, défini à isom. unique près, et où $X\xrightarrow{\sim}Y'$ est un isom. dans la cat. isotopique — i.e. une classe d'isotopie d'homéomorphismes ? Bien sûr, si on \uncertain{se} \uncertain{borne} à \uncertain{exiger} \uncertain{l'existence} \uncertain{seule}, la factorisabilité (10) de $f$ est triviale — il suffit de prendre un représentant quelconque de $f$. \struck{Plus} Pour préciser la \struck{question} condition d'unicité, on est amené à se poser la question \struck{\ill{}} si pour \uncertain{tout} $Y$-automorphisme $\gamma$ de $Y'$ \struck{\ill{} le \ill{} qui \ill{} soit} — l'implication
+\[
+  (11)\qquad (\gamma f_{0}\sim f_{0})\Longrightarrow\gamma=\mathrm{id}_{Y'}\ ?
+\]
+(\uncertain{Rappel} : isot. près !)
+
+Dans cette question, on peut bien sûr supposer $f_{0}=\mathrm{id}$, donc la question est si un automorphisme $\gamma$ d'ordre fini d'une surface orientée $Y'$ de type fini, qui est isotope à l'identité, est l'identité. La condition supplémentaire, que $Y'\to Y$ est fini étale, signifie aussi, \uncertain{en} \uncertain{outre}, que $\gamma$ opère via une opération \emph{libre} de $\mathbb{Z}/n\mathbb{Z}$ (\uncertain{où} $n$ \uncertain{est} \uncertain{l'ordre} de $\gamma$) — mais on admettant que si $\gamma$ \add{(automorphisme d'ordre fini)} n'est pas l'identité, ses pts fixes sont isolés,
+
+
+\page{6}
+que $\gamma$ soit l'identité. Pour le voir, on peut supposer que $\gamma$ laisse invariante une structure de courbe algébrique (de type $(g,\nu)$ anabélienne) sur $X$. Il suffit que l'on ait $2g+\nu\geq 2$\note{lecture du signe et de la borne incertaine}, i.e. que $X$ se plonge dans une jacobienne \uncertain{généralisée}, ext. d'une VA par un tore, par \uncertain{l'hypothèse} \uncertain{homologique} \ill{} que $\gamma$ induit une \emph{translation} sur cette jacobienne, \uncertain{d'ordre} fini de la jacobienne \uncertain{homogène}. Il faut donc voir que $X$ plongé dans sa jacobienne \uncertain{n'est} \uncertain{stable} par aucune \struck{\ill{}} translation \uncertain{non} nulle, dans le cas anabélien — c'est là un fait bien connu… [Sûrement, il ne doit pas être difficile de trouver une démonstr. directe purement topologique de la proposition précédente…]
+
+Notons maintenant que si $Y$ est une surface \add{top.} anabélienne, tout revêtement étale fini l'est aussi. On trouve donc le
+
+\textbf{Corollaire 1.} \struck{Proposition 3} Soient $X$, $Y$ \struck{deux} comme plus haut, \add{$Y$ anabélienne}. Alors toute classe isotopique de morphismes finis étales de $X$ dans $Y$ est un \emph{torseur} à droite sous le groupe $A^{\circ}_{X}$ des automorphismes de $X$ isotopes à l'identité.
+
+Compte tenu de la proposition~1, il reste
+
+\page{7}
+\ill{} pourvu que si $f\colon X\to Y$ fait de $X$ un rev. fini étale de $Y$ et si $u\in A^{\circ}_{X}$ est tel que $f=f\circ u$, i.e. $u$ est un $Y$-morphisme, alors $u=\mathrm{id}$. Mais c'est ce qu'affirme la prop.~2.
+
+\textbf{Corollaire 2.} Les composantes connexes de l'espace des morphismes finis étales $X\to Y$ sont contractiles.
+
+\textbf{Corollaire 3.} \struck{L'ens. des \ill{} $\mathrm{Hom}_{\mathrm{ét}}(X,Y)$ est} L'opération à droite \add{\uncertain{étale}} du \struck{\ill{}} groupe de Teichmüller (non orienté) $T_{X}=A_{X}/A^{\circ}_{X}$ sur l'ens. $\mathrm{Hom}_{\mathrm{ét}}(X,Y)$ des « morphismes étales » de $X$ dans $Y$ \struck{a des \ill{}} a des stabilisateurs finis : des sous-groupes finis de $T_{X}$ ; plus précisément, le stabilisateur de $f$ s'identifie au \struck{groupe} \add{groupe} \struck{\ill{}} des $Y$-automorphismes du rev. fini étale \uncertain{$Y'_{f}$} défini par $f$. L'ensemble des orbites de $T_{X}$ opérant sur $\mathrm{Hom}_{\mathrm{ét}}(X,Y)$ \struck{\ill{}} \add{est en} \add{bij.} \add{avec} \struck{$R_{X}(Y)$} $R_{X}(Y)$, l'ens. des classes d'isom. de revêtements finis étales de $Y$, homéomorphes à $X$. [L'ens. des orbites de $T^{+}_{X}$ est en corr. biunivoque avec l'ens. $R_{X}(Y)\times\{\pm1\}$, le signe $+$ correspondant aux classes de morphismes finis étales $X\to Y$
+\marginal{NB $T_{X}$ \ill{} $\mathrm{Out}$ \ill{} $\pi_{X}$ \uncertain{pour} \ill{} s'identifie \ill{} \ill{} !! (\ill{} \uncertain{profini} \ill{} \uncertain{vécu}…)}
+\marginal{NB cet ens. d'orbites est \uncertain{fini}}
+\note{les deux notes marginales sont écrites en biais dans la marge gauche ; la première est en grande partie illisible}
+
+\page{8}
+\note{p.~4 de sa main}
+qui conservent resp. renversent l'orientation, i.e. $\mathrm{Hom}^{+}_{\mathrm{ét}}(X,Y)$ et $\mathrm{Hom}^{-}_{\mathrm{ét}}(X,Y)$.]
+
+\struck{Supposons maintenant}
+
+\textbf{Scholie.} Par la composition induite sur les $\mathrm{Hom}^{+}_{\mathrm{ét}}(X,Y)$, les surfaces topologiques orientées \struck{\ill{}} (\uncertain{compactes} de t.f. et \ill{}) forment une catégorie, la « catégorie topologique orientée des \ill{} ». \struck{La catégorie \ill{} est équivalente \ill{} $X$ et $Y$ \ill{}} \add{\ill{} catégorie-groupoïde} des triplets $(X,Y,f)$ des deux surfaces \struck{\ill{}} $X$, $Y$ et de $f\in\mathrm{Hom}^{+}_{\mathrm{ét}}(X,Y)$ et celle des \struck{\ill{}} quadruplets $(X,Y,Y',f_{0})$, où $X$ et $Y$ sont \uncertain{itou}, $Y'$ un rev. étale fini de $Y$, et $f_{0}$ est une donnée d'isotopie entre \ill{} orientés de $X$ et $Y'$, i.e. $f_{0}\in\mathrm{Isom}^{+}_{\mathrm{ét}}(X,Y')$.
+\marginal{[\ill{} \ill{} d'ailleurs \ill{} \ill{} $\widehat{\mathrm{Hom}}$ est \ill{} \ill{}…]}
+
+Posons maintenant
+\[
+  (12)\qquad \widehat{\mathrm{Hom}}_{\mathrm{ét}}(X,Y)=\mathrm{Hom}_{\mathrm{ét}}(X,Y)\wedge^{T_{X}}\widehat{T}_{X}
+\]
+\marginal{muni de la topologie d'espace compact}
+\marginal{compactifié profini}
+\marginal{Pour la suite, on laisse tomber le $+$ dans les notations — tous les morphismes étales \uncertain{considérés} conservant l'orientation.}
+On définit une composition
+\[
+  (13)\qquad
+  \begin{cases}
+    \widehat{\mathrm{Hom}}_{\mathrm{ét}}(X,Y)\times\widehat{\mathrm{Hom}}_{\mathrm{ét}}(Y,Z)\longrightarrow\widehat{\mathrm{Hom}}_{\mathrm{ét}}(X,Z)\\
+    \qquad (u,v)\longmapsto v\circ u
+  \end{cases}
+\]
+\uncertain{continue}
+
+\page{9}
+satisfaisant à la propriété d'associativité évidente, par prolongement par continuité à partir de l'associativité au niveau des $\mathrm{Hom}$ \struck{la construction \ill{} dans \ill{}}.
+
+\textbf{Version axiomatique.}
+\marginal{Mérite d'être fait avec plus de soin !}
+Une catégorie $C$ est dite « \struck{à $\mathrm{Hom}$ profinis} : \struck{les \ill{}} \add{à groupes d'automorphismes} profinis » si pour tout $X\in C$, $\mathrm{Aut}\,X$ est muni d'une structure de groupe profini, de telle façon que pour $u\colon X\to Y$ dans $C$, les stabilisateurs dans $\mathrm{Aut}_{C}(X)\times\mathrm{Aut}_{C}(Y)$ \struck{\ill{}} des $u\in\mathrm{Hom}_{C}(X,Y)$ \struck{opérant par \ill{} $\mathrm{Aut}_{C}(Y)$ ($g,f$) $u\mapsto guf^{-1}$, \ill{}} soient des sous-groupes fermés. \struck{\ill{}} On munit alors $\mathrm{Hom}(X,Y)$ \uncertain{comme réunion} \ill{} d'orbites sous $\mathrm{Aut}(X)\times\mathrm{Aut}(Y)$ \ill{}, de la topologie profinie quotient \uncertain{sur} les orbites, et de la topologie \add{\uncertain{discrète}} \ill{} sur l'ensemble des orbites, de sorte que $\mathrm{Hom}(X,Y)$ devient un espace loc. compact. J'\struck{\ill{}} \add{veux} que l'application
+\[
+  (14)\qquad
+  \begin{cases}
+    \mathrm{Hom}(X,Y)\times\mathrm{Hom}(Y,Z)\longrightarrow\mathrm{Hom}(X,Z)\\
+    \qquad (u,v)\longmapsto vu
+  \end{cases}
+\]
+soit \struck{\ill{}} une \struck{\ill{}} application continue. Il suffit de le voir \add{pour $u$, $v$ fixés,} sur le produit d'orbites, \ill{} que l'application
+\[
+  (g,f,g',f')\longmapsto (g'vf'^{-1})\circ(guf^{-1}),
+\]
+\[
+  \mathrm{Aut}(Y)\times\mathrm{Aut}(X)\times\mathrm{Aut}(Z)\times\mathrm{Aut}(Y)\longrightarrow\mathrm{Hom}(X,Z)
+\]
+
+\page{10}
+\note{p.~5 de sa main}
+est continue. Il revient au même que l'application
+\[
+  (15)\qquad \mathrm{Aut}(Y)\longrightarrow\mathrm{Hom}(X,Z),\qquad \varphi\longmapsto v\varphi u
+\]
+soit continue.
+
+Considérons \struck{alors et} le stabilisateur $G_{u}$ de $u\in\mathrm{Hom}(X,Y)$ dans $\mathrm{Aut}(X)\times\mathrm{Aut}(Y)$,
+\[
+  G_{u}\subset\mathrm{Aut}(X)\times\mathrm{Aut}(Y),\qquad
+  G_{u}=\{\psi,\varphi \mid \varphi u\psi^{-1}=u \text{ i.e. } \varphi u=u\psi\},
+\]
+c'est un sous-groupe fermé de $\mathrm{Aut}(X)\times\mathrm{Aut}(Y)$, et l'application composée
+\[
+  G_{u}\xrightarrow{\ \mathrm{pr}_{2}\ }\mathrm{Aut}(Y)\longrightarrow\mathrm{Hom}(X,Z)
+\]
+n'est autre que $(\psi,\varphi)\mapsto v\varphi u=vu\psi$, qui est donc continue, par construction de la top. de $\mathrm{Hom}(X,Z)$. Donc l'application $\mathrm{Aut}(Y)\to\mathrm{Hom}(X,Z)$ est continue sur l'image $H_{u}\subset\mathrm{Aut}(Y)$ \add{de $G_{u}$} (car la top. de cette image est quotient de celle de $G_{u}$), \add{donc aussi} sur ses translatés $\alpha_{i}H_{u}$ ($\alpha_{i}\in\mathrm{Aut}(Y)$), grâce à \add{\ill{}} cette image, \ill{} l'on aura \struck{\ill{}}
+\[
+  v(\alpha_{i}\varphi)u=v\alpha_{i}u\psi .
+\]
+\marginal{NB $H_{u}$ est un sous-groupe fermé de $\mathrm{Aut}(Y)$, donc il est ouvert ssi il est d'indice fini…}
+La continuité de (15), donc de (14), \uncertain{est assurée}, si on fait l'hypothèse :
+
+(16) $(*)$ Pour toute flèche $u\colon X\to Y$ dans $C$, l'image dans $\mathrm{Aut}_{C}(Y)$ du groupe $G_{u}$ des couples \ill{} \add{\uncertain{fixant} $u$} est un sous-groupe d'indice fini de $\mathrm{Aut}(Y)$.
+\marginal{NB l'hypothèse (16) dit que \uncertain{dans} $\mathrm{Hom}(X,Y)$, \struck{les} les orbites \uncertain{sous} $\mathrm{Aut}(X)$ sont \uncertain{ouvertes} \add{\uncertain{dans} \ill{}} \ill{} $\mathrm{Aut}(X)\times\mathrm{Aut}(Y)$, et sont \uncertain{réunion finie} d'orbites \ill{} telles…}
+
+\page{11}
+Soit maintenant $C_{0}$ une catégorie (\uncertain{sans} données topologiques préalables sur $C_{0}$), telle que la satisfasse la condition $(*)$ (condition qui ne fait pas usage des données topologiques). Je dis qu'on peut alors trouver une solution au \uncertain{pb} \ill{} universel \ill{} $C_{0}$, par un foncteur de $C_{0}$ dans une catégorie $C$ « \uncertain{essentiellement} profinie »
+\marginal{devrait \uncertain{suffire}}
+[i.e. où les $\mathrm{Hom}(X,Y)$ sont des espaces loc. compacts, les \uncertain{compositions} continues pour la topologie, les $\mathrm{Aut}_{C}(X)$ \uncertain{munis} de la topologie induite par $\mathrm{Hom}(X,X)\times\mathrm{Hom}(X,X)$ — \ill{} $\mathrm{Aut}(X)\simeq\{(u,v)\mid uv=\mathrm{id},\ vu=\mathrm{id}\}$ — des groupes profinis, et les orbites des $\mathrm{Aut}(X)\times\mathrm{Aut}(Y)$ dans $\mathrm{Hom}_{C}(X,Y)$ sont ouvertes…], on prend \uncertain{pour} $\widehat{C}_{0}$ \struck{\ill{}} « complétion profinie » \ill{} la catégorie \ill{} ayant les objets de $C_{0}$, et en prenant
+\[
+  (17)\qquad \mathrm{Hom}_{\widehat{C}_{0}}(X,Y)=\mathrm{Hom}_{C_{0}}(X,Y)\wedge^{\mathrm{Aut}(X)\times\mathrm{Aut}(Y)^{\circ}}\bigl(\widehat{\mathrm{Aut}}(X)\times\widehat{\mathrm{Aut}}(Y)\bigr)
+\]
+\[
+  \simeq\ \mathrm{Hom}_{C_{0}}(X,Y)\wedge^{\mathrm{Aut}(X)}\widehat{\mathrm{Aut}}(X)
+\]
+\marginal{avec la top. d'espace \uncertain{compact}…}
+\note{le signe $\simeq$ est écrit verticalement, sous $\mathrm{Hom}_{\widehat{C}_{0}}$, avec un « $\mathrm{fl}$ » ou « $\mathrm{r}$ » peu clair au-dessus}
+\struck{\ill{}}
+d'après le \uncertain{composé} des morphismes de $\widehat{C}_{0}$ se définit ad hoc (de façon unique, d'ailleurs, en exigeant la continuité de la composition, et qu'elle prolonge celle donnée sur $C_{0}$). Par construction, \uncertain{tout} $\widehat{C}_{0}$-morphisme
+
+\page{12}
+\note{p.~6 de sa main}
+Revenons au cas de la catégorie isotopique des surfaces orientées \struck{de t.f.} \add{\uncertain{anabéliennes}}, il lui est donc associé une catégorie « complétée profinie », \struck{où les $\mathrm{Hom}$ \ill{}} \add{définis par} (12) — où les $\widehat{\mathrm{Hom}}$ sont des esp. topologiques compacts totalement discontinus — en fait, ce sont des espaces loc. compacts dénombrables à l'infini, totalement discontinus, \uncertain{métrisables} — toutes les qualités ! (Et pas un pt isolé, pas \uncertain{souvenir}…)
+
+Limitons-nous maintenant au cas de surfaces $X$ qui sont munies d'une structure de courbe alg. complexe, compatible avec sa topologie. Alors les morphismes entre telles $X$, au sens de $\widehat{\mathrm{Hom}}_{\mathrm{ét}}$, et leur composition, définis ici ne utilisent en fait essentiellement que la topologie des corps des complexes $\mathbb{C}$. \uncertain{Considérant} d'\ill{} \ill{} \uncertain{les courbes} \ill{} \uncertain{quasi-projectives} sur $\mathbb{C}$ \uncertain{des} surfaces topologiques orientées (de t.f.), pouvant en dire des façons purement algébro-géométriques, indépendamment de cette topologie de $\mathbb{C}$. \uncertain{Par} \ill{}, \ill{}). Pour la
+
+
+\page{13}
+\[
+  (18)\qquad \hat{f}\colon X\longrightarrow Y
+\]
+se factorise en
+\[
+  (19)\qquad X\xrightarrow[\ \sim\ ]{\ \hat{f}_{0}\ }Y'\xrightarrow{\ u\ }Y
+\]
+où $u$ est un $C_{0}$-morphisme, et $\hat{f}_{0}$ un $\widehat{C}_{0}$-\emph{isomorphisme} (NB $Y'$ est un objet $C_{0}$-isom. à $X$), et où $u$ est un morphisme de $C_{0}$. Dans le cas où on \uncertain{sait que}, pour toute flèche $u\colon Y'\to Y$ dans $C_{0}$,
+\[
+  \mathrm{Aut}_{Y}(Y')\longrightarrow\mathrm{Aut}(Y')\longrightarrow\mathrm{Aut}(Y')^{\wedge}
+\]
+est \emph{injectif}, on voit que $Y'$ est déterminé à $Y$-isomorphisme unique près \struck{\ill{}}. \add{\uncertain{Il en résulte}} \struck{plus, pour} \uncertain{composons} deux morphismes $\hat{f}$ et $\hat{g}$ ainsi, $\hat{f}=u\hat{f}_{0}$ et $\hat{g}=v\hat{g}_{0}$,
+\[
+  (20)\qquad Y\xrightarrow[\ \sim\ ]{\ \hat{g}_{0}\ }Z'\xrightarrow{\ v\ }Z,
+\]
+et \uncertain{la mettre sous la forme} \ill{}, on \uncertain{applique} $\hat{g}_{0}\colon Y\xrightarrow{\sim}Z'$ (un $\widehat{C}_{0}$-iso.) par $\hat{w}$
+\marginal{NB La factorisation (19) \ill{} \uncertain{canonique} \ill{} si \ill{} ($C_{0}\to\widehat{C}_{0}$ \ill{} \uncertain{sur les} $\mathrm{Isom}$ \ill{}…) Tout $\hat{f}_{0}$ \ill{} $C_{0}$-iso \ill{} \uncertain{limite} de \ill{} $\mathrm{Isom}_{\widehat{C}_{0}}(X,Y)\simeq\mathrm{Isom}_{C_{0}}(X,Y)\wedge^{\mathrm{Aut}_{C_{0}}(X)}\widehat{\mathrm{Aut}}_{C_{0}}(X)$, $\mathrm{Aut}_{\widehat{C}_{0}}(X)\simeq\widehat{\mathrm{Aut}}_{C_{0}}(X)$ \ill{}}
+
+\begin{tikzcd}[column sep=small, row sep=small, nodes={font=\scriptsize}]
+ & & Y' \arrow[r, "u"] & Y \arrow[dr, "w"] & & \\
+X \arrow[r, "\hat{f}_{0}\,\sim"] & Y' \arrow[r, "u"'] \arrow[ur, "\hat{\varphi}^{\prime}"] & Y \arrow[ur, "\hat{\varphi}"] \arrow[rr, "\hat{g}_{0}\,\sim"] & & Z' \arrow[r, "v"'] & Z
+\end{tikzcd}
+
+\note{diagramme (21) ; la flèche $Y\to Z'$ de la ligne du haut porte une étiquette lue $w$ (il écrit peut-être $\hat{w}$)}
+
+(ce qui est possible, puisque $\hat{H}_{u}$ est ouvert dans $\widehat{\mathrm{Aut}}_{C_{0}}(Y)$) avec
+\[
+  \hat{g}_{0}=w\hat{\varphi},\qquad \hat{\varphi}\in\hat{H}_{u}\subset\widehat{\mathrm{Aut}}_{C_{0}}(Y)
+\]
+et en choisissant $\hat{\varphi}'\in\widehat{\mathrm{Aut}}(Y')$ tel qu'on ait $\hat{\varphi}u=u\hat{\varphi}'$, donc on aura
+\[
+  (22)\qquad \hat{g}\hat{f}=(v\hat{g}_{0})(u\hat{f}_{0})=(vw\hat{\varphi})(u\hat{f}_{0})=\underbrace{(vwu)}_{\in\,\mathrm{Fl}\,C_{0}}\underbrace{(\hat{\varphi}'\hat{f}_{0})}_{\in\,\mathrm{Fl\,iso.}(\widehat{C}_{0})}
+\]
+\marginal{NB Il faut \uncertain{expliciter} \struck{\ill{}} \add{\ill{}} $\widehat{C}_{0}$ \ill{} morphismes \ill{} \uncertain{savoir} \ill{} \uncertain{relation} \ill{} de telle façon que \ill{} — \ill{} $\hat{g}_{0}=w\hat{\varphi}$ signifie \ill{} $(\hat{\varphi}',\hat{\varphi})\in\hat{G}_{u}$, $G_{u}\subset\mathrm{Aut}(X)\times\mathrm{Aut}(Y)$ \uncertain{stabilisateur} de $u$ \ill{}}
+\note{les deux notes marginales sont écrites en biais, serrées, et pour la plupart illisibles}
+
+
+\page{14}
+\note{p.~7 de sa main}
+voir, on voit que la description (19) \add{\uncertain{dans} $\widehat{C}_{0}$} d'un $\widehat{C}_{0}$-morphisme (18), $Y'$ est un revêtement (topologique) étale fini, qui provient canoniquement d'un rev. étale fini algébrique, grâce à $\hat{f}_{0}$, ne \uncertain{prend} \add{l'intérieur des points} (au « \uncertain{classe} de \uncertain{domaines} ») comme un « isomorphisme » \struck{\ill{}} \add{\uncertain{entre}} des points à coefficients dans $\mathbb{C}$ \ill{} d'une multiplicité \uncertain{modulaire} convenable, \ill{}, au sens des groupoïdes fondamentaux de celle-ci. Il en résulte, \ill{} la description (21), que la composition des morphismes dans $\widehat{C}_{0}$ s'explicite en termes de compositions de morphismes, d'une part dans le groupoïde fondamental de la multiplicité modulaire, d'autre part pour les courbes \ill{} \ill{}, \ill{} étales finis entre courbes \ill{} pour ces morphismes. La construction de la catégorie « isotopique profinie » des courbes algébriques anabéliennes ad hoc de courbes alg. \uncertain{sur} $\mathbb{C}$ \ill{}, peut d'ailleurs se faire sur un corps alg. clos \struck{\ill{}} corps alg. clos $k$ \add{\uncertain{quelconque}} (pas besoin qu'il soit de car.~0 !), et cette catégorie dépend fonctoriellement de $k$,
+
+
+\page{15}
+pour les homomorphismes de corps, par des foncteurs, de « changement de base » pour $k\to k'$ \struck{essentiellement pl. fidèles} \add{\uncertain{des équivalences de cat.}} [mais \struck{essentiellement} surjectifs]. (Cela provient d'ailleurs du fait que le groupoïde fondamental de la multiplicité modulaire pertinente, ou d'une courbe alg. sur un corps alg. clos $k$, ne change pas \uncertain{par extension} $k\to k'$ des corps de base, \uncertain{tant que} $k'$ alg. clos) \struck{pour \ill{} il y \ill{}} \struck{si $k'\neq k$, des courbes \ill{}}.
+\marginal{Mais cela ne signifie pas que tous \uncertain{les} courbes alg. sur $k'$ soient isom. \uncertain{à} \ill{} \uncertain{provenant} de $k$ !}
+
+En particulier, le groupe des automorphismes de $k$ opère sur la catégorie précédente, que j'ai \uncertain{nommée} d'ailleurs la \emph{catégorie de Teichmüller -- Galois} associée à $k$. Les \struck{objets} classes d'iso. d'objets connexes de cette catégorie sont en corr.~1-1 avec les types (g,\,\uncertain{v}) de courbes anabéliennes ; les groupes d'automorphismes d'un objet sont essentiellement \ill{} \add{\uncertain{\ill{}}} (des compactifiés profinis des groupes \ill{} des \uncertain{mixtes}) des groupes de Teichmüller \uncertain{\ill{}} \uncertain{\ill{}}.
+\note{la fin de la page, sous « groupes de Teichmüller », est peu lisible ; un mot écrit au-dessus de la ligne, entre « essentiellement » et « des compactifiés », n'a pas été lu}
+
+
+\page{16}
+\note{p.~8 de sa main}
+Le fait d'avoir élargi le \emph{groupoïde} de Teichmüller -- Poincaré en la catégorie (qui n'est plus un groupoïde !) de Teichmüller -- Galois précédente, est une façon \struck{\ill{}} \add{\uncertain{naturelle}} pour relier entre eux \uncertain{des} courbes alg. relatifs à des types numériques (g,\,\uncertain{v}) différents. Une part essentielle du \uncertain{vaste} « programme à l'horizon » est la détermination de façon complète cette catégorie par voie « algébrique » (ni transcendante, ni de \uncertain{géométrie} algébrique !), \emph{avec les opérations} \uncertain{de} Galois\,-- Teichmüller \emph{dessus}, tout au moins dans le cas où $k=\overline{\mathbb{Q}}$, et aussi (dans une certaine mesure) lorsqu'on prend \uncertain{plus} $k=\overline{K}$, $K$ corps de type fini sur $\mathbb{Q}$, et qu'on se limite aux \struck{\ill{}} \uncertain{automorphismes} de $\overline{K}$ qui sont des $K$-automorphismes… (\uncertain{ou} $\mathbb{Q}$).
+\marginal{« algébrique » \uncertain{allant} plus loin \ill{} \uncertain{signifiant} ici : par des \uncertain{techniques} \ill{} topologiques des surfaces et des groupes profinis… \emph{\uncertain{combinatoire}} (\uncertain{conditions}) et de \ill{} de théorie des \ill{} des $\mathrm{Aut}\,k$}
+\note{la note marginale, écrite en biais dans la marge gauche, est très serrée ; sa lecture est en grande partie conjecturale}
+
+
+\page{17}
+Dans tout ceci, il reste cependant un type important de \struck{homo}morphismes, entre surfaces \add{top.} / \uncertain{complexes} \ill{} entre \uncertain{relatives} \uncertain{aux} courbes, qui n'a pas été pris en ligne de compte — savoir les morphismes d'inclusion \uncertain{ouverte}
+\[
+  (23)\qquad X=Y\setminus T\hookrightarrow Y
+\]
+correspondants : une opération de \emph{bouchage de trous}. Mais on est conséquent, pour élargir la catégorie en conséquence, pour \uncertain{pouvoir} comprendre les \uncertain{en} l'opération \uncertain{ensemble} \ill{} les morphismes étales finis, et d'inclusion ouverte (\uncertain{type} « bouchage de trous ») à \uncertain{envisager} des morphismes $X\to Y$ qui \uncertain{s'insèrent} \uncertain{dans} un diagramme commutatif
+\[
+  (24)\qquad
+  \begin{array}{ccc}
+    X & \hookrightarrow & \hat{X}\\
+    \downarrow & & \downarrow\\
+    Y & \hookrightarrow & \hat{Y}
+  \end{array}
+\]
+avec $\hat{X}\to\hat{Y}$ fini ramifié, $X\to Y$ \uncertain{lui-même} étale. Posant $S=\hat{X}\setminus X$, $T=\hat{Y}\setminus T$\note{sic : sans doute $T=\hat{Y}\setminus Y$}, on sait que
+\[
+  (25)\qquad S\supset\hat{X}\,|\,T
+\]
+\note{$\hat{X}\,|\,T$ désigne vraisemblablement l'image inverse de $T$ dans $\hat{X}$}
+les \uncertain{conditions} techniques \uncertain{provenant} du fait que l'on est obligé d'admettre que $\hat{X}/\hat{Y}$ puisse avoir des \uncertain{points} de ramification affectant non seulement \uncertain{une} \uncertain{partie} des pts de $S$ \uncertain{qui} \uncertain{sont} \uncertain{les} pts de $\hat{X}\,|\,T$, mais aussi un des pts de $S$ qui ne sont \emph{pas} dans $\hat{X}\,|\,T$.
+\note{les deux dernières lignes de la page sont serrées et écrites l'une sur l'autre ; leur lecture est incertaine}
+
+
+\page{18}
+\note{p.~9 de sa main}
+La notion d'isotopie raisonnable pour des tels morphismes (dans le contexte topologique), se trouve être équivalente : le \uncertain{groupe} \uncertain{dans} le groupe $\mathrm{Aut}^{\circ}(X)\times\mathrm{Aut}^{\circ}(Y)$ (où $\mathrm{Aut}^{\circ}(X)$ est interprété comme $\mathrm{Aut}(\hat{X},S)$, et $\mathrm{Aut}(Y)$ comme $\mathrm{Aut}(\hat{Y},T)$). L'ennui, c'est qu'il n'y a plus de factorisation \emph{canonique} d'un tel \uncertain{morphisme} d'isotopie \add{\uncertain{possibles}} \uncertain{des} morphismes $X\to Y$ (dont les éléments ($\subset$ transforment $S_{1}=S\setminus S_{0}$, où $S_{0}=\hat{X}\,|\,T$) en des parties \uncertain{variables} de $Y=\hat{Y}\setminus T$) en une \struck{\uncertain{suivie}} \add{\uncertain{classe} d'isotopie d'inclusions} isomorphisme isotopique \struck{\uncertain{suivi}} \add{ou plutôt} type « bouchage de trous » ; suivie d'un morphisme $Y'\to Y$, où $Y'$ est un morphisme fini \uncertain{topologiquement} \uncertain{maintenant} \uncertain{non} \uncertain{ramifié} \uncertain{en dehors} des \uncertain{pts} de ramification, \uncertain{en dessous} des points de $Y$ qui \emph{ne sont pas} déterminés par la classe seule). Pour cette raison, je ne vois plus comment \uncertain{interpréter} une telle classe, ou \uncertain{son} image dans un \struck{« \ill{} profini »} « complété profini » convenable, en termes de géométrie alg. « abstraite » sur $\mathbb{C}$,
+\note{page très corrigée par des insertions interlinéaires ; l'ordre de lecture de la phrase centrale est conjectural}
+
+
+\page{19}
+lorsque $X$ et $Y$ sont des courbes \emph{algébriques} anabéliennes sur $\mathbb{C}$.
+
+Pourtant, il \struck{doit être} \add{est} possible (tout au moins, sur un corps alg. \add{clos} quelconque), de définir un foncteur qui va du \emph{groupoïde} de Teichmüller des courbes de type (g,\,v), \uncertain{disons}, \uncertain{muni} d'un \uncertain{ensemble} $I$ de cardinal $\nu'\leq\nu$ de \uncertain{pts} \uncertain{marqués} \struck{dans} $\to$ \uncertain{indexés} par $I$, vers le \emph{groupoïde} de Teichmüller des courbes de type $(g,\nu-\nu')$, par « bouchage des trous en $I$ », \struck{\ill{}} \struck{dit}, si on \uncertain{veut} \uncertain{une} propriété de transitivité évidente, pour des bouchages de trous successifs. Mais je vois \uncertain{malaisément} \uncertain{comment} \uncertain{concilier} l'inclusion dans une notion commune de « morphisme d'inclusion », qui pourrait se composer avec les morphismes étales \ill{} dès \uncertain{présent} déjà dans la \emph{catégorie} (pas groupoïde !) de Galois -- Teichmüller. À moins d'y
+\note{la phrase se poursuit à la page~20, où s'achève ce développement}
+
+
+\page{20}
+\note{p.~10 de sa main}
+aller comme une source et des définitions une catégorie plus grosse que la cat. de Galois -- Teichmüller \uncertain{citée} : une de flèches plus \uncertain{gros}) par générateurs et relations convenables. Mais alors il devient problématique, quand le corps de base est le corps $\mathbb{C}$ des complexes, d'interpréter cette catégorie de Galois -- Teichmüller comme une « complétée profinie » de la catégorie isotopique envisagée plus haut.
+\note{le développement s'arrête ici, au milieu de la page ; le reste du feuillet est blanc}
+
+\end{document}
