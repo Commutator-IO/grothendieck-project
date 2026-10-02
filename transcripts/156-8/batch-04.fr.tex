@@ -1,0 +1,533 @@
+% Folder 156-8, batch 04 (archivists' pages 61-80).
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-02 — first pass, unchecked against the pages by a human.
+%
+% Grothendieck's own pagination runs 53-72 on these twenty leaves. The pencilled
+% archive numbers on the leaves read 62-81, one ahead of the page numbering used
+% here. All twenty pages are mathematics; none is skipped.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{156-8}
+\batch{4}
+\pages{61}{80}
+\foldertitle{[Chapitre] VIII. Analysis situs (quatrième mouture) : notes manuscrites (26/06-04/07/1986).}
+\dating{1986}
+\watermark{Édition de démonstration}
+
+\begin{document}
+
+\note{Conventions de ce lot. $\mathcal{M}$ (le magasin), $\mathcal{F}$ (l'atlas), $\mathcal{L}$ (les lieux) et $\mathcal{P}$ sont écrits en cursive. La relation d'incidence stricte, un $\ll$ surmonté d'un petit rond, est rendue $\mathrel{\mathring{\ll}}$ ; la relation de disjonction, un rond entre deux barres, $\mathrel{|\circ|}$. « Omb » (l'ombre) et « supp », « cosupp » sont gardés tels qu'écrits.}
+
+\note{La page 61 s'ouvre sur une définition nouvelle ; l'argument sur les magasins et leurs atlas vient d'avant ce lot, auquel renvoient les « p.~23 », « p.~27 », « p.~28 », « p.~33 », « p.~37 » et « p.~50 » de l'auteur.}
+
+\page{61}
+\note{p. 53 de l'auteur. Le numéro d'archive porté au crayon sur les feuillets de ce lot (62 à 81) dépasse d'une unité la numérotation suivie ici.}
+
+\textbf{Définition\add{-prop.}} Soit $\mathcal{M}$ un magasin, $\mathcal{M}'$ une \struck{partie de $\mathcal{M}$}. On dit que c'est un \emph{sous-magasin} si \uncertain{elle} satisfait
+\begin{enumerate}
+  \item[a)] $\mathcal{M}'$ fermée pour $\leq$ i.e. \struck{$X$} $\in \mathcal{M}'$, $Y \leq$ \struck{$X$} $\Rightarrow Y \in \mathcal{M}'$ ;
+  \item[b)] si $X \mathrel{\mathring{\ll}} Y' \leq Y$ et $X, Y \in \mathcal{M}'$, alors $Y' \in \mathcal{M}'$.
+\end{enumerate}
+\note{la lettre barrée de a) est récrite par-dessus elle-même ; on lit $X \in \mathcal{M}'$, $Y \leq X \Rightarrow Y \in \mathcal{M}'$.}
+
+Alors $\mathcal{M}'$, muni des relations $\leq$, $\mathrel{\mathring{\ll}}$, $|\circ|$ induites par $\mathcal{M}$, est un magasin, et les relations $\ll$, $\not>$, $\parallel$ \uncertain{déduites} sont induites par les relations de même nom dans $\mathcal{M}$.
+\note{le deuxième signe de la liste, un $>$ barré, est de lecture douteuse.}
+
+\textbf{Définition} Dans ces conditions, si $\mathcal{F}$ est un atlas associé à $\mathcal{M}$, on appelle \emph{restriction de $\mathcal{F}$ \ill{} associé à $\mathcal{M}'$} \struck{\ill{}}, l'ens.\ \add{$\mathcal{F}'$} \struck{des $F \in \mathcal{F}$ tels que $\widetilde{F} \in$}
+\[
+  \mathcal{F}' = \{ F \in \mathcal{F} \mid \widetilde{F} \subset \mathcal{M}' \}.
+\]
+Pour la relation d'incidence induite \uncertain{entre} $\mathcal{M}'$, $\mathcal{F}'$, et les relations $\mathrel{\mathring{\ll}}$, $|\circ|$ sur $\mathcal{M}'$, c'est bien un atlas associé à $\mathcal{M}'$. On a alors :
+
+Les relations $\leq$, $\ll$, \struck{\ill{}} $\not>$, $\parallel$ dans $\mathcal{F}'$ sont induites par les relations similaires dans $\mathcal{F}$, le plongement $\mathcal{F}' \to \mathcal{F}$ commute aux Sup quelconques pour $\leq$, et aux \uncertain{Inf} des familles non vides.
+
+\page{62}
+Si $|\circ|$ dans $\mathcal{M}$ peut \uncertain{s'obtenir} défini par $\mathrel{\mathring{\ll}}$, il n'est pas clair qu'il en soit de $=$ dans $\mathcal{M}'$, mais ça sera le cas si $\mathcal{M}'$ est $\mathrel{\mathring{\ll}}$-fermé (mais \add{bien} \uncertain{souvent}, $\mathcal{M}'$ ne le sera pas…). Par contre, \uncertain{supposons} qu'on ait $\mathcal{M}' \supset \mathcal{L}$, de sorte que $\mathcal{L}$ est \uncertain{aussi} \ill{} des lieux de $\mathcal{M}'$. Si alors $\mathcal{M}$ est \uncertain{strict.\ dirigé}, $\mathcal{M}'$ aussi (\uncertain{axiomatique} $\mathrm{M}_0$ dite, page~23) ; \struck{\ill{}} si $\mathcal{M}$ est quasi-ensembliste, $\mathcal{M}'$ aussi. Enfin si $\mathcal{M}$ ensembliste, $\mathcal{M}'$ aussi…
+
+Je suis amené maintenant à introduire \add{(restreints)} la notion d'homomorphismes entre atlas, donc des hom.\ qui \uncertain{respectent}, \add{non seulement} $\mathrel{\mathring{\ll}}$ et $|\circ|$, mais aussi $\leq$. On les appellera provisoirement « homomorphismes ».
+
+\struck{Définition \ill{}}
+
+Soient les
+\[
+  (\mathcal{F}, \mathcal{M}, \lhd, \mathrel{\mathring{\ll}}, |\circ|), \qquad
+  (\mathcal{F}', \mathcal{M}', \lhd, \mathrel{\mathring{\ll}}, |\circ|)
+\]
+deux atlas, on va définir les applications
+\[
+  f : \mathcal{F} \longrightarrow \mathcal{F}'
+\]
+qu'\uncertain{il faut} \ill{} d'\emph{homomorphismes}.
+
+\page{63}
+1°) On veut qu'elles soient croissantes pour $\leq$, et commutent aux Sup quelconques. Ça implique qu'elles seront déterminées par \uncertain{leur} restriction \ill{}
+\[
+  f_{\mathcal{M}} : \mathcal{M} \longrightarrow \mathcal{F}',
+\]
+qui sera une application croissante pour $\leq$. Si les figures de $\mathcal{F}$ sont du type \ill{}, et celles de $\mathcal{F}'$ \ill{}, \uncertain{on voit que} n'importe quelle appl.\ $f_{\mathcal{M}}$ croissante pour $\leq$ provient d'une $f$.
+
+2°) On veut qu'elles commutent aux Inf quelconques, \uncertain{i.e.} familles \add{d'indices} non vides, et pour commencer
+\[
+  (*) \qquad f(F \cap G) = f(F) \cap f(G).
+\]
+On est ramené aussitôt au cas où $F$, $G$ sont des \ill{}, et la formule devient
+\[
+  (*)_{\mathcal{M}} \qquad f_{\mathcal{M}}(X) \cap f_{\mathcal{M}}(Y) = \operatorname*{Sup}_{Z \in \widetilde{X} \cap \widetilde{Y}} f_{\mathcal{M}}(Z)
+\]
+(qui rappelle la formule familière pour une figure ensembliste
+\[
+  X_i \cap X_j = \bigcup_{k \leq i, j} X_k \ ).
+\]
+Cette formule $(*)$ \uncertain{inclut} la commutation aux Inf finis. Pour les Inf infinis, on est ramené au cas des familles \struck{\ill{}} filtrantes décroissantes. Il \ill{}
+
+\page{64}
+pas clair que ce soit essentiel de la poser dans les définitions.
+
+On veut d'autre part que $f_{\mathcal{M}}$ soit compatible, \struck{en plus de} $\leq$, à $\mathrel{\mathring{\ll}}$, $|\circ|$. (\textbf{NB} On sait déjà qu'il est compatible à \struck{$X$}.) Mais il faut bien donner un sens, dans le cas où $f_{\mathcal{M}}$ n'applique pas $\mathcal{M}$ dans $\mathcal{M}'$, mais dans $\mathcal{F}$ ! Mais il faut, pour cela, poser une petite condition, encore une condition (comparer p.~28)
+\[
+  (**) \qquad \forall F \in \mathcal{F}, \text{ posant } F' = f(F), \text{ l'application}
+\]
+\[
+  G \longmapsto G' = f(G) : \operatorname{SsFig}(F) \xrightarrow{\ \sim\ } \operatorname{SsFig} F'
+\]
+est un isom.\ d'ens.\ ordonnés.
+\note{la formule $(**)$ est marquée d'un trait vertical en marge gauche. Le signe de $\operatorname{SsFig}$, ici et plus bas, est lu « sous-figures ».}
+
+\struck{Utilisant la \uncertain{cosuffisance} de \ill{}, cela sera équivalent à : $(**_{\mathcal{M}})$ $\forall X$}
+\note{deux lignes et demie biffées de traits obliques.}
+Mais cela implique que si $F$ est élémentaire, $F'$ aussi, c'est-à-dire $f_{\mathcal{M}} : \mathcal{M} \to \mathcal{M}'$ ! C'est justement dans le moment où je m'interrogeais si je connais des \struck{\ill{}} \add{applications} $f : \mathcal{F} \to \mathcal{F}'$ que j'aurais envie d'appeler « homomorphismes », et qui n'appliquent pas $\mathcal{M}$ dans $\mathcal{M}'$. Oui, il y a \uncertain{des} exemples p.~50, mais \struck{\ill{}} \add{qui me paraissent hétéroclites} et \ill{} les laisser de côté $(**)$.
+
+\page{65}
+Revenons justement pour retomber sur
+\[
+  f_{\mathcal{M}} = f : \mathcal{M} \longrightarrow \mathcal{M}'
+\]
+comme pages~27, 28. On \add{\uncertain{demande}} que pour tout $\widetilde{F} \in \operatorname{Fig}(\mathcal{M})$ (figure \uncertain{associée au} magasin), posant $F' = f(F)$, on ait
+\[
+  f \,|\, \widetilde{F} : \widetilde{F} \xrightarrow{\ \sim\ } \widetilde{F}' \qquad \text{isom.\ d'ens.\ ordonnés}
+\]
+ce qui découle aussitôt de $(**)$. On dispose de tous les corollaires de p.~28, 29.
+
+Les propriétés de $f$ sont voisines de celles d'un plongement, mais \struck{\ill{}} $f$ n'est pourtant pas nécess.\ injectif. Exemple : si $\mathcal{M}$ est quasi-ensembliste et non ensembliste, l'hom.\ canonique
+\[
+  \mathcal{M} \longrightarrow \operatorname{Figures}(\mathcal{L}).
+\]
+
+Si c'est injectif, est-ce qu'on peut identifier $\mathcal{M}$ à un \emph{sous-magasin} de $\mathcal{M}'$, i.e.\ l'image \uncertain{$f(\mathcal{M})$} est-elle un sous-$\mathcal{M}'$, i.e.\ \struck{$\mathcal{M}$} y est-il isomorphe \struck{\ill{}} \add{\uncertain{l'image}} \ill{} ? \ill{}, pour ça il faut que \ill{} $\leq$. \struck{Montrons que} \add{Donc} si
+\[
+  f(X) \mathrel{\mathring{\ll}} Y' \leq f(Y) \quad \text{dans } \mathcal{M}'
+\]
+est-ce que $Y'$ est de la forme $f(Y_1)$ ? On voudrait de plus, bien sûr,
+\[
+  X \mathrel{\mathring{\ll}} Y_1 \leq Y
+\]
+En résumé, on voudrait que
+
+\page{66}
+\[
+  (**') \qquad f(X) \ll f(Y) \Longrightarrow X \ll Y
+\]
+ce qui n'est pas automatique \uncertain{même} quand on suppose \struck{\ill{}} $f$ injectif. Si c'est vrai, alors prenant $Y_1$ avec $X \mathrel{\mathring{\ll}} Y_1 \leq Y$, on trouve
+\[
+  f(X) \mathrel{\mathring{\ll}} f(Y_1) \leq f(Y) \quad \text{donc } Y' = f(Y_1), \text{ OK.}
+\]
+De plus, si $f(X) \mathrel{\mathring{\ll}} f(Y)$, on aura $X \ll Y$, et \struck{$f(Y_1) =$} on trouve $f(Y_1) = f(Y)$, \uncertain{donc} $X \mathrel{\mathring{\ll}} Y$. Donc (cas \uncertain{dans} $Y_1 = Y$), on a $X \mathrel{\mathring{\ll}} Y$. \ill{} implique que $\mathrel{\mathring{\ll}}$ est induit par $\ll$. Qu'en est-il de $\leq$, $|\circ|$ ? Il semble qu'il faille le poser en sus…
+
+J'ai envie maintenant de déterminer les homomorphismes de magasins
+\[
+  f : \mathcal{M} \longrightarrow \text{Figél}(P),
+\]
+où $P$ est un ens. Si on a un tel hom, on en déduit une application
+\[
+  \mathcal{M} \longrightarrow \mathcal{P}(P), \qquad X \longmapsto |X| \overset{\mathrm{def}}{=} |f(X)|,
+\]
+et \ill{} $f$ \uncertain{est entièrement} déterminé par cette application, on a
+\[
+  (\alpha) \qquad f(X) = \{ |Y| \mid Y \in \widetilde{X} \}.
+\]
+\marginal{\ill{} $f(F)$ \ill{}}
+\note{note marginale oblique, en bas à gauche, à peu près illisible ; dans $(\alpha)$, un signe biffé précède le premier $|Y|$.}
+
+\page{67}
+La question est maintenant, quelles sont les conditions sur une application $f$
+\[
+  X \longmapsto |X| : \mathcal{M} \longrightarrow \mathcal{P}(P),
+\]
+pour \struck{\ill{}} pouvoir être définie par un morphisme d'atlas ? Nous voilà revenus à la situation p.~33 ! En termes des $X \mapsto |X|$, on définira, pour \struck{$X \in \mathcal{M}$} toute \struck{\ill{}} partie \struck{\ill{}} $\Phi \subset \mathcal{M}$
+\[
+  |\Phi| = \bigcup_{X \in \Phi} |X|,
+\]
+ce qui donne un sens à
+\[
+  |\partial X| \subset |X|, \qquad |\partial X| = \bigcup_{Y < X} |Y|
+\]
+(où
+\[
+  \partial X = \widetilde{X} - \{X\} = \{ Y \in \mathcal{M} \mid Y < X \} \ ),
+\]
+et à
+\[
+  |X|^{\circ} = |X| \setminus |\partial X|.
+\]
+Il faudrait avoir en tout cas
+\begin{enumerate}
+  \item[(i)] $X \ll Y \Longrightarrow |X| \leq |Y|$
+  \item[(ii)] $X \mathrel{|\circ|} Y \Longrightarrow |X|^{\circ} \cap |Y|^{\circ} = \emptyset$
+  \item[(iii)] $\forall X \in \mathcal{M}$, $|X|^{\circ} \neq \emptyset$
+  \item[(iv)] $\forall X \in \mathcal{M}$, $|X| = \bigcup_{Y \in \widetilde{X}} |Y|^{\circ}$
+\end{enumerate}
+\note{(iv) est récrit entre les lignes, sous (iii), d'une écriture serrée ; « $\leq$ » dans (i) est tel quel.}
+Montrons que ces conditions permettent de définir, pour $\forall X \in \mathcal{M}$, une \uncertain{dite} $f(X) \in \text{Figél}(P)$ par $(\alpha)$ \uncertain{p.\ précédente}. Il faut donc voir que la famille
+
+\page{68}
+des $|Y|$, $Y \in \widetilde{X}$, est une figure élémentaire (de support $|X|$, bien sûr), \uncertain{où} \ill{} les $|Y| \subset |X|$). Cela résulte en effet de la condition (\uncertain{iii}) de la prop.\ p.~37. (\textbf{NB} on n'a utilisé (i) que pour le cas $X \leq Y$.) Il est clair que l'application $f$ est croissante pour $\leq$, et qu'elle induit, $\forall X \in \mathcal{M}$, $\widetilde{X} \xrightarrow{\sim} f(X)$. Ainsi \struck{\ill{}} l'on a bien
+\[
+  |X|^{\circ} = f(X)^{\circ},
+\]
+de sorte que (ii) implique \uncertain{ipso facto}
+\[
+  X \mathrel{|\circ|} Y \Longrightarrow f(X) \mathrel{|\circ|} f(Y).
+\]
+\marginal{condition 2) p.~28}
+Il reste à vérifier que
+\[
+  X \mathrel{\mathring{\ll}} Y \Longrightarrow f(X) \mathrel{\mathring{\ll}} f(Y),
+\]
+\struck{Mais} est-ce bien vrai ? Ça revient à une application croissante
+\[
+  \varphi : \widetilde{X} \longrightarrow \widetilde{Y}, \qquad \varphi(X) = Y,
+\]
+\struck{telle que} conditionnée par
+\[
+  X' \mathrel{\mathring{\ll}} \varphi(Y')
+\]
+et \struck{\ill{}} revient à ceci :
+\[
+  X \mathrel{\mathring{\ll}} Y \Longrightarrow |X|^{\circ} \subset |Y|^{\circ}
+\]
+\struck{Ce serait déjà} Par (i) on aurait $|X| \subset |Y|$ donc $|X|^{\circ} \subset |Y|$,
+\marginal{cf.\ \uncertain{CF\,V} p.~19, 20, conditions}
+\note{la marginale « condition 2) p.~28 » est écrite obliquement en marge gauche, à hauteur de « qu'elle induit » ; la seconde, en bas à gauche, renvoie sans doute à un autre chapitre (V) ; lecture du sigle incertaine.}
+
+\page{69}
+il reste à voir que
+\[
+  |X|^{\circ} \cap |\partial Y| = \emptyset
+\]
+ce qui revient à :
+\[
+  |X|^{\circ} \cap |Z|^{\circ} = \emptyset \qquad \forall Z \not\leq Y
+\]
+\note{le dernier signe de cette ligne est lu $\not\leq$ ; il pourrait s'agir d'un $<$ repassé, comme à la ligne suivante.}
+\struck{et \uncertain{sera}} \struck{(\ill{}} et comme
+\[
+  |Z| = \bigcup_{Z' \leq Z} |Z'|^{\circ}
+\]
+par (iv), il revient au même de voir
+\[
+  |X|^{\circ} \cap |Z|^{\circ} = \emptyset \qquad \forall Z < Y
+\]
+ce qui va résulter de
+\[
+  X \mathrel{|\circ|} Z \qquad \text{(via (ii))}
+\]
+\[
+  Z < Y \text{ \ill{} } Z \mathrel{|\circ|} Y \quad (\mathrm{M}_0 4)
+\]
+or si $X \mathrel{\mathring{\ll}} Z$ \ill{} on en déduit
+et comme \ill{}
+\[
+  X \mathrel{|\circ|} Z \quad (\mathrm{M}_0 3)\text{], on a gagné !}
+\]
+
+Donc
+
+\textbf{Théorème} Les hom.\ de magasins${}^{*}$
+\[
+  \mathcal{M} \longrightarrow \operatorname{Figures}(P)^{*}
+\]
+sont en corr.\ 1-1 avec les applications
+\[
+  \mathcal{M} \longrightarrow \mathcal{P}(P), \qquad X \longmapsto |X|
+\]
+satisfaisant les \struck{applications} \add{conditions} (i)--(iv) de la page~59.
+
+Une fonction ayant ces propriétés est
+\marginal{cf.\ p.~27 \ill{}}
+\note{la marginale est écrite obliquement en marge gauche, à hauteur du théorème. L'astérisque appelle une précision que la page ne donne pas.}
+
+\page{70}
+appelée \emph{fonction support exacte} (à valeurs dans $\mathcal{P}(P)$). Elle est dite \emph{normalisée} si a) $P = |\mathcal{M}|$ i.e.\ les $|X|$ recouvrent $P$ et b) les $|X|$ séparent les points de $P$ (\struck{\ill{}} $\Longleftrightarrow$ les $|X|^{\circ}$ \struck{aussi} séparent les points). Elle est dite \emph{fidèle} si les \struck{conditions} deux conditions (ii) (iii) \uncertain{se renforcent} en la condition
+\[
+  (\text{ii fid}) \qquad \forall X, Y \in \mathcal{M}, \quad X \mathrel{|\circ|} Y \Longleftrightarrow |X|^{\circ} \cap |Y|^{\circ} = \emptyset
+\]
+
+\textbf{NB} \ill{} types, en remplaçant \ill{} par un quotient de $|\mathcal{M}|$, on se ramène au cas d'une fonction support normalisée.
+
+\uncertain{Subtilités}. D'ailleurs${}^{*}$ tous les exemples \ill{} que j'ai effleurés provenant des contextes ensemblistes, de topologie ou de topologie modérée, il existe${}^{*}$ toujours des fonctions support fidèles. Donc les \struck{\ill{}} \add{propriétés} commodes souhaitables qui seraient conséquences
+
+\marginal{On dit qu'elle constitue une « réalisation » ensembliste \ill{} si \emph{de plus}, les relations $\mathrel{\mathring{\ll}}$, $\leq$ sont « induites », i.e.\
+$\varphi(X) \mathrel{\mathring{\ll}} \varphi(Y) \Rightarrow X \mathrel{\mathring{\ll}} Y$,
+$\varphi(X) \leq \varphi(Y) \Rightarrow X \leq Y$ \ill{}}
+\marginal{${}^{*}$ \ill{} 27. C'est inexact dans le cas des \uncertain{pseudo-}\ill{} \ill{} il est vrai \ill{}}
+\note{deux longues notes marginales obliques, en marge gauche de la seconde moitié de la page, appelées par des astérisques ; on n'en transcrit que ce qui se lit. La note sur la réalisation est cochée « NB ». Un $X$ entouré, avec une flèche vers « $P$ », surcharge la ligne du NB.}
+
+\page{71}
+de l'existence d'une telle fonction support, pourraient être posées en axiome sans inconvénient pratique.
+
+La seule exception \uncertain{à cette règle} concerne les géométries de lieux définis \struck{\ill{}} en termes d'une fonction distance, où la disjonction est \uncertain{décrite} en termes d'une distance \add{$\geq \varepsilon$ ou} $> \varepsilon$, et où peut-être la notion de lieu se ramène à une question de « disposition ensembliste ». De toute façon, je n'ai pas l'impression que le \uncertain{dessin} puisse être autre que la \uncertain{chose} géométrique des magasins \uncertain{bien} géométriques que je propose ici, s'y appliquent intégralement.
+
+\textbf{Exemples} 1) \struck{Dans} Dire que dans \struck{\ill{}} un magasin $\mathcal{M}$, \struck{\ill{}} $|\circ|$ est définissable par $\mathrel{\mathring{\ll}}$, signifie que
+\[
+  X \longmapsto \mathrm{Omb}(X) \qquad \mathcal{M} \xrightarrow[\text{fidèle}]{\ \ } {}^{*}\mathcal{P}(\mathcal{M})
+\]
+est une fonction support \add{fidèle}. \struck{Mais cette} Ça ne fait \uncertain{même} \uncertain{pas} \uncertain{besoin} \uncertain{de} \uncertain{garantir} !
+\marginal{NB C'est une fonction support (p.~30, 31) \ill{}}
+\note{la marginale, en bas à gauche, commence par un sigle biffé ; « p.~30, 31 » appartient à la ligne de « signifie que ». La dernière ligne du corps est de lecture très douteuse.}
+
+\page{72}
+\textbf{Exemple 2} Les magasins \uncertain{formés} avec des pseudo-cylindres etc.\ dans un espace \add{$X$}/top.\ ou modéré (disons) --- \struck{\ill{}} associés à une « corde » (ou « feuille ») topologique, ou plus généralement à un ens.\ ordonné quelconque, déjà rencontrés au cas précédent --- des lieux effectivement pensés comme peut-être disjoints. Mais pourtant, la fonction support évidente à valeurs dans $\mathcal{P}(X)$ est \uncertain{toute trouvée} !
+
+\textbf{Exemple 3} Magasins « triviaux » \uncertain{ou} \uncertain{quelconques}. La \struck{condition} \add{relation} $X \mathrel{|\circ|} Y$ signifie $X \neq Y$, la \struck{condition} \add{relation} $X \mathrel{\mathring{\ll}} Y$ signifie $X = Y$, on a donc \struck{\ill{}}
+\[
+  X \mathrel{|\circ|} Y \text{ ssi } \nexists Z,\ Z \mathrel{\mathring{\ll}} X,\ Z \mathrel{\mathring{\ll}} Y,
+\]
+i.e.\ on est dans le cas de l'exemple~1. En somme : $\forall X$
+\[
+  |X| \overset{\mathrm{def}}{=} \widetilde{X} = \mathcal{M}_{\leq X} = \mathrm{Omb}(X)
+\]
+\uncertain{Comme} \uncertain{toujours}, l'adhérence de $X$ pour la top.\ de $\mathcal{M}$ associée à $\leq$), on trouve une fonction support fidèle. Notons qu'ici
+\[
+  |X|^{\circ} = \{ X \} \qquad \text{pour } \forall X \in \mathcal{M}
+\]
+\note{la parenthèse fermante après « $\leq$ » est sur la page, sans ouvrante. Le bas de la page est vide.}
+
+\page{73}
+Il est temps de revenir aux supports internes dans un magasin.
+
+Utilisant la relation $|\circ|$ \struck{syntaxique} et \uncertain{intuitive}, on trouve \struck{\ill{}} \uncertain{comme d'habitude}, dans $\mathcal{P}(\mathcal{M})$, \struck{\ill{}} une opération
+\[
+  \operatorname{cosupp}^{\circ}(A) = \{ \text{\struck{$X$}}\, Y \in \mathcal{M} \mid A \mathrel{|\circ|} \text{\struck{$X$}}\, Y \}
+\]
+\add{i.e.\ $\forall X \in A$, $X \mathrel{|\circ|} Y$} où on pose, pour deux parties $A$, $B$ de $\mathcal{M}$
+\[
+  A \mathrel{|\circ|} B \overset{\mathrm{def}}{\Longleftrightarrow} \forall X \in A,\ Y \in B, \text{ on a } X \mathrel{|\circ|} Y
+\]
+et
+\[
+  A \mathrel{|\circ|} X \overset{\mathrm{def}}{\Longleftrightarrow} A \mathrel{|\circ|} \{ X \}.
+\]
+\struck{\ill{} pour \ill{}} \struck{On \uncertain{pose}} \struck{Ainsi $\operatorname{cosupp}^{\circ}$}
+\[
+  \begin{cases}
+    \operatorname{cosupp}^{\circ}\bigl(\bigcup A_i\bigr) = \bigcap_i \operatorname{cosupp}^{\circ}(A_i) \\
+    \operatorname{cosupp}^{\circ}(\emptyset_{\mathcal{M}}) = \mathcal{M} \\
+    \operatorname{cosupp}^{\circ}(\mathcal{M}) = \emptyset
+  \end{cases}
+\]
+\note{dans la deuxième ligne, avant $\mathcal{M}$, une expression biffée commençant par $\operatorname{cosupp}^{\circ}$.}
+On pose
+\[
+  \operatorname{supp}^{\circ}(A) = \operatorname{cosupp}^{\circ}\bigl(\operatorname{cosupp}^{\circ}(A)\bigr)
+\]
+On dit qu'une partie $S$ \add{$A$} de $\mathcal{M}$ est un $|\circ|$-support, si elle est de la forme $\operatorname{supp}^{\circ}(A)$, ou ce qui revient au même, si
+\[
+  A = \operatorname{supp}^{\circ}(A)
+\]
+Notons qu'une telle partie est fermée pour $\mathrel{\mathring{\ll}}$ :
+\[
+  X \in A, \quad X' \mathrel{\mathring{\ll}} X \Longrightarrow X' \in A.
+\]
+Mais elle n'est pas nécess.\ fermée pour $\leq$, et encore moins pour $\ll$. \struck{\ill{}}
+
+La relation avec la notion précédente de support (\uncertain{p.~11}), \struck{\ill{} des parties est}
+\marginal{on a $\operatorname{supp}^{\circ}(X) = \operatorname{supp}^{\circ}(\{X\})$, $\operatorname{cosupp}^{\circ}(X) = \operatorname{cosupp}^{\circ}(\{X\})$ pour \ill{}}
+\note{la marginale est écrite obliquement en marge gauche, à hauteur de la définition de $\operatorname{supp}^{\circ}$.}
+
+\page{74}
+la suivante :
+\[
+  \operatorname{cosupp} X = \{ Y \in \mathcal{M} \mid \widetilde{Y} \subset \operatorname{cosupp}^{\circ}(\widetilde{X}) \}
+\]
+\[
+  \operatorname{cosupp} A = \{ Y \in \mathcal{M} \mid \widetilde{Y} \subset \operatorname{cosupp}^{\circ}(\widetilde{A}) \}
+\]
+(où $\widetilde{A} \overset{\mathrm{def}}{=} \bigcup_{X \in A} \widetilde{X}$ (plus petite partie fermée de $\mathcal{M}$, $\leq$ contenant $A$)).
+\note{« $\{ Y \in \mathcal{M} \mid \widetilde{Y} \subset$ » est ajouté au-dessus de chaque ligne, par-dessus un premier membre de droite \struck{$\operatorname{cosupp}^{\circ}(\widetilde{X})$} qu'il encadre ; dans la parenthèse, « partie » remplace un mot biffé.}
+
+\struck{Donc $\operatorname{cosupp} A = \operatorname{cosupp}^{\circ}(A)$ si $A = \widetilde{A}$ i.e.\ $A$ fermée dans $\mathcal{M}$ pour $\leq$.}
+\marginal{idiot}
+\note{la ligne est barrée de grands traits obliques, et l'auteur écrit « idiot » en marge.}
+
+\struck{En. Ainsi, les supports sont les supports \uncertain{internes} des parties de $\mathcal{M}$ \emph{fermées} pour $\leq$. En effet, pour une telle partie, prendre $\operatorname{cosupp}^{\circ}$ ou $\operatorname{cosupp}$ revient au même et le résultat est $\leq$-fermé, et \ill{} le \ill{}, on trouve l'assertion.}
+\note{ce paragraphe, marqué d'un trait vertical en marge, est barré de deux longs traits obliques.}
+Le traitement précédent des supports était \uncertain{vicié} par le fait, qu'il se \uncertain{brouillait} \struck{\uncertain{constamment} au \ill{}} \add{\ill{}} quand les supports de parties fermées. Tous supp et cosupp.\ s'expriment, on l'a vu, en termes de $\operatorname{supp}^{\circ}$ et $\operatorname{cosupp}^{\circ}$, mais l'inverse n'est pas vrai.
+
+\textbf{Exemples instructifs} : magasins triviaux \add{ou quelconques}. La relation $|\circ|$ est la relation $X \neq Y$. Donc les supports sont les parties quelconques de $\mathcal{M}$. Je \uncertain{veux} visualiser une telle partie, $A$, comme représentant la réunion des « \emph{cellules ouvertes} » $X^{\circ}$, pour $X \in A$. Si on
+
+\page{75}
+travaille avec la relation $X \parallel Y \Longleftrightarrow \widetilde{X} \cap \widetilde{Y} = \emptyset$, les supports sont \emph{certaines} parties fermées de $\mathcal{M}, \leq$ bien particulières. Jamais par elles on ne pourra exprimer des supports internes !
+
+Je désigne par $\Sigma_{\mathcal{M}}$ (notation standard) l'ens.\ des supports pour $\mathcal{M}$. \struck{L'application} C'est un ensemble, \struck{\ill{}} ordonné par $\subset$, \uncertain{ayant} un plus petit élément $\emptyset$, et un plus grand élément $\mathcal{M}$. Il a des Inf quelconques --- ce sont les $\bigcap_i$ ordinaires. Il y a une \struck{fonction} application \uncertain{canonique}
+\[
+  \Sigma_{\mathcal{M}} \xrightarrow{\ \sim\ } \Sigma_{\mathcal{M}}, \qquad S \longmapsto \text{\struck{$\mathcal{C}$}}\, \mathrm{c}S,
+\]
+qui est une antiinvolution de l'ens.\ ordonné. Il \struck{\ill{}} transforme \uncertain{donc} \uncertain{les} Inf en Sup, et inversement. Le Sup s'écrit ainsi
+\[
+  \operatorname{Sup} S_i = \operatorname{supp}^{\circ}\Bigl(\bigcup S_i\Bigr)
+\]
+On prendra bien garde de ne pas le confondre avec $\bigcup S_i$.
+
+On peut aussi construire un \add{produit} $\Sigma_{\mathcal{L}}$, avec $\mathrel{|\circ|}_{\mathcal{L}} = \parallel_{\mathcal{L}}$ sur $\mathcal{L}$. On \struck{\ill{}} \add{voudrait} une application canonique
+
+\page{76}
+\[
+  \Sigma_{\mathcal{M}} \longrightarrow \Sigma_{\mathcal{L}}, \qquad S \longmapsto S \cap \mathcal{L}
+\]
+mais est-on sûr que si $S$ est un support \add{(interne)}, $S \cap \mathcal{L}$ en soit un ? (C'est OK si on suppose Mag~L2 \struck{\ill{}} (magasin strict.\ dirigé) \struck{\ill{}}, car alors,
+\[
+  \operatorname{cosupp}^{\circ}_{\mathcal{M}} X = \operatorname{cosupp}^{\circ}_{\mathcal{M}}(\mathrm{Omb}^{\circ} X)
+\]
+et plus généralement, pour une partie quelc.\ $A$ de $\mathcal{M}$
+\[
+  \operatorname{cosupp}^{\circ}_{\mathcal{M}}(A) = \operatorname{cosupp}^{\circ}_{\mathcal{M}}(\mathrm{Omb}^{\circ}(A))
+\]
+où on pose
+\[
+  \mathrm{Omb}^{\circ}(A) = \bigcup_{X \in A} \mathrm{Omb}^{\circ}(X) \subset \mathcal{L}
+\]
+on en conclut
+\[
+  \operatorname{cosupp}^{\circ}_{\mathcal{M}}(A) \cap \mathcal{L} = \operatorname{cosupp}^{\circ}_{\mathcal{L}}(\mathrm{Omb}(A)),
+\]
+\struck{donc} ce qui prouve que si $S$ est un support \add{(interne)} \struck{\ill{}} \add{de} $\mathcal{M}$, i.e.\ de la forme $\operatorname{cosupp}^{\circ}_{\mathcal{M}}(A)$, alors $S \cap \mathcal{L}$ est un support (interne) dans $\mathcal{L}$.
+\marginal{NB en conclut $\operatorname{supp}^{\circ} X = \operatorname{supp}^{\circ}(\mathrm{Omb}^{\circ} X)$}
+\note{la marginale est écrite obliquement en marge gauche, à hauteur de la première formule. Dans la proposition sur Mag~L2, plusieurs mots soulignés puis biffés.}
+
+On trouve une application en sens inverse
+\[
+  \Sigma_{\mathcal{L}} \longrightarrow \Sigma_{\mathcal{M}}
+\]
+\[
+  A \longmapsto \operatorname{supp}^{\circ}_{\mathcal{M}}(A) \overset{?}{=} \{ X \in \mathcal{M} \mid \mathrm{Omb}^{\circ} X \subset A \}
+\]
+\note{une flèche montre le signe « $\overset{?}{=}$ ».}
+A-t-on bien l'égalité annoncée ? Sûrement, si $X \in \mathcal{M}$
+\[
+  \mathrm{Omb}^{\circ}(X) \subset A \Longrightarrow \operatorname{supp}^{\circ}(X) \subset \operatorname{supp}^{\circ}_{\mathcal{M}}(A) \quad \text{d'où}
+\]
+\note{sous $\operatorname{supp}^{\circ}(X)$, l'auteur écrit « $= \operatorname{supp}^{\circ}(\mathrm{Omb}^{\circ}(X))$ » ; le $\operatorname{supp}^{\circ}$ récrit au-dessus d'un mot biffé.}
+$X \in \operatorname{supp}^{\circ}_{\mathcal{M}}(A)$. Mais inversement, supposons
+
+\page{77}
+$X \in \operatorname{supp}^{\circ}_{\mathcal{M}}(A)$, on en conclut (puisque $\operatorname{supp}^{\circ}$ est fermé pour $\mathrel{\mathring{\ll}}$) $\mathrm{Omb}^{\circ}(X) \subset \operatorname{supp}^{\circ}_{\mathcal{M}}(A)$, OK.
+
+Ceci dit, les deux applications précédentes sont inverses l'une de l'autre, et établissent des \uncertain{bij.}\ réciproques \uncertain{inverses} des \uncertain{parties} \uncertain{ordonnées}, \uncertain{munies} de l'opération $\complement$\,…
+
+C'est formel en termes de
+
+\begin{tikzcd}[column sep=large]
+  \mathcal{L} \arrow[d, leftrightarrow, "\text{comm.}"'] \arrow[dr, "x \mapsto \{x\}"] & \\
+  \mathcal{M} \arrow[r, "o"'] & \mathcal{P}(\mathcal{L})
+\end{tikzcd}
+
+\note{le trait vertical entre $\mathcal{L}$ et $\mathcal{M}$ porte une tête à chaque bout, telle qu'on la lit ; la flèche $\mathcal{M} \to \mathcal{P}(\mathcal{L})$ est légendée en dessous « application (ici $X \mapsto \mathrm{Omb}^{\circ}(X)$) » ; la lettre $o$ est celle de la suite.}
+$\parallel_{\mathcal{L}}$ relation symétrique antiréfl.\ sur $\mathcal{L}$, d'où relation $|\circ|_{\mathcal{M}}$ sur $\mathcal{M}$ par
+\[
+  X \mathrel{|\circ|} Y \Longleftrightarrow o(X) \parallel o(Y)
+\]
+i.e.\ $\forall x \in o(X)$, $y \in o(Y)$, $x \parallel_{\mathcal{L}} y$.
+
+\struck{À toute partie \ill{} $\operatorname{supp}^{\circ}$ de $\mathcal{L}$, on associe alors}
+\add{une} \add{partie, \uncertain{support},} \add{de $\mathcal{M}$, par}
+\[
+  \varphi(A) = \{ X \in \mathcal{M} \mid o(X) \subset A \}
+\]
+\note{les deux premières lignes de ce paragraphe sont barrées de traits obliques, sauf ce qui est récrit au-dessus ; la reconstruction de la phrase est incertaine.}
+et on trouve \struck{deux} deux isom.\ \struck{\ill{}} réciproques
+\[
+  \Sigma_{\mathcal{L}} \rightleftarrows \Sigma_{\mathcal{M}} \quad \dots
+\]
+Il faudra bien que je me tape la vérification ! \uncertain{même} général,
+
+\textbf{Cor} Si $\parallel_{\mathcal{L}}$ est la relation $x \neq y$ (\uncertain{cas} quasi-ensembliste) alors
+\[
+  \Sigma_{\mathcal{M}} \simeq \mathcal{P}(\mathcal{L})
+\]
+La notion de support \add{interne} \struck{\ill{}} s'explicite : supp${}^{\circ}A$ s'identifie à $\mathrm{Omb}^{\circ}(A)$.
+
+\marginal{On peut généraliser à une relation abstraite $L$, $L'$ \ill{} entre deux magasins $\mathcal{M}$, $\mathcal{M}'$ \ill{}}
+\note{marginale oblique en marge gauche, à hauteur du diagramme ; lecture très partielle.}
+
+\page{78}
+Si je me fatigue à faire une théorie « abstraite », c'est bien sûr pour pouvoir parler des supports aussi en dehors des \uncertain{cas} quasi-ensemblistes (p.\ ex.\ pour les cordes etc…)
+
+Supposons qu'on ait une \uncertain{fonction} support \add{\uncertain{exacte}} \uncertain{normalisée} \add{\uncertain{exacte} et} \emph{fidèle}
+\[
+  \mathcal{M} \longrightarrow \mathcal{P}(P), \qquad X \longmapsto |X|
+\]
+\uncertain{comme} (p.~62), j'ai envie \uncertain{alors} de définir une \struck{application injective, comme} \add{\uncertain{relèvement}}
+\[
+  \Sigma_{\mathcal{M}} \hookrightarrow \mathcal{P}(P)
+\]
+de telle façon que la relation d'ordre de $\Sigma_{\mathcal{M}}$ soit induite par celle de $\mathcal{P}(P)$, que $\Sigma_{\mathcal{M}}$ soit stable par Sup et Inf quelconques, et commute à $\complement$. Si $|\mathcal{M}| = P$. Est-ce trop \uncertain{demander} \ill{} \uncertain{exprimer} ?
+
+\struck{Si $A \subset \mathcal{M}$, définissons $|A|^{\circ} = \bigcup_{X \in A} |X|^{\circ}$. Donc si $A, B \subset \mathcal{M}$, on a $A$…}
+\note{ces lignes, au bas de la page, sont barrées de quatre traits obliques ; la dernière s'arrête sur « $A$ » suivi d'un signe inachevé.}
+\marginal{Pour une fonction support \ill{} $\mathcal{M}$, $\mathcal{M}'$ \ill{} générale}
+\note{marginale oblique en marge gauche, à hauteur de la définition de la fonction support ; lecture très partielle. La flèche de $\Sigma_{\mathcal{M}} \hookrightarrow \mathcal{P}(P)$ est un crochet d'inclusion.}
+
+\page{79}
+Je regarde l'application
+\[
+  \varphi : X \longmapsto |X|^{\circ} \qquad \mathcal{M} \longrightarrow \mathcal{P}(P),
+\]
+plus « fine » que $X \mapsto |X|$. Par hypothèse, la relation $|\circ|$ sur $\mathcal{M}$ se déduit de la \struck{\ill{}} relation $x \neq y$ sur $P$, via l'application précédente. Je pose donc pour \struck{toute} partie $A$ de $\mathcal{M}$
+\[
+  |A|^{\circ} \text{ ou } \varphi(A) \overset{\mathrm{def}}{=} \bigcup_{X \in A} \underbrace{\varphi(X)}_{|X|^{\circ}}
+\]
+et on trouve par hyp.
+\[
+  A \parallel B \Longleftrightarrow \underbrace{\varphi(A) \cap \varphi(B)}_{S} = \emptyset
+\]
+\note{l'accolade « $S$ » sous $\varphi(A) \cap \varphi(B)$ est sur la page ; le signe $\parallel$ est ici celui que la suite écrit $|\circ|$.}
+Ceci vu, on a donc
+\[
+  \operatorname{cosupp}^{\circ}(A) = \{ \text{\struck{$X$}}\, X \in \mathcal{M} \mid \text{\struck{$\varphi(\ldots)$}}\ X \subset P \setminus \varphi(A) \}
+\]
+Par suite, on a
+\[
+  \varphi(\underbrace{\operatorname{cosupp}^{\circ}(A)}_{S}) \subset P \setminus \varphi(A)
+\]
+\struck{Ce \uncertain{partie} \ill{} support} et $\underbrace{\operatorname{cosupp}^{\circ}(A)}_{S}$ est \uncertain{connu} quand on connaît \struck{$\varphi(S) =$} la partie $\varphi(S) =$ \struck{\ill{}} $P \setminus \varphi(A)$, \uncertain{par} \uncertain{dans} $P$ (et $=$ à $P \setminus \varphi(A)$), par
+\[
+  X \in S \Longleftrightarrow \varphi(X) \subset \varphi(S)
+\]
+\struck{D'où l'application}
+[En effet, $\Rightarrow$ tautologique, et $\Leftarrow$ car $\varphi(X) \subset \varphi(S)$ implique $\varphi(X) \subset P \setminus \varphi(A)$ … $\varphi(X) \cap \varphi(A) = \emptyset$ i.e.\ $X \mathrel{|\circ|} A$ donc $X \in \operatorname{cosupp}^{\circ} A$).
+
+Ainsi l'application
+\note{p. 71 de l'auteur. La phrase se poursuit au-delà de ce lot.}
+
+\page{80}
+\[
+  \Sigma_{\mathcal{M}} \longrightarrow \mathcal{P}(P), \qquad S \longmapsto \varphi(S) \ (= |S|^{\circ})
+\]
+est injective, on trouve une inverse à gauche en associant, à toute partie $Q$ \struck{\ill{}} de $P$, l'ens.
+\[
+  \text{\struck{$S_Q$}} = \{ X \in \mathcal{M} \mid \varphi(X) \subset Q \}
+\]
+ou plutôt (comme celui-ci n'est peut-être pas lui-même un support)
+\[
+  S_Q = \operatorname{supp}^{\circ}\bigl(\{ X \in \mathcal{M} \mid \varphi(X) \subset Q \}\bigr).
+\]
+\uncertain{\add{Peut-être} faut-il} \struck{\ill{}} \uncertain{dire} \ill{}, d'ailleurs \ill{} \add{pas} \uncertain{de} \uncertain{fonction} support \ill{} plus \ill{} que celles précédemment \ill{} \uncertain{rencontrées}, i.e.\ qui ne puisse y comprendre \add{\uncertain{invariants} de} supports de figures quelques choses en l'occurrence) (\struck{\ill{}} éliminant ceux qui ne sont pas compatibles, ou qui ne \ill{} après subdivision, ou le diminuant).
+
+Ainsi faudrait-il à présent que je me limite à des supports de figures, finis, \uncertain{voire} \uncertain{finis} par \uncertain{une} \uncertain{subdivision}\,: \ill{} une figure (supports « constructibles »)
+\note{la fin de la page est d'une écriture très rapide ; la lecture des deux derniers paragraphes est en grande partie conjecturale. Le texte se poursuit au-delà de ce lot.}
+
+\marginal{Il me semble difficile \ill{} \ill{} $A \cap B$ \ill{} \ill{} figures \ill{} \ill{}}
+\drawing{En marge gauche, en bas : un fuseau hachuré, entre deux points, coupé par un segment ; légendes $|B|$, $|A|$, « $A \cap B = \emptyset$ », « $|A| \cap |B| \neq \emptyset$ ». Il illustre deux parties disjointes dont les supports se rencontrent.}
+\note{marginale oblique, lue très partiellement, avec le croquis qu'elle accompagne.}
+
+\end{document}
