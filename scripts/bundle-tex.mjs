@@ -69,7 +69,7 @@ for (const folder of folders) {
 
   const meta = parts[0].meta
     .split('\n')
-    .filter((l) => !/^\\batch\{/.test(l.trim()))
+    .filter((l) => !l.trim().startsWith('\\batch{'))
     .join('\n')
     .replace(/\\pages\{\d+\}\{\d+\}/, `\\pages{${first}}{${last}}`)
     .replaceAll('\\input{../preamble/', '\\input{preamble/')
