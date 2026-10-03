@@ -1,0 +1,521 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 34, batch 1 (pages 1-20).
+% Established from the facsimile archives/batches/34/batch-01.pdf (a mirror of
+% https://grothendieck.umontpellier.fr/34.pdf), per the skill
+% transcribe-grothendieck.
+% The opening of a manuscript draft of SGA 7, Exposé I: notations (a trait S,
+% Galois group pi), l-adic representations and their geometric sources, then
+% the structure of pi (inertia, wild inertia, tame quotient), Tate twists, and
+% the l-adic monodromy theorem. Page 1 is a blank cover sheet carrying only the
+% archivists' number and is skipped. Pages 2-20 are his pagination 1-19.
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-03 — first pass, unchecked against the pages by a human.
+%
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{34}
+\batch{1}
+\pages{1}{20}
+\foldertitle{SGA 7 : notes manuscrites (s.d.).}
+\dating{[vers 1967-1973]}
+\watermark{Édition de démonstration}
+
+\begin{document}
+
+\section{Exposé I. Généralités, le th. de monodromie par voie arithmétique}
+
+\page{2}
+\note{p. 1 de l'auteur. En tête : « Exposé I », suivi d'un premier titre biffé, puis du titre retenu, repris ici comme titre de section.}
+
+Exposé I \struck{Actions des groupes de monodromie} : Généralités, \add{le} th. de monodromie par voie arithmétique.
+
+\subsection*{0. Introduction}
+
+0.1. \emph{Notations.} $S = \operatorname{Spec} V$ un trait, $s$ le pt fermé, $\eta$ point générique,
+$\mathfrak{m} = {}$\uncertain{$\mathfrak{r}V$} \add{$= tV$}, $k = k(s)$, $K = k(\eta)$ ; $p$ = exp. car. de $k(s)$.
+Le plus souvent, on supposera \add{\ill{}} $V$ hensélien, et ${}={}$ \uncertain{même} strictement local, i.e. $k$ sép. clos ;
+\struck{Soit} $\overline{K}$ une clôture séparable de $K$, $\bar\eta = \operatorname{Spec}\overline{K}$ ;
+\[
+  \pi = \operatorname{Gal}(\overline{K}/K) .
+\]
+$\ell$ nombre premier. \struck{Sauf mention du contraire, dans la plus grande partie} \add{\uncertain{Pour tout ce qui suit} \ill{} de l'exposé} \ill{} \struck{L'objet de} $\ell \neq \operatorname{car} k$.
+
+0.2. L'objet du Séminaire est l'étude de certaines représentations $\ell$-adiques de $\pi$, provenant de diverses situations géométriques. Une repr. $\ell$-adique de $\pi$ est un \struck{\ill{}} hom. continu
+\[
+  (*) \qquad \pi \longrightarrow \operatorname{Aut}_{\mathbb{Z}_\ell}(E) ,
+\]
+où $E$ est un module de t.f. sur $\mathbb{Z}_\ell$. On pourra aussi regarder
+\[
+  \pi \longrightarrow \operatorname{Aut}_{\mathbb{Q}_\ell}(E) ,
+\]
+$E$ module de t.f. sur $\mathbb{Q}_\ell$.
+
+\emph{Exemple} 0.3. $X_K$ schéma algébrique sur $K$, \add{$i$ entier.} \uncertain{On suppose que} $H^i(X_{\overline{K}}, \mathbb{Z}/\ell\mathbb{Z})$ est un groupe fini, de sorte que
+\[
+  E = H^i(X_{\overline{K}}, \mathbb{Z}_\ell) \overset{\mathrm{df}}{=} \varprojlim_\nu H^i(X_{\overline{K}}, \mathbb{Z}/\ell^\nu\mathbb{Z})
+\]
+est un module de t.f. sur $\mathbb{Z}_\ell$ ; cette hyp. \struck{\ill{}} est \struck{\ill{}} vérifiée dans les trois cas suivants :
+\begin{itemize}
+  \item[a)] On dispose de résolution des sing. \add{sous forme de Hironaka ( )} des schémas alg. de dim ${}\leq \dim X$ sur $\overline{K}$, --- p.ex. $K$ de car. nulle ;
+  \item[b)] $X$ propre sur $K$ ;
+  \item[c)] $X$ lisse sur $K$.
+\end{itemize}
+
+\page{3}
+\note{p. 2 de l'auteur.}
+\uncertain{Comme} $\pi$ opère sur \struck{\ill{}} $E$ par « transport de structure », on trouve une représentation $\ell$-adique $(*)$.
+
+\emph{Exemple} 0.4. Soit $A$ un \struck{schéma} groupe algébrique \add{commut.} sur $K$. Alors on regarde
+\[
+  E = T_\ell(A(\overline{K})) \overset{\mathrm{df}}{=} \varprojlim_\nu {}_{\ell^\nu}A(\overline{K}) .
+\]
+\struck{\ill{}} Le groupe ne change pas si on remplace $A$ par $(A^{\circ})_{\mathrm{red}}$ (NB. $T_\ell$ est un foncteur exact : quand les \uncertain{noyaux} sont finis), c'est un \struck{groupe} \emph{module libre} sur $\mathbb{Z}_\ell$ de rang égal à : $2\alpha + \struck{\ill{}}\,\mu$, où $\alpha$ ($\mu$) est la dim. de la « partie abélienne » resp. \struck{« torique »} « torique » de $(A_K)^{\circ}_{\mathrm{red}}$. Ici encore, $\pi$ opère sur $E$ par transport de structure.
+
+\emph{Remarque} 0.5. On peut regarder l'exemple 0.\uncertain{3} comme étant essentiellement \struck{le} un cas particulier de l'exemple 0.4 \add{pour $i = 1$.}\note{le chiffre du premier renvoi est surchargé ; l'ajout « pour $i=1$ » est appelé par un trait après « 0.4 ».}
+De façon précise, \add{on montre qu'}il y a un isom. canonique
+\[
+  H^1(A_{\overline{K}}, \mathbb{Z}_\ell) \simeq \text{\struck{\ill{}}}\ \operatorname{Hom}_{\mathbb{Z}_\ell}(T_\ell(A(\overline{K})), \mathbb{Z}_\ell) ,
+\]
+ou ce qui revient au même, puisque $T_\ell(A_{\overline{K}})$ est libre de type fini sur $\mathbb{Z}_\ell$ :
+\[
+  T_\ell(A(\overline{K})) = \operatorname{Hom}_{\mathbb{Z}_\ell}(H^1(A_{\overline{K}}, \mathbb{Z}_\ell), \mathbb{Z}_\ell) .
+\]
+D'autre part, \struck{dans 0.3,} si \struck{\ill{}} dans 0.3, $X$ \uncertain{est propre et lisse}, \uncertain{et} $i = 1$, on trouve
+\[
+  H^1(X_{\overline{K}}, \mathbb{Z}_\ell(1)) \simeq \varprojlim_\nu H^1(X_{\overline{K}}, \mu_{\ell^\nu}) \simeq T_\ell(\operatorname{Pic}(X_{\overline{K}}))
+  \simeq T_\ell(\underline{\operatorname{Pic}}_{X/K}(\overline{K}))
+\]
+
+\page{4}
+\note{p. 3 de l'auteur.}
+ou si on préfère
+\[
+  H^1(X_{\overline{K}}, \mathbb{Z}_\ell) \simeq T_\ell(\underline{\operatorname{Pic}}_{X/K}(\overline{K})) \otimes_{\mathbb{Z}_\ell} \mathbb{Z}_\ell(-1) .
+\]
+
+0.6. Lorsque $A$ est un schéma abélien sur $K$, nous verrons que la connaissance du $\pi$-module $T_\ell(A(\overline{K}))$ donne des informations \struck{assez} précises sur la structure du \emph{modèle de Néron} de $A$ [ ], et inversement la considération du mod. de Néron permet d'obtenir des renseignements complémentaires intéressants sur $T_\ell(A(\overline{K}))$, --- et partant sur
+\marginal{\uncertain{tous les} $H^i(X_{\overline{K}})_{\uncertain{f}}$ comme $\pi$-modules}
+D'autre part, l'étude des $\pi$-modules plus généraux $H^i(X_{\overline{K}}, \mathbb{Z}_\ell)$ s'introduit quand on \struck{\ill{}} dispose d'un \struck{modèle} \add{schéma} $X$ \struck{\ill{}} sur $S$ de fibre générique $X_K = X_\eta$, et qu'on désire \struck{\ill{}} étudier les relations entre $H^i(X)$, $H^i(X_s)$ et $H^i(X_{\bar\eta})$ ; (p.ex. dans certains cas on a $H^i(X_s) \simeq H^i(X_{\bar\eta})^{\pi}$). Cette \struck{Deligne, utilisant} \struck{l'étude} étude locale s'avère comme un outil indispensable pour l'étude \add{cohomologique} \emph{globale} d'un morphisme
+\[
+  f : X \longrightarrow S
+\]
+avec $S$ régulier de dim 1. \struck{Pour \ill{}} Dans le cas où $S = \mathbb{P}^1_k$, et où $X$ « est » \struck{\ill{}} un pinceau de sections hyperplanes d'une variété projective lisse $X_0$ définie sur $k$, on est dans la situation typique de la \emph{théorie de Lefschetz} [ ]. S'inspirant d'arguments de Lefschetz, Deligne montre \uncertain{ainsi} \struck{\ill{}} que si $X_0$ est une surface de degré ${}\geq 4$
+
+\page{5}
+\note{p. 4 de l'auteur.}
+dans $\mathbb{P}^3_k$, alors on a
+\[
+  \mathbb{Z} \simeq \operatorname{Pic}(\mathbb{P}^3) \xrightarrow{\ \sim\ } \operatorname{Pic}(X_0) ,
+\]
+$k$ étant un corps de car. quelconque.
+
+\subsection*{2. Rappels sur la structure de $\pi$}
+\note{la numérotation saute de 0 à 2 sur la page.}
+
+On suppose $S$ hensélien, i.e. $V$ hensélien.
+
+2.1. Il y a une sous-extension $\widetilde{K}_{\mathrm{nr}}$ de $\overline{K}/K$, qui est la plus grande sous-extension non ramifiée (i.e. étale) sur $V$.\note{l'indice de $\widetilde{K}$ est empâté, ici et p.~7 ; la lecture « nr » est une conjecture du transcripteur.} Si \struck{\ill{}} $\widetilde{V}$ est la clôture normale de $V$ dans $\widetilde{K}_{\mathrm{nr}}$, $\widetilde{V} = {}$\struck{\ill{}} $\overline{V} \cap \widetilde{K}_{\mathrm{nr}}$ la clôture normale de \struck{\ill{}} $V$ dans $\overline{K}$, alors $\widetilde{V}$ est un anneau de valuation \uncertain{discrète}, \struck{$\mathfrak{m}(\widetilde{V}) = \mathfrak{m}\widetilde{V}$,}
+\[
+  \widetilde{V} \otimes_V k = \bar{k}
+\]
+est une \struck{extension} clôture séparable de $k$ ; \uncertain{d'autres} termes, $\widetilde{V}$ est une \emph{hensélisation stricte} de $V$ p.r. à \struck{\ill{}} la clôture séparable $\bar k$ de $k$, et $\widetilde{K}_{\mathrm{nr}}$ est le corps des fractions de $\widetilde{V}$. On pose
+\[
+  \begin{cases} \widetilde{S} = \operatorname{Spec}\widetilde{V} = \text{hensélisé strict de } S \\ \bar{s} = \operatorname{Spec}\bar{k} . \end{cases}
+\]
+
+2.3. On a remarqué que la donnée de la clôture séparable $\overline{K}$ de $K$ définit canoniquement une clôture séparable $\bar k$ de $k$. \add{Si $S'$ est un} \struck{Cette} \struck{\ill{}} \struck{fini étale} \ill{}
+
+\struck{2.1.1. D'où un isomorphisme canonique ${}_n\bar{k}^{*} \xleftarrow{\ \sim\ } {}_n\widetilde{V}^{*} \xrightarrow{\ \sim\ } \overline{K}^{*}$ \ldots\ $\mu_n(\overline{K}) \simeq \mu_n(\bar k)$. \ill{} compatible avec les morphismes de \ill{}}\note{ce passage, numéroté 2.1.1 et précédé de « \ldots{} inversible dans $k$, on a : », est encadré et biffé de traits obliques ; l'appel en marge (« 2.3 ») le remplace par le paragraphe 2.3 ci-dessus, écrit au-dessus.}
+
+\page{6}
+\note{p. 5 de l'auteur.}
+schéma fini étale sur $S$, alors on a des isomorphismes
+\[
+  \operatorname{Hom}_S(\bar{s}, S') \xleftarrow{\ \sim\ } \operatorname{Hom}_S(\text{\struck{Spec}}\ \widetilde{S}, S') \xrightarrow{\ \sim\ } \operatorname{Hom}_S(\text{\struck{Spec}}\ \bar\eta, S') ,
+\]
+d'où un isom. canonique
+\[
+  (2.3.1) \qquad \operatorname{Hom}_S(\bar{s}, S') \simeq \operatorname{Hom}_S(\bar\eta, S') ,
+\]
+fonctoriel en $S'$, \uncertain{liant les} \add{2} foncteurs « fibres » sur la cat. des rev. étales de $S$, définis resp. par \struck{\ill{}} $\bar k$ et $\overline{K}$ \add{(i.e. pts} géom. $\bar s$ et $\bar\eta$). Faisant $S' = \mu_n$, $n$ \add{entier} inversible dans $k$, on trouve en particulier un isom.
+\[
+  (2.3.2) \qquad \mu_n(\bar{s}) = {}_n\bar{k}^{*} \simeq \mu_n(\overline{K}) = {}_n\overline{K}^{*} ,
+\]
+d'où par passage à la limite sur les puissances de $\ell$, $\ell \neq \operatorname{car} k$ :
+\[
+  (2.3.3) \qquad T_\ell(\bar{k}^{*}) \simeq T_\ell(\overline{K}^{*}) .
+\]
+\struck{On notera} Les deux membres sont des modules libres de rang 1 sur $\mathbb{Z}_\ell$, \struck{qui} \struck{le premier identifié} qu'on désignera \uncertain{aussi} par $\mathbb{Z}_\ell(1)$. \struck{\ill{}}
+(2.3.5) \add{La puiss. tensorielle n-ième} $\mathbb{Z}_\ell(1)^{\otimes n}$ ($n \in \mathbb{Z}$) est notée $\mathbb{Z}_\ell(n)$. Donc
+\[
+  (2.3.4) \qquad \mathbb{Z}_\ell(n) \simeq \varprojlim_\nu \mu_{\ell^\nu}(\bar{k}^{*})^{\otimes n} \simeq \varprojlim_\nu \mu_{\ell^\nu}(\overline{K}^{*})^{\otimes n} .
+\]
+Les isomorphismes \struck{\ill{}} \add{ci-dessus} sont compatibles aux opérations de $\pi$ sur $\mu_n(\overline{K}^{*})$ \add{et} à celles de $\pi_0$ sur $\mu_n(\bar{k}^{*})$ etc.\ldots, compte tenu de l'épimorphisme canonique $\pi \to \pi_0$.
+
+\page{7}
+\note{p. 6 de l'auteur. Le numéro 2.2 surcharge un autre chiffre ; un trait en marge, comme en face de 2.3 p.~5, semble indiquer une insertion.}
+2.2. La sous-extension $\widetilde{K}_{\mathrm{nr}}$ de $\overline{K}/K$ est galoisienne, et son groupe de Galois est canoniquement isomorphe au groupe de Galois
+\[
+  (2.2.1) \qquad \pi_0 = \operatorname{Gal}(\bar{k}/k) .
+\]
+On obtient ainsi une suite exacte
+\[
+  (2.2.2) \qquad 1 \longrightarrow I \longrightarrow \pi \longrightarrow \pi_0 \longrightarrow 1 ,
+\]
+où
+\[
+  I = \operatorname{Gal}(\overline{K}/\widetilde{K})
+\]
+est ce qu'on appelle le groupe d'\emph{inertie}. \struck{\ill{}} \struck{c'est aussi} Si on se rappelle \add{que} $\widetilde{K}$ = corps des fractions de $\widetilde{V}$, ($\overline{K}$ est une clôture séparable de $\widetilde{K}$,) on voit donc que $I$ est le groupe de Galois qui correspond à la situation \struck{\ill{}} des anneaux de valuation strictement locaux $\widetilde{V}$. Si $k$ est sép. clos, on aura $K = \widetilde{K}$, $V = \widetilde{V}$, $I = \pi$.
+
+\emph{Le objet du séminaire est plutôt l'étude des représentations $\ell$-adiques du groupe d'inertie $I$.} (Le groupe $I$, en tant qu'il intervient par la représentation $\ell$-adique envisagée, \struck{provient de la} est parfois appelé \emph{groupe de monodromie locale}.) Il revient au même de dire qu'on s'attache surtout à étudier les repr. $\ell$-adiques du groupe $\pi$, lorsque $k$ est sép. clos. \struck{Dans} certaines situations, cependant, on aura une représentation d'une extension
+
+\page{8}
+\note{p. 7 de l'auteur.}
+(2.2.2), et on ne se bornera pas \struck{\ill{}} à étudier sa restriction à $I$. On verra \struck{toutefois} \add{parfois} que le fait qu'une représentation de $I$ se prolonge à $\pi$ impose à cette représentation des restrictions draconiennes.
+
+2.3.
+
+2.4. \struck{Rappelons} \uncertain{La structure} de $I$. Soit $p$ l'exposant caractéristique de $k$, \struck{Alors} et soit $P$ le \struck{plus grand} sous-$p$-groupe de Sylow de $I$ ($P = 1$ si $p = 1$ i.e. $k$ de car. nulle). Alors $P$ est \emph{invariant}, i.e. on a une suite exacte
+\[
+  (2.4.1) \qquad 1 \longrightarrow P \longrightarrow I \longrightarrow I_t \longrightarrow 1 ,
+\]
+où $I_t$ \add{(partie « tame » du groupe d'inertie $I$)} est un groupe profini premier à $p$, d'autre part on a un isomorphisme canonique
+\[
+  (2.4.2) \qquad I_t \simeq \prod_{\ell \neq p} \mathbb{Z}_\ell(1) .
+\]
+Le diagramme est obtenu ainsi. Le groupe $P$ est le groupe de Galois \struck{de}
+\[
+  (2.4.3) \qquad P = \operatorname{Gal}(\overline{K}/\overline{K}_t) ,
+\]
+où $\overline{K}_t$ est la plus \struck{grande} grande sous-extension \emph{modérément ramifiée} de $\overline{K}/K$ \add{(rel. à $V$)}, \uncertain{i.e. aussi} de $\overline{K}/\widetilde{K}$ (rel. à $\widetilde{V}$). Celle-ci s'obtient, en désignant
+
+\page{9}
+\note{p. 8 de l'auteur.}
+d'une uniformisante \struck{\ill{}} $t$ de $V$, \add{donc de $\widetilde{V}$,} comme la réunion des sous-extensions \struck{abéliennes} Kummeriennes
+\[
+  (2.4.4) \qquad K_n = \widetilde{K}(\sqrt[n]{t}) \subset \overline{K} ,
+\]
+où $n$ parcourt les entiers ${}>0$ premiers à $p$. Le groupe de Galois de cette extension $K_n$ est naturellement isomorphe au groupe
+\[
+  \mu_n(\overline{K}) = {}_n\overline{K}^{*}
+\]
+des racines $n$-ièmes de l'unité dans $\overline{K}$, et par passage à la limite on trouve
+\[
+  I_t = \operatorname{Gal}\bigl((\varinjlim_n K_n)/\widetilde{K}\bigr) \simeq \varprojlim_n \operatorname{Gal}(K_n/\widetilde{K}) ,
+\]
+\note{le second argument du dernier $\operatorname{Gal}$ est noirci ; on lit $\widetilde{K}$ par analogie avec le premier membre.}
+i.e. (2.4.2).
+
+\emph{Remarque} 2.5. On notera que par définition, le sous-groupe $P$ de $I$ est stable par \struck{\ill{}} automorphismes de $I$, en particulier par les automorphismes \uncertain{intérieurs} induits par les automorph. int. de $\pi$. Donc $\pi$ opère par passage au quotient sur $I/P = I_t$ ; \struck{De manière analogue, puisque} \struck{\ill{} on \ill{}} dans cette opération, le sous-groupe $I$ de $\pi$ opère \emph{trivialement}, $I_t$ étant commutatif, donc les \uncertain{\ill{}} on trouve une opération de $\pi/I \simeq \pi_0$ sur $I_t$. \struck{Comme \ill{}} On vérifie trivialement que
+
+\page{10}
+\note{p. 9 de l'auteur.}
+cette opération, via l'isomorphisme (2.4.2), \struck{\ill{}} n'est autre que celle qui provient de \add{l'opération naturelle} \struck{l'isomorphisme de} de $\pi_0$ sur les facteurs $\mathbb{Z}_\ell(1)$, via l'expression (2.3.3) de $\mathbb{Z}_\ell(1)$.
+
+Bien entendu, pour tout $\ell$ \struck{\ill{}} il existe \struck{des} un isomorphisme
+\[
+  \mathbb{Z}_\ell(1) \simeq \mathbb{Z}_\ell ,
+\]
+dont le choix revient au choix d'un syst. cohérent de racines \add{primitives} $\ell^\nu$-ièmes de 1 dans $\overline{K}$. Mais on fera attention qu'il n'y a pas de façon naturelle de faire ce choix, et que c'est l'expression \uncertain{intrinsèque} (2.4.2) qui seule \struck{permet} tient compte des opérations naturelles de $\pi_0$ sur le premier membre.
+
+\page{11}
+\note{p. 10 de l'auteur.}
+\subsection*{3. Comportement pour $S$ variable}
+
+\note{titre souligné : « Comportement pour \struck{\ill{}} $S$ \uncertain{variable} » ; un mot biffé précède « $S$ ».}
+
+Soit
+\[
+  (3.1) \qquad f : S' = \operatorname{Spec}(V') \longrightarrow S = \operatorname{Spec} V ,
+\]
+un morphisme \emph{dominant} de traits, \struck{Alors} donc $f(s') = s$, $f(\eta') = \eta$. La donnée d'une \add{clôture} \struck{extension} séparable \struck{\ill{}} $\overline{K'}$ de $K'$ en définit une $\overline{K}$ de $K$, à savoir la clôture séparable de $K$ dans l'extension $\overline{K'}$. Alors $\widetilde{K}$ est contenu dans $\widetilde{K'}$, et $\widetilde{V}$ dans $\widetilde{V'}$. L'homomorphisme d'inclusion $\widetilde{V} \hookrightarrow \widetilde{V'}$ définit aussi un hom. $\bar{k} \to \bar{k}'$, correspondant ; \struck{\ill{}} on a des diagrammes commutatifs de corps :
+
+(3.2)
+
+\begin{tikzcd}[column sep=small, row sep=small]
+K' \arrow[r, no head] & \widetilde{K}' \arrow[r, no head] & \overline{K'} \\
+K \arrow[u, no head] \arrow[r, no head] & \widetilde{K} \arrow[u, no head] \arrow[r, no head] & \overline{K} \arrow[u, no head]
+\end{tikzcd}
+
+\[
+  (3.3) \qquad (3.4)
+\]
+
+\begin{tikzcd}[column sep=small, row sep=small]
+V' \arrow[r, no head] & \widetilde{V}' & k' \arrow[r, no head] & \bar{k}' \\
+V \arrow[u, no head] \arrow[r, no head] & \widetilde{V} \arrow[u, no head] & k \arrow[u, no head] \arrow[r, no head] & \bar{k} \arrow[u, no head]
+\end{tikzcd}
+
+\note{le premier carré, (3.3), est numéroté à gauche, le second, (3.4), entre les deux ; les traits sont sans flèche sur la page.}
+
+On trouve ainsi un diagramme commutatif d'extensions, induit par $\operatorname{Gal}(\overline{K'}/K') = \pi' \to \operatorname{Gal}(\overline{K}/K) = \pi$ :
+(3.5)
+
+\begin{tikzcd}[column sep=small, row sep=small]
+1 \arrow[r] & I' \arrow[r] \arrow[d] & \pi' \arrow[r] \arrow[d, no head] & \pi'_0 \arrow[r] \arrow[d, no head] & 1 \\
+1 \arrow[r] & I \arrow[r] & \pi \arrow[r] & \pi_0 \arrow[r] & 1
+\end{tikzcd}
+
+L'homomorphisme $\pi'_0 \to \pi_0$ n'est autre que l'hom.
+\[
+  (3.6) \qquad \pi'_0 = \operatorname{Gal}(\bar{k}'/k') \longrightarrow \operatorname{Gal}(\bar{k}/k) = \pi_0
+\]
+\note{sur la page, $\pi'_0$ et $\pi_0$ sont écrits sous les deux groupes de Galois, reliés par « $=$ » verticaux.}
+déduit de (3.4). L'hom. $I' \to I$ s'insère dans un diagramme de suites exactes
+(3.7)
+
+\begin{tikzcd}[column sep=small, row sep=small]
+1 \arrow[r] & P' \arrow[r] \arrow[d] & I' \arrow[r] \arrow[d] & I'_t \arrow[r] \arrow[d, no head] & 1 \\
+1 \arrow[r] & P \arrow[r] & I \arrow[r] & I_t \arrow[r] & 1
+\end{tikzcd}
+
+\page{12}
+\note{p. 11 de l'auteur.}
+Il convient de déterminer l'hom.
+\[
+  (3.8) \qquad I'_t \simeq \prod_{\ell \neq p} \mathbb{Z}_\ell(1) \longrightarrow \prod_{\ell \neq p} \mathbb{Z}_\ell(1) \simeq I_t
+\]
+\note{« $\simeq I_t$ » est écrit au-dessus du second produit.}
+où on identifie, grâce à l'inclusion $\overline{K} \subset \overline{K'}$, les \struck{\ill{}} groupes $\mathbb{Z}_\ell(1)$ définis à l'aide de $\overline{K}$ et de $\overline{K'}$ (savoir $T_\ell(\overline{K}^{*})$ et $T_\ell(\overline{K'}^{*})$).
+
+Pour ceci, on regarde les sous-extensions (pour $(n,p) = 1$)
+\[
+  (3.9) \qquad
+  \begin{cases}
+    K_n = \widetilde{K}(\theta_n) \subset \overline{K}_t & \text{où } \theta_n^{\,n} = t , \\
+    K'_n = \widetilde{K'}(\theta'_n) \subset \overline{K'}_t & \text{où } \theta'^{\,n}_n = t'
+  \end{cases}
+\]
+et on regarde comment
+\[
+  \operatorname{Gal}(K'_n/\widetilde{K'}) \simeq \mu_n(\widetilde{K'}) \xleftarrow{\ \sim\ } \mu_n(\widetilde{K})
+\]
+(groupe des racines $n$-ièmes $\varepsilon$ de 1 dans $\widetilde{K}$) opère sur $K_n$. Si $\varepsilon_{K'}$ désigne l'opération sur $K'_n$ définie par $\varepsilon$, donc
+\[
+  \varepsilon_{K'_n}(\theta'_n) = \varepsilon\,\theta'_n ,
+\]
+on trouve, si
+\[
+  (3.10) \qquad t = u'\,t'^{\,e} \qquad (e \in \mathbb{N},\ u' \in \widetilde{V}'^{*})
+\]
+\note{la parenthèse est soulignée ; le $\widetilde{V}'^{*}$ est surchargé et pourrait être $V'^{*}$.}
+\marginal{d'où : \struck{$\mathfrak{m}\widetilde{V} = \mathfrak{m}'^{\ldots}$} \quad $\mathfrak{m}V = \mathfrak{m}'^{e}$ (encadré)}
+que
+\[
+  \theta_n^{\,n} = u' (\theta'^{\,e}_n)^{n} ,
+\]
+donc, si on pose
+\[
+  (3.11) \qquad \theta_n = \lambda\,\theta'^{\,e}_n , \qquad (\lambda \in K'_n) ,
+\]
+\note{le numéro (3.11) surcharge un autre ; la parenthèse « $(\lambda \in K'_n)$ » est soulignée d'un long trait.}
+on aura
+\[
+  \lambda^n = u' ,
+\]
+donc \struck{\ill{}} $\lambda \in \widetilde{V}'$ \struck{\ill{}} d'où $\varepsilon_{K'}(\lambda) = \lambda$, et on trouve
+\[
+  \varepsilon_{K'_n}(\theta_n) = \underbrace{\varepsilon_{K'_n}(\lambda)}_{=\lambda}\, \varepsilon_{K'_n}(\theta'^{\,e}_n) = \lambda (\varepsilon\theta'_n)^{e} = \varepsilon^{e}\,\theta_n
+\]
+\note{un renvoi « (3.10) » est porté au-dessus du dernier signe d'égalité.}
+
+\page{13}
+\note{p. 12 de l'auteur.}
+ou d'autres termes
+\[
+  \varepsilon_{K'_n}(\theta_n) = (\varepsilon^{e})_{K_n}(\theta_n)
+\]
+et par suite
+\[
+  \varepsilon_{K'_n} | K_n = (\varepsilon^{e})_{K_n} .
+\]
+Passant à la limite sur $n$, on trouve le
+
+\emph{Proposition} 3.12. Si $\mathfrak{m}V' = \mathfrak{m}'^{e}$, alors l'hom. \add{can.} (3.8) provenant de (3.5) s'identifie à la multiplication par $e$.
+
+En particulier, si $e = 1$ cet hom. est l'identité, \struck{\ill{}} \add{Ceci s'applique en particulier si $V' = \widehat{V}$.} \uncertain{c'est} \uncertain{un} isomorphisme. \add{En fait, \ldots{}}
+
+\emph{Prop.} 3.13. Supposons $V' = \widehat{V}$, \struck{et $V$ excellent} \struck{(i.e. $\widehat{K}$ sép. sur $K$)}. Alors les hom. de suites exactes (3.5) et (3.7) sont des isom\supplied{orphismes}\ldots
+
+\note{à partir d'ici, la moitié inférieure de la page (le reste de 3.13 et sa démonstration) est barrée de deux longs traits obliques, et plusieurs lignes y sont en outre biffées horizontalement ; un ajout cerclé en marge gauche, également sous les traits, se lit en partie : « \ill{} de val. discrète ; $\widehat{V}$, $\widehat{K}$ \ill{} », avec la chaîne $\widetilde{V} \subset \widetilde{\widetilde{V}} \subset \widehat{\widetilde{V}}$ \uncertain{} plus bas. Ce qui se lit du texte barré :}
+
+\struck{\ill{} \ldots{} $\pi' \to \pi$ est \ill{} surjectif, i.e. si $K_1$ est une extension finie séparable de $K$, \ill{} $K_1 \otimes_K \widehat{K}$ \ill{} \ldots{} $V$ dans \ill{} $\pi'_0 \to \pi_0$ \ill{} \ldots{} $I'_t \to I_t$, \ill{} \ldots{} en fait il \ill{} examiner $\pi' \to \pi$ \ill{} \ldots{} $I' \to I$) \ldots{} d'après la \ill{} \ldots{} solutions d'une équation algébrique \ill{} \ldots{} p.r. aux coefficients, qui explique que les \ill{} \ldots{} \emph{voisines} définissent les extensions \ill{} $\widehat{K}$. \ldots{} isomorphes de $\widehat{K}$ \ldots{} (d'après le résultat \ldots{}) comme $I' \to I$ est surjectif \ldots{} l'hypothèse d'excellence \ldots{}}
+
+\emph{Remarque} 3.14. La prop. 3.13 montre que dans le \uncertain{plupart} des questions \struck{\ill{}} des \uncertain{séminaires}, on pourrait supposer $V$ complet.
+\note{la remarque 3.14 est elle aussi sous les traits obliques, mais n'est pas biffée ligne à ligne ; on la donne en clair.}
+
+\page{14}
+\note{p. 13 de l'auteur. Démonstration de la prop. 3.13 (p.~13).}
+\emph{Dém.} a) Comme $\pi'_0 \to \pi_0$ est évidemment un isom. (car $k'/k$ est trivial) il suffit de prouver que $I' \simeq I$, et comme $I'_t \xrightarrow{\ \sim\ } I_t$ (car $e = 1$) il suffit de prouver que $P' \xrightarrow{\ \sim\ } P$.
+
+b) On sait que $\pi' \to \pi$ est \struck{\ill{}} surjectif, i.e. pour toute ext. finie sép. $K_1/K$, $K_1 \otimes_K \widehat{K}$ est un \emph{corps} : en effet, la clôture normale $V_1$ de $V$ dans $K_1$ est finie, donc $V_1 \otimes_V \widehat{V} \simeq \widehat{V}_1$, \add{c'est donc} un anneau de val. discrète (\uncertain{$V_1$} étant \uncertain{local}), donc $K_1 \otimes_K \widehat{K} \simeq \widehat{V}_1 \otimes_V K$ est un corps.
+
+\struck{Dans \ill{}} \struck{\uncertain{Il suffit} de \uncertain{remplacer} $V, V'$ par $\widetilde{V}, \widetilde{V}'$ et à \uncertain{comparer} \ill{} $\widehat{\widetilde{V}} \simeq \widehat{\widetilde{V}}'$ \ill{}} \note{passage biffé, avec des ajouts interlinéaires eux-mêmes partiellement biffés : « \ldots{} \uncertain{complet} \ldots{} sur les suites exactes ».}
+
+c) On en conclut que $I' \to I$ est surjectif, puis $P' \to P$ \emph{surjectif}.
+
+Il reste à prouver que $P' \to P$ est injectif, et pour ceci que $\pi' \to \pi$ est injectif, i.e. que toute extension séparable finie $K'_1$ de $K' = \widehat{K}$ provient d'une ext. sép. finie de $K$. Or ceci résulte du fait (« continuité des racines p.r. aux coefficients ») que deux équations \uncertain{voisines}, séparables à coefficients dans $\widehat{K}$ \add{dans $K$}, définissent des \struck{\ill{}} $\widehat{K}$-algèbres isomorphes.
+
+\page{15}
+\note{p. 14 de l'auteur. Les numéros 3.14, 3.14.1, 3.14.2 surchargent d'autres chiffres (vraisemblablement 3.15 \ldots), la remarque 3.14 de la p.~13 étant venue s'intercaler ; on transcrit les numéros définitifs.}
+3.14. Soit $\pi'$ un sous-groupe d'indice fini de $\pi$. Il correspond à une extension séparable finie $K'$ de $K$, d'où un normalisé $V'$ de $V$ dans $K'$, qui est un anneau de val. discrète hensélien. Si $k'$ est son corps résiduel, $k'/k$ est une extension finie, \uncertain{plus précisément} \struck{\ill{}} \add{\uncertain{l'image}} de $\pi'_0 = \operatorname{Gal}(\bar{k}'/k')$ \add{\uncertain{dans}} \struck{\ill{}} sous-groupe ouvert de $\pi_0 = \operatorname{Gal}(\bar{k}/k)$. \add{Il \uncertain{vient} \ldots} \struck{D'autre part} \ldots{} $\pi'_0 \to \pi'$ est injectif, i.e. que
+\[
+  (3.14.1) \qquad I' = I \cap \pi' .
+\]
+Notons que d'après le théorème général appliqué à $V'$, \add{\uncertain{les} \ldots{}}
+\[
+  (3.14.2) \qquad \bigl[ I'/(I',I') \bigr]^{(\ell)} \simeq \mathbb{Z}_\ell(1) \qquad (\ell \neq p)
+\]
+\note{l'exposant de $[\,I'/(I',I')\,]$ surcharge un premier exposant biffé ; « $\ell \neq p$ » est ajouté au-dessus avec un trait de renvoi.}
+(isomorphisme canonique). \struck{D'autre part}, l'hom. $I'_t \to I_t$ \add{comme dessus}, s'identifie, à la multiplication par $e$, i.e. l'extension $k'/k$ est séparable, \struck{p.ex. si} \struck{lorsque} $\widetilde{V}'/\widetilde{V}$ \add{triviale} \struck{séparable}, \struck{Alors} p.ex. si $k$ est parfait, alors $e$ \uncertain{un} terme \ldots{} \uncertain{peut interpréter} \uncertain{l'indice de ramification} « géométrique » comme
+\[
+  e = [I : I'] = \operatorname{card} I/I' \quad \text{si } k'/k \text{ est \uncertain{séparable}} .
+\]
+\struck{Sinon, il faut diviser par le facteur d'inséparabilité} \ldots{} \note{passage biffé d'un long trait, en partie surchargé ; on lit encore : « \ldots{} lorsque \ldots{} $\pi'/\pi$ (i.e. $K'/K$ galoisienne) \ldots{} invariant dans $\pi$ \ldots{} ».}
+
+\struck{3.16. Il \ldots{} $I'$ invariant dans $\pi$ \ldots{} \ill{}}
+
+3.15. Lorsque $\pi'$ est \uncertain{invariant} dans $\pi$, \struck{$\pi'_0$ dans $\pi_0$, \ill{} (\ill{}) \ldots{}} \add{\ldots{} dans $\pi$} \struck{(\ill{} galoisienne)}, \add{donc} \struck{$k'/k$} \ldots{}
+\[
+  I' = I \cap \pi'
+\]
+(\uncertain{puisque} $I$ est invariant), \add{donc} \struck{$\pi/\pi'$} \struck{\ill{}} $\pi$ opère sur $I'/(I',I')$ et par suite sur
+
+\note{la moitié inférieure de la page est très raturée : plusieurs lignes biffées horizontalement, des ajouts interlinéaires et des renvois entremêlés ; seuls les fragments ci-dessus se lisent avec quelque assurance.}
+
+\page{16}
+\note{p. 15 de l'auteur. Le numéro (3.15.1) surcharge un autre.}
+\[
+  (3.15.1) \qquad I'_t = \prod_{\ell \neq p} \bigl( I'/[I',I'] \bigr)(\ell) \simeq \prod_{\ell \neq p} \mathbb{Z}_\ell(1) .
+\]
+\struck{Ceci posé, on constate \ldots{} constitue \ill{} \ldots{} $I'_{\mathrm{ab}}$ \ldots{} Bien \uncertain{entendu}, $I'$ opère trivialement \ldots{}, donc c'est \ldots{} opération de $\pi$ \ldots{} $\pi/I'$ qui opère sur $I'_{\mathrm{ab}}$ et à fortiori \ldots{} sur $I'_t$. Ceci \uncertain{posé} \ldots{} on constate que $I/I'$ opère trivialement sur (3.16.1), et que \ldots{} l'opération de $\pi/I \simeq \pi_0$ sur $I_t$ ainsi \ldots{}}
+\note{quelques lignes biffées, et recouvertes de traits ondulés, en tête de page ; elles renvoient à un « (3.16.1) » qui n'est pas celui qui suit.}
+
+\struck{\ill{}} l'isomorphisme \struck{\ill{}} (3.16.1) \uncertain{échange} les opérations de $\pi$ sur les deux membres, ni l'opération \ill{} sur le deuxième membre \struck{\ill{}} se fait via $\pi_0$ comme expliqué déjà plus haut.
+
+Ceci se fait \uncertain{géométriquement} le fait que l'isom. canonique (3.15.1), est compatible avec « transport de structure ».
+
+En particulier, on trouve que $I/I'$ opère trivialement sur $I'_t$, en d'autres termes
+
+\emph{Corollaire} 3.16. Pour tout sous-groupe \add{ouvert} invariant $I'$ \struck{\ill{}} de $I$, l'extension naturelle de $I/I'$ par le quotient $I'_t \simeq \prod_{\ell \neq p} \mathbb{Z}_\ell(1)$ de $I'$ est une extension \emph{centrale}.
+\note{le numéro 3.16 surcharge un autre chiffre ; la référence « (3.16.1) » du deuxième alinéa désigne vraisemblablement (3.15.1), renumérotée.}
+
+\page{17}
+\note{p. 16 de l'auteur. Le chiffre 4 du titre et des numéros (4.1), (4.2), 4.3 surcharge un autre chiffre.}
+\subsection*{4. Généralités sur les représentations $\ell$-adiques de $I$ ($\ell \neq p$)}
+
+Soit $E$ un module de type fini sur $\mathbb{Z}_\ell$, donc
+\[
+  (4.1) \qquad E = \varprojlim_\nu E_\nu , \qquad E_\nu = E \otimes_{\mathbb{Z}_\ell} \mathbb{Z}/\ell^{\nu+1}\mathbb{Z} ,
+\]
+\note{après $E$, sous l'accolade marquée $E_\nu$, un produit tensoriel est biffé et noirci.}
+d'où
+\[
+  (4.2) \qquad G = \operatorname{Aut}_{\mathbb{Z}_\ell}(E) = \varprojlim_\nu \operatorname{Aut}_{\mathbb{Z}/\ell^{\nu+1}\mathbb{Z}}(E_\nu) .
+\]
+Par définition, on munit $\operatorname{Aut}_{\mathbb{Z}_\ell}(E)$ de la structure de groupe topologique \uncertain{pro-fini}, limite projective des groupes finis \uncertain{correspondants} dans (4.1). Notons le
+
+\emph{Lemme} 4.3. Le \struck{groupe} sous-groupe \struck{de}
+\[
+  G^{1} = \operatorname{Ker}\bigl( \operatorname{Aut}_{\mathbb{Z}_\ell}(E) \to \operatorname{Aut}_{\mathbb{Z}/\ell\mathbb{Z}}(E_0) \bigr)
+\]
+est un sous-groupe ouvert de $G$, \struck{qui} est \uncertain{lui-même} un pro-$\ell$-groupe \struck{\uncertain{\ill{}}}.
+
+\emph{Dém.} Le fait qu'il soit ouvert est trivial par définition. Reste à prouver le fait que pour $\nu \geq 1$,
+\[
+  \operatorname{Ker}\bigl( \operatorname{Aut}(E_\nu) \to \operatorname{Aut}(E_0) \bigr)
+\]
+est un $\ell$-groupe. Or si $u$ est tel que
+\[
+  u \equiv \mathrm{id} \ (\ell) ,
+\]
+\struck{i.e. $(u-1)(E_\nu) \subset \ell E_\nu$, on \uncertain{constate} \ldots{} par récurrence \ldots{} $(u-1)^{i} \in \ell^{i} E_\nu$, d'où pour $i = \nu + 1$, $(u-1)^{\nu+1} E_\nu = 0$, ce qui}
+\note{lignes biffées ; l'ajout encadré qui les remplace commence ici.}
+donc $u$ induit l'identité sur le gradué associé de $E_\nu$ pour la filtration \uncertain{$\ell$-adique} (\uncertain{par} les $\ell^{i} E_\nu$), d'où on conclut facilement par récurrence sur $\nu$ que $u^{\ell^{\nu}}$ induit l'identité sur le
+
+\page{18}
+\note{p. 17 de l'auteur.}
+gradué associé à la filtration $\ell^{\nu}$-adique (\uncertain{par} les $\ell^{\nu i} E_\nu$). Faisant $r = \nu + 1$, on \uncertain{conclut}.
+
+\emph{Corollaire} 4.4. Pour tout \struck{\ill{}} sous-groupe \struck{\ill{}} fermé $Q$ de $G$ qui est une \struck{pro-$p$-groupe (\ill{} $p \neq \ell$)} \add{limite projective de} \add{groupes finis} d'ordre premier à $\ell$, l'hom. naturel
+\[
+  Q \longrightarrow \operatorname{Aut}_{\mathbb{Z}/\ell\mathbb{Z}}(E_0)
+\]
+est injectif ; en particulier $Q$ est fini.
+
+\emph{Corollaire} 4.5. Soit $u : I \to G$ un \struck{\ill{}} \add{hom. continu} et $N = \operatorname{Ker} u$. \add{Soit} $I'$ l'image inverse dans $I$ du sous-groupe
+\[
+  \prod_{\ell' \neq \ell, p} \mathbb{Z}_{\ell'}(1) \quad \text{de} \quad I/P \simeq \prod_{\ell'} \mathbb{Z}_{\ell'}(1) ,
+\]
+\note{une parenthèse « (\ldots{} $I$ comme dans \uncertain{4.2}) » est intercalée avant « Soit » ; le chiffre surcharge un autre.}
+\struck{Alors} Alors l'hom. induit
+\[
+  I'/I' \cap N \longrightarrow \operatorname{Aut}_{\mathbb{Z}/\ell\mathbb{Z}}(E_0)
+\]
+est injectif, en particulier $I'/I' \cap N$ est un groupe fini, i.e. $I' \cap N$ est ouvert dans $I'$.
+
+En outre, il existe un \struck{extension} sous-groupe ouvert $U$ dans $I$ tel que $U \cap I' \subset I' \cap N$, p.ex. \struck{donc le} $U = \operatorname{Ker}\bigl(G \to \operatorname{Aut}_{\mathbb{Z}/\ell\mathbb{Z}}(E_0)\bigr)$. Alors l'hom. induit
+\[
+  U \longrightarrow G
+\]
+s'annule sur $U \cap I'$, donc passe au quotient \uncertain{en} un hom.
+\[
+  U/U \cap I' = \operatorname{Im}\bigl(U \to \mathbb{Z}_\ell(1)\bigr) \longrightarrow \text{\struck{\ill{}}}\ G .
+\]
+\note{les $N$ de cette page surchargent une autre lettre ; dans la définition de $U$, c'est vraisemblablement l'image inverse dans $I$ du noyau indiqué que l'auteur a en vue ; le but de la dernière flèche est noirci et récrit.}
+
+\page{19}
+\note{p. 18 de l'auteur. Le numéro 4.5 de ce corollaire répète celui de la p.~18 ; les numéros (4.7), (4.8), 4.9 surchargent d'autres chiffres.}
+En d'autres termes :
+
+\emph{Corollaire} 4.5. Avec les notations de 4.4, quitte à remplacer $I$ par sa restriction à un sous-groupe \add{\uncertain{convenable}} ouvert $U$ de $\pi$, la représentation donnée $u : I \to G$ se factorise en une représentation
+\[
+  U \longrightarrow \operatorname{Im}\bigl(U \to \mathbb{Z}_\ell(1)\bigr) \longrightarrow G
+\]
+d'un sous-groupe ouvert \add{$U'$ \ill{}} \struck{\ill{}} du facteur \struck{$\mathbb{Z}_\ell(1)$} $\ell$-primaire $\mathbb{Z}_\ell(1)$ de $I_t$.
+
+Si $\ell^{\nu}$ est l'indice de ce dernier, alors la multiplication par $\ell^{\nu}$ \uncertain{induit} un isomorphisme
+\[
+  (4.7) \qquad \mathbb{Z}_\ell(1) \xrightarrow{\ \sim\ } U' ,
+\]
+et on est donc ramené, pour étudier la restriction de $u$ à $U$, à étudier une représentation $\ell$-adique du groupe $\mathbb{Z}_\ell(1)$.
+
+En fait, souvent on a besoin de prendre $U$ tel que \struck{$K \cap U \subset K \cap$}
+\[
+  P \cap U \subset P \cap N ,
+\]
+\note{la ligne biffée porte une lettre noircie, peut-être $K$ ou $N$.}
+de sorte que la restriction de $u$ à $U$ se factorise en un hom.
+\[
+  U' = \text{\struck{$\operatorname{Im}$}}\ \operatorname{Im}(U \to I_t) \longrightarrow G .
+\]
+Ici encore, on trouve un isom. canonique
+\[
+  (4.8) \qquad U' \simeq I_t \simeq \prod_{\ell' \neq p} \mathbb{Z}_{\ell'}(1)
+\]
+\note{la lecture du premier $\simeq$ (« $U' \simeq I_t$ ») est littérale ; le sens attendu est sans doute que $U'$ est un sous-groupe ouvert de $I_t$, isomorphe à lui.}
+
+On retiendra en particulier que $U'$ est \emph{commutatif}.
+
+4.9. On peut aussi exprimer ceci en disant que, quitte à faire une extension séparable finie $K_1$ de $K$, \ill{} le \uncertain{groupe} de $I$ défini \uncertain{par} une repr. $\ell$-adique \uncertain{la} rep. $\ell$-adique \ldots{} se factorise par sa « partie $\ell$-primaire » $I^{(\ell)} = \mathbb{Z}_\ell(1)$.
+\note{les deux dernières lignes de la page sont serrées et en partie surchargées ; la lecture en est incertaine.}
+
+\page{20}
+\note{p. 19 de l'auteur.}
+4.10. Parfois on arrive à considérer un vectoriel de dim. finie $E$ sur $\mathbb{Q}_\ell$, et une représentation continue
+\[
+  (4.10.1) \qquad u : \pi \longrightarrow \operatorname{Aut}_{\mathbb{Q}_\ell}(E) .
+\]
+Le fait à retenir est que ($\pi$ étant compact) il existe toujours un « réseau invariant par $\pi$ », i.e. un sous-$\mathbb{Z}_\ell$-module $E_{\mathbb{Z}_\ell}$, \struck{tel que} \uncertain{libre} de type fini sur $\mathbb{Z}_\ell$, stable par $\pi$, tel que $E_{\mathbb{Z}_\ell} \otimes_{\mathbb{Z}_\ell} \mathbb{Q}_\ell \xrightarrow{\ \sim\ } E$, \struck{donc} \add{donc (4.10.1)} se factorise \add{en}
+\[
+  (4.10.2) \qquad u_{\mathbb{Z}_\ell} : \pi \longrightarrow \operatorname{Aut}_{\mathbb{Z}_\ell}(E_{\mathbb{Z}_\ell}) .
+\]
+Il s'ensuit \add{\uncertain{donc}} que pour \uncertain{tout} sous-groupe $Q$ de $\pi$ qui est une limite projective de groupes finis d'ordre premier à $\ell$, $u(Q)$ est un sous-groupe fini de $G = \operatorname{Aut}_{\mathbb{Q}_\ell}(E)$, et les cor. 4.5, \struck{et} 4.6 \ldots{} \uncertain{restent} \uncertain{applicables}.
+
+\subsection*{5. Représentations quasi-unipotentes}
+
+\emph{Définition} 5.1. Soit $\pi$ un groupe profini, $u : \pi \to \operatorname{Aut}_R(E)$ une représentation linéaire de $\pi$ \struck{dans} \add{\uncertain{dans un}} vectoriel de dim. finie sur \uncertain{un corps} $R$. On dit que $u$ est \struck{\ill{}} \emph{quasi-unipotente} si $\forall g \in \pi$, $u(g)$ est un automorphisme quasi-unipotent de $E$, i.e. ses valeurs propres (dans une clôture alg. de $R$) sont toutes des racines de 1, ou encore \uncertain{s'il existe} \ldots{} des polynômes car. $\det(T\,\mathrm{id} - u)$ \ldots{} $T^{n} - 1$. On dit que
+\note{la fin de la page est serrée et en partie illisible ; la définition se poursuit au-delà de la fin du lot.}
+
+
+\end{document}

@@ -1,0 +1,452 @@
+% Folder 34, batch 05 — archivists' pages 81–100.
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-03 — first pass, unchecked against the pages by a human.
+%
+% Page 82 is a blank sheet and carries no \page{}; its absence is the record.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{34}
+\batch{5}
+\pages{81}{100}
+\foldertitle{SGA 7 : notes manuscrites (s.d.).}
+\dating{[vers 1967-1973]}
+\watermark{Édition de démonstration}
+
+\begin{document}
+
+\page{81}
+\note{La remarque 5.4 clôt un exposé commencé avant ce lot (les résultats 5.1 à 5.3 y renvoient). En haut à droite, au crayon : « II.30 ».}
+
+\emph{Remarque} 5.4. Dans Exp.~III, nous prouverons que, quand $X_K$ est une courbe \struck{projective} \add{séparée} lisse sur $K$, l'action de $I$ sur $E = H^1(X_{\bar K}, \mathbf{Z}_\ell)$ est \struck{\ill{}} unipotente \struck{\ill{}} d'\emph{échelon}~2, i.e. qu'il existe un sous-groupe ouvert $U$ de $I$ tel que $U$ opère \struck{de façon} trivialement sur \struck{\ill{}} $E/E^U$. On voit alors facilement, en utilisant les résultats 5.1, 5.2, 5.3, \struck{\ill{}} que pour \struck{tout} $X$ \add{de type fini sur $K$}, l'action de $I$ est \struck{\ill{}} \uncertain{en} unipotente d'échelon~3 (et \uncertain{même} d'échelon \struck{2} \add{2}) si $X$ est normal.
+
+\subsection*{Bibliographie}
+
+[1] A.~Grothendieck, Un th. sur les hom. de schémas abéliens, Invent. Math. 2, 59--78 (1966).
+
+[2] S.~Lang,
+
+[3] J.-P.~Serre -- J.~Tate, Good reduction of abelian varieties.
+
+[4] Shimura -- Taniyama, Complex multiplication of abelian varieties, Publ. of Math. Soc. of Japan, n°~6 (1961).
+
+\note{L'entrée [2] est restée inachevée.}
+
+\page{83}
+\section*{Exposé III. Le théorème de monodromie par voie géométrique}
+\note{p.~1 de l'auteur, pour cet exposé.}
+
+\subsection*{1. Comparaison de la cohomologie des fibres \add{géométriques} \struck{spéciale et} \struck{de la fibre} spéciale et générale : les suites exactes des cycles évanescents}
+
+\begin{tikzcd}[column sep=small, row sep=small]
+X \arrow[d, no head] & X_K \arrow[d, no head] & X_{\bar K} \arrow[d, no head] \\
+S \arrow[dr, no head] & K \arrow[dr, no head] & \bar K \\
+ & \tilde S \arrow[r, no head] & \tilde K
+\end{tikzcd}
+
+Notations de I~1.1. On suppose donné $X$ \struck{propre} sur $S$, d'où $X_\eta = X_K$ sur $\eta = \operatorname{Spec} K$, et on se propose de \struck{déterminer} donner des relations entre $H^i(X_{\bar s})$ et $H^i(X_{\bar\eta})$ (coefficients $\Lambda_\nu = \mathbf{Z}/\ell^{\nu+1}\mathbf{Z}$ ou $\mathbf{Z}_\ell = \varprojlim_\nu \Lambda_\nu$). On verra que cette question est liée intimement à celle des opérations de $\pi$ sur $H^i(X_{\bar\eta})$ ; [par exemple on \ill{} un isomorphisme $H^i(X_s) \simeq H^i(X_{\bar s})^{\pi}$].
+
+Quitte à remplacer $S$ par $\tilde S$, on peut supposer pour simplifier les notations que $S$ est \emph{strictement} \struck{\ill{}} local (et $=$ \uncertain{complet si on y tient}…), quand $\ell \neq \operatorname{car} K$). On a
+\[
+(1.1) \qquad \bar K = \varinjlim_{\alpha} K_\alpha ,
+\]
+$K_\alpha$ les sous-extensions finies de $K$, d'où
+\[
+(1.2) \qquad X_{\bar\eta} = \varprojlim_{\alpha} X_\alpha , \qquad \text{où } X_\alpha = X_{K_\alpha},
+\]
+\note{sous les limites de (1.1) et (1.2), l'indice ressemble à un $i$ ; dans (1.1) et (1.2), un indice écrit après $K_\alpha$, resp. $X_\alpha$, est biffé.}
+et
+\[
+(1.3) \qquad H^*(X_{\bar\eta}, \Lambda_\nu) = \varinjlim_{\alpha} H^*(X_{\bar K_\alpha}, \Lambda_\nu) .
+\]
+Soit $S_\alpha$ \add{$= \operatorname{Spec} V_\alpha$,} \struck{le} normalisé de $S$ dans $K_\alpha$, qui est encore strict. local, \struck{\ill{}} et soit $s_\alpha$ le pt fermé de $S_\alpha$, $\eta_\alpha$ le pt \add{générique}, et soit
+\[
+(1.4) \qquad X_\alpha = X \times_S S_\alpha , \qquad X_{\alpha 0} = X_{\alpha s_\alpha} = X_0 \otimes_k k_\alpha .
+\]
+
+\page{84}
+\note{p.~2 de l'auteur.}
+
+\struck{La fibre spéciale de $X_\alpha$ est}
+\[
+\text{\struck{$X_{\alpha s_\alpha} = X_0 \otimes_k k_\alpha$}}
+\]
+où $X_0 = X_s$, et \add{$k_\alpha = k(s_\alpha)$} est une extension \add{\uncertain{finie donc}} radicielle de $k$.
+
+\begin{tikzcd}[column sep=small, row sep=small]
+X \arrow[r, no head] \arrow[d, no head] & X_\alpha \arrow[r, no head] \arrow[d, no head] & X_\beta \arrow[d, no head] \\
+S \arrow[r, no head] & S_\alpha \arrow[r, no head] & S_\beta
+\end{tikzcd}
+
+Donc $X_{\alpha s_\alpha} \to X_s$ induit un isomorphisme \uncertain{pleinement}
+\[
+(1.5) \qquad H^*(X_s) \xrightarrow{\ \sim\ } H^*(X_{\alpha s_\alpha}) .
+\]
+\note{après chacun des deux membres de (1.5), un coefficient $\Lambda_\nu$ est biffé.}
+D'autre part, \struck{le diagramme} dans le diagramme commutatif
+
+(1.6)
+
+\begin{tikzcd}
+H^*(X) \arrow[r] \arrow[d, "\wr"] & H^*(X_\alpha) \arrow[d, "\wr"] \\
+H^*(X_s) \arrow[r] & H^*(X_{\alpha, s_\alpha})
+\end{tikzcd}
+
+les flèches verticales sont \uncertain{déjà} des isomorphismes, \uncertain{car} $X/S$ et $X_\alpha/S_\alpha$ \struck{propres} \add{propres} sur $S$. Donc
+\[
+(1.7) \qquad H^*(X) \xrightarrow{\ \sim\ } H^*(X_\alpha) .
+\]
+
+Considérons maintenant les suites exactes de cohomologie relative sur $X_\alpha$, mod. l'ouvert $X_{\eta_\alpha}$ :
+\[
+\begin{aligned}
+& (1.8) \qquad \cdots \to H^i_{X_{\alpha 0}}(X_\alpha, \Lambda_\nu) \to H^i(X_\alpha, \Lambda_\nu) \to H^i(X_{\eta_\alpha}, \Lambda_\nu) \\
+& \qquad \to H^{i+1}_{X_{\alpha, 0}}(X_{\eta_\alpha}, \Lambda_\nu) \to \cdots
+\end{aligned}
+\]
+\note{dans le dernier terme de (1.8), l'indice $\eta_\alpha$ est surchargé et douteux.}
+Passant à la limite sur $\alpha$, et utilisant (1.3) et (1.7), on trouve une suite exacte
+\[
+(1.9) \qquad \cdots \to \Phi^i_\nu \to H^i(X_s, \Lambda_\nu) \to H^i(X_{\bar\eta}, \Lambda_\nu) \to \Phi^{i+1}_\nu \to \cdots
+\]
+où on a
+\[
+(1.10) \qquad \Phi^i_\nu = \varinjlim_\alpha H^i_{X_{\alpha 0}}(X_\alpha, \Lambda_\nu) .
+\]
+
+\page{85}
+\note{p.~3 de l'auteur.}
+
+1.11. Le groupe $\Phi^i_\nu$ peut être appelé groupe des \emph{cycles évanescents en dimension~$i$} (de $X/S$ \add{et les coeff. $\Lambda_\nu$}), et la suite exacte (1.9) la \emph{suite exacte des cycles évanescents}. Les cycles évanescents \uncertain{s'introduisent} ici comme mesurant « l'écart » entre la cohomologie de $X_s$ et de $X_{\bar\eta}$ (fibres géométriques spéciale et générale). Passant à la limite \add{\uncertain{projective}} sur $\nu$, on trouve (les groupes de la suite (1.9) étant \emph{finis} \ill{} \ill{} de type fini)
+\[
+(1.9\ \text{bis}) \qquad \cdots \to \Phi^i \to H^i(X_s, \mathbf{Z}_\ell) \to H^i(X_{\bar\eta}, \mathbf{Z}_\ell) \to \Phi^{i+1} \to \cdots ,
+\]
+avec
+\[
+(1.10\ \text{bis}) \qquad \Phi^i = \varprojlim_\nu \Phi^i_\nu = \varprojlim_\nu \varinjlim_\alpha H^i_{X_{\alpha 0}}(X_\alpha, \Lambda_\nu) .
+\]
+\struck{1.12.} \uncertain{Nous appellerons} aussi (1.9 bis) suite exacte des cycles évanescents pour les coeff. $\mathbf{Z}_\ell$, et $\Phi^i$ le groupe des cycles évanescents en dim.~$i$ pour les coeff. $\mathbf{Z}_\ell$.
+
+1.12. \emph{Passage du local au global}. Pour calculer les $\Phi^i_\nu$, \struck{il y a lieu} utilisant la \struck{\ill{}} \add{réunion} (1.10), on regarde pour chaque $\alpha$ la suite spectrale
+\[
+(1.13) \qquad H^*_{X_{\alpha 0}}(X_\alpha, \Lambda_\nu) \Longleftarrow E_2^{pq} = H^p(X_{\alpha 0}, \underline{H}^q_{X_{\alpha 0}}(\Lambda_{\nu X_\alpha})) .
+\]
+Les \uncertain{foncteurs} spectraux, pour $\alpha$ variable, forment un système inductif, et donnent à la limite (compte tenu que $X_{\alpha 0} \to X_0$ induit une équivalence \add{des sites étales})
+
+\page{86}
+\note{p.~4 de l'auteur.}
+\[
+(1.14) \qquad \Phi^*_\nu \Longleftarrow E_2^{pq} = H^p(X_0, \underline{\Phi}^q_\nu)
+\]
+où $\underline{\Phi}^q_\nu$ est un \emph{faisceau} sur $X_0$ qui, via identification de $X_{\alpha 0}$ avec $X_0$, peut s'écrire
+\[
+(1.15) \qquad \underline{\Phi}^q_\nu = \varinjlim_\alpha \underline{H}^*_{X_{\alpha 0}}(\Lambda_{\nu X_\alpha}) .
+\]
+\note{l'exposant du membre de droite de (1.15) est bien une étoile sur la page, là où l'on attend $q$.}
+Le calcul de ces faisceaux sur $X_0$ est de \emph{nature locale sur $X$}. [Sous réserve \struck{que} de vérifications \struck{\ill{}} de passages à la limite, on conclut de même \ill{}
+\[
+(1.14\ \text{bis}) \qquad \Phi^* \Longleftarrow E_2^{pq} = H^p(X_0, \underline{\Phi}^q)
+\]
+avec
+\[
+(1.15\ \text{bis}) \qquad \underline{\Phi}^q = \varprojlim_\nu \underline{\Phi}^q_\nu ,
+\]
+\add{mais} \uncertain{que} nous n'utiliserons pas \uncertain{telles quelles}. \add{Il faudrait} \ill{} \ill{} \uncertain{justifier} \ill{} \ill{} que \ill{} le système projectif $(\underline{\Phi}^q_\nu)_{\nu \geq 1}$ définit un faisceau $\ell$-adique \ill{} \add{\ill{} \ill{} \ill{} sur $X$…)}.]
+
+1.16. On trouve ainsi un principe de localisation fort utile pour comparer la cohomologie de $X_s$ et de $X_{\bar\eta}$. Notons par exemple, \struck{que} \struck{le théorème} \add{\ill{}} que si $X \to S$ est \emph{lisse} (et $\ell \neq p$) que \struck{\ill{}} (le théorème de pureté pour l'immersion $s \to S$, et le th. de changement de base lisse, montrent que \uncertain{pour tous} points \ill{} $X_\alpha$ est lisse sur $S_\alpha$ :) $\underline{H}^i_{X_{\alpha 0}}(\Lambda_{\nu X_\alpha})$ est nul pour $i \neq 2$, et
+\[
+\underline{H}^2_{X_{\alpha 0}}(\Lambda_{\nu X_\alpha}) \simeq \bigl(\mu_{\ell^\nu}^{\otimes(-1)}\bigr)_{X_{\alpha 0}}
+\]
+\struck{\ill{}} \add{si $i = 2$}.
+\note{dans « nul pour $i \neq 2$ », le chiffre ressemble à un 0 ; le $\underline{H}^2$ du membre de gauche est surchargé.}
+On en conclut que $\underline{\Phi}^i_\nu = 0$ si $i \neq 2$, et
+\[
+\underline{\Phi}^2_\nu = \text{\struck{$\ill{}$}}\ \varinjlim_\alpha (\mu_{\ell^\nu})_{X_{\alpha 0}} .
+\]
+Il faut déterminer les
+
+\page{87}
+\note{p.~5 de l'auteur.}
+
+\marginal{(cont. au faisceau, interprétés comme le faisceau $\mu_{\ell^\nu}$ sur $X_0$.)}
+morphismes de transition. On trouve que si $S_\alpha$ est de degré $n_\alpha$ sur $S$, donc $S_\beta$ de degré $n_{\alpha\beta} = n_\beta/n_\alpha$ sur $S_\alpha$ (si $\beta \geq \alpha$), \add{(On est ramené à faire la vérification pour $X = S$…)} dans le morphisme de transition est la multiplication par $n_{\alpha\beta}$. On en conclut aussitôt \struck{\ill{} \ill{}} que $\underline{\Phi}^2_\nu = \varinjlim (\mu_{\ell^\nu})$ \struck{est égal à zéro}. \emph{Donc} \struck{\ill{}} on a $\underline{\Phi}^i_\nu = 0$ \emph{pour tout} $i, \nu$, d'où On en déduit grâce à (1.14) que $\Phi^i_\nu = 0$ pour tout $i, \nu$, puis grâce à (1.9) que
+\[
+(1.16.1) \qquad H^i(X_s, \Lambda_\nu) \xrightarrow{\ \sim\ } H^i(X_{\bar\eta}, \Lambda_\nu)
+\]
+($X$ lisse sur $S$, \struck{\ill{}} $\ell \neq p$) : \struck{\ill{}} \add{\ill{} \struck{\ill{}} \ill{}} le \emph{th. de spécialisation} de la cohomologie pour les morphismes propres et lisses (SGA~4 $\overline{\text{XVI}}$ …). [Bien \ill{} \ill{} \ill{} avec des \ill{} \ill{}).
+
+Compte tenu de la nature locale des $\underline{\Phi}^i_\nu$, on \uncertain{conclut} de ce qui précède la
+
+\textbf{Proposition 1.17.} Soit $T$ l'ensemble des $x \in X_0$ en lesquels $f : X \to S$ \add{$X \to S$} n'est pas lisse, \add{et supposons $\ell \neq p$.} Alors les faisceaux $\underline{\Phi}^i_\nu$ des cycles évanescents sont à support dans $T$.
+
+1.18. Supposons par exemple que \struck{les points de $T$ soient fermés} $T$ soit \emph{discret}. Alors \struck{\ill{}} dans (1.14) on a $E_2^{pq} = 0$ pour $p \neq 0$, donc on trouve des isomorphismes
+
+\page{88}
+\note{p.~6 de l'auteur.}
+\[
+(1.18) \qquad \Phi^i_\nu = \sum_{t \in T} (\underline{\Phi}^i_\nu)_t ,
+\]
+où
+\[
+(1.19) \qquad (\underline{\Phi}^i_\nu)_t = \varinjlim_\alpha \underline{H}^i_{X_{\alpha 0}}(\Lambda_{\nu X_\alpha})_{t_\alpha}
+\]
+où $t_\alpha$ est l'unique point de $X_\alpha$ au-dessus de $t$. On voit donc que dans le cas où l'ensemble $T$ des pts de $X_0$ où $f$ n'est pas lisse est fini, le \struck{calcul des} groupe $\Phi^i_\nu$ des cycles évanescents \add{(au sens de la top. étale)} est \add{une somme de termes} \emph{purement locaux} \struck{\ill{} \ill{}} relatifs aux différents points de $t$]. \struck{\ill{}} Nous donnerons plus loin des exemples d'application de ce principe à des cas particuliers intéressants.
+
+1.20. \struck{Mais} \struck{\ill{}} nous donnons \add{d'abord} \uncertain{ici} une \struck{autre} \add{variante} de la méthode précédente pour formuler les relations entre la cohomologie de $X_s$ et de $X_{\bar\eta}$, \add{qui servira} plus commodément dans la démonstration \add{(directe)} du th. de monodromie. On constate aisément que :
+
+Notons toutefois que, \add{par construction même,} le groupe d'inertie $I = \operatorname{Gal}(\bar K/K)$ opère sur les faisceaux $\underline{\Phi}^i_\nu$, que la suite spectrale (1.14) peut être interprétée comme une suite spectrale de $I$-modules, et la suite exacte (1.9) comme une suite exacte de $I$-modules, \struck{\ill{}} $I$ opérant \add{\uncertain{trivialement}} \struck{\ill{} \ill{}} sur $H^*(X_s, \Lambda_\nu)$ \add{\ill{} \ill{} \ill{} la limite}. (Il serait possible de prouver le th. de
+
+\page{89}
+\note{p.~7 de l'auteur.}
+
+monodromie, dans les cas \struck{\ill{}} traités plus bas, en prouvant que l'action de $I$ sur chacun des $\underline{\Phi}^i$ est \struck{quasi} \add{\ill{}} unipotente, \struck{\ill{}} \add{en prouvant} \uncertain{bien} ceci, que \struck{affirmant des} l'action sur chacun des \emph{faisceaux} $\ell$-adiques $\underline{\Phi}^i$ est \struck{\ill{}} \emph{\uncertain{essentiellement}} \emph{triviale}, et mieux, qu'il existe un sous-groupe \add{ouvert} $I'$ de $I$ qui opère \struck{\ill{}} trivialement sur \emph{tous} les \struck{\ill{}} $\underline{\Phi}^i_\nu$ ($i, \nu$ variables). \struck{Les calculs pourraient} On a là un résultat de nature \emph{purement locale} sur $X$, qui est accessible au calcul dans des conditions favorables, \uncertain{comme} nous examinerons au n°~suivant.
+
+1.21. \emph{Généralisation des développements précédents au cas} d'un ouvert $U$ de la fibre générique. \add{($X$ très propre sur $S$). Soit $Y = X - U \supset X_0$.} Dans \uncertain{ce cas} on trouve encore une suite exacte des cycles évanescents
+\[
+(1.22) \qquad \cdots \to \Phi^i_\nu \to H^i(X_s, \Lambda_\nu) \to H^i(U, \Lambda_\nu) \to \Phi^{i+1}_\nu \to \cdots
+\]
+avec
+\[
+(1.23) \qquad \Phi^i_\nu = \varinjlim_\alpha H^i_{Y_\alpha}(X_\alpha, \Lambda_\nu) ,
+\]
+où $Y_\alpha$ est l'image inverse de $Y_\alpha$ dans $X_\alpha$. La suite spectrale de localisation \uncertain{s'écrit}
+\[
+(1.14) \qquad \Phi^*_\nu \Longleftarrow E_2^{pq} = H^p(X_0, \underline{\Phi}^q_\nu) ,
+\]
+\[
+(1.15) \qquad \underline{\Phi}^q_\nu = \varinjlim_\alpha \bigl(\underline{H}^q_{Y_\alpha}((\Lambda_\nu)_{X_\alpha}) \,|\, X_{\alpha 0}\bigr) .
+\]
+\note{les numéros (1.14) et (1.15) sont repris tels quels sur la page ; dans (1.23), un premier argument de $H^i$ est biffé et l'indice $Y_\alpha$ récrit sous le $H$ ; « image inverse de $Y_\alpha$ » est sur la page, là où l'on attend $Y$.}
+
+\page{90}
+\note{p.~8 de l'auteur.}
+
+\struck{\ill{}}
+
+1.26. \emph{Restriction aux revêtements modérément ramifiés de $S$.}
+
+Comme on verra par la suite, le calcul des $\underline{H}^i(\Lambda_{\nu X_\alpha})$\note{l'indice $Y_\alpha$ de $\underline{H}^i$ est biffé.} peut se faire, parfois, à condition de se borner aux $S_\alpha$ qui sont modérément ramifiés sur $S$, correspondant donc aux \struck{\ill{}} sous-extensions \add{finies} de l'extension $\bar K_t \subset \bar K$, \struck{\ill{}} correspondant au $p$-sous-groupe de Sylow $P$ de $I$. \struck{\ill{} \ill{} \ill{} suite} \struck{La suite} La suite exacte de Hochschild--Serre pour \add{le groupe $P$} donnant
+\[
+U_{\bar K} \to U_{\bar K_t}
+\]
+\[
+H^*(U_{\bar K_t}, \Lambda) \Longleftarrow E_2^{p,q} = H^p(P, H^q(U_{\bar K}, \Lambda_\nu)) ,
+\]
+et on a $E_2^{pq} = 0$ si $p \neq 0$, car $H^q(U_{\bar K}, \Lambda_\nu)$ est de $\ell$-torsion, $\ell \neq p$. Donc on trouve
+\[
+(1.27) \qquad H^*(U_{\bar K_t}, \Lambda_\nu) \xrightarrow{\ \sim\ } H^*(U_{\bar K}, \Lambda_\nu)^P ,
+\]
+invariants sous le groupe de $P$-Sylow. D'ailleurs, le premier membre est aussi isomorphe à
+\[
+\varinjlim_\alpha H^*(U_{K_\alpha}, \Lambda_\nu) ,
+\]
+où $K_\alpha$ parcourt les sous-extensions finies \emph{de} $\bar K_t$, \struck{dont} \uncertain{qui sont} \ill{} \ill{}, les
+\[
+(1.28) \qquad K(n) = K(\pi^{1/n}) \qquad \text{pour } (p, n) = 1 .
+\]
+
+\page{91}
+\note{p.~9 de l'auteur.}
+
+\marginal{[On trouve donc une suite exacte de la forme (1.29), mais \ill{} \ill{} \uncertain{écrire} $H^i(U_{\bar\eta}, \mathbf{Z}_\ell)$ au lieu de $H^i(U_{\bar\eta}, \mathbf{Z}_\ell)^P$.}
+\note{ajout en haut de page, séparé du texte par un trait.}
+
+On trouve donc une suite exacte
+\[
+\begin{aligned}
+& (1.29) \qquad \cdots \to (\Phi^i_\nu)_{\mathrm{mod}} \to H^i(X_s, \Lambda_\nu) \\
+& \qquad \to H^i(U_{\bar\eta}, \Lambda_\nu)^P \to (\Phi^{i+1}_\nu)_{\mathrm{mod}} \to \cdots
+\end{aligned}
+\]
+avec
+\[
+(1.30) \qquad (\Phi^i_\nu)_{\mathrm{mod}} = \varinjlim_{(n,p)=1} H^i_{Y_n}(X_n, \Lambda_\nu) ,
+\]
+où $X_n = X \times_S S(n)$, $S(n)$ le normalisé de $S$ dans $K(n)$, $Y_n$ l'image inverse de $Y = X - U$ dans $X(n)$. La suite spectrale de localisation est ici
+\[
+(1.31) \qquad (\Phi^*_\nu)_{\mathrm{mod}} \Longleftarrow E_2^{pq} = H^p(X_0, (\underline{\Phi}^q_\nu)_{\mathrm{mod}})
+\]
+avec
+\[
+(1.32) \qquad (\underline{\Phi}^q_\nu)_{\mathrm{mod}} = \varinjlim_{(n,p)=1} \bigl(\underline{H}^q_{Y(n)}((\Lambda_\nu)_{X(n)}) \,|\, X(n)_0\bigr) ,
+\]
+où $X(n)_0$ est la \struck{restriction de} fibre spéciale de $X(n)$, identifiée (comme \struck{\ill{}} \uncertain{site étale}) à $X_0$.
+\note{l'indice « mod » de (1.29) à (1.32) est écrit en abrégé, sous une forme proche de « $\mathrm{tame}$ » ou « $\mathrm{dam}$ » ; la lecture « mod » (modéré) est celle du titre de 1.26.}
+
+[Cette suite \struck{\ill{}} exacte (\ill{})
+\marginal{et celle qu'on en déduit par $\varprojlim_\nu$}
+sont \uncertain{surtout} utiles si $P$ opère trivialement sur $H^*(U_{\bar\eta}, \mathbf{Z}_\ell)$, \struck{\ill{}} conditions qui sera vérifiée en tous cas après extension finie de $S$ (cf.~I).]
+\marginal{(conséquence de \ill{} \ill{} sur $\mathbf{Z}_\ell$)}
+
+1.33. Les développements \uncertain{précédents} \uncertain{valent} \uncertain{tels quels} (si on remplace $P$ par n'importe quel sous-groupe invariant fermé $Q$ de $I$ \struck{tel que $I$} tel que $I/Q$ soit « premier à $\ell$ », i.e. \ill{} \ill{} \ill{} \ill{} \ill{} $\mathbf{Z}_\ell(1)$ de $I_t$, \ill{} de $I/p$. Un cas particulier \ill{} \struck{\ill{}} qui \ill{} \ill{} est celui où $I/Q \simeq \mathbf{Z}_\ell(1)$ est \uncertain{quotient} \ill{} \ill{}, ce qui signifie qu'on fait parcourir à $K_\alpha$ les $K(n)$ avec $n$ de la forme $\ell^r$. \struck{\ill{}}
+
+\page{92}
+\note{p.~10 de l'auteur.}
+
+\subsection*{2. Comparaison entre la cohomologie de la fibre spéciale et générique par la suite spectrale de Leray}
+
+2.1. $X$ propre sur $S$, $U$ \uncertain{ouvert} de $X_\eta$. La suite spectrale de \struck{localisation} \add{cohomologie ultime} \uncertain{sera} ici remplacée, essentiellement, par la suite spectrale \struck{des \ill{}} \add{(légèrement différente)} \ill{} \ill{} \ill{} \ill{} \ill{} $U_\alpha \to X_\alpha$, \ill{} plutôt par la limite de ces suites spectrales. \struck{\ill{} plus} Nous ne supposons pas ici que $X$ soit nécessairement lisse, ce qui nous laissera \add{toutefois} \struck{\ill{}} saisir les opérations de $\pi$ dans cette situation, \ill{} de $I$ seulement, lequel ne \ill{} \ill{} : \ill{} \ill{}, en plus de l'ouvert $U$ de $X_\eta$, et de $\bar U$, $\bar X = X_{\bar\eta}$, les schémas analogues $\tilde X$ et $\tilde U$ sur $\tilde S$. \struck{\ill{}} \struck{mais} Le groupe $\pi$ opère sur la situation
+
+\begin{tikzcd}[column sep=small, row sep=small]
+\tilde U & \bar U \arrow[l] \\
+\tilde X \arrow[u, hook] & \bar X \arrow[l] \arrow[u, hook]
+\end{tikzcd}
+
+le sous-groupe $I$ opérant par $\bar X$-automorphismes.
+
+(2.2)
+
+\begin{tikzcd}[column sep=small, row sep=small]
+U \arrow[d, hook] & \tilde U \arrow[d, hook] & \bar U = U_{\bar\eta} \arrow[d, hook] \\
+X \arrow[d, no head] & \tilde X \arrow[l] \arrow[d, no head] & \bar X = X_{\bar\eta} \arrow[l, "g"'] \arrow[d, no head] \\
+S & \tilde S \arrow[l] & \bar S \arrow[l, no head]
+\end{tikzcd}
+
+\note{dans (2.2) et dans le petit carré inséré plus haut, les inclusions des ouverts sont dessinées comme des symboles $\subset$ verticaux ; la flèche horizontale du bas, de $\bar S$ vers $\tilde S$, est un trait sans pointe.}
+
+Nous considérons la suite spectrale de Leray pour le composé $\bar U \to \tilde X$
+\[
+(2.3) \qquad \tilde X \xleftarrow{\ g\ } \bar U ,
+\]
+\note{au-dessus de « composé », $\bar U$ est récrit et biffé d'un trait épais.}
+on trouve
+\[
+(2.4) \qquad H^*(\bar U, \Lambda_\nu) \Longleftarrow E_2^{pq} = H^p(\tilde X, R^q g_*((\Lambda_\nu)_{\bar U})) .
+\]
+\struck{On peut considérer cette suite spectrale comme une suite} La th. de \uncertain{changement} de base propre permet de l'écrire sous la forme
+
+\page{93}
+\note{p.~11 de l'auteur.}
+\[
+(2.5) \qquad H^*(\bar U, \Lambda_\nu) \Longleftarrow E_2^{pq} = H^p(\tilde X_0, \underline{\Psi}^q_\nu)
+\]
+avec
+\[
+(2.6) \qquad \underline{\Psi}^q_\nu = R^q g_*((\Lambda_\nu)_{\bar U} \,|\, \tilde X_0) = \varinjlim_\alpha R^q g_{\alpha *}((\Lambda_\nu)_{U_\alpha}) \,|\, \tilde X_0 ,
+\]
+\marginal{où on a écrit $\bar K = \varinjlim_\alpha K_\alpha$ ($K_\alpha$ sous-extensions finies de $\bar K/\tilde K$), $g_\alpha : U \times_S S_\alpha \to \tilde X$}
+\struck{\ill{}} \ill{} l'homom. canonique.
+
+2.7. \ill{} le calcul des faisceaux $\underline{\Psi}^q_\nu$ est de nature locale sur $\tilde X$. Notons d'ailleurs \struck{\ill{}} les relations \ill{} \ill{} faisceaux avec \struck{ceux des} les faisceaux $\underline{\Phi}^q_\nu$ du n°~1 (que nous n'utiliserons pas)
+\[
+(2.8) \qquad
+\begin{cases}
+\underline{\Phi}^q_\nu = \underline{\Psi}^{q-1}_\nu & \text{si } q \geq 2 \\
+0 \to \underline{\Phi}^0_\nu \to (\Lambda_\nu)_{X_0} \to \underline{\Psi}^0_\nu \to \underline{\Phi}^1_\nu \to 0 .
+\end{cases}
+\]
+Donc, à part le \uncertain{décalage} près, \uncertain{ce sont} les faisceaux $\underline{\Psi}^q_\nu$ sont les faisceaux de cycles évanescents pour $\tilde X/\tilde S$ et l'ouvert $\bar U$ de $\tilde X_{\tilde\eta}$ (coeffts $\Lambda_\nu$).
+
+2.9. Il y a lieu de considérer (2.5) comme une suite spectrale de $\pi$-modules, et \uncertain{l'expression} (2.6) comme une \uncertain{\ill{}} de faisceaux \add{sur $\tilde X_0$} où $\pi$ opère, de façon compatible avec ses opérations sur $\tilde X_0$ (\ill{} \ill{} via $\pi_0$). Nous nous intéressons d'abord \ill{} l'action du sous-groupe \struck{\ill{}} d'inertie $I$.
+
+2.10. On peut donner aussi une variante \uncertain{évidente} des développements précédents, en remplaçant $\bar K$ par $\bar K_t$, cf.~1.26. On trouve
+
+\page{94}
+\note{p.~11' de l'auteur ; demi-feuille.}
+\[
+(2.5\ \text{bis}) \qquad H^*(\bar U, \Lambda_\nu)^P \Longleftarrow E_2^{pq} = H^p(\tilde X_0, (\underline{\Psi}^q_\nu)_{\mathrm{mod}}) ,
+\]
+avec
+\[
+\begin{aligned}
+& (2.6\ \text{bis}) \qquad (\underline{\Psi}^q_\nu)_{\mathrm{mod}} = R^q g_{t *}((\Lambda_\nu)_{U_{\bar K_t}}) \,|\, \tilde X_0 \\
+& \qquad = \varinjlim_{(n,\ell)=1} R^q g_{n *}((\Lambda_\nu)_{U_{K(n)}}) \,|\, \tilde X_0 ,
+\end{aligned}
+\]
+où
+\[
+K(n) = \tilde K(\pi^{1/n}) \subset \bar K_t \subset \bar K
+\]
+et
+\[
+g_n : U_{K(n)} \to \tilde X
+\]
+est la projection canonique.
+\note{(2.5 bis) et (2.6 bis) sont des numéros corrigés, récrits sur (2.5) et (2.6) ; dans (2.6 bis), un exposant de $g$ est biffé ; sous la limite, la condition est bien écrite $(n, \ell) = 1$, là où 1.28 porte $(p, n) = 1$.}
+
+\page{95}
+\note{p.~11'' de l'auteur ; demi-feuille, d'une encre plus pâle.}
+
+\emph{Remarque} 2.\struck{7}\add{8}. Il semble plausible qu'on doive pouvoir montrer, \add{lorsqu'on dispose de} \struck{\ill{}} la résolution des singularités (\add{ou les $\underline{\Psi}^{(q)}_\nu$, c'est pareil}), que les faisceaux $\underline{\Phi}^{(q)}_\nu$ \struck{\ill{}} sont constructibles \uncertain{si} $\ell \neq$ \struck{\ill{}} $p$, et que pour $\nu$ variable, le système projectif des $(\underline{\Phi}^{(q)}_\nu)$ (\add{ou $\underline{\Psi}^{(q)}_\nu$}) \struck{\ill{} définit un faisceau} \uncertain{donnant} un système projectif dans la catégorie des faisceaux $\ell$-adiques constructibles. S'il en était ainsi, on \uncertain{déduirait} par passage à la limite, \add{\uncertain{\ill{}}} \struck{\ill{}} \add{à partir des} \struck{(\ill{})} (1.14) \struck{\ill{}}, \uncertain{resp.} (2.5), des suites spectrales \add{cohomologiques} \struck{des faisceaux} $\ell$-adiques. C'est ce qui \uncertain{constituera} dans un cas particulier typique au n°~5, et il est plausible que le cas général puisse s'y ramener par les arguments standard, via la résolution des singularités.
+\note{le numéro de la remarque est surchargé (7 et 8) ; le n°~« 5 » final est récrit sur un autre chiffre.}
+
+\page{96}
+\note{p.~12 de l'auteur.}
+
+\marginal{(Énoncé du th. principal et de ses corollaires)}
+
+\subsection*{3. Cas où \add{$X$ régulier et} $Y = X - U$ est un diviseur à croisements normaux}
+
+\add{On suppose $\ell \neq p$.}
+
+\note{Un premier départ de 3.1 est barré de traits obliques : \struck{Dans le résultat qui suit, … d'inertie … (\ill{}) … supposons que $S$ soit local …} ; puis une ligne barrée : \struck{\ill{} correspondant \ill{} \ill{}}.}
+
+3.1. \emph{Hypothèses} : $X$ régulier, $Y$ diviseur à croisements normaux, \add{(\uncertain{relativement} au changement de base $\tilde S \to S$)}.
+\marginal{Nous supposons en tout ce \uncertain{chapitre} plus que $X$ régulier satisfait aux \uncertain{propriétés} \ill{} de \uncertain{cohomologie} (cf.~4.1)}
+Nous supposons que \add{\ill{}} \add{\ill{} si $U$ est \uncertain{propre} \ill{} sur $K$ (et \uncertain{ses} \ill{} \uncertain{réguliers})} \ill{} $H^*(U_{\bar K}, \mathbf{Z}/\ell\mathbf{Z})$ est fini, ce qui \ill{} \ill{}
+\note{suit un passage de deux à trois lignes rayé à grandes boucles, avec une note encerclée en marge, elle aussi rayée ; seuls des fragments surnagent (« résultat », « $(X, Y)$ », « tout schéma … »).}
+
+\textbf{Théorème 3.2.} \emph{Avec les hypothèses du titre} \struck{3} \emph{et} \struck{\ill{}} \emph{de} 3.1 \struck{(\ill{})}, \struck{\ill{} $H^i(U_{\bar K}, \mathbf{Z}_\ell)$ est fini} \struck{\ill{} les opérations \ill{}} $H^i(U_{\bar K}, \mathbf{Z}_\ell)$ est un $\mathbf{Z}_\ell$-module de type fini \add{et l'action du groupe d'inertie $I$ sur \uncertain{$E = H^i(U_{\bar K}, \mathbf{Z}_\ell)^P$}} \struck{\ill{}} est \uncertain{essentiellement} unipotente \struck{\ill{}} \uncertain{(\struck{Plus} où $P$ est le $p$-sous-groupe de Sylow de $I$, cf.~I~\ill{})}.
+
+Plus précisément, \struck{\ill{} \ill{}} posons (
+\[
+\text{\struck{$X_0$}}\ \text{\struck{$Y_0$}} \qquad X_0 = \sum m_\lambda X_0^{(\lambda)}
+\]
+(cycle \uncertain{diviseur} sur $X$), où les $X_0^{(\lambda)}$ sont les composantes irréductibles de $X_0$, et les $m_\lambda > 0$. Soit $m$ le ppcm des $m_\lambda$, et $m'$ le composant premier à $p$ de $m$, et $I'$ le sous-groupe ouvert d'indice $m'$ de $I$. Alors l'action de $I'$ sur $E =$ \struck{\ill{}} $H^i(U_{\bar K}, \mathbf{Z}_\ell)^P$ est \struck{unipotente d'échelon $\leq i+1$} \add{\uncertain{\ill{}}}, i.e. il y a une filtration \add{de $E$}, \add{\uncertain{\ill{}} par des \ill{} $P$}, invariante sous $I'$, ayant $i + 1$ quotients, et l'action de $I'$ sur les $\operatorname{gr}^p(E)$ est triviale. En d'autres termes,
+
+\page{97}
+\note{p.~13 de l'auteur.}
+
+si $g$ est un générateur topologique de $I_t = I/P$ (\uncertain{hommage} !), \add{$g_E$ \uncertain{son action} sur $E$, \uncertain{on a} la relation}
+\[
+(3.3) \qquad (\mathrm{id} - g_E^{m'})^{i+1} = 0 .
+\]
+
+\emph{Remarque} 3.4. a) La démonstration que nous \uncertain{donnerons} \add{au §~5} donne \add{\ill{}} également, \uncertain{\emph{mutatis mutandis}}, dans le cas analytique complexe, pour un morphisme $f : X \to S$ d'espaces analytiques, $S$ régulier \add{(auquel cas il n'y a plus lieu d'introduire \ill{} $P$ !)} de dim.~1. L'énoncé dans ce cas est dû à P.~A.~Griffiths.
+\marginal{plus bas}
+\note{tout l'alinéa a) est encadré d'un trait en marge gauche, accompagné du renvoi « plus bas ».}
+
+b) La démonstration qui sera \struck{\ill{}} \add{donnée} \uncertain{en} fait une filtration \emph{\uncertain{canonique}} de $E$, qui sera en plus invariante sous l'action de $\pi$ tout entier, pas seulement de $I$. Elle sera étudiée plus bas de façon \uncertain{arithmétique} \ill{} \ill{} \ill{} \ill{} suite :
+
+\textbf{Corollaire 3.5} \struck{\ill{}} Soit \struck{$X$} \struck{$U$ lisse \ill{}} \add{$n \geq 0$, et} \add{\uncertain{\ill{}} de dimension} \struck{\ill{}} \struck{de type fini sur $K$} \add{\uncertain{propre}} \struck{\ill{}}.
+\begin{itemize}
+\item[(i)] Pour \uncertain{toute} extension finie ($K'$ de $K$, si $S'$ est le normalisé de $S$ dans $K'$, la résolution des singularités \emph{forte} est possible pour les schémas de type fini $X'$ sur $\hat S'$ de dimension relative $\leq n$.
+\item[(ii)] Pour tout \struck{$K$,} \ill{}, $X'$ comme dessus, avec $X'$ régulier, et \uncertain{\ill{}} diviseur régulier $Y'$ de $X'_\eta$ de $K$.
+\end{itemize}
+\note{l'énoncé de 3.5 est très repris ; la phrase (ii) se poursuit en haut de la page suivante.}
+
+\page{98}
+\note{p.~14 de l'auteur.}
+
+de pureté cohomologique est vraie pour le couple $(X', Y')$ et pour $\ell$.
+
+\add{Soit $U$ lisse quasi-projectif sur $K$, et,} Sous ces conditions, (pour tout entier $i$, l'action du groupe d'inertie $I$ sur \struck{\ill{}} $H^i(Y_{\bar K}, \mathbf{Z}_\ell)$ est \struck{essentiellement} \add{\ill{}} unipotente d'échelon $i + 1$.
+
+\emph{Dém.} En vertu de I~\ill{}, on peut supposer $S = \hat S$. \struck{On peut supposer que} \add{\uncertain{comme} $U$ est quasi-projectif \add{de dim. relative $n$},} \struck{\ill{} \ill{}} $\exists$ $X$ \struck{projectif} propre sur $S$ (\add{\uncertain{\ill{}}} $=$ \uncertain{projectif} sur $S$), \struck{plat,} \struck{\ill{}} de dim. relative $n$. On peut supposer $X = $ \uncertain{adhérence} schématique de $U$, donc $X$ plat sur $S$ et $X$ réduit. \struck{Notons} \add{Remarquons} que l'hypothèse de \uncertain{limite} \struck{\ill{}} sur $\mathbf{Z}_\ell$ cohomologique \ill{} $H^i(U_{\bar K}, \mathbf{Z}/\ell\mathbf{Z})$ fini, donc $E = H^i(U_{\bar K}, \mathbf{Z}_\ell)$ de t.f. sur $\mathbf{Z}_\ell$. \uncertain{Quitte} : faire une extension finie \add{séparable} sur $K$, on peut supposer que l'action de $P$ sur $E$ est triviale (cf.~I~…). Utilisant la résolution des \uncertain{singularités}, \add{(hyp.~(i))} on est ramené au cas $X$ régulier, et $Y = X - U$ un diviseur à croisements normaux. Ou pour \uncertain{appliquer} 3.2 grâce à l'hypothèse (ii), et on gagne.
+\note{« $H^i(Y_{\bar K}, \mathbf{Z}_\ell)$ » est bien écrit $Y$ sur la page, sur une écriture biffée ; la démonstration demande $U$.}
+
+\emph{Remarque} 3.6. Si on admet le résultat de \uncertain{\ill{}} \uncertain{tient} de \uncertain{Hironaka}, la démonstration précédente montre
+
+\page{99}
+\note{p.~15 de l'auteur.}
+
+sans supposer $U$ quasi-projectif sur $K$, mais seulement de t.f. et sép. D'autre part, les réductions faites \struck{à la fin} \add{dans} \struck{de} I~\ill{} nous permettent de conclure :
+
+\textbf{Corollaire 3.\struck{7}\add{7}} Sous les conditions (i) (ii) de 3.5, pour tout $U$ schéma de type \add{fini} sur $K$, $H^i(U_{\bar K}, \mathbf{Z}_\ell)$ est de t.f. sur $\mathbf{Z}_\ell$ et l'action du groupe d'inertie $I$ sur \struck{\ill{}} \uncertain{lui} est \uncertain{essentiellement} unipotente. Même résultat pour $H^i_!(U_{\bar K}, \mathbf{Z}_\ell)$, pourvu que $U$ soit \struck{\ill{}} \add{séparé} sur $K$.
+
+\emph{Remarques} 3.8. \struck{\ill{}} a) \add{Pour} l'instant, 3.5 \add{et 3.7} \struck{ne s'applique} \struck{\ill{} que dans \ill{}} \uncertain{n'est} \uncertain{utilisable} que \struck{\ill{} 3.2 \ill{}} quand $S$ est de caractéristique nulle, en utilisant les résultats de Hironaka [\,] et d'Artin SGA~4~$\overline{\text{XIX}}$ … . D'autre part, lorsqu'on dispose de la résolution des singularités \struck{pour \ill{}} pour les schémas de type fini sur \struck{\ill{} \ill{}} \add{\uncertain{\ill{}} \uncertain{dimension} \ill{}} un corps $k_0$ \add{\uncertain{\ill{} \ill{}}}, utilisant le th. de pureté SGA~4~$\overline{\text{XV}}$ … on voit \add{aisément} \struck{que les conclusions} \add{\uncertain{\ill{}}} \add{\uncertain{relatif}} à partir de \uncertain{chasses} pris \uncertain{comme} pour 3.5), que les \struck{les schémas} \ill{} \ill{} \ill{} \ill{} \ill{} \ill{} \ill{} 3.5 à 3.7, lorsque $S$ est \struck{\ill{}} \add{\uncertain{\ill{}}} \struck{\ill{}} \add{hensélisé strict} d'un schéma de type fini sur \struck{\ill{}} $k_0$.
+
+b) Lorsque $n = 1$, \uncertain{dans} \uncertain{qui} \uncertain{Abhyankar} [\,] la condition (i) de 3.5 est \uncertain{toujours} satisfaite. On ne sait cependant s'il en est de \ill{}
+\note{la phrase se poursuit sur la page suivante.}
+
+\page{100}
+\note{p.~16 de l'auteur.}
+
+la condition (ii). Cependant, la démonstration que nous donnerons \add{au §~5} de (3.2) montre que si le th. de \emph{pureté est satisfait pour les} $(X, Y^{(\lambda)})$ \emph{quelconques de dimension} $\leq i$, alors la conclusion sur $H^i(U_{\bar K}, \mathbf{Z}_\ell)^P$ reste valable. Or \uncertain{la} cette condition est toujours satisfaite pour $i = 1$, (c'est alors un résultat de \add{Nagata} \struck{Zariski} (SGA~2 …), \struck{\ill{}} th. de pureté \uncertain{ordinaire} de Zariski–Nagata \uncertain{(SGA~1 …)}. Le raisonnement de \struck{Nous} cf.~plus bas … 3.5 donne donc \struck{\ill{}} \add{ceci} :
+\note{la fin de b) est surchargée : « Nagata » est écrit au-dessus de « Zariski », et l'ordre des renvois entre les deux parenthèses est incertain.}
+
+\textbf{Corollaire 3.\struck{\ill{}}\add{9}.} Soit $X_K$ une \struck{\ill{}} \add{courbe algébrique} \struck{lisse de dim. $\leq 1$ sur $K$} lisse sur $K$, alors l'action du groupe d'inertie $I$ sur $H^1(X_{\bar K}, \mathbf{Z}_\ell)$ est \uncertain{ess.} unipotente d'échelon~2. Grâce à la réduction II~5.4, on en conclut
+
+\textbf{Corollaire 3.10.} Soit $X_K$ un schéma \struck{\ill{}} de type fini sur $K$. Alors $E = H^1(X_{\bar K}, \mathbf{Z}_\ell)$ est de t.f., et l'action du groupe d'inertie sur $E$ est ess.~unipotente d'échelon~3, \struck{\ill{}} et \uncertain{même} ess.~unipotente d'échelon~2 si $X$ est normal.
+\note{le numéro du premier corollaire est récrit en 3.9 ; celui du second est lu 3.10 sur la marge, sous un trait. La page s'arrête là ; la suite de l'exposé est hors de ce lot.}
+
+\end{document}
