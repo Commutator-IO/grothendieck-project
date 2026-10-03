@@ -1,0 +1,1843 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 46, pages 1-94
+% (the whole folder).
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried — a doubtful
+% reading, a notation he used differently, a missing passage — moves into a
+% footnote. It is held to being mathematically correct as it stands; where the
+% manuscript is loose or mistaken, the true statement is what appears here and
+% the footnote says what the page has. In any dispute of substance the
+% transcription governs: whoever cites Grothendieck must cite
+% batch-01.fr.tex ... batch-05.fr.tex.
+%
+% Scope: the folder was read whole — five batches, pages 1-94 — before any of
+% this was written, and it is ONE file for the shelfmark. The folder is a
+% binder of « Divers » under his own covers (pp. 1, 3, 9, 27, 37, 39, 50, 55,
+% 67, 71, 93); the runs are kept apart here, in binding order. The two
+% Brauer-Severi runs (pp. 39-48 and 55-61) are two moutures and are kept
+% distinct. The typed « Définition du morphisme Verschiebung » (pp. 23-26) is
+% by another, unnamed hand: described, not re-set. The typed versos (pp. 22,
+% 34, 36, 41, 43, 45, 47, 49) are scrap paper and are not read.
+%
+% Notation fixed for the whole document.
+%  - Characteristic p > 0 throughout pp. 4-35. F_X is the absolute Frobenius
+%    (his Frob(X), Fr_X); X^{(p/S)} = X x_{S,F_S} S (his P_S(X)); F_{X/S} :
+%    X -> X^{(p/S)} the relative Frobenius (his Frob_S(X), Fr_{X/S}); pr :
+%    X^{(p/S)} -> X the projection (his Ver_S(X), NOT the Verschiebung).
+%    Iterates F^nu, X^{(p^nu/S)}. U_nu(G) = Ker F^nu_{G/S} kept as written.
+%  - The endomorphism of pp. 4-7 is written f (his gothic f); its Lang map
+%    L_f(u) = f(u)u^{-1}.
+%  - Étale sheaves are script letters (\mathcal F) to keep F for Frobenius;
+%    the comparison isomorphism of pp. 29-32 is Fr_{F/X} : F_X^* F -> F. The
+%    axiomatic endomorphism of the identity functor of p. 33 is bold \mathbf F.
+%  - PGL_n, GL_n, SL_n for his GP(n-1), Gl(n), Sl(n). P(E) = Proj Sym E
+%    (Grothendieck's convention: f_* O(n) = S^n E) throughout pp. 40-61.
+%  - Twisting by a 1-cocycle f is written gamma_f, as on pp. 80-92.
+%
+% Substantive departures from the pages (footnoted where they occur): p. 5,
+% the relation between a and b is b = u a f(u)^{-1}, not b^{-1}a = f(u)u^{-1}
+% (the conclusion stands); p. 6, G/N -> G an isomorphism needs G connected;
+% p. 7, the corollary needs G connected; p. 10, X'^{(p/X)} is defined by
+% J^{[p]}, not J^p; p. 17, the lemma holds for any homeomorphism, and the
+% passage to affine needs V principal in an affine; p. 18, U_nu(G) contains
+% the (p^nu - 1)-th infinitesimal neighbourhood of the unit section and differs
+% from it in general; p. 20, the injective map is R*/(O* R*^p), not R*/O*,
+% and the reduction to X regular is not justified for X merely normal;
+% p. 31, on X = Spec F_p, Fr_{F/X} is the Frobenius automorphism of F, not the
+% identity (it is the identity on H^0); p. 46, the canonical section of lambda
+% is read as the empty linear system; p. 57, the formula for Phi^n(P(E)) is
+% harmonised to P((S^n E)^v), and (S^n E)^v = Gamma^n(E^v), not S^n(E^v), in
+% characteristic p; p. 63, the equivalence relation needs ac ~ bd with c, d
+% trivial; p. 70, V = Ker(norm) is R(mu_p) only for [k':k] = p, the sequence
+% is 0 -> mu_{p^e} -> V -> U -> 0 in general, and V is never smooth; p. 72,
+% Gamma is finite; p. 78, Lemma 4's hypothesis is stated as the proof uses it;
+% p. 79, the « last factor » is in G', not 1, and Lemma 5 is about maps
+% G' -> G'; p. 84, A is supplied finite over O; p. 85, Gamma/Gamma_d (not
+% Gamma mod Gamma_i) permutes the factors; p. 90, the proof uses A^Gamma ->
+% A/mA surjective (the margin's hypothesis), and injectivity is shown on the
+% kernel; the passage from « trivial mod m^n for all n » to trivial is made
+% explicit by Artin-Rees; p. 94, PGL_{N+1} itself never acts freely on an
+% open of P^N, so the argument is read for a subgroup without characters.
+% Announced and not established: the question of p. 8 (necessity of local
+% freeness), the corollary of p. 16 (breaks off), the local question of p. 20,
+% the problems of p. 21, the « Peut-être » of p. 35, the descent remarks of
+% pp. 46-48, the full faithfulness/equivalence of p. 51 (« douteux »), the
+% plan items 3-4 of p. 56, Questions 1-2 of pp. 64-66, the counter-example of
+% p. 68, the finite-field case of p. 73 and the general case of Lemma 1 p. 76
+% (supplied here, marked as ours), the surjectivity of Lemma 5 p. 79 (breaks
+% off), and the conclusion of p. 94.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-03 — first pass, unchecked against the pages by a human.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{46}
+\pages{1}{94}
+\dating{[vers 1966-vers 1972]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Schémas en groupes et fibrés principau[x] (Divers) : notes manuscrites (s.d.), tapuscrit (s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Ce dossier est une chemise de « divers » : une dizaine de liasses courtes,
+chacune sous un titre de sa main, qui gravitent autour de deux objets — les
+\emph{schémas en groupes} (des groupes dont les éléments sont les points d'un
+espace géométrique, comme le groupe des matrices inversibles) et les
+\emph{fibrés principaux} ou torseurs (des espaces sur lesquels un tel groupe
+agit librement et transitivement, sans qu'on ait choisi d'origine, comme
+l'ensemble des bases d'un espace vectoriel sur lequel agit le groupe linéaire).
+Le titre de la chemise reprend celui d'un chapitre prévu des \emph{Éléments de
+géométrie algébrique}, dont la première page donne d'ailleurs un plan.
+
+Plusieurs liasses tournent autour d'un seul outil, propre à la caractéristique
+$p$ : le \emph{Frobenius}, qui élève toutes les fonctions à la puissance $p$.
+Sur un corps fini à $q$ éléments, ses points fixes sont exactement les points
+rationnels, et presque tout ce qu'on sait dire sur ces corps passe par là.
+L'énoncé central est le \emph{théorème de Lang} : pour un groupe algébrique
+connexe $G$ sur un corps fini, l'application $u \mapsto F(u)u^{-1}$ est
+surjective. On le voit trois fois dans le dossier, sous trois habits : comme
+critère pour qu'une famille de torseurs « à Frobenius près » soit gouvernée
+par le groupe fini $G(\mathbb{F}_q)$ — d'où la correspondance entre fibrés
+vectoriels munis d'un Frobenius inversible et représentations du groupe
+fondamental sur $\mathbb{F}_p$ ; comme nullité de la cohomologie galoisienne
+d'un groupe connexe sur un corps fini ; comme ingrédient d'une version
+« semi-locale » du théorème 90 de Hilbert. Autour, des fiches de calcul sur le
+Frobenius relatif, sur le noyau du Frobenius d'un schéma en groupes, sur la
+$p$-torsion du groupe de Picard par l'opérateur de Cartier, et la preuve que
+le Frobenius absolu agit comme l'identité sur la cohomologie étale.
+
+Une seconde famille de liasses porte sur les \emph{schémas de Brauer–Severi} :
+des objets qui ressemblent localement à un espace projectif, mais dont les
+morceaux sont recollés par des transformations projectives qui ne proviennent
+pas toujours de transformations linéaires. L'image est celle d'un ruban de
+Möbius : localement un produit, globalement tordu, et la torsion mesurée par
+une classe de cohomologie. Ici la mesure est le \emph{groupe de Brauer}, et le
+dossier en donne la construction dans le cadre analytique complexe, la comparaison avec le second
+groupe de cohomologie, et deux questions sur sa surjectivité, puis l'usage
+des schémas de Brauer–Severi pour paramétrer les systèmes linéaires et les
+diviseurs de degré donné.
+
+Viennent enfin des fiches isolées : approximation des schémas en groupes par
+des progroupes, restriction des scalaires à travers une extension
+inséparable (où apparaît un groupe dont la partie unipotente n'est pas définie
+sur le corps de base), un calcul de cohomologie non abélienne par « torsion »
+des cocycles, que Grothendieck rapproche des séries zétafuchsiennes de
+Poincaré, et une impossibilité de passer au quotient. Rien n'est rédigé pour
+être lu ; beaucoup s'arrête au milieu d'une phrase. Au bas de la dernière
+page, quelques lignes en anglais, biffées, parlent de libérer la création du
+poids des concepts et des outils ; elles ne se rattachent à rien dans le
+dossier.
+
+Où chercher la suite ? Sous les noms de théorème de Lang et de
+Lang–Steinberg, de correspondance entre $F$-modules unités et systèmes locaux
+étales, de noyaux de Frobenius et d'algèbres de Lie restreintes,
+d'invariance topologique du site étale, de schémas de Brauer–Severi et
+d'algèbres d'Azumaya, de restriction de Weil et de groupes pseudo-réductifs,
+de torsion en cohomologie non abélienne.
+
+\keywords{relative Frobenius, Frobenius twist, Lang's theorem, Lang map, gerbe, unit-root F-module, étale local system mod p, unramified and étale morphisms, universal homeomorphism, Frobenius kernel, infinitesimal group scheme, p-torsion of the Picard group, Cartier operator, logarithmic differential forms, restricted Lie algebra, Verschiebung, topological invariance of the étale site, absolute Frobenius acts trivially on cohomology, Brauer–Severi scheme, projective bundle, linear system, relative Picard functor, relative effective Cartier divisor, Brauer group, Azumaya algebra, period-index problem, pro-algebraic group, approximation of group schemes, Weil restriction, pseudo-reductive group, Shapiro's lemma, twisting of cocycles, factor of automorphy, Hilbert's Theorem 90, Galois descent, decomposition and inertia groups, Lang–Steinberg theorem, free action and quotient}
+\end{resume}
+
+\section*{Le fil du dossier, et les conventions}
+
+Le dossier ne porte aucune pagination de sa main. Il se compose de liasses
+séparées par des chemises titrées, dans l'ordre de reliure suivant, qu'on
+garde.
+
+\begin{itemize}
+\item Page 2 : un plan des \emph{Éléments}, en treize chapitres.
+\item Pages 3 à 8 : « $p$-structures sur fibrés vectoriels et sur torseurs » —
+gerbes de torseurs munis d'un isomorphisme $P \simeq P^{f}$, théorème de Lang,
+fibrés vectoriels à Frobenius inversible.
+\item Pages 9 à 20 : « Frobenius » — Frobenius relatif et morphismes étales,
+« Frobeniuseries » (formulaire du Frobenius absolu et relatif), noyau du
+Frobenius d'un schéma en groupes, $p$-torsion du groupe de Picard.
+\item Pages 21 à 26 : un problème sur l'opération de Cartier et la
+Verschiebung, et le tapuscrit d'un correspondant, « Définition du morphisme
+Verschiebung ».
+\item Pages 27 à 35 : « Frobeniuseries pour faisceaux étales » — l'isomorphisme
+$F_X^{*}\mathcal{F} \simeq \mathcal{F}$ et la trivialité cohomologique du
+Frobenius absolu. Une chemise biffée (page 37) et son dos (page 38, le seul mot
+« Steinberg ») suivent.
+\item Pages 39 à 48 : « Brauer-Severi. Dans Chap VI » — première mouture :
+définition, critères de trivialité, systèmes linéaires paramétrés par un
+schéma de Brauer–Severi.
+\item Pages 50 à 53 : « Progroupes et groupes algébriques quasi-compacts ».
+\item Pages 55 à 66 : « Schémas de Brauer-Severi » — seconde mouture : plan
+d'une théorie globale, schéma des $n$-formes, diviseurs transversaux ; puis
+« Groupe de Brauer global » dans le cadre analytique complexe.
+\item Pages 67 à 70 : « “Restriction des scalaires” dans les groupes
+algébriques et leurs espaces principaux homogènes ».
+\item Pages 71 à 92 : « Petits fourbis cohomologiques » — théorème 90 tordu,
+théorème de Lang en cohomologie galoisienne, cohomologie d'un groupe muni
+d'un automorphisme, torsion des cocycles, version semi-locale.
+\item Pages 93 et 94 : « Contre-exemples à passage au quotient ».
+\end{itemize}
+
+\emph{Le fil.} Ce n'est pas un dossier à argument unique, et on ne lui en
+prête pas. Deux constructions reviennent pourtant d'une liasse à l'autre, et
+on les nomme une fois. La première est l'\emph{application de Lang}
+$L_f(u) = f(u)\,u^{-1}$ d'un groupe dans lui-même, pour un endomorphisme $f$
+à différentielle nulle : sa surjectivité est l'énoncé des pages 6, 74 à 76
+et 83, et son interprétation cohomologique celle des pages 5 et 77 à 79. La
+seconde est la \emph{torsion} d'un objet par un torseur ou un cocycle : un
+torseur tordu par $f$ aux pages 4 à 7, un schéma de Brauer–Severi comme forme
+tordue d'un espace projectif aux pages 40 à 61, un $\Gamma$-ensemble tordu par
+un cocycle aux pages 80 à 92. Les deux moutures sur les schémas de
+Brauer–Severi (pages 39 à 48, pages 55 à 61) se recouvrent en partie et on les
+garde distinctes : la seconde reprend la première comme plan, puis va plus
+loin sur les diviseurs.
+
+\emph{Conventions.} La caractéristique est $p > 0$ des pages 4 à 35. On note
+$F_X$ le Frobenius absolu d'un schéma $X$ (identité sur l'espace, $a \mapsto
+a^{p}$ sur les fonctions), $X^{(p/S)} = X \times_{S, F_S} S$ le tordu de
+Frobenius d'un $S$-schéma (son $P_S(X)$), $F_{X/S} : X \to X^{(p/S)}$ le
+Frobenius relatif, et $\mathrm{pr} : X^{(p/S)} \to X$ la projection (son
+$\mathrm{Ver}_S(X)$, qui n'a rien à voir avec la Verschiebung) ; les itérés
+sont $F^{\nu}$, $X^{(p^{\nu}/S)}$. Les faisceaux étales sont notés
+$\mathcal{F}$, pour garder la lettre $F$ au Frobenius. Les groupes linéaires
+sont $\mathrm{GL}_n$, $\mathrm{SL}_n$, $\mathrm{PGL}_n$ (ses $\mathrm{Gl}(n)$,
+$\mathrm{Sl}(n)$, $\mathrm{GP}(n-1)$). Pour un module localement libre $E$,
+$\mathbb{P}(E) = \mathrm{Proj}\,\mathrm{Sym}\,E$, de sorte que les sections
+de $\mathcal{O}(n)$ sont $S^{n}E$ ; on s'y tient des pages 40 à 61, où la
+page mêle parfois l'autre convention. Un $1$-cocycle $f$ tord une action
+$\gamma \mapsto \gamma$ en $\gamma_f$, comme aux pages 80 à 92.
+
+\emph{Ce qui est annoncé et non établi.} La question de la page 8 (les
+hypothèses de liberté locale sont-elles nécessaires ?) reste posée ; le
+corollaire de la page 16 s'arrête au milieu de sa phrase ; la question locale
+de la page 20 n'est pas résolue ; les deux problèmes de la page 21 sont des
+demandes ; la réciproque de la page 35 est un « Peut-être » ; les questions
+de descente des pages 46 à 48 sont indiquées ; la pleine fidélité et
+l'équivalence de la page 51 sont, la seconde, marquées « douteux » ; les
+questions 1 et 2 des pages 64 à 66 restent ouvertes sur la page ; le
+contre-exemple de la page 68 est une question ; le cas d'un corps fini à la
+page 73 et le cas général du lemme de la page 76 ne sont pas écrits ; le
+lemme 5 de la page 79 et la conclusion de la page 94 s'arrêtent avant leur
+conclusion.
+
+\pagerange{2}{2}
+\section*{Un plan des \emph{Éléments} (page 2)}
+
+La page 2, un feuillet déchiré, porte un plan de chapitres repris à deux
+encres, dont on donne le dernier état lisible : I. Langage des schémas ;
+II. Étude élémentaire de quelques classes de morphismes ; III. Cohomologie
+des faisceaux cohérents ; IV. Étude locale des morphismes ; V. Étude globale
+élémentaire des morphismes ; VI. Procédés de construction (avec, en marge,
+« y inclure propriétés de descente pour morphismes étales ») ;
+VII. Schémas en groupes, fibrés principaux (« définition du groupe
+fondamental ») ; VIII. Picard et variétés abéliennes ; IX. Torseurs et
+cotorseurs, dualité ; X. Théorie d'intersection, Riemann–Roch ;
+XI. Cohomologie étale et groupe fondamental ; XII. Jacobiennes et variétés
+[abéliennes ?] ; XIII. Résolution des singularités ? ; et, sans numéro,
+« Théorie des cycles algébriques ?? ».\footnote{La lecture des chapitres VIII,
+XI et XII est douteuse : la ligne VIII primitive, barrée, ne se lit presque
+pas, et « Et Picard et V.A. » est écrit au-dessus à l'encre bleue ; le titre
+du chapitre XII est en partie illisible et « abéliennes » est une conjecture.
+Des flèches dans la marge déplacent les chapitres IX à XI, avec les mots
+« intersectivité », « intersectiviste », de lecture incertaine. En haut,
+barré : « Groupe fondamental ».}
+
+C'est à rapprocher du plan annoncé dans l'introduction d'EGA I (1960), dont
+il garde les quatre premiers chapitres et le chapitre VII « Schémas en
+groupes, espaces fibrés principaux » — qui est aussi le titre de la chemise
+du présent dossier. Il en diffère par un chapitre sur torseurs, cotorseurs et
+dualité, par le rapprochement du schéma de Picard et des variétés abéliennes,
+et par les deux chapitres finaux, qui portent chacun un point
+d'interrogation. La chemise « Brauer-Severi » de la page 39 porte « Dans Chap
+VI », ce qui la range sous les procédés de construction et la descente.
+
+\pagerange{4}{8}
+\section*{$p$-structures sur fibrés vectoriels et sur torseurs (pages 3 à 8)}
+
+\pagerange{4}{6}
+\subsection*{Torseurs tordus par un endomorphisme : quand forment-ils une gerbe ? (pages 4 à 6)}
+
+Soit $\underline{S}$ un site, $G$ un faisceau de groupes sur $\underline{S}$
+et $f : G \to G$ un endomorphisme. Pour un $G$-torseur (à droite) $P$, notons
+$P^{f} = P \wedge^{G, f} G$ le torseur obtenu par extension du groupe
+structural le long de $f$. On considère les couples $(P, \varphi)$ formés d'un
+$G$-torseur et d'un isomorphisme $P \simeq P^{f}$, ou, ce qui revient au
+même, d'un morphisme de faisceaux $\varphi : P \to P$ tel que
+\[
+\varphi(xg) = \varphi(x)\,f(g).
+\]
+Ces couples forment un champ $\Sigma$ sur $\underline{S}$.\footnote{Une
+insertion interlinéaire, reliée au texte par un trait et de lecture douteuse,
+semble décrire ces objets comme des objets « sur un groupoïde, avec une
+action de $(G, f)$ ».} La question est : quand est-ce une \emph{gerbe} ?
+
+Localement, $P$ est trivial et s'identifie à $G$ ; la structure $\varphi$ est
+alors déterminée par $a = \varphi(1) \in G(S)$, sous la forme $\varphi_a(g) =
+a\,f(g)$, et $a$ est arbitraire. Le champ est donc localement non vide, et
+tout revient à savoir quand deux objets $(G, \varphi_a)$, $(G, \varphi_b)$
+sont localement isomorphes. Un morphisme de l'un vers l'autre est une
+translation à gauche $g \mapsto ug$, $u \in G(S)$, qui entrelace $\varphi_a$ et
+$\varphi_b$, c'est-à-dire $u\,a\,f(g) = b\,f(ug)$ pour tout $g$, soit
+\[
+b = u\,a\,f(u)^{-1}.
+\]
+Les classes d'isomorphisme locales sont donc les orbites de $G$ agissant sur
+lui-même par \emph{$f$-conjugaison} $u \cdot a = u\,a\,f(u)^{-1}$.\footnote{La
+page écrit $b^{-1}a = f(u)\,u^{-1}$, qui ne découle de $ua = b\,f(u)$ que si
+$u$ commute à $a$. La conclusion n'en dépend pas : l'objet $(G, \varphi_a)$ est
+localement isomorphe à $(G, \varphi_1)$ si et seulement si $a$ est
+localement de la forme $u^{-1}f(u)$, et l'image de $u \mapsto u^{-1}f(u)$ est
+l'ensemble des inverses de l'image de $v \mapsto f(v)\,v^{-1}$ (poser $v =
+u^{-1}$), de sorte que l'une est un épimorphisme si et seulement si l'autre
+l'est.} Il en résulte :
+
+\emph{Proposition (page 5).} Le champ $\Sigma$ est une gerbe si et seulement si
+l'application de Lang
+\[
+L_f : G \longrightarrow G, \qquad u \longmapsto f(u)\,u^{-1},
+\]
+est un épimorphisme de faisceaux d'ensembles. Dans ce cas tout objet est
+localement isomorphe à $(G, \varphi_1 = f)$, dont le faisceau des
+automorphismes est formé des $u$ tels que $f(u) = u$, c'est-à-dire le faisceau
+des coïncidences $N = \mathrm{Ker}(f, \mathrm{id}_G)$ ; et $\Sigma$ est
+équivalente à la gerbe des $N$-torseurs, un $N$-torseur $Q$ allant sur
+$(Q \wedge^{N} G, \varphi)$ avec $\varphi$ induit par $f$.
+
+\pagerange{6}{6}
+\subsection*{Le théorème de Lang (page 6)}
+
+Soit $G$ un schéma en groupes lisse sur le corps fini $\mathbb{F}_q$, $q =
+p^{n}$, et $f = F^{n}_{G/\mathbb{F}_q} : G \to G$ son Frobenius relatif à
+$\mathbb{F}_q$ (puisque $G$ est défini sur $\mathbb{F}_q$, $G^{(q)} = G$).
+
+\emph{Théorème (Lang).} L'application $L_f(u) = f(u)\,u^{-1}$ de $G$ dans $G$
+est \emph{étale} ; elle est de plus \emph{surjective}, donc couvrante pour la
+topologie étale, si $G$ est connexe.
+
+L'étalité vient du critère infinitésimal : $G$ est lisse et la différentielle
+de $f$ est nulle ($\mathrm{Lie}(f) = 0$, donc $df = 0$ en tout point par
+translation), si bien que la différentielle de $L_f$ en tout point est, au
+signe et aux translations près, l'identité. Le même calcul vaut pour
+l'application d'orbite $u \mapsto f(u)\,a\,u^{-1}$ de la $f$-conjugaison
+tordue, qui est équivariante :
+\[
+L_f(gx) = f(g)\,L_f(x)\,g^{-1}.
+\]
+Toutes les orbites de cette action sont donc ouvertes ; $G$ connexe (donc
+irréductible) n'en a qu'une, et $L_f$ est surjective. C'est la preuve à
+laquelle la page renvoie : Serre, \emph{Groupes algébriques et corps de
+classes}, p.~119.\footnote{La page conclut ici à un isomorphisme $G/N \to G$
+induit par $L_f$, avec $N = \mathrm{Ker}(f, \mathrm{id}_G) = G(\mathbb{F}_q)$
+fini étale. En effet $L_f(un) = L_f(u)$ pour $n \in N$, et $L_f(u) = L_f(v)$
+équivaut à $v^{-1}u \in N$ ; le morphisme induit $G/N \to G$ est donc un
+monomorphisme étale, c'est-à-dire une immersion ouverte, et c'est un
+isomorphisme exactement quand $L_f$ est surjective — donc quand $G$ est
+connexe, hypothèse que la page a barrée en tête du numéro et qu'il faut
+rétablir à cet endroit.}
+
+\emph{Axiomatisation (pied de la page 6).} Soit $G$ un schéma en groupes lisse
+sur une base $S$ et $f$ un endomorphisme de $G$ avec $\mathrm{Lie}(f) = 0$.
+Alors $L_f$ est étale, et surjective si $G$ est à fibres connexes. C'est
+exact : $L_f$ est un $S$-morphisme entre $S$-schémas lisses, étale dès qu'il
+l'est fibre à fibre, et sur chaque fibre l'argument des orbites s'applique sur
+une clôture algébrique. C'est le germe de ce qu'on appelle aujourd'hui le
+théorème de Lang–Steinberg (Steinberg, 1968), où $f$ est un endomorphisme
+quelconque à différentielle nilpotente ; on le retrouve aux pages 74 à 76.
+
+\pagerange{7}{8}
+\subsection*{Torseurs à Frobenius près, et fibrés vectoriels à Frobenius inversible (pages 7 et 8)}
+
+\emph{Corollaire (page 7).} Soit $G$ un schéma en groupes lisse et
+\emph{connexe} sur $\mathbb{F}_q$, $S$ un schéma sur $\mathbb{F}_q$ et $f$ le
+Frobenius de $G$ relatif à $\mathbb{F}_q$, étendu à $G_S$. La catégorie des
+$G_S$-torseurs $P$ munis d'un isomorphisme $P \simeq P^{f}$ est équivalente à
+celle des torseurs sous le groupe constant fini $G(\mathbb{F}_q)$, c'est-à-dire
+des revêtements étales galoisiens de $S$ (non nécessairement connexes) de
+groupe $G(\mathbb{F}_q)$.\footnote{La connexité est nécessaire et n'est pas
+écrite : c'est elle qui rend $L_f$ surjective, donc $\Sigma$ une gerbe. La
+ligne « revêtements étales galoisiens de $S$, de groupe » est barrée d'un trait
+plein puis soulignée d'un pointillé qui paraît la rétablir ; on la garde.}
+En effet $N = \mathrm{Ker}(f, \mathrm{id})$ est le groupe constant défini par
+$G(\mathbb{F}_q)$, et l'on applique la proposition de la page 5.
+
+\emph{Application aux $p$-structures (pages 7 et 8).} Soit $S$ un schéma de
+caractéristique $p$ et $E$ un $\mathcal{O}_S$-module quasi-cohérent. Une
+\emph{$p$-structure} sur $E$ est un homomorphisme
+\[
+\varphi : E^{(p)} = F_S^{*}E = E \otimes_{\mathcal{O}_S, F_S} \mathcal{O}_S
+\longrightarrow E ;
+\]
+on la dit \emph{inversible} si $\varphi$ est un isomorphisme.\footnote{L'adjectif
+de la page est illisible ; « inversible » est notre choix. Ce qu'il désigne
+est ce qu'on appelle aujourd'hui un $F$-module unité, ou un fibré à
+Frobenius inversible.} Si $E$ est localement libre de rang $n$, le torseur
+des repères $P = \underline{\mathrm{Isom}}(\mathcal{O}_S^{n}, E)$ est un
+$\mathrm{GL}_n$-torseur, $E^{(p)}$ correspond à $P^{f}$ pour $f$ le Frobenius
+de $\mathrm{GL}_n$ (défini sur $\mathbb{F}_p$), et une $p$-structure
+inversible est un isomorphisme $P^{f} \simeq P$. Comme $\mathrm{GL}_n$ est
+lisse et connexe sur $\mathbb{F}_p$, le corollaire donne :
+
+\emph{Proposition (page 8).} La catégorie des $\mathcal{O}_S$-modules
+localement libres de rang $n$ munis d'une $p$-structure inversible est
+équivalente à celle des $\mathrm{GL}_n(\mathbb{F}_p)$-torseurs, c'est-à-dire
+des faisceaux étales d'espaces vectoriels sur $\mathbb{F}_p$ localement libres
+de rang $n$. À un tel faisceau $\Phi$ correspond
+\[
+E = \Phi \otimes_{\mathbb{F}_p} \mathcal{O}_S, \qquad \varphi = \mathrm{id}_{\Phi}
+\otimes F_S.
+\]
+On utilise au passage que les modules quasi-cohérents pour la topologie de
+Zariski et pour la topologie étale sont les mêmes (descente fidèlement plate).
+La page se demande pour finir dans quelle mesure les hypothèses de liberté
+locale et de type fini sont nécessaires, et ne répond pas.\footnote{C'est
+l'énoncé qu'on trouve sous le nom de correspondance entre $F$-modules unités
+(ou $F$-cristaux unités) et systèmes locaux étales, chez Katz, \emph{$p$-adic
+properties of modular schemes and modular forms} (1973), §4.1, et, pour les
+fibrés sur une courbe, chez Lange et Stuhler (1977). Rien sur ces pages ne
+renvoie à une source.}
+
+\pagerange{10}{20}
+\section*{Frobenius (pages 9 à 20)}
+
+\pagerange{10}{10}
+\subsection*{Frobenius relatif, morphismes non ramifiés et étales (page 10)}
+
+Soit $p : X' \to X$ un morphisme localement de présentation finie de schémas
+de caractéristique $p$, et $F_{X'/X} : X' \to X'^{(p/X)}$ son Frobenius
+relatif, qui fait commuter le diagramme où les deux carrés de gauche sont le
+tordu et le Frobenius absolu.
+
+\begin{tikzcd}[column sep=large, row sep=normal]
+X' \arrow[r, "F_{X'/X}"] \arrow[dr, "p"'] & X'^{(p/X)} \arrow[r, "\mathrm{pr}"] \arrow[d] & X' \arrow[d, "p"] \\
+ & X \arrow[r, "F_X"'] & X
+\end{tikzcd}
+
+\emph{Proposition.} 1° Sont équivalents : (i) $p$ est non ramifié ; (ii)
+$F_{X'/X}$ est non ramifié ; (ii bis) $F_{X'/X}$ est un monomorphisme.
+2° Sont équivalents : (i) $p$ est étale ; (ii) $F_{X'/X}$ est étale ; (ii bis)
+$F_{X'/X}$ est un isomorphisme.
+
+\emph{Démonstration.} Le Frobenius relatif est un homéomorphisme universel,
+donc radiciel et surjectif, et il est localement de présentation finie
+puisque $X'$ et $X'^{(p/X)}$ le sont sur $X$. 1° (ii) $\Leftrightarrow$ (ii bis)
+parce qu'un morphisme localement de présentation finie est un monomorphisme si
+et seulement s'il est radiciel et non ramifié\footnote{EGA IV, 17.2.6. La page
+renvoie à un numéro lu « 17.4.10 », sous réserve, peut-être d'un état
+antérieur de la numérotation.} ; (i) $\Leftrightarrow$ (ii) parce que
+$\Omega^1_{X'/X} \simeq \Omega^1_{X'/X'^{(p/X)}}$, la flèche
+$F_{X'/X}^{*}\Omega^1_{X'^{(p/X)}/X} \to \Omega^1_{X'/X}$ étant nulle (la
+différentielle d'une puissance $p$-ième est nulle).
+2° (ii) $\Leftrightarrow$ (ii bis) parce qu'un morphisme étale, radiciel et
+surjectif est un isomorphisme ; (i) $\Rightarrow$ (ii) parce que si $X'$ est
+étale sur $X$, $X'^{(p/X)}$ l'est aussi, et tout $X$-morphisme entre
+$X$-schémas étales est étale. (ii bis) $\Rightarrow$ (i) : par 1°, $p$ est non
+ramifié, donc, localement sur $X'$ et après une extension étale de $X$, une
+immersion fermée (EGA IV, 18.4.7) ; le Frobenius relatif commute aux
+changements de base, et l'on est ramené au cas d'une immersion fermée
+$X' = V(\mathcal{J})$, $\mathcal{J}$ de type fini, dont le Frobenius relatif est
+un isomorphisme. Or $X'^{(p/X)}$ est le sous-schéma fermé défini par l'idéal
+$\mathcal{J}^{[p]}$ engendré par les puissances $p$-ièmes des sections de
+$\mathcal{J}$, et $F_{X'/X}$ est l'inclusion $V(\mathcal{J}) \subset
+V(\mathcal{J}^{[p]})$.\footnote{La page écrit $\mathcal{J}^{p}$. L'idéal du
+tordu est $\mathcal{J}^{[p]} \subset \mathcal{J}^{p}$ ; la conclusion ne
+change pas, puisque $\mathcal{J} = \mathcal{J}^{[p]}$ entraîne $\mathcal{J} =
+\mathcal{J}^{p} = \mathcal{J}^{2}$.} L'hypothèse s'écrit $\mathcal{J} =
+\mathcal{J}^{[p]}$, d'où $\mathcal{J} = \mathcal{J}^{2}$ ; un idéal de type
+fini idempotent est localement engendré par un idempotent, et $X'$ est
+ouvert (et fermé) dans $X$.\footnote{La page renvoie ici à « (16.1.8) », lu
+sous réserve.}
+
+\pagerange{11}{16}
+\subsection*{« Frobeniuseries » : le formulaire (pages 11 à 16)}
+
+Les pages 11 à 16 fixent un formulaire, dans la catégorie des schémas de
+caractéristique $p$ (ses « préschémas » sur $\mathbb{Z}/p\mathbb{Z}$).
+
+\emph{Frobenius absolu et relatif.} Le Frobenius absolu $F_X : X \to X$ est
+l'identité sur l'espace et $a \mapsto a^{p}$ sur les fonctions ; il est
+fonctoriel en $X$. Pour $X$ au-dessus de $S$, le carré $f \circ F_X = F_S
+\circ f$ fournit le $S$-morphisme fonctoriel $F_{X/S} : X \to X^{(p/S)} = X
+\times_{S, F_S} S$, et $F_X = \mathrm{pr} \circ F_{X/S}$.\footnote{La page note
+$P_S(X)$ le tordu, $\mathrm{Frob}_S(X)$ le Frobenius relatif et
+$\mathrm{Ver}_S(X)$ la projection $P_S(X) \to X$, « compatible avec
+$\mathrm{Frob}(S)$ ». Ce $\mathrm{Ver}$ n'est pas la Verschiebung (pages 21 à
+26), qui n'existe que pour un schéma en groupes commutatif plat. Une note
+marginale propose les notations $X^{(p/S)}$, $X^{(p/f)}$, $X^{(p)}$, et demande
+de « dire que $X \to P_S(X)$ est un homéomorphisme universel ».} Le foncteur
+$X \mapsto X^{(p/S)}$ est un changement de base : il commute aux limites
+projectives et aux sommes, et préserve type fini, affine, propre, etc.
+
+\emph{Modules et algèbres.} Pour un $\mathcal{O}_X$-module $E$ on pose $E^{(p/S)}
+= \mathrm{pr}^{*}E = E \otimes_{\mathcal{O}_S, F_S} \mathcal{O}_S$ ; on a
+$F_{X/S}^{*}(E^{(p/S)}) = F_X^{*}E$, et pour $L$ inversible un isomorphisme
+canonique
+\[
+F_X^{*}L \simeq L^{\otimes p}, \qquad s \otimes 1 \mapsto s^{\otimes p}.
+\]
+Pour une algèbre quasi-cohérente $\mathcal{A}$ (graduée), le tordu commute à
+$\mathrm{Spec}$ et à $\mathrm{Proj}$, et le Frobenius relatif de $X =
+\mathrm{Spec}\,\mathcal{A}$ (resp. $\mathrm{Proj}\,\mathcal{A}$) est induit par
+$\mathcal{A}^{(p/S)} \to \mathcal{A}$, $a \otimes \lambda \mapsto \lambda a^{p}$.
+D'où, pour $\mathbb{V}(E) = \mathrm{Spec}\,\mathrm{Sym}\,E$ et $\mathbb{P}(E)$,
+$\mathbb{V}(E)^{(p/S)} = \mathbb{V}(E^{(p/S)})$ et $\mathbb{P}(E)^{(p/S)} =
+\mathbb{P}(E^{(p/S)})$, les Frobenius étant donnés par $E^{(p/S)} \to S^{p}E$,
+$x \otimes \lambda \mapsto \lambda x^{p}$. Le Frobenius de $\mathbb{V}(E)$
+respecte l'addition mais tord la multiplication par les scalaires par $\lambda
+\mapsto \lambda^{p}$\footnote{La page dit que la structure vectorielle « n'est
+pas conservée », mais que la structure de [deux mots illisibles] l'est ; on
+lit qu'il s'agit de la structure de groupe additif, ce qui est exact.} ; celui
+de $\mathbb{P}(E)$ correspond à l'homomorphisme d'algèbres graduées
+$\mathrm{Sym}(E^{(p/S)}) \to (\mathrm{Sym}\,E)_{(p)}$ (degrés multiples de
+$p$), et ramène $\mathcal{O}(1)$ sur $\mathcal{O}(p)$. Exemple (marge de la
+page 14) : pour $E = \mathcal{O}_S^{n}$, le Frobenius de l'espace affine
+$\mathbb{A}^{n}_S$ est $t_i \mapsto t_i^{p}$.
+
+\emph{Changement de base.} 1° Pour $X' \to X \to S$,
+\[
+X'^{(p/X)} \simeq X'^{(p/S)} \times_{X^{(p/S)}, F_{X/S}} X,
+\]
+et $F_{X'/X}$ est le morphisme de composantes $F_{X'/S}$ et le morphisme
+structural $X' \to X$ — « trois carrés cartésiens », dit le diagramme de la
+page 13. 2° Pour $S' \to S$, $X^{(p/S)} \times_S S' \simeq (X \times_S
+S')^{(p/S')}$, isomorphisme qui transforme $F_{X/S}$ en $F_{X_{S'}/S'}$. Les
+deux se vérifient en écrivant les produits fibrés.
+
+\emph{Itérés, base parfaite, base finie.} On définit $X^{(p^{\nu}/S)}$ et
+$F^{\nu}_{X/S}$ en remplaçant partout $p$ par $p^{\nu}$. Si $S$ est
+\emph{parfait} ($F_S$ un isomorphisme, par exemple le spectre d'un corps
+parfait), $\mathrm{pr} : X^{(p^{\nu}/S)} \to X$ est un isomorphisme de
+schémas, qui n'est pas un $S$-isomorphisme. Si $S$ est un $\mathbb{F}_q$-schéma,
+$q = p^{\nu}$, et $S = \mathrm{Spec}\,\mathbb{F}_q$, alors $F_S^{\nu} =
+\mathrm{id}$, donc $X^{(q/S)} = X$ comme $S$-schéma et $F^{k\nu}_{X/S}$ est un
+$S$-endomorphisme de $X$, égal à $(F^{\nu}_{X/S})^{k}$ ; pour $\nu = 1$ on
+retrouve le Frobenius absolu.\footnote{L'exposant de « $\mathrm{Frob}^{k\nu}_S(S)$ »
+est surchargé. Le corollaire qui suit, « Si $S$ est sur $\mathbb{F}_q$, et si
+$X$ provient d'un préschéma $X_0$ sur $\mathbb{F}_q$ par extension de la
+base… », s'arrête là ; ce qu'il annonce est vraisemblablement que
+$F^{\nu}_{X_0/\mathbb{F}_q} \times \mathrm{id}_S$ est alors un
+$S$-endomorphisme de $X$ — c'est l'usage qu'en fait la page 6 —, mais la
+complétion est nôtre.}
+
+\emph{Groupes.} Si $G$ est un $S$-schéma en groupes (ou porte une structure
+algébrique finie quelconque), $G^{(p^{\nu}/S)}$ en hérite et $F^{\nu}_{G/S}$
+est un homomorphisme. On pose
+\[
+U_{\nu}(G) = \mathrm{Ker}\bigl(F^{\nu}_{G/S}\bigr),
+\]
+le $\nu$-ième noyau de Frobenius, noté souvent $G_{(\nu)}$ aujourd'hui. Une
+proposition barrée affirmait que si $G$ est de présentation finie, $U_{\nu}(G)$
+est fini, radiciel, surjectif et de présentation finie sur $S$. L'énoncé est
+exact : un homéomorphisme universel est entier (EGA IV, 18.12.11), de sorte que
+$F^{\nu}_{G/S}$, de type fini, est fini, et $U_{\nu}(G)$ est son image
+réciproque par la section unité.\footnote{Pourquoi la proposition est barrée,
+la page ne le dit pas ; une note marginale illisible lui est reliée, où se
+lisent « $U_{\nu}$ », « $\mathrm{Frob}^{\nu}$ » et « fini ». Le lemme de la
+page 17, qui suit, est précisément un outil pour l'établir autrement.}
+
+\pagerange{17}{18}
+\subsection*{Un lemme d'affinité, et les groupes infinitésimaux (pages 17 et 18)}
+
+\emph{Lemme 1 (page 17).} Un morphisme $f : T \to S$ qui est un homéomorphisme
+est affine.\footnote{La page énonce le lemme pour $f$ de présentation finie,
+après avoir barré « radiciel surjectif » et « universel ». L'hypothèse de
+présentation finie ne sert pas. Une première démonstration, d'une douzaine de
+lignes, est barrée.}
+
+\emph{Démonstration.} Soit $s \in S$ et $t$ l'unique point de $f^{-1}(s)$.
+Choisissons un ouvert affine $V \ni s$, puis un ouvert affine $U \ni t$ contenu
+dans $f^{-1}(V)$. Comme $f$ est un homéomorphisme, $f(U)$ est un ouvert de $V$
+contenant $s$ ; soit $h \in \Gamma(V, \mathcal{O})$ avec $s \in D(h) \subset
+f(U)$. Par bijectivité $f^{-1}(D(h)) \subset U$, et $f^{-1}(D(h)) = U_{f^{*}h}$
+est un ouvert principal de l'affine $U$, donc affine.\footnote{La page prend
+$V$ affine quelconque dans $f(U)$ et conclut que $f^{-1}(V)$, ouvert de
+l'affine $U$, est affine « comme morphisme de schémas affines ». Cela vaut si
+$S$ est séparé ; sans cela, l'image réciproque d'un ouvert affine par un
+morphisme d'un affine peut ne pas être affine. Le choix d'un ouvert principal
+d'un affine contenant $f(U)$ règle le point.}
+
+\emph{Proposition 2 (page 18).} Soit $G$ un $S$-schéma en groupes. Pour que $G$
+soit de hauteur $\le \nu$, c'est-à-dire $U_{\nu}(G) = G$, il faut et il suffit
+que $G$ soit affine sur $S$, défini par une algèbre augmentée $\mathcal{A}$
+dont l'idéal d'augmentation $\mathcal{I}$ est à puissances $p^{\nu}$-ièmes
+nulles ($x \in \mathcal{I} \Rightarrow x^{p^{\nu}} = 0$).\footnote{La page dit
+« d'échelon infinitésimal $\nu$ », lecture douteuse ; « hauteur » est le terme
+d'aujourd'hui.}
+
+En effet, si $F^{\nu}_{G/S}$ se factorise par la section unité, $G \to S$ est
+un homéomorphisme (le Frobenius en est un), donc $G$ est affine par le lemme 1,
+et la factorisation de $\mathcal{A}^{(p^{\nu}/S)} \to \mathcal{A}$, $a \otimes
+\lambda \mapsto \lambda a^{p^{\nu}}$, par l'augmentation dit exactement que
+$x^{p^{\nu}} = 0$ pour $x \in \mathcal{I}$ ; la réciproque est immédiate.
+
+Pour $G$ quelconque, $U_{\nu}(G)$ est le plus grand sous-schéma fermé de $G$
+contenant la section unité dans lequel les sections de l'idéal de cette
+section ont des puissances $p^{\nu}$-ièmes nulles : localement il est défini
+par l'idéal $\mathcal{I}^{[p^{\nu}]}$. Il contient le voisinage infinitésimal
+d'ordre $p^{\nu} - 1$ de la section unité (défini par $\mathcal{I}^{p^{\nu}}$),
+mais en diffère en général : pour $G$ lisse de dimension relative $d$,
+$U_1(G)$ est de rang $p^{d}$, ce voisinage de rang $\binom{d + p - 1}{d}$.\footnote{La
+fin de l'énoncé est en partie illisible : on y lit « l'unique plus », puis
+« voisinage infinitésimal d'ordre $p^{\nu}$ de la section unité ». On donne ce
+qui est vrai ; l'identification de $U_{\nu}(G)$ à un voisinage infinitésimal
+ne vaut qu'en dimension relative au plus $1$. Une note marginale, de biais,
+où se lisent « voisinage » et « section », n'est pas lue.}
+
+\pagerange{19}{20}
+\subsection*{La $p$-torsion du groupe de Picard (pages 19 et 20)}
+
+Soit $X$ propre et normal sur un corps parfait $k$ de caractéristique $p$, et
+$A = H^0(X, \mathcal{O}_X)$. Comme $X$ est réduit, la suite de faisceaux
+(pour la topologie de Zariski)
+\[
+0 \to \mathcal{O}_X^{*} \xrightarrow{\ x \mapsto x^{p}\ } \mathcal{O}_X^{*}
+\to \mathcal{O}_X^{*}/\mathcal{O}_X^{*p} \to 0
+\]
+est exacte à gauche, et la suite de cohomologie donne
+\[
+0 \to A^{*}/A^{*p} \to \Gamma(X, \mathcal{O}_X^{*}/\mathcal{O}_X^{*p}) \to
+{}_p\mathrm{Pic}(X) \to 0 .
+\]
+Comme $A$ est une $k$-algèbre finie réduite et $k$ parfait, $A$ est un produit
+de corps parfaits et $A^{*} = A^{*p}$ ; d'où
+\[
+{}_p\mathrm{Pic}(X) \simeq \Gamma(X, \mathcal{O}_X^{*}/\mathcal{O}_X^{*p}).
+\]
+
+La dérivée logarithmique $f \mapsto df/f$ s'annule sur $\mathcal{O}_X^{*p}$ et
+induit $\mathcal{O}_X^{*}/\mathcal{O}_X^{*p} \to Z\Omega^1_{X/k}$, faisceau des
+$1$-formes fermées. Elle est \emph{injective} : si $K$ est l'anneau des
+fonctions rationnelles, $df = 0$ entraîne $f \in K^{p}$ (théorie des
+$p$-bases : $k \subset K^{p}$ puisque $k$ est parfait, et le noyau de $d : K \to
+\Omega^1_{K/K^{p}}$ est $K^{p}$) ; si $f = g^{p}$ avec $f \in
+\mathcal{O}_{X,x}^{*}$, $g$ est entier sur $\mathcal{O}_{X,x}$, donc dans
+$\mathcal{O}_{X,x}$ par normalité. Autrement dit
+$\mathcal{O}_X^{*}/\mathcal{O}_X^{*p} \to \mathcal{R}_X^{*}/\mathcal{R}_X^{*p}$
+est injectif, $\mathcal{R}_X$ désignant le faisceau des fonctions rationnelles.
+
+D'après Cartier, une $1$-forme rationnelle fermée $\omega$ est une dérivée
+logarithmique $df/f$, $f \in K^{*}$ déterminé modulo $K^{*p}$ sur chaque
+composante, si et seulement si $C\omega = \omega$, où $C$ est l'opérateur de
+Cartier. Pour montrer qu'une forme régulière fermée $\omega$ avec $C\omega =
+\omega$ provient d'une section de $\mathcal{O}_X^{*}/\mathcal{O}_X^{*p}$, la
+question est donc locale : si $f \in K^{*}$ et $df/f$ est régulière, a-t-on
+$f = g^{p}h$ avec $h \in \mathcal{O}^{*}$ ? Autrement dit, l'application
+\[
+\mathcal{R}_X^{*}/\mathcal{O}_X^{*}\mathcal{R}_X^{*p} \longrightarrow
+\Omega^1_{K}/\Omega^1_{\mathcal{O}_X}, \qquad f \mapsto df/f,
+\]
+est-elle injective ?\footnote{La page écrit l'application sur
+$\mathcal{R}_X^{*}/\mathcal{O}_X^{*}$, qui ne peut être injective : son noyau
+contient les puissances $p$-ièmes. On a rétabli le quotient par
+$\mathcal{R}_X^{*p}$.} La page dit qu'on se ramène au cas où $X$ est
+régulier, et s'arrête.
+
+Dans le cas régulier la réponse est oui : en un point de codimension $1$,
+d'anneau de valuation discrète d'uniformisante $t$, $f = ut^{n}$ et $df/f =
+du/u + n\,dt/t$ est régulière si et seulement si $p \mid n$ ($dt/t$ a un pôle,
+$dt$ étant non nul dans $\Omega^1 \otimes \kappa$) ; le diviseur de $f$ est
+donc $p$ fois un diviseur, localement principal puisque $X$ est localement
+factoriel. Pour $X$ seulement normal, la réduction annoncée ne va pas de soi :
+en un point non factoriel, un diviseur de Weil $D$ avec $pD$ principal n'est
+pas nécessairement de Cartier, et la page ne dit pas comment l'éviter. Pour
+$X$ lisse et propre sur $k$ parfait, on obtient
+\[
+{}_p\mathrm{Pic}(X) \simeq \lbrace \omega \in H^0(X, Z\Omega^1_{X/k}) :
+C\omega = \omega \rbrace,
+\]
+le groupe des formes logarithmiques globales ; c'est l'énoncé classique
+qu'on trouve par exemple chez Milne, \emph{Étale cohomology}, chap.~III, §4.
+
+\pagerange{21}{26}
+\section*{Un problème sur l'opération de Cartier, et la Verschiebung (pages 21 à 26)}
+
+\pagerange{21}{21}
+\subsection*{Le problème (page 21)}
+
+La page 21, écrite vite au verso d'une feuille ronéotypée, pose un problème en
+deux parties pour $X$ sur $S$ de caractéristique $p$, dont la moitié des mots
+de liaison ne se lit pas.\footnote{Tout ce paragraphe est une reconstruction ;
+les formules encadrées $\Omega^1_{X/S}{}^{(p)}$ et
+$\mathrm{Sym}^{p}(\Omega^1_{X/S})$ sont lisibles, la prose qui les relie ne
+l'est qu'à moitié. Le verso de la feuille (page 22) est un tapuscrit ronéotypé
+retourné, « Chapitre II. Structures uniformes », sans rapport.}
+
+a) Définir une opération « de Cartier », $p$-linéaire, sur
+$\Omega^1_{X/S}$, qui soit dans un sens convenable la transposée de
+l'opération $\partial \mapsto \partial^{p}$ sur les $S$-dérivations (en
+caractéristique $p$, la puissance $p$-ième d'une dérivation est une
+dérivation), et compatible aux changements de base. La page envisage comme
+but le tordu $(\Omega^1_{X/S})^{(p)}$ ou la puissance symétrique
+$\mathrm{Sym}^{p}(\Omega^1_{X/S})$, et nomme le résultat « l'opération de
+Cartier ».
+
+b) Décrire de même des objets infinitésimaux d'ordre $1$ sur $S$ par un
+module quasi-cohérent $\Omega$ sur $S$ muni de deux opérations
+\[
+C : \Omega \to \mathrm{Sym}^{p}_{\mathcal{O}_S}(\Omega), \qquad
+d_1 : \Omega \to {\textstyle\bigwedge}^{2}_{\mathcal{O}_S}\Omega .
+\]
+C'est la description duale d'une \emph{algèbre de Lie restreinte} : $d_1$ est
+la transposée du crochet, $C$ celle de l'application $x \mapsto x^{[p]}$, qui
+n'est pas additive mais polynomiale de degré $p$ — d'où la puissance
+symétrique. La correspondance entre groupes infinitésimaux de hauteur $1$
+et $p$-algèbres de Lie est celle de SGA 3, exposé VII$_{\mathrm{A}}$
+(Gabriel), et de Demazure–Gabriel, II, §7.\footnote{Cette identification est
+nôtre ; la page dit seulement « infinitésimaux », « $1$ sur $S$ », et donne
+les deux flèches.} Une note marginale, presque effacée, parle de
+« structures analogues », de l'identification du cas $d_1 = 0$, et demande
+une « Verschiebung » $V_S(X) : G^{(p/S)} \to G$ pour un groupe commutatif $G$
+sur $S$.
+
+\pagerange{23}{26}
+\subsection*{Le tapuscrit « Définition du morphisme Verschiebung » (pages 23 à 26)}
+
+Les pages 23 à 26 sont un tapuscrit de quatre pages, d'une autre main, adressé
+à Grothendieck au tutoiement par un correspondant qui n'est pas nommé : il
+répond à une demande de définir la Verschiebung, comme celle de la marge de la
+page 21, en disant reprendre un texte de l'année précédente que Grothendieck
+dit avoir perdu. Les symboles sont ajoutés à l'encre bleue dans les blancs de
+la frappe ; aucune annotation n'est de la main de Grothendieck. On le résume
+page à page.
+
+Page 23 : la base est le spectre d'un corps $k$ de caractéristique $p$ ; pour
+un $k$-groupe commutatif affine $G = \mathrm{Spec}\,A$, notations $A^{(p)}$,
+$F : A^{(p)} \to A$, $G^{(p)}$, $\otimes^{p}A$, $\Delta^{p}$, $m^{p}$. Page 24 :
+les tenseurs symétriques $\Sigma^{p}A$, l'image $S^{p}A$ dans l'algèbre
+symétrique, et les applications $\Sigma^{p}A \to \otimes^{p}A \to S^{p}A \to A$,
+$r : \Sigma^{p}A \to A^{(p)}$, $j : A^{(p)} \to S^{p}A$, calculées sur une base.
+Page 25 : la relation $q \circ i = j \circ r$, avec renvoi à Serre,
+\emph{Groupes algébriques et corps de classes} ; la Verschiebung $V$ est
+définie par $F \circ V = p$ ; $F$ et $V$ s'échangent dans la dualité de
+Cartier. Page 26 : par la diagonale et la symétrisation $G \to \Sigma^{p}G \to
+G^{(p)}$, la construction vaut pour tout groupe algébrique commutatif, affine
+ou non, et l'on a $V \circ F = p$.
+
+C'est la construction devenue standard de la Verschiebung par les tenseurs
+symétriques (SGA 3, exposé VII$_{\mathrm{A}}$, §4).
+
+\pagerange{28}{35}
+\section*{Frobeniuseries pour faisceaux étales (pages 27 à 35)}
+
+La chemise (page 27) porte ce titre ; son dos (page 28) quatre lignes barrées,
+illisibles, avec un « XV » souligné.
+
+\pagerange{29}{32}
+\subsection*{L'isomorphisme de Frobenius d'un faisceau étale (pages 29 à 32)}
+
+Soit $X$ un schéma sur $\mathbb{F}_p$. Le Frobenius absolu $F_X$ est un
+homéomorphisme universel ; par l'invariance topologique du site étale (SGA 1,
+exposé IX, 4.10), $F_X^{*}$ et $F_{X*}$ sont des équivalences quasi inverses
+du topos étale de $X$, et la donnée d'un morphisme $\mathcal{G} \to
+F_X^{*}\mathcal{F}$ équivaut à celle d'un morphisme $F_{X*}\mathcal{G} \to
+\mathcal{F}$.
+
+Pour $U$ étale sur $X$ on a $F_{X*}\mathcal{F}(U) = \mathcal{F}(U \times_{X,
+F_X} X) = \mathcal{F}(U^{(p/X)})$, et le Frobenius relatif $F_{U/X} : U \to
+U^{(p/X)}$ est un \emph{isomorphisme}, puisque $U$ est étale (proposition de
+la page 10). D'où un isomorphisme fonctoriel en $U$, $\mathcal{F}(U^{(p/X)})
+\xrightarrow{\sim} \mathcal{F}(U)$, c'est-à-dire un isomorphisme
+\[
+F_{X*}\mathcal{F} \xrightarrow{\ \sim\ } \mathcal{F},
+\]
+et, par adjonction, un isomorphisme canonique $\mathrm{Fr}_{\mathcal{F}/X} :
+F_X^{*}\mathcal{F} \xrightarrow{\sim} \mathcal{F}$.\footnote{La page écrit
+d'abord $\mathcal{F} \leftarrow F_X^{*}\mathcal{F}$, avec une pointe à chaque
+bout, puis la forme adjointe $F_{X*}\mathcal{F} \to \mathcal{F}$. Comme les
+deux sont des isomorphismes, le sens importe peu ; à la page 30 le sens des
+flèches de l'énoncé et celui du diagramme ne s'accordent pas, et l'on s'en
+tient à $F_X^{*}\mathcal{F} \to \mathcal{F}$. Une tentative de définition
+directe, encadrée, est barrée.}
+
+\emph{Proposition (pages 30 et 31).} 1) Les isomorphismes
+$\mathrm{Fr}_{\mathcal{F}/X}$ sont fonctoriels en $\mathcal{F}$ et compatibles
+aux changements de base quelconques $g : X' \to X$ (via $g^{*}F_X^{*} \simeq
+F_{X'}^{*}g^{*}$, le Frobenius absolu commutant à tout morphisme) ; pour un
+faisceau constant $I_X$, $F_X^{*}I_X \simeq I_X$ et $\mathrm{Fr}_{I_X/X} =
+\mathrm{id}$. 2) Ces conditions, pour $X$ et $\mathcal{F}$ variables,
+\emph{caractérisent} les $\mathrm{Fr}_{\mathcal{F}/X}$.
+
+Pour 2), tout $\mathcal{F}$ est quotient d'une somme de représentables, et la
+fonctorialité ramène au cas $\mathcal{F}$ représentable par $X'$ étale sur
+$X$ ; la compatibilité au changement de base permet de localiser sur
+$\mathcal{F}$ et sur $X$ — après le changement de base $X' \to X$ le faisceau
+acquiert une section, et l'on se ramène à une immersion ouverte, puis à
+l'objet final, qui est un faisceau constant. D'où l'autre caractérisation de
+la page 32 : pour $X$ fixé, $\mathrm{Fr}_{\mathcal{F}/X}$ est fonctoriel en
+$\mathcal{F}$ et, pour $\mathcal{F}$ représentable par $X'$ étale sur $X$, c'est
+le Frobenius relatif $F_{X'/X}$.
+
+\emph{Le cas $F_X = \mathrm{id}$.} Si $F_X = \mathrm{id}$, par exemple $X =
+\mathrm{Spec}\,\mathbb{F}_p$, alors $F_X^{*}\mathcal{F} = \mathcal{F}$ et
+$\mathrm{Fr}_{\mathcal{F}/X}$ est un \emph{automorphisme} de $\mathcal{F}$. Ce
+n'est pas l'identité en général : sur $X = \mathrm{Spec}\,\mathbb{F}_p$, un
+faisceau étale est un ensemble muni d'une action continue de
+$\mathrm{Gal}(\overline{\mathbb{F}}_p/\mathbb{F}_p)$, et pour $\mathcal{F}$
+représenté par $\mathrm{Spec}\,\mathbb{F}_{p^{n}}$, $\mathrm{Fr}_{\mathcal{F}/X}$
+est induit par le Frobenius de $\mathbb{F}_{p^{n}}$, qui est un générateur du
+groupe de Galois ; en général $\mathrm{Fr}_{\mathcal{F}/X}$ est l'action de
+l'élément de Frobenius sur la fibre. Il est l'identité sur les faisceaux
+constants et sur les sections globales, ce qui est l'énoncé
+suivant.\footnote{La fin de la page 31, serrée au bas du feuillet, est en
+grande partie illisible ; on y lit « automorphisme » et « l'identité ». Si
+elle affirme que $\mathrm{Fr}_{\mathcal{F}/X}$ est l'identité de $\mathcal{F}$,
+c'est inexact, pour la raison dite ; l'identité ne vaut que sur $H^0$. Une note
+marginale, de biais, se termine par « endomorphismes ! ».}
+
+\emph{Théorème de trivialité cohomologique du Frobenius absolu (page 32).} Pour
+tout faisceau $\mathcal{F}$ sur le site étale de $X$, le composé
+\[
+H^0(X, \mathcal{F}) \simeq H^0(X, F_{X*}\mathcal{F})
+\xrightarrow{\ H^0(\mathrm{Fr}_{\mathcal{F}/X})\ } H^0(X, \mathcal{F})
+\]
+est l'identité. En effet $H^0(X, F_{X*}\mathcal{F}) = \mathcal{F}(X^{(p/X)})
+= \mathcal{F}(X)$ et le Frobenius relatif de $X$ sur lui-même est l'identité.
+
+\emph{Corollaire 1.} Pour $\mathcal{F}$ un faisceau en groupes, l'application
+analogue sur $H^1(X, \mathcal{F})$ (classes de torseurs) est l'identité.
+\emph{Corollaire 2.} Pour un complexe $\mathcal{F}^{\bullet}$ de faisceaux de
+$A$-modules ($A$ un anneau), le composé analogue $R\Gamma_X(\mathcal{F}^{\bullet})
+\to R\Gamma_X(\mathcal{F}^{\bullet})$ est l'identité dans la catégorie dérivée
+$D(A)$ ; en particulier $F_X$ agit trivialement sur tous les $H^{i}(X,
+\mathcal{F})$. Les corollaires résultent du théorème par dérivation, $F_{X*}$
+étant exact.\footnote{L'énoncé du corollaire 2 a été corrigé sur la page :
+« complexe de » et « de $A$-Modules » sont ajoutés au-dessus de « faisceaux
+abéliens », biffé. La preuve du théorème, à la fin de la page 32, est en
+partie illisible ; celle qu'on donne est la plus directe. C'est l'énoncé qu'on
+lit dans SGA 5, exposé XV, §1.}
+
+\pagerange{33}{35}
+\subsection*{Une version axiomatique (pages 33 et 35)}
+
+La page 33 dégage l'argument de son cadre. Soit $\mathbb{S}$ une catégorie à
+produits fibrés, $\mathcal{M}$ une classe de morphismes stable par changement
+de base (les « étales »), qui définit pour chaque $X$ un site $X_{\text{ét}}$
+et des foncteurs $f^{*} : Y_{\text{ét}} \to X_{\text{ét}}$ ; soit $\mathbf{F}$
+un endomorphisme du foncteur identique de $\mathbb{S}$, à la manière du
+Frobenius absolu. On considère :
+
+a) pour tout $X$, $\mathbf{F}_X^{*}$ est une équivalence du topos
+$\widetilde{X}_{\text{ét}}$, et pour tout $p : X' \to X$ dans $\mathcal{M}$ le
+carré
+\[
+\begin{array}{ccc}
+X' & \xrightarrow{\ \mathbf{F}_{X'}\ } & X' \\
+\downarrow & & \downarrow \\
+X & \xrightarrow{\ \mathbf{F}_{X}\ } & X
+\end{array}
+\]
+est cartésien, autrement dit le « Frobenius relatif » $X' \to X' \times_{X,
+\mathbf{F}_X} X$ est un isomorphisme ;
+
+b) le foncteur $\mathbf{F}_X^{*} : X_{\text{ét}} \to X_{\text{ét}}$ est
+isomorphe au foncteur identique.\footnote{L'énoncé de b) n'est pas écrit ; une
+note entourée, « b) $\Leftrightarrow$ que », est au-dessus de « Dém. », et le
+contenu de b) se tire de la démonstration. La lettre $\mathbf{F}$ (un F
+double, proche de son $\mathrm{Fr}$ sans le r) est lue sous réserve ; elle
+désigne un endomorphisme du foncteur identique qu'il distingue du
+Frobenius.}
+
+La démonstration établit que les isomorphismes cartésiens de a) rendent
+$\mathbf{F}_X^{*}$ isomorphe à l'identité sur $X_{\text{ét}}$, donc sur le
+topos, l'isomorphisme étant donné sur les représentables par les
+$\mathbf{F}_{-/X}$ ; en marge, « de Topos ». La page 35 se demande si a)
+n'impliquerait pas aussi b) en renforçant a) par une compatibilité de
+$\mathbf{F}_X$ à tout changement de base, et reprend la définition de
+$\mathbf{F}_{\mathcal{F}/X}$, la condition sur les faisceaux constants, la
+caractérisation et la conclusion : « il implique l'identité sur les $H^0$, les
+$H^{i}$, $R\Gamma_X$ ». Le haut de la page est raturé et la prose ne se lit
+qu'en partie. Les pages 34 et 36, versos dactylographiés sur les applications
+de restriction en cohomologie des faisceaux de torsion, sont du papier de
+brouillon.
+
+La chemise suivante (page 37) porte un titre biffé, puis « Variances… /
+$G$-… » sous un quadrillage de ratures ; son dos (page 38), le seul mot
+« Steinberg », à l'envers.
+
+\pagerange{40}{48}
+\section*{Schémas de Brauer–Severi, première mouture (pages 39 à 48)}
+
+La chemise (page 39) porte « Brauer-Severi. Dans Chap VI ».
+
+\pagerange{40}{40}
+\subsection*{Définition et premiers énoncés (page 40)}
+
+\emph{Définition.} Un \emph{schéma de Brauer–Severi} sur $S$ est un $S$-schéma
+$P$ qui devient isomorphe à un espace projectif $\mathbb{P}^{r}$ localement
+pour la topologie fidèlement plate de présentation finie.\footnote{« Loc.
+fppf » est lu sous réserve. Comme $\mathrm{PGL}_{r+1}$ est lisse, ses torseurs
+fppf sont localement triviaux pour la topologie étale, et l'on obtient la même
+notion en remplaçant fppf par étale ; c'est ainsi qu'on la définit
+aujourd'hui. Le titre « Systèmes linéaires et… » est barré au profit de
+« Schémas de Brauer-Severi ».}
+
+\emph{Proposition 1.} Un tel $P$ est projectif et lisse sur $S$, et le faisceau
+anticanonique $\omega_{P/S}^{-1}$ est ample relativement à $S$. En effet
+$\omega^{-1} = \mathcal{O}(r+1)$ sur $\mathbb{P}^{r}$ est très ample et, étant
+canonique, descend ; il plonge $P$ dans le fibré projectif associé à
+$f_{*}\omega^{-1}_{P/S}$.
+
+\emph{Proposition 2.} Pour que $P$ soit un fibré projectif $\mathbb{P}(E)$, il
+faut et il suffit qu'il existe un faisceau inversible $L$ sur $P$ de degré $1$
+sur chaque fibre. Sur $\mathbb{P}^{r}$, $\omega = \mathcal{O}(-r-1)$, de sorte
+que $L^{\otimes(r+1)} \otimes \omega_{P/S}$ est de degré $0$ sur les fibres, donc
+localement sur $S$ l'image réciproque d'un inversible de $S$ ; et si $L$
+existe, $E = f_{*}L$ est localement libre de rang $r+1$ et $P \simeq
+\mathbb{P}(E)$.\footnote{La page continue : « Cela signifie que le résultat
+de classification donné au [illisible] I pour $\mathrm{Pic}(P)$ reste
+valable… », puis un corollaire illisible. Une note marginale encadrée annonce
+la « construction de $\underline{\mathrm{Div}}^{1}_{P/S} = \check{P}$ » — le
+schéma de Brauer–Severi dual, des hyperplans —, que la seconde mouture
+réalise (page 59).}
+
+\emph{Proposition.} Si $P$ admet une section sur $S$, c'est un fibré projectif
+: « utiliser le théorème de descente (et dualité des projectifs) ». C'est
+exact sur toute base : la section réduit le groupe structural au stabilisateur
+d'un point dans $\mathrm{PGL}_{r+1}$, qui se relève dans $\mathrm{GL}_{r+1}$
+(normaliser à $1$ le coefficient du point fixé), et le torseur provient donc
+d'un fibré vectoriel. La page ajoute, et barre, une remarque pour le cas où
+tout module localement libre sur $S$ est libre ($S$ local).
+
+\pagerange{42}{42}
+\subsection*{Critères de trivialité (page 42)}
+
+\emph{Corollaire.} $P$ est un fibré projectif si et seulement s'il admet
+localement (pour Zariski) des sections, c'est-à-dire est localement trivial,
+et si une certaine obstruction dans $H^2(S, \mathcal{O}_S^{*})$ est nulle.
+C'est l'obstruction à relever en $\mathrm{GL}_{r+1}$-torseur un
+$\mathrm{PGL}_{r+1}$-torseur localement trivial pour Zariski, par la suite
+$1 \to \mathbb{G}_m \to \mathrm{GL}_{r+1} \to \mathrm{PGL}_{r+1} \to 1$,
+exacte pour Zariski puisque $\mathrm{PGL}_{r+1}(R) = \mathrm{GL}_{r+1}(R)/R^{*}$
+pour $R$ local.
+
+\emph{Corollaire.} Si $S$ est régulier (et intègre), $P$ est un fibré
+projectif si et seulement s'il est localement trivial, ou encore si et
+seulement si sa fibre générique l'est. La première équivalence vient de ce que
+$H^2_{\mathrm{Zar}}(S, \mathcal{O}_S^{*}) = 0$ pour $S$ localement factoriel
+(la suite $0 \to \mathcal{O}^{*} \to K^{*} \to \mathrm{Div} \to 0$ est une
+résolution flasque) ; la seconde, de l'injectivité de $\mathrm{Br}(S) \to
+\mathrm{Br}(K)$ pour $S$ régulier intègre (Grothendieck, « Le groupe de
+Brauer II », §1).\footnote{La page dit « ses fibres génériques », au
+pluriel, et propose une « autre façon de procéder, valable si $S$ est
+strictement localement factoriel », qu'elle ne développe pas. La note
+marginale reliée par une accolade n'est pas lue.}
+
+\emph{Corollaire.} Isotrivialité locale (sans plus).
+
+\pagerange{42}{48}
+\subsection*{Systèmes linéaires paramétrés par un schéma de Brauer–Severi (pages 42 à 48)}
+
+Un item numéroté (6), dont les items 1 à 5 manquent dans le dossier, définit un
+\emph{système linéaire de diviseurs} sur $X/S$ ($X \to S$ fidèlement plat et
+localement de présentation finie) \emph{paramétré} par un schéma
+$\check{P}/S$ : localement pour fppf, un système linéaire de diviseurs
+paramétré par un fibré projectif. Le reste de la page est une suite de notes
+courtes — « dualité pour $X/S$ et un schéma de Brauer–Severi », « système
+linéaire (cas complet) », « classe d'équivalence » — dont l'ordre de lecture
+est incertain. La page 44 en fait un programme :
+
+a) relation entre morphismes $X \to P$ vers un schéma de Brauer–Severi et
+systèmes linéaires de diviseurs paramétrés par le dual $\check{P}$ (les
+images réciproques des hyperplans) ;
+
+b) systèmes linéaires « stricts », pour lesquels un morphisme $X \to P$
+demande une petite propriété supplémentaire de nature locale, inutile si $X$
+est régulier ou strictement localement factoriel ;
+
+c) le morphisme naturel
+\[
+\lambda : \underline{\mathrm{SystLin}}_{X/S} \longrightarrow
+\underline{\mathrm{Pic}}_{X/S},
+\]
+qui a une section canonique.\footnote{La page dit « ayant d'ailleurs une
+section canonique » sans la décrire. On la lit comme le système linéaire
+vide : à une classe de faisceau inversible on associe le sous-espace nul de
+ses sections. C'est cette lecture qui rend juste la conclusion « Donc » de la
+page 46.} Si $X/S$ est propre à fibres géométriquement intègres, $\lambda$ est
+relativement représentable : au-dessus d'un point $\xi$ de
+$\underline{\mathrm{Pic}}_{X/S}$, défini par un inversible $L$ seulement
+localement pour fppf sur $S$, les systèmes linéaires sont les sous-espaces de
+$f_{*}L$, et la fibre est la « grassmannienne complète » (réunion sur tous les
+rangs) d'une forme tordue d'un fibré projectif construit sur un module qui
+n'est pas localement libre — ce que la page appelle un « schéma de
+Brauer–Severi généralisé », avec la réserve qu'il faut vérifier
+l'effectivité des données de descente. Si l'on suppose seulement
+$f_{*}\mathcal{O}_X = \mathcal{O}_S$ universellement, on trouve encore un
+ouvert d'un tel schéma.
+
+D'où (page 46) : $\underline{\mathrm{SystLin}}_{X/S}$ est représentable si et
+seulement si $\underline{\mathrm{Pic}}_{X/S}$ l'est — dans un sens par la
+représentabilité relative de $\lambda$, dans l'autre parce que
+$\underline{\mathrm{Pic}}$ est alors un rétracte, par la section, d'un foncteur
+représentable.
+
+\emph{Énoncé (pages 46 et 48).} Soit $f : X \to S$ propre avec $f_{*}\mathcal{O}_X =
+\mathcal{O}_S$ universellement, et un système linéaire paramétré par un
+schéma de Brauer–Severi $\check{P}/S$, donné localement par un inversible $L$
+sur $X$ et un inversible $L \otimes \mathcal{O}_{\check{P}}(1) \otimes N$ sur $X
+\times_S \check{P}$ ; soit $\xi \in \underline{\mathrm{Pic}}_{X/S}(S)$ la
+section correspondante. Alors $\xi$ est représentée par un faisceau
+inversible sur $X$ si et seulement si $\check{P}$ est un fibré projectif. La
+page esquisse la nécessité par descente (un épimorphisme $\check{P} \to
+\mathbb{P}(Q)$ avec $Q$ de présentation finie identifie $\check{P}$ à
+$\mathbb{P}(E)$, $E$ quotient localement libre de $Q$) et, page 48, la
+remarque qui sert à la suffisance : un inversible $\mathcal{M}$ sur $X
+\times_S \check{P}$ trivial sur les fibres de $X$ provient localement sur $S$,
+et de façon canonique puisque $f_{*}\mathcal{O}_X = \mathcal{O}_S$, d'un
+inversible sur $\check{P}$.\footnote{Les deux dernières lignes de la page 48,
+écrites par-dessus un tapuscrit qui transparaît, ne se lisent qu'en partie.}
+
+En termes d'aujourd'hui : pour $f$ propre avec $f_{*}\mathbb{G}_m = \mathbb{G}_m$
+universellement, la suite de Leray donne
+\[
+0 \to \mathrm{Pic}(S) \to \mathrm{Pic}(X) \to \underline{\mathrm{Pic}}_{X/S}(S)
+\xrightarrow{\ \delta\ } \mathrm{Br}(S),
+\]
+et l'énoncé dit que l'obstruction $\delta(\xi)$ est (au signe près) la classe
+de Brauer de $\check{P}$.
+
+\pagerange{51}{53}
+\section*{Progroupes et groupes algébriques quasi-compacts (pages 50 à 53)}
+
+Soit $k$ un corps, $C'_0$ la catégorie des $k$-schémas de présentation finie,
+$C' \subset \mathrm{Pro}(C'_0)$ la sous-catégorie pleine des pro-objets
+\emph{essentiellement affines} (isomorphes à un système projectif à morphismes
+de transition affines), et $C$ celle des $k$-schémas quasi-compacts et
+quasi-séparés ; le passage à la limite donne une équivalence $C' \simeq C$
+(EGA IV, §8).\footnote{La page ne définit pas $C$, $C'$, $C'_0$ ; leur
+identification est nôtre, et c'est la seule qui rende vraies les flèches
+annotées. Elle note « ! = ens. affine » dans un cadre ; on lit « essentiellement
+affine », seul sens compatible avec la démonstration du lemme de la page 53
+(« on peut supposer les $X_j \to X_0$ affines »).} La page 51 dessine les
+foncteurs
+\[
+\mathrm{Progr}^{!}(C'_0) \xrightarrow{\ \alpha\ } \mathrm{Gr}(C)
+\xrightarrow[\ \simeq\ ]{\ \beta\ } \mathrm{Gr}(C') \xrightarrow{\ \sigma\ }
+\mathrm{Gr}_{\mathrm{qc}}(\mathrm{Sch}/k),
+\]
+avec les inclusions pleinement fidèles $i : \mathrm{Progr}^{!}(C'_0) \subset
+\mathrm{Progr}(C'_0)$, $j : \mathrm{Gr}(C') \subset \mathrm{Gr}\,\mathrm{Pro}(C'_0)$
+et le foncteur $k : \mathrm{Progr}(C'_0) \to \mathrm{Gr}\,\mathrm{Pro}(C'_0)$ des
+progroupes vers les groupes dans les pro-schémas. Il observe : $\beta$ est une
+équivalence, $\sigma$ est trivialement pleinement fidèle, $i$ et $j$ aussi ;
+donc si $k$ est pleinement fidèle, $\alpha$ et $\sigma\alpha$ le sont.
+L'équivalence de $\sigma\alpha$ équivaut à ce que tout schéma en groupes
+quasi-compact sur $k$ soit limite projective de schémas en groupes de type fini
+à transitions affines ; que $k$ soit une équivalence est marqué « douteux ».
+
+C'est le théorème d'approximation établi par D. Perrin, « Approximation des
+schémas en groupes, quasi compacts sur un corps » (1976) : tout schéma en
+groupes quasi-compact sur un corps est limite projective de schémas en groupes
+de type fini, à morphismes de transition affines.
+
+\emph{Pleine fidélité de $k$ (page 52).} Tout progroupe de type fini provient
+d'un système projectif \emph{strict}, à transitions fidèlement plates : les
+images des transitions se stabilisent, par la condition de chaîne descendante
+sur les sous-groupes fermés d'un groupe de type fini. Pour deux tels systèmes
+$(G_i)$, $(H_j)$, l'application
+\[
+\varprojlim_j \varinjlim_i \mathrm{Hom}_{\mathrm{gr}}(G_i, H_j) \longrightarrow
+\Bigl(\varprojlim_j \varinjlim_i \mathrm{Hom}(G_i, H_j)\Bigr)_{\mathrm{mult}}
+\]
+est bijective : injective parce que chaque $\mathrm{Hom}_{\mathrm{gr}} \to
+\mathrm{Hom}$ l'est ; surjective parce qu'un morphisme de schémas $u : G_i \to
+H$ qui devient multiplicatif après composition avec $G_{i'} \times G_{i'} \to G_i
+\times G_i$ pour $i'$ grand l'était déjà, ce morphisme étant fidèlement plat,
+donc un épimorphisme.
+
+\emph{Lemme (page 53).} Un progroupe $(G_i)$ dont le pro-schéma sous-jacent est
+essentiellement affine est essentiellement affine comme progroupe.
+
+On peut supposer le système strict, et il est isomorphe comme pro-schéma à un
+système $(X_j)$ à transitions affines. Pour $i_1 \ge i_0$, la limite $X =
+\varprojlim G_i \to G_{i_0}$ se factorise par un $X_{j}$ et est affine, et $X
+\to G_{i_1}$ est fidèlement plat. Il en résulte que $G_{i_1} \to G_{i_0}$ est
+affine : son noyau $K$ est quotient fidèlement plat du noyau de $X \to
+G_{i_0}$, qui est affine, donc $K$ est affine, et un homomorphisme de groupes
+de type fini à noyau affine est affine (il se factorise en un $K$-torseur suivi
+d'une immersion fermée).\footnote{La page conclut par le seul diagramme
+« $X = \varprojlim G_i \to G_{i_1} \to G_{i_0}$, fid. plat, affine ». Le passage
+de « composé affine, premier facteur fidèlement plat » à « second facteur
+affine » est faux pour des schémas quelconques (un recouvrement fidèlement
+plat d'une droite projective par un affine) ; il faut la structure de groupe,
+et l'argument des noyaux est nôtre.}
+
+Au dos de la chemise (page 54), barré : « “Revêtements” étales de groupes
+infinis ».
+
+\pagerange{56}{66}
+\section*{Schémas de Brauer–Severi, seconde mouture, et groupe de Brauer global (pages 55 à 66)}
+
+\pagerange{56}{56}
+\subsection*{Le plan d'une théorie globale (page 56)}
+
+Sous la chemise bleue « Schémas de Brauer-Severi » (page 55), la page 56
+trace le plan d'une « théorie des Brauer-Severi-Châtelet globale ».
+
+1. Définition d'un schéma de Brauer–Severi sur $Y$ : localement isomorphe à
+$\mathbb{P}^{r}_Y$ pour la topologie étale\footnote{La page écrit « loc.
+$S$-isomorphe à $\mathbb{P}^r_Y$ », et un peu plus loin « possibilité de la
+$S$-descente » ; on lit $S$ comme le nom d'une topologie, et la
+comparaison avec la page 40 et la remarque sur la lissité de
+$\mathrm{PGL}$ font choisir la topologie étale. C'est une interprétation.},
+à distinguer d'un \emph{schéma de Châtelet} : propre et plat sur $Y$, à fibres
+des variétés de Brauer–Severi. Descente, propriétés, isotrivialité locale.
+
+2. Fibré projectif $=$ schéma de Châtelet muni d'un inversible $L$ induisant
+$\mathcal{O}(1)$ sur chaque fibre. Corollaire 1 : sur $Y$ spectre d'un anneau
+local complet, Châtelet $=$ Brauer–Severi. Corollaire 2 : sur $Y$ régulier,
+Brauer–Severi localement trivial $=$ fibré projectif $=$ Châtelet localement
+trivial.
+
+3. Fibré dual, dont les sections s'interprètent comme diviseurs localement
+principaux « hyperplans » sur $X$. Corollaire 1 : si $X$ admet une section,
+c'est un fibré projectif ($Y$ noethérien), « deux façons de le prouver », dont
+l'une par un faisceau localement libre de rang $r$ et un sous-faisceau
+localement facteur direct de rang $r-1$.\footnote{Avec ces rangs, $X$ est
+de dimension relative $r-1$ ; la page suit ici une autre normalisation que
+$\mathbb{P}^{r}$ au point 1.} Corollaire 2 : critère de trivialité locale par
+l'existence de sections locales. \emph{3 bis} (ajouté) : fibré des $n$-formes,
+dont les sections sur $Y$ sont les diviseurs localement principaux dont la
+trace sur chaque fibre est de degré $n$.
+
+4. Soit $X$ propre et plat sur $Y$ ; si $f^{-1}(y)$ est une variété de
+Brauer–Severi, il existe un voisinage ouvert $U$ de $y$ tel que $X|U$ soit un
+schéma de Brauer–Severi. Corollaire : Châtelet $=$ Brauer–Severi. On prouve
+d'abord que $X|U$ est de Châtelet, puis Châtelet $\Rightarrow$ Brauer–Severi en
+considérant $\underline{\mathrm{Isom}}_Y(\mathbb{P}^{r}_Y, X)$, qui est un
+$\mathrm{PGL}_{r+1}$-torseur lisse et a donc des sections localement pour la
+topologie étale.
+
+Enfin, entre accolades : relations avec les faisceaux d'algèbres simples
+centrales (algèbres d'Azumaya), groupe de Brauer global, « consulter le cours
+de Serre ». L'équivalence Châtelet $=$ Brauer–Severi est le théorème qu'on lit
+dans « Le groupe de Brauer I » ; le nom de Châtelet est celui de ses travaux de
+1944 sur les variétés de Brauer–Severi.
+
+\pagerange{57}{59}
+\subsection*{Le schéma des $n$-formes (pages 57 à 59)}
+
+Soit $E$ localement libre de rang $r+1$ sur $Y$. Le groupe $\mathrm{PGL}(E)$
+agit sur $\mathbb{P}((S^{n}E)^{\vee})$ — l'espace des droites de $S^{n}E$,
+c'est-à-dire des hypersurfaces de degré $n$ de $\mathbb{P}(E)$ — via
+$\mathrm{GL}(E) \to \mathrm{GL}(S^{n}E)$, les homothéties agissant par
+$\lambda^{n}$ ; et $\mathbb{P}((S^{n}E)^{\vee})$ ne dépend que de
+$\mathbb{P}(E)$, puisque remplacer $E$ par $E \otimes M$ remplace $S^{n}E$ par
+$S^{n}E \otimes M^{\otimes n}$. Pour $E = \mathcal{O}_Y^{r+1}$,
+$\mathrm{PGL}_{r+1,Y}$ agit sur $\mathbb{P}((S^{n}\mathcal{O}_Y^{r+1})^{\vee})$.
+Un schéma de Brauer–Severi $X$ de dimension relative $r$ est le tordu de
+$\mathbb{P}^{r}_Y$ par un $\mathrm{PGL}_{r+1}$-torseur $T$ ; le tordu de
+$\mathbb{P}((S^{n}\mathcal{O}^{r+1})^{\vee})$ par le même torseur est un schéma
+de Brauer–Severi, trivial (localement trivial) si $X$ l'est. On l'appelle le
+\emph{schéma des $n$-formes} de $X$ et on le note $\Phi^{n}(X)$ ; il est
+compatible aux images réciproques.
+
+Pour $X = \mathbb{P}(E)$, on a canoniquement $\Phi^{n}(X) \simeq
+\mathbb{P}((S^{n}E)^{\vee})$.\footnote{La page écrit
+$\mathbb{P}(\underline{S}^{n}(\check{\underline{E}})^{\vee})$, qui est la
+formule dans l'autre convention ($\mathbb{P}(E)$ espace des droites de $E$) ;
+la suite du calcul, où les sections de $\mathcal{O}(n)$ sont
+$S^{n}(\underline{E})$, est dans celle de Grothendieck, qu'on a suivie
+partout. Une addition interlinéaire écrit aussi $\mathbb{P}(S^{n}(E)^{\vee}) =
+\mathbb{P}(S^{n}(\check{E}))$ : en caractéristique $p$ et pour $n \ge p$, le dual
+de $S^{n}E$ est la puissance divisée $\Gamma^{n}(\check{E})$, non
+$S^{n}(\check{E})$, et l'égalité ne vaut que si $n!$ est inversible.} Une section
+de $\Phi^{n}(X)$ sur $Y$ est donc un sous-module inversible de $S^{n}E$,
+localement facteur direct, c'est-à-dire localement une section $s$ de $S^{n}E$
+qui ne s'annule en aucun point de $Y$, modulo $\mathcal{O}_Y^{*}$ : une section
+du faisceau $(S^{n}E)^{\circ}/\mathcal{O}_Y^{*}$, où $(S^{n}E)^{\circ}$ désigne
+le faisceau des germes de sections partout non nulles. Or $s$ est une section
+de $\mathcal{O}_X(n)$ sur $X = \mathbb{P}(E)$, et définit un diviseur positif
+$\mathrm{div}(s)$ ; que $s$ ne s'annule en aucun point de $Y$ signifie que ce
+diviseur induit un diviseur sur chaque fibre. De plus $\mathrm{div}(s) =
+\mathrm{div}(t)$ si et seulement si $t = \rho s$ avec $\rho \in \Gamma(X,
+\mathcal{O}_X^{*}) = \Gamma(Y, \mathcal{O}_Y^{*})$, puisque $f_{*}\mathcal{O}_X =
+\mathcal{O}_Y$. Appelons \emph{diviseurs transversaux de degré $n$} les
+diviseurs localement principaux positifs sur $X$ qui induisent sur chaque fibre
+un diviseur de degré $n$ — ce sont les diviseurs de Cartier effectifs relatifs.
+On a donc une injection de $\Phi^{n}(X)(Y)$ dans l'ensemble
+$\mathcal{D}^{(n)}(X/Y)$ de ces diviseurs, compatible à la localisation.
+
+Elle est surjective : si $D$ est transversal de degré $n$, la question étant
+locale sur $Y$, $\mathcal{O}_X(D) \simeq \mathcal{O}_X(k)$ pour un $k$
+($\mathrm{Pic}\,\mathbb{P}(E) = \mathrm{Pic}\,Y \times \mathbb{Z}$), et $k = n$ par
+le degré sur une fibre ; $D$ est donc le diviseur d'une section de
+$\mathcal{O}_X(n)$. D'où un isomorphisme fonctoriel, compatible aux images
+réciproques,
+\[
+\Phi^{n}(\mathbb{P}(E)) \xrightarrow{\ \sim\ } \mathcal{D}^{(n)}(\mathbb{P}(E)/Y).
+\]
+La notion de diviseur transversal est compatible à la descente — c'est la
+donnée d'un fibré inversible et d'une section régulière qui reste régulière sur
+chaque fibre —, et le degré d'un diviseur sur une variété de Brauer–Severi a un
+sens, invariant par extension du corps de base. D'où, par descente :
+
+\emph{Théorème (page 59).} Pour $X$ un schéma de Brauer–Severi sur $Y$, les
+sections de $\Phi^{n}(X)$ sont les diviseurs positifs transversaux de degré
+$n$ de $X/Y$ ; autrement dit $\Phi^{n}(X)$ représente le foncteur des
+diviseurs de Cartier effectifs relatifs de degré $n$. Pour $n = 1$, c'est le
+schéma de Brauer–Severi dual $\check{X} = \underline{\mathrm{Div}}^{1}_{X/Y}$
+annoncé à la page 40.
+
+\pagerange{60}{61}
+\subsection*{Un critère de transversalité (pages 60 et 61)}
+
+Soit $X$ sur $Y$ et $\mathcal{R}_0(X)$ le faisceau des fractions totales de
+$\mathcal{O}_X$ ; les sections de $\mathcal{R}_0(X)^{*}/\mathcal{O}_X^{*}$
+sont les idéaux fractionnaires divisoriels localement principaux, c'est-à-dire
+les diviseurs de Cartier. Un idéal positif $\mathcal{I} \subset \mathcal{O}_X$
+définit un sous-schéma fermé $X'$.
+
+\emph{Proposition.} Soit $X$ plat sur $Y$, $X$ et $Y$ localement noethériens,
+$X' \subset X$ un sous-schéma fermé, $x \in X'$ d'image $y$. Pour que $X'$ soit
+divisoriel (localement défini par un non-diviseur de zéro) et $Y$-transversal
+en $x$, il faut et il suffit que (i) $X'$ soit $Y$-plat en $x$ et (ii) $X'
+\otimes k(y)$ soit divisoriel en $x$ dans $X \otimes k(y)$.
+
+\emph{Démonstration.} Nécessité : localement $\mathcal{O}_{X'} =
+\mathcal{O}_X/\varphi\mathcal{O}_X$, avec $\varphi$ non diviseur de zéro dans
+$\mathcal{O}_X$ et dans les fibres ; les suites $0 \to \mathcal{O}_X
+\xrightarrow{\varphi} \mathcal{O}_X \to \mathcal{O}_{X'} \to 0$ et leurs
+réductions modulo $k(z)$ sont exactes, et le critère local de platitude donne
+la platitude de $\mathcal{O}_{X'}$. Suffisance : de $0 \to \mathcal{I} \to
+\mathcal{O}_X \to \mathcal{O}_{X'} \to 0$ et de la platitude de $X'$ en $x$, la
+suite reste exacte après $\otimes k(y)$ ; comme $\mathcal{O}_{X'} \otimes
+k(y)$ est divisoriel en $x$, $(\mathcal{I} \otimes k(y))_x$ est monogène, donc
+(Nakayama) $\mathcal{I} = \varphi\mathcal{O}_X$ au voisinage de $x$, et $\varphi$
+n'est pas diviseur de zéro dans $\mathcal{O}_X \otimes k(y)$. Soit $I$ le
+noyau de $\varphi : \mathcal{O}_X \to \mathcal{I}$ ; $\mathcal{I}$ est plat
+(comme $\mathcal{O}_X$ et $\mathcal{O}_{X'}$), donc $0 \to I \otimes k \to
+\mathcal{O}_X \otimes k \to \mathcal{I} \otimes k \to 0$ est exacte, et
+l'injectivité de $\varphi$ sur $\mathcal{O}_X \otimes k$ donne $I \otimes k =
+0$, d'où $I = 0$ près de $x$ (Nakayama).\footnote{Un terme de la première suite
+de la page 61 est couvert d'une tache d'encre ; c'est $\mathcal{I}$. La page
+appelle $I$ le noyau, à côté de l'idéal souligné $\underline{I}$, qu'on note
+$\mathcal{I}$.}
+
+\emph{Corollaire.} Stabilité par extension de la base. C'est le critère de
+platitude par fibres (EGA IV, 11.3.8) appliqué aux diviseurs de Cartier
+relatifs.
+
+\pagerange{62}{66}
+\subsection*{Le groupe de Brauer global (pages 62 à 66)}
+
+« Pour avoir des fondements solides et bien connus », la page se place en
+géométrie analytique complexe, la cohomologie étant prise pour la topologie
+usuelle, à coefficients dans des faisceaux de germes d'applications
+holomorphes ; on note $\mathcal{O}_X^{*}$ le faisceau des germes de fonctions
+holomorphes inversibles.\footnote{La page note $\underline{\mathbb{C}}^{*}$ ce
+faisceau, et souvent $\mathbb{C}^{*}$ sans souligner ; c'est toujours le
+faisceau des germes holomorphes qu'il faut lire, centre du faisceau
+$\underline{\mathrm{GL}}_n$.} Des suites exactes centrales
+\[
+1 \to \mathcal{O}_X^{*} \to \underline{\mathrm{GL}}_n \to
+\underline{\mathrm{PGL}}_n \to 1, \qquad
+1 \to \mathbb{Z}/n\mathbb{Z} \to \underline{\mathrm{SL}}_n \to
+\underline{\mathrm{PGL}}_n \to 1,
+\]
+on tire, pour un fibré $\gamma \in H^1(X, \underline{\mathrm{PGL}}_n)$,
+l'obstruction $\partial\gamma \in H^2(X, \mathbb{Z}/n\mathbb{Z})$ à relever le
+groupe structural à $\mathrm{SL}_n$ ; l'obstruction à le relever à
+$\mathrm{GL}_n$ est son image dans $H^2(X, \mathcal{O}_X^{*})$, donc annulée par
+$n$. Et l'image de $H^2(X, \mathbb{Z}/n\mathbb{Z})$ est exactement la
+$n$-torsion de $H^2(X, \mathcal{O}_X^{*})$, par la suite de Kummer $1 \to
+\mathbb{Z}/n \to \mathcal{O}^{*} \xrightarrow{n} \mathcal{O}^{*} \to 1$, exacte
+pour la topologie usuelle.
+
+Les classes de $\mathrm{PGL}_n$-fibrés sont les classes de fibrés en algèbres
+de rang $n^2$ localement isomorphes à $M_n$ ; celles qui proviennent de
+$\mathrm{GL}_n$ sont les $\underline{\mathrm{End}}(E)$, $E$ fibré vectoriel de
+rang $n$. Le produit tensoriel fait de
+\[
+\mathbb{B}(X) = \coprod_{n \ge 1} H^1(X, \underline{\mathrm{PGL}}_n)
+\]
+un monoïde commutatif, via $\mathrm{PGL}_m \times \mathrm{PGL}_n \to
+\mathrm{PGL}_{mn}$ déduit de $\mathrm{GL}_m \times \mathrm{GL}_n \to
+\mathrm{GL}_{mn}$. On déclare $a \sim b$ s'il existe des classes triviales $c$,
+$d$ (provenant de fibrés vectoriels) avec $ac = bd$\footnote{La page écrit
+« $ac = bc$ », avec la même classe $c$ des deux côtés. Comme $\mathbb{B}(X)$
+est gradué par le rang, cela forcerait $a$ et $b$ à avoir même rang, et
+$\underline{\mathrm{End}}(E)$ ne serait pas équivalent à l'unité ; il faut deux
+classes triviales.} ; c'est compatible au produit, et le quotient
+$\mathrm{Br}(X)$ est un groupe, l'inverse de la classe d'une algèbre
+$\mathcal{A}$ étant celle de l'algèbre opposée, car $\mathcal{A} \otimes
+\mathcal{A}^{\circ} \simeq \underline{\mathrm{End}}(\mathcal{A})$.
+
+Pour $a$ de rang $m$ et $b$ de rang $n$, $\partial(ab) = \iota_m \partial a +
+\iota_n \partial b$ dans $H^2(X, \mathbb{Z}/mn\mathbb{Z})$, où $\iota_m :
+\mathbb{Z}/m \to \mathbb{Z}/mn$ est l'inclusion ($1 \mapsto n$), puisque
+le produit de Kronecker envoie $\mu_m \times \mu_n$ dans $\mu_{mn}$ par
+$(\zeta, \xi) \mapsto \zeta\xi$. Via $\mathbb{Z}/m \subset \mathbb{Q}/\mathbb{Z}$,
+on obtient un homomorphisme de monoïdes $\mathbb{B}(X) \to H^2(X,
+\mathbb{Q}/\mathbb{Z})$, puis, par $\mathbb{Q}/\mathbb{Z} \to
+\mathcal{O}^{*}$, $x \mapsto e^{2i\pi x}$, vers $H^2(X, \mathcal{O}_X^{*})$, qui
+tue les classes triviales. D'où un homomorphisme \emph{injectif}
+\[
+\mathrm{Br}(X) \hookrightarrow H^2(X, \mathcal{O}_X^{*})
+\]
+d'image contenue dans l'image de $H^2(X, \mathbb{Q}/\mathbb{Z})$, donc dans la
+torsion : si $a$ a une image nulle, le fibré se relève à $\mathrm{GL}_n$ et $a$
+est trivial.
+
+\emph{Question 1.} Tout élément de torsion de $H^2(X, \mathcal{O}_X^{*})$
+provient-il de $\mathrm{Br}(X)$ ? \emph{Question 2}, plus précise : tout
+élément de $H^2(X, \mathbb{Z}/n\mathbb{Z})$ est-il de la forme $\partial a$, $a
+\in H^1(X, \underline{\mathrm{PGL}}_n)$ ?
+
+La page 65 propose de les résoudre d'abord du point de vue
+\emph{topologique}, avec le faisceau des germes continus, pour lequel $H^2(X,
+\mathbb{C}^{*}_{\mathrm{cont}}) \simeq H^3(X, \mathbb{Z})$ : la classe canonique
+d'un espace d'Eilenberg–MacLane $K(\mathbb{Z}/n, 2)$ est-elle de la forme
+$\partial a$ ? sinon, tout élément de $H^2(X, \mathbb{Q}/\mathbb{Z})$
+est-il l'obstruction d'un $\mathrm{PGL}_n$-fibré pour $n$ convenable ? les
+éléments de torsion de $H^3(X, \mathbb{Z})$ le sont-ils (« question 1
+topologique ») ?\footnote{L'argument du « $H^2(Z, \mathbb{Z}/n, \mathbb{Z}/n)$ »
+de la page est lu comme la cohomologie de l'espace $K(\mathbb{Z}/n, 2)$ ; la
+lettre et ses indices sont peu nets. Une note cerclée, en marge, précise
+« faisceau des sections » à propos de $\mathrm{GP}(n-1)$.} Puis il introduit le
+revêtement universel $\widetilde{X}$, de groupe $\pi$ ; comme $H^1(\widetilde{X},
+\mathbb{Z}/n) = 0$, la suite spectrale de Cartan–Leray donne
+\[
+0 \to H^2(\pi, \mathbb{Z}/n) \to H^2(X, \mathbb{Z}/n) \to H^2(\widetilde{X},
+\mathbb{Z}/n)^{\pi} \to H^3(\pi, \mathbb{Z}/n),
+\]
+et pour les classes venant de $H^2(\pi, \mathbb{Z}/n)$ il suffirait que
+$H^1(\pi, \mathrm{PGL}_n(\mathbb{C})) \to H^2(\pi, \mathbb{Z}/n)$ soit
+surjectif — c'est-à-dire que toute classe soit l'obstruction d'une
+représentation projective de $\pi$, qui donne un fibré plat $\widetilde{X}
+\times^{\pi} \mathbb{P}^{n-1}$. À défaut, le soit-elle pour $n$ convenable
+dans $H^2(\pi, \mathbb{Q}/\mathbb{Z})$, ou au moins dans $H^2(\pi,
+\mathbb{C}^{*})$ ? La page 66 ferme le crochet ouvert page 65 sans
+conclure.\footnote{Pour $\pi$ fini, la réponse à la dernière question est
+oui : toute classe $\alpha \in H^2(\pi, \mathbb{C}^{*})$ est l'obstruction de
+la représentation régulière $\alpha$-tordue, de dimension $|\pi|$ (Schur). En
+topologie, pour un CW-complexe fini, toute classe de torsion de $H^3(X,
+\mathbb{Z})$ provient d'un fibré en espaces projectifs : c'est un théorème de
+Serre exposé dans « Le groupe de Brauer I ». La question 2 à $n$ fixé est le
+problème dit aujourd'hui de période et d'indice ; Antieau et Williams (2014)
+ont construit des CW-complexes finis de dimension 6 où la réponse est
+négative. Rien de cela n'est sur la page.}
+
+\pagerange{68}{70}
+\section*{Restriction des scalaires (pages 67 à 70)}
+
+Soit $k'/k$ une extension finie, $S = \mathrm{Spec}\,k$, $S' = \mathrm{Spec}\,k'$,
+et, pour un $k'$-schéma $X'$ (quasi-projectif, pour que la restriction existe),
+$X_1 = R_{k'/k}X' = \prod_{S'/S} X'$ sa restriction de Weil.
+
+(i) $X_1(k) = X'(k')$, par définition, sur toute base.
+
+(ii) Pour un $k'$-schéma en groupes $G'$ (lisse), $H^1(k, G_1) \simeq H^1(k',
+G')$ : un torseur $P'$ sous $G'$ donne $P_1 = \prod_{S'/S} P'$, formellement
+principal homogène sous $G_1$, et non vide ; le foncteur $P' \mapsto P_1$ est
+pleinement fidèle, et un argument de descente en fait une équivalence de
+catégories.\footnote{La condition que la page met sur $G'$ est illisible ; on
+lit « lisse ». Pour $G'$ lisse c'est le lemme de Shapiro en cohomologie
+étale. Une note marginale, « Contre-exemple… si $G'$… ?? », reste une
+question.}
+
+(iii) Pour $G' = M'$ commutatif, $H^{i}(k, M_1) \simeq H^{i}(k', M')$ pour tout
+$i$ (cohomologie galoisienne) : par les cochaînes de Čech, $C^{*}(T/S, M_1)
+\simeq C^{*}(T'/S', M')$ pour $T/S$ galoisien et $T' = T \times_S S'$, et les
+$T'$ sont cofinaux parmi les revêtements de $S'$. C'est encore Shapiro : $M_1(k_s)
+= M'(k' \otimes_k k_s)$ est un module induit, et, pour $k'/k$ radiciel, $k'
+\otimes_k k_s$ est une clôture séparable de $k'$.
+
+\emph{Le cas radiciel (page 69).} Soit $k'/k$ radiciel et $M' =
+\mathbb{G}_{m,k'}$. On a une suite exacte
+\[
+1 \to \mathbb{G}_m \to R_{k'/k}\mathbb{G}_m \to U \to 1,
+\]
+avec $U$ unipotent connexe de dimension $[k':k] - 1$ (de dimension $1$ si
+$[k':k] = 2$, en caractéristique $2$). Comme $H^{i}(k, R_{k'/k}\mathbb{G}_m) =
+H^{i}(k', \mathbb{G}_m)$ et $H^1(k', \mathbb{G}_m) = 0$, la suite de cohomologie
+donne
+\[
+H^1(k, U) \simeq \mathrm{Ker}\bigl(\mathrm{Br}(k) \to \mathrm{Br}(k')\bigr).
+\]
+Pour $k = k_0((t))$, $k' = k_0((t^{1/p}))$, $k_0$ fini de caractéristique $p$,
+la théorie du corps de classes local donne $\mathrm{Br}(k) = \mathbb{Q}/\mathbb{Z}$
+et la restriction multiplie l'invariant par $p$, d'où $H^1(k, U) \simeq
+\mathbb{Z}/p\mathbb{Z} \neq 0$ — bien que, pour $p = 2$, $U$ soit une forme de
+$\mathbb{G}_a$ : une forme non triviale, puisque $H^1(k, \mathbb{G}_a) = 0$. Si
+$k'^{p} \subset k$, on a $pU = 0$ (la puissance $p$-ième envoie
+$R_{k'/k}\mathbb{G}_m$ dans $\mathbb{G}_m$).
+
+L'extension de $U$ par $\mathbb{G}_m$, qui se scinde sur $\bar{k}$, \emph{n'est
+pas triviale} sur $k$ : sinon $H^1(k, R_{k'/k}\mathbb{G}_m) = H^1(k,
+\mathbb{G}_m) \times H^1(k, U)$, et les deux premiers sont nuls. Autrement dit
+la décomposition de $R_{k'/k}\mathbb{G}_m \otimes \bar{k}$ en partie
+multiplicative et partie unipotente n'est pas définie sur $k$ : le radical
+unipotent géométrique ne descend pas, ce qui scinderait l'extension. C'est
+l'exemple type de ce qu'on appelle un groupe pseudo-réductif, réductif sur
+$\bar{k}$ à son radical unipotent près sans l'être sur $k$ (Borel–Tits ; voir
+Conrad, Gabber et Prasad, \emph{Pseudo-reductive groups}, 2010).\footnote{La
+page conclut : « la [mot illisible] multiplicative de $(\mathbb{G}_m)_1$ n'est
+pas définie sur $k$ » ; on donne l'énoncé exact. Le tore maximal $\mathbb{G}_m$
+est, lui, défini sur $k$.}
+
+\emph{La norme (page 70).} Soit $V$ le noyau de la norme $N_{k'/k} :
+R_{k'/k}\mathbb{G}_m \to \mathbb{G}_m$, et $p^{e} = [k':k]$. Sur $\bar{k}$,
+$R_{k'/k}\mathbb{G}_m = \mathbb{G}_m \times U_0$, la norme vaut $\lambda \mapsto
+\lambda^{p^{e}}$ sur $\mathbb{G}_m$ et est triviale sur $U_0$ ; donc $V \otimes
+\bar{k} = \mu_{p^{e}} \times U_0$. Ainsi $V$ \emph{n'est jamais lisse}, et
+$(V \otimes \bar{k})_{\mathrm{réd}} = U_0$ est le radical unipotent ; on a une
+suite exacte
+\[
+0 \to \mu_{p^{e}} \to V \to U \to 0,
+\]
+non scindée. Si $[k':k] = p$, la norme est la puissance $p$-ième, $V$ est
+réduit (sans être géométriquement réduit) et
+\[
+V \simeq R_{k'/k}(\mu_p).
+\]
+\footnote{La page écrit que $V$ n'est pas lisse « dans le cas particulier
+envisagé où $H^1(k, U) \neq 0$ » (en marge), que $V$ est réduit si $[k':k] =
+p$, et que « dans le cas où $k'^{p} \subset k$ », $V$ est le noyau de la
+puissance $p$-ième, d'où $V \simeq \prod_{S'/S}(\mu_p)_{S'}$ et une suite $0 \to
+\mu_p \to V \to U \to 0$. Pour $[k':k] = p^{e}$ avec $e > 1$ et $k'^{p} \subset
+k$, la norme est $x \mapsto x^{p^{e}}$ et son noyau contient strictement
+$R_{k'/k}(\mu_p)$, qui est le noyau de la puissance $p$-ième ; les énoncés de
+la page valent tels quels pour $[k':k] = p$, ce qui est le cas de l'exemple.}
+Enfin, si $G'$ est un groupe algébrique sur $k'$ de centre $(\mu_p)_{k'}$, par
+exemple $\mathrm{SL}_{p,k'}$, le centre de $G_1 = R_{k'/k}G'$ est $Z_1 =
+R_{k'/k}(\mu_p) = V$ (pour $[k':k] = p$), et le sous-groupe réduit de $Z_1
+\otimes \bar{k}$ n'est pas défini sur $k$.
+
+\pagerange{72}{92}
+\section*{Petits fourbis cohomologiques (pages 71 à 92)}
+
+La chemise (page 71) porte ce titre, de lecture douteuse pour « fourbis » ;
+il est répété au crayon dans la marge de la page 72.
+
+\pagerange{72}{73}
+\subsection*{Le théorème 90 tordu (pages 72 et 73)}
+
+\emph{Proposition.} Soit $k$ un corps, $L/k$ une extension galoisienne
+\emph{finie} de groupe $\Gamma$\footnote{La page ne dit pas « finie » ; la
+démonstration somme sur $\Gamma$.}, $A$ une $k$-algèbre de dimension finie
+avec unité, $A^{L} = A \otimes_k L$ munie de l'action de $\Gamma$, et $G =
+(A^{L})^{*}$. Alors $H^1(\Gamma, G) = \lbrace 1\rbrace$, ainsi que $H^1(\Gamma,
+G^{\psi})$ si $\psi$ est un homomorphisme croisé de $\Gamma$ dans le groupe des
+automorphismes de la $L$-algèbre $A^{L}$, $G^{\psi}$ désignant $G$ muni de
+l'action tordue $\sigma(\gamma)g = \psi(\gamma)(\gamma g)$. En particulier
+$H^1(\Gamma, \mathrm{GL}_n(L)) = \lbrace 1\rbrace$.
+
+\emph{Démonstration.} Soit $\varphi \in Z^1(\Gamma, G^{\psi})$ et, pour $a \in
+A^{L}$,
+\[
+x = \sum_{\gamma \in \Gamma} \varphi(\gamma)\,\sigma(\gamma)a .
+\]
+Le calcul de la page donne $\sigma(\gamma)x = \varphi(\gamma)^{-1}x$, d'où, si
+$x$ est inversible, $\varphi(\gamma) = x\,(\sigma(\gamma)x)^{-1}$ : $\varphi$ est
+un cobord. Il reste à trouver $a$ avec $x$ inversible. Soit $P$ la fonction
+polynôme « norme réduite » sur $A^{L}$, $P(b) = \det(c \mapsto bc)$, qui ne
+s'annule pas exactement sur $G$, et
+\[
+\bar{P}\bigl((b_{\gamma})_{\gamma}\bigr) = P\Bigl(\sum_{\gamma} \varphi(\gamma)\,
+\psi(\gamma)(b_{\gamma})\Bigr),
+\]
+fonction polynôme sur $(A^{L})^{\Gamma}$ (produit indexé par $\Gamma$). Si $x$
+n'était jamais inversible, $\bar{P}$ s'annulerait aux points $b_{\gamma} =
+\gamma(a)$, $a \in A^{L}$. Si $k$ est infini, ces points sont denses pour la
+topologie de Zariski — ce sont les $k$-points d'une $k$-forme de l'espace
+$(A^{L})^{\Gamma}$, puisque $L \otimes_k L \simeq L^{\Gamma}$ —, donc $\bar{P}$
+est identiquement nulle ; avec $b_1 = 1$ et $b_{\gamma} = 0$ pour $\gamma \neq
+1$, on trouve $P(1) = 0$, absurde.\footnote{La page applique $\gamma$ deux fois,
+dans la définition de $\bar{P}$ et dans la substitution $A_{\gamma} =
+A^{\gamma}$ ; on a harmonisé. En marge : « argument [illisible] d'un corps
+!!! ».}
+
+Reste le cas d'un corps fini, que la page commence pour $\Gamma$ cyclique
+engendré par $u$, $u\lambda = \lambda^{q}$, avec $\varphi(u^{k}) = a\,\sigma(u)a
+\cdots \sigma(u)^{k-1}a$, et abandonne sous des ratures. Il est couvert par le
+théorème de Lang de la page suivante, $(A^{L})^{*}$ étant le groupe des points
+d'un groupe algébrique connexe (un ouvert d'un espace affine).
+
+\pagerange{74}{76}
+\subsection*{Le théorème de Lang en cohomologie galoisienne (pages 74 à 76)}
+
+\emph{Proposition (Lang).} Soit $G$ un groupe algébrique \emph{connexe} sur un
+corps fini $k$, $L/k$ une extension finie de groupe $\Gamma$. Alors
+$H^1(\Gamma, G(L)) = \lbrace e\rbrace$. Plus généralement, pour $\psi$ un
+homomorphisme croisé de $\Gamma$ dans $\mathrm{Aut}(G_L)$ (automorphismes du
+groupe algébrique sur $L$), et $G^{L\psi}$ le groupe $G(L)$ muni de l'action
+$\sigma(\gamma)g = \psi(\gamma)(g^{\gamma})$, on a encore $H^1(\Gamma,
+G^{L\psi}) = \lbrace e\rbrace$.\footnote{En marge : « à voir ! ». L'énoncé tordu
+est exact : $G^{L\psi}$ est le groupe des $L$-points d'une forme tordue de $G$
+sur $k$, encore connexe.}
+
+\emph{Démonstration.} Soit $q = |k|$, $n = [L:k]$ ; $\Gamma$ est cyclique,
+engendré par $f : \lambda \mapsto \lambda^{q}$, et l'on note $u$
+l'automorphisme correspondant de $G(L)$. Soit $\Omega$ une clôture algébrique
+de $L$, $\tilde{u}$ l'automorphisme de $G(\Omega)$ défini par $\lambda \mapsto
+\lambda^{q}$ — c'est le Frobenius $F$ de $G$, défini sur $k$ — ; on a $u^{n} =
+1$ mais $\tilde{u}^{n} \neq 1$, et les invariants de $\tilde{u}^{n}$ dans
+$G(\Omega)$ sont $G(L)$. Soit $\tilde{\psi}$ l'automorphisme de $G_{\Omega}$
+prolongeant $\psi(f)$, et $\tilde{v} = \tilde{\psi} \circ \tilde{u}$, qui induit
+$v = \sigma(f)$ sur $G(L)$. La relation de cocycle de $\psi$ donne $(*)$
+$\tilde{\psi}\,\tilde{\psi}^{\tilde{u}} \cdots \tilde{\psi}^{\tilde{u}^{n-1}} = 1$, d'où
+$\tilde{v}^{n} = \tilde{u}^{n}$ (par récurrence, $\tilde{v}^{k} =
+\tilde{\psi}\,\tilde{\psi}^{\tilde{u}} \cdots \tilde{\psi}^{\tilde{u}^{k-1}}
+\tilde{u}^{k}$).\footnote{La page écrit le produit $(*)$ en partant de
+$\psi^{(u)}$, avec $\psi^{(u^{k})} = u^{k}\psi u^{k-1}$ ; les indices sont
+décalés d'un cran, ce qui ne change pas la relation, produit d'un cocycle sur
+un groupe cyclique d'ordre $n$.}
+
+Un cocycle $\varphi \in Z^1(\Gamma, G^{L\psi})$ est donné par $a =
+\varphi(u) \in G(L)$ avec $(**)$ $a\,a^{v}a^{v^{2}} \cdots a^{v^{n-1}} = 1$. On
+cherche $b \in G(L)$ avec $a = b\,(b^{v})^{-1}$. Il suffit de trouver $b \in
+G(\Omega)$ avec $a = b\,(b^{\tilde{v}})^{-1}$ : alors $a^{v^{k}} =
+b^{\tilde{v}^{k}}(b^{\tilde{v}^{k+1}})^{-1}$, et le produit télescopique $(**)$
+donne $b = b^{\tilde{v}^{n}} = b^{\tilde{u}^{n}}$, donc $b \in G(L)$. On est
+ramené au théorème géométrique suivant.
+
+\emph{Lemme (page 76).} Soit $G$ un groupe algébrique connexe sur un corps
+algébriquement clos $\Omega$ de caractéristique $p$, défini sur
+$\mathbb{F}_q$, et $\psi$ un automorphisme du groupe algébrique $G$. Alors
+l'application
+\[
+\theta : G \to G, \qquad x \longmapsto x\,\bigl(\psi\,x^{(q)}\bigr)^{-1},
+\]
+où $x^{(q)}$ est l'image de $x$ par le Frobenius (l'automorphisme de $G(\Omega)$
+induit par $\lambda \mapsto \lambda^{q}$), est \emph{surjective}.
+
+La page calcule la différentielle de $\theta$ en $e$ : c'est l'identité,
+puisque celle de $x \mapsto \psi x^{(q)}$ est $d\psi(e)$ composée avec celle du
+Frobenius, qui est nulle. L'image de $\theta$ contient donc un voisinage de $e$.
+De plus $\theta$ est un homomorphisme croisé, $\theta(xy) =
+\theta(x)\,\mathrm{int}(\psi x^{(q)})\,\theta(y)$. Si $G$ est commutatif,
+$\theta$ est un homomorphisme, son image est un sous-groupe contenant un ouvert
+dense, donc ouvert et fermé, donc égal à $G$ connexe. « Dans le cas général,
+on… » : la page s'arrête.
+
+Le cas général se conclut par l'argument des orbites de la page 6 : $G$ agit
+sur lui-même par $g \cdot y = g\,y\,(\psi g^{(q)})^{-1}$, l'application d'orbite
+en chaque $y$ a une différentielle bijective (même calcul), donc toutes les
+orbites sont ouvertes ; $G$ étant irréductible, il n'y en a qu'une, et c'est
+l'orbite de $e$, qui est l'image de $\theta$.\footnote{Cette fin est nôtre.
+C'est le théorème de Lang–Steinberg pour l'endomorphisme $\psi \circ F$
+(Steinberg, \emph{Endomorphisms of linear algebraic groups}, 1968).}
+
+\pagerange{77}{79}
+\subsection*{Cohomologie d'un groupe muni d'un automorphisme (pages 77 à 79)}
+
+Les pages 77 à 79 donnent le langage où le lemme précédent devient la nullité
+d'une cohomologie : celui d'un groupe muni d'un automorphisme $T$, modèle de
+$G(\overline{\mathbb{F}}_q)$ muni du Frobenius.
+
+Soit $G$ un groupe sur lequel $\mathbb{Z}$ opère par $T$, et $G_n$ le
+sous-groupe des $x$ tels que $T^{n}x = x$. On suppose $G = \bigcup_n G_n$
+(réunion filtrante pour la divisibilité : $G_n \subset G_m$ si $n \mid
+m$).\footnote{La page dit « suite croissante » ; l'inclusion n'a lieu que pour
+$n \mid m$, et la limite qui suit est prise selon la divisibilité, « filtrant
+multiplicativement », dit une note sous la limite.} Alors $G_n$ est un
+$\mathbb{Z}/n$-groupe ; $H^0(\mathbb{Z}/n, G_n) = G_1$, et $H^1(\mathbb{Z}/n,
+G_n)$ est l'ensemble des $\alpha \in G_n$ tels que $\alpha\,T\alpha \cdots
+T^{n-1}\alpha = 1$, modulo $\beta \sim \alpha$ s'il existe $u \in G_n$ avec
+$\beta = u^{-1}\alpha\,Tu$. Pour $n \mid m$, $G_n = G_m^{N_{n,m}}$ avec $N_{n,m}
+\simeq \mathbb{Z}/(m/n)$, et la suite d'inflation-restriction
+\[
+1 \to H^1(\mathbb{Z}/n, G_n) \xrightarrow{\ \mathrm{inf}\ } H^1(\mathbb{Z}/m,
+G_m) \to H^1(N_{n,m}, G_m)^{\mathbb{Z}/m}
+\]
+est exacte ; pour $G$ commutatif, la périodicité de la cohomologie des groupes
+cycliques rend les $H^{i}$, $i > 1$, de peu d'intérêt.
+
+\emph{Lemme 1.} Si $\alpha \in G$ vérifie $\alpha\,T\alpha \cdots T^{n-1}\alpha =
+1$, alors $\alpha \in G_n$ ; et si $\alpha$, $\beta$ vérifient cette condition et
+$\beta = u^{-1}\alpha\,Tu$ avec $u \in G$, alors $u \in G_n$. (Appliquer $T$ :
+$\alpha$ et $T^{n}\alpha$ sont tous deux l'inverse de $T\alpha \cdots
+T^{n-1}\alpha$ ; pour le second point, le produit télescope en
+$u^{-1}T^{n}u = 1$.)
+
+\emph{Lemme 2.} L'image dans $H^1(\mathbb{Z}/m, G_m)$, $n \mid m$, de la classe
+de $\alpha$ est représentée par le même $\alpha$. (Trivial.)
+
+On pose $H^1(T, G) = \varinjlim_n H^1(\mathbb{Z}/n, G_n)$ ; par les lemmes 1 et
+2, c'est l'ensemble des $\alpha \in G$ tels que $\alpha\,T\alpha \cdots
+T^{n-1}\alpha = 1$ pour un $n$, modulo $\beta \sim \alpha$ s'il existe $u \in G$
+avec $\beta = u^{-1}\alpha\,Tu$. Pour $G = G(\overline{\mathbb{F}}_q)$ et $T$ le
+Frobenius, c'est la cohomologie galoisienne $H^1(\mathbb{F}_q, G)$.
+
+\emph{Lemme 3.} Si $x \mapsto x^{-1}Tx$ est surjective de $G$ dans $G$, alors
+$H^1(T, G) = \lbrace e\rbrace$. (Lemmes 1 et 2.) Avec le lemme de la page 76,
+c'est le théorème de Lang : $H^1(\mathbb{F}_q, G) = 1$ pour $G$ connexe.
+
+\emph{Lemme 4.} Soit $1 \to G' \to G \to G'' \to 1$ une suite exacte de
+$\mathbb{Z}$-groupes ($T$ stabilise $G'$). Supposons que, pour tout $\alpha \in
+G$ représentant une classe, l'application $v \mapsto v^{-1}\,\alpha\,T(v)\,
+\alpha^{-1}$ de $G'$ dans $G'$ soit surjective. Alors $H^1(T, G) \to H^1(T,
+G'')$ est injectif.\footnote{L'hypothèse de la page est biffée et surchargée,
+avec « intérieur » et « $G'$ » en interligne ; on lit « $x \mapsto
+x^{-1}\alpha\,Tx$ contienne $G'$ ». On énonce ce que la démonstration
+utilise.} En effet, si $\beta$ et $\alpha$ ont même image, on se ramène à
+$\beta = t\alpha$, $t \in G'$, et l'on cherche $v \in G'$ avec $t\alpha =
+v^{-1}\alpha\,Tv$, soit $t = v^{-1}\sigma T(v)$, $\sigma = \mathrm{int}(\alpha)$.
+
+\emph{Surjectivité.} Soit $\alpha \in G$ dont l'image dans $G''$ est un cocycle,
+$c = \alpha\,T\alpha \cdots T^{n-1}\alpha \in G'$. On cherche $t \in G'$ tel que
+$\beta = t\alpha$ soit un cocycle. Le développement de la page donne
+\[
+\beta\,T\beta \cdots T^{n-1}\beta = t\,\sigma_1T(t)\,\sigma_2T^{2}(t) \cdots
+\sigma_{n-1}T^{n-1}(t)\cdot c,
+\]
+où $\sigma_i$ est l'automorphisme intérieur défini par $\alpha\,T\alpha \cdots
+T^{i-1}\alpha$, qui stabilise $G'$.\footnote{La page dit « le dernier facteur
+est $1$ » ; il vaut $c$, qui n'est que $\equiv 1$ modulo $G'$. Il faut donc
+atteindre $c^{-1}$, non $1$.} D'où :
+
+\emph{Lemme 5.} Supposons que, pour toute suite $\sigma_1, \ldots,
+\sigma_{n-1}$ d'automorphismes de $G'$ induits par des automorphismes
+intérieurs de $G$, l'application $x \mapsto x\,\sigma_1T(x) \cdots
+\sigma_{n-1}T^{n-1}(x)$ de $G'$ dans $G'$ soit surjective. Alors $H^1(T, G) \to
+H^1(T, G'')$ est surjectif.\footnote{La page écrit « de $G$ dans $G$ » et
+$H^1(X, G) \to H^1(X, G'')$, là où l'on attend $G'$ et $T$ ; elle s'arrête
+avant la conclusion, qui est nôtre et suit du développement ci-dessus. En tête
+de la page 78, deux références bibliographiques barrées : F. Peterson,
+« Functional cohomology operations », « Some non-embedding problems », et
+J. Moore, « The double suspension and $p$-primary components of homotopy groups
+of spheres ».}
+
+\pagerange{80}{83}
+\subsection*{Torsion par un cocycle, éléments automorphes (pages 80 à 83)}
+
+Soit $\Gamma$ un groupe, $G$ un $\Gamma$-groupe, $M$ un $\Gamma$-ensemble sur
+lequel $G$ opère de façon compatible, $\gamma(gm) = (\gamma g)(\gamma m)$, et $f$
+un $1$-cocycle, $f(\gamma\gamma') = f(\gamma)\,\gamma f(\gamma')$. Alors
+\[
+\gamma_f\,m = f(\gamma)\,\gamma m
+\]
+est une nouvelle action de $\Gamma$ sur $M$ (le calcul de la page le
+vérifie), et l'on note $M_f$ le $\Gamma$-ensemble tordu ; la loi de groupe de
+$G$ ne sert qu'à travers son action. Pour $G$ opérant sur lui-même par
+automorphismes intérieurs, $\gamma_f\,g = f(\gamma)\,\gamma g\,f(\gamma)^{-1}$ est
+une nouvelle structure de $\Gamma$-groupe $G_f$, et $\gamma_f(gm) =
+\gamma_f(g)\,\gamma_f(m)$ : $M_f$ est un $G_f$-$\Gamma$-ensemble. C'est la
+torsion de la cohomologie non abélienne (Serre, \emph{Cohomologie galoisienne},
+I, §5).
+
+Les invariants $M_f^{\Gamma}$ sont les $m$ tels que $\gamma m = f(\gamma)^{-1}m$
+pour tout $\gamma$ — des « éléments $f$-automorphes ». Si $M$ porte des
+structures invariantes par $\Gamma$ et $G$, $M_f$ les garde ; pour $M$
+abélien on peut considérer les $H^{i}(\Gamma, M_f)$. Si $f'(\gamma) =
+a^{-1}f(\gamma)\,\gamma a$, l'application $u_a : m \mapsto am$ est un
+isomorphisme $M_{f'} \to M_f$.\footnote{La page écrit l'isomorphisme $M_f \to
+M_{f^{*}}$, l'astérisque étant peut-être un prime ; le calcul qui suit est
+celui de $M_{f'} \to M_f$.} Réciproquement, en prenant $M = G$ opérant par
+translations à gauche, un isomorphisme $M_{f'} \simeq M_f$ compatible aux
+translations à droite est une translation à gauche par un $c$, et force
+$f'(\gamma) = c^{-1}f(\gamma)\,\gamma c$.\footnote{La page dit seulement : « Si
+on veut que $M_f \simeq M_{f'}$ pour tout $G$-$\Gamma$-ensemble $M$, il faut que
+$f \sim f'$, comme on voit en prenant $M = G$ » ; l'isomorphisme doit être
+compatible à la structure de torseur, sans quoi deux $\Gamma$-ensembles peuvent
+être isomorphes sans que les cocycles le soient.}
+
+\emph{Moyennes (page 82).} Pour $\Gamma$ fini et $M$ abélien, $N_f\,m =
+\sum_{\gamma} f(\gamma)\,\gamma m$ est dans $M_f^{\Gamma}$. Pour $G = A^{*}$,
+$A$ un anneau, et $u \in A$, si $x = N_f u$ est inversible, alors $f(\gamma) =
+x\,\gamma(x)^{-1}$ et $f$ est un cobord. Pour $\Gamma$ infini, on essaie des
+moyennes infinies : « c'est la construction des fonctions zéta-fuchsiennes de
+Poincaré ». Le rapprochement est juste : les séries de Poincaré (1884)
+fabriquent des fonctions automorphes vectorielles pour un facteur
+d'automorphie à valeurs matricielles, qui est un $1$-cocycle d'un groupe
+fuchsien, par exactement cette moyenne.
+
+\emph{Exemple (pages 82 et 83).} Soit $\Gamma$ fini opérant fidèlement sur un
+corps $K$, et $A$ une $K$-algèbre de dimension finie munie d'une action
+semi-linéaire de $\Gamma$. Alors $H^1(\Gamma, A^{*}) = \lbrace 1\rbrace$. On montre
+d'abord que $A$ a une base d'éléments invariants — lemme de descente
+galoisienne (de Speiser), qui ne sert pas la structure d'algèbre ni la
+dimension finie — ; dans cette base, la condition que $\sum f(\gamma)\,\gamma a$
+soit inversible s'écrit $P \neq 0$ pour un polynôme $P$, et $P(\sum
+f(\gamma)\,\gamma(a_{\gamma}))$ est un polynôme $R$ en les $n|\Gamma|$ quantités
+$\gamma(a^{i}_{\gamma})$. Si $K$ est infini et que $P$ s'annule pour tous les
+$a$, le théorème d'indépendance algébrique des automorphismes rend $R$
+identiquement nul ; avec $a_{\gamma_0} = 1$ et $a_{\gamma} = 0$ ailleurs, $P(f(\gamma_0))
+= 0$, absurde puisque $f(\gamma_0)$ est inversible. Si $K$ est fini, on utilise
+Lang. \emph{Cas particulier} : $H^1(\Gamma, K^{*}) = 0$ (Hilbert 90), où
+l'indépendance \emph{linéaire} des automorphismes (Dedekind) suffit.
+
+\pagerange{84}{89}
+\subsection*{Une version semi-locale (pages 84 à 89)}
+
+\emph{Énoncé (page 84).} Soit $\mathcal{O}$ un anneau semi-local noethérien,
+$\Gamma$ un groupe fini opérant fidèlement sur $\mathcal{O}$ et transitivement
+sur ses idéaux maximaux, $\Gamma_d$ le groupe de décomposition d'un idéal
+maximal $\mathfrak{m}$, qui opère sur $k = \mathcal{O}/\mathfrak{m}$, et
+$\Gamma_i \subset \Gamma_d$ le groupe d'inertie, noyau de cette action. Soit $A$
+une $\mathcal{O}$-algèbre finie\footnote{Hypothèse supplée : la page biffe
+« de type fini », mais les arguments des pages 86 et 88 (« il en est de même
+de $A$ ») supposent $A$ module de type fini sur $\mathcal{O}$.} munie d'une
+action de $\Gamma$ semi-linéaire, $\gamma(\lambda a) = (\gamma\lambda)(\gamma a)$.
+Alors les applications
+\[
+H^1(\Gamma, A^{*}) \longrightarrow H^1(\Gamma_d, A_{\mathfrak{m}}^{*})
+\longrightarrow H^1(\Gamma_i, A_{\mathfrak{m}}^{*})
+\]
+sont injectives. Dans le cas le plus important, $\Gamma_i$ opère trivialement
+sur $A/\mathfrak{m}A$ et $H^1(\Gamma_i, (A/\mathfrak{m}A)^{*})$ est formé de
+classes d'homomorphismes.
+
+\emph{La première flèche (pages 85 et 86).} Les complétés $\hat{\mathcal{O}} =
+\prod_i \hat{\mathcal{O}}_{\mathfrak{m}_i}$ et $\hat{A} = \prod_i B_i$, $B_i =
+\hat{A}_{\mathfrak{m}_i}$, portent l'action de $\Gamma$ ; $\Gamma_d$ stabilise
+$B_0$ et $\Gamma$ permute les $B_i$ transitivement, de stabilisateur $\Gamma_d$,
+de sorte que $\hat{A}^{*}$ est induit et, par le lemme de Shapiro (non
+commutatif),
+\[
+H^1(\Gamma, \hat{A}^{*}) \simeq H^1(\Gamma_d, \hat{A}_{\mathfrak{m}}^{*}).
+\]
+\footnote{La page écrit que « $\Gamma$ mod $\Gamma_i$ » permute les $B_i$ « de
+façon simplement transitive » ; c'est $\Gamma/\Gamma_d$ qui est en bijection
+avec les facteurs. Les deux passages barrés des pages 84 et 85, qui
+travaillaient dans $A_{\mathfrak{m}}$ puis modulo $\mathfrak{m}^{N}A$, sont
+remplacés par l'argument qui suit.} Il suffit donc de voir que $H^1(\Gamma,
+A^{*}) \to H^1(\Gamma, \hat{A}^{*})$ est injective. Soient $f$, $g$ deux
+cocycles de même image : il existe $u \in \hat{A}^{*}$ avec $u\,g(\gamma) =
+f(\gamma)\,\gamma(u)$. Considérons l'application
+\[
+\varphi : A \longrightarrow \prod_{\gamma \in \Gamma} A, \qquad u \longmapsto
+\bigl(u\,g(\gamma) - f(\gamma)\,\gamma(u)\bigr)_{\gamma},
+\]
+linéaire sur $\mathcal{O}^{\Gamma}$. Comme $\mathcal{O}^{\Gamma}$ est semi-local
+noethérien et $\mathcal{O}$, donc $A$, de type fini sur lui, la topologie
+$\mathfrak{m}$-adique de $A$ est la même pour $\mathcal{O}$ et pour
+$\mathcal{O}^{\Gamma}$, et le noyau $\hat{N}$ de $\hat{\varphi}$ est l'adhérence
+de $N = \mathrm{Ker}\,\varphi$ (platitude de la complétion, ou Artin–Rees).
+L'élément $u \in \hat{N}$ est donc approché par $v \in N$, $v \equiv u$ modulo
+$\mathfrak{m}^{r}\hat{A}$ ; $v$ est inversible dans $\hat{A}$, donc dans $A$
+(descente fidèlement plate), et $g(\gamma) = v^{-1}f(\gamma)\,\gamma(v)$. La
+même diagonale donne l'injectivité de $H^1(\Gamma, A^{*}) \to H^1(\Gamma_d,
+A^{*}_{\mathfrak{m}})$.\footnote{La page note $A^{\Gamma}$ le but de $\varphi$
+— le produit indexé par $\Gamma$, non les invariants. Les lettres $u$ et $v$
+se distinguent mal sur la page 86. Une « digression » en marge, sur $f \sim
+g$ modulo $\mathfrak{m}^{n}A$, n'est pas lue.}
+
+\emph{La seconde flèche (pages 86 à 89).} On suppose $\mathcal{O}$ local
+($\Gamma = \Gamma_d$). Une tentative par le carré des réductions modulo
+$\mathfrak{m}$ est barrée (bas de la page 86, haut de la page 87). Ce qui
+reste est l'argument suivant. Par torsion, l'injectivité se ramène à la
+trivialité du noyau : si $g = u^{-1}f\,\gamma(u)$ sur $\Gamma_i$, on tord
+l'action de $\Gamma$ sur $A$ par $f$, $\gamma_f(x) = f(\gamma)\,\gamma x\,
+f(\gamma)^{-1}$, ce qui fait de $A_f$ une $(\mathcal{O}, \Gamma)$-algèbre de même
+nature, et $h(\gamma) = g(\gamma)f(\gamma)^{-1}$ est un cocycle à valeurs dans
+$A_f^{*}$, trivial sur $\Gamma_i$ ; il s'agit de voir qu'il est trivial sur
+$\Gamma$. La suite d'inflation-restriction
+\[
+1 \to H^1(\Gamma/\Gamma_i, G^{\Gamma_i}) \to H^1(\Gamma, G) \to H^1(\Gamma_i, G)
+\]
+ramène à $H^1(\Gamma', A'^{*}) = \lbrace 1\rbrace$, où $\Gamma' = \Gamma/\Gamma_i$, $A'
+= A^{\Gamma_i}$, $\mathcal{O}' = \mathcal{O}^{\Gamma_i}$ : $\mathcal{O}'$ est local
+noethérien, $\mathcal{O}$ et $A$ sont de type fini sur lui, et $\Gamma'$ opère
+fidèlement sur son corps résiduel.\footnote{Ce dernier point est donné comme
+connu (« on sait que ») ; il vaut dans le cadre de la clôture intégrale d'un
+anneau normal dans une extension galoisienne, où le corps résiduel de
+$\mathcal{O}$ est radiciel sur celui de $\mathcal{O}^{\Gamma_i}$ (Bourbaki,
+\emph{Algèbre commutative}, V, §2). On l'admet ici avec la page.}
+
+On est ramené au cas $\Gamma_i = \lbrace e\rbrace$. Alors $H^1(\Gamma,
+(A/\mathfrak{m}A)^{*}) = 1$ par l'exemple des pages 82 et 83 (indépendance
+algébrique des automorphismes, ou Lang si $k$ est fini). Par récurrence sur
+$n$, la suite exacte de $\Gamma$-groupes
+\[
+1 \to N_n \to (A/\mathfrak{m}^{n+1}A)^{*} \to (A/\mathfrak{m}^{n}A)^{*} \to 1,
+\qquad N_n = 1 + \mathfrak{m}^{n}A/\mathfrak{m}^{n+1}A \simeq
+\mathfrak{m}^{n}A/\mathfrak{m}^{n+1}A,
+\]
+où $N_n$ est un $k$-espace vectoriel à action semi-linéaire, donc isomorphe à
+une somme de copies de $k$ (Speiser), avec $H^1(\Gamma, k) = 0$, donne
+$H^1(\Gamma, (A/\mathfrak{m}^{n}A)^{*}) = 1$ pour tout $n$. On en conclut
+$H^1(\Gamma, A^{*}) = 1$ : si $f$ est trivial modulo chaque $\mathfrak{m}^{n}A$,
+il y a des $u_n \in A^{*}$ avec $\varphi(u_n) \in \mathfrak{m}^{n}\prod A$ (pour
+$g = 1$), et, par Artin–Rees appliqué à l'application $\varphi$ de la page 85,
+un élément de $N$ congru à $u_n$ modulo $\mathfrak{m}^{n-c}A$, inversible pour
+$n$ grand.\footnote{La page dit seulement : « reproduisant un raisonnement
+déjà fait, on en conclut » ; on rend explicite que des solutions approchées à
+tout ordre, choisies indépendamment, suffisent, sans système compatible. Des
+astérisques mal placés (« $A/\mathfrak{m}A^{*}$ » pour
+$(A/\mathfrak{m}A)^{*}$, « $k = A/\mathfrak{m}$ » pour
+$\mathcal{O}/\mathfrak{m}$) sont corrigés sans autre remarque.}
+
+\pagerange{90}{92}
+\subsection*{Le cas d'une action triviale sur le corps résiduel (pages 90 à 92)}
+
+Soit $\mathcal{O}$ local, $\Gamma$ opérant trivialement sur $k =
+\mathcal{O}/\mathfrak{m}$, $A$ une $(\mathcal{O}, \Gamma)$-algèbre finie, et
+supposons que $A^{\Gamma} \to A/\mathfrak{m}A$ soit surjectif.\footnote{Le texte
+suppose « que $\Gamma$ opère trivialement sur $A/\mathfrak{m}A$ », et la marge,
+« plus généralement », que $A^{\Gamma} \to A/\mathfrak{m}A$ est surjectif. C'est
+la seconde hypothèse que la démonstration utilise (page 92, « soit $v \in
+A^{\Gamma}$ tel que $\varepsilon(v) = \varepsilon(u)$ ») ; la première ne
+l'entraîne pas quand le corps résiduel est imparfait.} Soit $p$ la
+caractéristique de $k$ et $\Lambda$ un $p$-sous-groupe de Sylow de $\Gamma$
+($\Lambda = \lbrace e\rbrace$ en caractéristique nulle). Alors un élément de
+$H^1(\Gamma, A^{*})$ dont les images dans $H^1(\Gamma, (A/\mathfrak{m}A)^{*})$ et
+dans $H^1(\Lambda, A^{*})$ sont triviales est trivial ; en particulier, si $p$
+ne divise pas $|\Gamma|$, le noyau de $H^1(\Gamma, A^{*}) \to H^1(\Gamma,
+(A/\mathfrak{m}A)^{*})$ est trivial.\footnote{La page énonce l'injectivité de
+$H^1(\Gamma, A^{*}) \to H^1(\Gamma, (A/\mathfrak{m}A)^{*}) \times H^1(\Lambda,
+A^{*})$ (après avoir biffé « bijective ») et se ramène à $g = 1$. La réduction
+de l'injectivité au noyau, par torsion, demande que l'hypothèse sur
+$A^{\Gamma}$ survive à la torsion, ce que la page ne vérifie pas ; on énonce ce
+qui est démontré.}
+
+\emph{Démonstration.} Soit $\varepsilon : A \to A/\mathfrak{m}A$ la réduction.
+On montre par récurrence sur $n$ que $f$ est trivial modulo $\mathfrak{m}^{n}A$
+; on conclut par Artin–Rees comme plus haut. Supposons-le modulo
+$\mathfrak{m}^{n}A$ ; on peut supposer $\mathfrak{m}^{n+1}A = 0$ et, quitte à
+remplacer $f$ par un cocycle cohomologue, $f(\gamma) = 1 + g(\gamma)$ avec
+$g(\gamma) \in \mathfrak{m}^{n}A$ et $g(\gamma\gamma') = g(\gamma) + \gamma
+g(\gamma')$. L'hypothèse sur $\Lambda$ donne $u \in A^{*}$ avec $1 + g(\gamma) =
+u^{-1}\gamma(u)$, soit $\gamma(u) - u = u\,g(\gamma) = \varepsilon(u)\,g(\gamma)$
+pour $\gamma \in \Lambda$, $\mathfrak{m}^{n}A$ étant un $A/\mathfrak{m}A$-module.
+Soit $v \in A^{\Gamma}$ avec $\varepsilon(v) = \varepsilon(u)$ ; alors
+$g(\gamma) = \gamma(v^{-1}u) - v^{-1}u$ sur $\Lambda$ : $g$ est un cobord dans
+$H^1(\Lambda, A)$ (cohomologie additive). Comme $\nu = [\Gamma : \Lambda]$ est
+premier à $p$, la multiplication par $\nu$ est bijective sur $A$ (elle l'est
+sur chaque $\mathfrak{m}^{i}A/\mathfrak{m}^{i+1}A$, espace vectoriel sur $k$),
+et la restriction $H^1(\Gamma, A) \to H^1(\Lambda, A)$ est injective
+(corestriction). Il existe donc $w \in A$ avec $g(\gamma) = \gamma(w) - w$ pour
+tout $\gamma \in \Gamma$ ; en modifiant $w$ par un élément de $A^{\Gamma}$, on
+peut supposer $\varepsilon(w) = 1$, donc $w \in A^{*}$, et alors $g(\gamma) =
+w^{-1}g(\gamma) = w^{-1}\gamma(w) - 1$, c'est-à-dire $1 + g(\gamma) =
+w^{-1}\gamma(w)$ : $f$ est trivial modulo $\mathfrak{m}^{n+1}A$.\footnote{Les
+blocs encadrés et barrés des pages 91 et 92 contiennent une première version
+de ce calcul, qui s'achève sur « ce qui montre que $\Gamma$ opère trivialement
+sur $\mathcal{O}/\mathfrak{m}$ ! », et l'énoncé, barré, que $H^1(\Gamma, M) \to
+H^1(\Lambda, M)$ est injectif pour un module de longueur finie ; c'est ce
+dernier qui est repris, au propre, page 92.}
+
+\pagerange{94}{94}
+\section*{Contre-exemples à passage au quotient (pages 93 et 94)}
+
+Sous une chemise grise (page 93), la page 94, intitulée en marge
+« Impossibilité des passages aux quotients », esquisse un argument. Soit $k$ un
+corps, $S = \mathrm{Spec}\,k$, et un groupe $G$ opérant sur $\mathbb{P}^{N}_S$
+à travers $\mathrm{PGL}_{N+1}$, sans caractère non trivial ; soit $V$ un
+ouvert invariant sur lequel $G$ opère librement, et supposons que le quotient
+$W = V/G$ existe « effectivement », $V \to W$ étant un $G$-torseur. Alors le
+faisceau anticanonique $L = \mathcal{O}(N+1) \simeq
+(\Omega^{N}_{\mathbb{P}^N/S})^{-1}$, canoniquement $G$-linéarisé, descend à $W$,
+et le faisceau descendu est \emph{ample} : tout ouvert affine de $\mathbb{P}^N$
+est le complémentaire d'une hypersurface, donc le lieu de non-annulation d'une
+section de $L^{\otimes m}$, $m > 0$ ; pour un ouvert affine $G$-stable, cette
+section est semi-invariante, donc invariante puisque $G$ n'a pas de caractère
+non trivial, et descend. A fortiori $W$ est quasi-projectif. La conclusion,
+« donc si $G$ opère librement dans $V$ [cinq mots illisibles] ; $V/G$ n'existe
+pas », suppose une situation où un tel $W$ ne peut pas être quasi-projectif,
+que la page ne précise pas.\footnote{La page écrit $G = \mathrm{GP}(N)_S$,
+c'est-à-dire $\mathrm{PGL}_{N+1}$ lui-même. Pris à la lettre, l'énoncé est
+vide : $\mathrm{PGL}_{N+1}$, de dimension $N^{2} + 2N$, n'opère librement sur
+aucun ouvert non vide de $\mathbb{P}^{N}$, les stabilisateurs des points étant
+de dimension $N^{2} + N$. L'argument ne sert que pour un sous-groupe sans
+caractère de $\mathrm{PGL}_{N+1}$ (connexe, unipotent ou semi-simple, par
+exemple) ; c'est notre lecture. Les deux propriétés invoquées — l'absence
+d'homomorphismes non triviaux vers $\mathbb{G}_m$ et la description des ouverts
+affines de $\mathbb{P}^{N}$ — sont celles de la page.}
+
+Au bas de la page, quelques lignes en anglais, barrées et plusieurs fois
+corrigées, parlent de libérer la création du poids des concepts et des outils
+techniques ; elles ne se rattachent à rien d'autre du dossier.
+
+\end{document}
