@@ -42,9 +42,22 @@ for (const m of catalogue.matchAll(/"id": "([^"]+)",\s*"file": "[^"]+",\s*"date"
   COTE.set(m[1], { date: m[2], title: m[3].replace(/\\"/g, '"') });
 const shortTitle = (id) =>
   (COTE.get(id)?.title ?? '').replace(/\s*:\s*notes manuscrites.*$/i, '').replace(/\s*:.*$/, '');
-/** Midpoint of the years in the inventory's dating, or null for « s.d. ». */
+/** The project's proposed datings (src/content/proposed-datings.json), from the leaves. */
+const PROPOSED = new Map(
+  JSON.parse(readFileSync(resolve(ROOT, 'src/content/proposed-datings.json'), 'utf8')).records.map((r) => [r.folder, r]),
+);
+const yearsIn = (s) => [...(s ?? '').matchAll(/\b(19\d\d)\b/g)].map((m) => Number(m[1]));
+/**
+ * Midpoint of the years in the inventory's dating; for a folder the inventory
+ * leaves « s.d. », the midpoint of the project's proposed dating, when the
+ * leaves gave one. null when neither has a year.
+ */
 function year(id) {
-  const ys = [...(COTE.get(id)?.date ?? '').matchAll(/\b(19\d\d)\b/g)].map((m) => Number(m[1]));
+  let ys = yearsIn(COTE.get(id)?.date);
+  if (!ys.length) {
+    const p = PROPOSED.get(id);
+    ys = p ? [...yearsIn(p.from), ...yearsIn(p.to)] : [];
+  }
   return ys.length ? (Math.min(...ys) + Math.max(...ys)) / 2 : null;
 }
 const byShelfmark = (a, b) => {

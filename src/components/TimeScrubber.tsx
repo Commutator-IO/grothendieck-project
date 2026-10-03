@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { BY_ID } from '../content/catalogue.ts';
+import proposedRaw from '../content/proposed-datings.json';
 
 /**
  * A folder's place in time, and a control to move through it.
@@ -9,11 +10,22 @@ import { BY_ID } from '../content/catalogue.ts';
  * year of its dating's midpoint — the same midpoint `npm run fonds-maps` uses
  * for the colour by dating — which is a tendency and not a date: the inventory
  * mostly infers its datings, and a range of 1958–1973 puts the folder at 1965.5.
- * Undated folders (« s.d. ») have no place on the axis; they appear only when
- * the scrubber is set to « all ».
+ * Undated folders (« s.d. ») take the proposed dating read on their leaves
+ * (src/content/proposed-datings.json) when there is one; the others have no
+ * place on the axis and appear only when the scrubber is set to « all ».
  */
+const PROPOSED = new Map(
+  (proposedRaw as unknown as { records: { folder: string; from: string | null; to: string | null }[] }).records.map((r) => [r.folder, r]),
+);
+const yearsIn = (s: string | null | undefined) => [...(s ?? '').matchAll(/\b(19\d\d)\b/g)].map((m) => Number(m[1]));
+
+/** The inventory's midpoint; for a « s.d. » folder, that of the proposed dating read on its leaves. */
 export function folderYear(id: string): number | null {
-  const ys = [...(BY_ID.get(id)?.date ?? '').matchAll(/\b(19\d\d)\b/g)].map((m) => Number(m[1]));
+  let ys = yearsIn(BY_ID.get(id)?.date);
+  if (!ys.length) {
+    const p = PROPOSED.get(id);
+    ys = p ? [...yearsIn(p.from), ...yearsIn(p.to)] : [];
+  }
   return ys.length ? (Math.min(...ys) + Math.max(...ys)) / 2 : null;
 }
 
