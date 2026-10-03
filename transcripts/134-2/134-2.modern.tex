@@ -1,0 +1,1890 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 134-2, pages
+% 1-80, which is all of the folder that is transcribed: batches 1 to 4 of a
+% folder of 184 pages (issue #44). Pages 81-184 are not transcribed and are not
+% read here.
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried moves into
+% a footnote. In any dispute of substance the transcription governs: whoever
+% cites Grothendieck cites batch-NN.fr.tex.
+%
+% Scope, and what is deliberately NOT restated. Under the special rules of
+% this folder (#44), the letter to Daniel Quillen of 19-23.2.1983 and the
+% numbered sections of Pursuing Stacks (pages 14-36), and the typescript
+% « NOTES to Chapter I and Appendix » (pages 78-80), are only noted in the
+% transcription, because Maltsiniotis's edition (À la poursuite des champs,
+% vol. I, SMF, Documents mathématiques 20, 2022) prints them. This reading
+% cites that edition for them and does not paraphrase them. What it reads is:
+% the plans and tables of contents (pp. 1-12), the dedication (p. 13), his
+% 1983 introduction to the Appendix (p. 37), and his three letters to Lawrence
+% Breen of 5.2.1975 (pp. 38-47), 17.2.1975 (pp. 48-55) and 17/19.7.1975
+% (pp. 56-77), which the printed volume I does not include. Breen's own
+% letters are not in these pages and are not reconstructed: only what
+% Grothendieck's letters say of them is reported.
+%
+% Notation fixed for the whole document: S = infinity-groupoids (spaces);
+% S_{<=n} = n-groupoids = homotopy n-types; an « n-champ » on a topos X is an
+% n-truncated object of the infinity-topos of sheaves of spaces on X;
+% Pi_n(X) = tau_{<=n} of the shape (pro-object in general); his cursive
+% « espace classifiant » functor (read T in the transcription) is written B
+% here, and his « n-topos classifiant » T_n keeps its letter. A map f is
+% « k-connexe » if it is bijective on pi_i for i < k and surjective on pi_k.
+%
+% Substantive departures from the pages, all footnoted where they occur:
+%  - p. 48: the chain « critère d'Artin-Mazur <=> critère des n-gerbes <=> (A)
+%    <=> (B) » is off by one degree; the three conditions are stated
+%    separately, with their exact homotopical meaning and counterexamples.
+%  - p. 54: (B') as written is false in the direction « f_n n-équivalence =>
+%    ... »; corrected to (n+1)-connectedness of f_{n+1}.
+%  - p. 50-51: the expectation that van Kampen fails for Pi_2 is not borne out
+%    (truncation is a left adjoint); stated with the hypotheses that make it
+%    true.
+%  - p. 53: B^2 F needs a braided (E_2) structure, and all B^k need a Picard
+%    (E_infinity) structure, not a strict one.
+%  - p. 52: the « morphisme canonique de (n-1)-groupoïdes » is between
+%    (n+1)-groupoids.
+%  - p. 45: Lf_* versus Rf_* — the direct image of simplicial sheaves is
+%    derived on the right.
+%  - p. 66: Gamma_k on the left of the arithmetic local duality is Gamma_K;
+%    D_S(i^* F) is D_s(i^* F).
+%  - p. 67: « the construction in (B) of the local jacobian complex » is (C).
+%  - p. 68: target (n-Cat) made (n-1)-Cat, consistent with (n-1)-systems.
+% The modern situating (n-stacks, homotopy hypothesis, shape, exodromy,
+% six-functor formalisms, flat duality) is ours; every such passage says so.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-03 — first pass, unchecked against
+% the transcription by a human.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{134-2}
+\pages{1}{80}
+\dating{1975-[1983]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{[Chapitre I : Take off (pages 1 à 65) et table des matières provisoire] : tapuscrits annotés (19/02-22/02/1983), note manuscrite (s.d.), copies de lettre (1975, s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Ce dossier est l'ouverture d'\emph{À la poursuite des champs}
+(\emph{Pursuing Stacks}), le long texte que Grothendieck commence en février
+1983 sous la forme d'une lettre à Daniel Quillen. Il en contient trois
+choses : les plans et tables des matières de l'ouvrage tel qu'il le voyait
+alors ; le premier chapitre, « Take-off », qui est la lettre à Quillen ; et
+l'appendice de ce chapitre, trois lettres de 1975 à Lawrence Breen que
+Grothendieck a fait retaper pour les joindre au volume.
+
+Il faut dire d'emblée ce que cette lecture couvre. Le dossier compte 184
+pages ; seules les pages 1 à 80 sont transcrites, et c'est d'elles seules
+qu'il est question ici. Parmi elles, la lettre à Quillen et les sections
+numérotées (pages 14 à 36) et les notes au chapitre (pages 78 à 80) ne sont
+pas reprises : elles sont imprimées dans l'édition de Georges Maltsiniotis
+(\emph{À la poursuite des champs}, vol.~I, SMF, 2022), à laquelle on renvoie.
+Ce qui est lu, ce sont les tables (pages 1 à 12), une dédicace (page 13), et
+surtout les trois lettres à Breen, du 5 février, du 17 février et des 17--19
+juillet 1975 (pages 37 à 77), que ce volume imprimé ne contient pas.
+
+De quoi ces lettres parlent-elles ? D'une intuition qui vient d'arriver :
+qu'un « espace à déformation près » et une certaine structure purement
+algébrique --- un $n$-\emph{groupoïde} --- sont au fond la même chose. Un
+groupoïde, c'est une collection d'objets et de flèches toutes inversibles.
+Si l'on prend pour objets les points d'un espace et pour flèches les chemins
+à déformation près, on obtient le groupoïde fondamental, qui retient les
+composantes connexes et le groupe fondamental, et oublie le reste. Pour
+retenir davantage, il faut cesser de passer au quotient trop tôt : garder les
+chemins eux-mêmes, puis les déformations entre chemins, puis les déformations
+entre déformations, sur $n$ étages. C'est un $n$-groupoïde, et l'idée de 1975
+est qu'il retient exactement la forme de l'espace jusqu'en dimension $n$.
+
+Quel problème cela résout-il ? Grothendieck répond à Breen, qui lui demandait
+des exemples « convaincants » d'objets de ce genre, et lui en donne : les
+gerbes, les algèbres d'Azumaya, les champs de Picard. Mais l'argument de fond
+est ailleurs. L'algèbre homologique classique travaille avec des complexes
+de groupes \emph{abéliens}, et beaucoup de théorèmes de géométrie (ceux de
+Lefschetz, par exemple) se démontrent aussi pour des coefficients qui ne
+commutent pas, où l'outil manque. Ce qui joue pour les objets non
+commutatifs le rôle des complexes, ce seraient ces $n$-groupoïdes, et leurs
+versions qui varient d'un point à l'autre d'un espace : les
+$n$-\emph{champs}. La cohomologie d'un espace devient alors une opération
+très simple --- prendre les sections globales d'un champ --- sans résoudre ni
+l'espace ni les coefficients.
+
+La troisième lettre est plus vaste. Elle esquisse un programme de dualité
+conçu à la fin des années cinquante, où la théorie du corps de classes,
+locale et globale, devient une formule de dualité entre deux cohomologies ;
+et elle esquisse une « topologie modérée » dans laquelle un espace muni d'une
+stratification se décrit par un diagramme fini de types d'homotopie, d'où
+un « type d'homotopie fin » d'un espace ou d'un schéma.
+
+Une analogie aide à tenir ensemble ces fils. Un revêtement d'un espace, ce
+sont des données qui sont constantes là où l'on regarde de près, mais qui
+peuvent se tordre quand on fait le tour d'un trou. Grothendieck pose que
+l'espace, vu « à homotopie près », n'est rien d'autre que la collection de
+toutes ces données localement constantes, à tous les étages ; et que si l'on
+autorise ces données à changer de nature le long d'une stratification, on
+voit apparaître un type d'homotopie plus fin, qui retient comment les
+strates sont recollées.
+
+Où cela mène-t-il ? Presque tout ce que ces lettres demandent a reçu depuis
+un nom, parfois une démonstration. L'hypothèse que les $n$-groupoïdes
+modélisent les $n$-types d'homotopie est l'« hypothèse d'homotopie » ; les
+$n$-champs sont les objets tronqués d'un $\infty$-topos, et les
+« $n$-topos » qu'il redoutait existent ; le type d'homotopie d'un topos est
+sa « forme » (\emph{shape}) ; la description d'un espace stratifié par
+diagramme est la théorie des chemins de sortie, aujourd'hui
+« exodromie ». Les situer est le travail de cette lecture, qui signale
+chaque fois ce qui est son propre commentaire. Quelques-unes de ses
+affirmations de 1975 sont décalées d'un degré, et on le dit à l'endroit où
+elles se trouvent.
+
+Reste la manière, qui se lit sans aucun bagage. À Breen qui lui objecte que
+la classification des objets géométriques se ramène finalement à des
+invariants cohomologiques bien connus, il répond que c'est négliger la
+différence entre \emph{comprendre} un objet et connaître sa classe à
+isomorphisme près. Qu'on ait jusqu'ici toujours pu éluder ces animaux
+n'est pas pour lui une raison de continuer : beaucoup de mathématiques
+« sérieuses » n'existeraient pas si l'on n'avait éclairci que ce qu'on était
+\emph{forcé} d'éclaircir. Et devant une définition technique qui marche mais
+n'éclaire rien, il propose une autre méthode : dresser, comme une liste de
+cadeaux de Noël, la liste complète de ce qu'on voudrait avoir, et attendre
+qu'elle désigne d'elle-même la construction --- « you just follow your nose ».
+
+\keywords{n-stack, n-groupoid, homotopy hypothesis, fundamental n-groupoid, Picard stack, gerbe, Brauer group, crossed module, shape of a topos, infinity-topos, six-functor formalism, flat duality, geometric class field theory, exodromy, stratified spaces, test category}
+\end{resume}
+
+\section*{Le fil du dossier, et ce que cette lecture couvre}
+
+\subsection*{Les stations}
+
+Le dossier est un tapuscrit de 1983 annoté de sa main, dans l'ordre où
+Grothendieck l'a monté pour en faire le premier chapitre de \emph{Pursuing
+Stacks}. On y distingue sept stations.
+
+\begin{itemize}
+  \item[1.] \emph{Pages 1 à 12} : la couverture, « The Modelizing Story », le
+  plan en parties I à X et deux états successifs de la table des matières,
+  §§~1 à 140, plus la table de l'appendice (App.~1 à 18). Ce sont ses tables
+  de travail ; elles sont lues ici comme un document.
+  \item[2.] \emph{Page 13} : une dédicace manuscrite.
+  \item[3.] \emph{Pages 14 à 36} : le chapitre I, « Take off », c'est-à-dire
+  la lettre à Daniel Quillen des 19--23 février 1983, §§~1 à 13. Imprimé par
+  Maltsiniotis ; non repris ici.
+  \item[4.] \emph{Page 37} : l'avertissement de 1983 à l'appendice, en
+  anglais.
+  \item[5.] \emph{Pages 38 à 47} : première lettre à Breen, Villecun,
+  5.2.1975 (App.~1 à 5).
+  \item[6.] \emph{Pages 48 à 55} : deuxième lettre, Villecun, 17.2.1975
+  (App.~6 à 8).
+  \item[7.] \emph{Pages 56 à 77} : troisième lettre, Villecun, 17/19 juillet
+  1975, dans une traduction anglaise revue par lui (App.~9 à 18).
+\end{itemize}
+
+Suivent, pages 78 à 80, les premières pages des « NOTES to Chapter I and
+Appendix », imprimées dans la même édition et non reprises ici.
+
+\subsection*{L'épine dorsale}
+
+Le dossier ne construit pas un objet de page en page ; il en \emph{annonce}
+un. Les tables disent où \emph{Pursuing Stacks} devait aller, la lettre à
+Quillen dit par où il commence, et les lettres à Breen disent d'où il vient :
+de l'intuition de 1975 que les $n$-groupoïdes non stricts modélisent les types
+d'homotopie $n$-tronqués --- l'avertissement de la page 37 le dit en propres
+termes. Les trois lettres déploient cette intuition dans un ordre qui est
+celui de cette lecture :
+\begin{enumerate}
+  \item des exemples de $2$-catégories de Picard (pages 38 à 40) ;
+  \item les $n$-champs comme cadre naturel d'une algèbre homologique non
+  commutative (pages 40 à 42) ;
+  \item le dictionnaire entre $n$-groupoïdes et types d'homotopie tronqués,
+  absolu puis relatif à un topos (pages 42 à 47) ;
+  \item le $n$-groupoïde fondamental d'un topos et la classification de ses
+  systèmes locaux (pages 48 à 51) ;
+  \item la cohomologie comme intégration de champs (pages 51 à 55) ;
+  \item en juillet, le prolongement vers la dualité, la topologie modérée et
+  la linéarisation des types d'homotopie (pages 56 à 77).
+\end{enumerate}
+
+\subsection*{Conventions, valables pour tout le dossier}
+
+\begin{itemize}
+  \item On note $\mathcal{S}$ l'$\infty$-catégorie des espaces, ou
+  $\infty$-groupoïdes, et $\mathcal{S}_{\leqslant n}$ celle des
+  $n$-groupoïdes, c'est-à-dire des $n$-types d'homotopie (espaces dont les
+  $\pi_i$ sont nuls pour $i > n$ en tout point base). Ce dictionnaire est
+  \emph{l'hypothèse d'homotopie} ; on dit à la page 43 sous quelle forme elle
+  est un théorème.
+  \item Un \emph{$n$-champ} (en groupoïdes) sur un topos $X$ est un objet
+  $n$-tronqué de l'$\infty$-topos $\mathrm{Sh}(X;\mathcal{S})$ des faisceaux
+  d'espaces sur $X$ ; pour $n = 0$ ce sont les faisceaux, pour $n = 1$ les
+  champs en groupoïdes de Giraud.\footnote{Pour des objets tronqués, la
+  différence entre cet $\infty$-topos et son hypercomplété ne joue pas ;
+  elle reviendra à la page 44, à propos des $\infty$-catégories.}
+  Un \emph{$n$-champ de Picard strict} est l'objet associé à un complexe de
+  faisceaux abéliens concentré sur $n+1$ degrés consécutifs ; un
+  \emph{champ de Picard} au sens de Deligne (SGA~4, XVIII, 1.4) est le cas
+  $n=1$.
+  \item $\Pi_n(X)$ désigne le $n$-groupoïde fondamental de $X$ --- la
+  troncature en degré $n$ de sa \emph{forme}, en général un pro-objet. La
+  lettre du 17 février le note d'abord $\mathcal{C}_n$ ; les deux notations
+  désignent le même objet.
+  \item Le foncteur « espace classifiant » des pages 52 et 53, qu'il note
+  d'une cursive lue $\mathcal{T}$ dans la transcription, est noté ici $B$,
+  comme aujourd'hui ; la lettre $\mathcal{T}_n$ reste réservée au
+  « $n$-topos classifiant » de la page 50.
+  \item Une application $f$ est dite \emph{$k$-connexe} si elle induit une
+  bijection sur les $\pi_i$ pour $i < k$ et une surjection sur $\pi_k$, en
+  tout point base. C'est la convention dont dépendent les corrections des
+  pages 48 et 54.
+  \item Les intertitres « App.~1 » à « App.~18 » sont de sa main, ajoutés en
+  1983 ; ils servent ici à repérer les passages.
+\end{itemize}
+
+\subsection*{Ce que le dossier n'établit pas, et ce qui manque}
+
+\begin{itemize}
+  \item La lettre de juillet passe de sa page 1 (page 56 du dossier) à sa
+  page 12 (page 57) : ses pages 2 à 11 ne sont pas dans le dossier
+  transcrit.\footnote{Sa pagination de 1983 va de 40 à 42 sur ces deux
+  feuillets ; elle suggère qu'un seul feuillet de son tapuscrit manque, la
+  pagination propre de la lettre en suggère dix. Le passage manquant
+  contenait sans doute ses réponses aux questions 1 à 6 de Breen --- la
+  page 67 répond à la « question 7 » ---, mais ce n'est qu'une inférence.}
+  \item Le complexe $X(M)$ de la page 39 n'est pas défini sur ces pages.
+  \item Les commentaires de 1983 annoncés page 37, « notes (22) à (31) »,
+  sont dans les « NOTES » des pages 78 sq., imprimées par Maltsiniotis et
+  non reprises ; leur suite est au-delà de la page 80.
+  \item Les lettres de Breen ne sont pas dans ces pages, et on ne les
+  reconstruit pas.
+  \item Les pages 81 à 184 ne sont pas transcrites ; on ne sait de leur
+  contenu que ce qu'en dit l'inventaire.
+\end{itemize}
+
+\pagerange{1}{12}
+\section*{Le plan de \emph{Pursuing Stacks} (pages 1 à 12)}
+
+La couverture porte au crayon, et seulement cela, « The Modelizing Story ».
+La page suivante donne un plan en parties, tapé puis remanié à la main\footnote{Page 2. Les numéros sont corrigés à la main (« VII » devient
+« VIII », « VIII » devient « IX », « X » est récrit sur un « VIII » biffé) ;
+la partie VII est ajoutée verticalement dans la marge gauche ; « and test
+functors », « and contractibility structures », « and canonical modelizers »
+sont biffés dans les intitulés de II, III et IV, et l'intitulé primitif de V
+était « Homology and cohomology (abelianization of homotopy types) ». Un mot
+au crayon, à peine lisible, est lu avec doute « homotopy types ».} :
+\begin{itemize}
+  \item[I] Take-off ;
+  \item[II] Test categories ;
+  \item[III] Homotopy structures ;
+  \item[IV] Asphericity structures ;
+  \item[V] Abelianization ;
+  \item[VI] Schematization ;
+  \item[VII] Abelianization (II) ;
+  \item[VIII] Homotopy properties of (Cat) and $A^{\wedge}$ (closed model
+  structures) ;
+  \item[IX] Derivators ;
+  \item[X] Back to topoi.
+\end{itemize}
+Sous la liste, un schéma de dépendances relie les parties ; on le reproduit
+tel qu'il est tracé, la partie I restant isolée\footnote{Deux flèches de ce schéma sont biffées : l'une de V vers un « VI »
+biffé placé à sa droite, l'autre de V vers VIII. La partie X n'y figure pas.} :
+
+\begin{tikzcd}[column sep=small, row sep=small]
+\mathrm{I} & \mathrm{II} \arrow[r, Rightarrow] & \mathrm{III} \arrow[r, Rightarrow] & \mathrm{IV} \arrow[dd, Rightarrow] & \mathrm{V} \arrow[d, Rightarrow] \arrow[dr] & \\
+ & & & & \mathrm{VII} & \mathrm{VI} \\
+ & & & \mathrm{VIII} \arrow[d, Rightarrow] & & \\
+ & & & \mathrm{IX} & &
+\end{tikzcd}
+
+Les pages 3 à 12 donnent deux états de la table. Le premier (page 3, sa
+page « i ») titre encore « The Modilizing Story » et attribue le chapitre I à
+« A letter to … », sans nom ; le second (page 4) porte le titre général
+« PURSUING STACKS (À la poursuite des champs). First episode: THE MODELIZING
+STORY (Histoire de Modèles) » et précise « a letter to Daniel Quillen ». La
+table de l'appendice --- les dix-huit intertitres des lettres à Breen ---
+n'est qu'au premier état ; elle concorde avec les marques « App. » portées
+dans les marges des lettres, qui sont donc de la même campagne de 1983.\footnote{Le premier état comporte une consigne d'impression : « Les chiffres
+soulignés 5, 9, 13, App.~3, App.~6, App.~11, App.~12 etc sont à imprimer en
+caractères gras ». Au second état, ce sont des numéros cerclés à l'encre
+(5, 9, 13, puis 23, 28, 31, 33, 37, 46, 50, 51, 62, 72, 75, 77, 79, 81, 102,
+109 à 111, 118, 119, 124, 131, 132) : ce sont les sections qu'il tenait pour
+principales. Le titre de l'App.~6, « Champs essentiellement localement
+constants et types d'homotopie », déborde le bord de la feuille numérisée et
+reste incomplet.}
+La transcription note que ces tables de travail diffèrent de la table
+imprimée ; on ne les a pas collationnées avec elle.
+
+Ce qu'elles montrent, c'est la forme du projet à la date des pages 7 et 8 :
+§§~1 à 66 en deux parties (« Take-off », puis « Test categories and test
+functors » et « Homotopy structures, contractibility structures »), une
+partie IV refaite au propre à la main après qu'une première version tapée a
+été barrée (§§~67 à 99), puis abélianisation (§§~100 à 109),
+schématisation (§§~110 à 133) et linéarisation (§§~133 à 140), la table
+s'arrêtant sur « (to be completed) ».\footnote{Page 7, en marge du § 65 :
+« p. 168 -- » suivi d'un mot lu avec doute « 199 », renvoi à la pagination
+du tapuscrit. Page 10, la place de l'insertion « pseudo-topoi » au § 104 est
+incertaine. Le § 133, « Birth of Suleyman », figure deux fois, en fin de VI
+et en tête de VII.}
+
+Quelques noms d'aujourd'hui pour s'orienter dans ces intitulés --- ils sont
+de nous, et l'ouvrage, qui est de 1983, ne pouvait pas les connaître, sauf
+le premier :
+\begin{itemize}
+  \item les « catégories test » et « modélisateurs » (§§~26 à 44, 65) et le
+  « basic localizer » $\underline{W}$ (§§~60 à 65) sont devenus, chez
+  Maltsiniotis (\emph{La théorie de l'homotopie de Grothendieck}, Astérisque
+  301, 2005) et Cisinski (\emph{Les préfaisceaux comme modèles des types
+  d'homotopie}, Astérisque 308, 2006), la théorie des catégories test et des
+  localisateurs fondamentaux ; Cisinski y démontre la conjecture de
+  Grothendieck que le localisateur fondamental des équivalences faibles
+  usuelles de $(\mathrm{Cat})$ est le plus petit ;
+  \item le § 87 commente l'article de Thomason (1980) qui munit
+  $(\mathrm{Cat})$ d'une structure de catégorie de modèles fermée --- c'est
+  le seul de ces noms que le texte cite lui-même ;
+  \item les « dérivateurs » (§ 69, partie IX) sont la théorie qu'il
+  développera ensuite (\emph{Les Dérivateurs}), parallèlement à Heller ;
+  \item la « schématisation » des types d'homotopie (§§~110 à 133) est ce
+  que Toën a construit sous le nom de champs affines (2006) et de types
+  d'homotopie schématiques (Katzarkov, Pantev, Toën, 2008) ;
+  \item la paire $\widetilde{LH}_\bullet \dashv \widetilde{K}$ du § 121
+  entre types d'homotopie abéliens et types d'homotopie pointés est, sauf
+  erreur de lecture du titre, l'adjonction entre homologie réduite (le
+  groupe abélien libre engendré, à la Dold--Thom) et l'oubli, via
+  Dold--Kan.
+\end{itemize}
+
+\pagerange{13}{13}
+\section*{La dédicace (page 13)}
+
+La page est manuscrite. Une première dédicace, « À ceux qui furent mes
+élèves --- à qui j'ai donné du meilleur de moi-même, et aussi du pire … »,
+est barrée de traits obliques. Celle qui reste est à son frère, Dodek
+Shapiro, qu'il aurait « voulu rencontrer un jour », et dont les seuls signes
+tangibles sont « quelques lettres et photos d'enfant, anciennes de près d'un
+demi-siècle », datées d'Oulianovsk et adressées à leur père,
+Sascha.\footnote{Le texte dit « datées d'Ulianovsk en Sibérie » ; Oulianovsk
+est sur la Volga, en Russie d'Europe, et non en Sibérie. On rapporte la page
+sans la corriger. Un mot biffé et noirci sous « Sibérie » est lu avec doute
+« maman » ; « notre » père est corrigé en « son » père, « (qui est aussi le
+mien) ».}
+
+\pagerange{14}{36}
+\section*{Le chapitre I : la lettre à Quillen (pages 14 à 36)}
+
+Les pages 14 à 36 sont le tapuscrit annoté de la lettre à Daniel Quillen
+commencée aux Aumettes le 19 février 1983 et poursuivie jusqu'au 23 (avec
+une note marginale du 25), qui forme les §§~1 à 13 de \emph{Pursuing Stacks}
+et se termine par un post-scriptum ; un bandeau collé page 14 l'intitule
+« Chapter I : TAKE OFF / A letter to …. / (followed by an Appendix: Three
+letters to Larry Breen) ». Ce texte est imprimé dans G.~Maltsiniotis (éd.),
+\emph{À la poursuite des champs}, vol.~I, SMF, Documents mathématiques 20,
+2022, et c'est là qu'il faut le lire ; on ne le restitue ni ne le paraphrase
+ici. Les titres de ses sections sont ceux des tables des pages 3 et 4 : de
+« The importance of innocence » (§ 1) à « An urgent reflection on proper
+names: “stacks” and “coherators” » (§ 13).\footnote{La transcription relève
+seulement, pour s'y repérer, la correspondance des pages : pages 14 à 20,
+§§~1 à 4 (sa p.~3 classée après sa p.~4) ; pages 21 à 36, §§~4 (fin) à 13,
+avec les dates « 21.2. » (page 28), « 22.2.1983 » (page 34) et « PS (23.2) »
+(page 36).}
+
+\pagerange{37}{37}
+\section*{L'avertissement de 1983 à l'appendice (page 37)}
+
+L'appendice s'ouvre sur une page en anglais, qui dit d'où viennent les
+textes qui suivent et ce qu'il en a fait. Les deux premières lettres sont
+reproduites telles quelles, en français ; pour la deuxième il se sert d'une
+copie dactylographiée faite par Breen en 1975. La troisième paraît dans une
+traduction anglaise faite l'année précédente par Ronnie Brown, avec l'aide
+de Breen et de J.-L.~Loday, à partir d'une copie à peine lisible de la
+lettre manuscrite ; il dit s'en servir plutôt que de l'original, qu'« aucun
+imprimeur ne pourrait déchiffrer », et l'avoir corrigée là où son écriture
+avait égaré les traducteurs. Il a sauté le début de la première lettre, ajouté
+les intertitres App.~1 à 18 et des commentaires, les notes (22) à
+(31).\footnote{Il en résulte que les mots de la troisième lettre, telle
+qu'on la lit pages 56 à 77, ne sont pas les siens mais ceux d'une
+traduction qu'il a revue. On la cite donc en anglais, entre guillemets,
+quand une formule compte, sans la retraduire.}
+
+Il situe ensuite les lettres. Les deux premières tentaient d'expliquer à
+Breen « some of the main points of the programme I had in mind around the
+notions of $n$-categories and $n$-stacks », sous l'impulsion d'une intuition
+neuve pour lui : « that (non strict) $n$-groupoids should model (in a
+suitable sense) $n$-truncated homotopy types ». La troisième, réponse aux
+questions de Breen, est « of a wider scope » : un programme de dualité
+remontant à la fin des années cinquante, y compris une formulation
+cohomologique de la théorie du corps de classes « géométrique » locale et
+globale, qui « appears here for the first time in print » ; puis le besoin
+d'une « tame topology » pour une théorie du dévissage des espaces
+stratifiés et des voisinages tubulaires étales, en vue d'un « fine homotopy
+type » défini par le système projectif des types d'homotopie indexés
+associés aux stratifications équisingulières.
+
+\pagerange{38}{47}
+\section*{Première lettre à Breen, Villecun, 5 février 1975 (pages 38 à 47)}
+
+La lettre est datée « Villecun 5.2.1975 » et commence, dans le volume, par
+« Cher Breen » suivi d'une coupure. Le début sauté transparaît sous la bande
+collée : il y remercie Breen d'une longue lettre et parle de sa propre
+lettre à Deligne et d'une interprétation, due à Breen, d'un groupe
+d'obstruction comme un $\mathrm{Ext}$.\footnote{Page 38. Ce début est barré
+de grandes croix et ne se lit qu'à travers le papier ; la transcription en
+donne des fragments, dont plusieurs mots incertains (« Ton scepticisme »,
+« était fondé », « cohomologique », « Ext (X(M),T) ») et des lacunes. On n'en
+tire rien de plus que ce qui est dit ici. La « lettre à Deligne » est très
+vraisemblablement celle du 27 août 1974 que contient le dossier 134-1, où
+paraît le « drôle de $\mathrm{Ext}^2$ » que mentionne la page 39.}
+Que les pages 41 à 47 soient la fin de cette même lettre résulte de la
+continuité : la phrase interrompue au bas de la page 40 (« des théorèmes de
+Lefschetz ») reprend en haut de la page 41, et les intertitres App.~2 à 5 se
+suivent.\footnote{La transcription de ces pages, faite lot par lot, laissait
+le destinataire ouvert pour les pages 41 à 47 ; lu d'un seul tenant, le
+dossier le fixe, et l'avertissement de la page 37 compte bien deux lettres en
+français avant celle de juillet.}
+
+\pagerange{38}{40}
+\subsection*{App.~1 : des $2$-catégories de Picard (pages 38 à 40)}
+
+Breen espérait, dit-il, qu'on lui prouverait que les $2$-catégories de
+Picard, les $n$-catégories « et autre faune de ce genre » sont
+indispensables à des mathématiques sérieuses. Grothendieck craint que non :
+on a toujours pu les éluder. Mais il refuse d'en conclure qu'il faut
+continuer, et il refuse l'argument selon lequel la classification d'objets
+géométriques « relativement merdiques » se ramènerait à des invariants
+cohomologiques bien connus : c'est confondre la \emph{compréhension d'un
+objet géométrique} et la détermination de sa classe à équivalence près.
+
+Suivent quatre exemples. Dans le langage des conventions, une
+\emph{$2$-catégorie de Picard stricte} est un $2$-groupoïde muni d'une
+structure de groupe abélien strictement commutative à cohérence près, et
+elle équivaut à la donnée d'un complexe de groupes abéliens concentré en
+trois degrés consécutifs, à quasi-isomorphisme près ; ses $\pi_0$, $\pi_1$,
+$\pi_2$ sont les trois groupes de cohomologie de ce complexe, du plus haut
+degré au plus bas.\footnote{Pour $n = 1$ c'est le théorème de Deligne
+(SGA~4, XVIII, 1.4.15). Pour $n$ quelconque, la théorie des
+$n$-catégories de Picard strictes n'existait pas en 1975 ; la lettre la
+suppose. L'énoncé qu'on donne est le contenu, en termes d'aujourd'hui, de
+l'équivalence entre $n$-groupoïdes de Picard stricts et complexes de
+longueur $n$ à quasi-isomorphisme près, qu'il demande explicitement page
+56 ; on en dit le statut actuel à cet endroit.}
+
+\emph{1) Gerbes.} Soit $L$ un lien sur le topos $X$, de centre $Z$ (un
+faisceau abélien). Les gerbes liées par $Z$ forment une $2$-catégorie de
+Picard stricte, associée au complexe $\tau_{\leqslant 2}\,R\Gamma(X,Z)$, de
+sorte que
+\[
+\pi_{2-i}\bigl(\mathrm{Gerbes}_Z(X)\bigr) \simeq H^i(X,Z), \qquad 0 \leqslant i \leqslant 2 .
+\]
+Les gerbes liées par $L$ forment un pseudo-torseur sous cette
+$2$-catégorie, non vide si et seulement si une obstruction dans $H^3(X,Z)$
+est nulle --- c'est le théorème de Giraud (\emph{Cohomologie non
+abélienne}, IV.3.4). Pour comprendre cette classe, il propose de passer aux
+champs : le $2$-champ de Picard strict des $Z$-gerbes sur les objets
+variables de $X$, qui est le $2$-champ $B^2Z$, et le $2$-champ des
+$L$-gerbes, qui est un $2$-torseur sous le précédent ; et les $2$-torseurs
+sous $B^2Z$ sont classés par $H^3(X,Z)$, comme les $Z$-gerbes, torseurs sous
+le champ de Picard strict $BZ$ des $Z$-torseurs, le sont par
+$H^2(X,Z)$.\footnote{La page dit que la $3$-catégorie de Picard stricte des
+$2$-gerbes liées par $Z$ est décrite par $R\Gamma(X,Z)$ « tronqué en
+dimension 3 », et que le « $3$-champ de Picard correspondant » l'est par une
+résolution injective de $Z$ tronquée en degré 3. Pour un champ, ce qui le
+détermine est le complexe de faisceaux $Z[3]$ ; une résolution injective
+tronquée en est un représentant commode, dont les sections globales
+calculent les groupes $H^i(X,Z)$, $0 \leqslant i \leqslant 3$. On écrit
+« $B^2Z$ » pour ce qu'il nomme le $2$-champ des $Z$-gerbes, ce qui est
+exact parce que toute gerbe est localement triviale. Le préfixe « 1- » de
+« $1$-torseurs » est une lecture incertaine. La théorie des $2$-gerbes et de
+leur classification par $H^3$ a été écrite depuis par Breen lui-même
+(\emph{On the classification of 2-gerbes and 2-stacks}, Astérisque 225,
+1994).}
+
+\emph{2) Champs de Picard d'invariants $M$ et $N$.} Si $M$ et $N$ sont deux
+faisceaux abéliens, les champs de Picard (non nécessairement stricts) dont
+le faisceau des classes d'objets est $M$ et celui des automorphismes de
+l'objet nul est $N$ forment une $2$-catégorie de Picard stricte. Il la dit
+« représentée sans doute » par le complexe $\mathrm{RHom}(X(M),N)$ tronqué
+en degré $2$, d'invariants « le drôle de $\mathrm{Ext}^2$ » de sa lettre à
+Deligne et les « honnêtes » $\mathrm{Ext}^0(M,N)$ et
+$\mathrm{Ext}^1(M,N)$.\footnote{Le complexe $X(M)$ n'est pas défini sur ces
+pages ; l'appel (23), qui le commentait sans doute, renvoie aux notes non
+reprises. La lecture la plus sûre est que $\mathrm{RHom}(X(M),N)$ joue le
+rôle du complexe $E'(M,N)$ de la lecture modernisée du dossier 134-1 : en
+termes d'aujourd'hui, le complexe des morphismes de $M$ dans $N$ calculé au-dessus de
+la sphère $\mathbb{S}$ et non de $\mathbb{Z}$, dont les $\mathrm{Ext}^0$ et
+$\mathrm{Ext}^1$ sont les ordinaires et dont le $\mathrm{Ext}^2$ classe les
+champs de Picard non nécessairement stricts. Cette identification est la
+nôtre. Sur la page, l'exposant du premier « $\mathrm{Ext}$ » ressemble à un
+1 ; l'encadrement $0 \leqslant i \leqslant 1$ demande $i$, et c'est ce qu'on
+lit.} Les champs de Picard \emph{stricts} forment une sous-$2$-catégorie de
+Picard pleine, associée à $\tau_{\leqslant 2}\,\mathrm{RHom}(M,N)$ : le
+groupe $\mathrm{Ext}^2(M,N)$ classe les objets à équivalence près,
+$\mathrm{Ext}^1(M,N)$ les automorphismes de l'objet nul à isomorphisme près,
+$\mathrm{Ext}^0(M,N)$ les automorphismes de l'automorphisme identique de
+celui-ci. Il n'a pas, dit-il, d'interprétation géométrique de
+$\tau_{\leqslant n}\,\mathrm{RHom}(M,N)$ pour $n > 2$, mais il faut la
+chercher du côté des $n$-champs de Picard.\footnote{En termes
+d'aujourd'hui, et c'est notre commentaire : $\tau_{\leqslant n}\,
+\mathrm{RHom}(M,N)$ est la $n$-catégorie de Picard stricte des morphismes
+de $HM$ dans $B^{n-1}HN$ dans les faisceaux de $H\mathbb{Z}$-modules, et
+c'est bien un objet de la famille qu'il annonce.}
+
+\emph{3) Gr-champs liés par $(G,N)$.} Soit $G$ un faisceau de groupes sur
+$X$ opérant sur un faisceau abélien $N$. Les champs en Gr-catégories sur
+$X$ liés par $(G,N)$ --- $\pi_0 = G$, $\pi_1 = N$, avec l'action donnée ---
+forment une $2$-catégorie de Picard, d'invariants
+\[
+\pi_0 = H^3(B_G/X, N), \qquad \pi_1 = H^2(B_G/X, N), \qquad \pi_2 = Z^1(G,N),
+\]
+où $B_G/X$ est le topos classifiant de $G$ au-dessus de $X$ et $Z^1(G,N)$
+le groupe des $1$-cocycles (homomorphismes croisés). Il laisse à Breen le
+soin de deviner le complexe tronqué qui la décrit.\footnote{Notre réponse,
+dans le cas d'un groupe discret $G$ sur un point : le complexe des cochaînes
+inhomogènes privé de son degré $0$ et tronqué en degré $3$,
+$C^1(G,N) \to C^2(G,N) \to Z^3(G,N)$. Supprimer $C^0$ remplace $H^1$ par
+$Z^1$, ce qui est exactement l'invariant $\pi_2$ de la page :
+l'automorphisme d'un foncteur monoïdal qui induit l'identité sur $G$ et sur
+$N$ est une famille $u_x \in N$ avec $u_{xy} = u_x + x\cdot u_y$, sans
+quotient ultérieur. La version faisceautique remplace les cochaînes par
+celles du classifiant simplicial de $G$ au-dessus de $X$. La lettre à
+Deligne citée ici n'est pas dans le dossier.}
+
+\emph{4) Algèbres d'Azumaya.} Sur un topos localement annelé $X$, les
+Algèbres d'Azumaya forment une $2$-catégorie de Picard « de Brauer » : la
+catégorie des morphismes $A \to B$ est celle des trivialisations
+$(E,\varphi)$ de $A^{\circ}\otimes B$, avec $E$ un Module localement libre
+et $\varphi : \underline{\mathrm{End}}(E) \xrightarrow{\sim} A^{\circ}\otimes
+B$ --- ce qu'on appelle aujourd'hui une équivalence de Morita ---, le
+produit est le produit tensoriel et l'inverse l'algèbre opposée. En
+associant à chaque algèbre la gerbe de ses trivialisations, on obtient un
+$2$-foncteur monoïdal vers la $2$-catégorie de Picard des $\mathbb{G}_m$-gerbes, qui
+est $2$-fidèle (pleinement fidèle sur les catégories de morphismes) ; d'où
+les invariants
+\[
+\pi_0 = H^2(X,\mathbb{G}_m)_{\mathrm{Br}}, \qquad \pi_1 = H^1(X,\mathbb{G}_m) = \mathrm{Pic}(X), \qquad \pi_2 = H^0(X,\mathbb{G}_m),
+\]
+où $H^2(X,\mathbb{G}_m)_{\mathrm{Br}}$ est le sous-groupe des classes qui
+proviennent d'algèbres d'Azumaya. Formées sur les objets variables de $X$,
+ces $2$-catégories font une $2$-catégorie de Picard fibrée qui n'est « pas
+tout à fait un $2$-champ (whatever that means) » : la condition de
+$2$-recollement doit faillir, sans quoi il n'y aurait pas d'indice
+$\mathrm{Br}$.\footnote{L'argument est juste et se dit ainsi : le
+$2$-champ associé est celui de toutes les $\mathbb{G}_m$-gerbes, puisque
+toute gerbe est localement triviale, c'est-à-dire localement celle de
+$\mathcal{O}_X$ ; si le préchamp était déjà un $2$-champ, toute classe de
+$H^2$ viendrait d'une algèbre. La comparaison du groupe de Brauer et de
+$H^2(X,\mathbb{G}_m)_{\mathrm{tors}}$ est sa question de \emph{Le groupe de
+Brauer II} ; l'égalité est connue pour les schémas munis d'un faisceau
+ample (Gabber, puis de Jong, 2003). Notre commentaire : c'est en admettant
+des algèbres d'Azumaya \emph{dérivées} que Toën (\emph{Derived Azumaya
+algebras and generators for twisted derived categories}, Invent. Math.,
+2012) obtient un objet qui recolle et atteint tout $H^2(X,\mathbb{G}_m)$
+pour les schémas quasi compacts et quasi séparés --- ce qui est, à la
+lettre, le défaut de $2$-recollement que la page constate, réparé en
+élargissant la classe d'objets.}
+
+\pagerange{40}{42}
+\subsection*{App.~2 : les $n$-champs et l'algèbre homologique non commutative (pages 40 à 42)}
+
+Les $n$-catégories de Picard strictes, qui « s'imposent pas à pas » dans un
+contexte commutatif, donnent une interprétation géométrique correcte des
+complexes tronqués à l'ordre $n$ en tant qu'objets de catégories dérivées,
+donc, à la limite sur $n$, des complexes tout court. D'où l'idée « naïve »
+qu'il propose : les « complexes non commutatifs », objets fantômes d'une
+algèbre homologique non commutative, seraient ce qui reste d'une
+$n$-catégorie de Picard quand on oublie sa structure de Picard --- la
+$n$-catégorie elle-même --- et, sur un topos, les $n$-champs.\footnote{C'est
+exactement ce que l'on fait aujourd'hui, et c'est notre commentaire : un
+complexe connectif à quasi-isomorphisme près est un $\infty$-groupoïde
+muni d'une structure de $H\mathbb{Z}$-module, et oublier cette structure
+laisse un objet de $\mathcal{S}$, ou, sur un topos, un faisceau d'espaces.
+Le foncteur d'oubli est celui de Dold--Kan suivi de l'oubli de la
+structure de groupe simplicial.}
+
+L'idée, dit-il, est d'abord venue d'ailleurs : des théorèmes de Lefschetz
+« faibles » en cohomologie étale à coefficients discrets, pour une variété
+projective et toute section hyperplane, ou une variété quasi projective et
+presque toute section hyperplane, sous les hypothèses de profondeur
+cohomologique les plus naturelles. Dans le cas commutatif, la dualité
+indique les meilleurs énoncés possibles (exposé de Mme Raynaud dans SGA~2),
+mais seulement pour des coefficients premiers aux caractéristiques ; des
+démonstrations géométriques directes donnaient des énoncés voisins pour le
+$\pi_0$ et le $\pi_1$ sans cette restriction, du moins dans le cas propre.
+Les meilleurs énoncés, conjecturés dans SGA~2, ont été démontrés par
+Michèle Raynaud dans sa thèse. Le point est que ces énoncés se formulent le
+plus naturellement en termes de $1$-champs sur le site étale, la notion de
+profondeur $\geqslant i$ ($i = 1,2,3$) aussi, et qu'on ne semble pas pouvoir
+démontrer, par exemple, la bijectivité $\pi_1(Y)\to\pi_1(X)$ pour une section
+hyperplane $Y$ avec le seul formalisme du $H^0$ et du $H^1$ non abéliens de
+Giraud : il faut les trois théorèmes de changement de base --- propre, lisse,
+et « propreté cohomologique générique » --- pour les $1$-champs de torsion
+eux-mêmes.\footnote{Page 41. Le troisième énoncé dit : pour $f : X \to S$ de
+type fini, $S$ intègre, il existe un ouvert non vide $U$ de $S$ tel que la
+formule de changement de base vaille pour \emph{tout} changement de base se
+factorisant par $U$ (la frappe porte « $u$ »). Pour le changement de base
+lisse et le troisième, il faut des faisceaux d'automorphismes premiers aux
+caractéristiques, et une hypothèse de constructibilité pour le troisième ;
+ils ne servent que dans la version générique du théorème. Il croit, sans en
+être sûr, que Giraud démontre les deux premiers, peut-être le troisième,
+pour les $1$-champs.} Le contexte naturel des théorèmes de changement de
+base et de Lefschetz, et de la profondeur, doit donc être celui des
+$n$-champs, et il ne s'agira pas d'une « jonglerie purement formelle » : on
+sera aussitôt soumis à des tests d'utilisabilité sérieux.
+
+Il propose enfin d'expliciter les ingrédients d'une telle algèbre, en
+rappelant que même l'algèbre homologique commutative n'est pas dans un état
+satisfaisant, puisqu'on ne sait pas quelle est « la bonne notion de catégorie
+triangulée » : on fait de la prose, comme Monsieur Jourdain, sans se
+demander quelles structures portent les catégories de complexes.\footnote{Les
+réponses qu'on donne aujourd'hui à cette question sont les catégories
+triangulées munies d'un enrichissement différentiel gradué (Bondal--Kapranov,
+1990), les $\infty$-catégories stables (Lurie, \emph{Higher Algebra},
+chapitre 1) et les dérivateurs, dont \emph{Pursuing Stacks} amorce la
+théorie (partie IX du plan de la page 2). Le commentaire est le nôtre ; les
+appels (*) et (4) de ce passage sont ajoutés à la main, et un appel marginal
+est lu avec doute « (24) ».}
+
+\pagerange{42}{45}
+\subsection*{App.~3 : les $n$-groupoïdes comme types d'homotopie tronqués (pages 42 à 45)}
+
+C'est le post-scriptum, écrit pour « mettre en appétit », et c'est le cœur
+des trois lettres. Le « yoga » est le suivant : une $n$-catégorie en
+groupoïdes, à $n$-équivalence près, « est essentiellement la même chose »
+qu'un ensemble simplicial à homotopie près dont on néglige les $\pi_i$ pour
+$i \geqslant n+1$.
+
+\emph{Le $n$-groupoïde fondamental d'un complexe de Kan.} À un ensemble
+simplicial de Kan $K_\bullet$, il associe une $n$-catégorie
+$C_n(K_\bullet)$ : ses $0$-objets sont les $0$-simplexes, ses $1$-flèches les
+chemins, ses $2$-flèches les homotopies entre chemins à extrémités fixes, et
+ainsi de suite jusqu'aux $n$-flèches, qui sont les homotopies prises
+\emph{à homotopie près}. La composition est associative à homotopie près
+seulement, de sorte que l'objet obtenu n'est pas strict ; et c'est
+précisément la mise au point de ce yoga qui pourrait servir de fil d'Ariane
+pour définir les $n$-catégories non strictes, leurs $n$-foncteurs et leurs
+$n$-équivalences, à côté du yoga inductif « une $n$-catégorie est une
+catégorie dont les $\mathrm{Hom}$ sont des $(n-1)$-catégories ». La
+construction est fonctorielle, et même $n$-fonctorielle en $K_\bullet$.\footnote{Notre commentaire sur le caractère non strict, qui est le point
+technique. Les $n$-groupoïdes \emph{stricts} ne suffisent pas : Simpson
+(\emph{Homotopy types of strict 3-groupoids}, 1998) a montré qu'aucun
+$3$-groupoïde strict n'a le $3$-type de $S^2$, ce qui invalide l'énoncé
+contraire de Kapranov et Voevodsky (1991). Pour des modèles non stricts,
+l'équivalence entre $n$-groupoïdes et $n$-types est un théorème dans
+plusieurs cadres --- les $n$-groupoïdes de Tamsamani (1999), les complexes
+de Kan $n$-tronqués, où elle est presque tautologique --- et elle est
+restée longtemps ouverte pour les $\infty$-groupoïdes globulaires que
+Grothendieck définira dans \emph{Pursuing Stacks} ; nous ne garantissons
+pas l'état actuel de ce dernier cas. Page 43, la frappe porte « $K!$ » pour
+$K'_\bullet$, et la phrase sur la $n$-catégorie des ensembles simpliciaux
+se termine par « quel que soit $N$ ».}
+
+\emph{Les groupes d'homotopie.} $C_n(K_\bullet)$ est un $n$-groupoïde : toute
+$i$-flèche, $1 \leqslant i \leqslant n$, y est une équivalence. Pour un
+$n$-groupoïde $C$ et un objet $x$, on pose : $\pi_0(C)$ l'ensemble des
+classes d'objets ; $\pi_1(C,x)$ le groupe des classes de $1$-flèches
+$x \to x$ ; $\pi_2(C,x)$ celui des classes de $2$-flèches
+$1_x \Rightarrow 1_x$, qui est commutatif, comme les suivants ; et ainsi de
+suite jusqu'à $\pi_n$. Ce sont des systèmes locaux sur $\pi_0$, et il y a
+des isomorphismes canoniques $\pi_i(K_\bullet,x) \simeq \pi_i(C_n(K_\bullet),x)$
+pour $0 \leqslant i \leqslant n$. Par suite, \emph{une application
+simpliciale $f : K_\bullet \to K'_\bullet$ induit une $n$-équivalence
+$C_n(K_\bullet) \to C_n(K'_\bullet)$ si et seulement si elle induit une
+bijection sur les $\pi_i$ pour $0 \leqslant i \leqslant n$, en tout point
+base.}
+
+Il hésite alors : il « serait plus heureux » de pouvoir ajouter « et une
+surjection sur $\pi_{n+1}$ », condition qui lui paraît nécessaire pour
+identifier la localisée des ensembles simpliciaux selon ces flèches à celle
+des $n$-catégories selon les $n$-équivalences.\footnote{L'hésitation n'a pas
+lieu d'être, et c'est notre correction. Les applications qui induisent une
+bijection sur les $\pi_i$, $i \leqslant n$, sont exactement celles que la
+troncature de Postnikov $\tau_{\leqslant n}$ rend inversibles ; la localisée
+des ensembles simpliciaux selon elles est équivalente à la catégorie
+homotopique des $n$-types, puisque $K_\bullet \to \tau_{\leqslant n}K_\bullet$
+est l'une d'elles et qu'entre $n$-types elles sont des équivalences faibles.
+Elle est donc équivalente à celle des $n$-groupoïdes dès qu'on dispose de
+l'hypothèse d'homotopie. La condition de surjectivité sur $\pi_{n+1}$ définit
+autre chose : les applications $(n+1)$-connexes, qui reviendront page 48, où
+le même décalage d'un degré se produit. Page 44, « $i = n+1$ » est frappé
+« $N+1$ », le $N$ surchargé en $n$.} Il ajoute que la troncature homotopique
+(tuer les $\pi_i$ pour $i > n$) se traduit par l'opération qui conserve les
+$i$-flèches pour $i < n$ et remplace les $n$-flèches par leurs classes à
+équivalence près, et l'inclusion des $n$-types dans les $N$-types par l'ajout
+d'identités en dimensions $n+1$ à $N$ --- ce qui est exact, la troncature
+étant adjointe à gauche de l'inclusion.
+
+\emph{Les $\infty$-catégories.} Sauf erreur, dit-il, la localisée des
+$\infty$-catégories (en groupoïdes) selon les $\infty$-équivalences est la
+catégorie homotopique, « ou du moins une sorte de complétée de
+celle-là ».\footnote{Notre commentaire : pour les espaces, la tour de
+Postnikov converge et il n'y a pas de complétion à faire ; la réserve devient
+pertinente dans un topos, où un faisceau d'espaces n'est pas toujours limite
+de ses tronqués --- c'est la distinction entre un $\infty$-topos et son
+hypercomplété (Lurie, \emph{Higher Topos Theory}, § 6.5).} Une
+$\infty$-catégorie de Picard stricte s'interprète comme un complexe de
+chaînes regardé dans une catégorie dérivée, ce qu'il faut relier à la
+théorie de Dold--Puppe, qui interprète ces complexes comme des groupes
+abéliens simpliciaux.\footnote{L'énoncé strict correspondant --- les
+groupes abéliens dans les $\omega$-groupoïdes stricts sont les complexes de
+chaînes en degrés positifs --- est dû, à notre connaissance, à Brown et
+Higgins (1981) et Bourn (1990).}
+
+\emph{Le dictionnaire.} Pour se donner confiance, il traduit des
+constructions familières. L'espace des lacets $\Omega(K_\bullet,x)$
+correspond à la $(n-1)$-catégorie $\underline{\mathrm{Hom}}(x,x)$. L'espace
+simplicial des applications $\mathrm{Hom}_\bullet(K_\bullet,K'_\bullet)$
+correspond à la $n$-catégorie $\underline{\mathrm{Hom}}(C,C')$. La fibre
+homotopique d'une application correspond au produit fibré homotopique
+$C \times_{C'} \mathrm{pt}$ dans les $n$-groupoïdes.\footnote{La page dit
+« produit $n$-fibré », puis une main corrige en « $(n+1)$ » sans que la
+portée de la correction soit sûre. La correction est juste : le produit
+fibré homotopique de $n$-catégories est une limite dans la
+$(n+1)$-catégorie qu'elles forment, comme le « produit $2$-fibré » de
+catégories de Giraud est celui des $1$-catégories.} Les espaces
+$K(\pi,n)$ sont les $n$-gerbes liées par $\pi$. Il ne voit pas de candidat
+pour la suspension.\footnote{Il n'y en a pas à l'intérieur des
+$n$-groupoïdes : la suspension d'un $n$-type n'est pas un $n$-type. Ce qui
+existe est $\tau_{\leqslant n}\Sigma$, la somme amalgamée
+$\mathrm{pt}\sqcup_C\mathrm{pt}$ calculée dans les $n$-groupoïdes.
+Commentaire nôtre.} Enfin le dévissage de Postnikov : un $n$-groupoïde
+s'interprète comme son tronqué $(n-1)$-groupoïde muni d'une $n$-gerbe sur
+le topos classifiant de celui-ci, liée par $\pi_n$ tordu par l'action de
+$\pi_1$. C'est la description actuelle de l'étage
+$\tau_{\leqslant n}K \to \tau_{\leqslant n-1}K$ comme fibration de fibre
+$K(\pi_n,n)$, classée par un invariant de Postnikov
+$k_n \in H^{n+1}(\tau_{\leqslant n-1}K;\pi_n)$ à coefficients locaux.
+
+\pagerange{45}{46}
+\subsection*{App.~4 : relativisation sur un topos (pages 45 et 46)}
+
+Tout ce yoga doit être relativisé au-dessus d'un topos $X$ : il faudrait
+identifier, dans une certaine mesure, l'algèbre homotopique des faisceaux
+simpliciaux sur $X$ et l'algèbre « catégorique » des $n$-champs en
+groupoïdes, $0 \leqslant n \leqslant \infty$.\footnote{C'est ce que
+réalise aujourd'hui la structure de modèles de Jardine sur les faisceaux
+simpliciaux (1987), dont la localisée est l'hypercomplété de
+l'$\infty$-topos $\mathrm{Sh}(X;\mathcal{S})$ (Lurie, \emph{Higher Topos
+Theory}, § 6.5.2). Les faisceaux simpliciaux d'Illusie et la théorie
+homotopique abstraite de K.~Brown (1973) sont antérieurs à la lettre, que ni
+l'un ni l'autre ne cite. Commentaire nôtre.} L'image inverse des faisceaux
+simpliciaux, qui est évidente, doit correspondre à l'image inverse plus
+subtile des $n$-champs ; et l'image directe des $n$-champs, qui est évidente,
+à une image directe dérivée des faisceaux simpliciaux --- « on hésite s'il
+faut mettre $Lf_*$ ou $Rf_*$ ».\footnote{C'est $Rf_*$ : $f_*$ est adjoint
+à droite de $f^*$, et on le dérive à droite, en remplaçant le faisceau
+simplicial par un remplacement fibrant (localement de Kan et satisfaisant
+la descente). Sur la page, « $Lf_*(K_\bullet)$ » est écrit au-dessus de
+« d'un faisceau », qu'un trait semble barrer en partie.} Les dévissages de
+Postnikov doivent avoir une interprétation simple en termes de champs ; il
+rappelle la remarque de Giraud qu'un $1$-champ en groupoïdes équivaut à la
+donnée de son faisceau $\pi_0$ et d'une gerbe sur le topos induit
+$X_{/\pi_0}$, gerbe dont le lien « devrait être noté $\pi_1$ ». Cela vaut
+pour tout $n$ : un $n$-champ $F$ est un objet connexe de l'$\infty$-topos
+$\mathrm{Sh}(X;\mathcal{S})_{/\pi_0 F}$.\footnote{Notre commentaire. La
+traduction des $1$-champs en topos classifiants au-dessus de $X$ est, dit-il,
+traitée par Giraud sous le nom d'« extensions » du topos. Après « Giraud »
+la frappe porte un « x » en indice, peut-être un appel de note.}
+
+\emph{Remords.} Mais il ne sait pas définir à vue de nez le topos classifiant
+d'un $n$-champ pour $n \geqslant 2$ --- il suffirait de savoir le faire pour
+une $n$-gerbe liée par un faisceau abélien $\pi_n$ --- et ne sait donc pas
+décrire le dévissage de Postnikov en termes de $n$-champs au-delà de
+$n \leqslant 2$. C'est lié à la définition directe de la cohomologie d'un
+$n$-groupoïde, qui devrait redonner celle de l'ensemble simplicial
+correspondant : peut-on le faire par un nerf ? Cas typique : trouver, pour un
+groupe commutatif $\pi$, un topos canonique et fonctoriel en $\pi$ qui ait
+le type d'homotopie de $K(\pi,n)$. « On frémit à l'idée que les topos
+pourraient ne pas faire l'affaire, et qu'il y faille des “$n$-topos” !!
+(J'espère bien que ces animaux n'existent pas …) »\footnote{Notre
+commentaire. Il y a deux questions, et elles ont deux réponses. \emph{Le
+type d'homotopie} : des topos ordinaires suffisent ; le topos des
+préfaisceaux sur la catégorie des simplexes d'un ensemble simplicial $K$ a
+le type d'homotopie faible de $K$, ce qui donne, avec un modèle simplicial
+fonctoriel de $K(\pi,n)$, le topos canonique demandé (voir Moerdijk,
+\emph{Classifying spaces and classifying topoi}, LNM 1616, 1995, et
+Illusie). C'est d'ailleurs le principe des « catégories test » de
+\emph{Pursuing Stacks}. \emph{La propriété universelle} : pour qu'un objet
+classifie les $n$-gerbes comme un topos classifiant classe les torseurs, il
+faut des $\infty$-topos (Toën--Vezzosi, Rezk, Lurie) ; les $n$-topos
+existent (Lurie, \emph{Higher Topos Theory}, § 6.4), et ils sont devenus le
+cadre ordinaire de ce qu'il cherchait. On y revient page 50.} Pour un
+$n$-groupoïde $C$, on dispose bien d'un nerf, et la cohomologie de $C$ à
+coefficients dans un système local est celle de ce nerf.
+
+\pagerange{46}{47}
+\subsection*{App.~5 : une « algèbre topologique » (pages 46 et 47)}
+
+L'« algèbre homologique non commutative » qu'il suggère serait l'étude
+parallèle de quatre familles de notions et de leurs relations : a) espaces
+topologiques et topos ; b) ensembles et faisceaux simpliciaux ; c)
+$n$-catégories, notamment $n$-groupoïdes, et $n$-champs ; d) complexes de
+groupes et de faisceaux abéliens. C'est « de l'algèbre avec la présence
+constante de motivations provenant de l'intuition topologique ». Il lui
+propose le nom d'« algèbre topologique », l'usage courant de ce terme
+n'étant guère qu'un « bric à brac » d'anneaux, de corps et de groupes
+topologiques, et rappelle que Serre a bien donné un sens nouveau à
+« géométrie analytique » sans rencontrer de résistance.\footnote{Le nom n'a
+pas pris. Ce domaine s'appelle aujourd'hui, selon l'angle, algèbre
+homotopique, théorie des catégories supérieures ou théorie des
+$\infty$-topos. La correction manuscrite de la phrase de la page 47 est lue
+avec doute.} La lettre se termine par « Re-salut, et au plaisir de te
+lire. A.G. »
+
+\pagerange{48}{55}
+\section*{Deuxième lettre à Breen, Villecun, 17 février 1975 (pages 48 à 55)}
+
+La lettre, en français, est une copie dactylographiée par Breen, dont
+l'intitulé « Transcription d'une lettre manuscrite de A. Grothendieck » est
+barré ; les lettres cursives y sont tracées à la main. Elle commence : « Encore
+un “afterthought” à une lettre-fleuve sur le yoga homotopique ».
+
+\pagerange{48}{51}
+\subsection*{App.~6 : le $n$-groupoïde fondamental d'un topos (pages 48 à 51)}
+
+\emph{Le pro-type d'homotopie.} À un topos $X$ on associe canoniquement un
+pro-ensemble simplicial, donc un pro-type d'homotopie (Artin--Mazur,
+\emph{Etale homotopy}, LNM 100, 1969). Si $X$ est « localement
+homotopiquement trivial », ce pro-objet est essentiellement constant et $X$
+a un type d'homotopie ordinaire ; s'il l'est en dimension $\leqslant n$, il
+a un type d'homotopie $n$-tronqué.\footnote{Ce pro-type d'homotopie est
+aujourd'hui la \emph{forme} (shape) de l'$\infty$-topos associé (Lurie,
+\emph{Higher Topos Theory}, § 7.1.6), et « localement homotopiquement
+trivial » correspond à « localement de forme constante ».}
+
+\emph{Trois critères, et leur décalage.} Pour un morphisme de topos
+$f : X \to Y$, il cite le critère cohomologique d'Artin--Mazur : $f$ est une
+« équivalence d'homotopie en dim $\leqslant n$ » si $H^i(Y,F)\to
+H^i(X,f^*F)$ est bijectif pour $i \leqslant n$ et tout faisceau de groupes
+localement constant $F$, avec $i \leqslant 1$ si $F$ n'est pas
+commutatif. Il le traduit en termes de $n$-gerbes localement constantes,
+puis affirme qu'il équivaut encore à chacun des deux critères suivants :
+
+\begin{quote}
+(A) pour tout $n$-champ localement constant $\mathcal{F}$ sur $Y$, le
+$n$-foncteur $\mathcal{F}(Y) \to (f^*\mathcal{F})(X)$ est une
+$n$-équivalence ;
+
+(B) le $n$-foncteur $\mathcal{F}\mapsto f^*\mathcal{F}$, de la $n$-catégorie
+des $(n-1)$-champs localement constants sur $Y$ dans celle des
+$(n-1)$-champs localement constants sur $X$, est une $n$-équivalence.
+\end{quote}
+
+Les trois énoncés sont justes chacun pour lui-même, mais ils ne sont pas
+équivalents : ils diffèrent d'un degré. Exactement, pour $X$ et $Y$
+localement de forme constante et $f$ bijectif sur $\pi_0$ et
+$\pi_1$ :\footnote{Correction nôtre ; la page affirme l'équivalence des
+trois (« il est certainement vrai que ceci équivaut encore … »). La flèche
+$\mathcal{F}(Y)\to\mathcal{F}(X)$ de la page est tracée à la main, avec une
+boucle à l'origine, peut-être un $\sim$, et le critère par les gerbes porte
+la clause « pour tout tel $\mathcal{F}$ et $i \leqslant n$ », qu'on lit
+comme on le dit ici. Les deux derniers points se déduisent de ce que les
+applications $(n+1)$-connexes sont exactement celles qui sont orthogonales
+à gauche aux applications $n$-tronquées : les sections d'un système local à
+fibres $n$-tronquées se relèvent alors de façon unique. Les conditions sur
+les coefficients doivent s'entendre à coefficients locaux.}
+\begin{itemize}
+  \item le critère cohomologique sous la forme citée (bijection sur $H^i$
+  pour $i \leqslant n$) caractérise les $f$ \emph{$n$-connexes} : bijection
+  sur $\pi_i$ pour $i < n$, surjection sur $\pi_n$ ;
+  \item le critère par les $n$-gerbes, \emph{à condition d'y inclure les
+  gerbes non neutres}, et le critère (A) caractérisent tous deux les $f$
+  \emph{$(n+1)$-connexes} : bijection sur $\pi_i$ pour $i \leqslant n$,
+  surjection sur $\pi_{n+1}$ ; cohomologiquement, bijection sur $H^i$ pour
+  $i \leqslant n$ et \emph{injection} sur $H^{n+1}$ --- c'est cette
+  injectivité qu'exprime le fait qu'une $n$-gerbe sur $Y$ dont l'image
+  inverse a une section en a déjà une ;
+  \item le critère (B) caractérise exactement les $f$ qui induisent une
+  bijection sur $\pi_i$ pour $i \leqslant n$, c'est-à-dire tels que
+  $\tau_{\leqslant n}f$ soit une équivalence : la pleine fidélité de $f^*$
+  est la $n$-connexité, l'essentielle surjectivité ajoute l'injectivité sur
+  $\pi_n$.
+\end{itemize}
+On a donc (A) $\Rightarrow$ (B) $\Rightarrow$ critère cohomologique cité,
+et aucune réciproque. Deux exemples le montrent. L'inclusion d'un point
+dans un espace $K(A,n+1)$, $A \neq 0$, vérifie (B) mais non (A) : la
+fibration des chemins, de fibre $K(A,n)$, est un $n$-champ localement
+constant qui a des sections sur le point et n'en a pas sur $K(A,n+1)$.
+L'inclusion $S^2\vee S^2 \to S^2\times S^2$ induit des bijections sur les
+$H^i$, $i \leqslant 3$, pour tout groupe de coefficients, mais non sur
+$\pi_3$ (qui est $\mathbb{Z}^3$ d'un côté, $\mathbb{Z}^2$ de l'autre) : elle
+vérifie le critère cité pour $n = 3$, mais ni (B) ni (A).
+
+Ce que la lettre veut en tirer reste vrai, et c'est (B) qui le porte : les
+constructions qu'on peut faire sur $X$ en termes de $(n-1)$-champs
+localement constants ne dépendent que de son type d'homotopie
+$n$-tronqué, et le déterminent.
+
+\emph{Le $n$-groupoïde fondamental.} Lorsque $X$ est localement
+homotopiquement trivial en dimension $\leqslant n$, son type d'homotopie
+$n$-tronqué s'interprète comme un $n$-groupoïde, défini à $n$-équivalence
+près, qu'il propose d'appeler le \emph{$n$-groupoïde fondamental} de $X$ et
+de noter $\Pi_n(X)$ ; et
+
+\begin{quote}
+(C) les $(n-1)$-champs localement constants sur $X$ s'identifient aux
+$n$-foncteurs de $\Pi_n(X)$ dans la $n$-catégorie $((n-1)\text{-}\mathrm{Cat})$
+de toutes les $(n-1)$-catégories.
+\end{quote}
+
+Pour $n = 1$ c'est la classification des revêtements par le
+groupoïde fondamental, « la théorie de Poincaré ». $\Pi_n(X)$ détermine les
+$\pi_i(X)$, $i \leqslant n$, et les invariants de Postnikov jusqu'à celui
+qui vit dans $H^{n+1}(\Pi_{n-1}(X),\pi_n)$. Pour un topos quelconque, il
+espère un pro-$n$-groupoïde ; c'est fait pour $n = 1$ et $X$ connexe, et
+traité « in extenso » dans SGA~3 pour le topos étale d'un schéma, à propos de
+la classification des tores.\footnote{Notre commentaire. L'énoncé (C) est
+aujourd'hui un théorème : pour un $\infty$-topos localement de forme
+constante, les faisceaux localement constants à valeurs dans une
+$\infty$-catégorie $\mathcal{D}$ forment l'$\infty$-catégorie
+$\mathrm{Fun}(\Pi_\infty(X),\mathcal{D})$ (Lurie, \emph{Higher Algebra},
+appendice A) ; si $\mathcal{D}$ est formée de $(n-1)$-catégories, un tel
+foncteur ne voit que $\Pi_n(X)$, puisqu'il se factorise par le
+sous-groupoïde maximal de $\mathcal{D}$, qui est $n$-tronqué. Le cas d'un
+$\infty$-topos quelconque, avec un pro-groupoïde, est la « théorie de Galois
+supérieure » de Hoyois (J. Pure Appl. Algebra, 2018). Sur la page, un
+crochet hachuré marqué « (C) » encadre l'énoncé. La lettre écrit ce
+paragraphe avec $(n-1)$-champs « localement constants », et
+$((n-1)\text{-}\mathrm{Cat})$ comme but ; c'est la forme juste, et on la
+garde.}
+
+\emph{Le $n$-topos classifiant.} Pour $n = 1$, on récupère le groupoïde
+$\mathcal{C}_1 = \Pi_1(X)$ à partir du topos « multigaloisien »
+$\underline{\mathrm{Hom}}(\mathcal{C}_1,(\mathrm{Ens}))$ des systèmes locaux,
+qui est le topos classifiant de $\mathcal{C}_1$, comme la catégorie de ses
+foncteurs fibres, c'est-à-dire de ses points.\footnote{La page dit « la
+catégorie opposée à la catégorie des points de ce topos » ; pour un groupoïde
+la différence est sans objet, l'inversion des flèches identifiant un
+groupoïde à son opposé.} Pour élucider (B), il faudrait de même récupérer
+$\mathcal{C}_n$ à partir de la $n$-catégorie
+\[
+\mathcal{T}_n = \underline{\mathrm{Hom}}_n\bigl(\mathcal{C}_n,((n-1)\text{-}\mathrm{Cat})\bigr)
+\]
+des $(n-1)$-systèmes locaux : $\mathcal{C}_n$ devrait être la
+$n$-catégorie des « $n$-foncteurs fibres » sur $\mathcal{T}_n$, ayant des
+propriétés d'exactitude analogues à celles d'une image inverse de topos
+(commuter aux limites inductives quelconques et aux limites projectives
+finies). « C'est ici que se matérialise la peur […] qu'on finisse par tomber
+sur la notion de $n$-topos et morphismes de tels ! » --- $\mathcal{T}_n$
+serait un $n$-topos, $((n-1)\text{-}\mathrm{Cat})$ le $n$-topos ponctuel, et
+$\mathcal{C}_n$ la $n$-catégorie des $n$-points de $\mathcal{T}_n$.
+« Brr ! »\footnote{Les cursives $\mathcal{C}_n$ et $\mathcal{T}_n$ se
+ressemblent sur la page et ont été départagées par le sens. Notre
+commentaire : c'est exactement ce qui est vrai. Pour un $\infty$-groupoïde
+$C$, l'$\infty$-topos $\mathcal{S}_{/C} \simeq \mathrm{Fun}(C,\mathcal{S})$
+est son $\infty$-topos classifiant, et ses points --- les foncteurs exacts
+à gauche qui commutent aux colimites vers $\mathcal{S}$ --- forment un
+$\infty$-groupoïde équivalent à $C$, puisqu'un ind-objet d'un groupoïde est
+essentiellement constant. Sa version $n$-tronquée est un $n$-topos au sens
+de Lurie.}
+
+Peut-on se contenter d'un topos ordinaire ? Le seul problème universel qu'il
+voie est celui-ci : trouver un topos $\mathcal{B}$ et un
+$\varphi : \Pi_n(\mathcal{B}) \to \mathcal{C}_n$ tels que, pour tout topos
+$T$, le foncteur
+\[
+\underline{\mathrm{Hom}}_{(\mathrm{Top})}(T,\mathcal{B}) \longrightarrow
+\tau_1\,\underline{\mathrm{Hom}}\bigl(\Pi_n(T),\mathcal{C}_n\bigr), \qquad
+u \longmapsto \varphi\circ\Pi_n(u),
+\]
+soit une équivalence. Pour $n = 1$, le topos classifiant usuel convient ;
+pour $n = 2$, il doute que le problème ait une solution.\footnote{Sur la
+page, l'étiquette manuscrite de la flèche porte « $\pi_n(u)$ » pour
+$\Pi_n(u)$ ; une main a écrit en marge, en face de ces lignes, « cela semble
+suspect ! ». Notre commentaire : la version qui est vraie remplace le topos
+ordinaire par l'$\infty$-topos $\mathcal{S}_{/\mathcal{C}_n}$ et la
+troncature $\tau_1$ par l'$\infty$-groupoïde tout entier : les morphismes
+géométriques $T \to \mathcal{S}_{/C}$ sont les sections globales sur $T$ du
+faisceau constant de valeur $C$, c'est-à-dire, par définition de la forme,
+les applications de $\Pi_\infty(T)$ dans $C$. Nous ne tranchons pas si le
+problème posé avec des topos ordinaires et $\tau_1$ a une solution pour
+$n = 2$.}
+
+Il rattache ce doute à un autre : le théorème de van Kampen, qui dit que
+$T \mapsto \Pi_1(T)$ transforme sommes amalgamées en sommes amalgamées, ne
+serait « sans doute plus vrai » pour $\Pi_2$. Si $T$ est réunion de deux
+fermés $T_1$ et $T_2$, il ne serait plus vrai qu'un $1$-champ localement
+constant sur $T$ équivaille à la donnée de tels champs sur $T_1$ et $T_2$
+et d'une équivalence entre leurs restrictions à $T_1\cap T_2$, alors que
+l'énoncé analogue pour les revêtements est correct.\footnote{Correction
+nôtre : l'énoncé de recollement est vrai, et van Kampen vaut pour $\Pi_n$
+à condition de prendre les sommes amalgamées au sens homotopique. Pour un
+recouvrement par deux ouverts, c'est simplement la descente des champs (il
+n'y a pas de condition de cocycle non triviale avec deux ouverts) ; pour
+deux fermés, il faut une hypothèse de régularité --- par exemple deux
+sous-complexes d'un CW-complexe, ou des fermés admettant des voisinages qui
+se rétractent sur eux par déformation. Sous ces hypothèses, la forme de $T$
+est la somme amalgamée homotopique de celles de $T_1$ et $T_2$ au-dessus de
+$T_1\cap T_2$ (Lurie, \emph{Higher Algebra}, A.3.1, pour les ouverts), et
+$\tau_{\leqslant n}$, adjoint à gauche, la préserve : $\Pi_n$ commute aux
+sommes amalgamées homotopiques, ce qui était déjà le contenu du van Kampen
+classique pour $\Pi_1$ dès qu'on le lit $2$-catégoriquement, comme le fait la
+page (« commute aux $2$-limites inductives »). Le théorème de van Kampen
+supérieur de Brown et Higgins (1981) en est une version stricte. Sur la
+page, la phrase est marquée d'un crochet en marge.}
+
+\pagerange{51}{54}
+\subsection*{App.~7 : la cohomologie comme intégration de champs (pages 51 à 54)}
+
+\emph{L'intégration.} Si $\mathcal{C}_n = \Pi_n(X)$, $\mathcal{F}$ un
+$(n-1)$-champ localement constant sur $X$ et $e^X_{n-1}$ le $(n-1)$-champ
+final, on a
+\[
+\Gamma_X(\mathcal{F}) = \mathcal{F}(X) \simeq \underline{\mathrm{Hom}}(e^X_{n-1},\mathcal{F}),
+\]
+et, via (C), « l'intégration sur $X$ » des champs localement constants, qui
+contient la cohomologie non commutative localement constante de $X$ en
+dimension $\leqslant n-1$, devient
+$\underline{\mathrm{Hom}}(e^{\mathcal{C}_n}_{n-1},\mathcal{F})$, où
+$\mathcal{F}$ est vu comme un $n$-foncteur
+$\mathcal{C}_n \to ((n-1)\text{-}\mathrm{Cat})$ et $e^{\mathcal{C}_n}_{n-1}$
+est le $n$-foncteur constant de valeur la $(n-1)$-catégorie finale. C'est,
+en termes d'aujourd'hui, la limite du diagramme $\mathcal{F}$ indexé par
+$\Pi_n(X)$.
+
+\emph{Le cas de Picard.} Soit $\mathcal{F}$ un $n$-champ de Picard strict sur
+$X$, défini par un complexe de cochaînes de faisceaux abéliens
+$\mathcal{L}^\bullet$ concentré en degrés $0$ à $n$, à quasi-isomorphisme
+près. Alors
+\[
+H^i(X,\mathcal{L}^\bullet) \simeq \pi_{n-i}\,\Gamma_X(\mathcal{F}), \qquad 0 \leqslant i \leqslant n,
+\]
+le premier membre étant l'hypercohomologie.\footnote{L'indexation se
+vérifie ainsi : $\mathcal{F}$ correspond au complexe $\mathcal{L}^\bullet[n]$,
+concentré en degrés $-n$ à $0$, et
+$\pi_k\Gamma_X(\mathcal{F}) = H^{-k}\bigl(R\Gamma(X,\mathcal{L}^\bullet[n])\bigr)
+= H^{n-k}(X,\mathcal{L}^\bullet)$.} Pour atteindre les $H^i$ avec
+$i > n$, on regarde $\mathcal{L}^\bullet$ comme concentré en degrés $0$ à
+$N$, ce qui remplace $\mathcal{F}$ par $B^{N-n}\mathcal{F}$, où $B$ est le
+foncteur espace classifiant --- sur une $n$-catégorie de Picard stricte, il
+décale les $i$-flèches en $(i+1)$-flèches et ajoute un unique objet. D'où
+la définition, pour tout $n$-champ de Picard strict $\mathcal{F}$,
+\[
+\boxed{\;H^i(X,\mathcal{F}) = \pi_{N-i}\,\Gamma_X\bigl(B^{N-n}\mathcal{F}\bigr), \qquad N \geqslant \sup(i,n),\;}
+\]
+indépendante de $N$ grâce au morphisme canonique
+$B\,\Gamma_X(\mathcal{F}) \to \Gamma_X(B\mathcal{F})$, qui induit des
+isomorphismes sur les $\pi_j$ pour $1 \leqslant j \leqslant
+n+1$.\footnote{La page appelle ce morphisme un « morphisme canonique de
+$(n-1)$-groupoïdes » ; ce sont des $(n+1)$-groupoïdes, $B\mathcal{F}$ étant
+un $(n+1)$-champ. Il n'est pas un isomorphisme sur $\pi_0$ : le membre de
+gauche est connexe, et $\pi_0\Gamma_X(B\mathcal{F}) = H^{n+1}(X,\mathcal{F})$.
+La formule encadrée l'est sur la page ; on y a écrit $B$ pour sa cursive,
+voir les conventions.}
+
+\emph{Sans structure de Picard.} Pour un $n$-champ en groupoïdes quelconque,
+on peut encore poser $H^i(X,\mathcal{F}) = \pi_{n-i}\Gamma_X(\mathcal{F})$
+pour $0 \leqslant i \leqslant n$, pourvu qu'on se donne une section globale
+comme point base pour $i < n$ ; pour un $n$-Gr-champ, le champ classifiant
+$B\mathcal{F}$ existe et donne en outre
+\[
+H^{n+1}(X,\mathcal{F}) = \pi_0\Gamma_X(B\mathcal{F}) = \text{sections de } B\mathcal{F} \text{ à équivalence près},
+\]
+généralisation directe du $H^1$ non abélien de Giraud, classes de
+torseurs.\footnote{Le choix d'une section base est implicite sur la page ;
+sans elle, $\pi_{n-i}$ n'a pas de sens pour $n-i \geqslant 1$.} Mais pour
+former $B^2\mathcal{F}$ et $H^{n+2}$, il faut que $B\mathcal{F}$ soit
+lui-même un Gr-champ, « ce qui ne sera sans doute le cas que si
+$\mathcal{F}$ est un $n$-champ de Picard strict ».\footnote{Correction
+nôtre : il faut et il suffit que la loi de groupe de $\mathcal{F}$ soit
+tressée (structure $E_2$) pour que $B^2\mathcal{F}$ existe, et qu'elle soit
+symétrique à cohérence près (structure $E_\infty$, champ de Picard non
+nécessairement strict) pour que tous les $B^k\mathcal{F}$ existent. La
+stricte commutativité n'est pas nécessaire ; elle caractérise ceux qui
+proviennent d'un complexe de faisceaux abéliens. C'est la distinction même
+que la lettre à Deligne du dossier 134-1 mesure par un signe.}
+
+\emph{Le cas localement constant.} Si $\mathcal{F}$ est un $n$-champ
+localement constant, défini par un $(n+1)$-foncteur
+$\mathcal{C}_{n+1} \to (n\text{-catégories de Picard strictes})$, on pose
+$H^i(\mathcal{C}_{n+1},\mathcal{F}) = \pi_{n-i}\,
+\underline{\mathrm{Hom}}(e^{\mathcal{C}_{n+1}}_n,\mathcal{F})$, et on a
+$H^i(\mathcal{C}_{n+1},\mathcal{F}) \simeq H^i(X,\mathcal{F})$ pour
+$0 \leqslant i \leqslant n$, sans structure de Picard. Plus généralement,
+pour un $\infty$-groupoïde $\mathcal{C}$ et un tel foncteur,
+\[
+H^i(\mathcal{C},\mathcal{F}) = \pi_{N-i}\,\underline{\mathrm{Hom}}\bigl(e^{\mathcal{C}}_N, B^{N-n}\mathcal{F}\bigr), \qquad N \geqslant \sup(i,n),
+\]
+c'est-à-dire la cohomologie de $\mathcal{C}$ à coefficients locaux dans un
+complexe ; et, pour une simple Gr-structure,
+$H^{n+1}(\mathcal{C},\mathcal{F}) = \pi_0\,\underline{\mathrm{Hom}}(e^{\mathcal{C}}_{n+1},B\mathcal{F})$.
+Il pense que, pour $\mathcal{C} = \Pi_{n+1}(X)$, cet ensemble doit être
+encore canoniquement isomorphe à $H^{n+1}(X,\mathcal{F})$, le vérifie pour
+$n = 0$, et demande de décrire la flèche.\footnote{C'est vrai, et c'est
+notre réponse. $B\mathcal{F}$ est un système local à fibres
+$(n+1)$-tronquées défini sur $\Pi_{n+1}(X)$ ; son espace total au-dessus de
+$\Pi_{n+1}(X)$ est donc $(n+1)$-tronqué, et ses sections sur $X$ sont les
+mêmes que sur $\Pi_{n+1}(X)$, par la propriété universelle de la troncature.
+La flèche est l'image inverse le long du morphisme canonique de $X$ (de sa
+forme) vers $\Pi_{n+1}(X)$. Le cas $n = 0$ est la classification des
+torseurs sous un groupe localement constant par les revêtements.}
+
+\emph{(A$'$) et (B$'$).} Pour un $(n+1)$-foncteur
+$f_{n+1} : \mathcal{C}_{n+1} \to \mathcal{D}_{n+1}$ entre
+$(n+1)$-groupoïdes, de tronqué $f_n : \mathcal{C}_n \to \mathcal{D}_n$, la
+traduction de (A) et (B) qu'il propose est :
+
+\begin{quote}
+(A$'$) $f_n$ est une $n$-équivalence si et seulement si
+$f_n^* : \underline{\mathrm{Hom}}(\mathcal{D}_n,((n-1)\text{-}\mathrm{Cat})) \to
+\underline{\mathrm{Hom}}(\mathcal{C}_n,((n-1)\text{-}\mathrm{Cat}))$ est une
+$n$-équivalence ;
+
+(B$'$) $f_n$ est une $n$-équivalence si et seulement si, pour tout
+$n$-système local $\mathcal{F} : \mathcal{D}_{n+1} \to (n\text{-}\mathrm{Cat})$,
+le $n$-foncteur
+$\Gamma_{\mathcal{D}_{n+1}}(\mathcal{F}) \to \Gamma_{\mathcal{C}_{n+1}}(f_{n+1}^*\mathcal{F})$
+est une $n$-équivalence.
+\end{quote}
+
+(A$'$) est exact ; c'est la forme combinatoire de (B), et de la
+théorie de Galois. (B$'$) ne l'est que dans un sens : la condition sur les
+sections équivaut à ce que $f_{n+1}$ soit $(n+1)$-connexe, ce qui demande, en
+plus de l'équivalence $f_n$, la surjectivité sur
+$\pi_{n+1}$.\footnote{Correction nôtre, conforme à celle du critère (A) plus
+haut. Contre-exemple : $\mathcal{C}_{n+1} = \mathrm{pt}$ et
+$\mathcal{D}_{n+1} = K(A,n+1)$ ; $f_n$ est une équivalence entre points, et le
+système local de fibre $K(A,n)$ donné par la fibration des chemins a des
+sections sur $\mathcal{C}_{n+1}$ et aucune sur $\mathcal{D}_{n+1}$. Sur la
+page, les accolades et les « $=$ déf » sous les deux membres sont ajoutés à
+la main, et le second porte $\Gamma_{\mathcal{C}_{n+1}}(\mathcal{F})$ sans
+$f_{n+1}^*$.}
+
+\pagerange{54}{55}
+\subsection*{App.~8 : trois approches de la cohomologie d'un topos (pages 54 et 55)}
+
+La construction de la cohomologie par intégration de champs ne fait appel
+ni aux complexes de faisceaux ni aux résolutions injectives ; elle
+s'apparenterait plutôt aux calculs « čechistes » par hyperrecouvrements,
+lesquels demandent un peu d'algèbre simpliciale. Il ne sait si une théorie
+des champs pourra s'écrire sans algèbre simpliciale ; si oui, on aurait
+trois approches :
+
+\begin{itemize}
+  \item[a)] complexes de faisceaux, résolutions injectives, catégories
+  dérivées --- l'\emph{algèbre homologique commutative} : on résout les
+  coefficients ;
+  \item[b)] le point de vue čechiste ou simplicial --- l'\emph{algèbre
+  homotopique} : on résout l'espace ;
+  \item[c)] les $n$-champs --- l'algèbre catégorique ou \emph{algèbre
+  homologique non commutative} : en apparence, on ne résout ni l'un ni
+  l'autre.
+\end{itemize}
+
+La lettre se termine « Bien cordialement, Alexandre ».\footnote{Notre
+commentaire. Dans un $\infty$-topos, c'est la définition c) qui est la
+définition ordinaire : $H^n(X;A) = \pi_0\,\mathrm{Map}(1,K(A,n))$ (Lurie,
+\emph{Higher Topos Theory}, § 7.2.2), et sa comparaison avec a) et b) est un
+théorème --- pour b), le théorème des hyperrecouvrements de Verdier
+(SGA~4, V.7) et sa version simpliciale (Dugger, Hollander, Isaksen, 2004). Mais
+l'« apparence » qu'il note est juste : les fondements usuels des
+$\infty$-catégories sont eux-mêmes simpliciaux, et la question de s'en
+passer est celle que \emph{Pursuing Stacks} reprendra avec les
+$\infty$-groupoïdes globulaires.}
+
+\pagerange{56}{77}
+\section*{Troisième lettre à Breen, Villecun, 17--19 juillet 1975 (pages 56 à 77)}
+
+La lettre, qu'on lit dans la traduction anglaise revue en 1983 (voir la
+page 37), répond à la réponse de Breen aux deux précédentes. Elle est datée
+de sa main « Villecun 17/19 July 1975 ».\footnote{« Villecun » est lu avec
+doute sur sa deuxième syllabe. Ses pages 2 à 11 manquent entre les pages 56
+et 57 du dossier ; voir « Ce que le dossier n'établit pas ».}
+
+\pagerange{56}{58}
+\subsection*{App.~9 : une définition à trouver, et un Dold--Kan non abélien (pages 56 à 58)}
+
+\emph{La définition des $n$-catégories.} Breen lui a proposé une construction
+des $n$-catégories non strictes et du foncteur nerf. Il lui reconnaît « the
+merit of existing » et d'être une première approche précise, mais la juge
+très technique, peu intuitive alors qu'aux niveaux $1$ et $2$ « you just
+follow your nose-tip », et surtout privée d'un foncteur des ensembles
+simpliciaux vers les $n$-groupoïdes, sans lequel une théorie lui paraît
+« kind of a joke ». D'où la méthode : écrire, « like a sort of list of
+Christmas presents », toutes les notions qu'on voudrait avoir et les
+relations qui doivent les lier, jusqu'à obtenir une description axiomatique
+assez complète pour soit suggérer une construction \emph{ad hoc}, soit
+démontrer un théorème d'existence et d'unicité d'une théorie du type
+voulu.\footnote{La frappe porte « theorem », corrigé à la main en
+« theory » ; l'appel (25) est ajouté à la main. Notre commentaire : c'est
+la démarche des résultats d'unicité de la théorie des $(\infty,1)$-catégories
+--- Toën, \emph{Vers une axiomatisation de la théorie des catégories
+supérieures} (K-Theory, 2005), puis Barwick et Schommer-Pries,
+\emph{On the unicity of the theory of higher categories} (J. Amer. Math.
+Soc., 2021) ---, qui caractérisent la théorie par des axiomes, à l'automorphisme
+« passage à l'opposée » près. La construction de Breen n'est pas dans ces
+pages et on ne la décrit pas.}
+
+\emph{Picard strict et non strict.} De la définition, qu'il n'a pas
+comprise, des $n$-catégories de Picard proposée par Breen d'après Segal, il
+ne retient qu'une exigence pour les \emph{strictes} : qu'elles forment une
+$(n+1)$-catégorie $(n+1)$-équivalente à celle des complexes de chaînes de
+longueur $n$. Et il remercie Breen d'avoir rectifié « a big blunder » : il
+croyait que des H-espaces assez associatifs et commutatifs --- disons
+équivalents à des $\Omega^iX$ pour $i$ arbitrairement grand ---
+correspondaient à des groupes topologiques commutatifs.\footnote{L'erreur est
+réelle et la correction de Breen est juste ; le commentaire qui suit est
+nôtre. Un groupe topologique commutatif (ou un groupe abélien simplicial) a
+le type d'homotopie d'un produit d'espaces d'Eilenberg--MacLane, alors
+qu'un espace de lacets infini est un spectre connectif quelconque, dont les
+invariants de Postnikov stables ne s'annulent pas en général. Les
+$n$-catégories de Picard \emph{strictes} modélisent les complexes (les
+$H\mathbb{Z}$-modules), les \emph{non strictes} les spectres connectifs
+$n$-tronqués ; le premier écart est la multiplication par $\eta$, le signe
+de la lettre à Deligne du dossier 134-1.}
+
+\emph{Dold--Kan non abélien.} Reste une question : y a-t-il un analogue de
+la théorie de Dold--Puppe pour les groupes simpliciaux non nécessairement
+commutatifs ? Il tient le yoga
+\[
+\text{ensembles simpliciaux} \longleftrightarrow \infty\text{-groupoïdes}
+\]
+pour la version ultime « ensembliste » de Dold--Puppe, dont celle-ci se
+déduirait en explicitant que les groupes abéliens dans les
+$\infty$-catégories ne sont « rien d'autre » que les complexes de chaînes. Il
+faut donc d'abord savoir ce que sont les \emph{groupes} dans les
+$\infty$-catégories. Dans les $1$-catégories, il le sait --- ce sera
+discuté, pense-t-il, dans la thèse de Mme Sinh, au chapitre des
+Gr-catégories strictes ---, et donne la description en termes de théorie
+des groupes : un quadruplet $(L_1,L_0,d,\theta)$, avec
+$d : L_1 \to L_0$ un homomorphisme de groupes et
+$\theta : L_0 \to \mathrm{Aut}(L_1)$ une action, soumis à\footnote{Dans (b), la frappe porte « $\theta(d(x_1) = \mathrm{int}(x_1)$ »,
+sans la parenthèse fermante ; on l'a ajoutée.}
+\[
+\text{(a)}\quad d\bigl(\theta(x_0)\,x_1\bigr) = x_0\,d(x_1)\,x_0^{-1}, \qquad
+\text{(b)}\quad \theta\bigl(d(x_1)\bigr) = \mathrm{int}(x_1).
+\]
+C'est ce qu'on appelle un \emph{module croisé} (J.H.C.~Whitehead, 1949) ; (b)
+est l'identité de Peiffer. Il en tire que $\mathrm{Im}\,d$ est distingué, que
+$\pi_1 = \mathrm{Ker}\,d$ est central dans $L_1$, que $L_0$ opère sur
+$\pi_1$ à travers $\pi_0 = \mathrm{Coker}\,d$, et que l'invariant principal
+est l'invariant de « Postnikov--Sinh » $\alpha \in H^3(\pi_0,\pi_1)$ ---
+la classification des $2$-types connexes pointés par Mac Lane et Whitehead
+(1950).\footnote{L'équivalence entre groupes dans les catégories (groupes
+catégoriques stricts) et modules croisés est publiée par Brown et Spencer
+(1976) ; la thèse de Hoàng Xuân Sính (1975) classe les Gr-catégories par le
+même $H^3$. Le tapuscrit de cette thèse forme le dossier 135. Commentaire
+nôtre.} Il a rencontré ces animaux à propos de la classification des groupes
+formels « ordinaires » sur un corps parfait, à travers des groupes algébriques
+affines et des groupes formels commutatifs reliés par des Gr-structures
+strictes de ce type, dans un topos arbitraire, pour expliciter un principe
+qu'il attribue à Dieudonné : « le caractère transcendant d'un groupe formel
+est concentré essentiellement dans les groupes formels commutatifs ».
+
+La question est la généralisation aux groupes dans les $n$-catégories :
+il attend un « complexe de chaînes non commutatif »
+\[
+L_n \to L_{n-1} \to \cdots \to L_1 \to L_0 \to 1
+\]
+muni de structures supplémentaires du type de $\theta$, qui exprime
+exactement le type d'homotopie tronqué en dimension $\leqslant n$ d'un groupe
+topologique, ou, ce qui revient au même, le type d'homotopie en dimension
+$\leqslant n+1$ d'un espace connexe pointé. « Have you candidates to
+propose? »\footnote{Notre commentaire. Les réponses venues depuis :
+pour $n = 2$, les $2$-modules croisés de Conduché (1984) ; pour tout $n$, les
+cat$^n$-groupes de Loday (1982) et les $n$-cubes croisés d'Ellis et Steiner
+(1987), qui modélisent les $(n+1)$-types connexes, mais ne sont pas des
+complexes ; et, sous la forme même d'un complexe de groupes non commutatifs
+muni d'opérations supplémentaires, les complexes hypercroisés de Carrasco et
+Cegarra (1991), obtenus à partir du complexe de Moore d'un groupe
+simplicial. Le théorème de Kan --- les groupes simpliciaux modélisent les
+espaces connexes pointés --- répondait déjà à la question « ensembliste ».
+Nous ne prétendons pas que ces travaux procèdent de la lettre.}
+
+\pagerange{58}{60}
+\subsection*{App.~10 : les six opérations et l'homologie (pages 58 à 60)}
+
+Aux réflexions « naïves » de Breen sur la bidualité et l'homologie, il
+répond par une série de réminiscences, numérotées (A) à (F).\footnote{Un
+mot rayé de la page 58 est noirci et illisible. Des astérisques de sa main
+surmontent « biduality » et « homology » ; leur renvoi n'est pas sur la
+page.}
+
+\emph{(A) Les six opérations.} Le formalisme de $Rf_!$ et $Rf^!$, combiné à
+$Rf_*$, $Lf^*$, $\otimes^{\mathbb{L}}$ et $R\mathcal{H}om$ --- « les six
+opérations » ---, contient implicitement la définition de l'homologie et
+son identité essentielle avec la cohomologie. On l'a pour les faisceaux
+quasi cohérents (séminaire Hartshorne, LNM 20), pour les espaces
+localement compacts (Verdier, Bourbaki 300), pour la cohomologie étale à
+coefficients premiers aux caractéristiques (SGA~5), pour les faisceaux
+cohérents sur les espaces analytiques (Ramis, Ruget, Verdier). Il reste à le
+développer dans le cadre cristallin, en caractéristique $0$ pour les modules
+stratifiés à singularités « à la Deligne », peut-être avec des structures de
+Hodge sur $\mathbb{C}$, enfin pour les motifs ; il est convaincu qu'il existe
+« about anywhere \ldots\ wherever there is a formalism of a cohomological
+nature ».\footnote{Notre commentaire. La prédiction s'est largement
+réalisée : $\mathcal{D}$-modules holonomes réguliers et correspondance de
+Riemann--Hilbert (Kashiwara, Mebkhout, vers 1980--1984), modules de Hodge
+mixtes de Saito (1988--1990), six opérations motiviques (Ayoub, 2007 ;
+Cisinski et Déglise), et, plus récemment, la notion même de « formalisme à six
+foncteurs » comme objet d'étude (Liu et Zheng, Mann, Scholze). La forme
+« developped » de la frappe est lue avec doute.}
+
+Pour $f : X \to e = \mathrm{Spec}\,k$ séparé de type fini et un anneau de
+coefficients $\Lambda$ de torsion première à la caractéristique, le
+complexe $f^!\Lambda_e$ joue le rôle du complexe des chaînes singulières à
+coefficients dans $\Lambda$, et $Rf_!\,f^!\Lambda_e$ celui de l'homologie
+$H_*(X/e)$ vis-à-vis des coefficients sur $e$.\footnote{Précision nôtre :
+$Rf_!f^!\Lambda$ est l'homologie ordinaire, duale de la cohomologie à
+supports compacts ; $Rf_*f^!\Lambda$ serait l'homologie de Borel--Moore.
+La « justification par un ou deux trucs » qu'il épargne à Breen est la
+dualité globale.} Il ajoute : il n'y a pas à tronquer ; c'est lié à la
+bidualité pour les coefficients constructibles, à valeurs dans un complexe
+dualisant $K_X = f^!K_e$, qui est, pour $\Lambda = \mathbb{Z}/n\mathbb{Z}$
+autodualisant, le « complexe des chaînes singulières » --- bidualité
+démontrée en admettant la résolution des singularités, ou sans elle si l'on
+en croit ce que Deligne lui a dit ; on peut traiter de même
+$\mathbb{Z}_\ell$ (Jouanolou, thèse non publiée) ; et pour $f : X \to S$
+lisse, ou plus généralement « cohomologiquement localement trivial », on a
+$H_*(X/S) = Rf_!f^!\Lambda_S$.\footnote{La bidualité sans résolution est
+démontrée par Deligne dans SGA~4$\tfrac12$, [Th. finitude]. Les travaux de
+Jouanolou sur la cohomologie $\ell$-adique sont dans SGA~5. Commentaire
+nôtre.}
+
+\emph{(B) L'autodualité des jacobiennes.} Artin et Mazur ont étudié
+l'autodualité de la jacobienne d'une courbe relative $X/S$ ; c'est acquis
+sur un anneau de valuation discrète à fibre générique lisse, la fibre
+spéciale pouvant être très sauvage. Il s'en est servi dans SGA~7 pour
+démontrer, dans le cas des jacobiennes, sa conjecture sur l'accouplement
+entre groupes de composantes des modèles de Néron de deux variétés
+abéliennes duales.\footnote{Notre commentaire, avec réserve : la
+conjecture est démontrée pour un corps résiduel fini (McCallum, 1986) et,
+sauf erreur, pour un corps résiduel parfait (T.~Suzuki) ; elle est fausse en
+général pour des corps résiduels non parfaits (Bertapelle et Bosch, 2000).}
+
+Puis un souvenir : vers la fin des années cinquante, au moment où « the
+grand cohomological stuff » sortait de l'ombre, le cours de Serre sur la
+théorie de Rosenlicht et Lang des jacobiennes généralisées et du corps de
+classes géométrique, et plus tard sa théorie « géométrique » du corps de
+classes \emph{local} par les groupes proalgébriques, l'ont fait réfléchir à
+des formulations cohomologiques de ces résultats, de nature géométrique,
+dont les résultats arithmétiques sur un corps $k$ quelconque se
+déduiraient par descente de $\bar k$. Il en esquissa des projets dans des
+lettres à Serre, dans trois directions au moins, sans jamais réussir à
+« mobiliser quelqu'un » pour les développer.
+
+\pagerange{60}{61}
+\subsection*{App.~11 : le complexe des jacobiennes généralisées (pages 60 et 61)}
+
+\emph{(C)} Pour $X$ de type fini sur un corps $k$, construire un complexe
+$J_{*X/k}$ de jacobiennes généralisées, de longueur $\dim X$, formé de
+groupes proalgébriques commutatifs affines sauf $J_0$, dont la partie
+abélienne est celle de la jacobienne généralisée usuelle $\mathrm{Alb}_{X/k}$.
+Sa construction, inspirée du complexe résiduel, passe par des jacobiennes
+généralisées (au sens cohomologique) des localisés
+$\mathrm{Spec}\,\mathcal{O}_{X,x}$. Son $\underline{H}_0$ est la jacobienne
+généralisée de $X$ : il existe un morphisme $X \to \underline{H}_0$
+universel pour les morphismes de $X$ dans les groupes localement
+proalgébriques commutatifs ; pour $X$ connexe, $\underline{H}_0$ est une
+extension de $\mathbb{Z}$ par un groupe proalgébrique.\footnote{La frappe
+dit « homeomorphism » ; il s'agit d'un morphisme de schémas. L'alinéa
+« N.B. » qui le contient est encadré à la main et renvoyé par une flèche
+après la phrase suivante, qu'on a suivie.} Le rôle cohomologique de ce
+complexe est celui d'un complexe d'\emph{homologie} :
+\[
+(*) \qquad H^i(X,G_X) \simeq \mathbb{E}\mathrm{xt}^i\bigl(J_{*X/k},G\bigr),
+\]
+pour des coefficients $G$ qu'il prenait alors parmi les groupes algébriques
+commutatifs, mais avec la topologie de Zariski (« malédiction ! »), ce qui
+donne des groupes « légèrement stupides ». Il faudrait reprendre la
+construction en cohomologie fppf, avec une formule $(*)$ sans limitation sur
+$i$ --- le complexe $J_*$ s'arrêtant alors en dimension $2\dim X$, ses
+composantes au-delà de $\dim X$ pouvant être de dimension nulle --- et dans
+une catégorie dérivée de groupes proalgébriques, notion que personne n'avait
+définie quand Serre développait le formalisme de ces groupes. La
+construction de $J_*$ ne commuterait au changement de base qu'au sens
+dérivé.\footnote{L'indice de « $(J_\cdot)_{X/k}$ » est surchargé et lu avec
+doute ; un mot biffé après « and » est illisible ; le numéro de l'intertitre
+App.~11 est surchargé. Notre commentaire : l'objet le plus proche qu'on
+connaisse aujourd'hui est le complexe d'Albanese motivique $\mathrm{LAlb}(X)$
+de Barbieri-Viale et Kahn (\emph{On the derived category of 1-motives},
+Astérisque 381, 2016), complexe de $1$-motifs défini pour tout $X$, avec les
+jacobiennes généralisées « à module » de Kato et Russell ; nous ne disons
+pas qu'ils réalisent le programme de la lettre.}
+
+\pagerange{62}{65}
+\subsection*{App.~12 : le corps de classes géométrique global comme dualité (pages 62 à 65)}
+
+\emph{(D)} Soit $f : X \to \mathrm{Spec}\,k$ lisse, séparé, de type fini, de
+dimension relative $d$, et $n > 0$ premier à la caractéristique. Pour $F$
+annulé par $n$, la dualité globale dit que $Rf_!F$ et
+$Rf_*R\mathcal{H}om(F,\mu_n^{\otimes d})$ sont duaux à valeurs dans
+$(\mathbb{Z}/n\mathbb{Z})_k$, avec un décalage de $2d$ ; comme
+$\mathbb{Z}/n\mathbb{Z}$ est injectif sur lui-même, cela donne des dualités
+parfaites\footnote{La frappe donne pour second exemple « $Rf_!(\mu_m^{\otimes})$ et
+$Rf_*(\mathbb{Z}/n\mathbb{Z})$ » ; il faut lire
+$Rf_!(\mu_n^{\otimes d})$.}
+\[
+R^if_!(F) \times R^{2d-i}f_*\bigl(R\mathcal{H}om(F,\mu_n^{\otimes d})\bigr) \longrightarrow \mathbb{Z}/n\mathbb{Z}.
+\]
+Si $n$ est une puissance de $p > 0$, tout
+s'effondre : on ne sait même plus, pour $d > 1$, par quoi remplacer
+$\mu_n^{\otimes d}$.\footnote{Notre commentaire : la réponse est venue
+quelques années plus tard, avec les faisceaux de de Rham--Witt logarithmiques
+$W_r\Omega^d_{X,\log}$, placés en degré $d$ (Milne, Gros, Kato, puis Moser
+pour les coefficients constructibles), qui jouent le rôle de
+« $\mu_{p^r}^{\otimes d}$ ».}
+
+« The extraordinary miracle » est que pour $d = 1$, une courbe lisse, tout
+continue de marcher, pourvu qu'on énonce avec soin : on le vérifie sur
+$\mathbb{Z}/p\mathbb{Z}$, $\mu_p$, $\alpha_p$ pour $X$ complète, par
+l'autodualité de la jacobienne, puis pour des coefficients tordus et $X$ non
+complète. Seulement, les $R^if_*F$ et $R^if_!F$ ont alors une structure
+« continue » : ce sont essentiellement des groupes proalgébriques, comme le
+$\pi_1^{\mathrm{ab}}$ d'une courbe non complète, donc
+$H^1(X,\mathbb{Z}/p^n\mathbb{Z})$.\footnote{Dans
+« $H^1(X,\mathbb{Z}/p^n\mathbb{Z})$ » la frappe portait
+$\mathbb{Z}/n\mathbb{Z}$, corrigé à la main, et corrigé de nouveau en marge.}
+
+\emph{La dualité de Serre.} Serre avait proposé, sans l'écrire, une dualité
+pour les groupes algébriques unipotents commutatifs \emph{à isogénie
+radicielle près} (« quasi-algébriques ») : sur $k$ algébriquement clos,
+$G' = \mathrm{Ext}^1(G,\mathbb{Q}/\mathbb{Z})$ porte une structure canonique
+de groupe quasi-algébrique, avec
+$\mathrm{Ext}^1(\mathbb{G}_a,\mathbb{Q}/\mathbb{Z}) \simeq \mathbb{G}_a$, et
+$\Delta G = G'$ vérifie $G \simeq \Delta\Delta G$ --- « an authentic
+autoduality », qu'il appelle \emph{dualité de Serre}. Pour les groupes
+finis étales, c'est $\mathrm{Ext}^0(G,\mathbb{Q}/\mathbb{Z})$, la dualité de
+Pontrjagin, qui est parfaite. On les recolle dans une catégorie dérivée
+convenable en posant
+\[
+\Delta G = R\mathcal{H}om(G,\mathbb{Q}/\mathbb{Z}),
+\]
+dualité « cohomologique » de Serre, autodualité parfaite sur les complexes
+dont les $\underline{H}^i$ sont, à passage à la limite près, extensions de
+groupes étales par des groupes unipotents connexes --- les seuls qu'on
+rencontre en intégrant des coefficients finis par $Rf_!$ ou
+$Rf_*$.\footnote{Notre commentaire. Les groupes quasi-algébriques de Serre
+sont aujourd'hui les schémas en groupes \emph{parfaits}, et cette dualité
+est établie dans la catégorie dérivée des faisceaux sur le site parfait
+(Bégueri, 1980 ; Milne, \emph{Arithmetic Duality Theorems}, chapitre III) ;
+le théorème d'annulation de Breen pour les $\mathrm{Ext}$ de faisceaux
+abéliens (1975) en est un ingrédient. Sur la page, l'exposant frappé de
+$G' = \mathrm{Ext}^1$ est biffé et remplacé par un accent, répété en
+marge.} Passant à la limite sur $n$, avec $f^!(\mathbb{Q}/\mathbb{Z})_k
+= (\mu_\infty)_X[2]$, la formule de dualité pour une courbe devient
+\[
+\Delta\bigl(Rf_!F\bigr) \simeq Rf_*\bigl(DF[2]\bigr),
+\]
+où $D = R\mathcal{H}om(-,\mu_\infty)$ est la dualité de Cartier (ou
+$R\mathcal{H}om(-,\mathbb{G}_m)$) et $\Delta$ la dualité de Serre :
+cohomologie à supports propres et cohomologie ordinaire s'échangent, « when
+one takes upstairs Cartier duality, and downstairs Serre
+duality ».\footnote{La page écrit
+« $f^!(\mathbb{Q}/\mathbb{Z})_k = (\mu_\infty)_X$ » sans décalage ; le
+décalage $[2]$ est celui de la formule, et c'est à lui que renvoie, sur la
+page, une flèche tracée depuis le mot « shift ». L'indice $\infty$ de
+$\mu_\infty$ est écrit à la main sous un indice frappé noirci.}
+
+La validité de la formule « is not open to doubt » ; le travail est de
+décrire soigneusement les catégories de coefficients, sur $X$ et sur $k$, et
+les foncteurs $D$ et $\Delta$ ; la flèche étant immédiate, la formule
+résulterait des dévissages usuels vers $\mathbb{Z}/p\mathbb{Z}$, $\mu_p$,
+$\alpha_p$ sur $X$ complète. Appliquée à $R^1f_*(G_X)$ pour $G$ fini étale
+sur $k$, elle redonne la description de Serre du corps de classes
+géométrique en termes d'extensions par $G$ d'une jacobienne généralisée :
+\emph{la formule de dualité est une version cohomologique, considérablement
+enrichie, du corps de classes géométrique.}\footnote{Dans « $G_X$ », la
+frappe porte le même $G$ évidé que dans $\mathbb{G}_a$ ; d'après la suite, il
+s'agit du faisceau constant de valeur $G$.} Sur un corps fini, on retrouve
+la forme classique par « le truc de Lang » --- l'isogénie de Lang identifie
+le $\pi_1$ arithmétique d'un groupe algébrique commutatif lisse connexe $J$
+à $J(k)$ ---, sous la forme cohomologique
+\[
+\Delta_0\,R\Gamma_k(J^*) \simeq R\Gamma_k\bigl(\Delta J^*[1]\bigr),
+\]
+où $\Delta_0$ est la dualité de Pontrjagin des groupes topologiques totalement
+discontinus et $J^*$ un complexe d'ind-progroupes algébriques ; en
+l'appliquant à la formule géométrique, on obtient la formule de dualité du
+corps de classes arithmétique\footnote{Notre commentaire. C'est, pour une courbe sur un corps fini et des
+schémas en groupes finis plats, la dualité d'Artin--Milne
+(\emph{Duality in the flat cohomology of curves}, Invent. Math., 1976 ;
+Milne, \emph{Arithmetic Duality Theorems}, III) :
+$H^i_c(X,F)\times H^{3-i}(X,F^D)\to\mathbb{Q}/\mathbb{Z}$ parfait. La
+version « géométrique », avec la dualité de Serre en bas, est le programme
+que T.~Suzuki a repris par des sites relatifs ; nous ne disons pas
+jusqu'où.},
+\[
+\Delta_0\bigl(H^*_!(X,F)\bigr) \simeq H^*\bigl(X,D(F)[3]\bigr).
+\]
+
+Enfin, pour un $F$ qui n'est pas étale mais a une structure continue, comme
+$\alpha_p$, il faut définir $Rf_!F$ avec soin à partir d'une
+compactification $\tilde f : \tilde X \to \mathrm{Spec}\,k$, au moyen d'un
+triangle exact
+
+\begin{tikzcd}[column sep=small]
+ & R\hat{f}_*\bigl(\hat{\tilde F}\bigr) \arrow[dl, "{+1}"'] & \\
+Rf_!(F) \arrow[rr] & & R\tilde{f}_*(\tilde{F}) \arrow[ul]
+\end{tikzcd}
+
+où $\hat{\tilde F}$ est le complété formel d'un prolongement
+« admissible » $\tilde F$ de $F$ le long des points à
+l'infini.\footnote{La page note le sommet « $Rf_!(\hat{\tilde F})$ » ; il
+s'agit de l'image directe, sur le spectre de $k$, de la cohomologie du
+voisinage formel de $\tilde X \setminus X$, ce qu'on a écrit
+$R\hat f_*$. Le degré de la flèche de bord, implicite sur la page, est
+marqué $+1$. Notre commentaire : c'est ainsi que Milne définit la
+cohomologie à supports compacts en cohomologie plate, par les complétés aux
+places manquantes (\emph{Arithmetic Duality Theorems}, III, § 0).} C'est là,
+dit-il, qu'apparaît le lien avec le corps de classes local.
+
+\pagerange{65}{66}
+\subsection*{App.~13 : le corps de classes local comme dualité (pages 65 et 66)}
+
+\emph{(E)} Soit $V$ un anneau de valuation discrète complet, de corps
+résiduel $k$ et de corps des fractions $K$ ; on suppose soit $k$ relevé dans
+$V$ (donc $V \simeq k[[T]]$), soit $k$ parfait de caractéristique $p>0$.
+Pour des coefficients $F$ finis sur $K$, le travail principal serait de
+définir une catégorie convenable de coefficients sur $k$ et un foncteur
+$F \mapsto R\underline{\Gamma}_K(F)$ à valeurs dans celle-ci, avec
+\[
+R\Gamma_K(F) \simeq R\Gamma_k\bigl(R\underline{\Gamma}_K(F)\bigr),
+\]
+conformément à l'intuition que, pour $k$ algébriquement clos, les
+$H^i(K,F)$ portent une structure de groupe algébrique (ind-pro) sur $k$ ;
+les vecteurs de Witt et le foncteur de Greenberg y joueraient un rôle
+essentiel. La formule de dualité s'énoncerait alors comme en (D),
+\[
+\Delta\,R\underline{\Gamma}_K(F) \simeq R\underline{\Gamma}_K\bigl(DF[1]\bigr),
+\]
+et deviendrait, pour un corps résiduel fini, par le truc de Lang,
+\[
+\Delta_0\,R\Gamma_K(F) \simeq R\Gamma_K\bigl(DF[2]\bigr),
+\]
+qui contient le corps de classes local géométrique de Serre et le corps de
+classes local arithmétique classique.\footnote{La frappe porte $\Gamma_k$ au
+premier membre de cette dernière formule et $\Gamma_K$ au second ; c'est
+$\Gamma_K$ des deux côtés, et c'est alors la dualité locale de Tate,
+$H^i(K,F)\times H^{2-i}(K,F^D)\to\mathbb{Q}/\mathbb{Z}$. L'exposant de
+$H^i(K,F)$ est surchargé et lu avec doute.}
+
+Remarques. (a) Pour $F$ premier à la caractéristique résiduelle, c'est facile
+et connu : un cas particulier de la formule d'induction
+$i^!\,D_S(F) \simeq D_s(i^*F)$ pour l'immersion fermée
+$i : s = \mathrm{Spec}\,k \to S = \mathrm{Spec}\,V$ ; le travail porte donc
+sur les coefficients $p$-primaires, et le cas le plus subtil est
+l'inégale caractéristique.\footnote{La page écrit « $D_S(i^*(F))$ » au second
+membre ; c'est le foncteur dualisant de $s$ qui convient, $i^*F$ vivant sur
+$s$. Elle écrit aussi « $p = \mathrm{Spec}(k)$ » pour le point fermé.}
+(b) $R\underline{\Gamma}_K$ s'obtiendrait en composant $Rj_*$, pour
+$j : \mathrm{Spec}\,K \to \mathrm{Spec}\,V$, avec une version cohomologique
+du foncteur de Greenberg. (c) Il ne parle que de coefficients finis, les
+seuls pour lesquels il est sûr de ce qu'il avance ; mais il se rappelle
+vaguement, sans garantie, une formule pour un schéma abélien $F$ sur $K$, de
+dual $F'$, avec $G'$ le groupe proalgébrique attaché « à la Greenberg » au
+modèle de Néron de $F'$ ($k$ algébriquement clos) :
+\[
+H^1(K,F) \overset{?}{\simeq} \mathrm{Ext}^1_{k\text{-grp}}(G',\mathbb{Q}/\mathbb{Z}),
+\]
+et pense que la conjecture de SGA~7 sur les modèles de Néron devrait sortir
+de cette machine de dualité locale.\footnote{Notre commentaire, avec
+réserve. Pour $G'$ connexe, $\mathrm{Ext}^1(G',\mathbb{Q}/\mathbb{Z})$ est le
+dual de $\pi_1(G')$, et la formule est la conjecture de Šafarevič, démontrée
+par Bégueri en caractéristique nulle et par Bertapelle en égale
+caractéristique $p$. Le numéro « SGA~7 » est surchargé à la main sur un
+chiffre frappé, peut-être 6.} (d) « You may ask Deligne if he didn't dive
+into questions (D) and (E) lately. »
+
+\pagerange{67}{67}
+\subsection*{App.~14 : portée et limites de la topologie fppf (page 67)}
+
+\emph{(F)} Depuis les tentatives de Serre pour trouver une cohomologie de
+Weil avec des coefficients continus (les vecteurs de Witt $W_n$), il a eu
+l'impression qu'une cohomologie de Weil $p$-adique correcte en
+caractéristique $p$ devrait venir de la cohomologie fppf, à coefficients
+finis ou dans des groupes algébriques sur $k$ ; la construction du complexe
+jacobien local était liée à cet espoir --- « the homology might reveal what
+is hidden to us in cohomology! ».\footnote{La page dit « The construction in
+(B) of the local jacobian complex » ; c'est en (C) que la lettre construit
+ce complexe, et (B) porte sur l'autodualité des jacobiennes.} Mais on a
+maintenant la cohomologie cristalline, qui a les bonnes propriétés pour $X$
+projective et lisse (Berthelot), et, prise pour étalon, elle montre que la
+partie de $H^i_{\mathrm{cris}}(X)$ descriptible par la cohomologie fppf à
+coefficients dans des $k$-groupes algébriques n'en est qu'une petite part :
+celle des pentes $\leqslant 1$ du Frobenius, alors que les pentes vont de $0$
+à $i$. D'où un $H^1$ correct, et l'échec pour $H^2$. On conjecture que
+\emph{toute} la partie de pentes $\leqslant 1$ vient de fppf ; Mazur, Katz,
+Messing et Deligne en sauraient l'état.\footnote{Notre commentaire. La
+décomposition par les pentes a été rendue précise par le complexe de
+de Rham--Witt (Illusie, 1979) : la partie de pentes $< 1$ est
+$H^i(X,W\mathcal{O}_X)_{\mathbb{Q}}$, la cohomologie de Witt de Serre, et la
+partie de pente $1$ est atteinte par la cohomologie plate de $\mu_{p^\infty}$,
+ou de $W_r\Omega^1_{\log}$. Les coefficients de Tate supérieurs
+$\mathbb{Z}_p(n)$ de la cohomologie syntomique, puis prismatique
+(Bhatt, Morrow, Scholze ; Bhatt, Lurie), atteignent les pentes jusqu'à $n$ ;
+c'est une manière de dépasser la limite qu'il constate, sans que nous
+prétendions qu'elle réalise son espoir. L'indice de « $\mu_{p^n}$ » est
+surchargé et corrigé en marge.}
+
+\pagerange{67}{69}
+\subsection*{App.~15 : le type d'homotopie d'un topos (pages 67 à 69)}
+
+La question 7 de Breen trahit, dit-il, un malentendu sur le sens du « type
+d'homotopie » d'un topos $X$ : on confond l'algèbre homotopique qu'on peut
+faire \emph{sur} $X$ --- faisceaux simpliciaux, champs de toutes sortes ---
+et le point de vue où $X$, avec sa riche structure, disparaît pour ne plus
+être qu'un « pale element » d'une catégorie homotopique (ou
+pro-homotopique), obtenu par une localisation très poussée. Il ne reste
+alors à $X$ que ses $\pi_i$ et sa cohomologie à coefficients constants ou
+tordus ; et, à creuser ce qui reste, on tombe sur \emph{les $n$-champs
+localement constants} --- une équivalence d'homotopie $f : X \to X'$
+induisant une $(n+1)$-équivalence entre les $(n+1)$-catégories des
+$n$-champs localement constants --- qui contiennent les complexes abéliens
+de longueur $n$ à faisceaux de cohomologie localement constants. D'où un
+triangle d'objets qui se déterminent mutuellement, les deux sommets du bas
+étant pris à $n$-équivalence près, et le sommet du haut pouvant être aussi
+un ensemble simplicial :
+
+\begin{tikzcd}[column sep=small, row sep=large, nodes={font=\scriptsize}]
+ & \text{topos (ou espace) à $n$-homotopie près} \arrow[dl, leftrightarrow] \arrow[dr, leftrightarrow] & \\
+\text{$n$-groupoïdes} \arrow[rr, leftrightarrow] & & \text{$n$-catégories « spéciales »}
+\end{tikzcd}
+
+Une $n$-catégorie $E_n$ est « spéciale », ou \emph{$n$-galoisienne},
+si elle est $n$-équivalente à celle des $(n-1)$-champs localement constants
+sur un espace ou un topos, ou, ce qui doit revenir au même, à celle des
+$n$-foncteurs $G_n \to ((n-1)\text{-}\mathrm{Cat})$ pour un $n$-groupoïde
+$G_n$ ; $G_n$ est alors le $n$-groupoïde fondamental, $E_n$ la catégorie des
+$(n-1)$-systèmes locaux, $X$ la réalisation géométrique. Comme pour $n=1$,
+$G_n$ devrait se retrouver comme la sous-$n$-catégorie pleine de
+$\underline{\mathrm{Hom}}_n(E_n,((n-1)\text{-}\mathrm{Cat}))$ formée des
+$n$-foncteurs ayant des propriétés d'exactitude --- « which commute with
+finite $\varprojlim$ and arbitrary $\varinjlim$ » ---, ce qui soulève « the
+disquieting vision of $n$-limits in $n$-categories ».\footnote{La page écrit
+« $n$-functors $G_n \to (n\text{-}\mathrm{Cat})$ » et
+« $\mathrm{Hom}_n(E_n,(n\text{-}\mathrm{cat}))$ », alors que, d'après sa
+propre correction de « local $n$-systems » en « local $(n-1)$-systems », il
+s'agit de $(n-1)$-champs : avec $(n\text{-}\mathrm{Cat})$ pour but, $E_n$
+serait une $(n+1)$-catégorie. On a mis $((n-1)\text{-}\mathrm{Cat})$, comme
+dans la lettre du 17 février. Le triangle occupe sur la page plusieurs lignes
+par sommet ; on l'a traduit. Notre commentaire : c'est, à la lettre, la
+théorie de Galois supérieure de Hoyois citée page 49 ; les $n$-limites dans
+les $n$-catégories sont devenues ordinaires avec les $\infty$-catégories.}
+
+Il est prudent de supposer $X$ localement homotopiquement trivial, ce qui
+assure que le pro-ensemble simplicial d'Artin--Mazur est essentiellement
+constant ; ce n'est sûrement pas le cas du topos étale d'un schéma, dont le
+$n$-groupoïde fondamental doit être un pro-$n$-groupoïde, et $E_n$ une
+ind-$n$-catégorie, l'ind-structure traduisant la trivialité locale relative
+à des recouvrements de plus en plus fins.
+
+\pagerange{69}{72}
+\subsection*{App.~16 : stratifications et voisinages tubulaires (pages 69 à 72)}
+
+Il comprend pourtant la résistance de Breen à ce dépouillement d'un « beau
+topos », et pense qu'en allant à sa racine on arrive à approfondir la notion
+même de type d'homotopie.
+
+\emph{Faisceaux $P$-constructibles.} Sur le topos étale d'un schéma
+cohérent $X$, les faisceaux constructibles sont ceux pour lesquels il existe
+une partition finie $P$ de $X$ en strates localement fermées constructibles
+$X_i$ telle que la restriction à chaque $X_i$ soit localement constante.
+Pour $P$ fixée, les faisceaux (ou complexes, ou champs) $P$-constructibles
+ne forment une catégorie satisfaisante que si elle est stable par les
+opérations usuelles, $R\mathcal{H}om$, $Rj_*j^*$ pour une strate $j$, etc. ;
+pour $X$ excellent et avec la résolution des singularités, les faisceaux
+constructibles de torsion première aux caractéristiques sont stables, mais
+pas pour une partition fixée. Il faut pour cela des hypothèses très strictes
+d'« équisingularité » le long des strates, et il pense qu'un raffinement des
+techniques connues fournira des stratifications équisingulières
+arbitrairement fines.
+
+\emph{Deux strates.} Soit $X_0$ fermé, $X_1 = X \setminus X_0$, avec les
+inclusions $X_0 \xrightarrow{i_0} X \xleftarrow{i_1} X_1$. Par le dévissage
+d'Artin (le recollement de SGA~4), un faisceau $F$ sur $X$ équivaut à la
+donnée de $F_0 = i_0^*F$, de $F_1 = i_1^*F$ et d'un morphisme
+$F_0 \to \varphi(F_1)$, avec $\varphi = i_0^*\,i_{1*}$ exact à gauche. $F$
+est $P$-constructible si et seulement si $F_0$ et $F_1$ sont localement
+constants ; par équisingularité, $\varphi(F_1)$ l'est aussi, et tout
+s'exprime par les faisceaux localement constants sur $X_0$ et $X_1$ --- leur
+seul type d'homotopie --- et le foncteur $\varphi$. Pour expliciter
+celui-ci, il propose un « voisinage tubulaire étale » de $X_0$, topos
+intéressant mais non associé à un schéma, paraphrase technique d'une intuition
+topologique très simple.\footnote{La page dit « tubular neighbourhood of
+$X_0$ in $X_1$ » ; il s'agit d'un voisinage de $X_0$ dans $X$, dont on
+retient la trace sur $X_1$. Un mot biffé avant « $\varphi(F_1)$ » est
+noirci ; « topological intuition » est entouré et renvoyé après « simple ».}
+
+\emph{L'intuition.} Sur $\mathbb{C}$, l'équisingularité dit qu'il existe un
+voisinage tubulaire $T$ de $X_0$ dans $X$, rétracté sur $X_0$, tel que
+$T\setminus X_0$ soit localement trivial sur $X_0$ ; si $\partial T$ est son
+bord, $T$ est le fibré en cônes
+$(\partial T \times [0,1]) \amalg_{\partial T} X_0$, et
+$\mathring T = T \setminus X_0 \simeq \partial T \times [0,1[$ est
+$X_0$-homotope à $\partial T$. Si les strates sont non singulières,
+$\partial T \to X_0$ est une fibration topologiquement lisse ; avec
+$\widetilde X_1 = X_1 \setminus \mathring T$, l'inclusion
+$\widetilde X_1 \to X_1$ est une équivalence d'homotopie, et $X$ se
+reconstitue à homéomorphisme près comme somme amalgamée du diagramme
+
+\begin{tikzcd}
+\partial T \arrow[r, "j"] \arrow[d, "p"'] & \widetilde{X}_1 \\
+X_0 &
+\end{tikzcd}
+
+où $p$ est une fibration et $j$ l'inclusion du bord. Alors
+$\varphi(F_1) \simeq p_*j^*\widetilde F_1$, et la donnée de $F$ est celle
+de
+\[
+F_0, \qquad \widetilde F_1, \qquad \tilde u : p^*F_0 \to j^*\widetilde F_1,
+\]
+avec $F_0$, $\widetilde F_1$ localement constants sur $X_0$ et
+$\widetilde X_1$.\footnote{La page note $\phi$ et $\varphi$ le même foncteur ;
+on a gardé $\varphi$. Sur la page, $\mathring T$ est « $X_0$-homotopic » à
+$\partial T$, et le crochet de « $[0,1[$ » est corrigé à la main.} Il
+propose aussi les diagrammes équivalents
+$X_0 \leftarrow \mathring T \to X_1$, plus canonique, et
+$T \hookleftarrow \mathring T \to X_1$, où l'inclusion
+$\mathring T \to T$ est « morally » une fibration à fibres compactes
+non singulières de dimension finie --- bien mieux que ce que donne le yoga
+de Cartan--Serre selon lequel toute application est équivalente à une
+fibration ---, et qui a l'avantage de se construire algébriquement pour les
+schémas, une fois les voisinages tubulaires étales
+construits.\footnote{Notre commentaire. Ce dictionnaire est aujourd'hui la
+théorie des \emph{chemins de sortie} : pour un espace conique stratifié, les
+faisceaux constructibles (d'ensembles, de complexes ou d'espaces) sont les
+foncteurs sur l'$\infty$-catégorie des chemins de sortie (MacPherson ;
+Treumann, \emph{Exit paths and constructible stacks}, 2009 ; Lurie,
+\emph{Higher Algebra}, A.9), et, pour deux strates, ce foncteur est
+exactement la donnée $(F_0, F_1, p^*F_0 \to j^*F_1)$, le « lien » $\partial T$
+portant les chemins qui sortent de $X_0$. La version étale, pour les
+schémas, est l'« exodromie » de Barwick, Glasman et Haine (2018). Les
+voisinages tubulaires algébriques ont été étudiés par Cox (1979).}
+
+\pagerange{72}{75}
+\subsection*{App.~17 : le type d'homotopie fin (pages 72 à 75)}
+
+Le point est que les faisceaux, complexes ou $n$-champs $P$-constructibles,
+pour une stratification équisingulière $P$, se ramènent à la connaissance
+d'un diagramme de \emph{types d'homotopie} ordinaires (des pro-types en
+topologie étale), en prenant des systèmes locaux sur les sommets reliés par
+des morphismes de compatibilité du type $p^*F_0 \to j^*F_1$.\footnote{Le
+sommet du diagramme de la page 73 est frappé « $\Delta$ », pour
+$\partial T$ ; le numéro de l'intertitre App.~17 est surchargé et lu avec
+doute.} Ce serait un exercice amusant, qu'il n'a pas fait, de traduire les
+six opérations dans ce dictionnaire et d'y retrouver les formules connues,
+au moins pour des strates non singulières ; mais il faudrait sans doute
+considérer non un diagramme dans la catégorie homotopique, mais la catégorie
+homotopique des diagrammes d'ensembles simpliciaux.\footnote{C'est
+exactement le point technique qu'on a retenu depuis : un diagramme dans la
+catégorie homotopique perd l'information de cohérence, et c'est
+l'$\infty$-catégorie des chemins de sortie, ou la catégorie de modèles des
+diagrammes, qu'il faut prendre. Commentaire nôtre.}
+
+\emph{La topologie modérée.} En réfléchissant aux fondements d'une « tame
+topology », qui élimine d'emblée les phénomènes sauvages, il a récemment
+explicité comment une stratification équisingulière à strates non
+singulières d'un espace modéré compact donne canoniquement un diagramme
+fini de variétés à bord, reliées par des fibrations localement triviales de
+variétés à bord compactes et par les inclusions des bords --- avec des bords
+munis d'une décomposition cellulaire élémentaire ---, à partir duquel
+l'espace se reconstitue par recollement. Pour un morphisme modéré
+$f : X \to Y$ et des stratifications adaptées, on obtiendrait un morphisme
+de diagrammes, et les quatre opérations $Rf_*$, $Rf_!$, $Lg^*$, $g^!$
+entre faisceaux $P_X$- et $P_Y$-constructibles s'exprimeraient par des
+opérations standard entre types d'homotopie. Le tout devrait se transposer
+aux schémas excellents par les voisinages tubulaires étales.\footnote{Notre
+commentaire. La « topologie modérée » a reçu une forme dans les structures
+o-minimales (van den Dries, \emph{Tame topology and o-minimal structures},
+1998, dont le titre reprend l'expression de l'\emph{Esquisse d'un
+programme}) ; la décomposition en variétés à bord à partir d'une
+stratification équisingulière est celle de la théorie de Thom--Mather
+(données de contrôle, lemmes d'isotopie).}
+
+\emph{Le type d'homotopie fin} d'un espace modéré ou d'un schéma excellent se
+définit alors par passage à la limite sur les « $P$-types d'homotopie »
+associés à des stratifications équisingulières de plus en plus fines. Il
+contiendrait la connaissance non seulement des faisceaux localement
+constants, mais, à la limite inductive, de \emph{tous}, et dépendrait
+fonctoriellement de $X$. Pour un schéma de type fini sur un corps
+algébriquement clos, le théorème de finitude le plus fort s'exprimerait par
+ce type fin : ses constituants seraient des « polyèdres finis », voire des
+variétés compactes à bord, ou plus précisément leurs complétés profinis
+premiers à $p$ seraient ceux de tels polyèdres. On voit comment commencer en
+caractéristique $0$ ; en caractéristique $p$, il prévoit un supplément
+d'amusement, voire de mystère, pour les variétés qui résistent à tout
+relèvement en caractéristique $0$, même birationnel.\footnote{Notre
+commentaire. Le type d'homotopie fin est, sous un autre nom, la « catégorie
+de Galois » profinie stratifiée de l'exodromie de Barwick, Glasman et Haine,
+qui code tous les faisceaux constructibles d'un schéma cohérent, et la
+théorie de l'homotopie des espaces stratifiés qui l'accompagne (Haine). Nous
+ne savons pas dire où en est l'énoncé de finitude en caractéristique $p$, et
+le laissons comme la lettre le laisse. Sur la page, « the ordinary homotopy
+types … finite polyhedra » est souligné à la main.}
+
+\pagerange{75}{77}
+\subsection*{App.~18 : linéariser un type d'homotopie (pages 75 à 77)}
+
+De ces pensées géométriques il ne tire pas de programme précis, et se borne
+à des remarques. Il se demande depuis longtemps combien d'information
+cohomologique il faut pour reconstituer un type d'homotopie : le groupe
+fondamental, les foncteurs $H^i(-,M)$ sur les $\pi_1$-modules avec leur
+structure de foncteurs cohomologiques, les cup-produits, d'autres
+opérations. Avec le langage des catégories dérivées, un meilleur candidat
+est la sous-catégorie de la catégorie dérivée des complexes abéliens sur $X$
+à faisceaux de cohomologie localement constants, avec sa structure
+triangulée et son produit $\otimes^{\mathbb{L}}$, peut-être
+$R\mathcal{H}om$ ; il ne sait pas si cela suffit. En revanche il ne doute pas
+qu'en poussant la linéarisation jusqu'au bout, c'est-à-dire jusqu'au cadre
+\emph{non abélien} --- les $(n+1)$-catégories des $n$-champs localement
+constants, sans aucune structure supplémentaire ---, on reconstitue le type
+d'homotopie par son $\infty$-groupoïde fondamental, ce qui signifie que
+toutes les opérations cohomologiques imaginables sont déjà dans ces
+données.\footnote{Notre commentaire. La version non abélienne est
+aujourd'hui une tautologie bien comprise : l'$\infty$-topos
+$\mathrm{Fun}(X,\mathcal{S})$ des systèmes locaux d'espaces détermine $X$
+comme sa forme. Pour la version abélienne, la réponse positive la plus
+nette porte sur les cochaînes munies de leur structure d'algèbre
+$E_\infty$ : Mandell (\emph{E$_\infty$ algebras and p-adic homotopy theory},
+2001 ; \emph{Cochains and homotopy type}, 2006) montre qu'elles déterminent
+les espaces nilpotents de type fini, $p$-complétés ou entiers ; la
+structure triangulée et $\otimes^{\mathbb{L}}$ seuls ne suffisent pas en
+général, faute de cohérences. L'appel (31) est répété en marge.}
+
+De même, les types d'homotopie plus élaborés attachés aux stratifications
+devraient correspondre aux $(n+1)$-catégories des $n$-champs subordonnés à
+$P$ ; et, si la description par la catégorie dérivée « localement
+constante » valait, on retrouverait le type d'homotopie mixte par la
+sous-catégorie dérivée des complexes à cohomologie localement constante sur
+chaque strate, avec $\otimes^{\mathbb{L}}$, $R\mathcal{H}om$ et les quatre
+opérations entre réunions localement fermées de strates. Le problème est
+qu'on ne sait même pas ce qu'est une catégorie triangulée, ni sa version
+non commutative, décrite sans doute plus simplement et plus
+fondamentalement comme une « catégorie homotopique » munie des opérations
+de prise de fibres et de cofibres.\footnote{Une parenthèse biffée de
+traits obliques, page 77, ajoutait : « (N.B. A first approach has been
+developed by Quillen at the beginning of the years “70”.) » ;
+\emph{Homotopical Algebra} (LNM 43) est de 1967. Notre commentaire : la
+« catégorie homotopique avec fibres et cofibres » est aujourd'hui une
+$\infty$-catégorie à limites et colimites finies, dont la version stable
+est la « bonne » catégorie triangulée ; c'est aussi ce que les dérivateurs
+de \emph{Pursuing Stacks} cherchent à capter.}
+
+« It is surely time that I finish this “lettre-fleuve”, which is becoming
+more and more vague. » Une dernière question : quelle est cette « marvellous
+formula of Bloch--Quillen » à laquelle Breen fait allusion, dont il n'a
+jamais entendu parler, « and which makes my mouth water? »\footnote{C'est,
+selon toute vraisemblance, la formule de Bloch
+$\mathrm{CH}^p(X) \simeq H^p(X,\mathcal{K}_p)$, démontrée par Bloch pour
+$p = 2$ (1974) et par Quillen en général pour les variétés lisses (1973).
+L'allusion de Breen n'est pas dans ces pages ; l'identification est la
+nôtre. La pagination de la dernière page, surchargée, est lue avec doute
+« 61 bis ».} Signé : « Very cordially yours, Alexandre Grothendieck. »
+
+\pagerange{78}{80}
+\section*{Les notes au chapitre I et à l'appendice (pages 78 à 80)}
+
+Les pages 78 à 80 sont les trois premières pages du tapuscrit « NOTES to
+Chapter I and Appendix », notes (1) à (25), avec des corrections et ajouts
+de sa main, dont la note (11), « Added 23.2.83 ». Elles commentent les
+sections du chapitre I et, à partir de la note (22), les lettres à Breen.
+Ce texte appartient à \emph{Pursuing Stacks} et il est imprimé dans
+G.~Maltsiniotis (éd.), \emph{À la poursuite des champs}, vol.~I, SMF,
+Documents mathématiques 20, 2022 ; on y renvoie et on ne le restitue pas. La
+note (25) se poursuit au-delà de la page 80, dans la partie du dossier qui
+n'est pas transcrite.\footnote{La transcription relève seulement que ces
+notes renvoient aux sections 9, 11, 12, 13, 18 et 90, et la note (24) à une
+section dont le numéro surchargé se lit 69 ou 59, à propos des
+« derivators ».}
+
+\end{document}
