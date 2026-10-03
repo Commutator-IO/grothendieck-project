@@ -1,0 +1,327 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 33, batch 6 (pages 101-120).
+% Established from the facsimile archives/batches/33/batch-06.pdf, per the skill
+% transcribe-grothendieck, from the tiles in archives/tiles/33/p101 … p120.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-03 — first pass, unchecked against the pages by a human.
+%
+% Ten of the twenty pages are transcribed: the odd pages 101-119, written in
+% blue ink on the versos of an English typescript on commutative algebra
+% (multiplicities, Tor, local rings). The even pages 102-120 are that typescript
+% alone, with nothing in his hand, and are absent.
+%
+% Content: notes for SGA (étale cohomology, 1965) on the derived tensor
+% product and its companions: hypertor, global variant, the formulas
+% (associativity, commutativity, RHom adjunction), Lf^* and base change,
+% adjunction Lf^*/Rf_*, the domains of definition of Rf_*, R_!f_*, Lf^*, R^!f
+% on D, D^+, D^-, D^b, the projection formula for R_!f with its proof, the
+% Künneth formula as corollary, and remarks on its limits (supports
+% quelconques, characteristic p) and on independence from duality.
+%
+% Notation fixed for the batch: his "L." is set L_\bullet, his "K·" K^\bullet;
+% the derived tensor product, written with a double-struck L over ⊗, is
+% \overset{\mathbb{L}}{\otimes}; his boxed ⊗ is \boxtimes. His R with a
+% subscript ! (R_! f) is kept in the order he writes it.
+%
+% The connecting prose is a fast hand and much of it is \ill{} or
+% \uncertain{}; the formulas carry.
+
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{33}
+\batch{6}
+\pages{101}{120}
+\dating{1965-[vers 1971]}
+\watermark{Édition de démonstration}
+\foldertitle{SGA 1965. MS [Manuscrit] brouillon : notes manuscrites (s.d.).}
+
+\begin{document}
+
+\section{Produit tensoriel dérivé : hypertor, formules, changement de base}
+
+\page{101}
+\note{la page s'ouvre sur les faisceaux de cohomologie de $L_{\bullet} \overset{\mathbb{L}}{\otimes} M_{\bullet}$ : la définition de ce produit tensoriel dérivé précède la présente liasse. On transcrit « L. » de l'auteur par $L_{\bullet}$, et $\overset{\mathbb{L}}{\otimes}$ rend le $\otimes$ surmonté d'un L à double barre.}
+Les \struck{\ill{}} faisceaux de cohomologie de $L_{\bullet} \overset{\mathbb{L}}{\otimes} M_{\bullet}$ sont \uncertain{dits} \emph{hypertor} de $L_{\bullet}, M_{\bullet}$, notation $\mathrm{Tor}_i^{\mathcal{O}}(L_{\bullet}, M_{\bullet})$. \struck{\ill{}} Comme il s'agit ici de foncteurs \add{« exacts »} de catégories triangulées, tout triangle exact en l'un des arguments donne lieu à une suite exacte infinie habituelle. En particulier, les $\mathrm{Tor}_i( \;, M_{\bullet})$ définissent un foncteur cohomologique en le premier argument, lorsqu'on prend pour celui-ci un Module ordinaire.
+
+La formation de $L_{\bullet} \overset{\mathbb{L}}{\otimes} M_{\bullet}$ commute au changement de base \uncertain{plat} \add{$f : X \to Y$}, quand celui-ci est défini \struck{[\ill{}]} \ill{} :
+\[
+  \mathbb{L}f^{*}(M_{\bullet} \overset{\mathbb{L}}{\otimes} L_{\bullet})
+  \simeq \mathbb{L}f^{*}(M_{\bullet}) \overset{\mathbb{L}}{\otimes} \mathbb{L}f^{*}(L_{\bullet})
+\]
+\note{la formule est encadrée ; un trait la barre en partie, sans qu'on puisse dire s'il la biffe.}
+Pour définir le foncteur $f^{*}$ ou $\mathbb{L}f^{*}$ sur les $D^{-}$, il faut noter que la \uncertain{platitude} de $f$ implique que $f^{*}$ transforme quasi-isomorphismes \uncertain{plats} en quasi-isomorphismes. D'autre part, $f^{*}$ transforme plats en plats, d'où la commutation. — En particulier, la formation des $L_{\bullet} \overset{\mathbb{L}}{\otimes} M_{\bullet}$ commute au passage aux fibres, ce qui donne la \uncertain{possibilité} d'un \uncertain{calcul} \add{\uncertain{au moins}} \ill{} \ill{} des $\overset{\mathbb{L}}{\otimes}$.
+\marginal{\uncertain{est-ce vrai} dans le contexte des topos généraux ?!}
+
+\page{103}
+Variante globale : on définit les hypertor globaux par
+\[
+  \mathbb{R}\Gamma_{X}\, L_{\bullet} \overset{\mathbb{L}}{\otimes} M_{\bullet} .
+\]
+\marginal{Mais il faut \uncertain{remarquer}, \ill{} \ill{}, que $\Gamma_X \to$ \ill{} \ill{} \ill{} $L$, $M$, \ill{} \uncertain{cohomologie} \uncertain{finie} !}
+
+\subsection{Lois formelles en \ill{} \ill{} (lois internes)}
+
+\begin{enumerate}
+  \item Associativité de $\overset{\mathbb{L}}{\otimes}$.
+  \item Commutativité (attention aux signes !)
+  \item \begin{align*}
+      \mathbb{R}\mathcal{H}om^{\bullet}(L_{\bullet} \overset{\mathbb{L}}{\otimes} M_{\bullet}, K^{\bullet})
+        &\simeq \mathbb{R}\mathcal{H}om^{\bullet}(L_{\bullet}, \mathbb{R}\mathcal{H}om^{\bullet}(M_{\bullet}, K^{\bullet})) \\
+        &\simeq \mathbb{R}\mathcal{H}om^{\bullet}(M_{\bullet}, \mathbb{R}\mathcal{H}om^{\bullet}(L_{\bullet}, K^{\bullet}))
+    \end{align*}
+    \begin{align*}
+      \mathbb{R}\mathrm{Hom}^{\bullet}(L_{\bullet} \overset{\mathbb{L}}{\otimes} M_{\bullet}, K^{\bullet})
+        &\simeq \mathbb{R}\mathrm{Hom}^{\bullet}(L_{\bullet}, \mathbb{R}\mathcal{H}om^{\bullet}(M_{\bullet}, K^{\bullet})) \\
+        &\simeq \mathbb{R}\mathrm{Hom}^{\bullet}(M_{\bullet}, \mathbb{R}\mathcal{H}om^{\bullet}(L_{\bullet}, K^{\bullet}))
+    \end{align*}
+    \struck{$\mathrm{Hom}(L_{\bullet}, \mathbb{R}\mathcal{H}om$}
+    \begin{align*}
+      \mathrm{Hom}(L_{\bullet} \overset{\mathbb{L}}{\otimes} M_{\bullet}, K^{\bullet})
+        &\simeq \mathrm{Hom}(L_{\bullet}, \mathbb{R}\mathcal{H}om^{\bullet}(M_{\bullet}, K^{\bullet})) \\
+        &\simeq \mathrm{Hom}(M_{\bullet}, \mathbb{R}\mathcal{H}om^{\bullet}(L_{\bullet}, K^{\bullet}))
+    \end{align*}
+    \note{la main ne distingue pas nettement le $\mathcal{H}om$ faisceautique du $\mathrm{Hom}$ global ; on a lu le premier groupe comme faisceautique, le second comme global, d'après la variante globale qui précède.}
+\end{enumerate}
+\marginal{N.B. $\mathbb{R}\mathcal{H}om^{\bullet}(L_{\bullet}, K^{\bullet})$ défini dès que $K^{\bullet} \in \mathrm{Ob}\, D^{+}(X)$, mais $L_{\bullet}$ \uncertain{pour} \uncertain{chaque} \uncertain{quelconque}.}
+
+\subsection{Remarque sur changement de base non plat}
+
+On définit $\mathbb{L}f^{*} : D^{-}(Y) \to D^{-}(X)$ comme on \uncertain{sait}, en passant par $K^{-}(Y)^{\mathrm{plat}}/\text{quasi-isom.}$, en notant que $f^{*}$ \struck{\ill{}} \uncertain{envoie} $K^{-}(Y)^{\mathrm{plat}}$ dans $K^{-}(X)^{\mathrm{plat}}$ et transforme quasi-isom.\ en \uncertain{quasi}-isom. Avec cette définition, on a encore
+\[
+  \mathbb{L}f^{*}(L_{\bullet} \overset{\mathbb{L}}{\otimes} M_{\bullet})
+  \simeq \mathbb{L}f^{*}(L_{\bullet}) \overset{\mathbb{L}}{\otimes} \mathbb{L}f^{*}(M_{\bullet}) .
+\]
+Notons aussi formule de transitivité
+
+\page{105}
+\[
+  \mathbb{L}(gf)^{*} \simeq \mathbb{L}f^{*}\, \mathbb{L}g^{*}
+\]
+valable sans hypothèse sur $f, g$ \ill{}.
+
+Écriture \struck{$\otimes$} : $f : X \to Y$, $L_{\bullet}$ sur $X$, $M_{\bullet}$ sur $Y$,
+\[
+  L_{\bullet} \overset{\mathbb{L}}{\otimes}_{Y} M_{\bullet}
+  \simeq L_{\bullet} \overset{\mathbb{L}}{\otimes} \mathbb{L}f^{*}(M_{\bullet}) .
+\]
+
+\subsection{Formule d'adjonction pour $f : X \to Y$ :}
+
+\begin{tikzcd}[column sep=small, row sep=small]
+  X \arrow[d, "f"'] & K^{\bullet} \\
+  Y & L_{\bullet}
+\end{tikzcd}
+
+\[
+  \mathrm{Hom}(\mathbb{L}f^{*}(L_{\bullet}), K^{\bullet})
+  \xrightarrow{\ \sim\ } \mathrm{Hom}(L_{\bullet}, \mathbb{R}f_{*}(K^{\bullet}))
+\]
+\note{encadré ; au second membre un symbole biffé précède $L_{\bullet}$.}
+En effet, on peut supposer $K^{\bullet}$ \struck{\ill{}} injectif, $L_{\bullet}$ plat, alors le premier membre est
+\struck{(\ill{} $K$ injectif)} $H^{0}$ \struck{$\mathrm{Hom}^{\bullet}(f^{*}(L_{\bullet}), K^{\bullet})$}, le $H^{0}$ de
+\[
+  \mathrm{Hom}^{\bullet}(f^{*}L_{\bullet}, K^{\bullet}) \simeq \mathrm{Hom}^{\bullet}(L_{\bullet}, f_{*}(K^{\bullet})) \qquad \text{OK.}
+\]
+\marginal{Attention, \ill{} \uncertain{que si} $K^{\bullet}$ \uncertain{injectif}, $f_{*}(K^{\bullet})$ \ill{}. Donc \ill{} \ill{} \ill{} \ill{}.}
+
+\ill{} \uncertain{de projection}
+\[
+  \mathbb{R}f_{*}\, \mathbb{R}\mathcal{H}om^{\bullet}(\mathbb{L}f^{*}(L_{\bullet}), K^{\bullet})
+  \simeq \mathbb{R}\mathcal{H}om^{\bullet}(L_{\bullet}, \mathbb{R}f_{*}(K^{\bullet}))
+\]
+\note{un symbole biffé avant $\mathcal{H}om$ au premier membre.}
+
+\textbf{Cor.}
+\[
+  \mathbb{R}\mathrm{Hom}^{\bullet}(\mathbb{L}f^{*}(L_{\bullet}), K^{\bullet})
+  \simeq \mathbb{R}\mathrm{Hom}^{\bullet}(L_{\bullet}, \mathbb{R}f_{*}(K^{\bullet}))
+\]
+\marginal{\uncertain{Démonstration} de \uncertain{Cor.} : on se ramène à \uncertain{faire} \ill{} \ill{} $L_{\bullet} = A_{Y'}$, \ill{} \ill{} \ill{} :}
+\begin{align*}
+  \mathbb{R}\mathrm{Hom}^{\bullet}(f^{*}L_{\bullet}, K^{\bullet})
+  &= \mathbb{R}\mathrm{Hom}^{\bullet}(A_{X'}, K^{\bullet})
+   = \mathbb{R}\Gamma_{X'}(\mathbb{L}j'^{*}(K^{\bullet})) \\
+  &\simeq \mathbb{R}\Gamma_{Y'}(\mathbb{R}f'_{*}\, \mathbb{L}j'^{*}(K^{\bullet})) \\
+  &\simeq \mathbb{R}\mathrm{Hom}^{\bullet}(A_{Y'}, \mathbb{L}i^{*}(\mathbb{R}f_{*}(K^{\bullet}))) \\
+  &= \mathbb{R}\mathrm{Hom}^{\bullet}(L_{\bullet}, \mathbb{R}f_{*}(K^{\bullet}))
+\end{align*}
+\note{ce calcul court en bas de page, sous le corollaire et dans la marge. Sous $\mathbb{L}j'^{*}(K^{\bullet})$ : « image sur $X'$ » ; une accolade sous $\mathbb{R}f'_{*}\,\mathbb{L}j'^{*}(K^{\bullet})$ porte $\mathbb{L}i^{*}(\mathbb{R}f_{*}(K^{\bullet}))$, avec la justification « car $i : Y' \to Y$ est un morphisme de localisation… » (l'auteur écrit $j$ là où le carré porte $i$). Avant $\mathbb{R}\Gamma_{X'}$, un $\mathrm{Hom}$ biffé. Le carré dessiné en marge :}
+
+\begin{tikzcd}[column sep=small, row sep=small]
+  X' \arrow[r, "j'"] \arrow[d, "f'"'] & X \arrow[d, "f"] \\
+  Y' \arrow[r, "i"'] & Y
+\end{tikzcd}
+
+\page{107}
+\textbf{Remarque.} Nous nous sommes bornés ici aux formules générales valables sans conditions de régularité (genre pseudo-cohérence, ou quasi-cohérence) qui donnent des \ill{} \uncertain{entre} \uncertain{autres} formules. D'autre part, nous nous sommes bornés aux cas « naturels » en général d'existence des opérations cohomologiques $\overset{\mathbb{L}}{\otimes}$, \add{$\mathbb{L}f^{*}$, $\mathbb{R}\mathcal{H}om$}, $\mathbb{R}f_{*}$, sans examiner les variantes \struck{\ill{}} d'hypothèse de Tor-dimension ou Ext-dimension finie…
+
+(2) Formules \uncertain{pour} les \ill{}, faisant \uncertain{intervenir} \add{également !} en plus de $\overset{\mathbb{L}}{\otimes}$ : Künneth.
+
+\struck{Théorème. Soit $f : X \to Y$ un morphisme compactifiable}
+\note{sous le titre biffé, un mot encadré et hachuré, illisible.}
+
+Notons que en général on \uncertain{sera} bien obligé de travailler sur des faisceaux de \uncertain{modules} sur un anneau $\mathbb{Z}/n\mathbb{Z} = A$ qui n'est pas de dimension \add{globale} \uncertain{finie}, \ill{} \ill{} \ill{} \ill{} \ill{} \ill{}, \ill{} \ill{} \uncertain{comme} \uncertain{on} \uncertain{sait}, \ill{} \ill{} à \uncertain{faire} \ill{} $\overset{\mathbb{L}}{\otimes}$, \ill{} \ill{} \ill{} \ill{} aux faisceaux réduits au degré $0$, \ill{} \ill{} \ill{} des $D^{-}$. Il faut
+
+\page{109}
+donc, pour cette raison, savoir définir les $\mathbb{R}f_{*}$, $\mathbb{R}_{!}f_{*}$ pour des arguments qui ne \uncertain{sont} \uncertain{pas} \uncertain{nécessairement} dans $D^{+}$, \add{pour les foncteurs $D^{-}(X) \to D^{-}(Y)$, $D(X) \to D(Y)$}. Pour $\mathbb{R}f_{*}$, ce sera possible dès que $f_{*}$ est de dim.\ cohomologique finie. C'est peut-être vrai dès que $Y$ est noethérien, \add{résultat} \struck{\ill{}} en tout cas de la finitude de la \uncertain{dimension} \uncertain{cohomologique} des corps de type fini sur le corps premier, \struck{\ill{}} donc \uncertain{toujours} pour $Y$ de type fini sur $\mathbb{Z}$. Pour $\mathbb{R}_{!}f_{*}$, \ill{} \ill{} \ill{} \ill{} au changement de base propre, \ill{} dès que $Y$ \emph{qu.\ cpt}. \ill{} \ill{}
+\begin{align*}
+  \mathbb{R}_{!}f_{*} :\ & D(X) \to D(Y) \\
+  & D^{+}(X) \to D^{+}(Y) \\
+  & D^{-}(X) \to D^{-}(Y) \\
+  & D^{b}(X) \to D^{b}(Y)
+  && \text{si $Y$ qu.\ cpt, $f$ compactifiable}
+\end{align*}
+\uncertain{Comme} à $Y$ \ill{}, \ill{},
+\begin{align*}
+  \mathbb{R}f_{*} :\ & D(X) \to D(Y) \\
+  & D^{+}(X) \to D^{+}(Y) \\
+  & D^{-}(X) \to D^{-}(Y) \\
+  & D^{b}(X) \to D^{b}(Y)
+  && \text{si $Y$ de t.f.\ sur un corps}\\
+  &&& \text{ou sur $\mathrm{Spec}\, \mathbb{Z}$, et $f$ de t.f.}
+\end{align*}
+\begin{align*}
+  \mathbb{L}f^{*} :\ & D(\text{\struck{$X$}}\, Y) \to D(X) \\
+  & D^{-}(Y) \to D^{-}(X) \\
+  & D^{+}(Y) \to D^{+}(X)
+  \qquad D^{b}(Y) \to D^{b}(X)
+\end{align*}
+
+\page{111}
+\begin{align*}
+  \mathbb{R}^{!}f :\ & D(\text{\struck{$X$}}\, Y) \to D(X) \\
+  & D^{+}(Y) \to D^{+}(X) \\
+  & D^{-}(Y) \to D^{-}(X) \\
+  & D^{b}(Y) \to D^{b}(X)
+  && \text{si $f$ compactifiable de t.f., $Y$ de t.f.}\\
+  &&& \text{sur un corps, ou sur $\mathrm{Spec}\, \mathbb{Z}$.}
+\end{align*}
+
+\emph{NB} Mais $\overset{\mathbb{L}}{\otimes}$ et $\mathbb{R}\mathcal{H}om$ \ill{} \ill{} \uncertain{aucun} \ill{} \ill{} à être de dim.\ coh.\ finie, même si $X$ \uncertain{excellent} : \ill{} \ill{} \ill{} !
+
+\textbf{Prop.} $\mathbb{R}f_{*}(L_{\bullet}) \overset{\mathbb{L}}{\otimes} M_{\bullet} \xrightarrow{\ \sim\ } \mathbb{R}f_{*}(L_{\bullet}) \overset{\mathbb{L}}{\otimes} M_{\bullet}$ si $M_{\bullet}$ à cohomologie loc.\ cte et constructible (= \add{$M_{\bullet}$} pseudo-cohérent) \emph{ou} $f$ qu.\ cpt qu.\ sép.\ et $M_{\bullet}$ à coh.\ loc.\ constants — sans réserve de dim.\ coh.\ finie. \ill{} \ill{}, \ill{}
+\note{les deux membres de la proposition se lisent identiques sur la page ; on transcrit tel quel. La forme qu'il démontre p.\ 113 et énonce p.\ 119 a $\mathbb{R}f_{*}(L_{\bullet} \overset{\mathbb{L}}{\otimes} M_{\bullet})$ au second membre. Cette ligne d'une encre plus foncée est ajoutée entre le NB et le théorème.}
+\marginal{NB. \ill{} \ill{} \ill{} \ill{} \ill{} \ill{} \uncertain{ordinaires}…}
+
+\textbf{Théorème.} Soit $f : X \to Y$ un morphisme \add{avec $Y$ qu.\ cpt,} compactifiable, $L_{\bullet} \in \mathrm{Ob}\, D^{-}(X)$, $M_{\bullet} \in \mathrm{Ob}\, D^{-}(Y)$, alors on a un isomorphisme canonique bi-fonctoriel
+\[
+  \mathbb{R}_{!}f(L_{\bullet}) \overset{\mathbb{L}}{\otimes} M_{\bullet}
+  \simeq \mathbb{R}_{!}f(L_{\bullet} \overset{\mathbb{L}}{\otimes} M_{\bullet})
+\]
+\note{encadré. Au second membre, $M_{\bullet}$ est pris sur $X$ sans $\mathbb{L}f^{*}$ écrit, selon la convention d'écriture de p.\ 105.}
+
+On peut supposer $f$ propre, \struck{\ill{}} \ill{}
+
+\struck{définition} Donc
+\[
+  \mathbb{R}f_{*}(L_{\bullet}) \overset{\mathbb{L}}{\otimes} M_{\bullet}
+  \simeq \mathbb{R}f_{*}(L_{\bullet} \overset{\mathbb{L}}{\otimes} M_{\bullet})
+\]
+On peut supposer, utilisant la définition, que $L_{\bullet}$ est $f_{*}$-acyclique \uncertain{tout} \uncertain{degré}, et que $M_{\bullet}$ est plat \uncertain{tout} \uncertain{degré}, et il faut définir
+\[
+  f_{*}(L_{\bullet}) \otimes M_{\bullet} \longrightarrow f_{*}(C^{\bullet}(L_{\bullet} \otimes M_{\bullet}))
+\]
+où $C^{\bullet}(L_{\bullet} \otimes M_{\bullet})$ désigne une « résolution » de $L_{\bullet} \otimes M_{\bullet}$ par un \uncertain{complexe} $f_{*}$-acyclique.
+
+\page{113}
+On \uncertain{a} \ill{} un homomorphisme canonique
+\[
+  f_{*}(L_{\bullet}) \otimes M_{\bullet} \text{\struck{$\otimes$}} \longrightarrow f_{*}(L_{\bullet} \otimes M_{\bullet})
+\]
+provenant de
+\[
+  M_{\bullet} \longrightarrow \mathcal{H}om^{\bullet}(f_{*}(L_{\bullet}), f_{*}(L_{\bullet} \otimes M_{\bullet}))
+\]
+(\uncertain{lui-même} provenant de $M_{\bullet} \to \mathcal{H}om^{\bullet}(L_{\bullet}, L_{\bullet} \otimes M_{\bullet})$ \emph{\ill{} \ill{}}) \ill{} \ill{} \uncertain{composé}
+\[
+  f_{*}(L_{\bullet} \otimes M_{\bullet}) \longrightarrow f_{*}(C^{\bullet}(L_{\bullet} \otimes M_{\bullet}))
+\]
+Il faut \uncertain{prouver} que l'homomorphisme \ill{} \ill{}. \ill{} \ill{} \ill{} \uncertain{fonctoriel} pour la catégorie \uncertain{dérivée}. \struck{\ill{} \ill{} \ill{}}
+
+Pour \uncertain{prouver} que \ill{} \ill{} \ill{} \ill{}, \ill{} \ill{} \ill{} \ill{} $L_{\bullet}$, $M_{\bullet}$ \ill{} $Y$-\uncertain{plats}, \uncertain{puis} \ill{} \ill{} \ill{} $M_{\bullet}$ \ill{}, \ill{} \ill{} \ill{} \ill{} de la forme $i_{!}(A_{Y'})$, \ill{} $i : Y' \to Y$ \ill{} \ill{} \ill{} \ill{}. \ill{} \ill{} plat et le $\otimes$ \uncertain{est} \uncertain{ordinaire}. Notons \ill{} \ill{} \ill{} $P_{\bullet}$ \ill{} $Y$, \ill{} $Q_{\bullet}$ \ill{} $Y'$,
+\[
+  i_{!}(Q) \otimes P \simeq i_{!}(Q \otimes i^{*}P)
+\]
+(c'est \ill{} \ill{} \ill{} \uncertain{fibre} \uncertain{par} \uncertain{fibre}…) on
+
+\begin{tikzcd}[column sep=small, row sep=small]
+  X' \arrow[r, "j"] \arrow[d, "f'"'] & X \arrow[d, "f"] \\
+  Y' \arrow[r, "i"'] & Y
+\end{tikzcd}
+
+\marginal{Se \uncertain{simplifie}, \ill{} \ill{} \ill{} \ill{} \ill{} \ill{} \ill{} \ill{}, \ill{} \ill{} \ill{} (\ill{} \ill{} \ill{} \ill{} !)}
+
+\page{115}
+particulier $i_{!}(A_{Y'}) \otimes Q \simeq i_{!}(i^{*}(Q))$ d'où aussitôt
+\begin{align*}
+  i_{!}(A_{Y'}) \otimes \mathbb{R}_{!}f(L_{\bullet})
+  &\simeq \mathbb{R}i_{!}(\mathbb{L}i^{*}(\mathbb{R}_{!}f(L_{\bullet}))) \\
+  &\simeq \mathbb{R}i_{!}\, \mathbb{R}_{!}f'(\mathbb{L}j^{*}(L_{\bullet})) \\
+  &\simeq \mathbb{R}_{!}f(\mathbb{R}_{!}j(\mathbb{L}j^{*}(L_{\bullet}))) \\
+  &\simeq \mathbb{R}_{!}f(\mathbb{L}f^{*}i_{!}(A_{Y'}) \otimes \mathbb{L}j^{*}(L_{\bullet}))
+\end{align*}
+O.K.
+\note{une accolade sous $\mathbb{R}_{!}j(\mathbb{L}j^{*}(L_{\bullet}))$ renvoie à $j_{!}(A_{X'}) \otimes \mathbb{L}j^{*}(L_{\bullet})$, et une seconde sous $j_{!}(A_{X'})$ à $\mathbb{L}f^{*}(i_{!}(A_{Y'}))$. Devant cette dernière formule et à la première ligne, un $A$ biffé ; à la troisième, un $(f)$ biffé entre $\mathbb{R}_{!}$ et $f$. Au dernier membre, le second facteur se lit $\mathbb{L}j^{*}(L_{\bullet})$, là où l'on attendrait $L_{\bullet}$ : \uncertain{$\mathbb{L}j^{*}$}.}
+
+\textbf{Corollaire} (Formule de Künneth). Soient $f : X \to S$, $g : Y \to S$ compactifiables, avec $S$ qu.\ cpt, et $L_{\bullet} \in \mathrm{Ob}\, D^{-}(X)$, $M_{\bullet} \in \mathrm{Ob}\, D^{-}(Y)$, alors on a un isomorphisme \uncertain{bifonctoriel} en $L_{\bullet}, M_{\bullet}$
+\begin{align*}
+  &\mathbb{R}_{!}h_{*}(\mathbb{L}g'^{*}(L_{\bullet}) \overset{\mathbb{L}}{\otimes} \mathbb{L}f'^{*}(M_{\bullet})) \\
+  &\qquad \simeq \mathbb{R}_{!}f_{*}(L_{\bullet}) \overset{\mathbb{L}}{\otimes} \mathbb{R}_{!}g_{*}(M_{\bullet})
+\end{align*}
+\note{encadré.}
+
+\begin{tikzcd}[column sep=small, row sep=small]
+  & Z = X \times_S Y \arrow[dl, "g'"'] \arrow[dr, "f'"] \arrow[dd, "h"] & \\
+  X \arrow[dr, "f"'] & & Y \arrow[dl, "g"] \\
+  & S &
+\end{tikzcd}
+
+\marginal{Redonne \ill{} \ill{} \ill{} \ill{} $g : Y \to S$ \ill{}}
+
+S'obtient en appliquant 2 fois la formule de projection pour $\overset{\mathbb{L}}{\otimes}$.
+
+\textbf{Cas particulier.} Supposons $F$ sur $X$, $G$ sur $Y$ tels que \struck{$L_{\bullet}$, $M_{\bullet}$ plats \ill{} \ill{}} \struck{\ill{} \ill{}} $F$ \uncertain{ou} $G$ soit plat, et les $R^{i}_{!}f(F)$ \uncertain{ou} les $R^{j}_{!}(G)$ soient plats, alors
+\[
+  \mathbb{R}^{n}_{!}h(g'^{*}(F) \otimes f'^{*}(G))
+  \simeq \sum_{i+j=n} R^{i}_{!}f(F) \otimes R^{j}_{!}g(G) .
+\]
+\note{encadré. Le premier facteur est écrit sur un $f$ surchargé ; la lecture $g'^{*}$ est celle que demande le carré.}
+
+\page{117}
+\textbf{Remarque.} On ne peut espérer mieux comme formule de Künneth pour la coh.\ à supports propres, \uncertain{même} sur un corps de base alg.\ clos, \uncertain{car} il faut tjs s'attendre en général à avoir des $\mathrm{Tor}_i$ ….
+
+Pour la cohomologie à supports quelconques de $X$ et $Y$ \add{de t.f.} sur un $k$ (alg.\ clos), on \ill{} \ill{} Künneth, à coefficients dans $\mathbb{Z}/p\mathbb{Z}$ \uncertain{par} \uncertain{exemple} ($p = \text{car.}$). \uncertain{Cependant}, si $X$ \ill{} $Y$ propre sur $k$, \ill{} \ill{} \ill{}.
+
+\begin{align*}
+  (*) \qquad &\mathbb{R}(f \times g)_{*}(L_{\bullet} \overset{\mathbb{L}}{\boxtimes} M_{\bullet}) \\
+  &\qquad \xleftarrow{\ \sim\ } \mathbb{R}f_{*}(L_{\bullet}) \overset{\mathbb{L}}{\boxtimes} \mathbb{R}g_{*}(M_{\bullet})
+\end{align*}
+\note{l'auteur biffe un symbole devant $L_{\bullet}$ au premier membre ; $\boxtimes$ rend son $\otimes$ encadré.}
+
+Comment \ill{} \ill{} \ill{} (\ill{} \ill{} $f$ propre)
+\begin{align*}
+  \mathbb{R}(f \times g)_{*}(L_{\bullet} \overset{\mathbb{L}}{\boxtimes} M_{\bullet})
+  &\simeq \mathbb{R}g_{*}\big[\mathbb{R}f'_{*}(\mathbb{L}g'^{*}(L_{\bullet})) \overset{\mathbb{L}}{\otimes} M_{\bullet}\big] \\
+  &\simeq \mathbb{R}f_{*}(L_{\bullet}) \overset{\mathbb{L}}{\otimes} \mathbb{R}g_{*}(M_{\bullet})
+\end{align*}
+\note{au-dessus du premier $\simeq$ : $\mathbb{R}g_{*}(\mathbb{R}f'_{*})(-)$ ; sous $L_{\bullet} \overset{\mathbb{L}}{\boxtimes} M_{\bullet}$ : $\mathbb{L}g'^{*}(L) \overset{\mathbb{L}}{\otimes} M$ ; une accolade sous $\mathbb{R}f'_{*}(\mathbb{L}g'^{*}(L_{\bullet}))$ porte $\mathbb{L}g^{*}(\mathbb{R}f_{*}(L_{\bullet}))$, avec en dessous « formule de projection pour $f'$ \ill{} » ; sous le second $\simeq$ : « formule de projection pour $g$ : \ill{} que \ill{} $H$ \uncertain{faisceau} \ill{} $S \to$ \uncertain{loc.} \uncertain{constant} !!! ».}
+
+Lorsque ni $f$ ni $g$ propres, alors \struck{\ill{}} \ill{} \ill{} \ill{} un \uncertain{corps} \ill{} \ill{} \ill{} \ill{} \ill{} \uncertain{avoir} la formule \struck{$\mathbb{R}f$} \ill{}, si \ill{} est \emph{\uncertain{premier} à la caractéristique}, \ill{} \ill{} \ill{} \uncertain{dimension} à l'aide du th.\ de dualité locale…
+
+\page{119}
+Notons que ces résultats ; le Künneth établis ici \ill{} \ill{} \ill{} \uncertain{premier} : le \uncertain{cas}, et ne dépendent pas du th.\ de dualité : la formule de Künneth \uncertain{propre} dite \uncertain{avait} \uncertain{déjà} été établie par Verdier \struck{par} en utilisant le th.\ de dualité globale.
+
+\marginal{remarque}
+Notons que \struck{les} formules de projection \uncertain{n'ont} \ill{} \ill{} exacte si \ill{} \add{\uncertain{complexes}} $\mathbb{R}_{!}f_{*}$ \ill{} $\mathbb{R}f_{*}$, \ill{} \ill{} \ill{} : $L_{\bullet} = A_{X}$, $X = U \hookrightarrow Y$ \ill{} \ill{} ($U$ \ill{} \ill{} $X$), et le $H^{0}$, on
+\[
+  M_{\bullet} = A_{U,X} ,
+\]
+\ill{} \ill{} \ill{} que si $U$ \ill{} \ill{} \ill{} \ill{} à $Y$, et $F$ \ill{} \ill{} que $F|(X - f^{-1}(U)) = 0$, \ill{} $f_{*}(F)|(Y - U) = 0$, \ill{} \ill{} que \ill{} \ill{} \ill{} si $f$ \ill{} \ill{}… \struck{\ill{}} \uncertain{Cependant}, une démonstration \uncertain{presque} \uncertain{immédiate} (\uncertain{valable} pour $H$ \uncertain{topos} \uncertain{arbitraire}, sans \ill{} réserve d'une finitude de dim.\ cl.)\ \uncertain{prouve} \ill{} \ill{} \ill{} un isom.
+\[
+  \mathbb{R}f_{*}(L_{\bullet}) \overset{\mathbb{L}}{\otimes} M_{\bullet}
+  \longrightarrow \mathbb{R}f_{*}(L_{\bullet} \overset{\mathbb{L}}{\otimes} M_{\bullet})
+\]
+lorsque $M_{\bullet}$ est à cohomologie localement constante, de t.f.\ (\struck{la} restriction « de type fini » étant d'ailleurs inutile si $f$ est qu.\ cpt qu.\ sép.) : \ill{} \ill{} \ill{} \ill{} \ill{} \ill{} $M = A_{Y}$ !
+\note{la page s'arrête là ; la remarque sur les limites des formules de projection ne se poursuit pas dans la liasse (la page 120 est le seul texte dactylographié du verso).}
+
+\end{document}
