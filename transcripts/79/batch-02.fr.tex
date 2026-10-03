@@ -1,0 +1,616 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 79, batch 2 (pages 21-40).
+% Established from the facsimile archives/batches/79/batch-02.pdf, per the skill
+% transcribe-grothendieck.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-03 — first pass, unchecked against the pages by a human.
+%
+% All twenty pages are transcribed. They are one continuous run in his hand,
+% paginated by him 10 to 19 on the odd sheets (p. 21 = his 10, p. 39 = his 19),
+% with formulas numbered (48) to (101). The argument runs in from the previous
+% batch (formulas (1)-(47), § I) and out past page 40.
+%
+% Content: the regular triangulated 2-polyhedron SP_M attached to a free module
+% M of rank 2 over Λ = Z or Z/nZ (n ≥ 3): injectivity of Sl(M)' → Aut^+(SP_M),
+% the theorem Sl_Λ(M)' ≃ Aut^+(SP_M), Gl_Λ(M)^±' ≃ Aut(SP_M); counts of
+% vertices, edges, faces and genus of SP_M for Λ = Z/nZ (g = 0 iff n ≤ 5,
+% g = 1 iff n = 6). § II: the oriented triangular cartographic group, its
+% isomorphism with Sl(2,Z)' and Gl(2,Z)', the explicit flag automorphisms
+% τ_i^r and ρ_i^r as matrices, comparison with his "formulaire 1981", the sign
+% choices (87)/(88), universality of SP_M over Z. § III: the module without a
+% symplectic gauge, the polyhedron P_M with φ(n)/2 components (connected iff
+% n ∈ {3,4,6}, a "bi-icosaèdre" for n = 5), and the extra structures
+% (95), (97), (101) on P_M.
+%
+% Page 22 ends with a "Lemme" cancelled by a lattice of diagonal strokes;
+% it is transcribed as struck, the cancelled prose largely \ill{}.
+%
+% The dating is the inventory's own for the shelfmark; inventory group 69-89.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{79}
+\batch{2}
+\pages{21}{40}
+\dating{[à partir de 1980]}
+\watermark{Édition de démonstration}
+\foldertitle{2-polyèdres réguliers triangulés, et modules libres de rangs 2 sur les anneaux $\Lambda=\mathbb{Z}/n\mathbb{Z}$ et $\Lambda=\mathbb{Z}$ : notes manuscrites (s.d.).}
+
+\begin{document}
+
+\page{21}
+\note{p. 10 de l'auteur. La page s'ouvre au milieu d'une phrase commencée dans le lot précédent, dont l'auteur reprend aussi la numérotation des formules (48 et suivantes).}
+
+\uncertain{sûrement} vrai que $SF_M$ est encore connexe, mais je ne veux pas m'y attarder maintenant.
+
+Je reviens au cas général (avec toujours $2\cdot 1_\Lambda \neq 0$, cependant). On a donc
+\[
+(48)\qquad \mathrm{Sl}(M)' \overset{\text{déf}}{=} \mathrm{Sl}(M)/\{\pm 1\} \longrightarrow \mathrm{Aut}^{+}(SP_M)
+\]
+\marginal{sous $\mathrm{Aut}^{+}$ : « pour l'orientation canonique $\mu$ ».}
+
+Je dis que cette application est injective, \struck{Soit en effet $u$} \struck{i.e. que} plus précisément
+\[
+(49)\qquad \text{Soit } f \in SF_M, \text{ et } u \in \mathrm{Gl}(M), \text{ alors }
+\bigl(u(x) = x \ \ \forall x \in f\bigr) \Longrightarrow u \in \{\pm \mathrm{id}_M\}.
+\]
+
+\uncertain{Dém.} $f = \{\dot x, \dot y, \dot z\}$, avec $(x,y,z) \in B(M)$, on aura donc, quitte à changer $u$ de signe,
+\[
+ux = x, \quad uy = \varepsilon' y, \quad uz = \varepsilon'' z
+\]
+\struck{$x \cdot y$}
+\[
+x + y + z = 0, \qquad \underbrace{x + \varepsilon' y + \varepsilon'' z}_{= u(x+y+z)} = 0
+\]
+donc $x = -y - z = -\varepsilon' y - \varepsilon'' z$, et comme $(y,z) \in \mathrm{Rep}(M)$, cela implique $\varepsilon' = 1$, $\varepsilon'' = 1$, donc $u = \mathrm{id}_M$. OK.
+
+Ainsi, on trouve un homomorphisme injectif de suites exactes canoniques
+
+\page{22}
+(50)
+
+\begin{tikzcd}[column sep=small, row sep=small, nodes={font=\scriptsize}]
+1 \arrow[r] & \mathrm{Sl}_\Lambda(M)' \arrow[r] \arrow[d, hook] & \mathrm{Gl}_\Lambda(M)^{\pm\prime} \arrow[r, "\det"] \arrow[d, hook] & \{\pm 1\} \arrow[r] \arrow[d, "\wr"] & 1 \\
+1 \arrow[r] & \mathrm{Aut}^{+}(SP_M) \arrow[r] & \mathrm{Aut}(SP_M)^{\pm} \arrow[r] & \{\pm 1\} \arrow[r] & 1
+\end{tikzcd}
+
+\marginal{sous $\mathrm{Aut}(SP_M)^{\pm}$ : « \uncertain{ensemble} qui transforme l'orientation $\mu$ en $\pm\mu$ ».}
+
+\marginal{où $\mathrm{Sl}_\Lambda(M)' \overset{\text{déf}}{=} \mathrm{Sl}_\Lambda(M)/\pm 1$, $\mathrm{Gl}_\Lambda(M)^{\pm\prime} \overset{\text{déf}}{=} \mathrm{Gl}_\Lambda(M)^{\pm}/\pm 1$}
+
+Notons que l'on a
+\[
+(51)\qquad \mathrm{Rep}^{+}(SP_M) \simeq \overrightarrow{SA}_M \simeq \mathrm{Repsp}(M, e_M)/\{\pm \mathrm{id}_M\},
+\]
+où $\mathrm{Repsp}(M,e_M) = \{(x,y) \in M^2 \mid x \wedge y = e_M\}$, la correspondance étant
+\[
+\{\dot x, \dot y\} \longleftarrow (x,y) \bmod \{\pm \mathrm{id}_M\}
+\]
+d'où le fait que $\mathrm{Sl}_\Lambda(M)'$ opère de façon simplement transitive sur $\mathrm{Rep}^{+}(SP_M)$, donc que $\mathrm{Gl}_\Lambda(M)^{\pm\prime}$ opère de façon simpl. transitive sur l'ens. des repères $\mathrm{Rep}(SP_M)$.
+
+\note{Le passage qui suit est annulé par un treillis de traits obliques ; la prose biffée n'est lisible que par fragments. Au-dessus, encadré : « $R$, $R'$ ».}
+
+\struck{Lemme. Soit $P = (S, A, F, \ldots)$ une structure} \struck{« 2-polyédrale » connexe} \struck{\add{au sens strict} \ill{} les axiomes} \struck{\ill{} toute arête incidente à exactement deux faces, plus \ill{} deux sommets} \struck{(incidentes : avec $f$ \ill{}, il y a exactement deux arêtes, incidentes à la fois à $s$ et $f$)} \struck{associé à un sommet,}
+
+\page{23}
+\note{p. 11 de l'auteur.}
+
+Comme \uncertain{tout} automorphisme d'une structure 2-polyédrale connexe \add{au sens strict} est connu quand on connaît son effet sur un repère, on trouve le
+
+\emph{Théorème}. Si $\Lambda = \mathbb{Z}$ ou $\mathbb{Z}/n\mathbb{Z}$ ($n \geq 3$), alors les homs verticaux dans (50), sont des isomorphismes, i.e.
+\[
+(52)\qquad
+\begin{cases}
+\mathrm{Sl}_\Lambda(M)' \simeq \mathrm{Aut}^{+}(SP_M) \\
+\mathrm{Gl}_\Lambda(M)^{\pm\prime} \simeq \mathrm{Aut}(SP_M),
+\end{cases}
+\]
+et $SP_M$ est un 2-polyèdre triangulé orienté connexe, \emph{régulier} du point de vue orienté aussi bien que du point de vue non orienté.
+
+Calculons le nb de sommets, arêtes, faces de $SP_M$, dans le cas où
+\[
+(53)\qquad
+\begin{cases}
+\Lambda = \mathbb{Z}/n\mathbb{Z} = \prod_\alpha \mathbb{Z}/p_\alpha^{\nu_\alpha}\mathbb{Z} \\
+\text{où } n = \prod p_\alpha^{\nu_\alpha}, \text{ les } p_\alpha \text{ premiers.}
+\end{cases}
+\]
+d'où
+
+\page{24}
+\[
+(54)\qquad \mathrm{Sl}(2,\Lambda) \simeq \prod_\alpha
+\underbrace{\mathrm{Sl}(2, \mathbb{Z}/p_\alpha^{\nu_\alpha}\mathbb{Z})}_{\text{d'ordre } (p_\alpha(p_\alpha-1)(p_\alpha+1))\, p_\alpha^{3(\nu_\alpha-1)}}
+\]
+\note{Le membre de gauche est surchargé : un indice $\Lambda$ et un exposant sont biffés ou à demi effacés.}
+
+donc
+\[
+(55)\qquad
+\begin{cases}
+\operatorname{card} \mathrm{Sl}(2, \mathbb{Z}/n\mathbb{Z}) = \prod_\alpha \bigl[p_\alpha (p_\alpha - 1)(p_\alpha + 1)\, p_\alpha^{3(\nu_\alpha - 1)}\bigr] = N \\
+\operatorname{card} \mathrm{Sl}(2, \mathbb{Z}/n\mathbb{Z})' = \frac{1}{2} \prod_\alpha \bigl[p_\alpha (p_\alpha - 1)(p_\alpha + 1)\, p_\alpha^{3(\nu_\alpha - 1)}\bigr] = N' = N/2
+\end{cases}
+\]
+
+\struck{Le stabilisé}
+
+On a de même
+\[
+(56)\qquad
+\begin{cases}
+\widetilde{S}_M \simeq \prod_\alpha \widetilde{S}_{M_\alpha} \\
+\operatorname{card} \widetilde{S}_{M_\alpha} = (p_\alpha - 1)(p_\alpha + 1)\, p_\alpha^{2(\nu_\alpha - 1)}
+\end{cases}
+\]
+donc
+\[
+(57)\qquad \operatorname{card} S_M = \frac{1}{2} \prod_\alpha (p_\alpha - 1)(p_\alpha + 1)\, p_\alpha^{2(\nu_\alpha - 1)}
+\]
+\[
+\qquad = \frac{N}{2 \prod_\alpha p_\alpha^{\nu_\alpha}} = N/2n = N'/n .
+\]
+\[
+(58)\qquad
+\begin{cases}
+\vec{\widetilde{A}}_M \simeq \mathrm{Rep}^{\mathrm{sp}}(M) \ \text{torseur sous } \mathrm{Sl}(2, \mathbb{Z}/n\mathbb{Z}), \\
+\qquad \text{cardinal donné par (55, a)} \\
+\overrightarrow{SA}_M \simeq \mathrm{Rep}(M)' \ \text{torseur sous } \mathrm{Sl}(2, \mathbb{Z}/n\mathbb{Z})', \\
+\qquad \text{cardinal donné par (55 b),}
+\end{cases}
+\]
+\marginal{sous $\overrightarrow{SA}_M$ : « arêtes orientées de $SP_M$ ».}
+
+donc
+\[
+(59)\qquad
+\begin{cases}
+SA_M \simeq \mathrm{Rep}(M)'/\text{symétrie} \quad \{\dot x, \dot y\} \mapsto \{\dot y, \dot x\}, \quad (x,y) \mapsto (-x,-y) \\
+\text{de cardinal } \underbrace{\tfrac{1}{4} \prod_\alpha p_\alpha (p_\alpha - 1)(p_\alpha + 1)\, p_\alpha^{3(\nu_\alpha - 1)}}_{N'/2}
+\end{cases}
+\]
+
+enfin \struck{(60) $\widetilde{SF}_M \simeq B_{\mathrm{sp}}(M)/\mathfrak{S}_3$, triplets $(x,y,z)$, opérant librement, de cardinal $N/$}
+
+\page{25}
+\note{p. 12 de l'auteur.}
+\[
+(60)\qquad
+\begin{cases}
+\widetilde{SF}_M \simeq \underbrace{B_{\mathrm{sp}}(M, e_M)}_{\{(x,y,z) \in B(M) \mid x \wedge y \in \{\pm e_M\}\}} / \underbrace{\mathfrak{S}_3}_{\text{opérant librement}} \\
+\text{de cardinal } 2N/6 = N/3
+\end{cases}
+\]
+d'où
+\[
+(61)\qquad \operatorname{card} SF_M = \tfrac{1}{2} \operatorname{card} \widetilde{SF}_M = N/6 = N'/3 ,
+\]
+en résumé on aura
+\[
+(62)\qquad
+\begin{cases}
+s_0(SP_M) = N'/n \\
+s_1(SP_M) = N'/2 \\
+s_2(SP_M) = N'/3
+\end{cases}
+\]
+NB tous les sommets sont d'ordre $n$, toutes les faces sont d'ordre $3$.
+
+\marginal{C'était évident d'avance, en vertu du th. et de l'analyse faite de \ill{} la structure de $SP_M$ autour d'un sommet…}
+
+avec
+\[
+(63)\qquad
+\begin{cases}
+N' = \operatorname{card} \mathrm{Sl}(2, \mathbb{Z}/n\mathbb{Z})' = \frac{1}{2} \prod_\alpha p_\alpha (p_\alpha - 1)(p_\alpha + 1)\, p_\alpha^{3(\nu_\alpha - 1)} \\
+\text{où } n = \prod_\alpha p_\alpha^{\nu_\alpha},
+\end{cases}
+\]
+d'où
+\[
+(64)\qquad \chi(SP_M) = N'\Bigl[\frac{1}{n} - \frac{1}{2} + \frac{1}{3}\Bigr] = N'\Bigl[\frac{1}{n} - \frac{1}{6}\Bigr] = 2 - 2g
+\]
+ou encore pour le genre de $SP_M$
+\[
+(65)\qquad g = 1 + \frac{N'}{2}\Bigl(\frac{1}{6} - \frac{1}{n}\Bigr)
+\]
+\note{Devant et après (65), deux premières rédactions de la formule et d'une conclusion, biffées et illisibles.}
+
+On a donc $g = 0$, i.e. $g < 1$, ssi $\frac{1}{6} - \frac{1}{n} < 0$ i.e. \struck{ssi}
+
+\struck{$n \leq 5$ ssi $g = 0$ ; $n = 6$ ssi \uncertain{$g = 1$} ; $n \geq 7$ ssi $g \geq 2$}
+
+\page{26}
+\[
+(66)\qquad
+\begin{cases}
+g = 0 \ \text{ ssi } \ n \leq 5 \\
+g = 1 \ \text{ ssi } \ n = 6 \\
+g \geq 2 \ \text{ ssi } \ n \geq 7 .
+\end{cases}
+\]
+
+Nous reviendrons de façon plus détaillée sur les cas où $g = 0$ ($n \leq 5$) et $g = 1$ ($n = 6$), par la suite. Pour l'instant, j'ai envie d'expliciter d'abord la fonctorialité des constructions faites, notamment pour $\Lambda$ variable, mais aussi pour $(M, e_M)$ variable.
+
+\section*{II}
+
+Revenons à la description combinatoire standard des « cartes triangulées » orientées, via les ensembles à opérateurs sous le groupe cartographique \add{orienté (par prudence)} triangulé
+\[
+(67)\qquad \mathfrak{G}^{\circ}_{3,\infty} = \{\rho_0, \rho_1, \rho_\infty \mid \rho_1^2 = \rho_\infty^3 = 1, \ \rho_\infty \rho_1 \rho_0 = 1\}
+\]
+\marginal{sous $\rho_0$, $\rho_1$, $\rho_\infty$ respectivement : « rotation autour d'un sommet », « rotation autour d'un centre d'arête », « rotation autour d'une face ».}
+\note{La relation $\rho_\infty\rho_1\rho_0 = 1$ est ajoutée en fin de ligne ; dans l'indice de $\mathfrak{G}$, un premier chiffre est biffé.}
+
+D'autre part, on a un isomorphisme (plus ou moins) canonique :
+
+\page{27}
+\note{p. 13 de l'auteur.}
+\[
+(68)\qquad
+\begin{array}{c}
+\mathrm{Sl}(2,\mathbb{Z})' \xleftarrow[\ \sim\ ]{\ \varphi\ } \mathfrak{G}^{\circ}_{3,\infty} \\
+\| \\
+\mathrm{Sl}(2,\mathbb{Z})/\pm 1
+\end{array}
+\]
+\struck{$\longleftarrow \rho_0$}
+
+donné par
+\[
+(69)\qquad \varphi
+\begin{cases}
+\rho_1 \longmapsto \lambda_1 = \begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix} = \sigma \\[4pt]
+\rho_\infty \longmapsto \lambda_\infty = \begin{pmatrix} 1 & -1 \\ 1 & 0 \end{pmatrix} = \rho^{-1} \\[4pt]
+\rho_0 \longmapsto \lambda_0 = \begin{pmatrix} 1 & -1 \\ 0 & 1 \end{pmatrix} = \varepsilon_0
+\end{cases}
+\quad \bmod \pm 1
+\]
+\note{Une première mention « mod $\pm 1$ » est biffée en tête de l'accolade. Les lettres à droite ($\sigma$, $\rho^{-1}$, $\varepsilon_0$) sont lues sous réserve : elles portent de petites marques en exposant.}
+
+(suivant un formulaire), qui s'insère d'ailleurs dans un isomorphisme entre
+\[
+\mathfrak{G}_{3,\infty} = \{\tau_0, \tau_1, \tau_\infty \mid \tau_0^2 = \tau_1^2 = \tau_\infty^2 = (\tau_0\tau_\infty)^2 = (\tau_0\tau_1)^3 = 1\}
+\]
+et $\mathrm{Gl}(2,\mathbb{Z})' = \mathrm{Gl}(2,\mathbb{Z})/\{\pm 1\}$, savoir
+\[
+(71)\qquad
+\begin{array}{c}
+\mathrm{Gl}(2,\mathbb{Z})' \xleftarrow{\ \sim\ } \mathfrak{G}_{3,\infty} \\
+\| \\
+\mathrm{Gl}(2,\mathbb{Z})/\{\pm 1\}
+\end{array}
+\]
+\marginal{NB $\rho_\infty = \tau_1\tau_0$, $\rho_0 = \tau_\infty\tau_1$, $\rho_1 = \tau_0\tau_\infty$ (70)}
+
+\drawing{dans la marge gauche, un hexagone hachuré ; à droite, un triangle (face $f$) de sommet $s$ et d'arête $a$, avec les drapeaux voisins du drapeau hachuré $r$ marqués $\tau_1 r$, $\tau_0 r$, $\tau_\infty r$ ; légende $r = (s,a,f)$.}
+
+donné par
+\[
+(72)\qquad
+\begin{cases}
+\tau_\infty \longmapsto r_\infty = \begin{pmatrix} -1 & 0 \\ 0 & 1 \end{pmatrix} = \tau_\infty \\[4pt]
+\tau_0 \longmapsto r_0 = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix} = \tau'_\infty \\[4pt]
+\tau_1 \longmapsto r_1 = \begin{pmatrix} -1 & 1 \\ 0 & 1 \end{pmatrix} = -\tau'_0
+\end{cases}
+\]
+\marginal{Cf « formulaire pour \ill{} ».}
+
+\page{28}
+\add{Ceci précisé,} Soit maintenant $M$ un $\Lambda$-module libre de rang $2$, et considérons l'ens.
+\[
+(73)\qquad \mathrm{Rep}(M)' \simeq \mathrm{Isom}_\Lambda(\Lambda^2, M)/\pm 1
+\]
+qui est un torseur \add{à droite} sous $\mathrm{Gl}(2,\Lambda)/\pm 1$. Comme l'hom canonique
+\[
+\mathbb{Z} \longrightarrow \Lambda
+\]
+définit des homs correspondants
+\[
+(74)\qquad
+\begin{cases}
+\mathrm{Gl}(2,\mathbb{Z}) \longrightarrow \mathrm{Gl}(2,\Lambda) \\
+\mathrm{Gl}(2,\mathbb{Z})' \longrightarrow \mathrm{Gl}(2,\Lambda)' = \mathrm{Gl}(2,\Lambda)/\{\pm 1\}
+\end{cases}
+\]
+on peut considérer $\mathrm{Rep}(M)'$ comme un ensemble sur lequel $\mathrm{Gl}(2,\mathbb{Z})'$ opère à droite, donc à gauche via la modification habituelle $g \mapsto g^{-1}$. Donc $\mathrm{Rep}(M)'$ définit une structure \add{2-polyédrale} triangulée (pas néc. \uncertain{finie}) qu'il faudrait expliciter, en termes des constructions du §~I. On peut aussi, \struck{prenant} \add{regardant} la restriction de l'opération précédente à $\mathrm{Sl}(2,\mathbb{Z})'$, on trouve une structure 2-polyédrale triangulée orientée (qui, pour
+
+\page{29}
+\note{p. 14 de l'auteur.}
+
+les valeurs générales, s'identifie au revêtement des orientations locales du précédent). Quand on se donne une jauge $e_M \in (\det M)^{*}$, on peut aussi considérer l'ens. des repères symplectiques
+\[
+(75)\qquad \mathrm{Repsp}_\Lambda(M, e_M)' \subset \mathrm{Rep}_\Lambda(M)'
+\]
+\[
+\qquad\qquad \mathrm{Repsp}_\Lambda(M, e_M)' = \mathrm{Repsp}_\Lambda(M, e_M)/\{\pm \mathrm{id}_M\}
+\]
+qui est torseur sous $\mathrm{Sl}(2,\Lambda)'$, et qui devient donc un ens. sur lequel $\mathrm{Sl}(2,\mathbb{Z})'$ opère. Il lui correspond donc une structure 2-polyédrale orientée, qu'il faudrait encore expliciter en termes des constructions précédentes \add{du §~I}. Sauf erreur, pour $\Lambda$ de la forme $\mathbb{Z}$ ou $\mathbb{Z}/n\mathbb{Z}$ (ce qui est nécessaire pour que les dites constructions fournissent bien un polyèdre, au sens strict des termes), on retrouve,
+
+\page{30}
+à isom. canonique près \add{qu'il faudrait expliciter}, le 2-polyèdre triangulé orienté $SP_M$. Dans ce cas d'ailleurs, l'hom qui correspond à (74)
+\[
+(76)\qquad \mathrm{Sl}(2,\mathbb{Z})' \longrightarrow \mathrm{Sl}(2,\Lambda)'
+\]
+est un hom surjectif, de sorte qu'il est clair a priori que la structure 2-polyédrale associée doit être connexe, et bien sûr \emph{régulière} (dans le cas général, si $\Lambda_0$ est l'image de $\mathbb{Z}$ dans $\Lambda$, les composantes connexes de la structure obtenue doivent être des polyèdres triangulés réguliers \add{isomorphes}, \struck{dont le} \struck{\ill{}} ayant comme groupe d'automorphismes \add{directs} le groupe $\mathrm{Sl}(2,\Lambda_0)'$.)
+
+\marginal{à vérifier !}
+
+\page{31}
+\note{p. 15 de l'auteur.}
+
+Considérons un module libre \add{$M$,} \struck{de} \struck{de} rang $2$ sur l'anneau $\Lambda = \Lambda_0$ ($\simeq \mathbb{Z}$ ou $\mathbb{Z}/n\mathbb{Z}$, $n \geq 3$), \struck{et considérons} muni d'une jauge $e_M \in (\det M)^{*}$, d'où un 2-polyèdre régulier triangulé $SP_M$. Choisissons un repère \struck{direct} de $SP_M$, \struck{qui} \struck{et donc} ce qui revient au même, un triplet d'éléments distincts de $S_M = M^{*}/\pm 1$
+\[
+(77)\qquad (s,t,u) \ \text{ tel que } \ \{s,t,u\} \in SF_M
+\]
+i.e. tel qu'il existe
+\[
+(78)\qquad
+\begin{cases}
+(x,y,z) \in B(M) \\
+\text{avec } s = \dot x, \ t = \dot y, \ u = \dot z = (x+y)^{\cdot}, \ x \wedge y \in \{\pm e_M\}
+\end{cases}
+\]
+[donc $(x,y) \in \mathrm{Rep}(M)$, $x + y + z = 0$ i.e. $z = -(x+y)$]
+le repère correspondant étant
+\[
+(79)\qquad r = (s, a, f), \quad \text{avec} \quad a = \{s,t\}, \ f = \{s,t,u\} .
+\]
+
+\struck{Le triplet} Supposons que le repère soit direct, i.e. la base $(x,y)$ soit directe
+\[
+(80)\qquad x \wedge y = e_M .
+\]
+
+On va expliciter les automorphismes $\tau_0^r, \tau_1^r, \tau_\infty^r$ du polyèdre régulier \add{(direct)} $SF_M$, qui correspondent au repère \add{choisi} $r$ (79), i.e. à la base symplectique $(x,y)$ de $M$. (Le choix \struck{direct} d'un repère direct revient à celui d'une base symplectique, \emph{modulo signe}.)
+
+\page{32}
+\drawing{losange de sommets $u$ (en haut), $s$ (à gauche), $t$ (à droite), $u'$ (en bas), coupé par la diagonale $a = st$ ; dans la face supérieure $f$, le drapeau hachuré $r$ et ses voisins $\tau_1 r$, $\tau_0 r$, $\tau_\infty r$, ce dernier passant dans la face inférieure.}
+
+Si $u'$ est le sommet de $SP_M$ tel que l'on ait
+\[
+\{s,t,u'\} \in SF_M, \qquad \{s,t,u'\} \neq \{s,t,u\} \quad \text{i.e. } u' \neq u
+\]
+i.e.
+\[
+(81)\qquad u' = (x - y)^{\cdot} ,
+\]
+on aura
+\[
+(81)\qquad
+\begin{cases}
+\tau_0^r(s,t,u) = (t,s,u) \\
+\tau_1^r(s,t,u) = (s,u,t) \\
+\tau_\infty^r(s,t,u) = (s,t,u')
+\end{cases}
+\]
+\note{Le numéro de ce second système se lit comme (81) répété ; le numéro (82) vient ensuite. À droite, un mot biffé illisible.}
+
+donc $\tau_0^r, \tau_1^r, \tau_\infty^r$ sont induits respectivement par les automorphismes \add{antisymplectiques} de $M$, \struck{\ill{}} \struck{caractérisés par} :
+\[
+(82)\qquad
+\begin{cases}
+\tau_0^r \begin{cases} x \mapsto y \\ y \mapsto x \\ z \mapsto z \end{cases} \quad \text{matrice } \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix} = r_0 \\[14pt]
+\tau_1^r \begin{cases} x \mapsto x \\ y \mapsto z \\ z \mapsto y \end{cases} \quad \text{matrice } \begin{pmatrix} 1 & -1 \\ 0 & -1 \end{pmatrix} = -r_1 \\[14pt]
+\tau_\infty^r \begin{cases} x \mapsto x \\ y \mapsto -y \\ z \mapsto y - x \end{cases} \quad \text{matrice } \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix} = -r_\infty
+\end{cases}
+\]
+les automorphismes correspondants de $M$, et leurs matrices p.r. à la base $(x,y)$ de $M$, étant définis modulo signe par le choix du repère $r$ (et $=$, pour ce qui est des matrices, indépendamment du choix du repère). On trouve
+\[
+(83)\qquad
+\begin{cases}
+\rho_0^r \overset{\text{déf}}{=} \tau_\infty^r \tau_1^r \longmapsto \begin{pmatrix} 1 & -1 \\ 0 & 1 \end{pmatrix} = \lambda_0 \\[8pt]
+\rho_1^r \overset{\text{déf}}{=} \tau_0^r \tau_\infty^r \longmapsto \begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix} = -\lambda_1 \\[8pt]
+\rho_\infty^r \overset{\text{déf}}{=} \tau_1^r \tau_0^r \longmapsto \begin{pmatrix} -1 & 1 \\ -1 & 0 \end{pmatrix} = -\lambda_\infty ,
+\end{cases}
+\]
+i.e. à des différences de signe près (qui du notre
+
+\page{33}
+\note{p. 16 de l'auteur.}
+
+point de vue actuel sont sans importance, puisqu'on travaille dans $\mathrm{Sl}(2,\Lambda)'$) on tombe pile sur les formules du formulaire 1981, qui avaient été obtenues par voie topologico-transcendante (classique) relativement délicate. Cela confirme que ledit formulaire (où \add{le couple} des matrices $\rho = \lambda_\infty^{-1}$ et $\sigma = \lambda_1$ choisies comme générateurs de $\mathrm{Sl}(2,\mathbb{Z})$, par
+\[
+(84)\qquad \mathrm{Sl}(2,\mathbb{Z}) = \{\rho, \sigma \mid \rho^3 = \sigma^2 = \rho^{-3}\}
+\]
+\note{Le dernier membre de la présentation (84) est lu sous réserve.}
+n'était \uncertain{dicté} que par des propriétés intrinsèques \struck{tout bel et bien} remarquables, \uncertain{via} à conjugaison près par un élément de $\mathrm{Gl}(2,\mathbb{Z})/\{\pm 1\} \simeq{}$ \uncertain{$\mathrm{GP}(1,\mathbb{Z})$}, était vraiment « le plus naturel possible ».
+
+\emph{NB} Si on regarde les homomorphismes
+\[
+(85)\qquad \Pi_{0,3} = \{\rho_0, \rho_1, \rho_\infty \mid \rho_\infty \rho_1 \rho_0 = 1\} \xrightarrow{\ \varphi^{\circ}\ } \mathrm{Sl}(2,\mathbb{Z})
+\]
+qui relèvent l'homomorphisme précédent à valeurs dans $\mathrm{Sl}(2,\mathbb{Z})'$
+\[
+(*)\qquad \rho_0 \longmapsto \lambda_0, \quad \rho_1 \longmapsto \lambda_1, \quad \rho_\infty \longmapsto \lambda_\infty ,
+\]
+ou les homomorphismes
+\[
+(86)\qquad \Pi^{2}_{0,3} = \{\tau_0, \tau_1, \tau_\infty \mid \tau_0^2 = \tau_1^2 = \tau_\infty^2\} \xrightarrow{\ \varphi\ } \mathrm{Gl}(2,\mathbb{Z})
+\]
+qui relèvent l'hom précédent dans $\mathrm{Gl}(2,\mathbb{Z})' \simeq \ldots$
+\[
+(**)\qquad \tau_0 \longmapsto r_0, \quad \tau_1 \longmapsto r_1, \quad \tau_\infty \longmapsto r_\infty
+\]
+(en partant du fait que pour $(*)$ et $(**)$ il y a des choix canoniques correspondants, sans \struck{\ill{}}
+
+\page{34}
+d'ambiguïté de signe), on trouve que pour un tel choix, disons
+\[
+(87)\qquad \rho_0 \longmapsto \lambda_0, \quad \rho_1 \longmapsto \lambda_1, \quad \rho_\infty \longmapsto \lambda_\infty
+\]
+ou
+\[
+(87\ \text{bis})\qquad \tau_0 \longmapsto r_0, \quad \tau_1 \longmapsto r_1, \quad \tau_\infty \longmapsto r_\infty ,
+\]
+les autres choix possibles s'obtiennent en faisant des changements de signes sur les $\rho_i$ resp. les $\tau_i$, \ill{} des \uncertain{rangs} des $\rho_i$ resp. $\tau_i$, avec comme seule contrainte que dans le cas des $\rho_i$, le nb de signes $-$ soit pair (donc égal à $2$, s'il y a effectivement modification). D'ailleurs, une fois le choix fait pour les $\rho_i$, si on veut que $\varphi^{\circ}$ soit induit par $\varphi$, cela impose le choix des images des $\tau_i$, aux changements de signes simultanés près. Ces changements de signes \uncertain{reviennent} à ce que l'image de $\rho_0$ soit \add{ou non} \struck{\ill{}} \emph{unipotente}, ce qui élimine l'ambiguïté de signes pour $\lambda_0$. \struck{Cela} Il reste donc comme seule autre possibilité, en plus de (87), la possibilité
+\[
+(88)\qquad \rho_0 \longmapsto \lambda_0, \quad \rho_1 \longmapsto -\lambda_1, \quad \rho_\infty \longmapsto -\lambda_\infty
+\]
+qui est celle qui s'est présentée dans (83). Elle se distingue du choix (87) par le fait que
+\[
+(-\lambda_\infty)^3 = -(\lambda_\infty)^3 = 1, \quad \text{mais} \quad (\lambda_\infty)^3 = -1
+\]
+i.e. $-\lambda_\infty$ est d'ordre $3$, tandis que $\lambda_\infty$ est d'ordre $6$. Suivant le contexte, l'un ou l'autre des deux choix
+
+\page{35}
+\note{p. 17 de l'auteur.}
+
+peut être préférable --- l'an dernier j'ai choisi délibérément l'image de $\rho_\infty$ comme \add{$\lambda_\infty =$} $\rho^{-1}$ et non $-\rho^{-1}$, pour avoir un élément d'ordre $6$, « moins spécial » que $-\lambda_\infty$ qui est d'ordre $3$.
+
+Relativement au choix (87) \add{$= (69)$} pour les $\rho_i$, \add{(87 bis) $=$} le choix correspondant (72) pour les $\tau_i$, qui semble plus satisfaisant que l'autre choix possible
+\[
+\tau_i \longmapsto -r_i ,
+\]
+qui introduit plus de signes dans les expressions matricielles. Relativement au choix (88) $=$ (83), le choix compatible pour les $\tau_i$ est donné par (82), \struck{qui \ill{}}
+\[
+\tau_0 \longmapsto r_0, \quad \tau_1 \longmapsto -r_1, \quad \tau_\infty \longmapsto -r_\infty
+\]
+qu'on pourrait aussi remplacer par
+\[
+\tau_0 \longmapsto -r_0, \quad \tau_1 \longmapsto r_1, \quad \tau_\infty \longmapsto r_\infty ,
+\]
+mais qui n'a pas une signification aussi simple, en termes géométriques aussi simple, d'une action sur un $(x,y,z) \in B(M)$ ; comme étant resp. la transposition de $x$ et $y$, ou la symétrie p.r. à l'axe des $x$ de $y$ et $z$,
+
+\note{Le bas de la page est encadré et annulé par des traits obliques.}
+
+\struck{(symétrie p.r. à la diagonale principale, la symétrie p.r. à la diagonale non principale, \ill{} l'axe des $x$ \ill{} coordonnées définies par la \ill{} dans le rapport de la base $(x,y)$ de $M$ …)}
+
+\page{36}
+La construction du §~I nous fournit donc des éléments remarquables
+\[
+\begin{cases}
+r_0, r_1, r_\infty \in \mathrm{Gl}(2,\mathbb{Z}) \\
+\lambda_0, \lambda_1, \lambda_\infty \in \mathrm{Sl}(2,\mathbb{Z})
+\end{cases}
+\]
+satisfaisant aux relations remarquables
+\[
+\begin{cases}
+r_0^2 = r_1^2 = r_\infty^2 = 1 \\
+\lambda_0 = r_\infty r_1, \ \ \lambda_1 = r_0 r_\infty, \ \ \lambda_\infty = r_1 r_0 \qquad \text{d'où } \lambda_\infty \lambda_1 \lambda_0 = 1 \\
+\lambda_\infty^{3} = \lambda_1^2 = \omega \ (\text{matrice } {-1}), \qquad \text{d'où } \lambda_\infty^6 = \lambda_1^4 = 1 ,
+\end{cases}
+\]
+\note{Dans la troisième ligne, l'exposant $3$ de $\lambda_\infty$ est ajouté au-dessus de la ligne.}
+
+sans indiquer pour autant que les homs correspondants
+\[
+\begin{cases}
+\Gamma^{\circ}_{\infty,3} \longrightarrow \mathrm{Sl}(2,\mathbb{Z})' \\
+\Gamma_{\infty,3} \longrightarrow \mathrm{Gl}(2,\mathbb{Z})'
+\end{cases}
+\]
+sont des isomorphismes, i.e. sans indiquer
+\[
+\begin{cases}
+\mathrm{Sl}(2,\mathbb{Z})' \simeq \{\dot\lambda_1, \dot\lambda_\infty \mid \dot\lambda_1^2 = \dot\lambda_\infty^3 = 1\} \\
+\mathrm{Gl}(2,\mathbb{Z})' \simeq \{\dot r_0, \dot r_1, \dot r_\infty \mid \dot r_0^2 = \dot r_1^2 = \dot r_\infty^2 = (\dot r_0 \dot r_\infty)^2 = (\dot r_1 \dot r_0)^3 = 1\}
+\end{cases}
+\]
+\note{Le groupe noté ici $\Gamma_{\infty,3}$ est écrit d'une lettre proche du $\mathfrak{G}_{3,\infty}$ de (67) et (71), indices inversés.}
+
+Le fait qu'il en est bien ainsi \struck{\ill{}} \ill{} identité remarquable, dont je ne connais pas de démonstration par voie purement algébrique. Je peux l'énoncer en disant que la structure 2-polyédrale triangulée orientée régulière \struck{déf} $SP_M$, définie par un $\mathbb{Z}$-module libre de rg $2$ muni d'une base symplectique, est \emph{universelle}, en ce sens
+
+\page{37}
+\note{p. 18 de l'auteur.}
+
+que si on choisit un repère direct $r_0$ \struck{\ill{}} de $SP_M$ --- ce qui revient à se donner un isom. symplectique $M \simeq \mathbb{Z}^2$ ---, alors pour toute structure 2-polyédrale triangulée orientée $P$ et tout repère $r$ de $P$, il existe un homomorphisme et un seul
+\[
+\begin{cases}
+SF_M \longrightarrow P \\
+r_0 \longmapsto r
+\end{cases}
+\quad \text{tel que}
+\]
+\note{La phrase est ainsi disposée sur la page : « tel que » à droite de la flèche $SF_M \to P$, l'accolade réunissant les deux lignes.}
+
+\section*{III}
+
+Quand on se donne un module libre \add{$M$} de rang $2$ \add{« absolu » i.e.} sur un anneau $\Lambda$ \add{isomorphe} à $\mathbb{Z}$ ou à un $\mathbb{Z}/n\mathbb{Z}$ (où on suppose néanmoins $n \geq 3$), sans se donner de structure symplectique \add{$e_M$}, on peut \uncertain{paramétrer} les \uncertain{structures} symplectiques $\{\pm e_M\}$ ; on peut \uncertain{considérer} les 2-polyèdres \add{triangulés} réguliers, \struck{\ill{}} associés \ill{} paramétrés par l'ensemble quotient
+\[
+(89)\qquad (\det M)^{*}/\pm 1 \simeq \mathrm{Ssympl}(M)
+\]
+formé des structures ½-symplectiques sur $M$, \ill{} le polyèdre $P_M$ \add{somme \uncertain{disjointe}} des 2-polyèdres réguliers triangulés (non \emph{orientés}) associés aux diverses structures semi-symplectiques sur $M$.
+
+\marginal{On a donc changé la notation p.r. à (23), en ce qui \ill{} … où il \ill{} introduit, \ill{}}
+
+Notons que pour
+\[
+(90)\qquad \mu \in (\det M)^{*}/\{\pm 1\}
+\]
+
+\page{38}
+i.e.
+\[
+\mu \subset (\det M)^{*}, \quad \mu = -\mu, \quad \operatorname{card} \mu = 2 ,
+\]
+le polyèdre régulier $SF_{M,\mu}$ admet une \uncertain{orientation canonique}
+\[
+(91)\qquad \underline{\mathrm{Or}}(SF_{M,\mu}) \simeq \mu
+\]
+Pour $\Lambda = \mathbb{Z}$, $(\det M)^{*}$ est déjà réduit à deux éléments, et $P_M$ est un 2-polyèdre régulier connexe, dont l'ens. des orientations est en bijection can. avec $\mu = (\det M)^{*}$. Pour $\Lambda = \mathbb{Z}/n\mathbb{Z}$, avec $n \geq 3$, alors $(\det M)^{*}/\{\pm 1\}$ est de cardinal $\varphi(n)/2$, donc $P_M$ a $\varphi(n)/2$ composantes connexes. Il est connexe ssi $\varphi(n)/2 = 1$, i.e.
+\[
+(92)\qquad P_M \ \text{connexe} \iff \varphi(n) = 2 \iff n \in \{3, 4, 6\} ,
+\]
+le premier cas où $P_M$ est disconnexe étant relatif à la valeur $n = 5$, où on trouve pour $P_M$ un « bi-icosaèdre ». Il faudrait revenir sur ce cas par la suite (ainsi que \add{sur chacun} \struck{\ill{}} des cas $n \in \{3, 4, 5, 6\}$). Pour le moment, je voudrais, dans le cas $\Lambda$ fini i.e. $\Lambda \simeq \mathbb{Z}/n\mathbb{Z}$, et dans le cas $P_M$ disconnexe i.e. $n = 5$ ou $n \geq 7$, dégager des éléments de structure supplé-
+
+\page{39}
+\note{p. 19 de l'auteur.}
+
+mentaires de $P_M$, qui permettraient peut-être d'identifier $\mathrm{Gl}_\Lambda(M)' = \mathrm{Gl}_\Lambda(M)/\{\pm \mathrm{id}_M\}$ au groupe des automorphismes de la structure renforcée.
+
+Je désigne par
+\[
+(93)\qquad g \longmapsto T_g : \mathrm{Gl}_\Lambda(M)' \longrightarrow \mathrm{Aut}(P_M)
+\]
+l'opération naturelle de $\mathrm{Gl}_\Lambda(M)'$ sur $P_M$, et je \struck{considère} pose
+\[
+(94)\qquad Z'_\Lambda = \Lambda^{*}/\{\pm 1_\Lambda\} \hookrightarrow \mathrm{Gl}_\Lambda(M)'
+\]
+c'est un sous-groupe central, égal au centre de $\mathrm{Gl}_\Lambda(M)'$ sauf erreur,
+
+je considère comme première structure suppl. sur $P_M$ la restriction de l'opération (93), de $\mathrm{Gl}_\Lambda(M)'$ sur $P_M$ au ss-groupe $Z'_\Lambda$
+\[
+(95)\qquad
+\begin{array}{rcl}
+Z'_\Lambda & \longrightarrow & \mathrm{Aut}(P_M) \\
+\dot\lambda & \longmapsto & T_{\dot\lambda}
+\end{array}
+\]
+D'autre part, \struck{je} rappelons nous de la bijection canonique
+\[
+(96)\qquad \pi_0(P_M) \simeq (\det M)^{*}/\{\pm 1_\Lambda\} ,
+\]
+qui donne une opération
+\[
+(97)\qquad \dot\lambda \longmapsto (\dot\lambda_\pi : i \longmapsto \dot\lambda \cdot i) \qquad Z'_M \longrightarrow \mathfrak{S}_{\pi_0(P_M)}
+\]
+de $Z'_\Lambda$ sur $\pi_0(P_M)$, faisant de $\pi_0(P_M)$ un \emph{torseur} sous $Z'_\Lambda$. Pour $\dot g \in \mathrm{Gl}_\Lambda(M)'$, $i \in \pi_0(P_M)$,
+
+\page{40}
+on a alors
+\[
+(98)\qquad T_{\dot g}\, i = (\det(g))^{\cdot} \cdot i
+\]
+ce qui relie (93) et (97), et constitue en fait (97) en termes de (93). Pour $\dot g$ de la forme $\dot\lambda$, avec $\dot\lambda \in Z'_\Lambda$, on trouve donc
+\[
+(99)\qquad T_{\dot\lambda}\, i = \dot\lambda^2 \cdot i \qquad \dot\lambda \in Z'_\Lambda, \ i \in \pi_0(P_M) ,
+\]
+formule qui relie les deux éléments de structure (95) et (97).
+
+Enfin, rappelons nous des bijections canoniques
+\[
+(100)\qquad S_{M,i} \simeq M^{*} \qquad i \in \pi_0(P_M) ,
+\]
+où $S_{M,i}$ désigne \add{l'ens. des sommets de la} \struck{la} composante connexe $P_{M,i}$ de $P_M$ d'indice $i$ --- ces bijections canoniques définissent \struck{\ill{}}, un syst. transitif de bijections canoniques
+\[
+(101)\qquad \kappa_{j,i} : S_{M,i} \xrightarrow{\ \sim\ } S_{M,j} \qquad (i, j \in \pi_0(P_M)) .
+\]
+
+Appelons \emph{automorphisme strict} de $P_M$ tout automorphisme \add{du polyèdre} \struck{qui \ill{}} qui respecte les trois structures supplémentaires (95) (97) (101). \struck{Désignons alors} $\mathrm{Aut}^{\mathrm{str}}(P_M)$
+
+\marginal{on verra par la suite que la structure \uncertain{(101)} \ill{} (95), (97) \ill{}}
+
+\note{La page, et le lot, s'arrêtent sur la notation $\mathrm{Aut}^{\mathrm{str}}(P_M)$ ; l'argument se poursuit au-delà de la page 40.}
+
+\end{document}
