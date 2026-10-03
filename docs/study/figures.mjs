@@ -135,7 +135,7 @@ ${rows.map((r) => r.join(' ')).join('\n')}
     return { from: a.year, to: b.q === 'from' ? b.year + 5 : b.year, inferred: a.inferred || b.inferred };
   }
   const ranges = datings.map(parse).filter(Boolean);
-  const leaves = J('src/content/dated-leaves.json').records.filter((l) => l.iso && !(l.kind === 'stamp' || l.hand === 'machine'));
+  const leaves = J('src/content/dated-leaves.json').records.filter((l) => l.iso && l.kind !== 'paper' && !(l.kind === 'stamp' || l.hand === 'machine'));
   const years = Array.from({ length: 1992 - 1949 }, (_, i) => 1949 + i);
   const cover = years.map((y) => ranges.filter((r) => r.from <= y && y <= r.to).length);
   const read = years.map((y) => ranges.filter((r) => !r.inferred && r.from <= y && y <= r.to).length);
