@@ -1,0 +1,386 @@
+% Folder 136, batch 11 — archivists' pages 201–220.
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-03 — first pass, unchecked against the pages by a human.
+%
+% Pages carrying his hand: 201, 203, 205, 207, 209, 211, 214, 216, 218, 219,
+% 220. Pages 202–212 (even) are typed proofs of an unrelated exposé (versos),
+% page 213 is blank, pages 215 and 217 are a third-party typescript; all are
+% skipped without description.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{136}
+\batch{11}
+\pages{201}{220}
+\foldertitle{Complexe de De Rham à puissance divisée [conférence de 1976 à l’IHÉS] : notes manuscrites (s.d.).}
+\dating{[à partir de 1975-1976]}
+\watermark{Édition de démonstration}
+
+\begin{document}
+
+\page{201}
+\note{la page continue un calcul commencé avant ce lot : les $f_{ij}$, $T$, $X_0$ et $A_0$ y sont introduits plus haut.}
+
+\[
+  X_0 + \sum_{i,j \geq 1} f_{ij}\, X_0^{(i)} \sum_{0 \leq k \leq j} T^{(j-k)} (-1)^k X_0^{k}
+\]
+\[
+  \sum_{\substack{i,j,k \\ 0 \leq k \leq j\,;\ i,j \geq 1}} f_{ij}\, T^{(j-k)} (-1)^k X_0^{(i+k)}
+\]
+avec
+\[
+  \begin{cases}
+    i + k = \nu \geq 1 \\
+    0 \leq k \leq \nu - 1 \\
+    j \geq \operatorname{Sup}(k,1)
+  \end{cases}
+  \qquad i = \nu - k \geq 1, \quad j = k + \delta, \quad \delta = j - k \geq 0 ,
+\]
+\[
+  \text{\struck{$\displaystyle \sum_{\nu} X_0^{\nu} \sum_{0 \leq k \leq \nu-1} (-1)^k f_{\nu,k+\delta}$}}
+\]
+\note{cette ligne est biffée d'un trait ; sous la somme intérieure il avait écrit $j \geq \operatorname{Sup}(k,1)$ (biffé), puis $\delta \geq 0$, $(k,\delta) \neq (0,0)$.}
+\[
+  \sum_{\nu \geq 1} X_0^{\nu} \underbrace{\sum_{\substack{0 \leq k \leq \nu - 1 \\ \delta \geq 0 \\ k + \delta \geq 1}} (-1)^k f_{\nu-k,\,k+\delta}\, T^{\delta}}_{a_{1,\nu}}
+\]
+\note{sous la somme, la condition « $(k,\delta) \neq 0$ » est biffée et remplacée par $k + \delta \geq 1$.}
+\[
+  A_0 = X_0 \bigl( \underbrace{1 + \sum_{\delta \geq 1} f_{1,\delta}\, T^{(\delta)}}_{a_{1,1}} \bigr) + \sum
+  \qquad (k = 0,\ \nu = 1)
+\]
+
+\struck{$\varphi(\xi_1$} $\varphi(X_0)$
+
+\page{203}
+\section{Endomorphismes de l'anneau différentiel ½simplicial $\mathcal{A}_*$}
+
+(NB. on ne demande plus de respecter la structure de $S$-algèbre, $S = \mathcal{A}_0$, i.e. on ne demande plus que $\varphi$ induise l'identité sur $\mathcal{A}_0$).
+
+Rappelons-nous qu'un complexe de De Rham peut se construire dès qu'on a un anneau comm.\ $S$ avec idéal $S^+$ à puiss.\ divisées, et $t \in S^+$, via une \add{$S$-algèbre} \struck{anneau} différentielle \add{$\Lambda^*$-graduée à p.d.} ½simpliciale $\mathcal{A}_*(S, S^+, t)$, où
+\[
+  \mathcal{A}_n(S, S^+, t) = S\{X_0, \ldots, X_n\}[dX_0, \ldots, dX_n] \big/ \bigl( \textstyle\sum X_i - t,\ \sum dX_i \bigr)_{\mathrm{pd}} .
+\]
+Si on a un hom.\ d'anneaux à p.d.\ $S \xrightarrow{u} S'$ ($u(S^+) \subset S'^+ \ldots$) et $\lambda' \in S'$ \struck{$\lambda \in S^+$} tel que $u(t) = \lambda t'$, on en déduit un hom.\ \add{de $S$-alg.\ ½gradués différentielles à p.d.}
+\[
+  \mathcal{A}_*(u, \lambda) : \mathcal{A}_*(S, S^+, t) \longrightarrow \mathcal{A}_*(S, S'^+, t'),
+\]
+qui en degré $n$ est l'hom.
+
+\begin{tikzcd}
+  S\{X_0, \ldots, X_n\}[dX_0, \ldots, dX_n] / \ldots \arrow[d] \\
+  S'\{X_0, \ldots, X_n\}[dX_0, \ldots, dX_n] / \ldots
+\end{tikzcd}
+
+donné par \struck{\ill{}} $u : S \to S'$ sur les scalaires,
+\[
+  X_0 \longmapsto \lambda X_0 \qquad
+  \Bigl(\text{donc } \textstyle\sum X_0 - t \longmapsto \sum \lambda X_0 - u(t) = \sum \lambda X_0 - \lambda t' = \lambda \bigl(\sum X_0 - t'\bigr)\Bigr),
+\]
+\[
+  dX_0 \longmapsto \lambda\, dX_0 .
+\]
+Ainsi $\mathcal{A}_*(S, S^+, t)$ devient un foncteur covariant \struck{\ill{}} sur la catégorie des triples $(S, S^+, t)$, où les hom.\ sont les couples $(u, \lambda)$ (composition : $(u', \lambda')(u, \lambda) = (u'u, u'(\lambda)\lambda')$) \add{comme ci-dessus}.
+\note{dans l'énoncé il écrit $\lambda' \in S'$, puis $u(t) = \lambda t'$ et $\mathcal{A}_*(S, S'^+, t')$ là où l'on attend $\lambda$ et $S'$ ; transcrit tel quel.}
+
+\textbf{NB} En plus de sa \struck{\ill{}} graduation, $\mathcal{A}_n(S, S^+, t)$ admet une filtration naturelle, où $\operatorname{Fil}^n \mathcal{A}_n(S, S^+, t)$ est \ill{} les sommes des expressions
+\[
+  \sum F_{i_0 \ldots i_p}\, dX_{i_0} \wedge \ldots \wedge dX_{i_p}, \qquad
+  F_{i_0 \ldots i_p} \in S\{X_0, \ldots, X_n\}
+\]
+élément de « degré » $\leq n - p$,
+le tout des sous-$S$-modules (pas des idéaux), on a $\operatorname{Fil}^n \cdot \operatorname{Fil}^m \subset \operatorname{Fil}^{n+m}$, $\operatorname{Fil}^0 = S$ (scalaires), $\operatorname{Fil}^n = 0$ si $n < 0$. Cette filtration est respectée par les $\mathcal{A}_*(u, \lambda)$.
+
+\page{205}
+Considérons le cas où $t' \in S'^+$ est un élément régulier de $S'$ ; alors $\lambda$ tel que $u(t) = \lambda t'$ est uniquement déterminé par $u$ ; donc si on se borne aux triples $(S, S^+_{\mathrm{pd}}, t)$ tels que $t$ soit régulier, et aux hom.\ $u : (S, S^+, t) \to (S', S'^+, t')$ tels que $u(t) \in S \cdot t'$, alors $\mathcal{A}_*(S, S^+, t)$ devient un foncteur sur cette catégorie, à valeurs dans la cat.\ des anneaux gradués (½simpliciaux) \struck{et} différentiels filtrés.
+
+La condition envisagée sur $(S, S^+_{\mathrm{pd}}, t)$ est satisfaite en particulier si on fait $S = k\{T\}$, $S^+ = (T)_{\mathrm{pd}}$, $t = T$, lorsque $k$ est sans torsion.
+
+Revenons alors :
+\[
+  \mathcal{A}_*(k) \overset{\text{déf}}{=} \mathcal{A}_*(S_k, S_k^+, T), \qquad S_k = k\{T\},
+\]
+et à la détermination des \uncertain{endomorphismes} de celle-ci, comme \add{$k$-algèbre} \struck{anneau} différentielle ½simpliciale (où on ne considère \struck{\ill{}} ni la structure de $S$-algèbre, ni la graduation, ni les p.d., ni la filtration a priori …) \struck{lorsqu'on \ill{}}. Soit $G_k$ le \add{monoïde} \struck{groupe} des couples $(u, \lambda)$, où $u$ est un endomorphisme de $S$ comme $k$-algèbre à p.div., et $\lambda \in S$ \struck{$S^+$}, tel que $u(T) = \lambda\{T\}\, T$. Comme $u$ \struck{\ill{}} est connu par $u(T)$, $G_k$ est donc $\simeq$ le \add{monoïde} \struck{groupe} \ill{} \add{la connaissance \ill{} de $u(T)$} d'un \ill{} \struck{$S^\times$} de $S$, avec la multiplication
+\[
+  (\lambda' * \lambda)\{T\} = \lambda'\{T\} \; \text{\ill{}} \; \lambda'\{\lambda\} ;
+\]
+on désigne par $(u_\lambda)_*$ l'endomorphisme de $\mathcal{A}_*(k)$ défini par $\lambda \in S$ (\uncertain{donc} $u_\lambda u_{\lambda'} = u_{\lambda \lambda'}$).
+\note{le bas de la page mêle deux couches, l'une à l'encre bleue, l'autre au crayon, écrites l'une dans l'autre ; la formule de composition, surchargée, n'est lue qu'en partie.}
+
+Il est clair que $\lambda \mapsto u_\lambda$ est un hom.\ de monoïdes \uncertain{injectif} (on fait $\lambda \mapsto (u_\lambda)_*$ l'est déjà, car $(u_\lambda)_*(X_0) = \lambda X_0$ et $\mathcal{A}_1(k) \simeq k\{T\}\{X_0\}$). Ceci dit,
+
+Si $H_k$ est le monoïde des \uncertain{$S_k$-endomorphismes} de la $k$-algèbre différentielle ½simpliciale $\mathcal{A}_*(k)$, \struck{et \ill{}} $\Omega_k$ le monoïde de tous les endomorphismes de la $k$-alg.\ diff.\ ½simpliciale, on a
+
+\page{207}
+\[
+  G_k,\ H_k \subset \Omega_k
+\]
+\[
+  G_k \cap H_k = \bigl\{ u_\lambda \bigm| \lambda \in S_k,\ \lambda T = T \text{ i.e. } (\lambda\{T\} - 1)\, T = 0 \bigr\}
+\]
+Si on pose $\lambda\{T\} = \sum_{i \geq 0} \lambda_i T^{(i)}$, alors la condition sur $\lambda$ s'exprime
+\[
+  \boxed{\lambda_0 = 1} \qquad \boxed{(i+1)\, \lambda_i = 0 \quad \forall i \geq 1}
+\]
+\struck{(ce qui implique en particulier $\lambda_0 = 1$.} \struck{(\ill{} $0$, et implique \ill{}} Si $k$ sans torsion, cela implique que $\lambda_i = 0$ pour $i \geq 1$ i.e.\ $\lambda = 1$, i.e.\ $u_\lambda = \mathrm{id}$, d'où $G_k \cap H_k = (1)$ \uncertain{dans ce cas}. --- Et dans ce cas on \uncertain{a le résultat} (\add{$k$ de car.\ $0$ i.e.\ une $\mathbf{Q}$-alg.}), [Dans ce cas, $G_k$ est aussi le groupe $G'_k$ de tous les endomorphismes de $S_k = k\{T\}$ comme $k$-alg.\ \uncertain{augmentée}, \struck{\ill{} l'hom.\ \ill{} alors $\Omega$} et par suite
+
+\begin{tikzcd}
+  (1 \arrow[r] & H'_k \arrow[r] & \Omega_k \arrow[r] & G'_k = \operatorname{End}_{k\text{-alg}}(k\{T\}) = S_k) \\
+  & & & G_k \arrow[u, "\simeq"'] \arrow[ull, bend left=20]
+\end{tikzcd}
+
+\note{le « $=$ » final est écrit sous $k\{T\}$ en dessous de « $k$-alg », un mot biffé à côté ; la flèche courbe de $G_k$ vers $\Omega_k$ est sur la page une boucle en forme de lacet ; la flèche verticale porte « $\simeq$ » et, à côté, « (22) » entre parenthèses.}
+
+donc $\Omega_k$ comme produit ½direct de $G_k \simeq G'_k$ et de $H'_k$.]
+
+\struck{Dans le cas général, on peut dire que}
+
+\begin{tikzcd}
+  1 \arrow[r] & H_k \arrow[r] & \Omega_k \arrow[r] & G'_k = \operatorname{End}_{k\text{-alg augm.}}(k\{T\}) \\
+  & & & G_k \arrow[u] \arrow[ull, bend left=20] \\
+  & & & G_k \cap H_k \arrow[u]
+\end{tikzcd}
+
+\[
+  G_k \cap H_k \simeq \Bigl\{ u_\lambda \Bigm| \lambda = 1 + \sum_{i \geq 1} \lambda_i T^{(i)},\ (i+1)\, \lambda_i = 0 \Bigr\}
+\]
+
+\page{209}
+Essayons de dire un peu \uncertain{davantage} sur les $\varphi_*$, endom.\ de la $k$-alg.\ diff.\ ½simpliciale $\mathcal{A}_*(k)$.
+
+1) \emph{Premier invariant} $\varphi_0 \in \operatorname{End}_{k\text{-alg}}(S_k)$.
+
+\struck{$\varphi_0$} $\varphi_0$ est donné par les
+\[
+  \varphi_0(T^{(i)}) = \tau_i \in S_k \qquad i \geq 1
+\]
+satisfaisant les conditions
+\[
+  \boxed{\tau_i \tau_j = c_{ij}\, \tau_{i+j}}
+\]
+\note{$\tau_i$ est entouré d'un cercle sur la page.}
+
+Chaque $\varphi_n$ est $\varphi_0$-semi-linéaire.
+
+2) \emph{Deuxième invariant} $\varphi_1$, endom.\ $\varphi_0$-semi-linéaire de $S_k\{X_0\}[dX_0]$ considéré comme $S_k$-alg.\ différentielle. Il doit être compatible avec les augm.\ $\alpha$, $\beta$ \ill{}.
+
+Prop.\ \uncertain{auxiliaire} :
+
+\textbf{Prop.} Soient $S$, $S'$ deux anneaux comm., $\varphi_0 : S \to S'$ un hom., on s'intéresse à la détermination des hom.\ d'anneaux différentiels
+\[
+  \varphi_1 : \underbrace{S\{X_0\}[dX_0]}_{\mathcal{A}_S} \longrightarrow \underbrace{S'\{X_0\}[dX_0]}_{\mathcal{A}_{S'}}
+\]
+induisant $\varphi_0$ sur $S$, et compatibles avec augmentation ($X_0 \mapsto 0$, $dX_0 \mapsto 0$). Ils sont donnés par un système d'éléments
+\[
+  \xi_i \in \mathcal{A}_{S'}^{+} = \operatorname{Ker}(\alpha_{S'} : \mathcal{A}_{S'} \to S'),
+  \qquad \xi_i = A_i + B_i\, dX_0, \quad A_i \in S'\{X_0\}^+,\ B_i \in S'\{X_0\}
+\]
+satisfaisant
+\[
+  A_i = A_1^{(i)}
+\]
+\ill{}, $\varphi_1$ étant déterminé par
+\[
+  \varphi_1(X_0^{(i)}) = \xi_i, \qquad \varphi_1(dX_0) = d\xi_1 .
+\]
+$\varphi$ est compatible avec les graduations (\uncertain{resp.} \uncertain{aux p.d.}) ssi $B_i = 0$ $\forall i \geq 1$ (\uncertain{resp.} $B_i = A_1^{(i-1)} B_1$ $\forall i \geq 2$).
+
+\page{211}
+\[
+  \varphi_1(X_0^{(i)}) = \xi_i, \quad i \geq 1 \qquad\qquad
+  \boxed{\xi_i \xi_j = c_{ij}\, \xi_{i+j}} \quad (i, j \geq 1)
+\]
+\[
+  \varphi_1(dX_0) = d\xi_1 \qquad\qquad
+  \boxed{d\xi_i = \xi_{i-1}\, d\xi_1} \qquad
+  \boxed{\xi_i \in S'\{X_0\}^+}
+\]
+\note{la première ligne de gauche est entourée ; dans la dernière boîte, une lettre est surchargée devant $\{X_0\}^+$.}
+\[
+  \xi_i = A_i + B_i\, dX_0 \qquad A_i, B_i \in S'\{X_0\}, \quad A_i \in S'\{X_0\}^+
+\]
+\[
+  dA_i = A_{i-1} A'_1
+\]
+\[
+  A_i = \xi_1^{(i)}
+\]
+
+\textbf{Remarque} On voit donc que \uncertain{tout} $\varphi_1$ s'écrit de façon unique sous la forme $\psi_1 \circ \overline{\varphi}_0$, où $\overline{\varphi}_0$ est l'hom.\ \uncertain{canonique} prolongeant $\varphi_0$ ($\overline{\varphi}_0(X_0^{(i)}) = X_0^{(i)}$, $\overline{\varphi}_0(dX_0) =$ \struck{\ill{}} $dX_0$) et $\psi_1$ est un $S'$-\uncertain{endom.}\ de la $S'$-alg.\ diff.\ $\mathcal{A}_{S'}$, compatible avec l'augmentation.
+
+Il faut maintenant exprimer \add{(si $S = k\{T\}$, $S' = k'\{T\}$)} \add{la compatibilité de $X_0^{(i)} \mapsto T^{(i)}$} de $\varphi_1$ avec augmentation $\beta$ ($X_0 \mapsto T$, $dX_0 \mapsto 0$) ; on trouve que l'on doit avoir
+\[
+  \beta_{S'}(\xi_i) = \varphi_0(T^{(i)}) \text{ i.e. } \quad
+  \beta_{S'}(A_i) = \varphi_0(T^{(i)})
+\]
+ce qui \ill{}, \uncertain{évidemment}, puisque $A_i = A_1^{(i)}$, à :
+\[
+  \begin{cases}
+    \beta_{S'}(A_1) = \varphi_0(T) \\
+    \varphi_0(T^{(i)}) = \varphi_0(T)^{(i)}
+  \end{cases}
+\]
+\note{devant la seconde formule de la ligne, un mot biffé illisible ; les deux formules en $\varphi_0$ et l'accolade sont repassées à l'encre bleue sur le crayon.}
+donc on aura
+\[
+  A_1 \text{\struck{$(X_0)$}} = X_0 + f \text{\struck{$(X_0)$}}
+\]
+où $f \in \mathcal{A}_{1} = k\{X_0, X_1\}$ est donné par
+\[
+  f = \sum_{i \geq 1,\, j \geq 1} X_0^{(i)} X_1^{(j)}
+\]
+La remarque ci-dessus se prolonge ---
+
+\page{214}
+\marginal{Feuille à part !}
+
+\textbf{Théorème} Soient $S$ un anneau muni d'un idéal $I$ à puiss.\ division, \add{p.d.\ dans les anneaux \uncertain{alternés}} $M^* = M^0 + M^1$ un $S$-module gradué mod $2$, $A(M^*) = \Gamma^*(M^0) \otimes_S \overset{*}{\Lambda} M^1$ \add{$S$-algèbre} graduée par la parité du degré total, [et augmentée vers $S$ de la façon évidente $\varepsilon : A \to S$], $J$ l'idéal engendré dans $A$ par $I$ ($\subset S \subset A$) et par $M^*$ ($\subset S$), [donc $J = \varepsilon^{-1}(I)$].
+\note{« $M^* (\subset S)$ » est écrit tel quel ; on attend $M^* \subset A$.}
+
+a) On peut trouver sur \struck{$A$} $J \subset A$ une structure à p.d.\ telle que 1°) $S \to A$ soit un hom.\ d'anneaux compatible aux p.d.\ sur $I \subset S$ et $J \subset A$ 2°) Pour $(S, M^*)$ variable, cette structure à p.d.\ est fonctorielle. Ces conditions caractérisent de façon unique la structure à p.d.\ envisagée.
+
+b) Soit $(B^*$, \struck{$K^*$}) une $S$-algèbre graduée mod $2$, \struck{alternée stricte} alternée, munie d'un idéal $K^*$ gradué à p.d., \add{compatible avec les p.d.} \struck{l'application de restriction} sur $I \subset S$. L'application de restriction
+\[
+  \operatorname{Hom}_{S\text{-alg à p.d.}}\bigl( (A(M^*), J(M^*)),\ (B^*, K^*) \bigr)
+  \longrightarrow \operatorname{Hom}_{S\text{-mod grad}}(M^*, K^*)
+\]
+est bijective. (Donc il y a lieu d'appeler $A(M^*)$ la $S$-algèbre \add{graduée alternée} à p.d.\ \struck{sur} $S$ \uncertain{engendrée} par le $S$-module gradué $M^*$.)
+
+\emph{Dém} :
+
+\page{216}
+\[
+  A = A^0 + A^1 \supset J^0 + J^1
+\]
+\begin{itemize}
+  \item $A^0$ anneau comm.
+  \item $A^1$ $A^0$-module
+  \item $A^1 \times A^1 \xrightarrow{\varphi} A^0$ forme alternée (écrite $x \cdot y = \varphi(x, y)$), \quad $\overline{\varphi} : A^1 \to \operatorname{Hom}(A^1, A^0)$
+  \item $J^0$ idéal de $A^0$
+  \item $J^1$ \struck{\ill{}} sous-module de $A^1$ tel que
+\end{itemize}
+\[
+  J^0 A^1 \subset J^1 \subset \overline{\varphi}^{-1}\bigl( \operatorname{Hom}(A^1, J^0) \bigr)
+  \qquad \bigl(\operatorname{Hom}(A^1, J^0) \subset \operatorname{Hom}(A^1, A^0)\bigr)
+\]
+
+On s'est donné une structure de p.d.\ sur $J^0 \subset A^0$ :
+\[
+  (A) \;
+  \begin{cases}
+    (0)\ x^{(i)} \ (i \geq 0) \quad x^{(0)} = 1,\ x^{(1)} = x,\ x^{(i)} \in J^0 \ (i \geq 1) \\
+    (1)\ (x + y)^{(i)} = \sum_{j+k=i} x^{(j)} y^{(k)} & x, y \in J^0,\ i \geq 0 \\
+    (2)\ (\lambda x)^{(i)} = \lambda^i x^{(i)} & \lambda \in A^0,\ x \in J^0 \\
+    (3)\ x^{(i)} x^{(j)} = c_{ij}\, x^{(i+j)} & x \in J^0,\ i, j \geq 0, \quad c_{ij} = \frac{(i+j)!}{i!\,j!} \\
+    (4)\ (x^{(i)})^{(j)} = d_{ij}\, x^{(ij)} & x \in J^0,\ i, j \geq 1, \quad d_{ij} = \frac{(ij)!}{(i!)^j\, j!}
+  \end{cases}
+\]
+\note{dans (2), un premier jet (« $\lambda^{(i)}$ ») est surchargé à l'encre plus foncée.}
+
+On prolonge les op.\ $x^{(i)}$ de $J^0$ à $J = J^0 + J^1$ par
+\[
+  (*) \qquad (x + u)^{(i)} = x^{(i)} + x^{(i-1)} u \qquad x \in J^0,\ u \in J^1,\ i \geq 0
+\]
+\struck{Voyons dans quelle mesure}
+donc $u^{(i)} = 0$ si $u \in J^1$, $i \geq 2$.
+
+On s'en \uncertain{servira} : \quad (5) $(\lambda_1 x_1)^{(i)} = 0$ \quad $i \geq 2$ \quad ($\lambda_1 \in A^1$, $x_1 \in J^1$).
+\note{une flèche, tracée dans la marge gauche, renvoie de cette ligne à « On prolonge » plus haut.}
+
+Voyons dans quelle mesure (A) reste valable pour les éléments généraux de $J = J^0 + J^1$.
+
+(0) OK (en convenant $x^{(i)} = 0$ si $i < 0$, $x \in J^0$)
+
+(1) $(x + y)^{(i)} = \sum_{j+k=i} x^{(j)} y^{(k)}$ \quad car $J^0 A^1 \subset J^1$ \quad si $x, y \in J$ \emph{commutent} \emph{strictement} \struck{(i.e.\ posant} (i.e.\ posant $x = x^0 + x^1$, $y = y^0 + y^1$, si on a non seulement $x^1 y^1 = y^1 x^1$ donc ($= -x^1 y^1$) i.e.\ $2 x^1 y^1 = 0$, mais même $x^1 y^1 = 0$)
+
+(2) $(\lambda x)^{(i)} = \lambda^i x^{(i)}$ \quad si $\lambda \in A$, $x \in J$ commutent strictement [grâce à (5)]
+
+(3) \struck{\ill{}} $x^{(i)} x^{(j)} = c_{ij}\, x^{(i+j)}$ \quad $\forall x \in J$ \quad ok
+
+(4) $(x^{(i)})^{(j)} = d_{ij}\, x^{(ij)}$ :
+\note{la page s'arrête sur (4), sans conclusion.}
+
+\page{218}
+\section{(Quelques complexes d'algèbre différentielle.)}
+
+$A$ anneau commutatif, $M$ $A$-module. \add{On considère $\operatorname{Sym}^*(M) \otimes \overset{*}{\Lambda} M$ et $\Gamma^*(M) \otimes \overset{*}{\Lambda} M$ \emph{comme} $A$-alg.\ graduées par \emph{degré de} $\overset{*}{\Lambda} M$.}
+
+\marginal{De Rham}
+(1) Sur $\operatorname{Sym}^*(M) \otimes \overset{*}{\Lambda} M$ \struck{(algèbre bigraduée)}, il y a une \struck{et $A$-linéaire} unique opérateur $d$ \add{de $A$-algèbre graduée} (qui soit donc une \add{anti}\emph{dérivation}) \struck{(pour $\operatorname{Sym}^i M$ de degré pair et $\overset{*}{\Lambda} M$ de degré impair)} a) qui soit nulle sur $\overset{1}{\Lambda} M$, et qui sur $\operatorname{Sym}^1(M)$ soit l'isom.\ can.\ $\operatorname{Sym}^1(M) \to \overset{1}{\Lambda} M$.
+
+\struck{Le $d$} satisfait $d^2 = 0$, et \uncertain{applique} $\operatorname{Sym}^p \otimes \overset{q}{\Lambda}$ dans $\operatorname{Sym}^{p-1} \otimes \overset{q+1}{\Lambda}$. Il est $\overset{*}{\Lambda} M$-linéaire. \struck{\ill{}} C'est aussi le complexe de De Rham de $\operatorname{Sym}^*(M)$ sur $A$, donc le complexe de De Rham du fibré vectoriel $V(M)$ sur $A$. \struck{Si $M$ est libre et si $M$ est libre,} Si \uncertain{…} $M$ plat \struck{(projectif, plat, …)}, $A$ de car.\ $0$ (i.e.\ $A$ une $\mathbf{Q}$-algèbre), alors
+\struck{$H^*(\operatorname{Sym}^* M \otimes \overset{*}{\Lambda} M)$ (gradué par le degré de $\overset{*}{\Lambda} M$) est nulle en degrés $\neq 0$, et en degré} …
+(gradué suivant le degré de $\overset{*}{\Lambda} M$)
+\[
+  H^i_{\mathrm{DR}}\bigl( \operatorname{Sym}^*(M) \otimes \overset{*}{\Lambda}(M) \bigr) \simeq
+  \begin{cases}
+    0 & \text{si } i \neq 0 \\
+    A = \operatorname{Sym}^0 \otimes \overset{0}{\Lambda} & \text{si } i = 0
+  \end{cases}
+\]
+(lemme de Poincaré, \uncertain{plat}) (si $A$ est de car.\ $p > 0$, alors on a … (théorie des opérations de Cartier …)).
+\note{« intégrale » (?) est écrit dans la marge gauche, relié par un trait à « $M$ plat ».}
+
+\marginal{Koszul}
+(2) Sur $\operatorname{Sym}^*(M) \otimes \overset{*}{\Lambda} M$, \struck{(algèbre bigraduée)} il y a un unique opérateur $\delta$ qui est \struck{$A$-linéaire} a) une \add{anti}dérivation \add{de} $A$-alg.\ graduée \add{et} \struck{pour $\operatorname{Sym}^1 M$ de degrés pairs et b) $\overset{*}{\Lambda} M$ de degrés impairs,} b) nulle sur \struck{$\overset{*}{\Lambda}$} $\operatorname{Sym}^1 M$, et sur $\overset{1}{\Lambda} M$ c'est l'isom.\ can.\ $\overset{1}{\Lambda} M \xrightarrow{\simeq} \operatorname{Sym}^1 M$. Alors $\delta$ satisfait $\delta^2 = 0$, il applique $\operatorname{Sym}^p \otimes \overset{q}{\Lambda}$ dans $\operatorname{Sym}^{p+1} \otimes \Lambda^{q-1}$. Si $M$ est libre (plus gén., plat) et sans condition de car.\ sur $A$, on a \add{(graduant} \struck{gradué} \add{par le degré de $\overset{*}{\Lambda}$ (de sorte que $\delta$ est de degré $-1$), }\add{qu'on écrit en bas} :
+\[
+  H_i^{\mathrm{Kos}}\bigl( \operatorname{Sym}^* M \otimes \overset{*}{\Lambda} M \bigr) =
+  \begin{cases}
+    0 & \text{si } i \neq 0 \\
+    \simeq A = \operatorname{Sym}^0 \otimes \Lambda^0 & \text{si } i = 0
+  \end{cases}
+\]
+
+\page{219}
+\marginal{De Rham P.D.}
+(3) Sur $\Gamma^* M \otimes \overset{*}{\Lambda} M$ \struck{(algèbre bigraduée)}, il y a un seul op.\ $d$ qui soit \struck{a) $A$-linéaire} a) une \add{anti}dérivation si \add{$A$-algèbre graduée} \struck{$\Gamma^*(M)$ de degrés pairs et $\overset{*}{\Lambda} M$ de degrés impairs} b) \add{antidérivation de degré 1} compatible avec les puiss.\ division sur $(\Gamma^* M)^+$ i.e.
+\[
+  d(x^{(i)}) = x^{(i-1)}\, dx ,
+\]
+et c) $d$ est nulle sur $\overset{1}{\Lambda} M$, et sur $\Gamma^1 M$ c'est l'isom.\ can.\ $\Gamma^1 M \to \overset{1}{\Lambda} M$. Alors $d$ satisfait $d^2 = 0$, il applique $\Gamma^p \otimes \overset{q}{\Lambda}$ dans $\Gamma^{p-1} \otimes \overset{q+1}{\Lambda}$. Il est $\overset{*}{\Lambda} M$-linéaire. C'est aussi
+\marginal{?}
+le « complexe de De Rham à puissances divisées » de la $A$-algèbre à p.d.\ $\Gamma^* M$ (pour son idéal $\Gamma^+ M$). Si $M$ est plat sur $A$, alors … (graduant par le degré de $\overset{*}{\Lambda}$)
+\[
+  H^i_{\mathrm{DR\,p.d.}}\bigl( \Gamma^*(M) \otimes \overset{*}{\Lambda} M \bigr) \simeq
+  \begin{cases}
+    0 & \text{si } i \neq 0 \\
+    A = \Gamma^0 \otimes \Lambda^0 & \text{si } i = 0
+  \end{cases}
+\]
+\note{la grande accolade qui, dans la marge gauche, embrasse les lignes « Il est $\overset{*}{\Lambda} M$-linéaire … $\Gamma^+ M$ » est précédée d'un point d'interrogation.}
+
+\marginal{Koszul P.D.}
+(4) Sur $\Gamma^* M \otimes \overset{*}{\Lambda} M$, il y a un seul op.\ $\delta$ qui soit a) dérivation de \add{$A$-}algèbre graduée b) compatible avec p.d.\ sur $\Gamma^+(M)$ ($d(x^{(i)}) = x^{(i-1)}\, dx$ si $x \in \Gamma^+$). c) nulle sur $\Gamma^1 M$ \struck{(donc sur $\Gamma^* M$ \ill{})} et induisant sur $\overset{1}{\Lambda} M$ l'isom.\ $\overset{1}{\Lambda} M \to \Gamma^1 M$. \struck{Si $M$ \ill{} sur} \struck{$A$, … est … $A$, $\delta^2 = 0$, il applique} \add{\uncertain{il applique}} $\Gamma^p \otimes \overset{q}{\Lambda}$ dans $\Gamma^{p+1} \otimes \Lambda^{q-1}$). Il est $\Gamma^* M$-linéaire. Écrivant les degrés en bas, si $M$ est \add{plat} \struck{\ill{}} sur $A$ (\uncertain{limitatif}) de car.\ $0$, on a
+\[
+  H_i^{\mathrm{Kos\,p.d}}\bigl( \Gamma^* M \otimes \overset{*}{\Lambda} M \bigr) \simeq
+  \begin{cases}
+    0 & \text{si } i \neq 0 \\
+    A = \Gamma^0 \otimes \Lambda^0 & \text{si } i = 0
+  \end{cases}
+\]
+Si $A$ de car.\ $p > 0$, $M$ plat, on doit avoir une histoire d'opérations de Cartier …
+\note{le numéro entouré de ce paragraphe, mal formé, est confirmé (4) par les renvois de la page suivante.}
+
+\page{220}
+\section{Relations entre les 4 complexes, et fonctorialités.}
+
+Les \emph{complexes} algèbres différentielles sont fonctorielles en $(A, M)$. Pour $A$ fixé, $M$ variable, elles transforment sommes en produits tensoriels (donc, par chaque \uncertain{application} \ill{} compatible avec \struck{\ill{}} les différentielles), et commutent aux \emph{lim} filtrantes.
+
+L'hom.\ can.\ d'algèbres (fonctoriel en $A$, $M$)
+\[
+  \begin{array}{ccc}
+    \operatorname{Sym}^* M \otimes \overset{*}{\Lambda} M & \longrightarrow & \Gamma^* M \otimes \overset{*}{\Lambda} M \\
+    \| & & \| \\
+    C^*_{\mathrm{DR}} \operatorname{Sym}^* M & \longrightarrow & C^*_{\mathrm{DR\,p.d.}}(\Gamma^* M)
+  \end{array}
+\]
+est compatible avec les différentielles $d$. \struck{\ill{}} C'est un isom.\ \struck{pour} si $A$ de car.\ $0$ (\uncertain{quelque} \uncertain{chose} si $M$ libre de rang $> 0$), dans le calcul de la cohomologie dans le cas considéré dans celui de (3). [Ce dernier se fait en réduisant au cas où $M$ est libre de t.f.\ par Lazard, puis par Künneth au cas où $M$ libre de rang 1, \uncertain{lorsque} on \uncertain{conclut} \ill{}].
+
+L'hom.\ can.\ d'algèbres
+\[
+  \operatorname{Sym}^* M \otimes \overset{*}{\Lambda} M \longrightarrow \Gamma^* M \otimes \overset{*}{\Lambda} M
+\]
+est aussi compatible avec les opérateurs diff.\ $\delta$. \struck{\ill{}} Par ce \uncertain{qui} \uncertain{précède} comme dans le dernier, le calcul de l'homologie de (4) est ramené à celui de (2), qui peut se traiter par la même méthode que pour (1).
+
+La \emph{définition} des opér.\ $\delta$ dans (2) et (4) peut d'ailleurs se ramener à un cas plus général de Koszul : si $S$ est un anneau comm., $M$ un $S$-module, \struck{\ill{}} et $\varphi : M \to S$ une forme
+\note{la phrase se poursuit au-delà de ce lot.}
+
+\end{document}
