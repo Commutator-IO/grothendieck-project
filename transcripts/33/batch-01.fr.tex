@@ -1,0 +1,400 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 33, batch 1 (pages 1-20).
+% Established from the facsimile archives/batches/33/batch-01.pdf (a mirror of
+% https://grothendieck.umontpellier.fr/33.pdf), per the skill
+% transcribe-grothendieck.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-03 — first pass, unchecked against the pages by a human.
+%
+% Eleven of the twenty pages are transcribed: 1, 2, 3, 5, 7, 9, 11, 13, 15,
+% 17, 19. The even pages 4, 6, 8, 10, 12, 14, 16, 18 and page 20 are typed
+% versos (a Bourbaki-style draft on root systems and Dynkin diagrams, pages
+% numbered 179-194, « n° 391 ») carrying nothing in his hand, and are absent.
+%
+% The batch is one continuous programme, in ink on the backs of those
+% typescript sheets, for a course or seminar on étale cohomology: « Nous
+% prendrons comme prétexte la théorie des fonctions L … ». Numbered items 1° to
+% 14° run through the batch: étale site, functoriality, fibre functors, strict
+% localisation, the proper base change theorem, comparison with classical
+% cohomology, specialisation, cohomological dimension, supports, purity,
+% constructible sheaves, and the R^q_! f_* of a compactifiable morphism, whose
+% list of properties is still open at the foot of page 19. Page 2 is a sheet
+% of pencil diagrams (base-change squares) in the same hand.
+%
+% The hand is fast and heavily abbreviated; formulas come through, the
+% connecting prose often does not. His underlinings are set with \emph.
+% Page 13's item « 13) Les R^i_! f(F) » and its continuation at the head of
+% page 15 are cancelled by large crossing strokes; the cancellation is
+% recorded once, and the text is rewritten as 14) on page 17.
+
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{33}
+\batch{1}
+\pages{1}{20}
+\dating{1965-[vers 1971]}
+\watermark{Édition de démonstration}
+\foldertitle{SGA 1965. MS [Manuscrit] brouillon : notes manuscrites (s.d.).}
+
+\begin{document}
+
+\section{Programme : cohomologie étale et fonctions $L$}
+
+\page{1}
+Nous prendrons comme prétexte la théorie des fonctions $L$ pour développer plus
+avant le formalisme de la cohomologie étale. Trois parties
+
+a) Continuer l'étude \add{de la coh. étale} avec des coefficients de torsion,
+en \struck{développant} en particulier, dans ce cadre, \struck{\ill{}}
+\uncertain{avant} le formalisme de dualité, \struck{donnant} donnant des
+formules de Künneth et de Lefschetz.
+
+b) Étendre le formalisme : aux coefficients \emph{$\ell$-adiques}.
+
+c) Appliquer les résultats au formalisme des fonctions $L$.
+
+1°) \emph{Site étale} de $X$,
+
+$X_{\mathrm{ét}}$ : catégorie, familles couvrantes, faisceaux, faisceaux
+abéliens, cohomologie
+
+2°) \emph{Exemples} $X = \operatorname{Spec}(k)$,
+$X_{\mathrm{ét}} \simeq \widetilde{X}_{\mathrm{ét}} \simeq \mathrm{Ens}(\pi)$,
+\qquad $\pi = \operatorname{Gal}(\bar{k}/k)$
+\note{le premier $\simeq$ est tel quel sur la page, entre le site et le topos.}
+
+3°) $f : X \to Y$ définit $X_{\mathrm{ét}} \to Y_{\mathrm{ét}}$
+\[
+  f^{*} : Y_{\mathrm{ét}} \to X_{\mathrm{ét}}, \qquad
+  \widetilde{Y}_{\mathrm{ét}} \to \widetilde{X}_{\mathrm{ét}}, \qquad
+  f_{*} : \widetilde{X}_{\mathrm{ét}} \to \widetilde{Y}_{\mathrm{ét}}
+\]
+\marginal{pour $f^{*}$ : commute aux \emph{lim.\ ind.} quelc.\ et aux
+\emph{lim.\ proj.} finies ; pour $f_{*}$ : commute aux lim.\ proj.\ quelc.}
+
+\page{2}
+\drawing{feuille de croquis au crayon. En haut à droite « McL » et
+« $\times M'U$ », une lettre « A ». À gauche, un morphisme
+$X \to k$ et $k \to Y$ en équerre, puis $X' \to X$ avec une flèche oblique
+$X' \to k$ marquée \uncertain{« $\phi$ »}. En bas, deux esquisses
+$Y \to X$ au-dessus de $k$ et $Y' \to X'$ au-dessus de $k'$, une flèche
+$k \to k'$ barrée d'un petit cercle hachuré ; à droite un carré
+$X \leftarrow X$, $K$, $k'$, $k \leftarrow K$, un $X$ entouré.}
+
+Au milieu à droite, un carré entouré :
+
+\begin{tikzcd}
+Y \arrow[d, "f"'] & Y' \arrow[l, "h"'] \arrow[d, "{f'}"] \\
+X & X' \arrow[l, "g"]
+\end{tikzcd}
+
+\note{à côté du carré : « $V'$ » près de $Y'$, « $g(U')$ » sous $X$, et
+« $U' \neq \emptyset$ » près de $X'$.}
+
+\page{3}
+transitivité …
+
+\emph{Suite spectrale de Leray} \add{$R^i f_{*}$}
+
+4°) Foncteurs fibres
+
+Soit $\xi$ un pt géométrique de $X$
+\[
+  \xi \to X, \quad \text{d'où foncteur fibre} \quad
+  u^{*} : \widetilde{X}_{\mathrm{ét}} \to \widetilde{\xi}_{\mathrm{ét}} \simeq (\mathrm{Ens})
+\]
+La famille des foncteurs fibres est \emph{conservative} : $u : F \to G$ est un
+isom ssi les $u_\xi : F_\xi \to G_\xi$ le sont pour tt $\xi$
+\uncertain{$\in X$}, d'où les cor.\ habituels.
+\[
+  F_\xi = \varinjlim_{\substack{X' \text{ étale sur } X\\ \text{et pointé par } \xi}} F(X')
+\]
+
+5°) \emph{Localisation stricte}
+\[
+  \mathcal{O}_{X,\xi} = \varinjlim_{\substack{X' \text{ étale sur } X\\ \text{et } \xi\text{-pointé}}} \Gamma(X', \mathcal{O}_{X'})
+\]
+\note{à gauche un petit diagramme : $\xi \to X'$, $X' \to X$, et $\xi \to X$ ;
+un symbole biffé précède le signe $=$.}
+anneau des stricts localisés en $\xi$ [anneau \struck{\ill{}}
+\add{strict.\ local} i.e.\ hensélien et à corps rés.\ sép.\ clos]
+\[
+  \overline{X}{}^{\xi} = \operatorname{Spec} \mathcal{O}_{X,\xi}, \qquad
+  F_\xi = \Gamma(\overline{X}, F_{\overline{X}})
+\]
+
+6°) Application aux fibres des $R^q f_{*}(F)$, pour $f$ qu.-cpt.\ et qu.-sép.
+\marginal{NB 5° et 6° n'ont pas vraiment d'analogue complet dans le cas des
+espaces top.\ ordinaires …}
+
+7°) \emph{Théorème fondamental} Soit $f : X \to Y$ morphisme propre, $F$
+faisceau \emph{de torsion} sur $X$, alors la formation des $R^q f_{*}(F)$
+
+\page{5}
+commute à tt changement de base $Y' \to Y$.
+
+\emph{NB} Vrai sans hyp.\ de propreté si $Y' \to Y$ est \emph{lisse}, $f$
+qu.-cpt.\ qu.-sép., et $F$ premier aux car.\ rés.\ de $Y$.
+
+\struck{8°) Ex. Morphismes finis : $R^q f_{*}(F) = 0$ pour $q \geq 1$}
+\note{ligne biffée, lecture approximative.}
+
+Ex. $R^q f_{*}(F)_{\bar y} \simeq H^q(X_{\bar y}, F_{\bar y})$
+
+Ex. $X$ propre sur $k$ sép.\ clos, $K$ ext.\ sép.\ close de $k$, d'où
+$X' = X_{K}$, $F' = F_{X'}$, et $H^i(X, F) \simeq H^i(X', F')$
+
+\emph{NB} Vrai sans hyp.\ de propreté si $F$ de torsion premier à
+\struck{\ill{}} car $k$.
+
+8°) \emph{Comparaison avec la cohomologie classique}
+
+$X$ préschéma loc.\ de type fini sur $\mathbb{C}$, alors pour tt $F$ faisceau
+de torsion sur $X$,
+\[
+  H^i(X, F) \to H^i(X^{\mathrm{an}}, F^{\mathrm{an}})
+\]
+est un \emph{isomorphisme}. Résultat analogue pour les $R^i f_{*}$ pour un
+morphisme $f : X \to Y$, si $f$ est \emph{de type fini}.
+
+\note{le paragraphe suivant est biffé de quatre grands traits obliques ; il
+est lu ici en partie.}
+\struck{Soit $X$ un schéma propre sur un anneau $A = \mathcal{O}_{Y,y}$ \ill{}
+$\mathbb{C}$, \ill{} $Y$ \ill{}. Alors $X$ « provient » d'un \ill{}
+algébrique sur $\mathbb{C}$ \ill{} $X'$ propre \ill{} au-dessus d'un voisinage
+\ill{} $Y'$ de $Y$. \ill{} faisceau de torsion constr.\ $F'$ sur $X'$
+« induisant » un faisceau constr.\ $F$ sur $X$.}
+
+\marginal{Utiliser de plus \uncertain{résolution des singularités}
+\struck{\ill{}} et l'hyp.\ de propreté.}
+\marginal{\emph{GAGA} plus complet : OK. \struck{\ill{}} Ext.\ pour faisceaux
+de torsion. Équivalence de catégories des faisceaux constructibles algébriques
+et faisceaux constructibles analytiques \uncertain{se réduisant} de torsion.
+\ill{} relatives …}
+
+\page{7}
+\struck{On peut certainement \ill{} que
+$H^i(X, F) \simeq \varinjlim_{U \ni y} H^i(f^{-1}(U), F)$}
+\add{Il y a aussi des \ill{} relatifs \uncertain{dans le type} :}
+
+\emph{Remarque} Soit $f : X \to Y$ un « schéma relatif » de type fini sur un
+espace analytique $Y$, d'où $f^{\mathrm{an}} : X^{\mathrm{an}} \to Y$. Tout
+faisceau étale \add{de torsion} $F$ constructible sur $X$ définit un faisceau
+analytique $F^{\mathrm{an}}$ sur $X^{\mathrm{an}}$, d'où les hom.
+\[
+  H^q(X, F) \to H^q(X^{\mathrm{an}}, F^{\mathrm{an}}), \qquad
+  R^q f_{*}(F)^{\mathrm{an}} \to R^q f^{\mathrm{an}}_{*}(F^{\mathrm{an}})
+\]
+À prouver que ce sont des \emph{isomorphismes}.
+\marginal{Devrait aussi se généraliser au contexte rigide-analytique …}
+
+\emph{Var.} Passant à la limite sur les voisinages d'un pt $y$ de $Y$, on
+trouverait alors
+\[
+  H^i(X \times_{Y} \mathcal{O}_{Y,y}, F \otimes \mathcal{O}_{Y,y})
+  \simeq \varinjlim_{U \ni y} H^i((f^{\mathrm{an}})^{-1}(U), F^{\mathrm{an}})
+\]
+\note{sous le premier membre, une flèche vers l'annotation « schéma ordinaire
+de t.f.\ sur $\mathcal{O}_{Y,y}$ ».}
+
+Par exemple, prenons $X = Y - Z$, $Z$ fermé analytique, en vérifiant
+\uncertain{par là} la \uncertain{classe} des $R^q f_{*}(F)$ ($F$ faisceau de
+torsion, \uncertain{loc.\ cst}, sur $X - Z$) \struck{\ill{}} provient d'un
+faisceau dans le cadre de la \emph{géom.\ alg.}
+
+\page{9}
+9°) \emph{Th.\ de spécialisation} Voici le type d'une forme précise :
+$f : X \to Y$ morphisme \emph{propre} et \emph{lisse}, $F$ faisceau de
+torsion loc.\ libre sur $X$, premier aux car.\ résiduelles de $X$, alors les
+$R^q f_{*}(F)$ [dont les fibres sont les coh.\ des fibres …] sont loc.\ libres.
+
+10°) \emph{Dim.\ cohomologique.}
+
+$X$ de type fini sur $k$ sép.\ clos, $n = \dim X$, alors
+$H^i(X, F) = 0$ pour $i$ \struck{$\geq$} $> 2n$,
+($F$ faisceau de torsion sur $X$).
+\note{un $\geq$ biffé est corrigé en $>$.}
+
+Si $X$ est \emph{affine}, on a même $H^i(X, F) = 0$ pour $i > n$ (th.\ du
+type Lefschetz).
+
+La dimension « topologique » de $X$ \uncertain{devant} donc être en général le
+double de la dimension de Krull — il y a un abaissement dans le cas affine, qui
+peut donner des idées fausses.
+
+\page{11}
+(cf Artin, Woodshole, par changement de base)
+
+11) \emph{Supports} \struck{Désignons par $U$ ouvert $U$ de $X$,}
+
+Faisceau final : $X/X$ lui-même, $X(X') = \{e\}$ ; les sous-faisceaux du
+faisceau final \struck{sont} sont les ouverts de $X$.
+
+\struck{Support d'un f}
+\struck{Si $F$ est un fai}
+La catégorie des faisceaux $F$ sur $X$ qui sur $U$ sont le faisceau final est
+équivalente à la catégorie des faisceaux sur $Y = X - U$, par le foncteur image
+\add{directe}. D'où : faisceaux abéliens sur $X$ nuls sur $U$ $=$ faisceaux
+abéliens sur $Y$.
+
+Support d'un faisceau abélien
+\struck{$\operatorname{Supp}(F) \subset \Gamma(F)$ fermé.}
+Support d'une section d'un faisceau abélien
+\[
+  \Gamma_Y(F) \subset \Gamma(F), \qquad
+  \underline{\Gamma}_Y(F) \subset F, \qquad
+  \underline{\Gamma}_Y(F)(X') = \Gamma_{Y'}(X', F')
+\]
+
+Foncteurs dérivés
+\[
+  H^i_Y(X, F) \simeq \operatorname{Ext}^i(X ; \mathbb{Z}_Y, F), \qquad
+  \underline{H}^i_Y(F) \simeq \underline{\operatorname{Ext}}^i(\mathbb{Z}_Y, F)
+  = R^{i-1} u_{*}(F|U) \quad \text{si } i \geq 2
+\]
+\marginal{si $i = 0$ ou $1$, noyau et conoyau de $F \to u_{*}(F|U)$}
+Suite exacte, spectrale …
+\marginal{cf SGA 1962, notes Hartshorne 1961}
+
+12) \emph{Pureté} $Y \subset X$ régulière, codim${}_X(Y) = p$ en chaque pt
+de $Y$
+
+\begin{tikzcd}
+Y \arrow[rr, hook] \arrow[dr, "\text{lisse}"'] & & X \arrow[dl, "\text{lisse}"] \\
+& k &
+\end{tikzcd}
+
+\[
+  \underline{H}^i_Y((\mathbb{Z}/n\mathbb{Z})_X) =
+  \begin{cases}
+    0 & \text{si } i \neq 2p \\
+    \simeq \mu_n^{\otimes(-p)} & \text{si } i = 2p
+  \end{cases}
+  \qquad n \text{ premier aux car.\ résiduelles de } Y
+\]
+\note{l'exposant se lit $\otimes(-p)$ sur la page.}
+\marginal{Donner explication de \struck{lisse} la classe fondamentale}
+
+\page{13}
+\emph{NB}
+\drawing{un cercle traversé d'un diamètre horizontal, un point au centre.}
+\[
+  \mu_n = \operatorname{Ker}(\mathbb{G}_m \xrightarrow{\;n\;} \mathbb{G}_m),
+  \qquad
+  \mu_n(X') = {}_n\Gamma(X', \mathcal{O}_{X'})^{*}
+\]
+\note{un « Ker » est biffé devant ${}_n\Gamma$.}
+\uncertain{gr.} fini plat sur $X$.
+
+Si $n$ premier aux car.\ de $X$, $\mu_{n,X}$ est \emph{étale} sur $X$, loc.\
+isom.\ (pour top.\ étale) à $\mathbb{Z}/n\mathbb{Z}$. Il \add{ne} faut surtout
+pas les confondre. Les $\mu_{n,X}^{\otimes d}$ ($d \in \mathbb{Z}$) sont donc
+définis, et sont \add{loc.} isomorphes à $(\mathbb{Z}/n\mathbb{Z})_X$ [le
+choix d'une section génératrice de $\mu_n$ définit un isom
+$\mu_{n,X}^{\otimes d} \simeq (\mathbb{Z}/n\mathbb{Z})_X$, multiplié par
+$\lambda^d$ si on multiplie la section par
+$\lambda \in (\mathbb{Z}/n\mathbb{Z})^{*}$ \ill{} $\lambda^d$ …].
+\emph{Dém.} pureté immédiate par th.\ de changement de base …
+
+\emph{Pb} [Pureté « absolue »] avec hypothèse de lissité remplacée par hyp.\
+régularité. OK \uncertain{pour toutes puissances} [\uncertain{pour} \ill{}
+\ill{}] \ill{} dépend de la résolution des singularités (Artin).
+
+Il y a aussi un th.\ de pureté relatif sur une base quelconque …
+
+\note{la suite de la page et le haut de la p.\ 15 sont barrés de grands traits
+croisés ; l'article est repris en 14) p.\ 17.}
+\struck{13) B) \emph{Les} $R^i_{!} f(F)$. Morphismes compactifiables
+$f : X \to Y$ \ill{} \ill{} Ext.\ aux \ill{} \ill{} croisements normaux …}
+
+\page{15}
+\struck{\ill{} ouvert, $\bar{f}$ propre \ill{} \ill{} quasi-projectif \ill{}
+st.\ \ill{} \ill{}.}
+
+13) \emph{Faisceaux constructibles}
+
+Faisceaux loc.\ \struck{\ill{}} constants
+
+Faisceaux constructibles : en général, il \uncertain{a}
+loc.\ constant : fibres \struck{finies} \add{de t.f.}
+sur des ens.\ loc.\ fermés qui partitionnent $U$. Dans le cas noethérien,
+\uncertain{critère} par adhérences \ill{} \struck{\ill{}}.
+
+\emph{Th.} Si $f : X \to Y$ propre, $Y$ loc.\ \emph{noethérien}, alors pour tt
+faisceau \emph{de torsion} \emph{constructible} $F$ sur $X$, les
+$R^i f_{*}(F)$ sur $Y$ sont constr.
+
+\emph{Cor.} $X$ propre sur un \uncertain{corps sép.\ clos}, \ill{} $F$ de
+torsion constructible sur $X$, les $H^i(X, F)$ sont finis.
+
+\emph{Remarques} \uncertain{Questions} de la généralisation
+
+\page{17}
+: au $f$ de type fini au lieu de $f$ propre. Se ramène au cas d'une
+\emph{immersion}. Se ramène \uncertain{par} la \uncertain{résolution} des
+singularités \add{+ pureté} \add{ou plutôt « bons modèles »},
+\uncertain{lorsque} \ill{}. Cf.\ là-dessus \uncertain{la} \ill{}
+\uncertain{bons} \uncertain{modèles} \ill{} des singularités \struck{\ill{}}
+dans ce cadre …
+
+14) \emph{Les} $R^i_{!} f(F)$.
+
+Soit $f : X \to Y$ morphisme compactifiable, i.e.\ qui se factorise en
+\[
+  X \xrightarrow{\;i\;} \overline{X} \xrightarrow{\;\bar{f}\;} Y
+\]
+$i$ immersion ouverte, $\bar{f}$ propre (cas où $f$ qu.-proj.\ et $Y$
+\uncertain{qu.-cpt}).
+
+Pour tt faisceau de torsion $F$ sur $X$, on considère les $i_{!}(F)$ [ext.\ de
+$F$ par $0$], puis les $R^q \bar{f}_{*}(i_{!}(F))$, foncteurs coh.\ en $F$.
+Je \uncertain{vérifie} \uncertain{qu'ils} ne dépendent \ill{} de façon
+\ill{} \ill{} \ill{} fonctions \uncertain{cohomologiques}
+\ill{} \ill{} \ill{} foncteur coh.
+
+\page{19}
+\uncertain{à} \ill{} \uncertain{près}, \ill{} \emph{indépendant} du choix de
+la factorisation.
+\emph{Notation} $R^q_{!} f_{*}(F)$.
+\[
+  R^q_{!} f_{*}(F) = (R^q \bar{f}_{*})(i_{!}(F))
+\]
+\note{lecture du membre de droite douteuse ; suit sur la même ligne
+« \ill{} : \ill{} propre sur $Y$ ».}
+
+\struck{Propriétés} Propriétés fondamentales, \uncertain{identiques} à celles
+des $R^q f_{*}(F)$, \emph{aussi bien} que si $f$ propre :
+
+(i') \emph{Comparaison avec cas classiques sur $\mathbb{C}$}
+
+(ii) \emph{Th.\ de changement de base} \struck{\ill{}}, \emph{dito.}
+
+(iii) \add{\emph{Th.\ de finitude}} \struck{Suite spectrale de
+Leray}
+
+(iv) \emph{Suite spectrale de Leray}
+
+(v) Si $f$ quasi-fini, \add{\uncertain{alors}} \ill{} les
+$R^i_{!} f_{*}(F) = 0$ \uncertain{pour $i > 0$}
+\marginal{phénomènes spéciaux}
+
+(vi) \struck{D'autre part} Si $f$ \emph{étale}, on a un hom.\
+\uncertain{can.}
+\[
+  \operatorname{Tr}_f(F) : f_{!}(F) \to F
+\]
+[d'où les covariants, \uncertain{par} $f : X' \to X$ morphisme
+\ill{}, \ill{} \ill{} \ill{} \ill{} \uncertain{compactifiable} sur $Y$
+\[
+  R^q_{!} g'_{*}(F') \to R^q_{!} g_{*}(f_{!}(F'))
+\]
+on en \uncertain{tire}
+\[
+  R^q_{!} g'_{*}(f^{*}(F)) \to R^q_{!} g_{*}(F) \;]
+\]
+
+(vi) \emph{Suite exacte en cohomologie relative}
+\note{deux articles portent le numéro (vi) sur la page. La liste se poursuit
+au-delà de la p.\ 19, dans le lot suivant.}
+
+\end{document}
