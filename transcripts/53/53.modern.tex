@@ -1,0 +1,1263 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 53, pages 1-33
+% (the whole folder).
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried moves into
+% a footnote. It is held to being mathematically correct as it stands; where
+% the manuscript is loose or mistaken, the true statement is what appears here
+% and the footnote says what the page has. In any dispute of substance the
+% transcription governs: whoever cites Grothendieck must cite batch-01.fr.tex
+% and batch-02.fr.tex.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-03 — first pass, unchecked against the pages by a human.
+% The folder was read whole — two batches, pages 1-33, both transcribed —
+% before any of this was written. Page 1 is the folder cover; pages 16-20 are
+% a letter to him in another hand (June 1973), skipped by the transcription
+% and described here only by its mathematical objection, its writer unnamed.
+%
+% What the folder is. Notes for a course on algebraic groups: pages 2-15 over
+% a field (homogeneity, geometric properties of schemes over a field, pi_0,
+% Cartier duality), pages 21-33 over a ring (distributions, comodules,
+% finiteness, linear embedding of affine groups and monoids, the functors
+% V(M) and W(M)). The letter objects to the course's embedding of affine
+% monoids in GL(n); page 21 opens with the rectification (M(n)), and on
+% page 30 the M is written over a GL: the same correction.
+%
+% Notation fixed for the whole document (the page's letters in footnotes):
+%  - k a field on pages 2-15, a ring on pages 21-33; k_s a separable closure,
+%    \bar k an algebraic closure; pi = Gal(k_s/k), as on the page;
+%  - a : G x X -> X the action (the page's pi on pp. 2-3), mu the
+%    multiplication of G (his pi on p. 31);
+%  - A the affine algebra, Delta : A -> A (x) A its comultiplication (his pi
+%    on pp. 15, 24-30), epsilon the counit, sigma the antipode, rho_M : M ->
+%    M (x) A a coaction (his u_0, omega_M, u_M, Delta_M);
+%  - \check A = Hom_k(A, k) = Dist(G)(k), delta the coproduct of Dist(X)
+%    (his Delta on p. 21, delta on p. 22);
+%  - V(M) : k' -> Hom_k(M, k') and W(M) : k' -> M (x)_k k' throughout (on
+%    p. 25 he calls the first W; pp. 32-33 fix the use kept here);
+%  - submodules M', quotients N (his M'', N', M' on pp. 27-29).
+%
+% Substantive departures from the pages (footnoted where they occur):
+%  p. 2, the connected components = irreducible components claim is stated
+%  for pseudo-torsors under a group locally of finite type; p. 5, the
+%  equivalences on a homomorphism u are stated for G, H locally of finite
+%  type with c) on a maximal point of H (the page writes G), and the converse
+%  half of the lemma for W open and closed; p. 6, « X régulier » supplied in
+%  the first Prop., the perfection hypothesis dropped from the second; p. 7,
+%  « X réduit » supplied for density of the smooth locus; the margin question
+%  « G réduit => G séparable ? » answered (no, over an imperfect field); p. 9,
+%  « X irréductible » supplied in the rectified criterion; p. 12, two
+%  implications written backwards (irreducible / geometrically irreducible),
+%  « Y connexe » supplied; p. 13, U V^{-1} contains G^0 only when U and V
+%  meet G^0 (or a common coset); p. 14, a point of T with values in S' gives
+%  a clopen part of X_{S'}, not every clopen part is one; p. 21, epsilon(x) = 1
+%  supplied beside Delta(x) = x (x) x; p. 30, the subcoalgebra corollary (4)
+%  is the one the proof needs, not Cor. 2.
+% Modern names given and footnoted as ours: pseudo-torsor, geometrically
+% reduced/irreducible/connected/integral, Jacobian criterion, Galois category,
+% scheme of connected components pi_0(X/k), pro-étale, restricted Lie algebra,
+% Chevalley-Barsotti-Rosenlicht, Cartier duality, comodule (a right comodule
+% today), fundamental theorem of coalgebras, pseudocompact algebra, Hopf
+% subalgebra, Ax-Grothendieck. « Dist(G) » here is the whole dual A^*, not
+% the distributions supported at e that the name designates today.
+% Announced and not established: the struck theorem on the openness of the
+% geometrically regular locus (p. 6), the proof of b) => a) on p. 7 (« Esq. »),
+% the plans of pp. 4, 5 and 15 (structure of radicial groups through p-Lie
+% algebras, Chevalley's extension, the role of Ext^1(G, G_m)), the inclusion
+% of G_a in Cartier duality (p. 15, « il faut… »), and the last line of p. 33.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{53}
+\pages{1}{33}
+\dating{1973}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Groupes algébriques : notes manuscrites (s.d.), lettre (1973) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Ces feuillets sont des notes pour un cours sur les groupes algébriques : les
+groupes que l'on définit par des équations polynomiales, comme le groupe des
+matrices inversibles, celui des rotations, ou plus simplement les nombres non
+nuls sous la multiplication. On peut chercher les solutions de ces équations
+dans n'importe quel corps, ou même dans n'importe quel anneau, et c'est ce
+qui fait la richesse et la difficulté du sujet.
+
+La première moitié du dossier affronte une difficulté qui vient des corps
+non algébriquement clos. L'équation $x^{2} + y^{2} = 0$ n'a qu'une solution
+réelle, l'origine, et définit sur les réels un objet d'un seul tenant ; sur
+les complexes, elle se scinde en deux droites, $x = iy$ et $x = -iy$. Une
+propriété comme « être d'un seul tenant » ou « ne pas avoir de point
+multiple » peut donc se perdre quand on agrandit le corps. Grothendieck
+dresse la liste de ces propriétés --- réduit, irréductible, connexe, intègre,
+régulier --- et de leurs versions « géométriques », celles qui survivent à
+toute extension du corps ; pour chacune, il dit sur quels corps la version
+ordinaire et la version géométrique coïncident. Il construit aussi l'objet
+qui compte les morceaux d'un espace même quand ces morceaux ne deviennent
+visibles qu'après extension du corps : un « ensemble » de composantes sur
+lequel le groupe de Galois agit.
+
+Pour les groupes, une idée simple fait presque tout le travail : un groupe
+est homogène. Une translation envoie n'importe quel point sur n'importe quel
+autre, de sorte qu'une propriété locale vraie en un point est vraie partout.
+Il suffit donc qu'un groupe soit « bon » en un seul point pour être lisse ; et
+ses morceaux d'un seul tenant sont aussi ses morceaux irréductibles. La
+première partie se clôt sur la dualité de Cartier, qui apparie les groupes
+commutatifs finis deux à deux, comme on apparie un espace vectoriel et son
+dual.
+
+La seconde moitié change de point de vue. Au lieu du groupe, on regarde les
+formes linéaires sur ses fonctions, que Grothendieck appelle ses
+distributions, par analogie avec les mesures de l'analyse. Un point du groupe
+se retrouve comme une masse de Dirac : une distribution qui respecte les
+produits de fonctions. Faire agir le groupe sur un espace vectoriel, c'est
+faire agir ces distributions, ou encore munir l'espace d'une « coaction ».
+De là sort un énoncé de finitude : tout vecteur vit dans un sous-espace de
+dimension finie stable sous le groupe. Et de là, deux conséquences : tout
+groupe affine est limite de groupes de matrices, et tout groupe affine de
+type fini est un groupe de matrices.
+
+Entre les deux moitiés est classée une lettre d'un auditeur du cours, de juin
+1973. Elle relève une erreur : un monoïde --- une loi associative avec
+élément neutre, sans inverses --- ne peut pas se plonger dans les matrices
+inversibles, et l'exemple tient en deux éléments, $0$ et $1$ sous la
+multiplication. La page qui suit la lettre s'ouvre sur la rectification : il
+faut toutes les matrices, et non les seules matrices inversibles. On voit
+ici, à petite échelle, un cours qui se corrige à la lecture d'un auditeur.
+
+Pour aller plus loin, les noms à chercher sont ceux des schémas en groupes
+sur un corps, des propriétés géométriques des schémas, de la dualité de
+Cartier, des cogèbres et comodules, et du plongement des groupes affines
+dans $\mathrm{GL}_{n}$.
+
+\keywords{group scheme over a field, pseudo-torsor, neutral component, geometrically reduced scheme, geometrically irreducible scheme, geometrically connected scheme, geometrically integral scheme, geometric regularity, smooth scheme, Jacobian criterion, Galois category, scheme of geometric connected components, pro-étale scheme, Cartier duality, restricted Lie algebra, Chevalley–Barsotti–Rosenlicht theorem, distribution algebra, comodule, fundamental theorem of coalgebras, pseudocompact algebra, Hopf subalgebra, linear algebraic monoid, pro-algebraic group, vector group functor}
+\end{resume}
+
+\section*{Le fil du dossier, et les conventions}
+
+Le dossier compte trente-trois pages : une chemise (page 1), quatorze pages
+de notes de sa main sur les groupes algébriques sur un corps (pages 2 à 15),
+une lettre d'une autre main (pages 16 à 20), et treize pages de notes de sa
+main sur les groupes affines sur un anneau (pages 21 à 33). Aucune page de
+notes n'est datée ni paginée par lui ; la date de l'inventaire, 1973, est
+celle de la lettre.
+
+\begin{enumerate}
+\item[1.] \emph{Groupes et homogénéité} (pages 2 à 5) : la multiplication est
+universellement ouverte, les ouverts $U \cdot V$, les parties stables par la
+composante neutre, les composantes connexes ; un plan du cours (page 4) ;
+les homomorphismes, leur image fermée, les monomorphismes (page 5).
+\item[2.] \emph{Régularité et lissité} (pages 6 à 8) : régularité
+géométrique, critère jacobien, lieu lisse ; un groupe géométriquement réduit
+est lisse ; composantes irréductibles et connexes d'un groupe.
+\item[3.] \emph{Schémas sur un corps} (pages 9 à 14) : un critère
+d'irréductibilité géométrique, rectifié ; schémas étales et ensembles
+galoisiens ; le schéma $\pi_{0}(X/k)$ des composantes connexes géométriques,
+traité deux fois (pages 9-10 et page 14) ; les quatre propriétés
+géométriques (pages 11 à 13).
+\item[4.] \emph{Dualité de Cartier} (page 15).
+\item[5.] \emph{La lettre} (pages 16 à 20).
+\item[6.] \emph{Distributions et comodules} (pages 21 à 29) : l'algèbre des
+distributions, l'action d'un monoïde affine comme coaction, les foncteurs
+$V$ et $W$, comodules et $\check{A}$-modules topologiques, sous-modules
+stables, théorème de finitude.
+\item[7.] \emph{Groupes affines et matrices} (pages 30 à 33) : un groupe
+affine sur un corps est limite projective de groupes de type fini, un
+monoïde affine de type fini se plonge dans $\mathrm{M}_{n}$ ; exemples ;
+représentabilité de $W(M)$ et de $V(M)$.
+\end{enumerate}
+
+Les deux moitiés ne se citent pas, mais elles se rejoignent en un point :
+l'énoncé de la page 30, dont la lettre conteste la partie b), et que la
+page 21 rectifie.
+
+\emph{Conventions.} Sur les pages 2 à 15, $k$ est un corps, $k_{s}$ une
+clôture séparable, $\bar k$ une clôture algébrique, et
+$\pi = \mathrm{Gal}(k_{s}/k)$ comme sur la page. $G$ est un schéma en groupes
+sur $k$, $G^{0}$ sa composante neutre, $G_{\mathrm{réd}}$ le sous-schéma
+réduit. L'action d'un groupe sur un schéma est notée
+$a \colon G \times X \to X$ et la multiplication de $G$ est notée
+$\mu$.\footnote{La page écrit $\pi$ pour l'action (pages 2 et 3), pour le
+groupe de Galois (pages 9 à 14), pour la comultiplication (pages 15, 24 à 30)
+et pour la multiplication du groupe (page 31). On ne garde $\pi$ que pour le
+groupe de Galois.}
+Sur les pages 21 à 33, $k$ est un anneau, $\mathcal{O} = \mathcal{O}_{k}$ le
+foncteur $k' \mapsto k'$ sur les $k$-algèbres, $A$ l'algèbre affine,
+$\Delta \colon A \to A \otimes_{k} A$ la comultiplication, $\varepsilon$ la
+coünité, $\sigma$ l'antipode, $\rho_{M} \colon M \to M \otimes_{k} A$ une
+coaction,\footnote{Il écrit successivement $u_{0}$, $\omega_{M}$, $u_{M}$,
+$\Delta_{M}$ pour la coaction, et $\pi$ pour la comultiplication.} et
+\[
+  V(M) \colon k' \longmapsto \mathrm{Hom}_{k}(M, k'), \qquad
+  W(M) \colon k' \longmapsto M \otimes_{k} k' .
+\]
+Le premier est contravariant en $M$, le second covariant ; c'est l'usage
+des pages 32 et 33, que l'on suit partout.\footnote{Page 25, il appelle
+$W(M)$ le foncteur $k' \mapsto \mathrm{Hom}_{k}(M, k')$, et la transcription
+note qu'il écrit tantôt $V$, tantôt $W$ pour lui. Les pages 23, 32 et 33
+réservent $W$ à $k' \mapsto M \otimes_{k} k'$ et $V$ au dual ; on fixe cet
+usage pour tout le document.}
+On note $\check{A} = \mathrm{Hom}_{k}(A, k) = V(A)(k)$ le dual de $A$, et
+$\delta$ le coproduit de $\mathrm{Dist}(X)$, dual de la multiplication de $A$.
+
+Un même mot désigne deux choses dans le dossier : \emph{séparé} (la
+diagonale est une immersion fermée) et \emph{séparable} (géométriquement
+réduit) ; la page abrège les deux en « sép. », et on les distingue partout.
+
+\emph{Annoncé et non établi} : le théorème biffé de la page 6 sur le lieu de
+régularité géométrique ; la démonstration de b) $\Rightarrow$ a) de la page 7,
+réduite à « Esquisse » ; les plans des pages 4, 5 et 15 ; l'extension de la
+dualité de Cartier à $\mathbf{G}_{a}$ (« il faut… ») ; la dernière ligne de
+la page 33.
+
+\pagerange{2}{3}
+\section*{Groupes, pseudo-torseurs et ouverts $U \cdot V$ (pages 2, 3 et 5)}
+
+\emph{Tout schéma en groupes sur un corps est séparé.} En effet la section
+unité $e \colon \mathrm{Spec}\, k \to G$ est une immersion fermée (un point
+rationnel d'un schéma sur un corps est fermé), et la diagonale de $G$ s'en
+déduit par le changement de base $(x, y) \mapsto x y^{-1}$.\footnote{La page
+énonce le corollaire sans démonstration ; celle-ci est la démonstration
+usuelle (SGA~3, VI$_{A}$, 0.3).}
+
+\emph{La multiplication $\mu \colon G \times G \to G$ est universellement
+ouverte.} L'automorphisme $(g, h) \mapsto (gh, h)$ de $G \times G$ la
+transforme en la première projection, et une projection
+$X \times_{k} Y \to X$ est universellement ouverte pour des schémas sur un
+corps. Plus généralement, appelons \emph{pseudo-torseur} sous $G$ un
+$k$-schéma $X$ muni d'une action $a$ telle que
+$(g, x) \mapsto (gx, x)$ soit un isomorphisme $G \times X \to X \times X$ ;
+alors $a \colon G \times X \to X$ est universellement ouverte, par le même
+argument.
+
+\textbf{Proposition.}\quad Soient $X$ un pseudo-torseur sous $G$, $U \subset G$ et $V \subset X$ deux
+ouverts.
+\begin{itemize}
+\item[a)] $U \cdot V$ est ouvert.
+\item[b)] $U \cdot V$ est stable par translation par $G^{0}$, donc par
+générisation.
+\item[c)] $U \cdot V$ est stable par spécialisation.
+\item[c')] Si $U \cdot V$ est quasi-compact (par exemple $U$ et $V$
+quasi-compacts), ou si $X$ est localement noethérien, $U \cdot V$ est
+fermé.\footnote{La page écrit « $U \times V$ est fermé », là où il s'agit de
+$U \cdot V$ ; l'interligne ajoute « et $X$ quasi-séparé (p.\,ex.\ $X$ un
+ps.\ torseur) ». C'est l'hypothèse qui fait marcher l'argument : un ouvert
+quasi-compact d'un schéma quasi-séparé est rétrocompact, donc constructible,
+et une partie constructible stable par spécialisation est fermée.}
+\end{itemize}
+
+La démonstration de b), à la page 3, se ramène au cas où un point
+$x = u_{0} v_{0}$ de $U \cdot V$ est rationnel, avec $u_{0} \in U(k)$ et
+$v_{0} \in V(k)$, et montre que $g x \in U \cdot V$ pour $g \in G^{0}$ : il
+suffit de trouver $u$ dans $U \cap g W^{-1}$, où $W$ est l'image réciproque
+de $V$ par $h \mapsto h x$. Or $T = G^{0} u_{0}$ est irréductible et contient
+$u_{0} \in U$ et $g u_{0} \in g W^{-1}$ ; les deux ouverts $U \cap T$ et
+$g W^{-1} \cap T$ de $T$ sont non vides, donc se rencontrent.\footnote{Cet
+argument suppose $G^{0}$ géométriquement irréductible, ce qui n'est établi
+qu'au corollaire 2 de la page 8 ; dans le dossier, l'ordre des feuillets ne
+suit pas l'ordre logique. La page écrit ici « $G_{0}$ » pour la composante
+neutre.}
+
+\textbf{Lemme.}\quad Soit $G$ opérant sur $X$, de sorte que les morphismes orbitaux
+$g \mapsto g x$ soient générisants (c'est le cas pour un pseudo-torseur).
+\begin{itemize}
+\item[1)] Une partie $W$ de $X$ stable par $G^{0}$ est stable par
+générisation et par spécialisation ; si $X$ est localement noethérien, elle
+est donc ouverte et fermée.
+\item[2)] Réciproquement, une partie ouverte et fermée de $X$ est stable par
+$G^{0}$.
+\end{itemize}
+
+Pour 1) : si $y \in W$ est rationnel et $x$ générise $y$, le morphisme
+orbital $\varphi \colon G^{0} \to X$, $g \mapsto g y$, est générisant et
+$G^{0}$ est stable par générisation dans $G$, donc $x \in \varphi(G^{0})
+\subset W$. Le complémentaire de $W$ est stable par $G^{0}$ lui aussi, donc
+par générisation, et $W$ est stable par spécialisation. Dans un schéma
+localement noethérien, une partie stable dans les deux sens est réunion de
+composantes connexes, donc ouverte et fermée.\footnote{La page dit « i.e., si
+$X$ loc.\ noeth., est-elle ouverte et fermée » sans justifier ; l'argument
+par les composantes irréductibles, localement finies, est le nôtre. Le milieu
+de la démonstration est repris plusieurs fois sur la page ; on n'en donne que
+ce qui se lit.}
+Pour 2), qui est en tête de la page 5 : si $W$ est ouverte et fermée,
+$a^{-1}(W) \cap (G^{0} \times W)$ est ouverte et fermée dans
+$G^{0} \times W$ et contient $e \times W$ ; chaque fibre
+$G^{0}_{k(w)}$ de $G^{0} \times W \to W$ est connexe et rencontre
+$e \times W$, donc $a^{-1}(W)$ contient $G^{0} \times W$. Cette moitié
+n'utilise pas l'hypothèse sur les morphismes orbitaux.\footnote{La page
+commence par « Si $W$ est ouvert et fermé », biffe « ouvert et fermé » et
+écrit « stable par spécialisation » ; l'argument qu'elle donne (une partie
+ouverte et fermée de $G^{0} \times W$ contenant $e \times W$) demande bien
+que $W$, et donc $a^{-1}(W)$, soit ouverte et fermée. On énonce donc la forme
+première.}
+
+\textbf{Corollaire.}\quad Soit $X$ un pseudo-torseur sous $G$. Alors $X$ est réunion disjointe de
+parties à la fois ouvertes, fermées et quasi-compactes, stables par $G^{0}$ ;
+en particulier les composantes connexes de $X$ sont quasi-compactes. Si de
+plus $G$ est localement de type fini, les composantes connexes de $X$ sont
+ses composantes irréductibles.\footnote{La page énonce le corollaire sous
+l'hypothèse que $G \times X \to X \times X$ est ouvert (« p.\,ex.\ $X$ un
+ps.\ torseur »), et sa seconde moitié, numérotée « 2. », sans hypothèse de
+finitude. Pour une action quelconque, les composantes connexes de $X$ ne sont
+évidemment pas irréductibles (le groupe trivial opère sur tout schéma) ; on
+s'en tient aux pseudo-torseurs. L'énoncé sur les composantes irréductibles
+résulte, après extension du corps, du corollaire 2 de la page 8.}
+
+En effet, pour $U$ un voisinage ouvert affine de $e$ et $V$ un ouvert affine
+de $X$, $U \cdot V$ est ouvert, fermé et quasi-compact par a) et c'), et $X$
+est réunion de tels ouverts.
+
+\pagerange{4}{4}
+\section*{Un plan du cours (page 4)}
+
+La page 4, au crayon, esquisse la suite. Sur un corps parfait, un groupe
+algébrique se dévisse en
+\[
+  e \subset G^{0}_{\mathrm{réd}} \subset G^{0} \subset G ,
+\]
+où $G^{0}_{\mathrm{réd}}$ est un groupe lisse connexe, $G^{0}/G^{0}_{\mathrm{réd}}$
+un groupe radiciel (infinitésimal), et $G/G^{0}$ un groupe étale --- un
+groupe discret muni d'une action continue de $\pi$ ; $G$ est quasi-compact
+si et seulement si $G/G^{0}$ est fini.\footnote{La page écrit « $G/G^{0}$
+cpt » et, sous la dernière inclusion, « loc.\ cpts sép. » ; on lit qu'un
+groupe étale, vu comme $\pi$-ensemble discret, est quasi-compact si et
+seulement s'il est fini. Le dévissage lui-même demande $k$ parfait, pour que
+$G_{\mathrm{réd}}$ soit un sous-groupe (page 13).}
+La structure des groupes lisses connexes est « assez bien connue » : variétés
+abéliennes, groupes semi-simples, tores, groupes vectoriels
+$\mathbf{G}_{a}^{s}$, avec des formes tordues ; celle des groupes radiciels
+se ramène, par dévissage, aux groupes de hauteur $1$, décrits par leurs
+$p$-algèbres de Lie ; restent les groupes discrets. Dans le cas commutatif,
+la liste des briques est : variétés abéliennes, $\mathbf{G}_{a}$,
+$\mathbf{G}_{m}$, $\mathbb{Z}/n\mathbb{Z}$, $\mu_{p}$,
+$\alpha_{p}$.\footnote{Les $p$-algèbres de Lie sont les algèbres de Lie
+restreintes de Jacobson ; l'équivalence entre groupes de hauteur $1$ et
+$p$-algèbres de Lie de dimension finie est dans SGA~3, VII$_{A}$, et dans
+Demazure--Gabriel. Le mot « types » de la première ligne est lu avec doute.}
+
+\pagerange{5}{5}
+\section*{Homomorphismes (page 5)}
+
+Soit $u \colon G \to H$ un homomorphisme de schémas en groupes localement de
+type fini sur $k$.
+
+\textbf{Corollaire.}\quad Les conditions suivantes sont équivalentes :
+\begin{itemize}
+\item[a)] $u$ est universellement générisant ; a') $u$ est générisant en un
+point ;
+\item[b)] $u(G) \supset H^{0}$ ;
+\item[c)] $u(G)$ contient un point maximal de $H$.
+\end{itemize}
+Sous ces conditions, $u(G)$ est une partie ouverte et fermée de $H$.
+
+L'image d'un homomorphisme de groupes localement de type fini sur un corps
+est fermée --- c'est le sous-groupe fermé quotient de $G$ par le noyau. Si
+$u$ est générisant en un point, son image contient le point générique d'une
+composante irréductible, d'où c) ; si $u(G)$, fermé, contient un point
+maximal, il contient la composante correspondante, un translaté de $H^{0}$,
+et donc $H^{0}$ puisque c'est un sous-groupe, d'où b) ; et si
+$u(G) \supset H^{0}$, $u$ se factorise par l'ouvert $u(G)$, réunion de
+translatés de $H^{0}$, sur lequel il est fidèlement plat, donc
+universellement générisant.\footnote{La démonstration de la page est plus
+courte et suit un autre chemin : « a) $\Leftrightarrow$ a') connu,
+a') $\Leftarrow$ c) trivial, b) $\Rightarrow$ c) trivial », puis
+a) $\Rightarrow$ b) par la stabilité de $u(G)$ sous $H^{0}$ et le lemme de la
+page 3. La condition c) y est écrite « un point maximal $x$ de $G$ tel que
+$u^{-1}(x) \neq \emptyset$ », où il faut lire $H$. L'hypothèse « localement
+de type fini », que la page ne pose pas, est celle sous laquelle l'image est
+fermée et le passage au quotient fidèlement plat (SGA~3, VI$_{B}$). Un
+énoncé biffé, juste au-dessus, déduisait la platitude de $u$ du cas où $H$
+est réduit ; une note de marge demande un argument pour « universellement ».}
+
+\textbf{Corollaire.}\quad Si $G$ est quasi-compact, l'image de $u$ est fermée.
+
+\textbf{Proposition.}\quad Un monomorphisme $u \colon G \to H$, avec $G$ de type fini, est une immersion
+fermée.
+
+C'est le théorème de SGA~3, VI$_{B}$, 1.4.2 ; la page l'énonce sans
+démonstration, et une note de marge au crayon interroge la stabilité par
+spécialisation.
+
+Suit un plan. D'un côté, les groupes étales et leurs limites : groupes
+discrets, profinis, localement compacts totalement discontinus, éventuellement
+tordus, équivalents aux groupes topologiques correspondants munis d'une
+action continue de $\pi$. De l'autre, les groupes connexes : sur un corps
+parfait, un groupe lisse connexe est extension canonique d'une variété
+abélienne par un groupe lisse connexe affine, et un groupe quasi-compact est
+limite projective de groupes de type fini.\footnote{L'extension canonique est
+le théorème de Chevalley (démontré aussi par Barsotti et Rosenlicht), connu
+depuis les années 1950 ; la page dit « Extension (can.) d'une VA par un groupe
+connexe lisse affine ». La limite projective est démontrée, pour les groupes
+affines, à la page 30.}
+
+\pagerange{6}{7}
+\section*{Régularité géométrique et lissité (pages 6 et 7)}
+
+\textbf{Proposition.}\quad Soient $k$ un corps parfait, $X$ un $k$-schéma régulier et $k'$ une extension
+de $k$ ; on suppose $X$ localement de type fini sur $k$, ou $k'$ de type fini
+sur $k$, de sorte que les anneaux locaux de $X_{k'}$ soient noethériens.
+Alors $X_{k'}$ est régulier.\footnote{La page omet l'hypothèse « $X$
+régulier », sans laquelle l'énoncé est faux ; on la rétablit. Le corollaire
+qui suit, pour un anneau local régulier $A$ tel que $A \otimes_{k} k'$ soit
+essentiellement de type fini, est la même chose en termes d'anneaux.}
+
+\textbf{Proposition.}\quad Soit $X$ un $k$-schéma localement essentiellement de type fini. Les
+conditions suivantes sont équivalentes :
+\begin{itemize}
+\item[a)] pour tout $k$-schéma régulier $Y$ (à anneaux locaux de
+$X \times_{k} Y$ noethériens), $X \times_{k} Y$ est régulier ;
+\item[b)] pour toute extension $k'$ de $k$, $X_{k'}$ est régulier ;
+\item[c)] $X_{\bar k}$ est régulier ;
+\item[d)] pour toute extension finie radicielle $k'$ de $k$, $X_{k'}$ est
+régulier.
+\end{itemize}
+
+On dit alors que $X$ est \emph{géométriquement régulier}, ou \emph{lisse} si
+$X$ est localement de type fini.\footnote{La page pose « $k$ ext.\
+parfait » dans les hypothèses de cette proposition ; elle est
+vraie sans perfection, et elle n'a d'intérêt que sans elle, puisque sur un
+corps parfait les quatre conditions se réduisent à « $X$ régulier »
+(proposition précédente). On supprime l'hypothèse.}
+La page indique les trois arguments : b) $\Rightarrow$ a) parce qu'un
+homomorphisme local plat d'anneaux locaux noethériens, à base et fibre
+régulières, a un but régulier ; c) $\Rightarrow$ b) parce que la régularité
+descend par homomorphisme local fidèlement plat ; d) $\Rightarrow$ c) par
+passage à la limite. Ce dernier pas est le plus profond : c'est le théorème
+d'EGA~IV, 6.7.7, selon lequel la régularité géométrique se teste sur les
+extensions finies radicielles.
+
+Un schéma géométriquement régulier est régulier ; la réciproque vaut pour
+tout $X$ si et seulement si $k$ est parfait --- prendre
+$X = \mathrm{Spec}\, k'$, $k'$ extension finie radicielle non triviale, qui
+est régulier mais dont $k' \otimes_{k} k'$ n'est pas réduit. La régularité
+géométrique est stable par extension du corps et par produit. Elle a aussi
+un sens en un point $x$ : $\mathcal{O}_{X,x}$ est géométriquement régulier ;
+et si $k(x)$ est séparable sur $k$, la régularité de $\mathcal{O}_{X,x}$
+entraîne sa régularité géométrique.\footnote{Ce dernier énoncé est exact :
+pour $X$ localement de type fini, si $k(x)$ est séparable sur $k$ et
+$\mathcal{O}_{X,x}$ régulier, $X$ est lisse en $x$ (EGA~IV, 17.15.5). Un
+théorème biffé, à la suite, annonçait que l'ensemble des points où $X$ est
+géométriquement régulier est ouvert, et ne se lit plus.}
+
+\textbf{Proposition (critère jacobien).}\quad Un $k$-schéma $X$ localement de type fini est lisse en $x$ si et seulement
+s'il existe un voisinage ouvert $U$ de $x$ et un morphisme
+$f \colon U \to \mathbb{A}^{n}_{k}$ étale en $x$, c'est-à-dire de
+présentation finie, plat et à fibres étales au voisinage de
+$x$.\footnote{La page note l'espace affine $E^{n}_{k}$ et met « étale » entre
+guillemets ; le nom de critère jacobien est lu avec doute sur la page.}
+
+Par conséquent le lieu lisse de $X$ est ouvert. Il est dense si et seulement
+si, en tout point maximal $x$ de $X$, l'anneau artinien $\mathcal{O}_{X,x}$
+est réduit et $k(x)$ est une extension séparable de $k$ --- pour une
+extension de type fini, cela revient à être une extension finie séparable
+d'une extension transcendante pure. En particulier, si $k$ est parfait et
+$X$ réduit, le lieu lisse est un ouvert dense.\footnote{La page écrit « Si
+$k$ est parfait, l'ens.\ des pts où $X$ est lisse est un ouvert dense », sans
+« $X$ réduit » : pour $X = \mathrm{Spec}\, k[\varepsilon]/(\varepsilon^{2})$
+le lieu lisse est vide. On ajoute l'hypothèse, que le corollaire précédent
+contient d'ailleurs.}
+
+La normalité géométrique se traite de même, sans condition de finitude : pour
+$X$ localement de type fini, le lieu où $X$ est géométriquement normal est
+ouvert, et dense si $k$ est parfait et $X$ réduit ; une extension de corps
+est géométriquement normale si et seulement si elle est séparable.
+
+\pagerange{7}{8}
+\section*{Groupes lisses, composantes d'un groupe (pages 7 et 8)}
+
+\textbf{Proposition.}\quad Soit $G$ un schéma en groupes localement de type fini sur $k$. Les
+conditions suivantes sont équivalentes :
+\begin{itemize}
+\item[a)] $G$ est géométriquement réduit en un point ; a') $G$ est
+géométriquement réduit ;
+\item[b)] $G$ est géométriquement normal ;
+\item[c)] $G$ est lisse sur $k$.
+\end{itemize}
+
+On a c) $\Rightarrow$ b) $\Rightarrow$ a') $\Rightarrow$ a). Pour
+a) $\Rightarrow$ b) : $G$ géométriquement réduit en un point l'est en un point
+maximal $g$, où $\mathcal{O}_{G,g} = k(g)$ est un corps séparable sur $k$,
+donc géométriquement normal ; après extension du corps, on peut supposer que
+$g$ et un autre point $g'$ sont rationnels, et une translation les échange.
+C'est l'homogénéité qui fait tout. La même démonstration vaut pour un
+$k$-schéma $X$ sur lequel $G$ opère de façon que $G \times X \to X \times X$
+soit surjectif.\footnote{La page énonce la proposition sans l'hypothèse
+« localement de type fini » pour a) et b), et c) « si $G$ loc.\ de t.f. » ;
+on s'en tient au cas localement de type fini, celui de SGA~3, VI$_{A}$,
+1.3.1. Le pas de b) à c) est le critère jacobien, et la page ne donne de
+b) $\Rightarrow$ a) qu'une « Esquisse de démonstration », sans contenu.}
+
+Une note de marge demande : « Si $G$ de t.f.\ sur $k$, alors $G$ réduit
+$\Rightarrow$ $G$ séparable ? » La réponse est non sur un corps imparfait :
+pour $k = \mathbb{F}_{p}(t)$, le sous-groupe de $\mathbf{G}_{a}^{2}$ d'équation
+$y^{p} = t x^{p}$ est réduit (le polynôme $y^{p} - t x^{p}$ est irréductible)
+mais n'est pas lisse, puisque sur $\bar k$ il devient la droite
+$y = t^{1/p} x$ comptée $p$ fois.\footnote{La question est laissée ouverte
+sur la page ; la réponse et l'exemple sont les nôtres. Sur un corps parfait
+la réponse est oui, par le corollaire 1.}
+
+\textbf{Corollaire 1.}\quad Si $k$ est parfait, $G_{\mathrm{réd}}$ est un sous-groupe fermé de $G$,
+géométriquement normal, et lisse si $G$ est localement de type fini.
+
+\textbf{Corollaire 2.}\quad Les composantes irréductibles de $G$ sont ses composantes connexes ; en
+particulier $G^{0}$ est irréductible.
+
+On peut supposer $k$ parfait et $G$ réduit, donc normal ; or un schéma
+normal localement noethérien a pour composantes connexes ses composantes
+irréductibles. Sans finitude, la page note que la composante irréductible
+de $e$ est stable par générisation, donc contient le spectre de
+$\mathcal{O}_{G,e}$.
+
+\textbf{Corollaire 3.}\quad Pour deux ouverts $U$, $V$ de $G$, $U \cdot V$ est stable par translation par
+$G^{0}$ ; si $G$ est localement de type fini, ou si $U$ et $V$ sont
+quasi-compacts, $U \cdot V$ est ouvert et fermé.
+
+Si $U$ et $V$ rencontrent $G^{0}$, on a $U V^{-1} \supset G^{0}$ : pour
+$g \in G^{0}$, $g V \cap G^{0}$ et $U \cap G^{0}$ sont des ouverts non vides
+de $G^{0}$, irréductible, donc se rencontrent. En général, pour $u \in U$ et
+$v \in V$, le même argument dans les translatés $u G^{0}$ et $G^{0} v$ montre
+que $U \cdot V$ contient $u v G^{0}$. L'ensemble $U \cdot V$ est ouvert comme
+image de $U \times V$ par $\mu$, universellement ouverte ; il est stable par
+spécialisation, et fermé dès qu'il est rétrocompact, ce qui est le cas s'il
+est quasi-compact puisque $G$ est séparé.\footnote{La page est un palimpseste
+de plusieurs démonstrations encadrées et biffées ; on suit l'ordre qu'indiquent
+ses renvois. Dans le cas localement de type fini, $U \cdot V$ est l'image
+réciproque d'une partie de $\pi_{0}(G)$, schéma étale, donc ouvert et
+fermé sans hypothèse de quasi-compacité.}
+
+\pagerange{9}{10}
+\section*{Irréductibilité géométrique, schémas étales, le schéma $\pi_{0}(X/k)$ (pages 9 et 10)}
+
+\emph{Critère d'irréductibilité géométrique, rectifié.} Soient $X$ un
+$k$-schéma irréductible et $f \colon Z \to X$ un morphisme. On suppose
+\begin{itemize}
+\item[a)] $Z$ géométriquement irréductible ;
+\item[b)] $f(Z)$ non contenu dans le lieu des points par lesquels passent
+plusieurs composantes irréductibles de $X_{\bar k}$ (par exemple, $f(Z)$
+contient un point où $X_{\mathrm{réd}}$ est géométriquement normal).
+\end{itemize}
+Alors $X$ est géométriquement irréductible.\footnote{La page n'écrit pas
+« $X$ irréductible », mais la démonstration l'emploie (« $p(X'_{i}) = X$ ») et
+l'énoncé est faux sans elle : deux droites disjointes et un point sur l'une
+d'elles. On rétablit l'hypothèse.}
+
+Soient $k'$ une extension finie galoisienne de $k$, $p \colon X' = X_{k'} \to X$,
+$f' \colon Z' = Z_{k'} \to X'$, et $X'_{i}$ une composante irréductible de $X'$
+contenant $f'(Z')$, qui est irréductible. Les transformées de $X'_{i}$ par
+$\mathrm{Gal}(k'/k)$ contiennent $f'(Z')$, qui est stable, donc sont égales à
+$X'_{i}$ par b). Ainsi $X'_{i}$ est l'image inverse de la partie fermée
+irréductible $p(X'_{i})$, qui est $X$ puisque $p$ est ouvert et fermé ; donc
+$X' = X'_{i}$ est irréductible. Une extension radicielle ne change pas la
+topologie, d'où la conclusion.
+
+Sans b), l'énoncé tombe : $X = \mathrm{Spec}\, \mathbb{R}[x,y]/(x^{2} + y^{2})$
+est irréductible, $Z = \mathrm{Spec}\, \mathbb{R}$ s'y envoie sur l'origine,
+mais $X_{\mathbb{C}}$ est la réunion des deux droites $x = \pm i y$, qui se
+coupent justement à l'origine.
+
+\emph{Schémas étales.} Le foncteur $X \mapsto E = X(k_{s})$ est une
+équivalence entre la catégorie $\mathrm{Et}(k)$ des $k$-schémas étales et
+celle des ensembles discrets munis d'une action continue de $\pi$. Dans ce
+dictionnaire, $X$ quasi-compact de degré $n$ correspond à $E$ fini d'ordre
+$n$ ; $X$ connexe (c'est-à-dire $X = \mathrm{Spec}\, K$, $K$ extension finie
+séparable) à une action transitive ; la décomposition en composantes
+connexes à la décomposition en orbites ; les limites projectives finies et
+les limites inductives aux mêmes limites de $\pi$-ensembles ; les
+monomorphismes et les épimorphismes aux injections et aux surjections ; et,
+pour $\Gamma$ un groupe fini ordinaire, un $\Gamma$-torseur à un
+$\pi$-ensemble $E$ muni d'une action à droite simplement transitive de
+$\Gamma$ commutant à celle de $\pi$, ce qui revient à la donnée d'un
+homomorphisme continu $\pi \to \Gamma$, à conjugaison près.\footnote{C'est
+le prototype de ce que Grothendieck appellera catégorie galoisienne
+(SGA~1, V). La page écrit « défini par un hom continu $\pi \to G$ » ; la
+précision « à conjugaison près » (une fois choisi un point de $E$,
+l'homomorphisme est déterminé) est la nôtre. Il note le groupe fini $G$, que
+l'on renomme $\Gamma$ pour ne pas le confondre avec le groupe algébrique.}
+
+\emph{Le schéma des composantes connexes.} Supposons $X_{k_{s}}$ localement
+connexe, à composantes connexes définies sur des extensions finies de $k$
+(par exemple $X$ quasi-compact, ou localement de type fini). On veut un
+$k$-schéma $\pi_{0}(X/k)$ dont les points correspondent aux composantes
+connexes de $X$, le corps résiduel du point qui correspond à une composante
+$X_{(x)}$ étant la plus grande sous-algèbre étale de
+$\Gamma(X_{(x)}, \mathcal{O})$.\footnote{La page dit « la plus grande
+sous-algèbre séparable de $\Gamma(X_{(x)}, \mathcal{O}_{X_{(x)}})$
+sur $k(x)$ » ; c'est « sur $k$ » qu'il faut lire, $k(x)$ étant
+précisément ce que l'on définit.}
+
+L'exemple $X = \mathrm{Spec}\, k_{s}$ montre qu'il faut sortir des schémas
+étales : $k_{s}$ est la réunion de ses sous-extensions finies galoisiennes
+$k_{i}$, $X$ est la limite des $\mathrm{Spec}\, k_{i}$, et
+$X_{k_{s}} = \varprojlim (\pi_{i})_{k_{s}}$ est le schéma « constant » de
+valeur l'ensemble profini $\pi$ : $\pi_{0}(X_{k_{s}}) = \pi$ comme espace
+topologique. D'où la catégorie des schémas \emph{proétales} sur $k$ (entiers
+et séparables), équivalente à celle des $\pi$-espaces profinis et à celle des
+$k$-algèbres séparables (réunions de sous-algèbres étales), et celle des
+schémas localement proétales, équivalente aux $\pi$-espaces localement
+compacts totalement discontinus.\footnote{« Proétale » est son mot ; il ne
+s'agit pas du site proétale de Bhatt et Scholze (2015), mais des schémas
+spectres d'algèbres ind-étales sur un corps.}
+
+Pour $X$ quasi-compact, on construit $\pi_{0}(X/k) = \mathrm{Spec}(A_{0})$ de
+deux façons :
+\begin{itemize}
+\item[a)] $A_{0}$ est la plus grande sous-algèbre ind-étale de
+$\Gamma(X, \mathcal{O}_{X})$, et $X \to \mathrm{Spec}(A_{0})$ est le morphisme
+canonique ;
+\item[b)] $\bar{A}$ est l'algèbre des fonctions localement constantes sur
+$X_{k_{s}}$ à valeurs dans $k_{s}$ (réunion des fonctions localement
+constantes sur les $X_{k_{i}}$), sur laquelle $\pi$ agit par transport de
+structure, et $A_{0} = \bar{A}^{\pi}$.
+\end{itemize}
+Alors $\pi_{0}(X/k)$ est proétale, $X \to \pi_{0}(X/k)$ est surjectif à
+fibres géométriquement connexes, et $\pi_{0}(X/k)$ est fonctoriel en $X$,
+commute aux produits et à l'extension du corps de base.\footnote{La
+compatibilité aux produits repose sur le théorème de la page 12 (sur un
+corps séparablement clos, un produit de schémas connexes est connexe). La
+page note $\underline{\pi}_{0}(X/k)$ ; l'algèbre est notée $A$ sur la page,
+on l'appelle $A_{0}$ pour la distinguer de l'algèbre affine de la seconde
+moitié.}
+Plus généralement, $\pi_{0}(X/k)$ se définit comme schéma localement
+proétale dès que tout point de $X$ a un voisinage ouvert et fermé $U$ tel
+que $U_{\bar k}$ n'ait qu'un nombre fini de composantes connexes.
+
+\pagerange{11}{13}
+\section*{Quatre propriétés géométriques des schémas sur un corps (pages 11 à 13)}
+
+Les quatre propriétés suivent le même patron : une caractérisation des corps
+sur lesquels la propriété est stable par produit, puis la version
+géométrique de la propriété, avec quatre conditions équivalentes, puis la
+comparaison, la stabilité par extension du corps et par produit.
+
+\subsection*{Séparabilité}
+
+Un corps $k$ est parfait si et seulement si un produit tensoriel de
+$k$-algèbres réduites est réduit, si et seulement si $k' \otimes_{k} k'$ est
+réduit pour toute extension finie $k'$. Pour une $k$-algèbre $A$, les
+conditions suivantes sont équivalentes : $A \otimes_{k} k'$ réduit pour toute
+extension $k'$ ; $A \otimes_{k} B$ réduit pour toute $k$-algèbre réduite $B$ ;
+$A \otimes_{k} \bar k$ réduit ; $A \otimes_{k} k'$ réduit pour toute extension
+finie radicielle $k'$. On dit alors que $A$ est \emph{séparable}, ou
+\emph{géométriquement réduite} ; pour un schéma, la condition se teste sur
+un recouvrement affine. Un schéma géométriquement réduit est réduit ; la
+réciproque vaut pour tous les $k$-schémas si et seulement si $k$ est
+parfait.\footnote{La transcription porte ici une phrase raturée qui se lit
+« tt schéma géom.\ [réduit] sur $k$ est [géom.]\ réduit » ; on rétablit le
+sens. Une note de marge recommande de « faire gaffe » au passage à la
+limite.}
+
+\subsection*{Irréductibilité}
+
+Un corps $k$ est séparablement clos si et seulement si, pour deux
+$k$-algèbres intègres $A$ et $B$, $(A \otimes_{k} B)/\mathrm{Nil}$ est
+intègre (de façon équivalente : un produit de $k$-schémas irréductibles est
+irréductible), si et seulement si, pour toute extension finie $k'$, le noyau
+de la multiplication $k' \otimes_{k} k' \to k'$ est nilpotent. Un $k$-schéma
+$X$ est \emph{géométriquement irréductible} s'il satisfait les conditions
+équivalentes : $X \times_{k} Y$ irréductible pour tout $Y$ irréductible ;
+$X_{k'}$ irréductible pour toute extension $k'$ ; $X_{\bar k}$ irréductible ;
+$X_{k'}$ irréductible pour toute extension finie $k'$. Un schéma
+géométriquement irréductible est irréductible ; la réciproque vaut pour tous
+les schémas si et seulement si $k$ est séparablement clos.\footnote{La page
+12 écrit l'inverse, « tout $k$-schéma irréductible est géom.\ irréductible,
+réciproque vraie ssi $k$ est sép.\ clos » ; la transcription le signale. On
+redresse le sens de l'implication, comme dans les trois autres cas.}
+
+\subsection*{Connexité}
+
+\textbf{Théorème.}\quad Sur un corps séparablement clos $k$, le produit de deux $k$-schémas connexes
+non vides est connexe.
+
+La page le démontre pour des schémas localement de type fini (le cas général
+demande la descente), en utilisant que $X \times_{k} Y \to Y$ est ouvert et
+surjectif, de sorte que la topologie de $Y$ est quotient. D'abord $X_{k'}$
+est connexe pour toute extension $k'$, car les fibres de $X_{k'} \to X$ sont
+les spectres des $k(x) \otimes_{k} k'$, connexes et non vides ; ensuite les
+fibres de $X \times_{k} Y \to Y$, qui sont des $X_{k(y)}$, sont connexes et
+non vides au-dessus de $Y$ connexe. Réciproquement, si $X \times_{k} X$ est
+connexe pour tout $k$-schéma fini connexe $X$, $k$ est séparablement clos.
+
+Un $k$-schéma $X$ est \emph{géométriquement connexe} s'il satisfait les
+conditions équivalentes : $X \times_{k} Y$ connexe pour tout $k$-schéma
+connexe $Y$ ; $X_{k'}$ connexe pour toute extension $k'$ ; $X_{k_{s}}$
+connexe ; $X_{k'}$ connexe pour toute extension finie galoisienne
+$k'$.\footnote{La page écrit, en a), « $\forall$ $k$-schéma $Y$ », sans
+« connexe » ; l'énoncé serait faux pour $Y$ non connexe. Elle définit aussi
+$\bar k$ comme une clôture séparable dans cette proposition, ce qu'on écrit
+$k_{s}$.}
+Géométriquement connexe entraîne connexe, avec réciproque si et seulement si
+$k$ est séparablement clos ; pour une extension $k'$, $X_{k'}$ est
+géométriquement connexe sur $k'$ si et seulement si $X$ l'est sur
+$k$.\footnote{La page dit « $X$ géom.\ connexe sur $k'$ », là où il faut
+« sur $k$ ».}
+
+\subsection*{Intégrité}
+
+Un corps $k$ est algébriquement clos si et seulement si le produit tensoriel
+de deux $k$-algèbres intègres est intègre, si et seulement si
+$k' \otimes_{k} k'$ est intègre pour toute extension finie $k'$ (ce qui
+n'arrive que pour $k' = k$). Un $k$-schéma est \emph{géométriquement intègre}
+si $X \times_{k} Y$ est intègre pour tout $Y$ intègre, ou de façon équivalente
+si $X_{k'}$ l'est pour toute extension $k'$, ou si $X_{\bar k}$ l'est ; c'est
+la conjonction de géométriquement irréductible et géométriquement réduit.
+Géométriquement intègre entraîne intègre, avec réciproque si et seulement si
+$k$ est algébriquement clos.
+
+\subsection*{Un critère de connexité géométrique, et la composante neutre}
+
+\textbf{Proposition.}\quad Soient $X$ un $k$-schéma connexe et $u \colon Z \to X$ un morphisme, $Z$
+géométriquement connexe et non vide (par exemple un point rationnel). Alors
+$X$ est géométriquement connexe.
+
+Soit $k'$ une extension finie galoisienne, de groupe $\pi'$ agissant sur
+$X_{k'}$ et $Z_{k'}$ de façon compatible à $u_{k'}$. Soit $U$ une partie
+ouverte et fermée non vide de $X_{k'}$ ; quitte à la remplacer par son
+complémentaire, $U$ contient $u_{k'}(Z_{k'})$, connexe et stable par
+$\pi'$. L'intersection des transformées de $U$ par $\pi'$ est ouverte,
+fermée, stable et non vide ; elle provient donc d'une partie ouverte et
+fermée non vide de $X$, qui est $X$ tout entier. Donc $U = X_{k'}$, et
+$X_{k'}$ est connexe ; on conclut par la dernière condition ci-dessus.
+
+\emph{Exemples.} La composante neutre $G^{0}$ contient le point rationnel
+$e$ : elle est donc géométriquement connexe, et sa formation commute à
+l'extension du corps. Elle est quasi-compacte : pour $U$ un voisinage ouvert
+affine de $e$, $U U^{-1}$ est quasi-compact, ouvert et fermé (page 2), et
+contient donc la composante connexe $G^{0}$, qui est fermée.\footnote{La
+page écrit « [Cor.\ $G^{0}$ quasi-compact] » sans démonstration et biffe
+« Elle est quasi-compacte » plus haut ; l'argument par $U U^{-1}$ est celui
+de la page 2, rapporté ici.}
+Si $k$ est parfait, $G_{\mathrm{réd}}$ est un sous-groupe fermé de $G$, car
+$G_{\mathrm{réd}} \times G_{\mathrm{réd}}$ est réduit ; de même
+$G^{0}_{\mathrm{réd}}$. Enfin, pour deux ouverts $U$, $V$ de $G$ qui
+rencontrent $G^{0}$, $U V^{-1} \supset G^{0}$, et si $U$ et $V$ contiennent
+$e$, $U V \supset G^{0}$.\footnote{La page écrit « Soient $U$, $V$ deux ouverts
+de $G$, alors $U.V^{-1} \supset G^{0}$ », sans condition : c'est faux si
+$U$ et $V$ sont dans deux translatés distincts de $G^{0}$, car alors
+$U V^{-1}$ ne rencontre pas $G^{0}$. Il suffit que $U$ et $V$ rencontrent
+un même translaté $g G^{0}$.}
+
+\pagerange{14}{14}
+\section*{Le schéma des composantes connexes géométriques, seconde mouture (page 14)}
+
+La page 14 reprend la construction des pages 9 et 10 par la descente, au lieu
+des algèbres. On suppose $X_{\bar k}$ localement connexe (par exemple
+localement noethérien, ce qui est le cas si $X$ est localement de type fini).
+Alors $I = \pi_{0}(X_{\bar k})$ est un ensemble discret, et le morphisme
+$X_{\bar k} \to I_{\bar k}$ vers le schéma constant de valeur $I$ est
+universel pour les morphismes de $X_{\bar k}$ vers les schémas constants. Le
+groupe $\pi$ agit sur $I$ ; si l'action est continue --- c'est le cas si les
+composantes connexes de $X_{\bar k}$ sont définies sur des extensions finies
+de $k$, par exemple si $X$ est quasi-compact ---, $I_{\bar k}$ descend en un
+schéma étale $T$ sur $k$, et le morphisme descend en
+\[
+  f \colon X \longrightarrow T = \pi_{0}(X/k) ,
+\]
+surjectif à fibres géométriquement connexes, propriété qui caractérise $T$ ;
+c'est aussi le morphisme universel de $X$ vers un $k$-schéma étale. Un point
+de $T$ à valeurs dans un $k$-schéma $S'$ définit une partie ouverte et fermée
+de $X_{S'}$, la fibre de $X_{S'} \to T_{S'}$ au-dessus de la section
+correspondante.\footnote{La page dit que ce point « est » une partie ouverte
+et fermée de $X_{S'}$, en mettant le verbe entre guillemets. Ce n'est pas une
+bijection : pour $X = T = \mathrm{Spec}\, k$, $T(S')$ a un seul élément alors
+que $X_{S'} = S'$ peut avoir beaucoup de parties ouvertes et fermées. On
+énonce l'injection. Il écrit $\bar k$, où la descente demande une clôture
+séparable ; une extension radicielle ne change rien à la topologie.}
+
+Pour $X$ quasi-compact, ou somme de schémas quasi-compacts, sans hypothèse
+de continuité, on trouve un $T$ affine proétale aux mêmes propriétés : c'est
+le $\pi_{0}(X/k)$ des pages 9 et 10, dont le foncteur des points est « un peu
+plus subtil à décrire ».
+
+\pagerange{15}{15}
+\section*{Dualité de Cartier (page 15)}
+
+La page s'ouvre sur une question de plan : faut-il travailler sur une base
+$S$ quelconque ou sur un corps ? Les groupes non affines sont admis. Pour un
+groupe diagonalisable $D(M)$ ($M$ un groupe abélien), les représentations
+linéaires s'écrivent comme des modules gradués par $M$, et les homomorphismes
+$D(M) \to \mathbf{G}_{m}$ forment le groupe constant $M_{S}$ : $M_{S}$ est
+réflexif vis-à-vis de $\mathbf{G}_{m}$.
+
+Le foncteur $\underline{\mathrm{Hom}}_{\mathrm{gr}}(G, \mathbf{G}_{m})$
+est-il représentable ? Oui pour $G$ diagonalisable, non en général, par
+exemple pour $G = \mathbf{G}_{a}$.\footnote{En caractéristique nulle, les
+homomorphismes $\mathbf{G}_{a} \to \mathbf{G}_{m}$ sur une base $S$ sont les
+$x \mapsto \exp(\lambda x)$ avec $\lambda$ nilpotent : le foncteur est le
+complété formel de $\mathbf{G}_{a}$, qui n'est pas un schéma. La page écrit
+« non (p.\,ex.\ $G = \mathbf{G}_{a}$) » dans l'interligne, au-dessus d'un
+« affine lisse de t.f. » biffé.}
+Mais si $G$ est fini localement libre sur $S$, d'algèbre $\mathcal{A}$, on a
+\[
+  \underline{\mathrm{Hom}}_{\mathrm{gr}}(G, \mathbf{G}_{m}) \subset
+  \underline{\mathrm{Hom}}_{\mathcal{O}\text{-alg}}(\mathcal{O}_{S}[T, T^{-1}], \mathcal{A})
+  \simeq W(\mathcal{A})^{\times},
+\]
+le sous-foncteur des unités $u$ de $\mathcal{A} \otimes \mathcal{O}_{S'}$
+telles que $\Delta(u) = u \otimes u$ et $\varepsilon(u) = 1$ (les éléments
+de type groupe), puisqu'un homomorphisme de groupes vers $\mathbf{G}_{m}$ est
+un homomorphisme de monoïdes vers les unités de $\mathcal{O}$. Ce foncteur
+est représenté par $\mathrm{Spec}(\check{\mathcal{A}})$, où
+$\check{\mathcal{A}} = \mathrm{Dist}(G)_{S}$, dual de $\mathcal{A}$, est une
+algèbre grâce à la cogèbre $\mathcal{A}$ ; cette algèbre est commutative si
+$G$ l'est (sinon, c'est son abélianisée qui représente le foncteur) ; et la structure de cogèbre de
+$\check{\mathcal{A}}$, duale de la multiplication de $\mathcal{A}$, provient
+de ce que le foncteur représenté est un foncteur en groupes.
+
+\textbf{Théorème.}\quad Tout schéma en groupes commutatif fini localement libre $G$ est réflexif pour
+$\mathbf{G}_{m}$ : son dual
+$G^{*} = \underline{\mathrm{Hom}}_{\mathrm{gr}}(G, \mathbf{G}_{m})$ est
+commutatif fini localement libre, et $G \to G^{**}$ est un isomorphisme.
+D'où une involution $G \mapsto G^{*}$ de la catégorie de ces groupes, qui
+correspond à la dualité des bigèbres bicommutatives finies localement libres
+sur $S$.
+
+Exemples : $\mu_{n}$ et $\mathbb{Z}/n\mathbb{Z}$ sont duaux, $\alpha_{p}$ est
+son propre dual, et plus généralement $D(M)$ et $M_{S}$ se correspondent.
+La dualité marche plus ou moins pour d'autres classes --- groupes discrets,
+groupes diagonalisables, formes tordues ---, mais inclure $\mathbf{G}_{a}$
+demande autre chose, que la page ne dit pas. Elle « domine la théorie des
+groupes algébriques (ou formels) commutatifs, affines ou non », à condition
+de la compléter par $\underline{\mathrm{Ext}}^{1}(G, \mathbf{G}_{m})$.\footnote{La
+dualité porte le nom de Cartier (1962). Le rôle de
+$\underline{\mathrm{Ext}}^{1}(\,\cdot\,, \mathbf{G}_{m})$ est celui qu'il a
+pour une variété abélienne $A$, dont la duale est
+$\underline{\mathrm{Ext}}^{1}(A, \mathbf{G}_{m})$ (formule de
+Weil--Barsotti) ; c'est le cadre de SGA~7, VII et VIII.}
+
+\pagerange{16}{20}
+\section*{La lettre de juin 1973 (pages 16 à 20)}
+
+Les pages 16 à 19 sont une lettre en anglais, datée du 15 juin 1973, d'un
+auditeur de son cours sur les groupes algébriques ; la page 20 en est le
+dernier feuillet, blanc à l'adresse près. Rien n'y est de sa main, et la
+transcription ne la reproduit pas ; on n'en dit ici que l'objection
+mathématique.\footnote{Ce qui suit est tiré de la description que la
+transcription en donne dans son en-tête ; l'auteur de la lettre n'est pas
+nommé.}
+Elle porte sur la partie b) de « la dernière proposition du cours » : un
+monoïde affine de type fini sur un corps se plongerait comme sous-monoïde
+fermé de $\mathrm{GL}(n)$. Or l'antipode de la cogèbre de $\mathrm{GL}(n)$
+passerait au quotient et ferait du monoïde un groupe. Le contre-exemple est le
+monoïde $\{0, 1\}$ sous la multiplication, d'algèbre $k \times k$ ; la lettre
+propose de remplacer $\mathrm{GL}(n)$ par $\mathrm{End}_{k}(M)$.
+
+Cette proposition est celle de la page 30, dont le « $\mathrm{M}$ » est écrit
+par-dessus un « $\mathrm{GL}$ », et la page 21 s'ouvre sur la
+rectification : il faut $\mathrm{M}_{n}$, et non $\mathrm{GL}_{n}$.
+
+\pagerange{21}{22}
+\section*{L'algèbre des distributions (pages 21 et 22)}
+
+\emph{Rectification.} Un monoïde affine de type fini sur un corps $k$ admet
+une immersion fermée multiplicative dans $\mathrm{M}_{n,k}$, et non dans
+$\mathrm{GL}_{n,k}$. Un sous-monoïde fermé de $\mathrm{GL}_{n}$ est en effet
+un groupe ; et plus généralement, un monoïde de présentation finie dont les
+translations sont des monomorphismes --- par exemple un monoïde qui se plonge
+dans un groupe --- est un groupe.\footnote{La fin de la phrase est
+incertaine sur la page (« alors $G$ est un objet gr.-pr. »), et
+le mot qui qualifie les translations est illisible. Notre lecture : une
+translation $G \to G$ qui est un monomorphisme d'un schéma de présentation
+finie dans lui-même est surjective (théorème d'Ax--Grothendieck, EGA~IV,
+10.4.11, sous sa forme de surjectivité des endomorphismes radiciels), d'où
+l'existence d'inverses. La reconstruction est la nôtre.}
+
+Soit $X = \mathrm{Spec}\, A$ un schéma affine sur l'anneau $k$. Ses
+\emph{distributions à valeurs dans} $k'$ sont les formes linéaires sur $A$ :
+\[
+  \mathrm{Dist}(X)(k') = \mathrm{Hom}_{k}(A, k'), \qquad
+  \mathrm{Dist}(X) = V(A) \text{ comme $\mathcal{O}$-Module}, \qquad
+  \check{A} = \mathrm{Dist}(X)(k) .
+\]
+\begin{itemize}
+\item[a)] $\mathrm{Dist}(X)$ est covariant en $X$.
+\item[b)] L'application bilinéaire
+$\mathrm{Dist}(X) \times \mathrm{Dist}(Y) \to \mathrm{Dist}(X \times Y)$
+est universelle pour les applications bilinéaires vers un $V(M)$ ; en posant
+$V(A) \boxtimes V(B) = V(A \otimes_{k} B)$, elle donne
+$\mathrm{Dist}(X) \boxtimes \mathrm{Dist}(Y) \simeq \mathrm{Dist}(X \times Y)$,
+et $\boxtimes$ coïncide avec $\otimes_{\mathcal{O}}$ si $A$ ou $B$ est
+projectif de type fini.
+\item[c)] Les distributions ponctuelles (masses de Dirac)
+$\alpha_{X} \colon X \to \mathrm{Dist}(X)$ forment une transformation
+naturelle compatible aux produits :
+$\alpha_{X \times Y}$ est le composé de $\alpha_{X} \times \alpha_{Y}$ et de
+l'application bilinéaire de b).\footnote{Le diagramme de la page étiquette la
+diagonale $\pi_{X \times Y}$, là où il s'agit de $\alpha_{X \times Y}$ ; la
+transcription le signale.}
+\end{itemize}
+
+On reconstruit $X$ à partir de la cogèbre $D = \mathrm{Dist}(X)$, munie du
+coproduit $\delta \colon D \to D \boxtimes D$ dual de la multiplication de $A$
+--- coassociatif, cocommutatif et coünitaire, de coünité $D \to \mathcal{O}$
+duale de l'unité ---, comme l'ensemble des $x \in D(k')$ tels que
+\[
+  \delta(x) = x \boxtimes x \qquad \text{et} \qquad x(1) = 1 ;
+\]
+ces conditions expriment que la forme linéaire $A \to k'$ est un
+homomorphisme d'algèbres.\footnote{La page encadre la seule condition
+$\Delta(x) = x \boxtimes x$, qu'elle écrit avec $\Delta$ (et $\delta$ à la
+page 22). Elle est satisfaite par $x = 0$ : il faut y joindre la condition de
+coünité, que la page évoque dans le crochet « muni de
+$D \xrightarrow{\varepsilon} \mathcal{O}$ » sans l'écrire.}
+
+Si $G$ est muni d'une loi de composition, $\mathrm{Dist}(G)$ hérite de la loi
+de convolution, associative (commutative) si et seulement si celle de $G$
+l'est ; et $G$ a une unité bilatère si et seulement si $\mathrm{Dist}(G)$ a
+une unité $e$ telle que $\delta(e) = e \boxtimes e$. Faire opérer $G$ sur un
+module $M$, c'est faire opérer $\mathrm{Dist}(G)$ à gauche, d'une façon qui
+étend l'action de $G$.
+
+Dans certains cas $\mathrm{Dist}(X)$ se reconstitue à partir de
+$\check{A} = \mathrm{Dist}(X)(k)$ seul : si $A$ est projectif de type fini,
+ou somme de modules projectifs de type fini (par exemple si $k$ est un
+corps), à condition de regarder $\check{A}$ comme module topologique. En
+outre $\mathrm{Dist}(G, k)$ contient toute l'information infinitésimale de
+$G$ : l'algèbre de Lie de $G$ s'y plonge, son crochet est le commutateur de
+l'algèbre, et en caractéristique $p$ sa puissance $p$-ième est la puissance
+dans l'algèbre --- de sorte que l'hyperalgèbre, c'est-à-dire la sous-algèbre
+des distributions portées par $e$, se lit dans
+$\check{A}$.\footnote{La phrase de la page s'arrête sur « de sorte que
+l'hyperalgèbre. ». Attention au nom : aujourd'hui, à la suite de
+Demazure--Gabriel et de Jantzen, $\mathrm{Dist}(G)$ désigne précisément
+cette hyperalgèbre, les formes linéaires sur $A$ nulles sur une puissance de
+l'idéal d'augmentation. Le $\mathrm{Dist}(G)(k)$ de ces pages est le dual
+tout entier $\check{A}$, qui la contient.}
+
+Exemples. Pour un groupe fini constant, $\check{A}$ est l'algèbre du groupe.
+Pour un groupe diagonalisable $D(M)$, $A = k[M]$ est l'algèbre du groupe $M$,
+de multiplication induite par la loi de $M$ et de comultiplication induite
+par la diagonale $m \mapsto (m, m)$ ; donc
+\[
+  \mathrm{Dist}(D(M))(k) = k^{M}
+\]
+avec la multiplication \emph{produit}, terme à terme, qui ne dépend pas de la
+loi de groupe de $M$.\footnote{La page glose : « Combinaison linéaire infinie
+de caractères ». On lit : un élément de $k^{M}$ est une somme formelle
+$\sum_{m} \xi_{m} e_{m}$ des idempotents $e_{m}$ duaux de la base $M$ de $A$,
+qui agissent sur une représentation comme les projecteurs sur les
+composantes de poids $m$.}
+
+\pagerange{23}{24}
+\section*{Une action est une coaction (pages 23 et 24)}
+
+Soient $G = \mathrm{Spec}\, A$ un monoïde affine sur $k$ et $M$ un $k$-module.
+Une action de $G$ sur $M$ est un morphisme de monoïdes
+$G \to \underline{\mathrm{End}}_{\mathcal{O}}(W(M))$, soumis à $1 x = x$ et
+$g(g' x) = (g g') x$. Une « opération sans axiomes » revient à un
+endomorphisme $A$-linéaire de $M \otimes_{k} A$, ou encore à une application
+$k$-linéaire
+\[
+  \rho_{M} \colon M \longrightarrow M \otimes_{k} A .
+\]
+Un point $g \in G(k')$, c'est-à-dire un homomorphisme $g \colon A \to k'$,
+agit sur $M \otimes_{k} k'$ par l'endomorphisme $g_{M}$ déduit par changement
+de base, et $g_{M}$ est déterminé par sa restriction
+$g_{M}^{\circ} = (\mathrm{id}_{M} \otimes g) \circ \rho_{M} \colon M \to M \otimes_{k} k'$.
+
+L'axiome d'unité, pour $k' = k$ et $g = \varepsilon$, devient
+\[
+  \text{(1')} \qquad (\mathrm{id}_{M} \otimes \varepsilon) \circ \rho_{M} = \mathrm{id}_{M} .
+\]
+Pour l'associativité, on prend le couple universel : $k' = A \otimes A$,
+$g(\lambda) = \lambda \otimes 1$, $g'(\lambda) = 1 \otimes \lambda$ (les deux
+projections $G \times G \to G$), de sorte que $g g'$ est la comultiplication
+$\Delta$. D'une part $(g g')_{M}^{\circ} = (\mathrm{id}_{M} \otimes \Delta)
+\circ \rho_{M}$ ; d'autre part $g'_{M}$ envoie $x$ sur
+$\sum y_{i} \otimes 1 \otimes \lambda_{i}$ si
+$\rho_{M}(x) = \sum y_{i} \otimes \lambda_{i}$, et $g_{M}$ envoie
+$y \otimes 1 \otimes \lambda$ sur $\rho_{M}(y) \otimes \lambda$, de sorte que
+$(g_{M} g'_{M})^{\circ} = (\rho_{M} \otimes \mathrm{id}_{A}) \circ \rho_{M}$.
+L'axiome 2) s'exprime donc par la commutativité de
+
+\begin{tikzcd}
+  M \arrow[r, "\rho_{M}"] \arrow[d, "\rho_{M}"'] & M \otimes A \arrow[d, "\mathrm{id}_{M} \otimes \Delta"] \\
+  M \otimes A \arrow[r, "\rho_{M} \otimes \mathrm{id}_{A}"'] & M \otimes A \otimes A
+\end{tikzcd}
+
+C'est la définition d'un comodule sur la cogèbre $A$.\footnote{La page écrit
+d'abord la coaction $M \to A \otimes_{k} M$, puis échange les facteurs d'un
+trait ; on suit l'ordre $M \otimes A$ des formules. Avec la coaction à droite,
+c'est ce qu'on appelle aujourd'hui un comodule \emph{à droite} ; la page 26
+dit « comodule à gauche », en pensant à l'action de $G$, qui est à gauche.}
+
+\pagerange{25}{27}
+\section*{Les foncteurs $V$ et $W$ ; comodules et $\check{A}$-modules (pages 25 à 27)}
+
+\begin{itemize}
+\item[a)] Le foncteur $M \mapsto V(M)$, de $\mathrm{Mod}(k)^{\mathrm{op}}$ vers
+les $\mathcal{O}$-Modules, est pleinement fidèle :
+$\mathrm{Hom}_{k}(M, N) \simeq \mathrm{Hom}_{\mathcal{O}}(V(N), V(M))$.
+\item[b)] L'accouplement $V(M) \otimes_{\mathcal{O}} V(N) \to V(M \otimes_{k} N)$
+n'est pas un isomorphisme en général, mais il induit une bijection
+\[
+  \mathrm{Hom}_{\mathcal{O}}(V(M \otimes_{k} N), V(P)) \xrightarrow{\ \sim\ }
+  \mathrm{Hom}_{\mathcal{O}}(V(M) \otimes_{\mathcal{O}} V(N), V(P)) ,
+\]
+et le premier membre est $\mathrm{Hom}_{k}(P, M \otimes_{k} N)$.
+\end{itemize}
+
+Il en résulte un dictionnaire. Une loi de composition $\mathcal{O}$-bilinéaire
+sur $V(A)$ est une comultiplication $\Delta \colon A \to A \otimes A$ ; une
+unité pour cette loi est une coünité $\varepsilon \colon A \to k$ ; la loi est
+associative (commutative) si et seulement si $\Delta$ est coassociative
+(cocommutative).\footnote{Les mots qualifiant les lois sont illisibles sur la
+page ; la transcription restitue le sens, que l'on suit.}
+Un accouplement bilinéaire $V(A) \times V(M) \to V(M)$ est une application
+$M \to M \otimes A$ ; il est unitaire si et seulement si (1') commute, et
+associatif si et seulement si (2') commute. En marge : « on dit aussi : $M$
+comodule », ce qui signifie que $V(A)$ opère à gauche sur $W(M)$.
+
+Soient donc $A$ une cogèbre (coassociative, coünitaire) et $M$ un comodule.
+Le dual $\check{A} = V(A)(k)$, algèbre pour la convolution
+$\xi * \eta = (\xi \otimes \eta) \circ \Delta$, opère à gauche sur $M$ par
+\[
+  \xi \cdot x = (\mathrm{id}_{M} \otimes \xi)(\rho_{M}(x)) .
+\]
+Si $A$ est projectif de type fini, $M \otimes A \simeq \mathrm{Hom}_{k}(\check{A}, M)$,
+et une structure de comodule sur $M$ équivaut à une structure de
+$\check{A}$-module ; de même une structure de cogèbre sur $A$ équivaut à une
+structure d'algèbre sur $\check{A}$.
+
+Si $A$ est somme directe de modules projectifs de type fini (par exemple si
+$k$ est un corps), on munit $\check{A}$ de la topologie de la convergence
+simple ; alors $M \otimes_{k} A \simeq \mathrm{Hom\,cont}_{k}(\check{A}, M)$
+pour $M$ discret, et plus généralement
+\[
+  \mathrm{Hom}(N, M \otimes_{k} A) \simeq
+  \mathrm{Hom\,cont}_{k}\bigl(\check{A}, \mathrm{Hom}_{k}(N, M)\bigr),
+\]
+$\mathrm{Hom}_{k}(N, M)$ étant muni de la convergence simple. Une structure
+de comodule sur $M$ revient donc à une structure de $\check{A}$-module telle
+que, pour tout $x \in M$, $\xi \mapsto \xi x$ soit continue,
+c'est-à-dire s'annule sur un idéal ouvert. Et une structure de cogèbre sur
+$A$ revient à une structure d'algèbre \emph{continue} sur $\check{A}$, par le
+calcul suivant, où $P = \varinjlim P_{\alpha}$, $Q = \varinjlim Q_{\beta}$,
+$R = \varinjlim R_{\gamma}$ sont des réunions filtrantes de sous-modules
+projectifs de type fini et $\check{P} = \varprojlim \check{P}_{\alpha}$,
+etc. :
+\begin{align*}
+  \mathrm{Bil\,cont}_{k}(\check{P}, \check{Q}; \check{R})
+  &\simeq \varprojlim_{\gamma} \varinjlim_{\alpha,\beta}
+     \mathrm{Hom}_{k}(\check{P}_{\alpha} \otimes \check{Q}_{\beta}, \check{R}_{\gamma}) \\
+  &\simeq \varprojlim_{\gamma} \varinjlim_{\alpha,\beta}
+     \mathrm{Hom}_{k}(R_{\gamma}, P_{\alpha} \otimes Q_{\beta}) \\
+  &\simeq \varprojlim_{\gamma} \mathrm{Hom}_{k}(R_{\gamma}, P \otimes Q)
+   \simeq \mathrm{Hom}_{k}(R, P \otimes Q) .
+\end{align*}
+On est dans ce cas, par exemple, si $A$ est réunion filtrante dénombrable de
+sous-modules projectifs de type fini, les inclusions admettant des
+rétractions. Mais en général on ne peut pas oublier $V(A)$ et ses opérations
+au profit du seul $\check{A}$.\footnote{Une algèbre topologique de la forme
+$\check{A}$, limite projective stricte d'algèbres de dimension finie, est ce
+qu'on appelle depuis Gabriel (1962) une algèbre pseudocompacte ; l'équivalence
+entre cogèbres et algèbres pseudocompactes est la forme qu'il donne à cette
+dualité.}
+
+\pagerange{27}{29}
+\section*{Sous-modules stables et finitude (pages 27 à 29)}
+
+\emph{Quotients.} Soit $M \to N$ un épimorphisme de $A$-comodules en
+puissance ; $V(N) \subset V(M)$, et l'on dit que $N$ est stable si $V(N)$ est
+stable par l'action de $V(A)$. Cela revient à l'existence d'un
+$\rho_{N} \colon N \to N \otimes A$ rendant le carré évident commutatif ; il est
+alors unique et satisfait aux axiomes. Si $A$ est l'algèbre d'un monoïde
+affine $G$, cela signifie que $G$ opère sur $N$ de façon compatible, et
+l'opération est unique.\footnote{La page note le quotient $N'$, puis $M'$ ; on
+l'appelle $N$, et les sous-modules $M'$ (la page : $M''$, puis $M'$ à la
+page 29).}
+
+\emph{Sous-modules.} Pour $i \colon M' \hookrightarrow M$, il n'est plus vrai
+en général que $V(M) \to V(M')$ soit surjectif, et l'opération « induite »
+n'est plus évidemment unique. Il s'agit de trouver
+$\rho_{M'} \colon M' \to M' \otimes A$ avec
+$(i \otimes \mathrm{id}_{A}) \circ \rho_{M'} = \rho_{M} \circ i$ ; elle est
+unique si $i \otimes \mathrm{id}_{A}$ est injectif, et satisfait alors aux
+axiomes si de plus $i \otimes \mathrm{id}_{A \otimes A}$ est injectif. C'est
+le cas si $A$ est plat (le cas courant), si $M/M'$ est plat, ou si $M'$ est
+facteur direct dans $M$. Sous ces conditions, $M'$ est stable si et
+seulement si $M/M'$ l'est ; et si $A$ est plat, une intersection finie de
+sous-modules stables est stable, comme une somme quelconque.\footnote{La
+remarque sur les intersections et les sommes est cerclée sur la page, sans
+hypothèse ; pour les intersections, il faut que $\otimes A$ commute aux
+intersections finies, ce que donne la platitude de $A$. Les sommes sont
+stables sans hypothèse.}
+
+\textbf{Proposition.}\quad Si $A$ est somme de modules projectifs de type fini, un sous-$k$-module d'un
+$A$-comodule $M$ est stable si et seulement si c'est un sous-$\check{A}$-module.
+
+En effet, si $(a_{j})$ est une famille génératrice adaptée et $(\xi_{j})$ les
+formes coordonnées, $\rho_{M}(x) = \sum_{j} (\xi_{j} \cdot x) \otimes a_{j}$.
+
+\textbf{Corollaire 1.}\quad Tout sous-module $M'$ de $M$ est contenu dans un plus petit sous-module
+stable $M'^{S}$, le sous-$\check{A}$-module engendré ; si $M'$ est de type
+fini, $M'^{S}$ aussi.\footnote{L'exposant $S$ est une lecture de la lettre
+tracée, qui ressemble aussi à un $G$. La finitude vient de ce que
+$\check{A} \cdot x$ est contenu dans le module engendré par les $y_{i}$ de
+$\rho_{M}(x) = \sum y_{i} \otimes \lambda_{i}$ --- argument que la page
+n'écrit pas.}
+
+\textbf{Corollaire 2.}\quad Tout comodule $M$ est réunion filtrante de ses sous-modules de type fini
+stables.
+
+\textbf{Corollaire 3.}\quad Regardons $A$ comme comodule à gauche et à droite sur elle-même, par
+$\Delta$. Tout sous-module $B$ de $A$ est contenu dans un plus petit
+sous-module $B^{S}$ stable des deux côtés (le sous-$\check{A}$-bimodule
+engendré), de type fini si $B$ l'est ; donc $A$ est réunion filtrante de
+sous-modules de type fini stables des deux côtés.\footnote{Le passage est
+remanié à l'extrême : un premier « Corollaire 3 » est biffé, avec plusieurs
+amorces, et un ajout interlinéaire parle de « la coalgèbre produit
+($A^{\circ}$ l'opposée de $A$) », c'est-à-dire de la cogèbre
+$A \otimes A^{\circ}$ dont les comodules sont les bicomodules. La syntaxe
+exacte n'est pas restituable ; on donne l'énoncé repris en clair.}
+
+Or la stabilité des deux côtés signifie que $\Delta(B) \subset (B \otimes A)
+\cap (A \otimes B)$, et sur un corps cette intersection est $B \otimes B$ :
+$B$ est une sous-cogèbre.\footnote{La page invoque la platitude de $A/B$ ;
+sur un corps, $(B \otimes A) \cap (A \otimes B) = B \otimes B$ pour tous
+sous-espaces, ce qui suffit au corollaire 4.}
+
+\textbf{Corollaire 4.}\quad Toute cogèbre $A$ sur un corps est réunion filtrante de sous-cogèbres de
+dimension finie ; donc $\check{A}$ est limite projective filtrante stricte
+d'algèbres de dimension finie.
+
+C'est ce qu'on appelle aujourd'hui le théorème fondamental des
+cogèbres.\footnote{Il figure, sous ce nom, dans Sweedler, \emph{Hopf
+Algebras} (1969) ; il était connu auparavant, et le dossier ne cite
+personne.}
+
+\pagerange{30}{31}
+\section*{Groupes affines et matrices ; l'algèbre des distributions (pages 30 et 31)}
+
+\textbf{Proposition.}\quad Soit $G$ un groupe (resp.\ un monoïde) affine sur un corps $k$.
+\begin{itemize}
+\item[a)] $G$ est limite projective filtrante stricte de groupes (resp.\
+monoïdes) affines de type fini sur $k$.
+\item[b)] Si $G$ est de type fini, il existe un entier $n$ et une immersion
+fermée compatible aux multiplications $G \to \mathrm{M}(n)_{k}$ (resp.\
+$G \to \mathrm{GL}(n)_{k}$ si $G$ est un groupe).\footnote{Le « $\mathrm{M}$ »
+est écrit par-dessus un « $\mathrm{GL}$ » : c'est sans doute la trace de la
+correction qu'appelle la lettre des pages 16 à 19, et que la page 21
+énonce. Le mot « entier » est lu d'après le sens.}
+\end{itemize}
+
+Pour a) : $A$ est réunion filtrante de ses sous-cogèbres de dimension finie
+(corollaire 4), et la sous-algèbre engendrée par une sous-cogèbre est une
+sous-bigèbre, puisque $\Delta$ est un homomorphisme d'algèbres. Si $G$ est un
+groupe, d'antipode $\sigma$, et $M$ une sous-cogèbre, $\sigma M$ en est une
+aussi --- $M$ est un sous-$\check{A}$-module à gauche (à droite) si et
+seulement si $\sigma M$ en est un à droite (à gauche) --- ; donc
+$M + \sigma M$ est une sous-cogèbre stable par $\sigma$, puisque
+$\sigma^{2} = \mathrm{id}$ pour $A$ commutative, et la sous-algèbre qu'elle
+engendre est une sous-algèbre de Hopf. Ainsi $A$ est réunion filtrante de
+sous-algèbres de Hopf $A_{i}$ de type fini, et $G = \varprojlim G_{i}$ avec
+$G_{i} = \mathrm{Spec}\, A_{i}$.\footnote{La page renvoie au « corollaire 2 »
+pour pouvoir supposer les $A_{i}$ stables par la comultiplication ; c'est le
+corollaire 4, sur les sous-cogèbres, qui le donne : une sous-algèbre engendrée
+par un sous-comodule d'un seul côté n'est pas une sous-bigèbre. Les mots
+« filtrante » et « stricte » sont des ajouts incertains de l'interligne.}
+
+Pour b) : $A$ est de type fini ; on choisit un sous-espace de dimension
+finie $M$ qui engendre $A$ comme algèbre, et on peut le supposer stable par
+la coaction $\Delta$ (corollaire 2), de sorte que $G$ opère sur $M$ par
+translations. D'où un morphisme de monoïdes
+$G \to \underline{\mathrm{End}}_{k}(M) \simeq \mathrm{M}(n)_{k}$, à valeurs
+dans $\underline{\mathrm{Aut}}_{k}(M) \simeq \mathrm{GL}(n)_{k}$ si $G$ est un
+groupe, avec $n = \dim M$. Pour $\varphi \in M$, la fonction coefficient
+$g \mapsto \varepsilon(g \cdot \varphi) = (g \varphi)(1) = \varphi(g)$ est
+l'image d'une fonction coordonnée de $\underline{\mathrm{End}}_{k}(M)$ ; ainsi
+$M$ est contenu dans l'image de l'algèbre affine de
+$\underline{\mathrm{End}}_{k}(M)$ dans $A$, qui est donc surjective, et le
+morphisme est une immersion fermée.
+
+\emph{L'algèbre des distributions.} Si $A$ est l'algèbre affine d'un monoïde
+affine $G$ --- une algèbre commutative munie d'une comultiplication qui est
+un homomorphisme d'algèbres --- les éléments de
+$V(A)(k') = \mathrm{Hom}_{k}(A, k')$ s'appellent les distributions de $G$ à
+coefficients dans $k'$ ; pour la convolution, elles forment une $k'$-algèbre
+$\mathrm{Dist}(G)(k')$, « l'algèbre du monoïde $G$ à coefficients dans $k'$ »,
+et l'on a un homomorphisme injectif de monoïdes
+\[
+  G(k') \hookrightarrow \mathrm{Dist}(G)(k') ,
+\]
+à valeurs dans les éléments inversibles si $G$ est un groupe, et
+« pratiquement jamais » bijectif.\footnote{La page note
+$\mathrm{Dist}(G)(k')^{\times}$ le monoïde multiplicatif et
+$\mathrm{Dist}(G)(k')^{*}$ son groupe des unités. Un exemple, celui d'un
+groupe fini constant $\Gamma$ dont l'algèbre affine est $k^{\Gamma}$, est
+encadré puis biffé.}
+L'antipode s'écrit par le diagramme $g g^{-1} = 1$ : le composé
+$G \xrightarrow{(\mathrm{id}, \sigma)} G \times G \xrightarrow{\mu} G$ est
+le composé $G \to e \to G$ ; dualement,
+$m \circ (\mathrm{id}_{A} \otimes \sigma) \circ \Delta = \eta \circ \varepsilon$,
+où $m(x \otimes y) = x y$ et $\eta \colon k \to A$ est l'unité.\footnote{La
+page dessine les deux triangles, $G \to G \times G \to G$ par $e$ et
+$A \leftarrow A \otimes A \leftarrow A$ par $k$, avec la règle
+$x \, \sigma y \leftarrow\!\shortmid (x, y)$ ; elle note $\pi$ la
+multiplication de $G$ et $p$ l'unité de $A$.}
+
+\pagerange{32}{33}
+\section*{Exemples ; les foncteurs vectoriels $W(M)$ et $V(M)$ (pages 32 et 33)}
+
+\emph{Exemples de groupes algébriques affines} : $\mathbf{G}_{m}$,
+$\mathbf{G}_{a}$, $\mathrm{GL}(n)$ et ses sous-groupes $\mathrm{SL}(n)$, le
+groupe orthogonal $O(Q)$, et plus généralement les stabilisateurs de
+tenseurs ; le groupe $\mathrm{Tr}(n)$ des matrices triangulaires, son
+sous-groupe $\mathrm{Tr}_{0}(n)$ ; le groupe diagonal $\mathrm{Diag}(n)$ et
+son sous-groupe $\mathrm{Diag}_{0}(n) \simeq \mathbf{G}_{m}$ ; l'immersion
+de $\mathbf{G}_{a}$ dans $\mathrm{GL}(2)$, $x \mapsto
+\bigl(\begin{smallmatrix} 1 & x \\ 0 & 1 \end{smallmatrix}\bigr)$.\footnote{La
+page ne définit ni $\mathrm{Tr}_{0}(n)$ ni $\mathrm{Diag}_{0}(n)$ ; on lit
+$\mathrm{Tr}_{0}(n)$ comme le sous-groupe unipotent (diagonale égale à $1$)
+et $\mathrm{Diag}_{0}(n)$ comme les matrices scalaires, d'après
+l'isomorphisme avec $\mathbf{G}_{m}$ qu'elle dessine. La matrice de
+l'immersion de $\mathbf{G}_{a}$ est la nôtre ; la page n'écrit que les mots.}
+
+\textbf{Proposition.}\quad Le foncteur $W(M) \colon k' \mapsto M \otimes_{k} k'$, faisceau de
+$\mathcal{O}$-Modules, est représentable si et seulement si $M$ est
+projectif de type fini.
+
+S'il est représentable, il transforme injections d'algèbres en injections,
+donc $M$ est plat ; et il transforme produits d'algèbres en produits, d'où
+$M \otimes_{k} k^{I} \simeq M^{I}$ pour tout ensemble $I$, ce qui entraîne
+que $M$ est de type fini. Écrivant $0 \to R \to L \to M \to 0$ avec $L$ libre
+de type fini, la platitude de $M$ garde la suite exacte après
+$\otimes_{k} k^{I}$, d'où $R \otimes k^{I} \simeq R^{I}$ et $R$ de type fini ;
+$M$ est donc plat de présentation finie, c'est-à-dire projectif de type
+fini.\footnote{Le passage de la préservation des injections à la platitude
+n'est pas détaillé sur la page ; il suffit, pour un idéal $J$ de $k$, de
+plonger l'algèbre $k \oplus J$ (de carré nul sur $J$) dans
+$k[\varepsilon] = k \oplus k \varepsilon$, ce qui donne l'injectivité de
+$M \otimes J \to M$.}
+Inversement, si $M$ est facteur direct de $L = k^{n}$, image d'un
+projecteur $p$, alors $W(M) = \mathrm{Ker}\bigl(1 - p \colon \mathbf{G}_{a}^{n}
+\to \mathbf{G}_{a}^{n}\bigr)$ est représentable.\footnote{La page note
+$E^{n}$, sans le définir ; c'est l'espace affine $\mathbb{A}^{n}$, ou
+$\mathbf{G}_{a}^{n}$ avec sa structure de module.}
+
+En revanche $V(M)$ est représentable pour tout $M$, par l'algèbre symétrique
+$\mathrm{Sym}^{*}_{k}(M) = \bigoplus_{n \geqslant 0} \mathrm{Sym}^{n}_{k}(M)$,
+puisque $\mathrm{Hom}_{k}(M, k') = \mathrm{Hom}_{k\text{-alg}}(\mathrm{Sym}^{*}_{k} M, k')$.
+L'accouplement $V(M) \times W(M) \to \mathcal{O} = W(k)$ donne un isomorphisme
+\[
+  V(M) \xrightarrow{\ \sim\ } \underline{\mathrm{Hom}}_{\mathcal{O}}\bigl(W(M), \mathcal{O}\bigr),
+\]
+parce que $M \mapsto W(M)$ est pleinement fidèle, et le reste après toute
+extension de la base ; symétriquement, $V$ étant pleinement fidèle,
+$W(M) \simeq \underline{\mathrm{Hom}}_{\mathcal{O}}(V(M), \mathcal{O})$. On a
+donc une dualité parfaite entre $V(M)$ et $W(M)$, sans hypothèse de finitude
+sur $M$.\footnote{La page conclut « Donc on a une dualité
+parfaite entre $V(M)$ et $W(M)$ » ; le mot est incertain (peut-être
+« bi-dualité »), et le second isomorphisme, qui résulte de la pleine fidélité
+de $V$ (page 25), n'est pas écrit.}
+Enfin $\underline{\mathrm{Aut}}_{\mathcal{O}}(M) \subset
+\underline{\mathrm{End}}_{\mathcal{O}}(M)$ est représentable si $M$ est
+projectif de type fini. La page s'arrête sur une ligne isolée, où se lisent
+un mot incertain et $D(\Gamma)$ : sans doute l'annonce des groupes
+diagonalisables.
+
+\end{document}
