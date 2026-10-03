@@ -1,0 +1,1241 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 150, pages 1-98
+% (the whole folder).
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried — a doubtful
+% reading, a notation he used differently, a missing passage — moves into a
+% footnote. It is held to being mathematically correct as it stands; where the
+% manuscript is loose or mistaken, the true statement is what appears here and
+% the footnote says what the page has. In any dispute of substance the
+% transcription governs: whoever cites Grothendieck must cite batch-0{1..5}.fr.tex.
+%
+% Scope: the folder was read whole — five batches, pages 1-98 — before any of
+% this was written, and it is ONE file for the shelfmark.
+%
+% Notation fixed for the whole document.
+%  - The page writes X^* for two different things: the open strata
+%    X_i^* = X_i \ U_{j<i} X_j (pp. 2-4, 76-98), and the complement of an open
+%    tube, X^* = X \ interior(T) (pp. 14-35). Here the second is written
+%    X^\sharp (and X_i^\sharp = X_i ∩ X^\sharp); X_i^* keeps its first sense.
+%  - Sigma^*(n) (pp. 47-63) is his raised star for spaces of strict flags; it
+%    is kept, and distinct from the index * of Sigma_*, Sigma_** (pp. 40-47).
+%  - « bordant » is read as « muni d'un collier » (collared), « voisinage
+%    cylindrique » as « collier »; his « cône C(f) » is the mapping cylinder.
+%  - \mathcal V is his round V (provoisinages), \mathbf I the interval [0,1]
+%    acting multiplicatively.
+%
+% Substantive departures from the pages (footnoted where they occur): the
+% equivalence of p. 19 needs the strict form of compatibility or the data
+% X_i ∩ Y (supplied); p. 7 c) is an intersection in Sigma_2, not Sigma_12;
+% p. 2 swaps id_E and id_O; p. 67 says « b fibrant » where s is meant; the
+% dimension argument of p. 68 needs manifold-like Sigma_i (supplied); p. 89
+% writes I' = \bar K for I' ⊂ \bar K; pp. 74-75 write X_{(d)} for X^{(d)}.
+% Announced and not established: the existence of conical structures under
+% non-singularity (p. 36), the independence from the filtration (p. 36), the
+% formulas (72)-(73), (78) « sauf erreur » (pp. 84-86), the homotopy
+% equivalences (51), (100) (« ? à vérifier », p. 96). Page 87 breaks off
+% mid-sentence; page 98 ends the folder on (113).
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-03 — first pass, unchecked against the pages by a human.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{150}
+\pages{1}{98}
+\dating{1981-1982}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Espaces stratifiés et voisinages côniques (ou : déploiement des espaces stratifiés) : notes manuscrites (s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Un espace stratifié est un espace découpé en morceaux, chacun simple pris seul,
+dont les complications n'apparaissent qu'aux jointures : un cône et sa pointe,
+une surface et les courbes qu'elle porte, une variété algébrique et son lieu
+singulier. Ces quatre-vingt-dix-huit pages, datées par lui de décembre 1981 et
+janvier 1982, cherchent une manière de \emph{déplier} un tel espace : remplacer
+chaque morceau par une version un peu rognée, sans plus aucune jointure, et
+garder à côté la trace exacte de la façon dont les morceaux se recollaient.
+
+L'image qui porte tout est celle d'un cône. Un voisinage d'une strate $Y$ dans
+l'espace $X$ ressemble, si l'espace est raisonnable, à un cône dont la base est
+le bord $\dot T$ du voisinage et dont la pointe s'étale sur $Y$ : chaque point du
+bord est relié à son image dans $Y$ par un petit segment. Le dossier fait de
+cette image une définition : un voisinage conique est un voisinage muni d'une
+contraction $t \mapsto \lambda t$, $\lambda \in [0,1]$, qui l'écrase sur $Y$.
+Ôter l'intérieur de ce voisinage, c'est découper le morceau : il reste un espace
+à bord, et le bord se projette sur $Y$. Faire cela strate après strate, des plus
+petites aux plus grandes, donne les \emph{strates déployées} $\Sigma_i$ — des
+variétés à bord, ou à coins, quand tout est lisse — et des \emph{tubes de
+raccord} $\Sigma_{ij}$, posés sur le bord de $\Sigma_j$ et fibrés au-dessus de
+$\Sigma_i$. L'espace de départ se reconstruit en recollant ces pièces le long de
+leurs flèches.
+
+Le dossier avance en quatre mouvements. D'abord le vocabulaire : comment une
+partition d'un espace en morceaux détermine un ordre sur les morceaux, puis les
+voisinages coniques, les colliers, les compatibilités et la transversalité, et
+un théorème de reconstruction par récurrence sur le nombre de strates. Ensuite
+la présentation des données dépliées comme un foncteur sur l'ensemble des
+drapeaux $i_0 < \cdots < i_n$ d'indices. Puis une longue digression où l'ensemble
+d'indices disparaît : tout se laisse dire par un seul espace ordonné $\Sigma$,
+réunion des strates déployées, dont le graphe de l'ordre est la réunion des
+tubes. Enfin, en changeant de point de vue, les \emph{provoisinages} : au lieu de
+choisir des voisinages, on considère le système de tous à la fois, ce qui libère
+la construction des choix.
+
+Grothendieck s'arrête au milieu de ce dernier mouvement, et il dit lui-même
+où il en est. Page 55, après cinq pages de conditions : « Je m'aperçois
+finalement que j'ai pas mal bafouillé pour arriver à trouver les formulations
+simples — car j'ai \emph{mélangé} des propriétés purement ensemblistes …, ses
+interprétations semi-simpliciales et les aspects topologiques. Je
+\emph{reprends}. » La reprise tient en trois pages, et elle est nette. C'est une
+leçon de méthode qui ne demande aucun bagage : séparer ce qui relève de l'ordre
+seul de ce qui relève de l'espace, et les formulations se simplifient d'elles-mêmes.
+
+Les objets que le dossier construit portent aujourd'hui plusieurs noms : voisinages en
+cylindre d'application, données de contrôle de Thom et Mather, résolution ou
+dépliage d'un espace stratifié en une variété à coins, catégorie des chemins de
+sortie dont l'ensemble des composantes est l'ensemble ordonné des strates. Le
+dossier 151, qui suit dans l'inventaire, reprend la même question par les tubes
+et le recollement.
+
+\keywords{stratified space, specialization preorder, Alexandrov topology, conical neighbourhood, mapping cylinder neighbourhood, collar, manifold with corners, Thom–Mather control data, equisingularity, unfolding of a stratified space, flag poset, internal category, ordered topological space, semi-simplicial space, pro-homotopy, Mayer–Vietoris spectral sequence}
+\end{resume}
+
+\section*{Le fil du dossier, et les conventions}
+
+Les feuillets se suivent dans l'ordre de reliure, à deux exceptions près que
+les notes signalent : les pages 29 et 30 sont interverties (la page 30 continue
+la page 28, la page 31 la page 29), et les pages 92 et 93 aussi. À partir de la
+page 11, une seule suite numérotée par lui, intitulée « Espaces stratifiés (étude
+par voisinages coniques) », court jusqu'à la fin (ses feuillets 1 à 46) ; ses
+paragraphes sont numérotés de (1) à 17.
+
+\begin{itemize}
+\item Page 1 : le plan du déploiement, avant toute définition.
+\item Pages 2 à 4 : ordre de spécialisation, partitions et stratifications.
+\item Pages 6, 7, 9 : le cas de trois strates, en axiomes.
+\item Pages 11 à 20 : voisinages coniques, colliers, compatibilité,
+équisingularité (§ 1 à 5).
+\item Pages 21 à 37 : germes, transversalité, stratifications précylindriques,
+et la structure conique définie par récurrence (§ 5 à 9).
+\item Pages 38 à 47 : la présentation standard par un foncteur sur les drapeaux
+(§ 9 et 10).
+\item Pages 47 à 71 : l'espace ordonné $\Sigma$ sans ensemble d'indices, la
+reprise, la récapitulation, et la catégorie topologique (§ 11 à 13).
+\item Pages 72 à 75 : la construction heuristique par voisinages tubulaires (§ 14).
+\item Pages 76 à 98 : provoisinages, bandes, domination (§ 15 à 17).
+\end{itemize}
+
+\emph{Conventions.} $I$ est un ensemble ordonné, fini sauf mention contraire. Un
+\emph{drapeau} de $I$ est une suite strictement croissante $d = (i_0 < \cdots <
+i_n)$ ; $\mathrm{Drap}(I)$ est l'ensemble des drapeaux, ordonné par inclusion.
+Pour $d \subset d'$, on dit que $d$ est un \emph{segment initial} de $d'$ s'il en
+est une section commençante, et qu'il est \emph{cofinal} dans $d'$ s'il a le même
+plus grand élément. Les strates fermées sont les $X_i$, les strates ouvertes
+$X^{*}_i = X_i \smallsetminus \bigcup_{j<i} X_j$. Le complémentaire d'un tube
+ouvert est noté $X^{\sharp}$\footnote{La page écrit $X^{*}$ pour les deux objets :
+les strates ouvertes (pages 2 à 4, 76 à 98) et le complémentaire $X \smallsetminus
+\overset{\circ}{T}$ d'un tube (pages 14 à 35). On les distingue ici.}.
+
+Un sous-espace fermé $Y$ de $X$ est \emph{à collier} (« partie bordante » sur la
+page) s'il possède un voisinage $E$ et un homéomorphisme $E \simeq Y \times
+[0,1]$ envoyant $y$ sur $(y,0)$ ; un tel $E$ est un \emph{collier} (« voisinage
+cylindrique »)\footnote{Le mot « bordant » est le sien. « Collier » est le terme
+reçu, au sens de Brown (1962) pour les bords de variétés ; on le prend ici pour
+un fermé quelconque.}.
+
+\pagerange{1}{1}
+\section*{Le plan du déploiement (page 1)}
+
+Le dossier s'ouvre sur ce qu'il veut obtenir\footnote{En haut à gauche de la
+page 1, la date « déc. 81 -- janv. 82 », le mois de décembre lu avec doute.}. Pour
+trois indices $i < j < k$, on veut des espaces $\Sigma_i, \Sigma_j, \Sigma_k$ (les
+strates déployées), des tubes de raccord $\Sigma_{ij}, \Sigma_{jk}, \Sigma_{ik}$,
+et une jonction $\Sigma_{ijk}$, reliés par le diagramme
+
+\begin{tikzcd}[column sep=small, row sep=normal]
+ & \Sigma_{ik} \arrow[dl] \arrow[rr, hook] & & \Sigma_{k} & \\
+\Sigma_{i} & & \Sigma_{ijk} \arrow[ul, hook] \arrow[rr, hook] \arrow[dl] & & \Sigma_{jk} \arrow[ul, hook] \arrow[dl] \\
+ & \Sigma_{ij} \arrow[ul] \arrow[rr, hook] & & \Sigma_{j} &
+\end{tikzcd}
+
+où les flèches $\hookrightarrow$ sont des plongements à collier (sur le bord), les
+autres des fibrations propres, de fibres $F_{ij}$, $F_{jk}$, $F_{ik}$ (« fibres de
+raccord »), et où les deux losanges de droite sont cartésiens. La strate
+$\Sigma_i$ est « l'âme » du tube $\Sigma_{ij}$, $\Sigma_j$ en est la strate
+ambiante.
+
+Dans le cas non singulier : $\Sigma_i$ est une variété à bord dont le bord est la
+réunion des $\Sigma_{ji}$, $j < i$\footnote{La page écrit $\Sigma_{ji}$ avec $j<i$,
+alors que sa légende ordonne les indices croissants ; c'est bien le tube de la
+strate $j$ dans la strate $i$.} ; et $\Sigma_{ik} \to \Sigma_i$ est une fibration à fibres des variétés à bord compactes, le fibré
+des bords étant la réunion des $\Sigma_{ijk}$, $i<j<k$\footnote{La page écrit
+« $\Sigma_{ik} \to \Sigma_k$ fibrations » ; la fibration, dans tout le reste du
+dossier (pages 38, 45, 64), est la flèche vers la plus petite strate $\Sigma_i$, la
+flèche vers $\Sigma_k$ étant le plongement au bord. On rétablit.}. En général, pour
+un drapeau $d = (i_0 < \cdots < i_n)$ :
+\begin{enumerate}
+\item[a)] $\Sigma_d$ est une variété à bord, dont le bord est la réunion des
+$\Sigma_{d'}$ pour $d' \supsetneq d$ et $d$ cofinal dans $d'$ ; il suffit des $d' = d
+\cup \{j\}$, avec $j$ pris avant $i_0$ ou dans l'un des intervalles ouverts $]i_k,
+i_{k+1}[$ ;
+\item[b)] pour $\delta = (i_0, …, i_p)$ segment initial de $d$, $\Sigma_d \to
+\Sigma_\delta$ est une fibration à fibres des variétés à bord compactes, le fibré
+des bords étant la réunion des $\Sigma_{d'}$, $d' = d \cup \{j\}$ avec $j$ dans l'un des
+intervalles $]i_k, i_{k+1}[$, $k \geq p$.
+\end{enumerate}
+C'est le programme du dossier ; il est repris et prouvé pas à pas aux pages 45 à
+47.
+
+\pagerange{2}{4}
+\section*{L'ordre d'une partition (pages 2 à 4)}
+
+\subsection*{Espaces et ensembles préordonnés}
+
+Un espace topologique $X$ est préordonné par la \emph{spécialisation} : $x \leq y$
+si $\overline{\{x\}} \subset \overline{\{y\}}$, c'est-à-dire si $x \in
+\overline{\{y\}}$ ; c'est un ordre si et seulement si $X$ est $T_0$. Inversement un
+ensemble préordonné $I$ porte la \emph{topologie d'Alexandrov} : les fermés sont
+les parties stables vers le bas, les ouverts les parties stables vers le haut,
+et les $I_{\geq x}$ forment une base d'ouverts ; l'adhérence de $\{x\}$ est
+$I_{\leq x}$.
+
+Une application entre ensembles préordonnés est croissante si et seulement si
+elle est continue, et plus généralement une application $I \to X$ est continue
+si et seulement si elle est croissante pour la spécialisation de $X$. D'où une
+adjonction
+\[
+\mathrm{Hom}_{\mathrm{Esp}}(\mathrm{Alex}(I), X) \simeq
+\mathrm{Hom}_{\mathrm{Préord}}(I, \mathrm{Spéc}(X)),
+\]
+avec $\mathrm{Spéc} \circ \mathrm{Alex} = \mathrm{id}_{\mathrm{Préord}}$ et une
+coünité $\mathrm{Alex}(\mathrm{Spéc}\,X) \to X$ donnée par l'identité de $X$,
+qui est un homéomorphisme si et seulement si toute réunion de fermés de $X$ est
+fermée\footnote{La page note $\mathrm{Esp}$ le foncteur noté ici
+$\mathrm{Alex}$, et $\mathrm{Ord}$ la spécialisation ; elle écrit
+$\mathrm{Ord} \circ \mathrm{Esp} = \mathrm{id}_{\mathcal{E}}$ et $\mathrm{Esp}
+\circ \mathrm{Ord} \to \mathrm{id}_{\mathcal{O}}$, les deux indices intervertis.
+« Topologie d'Alexandrov » est le nom reçu (Alexandrov, 1937) ; la page ne le
+donne pas.}. Les espaces de ce type sont ceux d'Alexandrov.
+
+\subsection*{Pseudo-partitions et ordre récupéré}
+
+Une application $\varphi : X \to I$ est la même chose qu'une partition de $X$ en
+parties $X^{*}_i = \varphi^{-1}(i)$, éventuellement vides. Elle est continue si
+et seulement si les $\bigcup_{j \geq i} X^{*}_j$ sont ouverts ; cela exige que
+les $X_i = \bigcup_{j \leq i} X^{*}_j$ soient fermés, et c'est suffisant si la
+famille des $X_i$ est localement finie\footnote{La page écrit, dans la formule,
+la réunion des $X_j$ là où l'on attend celle des $X^{*}_j$.}.
+
+La question posée est l'inverse : quand l'ordre de $I$ est-il \emph{déterminé} par
+la partition ? Il faut que $\varphi$ soit surjective, et l'on voudrait que la
+topologie de $I$ soit la topologie quotient. Pour une partition localement finie
+indexée par un ensemble préordonné, avec $\varphi$ continue, on a trois
+conditions :
+\begin{enumerate}
+\item[1°)] la topologie de $I$ est finale pour $\varphi$ : $X^{*}_J$ fermé implique
+$J$ fermé ;
+\item[2°)] $\varphi$ est surjective ;
+\item[3°)] $\varphi$ est ouverte, ce qui revient à $\overline{X^{*}_j} =
+\bigcup_{i \leq j} X^{*}_i$ pour tout $j$.
+\end{enumerate}
+Sous 1° et 2°, l'ordre de $I$ est l'inclusion des adhérences
+$\overline{X^{*}_i}$. Une partition satisfaisant 1° à 3° équivaut à une relation
+d'équivalence localement finie et ouverte, et $I$ en est l'ensemble quotient ;
+$I$ est ordonné, et non seulement préordonné, si et seulement si les classes
+$X^{*}_i$ sont localement fermées. On dit alors que la partition est
+\emph{stratifiante}.
+
+\subsection*{Stratifications strictes}
+
+Du côté des strates fermées, la donnée correspondante est une famille croissante
+localement finie de fermés $(X_i)_{i \in I}$, recouvrant $X$, telle que
+\begin{enumerate}
+\item[1°)] $i \mapsto X_i$ est croissante ;
+\item[2°)] $X_i \cap X_j = \bigcup_{k \leq i,\, k \leq j} X_k$ ;
+\end{enumerate}
+c'est une \emph{stratification}. Elle est \emph{stricte} si de plus
+\begin{enumerate}
+\item[3°)] chaque $X^{*}_i = X_i \smallsetminus \bigcup_{j<i} X_j$ est non vide
+(fidélité) ;
+\item[4°)] chaque $X^{*}_i$ est dense dans $X_i$ (densité).
+\end{enumerate}
+Les partitions stratifiantes sont alors exactement les stratifications
+strictes\footnote{Les conditions 3° et 4° sont des ajouts encadrés ; la seconde
+est coupée par la marge et n'est lisible que par sa conclusion, qui est la
+densité. Sa première formulation, « $j<i$ implique que $X_j$ rencontre $X_i$ »,
+lue avec doute, n'est pas reprise.}.
+
+Les conditions 1° et 2° passent aux images inverses, la fidélité non (un ouvert
+peut éviter une strate), la densité passe aux ouverts. La fidélité au sens faible
+— $X_i \subset X_j$ implique $i \leq j$ — ne suffit pas à la non-vacuité des
+strates ouvertes : pour $I = \{a, b < c\}$ et $X_c = X = X_a \amalg X_b$ avec
+$X_a, X_b$ non vides, l'indexation est fidèle mais $X^{*}_c$ est vide. Sous 1°,
+2° et cette fidélité faible, les traces sur un ouvert forment encore une
+stratification du même type, d'où un préfaisceau de stratifications et la notion
+de stratification locale.
+
+Enfin, la condition 1° se ramène, pour $I$ fini, à une condition sur un seul
+indice à la fois. Si $J$ est minimal parmi les parties non fermées à $X^{*}_J$
+fermé, $J$ a un plus grand élément $j$ et $J_0 = J \smallsetminus \{j\}$ est
+fermé ; d'où l'équivalence de 1° avec : chaque fois que la frontière $X^{\bullet}_j
+= \overline{X^{*}_j} \smallsetminus X^{*}_j$ est contenue dans $X_{J_0}$ pour un
+fermé $J_0$, on a $I_{\leq j} \subset J_0 \cup \{j\}$, et la même condition vaut
+dans $I_{<j}$\footnote{Le passage est encadré, en partie biffé, et le trait ne
+distingue pas toujours $\bar j$ de $\bar J$ ; on a suivi la lecture que l'argument
+demande, celle de la transcription.}. La page mentionne aussi la question, en
+topologie modérée, d'une plus petite stratification modérée majorant une
+partition donnée par des parties localement fermées modérées.
+
+\pagerange{6}{9}
+\section*{Trois strates (pages 6, 7 et 9)}
+
+Les dessins des pages 6 et 9 montrent le cas type : un point $\Sigma_0$, une demi-droite
+$\Sigma_1$ qui en part, un plan $\Sigma_2$. Les strates déployées s'obtiennent en
+ôtant les tubes ouverts des strates inférieures :
+\[
+\Sigma_i = X_i \smallsetminus \Bigl(X_i \cap \bigcup_{k<i}
+\overset{\circ}{\mathrm{Tub}}(X_k, X_i)\Bigr),
+\]
+et le tube de raccord $\Sigma_{ij}$ est le bord du tube de $\Sigma_i$ dans la strate
+$j$ ainsi rognée, plongé dans $\Sigma_j$.
+
+La page 7 met ce cas en axiomes. On se donne des espaces $\Sigma_0, \Sigma_1,
+\Sigma_2$ et des fermés $\Sigma_{01} \subset \Sigma_0 \times \Sigma_1$, $\Sigma_{12}
+\subset \Sigma_1 \times \Sigma_2$, $\Sigma_{02} \subset \Sigma_0 \times
+\Sigma_2$\footnote{La page écrit « $\Sigma_{01} \subset \Sigma_{01}$ », lapsus
+rétabli d'après les deux inclusions voisines.}, et l'on pose
+$\Sigma_{012} = (\Sigma_{01} \times \Sigma_2) \cap (\Sigma_0 \times \Sigma_{12})$.
+\begin{enumerate}
+\item[a)] L'image de $\Sigma_{012}$ dans $\Sigma_0 \times \Sigma_2$ est dans
+$\Sigma_{02}$ ; autrement dit, $\Sigma_0 \amalg \Sigma_1 \amalg \Sigma_2$ porte un
+ordre au-dessus de $\{0 < 1 < 2\}$.
+\item[b)] Les projections $\Sigma_{01} \to \Sigma_1$, $\Sigma_{02} \to \Sigma_2$,
+$\Sigma_{12} \to \Sigma_2$ sont injectives, à collier ; donc $\Sigma_{012} \to
+\Sigma_{12}$ aussi.
+\item[c)] $\Sigma_{012} = \Sigma_{02} \cap \Sigma_{12}$, l'intersection étant prise
+dans $\Sigma_2$ : le carré supérieur du diagramme est cartésien\footnote{La page
+dit « dans $\Sigma_{12}$ » ; les deux termes sont des parties de $\Sigma_2$ par
+b).}.
+\item[d)] $\Sigma_{12} \to \Sigma_1$ est transverse au plongement à collier
+$\Sigma_{01} \to \Sigma_1$ ; donc $\Sigma_{012} \to \Sigma_{12}$ est à collier.
+\item[e)] $\Sigma_{02}$ et $\Sigma_{12}$ sont des parties à collier transverses de
+$\Sigma_2$ ; donc $\Sigma_{012} \to \Sigma_{02}$ est à collier.
+\item[f)] $\Sigma_{01} \to \Sigma_0$, $\Sigma_{02} \to \Sigma_0$, $\Sigma_{12} \to
+\Sigma_1$ sont des fibrations (lisses), donc $\Sigma_{012} \to \Sigma_{02}$ et
+$\Sigma_{012} \to \Sigma_{01}$ aussi.
+\end{enumerate}
+
+\pagerange{11}{20}
+\section*{Voisinages coniques (pages 11 à 20)}
+
+\subsection*{(1) La définition}
+
+Soit $Y$ un espace. Un \emph{voisinage conique} de $Y$ est un espace $T \supset Y$,
+muni d'un fermé $\dot T$ (le bord du tube) et d'une action $(\lambda, t) \mapsto
+\lambda t$ du monoïde multiplicatif $\mathbf{I} = [0,1]$ telle que $\lambda y = y$
+sur $Y$, $0 \cdot T \subset Y$, et que le carré
+
+\begin{tikzcd}
+\mathbf{I} \times \dot T \arrow[r] & T \\
+\{0\} \times \dot T \arrow[u, hook] \arrow[r, "f"'] & Y \arrow[u, hook]
+\end{tikzcd}
+
+soit cocartésien, où $f(x) = 0 \cdot x$. Autrement dit $T$ est le \emph{cylindre de
+l'application} $f : \dot T \to Y$, recollement de $\mathbf{I} \times \dot T$ et de
+$Y$ le long de $\{0\} \times \dot T$, avec l'action évidente\footnote{La page dit
+« le cône de l'application $f$ » et le note $\mathcal{C}(f)$. C'est le cylindre
+d'application au sens de la topologie actuelle : l'extrémité $\{1\} \times \dot T$
+n'est pas écrasée. Il se réduit au cône sur $\dot T$ quand $Y$ est un point, d'où le
+nom. Un voisinage de cette forme est ce qu'on appelle aujourd'hui un voisinage en
+cylindre d'application (« mapping cylinder neighbourhood »), notion de Siebenmann
+(1972) et de Quinn ; les données de contrôle de Thom (1969) et Mather (1970) en sont la
+version lisse. Le dossier ne cite aucun d'eux.}. Les $\lambda_T$ forment une
+homotopie de l'identité à une rétraction de $T$ sur $Y$, fixe sur $Y$. Le bord est
+déterminé par l'action : l'intérieur du tube est $\overset{\circ}{T} =
+\bigcup_{\lambda < 1} \lambda T$.
+
+Les $T_\lambda = \lambda T$ forment une famille croissante de fermés, et pour
+$\lambda < 1$ l'intérieur topologique de $T_\lambda$ est $\lambda
+\overset{\circ}{T}$. Pour $\varepsilon \in \,]0,1]$, l'\emph{épaississement}
+$E_\varepsilon(T) = T \smallsetminus \overset{\circ}{T}_{1-\varepsilon}$ est un
+voisinage de $\dot T$, homéomorphe à $[1-\varepsilon, 1] \times \dot T$.
+
+\subsection*{(2) Voisinage conique dans un espace, colliers}
+
+Si $Y$ est fermé dans $X$, un voisinage conique de $Y$ dans $X$ est un voisinage
+$T$ muni d'une telle structure. Les $\lambda T$ en sont d'autres, et pour $\lambda
+< 1$ la frontière de $\lambda T$ dans $X$ est $\lambda \dot T$ ; pour $\lambda = 1$,
+ce peut être faux (prendre $X = T$).
+
+Les colliers en sont le cas particulier où $f : \dot T \to Y$ est un
+homéomorphisme. Si $T$ est un voisinage conique de $Y$, $\dot T$ est à collier
+dans $T$ et dans chaque $T_\lambda$. Dans un espace compact, une réunion finie de
+fermés disjoints est à collier si et seulement si chacun l'est.
+
+\subsection*{Voisinages coniques stricts}
+
+Soit $X^{\sharp} = X \smallsetminus \overset{\circ}{T}$, fermé de $X$.
+
+\emph{Proposition (page 14).} Pour $\lambda \in \,]0,1[$ donné, les conditions
+suivantes sont équivalentes :
+\begin{enumerate}
+\item[a)] $\dot T$ est à collier dans $X^{\sharp}$ ;
+\item[b)] il existe un homéomorphisme de $X$ envoyant $(T, \dot T)$ sur
+$(T_\lambda, \dot T_\lambda)$ ;
+\item[b')] de même, avec un homéomorphisme égal à l'identité sur un $T_{\lambda'}$,
+$0 < \lambda' < \lambda$ donné ;
+\item[c)] il existe un voisinage conique $T'$ de $Y$ avec $T = \lambda T'$, de façon
+compatible aux structures.
+\end{enumerate}
+Le voisinage est alors dit \emph{strict}. Sa frontière est $\dot T$, et pour tout
+voisinage conique $T$ les $T_\lambda$, $\lambda < 1$, sont stricts. Une note en
+marge propose de prendre les voisinages stricts comme notion de base.
+
+\subsection*{(3) Sous-espaces coniques et compatibilité}
+
+Une partie $T' \subset T$ est \emph{conique} si elle est stable par l'action et en
+fait un voisinage conique de $Y' = T' \cap Y$\footnote{La page dit « de $Y$ » ;
+c'est un voisinage conique de sa trace sur $Y$.}. Elle équivaut alors à un fermé
+$\dot T' = T' \cap \dot T$ et à un fermé $Y' \supset 0 \cdot \dot T'$ de $Y$, avec
+$T' = \mathbf{I} \cdot \dot T' \cup Y'$. Elle est \emph{conique stricte} si $Y' = 0
+\cdot \dot T'$, c'est-à-dire si $T'$ n'a sur $Y$ que la pointe de ses propres
+cônes.
+
+Un voisinage conique $T$ de $Y$ dans $X$ est \emph{compatible} avec un fermé $X'$ si
+$X' \cap T$ est conique dans $T$ ; \emph{strictement compatible} si de plus $T$ est
+strict et si $\dot T$ admet dans $X^{\sharp}$ un collier $E \simeq \dot T \times
+[0,1]$ dans lequel $X' \cap E$ s'écrit $X'_0 \times [0,1]$. De même, un fermé est
+compatible avec un collier $E \simeq B \times [0,1]$ si sa trace y est un produit
+$B' \times [0,1]$\footnote{La page remarque que la compatibilité cylindrique n'est
+pas un cas particulier de la compatibilité conique, mais qu'elle lui correspond si
+l'on impose la condition stricte $T' \cap Y = 0 \cdot \dot T'$, ajoutée et entourée
+au bas de la page 16. En marge : « utiliser plutôt la terminologie transversale ».}.
+
+\subsection*{(4) Équisingularité}
+
+Un voisinage conique est \emph{équisingulier} si $f : \dot T \to Y$ est une
+fibration localement triviale, et équisingulier pour une famille de parties
+coniques $T_i$ si la famille des $\dot T_i \subset \dot T$ est \emph{globalement}
+localement triviale au-dessus de $Y$. Si $X_i \cap Y$ est ouvert et fermé dans $Y$
+connexe, on a l'alternative : ou bien $X_i \cap T = \emptyset$, ou bien $X_i
+\supset Y$\footnote{L'alternative découle de la compatibilité seule : si $X_i \cap
+Y$ est vide, $X_i \cap \dot T$ s'envoie dans le vide, donc est vide. La page la
+présente comme conséquence de l'équisingularité, qui sert à rendre $X_i \cap Y =
+0 \cdot \dot X_i$ ouvert et fermé dans le cas strict.}. Un système $(X, (X_i))$ est
+équisingulier le long de $Y$ s'il existe un voisinage conique équisingulier pour
+les $X_i$.
+
+\subsection*{(5) La reconstruction}
+
+\emph{Proposition (page 19).} Les systèmes $(X, Y, (X_i)_{i \in I}, T)$, où $T$
+est un voisinage conique de $Y$ strictement compatible avec les $X_i$, équivalent
+— morphismes : les isomorphismes — aux systèmes $(X^{\sharp}, \dot X, (X^{\sharp}_i),
+Y, f : \dot X \to Y)$, où $\dot X$ et les $X^{\sharp}_i$ sont fermés dans
+$X^{\sharp}$ ; on passe du second au premier par $X = X^{\sharp}
+\amalg_{\dot X} \mathcal{C}(f)$\footnote{La page énonce l'équivalence pour $T$
+seulement compatible. Elle est fausse sous cette forme : la trace $X_i \cap Y$
+n'est pas déterminée par les données de droite dès qu'elle déborde l'image de
+$\dot X_i$. Il faut soit la strictité au sens $X_i \cap Y = f(\dot X_i)$, que
+la page impose elle-même en bas de la page 16, soit ajouter les $X_i \cap Y$ aux
+données. On a retenu la première.}. Le voisinage $T$ est strict et transverse
+aux $X_i$ si et seulement si $\dot X$ est à collier dans $X^{\sharp}$, compatible
+avec les $X^{\sharp}_i$ ; il est équisingulier pour les $X_i$ si et seulement si
+$\dot X \to Y$, avec les $\dot X_i = X_i \cap \dot X$, est une fibration
+localement triviale simultanée.
+
+La page 20, biffée, commence une définition par récurrence de la
+« conification » d'une stratification finie munie d'un sous-espace à collier
+$\dot X$ strictement compatible : vide si $I$ est vide, voisinage conique strict
+compatible avec $\dot X$ si $I$ a un seul élément. Elle est reprise aux pages 29
+à 35.
+
+\pagerange{21}{27}
+\section*{Germes et transversalité (pages 21 à 27)}
+
+Deux voisinages coniques $T, T'$ de $Y$ dans $X$ sont \emph{équivalents} s'il existe
+$\lambda, \lambda' \in \,]0,1[$ avec $\lambda T = \lambda' T'$, structures comprises
+; une classe est un \emph{germe} de voisinage conique. La compatibilité avec un
+fermé, la strictité, l'équisingularité et le caractère cylindrique ne dépendent
+que du germe.
+
+\emph{Équivalence de catégories (page 22).} Les systèmes $(\tilde X, \dot X,
+\mathcal{E}, Y, f)$ — un espace, un fermé $\dot X$ muni d'un germe de collier
+$\mathcal{E}$, un espace $Y$ et une application $f : \dot X \to Y$ — équivalent aux
+systèmes $(X, Y, \mathcal{T})$ — un espace, un fermé, un germe de voisinage conique
+—, par $X = \tilde X \amalg_{\dot X} Y$ : l'image du collier y devient le cylindre
+de $f$. Le germe obtenu est équisingulier si et seulement si $f$ est une fibration.
+
+\emph{Corollaire (page 23).} Les fermés $X'$ de $X$ compatibles avec le germe
+conique correspondent aux couples $(\tilde X' \subset \tilde X, Y' \subset Y)$ de
+fermés, $\tilde X'$ compatible avec le germe de collier, tels que $f(\dot X')
+\subset Y'$ où $\dot X' = \tilde X' \cap \dot X$ ; on a $X' = \mathrm{Im}(\tilde X')
+\cup Y'$, et $X'$ est conique strict si et seulement si $Y' = f(\dot X')$.
+
+\emph{Collier compatible avec un germe conique.} Soit $X_0$ à collier dans $X$, de
+germe de collier $\mathcal{E}$. On dit que $\mathcal{E}$ et le germe conique
+$\mathcal{T}$ sont compatibles s'il existe des représentants $E \simeq X_0 \times
+\mathbf{I}$ et $T$ tels que $T \cap E \simeq T_0 \times \mathbf{I}$, avec $\dot T
+\cap E \simeq \dot T_0 \times \mathbf{I}$ et $Y \cap E \simeq Y_0 \times \mathbf{I}$
+($T_0 = T \cap X_0$, etc.), la structure conique induite étant le produit par
+$\mathbf{I}$ d'une structure conique de $T_0$ sur $Y_0$. Cela résume trois
+conditions : les traces de $T$, $\dot T$, $Y$ sont cylindriques dans $E$ ; celles de
+$E$, $\dot E$, $X_0$ sont coniques dans $T$ ; les deux familles d'homothéties
+commutent.
+
+\emph{Proposition (page 25).} Si $(X, Y, \mathcal{T})$ est décrit par $(\tilde X,
+\dot X, \mathcal{E}_{\dot X}, Y, p : \dot X \to Y)$, les germes de colliers
+$(X_0, \mathcal{E})$ compatibles avec $\mathcal{T}$ correspondent aux systèmes
+$(\tilde X_0, \mathcal{E}_{\tilde X_0}, Y_0, \mathcal{E}_{Y_0})$ — des parties à
+collier de $\tilde X$ et de $Y$ avec leurs germes — tels que : a)
+$\mathcal{E}_{\tilde X_0}$ et $\mathcal{E}_{\dot X}$ sont compatibles, de sorte que
+$\dot X_0 = \tilde X_0 \cap \dot X$ hérite d'un germe de collier ; b) $\dot X_0 =
+p^{-1}(Y_0)$, et $p$ s'écrit $p_0 \times \mathrm{id}_{\mathbf{I}}$ sur des colliers
+convenables, où $p_0 : \dot X_0 \to Y_0$\footnote{La page écrit $p_0 : X_0 \to
+Y_0$, sans le point.}.
+
+\emph{Transversalité.} Une famille finie de colliers $(B_\alpha, E_\alpha)$ est
+\emph{transverse} si, pour toute partie $J$ des indices, $E_J = \bigcap_{\alpha \in J}
+E_\alpha$ est isomorphe au-dessus de $B_J = \bigcap_{\alpha\in J} B_\alpha$ à $B_J
+\times \mathbf{I}^J$, l'homothétie du collier $\alpha$ agissant sur la seule
+coordonnée $\alpha$. C'est une structure de coin : localement, l'espace est un coin
+de cube\footnote{Le nom de « variété à coins » (Cerf 1961, Douady 1961) désigne
+le cas lisse de cette structure.}. La famille est transverse à un voisinage conique
+$T$ de $Y$ si de plus $E_J \cap T \simeq T_J \times \mathbf{I}^J$, avec les bords et
+$Y$, la structure conique étant le produit par $\mathbf{I}^J$ d'une structure conique
+de $(T_J, Y_J)$.
+
+\pagerange{27}{30}
+\section*{Stratifications précylindriques (pages 27, 28 et 30)}
+
+Soit $(X_i)_{i \in I}$ une famille croissante de fermés, $I$ fini. Elle est
+\emph{précylindrique} si :
+\begin{enumerate}
+\item[a)] pour $j'$ prédécesseur immédiat de $j$, $X_{j'} \hookrightarrow X_j$ est
+à collier ;
+\item[b)] pour $j$ fixé, les colliers des prédécesseurs de $j$ sont transverses
+dans $X_j$ ;
+\item[c)] pour $i \leq j$, l'intervalle $[i, j]$ est un treillis booléen : si $S$
+est l'ensemble des prédécesseurs immédiats de $j$ dans $[i,j]$, l'application
+$k \mapsto s_k = \{ s \in S \mid s \geq k \}$ est un anti-isomorphisme de $[i,j]$ sur
+$\mathfrak{P}(S)$\footnote{La lecture de b) et de la première ligne de c) est très
+incertaine ; on donne la forme que la suite de la page utilise, page 28 et page
+30.}.
+\end{enumerate}
+Ensemble, b) et c) disent que la structure locale de $X_j$ le long de $X_i$ est
+cubique : un coin de cube de dimension $\mathrm{card}\, S$. Dans un treillis
+booléen les bornes inférieures existent ; donc, si $j'$ est un prédécesseur de
+$j$, $k \leq j$ sans être $\leq j'$, et s'il existe un minorant commun à $k$ et $j'$,
+alors $k' = \inf(k, j')$ existe et est un prédécesseur de $k$. On demande alors
+que le carré $(X_k, X_{k'}) \to (X_j, X_{j'})$ soit transverse : les colliers se
+correspondent, $E_{k';k}$ étant l'image inverse de $E_{j';j}$\footnote{La page
+écrit $E_{k;k}$ ; on attend $E_{k';k}$.}.
+
+Un système de colliers compatible avec ces conditions fait de la stratification
+une stratification \emph{cylindrique}. La page 30 ajoute enfin une condition
+« oubliée », exigée désormais pour toutes les stratifications :
+\[
+X_i \cap X_j = \bigcup_{k \leq i,\, k \leq j} X_k ,
+\]
+d'où : si $X_i \cap X_j$ est non vide, $i$ et $j$ ont un minorant.
+
+\pagerange{29}{35}
+\section*{La structure conique, par récurrence (pages 29 à 35)}
+
+Soit $(X_i)_{i \in I}$ une stratification ($X_i \cap X_j = \bigcup_{\alpha \leq i,j}
+X_\alpha$, $X = \bigcup X_i$), et $(B_\alpha, \mathcal{E}_\alpha)_{\alpha \in
+\Lambda}$ une famille transverse de parties à collier, transverse aux $X_i$. Soit
+$I_0$ l'ensemble des éléments minimaux de $I$ ; les $X_\beta$, $\beta \in I_0$,
+sont disjoints, et un germe de voisinage conique strict de $X_{I_0}$ est une famille
+de germes de voisinages coniques des $X_\beta$\footnote{Les pages 29 et 30 sont
+interverties dans la reliure : la page 30 continue la page 28, la page 31 la page
+29.}.
+
+Prenons $T_{I_0} = \coprod T_\beta$ strict, transverse aux colliers, et les $X_i$,
+$i \in I^{*} = I \smallsetminus I_0$, strictement compatibles avec lui. Alors
+$X_i \cap T_\beta = \emptyset$ si $i \not> \beta$, et $X_i \cap T_\beta =
+\mathbf{I} \cdot (X_i \cap \dot T_\beta) \cup X_\beta$ si $i > \beta$\footnote{Le
+premier cas demande la strictité : $0 \cdot (X_i \cap \dot T_\beta) \subset X_i
+\cap X_\beta = \emptyset$ force $X_i \cap \dot T_\beta = \emptyset$.}. Le système
+\[
+\bigl(X, (X_i)_{i\in I}, (B_\alpha, \mathcal{E}_\alpha)_{\alpha \in \Lambda},
+(T_\beta)_{\beta \in I_0}\bigr)
+\]
+se reconstitue donc à partir de
+\[
+\bigl(X^{\sharp}, (\dot X_\beta), (B^{\sharp}_\alpha, \mathcal{E}^{\sharp}_\alpha),
+(X^{\sharp}_i)_{i \in I^{*}}\ ;\ (X_\beta),\ (B_{\beta\alpha},
+\mathcal{E}_{\beta\alpha}),\ (p_\beta : \dot X_\beta \to X_\beta)\bigr),
+\]
+avec $X^{\sharp} = X \smallsetminus \overset{\circ}{T}_{I_0}$, $\dot X_\beta = \dot
+T_\beta$, et les traces évidentes, par
+\[
+X = X^{\sharp} \amalg_{\coprod \dot X_\beta} \coprod_\beta \mathcal{C}(p_\beta),
+\qquad
+X_i = X^{\sharp}_i \cup \bigcup_{\beta < i} \bigl(\mathbf{I}\cdot \dot X_{i\beta}
+\cup X_\beta\bigr),\quad \dot X_{i\beta} = X^{\sharp}_i \cap \dot X_\beta ,
+\]
+et de même pour les $B_\alpha$.
+
+Les conditions (20) sur ces données : (a) les $X_\beta$ sont disjoints ; (b) chaque
+$\dot X_\beta$ est transverse aux $(B^{\sharp}_\alpha, \mathcal{E}^{\sharp}_\alpha)$ ;
+(c) les $p_\beta$ respectent les systèmes de colliers induits ; (d) les
+$X^{\sharp}_i$ sont transverses à la famille formée des $\dot X_\beta$ et des
+$B^{\sharp}_\alpha$. S'y ajoutent (e) $i \leq j$ implique $X^{\sharp}_i \subset
+X^{\sharp}_j$, et (f) $X^{\sharp}_i \cap X^{\sharp}_j = \bigcup_{h \leq i,j}
+X^{\sharp}_h$, qui disent que les $X^{\sharp}_i$ forment une stratification de
+$X^{\sharp}$. La relation $X_i \cap X_j = \bigcup_{h\leq i,j} X_h$ se vérifie dans
+chaque $T_\beta$ à partir de (f) sur $\dot X_\beta$, et hors des tubes par (f)
+même.
+
+\emph{Théorème (page 34).} Les systèmes du premier type, satisfaisant aux axiomes
+des stratifications et aux conditions de transversalité, équivalent aux systèmes
+du second, satisfaisant à (20), (e) et (f).
+
+D'où la définition, par récurrence sur $\mathrm{card}\, I$, d'une \emph{structure
+conique} sur $(X, (X_i), (B_\alpha, \mathcal{E}_\alpha))$ : vide si $I$ est vide ;
+sinon, la donnée (a) d'un voisinage conique strict $T_{I_0}$ de $X_{I_0}$,
+transverse aux colliers et coniquement transverse aux $X_i$, et (b) d'une structure
+conique sur le système plus petit
+\[
+\bigl(X^{\sharp},\ (X^{\sharp}_i)_{i\in I^{*}},\ (B_\alpha, \mathcal{E}_\alpha)_{\alpha
+\in \Lambda} \cup (\dot X_\beta, \mathcal{E}_\beta)_{\beta \in I_0}\bigr),
+\]
+où les bords des tubes rejoignent la famille des colliers. C'est, à la topologie
+près, la récurrence des données de contrôle de Mather.
+
+\pagerange{36}{37}
+\subsection*{Trois remarques (pages 36 et 37)}
+
+1) Sous des hypothèses de non-singularité, une structure conique « doit »
+exister ; si la stratification est équisingulière le long de chaque strate
+ouverte, il doit en exister une équisingulière, et il suffit de savoir construire
+un tube équisingulier autour de $X_{I_0}$. 2) On pourrait faire la récurrence le
+long de n'importe quelle filtration de $I$ par des parties dont les différences
+successives sont formées d'éléments minimaux ; la notion n'en dépendrait pas
+« essentiellement ». 3) La famille des $B_\alpha$ peut être remplacée par une
+stratification cylindrique indexée par $\mathfrak{P}(\Lambda)^{\circ}$. Aucune
+de ces trois affirmations n'est démontrée dans le dossier\footnote{Pour la
+première, c'est le théorème d'existence des données de contrôle de Mather (1970)
+dans le cas des stratifications de Whitney ; le dossier n'y renvoie pas.}.
+
+Le paragraphe 9, « Description d'une stratification conique de type $I$ », ne dit
+que son intention — d'abord sans stratification cylindrique supplémentaire — et la
+page 37 s'arrête là.
+
+\pagerange{38}{42}
+\section*{La présentation standard (pages 38 à 42)}
+
+Soit $\mathcal{M}$ une « catégorie topologique modèle » — les espaces topologiques,
+pour fixer les idées. Une stratification équisingulière de type $I$ se présente par
+un foncteur
+\[
+\Sigma : \mathrm{Drap}(I) \longrightarrow \mathcal{M}, \qquad (i_0, …, i_n)
+\longmapsto \Sigma_{i_0 … i_n},
+\]
+contravariant pour l'inclusion des drapeaux, tel que :
+\begin{enumerate}
+\item[(1)] pour $d$ segment initial de $d'$, $\Sigma_{d'} \to \Sigma_d$ est une
+fibration (il suffit de le demander pour l'oubli du dernier terme) ;
+\item[(2)] l'oubli d'un terme autre que le dernier, $\Sigma_{i_0 … i_n} \to
+\Sigma_{i_0 … \widehat{i_p} … i_n}$, $p \neq n$, est un plongement au bord,
+à collier ;
+\item[(3)] si le dernier élément $i$ de $d$ est le premier de $d'$, le carré
+ci-dessous est cartésien.
+\end{enumerate}
+
+\begin{tikzcd}
+\Sigma_{d \cup d'} \arrow[r, hook] \arrow[d] & \Sigma_{d'} \arrow[d] \\
+\Sigma_d \arrow[r, hook] & \Sigma_i
+\end{tikzcd}
+
+Une note marginale corrige (1) : « fibrant » est trop faible pour
+l'équisingularité ; il faut que, $d$ fixé, la famille des $\Sigma_{d \amalg \delta}$
+au-dessus de $\Sigma_d$ soit localement triviale. Une autre ajoute la transversalité
+des $\Sigma_{d'} \to \Sigma_\delta$ aux sous-espaces à collier, pour $d$ de longueur
+2\footnote{La page énonce aussi un corollaire — si $d \subset d'$ ont même …,
+alors $\Sigma_{d'} \to \Sigma_d$ est un plongement — dont la condition est
+illisible.}.
+
+Par (3), tout se ramène aux $\Sigma_i$, aux $\Sigma_{ij}$ ($i<j$) avec la fibration
+$\Sigma_{ij} \to \Sigma_i$ et le plongement au bord $\Sigma_{ij} \to \Sigma_j$, et
+aux compositions
+\[
+\Sigma_{ijk} = \Sigma_{ij} \times_{\Sigma_j} \Sigma_{jk} \longrightarrow \Sigma_{ik}.
+\]
+Les $\Sigma_i$ forment un objet $\Sigma_* = \coprod \Sigma_i$ au-dessus de $I$, les
+$\Sigma_{ij}$ un objet $\Sigma_{**}$ au-dessus de $I \times I$ (avec $\Sigma_{ii} =
+\Sigma_i$, et $\Sigma_{ij}$ vide si $i \not\leq j$), muni d'une source $s$ (une
+fibration), d'un but $b$ (localement un plongement au bord) et d'une identité $\iota
+: \Sigma_* \to \Sigma_{**}$. Avec la composition, la donnée de $\Sigma$ équivaut à
+celle d'une \emph{catégorie interne} à $\mathcal{M}$, au-dessus de la catégorie
+$I_{\mathcal{M}}$ définie par l'ordre de $I$. C'est même un \emph{espace ordonné} :
+$\Sigma_{i_0 … i_n}$ est l'espace des chaînes $x_{i_0} \leq \cdots \leq
+x_{i_n}$ de $\Sigma_*$ au-dessus de $d$, et la condition (3) se ramène au cas $n
+= 2$, $\Sigma_{ijk} = \Sigma_{ik} \cap \Sigma_{jk}$ : pour $z \in \Sigma_k$,
+l'ensemble $(\Sigma_*)_{\leq z}$ s'envoie injectivement dans $I_{\leq k}$, avec
+l'ordre induit.
+
+Pour reconstruire l'espace stratifié, Grothendieck considère les couples $d
+\subset d'$ avec $d$ cofinal dans $d'$ ($2^n$ choix pour $d'$ de longueur $n$) ;
+chacun équivaut à une chaîne $d_1 \subset \cdots \subset d_{p+1} = d'$ de segments
+initiaux stricts, d'où une suite de fibrations $\Sigma_{d'} \to \Sigma_{d_p} \to
+\cdots \to \Sigma_{d_1}$ et son cylindre d'application simultané $C_{\Sigma, d, d'}$.
+Il reste à écrire les morphismes de transition entre ces cylindres ; la page ne
+le fait pas.
+
+\pagerange{42}{47}
+\section*{Le cas des espaces topologiques (paragraphe 10, pages 42 à 47)}
+
+Pour $\mathcal{M} = (\mathrm{Top})$, les données sont un espace $\Sigma_*$, un ordre
+de graphe fermé $\Sigma_{**} \subset \Sigma_* \times \Sigma_*$, une application
+croissante continue $\Sigma_* \to I$ (d'où $\Sigma_* = \coprod \Sigma_i$, $\Sigma_{**}
+= \coprod_{i \leq j} \Sigma_{ij}$), avec les conditions :
+\begin{enumerate}
+\item[(a)] pour $i \leq j$, le but $\Sigma_{ij} \to \Sigma_j$ est un plongement
+fermé ; donc, pour $z$ au-dessus de $j$ et $i \leq j$, il existe au plus un $y \leq z$
+au-dessus de $i$, et $\Sigma_{ii} = \Sigma_i$ ;
+\item[(b)] pour $i<j<k$, $\Sigma_{ijk} = \Sigma_{ik} \cap \Sigma_{jk}$ ;
+\item[(c)] si $i, j \leq k$ n'ont pas de minorant, $\Sigma_{ik} \cap \Sigma_{jk} =
+\emptyset$ ;
+\item[(d)] pour $k$ fixé, les $\Sigma_{ik}$, $i<k$, sont des sous-espaces à collier
+transverses de $\Sigma_k$, se coupant le long des $\Sigma_d$, $d = (i_0, …, i_n,
+k)$ ;
+\item[(e)] (équisingularité) les $\Sigma_{ij} \to \Sigma_i$ sont des fibrations ;
+\item[(f)] (non-singularité) les $\Sigma_i$ sont des variétés à bord.
+\end{enumerate}
+Par (b) et (c), pour des drapeaux $d_\alpha$ de même dernier terme $k$,
+$\bigcap \Sigma_{d_\alpha}$ est vide si $\bigcup d_\alpha$ n'est pas un drapeau, et
+vaut $\Sigma_{\bigcup d_\alpha}$ sinon. Sous (f), les $\Sigma_{ji}$, $j<i$, forment
+une stratification cylindrique du bord de $\Sigma_i$, et plus généralement les
+$\Sigma_{d'}$, $d' \supsetneq d$, $d$ cofinal dans $d'$, une stratification
+cylindrique du bord de $\Sigma_d$ ; l'ensemble de ces $d'$ s'identifie aux drapeaux
+non vides de la somme ordinale $I_{<i_1} \amalg I_{]i_1, i_2[} \amalg \cdots
+\amalg I_{]i_{n-1}, i_n[}$.
+
+Sous (e) et (f), les fibres de $\Sigma_{ij} \to \Sigma_i$ sont des variétés à bord ;
+le fibré des bords est stratifié par les $\Sigma_d$, $d$ contenant strictement
+$\{i,j\}$, de premier terme $i$ et de dernier $j$, et l'ensemble de ces $d$ est
+celui des drapeaux non vides de $I_{]i,j[}$. Il est vide si et seulement si $j$ est un
+successeur immédiat de $i$ : c'est la condition pour que $\Sigma_{ij} \to \Sigma_i$
+soit lisse, c'est-à-dire à fibres sans bord. Plus généralement, pour $d =
+(i_1, …, i_p)$ segment initial strict de $d' = (i_1, …, i_n)$, le fibré des
+bords de $\Sigma_{d'} \to \Sigma_d$ est stratifié par les drapeaux non vides de
+$I_{]i_p, i_{p+1}[} \amalg \cdots \amalg I_{]i_{n-1}, i_n[}$, et la fibration est
+lisse si et seulement si chacun de $i_p, i_{p+1}, …, i_n$ est successeur
+immédiat du précédent — « à partir de $i_p$, pas de $i_1$ ! ». C'est l'énoncé b) de
+la page 1, désormais démontré.
+
+\pagerange{47}{54}
+\section*{Digression : l'espace ordonné sans ensemble d'indices (paragraphe 11, pages 47 à 54)}
+
+L'ensemble $I$ disparaît. On se donne un espace ordonné $\Sigma$ : un espace
+$\Sigma(0)$ et un fermé $\Sigma(1) \subset \Sigma(0) \times \Sigma(0)$, graphe d'un
+ordre. Soit $\Sigma^{*}(1)$ le graphe de l'ordre strict et $\Sigma^{*}(n)$ l'espace
+des chaînes strictes $x_0 < \cdots < x_n$ ; ils forment un espace semi-simplicial
+(sans dégénérescences)\footnote{La page dit « pré-simplicial », et note ces
+espaces d'une petite étoile, gardée ici.}. Les conditions :
+\begin{enumerate}
+\item[(a)] le but $\Sigma(1) \to \Sigma(0)$ est une immersion propre localement à
+collier ; la diagonale est alors ouverte et fermée dans $\Sigma(1)$ ;
+\item[(b)] pour tout carré cocartésien d'ensembles totalement ordonnés $\delta = d
+\cap d'$, $d'' = d \cup d'$, avec $\delta$ segment initial de $d$ contenant le
+dernier élément de $d$, le carré des $\Sigma^{*}$ correspondant est cartésien ; et
+pour $d = (i_0, …, i_n)$, au voisinage de chaque point, $\Sigma^{*}(d)$ est
+l'intersection transverse des sous-espaces à collier $\Sigma^{*}(i_\alpha, i_n) \to
+\Sigma^{*}(i_n)$ ; de même pour toute inclusion cofinale ;
+\item[(c)] (équisingularité) la source $\Sigma^{*}(1) \to \Sigma^{*}(0)$ est propre et
+fibrante ; donc $\Sigma^{*}(d') \to \Sigma^{*}(d)$ l'est pour $d$ segment initial de
+$d'$ ;
+\item[(d)] (non-singularité) $\Sigma^{*}(0)$ est une variété à bord dont le bord est
+l'image du but ;
+\item[(e)] (mixte) les fibres de la source sont des variétés à bord, le fibré des
+bords étant l'image de $\Sigma^{*}(2) \to \Sigma^{*}(1)$, $(x<y<z) \mapsto (x<z)$.
+\end{enumerate}
+Une marge doute : le bord de $\Sigma^{*}(d)$ est-il bien la réunion des
+$\Sigma^{*}(d')$, $d \subset d'$ cofinal ? « Si c'est vrai, ça risque d'être
+délicat ! »
+
+La condition (b) est ensuite précisée en trois points. Pour $x \in \Sigma$ :
+b$_1$) les $z_\alpha \in \Sigma^{*}(1)$ de but $x$ correspondent bijectivement aux
+germes en $x$ de sous-espaces à collier $B_\alpha$, images des germes de
+$\Sigma^{*}(1)$ en les $z_\alpha$ ; b$_2$) si les $z_\alpha$ sont au nombre de $n$, il
+existe un unique $\tilde x \in \Sigma^{*}(n)$ dont ils sont les images par les $n$
+faces ; b$_3$) pour $1 \leq d \leq n$, les points de $\Sigma^{*}(d)$ au-dessus de $x$
+correspondent aux parties à $d$ éléments de $\{z_\alpha\}$, et le germe de
+$\Sigma^{*}(d)$ en un tel point a pour image l'intersection des $B_\alpha$
+correspondants.
+
+D'où une reformulation. Les inclusions cofinales d'ensembles totalement ordonnés
+non vides forment une catégorie équivalente à celle des ensembles totalement
+ordonnés $d$, éventuellement vides, par $d \mapsto d \amalg \{\omega\}$. Le foncteur
+$\Gamma(d) = \Sigma^{*}(d \amalg \{\omega\})$ est donc un espace semi-simplicial
+au-dessus de $\Gamma(\emptyset) = \Sigma$, et b$_1$ à b$_3$ disent qu'il provient
+d'une \emph{stratification cylindrique locale ordonnée} de $\Sigma$ : les strates de
+codimension 1 passant par $x$ sont totalement ordonnées, continûment en $x$, et
+$\Gamma(d)$ est l'espace des germes de strates de codimension $d+1$.
+
+Autre description : $\Gamma'(d)$, l'espace des suites de $d$ germes distincts de
+strates de codimension 1 en un point, est la puissance relative $d$-ième de $\Gamma_0
+= \Sigma^{*}(1)$ sur $\Sigma$ privée des diagonales, et $\Gamma'(d) \simeq
+\mathfrak{S}_d \times \Gamma(d)$. Un ordre total relatif est la donnée d'une partie
+ouverte et fermée $\Gamma_1$ de $\Gamma_0 \times_\Sigma \Gamma_0$ privé de la
+diagonale, telle que $\Gamma_1$ et son symétrique la partagent, et transitive :
+$(\Gamma_1 \times_\Sigma \Gamma_0) \cap (\Gamma_0 \times_\Sigma \Gamma_1)$ s'envoie
+par $\mathrm{pr}_{13}$ dans $\Gamma_1$.
+
+\pagerange{55}{63}
+\section*{La reprise (pages 55 à 63)}
+
+« Je m'aperçois finalement que j'ai pas mal bafouillé … Je
+\emph{reprends}. » Soit $\Sigma$ un ensemble ordonné muni d'une topologie séparée,
+$\Sigma(1)$ le graphe de son ordre.
+\begin{enumerate}
+\item[(a)] Le but $b = \mathrm{pr}_2 : \Sigma(1) \to \Sigma$ est propre et
+localement une immersion à collier. Alors la diagonale est ouverte et fermée
+dans $\Sigma(1)$, son complémentaire est $\Sigma^{*}(1)$, et $\Sigma(1)$ est fermé
+dans $\Sigma \times \Sigma$.
+\item[(b)] Pour tout $x$, l'ensemble fini $\Sigma_{\leq x}$ est totalement ordonné.
+Les chaînes de longueur $d$ de but $x$ correspondent donc aux parties à $d+1$
+éléments de $\Sigma_{\leq x}$, et la fibre de $\Sigma^{*}(d) \to \Sigma$ en $x$ à
+$\mathfrak{P}_d(\{1, …, N(x)\})$, $N(x) = \mathrm{card}\, \Sigma_{<x}$\footnote{La
+page écrit $N(x) = \mathrm{card}(\Sigma_{\leq x})$ ; pour que les chaînes strictes
+de longueur $d$ finissant en $x$ correspondent aux parties à $d$ éléments, il faut
+compter $\Sigma_{<x}$.}. Tout cela est purement ensembliste.
+\item[(c)] Pour tout $x$, les germes $B_\alpha$ de sous-espaces à collier
+correspondant aux $z_\alpha$ de but $x$ sont deux à deux distincts et mutuellement
+transverses.
+\end{enumerate}
+Les germes d'intersection des $B_\alpha$ correspondent alors aux points des
+$\Sigma^{*}(d)$ au-dessus de $x$ : $\Sigma$ est muni d'une stratification
+cylindrique locale ordonnée, $\Sigma^{*}(1)$ étant l'espace des strates de
+codimension 1.
+
+\subsection*{Retrouver l'ordre}
+
+Inversement, partons de la stratification et de l'ordre relatif. Pour retrouver
+l'ordre de $\Sigma$, on se donne une application source $s : \Sigma^{*}(1) \to
+\Sigma$, injective sur chaque fibre du but et d'image ne rencontrant pas la
+diagonale — c'est-à-dire $(s, b) : \Sigma^{*}(1) \to \Sigma \times \Sigma$ injective,
+d'image disjointe de la diagonale —, et l'on demande qu'il existe $p_2 :
+\Sigma^{*}(2) \to \Sigma^{*}(1)$ avec $b \circ p_2 = s \circ b'$ et $s \circ p_2 = s
+\circ s'$ ; $p_2$ est alors unique, et l'on exige que le carré
+
+\begin{tikzcd}
+\Sigma^{*}(2) \arrow[r, hook, "b'"] \arrow[d, "p_2"'] & \Sigma^{*}(1) \arrow[d, "s"] \\
+\Sigma^{*}(1) \arrow[r, hook, "b"'] & \Sigma
+\end{tikzcd}
+
+soit cartésien, et que $s$ soit transverse à l'immersion à collier $b$.
+
+Posons $x \prec y$ s'il existe $u \in \Sigma^{*}(1)$ avec $s(u) = x$, $b(u) = y$.
+C'est transitif : pour $u : x \prec y$ et $v : y \prec z$, on a $b(u) = s(v)$, donc
+par le carré cartésien un unique $\delta \in \Sigma^{*}(2)$ avec $b'(\delta) = v$,
+$p_2(\delta) = u$, et $w = s'(\delta)$ vérifie $s(w) = s(p_2 \delta) = x$, $b(w) =
+b(b'\delta) = z$\footnote{La page écrit $b(s'(d)) = b(b'(d))$ : c'est l'identité
+simpliciale $b \circ s' = b \circ b'$ des deux faces qui conservent le dernier
+sommet.}. C'est irréflexif, puisque l'image de $(s, b)$ évite la diagonale. Donc
+$\prec$ est l'ordre strict d'un ordre sur $\Sigma$, dont $\Sigma^{*}(1)$ est le graphe
+strict et $\Sigma^{*}(2)$ l'espace des chaînes $x \prec y \prec z$, les faces étant
+$(x,y,z) \mapsto (x,y), (x,z), (y,z)$.
+
+\emph{Scholie (pages 60 à 62).} La situation est décrite par : 1°) un espace
+$\Sigma$ muni d'une stratification précylindrique, dont l'espace des strates de
+codimension 1 s'immerge par $b$, immersion propre à collier ; 2°) un ordre total
+relatif sur ces strates, donné par une partie fermée de $\Sigma^{*}(1) \times_\Sigma
+\Sigma^{*}(1)$ ; 3°) une application source $s$ telle que a) $(s, b)$ est injective
+et d'image disjointe de la diagonale, b) $s \circ s'$ se factorise par $(s, b)$ en un
+$p_2$ rendant le carré ci-dessus cartésien, avec $s$ transverse à $b$.
+
+Ce qui se redit, en termes d'espace ordonné : a) chaque $\Sigma_{<x}$ est totalement
+ordonné ; b) le but $b$ est une immersion propre, donc les $\Sigma_{<x}$ sont finis ;
+c) les germes en $x$ images des $(\Sigma^{*}(1), z_\alpha)$ forment une famille
+transverse de sous-espaces à collier ; d) $s$ est transverse à $b$. Puis trois cas :
+équisingulier ($s$ fibrante propre), non singulier ($\Sigma$ variété à bord de bord
+$b(\Sigma^{*}(1))$), et les deux à la fois ($s$ fibration propre à fibres des variétés
+à bord, le fibré des bords étant l'image de $s' : \Sigma^{*}(2) \to \Sigma^{*}(1)$).
+Une marge suggère que le troisième est conséquence des deux premiers.
+
+Les flèches principales forment l'hexagone
+
+\begin{tikzcd}[column sep=small]
+ & \Sigma^{*}(1) \arrow[r, hook, "b"] \arrow[dl, "s"'] & \Sigma & \\
+\Sigma & \Sigma^{*}(2) \arrow[u, hook, "s'"] \arrow[rr, hook, "b'"] \arrow[d, "p_2"'] & & \Sigma^{*}(1) \arrow[ul, hook, "b"'] \arrow[dl, "s"] \\
+ & \Sigma^{*}(1) \arrow[r, hook, "b"] \arrow[ul, "s"] & \Sigma &
+\end{tikzcd}
+
+aux deux carrés cartésiens, où $b, b', s'$ sont des immersions à collier propres et
+$s, p_2$ des fibrations propres. Ces fibrations ne sont pas surjectives : l'image de
+$s$ est l'ensemble des points non maximaux, celle de $p_2$ celui des $x<y$ avec $y$
+non maximal.
+
+\pagerange{64}{66}
+\section*{Récapitulation (paragraphe 12, pages 64 à 66)}
+
+Les données de déploiement sur un ensemble ordonné fini $I$ sont des espaces
+$\Sigma_i$, des espaces $\Sigma_{ij}$ ($i<j$), des applications $s_{ij} : \Sigma_{ij}
+\to \Sigma_i$ et $b_{ij} : \Sigma_{ij} \to \Sigma_j$, avec :
+\begin{enumerate}
+\item[a)] $b_{ij}$ est un plongement fermé, par lequel on identifie $\Sigma_{ij}$ à
+une partie de $\Sigma_j$ ;
+\item[b)] $\Sigma_{ik} \cap \Sigma_{jk} = \emptyset$ si $i, j<k$ sont incomparables ;
+\item[c)] pour $i<j<k$, on pose $\Sigma_{ijk} = \Sigma_{ik} \cap \Sigma_{jk} \subset
+\Sigma_k$, et l'on a $\Sigma_{ijk} = s_{jk}^{-1}(\Sigma_{ij})$ dans
+$\Sigma_{jk}$\footnote{La page écrit $b_{ij}^{-1}(\Sigma_{ij})$ ; dans $\Sigma_{jk}$,
+c'est l'image inverse par la fibration $s_{jk}$ vers $\Sigma_j$ que l'hexagone
+demande.} ;
+\item[d)] les $\Sigma_{ji} \hookrightarrow \Sigma_i$ sont à collier, et en $x \in
+\Sigma_i$ ceux qui contiennent $x$ — totalement ordonnés par b) — sont mutuellement
+transverses\footnote{La page écrit « les $\Sigma_j \hookrightarrow \Sigma_{ji}$ ».} ;
+\item[e)] $s_{ij}$ est transverse au système des $b_{ki}$.
+\end{enumerate}
+D'où l'hexagone de la page 64, semblable au précédent, pour $i<j<k$. Avec $\Sigma =
+\coprod \Sigma_i$ et $\Sigma^{*}(1) = \coprod_{i<j} \Sigma_{ij}$, les conditions a) à c)
+disent que $(s, b)$ est injective, d'image le graphe d'un ordre strict, que $b$ est
+une immersion propre, que $\varphi : \Sigma \to I$ est strictement croissante et
+injective sur chaque $\Sigma_{<x}$, lequel est totalement ordonné ; d) est la
+condition c) de la scholie. Cas équisingulier : les $s_{ij}$ fibrations propres ; non
+singulier : les $\Sigma_i$ variétés à bord, de bord la réunion des $\Sigma_{ji}$ ;
+les deux : $s_{ij}$ fibration propre à fibres des variétés à bord, le fibré des bords
+étant la réunion des $\Sigma_{ijk}$.
+
+\pagerange{66}{71}
+\section*{Une digression : catégories topologiques (paragraphe 13, pages 66 à 71)}
+
+Soit $\underline{\Sigma}$ une catégorie topologique — objets $\Sigma(0)$, flèches
+$\Sigma(1)$, source et but $s, b$, composition — dont la source est une fibration.
+Alors $\pi_0(\Sigma(0))$ est un ensemble préordonné, le graphe étant l'image de
+$\pi_0(\Sigma(1))$ dans $\pi_0(\Sigma(0)) \times \pi_0(\Sigma(0))$. La relation est
+réflexive par les identités, transitive parce que $\pi_0(\Sigma(2)) \to
+\pi_0(\Sigma(1)) \times_{\pi_0 \Sigma(0)} \pi_0(\Sigma(1))$ est surjective, par le
+lemme suivant appliqué à la source\footnote{La page écrit « grâce à l'hypothèse
+que $b$ est fibrant » ; l'hypothèse posée à la page 66, et celle dont le lemme a
+besoin pour $\Sigma(2) = \Sigma(1) \times_{b, \Sigma(0), s} \Sigma(1)$, porte sur
+$s$.}.
+
+\emph{Lemme (page 67).} Dans un carré cartésien d'espaces $X' = X \times_Y Y'$, avec
+$f : X \to Y$ une fibration, $\pi_0(X') \to \pi_0(X) \times_{\pi_0(Y)} \pi_0(Y')$ est
+surjective\footnote{Ici $\pi_0$ désigne les composantes connexes par arcs, et
+« fibration » une fibration de Hurewicz : on relève un chemin qui joint $f(x)$ à
+l'image de $y'$. Pour les composantes connexes, il faudrait supposer les espaces
+localement connexes par arcs.}.
+
+Le foncteur canonique $\underline{\Sigma} \to I = \pi_0(\Sigma(0))$, vers la
+catégorie discrète de l'ensemble préordonné, découpe $\Sigma(0) = \coprod \Sigma_i$ et
+$\Sigma(1) = \coprod_{i \leq j} \Sigma_{ij}$ ; il est universel parmi les foncteurs
+vers un ensemble préordonné. Supposons de plus :
+\begin{enumerate}
+\item[a)] le but $\Sigma(1) \to \Sigma(0)$ est une immersion propre, de sorte que
+l'identité $\delta : \Sigma(0) \to \Sigma(1)$ est un plongement ouvert et fermé et
+$\Sigma(1) \simeq \delta(\Sigma(0)) \amalg \Sigma^{*}(1)$ ;
+\item[b)] la restriction du but à $\Sigma^{*}(1)$ est une immersion d'images
+localement rares ;
+\item[c)] les composantes de $\Sigma(0)$ sont de dimension finie.
+\end{enumerate}
+Alors $\Sigma^{*}_{ii} = \Sigma_{ii} \cap \Sigma^{*}(1)$ est vide : fibré sur
+$\Sigma_i$, il serait de dimension au moins $\dim \Sigma_i$, et, d'image rare par une
+immersion, de dimension moindre. Donc $\Sigma_i \simeq \Sigma_{ii}$ : toute flèche
+entre deux objets d'une même composante est une identité\footnote{L'argument de
+dimension demande plus que la page ne dit : que la fibration soit localement
+triviale, pour que la dimension totale majore celle de la base, et que les $\Sigma_i$
+soient de dimension pure et à la manière des variétés, pour qu'une partie fermée
+rare soit de dimension strictement moindre. C'est le cas dans le cadre non singulier
+qui est celui du dossier ; on suppose ces hypothèses.}. Si de plus d) toute flèche
+inversible est une identité — par exemple si $\underline{\Sigma}$ vient d'un espace
+ordonné —, $I$ est \emph{ordonné} et $\Sigma \to I$ est strictement croissante.
+
+\emph{Conséquence (page 70).} Les déploiements équisinguliers de stratifications
+indexés par $I$, au sens de la récapitulation, équivalent aux données : (a) d'un
+espace ordonné $\Sigma$ satisfaisant aux conditions a), b), c) et au cas
+équisingulier de la scholie, dont les composantes connexes sont de dimension finie,
+tel qu'en posant $\tilde I = \pi_0(\Sigma)$, chaque $b_{ij} : \Sigma_{ij} \to
+\Sigma_j$, $i<j$ dans $\tilde I$, soit un plongement fermé ; (b) d'une application
+strictement croissante, non nécessairement surjective, $\tilde I \to I$. La condition
+b) de la récapitulation se démontre : un point de $\Sigma_{ik} \cap \Sigma_{jk}$
+donnerait deux éléments $< x$ au-dessus de $i$ et de $j$, comparables puisque
+$\Sigma_{<x}$ est totalement ordonné, donc $i$ et $j$ comparables.
+
+\emph{Remarque (page 71).} Deux contextes de « déploiement » ont produit de tels
+espaces ordonnés — $s$ fibration propre, $b$ immersion propre, deux points distincts
+d'une même composante incomparables. Pour une stratification par les $X_i$, $\Sigma =
+\coprod X_i$ et $\Sigma(1) = \coprod_{X_i \subset X_j} X_i$ : $s$ est étale, rien de
+spécial sur $b$. Pour la théorie présente, $b$ est à collier et rien de spécial sur
+$s$. Dans les deux cas, passer à $\tilde I = \pi_0(\Sigma)$ revient à remplacer les
+strates par leurs composantes connexes\footnote{Le premier contexte est, en termes
+actuels, la catégorie des chemins de sortie d'une stratification, dont l'ensemble
+des composantes est l'ensemble ordonné des strates (MacPherson ; Treumann 2009 ;
+Lurie, \emph{Higher Algebra}, annexe A). Le dossier précède ces travaux.}.
+
+\pagerange{72}{75}
+\section*{Construction heuristique des $\Sigma_i$, $\Sigma_{ij}$ (paragraphe 14, pages 72 à 75)}
+
+À préciser « considérablement » en topologie modérée. Pour $\Sigma_i$, on ôte de
+$X_i$ l'intérieur d'un voisinage tubulaire standard $T_{<i}$ de $\bigcup_{k<i} X_k$ :
+$\Sigma_i = X_i \smallsetminus \overset{\circ}{T}_{<i}$. Pour $\Sigma_{ij}$, on prend un
+voisinage tubulaire $T'_{ij}$ de $\Sigma_i$ dans $X_j$, petit devant $T_{<i}$, son bord
+$\dot T'_{ij}$, la trace $S \dot T'_{ij}$ des $X_k$, $i<k<j$ — vide si $j$ est
+successeur immédiat de $i$ —, et l'on ôte un voisinage tubulaire de cette partie
+singulière : $\Sigma_{ij} = \dot T'_{ij} \smallsetminus \overset{\circ}{T}(S \dot
+T'_{ij}) \subset \Sigma_j$.
+
+Pour que les $\Sigma_{ik}$ et $\Sigma_{jk}$ soient en position correcte dans
+$\Sigma_k$, on fixe une fonction dimension strictement croissante $\delta : I \to
+\mathbb{N}$, on pose $X_{(d)} = \bigcup_{\delta(i) \leq d} X_i$, et l'on construit une
+filtration décroissante par des fermés $X = X^{(0)} \supset X^{(1)} \supset \cdots
+\supset X^{(N+1)} = \emptyset$ : $T_d$ voisinage tubulaire de $X_{(d)}$, petit devant
+les précédents, et $X^{(d)} = X \smallsetminus \bigcup_{\alpha < d}
+\overset{\circ}{T}_\alpha$. On pose alors, pour $\delta(i) = d$,
+\[
+\Sigma_i = X_i \cap X^{(d)} = X_i \smallsetminus \bigcup_{j<i} X_i \cap
+\overset{\circ}{T}_j, \qquad \Sigma_{ij} = \dot T_i \cap \Sigma_j ,
+\]
+\[
+\Sigma_{i_0 … i_n} = \dot T_{i_0} \cap \cdots \cap \dot T_{i_{n-1}} \cap
+\Sigma_{i_n} = \Sigma_{i_0 i_n} \cap \cdots \cap \Sigma_{i_{n-1} i_n}.
+\]
+La page écrit ici $X_i \cap X_{(d)}$\footnote{Pour $X_i \cap X^{(d)}$ ; elle numérote
+aussi (49) deux formules différentes.}.
+Les morphismes de transition pour les inclusions cofinales de drapeaux sont
+évidents ; les autres dépendent d'un choix de rétractions des $T_i^{(d)}$ sur
+$X_i^{(d)} = \Sigma_i$, et pour que les $\Sigma_{ij} \to \Sigma_i$ soient des
+fibrations il faut des hypothèses d'équisingularité et la locale trivialité de ces
+rétractions.
+
+\pagerange{76}{83}
+\section*{Provoisinages (paragraphe 15, pages 76 à 83)}
+
+Le point de vue change : au lieu de choisir un voisinage, on prend le système de
+tous. Soit $\mathcal{V}_i$ le \emph{provoisinage} tubulaire de la strate ouverte
+$X^{*}_i$ dans $X$ — le système projectif de ses voisinages, vu comme pro-espace —,
+et $\mathcal{V}_{ij} = \mathcal{V}_i \cap \mathcal{V}_j$\footnote{« Provoisinage »
+est lu de l'interligne « pro » des pages 76 et 79. La notion de pro-espace est
+celle de la théorie de la forme et de l'homotopie propre (Artin--Mazur 1969 ;
+Edwards--Hastings 1976) ; l'« entrelacs homotopique » de Quinn (1988) en est une
+version.}. L'inclusion $X^{*}_i \to \mathcal{V}_i$ est supposée une équivalence
+d'homotopie de pro-espaces\footnote{Ce n'est pas vrai pour une stratification
+quelconque ; c'est vrai si les strates ouvertes sont des rétractes par déformation
+de voisinages, par exemple sous l'hypothèse conique du début du dossier. La page
+96 met elle-même un « ? à vérifier ! » en face d'un énoncé de ce type.}, et
+$\mathcal{V}_{ij}$ est vide si $i, j$ sont incomparables dès que $X$ est
+héréditairement normal, par exemple métrisable : $X^{*}_i$ et $X^{*}_j$ sont alors
+séparés, aucune n'adhérant à l'autre, donc à voisinages disjoints\footnote{La page
+dit « si les ouverts de $X$ sont normaux ». La justification : $X^{*}_i \cap
+\overline{X^{*}_j} \subset X^{*}_i \cap X_j$, vide si $i \not\leq j$.}. L'espace
+s'obtient par recollement :
+\[
+X = \varinjlim \bigl(\mathcal{V}_i, \mathcal{V}_{ij} \rightrightarrows\bigr) =
+\varinjlim_{d \in \mathrm{Drap}(I)} \mathcal{V}_d, \qquad \mathcal{V}_{i_0 … i_n}
+= \mathcal{V}_{i_0} \cap \cdots \cap \mathcal{V}_{i_n},
+\]
+limite prise niveau par niveau sur des voisinages ouverts recouvrant $X$.
+
+Relativement à une partie localement fermée $Z$ : $\mathcal{V}^Z_d = \mathcal{V}_d
+\cap Z$, et $\mathcal{V}^Z_{i_n} \to \mathcal{V}_{i_n}$ est une équivalence d'homotopie
+si $Z$ contient $X^{*}_{i_n}$. Pour une partie $J$ de $I$, $X^{*}_J = \bigcup_{j \in J}
+X^{*}_j$ ; c'est un fermé si $J$ est un \emph{idéal} (stable vers le bas), et une
+partie localement fermée si $J$ est une \emph{bande} (convexe : $i<k<j$, $i,j \in J$
+impliquent $k \in J$), car $X^{*}_J = X_{\tilde J} \smallsetminus X_{J'}$ où $\tilde J$
+est l'idéal engendré et $J' = \tilde J \smallsetminus J$\footnote{Ici $\tilde J$ est
+l'idéal engendré ; à partir de la page 84, la page note $\bar J$ l'idéal engendré
+et $\tilde J$ le filtre engendré. On suit chaque fois sa notation, en le
+rappelant.}. Les $X_i \cap X^{*}_J$ stratifient $X^{*}_J$, et
+\[
+X^{*}_J \simeq \varinjlim_{d \in \mathrm{Drap}(J)} \mathcal{V}^{J}_d .
+\]
+
+Pour deux bandes $J, L$, on s'intéresse à $\mathcal{V}^L_J = \mathcal{V}_J \cap X^{*}_L$,
+« provoisinage de second ordre ». Il ne change pas si l'on remplace $J$ par ses
+éléments qui minorent un élément de $L$, et $L$ par ses éléments qui majorent un
+élément de $J$ ; on se ramène ainsi au cas $J \prec L$ : tout élément de $J$ est
+majoré par un élément de $L$, et tout élément de $L$ majore un élément de $J$.
+
+\emph{Lemme (page 81).} Pour deux parties $J, L$ de $I$, sont équivalents : a) $J$ et
+$L$ sont des bandes et $J \prec L$ ; b) il existe une bande $I'$ dont $J$ est un idéal
+et $L$ un filtre, chaque élément de $I'$ majorant un élément de $J$ et minorant un
+élément de $L$. La bande $I'$ est alors unique : $I' = \{ i \mid \exists j \in J, l \in
+L,\ j \leq i \leq l \}$, la plus petite bande contenant $J \cup L$\footnote{La fin de
+la démonstration dit « un élément de $I$ » pour « de $J$ ».}.
+
+Alors $\mathcal{V}^L_J$ se calcule dans $X' = X^{*}_{I'}$, où $X'_J$ est fermé et
+$X'_L$ ouvert :
+\[
+\mathcal{V}^L_J = \bigcup_{\substack{j \in J,\ l \in L\\ j \leq l}}
+\mathcal{V}^{X'}_{j,l} = \varinjlim_{d \in \mathrm{Drap}^L_J(I)} \mathcal{V}^{X'}_d ,
+\]
+où $\mathrm{Drap}^L_J(I)$ est l'ensemble des drapeaux de $J \cup L$ commençant dans $J$
+et finissant dans $L$ ; les intersections deux à deux sont vides sauf si la réunion
+des indices est un drapeau, d'au plus quatre termes. Pour un faisceau $F$ sur
+$\mathcal{V}^L_J$, d'où une suite spectrale
+\[
+E_2^{pq} = H^p\bigl(\mathrm{Drap}^L_J(I),\ d \mapsto H^q(\mathcal{V}^{X'}_d, F)\bigr)
+\Longrightarrow H^{p+q}(\mathcal{V}^L_J, F).
+\]
+Les $H^p$ sont ceux de l'ensemble ordonné à coefficients dans le
+foncteur\footnote{C'est-à-dire les foncteurs dérivés de la limite. C'est la suite
+spectrale d'un recouvrement ouvert indexé par un ensemble ordonné, stable par
+intersection (l'intersection de deux membres est le membre de la réunion des
+drapeaux, ou vide), à la manière de Mayer--Vietoris.}.
+
+\pagerange{84}{87}
+\section*{$\Sigma_J$ et $\Sigma_{J,L}$ (paragraphe 16, pages 84 à 87)}
+
+On revient aux strates déployées, désormais indexées par des bandes. Notons $\bar
+J$ l'idéal engendré par $J$ et $\tilde J$ le filtre engendré. Pour une bande $J$,
+\[
+\Sigma_J = X^{*}_J \smallsetminus X^{*}_J \cap \bigcup_{i \in \bar J \smallsetminus J}
+\overset{\circ}{T}_i ,
+\]
+de sorte que $\Sigma_\emptyset = \emptyset$, $\Sigma_{\{j\}} = \Sigma_j$, $\Sigma_I =
+X$, et $\Sigma_J = X_J$ si $J$ est un idéal. « Sauf erreur »,
+\[
+\Sigma_J \simeq \varinjlim_{d \in \mathrm{Drap}(J)} \Sigma_d, \qquad \Sigma_J
+\hookrightarrow X^{*}_J \ \text{équivalence d'homotopie},
+\]
+et le bord $\dot \Sigma_J$ est la réunion des images des $\Sigma_{ij} \to \Sigma_j$,
+$i<j$ dans $J$, limite des $\Sigma_d$ pour $d$ d'au moins deux termes.
+
+Pour deux bandes disjointes $J \prec L$, avec $I' = \tilde J \cap \bar L$ et $J' = I'
+\smallsetminus L$, on a des idéaux $J \subset J' \subset I'$ et des inclusions $\Sigma_J
+\subset \Sigma_{J'} \subset \Sigma_{I'}$. Le tube de $\Sigma_J$ dans $\Sigma_{I'}$
+est $\Sigma_{I'} \cap \bigcup_{j \in J} T_j$, et l'on pose
+\[
+\Sigma_{J,L} = \dot T_{\Sigma_J, \Sigma_{I'}} \cap \Sigma_L \ \simeq\
+\varinjlim \Sigma_d ,
+\]
+la limite étant prise sur les drapeaux de $J \cup L$ de premier terme dans $J$ et de
+dernier dans $L$ (« sauf erreur ») ; chacun s'écrit uniquement $(j_1 … j_p\, l_1
+… l_q)$, $p, q \geq 1$, d'où l'inclusion $\Sigma_{J,L} \hookrightarrow \Sigma_L$
+et la projection $\Sigma_{J,L} \to \Sigma_J$, induites par $\Sigma_{j_1 … j_p l_1
+… l_q} \hookrightarrow \Sigma_{l_1 … l_q}$ et $\Sigma_{j_1 … j_p l_1
+… l_q} \to \Sigma_{j_1 … j_p}$.
+
+\emph{Remarque (page 87).} Les $\Sigma_{J,L}$ et les inclusions $\Sigma_{J,L} \to
+\Sigma_L$ ont un sens, dans une catégorie isotopique, indépendamment de tout choix
+de rétractions coniques locales autour des strates, du moins en topologie modérée ;
+la projection $\Sigma_{J,L} \to \Sigma_J$, elle, utilise ces rétractions. La phrase
+suivante s'arrête sur « il est plus commode, » ; la page 88 ouvre un nouveau
+paragraphe.
+
+\pagerange{88}{98}
+\section*{Récapitulation sur les provoisinages (paragraphe 17, pages 88 à 98)}
+
+\subsection*{Topologie inférieure, bandes, domination}
+
+Les parties fermées de $I$ — stables vers le bas — sont les fermés de la topologie
+\emph{inférieure}, celle d'Alexandrov des pages 2 à 4 : l'adhérence de $A$ est $\bar
+A = \{ i \mid \exists j \in A,\ i \leq j \}$, et le plus petit ouvert contenant $B$ est
+$\tilde B = \{ i \mid \exists j \in B,\ i \geq j \}$. Une partie est localement fermée
+si et seulement si $J = \bar J \cap \tilde J$, si et seulement si c'est une bande.
+Toute intersection de bandes est une bande, et la bande engendrée par $J$ est $B(J) =
+\bar J \cap \tilde J$.
+
+La \emph{domination} $J \prec K$, définie par $J \subset \bar K$ et $K \subset \tilde J$,
+est un préordre sur les parties de $I$ ; $J \sim K$ si et seulement si $B(J) = B(K)$, et
+l'ensemble ordonné quotient est celui des bandes, ordonné par domination. Pour deux
+bandes $J \prec K$, la bande engendrée par $J \cup K$ est $I' = \tilde J \cap \bar
+K$ ; $J$ y est fermé et codense ($I' \subset \tilde J$), $K$ ouvert et dense ($I'
+\subset \bar K$)\footnote{La page écrit $I' = \bar K$ ; c'est une inclusion, la
+densité de $K$ dans $I'$.}, et réciproquement.
+
+\subsection*{Stratifications ordinaires}
+
+Une \emph{stratification ordinaire} de type $I$ est une application $i \mapsto X_i$
+satisfaisant (Strat 1) les $X_i$ sont fermés et forment un recouvrement localement
+fini ; (Strat 2) $i \mapsto X_i$ est croissante ; (Strat 3) $X_i \cap X_j =
+\bigcup_{k \leq i,\, k \leq j} X_k$\footnote{La page annonce « les deux conditions » et
+en énumère trois.}. Pour un drapeau $d$, posons $X_d = X_{i_0}$ : on obtient un
+espace semi-simplicial au-dessus de $X$, résolution de $X$, d'où pour un faisceau
+abélien $F$
+\[
+E_2^{pq} = H^p\bigl(I,\ i \mapsto H^q(X_i, F)\bigr) = H^p_{ss}\bigl(\mathrm{Drap}(I),\
+d \mapsto H^q(X_d, F)\bigr) \Longrightarrow H^{p+q}(X, F),
+\]
+suite spectrale d'un recouvrement fermé localement fini\footnote{Au sens de
+Godement, \emph{Topologie algébrique et théorie des faisceaux}, II.5.2 ; la page ne
+le cite pas.}, « souvent assez peu pratique » parce que les $X_i$ sont compliqués.
+
+Les strates ouvertes $X^{*}_i = X_i \smallsetminus \bigcup_{j<i} X_j$ non vides forment
+une partition de $X$. Axiomes supplémentaires, à n'invoquer que par mention
+expresse : (Strat 4) fidélité, $X^{*}_i \neq \emptyset$ — non stable par restriction à
+un ouvert ; (Strat 4 bis) les $X^{*}_i$ sont connexes non vides ; (Strat 5) densité,
+$X_i = \overline{X^{*}_i}$, c'est-à-dire $X_j$ rare dans $X_i$ pour $j<i$ — stable
+par restriction à un ouvert\footnote{La ligne de (Strat 4 bis) finit sur « i.e. » et
+la suivante porte (Strat 5) ; on lit deux axiomes distincts.}. Moyennant la densité,
+la fidélité équivaut à $X_i \neq \emptyset$.
+
+On a $X_i = \bigcup_{j \leq i} X^{*}_j$. Si la stratification est fidèle, $X_i \subset
+X_j$, $X^{*}_i \subset X_j$ et $i \leq j$ sont équivalents : $I$ s'identifie à une
+famille de parties de $X$, et une stratification fidèle équivaut à une famille
+localement finie de fermés non vides, recouvrant $X$, satisfaisant (Strat 3), dont
+aucun membre n'est réunion des membres strictement plus petits\footnote{Les pages
+92 et 93 sont interverties dans la reliure : la page 91 se poursuit par la page 93,
+puis par la page 92.}.
+
+Pour $J \subset I$, $X^{*}_J = \bigcup_{j \in J} X^{*}_j$ et $X_J = \bigcup_{j \in J}
+X_j = X^{*}_{\bar J}$. L'application $J \mapsto X^{*}_J$ commute aux réunions et aux
+intersections quelconques. On a $X^{*}_J = X^{*}_{\bar J} \smallsetminus X^{*}_{\bar J
+\smallsetminus J}$ ; si $J$ est une bande, $\bar J \smallsetminus J$ est fermé et $X^{*}_J$
+localement fermé ; sous la densité, $\overline{X^{*}_J} = X_J = X^{*}_J \amalg
+X^{*}_{\bar J \smallsetminus J}$. Si $L$ est ouvert, $X^{*}_L$ est le complémentaire de
+$X^{*}_{I \smallsetminus L}$, donc ouvert. Sous densité et fidélité, les réciproques
+valent : $X^{*}_J$ est fermé si et seulement si $J$ est fermé, $X^{*}_L$ ouvert si et
+seulement si $L$ l'est, $X^{*}_J$ localement fermé si et seulement si $J$ est une bande.
+
+\subsection*{Les provoisinages, définitivement}
+
+Soit $\mathcal{V}_i = \mathcal{V}(X^{*}_i, X)$ le pro-espace des voisinages de
+$X^{*}_i$. Alors
+\[
+\mathcal{V}_i \cap X^{*}_j \neq \emptyset \iff X^{*}_i \cap \overline{X^{*}_j} \neq
+\emptyset \Longrightarrow X^{*}_i \cap X_j \neq \emptyset \Longrightarrow i \leq j ,
+\]
+la première implication étant une équivalence sous la densité, la seconde sous la
+fidélité ; pour une stratification dense et fidèle, $\mathcal{V}_i \cap X^{*}_j \neq
+\emptyset$ si et seulement si $i \leq j$. La relation n'est pas symétrique ; en
+revanche, si $X$ est héréditairement normal, $\mathcal{V}_i \cap \mathcal{V}_j \neq
+\emptyset$ implique que $i$ et $j$ sont comparables, avec réciproque sous la
+fidélité\footnote{« Non vide » s'entend du pro-espace : tout voisinage rencontre.
+$\mathcal{V}_i \cap X^{*}_j$ est non vide en ce sens si et seulement si $X^{*}_i$
+rencontre l'adhérence de $X^{*}_j$, sinon le complémentaire de cette adhérence est
+un voisinage qui l'évite.}.
+
+On pose $\mathcal{V}_{i_0 … i_n} = \mathcal{V}_{i_0} \cap \cdots \cap
+\mathcal{V}_{i_n}$ pour les drapeaux ; ce sont les « pièces de construction »
+élémentaires des types d'homotopie, par limites inductives finies si $I$ est fini.
+Pour $Z$ localement fermé contenant $X^{*}_{i_n}$, $\mathcal{V}^Z_{i_0 … i_n} =
+\mathcal{V}_{i_0 … i_n} \cap Z \to \mathcal{V}_{i_0 … i_n}$ « est » une
+équivalence d'homotopie — la marge porte « ? à vérifier ! ». Pour une bande $J$, et
+pour deux bandes $J, L$ :
+\[
+\mathcal{V}_J = \mathcal{V}(X^{*}_J, X) = \bigcup_{j \in J} \mathcal{V}_j =
+\varinjlim_{d \in \mathrm{Drap}(J)} \mathcal{V}_d , \qquad X^{*}_J \hookrightarrow
+\mathcal{V}^Z_J \hookrightarrow \mathcal{V}_J \ \ (Z \supset X_J),
+\]
+\[
+\mathcal{V}_{J,L} = \mathcal{V}_J \cap \mathcal{V}_L = \varinjlim_{\substack{d \in
+\mathrm{Drap}(J \cup L)\\ d \cap J \neq \emptyset,\ d \cap L \neq \emptyset}}
+\mathcal{V}_d \quad (J \prec L), \qquad \mathcal{V}^L_J = \mathcal{V}_J \cap X^{*}_L
+\hookrightarrow \mathcal{V}_{J,L} ,
+\]
+cette dernière inclusion étant une équivalence d'homotopie si $J \prec L$ sont des
+bandes. Dans le cas $J \prec L$, les drapeaux en jeu commencent dans $J$, finissent
+dans $L$, et leurs termes dans $J$ forment un segment initial, ceux dans $L$ un
+segment final. Une marge propose la notation $\mathcal{V}^{\flat}_{i_0 … i_n} =
+\mathcal{V}_{i_0} \cap \cdots \cap \mathcal{V}_{i_{n-1}} \cap X^{*}_{i_n}$.
+
+Enfin, pour une chaîne de bandes $J_0 \prec J_1 \prec \cdots \prec J_n$,
+\[
+\mathcal{V}_{J_0, …, J_n} = \mathcal{V}_{J_0} \cap \cdots \cap \mathcal{V}_{J_n} =
+\bigcup_{j_\alpha \in J_\alpha} \mathcal{V}_{j_0 … j_n} = \varinjlim_{\substack{d
+\in \mathrm{Drap}(J_0 \cup \cdots \cup J_n)\\ d \cap J_\alpha \neq \emptyset\ \forall
+\alpha}} \mathcal{V}_d .
+\]
+Le dossier s'arrête sur cette formule ; un bloc de calculs raturés au bas de la
+dernière page n'a pas pu être lu.
+
+\end{document}
