@@ -1,0 +1,496 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 136, batch 5 (pages 81-100).
+% Established from the facsimile archives/batches/136/batch-05.pdf (cover sheet
+% excluded; batch page 1 = archivists' page 81), per the skill
+% transcribe-grothendieck.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-03 — first pass, unchecked against the pages by a human.
+%
+% Pages 83, 85, 87, 89, 91, 92, 94, 96, 98 and 100 carry no writing of his
+% (typescripts by other hands, or blank) and are absent. Pages 81, 82, 84, 86,
+% 88, 90, 93, 95, 97 and 99 are his manuscript.
+%
+% Contents, in outline:
+%   Pages 81-86 — the bicomplex K^{..} attached to an immersion u : L -> Phi of
+%                 a flat k-Module: functoriality in u, the list a)-g) of its
+%                 structures (bigraded algebra, divided powers, differential,
+%                 K^{..} = Gamma^* Phi (x) Lambda^* Psi), the data (k, L, Phi, u)
+%                 and the homomorphisms between two such; the question of two
+%                 homomorphisms lambda, mu.
+%   Pages 88-90 — X a topos, k a Ring: the lemma on a « universal » mono
+%                 u_N : N -> \check N; the complex DR_pd^{**}(k,u); its
+%                 independence of the choice of S -> N (transitivity); the
+%                 « condition de De Rham » on a Ring k; algebras A^{**} in
+%                 DR_pd^{**}(X).
+%   Pages 93-99 — category of special De Rham algebras (with divided powers):
+%                 definition, the categories DRsp(X,k)_0, DRspfl, DRspufl; the
+%                 universal-flasque objects DR(Phi,T); the question whether
+%                 flasque + flat implies homotopic to 0, the projective topos P
+%                 and the Godement-type resolution u_n^*(K) = K_n = K(Delta_n).
+%
+% Notation fixed for the batch: \Phi, \Psi for his capital phi, psi; L for the
+% flat Module (on p. 81 the letter is drawn with a doubled stroke and looks like
+% a Z: it is the L of p. 84); K^{\cdot\cdot} for the bicomplex; DR_{pd} for his
+% De Rham « à puissances divisées »; \mathbb{DR} for his double-struck DR
+% (a category); \mathcal{DR} for his script DR (a sheaf); k\{T\} for the
+% divided-power polynomial algebra; \widehat{\Delta} for the topos of
+% simplicial sets. His « ½ » prefix (= semi-) is kept as written.
+%
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{136}
+\batch{5}
+\pages{81}{100}
+\foldertitle{Complexe de De Rham à puissance divisée [conférence de 1976 à l’IHÉS] : notes manuscrites (s.d.).}
+\dating{[à partir de 1975-1976]}
+\watermark{Édition de démonstration}
+
+\begin{document}
+
+\page{81}
+\note{la phrase commence sur la page précédente, hors de ce lot}
+est un isomorphisme \add{en cohomologie} (en bidegré $(i,j)$ avec $j\leq i$),
+tandis que la coh.\ du premier membre est nulle pour $j>i$.
+
+On peut l'exprimer comme un isomorphisme du \ill{} avec un certain \ill{} du
+second…
+
+\textbf{Fonctorialités.} a) en $k$, clair.
+
+b) \emph{En $u$} \struck{\ill{}}. Soit
+\[
+  u'\colon L\longrightarrow\Phi'
+\]
+une deuxième immersion\,; s'il existe un hom.\ $\lambda\colon\Phi\to\Phi'$
+rendant commutatif
+
+\begin{tikzcd}
+ & L \arrow[dl, "u"'] \arrow[dr, "{u'}"] & \\
+\Phi \arrow[rr, "\lambda"'] & & {\Phi'}
+\end{tikzcd}
+
+i.e.\ $\lambda u=u'$, on en conclut $\bar\lambda\colon K^{\cdot\cdot}_{u}\to
+K^{\cdot\cdot}_{u'}$ et $\bar\lambda_{h}\colon K^{\cdot\cdot}_{u,h}\to
+K^{\cdot\cdot}_{u',h}$, compatible avec les structures, qui est un isom.\ dans
+telle catégorie dérivée, et le reste après application de $\Gamma(X,-)$ ou de
+$f_{*}$.
+
+Supposons qu'on ait un autre, soit $\mu$, tel que $\mu u=u'$, donc, posant
+$\mu=\lambda+\Theta$, on trouve $\Theta u=0$
+\note{la page s'arrête ici}
+
+\page{82}
+$K^{\cdot\cdot}$ \quad Algèbre de $\mathrm{DR}$ à p.d.\ élémentaire
+
+a) Anneau bigradué, \struck{\ill{}} alterné pour \add{« deg.\ ext »}
+\marginal{$\surd$}
+
+b) \struck{\ill{}} à bidegré $\geq0$
+
+\quad Structure à p.d.\ sur l'idéal $\sum\limits_{i+j>0}K^{ij}$
+
+c) différentielle d'Anneau gradué (pour le grad.\ ext) en changeant pour le
+degré total, etc.\ comp.\ avec p.d.
+
+d) $d\colon K^{1,0}=\Phi\longrightarrow K^{11}=\Psi$ est un épi.
+
+e) Posant $k=K^{00}$, $K^{**}$ est l'algèbre \add{alternée à p.d.}\ libre
+engendrée par $\Phi$ et $\Psi$, i.e.\ $K^{**}\simeq\Gamma^{*}\Phi\otimes
+\bigwedge^{*}\Psi$ [Il en résulte que $K^{ij}=0$ si $j>i$]
+
+f) \struck{\uncertain{Mono-plat}} $\Phi$ et $\Psi$ sont $k$-plats
+
+(donc aussi $L=\operatorname{Ker}d=\mathcal{H}^{1\,0}(K^{\cdot\cdot})$)
+
+Il résulte déjà de ceci que
+\[
+  H^{*i}(K^{\cdot\cdot})=
+  \begin{cases}
+    \Gamma^{*}L & \text{si } i=0\\
+    0 & \text{si } i>0
+  \end{cases}
+\]
+donc que $K^{\cdot\cdot}$ est une résolution de $\Gamma^{*}L$. On va supposer
+le plus souvent
+
+g) $L$ est un $k$-Module \struck{inversible} \add{loc.\ libre} de rang $1$.
+
+(voire libre de rang $1$ et trivialisé…)
+
+\page{84}
+\struck{Soient $K^{\cdot\cdot}$ et $K'^{\cdot\cdot}$}
+
+Finalement, la donnée de $K^{\cdot\cdot}$ équivaut à celle de
+
+$\alpha$) $k$, Anneau commutatif sur $X$
+
+$\beta$) $L$, $k$-Module plat (voire inversible, voire $k$ lui-même…)
+
+$\gamma$) Une immersion de $L$ dans un $k$-module $\Phi$, $u\colon L\to\Phi$.
+
+Soit de même $K'^{\cdot\cdot}$ défini par $(k',L',\Phi',u')$. La donnée d'un
+hom.\ $\lambda$ de $K^{\cdot\cdot}$ dans $K'^{\cdot\cdot}$, compatible avec les
+structures, équivaut à la donnée d'un système d'hom.
+\[
+  k\xrightarrow{\ \lambda_{0}\ }k'\qquad\text{hom.\ d'Anneaux}
+\]
+\struck{$K^{\cdot\cdot}\to K'^{\cdot\cdot}$}
+\[
+  \Phi\xrightarrow{\ \lambda_{\Phi}\ }\Phi'
+\]
+hom.\ $\lambda_{0}$-½linéaire
+avec $\lambda_{\Phi}(u(L))\subset u'(L')$, \struck{\ill{}} donc
+$\lambda_{\Phi}$ induit un hom.\ ($\lambda_{0}$-½linéaire)
+\note{« ½linéaire » : semi-linéaire, au-dessus de $\lambda_{0}$}
+
+\begin{tikzcd}
+L \arrow[r, "\lambda_{L}"] \arrow[d] & {L'} \arrow[d] \\
+\Phi \arrow[r] & {\Phi'}
+\end{tikzcd}
+
+\note{un premier tracé du même carré, à gauche, est biffé}
+
+Dans le cas $L\simeq k$, $L'\simeq k'$ donnés, on peut oublier $L,L'$ et
+retenir $\Phi,\Phi'$ avec sections marquées, et la condition sur
+$\lambda_{\Phi}$
+
+\page{86}
+devient donc de transformer section marquée en section marquée.
+
+Supposons qu'on ait deux hom.\ $\lambda,\mu$, correspondant\,: un
+$k\xrightarrow{\lambda_{0}=\mu_{0}}k'$ et deux hom.
+\[
+  \Phi\overset{\lambda_{\Phi},\,\mu_{\Phi}}{\rightrightarrows}\Phi'
+\]
+(ayant même effet sur la section marquée). Que peut-on dire des hom.\
+$\lambda,\mu$ de $K^{\cdot\cdot}$ dans $K'^{\cdot\cdot}$\,?
+
+\page{88}
+$X$, topos
+
+$k$ Anneau sur $X$
+
+$k\overset{u}{\hookrightarrow}\Phi$ mono dans $k$-Modules, avec
+\[
+  \begin{cases}
+    \text{(a)}\ \Psi=\operatorname{Coker}u\ \ k\text{-plat}\\
+    \text{(b)}\ \forall\ k\text{-modules } N, M,\ \text{et } i>0,\\
+    \qquad\Gamma^{i}(N\otimes_{k}\Phi)\otimes M\ \text{est flasque}
+  \end{cases}
+\]
+
+\textbf{Lemme.} $\forall$ $k$-module $N$, $\exists$ \uncertain{homom.}\
+$N\xrightarrow{u_{N}}\check N$, qui est un $k$-mono « universel » (vérifiant
+mêmes \uncertain{propriétés}\ \ill{}) \struck{\ill{}}\ \uncertain{satisfaisant}\
+\struck{$N$}\,: (a) \ill{} \uncertain{plat} $\Rightarrow$
+$\operatorname{Coker}u_{N}$ plat, et (b$'$) $\forall i>0$, et $k$-modules
+\struck{$N$}, $M$
+\[
+  \Gamma^{i}_{k}\bigl(\check N\,\text{\struck{$\otimes_{k}\Phi$}}\bigr)\otimes_{k}M
+  \quad\text{flasque}
+\]
+On prend $\check N=\Phi\otimes_{k}N$, $u_{N}=u\otimes\mathrm{id}_{N}$, donc (a)
+résulte de (a), et (b$'$) de (b).
+
+$\mathcal{DR}^{**}_{pd}($\struck{\ill{}}\,$k,u)=\Gamma^{*}(\Phi)\otimes_{k}\bigwedge^{*}\Psi$
+Algèbre bigraduée (degré complet $+$ alternée pour deg.\ ext), augm.\ cat.\
+degré total) (différentielle à p.d.\ sur idéal des bi-degrés $>0$…) ---
+résolution de $k\{T\}$ (où deg ext $T=0$, deg tot $T=1$)
+\note{lecture des indices de degré incertaine}
+
+\[
+  \mathrm{DR}^{**}_{pd}(k,u)=\Gamma\bigl(X,\mathcal{DR}^{**}_{pd}(k,u)\bigr).
+\]
+
+Soit $\mathbb{DR}^{**}$ la cat.\ des \add{anneaux} bigradués (à deg
+$\geq0$) \add{alternés, diff.\ à p.d.}\ \struck{anticommutatifs, engendrés
+par bidegré $(1,0)$}, \add{avec} \struck{\ill{}} \add{\uncertain{élément}\ de
+degré $(1,0)$} \ill{}…\ On a défini un système transitif d'isom.\ dans
+$\mathbb{DR}^{**}$ entre les $\mathrm{DR}^{**}_{pd}(k,u)$, pour $k$ fixé et
+$u$ variable.
+
+N.B.\ hom.\ pour \ill{}
+
+\begin{tikzcd}[column sep=small, row sep=small]
+ & \Phi \arrow[d, "\lambda"] \\
+k \arrow[ur, "u"] \arrow[r, "{u'}"'] & {\Phi'}
+\end{tikzcd}
+
+d'où $\lambda^{**}\colon\mathrm{DR}^{**}_{pd}(k,u)\to\mathrm{DR}^{**}_{pd}(k,u')$,
+donc $\lambda^{**}$ est un iso.\ dans $\mathbb{DR}^{**}$
+
+\note{il s'agit d'un hom.\ $\lambda$ quelconque, non de l'iso.\ donné par le lemme\,; cf.\ ce qui suit}
+
+\begin{tikzcd}[column sep=small, row sep=small]
+ & {\Phi'} \arrow[dr, hook] & & \\
+k \arrow[ur, hook, "u"] \arrow[dr, hook, "{u'}"'] & & S \arrow[r, hook] & N \\
+ & \Phi \arrow[ur, hook] & &
+\end{tikzcd}
+
+($S=\Phi\amalg_{k}\Phi'$, et $S\hookrightarrow N$ donné par le lemme), d'où
+$\mathrm{DR}(u)\xrightarrow{\ \sim\ }\mathrm{DR}(N)\xleftarrow{\ \sim\ }\mathrm{DR}(u')$,
+d'où $\mathrm{DR}(u)\simeq\mathrm{DR}(u')$ dans $\mathbb{DR}^{**}$
+
+indépendant du choix de $S\hookrightarrow N$ avec $N$ comme \ill{} dans le
+lemme\,:
+
+\begin{tikzcd}[column sep=small, row sep=small]
+ & N \arrow[dr, hook] & & \\
+S \arrow[ur, hook] \arrow[dr, hook] & & T \arrow[r, hook] & {N''} \\
+ & {N'} \arrow[ur, hook] & &
+\end{tikzcd}
+
+($T=N\amalg_{S}N'$, $T\hookrightarrow N''$ donné par le lemme), d'où
+
+\begin{tikzcd}[column sep=small, row sep=small]
+\mathrm{DR}(u) \arrow[dr] & & \mathrm{DR}(N) \arrow[dr, "\sim"] & \\
+ & \mathrm{DR}(S) \arrow[ur] \arrow[dr] & & \mathrm{DR}(N'') \\
+\mathrm{DR}(u') \arrow[ur] & & \mathrm{DR}(N') \arrow[ur, "\sim"'] &
+\end{tikzcd}
+
+Transitivité évidente par diagramme
+
+\page{90}
+\drawing{à gauche, un schéma à traits sans flèches\,: $k$ relié par $u$, $u'$, $u''$ à $\Phi$, $\Phi'$ (écrit deux fois, un tracé biffé), $\Phi''$\,; $\Phi,\Phi'$ vers $N$, $\Phi',\Phi''$ vers $N'$, puis $N$ et $N'$ vers $N''$}
+
+d'où
+
+\begin{tikzcd}[column sep=small, row sep=small]
+ & \Phi \arrow[dr] & \\
+k \arrow[ur] \arrow[r] \arrow[dr] & {\Phi'} \arrow[r] & {N''} \\
+ & {\Phi''} \arrow[ur] &
+\end{tikzcd}
+
+\[
+  \begin{aligned}
+    &\mathrm{DR}(\Phi)\ \cdots\\
+    &\mathrm{DR}(\Phi'')\xrightarrow{\ \simeq\ }\mathrm{DR}(N'')\\
+    &\mathrm{DR}(\Phi'')\nearrow\simeq
+  \end{aligned}
+\]
+\note{les trois flèches vers $\mathrm{DR}(N'')$ sont esquissées\,; la deuxième ligne porte sans doute $\mathrm{DR}(\Phi')$, que la page écrit comme $\Phi''$}
+
+Argument analogue pour $f_{*}\bigl(\mathcal{DR}^{**}_{pd}(k,u)\bigr)$, où
+$f\colon X\to Y$ morphisme de topos.
+
+\emph{Conditions de De Rham} \emph{sur Anneau $k$}\,: la condition
+d'existence d'un $u\colon k\to\Phi$ tel que…
+
+Si $k$ satisfait condition de De Rham, de même tt $k$-Algèbre. Donc le plus
+beau, c'est que $\mathbb{Z}_{X}$ y satisfasse\,! C'est vrai pour
+
+\quad a) le topos SS $\widehat{\Delta}$
+
+\quad b) le topos défini par un espace topologique \uncertain{paracompact}.
+
+\emph{Conjecture.} Est-ce vrai pour $\widehat{\Delta}^{\circ}$ (topos des
+\uncertain{ens.}\ cosimpliciaux)\,? \emph{Non}
+\note{« Non » souligné trois fois, sans doute ajouté après coup}
+
+Soit $A^{**}\in\operatorname{Ob}\mathbb{DR}^{**}_{pd}(X)$ une Algèbre bigr.\
+\uncertain{donc} à degrés positifs, alternée pour le degré ext, diff.\ à p.\
+div.\ …\ Supposons que $A^{00}=k$ satisfasse la condition de De Rham, soit
+$u\colon k\to\Phi$, d'où $\mathcal{DR}^{**}_{pd}(k,u)$. Considérons alors
+\[
+  \overline{A^{**}}=\mathcal{DR}^{**}_{pd}(A^{**})
+  \overset{\mathrm{déf}}{=}\mathcal{DR}^{**}_{pd}(k,u)\otimes_{k\{T\}}A^{**},
+\]
+l'augmentation $k\{T\}\to\mathcal{DR}^{**}_{pd}(k,u)$ (qui est un
+quasi-iso.\ \uncertain{universel}) définit un hom.
+\[
+  A^{**}\longrightarrow\overline{A^{**}}
+\]
+qui est un quasi-iso.\ \add{\uncertain{Ensuite}} \struck{\ill{}}
+\note{la phrase s'arrête au bas de la page\,; un mot souligné en fin de ligne, peut-être « Ensuite » écrit sur un mot biffé}
+
+\page{93}
+\section{Cat.\ des Alg.\ de De Rham spéciales}
+\note{titre de sa main, encadré en haut à droite de la page}
+
+\struck{(à p.\ div.\ \ill{})}
+
+\emph{Structure De Rham} (à p.d.\ -- sous-entendu)\,:
+
+\quad Anneau bigradué [à degrés -- total et ext -- $\geq0$] alterné pour degré
+ext
+\[
+  A^{ij}\neq0\ \text{\struck{$\Leftarrow$}}\Rightarrow 0\leq j\leq i
+\]
+\quad degré complémentaire $=i-j\geq0$
+
+différentiel [différentielle de bidegré $0,1$\,; c'est une diff.\ pour le
+degré ext\,:
+\[
+  d(xy)=(dx)y+(-1)^{\deg\mathrm{ext}\,x}x\,dy\ ]
+\]
+à p.\ div.\ sur l'idéal
+\[
+  \sum_{i+j>0}A^{ij}=A^{+}
+\]
+[p.d.\ \struck{\ill{}} compatible avec 2 grad.\ ($\gamma^{d}\colon A^{ij}\to
+A^{di,dj}$) et la différentielle ($d\,x^{(i)}=x^{(i-1)}dx$)]
+
+élément marqué $T\in Z^{10}(A^{**})\ \bigl(\xrightarrow{\ \simeq\ }H^{10}(A^{**})\bigr)$]
+
+[Cohomologie\,: $H^{*i}(A^{**})\simeq[h^{i}\otimes_{k}k\{T\},0]$, $k=A^{00}$]
+\note{lecture de cette ligne incertaine}
+
+Structure de De Rham \emph{spéciale}\,:
+\[
+  \begin{cases}
+    k\{T\}\xrightarrow{\ \sim\ }H^{*0}(A^{**})\\
+    H^{*i}(A^{**})=0\quad(i>0)\\
+    \text{les } A^{ij}\text{ sont $k$-plats}
+  \end{cases}
+\]
+[NB c'est utile pour la stabilité par $\otimes_{k}k'$]
+\note{la condition $H^{*i}=0$ est écrite sans précision sur $i$\,; « $(i>0)$ » est notre lecture du contexte}
+
+\marginal{\struck{\ill{}} Univ.\ flasque\,: $\to$ flasques. \struck{\ill{}}}
+
+[Structure de De Rham flasque\,: les $A^{ij}$ ($1\leq i$) flasques.]
+\note{ligne ajoutée en interligne\,; lecture incertaine}
+
+On parle de $k$-structure de De Rham si $k=A^{00}$ est donné.
+
+\struck{\ill{}} $\mathfrak{X}$ topos. \struck{\ill{}}
+
+$\mathbb{DR}\mathrm{sp}(\mathfrak{X},k)_{0}$\,: structures de De Rham
+spéciales sur $\mathfrak{X}$ -- avec comme flèches celles qui respectent
+\struck{toutes} les structures (y compris les structures)
+
+$\mathbb{DR}\mathrm{spfl}(\mathfrak{X},k)_{0}$\,: « \quad spéciales et flasques
+
+$\mathbb{DR}\mathrm{spufl}(\mathfrak{X},k)_{0}$\,: « \quad --- \quad univ.\ flasques
+
+$\mathbb{DR}\mathrm{sp}(\mathfrak{X},k)$, $\mathbb{DR}\mathrm{spfl}(\mathfrak{X},k)$,
+$\mathbb{DR}\mathrm{spufl}(\mathfrak{X},k)$ \add{\uncertain{de fractions}}\,:
+catégories \uncertain{déduites} en rendant inversibles les flèches
+\uncertain{qui sont} des quasi-isom.\ --- NB on \ill{}
+\note{la phrase se poursuit au haut de la page suivante, p.~95}
+
+\page{95}
+\note{tableau des $A^{ij}$ en haut de la page\,; les flèches verticales sont les différentielles}
+
+\begin{tikzcd}[column sep=small, row sep=small]
+0 & 0 & A^{22} & \cdots \\
+0 & A^{11} & A^{21} \arrow[u] & \cdots \\
+k & A^{10} \arrow[u] & A^{20} \arrow[u] & \cdots
+\end{tikzcd}
+
+Soit $A^{**}\in\operatorname{Ob}\mathbb{DR}\mathrm{sp}(\mathfrak{X},k)$\,;
+$T\in\Gamma_{\mathfrak{X}}(A^{10})$ définit $k\to A^{10}=\Phi$, $\lambda\mapsto\lambda T$, avec suite exacte
+
+\begin{tikzcd}[column sep=small, row sep=small]
+0 \arrow[r] & k \arrow[r] & \Phi \arrow[r] \arrow[d, no head, "\Vert" description] & \Psi \arrow[r] \arrow[d] & 0 \\
+ & & A^{10} & A^{20} &
+\end{tikzcd}
+
+\note{la flèche verticale sous $\Psi$ va vers un terme que nous lisons $A^{20}$, peut-être $A^{11}$}
+
+Comme $\Psi$ est $k$-plat, $\Phi$ \ill{}\ \ill{}, et on a \ill{}
+\[
+  \mathrm{DR}(\Phi,T)=\underbrace{\Gamma^{*}(\Phi)}_{\text{deg compl}}
+  \otimes_{k}\underbrace{\textstyle\bigwedge^{*}\Psi}_{\text{deg ext}}
+\]
+\note{au-dessus de « $\mathrm{DR}$ » un mot ajouté, \ill{}}
+
+\ill{}\ \ill{} est \ill{} et on a un $k$-\ill{}\ \ill{}
+
+\struck{donc la cat.\ de}
+
+Un hom.\ $A^{**}\to A'^{**}$ \ill{}
+
+\begin{tikzcd}
+\mathrm{DR}(\Phi,T) \arrow[r] \arrow[d] & A^{**} \arrow[d] \\
+\mathrm{DR}(\Phi',T') \arrow[r] & {A'^{**}}
+\end{tikzcd}
+
+Cela implique \struck{\ill{}} ainsi que la cat.\ \add{dérivée}
+$\mathbb{DR}\mathrm{sp}(\mathfrak{X},k)_{0}$ est équivalente canoniquement\,:
+la \struck{\ill{}} cat.\ qui se déduit des \add{\uncertain{dérivées}} de la forme
+$\mathrm{DR}(\Phi,T)$, qui est aussi celle des \ill{} exactes
+$0\to k\to\Phi\to\Psi\to0$ avec $\Psi$ plat sur $k$.
+
+\page{97}
+On sait que cette dernière est équivalente à la cat.\ ponctuelle.
+Donc $\mathbb{DR}\mathrm{sp}(\mathfrak{X},k)_{0}$ est équivalente à la cat.\
+ponctuelle.
+
+Si maintenant on travaille dans
+\struck{(cat.\ $\mathbb{DR}\mathrm{spufl}$)} $\mathbb{DR}\mathrm{spufl}$ i.e.\
+avec des $A^{**}$ flasques, \add{u.} $(A^{ij}$ flasque si $0<j)$ \struck{\ill{}}
+\ill{}, alors $\Phi$ est flasque.
+Supposons aussi que (\uncertain{les}) \ill{} les $\Gamma^{i}_{k}\Phi$ ($i>0$)
+sont univ.\ flasques, alors $\mathrm{DR}(\Phi,T)$ est aussi flasque,
+\struck{\ill{}} et on voit comme dessus que la cat.\ \uncertain{dérivée} est
+équivalente à celle construite \ill{} \struck{la cat.\ des}
+$\mathrm{DR}(\Phi,T)$, avec $\Phi$ univ.\ flasque et $\Phi/k\cdot T$ plat,
+i.e.\ avec les suites exactes $0\to k\to\Phi\to\Psi\to0$, \ill{}
+$\Phi$ univ.\ flasque et $\Psi$ $k$-plat\,; or cette cat.\ dérivée est
+\uncertain{encore} la catégorie ponctuelle. On a donc\,:
+
+\emph{Prop.} La cat.\ $\mathbb{DR}\mathrm{sp}(\mathfrak{X},k)_{0}$ est
+équivalente à la cat.\ ponctuelle. Il en est de même de la cat.\
+$\mathbb{DR}\mathrm{spufl}(\mathfrak{X},k)_{0}$, \add{$k$-\uncertain{modules}}
+\struck{\ill{}} si on suppose que pour \ill{} \struck{\ill{}} $\Phi$ plat sur
+$k$ univ.\ flasque, les $\Gamma^{i}\Phi$ ($i>0$) sont aussi univ.\ flasques.
+
+\page{99}
+Cette dernière condition est satisfaite pour le topos \add{$(\mathrm{Ss})=$}
+$\widehat{\Delta}$, car pour celui-ci
+\[
+  \text{flasque}+\text{plat}\Longrightarrow\text{homotope à $0$, donc}
+\]
+\[
+  \Downarrow
+\]
+(\uncertain{univ.\ projectif})
+univ.\ flasque et les $\Gamma^{i}(\Phi)$ univ.\ flasques ($i>0$).
+\marginal{faux tel quel, à arranger\,!}
+\note{l'accolade sous « flasque $+$ plat » renvoie à « univ.\ projectif », souligné\,; la note marginale porte sur cette implication}
+
+Soit $P$ le topos ponctuel, et
+\[
+  i_{n}\colon P\longrightarrow\widehat{\Delta}(\mathrm{S}_{s})
+\]
+le morphisme de topos associé au foncteur
+\[
+  u_{n}^{*}(K)=K_{n}=K(\Delta_{n}).
+\]
+Soit $k$ un anneau (commutatif, \uncertain{disons}).
+
+\emph{Lemme.} $\forall$ $k$-module $M$, on a un
+\[
+  i_{0*}(M)\simeq\Phi_{*}\otimes_{\mathbb{Z}}M\simeq\Phi_{*k}\otimes_{k}M
+\]
+où $\Phi_{*}\in\operatorname{Ob}\bigl(\widehat{\Delta}_{ab}\simeq
+\underline{\mathrm{Hom}}(\Delta^{\circ},\mathrm{Ab})\bigr)$ est défini par
+$\Phi_{*}(I)=\mathbb{Z}^{I}$, donc $\Phi_{*k}(I)\simeq k^{I}$.
+
+En effet, on a par construction de l'image directe
+\[
+  i_{0*}(M)(I)\simeq M(i_{0}^{*}(I))\simeq M^{I}
+\]
+\[
+  \mathrm{Hom}(I,i_{0*}(M))=\mathrm{Hom}\bigl(\underbrace{i_{0}^{*}(I)}_{\mathrm{Hom}(\Delta_{0},I)\simeq I},M\bigr)
+\]
+OK.
+
+\struck{\ill{}} \emph{Corollaire.} Pour tout $k_{*}$-Module $A_{*}$,
+\[
+  \mathrm{Hom}(A_{*},\Phi_{*}\otimes_{k}M)\simeq\mathrm{Hom}_{k}(A_{0},M)
+\]
+en particulier on a un hom.\ can.\ (pour $M=A_{0}$)
+\[
+  \text{\struck{$\mathrm{Hom}$}}\ A_{*}\longrightarrow\Phi_{*}\otimes_{\mathbb{Z}}A_{0}
+  \simeq\Phi_{*k}\otimes_{k}A_{0}\quad(\simeq i_{0*}i_{0}^{*}A_{*})
+\]
+Appliquons ceci au cas d'une immersion
+\[
+  k_{*}\overset{u}{\hookrightarrow}A_{*}=A^{1,0}_{*}
+\]
+provenant d'une $A^{**}_{*}\in\operatorname{Ob}\mathbb{DR}\mathrm{sp}(\mathfrak{X}_{s},k_{*})$
+\note{la phrase se poursuit au-delà de ce lot}
+
+\end{document}
