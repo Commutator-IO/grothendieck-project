@@ -1,0 +1,1509 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 105, pages 1-52
+% (the whole folder).
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried moves into
+% a footnote. It is held to being mathematically correct as it stands; where
+% the manuscript is loose or mistaken, the true statement is what appears here
+% and the footnote says what the page has. In any dispute of substance the
+% transcription governs: whoever cites Grothendieck must cite
+% batch-0{1,2,3}.fr.tex.
+%
+% Scope: the folder was read whole — three batches, pages 1-52, thirty pages
+% carrying his hand — before any of this was written, and it is ONE file for
+% the shelfmark.
+%
+% What the folder is. Two French scratch leaves (pp. 1-2); an English run
+% paginated by him 1-16 (pp. 4-39) on model structures in a topos with the
+% monomorphisms as cofibrations, in three stretches: generation from a small
+% set (TC)_0 and the comparison of W~ = TF o TC with W (pp. 4-19, his 1-8);
+% a restart from the pair (C, W), with saturated classes, weak factorization
+% systems and a criterion for a model structure (pp. 21-31, his 9-12); the
+% small-object argument that supplies the factorization both stretches had
+% admitted (pp. 33-39, his 13-16). Then a French run paginated 6-18
+% (pp. 42-52), whose pages 1-5 are not in the folder, on axioms W7, W8 for a
+% class W in Cat tested on W_D, the cohomological equivalences of a
+% dérivateur D, ending on the axiom « Der 6 »: a square is cartesian iff
+% cocartesian.
+%
+% Notation fixed for the whole document.
+%  - The topos is written \mathcal{E} (he writes A, which is also his letter
+%    for the source of an arrow i : A -> B); e its final object.
+%  - Phi^* (left lifting) and Phi_* (right lifting) are his, from p. 24, used
+%    from p. 4 on; i \pitchfork f means i has the LLP with respect to f.
+%  - His underlined Hom (internal) is \mathbf{Hom}; his boxed cross is the
+%    pushout-product \boxtimes; alpha(i,f) the pullback-hom.
+%  - His « Quillen pair » is written « système de factorisation faible », his
+%    « Quillen triple » « structure de modèles »: the modern « paire de
+%    Quillen » is an adjunction, and the clash is footnoted.
+%  - The section of an interval is \varepsilon : e -> I (he writes e for both).
+%  - His underlined W (a localisateur fondamental on Cat) is \mathcal{W}; the
+%    test category of p. 19 b) is B (he writes T, also the object of p. 6).
+%  - Part 3: Psi = {0 < a, 0 < b}, Q = Delta^1 x Delta^1, k : Psi -> Q,
+%    Phi = Psi^op = (a -> 0 <- b) (he calls its apex 1 on p. 49); \mathcal{A}
+%    = D(e); the Grothendieck construction s |-> X_{/s} is \mathcal{G}_I(X)
+%    (he writes a thick Psi with an index, which collides with the poset Psi);
+%    objects of D(I) are read as diagrams of type I^op, as p. 45 says.
+%
+% Substantive departures from the pages, each footnoted where it occurs:
+% p. 2, the composites s o p, b o p are a fibred and a cofibred functor
+% (the page seems to deny it; reading uncertain); p. 6, the NB's claim of
+% what is used is sharpened (only retracts); p. 9, (iii) is equivalent to
+% boxtimes-stability, not to stability under ? x T; p. 11, fourth line of
+% the table is C boxtimes TC (page hatched), and « F stable » is TF; pp. 11-13,
+% the passage from generators to TC boxtimes C is supplied; p. 13, his M1/M5
+% are not Quillen's numbering; p. 15, TF in W from axiom (1) needs c) of p. 4,
+% argument supplied; p. 17, the factorization used must be the cellular one;
+% p. 21, his 3), 4), 5) are (3)(4)(5) of pp. 15-17; p. 26, the question is
+% answered (no) by a counterexample of ours; p. 27, factorization implicit
+% in (i); p. 37, (d) for filtering limits is more than the Zorn argument
+% gives, p. 39 restricts it to well-ordered systems; p. 35, the « pi = 0 » is
+% aleph_0 and alpha_0 a regular cardinal; p. 45, « i_0^* iso <=> i^* iso »
+% holds only => for a cartesian square, as p. 46 itself says; p. 49,
+% psi_!(xi) lives in D(Q^op); p. 50, the implications listed are the
+% cocartesian ones; p. 52, the shape Phi normalised to (a -> 0 <- b).
+% Remarks of ours, footnoted as such: W7 bis and W8 bis fail for W_infinity
+% (acyclic spaces) and hold for homology equivalences, which is what makes
+% « Der 6 » the right axiom; Der 8's a + b => c holds in the stable case;
+% the statements « admitted in HOT » hold for connective complexes and fail
+% for homotopy types of spaces.
+%
+% Announced and not established: the factorization (admitted pp. 13, 21,
+% supplied pp. 33-39 only under the smallness of Phi_0, which p. 39 wants to
+% remove); W ⊂ W~ (p. 19, « [ ? ??? ] »), and the two cases a), b) wanted
+% there; why TC = C ∩ W is the saturation of (TC)_0 (p. 31); the « à
+% vérifier » of p. 45; Der 6 is posed, not derived; the lemma of p. 50 is
+% left at « forme de Der 3 »; Der 8's « (?) »; W7 bis, W8 bis are stated,
+% not proved; the struck « cqfd » of p. 42 closes an argument whose start
+% (his pp. 1-5) is not in the folder.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-03 — first pass, unchecked against the pages by a human.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{105}
+\pages{1}{52}
+\dating{[à partir de 1982]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{[Champs (stacks) 2] : notes manuscrites (s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+En topologie, deux formes ont « le même type d'homotopie » quand on peut
+déformer l'une en l'autre sans rien déchirer : un disque et un point, un
+anneau et un cercle. Pour calculer avec cette notion, il faut savoir quelles
+applications on déclare être des \emph{équivalences}, et cela ne suffit pas :
+il faut encore deux familles d'applications commodes, de bonnes inclusions et
+de bonnes projections, qui se relèvent les unes par rapport aux autres comme un
+chemin se relève dans un revêtement. Quillen a appelé en 1967 la donnée de ces
+trois familles une structure de modèles fermée. Ces feuillets, en anglais pour
+la plupart, cherchent à quelles conditions une classe d'équivalences donnée
+d'avance, dans un topos, est celle d'une telle structure dont les bonnes
+inclusions sont toutes les inclusions.
+
+La question vient de \emph{Pursuing Stacks}, auquel l'inventaire rattache le
+dossier. Les types d'homotopie y sont décrits par des préfaisceaux sur des
+« catégories test », et les équivalences y sont définies tout de suite, par un
+critère homologique. Chez Kan et Quillen, au contraire, on part d'un petit
+ensemble d'inclusions élémentaires, les cornets des ensembles simpliciaux, et
+les équivalences sont ce qui en sort. Grothendieck le dit lui-même à la page
+31 : de son point de vue, l'équivalence est donnée d'avance, « in a rather
+tangible way », et c'est la construction de Kan et Quillen qui lui paraît ad hoc.
+Le dossier cherche le pont entre les deux. Quand les inclusions qui sont des
+équivalences sont-elles exactement celles qu'on obtient en saturant quelques
+inclusions élémentaires ?
+
+L'idée est celle d'un intervalle. On se donne quelques objets $I$ munis d'un
+point, qu'on veut voir comme des segments ; on fait glisser une inclusion
+$A_0 \subset B_0$ le long de $I$, ce qui donne une inclusion de « cylindres » ;
+et l'on prend pour inclusions élémentaires toutes celles-là. Le segment
+universel d'un topos est l'objet de Lawvere $\Omega$, qui classe les
+sous-objets. Il a toujours les propriétés voulues, ce qui arrache à la marge de
+la page 15 trois points d'exclamation. Reste à fabriquer les factorisations,
+et c'est l'argument par lequel on plonge un module dans un module injectif : on
+ajoute toutes les solutions qui manquent, puis on recommence, transfiniment,
+jusqu'à ce que plus rien ne manque. Les pages 33 à 39 l'écrivent en entier ;
+c'est l'« argument du petit objet ».
+
+Le dossier procède comme on le fait en travaillant. Il admet d'abord les
+factorisations, pour le moment, pour voir ce qu'il reste à démontrer. Il
+reprend ensuite tout depuis l'autre bout, sous le titre « Alternative
+presentation of theory ». Il ne revient aux factorisations qu'une fois le reste
+en place. Les deux présentations ne sont pas fondues : la première engendre,
+la seconde part de ce qu'on veut obtenir.
+
+Les onze dernières pages, en français, changent de cadre. Une catégorie y est
+recouverte par deux morceaux ouverts, comme un espace par deux ouverts dans la
+suite exacte de Mayer--Vietoris, et l'on teste deux axiomes de recollement sur
+les équivalences que voit une cohomologie. Elles aboutissent à un axiome
+qu'elles jugent provisoire : un carré y est « cartésien » (un produit fibré)
+si et seulement s'il est « cocartésien » (une somme amalgamée). C'est le monde
+des suites exactes longues, où recoller et intersecter reviennent au même ; ce
+n'est pas celui des espaces.
+
+Les noms modernes à chercher : systèmes de factorisation faibles, catégories de
+modèles à engendrement cofibrant, structures de modèles de Cisinski sur les
+topos, extensions anodines ; et, pour la fin, dérivateurs stables et limites
+inductives homotopiques de Thomason.
+
+\keywords{lifting property, weak factorization system, model category, pushout-product, monoidal model category, subobject classifier, interval object, anodyne extension, Cisinski model structure, test category, basic localizer, small object argument, cofibrantly generated model category, accessible category, proper model category, 2-out-of-6 property, Thomason model structure, derivator, homotopy cartesian square, stable derivator, Grothendieck construction, homotopy pushout, Mayer–Vietoris sequence, homology equivalence}
+\end{resume}
+
+\section*{Le fil du dossier, et les conventions}
+
+Le dossier a cinquante-deux pages ; trente portent sa main. Les autres sont des
+feuilles de listing d'ordinateur (journaux de travaux, pages de garde,
+tableaux) qui ne portent rien de lui, des feuilles blanches, un carton rose
+(page 3) où ne figure qu'un nom biffé, et une page dactylographiée (page 43,
+numérotée « 90 » par la dactylo) d'une prose sans rapport avec les
+mathématiques. Plusieurs des feuillets écrits le sont au dos de listings ; celui
+de la page 27 porte imprimée la date « 06/09/82 », qui borne ce feuillet par
+en dessous et lui seul.
+
+\begin{enumerate}
+\item[1.] \emph{Deux brouillons} (pages 1 et 2, en français, non paginés) : un
+lemme de relèvement dans $\mathrm{Cat}$, et la question d'une structure de
+Quillen sur $\mathrm{Cat}$.
+\item[2.] \emph{Une suite en anglais, paginée 1 à 16 de sa main} (pages 4 à
+39 ; sa page « 10 bis » est la page 27, et la page 26 est un brouillon sans
+numéro). Elle contient trois étapes, 2a à 2c.
+\item[2a.] Pages 4 à 19 (ses pages 1 à 8) : d'un petit ensemble $(TC)_0$
+d'inclusions élémentaires on tire quatre classes $C, TC, F, TF$ et une classe
+$\widetilde W = TF \circ TC$. Le produit-boîte, puis l'exemple des cylindres
+sur des intervalles, montrent la compatibilité au produit. Le programme est
+$\widetilde W = W$ : l'inclusion $\widetilde W \subset W$ s'obtient sous cinq
+axiomes, l'inclusion inverse reste ouverte.
+\item[2b.] Pages 21 à 31 (ses pages 9 à 12) : la reprise. On part de la paire
+$(C, W)$ et l'on pose directement $TC = C \cap W$. Viennent les classes
+saturées, les systèmes de factorisation faibles, la définition d'une structure
+de modèles par deux tels systèmes, et un critère d'existence (page 29).
+\item[2c.] Pages 33 à 39 (ses pages 13 à 16), « Factorization » : l'argument
+du petit objet, qui fournit la factorisation admise en 2a et 2b.
+\item[3.] \emph{Une suite en français, paginée 6 à 18 de sa main} (pages 42 à
+52), dont les pages 1 à 5 ne sont pas dans le dossier : les axiomes W7, W8 et
+leurs formes « bis » pour une classe $W$ de flèches de $\mathrm{Cat}$, testés
+sur la classe $W_{\mathbb D}$ des équivalences cohomologiques d'un dérivateur
+$\mathbb D$, et l'axiome « Der 6 ».
+\end{enumerate}
+
+Rien ne date la troisième suite par rapport à la deuxième. Son vocabulaire
+(dérivateur, axiomes « Der ») est celui du long manuscrit de Grothendieck sur
+les dérivateurs ; c'est un rapprochement, non une datation.
+
+\emph{Conventions.} Pour une catégorie $M$, $\mathrm{Fl}(M)$ est l'ensemble de
+ses flèches. On écrit $i \pitchfork f$ quand $i$ a la propriété de relèvement à
+gauche par rapport à $f$ (tout carré de $i$ vers $f$ admet une diagonale), et,
+pour $\Phi \subset \mathrm{Fl}(M)$,
+\[
+\Phi^* = \{u \mid u \pitchfork \varphi \ \ \forall \varphi \in \Phi\}, \qquad
+\Phi_* = \{u \mid \varphi \pitchfork u \ \ \forall \varphi \in \Phi\},
+\]
+notation qui est la sienne à partir de la page 24 et qu'on emploie dès la page
+4. Le topos des pages 4 à 19 est noté $\mathcal{E}$, son objet final
+$e$.\footnote{Il écrit $A$ pour le topos, et aussi pour la source d'une
+flèche $i : A \to B$ ; on lève la collision.} Le $\mathbf{Hom}$ en gras est le
+$\mathrm{Hom}$ interne, qu'il souligne. Les chiffres et les lettres qu'il entoure (ses axiomes
+numérotés de la page 15 à la page 17, ses conditions des pages 21 à 39) sont
+rendus entre parenthèses, (1) à (5) et (a) à (e).
+
+Trois mots changent de sens d'une partie à l'autre, et on les fixe ici. Une
+\emph{fibration}, sans autre précision, est une flèche de la classe $F$ d'une
+structure de modèles ; une \emph{catégorie fibrée} ou \emph{cofibrée} sur une
+base est prise au sens de Grothendieck (SGA~1), et ce sont elles seules qui
+paraissent dans la troisième partie. Sa « paire de Quillen » est ici un
+\emph{système de factorisation faible}, et son « triple de Quillen » une
+\emph{structure de modèles}. Pour la saturation d'une classe $W$, enfin, on
+distingue trois degrés. $W$ est \emph{faiblement saturée} si elle contient les
+isomorphismes, a la propriété du deux-sur-trois et la propriété c) de la page
+4 ; il dit aussi « mildly ». Elle est \emph{saturée} si $fg, gf \in W$
+entraînent $f, g \in W$ (page 26). Elle est \emph{fortement saturée} si
+$f \in W$ équivaut à ce que l'image de $f$ dans $W^{-1}M$ soit un
+isomorphisme.
+
+Les notations de la troisième partie sont fixées à son entrée (page 42).
+
+\emph{Le dossier annonce et n'établit pas} : les factorisations, admises aux
+pages 13 et 21, puis obtenues aux pages 33 à 39 sous une hypothèse de
+petitesse dont la page 39 voudrait se défaire ; l'inclusion
+$W \subset \widetilde W$ (page 19) et les deux cas où il la voudrait ; la
+raison pour laquelle $C \cap W$ serait la saturation de $(TC)_0$ (page 31) ;
+l'axiome « Der 6 », posé et non déduit ; le lemme de la page 50, arrêté sur
+« forme de Der 3 » ; les énoncés W7 bis et W8 bis, posés sans démonstration.
+
+\pagerange{1}{2}
+\section*{Deux brouillons (pages 1 et 2)}
+
+\emph{Page 1 : un lemme de relèvement dans $\mathrm{Cat}$.} Soit
+$\partial \to I$ l'inclusion des extrémités d'un intervalle.\footnote{Sous
+$I$, une mention entre parenthèses illisible ; plus bas, deux lignes biffées,
+dont « $\Pi_0(\partial) \geq 2$ », qui semble demander que les extrémités
+soient au moins deux. En haut à gauche, un signe en forme de Z barré, suivi de
+« a », non identifié.} On considère les flèches
+\[
+\varnothing \to e, \qquad \partial \times S^n(N) \longrightarrow I \times S^n(N),
+\]
+et des « cônes » construits sur elles, parmi lesquels
+$\{0\} \to \Delta^1$ et $\{1\} \to \Delta^1$.\footnote{Les objets $S^n(N)$ ne
+sont définis nulle part sur les feuillets ; $N$ parcourt un ensemble
+$\mathcal N$ de parties, lues « finies » avec doute, de $\mathbb N$. Le mot qui
+suit « cônes » est illisible, et l'abréviation « compl. droits » n'est pas
+résolue. Un $\mathbf{Hom}(T, X)$ isolé est écrit au milieu de la page ; la
+lettre, très appuyée, pourrait aussi être le $I$ du haut.} Le lemme énonce :
+\begin{enumerate}
+\item[a)] si $X \to e$ a la propriété de relèvement à droite par rapport à
+$\varnothing \to e$ et aux $\partial \times S^n(N) \to I \times S^n(N)$, alors
+$X$ est $W_\infty$-asphérique, c'est-à-dire que son nerf est contractile ;
+\item[b)] si $X \to Y$ a la propriété de relèvement à droite par rapport aux
+cônes sur ces flèches, alors $X \to Y$ est $W_\infty$-propre (resp.~$W_\infty$-lisse).
+\end{enumerate}
+C'est l'analogue, dans $\mathrm{Cat}$, du fait qu'un ensemble simplicial ayant
+la propriété de relèvement par rapport aux inclusions $\partial\Delta^n \subset
+\Delta^n$ est contractile.\footnote{Le rapprochement est le nôtre. $W_\infty$
+est la classe des foncteurs dont le nerf est une équivalence faible
+d'homotopie, le plus petit localisateur fondamental (D.-C.~Cisinski,
+2004). Les notions de foncteur $W$-propre et $W$-lisse sont celles de
+\emph{Pursuing Stacks}, calquées sur les théorèmes de changement de base
+propre et lisse de SGA~4 ; « lisse » est lu avec doute, aux trois endroits où
+le mot paraît.} Le corollaire qui suit, très surchargé et en partie couvert
+d'une tache d'encre, ne se lit que par fragments : une propriété de relèvement
+à droite rendrait $X \to Y$ propre à fibres asphériques, et, sous une condition
+illisible portant sur des catégories finies, « $W_\infty$-parfait » (lu avec
+doute).\footnote{Le $Y$ de $X \to Y$ est écrit sur un $e$ ; plusieurs mots
+biffés se superposent au texte. On ne restitue pas le corollaire.}
+
+\emph{Page 2 : la flèche $\mathrm{Ar}(C) \to C \times C$.} Le feuillet est barré
+de deux longs traits obliques et se lit sous la rature. Pour une catégorie $C$
+et sa catégorie des flèches $\mathrm{Ar}(C)$, on voudrait que
+\[
+p = (s, b) : \mathrm{Ar}(C) \longrightarrow C \times C,
+\]
+qui envoie une flèche sur sa source et son but, ait des propriétés de type
+fibration. Or $p$ n'est ni une catégorie fibrée ni une catégorie
+cofibrée.\footnote{Elle est ce qu'on appelle aujourd'hui une fibration
+discrète à deux faces (R.~Street, 1974) : fibrée en la première variable,
+cofibrée en la seconde. Le nom n'est pas sur la page. La page ajoute que les
+composées $s \circ p$, $b \circ p : \mathrm{Ar}(C) \to C$ « ne le sont pas » ;
+le mot qui précède est illisible et « composées » est lu avec doute. Or
+$s \circ p$ est fibrée (la précomposition $x \mapsto x u$ fournit les
+flèches cartésiennes) et $b \circ p$ est cofibrée (par la postcomposition).
+Chacune n'a que l'une des deux propriétés, et c'est le seul sens où la phrase
+est juste ; on ne lit pas assez la page pour dire si c'est celui qu'elle a.}
+Elle n'est pas non plus cohomologiquement propre ni lisse, et la page se
+demande si au moins $s \circ p$ et $b \circ p$ le sont.\footnote{Avec la
+convention que le dossier suit aux pages 44 et 52 (une catégorie cofibrée est
+propre, une catégorie fibrée est lisse), $s \circ p$ est lisse et $b \circ p$
+propre. La remarque est la nôtre.} « Mais ce sont plutôt les propriétés de
+$p$ lui-même qui importent. » Il souhaiterait que $p$ soit une
+« $W_\infty$-fibration » (« fibration cohomologique », lu avec doute), et
+pose :
+
+\textbf{Question.} Les $W_\infty$-fibrations et les cofibrations définies par
+relèvement à gauche par rapport à elles forment-elles une structure de
+modèles sur $\mathrm{Cat}$ ?\footnote{Une structure de modèles sur
+$\mathrm{Cat}$ dont les équivalences faibles sont $W_\infty$ existe : c'est
+celle de R.~Thomason (1980), obtenue par transfert le long de
+$\mathrm{Ex}^2 N$. Ses fibrations sont définies par ce transfert et non de
+façon intrinsèque, et la page ne définit pas les « $W_\infty$-fibrations ».
+On ne dit donc pas si les deux classes coïncident, ni si $p$ est une
+fibration de Thomason.}
+
+\pagerange{4}{11}
+\section*{Paires de relèvement dans un topos (pages 4 à 11)}
+
+À partir d'ici le texte est en anglais, paginé de sa main à la tête de chaque
+feuillet : la page 4 est sa page 1, la page 19 sa page 8, et la page 21 sa
+page 9.
+
+\subsection*{Les quatre classes}
+
+Soit $\mathcal{E}$ un topos, et $W \subset \mathrm{Fl}(\mathcal{E})$ une
+classe faiblement saturée :
+\begin{enumerate}
+\item[a)] les isomorphismes sont dans $W$ ;
+\item[b)] si $f = vu$ et si deux des trois flèches $u, v, f$ sont dans $W$, la
+troisième l'est ;
+\item[c)] si $f : X \to Y$ et $g : Y \to X$ vérifient $gf = \mathrm{id}_X$ et
+$fg \in W$, alors $f, g \in W$ ;
+\end{enumerate}
+« plus other conditions we are going to list, as we need them ».\footnote{« weakly » est ajouté au-dessus de la ligne. La fin de la
+ligne b) mord sur le bord du feuillet. La condition c) est un cas particulier
+de la stabilité par rétractes, qu'il posera page 17 (axiome (5)) ; la page 26 le
+montre.}
+
+Donnons-nous deux classes $(TC)_0 \subset C_0 \subset
+\mathrm{Fl}(\mathcal{E})$, sans autre hypothèse pour l'instant, et
+posons
+\[
+F = ((TC)_0)_*, \quad TF = (C_0)_*, \qquad TC = F^*, \quad C = (TF)^*.
+\]
+Comme $(TC)_0 \subset C_0$, on a $TF \subset F$, d'où $TC \subset C$, et
+$(TC)_0 \subset TC$, $C_0 \subset C$. Chacune des deux paires $(TC, F)$ et
+$(C, TF)$ se détermine par relèvement : $F = (TC)_*$ et $TF = C_*$, parce
+que $\Phi_* = ((\Phi_*)^*)_*$ pour toute classe $\Phi$. Les classes $F$ et $TF$
+sont stables par composition, changement de base et rétractes ; $C$ et $TC$
+par composition, changement de cobase et rétractes. En marge : $C$ seront les
+« cofibrations », $TC$ les « cofibrations triviales », $F$ les
+« fibrations », $TF$ les « fibrations triviales ».
+
+\textbf{Lemme} (page 6). Soit
+$\widetilde W = \{ pi \mid p \in TF,\ i \in TC \}$. Alors
+\[
+TC = C \cap \widetilde W, \qquad TF = F \cap \widetilde W .
+\]
+En effet, $TC \subset C \cap \widetilde W$ en écrivant $i = \mathrm{id} \circ
+i$. Inversement, soit $f = pi \in C$, $p \in TF$, $i \in TC$ ; comme
+$f \pitchfork p$, le carré formé de $i$ et de l'identité de la cible a une
+diagonale $s$, avec $sf = i$ et $ps = \mathrm{id}$, de sorte que $f$ est un
+rétracte de $i$ et appartient à $TC$. L'énoncé sur $TF$ est dual.\footnote{La
+page énonce les deux égalités sans démonstration ; celle-ci est la nôtre. Le
+\emph{NB} qui suit dit que ces faits n'utilisent que l'existence de sommes
+amalgamées et de produits fibrés dans $\mathcal{E}$, pas le fait que ce soit un
+topos, ni $W$, ni la manière dont les paires ont été obtenues, seulement leur
+relation symétrique et $TC \subset C$. C'est juste, et même plus que juste :
+l'argument n'utilise que la stabilité par rétractes, c'est-à-dire aucune
+limite.}
+
+\subsection*{La flèche $\alpha(i,f)$ et le produit-boîte}
+
+Pour $i : A \to B$ et $f : X \to Y$ dans $\mathcal{E}$, soit
+\[
+\alpha(i,f) : \mathbf{Hom}(B, X) \longrightarrow \mathbf{Hom}(i,f)
+= \mathbf{Hom}(B, Y) \times_{\mathbf{Hom}(A, Y)} \mathbf{Hom}(A, X),
+\]
+qu'on appelle aujourd'hui la puissance fibrée de $f$ par $i$.\footnote{Sous
+$i$ et $f$, biffés : « $i \in C$ », « $f \in F$ ». Le nom est le nôtre ;
+on parle aussi de construction de Leibniz.} La page considère, pour un objet
+$T$, les trois propriétés :
+\begin{enumerate}
+\item[(i)] $C$ et $TC$ sont stables par $? \times T$ ;
+\item[(ii)] $TF$ et $F$ sont stables par $\mathbf{Hom}(T, ?)$ ;
+\item[(iii)] si $i \in C$ et $f \in F$, alors $\alpha(i,f) \in F$, et
+$\alpha(i,f) \in TF$ si de plus $i \in TC$ ou $f \in TF$.
+\end{enumerate}
+
+\textbf{(i) $\Leftrightarrow$ (ii)}, et plus précisément
+$C \times T \subset C \Leftrightarrow \mathbf{Hom}(T, TF) \subset TF$ et
+$TC \times T \subset TC \Leftrightarrow \mathbf{Hom}(T, F) \subset F$. Soit
+en effet $f \in F$. Alors $\mathbf{Hom}(T, f) \in F = (TC)_*$ si et seulement
+si $i \pitchfork \mathbf{Hom}(T, f)$ pour tout $i \in TC$, c'est-à-dire
+$i \times \mathrm{id}_T \pitchfork f$, ce qui a lieu si $TC \times T \subset
+TC$. La réciproque et l'autre paire se traitent de même (page 9).
+
+Le \emph{NB} de la page 9 dégage ce qui sert. Soient $\otimes$ et
+$\mathbf{Hom}$ deux foncteurs liés par l'isomorphisme d'adjonction
+$\mathrm{Hom}(A \otimes T, X) \simeq \mathrm{Hom}(A, \mathbf{Hom}(T,
+X))$.\footnote{Il l'appelle « relation de Cartan » ; c'est l'associativité
+adjointe du livre de Cartan et Eilenberg.} Pour $j : A' \to B'$ et
+$i : A \to B$, le \emph{produit-boîte} est
+\[
+j \boxtimes i : A' \otimes B \amalg_{A' \otimes A} B' \otimes A
+\longrightarrow B' \otimes B .
+\]
+Un carré de $j$ vers $\alpha(i,f)$ est la même chose qu'un carré de
+$j \boxtimes i$ vers $f$, et les diagonales se correspondent :
+\[
+j \pitchfork \alpha(i,f) \iff j \boxtimes i \pitchfork f, \qquad
+\alpha(i', \alpha(i,f)) \simeq \alpha(i' \boxtimes i, f) .
+\]
+Il en tire le tableau de la page 11 :
+\[
+\begin{array}{rcl}
+C \otimes T \subset C & \iff & \mathbf{Hom}(T, ?) \text{ préserve } TF, \\
+TC \otimes T \subset TC & \iff & \mathbf{Hom}(T, ?) \text{ préserve } F, \\
+C \boxtimes C \subset C & \iff & \bigl( i \in C,\ f \in TF \Rightarrow \alpha(i,f) \in TF \bigr), \\
+C \boxtimes TC \subset TC & \iff & \bigl( i \in TC,\ f \in F \Rightarrow \alpha(i,f) \in TF \bigr), \\
+TC \boxtimes C \subset TC & \iff & \bigl( i \in C,\ f \in F \Rightarrow \alpha(i,f) \in F \bigr).
+\end{array}
+\]
+Chaque ligne se lit sur l'équivalence précédente : par exemple
+$\alpha(i,f) \in TF = C_*$ pour tout $i \in TC$, $f \in F$ équivaut à
+$j \boxtimes i \in F^* = TC$ pour tout $j \in C$, $i \in TC$.\footnote{Le
+membre de gauche de la quatrième ligne est noyé sous des hachures, sous
+lesquelles on lit « $TC \boxtimes TC$ » ou, avec doute, « $C \boxtimes TC$ ».
+C'est $C \boxtimes TC$ que l'équivalence demande : la variable extérieure $j$
+parcourt $C$, puisque $TF = C_*$. Dans le membre de droite, $TF$ est écrit
+sur une autre lettre. Les deux premières lignes sont écrites sur
+« stable by $? \otimes T$ », biffé.}
+
+Les deux premières lignes sont des cas particuliers des trois autres, ce que la
+page ne dit pas. Comme $\varnothing \otimes X = \varnothing$ dans un topos, on
+a $(\varnothing \to T) \boxtimes i = i \otimes T$ et
+$\alpha(\varnothing \to T, f) = \mathbf{Hom}(T, f)$ ; et
+$\varnothing \to T$ est un monomorphisme.\footnote{La remarque est la nôtre.
+Elle explique la mention marginale « under suitable assumptions » de la page
+6 : la condition (iii) n'équivaut pas à la stabilité par $? \times T$ ; elle
+équivaut à la stabilité des classes par produit-boîte (troisième à cinquième
+lignes), dont la stabilité par $? \times T$ est le cas
+$j = (\varnothing \to T)$.} La condition (iii), avec ses trois lignes, est ce
+qu'on appelle aujourd'hui l'axiome du produit-boîte d'une catégorie de
+modèles monoïdale, ou l'axiome SM7 de Quillen quand $\mathcal{E}$ est enrichie
+sur elle-même.\footnote{Quillen, \emph{Homotopical Algebra} (1967), pour SM7 ;
+la forme monoïdale est chez Hovey (1999) et Schwede--Shipley (2000).
+Références citées de mémoire.}
+
+\pagerange{11}{13}
+\section*{L'exemple : cofibrations monomorphes et cylindres (pages 11 et 13)}
+
+Soit $\mathcal{E}$ un topos, $\otimes$ le produit cartésien, $\mathbf{Hom}$ le
+$\mathrm{Hom}$ interne, et $C$ la classe des monomorphismes.\footnote{Pour que
+$C = (TF)^*$ avec $TF = (C_0)_*$, il faut que les monomorphismes soient la
+saturation d'un petit ensemble $C_0$. C'est vrai dans tout topos de
+Grothendieck (Cisinski, cité de mémoire) ; la page prend $C$ égal aux
+monomorphismes sans le dire.} Pour un monomorphisme $i_0 : A_0 \to B_0$ et un
+objet $I$ muni d'une section $\varepsilon : e \to I$, avec $I \to e$ dans $W$,
+soit
+\[
+h(i_0, I, \varepsilon) : (B_0 \times e) \cup (A_0 \times I)
+\subset B_0 \times I ,
+\]
+où $B_0 \times e$ désigne l'image de $\mathrm{id} \times \varepsilon$ ;
+c'est le produit-boîte $i_0 \boxtimes \varepsilon$. On prend pour $(TC)_0$
+l'ensemble de ces flèches, $I$ parcourant un ensemble donné (« a bunch »)
+d'intervalles munis de leur section.\footnote{Il écrit $e$ pour la section
+comme pour l'objet final ; on écrit $\varepsilon$. « $W$-aspheric » est son
+mot pour « $I \to e$ est dans $W$ » ; « object » est lu avec doute. Le
+« bunch » est en marge : « given bunch of $I$'s with given sections ».}
+
+Les vérifications suivent le tableau.
+\begin{itemize}
+\item $C \times T \subset C$ est trivial, donc $\mathbf{Hom}(T, ?)$ préserve
+$TF$.\footnote{La page écrit, avec doute, « $F$ stable » ; la lettre qui
+précède $F$, s'il y en a une, est à peine marquée. C'est $TF$ que la première
+ligne du tableau donne.}
+\item $(TC)_0 \times T \subset (TC)_0$, car $h(i_0, I, \varepsilon) \times T =
+h(i_0 \times \mathrm{id}_T, I, \varepsilon)$ ; donc $\mathbf{Hom}(T, ?)$
+préserve $F = ((TC)_0)_*$, et $TC \times T \subset TC$.
+\item $C \boxtimes C \subset C$ : le produit-boîte de deux monomorphismes d'un
+topos est un monomorphisme, parce qu'une réunion de deux sous-objets y est la
+somme amalgamée le long de leur intersection.
+\item $TC \boxtimes C \subset TC$ et $C \boxtimes TC \subset TC$ : sur les
+générateurs, par associativité du produit-boîte,
+\[
+i' \boxtimes h(i_0, I, \varepsilon) = h(i' \boxtimes i_0, I, \varepsilon),
+\]
+qui est encore dans $(TC)_0$ puisque $i' \boxtimes i_0$ est un
+monomorphisme. La page le calcule sur deux carrés et conclut en
+français : « On trouve … vérifier … et la formule symétrique, donc OK. »
+\end{itemize}
+
+Il reste à passer des générateurs à $TC$, et la page ne le fait
+pas.\footnote{Les deux carrés de la page 13 portent les étiquettes
+$h(i_0 \times \mathrm{id}_{A'}, I, e)$ et $h(i_0 \times \mathrm{id}_{B'}, I,
+e)$, reliées aux flèches verticales par des accolades ; plusieurs lettres du
+premier carré, page 11, sont surchargées. « Vérifier » et « OK » sont lus
+avec doute.} Pour $i' \in C$ fixé, la classe des $j$ tels que
+$j \boxtimes i' \in TC = F^*$ est celle des $j$ tels que
+$j \pitchfork \alpha(i', f)$ pour tout $f \in F$ : c'est une classe de la
+forme $\Psi^*$, donc saturée à gauche. Elle contient $(TC)_0$, donc
+$((TC)_0)_*{}^* = TC$. Les trois dernières lignes du tableau sont donc
+satisfaites, et la condition (iii) aussi.\footnote{Cet argument est le nôtre.
+Le procédé (produit-boîte d'un monomorphisme par l'inclusion d'une extrémité
+d'un intervalle, puis saturation) est celui qui engendre les « extensions
+anodines » de Cisinski (\emph{Théories homotopiques dans les topos}, 2002 ;
+\emph{Les préfaisceaux comme modèles des types d'homotopie}, Astérisque 308,
+2006). Cisinski est l'élève de Maltsiniotis et ses travaux partent de
+\emph{Pursuing Stacks} ; mais le manuscrit ne peut pas les connaître, et l'on
+ne dit pas que l'un dérive de l'autre.}
+
+\emph{Le programme} (page 13). « We do not know yet » M1, l'existence
+des deux factorisations $f = pi$, ni M5, la saturation de $\widetilde W$ ; or
+il suffirait de vérifier a) et b) pour avoir une catégorie de modèles
+fermée.\footnote{Sa numérotation n'est pas celle de Quillen, chez qui, sauf
+erreur de mémoire, M1 est le relèvement, M2 la factorisation et M5 le
+deux-sur-trois ; à la page 24 il désigne par « (M1) (M2) » les deux à la
+fois.} La factorisation est « the usual argument for constructing injectives », moyennant un petit ensemble de générateurs et des limites
+inductives filtrantes. Il ne veut pas en écrire la forme générale pour le
+moment et la suppose acquise ; elle viendra aux pages 33 à 39. Le but est
+maintenant d'identifier $\widetilde W$, et même de prouver $\widetilde W = W$.
+Il faut alors rendre explicite la dépendance de $(TC)_0$ en $W$. On voudrait
+prendre pour « bunch » tous les intervalles $W$-asphériques, mais ce bunch
+n'est pas petit, ce qui gênera la factorisation : on en prendra un plus petit
+et l'on cherchera ce qu'il doit contenir.
+
+\pagerange{15}{19}
+\section*{Comparer $\widetilde W$ et $W$ (pages 15 à 19)}
+
+\subsection*{L'inclusion $\widetilde W \subset W$, sous cinq axiomes}
+
+Comme $\widetilde W = TF \circ TC$ et que $W$ est stable par composition, il
+suffit de montrer $TF \subset W$ et $TC \subset W$.
+
+\emph{Les fibrations triviales.} Puisque $TF = C_*$ ne dépend que des
+monomorphismes, l'inclusion $TF \subset W$ peut être prise comme axiome sur
+$W$. Appelons intervalle \emph{séparant} un objet $I$ muni de deux points
+$e \rightrightarrows I$ dont l'intersection est l'objet initial. Si un tel $I$
+est injectif, c'est-à-dire si $I \to e$ est dans $TF$, l'axiome équivaut à :
+$I \to e$ est \emph{universellement} dans $W$ (« $\mathrm{U}W$ »), au sens où
+$I \times X \to X$ est dans $W$ pour tout $X$. L'objet de Lawvere $L =
+\Omega$, qui classe les sous-objets, est un intervalle séparant injectif, et
+l'axiome devient :
+\[
+\text{(1)} \qquad (\Omega \to e) \in \mathrm{U}W .
+\]
+Les deux sens de l'équivalence se vérifient ainsi.\footnote{La page énonce
+l'équivalence et les deux faits qui suivent ; la démonstration est la nôtre.
+La formule « $(I \to e) \in \mathrm{U}W$, i.e. $(I \times X \to X)$ is in
+$W$ for any $X$ » est encadrée puis biffée ; on garde la définition qu'elle
+donne de $\mathrm{U}W$. « Really » (« Thus, the axiom is really ») et
+« Lawvere element », au-dessus du $L$, sont lus avec doute. La note oblique de
+la marge gauche, lue par fragments, finit par « but this is always so, because
+the [Lawvere] object is injective !!! ».} Si $TF \subset W$, alors $I \times X
+\to X$, changement de base de $I \to e \in TF$, est dans $TF \subset W$.
+Inversement, supposons (1) (ou la même propriété pour un intervalle séparant
+$I$) et soit $f : X \to Y$ dans $TF$. Le relèvement de $\varnothing \to X$
+fournit une section $s$ de $f$. Comme les deux points de $I$ sont disjoints,
+$X \sqcup X = X \times \partial I \to X \times I$ est un monomorphisme, et le
+relèvement fournit une homotopie $H : X \times I \to X$ au-dessus de $Y$
+entre $sf$ et $\mathrm{id}_X$. Les deux sections $X \to X \times I$ sont dans
+$W$ par (1) et le deux-sur-trois, donc $H$ et $sf$ le sont ; et $fs =
+\mathrm{id}_Y$, $sf \in W$ donnent $f \in W$ par la condition c) de la page
+4. La page le résume ainsi : toute flèche de $TF$ est une $I$-homotopie,
+et toute $L$-homotopie est dans $W$.
+
+\emph{Les cofibrations triviales : les générateurs.} Il faut d'abord
+$(TC)_0 \subset W$, et pour cela deux axiomes :
+\[
+\text{(2)} \qquad (I \to e) \in \mathrm{U}W \ \text{ pour tout } I \text{ du
+bunch},
+\]
+ce qui équivaut, par le deux-sur-trois, à $A \times e \to A \times I$ dans $W$
+pour tout $A$ ; et
+\begin{enumerate}
+\item[(3)] si $S \hookrightarrow T$ est un monomorphisme et
+$g : S \hookrightarrow S'$ un monomorphisme dans $W$, la flèche
+$T \to T' = S' \amalg_S T$ est dans $W$.
+\end{enumerate}
+Alors, dans le diagramme
+
+\begin{tikzcd}[column sep=small, row sep=small, nodes={font=\scriptsize}]
+A_0 \times e \arrow[r, hook] \arrow[d, "W"'] & B_0 \times e \arrow[d, hook] \arrow[dr, "W"] & \\
+A_0 \times I \arrow[r, hook] & (B_0 \times e) \cup (A_0 \times I) \arrow[r, hook] & B_0 \times I
+\end{tikzcd}
+
+le carré est cocartésien, la flèche verticale médiane est dans $W$ par (3), la
+diagonale par (2), et $h(i_0, I, \varepsilon)$ par le
+deux-sur-trois.\footnote{La flèche verticale médiane porte sur la page
+« $f$ » et « $W$ » ; le premier terme est précédé d'une parenthèse biffée. La
+condition (3) est encadrée sur la page 17, où il la dit nécessaire de toute
+façon pour $W = \widetilde W$.}
+
+\emph{Les cofibrations triviales : la saturation.} Soit $f : A \to B$ dans
+$TC$. On le factorise en $f = pi$ avec $p \in F$ et $i$ obtenu par l'argument
+du petit objet, c'est-à-dire comme composé transfini de changements de cobase
+de sommes de flèches de $(TC)_0$. Par (3) et l'axiome
+\begin{enumerate}
+\item[(4)] $W$ est stable par limites inductives filtrantes,
+\end{enumerate}
+$i$ est dans $W$.\footnote{La page dit « when we use factorization » ; il faut
+que ce soit la factorisation cellulaire, sans quoi (3) et (4) ne s'appliquent pas
+à $i$. Les sommes s'obtiennent par (3) pour un nombre fini de termes, puis par
+(4). Le chiffre entouré après « Thus we need » est mal formé ; on le lit (4).}
+Comme $f \pitchfork p$, il existe $s$ avec $sf = i$ et $ps = \mathrm{id}_B$,
+et $f$ est un rétracte de $i$ :
+
+\begin{tikzcd}
+A \arrow[r, hook, "i"] \arrow[d, "="'] & B' \arrow[d, "p"] \\
+A \arrow[r, hook, "f"'] & B \arrow[u, bend right=40, "s"']
+\end{tikzcd}
+
+Il faut donc enfin
+\begin{enumerate}
+\item[(5)] $W$ est stable par rétractes (« direct factors »),
+\end{enumerate}
+condition nécessaire pour $W = \widetilde W$, puisque $\widetilde W$ l'est
+dès qu'on a une structure de modèles.\footnote{Il demande si (5) ne serait pas
+conséquence de la saturation. Elle ne l'est pas des conditions a), b), c) de
+la page 4 : voir la note de la page 26. Les deux figures de la marge gauche
+portent, l'une, « $W$ » et « (and $TC$) » sur $i$, « $F$ » sur $p$ et
+« $TC$ » sur $f$ ; l'autre dessine l'identité de gauche comme deux flèches
+opposées entre deux signes « $=$ ».} « Thus (1) to (5) imply $\widetilde W \subset W$. »
+
+\subsection*{L'inclusion $W \subset \widetilde W$, qui reste ouverte}
+
+Pour $\widetilde W \subset W$ il a fallu restreindre les intervalles ((2)) ; pour
+que $\widetilde W$ soit assez grande il faut que le bunch soit assez gros, et
+la condition naturelle serait qu'il contienne un intervalle séparant. On en a
+d'éligibles, $W$-asphériques et séparants, comme $\Omega$.
+
+Soit $f \in W$ factorisée en $f = pi$, $i \in TC$, $p \in F$. On sait déjà que
+$i \in W$, donc $p \in W$. Les trois inclusions
+\[
+W \subset \widetilde W, \qquad F \cap W \subset TF, \qquad C \cap W \subset TC
+\]
+sont donc équivalentes, moyennant les deux factorisations.\footnote{La page
+dit la deuxième et la troisième équivalentes, et équivalentes à la première,
+dans une phrase en partie illisible. La vérification est immédiate : si
+$F \cap W \subset TF$, la factorisation ci-dessus met $f$ dans
+$\widetilde W$ ; si $C \cap W \subset TC$, on factorise $f = pi$ avec
+$i \in C$, $p \in TF \subset W$, et $i \in C \cap W \subset TC$ ; enfin
+$W \subset \widetilde W$ donne $F \cap W \subset F \cap \widetilde W = TF$ par
+le lemme de la page 6.} La troisième dit que toute flèche ayant la propriété
+de relèvement à droite par rapport aux $h(i_0, I, \varepsilon)$ l'a par
+rapport à \emph{tous} les monomorphismes qui sont dans $W$. La page
+s'interrompt sur « [ ? ??? ] ». Il voudrait l'avoir au moins dans deux cas.\footnote{Il souligne $W$ pour le localisateur fondamental ; on écrit
+$\mathcal{W}$. Il écrit $T$ pour la catégorie test de b), lettre déjà prise
+par l'objet de la page 6 ; on écrit $B$. « Locale » est lu avec doute. Le cas
+a) est aujourd'hui un théorème de Cisinski (Astérisque 308, 2006) : pour un
+localisateur fondamental accessible $\mathcal{W}$ et une catégorie
+$\mathcal{W}$-test locale $A$, $\mathcal{W}_A$ est la classe des équivalences
+faibles d'une structure de modèles sur $\widehat{A}$ dont les cofibrations sont
+les monomorphismes. L'énoncé est cité de mémoire, et l'on ne dit pas sous
+quelle forme le cas b) y figure. La note oblique de la marge gauche (« but
+this cannot possibly be enough, as it would … given just one particular … »)
+ne se lit que par fragments.}
+\begin{enumerate}
+\item[a)] $\mathcal{E} = \widehat{A}$ et $W = \mathcal{W}_A$, où
+$\mathcal{W}$ est un localisateur fondamental et $A$ une catégorie
+$\mathcal{W}$-test (locale ?).
+\item[b)] $A = A_0 \times B$ avec $B$ une catégorie test, de sorte que
+$\widehat{A} \simeq \mathbf{Hom}(A_0^{\mathrm{op}}, \widehat{B})$, et
+$W = \mathcal{W}_{A/A_0}$, défini fibre à fibre par $\mathcal{W}_B$.
+\end{enumerate}
+
+\pagerange{21}{21}
+\section*{Une présentation alternative (page 21)}
+
+La page 21 (sa page 9) reprend tout depuis l'autre bout : « Alternative
+presentation of theory, with possibly slightly less strong result ». On se
+donne cette fois $W$, on veut une structure de modèles dont les cofibrations
+sont les monomorphismes et les équivalences faibles les flèches de $W$, et
+l'on pose directement
+\[
+C = \text{mono}, \quad TC = C \cap W, \quad F = (TC)_*, \quad TF = C_* .
+\]
+On sait toujours que $(TF)^* = C$. Restent quatre problèmes.\footnote{« Kan- » suivi d'un mot illisible désigne, deux fois, les flèches de
+$TF$. La page dit que c) découle « de 3) et 4) », et (a) « de 5) » ; la
+transcription note que ces conditions ne sont pas posées dans le lot, mais ce
+sont les axiomes (3), (4), (5) des pages 15 à 17. La condition (d), « quite
+important for me », est dite duale d'une condition lue avec doute « (b) ».
+C'est ce qu'on appelle aujourd'hui la propreté à droite, duale de la
+stabilité (3) par changement de cobase.}
+\begin{enumerate}
+\item[(a)] $F^* = TC$. Comme $F^* \subset (TF)^* = C$, cela revient à : tout
+monomorphisme ayant la propriété de relèvement à gauche par rapport à $F$ est
+dans $W$. C'est une propriété de saturation de $W$ relativement aux
+monomorphismes.
+\item[(b)] $TF = W \cap F$. Les hypothèses déjà faites ((1), page 15) donnent
+$TF \subset W$, donc $TF \subset W \cap F$ ; il reste $W \cap F \subset TF$.
+\item[c)] Les factorisations, la seconde avec $i \in C \cap W$ ; elles
+« shouldn't be too hard » par des arguments standard, et il
+les admet.
+\item[(d)] Si $f : X \to Y$ est dans $F$ et $Y' \to Y$ dans $W$, alors
+$X' = X \times_Y Y' \to X$ est dans $W$.
+\end{enumerate}
+
+Pour (a), l'argument de rétracte de la page 17 vaut tel quel. Si $f$ est un
+monomorphisme de $F^*$, on le factorise en $f = pi$ avec $i \in W \cap C$,
+$p \in F$. Le relèvement donne $s$ avec $sf = i$, $ps = \mathrm{id}$, donc $f$
+est un rétracte de $i$, et $f \in W$ par (5).\footnote{La lettre qui suit « Thus
+for » est tracée comme le c) qui précède ; l'argument est celui qui répond à
+(a). Le petit diagramme est dans la marge inférieure.}
+
+\begin{tikzcd}
+& X' \arrow[d, "p \in F"] \\
+X \arrow[ur, "i \in W \cap C"] \arrow[r, "f"'] & Y \arrow[u, bend right=40, "s"']
+\end{tikzcd}
+
+La différence avec les pages 4 à 19 est de principe : là, $TC$ était engendrée
+par $(TC)_0$ et il fallait comparer $\widetilde W$ à $W$ ; ici $TC$ est
+définie par $W$, et la question de la génération reviendra à la page 31.
+
+\pagerange{24}{27}
+\section*{Classes saturées, factorisation, structures de modèles (pages 24 à 27)}
+
+\subsection*{Saturations et systèmes de factorisation faibles}
+
+Soit $M$ une catégorie. Une classe $\Phi \subset \mathrm{Fl}(M)$ est
+\emph{saturée à gauche} si $\Phi = \Psi^*$ pour une classe $\Psi$,
+c'est-à-dire si $\Phi = (\Phi_*)^*$ ; une classe $\Psi$ est \emph{saturée à
+droite} si $\Psi = (\Psi^*)_*$. On a toujours $\Phi \subset (\Phi_*)^*$ et
+$\Psi \subset (\Psi^*)_*$, et $\Phi \mapsto \Phi_*$, $\Psi \mapsto \Psi^*$
+sont des bijections décroissantes, inverses l'une de l'autre, entre classes
+saturées à gauche et classes saturées à droite. Une classe saturée à droite
+est stable par composition, changement de base et rétractes ; dualement à
+gauche.\footnote{La dernière phrase est une note oblique de la marge gauche,
+où « right », « base ch. » et « retracts » sont lus avec doute. Il dessine son
+$\Phi$ tantôt rond, tantôt en une forme cursive proche d'un L de ronde, dans
+les mêmes formules.}
+
+Deux classes $\Phi, \Psi$ sont \emph{orthogonales} si $\Phi \subset \Psi^*$,
+ou, ce qui revient au même, $\Psi \subset \Phi_*$. La paire a la
+\emph{propriété de factorisation} si toute flèche $f$ s'écrit $f = pi$ avec
+$i \in \Phi$, $p \in \Psi$.
+
+\textbf{Proposition.} Soit $(\Phi, \Psi)$ une paire orthogonale ayant la
+propriété de factorisation. Alors $\Phi = \Psi^*$ si et seulement si $\Phi$
+est stable par rétractes, et $\Psi = \Phi_*$ si et seulement si $\Psi$ l'est.
+En effet, si $h \in \Psi^*$, on factorise $h = pi$, et $h \pitchfork p$ fait
+de $h$ un rétracte de $i \in \Phi$, comme à la page 17.
+
+Il appelle « paire de Quillen » une paire orthogonale ayant la propriété de
+factorisation dont les deux classes sont stables par rétractes : c'est ce
+qu'on appelle aujourd'hui un \emph{système de factorisation
+faible}.\footnote{Le nom « paire de Quillen » désigne aujourd'hui tout autre
+chose : une adjonction entre catégories de modèles qui préserve cofibrations
+et cofibrations triviales. Sur la page, c'est la paire $(C, TF)$ ou $(TC, F)$
+d'une structure de modèles. On ne garde pas son nom pour éviter la confusion.
+Il dit aussi « dual pair of subsets (localizers) » pour une paire
+$(\Psi^*, \Psi)$.} Il appelle « triple de Quillen » une donnée $(C, F, W)$
+telle que :
+\begin{enumerate}
+\item[a)] $W$ est faiblement saturée et stable par rétractes (M5) ;
+\item[b)] $(C, TF)$ et $(TC, F)$ sont des systèmes de factorisation faibles,
+où $TF = F \cap W$ et $TC = C \cap W$ (M1, M2).
+\end{enumerate}
+C'est une \emph{structure de modèles} au sens de Quillen ; il en résulte que
+$f \in W$ si et seulement si $f = pi$ avec $i \in TC$, $p \in TF$, et, si $M$
+a des limites projectives et inductives finies (M0), que $W$ est fortement
+saturée.\footnote{L'insertion « it would not be necessary here to assume the
+direct factor condition on $W$, if we assume b) » est juste : la stabilité de
+$W$ par rétractes découle des autres axiomes (Joyal et Tierney, cité de
+mémoire). La forte saturation est un résultat de Quillen ; la condition M0 est
+en marge, où « limits » et « finite inverse limits » sont lus avec doute.}
+
+\pagerange{26}{26}
+\subsection*{Un brouillon : la saturation (page 26)}
+
+Le feuillet n'a pas de numéro de sa main et il est barré de deux longues
+diagonales au crayon. Il commence par les complexes de Kan : si $Y$ est de
+Kan, $\mathbf{Hom}(I, Y) \to Y \times Y$ est une fibration de Kan ; est-ce une
+fibration de Serre ? La question est aussitôt posée fibre à fibre, au-dessus
+d'un $a \to Y \times Y$.\footnote{La première assertion est juste ; c'est un
+cas de l'axiome SM7 pour les ensembles simpliciaux. La seconde question n'est
+pas développée ; les notations $\mathbf{Hom}_{\alpha, \beta}(I_a, Y_a)$ sont
+celles de la page.}
+
+Puis trois conditions sur une classe $W$ : a) $\mathrm{Iso}_M \subset W$ ; b)
+le deux-sur-trois ; c) $W$ stable par rétractes. Elles donnent la saturation
+faible. Donnent-elles la saturation, $fg, gf \in W \Rightarrow f, g \in W$ ?
+Il compare
+\begin{enumerate}
+\item[(i)] $gf = \mathrm{id}$, $fg \in W$ $\Rightarrow$ $f, g \in W$ ;
+\item[(ii)] $gf \in W$, $fg \in W$ $\Rightarrow$ $f, g \in W$ ;
+\item[(iii)] $W$ stable par rétractes ;
+\end{enumerate}
+et note (ii) $\Rightarrow$ (i) $\Leftarrow$ (iii). La seconde implication
+vient de ce que, si $gf = \mathrm{id}_A$, $f$ est un rétracte de $fg$ :
+
+\begin{tikzcd}
+A \arrow[r, "f"] \arrow[d, "f"'] & B \arrow[r, "g"] \arrow[d, "fg"] & A \arrow[d, "f"] \\
+B \arrow[r, "\mathrm{id}"'] & B \arrow[r, "\mathrm{id}"'] & B
+\end{tikzcd}
+
+et $g$ est alors dans $W$ par le deux-sur-trois. La question elle-même reste
+ouverte sur la page, et la réponse est non.\footnote{Le contre-exemple est le
+nôtre. Soit la catégorie libre engendrée par deux flèches $f : A \to B$,
+$g : B \to A$ ; ses flèches sont les mots alternés, de longueur $\ell$, avec
+$\ell(vu) = \ell(u) + \ell(v)$. Soit $W$ la classe des mots de longueur paire.
+Elle contient les identités, seuls isomorphismes ; elle a le deux-sur-trois par
+additivité de la longueur ; elle est stable par rétractes, car seules les
+identités ont une section dans une catégorie libre. Elle a donc a), b), c), et
+pourtant $gf, fg \in W$ alors que $f \notin W$. La propriété (ii) est un cas de
+ce qu'on appelle aujourd'hui le deux-sur-six (Dwyer, Hirschhorn, Kan, Smith,
+2004), qui vaut pour toute classe fortement saturée. Autour de ces lignes, des
+esquisses : un encadré « a) b) c$_1$) (c$_2$) (c$_3$) », et des homotopies
+$gf \sim_h \mathrm{id}$, $fg \sim_h \mathrm{id}$ qui mettent $gf$ et $fg$ dans
+$W$ ; un dernier schéma n'est pas restitué.}
+
+\pagerange{27}{27}
+\subsection*{Conditions équivalentes (page 27, sa page « 10 bis »)}
+
+Soit $(C, F, W)$ avec $TF = F \cap W$ et $TC = C \cap W$, et posons
+$\widetilde{TF} = C_*$, $\widetilde{TC} = F^*$. On suppose
+\[
+\text{(a)} \ \ C = (TF)^*, \ F = (TC)_*, \qquad
+\text{(b)} \ \ W = \{ pi \mid p \in \widetilde{TF},\ i \in \widetilde{TC} \}.
+\]
+C'est la construction $\widetilde W$ de la page 6, faite avec les paires
+$(F^*, F)$ et $(C, C_*)$. Comme $C$ et $F$ sont saturées, $\widetilde{TF}
+\subset F$ et $\widetilde{TC} \subset C$ ; et (a) donne $TF \subset
+\widetilde{TF}$, $TC \subset \widetilde{TC}$. Il suffit donc que
+$\widetilde{TF} \subset W$ et $\widetilde{TC} \subset W$, ce qui équivaut à
+$\widetilde{TF} = TF$ et $\widetilde{TC} = TC$, c'est-à-dire à ce que
+$(C, TF)$ et $(TC, F)$ soient des systèmes de factorisation faibles. D'où les
+conditions équivalentes : (i) (a) et (b), une catégorie de modèles fermée au sens
+de Quillen ; (ii) $(C, TF)$ et $(TC, F)$ sont des systèmes de factorisation
+faibles ; et il faut encore (iii) $C$, $F$, $W$ stables par
+rétractes.\footnote{La factorisation de toutes les flèches, admise depuis la
+page 21, est implicite dans (i). La place de (iii) dans l'équivalence n'est
+pas claire sur la page ; il ajoute aussitôt : « I've to check » que (i) ou (ii)
+entraîne que $W$ est stable par rétractes. Le listing sur lequel il écrit
+porte imprimés « 06/09/82-09:14:22 » et « CFT 1.09 (05/10/82) ».}
+
+Quillen démontre plus : $W$ est fortement saturée, du moins quand $M$ a des
+limites inductives et projectives finies. La page le ramène aux objets
+fibrants et cofibrants. Par des factorisations successives, $f : X \to Y$ est
+relié à une flèche $g : X_2 \to Y_2$ entre objets fibrants et cofibrants, de
+sorte que $\gamma(f)$ est un isomorphisme si et seulement si $\gamma(g)$ en
+est un, et $f \in W$ si et seulement si $g \in W$. Donc $W$ est fortement
+saturée si et seulement si, pour $f$ entre objets fibrants et cofibrants et
+$f \in C$, $\gamma(f)$ isomorphisme entraîne $f \in W$ ; et de même avec $f \in
+F$.\footnote{Le diagramme de remplacement de la page passe par l'objet
+initial, tracé $\varphi$, et porte deux flèches en pointillé marquées
+« $\varepsilon$ » et « $F$ » qu'on ne restitue pas. C'est le théorème de
+Whitehead des catégories de modèles : une flèche entre objets fibrants et
+cofibrants inversée dans la catégorie homotopique est une équivalence
+d'homotopie, donc une équivalence faible.}
+
+\pagerange{29}{31}
+\section*{Construire une structure de modèles à partir de $(C, W)$ (pages 29 et 31)}
+
+La page 29 (sa page 11) donne la recette. On part d'une classe
+$C \subset \mathrm{Fl}(M)$ stable par rétractes et l'on vérifie la
+factorisation pour la paire $(C, C_*)$, qui est alors un système de
+factorisation faible ; on pose $TF = C_*$. On prend ensuite une classe
+$W \supset TF$, faiblement saturée et stable par rétractes. Alors $TC = C
+\cap W$ est stable par rétractes ; on pose $F = (TC)_*$, qui contient $TF$,
+et l'on vérifie la factorisation pour $(TC, F)$. Il reste $TF = F \cap W$. Une
+inclusion est acquise. Pour l'autre, soit $f : X \to Y$ dans $F \cap W$,
+factorisé en $f = pi$ avec $i \in C$, $p \in TF$. Comme $f, p \in W$, on a
+$i \in W$, donc $i \in TC$. Le relèvement de $i$ par rapport à $f$ donne
+$s : X' \to X$ avec $si = \mathrm{id}_X$ et $fs = p$, de sorte que $f$ est un
+rétracte de $p$, et $f \in TF$.
+
+\begin{tikzcd}
+X \arrow[r, "="] \arrow[d, "i"'] & X \arrow[d, "f \in F"] \\
+X' \arrow[r, "p"'] \arrow[ur, dashed, "s"] & Y
+\end{tikzcd}
+
+\textbf{Proposition.} Pour qu'une paire $(C, W)$ provienne d'une structure de
+modèles $(C, F, W)$, il faut et il suffit que :\footnote{Que $C = (C_*)^*$ et $C \cap W = ((C \cap W)_*)^*$ découle de 1) et
+2) par la proposition de la page 24 ; la page ne le dit pas. La
+caractérisation est aujourd'hui standard : une structure de modèles est
+déterminée par ses cofibrations et ses équivalences faibles. Il dit « mildly
+saturated ».}
+\begin{enumerate}
+\item[1)] $C$ et $W$ soient stables par rétractes, et $W$ faiblement
+saturée ;
+\item[2)] les paires $(C, C_*)$ et $(C \cap W, (C \cap W)_*)$ aient la
+propriété de factorisation ;
+\item[3)] $W \supset C_*$.
+\end{enumerate}
+
+« In the case of interest to us », 1) est gratuit, 3) presque (il vient de
+l'hypothèse « test »), et 2) pose un petit problème technique. Il s'intéresse
+aussi, au-delà des factorisations, à la propriété qui caractérise un triple
+de Quillen \emph{strict} :
+\begin{enumerate}
+\item[4)] $W$ est stable par changement de base le long des $g \in F$ et par
+changement de cobase le long des $g \in C$.
+\end{enumerate}
+C'est ce qu'on appelle aujourd'hui une structure de modèles
+\emph{propre}.\footnote{Le terme est de Bousfield et Friedlander (1978), cité
+de mémoire. La condition de base est la (d) de la page 21, celle de cobase
+la (3) de la page 15, sous une forme où la flèche le long de laquelle on
+change de cobase est une cofibration quelconque.}
+
+\emph{NB} (page 31). C'est la réflexion de méthode du dossier. De son point de vue, $W$ est donnée d'avance, de façon assez
+tangible, par un critère homologique, très maniable. Chez Kan et Quillen, $W$
+était plus cachée : on y arrive par la paire $(C, TF)$ et les fibrations de
+Kan $F \supset TF$, une construction quelque peu ad hoc à partir d'un ensemble
+générateur $(TC)_0$, qui exprime en gros la propriété de relèvement de Kan.
+Reste à comprendre, pour une catégorie test générale, le rapport entre cette
+construction et la description directe $TC = C \cap W$, c'est-à-dire pourquoi
+$C \cap W$ est exactement la \emph{saturation} de $(TC)_0$. Peut-être faut-il
+regarder le traitement par Gabriel et Zisman des « extensions
+anodines ».\footnote{« ss structures » et « a-priori » sont lus avec doute.
+Gabriel et Zisman, \emph{Calculus of Fractions and Homotopy Theory} (1967),
+montrent que, pour les ensembles simpliciaux, les monomorphismes qui sont des
+équivalences faibles sont exactement la saturation des inclusions de cornets.
+Pour une catégorie test, la question est celle à laquelle répond la théorie de
+Cisinski (2006), où les cofibrations triviales sont la saturation d'un petit
+ensemble d'extensions anodines (cité de mémoire).}
+
+\pagerange{33}{39}
+\section*{Factorisation (pages 33 à 39)}
+
+Le titre est le sien, souligné, en oblique dans la marge supérieure de la page
+33 (sa page 13). Ces pages fournissent ce qui avait été admis aux pages 13 et
+21. C'est aussi là que se décide la question de la page 15 : le bunch
+d'intervalles doit être petit, parce que $(TC)_0$ doit l'être.
+
+\subsection*{La construction}
+
+Soit $M$ une catégorie, $\Phi_0 \subset \mathrm{Fl}(M)$, $\Psi = (\Phi_0)_*$,
+et $\Phi_0 \subset \Phi \subset \overline{\Phi}_0 = \Psi^*$. On cherche des
+conditions sur $\Phi_0$ et $\Phi$ pour que toute flèche se factorise en
+$f = pi$ avec $i \in \Phi$, $p \in \Psi$.\footnote{En interligne : « NB. we
+don't use $\Phi \subset \overline{\Phi}_0$ » ; c'est juste, cette inclusion ne
+sert qu'à l'orthogonalité. Un astérisque au-dessus de $\Phi_0$ renvoie,
+semble-t-il, à la note marginale de la page 39 ; une note oblique sous le titre
+renvoie à « p.~16 », sa page 16, qui est la page 39.}
+
+Pour $f : X \to Y$ fixée, on considère tous les carrés commutatifs $(D)$
+
+\begin{tikzcd}
+A \arrow[r, "u"] \arrow[d, "g"'] & X \arrow[d, "f"] \\
+B \arrow[r, "v"'] & Y
+\end{tikzcd}
+
+avec $g \in \Phi_0$, et l'on pose $X_D = X \amalg_A B$, puis $X_1(f)$ la somme
+amalgamée sous $X$ de tous les $X_D$. On obtient une factorisation
+$f = \Sigma_1(f) \circ i_1(f)$, avec $i_1(f) : X \to X_1(f)$ et
+$\Sigma_1(f) : X_1(f) \to Y$, et $i_1(f) \in \Phi$ pourvu que :\footnote{Les insertions en bout des lignes b) et c) sont très serrées, et
+leur place exacte est incertaine. Le carré supérieur de la construction de
+$X_D$ est marqué « coc. ».}
+\begin{enumerate}
+\item[a)] $\Phi_0$ soit petit ;
+\item[b)] les sommes amalgamées indexées par des ensembles de cardinal
+$\leqslant \mathrm{card}\, \Phi_0 \times c$ existent dans $M$, où $c$ est le
+cardinal des $\mathrm{Hom}(A, X) \times \mathrm{Hom}(B, Y)$ ;
+\item[c)] $\Phi$ soit stable par composition, par changement de cobase et par
+les limites inductives filtrantes indexées par des ensembles de cardinal
+$\leqslant c$.
+\end{enumerate}
+
+Puis, par récurrence transfinie sur les ordinaux $\alpha < \alpha_0$,
+\[
+\Sigma_{\alpha+1}(f) = \Sigma_1(\Sigma_\alpha(f)), \qquad
+i_{\alpha+1}(f) = i_1(\Sigma_\alpha(f)) \circ i_\alpha(f),
+\]
+et
+\[
+\Sigma_\alpha(f) = \varinjlim_{\alpha' < \alpha} \Sigma_{\alpha'}(f)
+\quad \text{si } \alpha \text{ est un ordinal limite},
+\]
+$X_\alpha(f)$ étant la source de $\Sigma_\alpha(f)$. On suppose $\Phi$ stable
+par les limites inductives qui interviennent aux ordinaux limites.
+
+\emph{Le choix de $\alpha_0$.} Soit $\pi$ un cardinal tel que les sources et
+buts des $g \in \Phi_0$ soient $\pi$-accessibles : $\mathrm{Hom}(A, -)$
+commute aux limites inductives filtrantes « large with resp.\ to $\pi$ ». On
+peut prendre $\pi = \sup_{g \in \Phi_0} \pi_g$. Si ces objets sont de
+présentation finie, on arrête la récurrence au premier ordinal infini ; en
+général on prend pour $\alpha_0$ le premier ordinal dont l'ensemble des
+prédécesseurs est large par rapport à $\pi$.\footnote{Dans le cas de
+présentation finie, la page écrit « $\pi = 0$ » d'un rond épais ; c'est
+$\aleph_0$, la récurrence s'arrêtant à $\omega$. En général, on peut prendre
+pour $\alpha_0$ un cardinal régulier $\kappa \geqslant \pi$ : l'ensemble des
+ordinaux $< \kappa$ est $\kappa$-filtrant. Cette précision est la nôtre.} On
+pose $\mathbf{X}(f) = X_{\alpha_0}(f)$, $i(f) = i_{\alpha_0}(f)$ et
+$p(f) = \Sigma_{\alpha_0}(f)$.
+
+Alors $i(f) \in \Phi$ et $p(f) \in \Psi$, sous l'hypothèse d) : les sources et
+buts des $g \in \Phi_0$ sont accessibles, et, pour un cardinal $\pi$ assez
+grand, tout système inductif filtrant de cardinal $\leqslant \pi$ à flèches de
+transition dans $\Phi$ a une limite, les flèches $Z_i \to Z$ étant dans
+$\Phi$. La raison est la suivante.\footnote{La page énonce la conclusion sans
+cet argument, qui est le nôtre. Elle marque d'un double trait en marge la
+fonctorialité qui suit.} Un carré de $g : A \to B$, $g \in \Phi_0$, vers
+$p(f)$ a sa flèche $A \to X_{\alpha_0}(f) = \varinjlim X_\alpha(f)$ qui se
+factorise par un $X_\alpha(f)$, $\alpha < \alpha_0$, par accessibilité de $A$.
+Ce carré figure donc parmi ceux qui construisent $X_{\alpha+1}(f)$, et celui-ci
+fournit la diagonale $B \to X_{\alpha+1}(f) \to X_{\alpha_0}(f)$. De plus la
+factorisation est \emph{fonctorielle} en $f$.
+
+\pagerange{37}{37}
+\subsection*{L'énoncé (page 37)}
+
+Supposons :
+\begin{enumerate}
+\item[a)] $\Phi_0$ petit, et les sources et buts de ses flèches accessibles ;
+\item[b)] $M$ stable par limites inductives filtrantes ;
+\item[(c)] pour toute $u : A \to X$ et toute $\alpha : A \to B$ dans $\Phi_0$,
+la somme amalgamée $X' = X \amalg_A B$ existe et $\alpha' : X \to X'$ est
+dans $\Phi$ ; et c') $\Phi$ est stable par composition ;
+\item[(d)] $\Phi$ est stable par limites inductives filtrantes, au sens de la
+page 35.
+\end{enumerate}
+Alors $(\Phi, \Psi)$ a la propriété de factorisation, et il existe même un
+foncteur $\Sigma : \mathrm{Fl}(M) \to \mathrm{Fl}(M)$ au-dessus de $M$ (pour le
+foncteur but $t$) et un morphisme fonctoriel $\mathrm{id} \to \Sigma$ dans
+$[\mathrm{Cat}]_{/M}$, qui envoie $f : X \to Y$ sur $p(f) :
+\mathbf{X}(f) \to Y$ par $(i(f), \mathrm{id}_Y)$, avec $i(f) \in \Phi$ et
+$p(f) \in \Psi$.\footnote{Il souligne $\mathrm{Fl}$ dans
+$\mathrm{Fl}(M)$, la catégorie des flèches ; et il précise en
+interligne que ce sont des catégories « possibly “large” » au-dessus de
+$M$. En marge de (d) : « It is enough to know it w.r.t.\ ordered sets $I$ where
+sup of any two elements exists ».}
+
+\begin{tikzcd}
+\mathrm{Fl}(M) \arrow[rr, "\Sigma"] \arrow[dr, "t"'] & & \mathrm{Fl}(M) \arrow[dl, "t"] \\
+& M &
+\end{tikzcd}
+
+\emph{Exemple.} Si $M$ a des sommes amalgamées et $\Phi = \overline{\Phi}_0 =
+\Psi^*$, la condition (c) est triviale, une classe saturée à gauche étant
+stable par changement de cobase. Pour (d), il propose une récurrence de Zorn sur
+les paires $(J \subset I, u_J : \varinjlim_J A_j \to X)$ qui prolongent le
+relèvement donné sur $A_{i_0}$, la surjectivité cherchée étant celle de
+$\mathrm{Hom}(B, X) \to \mathrm{Hom}(g, f) = \varprojlim
+\mathrm{Hom}(g_i, f)$.\footnote{L'argument de Zorn vaut pour un système
+\emph{bien ordonné}, où chaque étape n'a qu'un prédécesseur immédiat ou est
+une limite. Il ne passe pas tel quel à un système filtrant quelconque : deux
+relèvements déjà choisis sur deux $A_j$ n'ont pas de raison de se recoller sur
+un $A_i$ qui les majore. C'est bien la restriction que fait le lemme de la page
+39, où la version filtrante est biffée au profit des systèmes ordinaux ; et
+c'est tout ce que la construction des pages 33 à 35 utilise. « OK », « for
+compositions », « Zorn », « induction » et « obvious » sont lus avec doute.
+Le schéma qui pose le problème est en marge, avec la flèche cherchée
+$\varphi : B \to X$ en pointillé.}
+
+\pagerange{39}{39}
+\subsection*{Le lemme et le théorème (page 39)}
+
+\textbf{Lemme.} Soit $\Phi = \Psi^*$ une classe saturée à gauche. Alors :
+\begin{enumerate}
+\item[a)] $\Phi$ contient les isomorphismes ;
+\item[b)] $\Phi$ est stable par composition et changement de cobase ;
+\item[c)] $\Phi$ est stable par sommes amalgamées quelconques ;
+\item[d)] $\Phi$ est stable par systèmes inductifs ordinaux : si $I$ est bien
+ordonné et $(A_i)_{i \in I}$ un système inductif à flèches de transition dans
+$\Phi$, continu aux ordinaux limites ($A_{i_0} = \varinjlim_{j < i_0} A_j$),
+alors $A_{i_0} \to \varinjlim_I A_i$ est dans $\Phi$ pour tout $i_0$.
+\end{enumerate}
+En marge : a), b), d) entraînent c).\footnote{« Including » et le mot qui suit,
+à la fin de b), sont lus avec doute et illisibles. Il dit « left
+Q-saturated », Q pour Quillen.}
+
+\textbf{Théorème.} Soit $M$ une catégorie stable par petites limites
+inductives et accessible.\footnote{« Weakly » devant « accessible » est lu avec doute ; seule sert
+l'accessibilité des sources et buts des flèches de $\Phi_0$. La note
+marginale oblique, en regard de (1) et (2), à laquelle renvoient les astérisques,
+commence par « We have to assume $\Phi_0$ small » ; le reste ne se lit que par
+fragments, dont une variante a), b$'$), c), d) avec b$'$) la stabilité par
+changement de cobase sans composition. L'énoncé est l'argument du petit objet
+de Quillen (1967), et ce qu'on appelle aujourd'hui une classe à engendrement
+cofibrant ; une catégorie stable par petites limites inductives et accessible,
+avec un petit ensemble de générateurs, est ce que Gabriel et Ulmer (1971)
+appellent localement présentable.}
+\begin{enumerate}
+\item[(1)] Soit $\Phi_0 \subset \mathrm{Fl}(M)$ petit, et
+$\Phi_0 \subset \Phi \subset \overline{\Phi}_0 = \Psi^*$, $\Psi = (\Phi_0)_*$.
+Si $\Phi$ satisfait a), b), c), d), la paire $(\Phi, \Psi)$ a la propriété de
+factorisation ; si de plus $\Phi$ est stable par rétractes,
+$\Phi = \overline{\Phi}_0$.
+\item[(2)] Pour que $\Phi = \overline{\Phi}_0$, il faut et il suffit que $\Phi$
+satisfasse a), b), c), d) et e) : la stabilité par rétractes. La
+factorisation a lieu alors pour le système $(\Phi, \Psi)$.
+\end{enumerate}
+
+\emph{NB.} Dans (2), on supposait au préalable l'existence d'un $\Phi_0$
+\emph{petit} ayant même saturation à gauche que $\Phi$. « Next step is to try
+to get rid of this. » La suite n'est pas dans le dossier.\footnote{Sans
+hypothèse, on ne peut pas s'en défaire : la question devient celle de savoir
+quand une classe $C \cap W$ est engendrée par un petit ensemble, à laquelle
+répondent, sous des hypothèses d'accessibilité sur $W$, le théorème de
+J.~Smith (exposé par T.~Beke en 2000) et, pour les topos, Cisinski. Références
+citées de mémoire.}
+
+\pagerange{42}{45}
+\section*{Les axiomes W7 et W8, et l'axiome « Der 6 » (pages 42 à 52)}
+
+La dernière suite est en français et paginée de sa main de 6 à 18 ; ses pages 1
+à 5 ne sont pas dans le dossier. Elle s'ouvre sur la fin, biffée, d'un
+argument commencé avant : un carré de foncteurs $U \to \overline{U}$,
+$U' \to \overline{U}'$ dont les deux flèches horizontales sont dans $W$, donc
+« $q \in W$ ssi $q_U \in W$ cqfd ». Elle demande alors : « \emph{Dém.} de W7,
+W 7 bis si $W = W_{\mathbb D}$ ? »\footnote{Le chiffre devant « bis » est
+surchargé. La liste des axiomes W1 à W8, ni les énoncés de W7 et W8, ne sont
+dans le dossier ; leur forme se lit sur l'argument, et sur les formes « bis »
+des pages 51 et 52. De même les axiomes « Der 1 -- Der 5, 5' » de la page 48
+sont cités sans être énoncés. La numérotation Der 1 à Der 5 est celle que la
+théorie des dérivateurs a gardée, mais on ne prétend pas que la liste
+qu'invoque la page coïncide avec la liste reçue.}
+
+\emph{Notations de cette partie.} Un \emph{ouvert} d'une catégorie $X$ est un
+crible : une sous-catégorie pleine $U$ telle que $x \to y$ et $y \in U$
+entraînent $x \in U$.\footnote{C'est le sens que force la page, où
+$U = \varphi^{-1}(\{0\} \times \Delta^1) = X_{/a}$.} On note
+$Q = \Delta^1 \times \Delta^1$, et $\Psi = Q \smallsetminus \{(1,1)\}$,
+l'ensemble ordonné $\{0 < a,\ 0 < b\}$ où $0 = (0,0)$, $a = (0,1)$, $b = (1,0)$ ;
+$k : \Psi \subset Q$ est l'inclusion, qui ajoute à $\Psi$ l'élément final
+$(1,1)$. On note $\Phi = \Psi^{\mathrm{op}} = (a \to 0 \leftarrow b)$. Pour
+$\varphi : X \to I$ et $s \in I$, $X_{/s} = X \times_I I_{/s}$ ; la
+construction de Grothendieck du foncteur $s \mapsto X_{/s}$ est notée
+$\mathcal{G}_I(X)$.\footnote{Il la note d'un $\Psi$ épaissi affecté d'un
+indice, « $\Psi_{Q}(X)$ », qui se confond avec l'ensemble ordonné
+$\Psi$ ; on écrit $\mathcal{G}$.} $\mathbb D$ est un dérivateur,
+$\mathcal{A} = \mathbb D(e)$ ; pour une catégorie $X$, $p_X : X \to e$, et
+$\xi \in \mathcal{A}$,
+\[
+H^\bullet_{\mathbb D}(X, \xi) = p_{X*}\, p_X^*\, \xi \in \mathcal{A}
+\]
+est la cohomologie de $X$ à coefficients constants $\xi$, et $W_{\mathbb D}$
+la classe des foncteurs $u : X \to Y$ tels que $u^* :
+H^\bullet_{\mathbb D}(Y, \xi) \to H^\bullet_{\mathbb D}(X, \xi)$ soit un
+isomorphisme pour tout $\xi \in \mathcal{A}$.\footnote{Cette définition n'est
+pas sur ces pages ; elle se lit sur l'usage qu'en fait la page 45 (« ceci
+étant vrai pour tout $\xi \in \mathcal{A}$, cela donne $i_0 \in W_{\mathbb D}
+\Rightarrow i \in W_{\mathbb D}$ »). Il souligne $\mathbb D$ en un endroit, et
+$\Psi$, $\Phi$, $Q$, $U_0$ partout.} Les objets de $\mathbb D(I)$ se lisent,
+comme le dit la page 45, comme des diagrammes de type
+$I^{\mathrm{op}}$.\footnote{C'est la convention des préfaisceaux, à laquelle
+toutes les formules de ces pages obéissent : la valeur en $(1,1)$ d'un
+$k_*(\gamma_0)$ y est une limite projective sur $\Psi^{\mathrm{op}}$, et
+$H^\bullet_{\mathbb D}(Q, \gamma) \simeq \gamma(1,1)$ parce que $(1,1)$ est
+final dans $Q$. Une bonne part de la littérature actuelle sur les dérivateurs
+prend la convention opposée.}
+
+\subsection*{Deux ouverts et le carré de Mayer--Vietoris (pages 42 à 45)}
+
+Se donner deux ouverts $U, U'$ de $X$ revient à se donner
+$\varphi : X \to Q$, avec $U = \varphi^{-1}(\{0\} \times \Delta^1)$ et
+$U' = \varphi^{-1}(\Delta^1 \times \{0\})$. Ses fibres sont $X_{0,0} = U \cap
+U'$, $X_{0,1} = U \cap T'$, $X_{1,0} = T \cap U'$ et $X_{1,1} = T \cap T'$,
+où $T$ et $T'$ sont les complémentaires de $U$ et $U'$. La condition
+$U \cup U' = X$ équivaut à $X_{1,1} = \varnothing$, donc à ce que $\varphi$ se
+factorise par $\Psi$. Les fibres sont alors
+$X_0 = U \cap U'$, $X_a = U \smallsetminus U'$, $X_b = U' \smallsetminus U$,
+et
+\[
+U = X_{/a}, \qquad U' = X_{/b}, \qquad U \cap U' = X_{/0} .
+\]
+\footnote{Il écrit $\{1,1\}$ pour le point $(1,1)$. Les ouverts
+$\{0, a\}$ et $\{0, b\}$ de $\Psi$, dont $U$ et $U'$ sont les images
+réciproques, sont notés $U_0$, $U'_0$, soulignés.}
+
+Le diagramme $U \leftarrow U \cap U' \rightarrow U'$ de $\mathrm{Cat}$ est
+donc le foncteur $\Psi \to \mathrm{Cat}$, $s \mapsto X_{/s}$, et il définit
+une catégorie cofibrée scindée $\overline{X} = \mathcal{G}_\Psi(X)$ sur
+$\Psi$, de fibres $\overline{X}_a = U$, $\overline{X}_b = U'$,
+$\overline{X}_0 = U \cap U'$, les foncteurs de transition étant les
+inclusions. Le foncteur $\alpha : X \to \overline{X}$, $x \mapsto
+(\varphi(x), x)$, est dans $W$.\footnote{La page écrit
+« $\alpha \in W_{\Psi}$ », l'indice surchargé et lu avec doute, et
+ne justifie pas. Voici pourquoi, pour toute classe $W$ qui contient les
+foncteurs ayant un adjoint. Le foncteur $r : \overline{X} \to X$, $(s, x)
+\mapsto x$, vérifie $r \alpha = \mathrm{id}_X$, et les flèches $(\varphi(x),
+x) \to (s, x)$ forment une transformation naturelle $\alpha r \Rightarrow
+\mathrm{id}$. Ainsi $\alpha$ est une équivalence d'homotopie au sens des
+catégories, et est dans $W_\infty$, comme dans $W_{\mathbb D}$. L'argument est
+le nôtre. Les deux traits vers $\Psi$ du triangle sont sans pointe sur la
+page.}
+
+La projection $\overline{\varphi} : \overline{X} \to \Psi$ est propre, de
+sorte que $\overline{\varphi}_*$ se calcule fibre par fibre. Pour un
+coefficient constant $\xi_{\overline{X}}$, $\xi \in \mathcal{A}$, la valeur de
+$\overline{\varphi}_*(\xi_{\overline{X}})$ en $0$, $a$, $b$ est
+$H^\bullet_{\mathbb D}(U \cap U', \xi)$, $H^\bullet_{\mathbb D}(U, \xi)$,
+$H^\bullet_{\mathbb D}(U', \xi)$ ; le diagramme
+$H^\bullet_{\mathbb D}(U, \xi) \to H^\bullet_{\mathbb D}(U \cap U', \xi)
+\leftarrow H^\bullet_{\mathbb D}(U', \xi)$, de type $\Psi^{\mathrm{op}}$, est
+donc le diagramme sous-jacent de
+\[
+\gamma_0 = \overline{\varphi}_*(\xi_{\overline{X}}) \in \mathbb D(\Psi).
+\]
+Soit $\gamma = k_*(\gamma_0) \in \mathbb D(Q)$. Un objet de $\mathbb D(Q)$
+de la forme $k_*(\gamma_0)$ est ce qu'on appelle un carré
+\emph{cartésien} ; comme $k$ est pleinement fidèle, $k^*\gamma \simeq
+\gamma_0$.\footnote{La définition, qui est la reçue, n'est pas écrite sur la
+page ; elle y dit « le “carré cartésien” », entre guillemets.} Le carré
+sous-jacent à $\gamma$ est
+
+\begin{tikzcd}[column sep=small]
+& H^{\bullet}_{\mathbb{D}}(X, \xi) \arrow[dl, "i^*"'] \arrow[dr, "i'^*"] & \\
+H^{\bullet}_{\mathbb{D}}(U, \xi) \arrow[dr, "i_0'^*"'] & & H^{\bullet}_{\mathbb{D}}(U', \xi) \arrow[dl, "i_0^*"] \\
+& H^{\bullet}_{\mathbb{D}}(U \cap U', \xi) &
+\end{tikzcd}
+
+où $i : U \to X$, $i' : U' \to X$, $i'_0 : U \cap U' \to U$ et
+$i_0 : U \cap U' \to U'$ sont les inclusions. En effet, si
+$\psi = k \circ \overline{\varphi} : \overline{X} \to Q$, alors $\gamma =
+\psi_*(\xi_{\overline{X}})$, d'où
+\[
+\gamma(1,1) \simeq H^\bullet_{\mathbb D}(Q, \gamma) \simeq
+H^\bullet_{\mathbb D}(\overline{X}, \xi) \simeq H^\bullet_{\mathbb D}(X, \xi),
+\]
+la première identification parce que $(1,1)$ est final dans $Q$, la dernière
+parce que $\alpha \in W$.\footnote{En marge, entre les deux moitiés de la
+feuille : « à vérifier (ou à mettre comme axiome sur les dérivateurs) ». Une
+note encadrée ajoute que le carré est cartésien pour tout
+$\xi \in \mathbb D(X)$, et pas seulement pour $\xi$ constant.}
+
+Dans un carré cartésien, l'image réciproque d'un isomorphisme est un
+isomorphisme : si $i_0^*$ est un isomorphisme, $i^*$ en est un. Ceci valant
+pour tout $\xi \in \mathcal{A}$,
+\[
+i_0 \in W_{\mathbb D} \Longrightarrow i \in W_{\mathbb D} .
+\]
+\footnote{La page écrit « $i_0^*$ iso $\Longleftrightarrow i^*$ iso » comme
+une propriété générale des carrés cartésiens dans $\mathcal{A}$. Seule
+l'implication $\Rightarrow$ est générale ; la réciproque demande que le carré
+soit aussi cocartésien, comme la page 46 le dit elle-même. La
+conclusion qu'elle tire, $i_0 \in W_{\mathbb D} \Rightarrow i \in
+W_{\mathbb D}$, n'utilise que $\Rightarrow$.} C'est la moitié de W7 : pour
+deux ouverts $U, U'$ recouvrant $X$, si $U \cap U' \to U'$ est une
+équivalence, $U \to X$ en est une.
+
+\pagerange{46}{48}
+\subsection*{La réciproque, et le « Principe » (pages 46 à 48)}
+
+Pour avoir la réciproque $i \in W_{\mathbb D} \Rightarrow i_0 \in
+W_{\mathbb D}$, il faudrait savoir que le carré $\gamma$ est non seulement
+cartésien, mais aussi \emph{cocartésien}. « Moralement », qu'il soit cartésien
+lui semble la traduction cohomologique de ce que le carré de cribles
+$U \cap U' \to U, U' \to X$ est cocartésien dans $\mathrm{Cat}$, en un sens
+assez fort. Ce carré est aussi trivialement cartésien, et l'on peut s'attendre
+à ce que son transformé par $H^\bullet_{\mathbb D}(-, \xi)$ soit
+cocartésien.\footnote{Quatre lignes biffées ouvrent la page 46 ; on y lit
+« Dérivateur » avec doute.}
+
+Il se place alors sur $Q$ plutôt que sur $\Psi$. On a $\mathcal{G}_Q(X)|_\Psi
+\simeq \mathcal{G}_\Psi(X)$, et la quatrième fibre est $X_{/(1,1)} \simeq X$,
+de sorte que le diagramme de type $Q$ de $\mathrm{Cat}$ qui définit
+$\mathcal{G}_Q(X)$ est le carré des cribles lui-même. Ce carré n'est pas
+quelconque. Sa propriété essentielle est que, pour $V = U \cap U'$, le
+foncteur
+\[
+\mathcal{G}_\Psi(X) = \int \bigl(V \to U,\ V \to U'\bigr) \longrightarrow X
+\]
+est dans $W$.\footnote{C'est le foncteur $r$ de la note précédente. Par le
+théorème de Thomason (1979), la construction de Grothendieck d'un diagramme de
+catégories en calcule la limite inductive homotopique ; dire que ce foncteur
+est une équivalence, c'est dire que le carré des cribles est
+homotopiquement cocartésien. La glose est la nôtre. Sous l'intégrale, la
+source commune est d'abord écrite puis surchargée ; on la lit $V$.}
+
+\textbf{« Principe » (?).} Soit $X_a \leftarrow X_0 \rightarrow X_b$ un
+diagramme de $\mathrm{Cat}$ de type $\Psi$, $\mathcal{X}$ la catégorie
+cofibrée sur $\Psi$ qu'il définit et $\varphi : \mathcal{X} \to \Psi$ la
+projection. Pour $\xi \in \mathbb D(\mathcal{X})$, soit $\gamma_0 =
+\varphi_*(\xi) \in \mathbb D(\Psi)$ et $\gamma = k_*(\gamma_0) \in \mathbb
+D(Q)$. Alors
+\[
+\gamma(0,0) \simeq H^\bullet_{\mathbb D}(X_0, \xi), \quad
+\gamma(0,1) \simeq H^\bullet_{\mathbb D}(X_a, \xi), \quad
+\gamma(1,0) \simeq H^\bullet_{\mathbb D}(X_b, \xi), \quad
+\gamma(1,1) \simeq H^\bullet_{\mathbb D}(\mathcal{X}, \xi),
+\]
+et le carré sous-jacent est celui des restrictions. Le carré
+$X_0 \to X_a, X_b \to \mathcal{X}$ des fibres n'est même pas commutatif, car
+$X_a \cap X_b = \varnothing$ dans $\mathcal{X}$ ; mais celui des
+$X_{/0} \subset X_{/a}, X_{/b} \subset \mathcal{X}$ l'est, et le carré des
+cohomologies s'en déduit aussi.\footnote{« N'est même pas » est lu avec
+doute. Le passage enjambe les deux moitiés de la feuille, que la page 48 porte
+à l'italienne comme les pages 45 et 51.}
+
+Le carré $\gamma$ est cartésien par construction, et il le serait pour tout
+$\mathcal{X}$ propre sur $\Psi$, sans le supposer cofibré. Que $\mathcal{X}$
+soit cofibré doit donner en plus qu'il est \emph{cocartésien}. Il a
+l'impression que cela ne découle pas des axiomes Der 1 à Der 5, 5', et le pose
+comme axiome.\footnote{La phrase est criblée de mots illisibles et de lectures
+douteuses ; on n'en garde que le sens qu'impose la suite.}
+
+\textbf{« Der 6 » (provisoire), « axiome des cofibrations ».} Si
+$\mathcal{X}$ est cofibré sur $\Psi$ et $\xi \in \mathbb D(\mathcal{X})$,
+l'objet $\psi_*(\xi) \in \mathbb D(Q)$, où $\psi = k \circ \varphi$, est non
+seulement cartésien, mais aussi cocartésien.\footnote{« Quelconque » après
+$\xi$ est biffé. Le nom « Axiome des cofibrations » est écrit en oblique au
+bas de la moitié droite, souligné ; trois lignes plus petites au-dessous, et
+une note oblique de la marge gauche reliée à « Der 6 », restent illisibles.}
+
+\pagerange{49}{50}
+\subsection*{Der 6', et la forme symétrique (pages 49 et 50)}
+
+\textbf{« Der 6' » (provisoire).} Si $\mathcal{X}$ est fibrée sur
+$\Phi = \Psi^{\mathrm{op}} = (a \to 0 \leftarrow b)$ (donc donnée, à
+$\Phi$-équivalence près, par un diagramme $X_a \leftarrow X_0 \rightarrow X_b$
+de $\mathrm{Cat}$) et $\xi \in \mathbb D(\mathcal{X})$ est constant, alors
+$\psi_!(\xi)$, pour $\psi : \mathcal{X} \to \Phi \subset Q^{\mathrm{op}}$, est
+non seulement cocartésien, « sans mérite », mais aussi
+cartésien.\footnote{La page appelle $1$ le sommet de $\Phi$, « $(a \to 1
+\leftarrow b)$ » ; il deviendra $0$ aux pages 51 et 52, et on l'appelle $0$
+partout. Elle écrit $\psi_!(\xi) \in \mathbb D(Q)$, mais dessine
+$\Phi$ dans $Q^\circ$, ses trois sommets entourés ; c'est
+$\mathbb D(Q^{\mathrm{op}})$. Le diagramme définissant $\mathcal{X}$ est
+reproduit tel que la page le trace (un trait sans pointe entre $X_a$ et $X_0$,
+une flèche de $X_a$ vers $X_b$) ; la forme d'un diagramme de fibres d'une
+catégorie fibrée sur une co-étoile est celle qu'on écrit. Dans la marge
+gauche, en oblique, « Axiome des fibrations », lu avec doute.}
+
+\emph{NB.} Der 6' pour $\mathbb D$ n'est autre que Der 6 pour le dérivateur
+opposé $\mathbb D^\circ$, $\mathbb D^\circ(I) = \mathbb
+D(I^{\mathrm{op}})^{\mathrm{op}}$. Il ne voit pas comment l'un impliquerait
+l'autre, hors le cas exceptionnel où il y a un foncteur dualisant dans
+$\mathcal{A}$, et une dualité correspondante entre cohomologie et homologie.
+
+Il semble finalement que l'axiome qui englobe les deux soit le suivant :
+
+\textbf{« Der 6 ».} Un objet $\gamma \in \mathbb D(\Delta^1 \times
+\Delta^1)$ est cartésien si et seulement s'il est cocartésien.
+
+C'est, pour un dérivateur pointé, la définition reçue aujourd'hui
+d'un dérivateur \emph{stable}.\footnote{Sous cette forme : Maltsiniotis et
+Groth, cités de mémoire. Les catégories $\mathbb D(I)$ d'un dérivateur stable
+sont triangulées. Le dérivateur des types d'homotopie ne l'est pas : un carré
+homotopiquement cocartésien d'espaces n'est pas en général cartésien (voir la
+note de la page 51). « Der 6 » est suivi d'un mot noirci ; l'addition entre
+crochets, interlinéaire et très raturée, et la note oblique de la marge
+gauche (« l'axiome “vrai” … cartésien »), ne se lisent que par fragments.}
+
+Page 50, sur le carré
+
+\begin{tikzcd}[column sep=small, row sep=small]
+& \gamma(0,1) \arrow[dl, "j_0"'] & \\
+\gamma(0,0) & & \gamma(1,1) \arrow[ul, "i_1"'] \arrow[dl, "j_1"] \\
+& \gamma(1,0) \arrow[ul, "i_0"] &
+\end{tikzcd}
+
+un carré bicartésien a $i_0$ iso si et seulement si $i_1$ l'est, et $j_0$ iso
+si et seulement si $j_1$ l'est : « cartésien » donne un sens, « cocartésien »
+l'autre.\footnote{La page n'écrit que « $i_1$ iso $\Rightarrow i_0$ iso, $j_1$
+iso $\Rightarrow j_0$ iso », qui est le sens cocartésien ($i_0$ est le
+changement de cobase de $i_1$), puis la parenthèse « car cart.\ implique
+$\Longrightarrow$, cocartésien implique $\Longleftarrow$ ». En marge, à côté du
+carré : il faudra invoquer aussi les dérivateurs induits $\mathbb D_I$
+($I \in \mathrm{Diag}$), dans $\mathbb D(I \times \Delta^1 \times \Delta^1)$.}
+La dernière forme se déduirait aussitôt de la précédente, pourvu qu'on ait le
+lemme suivant.\footnote{« Montre aussitôt » est lu avec doute, et la suite de
+la phrase illisible ; le sens de la déduction n'est pas écrit au-delà.}
+
+\textbf{« Lemme ».} Soit $\xi = (\xi_a \xrightarrow{j_0} \xi_0
+\xleftarrow{i_0} \xi_b) \in \mathbb D(\Psi)$ tel que $i_0$ soit un
+isomorphisme. Alors $\xi$ est isomorphe à l'image réciproque $\rho^*\eta$
+d'un $\eta \in \mathbb D(\Psi_a)$, où $\Psi_a = (0 \to a)
+\simeq \Delta^1$ est l'ouvert $\{0, a\}$ de $\Psi$ et $\rho : \Psi \to
+\Psi_a$ la rétraction qui envoie $b$ sur $0$.
+
+La page veut montrer que la flèche d'adjonction $\rho^*\rho_*(\xi)
+\to \xi$ est un isomorphisme. Comme $\rho$ est lisse, induite par la première
+projection $\Delta^1 \times \Delta^1 \to \Delta^1$, $\rho_*$ se calcule fibre
+par fibre, et l'on est ramené à ce que $\mathcal{A} \to \mathbb
+D^{\mathrm{cc}}(\Delta^1)$ soit une équivalence, « forme de Der 3 ». Elle
+s'arrête là.\footnote{L'exposant « cc » se lit mal ; une note verticale biffée
+le long de la marge gauche reste illisible. Le lemme est vrai, et se démontre
+plus directement. Soit $j : \Psi_a \subset \Psi$ ; on a $\rho j =
+\mathrm{id}$ et une transformation naturelle $j\rho \Rightarrow
+\mathrm{id}_\Psi$ (car $j\rho(b) = 0 \leq b$). Elle induit une flèche entre
+$\rho^* j^*\xi$ et $\xi$ dont les composantes en $0$ et $a$ sont des identités
+et celle en $b$ est $i_0$. C'est donc un isomorphisme, les isomorphismes se
+lisant sur les valeurs, et l'on prend $\eta = j^*\xi$. Cette démonstration est
+la nôtre.}
+
+\pagerange{51}{52}
+\subsection*{HOT, Der 8, W7 bis et W8 bis (pages 51 et 52)}
+
+« Dans HOT, j'ai admis que : tout carré cocartésien est cartésien. Pour qu'un
+carré cartésien
+
+\begin{tikzcd}[column sep=small, row sep=small]
+& \xi_0 \arrow[dl] \arrow[dr] & \\
+\xi_a \arrow[dr] & & \xi_b \arrow[dl] \\
+& \xi_1 &
+\end{tikzcd}
+
+soit aussi cocartésien, il faut et il suffit que l'on ait
+$\pi_0(\xi_1) = \mathrm{Im}\, \pi_0(\xi_a) \cup \mathrm{Im}\, \pi_0(\xi_b)$. »
+\footnote{HOT n'est pas identifié par le dossier. Les deux énoncés valent pour
+les complexes connectifs (concentrés en degrés homologiques positifs), où
+$\pi_0$ est $H_0$ et la réunion des images une somme. Une somme amalgamée
+homotopique d'objets connectifs y est encore connective, donc cartésienne. Un
+produit fibré homotopique y est connectif, donc cocartésien, exactement quand
+$H_0(\xi_a) \oplus H_0(\xi_b) \to H_0(\xi_1)$ est surjective. Ils sont faux
+pour les types d'homotopie d'espaces : la somme amalgamée de $\mathrm{pt}
+\leftarrow S^0 \to \mathrm{pt}$ est $S^1$, et le produit fibré homotopique de
+$\mathrm{pt} \to S^1 \leftarrow \mathrm{pt}$ est $\Omega S^1 \simeq \mathbb Z$,
+non $S^0$. La remarque est la nôtre. Les trois lignes sont tenues par un trait
+vertical à gauche ; une note oblique de la marge, en partie lisible, porte
+« $\xi_1 = e$ ». La ligne suivante, « Der 6 ou Der 6' … donc … », est
+illisible pour l'essentiel.}
+
+W8 semble découler d'un principe général :
+
+\textbf{« Der 8 ».} Soit $f : \xi \to \eta$ un morphisme de carrés de
+$\mathcal{A}(\Delta^1 \times \Delta^1)$, de composantes $f_0, f_a, f_b,
+f_1$, et les conditions a) $f_0$ est iso ; b) $f_1$ est iso ; c) $f_a$ et
+$f_b$ sont iso. Si les carrés sont cartésiens, b) et c) entraînent a) ; s'ils
+sont cocartésiens, a) et c) entraînent b) ; s'ils sont bicartésiens, de plus a)
+et b) entraînent c) (?).\footnote{Le cube est redessiné ; sur la page les deux carrés sont décalés
+l'un sous l'autre, les quatre flèches verticales se croisent et les indices
+$a$, $b$ se lisent mal. « Cartésiens », « cocartésiens », « bicartésiens »
+sont lus avec doute ; un \emph{NB} qui suit est barré. Les deux premières
+implications sont celles de l'image réciproque et de l'image directe d'un
+isomorphisme. La troisième, marquée « (?) », vaut dans un dérivateur stable,
+où un carré bicartésien donne une suite exacte longue de Mayer--Vietoris
+$\cdots \to \xi_0 \to \xi_a \oplus \xi_b \to \xi_1 \to \cdots$, et le lemme des
+cinq rend $f_a \oplus f_b$ inversible, donc $f_a$ et $f_b$. La remarque est la
+nôtre ; en marge gauche : « Il suffit d'exiger $a + b \Rightarrow c$ … ».}
+
+\begin{tikzcd}[column sep=small, row sep=small]
+& \xi_a \arrow[dr] \arrow[ddd, "f_a"] & \\
+\xi_0 \arrow[ur] \arrow[dr] \arrow[ddd, "f_0"'] & & \xi_1 \arrow[ddd, "f_1"] \\
+& \xi_b \arrow[ur] \arrow[ddd, "f_b"'] & \\
+& \eta_a \arrow[dr] & \\
+\eta_0 \arrow[ur] \arrow[dr] & & \eta_1 \\
+& \eta_b \arrow[ur] &
+\end{tikzcd}
+
+
+\textbf{W7 bis.} Soit $X_a \leftarrow X_0 \rightarrow X_b$ un diagramme de
+$\mathrm{Cat}$, et $\mathcal{X}$ la catégorie fibrée sur $\Phi = (a \to 0
+\leftarrow b)$ qu'il définit. On a un diagramme commutatif dans
+$\mathrm{Hot}_W = W^{-1}\mathrm{Cat}$ :
+
+\begin{tikzcd}[column sep=small, row sep=small]
+& X_0 \arrow[dl, "i_a"'] \arrow[dr, "i_b"] & \\
+X_a \arrow[dr, "i'_b"'] & & X_b \arrow[dl, "i'_a"] \\
+& \mathcal{X} &
+\end{tikzcd}
+
+(dans $\mathrm{Cat}$, les deux composés sont homotopes par un chemin de
+longueur 2, homotopes tous deux, par une homotopie de longueur 1, à
+l'inclusion $X_0 \hookrightarrow \mathcal{X}$). Alors $i_a \in W$ si et
+seulement si $i'_a \in W$, et $i_b \in W$ si et seulement si $i'_b \in
+W$.\footnote{Les pointes des flèches de $\Phi$ se lisent mal, ici et page 52,
+où la page écrit une fois « $(0 \leftarrow a,\ 0 \to b)$ » ; on écrit
+$\Phi = (a \to 0 \leftarrow b)$, la forme sur laquelle une catégorie fibrée
+a pour fibres un diagramme $X_a \leftarrow X_0 \rightarrow X_b$, et celle de
+la page 49. En marge : « Autre possibilité : $\mathcal{X}$ fibrée … ».}
+
+\textbf{W8 bis.} Soit un cube commutatif de $\mathrm{Cat}$ formé de deux tels
+diagrammes et de $f_0, f_a, f_b$, complété dans $\mathrm{Hot}_W$ par
+$f : \mathcal{X} \to \mathcal{X}'$, où $\mathcal{X} = \int(X_0 \to X_a,\ X_0
+\to X_b)$ et de même $\mathcal{X}'$. Considérons les conditions a) $f \in W$ ;
+b) $f_0 \in W$ ; c) $f_a$ et $f_b \in W$. Deux d'entre elles entraînent la
+troisième.\footnote{Cube redessiné sur le modèle du précédent ; les flèches vers
+$\mathcal{X}$ et $\mathcal{X}'$ sont pointillées sur la page, les autres
+pleines, et les étiquettes $f_a$, $f_b$ se lisent mal. Deux notes obliques de
+part et d'autre du cube, en partie biffées, ne se lisent que par fragments.}
+
+\begin{tikzcd}[column sep=small, row sep=small]
+& X_a \arrow[dr, dashed] \arrow[ddd, "f_a"] & \\
+X_0 \arrow[ur] \arrow[dr] \arrow[ddd, "f_0"'] & & \mathcal{X} \arrow[ddd, "f"] \\
+& X_b \arrow[ur, dashed] \arrow[ddd, "f_b"'] & \\
+& X'_a \arrow[dr, dashed] & \\
+X'_0 \arrow[ur] \arrow[dr] & & \mathcal{X}' \\
+& X'_b \arrow[ur, dashed] &
+\end{tikzcd}
+
+
+La page 52 (sa page 18, numéro entouré) en donne une mise au propre, sous le
+titre « Corollaire de W7 bis », biffé en « Variante forte ». \emph{W7 bis} :
+soit $\mathcal{X}$ lisse sur $\Phi$, d'où le même diagramme ; alors
+$i_a \in W$ si et seulement si $i'_a \in W$ (donc de même pour $i_b$,
+$i'_b$). Cela implique l'axiome dual W7' bis, pour $\mathcal{X}$ propre sur
+$\Psi$. \emph{W8 bis} : soient $\mathcal{X}$, $\mathcal{X}'$ lisses sur
+$\Phi$ et $f : \mathcal{X} \to \mathcal{X}'$ un $\Phi$-morphisme, induisant
+$f_0, f_a, f_b$ sur les fibres ; deux des conditions a) $f \in W$, b) $f_0 \in
+W$, c) $f_a, f_b \in W$ entraînent la troisième.\footnote{« Lisse »
+généralise « fibré » comme « propre » généralise « cofibré », selon la
+convention de la page 44.}
+
+Ces deux énoncés ont un contenu qu'on peut dire, bien que la page ne le dise
+pas. La catégorie $\mathcal{X}$ est la somme amalgamée homotopique du
+diagramme. Les implications « $i_a \in W \Rightarrow i'_a \in W$ » et « b) et
+c) $\Rightarrow$ a) » expriment l'invariance homotopique de cette somme : elles
+valent pour $W_\infty$ comme pour toute classe $W_{\mathbb D}$. Les
+implications inverses sont d'une autre nature. Elles sont fausses pour
+$W_\infty$ et vraies pour les équivalences d'homologie, par la suite de
+Mayer--Vietoris et le lemme des cinq, comme pour $W_{\mathbb D}$ quand
+$\mathbb D$ est stable.\footnote{Remarque et contre-exemple sont les nôtres.
+Soit $X_0$ une catégorie dont le nerf est un espace acyclique non contractile,
+comme le complémentaire d'un point dans la sphère d'homologie de Poincaré ;
+soit $X_a = e$ et $X_b$ une catégorie contractile contenant $X_0$, par exemple
+$X_0$ muni d'un objet final ajouté. Alors $\mathcal{X}$ a le type de la
+suspension de $X_0$, simplement connexe et acyclique, donc contractile. Ainsi
+$i'_b : X_a \to \mathcal{X}$ est dans $W_\infty$ sans que $i_b : X_0 \to X_b$
+le soit. De même, pour W8 bis, l'application de ce diagramme vers $e
+\leftarrow e \rightarrow e$ satisfait a) et c), pas b).} C'est ce qui fait de
+« Der 6 » l'axiome que ces pages cherchent : pour qu'un recollement se lise
+dans les deux sens, il faut être dans le monde stable, où cartésien et
+cocartésien coïncident.
+
+\end{document}
