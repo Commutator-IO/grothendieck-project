@@ -1,0 +1,1482 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 121, pages 1-72.
+%
+% This is an INTERPRETATION, not a transcription. Everything the critical
+% apparatus carried moves into footnotes. In any dispute of substance the
+% transcription governs: whoever cites Grothendieck must cite
+% batch-01.fr.tex ... batch-04.fr.tex.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-03 — first pass, unchecked against the pages by a human.
+% The folder was read whole: four batches, pages 1-72, all transcribed.
+% Pages with no \page in the transcription: 2, 24, 28, 37, 39, 52, 63, 68
+% (blank separators) and 47 (the pink cover « Équisingularité / Cellules »).
+%
+% Notation fixed for the whole document. F (\mathcal{F}) a family of subsets,
+% F_0 its closed members; his conditions keep his letters a) b) c) d) e) f),
+% except that the SECOND c) of p. 4 (closure) is called « c bis) » here; the
+% conditions alpha beta gamma gamma' epsilon of pp. 6-8 keep his Greek
+% letters. The pieces of a partition are « cellules » in §§ 2-4 (pp. 10-20,
+% where he writes « feuillets » and « cellules ») and « feuilles » from p. 25
+% on (where he writes « feuilles »); « feuille fermée » is the closure of a
+% leaf, as he defines it. |X| is the underlying space of a tame object, M the
+% tame category, M_n the classes of tame subsets of the cube I^n, I_0 the
+% tame interval when it is an object of M; C_n and « C-modèle » for pp.
+% 69-72, without the small mark he puts on the C (transcribed C_* there).
+%
+% Substantive departures from the pages, each footnoted where it occurs:
+% — p. 5, condition d): read as « A contains a dense open subset of its
+%   closure » (interior relative to the closure); the literal reading
+%   (interior in X) would exclude points, which § 2 needs.
+% — p. 5, the Prop. (generation by closed members) is stated under a)-e):
+%   the page says a)-d) but its proof uses e).
+% — p. 6: under alpha, beta, gamma, condition d) is automatic; the page's
+%   unfinished delta) is not needed, as its own argument shows.
+% — p. 18: « A-bar_i rare dans A-bar_{i+1} » corrected to the reverse.
+% — p. 20: « si X compact » read « même si X est compact ».
+% — p. 27, Prop. D: false in the topological category (double suspension);
+%   footnoted, the reading states it as a question, as the page does.
+% — p. 55: the module of tame functions is a module over the tame field only
+%   under 3°) (product), a Q-vector space under 1°) 2°).
+% — p. 56: the composite's graph needs a projection, which the page omits.
+% — p. 61: the « Y x_X Z » the transcription flags as sic is correct, taken
+%   over the retractions; no correction.
+% — p. 69: the Prop. « X, Y in C_n => X cap Y in C_n » does not follow from
+%   (1)-(4) (counterexample in a footnote); stated with stability under
+%   inverse images by coordinate maps supplied, which is M'2) of p. 55.
+% — p. 69 c): the illegible condition is replaced by what is true (a
+%   bijective C-morphism has a C-morphism inverse, by (1)).
+% — p. 71: the sheaf of C-morphisms uses the gluing of p. 72, hence (6).
+%
+% What the folder announces and never establishes: condition f) of p. 23
+% (blank); the « Dém. » of p. 48 (broken off); Conjectures 1 and 2 of pp.
+% 33-34; Props. A-D of pp. 26-27 (posed as questions); the existence of
+% amalgamated sums of tame objects in general (pp. 59-61, 72: reduced to
+% conditions 5°) 6°) or to an extension property, not proved from the
+% axioms); condition c) of p. 65 for the cube construction of pp. 66-67.
+
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{121}
+\pages{1}{72}
+\dating{1974}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Topologie modérée : notes manuscrites (s.d.), lettre (1974) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Ces feuillets cherchent quelles figures il est raisonnable d'appeler des
+« formes » géométriques, et comment les découper proprement en morceaux
+simples.
+
+La topologie qu'on apprend d'abord admet des ensembles monstrueux : une courbe
+qui remplit un carré, une partie de la droite qui est dense et de complémentaire
+dense, une fonction continue qui n'est dérivable nulle part. Ces objets ne
+sont pas faux, mais ils ne ressemblent à rien de ce qu'un géomètre dessine. Le
+dossier part de l'idée inverse : choisir d'avance une famille de parties
+« sages » — celles qu'on obtient à partir de polynômes, de morceaux de droites
+et de plans — et ne travailler qu'avec elles. On renonce aux monstres et l'on
+gagne en échange des théorèmes de finitude : toute figure sage se découpe en un
+nombre fini de cellules, chacune un morceau lisse et d'un seul tenant, collées
+le long de leurs bords d'une façon qui ne dépend que de la figure. C'est ce
+qu'il appelle la \emph{topologie modérée}.
+
+Le dossier attaque le problème trois fois, par trois portes différentes, et
+c'est son intérêt. La première porte (pages 3 à 23) est ensembliste : on se
+donne la famille des parties sages comme une algèbre de Boole stable par
+adhérence, avec deux exigences — une partie sage a un bord « mince », et on ne
+peut pas emboîter indéfiniment des bords dans des bords — et l'on démontre
+qu'on peut alors tout découper en cellules, avec un découpage plus grossier que
+tous les autres. La deuxième porte (pages 25 à 51) est géométrique : deux
+points d'une figure ont « la même singularité » si la figure a, autour de
+l'un et de l'autre, la même allure ; regrouper les points de même allure
+devrait donner un découpage canonique, et il le conjecture, pour un espace et
+même pour une application. La troisième porte (pages 53 à 72) est catégorique :
+au lieu de dire quelles parties sont sages, on dit quelles \emph{opérations}
+le sont — produits, projections, images — et l'on cherche le petit nombre
+d'axiomes qui permettent de reconstruire tout le reste à partir de l'intervalle
+$[0,1]$, de ses points, de la moyenne $(x+y)/2$ et du produit $xy$.
+
+Une image aide pour cette dernière porte. Un jeu de construction fournit
+quelques pièces de base et quelques façons de les assembler ; les objets qu'on
+peut monter sont tout ce qu'on peut monter, rien de plus. Ici les pièces sont
+les sous-ensembles sages des cubes $[0,1]^n$, et les règles d'assemblage sont
+les produits et les projections. La question est de savoir si l'on peut aussi
+\emph{recoller} deux objets le long d'un troisième sans sortir du jeu : c'est la
+question des sommes amalgamées, à laquelle les pages 58 à 72 reviennent sans
+cesse.
+
+Le dossier est une suite de brouillons, non une rédaction : deux preuves
+s'arrêtent net, une condition est annoncée et laissée en blanc, plusieurs
+énoncés sont posés comme questions. Il contient aussi ce qui semble être le
+brouillon d'une lettre au mathématicien A'Campo, où il annonce une construction conjecturale du
+découpage canonique d'une application propre.
+
+Ce que ces pages anticipent a reçu des noms plus tard. Les « structures
+modérées » sont très proches de ce qu'on appelle depuis les années 1980 les
+\emph{structures o-minimales}, en théorie des modèles ; les découpages en
+cellules sont des \emph{stratifications} vérifiant la \emph{condition de
+frontière} ; l'équisingularité topologique et le découpage canonique d'une
+application sont le domaine de la théorie de Thom–Mather et des théorèmes de
+trivialité de Hardt. Dix ans plus tard, l'\emph{Esquisse d'un programme}
+(1984) reprend le programme sous le nom de « topologie modérée » ; ce dossier
+en est un des chantiers anciens.
+
+\keywords{tame topology, o-minimal structure, definable sets, stratification, frontier condition, cell decomposition, Boolean algebra of sets, finite T0 space, intrinsic stratification, topological equisingularity, Thom-Mather theory, Hardt triviality, double suspension theorem, recollement, manifolds with fibred corners, Lawvere theory, adhesive category, definable Tietze extension, definable triangulation}
+\end{resume}
+
+\pagerange{1}{72}
+\section*{Le dossier, sa charpente et ses notations}
+
+Soixante-douze pages, dont neuf sans texte suivi : huit feuillets blancs de
+séparation (pages 2, 24, 28, 37, 39, 52, 63, 68) et la chemise rose de la page
+47, titrée de sa main « Équisingularité / Cellules ». La chemise
+grise de la page 1 porte de sa main « Topologie Modérée ». Rien n'est daté ; la
+date de 1974 est celle de l'inventaire, qui l'attache à une « lettre ». Le
+dossier contient deux brouillons de lettres de sa main : les pages 29 à 36, où
+il se réfère deux fois à une lettre précédente à A'Campo et qui ont tout l'air
+d'une lettre au même correspondant, et, tête-bêche sur la page 66, le début
+biffé d'une lettre de bienvenue en anglais, sans mathématiques, que la
+transcription ne reproduit pas.\footnote{La transcription signale que la page
+40, un feuillet de cahier, porte en tête le nom « Fujii Guruji Nichidatsu »,
+et que la lettre biffée de la page 66 s'adresse au même « Fujii Guruji ».
+L'édition n'en tire aucune datation et ne décide pas laquelle de ces pièces est
+la « lettre (1974) » de l'inventaire.}
+
+Le fil n'est pas continu : ce sont des moutures successives, sur des papiers et
+des encres différents, d'un même projet. On les garde distinctes.
+
+\begin{itemize}
+\item \textbf{Pages 1 et 3 à 23 — l'approche ensembliste.} Un ensemble
+  $\mathcal{F}$ de parties d'un espace $X$, ses conditions a) à f), les
+  décompositions cellulaires, l'existence d'un découpage plus grossier que tous
+  les autres, les décompositions régulières, la localisation et le passage aux
+  faisceaux. Paragraphes numérotés de sa main, §~1 à §~5.
+\item \textbf{Pages 25 à 27 — l'ordre de mobilité.} Une singularité est
+  « mobile » si la figure se déplace le long d'une variété en gardant la même
+  allure ; quatre propositions posées comme questions.
+\item \textbf{Pages 29 à 36 — « Équisingularité », mis au propre.} Partitions
+  équisingulières et privilégiées d'un espace et d'un diagramme d'espaces, deux
+  conjectures d'existence d'une partition canonique, et la construction
+  conjecturale pour une application propre (brouillon de lettre à A'Campo).
+\item \textbf{Pages 38 et 40 à 46 — recoller.} Une catégorie de faisceaux
+  « recollés » sur un diagramme $Y \leftarrow Z \hookrightarrow X$, puis la
+  reconstruction d'un espace stratifié à partir de variétés à bord fibrées les
+  unes sur les autres.
+\item \textbf{Pages 47 à 51 — « Équisingularité. Cellules ».} Reprise des
+  partitions admissibles, du point de vue des feuilles fermées.
+\item \textbf{Pages 53 à 67 — la catégorie modérée.} Axiomes M0) à M5) d'une
+  catégorie munie d'un foncteur vers les espaces compacts, leur traduction en
+  classes $\mathcal{M}_n$ de parties des cubes, la généralisation à une
+  catégorie $\mathcal{K}$ quelconque, les sommes amalgamées.
+\item \textbf{Pages 69 à 72 — les $C$-modèles.} Une dernière mouture, mise au
+  propre et numérotée « 1) », « 2) » : des classes $C_n$ de parties de $R^n$
+  et la catégorie qu'elles engendrent.
+\end{itemize}
+
+\textbf{Deux homonymies à ne pas confondre.} Le mot « admissible » sert trois
+fois : une décomposition cellulaire est $\mathcal{F}$-admissible (page 13) si
+ses cellules sont dans $\mathcal{F}$ ; une partition est admissible (page 31,
+et page 51 sous une forme un peu différente) si chaque feuille est localement
+fermée et d'adhérence réunion de feuilles ; un système de partitions sur un
+diagramme est admissible (page 32) si les flèches envoient feuille dans
+feuille. Les lettres a) b) c) désignent aussi plusieurs listes de conditions
+sans rapport ; on dit chaque fois de quelle liste il s'agit. Enfin le §~1
+emploie deux fois la lettre c) : on appelle ici \emph{c~bis)} la seconde
+(stabilité par adhérence).\footnote{Le double emploi est sur la page, pages 3
+et 4 ; la transcription le garde tel quel.}
+
+\textbf{Vocabulaire.} Une partie d'un espace est \emph{rare} si son adhérence
+est d'intérieur vide ; $\overline{A}$, $\mathring{A}$ et
+$\partial A = \overline{A} \setminus \mathring{A}$ sont l'adhérence,
+l'intérieur et la frontière.\footnote{Il note la frontière tantôt $\dot{A}$
+(page 4), tantôt $bA$ (pages 5, 31) ; on écrit partout $\partial A$, sauf aux
+pages 40 à 46, où $\partial$ est le bord d'une variété à bord, comme sur la
+page.} Les morceaux d'une partition s'appellent \emph{cellules} aux §§~2 à 4
+et \emph{feuilles} à partir de la page 25, comme il les appelle.
+
+\pagerange{1}{1}
+\section*{La couverture (page 1)}
+
+Sous le titre, des esquisses au crayon : des cubes $I^{n-1} \to I^n \leftarrow
+I^{n+1}$, des plongements $X \hookrightarrow I^n$, un espace $X$ présenté comme
+quotient d'une somme $\coprod X_i$ par des flèches de recollement, une
+relation d'équivalence $R \simeq X \times_Y X$ et, dans un cadre, un
+plongement $\beta : X \hookrightarrow M$ soumis à deux conditions : les
+composés $\beta \circ p_i$ sont modérés, et $\beta$ est injectif.\footnote{Le
+mot du cadre se lit « modulaires » ou « modérées », lecture douteuse, suivi de
+deux mots illisibles. On retient « modérées », parce que la condition est
+celle que l'axiome M5) de la page 55 imposera : tout objet modéré admet un
+morphisme modéré injectif dans un cube. Les esquisses ne sont pas un texte
+suivi, et l'on ne s'appuie pas sur elles.} Ce sont les ingrédients de la
+troisième mouture du dossier : présenter un objet par recollement de pièces, et
+le plonger dans un cube.
+
+\pagerange{3}{9}
+\section*{§ 1. Structure modérée sur un espace (pages 3 à 9)}
+
+\subsection*{L'algèbre de Boole et l'anneau des fonctions étagées}
+
+Soit $X$ un ensemble et $\mathcal{F}$ un ensemble de parties de $X$ stable par
+réunions finies (a), intersections finies (b) et passage au complémentaire
+(c) : une \emph{algèbre de Boole de parties} de $X$. Pour un anneau commutatif
+$\Lambda$, soit $\mathcal{A}_{\mathcal{F}}$ l'ensemble des fonctions
+$f : X \to \Lambda$ ne prenant qu'un nombre fini de valeurs et dont chaque
+fibre $f^{-1}(\lambda)$ est dans $\mathcal{F}$. C'est une sous-$\Lambda$-algèbre
+unitaire de l'algèbre $\mathrm{Et}(X, \Lambda)$ des fonctions étagées — les
+fibres d'une somme ou d'un produit sont des réunions finies d'intersections
+$f^{-1}(\lambda) \cap g^{-1}(\mu)$ — et $\mathcal{F}$ s'en déduit, comme
+l'ensemble des $A$ dont la fonction caractéristique est dans
+$\mathcal{A}_{\mathcal{F}}$.\footnote{La page énonce ces équivalences sous des
+étiquettes a$'$), b$'$), b$''$) qui ne correspondent pas exactement : b$'$)
+est invoquée mais n'est écrite que dans une note marginale presque illisible.
+On énonce ce qui est vrai. La page écrit aussi « sous-anneau de
+$X^{\mathbb{Z}}$ » pour $\mathbb{Z}^X$.}
+
+Quand $\Lambda$ est intègre, de corps des fractions $K$, il affirme que les
+algèbres ainsi obtenues sont exactement les traces sur $\mathrm{Et}(X,\Lambda)$
+des sous-algèbres de $\mathrm{Et}(X, K)$, c'est-à-dire les sous-algèbres
+\emph{saturées} : si $\lambda \neq 0$ et $\lambda \varphi \in \mathcal{A}$, alors
+$\varphi \in \mathcal{A}$. C'est juste pour les sous-algèbres unitaires : si
+$f \in \mathcal{A}$ prend les valeurs $c_1, \dots, c_k$, l'interpolation de
+Lagrange donne $d \cdot \mathbf{1}_{f^{-1}(c_j)} = \prod_{l \neq j} (f - c_l)
+\in \mathcal{A}$ avec $d = \prod_{l \neq j}(c_j - c_l) \neq 0$, et la
+saturation fait le reste.\footnote{L'hypothèse « unitaire » est ajoutée ; la
+page a biffé le mot à la ligne précédente. Elle est nécessaire : sans les
+constantes, le produit $\prod (f - c_l)$ n'a pas de sens dans $\mathcal{A}$.}
+
+\subsection*{Les conditions topologiques (pages 4 et 5)}
+
+Supposons maintenant $X$ topologique. On considère :
+
+\begin{itemize}
+\item[c~bis)] pour tout $A \in \mathcal{F}$, $\overline{A} \in \mathcal{F}$ ;
+  de façon équivalente (par passage au complémentaire), $\mathring{A} \in
+  \mathcal{F}$. Alors $\partial A \in \mathcal{F}$, et la partition de $X$ en
+  $\mathring{A}$, $\partial A$, $X \setminus \overline{A}$ est formée
+  d'éléments de $\mathcal{F}$.
+\item[d)] pour tout $A \in \mathcal{F}$, $A$ contient un ouvert dense de son
+  adhérence ; autrement dit, $\overline{A}$ privé de l'intérieur de $A$
+  \emph{relatif à} $\overline{A}$ est rare dans $\overline{A}$ (et a fortiori
+  dans $X$).\footnote{La ligne est très raturée ; « l'intérieur de $A$ est
+  dense dans $\overline{A}$ » y est écrit au-dessus d'une première version.
+  Lu au pied de la lettre, avec l'intérieur pris dans $X$, l'énoncé
+  interdirait à un point d'appartenir à $\mathcal{F}$ dans $\mathbb{R}$, ce
+  que le §~2 exige (les cellules minimales sont des fermés, souvent des
+  points). L'intérieur est donc relatif à $\overline{A}$, et c'est d'ailleurs
+  ainsi que la page 6 l'emploie (« l'intérieur de $C$ dans
+  $D = \overline{C}$ est dense dans $D$ »).}
+\item[e)] toute suite décroissante $A_1 \supset A_2 \supset \cdots$ de
+  fermés appartenant à $\mathcal{F}$, avec $A_{n+1}$ rare dans $A_n$, est
+  stationnaire à $\emptyset$.
+\end{itemize}
+
+La condition d) est celle qui distingue les parties sages des parties comme
+$\mathbb{Q} \subset \mathbb{R}$ ; la condition e) est une dimension finie
+déguisée : on ne peut pas emboîter indéfiniment des bords dans des bords.
+
+\textbf{Une remarque sur les générateurs.} Si $\mathcal{L} \subset
+\mathfrak{P}(X)$ est stable par réunions et intersections finies et contient
+$\emptyset$ et $X$, l'algèbre de Boole engendrée par $\mathcal{L}$ est formée
+des réunions finies de parties $A \cap \complement B$, $A, B \in
+\mathcal{L}$.\footnote{Les hypothèses de stabilité sur $\mathcal{L}$ sont
+ajoutées : sans elles, il faut des intersections de plusieurs $A$ et de
+plusieurs $\complement B$. Le renvoi aux conditions, à cet endroit de la page,
+est d'une lecture douteuse (« a) à b) »).}
+
+\textbf{Proposition (page 5).} \emph{Si $\mathcal{F}$ satisfait a) à e), elle
+est engendrée, comme algèbre de Boole, par l'ensemble $\mathcal{F}_0$ de ses
+éléments fermés.}\footnote{La page dit « a) à d) », mais la preuve qu'elle
+donne s'arrête grâce à e), et c'est e) qui la fait terminer. On ajoute e) à
+l'énoncé.}
+
+Pour $A \in \mathcal{F}$, on écrit $A = \mathring{A} \cup (A \cap \partial A)$.
+L'intérieur $\mathring{A} = \complement\, \overline{\complement A}$ est le
+complémentaire d'un fermé de $\mathcal{F}$. Reste $A_1 = A \cap \partial A$,
+qui est un élément de $\mathcal{F}$ contenu dans le fermé $X_1 = \partial A$, et
+$X_1$ est rare dans $X$ (on le montre plus bas). On recommence dans $X_1$ avec
+l'algèbre induite $\mathcal{F}|X_1 = \{ B \in \mathcal{F} : B \subset X_1 \}$,
+qui satisfait encore a) à e). On obtient une suite de fermés $X \supset X_1
+\supset X_2 \supset \cdots$ de $\mathcal{F}$, chacun rare dans le précédent ;
+par e) elle s'arrête, et $A$ est une réunion finie de différences de fermés de
+$\mathcal{F}$.\footnote{La page écrit $A \cap b\mathring{A}$ là où l'on
+attend $A \cap bA$ ; on lit $\partial A$.}
+
+\subsection*{Les fermés suffisent (pages 6 à 8)}
+
+Puisque tout se ramène à $\mathcal{F}_0$, il demande quand un ensemble
+$\mathcal{F}_0$ de fermés est exactement l'ensemble des fermés de l'algèbre de
+Boole qu'il engendre. Il faut évidemment
+
+\begin{itemize}
+\item[$\alpha$)] $\mathcal{F}_0$ stable par réunions finies ;
+\item[$\beta$)] $\mathcal{F}_0$ stable par intersections finies ;
+\end{itemize}
+
+et il suffit d'y ajouter
+
+\begin{itemize}
+\item[$\gamma$)] pour $A, B \in \mathcal{F}_0$, $\overline{A \cap \complement
+  B} \in \mathcal{F}_0$,
+\end{itemize}
+
+car l'adhérence d'une réunion finie est la réunion des adhérences. Sous
+$\alpha$, $\beta$, $\gamma$, \emph{la condition d) est alors automatique} : si
+$C = \bigcup_i C_i$ avec $C_i = A_i \cap \complement B_i$, posons
+$D_i = \overline{C_i} \in \mathcal{F}_0$ et $E_i = D_i \cap B_i$. Comme $C_i$
+est ouvert et dense dans $D_i$, le fermé $E_i = D_i \setminus C_i$ est rare
+dans $D_i$, donc dans $D = \bigcup D_i = \overline{C}$, et $E = \bigcup E_i$
+est rare dans $D$. Or $D \setminus E \subset C \subset D$ : $C$ contient un
+ouvert dense de son adhérence.\footnote{La page amorce une condition
+$\delta$), qui devait traduire d) en termes de $\mathcal{F}_0$, et la laisse
+inachevée. L'argument qui suit sur la page — celui qu'on vient de donner — montre
+qu'elle n'est pas nécessaire. C'est sans doute pourquoi elle est restée en
+suspens ; on ne la restitue pas.}
+
+Sous $\alpha$, $\beta$, $\gamma$, l'adhérence d'un $A \in \mathcal{F}$ est le
+plus petit élément de $\mathcal{F}_0$ qui le contient : elle se lit dans
+$\mathcal{F}_0$, \emph{sans faire appel à la topologie de $X$}. Il en va donc de
+même de la rareté : pour $A \subset B$ dans $\mathcal{F}_0$, $A$ est rare dans
+$B$ si et seulement si tout élément de $\mathcal{F}_0$ contenant $B \setminus A$
+contient $B$. L'axiome e) se récrit :
+
+\begin{itemize}
+\item[$\varepsilon$)] toute suite décroissante d'éléments de
+  $\mathcal{F}_0$, chacun « $\mathcal{F}_0$-rare » dans le précédent au sens
+  qu'on vient de dire, est stationnaire à $\emptyset$.
+\end{itemize}
+
+\textbf{Retrouver la topologie.} Inversement, soit $\mathcal{F}_0$ une famille
+de parties d'un ensemble nu $X$, stable par réunions et intersections finies et
+contenant $\emptyset$ et $X$. Il existe une topologie pour laquelle les
+éléments de $\mathcal{F}_0$ sont fermés et vérifient $\gamma$) si et seulement
+si
+
+\begin{itemize}
+\item[$\gamma'$)] pour $A, B \in \mathcal{F}_0$, il existe un plus petit
+  élément de $\mathcal{F}_0$ contenant $A \cap \complement B$.\footnote{La page
+  écrit « l'ensemble des $\in \mathcal{F}_0$ qui contiennent $A \cap
+  \complement B$ est $\in \mathcal{F}_0$ » ; c'est l'\emph{intersection} de
+  ces ensembles qui doit être dans $\mathcal{F}_0$, et la parenthèse qui suit
+  sur la page le dit.}
+\end{itemize}
+
+On prend pour fermés les intersections quelconques d'éléments de
+$\mathcal{F}_0$ — elles sont stables par réunions finies, par distributivité.
+C'est la moins fine des topologies qui conviennent, et elle est caractérisée
+par la propriété : tout point a un système fondamental de voisinages ouverts
+appartenant à $\mathcal{F}$.
+
+\textbf{Le bord est mince (page 8).} Sous a) à d), la frontière $\partial A$
+d'un $A \in \mathcal{F}$ est rare dans $X$. Soit en effet $U$ l'intérieur de
+$\partial A$, qui est dans $\mathcal{F}$. Si $U$ n'était pas vide, $U \cap A$
+serait non vide (car $U \subset \overline{A}$ est ouvert) et d'intérieur vide
+(un ouvert contenu dans $U \cap A$ serait dans $\mathring{A}$, disjoint de
+$\partial A$) ; mais $\overline{U \cap A} \supset U$, et par d) $U \cap A$
+contiendrait un ouvert dense de son adhérence, qui rencontrerait $U$ en un
+ouvert de $X$ contenu dans $A$ — contradiction.\footnote{La page mène
+l'argument par réduction au cas $\overline{A} = X$, $\mathring{A} =
+\emptyset$ ; la fin en est très raturée et ne se lit que par fragments. On
+donne une preuve complète du même énoncé.}
+
+\subsection*{La condition f) (page 9)}
+
+\begin{itemize}
+\item[f)] pour tout $A \in \mathcal{F}$ localement fermé — c'est-à-dire
+  $A = B \setminus C$ avec $B, C \in \mathcal{F}_0$ —, les composantes
+  connexes de $A$ sont en nombre fini et appartiennent à $\mathcal{F}$.
+\end{itemize}
+
+Elles sont alors ouvertes dans $A$. Sous f), la connexité d'un $A$
+localement fermé se lit dans $\mathcal{F}_0$ : $A$ est connexe si et seulement
+s'il n'est pas réunion disjointe de deux éléments non vides de $\mathcal{F}$
+fermés dans $A$. Et si les ouverts de $\mathcal{F}$ forment une base de la
+topologie, f) entraîne que les éléments de $\mathcal{F}$ sont localement
+connexes : la composante d'un point dans $U \cap A$, pour $U$ un petit ouvert
+de $\mathcal{F}$, est ouverte, étant l'une d'un nombre fini de composantes
+fermées.\footnote{Il dit d'abord « du moins ceux qui sont localement fermés »,
+puis « en fait cette restriction est inutile ». C'est juste, mais cela utilise
+l'extension de f) à tous les éléments de $\mathcal{F}$, qui n'est prouvée
+qu'aux pages 18 et 19. Une condition $(\varphi)$, cerclée au-dessus d'une
+ligne, semble nommer la décomposition finie en parties
+« $\mathcal{F}_0$-connexes » ; lecture douteuse.}
+
+Les conditions a) à f) sont, à la terminologie près, celles qu'on demande
+aujourd'hui aux ensembles définissables d'une structure o-minimale sur
+$\mathbb{R}$ : algèbre de Boole stable par adhérence, frontière de dimension
+plus petite, dimension finie, nombre fini de composantes définissables.
+\footnote{Les structures o-minimales viennent de la théorie des modèles des
+années 1980 (van den Dries ; Pillay et Steinhorn ; Knight, Pillay et
+Steinhorn) ; le livre de van den Dries, \emph{Tame topology and o-minimal
+structures} (1998), emprunte son titre à l'\emph{Esquisse d'un programme}. Ces
+feuillets, s'ils sont bien de 1974, sont antérieurs à tout cela, et rien n'y
+suggère qu'il ait connu les travaux sur les ensembles semi-algébriques ou
+sous-analytiques de Łojasiewicz et Hironaka autrement que de réputation : il ne
+cite personne. Une différence de fond : ici la topologie est donnée d'avance,
+et $\mathcal{F}$ vit dans un seul espace ; une structure o-minimale est une
+famille de parties de \emph{tous} les $\mathbb{R}^n$, stable par projection,
+ce que seule la troisième mouture du dossier (pages 53 et suivantes) retrouve.}
+
+\pagerange{10}{13}
+\section*{§ 2. Décompositions cellulaires (pages 10 à 13)}
+
+Soit $\mathcal{P} = (X_i)_{i \in I}$ une partition finie de $X$, et
+$\mathcal{F}_{\mathcal{P}}$ l'algèbre de Boole des réunions de $X_i$ ; les
+fonctions de $\mathcal{A}_{\mathcal{F}_{\mathcal{P}}}$ sont celles qui se
+factorisent par l'ensemble quotient $X/\mathcal{R} \simeq I$. Pour
+$\mathcal{F}_{\mathcal{P}}$, la condition c~bis) équivaut à
+
+\begin{itemize}
+\item[(1)] l'adhérence de chaque $X_i$ est une réunion de cellules,
+\end{itemize}
+
+qui est la \emph{condition de frontière} des stratifications. On lui adjoint
+
+\begin{itemize}
+\item[(2)] deux cellules distinctes ont des adhérences distinctes.
+\end{itemize}
+
+Une \emph{décomposition cellulaire} (finie) est une partition finie
+satisfaisant (1) et (2) ; elle est \emph{stricte} si de plus
+
+\begin{itemize}
+\item[(3)] les cellules sont connexes.
+\end{itemize}
+
+\textbf{Les cellules sont localement fermées.} La relation $i \prec j$ si
+$\overline{X_i} \subset \overline{X_j}$ — la \emph{relation d'incidence} — est
+un préordre, et un ordre grâce à (2). Une cellule minimale $X_{i_0}$ est
+fermée : $\overline{X_{i_0}} \setminus X_{i_0}$ est une réunion de cellules
+d'adhérence contenue dans $\overline{X_{i_0}}$, donc strictement par (2), ce
+que la minimalité interdit. On recommence sur l'ouvert $X \setminus X_{i_0}$
+muni de la partition induite, qui satisfait encore (1) et (2). Inversement, (1)
+et « les cellules sont localement fermées » entraînent (2) : une cellule est
+ouverte et dense dans son adhérence, et deux ouverts denses d'un même espace se
+rencontrent.\footnote{La page contient une première tentative, encadrée et
+barrée, de dériver (2) d'autre chose, et une addition interlinéaire de deux
+lignes ; la remarque « Mais 1° + les $X_i$ loc.\ fermés implique 2° » est dans
+la marge.} L'algèbre $\mathcal{F}_{\mathcal{P}}$ est alors engendrée par les
+adhérences des cellules, qui vérifient $\alpha$, $\beta$, $\gamma$ ; donc d)
+est automatique, par la page 6, et e) l'est aussi puisque $I$ est fini.
+
+\textbf{(3) équivaut à f).} Si f) vaut pour $\mathcal{F}_{\mathcal{P}}$, une
+cellule, localement fermée et élément non vide minimal de
+$\mathcal{F}_{\mathcal{P}}$, a ses composantes dans $\mathcal{F}_{\mathcal{P}}$,
+donc est connexe. Inversement, sous (3), un $A \in \mathcal{F}_{\mathcal{P}}$
+localement fermé hérite d'une décomposition cellulaire stricte — (2) passe à
+la partition induite, car si $X_i, X_j \subset A$ et $\overline{X_i} \cap A =
+\overline{X_j} \cap A$, alors $X_i \subset \overline{X_j}$ et $X_j \subset
+\overline{X_i}$ —, et ses composantes connexes sont des réunions de cellules,
+puisque les cellules sont connexes.\footnote{Aux pages 11 et 12, il écrit deux
+fois « d) » pour f) ; corrigé.}
+
+\textbf{Le quotient fini.} L'espace quotient $I = X/\mathcal{R}$ est un espace
+topologique fini. L'adhérence de $\{i\}$ correspond au plus petit fermé saturé
+contenant $X_i$, c'est-à-dire à $\overline{X_i}$ par (1) : la relation
+d'incidence est la relation de spécialisation de $I$. La condition (2) dit que
+$I$ est $T_0$\footnote{Il écrit que $I$ est « primitif » ; lecture douteuse.
+La définition qu'il donne, $\overline{\{i\}} = \overline{\{j\}} \Rightarrow
+i = j$, est celle d'un espace de Kolmogorov, $T_0$.}, et la condition (1) dit
+que l'application quotient $\varphi : X \to I$ est \emph{ouverte}.\footnote{La
+page dit que (1) signifie que « $\overline{\varphi^{-1}(J)}$ commute à
+l'adhérence » ; on énonce l'équivalence avec l'ouverture de $\varphi$, qui est
+ce que la page conclut et qui est exacte : si $U$ est ouvert, le complémentaire
+du saturé de $U$ est la réunion des cellules disjointes de $U$, et (1) le rend
+fermé ; inversement, si $\varphi$ est ouverte, tout voisinage d'un point de
+$X_k \subset \overline{X_i}$ rencontre $X_i$.} D'où l'énoncé, qui clôt le
+paragraphe : \emph{les décompositions cellulaires finies de $X$ correspondent
+aux quotients finis $T_0$ de $X$ pour lesquels l'application quotient est
+ouverte.}
+
+Un espace fini $T_0$ est la même chose qu'un ensemble ordonné fini ; une
+application continue $X \to I$ vers un ensemble ordonné muni de la topologie
+d'Alexandrov est ce qu'on appelle aujourd'hui un espace stratifié au-dessus de
+$I$, et l'ouverture de l'application est précisément la condition de
+frontière.\footnote{Ce langage est celui de Lurie (\emph{Higher Algebra},
+appendice A) et de la littérature récente sur les espaces stratifiés ; il est
+de trente ans postérieur et la page n'en a évidemment rien. Le dictionnaire
+entre espaces finis et ensembles préordonnés est d'Alexandrov (1937).}
+
+\pagerange{13}{16}
+\section*{§ 3. Décompositions $\mathcal{F}$-admissibles : existence (pages 13 à 16)}
+
+Une décomposition cellulaire est \emph{$\mathcal{F}$-admissible} si ses cellules
+sont dans $\mathcal{F}$, c'est-à-dire si $\mathcal{F}_{\mathcal{P}} \subset
+\mathcal{F}$.
+
+\textbf{Proposition (page 14).} \emph{Soit $\mathcal{F}$ satisfaisant a) à e), et
+$\mathcal{L} \subset \mathcal{F}$ une partie finie. Il existe une décomposition
+cellulaire $\mathcal{F}$-admissible dont les éléments de $\mathcal{L}$ sont des
+réunions de cellules, et parmi elles une plus grossière que toutes les
+autres.}\footnote{Le mot qui remplace « fine », biffé, est peu lisible ; la
+transcription offre « grossière » d'après le sens, et c'est bien ce qui est
+vrai : il ne peut exister de décomposition plus \emph{fine} que toutes les
+autres.}
+
+Soit $X' = \bigcup_{Y \in \mathcal{L}} \partial Y$, fermé rare comme réunion
+finie de fermés rares (page 8), et $U = X \setminus X'$. Dans $U$, chaque
+$Y \cap U$ est ouvert et fermé ; les atomes $U_i$ de l'algèbre de Boole finie
+qu'ils engendrent sont ouverts et fermés dans $U$, donc ouverts dans $X$. On
+résout le même problème dans $X'$ pour la famille
+$\mathcal{L}' = \{ Y \cap X' \}_{Y \in \mathcal{L}} \cup \{ \overline{U_i} \cap
+X' \}_i$ ; la décomposition cherchée de $X$ est formée des cellules de $X'$ et
+des $U_i$. Comme $X'$ est rare dans $X$, la récurrence s'arrête par e).
+
+La page dit que le résultat est le plus grossier sans le justifier ; voici
+pourquoi c'est vrai. Si $\mathcal{Q}$ est une décomposition admissible rendant
+les $Y \in \mathcal{L}$ réunions de cellules, une cellule de $\mathcal{Q}$ qui
+rencontre $\partial Y$ y est contenue : si elle est dans $Y$, elle est dans
+l'adhérence d'une cellule de $\complement Y$ par (1), donc disjointe de
+$\mathring{Y}$, et symétriquement. Donc $\mathcal{Q}$ se restreint à $U$, où
+elle raffine les atomes $U_i$, et à $X'$, où elle rend les $\overline{U_i} \cap
+X'$ réunions de cellules ; la récurrence conclut.
+
+\emph{Corollaire 1.} Sous a) à e), $\mathcal{F}$ est réunion filtrante des
+$\mathcal{F}_{\mathcal{P}}$, $\mathcal{P}$ parcourant les décompositions
+$\mathcal{F}$-admissibles. \emph{Corollaire 2.} Ces décompositions, ordonnées
+par raffinement, ont des bornes supérieures finies.\footnote{Une condition
+« (Dim) », qui n'est autre que e), est d'abord écrite à part puis barrée, et
+les énoncés renvoient ensuite à « a) b) c) d) e) ».}
+
+\emph{Remarque (page 16).} Si $\mathcal{F}$ satisfait aussi f), on peut exiger
+des cellules connexes : on remplace les $U_i$ par leurs composantes connexes, en
+nombre fini et dans $\mathcal{F}$ puisque $U_i$ est un ouvert de $\mathcal{F}$.
+Il existe alors une décomposition stricte plus grossière que toutes les autres,
+et $\mathcal{F}$ est réunion filtrante des $\mathcal{F}_{\mathcal{P}}$
+stricts.
+
+C'est l'énoncé qu'on appelle aujourd'hui l'existence d'une stratification
+compatible avec une famille finie d'ensembles définissables, ici sans
+condition de régularité et avec une stratification canonique, la plus
+grossière.
+
+\pagerange{16}{17}
+\section*{§ 4. Décompositions régulières (pages 16 et 17)}
+
+On se donne en plus une partie $\mathcal{F}_r \subset \mathcal{F}$ d'éléments
+localement fermés, dits \emph{réguliers} (on pense aux sous-variétés lisses),
+avec
+
+\begin{itemize}
+\item[(S)] pour tout fermé $Y \in \mathcal{F}$, il y a une plus grande partie
+  ouverte de $Y$ appartenant à $\mathcal{F}_r$, notée $Y_{\mathrm{reg}}$, et
+  elle est dense : le lieu singulier $Y_{\mathrm{sing}} = Y \setminus
+  Y_{\mathrm{reg}}$ est rare dans $Y$.
+\end{itemize}
+
+Une décomposition cellulaire est \emph{$\mathcal{F}$-régulière} si, pour tout
+fermé $Y$ réunion de cellules, $Y_{\mathrm{sing}}$ est encore une réunion de
+cellules ; les cellules sont alors régulières.\footnote{Les trois premières
+lignes de la page 17 sont un palimpseste de ratures et d'additions ; on retient
+la condition qui s'en dégage et la conséquence qu'il en tire. Celle-ci suppose
+implicitement qu'une partie ouverte d'une partie régulière est régulière : une
+cellule est ouverte et dense dans son adhérence, donc disjointe du lieu
+singulier de celle-ci, donc ouverte dans sa partie régulière.} La proposition
+de la page 17 affirme, sous a) à e) et (S), l'existence d'une décomposition
+$\mathcal{F}$-régulière rendant les éléments d'une famille finie $\mathcal{L}$
+réunions de cellules, et d'une plus grossière ; de même à cellules connexes
+sous f).\footnote{La clause « telle que les $Y \in \mathcal{L}$ soient des
+réunions de cellules » manque sur la page, mais la preuve s'en sert. Il écrit
+aussi « d) » pour f) à deux reprises.} La preuve n'est qu'indiquée : on retire
+en outre les lieux singuliers, $X' = \bigcup_{Y} (\partial Y \cup
+Y_{\mathrm{sing}})$, et l'on ajoute à $\mathcal{L}'$ les
+$(\overline{U_i})_{\mathrm{sing}}$. Le caractère « le plus grossier » n'est
+plus argumenté. Les corollaires suivent le modèle du §~3 : $\mathcal{F}$ est
+réunion filtrante des $\mathcal{F}_{\mathcal{P}}$ pour $\mathcal{P}$ régulière
+(à cellules connexes sous f)), ces décompositions ont des bornes supérieures
+finies, et (cas $\mathcal{L} = \emptyset$) $X$ aurait une
+\emph{décomposition régulière canonique} — l'analogue, dans ce cadre abstrait,
+de la stratification de Whitney canonique d'un ensemble
+analytique.\footnote{Rapprochement de l'édition. La stratification de Whitney
+minimale d'un ensemble analytique complexe était connue des spécialistes au
+début des années 1970 (Whitney, Thom, Mather) ; la page n'en parle pas.}
+
+\pagerange{18}{23}
+\section*{§ 5. Localisation et faisceaux (pages 18 à 23)}
+
+\textbf{Restriction à une partie.} Soit $\mathcal{F}$ satisfaisant a) à e) — ou,
+« c'est kif-kif », $\mathcal{F}_0$ satisfaisant $\alpha$, $\beta$, $\gamma$,
+$\varepsilon$. Pour $A \in \mathcal{F}$, l'algèbre induite
+$\mathcal{F}_A = \{ B \in \mathcal{F} : B \subset A \}$, dans l'espace $A$,
+satisfait encore a) à e). Pour d) : tout élément de $\mathcal{F}$ est réunion
+finie de localement fermés de $\mathcal{F}$, donc $\mathcal{F}_A$ est engendrée
+par ses fermés relatifs, et la page 6 s'applique. Pour e) : si $A_1 \supset A_2
+\supset \cdots$ sont des fermés relatifs de $A$ avec $A_{i+1}$ rare dans $A_i$,
+les adhérences $\overline{A_{i+1}}$ sont rares dans
+$\overline{A_i}$\footnote{La page écrit « $\overline{A_i}$ rare dans
+$\overline{A_{i+1}}$ » ; c'est l'inverse, et c'est ce que démontre la
+parenthèse qui suit sur la page.}, car $A_i \setminus A_{i+1} \subset
+\overline{A_i} \setminus \overline{A_{i+1}}$ est dense dans $\overline{A_i}$ ;
+e) dans $X$ conclut. Si $\mathcal{F}$ satisfait f), il en va de même de
+$\mathcal{F}_A$, et plus fortement \emph{tout} $A \in \mathcal{F}$ a un nombre
+fini de composantes connexes, toutes dans $\mathcal{F}$ : $A$ est réunion finie
+de localement fermés connexes, et chaque composante est réunion de certains
+d'entre eux.
+
+\textbf{Le faisceau des germes.} Supposons que les ouverts de $\mathcal{F}$
+forment une base de la topologie. Soit $\underline{\mathcal{F}}$ le
+sous-faisceau du faisceau des germes de parties de $X$ engendré par
+$\mathcal{F}$, et $\overline{\mathcal{F}} = \Gamma(X, \underline{\mathcal{F}})$
+l'ensemble des parties qui sont \emph{localement} dans $\mathcal{F}$ : $X$ est
+recouvert par des ouverts $U_i \in \mathcal{F}$ avec $A \cap U_i \in
+\mathcal{F}$. On a $\mathcal{F} \subset \overline{\mathcal{F}}$, et
+$\overline{\mathcal{F}}$ satisfait a) à d) ; il n'est pas clair qu'elle
+satisfasse e), ni qu'elle soit engendrée par ses fermés. Si $X$ est
+quasi-compact, $\overline{\mathcal{F}} = \mathcal{F}$ : un recouvrement fini
+suffit.
+
+Sans l'hypothèse de base, on définit encore $\underline{\mathcal{F}}$ — ses
+sections sur un ouvert $U$ sont les $A \subset U$ qui coïncident localement avec
+des éléments de $\mathcal{F}$ — et $\overline{\mathcal{F}}_U = \Gamma(U,
+\underline{\mathcal{F}})$. Mais alors, même si $X$ est compact, on n'a plus
+$\overline{\mathcal{F}} = \mathcal{F}$\footnote{La page écrit « si $X$
+compact, on ne peut affirmer que $\overline{\mathcal{F}} = \mathcal{F}$ » ;
+l'exemple qui suit montre qu'il faut lire « même si ».} : pour
+$\mathcal{F} = \{\emptyset, X\}$, $\overline{\mathcal{F}}$ est formée des
+parties ouvertes et fermées.
+
+\textbf{Le cas d'une décomposition cellulaire (pages 20 et 21).} Prenons
+$\mathcal{F} = \mathcal{F}_{\mathcal{P}}$. Une partie ouverte et fermée d'une
+cellule fermée est dans $\overline{\mathcal{F}}$ ; pour avoir
+$\overline{\mathcal{F}}_U = \mathcal{F}_U$ pour tout ouvert $U \in \mathcal{F}$,
+il faut donc que toutes les cellules soient connexes. Cela suffit : un $U \in
+\mathcal{F}$ est une réunion de cellules, et si $A \subset U$ est localement une
+réunion de cellules, $A \cap X_i$ est ouvert et fermé dans $X_i$ pour chaque
+cellule $X_i$, donc égal à $X_i$ ou vide.\footnote{La page 21 écrit « une
+partie à la fois ouverte et fermée de $A$ » ; c'est de $X_i$ qu'il s'agit.}
+Pour un ouvert $U$ \emph{quelconque}, les $A \in \overline{\mathcal{F}}_U$ sont
+des réunions de composantes connexes des $X_i \cap U$, mais pas toutes ces
+réunions : sur $X = \mathbb{R}$, avec les cellules $\{0\}$ et $\mathbb{R}^{*}$,
+la demi-droite $]0, +\infty[$ — composante de $\mathbb{R}^{*}$ — n'est pas dans
+$\overline{\mathcal{F}}$, car près de $0$ elle ne coïncide avec aucun élément
+de $\mathcal{F}$. Et avec des cellules connexes : sur le cercle
+$\mathbb{R} \cup \{\infty\}$, avec les cellules $\{0\}$ et son complémentaire,
+et $U = \mathbb{R}$, on retrouve le même phénomène.\footnote{La page note la
+demi-droite $\mathbb{R}^{+}$ et le cercle $\widehat{\mathbb{R}}$, puis un
+symbole surchargé lu comme $\mathbb{S}^1$. « n'est pas » est d'une lecture
+douteuse, mais c'est ce que l'exemple exige.}
+
+\textbf{La condition f) n'est pas locale (page 22).} Elle passe aux ouverts de
+$\mathcal{F}$ mais pas aux ouverts quelconques. Si $A \in
+\overline{\mathcal{F}}_U$ est localement fermé dans $U$, il est localement
+connexe, ses composantes sont ouvertes, et localement finies dans $A$ si $A$
+est localement compact ; il demande si elles sont localement finies dans $U$,
+et laisse la question.
+
+\textbf{Le point de vue des faisceaux.} Il part alors d'un sous-faisceau
+$\underline{\mathcal{F}}$ du faisceau des germes de parties, satisfaisant a) à
+d) et une forme locale de e) : pour tout ouvert $U$ et toute suite décroissante
+de fermés de $U$, sections de $\underline{\mathcal{F}}$, chacun rare dans le
+précédent, la suite est localement finie — tout quasi-compact $K \subset U$ ne
+rencontre qu'un nombre fini de termes. Alors $\Gamma(X, \underline{\mathcal{F}})$
+satisfait a) à d), et e) si $X$ est quasi-compact. Plus commode est l'axiome
+
+\begin{itemize}
+\item[e$_n$)] il existe $n$ tel que toute telle suite $X_0 \supset \cdots
+  \supset X_{n+1}$ ait $X_{n+1} = \emptyset$ — $X$ est « de
+  $\underline{\mathcal{F}}$-dimension $\leqslant n$ » —,
+\end{itemize}
+
+qui passe à tous les $\mathcal{F}_A$, $A$ fermé, et entraîne e).
+
+Le faisceau $\underline{\mathcal{F}}$ peut être strictement plus gros que celui
+qu'engendrent ses sections globales. Exemple : les germes de parties
+analytiques — on entend : de l'algèbre de Boole qu'elles engendrent — d'un tore
+complexe de dimension 2 sans fonctions méromorphes non
+constantes.\footnote{Justification de l'édition : un tel tore ne contient
+aucune courbe. Une courbe sur un tore de dimension 2 est de carré positif ou
+nul ; de carré strictement positif, le tore serait projectif, de carré nul, il
+fibrerait sur une courbe elliptique, et dans les deux cas il aurait des
+fonctions méromorphes non constantes. Ses
+seules parties analytiques fermées sont donc les ensembles finis de points et
+le tore entier, alors que localement il a autant de germes de courbes qu'on
+veut.} Une condition f) est ensuite annoncée (« Nous envisageons maintenant une
+condition : f) ») et laissée en blanc ; la page s'arrête là, et l'approche
+ensembliste avec elle.
+
+\pagerange{25}{27}
+\section*{L'ordre de mobilité d'une singularité (pages 25 à 27)}
+
+Une nouvelle mouture commence, qui ne prend plus une famille de parties pour
+donnée, mais cherche à la \emph{définir} à partir de la géométrie.
+
+Soit $X$ un espace topologique et $Y \subset X$ une variété topologique (« sous-espace
+non singulier »). On dit que $X$ est \emph{équisingulier le long de $Y$} si
+tout $y \in Y$ a un voisinage ouvert $U$ dans $X$ homéomorphe à un produit
+$N \times Y_U$ ($Y_U = Y \cap U$, $(N, a)$ un espace pointé), l'homéomorphisme
+envoyant $Y_U$ sur $\{a\} \times Y_U$ de façon compatible à l'identité de
+$Y_U$. En mots : le long de $Y$, la figure a partout la même allure, et cette
+allure est celle du germe $(N, a)$.
+
+Un point $x$ est \emph{$\nu$-mobile} s'il existe une telle $Y \ni x$ avec
+$\dim_x Y \geqslant \nu$ ; son \emph{ordre de mobilité} $\nu(x)$ est le plus
+grand tel $\nu$, qui existe si $X$ est localement de dimension finie. Les
+points d'ordre $0$ sont les singularités \emph{immobiles}, ou
+éliminables.\footnote{« ou immobile » est écrit au-dessus d'un mot biffé,
+lecture incertaine du mot biffé.} L'ensemble $\mathrm{Mob}^i(X)$ des points
+$i$-mobiles est \emph{ouvert} — dans une carte $N \times Y_U$, chaque point
+$(n, y)$ est $i$-mobile le long de $\{n\} \times Y_U$ —, d'où une suite
+décroissante d'ouverts $X = \mathrm{Mob}^0 \supset \mathrm{Mob}^1 \supset
+\cdots$ et la suite croissante des fermés $F_i(X) = X \setminus
+\mathrm{Mob}^{i+1}(X)$.\footnote{La page écrit $F_0 \subset F_1 \subset F_3$ ;
+on lit $F_2$.}
+
+Il se demande, pour un $X$ donné, si les énoncés suivants sont valables (on
+pose $F_{-1} = \emptyset$ et $Y_i = F_i \setminus F_{i-1}$, l'ensemble des
+points d'ordre exactement $i$) :
+
+\begin{itemize}
+\item[A.] $Y_i$ est une variété de dimension $i$ en chacun de ses points, et
+  $X$ est équisingulier le long de $Y_i$.
+\item[B.] Localement près de chaque point de $Y_i$, $(X, Y_i) \simeq
+  Y_i \times (N, a)$ avec $a$ immobile dans $N$, et le type du germe $(N, a)$ ne
+  dépend que de la composante connexe de $Y_i$.
+\item[C.] Le germe de $Y_i$ en $y$ est le plus grand germe de variété le long
+  duquel $X$ est équisingulier ; les autres sont les germes de sous-variétés de
+  $Y_i$.\footnote{« plongées » et « autres » sont d'une lecture douteuse.}
+\item[D.] Si $Y$ est une variété de dimension $i$ et $N$ un espace, $(y, n)$
+  est $\nu$-mobile dans $Y \times N$ si et seulement si $n$ est $(\nu -
+  i)$-mobile dans $N$ ; donc $Y_\nu(Y \times N) = Y \times Y_{\nu-i}(N)$.
+\end{itemize}
+
+Ce qu'il construit là est, dans le cadre linéaire par morceaux, la
+\emph{dimension intrinsèque} d'un point d'un polyèdre et la
+\emph{stratification intrinsèque} qu'elle définit ; dans ce cadre les énoncés
+A à D sont du type de ceux que la théorie des polyèdres établit.\footnote{La
+stratification intrinsèque des polyèdres figure dans la littérature linéaire
+par morceaux de la fin des années 1960 (Armstrong, Akin) ; l'édition n'a pas
+vérifié que les énoncés A à D s'y trouvent sous cette forme exacte, et ne
+l'affirme pas.} Dans le cadre \emph{topologique}, où la page se place, D est
+faux : si $\Sigma$ est une sphère d'homologie de dimension 3 non simplement
+connexe, le sommet du cône $c\Sigma$ est immobile, mais $c\Sigma \times
+\mathbb{R}^2$ est homéomorphe à $\mathbb{R}^6$, où tout point est
+$6$-mobile — c'est le théorème de la double suspension de Cannon et Edwards.
+\footnote{Ce théorème est postérieur au dossier (Edwards, milieu des années
+1970 ; Cannon, 1979), et la page ne pouvait pas le connaître. Deux notes en
+marge, près de B et de D, portent un mot lu « divisible » sous réserve
+(« $N$ divisible $\Leftrightarrow$ $Y \times N$ divisible ») : c'est
+peut-être précisément la question de pouvoir simplifier un facteur, qu'il
+pressentait délicate. Il pose d'ailleurs A à D comme des questions
+(« la validité des propositions “suivantes” »), non comme des théorèmes, et la
+page 29 quitte le cadre topologique pour le cadre linéaire par morceaux.}
+
+\pagerange{29}{36}
+\section*{Équisingularité, mise au propre (pages 29 à 36)}
+
+\subsection*{Le contexte et la définition (page 29)}
+
+Les « espaces » sont maintenant les espaces linéaires par morceaux — ou
+algébriques, ou analytiques —, « variété » et « morphisme » s'entendant dans
+le contexte choisi. Pour $Y \subset X$ localement fermé, $X$ est équisingulier
+le long de $Y$ si tout $y \in Y$ a un voisinage ouvert $X'$ et un espace pointé
+$(Z, a)$ avec un carré commutatif
+
+\begin{tikzcd}
+Y' = X' \cap Y \arrow[r, hook] \arrow[d, "\simeq"'] & X' \arrow[d, "\simeq"] \\
+Y' \times \lbrace a \rbrace \arrow[r, hook] & Y' \times Z
+\end{tikzcd}
+
+Plus généralement, pour un diagramme d'espaces $\mathfrak{X} = (X_i)_{i \in I}$
+indexé par un ensemble ordonné, et $Y$ localement fermé dans $X_{i_0}$, on
+demande que le diagramme formé des $X_j$ pour $j \leqslant i_0$ soit localement
+le long de $Y$ le produit par $Y$ d'un diagramme $(Z_j)$ d'espaces, $Z_{i_0}$
+pointé, par des plongements ouverts $Z_j \times Y' \to X_j$.\footnote{Il écrit
+une fois $Z'_j$ et une fois $Z'_{i_0}$ pour $Z_j$, $Z_{i_0}$ ; on unifie.}
+
+\subsection*{Filtrations et partitions (pages 30 à 32)}
+
+Une filtration croissante $(X_i)_{i \geqslant 0}$ par des fermés, de réunion
+$X$, est \emph{équisingulière} si, pour chaque $i$, le diagramme
+$X_0 \to X_1 \to \cdots \to X$ est équisingulier le long de $V_i = X_i
+\setminus X_{i-1}$. Les \emph{feuilles} sont les composantes connexes des
+$V_i$ ; elles partitionnent $X$, et (proposition de la page 30) l'adhérence
+d'une feuille est une réunion de feuilles — finie si $X$ est compact et les
+$X_i$ localement connexes. Les adhérences s'appellent \emph{feuilles fermées} ;
+$F \mapsto \overline{F}$ est bijective ; l'inclusion des feuilles fermées
+définit la relation d'incidence ; et $\overline{F} \setminus F$, réunion des
+feuilles incidentes à $F$ et distinctes d'elle, est le \emph{bord} de
+$F$.\footnote{Il dit aussi « feuilles ouvertes » pour les feuilles
+restreintes, ouvertes dans leur adhérence et non dans $X$.} Une seconde
+proposition (page 31) caractérise les filtrations équisingulières : il faut et
+il suffit que l'adhérence de toute feuille soit une réunion de feuilles, et que
+le diagramme formé de $X$ et de toutes les feuilles fermées, avec les
+inclusions, soit équisingulier le long de chaque feuille.\footnote{Le mot
+« inclusions » est écrit au-dessus d'un mot biffé, lecture douteuse ; de même
+« équisingulier » dans b).} Il en vient à
+privilégier la partition sur la filtration (page 32) : plusieurs filtrations
+donnent la même partition, et dans le contexte linéaire par morceaux il y a au
+moins quatre façons canoniques de filtrer une partition donnée (par dimension,
+par minimalité itérée, et les deux duales).
+
+Une partition $(F_i)$ de $X$ est \emph{admissible} si chaque $F_i$ est
+différence de deux fermés et chaque $\overline{F_i}$ est réunion de feuilles —
+c'est la décomposition cellulaire du §~2, sans finitude — et
+\emph{équisingulière} si de plus le diagramme formé de $X$, des
+$\overline{F_i}$ et de leurs inclusions est équisingulier le long de chaque
+feuille. Elle est \emph{privilégiée} si elle est équisingulière et si les
+feuilles sont des variétés sans bord.\footnote{La définition de « privilégié »
+est dans une note marginale verticale, de lecture fragmentaire ; « admissible »
+est aussi dans la marge. Le sens de « privilégié » qu'on retient est celui
+qu'imposent les deux conjectures.} Sur un diagramme d'espaces, un système de
+partitions est admissible si chaque flèche envoie feuille dans feuille ; il
+définit alors un diagramme d'ensembles ordonnés de feuilles, et il est
+équisingulier si le diagramme des applications entre feuilles fermées l'est le
+long de chaque feuille.
+
+\subsection*{Deux conjectures (pages 33 et 34)}
+
+Dans le contexte « par morceaux » :
+
+\textbf{Conjecture 1.} \emph{Tout espace $X$ admet une partition privilégiée, et
+parmi elles une plus grossière que toutes les autres, dite canonique.}
+
+Cela ne suffit pas : il faudra des partitions privilégiées plus fines qu'une
+partition donnée, ou rendant des fermés donnés réunions de feuilles, ou
+compatibles avec une application. Tout cela rentre dans :
+
+\textbf{Conjecture 2.} \emph{Soit $I$ un ensemble ordonné fini et
+$(X_i)_{i \in I}$ un diagramme d'espaces dont les flèches sont propres. Il
+existe des partitions privilégiées de ce diagramme, et parmi elles une moins
+fine que toutes les autres, dite canonique.}
+
+\emph{Remarque.} Pour un système de partitions équisingulier et une flèche
+propre $f : X_i \to X_j$, l'image d'une feuille $F$ est la feuille $\Phi$
+entière qui la contient : elle est ouverte dans $\Phi$ par équisingularité,
+fermée par propreté, et $\Phi$ est connexe. De plus $F \to \Phi$ est une
+fibration localement triviale, et même $f^{-1}(\Phi)$ avec sa partition
+induite ; comme $F$ et $\Phi$ sont des variétés, les fibres en sont
+aussi.\footnote{La fin de la page 34 est très raturée, et l'argument de
+fermeture n'est donné que par fragments ; on en retient la structure, qu'il
+conclut sur la page 35.}
+
+\subsection*{Une construction conjecturale pour une application propre (pages 35 et 36)}
+
+« Dans la précédente lettre à A'Campo, j'ai donné une description
+conjecturale de la “partition privilégiée canonique” d'un espace $X$, en
+termes de points “immobiles”. »\footnote{Cette lettre précédente n'est pas
+dans le dossier. Le correspondant est vraisemblablement Norbert A'Campo, alors
+spécialiste des singularités ; la page écrit « A-Campo ». La description par les
+points immobiles est celle des pages 25 à 27.} Voici, pour une application
+propre $f : X \to Y$, $Y$ compact, celle qu'il propose :
+
+\begin{itemize}
+\item[1.] Soit $U$ le plus grand ouvert de $Y$ qui soit non singulier et
+  au-dessus duquel $f$ soit une fibration localement triviale. Il faut prouver
+  que $Y' = Y \setminus U$ est un sous-espace rare, donc de dimension plus
+  petite. Les composantes connexes de $U$ sont les feuilles ouvertes de $Y$.
+\item[2.] Au-dessus de $U$, les feuilles de $X$ sont celles de la partition
+  privilégiée canonique de $V = f^{-1}(U)$, localement le produit de $U$ par
+  la partition canonique d'une fibre.
+\item[3.] Si $F_i$ sont ces feuilles, les traces $\overline{F_i} \cap
+  f^{-1}(Y')$ doivent être des réunions de feuilles. On est ramené à
+  $f^{-1}(Y') \to Y'$, de dimension plus petite, mais muni en plus de ces
+  fermés et de leurs intersections finies : la récurrence demande donc
+  d'emblée l'énoncé pour un espace muni d'une famille finie de fermés.
+\end{itemize}
+
+Il note que ce cas plus général « peut probablement se faire en paraphrasant
+celle proposée dans la 1re lettre ». L'étape 1 est un théorème de
+trivialité générique : dans les cadres semi-algébrique et sous-analytique,
+c'est le théorème de Hardt (1980), et dans le cadre o-minimal sa
+généralisation.\footnote{Rapprochement de l'édition. La partie existence de la
+conjecture 2 est de ce type ; l'existence d'une partition \emph{la plus
+grossière} pour une application est une autre affaire, que ces théorèmes ne
+donnent pas, et l'édition ne prétend pas qu'elle soit établie.}
+
+\pagerange{38}{38}
+\section*{Recollement de faisceaux (page 38)}
+
+Une page de formules sans texte, sur le diagramme $\mathfrak{X} = (Y
+\xleftarrow{p} Z \overset{i}{\hookrightarrow} X)$. Un faisceau sur
+$\mathfrak{X}$ est un triple $(\mathcal{F}, \mathcal{G}, \alpha)$ formé d'un
+faisceau $\mathcal{F}$ sur $Y$, d'un faisceau $\mathcal{G}$ sur $X$ et d'un
+morphisme $\alpha : p^{*}\mathcal{F} \to i^{*}\mathcal{G}$. Il note les foncteurs
+
+\[
+  i'^{*}(\mathcal{F}, \mathcal{G}, \alpha) = \mathcal{F}, \qquad
+  i'_{*}(\mathcal{F}) = (\mathcal{F}, 0, 0), \qquad
+  p'^{*}(\mathcal{F}, \mathcal{G}, \alpha) = \mathcal{G}, \qquad
+  p'_{*}(\mathcal{G}) = (p_{*} i^{*} \mathcal{G}, \mathcal{G}, \mathrm{can}),
+\]
+
+et $q_{!}(\mathcal{G}) = (0, \mathcal{G}, 0)$ ; $q^{!}$ reste inachevé. Ces
+formules sont cohérentes : $i'_*$ est adjoint à droite de $i'^*$, $p'_*$ adjoint
+à droite de $p'^*$ (un morphisme vers $p'_*\mathcal{G}$ est déterminé par sa
+composante sur $X$, par adjonction $p^* \dashv p_*$), et $(0, \mathcal{G}, 0)$
+est adjoint à gauche de $p'^*$.\footnote{Vérification de l'édition ; la page ne
+dit rien de ces adjonctions. Le nom $q_!$ suggère une extension par zéro depuis
+$X \setminus Z$, que le schéma de la page dessine ($q : X \setminus Z \to
+\mathfrak{X}$) ; c'est alors à un faisceau sur $X \setminus Z$, prolongé par
+zéro, qu'il faut l'appliquer.} C'est la catégorie de recollement de SGA~4,
+exposé~IV, transportée à un diagramme ; elle décrit les faisceaux sur le
+cylindre de l'application $p$ recollé à $X$ le long de $Z$. En bas de page :
+les strates $X_{I,J} = X_I \setminus X_J$ d'un espace stratifié, les quatre
+opérations $\alpha_*$, $\alpha^*$, $\alpha_!$, $\alpha^!$ entre elles et le
+complexe dualisant — le formalisme des six opérations sur un espace stratifié,
+simplement nommé.
+
+\pagerange{40}{46}
+\section*{Reconstruire un espace stratifié (pages 40 à 46)}
+
+Ces pages, surtout faites de croquis, cherchent à décrire un espace stratifié
+par des données lisses : chaque strate, privée d'un voisinage tubulaire
+ouvert de ses strates inférieures, est une variété à bord, et son bord est
+fibré au-dessus des strates inférieures.
+
+\textbf{La donnée (page 40).} $I$ est un ensemble ordonné fini. Pour chaque
+$i \in I$, $V_i^{\circ}$ est une variété à bord (sans bord si $i$ est
+minimal). Pour $j < i$, une partie $\partial_j V_i^{\circ}$ du bord est une
+sous-variété à bord, fibrée sur $V_j^{\circ}$, de fibres des variétés à bord
+(sans bord si $j$ est un prédécesseur immédiat de $i$), et $\partial
+V_i^{\circ}$ est réunion des $\partial_j V_i^{\circ}$ pour $j$ prédécesseur
+de $i$. Les bords se décomposent à leur tour : $\partial(\partial_j V_i^\circ)$
+contient les $\partial_j V_i^\circ | \partial_k V_j^\circ = \partial_{j,k}
+V_i^\circ$, fibrés sur $V_k^\circ$, et ainsi de suite le long des chaînes
+$j > k > l > \cdots$.\footnote{Les indices $\partial_{i,j}$,
+$\partial_{\emptyset,j}$ et l'indice du « fibré des bords » sont d'une lecture
+incertaine ou illisibles ; on ne garde que la structure par chaînes, que les
+croquis de la page et ceux de la page 46 (une suite $V_i^{\circ} \leftarrow
+V_{ij}^{\circ} \leftarrow V_{ijk}^{\circ} \leftarrow \cdots$ avec des carrés
+cartésiens) confirment.} C'est ce qu'on appelle aujourd'hui une variété à
+coins fibrés, ou une structure de fibration itérée.\footnote{Le nom vient de la
+littérature des années 2000 sur les espaces stratifiés (Albin, Leichtnam,
+Mazzeo, Piazza, à la suite de Melrose) ; les « données de contrôle » de Mather
+(1970) et la « résolution » des espaces de Thom–Mather par Verona (années 1980)
+en sont des formes plus anciennes. La page n'en cite aucune.} La page 40 est
+un feuillet de cahier titré « Fujii Guruji Nichidatsu » ; les pages 41, 42, 44
+et 45 sont presque entièrement des dessins.
+
+\textbf{Trois strates (page 43).} Pour une tour $U \subset V \subset W$ de
+dimensions $r$, $r+s$, $r+s+t$, avec $U$, $V \setminus U$, $W \setminus V$
+réguliers et l'équisingularité le long des strates, la donnée est :
+
+\begin{itemize}
+\item[1°)] $U$, régulier de dimension $r$ ;
+\item[2°)] $U'$ fibré sur $U$ à fibres régulières de dimension $s-1$ ;
+\item[3°)] $V^{\circ}$ variété à bord, de bord $U'$ ;
+\item[4°)] $V^{\circ\prime}$ fibré sur $V^{\circ}$ à fibres régulières de
+  dimension $t-1$, dont le bord $V^{\circ\prime}|U'$ est fibré sur $U$ ;
+\item[5°)] $U''$ autre fibré sur $U$, à fibres des variétés à bord de dimension
+  $s+t-1$ ;
+\item[6°)] un isomorphisme de fibrés sur $U$ entre $\partial U''$ et $\partial
+  V^{\circ\prime}$, d'où par recollement l'espace $V' = V^{\circ\prime}
+  \sqcup_\partial U''$ ;
+\item[7°)] $W^{\circ}$ variété à bord, de bord $V'$.
+\end{itemize}
+
+On reconstruit $V = V^{\circ} \sqcup_{U'} U$ (on écrase le bord $U'$ sur $U$
+par la fibration) et $W = W^{\circ} \sqcup_{V'} V$.\footnote{Les dimensions de
+5°) sont lues sur un bloc serré, exposants incertains. Le diagramme de la page
+est redessiné dans la transcription d'après une esquisse dont toutes les
+flèches ne se lisent pas ; on ne le reprend pas.} Les pages 44 à 46 étendent
+cela à une tour $U_0 \subset U_1 \subset \cdots \subset U_n$, avec les bords
+$\partial_{n-1} U_n^{\circ}, \dots, \partial_0 U_n^{\circ}$ fibrés sur
+$U_{n-1}^{\circ}, \dots, U_0^{\circ}$, et la page 45 porte le mot
+d'ordre : « PL variétés à bord fibrées sur variétés à bord ».
+
+C'est le « dévissage » des structures stratifiées que l'\emph{Esquisse d'un
+programme} décrira comme l'un des théorèmes à attendre d'une topologie
+modérée : l'équivalence entre espaces stratifiés modérés et systèmes de
+variétés à bord recollées.
+
+\pagerange{48}{51}
+\section*{Équisingularité. Cellules (pages 47 à 51)}
+
+Sous une chemise rose titrée de sa main, une reprise.
+
+\textbf{Contextes (page 48).} Quatre sont nommés : L.P.M., SA.P.M.,
+$\mathrm{Alg}_{\mathbb{C}}$, $\mathrm{An}_{\mathbb{C}}$.\footnote{Les deux
+premiers sigles ne sont pas développés. L.P.M.\ est vraisemblablement
+« linéaire par morceaux », SA.P.M.\ peut-être « semi-algébrique » ou
+« semi-analytique par morceaux » ; l'édition ne tranche pas.} L'énoncé est
+celui du §~3, localisé : pour une famille localement finie de sous-espaces
+fermés $T_\alpha \subset X$, il existe une partition admissible \emph{stricte}
+(à feuilles connexes) dont les $T_\alpha$ sont réunions de feuilles, une plus
+grossière que toutes les autres, et sa formation commute à la restriction aux
+ouverts. La démonstration, par récurrence sur $\dim X$ — trivial si $\dim X
+\leqslant 0$ ; ensuite on retire $X^1 = \bigcup_\alpha \partial T_\alpha$ —,
+s'interrompt sur « Soit ».\footnote{Les lignes de la démonstration sont
+surchargées d'additions et de passages biffés, et la lecture en est très
+incertaine ; on n'en donne que le plan, qui est celui de la page 14.}
+
+\textbf{L'ordre et les ouverts (page 49).} Pour une partition admissible et un
+ouvert $U$, soit $I_U$ l'ensemble des feuilles qui rencontrent $U$. L'ordre
+d'incidence de $I_U$ calculé dans $U$ est celui de $I$ : si $F_i$ rencontre
+$U$ et $\overline{F_i} \cap U \subset \overline{F_j} \cap U$, un point de
+$F_i \cap U$ est dans $\overline{F_j}$, donc $F_i \subset \overline{F_j}$ par la
+condition de frontière.\footnote{La page passe par un argument plus long,
+local au voisinage d'un point, et conclut « Oui, car $F_k$ est ouvert dans
+$\overline{F_i}$ ! ». Elle écrit aussi « induite par $U$ » pour « induite par
+$I$ ».} En conséquence, si $F_i$ rencontre $U$, $i$ est maximal dans $I$ si et
+seulement s'il l'est dans $I_U$ ; et pour une partition admissible localement
+finie, \emph{une feuille est ouverte si et seulement si elle est maximale} :
+si $F_i$ est maximale, $X \setminus F_i$ est la réunion localement finie des
+fermés $\overline{F_j}$, $j \neq i$, qui ne rencontrent pas $F_i$.\footnote{La
+page 50 aboutit à cette équivalence sur une ligne serrée qui finit par un
+point d'interrogation ; elle est vraie, sous l'hypothèse de finitude locale.}
+
+\textbf{Stabilité par restriction (page 50).} Il distingue trois conditions sur
+une partition admissible : (a) feuilles connexes, (b) feuilles non singulières,
+(c) équisingularité. Les deux dernières, comme l'admissibilité, passent à un
+ouvert, mais pas (a). La bonne condition stable est
+
+\begin{itemize}
+\item[(C)] pour tout ouvert $U$, la famille des composantes connexes de tous
+  les $U \cap F_i$ est une partition admissible de $U$,
+\end{itemize}
+
+c'est-à-dire : ces composantes sont localement finies, et si une composante
+$F_{i\alpha}$ de $U \cap F_i$ a une adhérence qui rencontre une composante
+$F_{j\beta}$, elle la contient.\footnote{L'addition interlinéaire qui donne la
+finitude locale est de place incertaine dans la phrase. Une filtration (III)
+de la page 49, encadrée, donne une forme filtrée de la même condition ; ses
+indices sont peu lisibles et l'on ne la reprend pas.}
+
+\textbf{Cellules (page 51).} Une partition $(F_i)_{i \in I}$ d'un espace $X$
+en \emph{feuilles} est admissible si (I) :
+
+\begin{itemize}
+\item[(i)] elle est localement finie ;
+\item[(ii)] chaque $\overline{F_i}$ est une réunion de feuilles ;
+\item[(iii)] chaque $F_i$ est ouvert dans $\overline{F_i}$.
+\end{itemize}
+
+Deux feuilles distinctes ont des adhérences distinctes, et la partition se
+lit sur la famille des feuilles fermées $\Phi_i = \overline{F_i}$, qui est
+caractérisée par (II) :
+
+\begin{itemize}
+\item[(0)] les $\Phi_i$ recouvrent $X$ ;
+\item[(i)] la famille est localement finie ;
+\item[(ii)] les $\Phi_i$ sont fermés ;
+\item[(iii)] $\Phi_i \cap \Phi_j$ est une réunion de $\Phi_k$ ;
+\item[(iv)] si $\Phi_j \subsetneq \Phi_i$, $\Phi_j$ est rare dans $\Phi_i$.
+\end{itemize}
+
+Réciproquement, (II) suffit, pour une famille de fermés non vides deux à deux
+distincts\footnote{Hypothèse ajoutée ; sans elle, $F_i$ peut être vide ou deux
+indices donner la même feuille.} : on pose $F_i = \Phi_i \setminus
+\bigcup_{\Phi_j \subsetneq \Phi_i} \Phi_j$. Tout $x$ est dans un unique $F_i$
+— celui du plus petit $\Phi_i$ contenant $x$, qui existe par (i) et (iii) —,
+$F_i$ est localement fermé, la famille est localement finie, $\overline{F_i}
+= \Phi_i$ par (iv) (une réunion localement finie de fermés rares est rare), et
+$\Phi_i$ est réunion de feuilles : si $F_j$ rencontre $\Phi_i$ en $x$, le plus
+petit fermé de la famille contenant $x$ est $\Phi_j$, donc $\Phi_j \subset
+\Phi_i$ par (iii).
+
+\pagerange{53}{57}
+\section*{La catégorie modérée (pages 53 à 57)}
+
+Troisième mouture : la structure modérée n'est plus une famille de parties
+d'un espace donné, mais une catégorie d'objets avec leur espace sous-jacent.
+
+\subsection*{Axiomes (page 53)}
+
+On se donne une catégorie $\mathcal{M}$ et un foncteur $X \mapsto |X|$ de
+$\mathcal{M}$ vers les espaces compacts, avec
+
+\begin{itemize}
+\item[M0)] le foncteur est « transportable » : on peut transporter la structure
+  d'un objet le long d'un homéomorphisme ;
+\item[M1)] les limites projectives finies existent dans $\mathcal{M}$ et
+  $|\ |$ les respecte ;
+\item[M2)] $|\ |$ est conservatif (donc fidèle).
+\end{itemize}
+
+Un morphisme $f$ est alors un monomorphisme si et seulement si $|f|$ est
+injectif, et les sous-objets de $X$ s'identifient à certaines parties de
+$|X|$, les parties \emph{modérées}, stables par intersections finies. Une
+application $|X| \to |Y|$ est modérée si elle provient d'un morphisme ; c'est le
+cas si et seulement si son graphe est une partie modérée de $|X \times Y|$. On
+demande encore :
+
+\begin{itemize}
+\item[M3)] l'image d'une partie modérée par une application modérée est
+  modérée.
+\end{itemize}
+
+Tout morphisme se factorise alors de façon unique en $X \xrightarrow{f'} Y'
+\xrightarrow{i} Y$ avec $|f'|$ surjectif et $i$ un monomorphisme, et $f'$ est
+un épimorphisme \emph{effectif}. La clé est un lemme : si $|f'|$ est surjectif
+et $H \circ |f'|$ est modéré, alors $H$ est modéré, car le graphe de $H$ est
+l'image du graphe de $H \circ |f'|$ par $|f'| \times \mathrm{id}$, et M3)
+s'applique.\footnote{La continuité de $H$, qu'il ne mentionne pas, vient de ce
+qu'une surjection continue entre compacts séparés est une application
+quotient. La page écrit « $h : Y' \to |Z|$ », mélangeant objet et espace ; on
+lit $h : Y' \to Z$.}
+
+\subsection*{Les ind-objets et la droite réelle (pages 53 et 54)}
+
+Un ind-objet \emph{spécial} est une suite de monomorphismes $X_1 \to X_2 \to
+\cdots$ telle que chaque $|X_i|$ soit dans l'intérieur d'un $|X_j|$ dans tous
+les $|X_k|$ suivants. Sa limite $\varinjlim |X_i|$ est un espace localement
+compact dénombrable à l'infini, dont les $|X_i|$ forment un système
+fondamental de compacts. On en tire la notion de structure
+\emph{pseudo-modérée} sur un espace localement compact, et l'image directe
+d'une partie pseudo-modérée par un morphisme pseudo-modéré \emph{propre} est
+pseudo-modérée.
+
+On demande alors une structure pseudo-modérée sur $\mathbb{R}$ pour laquelle
+les $I_n = [-n, n]$ sont modérés et la multiplication par un entier non nul est
+un isomorphisme. Comme $\mathbb{R} = \text{``}\varinjlim\text{''}\, I_n$ et que
+$I_n \simeq I_1$ par $t \mapsto t/n$, les transitions devenant la multiplication
+par $n/(n+1)$, cela revient à une structure modérée sur $I_1 = [-1, 1]$ pour
+laquelle les homothéties $t \mapsto rt$, $r \in \mathbb{Q}^*$, $|r| \leqslant 1$,
+sont modérées. On suppose de plus
+
+\begin{itemize}
+\item[M4)] 1°) le point $1$ est modéré ; 2°) la moyenne $(x, y) \mapsto
+  (x+y)/2$, $I_1 \times I_1 \to I_1$, est modérée ; 3°) le produit $(x, y)
+  \mapsto xy$ est modéré.
+\end{itemize}
+
+Sous 1°) et 2°), les points rationnels et les translations rationnelles sont
+modérés, et les applications modérées d'un objet dans $\mathbb{R}$ forment un
+$\mathbb{Q}$-espace vectoriel. Sous 3°) en plus, les points modérés de
+$\mathbb{R}$ forment un corps $\mathbb{R}_{\mathrm{mod}}$ — l'inverse de $a$
+est la projection de la partie modérée $\{ (a, y) : ay = 1 \}$ —, et ces
+applications forment une $\mathbb{R}_{\mathrm{mod}}$-algèbre.\footnote{La page
+55 dit que, « moyennant 1°, 2° », elles forment un module « sur le corps
+$\mathbb{R}_{\mathrm{mod}}$ » : la multiplication par un scalaire modéré
+demande le produit, c'est-à-dire 3°). On corrige l'attribution des hypothèses ;
+« sous-module » et « sous-anneau algèbre » sont d'ailleurs de lecture
+douteuse. La dernière ligne de la page 54, coupée par le bord du feuillet,
+annonce que les intervalles à extrémités modérées sont modérés.} Enfin :
+
+\begin{itemize}
+\item[M5)] tout objet admet un morphisme modéré injectif dans un cube $I^n$.
+\end{itemize}
+
+\subsection*{Tout se lit dans les cubes (pages 55 à 57)}
+
+Sous M5), $\mathcal{M}$ se reconstruit à partir des ensembles $\mathcal{M}_n$
+des parties compactes modérées de $I^n$, $I = [0, 1]$, qui vérifient
+
+\begin{itemize}
+\item[M$'$0)] les éléments de $\mathcal{M}_n$ sont compacts ;
+\item[M$'$1)] $\mathcal{M}_n$ est stable par intersections finies ;
+\item[M$'$2)] stabilité par images réciproques par les applications de
+  coordonnées $I^n \to I^m$ ;
+\item[M$'$3)] stabilité par images directes par ces applications.
+\end{itemize}
+
+Les « applications simpliciales » de la page sont les applications
+$I^J \to I^{J'}$ induites par les applications d'ensembles finis
+$J' \to J$ : projections, diagonales, permutations de
+coordonnées.\footnote{Il dit que $\mathcal{M}_*$ est un « ensemble
+cosimplicial » ; c'est plutôt un foncteur sur la catégorie des ensembles finis,
+puisque toutes les applications d'ensembles finis interviennent, pas seulement
+les croissantes.} Une structure modérée sur un compact est une classe de
+plongements dans des cubes à image dans les $\mathcal{M}_n$, deux plongements
+étant équivalents si le graphe de l'application de transition est dans
+$\mathcal{M}_{n+n'}$ ; une application est modérée si son graphe, lu dans les
+cubes, l'est.
+
+\textbf{La catégorie $\mathcal{M}_0$ (pages 56 et 57).} Partant de classes
+$\mathcal{M}_n$ vérifiant M$'$1) à M$'$3), on définit $\mathcal{M}_0$ : ses
+objets sont les couples $(n, K)$, $K \in \mathcal{M}_n$, et ses morphismes
+$(n,K) \to (n',K')$ les applications $f : K \to K'$ de graphe dans
+$\mathcal{M}_{n+n'}$ — ce qui force $f$ continue, son graphe étant compact. Le
+graphe de l'identité est l'image de $K$ par la diagonale (M$'$3)). Pour
+$f : K \to K'$ et $g : K' \to K''$, le graphe de $g \circ f$ est la
+projection sur $I^{n+n''}$ de $p^{-1}(\Gamma_f) \cap q^{-1}(\Gamma_g) \subset
+I^{n+n'+n''}$, donc est modéré par M$'$1), M$'$2), M$'$3).\footnote{La page
+écrit $\Gamma_{fg} = p^{-1}(\Gamma_f) \cap q^{-1}(\Gamma_g)$, qui est une
+partie de $I^{n+n'+n''}$ et non le graphe ; la projection sur $I^{n+n''}$
+manque, et M$'$3) est nécessaire en plus de M$'$1) et M$'$2), qu'il cite seuls.}
+Le foncteur $(n, K) \mapsto K$ est fidèle et conservatif ; il y a un objet final
+$I^0$, des produits fibrés et des noyaux, calculés comme dans les ensembles ;
+d'où M1) et M2), M3) par M$'$3), et M5) par construction. Enfin M4) se
+traduit :
+
+\begin{itemize}
+\item[M$'$4)] pour $q$ rationnel, $|q| \leqslant 1$, le graphe de $x \mapsto
+  qx$ est dans $\mathcal{M}_2$ ; $\{1\} \in \mathcal{M}_1$ ; les graphes de la
+  moyenne et du produit sont dans $\mathcal{M}_3$.\footnote{Avec $I = [0,1]$,
+  comme à la page 55, seuls les $q \geqslant 0$ ont un sens : la condition est
+  écrite pour l'intervalle $[-1,1]$ de la page 54.}
+\end{itemize}
+
+Ce que M$'$0) à M$'$4) décrivent est, à la compacité près, une
+\emph{structure} sur $\mathbb{R}$ au sens de la théorie des modèles, contenant
+les graphes de l'addition et de la multiplication : une famille de parties de
+tous les $\mathbb{R}^n$ stable par intersections, produits et projections.
+L'axiome d'o-minimalité — les parties modérées de la droite sont les
+réunions finies de points et d'intervalles — n'est pas ici : il est remplacé,
+dans la première mouture, par les conditions de finitude d), e), f).
+
+\pagerange{58}{62}
+\section*{Changer de catégorie de base ; sommes amalgamées (pages 58 à 62)}
+
+\textbf{(A) Une base quelconque (page 58).} On remplace les espaces compacts par
+une catégorie $\mathcal{K}$ à limites projectives finies, et l'on se donne un
+foncteur $\varphi : \mathcal{M} \to \mathcal{K}$ exact à gauche, conservatif,
+et un objet $I_0$ de $\mathcal{M}$ dans une puissance duquel tout objet se
+plonge. À équivalence près, cela revient à se donner un objet $I$ de
+$\mathcal{K}$ et des ensembles $\mathcal{M}_n$ de sous-objets de $I^n$ stables
+par intersections finies, par images réciproques d'applications de
+coordonnées, et par image d'une application de coordonnées qui reste un
+monomorphisme sur $K$.\footnote{Sa lettre pour la catégorie de base est un K
+simple ; on écrit $\mathcal{K}$, comme la transcription, pour la distinguer des
+parties $K$.}
+
+\textbf{(B) Images.} Si tout morphisme de $\mathcal{K}$ se factorise en un
+épimorphisme effectif suivi d'un monomorphisme, et si les épimorphismes
+effectifs sont universels, on peut demander la stabilité par images
+quelconques (3°~bis), qui est M3).
+
+\textbf{(C) Réunions.} Si les sous-objets ont des bornes supérieures finies, on
+peut demander que les $\mathcal{M}_n$ y soient stables et qu'il existe un
+monomorphisme modéré $e \sqcup e \to I$ ; cela revient à ce que $\mathcal{M}$
+ait des sommes disjointes finies respectées par $\varphi$.
+
+\textbf{(D) Sommes amalgamées (pages 59 à 61).} Un morphisme $f : Y \to X$ est
+un épimorphisme si et seulement si la codiagonale $X \sqcup_Y X \to X$ est un
+isomorphisme ; si $\mathcal{M}$ a les mêmes sommes amalgamées que $\mathcal{K}$
+et que $\varphi$ les respecte, $\varphi$ reflète donc les épimorphismes. La
+question devient : étant donnés des monomorphismes modérés $Y \leftarrow X
+\rightarrow Z$, trouver sur la somme amalgamée $S = Y \sqcup_X Z$ calculée dans
+$\mathcal{K}$ une structure modérée qui en fasse une somme amalgamée dans
+$\mathcal{M}$.\footnote{À la page 59, il écrit « $X \xrightarrow{f} X$ » ; la
+transcription lit $Y \to X$ d'après la suite, et l'on fait de même.}
+
+Il suppose, dans $\mathcal{K}$, que les sommes amalgamées le long de
+monomorphismes existent, que leurs flèches structurales sont des monomorphismes
+et que le carré est cartésien, et il veut de plus un carré cartésien de
+monomorphismes $X \to Y, Z \to S'$ dont $S$ soit la réunion de $Y$ et de $Z$.
+Il en déduit que tout monomorphisme de $\mathcal{K}$ est effectif — c'est le
+noyau de la paire $Y \rightrightarrows Y \sqcup_X Y$ — et que les sommes
+amalgamées sont universelles. Ce sont presque mot pour mot les propriétés
+des \emph{catégories adhésives}.\footnote{Notion de Lack et Sobociński (2004) :
+une catégorie où les sommes amalgamées le long de monomorphismes existent et
+sont des carrés de Van Kampen ; on y montre que ces carrés sont cartésiens et
+que les monomorphismes sont réguliers. Rapprochement de l'édition.} Pour la
+structure modérée de $S$, il ajoute deux conditions sur l'intervalle :
+
+\begin{itemize}
+\item[5°)] $I_0$ est injectif dans $\mathcal{M}$ : toute application modérée
+  d'un sous-objet vers $I_0$ se prolonge ;
+\item[6°)] tout sous-objet $Y \hookrightarrow X$ est l'image réciproque d'un
+  point $\sigma_n : e \to I_0^n$ par une application modérée $X \to I_0^n$.
+\end{itemize}
+
+5°) est un théorème de prolongement de Tietze, 6°) dit que les fermés modérés
+sont des lieux de zéros d'applications modérées ; dans le cadre o-minimal, les
+deux sont vrais.\footnote{Voir le livre de van den Dries cité plus haut,
+chapitre~8. Rapprochement de l'édition.}
+
+\textbf{La démonstration (page 61).} Si $X$ est un rétracte de $Y$ et de $Z$, de
+rétractions $r$ et $r'$, on plonge $Y$ et $Z$ dans le produit fibré $Y
+\times_X Z$ (pris au-dessus des rétractions) par $y \mapsto (y, r(y))$ et
+$z \mapsto (r'(z), z)$ ; leurs images se coupent exactement le long de la
+diagonale de $X$, et l'on prend pour $S'$ ce produit fibré.\footnote{La
+transcription marque ce « $Y \times_X Z$ » comme suspect, attendant une somme
+amalgamée. Pris au-dessus des rétractions, le produit fibré est juste : les deux
+plongements tombent dedans et ne se rencontrent que sur $X$. Le reste de la
+ligne est illisible ; on complète l'argument.} On se ramène à ce cas : par
+6°), $X$ est l'image réciproque d'un point par $\Psi : Y \to I_0^p$ ; par M5)
+et 5°), on plonge $Y$ dans $I_0^n$ par un $\Phi$ prolongeant un plongement
+$\varphi$ de $X$ ; on fait de même pour $Z$ ; puis on prolonge $\varphi$ à $Z$
+et $\varphi'$ à $Y$. On obtient un cube commutatif de monomorphismes à faces
+cartésiennes, où $X$, $Y$, $Z$ se plongent dans des cubes $I^\nu$, $I^N$,
+$I^{N'}$ ($\nu = n + n'$, $N = p + \nu$, $N' = p' + \nu$), et $I^\nu$ est un
+rétracte de $I^N$ et de $I^{N'}$ ; le cas du rétracte donne $S$.
+
+\textbf{Les fonctions modérées (page 62).} Les conditions 5°) et 6°) ne
+s'expriment pas simplement en termes des $\mathcal{M}_n$. Il propose de prendre
+pour donnée primitive les ensembles $F_n = \mathrm{Hom}_{\mathcal{M}}(I_0^n,
+I_0)$ des fonctions modérées de $n$ variables, avec (F1) les projections sont
+dans $F_n$, (F2) les $F_n$ sont stables par composition — c'est la donnée d'une
+\emph{théorie de Lawvere} sur une sorte, ou d'un clone d'opérations —, et l'on
+pose $\mathcal{M}_n$ = intersections finies de lieux $\varphi^{-1}(\alpha)$,
+$\varphi \in F_n$, $\alpha$ un point modéré. Viennent (F3), inachevé, pour
+avoir M3), et (F4) : un point $0$ dont les points modérés sont des lieux de
+zéros, la réunion des deux axes dans $\mathcal{M}_2$, deux points distincts.
+\footnote{Sous (F4) a), il écrit « $\forall \alpha \in F_1$ » alors que
+$\alpha$ est un point, donc dans $F_0$ ; on lit $F_0$.} Une fonction est dans
+$F_n$ si et seulement si son graphe est dans $\mathcal{M}_{n+1}$ : le « il
+faut » demande que la diagonale de $I \times I$ soit dans $\mathcal{M}_2$, le
+« il suffit » doit être postulé.
+
+\pagerange{64}{67}
+\section*{Axiomes dans les cubes ; carrés de recollement (pages 64 à 67)}
+
+\textbf{Une liste d'axiomes (page 64).} Avec $I = [-1, 1]$ : les
+$\mathcal{M}_n$ sont stables par intersections et réunions finies et par images
+directes et réciproques d'applications de coordonnées ; $\mathcal{M}_0$
+contient $\{0\}$ et $\{1\}$ ; entre crochets, $I$ est injectif et toute partie
+modérée est un lieu de zéros $\bigcap_i f_i^{-1}(0)$ de fonctions « permises ».
+S'y ajoute une exigence de \emph{triangulation} : la réalisation géométrique de
+tout complexe simplicial fini porte une structure modérée admissible, tout objet
+est triangulable, et pour $Y \subset X$ une triangulation de $Y$ est induite
+par une triangulation de $X$. Exemple : pour des points modérés $a_0, \dots,
+a_n$, la partie $\{ (x, y) : x_i \geqslant 0, \sum x_i = 1, y = \sum a_i x_i
+\}$ — le graphe de la fonction affine sur le simplexe qui vaut $a_i$ au sommet
+$i$ — est dans $\mathcal{M}_{n+2}$.\footnote{La condition a) sur les simplexes
+types, ligne surchargée de biffures, ne se lit que par fragments. Le
+théorème de triangulation des ensembles définissables, compatible avec une
+famille finie de parties, est un des théorèmes centraux de la théorie
+o-minimale.}
+
+\textbf{Quand un carré est-il une somme amalgamée ? (page 65).} Soit un carré
+commutatif $X \overset{i}{\hookrightarrow} Y$, $X \xrightarrow{p} Z$, $Z
+\overset{i'}{\hookrightarrow} S$, $Y \xrightarrow{p'} S$. Il énonce :
+
+\begin{itemize}
+\item[a)] $i'$ est un monomorphisme ;
+\item[b)] le carré est cartésien : $X = p'^{-1}(Z)$ ;
+\item[c)] $Y \times_S Y = \Delta_Y \cup (X \times_Z X)$ ;
+\item[d)] $Z \sqcup Y \to S$ est un épimorphisme effectif ;
+\end{itemize}
+
+entraînent $S \simeq Y \sqcup_X Z$. C'est exact : la paire noyau de
+$Z \sqcup Y \to S$ se décompose, par a) et b), en $Z \sqcup X \sqcup X \sqcup
+(Y \times_S Y)$, et par c) une application $(f, g) : Z \sqcup Y \to T$ avec
+$f \circ p = g \circ i$ égalise cette paire, donc passe au quotient par
+d).\footnote{L'argument est celui de la page, écrit en formules. Dans c), la
+réunion n'est pas disjointe — les deux termes se rencontrent le long de
+$\Delta_X$ — alors que la page écrit une fois $(X \times_Z X) \sqcup \Delta_Y$.
+Le calcul de la paire noyau suppose les sommes disjointes et universelles.}
+
+\textbf{Le réaliser dans un cube (pages 66 et 67).} Il cherche à réaliser un tel
+carré avec $S$ un cube, en plongeant $Z$ et $Y$ par des fonctions $f_\alpha$,
+$g_\alpha$ compatibles ($f_\alpha \circ p = g_\alpha \circ i$, prolongées par
+injectivité) et en ajoutant des fonctions qui s'annulent exactement sur $X$
+(par 6°)). Il note « OK pour a) », « OK pour b) ». Pour c), il passe par une
+factorisation $S = I^{p+q} \to S' = I^q$ et écrit $Y \times_{I^q} Y = \Delta_Y
+\cup (X \times X)$ ; mais cette égalité demande que $Y \to I^q$ soit injective
+hors de $X$, ce que la construction n'assure pas, et la page écrit elle-même
+un « $\neq$ » pour l'égalité analogue sur le cube.\footnote{Ce « $\neq$ » est
+d'une lecture douteuse. Les lettres de $f_\alpha$, $g_\alpha$ sont
+surchargées.} La condition c) reste ouverte, et avec elle l'existence générale
+des sommes amalgamées.
+
+La moitié gauche de la page 65, écrite en travers, est sans rapport : la
+présentation de la cohomologie d'un fibré en grassmanniennes par les classes de
+Chern du sous-fibré et du quotient tautologiques, $H(S)[c_i(M), c_j(N)]$ modulo
+$c(M)\,c(N) = c(E)$, et la formule correspondante sur un fibré en
+drapeaux.\footnote{Avec des lieux $D_\sigma(E)$ et $\Sigma_{n,\sigma}(E)$ qui
+évoquent des lieux de dégénérescence de type Schubert ; un exposant de $c_i$ et
+un indice de sommation sont illisibles.}
+
+\pagerange{69}{72}
+\section*{Les $C$-modèles (pages 69 à 72)}
+
+La dernière mouture, mise au propre à l'encre noire, numérotée « 1) » et
+« 2) », reprend tout sur un ensemble $R$ (« ce sera bientôt $\mathbb{R}$ »).
+
+\subsection*{1. Les classes $C_n$ (pages 69 et 70)}
+
+Pour chaque $n$, soit $C_n$ un ensemble de parties de $R^n$,\footnote{La page
+écrit « $C_n \in R^n$ » ; on lit $C_n \subset \mathfrak{P}(R^n)$, comme la
+suite de la page.} avec
+
+\begin{itemize}
+\item[(1)] $C_n$ est stable par permutation des coordonnées ;
+\item[(2)] l'image d'un élément de $C_n$ par une projection $R^n \to R^p$ est
+  dans $C_p$ ;
+\item[(3)] l'image d'un élément de $C_n$ par une application qui répète les
+  coordonnées, $(x_1, \dots, x_n) \mapsto (x_1, \dots, x_1, \dots, x_n, \dots,
+  x_n)$, est dans $C_{p_1 + \cdots + p_n}$ ;
+\item[(4)] si $X \in C_m$ et $Y \in C_n$, $X \times Y \in C_{m+n}$.
+\end{itemize}
+
+De façon équivalente, on se donne pour chaque ensemble fini $I$ une classe
+$C_I$ de parties de $R^I$, stable par les applications $\alpha^* : R^J \to
+R^I$ induites par les applications d'ensembles finis $\alpha : I \to J$, et par
+produits.
+
+\textbf{Proposition.} \emph{Si $X, Y \in C_n$, alors $X \cap Y \in C_n$} —
+pourvu que les $C_I$ soient aussi stables par \emph{images réciproques} par les
+$\alpha^*$ : alors $X \cap Y$ est l'image réciproque de $X \times Y$ par la
+diagonale $R^n \to R^{2n}$.\footnote{Hypothèse ajoutée. Sous (1) à (4)
+seuls, l'énoncé est faux : les classes engendrées par les deux parties
+$[0,2]$ et $[1,3]$ de $\mathbb{R}$ ne contiennent dans $C_1$ que ces deux
+parties, car (1) à (4) ne font que permuter, répéter et oublier des
+coordonnées de produits ; $[1,2]$ n'y est pas. La stabilité par images
+réciproques est l'axiome M$'$2) de la page 55, que cette mouture a omis.}
+
+Une application $f : X \to Y$, $X \in C_I$, $Y \in C_J$, est un
+\emph{$C$-morphisme} si son graphe est dans $C_{I \sqcup J}$.\footnote{Il
+accole à $C$, dans « $C$-morphisme » et « $C$-modèle », une petite marque en
+indice (étoile ou croix), transcrite $C_*$ ; on écrit simplement $C$.} Les
+identités, les composés, les couples $(g, h) : X \to Y \times Z$ dont les
+composantes le sont, les restrictions des $\alpha^*$ et les inclusions sont des
+$C$-morphismes ; l'image directe et l'image réciproque d'une partie de $C$ par
+un $C$-morphisme sont dans $C$ ; et l'inverse d'un $C$-morphisme bijectif est
+un $C$-morphisme, son graphe étant le transposé du premier
+(1).\footnote{L'énoncé c) de la page, sur l'inverse d'une bijection, finit sur
+une condition illisible ; on énonce ce qui est vrai. Les énoncés e) à h) sont
+en marge, en biais ; leurs lettres et indices sont peu sûrs. Plusieurs de ces
+énoncés — composés, images — passent par des intersections, donc par
+l'hypothèse ajoutée ci-dessus.}
+
+\textbf{Les $C$-modèles.} Une structure de $C$-modèle sur un ensemble $E$ est
+la donnée, pour chaque $n$, d'un ensemble $T_n$ d'injections $E \to R^n$, non
+tous vides, tels que, si $u \in T_n$, une injection $v : E \to R^m$ est dans
+$T_m$ si et seulement si $v(E) \in C_m$ et $v \circ u^{-1}$ est un
+$C$-morphisme. En marge, une définition équivalente par l'ensemble des
+$C$-morphismes $E \to R$. Tout $X \in C_n$ est un $C$-modèle, et les
+$C$-modèles forment une catégorie, avec produits finis, où un morphisme est un
+isomorphisme si et seulement s'il est bijectif. Il y a un $C$-modèle à un
+point si et seulement si un $C_n$ contient une partie non vide, si et seulement
+si $R^0 \in C_0$ ; on demande plus fortement
+
+\begin{itemize}
+\item[(5)] $R^n$ est réunion des éléments de $C_n$.
+\end{itemize}
+
+\subsection*{2. Le cas topologique (pages 71 et 72)}
+
+On suppose $R$ topologique séparé et
+
+\begin{itemize}
+\item[(7)] les éléments de $C_n$ sont compacts.
+\end{itemize}
+
+Alors tout $C$-morphisme est continu — son graphe est un fermé du produit, à
+valeurs dans un compact séparé —, et l'on a un foncteur des $C$-modèles vers
+les espaces compacts : c'est la catégorie $\mathcal{M}$ des pages 53 à 57,
+retrouvée de l'autre côté. On suppose encore
+
+\begin{itemize}
+\item[(8)] pour $X \in C_n$ et $x \in X$, les $Y \in C_n$ qui sont des
+  voisinages de $x$ dans $X$ forment un système fondamental de voisinages
+\end{itemize}
+
+— il suffit que les intérieurs des éléments de $C_n$ forment une base de
+$R^n$ —, et
+
+\begin{itemize}
+\item[(6)] $C_n$ est stable par réunions finies (donc contient $\emptyset$).
+\end{itemize}
+
+\textbf{Proposition (page 72).} \emph{Si un $C$-modèle $X$ est réunion d'une
+famille finie de $C$-parties $X_i$, une application $f : X \to Y$ est un
+$C$-morphisme si et seulement si chaque $f|X_i$ en est un} : le graphe de $f$
+est la réunion des graphes des restrictions (6), et chacun de ceux-ci est la
+trace du graphe de $f$ sur $X_i \times Y$. \emph{Corollaire} : $X$ est la somme
+amalgamée des $X_i$ au-dessus des $X_i \cap X_j$.
+
+Avec (8), il en déduit que les $C$-morphismes d'un $C$-modèle dans un autre
+sont les sections d'un faisceau, celui de leurs germes — ce qui demande
+précisément ce recollement fini, donc (6).\footnote{La page 71 affirme le
+caractère faisceautique avant d'introduire (6), à la page 72 ; le numéro 6,
+cerclé, avait été réservé. On met l'hypothèse à sa place logique.} La
+connaissance du faisceau des $C$-morphismes vers $R$ ne donne
+pas, dit-il, la structure de modèle.\footnote{« pas » est de lecture douteuse,
+et l'addition interlinéaire qui précède est en partie illisible.} D'où la
+notion de \emph{$C$-espace} : un espace localement compact muni d'un faisceau
+de fonctions continues à valeurs dans $R$ tel que tout point ait un voisinage
+compact qui soit, pour la structure induite, un $C$-modèle — l'analogue des
+« espaces définissables » de la théorie o-minimale.
+
+\textbf{La question finale.} Pour deux inclusions de $C$-modèles $X
+\hookleftarrow Z \hookrightarrow Y$, la somme amalgamée existe-t-elle ? Sa
+réponse : « OK », si l'on suppose que pour $Y \subset X$ dans $C_n$, tout
+$C$-morphisme $Y \to R$ se prolonge en un $C$-morphisme $X \to R$ — la
+condition 5°) de la page 60, sous forme d'un théorème de Tietze. C'est sur
+cette condition que le dossier s'arrête.
+\end{document}

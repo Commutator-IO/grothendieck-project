@@ -1,0 +1,1406 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 123, pages 1-47.
+%
+% This is an INTERPRETATION, not a transcription. Everything the critical
+% apparatus carried moves into footnotes. In any dispute of substance the
+% transcription governs: whoever cites Grothendieck must cite
+% batch-01.fr.tex, batch-02.fr.tex or batch-03.fr.tex.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-03 — first pass, unchecked against
+% the pages by a human. The folder was read whole: three batches, pages 1-47,
+% all transcribed. Covers (3, 7, 14, 23, 36, 42) and blanks (20, 24, 32) carry
+% no \page in the transcription; their titles head the sections here.
+%
+% Notation fixed for the whole document.
+% — G is a reductive (mostly semisimple adjoint) group scheme over a base S;
+%   g = Lie(G); T a maximal torus, t = Lie(T), W the Weyl group; h the Coxeter
+%   number, z the order of the centre of the simply connected cover, written
+%   frak{z} as a group; phi Euler's function.
+% — Bor is the scheme of Borel subgroups everywhere. Pages 8-13 call it D; the
+%   reading renames it, because from page 21 on D is a cyclic line, and the
+%   folder never uses D for Borels again.
+% — The Lie-algebra Grothendieck-Springer space is tilde-g (pages 4-6 write
+%   underlined L), the group one tilde-G (pages 8-13 write round B, the
+%   "universal Borel", which is the same scheme). J = t/W and I = T/W are kept.
+% — M is the character lattice of T on pages 8-13 and a cocharacter lattice
+%   on page 17. The reading writes X^*(T) and X_*(T) and footnotes the clash.
+% — Two "principal" cocharacters: the Dynkin cocharacter of the principal
+%   SL(2) (pages 15-19, 40), which is 2 rho-check, and the "hom. principal"
+%   of page 43, which is rho-check, defined because G is adjoint. Fixed in the
+%   spine section; the page-40 statement "all components 1" is corrected to 2.
+%
+% Substantive departures from the pages, each footnoted where it occurs:
+% — p. 1: w c w^{-1} = c^h is corrected to c^n.
+% — pp. 4-5: free action of W on t^rss is kept as the hypothesis it is
+%   (question 0 of page 6 holds it open); the existence of f: g -> J is
+%   stated as equivalent to Chevalley restriction, true in char. 0.
+% — p. 9: "f normal" is stated under the hypothesis that the derived group is
+%   simply connected, and G' normal under S normal.
+% — p. 10, (iv): Pic(Bor) -> Pic(tilde-G) is an isomorphism only when
+%   H^1(Gamma, X^*(T)) = 0 (as page 12 itself says); the ample cone is the
+%   interior of P^+, not P^+.
+% — p. 11: "T = prod_{k'/k} T'" is read as "T splits over k'".
+% — p. 13, d): the finiteness of the cokernel of Pic(S) -> Pic(G^reg) needs S
+%   regular, not only the injectivity the page proves.
+% — p. 15, b): ad(e): g(0) -> g(-2) is corrected to g(0) -> g(2).
+% — p. 18: the inference that a rational Dynkin-Kostant parabolic forces G
+%   quasi-split is established only in the principal case.
+% — p. 19: "g(1) = 0 iff principal" (blank filled as the transcription
+%   suggests) is false; g(1) = 0 characterises even classes. Stated correctly.
+% — p. 40, b): principal = all weights 2, not 1.
+% — p. 44: "racines positives" corrected to "racines"; p. 45-46: "sauf une"
+%   to "sauf au plus une".
+%
+% What the folder announces and never establishes: the answers to questions
+% 0)-g) of page 6; the extension asked for in the margin of page 1; the count
+% card(W)^2/(h z phi(h)) of the letter and of page 34 (asserted, not proved);
+% the "à prouver" of page 30; the normaliser of a Kostant homomorphism
+% (page 46); the paragraph "e)" of page 41, cut off after one sentence; the
+% struck "e)" at the foot of page 13. The typed versos (27, 29, 31, 35, 39)
+% belong to two other texts and are only named, as the transcription names
+% them (RIGHTS.md).
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{123}
+\pages{1}{47}
+\dating{1969}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{[Autour de Kostant] : tapuscrits (s.d.), notes manuscrites (s.d.), lettre (1969) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Ce dossier est un relevé de lecture : Grothendieck relit, en 1969, deux
+articles de Bertram Kostant sur les groupes de Lie, et les récrit dans sa propre
+langue — celle des schémas, où tout énoncé doit valoir non seulement sur les
+nombres complexes, mais au-dessus d'une base quelconque, en famille.
+
+Le point de départ est une application très concrète. À une matrice carrée,
+associons ses valeurs propres, prises comme un ensemble non ordonné —
+c'est-à-dire son polynôme caractéristique. Les matrices qui ont mêmes valeurs
+propres forment une « fibre » de cette application. Une fibre générique, où les
+valeurs propres sont distinctes, est lisse : c'est une seule classe de matrices
+diagonalisables. Mais la fibre où toutes les valeurs propres sont nulles —
+les matrices nilpotentes — est singulière, et d'autant plus singulière que la
+matrice est dégénérée. La même application existe pour tout groupe de Lie
+semi-simple : c'est l'application de Kostant $\mathfrak{g}\to\mathfrak{t}/W$
+pour l'algèbre de Lie, et celle de Steinberg $G\to T/W$ pour le groupe.
+
+Le premier problème du dossier est de « lisser » cette famille de fibres. Le
+cas le plus petit dit tout. Pour les matrices $2\times 2$ de trace nulle, la
+fibre au-dessus de $s$ est la quadrique $a^{2}+bc=s$ : un hyperboloïde pour
+$s\neq 0$, un cône pour $s=0$. On ne peut pas désingulariser le cône sans
+abîmer ses voisins ; mais si l'on pose $s=t^{2}$ — si l'on choisit une racine
+carrée, c'est-à-dire si l'on \emph{ordonne} les deux valeurs propres $\pm t$ —
+la famille devient résoluble d'un seul coup. Dans le cas général, ordonner les
+valeurs propres revient à passer de $\mathfrak{t}/W$ à $\mathfrak{t}$, et la
+résolution s'obtient en adjoignant à chaque élément un sous-groupe de Borel qui
+le contient — un « drapeau ». Les feuillets 4 à 13 montrent que cette
+construction résout la famille changée de base, et prouvent, par un calcul de
+groupes de Picard, qu'aucune résolution analogue n'existe \emph{sans} ce
+changement de base. C'est ce que la littérature appelle la résolution simultanée
+de Grothendieck.
+
+Le second fil est arithmétique et combinatoire. Kostant avait isolé, dans tout
+groupe simple, des objets privilégiés : le sous-groupe « principal » de type
+$\mathrm{SL}(2)$, l'élément de Coxeter du groupe de Weyl — qui agit comme une
+rotation d'ordre maximal $h$ —, et les éléments « cycliques », sommes des
+vecteurs de racines simples et du vecteur de la plus basse racine. Grothendieck
+les reprend un par un, les range en tableaux d'espaces homogènes avec leurs
+stabilisateurs, et se demande ce qui en reste sur un corps qui n'est pas
+algébriquement clos : par exemple, l'existence d'un sous-groupe principal défini
+sur le corps équivaut à ce que le groupe soit quasi-déployé. Il interprète aussi
+la théorie de Kostant en termes de filtrations du foncteur qui oublie la
+structure d'une représentation — une première esquisse de ce qui deviendra la
+théorie tannakienne des filtrations.
+
+Au milieu du dossier, une lettre à Kostant, datée de Massy le 22 octobre 1969,
+pose ses questions en clair : comment varie le rang de l'application de Kostant
+sur les orbites nilpotentes, quelle est la dimension de la variété des Borels
+contenant un élément donné, les singularités des fibres sont-elles
+« rationnelles » ? Elle dit aussi d'où vient la relecture : d'un travail de
+Brieskorn sur les singularités de Klein. La lettre donne la mesure de
+l'attitude : relire une œuvre déjà classique parce qu'elle « appelle une
+reconsidération soigneuse dans le cadre de la géométrie algébrique », puis poser
+les questions qu'elle suggère, quitte à découvrir qu'elles sont connues —
+« pour certaines, il serait scandaleux que les experts ne connaissent pas la
+réponse ». La plupart de ces questions ont reçu depuis des réponses affirmatives.
+
+Pour aller plus loin : résolution de Grothendieck--Springer, application de
+Steinberg, section de Kostant, théorème de Jacobson--Morozov, éléments réguliers
+de Springer, orbite sous-régulière et théorème de Brieskorn--Slodowy.
+
+\keywords{Grothendieck-Springer resolution, simultaneous resolution, adjoint quotient, Steinberg map, Chevalley restriction theorem, Kostant section, regular element, Picard group of flag variety, Coxeter element, Coxeter number, regular elements of reflection groups, principal three-dimensional subgroup, sl2-triple, Jacobson-Morozov theorem, weighted Dynkin diagram, Jacobson-Morozov parabolic, quasi-split group, Tannakian filtration, Springer fibre, subregular orbit, Klein singularity, rational singularities, cyclic element, extended affine Weyl group}
+\end{resume}
+
+\pagerange{1}{47}
+\section*{Le fil du dossier, et ses conventions}
+
+Quarante-sept feuillets, dont six chemises qui ne portent qu'un titre de sa main
+(feuillets 3, 7, 14, 23, 36, 42) et trois blancs (20, 24, 32). Trois sortes de
+papier s'y mêlent : deux tapuscrits de sa main, en français, corrigés à
+l'encre (feuillets 1--2 et 15--19) ; une lettre dactylographiée en anglais
+(21--22) ; des notes manuscrites, dont plusieurs sur le verso de feuillets
+dactylographiés étrangers au dossier.\footnote{Les versos 27, 29, 31, 35 et 39
+appartiennent à deux autres textes : un exposé sur les topos (§~3.1, exactitude
+des foncteurs $u^{*}$ et $u_{*}$ d'un morphisme de topos) et un paragraphe
+« Accouplements définis par une biextension ». Ils ne touchent pas aux notes sur
+Kostant ; la transcription les résume et en relève les ajouts manuscrits,
+l'édition ne fait que les nommer.} La date de l'inventaire, 1969, est celle de
+la lettre ; le reste est sans date, mais tout se tient autour d'elle, et
+plusieurs feuillets portent des reprises à l'encre brune, plus tardives.
+
+Le dossier se lit en huit stations.
+
+\begin{itemize}
+\item \textbf{La transformation de Coxeter} (feuillets 1--2) : ce que Kostant
+  dit des valeurs propres d'un élément de Coxeter, et les « droites
+  cycliques » du groupe de Weyl.
+\item \textbf{Lissification des morphismes de Kostant} (3--6) : la résolution
+  simultanée pour l'algèbre de Lie, et une liste de questions.
+\item \textbf{Lissification des morphismes de Steinberg} (7--13) : la même
+  construction pour le groupe, avec un théorème, un lemme sur les groupes de
+  Picard, et la preuve qu'on ne peut résoudre sans changer de base.
+\item \textbf{Résumé des théorèmes de conjugaison de Kostant} (14--19) : les
+  sous-groupes de type $\mathrm{SL}(2)$, les éléments de Dynkin, et leur
+  interprétation par les filtrations du foncteur fibre.
+\item \textbf{La lettre à Kostant} (21--22).
+\item \textbf{Diagrammes d'espaces homogènes} (23--35) : éléments de Kostant
+  et de Coxeter, tores en apposition, droites cycliques, rigidifications.
+\item \textbf{Liste d'espaces homogènes remarquables} (36--41), suivie de
+  « Résultats de Kostant ».
+\item \textbf{Résumé de quelques résultats de Kostant} (42--47), mis au
+  propre : homomorphismes principaux, homomorphismes de Kostant
+  $\mu_{h}\to G$, graduation de $\mathfrak{g}$, droites cycliques.
+\end{itemize}
+
+Les deux premières stations « géométriques » (3--13) et les autres
+« combinatoires » ne se citent presque pas l'une l'autre ; ce qui les lie est
+Kostant, dont les deux articles sont nommés dans la lettre : \emph{The principal
+three-dimensional subgroup and the Betti numbers of a complex simple Lie group}
+(Amer. J. Math., 1959) et \emph{Lie group representations on polynomial rings}
+(Amer. J. Math., 1963). Le dossier contient deux résumés de Kostant, le
+tapuscrit des feuillets 15--19 et le manuscrit des feuillets 43--47 : ce sont
+deux moutures distinctes, sur des sujets voisins mais non identiques, et
+l'édition les garde séparées.
+
+\textbf{Conventions, valables pour tout le dossier.} $G$ est un schéma en
+groupes réductif sur une base $S$, le plus souvent semi-simple adjoint ;
+$\mathfrak{g}=\operatorname{Lie}(G)$ ; $T$ est un tore maximal,
+$\mathfrak{t}=\operatorname{Lie}(T)$, $W$ le groupe de Weyl ; $r$ est le rang,
+$N$ le nombre de racines positives, $n=\dim G=2N+r$. On note $h$ le nombre de
+Coxeter, $\psi$ la plus grande racine, $\Sigma$ l'ensemble des racines simples,
+$\mathfrak{z}$ un groupe isomorphe au centre du revêtement simplement connexe
+$\widetilde{G}$ et $z$ son ordre, $\varphi$ l'indicatrice d'Euler. On écrit
+$X^{*}(T)$ et $X_{*}(T)$ pour les réseaux des caractères et des
+cocaractères.\footnote{Le dossier écrit $M$ pour l'un \emph{et} pour l'autre :
+$M=\widehat{T}$, réseau des caractères, aux feuillets 8 à 13 ;
+$M=\operatorname{Hom}(\mathbf{G}_{m},T_{0})$, réseau des cocaractères, au
+feuillet 17. L'édition lève l'ambiguïté.}
+
+Trois homonymies sont à fixer dès maintenant.
+
+\begin{itemize}
+\item $\mathrm{Bor}$ désigne partout le schéma des sous-groupes de Borel. Les
+  feuillets 8 à 13 l'appellent $D$ ; à partir du feuillet 21, $D$ est une
+  \emph{droite cyclique}. L'édition réserve $D$ aux droites.
+\item Le « Borel universel » des feuillets 4 et 8, vu comme schéma des couples
+  $(g,B)$ avec $g\in B$, est noté $\widetilde{G}$ ; son analogue pour l'algèbre
+  de Lie, le schéma des couples $(x,\mathfrak{b})$ avec $x\in\mathfrak{b}$, est
+  noté $\widetilde{\mathfrak{g}}$.\footnote{Les feuillets écrivent
+  $\mathfrak{B}$ (un $B$ rond) et $\underline{\mathfrak{L}}$ (un $L$ rond
+  souligné). Les notations $\widetilde{\mathfrak{g}}$ et $\widetilde{G}$ sont
+  les notations actuelles ; à ne pas confondre avec le revêtement simplement
+  connexe, que l'édition ne nomme $\widetilde{G}$ que dans la lettre, comme
+  elle.}
+\item \emph{Principal} a deux sens. Au feuillet 15 et au feuillet 40, le
+  cocaractère attaché à un sous-groupe principal $\mathrm{SL}(2)\to G$ est le
+  cocaractère de Dynkin, qui vaut $2$ sur chaque racine simple : c'est
+  $2\rho^{\vee}$. Au feuillet 43, un « homomorphisme principal »
+  $\mathbf{G}_{m}\to G$ vaut $1$ sur chaque racine simple : c'est
+  $\rho^{\vee}$, somme des copoids fondamentaux, qui n'existe comme
+  cocaractère que parce que $G$ est adjoint. Le second est la « moitié » du
+  premier.
+\end{itemize}
+
+\pagerange{1}{2}
+\section*{Compléments sur la transformation de Coxeter (feuillets 1 et 2)}
+
+Deux feuillets dactylographiés, intitulés « Compléments sur transformation de
+Coxeter d'un système de racines irréductible (Kostant) », avec en marge un
+renvoi à l'article de 1959 et à son théorème 9.2.\footnote{« irréductible »
+est ajouté à la main dans le titre. Le tapuscrit est de lui : il est en
+français, cite Kostant à la troisième personne et est corrigé de sa main, qui
+complète aussi les lettres grecques que la machine n'avait pas.} Soit $R$ un
+système de racines irréductible dans un espace réel $V$, $W$ son groupe de
+Weyl, $m_{1}\leqslant\dots\leqslant m_{r}$ ses exposants et $h=m_{r}+1$ son
+nombre de Coxeter. On fait agir $W$ sur $V\otimes\mathbf{C}$.
+
+\textbf{a)} Toute valeur propre d'un $w\in W$ est une racine de l'unité dont
+l'ordre divise l'un des degrés $m_{i}+1$, donc est au plus $h$. Une valeur
+propre d'ordre exactement $h$ existe si et seulement si $w$ est un élément de
+Coxeter ; le sous-espace propre correspondant est alors une droite, et ses
+vecteurs non nuls sont réguliers (n'appartiennent à aucun hyperplan de
+réflexion).\footnote{La parenthèse « (qui est de dim.\ 1) » est une note
+marginale de lecture incertaine. Le tapuscrit attribue l'ensemble à Kostant.
+La forme générale de la première phrase — un $\zeta$ primitif d'ordre $d$ est
+valeur propre d'un élément de $W$ si et seulement si $d$ divise un degré — est
+aujourd'hui citée d'après Springer, \emph{Regular elements of finite reflection
+groups} (Invent. Math., 1974), postérieur au dossier ; l'édition ne tranche pas
+ce que Kostant en énonçait en 1959.}
+
+\textbf{Corollaire 1.} Soit $c$ un élément de Coxeter et $\mu=\langle
+c\rangle\simeq\mathbf{Z}/h\mathbf{Z}$. Alors $\mu$ est son propre
+centralisateur dans $W$, et si $\nu$ est le normalisateur de $\mu$,
+l'homomorphisme $\nu/\mu\to\operatorname{Aut}(\mu)\simeq
+(\mathbf{Z}/h\mathbf{Z})^{*}$ est un isomorphisme. Autrement dit, pour tout
+$n$ premier à $h$, il existe $w\in W$, unique modulo $\mu$, tel que
+$wcw^{-1}=c^{n}$.\footnote{Le tapuscrit porte $wcw^{-1}=c^{h}$, qui serait
+$=1$ ; le sens, et la phrase de la démonstration (« si $n$ est premier à $h$,
+alors $c^{n}$ est conjugué de $c$ »), demandent $c^{n}$, que l'édition écrit.
+Deux notes marginales accompagnent l'énoncé : « Quelle extension de
+$(\mathbf{Z}/h\mathbf{Z})^{*}$ par $\mathbf{Z}/h\mathbf{Z}$ obtient-on ? » —
+question que le dossier ne résout pas, et que la lettre reprend sous une autre
+forme — et, d'une lecture incertaine, « échanger avec cor.\ 3 ? », alors
+qu'aucun corollaire n'est numéroté 3.}
+
+\emph{Démonstration.} Soit $D$ la droite propre de $c$ pour une racine
+primitive $h$-ième de l'unité.\footnote{Le tapuscrit justifie $\dim D=1$ par une
+« prop.\ 30 » dont la source n'est pas indiquée.} Le centralisateur
+$C_{W}(c)$ normalise $D$, d'où un homomorphisme
+$C_{W}(c)\to\operatorname{Aut}(D)=\mathbf{C}^{*}$ ; son image est
+un groupe cyclique fini qui contient l'image, isomorphe, de $\mu$, donc d'ordre
+multiple de $h$ ; comme ses éléments sont des valeurs propres d'éléments de
+$W$, leur ordre est au plus $h$, et l'image est d'ordre $h$. On obtient une
+rétraction $C_{W}(c)\to\mu$, dont le noyau fixe $D$ point par point
+; $D$ étant régulière et $W$ agissant simplement transitivement sur les
+chambres, ce noyau est trivial. Reste que $c^{n}$ est conjugué de $c$ pour $n$
+premier à $h$, que le tapuscrit tire encore de Kostant.
+
+\textbf{Corollaire.} Soit $x$ un vecteur propre de $c$, de valeur propre
+$\lambda$. Alors $x$ est régulier si et seulement si $\lambda$ est une racine
+primitive $h$-ième de l'unité. La suffisance est a). Pour la nécessité, si
+$h'$ est l'ordre de $\lambda$, $c^{h'}$ fixe $x$, donc $c^{h'}=1$ puisque $x$
+est régulier, et $h'=h$.
+
+\textbf{Corollaire.} Soit $D\subset V\otimes\mathbf{C}$ une droite régulière
+normalisée par un élément de Coxeter $c$.\footnote{La frappe superpose deux
+débuts, « Soit D une » et « Considérons », tous deux recouverts ; l'édition lit
+« Soit $D$ une droite régulière ».} Alors le normalisateur de $D$ dans $W$ est
+$\langle c\rangle$, et pour chaque racine primitive $h$-ième $\zeta$ il existe
+un unique élément de Coxeter normalisant $D$ et y agissant par $\zeta$. Ces
+droites — les \emph{droites cycliques} de Kostant — forment une seule orbite
+sous $W$, et leur nombre est $\operatorname{card}(W)/h$. Le groupe
+$(\mathbf{Z}/h\mathbf{Z})^{*}$ agit librement sur l'ensemble des droites
+cycliques, en commutant à $W$ ; deux droites cycliques sont dans la même orbite
+de ce groupe si et seulement si elles ont même stabilisateur dans $W$.
+
+Ce sont, au niveau du groupe de Weyl, les objets dont les feuillets 21 à 47
+construiront les relèvements dans $G$ et dans $\mathfrak{g}$.
+
+\pagerange{3}{6}
+\section*{Lissification des morphismes de Kostant (feuillets 3 à 6)}
+
+\pagerange{4}{5}
+\subsection*{Les données, et le morphisme de Kostant}
+
+Le feuillet 4 est une liste de notations. $G$ est un schéma en groupes
+semi-simple \emph{adjoint} sur $S$, $\mathfrak{g}$ son algèbre de Lie, vue
+comme schéma vectoriel sur $S$ ; $T$ est « le » tore maximal abstrait, défini
+par descente à partir d'un couple de Killing, $\mathfrak{t}$ son algèbre de
+Lie, $W$ « le » groupe de Weyl. On pose
+\[
+  \mathfrak{J}=\mathfrak{t}/W,\qquad \mathfrak{J}'=\mathfrak{t},
+\]
+de sorte que $\mathfrak{J}'\to\mathfrak{J}$ est un revêtement ramifié. On note
+$\mathrm{Tor}$ le schéma des tores maximaux, $\mathrm{Kill}$ celui des couples
+de Killing (tore maximal, Borel le contenant), $\mathrm{Bor}$ celui des Borels,
+et $\widetilde{\mathfrak{g}}\to\mathrm{Bor}$ le fibré vectoriel des couples
+$(x,\mathfrak{b})$, $x\in\mathfrak{b}$. Il porte deux morphismes : la
+projection $q\colon\widetilde{\mathfrak{g}}\to\mathfrak{g}$, propre, et
+$\tilde f'\colon\widetilde{\mathfrak{g}}\to\mathfrak{t}$, qui envoie
+$(x,\mathfrak{b})$ sur l'image de $x$ dans
+$\mathfrak{b}/[\mathfrak{b},\mathfrak{b}]\simeq\mathfrak{t}$, et qui est
+lisse.
+
+Les exposants $\mathrm{rss}$ désignent les ouverts d'éléments réguliers
+semi-simples. On a un isomorphisme canonique
+$\widetilde{\mathfrak{g}}^{\mathrm{rss}}\simeq
+\mathrm{Kill}\times_{S}\mathfrak{t}^{\mathrm{rss}}$ — un élément régulier
+semi-simple détermine son tore centralisateur, et le Borel choisi en fait un
+couple de Killing — et un carré cartésien
+
+\begin{tikzcd}
+\mathfrak{g}^{\mathrm{rss}} \arrow[d] & \widetilde{\mathfrak{g}}^{\mathrm{rss}} \arrow[l] \arrow[d] \\
+\mathrm{Tor} & \mathrm{Kill} \arrow[l]
+\end{tikzcd}
+
+où la flèche de gauche associe à $x$ son centralisateur. Le groupe $W$ opère
+sur $\mathrm{Kill}$, qui est un torseur sous $W$ au-dessus de $\mathrm{Tor}$,
+d'où une opération sur $\widetilde{\mathfrak{g}}^{\mathrm{rss}}$, diagonale
+sur $\mathrm{Kill}\times\mathfrak{t}^{\mathrm{rss}}$, et
+$\mathfrak{g}^{\mathrm{rss}}=\widetilde{\mathfrak{g}}^{\mathrm{rss}}/W$. On en
+tire un morphisme naturel
+$f^{\mathrm{rss}}\colon\mathfrak{g}^{\mathrm{rss}}\to
+\mathfrak{J}^{\mathrm{rss}}=\mathfrak{t}^{\mathrm{rss}}/W$.
+
+\textbf{Hypothèse (L).} $W$ opère librement sur
+$\mathfrak{t}^{\mathrm{rss}}$, ce qui revient à dire qu'il opère fidèlement sur
+les fibres géométriques de $\mathfrak{t}$. Sous (L), le carré formé de
+$f^{\mathrm{rss}}$, de $q^{\mathrm{rss}}$, de
+$\tilde f'^{\mathrm{rss}}$ et de $\mathfrak{t}^{\mathrm{rss}}\to
+\mathfrak{J}^{\mathrm{rss}}$ est cartésien.\footnote{Le feuillet écrit d'abord
+« trivialement », biffé, puis « librement », et ajoute que c'est le cas quand
+les caractéristiques résiduelles sont toutes $\neq 2$ — avec un « si » de
+lecture douteuse. L'édition garde (L) comme une hypothèse, ce que le dossier
+fait lui-même : c'est la question 0) du feuillet 6. Elle est vraie en
+caractéristique nulle ; elle tombe en caractéristique $2$ déjà pour
+$\mathrm{PGL}_{2}$, où $W=\{\pm 1\}$ opère trivialement sur $\mathfrak{t}$.}
+
+Le morphisme $f^{\mathrm{rss}}$ se prolonge (de façon unique) en un morphisme
+\[
+  f\colon\mathfrak{g}\longrightarrow\mathfrak{J}=\mathfrak{t}/W,
+\]
+le \emph{morphisme de Kostant} — aujourd'hui le quotient adjoint
+$\mathfrak{g}\to\mathfrak{g}/\!\!/G$. Une note marginale le dit : l'anneau de
+$\mathfrak{J}$ est l'anneau des invariants de celui de $\mathfrak{g}$. Le
+prolongement revient, sur un corps, à la surjectivité de la restriction de
+Chevalley $k[\mathfrak{g}]^{G}\to k[\mathfrak{t}]^{W}$ ; elle est classique en
+caractéristique nulle.\footnote{La démonstration du feuillet 5 est une
+esquisse : on se ramène à $S=\operatorname{Spec}\mathbf{Z}$ et $G$ déployé, et
+comme $\mathfrak{g}$ est normal et $\mathfrak{J}$ affine, « il suffit de le voir
+sur les fibres géométriques ; là c'est connu (Kostant…) ». Kostant travaille
+sur $\mathbf{C}$ ; en petite caractéristique, la restriction de Chevalley peut
+cesser d'être surjective, et l'édition ne prend pas à son compte le
+prolongement sur $\mathbf{Z}$. La note marginale du feuillet 5 est en partie
+effacée ; seul son début se lit sûrement.}
+
+\pagerange{5}{6}
+\subsection*{La résolution simultanée}
+
+On pose $\mathfrak{g}'=\mathfrak{g}\times_{\mathfrak{J}}\mathfrak{J}'$ :
+c'est la famille des fibres de $f$ rendue par le changement de base qui ordonne
+les « valeurs propres ». On obtient le diagramme
+
+\begin{tikzcd}
+\mathfrak{g} \arrow[d, "f"'] & \mathfrak{g}' \arrow[l] \arrow[d, "f'"] & \widetilde{\mathfrak{g}} \arrow[l, "p"'] \arrow[dl, "\tilde f'"] \arrow[r] & \mathrm{Bor} \\
+\mathfrak{J} & \mathfrak{J}' \arrow[l] & &
+\end{tikzcd}
+
+où $p=(q,\tilde f')$ est projectif et $\tilde f'$ lisse.\footnote{Le feuillet
+trace aussi la flèche composée $q$ de $\widetilde{\mathfrak{g}}$ vers
+$\mathfrak{g}$, en arc ; l'édition l'omet, puisqu'elle vaut le composé. Le but
+de la dernière flèche est écrit à l'encre pâle et se lit « $D$ » : c'est le
+schéma de base de $\widetilde{\mathfrak{g}}$, que l'édition nomme
+$\mathrm{Bor}$.} Sous (L), $p$ est birationnel : il induit un isomorphisme
+$\widetilde{\mathfrak{g}}^{\mathrm{rss}}\simeq\mathfrak{g}'^{\mathrm{rss}}$.
+C'est la \emph{résolution simultanée} : $\tilde f'$ est une famille lisse au-dessus
+de $\mathfrak{t}$, et elle résout fibre à fibre la famille $f'$.\footnote{C'est
+la construction que la littérature appelle résolution simultanée de
+Grothendieck, ou de Grothendieck--Springer. Elle a été rendue publique par
+Brieskorn (congrès de Nice, 1970), qui l'attribue à Grothendieck, puis exposée
+par Slodowy (\emph{Simple singularities and simple algebraic groups}, 1980).
+Springer avait publié en 1969 la résolution du cône nilpotent, qui en est la
+fibre en $0$.}
+
+Par réduction à la base $\mathbf{Z}$ ou $\mathbf{Z}[1/2]$ et par le Main
+Theorem de Zariski, le plus grand ouvert de $\mathfrak{g}'$ au-dessus duquel
+$p$ est un isomorphisme est formé des $x'$ dont la fibre $p^{-1}(x')$ est finie :
+c'est l'image inverse de l'ouvert $\mathfrak{g}^{\mathrm{reg}}$ des éléments
+\emph{réguliers}, ceux qui ne sont contenus que dans un nombre fini de
+sous-algèbres de Borel.\footnote{L'argument suppose $\mathfrak{g}'$ normal, ce
+que le feuillet 6 ramène, dans la question c), à la normalité des fibres de
+$f$ ; en caractéristique nulle, c'est Kostant (1963).} D'après Springer
+(\emph{Publ. Math. IHÉS} 30, 1966, 5.3), cet ouvert rencontre la fibre
+nilpotente : il existe des éléments nilpotents réguliers. Le feuillet prévoit
+d'en déduire qu'il rencontre toutes les fibres de $f$, et ajoute plus tard,
+souligné deux fois : « \textbf{Non} en car.\ 2, cas $A_{1}$, $B_{2}$… peut-être
+d'autres ».
+
+\textbf{Questions.} Le feuillet 6 se clôt sur une liste, que le dossier ne
+résout pas.
+
+\begin{enumerate}
+\item[0)] $W$ opère-t-il fidèlement sur $\mathfrak{t}^{\mathrm{rss}}$ ?
+\item[a)] $\mathfrak{J}$ est-il régulier, c'est-à-dire $\mathfrak{J}'$ plat
+  sur $\mathfrak{J}$ ?
+\item[b)] $f$ est-il plat ? En fait, $f$ est plat si et seulement si
+  $\mathfrak{J}$ est régulier et $f$ équidimensionnel.\footnote{L'équivalence
+  est juste : $\mathfrak{g}$ est régulier, donc un morphisme plat
+  $\mathfrak{g}\to\mathfrak{J}$ force $\mathfrak{J}$ régulier, et
+  réciproquement un morphisme équidimensionnel d'un schéma de Cohen--Macaulay
+  vers un schéma régulier est plat (EGA~IV~6.1.5). En marge : « Oui pour les
+  “bons” nombres premiers ? ».}
+\item[c)] Les fibres géométriques de $f$ sont-elles intègres, adhérences
+  d'une orbite, à complémentaire de codimension $\geqslant 2$, normales ? Si
+  oui, $f'$ est normal, donc $\mathfrak{g}'$ l'est, et
+  $\widetilde{\mathfrak{g}}\to\mathfrak{g}'\to\mathfrak{g}$ est la
+  factorisation de Stein de $q$.
+\item[d)] Les points de lissité de $f$ sont-ils les points réguliers ?
+\item[e)] Définir une stratification orbitale de $\mathfrak{g}$ sur
+  $\mathbf{Z}$, la comparer à celle du groupe, et aux orbites unipotentes ;
+  questions analogues pour $\widetilde{G}$ et $\widetilde{\mathfrak{g}}$.
+\item[f)] Reprendre la théorie de Kostant : l'ouvert des points réguliers
+  a-t-il une section ?
+\item[g)] Étudier les fibres de $p$, c'est-à-dire la variété des
+  sous-algèbres de Borel contenant un élément donné : quelle est sa dimension,
+  en relation avec celle de l'orbite ?
+\end{enumerate}
+
+Sur $\mathbf{C}$, Kostant (1963) avait déjà répondu à a)--d) et f) : $f$ est
+plat, ses fibres sont des intersections complètes normales et irréductibles,
+adhérences de l'orbite régulière qu'elles contiennent, les points lisses de $f$
+sont les points réguliers, et l'ouvert régulier admet une section — la
+\emph{section de Kostant}. Les questions portent donc sur une base
+quelconque.\footnote{Le feuillet est très chargé ; c), d) et e) ne se lisent que
+par fragments, et l'édition n'en donne que le sens assuré. f) et g) sont dans
+la marge, à l'encre brune. La question g) est celle que la lettre à Kostant
+reprend (feuillet 22).}
+
+\pagerange{7}{13}
+\section*{Lissification des morphismes de Steinberg (feuillets 7 à 13)}
+
+\pagerange{8}{9}
+\subsection*{Les données, et le morphisme de Steinberg}
+
+$G$ est maintenant un schéma en groupes réductif sur $S$, $\mathrm{Bor}$ le
+schéma de ses Borels, $\widetilde{G}\subset G\times_{S}\mathrm{Bor}$ le Borel
+universel, de radical unipotent $\widetilde{G}_{u}$.\footnote{Le feuillet
+appelle $D$ le schéma des Borels et $\mathfrak{B}$ le Borel universel ; voir
+les conventions.} Le tore $\widetilde{G}/\widetilde{G}_{u}$ sur
+$\mathrm{Bor}$ descend en un tore $T$ sur $S$, de réseau des caractères
+$X^{*}(T)$, avec un groupe de Weyl $W$ sur $S$ qui opère sur l'un et l'autre ;
+on pose $I=T/W$. Sur le schéma $K=\mathrm{Kill}(G)$ des couples de Killing, le
+tore universel s'identifie à $T\times_{S}K$ et le groupe de Weyl universel à
+$W\times_{S}K$.
+
+Il existe un unique morphisme
+\[
+  f\colon G\longrightarrow I=T/W,
+\]
+invariant par automorphismes intérieurs, dont la restriction à un tore maximal
+$T_{0}$ contenu dans un Borel $B_{0}$ est la projection
+$T_{0}\to T_{0}/W_{0}\simeq I$ : c'est le \emph{morphisme de Steinberg}.
+La marge pose la question de son existence sans hypothèse de simple connexité,
+et répond « Oui » en renvoyant à Steinberg.\footnote{Sur un corps
+algébriquement clos, la restriction $k[G]^{G}\to k[T]^{W}$ est en effet un
+isomorphisme pour tout groupe réductif connexe (Steinberg, \emph{Regular
+elements of semisimple algebraic groups}, Publ. Math. IHÉS 25, 1965). La
+même note demande si $f$ est « normal en tous cas », et objecte aussitôt, entre
+crochets : « Mais alors il faudrait que $I$ soit lisse$/S$ en tous cas ! »
+L'objection est fondée : un morphisme plat de source régulière a un but
+régulier. Quand le groupe dérivé est simplement connexe, $I$ est lisse et $f$
+est plat à fibres normales (Steinberg) ; en général, non.}
+
+On définit $G'$ par le carré cartésien de gauche ci-dessous, et un morphisme
+$p\colon\widetilde{G}\to G'$ par ses deux composantes :
+$h(g,B)=g$, et $\tilde f(g,B)=$ l'image de $g$ dans $B/B_{u}\simeq T$.
+
+\begin{tikzcd}
+G \arrow[d, "f"'] & G' \arrow[l] \arrow[d, "f'"] & \widetilde{G} \arrow[l, "p"'] \arrow[dl, "\tilde f"] \\
+I & T \arrow[l, "\pi"] &
+\end{tikzcd}
+
+L'égalité $\pi\tilde f=fh$ se vérifie sur l'ouvert dense
+$\widetilde{G}^{\mathrm{rs}}$ des $(g,B)$ avec $g$ régulier semi-simple, où
+elle est évidente. Le morphisme $h$ est propre ($\mathrm{Bor}$ l'est sur $S$),
+donc $p$ l'est aussi ; $\tilde f$ est lisse. Si de plus $f$ est normal — c'est
+le cas quand le groupe dérivé de $G$ est simplement connexe — et si $S$ est
+normal, alors $f'$ est normal et $G'$ est normal.\footnote{Le feuillet 9 dit
+seulement : « Utilisant le fait que $f$ est normal, donc $f'$ normal, on trouve
+que $G'$ est normal. » Les deux hypothèses entre tirets sont de l'édition ; la
+première est celle sur laquelle la marge du feuillet 8 hésitait. Le feuillet
+ajoute aussi que $p$ est propre « comme on verra qu'il est birationnel » ; la
+propreté ne dépend pas de la birationalité.}
+
+On note $G^{\mathrm{reg}}$ l'ouvert des éléments réguliers — c'est l'ouvert de
+lissité de $f$ — et $G'^{\mathrm{reg}}$, $\widetilde{G}^{\mathrm{reg}}$ ses
+images inverses.
+
+\pagerange{10}{11}
+\subsection*{Le théorème (feuillet 10) et sa démonstration}
+
+\textbf{Théorème.} Sous les hypothèses précédentes ($S$ normal, $G'$ normal) :
+
+\begin{enumerate}
+\item[(i)] $p\colon\widetilde{G}\to G'$ est projectif et
+  $\tilde f\colon\widetilde{G}\to T$ est lisse.
+\item[(ii)] $p$ induit un isomorphisme
+  $\widetilde{G}^{\mathrm{reg}}\xrightarrow{\sim}G'^{\mathrm{reg}}$, et
+  $G'^{\mathrm{reg}}$ est le plus grand ouvert au-dessus duquel $p$ est un
+  isomorphisme.
+\item[(iii)] $\widetilde{G}-\widetilde{G}^{\mathrm{reg}}$ est de codimension
+  $\geqslant 2$ fibre par fibre, et $G'-G'^{\mathrm{reg}}$ a toutes ses
+  composantes de codimension $3$ fibre par fibre sur $S$.
+\item[(iv)] Si $S$ est localement noethérien et normal, les restrictions
+  donnent des isomorphismes
+  \[
+    \operatorname{Pic}(\widetilde{G})\xrightarrow{\sim}
+    \operatorname{Pic}(\widetilde{G}^{\mathrm{reg}})\xleftarrow{\sim}
+    \operatorname{Pic}(G'^{\mathrm{reg}}),
+  \]
+  l'homomorphisme $\operatorname{Pic}(\mathrm{Bor})\to
+  \operatorname{Pic}(\widetilde{G})$ est injectif, et il est bijectif lorsque
+  $H^{1}(\Gamma,X^{*}(T))=0$, où $\Gamma$ est l'image du groupe fondamental de
+  $S$ (en un point générique) dans $\operatorname{Aut}X^{*}(T)$ — en
+  particulier lorsque $T$ est déployé. En faisceautisant pour la topologie
+  étale, $\underline{\mathrm{Pic}}_{\mathrm{Bor}/S}$ s'identifie au réseau $P$
+  des poids, $X^{*}(T)\to P$ étant injectif si $G$ est semi-simple, et un
+  faisceau inversible sur $\mathrm{Bor}$ est ample si et seulement si son image
+  inverse sur $\widetilde{G}$ l'est ; le cône ample est formé des poids
+  strictement dominants.
+\end{enumerate}
+
+L'énoncé du feuillet 10 donne
+$\operatorname{Pic}(\mathrm{Bor})\simeq\operatorname{Pic}(\widetilde{G})$ sans
+condition, avec en marge une condition rajoutée après coup ; le feuillet 12
+montre que la bijectivité tombe quand $T$ est tordu. L'édition met la condition
+dans l'énoncé.\footnote{La note marginale, en partie illisible, lit : « Si $T$
+est trivial, ou génériquement si l'image de $\pi_{1}(S,\xi)$ dans
+$\operatorname{Ext}(G_{\xi})$ est telle que $H^{1}(\Gamma,M)=0$ » ; « on a une
+réciproque si $S$ régulier ». Le feuillet écrit aussi que le cône ample « est
+le cône des poids $P^{+}$ » ; un fibré en droites sur la variété des drapeaux
+est ample exactement pour les poids \emph{strictement} dominants, $P^{+}$ étant
+le cône des fibrés engendrés par leurs sections. Le mot qui précède « pour
+$\underline{\mathrm{Pic}}_{D/S}$ » est illisible.}
+
+\emph{Démonstration.} (i) et (iii) sont connus ; pour (iii), Steinberg (le
+lieu non régulier de $G$ est de codimension $3$, et son image inverse dans
+$\widetilde{G}$, où les fibres au-dessus des éléments sous-réguliers sont des
+courbes, est de codimension $2$).
+
+(ii) On a d'abord $\widetilde{G}^{\mathrm{rs}}\xrightarrow{\sim}
+G'^{\mathrm{rs}}$ au-dessus de l'ouvert régulier semi-simple. Par Steinberg,
+les fibres de $\widetilde{G}^{\mathrm{reg}}\to G'^{\mathrm{reg}}$ sont finies ;
+le morphisme est propre, birationnel, et $G'^{\mathrm{reg}}$ est normal : le
+Main Theorem de Zariski conclut.\footnote{La maximalité de
+$G'^{\mathrm{reg}}$ n'est pas démontrée sur la page ; elle tient à ce qu'un
+élément non régulier est contenu dans une famille de dimension positive de
+Borels. Une note à l'encre brune, en partie illisible, ajoute un renseignement
+tiré de Steinberg sur les centralisateurs.}
+
+(iv) $S$ étant normal, $\widetilde{G}$ l'est, et l'injectivité de
+$\operatorname{Pic}(\widetilde{G})\to\operatorname{Pic}(\widetilde{G}^{\mathrm{reg}})$
+tient à la profondeur, puisque le complémentaire est de codimension
+$\geqslant 2$ fibre par fibre. La surjectivité de
+$\operatorname{Pic}(\mathrm{Bor})\to\operatorname{Pic}(\widetilde{G}^{\mathrm{reg}})$
+se déduit de EGA~IV~21.4.13, compte tenu du lemme suivant ; les deux ensemble
+donnent les isomorphismes annoncés.\footnote{Le renvoi est celui de la page,
+avec « (EGA IV 53) » entre parenthèses, que l'édition ne s'explique pas.}
+
+\textbf{Lemme.} Soit $G$ semi-simple simplement connexe sur un corps $k$, $B$
+un Borel, $T=B/B_{u}$. Alors
+\[
+  \operatorname{Pic}(B)=\operatorname{Pic}(B^{\mathrm{reg}})
+  =\operatorname{Pic}(T)=H^{1}(\Gamma,X^{*}(T)),
+\]
+où $\Gamma$ est le groupe de Galois d'une extension galoisienne finie $k'$ qui
+déploie $T$. En effet, $B\to T$ est un torseur sous le groupe unipotent
+déployé $B_{u}$, d'où $\operatorname{Pic}(B)=\operatorname{Pic}(T)$ ; la suite
+spectrale de Hochschild--Serre pour $T_{k'}$ déployé donne
+\[
+  0\to H^{1}\bigl(\Gamma,\ k'^{*}\times X^{*}(T)\bigr)\to\operatorname{Pic}(T)
+  \to H^{0}\bigl(\Gamma,\operatorname{Pic}(T_{k'})\bigr)=0,
+\]
+puisque les inversibles de $T_{k'}$ sont $k'^{*}\times X^{*}(T)$ ; et
+$H^{1}(\Gamma,k'^{*})=0$ par le théorème 90 de Hilbert.\footnote{Le feuillet
+écrit « $T=\prod_{k'/k}T'$, $T'$ un tore sur une extension galoisienne finie
+déployée » : tout tore n'est pas une restriction des scalaires, et la
+démonstration n'utilise que le fait que $T$ se déploie sur $k'$, qu'on écrit.
+L'égalité avec $\operatorname{Pic}(B^{\mathrm{reg}})$ vient de la codimension
+$\geqslant 2$ du lieu non régulier dans $B$, qui est lisse. Plusieurs termes
+du lemme sont ajoutés en couches au-dessus de la ligne.}
+
+Si $T$ est tordu, ce groupe peut être non nul ; prenant pour $B$ la fibre
+générique de $\widetilde{G}$ sur $\mathrm{Bor}$, on voit que
+$\operatorname{Pic}(\mathrm{Bor})\to\operatorname{Pic}(\widetilde{G})$ n'est
+alors pas surjectif. Il est toujours injectif, car $\widetilde{G}$ a une
+section sur $\mathrm{Bor}$, la section unité. Enfin, $\widetilde{G}\to
+\mathrm{Bor}$ étant affine et muni d'une section, un faisceau inversible sur
+$\mathrm{Bor}$ est ample si et seulement si son image inverse l'est —
+« indépendamment de l'hypothèse normal sur $S$ ! », note la marge.
+
+\pagerange{12}{13}
+\subsection*{Remarques (feuillets 12 et 13) : aucune résolution sans changement de base}
+
+\textbf{a)} Si $T$ peut être tordu et que $S$ n'a qu'un nombre fini de
+composantes connexes, le conoyau de l'injection
+$\operatorname{Pic}(\mathrm{Bor})\to\operatorname{Pic}(\widetilde{G})$ est
+fini. Pour $S$ intègre et normal, de point générique $\xi$, on a une suite
+exacte
+\[
+  0\to\operatorname{Pic}(\mathrm{Bor})\to\operatorname{Pic}(\widetilde{G})
+  \to H^{1}(\Gamma,X^{*}(T)_{\bar\xi}),
+\]
+fondée sur $\operatorname{Pic}(\widetilde{G}_{\eta})\simeq
+\operatorname{Pic}(T_{\eta})\simeq\operatorname{Pic}(T_{\xi})$, $\eta$ le point
+générique de $\mathrm{Bor}$. Si $S$ est régulier, on peut compléter la suite
+par $\to 0$ ; la condition $H^{1}(\Gamma,X^{*}(T)_{\bar\xi})=0$ est alors
+nécessaire et suffisante pour la surjectivité.\footnote{Le passage est criblé
+de mots illisibles ; l'édition donne la structure que les formules
+assurent.}
+
+\textbf{b)} L'injectivité de
+$\operatorname{Pic}(\mathrm{Bor})\to\operatorname{Pic}(\widetilde{G})$ et la
+caractérisation des faisceaux amples restent vraies sans hypothèse de
+normalité sur $S$.
+
+\textbf{c)} Supposons $S$ normal et $H^{1}(\Gamma,X^{*}(T))=0$. Alors
+$\operatorname{Pic}(S)\xrightarrow{\sim}\operatorname{Pic}(G')$.
+L'injectivité vient de la section unité de $G'$ sur $S$. Soit
+$\mathcal{L}\in\operatorname{Pic}(G')$ trivial sur la section unité. On a
+\[
+  \operatorname{Pic}(G')\hookrightarrow\operatorname{Pic}(G'^{\mathrm{reg}})
+  \simeq\operatorname{Pic}(\widetilde{G}^{\mathrm{reg}})
+  \simeq\operatorname{Pic}(\widetilde{G}),
+\]
+la première flèche injective par profondeur ; il suffit donc que l'image
+inverse $p^{*}\mathcal{L}$ soit nulle. Comme
+$\operatorname{Pic}(\widetilde{G})=\operatorname{Pic}(\mathrm{Bor})$, il suffit
+de voir que sa restriction à la section unité $\mathrm{Bor}\to\widetilde{G}$
+est nulle ; or $\mathrm{Bor}\to\widetilde{G}\to G'$ se factorise par la
+section unité de $G'$ sur $S$, où $\mathcal{L}$ est trivial.\footnote{Le
+feuillet note $\xi$ ce faisceau, lettre déjà prise par le point générique de
+a) ; l'édition écrit $\mathcal{L}$. L'hypothèse $H^{1}=0$ est de l'édition :
+l'argument se sert de
+$\operatorname{Pic}(\widetilde{G})=\operatorname{Pic}(\mathrm{Bor})$, et le
+feuillet 13 le reconnaît en donnant aussitôt la forme générale.} Sans
+hypothèse sur $T$, le même diagramme
+
+\begin{tikzcd}
+G'^{\mathrm{reg}} \arrow[d, hook] & \widetilde{G}^{\mathrm{reg}} \arrow[l] \arrow[d, hook] \\
+G' \arrow[d] & \widetilde{G} \arrow[l] \\
+S \arrow[u, bend left=40] & \mathrm{Bor} \arrow[u, hook] \arrow[ul] \arrow[l]
+\end{tikzcd}
+
+donne une suite exacte $\operatorname{Pic}(S)\to\operatorname{Pic}(G')\to
+H^{1}(\xi,X^{*}(T))$, de dernier terme fini.
+
+\textbf{d)} Pour $S$ normal intègre, de point générique $\xi$, on a
+$0\to\operatorname{Pic}(S)\to\operatorname{Pic}(G)\to
+\operatorname{Pic}(G_{\xi})$, injective grâce à la section unité, et
+$\operatorname{Pic}(G_{\xi})$ est fini, nul si $G_{\xi}$ est simplement
+connexe.\footnote{Le feuillet dit « nul si $G_{\xi}$ est simplement connexe et
+déployé » ; la nullité vaut déjà pour un groupe semi-simple simplement connexe
+non déployé, mais la condition plus forte de la page n'est pas fausse.}
+D'autre part
+$\operatorname{Pic}(G)\to\operatorname{Pic}(G^{\mathrm{reg}})$ est injectif
+sans hypothèse de normalité, par profondeur, le lieu non régulier étant de
+codimension $\geqslant 3$ fibre par fibre. Si $S$ est régulier, cette flèche
+est bijective, et le conoyau de
+$\operatorname{Pic}(S)\to\operatorname{Pic}(G^{\mathrm{reg}})$ est
+fini.\footnote{La page tire la finitude du conoyau de la seule injectivité ;
+il y faut aussi la surjectivité, que donne la factorialité de $G$ quand $S$ est
+régulier. D'où l'hypothèse ajoutée.}
+
+Voici la conclusion, qui est le point du chapitre. Une résolution
+$\widetilde{X}\to G$ des singularités de $f$ qui serait analogue à celle de
+$f'$ — un isomorphisme au-dessus de $G^{\mathrm{reg}}$, avec un lieu
+exceptionnel de codimension $\geqslant 2$ fibre par fibre — aurait un groupe
+de Picard égal à celui de $G^{\mathrm{reg}}$, donc de rang nul sur
+$\operatorname{Pic}(S)$ ; alors que celui de $\widetilde{G}$ contient le réseau
+des poids, de rang $r$, avec son cône ample. Il n'y a donc pas de résolution
+simultanée de $f$ sans toucher à $G^{\mathrm{reg}}$ : le changement de base
+$T\to T/W$ est nécessaire.\footnote{L'énoncé du feuillet est plus bref :
+« Cela montre qu'on ne peut trouver une résolution $\widetilde{X}$ des
+singularités de $f$ analogue à celle de $f'$, sans toucher à $G^{\mathrm{reg}}$
+(l'image inverse de $G-G^{\mathrm{reg}}$ dans $\widetilde{X}$ étant de codim.\
+$\geqslant 2$ fibre par fibre…) ». Que les résolutions simultanées n'existent
+qu'après le changement de base par $W$ est devenu, avec Brieskorn et Slodowy,
+un énoncé classique. Un « e) » isolé, biffé, figure en bas de page.}
+
+\pagerange{14}{19}
+\section*{Résumé des théorèmes de conjugaison de Kostant (feuillets 14 à 19)}
+
+La chemise du feuillet 14 porte « Résumé th.\ de conjugaison Kostant + lettre à
+Kostant » ; la lettre est aux feuillets 21--22. Les feuillets 15 à 19 sont un
+tapuscrit de sa main, corrigé et complété à l'encre, intitulé « Résumé de
+quelques résultats de Kostant (sous-groupes simples de rang 1) », avec en marge
+les numéros de l'article de 1959 qu'il résume (3.4, 3.5, 3.6, 4.2,
+9.3).\footnote{Les lettres gothiques, absentes de la machine, sont ajoutées à
+la main.}
+
+\pagerange{15}{16}
+\subsection*{Théorème 1 : sous-groupes de type $\mathrm{SL}(2)$}
+
+$G$ est semi-simple sur un corps $k$ de caractéristique nulle, $e\neq 0$
+nilpotent dans $\mathfrak{g}$. Pour $x\in\mathfrak{g}$ semi-simple et
+$k\in\mathbf{Z}$, on note $\mathfrak{g}(k)$ le sous-espace propre de
+$\operatorname{ad}(x)$ pour la valeur propre $k$\footnote{La frappe laisse un
+blanc après « sous-espace propre de » ; la main ne l'a pas rempli.
+$\operatorname{ad}(x)$ est ce que le sens demande.} ; si
+$x=\operatorname{Lie}(i)(1)$ pour un cocaractère
+$i\colon\mathbf{G}_{m}\to G$, ce sont les composantes isotypiques de
+$\mathfrak{g}$ sous $\mathbf{G}_{m}$. On note $(x_{0},e_{0},f_{0})$ la base
+habituelle de $\mathfrak{sl}_{2}$, $i_{0}$ le cocaractère diagonal de
+$\mathrm{SL}(2)$, et $\operatorname{Fil}^{k}\mathfrak{g}=
+\sum_{j\geqslant k}\mathfrak{g}(j)$.
+
+\textbf{(i)} Les conditions suivantes sont équivalentes :
+
+\begin{enumerate}
+\item[a)] $[x,e]=2e$, et $\operatorname{ad}(e)^{k}\colon\mathfrak{g}(-k)\to
+  \mathfrak{g}(k)$ est un isomorphisme pour tout $k\geqslant 1$ ;
+\item[b)] $e\in\mathfrak{g}(2)$,
+  $\operatorname{ad}(e)\colon\mathfrak{g}(0)\to\mathfrak{g}(2)$ est
+  surjectif, et $x$ est un \emph{élément de Dynkin}, de la forme
+  $\varphi(x_{0})$ pour un $\varphi\colon\mathrm{SL}(2)\to G$ ;
+\item[c)] $e\in\mathfrak{g}(2)$ et $x\in[e,\mathfrak{g}]$ ;
+\item[c')] $e\in\mathfrak{g}(2)$ et $x\in[e,\mathfrak{g}(-2)]$ ;
+\item[d)] il existe un homomorphisme $\varphi\colon\mathrm{SL}(2)\to G$ tel que
+  $d\varphi(e_{0})=e$ et $d\varphi(x_{0})=x$.
+\end{enumerate}
+
+Ces conditions entraînent que $x=\operatorname{Lie}(i)(1)$ pour un cocaractère
+$i$ — en particulier que $x$ est semi-simple — et le $\varphi$ de d) est
+unique.\footnote{Le tapuscrit écrit $f$ pour l'homomorphisme
+$\mathrm{SL}(2)\to G$ ; l'édition écrit $\varphi$, pour ne pas le confondre avec
+le morphisme de Steinberg ni avec le troisième vecteur d'un
+$\mathfrak{sl}_{2}$-triplet. Dans b), il porte
+$\operatorname{ad}(e)\colon\mathfrak{g}(0)\to\mathfrak{g}(-2)$ : $\operatorname{ad}(e)$
+élève le degré de $2$, et (iii) au feuillet 16 écrit bien
+$\mathfrak{g}(0)\to\mathfrak{g}(2)$ ; l'édition corrige. La seconde moitié de
+b) est ajoutée à la main, et une ligne b') est barrée. L'équivalence de c) et
+d) est le lemme de Morozov, celle de a) et d) la théorie des représentations
+de $\mathfrak{sl}_{2}$.}
+
+\textbf{(ii)} Pour tout nilpotent $e$, il existe $\varphi\colon\mathrm{SL}(2)\to
+G$ avec $d\varphi(e_{0})=e$, ou, ce qui revient au même, avec
+$\varphi(u_{0})=u$, où $u=\exp(e)$ et $u_{0}=\exp(e_{0})$ — c'est le théorème
+de Jacobson--Morozov. Pour $e\neq 0$, ces $\varphi$ sont déterminés par
+$x=d\varphi(x_{0})$, ils sont conjugués sous $Z=\operatorname{Cent}(e)=
+\operatorname{Cent}(u)$, et ils forment un torseur sous $Z^{+}=Z\cap U$,
+groupe unipotent, où $U$ est le groupe défini en (iv). L'ensemble des $x$
+correspondants est l'espace affine
+$x+\bigl(\mathfrak{g}^{e}\cap\operatorname{Fil}^{1}\mathfrak{g}\bigr)$, torseur
+sous $\operatorname{Lie}(Z^{+})=\mathfrak{g}^{e}\cap
+\operatorname{Fil}^{1}\mathfrak{g}$ pour l'addition. On a
+$Z=Z_{0}\ltimes Z^{+}$, où $Z_{0}=Z\cap L=\operatorname{Cent}(\varphi)$ est
+réductif.\footnote{Les deux définitions de $Z^{+}$ et de son algèbre de Lie
+sont manuscrites, à la place de définitions dactylographiées biffées ; la
+décomposition $Z=Z_{0}\cdot Z^{+}$ est une note marginale.}
+
+\textbf{(iii)} Soit $x\neq 0$ un élément de Dynkin, de cocaractère $i$. Les $e$
+tels que $(x,e)$ satisfasse aux conditions de (i) forment l'ouvert dense
+$\mathfrak{g}(2)^{*}$ de $\mathfrak{g}(2)$ où
+$\operatorname{ad}(e)\colon\mathfrak{g}(0)\to\mathfrak{g}(2)$ est surjectif ;
+c'est un espace homogène — le tapuscrit corrige « torseur » — sous le groupe
+réductif $L=\operatorname{Cent}(x)=\operatorname{Cent}(i)$.
+
+\textbf{(iv)} Soit $x=\operatorname{Lie}(i)(1)$ un élément de Dynkin, et $P$,
+$U$, $L$ les sous-groupes d'algèbres de Lie
+$\sum_{k\geqslant 0}\mathfrak{g}(k)$, $\sum_{k\geqslant 1}\mathfrak{g}(k)$ et
+$\mathfrak{g}(0)$. Alors $P$ est parabolique, $U$ son radical unipotent, $L$ un
+sous-groupe de Levi. Si $u=\exp(e)$ est adapté à $i$, $P$ et $U$ ne dépendent
+que de $u$ (deux $x$ associés au même $u$ donnent le même $P$), de même que
+$H=i(\mathbf{G}_{m})\cdot U$ et que $i$ modulo $U$. L'application
+$g\mapsto\operatorname{Ad}(g)x$ est un isomorphisme de $U$ sur
+$x+\operatorname{Fil}^{1}\mathfrak{g}$, et $g\mapsto\operatorname{Ad}(g)e$
+applique $U$ sur $e+\operatorname{Fil}^{3}\mathfrak{g}$, et $P$ sur
+$\mathfrak{g}(2)^{*}+\operatorname{Fil}^{3}\mathfrak{g}$.\footnote{C'est ce
+qu'on appelle aujourd'hui le parabolique de Jacobson--Morozov de $e$ ; les
+valeurs de $\alpha(i)$ sur les racines simples forment le diagramme de Dynkin
+pondéré de l'orbite de $e$.}
+
+\pagerange{17}{19}
+\subsection*{Interprétation par les filtrations du foncteur fibre}
+
+Le tapuscrit traduit ensuite la théorie en termes de filtrations du foncteur
+oubli sur la catégorie des représentations de dimension finie de $G$ —
+filtrations compatibles au produit tensoriel et exactes, ce qui est
+automatique en caractéristique nulle.\footnote{C'est le cadre que développera
+la thèse de Saavedra Rivano, \emph{Catégories tannakiennes} (Lecture Notes 265,
+1972), sous sa direction ; le tapuscrit en est antérieur ou contemporain.}
+
+Une classe de conjugaison $c$ de telles filtrations, rationnelle sur $k$
+(sans qu'elle ait nécessairement un représentant rationnel), revient à un
+élément de $X_{*}(T_{0})/W$ invariant par l'image $\Gamma$ de
+$\operatorname{Gal}(\bar k/k)$ dans le groupe des automorphismes extérieurs du
+groupe de Chevalley $G_{0}$ associé — autrement dit à un cocaractère dominant
+stable par $\Gamma$. On a alors :
+
+\begin{itemize}
+\item le schéma $\underline{\varnothing}_{c}$ des filtrations de classe $c$,
+  espace homogène sous $G$ dont les stabilisateurs sont des paraboliques ; il
+  s'identifie à l'ouvert et fermé $\mathrm{Par}_{c'}$ de
+  $\underline{\mathrm{Par}}(G)$ formé des paraboliques d'un type $c'$ ;
+\item le schéma $\mathrm{ST}_{c}$ des cocaractères
+  $i\colon\mathbf{G}_{m}\to G$ de classe $c$, orbite rationnelle dans
+  $\underline{\mathrm{Hom}}_{\mathrm{gr}}(\mathbf{G}_{m},G)$, isomorphe au
+  schéma $(\mathrm{CL})_{c'}$ des couples de Levi $(P,L)$ avec $P$ de type
+  $c'$ : à $i$ on associe $P$ et $\operatorname{Cent}(i)$ ;
+\item le morphisme $\mathrm{ST}_{c}\to\underline{\varnothing}_{c}$ (en termes de
+  filtrations), qui s'identifie à $(\mathrm{CL})_{c'}\to\mathrm{Par}_{c'}$ (en
+  termes de paraboliques).
+\end{itemize}
+
+En caractéristique nulle (« j'ignore dans quelle mesure c'est vraiment
+nécessaire »), soit $\mathrm{Dyn}_{c}$ le schéma des
+$\varphi\colon\mathrm{SL}(2)\to G$ tels que $\varphi\circ i_{0}$ soit de classe
+$c$. S'il est non vide et $c\neq 1$ — $c$ est alors une \emph{classe de
+Dynkin} —, c'est un espace homogène sous $G$, de stabilisateur
+$Z_{0}$.\footnote{La main ajoute : « il faudrait regarder la structure de ces
+$Z_{0}$ ; dimension, semi-simplicité ». Le tapuscrit biffe une parenthèse qui
+identifiait $\mathrm{Dyn}_{c}$ au torseur $\underline{\mathrm{Isom}}(G_{1},G)$,
+$G_{1}$ la forme quasi-déployée.} Soit $\mathrm{Un}_{c}$ le schéma des
+unipotents de la classe qui correspond à $c$. Les morphismes $\varphi\mapsto
+\varphi\circ i_{0}$ et $\varphi\mapsto\varphi(u_{0})$, et un morphisme
+$\mathrm{Un}_{c}\to\underline{\varnothing}_{c}$ que « Deligne nous fournit »,
+forment un carré commutatif d'espaces homogènes
+
+\begin{tikzcd}
+\mathrm{ST}_{c}\simeq(\mathrm{CL})_{c'} \arrow[d] & \mathrm{Dyn}_{c} \arrow[l] \arrow[d] \\
+\underline{\varnothing}_{c}\simeq\mathrm{Par}_{c'} & \mathrm{Un}_{c} \arrow[l]
+\end{tikzcd}
+
+de stabilisateurs $L$, $Z_{0}$, $P$ et $\operatorname{Cent}(e)$.\footnote{Le
+carré des stabilisateurs est dessiné à la main, à côté du premier. Le morphisme
+de Deligne associe à un unipotent la filtration canonique qu'il définit ; le
+rapprocher de la « filtration de monodromie » de \emph{La conjecture de Weil
+II} (1980), 1.6, est une remarque de l'édition, non du dossier.}
+
+\textbf{Points rationnels.} $\mathrm{Par}_{c'}$ a un point rationnel si et
+seulement si $\mathrm{Dyn}_{c}$ en a un. Dans un sens, un $\varphi$ rationnel
+définit $i=\varphi\circ i_{0}$, donc $P$. Dans l'autre, $P$ rationnel étant
+donné, on en choisit un Levi, c'est-à-dire un $i$ de classe $c$ qui le définit,
+et les $e$ adaptés à $i$ forment l'ouvert dense $\mathfrak{g}(2)^{*}$ de
+$\mathfrak{g}(2)$, qui a un point rationnel. Dans le cas principal, où
+$Z_{0}$ est trivial et $P$ un Borel, cela dit qu'un sous-groupe principal
+$\mathrm{SL}(2)$ rationnel existe si et seulement si $G$ est
+quasi-déployé.\footnote{Le tapuscrit en tire que « pour certaines classes de
+paraboliques (qu'on pourrait appeler les paraboliques de Dynkin-Kostant)
+l'existence d'un parabolique de cette classe rationnel sur $k$ implique déjà
+que $G$ est quasi-déployé ». L'argument donné ne l'établit que dans le cas
+principal, où $P$ est un Borel et où la conclusion est immédiate ; pour une
+autre classe de Dynkin, un $\varphi$ rationnel n'entraîne que l'isotropie.
+L'édition s'en tient à ce qui est démontré.} L'argument vaut sur un anneau
+semi-local de caractéristique nulle.
+
+Quand $G$ n'est pas une forme intérieure, il faut vérifier que la classe $c'$
+de $P$ provient d'une classe de Dynkin $c$ \emph{invariante par} $\Gamma$, ce
+qui ne résulte pas de l'invariance de $c'$ tant qu'on ne sait pas si $c\mapsto
+c'$ est injectif sur les classes de Dynkin. Il ne l'est pas : une note marginale
+le dit pour $A_{2}$ et $A_{4}$.\footnote{Lecture partiellement incertaine :
+« Il n'est en effet pas injectif pour $A_{2}$, $A_{4}$ (cela vaut pour
+$A_{3}$) ». Le calcul sur les diagrammes pondérés confirme : dans $A_{2}$,
+l'orbite régulière ($22$) et l'orbite minimale ($11$) ont toutes deux un Borel
+pour parabolique ; dans $A_{4}$, la régulière et la sous-régulière ($2112$) de
+même ; dans $A_{3}$, les orbites $[3,1]$ ($202$) et $[2,1,1]$ ($101$) ont le
+même parabolique, ce qui justifie la parenthèse.} D'où l'intérêt, pour
+l'arithmétique, de déterminer les classes de paraboliques de Dynkin--Kostant des
+groupes simples, et de comparer leur stabilisateur dans le groupe des
+automorphismes extérieurs à celui des $c$ correspondants.
+
+Si une filtration du foncteur oubli est définie par un unipotent, la classe de
+celui-ci (ou $c$) est déterminée. Les unipotents qui la définissent sont les
+$\exp(e)$, $e\in\mathfrak{g}(2)^{*}+\operatorname{Fil}^{3}\mathfrak{g}$ ; ils
+forment une seule classe de conjugaison sous $P$ — non sous $U$, dont les
+classes sont les $\exp(a+\operatorname{Fil}^{3}\mathfrak{g})$,
+$a\in\mathfrak{g}(2)^{*}$.
+
+\textbf{Cas principal.} La classe de $\varphi$ est \emph{principale} au sens de
+Dynkin--Kostant lorsque $e$ est régulier, ce qui équivaut à ce que
+$\mathfrak{g}(0)$ soit une sous-algèbre de Cartan ; on a alors
+$\mathfrak{g}(1)=0$. Le parabolique associé est un Borel — la réciproque est
+fausse, comme on vient de le voir —, et $Z_{0}$ est trivial pour $G$ adjoint :
+$\mathrm{Dyn}_{c}$ est un torseur sous $G$.\footnote{Le tapuscrit écrit :
+« Pour qu'on ait [blanc]$(1)=0$, il faut et suffit que la classe … soit
+“principale” ». Le blanc n'est pas rempli. Lu, comme le propose la
+transcription, $\mathfrak{g}(1)=0$, l'équivalence est fausse : $\mathfrak{g}(1)=0$
+caractérise les classes \emph{paires}, dont la principale n'est qu'une (dans
+$\mathfrak{sl}_{4}$, l'orbite $[2,2]$ est paire et non principale).
+L'édition donne la caractérisation correcte et garde l'implication. La marge
+note : « ex. Cas $A_{2}$, $A_{4}$ : les paraboliques associés aux unipotents
+“sous-réguliers” sont des Borels ! »}
+
+\pagerange{21}{22}
+\section*{La lettre à Kostant (Massy, 22 octobre 1969)}
+
+Lettre dactylographiée, en anglais, signée de sa main.\footnote{Le titre est de
+l'édition. Quelques mots sont ajoutés à la main — les deux carrés de
+$\operatorname{card}(W)^{2}$, « of $\widetilde{G}$ », « generating », « $n-$ »,
+« all » — et une note de bas de page. La lettre est de lui ; la transcription
+la donne en entier, et l'édition la suit ici en français.} Elle dit l'occasion
+de la relecture : un « joli travail » de Brieskorn sur les singularités de
+Klein a ramené Grothendieck aux deux articles de Kostant, qui « appellent une
+reconsidération soigneuse dans le cadre de la géométrie algébrique ». Suivent
+des questions.
+
+\textbf{Quadruplets rigidifiants.} Pour $G$ simple adjoint complexe, classer les
+quadruplets $(T,B,T',B')$ où $T$ et $T'$ sont des tores maximaux « en
+apposition », au sens de Kostant, et $B\supset T$, $B'\supset T'$ des Borels.
+Le nombre de classes de conjugaison est annoncé égal à
+\[
+  \frac{\operatorname{card}(W)^{2}}{h\,z\,\varphi(h)} ,
+\]
+et à $\operatorname{card}(W)^{2}/hz$ si l'on se donne en outre un générateur du
+groupe d'ordre $h$, $T\cap N(T')$. Le stabilisateur d'un tel quadruplet est
+$T\cap T'=e$ : la donnée rend $G$ entièrement « rigide », aux automorphismes
+extérieurs près.\footnote{Note de sa main au pied du feuillet :
+$N(T)\cap N(T')$ est une extension de $(\mathbf{Z}/h\mathbf{Z})^{*}$ par
+$\mathbf{Z}/h\mathbf{Z}\times\mathfrak{z}$, donc d'ordre $hz\varphi(h)$ ; le
+dénombrement en découle si ce groupe agit librement sur les
+$\operatorname{card}(W)^{2}$ choix de $(B,B')$. Le dossier ne démontre ni
+l'une ni l'autre affirmation. Les nombres sont entiers dans les cas qu'on
+vérifie à la main : $1$ pour $A_{1}$, $2$ pour $A_{2}$, $4$ pour $B_{2}$, $12$
+pour $G_{2}$.} Questions : $B$ et $B'$ sont-ils en position générale,
+c'est-à-dire $B\cap B'$ est-il un tore maximal, pour certains ou pour tous ces
+quadruplets ? Y a-t-il une classe \emph{distinguée}, invariante par les
+automorphismes extérieurs ? Quels sont les groupes d'automorphismes de ces
+quadruplets — isomorphes, dit-il, à des sous-groupes du groupe des
+automorphismes extérieurs ?
+
+\textbf{Le rang de l'application de Kostant.} Dans une autre direction : comment
+varie le rang de la différentielle de $\mathfrak{g}\to\mathfrak{h}/W$ (et de
+celle de Steinberg $G\to T/W$) ? Il y a des raisons de croire que sur les
+orbites unipotentes de dimension $n-r-2$, juste en dessous du maximum $n-r$, le
+rang est $r-1$ quand toutes les racines ont même longueur — types $A$, $D$,
+$E_{6}$, $E_{7}$, $E_{8}$, ceux des singularités de Klein — et $<r-1$ dans les
+autres cas ; et que dans le premier cas il n'y a qu'une orbite de cette
+dimension, propriété peut-être caractéristique du cas « homogène ».\footnote{Il
+y a en fait, dans tout groupe simple, une seule orbite nilpotente de dimension
+$n-r-2$, l'orbite sous-régulière ; l'unicité n'est donc pas propre au cas des
+racines de même longueur. Le lien avec les singularités de Klein que la lettre
+devine est devenu le théorème de Brieskorn (congrès de Nice, 1970), conjecturé
+par Grothendieck : une tranche transverse à l'orbite sous-régulière coupe le
+cône nilpotent selon une singularité simple de même type, et la restriction de
+l'application de Kostant à la tranche en est la déformation semi-universelle
+dans le cas $ADE$ (Slodowy, 1980, pour les autres types). L'édition ne tranche
+pas l'énoncé sur le rang dans les types non simplement lacés.}
+
+\textbf{Les fibres de Springer.} Quelle est la dimension de la variété des
+Borels qui contiennent un élément $g\in G$ (resp.\ dont l'algèbre de Lie
+contient $x\in\mathfrak{g}$) ? Si l'orbite est de dimension $2N-2i$, il
+s'attend à la dimension $i$ ; et l'inégalité $\leqslant i$ entraînerait, en
+généralisant un argument de profondeur de Brieskorn, que les singularités des
+fibres de $\mathfrak{g}\to\mathfrak{h}/W$ (resp.\ de $G\to T/W$ pour $G$
+simplement connexe) sont \emph{rationnelles} : pour une résolution $F'\to F$
+d'une fibre, $R^{i}f_{*}\mathcal{O}_{F'}=0$ pour $i>0$.\footnote{La première
+attente est devenue la formule $\dim\mathcal{B}_{x}=\frac12(\dim
+Z_{G}(x)-r)$, établie au milieu des années 1970 (Steinberg, Spaltenstein) ;
+la seconde, la rationalité des singularités, l'a été à la même époque pour le
+cône nilpotent (Hesselink, 1976). C'est la question g) du feuillet 6.}
+
+La lettre se clôt sur une phrase qui dit l'attitude : « Peut-être la réponse à
+la plupart des questions que je pose est-elle bien connue, et suis-je seulement
+ignorant ; pour certaines d'entre elles, il serait en vérité scandaleux que les
+experts ne connaissent pas la réponse ! »
+
+\pagerange{23}{35}
+\section*{Diagrammes d'espaces homogènes : éléments de Kostant, de Coxeter, points cycliques (feuillets 23 à 35)}
+
+Le titre est celui de la chemise du feuillet 23. Les notes qui suivent sont sur
+papier libre ou au verso de feuillets dactylographiés étrangers au dossier
+(27, 29, 31, 35), qu'on ne fait que signaler. Elles relèvent dans $G$ les
+objets que les feuillets 1--2 décrivaient dans $W$, sur un corps $k$ de
+caractéristique nulle ou première à $h$.
+
+\pagerange{25}{26}
+\subsection*{Le tableau des notions (feuillets 25 et 26)}
+
+Le feuillet 25 dresse, en trois colonnes, une liste de notions, leurs sigles,
+et le groupe qui les stabilise.
+
+\begin{itemize}
+\item \emph{Éléments de Kostant} $\kappa\colon\mu_{h}\to G$ et \emph{éléments de
+  Coxeter} $\gamma\in G(k)$ (E Kost, E Cox) : équivalents en caractéristique
+  nulle dès qu'on s'est donné $\omega\in\mu_{h}^{*}(k)$, par $\gamma=\kappa(\omega)$ ;
+  stabilisateur $\mathfrak{z}\cdot T$, produit semi-direct.
+\item \emph{Sous-groupes} de Kostant et de Coxeter $\mu\hookrightarrow G$
+  (SG Kost, SG Cox) ; stabilisateur extension de
+  $(\mathbf{Z}/h\mathbf{Z})^{*}$ par $\mathfrak{z}\cdot T$.
+\item \emph{Couples} de Kostant $(\kappa,T')$, ou $(\kappa,D)$ avec $D$ une
+  droite régulière de $\mathfrak{g}(1)$, et de Coxeter $(\gamma,T)$
+  (C Kost, C Cox) ; stabilisateur $\mu_{h}\times\mathfrak{z}$.
+\item \emph{Précouples} $(\mu\subset G,T')$, c'est-à-dire couples de tores en
+  apposition (Toapp) ; stabilisateur extension de
+  $(\mathbf{Z}/h\mathbf{Z})^{*}$ par $\mu_{h}\times\mathfrak{z}$.
+\item \emph{Droites cycliques} $D$ (D Cy) ; stabilisateur $\mu_{h}\cdot T'$.
+\item \emph{Couples de Kostant--Killing} $((B,T),T')$, équivalemment
+  $(B,T,D)$ ; stabilisateur $\mu_{h}$.
+\item \emph{Couples de Kostant normalisés} (C Kost norma) ; stabilisateur
+  $\mathfrak{z}$.
+\item \emph{Couples de Kostant--Killing normalisés} $((T,B),x)$
+  (Kost Kill norma) ; stabilisateur trivial.
+\end{itemize}
+
+Une marge précise que ces équivalences ne valent qu'en caractéristique nulle
+« (ou car.\ $p>h$ ?) », et une note définit la normalisation : le choix d'un
+élément d'une droite canonique $\Delta$, commune aux droites cycliques modulo
+$\mu_{h}$, choix privilégié au signe près.\footnote{Les sigles ont été récrits
+plusieurs fois et les biffures y sont lourdes ; plusieurs mots de la note sont
+incertains. L'édition donne les lignes dans la dernière forme lisible.}
+
+Le feuillet 26 range les mêmes données en deux treillis — celui des
+stabilisateurs, de $0$ à $N(T)$ et $N(T')$ en passant par $\mathfrak{z}$,
+$\mu$, $\mu\times\mathfrak{z}$, $\mathfrak{z}\cdot T$, $\mu\cdot T'$, $N(\mu)$,
+$N(T)\cap N(T')$ ; et celui des espaces, de « Kost-Kill-norma » en haut jusqu'aux
+tores maximaux en bas — avec deux renvois : certains isomorphismes ne sont
+définis que sur $\mathring{\mu}_{h}^{*}$, d'autres que si $(h,p)=1$. Une
+dernière ligne note que l'existence de ces objets dans le cas quasi-déployé
+s'obtient par descente.\footnote{L'édition ne redessine pas ces deux
+diagrammes, que la transcription donne trait pour trait ; le long trait qui
+descend de C Kos y est de lecture incertaine.}
+
+\pagerange{28}{30}
+\subsection*{Les groupes d'une paire de tores en apposition (feuillets 28 et 30)}
+
+Le feuillet 28 identifie les couples de tores en apposition $(T,T')$ aux
+sous-groupes de Coxeter $\mu$, et le choix d'un isomorphisme $\mu\simeq\mu_{h}$
+au choix d'une droite cyclique $D$. Puis il croise, dans une grille, les
+sous-groupes $T$, $C(\mu)$ (centralisateur de $\mu$, que la page note, comme le centre, d'un 3 bouclé), $N(\mu)$, $N(T)$
+avec leurs intersections par $N(T')$, par $N(D)$ et par $T'$, en notant sur chaque
+trait le quotient ($\mathfrak{z}$, $(\mathbf{Z}/h\mathbf{Z})^{*}$,
+$T/\mu$, $\mu$, $T'/\mathfrak{z}$) et en marquant les carrés cocartésiens. Il
+en retient trois égalités :
+\[
+  N(T)\cap N(D)=C(\mu)\cap N(D),\qquad
+  N(T)\cap T'=C(\mu)\cap T',\qquad
+  N(T)\cap N(T')=N(\mu)\cap N(T'),
+\]
+et une extension canonique de $(\mathbf{Z}/h\mathbf{Z})^{*}$ par
+$\mu\times\mathfrak{z}$, dont les deux extensions induites, par $\mu$ et par
+$\mathfrak{z}$, se réalisent dans $W'$ et dans $W$.\footnote{C'est la question
+de la marge du feuillet 1, reprise au niveau de $G$. La fin du paragraphe ne
+se lit que par mots isolés.}
+
+Le feuillet 30 refait la grille pour un élément de Coxeter $\gamma$ de
+$N(T)$. Il y lit $T\cap T'=0$ et
+\[
+  T'^{\gamma}\simeq P'/(1-c)P'(1)\simeq\mathfrak{z},
+\]
+où $P'$ est le réseau des cocaractères de $T'$ (copoids, $G$ étant adjoint) et
+$c$ l'élément de Coxeter qu'induit $\gamma$ : comme $1-c$ est inversible sur
+$\mathbf{Q}$, les points fixes de $\gamma$ dans $T'$ forment le groupe fini
+$P'/(1-c)P'$, tordu à la Tate, et $(1-c)$ envoie le réseau des copoids sur celui
+des coracines, d'où un groupe isomorphe à $P^{\vee}/Q^{\vee}$, d'ordre
+$z$.\footnote{L'explication de l'isomorphisme est de l'édition ; la page ne
+donne que la formule, sous la grille.} Deux justifications suivent : tout
+élément de $T$ qui normalise $D$ est neutre ; tout élément de $W$ qui
+centralise $c$ en est une puissance (le corollaire 1 des feuillets 1--2).
+
+\emph{À prouver} : tout élément de $T$ qui normalise $D$ est dans
+$K(\mu_{h})$. La page amorce un calcul d'indice, le déterminant
+\[
+  \det\begin{pmatrix}
+    n_{1}+1 & n_{2} & \cdots & n_{r}\\
+    n_{1} & n_{2}+1 & \cdots & n_{r}\\
+    \vdots & & \ddots & \vdots\\
+    n_{1} & n_{2} & \cdots & n_{r}+1
+  \end{pmatrix}=1+\sum_{i}n_{i},
+\]
+qui vaut $h$ quand les $n_{i}$ sont les coefficients de la plus grande racine.
+Elle conclut que $N(T)\cap N(D)=N(\mu)\cap N(D)$, puisque $\mu\simeq\mu_{h}$
+est formé des éléments de $T$ qui normalisent $D$.\footnote{L'énoncé à
+prouver est établi au feuillet 46, (iii) c), sous la forme : le stabilisateur
+dans $T$ d'une droite cyclique est $K(\mu_{h})$. La matrice est esquissée sur la
+page ; sa valeur est juste (lemme du déterminant d'une perturbation de rang
+un).}
+
+\pagerange{33}{33}
+\subsection*{Rappels de Kostant (feuillet 33)}
+
+\textbf{a)} Pour $\mu_{h}\hookrightarrow T\hookrightarrow G$ fixé, les droites
+cycliques $D$ normalisées par $\mu_{h}$ forment un espace homogène sous $T$, de
+stabilisateur $\mu_{h}$. Elles correspondent bijectivement aux tores maximaux
+$T'$ en apposition avec $T$ par $\mu_{h}$ — normalisés par $\mu_{h}$, qui
+agit sur $\operatorname{Lie}T'$ avec le caractère $1$ pour valeur propre — : à
+$D$ on associe son centralisateur, à $T'$ la droite propre correspondante de
+$\operatorname{Lie}T'$. On a $T\cap N(T')=\mu_{h}$.
+
+\textbf{b)} Les droites cycliques de $\mathfrak{g}$, modulo $\mu_{h}^{*}$,
+s'identifient canoniquement à une droite $\Delta$ définie sur $k$, obtenue par
+descente à partir de $D^{\otimes h}$, ou comme l'image des lieux cycliques par
+le morphisme de Kostant $\mathfrak{g}\to\mathfrak{t}/W$. On a
+$\mathfrak{g}_{\psi}\simeq\Delta$, ou $\Delta^{-1}$, car
+$\Delta^{\otimes 2}\simeq\mathbf{1}$.\footnote{La plus grande partie de b) et
+de la note oblique qui l'accompagne est rapide et effacée ; l'édition ne
+reconstitue pas les liaisons. La note parle d'un torseur et d'une obstruction
+de Kostant dans un groupe $H^{2}(Q;E;\mu_{h})$, nulle si un certain
+$H^{2}(Q,\mu_{h})$ l'est ; ce qu'elle obstrue ne se lit pas.}
+
+\pagerange{34}{34}
+\subsection*{Les rigidifications de Kostant (feuillet 34)}
+
+Soit, sur une base où $(h,p)=1$, le schéma $\mathrm{RigKos}$ des
+\emph{rigidifications de Kostant} $(T,T',B,B')$ : $T$ et $T'$ tores maximaux en
+apposition, $B\supset T$ et $B'\supset T'$ des Borels. C'est un schéma lisse
+sur $S$, sur lequel $G$ opère librement, et $\mathrm{RigKos}/G$ est fini étale
+de rang $\operatorname{card}(W)^{2}/\varphi(h)hz$ — le nombre de la lettre.
+Le feuillet le décrit comme une représentation du groupe des automorphismes
+extérieurs dans un schéma fini étale sur $\operatorname{Spec}\mathbf{Z}[1/h]$.
+
+Dans le cas déployé, un épinglage fournit $\kappa\colon\mu_{h}\to T$ et la
+droite $D$ engendrée par
+\[
+  e=e_{\alpha_{1}}+\cdots+e_{\alpha_{r}}+e_{-\psi},
+\]
+définie au signe près ; $T'$ est le centralisateur de $e$. Le schéma $Q$ des
+Borels contenant $T$ est un $W$-torseur trivial ; celui, $Q'$, des Borels
+contenant $T'$ est un $W'$-torseur « très tordu ». Le sous-groupe
+$\Phi$, image de $N(T)\cap N(T')$ dans $W\times W'$, extension de
+$(\mathbf{Z}/h\mathbf{Z})^{*}$ par $\mathfrak{z}\times\mu_{h}$, opère sur
+$Q\times Q'$, et le quotient cherché est $(Q\times Q')/\Phi$ ; les
+automorphismes extérieurs y opèrent par leur action $\pm 1$ sur
+$\mathfrak{g}_{-\psi}$.\footnote{Le feuillet ne nomme pas $Q$, et la lettre
+$\Phi$ est surchargée. « librement » est de lecture incertaine. Les quatre
+dernières lignes, à l'encre brune, ne se lisent que par fragments. Rien de ce
+feuillet n'est démontré.}
+
+\pagerange{36}{39}
+\section*{Liste d'espaces homogènes remarquables et leurs relations (feuillets 36 à 39)}
+
+La chemise du feuillet 36 précise au crayon : « liés aux sous-groupes simples
+principaux de rang 1 ». Le feuillet 37 dresse la liste des schémas en jeu :
+
+\begin{itemize}
+\item les sous-groupes simples de rang $1$ principaux (SSP), seuls ou munis
+  d'un épinglage (SSPEP, contenu dans
+  $\underline{\mathrm{Hom}}^{*}_{\mathrm{gr}}(\mathrm{SL}(2),G)$), d'un couple
+  de Killing, d'un tore maximal, d'un Borel, d'un Borel épinglé ;
+\item les tores de dimension $1$ principaux (STP) et les homomorphismes
+  principaux $\mathbf{G}_{m}\to G$ ($\mathrm{ST}_{0}\mathrm{P}$) ;
+\item les sous-groupes additifs principaux (SAP), pointés
+  ($\mathrm{SAP}_{0}\subset\underline{\mathrm{Hom}}_{\mathrm{gr}}(\mathbf{G}_{a},G)$),
+  et les unipotents principaux (EUP) — canoniquement isomorphes en
+  caractéristique nulle ;
+\item les éléments de Coxeter et de Kostant, isomorphes une fois choisie une
+  racine primitive $h$-ième de l'unité ;
+\item les droites cycliques (DC), les éléments cycliques, les éléments
+  cycliques principaux ;
+\item les couples de tores maximaux en apposition (CTAP), de Coxeter
+  $(T,\gamma\in W(T))$ (CCox), de Kostant $(\kappa,D)$ (CKost), ces deux
+  derniers isomorphes sur $\mu_{h}^{*}$.
+\end{itemize}
+
+Le feuillet 38 dessine le diagramme de ces espaces homogènes sous $G$, de
+$\underline{\mathrm{Isom}}(G_{0},G)\simeq\mathrm{SSPEP}$ en haut à
+$\mathrm{STP}$ et $\mathrm{SSP}$ en bas, avec
+$\mathrm{Kill}\simeq\mathrm{ST}_{0}\mathrm{P}$ et
+$\mathrm{SAP}_{0}\simeq\mathrm{EUP}$ ; puis celui des stabilisateurs
+correspondants, avec les dimensions sur les traits. Les dimensions se
+vérifient : en partant du sous-groupe principal $H$ (dimension $3$), de son
+tore $t$ et de son sous-groupe unipotent $b_{u}$ (dimension $1$), on monte au
+tore maximal $T$ et au centralisateur $Z(b_{u})$ (dimension $r$), puis au
+normalisateur $N(b_{u})=Z(b_{u})\cdot t$ (dimension $r+1$).\footnote{Le
+feuillet 38 est au verso d'une page dactylographiée étrangère ; le
+feuillet 39, d'un tapuscrit sur les topos, ne porte que des ajouts à ce texte.
+La transcription donne les deux diagrammes du feuillet 38 ; l'édition n'en
+retient que la vérification des dimensions. Une note du feuillet 37 dit que les
+espaces des éléments principaux « deviennent isomorphes une fois choisie une
+racine primitive $h$-ième de $1$ (donc dans $\mu_{h}^{*}$ !) ».}
+
+\pagerange{40}{41}
+\section*{Résultats de Kostant sur les classes remarquables (feuillets 40 et 41)}
+
+$G$ est semi-simple adjoint sur $\mathbf{C}$.
+
+\textbf{a)} Les classes de conjugaison de sous-groupes simples de rang $1$
+(ou de sous-groupes additifs) correspondent aux classes d'unipotents de $G$
+(ou de nilpotents de $\mathfrak{g}$), et à certaines classes de cocaractères
+$\mathbf{G}_{m}\to G$. Dans $\operatorname{Hom}(\mathbf{G}_{m},T)\simeq
+\mathbf{Z}^{\Sigma}$, ces cocaractères « admissibles », pris dans la chambre
+dominante $\mathbf{N}^{\Sigma}$, ont des composantes égales à $0$, $1$ ou $2$
+— pas toutes les combinaisons : ce sont les diagrammes de Dynkin pondérés.
+
+\textbf{b)} Le cas où toutes les composantes valent $2$ est admissible : il
+correspond aux unipotents principaux (réguliers), et aux homomorphismes
+principaux.\footnote{La page écrit « toutes les composantes sont $1$ ». Pour le
+cocaractère de Dynkin d'un $\mathrm{SL}(2)$ principal, elles valent $2$ ; le
+cocaractère à composantes $1$ est $\rho^{\vee}$, sa moitié, l'« homomorphisme
+principal » du feuillet 43 (voir les conventions).} Puis une série de
+centralisateurs et de normalisateurs : celui d'un unipotent principal est un
+groupe unipotent commutatif de dimension $r$ ; celui d'un homomorphisme
+principal $\mathbf{G}_{m}\to G$ est un tore maximal, d'où une bijection entre
+ces homomorphismes et les couples de Killing ; le normalisateur d'un tore de
+dimension $1$ principal est engendré par $T$ et un élément d'ordre $2$ ; le
+stabilisateur d'un sous-groupe principal de rang $1$, muni d'un Borel ou d'un
+couple de Killing, se lit dans ce sous-groupe. En marge : sur une base
+quelconque, il existe un sous-groupe principal de rang $1$ déployé si et
+seulement si $G$ est quasi-déployé.\footnote{Plusieurs de ces phrases sont
+lacunaires ; le normalisateur d'un sous-groupe additif principal reste sans
+description lisible. Une note marginale nomme l'élément $w_{0}$ qui envoie la
+chambre sur son opposée, sans dire à quel énoncé elle se rattache ; c'est,
+d'après le feuillet 43, l'élément qui normalise le tore principal.}
+
+\textbf{c)} Soit $u\colon\mathbf{G}_{m}\to G$ un homomorphisme principal, $h$
+le nombre de Coxeter (la somme des coefficients de la plus grande racine, plus
+$1$) et $\zeta$ une racine primitive $h$-ième de l'unité. Les éléments
+$u(\zeta)$ sont réguliers et tous conjugués ; leur image dans le groupe de Weyl
+de leur tore centralisateur est un élément de Coxeter, et réciproquement les
+représentants d'un élément de Coxeter de $W=N(T)/T$ sont réguliers. La marge
+conseille de considérer plutôt la classe de l'homomorphisme
+$\mu_{h}\to G$.\footnote{Le paragraphe c) est surchargé d'ajouts dont l'ordre
+ne se reconstitue pas avec certitude ; l'édition donne ce que les segments
+lisibles assurent. La phrase sur le centralisateur d'un élément régulier
+principal, suivie d'un « (?) » entouré, est laissée en suspens par la page.}
+
+\textbf{d)} Le groupe $W$ opérant sur $\mathfrak{t}$, il existe des droites
+propres d'un élément de Coxeter de valeur propre une racine primitive $h$-ième,
+qui sont régulières, et conjuguées sous $W$ ($G$ simple) : ce sont les droites
+cycliques des feuillets 1--2. Au feuillet 41, la phrase passe de $\mathfrak{t}$ à
+$\mathfrak{g}$ : les droites de $\mathfrak{g}$ propres sous un élément régulier
+principal, de valeur propre une racine primitive $h$-ième, sont conjuguées ; on
+les appelle \emph{cycliques}, et leurs points non nuls \emph{éléments
+cycliques}. Pour un couple de Killing donné, on en construit en prenant
+\[
+  \sum_{i=1}^{r}\lambda_{i}e_{\alpha_{i}}+\lambda_{0}e_{-\psi},
+  \qquad\text{tous les }\lambda\text{ non nuls}.
+\]
+Le centralisateur d'un élément cyclique est un tore maximal $T'$, et le
+normalisateur de la droite $D$ qu'il engendre est un groupe $\widetilde{T}'$,
+$T'\subset\widetilde{T}'\subset N(T')$, dont l'image dans le groupe de Weyl est
+cyclique d'ordre $h$, engendrée par un élément de Coxeter.\footnote{La page
+appelle $T$ ce tore centralisateur et $\mu$ le dernier coefficient ;
+l'édition écrit $T'$ et $\lambda_{0}$, pour garder $T$ au tore du couple de
+Killing et $\mu$ au sous-groupe de Coxeter. Les justifications sont
+interlinéaires et leur place incertaine.} Pour une droite cyclique, $D/\mu_{h}$
+s'identifie canoniquement à la droite standard — ce qui se vérifie dans un cas
+quasi-déployé, où l'on a l'élément cyclique privilégié
+$\sum_{i}e_{\alpha_{i}}+e_{-\psi}$ — ; les éléments qui y donnent $1$ sont les
+\emph{éléments cycliques principaux}, définis au signe près. Ils forment un
+espace homogène sous $G$, de stabilisateur un tore maximal.\footnote{La page
+dit « torseur » avec un stabilisateur non trivial ; l'édition écrit « espace
+homogène ». Une marge demande si l'on peut choisir un générateur canonique de
+$e_{-\psi}$, c'est-à-dire si un épinglage identifie $\mathfrak{g}_{-\psi}$ à
+$\mathfrak{g}_{\psi}$ — c'est l'ambiguïté de signe du feuillet 33 et du
+feuillet 34.}
+
+\textbf{e)} Considérons les couples $(T,\gamma)$ d'un tore maximal et d'un
+$\gamma\in N(T)$ dont l'image dans $W$ est un élément de Coxeter. Deux tels
+couples sont conjugués — et la page s'arrête là, la justification entre
+crochets étant illisible.
+
+\pagerange{42}{47}
+\section*{Résumé de quelques résultats de Kostant (feuillets 42 à 47)}
+
+Seconde mouture, manuscrite et mise au propre, d'un résumé de Kostant ; elle ne
+reprend pas le tapuscrit des feuillets 15--19, mais les objets des
+feuillets 21--41, sur une base. $G$ est semi-simple adjoint sur $S$, de type
+constant.
+
+\pagerange{43}{44}
+\subsection*{(i) Homomorphismes principaux}
+
+À tout couple de Killing $(T,B)$, on associe un cocaractère
+$i\colon\mathbf{G}_{m}\to G$, par descente à partir du cas déployé : là,
+$T\simeq\mathbf{G}_{m}^{\Sigma}$ par les racines simples,
+$\operatorname{Hom}(\mathbf{G}_{m},T)\simeq\mathbf{Z}^{\Sigma}$, et l'on prend
+l'élément dont toutes les coordonnées valent $1$ — soit $\rho^{\vee}$. Son
+centralisateur est $T$. Un homomorphisme est \emph{principal} s'il est associé
+à un couple de Killing ; ce couple est alors unique ($i$ est régulier), la
+condition est locale pour fppf, et les homomorphismes principaux
+correspondent bijectivement aux couples de Killing.
+
+\textbf{(i bis)} Si $i$ est principal, $\lambda\mapsto i(\lambda^{-1})$ l'est
+aussi, associé au couple de Killing opposé. Le normalisateur de
+$i(\mathbf{G}_{m})$ est l'image inverse $N_{1}(T)$, dans $N(T)$, du sous-groupe
+d'ordre $2$ de $W$ engendré par l'élément $w_{0}$ qui envoie $B$ sur le Borel
+opposé (on suppose $r\geqslant 1$). Un sous-tore de rang $1$ est
+\emph{principal} s'il est localement, pour fppf, l'image d'un homomorphisme
+principal ; ces sous-tores correspondent aux sections de
+$\mathrm{Kill}/(\mathbf{Z}/2\mathbf{Z})$, le quotient étant pris par $w_{0}$ :
+un tore maximal et une paire de Borels opposés le contenant, ces Borels
+n'étant pas nécessairement définis séparément sur $S$.
+
+\pagerange{44}{46}
+\subsection*{(ii) Homomorphismes de Kostant, et la graduation de $\mathfrak{g}$}
+
+Supposons $G$ simple.\footnote{« $G$ simple ? » est en marge : il le faut pour
+que le nombre de Coxeter $h$ soit défini.} Un homomorphisme principal $i$
+induit $\mu_{h}\to G$. Un homomorphisme $K\colon\mu_{h}\to G$ est \emph{de
+Kostant} s'il est localement (fppf, ou étale fini, cela revient au même)
+obtenu ainsi. Il est alors \emph{régulier} : son centralisateur connexe est un
+tore maximal $T$. La $\mathbf{Z}/h\mathbf{Z}$-graduation de $\mathfrak{g}$
+qu'il définit a pour composante de degré $0$ la sous-algèbre de Cartan
+$\mathfrak{t}$, et pour composante de degré $j$, $1\leqslant j\leqslant h-1$,
+\[
+  \mathfrak{g}^{j}=\sum_{\operatorname{ht}(\alpha)=j}\mathfrak{g}_{\alpha}
+  \;+\sum_{\operatorname{ht}(\alpha)=j-h}\mathfrak{g}_{\alpha},
+\]
+de rang le nombre de racines dont la hauteur est congrue à $j$ modulo
+$h$.\footnote{Le feuillet 44 dit « racines positives dont l'ordre est $\equiv j$
+(mod $h$), i.e.\ dont l'ordre est $j$ ou $j-h$ » ; les racines de hauteur
+$j-h$ sont négatives, et la formule du feuillet 45, qui somme sur toutes les
+racines, est la bonne. Elle y est écrite pour $1\leqslant j\leqslant h$, mais
+le degré $h$ est le degré $0$.} En particulier $\mathfrak{g}^{1}$, somme des
+espaces des racines simples et de celui de $-\psi$, est de rang $r+1$.
+
+Le centralisateur $G^{K}=N(T)^{K}$ est l'image inverse du stabilisateur $W_{K}$
+de $K$ dans $W$. Kostant dit que l'ordre de $W_{K}$ est celui du centre de
+$\widetilde{G}$, et Grothendieck espère qu'il soit isomorphe à $P/R$ (poids
+modulo racines) ou à son dual à valeurs dans $\mathbf{Q}/\mathbf{Z}$. C'est la
+seconde forme qui est juste : $W_{K}$ est isomorphe à $P^{\vee}/Q^{\vee}$,
+dual de $P/Q$.\footnote{Le feuillet écrit « le rang de $W_{K}$ » pour son
+ordre. En termes actuels, $K$ correspond au point $\rho^{\vee}/h$, intérieur à
+l'alcôve fondamentale où toutes les racines affines simples valent $1/h$ ; son
+stabilisateur dans le groupe de Weyl affine étendu est le groupe $\Omega$ des
+symétries du diagramme de Dynkin étendu, isomorphe à $P^{\vee}/Q^{\vee}$, et
+s'injecte dans $W$ avec pour image $W_{K}$. La formulation est de l'édition.}
+
+La donnée de $K\colon\mu_{h}\to T$ équivaut à celle de l'ensemble $\Sigma'$ des
+racines $\alpha$ telles que $\mathfrak{g}_{\alpha}\subset\mathfrak{g}^{1}$, au
+moins si $h>2$ ; dans le cas déployé, $\Sigma'=\Sigma\cup\{-\psi\}$, la base
+des racines affines simples. Grothendieck vérifie, dans le cas déployé, que
+$W_{K}$ est le stabilisateur de $\Sigma'$ dans $W$, c'est-à-dire l'ensemble des
+$w$ qui envoient toutes les racines simples dans $\Sigma$, sauf au plus une,
+envoyée sur $-\psi$.\footnote{Le feuillet dit « sauf une » ; l'élément neutre
+envoie $\Sigma$ dans $\Sigma$, d'où « au plus une ». L'inclusion $W_{K}\subset
+\operatorname{Stab}(\Sigma')$ est notée « a priori ». La phrase sur
+$\Sigma'$, avec ses mots « $\mathbf{Q}$-simples » et « $\mathbf{Q}$-base »,
+est en partie illisible.} Il reste à déterminer le normalisateur de $K$, et
+l'action de $\operatorname{Norm}(K)/\operatorname{Cent}(K)$ sur $\mu_{h}$ :
+est-elle transitive sur $\operatorname{Aut}(\mu_{h})=
+(\mathbf{Z}/h\mathbf{Z})^{*}$ ? Le dossier ne le dit pas.
+
+\pagerange{46}{46}
+\subsection*{(iii) Le théorème de Kostant sur $\mathfrak{g}^{1}$}
+
+Soit $K\colon\mu_{h}\to T$ de Kostant et
+$\mathfrak{g}^{1}=\sum_{\alpha\in\Sigma'}\mathfrak{g}_{\alpha}$. En
+caractéristique nulle (Kostant) :
+
+\begin{enumerate}
+\item[a)] une section $\sum x^{\alpha}$ de $\mathfrak{g}^{1}$, dont aucune
+  composante ne s'annule, est semi-simple régulière ;
+\item[b)] si l'une des composantes est nulle, elle est nilpotente ;
+\item[c)] deux droites $D$, $D'$ du cas a) sont conjuguées par un $t\in T$,
+  sans unicité : le stabilisateur dans $T$ d'une telle droite est $K(\mu_{h})$,
+  et les droites du cas a) forment un torseur sous $T/K(\mu_{h})$.
+\end{enumerate}
+
+Les trois points se voient sur les poids : $T$ agit sur les $r+1$
+coordonnées $x^{\alpha}$ par les caractères $\alpha\in\Sigma'$, liés par la
+seule relation $-\psi+\sum_{i}c_{i}\alpha_{i}=0$, où les $c_{i}$ sont les
+coefficients de $\psi$ ; les invariants de $\mathfrak{g}$ restreints à
+$\mathfrak{g}^{1}$ sont donc des polynômes en
+$x^{-\psi}\prod_{i}(x^{\alpha_{i}})^{c_{i}}$, qui s'annule dès qu'une
+coordonnée s'annule, d'où b). Et $t$ stabilise une droite du cas a) si et
+seulement si tous les $\alpha(t)$, $\alpha\in\Sigma'$, sont égaux à un même
+$\lambda$, ce qui force $\lambda^{1+\sum c_{i}}=\lambda^{h}=1$ et
+$t=K(\lambda)$.\footnote{Cette vérification est de l'édition ; elle établit
+aussi l'énoncé « à prouver » du feuillet 30. La page ajoute, à l'encre brune et
+en partie illisiblement, qu'une identification de $D$ à $D'$ dans la bonne
+classe est induite par un unique $t\in T$. Dans c), « loc. » est de lecture
+incertaine.}
+
+\pagerange{47}{47}
+\subsection*{(iv) Droites cycliques}
+
+Une \emph{droite cyclique} est une droite $D$ de $\mathfrak{g}$ qui, localement
+pour fppf, est propre de caractère $\chi_{1}$ sous un homomorphisme de Kostant
+$\mu_{h}\to G$ (et du cas a)). Les droites cycliques sont conjuguées. Si $D$
+est cyclique, son centralisateur connexe est un tore maximal $T'$, et son
+normalisateur est un sous-groupe de $N(T')$ contenant $T'$, image inverse
+d'un sous-groupe de $W'=N(T')/T'$ canoniquement isomorphe à $\mu_{h}$, dont un
+générateur correspond à un élément de Coxeter.\footnote{La page assortit
+l'énoncé sur le centralisateur d'une réserve, « (sous réserve que ce soit
+unique) », de lecture incertaine. Les mots « fini » (biffé) et « can.\ isom.\
+à » sont interlinéaires. Le reste du feuillet est blanc.}
+
+C'est, relevé dans $G$ et sur une base, le dernier corollaire des feuillets 1
+et 2 : le dossier se referme sur l'objet par lequel il s'était ouvert.
+
+\end{document}

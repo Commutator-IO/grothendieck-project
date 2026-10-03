@@ -1,0 +1,1010 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 122, pages 1-34.
+%
+% This is an INTERPRETATION, not a transcription. Everything the critical
+% apparatus carried moves into footnotes. In any dispute of substance the
+% transcription governs: whoever cites Grothendieck must cite batch-01.fr.tex
+% and batch-02.fr.tex.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-03 — first pass, unchecked against
+% the pages by a human. The folder was read whole: two batches, pages 1-20 and
+% 21-34, both transcribed. His pages are 2-16 (even), 19, 21-31 (odd), 33, 34;
+% the others are blank or typed leaves of other hands, passed by the
+% transcription and not described here.
+%
+% Notation fixed for the whole document.
+% — The pages' double-struck R is written R; R Gamma_! is written R Gamma_c.
+% — The dimension of the generic manifold of pages 2-10 is d (the pages write
+%   n); n is kept for the folder's own n of pages 19-33: W of dimension 2n+1,
+%   M (the Milnor fibre) of dimension 2n, W_0 of dimension 2n-1.
+% — The gluing identifications of page 12, written alpha, beta on the page,
+%   are a, b here: alpha, beta name the components of the restriction
+%   R Gamma(P) -> R Gamma(dP) from page 19 on, and that is the use kept.
+% — The components of the morphism of triangles of page 21, written
+%   (u_0, u_1, u_2) on the page, are (theta_0, theta_1, theta_2): u and u_1
+%   name the duality maps of pages 21 and 23.
+% — K = R Gamma(M) with its action of pi (the page's R(Gamma, pi)(M), K^.);
+%   L = R Gamma(W_0); L^triv with trivial action. The orientation sheaf
+%   (a script letter on the page, plain T on p. 2) is or_W. Tate twists are
+%   dropped in the topological reading and mentioned once (section on
+%   pp. 19-21).
+% — Lambda is taken to be a field, or a self-injective ring such as
+%   Z/l^nu; the pages identify cohomology of duals with duals of cohomology
+%   throughout, which needs it. Supplied, and said in the conventions.
+%
+% Substantive departures from the pages, each footnoted where it occurs:
+% — p. 6: Q = P - P-ring (sic) read as the closure of W - P; the term
+%   H^{i+1}(R, F (x) or) of the relative sequence corrected to H^i(R, ...)
+%   (Thom isomorphism in codimension 1).
+% — p. 14: the homotopy equivalence W - Q -> P holds for any manifold with
+%   boundary (collar); it is not what the triviality of dP means. The page's
+%   thirteen-vertex diagram is redrawn as the structure of the open book.
+% — p. 19 and 23: R Gamma(S^1)-factor written L(-1) on p. 19 and L[-1] on
+%   p. 23; both twist and shift belong (L(-1)[-1]). p. 21: Poincaré duality
+%   shift [2n] corrected to [-2n], as the page itself has it lower down.
+% — p. 21: the class of u lives in H^{2n}(pi, K (x)^L K), not merely in
+%   H^{2n}(K (x)^L K), if u is to be a map in D(Lambda[pi]).
+% — p. 25: « (c) transposées de (d) » — Verdier duality pairs (d) with (e)
+%   and makes (c) self-dual; the overwritten letters are noted, the true
+%   pairing stated.
+% — p. 27: the boxed sphere criterion needs W a closed connected orientable
+%   (2n+1)-manifold; supplied.
+% — p. 29: H^i(M) = 0 for i > n does not follow from H^i(W - W_0) = 0 for
+%   i > n+1 alone (Wang sequence); it is true (Andreotti-Frankel / affine
+%   Lefschetz), which is what the page's bracket « indépendant en fait »
+%   asserts.
+% — p. 31: with that bound, the « épim si i = n+1 » becomes an isomorphism,
+%   and the two outer terms of the boxed sequence vanish; the label « surj »
+%   on H^{n-1}(W_0) -> H^n(M)^vee is true only when u vanishes in the middle
+%   degree, and is flagged.
+% — p. 33: « H^i(V_s) = 0 si i != 0, n-1, n » is false for the link in degree
+%   2n-1 (the same page has H^{2n-1}(V_s) = Lambda); read as the statement for
+%   the Milnor fibre (p. 31), with the margin's V_xi; flagged as a doubt.
+%
+% What the folder announces and never establishes: the self-duality of the
+% triangles (« vérifier la commutation de R Gamma^pi à R Hom ») is asserted
+% and not checked on the pages; the sign of rho' = transpose of rho is left
+% with a question mark; the count of « 40, en fait 80 » exact sequences
+% breaks off on « mais »; page 34's example breaks off on « Q = ».
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{122}
+\pages{1}{34}
+\dating{[vers 1968-1971]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Point singulier isolé de la fibre : notes manuscrites (s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Ces feuillets cherchent ce qu'une petite sphère tracée autour d'un point
+singulier d'une courbe ou d'une surface permet de dire de ce point.
+
+Prenons l'exemple le plus simple. Dans l'espace des couples de nombres
+complexes $(z, w)$, l'équation $z^{2} + w^{3} = 0$ définit une courbe qui a un
+point singulier à l'origine : elle y forme une pointe. Entourons l'origine
+d'une petite sphère ; dans l'espace des couples complexes, qui a quatre
+dimensions réelles, cette sphère en a trois. La courbe la coupe selon un
+cercle tordu, qui fait un nœud de trèfle. Toute l'information sur la
+singularité est dans la façon dont ce nœud est posé dans la sphère.
+
+La découverte qui organise le sujet, et que ces pages tiennent pour acquise,
+est que le complémentaire du nœud est rangé comme un livre ouvert. Le nœud en
+est le dos ; les pages sont des surfaces qui s'appuient toutes sur le dos et
+qui, en tournant autour de lui, remplissent toute la sphère et reviennent à
+leur position de départ. Une page s'appelle aujourd'hui la \emph{fibre de
+Milnor}, et le tour complet, qui ramène chaque page sur elle-même mais pas
+point par point, la \emph{monodromie}. En dimension supérieure, c'est la même
+image : une sphère $W$ de dimension $2n+1$, un « nœud » $W_0$ de dimension
+$2n-1$, des pages $M$ de dimension $2n$.
+
+Ce que le dossier fait de cette image est de la cohomologie : une manière de
+compter les trous d'un espace, degré par degré. Les feuillets découpent la
+sphère en deux morceaux, un épais voisinage du dos et la réunion des pages, et
+écrivent toutes les suites exactes qui relient les trous des morceaux à ceux
+du tout. Puis ils remarquent que chacune de ces suites est en dualité avec une
+autre — à peu près comme, en algèbre linéaire, une application est en dualité
+avec sa transposée. Une seule application, notée $u$, porte tout ce qui n'est
+pas formel : c'est la forme d'intersection des cycles d'une page, qui dit
+comment deux trous de la page se croisent.
+
+La conclusion, quand $W$ est vraiment une sphère, est que presque tout est
+déterminé. La sphère n'ayant pas de trous, le nœud et les pages n'en ont qu'en
+quelques degrés, et dans les deux degrés du milieu une suite exacte de six
+termes, symétrique, relie les trous du nœud, ceux de la page et
+l'application $u$. C'est là que vit tout ce que la singularité a de
+particulier.
+
+Deux choses donnent à ces pages leur caractère. D'abord, tout y est dit deux
+fois : une fois pour des variétés différentiables, où l'on peut dessiner, et
+une fois, par un dictionnaire écrit sur une feuille de croquis, pour des
+schémas, où le cercle autour duquel tournent les pages devient un point
+générique et le tour de monodromie un groupe de Galois. Le dessin sert de
+modèle à ce qu'on ne peut pas dessiner. Ensuite, la méthode : avant de choisir,
+il recense — quarante suites exactes, « en fait 80 », et la phrase s'arrête
+sur « mais ». Le dernier feuillet change de sujet et note un défaut des
+conditions de finitude pour des systèmes de modules.
+
+Les noms à chercher ensuite : fibration de Milnor, livre ouvert, suite de
+Wang, suite de Gysin, dualité de Poincaré--Lefschetz, théorème de Lefschetz
+local, cycles évanescents.
+
+\keywords{Milnor fibration, Milnor fiber, open book decomposition, link of a singularity, isolated hypersurface singularity, monodromy, Poincaré-Lefschetz duality, Mayer-Vietoris sequence, Thom isomorphism, Gysin sequence, Wang sequence, intersection form, local Lefschetz theorem, affine Lefschetz theorem, cohomological purity, vanishing cycles, a-adic systems}
+\end{resume}
+
+\pagerange{1}{34}
+\section*{Le dossier, sa charpente et ses notations}
+
+Trente-quatre feuillets, dont dix-sept sont de sa main : les pages paires 2 à
+16, la page 19, les pages impaires 21 à 31, et les pages 33 et 34. Les autres
+sont blancs, ou sont des feuillets dactylographiés d'autres mains dont il a
+souvent réutilisé le verso ; la transcription les passe, et cette lecture
+aussi.\footnote{L'un d'eux est une annonce imprimée de l'Institut Henri
+Poincaré pour des conférences commençant le 25 avril 1968. Elle ne date pas
+ses notes, mais elle est compatible avec la datation « [vers 1968-1971] » de
+Montpellier, que l'on reprend telle quelle. Les pages ne sont pas numérotées de
+sa main ; l'ordre est celui de l'inventaire.}
+
+Le dossier se lit en cinq stations.
+
+\begin{itemize}
+\item \emph{Pages 2 à 10.} Préliminaires de topologie : une variété à bord, sa
+  dualité, et une variété coupée en deux morceaux le long d'une hypersurface ;
+  toutes les suites exactes qui en résultent, et leur appariement par dualité.
+\item \emph{Pages 12 à 16.} Le modèle : une variété recollée à partir de deux
+  fibrés le long de leur bord commun — un livre ouvert — et le dictionnaire qui
+  le relie à la situation algébrique d'un point singulier isolé de la fibre.
+\item \emph{Pages 19 à 25.} Les triangles distingués (a) à (e) dans la
+  catégorie dérivée, l'application de dualité $u$, et l'énoncé que ces
+  triangles sont autotransposés.
+\item \emph{Pages 25 à 33.} Le cas où $W$ est une sphère : suite de Gysin,
+  Lefschetz local, annulations, et la suite exacte des degrés du milieu ; puis
+  la même chose dite en termes de fibres générique et spéciale.
+\item \emph{Page 34.} Un autre sujet : les conditions de finitude pour les
+  systèmes inductifs $\mathfrak{a}$-adiques.
+\end{itemize}
+
+\textbf{Les objets.} $W$ est une variété compacte de dimension $2n+1$ — dans
+le bon cas une sphère —, $W_0 \subset W$ une sous-variété compacte de
+codimension $2$, $Q$ un voisinage tubulaire fermé de $W_0$, isomorphe à
+$W_0 \times D^{2}$, et $P$ l'adhérence de $W - Q$, de sorte que
+\[
+  W = P \cup Q, \qquad P \cap Q = \partial P = \partial Q \simeq W_0 \times S^{1},
+\]
+et que l'inclusion $P \subset W - W_0$ est une équivalence d'homotopie. Le
+morceau $P$ est fibré sur le cercle $S^{1}$, de fibre une variété à bord $M$
+de dimension $2n$, de bord $\partial M = W_0$. On note $\pi$ le groupe
+fondamental du cercle, qui agit sur la cohomologie de $M$ par monodromie, et
+\[
+  K = R\Gamma(M, \Lambda) \in D(\Lambda[\pi]), \qquad
+  L = R\Gamma(W_0, \Lambda) \in D(\Lambda),
+\]
+$L^{\mathrm{triv}}$ désignant $L$ muni de l'action triviale de $\pi$. Dans la
+situation algébrique que le modèle traduit, $W$ est le bord d'une petite boule
+autour du point singulier, $W_0$ son intersection avec la fibre spéciale (le
+\emph{link}), $M$ la fibre de Milnor.\footnote{Le dossier écrit
+$\mathbb{R}(\Gamma, \pi)(M)$ et $K^{\bullet}$ pour notre $K$, $L^{\bullet}$
+pour $L$, $\mathbb{R}\Gamma_{!}$ pour notre $R\Gamma_{c}$, et marque
+l'intérieur d'une variété à bord d'un petit rond ($\mathring{P}$,
+$\mathring{M}$), ce que l'on garde.}
+
+\textbf{Deux homonymies à ne pas confondre.} La lettre $n$ désigne aux pages 2
+à 10 la dimension d'une variété quelconque, et à partir de la page 19 l'entier
+tel que $\dim W = 2n+1$ ; on écrit $d$ pour la première. Les lettres $\alpha$,
+$\beta$ désignent page 12 deux identifications de recollement, et à partir de
+la page 19 les deux composantes de la restriction
+$R\Gamma(P) \to R\Gamma(\partial P)$ ; on garde ce second usage, qui est celui
+de tout le reste du dossier, et l'on écrit $a$, $b$ pour le premier.
+
+\textbf{Les coefficients.} $\Lambda$ est un anneau de coefficients, que l'on
+suppose être un corps, ou plus généralement un anneau auto-injectif comme
+$\mathbf{Z}/\ell^{\nu}$, et $(-)^{\vee} = R\mathrm{Hom}_{\Lambda}(-, \Lambda)$
+désigne le dual.\footnote{Hypothèse suppléée. Le dossier passe constamment de
+la dualité des complexes à celle des groupes de cohomologie,
+$H^{i}(K^{\vee}) = H^{-i}(K)^{\vee}$, ce qui demande que
+$\mathrm{Hom}(-, \Lambda)$ soit exact. Sur $\mathbf{Z}$ il faudrait ajouter des
+termes $\mathrm{Ext}^{1}$. Les cohomologies en jeu sont de type fini, les
+variétés étant compactes ; c'est ce que dit la marge de la page 21 : « $K$
+parfait relativement à $\Lambda$ ».} On suppose les variétés orientées quand
+il le faut ; c'est le cas de toutes celles qui viennent de la géométrie
+complexe.
+
+\pagerange{2}{4}
+\section*{Variétés à bord et dualité (pages 2 à 4)}
+
+Soit $P$ une variété topologique à bord, purement de dimension $d$, de bord
+$\partial P$ et d'intérieur $\mathring{P} = P - \partial P$, et $F$ un système
+local de $\Lambda$-modules de type fini. L'inclusion $\mathring{P} \to P$ est
+une équivalence d'homotopie, donc
+\[
+  H^{*}(P, F) \xrightarrow{\ \sim\ } H^{*}(\mathring{P}, F),
+  \qquad \text{c'est-à-dire} \qquad H^{*}_{\partial P}(P, F) = 0,
+\]
+et, en localisant, les faisceaux de cohomologie locale
+$\underline{H}^{*}_{\partial P}(F)$ sont nuls : au voisinage d'un point du
+bord, $P$ est un demi-espace. La suite exacte de la paire $(P, \partial P)$
+s'écrit
+\[
+  \cdots \to H^{i}_{c}(\mathring{P}, F) \to H^{i}(P, F) \to H^{i}(\partial P, F)
+  \to H^{i+1}_{c}(\mathring{P}, F) \to \cdots
+\]
+et la dualité de Poincaré sur la variété sans bord $\mathring{P}$ donne
+\[
+  H^{i}_{c}(\mathring{P}, F) \simeq
+  H^{d-i}(\mathring{P}, F^{\vee} \otimes \mathrm{or})^{\vee} \simeq
+  H^{d-i}(P, F^{\vee} \otimes \mathrm{or})^{\vee},
+\]
+où $\mathrm{or}$ est le faisceau d'orientation.\footnote{La page note $T$ le
+faisceau d'orientation et $\check{F}$ le système local dual. En marge : « si on
+travaille avec faisceaux loc. constants […], i.e. fibres de dim finie ». La
+page dit « paracompacte », le préfixe étant ajouté au-dessus de la ligne et
+entouré. Pour la suite on a besoin que $P$ soit \emph{compacte} : c'est ce qui
+rend $H^{i}_{c}(\mathring{P}) \simeq H^{i}(P, \partial P)$ et la cohomologie
+de type fini ; hypothèse suppléée.} On obtient ainsi un homomorphisme
+\[
+  \varphi : H^{d-i}(P, F^{\vee} \otimes \mathrm{or})^{\vee} \longrightarrow H^{i}(P, F),
+  \qquad \text{c'est-à-dire} \qquad
+  \varphi \in H^{i}(P, F) \otimes H^{d-i}(P, F^{\vee} \otimes \mathrm{or}),
+\]
+et si $\partial P = \emptyset$ c'est un isomorphisme : c'est la dualité de
+Poincaré pour $P$.
+
+Le reste de ces deux pages remplace le bord par un collier. Si
+$\widetilde{\partial P} \simeq \partial P \times [0, 1]$ est un épaississement
+du bord et $P' = \overline{P - \widetilde{\partial P}}$, alors $P - P'$ se
+rétracte sur $\partial P$, et l'excision $(P', \partial P') \to (P, P - P')$
+donne
+\[
+  H^{i}_{P'}(P, F) \simeq H^{i}(P, \partial P; F) \simeq H^{i}_{c}(\mathring{P}, F)
+  \simeq H^{i}_{c}(\mathring{P}', F).
+\]
+Autrement dit, la cohomologie à support compact de l'intérieur se lit aussi
+comme une cohomologie à support dans un compact $P'$ que l'on a éloigné du
+bord ; c'est la forme sous laquelle elle reviendra.\footnote{Tout le haut de
+la page 4 est barré ; on n'en retient que la conclusion, qui est reprise
+proprement au-dessous. Les « mod » des formules
+$H^{i}(P \bmod \partial P, F)$, qui désignent la cohomologie relative, sont
+des lectures douteuses.}
+
+\pagerange{6}{10}
+\section*{Une variété coupée en deux (pages 6 à 10)}
+
+Soit $W$ une variété compacte purement de dimension $d$, et $P \subset W$ une
+sous-variété à bord de même dimension, adhérence de son intérieur. Soit $Q$
+l'adhérence de $W - P$.\footnote{La page écrit $Q = P - \mathring{P}$, ce qui
+serait le bord de $P$ ; c'est un lapsus, et la suite de la page n'a de sens
+que pour l'adhérence du complémentaire.} Alors $Q$ est aussi une sous-variété à
+bord, et
+\[
+  W = P \cup Q, \qquad R := P \cap Q = \partial P = \partial Q, \qquad
+  W - R = \mathring{P} \amalg \mathring{Q},
+\]
+avec $R$ purement de dimension $d-1$.
+
+\subsection*{Les trois suites et leurs duales}
+
+\emph{La suite de $(W, R)$.} La suite de cohomologie à support dans le fermé
+$R$, jointe à l'isomorphisme de Thom en codimension $1$,
+$H^{i+1}_{R}(W, F) \simeq H^{i}(R, F \otimes \mathrm{or}_{R/W})$, s'écrit
+\[
+  \cdots \to H^{i}(W, F) \to H^{i}(P, F) \oplus H^{i}(Q, F)
+  \to H^{i}(R, F \otimes \mathrm{or}_{R/W}) \to H^{i+1}(W, F) \to \cdots
+\]
+puisque $H^{i}(W - R) = H^{i}(\mathring{P}) \oplus H^{i}(\mathring{Q}) =
+H^{i}(P) \oplus H^{i}(Q)$. L'orientation normale $\mathrm{or}_{R/W}$ est ici
+triviale, $R$ bordant $P$.\footnote{La page écrit le troisième terme
+$H^{i+1}(R, F \otimes \mathcal{T}_{R})$ ; l'isomorphisme de Thom en
+codimension $1$ abaisse le degré d'une unité, et le terme correct est
+$H^{i}(R, \ldots)$, ce qu'exige aussi la comparaison avec Mayer--Vietoris qui
+suit. La bulle en marge dit bien « faisceau d'orientation normal […] ici
+$\simeq \mathbf{Z}$ ».} Il conjecture — « n'est sans doute autre que » — que
+c'est la suite de Mayer--Vietoris du recouvrement $W = P \cup Q$, et c'est le
+cas, à la convention de signe près sur la flèche
+$H^{i}(P) \oplus H^{i}(Q) \to H^{i}(R)$. Sa forme à supports compacts,
+\[
+  \cdots \to H^{i}_{c}(\mathring{P}, F) \oplus H^{i}_{c}(\mathring{Q}, F)
+  \to H^{i}_{c}(W, F) \to H^{i}_{c}(R, F) \to \cdots,
+\]
+en est la transposée par dualité de Poincaré, puisque
+$H^{i}_{c}(\mathring{P}, F) \simeq H^{d-i}(P, F^{\vee} \otimes
+\mathrm{or}_{W})^{\vee}$ et de même pour $Q$.\footnote{La page écrit
+$H^{i}_{!}(W - T, F)$ pour $H^{i}_{c}(W - R, F)$ : la lettre $T$ y tient lieu
+de $R$, comme dans le tableau récapitulatif de la page 10.}
+
+\emph{La suite de $(W, P)$.} Si $\widetilde{P}$ est un petit épaississement de
+$P$ dans $W$, l'excision et la page 4 donnent
+$H^{i}_{P}(W, F) \simeq H^{i}_{P}(\widetilde{P}, F) \simeq
+H^{i}_{c}(\mathring{P}, F)$, et $H^{i}(W - P) = H^{i}(\mathring{Q}) \simeq
+H^{i}(Q)$. La suite de cohomologie à support dans $P$ devient donc
+\[
+  \cdots \to H^{i}_{c}(\mathring{P}, F) \to H^{i}(W, F) \to H^{i}(Q, F) \to \cdots,
+  \qquad H^{i}_{c}(\mathring{P}, F) \simeq H^{d-i}(P, F^{\vee} \otimes \mathrm{or}_{W})^{\vee},
+\]
+et symétriquement en échangeant $P$ et $Q$.
+
+\subsection*{Le tableau de la page 10}
+
+Les trois suites s'entrelacent autour de $H^{i}(W, F)$ en un diagramme en
+tresse : la suite de $(W, P)$, celle de $(W, Q)$ et celle de Mayer--Vietoris
+partagent deux à deux leurs termes.
+
+\begin{tikzcd}[column sep=tiny, row sep=small, nodes={font=\scriptsize}]
+ & H^{i-1}(R) \arrow[dl] \arrow[dr] & \\
+H^{i}_{c}(\mathring{P}) \simeq H^{d-i}(P)^{\vee} \arrow[r] & H^{i}(W) \arrow[dl] \arrow[dr] & H^{d-i}(Q)^{\vee} \simeq H^{i}_{c}(\mathring{Q}) \arrow[l] \\
+H^{i}(P) \arrow[r] & H^{i}(R) & H^{i}(Q) \arrow[l]
+\end{tikzcd}
+
+Les coefficients sont omis ; les termes duaux sont pris à
+coefficients $F^{\vee} \otimes \mathrm{or}_{W}$.\footnote{La page dessine
+l'hexagone sans pointe sur le trait de $H^{i-1}(R)$ vers le terme de gauche ;
+on l'oriente comme le cobord de la suite de $(Q, R)$, ce qu'il est.
+L'hexagone de la page 16 répète celui-ci, prolongé d'un cran vers
+$H^{i+1}(W)$.}
+
+Il en tire un tableau, qu'il appelle « Récapitulation ». Notons $S(W, P)$ la
+suite de $(W, P)$ ci-dessus, $S_{c}(W, P)$ sa forme à supports compacts et
+$MV$ la suite de Mayer--Vietoris. On a
+\[
+  \left.\begin{aligned}
+    \Phi &= S(W, P) \simeq S_{c}(W, Q) \\
+    \Phi' &= S(W, Q) \simeq S_{c}(W, P)
+  \end{aligned}\right\}\ \text{duales,}
+  \qquad
+  \left.\begin{aligned}
+    \Psi &= S(W, R) \simeq MV(W; P, Q) \\
+    \Psi' &= S_{c}(W, R) \simeq MV_{c}(W; P, Q)
+  \end{aligned}\right\}\ \text{duales.}
+\]
+Les identifications $S(W, P) \simeq S_{c}(W, Q)$ tiennent parce que $W$, $P$,
+$Q$ sont compacts. $\Psi$ fait intervenir $H(P)$, $H(Q)$, $H(R)$, $H(W)$ ;
+$\Phi$ fait intervenir $H(P)^{\vee}$, $H(Q)$, $H(W)$ ; $\Phi'$ fait intervenir
+$H(P)$, $H(Q)^{\vee}$, $H(W)$. Il les dispose en losange,
+$\Psi$ en haut, $\Psi'$ en bas, $\Phi$ et $\Phi'$ de part et
+d'autre.\footnote{Un bloc écrit dans l'autre sens de la feuille, sur la suite
+de $(W, Q)$, est barré ; il porte un « ? » sur l'isomorphisme
+$H^{i}_{Q}(W) \simeq H^{i}_{c}(W - P)$, qui est juste (c'est la page 8, avec
+$P$ et $Q$ échangés). Le tableau encadré qui précède la récapitulation dit la
+même chose sous une autre disposition ; les $R$ de sa première ligne sont des
+lectures douteuses.}
+
+\pagerange{12}{16}
+\section*{Le modèle : un livre ouvert (pages 12 à 16)}
+
+\subsection*{La construction}
+
+Soient $S$, $T$ deux variétés différentiables compactes, $P \to S$ un fibré de
+fibre une variété à bord $M$, et $Q \to T$ un fibré de fibre une variété à
+bord $N$. Alors $\partial P$ est fibré sur $S$ de fibre $\partial M$, et
+$\partial Q$ sur $T$ de fibre $\partial N$. On se donne des difféomorphismes
+\[
+  a : S \simeq \partial N, \qquad b : T \simeq \partial M
+\]
+et des trivialisations $\sigma : \partial P \simeq S \times \partial M$,
+$\tau : \partial Q \simeq T \times \partial N$.\footnote{La page note
+$\alpha$, $\beta$ ce que l'on note $a$, $b$ ; voir les conventions.} On en
+déduit
+\[
+  \partial P \simeq \partial N \times \partial M, \qquad
+  \partial Q \simeq \partial M \times \partial N,
+\]
+d'où, en échangeant les facteurs, un difféomorphisme
+$\varphi : \partial P \simeq \partial Q$, et $W$ est la variété obtenue en
+recollant $P$ et $Q$ le long de leurs bords via $\varphi$. Les inclusions
+\[
+  W - Q = P - \partial P \hookrightarrow P, \qquad
+  W - P = Q - \partial Q \hookrightarrow Q
+\]
+sont des équivalences d'homotopie.\footnote{La phrase de la page 14 est en
+partie illisible, et semble dire que c'est la trivialité de $\partial P$ qui
+« signifie » ces équivalences d'homotopie. Elles tiennent en fait pour toute
+variété à bord, par le théorème du collier ; ce que la trivialité des bords
+fournit est le difféomorphisme $\varphi$, donc le recollement lui-même.}
+
+Le cas qui sert est celui où $N = D^{2}$ est un disque, de bord $S = S^{1}$, et
+où $T = \partial M$. Alors $Q = T \times D^{2}$ est un voisinage tubulaire de
+$T$ (l'âme $T \times \{0\}$ étant notre $W_0$), $P$ est fibré sur le cercle de
+fibre $M$, et leur bord commun est
+\[
+  S^{1} \times T = \partial N \times \partial M = \partial P = \partial Q = P \cap Q .
+\]
+C'est la structure qu'on appelle aujourd'hui un \emph{livre ouvert} : $T$ est
+le dos (la reliure), les fibres de $P \to S^{1}$ sont les pages, et chacune a
+pour bord le dos.\footnote{Le nom est de Winkelnkemper (1973), postérieur à ces
+pages ; la chose, pour le bord d'une petite boule autour d'une singularité
+isolée d'hypersurface complexe, est le théorème de fibration de Milnor
+(\emph{Singular points of complex hypersurfaces}, 1968). Le dossier ne cite
+personne. Il pose le modèle sans démonstration : c'est un cadre, pas un
+théorème.}
+
+\begin{tikzcd}[column sep=small, row sep=small]
+M \arrow[r, hook] & P \arrow[d] & S^{1} \times T \arrow[l, hook'] \arrow[r, hook] \arrow[dl] \arrow[dr] & Q \arrow[d] & N \arrow[l, hook'] \\
+ & S = S^{1} & & T = \partial M &
+\end{tikzcd}
+
+Les flèches horizontales sont les inclusions d'une fibre et du bord
+commun ; les flèches obliques sont les deux projections du produit
+$S^{1} \times T$.\footnote{Le diagramme de la page 14 a treize sommets : outre
+ceux d'ici, $W$ (avec les inclusions de $P$ et $Q$), les points-bases $s$, $t$
+et $(s, t)$ des bases, et des copies de $\partial N = S^{1}$ et de
+$\partial M = T$ placées à côté de $N$ et de $M$. Plusieurs de ses têtes de
+flèche sont douteuses ; on n'en reproduit que la structure, qui ne dépend pas
+d'elles. La page écrit « $N = D_{1} \sim e$ », lecture douteuse : $N$ est un
+disque, contractile ($e$ est le point), et c'est un disque de dimension $2$
+puisque son bord est un cercle.}
+
+\subsection*{Le dictionnaire (page 16)}
+
+La page 16 est une feuille de croquis. Elle porte la clef de tout le dossier :
+la correspondance entre les morceaux du modèle et les objets de la géométrie
+algébrique.
+\[
+  \begin{array}{c|cccc|cccc}
+    \text{modèle} & W & P & Q & R & M & N & T = \partial M & S = \partial N \\ \hline
+    \text{géométrie} & V' & V_{\eta} & V'_{s} & V'_{s} \times \eta
+      & X'_{\bar\eta} & e & V'_{s} & \eta \sim S^{1}
+  \end{array}
+\]
+Ici $V'$ est un voisinage épointé du point singulier, $V'_{s}$ sa trace sur la
+fibre spéciale et $V_{\eta}$ sa trace sur la fibre générique ; le point
+générique $\eta$ du disque épointé joue le rôle du cercle, et la fibre
+géométrique générique celui de la page du livre. Le groupe $\pi$ de la page
+19 est, dans cette lecture, le groupe d'inertie, qui agit sur la fibre de
+Milnor par monodromie.\footnote{La page écrit $X'_{\eta}$ sous $P$ et à nouveau
+sous $M$. Le modèle exige que ce soient deux objets différents : $P$ est fibré
+sur le cercle, $M$ est sa fibre. On lit le second comme la fibre
+\emph{géométrique} générique $X'_{\bar\eta}$, ce que la page ne marque pas.
+Elle écrit aussi $T = \dot{M}$, $S = \dot{N}$, le point marquant le bord ; le
+$N$ de $\dot{N}$ peut se lire $M$.}
+
+La feuille porte encore deux diagrammes en perspective, en forme de cube, l'un
+sur les objets du modèle, l'autre sur leurs correspondants, qu'on ne reproduit
+pas ; un second exemplaire de l'hexagone de la page 10, prolongé jusqu'à
+$H^{i+1}(W)$ ; l'accouplement
+$H^{i}(Q) \times H^{d-i-1}(P) \to H^{d-1}(R) \simeq \Lambda$ ; et un
+dénombrement. Les dix parties à trois éléments de $\{1, \ldots, 5\}$ sont
+écrites en colonnes, des sommes partielles sont encadrées — $20$, $14$, $2$,
+$4$ — et le total est entouré : « 40 suites exactes de coh. relative et autant
+pour l'homologie… En fait 80 suites exactes, mais ». La phrase s'arrête
+là.\footnote{La page écrit
+$\binom{5}{2} = \frac{5.4.3}{12.} = 10$ ; le résultat $10$ est juste
+($\binom{5}{2} = \binom{5}{3}$, et c'est bien dix triplets qui sont listés),
+le calcul intermédiaire ne l'est pas tel qu'écrit. On ne reconstitue pas ce qui
+est dénombré au-delà de ce que les inscriptions disent.}
+
+\pagerange{19}{21}
+\section*{Les triangles de la fibre de Milnor (pages 19 à 21)}
+
+On revient aux notations des conventions : $\dim W = 2n+1$, $W_0 = T$ le dos,
+$M$ la page, $K = R\Gamma(M)$ dans $D(\Lambda[\pi])$, $L = R\Gamma(W_0)$. Toutes
+les identifications ci-dessous sont celles du modèle : $R\Gamma(P) \simeq
+R\Gamma(W - W_0)$, $R\Gamma(Q) \simeq R\Gamma(W_0)$, et
+$R\Gamma_{c}(\mathring{P}) \simeq R\Gamma_{c}(W - W_0)$.\footnote{La dernière
+tient parce que $(W - W_0) - \mathring{P} = Q - W_0$ est isomorphe à
+$\partial Q \times {]0, 1]}$, dont la cohomologie à support compact est
+nulle.} La page 19 écrit quatre triangles distingués, la page 21 un
+cinquième.\footnote{Sur la page les triangles sont dessinés, deux de leurs
+côtés en pointillé, et le sommet qui reçoit la flèche de degré $1$ est mis
+entre crochets et entouré au crayon. On les écrit ici en ligne.}
+
+\textbf{(a)}, dans $D(\Lambda[\pi])$ : la suite de la paire $(M, \partial M)$,
+avec son action de monodromie,
+\[
+  R\Gamma_{c}(\mathring{M}) \longrightarrow K \xrightarrow{\ \rho\ } L^{\mathrm{triv}}
+  \xrightarrow{\ +1\ } .
+\]
+L'action sur $L$ est triviale parce que la monodromie peut être choisie égale à
+l'identité près du bord de $M$ — c'est la trivialisation $\sigma$ de la page
+12. La flèche $\rho$ est la restriction au bord, « compatible avec cup ».
+
+\textbf{(b)} : on applique le foncteur des invariants dérivés
+$R\Gamma^{\pi} = R\mathrm{Hom}_{\Lambda[\pi]}(\Lambda, -)$. Comme $P$ est fibré
+sur le cercle de fibre $M$, $R\Gamma^{\pi}(K) \simeq R\Gamma(P)$ ; et
+\[
+  R\Gamma^{\pi}(L^{\mathrm{triv}}) \simeq R\Gamma(W_0 \times S^{1})
+  \simeq L \otimes^{\mathbf{L}}_{\Lambda} R\Gamma(S^{1}) \simeq L \oplus L[-1] .
+\]
+On obtient la suite de la paire $(P, \partial P)$, avec
+$\partial P = S^{1} \times W_0$ :
+\[
+  R\Gamma_{c}(\mathring{P}) \longrightarrow R\Gamma(P)
+  \xrightarrow{\ (\alpha, \beta)\ } L \oplus L[-1] \xrightarrow{\ +1\ } .
+\]
+La composante $\alpha : R\Gamma(P) \to L$ est la restriction à une copie
+$W_0 \times \{\mathrm{pt}\}$ du bord, compatible aux cup-produits. La
+composante $\beta : R\Gamma(W - W_0) \to L[-1]$ s'identifie en cohomologie,
+dit la marge, au cobord de la suite de cohomologie relative qui relie
+$H^{i}(W - W_0)$ et $H^{i-1}(W_0)$ : c'est le \emph{résidu} le long de
+$W_0$.\footnote{La page 19 écrit le second facteur $R\Gamma(W_0)(-1)$, la page
+23 $L^{\bullet}[-1]$. Les deux appartiennent à la formule : dans le cadre
+étale que le modèle traduit, $R\Gamma(\pi, \Lambda) \simeq \Lambda \oplus
+\Lambda(-1)[-1]$ pour la partie modérée de l'inertie, et le facteur est
+$L(-1)[-1]$ ; dans le modèle topologique la torsion de Tate est invisible. On
+l'omet désormais, comme dans l'isomorphisme de Thom
+$R\Gamma_{W_0}(W) \simeq L(-1)[-2]$ qui suit. La décomposition
+$R\Gamma(S^{1}) \simeq \Lambda \oplus \Lambda[-1]$ est légitime : un complexe
+dont la cohomologie est $\Lambda$ en degrés $0$ et $1$ est scindé, l'obstruction
+vivant dans $\mathrm{Ext}^{2}_{\Lambda}(\Lambda, \Lambda) = 0$.}
+
+\textbf{(c)} : on applique à (a) le foncteur d'oubli
+$D(\Lambda[\pi]) \to D(\Lambda)$, et l'on retrouve la suite de $(M, \partial M)$
+sans action :
+\[
+  R\Gamma_{c}(\mathring{M}) \longrightarrow R\Gamma(M)
+  \longrightarrow R\Gamma(W_0) \xrightarrow{\ +1\ } .
+\]
+\footnote{L'exposant que porte ici $K$ pour marquer l'oubli de l'action est lu
+« $\omega$ » (ou « w ») à la page 19 et « ens » au triangle (c') de la page 23 ;
+les deux lectures sont douteuses et l'on ne tranche pas. On écrit $K$ pour
+l'objet de $D(\Lambda[\pi])$ et $R\Gamma(M)$ pour son image dans
+$D(\Lambda)$.}
+
+\textbf{(d)} : la suite de cohomologie relative de $(W, W - W_0)$ — « au choix
+pour $(W, P)$ » —, jointe à l'isomorphisme de Thom
+$R\Gamma_{W_0}(W) \simeq R\Gamma(W_0)[-2]$ :
+\[
+  R\Gamma(W_0)[-2] \longrightarrow R\Gamma(W) \longrightarrow R\Gamma(W - W_0)
+  \xrightarrow{\ \beta\ } R\Gamma(W_0)[-1] .
+\]
+La flèche de degré $1$ de ce triangle est, note la marge, « le $\beta$ de
+(b) ».\footnote{La page écrit le sommet $R\Gamma_{!}(W)$ ; $W$ étant compacte,
+c'est $R\Gamma(W)$. Elle fait aboutir $\beta$ au sommet $R\Gamma(W_0)[-2]$, le
+décalage d'une unité étant celui de la flèche de degré $1$ ; on l'écrit
+explicitement.} C'est la suite de Gysin.
+
+\textbf{(e)} (page 21) : la suite de la paire $(W, Q)$, par excision
+$H(W, Q) \simeq H_{c}(\mathring{P})$ :
+\[
+  R\Gamma_{c}(\mathring{P}) \longrightarrow R\Gamma(W)
+  \xrightarrow{\ \rho_1\ } R\Gamma(Q) \simeq R\Gamma(W_0) \xrightarrow{\ +1\ } .
+\]
+\footnote{La page étiquette $\beta'$ la flèche de degré $1$ de (e) ; la même
+lettre désigne à la page 23 une autre flèche, celle de (b'). Le long de
+$\rho_1$ : « compatible avec […] », illisible.}
+
+Les restrictions $W \to P$ et $Q \to \partial P$ définissent un morphisme de
+triangles $(\theta_0, \theta_1, \theta_2)$ de (e) dans (b) : $\theta_0$ est
+l'identité de $R\Gamma_{c}(\mathring{P})$ (c'est l'isomorphisme $u_0$ que la
+page dit induit), $\theta_1 = \rho_0 : R\Gamma(W) \to R\Gamma(P)$ est la
+restriction, et $\theta_2 : L \to L \oplus L[-1]$ est l'inclusion du premier
+facteur, image inverse par la projection $W_0 \times S^{1} \to W_0$. D'où la
+relation
+\[
+  \rho_1 = \alpha \circ \rho_0
+\]
+que la page note en marge.\footnote{La page écrit le morphisme
+$(u_0, u_1, u_2)$, avec « $u_1 = \rho_0$, $u_2 = \mathrm{id}_1$ » ; on lit
+$\mathrm{id}_1$ comme l'identité sur le premier facteur. On renomme ces
+composantes, $u$ et $u_1$ désignant plus loin d'autres flèches. La
+justification de « $u_0$ isomorphisme » est illisible ; c'est l'excision. Une
+note en oblique dans la marge gauche, qui mentionne (a'), est presque
+entièrement illisible.}
+
+\pagerange{21}{25}
+\section*{Dualité : l'application $u$ et les triangles autotransposés (pages 21 à 25)}
+
+\subsection*{L'application $u$}
+
+Supposons $W$ non singulière, c'est-à-dire variété topologique ; comme $W$ est
+déjà une variété au voisinage de $W_0$, cela revient à demander que
+$\mathring{P}$, ou $\mathring{M}$, le soit.\footnote{Dans la situation
+algébrique, $W$ est toujours lisse près de $W_0$ : la fibre spéciale n'ayant
+qu'un point singulier isolé, le morphisme est lisse le long de ses autres
+points. La non-singularité de $W$ est donc une hypothèse sur l'espace total au
+point singulier.} La dualité de Poincaré sur la variété orientée $\mathring{M}$
+de dimension $2n$ donne, de façon équivariante,
+\[
+  R\Gamma_{c}(\mathring{M}) \simeq K^{\vee}[-2n]
+  \qquad \text{dans } D(\Lambda[\pi]),
+\]
+où $\pi$ agit sur $K^{\vee}$ par la contragrédiente.\footnote{La page écrit
+d'abord $[2n]$, crochet repassé, puis $[-2n]$ plus bas ; c'est $[-2n]$ qui est
+juste : $H^{i}(K^{\vee}[-2n]) = H^{2n-i}(M)^{\vee} \simeq
+H^{i}_{c}(\mathring{M})$. Dans le cadre étale s'ajoute une torsion $(n)$.} La
+première flèche de (a) devient alors
+\[
+  \boxed{\ u : K^{\vee}[-2n] \longrightarrow K \quad \text{dans } D(\Lambda[\pi])\ }
+\]
+et (a) devient le triangle
+\[
+  \text{(a')} \qquad K^{\vee}[-2n] \xrightarrow{\ u\ } K \xrightarrow{\ \rho\ }
+  L^{\mathrm{triv}} \xrightarrow{\ \rho'\ } K^{\vee}[-2n+1] .
+\]
+En cohomologie, $u$ est l'application $H^{i}_{c}(\mathring{M}) \to H^{i}(M)$
+qui oublie le support ; en degré $n$ c'est la \emph{forme d'intersection} de
+la fibre de Milnor.
+
+Comme $K$ est parfait sur $\Lambda$, une flèche $K^{\vee}[-2n] \to K$ est la
+même chose qu'une classe de degré $2n$ de $K \otimes^{\mathbf{L}}_{\Lambda} K$ ;
+pour qu'elle soit une flèche de $D(\Lambda[\pi])$, la classe doit être prise
+dans la cohomologie de $\pi$ :
+\[
+  u \in H^{2n}\bigl(\pi,\ K \otimes^{\mathbf{L}}_{\Lambda} K\bigr) =
+  \mathrm{Hom}_{D(\Lambda[\pi])}(K^{\vee}[-2n], K).
+\]
+\footnote{La page écrit $\xi \in H^{2n}(K \otimes^{\mathbf{L}}_{\Lambda} K)$,
+sans $\pi$, et la lettre $\xi$ est douteuse. Telle quelle, c'est la classe de
+l'application sous-jacente dans $D(\Lambda)$ ; l'application de $D(\Lambda[\pi])$
+en est un relèvement, et c'est lui que le reste du dossier utilise.}
+
+Il affirme que $\rho$ et $\rho'$ sont transposés l'une de l'autre, avec un
+« signe ? », c'est-à-dire que le triangle (a') est
+\emph{autotransposé} : son dual, décalé de $-2n$, est le même triangle tourné.
+C'est la dualité de Poincaré--Lefschetz pour la variété à bord $M$ : elle
+échange $R\Gamma(M)$ et $R\Gamma_{c}(\mathring{M})$, et, $\partial M = W_0$
+étant une variété fermée de dimension $2n-1$, elle identifie $L^{\vee}[-2n]$ à
+$L[-1]$. Le transposé de $\rho : K \to L$ est alors une flèche
+$L[-1] \to K^{\vee}[-2n]$, c'est-à-dire $\rho'$.\footnote{Le signe que la page
+interroge dépend des conventions de rotation des triangles et de
+l'identification $L^{\vee} \simeq L[2n-1]$ ; on ne le fixe pas. Le même
+phénomène donne, sur le degré moyen, ${}^{t}u = (-1)^{n} u$ : la forme
+d'intersection d'une variété de dimension $2n$ est symétrique pour $n$ pair,
+alternée pour $n$ impair.}
+
+\subsection*{Les triangles (c') et (b')}
+
+Le foncteur d'oubli donne
+\[
+  \text{(c')} \qquad R\Gamma(M)^{\vee}[-2n] \longrightarrow R\Gamma(M)
+  \longrightarrow R\Gamma(W_0) \xrightarrow{\ +1\ },
+\]
+« encore un triangle autotransposé ». Le foncteur $R\Gamma^{\pi}$ donne
+\[
+  \text{(b')} \qquad R\Gamma(P)^{\vee}[-2n-1] \xrightarrow{\ u_1\ }
+  R\Gamma(P) \xrightarrow{\ (\alpha, \beta)\ } L \oplus L[-1]
+  \xrightarrow{\ (\alpha', \beta')\ } ,
+\]
+autotransposé lui aussi, avec $R\Gamma(P) \simeq R\Gamma(W - W_0)$ et
+$R\Gamma(P)^{\vee}[-2n-1] \simeq R\Gamma_{c}(\mathring{P})$ : c'est la
+dualité de Poincaré--Lefschetz pour la variété à bord $P$, de dimension
+$2n+1$.
+
+Le décalage $-2n-1$ et non $-2n$ est ce que la marge encadrée demande de
+vérifier : « la commutation de $R\Gamma^{\pi}$ à $R\mathrm{Hom}_{\Lambda}(-,
+\Lambda)$ ». Elle a lieu avec un décalage : pour $\pi = \mathbf{Z}$, groupe de
+dualité de Poincaré de dimension $1$ (c'est la dualité sur le cercle),
+\[
+  R\Gamma^{\pi}(K^{\vee}) \simeq R\Gamma^{\pi}(K)^{\vee}[-1] .
+\]
+\footnote{Vérification suppléée : la page la demande et ne la fait pas. Dans le
+cadre étale, la même formule vaut pour la partie modérée de l'inertie, avec
+une torsion $(-1)$. Après (b') la page écrit « [exprimer comment ?] » : c'est
+cette commutation qui l'exprime.}
+
+\subsection*{Les données nouvelles}
+
+Il en tire deux structures nouvelles. La première est
+\[
+  \boxed{\ u_1 : R\Gamma(W - W_0)^{\vee}[-2n-1] \longrightarrow R\Gamma(W - W_0)\ },
+\]
+l'image de $u$ par $R\Gamma^{\pi}$. La seconde est une paire d'accouplements,
+obtenus en transposant $\alpha$ et $\beta$ et en identifiant
+$L^{\vee} \simeq L[2n-1]$ par la dualité de Poincaré sur $W_0$ :
+\[
+  \boxed{\begin{aligned}
+    \lambda &: R\Gamma(W_0) \otimes R\Gamma(W - W_0) \longrightarrow \Lambda[-2n], \\
+    \mu &: R\Gamma(W_0) \otimes R\Gamma(W - W_0) \longrightarrow \Lambda[-(2n-1)],
+  \end{aligned}}
+\]
+soit, en cohomologie,
+\[
+  \lambda : H^{2n-i}(W_0) \times H^{i}(W - W_0) \to \Lambda, \qquad
+  \mu : H^{2n-1-i}(W_0) \times H^{i}(W - W_0) \to \Lambda .
+\]
+Par la dualité de Poincaré sur $W_0$, $H^{2n-i}(W_0)^{\vee} \simeq
+H^{i-1}(W_0)$ et $H^{2n-1-i}(W_0)^{\vee} \simeq H^{i}(W_0)$, de sorte que ces
+accouplements sont des applications
+\[
+  \lambda^{i} : H^{i}(W - W_0) \to H^{i-1}(W_0), \qquad
+  \mu^{i} : H^{i}(W - W_0) \to H^{i}(W_0),
+\]
+et il le dit : « je dis que c'est $\beta$ », « je dis que c'est $\alpha$ ».
+C'est bien ce qu'ils sont, par construction.\footnote{La page écrit les
+accouplements avec un $\times$ ; ils sont définis sur le produit tensoriel
+dérivé. Les exposants des deux lignes en cohomologie sont récrits par-dessus
+d'autres, illisibles ; ceux que l'on donne sont ceux que la page porte en
+dernier, et ce sont ceux qu'impose le degré des accouplements.}
+
+La page 25 résume : on a deux données remarquables, $u$ et l'accouplement
+\[
+  \boxed{\ R\Gamma(W_0)^{\mathrm{triv}} \otimes K \longrightarrow \Lambda[-(2n-1)]\ },
+\]
+qui n'est autre que $\rho$ : par dualité de $W_0$, une flèche
+$K \to L^{\vee}[-(2n-1)] \simeq L^{\mathrm{triv}}$ est la même chose qu'un tel
+accouplement. Et « enfin, les triangles (a) et (b) sont transposés », chacun
+étant son propre transposé.\footnote{La phrase dit « transposés », sans
+préciser ; (a) et (b) vivent dans des catégories différentes et en dimensions
+différentes ($2n$ et $2n+1$), et ne peuvent être transposés l'un de l'autre. On
+la lit, comme les triangles (c') et (b') de la page 23, au sens de
+l'autotransposition.}
+
+\subsection*{Sans hypothèse de non-singularité}
+
+Une remarque (« NB ») étend tout cela : avec des coefficients généraux,
+localement constants au voisinage de $W_0$, et les coefficients « duaux » de
+l'autre côté, on n'a plus besoin que $W$ soit non singulière. La dualité de
+Verdier remplace celle de Poincaré, et elle apparie les triangles comme suit :
+(a), (b) et (c) sont chacun transposés d'un triangle du même type, et (d) est
+transposé de (e). En effet, le dual de (d) décalé de $-(2n+1)$ est, terme à
+terme,
+\[
+  R\Gamma_{c}(W - W_0) \longrightarrow R\Gamma(W) \longrightarrow R\Gamma(W_0)
+  \xrightarrow{\ +1\ },
+\]
+qui est (e).\footnote{La page écrit : « les suites exactes du type (a), (b),
+(e) sont transposées de suites exactes du même type, et les suites exactes du
+type (c) sont transposées de celles du type (d) ». La troisième lettre de la
+première liste est surchargée et « (e) » est une lecture douteuse. Telle que
+transcrite, l'affirmation ne tient pas : (c) est la suite d'une variété à bord
+de dimension $2n$, son dual est une suite du même type, tandis que le dual de
+(d) est (e), comme on vient de le voir. L'appariement que l'on donne est celui
+qui est vrai ; il est compatible avec la lecture « (a), (b), (c) … (e) … (d) »
+que les surcharges laissent ouverte.}
+
+\pagerange{25}{31}
+\section*{Quand $W$ est une sphère (pages 25 à 31)}
+
+\subsection*{La suite de Gysin}
+
+Supposons que $W$ soit une sphère cohomologique de dimension $2n+1$ :
+$H^{i}(W) = \Lambda$ pour $i = 0, 2n+1$, et $0$ sinon. La suite de Gysin (d),
+\[
+  \cdots \to H^{i-2}(W_0) \to H^{i}(W) \to H^{i}(W - W_0)
+  \xrightarrow{\ \beta\ } H^{i-1}(W_0) \to H^{i+1}(W) \to \cdots,
+\]
+donne aussitôt :
+
+\begin{itemize}
+\item[a)] si $i \neq 0, 2n$, le résidu $\beta : H^{i}(W - W_0) \to
+  H^{i-1}(W_0)$ est un isomorphisme ;\footnote{Il écrit d'abord la condition
+  « $i, i+1 \neq 0, 2n+1$ », puis : « en fait, comme on sait (b), il suffit que
+  $i \neq 0, 2n$ ». Pour $i = 2n+1$ les deux membres sont nuls, $P$ étant une
+  variété compacte à bord non vide de dimension $2n+1$ et $W_0$ de dimension
+  $2n-1$.}
+\item[b)] dans les degrés du haut, la portion
+  \[
+    0 = H^{2n}(W) \to H^{2n}(W - W_0) \hookrightarrow H^{2n-1}(W_0)
+    \twoheadrightarrow H^{2n+1}(W) = \Lambda \to H^{2n+1}(W - W_0) = 0 ,
+  \]
+  avec $H^{2n}(W_0) = 0$. Si $W_0$ est connexe, $H^{2n-1}(W_0) \simeq \Lambda$
+  par dualité, et donc $H^{2n}(W - W_0) = 0$ et $H^{2n-1}(W_0) \simeq
+  H^{2n+1}(W)$.\footnote{La bulle de la page dit « si $W_0$ est connexe, [ce
+  qui est] le cas si $n \geq 2$ », et une autre renvoie à « Lefschetz
+  [affine ?] local plus bas » : la connexité de $W_0$ pour $n \geq 2$ résulte
+  en effet de l'isomorphisme $H^{0}(W) \simeq H^{0}(W_0)$ du théorème de
+  Lefschetz local ci-dessous.}
+\end{itemize}
+
+La réciproque est encadrée en marge, et elle est juste : \emph{si $W$
+est une variété fermée connexe orientable de dimension $2n+1$, c'est une sphère
+cohomologique si et seulement si $\beta : H^{i}(W - W_0) \to H^{i-1}(W_0)$ est
+un isomorphisme pour $i \neq 0, 2n$ et injectif pour $i = 2n$} ; quand $W_0$
+est connexe, la dernière condition équivaut à $H^{2n}(W - W_0) =
+0$.\footnote{Hypothèse suppléée : l'encadré ne dit pas que $W$ est une variété
+fermée connexe. Sans elle, les conditions sur $\beta$ ne donnent pas
+$H^{0}(W) = H^{2n+1}(W) = \Lambda$ ; avec elle, la suite de Gysin donne
+l'annulation de $H^{i}(W)$ pour $1 \leq i \leq 2n$, et la dualité fait le
+reste. L'encadré ajoute : « si $n \geq 2$ et $W$ non singulière, il faut que
+$H^{2n}(W - W_0) = 0$, $W_0$ connexe ». La page 33 reprend le critère sous
+une forme complète, avec les conditions en degrés $0$ et $2n$.}
+
+\subsection*{Lefschetz local}
+
+Supposons l'espace total $X$ régulier au point singulier $x$ de la fibre. Alors
+le \emph{théorème de Lefschetz local} donne
+\[
+  H^{i}(W) \longrightarrow H^{i}(W_0) \quad
+  \text{isomorphisme pour } i \leq n-2, \ \text{injectif pour } i = n-1,
+\]
+et, transposé par les dualités de $W$ (dimension $2n+1$) et de $W_0$
+(dimension $2n-1$), il devient l'énoncé sur l'application de Gysin
+\[
+  H^{i}(W_0) \longrightarrow H^{i+2}(W) \quad
+  \text{isomorphisme pour } i \geq n+1, \ \text{surjectif pour } i = n .
+\]
+\footnote{Les bornes des deux énoncés sont récrites par-dessus d'autres
+chiffres, et la seconde, $n$, est douteuse ; celles que l'on donne sont celles
+que la dualité impose ($j \leq n-2$ équivaut à $i = 2n-1-j \geq n+1$). La page
+écrit $H^{i}_{!}(W_0)$ ; $W_0$ est compacte. Topologiquement, c'est le
+théorème de Milnor : le link d'une singularité isolée d'hypersurface de
+dimension $n$ est $(n-2)$-connexe. Dans le cadre étale, c'est la forme
+cohomologique des énoncés de Lefschetz locaux de SGA~2, et le fait que $W$
+soit une sphère cohomologique quand $X$ est régulier est la pureté
+cohomologique — connue pour $X$ lisse sur un corps (SGA~4, XVI), démontrée en
+général par Gabber bien plus tard. La page ne cite aucun de ces textes.}
+
+Donc la cohomologie de $W$ détermine celle de $W_0$, sauf dans les deux degrés
+$n-1$ et $n$ — « complémentaires, i.e. où les cohomologies sont duales pour
+$W_0$ ». Et l'on a
+\[
+  H^{i}(W - W_0) = H^{i}(P) = 0 \qquad \text{pour } i > n+1 .
+\]
+
+\subsection*{Les annulations}
+
+Revenant au cas où $W$ est une sphère, on trouve
+\[
+  H^{i}(W_0) = 0 \quad \text{si } i \neq 0, n-1, n, 2n-1, \qquad
+  H^{i}(W - W_0) = 0 \quad \text{si } i \neq 0, 1, n, n+1,
+\]
+la première par Lefschetz local et sa transposée, la seconde par le résidu
+$\beta$.\footnote{La page écrit la seconde annulation « si $i > n+1$ » puis,
+entre crochets, « en fait si $i \neq 0, 1, n, n+1$ » ; c'est la forme
+crochetée que l'on retient, qui contient l'autre. Le degré $2n$, où $\beta$
+n'est pas un isomorphisme, est couvert par b) ci-dessus, pour $n \geq 2$.} La
+suite de Gysin est alors triviale, sauf les morceaux
+\[
+  \begin{aligned}
+    &0 \to H^{0}(W) \to H^{0}(W - W_0) \to 0, \qquad
+     0 \to H^{1}(W - W_0) \to H^{0}(W_0) \to 0, \\
+    &0 \to H^{n}(W - W_0) \to H^{n-1}(W_0) \to 0, \qquad
+     0 \to H^{n+1}(W - W_0) \to H^{n}(W_0) \to 0 \quad (n \neq 1), \\
+    &0 \to H^{2n-1}(W_0) \to H^{2n+1}(W) \to 0,
+  \end{aligned}
+\]
+et, pour $n = 1$, où les degrés $n$ et $2n-1$ se confondent, le dernier
+devient
+$0 \to H^{2}(W - W_0) \to H^{1}(W_0) \to H^{3}(W) \simeq \Lambda \to 0$.
+Pour $n = 1$, $W_0$ est un entrelacs de la sphère de dimension $3$, qui peut
+avoir plusieurs composantes : c'est l'exemple du nœud de trèfle.
+
+Il en déduit, encadré,
+\[
+  \boxed{\ H^{i}(M, \Lambda) = 0 \quad \text{pour } i > n\ }
+\]
+et ajoute, entre crochets, que c'est « indépendant en fait » de la
+non-singularité de $W$ et de $W_0$. L'énoncé est vrai, et c'est la remarque
+entre crochets qui le justifie : $M$ a le type d'homotopie d'un complexe
+cellulaire de dimension $n$.\footnote{La borne encadrée est surchargée ; $n$
+est douteux, $n+1$ possible. C'est $n$ qui est vrai. Il ne découle pas de la
+seule annulation de $H^{i}(W - W_0)$ pour $i > n+1$ : par la suite de Wang
+$H^{i}(P) \to H^{i}(M) \xrightarrow{\gamma - 1} H^{i}(M) \to H^{i+1}(P)$, où
+$\gamma$ est la monodromie, celle-ci donne seulement que $\gamma - 1$ est
+bijectif sur $H^{i}(M)$ pour $i > n$, ce qui n'interdit pas $H^{i}(M) \neq 0$.
+L'annulation elle-même est un théorème de type Lefschetz affine : topologiquement,
+Andreotti--Frankel et Milnor ($M$ est une variété de Stein de dimension
+complexe $n$) ; dans le cadre étale, le théorème de Lefschetz affine d'Artin
+(SGA~4, XIV) et ses variantes. C'est d'ailleurs le mot que porte, avec un
+point d'interrogation, la marge de la page 27. On remarquera que la page 31
+est écrite comme si l'on ne savait que l'annulation pour $i > n+1$.}
+
+\subsection*{La suite exacte des degrés du milieu}
+
+Lorsque $W$ est non singulière, le triangle (c') donne la suite exacte longue
+\[
+  \cdots \to H^{2n-i}(M)^{\vee} \xrightarrow{\ u\ } H^{i}(M) \to H^{i}(W_0)
+  \to H^{2n-i-1}(M)^{\vee} \xrightarrow{\ u\ } H^{i+1}(M) \to H^{i+1}(W_0) \to \cdots
+\]
+Avec l'annulation précédente, elle donne des isomorphismes en dehors du milieu :
+\[
+  \begin{aligned}
+    H^{i}(M) &\xrightarrow{\ \sim\ } H^{i}(W_0) && \text{pour } i \leq n-2,
+      && \text{injectif pour } i = n-1, \\
+    H^{i}(W_0) &\xrightarrow{\ \sim\ } H^{2n-i-1}(M)^{\vee} && \text{pour } i \geq n+1 .
+  \end{aligned}
+\]
+\footnote{La page donne le second isomorphisme pour $i \geq n+2$ seulement, avec
+« épim si $i = n+1$ », et note « donc $2n-i-1 \leq n-3$ ». C'est exactement ce
+qui découle d'une annulation $H^{i}(M) = 0$ pour $i > n+1$ ; avec la borne
+vraie $i > n$, on a aussi $H^{n+1}(M) = 0$, et l'application est bijective dès
+$i = n+1$. Les bornes $n+2$ et $n-2$ sont surchargées et lues d'après la
+remarque « $2n-i-1 \leq n-3$ » et la page 27 ; « épim » et « mono » sont des
+lectures douteuses.} Ainsi $H^{q}(M)$ est connu en termes de $H^{q}(W_0)$, sauf
+dans les degrés $n-1$ et $n$, où l'on a la suite exacte
+\[
+  H^{n-1}(M) \to H^{n-1}(W_0) \to H^{n}(M)^{\vee} \xrightarrow{\ u\ } H^{n}(M)
+  \to H^{n}(W_0) \to H^{n-1}(M)^{\vee} .
+\]
+\footnote{La page porte « surj » sur la flèche $H^{n-1}(W_0) \to
+H^{n}(M)^{\vee}$. Par exactitude, son image est le noyau de
+$u : H^{n}(M)^{\vee} \to H^{n}(M)$, et elle n'est surjective que si $u$ est nul
+en degré moyen, ce qui n'est pas le cas en général : pour un point double
+ordinaire en $n$ pair, la forme d'intersection est la forme $(\pm 2)$ sur
+$H^{n}(M) \simeq \Lambda$. On ne retient pas le mot. Les deux lignes commencent
+par des termes biffés, qui reprennent la suite un cran plus bas.}
+
+Supposons enfin que $W$ soit la sphère topologique et $n \geq 3$. Alors
+$H^{i}(W_0) = 0$ pour $i \neq 0, n-1, n, 2n-1$, donc par ce qui précède
+\[
+  H^{i}(M) = 0 \qquad \text{pour } i \neq 0, n-1, n,
+\]
+et la suite des degrés du milieu se ferme en une suite exacte que la page
+encadre sur deux lignes, la seconde étant la transposée de la première :
+\[
+  \boxed{\begin{array}{c}
+    0 \to H^{n+1}(M)^{\vee} \xrightarrow{\ u\ } H^{n-1}(M) \to H^{n-1}(W_0)
+      \to H^{n}(M)^{\vee} \\
+    \downarrow u \\
+    0 \leftarrow H^{n+1}(M) \xleftarrow{\ {}^{t}u\ } H^{n-1}(M)^{\vee}
+      \leftarrow H^{n}(W_0) \leftarrow H^{n}(M)
+  \end{array}}
+\]
+Avec $H^{n+1}(M) = 0$, les deux termes extrêmes sont nuls, et ce qui reste est
+la suite à six termes
+\[
+  0 \to H^{n-1}(M) \to H^{n-1}(W_0) \to H^{n}(M)^{\vee} \xrightarrow{\ u\ }
+  H^{n}(M) \to H^{n}(W_0) \to H^{n-1}(M)^{\vee} \to 0,
+\]
+symétrique sous la dualité, l'application $u$ du milieu étant
+autotransposée.\footnote{L'encadré est traversé au crayon de traits en zigzag
+reliant les deux lignes, avec des signes $+$ et $-$ alternés : c'est la
+symétrie des deux lignes, et sans doute un calcul de caractéristique
+d'Euler. On ne le reconstitue pas. Le dossier s'arrête là. Le théorème de
+Milnor selon lequel $M$ a le type d'homotopie d'un bouquet de sphères de
+dimension $n$ donnerait de plus $H^{n-1}(M) = 0$ pour $n \geq 2$, et
+réduirait la suite à $0 \to H^{n-1}(W_0) \to H^{n}(M)^{\vee}
+\xrightarrow{u} H^{n}(M) \to H^{n}(W_0) \to 0$ : la cohomologie du link est le
+noyau et le conoyau de la forme d'intersection. Les pages n'atteignent pas cet
+énoncé.}
+
+\pagerange{33}{33}
+\section*{En termes de fibres (page 33)}
+
+La page 33, sur un autre papier, récrit le critère de la page 27 dans le
+langage du dictionnaire de la page 16 : $V$ joue le rôle de $W$, sa partie
+générique $V_{\eta}$ celui de $W - W_0$, sa partie spéciale $V_{s}$ celui de
+$W_0$.\footnote{La page 16 écrit $V'$ et $V'_{s}$ ; la page 33 omet le prime.}
+Il vient, pour $n \geq 1$ :
+\[
+  V \text{ sphère cohomologique} \iff
+  \left\{\begin{aligned}
+    &H^{i}(V_{\eta}) \to H^{i-1}(V_{s}) \ \text{isomorphisme pour } i \neq 0, 2n, \\
+    &H^{0}(V_{\eta}) \simeq \Lambda, \\
+    &H^{2n}(V_{\eta}) \to H^{2n-1}(V_{s}) \ \text{injectif, de conoyau} \simeq \Lambda .
+  \end{aligned}\right.
+\]
+C'est le critère encadré de la page 27, rendu complet par les conditions en
+degrés $0$ et $2n$. Il est accompagné de la portion de suite
+\[
+  0 \to H^{2n}(V_{\eta}) \to H^{2n-1}(V_{s}) \to H^{2n+1}(V) \to
+  H^{2n+1}(V_{\eta}) \to H^{2n}(V_{s}) = 0,
+\]
+où $H^{2n}(V_{\eta}) = 0$ si $n \geq 2$ et $H^{2n+1}(V_{\eta}) = 0$ si
+$n \geq 1$ — c'est l'annulation au-dessus de $n+1$, puisque $2n+1 > n+1$.
+
+La page conclut : si l'on sait déjà que la singularité est isolée,
+« $H^{i}(V_{s}) = 0$ si $i \neq 0, n-1, n$ ». Pris au pied de la lettre pour
+le link, c'est faux en degré $2n-1$, où la même page a
+$H^{2n-1}(V_{s}) \simeq \Lambda$. C'est en revanche exactement l'énoncé de la
+page 31 pour la fibre de Milnor, et la marge, qui écrit
+$H^{i}(V_{\xi}) \simeq H^{i}(V_{s})$, semble aller dans ce sens.\footnote{Doute
+signalé. L'indice lu $\xi$ peut être un $\eta$ ; si c'est la fibre
+géométrique générique qui est désignée, la marge et la conclusion portent sur
+la fibre de Milnor. On ne corrige pas la page ; on dit ce qui est vrai :
+$H^{i}(W_0) = 0$ pour $i \neq 0, n-1, n, 2n-1$, et $H^{i}(M) = 0$ pour
+$i \neq 0, n-1, n$ quand $n \geq 3$.}
+
+\pagerange{34}{34}
+\section*{Un autre sujet : finitude et noyaux (page 34)}
+
+La dernière page, sur le même papier que la précédente, change de sujet. Elle
+note un « inconvénient sérieux » des groupes $\mathrm{Ext}^{n}(S, T; A)$
+lorsque la catégorie $A$ satisfait l'axiome (AB5) des limites inductives
+filtrantes exactes : les conditions de finitude naturelles sur les systèmes
+inductifs $\mathfrak{a}$-adiques, ou essentiellement $\mathfrak{a}$-adiques —
+pour $A$ localement noethérienne — ne semblent pas stables par passage au
+noyau. Dualement, sous (AB5$^{*}$), les conditions de finitude correspondantes
+ne semblent pas stables par conoyau. La phrase finit sur deux points
+d'exclamation.\footnote{Le premier paragraphe est le plus difficile de la page :
+le mot qui précède « Ext » est illisible, « Ext » et « noyaux » sont des
+lectures douteuses, et l'on ne précise pas davantage ce que sont $S$ et $T$,
+que la page ne définit pas. Ce que l'on appellerait aujourd'hui ces systèmes
+inductifs est le langage des ind-objets et des modules de torsion
+$\mathfrak{a}$-primaire.}
+
+Suit un \emph{Exemple}, entièrement barré : $A$ un anneau noethérien, $f$, $g$
+deux éléments formant une suite $M$-régulière, et
+\[
+  P = M_{f}/M = \varinjlim_{n} M/f^{n}M,
+\]
+le système inductif ayant pour flèches de transition $M/f^{n}M \to M/f^{m}M$
+la multiplication par $f^{m-n}$, donc injectives. L'exemple s'arrête sur
+« $Q =$ ».\footnote{L'objet $M_{f}/M$ est le premier module de cohomologie
+locale $H^{1}_{(f)}(M)$ ; la régularité de la suite $(f, g)$ suggère que le
+contre-exemple annoncé devait se construire à partir de lui et de la
+multiplication par $g$, mais la page ne le dit pas, et on ne le complète pas.
+La lettre $P$ est ici sans rapport avec la variété à bord des pages
+précédentes.}
+
+\end{document}

@@ -1,0 +1,1064 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 120, pages 1-24.
+%
+% This is an INTERPRETATION, not a transcription. Everything the critical
+% apparatus carried moves into footnotes. In any dispute of substance the
+% transcription governs: whoever cites Grothendieck must cite
+% batch-01.fr.tex and batch-02.fr.tex.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-03 — first pass, unchecked against the pages by a human.
+% The folder was read whole: two batches, pages 1-24, both transcribed. Page 1
+% is the cover; it carries no \page in the transcription.
+%
+% Notation fixed for the whole document. R a set, R_0 its tame points;
+% \mathcal{M}_n (n >= 1) and \mathcal{M}_I (I finite) the tame parts;
+% \Sigma = Esp_{\mathcal{M}_*} the category of tame spaces, |X| the underlying
+% set; \Sigma^{ind} for the category of strict ind-tame spaces, which the page
+% writes « Esp_M » with an overwritten index (p. 14); gothic letters for
+% ind-tame spaces, as on pp. 15-16. The page uses the label (M5) twice: here
+% (M5) is R_0 != Ø (p. 6) and (M5') is stability under finite unions (p. 9);
+% every later « M5 » of the pages (pp. 12, 14) is (M5'). The axioms are
+% otherwise numbered as he numbers them, (M0)-(M11).
+%
+% Substantive departures from the pages, each footnoted where it occurs:
+% — p. 2: « les \mathfrak{S}_n stables par intersection » read \mathcal{M}_n;
+%   « pour avoir M3 il suffit de le prouver pour u surjectif » read u
+%   injective (u^* surjective), as the page's own c_1) of p. 3 has it.
+% — p. 3: the reduction a)-c) replaces M1-M3 only together with M4.
+% — p. 4: « {x} \in R^n » read {x} \in \mathcal{M}_n.
+% — p. 5: the margin « via M2 » — our proof of a)-c) uses M1, M3, M4.
+% — p. 6: the final object exists without (M5) once I = Ø is admitted (p. 4,
+%   p. 5 margin); with I >= 1 only, (M5) is what supplies it.
+% — p. 7: the characterisation by (\Sigma, R, |.|) — condition b) illegible;
+%   we state only the recovery of \mathcal{M}_* from the triple.
+% — p. 8: the discrete-structure corollary needs (M5') (counterexample:
+%   example a) of p. 5); the colimit Proposition of p. 8 also uses (M5') in
+%   its proof (p. 11), except for coequalisers.
+% — p. 10: the functions f_alpha, g_alpha of the criterion must be tame
+%   (supplied); « X_1 -> R^I » read R^A.
+% — p. 14: « (M8) impliqué par M5 » is false for either M5 (counterexample);
+%   M8 follows from M0.
+% — p. 14: finite sums of ind-tame spaces under « R_0 != Ø »: our
+%   construction needs two distinct tame points.
+% — p. 15: « dans Esp_{M_*} » read in \Sigma^{ind}.
+% — p. 17: the colimit topology induces on each tame part its own topology
+%   already without countability (argument in a footnote); « dénombrable »
+%   is an uncertain reading.
+% — p. 20: the finite limits of \Sigma need M3 (or M2) besides M1 and M4.
+% — p. 22: e_alpha \in R corrected to e_alpha \in R_0, as M6 has it.
+% — p. 23: « sépare les points de X » read X \smallsetminus Y.
+%
+% What the folder announces and never establishes: the converse of the
+% characterisation of p. 7; the existence of quotients and amalgamated sums
+% of ind-tame spaces (p. 15); the stability of locally tame spaces under
+% finite limits (p. 19); the « Dém : » of p. 23 (left empty; the argument
+% stands above it); the whole programme « À prouver » of p. 24 (Hardt-type
+% triviality). The \mathbb{D} opening p. 21 is not explained by the folder.
+
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{120}
+\pages{1}{24}
+\dating{[à partir de 1973-à partir de 1978]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Topologie modérée : notes manuscrites (s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Ces vingt-quatre pages cherchent à dire, par un petit nombre de règles,
+quelles figures de l'espace méritent d'être appelées « sages ».
+
+La topologie générale admet des objets que personne ne dessine : une courbe
+qui remplit un carré, un ensemble dense et de complémentaire dense, un compact
+qui a la forme d'une poussière. Ce ne sont pas des erreurs, mais ce n'est pas
+de la géométrie. La \emph{topologie modérée} que Grothendieck appelle de ses
+vœux fait le choix inverse : décider d'avance quelles parties sont admises —
+les figures définies par des polynômes, par exemple, et ce qu'on en tire par
+des opérations raisonnables — et ne jamais sortir de cette famille. On perd les
+monstres ; on espère gagner des théorèmes de finitude.
+
+Le dossier ne commence pas par les figures, mais par les \emph{règles}. On se
+donne un ensemble $R$ — la droite, pensée abstraitement — et, pour chaque
+$n$, une famille de parties de $R^n$ déclarées modérées. Les règles disent
+seulement ce qu'on a le droit de faire : permuter ou dupliquer des
+coordonnées, projeter, couper par une condition, former des produits. Une
+image aide : c'est un jeu de construction. On fournit quelques pièces et
+quelques façons de les assembler, et l'on ne demande rien d'autre ; tout ce
+qu'on peut monter est admis, rien d'autre ne l'est. Les deux premières
+sections montrent que ces règles suffisent à fabriquer une catégorie
+d'« espaces modérés » où l'on peut former produits, équations et
+sous-espaces exactement comme dans les ensembles.
+
+La question qui occupe ensuite presque tout le dossier est celle du
+\emph{recollement} : peut-on coller deux espaces modérés le long d'une partie
+commune, ou écraser une partie en un point, sans sortir du jeu ? Projeter et
+couper ne posent pas de problème ; recoller en pose un, parce qu'il faut
+trouver, dans un $R^n$, une place où loger le résultat. Grothendieck donne un
+critère, puis deux axiomes qui le rendent applicable : toute partie modérée
+est le lieu où un nombre fini de fonctions modérées prennent des valeurs
+fixées, et toute fonction modérée sur une partie se prolonge à l'espace
+entier. Moyennant quoi les recollements existent, et la preuve est une
+manière de ranger les deux morceaux dans des étages différents d'un même
+$R^n$ pour qu'ils ne se rencontrent que là où ils doivent.
+
+Viennent ensuite trois greffes sur ce tronc. Les \emph{ind-espaces}
+autorisent les objets non bornés, comme la droite entière, réunions
+croissantes de pièces modérées. La \emph{topologie} demande que les pièces
+soient compactes ; les applications modérées deviennent alors automatiquement
+continues, et l'on peut parler de ce qui est modéré au voisinage d'un point.
+La \emph{structure de corps} demande que l'addition et la multiplication
+soient modérées ; les fonctions modérées forment alors un anneau, les points
+modérés un corps — pour les polynômes à coefficients rationnels, ce serait le
+corps des nombres algébriques réels —, et une fonction modérée qui ne
+s'annule pas a un inverse modéré.
+
+La dernière page n'est plus une construction mais un programme, marqué
+« À prouver » : au-dessus d'une base modérée, toute application modérée
+devrait être un produit trivial hors d'une partie mince, morceau par morceau.
+
+Ces pages anticipent ce qui s'est appelé, quelques années plus tard, les
+\emph{structures o-minimales} de la théorie des modèles, dont le livre de
+référence porte le titre que Grothendieck avait choisi ; le programme de la
+dernière page est, dans ce cadre, le théorème de trivialité de Hardt. La
+feuille de garde porte, au crayon, « Autour de l'Éloge » : c'est le même
+programme que l'\emph{Esquisse d'un programme} défendra en 1984.
+
+\keywords{tame topology, o-minimal structure, definable sets, semi-algebraic sets, concrete category, transport of structure, finite limits, pushout along monomorphisms, quotient by a closed subset, definable Tietze extension, strict ind-object, colimit topology, sheaf of definable functions, field of definition, Hardt triviality}
+\end{resume}
+
+\pagerange{1}{24}
+\section*{Le dossier, sa charpente et ses notations}
+
+Vingt-quatre pages, toutes de sa main, d'une même encre et d'une rédaction
+rapide. La page 1 est une chemise rose ; les pages 2 à 23 sont un exposé
+axiomatique, divisé par lui en six sections numérotées en chiffres romains
+cerclés ; la page 24 est un programme. Il numérote lui-même un feuillet sur
+deux environ, de 1 (page 2) à 11 (page 22), sans lacune : le dossier est une
+seule rédaction, non des fragments réunis.
+
+Les stations de l'argument :
+
+\begin{itemize}
+\item[(I)] les \emph{modèles $R$-modérés} : les axiomes (M1) à (M4) sur des
+  familles $\mathcal{M}_n$ de parties de $R^n$, leurs réductions, les cas
+  triviaux, les points modérés (pages 2 à 5) ;
+\item[(II)] les \emph{espaces modérés} : la catégorie $\Sigma$, ses produits et
+  limites finies, la droite $R$ comme objet de $\Sigma$ (pages 5 à 7) ;
+\item[(III)] les \emph{limites inductives finies} : critère d'existence des
+  sommes amalgamées, quotients, les axiomes (M6) et (M7), et l'existence des
+  sommes amalgamées le long de plongements (pages 7 à 13) ;
+\item[(IV)] les \emph{ind-espaces modérés stricts} (pages 14 à 16) ;
+\item[(V)] la \emph{topologie} : compacité des parties modérées, voisinages
+  modérés, espaces localement modérés (pages 16 à 19) ;
+\item[(VI)] la \emph{structure de corps} : l'anneau des fonctions modérées, le
+  corps $R_0$, et le retour sur (M6) qu'elle permet (pages 20 à 23) ;
+\end{itemize}
+puis, page 24, le programme « À prouver ».
+
+Le tronc est (I)--(III) : construire, à partir de règles portant seulement sur
+des parties de $R^n$, une catégorie où les limites finies et certaines
+limites inductives finies existent et se calculent comme dans les ensembles.
+Les sections (IV) à (VI) sont des greffes indépendantes, chacune avec ses
+axiomes propres ; (VI) commence d'ailleurs par « Oublions les structures
+topologiques ». La section (VI) revient cependant sur (III) : elle montre que
+la seconde moitié de l'axiome (M6) est conséquence de la première dès que $R$
+est un corps.
+
+\textbf{Notations, valables pour tout le dossier.} $R$ est un ensemble
+quelconque, sans structure, jusqu'à la section (V). Pour $n \geqslant 1$,
+$\mathcal{M}_n$ est un ensemble de parties de $R^n$ ; ses éléments sont les
+\emph{parties modérées}. Pour une application $u : [1,n] \to [1,m]$, on note
+$u^* : R^m \to R^n$, $x \mapsto x \circ u$, l'application qu'elle induit sur
+les coordonnées : une projection quand $u$ est injective, un plongement
+diagonal quand $u$ est surjective. $R_0 \subset R$ est l'ensemble des
+\emph{points modérés}, ceux dont le singleton est modéré. $\Sigma =
+\mathrm{Esp}_{\mathcal{M}_*}$ est la catégorie des espaces modérés et $X
+\mapsto |X|$ son foncteur d'oubli ; $\Sigma^{\mathrm{ind}}$ est celle des
+ind-espaces modérés stricts, dont les objets sont notés en lettres gothiques
+$\mathfrak{X}, \mathfrak{Y}, \mathfrak{Z}$, comme aux pages 15 et 16.
+
+Les axiomes gardent ses numéros, à une exception près. Il emploie deux fois
+l'étiquette (M5) : page 6 pour $R_0 \neq \emptyset$, page 9 pour la stabilité
+par réunions finies. On garde (M5) pour la première et l'on écrit (M5$'$) pour
+la seconde ; toutes les mentions ultérieures de « M5 » (pages 12 et 14)
+renvoient à la seconde. Récapitulons, pour s'y retrouver :
+
+\begin{itemize}
+\item[(M0)] $R \in \mathcal{M}_1$ (facultatif, page 6) ;
+\item[(M1)--(M4)] images directes par les $u^*$, images réciproques par les
+  plongements diagonaux, intersections avec des images réciproques, produits
+  (page 2) ;
+\item[(M5)] $R_0 \neq \emptyset$ (page 6) ; \quad (M5$'$) stabilité par
+  réunions finies (page 9) ;
+\item[(M6)] toute partie modérée d'une partie modérée est une fibre d'un
+  nombre fini de fonctions modérées ; (M7) prolongement des fonctions modérées
+  (page 12) ;
+\item[(M8)] $R$ est réunion de ses parties modérées (page 14) ;
+\item[(M9)] $R$ séparé et parties modérées compactes ; (M10) voisinages
+  modérés (pages 16 et 17) ;
+\item[(M11)] axiomes de corps (page 20).
+\end{itemize}
+
+Un mot sur le mot « modéré ». Une \emph{partie} modérée est un élément d'un
+$\mathcal{M}_n$ ; une \emph{application} modérée est une application dont le
+graphe est une partie modérée ; une \emph{fonction} modérée est une application
+modérée à valeurs dans $R$. Ce sont trois emplois d'une même idée — le graphe
+ramène tout aux parties — et c'est le premier geste du dossier (page 5).
+
+Le dossier voisin 121, daté de 1974, reprend aux pages 53 à 72 une démarche
+très proche, mais en prenant pour pièces de base les parties des cubes
+$[0,1]^n$ plutôt que celles des $R^n$.
+
+\pagerange{1}{1}
+\section*{La chemise (page 1)}
+
+La chemise rose porte à l'encre, de sa main, « Topologie modérée », le premier
+mot écrit par-dessus un mot biffé, peut-être « Structures », et la finale de
+« modérées » corrigée en « modérée ».\footnote{Lecture de la transcription,
+qui donne « Structures » comme douteux. Le titre initial aurait donc été
+« Structures modérées », ce qui décrit mieux les pages 2 à 23 que le titre
+retenu : il s'agit de structures sur des ensembles, la topologie n'arrivant
+qu'à la page 16.} Au-dessous, au crayon très pâle et peut-être d'une autre
+main, « 1978 » suivi d'un mot illisible, et « (Autour de l'Éloge) ».\footnote{La
+lecture « Autour de l'Éloge » est douteuse. Si elle est juste, elle rattache
+ces pages à un « éloge » de la topologie modérée, ce que l'\emph{Esquisse d'un
+programme} (1984) développe en effet ; l'édition n'en tire pas de datation.
+La cote de l'inventaire, « [à partir de 1973-à partir de 1978] », est
+reproduite telle quelle dans le titre.}
+
+\pagerange{2}{5}
+\section*{(I) Modèles $R$-modérés (pages 2 à 5)}
+
+\subsection*{Les axiomes}
+
+On se donne, pour tout $n \geqslant 1$, un ensemble $\mathcal{M}_n$ de parties
+de $R^n$, et l'on demande :
+
+\begin{itemize}
+\item[(M1)] pour toute application $u : [1,n] \to [1,m]$ et tout $A \in
+  \mathcal{M}_m$, on a $u^*(A) \in \mathcal{M}_n$ ;
+\item[(M2)] pour toute $u : [1,n] \to [1,m]$ \emph{surjective} — de sorte que
+  $u^* : R^m \hookrightarrow R^n$ est injective — et tout $B \in
+  \mathcal{M}_n$, on a $(u^*)^{-1}(B) \in \mathcal{M}_m$ ;
+\item[(M3)] pour toute $u : [1,n] \to [1,m]$, $A \in \mathcal{M}_m$ et $B \in
+  \mathcal{M}_n$, on a $(u^*)^{-1}(B) \cap A \in \mathcal{M}_m$ ;
+\item[(M4)] pour $A \in \mathcal{M}_m$ et $B \in \mathcal{M}_n$, on a $A
+  \times B \in \mathcal{M}_{m+n}$, via $R^m \times R^n \simeq R^{m+n}$.
+\end{itemize}
+
+En clair : (M1) dit que les parties modérées sont stables par permutation et
+duplication des coordonnées et \emph{par projection} ; (M2), qu'on peut
+couper une partie modérée par une diagonale ; (M3), qu'on peut la couper par
+la condition « telles coordonnées tombent dans telle partie modérée » ; (M4),
+qu'on peut faire des produits. La stabilité par projection est la règle
+décisive : c'est, dans le cas des parties semi-algébriques, le théorème de
+Tarski–Seidenberg, et c'est elle qui fait qu'une partie définie par « il
+existe $y$ tel que \ldots » reste modérée.\footnote{Le rapprochement avec
+Tarski–Seidenberg est de l'édition ; la page ne nomme aucun exemple
+géométrique. Noter aussi ce qui \emph{manque} à la liste : ni réunions ni
+complémentaires. Les parties modérées ne forment pas une algèbre de Boole,
+contrairement aux ensembles définissables d'une structure o-minimale ; la
+réunion n'arrive qu'avec (M5$'$) page 9, et le complémentaire jamais, ce qui
+s'accorde avec la compacité demandée en (M9) page 16 : il pense à des
+parties fermées bornées.}
+
+Par (M3) appliqué à $u = \mathrm{id}$, les $\mathcal{M}_n$ sont stables par
+intersection de deux parties.
+
+\subsection*{Réductions}
+
+Comme (M1) est stable par composition et que toute application
+$[1,n] \to [1,m]$ est composée d'une surjection et d'une injection, (M1)
+revient à le demander pour les permutations, pour les « opérations de face »
+($u : [1,n] \hookrightarrow [1,n+1]$ injective, $u^*$ une projection
+$R^{n+1} \to R^n$) et pour les « opérations de dégénérescence » ($u :
+[1,n+1] \to [1,n]$ surjective, $u^*$ un plongement diagonal $R^n
+\hookrightarrow R^{n+1}$) — et même, à permutation près, pour la seule
+projection $(x_1, \dots, x_{n+1}) \mapsto (x_1, \dots, x_n)$ et le seul
+plongement $(x_1, \dots, x_n) \mapsto (x_1, \dots, x_n, x_n)$. De même (M2) se
+réduit à ce plongement diagonal standard.
+
+(M1), (M2) et (M4) entraînent la stabilité des $\mathcal{M}_n$ par
+intersection, sans (M3) : $A \cap B$ est l'image réciproque de $A \times B$
+par la diagonale $R^n \hookrightarrow R^{2n}$.\footnote{La page écrit « les
+$\mathfrak{S}_n$ sont stables par intersection » et « $A, B \in
+\mathfrak{S}_n \Rightarrow A \cap B \in \mathfrak{S}_n$ », avec le sigle du
+groupe symétrique employé trois lignes plus haut ; c'est $\mathcal{M}_n$ qui
+est entendu.} Il en résulte que (M3) n'a à être demandé que lorsque $u^*$ est
+une projection, et même pour la seule projection standard $R^{n+1} \to
+R^n$.\footnote{La page dit « pour $u$ surjectif ». C'est le cas inverse qui
+reste à traiter : si $u$ est surjective, $(u^*)^{-1}(B)$ est déjà modérée par
+(M2) et son intersection avec $A$ l'est par stabilité par intersection ; le
+cas non trivial est celui où $u$ est \emph{injective} et $u^*$ une projection.
+C'est bien ce cas, et lui seul, que retient le c$_1$) du résumé de la page 3,
+avec $\beta_n : [1,n] \hookrightarrow [1,n+1]$. Le passage d'une projection
+quelconque à la projection standard se fait par récurrence, en écrivant, pour
+$p = p_1 \circ p_2$, $A \cap p^{-1}(B) = A \cap p_2^{-1}\bigl(p_2(A) \cap
+p_1^{-1}(B)\bigr)$, où $p_2(A)$ est modérée par (M1).}
+
+En résumé, en présence de (M4), les axiomes (M1) à (M3) équivalent à :
+
+\begin{itemize}
+\item[a)] stabilité de chaque $\mathcal{M}_n$ par les permutations des
+  coordonnées ;
+\item[b)] pour le plongement diagonal $\alpha_n^* : R^n \hookrightarrow
+  R^{n+1}$, $(x_1, \dots, x_n) \mapsto (x_1, \dots, x_n, x_n)$ : stabilité par
+  image directe (b$_1$) et par image réciproque (b$_2$) ;
+\item[c)] pour la projection $\beta_n^* : R^{n+1} \to R^n$ : stabilité de $A
+  \cap (\beta_n^*)^{-1}(B)$ (c$_1$) et stabilité par image directe (c$_2$).\footnote{La page dit « M1, M2, M3 peuvent être remplacés par » a), b), c),
+sans mentionner (M4). Il faut (M4), ou (M3) en entier, pour obtenir la
+stabilité par intersection dont la réduction de (M3) se sert ; d'où la
+précision « en présence de (M4) ». En b$_1$), l'exposant de $\alpha_n$ est mal
+formé sur la page ; c'est bien une image directe.}
+\end{itemize}
+
+Enfin (M1) permet de définir $\mathcal{M}_I \subset \mathfrak{P}(R^I)$ pour
+tout ensemble fini non vide $I$, par le choix d'une bijection $I \simeq [1,n]$,
+indifférent grâce à la stabilité par permutation ; les axiomes se transcrivent
+en des énoncés (M$'$1) à (M$'$4) pour les applications $u : I \to J$ entre
+ensembles finis. C'est sous cette forme qu'ils servent dans tout le reste du
+dossier.
+
+\subsection*{Les cas triviaux}
+
+Par (M1), si l'un des $\mathcal{M}_n$ est vide, tous le sont, et les axiomes
+sont alors vérifiés trivialement ; on exclut ce cas :
+\[ (*) \qquad \mathcal{M}_1 \neq \emptyset . \]
+De même, si l'un des $\mathcal{M}_n$ contient $\emptyset$, tous le contiennent.
+Sinon, chaque $\mathcal{M}_n$, non vide, stable par intersection et ne
+contenant pas $\emptyset$, est une base de filtre sur $R^n$ — situation
+étrangère à ce qu'on cherche. On l'exclut aussi :
+\[ (**) \qquad \emptyset \in \mathcal{M}_1 , \]
+d'où $\emptyset \in \mathcal{M}_n$ pour tout $n$. Ce n'est pas une vraie
+restriction : si (**) manque, les $\mathcal{M}_n \cup \{\emptyset\}$ vérifient
+encore (M1) à (M4). Enfin si $\mathcal{M}_n = \{\emptyset\}$ pour un $n$, c'est
+vrai pour tout $n$, et l'on exclut ce dernier cas trivial :
+\[ (***) \qquad \text{il existe } A \in \mathcal{M}_1 \text{ non vide.} \]
+
+Sous (**) et (***), on peut admettre aussi l'ensemble d'indices vide, en posant
+$\mathcal{M}_\emptyset = \mathfrak{P}(R^\emptyset) = \{\emptyset, \{e\}\}$, où
+$R^\emptyset = \{e\}$ est un point : les propriétés (M$'$1) à (M$'$4) restent
+vraies, et ce choix est d'ailleurs forcé, puisque l'image d'une partie
+modérée non vide par $R^I \to R^\emptyset$ est $\{e\}$.\footnote{La page écrit
+« si on pose pour $I \neq \emptyset$ », lecture douteuse, puis
+$\mathcal{M}_\emptyset = \ldots$ ; c'est le cas $I = \emptyset$ qui est
+traité. La vérification de (M$'$1) à (M$'$4) est laissée sur la page à des
+points de suspension ; elle est immédiate, et c'est (**) qui la rend vraie.}
+
+\subsection*{Les points modérés}
+
+Pour $x = (x_1, \dots, x_n) \in R^n$, on a $\{x\} \in \mathcal{M}_n$ si et
+seulement si $\{x_i\} \in \mathcal{M}_1$ pour tout $i$ : dans un sens par
+projection (M1), dans l'autre par produit (M4).\footnote{La page écrit
+« $\{x\} \in R^n$ » à gauche de l'équivalence ; c'est $\{x\} \in
+\mathcal{M}_n$ qui est entendu.} On pose donc
+\[ R_0 = \{x \in R \mid \{x\} \in \mathcal{M}_1\} , \]
+et l'ensemble des points modérés de $R^I$ est $R_0^I$. Si $R_0$ a au moins
+deux points $x \neq y$, alors $\{x\} \cap \{y\} = \emptyset$ est modérée, et
+(**) est automatique.
+
+Dans le cas qui guide l'intuition — $R = \mathbb{R}$, parties semi-algébriques
+compactes définies par des polynômes à coefficients rationnels — $R_0$ serait
+le corps des nombres réels algébriques : les points modérés sont les points
+« définissables » de la structure.\footnote{Exemple de l'édition ; le dossier
+n'en donne aucun de cette sorte. Il annonce à la page 20 que $R_0$ est un
+sous-anneau, et à la page 22 un sous-corps, ce qui va dans ce sens.}
+
+\subsection*{Exemples (page 5)}
+
+En dehors des deux cas triviaux, on a les exemples : a) les parties de
+cardinal au plus $1$ ; b) les parties finies ; c) toutes les parties. Tous
+vérifient (M1) à (M4), et dans les trois $R_0 = R$. « Aucun de ces
+[exemples n'est intéressant] pour nous ! »\footnote{La phrase est coupée par un
+long ajout interlinéaire en biais, dont on ne lit que des fragments
+(« exemples », « discrets ») ; la fin de la phrase de la page est elle-même en
+partie illisible, et la restitution entre crochets est de l'édition. Une note
+marginale reliée à l'exemple a) renvoie aux axiomes et à « l'exclusion de
+(2) » ; sa lecture est trop incertaine pour qu'on en tire quoi que ce soit.}
+Ce sont les exemples où la projection ne crée rien : la structure ne voit pas
+la géométrie de $R$.
+
+\pagerange{5}{7}
+\section*{(II) Espaces modérés (pages 5 à 7)}
+
+\subsection*{Applications modérées}
+
+Pour $A \in \mathcal{M}_I$ et $B \in \mathcal{M}_J$, une application $f : A \to
+B$ est dite \emph{modérée} si son graphe $\Gamma_f \subset A \times B \subset
+R^{I \sqcup J}$ est une partie modérée.\footnote{La page écrit l'indice
+« $I \cup J$ » ; c'est la réunion disjointe qui est entendue, pour que
+$R^I \times R^J \simeq R^{I \sqcup J}$.}
+
+\textbf{Proposition.} a) $\mathrm{id}_A$ est modérée ; b) le composé de deux
+applications modérées est modéré ; c) l'inverse d'une bijection modérée est
+modéré.
+
+En effet, le graphe de $\mathrm{id}_A$ est l'image de $A$ par un plongement
+diagonal (M1). Celui de $g \circ f$, pour $f : A \to B$ et $g : B \to C$, est la
+projection sur $R^{I \sqcup K}$ de $(\Gamma_f \times C) \cap (A \times
+\Gamma_g)$, partie modérée de $R^{I \sqcup J \sqcup K}$ par (M4), (M3) et
+(M1). Celui de $f^{-1}$ se déduit de $\Gamma_f$ par une permutation des
+coordonnées.\footnote{En face de la Proposition, la marge porte « via M2 ».
+La vérification ci-dessus n'emploie que (M1), (M3) et (M4) ; (M2) sert à la
+réduction de (M3) et à l'intersection, ce que la marge vise peut-être.} Plus
+généralement, l'image d'une partie modérée par une application modérée est
+modérée, et l'image réciproque aussi : $f(A') = \mathrm{pr}_J\bigl(\Gamma_f
+\cap (A' \times R^J)\bigr)$ et $f^{-1}(B') = \mathrm{pr}_I\bigl(\Gamma_f \cap
+(R^I \times B')\bigr)$, par (M3) puis (M1).\footnote{Ces deux formules
+explicitent une note marginale de la page 7, à demi lisible : « Introduire les
+parties modérées des espaces modérés, \ldots\ les parties $f(A)$,
+$f^{-1}(B)$ ».}
+
+\subsection*{La catégorie des espaces modérés}
+
+On obtient la catégorie $\mathrm{Mod}_{\mathcal{M}_*}$ des \emph{modèles
+modérés} — les couples $(I, A)$ avec $A \in \mathcal{M}_I$ — et un foncteur
+$(I, A) \mapsto A$ vers les ensembles, fidèle, et conservatif par c). On la
+remplace par une catégorie équivalente $\Sigma = \mathrm{Esp}_{\mathcal{M}_*}$
+d'\emph{espaces modérés} : un ensemble muni d'une structure transportée d'un
+modèle par une bijection, deux telles bijections définissant la même structure
+quand elles diffèrent d'une bijection modérée. Le foncteur d'oubli $X \mapsto
+|X|$ est alors fidèle, conservatif et de plus \emph{transportable} : pour tout
+objet $X$ et toute bijection $\alpha : |X| \xrightarrow{\sim} E$, il existe
+une structure modérée sur $E$, et une seule, faisant de $\alpha$ un
+isomorphisme de $\Sigma$ — c'est le transport de structure de
+Bourbaki.\footnote{Le terme « transportable » est celui de la page.
+Aujourd'hui on dirait que le foncteur d'oubli est \emph{uniquement
+transportable} (Adámek, Herrlich et Strecker), ce qui fait de $\Sigma$, à
+équivalence près, une catégorie concrète d'ensembles structurés. La page
+écrit « $\exists$ un unique $f : X \to Y$ qui relève $\alpha$ » : c'est le
+couple formé de $Y$ et de $f$ qui est unique, $|Y| = E$ étant fixé.}
+
+La marge note qu'on n'exclut pas les modèles où $R_0$ est réduit à un point.
+
+\subsection*{Produits et limites finies (page 6)}
+
+\textbf{Proposition.} La catégorie $\Sigma$ a des produits de deux objets, et
+le foncteur d'oubli les respecte. Elle a aussi des noyaux de couples, respectés
+par l'oubli ; donc, dès qu'elle a un objet final, toutes les limites
+projectives finies, que l'oubli respecte.
+
+Le produit de $A \in \mathcal{M}_I$ et $B \in \mathcal{M}_J$ est $A \times B
+\in \mathcal{M}_{I \sqcup J}$ (M4) ; ses projections sont modérées (M1), et
+pour $f : C \to A$, $g : C \to B$ modérées, le graphe de $(f,g)$ est
+$(\Gamma_f \times B) \cap \mathrm{pr}_{C,B}^{-1}(\Gamma_g)$, modéré par (M3).
+Le noyau de $f, g : A \rightrightarrows B$ est la projection sur $R^I$ de
+$\Gamma_f \cap \Gamma_g$, modérée par (M1) — éventuellement vide, d'où l'utilité
+de (**).
+
+Pour l'objet final, la page introduit
+\[ (\mathrm{M}5) \qquad R_0 \neq \emptyset , \]
+et un point modéré $\{x\}$, $x \in R_0$, est alors final : le graphe de
+l'application constante $A \to \{x\}$ est $A \times \{x\}$.\footnote{Deux
+remarques. D'abord, si l'on admet l'ensemble d'indices vide, comme la page 4
+le permet et comme la marge de la page 5 le dit expressément (« on n'exclut
+pas $I$ vide »), le point $R^\emptyset = \{e\}$ est déjà un objet final, sans
+(M5). (M5) n'est nécessaire que si l'on se borne aux $I$ non vides. Ensuite,
+sur la page, tout le passage qui va de « le foncteur $X \mapsto |X|$ » à
+« limites finies » est encadré et barré de trois traits obliques, avec en
+biais un ajout dont on lit « existence d'un objet final \ldots\ des produits
+\ldots\ commute » : il a repris cet énoncé, et la page 8 le reformule sous
+l'hypothèse $\operatorname{card} R_0 \geqslant 2$. On donne ici ce qui est vrai.}
+
+\subsection*{La droite comme objet (pages 6 et 7)}
+
+Si $R^n \in \mathcal{M}_n$ pour un $n \geqslant 1$, alors $R \in
+\mathcal{M}_1$ par projection, et $R^I \in \mathcal{M}_I$ pour tout $I$ fini
+par produit. D'où l'axiome, facultatif :
+\[ (\mathrm{M}0) \qquad R \in \mathcal{M}_1 . \]
+Sous (M0), $R$ est un objet de $\Sigma$, et tout objet de $\Sigma$ est
+isomorphe à un sous-objet d'une puissance $R^n$ (produit dans $\Sigma$). Les
+$\mathcal{M}_n$ se relisent alors dans $\Sigma$ : ce sont exactement les
+sous-objets de $R^n$. En effet un monomorphisme de $\Sigma$ est injectif — son
+couple noyau, qui existe et se calcule comme dans les ensembles, est trivial —
+et une injection modérée $X \to R^n$ est un isomorphisme sur son image, qui est
+modérée, par le c) de la Proposition de la page 5.
+
+La page conclut que la donnée de $\mathcal{M}_*$ équivaut, à isomorphisme près,
+à celle du triple $(\Sigma, R, X \mapsto |X|)$ soumis à des conditions :
+a) $\Sigma$ a des limites projectives finies ; b) le foncteur d'oubli
+\ldots ; c) tout objet de $\Sigma$ est un sous-objet d'une puissance de $R$.
+Ce qui est établi, c'est un sens : $\mathcal{M}_*$ se reconstruit à partir du
+triple, comme ensemble des images des monomorphismes $X \hookrightarrow
+R^n$.\footnote{La condition b) est illégible sur la page (trois mots). On
+attend « fidèle, conservatif, transportable, et commute aux limites
+projectives finies », mais c'est une restitution. La réciproque — qu'un triple
+vérifiant a), b), c) provienne d'un $\mathcal{M}_*$ — demande au moins que
+l'image d'un sous-objet de $R^m$ par une application de coordonnées $R^m \to
+R^n$ soit encore un sous-objet, c'est-à-dire une factorisation image dans
+$\Sigma$ ; rien sur la page ne la fournit. Le dossier 121, à la page 58, se donne
+explicitement de telles factorisations. Le titre final de la page, « Parlons aussi des opérations
+\ldots\ modérées d'espaces modérés \ldots\ dans des $R^I$ », est trop lacunaire
+pour être restitué.}
+
+\pagerange{7}{13}
+\section*{(III) Limites inductives finies (pages 7 à 13)}
+
+\subsection*{Le problème}
+
+La section annonce « le problème des quotients des espaces modérés, et des
+limites inductives finies ».\footnote{L'introduction de la section, au bas
+de la page 7, est presque entièrement illisible ; seuls ces mots sont sûrs.}
+C'est la question de fond du dossier. Les limites projectives viennent
+gratuitement des axiomes, parce que produits et projections y sont ; les
+limites inductives — recoller, écraser — demandent de trouver dans un $R^n$ une
+place où loger le résultat, et rien dans (M1)--(M4) ne la fournit.
+
+\subsection*{Ensembles finis, et le principe de la page 8}
+
+\textbf{Proposition (page 8).} Si $\operatorname{card} R_0 \geqslant 2$,
+$\Sigma$ a des limites projectives finies, que l'oubli respecte. — Ce n'est
+qu'une reprise de la page 6 : deux points modérés distincts donnent un objet
+final et assurent (**).\footnote{Les quatre premières lignes de l'énoncé sont
+biffées et surchargées ; seule la reprise finale est sûre dans son sens. Le
+« moyennant (M5) » qui y figure est sans objet une fois $\operatorname{card}
+R_0 \geqslant 2$ supposé.}
+
+\textbf{Corollaire.} Sur tout ensemble fini, il existe une et une seule
+structure modérée pour laquelle toutes les parties sont modérées : la
+structure modérée discrète.\footnote{Ce corollaire demande la stabilité par
+réunions finies, (M5$'$), qui n'apparaît qu'à la page suivante. Sans elle il
+est faux : dans l'exemple a) de la page 5 (parties de cardinal au plus $1$),
+$R_0 = R$ a autant de points qu'on veut, et pourtant aucun ensemble à deux
+éléments ne porte de structure modérée. Avec (M5$'$) et $\operatorname{card}
+R_0 \geqslant 2$, un ensemble à $n$ éléments s'envoie injectivement dans
+$R_0^k$ dès que $2^k \geqslant n$, son image est une réunion finie de points
+modérés, et toute application entre deux tels ensembles a un graphe fini de
+points modérés, donc modéré : d'où existence et unicité.}
+
+Le but annoncé est de construire les sommes amalgamées $X_1 \sqcup_Z X_2$ sans
+supposer $Z$ fini. Le principe dont tout dépend est le suivant.
+
+\textbf{Proposition (pages 8 et 11).} Soit $(X_i)_{i \in I}$ un diagramme fini
+d'espaces modérés, et $X$ sa limite inductive dans les ensembles, avec les
+applications canoniques $g_i : X_i \to X$. S'il existe sur $X$ une structure
+modérée rendant les $g_i$ modérées, alors $X$, muni de cette structure, est la
+limite inductive du diagramme dans $\Sigma$, et l'oubli la respecte.
+
+\emph{Démonstration} (page 11). Un cône $(f_i : X_i \to Y)$ de $\Sigma$ définit
+une application $f : X \to Y$ avec $f \circ g_i = f_i$ ; il faut voir qu'elle
+est modérée. Comme $X$ est réunion des images des $X_i$, le graphe $\Gamma_f$
+est la réunion des images des $\Gamma_{f_i}$ par les applications modérées $g_i
+\times \mathrm{id}_Y$ ; ces images sont modérées, et leur réunion finie
+aussi.\footnote{La dernière étape demande (M5$'$), stabilité par réunions
+finies, que la page n'introduit qu'à la page 9, après l'énoncé de la page 8 et
+avant la démonstration de la page 11 : l'énoncé est donc à lire sous (M5$'$).
+Pour un conoyau de couple, $X$ est l'image d'un seul $X_i$ et la réunion est
+superflue. Le début de la page 11 est d'une lecture incertaine ; la
+démonstration est restituée d'après ce qui en est lisible, qui en donne
+toutes les étapes.}
+
+\subsection*{Réunions (page 9)}
+
+On ajoute l'axiome :
+\[ (\mathrm{M}5') \qquad \text{chaque } \mathcal{M}_n \text{ est stable par
+réunions finies} \]
+(y compris la réunion vide : $\emptyset \in \mathcal{M}_n$).\footnote{Sur la
+page, l'étiquette est (M5), déjà employée page 6 pour $R_0 \neq \emptyset$ ;
+voir la section des notations.} Alors : les parties modérées d'un espace
+modéré sont stables par réunions finies ; $\emptyset$ porte une unique structure
+modérée, qui en fait l'objet initial de $\Sigma$ ; et si $X$ est un espace
+modéré réunion d'une famille finie de parties modérées $X_i$, $X$ est la somme
+amalgamée des $X_i$ le long des $X_i \cap X_j$ : une application $f : X \to Y$
+est modérée si et seulement si ses restrictions aux $X_i$ le sont, puisque
+$\Gamma_f = \bigcup_i \Gamma_{f|X_i}$.
+
+\textbf{Question.} Étant donnés deux plongements modérés $i_1 : Z
+\hookrightarrow X_1$ et $i_2 : Z \hookrightarrow X_2$ dans $\Sigma$,
+
+\begin{tikzcd}[column sep=small]
+ & Z \arrow[dl, hook'] \arrow[dr, hook] & \\
+X_1 & & X_2
+\end{tikzcd}
+
+la somme amalgamée $X_1 \sqcup_Z X_2$ existe-t-elle ? Pour $Z = \emptyset$,
+c'est la question des sommes finies.\footnote{La page écrit « Si $Y =
+\emptyset$ » : la lettre $Z$ du diagramme est écrite par-dessus une autre,
+sans doute $Y$, restée dans la phrase. Pour les sommes finies, deux points
+modérés distincts $a \neq b$ et (M5$'$) suffisent : on loge $X_1 \subset R^I$
+et $X_2 \subset R^J$ dans $R^I \times R^J \times R$ comme $X_1 \times \{c_J\}
+\times \{a\}$ et $\{c_I\} \times X_2 \times \{b\}$, avec $c_I, c_J$ des points
+modérés.}
+
+\subsection*{Le critère (pages 10 et 11)}
+
+\textbf{Proposition.} Pour que la somme amalgamée de $X_1 \hookleftarrow Z
+\hookrightarrow X_2$ existe dans $\Sigma$ et que l'oubli la respecte, il faut
+et il suffit qu'il existe une famille finie $(f_\alpha, g_\alpha)_{\alpha \in
+A}$ de couples de fonctions \emph{modérées} $f_\alpha : X_1 \to R$, $g_\alpha
+: X_2 \to R$ telles que :
+
+\begin{itemize}
+\item[a)] $f_\alpha \circ i_1 = g_\alpha \circ i_2$ sur $Z$, pour tout $\alpha$ ;
+\item[b)] les $f_\alpha$ séparent les points de $X_1$ et les $g_\alpha$ ceux de
+  $X_2$, i.e.\ $f = (f_\alpha) : X_1 \to R^A$ et $g = (g_\alpha) : X_2 \to
+  R^A$ sont injectives ;
+\item[c)] pour $x_1 \in X_1 \smallsetminus i_1(Z)$ et $x_2 \in X_2 \smallsetminus
+  i_2(Z)$, il existe $\alpha$ avec $f_\alpha(x_1) \neq g_\alpha(x_2)$.\footnote{Le mot « modérées » n'est pas dans l'énoncé de la page, mais il l'est
+dans le NB qui le généralise, et le critère est faux sans lui. En b), la page
+écrit « $X_1 \to R^I$ » pour le premier plongement ; l'ensemble d'indices est
+$A$ dans tout le reste.}
+\end{itemize}
+
+Sous (M5$'$) — et c'est la seule chose à ajouter —, la preuve est la suivante.
+Les conditions a), b), c) disent exactement que $f$ et $g$ se recollent en une
+\emph{injection} $F$ de la somme amalgamée ensembliste $X = X_1 \sqcup_Z X_2$
+dans $R^A$ : b) sépare les points d'un même côté, c) sépare un point de $X_1$
+hors de $Z$ d'un point de $X_2$ hors de $Z$, et un point $i_1(z)$ d'un point
+$x_2 \neq i_2(z)$ est séparé par $g$ grâce à a) et b). L'image $F(X) = f(X_1)
+\cup g(X_2)$ est modérée, on transporte sa structure à $X$, les $g_i$ sont
+modérées puisque $F \circ g_1 = f$ et $F \circ g_2 = g$ le sont, et la
+Proposition des pages 8 et 11 conclut. Inversement, si la somme existe et que
+l'oubli la respecte, un plongement $F : X \hookrightarrow R^A$ donne $f = F
+\circ g_1$ et $g = F \circ g_2$.
+
+\textbf{NB.} De même, pour un diagramme fini quelconque, la structure modérée
+quotient existe sur la limite inductive ensembliste $X$ si et seulement s'il
+existe une famille finie de systèmes compatibles $(f_{\alpha i} : X_i \to
+R)_{i}$ de fonctions modérées, définissant des $f_\alpha : X \to R$ qui
+séparent les points de $X$.
+
+\textbf{Corollaire (page 11).} Soit $f : X \to Y$ une application modérée et
+$\mathcal{R}_f = X \times_Y X$ la relation d'équivalence qu'elle définit —
+partie modérée de $X \times X$, et relation d'équivalence dans $\Sigma$. Le
+quotient $X / \mathcal{R}_f$ existe dans $\Sigma$ et s'identifie
+canoniquement à $f(X)$ muni de sa structure induite. Autrement dit, dans
+$\Sigma$, toute application modérée se factorise en un épimorphisme effectif
+suivi d'un plongement, comme dans les ensembles.\footnote{La traduction en
+termes de factorisation est de l'édition. Le corollaire suit de la Proposition
+des pages 8 et 11 appliquée au conoyau de $\mathcal{R}_f \rightrightarrows X$,
+sans même (M5$'$). Le « Cor.\ 2 » qui suit sur la page — de nouveau le
+diagramme $X_1 \hookleftarrow Z \hookrightarrow X_2$ — est barré de quatre
+traits ; il est repris page 12.}
+
+\subsection*{Deux axiomes (page 12)}
+
+Le critère dit ce qu'il faut ; deux axiomes le rendent applicable.
+
+\[ (\mathrm{M}6) \quad
+\begin{cases}
+\text{pour } Z \subset X \text{ dans } \mathcal{M}_n, \text{ il existe une famille
+finie } (f_\alpha)_{\alpha \in A} \\
+\text{de fonctions modérées } X \to R \text{ et des } e_\alpha \in R_0
+\text{ tels que } Z = \bigcap_\alpha f_\alpha^{-1}(e_\alpha) ; \\
+\text{de plus, on peut supposer que les } f_\alpha \text{ séparent les points de }
+X \smallsetminus Z .
+\end{cases} \]
+
+Avec $F = (f_\alpha) : X \to R^A$ et $e = (e_\alpha)$, $Z = F^{-1}(e)$, et $F$
+est injective hors de $Z$ : $F$ identifie $X/Z$ — $X$ où $Z$ est écrasé en un
+point — à la partie modérée $F(X)$ de $R^A$. L'axiome (M6) signifie donc que
+le quotient $X/Z$ existe dans $\Sigma$ « au sens strict », c'est-à-dire que
+l'oubli le respecte.\footnote{Pour $Z$ non vide ; pour $Z = \emptyset$, $X/Z$
+est $X$ augmenté d'un point. Que $e_\alpha$ soit pris dans $R_0$ est
+essentiel : c'est ce qui rend $\{e\}$ modéré, et l'on s'en sert page 13. La
+seconde moitié de l'axiome (« de plus, on peut supposer », écrit « OPS ») n'est
+pas une conséquence de la première dans le cadre ensembliste ; elle le devient
+dès que $R$ est un corps, et c'est ce que prouvent les pages 22 et 23. Sur la
+page, sous (M6), un diagramme carré $Z \hookrightarrow R^n \times \{e\}$,
+$X \hookrightarrow R^n \times R^A$ est pris dans un bloc barré ; il est repris
+correctement page 13.}
+
+\[ (\mathrm{M}7) \quad
+\begin{cases}
+\text{pour } Z \subset X \text{ dans } \mathcal{M}_n \text{ et } f : Z \to R
+\text{ modérée,} \\
+\text{il existe } g : X \to R \text{ modérée qui prolonge } f .
+\end{cases} \]
+
+C'est un théorème de Tietze modéré.\footnote{Dans le cadre o-minimal, les deux
+axiomes sont des théorèmes : un fermé définissable est le lieu des zéros
+d'une fonction définissable continue, et les fonctions définissables continues
+sur un fermé se prolongent (théorème de Tietze définissable ; voir le livre de
+van den Dries, \emph{Tame topology and o-minimal structures}, 1998). Cela
+suppose la topologie et la structure de corps ordonné, qu'ici le dossier n'a
+pas encore introduites ; ce sont des rapprochements de l'édition.}
+
+\subsection*{Existence des sommes amalgamées (pages 12 et 13)}
+
+\textbf{Proposition.} Sous (M5$'$), (M6) et (M7), les sommes amalgamées $X_1
+\sqcup_Z X_2$ le long de plongements $Z \hookrightarrow X_1$, $Z
+\hookrightarrow X_2$ existent dans $\Sigma$, et l'oubli les respecte.
+
+\emph{Démonstration} (page 13). Soit $\varphi : Z \hookrightarrow R^I$ un
+plongement modéré. Par (M7), coordonnée par coordonnée, il se prolonge en
+$\varphi_i : X_i \to R^I$ ($i = 1, 2$). Par (M6) appliqué à $Z_i = u_i(Z)
+\subset X_i$, on a $F_i : X_i \to R^{A_i}$ avec $Z_i = F_i^{-1}(e_i)$, $e_i \in
+R_0^{A_i}$, injective hors de $Z_i$. Alors $(\varphi_1, F_1) : X_1 \to R^I
+\times R^{A_1}$ est un plongement — les points hors de $Z_1$ sont séparés par
+$F_1$, ceux de $Z_1$ par $\varphi$ — et le carré
+
+\begin{tikzcd}[column sep=small, row sep=small]
+X_1 \arrow[r, hook] & R^I \times R^{A_1} \\
+Z \arrow[u, hook] \arrow[r, hook] & R^I \times \lbrace e_1 \rbrace
+\arrow[u, hook]
+\end{tikzcd}
+
+est cartésien.\footnote{Dans ce diagramme, la page trace la flèche verticale
+de gauche vers le bas, de $X_1$ vers $Z$ ; on la donne dans le sens de
+l'inclusion, qui est celui de la flèche de droite.} De même pour $X_2$. On
+range alors les deux morceaux à des étages différents d'un même espace :
+
+\begin{tikzcd}[column sep=small, row sep=small, nodes={font=\scriptsize}]
+X_1 \arrow[r, hook] & R^I \times R^{A_1} \times \lbrace e_2 \rbrace
+\arrow[r, hook] & R^I \times R^{A_1} \times R^{A_2} \\
+ & R^I \times \lbrace e_1 \rbrace \times \lbrace e_2 \rbrace \arrow[u, hook]
+\arrow[r, hook] & R^I \times \lbrace e_1 \rbrace \times R^{A_2} \arrow[u,
+hook] \\
+Z \arrow[uu, hook] \arrow[rr, hook] & & X_2 \arrow[u, hook]
+\end{tikzcd}
+
+C'est le diagramme marqué (*) en marge de la page 13.\footnote{Il le
+reprend d'une première version barrée. La page trace la flèche de la première
+ligne de droite à gauche, sans crochet, et note les crochets de la colonne de
+droite par de petites marques de sens incertain ; on les donne toutes dans le
+sens des inclusions, qui est le seul où le diagramme commute.} $X_1$ est logé
+dans l'étage $R^{A_2}$-coordonnée $= e_2$, $X_2$ dans l'étage
+$R^{A_1}$-coordonnée $= e_1$. Un point commun aux deux images a ses deux
+coordonnées égales à $e_1$ et $e_2$, donc provient de $Z_1$ et de $Z_2$, et la
+coordonnée $R^I$ — qui est $\varphi$ sur $Z$ — dit qu'il provient du même point
+de $Z$. Les deux images se rencontrent donc exactement le long de l'image de
+$Z$, et leur réunion, modérée par (M5$'$), est en bijection avec la somme
+amalgamée ensembliste ; c'est le critère des pages 10 et 11, et la Proposition
+des pages 8 et 11 conclut.\footnote{La page s'arrête après le diagramme ; la
+conclusion est restituée. Les étages $\{e_1\}$, $\{e_2\}$ sont des parties
+modérées parce que $e_1, e_2$ sont des points modérés, ce que (M6) exige.}
+
+\pagerange{14}{16}
+\section*{(IV) Ind-structures modérées strictes (pages 14 à 16)}
+
+Un \emph{ind-espace modéré strict} est un ensemble $E$ muni d'un ensemble
+$\mathcal{M}_E$ de parties — ses parties modérées —, stable par réunions finies
+et recouvrant $E$, chacune munie d'une structure modérée, ces structures
+s'induisant mutuellement, et tel que $A \in \mathcal{M}_E$, $B$ partie modérée
+de $A$ entraînent $B \in \mathcal{M}_E$. Il revient au même de se donner la
+notion d'application modérée d'un espace modéré dans $E$. C'est un
+\emph{ind-objet strict} de $\Sigma$ : une réunion filtrante d'espaces modérés
+le long de plongements.\footnote{Le titre porte en interligne « (ou
+Ind-espaces modérés) », avec une majuscule nette ; les « ind- » minuscules
+des pages suivantes sont le même préfixe. L'expression « ind-objet strict »
+est de l'édition ; c'est la notion de SGA~4 restreinte aux systèmes de
+monomorphismes.}
+
+On suppose
+\[ (\mathrm{M}8) \qquad R \text{ est réunion de ses parties modérées} ; \]
+$R$, et les $R^I$ pour $I$ fini, sont alors canoniquement des ind-espaces
+modérés stricts.\footnote{La page ajoute au-dessus de la ligne « (impliqué par
+M5) », lecture douteuse. Ni l'une ni l'autre de ses deux (M5) n'entraîne (M8) :
+si $R_0 \subsetneq R$ et que $\mathcal{M}_n$ est l'ensemble des parties finies
+de $R_0^n$, les axiomes (M1) à (M4), (M5) et (M5$'$) sont vérifiés et $R$ n'est
+pas réunion de ses parties modérées. (M8) est en revanche conséquence de
+(M0).}
+
+\textbf{Proposition.} Sous (M1) à (M5$'$), la catégorie $\Sigma^{\mathrm{ind}}$
+des ind-espaces modérés stricts a des limites projectives finies, que l'oubli
+respecte ; elle a aussi des sommes finies, respectées par l'oubli.\footnote{La
+marge porte « M1 : M5 ». Le sigle de la catégorie est $\mathrm{Esp}$ avec un
+indice surchargé, $\mathcal{M}_*$ ou $\mathcal{M}$ ; on écrit
+$\Sigma^{\mathrm{ind}}$ pour la distinguer de $\Sigma$. La page met les sommes
+finies sous l'hypothèse « $R_0 \neq \emptyset$ ». La construction qu'on connaît
+(note de la page 9) demande deux points modérés distincts, pour séparer les
+deux termes ; avec un seul, l'édition ne voit pas de preuve. Une remarque
+marginale, en partie lisible, ajoute « stricts \ldots\ (en principe !) ».}
+
+\subsection*{Parties localement modérées (pages 15 et 16)}
+
+Une partie $\mathfrak{Y}$ d'un ind-espace $\mathfrak{X}$ est \emph{localement
+modérée} si $A \cap \mathfrak{Y}$ est modérée pour toute partie modérée $A$ de
+$\mathfrak{X}$. Ces parties sont stables par intersections finies — la
+famille vide donnant $\mathfrak{X}$ lui-même — et par image réciproque par les
+morphismes d'ind-espaces. Une application modérée d'un espace modéré dans un
+$R^I$ est un cas particulier de morphisme d'ind-espaces.
+
+Sous (M6) et (M7), la page annonce l'existence, dans $\Sigma^{\mathrm{ind}}$ et
+au sens strict, des quotients $\mathfrak{X}/\mathfrak{Y}$ pour $\mathfrak{Y}$
+localement modérée, et des sommes amalgamées $\mathfrak{X}_1
+\sqcup_{\mathfrak{Z}} \mathfrak{X}_2$ le long d'immersions correspondant à des
+parties localement modérées $\mathfrak{Z}_i \subset \mathfrak{X}_i$, avec
+$\mathfrak{Z} \simeq \mathfrak{Z}_1 \simeq \mathfrak{Z}_2$. Aucune démonstration
+n'est esquissée : on passerait à la limite sur les parties modérées dans la
+construction des pages 12 et 13.\footnote{La page écrit « dans
+$\mathrm{Esp}_{\mathcal{M}_*}$ » ; c'est la catégorie des ind-espaces qui est
+entendue, puisque $\mathfrak{X}$ en est un objet. La dernière phrase, sur la
+méthode, est de l'édition.}
+
+\textbf{NB.} Contrairement à ce qui se passe dans $\Sigma$, où les sous-objets
+d'un objet sont exactement ses parties modérées (page 7), un sous-objet d'un
+ind-espace ne correspond pas nécessairement à une partie localement
+modérée.\footnote{Exemple de l'édition, dans le cadre semi-algébrique
+compact : l'ensemble $\mathbb{N}$, ind-espace discret réunion de ses parties
+finies, s'envoie injectivement dans la droite par $n \mapsto 1/(n+1)$ ; l'image
+coupe $[0,1]$ en un ensemble infini dénombrable, qui n'est pas semi-algébrique.
+La page porte peut-être sur les deux sigles $\mathrm{Esp}$ une marque qui
+distinguerait la catégorie des ind-espaces.}
+
+\pagerange{16}{19}
+\section*{(V) Relations avec les topologies (pages 16 à 19)}
+
+\subsection*{Parties modérées compactes}
+
+Supposons $R$ muni d'une topologie ; les $R^I$ et les modèles modérés en
+héritent. On veut que les applications modérées soient continues, et il suffit
+pour cela que les parties modérées soient compactes, d'où l'axiome
+\[ (\mathrm{M}9) \qquad R \text{ est séparé, et les parties modérées des }
+R^n \text{ sont compactes.} \]
+En effet, une application $f : A \to B$ entre compacts séparés dont le graphe
+est fermé — ici compact — est continue. Le foncteur d'oubli se factorise alors
+par la catégorie des espaces compacts séparés,
+\[ \Sigma \longrightarrow (\text{espaces compacts}) , \]
+et ce foncteur est encore fidèle, conservatif — une bijection continue entre
+compacts séparés est un homéomorphisme — et transportable. Réciproquement,
+quand $R \in \mathcal{M}_1$ (donc $R$ compact), la page annonce une
+caractérisation des $\mathcal{M}_*$ par un tel foncteur et un objet $R$ dans
+une puissance duquel tout objet se plonge, analogue à celle de la page
+7.\footnote{Sous (M0) et (M9), $R$ est compact ; le dossier ne revient pas
+sur la tension avec la section (VI), où $R$ est un corps : un corps
+topologique séparé et compact est fini. Dans la section (VI) il a d'ailleurs
+« oublié les structures topologiques ».}
+
+\subsection*{Ind-espaces et topologie limite inductive (page 17)}
+
+Tout ind-espace modéré est muni de la topologie limite inductive de ses
+parties modérées. Celle-ci induit sur chaque partie modérée sa topologie
+propre, et chaque partie modérée y est fermée.\footnote{La page met une
+hypothèse : l'espace serait « ind-dénombrable », limite inductive de
+\emph{suites} croissantes d'espaces modérés (« dénombrable » est une lecture
+douteuse). Pour l'énoncé tel qu'il est écrit, elle est superflue : si $F$ est
+fermé dans une partie modérée $A$, alors pour toute partie modérée $B$, $F$
+est compact dans le compact séparé $A \cup B$, donc fermé, et $F \cap B$ est
+fermé dans $B$ ; $F$ est donc fermé dans l'ind-espace, ce qui donne les deux
+assertions. Là où la dénombrabilité sert vraiment, c'est pour que la topologie
+limite inductive commute aux produits finis : c'est le cas pour les réunions
+de suites croissantes de compacts (les « $k_\omega$-espaces »), et non en
+général. L'édition ne sait pas laquelle des deux choses la page avait en
+vue.}
+
+\subsection*{Voisinages modérés (pages 17 et 18)}
+
+On veut que dans un espace modéré tout point ait un système fondamental de
+voisinages modérés ; il suffit que ce soit vrai dans $R$, car alors c'est vrai
+dans les $R^n$ (par produits) et dans leurs parties modérées (par
+intersection). D'où l'axiome
+\[ (\mathrm{M}10) \qquad \text{dans } R, \text{ tout point a un système
+fondamental de voisinages appartenant à } \mathcal{M}_1 . \]
+Sous (M9), (M10) entraîne que $R$ est localement compact.
+
+On dispose alors de la notion d'application \emph{modérée au voisinage d'un
+point}.
+
+\textbf{Proposition (page 18).} Sous (M5$'$), (M9) et (M10), une application
+d'un espace modéré $X$ dans un ind-espace modéré est modérée si et seulement si
+elle l'est au voisinage de chaque point.
+
+En effet, $X$ étant compact, il est recouvert par un nombre fini de voisinages
+modérés sur lesquels l'application est modérée, et son graphe est la réunion
+finie des graphes des restrictions.\footnote{La page ne donne pas la preuve ni
+la liste des axiomes ; on la donne, avec les hypothèses dont elle se sert.}
+Les applications modérées de $X$ dans $Y$ sont donc les sections d'un
+faisceau sur $X$, le \emph{faisceau des applications modérées}. La structure
+modérée de $X$ est connue dès qu'on connaît les fonctions modérées $X \to R$
+— c'est vrai déjà dans le cadre ensembliste, sous (M1)$_0$, (M2), (M3), (M4),
+puisqu'une application dans $R^n$ est modérée si et seulement si ses
+coordonnées le sont —, donc aussi dès qu'on connaît le faisceau des germes de
+fonctions modérées.\footnote{« (M1)$_0$ » : l'indice $0$ est net sur la page,
+et revient dans une note en biais de la page 7 que l'on ne sait pas lire. Le
+dossier ne définit nulle part cette variante de (M1) ; on garde le sigle sans
+lui attribuer de contenu.} Un espace modéré devient ainsi un espace annelé —
+c'est le point de vue des « espaces définissables » de la théorie
+o-minimale.\footnote{Rapprochement de l'édition.}
+
+\subsection*{Espaces localement modérés (page 19)}
+
+Un \emph{espace localement modéré} est un ind-espace modéré dont la topologie
+est séparée, dont tout point a un voisinage modéré — de sorte qu'il est
+localement compact — et même un système fondamental de voisinages modérés, et
+dont toute partie compacte est contenue dans une partie modérée : les parties
+modérées forment alors une partie cofinale, filtrante, de l'ensemble des
+compacts.\footnote{La page dit « les parties compactes sont les parties
+contenues dans une partie modérée » : lu à la lettre, toute partie d'une
+partie modérée serait compacte, ce qui est faux. On lit l'inclusion dans le
+seul sens vrai, que la suite de la phrase (« un ensemble filtrant cofinal :
+celui des parties compactes ») confirme. Le mot « ind-modéré » est écrit
+au-dessus de « loc.\ cpct », biffé.}
+
+Par (M10), $R$ est localement modéré — un compact de $R$ est recouvert par un
+nombre fini de voisinages modérés, dont la réunion est modérée par (M5$'$) — et
+donc aussi les $R^I$. Les espaces localement modérés forment une
+sous-catégorie pleine de $\Sigma^{\mathrm{ind}}$, stable par limites
+projectives finies, ce que la page affirme sans le montrer.\footnote{Il note
+cette sous-catégorie « $\mathrm{Esploc}_{\mathcal{M}_*}$ ». Une note en biais
+au bas de la page est presque illisible.}
+
+\pagerange{20}{23}
+\section*{(VI) Relation avec une structure de corps (pages 20 à 23)}
+
+\subsection*{L'axiome (M11)}
+
+On oublie la topologie et l'on suppose que $R$ est un \emph{corps}. Outre les
+axiomes qui font de $\Sigma$ une catégorie à limites projectives finies, on
+demande :\footnote{La page dit « en plus de (M1) et (M4), minimum pour
+construire $\mathrm{Esp}_{\mathcal{M}_*}$ avec ses $\varprojlim$ finies ».
+Les limites finies de la page 6 se servent aussi de la stabilité par
+intersection, donc de (M3), ou de (M2) avec (M4) ; un indice surchargé après
+« (M1) » visait peut-être cela. Une première version de (M11), ne portant que
+sur $a \mapsto -a$, est barrée de sept traits.}
+
+\[ (\mathrm{M}11) \quad
+\begin{cases}
+\text{a) } 0 \neq 1 \text{ sont des points modérés : } \{0\}, \{1\} \in
+\mathcal{M}_1 ; \\
+\text{b) pour } A \in \mathcal{M}_2, \text{ les fonctions } (x,y) \mapsto x - y
+\text{ et } (x,y) \mapsto xy \\
+\qquad \text{sur } A \text{ sont modérées,} \\
+\qquad \text{i.e.\ } \{(x, y, x-y)\} \text{ et } \{(x, y, xy)\},\ (x,y) \in A,
+\text{ sont dans } \mathcal{M}_3 ; \\
+\text{c) pour } A \in \mathcal{M}_1,\ A \subset R^*, \text{ il existe } B \in
+\mathcal{M}_1 \text{ avec } A^{-1} \subset B .
+\end{cases} \]
+
+La marge dit deux fois, la première biffée, qu'on pourrait supposer $B =
+A^{-1}$ ; la page 22 montre que c'est en effet une conséquence. Une note
+marginale ajoute que, sous (M0), b) se réduit au cas $A = R^2$.\footnote{Lecture
+partielle : « NB si \ldots\ $A \in \mathcal{M}_2$ \ldots\ (M11) pour $A =
+R^2$ ». La réduction est juste : si $R^2$ est modérée et que les graphes de
+$x - y$ et $xy$ sur $R^2$ le sont, leurs restrictions à $A$ le sont par (M3).}
+
+\textbf{Proposition.} Pour un espace modéré $X$, les fonctions modérées $X \to
+R$ forment un sous-anneau de l'anneau de toutes les fonctions sur $X$. En
+particulier $R_0$ est un sous-anneau de $R$.
+
+En effet, pour $f, g$ modérées, $(f, g) : X \to R^2$ est modérée, d'image $A
+\in \mathcal{M}_2$, et $f - g$, $fg$ sont les composés de $(f,g)$ avec les
+fonctions modérées de b) ; les constantes $0$ et $1$ sont modérées par a). Une
+fonction constante de valeur $c$ est modérée si et seulement si $c \in R_0$ —
+son graphe est $X \times \{c\}$ —, et $R_0$ est le sous-anneau des
+constantes.\footnote{La page s'arrête au bas du feuillet sur « En particulier
+$R_0$ est un sous-anneau de $R$, et les \ldots » ; la page 21 ne la continue
+pas visiblement. La marge porte, verticalement, un fragment où l'on lit
+« $R_0$ intègre », lecture douteuse — ce qui est vrai de tout sous-anneau d'un
+corps.}
+
+\subsection*{Inverses (pages 21 et 22)}
+
+La page 21 s'ouvre sur un signe isolé, un D à double trait entouré d'une
+boucle, suivi de « $=$ », dont le dossier ne dit pas la fonction.\footnote{On
+ne lui donne pas de sens. La transcription le rend par $\mathbb{D}$.} Suit une
+remarque : sous (M8), sur les ind-espaces $R^I$, les fonctions ind-modérées
+contiennent en tout cas l'anneau $R_0[(X_i)_{i \in I}]$ des polynômes à
+coefficients dans $R_0$ en les fonctions coordonnées — ce que donne la
+Proposition précédente sur chaque partie modérée —, et les applications
+$R_0$-polynomiales entre les $R^I$ sont modérées et transforment les parties
+modérées en parties modérées.\footnote{Cette dernière clause est un ajout
+interlinéaire serré, lu « Dans les applications $R_0$-polynomiales $R^I \to X$
+modérées, et transforment des parties modérées en itou » ; le « $X$ » et
+plusieurs mots sont douteux, et l'on restitue « entre les $R^I$ ». La page ne
+dit pas si $I$ peut être infini ; partout ailleurs dans le dossier il est
+fini, et on le garde fini. « Ensembles », souligné ou biffé, est suivi de
+« anneaux » : on lit « anneaux ».}
+
+\textbf{Corollaire.} Une fonction modérée $f$ sur un espace modéré $X$ est
+inversible dans l'anneau des fonctions modérées si et seulement si elle ne
+s'annule pas sur $X$.
+
+Comme $f(X)$ est une partie modérée de $R^*$, cela revient au
+
+\textbf{Corollaire.} Pour $A \in \mathcal{M}_1$, $A \subset R^*$, la restriction
+de $x \mapsto x^{-1}$ à $A$ est modérée : $\{(x, x^{-1}) \mid x \in A\} \in
+\mathcal{M}_2$.
+
+En effet, cet ensemble est $\{(x, y) \in A \times B \mid xy = 1\}$, où $B \in
+\mathcal{M}_1$ contient $A^{-1}$ (M11 c) : c'est l'image réciproque du point
+modéré $1$ par la fonction modérée $(x,y) \mapsto xy$ sur $A \times B$. En
+projetant sur la seconde coordonnée, $A^{-1}$ est elle-même modérée, ce que
+suggérait la marge.
+
+\textbf{Corollaire (page 22).} $R_0$ est un sous-corps de $R$ : pour $x \in
+R_0^*$, appliquer ce qui précède à $A = \{x\}$.
+
+\subsection*{Retour sur (M6) (pages 22 et 23)}
+
+Soit $Y$ une partie modérée d'un espace modéré $X$, définie comme dans (M6)
+par $Y = \bigcap_{\alpha} f_\alpha^{-1}(e_\alpha)$ avec $e_\alpha \in R_0$.
+Quitte à remplacer $f_\alpha$ par $f_\alpha - e_\alpha$, qui est modérée parce
+que la constante $e_\alpha$ l'est, on peut supposer $e_\alpha = 0$ : $Y$ est
+le lieu des \emph{zéros communs} des $f_\alpha$.\footnote{La page écrit
+« $e_\alpha \in R$ ». C'est $e_\alpha \in R_0$ qu'exige (M6), et c'est ce
+qui rend la translation légitime : la constante $e_\alpha$ n'est modérée que si
+$e_\alpha$ est un point modéré.} Soit $(g_\beta)_{\beta \in J}$ une famille
+finie de fonctions modérées réalisant un plongement $X \hookrightarrow R^J$.
+Les fonctions $f_\alpha$ et $f_\alpha g_\beta$ sont modérées, s'annulent sur
+$Y$, ont $Y$ pour lieu des zéros communs, et \emph{séparent les points de $X
+\smallsetminus Y$}. Soient en effet $x \neq y$ dans $X \smallsetminus Y$. Si
+un $f_\alpha$ les sépare, c'est fini. Sinon $f_\alpha(x) = f_\alpha(y)$ pour
+tout $\alpha$ ; comme $x \notin Y$, il existe $\alpha$ avec $\lambda =
+f_\alpha(x) \neq 0$, et il existe $\beta$ avec $g_\beta(x) \neq g_\beta(y)$ ;
+alors
+\[ f_\alpha g_\beta(x) = \lambda\, g_\beta(x) \neq \lambda\, g_\beta(y) =
+f_\alpha g_\beta(y) , \]
+puisque $\lambda \neq 0$ dans le corps $R$.
+
+\textbf{Proposition (page 23).} Sous (M1) à (M7) et (M11), toute partie modérée
+$Y$ d'un espace modéré $X$ qui est le lieu des zéros communs d'une famille
+finie de fonctions modérées est aussi celui d'une famille finie de fonctions
+modérées séparant les points de $X \smallsetminus Y$ ; autrement dit $X/Y$ est
+un espace modéré, au sens strict de la page 12.\footnote{La page écrit
+« qui sépare les points de $X$ » : une telle famille, constante sur $Y$, ne
+peut séparer les points de $Y$ dès que $Y$ en a deux ; c'est $X \smallsetminus
+Y$ qui est entendu, comme dans l'argument qui précède. Les mots entre
+« famille » et « $X/Y$ » sont illisibles, la parenthèse ouvrante manque ; la
+lecture « $X/Y$ est un espace modéré » est sûre. Le « Dém : » qui précède
+l'énoncé est resté vide : la démonstration est l'argument écrit juste
+au-dessus, aux pages 22 et 23. « M1 : M7 » est peut-être « M1 à M7 ». Un mot
+barré devant « modérée », lu « fermée », est douteux.}
+
+Ainsi, dès que $R$ est un corps, la seconde moitié de (M6) est conséquence de
+la première : c'est le seul endroit où le dossier allège ses propres axiomes.
+
+\pagerange{24}{24}
+\section*{À prouver (page 24)}
+
+La dernière page n'est plus une construction mais un programme.
+
+1) Pour un morphisme $X \to Y$ d'espaces modérés, il existerait une partie
+modérée $Y'$ \emph{rare} dans $Y$ telle que, en notant $(U_i)_{i \in I}$ les
+composantes connexes de $Y \smallsetminus Y'$ — leurs adhérences
+$\overline{U}_i$ étant des parties modérées de $Y$ —, il existe pour chaque
+$i$ un espace modéré $Z_i$ et une correspondance modérée
+\[ R_i \subset (\overline{U}_i \times Z_i) \times X \]
+induisant une bijection entre $U_i \times Z_i$ et la partie $X|U_i$ de $X$
+au-dessus de $U_i$ : au-dessus de chaque $U_i$, $X$ est un fibré trivial au
+sens modéré relatif.
+
+Puis la question : un énoncé analogue vaut-il pour un \emph{diagramme fini}
+d'espaces modérés au-dessus de $Y$ — est-il « trivial par morceaux »
+au-dessus de $Y \smallsetminus Y'$ pour un $Y'$ modéré rare convenable ? « Ce
+serait déjà intéressant » dans le cas d'un diagramme $Z \subset X \subset Y
+\times [0,1]$ au-dessus de $Y$.\footnote{Le dernier mot avant « au dessus de
+$Y$ » est illisible. Le crochet de $[0,1]$ est tracé par-dessus un premier
+signe, peut-être un $I$.}
+
+Ce programme suppose tacitement ce que le dossier n'a pas posé ensemble : une
+topologie (« rare », « composantes connexes »), la finitude de $\pi_0(Y
+\smallsetminus Y')$, et un ordre sur $R$ pour parler de $[0,1]$. Le choix
+d'une \emph{correspondance} sur $\overline{U}_i$ plutôt que d'une bijection est
+juste : une trivialisation sur $U_i$ ne se prolonge pas en bijection sur le
+bord, mais son graphe a une adhérence.
+
+C'est, à la lettre, le \emph{théorème de trivialité de Hardt} : établi pour les
+applications semi-algébriques par Hardt en 1980, il vaut dans toute structure
+o-minimale, et sous une forme compatible avec un nombre fini de parties — ce
+qui répond par l'affirmative à la question du diagramme $Z \subset X$, la
+partie rare $Y'$ étant de dimension strictement plus petite que
+$Y$.\footnote{Voir le chapitre 9 du livre de van den Dries cité plus haut.
+Ces pages, datées par l'inventaire « à partir de 1973 — à partir de 1978 »,
+ne pouvaient connaître ni l'article de Hardt (1980) ni les structures
+o-minimales (van den Dries, Pillay et Steinhorn, à partir de 1984–1986) ;
+elles pouvaient connaître le théorème de Tarski–Seidenberg, les ensembles
+semi-analytiques de Łojasiewicz (1964) et sous-analytiques de Hironaka
+(1973), qu'elles ne citent pas. Rapprochement de l'édition, sans
+affirmation de priorité.}
+
+\end{document}
