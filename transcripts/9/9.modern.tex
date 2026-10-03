@@ -1,0 +1,891 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 9, pages 1-28.
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried moves into a
+% footnote. In any dispute of substance the transcription governs: whoever
+% cites Grothendieck must cite batch-01.fr.tex and batch-02.fr.tex.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-03 — first pass, unchecked against
+% the pages by a human. Not measured against the Opus 5 reference reading of
+% folder 115. The folder was read whole — both batches, pages 1-28 — before
+% any of this was written, and it is written as ONE file for the shelfmark.
+%
+% Notation fixed for the whole folder (spine section): A^* the dual abelian
+% scheme and u^* the dual morphism (his star, kept); (-)^∨ the linear dual;
+% t_A = Lie(A) (his underlined t), ω_A = det t_A^∨ (as on p. 20; NOT the module
+% t_A^∨, which p. 2 also calls ω_G — the module is written t_G^∨ here);
+% H^1_dR(A/S) (his DR^1); H(G) kept for the p-divisible case; E(G) for the
+% universal vector extension (his G~); A[p], A[p]_ét (his left subscript pA);
+% σ for the Frobenius of W(k) (his π); Δ, δ, φ̃, α_A as on pp. 23-28.
+%
+% Substantive departures from the pages, each footnoted where it occurs:
+%   - p. 4-7: A/(F^{n+1},V^{n+1}) is killed by p^{n+1}, so the trace form
+%     takes values in W_{n+1}, not W_n as written;
+%   - p. 7: « u·V = π(u∘F) » and « Vu = u∘F_g » are slips for V;
+%   - p. 8: θ = uθ' is written for θ = θ'∘u;
+%   - p. 11: K(W(k'),I) ≃ R_{W(k')}(I) is weakened to a homomorphism;
+%   - p. 12: the Z_p(1) counterexample needs inertia (not just G_K) to act
+%     non-trivially on μ_p;
+%   - p. 13: « égale à n = dim A_K » is read as 2g, the rank (the page's own
+%     elliptic case says 2);
+%   - p. 19: « t_{A*} → t_A » is a variance slip; the middle component is a
+%     section of Hom(t_A, t_{A*}), the tangent map of φ̃ (as the page then says);
+%   - p. 23: target ⊗Q_ℓ read ⊗Q_p; det T_p(A^*) read with its « ét »;
+%   - p. 24: « u' = φ̃uφ̃^{-1} » is u^* (an endomorphism of A^*); the involution
+%     of End(A)⊗Q is the Rosati u ↦ φ̃^{-1}u^*φ̃;
+%   - p. 26: the rationality of Δ is argued on the symmetric elements only,
+%     which is what the positivity argument needs.
+%
+% Announced and never established: the identity Δ(u)Δ(u^*) = deg u of p. 24
+% (its source is illegible; p. 25, cancelled, cites a « théorème p-adique ou
+% th. caractéristique de Weil »); the claim of p. 21 that ω_A ≃ ω_{A^*}
+% exchanges the Hasse invariants; c) and d) of p. 28; the « Remarque » of
+% p. 17; the end of the cancelled lemma of p. 8. The pencil « faux par Tate »
+% of p. 13 is recorded, not reconstructed.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{9}
+\pages{1}{28}
+\dating{[vers 1969]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Groupe de Barsotti-Tate et cristaux (jusqu’en été 1969) : notes manuscrites (s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Ces vingt-huit pages parlent de ce qui reste d'une variété abélienne quand on
+la regarde « à travers le nombre premier $p$ » en caractéristique $p$. Elles ne
+forment pas un mémoire suivi : ce sont cinq séries de feuillets, chacune sous
+sa chemise, qui tournent autour d'un même objet et posent sur lui des questions
+voisines.
+
+L'objet est le suivant. Une variété abélienne $A$ de dimension $g$ --- une
+courbe elliptique si $g = 1$ --- a, pour tout nombre premier $\ell$ différent de
+la caractéristique, un « module de Tate » $T_\ell(A)$ : un réseau de rang $2g$
+qui enregistre les points de torsion d'ordre une puissance de $\ell$. Pour
+$\ell = p$ ce réseau se mutile : il perd la moitié de son rang, ou plus. Ce qui
+le remplace est un objet linéaire, le \emph{module de Dieudonné}, muni de deux
+opérateurs $F$ et $V$ dont le produit est $p$. Réduit modulo $p$, c'est
+un espace vectoriel de dimension $2g$, la cohomologie de De Rham, avec un
+sous-espace privilégié de dimension $g$, la filtration de Hodge.
+
+Le problème qui revient d'une série à l'autre est celui-ci : qu'est-ce que
+cet objet permet de \emph{canoniser} ? Pour $\ell \neq p$, beaucoup de choses
+sont gratuites --- l'accouplement de Weil identifie le module de Tate de $A$
+au dual de celui de la variété duale $A^*$. Pour $\ell = p$, rien ne l'est.
+
+L'idée qui arrive est que tout devient possible dans le cas \emph{ordinaire}.
+Une image : un espace muni d'un opérateur peut avoir une partie où
+l'opérateur est inversible et une partie où il est nilpotent ; quand ces
+deux parties remplissent l'espace et se séparent proprement, tout ce qui est
+défini sur l'une se transporte. Une variété abélienne ordinaire est celle où
+$F$ et $V$ découpent ainsi le module de Dieudonné en deux moitiés de même
+taille, l'une « étale », l'autre « multiplicative ». Alors, montre le
+dossier, la cohomologie de De Rham se scinde canoniquement, chaque moitié
+devient un système local étale tensorisé par les fonctions, et un
+« transport parallèle » canonique existe sur l'espace des déformations ---
+ce qui, en caractéristique $p$, n'arrive \emph{que} dans le cas ordinaire.
+L'obstruction a un nom : la section qui s'annule exactement là où la variété
+cesse d'être ordinaire, et que les pages baptisent « invariant de Hasse ».
+Les dernières pages en tirent un isomorphisme canonique entre les
+déterminants des parties étales des modules de Tate $p$-adiques de $A$ et de
+$A^*$ : on le fabrique à partir d'une polarisation, on divise par la racine
+carrée de son degré, et l'on montre --- par un argument de positivité d'une
+grande économie --- que le résultat ne dépend pas de la polarisation choisie.
+
+Entre deux, une série dactylographiée pose une question d'une autre nature :
+peut-on attacher à un groupe $p$-divisible sur un corps local un
+« caractère » de l'inertie, comme on le fait pour $\ell \neq p$, et ce
+caractère est-il lu par la seule $p$-torsion ? La réponse est non, et la
+page le démontre elle-même ; la question suivante porte, au crayon, la mention
+« faux par Tate ». Ce dossier montre ainsi le travail en train de se faire :
+un lemme écrit puis barré d'un « faux », une page entière annulée, des
+questions laissées pour qui voudra.
+
+Les noms modernes à chercher ensuite : la théorie de Dieudonné et l'extension
+vectorielle universelle, la théorie de Serre--Tate des variétés abéliennes
+ordinaires, la filtration conjuguée, l'invariant de Hasse, et --- pour la
+question des caractères --- la réduction potentiellement bonne et les
+caractères de Brauer.
+
+\keywords{Dieudonné module, p-divisible group, universal vector extension, Cartier duality, Gauss-Manin connection, potentially good reduction, Brauer character, Hodge filtration, conjugate filtration, ordinary abelian variety, Serre-Tate theory, Hasse invariant, Rosati involution}
+\end{resume}
+
+\pagerange{1}{28}
+\section*{Le fil du dossier, et ses conventions}
+
+Le dossier n'a pas une colonne vertébrale unique ; il a un objet commun. Cinq
+séries de feuillets, non paginées par lui, séparées par des chemises dont
+les titres sont repris ici :
+
+\begin{enumerate}
+\item \emph{Pages 1 à 7} (chemise : « Dualité des modules de Dieudonné de
+groupes de B.T.\ duaux l'un de l'autre ») --- la réduction modulo $p$ du
+module de Dieudonné, sa dualité, et l'anneau de Dieudonné tronqué muni d'une
+forme trace.
+\item \emph{Page 8}, annulée --- une question sur la connexion de
+Gauss--Manin et un lemme sur les torseurs d'homotopies.
+\item \emph{Pages 9 à 13} (chemise : « Caractères des groupes de B.T.\ à
+réduction semi-stable virtuelle essentielle ») --- un tapuscrit sur le
+caractère d'un groupe $p$-divisible sur un corps local.
+\item \emph{Pages 14 à 20} (chemise : « Détermination des
+“stratifications canoniques” sur les déformations ») --- les déformations
+d'une variété abélienne, la nécessité de l'ordinarité, la description étale,
+la polarisation, l'invariant de Hasse.
+\item \emph{Pages 21 à 28}, à la suite sans chemise mais annoncées par celle
+de la page 14 (« L'isom.\ de nature globale : $\det T_p(A)_{\text{ét}} \simeq
+\det T_p(A^*)_{\text{ét}}$ ») --- la construction de cet isomorphisme.
+\end{enumerate}
+
+Les séries 1, 4 et 5 se tiennent : elles parlent du même espace $H$ muni de
+$F$ et $V$, d'abord pour un groupe $p$-divisible sur un corps (page 2), puis
+pour une variété abélienne sur une base. Les séries 2 et 3 sont des
+digressions, la seconde d'une autre main (une machine à écrire) et d'un
+autre côté du sujet (les représentations galoisiennes).
+
+\emph{Conventions, valables pour tout le dossier.} $k$ est un corps parfait de
+caractéristique $p > 0$, $W = W(k)$ ses vecteurs de Witt, $W_n = W/p^n W$, et
+$\sigma$ le Frobenius de $W$.\footnote{Il le note $\pi$, aux pages 4, 7 et
+20 ; à la page 20 la même lettre désigne une flèche $t_A^{(p)} \to t_A$, que
+l'on note ici $V$.} Pour un groupe $p$-divisible $G$ (un « groupe de B.T. »),
+$G^*$ est le dual de Cartier ; pour un schéma abélien $A$ sur $S$, $A^*$ est le
+schéma abélien dual et $u^* : B^* \to A^*$ le dual d'un morphisme $u : A \to
+B$ --- l'étoile est la sienne et on la garde. Le signe ${}^\vee$ désigne
+toujours un dual \emph{linéaire}. $t_A = \operatorname{Lie}(A)$ est l'espace
+tangent à l'origine (son $t$ souligné), $t_A^\vee$ le module des formes
+invariantes, et $\omega_A = \det t_A^\vee = \bigwedge^g t_A^\vee$ le
+fibré de Hodge, au sens de la page 20.\footnote{À la page 2 il écrit
+$\omega_G$ pour le module $t_G^\vee$ lui-même, non pour son déterminant. On
+écrit ici $t_G^\vee$ dans ce cas, pour que $\omega$ ait un seul sens.}
+$H^1_{\mathrm{dR}}(A/S)$ est ce qu'il note $\mathrm{DR}^1(A/S)$ ; $A[p]$ et
+$A[p]_{\text{ét}}$ sont ses ${}_pA$ et $({}_pA)_{\text{ét}}$ ; $M^{(p)}$ est le
+tiré en arrière par le Frobenius de la base.
+
+\emph{Ce que le dossier annonce et n'établit pas} : l'identité $\Delta(u)
+\Delta(u^*) = \deg u$ sur laquelle repose la page 24 (sa justification est
+illisible, et la page 25 qui en esquissait une est annulée) ; la
+compatibilité de l'isomorphisme $\omega_A \simeq \omega_{A^*}$ avec les
+invariants de Hasse (page 21) ; les points c) et d) de la page 28 ; la
+fin du lemme de la page 8. On les retrouve à leur place.
+
+\pagerange{1}{7}
+\section*{Le module de Dieudonné réduit et sa dualité (pages 1 à 7)}
+
+\pagerange{2}{2}
+\subsection*{Les deux suites exactes (page 2)}
+
+Soit $G$ un groupe $p$-divisible sur $k$, de dimension $g$, dont le dual
+$G^*$ est de dimension $g^*$ ; la hauteur est $g + g^*$. L'extension
+vectorielle universelle de $G$ est une suite exacte
+\[
+0 \to \mathbb{V}(\omega_{G^*}) \to E(G) \to G \to 0 ,
+\]
+où $\mathbb{V}(\omega_{G^*})$ est le groupe vectoriel dont les points sont les
+sections de $t_{G^*}^\vee$.\footnote{Il écrit $\tilde G$ pour $E(G)$, et
+$\mathbb{V}(\underline{t}_{G^*})$ pour le noyau : dans la convention d'EGA,
+$\mathbb{V}(\mathcal{E}) = \operatorname{Spec}\operatorname{Sym}\mathcal{E}$, dont les points sont les formes
+linéaires sur $\mathcal{E}$, si bien que les deux écritures désignent le même
+groupe. Le nom d'« extension vectorielle universelle » et la notation $E(G)$
+sont postérieurs (Mazur et Messing, 1974, à la suite des leçons de
+Grothendieck à Montréal en 1970) ; l'objet est déjà là.} En passant aux
+algèbres de Lie, on obtient
+\[
+0 \to t_{G^*}^\vee \to \operatorname{Lie} E(G) \to t_G \to 0 .
+\]
+Posons $H(G) = \operatorname{Lie} E(G^*)$ --- la page le dit en note, « NB
+$H(G) = \underline{t}_{\tilde G^*}$ ».\footnote{L'indice est en partie
+recouvert d'une tache ; la lecture $\tilde G^*$ est celle de la transcription,
+appuyée sur la même égalité, lisible, quelques lignes plus bas.} C'est
+l'analogue, pour $G$, de $H^1_{\mathrm{dR}}$ d'une variété abélienne, et c'est
+la réduction modulo $p$ du module de Dieudonné de $G$ --- le « module de
+Dieudonné réduit $M \otimes_W k$ » de la chemise. Il s'insère dans
+\[
+0 \to t_G^\vee \to H(G) \to t_{G^*} \to 0 ,
+\qquad
+\dim = g,\ g + g^*,\ g^* ,
+\]
+et porte deux applications, $F : H(G)^{(p)} \to H(G)$ et $V : H(G) \to
+H(G)^{(p)}$, de composés nuls. La suite exacte pour $G^*$, c'est-à-dire pour
+$H(G^*) = \operatorname{Lie} E(G)$, est la \emph{transposée} de celle de $G$ :
+la dualité $H(G^*) \simeq H(G)^\vee$ échange les deux suites, et échange $F$
+et $V$.\footnote{Les deux diagrammes sont côte à côte sur la page, avec
+« dual de » au-dessus du trait qui les sépare ; la phrase (1) qui énonce
+la transposition est à moitié illisible, et l'énoncé précis --- dualité,
+échange de $F$ et $V$ --- est notre reconstruction. C'est l'énoncé connu.}
+
+L'énoncé (2) de la page est exact et se dit ainsi :
+\[
+\operatorname{Ker} F = \operatorname{Im} V = (t_G^\vee)^{(p)} ,
+\qquad
+\operatorname{Ker} V = \operatorname{Im} F .
+\]
+Ce second sous-espace, de dimension $g^*$, est l'image de $t_{G^*}^{(p)}$ par
+$F$ ; on l'appelle aujourd'hui la \emph{filtration conjuguée}, par opposition à
+la filtration de Hodge $t_G^\vee \subset H(G)$. Il n'est pas en général un
+supplémentaire de $t_G^\vee$ : c'est exactement ce que mesure l'ordinarité, aux
+pages 15 et 21.\footnote{La page laisse en blanc ce que vaut $\operatorname{Ker}
+V$ (« ce que ça \ldots », suivi d'une parenthèse illisible). Pour une variété
+abélienne, c'est le théorème d'Oda (1969) sur $H^1_{\mathrm{dR}}$ en
+caractéristique $p$ ; la page n'y renvoie pas.}
+
+Vient enfin une trichotomie, que l'on énonce en termes de la décomposition de
+$G$ en parties connexe et étale :
+\begin{itemize}
+\item $G$ est connexe (« purement infinitésimal »), c'est-à-dire $G^*$ n'a pas
+de partie de type multiplicatif (« sans tore »), si et seulement si $F$ est
+nilpotent sur $H(G)$ ;
+\item $G^*$ est connexe, c'est-à-dire $G$ n'a pas de partie de type
+multiplicatif, si et seulement si $V$ est nilpotent ;
+\item $G$ et $G^*$ sont tous deux connexes --- $G$ est « local-local » --- si
+et seulement si $F$ et $V$ sont nilpotents.
+\end{itemize}
+On le vérifie sur les cas extrêmes : pour $G$ étale, $H(G) = t_{G^*}$ est
+l'algèbre de Lie d'un tore et $F$ y est bijectif ; pour $G = \mu_{p^\infty}$,
+$H(G) = t_G^\vee$ et $F$ y est nul.\footnote{Ces trois lignes sont d'une
+lecture presque entièrement incertaine sur la page ; seuls les signes
+$\iff$ et la structure en trois cas sont sûrs. Les énoncés donnés sont ceux
+que la théorie de Dieudonné rend vrais, et que la lecture de la transcription
+suggère. Le point (3), sur la composée $t_{G^*}^{(p)} \to H(G) \to t_{G^*}$ ---
+l'application de Hasse--Witt de $G^*$ --- et sur un « Frobenius dans
+$H^2(G, \mathbb{G}_m)$ », est trop lacunaire pour qu'on en tire un énoncé.}
+
+\pagerange{4}{7}
+\subsection*{L'anneau de Dieudonné tronqué et sa forme trace (pages 4, 6 et 7)}
+
+Soit $\mathcal{A} = W[F, V]$ l'anneau de Dieudonné : $F\lambda =
+\lambda^\sigma F$, $V\lambda^\sigma = \lambda V$, $FV = VF = p$. Il est libre
+sur $W$, de base les $F^i$ ($i \geq 0$) et les $V^j$ ($j \geq 1$). Pour $n
+\geq 0$, on pose
+\[
+\mathcal{A}_n = \mathcal{A}/(F^{n+1}, V^{n+1}) .
+\]
+Comme $V^a F^{n+1} = p^a F^{n+1-a}$, l'idéal bilatère contient $p^{n+1}$, et
+$\mathcal{A}_n = \bigoplus_{i=0}^n W_{n+1-i} F^i \oplus \bigoplus_{j=1}^n
+W_{n+1-j} V^j$.\footnote{La page écrit partout $W_n$ comme anneau de
+coefficients de $\mathcal{A}_n$. Avec la troncature choisie, $\mathcal{A}_n$
+est tué par $p^{n+1}$ et non par $p^n$ ; on corrige donc l'indice en $W_{n+1}$.
+On aurait aussi bien pu garder $W_n$ et tronquer en $F^n$, $V^n$, ce que la
+page 6 suggère d'ailleurs (« si $M$ tué par $F^n$, $V^n$ »).}
+
+Il existe une unique forme $W$-linéaire $\varphi_n : \mathcal{A}_n \to W_{n+1}$
+telle que $\varphi_n(1) = 1$ et $\varphi_n(F^i) = \varphi_n(V^i) = 0$ pour $i
+\geq 1$ ; elle est linéaire à gauche et à droite sur $W$, et vérifie
+\[
+\varphi_n(Fz) = \varphi_n(zF)^\sigma , \qquad \varphi_n(zV) =
+\varphi_n(Vz)^\sigma .
+\]
+On le vérifie sur la base : pour $z = \lambda V$, $Fz = p\lambda^\sigma$ et $zF
+= p\lambda$. La page le fait, pour la linéarité, en écrivant $z = a + \sum
+\lambda_i F^i + \sum V^i \mu_i$, et s'arrête au moment de traiter $F$.
+
+La forme $\langle x, y \rangle = \varphi_n(xy)$ est le point de la page 7. Ses
+règles sont
+\[
+\langle \lambda x, y \rangle = \lambda \langle x, y \rangle , \quad
+\langle x, y \lambda \rangle = \langle \lambda x, y \rangle , \quad
+\langle x, yF \rangle = \sigma^{-1}\langle Fx, y \rangle , \quad
+\langle x, yV \rangle = \sigma\langle Vx, y \rangle ,
+\]
+et $\langle x, ay \rangle = \langle xa, y \rangle$ pour tout $a \in
+\mathcal{A}_n$, ce qui la factorise par $\mathcal{A}_n \otimes_{\mathcal{A}_n}
+\mathcal{A}_n$. Elle est \emph{parfaite} : $F^i$ s'apparie avec $V^i$ en $p^i$,
+qui engendre $p^i W_{n+1} \simeq W_{n+1-i}$, et tous les autres produits de
+vecteurs de base ont une trace nulle. Il en résulte un isomorphisme de
+$\mathcal{A}_n$-bimodules
+\[
+\mathcal{A}_n \xrightarrow{\ \sim\ } \operatorname{Hom}_W(\mathcal{A}_n,
+W_{n+1}) ,
+\]
+que la page pose avec un point d'interrogation au-dessus de la flèche et
+dont elle vérifie la linéarité à droite et à gauche par les deux groupes de
+règles ci-dessus.\footnote{Le caractère parfait de l'accouplement est notre
+vérification ; la page n'en dit rien, et c'est ce qui fait de la flèche un
+isomorphisme.} La structure de module à droite sur $D'(M) =
+\operatorname{Hom}_W(M, W_{n+1})$, pour un $\mathcal{A}$-module à gauche $M$
+tué par $F^{n+1}$ et $V^{n+1}$, est la transposée :
+\[
+u \cdot F = \sigma^{-1} \circ u \circ F , \qquad u \cdot V = \sigma \circ u
+\circ V , \qquad u \cdot \lambda = u \circ \lambda ,
+\]
+et l'on a bien $u \cdot F \cdot V = u \cdot V \cdot F = pu$.\footnote{La page
+écrit « $u \cdot V = \pi(u \circ F)$ », et plus bas « $Vu = u \circ F_g$ » :
+deux lapsus pour $V$, que le calcul $u \cdot F \cdot V = pu$ écrit juste à
+côté exige.}
+
+Cela met en place deux foncteurs dualisants pour les modules de Dieudonné de
+longueur finie : $D(M) = \operatorname{Hom}_{\mathcal{A}}(M, I)$ où $I =
+\varinjlim I_n$, $I_n = \mathcal{A}_n$ vu comme bimodule et les transitions
+induites par la multiplication par $p$ ; et $D'(M) = \operatorname{Hom}_W(M,
+W_{n+1})$ muni de la structure transposée. L'isomorphisme ci-dessus est ce qui
+les identifie. Tous deux changent un module à gauche en module à droite ; on
+revient aux modules à gauche par l'anti-involution $s$ de $\mathcal{A}$, triviale
+sur $W$, qui échange $F$ et $V$.\footnote{La page dit « involution » ; c'est
+un anti-automorphisme ($s(ab) = s(b)s(a)$), et c'est ce qu'il faut pour
+changer de côté. On vérifie qu'il est bien défini : $s(\lambda^\sigma F) =
+V\lambda^\sigma = \lambda V = s(F\lambda)$.} C'est, sous sa forme d'anneau, la
+dualité de Dieudonné qui correspond à la dualité de Cartier ; aujourd'hui on
+l'écrit d'ordinaire directement $M \mapsto \operatorname{Hom}_W(M, W[1/p]/W)$,
+$F$ et $V$ transposés et échangés.
+
+\pagerange{8}{8}
+\section*{Une question sur la connexion de Gauss--Manin (page 8)}
+
+La page est annulée de trois traits, mais lisible.\footnote{On la donne parce
+qu'elle se lit et qu'elle situe le dossier ; son annulation interdit d'y voir
+autre chose qu'un essai.} Elle demande comment définir \emph{directement} une
+connexion intégrable sur $R f_* \Omega^\bullet_{X/S}$ --- ce qu'on appelle la
+connexion de Gauss--Manin, construite par Katz et Oda en 1968 et, du point de
+vue cristallin, déduite de ce que la cohomologie de De Rham est un cristal.
+
+Le lemme qui suit fournit l'outil. Soient $X$ un topos, $K^\bullet$ et
+$L^\bullet$ des complexes de faisceaux abéliens, $\mathcal{G}$ un faisceau
+abélien muni de $i : \mathcal{G} \to \underline{\mathrm{Hom}}^{-1}(K^\bullet,
+L^\bullet) = \prod_j \underline{\mathrm{Hom}}(K^j, L^{j-1})$, et $P$ un
+$\mathcal{G}$-torseur muni de $\theta : P \to Z^0
+\underline{\mathrm{Hom}}^\bullet(K^\bullet, L^\bullet)$ --- à chaque section de
+$P$ un morphisme de complexes --- tel que
+\[
+\theta(g \cdot p) = \theta(p) + d\, i(g) + i(g)\, d .
+\]
+Autrement dit : localement on dispose d'un morphisme de complexes, et deux
+choix diffèrent d'une homotopie fournie par $\mathcal{G}$, de façon
+cohérente. Alors on construit un morphisme $\varphi : K^\bullet \to L^\bullet$
+dans $D(X)$, fonctoriel en $L^\bullet$ et en la donnée $(\mathcal{G}, P, i,
+\theta)$ (pour $u : \mathcal{G} \to \mathcal{G}'$, $P \to P'$ compatible, $i =
+i' u$, $\theta = \theta' \circ u$) ;\footnote{La page écrit « $\theta = u
+\theta'$ », ce qui ne compose pas : $\theta$ part de $P$ et $u$ va de $P$ vers
+$P'$.} et la page s'arrête sur « 3°) Si $P$ admet une section, alors » --- on
+attend : $\varphi$ est la classe de $\theta(p)$ pour n'importe quelle section
+$p$.\footnote{La conclusion est notre complément. Le lemme n'est pas
+démontré, et il n'est pas trivial : les morphismes de $D(X)$ ne se recollent
+pas en général, et c'est la cohérence des homotopies --- un groupe qui opère,
+non une simple famille --- qui permet de conclure.}
+
+\pagerange{9}{13}
+\section*{Le caractère d'un groupe de Barsotti--Tate sur un corps local (pages 9 à 13)}
+
+Les pages 10 à 13 sont un tapuscrit, tapé en bleu, corrigé à l'encre et au
+crayon de sa main ; son titre est « Caractère d'un groupe de B.T.\ sur un
+corps local ».\footnote{Le tapuscrit n'est pas identifié comme publié. La
+chemise (page 9) porte un titre plus long, « à réduction semi-stable
+virtuelle essentielle », c'est-à-dire, en termes d'aujourd'hui,
+potentiellement semi-stable.}
+
+\pagerange{10}{11}
+\subsection*{La condition de monodromie et l'homomorphisme trace}
+
+Soit $V$ un anneau de valuation discrète complet, de corps résiduel $k$
+parfait de caractéristique $p$, de corps des fractions $K$, et $S =
+\operatorname{Spec} V$.\footnote{Le tapuscrit hésite sur le corps
+résiduel : « algébriquement clos » est barré au profit de « parfait », ajouté
+à l'encre ; la parenthèse « quitte à passer au complété de l'hensélisé
+strict » est barrée puis peut-être rétablie. $S$ est employé sans être
+introduit.} Un groupe $p$-divisible $M$ sur $K$ \emph{satisfait la condition
+de monodromie} s'il admet une filtration par des sous-groupes $p$-divisibles
+dont les quotients successifs ont \emph{potentiellement bonne réduction} :
+chacun, après une extension finie séparable $K'$ de $K$, s'étend en un
+groupe $p$-divisible sur le normalisé $S'$ de $S$ dans $K'$. On peut prendre
+$K'$ commun à tous les quotients, galoisien de groupe $G$ : c'est un
+\emph{corps de bonne réduction potentielle} pour $M$.
+
+Le prolongement est unique à isomorphisme unique près par le théorème de Tate
+(pleine fidélité du passage à la fibre générique), et $G$ opère donc sur lui,
+semi-linéairement par rapport à son action sur $S'$.\footnote{Le tapuscrit
+précise : démontré « pour l'instant seulement dans le cas d'inégales
+caractéristiques » --- c'est le théorème de Tate de 1967, pour $K$ de
+caractéristique nulle. Le cas d'égale caractéristique a été établi par de
+Jong en 1998.} De là une chaîne d'homomorphismes de groupes de Grothendieck :
+\[
+K_{BT}(K; K') \to K_{BT}(S'; G) \to K_{BT}(s'; G) \to K(W(k'), G) \to
+K(W(k'), I) ,
+\]
+où $s'$ est le point fermé de $S'$, $k'$ son corps résiduel, la troisième
+flèche est le module de Dieudonné (foncteur covariant, « et même vers les
+cristaux de $k'$ », dit le crayon), et $I \subset G$ est le sous-groupe
+d'inertie, qui opère $W(k')$-linéairement. La dernière étape est la trace :
+\[
+K(W(k'), I) \to \operatorname{Cent}(I, W(k'))^{G} ,
+\]
+à valeurs dans les fonctions centrales sur $I$, invariantes sous l'action de
+$G$ (par conjugaison sur $I$ et par son action sur $W(k')$).\footnote{La page
+écrit $K(W(k'), I) \simeq R_{W(k')}(I)^{G/I}$. Pour un $I$ d'ordre divisible
+par $p$, le groupe de Grothendieck des réseaux n'est pas évidemment l'anneau des
+représentations ; on n'utilise que l'homomorphisme vers les représentations
+de $I$ sur le corps des fractions de $W(k')$, par lequel la trace se
+factorise. C'est tout ce que la définition du caractère demande.} L'image de
+la classe de $M$ est le \emph{caractère} de $M$ ; il ne dépend pas de $K'$ et
+se voit comme une fonction centrale sur le groupe d'inertie (infini) de
+$\operatorname{Gal}(\bar K/K)$, qui se factorise par un quotient fini.
+
+\pagerange{11}{12}
+\subsection*{Le caractère n'est pas lu sur la $p$-torsion}
+
+Si $M_{K'}$ est \emph{constant}, son module de Dieudonné est $T_p(M) \otimes
+W(k')$, et son caractère coïncide, sur les éléments de $I$ d'ordre premier à
+$p$, avec le \emph{caractère de Brauer} (le « caractère modulaire ») de la
+représentation de $I$ sur $M[p] = M(0)$.\footnote{Ses $M(\nu)$ sont les
+$M[p^{\nu+1}]$ : $M(0) = {}_pM$. Le point d'interrogation qui clôt la phrase
+est repassé à l'encre ; l'énoncé est vrai, pour la raison donnée.}
+
+Le tapuscrit se demande alors si cela vaut pour tout $M$ satisfaisant la
+condition de monodromie, et répond \emph{non}, par un argument propre. Si le
+caractère était toujours déterminé par $M[p]$, la théorie de Brauer des
+relèvements virtuels forcerait l'égalité avec le caractère de Brauer de $M[p]$
+pour tout $M$ ; en particulier, pour $M$ à bonne réduction --- dont le
+caractère est constant, égal à la hauteur --- le caractère de Brauer de $M[p]$
+serait trivial. Or $M = \mathbb{Z}_p(1)$, c'est-à-dire $\mu_{p^\infty}$, a bonne
+réduction et $M[p] = \mu_p$, sur lequel l'inertie opère par le caractère
+cyclotomique modulo $p$.\footnote{La page dit « dans le cas où $K$ ne contient
+pas les racines $p$-ièmes de $1$ ». L'hypothèse exacte est que l'\emph{inertie}
+opère non trivialement sur $\mu_p$, c'est-à-dire que $\mu_p$ n'est pas dans
+l'extension non ramifiée maximale de $K$ ; elle équivaut à celle de la page
+quand $k$ est algébriquement clos, et elle est satisfaite pour $K =
+\mathbb{Q}_p$. Pour $K = \mathbb{Q}_p(p^{1/(p-1)})$, $p$ impair, $K$ ne contient
+pas $\mu_p$ mais $K(\mu_p)/K$ est non ramifiée, et le contre-exemple tombe.}
+
+Si $K$ contient $\mu_p$, au contraire, rien ne s'oppose à l'énoncé pour les
+bonnes réductions potentielles constantes ou multiplicatives ; reste le cas
+où la réduction est connexe à dual connexe (« ind-unipotente »). Une note au
+crayon en tire que le caractère serait alors à valeurs dans $\mathbb{Z}_p
+\subset W(k)$.
+
+\pagerange{12}{13}
+\subsection*{Le cas test des courbes elliptiques}
+
+D'où le cas test. Soient $E_1$, $E_2$ deux courbes elliptiques sur $K$ à bonne
+réduction potentielle, avec $E_1[p] \simeq E_2[p]$ et $\mu_p \subset K$. Les
+traces $\phi_{E_1}$ et $\phi_{E_2}$ sur l'inertie --- que l'on peut aussi
+calculer sur $T_\ell$ pour n'importe quel $\ell$\footnote{Parce que l'inertie
+opère sur la réduction $E_{s'}$ par automorphismes, et que la trace d'un
+endomorphisme d'une variété abélienne est la même sur $T_\ell$, $\ell \neq p$,
+et sur le module de Dieudonné. C'est le « comme on sait » de la page.} ---
+coïncident-elles sur les éléments d'ordre premier à $p$ ? Seul le cas d'une
+réduction supersingulière (« invariant de Hasse nul ») est intéressant.
+Variante : si $A_K[p]$ est constant, la trace vaut-elle $2g$ sur les éléments
+de $I$ d'ordre premier à $p$ ?\footnote{Le tapuscrit porte « égale à $n = \dim
+A_K$ », tapé au-dessus de mots surfrappés. La trace de l'identité est le rang
+$2g$, et le paragraphe suivant, pour la courbe elliptique, donne bien $2$ ; on
+corrige.} Il faudrait, dit la page, un exemple où le critère de réduction
+semi-stable de Raynaud --- $A[\ell]$ rationnel, $\ell \geq 3$, entraîne
+réduction semi-stable --- est en défaut pour $\ell = p$.
+
+Pour une courbe elliptique, en caractéristique résiduelle $\neq 2, 3$, avec
+$K'$ minimal, l'inertie de $K'/K$ s'injecte dans $\operatorname{Aut}(E_{s'})$,
+groupe cyclique d'ordre $2$, $4$ ou $6$, donc d'ordre premier à $p$ ; la
+question revient à savoir si $\phi_E$ est constante égale à $2$ lorsque $E[p]$
+est constant. En marge, au crayon : \emph{faux par Tate}.\footnote{Rien sur la
+page ne dit ce que Tate objectait, et on ne le reconstitue pas. On note
+seulement qu'un automorphisme non trivial d'ordre $2$, $3$, $4$ ou $6$ a pour
+trace $-2$, $-1$, $0$ ou $1$, de sorte que la question équivaut à demander si
+la constance de $E[p]$ force l'inertie à opérer trivialement sur $E_{s'}$.}
+
+\pagerange{14}{18}
+\section*{Les déformations d'une variété abélienne et leurs stratifications (pages 14 à 18)}
+
+\pagerange{15}{15}
+\subsection*{La question, et pourquoi elle force l'ordinarité}
+
+Soit $A_0$ une variété abélienne de dimension $g$ sur $k$. La question
+(page 15) : quand peut-on associer à toute déformation infinitésimale
+$A/\Lambda$ de $A_0$ --- $\Lambda$ une $k$-algèbre locale artinienne de corps
+résiduel $k$ --- une \emph{stratification} relative à $k$ sur
+$H^1_{\mathrm{dR}}(A/\Lambda)$, compatible au changement de base et
+fonctorielle en $A$ ? Une stratification est un transport parallèle à tous les
+ordres : un isomorphisme entre les deux images inverses sur $\operatorname{Spf}
+(\Lambda \hat\otimes_k \Lambda)$, satisfaisant la condition de cocycle. En
+caractéristique $p$, c'est beaucoup plus qu'une connexion : la connexion de
+Gauss--Manin existe toujours, une stratification non.
+
+Soit $\mathcal{M}$ l'espace des modules formels de $A_0$ --- lisse sur $k$, de
+dimension $g^2$ --- et $A_{\mathcal{M}}$ la déformation universelle. Il faudrait
+que $\mathcal{H} = H^1_{\mathrm{dR}}(A_{\mathcal{M}}/\mathcal{M})$ porte une
+stratification compatible avec $F : \mathcal{H}^{(p)} \to \mathcal{H}$ et $V :
+\mathcal{H} \to \mathcal{H}^{(p)}$. Alors le type de $(\mathcal{H}_x, F_x, V_x)$
+serait le même en tout point $x$ que celui de $(\mathcal{H}_0, F_0, V_0)$ ---
+c'est-à-dire, en termes d'aujourd'hui, que le type d'Ekedahl--Oort de $A_x[p]$
+serait constant sur $\mathcal{M}$. Comme le lieu ordinaire est dense dans
+$\mathcal{M}$, cela force $A_0$ à être \emph{ordinaire}.\footnote{La page écrit
+« Cela implique sans doute que $A_0$ est “ordinaire” » et ne justifie pas.
+L'argument par la densité du lieu ordinaire dans l'espace des déformations
+est le nôtre ; ce fait n'est pas sur la page.}
+
+Ordinaire signifie : dans la suite de Hodge
+\[
+0 \to H^{10} \to H \to H^{01} \to 0 , \qquad H^{10} = t_{A}^\vee =
+H^0(A, \Omega^1), \quad H^{01} = t_{A^*} = H^1(A, \mathcal{O}_A) ,
+\]
+où $\operatorname{Ker} F = \operatorname{Im} V = H^{10(p)}$ et
+$\operatorname{Ker} V = \operatorname{Im} F$ comme à la page 2, l'image $\operatorname{Im} F$ est un
+supplémentaire de $H^{10}$ ; de façon équivalente, la composée $H^{01(p)} \to
+H \to H^{01}$ --- l'opération de Frobenius sur $H^1(A, \mathcal{O}_A)$,
+l'application de Hasse--Witt --- est bijective.
+
+\pagerange{15}{17}
+\subsection*{La filtration de Hodge est horizontale}
+
+Supposons $A_0$ ordinaire. La stratification, compatible avec $F$, laisse
+stable $\operatorname{Im} F = F(\mathcal{H}^{(p)})$, qui est un supplémentaire
+de $H^{10}$ ; de même elle laisse stable $\operatorname{Ker} F = H^{10(p)}$.
+Cela n'entraîne pas \emph{a priori} que $H^{10}$ soit stable --- c'est
+l'« Attention » de la page 16. Ce qu'on obtient : sur $T = S \times S$, $S =
+\operatorname{Spf}\Lambda$, soient $E_1$, $E_2$ les deux images inverses de
+$H$, $F_1$, $F_2$ celles de $H^{10}$, et $u : E_1 \xrightarrow{\sim} E_2$
+l'isomorphisme de stratification ; alors $u(F_1)^{(p)} = F_2^{(p)}$. Les deux
+sections $u(F_1)$ et $F_2$ de la grassmannienne de $E_2$ deviennent égales
+après changement de base par le Frobenius absolu de $T$. Si $T$ est
+formellement lisse sur $k$ --- c'est le cas pour $S = \mathcal{M}$ ---, le
+Frobenius est fidèlement plat (théorème de Kunz), donc $u(F_1) = F_2$ ; et le
+cas général s'en déduit par fonctorialité, en remontant à l'espace de
+modules.\footnote{La page dit « c'est loc.\ fid.\ plat » sans nommer de
+théorème. Le théorème de Kunz (1969) caractérise les anneaux réguliers par la
+platitude du Frobenius ; pour un anneau de séries formelles sur un corps
+parfait, la platitude se voit directement.}
+
+Donc $H^{10}$ est horizontal, et $H$ admet une décomposition fonctorielle,
+compatible au changement de base et à la stratification :
+\[
+H^1_{\mathrm{dR}}(A/S) \simeq t_A^\vee \oplus t_{A^*} ,
+\]
+le second facteur étant identifié à $\operatorname{Im} F$. Le problème se
+ramène à trouver une stratification fonctorielle sur $t_A$, le cas de
+$t_{A^*}$ étant celui de $A^*$. La page hésite entre une stratification
+« a priori » venue des puissances divisées et une définition directe par les
+puissances $p$-ièmes ; « à préciser », dit la marge. La page 18 tranche,
+comme on va voir.
+
+La \emph{Remarque} qui clôt la page 17 entrevoit que la position de la
+filtration de Hodge par rapport à une structure horizontale sur la base des
+déformations devrait donner un principe de classification des déformations en
+caractéristique $p$.\footnote{La remarque est presque entièrement d'une
+lecture incertaine, et la parenthèse n'est pas fermée. Lue littéralement pour
+une stratification, elle serait vide dans le cas ordinaire, puisque la
+filtration y est horizontale ; on la lit donc, sous notre responsabilité, comme
+visant la structure cristalline. C'est le théorème de Grothendieck--Messing :
+les déformations d'un groupe de Barsotti--Tate le long d'un épaississement à
+puissances divisées sont classées par les relèvements de la filtration de
+Hodge dans le cristal de Dieudonné --- exposé par Grothendieck au congrès de
+Nice en 1970 sous un titre qui est celui même de ce dossier, « Groupes de
+Barsotti--Tate et cristaux », et rédigé par Messing en 1972.}
+
+\pagerange{18}{19}
+\subsection*{La description étale (pages 18 et 19)}
+
+Pour un schéma abélien $A$ \emph{ordinaire} sur une base $S$ de
+caractéristique $p$, la décomposition $H^1_{\mathrm{dR}}(A/S) \simeq t_A^\vee
+\oplus t_{A^*}$ vaut, et l'on a de plus
+\[
+t_A \simeq \mathcal{L}_A \otimes_{\mathbb{F}_p} \mathcal{O}_S , \qquad
+t_{A^*} \simeq \mathcal{L}_{A^*} \otimes_{\mathbb{F}_p} \mathcal{O}_S ,
+\]
+où $\mathcal{L}_A$, $\mathcal{L}_{A^*}$ sont des faisceaux étales localement
+libres de rang $g$ sur $\mathbb{F}_p$ :
+\[
+\mathcal{L}_A = (A^*[p]_{\text{ét}})^\vee , \qquad \mathcal{L}_{A^*} =
+(A[p]_{\text{ét}})^\vee .
+\]
+En effet, l'hypothèse fait de $A[p] \to S$ l'extension canonique $0 \to
+A[p]^\circ \to A[p] \to A[p]_{\text{ét}} \to 0$, le premier morphisme radiciel
+surjectif, le second étale, tous deux finis localement libres ; la partie
+connexe $A[p]^\circ$ est de type multiplicatif, duale de Cartier de
+$A^*[p]_{\text{ét}}$, et l'algèbre de Lie de $\underline{\mathrm{Hom}}(E,
+\mu_p)$ est $E^\vee \otimes \mathcal{O}_S$. Sur un corps algébriquement clos, la
+page le redit en cohomologie :
+\[
+\mathcal{L}_{A^*} = H^1(A, \mathcal{O}_A)^{F} = H^1_{\text{ét}}(A,
+\mathbb{Z}/p) = \operatorname{Hom}(A[p](k), \mathbb{Z}/p) ,
+\]
+la première égalité par la suite d'Artin--Schreier, d'où $t_A^\vee =
+A^*[p](k) \otimes_{\mathbb{F}_p} k$ et $t_{A^*} = A[p](k)^\vee
+\otimes_{\mathbb{F}_p} k$.\footnote{La page dit « si $S$ est le spectre d'un
+corps parfait » ; les égalités entre points ne valent telles quelles que sur
+un corps algébriquement clos, ou en lisant les deux membres comme faisceaux
+étales.}
+
+Voilà la stratification cherchée : un faisceau étale tensorisé par
+$\mathcal{O}_S$ en porte une canonique, puisque les faisceaux étales sont
+insensibles aux épaississements nilpotents. C'est, sous une autre forme, ce que
+la théorie de Serre--Tate dit des déformations des variétés abéliennes
+ordinaires : elles sont gouvernées par leurs parties étales et
+multiplicatives, qui ne se déforment pas.\footnote{La théorie de Serre et Tate
+(1964) est antérieure et Grothendieck la connaissait ; la page ne la cite
+pas, et on n'affirme pas qu'elle s'en inspire.}
+
+\pagerange{19}{21}
+\section*{Polarisation et invariant de Hasse (pages 19 à 21)}
+
+\subsection*{La polarisation (page 19)}
+
+Soit $\varphi$ une polarisation de $A$, section de $\underline{\mathrm{NS}}_{A/S}$,
+et $\tilde\varphi : A \to A^*$ l'isogénie qu'elle définit. Sa classe de Chern
+est une section de $H^2_{\mathrm{dR}} = \bigwedge^2 H^1_{\mathrm{dR}}(A/S)$. Selon
+la décomposition ordinaire,
+\[
+\textstyle\bigwedge^2 H^1_{\mathrm{dR}}(A/S) \simeq \bigwedge^2 t_A^\vee \oplus
+(t_A^\vee \otimes t_{A^*}) \oplus \bigwedge^2 t_{A^*} ,
+\]
+et la classe n'a de composante que dans le terme médian : les deux facteurs sont
+isotropes, ce qui revient à dire que les filtrations de Hodge et conjuguée
+sont lagrangiennes. La composante médiane est une section de $t_A^\vee \otimes
+t_{A^*} = \underline{\mathrm{Hom}}(t_A, t_{A^*})$, et c'est, au signe près,
+l'application tangente $\operatorname{Lie}(\tilde\varphi) : t_A \to
+t_{A^*}$.\footnote{La page écrit d'abord que la classe « définit un
+homomorphisme $t_A^\vee \otimes t_{A^*} \to \mathcal{O}_S$, i.e.\ $t_{A^*} \to
+t_A$ », ce qui est le dual de ce qu'il faut : une \emph{section} de $t_A^\vee
+\otimes t_{A^*}$ est une flèche $t_A \to t_{A^*}$. L'accolade sous
+$\operatorname{Hom}(t_A, t_{A^*})$, et la ligne suivante, ont la bonne
+variance, et c'est elle qu'on garde. Tout le passage est en outre traversé de
+diagonales, sans doute annulé.} Par la description étale, elle se déduit par
+$\otimes_{\mathbb{F}_p} \mathcal{O}_S$ de $\mathcal{L}_A \to \mathcal{L}_{A^*}$,
+transposée de $A[p]_{\text{ét}} \to A^*[p]_{\text{ét}}$ induite par
+$\tilde\varphi$.
+
+\pagerange{20}{21}
+\subsection*{L'invariant de Hasse (pages 20 et 21)}
+
+Soit à nouveau $g$ la dimension relative de $A/S$, maintenant
+\emph{quelconque}. L'algèbre de Lie de $A$ est une $p$-algèbre de Lie ;
+l'application $p$-linéaire $x \mapsto x^{[p]}$, ou ce qui revient au même le
+Verschiebung, donne $V : t_A^{(p)} \to t_A$. En passant au déterminant,
+$(\det t_A)^{\otimes p} \to \det t_A$, d'où une section
+\[
+\sigma_A \in \Gamma(S, (\det t_A)^{\otimes(1-p)}) = \Gamma(S,
+\omega_A^{\otimes(p-1)}) .
+\]
+« Cette section mérite le nom d'\emph{invariant de Hasse} de $A$ » : ses zéros
+sont exactement les points $s$ où $A_s$ n'est pas ordinaire.\footnote{La page
+écrit $\omega_A^{(p-1)}$ et, juste avant, $L^{\otimes(p-1)}$ : il s'agit de la
+puissance tensorielle, non d'un tordu par le Frobenius. Une première approche,
+par l'ouvert ordinaire $U$ et la densité, est écrite puis annulée au milieu
+de la page 20.} C'est la définition reçue aujourd'hui.
+
+Quel est le rapport entre $\omega_A$ et $\omega_{A^*}$ ? La suite de Hodge
+donne $\det t_A^\vee \otimes \det t_{A^*} \simeq \det H^1_{\mathrm{dR}}(A/S)
+\simeq H^{2g}_{\mathrm{dR}}(A/S) \simeq \mathcal{O}_S$, la dernière flèche par
+la trace ; d'où $\omega_A \otimes \omega_{A^*}^{\vee} \simeq \mathcal{O}_S$,
+c'est-à-dire un isomorphisme canonique
+\[
+\omega_A \simeq \omega_{A^*} .
+\]
+La page affirme qu'il est compatible avec les « $p$-structures », donc
+échange $\sigma_A$ et $\sigma_{A^*}$, et que, pour $A$ ordinaire, il induit un
+isomorphisme $\det A[p]_{\text{ét}} \simeq \det A^*[p]_{\text{ét}}$ ---
+puisque, par la page 19, $\omega_A = \det(A^*[p]_{\text{ét}}) \otimes
+\mathcal{O}_S$ et $\omega_{A^*} = \det(A[p]_{\text{ét}}) \otimes
+\mathcal{O}_S$.\footnote{« Je dis que » : l'affirmation n'est pas démontrée,
+ni ici ni plus loin, et le mot « $p$-structures » est d'une lecture
+incertaine. On la donne pour ce qu'elle est.} C'est l'annonce de ce qui suit.
+
+\pagerange{22}{28}
+\section*{L'isomorphisme $\det T_p(A)_{\text{ét}} \simeq \det T_p(A^*)_{\text{ét}}$ (pages 22 à 28)}
+
+\pagerange{22}{23}
+\subsection*{Le problème, et le modèle $\ell$-adique}
+
+Soit $A$ ordinaire sur $S$, et $T_p(A)_{\text{ét}} = \varprojlim
+A[p^\nu]_{\text{ét}}$, faisceau $p$-adique lisse de rang $g$. Le module de
+Tate $p$-adique $T_p(A) = \varprojlim A[p^\nu]$ (comme schéma en groupes) est
+extension
+\[
+0 \to T_p(A)_{\mathrm{rad}} \to T_p(A) \to T_p(A)_{\text{ét}} \to 0 ,
+\]
+et la dualité de Cartier, compatible aux filtrations, donne
+\[
+T_p(A)_{\mathrm{rad}} \simeq D(T_p(A^*)_{\text{ét}}) , \qquad
+T_p(A^*)_{\mathrm{rad}} \simeq D(T_p(A)_{\text{ét}}) .
+\]
+Les deux parties étales déterminent donc les deux facteurs de $T_p(A)$, et
+$T_p(A)$ lui-même si la base est parfaite, où la suite se scinde
+canoniquement. On voudrait un isomorphisme canonique\footnote{La page 23 écrit le but sans l'indice « ét », que la chemise de la
+page 14 et toute la suite portent.}
+\[
+\det T_p(A)_{\text{ét}} \xrightarrow{\ \sim\ } \det T_p(A^*)_{\text{ét}} .
+\]
+
+Pour $\ell \neq p$, il existe : $\det T_\ell(A) \simeq \det T_\ell(A^*) \simeq
+\mathbb{Z}_\ell(g)$. Et si $\varphi$ est une polarisation, $\beta_\ell(\varphi)
+= \det T_\ell(\tilde\varphi)$ donne une flèche $\det T_\ell(A) \to \det
+T_\ell(A^*)$, dont l'isomorphisme canonique est $\alpha_\ell =
+\beta_\ell(\varphi)/\deg\tilde\varphi$.\footnote{La page écrit « $\deg
+\varphi$ » pour $\deg\tilde\varphi$. La division par le degré entier est la
+bonne à $\ell$ : $\det T_\ell(u) = \deg u$ pour toute isogénie $u$, rang $2g$
+oblige, de sorte que le quotient ne dépend pas de $\varphi$. Une
+justification par $T_\ell(A^*) \simeq T_\ell(A)^\vee(1)$ est essayée puis
+annulée.} À $p$, le rang n'est plus que $g$, et la normalisation naturelle
+devient la racine carrée du degré. On définit donc
+\[
+\beta_p(\varphi) = \det T_p(\tilde\varphi)_{\text{ét}} , \qquad
+\alpha_p(\varphi) = \frac{\beta_p(\varphi)}{\sqrt{\deg\tilde\varphi}} :
+\det T_p(A)_{\text{ét}} \otimes \mathbb{Q}_p \to \det T_p(A^*)_{\text{ét}}
+\otimes \mathbb{Q}_p ,
+\]
+le degré d'une polarisation étant un carré parfait.\footnote{Le second
+$\otimes\mathbb{Q}$ porte l'indice $\ell$ sur la page : un lapsus pour $p$.
+Le degré de $\tilde\varphi$ est le carré de la caractéristique d'Euler du
+fibré en droites (Riemann--Roch) ; $\sqrt{\deg\tilde\varphi}$ est sa racine
+positive.} Il reste à prouver : a) $\alpha_p(\varphi)$ ne dépend pas de
+$\varphi$ ; b) c'est un isomorphisme des réseaux, non seulement des
+$\mathbb{Q}_p$-droites.
+
+On suppose ici que $A$ est polarisable, au moins localement sur $S$, et l'on
+raisonne sur une base connexe, où les déterminants d'endomorphismes de
+faisceaux $p$-adiques de rang $g$ sont des scalaires de $\mathbb{Z}_p$.\footnote{Hypothèses
+implicites sur la page. La première est ce qui permet de recoller les
+$\alpha_p(\varphi)$ locaux, une fois a) démontré.}
+
+Un lemme vient ensuite, qui affirmait que pour tout endomorphisme $u$ de $A$,
+$\deg u$ est un carré et $\det T_p(u)_{\text{ét}} = \sqrt{\deg u}$. Il est
+barré de quatre traits et marqué « faux » dans la marge.\footnote{Il l'est en
+effet. Sur un corps fini $\mathbb{F}_q$, pour $u$ l'endomorphisme de Frobenius
+d'une variété ordinaire, $\det T_p(u)_{\text{ét}}$ est le produit des $g$
+racines unités du polynôme caractéristique, une unité $p$-adique, alors que
+$\deg u = q^g$. Le contre-exemple est le nôtre.}
+
+\pagerange{24}{26}
+\subsection*{a) L'indépendance de la polarisation (pages 24 à 26)}
+
+Soit $\psi$ une autre polarisation : $\tilde\psi = \tilde\varphi \circ u$ avec
+$u \in \operatorname{End}(A) \otimes \mathbb{Q}$. La symétrie de $\tilde\psi$
+et de $\tilde\varphi$ donne $u^* \tilde\varphi = \tilde\varphi u$, soit
+\[
+u^* = \tilde\varphi\, u\, \tilde\varphi^{-1} ,
+\]
+c'est-à-dire que $u$ est symétrique pour l'involution de Rosati $u \mapsto
+u^\dagger = \tilde\varphi^{-1} u^* \tilde\varphi$ ; et $u$ est même
+\emph{positif}, comme quotient de deux polarisations.\footnote{La page écrit
+« $u' = \tilde\varphi u \tilde\varphi^{-1}$ » puis appelle $u \mapsto u'$
+l'involution de $\operatorname{End}(A) \otimes \mathbb{Q}$. Mais
+$\tilde\varphi u \tilde\varphi^{-1}$ est un endomorphisme de $A^*$, non de
+$A$ : c'est $u^*$ quand $u$ est symétrique, et c'est sous ce nom que la
+page l'utilise ensuite. L'involution elle-même est celle de Rosati,
+$\tilde\varphi^{-1} u^* \tilde\varphi$. Le signe de « $\tilde\varphi' =
+-\tilde\varphi$ » tient à sa convention pour la bidualité et disparaît dans
+la conclusion.} Posons $\Delta(u) = \det T_p(u)_{\text{ét}}$ (étendu à
+$\operatorname{End}(A) \otimes \mathbb{Q}$, à valeurs dans $\mathbb{Q}_p$) et
+$\delta(u) = \sqrt{\deg u}$, racine positive --- $\deg u = \deg\tilde\psi /
+\deg\tilde\varphi$ est le carré d'un rationnel. Comme $\beta_p(\psi) =
+\beta_p(\varphi)\Delta(u)$ et $\sqrt{\deg\tilde\psi} =
+\sqrt{\deg\tilde\varphi}\,\delta(u)$, l'énoncé a) équivaut à
+\[
+\Delta(u) = \delta(u) \qquad \text{pour tout } u \text{ symétrique positif.}
+\]
+
+La preuve a deux temps. D'abord, le carré :
+\[
+\Delta(u)\,\Delta(u^*) = \deg u = \delta(u)^2 ,
+\]
+et comme $u^* = \tilde\varphi u \tilde\varphi^{-1}$, $\Delta(u^*) = \Delta(u)$,
+d'où $\Delta(u)^2 = \delta(u)^2$ et $\Delta(u) = \pm\delta(u)$.\footnote{La
+première égalité est introduite par « Or par \ldots\ on a », le nom de la
+justification étant illisible ; la page 25, annulée, l'attribuait au
+« théorème $p$-adique ou th.\ caractéristique de Weil ». Elle est vraie, et
+voici pourquoi, de notre fait : pour $A$ ordinaire sur un corps parfait, le
+module de Dieudonné de $A[p^\infty]$ est somme de sa partie étale et de sa
+partie multiplicative ; $u$ opère sur la première avec le déterminant
+$\Delta(u)$, sur la seconde --- duale de Cartier de $A^*[p^\infty]_{\text{ét}}$
+--- avec le déterminant $\Delta(u^*)$ ; et le déterminant de $u$ sur tout le
+module de Dieudonné est $\deg u$, terme constant du polynôme caractéristique
+de Weil. Le dossier n'établit nulle part cette identité ; il l'utilise.}
+
+Ensuite, le signe. Sur le sous-espace des éléments symétriques de
+$\operatorname{End}(A) \otimes \mathbb{Q}$, $\Delta$ est une fonction
+polynomiale en les coordonnées, à coefficients dans $\mathbb{Z}_p$, qui prend
+des valeurs rationnelles aux points rationnels (puisqu'elle y vaut $\pm\delta$) :
+ses coefficients sont donc rationnels, et elle s'étend aux éléments
+symétriques de $\operatorname{End}(A) \otimes \mathbb{R}$, à valeurs réelles et
+multiplicative. Or dans cette algèbre à involution positive, tout élément
+symétrique positif est le carré $v^2$ d'un élément symétrique $v$, et
+$\Delta(v^2) = \Delta(v)^2 \geq 0$. Donc $\Delta \geq 0$ sur le cône positif,
+et $\Delta(u) = +\delta(u)$. Ce qu'il fallait démontrer.\footnote{La page
+affirme la rationalité des coefficients de $\Delta$ sans restreindre aux
+éléments symétriques ; sur tout $\operatorname{End}(A)$, $\Delta$ prend des
+valeurs $p$-adiques non rationnelles (cf.\ le Frobenius ci-dessus) et
+l'argument ne passe pas. Restreint aux symétriques, il est exact, et c'est
+tout ce que demande la positivité. La page 25, annulée, essayait une autre
+voie, par un caractère de signe $\varepsilon : F^\times \to \{\pm 1\}$ sur $F =
+\operatorname{End}(A) \otimes \mathbb{Q}$.}
+
+\pagerange{26}{27}
+\subsection*{b) Un isomorphisme des réseaux (pages 26 et 27)}
+
+$\alpha_p(\varphi)$ envoie $\det T_p(A)_{\text{ét}}$ \emph{sur} $\det
+T_p(A^*)_{\text{ét}}$ si et seulement si
+\[
+v_p\bigl(\operatorname{card}\operatorname{Coker} T_p(\tilde\varphi)_{\text{ét}}\bigr)
+= v_p\bigl(\sqrt{\deg\tilde\varphi}\bigr) .
+\]
+Or $\operatorname{Coker} T_p(\tilde\varphi)_{\text{ét}} \simeq (\operatorname{Ker}
+\tilde\varphi)(p)_{\text{ét}}$, partie étale de la composante $p$-primaire du
+noyau. Le noyau d'une polarisation est autodual ; sa partie étale est donc
+duale de sa partie multiplicative, et, $A$ étant ordinaire, il n'a pas de
+partie locale-locale. D'où
+\[
+\bigl(\operatorname{card}(\operatorname{Ker}\tilde\varphi)(p)_{\text{ét}}\bigr)^2
+= \operatorname{card}(\operatorname{Ker}\tilde\varphi)(p) =
+(\deg\tilde\varphi)_{(p)} ,
+\]
+la $p$-partie du degré, ce qui est la relation voulue. On obtient un
+isomorphisme canonique, indépendant de toute polarisation,
+\[
+\alpha_A : \det T_p(A)_{\text{ét}} \xrightarrow{\ \sim\ } \det
+T_p(A^*)_{\text{ét}} ,
+\]
+compatible au changement de base et naturel pour les isomorphismes de schémas
+abéliens.
+
+\pagerange{27}{28}
+\subsection*{Fonctorialité, et ce qui reste à vérifier (pages 27 et 28)}
+
+La naturalité pour les isomorphismes dit : si $u$ est un automorphisme de $A$,
+et $\check u = (u^*)^{-1}$ l'automorphisme qu'il induit sur $A^*$, alors
+$\alpha_A$ entrelace $\det T_p(u)_{\text{ét}}$ et $\det T_p(\check
+u)_{\text{ét}}$ ; en identifiant les deux déterminants à $\mathbb{Z}_p$,
+\[
+\det T_p(u)_{\text{ét}} \cdot \det T_p(u^*)_{\text{ét}} = 1 .
+\]
+Pour un endomorphisme quelconque, en revanche, $\det T_p(u)_{\text{ét}} \neq
+\det T_p(u^*)_{\text{ét}}$ en général, et l'on ne peut demander à $\alpha$
+d'être naturel pour les isogénies : $A \mapsto \det T_p(A)_{\text{ét}}$ est
+covariant, $A \mapsto \det T_p(A^*)_{\text{ét}}$ contravariant --- la page le
+dit elle-même, « les deux foncteurs n'étant pas de même variance en $A$ ».
+Ce qui tient lieu de fonctorialité est la formule encadrée
+\[
+\det T_p(u)_{\text{ét}} \cdot \det T_p(u^*)_{\text{ét}} = \deg u .
+\]
+Elle se démontre dans le cadre ci-dessus, et sous une forme plus générale : pour
+une isogénie $f : A \to B$ de schémas abéliens ordinaires polarisables,
+\[
+\det T_p(f^*)_{\text{ét}} \circ \alpha_B \circ \det T_p(f)_{\text{ét}} = (\deg f)\,
+\alpha_A ,
+\]
+en appliquant a) à la polarisation $f^*\tilde\varphi_B f$ de $A$.\footnote{Cette
+forme, et la dérivation à partir de a), sont les nôtres ; la page encadre le
+cas $B = A$ et l'étend, dans une marge très incertaine, aux isogénies entre
+schémas abéliens de même dimension. Pour $B = A$ on retrouve l'identité de la
+page 24, qui en est en réalité l'\emph{entrée} : la dérivation ne la démontre
+donc pas, elle en montre la cohérence avec a).}
+
+Deux vérifications sont laissées ouvertes :
+\begin{itemize}
+\item[c)] $\alpha_{A^*} = \alpha_A^{-1}$, « signe (?) ». Si $\tilde\varphi$ est
+une polarisation de $A$ et $n$ tue son noyau, $n\tilde\varphi^{-1}$ est une
+polarisation de $A^*$, et le calcul direct donne $\alpha_{A^*} =
+\alpha_A^{-1}$ --- au signe près qu'introduit la convention d'identification
+$A^{**} = A$, qui est précisément ce que la page met en doute.\footnote{Ce
+calcul est le nôtre. La phrase suivante de la page, « Noter aussi la
+compatibilité par \ldots\ de $\mathcal{V}A$ », est trop lacunaire pour être
+rendue.}
+\item[d)] L'isomorphisme $\det A[p]_{\text{ét}} \simeq \det
+A^*[p]_{\text{ét}}$ induit par $\alpha_A$ est celui que la dualité de De Rham
+donnait à la page 21 --- « à vérifier ». Ce ne l'est pas dans le dossier, et
+la boucle entre l'invariant de Hasse et l'isomorphisme $p$-adique reste
+ouverte là.\footnote{La page écrit « l'isom.\ $({}_pA)_{\text{ét}} \to
+({}_pA^*)_{\text{ét}}$ », sans « det » ; à la page 21 il s'agit des
+déterminants, et c'est ce que l'on rétablit.}
+\end{itemize}
+
+\end{document}

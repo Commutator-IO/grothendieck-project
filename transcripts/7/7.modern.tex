@@ -1,0 +1,1483 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 7, pages 1-71.
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried — a doubtful
+% reading, a notation he used differently, a missing passage — moves into a
+% footnote. It is held to being mathematically correct as it stands; in any
+% dispute of substance the transcription governs: whoever cites Grothendieck
+% must cite the batch-NN.fr.tex files.
+%
+% Scope: the folder was read WHOLE — all four batches, pages 1-71 — before any
+% of this was written, and it is written as ONE file for the shelfmark. Pages
+% 1 and 19 are blank. Two dated layers: pp. 20-71 are the talk notes
+% (« laïus ») of November-December 1966 (dates 15.11.66 p. 35, 6.12.1966
+% p. 56, « Nov. Déc. 1966 » p. 20, all checked on the facsimile by Michel Hua);
+% pp. 2-18 are dated « Juillet-Août 1967 », the 1967 read by elimination. The
+% reading follows page order, so the later layer comes first; the spine
+% section says so.
+%
+% Notation fixed for the whole folder (see « Conventions »):
+%   X^{nu+1} the (nu+1)-fold fibre product over S (his X^{[nu]} on p. 2 has
+%   nu+1 factors: his own margin on p. 9 warns of the shift); Delta^{(nu)}(i)
+%   the i-th infinitesimal neighbourhood of the diagonal; X^{nu+1}/X the
+%   formal completion; P^nu its ring (principal parts), Q^nu = P^{nu+1};
+%   (X/S)_inf for what the folder calls the « site cristallin » — NO divided
+%   powers appear anywhere in the folder, so today's name is the
+%   infinitesimal site; (X/S)_strat for the stratifying site; C^*(V) the
+%   Čech-Alexander complex of a stratified module.
+%
+% Substantive departures from the pages, each footnoted where it occurs:
+%   - p. 13-15: the formal Poincaré lemma needs S of characteristic 0 (the
+%     word is illegible on p. 13; p. 15 says it); it is false in char. p;
+%   - p. 21: the comparison theorem needs X smooth (the parenthesis says only
+%     « loc. de type fini »);
+%   - p. 40: the overconvergence bound is |a_n| <= C rho^{-n}, not O(1) rho^n;
+%   - p. 41: u : A -> A' induces H(Omega(A)) -> H(Omega(A')), and the
+%     independence of the lift is stated after tensoring with K (the integral
+%     form is his hope, and p. 42 says W-M prove only the rational one);
+%   - p. 58: the boxed formula is Q^{i-1}[M] = P^i (x) M (index);
+%   - p. 70: the argument for H_inf -> H_strat iso is elliptic; restated
+%     with what it actually needs.
+% Announced and never established in the folder: the conjecture of pp. 55
+% and 69 (stratifying cohomology of a singular complex variety); the « Pb »
+% of pp. 70-71; §7 and §8 of the plan of p. 59 (unless pp. 2-18 are them, a
+% hypothesis of ours); the « appendice » of p. 51; tests a) b) of p. 18.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-03 — first pass, unchecked against
+% the pages by a human.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{7}
+\pages{1}{71}
+\dating{1966-1967}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Notes laïus novembre-décembre 1967 (Cristaux) : notes manuscrites (1966-1967) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Ces feuillets sont les notes d'un mathématicien qui prépare une série
+d'exposés — il les appelle son « laïus » — sur une question précise : comment
+compter les « trous » d'une variété définie par des équations, quand ces
+équations sont écrites non pas sur les nombres réels ou complexes, mais sur un
+corps où $p \cdot 1 = 0$ pour un nombre premier $p$.
+
+Sur les nombres complexes, la question a une réponse ancienne et belle. Une
+forme différentielle fermée qui n'est pas la différentielle d'une fonction
+signale un trou : sur le plan privé de l'origine, la forme « angle » $d\theta$
+est fermée, mais $\theta$ n'est pas une fonction bien définie, parce qu'on peut
+tourner autour du trou. Compter ces formes, à l'exacte près, c'est la
+\emph{cohomologie de De Rham}. Le dossier part de ce fait, et de sa version
+algébrique : les formes différentielles s'écrivent avec des polynômes, et la
+cohomologie qu'on en tire donne les bons nombres de trous (pages 20 à 22).
+
+Le problème est qu'en caractéristique $p$ cette recette se dérègle. La
+dérivée de $t^{p}$ est $p\,t^{p-1} = 0$ : il y a beaucoup trop de fonctions
+« constantes », et les nombres qu'on obtient sont faux. On possède bien
+d'autres théories, dites $\ell$-adiques, qui marchent pour tout nombre premier
+$\ell$ \emph{différent} de $p$ ; mais il manque celle qui verrait $p$
+lui-même, et le dossier explique pourquoi on ne peut s'en passer (pages 26 à
+32). Une première tentative, celle de Washnitzer et Monsky, consiste à
+« relever » la variété en caractéristique nulle et à y prendre la cohomologie
+de De Rham ; le dossier en fait la critique (pages 34 à 46).
+
+L'idée qui arrive est la suivante. Au lieu de travailler avec des formes
+différentielles, qui exigent de savoir dériver, on regarde comment un objet se
+\emph{prolonge} aux voisinages infiniment petits de la variété : les points
+« infiniment proches » les uns des autres, rangés par ordre de proximité. Un
+objet qui se prolonge à tous ces voisinages, de façon cohérente et rigide,
+s'appelle aujourd'hui un \emph{cristal} — un cristal croît en gardant
+exactement sa structure. La cohomologie d'un site formé de ces voisinages
+redonne la cohomologie de De Rham en caractéristique nulle, sans jamais
+écrire une forme différentielle (pages 53 à 55) ; et elle se calcule par un
+procédé à la Čech, avec les fonctions sur les voisinages formels des
+diagonales, ce qui occupe toute la fin du dossier (pages 56 à 71). La couche
+la plus tardive, datée de l'été 1967 (pages 2 à 18), refait la construction
+proprement et retourne à la caractéristique $p$ — pour constater que, telle
+quelle, elle y échoue.
+
+Ce qui rend ces pages précieuses, au-delà de leur mathématique, c'est qu'on y
+voit un espoir se former et se défaire. « Mon espoir initial était qu'il soit
+“le” bon candidat », écrit-il à la page 16, et deux lignes plus bas : « C'est
+faux malheureusement. » Une remarque reçoit après coup, en marge, un « C'est
+sûrement faux ! » ; une relation entre deux idées est dite « heuristique et
+sentimentale », faute d'être comprise (page 52) ; un exposé s'ouvre sur le
+projet de « faire sentir un complexe de problèmes » plutôt que d'énoncer des
+théorèmes (page 20). On y apprend qu'un programme de recherche, chez lui,
+commence par un inventaire honnête de ce qui ne marche pas.
+
+Où cela mène : la réponse en caractéristique $p$ viendra des \emph{puissances
+divisées}, absentes de ces pages — c'est la cohomologie cristalline, construite
+par Berthelot ; le site plus gros que propose la page 17 a des cousins dans le
+site convergent d'Ogus et la cohomologie rigide de Berthelot. Les noms à
+chercher sont ci-dessous.
+
+\keywords{algebraic de Rham cohomology, comparison theorem, Hodge-to-de Rham spectral sequence, Leray spectral sequence, l-adic cohomology, independence of l, p-adic cohomology, Witt vectors, flat cohomology, Monsky-Washnitzer cohomology, overconvergent power series, weakly complete algebra, Gauss-Manin connection, Cartan homotopy formula, stratification, crystal, infinitesimal site, stratifying site, Čech-Alexander complex, Alexander-Spanier cochains, principal parts, linearization of differential operators, complexes of differential operators, formal Poincaré lemma, topological invariance, GAGA, crystalline cohomology, convergent site}
+\end{resume}
+
+\pagerange{2}{3}
+\section*{Le fil du dossier, et les conventions}
+
+\subsection*{Deux couches, et l'ordre des feuillets}
+
+Le dossier contient deux couches de dates différentes, rangées par
+l'inventaire dans l'ordre inverse de leur rédaction.\footnote{Les pages 1 et
+19 sont blanches. La date de la page 2, « Juillet-Août 1967 », a un troisième
+chiffre à peine formé : la transcription le lit 1967 par élimination (6 ou 8
+sont possibles, 1987 est exclu par le contenu). Les dates de la couche de
+1966 ont été vérifiées sur le fac-similé : « Nov.\ Déc.\ 1966 » à la page 20,
+le dernier chiffre corrigé en rouge ; « 15.11.66 » à la page 35, d'abord écrit
+« 25 » ; « 6.12.1966 » à la page 56. Le titre du catalogue, « novembre-décembre
+1967 », ne s'accorde donc pas avec les dates portées sur les feuillets de
+l'exposé ; nous suivons les feuillets.}
+
+\begin{itemize}
+\item \emph{Pages 20 à 71 : les notes du « laïus », novembre--décembre 1966.}
+  Un premier exposé paginé par lui de 1 à 15 (pages 20 à 34) : §\,1, la
+  cohomologie de De Rham ; §\,2, le tour d'horizon $\ell$-adique ; §\,3, les
+  essais de cohomologie $p$-adique, jusqu'au début de Washnitzer--Monsky. Une
+  reprise datée du 15 novembre (pages 35 à 52) : Washnitzer--Monsky en
+  détail, puis la relation heuristique avec Gauss--Manin. Un §\,4 sur les
+  topos stratifiant et cristallin (pages 53 à 55). Une reprise datée du
+  6 décembre (pages 56 à 58), puis un plan d'ensemble en huit paragraphes
+  (page 59) et le §\,6 de ce plan, « Calculs Čechistes » (pages 59 à 71).
+\item \emph{Pages 2 à 18 : « Anneaux simpliciaux canoniques et modules
+  stratifiés », été 1967.} Six paragraphes numérotés qui reprennent, de façon
+  systématique, la construction esquissée aux pages 56 à 58, et la poussent
+  jusqu'au lemme de Poincaré formel (pages 2 à 15) ; puis des « Commentaires
+  sur la définition d'une cohomologie $p$-adique en car.\ $p > 0$ »
+  (pages 16 à 18).
+\end{itemize}
+
+Le plan de la page 59 annonce un §\,7, « Comparaison de la cohomologie de De
+Rham et cristalline », et un §\,8, « Retour sur le cas de la car.\ $p$ », que
+la couche de 1966 n'écrit pas. Les pages 2 à 15 et 16 à 18 en ont exactement
+la matière ; c'est une hypothèse de notre part que ce soient eux, et rien sur
+les feuillets ne le dit.\footnote{La concordance des dates et des sujets avec
+les exposés de Grothendieck à l'IHÉS de novembre--décembre 1966, rédigés par
+J.~Coates et O.~Jussila sous le titre « Crystals and the De Rham cohomology
+of schemes » et publiés dans \emph{Dix exposés sur la cohomologie des
+schémas} (1968), suggère que ces pages en sont les notes préparatoires. C'est
+une identification de notre part, que les feuillets ne font pas.}
+
+\subsection*{Conventions, valables pour tout le dossier}
+
+On fixe une base $S$ et un préschéma relatif $f : X \to S$ (aujourd'hui : un
+schéma au-dessus de $S$).
+
+\begin{itemize}
+\item $X^{\nu+1} = X \times_{S} \cdots \times_{S} X$ ($\nu+1$ facteurs), et
+  $\Delta^{(\nu)}(i) \subset X^{\nu+1}$ le $i$-ème voisinage infinitésimal de
+  la diagonale. On note $X^{\nu+1}/X$ le complété formel de $X^{\nu+1}$ le
+  long de la diagonale, c'est-à-dire la limite inductive des
+  $\Delta^{(\nu)}(i)$ ; tous ont pour espace sous-jacent celui de
+  $X$.\footnote{La page 2 note $X^{[n]}$ le produit à $n+1$ facteurs, et son
+  complété $X^{\widehat{[n]}}$ ; les pages 59 et 60 écrivent $X^{\nu+1}$ et
+  $X^{(\nu+1)}/X$. Le décalage d'une unité entre l'exposant et le nombre de
+  facteurs est la source d'erreur qu'il se signale lui-même en marge de la
+  page 9 (« Mention $+1$ ! »). On compte ici les facteurs, partout.}
+\item $\mathcal{P}^{\nu} = \varprojlim_{i} \mathcal{O}_{\Delta^{(\nu)}(i)}$,
+  vu comme pro-objet de la catégorie des faisceaux d'anneaux sur l'espace de
+  $X$ : c'est le faisceau des \emph{parties principales} d'ordre infini.
+  Pour $\nu$ variable, les $\mathcal{P}^{\nu}$ forment un anneau cosimplicial
+  $\mathcal{P}^{*}$, avec $\mathcal{P}^{0} = \mathcal{O}_X$. On pose
+  $\mathcal{Q}^{\nu} = \mathcal{P}^{\nu+1}$ (le décalé).
+\item Un $\mathcal{O}_X$-Module $M$ donne $\mathcal{P}^{\nu}[M] =
+  \mathcal{P}^{\nu} \otimes_{\mathcal{O}_X} M$ et $\mathcal{Q}^{\nu}[M] =
+  \mathcal{Q}^{\nu} \otimes_{\mathcal{O}_X} M$, le produit tensoriel étant
+  toujours pris pour la structure de $\mathcal{O}_X$-algèbre venue de la
+  \emph{dernière} projection (« extrême-droite »). Quand on passe à la limite
+  projective d'un tel pro-objet, on écrit $\varprojlim$.
+\item $\mathrm{Mod}(X/S)$ désigne la catégorie dont les objets sont les
+  $\mathcal{O}_X$-Modules et les morphismes les \emph{opérateurs
+  différentiels} relatifs à $S$ ; c'est le sens que la page 58 lui donne en
+  toutes lettres. Elle est additive, non abélienne.
+\item Le dossier dit « site cristallin » pour le site des épaississements
+  nilpotents \emph{sans puissances divisées}. Rien, dans ces pages,
+  n'introduit de puissances divisées ; on écrit donc $(X/S)_{\mathrm{inf}}$,
+  le \emph{site infinitésimal}, là où il écrit
+  $X_{\mathrm{cris}}$.\footnote{Dans la terminologie fixée ensuite —
+  « Crystals and the De Rham cohomology of schemes » (1968), puis la thèse de
+  Berthelot, \emph{Cohomologie cristalline des schémas de caractéristique
+  $p > 0$} (1974) — le site sans puissances divisées s'appelle site
+  infinitésimal, et « cristallin » est réservé au site à puissances
+  divisées. Le nom ne change rien en caractéristique nulle, où les deux sites
+  ont même cohomologie ; il change tout en caractéristique $p$, et c'est
+  justement l'échec constaté à la page 16.} Le \emph{site stratifiant}
+  $(X/S)_{\mathrm{strat}}$ est le sous-site formé des épaississements
+  $U \hookrightarrow T$ pour lesquels l'inclusion de $U$ dans $X$ se
+  prolonge, au moins localement, en un $S$-morphisme $T \to
+  X$.\footnote{Le dossier ne donne pas la définition par écrit : la page 54
+  l'annonce (« Définition du site et du topos stratifiant ») et la page 59
+  invoque « la restriction sur ces objets du site stratifiant parmi ceux du
+  site cristallin ». Nous la restituons sous la forme qui rend vraies les
+  assertions des pages 53, 54 et 59 : avec elle, la donnée d'un Module sur
+  ce site, à flèches de transition des isomorphismes, est une stratification,
+  et le faisceau $\widetilde{X}$ représenté par $X$ lui-même couvre l'objet
+final.}
+\item Un Module stratifié se note $\underline{V}$. Son \emph{complexe de
+  Čech--Alexander} est le faisceau cosimplicial sur $X_{\mathrm{zar}}$
+  \[
+    C^{\nu}(\underline{V}) = \varprojlim_{i} \underline{V}_{\Delta^{(\nu)}(i)} ,
+  \]
+  l'image inverse par n'importe laquelle des $\nu+1$ projections, toutes
+  canoniquement isomorphes grâce à la stratification ; la page 12 l'appelle
+  $C^{\cdot}_{\mathrm{str}}(\underline{V})$, la page 56
+  $C^{*}(\mathcal{F})$, les pages 61 à 70 $\mathcal{F}^{*}$.
+\item $\mathbb{H}$ désigne l'hypercohomologie. $k$ est un corps parfait de
+  caractéristique $p > 0$, $W = W(k)$ l'anneau de ses vecteurs de Witt,
+  $K = W[1/p]$ son corps des fractions, $W_n = W/p^{n}W$.
+\end{itemize}
+
+\pagerange{2}{3}
+\section*{Anneaux cosimpliciaux canoniques (pages 2 et 3)}
+
+La rédaction de l'été 1967 s'ouvre sur un avertissement : formellement, ce
+qui suit ne dépend pas des « histoires de sites cristallins ou
+stratifiants ».\footnote{« stratifiants » est une lecture incertaine ; le
+sens n'en dépend pas.} C'est de l'algèbre cosimpliciale sur l'espace de $X$,
+et c'est ce qui permet ensuite d'en tirer des sites.
+
+Pour $\nu$ variable, les complétés $X^{\nu+1}/X$ forment un schéma formel
+simplicial — le nerf de Čech de $X \to S$, complété le long de la diagonale
+— dont tous les termes ont l'espace de $X$. Leurs faisceaux structuraux
+forment donc l'anneau cosimplicial $\mathcal{P}^{*}$ des conventions, et
+$\mathcal{P}^{0} = \mathcal{O}_X$. Ce n'est pas une $\mathcal{O}_X$-algèbre
+cosimpliciale : les deux cofaces $\mathcal{O}_X = \mathcal{P}^{0}
+\rightrightarrows \mathcal{P}^{1}$ sont en général distinctes, et mettent sur
+$\mathcal{P}^{1}$ deux structures de $\mathcal{O}_X$-algèbre
+\emph{différentes} — la gauche et la droite. Tout ce qui suit vit de cet
+écart.
+
+Le \emph{décalé} $\mathcal{Q}^{*} = \mathcal{S}\mathcal{P}^{*}$ s'obtient en
+ajoutant un point : si l'on voit $\mathcal{P}$ comme foncteur sur les
+ensembles finis non vides, $\mathcal{Q}(I) = \mathcal{P}(I \sqcup e)$, avec
+$e$ un ensemble à un élément, d'où $\mathcal{Q}^{\nu} = \mathcal{P}^{\nu+1}$.
+L'inclusion $I \to I \sqcup e$ donne un morphisme d'anneaux cosimpliciaux
+\[
+  \alpha : \mathcal{P}^{*} \longrightarrow \mathcal{Q}^{*} ,
+  \qquad \alpha^{\nu} : \mathcal{P}^{\nu} \to \mathcal{P}^{\nu+1} .
+\]
+Exemple : $S = \operatorname{Spec} k$, $X = \operatorname{Spec} A$, la
+diagonale $X \to X \times_S X$ étant une immersion nilpotente (par exemple
+$X$ radiciel sur $S$), de sorte qu'aucune complétion n'est
+nécessaire.\footnote{L'hypothèse est en partie illisible à la page 3
+(« immersion nil-[\ldots] ») ; « nilpotente » est la seule lecture qui rende
+juste la formule qui suit.} Alors
+\[
+  \Gamma \mathcal{P}^{\nu} = A^{\otimes_k (\nu+1)} ,
+  \qquad
+  \alpha^{\nu}(x_0 \otimes \cdots \otimes x_\nu)
+  = x_0 \otimes \cdots \otimes x_\nu \otimes 1 ,
+\]
+les opérations cosimpliciales étant celles du nerf de Čech de $k \to A$.
+
+\pagerange{4}{8}
+\section*{Modules, et la linéarisation des opérateurs différentiels (pages 4 à 8)}
+
+Soit $M$ un $\mathcal{O}_X$-Module. On pose $\mathcal{P}^{\nu}[M] =
+\mathcal{P}^{\nu} \otimes_{\mathcal{O}_X} M$, pour la structure
+extrême-droite. Par définition c'est un pro-objet ; on peut le remplacer par
+sa limite, un vrai faisceau, sous des conditions de finitude — $X$ localement
+noethérien, $\Omega^{1}_{X/S}$ et $M$ de type fini — qui rendent ce passage à
+la limite inoffensif.\footnote{La page 4 est très lacunaire à cet endroit ;
+les conditions sont celles qu'on peut lire entre les mots illisibles, et
+leur rôle (remplacer les profaisceaux par leur limite) est explicite. Nous ne
+prétendons pas les avoir restituées entièrement.} C'est un
+$\mathcal{P}^{\nu}$-Module, fonctoriel en $M$.
+
+Le point est dans les $\mathcal{Q}^{\nu}[M] = \mathcal{Q}^{\nu}
+\otimes_{\mathcal{O}_X} M$. Les opérations cosimpliciales de $\mathcal{Q}^{*}$
+ne touchent pas au dernier facteur, celui du point ajouté ; elles sont donc
+linéaires pour la structure extrême-droite, et les $\mathcal{Q}^{\nu}[M]$
+forment un \emph{Module cosimplicial} $\mathcal{Q}^{*}[M]$ sur l'anneau
+cosimplicial $\mathcal{Q}^{*}$.
+
+\emph{Fonctorialité en opérateurs différentiels.} Le terme
+$\mathcal{Q}^{0}[M] = \mathcal{P}^{1} \otimes_{\mathcal{O}_X} M$ est le
+pro-Module des parties principales de $M$. Un opérateur différentiel
+$D : M \to N$ d'ordre $\leq n$ est, par définition, la même chose qu'une
+application $\mathcal{O}_X$-linéaire $\mathcal{P}^{1}_{(n)} \otimes M \to N$ ;
+il induit donc un morphisme
+\[
+  \mathcal{Q}^{0}[D] : \mathcal{Q}^{0}[M] \longrightarrow \mathcal{Q}^{0}[N]
+\]
+qui est linéaire pour la structure \emph{gauche}, et respecte la
+stratification, mais non la structure extrême-droite. Ainsi $M \mapsto
+\mathcal{Q}^{0}[M]$ est un foncteur de $\mathrm{Mod}(X/S)$ vers les
+pro-Modules stratifiés, et $M$ s'en récupère comme sous-faisceau des sections
+horizontales, $D$ comme la restriction de $\mathcal{Q}^{0}[D]$ à ces
+sections.\footnote{C'est ce qu'on appelle aujourd'hui la
+\emph{linéarisation} des opérateurs différentiels : EGA~IV, 16.8, pour la
+correspondance entre opérateurs différentiels et applications linéaires sur
+les parties principales, et Berthelot (1974), où le foncteur $L$ joue le même
+rôle sur le site cristallin. Les pages 6 et 7 sont très lacunaires : la
+récupération de $M$ par les sections horizontales est lisible, l'énoncé
+exact sur $D$ l'est à peine. La mention « (Artin-Rees) » de la page 6, lue
+sous réserve, porte sans doute sur le contrôle du passage à la limite dans
+les pro-Modules.}
+
+\emph{Une résolution canonique.} On obtient autrement $\mathcal{Q}^{*}$ en
+regardant
+\[
+  X^{3}/X \rightrightarrows X^{2}/X \xrightarrow{\ \mathrm{pr}_2\ } X ,
+\]
+c'est-à-dire en formant le nerf de Čech, au-dessus de $X$, du morphisme
+$\mathrm{pr}_2 : X^{2}/X \to X$. Ce morphisme admet une section (la
+diagonale) ; un nerf de Čech augmenté d'un morphisme à section est
+contractile. Il en résulte que le complexe augmenté
+\[
+  0 \to M \to \mathcal{Q}^{0}[M] \to \mathcal{Q}^{1}[M] \to \cdots
+\]
+est exact, comme complexe de pro-Modules et pour les structures
+extrême-droites : \emph{$\mathcal{Q}^{*}[M]$ est une résolution de $M$}.
+
+La page 8 voit aussitôt la difficulté : les pro-Modules ne forment une
+catégorie abélienne commode que sous des conditions de type Artin--Rees, et
+c'est pour la \emph{limite} $\varprojlim \mathcal{Q}^{*}[M]$ qu'on veut une
+résolution. On a la résolution limite sous une hypothèse de
+quasi-cohérence sur $M$, et de Mittag-Leffler sur les systèmes
+projectifs.\footnote{L'hypothèse est nommée à la page 8, « hypothèse de
+quasi-cohérence sur $M$ », au milieu de mots illisibles ; la condition de
+Mittag-Leffler, que la page ne nomme pas, est ce qui la rend suffisante :
+elle assure que la limite des complexes exacts reste exacte. Nous
+l'ajoutons.}
+
+\pagerange{9}{9}
+\section*{La cohomologie d'un Module par la résolution canonique (page 9)}
+
+Sous ces conditions, la résolution donne
+\[
+  H^{*}(X, M) \simeq \mathbb{H}^{*}\bigl(X, \varprojlim
+  \mathcal{Q}^{*}[M]\bigr) ,
+\]
+et la suite spectrale du complexe double,
+\[
+  E_{2}^{pq} = H^{p}\Bigl(\nu \mapsto H^{q}\bigl(X, \varprojlim
+  \mathcal{Q}^{\nu}[M]\bigr)\Bigr) \Longrightarrow H^{p+q}(X, M) .
+\]
+Si l'on note $\mathcal{Q}^{\nu}_{(n)}$ le quotient d'ordre $n$, de sorte que
+$\mathcal{Q}^{\nu}[M] = \varprojlim_n \mathcal{Q}^{\nu}_{(n)} \otimes M$, on
+aura, sous des conditions convenables,
+\[
+  H^{q}\bigl(X, \varprojlim \mathcal{Q}^{\nu}[M]\bigr)
+  = \varprojlim_{n} H^{q}\bigl(X, \mathcal{Q}^{\nu}_{(n)} \otimes M\bigr) ,
+\]
+le terme de droite étant la cohomologie du $n$-ème voisinage de la diagonale
+dans $X^{\nu+2}$.\footnote{La page précise : $X^{\nu+2}$, et non $X^{\nu+1}$,
+puisque $\mathcal{Q}^{\nu} = \mathcal{P}^{\nu+1}$ ; c'est l'objet de la note
+en marge, « Mention $+1$ ! », et d'un « $= H^{q}(X^{[i]}, M)$ » biffé au bout
+de la ligne. Les « conditions convenables » ne sont pas précisées ; ce sont
+celles qui annulent le $\varprojlim^{1}$.}
+
+Tout cela s'étend aux complexes. Un complexe $M^{\cdot}$ dont les
+différentielles sont des \emph{opérateurs différentiels} — un objet de ce que
+la page 9 note $D^{+}(X/S)$ — donne, par la fonctorialité de la section
+précédente, un complexe double $\mathcal{Q}^{*}[M^{\cdot}]$, et
+$\varprojlim \mathcal{Q}^{*}[M^{\cdot}]$ en est une résolution ; d'où
+\[
+  \mathbb{H}^{*}(X, M^{\cdot}) \simeq
+  \mathbb{H}^{*}\bigl(X, \varprojlim \mathcal{Q}^{*}[M^{\cdot}]\bigr) \simeq
+  \mathbb{H}^{*}_{\mathrm{strat}}\bigl(X, \mathcal{Q}^{0}[M^{\cdot}]\bigr) .
+\]
+Le complexe de Modules stratifiés $\mathcal{Q}^{0}[M^{\cdot}]$, dont les
+différentielles sont maintenant \emph{linéaires}, s'appelle la
+\emph{formalisation} du complexe d'opérateurs différentiels
+$M^{\cdot}$.\footnote{« $D^{+}(\mathrm{Mod}(X/S))$ » est à prendre avec
+précaution : $\mathrm{Mod}(X/S)$ n'est pas abélienne, et sa catégorie
+dérivée n'est pas définie par la recette usuelle. Ce qui a un sens, et ce que
+la formule utilise, est la catégorie des complexes d'opérateurs
+différentiels, avec pour équivalences celles qui deviennent des
+quasi-isomorphismes après formalisation. Le cadre en a été posé plus tard
+(Herrera et Lieberman, 1971 ; M.~Saito, 1989, pour les complexes
+différentiels et les $\mathcal{D}$-modules induits). Le dernier isomorphisme,
+avec la cohomologie stratifiante, anticipe sur la définition de la page 12.}
+
+\pagerange{10}{13}
+\section*{Modules stratifiés de cohomologie, et une suite spectrale (pages 10 à 13)}
+
+Soit encore $M^{\cdot}$ un complexe d'opérateurs différentiels. Le complexe
+$\mathcal{Q}^{0}[M^{\cdot}]$ est un complexe de pro-Modules stratifiés ; ses
+différentielles sont linéaires pour la structure gauche, non pour la
+structure extrême-droite. On en prend les faisceaux de cohomologie
+\[
+  V^{q}(M^{\cdot}) =
+  \mathcal{H}^{q}\bigl(\varprojlim \mathcal{Q}^{0}[M^{\cdot}]\bigr) ,
+\]
+et l'on suppose que leur formation commute aux changements de base
+$\mathcal{P}^{0} \to \mathcal{P}^{\nu}$ par les cofaces. C'est une hypothèse
+de platitude ; elle est satisfaite, par exemple, quand $X$ est lisse sur
+$S$.\footnote{La page 11 est lacunaire ; on y lit une « platitude
+infinitésimale de $X/S$ », une platitude de $X^{2}/X \to X$, et « p.\,ex.\
+$X/S$ lisse ». Nous ne retenons que l'exemple, qui suffit à la suite.}
+Alors :
+
+\begin{enumerate}
+\item[1°)] les $V^{q}$ sont, de façon naturelle, des $\mathcal{O}_X$-Modules
+  \emph{stratifiés} ;
+\item[2°)] dans le complexe double $\varprojlim \mathcal{Q}^{*}[M^{\cdot}]$,
+  la première cohomologie, prise suivant les différentielles venues de
+  $M^{\cdot}$, est formée des complexes de Čech--Alexander $C^{*}(V^{q})$ des
+  stratifications des $V^{q}$ ;
+\item[3°)] d'où une suite spectrale.
+\end{enumerate}
+
+Définissons, pour un Module stratifié $\underline{V}$ relativement à $S$, sa
+\emph{cohomologie stratifiante}
+\[
+  \mathbb{H}^{p}_{\mathrm{strat}}(X/S, \underline{V}) =
+  \mathbb{H}^{p}\bigl(X, C^{*}(\underline{V})\bigr) .
+\]
+La suite spectrale du 3°) s'écrit alors
+\[
+  \boxed{\;
+  E_{2}^{pq} = \mathbb{H}^{p}_{\mathrm{strat}}\bigl(X/S, V^{q}(M^{\cdot})\bigr)
+  \Longrightarrow \mathbb{H}^{p+q}(X, M^{\cdot})
+  \;}
+\]
+\footnote{La page 12 ajoute « vérif.\ à EGA $0_{\mathrm{III}}$ ? » : il
+renvoie au formalisme des suites spectrales de complexes doubles d'EGA~0$_{\mathrm{III}}$,
+§\,11, pour la vérification. « EGA » est lu sous réserve.}
+
+\emph{Corollaire.} Si $V^{q}(M^{\cdot}) = 0$ pour $q \neq q_0$, on a des
+isomorphismes canoniques
+\[
+  \mathbb{H}^{n}(X, M^{\cdot}) \simeq
+  \mathbb{H}^{n-q_0}_{\mathrm{strat}}\bigl(X/S, V^{q_0}(M^{\cdot})\bigr) .
+\]
+Autrement dit — le cas $q_0 = 0$ est celui qu'il a en vue —
+l'hypercohomologie d'un complexe d'opérateurs différentiels qui « résout »
+un Module stratifié $\underline{V}$ ne dépend que de $\underline{V}$, et non
+du complexe choisi pour le résoudre.
+
+\pagerange{13}{15}
+\section*{Le complexe de De Rham et le lemme de Poincaré formel (pages 13 à 15)}
+
+Un Module stratifié $\underline{V}$ sur $X/S$ porte en particulier une
+connexion intégrable, et donc un \emph{complexe de De Rham}
+\[
+  \Omega^{\cdot}(\underline{V}) = \Omega^{\cdot}_{X/S} \otimes_{\mathcal{O}_X}
+  \underline{V} ,
+\]
+complexe d'opérateurs différentiels d'ordre $1$. Lorsque $X$ est lisse sur
+$S$ et que $S$ est de caractéristique nulle, ce complexe est une
+« résolution différentielle » de $\underline{V}$ au sens de la section
+précédente : c'est le \emph{lemme de Poincaré formel}, que la page 13 nomme
+en marge.\footnote{La condition sur $S$ est illisible à la page 13 (« et $S$
+[\ldots] de [\ldots] ») ; la page 15 la donne : « $X/S$ différentiellement
+lisse et $S$ de car.\ nulle ». Elle est nécessaire : en caractéristique $p$,
+le complété formel du complexe de De Rham d'une droite n'est pas exact
+($t^{p-1}\,dt$ n'a pas de primitive), et c'est précisément ce que
+répareront les puissances divisées.} Le corollaire précédent, avec $q_0 = 0$,
+donne alors
+\[
+  H^{*}_{\mathrm{DR}}(X/S, \underline{V}) \simeq
+  H^{*}_{\mathrm{strat}}(X/S, \underline{V}) ,
+\]
+une description de la cohomologie de De Rham où il n'est plus question de
+formes différentielles.
+
+Sans hypothèse de lissité ni de caractéristique, il reste un homomorphisme
+canonique $\underline{V} \to \mathcal{H}^{0}\bigl(\varprojlim
+\mathcal{Q}^{0}[\Omega^{\cdot}(\underline{V})]\bigr)$, c'est-à-dire un
+morphisme de complexes de Modules stratifiés
+$\underline{V} \to \varprojlim \mathcal{Q}^{0}[\Omega^{\cdot}(\underline{V})]$,
+et par la formalisation de la page 9, un homomorphisme canonique
+\[
+  \boxed{\;
+  H^{*}_{\mathrm{strat}}(X/S, \underline{V}) \longrightarrow
+  H^{*}_{\mathrm{DR}}(X/S, \underline{V})
+  \;}
+\]
+qui est un isomorphisme lorsque $X$ est lisse sur $S$ et $S$ de
+caractéristique nulle.
+
+En caractéristique $p$, il doute que ce soit un isomorphisme, même dans le
+cas le plus favorable : $X$ lisse et projectif sur un corps algébriquement
+clos de caractéristique $p$, $\underline{V} = \mathcal{O}_X$ avec sa
+stratification canonique. Il n'est même pas clair \emph{a priori} que les
+$H^{i}_{\mathrm{strat}}$ soient de dimension finie, ni qu'ils s'annulent en
+grand degré : « Situation à éclaircir ! »\footnote{La page 15 cite une courbe
+elliptique comme exemple de ce doute. Un fait élémentaire l'explique : en
+caractéristique $p$, une section horizontale pour une stratification est
+annulée par tous les opérateurs différentiels, donc est une puissance
+$p^{n}$-ième pour tout $n$ ; la cohomologie stratifiante de $\mathcal{O}_X$
+ne voit donc presque rien de la cohomologie de De Rham. Pour ce qu'on sait
+aujourd'hui de la cohomologie du site infinitésimal en caractéristique $p$,
+voir l'article d'A.~Ogus, « The cohomology of the infinitesimal site ».}
+
+\emph{Remarque.} L'intérêt de ce lien est que la cohomologie stratifiante
+s'interprète, à son tour, comme la cohomologie d'un « site stratifiant », et
+qu'une variante convenable de ce site pourrait conduire à la cohomologie
+$p$-adique cherchée en caractéristique $p$. Une note en marge, dans un cadre,
+y répond : « C'est sûrement faux ! », avec un renvoi à des calculs sur les
+variétés abéliennes.\footnote{La première ligne de la note est au crayon, les
+suivantes à l'encre bleue : elle a été ajoutée après coup, sans doute après
+le calcul de la page 16. « $p$-adique » et « abélien » sont lus sous
+réserve.}
+
+\pagerange{16}{18}
+\section*{Commentaires sur une cohomologie $p$-adique en caractéristique $p$ (pages 16 à 18)}
+
+Soit $X_0$ un schéma sur $k$, et $S = \operatorname{Spec} W$. Le premier espoir
+était que le $W$-module gradué
+\[
+  H^{*}\bigl((X_0/S)_{\mathrm{inf}}, \mathcal{O}\bigr)
+\]
+soit « le » bon candidat. Si $X_0$ est lisse et se relève en un $X$ lisse sur
+$W$, de réductions $X_n$ sur $W_n$, on a, « d'après l'exposé précédent » — sans doute l'invariance des pages 64
+et 65 —
+\[
+  H^{*}\bigl((X_0/S)_{\mathrm{inf}}, \mathcal{O}\bigr) = \varprojlim_{n}
+  H^{*}\bigl((X_n/S_n)_{\mathrm{inf}}, \mathcal{O}\bigr) ,
+\]
+et l'on espérait trouver à la limite la même chose que $\varprojlim_n
+H^{*}_{\mathrm{DR}}(X_n/W_n) \simeq H^{*}_{\mathrm{DR}}(X/W)$.
+
+« C'est faux malheureusement. » Si $X_0$ est une variété abélienne
+\emph{ordinaire} — formellement, un tore — on trouve
+\[
+  H^{i}\bigl((X_0/S)_{\mathrm{inf}}, \mathcal{O}\bigr) = 0
+  \quad \text{pour } i > \dim X_0 ,
+\]
+alors que la limite des cohomologies de De Rham est excellente. Dans le cas
+affine, on voit d'où vient l'ennui : le passage à la limite projective ne
+commute pas à la localisation $W \to W[1/p] = K$.\footnote{Le défaut est
+celui du site sans puissances divisées ; c'est en adjoignant des puissances
+divisées aux idéaux des épaississements que la théorie cristalline de
+Berthelot (1974) obtient, pour $X_0$ propre et lisse relevable,
+$H^{*}_{\mathrm{cris}}(X_0/W) \simeq H^{*}_{\mathrm{DR}}(X/W)$. Le dossier ne
+contient pas cette idée.}
+
+\emph{Une proposition.} Remplacer le site par un site plus gros, formé
+d'épaississements \emph{pas forcément infinitésimaux} : les objets sont les
+triples $(U_0, \mathcal{W}, i)$ où $U_0$ est un ouvert affine de $X_0$,
+$\mathcal{W} = \operatorname{Spf} B$ un schéma formel affine complet sur $W$,
+et $i : U_0 \to \mathcal{W}$ un morphisme qui identifie $U_0$ à un
+sous-schéma fermé de la fibre spéciale $\mathcal{W} \times_S S_0$, défini
+par un idéal nilpotent — en termes d'anneaux, un $W$-homomorphisme surjectif
+$B \to A_0$ dont le noyau, réduit modulo $p$, est nilpotent. Topologie : une
+variante convenable de la topologie de Zariski, les recouvrements se
+lisant sur les traces dans $X_0$.\footnote{La page 17 écrit « isomorphisme
+nilpotent » ; nous l'entendons comme immersion fermée définie par un idéal
+nilpotent, ce que confirme la parenthèse sur $B/pB \to A_0$. Le site proposé
+est à rapprocher, sans s'y identifier, du site convergent d'Ogus (« $F$-isocrystals
+and de Rham cohomology II — Convergent isocrystals », 1984), dont les objets,
+les « enlargements », sont aussi des schémas formels $p$-adiques munis d'une
+application de leur fibre spéciale réduite vers $X_0$, et de la cohomologie
+rigide de Berthelot. Rien n'indique que ces travaux s'appuient sur cette
+page.}
+
+\emph{Tests décisifs.}
+a) Si $X_0$ est lisse et affine sur $k$, on doit retrouver la cohomologie de
+Washnitzer--Monsky.
+b) Si $X_0$ est lisse et propre et se relève en $X$ lisse et propre, on doit
+retrouver, au moins modulo torsion, $H^{*}_{\mathrm{DR}}(X/W)$.
+
+« Il s'agit d'une première [tentative]. » Même si elle réussit, il faudra
+beaucoup pour en faire la théorie cohomologique désirée.\footnote{La fin de
+la page 18 est presque entièrement illisible ; « [tentative] » est notre
+restitution d'un mot biffé, « W.M. » (au test a) et « accomplir » sont lus
+sous réserve. Le dossier ne revient pas sur ces tests.}
+
+\pagerange{20}{21}
+\section*{Le « yoga » de la cohomologie de De Rham (pages 20 à 26)}
+
+L'exposé de novembre 1966 s'annonce, dans un cadre ajouté en tête : « faire
+sentir un complexe de problèmes gravitant autour de la cohomologie de De Rham
+des variétés algébriques, et proposer un point de vue qui me semble permettre
+de les grouper et de les étudier. D'où un (gros) programme de travail
+proposé. »
+
+\emph{Variétés différentiables.} Le théorème de De Rham s'explique par les
+faisceaux : $\Omega^{\cdot}_X$ est une résolution de $\mathbb{C}_X$ (lemme de
+Poincaré), et les $\Omega^{i}_X$ sont fins, donc acycliques ($X$ séparé,
+paracompact).
+
+\emph{Variétés analytiques complexes.} Le lemme de Poincaré holomorphe vaut
+encore, mais les $\Omega^{i}_X$ ne sont plus acycliques, sauf sur une variété
+de Stein. En général il faut l'hypercohomologie :
+\[
+  H^{*}(X, \mathbb{C}) \simeq \mathbb{H}^{*}(X, \Omega^{\cdot}_X) ,
+  \qquad
+  (*)\quad E_{1}^{pq} = H^{q}(X, \Omega^{p}_X) \Longrightarrow
+  \mathbb{H}^{p+q}(X, \Omega^{\cdot}_X) ,
+\]
+la suite spectrale de Hodge vers De Rham.\footnote{Un « 12 » de lecture
+douteuse surmonte la première égalité ; nous ne l'interprétons pas.}
+
+\emph{Variétés algébriques non singulières} sur $\mathbb{C}$, avec la
+topologie de Zariski. On a toujours un homomorphisme
+\[
+  \mathbb{H}^{*}(X, \Omega^{\cdot}_X) \longrightarrow
+  \mathbb{H}^{*}(X^{\mathrm{an}}, \Omega^{\cdot}_{X^{\mathrm{an}}})
+  \simeq H^{*}(X^{\mathrm{an}}, \mathbb{C}) .
+\]
+
+\emph{Théorème de comparaison.} Pour $X$ lisse et localement de type fini sur
+$\mathbb{C}$, c'est un isomorphisme. Si $X$ est affine, cela revient à dire
+que $H^{*}(X^{\mathrm{an}}, \mathbb{C})$ se calcule par le complexe des formes
+différentielles \emph{algébriques} globales.\footnote{La parenthèse de la
+page 21 dit seulement « $X$ schéma loc.\ de type fini sur $\mathbb{C}$ » ;
+la lissité, que le contexte (« Variétés algébriques (non singulières) »,
+page 20) suppose, est nécessaire : la page 23 donne elle-même le
+contre-exemple d'une courbe nodale. La démonstration renvoie à un « papier
+bleu », sans doute la lettre à Atiyah publiée sous le titre « On the de Rham
+cohomology of algebraic varieties », \emph{Publ.\ Math.\ IHÉS} 29 (1966) —
+identification de notre part.} Le cas général se ramène aux cas
+particuliers par la suite spectrale d'un recouvrement. Si $X$ est propre,
+cela résulte des deux suites spectrales $(*)$, algébrique et analytique, et
+de GAGA ; le cas général demande un moyen plus puissant que GAGA, la
+résolution des singularités.
+
+\pagerange{21}{22}
+\subsection*{Conséquences « métaphysiques », et critique (pages 21 et 22)}
+
+La cohomologie complexe, définie par voie transcendante, admet une
+description purement algébrique, qui a un sens pour des schémas lisses sur
+un corps quelconque ; elle est de plus \emph{filtrée}, le gradué associé
+étant le terme $E_\infty$ de la suite spectrale $(*)$ — la filtration de
+Hodge.
+
+\emph{Critique.} En caractéristique nulle, pour les variétés complètes et
+lisses, elle donne des invariants excellents, et les bons nombres de Betti.
+En caractéristique $p$, elle n'est pas raisonnable :
+\begin{enumerate}
+\item[1°)] si $X$ n'est pas propre, on trouve des espaces de dimension
+  infinie : pour $X$ lisse sur un corps parfait, $H^{0}_{\mathrm{DR}}(X) =
+  \Gamma(X, \mathcal{O}_X)^{p}$, l'anneau des puissances
+  $p$-ièmes ;\footnote{Le noyau de $d$ sur $\mathcal{O}_X$ est
+  $\mathcal{O}_X^{p}$ pour $X$ lisse sur un corps parfait (Cartier) ; la page
+  22 n'énonce pas l'hypothèse, que nous ajoutons.}
+\item[2°)] même si $X$ est propre, on ne trouve pas en général les bons
+  nombres de Betti : on a $\dim H^{1}_{\mathrm{DR}}(X) \geq 2 \dim
+  \mathrm{Pic}_X$, avec inégalité stricte dans certains exemples, dus
+  « moralement » à de la $p$-torsion ;\footnote{$\dim \mathrm{Pic}_X$ est la
+  dimension de la variété de Picard, et $2\dim\mathrm{Pic}_X$ le premier
+  nombre de Betti $\ell$-adique. Les exemples où l'inégalité est stricte
+  sont liés à la non-réduction du schéma de Picard, dont la surface d'Igusa
+  (1955) est un exemple.}
+\item[3°)] même là où les dimensions sont les bonnes, les coefficients sont
+  de caractéristique $p$ : la formule de Lefschetz n'y donne les nombres de
+  points fixes que modulo $p$, et ne se prête pas aux conjectures de Weil —
+  défaut déjà signalé par Serre.
+\end{enumerate}
+
+\pagerange{23}{26}
+\subsection*{Singularités, suites de Leray, dualité (pages 23 à 26)}
+
+Deux autres critiques valent même sur $\mathbb{C}$. D'abord, le point de vue
+est trop exclusivement lié aux variétés \emph{non singulières} : pour la
+droite affine ou projective avec un point double ordinaire, $\dim
+H^{1}(X, \Omega^{\cdot}_X)$ n'est pas le premier nombre de Betti. Or on ne
+peut éviter les variétés singulières, ne serait-ce que comme fibres d'un
+morphisme $f : X \to Y$ ; on voudrait une construction purement algébrique
+de la suite spectrale de Leray de $f^{\mathrm{an}}$,
+\[
+  E_{2}^{pq} = H^{p}\bigl(Y^{\mathrm{an}}, R^{q}f^{\mathrm{an}}_{*}
+  \mathbb{C}\bigr) \Longrightarrow H^{p+q}(X^{\mathrm{an}}, \mathbb{C}) ,
+\]
+ce qui exige des coefficients plus généraux que les seuls complexes de De
+Rham, et sans doute des complexes d'opérateurs différentiels plus généraux.
+Ensuite, la dualité : pour $X$ lisse et propre on a la dualité habituelle,
+Gysin, la classe d'un cycle, comme dans son exposé Bourbaki sur la
+« cohomologie de Hodge » ; mais on voudrait un formalisme $f_{!}$, $f^{!}$
+pour des morphismes séparés de type fini quelconques, du type du Séminaire
+Hartshorne (\emph{Residues and Duality}, 1966), qui donnerait aussi
+l'homologie singulière, et qui s'étende des complexes à différentielles
+linéaires aux complexes d'opérateurs différentiels.
+
+La question posée est donc celle de la bonne \emph{catégorie de
+coefficients}, qui englobe à la fois les complexes cohérents
+« linéaires » et les complexes de type De Rham.\footnote{C'est la question à
+laquelle répondront, en caractéristique nulle, la théorie des
+$\mathcal{D}$-modules (Kashiwara, Bernstein, Mebkhout, dans les années 1970)
+et son formalisme des six opérations ; ces noms sont postérieurs au dossier.}
+
+\pagerange{26}{32}
+\section*{Tour d'horizon $\ell$-adique (pages 26 à 32)}
+
+Pourquoi tant d'efforts pour algébriser De Rham, quand on dispose des
+invariants $\ell$-adiques ? Pour $X$ algébrique sur un corps algébriquement
+clos $k$ et $\ell \neq \mathrm{car}\,k$,
+\[
+  H^{i}(X, \mathbb{Z}_\ell) = \varprojlim_{\nu}
+  H^{i}(X_{\mathrm{\acute{e}t}}, \mathbb{Z}/\ell^{\nu}\mathbb{Z}) ,
+\]
+et sur $\mathbb{C}$ le théorème de comparaison donne des isomorphismes
+canoniques, fonctoriels en $X$,
+\[
+  \boxed{\;H^{i}(X, \mathbb{Z}_\ell) \simeq
+  H^{i}(X^{\mathrm{an}}, \mathbb{Z}) \otimes_{\mathbb{Z}} \mathbb{Z}_\ell\;}
+\]
+La connaissance de \emph{tous} les $H^{i}(X, \mathbb{Z}_\ell)$ équivaut donc,
+du point de vue additif, à celle de la cohomologie entière transcendante :
+pour un $\ell$ donné, au rang $b_i(X)$ et à la composante $\ell$-primaire de
+la torsion. On en tire, en caractéristique nulle et par voie transcendante,
+que les $H^{i}(X, \mathbb{Z}_\ell)$ sont de type fini, de rang indépendant de
+$\ell$, sans torsion pour presque tout $\ell$, et que le polynôme
+caractéristique d'un endomorphisme $f$ de $X$ sur $H^{i}(X, \mathbb{Z}_\ell)$
+est à coefficients entiers indépendants de $\ell$.
+
+En caractéristique $p$, rien de tel. La finitude n'est connue que pour $X$
+propre ou $\dim X \leq 2$ ; pour $X$ projectif et lisse, on ignore si le
+rang de $H^{2}$ est indépendant de $\ell$, et à plus forte raison si les
+polynômes caractéristiques le sont — ce serait, dit-il, le pas le plus
+important vers les conjectures de Weil.\footnote{L'état décrit est celui de
+1966. La finitude en général a été établie par Deligne
+(« Théorèmes de finitude en cohomologie $\ell$-adique », SGA~4½, 1977), sans
+résolution des singularités ; l'indépendance de $\ell$ pour le Frobenius
+d'une variété projective et lisse sur un corps fini résulte de la
+démonstration des conjectures de Weil (Deligne, 1974). Pour un endomorphisme
+quelconque, la question reste liée aux conjectures standard.} Et surtout —
+« c'est là le point que je désire faire » — même si l'on montre que ces
+coefficients sont rationnels (on sait ramener la question, pour $X$ projectif
+lisse, à un problème de cycles algébriques du type de Lefschetz), on ne pourra
+conclure qu'ils sont dans $\mathbb{Z}[1/p]$, à cause de la restriction
+$\ell \neq p$. \emph{Il manque une théorie cohomologique $p$-adique pour les
+variétés en caractéristique $p$} ; sans elle on ne comprendra pas non plus
+les phénomènes de $p$-torsion, dont l'exposé de Tate sur le groupe de Brauer
+donne des exemples.\footnote{La note oblique de la marge de la page 31, qui
+porte sur le groupe de Brauer sur un corps fini, est presque entièrement
+illisible.}
+
+Que serait une telle théorie ? Un foncteur $X \mapsto H^{\cdot}(X)$ des
+variétés projectives lisses sur $k$ vers les modules de type fini sur
+$\mathbb{Z}_p$ ou sur $\mathbb{Q}_p$, avec Künneth, dualité, et les bons
+nombres de Betti. Un argument de Serre montre qu'un tel foncteur n'existe
+pas, déjà pour le $H^{1}$ et en se bornant à des variétés de dimension
+$\leq 2$.\footnote{La page 31 écrit « VA de $\dim \leq 2$ », que l'on peut
+lire variétés algébriques ou variétés abéliennes. L'argument de Serre, sous
+sa forme classique, porte sur une courbe elliptique supersingulière $E$ :
+$\mathrm{End}(E) \otimes \mathbb{Q}$ est une algèbre de quaternions ramifiée
+en $p$, qui n'a pas de représentation de dimension $2$ sur $\mathbb{Q}_p$,
+alors qu'elle devrait agir sur $H^{1}(E)$.} L'anneau de coefficients naturel
+est l'anneau $W(k)$ des vecteurs de Witt, de valuation discrète pour $k$
+parfait, et dont le corps des fractions $K \supset \mathbb{Q}_p$ est de
+caractéristique \emph{nulle}.
+
+\pagerange{32}{34}
+\section*{Essais de cohomologie $p$-adique (pages 32 à 34)}
+
+\emph{Cohomologie plate à coefficients radiciels.} Prendre pour coefficients
+des schémas en groupes finis radiciels ($\mu_p$, $\alpha_p$, \ldots), avec la
+topologie plate. C'est magnifique en dimension $1$ — dualité en cohomologie
+plate pour les courbes sur un corps éventuellement fini, que Raynaud devrait
+tirer au clair. Mais sans espoir en dimension $n \geq 2$ : Artin a remarqué
+que ces groupes de cohomologie s'annulent en degré $> n + 1$, au lieu de
+$2n$. Il faut donc une \emph{définition de la cohomologie $p$-adique
+indépendante de la cohomologie plate}, quitte à étudier ensuite ses
+relations, sans doute fort intéressantes, avec celle-ci.
+
+\pagerange{34}{37}
+\section*{Washnitzer--Monsky (pages 34 à 46)}
+
+\emph{L'idée, simplifiée à l'extrême.} Soit $X_0$ lisse sur $k$, et
+supposons qu'il se relève en un $X$ propre et lisse sur $S =
+\operatorname{Spec} W$ :
+
+\begin{tikzcd}
+X_0 \arrow[r, hook] \arrow[d] & X \arrow[d] \\
+\operatorname{Spec} k \arrow[r, hook] & \operatorname{Spec} W
+\end{tikzcd}
+
+On pose
+\[
+  \boxed{\;H^{\cdot}_{\mathrm{DR}}(X/S) = \mathbb{H}^{*}(X, \Omega^{\cdot}_{X/S})\;}
+\]
+module de type fini sur $W$.\footnote{La page 34 dessine ce carré en marge,
+avec des traits verticaux sans flèche ; nous mettons les flèches structurales,
+qui sont ce que les traits signifient.} L'idée de Washnitzer et Monsky
+semble pouvoir s'exprimer en disant que ce module, à isomorphisme canonique
+près, \emph{ne dépend pas du relèvement} $X$, et serait donc un invariant de
+$X_0$ — par définition la cohomologie $p$-adique cherchée.
+
+La reprise du 15 novembre (page 35) rappelle le cadre et ajoute que
+$H_{\mathrm{DR}}(X/S)$ et les $Rf_{*}\Omega^{\cdot}_{X/S}$ ont un sens pour
+tout préschéma relatif, et commutent au changement de base si $f$ est
+lisse.\footnote{La note encadrée en bas de la page 35 est en partie
+illisible ; « comp.\ avec chgt de base si $f$ lisse » est la partie lue, à
+entendre pour $f$ propre et lisse.} Puis trois remarques :
+\begin{enumerate}
+\item[a)] la construction marcherait encore si l'on ne peut relever $X_0$
+  qu'en un schéma \emph{formel} lisse sur $S$ ;
+\item[b)] le texte publié de Washnitzer--Monsky ne traite que
+  $H_{\mathrm{DR}} \otimes_W K$, et seulement pour $X_0$ affine, relevé non en
+  un schéma mais en quelque chose qui ressemble à une variété
+  rigide-analytique à la Tate ; ce sont des invariants \emph{locaux}.
+  D'après Washnitzer, il serait aisé d'obtenir des invariants globaux, sur
+  $W$, en travaillant sur le \emph{site} des relèvements des ouverts
+  affines ;
+\item[c)] quand $X_0$ admet un relèvement propre et lisse, la construction
+  donne les bons nombres de Betti : ceux de la fibre générique, par le
+  théorème de comparaison.\footnote{Ce que la page 36 appelle « l'invariance
+  de W.M. » pour un relèvement propre et lisse sur $W$ est aujourd'hui vrai
+  et plus fort qu'il ne le pensait : $H^{*}_{\mathrm{DR}}(X/W) \simeq
+  H^{*}_{\mathrm{cris}}(X_0/W)$ (Berthelot, 1974), sans tensoriser par $K$.
+  Mais c'est la cohomologie cristalline à puissances divisées qui le
+  démontre, non la construction de Washnitzer--Monsky. La note en marge de la
+  page 36, « Some properties of formal schemes 63/64 », est une référence que
+  nous n'identifions pas.}
+\end{enumerate}
+
+\pagerange{38}{40}
+\subsection*{Pourquoi le complété formel ne suffit pas (pages 38 à 40)}
+
+Pour $X_0$ affine et lisse, on sait relever $X_0$ en un schéma formel lisse
+$\mathfrak{X}$ sur $W$, unique à isomorphisme non unique près (SGA~1,
+exposé~III). La première idée serait de prendre
+$\mathbb{H}^{*}(\mathfrak{X}, \Omega^{\cdot}_{\mathfrak{X}/S}) =
+H^{*}\bigl(\Gamma(\mathfrak{X}, \Omega^{\cdot}_{\mathfrak{X}/S})\bigr)$. C'est
+faux, déjà pour la droite affine : $X_0 = \operatorname{Spec} k[t]$,
+$\mathfrak{X} = \operatorname{Spf} W\{t\}$, où $W\{t\} = \varprojlim_n
+W_n[t]$ est l'anneau des séries restreintes, à coefficients tendant vers $0$.
+On voudrait $\mathbb{H}^{1} = 0$, ou au moins de torsion. Or
+\[
+  \mathbb{H}^{1}(\mathfrak{X}, \Omega^{\cdot}_{\mathfrak{X}/S})
+  \simeq W\{t\} \big/ \{ f' : f \in W\{t\} \} ,
+\]
+et $\sum a_n t^{n}$ est une dérivée dans $W\{t\}$ si et seulement si $\sum
+a_n t^{n+1}/(n+1)$ est encore restreinte, c'est-à-dire
+\[
+  v_p(a_n) - v_p(n+1) \longrightarrow +\infty .
+\]
+Comme $v_p(n+1)$ prend des valeurs arbitrairement grandes, la seule condition
+$v_p(a_n) \to +\infty$ ne suffit pas, et $\mathbb{H}^{1}$ n'est pas de
+torsion : il est de rang infini sur $W$.
+
+La condition $|a_n|_p / |n+1|_p \to 0$ est une condition arithmétique
+« assez biscornue ». Washnitzer et Monsky la remplacent par une condition plus
+forte et plus maniable :
+\[
+  |a_n|_p \leq C \rho^{-n} \quad \text{pour un } \rho > 1
+  \text{ et une constante } C
+\]
+(dépendant de la série), c'est-à-dire la convergence sur un disque de rayon
+$\rho > 1$, un peu plus grand que le disque unité. C'est l'anneau
+$W^{\dagger}\{t\}$ des séries \emph{surconvergentes} ; on définit de même
+$W^{\dagger}\{t_1, \ldots, t_n\}$, et les algèbres de Washnitzer--Monsky,
+quotients de celles-ci par des idéaux quelconques.\footnote{La page 40 écrit
+$|a_n| = O(1)\,\rho^{n}$, $\rho > 1$ : c'est une majoration de croissance, qui
+ne donne aucune convergence ; la condition voulue, celle de son propre
+commentaire (« disque de rayon $\rho > 1$ »), est $|a_n| = O(\rho^{-n})$. Elle
+donne bien $|a_n/(n+1)| \leq C (n+1) \rho^{-n} = O(\rho'^{-n})$ pour tout
+$1 < \rho' < \rho$, de sorte que toute série surconvergente a une primitive
+surconvergente \emph{à coefficients dans $K$} : sur $W$, $H^{1}$ de la droite
+surconvergente est de torsion (non bornée), et nul après $\otimes K$. La même
+page dit « $K$ corps des fractions de $K$ », lapsus pour « de $W$ ».} Les
+idéaux sont-ils automatiquement fermés ? La question reste posée en tête de
+la page 41, et le dossier ne la tranche pas.\footnote{On sait depuis que les
+algèbres de Washnitzer--Monsky sont noethériennes (Fulton, « A note on weakly
+complete algebras », 1969) ; pour les fondements, voir M.~van der Put,
+« The cohomology of Monsky and Washnitzer », \emph{Mémoires SMF} 23 (1986).}
+
+\pagerange{41}{43}
+\subsection*{Le théorème de relèvement et l'invariance (pages 41 à 43)}
+
+Il semble vrai, écrit-il, que :
+\begin{enumerate}
+\item[a)] si $A_0$ est une $k$-algèbre de type fini lisse, il existe une
+  algèbre de Washnitzer--Monsky $A$ sur $W$, plate (et formellement lisse)
+  sur $W$, et un isomorphisme $\varphi : A \otimes_W k \simeq A_0$ ;
+\item[b)] un tel couple $(A, \varphi)$ est unique à isomorphisme non unique
+  près ;
+\item[c)] on définit $\Omega^{1}(A/W)$ par la propriété universelle pour les
+  dérivations de $A$ dans les $A$-modules de type fini, et
+  $\Omega^{\cdot}(A/W) = \bigwedge^{\cdot}_{A} \Omega^{1}(A/W)$, complexe de
+  $W$-modules ;\footnote{La page 41 écrit $\bigwedge^{*}(A/W)$, en omettant
+  $\Omega^{1}$, et dit « complexe de $W$-algèbres » ; c'est une algèbre
+  différentielle graduée sur $W$.}
+\item[d)] un homomorphisme $u : A \to A'$ d'algèbres de
+  Washnitzer--Monsky lisses induit
+  \[
+    u_{*} : H^{\cdot}\bigl(\Omega^{\cdot}(A/W)\bigr) \otimes_W K
+    \longrightarrow H^{\cdot}\bigl(\Omega^{\cdot}(A'/W)\bigr) \otimes_W K ,
+  \]
+  qui ne dépend que de l'homomorphisme réduit $u_0 : A_0 \to A'_0$.
+\end{enumerate}
+\emph{Corollaire.} Pour $A$ un relèvement de Washnitzer--Monsky de $A_0$
+lisse, $H^{\cdot}\bigl(\Omega^{\cdot}(A/W)\bigr) \otimes_W K$ ne dépend, à
+isomorphisme canonique près, que de $A_0$.\footnote{Deux écarts avec la
+page. Le sens de la flèche : la page 41 écrit $u^{*}$ de $A'$ vers $A$, d'un
+simple trait sans pointe ; un homomorphisme d'anneaux $A \to A'$ induit une
+application de $\Omega^{\cdot}(A)$ vers $\Omega^{\cdot}(A')$. Et le
+$\otimes K$ : la page énonce d) et le corollaire sur $W$, comme un théorème
+qu'« il semble » vrai, mais la page 42 précise que Washnitzer--Monsky ne
+prouvent l'invariance que modulo torsion. Elle est fausse sur $W$ en
+général : l'homotopie entre deux relèvements de $u_0$ fait intervenir des
+divisions par des factorielles, et la page 40 vient de montrer que
+$H^{1}$ de la droite surconvergente a de la torsion non bornée. L'existence
+en a) est due à Elkik (1973) pour les relèvements lisses, l'unicité en b) à
+Washnitzer et Monsky.}
+
+Washnitzer et Monsky ne prouvent ces résultats que pour des $A_0$
+« spéciales », dont il y a assez. Pour $X_0$ lisse quelconque, ils en
+tirent des faisceaux de cohomologie $\mathcal{H}^{*}_{X_0}$ sur $X_0$, de
+$W$-modules, mais pas encore d'invariants globaux. Récemment, ils ont
+utilisé un \emph{site} — celui des relèvements de Washnitzer--Monsky des
+ouverts affines spéciaux, pour la topologie de Zariski — sur lequel les
+$\Omega^{\cdot}_{A/W}$ forment un complexe de faisceaux dont on prend
+l'hypercohomologie ; ils trouvent ainsi des invariants globaux, qui redonnent
+dans le cas relevable le $\mathbb{H}^{*}(\mathfrak{X},
+\Omega^{\cdot}_{\mathfrak{X}/S})$ de la page 38.\footnote{« vérifient (?) » et
+« ils retrouvent bien » sont des ajouts serrés en interligne, dont l'ordre
+est reconstitué par la transcription.}
+
+\pagerange{43}{46}
+\subsection*{Critique de Washnitzer--Monsky (pages 43 à 46)}
+
+C'est une idée nouvelle importante : elle relie la cohomologie de De Rham en
+caractéristique nulle à la cohomologie $p$-adique hypothétique, et évite une
+des critiques principales faites à De Rham naïf, puisque ses coefficients
+sont dans $W(k)$, de corps des fractions de caractéristique nulle. Si elle
+vit vraiment sur $W$, et pas seulement sur $K$, elle fournit en outre une
+notion de \emph{torsion $p$-adique}, peut-être la bonne — est-ce celle de la
+fibre générique ? géométrique ? C'est la question, « extrêmement importante
+et profonde », des relations entre cohomologie de De Rham et cohomologie
+$p$-adique dans la spécialisation de la caractéristique $0$ à la
+caractéristique $p$, que Tate a envisagée l'année précédente dans un autre
+langage.\footnote{Le lieu où Tate l'a envisagée est illisible : on lit deux
+capitales entourées, « HH » ou « IH ». C'est aujourd'hui le domaine de la
+théorie de Hodge $p$-adique ; la page renvoie aussi, pour son importance dans
+l'étude des familles de cycles algébriques, à un texte à paraître dont le
+titre est illisible.}
+
+Restent des critiques graves. La théorie est fournie par les formes
+différentielles, donc pratiquement limitée aux $X_0$ lisses ; et en ne
+travaillant qu'avec les complexes de De Rham, il est sans espoir qu'elle
+fournisse des suites spectrales de Leray pour un morphisme $f_0 : X_0 \to
+Y_0$, si précieuses pour les dévissages. Sans doute en conséquence,
+Washnitzer et Monsky n'ont pas pu prouver les propriétés formelles les plus
+élémentaires : que leurs $H^{i}(X_0)$ soient de type fini, donc ni la
+dualité ni Künneth.\footnote{La finitude de la cohomologie de
+Washnitzer--Monsky, tensorisée par $K$, n'a été démontrée qu'en 1997, dans le
+cadre de la cohomologie rigide (Berthelot, « Finitude et pureté
+cohomologique en cohomologie rigide », \emph{Invent.\ Math.} 128 ; Mebkhout,
+la même année, par une autre voie).} Ils envisagent cependant d'exprimer la
+fonction $\zeta$ d'un schéma projectif et lisse sur un corps fini par une
+formule de Lefschetz--Weil, Frobenius opérant sur leurs $H^{i}$ — un
+formalisme proche de celui de Dwork, « que je ne connais pas ».\footnote{C'est
+le contenu de Monsky, « Formal cohomology III : Fixed point theorems »,
+\emph{Annals of Math.} 1971.}
+
+\pagerange{46}{49}
+\section*{Washnitzer--Monsky et Gauss--Manin (pages 46 à 52)}
+
+L'invariance affirmée par Washnitzer--Monsky surprend d'abord. Supposons que
+$X_0$ varie beaucoup : qu'il soit la fibre, en un point $t_0$ au-dessus du
+point fermé $s_0$ de $S$, d'un schéma $Y$ propre et lisse sur un $M$ de type
+fini sur $S$,
+
+\begin{tikzcd}[column sep=large]
+Y \arrow[r, "f"] & M \arrow[r, "h"] & S = \operatorname{Spec} W
+\end{tikzcd}
+
+Chaque section $g$ de $M$ sur $S$ passant par $t_0$ donne un relèvement
+$X_g = g^{*}Y$ de $X_0$, propre et lisse sur $S$, de morphisme structural
+$f_g$. Posons $\mathcal{K}^{\cdot} = Rf_{*}(\Omega^{\cdot}_{Y/M})$ et
+$\mathcal{H}^{i} = \mathcal{H}^{i}(\mathcal{K}^{\cdot}) =
+R^{i}f_{*}(\Omega^{\cdot}_{Y/M})$. Le changement de base, au sens des
+catégories dérivées, donne
+\[
+  Rf_{g*}(\Omega^{\cdot}_{X_g/S}) \simeq g^{*}\mathcal{K}^{\cdot} ,
+  \qquad
+  R^{i}f_{g*}(\Omega^{\cdot}_{X_g/S}) \simeq g^{*}\mathcal{H}^{i}
+  \ \text{(modulo torsion)} .
+\]
+Si l'invariance est vraie, les $g^{*}\mathcal{K}^{\cdot}$, pour les
+diverses sections $g$ passant par $t_0$, sont canoniquement isomorphes entre
+eux, et les $g^{*}\mathcal{H}^{i}$ aussi, modulo torsion.\footnote{Les
+exposants des pages 47 et 48, un petit signe entre parenthèses lu « $(\Sigma)$ »
+sous réserve, sont omis ; ils n'interviennent pas dans l'argument.} Un tel
+système transitif d'isomorphismes est une \emph{structure} sur
+$\mathcal{K}^{\cdot}$, ou sur les $\mathcal{H}^{i}$, relativement à $S$ —
+apparentée à une donnée de descente : pour un $M$-module $\underline{E}$, un
+isomorphisme $\underline{E} \simeq h^{*}\underline{E}_0$ en fournirait un.
+Les structures plus fortes qui en fournissent encore un sont les
+\emph{stratifications relativement à $S$}. Suivent, page 49, quatre titres
+sans texte : définition générale d'une stratification et relation avec les
+connexions ; système transitif d'isomorphismes qu'elle fournit sur une base
+locale complète ; la connexion de Gauss--Manin.
+
+\pagerange{50}{52}
+\subsection*{La connexion de Gauss--Manin (pages 50 à 52)}
+
+En caractéristique nulle, la construction de Manin donne une connexion
+intégrable absolue sur la cohomologie de De Rham d'une famille, sans le
+langage géométrique ; pour le $H^{1}$ d'une famille de variétés propres et
+lisses, Manin montre de façon compliquée que la partie
+$\mathbb{H}(X, \Omega^{\cdot}_{X/k})$ est stable par les dérivations
+$\theta_X$.\footnote{La page 50 commence au milieu d'un développement, sans
+titre : l'exposé de Manin annoncé au point 4 de la page 49 ne figure pas
+sur les feuillets. Deux lettres de la page sont incertaines ($k$ ou $h$ sous
+$\Omega$, $K$ dans $H_{\mathrm{DR}}(K/k)$). La référence est Manin,
+« Algebraic curves over fields with differentiation », 1958.}
+
+En fait, des arguments directs, reposant sur la formule d'homotopie de
+Cartan
+\[
+  d \circ i_\xi + i_\xi \circ d = \theta_\xi ,
+\]
+($i_\xi$ le produit intérieur, $\theta_\xi$ la dérivée de Lie) donnent, pour
+un morphisme $f : X \to S$ :
+\begin{enumerate}
+\item[(i)] Si une dérivation $\xi$ de $\mathcal{O}_S$ se relève localement en
+  une dérivation $\overline{\xi}$ de $\mathcal{O}_X$ — c'est toujours le cas si
+  $X$ est formellement lisse et affine sur $S$ —, l'action de
+  $(\overline{\xi}, \xi)$ sur $f_{*}(\Omega^{\cdot}_{X/S})$ ne dépend du choix
+  de $\overline{\xi}$ qu'à homotopie près. Les dérivations de $S$ opèrent donc
+  sur les $R^{i}f_{*}(\Omega^{\cdot}_{X/S})$, avec les lois de linéarité et
+  de crochet ; si $S$ est lisse sur un $T$, c'est une connexion intégrable
+  relative à $T$.
+\item[(ii)] Par le même principe, un peu plus sophistiqué (renvoyé à un
+  « appendice » qui n'est pas dans le dossier), pour $f$ lisse et propre,
+  $Rf_{*}(\Omega^{\cdot}_{X/S})$ est muni d'une connexion absolue canonique au
+  sens des catégories dérivées. Cela ne munit pas individuellement les
+  $R^{i}f_{*}$ de connexions ; c'est pourtant le cas si $S$ est de
+  caractéristique nulle, car alors la formation des $R^{i}f_{*}$ commute au
+  changement de base. La compatibilité avec la construction transcendante est
+  triviale.\footnote{La page 51 dit « lisse propre et qu.-sép. ». Une
+  construction de ce type, par filtration du complexe de De Rham absolu, est
+  publiée par Katz et Oda, « On the differentiation of De Rham cohomology
+  classes with respect to parameters », 1968.}
+\end{enumerate}
+
+\emph{Remarque.} On pourrait espérer que ces connexions proviennent de
+\emph{stratifications} canoniques, ce qui expliquerait \emph{a priori}
+l'invariance de Washnitzer--Monsky. C'est vrai en caractéristique nulle ;
+c'est faux en caractéristique $p$, par exemple pour les familles de courbes
+elliptiques. Il s'agit donc d'une relation « heuristique et sentimentale »
+entre deux idées, dont le lien exact reste à élucider.\footnote{En
+caractéristique $p$, une stratification force la $p$-courbure de la connexion
+associée à s'annuler, et celle de Gauss--Manin pour une famille de courbes
+elliptiques non isotriviale ne s'annule pas (Katz, « Nilpotent connections and
+the monodromy theorem », 1970). Le lien exact viendra des puissances
+divisées : la cohomologie cristalline d'une famille propre et lisse est un
+\emph{cristal}, c'est-à-dire porte une stratification à puissances divisées,
+dont la connexion sous-jacente est Gauss--Manin.}
+
+Pour résumer, on est devant un puzzle : reconstituer une théorie d'ensemble
+qui combine (a) une théorie cohomologique des complexes d'opérateurs
+différentiels, en vue notamment du complexe de De Rham ; (b) une étude
+systématique des structures stratifiées ; (c) la théorie de
+Washnitzer--Monsky.
+
+\pagerange{53}{55}
+\section*{Topos stratifiant et topos infinitésimal (pages 53 à 55)}
+
+\emph{4.1. Ce qu'est une stratification.} Soit $\underline{F}$ un Module sur
+$X$ muni d'une stratification relative à $S$. Pour tout $S$-morphisme
+$f : Y \to X$ et tout voisinage infinitésimal $Y'$ de $Y$ sur $S$ auquel $f$
+se prolonge (localement) en $f' : Y' \to X$, la stratification fournit un
+système \emph{transitif} d'isomorphismes entre les $f'^{*}\underline{F}$, pour
+les divers prolongements $f'$. La donnée d'une stratification revient donc à
+celle, pour tout tel $Y'$, d'un \emph{prolongement} de $\underline{F}$ en un
+Module sur $Y'$, avec des conditions de fonctorialité évidentes. La condition
+de prolongement est automatique si $X$ est formellement lisse sur $S$.
+
+\begin{tikzcd}
+X \arrow[dd] & Y \arrow[l, "f"'] \arrow[d, hook] \\
+ & Y' \arrow[ul, "f'"] \\
+S &
+\end{tikzcd}
+
+\emph{4.2. Les sites.} D'où le site et le topos infinitésimaux de $X$ sur
+$S$, et le site et le topos stratifiants, au sens des
+conventions.\footnote{La page 54 donne les titres de ces définitions, non les
+définitions ; voir la note des conventions. Le croquis de la page 53 a un
+trait vertical sans flèche entre $X$ et $S$ ; nous mettons la flèche
+structurale.} Ils coïncident si $X$ est formellement lisse sur $S$.
+Attention : le site n'a pas d'objet qui couvre l'objet final, en
+général.\footnote{« le site n'a \emph{pas de générateur d'objet final} ! »,
+page 54. C'est ce que contourneront, aux pages 59 et 62, le faisceau
+$\widetilde{X}$ pour le site stratifiant et le choix d'un plongement dans un
+$Y$ formellement lisse pour le site infinitésimal.} On décrit les faisceaux
+sur ces sites par des faisceaux ordinaires, de même les faisceaux d'anneaux
+et de Modules. Les faisceaux \emph{spéciaux} sont ceux dont les homomorphismes
+de changement de base sont des isomorphismes — aujourd'hui, les
+\emph{cristaux} ; et les Modules spéciaux sur le site stratifiant de $X/S$
+sont la même chose que les Modules stratifiés sur $X/S$.
+
+\emph{4.3. Un théorème et une conjecture}, énoncés pour être détaillés plus
+tard.
+
+\emph{Théorème.} Si $S$ est de caractéristique nulle et $X$ lisse sur $S$,
+\[
+  H^{*}\bigl((X/S)_{\mathrm{inf}}, \mathcal{O}\bigr) \simeq
+  H^{*}\bigl((X/S)_{\mathrm{strat}}, \mathcal{O}\bigr) \simeq
+  H^{*}_{\mathrm{DR}}(X/S) .
+\]
+\footnote{Sous la flèche, deux lignes encadrées et biffées, de lecture très
+incertaine, portent sur $Rf_{*}$. Le théorème est le lemme de Poincaré
+formel des pages 13 et 14, une fois la cohomologie stratifiante identifiée à
+celle du site.}
+
+\emph{Conjecture.} Si $X$ est localement de type fini sur $\mathbb{C}$,
+\[
+  H^{*}\bigl((X/\mathbb{C})_{\mathrm{strat}}, \mathcal{O}\bigr)
+  \simeq H^{*}(X^{\mathrm{an}}, \mathbb{C}) ,
+\]
+et de même pour le site infinitésimal. Pour $X$ lisse, elle résulte du
+théorème et du théorème de comparaison de la page 21 : on obtient ainsi, en
+caractéristique nulle, une description de la cohomologie de De Rham
+\emph{sans utiliser de différentielles}. Elle est intéressante pour $X$
+singulier, où les formes différentielles échouent.\footnote{Pour le site
+infinitésimal, l'énoncé est aujourd'hui un théorème : par un plongement
+local dans un schéma lisse $Y$, la cohomologie infinitésimale se calcule par
+le complété formel de $\Omega^{\cdot}_Y$ le long de $X$, et Hartshorne
+(« On the De Rham cohomology of algebraic varieties », \emph{Publ.\ Math.\
+IHÉS} 45, 1975) montre que celui-ci calcule $H^{*}(X^{\mathrm{an}},
+\mathbb{C})$. Pour le site stratifiant d'un $X$ singulier, nous ne savons pas
+dire où en est la question ; elle rejoint le « Pb » des pages 70 et 71.}
+
+\pagerange{56}{58}
+\section*{La reprise du 6 décembre 1966 (pages 56 à 58)}
+
+Soit $\mathcal{F}$ un Module quasi-cohérent stratifié sur $X/S$. Il définit un
+Module sur $(X/S)_{\mathrm{strat}}$, et un faisceau cosimplicial sur
+$X_{\mathrm{zar}}$, son complexe de Čech--Alexander
+\[
+  C^{\nu}(\mathcal{F}) = \varprojlim_{i} \mathcal{F}_{\Delta^{(\nu)}(i)} ,
+\]
+défini par l'image inverse le long de l'une quelconque des $\nu+1$
+projections $\Delta^{(\nu)}(i) \to X$, toutes canoniquement isomorphes grâce
+à la stratification.\footnote{La page 56 dit « n'importe laquelle des $n$
+projections » pour le produit à $n+1$ facteurs ; il y en a $n+1$.} On a
+\[
+  \boxed{\;H^{*}\bigl((X/S)_{\mathrm{strat}}, \mathcal{F}\bigr) \simeq
+  \mathbb{H}^{*}\bigl(X_{\mathrm{zar}}, C^{*}(\mathcal{F})\bigr)\;}
+\]
+On a donc deux théories cohomologiques : pour $\mathcal{F}$ quasi-cohérent,
+les $H^{i}(X_{\mathrm{zar}}, \mathcal{F})$ ; pour $\mathcal{F}$ stratifié,
+les $H^{i}((X/S)_{\mathrm{strat}}, \mathcal{F})$. La seconde s'exprime par la
+première, comme hypercohomologie zariskienne d'un complexe dont les
+différentielles ne sont \emph{pas linéaires}. L'inverse ne semble pas vrai
+\emph{a priori} ; il l'est pourtant, à peu de chose près.
+
+\emph{La linéarisation.} À tout Module quasi-cohérent $\mathcal{F}$, sans
+stratification, on associe un pro-Module pro-quasi-cohérent stratifié
+$\mathcal{Q}(\mathcal{F})$, dont la cohomologie stratifiante est la
+cohomologie zariskienne \emph{ordinaire} de $\mathcal{F}$, et qui est
+fonctoriel non seulement en les homomorphismes linéaires, mais en les
+opérateurs différentiels relatifs à $S$. Dans le cas très particulier où la
+diagonale $X \to X \times_S X$ est une immersion nilpotente, stratification
+et donnée de descente relativement à $S$ se confondent, et
+$\mathcal{Q}(\mathcal{F}) = f^{*}f_{*}\mathcal{F}$. L'intérêt : \emph{l'hypercohomologie
+zariskienne ordinaire d'un complexe d'opérateurs différentiels s'interprète
+comme la cohomologie stratifiante d'un complexe de faisceaux stratifiés, à
+différentielles linéaires.} C'est le programme que réalisent, l'été suivant,
+les pages 4 à 9.
+
+En termes de parties principales : un opérateur différentiel $M \to N$
+induit un morphisme $\mathcal{P}^{\nu}[M] \to \mathcal{P}^{\nu}[N]$, qui n'est
+pas $\mathcal{P}^{\nu}$-linéaire, mais seulement $\mathcal{P}^{\nu-1}$-linéaire
+($\nu \geq 1$) quand on voit $\mathcal{P}^{\nu}[M]$ comme
+$\mathcal{P}^{\nu-1}$-Module par restriction des scalaires le long de
+$\alpha^{\nu-1}$ ; vu ainsi, on le note $\mathcal{Q}^{\nu-1}[M]$. En
+particulier $\mathcal{Q}^{0}[M]$ est un foncteur de $\mathrm{Mod}(X/S)$ vers
+les pro-$\mathcal{O}_X$-Modules, et $\alpha$ fait de $\mathcal{Q}^{*}$ une
+algèbre cosimpliciale sur $\mathcal{P}^{*}$, avec
+\[
+  \boxed{\;\mathcal{Q}^{\nu-1}[M] = \mathcal{P}^{\nu} \otimes_{\mathcal{O}_X} M\;}
+\]
+\footnote{La formule encadrée du bas de la page 58 a un indice lu « $i-1$ »
+ou « $i$ » ; seule la lecture $\mathcal{Q}^{i-1}[M] = \mathcal{P}^{i} \otimes
+M$ s'accorde avec la phrase qui la précède et avec la page 5. La longue note
+verticale de la marge de la page 58 est illisible, sauf le mot
+« Anti-Riesz », que nous n'interprétons pas.}
+
+\pagerange{59}{60}
+\section*{Le plan, et la cohomologie stratifiante par Čech (pages 59 à 61)}
+
+Le plan de la page 59 ordonne toute la série : §\,1 cohomologie de De Rham
+ordinaire ; §\,2 tour d'horizon $\ell$-adique et motivations ; §\,3
+Washnitzer--Monsky ; §\,4 stratifications, et la relation avec Gauss--Manin ;
+§\,5 site cristallin et site stratifiant, un théorème et une conjecture en
+caractéristique nulle ; §\,6 calculs « čechistes », en caractéristique
+quelconque ; §\,7 comparaison de la cohomologie de De Rham et de la
+cohomologie cristalline ; §\,8 retour sur la caractéristique $p$.\footnote{La
+numérotation des feuillets antérieurs ne suit pas exactement ce plan : la
+section Gauss--Manin y porte le numéro §\,3 (page 46), celle des topos
+§\,4 (page 53). Le §\,6 est le seul que la suite écrive sous ce numéro ; voir
+le fil du dossier pour les §\,7 et §\,8.}
+
+\emph{6.1. Cohomologie stratifiante.} Le topos stratifiant de $X/S$ a un
+objet $\widetilde{X}$, représenté par $X$ lui-même, qui \emph{couvre l'objet
+final} — c'est ici que sert la restriction aux objets qui se rétractent sur
+$X$. D'où une suite spectrale de Leray
+\[
+  E_{2}^{pq} = H^{p}\bigl(\nu \mapsto H^{q}(\widetilde{X}^{\nu+1}, F)\bigr)
+  \Longrightarrow H^{p+q}\bigl((X/S)_{\mathrm{strat}}, F\bigr) ,
+\]
+avec $\widetilde{X}^{\nu+1} = \varinjlim_{i} \widetilde{\Delta^{(\nu)}(i)}$, et
+pour tout objet $(U, X')$ du site, $H^{*}\bigl((U, X'), F\bigr) \simeq
+H^{*}(X', F_{(U, X')})$. Supposons $X$ affine, donc les $\Delta^{(\nu)}(i)$
+affines, et les $F_{\Delta^{(\nu)}(i)}$ quasi-cohérents, à flèches de
+transition surjectives en $i$. Alors $H^{q}(\widetilde{\Delta^{(\nu)}(i)}, F) =
+0$ pour $q > 0$, le système des $H^{0}$ est strict, et par Mittag-Leffler
+\[
+  H^{q}(\widetilde{X}^{\nu+1}, F) = 0 \ (q > 0) ,
+  \qquad
+  H^{0}(\widetilde{X}^{\nu+1}, F) = \varprojlim_{i} F\bigl(\Delta^{(\nu)}(i)\bigr) ,
+\]
+d'où l'isomorphisme canonique
+\[
+  \boxed{\;H^{*}\bigl((X/S)_{\mathrm{strat}}, F\bigr) \simeq
+  H^{*}\bigl(\nu \mapsto F(X^{\nu+1}/X)\bigr)\;}
+  \qquad (X \text{ affine}) ,
+\]
+par exemple pour $F = \mathcal{O}$ : la cohomologie stratifiante d'un affine
+est la cohomologie du complexe des fonctions sur les complétés formels des
+diagonales.\footnote{Le second membre de l'hypothèse est lu « et
+indépendants mutuellement », sous réserve, aux pages 60 et 61. La condition
+de Mittag-Leffler, que la page nomme (« la M.L. ») sans la formuler, est
+assurée par la surjectivité des flèches de transition, que nous
+écrivons : elle a lieu pour $F = \mathcal{O}$, les $\Delta^{(\nu)}(i) \to
+\Delta^{(\nu)}(i+1)$ étant des immersions fermées entre affines.}
+
+\pagerange{61}{61}
+\subsection*{Le cas non affine (page 61)}
+
+Si $X$ n'est plus supposé affine, les
+$U \mapsto F(U^{\nu+1}/U) = \varprojlim_{i} F\bigl(\Delta^{(\nu)}_{U}(i)\bigr)$
+sont des faisceaux $\mathcal{F}^{(\nu)}$ sur $X_{\mathrm{zar}}$, qui forment un
+faisceau cosimplicial $\mathcal{F}^{*}$ — le complexe de Čech--Alexander des
+conventions —, et
+\[
+  H^{*}\bigl((X/S)_{\mathrm{strat}}, F\bigr) \simeq
+  \mathbb{H}^{*}(X_{\mathrm{zar}}, \mathcal{F}^{*}) ,
+  \qquad
+  \boxed{\;E_{2}^{pq} = H^{p}\bigl(\nu \mapsto H^{q}(X_{\mathrm{zar}},
+  \mathcal{F}^{(\nu)})\bigr) \Longrightarrow
+  H^{p+q}\bigl((X/S)_{\mathrm{strat}}, F\bigr)\;}
+\]
+ce qui généralise la formule de la page 56.
+
+\pagerange{61}{64}
+\section*{Le site infinitésimal par un plongement (pages 61 à 64)}
+
+\emph{6.2.} Pour le site infinitésimal, $\widetilde{X}$ ne couvre plus l'objet
+final quand $X$ n'est pas formellement lisse sur $S$. Supposons qu'on ait une
+immersion
+\[
+  X \hookrightarrow Y , \qquad Y \text{ formellement lisse sur } S ;
+\]
+c'est toujours possible localement sur $X$, et globalement si $X$ est
+quasi-projectif sur $S$.\footnote{La page 62 est lacunaire ici ;
+« localement sur $X$ » est biffé puis l'idée reprise à la page 64, où le
+passage aux ouverts affines est fait explicitement. Le croquis de la page 62
+— $X \hookrightarrow Y$ au-dessus de $S$ — est remplacé par cette ligne.}
+Soit $Y(i)$ le $i$-ème voisinage infinitésimal de $X$ dans $Y$. Le faisceau
+« représenté » par $(X, Y)$ est $\widetilde{Y} = \varinjlim_i
+\widetilde{Y(i)}$, et la lissité formelle de $Y$ assure qu'il couvre l'objet
+final : tout épaississement d'un ouvert de $X$ se prolonge localement à
+$Y$. D'où
+\[
+  E_{2}^{pq} = H^{p}\bigl(\nu \mapsto H^{q}(\widetilde{Y}^{\nu+1}, F)\bigr)
+  \Longrightarrow H^{p+q}\bigl((X/S)_{\mathrm{inf}}, F\bigr) .
+\]
+Supposons $F$ quasi-cohérent sur chaque objet, à flèches de transition
+surjectives pour les immersions $X'' \hookrightarrow X'$ — c'est le cas d'un
+cristal en Modules quasi-cohérents —, et $X$ affine, donc les $Y(i)$
+affines. Comme $H^{*}(\widetilde{X'}, F) = H^{*}(X'_{\mathrm{zar}}, F_{X'})$,
+on trouve encore $E_2^{pq} = 0$ pour $q \neq 0$, et
+\[
+  H^{*}\bigl((X/S)_{\mathrm{inf}}, F\bigr) \simeq
+  H^{*}\bigl(\nu \mapsto F(Y^{\nu+1}/X)\bigr) ,
+\]
+où $Y^{\nu+1}/X$ est le complété formel de $Y^{\nu+1}$ le long de $X$
+plongé diagonalement.\footnote{L'ajout de la page 63, « et simultanément
+bien si $X'' \hookrightarrow X'$ ! », est ce que nous rendons par la
+surjectivité des flèches de transition ; la lecture est incertaine. La page
+dit aussi « supposons $U$ dans $X$ affines », que nous lisons : $X$ affine.}
+Si $X$ n'est pas affine, on introduit les faisceaux sur $X_{\mathrm{zar}}$
+\[
+  \mathcal{F}^{(\nu)}(U) = F\bigl(V^{\nu+1}/U\bigr) ,
+\]
+$V$ un ouvert de $Y$ qui induit $U$ ; ils forment un faisceau cosimplicial
+$\mathcal{F}^{*}$, et
+\[
+  H^{*}\bigl((X/S)_{\mathrm{inf}}, F\bigr) \simeq
+  \mathbb{H}^{*}(X_{\mathrm{zar}}, \mathcal{F}^{*}) ,
+  \qquad
+  E_{2}^{pq} = H^{p}\bigl(\nu \mapsto H^{q}(X, \mathcal{F}^{(\nu)})\bigr)
+  \Longrightarrow H^{p+q}\bigl((X/S)_{\mathrm{inf}}, F\bigr) .
+\]
+C'est le complexe de Čech--Alexander d'un plongement, sous le nom qu'il porte
+encore aujourd'hui.
+
+\pagerange{64}{65}
+\section*{Invariance par les immersions nilpotentes (pages 64 et 65)}
+
+\emph{6.3.} Soit $X_0 \hookrightarrow X$ une immersion \emph{nilpotente}, et
+$F$ sur $(X/S)_{\mathrm{inf}}$ provenant par restriction d'un $F_0$ sur
+$(X_0/S)_{\mathrm{inf}}$. Pour tout $\nu$, les complétés formels
+$Y^{\nu+1}/X_0$ et $Y^{\nu+1}/X$ sont les mêmes, puisqu'ils ne dépendent que
+du fermé sous-jacent ; donc $\mathcal{F}^{(\nu)} \simeq
+\mathcal{F}_0^{(\nu)}$ sur $X_{\mathrm{zar}} = X_{0,\mathrm{zar}}$, et
+\[
+  H^{*}\bigl((X/S)_{\mathrm{inf}}, F\bigr) \xrightarrow{\ \sim\ }
+  H^{*}\bigl((X_0/S)_{\mathrm{inf}}, F_0\bigr) .
+\]
+Établi pour un plongement global dans un $Y$ formellement lisse, cela s'étend
+au cas général par un recouvrement de $X$ par des ouverts affines. Il
+resterait à voir si l'on peut se passer de l'hypothèse de quasi-cohérence
+faite sur $F$.\footnote{C'est l'\emph{invariance topologique} du site
+infinitésimal. Elle est propre au site sans puissances divisées : pour le
+site cristallin à puissances divisées, elle ne vaut que pour les immersions
+compatibles aux puissances divisées.}
+
+Supposons en particulier $X$ \emph{lisse} sur $S$, et $S_0 \hookrightarrow
+S$ une immersion nilpotente ; alors $X_0 = X \times_S S_0 \to X$ en est une,
+et, en regardant $X_0$ comme schéma \emph{sur $S$},
+\[
+  H^{*}\bigl((X/S)_{\mathrm{inf}}, \mathcal{O}\bigr) \simeq
+  H^{*}\bigl((X_0/S)_{\mathrm{inf}}, \mathcal{O}\bigr) .
+\]
+\emph{Le premier membre ne dépend donc pas, à isomorphisme canonique près, de
+la façon dont on a relevé la situation lisse $X_0/S_0$ en une situation lisse
+sur $S$.} Si $S$ est de caractéristique nulle, il est aussi canoniquement
+isomorphe à $H^{*}(X_{\mathrm{zar}}, \Omega^{\cdot}_{X/S})$ (théorème de la
+page 54) ; on a donc une définition de la cohomologie de De Rham pour un
+morphisme quelconque $f : X \to S$ de base de caractéristique nulle, et
+mieux, on devrait pouvoir définir $Rf_{*}(\Omega^{\cdot}_{X/S})$ comme un
+\emph{cristal absolu} sur $S$, c'est-à-dire l'étendre à tout voisinage
+infinitésimal de $S$, et pas seulement à ceux qui se rétractent sur
+$S$.\footnote{C'est ici l'analogue exact, en caractéristique nulle, de
+l'invariance que Washnitzer et Monsky affirmaient en caractéristique $p$ :
+l'indépendance du relèvement est un théorème pour le site infinitésimal en
+caractéristique nulle. Que la page 52 vienne de constater que l'analogue naïf
+échoue en caractéristique $p$ est ce qui fait de ce passage le pivot du
+dossier.}
+
+\pagerange{66}{68}
+\section*{L'anneau cosimplicial de Čech--Alexander (pages 66 à 68)}
+
+\emph{6.4.} Pour $F = \mathcal{O}$, sur le site stratifiant ou infinitésimal,
+$\mathcal{F}^{*}$ est un \emph{anneau cosimplicial} sur $X_{\mathrm{zar}}$.
+Dans le cas du plongement de 6.2, c'est la limite projective des anneaux
+cosimpliciaux $\mathcal{F}(i)^{*}$ relatifs aux $Y(i)$ (qui ont tous l'espace
+de $X$) ; son étude se ramène donc essentiellement au contexte
+stratifiant.
+
+Chaque $\mathcal{F}^{(\nu)}$ est une $\mathcal{O}_X$-algèbre de $\nu+1$
+façons, par les $\nu+1$ projections de $X^{\nu+1}/X$ sur $X$. Si l'on en
+choisit une, $\mathrm{pr}_1$ par exemple, $\mathcal{F}^{(\nu)}$ devient
+pro-quasi-cohérent, et les opérations cosimpliciales — donc les cobords —
+doivent être vus comme des \emph{opérateurs différentiels d'ordre infini}.
+C'est ainsi que les complexes d'opérateurs différentiels s'introduisent dans
+la théorie de façon vraiment naturelle. Analogie avec les cochaînes de
+Čech--Alexander.\footnote{La fin de 6.4, page 66, est en partie illisible ;
+elle continue page 68, après une page 67 qui ne porte qu'un premier départ
+de 6.5, biffé (« Soit $X$ un espace analytique »). L'analogie est celle des
+cochaînes d'Alexander--Spanier, fonctions sur $X^{\nu+1}$ au voisinage de la
+diagonale ; ici le voisinage est formel.}
+
+\pagerange{68}{70}
+\section*{Le cas complexe (pages 68 à 70)}
+
+\emph{6.5.} Soit $S = \operatorname{Spec} \mathbb{C}$. La suite spectrale de
+6.1 s'écrit
+\[
+  E_{2}^{pq} = H^{p}\bigl(\nu \mapsto H^{q}(X^{\nu+1}/X,
+  \mathcal{O})\bigr) \Longrightarrow
+  H^{p+q}\bigl((X/\mathbb{C})_{\mathrm{strat}}, \mathcal{O}\bigr) ,
+\]
+avec, au second membre, une « cohomologie formelle ». Si $X$ est propre, les
+$H^{q}(\Delta^{(\nu)}(i), \mathcal{O})$ sont de dimension finie, et
+Mittag-Leffler donne
+\[
+  H^{q}(X^{\nu+1}/X, \mathcal{O}) \simeq \varprojlim_{i}
+  H^{q}\bigl(\Delta^{(\nu)}(i), \mathcal{O}\bigr) ,
+  \qquad
+  E_{2}^{pq} = \varprojlim_{i} H^{p}\Bigl(\nu \mapsto
+  H^{q}\bigl(\Delta^{(\nu)}(i), \mathcal{O}\bigr)\Bigr) .
+\]
+Par GAGA, la cohomologie des schémas propres $\Delta^{(\nu)}(i)$ s'interprète
+analytiquement, d'où
+\[
+  H^{*}\bigl((X/\mathbb{C})_{\mathrm{strat}}, \mathcal{O}\bigr) \simeq
+  H^{*}\bigl(X^{\mathrm{an}}_{\mathrm{strat}}, \mathcal{O}\bigr)
+  := \mathbb{H}^{*}\bigl(X^{\mathrm{an}}, \mathcal{F}^{*}_{X^{\mathrm{an}}}\bigr) ,
+\]
+où, pour un espace analytique $\mathfrak{X}$, $\mathcal{F}^{*}_{\mathfrak{X}}$
+est le faisceau cosimplicial $U \mapsto \Gamma\bigl(U^{\nu+1}/U,
+\mathcal{O}\bigr)$, $U$ parcourant les ouverts de $\mathfrak{X}$.
+
+\emph{Conjecture.} Pour tout espace analytique complexe $\mathfrak{X}$, le
+complexe $\mathcal{F}^{*}_{\mathfrak{X}}$ est, par l'augmentation évidente, une
+résolution du faisceau constant $\mathbb{C}_{\mathfrak{X}}$. Cela semble
+plausible, en regardant les « fibres formelles » des faisceaux.\footnote{Pour
+$\mathfrak{X}$ lisse, c'est une forme du lemme de Poincaré formel. Pour
+$\mathfrak{X}$ singulier, l'énoncé voisin où l'on complète un plongement
+$\mathfrak{X} \subset \mathfrak{Y}$ lisse — le complété formel de
+$\Omega^{\cdot}_{\mathfrak{Y}}$ le long de $\mathfrak{X}$ résout
+$\mathbb{C}_{\mathfrak{X}}$ — est démontré par Bloom et Herrera (« De Rham
+cohomology of an analytic space », \emph{Invent.\ Math.} 7, 1969). Nous ne
+savons pas si la conjecture telle qu'énoncée ici, sans plongement, a été
+établie.}
+
+\emph{Théorème.} Soit $X$ propre sur $\mathbb{C}$. Si la conjecture est vraie
+pour $X^{\mathrm{an}}$, on a un isomorphisme canonique
+\[
+  H^{*}\bigl((X/\mathbb{C})_{\mathrm{strat}}, \mathcal{O}\bigr) \simeq
+  H^{*}(X^{\mathrm{an}}, \mathbb{C}) .
+\]
+C'est immédiat : l'hypercohomologie d'une résolution de $\mathbb{C}$ est la
+cohomologie de $\mathbb{C}$.
+
+Supposons de plus $X$ contenu dans un schéma lisse $Y$. Alors l'homomorphisme
+\[
+  H^{*}\bigl((X/\mathbb{C})_{\mathrm{inf}}, \mathcal{O}\bigr) \longrightarrow
+  H^{*}\bigl((X/\mathbb{C})_{\mathrm{strat}}, \mathcal{O}\bigr)
+\]
+est également un isomorphisme — sous la même hypothèse, puisque le second
+membre est celui du théorème.\footnote{Le raisonnement de la page 70 est
+elliptique. Il invoque, pour le premier membre, $H^{*}_{\mathrm{inf}}(X) =
+\varprojlim_i H^{*}_{\mathrm{inf}}(Y(i))$ avec des flèches de transition
+bijectives — ce qui résulte de 6.3, mais ne compare rien au site
+stratifiant. Une hypothèse qui aurait fait marcher l'argument, la conjecture
+pour les $Y(i)^{\mathrm{an}}$, est écrite puis biffée. Ce qui rend l'énoncé
+vrai, sous la conjecture pour $X^{\mathrm{an}}$, est que le premier membre
+est lui aussi isomorphe à $H^{*}(X^{\mathrm{an}}, \mathbb{C})$ — c'est le
+théorème de Hartshorne cité à la page 55, par le complexe de 6.2 —, et que
+la flèche est compatible aux deux identifications, ce qui reste à vérifier.
+Nous énonçons donc le résultat, et non la démonstration de la page.} Cela
+rejoint, dit-il, la conjecture de l'exposé précédent, celle de la page 55.
+
+\pagerange{70}{71}
+\section*{Un problème, et une remarque non archimédienne (pages 70 et 71)}
+
+\emph{Problème.} Soit $X$ plat et localement de présentation finie sur $S$,
+et $F$ sur $(X/S)_{\mathrm{inf}}$ satisfaisant aux hypothèses habituelles
+(par exemple provenant d'un Module stratifié). A-t-on
+\[
+  H^{*}\bigl((X/S)_{\mathrm{inf}}, F\bigr) \xrightarrow{\ \sim\ }
+  H^{*}\bigl((X/S)_{\mathrm{strat}}, F\bigr) \ ?
+\]
+C'est équivalent au problème suivant : pour $X$ comme ci-dessus et
+$X_0 \to X$ une immersion nilpotente, a-t-on
+$H^{*}((X/S)_{\mathrm{strat}}, F) \simeq H^{*}((X_0/S)_{\mathrm{strat}}, F)$ ?
+— l'invariance topologique de 6.3, mais pour le site stratifiant. On peut
+supposer $S$, $X$, $X_0$ affines.\footnote{« plat » est lu sous réserve. Le
+dossier pose le problème et n'y revient pas. L'équivalence se voit ainsi :
+le site infinitésimal est invariant par immersion nilpotente (6.3) et
+coïncide avec le site stratifiant pour $X$ lisse ; plonger localement $X$
+dans un lisse et comparer aux voisinages infinitésimaux ramène l'un à
+l'autre.}
+
+\emph{Remarques.} Si $S = \operatorname{Spec} k$, $k$ un corps valué complet
+non archimédien, il y a lieu de se poser la question de la conjecture de la
+page 69 pour les espaces analytiques « flasques » sur $k$ ; mais rien
+n'indique globalement qu'elle soit vraisemblable. Le dossier s'arrête
+là.\footnote{Un passage barré et hachuré mentionnait d'abord les espaces
+rigides-analytiques de Tate. La fin de la page est en partie illisible ;
+« flasques » est entre guillemets sur la page, et nous ne savons pas quelle
+classe d'espaces il désigne.}
+
+\end{document}

@@ -1,0 +1,1525 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 5, pages 1-52.
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried — a doubtful
+% reading, a notation he used differently, a missing passage — moves into a
+% footnote.
+%
+% It is held to being mathematically correct as it stands, not merely faithful
+% to the page. Where the manuscript is loose or mistaken, the true statement is
+% what appears here, and the footnote says what the page has. In any dispute of
+% substance the transcription governs: whoever cites Grothendieck must cite the
+% batch-NN.fr.tex files.
+%
+% Scope: ONE document for the whole shelfmark, its three batches of
+% transcription (pages 1-52, all transcribed) read as a single argument. The
+% folder is a workshop for the apparatus of crystalline cohomology in 1965-66:
+% divided powers (three passes: pages 21-26 and 31-34 abstractly, 38-40 in a
+% Z_(p)-algebra, 44-46 on a principal ideal, with the artinian computation of
+% pages 4-12 as their concrete test), the sites (page 2 and pages 27-30), the
+% Frobenius topos (pages 15-19), and the letter to Deligne of 10.12.1965
+% (pages 49-52) that says what all this is for. The inventory's « correspondance
+% Berthelot » has no leaf among the 52 pages.
+%
+% NOTATION fixed once for the folder.
+%   Divided powers: gamma_n(x) everywhere. The pages write x^{(n)} and pi^n(x)
+%     (21-26), Gamma^n(x) (31-34), pi_m(x) (38-40), pi^{(n)} (44-46),
+%     gamma^{p^r} (4-8).
+%   Sites: his names DRIFT between page 2 and page 28 — his « cris » of page 2
+%     is his « DR » of page 28, and his « Cris » of page 28 is his « inf » of
+%     page 2. This reading writes Cris(X/S) (with divided powers, today's
+%     crystalline site), Cris^st (its sub-site of objects locally retracting),
+%     Inf(X/S) (no divided powers) and Inf^st (his Strat). Table in the
+%     conventions section.
+%   Coefficients: q_i = (p^{i+1})!/((p^i)!)^p (pages 4-8 and 32); kappa_n
+%     (pages 31-32, his c_n); e_n and d_m (page 38, his c_n and d_m); kappa'_n
+%     (page 40, his c_n). His one letter c_n is three different numbers.
+%   PD envelope: D_A(I) (his Gamma*(A, I), Gamma(A, J)).
+%
+% Substantive departures from the pages, each footnoted where it occurs:
+%   - page 5: « si i = nu » for i = 0 in the induction;
+%   - page 12: chif(n) <= (p-1) nu should be (p-1)(nu+1) (harmless);
+%   - page 16: Homtop(X, Q) for Homtop(X', Q);
+%   - page 18: omega_X^* for omega_Y^* in the base-change map;
+%   - page 26: log series with n >= 0 and sign (-1)^n, for n >= 1, (-1)^{n-1};
+%   - page 31: v_p(n) for v_p(n!); Gamma^n(xy) = x^n Gamma^n(y) with x in I,
+%     y in A, roles swapped;
+%   - page 32 (margin): a p-th POWER carrying the coefficient of a COMPOSITE;
+%   - page 34: boxed formula not as it should read from 1.5; the true one given;
+%   - page 40: the relation p! pi(x) = x^p, necessary, is missing from the
+%     list; his question « c_n = 1 mod p ? » is answered here — no,
+%     kappa'_n = 1 / prod a_i! mod p (checked by machine for p <= 7, n < 200);
+%   - page 44, Example 1: « pi^n in n! A » is NOT sufficient for divided powers
+%     on the principal ideal pi A; the condition is pi^n in n! pi A
+%     (counterexample: A = Z_(p)<T>, pi = T);
+%   - page 2: the « classe de Chern » is read as an obstruction class, and the
+%     smooth case needs a QUASI-NILPOTENT integrable connection in char. p.
+% The lemmas of pages 5 and 7 (normal form in W^{(nu)} and W^{(nu,r)}) were
+% checked by machine for (p, nu) in {(2,1),(2,2),(2,3),(3,1),(3,2),(5,1)} and
+% every r: the ideal is exactly the diagonal lattice the page states.
+%
+% Announced and not established on the pages: that W^{(nu)} carries the
+% divided powers (page 4, asserted); that the presentation of page 31 is the
+% PD envelope (« à vérifier »); the rigidity H^q(Cris^st/(U,U'), O) = H^q(U', O)
+% (« à vérifier »); the vanishing of R^i in the Frobenius topos (page 18-19,
+% breaks off); the extension of pi_p to a full divided-power structure
+% (page 40, open question). The polynomial-maps note closing on page 42 has no
+% beginning among the transcribed pages.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-03 — first pass, unchecked against the pages by a human.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{5}
+\pages{1}{52}
+\dating{1965-1969}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Cristaux et cohomologie de De Rham : généralités, correspondances Deligne et Berthelot (1965-1969) : notes manuscrites (s.d.), lettre (1965). — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Ce dossier est un atelier. On y voit Grothendieck, entre 1965 et 1966,
+fabriquer les outils d'une théorie qui n'existe pas encore : une cohomologie
+des variétés algébriques en caractéristique $p$ qui soit aussi bonne que la
+cohomologie de De Rham l'est sur les nombres complexes. Il l'appellera
+\emph{cohomologie cristalline}. La lettre à Deligne du 10 décembre 1965, qui
+clôt le dossier, dit en une phrase pourquoi il la faut : « on ne pourra dire
+des choses vraiment intéressantes et nouvelles qu'en faisant appel à la
+“vraie” cohomologie $p$-adique ».
+
+Le problème est simple à formuler. Sur les nombres complexes, la cohomologie
+de De Rham se calcule avec des formes différentielles, et tout repose sur le
+fait qu'une forme fermée est localement exacte — le lemme de Poincaré, qui
+n'est au fond que l'intégration des séries entières : $x^{n}$ a pour
+primitive $x^{n+1}/(n+1)$. En caractéristique $p$, on ne peut plus diviser
+par $p$ : $x^{p-1}\,dx$ est fermée et n'a pas de primitive, et la théorie
+s'effondre. Pire, les développements de Taylor, qui servent à comparer une
+fonction en deux points voisins, font intervenir $x^{n}/n!$, qui n'a plus de
+sens.
+
+L'idée qui traverse le dossier est de \emph{garder les quotients
+$x^{n}/n!$ comme symboles}, sans plus chercher à diviser. On décrète qu'un
+élément $x$ possède des « puissances divisées » $\gamma_n(x)$, qui se
+comportent comme $x^{n}/n!$ — elles se multiplient, s'additionnent,
+se composent selon les mêmes règles — mais qui ne sont pas obtenues en
+divisant. C'est comme si l'on gardait dans sa poche les fractions sans
+jamais avoir le droit de les écrire comme des nombres. Une bonne moitié des
+feuillets met cette notion au point, et l'éprouve : dans quels anneaux ces
+symboles existent-ils, combien de choix y a-t-il, que se passe-t-il quand
+on les impose à $p$ lui-même ? La réponse la plus nette tient en une
+inégalité, encadrée sur la page 46 : dans un anneau de valuation discrète
+d'indice de ramification $e$, l'idéal maximal porte des puissances divisées
+si et seulement si $e \leqslant p-1$.
+
+Vient ensuite le cadre géométrique. Plutôt que de travailler sur la variété
+$X$ elle-même, on considère tous ses « épaississements » : des objets un peu
+plus gros que des ouverts de $X$, dans lesquels ceux-ci sont plongés comme
+un point est plongé dans un germe de courbe, et dont l'idéal porte des
+puissances divisées. L'ensemble de ces épaississements forme un \emph{site},
+au sens de la théorie des topos, et sa cohomologie est la cohomologie
+cherchée. Les pages 2 et 27 à 30 dressent la carte des variantes possibles
+— avec ou sans puissances divisées, avec ou sans rétraction locale — et
+disent lesquelles coïncident quand $X$ est lisse ou en caractéristique zéro.
+
+Troisième pièce : Frobenius, l'élévation à la puissance $p$, qui est en
+caractéristique $p$ un endomorphisme de tout. Les pages 15 à 19 construisent,
+pour deux morphismes de topos parallèles, un nouveau topos dont les objets
+sont des faisceaux munis d'une flèche « de Frobenius » — c'est le cadre où
+vivront ce qu'on appelle aujourd'hui les $F$-cristaux.
+
+La lettre à Deligne, enfin, regarde plus loin. Elle propose que, sur un corps
+$p$-adique, la cohomologie étale et la cohomologie de De Rham soient liées
+comme elles le sont sur $\mathbf{C}$ — et aussitôt elle doute : « j'ai de
+grands doutes que les choses marchent aussi simplement que ça ». Ce doute était
+juste. Ce qu'il pressent là deviendra, quinze ans plus tard, la théorie de
+Hodge $p$-adique de Fontaine, où l'on découvre qu'il faut un anneau de
+« périodes » pour comparer les deux cohomologies.
+
+Il faut lire ce dossier comme on regarde des esquisses : plusieurs feuillets
+reprennent la même construction sous trois notations différentes, deux
+calculs s'interrompent sur une question, une conjecture s'énonce et se
+rétracte dans la même page. C'est le moment où les objets n'ont pas encore
+de nom — « cris » désigne une chose à la page 2 et une autre à la page 28 —
+et c'est pour cela qu'il est instructif.
+
+\keywords{divided powers, PD envelope, divided power algebra, Legendre's formula, Witt vectors, Cohen structure theorem, absolute ramification index, crystalline site, infinitesimal site, stratification, crystal, integrable connection, Cech-Alexander complex, Frobenius, inserter, lax colimit of topoi, base change morphism, F-crystal, polynomial law, Poincaré lemma, quasi-homogeneous singularity, completed module of differentials, Poincaré-Verdier duality, rigid analytic space, p-adic Hodge theory, Cartier isomorphism, conjugate spectral sequence}
+\end{resume}
+
+\pagerange{2}{2}
+\section*{Le fil du dossier, et les conventions valables pour tout le dossier}
+
+\subsection*{Les stations}
+
+Les cinquante-deux feuillets ne forment pas un texte suivi : ce sont des
+liasses, souvent écrites au dos de tapuscrits étrangers, que l'archive a
+mises dans l'ordre où elles sont. Dans l'ordre des pages :
+
+\begin{itemize}
+\item \textbf{Page 2} — la carte des topos attachés à $X$ (cristallin,
+infinitésimal, leurs variantes « stratifiées »), et une classe d'obstruction
+pour les faisceaux inversibles.
+\item \textbf{Pages 4 à 12} — un calcul : l'anneau artinien universel dont
+l'idéal maximal porte des puissances divisées nilpotentes d'ordre donné,
+avec sa forme normale (pages 4 à 8), la formule de Legendre pour $v_p(n!)$
+(page 10), et la convergence de $\pi^{n}/n!$ (page 12).
+\item \textbf{Pages 15 à 19} — « Général nonsens sur Frobenius » : le topos
+$\mathcal{Q}(\alpha, \beta)$ des faisceaux munis d'une flèche
+$\alpha^{*}E \to \beta^{*}E$.
+\item \textbf{Pages 21 à 26} — les §§ 1 à 3 d'une rédaction : axiomes des
+puissances divisées, algèbre $\Gamma(M)$, enveloppe à puissances divisées
+d'un idéal, puissances divisées nilpotentes, $\log$ et $\exp$.
+\item \textbf{Pages 27 à 30} — le § 4 : le site de De Rham, sa variante
+stratifiée, le carré des topos, et la suite spectrale qui calcule la
+cohomologie par les voisinages à puissances divisées de la diagonale.
+\item \textbf{Pages 31 à 40} — retour sur l'enveloppe, par générateurs et
+relations (pages 31 à 34) ; une liste d'anneaux où vaut le lemme de Poincaré
+(page 36) ; le cas d'une $\mathbf{Z}_{(p)}$-algèbre, où tout est déterminé
+par $\gamma_p$ (pages 38 et 40).
+\item \textbf{Page 42} — la fin d'une note sur les applications polynomiales
+homogènes.
+\item \textbf{Pages 44 et 46} — « Cristaux » : quand un idéal principal
+$\pi A$ porte-t-il des puissances divisées ? Trois exemples, dont
+l'inégalité $e \leqslant p - 1$.
+\item \textbf{Pages 45 et 47} — au verso des précédentes, deux pages
+annotées d'un tapuscrit d'EGA IV, § 18.13.
+\item \textbf{Pages 49 à 52} — la lettre à Deligne du 10.12.1965.
+\end{itemize}
+
+Logiquement, l'ordre est autre. La théorie des puissances divisées est
+exposée trois fois, à trois niveaux : abstraitement aux pages 21 à 26 et 31
+à 34 ; pour une $\mathbf{Z}_{(p)}$-algèbre aux pages 38 et 40 ; pour un
+idéal principal aux pages 44 et 46. Le calcul des pages 4 à 12 est l'essai
+de ces notions sur l'exemple le plus serré qui soit, l'anneau $W$ des
+vecteurs de Witt et l'élément $p$. Les pages 2 et 27 à 30 en font le cadre
+géométrique, la page 15 y ajoute Frobenius, et la lettre dit à quoi tout
+cela doit servir. Ces reprises ne sont pas des répétitions : la page 34 et
+la page 44 posent la même question — quelles relations imposer aux
+$\gamma_n(\lambda)$ d'un générateur — l'une pour \emph{construire}
+l'enveloppe, l'autre pour savoir si l'idéal $\pi A$ \emph{est déjà} à
+puissances divisées.
+
+\subsection*{Notations}
+
+\emph{Puissances divisées.} On écrit partout $\gamma_n(x)$, et
+$\gamma_0(x) = 1$, $\gamma_1(x) = x$. La page l'écrit de cinq façons :
+$x^{(n)}$ et $\pi^{n}(x)$ aux pages 21 à 26, $\Gamma^{n}(x)$ aux pages 31
+à 34, $\pi_m(x)$ aux pages 38 et 40, $\pi^{(n)}$ aux pages 44 et 46,
+$\gamma^{p^{r}}$ aux pages 4 à 8. Un couple $(A, I, \gamma)$ — un anneau, un
+idéal, une structure de puissances divisées sur l'idéal — s'appelle un
+\emph{anneau à puissances divisées}.
+
+\emph{Coefficients.} Le dossier emploie une seule lettre, $c_n$, pour trois
+nombres différents ; on les distingue ici :
+\[
+q_i = \frac{(p^{i+1})!}{\bigl((p^{i})!\bigr)^{p}}, \qquad
+\kappa_n = \frac{\prod_i \bigl((p^{i})!\bigr)^{a_i}}{n!}, \qquad
+e_n = \frac{(pn)!}{(n!)^{p}\, p!}, \qquad
+d_m = \frac{(pm)!}{(p!)^{m}\, m!},
+\]
+où $n = \sum a_i p^{i}$ est l'écriture de $n$ en base $p$. On note
+$s_p(n) = \sum a_i$ la somme des chiffres (son « $\mathrm{chif}(n)$ »).
+
+\emph{Sites.} Les noms changent d'un feuillet à l'autre, et c'est le piège
+principal du dossier. On fixe ici, pour un $S$-schéma $X$ :
+
+\begin{itemize}
+\item $\mathrm{Cris}(X/S)$ : les épaississements $(U, U', \delta)$ d'un
+ouvert $U$ de $X$, d'idéal nilpotent muni de puissances divisées $\delta$
+— le site cristallin d'aujourd'hui. C'est le « $X_{\mathrm{cris}}$ » de la
+page 2 et le « $\mathrm{DR}$ » des pages 27 et 28.
+\item $\mathrm{Cris}^{\mathrm{st}}(X/S)$ : le sous-site des objets qui
+admettent localement une rétraction $U' \to U$. C'est le
+« $X_{\mathrm{conn}}$ » de la page 2 et le « $\mathrm{DR}_{\mathrm{st}}$ »
+de la page 28.
+\item $\mathrm{Inf}(X/S)$ : les mêmes épaississements, sans puissances
+divisées — le site infinitésimal. C'est le « $X_{\mathrm{inf}}$ » de la page
+2 et le « $\mathrm{Cris}$ » de la page 28.
+\item $\mathrm{Inf}^{\mathrm{st}}(X/S)$ : son sous-site des objets
+localement rétractables. C'est le « $X_{\mathrm{strat}}$ » de la page 2 et le
+« $\mathrm{Strat}$ » de la page 28.
+\end{itemize}
+
+Cette identification est la nôtre ; elle repose sur le fait que les deux
+feuillets disent la même chose des mêmes flèches.\footnote{La page 2 dit que
+« $\mathrm{conn} \to \mathrm{strat}$ » est une équivalence en
+caractéristique $0$ et « $\mathrm{conn} \to \mathrm{cris}$ » une équivalence
+si $X/S$ est lisse ; la page 28 dit la même chose de
+« $\mathrm{DR}_{\mathrm{st}} \to \mathrm{Strat}$ » et de
+« $\mathrm{DR}_{\mathrm{st}} \to \mathrm{DR}$ ». Seuls les sites
+$\mathrm{DR}$ et $\mathrm{DR}_{\mathrm{st}}$ sont définis sur les pages (page
+27) ; $\mathrm{Strat}$ et le $\mathrm{Cris}$ de la page 28 ne le sont pas, et
+leur lecture comme variantes sans puissances divisées est déduite des
+énoncés qui les concernent. Qu'en 1965--66 « cristallin » ait pu désigner le
+site sans puissances divisées n'a rien d'étonnant : dans les exposés de
+l'IHES de 1966, « Crystals and the De Rham cohomology of schemes », les
+cristaux sont d'abord définis sur le site infinitésimal, et les puissances
+divisées n'arrivent qu'ensuite.} Ce qui distingue les deux topos qui portent
+le nom « cristallin » dans le dossier n'est pas un détail : l'un a des
+puissances divisées, l'autre non, et en caractéristique $p$ ce sont deux
+théories différentes.
+
+\subsection*{Ce que le dossier annonce sans l'établir}
+
+Que l'anneau $W^{(\nu)}$ de la page 4 porte bien des puissances divisées ;
+que la présentation de l'enveloppe des pages 31 à 34 en soit une (« à
+vérifier ») ; que la cohomologie d'un objet du site stratifié soit celle de
+son épaississement (page 29, « à vérifier ») ; que les foncteurs dérivés du
+topos de Frobenius se calculent sur les faisceaux sous-jacents (pages 18 et
+19, la feuille s'interrompt) ; qu'une opération $\gamma_p$ s'étende en une
+structure de puissances divisées complète (page 40, question ouverte). Chacun
+de ces points est signalé là où il se présente, avec ce que l'on en sait
+aujourd'hui quand c'est sûr.
+
+\pagerange{2}{2}
+\section*{Les topos attachés à $X$ (page 2)}
+
+Soit $X$ un schéma sur une base $S$ (sous-entendue dans les notations, dit
+une note marginale). Un seul feuillet, au crayon, dessine les topos que l'on
+peut attacher à $X$ et les morphismes qui les relient. Dans les notations
+fixées plus haut :
+
+\begin{tikzcd}[column sep=small, row sep=small, nodes={font=\scriptsize}]
+ & & X_{\mathrm{zar}} \arrow[dll] \arrow[drr] & & \\
+\mathrm{Cris}^{\mathrm{st}} \arrow[rrrr, dashed] \arrow[drr, "\text{équiv. en car. } 0"] \arrow[dd, "\text{équiv. si } X/S \text{ lisse}"'] & & & & \mathbb{P}\text{-}\mathrm{Cris}^{\mathrm{st}} \arrow[dll, dashed] \arrow[dd, "\text{équiv. si } X/p \text{ lisse}"] \\
+ & & \mathrm{Inf}^{\mathrm{st}} \arrow[dd] & & \\
+\mathrm{Cris} \arrow[rrrr, dashed] \arrow[drr] \arrow[ddrr] & & & & \mathbb{P}\text{-}\mathrm{Cris} \arrow[dll, dashed] \arrow[ddll] \\
+ & & \mathrm{Inf} \arrow[d] & & \\
+ & & X_{\mathrm{zar}} & &
+\end{tikzcd}
+
+Les flèches en tirets ne sont définies, dit une accolade, que si $X$ est de
+torsion sur $\mathbf{Z}$.\footnote{Le diagramme est celui de la page, nœud
+pour nœud et flèche pour flèche ; seuls les noms des sommets sont
+modernisés. Les deux sommets de droite portent sur la page un $\mathbb{P}$
+gras devant « conn » et « cris » ; aucun feuillet du dossier ne dit ce qu'il
+désigne, et nous ne l'identifions pas. Le label de la flèche verticale de
+droite, « équiv. si $X/p$ lisse », est une lecture incertaine. Un trait fin
+sans pointe descend en outre, sur la page, du $X_{\mathrm{zar}}$ du haut vers
+$\mathrm{Inf}$ ; il n'est pas rendu comme flèche.} Les deux équivalences de
+la colonne de gauche sont vraies, et pour une raison simple que la page 28
+rendra explicite : un sous-site qui contient localement tous les objets
+donne le même topos. Si $X$ est lisse sur $S$, tout épaississement
+$U \hookrightarrow U'$ avec $U'$ affine admet une rétraction $U' \to U$ — c'est
+la définition même de la lissité formelle — de sorte que
+$\mathrm{Cris}^{\mathrm{st}}$ est tout $\mathrm{Cris}$. En caractéristique
+$0$, tout idéal nilpotent porte une unique structure de puissances divisées,
+$\gamma_n(x) = x^{n}/n!$, de sorte que les sites avec et sans puissances
+divisées sont les mêmes.
+
+Trois remarques suivent.
+
+Les flèches qui aboutissent à $X_{\mathrm{zar}}$ (en bas) donnent des
+isomorphismes de localisation et des suites spectrales de Leray : c'est par
+elles que la cohomologie cristalline se compare à la cohomologie de Zariski.
+
+Les flèches qui partent de $X_{\mathrm{zar}}$ (en haut) donnent, sur le site
+cristallin, la suite exacte
+\[
+0 \longrightarrow \mathcal{J}_{X/S} \longrightarrow \mathcal{O}_{X/S}
+\longrightarrow \mathcal{O}_{X_0} \longrightarrow 0,
+\]
+où $\mathcal{O}_{X/S}$ est le faisceau structural du site, qui à un
+épaississement $(U, U')$ associe $\Gamma(U', \mathcal{O}_{U'})$,
+$\mathcal{O}_{X_0}$ celui qui lui associe $\Gamma(U, \mathcal{O}_U)$, et
+$\mathcal{J}_{X/S}$ l'idéal à puissances divisées.\footnote{La page écrit
+$\underline{\mathcal{O}}_{\mathcal{X}} \to
+\underline{\mathcal{O}}_{\mathcal{X}_0}$, sans nommer le noyau autrement que
+$J$, et note en marge qu'il faut « dire que
+$\mathrm{Mod}(X_{\mathrm{zar}}) \simeq
+\mathrm{Mod}(\underline{\mathcal{O}}_{\mathcal{X}_0})$ » — que les
+modules sur $\mathcal{O}_{X_0}$ dans le topos cristallin sont les modules de
+Zariski sur $X$. La remarque est rapportée comme il la fait ; elle n'est pas
+démontrée sur la page.}
+
+Enfin, pour un $\mathcal{O}_X$-module inversible $L$ sur $X_{\mathrm{zar}}$,
+il définit une classe $c(L) \in H^{2}(\mathrm{Cris})$ — et de même dans
+$H^{2}(\mathbb{P}\text{-}\mathrm{Cris})$, les deux étant compatibles si $X$
+est de torsion — dont l'annulation est nécessaire et suffisante pour que $L$
+provienne d'un module inversible sur le site cristallin, c'est-à-dire, dans
+le cas relatif lisse, pour que $L$ admette une connexion intégrable. Telle
+qu'on peut la reconstituer, c'est une \emph{classe d'obstruction}. La suite
+exacte ci-dessus donne une suite exacte de groupes multiplicatifs
+\[
+1 \longrightarrow 1 + \mathcal{J}_{X/S} \longrightarrow
+\mathcal{O}_{X/S}^{\times} \longrightarrow \mathcal{O}_{X_0}^{\times}
+\longrightarrow 1,
+\]
+la classe de $L$ dans $H^{1}(\mathcal{O}_{X_0}^{\times})$ a un bord dans
+$H^{2}(1 + \mathcal{J}_{X/S})$, et ce bord est nul si et seulement si $L$ se
+relève en un $\mathcal{O}_{X/S}$-module inversible. Le logarithme des
+puissances divisées (page 26) identifie $1 + \mathcal{J}_{X/S}$ au groupe
+additif $\mathcal{J}_{X/S}$, ce qui met la classe dans
+$H^{2}(\mathrm{Cris}, \mathcal{J}_{X/S})$.\footnote{Cette reconstruction est
+la nôtre : la page dit seulement « on définit une classe de Chern
+$c'(\underline{L})$ dans $H^{2}(X_{\mathrm{cris}})$ », sans coefficients, et
+la lettre $c'$ est une lecture incertaine (peut-être $c^{1}$). Le mot
+« classe de Chern » ne doit pas tromper : la première classe de Chern
+cristalline d'aujourd'hui, obtenue par $d\log$, vit dans
+$H^{2}(X/S, \mathcal{O}_{X/S})$ et ne s'annule pas pour cette raison-là ;
+ce que la page décrit — nul si et seulement si $L$ se relève — est une
+obstruction. L'usage du logarithme demande que les puissances divisées
+soient localement nilpotentes, ce qui est le cas sur un site dont les
+épaississements sont nilpotents.} Dans le cas lisse, un module inversible
+sur le site cristallin est un module inversible muni d'une connexion
+intégrable — à condition, en caractéristique $p$, que cette connexion soit
+\emph{quasi-nilpotente}.\footnote{Hypothèse ajoutée. L'équivalence entre
+cristaux et modules à connexion intégrable sur un $X$ lisse demande, en
+caractéristique $p$, la quasi-nilpotence de la connexion ; la page dit
+seulement « qu'il admette une connexion intégrable ».}
+
+Deux questions en marge : « détermination des \emph{points} de ces topos ? »,
+et le rappel que $S$ est sous-entendu partout.
+
+\pagerange{4}{8}
+\section*{L'anneau artinien universel à puissances divisées nilpotentes (pages 4 à 8)}
+
+\subsection*{L'énoncé}
+
+Soit $k$ un corps parfait de caractéristique $p$ et $W = W(k)$ l'anneau de
+ses vecteurs de Witt. Soit $\nu \geqslant 1$. On considère la catégorie des
+anneaux locaux artiniens $\Lambda$ de corps résiduel $k$ dont l'idéal maximal
+$\mathfrak{r}$ est muni de puissances divisées \emph{$\nu$-nilpotentes},
+c'est-à-dire telles que $\gamma_n(x) = 0$ pour $x \in \mathfrak{r}$ et
+$n \geqslant p^{\nu+1}$.\footnote{La page ne définit pas « $\nu$-nilpotentes
+». Les relations qu'elle impose à l'anneau universel ($\Lambda_\nu^{p} = 0$,
+ci-dessous) et le calcul de la page 8 ($\Lambda^{a} = 0$ dès que $\sum a_i
+p^{i} \geqslant p^{\nu+1}$) fixent le sens que nous adoptons. La condition
+plus faible $\gamma_{p^{\nu}}(x)^{p} = 0$ donnerait le même objet
+initial.} Il s'agit d'en construire un objet initial.
+
+Tout tel $\Lambda$ est une $W$-algèbre, de façon unique (théorème de
+structure de Cohen\footnote{La page écrit « (Cohen) », lecture incertaine ;
+c'est le seul nom que la phrase puisse porter.}), et l'image de $p$ tombe dans
+$\mathfrak{r}$. Les puissances divisées $\gamma_{p^{i}}(p)$ de cette image
+satisfont alors, par la règle $\gamma_m(x)\gamma_n(x) = \binom{m+n}{m}
+\gamma_{m+n}(x)$ itérée,
+\[
+\gamma_{p^{i}}(p)^{p} = q_i\, \gamma_{p^{i+1}}(p), \qquad
+q_i = \frac{(p^{i+1})!}{\bigl((p^{i})!\bigr)^{p}}, \qquad
+v_p(q_i) = 1 .
+\]
+D'où la candidate : avec des indéterminées $\Lambda_0, \ldots, \Lambda_\nu$
+(qui figureront $\gamma_{p^{i}}(p)$),
+\[
+W^{(\nu)} = W[\Lambda_0, \ldots, \Lambda_\nu] \big/ \bigl(\Lambda_i^{p} - q_i
+\Lambda_{i+1}\ (0 \leqslant i < \nu),\ \ \Lambda_\nu^{p},\ \ \Lambda_0 - p\bigr).
+\]
+Comme les nombres premiers $\ell \neq p$ sont inversibles dans $W$, il
+suffit de connaître les $\gamma_{p^{i}}$ pour connaître tous les $\gamma_n$
+(on le verra en détail à la page 31) : ces générateurs suffisent.
+
+\textbf{Proposition.} \emph{$W^{(\nu)}$ est un anneau local artinien de corps
+résiduel $k$, d'idéal maximal $J = (\Lambda_0, \ldots, \Lambda_\nu)$, et
+c'est l'objet initial de la catégorie.}
+
+Qu'il soit artinien est immédiat : $p^{p^{\nu+1}} = \Lambda_0^{p^{\nu+1}}$
+est un multiple de $\Lambda_\nu^{p} = 0$, donc $W^{(\nu)}$ est une algèbre
+finie sur $W/p^{N}$, engendrée par des nilpotents. Qu'il soit initial
+\emph{parmi les anneaux qui satisfont ses relations} l'est aussi. Le point
+qui demande un argument, et que la page affirme sans le donner, est que
+$J$ porte bien des puissances divisées $\nu$-nilpotentes.\footnote{La page
+place l'énoncé d'universalité entre crochets, sans démonstration. Il est
+vrai : $W^{(\nu)}$ est le quotient de l'enveloppe à puissances divisées de
+l'idéal $pW$ (celle des pages 23 et 31) par l'idéal engendré par les
+$\gamma_n(p)$, $n \geqslant p^{\nu+1}$, qui est stable par les $\gamma_m$, et
+l'on vérifie à partir de la formule de la page 31 que cet idéal est engendré
+par les $\Lambda_j = \gamma_{p^{j}}(p)$, $j \geqslant \nu + 1$ ; le quotient
+est l'anneau de la page, la relation $\Lambda_\nu^{p} = q_\nu
+\Lambda_{\nu+1} = 0$ en tenant lieu. Que
+l'enveloppe d'un idéal principal se calcule par changement de base à partir
+de celle de $(X) \subset \mathbf{Z}_{(p)}[X]$ tient à ce qu'une structure de
+puissances divisées sur un idéal principal s'étend à toute algèbre.}
+
+\subsection*{La forme normale}
+
+Pour calculer $W^{(\nu)}$ on part de l'anneau plus simple
+\[
+A^{(\nu)} = W[\Lambda_0, \ldots, \Lambda_\nu] \big/ \bigl(\Lambda_i^{p} - q_i
+\Lambda_{i+1}\ (0 \leqslant i < \nu),\ \ \Lambda_\nu^{p}\bigr),
+\]
+sans la relation $\Lambda_0 = p$. C'est un $W$-module libre de base les
+monômes $\Lambda^{a} = \Lambda_0^{a_0}\cdots\Lambda_\nu^{a_\nu}$ à
+exposants $0 \leqslant a_i \leqslant p-1$. On pose
+\[
+\lambda_i = \frac{p^{p^{i}}}{(p^{i})!} \in W \qquad \text{et} \qquad
+\Lambda_i = \lambda_i + \Theta_i ,
+\]
+où $\lambda_i$ est la puissance divisée \emph{usuelle} $\gamma_{p^{i}}(p)$ de
+$p$ dans $W$, et où $\Theta_i$ mesure donc l'écart entre les puissances
+divisées universelles et les usuelles. Les monômes
+$\Theta^{a}$, $0 \leqslant a_i \leqslant p-1$, forment encore une base, et
+$W^{(\nu)} = A^{(\nu)}/I$ où $I$ est l'idéal engendré par $\Theta_0$.
+
+\textbf{Lemme (page 5).} \emph{Pour que $\sum_a w_a\, \Theta^{a}$ soit dans
+$I$, il faut et il suffit que}
+\begin{enumerate}
+\item[a)] \emph{pour tout $a \neq 0$, si $a_i$ est la première composante non
+nulle de $a$, on ait $w_a \in p^{i} W$ ;}
+\item[b)] \emph{le coefficient $w_0$ de $1$ soit dans $p^{c(\nu)}W$, où}
+\[
+c(\nu) = \nu + p\, v_p(\lambda_\nu) = \nu + p\Bigl[p^{\nu} -
+\bigl(p^{\nu-1} + \cdots + p + 1\bigr)\Bigr].
+\]
+\end{enumerate}
+
+\emph{Suffisance.} Il suffit de voir que $p^{i}\Theta_i \in I$ pour
+$0 \leqslant i \leqslant \nu$ et que $p^{c(\nu)} \in I$. La première relation
+se prouve par récurrence sur $i$ ; pour $i = 0$ elle dit
+$\Theta_0 \in I$.\footnote{La page écrit « si $i = \nu$ » pour le début de
+la récurrence ; c'est $i = 0$.} Si $p^{i}\Theta_i \in I$ avec $i < \nu$, on
+développe $(\lambda_i + \Theta_i)^{p} = q_i(\lambda_{i+1} + \Theta_{i+1})$ ;
+comme $\lambda_i^{p} = q_i \lambda_{i+1}$, il reste
+\[
+\sum_{\alpha=1}^{p} \binom{p}{\alpha}\, \Theta_i^{\alpha}\, \lambda_i^{p-\alpha}
+= q_i\, \Theta_{i+1} .
+\]
+Multiplié par $p^{i}$, le membre de gauche est dans $I$, donc
+$p^{i} q_i \Theta_{i+1} \in I$, et comme $v_p(q_i) = 1$, $p^{i+1}\Theta_{i+1}
+\in I$.\footnote{La page écrit « $= 0$ » pour « $\in I$ » : elle calcule
+modulo $I$. Un terme barré d'un trait diagonal dans le développement se lit
+$\Theta_{i+1}$ où l'on attend $\lambda_{i+1}$ ; le calcul ci-dessus est le
+calcul correct.} Pour la seconde, on écrit $(\lambda_\nu + \Theta_\nu)^{p} =
+0$, on multiplie par $p^{\nu}$, et l'on obtient $p^{\nu}\lambda_\nu^{p} \in
+I$, de valuation $\nu + p\, v_p(\lambda_\nu) = c(\nu)$, puisque
+$v_p(\lambda_\nu) = p^{\nu} - v_p\bigl((p^{\nu})!\bigr) = p^{\nu} -
+\frac{p^{\nu}-1}{p-1}$.
+
+\emph{Nécessité.} L'ensemble $I'$ des éléments qui satisfont a) et b) est
+un sous-$W$-module contenu dans $I$ et contenant $\Theta_0$ ; il suffit
+de voir que c'est un idéal, c'est-à-dire qu'il est stable par multiplication
+par les $\Theta_i$. La page laisse la vérification au lecteur, avec un point
+d'exclamation en marge.\footnote{Nous ne l'avons pas faite à la main. Nous
+avons vérifié par le calcul — en exprimant la multiplication par
+$\Theta_0$ dans la base des $\Theta^{a}$ et en comparant les réseaux —
+que $I$ est exactement le réseau diagonal décrit par a) et b), pour
+$(p, \nu) = (2,1), (2,2), (2,3), (3,1), (3,2), (5,1)$. Pour $p = 2$, $\nu = 1$,
+on trouve $W^{(1)} = W[\Theta_1]/(2\Theta_1, \Theta_1^{2} + 4)$, de longueur
+$4$, avec $c(1) = 3$.}
+
+\textbf{Corollaire (page 6).} \emph{Soit $E_i$ un système de représentants de
+$W/p^{i}W$. Tout élément de $W^{(\nu)}$ s'écrit de façon unique}
+\[
+\sum w_{a_1 \ldots a_\nu}\, \Theta_1^{a_1}\cdots\Theta_\nu^{a_\nu},
+\qquad 0 \leqslant a_i \leqslant p-1,
+\]
+\emph{avec $w_a \in E_i$ si $a_i$ est la première composante non nulle de
+$a$, et $w_0 \in E_{c(\nu)}$.} En particulier $W^{(\nu)}$ est de longueur
+$c(\nu) + \sum_{i=1}^{\nu} i\,(p-1)\,p^{\nu-i}$ sur $W$.\footnote{Ce compte
+de longueur est une conséquence immédiate du corollaire ; il n'est pas sur la
+page.}
+
+\textbf{Lemme (page 7).} Pour $1 \leqslant r \leqslant \nu$, soit
+$W^{(\nu, r)}$ le quotient de $W^{(\nu)}$ par $\Theta_1, \ldots, \Theta_r$ :
+c'est l'anneau universel où les puissances divisées de $p$ coïncident avec
+les usuelles jusqu'à l'ordre $p^{r}$. Avec $I_{\nu,r} = (\Theta_0, \ldots,
+\Theta_r)$, de sorte que $A^{(\nu)}/I_{\nu,r} = W^{(\nu, r)}$ : \emph{pour que
+$\sum w_a \Theta^{a}$ soit dans $I_{\nu,r}$, il faut et il suffit que}
+\begin{enumerate}
+\item[a)] \emph{pour tout $a \neq 0$ dont la première composante non nulle
+$a_i$ a un indice $i > r$, on ait $w_a \in p^{i-r}W$} (aucune condition si
+$i \leqslant r$) ;
+\item[b)] \emph{$w_0 \in p^{c(\nu)-r}W$.}
+\end{enumerate}
+D'où la forme normale
+$\sum w_a\, \Theta_{r+1}^{a_{r+1}}\cdots\Theta_\nu^{a_\nu}$, avec $w_a \in
+E_{i}$ si $a_{r+i}$ est la première composante non nulle, et $w_0 \in
+E_{c(\nu)-r}$.\footnote{La parenthèse « aucune condition si $i \leqslant r$ »
+est implicite sur la page, qui n'énonce a) que pour $i > r$. Vérifié par le
+même calcul que le lemme précédent, pour tous les $r$ des cas cités. Pour
+$r = \nu$ on trouve $W^{(\nu,\nu)} = W/p^{p\,v_p(\lambda_\nu)}$ : si les
+puissances divisées de $p$ sont les usuelles, la seule relation est
+$\lambda_\nu^{p} = 0$.}
+
+\subsection*{Le calcul indépendant de la page 8}
+
+La page 8 reprend l'anneau $A^{(\nu)}$ pour lui-même et montre que
+\[
+\Lambda_0^{a_0}\cdots\Lambda_\nu^{a_\nu} = 0 \qquad \text{dès que} \qquad
+\sum a_i p^{i} \geqslant p^{\nu+1} \qquad (a_i \geqslant 0).
+\]
+C'est ce qu'on attend si $\Lambda^{a}$ figure, à une constante près,
+$\gamma_{\sum a_i p^{i}}(\Lambda_0)$. La preuve est une retenue en base $p$.
+\emph{Lemme} : $\Lambda^{a} = c\,\Lambda^{b}$ avec $c \in W$,
+$0 \leqslant b_i \leqslant p-1$ pour $i < \nu$, et $\sum a_i p^{i} = \sum b_i
+p^{i}$. Si $a_i \geqslant p$ pour un $i < \nu$, on écrit $a_i = p\,q + a'_i$ ;
+alors $\Lambda_i^{a_i} = (q_i\Lambda_{i+1})^{q}\Lambda_i^{a'_i}$, ce qui
+remplace $(a_i, a_{i+1})$ par $(a'_i, a_{i+1} + q)$ sans changer
+$\sum a_i p^{i}$ ; on recommence jusqu'à ce que tous les exposants d'indice
+$< \nu$ soient $< p$. Si alors $\sum b_i p^{i} \geqslant p^{\nu+1}$, c'est que
+$b_\nu \geqslant p$, et $\Lambda_\nu^{b_\nu}$ est un multiple de
+$\Lambda_\nu^{p} = 0$.\footnote{Deux lignes biffées ouvrent la démonstration,
+et une note encadrée en marge (« si tous les $a_i$ sont $\leqslant p - 1$,
+c'est ok ») en donne le cas trivial. Les exposants de la ligne principale
+sont écrits petit ; ils sont restitués d'après $a_i = pq_i + a'_i$.}
+
+\pagerange{10}{10}
+\section*{La formule de Legendre (page 10)}
+
+Un demi-feuillet en travers calcule $v_p(n!)$ à partir des $v_p\bigl((p^{k})!
+\bigr)$ :
+\[
+v_p\bigl((p^{k})!\bigr) = 1 + p + \cdots + p^{k-1} = \frac{p^{k}-1}{p-1},
+\]
+puis, pour $n = \sum a_i p^{i}$,
+\[
+v_p(n!) = \sum_i a_i\, v_p\bigl((p^{i})!\bigr), \qquad \text{d'où} \qquad
+\boxed{\ v_p(n!) = \frac{n - s_p(n)}{p-1}\ }
+\]
+— la formule de Legendre, encadrée deux fois sur la page.\footnote{La page
+écrit $v_p(p)$, $v_p(p^{2})$, \ldots\ pour $v_p(p!)$, $v_p\bigl((p^{2})!\bigr)$,
+\ldots\ La première ligne, qui exprime $v_p(n!)$ en termes d'une coupure en
+$\mu$, n'est pas reliée par la page à la suite et n'est pas reprise ici. Le
+nom de Legendre est en marge de la page 46, pour la conséquence
+$\sup_n v_p(n!)/n = 1/(p-1)$.}
+
+\pagerange{12}{12}
+\section*{Quand $\pi^{n}/n!$ est-il entier, et quand tend-il vers zéro ? (page 12)}
+
+Soit $V$ un anneau de valuation, $v_p$ sa valuation normalisée par
+$v_p(p) = 1$, et $\pi \in V$. D'après Legendre,
+\[
+(p-1)\, v_p\Bigl(\frac{\pi^{n}}{n!}\Bigr) = n\bigl[(p-1)v_p(\pi) - 1\bigr]
++ s_p(n).
+\]
+Il en résulte :
+\[
+v_p\Bigl(\frac{\pi^{n}}{n!}\Bigr) \geqslant 0 \ \text{pour tout } n
+\iff v_p\Bigl(\frac{\pi^{n}}{n!}\Bigr) > 0 \ \text{pour tout } n \geqslant 1
+\]
+\[
+\iff v_p(\pi) \geqslant \frac{1}{p-1}
+\iff \pi^{p-1} \in pV ,
+\]
+\[
+v_p\Bigl(\frac{\pi^{n}}{n!}\Bigr) \longrightarrow +\infty
+\iff v_p(\pi) > \frac{1}{p-1} .
+\]
+Si $v_p(\pi) = 1/(p-1)$, la quantité vaut $s_p(n)/(p-1)$, qui reprend la
+valeur $1/(p-1)$ pour tous les $n = p^{k}$ et ne tend donc pas vers
+l'infini ; si $v_p(\pi) < 1/(p-1)$, le choix $n = p^{k}$ la rend négative
+pour $k$ grand. Lorsque $p = u\,\pi^{r}$ avec $u$ inversible — par exemple
+si $V$ est de valuation discrète et $\pi$ une uniformisante, $r$ étant
+alors l'indice de ramification —, la seconde condition s'écrit
+$r < p - 1$, et la première $r \leqslant p-1$ : c'est l'inégalité de la page
+46.\footnote{La page établit $s_p(n)/n \to 0$ en majorant
+$s_p(n) \leqslant (p-1)\nu$ pour $p^{\nu} \leqslant n < p^{\nu+1}$ ; la
+borne exacte est $(p-1)(\nu+1)$, ce qui ne change rien à la conclusion. Elle
+écrit aussi « $\mathrm{chif}(n) \leqslant 1$ » pour $\mathrm{chif}(n)/n
+\leqslant 1$. Elle ne donne que la seconde équivalence sous la forme « $p =
+\text{unit}\cdot\pi^{r}$, avec $r < p-1$ » ; la forme $r \leqslant p-1$ de la
+première est la nôtre.}
+
+C'est le critère qui, aujourd'hui, distingue les puissances divisées
+\emph{qui existent} de celles qui sont \emph{topologiquement nilpotentes} sur
+l'idéal maximal d'un anneau de valuation discrète : $e \leqslant p-1$ pour
+les premières, $e < p-1$ pour les secondes.
+
+\pagerange{15}{16}
+\section*{Frobenius : le topos $\mathcal{Q}(\alpha, \beta)$ (pages 15 à 19)}
+
+Une chemise de sa main porte « Frobenius » ; le premier feuillet s'intitule
+« Général nonsens sur Frobenius ».
+
+\subsection*{1. Faisceaux munis d'une flèche de Frobenius}
+
+Soit un carré commutatif de topos
+\begin{tikzcd}
+X \arrow[r, "F_X"] \arrow[d, "g"'] & X \arrow[d, "g"] \\
+Y \arrow[r, "F_Y"] & Y
+\end{tikzcd}
+(on pense aux Frobenius de $X$ et de $Y$, mais rien ne l'exige). Pour un
+faisceau $E$ sur $X$ on dispose du morphisme de changement de base
+\[
+(1.1) \qquad c_E : F_Y^{*}\, g_*(E) \longrightarrow g_*\, F_X^{*}(E),
+\]
+défini pour tout carré commutatif par adjonction. Si $E$ est muni d'une
+flèche $F_E : F_X^{*}E \to E$, on en tire
+\[
+(1.3) \qquad g_*(F_E) \circ c_E : F_Y^{*}\bigl(g_*E\bigr) \longrightarrow
+g_*E ,
+\]
+ce qui munit $g_*E$ d'une flèche de même nature ; si $E$ est un faisceau de
+groupes, d'anneaux, de modules, et $F_E$ un morphisme de tels, il en va de
+même de (1.3), puisque (1.1) l'est. Dans l'autre sens, pour un faisceau $G$
+sur $Y$ muni de $F_G : F_Y^{*}G \to G$, l'isomorphisme
+$c^{G} : F_X^{*}g^{*}G \xrightarrow{\sim} g^{*}F_Y^{*}G$ donne
+\[
+(1.6) \qquad g^{*}(F_G) \circ c^{G} : F_X^{*}\bigl(g^{*}G\bigr)
+\longrightarrow g^{*}G .
+\]
+Autrement dit, les foncteurs $g_*$ et $g^{*}$ se relèvent aux faisceaux
+munis d'une flèche de Frobenius. C'est le langage des $F$-cristaux, avant
+la lettre.
+
+\subsection*{2. Le topos $\mathcal{Q}(\alpha, \beta)$}
+
+Soient $\alpha, \beta : X' \rightrightarrows X$ deux morphismes de topos. Soit
+$\mathcal{Q}(\alpha, \beta)$ la catégorie des couples $(E, F_E)$ formés d'un
+faisceau $E$ sur $X$ et d'une flèche $F_E : \alpha^{*}E \to \beta^{*}E$
+— variante : un \emph{isomorphisme} —, et
+$\omega^{*} : \mathcal{Q}(\alpha,\beta) \to X$ le foncteur d'oubli.
+
+\textbf{Proposition.} \emph{$\mathcal{Q}(\alpha, \beta)$ est un topos, et
+$\omega^{*}$ est le foncteur image inverse d'un morphisme de topos
+$\omega : X \to \mathcal{Q}(\alpha, \beta)$.}
+
+Les flèches $F_E$, naturelles en $(E, F_E)$, forment une transformation
+$F : \omega\beta \to \omega\alpha$ entre morphismes
+$X' \to \mathcal{Q}(\alpha,\beta)$, et le couple $(\omega, F)$ est
+universel : pour tout topos $Y$, le foncteur
+\[
+g \longmapsto (g \circ \omega,\ g * F) \;:\;
+\underline{\mathrm{Homtop}}\bigl(\mathcal{Q}(\alpha, \beta), Y\bigr)
+\longrightarrow \underline{\mathrm{Homtop}}(X, \alpha, \beta ; Y)
+\]
+est une équivalence, où le second membre est la catégorie des couples
+$(\varphi, f)$ d'un morphisme de topos $\varphi : X \to Y$ et d'une flèche
+$f : \varphi\beta \to \varphi\alpha$.\footnote{Convention : une flèche
+$\varphi \to \psi$ entre morphismes de topos est ici une flèche
+$\varphi_* \to \psi_*$, c'est-à-dire $\psi^{*} \to \varphi^{*}$ ; c'est avec
+elle que $F_E : \alpha^{*}\omega^{*} \to \beta^{*}\omega^{*}$ est une flèche
+$\omega\beta \to \omega\alpha$, comme l'écrit la page. La page place $F$ dans
+$\underline{\mathrm{Homtop}}(X, \mathcal{Q}(\alpha,\beta))$ ; c'est
+$\underline{\mathrm{Homtop}}(X', \mathcal{Q}(\alpha,\beta))$, les composés
+$\omega\alpha$, $\omega\beta$ partant de $X'$. Un crochet serré en marge
+(« qui se \ldots\ à l'aide de $\underline{\mathrm{Hom}}(X, Y)
+\rightrightarrows \underline{\mathrm{Homtop}}(X', Y)$ ») n'est pas lu en
+entier.}
+
+Dans le langage d'aujourd'hui, $\mathcal{Q}(\alpha, \beta)$ est
+l'\emph{inserteur} des foncteurs $\alpha^{*}, \beta^{*} : X \to X'$ dans la
+2-catégorie des catégories (dans la variante inversible, l'iso-inserteur),
+et, comme topos, le \emph{co-inserteur} — une colimite lâche — des morphismes
+$\alpha, \beta$ dans la 2-catégorie des topos.\footnote{Ces noms sont
+postérieurs : les limites pondérées de ce type (inserteurs, iso-inserteurs)
+ont été nommées et étudiées par l'école australienne de théorie des
+catégories (Kelly, Street) dans les années 1970 et 1980. La page n'emploie que
+la description universelle, qui est la même chose.} L'exemple le plus petit
+le montre : si $X = X' = \mathbf{Ens}$ et $\alpha = \beta = \mathrm{id}$, un
+objet est un ensemble muni d'un endomorphisme, et $\mathcal{Q}$ est le topos
+classifiant du monoïde $\mathbf{N}$ (du groupe $\mathbf{Z}$ dans la variante
+inversible).\footnote{Exemple de l'édition.}
+
+\pagerange{17}{17}
+\subsection*{Pourquoi c'est un topos}
+
+On vérifie les conditions de Giraud : les limites finies et les colimites de
+$\mathcal{Q}$ se calculent sur les faisceaux sous-jacents, puisque
+$\alpha^{*}$ et $\beta^{*}$ commutent aux unes et aux autres, et il reste à
+exhiber une petite famille génératrice. Dans la variante inversible,
+$\mathcal{Q}$ s'interprète comme la catégorie des sections cartésiennes d'un
+topos fibré au-dessus de la catégorie à deux objets $x', x$ et deux flèches
+$\alpha, \beta : x' \rightrightarrows x$, de fibres $X'$ en $x'$ et $X$ en $x$,
+les changements de base étant $\alpha^{*}$ et $\beta^{*}$ ; dans la variante
+non inversible, une catégorie fibrée analogue, avec un sommet de plus, fait
+l'affaire, sous réserve de vérification.\footnote{La page renvoie à « SGA 4
+I 9.25 » pour le premier cas et à « SGA 4 I 9.21 et suivants » pour le
+second ; nous reproduisons ces renvois sans les avoir vérifiés. Le diagramme
+marginal du second cas ($x' \to x$ par $u$, $x' \to x'_1$ par $f$,
+$x'_1 \to x$ par $v$) est encadré et accompagné de « à vérifier ». Plusieurs
+mots de ce paragraphe sont illisibles ; l'argument par Giraud est restitué
+d'après ce qui se lit.}
+
+Le cas qui motive tout est $X' = X$, $\beta = \mathrm{id}$ : les objets sont
+alors les $(E, F_E)$ avec $F_E : \alpha^{*}E \to E$, exactement ceux du n° 1
+quand $\alpha$ est un Frobenius.
+
+\pagerange{17}{19}
+\subsection*{Fonctorialité, et la question des foncteurs dérivés}
+
+Le topos $\mathcal{Q}(\alpha,\beta)$ dépend fonctoriellement de la paire
+$\alpha, \beta$. Soit un diagramme de topos, commutatif à isomorphisme près,
+\begin{tikzcd}
+X' \arrow[r, "{\alpha,\ \beta}"] \arrow[d, "u_1"'] & X \arrow[d, "u_0"] \\
+Y' \arrow[r, "{\lambda,\ \mu}"] & Y
+\end{tikzcd}
+c'est-à-dire avec $u_0\alpha \simeq \lambda u_1$ et $u_0\beta \simeq \mu
+u_1$.\footnote{La page trace des flèches doubles, $\alpha, \beta$ en haut et
+$\lambda, \mu$ en bas ; le diagramme n'en rend qu'une par ligne, qui porte
+les deux noms.} La propriété universelle fournit
+un morphisme $v = \mathcal{Q}(u) : \mathcal{Q}(\alpha,\beta) \to
+\mathcal{Q}(\lambda,\mu)$, avec les transitivités attendues, tel que
+$v\,\omega_X \simeq \omega_Y\, u_0$. Dans le cas $X' = X$, $Y' = Y$,
+$\beta = \mathrm{id}_X$, $\mu = \mathrm{id}_Y$, $\alpha = F_X$, $\lambda =
+F_Y$, on retrouve le carré du n° 1, et $v_*$, $v^{*}$ sont donnés par les
+formules (1.3) et (1.6) : $v_*(E, F_E) = (u_{0*}E,\ u_{0*}(F_E) \circ c_E)$,
+$v^{*}(G, F_G) = (u_0^{*}G,\ u_0^{*}(F_G)\circ c^{G})$.
+
+Pour un objet $\mathbb{E} = (E, F_E)$ de $\mathcal{Q}(\alpha, \beta)$ —
+disons un faisceau abélien —, on dispose des morphismes de changement de base
+\[
+\omega_Y^{*}\, R^{i}v_*(\mathbb{E}) \longrightarrow R^{i}u_{0*}\bigl(
+\omega_X^{*}\mathbb{E}\bigr) = R^{i}u_{0*}(E),
+\]
+et l'on aimerait savoir que ce sont des isomorphismes, ce qui est le cas pour
+$i = 0$ par la formule ci-dessus.\footnote{La page écrit $\omega_X^{*}$ à
+gauche ; c'est $\omega_Y^{*}$, puisque $R^{i}v_*(\mathbb{E})$ est un objet
+de $\mathcal{Q}(\lambda,\mu)$.} Comme $\omega_Y^{*}$ est exact, il suffit
+que $\omega_X^{*}$ envoie les injectifs de $\mathcal{Q}(\alpha,\beta)$ sur
+des faisceaux acycliques pour $u_{0*}$. Il affirme qu'il suffit pour cela que
+$\alpha^{*}$ et $\beta^{*}$ commutent aux produits infinis — que $\alpha_!$ et
+$\beta_!$ existent —, auquel cas $\omega_X^{*}$ commute aussi aux produits et
+$\omega_{X!}$ existe ; la feuille s'interrompt là, au milieu de la ligne, et
+l'argument n'est pas écrit.\footnote{Les lignes interlinéaires de la page 18
+qui explicitaient $v_*$ et $v^{*}$ « comme au n° 1 » ne se lisent pas ; les
+formules données ci-dessus sont celles que (1.3) et (1.6) imposent. La page
+19 ne porte qu'une ligne, qui clôt la page 18, et sa fin est perdue dans la
+marge.}
+
+\pagerange{21}{22}
+\section*{Pseudo-anneaux à puissances divisées (pages 21 à 26)}
+
+Les pages 21 à 30 sont une rédaction numérotée, §§ 1 à 4 de sa main.
+
+\subsection*{§ 1. Les axiomes}
+
+Un \emph{pseudo-anneau} est un groupe abélien muni d'une multiplication
+associative, bilinéaire — et ici commutative — mais sans unité : c'est le
+statut naturel d'un idéal. Des puissances divisées sur un pseudo-anneau $J$
+sont des applications $\gamma_n : J \to J$, $n \geqslant 1$, telles que
+\begin{enumerate}
+\item[1.1.] $\gamma_1(x) = x$ ;
+\item[1.2.] $\gamma_n(x+y) = \gamma_n(x) + \sum_{p+q=n,\ p, q \geqslant 1}
+\gamma_p(x)\gamma_q(y) + \gamma_n(y)$ ;
+\item[1.3.] $\gamma_n(xy) = x^{n}\gamma_n(y)$ ;
+\item[1.4.] $\gamma_m(\gamma_n(x)) = \dfrac{(mn)!}{(n!)^{m}\, m!}\,
+\gamma_{mn}(x)$ ;
+\item[1.5.] $\gamma_m(x)\gamma_n(x) = \dbinom{m+n}{m}\gamma_{m+n}(x)$.
+\end{enumerate}
+Si $J$ est un idéal d'un anneau $A$, on pose $\gamma_0 = 1$ et 1.2 s'écrit
+$\gamma_n(x+y) = \sum_{p+q=n}\gamma_p(x)\gamma_q(y)$. En itérant 1.5,
+\[
+\text{(1.5 bis)} \qquad \gamma_{p_1}(x)\cdots\gamma_{p_r}(x) =
+\frac{(p_1 + \cdots + p_r)!}{p_1!\cdots p_r!}\,\gamma_{p_1+\cdots+p_r}(x),
+\qquad \text{(1.5 ter)} \qquad n!\,\gamma_n(x) = x^{n}.
+\]
+Si $J$ est de plus une algèbre sur un anneau $A$, on demande
+\begin{enumerate}
+\item[1.6.] $\gamma_n(\lambda x) = \lambda^{n}\gamma_n(x)$ pour $\lambda \in
+A$, $x \in J$,
+\end{enumerate}
+condition automatique si $A = \mathbf{Z}$.\footnote{La note marginale dit
+« c'est tjs vérifié si $A = \mathbf{Z}$ » ; c'est vrai, par récurrence à
+partir de 1.2 et 1.5 ($\gamma_n(2x) = 2^{n}\gamma_n(x)$, etc.). La page
+écrit « $x \in A$ » biffé dans 1.6 ; c'est $x \in J$.} Des puissances
+divisées sur un idéal $J$ de $A$ sont alors la même chose que des puissances
+divisées sur la $A$-algèbre sous-jacente à $J$.
+
+Ce sont, à la présentation près, les axiomes de Cartan (1954) et de Roby
+(1963), que Berthelot reprendra dans sa thèse.\footnote{La page ne cite
+personne.}
+
+\subsection*{§ 2. L'algèbre $\Gamma(M)$}
+
+Pour un $A$-module $M$, l'algèbre $\Gamma_A(M) = \bigoplus_{n \geqslant 0}
+\Gamma^{n}(M)$ est munie des applications $x \mapsto x^{[n]}$ de $M$ dans
+$\Gamma^{n}(M)$. Il les prolonge en des $\gamma_n : \Gamma^{+}(M) \to
+\Gamma^{+}(M)$, en notant que sur $\Gamma^{p}(M)$ il suffit de se donner une
+application polynomiale homogène de degré $np$, à savoir
+\[
+x \longmapsto \bigl(x^{[p]}\bigr)^{[n]} = \frac{(pn)!}{(p!)^{n}\, n!}\,
+x^{[pn]} ,
+\]
+et l'on vérifie 1.1 à 1.6. \emph{Ainsi $\Gamma^{+}_A(M)$ est l'algèbre à
+puissances divisées universelle munie d'une application $A$-linéaire de
+$M$.}\footnote{C'est le théorème de N. Roby (« Lois polynômes et lois
+formelles en théorie des modules », Ann. Éc. Norm. Sup. 1963, et « Les
+algèbres à puissances divisées », Bull. Sc. Math. 1965), que la page
+utilise sans le nommer ; le passage par les applications polynomiales est
+exactement celui de Roby. Le degré « $np$ » est une lecture incertaine ;
+c'est le seul possible.}
+
+\pagerange{23}{25}
+\subsection*{§ 3. L'enveloppe à puissances divisées d'un idéal}
+
+Soit $I$ un idéal de $A$. On cherche un anneau $B$ muni d'un idéal $J$ à
+puissances divisées et un homomorphisme $u : A \to B$ tel que $u(I) \subset
+J$, \emph{universel} pour ces données. C'est ce qu'on appelle aujourd'hui
+l'\emph{enveloppe à puissances divisées} $D_A(I)$ de
+$I$.\footnote{La page la note $\Gamma^{*}(A, I)$ à la page 23 et
+$\Gamma(A, J)$ à la page 24. Le nom d'« enveloppe à puissances divisées » et
+la notation $D_A(I)$ sont ceux de Berthelot (1974) et de Berthelot--Ogus
+(1978).} La construction proposée :
+\begin{enumerate}
+\item on forme $\Gamma^{+}_A(I)$, l'idéal $I$ étant vu comme simple
+$A$-module ;
+\item on le divise par l'idéal engendré par les $(xy)^{[n]} - x^{n} *
+y^{[n]}$, pour $x, y \in I$, où $*$ est le produit de $\Gamma_A(I)$ et $xy$
+le produit de $I$ : il constate que les $\gamma_n$ passent au quotient
+$J'$, qui est une $A$-algèbre à puissances divisées, et l'application
+canonique $I \to J'$, $x \mapsto x'$, est compatible aux produits ;
+\item on recolle $A$ et $J'$ le long de $I$ : $B$ est le quotient de
+l'anneau $A \oplus J'$ (produit $(a,\xi)(b,\eta) = (ab, a\eta + b\xi +
+\xi\eta)$) par l'image de $x \mapsto (x, -x')$, et $J$ est l'image de
+$J'$.\footnote{La lettre dans « $\Gamma^{+}_A(\ )$ » est surchargée, $I$ ou $J$ ;
+la construction demande $I$. La page écrit « $(x.y)^{(n)} - x^{n} *
+y^{(n)}$ », le point désignant « la multiplication de $J$ » — c'est-à-dire,
+pour ce que fait la construction, celle de l'idéal $I$. Que l'idéal du point
+2 soit stable par les $\gamma_n$ est affirmé (« on constate »), non
+démontré ; c'est vrai, et c'est l'argument de Berthelot--Ogus, Théorème
+3.19.}
+\end{enumerate}
+Si $A$ est une $\Lambda$-algèbre, $D_A(I)$ l'est aussi.
+
+\emph{Cas particulier.} Pour $A = \mathrm{Sym}_\Lambda(M)$ et $I =
+\mathrm{Sym}^{+}_\Lambda(M)$, le problème universel est celui d'envoyer $M$
+dans une $\Lambda$-algèbre à puissances divisées, de sorte que
+\[
+D_{\mathrm{Sym}_\Lambda(M)}\bigl(\mathrm{Sym}^{+}_\Lambda(M)\bigr) \simeq
+\Gamma_\Lambda(M).
+\]
+
+\emph{Quotients.} Soit $(A, J, \gamma)$ un anneau à puissances divisées et
+$(x_i)$ une famille d'éléments de $J$. L'idéal $K$ engendré par les
+$\gamma_n(x_i)$, $n \geqslant 1$, est le plus petit idéal contenant les $x_i$
+et stable par les $\gamma_n$ ; les $\gamma_n$ passent au quotient
+$(A/K, J/K)$, qui représente le foncteur des morphismes d'anneaux à
+puissances divisées $(A, J) \to (A', J')$ qui annulent les $x_i$.
+
+\pagerange{26}{26}
+\subsection*{Puissances divisées nilpotentes ; logarithme et exponentielle}
+
+Les puissances divisées sont dites \emph{nilpotentes} s'il existe $n$ tel
+que $\gamma_i(x) = 0$ pour $i \geqslant n$ et tout $x \in J$, \emph{localement
+nilpotentes} si un tel $n$ existe pour chaque $x$.\footnote{La page porte
+trois formulations superposées et en partie biffées ; elle parle aussi de
+« nilidéal », et note que si $J$ est engendré par $N$ éléments, des
+puissances divisées nilpotentes entraînent $J^{N'} = 0$ pour un $N'$
+convenable. Ce que le logarithme et l'exponentielle demandent est la
+nilpotence locale, et c'est la définition que la page retient en dernier
+(« $\forall x$, $\exists n$ tel que $x^{(i)} = 0$ si $i > n$ »). Le nom
+moderne prête à confusion : chez Berthelot, « PD-nilpotent » désigne une
+autre condition, $J^{[N]} = 0$ pour la filtration par les puissances divisées.}
+Dans ce cas $J$ est un nilidéal ($x^{n} = n!\gamma_n(x)$), $1 + J$ est
+formé d'inversibles, et l'on a des isomorphismes de groupes réciproques
+\[
+\exp : J \xrightarrow{\ \sim\ } 1 + J, \quad \exp x = \sum_{n \geqslant 0}
+\gamma_n(x) ;
+\]
+\[
+\log : 1 + J \xrightarrow{\ \sim\ } J, \quad \log(1+x) = \sum_{n \geqslant 1}
+(-1)^{n-1}(n-1)!\,\gamma_n(x) ,
+\]
+toutes les sommes étant finies.\footnote{La page écrit la série du
+logarithme à partir de $n \geqslant 0$ et avec le signe $(-1)^{n}$ ; la
+borne est $n \geqslant 1$ et le signe $(-1)^{n-1}$, comme le veut
+$x^{n}/n = (n-1)!\,x^{n}/n!$.} C'est ce logarithme qui sert, à la page 2, à
+passer du groupe multiplicatif $1 + \mathcal{J}$ au groupe additif
+$\mathcal{J}$.
+
+\pagerange{27}{28}
+\section*{Le site de De Rham (pages 27 à 30)}
+
+\subsection*{§ 4. Le site et ses variantes}
+
+Soit $f : X \to S$. Les objets du site --- que la page appelle « site de De
+Rham », et qu'on note ici $\mathrm{Cris}(X/S)$ --- sont les quadruplets
+$(U, U', i, \delta)$ : $U$ un ouvert de $X$, $U'$ un $S$-schéma,
+$i : U \hookrightarrow U'$ une $S$-immersion nilpotente, $\delta$ une
+structure de puissances divisées sur l'idéal $\mathcal{J} =
+\mathrm{Ker}(\mathcal{O}_{U'} \to \mathcal{O}_U)$. Les morphismes sont les
+évidents, la topologie celle de Zariski.\footnote{La page dit les
+puissances divisées « topologiquement nilpotentes (ou quasi-nilpotentes) »,
+lecture par le sens d'un mot abrégé ; l'immersion étant nilpotente, la
+question ne se pose que pour l'idéal $\mathcal{J}$, qui l'est. Un premier
+quadruplet $(U, \mathcal{A}, \varphi, \pi^{*})$ est biffé.} À la condition
+de compatibilité près avec des puissances divisées données sur la base, que
+la page ne mentionne pas, c'est le site cristallin de Berthelot, dans sa
+version à épaississements nilpotents.
+
+Le site \emph{stratifié} $\mathrm{Cris}^{\mathrm{st}}(X/S)$ est formé des
+objets au-dessus desquels il existe localement une rétraction $U' \to U$ de
+$i$, cette rétraction ne faisant pas partie de la donnée. On a les topos
+correspondants, et le carré de morphismes de topos
+\begin{tikzcd}
+X_{\mathrm{zar}} \arrow[r, dashed] & \mathrm{Cris}^{\mathrm{st}} \arrow[r] \arrow[d] & \mathrm{Inf}^{\mathrm{st}} \arrow[d] \\
+& \mathrm{Cris} \arrow[r] & \mathrm{Inf}
+\end{tikzcd}
+dont il affirme :\footnote{Sur la page, les sommets sont
+$\widetilde{\mathrm{Zar}}(X)$, $\widetilde{\mathrm{DR}}_{\mathrm{st}}(X)$,
+$\widetilde{\mathrm{Strat}}(X)$, $\widetilde{\mathrm{DR}}(X)$,
+$\widetilde{\mathrm{Cris}}(X)$ ; voir les conventions pour la
+correspondance des noms. La flèche $X_{\mathrm{zar}} \to
+\mathrm{Cris}^{\mathrm{st}}$ est en pointillé sur la page.}
+\begin{itemize}
+\item si $X$ est formellement lisse sur $S$, les flèches verticales sont
+des équivalences de topos ;
+\item en caractéristique $0$ ($S$ au-dessus de $\mathbf{Q}$), les flèches
+horizontales le sont.
+\end{itemize}
+Les deux énoncés sont vrais, pour les raisons dites à propos de la page
+2 : la lissité formelle fournit localement les rétractions, et sur
+$\mathbf{Q}$ un idéal nilpotent a une et une seule structure de puissances
+divisées.
+
+Il ajoute que, dans $\mathrm{Cris}$ et $\mathrm{Cris}^{\mathrm{st}}$, les
+produits fibrés et les noyaux de couples existent, et doute, avec un point
+d'interrogation en marge, qu'il en soit de même dans $\mathrm{Inf}$ et
+$\mathrm{Inf}^{\mathrm{st}}$.\footnote{Nous rapportons ces deux affirmations
+sans les avoir vérifiées. On notera seulement que, sans puissances divisées,
+le produit fibré de deux épaississements nilpotents au-dessus d'un troisième
+est encore un épaississement nilpotent ; c'est avec les puissances divisées
+qu'il faut passer par une enveloppe, et que la question est délicate.}
+
+\pagerange{28}{30}
+\subsection*{La suite spectrale de Čech, et la cohomologie de
+$\mathcal{O}$}
+
+Travaillons dans $\mathrm{Cris}^{\mathrm{st}}$. Soit $\widetilde{X}$ le
+faisceau qui à $(U, U')$ associe l'ensemble des $S$-morphismes $U' \to X$
+prolongeant l'inclusion $U \subset X$. Par définition du site stratifié,
+$\widetilde{X} \to e$ est un épimorphisme sur l'objet final, et le
+recouvrement qu'il définit donne une suite spectrale
+\[
+E_2^{p,q} = H^{p}\Bigl(\nu \mapsto H^{q}\bigl(\widetilde{X}^{\nu+1},
+\mathcal{O}\bigr)\Bigr) \Longrightarrow H^{p+q}(\mathrm{Cris}^{\mathrm{st}},
+\mathcal{O}),
+\]
+que la page appelle suite spectrale de Leray et qu'on appelle aujourd'hui
+de Čech, ou de Cartan--Leray, pour un recouvrement de l'objet
+final.\footnote{La page dit « l'objet $\widetilde{X}$ de
+$\widetilde{\mathrm{DR}}_{\mathrm{st}}$ associé à $X$ comme l'objet final »,
+la suite de la phrase étant illisible ; la description de $\widetilde{X}$
+par les rétractions est la nôtre, et c'est elle qui fait de
+$\widetilde{X} \to e$ un recouvrement. L'indice $\nu$ de la suite spectrale
+est une lecture.}
+
+Le produit $\widetilde{X}^{\nu+1}$ est ind-représentable : soient
+$\Delta^{(\nu)}(i)$ le $i$-ième voisinage infinitésimal de la diagonale de
+$X^{\nu+1}$ et $\Delta^{(\nu)}(i, j)$ son voisinage à puissances divisées
+d'ordre $j$ ; alors
+\[
+\widetilde{X}^{\nu+1} = \varinjlim_{i, j} \Delta^{(\nu)}(i, j).
+\]
+Il « faudra vérifier » que, pour tout objet $(U, U')$ du site stratifié,
+\[
+H^{q}\bigl(\mathrm{Cris}^{\mathrm{st}}/(U, U'),\ \mathcal{O}\bigr) \simeq
+H^{q}(U', \mathcal{O}_{U'}) ;
+\]
+c'est vrai, et c'est aujourd'hui un lemme de base de la théorie : la
+cohomologie d'un faisceau sur le site cristallin localisé en un objet est la
+cohomologie de Zariski de l'épaississement.\footnote{La note marginale « à
+vérifier » est en regard de cette formule. La prose qui va de la formule
+$\Delta^{(\nu)}(i) = \varinjlim_j \Delta^{(\nu)}(i, j)$ à
+$\widetilde{X}^{\nu+1} = \varinjlim \Delta^{(\nu)}(i,j)$ est d'une écriture
+très rapide et n'est que partiellement lue ; les deux formules sont sûres.}
+D'où, si $X$ est affine (et séparé sur $S$, pour que la diagonale soit
+fermée),
+\[
+H^{q}\bigl(\widetilde{X}^{\nu+1}, \mathcal{O}\bigr) = 0 \ (q > 0), \qquad
+H^{0}\bigl(\widetilde{X}^{\nu+1}, \mathcal{O}\bigr) = \varprojlim_{i,j}
+\Gamma\bigl(\Delta^{(\nu)}(i,j), \mathcal{O}\bigr),
+\]
+et par suite
+\[
+H^{n}(\mathrm{Cris}^{\mathrm{st}}, \mathcal{O}) \simeq H^{n}\Bigl(\nu
+\mapsto H^{0}\bigl(\widetilde{X}^{\nu+1}, \mathcal{O}\bigr)\Bigr) :
+\]
+la cohomologie est celle d'un complexe cosimplicial explicite, formé des
+anneaux des voisinages à puissances divisées des diagonales. C'est ce
+qu'on appelle aujourd'hui le complexe de Čech--Alexander. Dans le cas
+général, ces complexes se recollent en un complexe $\mathcal{E}^{*}$ de
+faisceaux de Zariski, et $H^{*}(\mathrm{Cris}^{\mathrm{st}}, \mathcal{O})
+\simeq H^{*}(X_{\mathrm{zar}}, \mathcal{E}^{*})$.\footnote{L'hypothèse
+« séparé » est ajoutée. La page écrit « si $X \to$ » suivi d'un mot biffé,
+lu « Aff » ; les deux lignes qui introduisent $\mathcal{E}^{*}$ sont d'une
+encre presque effacée, seul l'isomorphisme final est sûr.}
+
+\pagerange{31}{32}
+\section*{L'enveloppe par générateurs et relations (pages 31 à 34)}
+
+\subsection*{La présentation}
+
+Retour à l'enveloppe $D_A(I)$ de la page 23, cette fois par générateurs et
+relations : c'est le quotient
+\[
+B = A\bigl[\{\Gamma^{n}(x)\}_{x \in I,\ n \geqslant 2}\bigr] \big/ (\text{relations}),
+\]
+où l'on convient que $\Gamma^{1}(x) = x$, les relations étant
+\[
+\Gamma^{n}(x+y) = \sum_{p+q=n}\Gamma^{p}(x)\Gamma^{q}(y), \qquad
+\Gamma^{n}(ax) = a^{n}\,\Gamma^{n}(x), \qquad
+\Gamma^{m}(x)\Gamma^{n}(x) = \binom{m+n}{m}\Gamma^{m+n}(x),
+\]
+pour $x, y \in I$ et $a \in A$, et l'idéal $J$ étant engendré par les
+$\Gamma^{n}(x)$.\footnote{La page écrit « $\Gamma^{n}(xy) =
+x^{n}\Gamma^{n}(y)$, $x \in I$, $y \in A$ » : les rôles sont inversés, puisque
+$\Gamma^{n}(y)$ n'est défini que pour $y \in I$. La relation de composition
+1.4 figure d'abord dans la liste, puis est biffée : elle ne peut s'écrire
+comme relation polynomiale, $\Gamma^{n}(x)$ n'étant pas un élément de $I$.}
+Il reste « à vérifier que c'est une solution du problème universel » : il
+faut munir $J$ de puissances divisées, et un bloc de quatre lignes, hachuré,
+reprenait pour cela la construction de la page 24. C'est vrai : cette
+présentation est celle de l'enveloppe (c'est, à peu de chose près,
+$\Gamma_A(I)$ divisé par les $x^{[1]} - x$), et la difficulté est
+exactement celle que la page désigne — la composition est héritée de
+$\Gamma_A(I)$ et non imposée.
+
+\subsection*{La simplification $p$-adique}
+
+Supposons tous les nombres premiers $\ell \neq p$ inversibles dans $A$,
+c'est-à-dire $A$ une $\mathbf{Z}_{(p)}$-algèbre. Si $n = \sum a_i p^{i}$,
+$0 \leqslant a_i \leqslant p-1$, alors
+\[
+v_p(n!) = \sum_i a_i\, v_p\bigl((p^{i})!\bigr), \qquad v_p\bigl((p^{i})!\bigr)
+= \frac{p^{i}-1}{p-1},
+\]
+d'où, dans toute $A$-algèbre à puissances divisées, par (1.5 bis),
+\[
+\gamma_n(x) = \kappa_n\, \gamma_1(x)^{a_0}\,\gamma_p(x)^{a_1}\cdots
+\gamma_{p^{\nu}}(x)^{a_\nu}, \qquad \kappa_n = \frac{\prod_i
+\bigl((p^{i})!\bigr)^{a_i}}{n!} \in \mathbf{Z}_{(p)}^{\times}.
+\]
+\footnote{La page écrit « $v_p(n) = \sum a_i v_p(p^{\nu})$ » pour
+$v_p(n!) = \sum a_i\, v_p\bigl((p^{i})!\bigr)$. Elle définit $\kappa_n$ (son
+$c_n$) comme la « partie première à $p$ » de $\prod((p^{i})!)^{a_i}/n!$ ; la
+formule précédente montre que la valuation $p$-adique de ce rationnel est
+nulle, de sorte qu'il est sa propre partie première à $p$.} Par suite $B$ est
+engendré par les seuls $[x, \nu] = \Gamma^{p^{\nu}}(x)$, $\nu \geqslant 1$,
+$x \in I$, les autres $\Gamma^{n}$ étant \emph{définis} par la formule
+ci-dessus, et les relations deviennent : l'additivité de $\Gamma^{p^{\nu}}$
+(dont le second membre ne fait intervenir que des $\Gamma^{p^{i}}$, $i <
+\nu$), la relation $\Gamma^{p^{\nu}}(ax) = a^{p^{\nu}}\Gamma^{p^{\nu}}(x)$, et
+les relations multiplicatives. Une note marginale demande s'il ne faut pas
+prendre toutes les $\Gamma^{n}(x+y)$ ; une autre isole la relation clef,
+\[
+\Gamma^{p^{\nu}}(x)^{p} = q_\nu\, \Gamma^{p^{\nu+1}}(x), \qquad
+q_\nu = \frac{(p^{\nu+1})!}{\bigl((p^{\nu})!\bigr)^{p}} ,
+\]
+la même qu'à la page 4.\footnote{La note marginale écrit
+$\Gamma^{p^{\nu}}(x)^{p} = \frac{(p^{\nu+1})!}{((p^{\nu})!)^{p}\, p!}
+\Gamma^{p^{\nu+1}}(x)$. Avec le $p!$ au dénominateur, c'est le coefficient de
+la \emph{composée} $\Gamma^{p}(\Gamma^{p^{\nu}}(x))$ (axiome 1.4), non celui
+de la \emph{puissance} $p$-ième (axiome 1.5) ; les deux diffèrent d'un
+facteur $p!$. On donne la forme correcte de la puissance.}
+
+\pagerange{32}{34}
+\subsection*{Le cas d'un idéal principal}
+
+Si $I = \lambda A$, $B$ est le quotient de $A[(\Gamma^{n}(\lambda))_{n
+\geqslant 2}]$ par les relations
+\[
+\Gamma^{m}(\lambda)\Gamma^{n}(\lambda) - \binom{m+n}{m}\Gamma^{m+n}(\lambda),
+\qquad (x^{n} - y^{n})\,\Gamma^{n}(\lambda) \quad \text{pour } x, y \in A
+\text{ tels que } (x-y)\lambda = 0 .
+\]
+La seconde, notée $(**)$ en marge, dit que $\Gamma^{n}(\lambda x) :=
+x^{n}\Gamma^{n}(\lambda)$ est bien défini ; l'additivité en résulte alors
+par le binôme, et la relation $\Gamma^{n}(ax) = a^{n}\Gamma^{n}(x)$ est
+triviale. Si de plus les premiers $\neq p$ sont inversibles dans $A$, il
+suffit des générateurs $\Gamma^{p^{\nu}}(\lambda)$, et les relations
+multiplicatives se ramènent à celles où une retenue se produit en base
+$p$.\footnote{La page conclut par une formule encadrée, lourdement
+surchargée, qui se lit $\Gamma^{p^{\nu}}(\lambda)^{e} =
+\frac{(e\,p^{\nu+1})!}{((p^{\nu})!)^{p}}\Gamma^{e\,p^{\nu+1}}(\lambda)$
+« pour $p \leqslant e < 2p-1$ ». Telle qu'elle se lit, elle ne découle pas
+de 1.5, qui donne $\Gamma^{p^{\nu}}(\lambda)^{e} =
+\frac{(e\,p^{\nu})!}{((p^{\nu})!)^{e}}\Gamma^{e\,p^{\nu}}(\lambda)$ ; et pour
+$e = p$ on retrouve la relation clef ci-dessus. Nous ne reconstituons pas la
+formule encadrée au-delà.}
+
+Ces relations sont celles-là mêmes que la page 44 imposera, de l'autre côté,
+à des éléments $\pi^{(n)}$ d'un anneau donné : ici on \emph{fabrique} un
+anneau où elles valent, là on demande si l'anneau qu'on a les satisfait déjà.
+
+\pagerange{36}{36}
+\section*{Une liste d'anneaux où vaut le lemme de Poincaré (page 36)}
+
+Soit $k$ un corps de caractéristique nulle. Le lemme de Poincaré — l'exactitude
+du complexe de De Rham $\Omega^{\bullet}_{A/k}$ en degrés $> 0$, et
+$H^{0} = k$ — vaut, dit la page, pour les $k$-algèbres
+\[
+\begin{gathered}
+k[[x]][Y]/(Y^{p} - x^{q}), \qquad k[[x]][Y]/\bigl(Y^{2} + P(x)Y + Q(x)\bigr),
+\qquad k[x_1, \ldots, x_n]/(x_1^{p_1}, \ldots, x_n^{p_n}), \\
+k[x, y]/\mathfrak{m}^{2}, \qquad k[x,y]/(x^{3}, y^{2}, x^{2}y), \qquad
+k[x,y]/(x^{3}, y^{2}, xy) .
+\end{gathered}
+\]
+\footnote{Les exposants $p$, $q$, $p_i$ sont ici des entiers quelconques,
+non le nombre premier des autres pages. Nous avons vérifié à la main les
+cas $k[x]/(x^{p})$ (d'où, par Künneth, les intersections complètes
+monomiales de la troisième ligne) et $k[x,y]/\mathfrak{m}^{2}$ ; les autres
+sont rapportés tels que la page les donne. Les deux premiers sont des
+singularités de courbes quasi-homogènes (la seconde après complétion du
+carré) : c'est sous le nom de quasi-homogénéité que la question a été
+reprise ensuite, par H.-J. Reiffen (1967) puis K. Saito (1971).} Et une
+remarque : si $A$ est locale sur $k$, d'extension résiduelle triviale, et si
+$x \in \mathfrak{m}$ vérifie $dx = 0$ dans $\Omega_{A/k}$, alors $x \in
+\mathfrak{m}^{3}$.\footnote{Énoncé sans démonstration sur la page ; nous ne
+l'avons pas vérifié. La référence marginale « Ann. Éc. N. Sc. 65 ou 66, J.
+de Liouville » est sans autre précision, et nous ne l'identifions pas.}
+
+\pagerange{38}{38}
+\section*{Le cas d'une $\mathbf{Z}_{(p)}$-algèbre : tout est déterminé par $\gamma_p$ (pages 38 et 40)}
+
+Supposons que les caractéristiques résiduelles de $A$ soient toutes égales
+à $p > 0$, c'est-à-dire que $A$ soit une $\mathbf{Z}_{(p)}$-algèbre (et $p$
+dans tous ses idéaux maximaux).\footnote{La page écrit « supposons que les
+car. résiduelles de $A$ soient parfaites : $p > 0$ » ; « parfaites » est une
+lecture incertaine, et ce qui suit n'utilise que l'inversibilité des premiers
+$\ell \neq p$.} Soient $\gamma_m$ des puissances divisées sur un idéal de
+$A$.
+
+a) Par 1.5, $\gamma_m(x)\gamma_n(x) = \binom{m+n}{n}\gamma_{m+n}(x)$. Si $m
+\equiv 0 \pmod p$ et $0 \leqslant n \leqslant p-1$, le coefficient
+$\binom{m+n}{n} = (m+1)\cdots(m+n)/n!$ est premier à $p$, donc
+\[
+\gamma_{m+n}(x) = \binom{m+n}{n}^{-1}\gamma_m(x)\,\gamma_n(x).
+\]
+
+b) Par 1.4, $\gamma_m \circ \gamma_n = \frac{(mn)!}{(n!)^{m} m!}\,\gamma_{mn}$.
+Pour $m = p$ le coefficient est $e_n = \frac{(pn)!}{(n!)^{p}\,p!}$, et
+Legendre donne $v_p(e_n) = s_p(n) - 1$ ; pour $n = p$, c'est $d_m =
+\frac{(pm)!}{(p!)^{m}\,m!}$, et $v_p(d_m) = 0$, de sorte que
+\[
+\gamma_{pm} = d_m^{-1}\; \gamma_m \circ \gamma_p .
+\]
+\footnote{La page note $c_n$ le coefficient $e_n$, déjà employé pour
+$\kappa_n$ à la page 32 ; on renomme. Les calculs de valuation sont ceux de
+la page et sont exacts.}
+
+Ensemble, a) et b) montrent que \emph{les $\gamma_n$ sont connus dès qu'on
+connaît $\gamma_p$} : écrivant $n = pm + r$ avec $0 \leqslant r < p$, on a
+$\gamma_n = \binom{n}{r}^{-1}\gamma_{pm}\,\gamma_r$, avec $\gamma_r(x) =
+x^{r}/r!$ et $\gamma_{pm} = d_m^{-1}\gamma_m \circ \gamma_p$, et l'on conclut
+par récurrence sur $n$.
+
+\pagerange{40}{40}
+\subsection*{L'opération $\gamma_p$ seule}
+
+L'opération $\pi = \gamma_p$ satisfait
+\[
+\pi(x+y) = \pi(x) + \pi(y) + \sum_{0 < i < p} \frac{x^{i}y^{p-i}}{i!\,(p-i)!},
+\qquad \pi(fx) = f^{p}\,\pi(x),
+\]
+et aussi $p!\,\pi(x) = x^{p}$.\footnote{Cette troisième relation, cas
+$n = p$ de 1.5 ter, est nécessaire et manque à la liste de la page.} Il
+pose la question réciproque : une opération satisfaisant ces conditions
+s'étend-elle en une structure de puissances divisées $(\gamma_n)$, avec
+$\gamma_p = \pi$ ? Une tentative par récurrence sur $n$ (« Cas 1 : $N
+\not\equiv 0\ (p)$, donc $N = N' + s$ \ldots ») est biffée. Il propose
+ensuite la forme close
+\[
+\gamma_n(x) = \kappa'_n\; x^{a_0}\,\pi(x)^{a_1}\,\pi^{\circ 2}(x)^{a_2}\cdots
+\pi^{\circ r}(x)^{a_r}, \qquad n = a_0 + a_1 p + \cdots + a_r p^{r},
+\]
+où $\pi^{\circ i}$ est l'itéré $i$-ième de $\pi$ et $\kappa'_n$ un rationnel
+de valuation $p$-adique nulle. Elle est juste : $\gamma_{p^{i}}$ est, à un
+facteur inversible près, $\pi^{\circ i}$ (par b), puisque les $d_m$ sont
+inversibles), et l'on conclut par la formule de la page 31. La question
+d'existence, elle, reste ouverte sur la page.
+
+« Il serait intéressant de connaître ce $c_n$ mod $p$, i.e. un élément de
+$\mathbf{F}_p^{\times}$. Est-ce toujours $1$ ? » La réponse est non, et elle
+est simple :
+\[
+\kappa'_n \equiv \Bigl(\prod_i a_i!\Bigr)^{-1} \pmod p .
+\]
+Déjà pour $n < p$, $\kappa'_n = 1/n!$, et par exemple $\kappa'_2 = 1/2 \not\equiv
+1$ dès que $p \geqslant 3$. La valeur générale découle de la congruence
+classique $n!/p^{v_p(n!)} \equiv (-1)^{v_p(n!)}\prod_i a_i! \pmod p$ (qui
+généralise le théorème de Wilson) appliquée aux factorielles qui composent
+$\kappa'_n$ : celles des $(p^{i})!$ donnent $\pm 1$, et les signes se
+compensent puisque la valuation totale est nulle. En normalisant plutôt
+par $\gamma_n(x) = u_n \prod_i \gamma_{a_i}\bigl(\pi^{\circ i}(x)\bigr)$,
+avec $\gamma_{a}(y) = y^{a}/a!$, on trouverait $u_n \equiv 1$.\footnote{La
+réponse est de l'édition. La congruence $\kappa'_n \equiv (\prod a_i!)^{-1}$
+a été vérifiée numériquement pour $p = 2, 3, 5, 7$ et $n < 200$. La page
+note $c_n$ ce coefficient, troisième emploi de la lettre dans le dossier, et
+écrit d'abord $\kappa'_n \in \mathbf{Z}_{p}\mathbf{Z}^{*}$, biffé, puis
+« $\mathbf{Q} \cap \mathbf{Z}_p^{*}$ ».}
+
+\pagerange{42}{42}
+\section*{Applications polynomiales homogènes (page 42)}
+
+Un feuillet à l'encre bleue clôt une note dont le début ne figure pas parmi
+les pages transcrites.\footnote{La transcription situe ce début « page 40 et
+avant » ; mais la page 40 transcrite traite de tout autre chose, et la page
+41 est un tapuscrit étranger. Les notations $\Phi$, $M$, $N$ ne sont
+introduites sur aucune page du dossier. Le lien le plus proche est la page
+22, où l'algèbre $\Gamma(M)$ est caractérisée par les applications
+polynomiales homogènes.} Une application polynomiale homogène $\Phi : M \to
+N$ de degré $n$ définit, par
+\[
+\Phi\Bigl(\sum_{i=1}^{r} t_i x_i\Bigr) = \sum_{p_1 + \cdots + p_r = n}
+\varphi_{p_1 \ldots p_r}(x_1, \ldots, x_r)\, t_1^{p_1}\cdots t_r^{p_r}
+\]
+($t_i$ indéterminées), des applications $\varphi_{p_1\ldots p_r} : M^{r} \to
+N$ multihomogènes de degrés $p_1, \ldots, p_r$ — ses polarisées. Elles
+satisfont les relations d'additivité obtenues en substituant des sommes,
+\[
+\varphi_{p_1\ldots p_r}\Bigl(\sum_{i \leqslant s_1} x_{1,i}, \ldots,
+\sum_{i \leqslant s_r} x_{r,i}\Bigr) = \sum
+\varphi_{(q_{k,i})}\bigl((x_{k,i})\bigr),
+\]
+la somme portant sur les familles $(q_{k,i})$ telles que $\sum_i q_{k,i} =
+p_k$ pour chaque $k$,\footnote{La page indexe la seconde condition
+$q_{1,i_2}$ où l'on attend $q_{2,i_2}$.} plus des relations de symétrie. La
+phrase suivante (« On suppose que l'on a vérifié que \ldots ») s'interrompt,
+et le reste du feuillet est blanc. C'est le formalisme des lois polynômes de
+Roby, dont l'algèbre $\Gamma(M)$ de la page 22 est l'objet universel.
+
+\pagerange{44}{44}
+\section*{« Cristaux » : quand un idéal principal porte-t-il des puissances divisées ? (pages 44 et 46)}
+
+Sous ce titre, de sa main, une question précise. Soit $J = \pi A$ un idéal
+principal. Formellement, des puissances divisées sur $J$ seraient
+\[
+\gamma_n(\pi y) = \frac{(\pi y)^{n}}{n!} = \frac{\pi^{n}}{n!}\, y^{n} =
+\pi^{(n)} y^{n} ;
+\]
+on est donc amené à chercher des éléments $\pi^{(n)} \in \pi A$, $n
+\geqslant 1$, tels que
+\[
+(1) \qquad
+\begin{cases}
+\pi^{(1)} = \pi, \\
+\pi^{(m)}\pi^{(n)} = \dbinom{m+n}{m}\pi^{(m+n)}, \\
+\pi^{(a)}\Bigl(\dfrac{\pi^{(b)}}{\pi}\Bigr)^{a} = \dfrac{(ab)!}{a!\,(b!)^{a}}\,
+\pi^{(ab)} .
+\end{cases}
+\]
+\footnote{La page écrit la troisième condition avec les lettres $p$, $q$,
+qui sont ici des entiers quelconques et non le nombre premier ; on les
+remplace par $a$, $b$. Un premier état des conditions, cerné et biffé,
+précède.} Comme $\pi^{(b)} \in \pi A$, le quotient $\pi^{(b)}/\pi$ n'est
+défini qu'à l'addition près d'un $z$ tel que $\pi z = 0$ ; mais comme
+$\pi^{(a)} \in \pi A$ aussi, le produit $\pi^{(a)}(\pi^{(b)}/\pi)^{a}$ est
+bien déterminé. \emph{Alors $\gamma_n(\pi y) = \pi^{(n)}y^{n}$ définit une
+structure de puissances divisées sur $J$}, indépendante du choix de $y$ pour
+la même raison. C'est exact : la deuxième condition donne 1.2 et 1.5, la
+troisième 1.4, et 1.3 est évidente.
+
+\emph{Exemple 1.} Si $A$ est sans torsion sur $\mathbf{Z}$, les relations
+$\pi^{n} = n!\,\pi^{(n)}$ déterminent les $\pi^{(n)}$, et les conditions (1)
+sont alors automatiques. Leur existence équivaut à
+\[
+\pi^{n} \in n!\,\pi A \qquad \text{pour tout } n \geqslant 2 .
+\]
+\footnote{La page écrit « $\pi^{n} \in n!\,A$ ». Ce n'est pas suffisant : il
+faut $\pi^{(n)} = \pi^{n}/n! \in \pi A$ et non seulement dans $A$. Dans
+l'algèbre à puissances divisées $A = \mathbf{Z}_{(p)}\langle T \rangle$,
+sans torsion, avec $\pi = T$, on a $\pi^{n} \in n!\,A$ pour tout $n$, mais
+$T^{p}/p! = T^{[p]}$ n'est pas dans $TA$ : l'idéal \emph{principal} $TA$ ne
+porte pas de puissances divisées (c'est l'idéal qu'elles engendrent qui en
+porte). Dans le cas d'un anneau de valuation discrète, qui est celui de
+l'exemple 3, les deux conditions coïncident.}
+
+\emph{Exemple 2.} Pour $A_0 = \mathbf{Z}_{(p)}$ et $\pi = p$, les $p^{n}/n!$
+sont des entiers $p$-adiques, et même des éléments de $p\mathbf{Z}_{(p)}$ ;
+les conditions (1) sont satisfaites. Par spécialisation, toute
+$\mathbf{Z}_{(p)}$-algèbre $A$ — tout anneau où les premiers $\ell \neq p$
+sont inversibles — reçoit les $\pi^{(n)} = p^{n}/n!$, qui satisfont (1) :
+d'où une structure de puissances divisées canonique sur $pA$.\footnote{La
+phrase commence en bas de la page 44 et s'achève en haut de la page 46 ; la
+page 45, son verso, porte une page du tapuscrit d'EGA donné plus bas.
+« inversible » et « caractéristiques » sont des lectures incertaines.} C'est
+la structure que l'on suppose aujourd'hui, sous le nom de compatibilité, sur
+la base $\mathbf{Z}_p$ de la cohomologie cristalline ; et ce sont les
+puissances divisées $\lambda_i = \gamma_{p^{i}}(p)$ de la page 4, celles dont
+l'anneau universel $W^{(\nu)}$ mesurait l'écart.
+
+\pagerange{46}{46}
+\emph{Exemple 3.} Soit $A$ intègre, de caractéristiques résiduelles $p$ et
+$0$, et $\pi$ tel que $A/\pi A$ soit de caractéristique $p$. Quand
+existe-t-il des $\pi^{(n)}$ ? Supposons $A$ de valuation discrète, $v$ sa
+valuation normalisée, $e = v(p)$ son indice de ramification absolu, de sorte
+que $v(N) = e\,v_p(N)$ pour un entier $N$. Il faut $\pi^{n}/n! \in A$,
+c'est-à-dire
+\[
+v(\pi) \geqslant e\,\frac{v_p(n!)}{n} \quad \text{pour tout } n, \qquad
+\text{soit} \qquad v(\pi) \geqslant e \sup_n \frac{v_p(n!)}{n} =
+\frac{e}{p-1},
+\]
+la borne supérieure valant $1/(p-1)$ par Legendre (nom écrit en marge) —
+elle n'est pas atteinte, mais c'est la condition pour tout $n$ qui compte.
+Si $\pi$ est une uniformisante, $v(\pi) = 1$, d'où la condition
+\[
+\boxed{\ e \leqslant p-1\ }
+\]
+C'est, sous sa forme définitive, le critère de la page 12 : l'idéal maximal
+d'un anneau de valuation discrète de caractéristique mixte porte des
+puissances divisées si et seulement si $e \leqslant p - 1$ (et elles sont
+alors uniques). Il gouvernera, dans toute la suite de l'histoire, la
+frontière entre ce que la théorie cristalline sait faire sans peine et ce
+qu'elle ne sait faire qu'avec des efforts — les théorèmes de comparaison de
+Fontaine--Messing, par exemple, supposent $e = 1$ et $p$ assez grand.\footnote{La
+page dit « $\lambda(p) = \sup_n v_p(n!)/n = 1/(p-1)$ est une constante ne
+dépendant que de $p$, et qui est $\leqslant 1$ ». La mention de
+Fontaine--Messing est de l'édition. Que la condition soit aussi suffisante
+résulte du calcul de la page 12, où $v(\pi^{n}/n!) \geqslant v(\pi)$ dès que
+$v_p(\pi) \geqslant 1/(p-1)$, de sorte que $\pi^{n}/n! \in \pi A$.}
+
+\pagerange{45}{47}
+\section*{Un tapuscrit d'EGA IV, § 18.13, annoté (pages 45 et 47)}
+
+Au dos des deux feuillets « Cristaux », deux pages d'un tapuscrit d'EGA IV,
+numérotées 22 et 23 du § 18.13, qui se lisent dans cet ordre (page 47, puis
+page 45).\footnote{La page 22 du tapuscrit finit sur « co- » et la page 23
+commence par « ïncide ». Nous n'avons pas comparé ce tapuscrit au texte
+imprimé d'EGA IV.} Leur objet est le \emph{module des différentielles
+complété} d'une algèbre topologique.
+
+Soit $A$ un anneau topologique et $B$ une $A$-algèbre topologique qui est un
+anneau semi-local noethérien muni de sa topologie $\mathfrak{r}$-préadique
+($\mathfrak{r}$ son radical). Pour tout $B$-module de type fini $L$, toute
+$A$-dérivation $D : B \to L$ est continue, puisque $D(\mathfrak{r}^{j+1})
+\subset \mathfrak{r}^{j}L$ ; elle se factorise donc par $\Omega^{1}_{B/A}$.
+On définit $\overline{\Omega}^{1}_{B/A}$ comme le quotient de
+$\Omega^{1}_{B/A}$ par l'intersection des noyaux de ses applications vers
+des $B$-modules de type fini, et $\bar d_{B/A}$ la dérivation composée ;
+alors
+\[
+(18.13.4.1) \qquad \mathrm{Hom}_B\bigl(\overline{\Omega}^{1}_{B/A}, L\bigr)
+\xrightarrow{\ \sim\ } \mathrm{D\acute{e}r}_A(B, L) =
+\mathrm{D\acute{e}r.cont}_A(B, L)
+\]
+pour tout $B$-module de type fini $L$. Si $\overline{\Omega}^{1}_{B/A}$ est de
+type fini, il représente donc le foncteur $L \rightsquigarrow
+\mathrm{D\acute{e}r}_A(B, L)$ sur les modules de type fini, et si
+$\Omega^{1}_{B/A}$ lui-même est de type fini (par exemple si $B$ est de type
+fini sur $A$), les deux coïncident. La proposition (18.13.5) traite des
+suites exactes de ces modules pour $A \to B \to C$.
+
+Sa main ajoute le renvoi $(0_{\mathrm{III}}, 8.1.11)$, l'égalité
+« $= \mathrm{D\acute{e}r.cont}_A(B, L)$ », la note marginale
+« On a donc $\mathrm{Hom}_B(\overline{\Omega}^{1}_{B/A}, L) =
+\mathrm{Hom}_B(\Omega^{1}_{B/A}, L)$ pour tout $B$-module de type fini $L$ »,
+biffe dans (18.13.5) les mots « déterminés de façon unique », et pose en
+marge, à côté de « semi-local noethérien », la question d'un rédacteur :
+« à quoi sert l'hypothèse ? Prendre topologie plus générale ? ». Ces pages
+ne touchent pas aux cristaux ; elles disent seulement de quoi était faite sa
+table de travail.
+
+\pagerange{49}{50}
+\section*{La lettre à Deligne du 10 décembre 1965 (pages 49 à 52)}
+
+Une chemise de sa main, « lettre à Deligne / sur coh. $p$-adique », couvre le
+double dactylographié d'une lettre datée à la main.\footnote{Le double n'a
+pas les flèches, restituées d'après le texte, ni les crochets de décalage
+$[2d]$.}
+
+\subsection*{Le théorème de dualité}
+
+La lettre s'ouvre sur une simplification de la démonstration du théorème
+de dualité pour la cohomologie étale (celui de SGA 4, exposé XVIII), qui
+évite le théorème de pureté relative. On est ramené au cas où
+$f : X \to Y$ est lisse de dimension relative $1$, les coefficients étant
+constants ; le passage à la limite de SGA 4, exposé VI, § 6, permet de
+supposer la base noethérienne et de dimension finie, et l'on raisonne par
+récurrence sur la dimension : localisant sur $Y$, on suppose $Y$ strictement
+local de point fermé $y$, et l'on traite séparément $X \times_Y (Y - y)$,
+par hypothèse de récurrence, et $X \times_Y y$.\footnote{La lettre fait la
+récurrence sur « $n = \dim X$ » et invoque « $\dim(Y - y) < n$ » ; c'est
+la dimension qui baisse quand on retire le point fermé de la base qui fait
+marcher l'argument.}
+
+Il ajoute que le théorème vaut, avec le même énoncé et la même preuve, pour
+un morphisme lisse compactifiable $f : (X, B) \to (Y, A)$ d'espaces annelés,
+où $A$ est un faisceau d'anneaux sur $Y$ annulé par un entier $n$ premier aux
+caractéristiques résiduelles, et $B$ un faisceau d'anneaux sur $X$ muni de
+$f^{-1}(A) \to B$, en posant, pour $d$ la dimension relative,
+\[
+f^{!}(K) = R\,\underline{\mathrm{Hom}}_{f^{-1}(A)}\bigl(B,\ f^{-1}(K)
+\otimes T_{X/Y}[2d]\bigr),
+\]
+où $T_{X/Y}$ est le faisceau de Tate (les racines $n$-ièmes de l'unité,
+tordues $d$ fois). La trace et la dualité se décomposent alors entre le cas
+où $f^{-1}(A) \to B$ est un isomorphisme, qui se traite comme le cas
+$A = (\mathbf{Z}/n\mathbf{Z})_Y$, et le cas $f = \mathrm{id}$, trivial. « Je
+pense qu'il vaut le coup d'inclure cette forme générale du théorème de
+dualité, soit de prime abord, soit à la fin dans un
+numéro-ratrappage. »\footnote{« numéro-ratrappage » est son orthographe,
+vérifiée sur le fac-similé.} Il doute qu'elle se déduise du cas constant
+comme simple corollaire, et la même remarque vaut pour la dualité globale.
+
+\pagerange{50}{51}
+\subsection*{Une comparaison $p$-adique}
+
+Vient le passage qui donne son titre à la chemise. Sur $\mathbf{C}$, la
+cohomologie de De Rham et la cohomologie $\ell$-adique sont reliées, de
+façon transcendante, par la cohomologie entière. Il devrait y avoir un
+analogue sur un corps $K$ algébriquement clos, complet pour une valeur
+absolue non archimédienne, de caractéristique $0$ et de corps résiduel de
+caractéristique $p$ : une application $\mathbf{Z}_p$-linéaire
+$H^{*}(X, \mathbf{Z}_p) \to H^{*}_{\mathrm{DR}}(X)$ qui induirait un
+isomorphisme $H^{*}(X, \mathbf{Z}_p) \otimes_{\mathbf{Z}_p} K \simeq
+H^{*}_{\mathrm{DR}}(X)$.
+
+Pour la construire, il propose de passer par l'espace rigide-analytique
+$X^{\mathrm{an}}$ de Tate — « un site qui ne peut être défini par une
+topologie au sens ordinaire » —, d'espérer que sa cohomologie à coefficients
+de torsion coïncide avec la cohomologie étale de $X$ et, « par un excès
+d'optimisme », que sa cohomologie à coefficients constants $\mathbf{Z}_p$
+soit la cohomologie $p$-adique. L'inclusion de $\mathbf{Z}_p$ dans les
+fonctions enverrait alors $H(X^{\mathrm{an}}, \mathbf{Z}_p)$ dans la
+cohomologie de De Rham de $X^{\mathrm{an}}$, qui est celle de $X$ par un
+GAGA rigide. Il faudrait pour cela un « lemme de Poincaré »
+rigide-analytique.
+
+Et aussitôt il doute : il n'est pas sûr que la cohomologie rigide à
+coefficients constants donne les bons nombres de Betti, et se rappelle que
+Tate lui a dit que c'était déjà faux pour le $H^{1}$ d'une courbe
+elliptique.
+
+Les deux doutes étaient fondés, et le premier va plus loin qu'il ne le
+dit.\footnote{Ce paragraphe est de l'édition.} La cohomologie à
+coefficients constants de l'analytifiée ne voit que la topologie de
+l'espace analytique — dans le langage de Berkovich, venu plus tard, elle
+est de rang $0$ en degré $1$ pour une courbe elliptique à bonne réduction
+et de rang $1$ pour une courbe de Tate, jamais $2$. Et, plus profondément,
+il n'existe pas d'isomorphisme naturel $H^{*}_{\text{ét}}(X,
+\mathbf{Z}_p) \otimes K \simeq H^{*}_{\mathrm{DR}}(X)$ : il faut, pour
+comparer les deux, un anneau de « périodes » $p$-adiques, $B_{\mathrm{dR}}$,
+construit par Fontaine au début des années 1980, et le théorème de
+comparaison — démontré par Faltings, Tsuji et d'autres, puis étendu par
+Scholze aux espaces rigides — dit $H^{*}_{\text{ét}} \otimes
+B_{\mathrm{dR}} \simeq H^{*}_{\mathrm{DR}} \otimes B_{\mathrm{dR}}$. C'est le
+« foncteur mystérieux » qu'il appellera de ses vœux en 1970. Le lemme de
+Poincaré rigide, lui, au niveau des faisceaux, ne pose pas de difficulté :
+une forme fermée sur un polydisque s'intègre sur tout polydisque de rayon
+strictement plus petit, et ces polydisques recouvrent.
+
+\pagerange{51}{52}
+\subsection*{En caractéristique $p$}
+
+En caractéristique $p > 0$, au contraire, il y a une flèche évidente de
+$H^{*}(X, \mathbf{F}_p)$ dans la cohomologie de De Rham — et c'est le point
+de départ de la suite. On calcule la cohomologie de De Rham sur le site
+étale (le résultat est le même que sur le site de Zariski, les composantes
+du complexe étant quasi-cohérentes), au moyen de la suite spectrale
+conjuguée
+\[
+E_2^{p,q} = H^{p}\bigl(X, \mathcal{H}^{q}(\Omega^{\bullet})\bigr)
+\Longrightarrow H^{p+q}_{\mathrm{DR}}(X).
+\]
+La flèche se factorise par $H^{*}(X, \mathbf{F}_p) \to H^{*}(X,
+\mathcal{O}_X)$, puis $H^{*}(X, \mathcal{O}_X) \to H^{*}_{\mathrm{DR}}(X)$,
+cette dernière venant de l'isomorphisme $\mathcal{O}_X \simeq
+\mathcal{H}^{0}(\Omega^{\bullet})$, $f \mapsto f^{p}$.\footnote{Hypothèse
+implicite : $X$ lisse sur un corps parfait. C'est alors le degré $0$ de
+l'isomorphisme de Cartier ; sans lissité, $\mathcal{H}^{0}(\Omega^{\bullet})$
+n'est pas en général $\mathcal{O}_X^{p}$.} Le composé
+\[
+H^{n}(X, \mathcal{O}_X) \longrightarrow H^{n}_{\mathrm{DR}}(X)
+\longrightarrow H^{n}(X, \mathcal{O}_X),
+\]
+la seconde flèche venant de l'autre suite spectrale (celle de Hodge vers De
+Rham), « ne peut guère être autre chose que l'homomorphisme de
+Frobenius » : c'est bien lui, puisque la première flèche est induite par
+$f \mapsto f^{p}$ et que la seconde est l'arête $H^{n}_{\mathrm{DR}} \to
+H^{n}(X, \mathcal{O}_X)$.
+
+« Il faut dire que tout ça est bien éculé, et qu'on ne pourra dire des choses
+vraiment intéressantes et nouvelles qu'en faisant appel à la “vraie”
+cohomologie $p$-adique. » Un an plus tard, à l'IHES, il exposera les
+cristaux ; les feuillets qui précèdent cette lettre dans le dossier en sont
+l'établi.
+
+\end{document}
