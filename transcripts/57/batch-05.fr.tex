@@ -1,0 +1,386 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 57, batch 5 (pages 81-100).
+% Established from the facsimile archives/batches/57/batch-05.pdf, per the skill
+% transcribe-grothendieck.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-03 — first pass, unchecked against the pages by a human.
+%
+% Fourteen of the twenty pages are transcribed. Absent: pp. 81, 83, 92 (typed
+% letter openings, struck out, no mathematics), pp. 89, 94 (unrelated English
+% typescript on theta functions, scanned upside down), p. 97 (blank). Page 95 is
+% a cover in his hand (« Critères d'équivalence »), which becomes the section
+% heading and gets no \page{}.
+%
+%   Pages 82, 84, 86, 88, 90, 91, 93 — the extension M_{X/S} of Pic^w_{X/S} by
+%     omega_{X/S}: invertible sheaves with connexion, interpretation of E_{X/S},
+%     functoriality for X -> A (torsor under B^*), universal extension of an
+%     abelian scheme, Poincaré bundle class in H^1(Omega^1).
+%   Page 85 — scratch sheet on torsors Z x^G E (descent notation).
+%   Page 87 — to-do list (SGA 1-3) and pencil notes on d log, residues.
+%   Pages 96, 98-100 — « Critères d'équivalence »: Lefschetz-type comparison of
+%     Pic, Pic^tau, NS, H^1(X,G) with a hyperplane section; properness of Pic^0.
+%
+% Notation: underlined sheaves/functors as \underline{...}; Pic as
+% \underline{\mathrm{Pic}}; the hyperplane section over \overline{K} as Y_{\overline{K}}.
+
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{57}
+\batch{5}
+\pages{81}{100}
+\foldertitle{Picard : tapuscrit annoté (s.d.), lettres (s.d., 1962).}
+\dating{1962-[vers 1968]}
+\watermark{Édition de démonstration}
+
+\begin{document}
+
+\page{82}
+\note{La page reprend un argument commencé avant ce lot : $\underline{E}_{X/S}$, $\underline{P}_{X/S}$ et $\underline{\omega}_{X/S}$ sont introduits sur des pages antérieures.}
+
+\begin{tikzcd}[column sep=small]
+ & & \underline{P}_{X/S} \arrow[dl, "j"'] \arrow[d] & \\
+0 \arrow[r] & f_*(\underline{E}_{X/S}) \arrow[r] & f_*(\underline{\mathrm{Div}}_{X/S})^{w} \arrow[r] & 0
+\end{tikzcd}
+
+\note{La ligne commence par $0 \to \underline{\omega}_{X/S} \to f_*(\underline{E}_{X/S}) \to \dots$ ; le terme $\underline{\omega}_{X/S}$ est omis du diagramme ci-dessus pour la mise en page : la suite écrite est $0 \to \underline{\omega}_{X/S} \to f_*(\underline{E}_{X/S}) \to f_*(\underline{\mathrm{Div}}_{X/S})^{w} \to 0$, la flèche $j$ allant de $\underline{P}_{X/S}$ vers $f_*(\underline{E}_{X/S})$ et une flèche verticale de $\underline{P}_{X/S}$ vers $f_*(\underline{\mathrm{Div}}_{X/S})^{w}$.}
+
+défini par
+\[
+  f_*(\underline{R}^{*}_{X/S}) \longrightarrow f_*(\underline{E}_{X/S})
+\]
+donnée par
+\[
+  f \longmapsto (\mathrm{div}\, f, \tfrac{df}{f})
+\]
+
+\marginal{En l'absence de cette hypothèse, on obtient seulement une ext.\ de $\underline{\mathrm{Pic}}^{w}_{X/S}$ par $\underline{\omega}_{X/S}/\mathrm{Im}\, f_*(\mathcal{O}_X^*)$.}
+Il faut vérifier que c'est \ill{} \uncertain{sur} $f_*(\mathcal{O}_X^*)$, \add{$f$ \ill{} $\mathcal{O}_X$ est \uncertain{coh.} plat en dim.\ $0$ sur $S$} et même si $f_*(\mathcal{O}_X)$ est plat sur $S$ (p.\ ex.\ si $\mathcal{O}_S \simeq f_*(\mathcal{O}_X)$ universellement), ce que nous allons supposer. Nous obtenons alors une extension
+\[
+  \mathcal{M}_{X/S} = f_*(\underline{E}_{X/S})/\underline{P}_{X/S}
+\]
+\[
+  0 \to \underline{\omega}_{X/S} \to \mathcal{M}_{X/S} \to \underline{\mathrm{Pic}}_{X/S}^{w} \to 0
+\]
+\note{sous $\underline{\omega}_{X/S}$, relié par un trait : « fibré vectoriel sur $S$ ». Dans la marge gauche, un petit schéma $X \to S' \to S$.}
+
+\emph{Cas favorable} : $\underline{\Omega}^1_{X/S}$ est \uncertain{coh.} plat sur $S$ en dim.\ $0$, i.e.\ $\underline{\omega}_{X/S}$ est \uncertain{le} fibré vectoriel \uncertain{associé} à un module loc.\ libre sur $S$ [C'est le cas si $f$ est lisse et projectif et $S$ de car.\ nulle (?), ou si $X/S$ est un schéma abélien]. Alors $R^1f_*(\underline{\Omega}_{X/S})$ est aussi représentable par un fibré vectoriel, donc si $\underline{\mathrm{Pic}}_{X/S}$ est représentable (p.\ ex.\ $f$ à fibres géom.\ intègres) $\underline{\mathrm{Pic}}^{w}_{X/S}$ l'est aussi. Donc par descente $\mathcal{M}_{X/S}$ l'est également.
+
+\page{84}
+\section{Définition directe de l'extension $\mathcal{M}_{X/S}$}
+\note{titre souligné par lui, en tête de page ; le mot « directe » est souligné.}
+
+Soit $\mathcal{M}^{\#}_{X/S}$ le foncteur $(\mathrm{Sch})_{/S}^{\circ} \to (\mathrm{Ens})$, faisceau (fpqf)\note{lecture du sigle douteuse : « fpqf » ou « fppf ».} associé au préfaisceau
+\struck{$\mathcal{M}'_{X/S}(T) =$}
+\[
+  \mathcal{Q} : T \longmapsto \text{classes, à isom.\ près, de faisceaux inversibles}
+\]
+sur $X \times_S T$, munis d'une \emph{connexion} relativement à $T$.
+
+\struck{\ill{}} N.B. \uncertain{On a une suite exacte} de préfaisceaux en $T$
+\[
+  H^0(X, \mathcal{O}_X^*) \xrightarrow{\ \varphi \mapsto d\varphi/\varphi\ } H^0(X, \Omega^1_X) \to \mathcal{Q}(T) \to \mathrm{Pic}(X_T) \to H^1(X, \underline{\Omega}^1_{X/S})
+\]
+\note{sous $H^0(X,\Omega^1_X)$, un mot biffé (« dlog » ?).}
+
+d'où en passant aux faisceaux associés
+\[
+  0 \to f_*(\underline{\Omega}^1_X)/\mathrm{Im}\, f_*(\mathcal{O}_X^*) \to \mathcal{M}^{\#}_{X/S} \to \underline{\mathrm{Pic}}^{w}_{X/S} \to 0
+\]
+\note{sous $\mathrm{Im}\, f_*(\mathcal{O}_X^*)$ : « par $\varphi \mapsto d\varphi/\varphi$ ».}
+
+où on a défini encore
+\[
+  \underline{\mathrm{Pic}}^{w}_{X/S} = \mathrm{Ker}\bigl(\underline{\mathrm{Pic}}_{X/S} \to R^1f_*(\underline{\Omega}^1_{X/S})\bigr)
+\]
+
+On en déduit un \uncertain{homomorphisme} \uncertain{de suites} d'ext.
+
+\begin{tikzcd}[column sep=small]
+0 \arrow[r] & \underline{\omega}_{X/S} \arrow[r] \arrow[d, "\mathrm{can}"] & f_*(\underline{E}_{X/S}) \arrow[r] \arrow[d, "\alpha"] & \underline{\mathrm{Pic}}^{w}_{X/S} \arrow[r] \arrow[d, "\mathrm{can}"] & 0 \\
+0 \arrow[r] & \underline{\omega}_{X/S}/\mathrm{Im}\, f_*(\mathcal{O}_X^*) \arrow[r] & \mathcal{M}^{\#}_{X/S} \arrow[r] & \underline{\mathrm{Pic}}^{w}_{X/S} \arrow[r] & 0
+\end{tikzcd}
+
+\note{devant $\underline{\omega}_{X/S}$ dans la première ligne, un symbole raturé.}
+
+Pour ceci, on va interpréter \struck{$\underline{E}_{X/S}$} l'extension $\underline{E}_{X/S}$ de $\underline{\mathrm{Div}}_{X/S}$ par $\underline{\Omega}^1_{X/S}$, en notant que pour un diviseur relatif donné $D$ sur un
+\note{la phrase se poursuit p.~86 ; la p.~85 est une feuille de calculs sur un autre sujet.}
+
+\page{85}
+\note{Feuille de brouillon, barrée de longs traits obliques, sans rapport direct avec les pp.~84 et 86 : notations de descente et de torseurs. On en donne les formules lisibles, dans l'ordre de la page, sans en restituer la disposition.}
+
+$P_i$, $P_{ij}$, $P_{ji}$ ; $X_i$, $X_i \times_X X_j$, $X$ ; $X' \to X$, $\mathcal{U}$ ; $X'_\alpha \to X$.
+
+$Z_\alpha \to X \leftarrow X'$ ; $Z_\alpha$ ; $Z_\alpha \times_S^{G_\alpha} H$, $Z_\alpha \times_S^{G_\alpha} E$.
+
+$G$, $Z \to S$ ; $Z \times^G E \simeq X$, $Z \times^G E' \simeq X$, $E \to E'$ ; $Z \times^G E$, $G$.
+\[
+  \mathrm{Hom}_{G_\alpha}(E, F) \xrightarrow{\ \sim\ } \mathrm{Hom}_{S}(T(E), T(F))
+\]
+\note{après $\mathrm{Hom}_S$, un indice raturé ; à droite, « 3.80 ».}
+(i) $Z_\alpha$ connexe ;
+
+(ii) $\mathrm{Hom}(Z_\alpha/H, Z/K) \simeq \mathrm{Hom}_G(G/H, G/K)$,
+avec, au-dessous, $Z \to Z_\alpha/H$ et $Z \to Z/K$ ; $g \in G/K$, $gKg^{-1} \supset H$.
+\[
+  Z \longrightarrow Z/K, \qquad \mathrm{Hom}_S(Z, Z/K) \simeq G/K
+\]
+$Z \times^G H$ \struck{\ill{}} \uncertain{est autour} \uncertain{de} $Z \times^G H$ \uncertain{principal} loc.\ \uncertain{d'un}\ \ill{}.
+
+$Z$ connexe ; $Z/H$ \uncertain{tout autour} \ill{} de $G$.
+
+À gauche, en bas : $Z_i' \to Z_1 \to Z$\note{flèches verticales ; la première en pointillé.}.
+\page{86}
+ouvert $U$ de $X$, la donnée d'une connexion sur $\underline{L} = \underline{\mathcal{O}}_X(D)$, i.e.\ d'un splitting de
+\[
+  0 \to \underline{L} \otimes \underline{\Omega}^1_{X/S} \to P^1(\underline{L}) \to \underline{L} \to 0,
+\]
+i.e.\ d'une projection $P^1(\underline{L}) \to \underline{L} \otimes \underline{\Omega}^1_{X/S}$, ou encore d'un op.\ $1$-différentiel rel/$S$
+\[
+  d_L : \underline{L} \to \underline{L} \otimes \Omega^1_{X/S}
+\]
+satisfaisant $d_L(\lambda x) =$ \struck{\ill{}} $x \otimes d(\lambda) + \lambda\, d_L(x)$,
+
+\struck{équivaut} définit, grâce à la section \uncertain{unité} canonique $\varphi_D$ de $\underline{L} = \underline{\mathcal{O}}_X(D)$, une élément $\overline{\omega}$
+\[
+  \frac{d_L \varphi_D}{\varphi_D} \in \underline{R}_{U/S}(\underline{L}^{-1} \otimes \underline{L} \otimes \Omega^1_{X/S}) = \underline{R}_{U/S}(\underline{\Omega}^1_{X/S}),
+\]
+dont la connaissance \uncertain{détermine} $d_L$ dans le \uncertain{prolongement}, car \add{sur $U - \mathrm{supp}\, D$}
+\[
+  d_L(\lambda \varphi_D) = \varphi \otimes d(\lambda) + \lambda\, d_L(\varphi) = \varphi \otimes d\lambda + \lambda \varphi \overline{\omega}.
+\]
+
+\struck{\ill{}} D'autre part, quand une $\overline{\omega}$ provient-elle d'une connexion ? On voit de suite que c'est \uncertain{ssi}
+\[
+  \overline{\omega} - \frac{df}{f} \in \Gamma(\underline{\Omega}^1_{V/S}),
+\]
+\struck{\uncertain{régulière}}, pour toute \struck{\uncertain{intégrale}} \add{équation} $f$ de $D$ sur un ouvert $V \subset U$. Donc on trouve que $\underline{E}_{X/S}$ s'interprète comme le faisceau des $(D, c)$, $D$ un diviseur, $c$ une connexion sur $\underline{\mathcal{O}}_X(D)$. Le morphisme $\alpha$ est maintenant évident. Si
+\[
+  f_*(\mathcal{O}_X^*) \xrightarrow{\ \varphi \mapsto d\varphi/\varphi\ } f_*(\underline{\Omega}_{X/S})
+\]
+est nulle, i.e.\ $\underline{\omega}_{X/S} \to \underline{\omega}_{X/S}/\mathrm{Im}\, f_*(\mathcal{O}_X^*)$ un isom., on \uncertain{peut} \uncertain{donc} interpréter l'ext.\ $f_*(\underline{E}_{X/S})$ comme \ill{} de l'ext.\ $\underline{\mathrm{Pic}}^{w}_{X/S}$.
+
+\page{87}
+\marginal{$\underline{\mathrm{VI}}$ B}
+\note{En tête de page, à l'encre, une liste de choses à faire, sans rapport avec les calculs au crayon qui suivent :}
+Demander Raynaud détails \uncertain{travaux} SGA 3 ; Prendre SGA 2 / Donner SGA 2 ; Prendre exemplaire \ill{} SGA 1 ; Donner \ill{} \uncertain{rabiot} de Segal.
+
+\note{Le reste de la page est au crayon, en notes éparses, barré d'un long trait oblique.}
+
+\begin{tikzcd}
+X \arrow[r] \arrow[d, "f"'] & A \arrow[dl] \\
+S &
+\end{tikzcd}
+
+$D$ diviseur relatif sur $X$. \emph{strict\supplied{ement}} \emph{alg.\ équiv.\ à $0$} \struck{\uncertain{sur chaque fibre}}, i.e.\ définit une section de \struck{$\underline{\mathrm{Pic}}_{X/S}$} $\underline{\mathrm{Pic}}^{00}_{X/S}$ ; au-dessous, $A^* = \underline{\mathrm{Pic}}^{0}_{A/S}$, avec une flèche verticale de $A^*$ vers $\underline{\mathrm{Pic}}^{00}_{X/S}$.
+\[
+  \longrightarrow V(R^1\underline{\mathcal{O}}_{A^*}) \longrightarrow E(A^*) \longrightarrow A^* \longrightarrow 0
+\]
+\[
+  V(R^1\underline{\mathcal{O}}_{A^*}) = W(R^1\underline{\mathcal{O}}_{A^*}{}^{\vee}) = \omega_A
+\]
+
+Pour \uncertain{chaque} \ill{}, on \uncertain{trouve} une fibre \uncertain{principale} sur $\omega_A$, d'où \ill{} \uncertain{dans} $R^1f_*(\underline{\Omega}^1_{X/S})$ ($\longleftarrow \omega_A$). Interprétation ?
+\drawing{deux droites qui se coupent en un point, chacune marquée « 1 » à son extrémité droite.}
+
+On aura donc \struck{$\underline{\Omega}^1_{X/S}(D)$} $\underline{\Omega}^1_{X/S}$ (\ill{}) ; $\omega$ ;
+\[
+  \widehat{\omega} = \frac{df}{f}, \qquad f\omega = \overline{\omega}, \qquad \omega = \frac{\overline{\omega}}{f}, \qquad \mathrm{res}_x\, \omega,
+\]
+\[
+  \omega_i - \frac{df}{f}, \qquad \omega_i = \frac{df}{f} \ (d \log f)
+\]
+\uncertain{holomorphe} \uncertain{au voisinage} de \ill{}.
+\[
+  \underline{\mathrm{D}}^{\mathrm{lo}}_{X/S} \hookrightarrow \underline{R}_{X/S}(\underline{\Omega}^1_{X/S})/\underline{\Omega}^1_{X/S}
+\]
+\note{l'exposant de $\underline{\mathrm{D}}$ est de lecture douteuse.}
+
+\page{88}
+Donnons-nous une section \struck{\ill{}} $\xi$ de $\underline{\mathrm{Pic}}^{w}_{X/S}$ sur $S$, d'où par image inverse une classe de $H^1(S, \underline{\omega}_{X/S}/\mathrm{Im}\, f_*(\mathcal{O}_X^*))$, que nous voulons calculer. Pour simplifier, nous \uncertain{nous} supposerons que $\xi$ provient d'un faisceau inversible $\underline{L}$ sur $X$. Alors on trouve \uncertain{que l'image} \uncertain{est} l'élément de
+\[
+  H^1(S, \underline{\omega}_{X/S}) \simeq \mathrm{Ker}\bigl(H^1(X, \Omega^1_{X/S}) \to H^0(S, R^1f_*(\underline{\Omega}^1_{X/S}))\bigr)
+\]
+défini par $\underline{L}$.
+
+\page{90}
+\emph{N.B.} Si on a un hom.
+\[
+  u : B \to \underline{\mathrm{Pic}}_{X/S}
+\]
+avec $B$ un schéma abélien, et si $\underline{\Omega}^1_{X/S}$ \uncertain{coh.} plat$/S$ en dim.\ $0$, alors il se factorise en $B \to \underline{\mathrm{Pic}}^{w}_{X/S}$. En particulier, si $\underline{\mathrm{Pic}}^{00}_{X/S}$ existe, alors on a
+\[
+  \underline{\mathrm{Pic}}^{00}_{X/S} \subset \underline{\mathrm{Pic}}^{w}_{X/S}.
+\]
+
+\marginal{sous réserve d'existence de $B^*$ et de possibilité de descente (p.\ ex.\ si $B/S$ est projectif)}
+Notons que la \emph{donnée} de $u$ équivaut : à la donnée d'un torseur $A$ sous \struck{$E$} le schéma dual $B^*$ de $B$, et d'un morphisme
+\[
+  X \longrightarrow A
+\]
+[d'où $B \simeq \underline{\mathrm{Pic}}^{0}_{A/S} \subset \underline{\mathrm{Pic}}_{A/S} \to \underline{\mathrm{Pic}}_{X/S}$ …]
+
+\marginal{fonctorialité doit être explicitée avec un peu de soin !}
+On trouve donc, par fonctorialité, un diagramme
+
+\begin{tikzcd}[column sep=small, row sep=small]
+0 \arrow[r] & \underline{\omega}^{*}_{X/S} \arrow[r] & \mathcal{M}_{X/S} \arrow[r] & \underline{\mathrm{Pic}}^{w}_{X/S} \arrow[r] & 0 \\
+0 \arrow[r] & \underline{\omega}_{A/S} \arrow[r] \arrow[u] & \mathcal{M}_{A/S} \arrow[r] \arrow[u] & \underline{\mathrm{Pic}}^{w}_{A/S} \arrow[r] \arrow[u] & 0 \\
+0 \arrow[r] & \underline{\omega}_{A/S} \arrow[r] \arrow[u, no head, "\Vert" description] & \mathcal{M}^{0}_{A/S} \arrow[r] \arrow[u] & B \arrow[r] \arrow[u, hook] & 0
+\end{tikzcd}
+
+\note{sous $\underline{\omega}_{A/S}$ de la dernière ligne : $\simeq V(R^1 f_{B^*}(\underline{\mathcal{O}}_B))$ ; sous $B$ : $= \underline{\mathrm{Pic}}^{0}_{A/S}$. Devant $\mathcal{M}^0_{A/S}$, un symbole raturé (« $\underline{E}$ » ?). L'astérisque de $\underline{\omega}^{*}_{X/S}$ est peut-être une rature.}
+
+Ici $\mathcal{M}^{0}_{A/S}$ \struck{$\underline{E}_{B^*/S}$} est défini comme image inverse de $\mathcal{M}_{A/S}$ [par $B \to \underline{\mathrm{Pic}}^{w}_{A/S}$] \add{[si $\underline{\omega}_{A/S} \simeq \underline{\omega}_{X/S}$]} [ou aussi de $\mathcal{M}_{X/S}$ par $B \to \underline{\mathrm{Pic}}^{w}_{X/S}$]. Je vou-
+
+\page{91}
+drais l'interpréter comme une extension \emph{universelle} (de \ill{}) de $B$ par un fibré vectoriel.
+
+Notons d'abord que le schéma $B^*$ des translations de $A$ opère trivialement sur l'extension \struck{$\mathcal{M}^{0}_{A/S}$ $\underline{E}$} \struck{$\underline{E}_{A/S}$} (car ils opèrent trivialement sur $\underline{\mathrm{Pic}}^{0}_{A/S}$ et sur $\underline{\omega}_{A/S}$), et il en \uncertain{est} \uncertain{de même} \ill{} $B$ dans $\underline{\omega}_{A/S}$ est trivial). Donc par \uncertain{descente} \ill{} \uncertain{on} \uncertain{déduit} que $\mathcal{M}^{0}_{A/S}$ est \uncertain{canon.} \uncertain{isomorphe} à $\mathcal{M}^{0}_{B^*/S}$, donc est un invariant qui ne dépend que du \struck{\ill{}} schéma abélien $B$ sur $S$.
+
+\marginal{$A$, $B$ au-dessus de $S$ par $f_A$, $f_B$ ; $A \times_S B$, et au-dessous « $= B^*$ » (?).}
+Pour calculer la classe de l'extension obtenue comme \ill{} de $B$ par $\underline{\omega}_{A/S}$ \ill{}
+\[
+  H^0(S, R^1 f_{B*}(\underline{\omega}_{A/S} \otimes_S \underline{\mathcal{O}}_B))
+\]
+\note{sous la formule, une accolade : $R^1 f_{B*}(\underline{\mathcal{O}}_B)^{\vee} \otimes R^1 f_{B*}(\underline{\mathcal{O}}_B)$.}
+\uncertain{rappelons} le faisceau inversible \uncertain{de Poincaré} \uncertain{sur} $P = A \times_S B$, et on écrit l'obstruction à mettre dessus une connexion relative à $B$, i.e.\ la classe de cohomologie qui lui correspond dans $H^1(P, \underline{\Omega}^1_{P/B})$ [puis la localiser sur $S$].
+
+Calculons donc la classe de \uncertain{cohomologie} de $\underline{L}$ dans $H^1(A \times_S B, \underline{\Omega}^1_{A \times_S B/S})$ \struck{\ill{}}, localisée sur $S$.
+
+\page{93}
+\[
+  \underline{H}^{1,1}(A \times_S B) = \underline{H}^{1,1}(A/S) \oplus \underline{H}^{1,1}(B/S)
+\]
+\[
+  + \underline{H}^{1,0}(A/S) \otimes \underline{H}^{0,1}(B/S) + \underline{H}^{0,1}(A/S) \otimes \underline{H}^{1,0}(B/S)
+\]
+
+La classe $\xi$ qu'on veut calculer \uncertain{a}, par des raisons de fonctorialité (regardant les inclusions $A \to A \times_S B$, $B \to A \times_S B$) des composantes nulles sur les deux premiers facteurs. \uncertain{Il} \uncertain{reste} à calculer sa classe dans le deuxième, ce qui \uncertain{peut} \uncertain{se faire} …
+
+\note{La moitié inférieure de la page, séparée par un double trait, est barrée de traits obliques.}
+
+\struck{Connexion \add{(absolue)} \uncertain{canonique} sur $\mathcal{M}_{X/S}$}
+\[
+  \underline{W}_{X'_1/S'} \simeq \underline{W}_{X'_2/S'} \quad \text{canoniquement ??}
+\]
+
+\marginal{$X_0 \to X'$, $X''$ ; $S_0 \subset S''$ : $S$ dans le voisinage inf.\ du premier ordre de $S$, avec $\exists$ rétraction de $S$ sur $S_0$.}
+\emph{Question équivalente} : \uncertain{soit} \uncertain{un} \ill{} \uncertain{inversible} sur $X_0$, muni d'une connexion rel.\ à $S_0$, \uncertain{dans} les \uncertain{prolongements} (\uncertain{avec} connexion) à $X'$ et à $X''$ se correspondent biunivoquement.
+
+\note{En bas de page, isolés : $\underline{W}_{X/S}$ (raturé) et $S_0 \leftarrow S$.}
+\section{« Critères d'équivalence »}
+\note{Titre pris sur la p.~95 du fonds, feuille de garde portant ces seuls mots de sa main, entre guillemets ; il est repris, encadré, en tête de la p.~96.}
+
+\page{96}
+$X$ variété projective \struck{\ill{}} \struck{\ill{}} \add{non sing.} de dim.\ $n$
+
+$Y$ section hyperplane \struck{\ill{}} non sing.
+
+$X_m$ $m$-ième voisinage infinitésimal de $Y$ \uncertain{dans} $X$
+
+\note{Suit un tableau : à gauche les homomorphismes, à droite, encadrés, les énoncés ; on le donne ligne par ligne.}
+\begin{itemize}
+  \item $\mathrm{Pic}(X) \to \mathrm{Pic}(Y)$ : inj si $n \geqslant 3$, $H^1(Y, \mathcal{O}_Y(m)) = 0$ pour $m > 0$, surjectif si $n \geqslant 4$, $H^2(Y, \mathcal{O}_Y(m)) = 0$ pour $m > 0$ \add{par Lef.-Grauert} ; noyau un $p$-groupe fini si $n \geqslant 3$ (nul si $Y$ \emph{général}), \add{noyau nul si $n \geqslant 4$} \add{\uncertain{$\leftarrow$ Pic des schémas \ill{} \ill{} $X_m$}} ;
+  \item $\mathrm{Pic}^{\tau}(X) \to \mathrm{Pic}^{\tau}(Y)$ : inj.\ exc.\ $p$ si $n \geqslant 2$, bij.\ exc.\ $p$ si $n \geqslant 3$ ; injectif si $n \geqslant 2$ et $Y$ \emph{général} \add{$\leftarrow$ via $\pi_1$, Lef.\ Grauert} ;
+  \item $\mathrm{Pic}^{0}(X) \to \mathrm{Pic}^{0}(Y)$ : inj exc.\ $p$ si $n \geqslant 2$, surjectif si $n \geqslant 3$, bijectif si $n \geqslant 2$ et $Y$ \emph{général} \add{$\leftarrow$ via $\pi_1$, Lef.\ Grauert} ;
+  \item $TN(X) \to TN(Y)$ : bij exc.\ $p$ si $n \geqslant 3$ [si $n \geqslant 3$, le noyau est \struck{\ill{}} \uncertain{celui} de $\mathrm{Pic}^{\tau}(X) \to \mathrm{Pic}^{\tau}(Y)$] ; injectif si $Y$ \emph{général} et $n \geqslant 3$, \struck{\ill{}} si $n \geqslant 4$ ;
+  \item $LN(X) \to LN(Y)$ : injectif si $n \geqslant 3$ ;
+  \item $N(X) \to N(Y)$ : noyau un $p$-groupe fini si $n \geqslant 3$ [contenu exc.\ $p$ dans l'image des noyaux \struck{de} $\mathrm{Pic}(X) \to \mathrm{Pic}(Y)$, groupe \uncertain{un} $p$-groupe fini] ; nul si on a $n \geqslant 4$ \emph{ou} $Y$ \emph{générale}.
+\end{itemize}
+\[
+  \mathrm{Pic}(X) \longrightarrow \mathrm{Pic}(X_m) \qquad \text{inj si } n \geqslant 3,\ \text{bijectif si } n \geqslant 4,
+\]
+$m$ grand.
+
+\emph{Question} : Surjectivité \add{(donc bijectivité)} de $\mathrm{Pic}(X) \to \mathrm{Pic}(Y)$ \struck{\ill{}} pour $n \geqslant 4$ \emph{sans conditions cohomologiques}, [équivalent à celle de $TN(X) \to TN(Y)$, ou encore celles de $TN(X) \to TN(Y)$ et $LN(X) \to LN(Y)$]. Équivalent à celle de $\mathrm{Pic}(X_m) \to \mathrm{Pic}(Y)$ pour $m$ grand. N.B. \uncertain{La} surjectivité \uncertain{successive}, \ill{} \ill{} mod $p^m$ (car.\ $p > 0$) \add{[\uncertain{requiert} les \uncertain{obstructions} \ill{} $p$ …]} \emph{donc pour} $n \geqslant 4$, $\mathrm{Pic}(X) \to \mathrm{Pic}(Y)$ \emph{est surjectif exc.\ $p$}. \struck{\ill{}} En car.\ $0$, \uncertain{on peut} \emph{\uncertain{appliquer}} \emph{la théorie Kählérienne}, qui prouve que \struck{\ill{}} $NS(X) \xrightarrow{\ \sim\ } N(Y)$, d'où $\mathrm{Pic}(X) \to \mathrm{Pic}(Y)$.
+
+Démonstration algébrique ???
+
+\marginal{Corollaire : $\rho(X) = \rho(Y)$ pour $n \geqslant 4$ \uncertain{si} $n \geqslant 3$ ; [$\rho(X) \leqslant \rho(Y)$ \ill{} ; \struck{$\rho(X) \leqslant \rho(Y)$ \ill{} $n = 2$ et \ill{} \uncertain{seulement}}]}
+\note{La note marginale du coin inférieur gauche est en partie biffée et encadrée ; la lecture de « $\rho$ » (nombre de Picard) est probable, celle des conditions sur $n$ douteuse. Le sigle de la dernière formule, écrit d'abord « $N$ » puis surchargé, est lu « $NS$ » sous réserve.}
+
+\page{98}
+\marginal{\uncertain{Il} \uncertain{y a}}
+\emph{Théorème.} $X/k$, $k$ corps alg.\ clos, $X$ \struck{\ill{}} \add{normal intègre} \emph{projectif}, $X \subset \mathbb{P}^r_k$, \struck{\uncertain{prof} $X \geqslant$ \ill{}} dim $X \geqslant 2$ (dont prof $X \geqslant 2$).
+
+$G$ groupe algébrique \struck{\ill{}} \emph{affine} \emph{sans composantes} \uncertain{conn.}\ \uncertain{(\uncertain{gpe} \ill{} ou \uncertain{gpe} alg.\ fini)}.
+
+$K = k(t_1, \dots, t_r)$, $\overline{K}$ sa clôture algébrique.
+
+$Y_{\overline{K}}$ la section hyperplane générique, définie sur $\overline{K}$.
+
+Alors
+\[
+  H^1(X, G) \longrightarrow H^1(Y_{\overline{K}}, G) \quad \text{est injectif.}
+\]
+
+La structure des groupes algébriques commutatifs \uncertain{finis} ramène aux cas simples $\mathbb{G}_a$, \struck{\ill{}} groupe fini séparable, $\mu_p$, $\alpha_p$\note{$\alpha_p$ cerclé, relié par une flèche à $\mu_p$.}. Donc on est ramené à prouver
+
+\marginal{N.B.\ Généralisation au cas d'une \uncertain{immersion} $X \to \mathbb{P}^r$ \uncertain{donnée}.}
+\emph{Corollaire 1.} $H^1(X, \mathcal{O}_X) \to H^1(Y_{\overline{K}}, \mathcal{O}_{Y_{\overline{K}}})$ est injectif.
+
+\struck{\emph{Corollaire 2.} $\mathrm{Pic}(X) \to \mathrm{Pic}(Y_{\overline{K}})$ est injectif.}
+
+\emph{Corollaire 2.} $\pi_1(Y_{\overline{K}}) \to \pi_1(X)$ est surjectif [Cf.\ \emph{Bertini}]
+
+\emph{Corollaire} \struck{3} \add{3}. $H^1(X, \alpha_p) \to H^1(X_{\overline{K}}, \alpha_p)$ injectif
+
+\emph{Corollaire} \struck{4} \add{4}. $H^1(X, \mu_p) \to H^1(Y_{\overline{K}}, \mu_p)$ injectif.
+
+On \uncertain{part} du corollaire \textbf{2}, \uncertain{connu} \uncertain{grâce} à \emph{Bertini}, \uncertain{Lefschetz}-Grauert [\uncertain{utilisant} \struck{\ill{}} prof $X \geqslant 2$]. \uncertain{Les} \struck{\ill{}} \uncertain{on} déduit
+\[
+  H^1(X, \mathcal{O}_X)^F \to H^1(X, \mathbb{Z}/p\mathbb{Z}) \longrightarrow H^1(Y_{\overline{K}}, \mathcal{O}_{Y_{\overline{K}}})^F
+\]
+est injectif, \uncertain{on est} \uncertain{donc} \uncertain{ramené} \uncertain{pour} \uncertain{le} cor.~1 \uncertain{à} \uncertain{prouver} que $H^1(X, \mathcal{O}_X)^{1-F} \to H^1(Y_{\overline{K}}, \mathcal{O}_{Y_{\overline{K}}})^{1-F}$ est injectif [N.B. \ill{} \ill{} \ill{} \uncertain{le} \ill{} \uncertain{est} \uncertain{stable} \uncertain{par} $F$…] i.e.\ au corollaire 3. Donc on est \uncertain{ramené} \struck{\ill{}} \add{\uncertain{[sauf car.\ $p > 0$]}} \struck{\ill{}} au cas des cor.~3 et 4. \uncertain{En} car.\ $p > 0$,
+
+\page{99}
+\struck{provenant de $H^1(U, G)$, pourvu que $U$ soit \add{\uncertain{pris}} assez petit.}
+\uncertain{On} utilisera un argument de spécialisation.
+
+\uncertain{Or} \struck{\ill{} \ill{}} \add{\uncertain{suivant}} \uncertain{Cartier}, \uncertain{dans} \uncertain{les} \uncertain{deux} \uncertain{cas}
+\[
+  0 \to \mathcal{O}_X \xrightarrow{\ F\ } \mathcal{O}_X \to \mathcal{O}_X/\mathcal{O}_X^p \to 0
+\]
+\[
+  1 \to \mathcal{O}_X^* \xrightarrow{\ F\ } \mathcal{O}_X^* \to \mathcal{O}_X^*/\mathcal{O}_X^{*p} \to 1
+\]
+\marginal{($X$ \uncertain{intègre} !)}
+\struck{\ill{}} \uncertain{donne} \uncertain{donc}
+\[
+  H^1(X, \alpha_p) = H^1(X, \mathcal{O}_X)^{1-F} \simeq H^0(X, \mathcal{O}_X/\mathcal{O}_X^p) \xrightarrow{\ df\ } H^0(X, \widetilde{\underline{\Omega}}^1_X)
+\]
+\[
+  H^1(X, \mu_p) = H^1(X, \mathcal{O}_X)^{1-F} \simeq H^0(X, \mathcal{O}_X/\mathcal{O}_X^*) \xrightarrow{\ df/f\ } H^0(X, \widetilde{\underline{\Omega}}^1_X)
+\]
+\note{la seconde ligne est recopiée telle qu'écrite, avec $H^1(X,\mathcal{O}_X)^{1-F}$ et $\mathcal{O}_X/\mathcal{O}_X^*$ ; le parallélisme avec la première demanderait $\mathcal{O}_X^*/\mathcal{O}_X^{*p}$.}
+
+et si $X$ est \emph{normal} les deux flèches écrites sont injectives [\struck{\ill{}} \add{\uncertain{correspondant}} \uncertain{aux} \uncertain{éléments} \uncertain{à} \uncertain{dérivées} \uncertain{nulles}, soit aux \emph{diviseurs} \emph{\uncertain{relatifs}} sur $X$ \ill{} \uncertain{par} $F$, soit aux diviseurs multiplicatifs \uncertain{multipliés} par $F$].
+
+Donc on est ramené au
+
+\emph{Lemme.} $H^0(X, \widetilde{\Omega}^1_{X/k}) \to H^0(Y_{\overline{K}}, \widetilde{\Omega}^1_{Y_{\overline{K}}/\overline{K}})$ est injectif
+
+La vérification est \uncertain{presque} \uncertain{triviale} …
+
+\marginal{purement infinitésimal}
+\emph{Corollaire.} $\underline{\mathrm{Pic}}^{\tau}_{X_{\overline{K}}/\overline{K}} \to \underline{\mathrm{Pic}}^{\tau}_{Y_{\overline{K}}/\overline{K}}$ \uncertain{a} \uncertain{un} noyau \uncertain{qui} est un $p$-\emph{groupe fini unipotent}, [\uncertain{le} \uncertain{fait} \uncertain{qu'il} \uncertain{soit} \uncertain{complet} \uncertain{résulte} \uncertain{déjà} \uncertain{des} \struck{Bertini} \uncertain{Lefschetz}-Grauert-Bertini] \uncertain{pour} prof $X \geqslant 2$, grâce au « \ill{} \ill{} \ill{} ». Si $X$ est normal (pas néc.\ de dim.\ $\geqslant 2$), \add{$\underline{\mathrm{Pic}}_{X/k}$ est propre sur $k$.} Le « \ill{} \uncertain{pas} \uncertain{fini} » provient de la \uncertain{non-normalité} ; elle \uncertain{n'est} pas \ill{} \ill{} \uncertain{l'injectivité} \ill{} \emph{\uncertain{l'homomorphisme}} \emph{\uncertain{fini}} $\underline{\mathrm{Pic}}^{\tau}_{X/k} \to \prod_i \underline{\mathrm{Pic}}_{Y_i/k}$, les $Y_i$ des sections hyperplanes \uncertain{générales} \uncertain{variées}. Donc pour prouver
+
+\page{100}
+que $\underline{\mathrm{Pic}}^{\tau}_{X/k}$ est propre, on est ramené à le prouver pour une \emph{courbe} \uncertain{normale}, \uncertain{où} c'est connu. Alors \uncertain{on} \uncertain{a} \uncertain{les} \uncertain{gpes} \uncertain{unipotents} \uncertain{de} \uncertain{noyau} \uncertain{fini}, \uncertain{ce} \uncertain{qui} \uncertain{achève} \uncertain{de} prouver l'\uncertain{assertion} ….
+
+\emph{Démonstration directe et indépendante de la \uncertain{con.}\ du fait que} si $X$ est \add{\uncertain{géomt}} \emph{normal} et \emph{projectif}$/k$, \struck{\ill{}} $\underline{\mathrm{Pic}}^{0}_{X/k}$ est propre.
+
+On utilise le théorème de structure des groupes algébriques commutatifs, on est ramené à prouver que tout morphisme $\mathrm{Spec}(k[t, t^{-1}]) \to \underline{\mathrm{Pic}}^{0}_{X/k}$ est constant, \struck{et il suffit [\ill{} des \ill{} \ill{}] de prouver \ill{} l'\uncertain{injectivité} \add{\ill{}} \uncertain{de} \ill{} est trivial \ill{} \uncertain{premier} \uncertain{de} \ill{}}.
+\note{passage barré d'un trait et entouré ; au-dessous, une insertion entre parenthèses, elle aussi biffée en partie : « \uncertain{en} \uncertain{utilisant} \uncertain{une} \uncertain{partie} $Y$ \uncertain{de} \uncertain{codim} $\geqslant 2$ \uncertain{tel} \uncertain{que} $U = X - Y$ \uncertain{soit} \uncertain{régulier} ».}
+
+\marginal{Certainement inutile, en procédant de façon convenable}
+\emph{Lemme.} Supposons $X$ \uncertain{géométriquement} loc.\ \uncertain{noethérien} normal. Alors \struck{\ill{}}
+\[
+  \mathrm{Pic}(X) \longrightarrow \mathrm{Pic}\, X[t, t^{-1}]
+\]
+est \struck{bijectif} \emph{surjectif}.
+
+\struck{\uncertain{c'est} injectif, \uncertain{car} $X[t]$ a une section \ill{} $X'$ (\uncertain{section} \ill{})} Soit alors $\underline{L}$ \uncertain{un} faisceau inversible sur $X' = X[t, t^{-1}]$, \struck{soit $\mathcal{U} \to$ \ill{}} \add{\uncertain{prenons} $\mathcal{U}' = X'(\mathcal{U})$} \struck{\uncertain{par} \uncertain{rejection} de $X$} $\underline{L} \mid \mathcal{U}'$ \struck{\ill{}} provient d'un faisceau inversible $\underline{L}_0$ sur $\mathcal{U}$, qui est défini à l'aide d'un diviseur $D_0$ sur $\mathcal{U}$. \uncertain{Son} adhérence $D_1 = \overline{D_0}$ est \uncertain{tel} \uncertain{que} \uncertain{son} \uncertain{image} inverse sur $X'$ \struck{\ill{}} \struck{\ill{}} soit loc.\ principal. Par raison de \uncertain{stabilité}, il \uncertain{en} \uncertain{est} \uncertain{de} \uncertain{même} \uncertain{de} $D_1$, d'où facilement la conclusion.
+\note{L'argument s'arrête ici, en bas de la p.~100 ; la suite, s'il y en a une, est au-delà de ce lot.}
+
+\end{document}

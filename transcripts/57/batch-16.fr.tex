@@ -1,0 +1,213 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 57, batch 16 (pages 301-314).
+% Established from the facsimile archives/batches/57/batch-16.pdf, per the skill
+% transcribe-grothendieck.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-03 — first pass, unchecked against the pages by a human.
+%
+% Pages transcribed: 301, 303, 305, 308-310, 312-314. Absent: 302, 306, 311
+% (typescripts with nothing of his hand on them: a Bourbaki "Tribu" report, an
+% upside-down typed page on group preschemes, a typed Bourbaki draft), 304 and
+% 307 (covers in his hand, whose words become section headings).
+%   301: end of an example (two P^r glued along an elliptic curve, non-projective).
+%   303: Pic of a scheme X' obtained by contracting a finite flat Y to S.
+%   305: Picard/Albanese for non-complete varieties, after Chevalley.
+%   308-310, 312-314: open questions on the structure of Pic_{X/S}: Pic^tau
+%     closed, flat, open, of finite type; separation; variation of alpha, lambda,
+%     mu; Pic^tau open (and closed in the projective case).
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{57}
+\batch{16}
+\pages{301}{314}
+\foldertitle{Picard : tapuscrit annoté (s.d.), lettres (s.d., 1962).}
+\dating{1962-[vers 1968]}
+\watermark{Édition de démonstration}
+
+\begin{document}
+
+\page{301}
+\note{l'exemple commence avant ce lot : « Exemple 2 » suppose un « Exemple 1 » et les notations $X_1$, $X_2$, $Y$, $\varphi_i$ des pages précédentes}
+
+\emph{Exemple 2.} \struck{Supposons} $X_1 = X_2 = \mathbf{P}^r$, et $\varphi_1, \varphi_2$ sont deux \struck{applic\ill{}} immersions correspondant aux \struck{\ill{}} \uncertain{éléments} $\xi_i$ de $H^1(Y, \underline{\mathcal{O}}_Y^{*})$ \struck{\ill{}} qui sont \emph{\uncertain{linéairement indépendants} sur $\mathbb{Z}$} : \ill{} \ill{} \ill{}. Soit \uncertain{p.~ex.} $r = 2$, $Y$ une courbe elliptique. Alors tout faisceau inversible sur $X_1 \amalg_Y X_2$ est \emph{trivial}, car il induit un faisceau trivial sur $X_1$ et $X_2$, et l'isomorphisme \struck{\ill{}} induit sur $Y$ \uncertain{ne peut} s'identifier \emph{\uncertain{canoniquement}} à $\underline{b}_i : \underline{\mathcal{O}}_{X_i}$ $(i = 1, 2)$ \uncertain{qu'à} l'identité. En particulier, $X_1 \amalg_Y X_2$ n'est \emph{pas projectif}, bien que sa normalisée $X_1 \amalg X_2 = \mathbf{P}^r \amalg \mathbf{P}^r$ le soit.
+
+Ici encore, \struck{\uncertain{puisque} \ill{} $\mathbb{Z}$} on \uncertain{aurait} pu faire un exemple un peu plus complet,
+\note{la page s'arrête sur cette virgule ; la suite n'est pas dans le lot}
+
+\page{303}
+\begin{tikzcd}[column sep=small, row sep=small]
+X \arrow[d, "p"] & Y \arrow[l, "i"'] \arrow[dl, "{pi = \varepsilon f i = q}"] \\
+X' \arrow[d, "f'"] & \\
+S \arrow[u, bend right=40, "\varepsilon"'] &
+\end{tikzcd}
+
+\note{le croquis porte aussi une flèche $f : X \to S$ ; elle est omise ici}
+\marginal{$X$ plat sur $S$, et quasi-proj. ; $Y$ sous-schéma fermé, fini et plat sur $S$ ; $X' = X \amalg_Y S$ (existe…)}
+
+\[ 0 \to \underline{\mathcal{O}}_X^{*} \to \underline{R}^{*}_{X/S} \to \underline{\mathcal{D}}_{X/S} \to 0 \]
+
+\begin{tikzcd}[column sep=small, row sep=small, nodes={font=\scriptsize}]
+0 \arrow[r] & p_*(\underline{\mathcal{O}}_X^{*}) \arrow[r] & p_*(\underline{R}^{*}_{X/S}) \arrow[r] & p_*(\underline{\mathcal{D}}_{X/S}) \arrow[r] & 0 \\
+0 \arrow[r] & \underline{\mathcal{O}}_{X'}^{*} \arrow[r] \arrow[u, "\alpha"] & \underline{R}^{*}_{X'/S} \arrow[r] \arrow[u, "\beta"] & \underline{\mathcal{D}}_{X'/S} \arrow[r] \arrow[u, "\gamma"] & 0
+\end{tikzcd}
+
+la première ligne exacte car $R^1 p_*(\underline{\mathcal{O}}_X^{*}) = 0$.
+
+\emph{Lemme.} a) $\alpha$ est injectif, et son conoyau s'identifie à
+\[ \varepsilon_*\bigl(f_*(\underline{\mathcal{O}}_Y^{*}) / \underline{\mathcal{O}}_S^{*}\bigr) = q_*(\underline{\mathcal{O}}_Y^{*}) / \varepsilon_*(\underline{\mathcal{O}}_S^{*}) \]
+b) $\beta$ est bijectif.
+
+\emph{Corollaire 1.} $\gamma$ est surjectif, son noyau s'identifie à $\varepsilon_*(f_*(\underline{\mathcal{O}}_Y^{*}) / \underline{\mathcal{O}}_S^{*})$ ; d'où une suite exacte de faisceaux sur $X'$ :
+\[ 0 \to \varepsilon_*\bigl(f_*(\underline{\mathcal{O}}_Y^{*}) / \underline{\mathcal{O}}_S^{*}\bigr) \to \underline{\mathcal{D}}_{X'/S} \to p_*(\underline{\mathcal{D}}_{X/S}) \to 0 \]
+
+\emph{Corollaire 2.} On a une suite exacte de faisceaux sur $S$
+\[ 0 \to f_*(\underline{\mathcal{O}}_Y^{*}) / \underline{\mathcal{O}}_S^{*} \to f'_*(\underline{\mathcal{D}}_{X'/S}) \to f_*(\underline{\mathcal{D}}_{X/S}) \to 0 \]
+
+N.B. On a aussi une suite exacte
+\[ 0 \to f_*(\underline{\mathcal{O}}_Y^{*}) / \underline{\mathcal{O}}_S^{*} \to \underline{\mathrm{Div}}(X'/S) \to \underline{\mathrm{Div}}(X/S) \to 0 \]
+\note{le symbole est un $\mathcal{D}$ souligné et barré ; lu \uncertain{$\underline{\mathrm{Div}}$}}
+déduite de la suite exacte
+\[ 0 \to \underline{\mathcal{O}}_{X'}^{*} \to p_*(\underline{\mathcal{O}}_X^{*}) \to \varepsilon_*\bigl(f_*(\underline{\mathcal{O}}_Y^{*}) / \underline{\mathcal{O}}_S^{*}\bigr) \]
+du moins si $f_*(\underline{\mathcal{O}}_X^{*}) = \underline{\mathcal{O}}_S^{*}$.
+
+\section{Picard et Albanese pour les variétés non complètes, th. de Chevalley}
+\note{titre de sa main, seuls mots d'une feuille par ailleurs blanche (p.~304)}
+
+\page{305}
+\struck{Ex.} $X \times Y \to Y$ \uncertain{opération} de schémas \uncertain{algébriques} (intègres sur $k$ alg. clos), $D$ diviseur sur $Y$.
+
+\emph{Supposons} que pour tout $x \in X(k)$ on ait
+\[ x \cdot D - D \ \text{lin. équivalent à } 0 \]
+\add{sur $Y$}. C'est le cas si $X$ est « d'irrégularité nulle » et \uncertain{trivial} sur $Y$. \struck{C'est vrai aussi} \uncertain{$\exists\, e \in X$ qui opère trivialement} sur $Y$.
+
+\struck{Alors l'ensemble des $x \cdot D$ \ill{} \ill{} \ill{} \ill{} \ill{} famille linéaire}
+\note{deux lignes biffées, à peine lisibles}
+
+\emph{Alors} il existe un système linéaire $P$ de diviseurs sur $Y$, contenant $D$, et un morphisme $X \times P \to P$, qui ensemblistement correspond à $(x, D) \mapsto x \cdot D$.
+
+\section{Questions ouvertes}
+\note{titre de sa main, seuls mots d'une feuille par ailleurs blanche (p.~307)}
+
+\page{308}
+\subsection{Questions sur la structure de $\underline{\mathrm{Pic}}_{X/S}$ ($S$ noeth.)}
+
+O.K. $\Leftarrow$ a) $X$ est-il \struck{somme} \add{(disjointe)} de préschémas de type fini sur $S$ ? \add{non en général ; mais « génériquement sur $S$ ».}
+
+$\Leftarrow$ a') Pour toute partie quasi-compacte $U$ de $X$, est-il vrai que $\overline{U}$ est quasi-compact ? $\Longleftrightarrow$ pour tout $x \in X$, est-il vrai que $\overline{x}$ est quasi-compact ?
+
+a'') Est-il vrai que \struck{\ill{}} $\underline{\mathrm{Pic}}^{\tau}_{X/S}$ est un sous-préschéma \emph{fermé} ?? (Il suffit de le voir dans le cas \uncertain{séparé}…)\,?
+
+On aurait a $\Rightarrow$ a' $\Rightarrow$ a''. La réponse à a'' est affirmative, \uncertain{si} $X$ est \struck{\ill{}} \add{normal ?} (et projectif \add{\uncertain{plat}}) sur $S$, mais je ne sais pas pour autant s'il en est de \ill{} \ill{}.
+\marginal{(grâce au th. de \uncertain{décomposition} \uncertain{critique} en géom. formelle) ; th. d'existence de \ill{} ; il suffit que \ill{} \uncertain{Pic} \ill{} \ill{}}
+
+b) Question : existence du préschéma quotient
+\[ \underline{\mathrm{NS}}^{0}_{X/S} = \underline{\mathrm{Pic}}_{X/S} / \underline{\mathrm{Pic}}^{\tau}_{X/S} \]
+\note{le symbole est écrit « Néron-Sev. » au-dessus de « NS »}
+
+c) $\underline{\mathrm{Pic}}^{\tau}_{X/S}$ est-il universellement ouvert sur $S$ ? \add{Plat sur $S$ ?}
+\marginal{O.K. si les fibres sont \uncertain{complètes}, \uncertain{sans} torsion de N.S. première \uncertain{aux car. résiduelles}}
+
+d) $\underline{\mathrm{Pic}}^{\tau}_{X/S}$ est-il quasi-compact \add{(donc de type fini)} sur $S$ ? \emph{Oui, toujours}
+\marginal{O.K. si $X$ normal sur $S$, grâce au « critère d'équivalence » de Weil, à démontrer via \ill{} formelle (via \uncertain{lemme} \ill{}) ; (O.K. si les fibres sont primaires)}
+
+e) $\underline{\mathrm{Pic}}^{\tau}_{X/S}$ est-il séparé sur $S$ ? \emph{non} si on veut \ill{} Weil \ill{} représentable ; l'est-il \ill{} représentable ?
+
+\struck{f)} f') \uncertain{Semi-continuité} des (\uncertain{dim.} \uncertain{lisseté} des fibres…
+
+g) Continuité de la dim. des Picard des fibres
+\marginal{O.K. si $X$ normal sur $S$, plus généralement si les composantes connexes de Picard des fibres sont complètes : via groupe fondamental}
+
+g) $\underline{\mathrm{Pic}}^{\tau}_{X \times_S Y/S} = \underline{\mathrm{Pic}}^{\tau}_{X/S} \times \underline{\mathrm{Pic}}^{\tau}_{Y/S}$
+\marginal{\struck{O.K. si $X$ et $Y$ \ill{} : fibres \uncertain{réduites} \ill{} \ill{} \ill{} \ill{}} [conditions à préciser…}
+
+h) Si $Y$ section hyperplane de $X$,
+\[ \underline{\mathrm{Pic}}^{\tau}_{X/k} \to \underline{\mathrm{Pic}}^{\tau}_{Y/k} \ \text{injectif ? \uncertain{Dom} ?} \]
+\[ \underline{\mathrm{Pic}}_{X/k} \to \underline{\mathrm{Pic}}^{\tau}_{Y/k} \ \text{\uncertain{surjectif}} \]
+
+\page{309}
+\note{page de bilan, en plusieurs encres, très raturée ; des flèches renvoient d'une question à l'autre et les réponses « Oui », « Non » sont cerclées en marge}
+
+1) $\underline{\mathrm{Pic}}^{\tau}$ \emph{fermé} dans $\underline{\mathrm{Pic}}$ ? OK si $f$ est \emph{normal} \struck{\ill{}} \ill{}
+
+2) $\underline{\mathrm{Pic}}^{\tau}$ plat sur $S$ ? \emph{Non} [Contre-exemple de Mumford…] \struck{\ill{} \ill{} ouvert sur $S$ ?}
+\marginal{[vrai, si fibres normales, et si la torsion est première aux car. rés. \ill{} OK \ill{} \ill{}]}
+
+3) $\underline{\mathrm{Pic}}^{\tau}$ univt ouvert sur $S$ ?
+
+4) La multiplication par $n$ dans $\underline{\mathrm{Pic}}$ (ou dans $\underline{\mathrm{Pic}}^{\tau}$ \struck{de type fini} univers. $\underline{\mathrm{Pic}}^{\tau}$) est-elle \uncertain{univ. ouverte} pour $n$ « grand » ? (\uncertain{voire plate}) ?
+[Oui si $n$ premier aux car. résiduelles ; une réponse affirmative à 4), \ill{} de $\underline{\mathrm{Pic}}^{\tau}$, \ill{}, indique une réponse affirmative à 3)]
+\marginal{La multiplication par $n$ est-elle de type fini ? — \emph{Non}, exemple : \drawing{deux droites qui se croisent, marquées $p$} la multiplication par $p$ \ill{} \ill{} ?}
+
+N.B. Soit $G$ un \struck{\ill{}} \ill{} groupe sur $S$, tel que les $G^{\tau}_s$ soient propres, plus généralement \uncertain{connexes}. Alors $G^{\tau} \to S$ est univt ouvert \ill{} les \ill{} pts de torsion \ill{} premiers aux car. résiduelles. [$\Leftarrow$ si $n$ premier aux car. résiduelles, \ill{} $G \xrightarrow{n} G$ \uncertain{morphisme} \emph{étale}.]
+
+5) $\underline{\mathrm{Pic}}^{\tau}$ de type fini sur $S$ $\Leftrightarrow$ propre sur $S$. \emph{Oui}.
+[Si $f$ \ill{}, \ill{} indique $\underline{\mathrm{Pic}}^{\tau}$ \emph{projectif} \struck{sur} $S$, j'ignore s'il en est de même si $f$ \ill{}…]
+Une réponse affirmative à 3), \ill{} indique une réponse \struck{\ill{}} \add{dans certains cas} à 5), si $f$ \emph{normal}.
+OK si les $X_s/k(s)$ « sans torsion ».
+
+6) $\underline{\mathrm{Pic}}^{\tau}$ \struck{\ill{}} n'a-t-il qu'un nb fini de comp. irréductibles, $S$ étant \emph{normal} ?
+\[ \underline{\mathrm{Pic}}^{\tau}_{X/S} \ \text{de type fini} \Longleftrightarrow \underline{\mathrm{Pic}}^{\tau}_{X'/S'} \]
+\ill{} \ill{} fini de comp. irréductibles, \ill{} \ill{} connexe, $\forall\, S'$ fini irréductible \uncertain{de} $S$.
+
+7) \uncertain{rang}$(\mathrm{NS})$ reste-t-il majoré ? \emph{Oui.}
+
+8) \struck{\ill{}} Les composantes connexes de $\underline{\mathrm{Pic}}_{X/S}$ sont-elles de type fini sur $S$ ?? \emph{Non ?}
+\marginal{$\overline{M}$ la réponse : 5) me semble \uncertain{indiquer} ici … \ill{} \emph{stables}}
+$\underline{\mathrm{Pic}}_{X/S}$ est-il réunion disjointe \struck{\ill{}} des $\underline{\mathrm{Pic}}^{\tau}_{X/S}$ ?
+
+9) Définition de $\underline{\mathrm{Pic}}_{X/k} / \underline{\mathrm{Pic}}^{\tau}_{X/k}$…
+
+\uncertain{Howard} : Multiplicité de $\underline{\mathrm{Pic}}^{\tau}$ ; $\circledast$ compatibilité avec spécialisation ???
+\marginal{$\circledast$ Questions liées : \ill{} ; $\circledast$ Questions d'existence et descente…}
+
+\page{310}
+$\underline{\mathrm{Pic}}^{\tau}_{X/S}$ univt ouvert sur $S$ ?
+
+$\underline{\mathrm{Pic}}^{0}_{X/S}$ plat sur $S$ ? ($\Rightarrow \underline{\mathrm{Pic}}^{\tau}_{X/S}$ plat sur $S$)
+
+Existence de \uncertain{$\underline{\mathrm{Pic}}^{00}_{X/S}$} dans le cas Artinien, dans le cas $S$ réduit \uncertain{plat} ???
+
+\emph{Continuité de la torsion de N.S.}
+\marginal{\uncertain{Utiliser} la \ill{} \ill{} de la \ill{} \ill{}…}
+
+\page{312}
+\subsection{Séparation de $\underline{\mathrm{Pic}}_{X/S}$}
+
+(i) Séparé sur $S$ si $X_s$ sont géom. intègres ?
+
+(ii) $\underline{\mathrm{Pic}}^{\tau}_{X/S}$ séparé sur $S$ si les $X_s$ séparables ?
+
+(ii') ${}_n\underline{\mathrm{Pic}}_{X/S}$ \quad « \quad » ?
+
+\emph{N.B.} 1) Exemple de Mumford par des « schémas en courbes elliptiques » : fibre donnée, montre que $\underline{\mathrm{Pic}}^{0}_{X/S}$ peut ne pas être séparé sur $S$
+\marginal{mais alors il n'est pas représentable}
+
+2) Exemple de \drawing{une croix suivie d'un trait vertical} montre que, même si les fibres sont séparables, $\underline{\mathrm{Pic}}_{X/S}$ n'est pas toujours séparé sur la base.
+
+\subsection{Variation de $\alpha, \lambda, \mu$}
+
+(i) Constance de $\dim \underline{\mathrm{Pic}}_{X_s/k(s)} = \alpha_s - \mu_s + \lambda_s$ ?
+
+(ii) $\alpha \leq \alpha'$, $\lambda \geq \lambda'$, [$2\alpha + \mu \leq 2\alpha' + \mu'$ \uncertain{connu}] du moins pour fibres séparables.
+
+Soient $X, Y$ propres sur $S$, à fibres géom. intègres. Le préschéma $\underline{\mathrm{Corr}}_S(X, Y)$ [classes de correspondances] existe-t-il ? \emph{Oui} par Raynaud…
+
+\page{313}
+\emph{Proposition.} Soit $X$ propre, plat, de prés. finie sur $S$. Alors $\underline{\mathrm{Pic}}^{\tau}_{X/S}$ est un sous-foncteur \emph{ouvert} \add{de prés. finie} de $\underline{\mathrm{Pic}}_{X/S}$. L'immersion ouverte $\underline{\mathrm{Pic}}^{\tau}_{X/S} \to \underline{\mathrm{Pic}}_{X/S}$ est aussi une immersion fermée si $X \to S$ \add{projectif} à fibres géom. intègres.
+\marginal{projectif est-il nécessaire ? \struck{\ill{} \ill{}}}
+
+Cette notion équivaut au \ill{}
+\note{phrase interrompue}
+
+\emph{Corollaire.} $X$ comme dessus, $L$ un module inversible. Alors l'ens. $U$ des $s \in S$ tels que $L_s$ sur $X_s$ soit \struck{\ill{}} $\tau$-équiv. à $0$ est \emph{ouvert} \emph{rétrocompact}. Il est ouvert et fermé si $X \to S$ \add{projectif} à fibres géom. intègres.
+
+On peut supposer $S$ noethérien. À prouver que $U$ est stable par générisation, et que si $s \in U$, alors $U \cap \overline{\{s\}}$ \struck{\ill{} \ill{}} contient un voisinage de $s$ dans $\overline{\{s\}}$. Or le critère (viii~b') implique facilement la première condition (en se ramenant au cas où $S$ est un trait, et où son pt fermé \struck{\ill{} \ill{}} est dans $U$). La deuxième condition est pratiquement triviale. Pour prouver que $U$ est \emph{fermé} si $X/S$ \add{projectif} à fibres géom. intègres, on est ramené à prouver qu'il est stable par spécialisation. On le voit sur le critère (viii~e).
+
+\emph{Question.} Éliminer l'hyp. projective dans la deuxième partie.
+\marginal{?}
+Prouver, si $X \to S$ est \emph{normal}, que $\underline{\mathrm{Pic}}^{0}_{X/S}$ est « fermé » dans $\underline{\mathrm{Pic}}_{X/S}$, ou mieux, que $\underline{\mathrm{Pic}}^{0}_{X/S}$ est \emph{propre sur $S$} ?? Cela signifie
+
+\page{314}
+aussi : si $X$ est normal et propre sur \struck{le} un \emph{trait} $S$ (avec $f_*(\underline{\mathcal{O}}_X) = \underline{\mathcal{O}}_S$ si on veut), et muni d'une section $g$ sur $S$, alors tout module inversible $\underline{L}_t$ sur $X_t$ ($t$ pt générique de $S$) qui est alg. équiv. à $0$ se prolonge-t-il \add{en un $\underline{L}$} à $X$, \add{et $L_s$ \ill{} alg. équiv. à $0$} ?? C'est vrai si $\underline{\mathrm{Pic}}_{X/S}$ est représentable, ce qui \struck{d'après Raynaud} est le cas si $X/S$ est \emph{projectif} ! Peut-être est-ce vrai dans le cas \struck{\ill{}} (i.e. $\underline{\mathrm{Pic}}_{X/S}$ représentable si $X \to S$ propre plat et à fibres géom. normales, voire seulement intègres…)\,?
+
+\end{document}

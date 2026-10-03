@@ -1,0 +1,397 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 57, batch 8 (pages 141-160).
+% Established from the facsimile archives/batches/57/batch-08.pdf, per the skill
+% transcribe-grothendieck.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-03 — first pass, unchecked against the pages by a human.
+%
+% Fourteen of the twenty pages are transcribed (or carry a \page{}). Absent:
+% p. 142 (typed IHES letter to a third party, no hand of his), p. 145 (blank),
+% pp. 147, 149, 151, 155 (English typescript on analytic surfaces, unrelated).
+% Page 156 is a cover in his hand (« Foncteurs de Picard, Diviseurs… »): it
+% becomes the section heading and gets no \page{}. Pages 153, 158, 160 are EGA
+% proof sheets; only their pencil annotations are given, hand not firmly attributed.
+%
+%   141, 143, 144 — the class xi_n in H^2(S, nE) for a smooth projective curve
+%     minus an etale divisor; E = Pic^0 of the pinched curve Z; eta in H^1(S,E).
+%   146, 148, 150 — Pic of a reduced connected curve over k alg. closed:
+%     linear part G, multiplicative/additive dimensions, cycles of the graph.
+%   152, 154 — sketches of stable-like curves and counts 3g-3, sum nu_i.
+%   157, 159 — A), A'), A''), A''') equivalences: bases of f_*L, maps to P^N,
+%     special morphisms, Brauer-Severi fibrations, Hom^spec_S(X,P^N) mod GP(N).
+%
+% Notation: underlined sheaves as \underline{...}; Pic as \underline{\mathrm{Pic}}
+% where he underlines, \operatorname{Pic} otherwise.
+
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{57}
+\batch{8}
+\pages{141}{160}
+\foldertitle{Picard : tapuscrit annoté (s.d.), lettres (s.d., 1962).}
+\dating{1962-[vers 1968]}
+\watermark{Édition de démonstration}
+
+\begin{document}
+
+\page{141}
+\note{le lot s'ouvre sur un argument nouveau ; rien ne paraît venir des pages précédentes}
+$f : X \to S$ projectif et lisse, fibres géométriques connexes de dim~1.
+
+$U = X - Y$, \quad $Y$ sous-schéma fermé de $X$ \emph{étale} sur $S$
+\marginal{\uncertain{p. ex.} $Y = \coprod_{i \in I} g_i(S)$, les $g_i$ des sections telles que les $g_i(S)$ deux à deux disjoints}
+
+$f_U : U \to S$
+
+$n$ premier aux car. résiduelles \add{de $S$}. On trouve
+\[
+  E_2^{pq} = H^p(S, R^q_! f_U(\mu_n)) \Longrightarrow H^*_{\mathrm{prop}}(U, \mu_n),
+\]
+où $R^q_! f_U(\mu_n)$ est $0$ sauf $q = 1, 2$ :
+\[
+  R^q_! f_U(\mu_n) =
+  \begin{cases}
+    0 & \text{si } q \neq 1, 2 \\
+    {}_n E & \text{si } q = 1 \\
+    (\mathbb{Z}/n\mathbb{Z})_S & \text{si } q = 2
+  \end{cases}
+\]
+(déf. de $E$ cf. plus bas)
+
+\drawing{schéma du terme $E_2$ : deux lignes de croix au-dessus de l'axe horizontal, la première croix de la ligne supérieure marquée d'un astérisque}
+\[
+  \begin{array}{ccc}
+    E_2^{0,2} & \longrightarrow & E_2^{2,1} \\
+    \| & & \| \\
+    H^0(S, \mathbb{Z}/n\mathbb{Z}) & & H^2(S, {}_n E)
+  \end{array}
+\]
+On trouve un élément canonique
+\[
+  \xi_n \in H^2(S, {}_n E).
+\]
+Si $n = \ell^\nu$ ($\nu$ variable), $\ell$ premier distinct des car. rés. sur $S$, on trouve
+\[
+  \boxed{\xi(\ell) \in H^2(S, T_\ell(E))}
+\]
+\emph{Cet élément est nul si} $U$ \emph{a une section sur} $S$.
+
+$E$ est un schéma en groupes lisse sur $S$, \struck{\ill{}} \add{à fibres connexes,} (extension de $J = \underline{\mathrm{Pic}}^0_{X/S}$ par $T = \mathbb{G}_m^I / \mathbb{G}_m$ \add{diagonal}),
+\[
+  0 \to T \to E \to J \to 0, \qquad T = \mathbb{G}_{m,S}^I / \mathbb{G}_{m,S}.
+\]
+
+\page{143}
+On obtient $E$ ainsi : \struck{\ill{}} on définit un schéma en courbes plat $Z$ sur $S$ comme conoyau de
+\[
+  X \amalg (Y \times_S Y) \rightrightarrows X
+  \qquad (\alpha : Y \hookrightarrow X),
+\]
+les deux flèches étant $(\mathrm{id}_X, \alpha\, \mathrm{pr}_1^{Y/S})$ et $(\mathrm{id}_X, \alpha\, \mathrm{pr}_2^{Y/S})$, et on définit
+\[
+  E = \underline{\mathrm{Pic}}^0_{Z/S}.
+\]
+\struck{\ill{}} Le morphisme $E \to J$ est induit par $X \xrightarrow{\varphi} Z$ en passant au $\underline{\mathrm{Pic}}^0_{/S}$. Notons que nous avons un torseur canonique $P$ sous $E$,
+\[
+  P = \underline{\mathrm{Pic}}^1_{Z/S}
+\]
+(et, d'ailleurs, un $S$-morphisme can.\ $U \to P$). Notons que $P$ définit un élément
+\[
+  \boxed{\eta \in H^1(S, E)},
+\]
+et la relation entre $\xi_n$ et $\eta$ \uncertain{est}
+\[
+  \boxed{\xi_n = \partial_n(\eta)},
+\]
+\marginal{à vérifier……}
+où $\partial_n$ est l'opérateur cobord
+\[
+  H^1(S, E) \longrightarrow H^2(S, {}_n E)
+\]
+associé à la suite exacte de Kummer
+\[
+  0 \to {}_n E \to E \xrightarrow{\;n_E\;} E \to 0 .
+\]
+
+\page{144}
+Notons que l'image de $\eta$ dans $H^1(S, J)$, par fonctorialité, n'est autre que la classe de $\underline{\mathrm{Pic}}^1_{X/S}$ (considéré comme torseur sous $J$). \uncertain{Si} $U$ a une section, cette classe est nulle. Ceci est le cas si $X/S$ admet une section $\xi$. \struck{p. ex.} Alors la suite exacte
+\[
+  H^0(S, J) \to H^1(S, T) \to H^1(S, E) \to H^1(S, J)
+\]
+montre que $\eta$ est dans $\operatorname{Im} H^1(S, T)$.
+
+Notons qu'on a d'ailleurs une suite exacte (si $Y \to S$ surjectif)
+\[
+  (*) \qquad 0 \to \mathbb{G}_{m,S} \to \prod_{Y/S} \mathbb{G}_m \to T \to 0
+\]
+qui donne une suite exacte \struck{\ill{}}
+\[
+  \begin{aligned}
+  0 &\to H^0(S, \mathcal{O}_S)^* \to H^0(Y, \mathcal{O}_Y)^* \to H^0(S, T) \to \operatorname{Pic}(S) \to \operatorname{Pic}(Y) \\
+    &\to H^1(S, T) \to \mathrm{Br}'(S) \to \mathrm{Br}'(Y),
+  \end{aligned}
+\]
+Lorsque la suite exacte $(*)$ est scindée, p. ex. lorsque $Y$ admet une section sur $S$, alors on trouve
+\[
+  \text{\struck{$H^1(S,T) =$}} \quad H^1(S, T) \simeq \operatorname{Pic}(Y) / \operatorname{Im} \operatorname{Pic}(S),
+\]
+et lorsque $Y = \coprod_{i \in I} g_i(S)$ comme ci-dessus, alors \struck{\ill{}}
+\[
+  \operatorname{Pic}(Y) \simeq \operatorname{Pic}(S)^I
+\]
+et on trouve
+\[
+  H^1(S, T) \simeq \operatorname{Pic}(S)^I / \operatorname{Im} \operatorname{Pic}(S)
+\]
+(\,$\hookrightarrow$ par diagonale). Si p. ex. $\operatorname{Pic}(S) = 0$, on trouve $\eta = 0$, \uncertain{a fortiori} les $\xi_n$, $\xi_\ell$ sont nuls.
+
+\page{146}
+Soit $C$ une courbe complète, réduite et connexe sur $k$ \add{alg. clos}. On veut calculer $\operatorname{Pic}_C$.
+\[
+  0 \to \underline{\mathcal{O}}_C^* \to \underline{\widetilde{\mathcal{O}}}_C^* \to \prod_p A_p^* \to 0
+  \qquad p \text{ les pts doubles}
+\]
+\[
+  0 \to \mathbb{G}_m \to \prod_{C_i} \mathbb{G}_m \to \prod_{p_\alpha} A_p \to \operatorname{Pic}_{C/k} \to \prod \operatorname{Pic}_{\widetilde{C}_i/k} \to 0
+\]
+\note{une accolade réunit les trois premiers termes de la seconde suite, avec un mot au-dessous, peut-être « tore » ; en marge droite, $k[t]/t^2$ et le croquis d'un point de rebroussement}
+On trouve que l'on a dans $\operatorname{Pic}_{C^0/k}$ une partie linéaire, \struck{\ill{}} \uncertain{et} isomorphe à
+\[
+  G = \Bigl(\prod_{p_\alpha} A_{p_\alpha}\Bigr) \Big/ \bigl(\textstyle\prod \mathbb{G}_m / \mathbb{G}_m\bigr)
+\]
+dont la dimension est égale à :
+\[
+  \dim G = \sum \mu_\alpha - c_0 + 1
+\]
+\marginal{$c_0 = $ nb des composantes $C_i$}
+où $\mu_\alpha = \dim P_\alpha = \dim_k \underline{\widetilde{\mathcal{O}}}_C / \underline{\mathcal{O}}_C$ \struck{\ill{}}. \uncertain{Posons},
+\[
+  \mu_\alpha = 1 + \delta_\alpha, 
+\]
+\note{ici et dans la suite du lot, de courts symboles biffés et illisibles à l'intérieur des formules sont omis}
+\note{la suite de la page est barrée de deux longs traits obliques ; elle se lit ainsi}
+\struck{$\dim G = c_1 - c_0 + 1 + \sum \delta_\alpha = b_1 + \sum \delta_\alpha$}
+\marginal{$c_0 - c_1 = 1 - b_1$}
+\struck{où $b_1$ est le nombre de cycles dans le schéma combinatoire de $C$.}
+
+\struck{La dimension de $C$ \uncertain{partie} \add{additive} \ill{} de $G$ \uncertain{est}}
+
+\struck{$\sum_\alpha (\nu_\alpha - 1) = \bigl(\sum \nu_\alpha\bigr) - c_1 = 2c_0 - c_1 =$}
+
+\struck{$\sum_\alpha (\mu'_\alpha) - c_0 + 1$} \quad $\sum (\mu_\alpha - \mu'_\alpha)$
+
+\struck{où $\mu'_\alpha$ est la \uncertain{multiplicité} \ill{}} « ensembliste » de $P_\alpha$, $=$ \ill{} \uncertain{nombre des branches} passant par $\alpha$.
+
+\page{148}
+Posons
+\[
+  \mu_\alpha = \mu'_\alpha + \mu''_\alpha ,
+\]
+$\mu'_\alpha$ partie multiplicative $=$ nb des branches \emph{formelles} passant par $P_\alpha$, diminué de~1 ;
+
+$\mu''_\alpha$ partie additive \struck{\ill{}}.
+\[
+  \text{\struck{Dim}}\ \dim G_{\mathrm{mult}} = \sum \mu'_\alpha - c_0 + 1 = h_{\underline{1}}
+\]
+\marginal{invariant topologique de 2 situations}
+[N.B. Lorsque les $C_i$ \struck{\ill{}} \add{\ill{}} \struck{\ill{}}, alors $h_1$ \struck{\ill{}} \uncertain{peut} être déterminé par combinatoirement \add{combinatoire de $C$} \struck{\ill{}}. Il \uncertain{est} \ill{} par le schéma combinatoire de la \uncertain{situation} \ill{} $\widetilde{C} \to C$ ; c'est \ill{} le \uncertain{rang} \ill{} du \ill{} $\mathrm{H}^1(C) \to \prod \mathrm{H}^1(\widetilde{C})$, (\uncertain{\ill{} de Weil}) ou du \uncertain{conoyau} de
+\[
+  \prod \pi_1(\widetilde{C}_i) \to \pi_1(C) \;]
+\]
+\[
+  \text{\struck{Dim}}\ \dim G_{\mathrm{add}} = \sum \mu''_\alpha
+\]
+Dire que $\operatorname{Pic}^0$ \ill{} par des composantes \struck{$C_i$ \ill{}} \ill{}, \uncertain{signifie} que les \uncertain{multiplicités} \uncertain{formelles}, \struck{\ill{}}, \uncertain{sont} $\mu_\alpha = \mu'_\alpha \geq 2$, \uncertain{i.e.} \ill{} \uncertain{que} les $P_\alpha$ \uncertain{sont} \uncertain{des} \ill{} \uncertain{dont} \uncertain{chacun} un V.A. \struck{\ill{}} \add{\ill{}} \uncertain{plus} \struck{\ill{}} \uncertain{de plus}…
+\note{lecture très lâche : le dernier paragraphe, écrit vite et repris, n'est sûr que dans ses formules}
+
+\page{150}
+\struck{il \uncertain{faut} \ill{}} Les $C_i$ \struck{\ill{}} \uncertain{non singulières}
+[\uncertain{car} $\operatorname{Pic}^0_{C_i/k}$ est un quotient de $\operatorname{Pic}^0_{C/k}$] et \uncertain{par}
+\struck{\uncertain{Alors} $\mu'_\alpha$ \ill{} $\nu_\alpha$ \ill{} $C_i$ \ill{}}.
+On a, si $i \neq j$, \uncertain{alors} $C_i$ et $C_j$ \uncertain{se} \uncertain{coupent} \ill{} \ill{} \uncertain{en} \ill{} \uncertain{seul} \uncertain{point}
+[\uncertain{car} $\operatorname{Pic}(C_i \cup C_j)$ est un \uncertain{quotient} de $\operatorname{Pic}(C)$]. \struck{\ill{} $\nu_\alpha$ \ill{}}
+
+\struck{$C_i$ \ill{} \ill{} $P_\alpha$}, \uncertain{\ill{}} \uncertain{deux} \uncertain{à} \uncertain{deux} \uncertain{distincts},
+\[
+  \dim G_{\mathrm{mult}} = \sum (\nu_\alpha - 1) - c_0 + 1
+  = \sum_i (\text{nb des pts } P_\alpha \text{ sur } C_i - 1) - \cdots
+\]
+\note{une ligne entoure les deux expressions et les relie au $C_i$ barré plus haut}
+\uncertain{En} \uncertain{fin} de \uncertain{compte}, \uncertain{cette} \uncertain{façon} \uncertain{pour} \ill{} \ill{} \uncertain{peut} \uncertain{avoir} des cycles
+\drawing{cinq segments de droite se coupant deux à deux en formant un pentagone}
+\uncertain{dans} le schéma combinatoire de $C$. \struck{\ill{}},
+\uncertain{Réciproquement}, si $C$ n'a que des pts \struck{\ill{}} \add{multiples} « multiplicatifs », et si \uncertain{les} $C_i$ \uncertain{sont} \ill{} \uncertain{non} singulières, \ill{} \uncertain{on} \uncertain{voit} \uncertain{par} \uncertain{récurrence} \uncertain{sur} \ill{} \uncertain{des} $C_i$ que $C \to \operatorname{Pic}^0_{C/k} \to$ \ill{} \uncertain{une} V.A.
+
+On a \uncertain{en} \uncertain{tout} \uncertain{cas}
+\[
+  \begin{aligned}
+  g = \dim \operatorname{Pic}_{C/k} &= \sum g_i + \Bigl(\sum_\alpha \mu_\alpha - c_0 + 1\Bigr) \\
+  &= \sum g_i + \rho + \sigma
+  \end{aligned}
+\]
+\marginal{$g_i = $ genre de $\widetilde{C}_i$}
+$\rho = $ nb des cycles combinatoire\supplied{s}, $+$ \uncertain{nombre} \uncertain{des} \uncertain{multiplications} \uncertain{multiplicatives} \uncertain{des} $C_i$ [\uncertain{cette} \uncertain{dernière} \uncertain{est} $0$ \uncertain{si} les $C_i$ \uncertain{non} \uncertain{sing.}]
+
+$\sigma = $ \uncertain{somme} des multiplicités \uncertain{additives} des $P_\alpha$.
+
+\page{152}
+\drawing{page de croquis de courbes stables : configurations de composantes rationnelles (traits) se coupant transversalement, l'une marquée $g$ ; une autre à deux composantes marquées $g'$ et $g''$, avec}
+\[
+  g' + g'' = g \qquad (g' g'' > 0)
+\]
+\drawing{une chaîne de composantes rationnelles marquée $g = 0$, avec « $(g = 0$ » ; un ovale ; un arc portant des points épaissis, accompagné de croix ; plusieurs étoiles de droites concourantes ; un pentagone de droites marqué de points ; deux lettres $k$ isolées}
+\[
+  \sum_{g_i \geq 1} (3g_i - 3 + \nu_i)
+  + \sum_{g_i = 1} \underbrace{(1 + \nu_i - 1)}_{3g_i - 3 + \nu_i}
+  + \sum_{\substack{g_i = 0 \\ \nu_i \geq 3}} \underbrace{\nu_i - 3}_{3g_i - 3 + \nu_i}
+\]
+$\nu_i = $ nb des pts \struck{\ill{}} \add{\uncertain{doubles}} sur $C_i$.
+\[
+  3 \sum g_i - 3c_0 + \sum \nu_i
+  \;\text{\struck{$+$}}\; {}^{\lambda}\!\!\sum_{\substack{g_i = 0 \\ \nu_i = 2}} (3 - \nu_i)
+\]
+\note{la dernière somme est encadrée et barrée d'un trait oblique ; le $\lambda$ est écrit au-dessus du signe}
+$\lambda = $ nb des composantes $C_i$ de genre $0$, \uncertain{avec} $\nu_i = 2$ (\uncertain{minimum} \ill{})
+
+[tout cycle est formé exclusivement de courbes rationnelles, \struck{\ill{}} \add{\uncertain{un cycle}} \uncertain{minimal} \uncertain{est} \uncertain{de} \uncertain{longueur} \ill{}]
+\[
+  \sum g_i = g - \rho \qquad (\rho = \text{nombre cycles combinatoires})
+\]
+$3g - $ \ill{}
+
+\page{153}
+\note{feuillet d'épreuves imprimées des \emph{Éléments de géométrie algébrique} (chap.~I, §~6.4--6.5) ; seule la correction manuscrite est transcrite, la main n'étant pas attribuée avec certitude}
+Dans (6.4.13) : « ce \struck{sont donc les seuls} \add{qui donnent à ces} morphismes \struck{qui aient} une signification « géométrique » ».
+
+\page{154}
+Conditions \uncertain{particulières} :
+
+a) $\operatorname{Pic}^0_{C/k}$ est abélien
+
+b) les $\mu_\alpha = 0$ i.e. tous les pts doubles \struck{\ill{}} ordinaires, \emph{et} $b_1 = 0$ [\uncertain{en particulier} les $C_i$ sont non singulières]
+Conditions \uncertain{particulières} :
+
+a) $\operatorname{Pic}^0_{C/k}$ n'a pas de composante additive.
+
+b) \struck{Donc} \uncertain{Pour} tout $\alpha$, on a $\mu_\alpha = \mu'_\alpha$ i.e. la \uncertain{multiplicité} est \uncertain{maximale}.
+\drawing{en marge gauche, une suite de croquis de courbes : une boucle à point double, des configurations de droites concourantes, un point marqué « 1 » ; d'autres croquis en bas de page}
+\[
+  \sum_i \nu_i = \sum_\alpha (\mu_\alpha)
+  = \text{\struck{$\sum$}}\ \underbrace{(\mu_\alpha - 1)}_{c_0 - 1 + \rho} + c_1
+\]
+\note{sous le premier membre, $\mu_\alpha - 1$ ; à gauche, un « 3 » barré au-dessus d'un « 6 »}
+\[
+  \boxed{\sum \nu_i = c_0 - 1 + \rho + c_1}
+  \qquad \rho = g - \sum g_i
+\]
+\[
+  \begin{aligned}
+  &3g - 3\rho - 3c_0 + \text{\struck{$c_0$}}\ \underbrace{\ -1 + \rho}\ + c_1 + \lambda \\
+  &3g - 2\rho - 2c_0 + c_1 + \lambda - 1 \\
+  &3g - 3\ \bigl[2(c_0 + \rho) - c_1 - \lambda - 2\bigr]
+  \end{aligned}
+\]
+\note{une ligne relie la première de ces lignes à « $\sum g_i = g - \rho$ », écrit en marge droite}
+\drawing{plusieurs configurations de composantes concourantes ; une boucle à point double ; un arc portant un point épaissi}
+$\nu_s \geq 3$
+
+courbe elliptique $+ k$ points dessus ($k \geq 1$)
+\[
+  \text{\struck{$k$}} \qquad -6 + 2 - 1 = -5 \qquad 9 - 5 = 4
+\]
+
+\section{Foncteurs de Picard, Diviseurs…}
+\note{intitulé de sa main, seul en haut d'un feuillet par ailleurs blanc (p.~156)}
+
+\page{157}
+$X$ schéma \emph{\uncertain{projectif}} \add{\ill{}} sur $S$
+
+\struck{\ill{}} Soit $\underline{L}$ inversible \add{\uncertain{très ample}} sur $X$, tel que $f_*(\underline{L}) = E$ [\uncertain{loc.} libre de rang $N$] \add{\uncertain{tel que}} \marginal{\uncertain{inutile} ?} $i : X \to P(E)$ \uncertain{soit} \uncertain{défini}
+
+A) Équivalence\supplied{s}
+
+(i) Donner une base de $E = f_*(\underline{L})$ i.e. un isom. $\underline{\mathcal{O}}_S^N \xrightarrow{\sim}$ \struck{$E$}
+
+(ii) Donner un isom. $\varphi : \mathbb{P}^N_S \xrightarrow{\sim} P(E)$, $\oplus$ un isom. $(\varphi^{-1} i)^*(\underline{\mathcal{O}}(1)) \simeq \underline{L}$
+
+(iii) Donner un \struck{\ill{}} morphisme
+  \[
+    g : X \to \mathbb{P}^N_S
+  \]
+  $\oplus$ un isomorphisme $\alpha : g^*(\underline{\mathcal{O}}(1)) \simeq \underline{L}$
+  tels que l'homomorphisme
+  \[
+    g_*(\underline{\mathcal{O}}(1)) \to f_*(\underline{L}) = E
+  \]
+  soit un isom. [condition qui ne dépend que de \uncertain{la} \uncertain{classe} de $g$]
+\marginal{\uncertain{La} \uncertain{définition} \uncertain{de} \uncertain{l'équivalence} \ill{} \ill{} \uncertain{bien} \uncertain{des} \ill{} \ill{} \uncertain{des} \ill{} \ill{} \uncertain{ces} \ill{}. N.B. \ill{} \ill{} \ill{} A')}
+\marginal{Compatibilité \uncertain{avec} \uncertain{opérations} \uncertain{de} $\Gamma(\underline{\mathcal{O}}_S^*)$ et \uncertain{la} \uncertain{définition}}
+
+\uncertain{A')} Équivalence\supplied{s}
+
+(i) Donner une \struck{\ill{}} \add{\uncertain{classe}} de \uncertain{bases} \uncertain{des} \uncertain{fibres} de $E$ modulo $\underline{\mathcal{O}}_S^*$
+
+(ii) Donner un isom.
+  \[
+    \varphi : \mathbb{P}^N_S \to P(E)
+  \]
+
+(iii) Donner un morphisme
+  \[
+    g : X \to P
+  \]
+  tel que 1°) $g^*(\underline{\mathcal{O}}(1)) \underset{S}{\simeq} \underline{L}$ \emph{relativement à $S$} ;
+  2°) l'homom.\ $g_*(\underline{\mathcal{O}}(1)) \xrightarrow{\sim} f_*(g^*(\underline{\mathcal{O}}(1)))$ \uncertain{un} isom.
+  \note{sous l'accolade : « \uncertain{homomorphisme} \uncertain{spécial} »}
+
+\page{158}
+\note{feuillet d'épreuves imprimées des \emph{Éléments de géométrie algébrique} (chap.~0, §~7.5--7.6, anneaux adiques et anneaux complets de fractions) ; le texte imprimé n'est pas reproduit. Seule l'annotation manuscrite de la marge est transcrite ; la main n'est pas attribuée avec certitude}
+\marginal{définition insuffisante : il faut avoir que les $c_i$ et $\mathfrak{J}B$ engendrent $\mathfrak{J}B/\mathfrak{J}^2B$ !}
+\note{l'annotation porte, par un trait, sur la phrase « Soit $(c_j)$ un système fini d'éléments de $B$ dont les classes mod.~$\mathfrak{J}^2B$ engendrent la $(A/\mathfrak{J}^2)$-algèbre $B/\mathfrak{J}^2B$ »}
+
+\page{159}
+\uncertain{En} \uncertain{un} \uncertain{mot}, \uncertain{on} \uncertain{a} \ill{} \ill{} $\leq$
+
+A'') Équivalence entre les données suivantes
+
+(i) Une $S$-donnée $\xi$ de faisceau inversible sur $S$, et un isom.
+  \[
+    \varphi : \mathbb{P}^N_\xi \xrightarrow{\sim} P_\xi
+  \]
+  \marginal{qui est \uncertain{morphisme} \ill{}}
+
+(ii) Une \uncertain{Donnée} d'un morphisme
+  \[
+    g : X \to \mathbb{P}^N_S
+  \]
+  tel que \struck{\ill{}} $g_*(\underline{\mathcal{O}}(1)) \to f_*(g^*(\underline{\mathcal{O}}(1)))$ soit un isomorphisme
+\marginal{morphisme spécial \ill{} \uncertain{dans} \uncertain{un} \uncertain{projectif}}
+\marginal{\struck{Attention}, \uncertain{Notations} :
+$\underline{L}$ \add{spécial} morphique sur $X/S$ $+$ trivialisation \uncertain{projective}
+$\downarrow$
+$S$-donnée $\xi$ sur $S$, $+$ trivialisation \uncertain{projective}
+$\|$
+Morphisme spécial $X \to \mathbb{P}^N_S$
+$\downarrow$
+$\underline{L}'$ morphique spécial sur $X$, et trivialisation projective
+\quad $\#$ \quad isom.\ \uncertain{canonique} \ill{} \uncertain{identique}}
+\note{ce schéma, entouré d'un trait qui le rattache à (ii), est écrit dans la marge droite ; une ligne barrée « \ill{} les données » le ferme}
+
+A''') Équivalence \ill{}
+
+(i) Une $S$-donnée \struck{\ill{}} \add{\uncertain{de}} « \struck{\ill{}} faisceaux » \struck{\ill{}} \add{\uncertain{morphique}} \uncertain{et} \uncertain{spécial} \struck{$X$} sur $S$, \uncertain{de} \add{Brauer-Severi} sur $X$
+
+(ii) Un fibré de Brauer-Severi \uncertain{associé} à un fibré \emph{principal} de groupe $GP(N)$ $+$ morphisme \struck{spécial} $g : X_P \to P^N_{\struck{\ill{}}}$ \struck{\ill{}} \struck{\ill{}}, \uncertain{ce} morphisme étant \emph{covariant} pour $GP(N)$
+\marginal{spécial $=$ \uncertain{par} \uncertain{changement} de \uncertain{base}, \ill{} \ill{} et les \uncertain{fibres} \uncertain{des} \uncertain{définissent} \ill{} \uncertain{morphisme}, \ill{} \ill{} \uncertain{projectif} \ill{} \uncertain{fibré} \ill{} \struck{\ill{}} $N$ \ill{}}
+
+\uncertain{Si} \uncertain{on} \uncertain{introduit} $\mathfrak{J}\,\underline{\mathrm{Hom}}_S(X, P^N)$ où $GP(N)$ opère, \uncertain{et} \uncertain{le} \uncertain{sous-schéma} \uncertain{ouvert} $\mathfrak{J}\,\underline{\mathrm{Hom}}^{\mathrm{spéc}}_S(X, P^N)$ [\ill{} \ill{} $X$ \struck{\ill{}} projectif sur $S$ \uncertain{localement}], \uncertain{alors} $GP(N)$ opère \uncertain{sans} \uncertain{pts} \uncertain{fixes} \uncertain{sur} $\underline{\mathrm{Hom}}^{\mathrm{spéc}}_S(X, P^N)$, et les structures A''') \ill{}…
+\note{la page s'arrête sur cette phrase inachevée ; le coin inférieur gauche porte une longue note marginale, très raturée, dont on lit \uncertain{introduction} \ill{} $g^*(\underline{\mathcal{O}}(1))$ \ill{} et quelques mots rattachés par des traits au texte ; elle n'est pas transcrite plus avant}
+
+\page{160}
+\note{feuillet d'épreuves imprimées des \emph{Éléments de géométrie algébrique}, chap.~I, §~1.1 (spectre premier d'un anneau) ; seules les annotations manuscrites au crayon sont transcrites, la main n'étant pas attribuée avec certitude}
+\marginal{Enfin $\mathfrak{j}(\{x\}) = \mathfrak{j}_x$ \quad (sert pour 1.1.7 !)}
+\note{ajout proposé après (1.1.3.1) ; dans (1.1.9), le renvoi « prop.~(1.1.1, (iv)) » est corrigé à la main}
+\marginal{En particulier, $X = D(1)$ est qu.-cpct}
+\note{ajout proposé à la fin de l'énoncé (1.1.10, (ii))}
+
+\end{document}
