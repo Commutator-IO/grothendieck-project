@@ -1,0 +1,923 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 107, pages 1-25
+% (the whole folder).
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried moves into
+% a footnote. It is held to being mathematically correct as it stands; where
+% the manuscript is loose or mistaken, the true statement is what appears here
+% and the footnote says what the page has. In any dispute of substance the
+% transcription governs: whoever cites Grothendieck must cite
+% batch-01.fr.tex and batch-02.fr.tex.
+%
+% Scope: the folder was read whole — two batches, pages 1-25 — before any of
+% this was written, and it is ONE file for the shelfmark. Pages 4, 6, 8, 10,
+% 12, 19 and 25 are printed listings with nothing of his mathematics; pages 1
+% and 17 are covers.
+%
+% Notation fixed for the whole document.
+%  - p_A : A x B -> B and p_B : A x B -> A, his convention: the index names
+%    the factor the projection forgets. Hom without index (underlined) is the
+%    internal Hom of a presheaf category; Hom_A = p_{B*} Hom and
+%    Hom_B = p_{A*} Hom are the relative Homs, valued in A^ and B^.
+%  - X' : A° -> B^ and X'' : B° -> A^ the two curried forms of X in (A x B)^
+%    (page 3's convention, kept on page 5 where he swaps them).
+%  - L ⊠ M = p_B^*(L) x p_A^*(M); X^M = Hom(p_A^*(M), X); X ⊗ M the levelwise
+%    copower; Gamma''_M(X) = p_{B*} X^M.
+%  - pi_0(P) for a presheaf P: the set of connected components of its
+%    category of elements (the edition's, used to state the corrected
+%    Proposition of page 13).
+%  - In the second part: Hot_A, Hot(W) as he writes them; J his interval
+%    object, X ⊗ J the cylinder (X x Delta(1) when A = Delta).
+%
+% Substantive departures from the pages (footnoted where they occur):
+%  - p. 13: the Proposition (L, M) |-> L ⊠ M fully faithful, with
+%    Hom(L' ⊠ M', L ⊠ M) = Hom(L', L) x Hom(M', M), is false in general
+%    (M' = empty); the true formula carries exponents pi_0(M'), pi_0(L'), and
+%    the statement holds for L', M' connected. The domain is A^ x B^, not its
+%    opposite. The Corollary on internal Homs needs a x L', b x M' connected.
+%  - p. 13: the last identification with a single « ! » on (A^ x B^)° would
+%    describe A^ x B^, not (A x B)^; the separate condition !! is the right one.
+%  - p. 15: p_B^* commutes with internal Homs (true in general, Frobenius);
+%    but Hom(L' ⊠ M', L ⊠ e) = Hom(L', L) ⊠ e for arbitrary M', and L^M = L
+%    for arbitrary M, are false; true when b x M is connected for every b
+%    (for B = Delta: M connected). The canonical map L -> L^M always exists.
+%  - p. 9: the comparison map between the coproduct in A^ and in A goes from
+%    the former to the latter; the page draws it the other way.
+%  - p. 11: ^gX(a) needs p_{A*}, not p_{B*}; the underbrace X^M labels
+%    p_{B*} X^M = Gamma''_M(X).
+%  - p. 5: Gamma''_M(X) = epsilon_M o X', not epsilon_M o Gamma''_M, and X'
+%    (not X'') is the form A° -> B^.
+%  - p. 20: « Injectivity of (*) ? » introduces what is the surjectivity of
+%    (*); page 24 records it as such.
+%  - p. 22: the struck « non » before « trivial cofibration »: j is a
+%    cofibration and not a trivial one.
+%  - p. 24 and the margin of p. 20: the injectivity of (*) fails in general
+%    (Milnor's lim^1; an example is given, the edition's), so X_oo is not a
+%    colimit in Hot and A^ -> Hot_A does not commute with countable filtered
+%    colimits; the rectification criterion of p. 20's margin is right and can
+%    fail (an example is given, the edition's).
+%
+% Announced and not established: the answer to the question of page 18 (the
+% folder leaves it at « not clear at all … Ask Ronnie Brown! »); the
+% interpretation of Hom(M, a) => a (p. 14, « ?? »); the sense of page 2's
+% sentence that breaks off; Quillen's proposition (Chap. II, n° 2.4) is cited,
+% not reproduced, and was not checked against Quillen's text here. No page
+% carries a letter c of the English run.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-03 — first pass, unchecked against the pages by a human.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{107}
+\pages{1}{25}
+\dating{[à partir de 1982]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Closed models [notes postérieures à PS ?] : notes manuscrites (s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Ces vingt-cinq feuillets, écrits au dos de listings d'ordinateur, sont des
+notes de travail sur l'homotopie vue à travers les « modèles fermés » de
+Quillen, c'est-à-dire les catégories de modèles. Ils ont deux parties.
+
+La première monte une machinerie. Une famille d'objets indexée par deux
+catégories $A$ et $B$ --- un tableau à double entrée --- peut se lire ligne par
+ligne ou colonne par colonne, et l'on a le droit de passer d'une lecture à
+l'autre. Le cas qui intéresse Grothendieck est celui où $B$ est la catégorie
+des simplexes : un objet du tableau est alors un objet simplicial, une suite
+d'objets $X_{0}, X_{1}, X_{2}$, …, reliés par des faces et des
+dégénérescences, comme les sommets, arêtes, triangles d'une triangulation. Il
+s'agit d'exprimer, dans ce langage, deux opérations : « élever $X$ à la
+puissance d'une forme $M$ » --- l'objet des familles de points de $X$
+paramétrées par $M$ --- et « multiplier $X$ par $M$ », c'est-à-dire en prendre
+autant de copies que $M$ a de cellules, recollées comme $M$. Ces deux
+opérations sont adjointes l'une de l'autre, à la manière dont, pour des
+ensembles, une application de $X \times M$ vers $Y$ est la même chose qu'une
+application de $X$ vers l'ensemble des applications de $M$ dans $Y$. C'est
+exactement la structure dont Quillen a besoin pour parler de catégories de
+modèles « simpliciales », dans lesquelles les homotopies se manipulent comme en
+topologie.
+
+La seconde partie pose une question précise : la catégorie homotopique, où
+l'on a identifié les objets ayant le même type d'homotopie, a-t-elle des
+limites inductives le long d'une suite $X_{0} \to X_{1} \to X_{2} \to \cdots$,
+et la limite ordinaire la fournit-elle ? Une application de la limite vers
+$Y$ donne, étage par étage, des applications compatibles à homotopie près ; la
+question est de savoir si l'on peut revenir en arrière, et de façon unique. On
+peut toujours trouver une application qui recolle les étages : il suffit de
+corriger les représentants un à un, en poussant chaque étage le long d'une
+homotopie. L'unicité est une autre affaire : deux applications qui sont
+homotopes à chaque étage le sont-elles globalement ? Il faudrait choisir les
+homotopies elles-mêmes de façon compatible, et chaque choix peut défaire le
+précédent. Les notes s'arrêtent là-dessus, « pas clair du tout », et se
+promettent de poser la question à Ronald Brown. La réponse, connue depuis
+Milnor (1962), est négative en général : l'obstruction est un groupe
+$\varprojlim^{1}$, et il existe des applications non nulles qui sont nulles à
+chaque étage.
+
+Les feuillets sont datés par le papier : les listings portent des dates de
+juin 1982, ce qui donne une borne inférieure et rien de plus. Le vocabulaire
+--- catégorie test, objet de Kan relatif à un localisateur $\underline{W}$ ---
+est celui de \emph{Pursuing Stacks}, rédigé à partir de 1983, ce qui s'accorde
+avec le titre des archivistes sans le démontrer.
+
+\keywords{presheaves on a product category, external product, weighted limit, cotensor, copower, simplicial objects, simplicial enrichment, matching object, simplicial model category, homotopy extension property, homotopy lifting, test category, sequential homotopy colimit}
+\end{resume}
+
+\section*{Le fil du dossier, et les conventions}
+
+\begin{enumerate}
+\item[1.] \emph{Préfaisceaux sur un produit} (pages 1 à 3) : les deux lectures
+de $(A \times B)^{\wedge}$, les Hom relatifs, les foncteurs d'évaluation
+$\Gamma''_{b}$ ; un premier départ en anglais, annulé, pour $B = \Delta$ (page
+2).
+\item[2.] \emph{Le cotenseur $X^{M}$} (pages 5 et 7) : $\Gamma''_{M}$, limite
+pondérée par un préfaisceau $M$ sur $B$, et la stabilité des objets
+« représentables en chaque degré ».
+\item[3.] \emph{Le tenseur $X \otimes M$ et l'adjonction} (page 9).
+\item[4.] \emph{Récapitulation} (page 11).
+\item[5.] \emph{Produit extérieur} (pages 13 à 15) : la Proposition et son
+Corollaire, à corriger ; l'objet $X^{\dot{\Delta}_{n}}$ (page 14) ;
+$p_{B}^{*}$ et les Hom internes (page 15).
+\item[6.] \emph{Propriétés universelles de $\widehat{A}$} (page 16, annulée).
+\item[7.] \emph{Limites inductives filtrantes dans Hot} (pages 17 à 24) : la
+question et la réduction aux monomorphismes (page 18) ; la surjectivité (page
+20) ; le carré relatif et sa rectification (pages 21 à 23) ; l'injectivité
+(page 24).
+\end{enumerate}
+
+Deux suites de lettres de sa main paginent les feuillets : en français,
+a à g, sur les pages impaires 3 à 15 ; en anglais, a (page 18), b (page 20),
+puis e (page 22) et d (page 24), sans c nulle part. La lecture suit l'ordre des
+archivistes, qui est aussi celui de l'argument : le carré relatif des pages 21
+à 23 est une digression, et la page 24 s'ouvre sur « Returning to our initial
+pb ».\footnote{L'ordre e avant d est celui du dossier ; on ne le corrige pas.
+Rien n'indique ce qu'aurait contenu une page c.}
+
+\emph{Conventions.} $A$ et $B$ sont deux petites catégories, $\widehat{A}$ la
+catégorie des préfaisceaux d'ensembles sur $A$, dans laquelle on identifie $A$
+à son image par Yoneda ; $e_{\widehat{A}}$ est le préfaisceau final et
+$\Gamma_{A} = \mathrm{Hom}(e_{\widehat{A}}, -) = \varprojlim_{A^{\circ}}$ le
+foncteur des sections. On garde sa notation pour les projections :
+\[
+p_{B} : A \times B \to A, \qquad p_{A} : A \times B \to B,
+\]
+l'indice nommant le facteur \emph{oublié}.\footnote{C'est la convention de
+toutes les pages, et la seule qui rende ses formules justes : $p_{B*}$ arrive
+dans $\widehat{A}$, $p_{A}^{*}(b)$ est l'image réciproque d'un représentable de
+$B$. On écrirait aujourd'hui $\mathrm{pr}_{1}$ et $\mathrm{pr}_{2}$.} Pour un
+préfaisceau $X$ sur $A \times B$, on note
+\[
+X' : A^{\circ} \to \widehat{B}, \quad a \mapsto X(a, -), \qquad
+X'' : B^{\circ} \to \widehat{A}, \quad b \mapsto X(-, b)
+\]
+ses deux formes curryfiées. $\underline{\mathrm{Hom}}$ sans indice est le Hom
+interne d'une catégorie de préfaisceaux ; les Hom relatifs sont
+\[
+\underline{\mathrm{Hom}}_{A}(X, Y) = p_{B*}\, \underline{\mathrm{Hom}}(X, Y)
+\in \widehat{A}, \qquad
+\underline{\mathrm{Hom}}_{B}(X, Y) = p_{A*}\, \underline{\mathrm{Hom}}(X, Y)
+\in \widehat{B}.
+\]
+Pour un préfaisceau $P$, $\pi_{0}(P) = \varinjlim P$ est l'ensemble des
+composantes connexes de sa catégorie des éléments, et $P$ est dit
+\emph{connexe} si $\pi_{0}(P)$ est un point.\footnote{Cette notation est la
+nôtre ; elle sert à énoncer la forme correcte de la Proposition de la page 13
+et de ses conséquences.}
+
+\emph{Annoncé, non établi} : la réponse à la question
+de la page 18 ; le sens de la flèche $\underline{\mathrm{Hom}}(M, a)
+\Rightarrow a$ marquée « ?? » (page 14) ; la proposition de Quillen invoquée
+à la page 20, citée et non reproduite.
+
+\pagerange{1}{3}
+\section*{Préfaisceaux sur un produit (pages 1 à 3)}
+
+La couverture de la page 1 annonce le programme : « Formalisme des
+$X \otimes M$, $X^{M}$, $\underline{\mathrm{Hom}}_{A}$,
+$\underline{\mathrm{Hom}}_{B}$ relatif ».\footnote{Le titre est écrit à
+l'encre par-dessus l'en-tête d'un listing daté « 06/04/82 » ; il continue par
+deux mots lus avec doute, « définitions » et, souligné, « produits ». Le
+listing de la page 19, du même travail, est daté « 04 JUIN 82 » : les
+feuillets ne sont pas antérieurs à juin 1982.}
+
+\pagerange{2}{2}
+\subsection*{Le cas simplicial, premier départ (page 2)}
+
+La page 2, en anglais, annulée par deux traits, part du cas $B = \Delta$. Elle
+note $p_{A*}X = (\Gamma_{A} X_{n})_{n}$ et $p_{\Delta*}X = X_{0}$ --- la
+seconde formule parce que $[0]$ est final dans $\Delta$, de sorte que $\Gamma_{\Delta}$ est l'évaluation en $[0]$ --- et affirme que, pour un préfaisceau $L$
+sur $A$ vu comme objet simplicial constant $p_{\Delta}^{*}(L)$,
+\[
+\bigl(\underline{\mathrm{Hom}}(L, X_{n})\bigr)_{n} \simeq
+\underline{\mathrm{Hom}}\bigl(p_{\Delta}^{*}(L), X\bigr),
+\qquad
+\bigl(\mathrm{Hom}(L, X_{n})\bigr)_{n} \simeq
+\underline{\mathrm{Hom}}_{\Delta}\bigl(p_{\Delta}^{*}(L), X\bigr),
+\]
+la seconde se déduisant de la première par $p_{A*}$. Les deux sont exactes :
+la valeur en $(a, n)$ du second membre de la première est
+$\mathrm{Hom}\bigl(p_{\Delta}^{*}(a \times L) \times p_{A}^{*}(\Delta_{n}),
+X\bigr) = \mathrm{Hom}(a \times L, X_{n})$. La seconde est l'ensemble
+simplicial des applications de $L$ dans $X$, celui qui fait des objets
+simpliciaux une catégorie simpliciale.\footnote{La page écrit
+$\underline{\mathrm{Hom}}_{A}(L, X_{n})$ pour le Hom interne de $\widehat{A}$,
+avec le même indice que pour le Hom relatif $\underline{\mathrm{Hom}}_{A} =
+p_{\Delta*}\,\underline{\mathrm{Hom}}$ qu'elle vient de définir ; on supprime
+l'indice. La vérification est la nôtre : la phrase qui devait la donner
+s'arrête sur « This is easily checked (see below) to be », « justified » étant
+ajouté au-dessus. Le sommet de gauche du premier diagramme est lu avec doute ;
+la marge gauche porte, en travers, des fragments sans lien apparent avec le
+texte ($X(a, b) = M(b)$, $u \mapsto u(i_{0})$, …).}
+
+\pagerange{3}{3}
+\subsection*{Deux lectures d'un même préfaisceau (page 3)}
+
+On a les identifications
+\[
+(A \times B)^{\wedge} \simeq \underline{\mathrm{Hom}}(A^{\circ}, \widehat{B})
+\simeq \underline{\mathrm{Hom}}(B^{\circ}, \widehat{A}),
+\qquad X \mapsto X', \ X \mapsto X'',
+\]
+et les foncteurs $p_{B*} : (A \times B)^{\wedge} \to \widehat{A}$,
+$p_{A*} : (A \times B)^{\wedge} \to \widehat{B}$, adjoints à droite de
+$p_{B}^{*}$ et $p_{A}^{*}$. Comme $q_{A} p_{B} = q_{B} p_{A}$ est la flèche vers
+la catégorie ponctuelle,
+\[
+\mathrm{Hom}(X, Y) \simeq \Gamma_{A}\, \underline{\mathrm{Hom}}_{A}(X, Y)
+\simeq \Gamma_{B}\, \underline{\mathrm{Hom}}_{B}(X, Y).
+\]
+
+\emph{Évaluation en $b$.} Pour $b \in \mathrm{Ob}\, B$, soit
+$\Gamma''_{b} : (A \times B)^{\wedge} \to \widehat{A}$, $X \mapsto X''(b) =
+X(-, b)$. Alors, fonctoriellement en $b$ et $X$,
+\[
+\Gamma''_{b}(X) \simeq p_{B*}\, \underline{\mathrm{Hom}}\bigl(p_{A}^{*}(b),
+X\bigr) = \underline{\mathrm{Hom}}_{A}\bigl(p_{A}^{*}(b), X\bigr).
+\]
+En effet, pour $a \in \mathrm{Ob}\, A$, l'adjonction $p_{B}^{*} \dashv p_{B*}$
+puis celle du Hom interne donnent
+\[
+\mathrm{Hom}_{\widehat{A}}\bigl(a, p_{B*}\, \underline{\mathrm{Hom}}(p_{A}^{*}(b),
+X)\bigr) \simeq \mathrm{Hom}\bigl(p_{B}^{*}(a) \times p_{A}^{*}(b), X\bigr)
+= X(a, b),
+\]
+parce que $p_{B}^{*}(a) \times p_{A}^{*}(b)$ est le préfaisceau représenté par
+$(a, b)$.\footnote{La page termine la chaîne par « OK ». Plusieurs indices
+$A$, $B$ y sont récrits l'un sur l'autre ; on suit la lecture finale, qui est
+la seule cohérente avec la convention des projections. Au-dessus, la page dit
+$\Gamma''_{b}$ « déduit par $(A \times B)^{\wedge} \simeq
+\underline{\mathrm{Hom}}(A^{\circ}, B)$ » : il faut lire $\widehat{B}$. Un
+paragraphe symétrique, sur les $\Gamma'_{a} = X'(a) \simeq p_{A*}\,
+\underline{\mathrm{Hom}}(p_{B}^{*}(a), X)$, est annulé par trois traits ; il
+est juste. Les mots de la phrase qui introduit $\Gamma''_{b}$ sont en partie
+illisibles ; on ne les restitue pas.}
+
+\pagerange{5}{7}
+\section*{Le cotenseur $X^{M}$ (pages 5 et 7)}
+
+\emph{Une troisième lecture de $\Gamma''_{b}$.} Soit $\varepsilon_{b} :
+\widehat{B} \to (\mathrm{Ens})$, $G \mapsto \mathrm{Hom}(b, G) = G(b)$ ; alors
+$\Gamma''_{b}(X) = \varepsilon_{b} \circ X'$. Cela se généralise à un
+préfaisceau quelconque $M$ sur $B$ : avec $\varepsilon_{M}(G) =
+\mathrm{Hom}_{\widehat{B}}(M, G)$, posons
+\[
+\Gamma''_{M}(X) = \varepsilon_{M} \circ X' : \quad a \longmapsto
+\mathrm{Hom}_{\widehat{B}}\bigl(M, X(a, -)\bigr).
+\]
+C'est la limite du diagramme $X'' : B^{\circ} \to \widehat{A}$ pondérée par
+$M$.\footnote{Le nom de limite pondérée est le nôtre ; il n'est pas sur la
+page. La page écrit ici $X'' : A^{\circ} \to \widehat{B}$, alors que la page
+3 réserve $X''$ à la forme $B^{\circ} \to \widehat{A}$, et
+« $X'' \mapsto \varepsilon_{M} \circ \Gamma''_{M}$ » pour la définition, où le
+sens demande $\varepsilon_{M} \circ X'$. La première ligne de la page est
+biffée et récrite au-dessus ; la nouvelle lecture est douteuse.} On a,
+fonctoriellement en $M$ et $X$,
+\[
+\Gamma''_{M}(X) \simeq p_{B*}\, \underline{\mathrm{Hom}}\bigl(p_{A}^{*}(M),
+X\bigr),
+\]
+car les deux membres, évalués en $a$, valent
+$\mathrm{Hom}\bigl(p_{B}^{*}(a) \times p_{A}^{*}(M), X\bigr)$ : à droite par
+les deux adjonctions comme à la page 3, à gauche parce que
+$\mathrm{Hom}_{\widehat{B}}(M, X'(a)) = \mathrm{Hom}_{\widehat{B}}(M,
+p_{A*}\underline{\mathrm{Hom}}(p_{B}^{*}(a), X))$.\footnote{La page conduit les
+deux calculs en colonnes et les relie par une double flèche courbe marquée
+« OK ! ». Le terme $p_{A*}(\underline{\mathrm{Hom}}(p_{B}^{*}(a), X))$ de la
+colonne de gauche est raturé et de lecture douteuse ; c'est $\Gamma'_{a}(X) =
+X'(a)$, et c'est ce qu'il doit être.}
+
+\emph{Le cotenseur.} On pose, pour $M \in \mathrm{Ob}\, \widehat{B}$,
+\[
+X^{M} \overset{\text{déf}}{=} \underline{\mathrm{Hom}}\bigl(p_{A}^{*}(M),
+X\bigr) \in (A \times B)^{\wedge},
+\qquad \text{d'où} \qquad \Gamma''_{M}(X) = p_{B*}\, X^{M}.
+\]
+Sa valeur en $(a, b)$ est $\mathrm{Hom}_{\widehat{B}}\bigl(b \times M, X(a,
+-)\bigr)$ ; autrement dit $(X^{M})'' (b) = \Gamma''_{b \times M}(X)$.
+
+\emph{Stabilité} (page 7). On s'intéresse à la sous-catégorie pleine
+$\underline{\mathrm{Hom}}(B^{\circ}, A)$ de $(A \times B)^{\wedge}$, formée des
+$X$ dont chaque $X''(b)$ est représentable --- pour $B = \Delta$, la catégorie
+$sA$ des objets simpliciaux de $A$. Si $B$ a un objet final $e_{B}$, $p_{B*}$
+est l'évaluation en $e_{B}$, $p_{B*} = \Gamma''_{e_{B}}$, et envoie donc
+$\underline{\mathrm{Hom}}(B^{\circ}, A)$ dans $A$.\footnote{La page écrit
+« $p_{B*}$ $(= (\Gamma_{B})^{\circ})$ » suivi d'un mot illisible, qu'on lit
+par le sens : $p_{B*}$ envoie $\underline{\mathrm{Hom}}(B^{\circ}, A)$ dans $A$.
+L'objet final est supposé à cet endroit, et la justification « car il
+s'identifie alors à $\Gamma''_{e_{B}}$ » est de sa main. Le diagramme qui
+suit a deux flèches qui convergent vers un point où rien n'est écrit.}
+$X^{M}$ reste dans $\underline{\mathrm{Hom}}(B^{\circ}, A)$ dès que $A$ a les
+limites projectives requises : $(X^{M})''(b)$ est la limite de $X''$ pondérée
+par $b \times M$, c'est-à-dire la limite dans $A$ du diagramme des
+$X''(c)$ indexé par la catégorie des éléments de $b \times M$. Pour $B =
+\Delta$ et $M$ fini, des limites finies suffisent.\footnote{Il écrit :
+« moyennant éventuellement des conditions de finitude », et « il suffit que $A$
+soit stable par limites du type requis pour représenter $M$ » ; la précision
+sur la catégorie des éléments de $b \times M$ est la nôtre. Le mot
+« limites » est lu avec doute.} En revanche,
+$\underline{\mathrm{Hom}}(B^{\circ}, A)$ ne contient pas les $p_{A}^{*}(M)$
+eux-mêmes, sauf cas dégénéré : il faudrait que, pour tout $b$, le préfaisceau
+constant de valeur $M(b)$ sur $A$ soit représentable, ce qui force $M(b)$ à
+être un point --- un représentable $h_{x}$ constant a $\mathrm{End}(x)$ réduit
+à l'identité --- et $A$ à avoir un objet final : $M = e_{\widehat{B}}$.
+« !! »\footnote{C'est une note de bas de page de sa main, serrée sur trois
+lignes, dont plusieurs mots sont illisibles ; sa conclusion, « $M$ objet
+final de $B^{\wedge}$, et $A$ admet objet final !! », se lit. L'argument entre
+tirets est le nôtre.}
+
+Enfin, pour $X, Y$ dans $(A \times B)^{\wedge}$, en appliquant $p_{A*}$ à
+l'adjonction du Hom interne,
+\[
+\underline{\mathrm{Hom}}_{B}(X, Y^{M}) \simeq
+\underline{\mathrm{Hom}}_{B}\bigl(X \times p_{A}^{*}(M), Y\bigr).
+\]
+
+\pagerange{9}{9}
+\section*{Le tenseur $X \otimes M$ (page 9)}
+
+Pour $X, Y$ dans $\underline{\mathrm{Hom}}(B^{\circ}, A)$, on voudrait
+trouver le membre de gauche de cette formule dans
+$\underline{\mathrm{Hom}}(B^{\circ}, A)$ aussi. Or $X \times p_{A}^{*}(M)$ est,
+comme foncteur $B^{\circ} \to \widehat{A}$,
+\[
+b \longmapsto X''(b) \times M(b) = \coprod^{\widehat{A}}_{\sigma \in M(b)}
+X''(b),
+\]
+une somme dans $\widehat{A}$ de représentables, qui n'est presque jamais
+représentable. Supposons que $A$ ait des sommes (des sommes finies si les
+$M(b)$ sont finis), et définissons $X \otimes M \in
+\underline{\mathrm{Hom}}(B^{\circ}, A)$ par
+\[
+(X \otimes M)(b) = \coprod^{A}_{\sigma \in M(b)} X''(b),
+\]
+la somme étant prise cette fois dans $A$. La flèche canonique va de la somme
+dans $\widehat{A}$ vers la somme dans $A$,
+\[
+i_{b} : \bigl(X \times p_{A}^{*}(M)\bigr)''(b) =
+\coprod^{\widehat{A}}_{\sigma \in M(b)} X''(b) \longrightarrow
+\coprod^{A}_{\sigma \in M(b)} X''(b),
+\]
+et elle induit une bijection sur les flèches vers un représentable ; c'est la
+définition même de la somme dans $A$.\footnote{La page trace la flèche
+$i_{b}$ (lecture douteuse de l'indice) de la somme dans $A$ vers la somme dans
+$\widehat{A}$ ; il n'y a pas de flèche naturelle dans ce sens. Les deux sommes
+portent en exposant la catégorie où elles sont prises, comme ici.} D'où, pour
+$X, Y$ dans $\underline{\mathrm{Hom}}(B^{\circ}, A)$, fonctoriellement,
+\[
+\underline{\mathrm{Hom}}_{B}(X, Y^{M}) \simeq \underline{\mathrm{Hom}}_{B}(X
+\otimes M, Y).
+\]
+Le calcul est le suivant. La valeur en $b'$ du membre de droite de la formule
+de la page 7 est $\mathrm{Hom}\bigl(X \times p_{A}^{*}(M \times b'),
+Y\bigr)$ ; comme les $Y''(c)$ sont représentables, une flèche
+$X \times p_{A}^{*}(N) \to Y$ est la même chose qu'une flèche $X \otimes N \to
+Y$, et $(X \otimes M) \otimes b' = X \otimes (M \times b')$.\footnote{Cette
+vérification est la nôtre ; la page énonce la formule. Sous l'accolade de la
+formule précédente, une notation raturée laisse deviner $X \otimes M$.}
+
+Pour $B = \Delta$, c'est la structure simpliciale de la catégorie $sA$ des
+objets simpliciaux de $A$ : $(X \otimes K)_{n} = \coprod_{K_{n}} X_{n}$ pour
+un ensemble simplicial $K$, l'ensemble simplicial
+$\underline{\mathrm{Hom}}_{\Delta}(X, Y)$ des applications de $X$ dans $Y$, et
+le cotenseur $Y^{K}$ ; $sA$ est ainsi \emph{tensorisée} et
+\emph{cotensorisée} sur les ensembles simpliciaux.\footnote{Les deux mots sont
+les nôtres. C'est la structure qu'utilise Quillen (\emph{Homotopical Algebra},
+1967, chap.~II, §1--2) pour les objets simpliciaux d'une catégorie ayant les
+limites et les sommes finies, et c'est elle que la seconde partie du dossier
+emploie sous la forme du cylindre $X \otimes J$.}
+
+\pagerange{11}{11}
+\section*{Récapitulation (page 11)}
+
+Notons ${}^{g}L = p_{B}^{*}(L)$ pour $L \in \mathrm{Ob}\, \widehat{A}$ et
+${}^{d}M = p_{A}^{*}(M)$ pour $M \in \mathrm{Ob}\, \widehat{B}$, et $L
+\boxtimes M = {}^{g}L \times {}^{d}M$ ; pour $a$, $b$ représentables, $a
+\boxtimes b$ est le représentable $(a, b)$. Alors
+\[
+X(L, M) \overset{\text{déf}}{=} \mathrm{Hom}(L \boxtimes M, X), \qquad X(a, b)
+= \Gamma_{A \times B}\, \underline{\mathrm{Hom}}(a \boxtimes b, X),
+\]
+\[
+{}^{g}X(L) = \underline{\mathrm{Hom}}_{B}({}^{g}L, X) \in \widehat{B}, \qquad
+{}^{d}X(M) = \underline{\mathrm{Hom}}_{A}({}^{d}M, X) = p_{B*}\, X^{M} =
+\Gamma''_{M}(X) \in \widehat{A},
+\]
+avec, pour $L = a$, ${}^{g}X(a) = X'(a)$, et pour $M = b$, ${}^{d}X(b) =
+X''(b)$ ; et l'adjonction de la page 9, $\underline{\mathrm{Hom}}_{B}(X,
+Y^{M}) \simeq \underline{\mathrm{Hom}}_{B}(X \otimes M, Y)$.\footnote{La
+première ligne de la page écrit $p_{B*}$ dans les formules de ${}^{g}X(a)$ et
+de ${}^{d}X(b)$, l'indice du premier étant surchargé ; pour ${}^{g}X(a)$ il
+faut $p_{A*}$, comme la page l'écrit d'ailleurs deux lignes plus bas pour
+${}^{g}X(L)$. L'accolade marquée $X^{M}$ couvre
+$p_{B*}\,\underline{\mathrm{Hom}}({}^{d}M, X)$, qui est $p_{B*}X^{M}$ et non
+$X^{M}$ lui-même. Les mots « identifié à » et « identifiés », au-dessus de
+$p_{B}^{*}(a)$ et $p_{A}^{*}(b)$, sont lus avec doute.}
+
+\pagerange{13}{13}
+\section*{Le produit extérieur (page 13)}
+
+Les identifications de la page 3 se prolongent aux préfaisceaux :
+\[
+(A \times B)^{\wedge} \simeq \underline{\mathrm{Hom}}(A^{\circ}, \widehat{B})
+\simeq \underline{\mathrm{Hom}}^{!}(\widehat{A}^{\circ}, \widehat{B})
+\simeq \underline{\mathrm{Hom}}^{!!}\bigl(\widehat{A}^{\circ} \times
+\widehat{B}^{\circ}, (\mathrm{Ens})\bigr),
+\]
+où $\underline{\mathrm{Hom}}^{!}$ désigne les foncteurs qui commutent aux
+limites projectives quelconques --- ceux qui transforment les limites
+inductives de $\widehat{A}$ en limites projectives --- et
+$\underline{\mathrm{Hom}}^{!!}$ ceux qui le font en chaque variable
+séparément. Le préfaisceau $X$ correspond au foncteur $(L, M) \mapsto X(L, M)
+= \mathrm{Hom}(L \boxtimes M, X)$.\footnote{La page note ces conditions par
+un « ! » et un « !! » en indice, et la marge précise : « le signe ! signifie :
+foncteurs commutant aux $\varprojlim$ quelconques ! » ; la page 16 met le
+signe en indice pour la commutation aux limites inductives et en exposant
+pour les limites projectives, et c'est cette dernière convention qu'on suit
+partout. La ligne se termine par un dernier terme,
+$\underline{\mathrm{Hom}}_{!}((\widehat{A} \times \widehat{B})^{\circ},
+\mathrm{Ens})$, avec un seul signe ; pris au sens d'une condition sur le
+produit, il décrirait les préfaisceaux sur la somme $A \sqcup B$,
+c'est-à-dire $\widehat{A} \times \widehat{B}$, et non $(A \times
+B)^{\wedge}$. C'est la condition séparée !! qui convient ; la fin de la note
+marginale, « et un seul signe ! relatif », est en partie illisible.}
+
+\textbf{Proposition} (forme exacte). Pour $L, L' \in \mathrm{Ob}\,
+\widehat{A}$ et $M, M' \in \mathrm{Ob}\, \widehat{B}$,
+\[
+\mathrm{Hom}(L' \boxtimes M', L \boxtimes M) \simeq
+\mathrm{Hom}(L', L)^{\pi_{0}(M')} \times \mathrm{Hom}(M', M)^{\pi_{0}(L')}.
+\]
+En particulier, si $L'$ et $M'$ sont connexes,
+\[
+\mathrm{Hom}(L' \boxtimes M', L \boxtimes M) \simeq \mathrm{Hom}(L', L)
+\times \mathrm{Hom}(M', M),
+\]
+et le foncteur $(L, M) \mapsto L \boxtimes M$, de $\widehat{A} \times
+\widehat{B}$ dans $(A \times B)^{\wedge}$, est pleinement fidèle sur les
+couples de préfaisceaux connexes.
+
+\emph{Démonstration.} Un morphisme vers un produit est un couple de
+morphismes, et $\mathrm{Hom}(L' \boxtimes M', p_{B}^{*}(L)) \simeq
+\mathrm{Hom}(p_{B!}(L' \boxtimes M'), L)$ avec $p_{B!}(L' \boxtimes M') = L'
+\times \pi_{0}(M')$, la somme de $\pi_{0}(M')$ copies de $L'$ ; de même pour
+l'autre facteur.
+
+La page énonce la Proposition sans restriction : $(L, M) \mapsto L \boxtimes
+M$ pleinement fidèle, et $\mathrm{Hom}(L' \boxtimes M', L \boxtimes M) =
+\mathrm{Hom}(L', L) \times \mathrm{Hom}(M', M)$. C'est faux en général : pour
+$M' = \varnothing$, le premier membre est un point et le second est
+$\mathrm{Hom}(L', L)$.\footnote{La démonstration de la page vérifie la formule
+pour $L' = a$, $M' = b$ représentables, où elle est vraie « par définition »,
+puis observe que les deux membres, comme foncteurs de $(L', M')$,
+transforment limites inductives en limites projectives dans les deux
+variables. C'est vrai du premier membre, puisque $\boxtimes$ commute aux
+limites inductives en chaque variable, et faux du second : $\mathrm{Hom}(L',
+L) \times \mathrm{Hom}(M', M)$, à $M'$ fixé, ne transforme en limites
+projectives que les limites inductives \emph{connexes} en $L'$, le facteur
+constant faisant obstacle aux sommes et à la limite vide. Un préfaisceau
+connexe étant limite inductive connexe de représentables (sa catégorie des
+éléments est connexe), l'argument établit exactement la forme restreinte. Il
+écrit d'abord « Corollaire », biffé, puis « Proposition ». Il fait aussi
+partir le foncteur de $(\widehat{A} \times \widehat{B})^{\circ}$ ; la variance
+correcte est covariante, de $\widehat{A} \times \widehat{B}$, et c'est ce
+qu'il utilise en identifiant $L \boxtimes M$ au foncteur qu'il représente
+sur $\widehat{A} \times \widehat{B}$. La forme générale avec les exposants
+$\pi_{0}$ est la nôtre.}
+
+\textbf{Corollaire.} Supposons que, pour tous $a \in \mathrm{Ob}\, A$ et $b
+\in \mathrm{Ob}\, B$, les préfaisceaux $a \times L'$ et $b \times M'$ soient
+connexes. Alors
+\[
+\underline{\mathrm{Hom}}(L' \boxtimes M', L \boxtimes M) \simeq
+\underline{\mathrm{Hom}}(L', L) \boxtimes \underline{\mathrm{Hom}}(M', M).
+\]
+On évalue les deux membres en $(a, b)$, en utilisant $(a \boxtimes b) \times
+(L' \boxtimes M') = (a \times L') \boxtimes (b \times M')$ et la
+Proposition.\footnote{La page démontre le Corollaire ainsi, sans hypothèse,
+et note « ok » au pied du calcul ; l'hypothèse de connexité est celle que la
+Proposition exige pour $a \times L'$ et $b \times M'$, et sans elle la formule
+peut être fausse (prendre $A$ discret à deux objets et $L'$ représenté par l'un
+d'eux). Elle est satisfaite si $L'$ et $M'$ sont connexes et si les produits de
+deux représentables de $\widehat{A}$, et de $\widehat{B}$, sont connexes ---
+par exemple si $A$ et $B$ ont des produits, ou pour $B = \Delta$, où
+$\Delta_{n} \times \Delta_{m}$ est connexe. Sur la page, les deux colonnes du
+calcul sont côte à côte.}
+
+\pagerange{14}{14}
+\section*{Les objets $X^{\Delta_{n}}$ et $X^{\dot{\Delta}_{n}}$ (page 14)}
+
+Une page de formules isolées, pour $B = \Delta$ et $X$ un objet simplicial :
+\[
+(X^{\Delta_{n}})_{0} = p_{\Delta*}\bigl(\underline{\mathrm{Hom}}(p_{A}^{*}(\Delta_{n}),
+X)\bigr) = X_{n}, \qquad
+(X^{\dot{\Delta}_{n}})_{0} = \varprojlim_{\Delta_{k} \to \dot{\Delta}_{n}} X_{k}
+= (\mathrm{Cosk}_{n-1} X)_{n},
+\]
+la seconde étant la limite des $X_{k}$ sur les faces propres du simplexe ---
+ce qu'on appelle aujourd'hui l'\emph{objet de recollement} (matching object)
+de $X$ en degré $n$.\footnote{Le nom est le nôtre. La page écrit la limite
+« $\varprojlim(X_{n-1}, X_{n-2}, \cdots)$ », arguments lus avec doute, et
+porte en marge $(\mathrm{Cosk}_{n-1}X)_{n}$, ainsi qu'un petit triangle
+hachuré dont les côtés sont marqués $x_{1}$ ; $\dot{\Delta}_{n}$ est le bord
+de $\Delta_{n}$.} Puis, pour un morphisme $X \to Y$, les deux flèches
+\[
+X^{\Delta_{n}} \longrightarrow X^{\dot{\Delta}_{n}}
+\times_{Y^{\dot{\Delta}_{n}}} Y^{\Delta_{n}}, \qquad
+X_{n} \longrightarrow (X^{\dot{\Delta}_{n}})_{0}
+\times_{(Y^{\dot{\Delta}_{n}})_{0}} Y_{n},
+\]
+la seconde étant la composante de degré $0$ de la première. Ce sont les
+flèches dont Quillen demande qu'elles soient des fibrations dans l'axiome
+des catégories de modèles simpliciales, et dont la seconde définit
+aujourd'hui les fibrations de Reedy.\footnote{Les deux rapprochements sont les
+nôtres ; la page ne porte aucun texte.}
+
+Restent trois formules sans texte, dont une question : pour $a$ un objet de
+$A$ vu comme objet simplicial constant, a-t-on $\underline{\mathrm{Hom}}(M, a)
+\simeq a$, c'est-à-dire $a^{M} = a$ ? La page la marque « ?? » ; la page 15
+y répond, sous une hypothèse sur $M$ qu'elle ne dit pas.\footnote{Les deux
+autres formules, $\mathrm{Hom}(X \times M, a) \simeq \mathrm{Hom}(X, -)$ et
+$\mathrm{Hom}(\alpha \boxtimes (\beta \times M), \alpha \boxtimes e_{B}) \simeq
+\mathrm{Hom}(\alpha \boxtimes \beta, \alpha \boxtimes e_{B})$, sont
+inachevées, la seconde touchant le bord de la feuille et de lecture douteuse
+dans son dernier argument. Elles préparent le calcul de la page 15.}
+
+\pagerange{15}{15}
+\section*{$p_{B}^{*}$ et les Hom internes (page 15)}
+
+\textbf{Corollaire.} $p_{B}^{*} : \widehat{A} \to (A \times B)^{\wedge}$
+commute aux Hom internes,
+\[
+\underline{\mathrm{Hom}}\bigl(p_{B}^{*}(L'), p_{B}^{*}(L)\bigr) \simeq
+p_{B}^{*}\, \underline{\mathrm{Hom}}(L', L),
+\]
+et de même $p_{A}^{*}$. C'est le Corollaire de la page 13 pour $M' = M =
+e_{\widehat{B}}$, où son hypothèse n'est pas nécessaire : avec $M =
+e_{\widehat{B}}$, le second facteur de la formule exacte est un point et le
+premier vaut $\mathrm{Hom}(a \times L', L)^{\pi_{0}(b)} = \mathrm{Hom}(a
+\times L', L)$. C'est aussi un cas de la formule de projection :
+$p_{B!}(F \times p_{B}^{*}L) = p_{B!}(F) \times L$, parce que le produit par un
+ensemble fixe commute aux limites inductives d'ensembles.\footnote{La page
+écrit « Il suffit de prendre $M' = M = e_{B^{\wedge}}$ », la première
+tentative, $M' \simeq e_{B^{\wedge}}$, étant biffée ; puis, dans la formule,
+garde $M'$ quelconque :
+$\underline{\mathrm{Hom}}(L' \boxtimes M', L \boxtimes e_{\widehat{B}}) \simeq
+\underline{\mathrm{Hom}}(L', L) \boxtimes e_{\widehat{B}}$. Sous cette forme
+la formule est fausse ($M' = \varnothing$) ; elle demande que $b \times M'$
+soit connexe pour tout $b$. La justification par la formule de projection est
+la nôtre.}
+
+\emph{Le cotenseur d'un objet constant.} Identifions $M \in \mathrm{Ob}\,
+\widehat{B}$ à $e_{\widehat{A}} \boxtimes M = p_{A}^{*}(M)$ et $L \in \mathrm{Ob}\,
+\widehat{A}$ à $L \boxtimes e_{\widehat{B}} = p_{B}^{*}(L)$. Il existe
+toujours une flèche canonique
+\[
+L \longrightarrow L^{M},
+\]
+cas de la flèche $Q \to \underline{\mathrm{Hom}}(P, Q)$ de toute catégorie
+cartésienne fermée, et
+\[
+L^{M}(a, b) = L(a)^{\pi_{0}(b \times M)} .
+\]
+Elle est donc un isomorphisme si et seulement si $b \times M$ est connexe pour
+tout $b$ ; pour $B = \Delta$, cela revient à dire que $M$ est un ensemble
+simplicial connexe, puisque $\pi_{0}$ commute aux produits finis d'ensembles
+simpliciaux. C'est la réponse à la question « ?? » de la page 14.\footnote{La
+page conclut « $L^{M} = L$ pour $L \in A^{\wedge}$, $M \in \mathrm{Ob}\,
+B^{\wedge}$ », sans hypothèse, en faisant $L' = e_{A^{\wedge}}$ et en changeant
+$M'$ en $M$ dans la formule précédente, que l'on vient de voir fausse pour
+$M'$ quelconque. Pour $M = \varnothing$, $L^{\varnothing}$ est le préfaisceau
+final et non $L$. L'expression de $L^{M}(a, b)$ et le critère sont les nôtres.
+Les mots qui précèdent « flèche canonique », et deux lignes biffées dessous,
+la première lue « produits », sont de lecture douteuse.}
+
+\pagerange{16}{16}
+\section*{Les propriétés universelles de $\widehat{A}$ (page 16)}
+
+Une page annulée par un long trait oblique, où $M$ désigne cette fois une
+catégorie, rappelle la propriété universelle de $\widehat{A}$ et sa duale.
+Notons $\underline{\mathrm{Hom}}_{!}$ les foncteurs qui commutent aux limites
+inductives, $\underline{\mathrm{Hom}}^{!}$ ceux qui commutent aux limites
+projectives, et $A^{\vee} = (A^{\circ})^{\wedge}$. Si $M$ a des limites
+inductives,
+\[
+\underline{\mathrm{Hom}}(A, M) \simeq \underline{\mathrm{Hom}}_{!}(\widehat{A},
+M), \qquad
+\underline{\mathrm{Hom}}(A^{\circ}, M) \simeq
+\underline{\mathrm{Hom}}_{!}(A^{\vee}, M) ;
+\]
+si $M$ a des limites projectives, $M^{\circ}$ a des limites inductives, et
+\[
+\underline{\mathrm{Hom}}(A, M^{\circ}) \simeq
+\underline{\mathrm{Hom}}_{!}(\widehat{A}, M^{\circ}), \qquad\text{soit}\qquad
+\underline{\mathrm{Hom}}(A^{\circ}, M) \simeq
+\underline{\mathrm{Hom}}^{!}(\widehat{A}^{\circ}, M).
+\]
+$\widehat{A}$ est la complétion de $A$ par limites inductives, et
+$\widehat{A}^{\circ}$ celle de $A^{\circ}$ par limites projectives. Le second
+cas, pour $M = \widehat{B}$, est l'identification $(A \times B)^{\wedge}
+\simeq \underline{\mathrm{Hom}}^{!}(\widehat{A}^{\circ}, \widehat{B})$ de la
+page 13.\footnote{Les noms de complétion sont les nôtres. La page écrit sous
+$M$ « stable par $\varinjlim$ » et « catégorie stable par $\varprojlim$ »,
+lectures douteuses. Une formule encadrée est barrée, et une autre,
+$\underline{\mathrm{Hom}}_{!}(A^{\vee}, M)^{\circ} \simeq
+\underline{\mathrm{Hom}}_{!}(A^{1}, M^{\circ})$, porte un exposant lu avec
+doute « 1 » qu'on n'interprète pas.}
+
+\pagerange{17}{18}
+\section*{Limites inductives filtrantes dans Hot (pages 17 et 18)}
+
+La couverture de la page 17, « Question des $\varinjlim$ filtrantes dans
+Hot », ouvre la seconde partie, en anglais.\footnote{Titre seul sur une
+feuille vierge. Les pages 18 à 24 sont en anglais ; on les lit en
+français.}
+
+\emph{La question.} La catégorie homotopique $\mathrm{Hot}$ a-t-elle des
+limites inductives filtrantes, et les foncteurs canoniques
+\[
+(\mathrm{Cat}) \longrightarrow \mathrm{Hot}(\underline{W}), \qquad
+\widehat{A} \longrightarrow \mathrm{Hot}_{A} \simeq \mathrm{Hot}(\underline{W})
+\quad (A \text{ catégorie test})
+\]
+y commutent-ils ? Le premier cas se ramène au second pour $A = \Delta$ : le
+foncteur nerf $(\mathrm{Cat}) \to \widehat{\Delta}$, défini par le foncteur
+test standard $i : \Delta \to (\mathrm{Cat})$, commute aux limites inductives
+filtrantes, parce que les catégories $i([n])$ sont de présentation finie.\footnote{Le
+vocabulaire --- catégorie test, $\mathrm{Hot}_{A}$, localisateur
+$\underline{W}$ --- est celui de \emph{Pursuing Stacks}. La parenthèse sur
+« of f.p. » n'est pas refermée sur la page.}
+
+\emph{Réduction aux monomorphismes.} Pour un système indexé par un ensemble
+dénombrable, on se ramène à une suite $X_{0} \xrightarrow{f_{0}} X_{1}
+\xrightarrow{f_{1}} \cdots$. En factorisant chaque flèche en un monomorphisme
+suivi d'une équivalence d'homotopie, on construit par récurrence une suite
+$X'_{0} \hookrightarrow X'_{1} \hookrightarrow \cdots$ de monomorphismes et des
+équivalences $u_{i} : X'_{i} \to X_{i}$ compatibles, $u_{0} = \mathrm{id}$,
+d'où $u_{\infty} : X'_{\infty} \to X_{\infty}$ entre les limites inductives.
+Il faut alors voir (i) que $X'_{\infty}$ est limite inductive des $X'_{i}$
+dans $\mathrm{Hot}_{A}$, et (ii) que $u_{\infty}$ est dans
+$\underline{W}$. Le point (ii) est vrai : les équivalences faibles sont
+stables par limites inductives filtrantes.\footnote{La page ne tranche pas
+(ii) ; elle le dit équivalent, une fois (i) acquis, à la commutation
+cherchée, l'expression « is equivalent to » étant biffée puis prolongée d'une
+flèche, et la fin de la phrase de lecture douteuse. La stabilité est
+classique pour les ensembles simpliciaux ; pour une catégorie test $A$, elle
+s'en déduit parce que le foncteur « catégorie des éléments » $\widehat{A}
+\to (\mathrm{Cat})$ est un adjoint à gauche et que le nerf commute aux limites
+inductives filtrantes. L'argument est le nôtre.} Tout repose donc sur (i),
+c'est-à-dire sur la propriété
+\[
+(*) \qquad \mathrm{Hom}_{\mathrm{Hot}}(X_{\infty}, Y) \longrightarrow
+\varprojlim_{i} \mathrm{Hom}_{\mathrm{Hot}}(X_{i}, Y)
+\quad \text{bijective,}
+\]
+pour une suite de monomorphismes. On peut supposer $Y$ de Kan relativement à
+$\underline{W}$, c'est-à-dire fibrant ; alors $\mathrm{Hom}_{\mathrm{Hot}}(X,
+Y)$ est l'ensemble des classes d'homotopie de flèches $X \to Y$, et la
+relation d'homotopie entre flèches $X \to Y$ coïncide avec l'homotopie
+élémentaire.\footnote{Ces deux affirmations ouvrent la page 20. Elles sont
+justes dans la structure de modèles de Kan--Quillen sur les ensembles
+simpliciaux, où tout objet est cofibrant ; « the », « among » et « the same »
+sont ajoutés entre les lignes.}
+
+\pagerange{20}{20}
+\section*{La surjectivité de $(*)$ (page 20)}
+
+Soit une famille $g_{n} : X_{n} \to Y$ avec $g_{n+1} f_{n} \sim g_{n}$ pour
+tout $n$. Il s'agit de trouver $g'_{n} \sim g_{n}$ avec $g'_{n+1} f_{n} =
+g'_{n}$ : les $g'_{n}$ définissent alors une flèche $X_{\infty} \to Y$ qui
+relève la famille. C'est la \emph{surjectivité} de $(*)$.\footnote{La page
+introduit ce problème par « Injectivity of $(*)$? ». Le problème posé
+--- remplacer une famille compatible à homotopie près par une famille
+strictement compatible --- est celui de la surjectivité, et la page 24 le
+dit : « surjection (using strongly that the transition morphisms are
+cofibrations) », avant de passer à l'injectivité.} Il se place dans une
+situation plus générale : un carré
+
+\begin{tikzcd}[column sep=large, row sep=large]
+X \arrow[r, "g"] \arrow[d, "i"'] & Y \arrow[d, "p"] \\
+X' \arrow[r, "g'"'] \arrow[ur, dashed, "\varphi"] & Y'
+\end{tikzcd}
+
+où $p g = g' i$, $i$ est une cofibration, $p$ une fibration, $X$, $X'$
+cofibrants et $Y$, $Y'$ fibrants, dans une catégorie de modèles quelconque,
+et $\varphi$ une flèche rendant les deux triangles commutatifs à homotopie
+près, $\varphi i \overset{k}{\sim} g$ et $p \varphi \overset{h}{\sim} g'$.
+Existe-t-il $\overline{\varphi} \sim \varphi$ qui les rende commutatifs,
+$\overline{\varphi} i = g$ et $p \overline{\varphi} = g'$ ?\footnote{Sous ces
+hypothèses, homotopie à gauche et à droite coïncident ; la page le dit, les
+deux signes $\sim$ portant des lettres lues avec doute $\ell$ et $r$. Dans la
+dernière formule elle écrit $\varphi$ pour $\overline{\varphi}$. Le cas de la
+suite est $i = f_{n}$, $p : Y \to e$, $g = g_{n}$, $\varphi = g_{n+1}$, la
+restitution de $f_{n} : X_{n} \to X_{n+1}$ étant douteuse. Une phrase biffée
+commence la construction d'un objet cylindre.} Il y voit « à peu près
+exactement le contenu » de la version de Quillen des théorèmes d'extension
+des homotopies pour les catégories de modèles simpliciales (proposition 4 du
+chapitre II, n°~2.4), « bien qu'il ait été un peu difficile
+d'y trouver un sens, telle qu'il l'énonçait ».\footnote{La référence est celle
+de la page ; on ne l'a pas confrontée ici au texte de Quillen.}
+
+Quand $Y' = e$, la réponse est oui, et c'est tout ce que la suite demande : la
+flèche $X' \times \{0\} \cup X \times \Delta(1) \to Y$ définie par $\varphi$ et
+$k$ s'étend à $X' \times \Delta(1)$, puisque l'inclusion est une cofibration
+triviale et $Y$ fibrant ; l'extrémité de l'homotopie étendue est
+$\overline{\varphi}$. Par récurrence, $g'_{0} = g_{0}$ et $g'_{n+1}$ obtenue
+ainsi à partir de $\varphi = g_{n+1}$ et de $g = g'_{n}$, et $(*)$ est
+surjective.\footnote{La récurrence est la nôtre ; la page 22 dit « in case
+$Y'$ is the final object, we are through! », et la page 24 tient la
+surjectivité pour acquise.}
+
+Dans le cas général, la note marginale dit : c'est possible si et seulement
+si l'on peut choisir $k$ et $h$ de sorte que les deux homotopies $p \circ k$
+et $h \circ (i \otimes J)$, qui vont toutes deux de $p \varphi i$ à $g' i$,
+soient homotopes --- relativement à leurs extrémités. « Ce n'est sans doute
+pas toujours satisfait ! » Le critère est exact, et la condition peut
+manquer.\footnote{La note est écrite en travers dans la marge gauche, et ses
+lectures sont très douteuses ; la précision « relativement à leurs
+extrémités » est la nôtre. \emph{Nécessité} : si $\overline{\varphi}$ existe,
+une homotopie $K : \varphi \sim \overline{\varphi}$ fournit $k = K \circ (i
+\otimes J)$ et $h = p \circ K$, et alors $p \circ k = h \circ (i \otimes J)$.
+\emph{Suffisance} : on modifie d'abord $h$, par extension d'homotopie le long
+de $i$, en une homotopie $\tilde{h}$ avec $\tilde{h} \circ (i \otimes J) = p
+\circ k$ ; on relève ensuite, $p$ étant une fibration, la flèche $X' \otimes
+\{0\} \cup X \otimes J \to Y$ définie par $\varphi$ et $k$ au-dessus de
+$\tilde{h}$ ; l'extrémité du relèvement est $\overline{\varphi}$.
+\emph{Exemple où la condition manque} : en topologie, $p : Y = P S^{1} \to
+S^{1}$ la fibration des chemins issus du point base $*$, $i : \{0, 1\} \to
+[0, 1]$, $g$ constante sur le chemin constant $c_{*}$, $g'$ le lacet de degré
+$1$, $\varphi = c_{*}$ constante. Les deux triangles commutent à homotopie
+près, $[0, 1]$ étant contractile ; mais un $\overline{\varphi}$ serait un
+relèvement du lacet $g'$ joignant $c_{*}$ à $c_{*}$, alors que tout relèvement
+issu de $c_{*}$ aboutit dans la composante des lacets de degré $1$ de la
+fibre $\Omega S^{1}$. Ces vérifications et l'exemple sont les nôtres.}
+
+\pagerange{21}{23}
+\section*{Relèvements et le carré relatif (pages 21 à 23)}
+
+\emph{Page 21.} Trois carrés au crayon, sans texte, sont les trois formes
+du relèvement dans une catégorie de modèles : le relèvement des homotopies,
+$A \to A \times I$ contre une fibration $p : X \to Y$ ; sa forme duale, avec
+un objet de chemins $A^{I} \xrightarrow{\partial_{0}} A$ et une cofibration
+$Y \to X$ ; et le carré de relèvement général $A \to X$, $B \to Y$.\footnote{Il
+marque la flèche $A \to A \times I$ « cof. » : c'est une cofibration
+\emph{triviale}, inclusion d'une extrémité du cylindre, et c'est pourquoi le
+relèvement existe. Le second carré porte « fib. » à gauche de $A$, et sa
+flèche $Y \to A^{I}$ est tracée en trait double. À droite du premier carré,
+deux petits croquis, une flèche prise dans une lentille, figurent
+vraisemblablement une homotopie entre deux flèches. Deux signes isolés,
+dont $Y_{\times}$ lu avec doute, ne sont pas interprétés.}
+
+\emph{Page 22.} Le carré de la page 20, avec $g_{0} = \varphi i$, $g_{1} = g$,
+$g'_{0} = p \varphi$, $g'_{1} = g'$, et $\theta_{0} = \varphi$, $\theta_{1} =
+\overline{\varphi}$ les deux diagonales. On dispose, par hypothèse,
+d'homotopies simpliciales
+\[
+k : \varphi i \longrightarrow g, \qquad h : p \varphi \longrightarrow g',
+\]
+et tout revient à pouvoir les choisir \emph{compatibles} à $i$ et à $p$,
+c'est-à-dire avec $p \circ k = h \circ (i \otimes J)$ ; si $Y'$ est l'objet
+final, c'est automatique.\footnote{« by assumption » et « simplicial » sont
+ajoutés au-dessus de la ligne ; la lettre de la première homotopie est tracée
+comme un $h$, mais les diagrammes de cette page et de la page 23 la nomment
+$k$. La page 23 porte deux esquisses au crayon du même diagramme, sur un
+listing daté 82155, début juin 1982 ; la première a des étiquettes
+différentes, en partie douteuses, la seconde est celle de la page 22. Une
+première tentative, par une somme $(X \sqcup X) \sqcup (X' \sqcup X')$ vers
+$X \otimes J \sqcup X' \otimes J$ marquée « cofib? », est barrée.} Le carré
+
+\begin{tikzcd}
+X \otimes J \arrow[r, "k"] \arrow[d, "i \otimes J"'] & Y \arrow[d, "p"] \\
+X' \otimes J \arrow[r, "h"'] & Y'
+\end{tikzcd}
+
+n'est pas commutatif a priori, mais seulement sur les extrémités $X \sqcup X
+\to X \otimes J$.
+
+La moitié inférieure de la page, annulée par deux traits croisés, réduit le
+problème à un relèvement : avec $u = (g_{0}, g_{1}) : X \sqcup X \to Y$, $j : X
+\sqcup X \to X \otimes J$ l'inclusion des extrémités et $v = h \circ (i
+\otimes J)$, chercher $k'$ avec $k' j = u$ et $p k' = v$. On connaît $k$ avec
+$k j = u$, mais seulement $p k \overset{s}{\sim} v$ et non $p k = v$. Comme $j$
+est une cofibration non triviale, rien ne garantit le relèvement ; il existe
+exactement quand $p k$ et $v$ sont homotopes relativement à $X \sqcup X$, ce
+qui est le critère de la page 20.\footnote{Sur la page, « trivial cofibration »
+est écrit à gauche de $j$, précédé d'un « non » biffé, ou lu tel avec doute ;
+$j$ est une cofibration et n'est pas triviale, l'inclusion des deux extrémités
+du cylindre n'étant pas une équivalence. La lettre $s$ au-dessus de $\sim$
+peut être celle de « simpliciale », comme les homotopies du début de la page ;
+lecture nôtre. Le mot qui précède « $pk \neq v$ » est surchargé. La page se
+termine par « (But in case $Y'$ is final object we are evidently
+through!) ».}
+
+\pagerange{24}{24}
+\section*{L'injectivité de $(*)$ (page 24)}
+
+« Revenant au problème initial » : pour une suite de cofibrations $X_{i}
+\hookrightarrow X_{i+1}$ de limite $X_{\infty}$, l'application
+$\mathrm{Hom}(X_{\infty}, Y) \to \varprojlim \mathrm{Hom}(X_{i}, Y)$ est
+surjective, ce qu'établit la page 20. Pour l'injectivité, soient $f, f' :
+X_{\infty} \to Y$ dont les restrictions $f_{i}$, $f'_{i}$ à $X_{i}$ sont
+homotopes pour tout $i$ ; il faut montrer $f \sim f'$, c'est-à-dire étendre
+$(f, f')$ de $A = X_{\infty} \sqcup X_{\infty}$ à $B = X_{\infty} \times
+\Delta(1)$, sachant que c'est possible au-dessus de chaque $X_{i} \times
+\Delta(1)$.\footnote{« surjection » et « extend » sont lus avec doute. Ici
+$A$ et $B$ désignent des objets, non plus les catégories de la première
+partie ; on garde ses lettres, l'usage étant local à la page.}
+
+Avec $A_{i} = X_{i} \sqcup X_{i}$ et $B_{i} = X_{i} \times \Delta(1)$, on
+procède pas à pas : étant donné une homotopie $h_{i}$ sur $B_{i}$, on la
+prolonge à
+\[
+B'_{i+1} = B_{i} \sqcup_{A_{i}} A_{i+1} = \bigl(\Delta(1) \times X_{i}\bigr)
+\cup \bigl(\{0, 1\} \times X_{i+1}\bigr) \subset B_{i+1},
+\]
+par $\varphi_{i+1} = (f_{i+1}, f'_{i+1})$ sur $A_{i+1}$, et l'on cherche
+$h_{i+1}$ sur $B_{i+1}$ prolongeant ce $h'_{i+1}$.
+
+\begin{tikzcd}[column sep=4em, row sep=3em]
+A_{i+1} \arrow[r, hook] \arrow[dr, "\varphi_{i+1}"'] & B'_{i+1} \arrow[r, hook] \arrow[d, "h'_{i+1}"] & B_{i+1} \arrow[dl, dashed, "h_{i+1} ?"] \\
+ & Y &
+\end{tikzcd}
+
+L'inclusion $B'_{i+1} \subset B_{i+1}$ est une cofibration qui n'est pas
+triviale en général : une homotopie $f_{i+1} \sim f'_{i+1}$ existe, mais pas
+forcément une qui prolonge $h_{i}$.\footnote{La page dessine aussi $A_{i}
+\hookrightarrow B_{i}$, $A_{i} \hookrightarrow A_{i+1}$ et une flèche
+$\varphi_{i}$ de $A_{i}$ vers $Y$, les lettres $\varphi_{i}$, $\varphi_{i+1}$
+étant de lecture douteuse ; les inclusions sont tracées en traits à crochet
+sans pointe. Les $\{0\}$ et $\{1\}$ de la réunion sont surchargés et lus avec
+doute.} La page abstrait alors la question : soit $Z_{0} \hookrightarrow Z_{1}
+\hookrightarrow Z_{2} \hookrightarrow \cdots$ et une flèche $Z_{0} \to Y$ qui
+s'étend à chaque $Z_{i}$ ; s'étend-elle à $Z_{\infty}$ ? « Pas clair du tout »,
+tout le point étant de voir que
+\[
+\varprojlim_{i} \pi_{0}\bigl(\text{extensions de } Z_{0} \to Y \text{ à }
+Z_{i}\bigr) \neq \varnothing .
+\]
+« Demander à Ronnie Brown ! »\footnote{Le mot qui suit $\pi_{0}$ est souligné,
+surchargé et illisible ; la paraphrase « extensions de $Z_{0} \to Y$ à
+$Z_{i}$ », que l'indexation $(Z_{i} ; Y)$ appelle, est la nôtre. La flèche
+de $Z_{0}$ vers $Y$ est tracée double, $Y \Leftarrow Z_{0}$. Ronald Brown, à
+Bangor, était à cette époque l'un de ses correspondants. Le cas de
+l'injectivité est $Z_{i} = A \cup B_{i}$ dans $B$.}
+
+\emph{La réponse.} La réduction est juste, et la réponse est négative en
+général. Les espaces d'extensions $\mathrm{Map}_{Z_{0}}(Z_{i}, Y)$ forment une
+tour de fibrations ; une extension à $Z_{\infty}$ est un point de leur limite,
+et l'application de $\pi_{0}$ de la limite vers la limite des $\pi_{0}$ est
+surjective. Une extension existe donc si et seulement si la limite des
+$\pi_{0}$ est non vide --- et une limite projective d'ensembles non vides peut
+être vide. Pour $(*)$, cela donne la suite exacte de Milnor : pour une suite de
+cofibrations et $Y$ fibrant, la surjection $(*)$ a pour défaut d'injectivité
+un $\varprojlim^{1}$, celui des $\pi_{1}$ des espaces d'applications
+$\mathrm{Map}(X_{i}, Y)$ pointés en les $f_{i}$. Ce $\varprojlim^{1}$ ne s'annule pas toujours. Soit
+$X_{i} = S^{1}$ pour tout $i$, avec les applications de degré $d \geq 2$, rendues
+cofibrations par télescope, et $Y = K(\mathbb{Z}, 2)$. Alors
+$\mathrm{Hom}_{\mathrm{Hot}}(X_{i}, Y) = H^{2}(S^{1}; \mathbb{Z}) = 0$, tandis
+que
+\[
+\mathrm{Hom}_{\mathrm{Hot}}(X_{\infty}, Y) = H^{2}(X_{\infty}; \mathbb{Z})
+\simeq \varprojlim\nolimits^{1}\bigl(\cdots \xrightarrow{\;d\;} \mathbb{Z}
+\xrightarrow{\;d\;} \mathbb{Z}\bigr) \simeq \widehat{\mathbb{Z}}_{d}/\mathbb{Z} \neq 0 ,
+\]
+où $\widehat{\mathbb{Z}}_{d}$ est le complété $d$-adique de $\mathbb{Z}$. Donc $(*)$ n'est
+pas injective : $X_{\infty}$ n'est pas limite inductive des
+$X_{i}$ dans $\mathrm{Hot}$, et $\widehat{\Delta} \to \mathrm{Hot}$ ne commute
+pas aux limites inductives dénombrables filtrantes, même le long de
+monomorphismes.\footnote{Ce paragraphe est entièrement le nôtre : le dossier
+s'arrête sur la question. La suite exacte est de J. Milnor (« On axiomatic
+homology theory », 1962) ; la surjectivité de $\pi_{0}$ de la limite d'une
+tour de fibrations vers la limite des $\pi_{0}$ est chez Bousfield et Kan
+(1972). Une flèche $X_{\infty} \to Y$ nulle sur chaque $X_{i}$ sans l'être
+est l'analogue, pour une suite, de ce qu'on appelle une application fantôme.
+L'exemple ne dit pas que $\mathrm{Hot}$ manque de limites inductives
+dénombrables, seulement que $X_{\infty}$ n'en est pas une ; le dossier ne
+pose pas cette question distincte.}
+
+\end{document}
