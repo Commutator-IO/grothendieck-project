@@ -1,0 +1,2179 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 43, pages 1-207
+% (the whole folder).
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried — a doubtful
+% reading, a notation he used differently, a missing passage — moves into a
+% footnote. It is held to being mathematically correct as it stands; where the
+% manuscript is loose or mistaken, the true statement is what appears here and
+% the footnote says what the page has. In any dispute of substance the
+% transcription governs: whoever cites Grothendieck must cite
+% batch-01.fr.tex ... batch-11.fr.tex.
+%
+% Scope: the folder was read whole — eleven batches, pages 1-207 — before any
+% of this was written, and it is ONE file for the shelfmark. The folder is a
+% binder of separate runs under his own covers (pp. 1-2, 23, 35, 69, 90, 121,
+% 141, 146, 159, 170, 202); the runs are kept apart here, in binding order.
+%
+% Notation fixed for the whole document.
+%  - G is a commutative algebraic group (later a commutative group scheme or a
+%    sheaf of groups); G_m, G_a, mu_n, alpha_p, Z/lZ (l prime to p) as usual.
+%  - Ray class groups are written Cl_m(K) (his script P^m on p. 3, C_m(K) on
+%    p. 8); his « diviseurs absolus » of p. 5 are written D_abs and read as
+%    Arakelov divisors, distinct from the signed moduli of p. 3.
+%  - J^•_{X/k} is the pro-generalised Jacobian of an open curve (lim over
+%    moduli supported at infinity), not the reduced-modulus Jacobian the page
+%    of p. 79 describes; see the footnote there.
+%  - Θ has three meanings on the pages: the degree-one element of the adelic
+%    algebra (pp. 59-66), Pontryagin duality (p. 105), a Poincaré divisor
+%    (p. 206). Kept, and each time said.
+%  - 𝕍 (his double-struck V, pp. 161-192) is read as the Cartier dual D(G_a),
+%    as p. 192 writes it; « Grbg » of p. 111 is read as Greenberg, not gerbe.
+%
+% Substantive departures from the pages (footnoted where they occur): p. 3,
+% the first factor of U^m (units, not K_p^*) and the reason the signs of
+% congruence units vanish (Chevalley's theorem, not finiteness); p. 8, the
+% sign of the local reciprocity class; p. 14, U_G x V -> 0 is U_G x U -> 0;
+% p. 25, flatness of S is a hypothesis, the ideal defines S, not Y; p. 28, the
+% fibre product Q x_G G' is the push-out; p. 41, H^2(pi, Z) = Q/Z is not 0;
+% p. 42, H^1(k, G) = G(k) only for G finite with trivial Frobenius; p. 51, the
+% projective limit dropped after the first line; p. 66, the sign of the graded
+% commutator; p. 76, vanishing over a henselian ring needs a separably closed
+% residue field, and H^i(L, G) = H^i(L, G/L_0) a finite (or similar) L; p. 79,
+% the Jacobian must be the pro-object for G_a to work; p. 111, alpha_p has
+% H^1 = K/K^p; p. 132, the column Z gives H^i(C, Z), shifted from the
+% H^i(C, Q/Z) the page writes; p. 145, the sixth term; p. 148, the arrow of
+% the functor M -> M ⊗ Q_l; p. 172, V on Z is p, not an isomorphism;
+% p. 198, F^n U = 0 and p^n U = 0 hold on the n-th stage only; p. 205, the
+% local symbol lands in k^*, not K^*; p. 206, Θ lives on A x Â.
+% Announced and not established: Rosenlicht's theorem in families (p. 27, no
+% proof), the bijectivity of Cor. 3 (p. 29, « il semble »), the plausible
+% sequences of pp. 32 and 34, the conjectures on local Jacobians (pp. 74-75,
+% « Je soupçonne »), Ext*(J^•_{K/k}, G) ≅ H*(K, G) (p. 79), the four forms of
+% local duality (p. 88), the exactness and spectral sequences of the Néron
+% functor (pp. 96-97, « vérifier »), the duality theorems announced in the
+% plans of pp. 99 and 101 and on p. 129, the questions of pp. 103, 139, 184,
+% 190, and the independence argument of p. 207, which breaks off.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-03 — first pass, unchecked against the pages by a human.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{43}
+\pages{1}{207}
+\dating{[à partir de 1961-vers 1968]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Dualité des groupes. Jacobiennes généralisées etc : notes et copies de notes manuscrites (s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Ce dossier est un classeur de travail : une quinzaine de liasses, chacune sous
+une chemise titrée de sa main, rassemblées autour d'une seule idée. Toutes
+parlent de groupes commutatifs — le groupe multiplicatif, le groupe additif,
+les groupes finis, les variétés abéliennes — et d'une manière de les apparier
+deux à deux.
+
+Le point de départ est la théorie du corps de classes, que le dossier énonce
+d'abord dans sa forme classique : pour un corps de nombres $K$, les extensions
+abéliennes de $K$ sont décrites par un seul groupe fabriqué à partir de $K$, le
+groupe des classes d'idèles, et la description est un isomorphisme entre ce
+groupe, convenablement quotienté, et le groupe de Galois. Il existe une version
+géométrique, due à Rosenlicht, Lang et Serre : sur une courbe algébrique, le
+rôle du groupe des classes d'idèles est tenu par une \emph{jacobienne
+généralisée}, et les revêtements abéliens de la courbe correspondent aux
+isogénies de cette jacobienne.
+
+L'idée qui revient de liasse en liasse est que cet énoncé est, au fond, un
+énoncé de \emph{représentabilité}. On se donne un objet géométrique $X$, et
+pour chaque groupe $G$ le groupe de cohomologie $H^i(X,G)$ — qui mesure, pour
+$i = 1$, les « fibrés » de groupe $G$ sur $X$. Le dossier cherche un groupe
+$J$, attaché à $X$ seul, tel que la cohomologie de $X$ à valeurs dans
+n'importe quel $G$ se lise comme l'ensemble des homomorphismes, ou des
+extensions, de $J$ vers $G$ :
+\[
+H^i(X, G) \simeq \mathrm{Ext}^i(J, G).
+\]
+C'est la même chose qu'en algèbre linéaire, où une forme linéaire sur un espace
+de fonctions se laisse représenter par un vecteur : ici, c'est un foncteur
+cohomologique qu'on représente par un groupe. Pour une courbe complète, $J$ est
+la jacobienne ; pour une courbe ouverte, une jacobienne généralisée ; pour un
+point d'une surface, le dossier invente des \emph{jacobiennes locales} ; pour
+les dimensions supérieures, il introduit des anneaux d'adèles attachés aux
+chaînes de points, de la forme que Parshin et Beilinson leur donneront dans les
+années 1970.
+
+Pour que ces formules servent, il faut savoir calculer les $\mathrm{Ext}$ entre
+groupes élémentaires, et il faut des dualités qui échangent les rôles des deux
+arguments. D'où la seconde moitié du dossier : la dualité de Cartier, qui
+échange groupe multiplicatif et groupes discrets ; les opérateurs de Frobenius
+et de Verschiebung, qui classent les groupes en huit types ; les modules de
+Dieudonné, qui traduisent les groupes finis en modules sur un anneau
+non commutatif ; les dualités de Tate pour les corps locaux et globaux ; enfin
+des tables où il recense, case par case, les $\mathrm{Hom}$ et les
+$\mathrm{Ext}^1$ entre ces groupes, avec des points d'interrogation là où il ne
+sait pas.
+
+Rien n'y est achevé. Les énoncés sont souvent précédés de « Je soupçonne », « il
+semble », « plausible », suivis de « vérifier ». Ce sont des notes de quelqu'un
+qui cherche le bon cadre, et c'est leur intérêt : on y voit la cohomologie
+locale, le complexe de Cousin, la dualité locale, la topologie plate et les
+schémas parfaits essayés tour à tour comme cadres où la formule ci-dessus
+deviendrait un théorème. Les indices de date (un manuscrit de Tate qui cite une
+thèse de juin 1962, un plan des \emph{Éléments} au bas duquel, tête-bêche, une
+liste porte « September 1963 », une bibliographie dactylographiée de 1964) placent l'essentiel
+au début des années 1960.
+
+Où chercher la suite ? Sous les noms de théorie du corps de classes géométrique
+(Serre, \emph{Groupes algébriques et corps de classes} ; \emph{Corps locaux}),
+de dualité de Bégueri et de Suzuki pour les corps locaux à corps résiduel
+parfait, de 1-motifs et de dualité de Cartier–Dieudonné, d'adèles de
+Parshin–Beilinson, de complexe de Cousin, et d'accouplement de Grothendieck sur
+les groupes de composantes des modèles de Néron.
+
+\keywords{idele class group, ray class group, Artin reciprocity, existence theorem, Arakelov class group, Dirichlet unit theorem, Chevalley congruence subgroup theorem, local symbol, Weil reciprocity, Rosenlicht reciprocity, generalized Jacobian, Rosenlicht universal property, relative Picard scheme, pinched curve, biextension, Cousin complex, big Witt vectors, Teichmüller representative, Tsen's theorem, Lang's theorem, Parshin–Beilinson adeles, Matlis duality, residual complex, local cohomology, local Jacobian, Hartogs extension, Zariski–Nagata purity, perfect schemes, quasi-algebraic groups, fppf cohomology, local duality, Greenberg functor, geometric local class field theory, Serre duality for proalgebraic groups, Néron component groups, Grothendieck pairing, Tate local duality, Kummer theory, Artin–Schreier theory, Poincaré duality for curves, Poitou–Tate sequence, Tate–Shafarevich group, l-adic representation, l-adic Lie algebra, Ext with supports, Cartier duality, Frobenius and Verschiebung, Dieudonné module, Dieudonné ring, formal group, pro-objects, Gabriel localization, Krull–Gabriel dimension, Tate pairing, Brauer group, tame symbol, Albanese kernel}
+\end{resume}
+
+\section*{Le fil du dossier, et les conventions}
+
+Le dossier ne porte aucune pagination continue de sa main. Il se compose de
+liasses séparées par des chemises titrées, dans l'ordre de reliure suivant,
+qu'on garde.
+
+\begin{itemize}
+\item Pages 1 à 12 : « Corps de classes global arithmétique (énoncé des
+théorèmes …) » — deux rédactions des théorèmes de Takagi–Artin pour un corps de
+nombres.
+\item Pages 14 à 22 : l'analogue géométrique sur une courbe : $G$-idèles,
+symboles locaux, complexe de Cousin, jacobiennes généralisées.
+\item Pages 23 à 34 : « Théorème de Rosenlicht » — le schéma de Picard d'une
+courbe pincée le long d'un sous-schéma fini, sa propriété universelle, et
+$H^1(X - S, G) \simeq \mathrm{Ext}^1(\mathrm{Pic}_S, G)$.
+\item Pages 35 à 37 : « Adèles des préschémas » — le schéma en anneaux des
+vecteurs de Witt, présenté par les séries formelles.
+\item Pages 39 à 42 : descente galoisienne pour les classes d'idèles d'une
+courbe sur un corps fini.
+\item Pages 44 à 68 : « Adèles pour plusieurs dimensions » — anneaux attachés
+aux chaînes de points, dualité de Matlis, l'algèbre graduée et l'élément
+$\Theta$.
+\item Pages 69 à 80 : « Jacobiennes locales » — cohomologie locale d'un anneau
+local régulier à coefficients dans $G$, jacobienne locale, conjectures, et le
+retour aux courbes.
+\item Pages 81 à 89 : catégories de groupes (fppf, fpqc, « modulo radiciels »)
+et quatre formulations de la dualité locale.
+\item Pages 90 à 120 : « Corps de classe local géométrique et dualité » —
+topologie de Weil sur un trait complet, foncteur de Néron, plan de travail en
+quatorze points, carré des dualités, calculs pour les groupes finis et les
+variétés abéliennes ; quelques feuillets dactylographiés des \emph{Éléments}
+intercalés.
+\item Pages 121 à 139 : « Corps de classes et dualité des Courbes
+Algébriques » — le théorème de dualité pour une courbe et sa table.
+\item Pages 141 à 145 : « Dualité de Tate-Cassels ».
+\item Pages 146 à 157 : « Groupes de Galois comme groupes analytiques sur
+$\mathbb{Q}_\ell$, d'après Serre ».
+\item Pages 159 à 169 : $\mathrm{Ext}$ à supports, puis les tables des
+$\mathrm{Hom}$ et des $\mathrm{Ext}^1$ entre groupes élémentaires.
+\item Pages 170 à 201 : « Dualité de Cartier des groupes affines et groupes
+formels » — Frobenius et Verschiebung, les huit types, l'anneau de Dieudonné,
+pro-objets, catégories abéliennes localement de longueur finie.
+\item Pages 202 à 207 : « Accouplements de Tate -- Lang » — l'accouplement de
+Tate par le groupe de Brauer, le symbole modéré, l'accouplement de Lang sur le
+noyau d'Albanese.
+\end{itemize}
+
+\emph{Le fil.} Sous la diversité des liasses, une construction revient : pour un
+schéma $X$ sur un corps $k$, on cherche un complexe $J_*$ de groupes
+(pro-)algébriques commutatifs, fait de \emph{jacobiennes locales} indexées par
+les points de $X$, tel que la cohomologie de $X$ à coefficients dans tout
+$k$-groupe commutatif $G$ se calcule comme
+\[
+H^*(X, G) \simeq \mathrm{Ext}^*(J_*, G).
+\]
+Les pages 16 à 21 en donnent la forme pour une courbe et une surface ; les pages
+70 à 75 prouvent l'ingrédient local — la cohomologie locale $H^i_x(G)$ est
+concentrée en degré $\dim \mathcal{O}_{X,x}$, si bien que $H^{\dim}_x(G) =
+\mathrm{Hom}(J_{\mathcal{O}_{X,x}/k}, G)$ définit une jacobienne locale ; les
+pages 79 et 80 en tirent la formule pour les courbes. Le corps de classes
+arithmétique des pages 1 à 12, et local géométrique des pages 90 à 120, en sont
+les deux modèles ; Rosenlicht (pages 23 à 34) en est le cas $H^1$ ; les
+dualités de Cartier, de Serre, de Tate et la théorie de Dieudonné (pages 81 à
+207) sont l'outillage qui permet de calculer les $\mathrm{Ext}$.
+
+\emph{Conventions.} $G$ désigne un groupe algébrique commutatif, puis un schéma
+en groupes commutatif ou un faisceau abélien selon la liasse ; $\mathbb{G}_m$,
+$\mathbb{G}_a$, $\mu_n$, $\alpha_p$, $\mathbb{Z}/\ell\mathbb{Z}$ ($\ell$ premier
+à la caractéristique $p$) ont leur sens habituel. Les groupes de rayons sont
+notés $\mathrm{Cl}_{\mathfrak{m}}(K)$. Pour une courbe ouverte, $J^{\bullet}_{X/k}$
+désigne la jacobienne généralisée comme pro-objet (limite sur les modules
+portés par les points à l'infini). La lettre $\Theta$ a trois emplois sur les
+pages — un élément de degré~1 d'une algèbre d'adèles (pages 59 à 66), la dualité
+de Pontrjagin (page 105), un diviseur de Poincaré (page 206) ; on les garde, en
+le disant à chaque fois. La lettre $S$ aussi : un sous-schéma fini (pages 25 à
+34), le spectre d'un trait (pages 91 à 139), un foncteur « points rationnels »
+(page 105), et dans $S\gamma$ une torsion (pages 99 et 131). Le groupe que les
+tables des pages 161 à 192 notent $\mathbb{V}$ est le dual de Cartier de
+$\mathbb{G}_a$, comme l'écrit la page 192.
+
+\emph{Ce qui est annoncé et non établi.} Le théorème de Rosenlicht en famille
+(page 27) est énoncé sans démonstration ; la bijectivité du corollaire 3
+(page 29) est « il semble » ; les suites exactes des pages 32 et 34 sont
+« plausibles » ; les propriétés des jacobiennes locales (pages 74 et 75) sont
+« Je soupçonne » ; l'isomorphisme $\mathrm{Ext}^*(J^{\bullet}_{K/k}, G) \simeq
+H^*(K, G)$ (page 79) est encadré et non prouvé ; les quatre formes de la
+dualité locale (page 88) sont énoncées ; l'exactitude du foncteur de Néron et
+ses suites spectrales (pages 96 et 97) portent « à vérifier » ; le théorème de
+dualité annoncé aux plans des pages 99 et 101, et à la page 129, n'est pas
+écrit ; la page 207 s'arrête au milieu d'une démonstration.
+
+\emph{Pièces d'autres mains.} Le dossier, qui se dit « notes et copies de notes
+manuscrites », contient aussi : deux feuillets d'une bibliographie dactylographiée
+d'un mémoire d'un autre auteur (pages 84 et 86, références de 1964) ; quatre
+feuillets d'un article anglais sur les complexes de Thom (pages 100, 102, 104) ;
+quatre feuillets d'un texte dactylographié sur les faisceaux mous et fins (pages
+123, 125, 138, 140) et un sur la fidèle platitude (page 136, une note de sa main
+en marge) ; des feuillets dactylographiés des \emph{Éléments} (pages 109, 114,
+120) ; trois feuillets d'un manuscrit de Tate (pages 142 à 144). On les signale
+à leur place, sans les recomposer. Les pages 165, 174 et 178 sont des copies
+pâles des pages 166, 175 et 179.
+
+\pagerange{1}{12}
+\section*{Le corps de classes global arithmétique (pages 1 à 12)}
+
+La chemise porte « Cohomologie des … galoisienne etc. », un mot biffé et
+illisible, puis le feuillet de la page 2 « Corps de classes global arithmétique
+(énoncé des théorèmes …) ». Suivent deux rédactions de l'énoncé des théorèmes
+du corps de classes pour un corps de nombres $K$ : une première, rapide (pages 3
+et 4), une seconde plus soignée (pages 5 à 12).
+
+\pagerange{3}{4}
+\subsection*{Idèles, modules, groupes de rayons (pages 3 et 4)}
+
+Soit $K$ un corps de nombres, $J_K$ son groupe des idèles, $C_K = J_K/K^{*}$
+celui des classes d'idèles. Un \emph{module} $\mathfrak{m} = \mathfrak{m}_0
+\mathfrak{m}_\infty$ est un idéal entier $\mathfrak{m}_0$ et un ensemble
+$\mathfrak{m}_\infty$ de places réelles\footnote{La page parle de « diviseur
+absolu, positif aux places finies », et pose $\mathcal{D}^{a}_K \approx
+\mathcal{D}_K \times \mathbb{Z}_2^{r_1}$ : un diviseur absolu y est un idéal
+muni d'un signe aux places réelles. Ce n'est pas le « diviseur absolu » de la
+page 5, à coefficients réels aux places infinies ; on réserve ici le mot de
+module au premier, et l'on appelle le second diviseur d'Arakelov.}. Notons $S$
+l'ensemble des places qui divisent $\mathfrak{m}$, $S_0$ et $S_\infty$ ses
+parties finie et infinie, $I^{\mathfrak{m}}$ le groupe des idéaux fractionnaires
+premiers à $\mathfrak{m}_0$, et $P^{\mathfrak{m}}$ le sous-groupe des idéaux
+principaux $(x)$ avec $x \equiv 1 \bmod^{\times} \mathfrak{m}$, c'est-à-dire
+$v_{\mathfrak{p}}(x-1) \geq v_{\mathfrak{p}}(\mathfrak{m}_0)$ pour $\mathfrak{p}
+\mid \mathfrak{m}_0$ et $x > 0$ aux places de $\mathfrak{m}_\infty$. Le groupe
+des rayons est $\mathrm{Cl}_{\mathfrak{m}}(K) = I^{\mathfrak{m}}/P^{\mathfrak{m}}$.
+Il s'insère dans la suite exacte
+\[
+0 \to N^{\mathfrak{m}} \to \mathrm{Cl}_{\mathfrak{m}}(K) \to \mathrm{Cl}(K) \to 0,
+\]
+dont le noyau est lui-même extension :
+\[
+0 \to \{\pm 1\}^{S_\infty}/\mathrm{Im}\,E^{\mathfrak{m}_0}_K \to N^{\mathfrak{m}}
+\to (\mathcal{O}_K/\mathfrak{m}_0)^{*}/\mathrm{Im}\,E_K \to 0,
+\]
+où $E_K$ est le groupe des unités et $E^{\mathfrak{m}_0}_K$ celui des unités
+congrues à $1$ modulo $\mathfrak{m}_0$. Si $\mathfrak{m}_0$ est assez divisible,
+toute unité congrue à $1$ modulo $\mathfrak{m}_0$ est totalement positive, si
+bien que $\{\pm 1\}^{S_\infty}$ s'injecte dans $N^{\mathfrak{m}}$\footnote{C'est
+le théorème de Chevalley sur les sous-groupes de congruence des unités (1951) :
+tout sous-groupe d'indice fini de $E_K$ — ici les unités totalement positives,
+qui contiennent $E_K^{2}$ — contient $E^{\mathfrak{m}_0}_K$ pour un
+$\mathfrak{m}_0$ convenable. La page justifie la chose en disant que
+$E^{\mathfrak{m}_0}_K$ est contenu dans un sous-groupe « fini » de $E_K$, mot lu
+sous réserve, au milieu de deux mots illisibles : sous cette forme ce serait
+faux, $E^{\mathfrak{m}_0}_K$ étant d'indice fini dans $E_K$, donc de rang
+$r_1 + r_2 - 1$.}. Si $\mathfrak{m}$ est fini ($S_\infty = \emptyset$), on a
+simplement $0 \to (\mathcal{O}_K/\mathfrak{m}_0)^{*}/\mathrm{Im}\,E_K \to
+\mathrm{Cl}_{\mathfrak{m}}(K) \to \mathrm{Cl}(K) \to 0$.
+
+Du côté des idèles, posons
+\[
+U^{\mathfrak{m}} = \prod_{\mathfrak{p} \notin S \text{ finie}} \mathcal{O}_{\mathfrak{p}}^{*}
+\times \prod_{\mathfrak{p} \notin S \text{ infinie}} K_{\mathfrak{p}}^{*}
+\times \prod_{\mathfrak{p} \in S_0} \bigl(1 + \mathfrak{p}^{v_{\mathfrak{p}}(\mathfrak{m})}\bigr)
+\times \prod_{\mathfrak{p} \in S_\infty} K_{\mathfrak{p}}^{*+},
+\]
+le groupe des idèles « congrus à $1$ modulo $\mathfrak{m}$ »\footnote{La page
+écrit le premier facteur $\prod_{\mathfrak{p} \notin S} K^{*}_{\mathfrak{p}}$, lu
+sous réserve ; aux places finies hors de $S$ il faut les unités
+$\mathcal{O}_{\mathfrak{p}}^{*}$, faute de quoi le quotient ci-dessous serait
+nul. La page dit aussi « voisinage de $0$ » : c'est un voisinage de $1$.}. C'est
+un sous-groupe ouvert de $J_K$, les images des $U^{\mathfrak{m}}$ sont cofinales
+parmi les sous-groupes ouverts d'indice fini de $C_K$\footnote{La phrase de la
+page est en grande partie illisible ; on lit « système fondamental » de
+voisinages. Les $U^{\mathfrak{m}}$ ne forment pas un système fondamental de
+voisinages de $1$ dans $J_K$ — ils contiennent tous $\prod
+\mathcal{O}_{\mathfrak{p}}^{*}$ hors de $S$ — mais leurs images sont cofinales
+parmi les sous-groupes ouverts d'indice fini de $C_K$, ce qui est ce dont la
+suite se sert.}, et
+\[
+C_K/\mathrm{Im}\,U^{\mathfrak{m}} \simeq \mathrm{Cl}_{\mathfrak{m}}(K),
+\qquad
+\varprojlim_{\mathfrak{m}} \mathrm{Cl}_{\mathfrak{m}}(K) \simeq C_K/D_K,
+\]
+où $D_K$ est la composante connexe de l'unité de $C_K$. Si $L/K$ est finie et
+si $N_{L/K} J_L \supset U^{\mathfrak{m}}$ (ce qui a lieu pour $\mathfrak{m}$
+assez grand, divisible par les places ramifiées), alors, pour $\mathfrak{m}'$
+assez grand sur $L$ avec $N_{L/K}(L^{*\mathfrak{m}'}) \subset K^{*\mathfrak{m}}$,
+\[
+\mathrm{Cl}_{\mathfrak{m}}(K)/N_{L/K}\mathrm{Cl}_{\mathfrak{m}'}(L) \simeq C_K/N_{L/K} C_L.
+\]
+
+Supposons $L/K$ abélienne\footnote{La page écrit d'abord « galoisienne », le
+biffe pour « finie », puis souligne « Supposons $L$ galoisienne ». Pour une
+extension galoisienne quelconque, tout ce qui suit vaut avec l'abélianisé
+$G(L/K)^{\mathrm{ab}}$, comme le fait la seconde rédaction (page 9).}, et soit
+$T$ l'ensemble des places finies ramifiées dans $L$. L'homomorphisme d'Artin
+$I^{T} \to G(L/K)$ envoie un premier $\mathfrak{p} \notin T$ sur sa substitution
+de Frobenius $(\mathfrak{p}, L/K)$\footnote{La page désigne par $S_0$
+l'ensemble des places finies « (non) ramifiées », le « non » ajouté sous réserve ;
+le domaine est le groupe des idéaux premiers aux places ramifiées.} ; son noyau
+contient trivialement $N_{L/K} I^{T}_L$. Le théorème du corps de classes
+affirme :
+\begin{enumerate}
+\item[(a)] il existe un module $\mathfrak{m}$, de support $T$ et des places
+réelles ramifiées, tel que $P^{\mathfrak{m}}$ soit dans le noyau — d'où un
+homomorphisme $\mathrm{Cl}_{\mathfrak{m}}(K) \to G(L/K)$, c'est-à-dire
+$C_K/\mathrm{Im}\,U^{\mathfrak{m}} \to G(L/K)$, puis $C_K/N_{L/K}C_L \to G(L/K)$ ;
+\item[(b)] cet homomorphisme est surjectif (et même : tout élément de $G(L/K)$
+est le Frobenius d'une infinité de premiers, forme du « théorème de la
+progression arithmétique ») ;
+\item[(c)] son noyau est exactement $P^{\mathfrak{m}} N_{L/K} I^{\mathfrak{m}'}_L$,
+d'où un isomorphisme $C_K/N_{L/K} C_L \simeq G(L/K)$.
+\end{enumerate}
+Le symbole de reste normique de Hilbert $(a_{\mathfrak{p}}, L/K)_{\mathfrak{p}}$
+en est la composante locale : c'est un homomorphisme continu sur
+$K^{*}_{\mathfrak{p}}$, égal au Frobenius sur une uniformisante aux places non
+ramifiées, et le symbole global est trivial sur $K^{*\mathfrak{m}}$.
+
+\pagerange{5}{6}
+\subsection*{Idèles, diviseurs d'Arakelov, théorème de Dirichlet (pages 5 et 6)}
+
+La seconde rédaction reprend les données place par place. Pour toute place
+$\mathfrak{p}$, finie ou infinie, $K_{\mathfrak{p}}$ est le complété,
+$U_{\mathfrak{p}} = \{|x|_{\mathfrak{p}} = 1\}$ (les unités aux places finies,
+$\{\pm 1\}$ ou le cercle $\mathbb{T}$ à l'infini), et $W_{\mathfrak{p}} =
+K^{*}_{\mathfrak{p}}/U_{\mathfrak{p}}$, qui vaut $\mathbb{Z}$ à distance finie et
+$\mathbb{R}^{*}_{+}$ à l'infini. Le groupe des idèles $J(K)$ est l'image inverse
+de $\bigoplus_{\mathfrak{p}} W_{\mathfrak{p}}$ dans $\prod_{\mathfrak{p}}
+K^{*}_{\mathfrak{p}}$ ; le groupe des diviseurs d'Arakelov est
+$\mathcal{D}_{\mathrm{abs}}(K) = \bigoplus_{\mathfrak{p}} W_{\mathfrak{p}}$, celui
+des idèles unités $V(K) = \prod U_{\mathfrak{p}}$, et l'on a
+\[
+0 \to V(K) \to J(K) \to \mathcal{D}_{\mathrm{abs}}(K) \to 0,
+\qquad
+0 \to K^{*} \to J(K) \to C(K) \to 0,
+\]
+$K^{*}$ étant discret dans $J(K)$. Le groupe $K^{*} \cap V(K)$ est celui des
+racines de l'unité $\mu(K)$, torsion de $K^{*}$, et le groupe de classes
+d'Arakelov $\mathcal{P}_{\mathrm{abs}}(K) = \mathcal{D}_{\mathrm{abs}}(K)/\mathrm{Im}\,K^{*}$
+s'insère dans
+\[
+0 \to \mu(K) \to K^{*} \to \mathcal{D}_{\mathrm{abs}}(K) \to \mathcal{P}_{\mathrm{abs}}(K) \to 0.
+\]
+La norme $J(K) \to \mathbb{R}^{*}_{+}$ passe à $\mathcal{D}_{\mathrm{abs}}$,
+$\mathcal{P}_{\mathrm{abs}}$ et $C(K)$ ; l'indice $0$ désigne les noyaux, et
+$K^{*} \subset J_0(K)$ par la formule du produit.
+
+\emph{Théorème de Dirichlet.} $C_0(K)$ est compact\footnote{La page note que la
+démonstration « se fait par Minkowski », puis, plus bas, remplace « Minkowski »
+biffé par « Dirichlet » dans le nom du théorème. La compacité de $C_0(K)$
+équivaut, compte tenu de la compacité de $V(K)$, à celle de
+$\mathcal{P}_{\mathrm{abs},0}(K)$, qui contient à la fois la finitude du groupe
+des classes et le théorème des unités.}. Écrivons
+$\mathcal{D}_{\mathrm{abs}}(K) = \mathcal{D}(K) \times \mathcal{D}_\infty(K)$,
+avec $\mathcal{D}(K)$ les diviseurs usuels et $\mathcal{D}_\infty(K) \simeq
+(\mathbb{R}^{*}_{+})^{r_1 + r_2}$ ; alors
+\[
+0 \to \mathcal{D}_{\infty,0}(K)/E_0(K) \to \mathcal{P}_{\mathrm{abs},0}(K) \to \mathrm{Cl}(K) \to 0,
+\qquad E_0(K) \simeq E(K)/\mu(K),
+\]
+$E_0(K)$ étant l'image des unités dans l'hyperplan $\mathcal{D}_{\infty,0}(K)$,
+de dimension $r_1 + r_2 - 1$. D'où trois corollaires : le groupe des classes
+$\mathrm{Cl}(K)$ est fini ; $E_0(K)$ est un réseau de rang $r_1 + r_2 - 1$ ;
+$\mathcal{P}_{\mathrm{abs},0}(K)$ est extension du groupe fini $\mathrm{Cl}(K)$
+par un tore réel compact de dimension $r_1 + r_2 - 1$\footnote{C'est la
+structure du groupe de Picard d'Arakelov de degré~$0$, telle qu'on l'énonce
+aujourd'hui (par exemple Schoof, 2008). Le mot « Arakelov » est le nôtre ; la
+page dit « diviseurs absolus », et le travail d'Arakelov est de 1974.}.
+
+\pagerange{7}{12}
+\subsection*{Sous-groupes ouverts et théorèmes d'Artin–Takagi (pages 7 à 12)}
+
+Les sous-groupes ouverts de $C(K)$ sont les sous-groupes ouverts de $J(K)$
+contenant $K^{*}$ ; un tel sous-groupe contient $V_{\mathfrak{m}}K^{*}$ pour un
+module $\mathfrak{m}$, où $V_{\mathfrak{m}}$ est le $U^{\mathfrak{m}}$ des pages 3
+et 4. Par approximation faible, tout idèle se ramène modulo $K^{*}$ à un idèle
+dont les composantes aux places de $\mathfrak{m}$ sont dans
+$V_{\mathfrak{p},\mathfrak{m}}$\footnote{Le haut de la page 7 est très raturé, et
+l'égalité « $K^{*}V_{\mathfrak{m}}\tilde J_{\mathfrak{m}} = J$ » se lit avec
+$\tilde J_{\mathfrak{m}} = \prod_{\mathfrak{p}\mid\mathfrak{m}} K_{\mathfrak{p}}$ ;
+le raisonnement qui survit (choisir $a \in K^{*}$ approchant l'idèle aux places de
+$\mathfrak{m}$) prouve l'énoncé d'approximation donné ici, qui est celui dont la
+page 8 se sert.} ; on en tire
+\[
+C_{\mathfrak{m}}(K) := C(K)/H_{\mathfrak{m}}(K) \simeq J(K)/V_{\mathfrak{m}}K^{*}
+\simeq \mathcal{D}_{\mathfrak{m}}(K)/P_{\mathfrak{m}}(K) = \mathrm{Cl}_{\mathfrak{m}}(K),
+\]
+avec $H_{\mathfrak{m}} = V_{\mathfrak{m}}K^{*}/K^{*}$, et la suite exacte
+\[
+0 \to E_{\mathfrak{m}}(K) \to K^{*} \to \mathcal{D}_{\mathfrak{m}}(K) \times
+\prod_{\mathfrak{p} \mid \mathfrak{m}} K^{*}_{\mathfrak{p}}/V_{\mathfrak{p},\mathfrak{m}}
+\to C_{\mathfrak{m}}(K) \to 0,
+\]
+où $E_{\mathfrak{m}}(K)$ est le groupe des unités congrues à $1$ modulo
+$\mathfrak{m}$ (positives aux places réelles de $\mathfrak{m}$), et où le facteur
+$K^{*}_{\mathfrak{p}}/V_{\mathfrak{p},\mathfrak{m}}$ vaut $\mathbb{Z}/2$ à une place
+réelle et est extension de $\mathbb{Z}$ par $(\mathcal{O}_{\mathfrak{p}}/
+\mathfrak{p}^{v})^{*}$ à une place finie.
+
+L'image dans $C_{\mathfrak{m}}(K)$ d'un $x \in K^{*}_{\mathfrak{p}}$ se calcule
+ainsi : si $\mathfrak{p} \nmid \mathfrak{m}$, c'est la classe de
+$\mathfrak{p}^{v_{\mathfrak{p}}(x)}$ ; si $\mathfrak{p} \mid \mathfrak{m}$, on
+choisit $a \in K^{*}$ congru à $1$ aux autres places de $\mathfrak{m}$ et à $x$
+en $\mathfrak{p}$, et l'image est la classe de la partie première à
+$\mathfrak{m}$ de l'idéal $(a)^{-1}$\footnote{La page écrit la classe de
+« $\mathrm{div}(a)$ », avec un indice lu sous réserve ; avec l'injection diagonale
+de $K^{*}$ dans $J(K)$, l'idèle $x$ en $\mathfrak{p}$ est équivalent modulo $K^{*}$
+à $x a^{-1}$, dont la partie hors de $\mathfrak{m}$ est le diviseur de $a^{-1}$.
+Le signe dépend de cette convention.}.
+
+\emph{Énoncé des théorèmes d'Artin–Takagi.} Soit $L/K$ galoisienne finie de groupe
+$G$, $\mathfrak{S}$ l'ensemble des places ramifiées. Les Frobenius des places non
+ramifiées, définis dans $G$ à conjugaison près, ont une image bien définie dans
+$G/G'$, d'où l'homomorphisme de réciprocité $\mathcal{D}_{\mathfrak{m}}(K) \to
+G/G'$ pour $\mathfrak{m}$ de support $\mathfrak{S}$.
+\begin{enumerate}
+\item[1°)] Il existe un module $\mathfrak{m}$ de support $\mathfrak{S}$ tel que
+l'homomorphisme de réciprocité s'annule sur $P_{\mathfrak{m}}(K)$ ; d'où
+$C_{\mathfrak{m}}(K) \to G/G'$, puis $C(K) \to G/G'$, indépendant de
+$\mathfrak{m}$.
+\item[2°)] Cet homomorphisme est surjectif ; plus précisément, chaque classe de
+conjugaison de $G$ contient le Frobenius d'une infinité de places.
+\item[3°)] Son noyau, qui contient trivialement $N_{L/K}C(L)$, lui est égal :
+dans $\mathcal{D}_{\mathfrak{m}}(K)$, le noyau est exactement
+$P_{\mathfrak{m}}(K) \cdot N_{L/K}\mathcal{D}_{\mathfrak{m}'}(L)$.
+\item[4°)] (Théorème d'existence.) Tout sous-groupe ouvert $U$ de $C(K)$ est un
+groupe de normes : il existe $L/K$ abélienne avec $N_{L/K}C(L) = U$\footnote{La
+page écrit « Tout sous-groupe … de $C(K)$ », deux mots illisibles après
+« sous-groupe ». Pour un corps de nombres, un sous-groupe ouvert de $C(K)$ est
+automatiquement d'indice fini, puisqu'il contient la composante connexe et que
+le quotient de $C_0(K)$ par celle-ci est profini.}.
+\item[5°)] Les homomorphismes locaux $\varphi_{\mathfrak{p}} : K^{*}_{\mathfrak{p}}
+\to G^{d}_{\mathfrak{p}}$ dans les groupes de décomposition, déduits du corps de
+classes local $\mathrm{Gal}(K^{\mathrm{ab}}_{\mathfrak{p}}/K_{\mathfrak{p}})
+\simeq \widehat{K^{*}_{\mathfrak{p}}}$ (complété profini)\footnote{Le chapeau sur
+$K^{*}_{\mathfrak{p}}$ est une lecture incertaine ; il faut bien le complété
+profini.}, sont les composantes locales du symbole de réciprocité.
+\end{enumerate}
+Le N.B. de la page 10 note que $N_{L/K}C(L) = N_{L_0/K}C(L_0)$, où $L_0$ est la
+sous-extension abélienne maximale de $L$ : c'est le théorème de limitation des
+normes. La « grande conséquence » de 1°), dit la page 11, est qu'on sait
+définir des homomorphismes $x \mapsto \bigl(\frac{x,\,L/K}{\mathfrak{p}}\bigr)$
+de $K^{*}_{\mathfrak{p}}$ vers $G/G'$ satisfaisant la formule du produit
+\[
+\prod_{\mathfrak{p}} \Bigl(\frac{x,\,L/K}{\mathfrak{p}}\Bigr) = 1 \qquad (x \in K^{*}).
+\]
+Comme les $\varphi_{\mathfrak{p}}$ et les symboles coïncident aux places non
+ramifiées, 5°) équivaut à ce que les $\varphi_{\mathfrak{p}}$ satisfassent
+ensemble la formule du produit — « la partie difficile de la théorie actuelle des
+corps de classes pour les corps de nombres ».
+
+\pagerange{14}{22}
+\section*{L'analogue géométrique : $G$-idèles d'une courbe (pages 14 à 22)}
+
+La page 14 est le pendant, pour une courbe, des pages 5 et 6. Soit $C$ une courbe
+complète non singulière sur un corps $k$ algébriquement clos, $K$ son corps des
+fonctions, et $G$ un groupe algébrique commutatif. Pour chaque point fermé $x$,
+$\hat{\mathcal{O}}_x$ et $\hat K_x$ sont le complété et son corps des fractions.
+
+\subsection*{$G$-idèles, $G$-diviseurs, symboles locaux}
+
+On pose : $V_G = \prod'_x G(\hat K_x)$ le groupe des $G$-idèles (produit restreint
+relativement aux $G(\hat{\mathcal{O}}_x)$), $U_G = \prod_x G(\hat{\mathcal{O}}_x)$
+celui des idèles entiers, $J_G = V_G/G(K)$ celui des classes d'idèles,
+$\mathcal{D}_G = V_G/U_G = \bigoplus_x G(\hat K_x)/G(\hat{\mathcal{O}}_x)$ celui des
+$G$-diviseurs, et
+\[
+J_{G,C} = V_G/U_G\,G(K) \simeq H^1(C, G),
+\]
+la cohomologie étant celle de Zariski. Pour $G = \mathbb{G}_m$ on retrouve les
+idèles de $K$, le groupe $\mathrm{Div}(C)$ et $\mathrm{Pic}(C)$, avec
+$\mathbb{G}_m(C) = k^{*}$. On a $G(C) = G(K) \cap U_G$, qui vaut $G(k)$ si $G$ est
+linéaire. Un degré $J_{G,C} \to \mathrm{Hom}(\mathbb{G}_m, G)$ généralise le
+degré des fibrés en droites ; une note au crayon dit que son noyau est formé des
+classes qui proviennent de $\mathrm{Ext}^1(J_C, G)$.
+
+Les symboles locaux de Rosenlicht et Serre, prolongés aux complétés, donnent un
+accouplement $V_G \times V \to G(k)$, $V$ désignant les idèles de $K$. Il
+s'annule : sur $U_G \times U$, où $U = \prod \hat{\mathcal{O}}_x^{*}$ (si $f$ est
+entier en $x$, $(f, g)_x = v_x(g) f(x)$) ; sur $G(K) \times K^{*}$ (loi de
+réciprocité de Rosenlicht) ; sur $V^0_G \times k^{*}$ par définition de
+$V^0_G$\footnote{La page écrit « $U_G(k) \times V(k) \to 0$, théorème local des
+symboles locaux ». Sur $U_G \times V$ le symbole vaut $v_x(g) f(x)$ et n'est pas
+nul : c'est sur $U_G \times U$ qu'il s'annule, et sur $U_G \times V$ il se
+factorise par $U_G \times \mathcal{D}$, comme la page 15 l'écrit elle-même.}. On
+en déduit les accouplements de la page 15 :
+\[
+G(K) \times J \to G(k),\quad J_G \times K^{*} \to G(k),\quad
+U_G \times \mathcal{D} \to G(k),
+\]
+\[
+\mathcal{D}_G \times U \to G(k),
+\quad J_{G,C} \times k^{*} \to G(k),\quad G(C) \times J_C \to G(k).
+\]
+Le premier exprime que $J$ est une « Albanese généralisée » ; le dernier provient
+de $\mathrm{Hom}(C, G) \to \mathrm{Hom}(J_C, G)$, propriété universelle de la
+jacobienne. Avec $J'_C \subset J^0_C$ l'intersection des noyaux des
+homomorphismes $J^0_C \to G$, la page encadre une classe
+\[
+\xi \in \mathrm{Ext}^1\bigl(J^0_{G,C}(k), J'_C(k); G(k)\bigr),
+\]
+« accouplement de Lang »\footnote{Un $\mathrm{Ext}^1$ à deux arguments à valeurs
+dans $G$ est ce qu'on appelle aujourd'hui une \emph{biextension}, notion que
+Grothendieck développe dans SGA~7, exposés VII et VIII (1967--1969) ; Mumford en
+donne la forme pour les groupes algébriques en 1969. La page n'emploie pas le
+mot.}.
+
+\pagerange{16}{17}
+\subsection*{Le bicomplexe adélique et le complexe de Cousin (pages 16 et 17)}
+
+Pour chaque $x$, on dispose des points entiers $G(\hat{\mathcal{O}}_x)$, des points
+$G(\hat K_x)$, et de la cohomologie locale $H^0_x(G) = 0$, $H^1_x(G) =
+G(\hat K_x)/G(\hat{\mathcal{O}}_x)$ ; au point générique $\xi$, $H^0_\xi(G) = G(K)$.
+Ces données forment un bicomplexe $DD(G)$ dont la première suite spectrale
+converge vers $H^{*}(C, G)$ ; comme $H^0_x(G) = 0$, la cohomologie de $C$ est
+celle du complexe
+\[
+G(K) \longrightarrow \bigoplus_x H^1_x(G),
+\]
+des $G$-diviseurs principaux vers les $G$-diviseurs : son noyau est $G(C)$, son
+conoyau $H^1(C, G)$. C'est le complexe de Cousin de $G$\footnote{Le nom est le
+nôtre ; la page dit « bicomplexe $DD(G)$ » et en dessine les deux suites
+spectrales $H_{\mathrm{I}}$, $H_{\mathrm{II}}$. Le complexe de Cousin, en
+cohomologie cohérente, est celui de \emph{Residues and Duality} (Hartshorne, 1966,
+d'après Grothendieck).}.
+
+La page 17 formule l'idée qui organise tout le dossier. Les termes de ce complexe
+devraient être des $\mathrm{Hom}$ vers $G$ : $G(K) = \mathrm{Hom}(J_{K/k}, G)$ et
+$H^1_x(G) = \mathrm{Hom}(J_x, G)$ pour des groupes $J_{K/k}$ et $J_x$ convenables,
+de sorte que le complexe de Cousin serait $\mathrm{Hom}(J_*, G)$ pour un complexe
+\[
+J_1 = \prod_x J_x \longrightarrow J_0 = J_{K/k},
+\]
+et qu'on écrirait $H_{\mathrm{I}}\,DD(G) = \mathrm{Hom}\bigl(H_{\mathrm{II}}\,
+DD(\mathbb{G}_m), G\bigr)$. Les pages 70 à 80 construiront ces $J_x$ : ce sont les
+jacobiennes locales. Un paragraphe de la page 17, qui disait déjà
+$J^{*}_{C/k} \simeq \mathcal{H}^1(C, \mathbb{G}_m)$, est encadré et barré.
+
+\pagerange{18}{22}
+\subsection*{$G$-répartitions et jacobiennes généralisées (pages 18 à 22)}
+
+Les pages 18 à 22 essaient le même schéma en dimension supérieure. Une
+$G$-répartition $(f_x)_x$ et, pour chaque diviseur premier $D$, un élément
+$\xi_D$ de la jacobienne locale $J^{*}_{\mathcal{O}_D/k}$ s'accouplent en $(f_x,
+\xi_D) \in G(k)$, via $G(K_D)/G(\mathcal{O}_D)^{(1)} \simeq \mathrm{Hom}
+(J^{*}_{\mathcal{O}_D/k}, G(k))$ ; la page commence à montrer que la somme sur
+les points de $D$ a un sens, et s'arrête (la moitié inférieure de la page 18 est
+barrée). Les pages 19 à 21 écrivent, pour $X$ complète, les suites
+\[
+0 \to G(K)/G(C) \to \mathrm{Div}^0_G \to H^1(X, G)^0 \to 0,
+\]
+\[
+\prod_{Z \text{ de codim. } 2} J_{\mathcal{O}_Z/k} \to \prod_D J^0_{\mathcal{O}_D/k}
+\xrightarrow{u} J^0_{K/k} \to \mathcal{J}^0_{X/k} \to 0,
+\]
+c'est-à-dire le complexe $J_*$ d'une surface, de longueur $2$, et proposent
+\[
+(G\text{-}\mathrm{Div}) = \mathrm{Hom}\Bigl(\bigl(\textstyle\prod J^0_{\mathcal{O}_D/k}\bigr)/
+\mathrm{Im} \textstyle\prod_Z J_{\mathcal{O}_Z/k},\ G\Bigr),
+\qquad
+(G\text{-}\mathrm{Div})^0 \overset{?}{=} \mathrm{Hom}\bigl(\textstyle\prod J^0_{\mathcal{O}_D/k}/
+\mathrm{Ker}\,u,\ G\bigr)
+\]
+(« plausible »), et $(G\text{-}\mathrm{Div})/(G\text{-}\mathrm{Div})^0 \subset
+\mathrm{Hom}(H_1(J_*), G)$ — pour $G = \mathbb{G}_m$, le groupe de Néron–Severi
+s'injecte dans $\mathrm{Hom}(H_1(J_*), \mathbb{G}_m)$ : « A-t-on égalité ?? »
+\footnote{Le second argument des $\mathrm{Hom}$ n'est pas écrit sur la page ; on
+le rétablit. En marge de ces suites, « Aucune … n'existe … », et au bas de la
+page « Quel était l'accouplement idélique de Tate ??? ».}. La page 22 traite un
+$G$-diviseur sur $X \times Y$ comme une correspondance : il transforme les
+$0$-cycles de $X$ en $G$-diviseurs sur $Y$, d'où $J^{*}_{X/k} \to
+\mathrm{Pic}^{*}_G(Y)$ et un morphisme de la suite d'Albanese $0 \to
+N_{\mathrm{Alb}} \to Z^0_X \to J^0_{X/k} \to 0$ vers $0 \to G(K)/G(Y) \to
+\mathrm{Div}^0(Y, G) \to \mathrm{Pic}^0(Y, G) \to 0$.
+
+\pagerange{23}{34}
+\section*{Le théorème de Rosenlicht (pages 23 à 34)}
+
+\subsection*{Existence du schéma de Picard d'une courbe (page 24)}
+
+Soit $f : X \to Y$ un morphisme avec a) $Y$ localement noethérien, b) $X$ propre
+sur $Y$ (« faut-il même : loc.\ projectif ? »), c) $X$ plat sur $Y$, d) les fibres
+des courbes géométriquement connexes et réduites, e) le nombre de composantes
+irréductibles géométriques des fibres localement constant (sans quoi « on tombe
+sur des phénomènes à la Néron »). La page affirme que le schéma de Picard relatif
+$\mathrm{Pic}_{X/Y}$ existe et est lisse sur $Y$\footnote{La page écrit « les
+fibres de $X$ sur $S$ » et « le $S$-schéma » là où la base est $Y$ ; et elle dit
+« simple » pour lisse. Avec ces hypothèses, on sait aujourd'hui que le foncteur de
+Picard est représentable par un espace algébrique lisse dès que $f_*\mathcal{O}_X
+= \mathcal{O}_Y$ universellement (Artin, 1969 ; Raynaud, 1970) ; la lissité vient
+de ce que les obstructions vivent dans $H^2$ des fibres, nul pour des courbes. La
+représentabilité par un \emph{schéma} demande davantage.}. Si les fibres ont $n$
+composantes, il existe un revêtement étale $Y' \to Y$ de degré $n$, et
+une augmentation fidèlement plate $\mathrm{Pic}_{X/Y} \to \mathbb{Z}_{Y'/Y}$ (le
+multidegré), où $\mathbb{Z}_{Y'/Y} = \mathbf{N}_{Y'/Y}(\mathbb{Z}_{Y'})$ devient
+$\mathbb{Z}^n$ sur $Y'$ ; son noyau est $\mathrm{Pic}^0_{X/Y}$, à fibres connexes.
+La trace $\mathbb{Z}_{Y'/Y} \to \mathbb{Z}_Y$ donne le degré total
+$\mathrm{Pic}_{X/Y} \to \mathbb{Z}_Y$. Une section de la partie lisse de $X$ sur
+$Y$ définit un diviseur relatif de degré $1$, d'où un morphisme de la partie
+lisse vers $\mathrm{Pic}^1_{X/Y}$, fonctoriel en $Y$.
+
+\pagerange{25}{29}
+\subsection*{La courbe pincée et le théorème (pages 25 à 29)}
+
+Soit maintenant $X$ propre et lisse sur $Y$, à fibres de dimension $1$
+géométriquement connexes, et $S \subset X$ un sous-schéma fermé ne contenant
+aucune fibre, donc fini sur $Y$, et supposé plat sur $Y$\footnote{La page écrit
+« ne contenant aucune fibre de $X/Y$, donc fini sur $Y$, et plat sur $Y$ » : la
+finitude se déduit, la platitude est une hypothèse (un passage biffé juste avant
+la mentionne). Elle dit aussi « le faisceau d'idéaux définissant $Y$ » : c'est
+$S$ qui est défini.}. Le faisceau d'idéaux $\mathfrak{J}$ de $S$ est alors
+inversible ($S$ est un diviseur de Cartier relatif), et les
+$\mathcal{O}_X/\mathfrak{J}^n$ sont plats sur $Y$. Soit $S_n$ défini par
+$\mathfrak{J}^n$ ($n \geq 1$), et $X_n = X \amalg_{S_n} Y$ le $Y$-schéma obtenu en
+contractant $S_n$ sur $Y$ — la courbe pincée de Rosenlicht, de module $nS$. On a
+$X \to X_1 \to X_2 \to \cdots$, système inductif\footnote{La page pose $X_0 = X$ ;
+avec $S_0$ défini par $\mathfrak{J}^0 = \mathcal{O}_X$ la contraction n'aurait pas
+de sens, et l'on prend $X_0 = X$ par convention. Elle écrit d'abord
+« projectif » puis corrige en « inductif » pour les $X_n$, et l'inverse pour les
+$\mathrm{Pic}$ : c'est correct, un pincement plus fort donnant moins de fonctions,
+d'où $X_n \to X_{n+1}$.}, donc un système projectif des $\mathrm{Pic}_{X_n/Y}$ et
+un pro-schéma en groupes $\mathrm{Pic}_{S,X/Y}$ — la jacobienne généralisée à
+module porté par $S$. Les morphismes $X - S \to \mathrm{Pic}^1_{X_n/Y}$ donnent à
+la limite
+\[
+\varphi_S : X - S \longrightarrow \mathrm{Pic}^1_{S,X/Y} \subset \mathrm{Pic}_{S,X/Y}.
+\]
+
+\begin{tikzcd}[column sep=normal, row sep=normal]
+S_n \arrow[r, "i_n"] \arrow[d, "f_n"'] & X \arrow[d, "p_n"] \\
+Y \arrow[r, "\varepsilon_n"] & X_n
+\end{tikzcd}
+
+\emph{Théorème (de Rosenlicht).} Soit $G$ un $Y$-schéma en groupes commutatif de
+type fini, $P^1$ un fibré principal homogène sous $G$ (trivialisé par une
+extension fidèlement plate quasi-compacte), et $P$ le schéma en groupes
+$\mathbb{Z}$-augmenté qu'il définit ($P^{(0)} = G$, $P^{(1)} = P^1$). Alors
+$u \mapsto u \circ \varphi_S$ est une bijection
+\[
+\mathrm{Hom}_{\mathbb{Z}\text{-aug.}}\bigl(\mathrm{Pic}_{S,X/Y}, P\bigr)
+\xrightarrow{\ \sim\ } \mathrm{Hom}_Y(X - S, P^1),
+\]
+les homomorphismes d'un pro-objet étant la limite inductive des homomorphismes
+des $\mathrm{Pic}_{X_n/Y}$\footnote{Sur un corps algébriquement clos, c'est le
+théorème de Rosenlicht sous la forme de Serre (\emph{Groupes algébriques et corps
+de classes}, chapitres III à V) : tout morphisme $X - S \to G$ admet un module
+porté par $S$ et se factorise par la jacobienne généralisée correspondante.
+L'énoncé en famille, sur une base $Y$ quelconque, est donné sans démonstration ;
+le dossier n'en contient pas.}.
+
+\emph{Corollaire 1.} $\mathrm{Hom}_{Y\text{-gr}}(\mathrm{Pic}_{S,X/Y}, G) \simeq
+\mathrm{Hom}_Y(X - S, G)$ — c'est le théorème pour le fibré trivial $P = G \times
+\mathbb{Z}$.
+
+\emph{Corollaire 2.} Le foncteur $\varphi_S^{*}$, des extensions de
+$\mathrm{Pic}_{S,X/Y}$ par des $Y$-groupes commutatifs de type fini vers les
+fibrés principaux homogènes sur $X - S$, est pleinement fidèle.
+
+Un homomorphisme d'une extension $Q'$ (de groupe $G'$) vers $Q$ (de groupe $G$)
+est la donnée de $u : G' \to G$ et d'un isomorphisme $u_*Q' \simeq Q$, où
+$u_*Q'$ est l'extension poussée par $u$\footnote{La page écrit « un isom.\ de
+$Q'' = Q \times_G G'$ », après plusieurs ratures, et une note en marge réclame
+qu'on précise la définition. Un produit fibré $Q \times_G G'$ n'a pas de sens ici,
+$G$ étant le sous-groupe et non le quotient ; c'est la somme amalgamée $u_*Q' =
+(Q' \times G)/G'$ qu'il faut, et l'argument est inchangé.}. Comme
+$\mathrm{Ext}^1(\mathrm{Pic}_S, G) \to H^1(X - S, G)$ est un homomorphisme de
+groupes, son injectivité revient à : si $\varphi^{*}Q$ est trivial, $Q$ l'est, ce
+qui résulte aussitôt du théorème ; et la pleine fidélité se ramène à la
+bijectivité de $\mathrm{End}(Q) \to \mathrm{End}(\varphi^{*}Q)$, c'est-à-dire de
+$\mathrm{Hom}_{\text{gr}}(\mathrm{Pic}_S, G) \to \mathrm{Hom}_Y(X - S, G)$, qui est
+le corollaire 1.
+
+\emph{Corollaire 3.} L'homomorphisme
+$\mathrm{Ext}^1_{Y\text{-gr}}(\mathrm{Pic}_{S,X/Y}, G) \to H^1(X - S, G)$ est
+injectif. « Il semble » qu'il soit bijectif chaque fois que $S \to Y$ est
+surjectif, c'est-à-dire que les fibres de $X - S$ ne sont pas propres ; pour
+$S = \emptyset$ et $G = \mathbb{G}_m$, il ne l'est pas — le degré y fait
+obstacle, comme le précise la page 31.
+
+\pagerange{30}{34}
+\subsection*{Vers $H^*(X, G) = \mathrm{Ext}^*(\mathrm{Pic}, G)$ (pages 30 à 34)}
+
+La page 30 esquisse la surjectivité : par descente, on se ramène aux complétés
+des anneaux locaux de $S$, puis, de proche en proche, à leurs corps résiduels et
+à leurs clôtures algébriques. Pour $S = \emptyset$, une technique « de degré »
+donne un homomorphisme $d : H^1(X, G) \to \mathrm{Hom}_{Y\text{-gr}}(\mathbb{G}_m,
+G)$ et une suite exacte
+\[
+0 \to \mathrm{Ext}^1(\mathrm{Pic}_{X/Y}, G) \to H^1(X, G) \xrightarrow{\ d\ }
+\mathrm{Hom}_{Y\text{-gr}}(\mathbb{G}_m, G),
+\]
+que la page voudrait prolonger en $\to \mathrm{Ext}^2(\mathrm{Pic}_{X/Y}, G) \to
+H^2(X, G) \to \mathrm{Ext}^1(\mathbb{G}_m, G) \to \cdots$, la flèche
+$\mathrm{Ext}^{i-1}(\mathbb{G}_m, G) \to \mathrm{Ext}^{i+1}(\mathrm{Pic}_{X/Y}, G)$
+étant le produit par une classe fondamentale
+$\zeta \in \mathrm{Ext}^2(\mathrm{Pic}_{X/Y}, \mathbb{G}_m)$. Elle la construit
+ainsi : l'extension $0 \to N_S \to \mathrm{Pic}_{S,X/Y} \to \mathrm{Pic}_{X/Y} \to
+0$ donne une classe $\xi \in \mathrm{Ext}^1(\mathrm{Pic}_{X/Y}, N_S)$, une
+extension $0 \to \mathbb{G}_{m,Y} \to \mathcal{E}_{X/Y/S} \to N_S \to 0$ une classe
+$\eta \in \mathrm{Ext}^1(N_S, \mathbb{G}_m)$, et $\zeta = \eta \circ \xi$ (produit
+de Yoneda)\footnote{La page 31 appelle $\xi$ l'élément fondamental de
+$\mathrm{Ext}^2$, et la page 32 réserve $\xi$ à la classe de $\mathrm{Ext}^1$ et
+pose $\zeta = \eta \circ \xi$. On suit la page 32.}. Lorsque $\zeta = 0$ — par
+exemple si $X$ a une section sur $Y$ — on aurait les suites « plausibles »
+\[
+0 \to \mathrm{Ext}^i(\mathrm{Pic}_{X/Y}, G) \to H^i(X, G) \to
+\mathrm{Ext}^{i-1}(\mathbb{G}_m, G) \to 0.
+\]
+En passant à la limite sur des $S$ de plus en plus grands, la page 33 obtient un
+pro-groupe $\mathrm{Pic}_{\infty, X/Y}$ et un pro-morphisme $\varphi_\infty$, solution
+d'un problème universel, avec $H^i(R_{X/Y}, G) \simeq
+\mathrm{Ext}^i_{Y\text{-gr}}(\mathrm{Pic}_\infty, G)$, où $R_{X/Y}$ est, semble-t-il,
+la courbe générique au-dessus de $Y$, limite des ouverts\footnote{Le nom de
+$R_{X/Y}$ est illisible ; le contexte (limite sur les $S$) suggère la limite des
+ouverts $X - S$. L'énoncé est donné sans preuve.}. Elle relie les
+$\mathrm{Ext}^i(\mathrm{Pic}_S, G)$ et $\mathrm{Ext}^i(\mathrm{Pic}^0_S, G)$ par la
+suite longue des $\mathrm{Ext}^{\cdot}(-, G)$ de $0 \to \mathrm{Pic}^0_S \to
+\mathrm{Pic}_S \to \mathbb{Z} \to 0$, où $\mathrm{Ext}^i(\mathbb{Z}, G) = H^i(Y,
+G)$\footnote{La page écrit $H^i(S, G)$ pour ces termes : la base y est notée $S$,
+comme dans $\mathrm{Pic}_{S,X/S}$ ailleurs. Au-dessus des termes, elle inscrit
+$\mathrm{Hom}(\mathrm{Pic}_S, G) \simeq \mathrm{Hom}(X - S, G)$ et, avec « $\simeq$
+? », $\mathrm{Ext}^1(\mathrm{Pic}_S, G) \simeq H^1(X - S, G)$,
+$\mathrm{Ext}^2(\mathrm{Pic}_S, G) \simeq H^2(X - S, G)$.}, et remarque que cette
+théorie se passe entièrement des jacobiennes locales. La page 34, intitulée
+« Détailler », note l'autodualité des jacobiennes — $\mathrm{Pic}^0_{X/Y}$ comme
+faisceau $\mathcal{E}xt^1(\mathrm{Pic}^0_{X/Y}, \mathbb{G}_m)$, forme de la
+formule de Weil–Barsotti —, les suites spectrales local-global des deux côtés, et
+le « résultat plausible »
+\[
+H^{*}(X_S/Y, G) \simeq \mathrm{Ext}^{*}(\mathrm{Pic}_S, G).
+\]
+
+\pagerange{35}{37}
+\section*{Adèles des préschémas : séries formelles et vecteurs de Witt (pages 35 à 37)}
+
+Sous la chemise « Adèles des préschémas », une note rouge en marge dit le sujet :
+« Relations entre séries formelles et vecteurs de Witt ». Soit $\mathbb{S}_\infty$
+le schéma en anneaux affine sur $\mathbb{Z}$ tel que $\mathbb{S}_\infty(A) =
+1 + tA[[t]]$, l'addition étant la multiplication des séries et le produit la
+convolution $*$ définie par $(1 + at) * (1 + bt) = 1 + abt$ ; on a $(1 + at) * f(t) =
+f(at)$. C'est l'anneau des grands vecteurs de Witt\footnote{Le nom est le nôtre ;
+la page dit seulement qu'il y a aussi des opérations $\lambda^{i}$, et note
+$A[[t]]^{**}$ les séries d'augmentation $1$.}. En caractéristique $p$, le
+Frobenius des coefficients $F(\sum a_i t^i) = \sum a_i^p t^i$ est un endomorphisme
+d'anneau, avec $f(t)^p = F(f)(t^p)$ ; le décalage $V(f)(t) = f(t^p)$ est additif, et
+\[
+FV = VF = p.
+\]
+Pour $x = a^{p^i}$, on a $(1 + x t^{p^i}) * f = F^i(f)(x t^{p^i})$ et $(1 + at)^{p^i} *
+f = f(at)^{p^i}$\footnote{La page écrit la première formule pour $x$ quelconque ;
+sa démonstration, qui suit, la prouve pour $x = a^{p^i}$, et c'est ainsi qu'il faut
+la lire (elle vaut pour tout $x$ si $A$ est parfait).}. Sans restriction de
+caractéristique, il existe un morphisme d'anneaux $\psi : \mathbb{S}_\infty \to
+\mathbb{W}_\infty$ vers les vecteurs de Witt $p$-typiques, additif et déterminé par
+$\psi(1 + at) = (a, 0, 0, \ldots)$ — ce qui montre que les représentants de
+Teichmüller proviennent d'un morphisme de $\mathbb{Z}$-schémas du schéma
+multiplicatif vers $\mathbb{W}_\infty$ (multiplicatif, et non additif).
+
+\pagerange{39}{42}
+\section*{Descente galoisienne pour les classes d'idèles (pages 39 à 42)}
+
+Soit $C' \to C$ un revêtement galoisien de groupe $\Gamma$ de courbes, $K'/K$
+l'extension de corps de fonctions sur $\bar k$, et $J_{C'}(\bar k)$ défini par
+$0 \to K'^{*} \to \prod'_x K'^{*}_x \to J_{C'}(\bar k) \to 0$. Comme $K'^{*}$ et
+les $K'^{*}_x$ sont cohomologiquement triviaux sous $\Gamma$ — par le théorème de
+Tsen pour le corps de fonctions d'une courbe sur un corps algébriquement clos, et
+parce que $\bar k((t))$ est de même $C_1$ —, $\hat H^{*}(\Gamma, J_{C'}(\bar k)) = 0$,
+et le complexe des cochaînes $C^{*}(\Gamma, J_{C'}(\bar k))$ est une résolution de
+\[
+H^0(\Gamma, J_{C'}(\bar k)) = \Bigl(\prod'_{x} K^{*}_x\Bigr)\Big/ K^{*} = J_C(\bar k)
+\]
+par des $\pi$-modules, $\pi = \mathrm{Gal}(\bar k/k)$\footnote{Le nom du théorème
+« global » est illisible ; Tsen convient, et le théorème « local » est celui de
+Lang (les corps $\bar k((t))$ sont $C_1$). La page passe par $H^1(\Gamma, K'^{*}) =
+0$ (Hilbert~90) pour le calcul de $H^0$.}. On en tire une suite spectrale
+$H^p\bigl(H^q(\pi, C^{*}(\Gamma, J_{C'}(\bar k)))\bigr) \Rightarrow H^{*}(\pi,
+J_C(\bar k))$. Pour $k$ fini, la page écrit que les termes $q > 0$ s'annulent,
+par le théorème de Lang, et que la suite dégénère sur $C^{*}(\Gamma, J_{C'}(k))$ ;
+la page 41 passe à la limite sur les modules, par Mittag-Leffler\footnote{La page
+écrit $H^{i}(\pi, \mathbb{Z}) = 0$ pour $i > 0$. C'est vrai pour $i = 1$, faux pour
+$i = 2$ : $H^2(\hat{\mathbb{Z}}, \mathbb{Z}) \simeq H^1(\hat{\mathbb{Z}},
+\mathbb{Q}/\mathbb{Z}) = \mathbb{Q}/\mathbb{Z}$. La partie connexe, dont les points
+sur $\bar{\mathbb{F}}_p$ sont de torsion, n'a pas de cohomologie en degré
+$\geq 1$ (Lang, et $\mathrm{cd}\,\hat{\mathbb{Z}} = 1$ pour la torsion) ; c'est la
+composante $\mathbb{Z}$ du degré qui fournit ce $H^2$, et l'argument de la page
+doit l'écarter (en travaillant en degré~$0$) ou en tenir compte.}.
+
+La page 42 en vient à l'énoncé de corps de classes : pour $K$ le corps des
+fonctions sur un corps fini $k$,
+\[
+H^1(K, G) \simeq \mathrm{Ext}^1(J_K, G),
+\]
+puis $\mathrm{Ext}^1(J^0_K, G)$, $H^2(k, G) = 0$, et l'accouplement
+$J(k) \times \mathrm{Ext}^1(J, G) \to H^1(k, G)$ obtenu en tirant une extension en
+arrière par un point rationnel. Elle encadre « $H^1(k, G) \simeq G(k)$ (corps
+fini) »\footnote{Comme cohomologie galoisienne, $H^1(k, G) = 0$ pour $G$ connexe
+(Lang), et $H^1(\hat{\mathbb{Z}}, M) = M/(F - 1)M$ pour un $G$ fini étale. L'égalité
+$H^1(k, G) = G(k)$ vaut donc pour $G$ fini sur lequel le Frobenius agit
+trivialement — le cas des revêtements abéliens, qui est celui que la page a en
+vue —, et non en général. La parenthèse « corps fini » est lue sous réserve.},
+et compare, pour $0 \to J^0 \to J \to \mathbb{Z} \to 0$, la suite des
+$\mathrm{Ext}^1(-, G)$ à celle des $\mathrm{Hom}(-(k), H^1(G))$, les deux
+flèches extrêmes étant des isomorphismes.
+
+\pagerange{44}{68}
+\section*{Adèles pour plusieurs dimensions (pages 44 à 68)}
+
+La liasse s'ouvre sur un titre encadré, « Adèles pour plusieurs dimensions ». Le
+but est de faire pour un schéma de dimension quelconque ce que les idèles font
+pour une courbe : remplacer le couple « points entiers / points du complété »
+par une famille d'anneaux attachés aux \emph{chaînes} de points.
+
+\pagerange{44}{48}
+\subsection*{Anneaux attachés aux chaînes (pages 44 à 48)}
+
+Soit $X$ un schéma noethérien. Les points sont ordonnés par spécialisation ; une
+chaîne $x_0 < x_1 < \cdots < x_n$ est une suite où chaque point est une
+spécialisation stricte du suivant ($x_0$ le plus spécial). À une chaîne on
+attache un anneau $\mathcal{O}_{[x_0 \cdots x_n]}$ : pour un point,
+$\mathcal{O}_{[x]} = \hat{\mathcal{O}}_x$ ; pour le point générique d'une variété
+intègre, $\mathcal{O}_{[x]} = K$ ; pour une courbe sur une surface,
+$\mathcal{O}_{[x_0 x_1]} = \hat{\mathcal{O}}_{x_0} \otimes K$ localisé et complété le
+long de $x_1$. Les flèches « localisantes » relient les produits restreints
+$\prod_{x_0}\mathcal{O}_{[x_0]}$, $\prod_{x_1}\prod'_{x_0}\mathcal{O}_{[x_0 x_1]}$,
+$\prod\mathcal{O}_{[x_0 x_1 x_2]}$ dans un diagramme en escalier.
+
+En termes d'idéaux premiers d'un anneau noethérien $A$, la définition est
+récursive (pages 46, 51, 61, 64) :
+\[
+A_{[\mathfrak{p}]} = \hat A_{\mathfrak{p}},
+\qquad
+A_{[\mathfrak{p}_1, \ldots, \mathfrak{p}_n, \mathfrak{q}]}
+= \varprojlim_k A_{[\mathfrak{p}_1, \ldots, \mathfrak{p}_n]} \otimes_A
+A_{\mathfrak{q}}/\mathfrak{q}^k A_{\mathfrak{q}}
+\qquad (\mathfrak{p}_1 \supset \cdots \supset \mathfrak{p}_n \supset \mathfrak{q}),
+\]
+et l'anneau global de degré $n$ est
+\[
+\mathcal{A}^n = \prod_{a \in X} \varprojlim_k \mathcal{A}^{n-1} \otimes_A
+\mathcal{O}_a/\mathfrak{m}_a^k \ \subset\ \prod_{x_0 \leq \cdots \leq x_n}
+\mathcal{A}_{[x_0, \ldots, x_n]},
+\]
+« l'inclusion étant fidèlement plate »\footnote{C'est, à l'ordre de la récurrence
+près, la définition donnée par Beilinson (1980) des adèles d'un schéma
+noethérien, après Parshin (1976) pour les surfaces ; la platitude des anneaux
+d'adèles a été établie par Huber (1991). Ces pages sont antérieures à 1968 ; elles
+ne pouvaient connaître ni l'un ni l'autre, et il n'y a pas lieu d'en tirer une
+question de priorité : la page reste une esquisse, sans démonstration.}.
+Le calcul local de la page 47, pour $A = k[s,t]$ localisé à l'origine, la
+courbe $s = 0$ et le point générique, donne les anneaux $k[[s,t]]$,
+$k((t))[[s]]$, et $k((t))((s))$ pour la chaîne complète : un élément de
+$k((t))[s]/(s^n)$ s'écrit $a_0(t) + a_1(t)s + \cdots + a_{n-1}(t)s^{n-1}$, et
+l'on factorise $a_0(t)$ dès qu'il n'est pas nul. La page 48 écrit, pour une
+surface, le diagramme des groupes d'unités $\hat{\mathcal{O}}^{*}_x$,
+$\hat{\mathcal{O}}^{*}_{D,x}$, $\hat{\mathcal{O}}^{*}_D$, $\hat K^{*}_D$, $K^{*}$, et
+celui des points $G(\hat{\mathcal{O}}_x)$, $G(\hat{\mathcal{O}}_{D,x})$,
+$G(\hat K_D)$, $G(K)$ : le bicomplexe $DD(G)$ des pages 16 et 17, à trois étages.
+
+\pagerange{49}{52}
+\subsection*{Dualité de Matlis et anneaux $A_{\mathfrak{q},\mathfrak{p}}$ (pages 49 à 52)}
+
+Soit $A$ régulier de dimension finie, et $K_* = \bigoplus_{\mathfrak{p}}
+K_{\mathfrak{p}}$, où $K_{\mathfrak{p}}$ est l'enveloppe injective de
+$k(\mathfrak{p})$ : c'est la somme des termes de la résolution injective minimale
+de $A$, le complexe résiduel\footnote{Les mots « complexe résiduel » et
+« Matlis » sont les nôtres ; la page note $K_*$ d'un $K$ étoilé.}. Pour $M$ de
+type fini, posons
+\[
+D(M) = \mathrm{Hom}(M, K_*) = \bigoplus_{\mathfrak{p}} D_{\mathfrak{p}}(M),
+\qquad D_{\mathfrak{p}}(M) = \mathrm{Hom}(M, K_{\mathfrak{p}}),
+\]
+$D_{\mathfrak{p}}(M)$ étant $\mathfrak{p}$-primaire, réunion de sous-modules
+$U_i$ de longueur finie sur $A_{\mathfrak{p}}$. Comme $\mathrm{Hom}(U_i,
+K_{\mathfrak{q}}) = 0$ si $\mathfrak{q} \not\supset \mathfrak{p}$, on trouve
+\[
+DD(M) = \prod_{\mathfrak{p}} \prod'_{\mathfrak{q} \supset \mathfrak{p}}
+\mathrm{Hom}\bigl(D_{\mathfrak{p}}(M), K_{\mathfrak{q}}\bigr).
+\]
+Pour $A$ local d'idéal maximal $\mathfrak{q}$, le foncteur $M \mapsto
+\mathrm{Hom}(D_{\mathfrak{p}}(M), K_{\mathfrak{q}})$ est covariant et exact, donc,
+sur les modules de type fini, de la forme $M \otimes A_{\mathfrak{q},\mathfrak{p}}$
+avec $A_{\mathfrak{q},\mathfrak{p}} = \mathrm{Hom}(K_{\mathfrak{p}},
+K_{\mathfrak{q}})$ plat\footnote{La restriction aux modules de type fini est
+ajoutée : un foncteur additif exact à droite qui commute aux sommes finies est
+$- \otimes F(A)$ sur les modules de présentation finie (Watts). Pour
+$\mathfrak{p} = \mathfrak{q}$ on obtient $\hat A_{\mathfrak{q}}$, ce que dit la page
+(dualité de Matlis).}. Ces anneaux sont ceux des chaînes : la page 58 écrit
+$\mathrm{Hom}(K_{\mathfrak{p}}, K_{\mathfrak{q}}) = A_{\mathfrak{q},\mathfrak{p}}$ pour
+$\mathfrak{q} \supset \mathfrak{p}$, et l'exemple de la dimension~$1$ le confirme :
+$\mathrm{Hom}(K, E(k)) = \hat A \otimes K$. Ils se composent le long des chaînes
+de premiers (le treillis de la page 52).
+
+Les pages 51 et 53 calculent l'anneau d'une chaîne de longueur~$1$ :
+\[
+A_{[\mathfrak{p},\mathfrak{q}]} = \varprojlim_n A_{[\mathfrak{p}]} \otimes_A
+A_{\mathfrak{q}}/\mathfrak{q}^n A_{\mathfrak{q}}
+= \varprojlim_n \bigl(A_{[\mathfrak{p}]}/\mathfrak{q}^n A_{[\mathfrak{p}]}\bigr)
+\otimes_A A_{\mathfrak{q}},
+\]
+et l'on peut y remplacer $\mathfrak{q}^n$ par la puissance symbolique
+$\mathfrak{q}^{(n)}$\footnote{La page écrit les égalités en colonne et omet la
+limite projective à partir de la deuxième ligne ; elle porte sur toutes.
+Le remplacement par $\mathfrak{q}^{(n)}$ est licite car $\mathfrak{q}^{(n)}
+A_{\mathfrak{q}} = \mathfrak{q}^n A_{\mathfrak{q}}$.}.
+
+\pagerange{52}{60}
+\subsection*{Ensembles ordonnés, chaînes saturées, l'élément $\Theta$ (pages 52 à 60)}
+
+La construction est ensuite rendue abstraite. Soit $I$ un ensemble ordonné
+satisfaisant à la « condition des chaînes » : a) la longueur des chaînes joignant
+$x \geq y$ est bornée ; b) deux chaînes saturées joignant $x$ à $y$ ont même
+longueur $d(x, y)$ — c'est la caténarité. Soit $S_X$ l'ensemble simplicial dont
+les $n$-simplexes sont les chaînes $x_0 \leq \cdots \leq x_n$, c'est-à-dire les
+applications croissantes de $\Delta_n$ dans $X$. Les $A_\sigma$, avec pour toute
+opération simpliciale $u$ un morphisme $\varphi(\sigma, u) : A_{u^{*}(\sigma)} \to
+A_\sigma$, forment un faisceau sur $S_X$ ; la page juge qu'il y a lieu de négliger
+les simplexes dégénérés, c'est-à-dire de ne retenir que les chaînes
+strictes\footnote{La prose de la page 54 est très raturée ; on ne garde que ce
+qui se lit : « il y a lieu de \emph{négliger} … les simplexes … \emph{dégénérés} »,
+« ne retenir que les chaînes strictes ». La page 55 note « sans vérif.\ des
+opérations de dégénérescence ».}. La page 55 traite de même un objet
+cosimplicial $K^{*}$ d'une catégorie abélienne comme un module gradué muni des
+$\partial^n_i$, et y impose les relations $\partial^n_i = 0$ pour $1 \leq i \leq
+n$ : ne restent que les faces extrêmes, et le complexe obtenu est
+\[
+A_{[x_1 \cdots x_n]} \longrightarrow \prod_{x_0 \text{ précède } x_1}
+A_{[x_0, x_1, \ldots, x_n]} \xrightarrow{\ d_0\ } \prod A_{[x'_0, x_0, \ldots, x_n]},
+\]
+avec deux différentielles $d'$, $d''$ (ajout d'un point en tête, en queue) qui
+vérifient $d'^2 = d''^2 = 0$, $d'd'' = d''d'$ (page 56).
+
+Les pages 60 et 59 — les feuillets sont intervertis — en donnent la forme
+multiplicative\footnote{La page 60 s'arrête sur « et satisfont les », et la page
+59 commence par « une multiplication » : on lit 60 puis 59.}. Pour toute chaîne
+saturée $c = (x_0 \geq \cdots \geq x_n)$ on se donne un anneau $A_c$, et des
+homomorphismes $u_1 : A_{[x_0 \cdots x_{n-1}]} \to A_c$, $u_2 : A_{[x_1 \cdots x_n]}
+\to A_c$ qui commutent ; d'où des $u_{c,c'} : A_{c'} \to A_c$ pour $c \supset c'$,
+un système inductif sur les chaînes, et des accouplements $A_{c'} \times A_c \to
+A_{c'c}$ pour des chaînes composables bout à bout, associatifs (page 62). La
+somme des $A_c$ devient un anneau $A^{*}$ gradué par la longueur, non
+commutatif, dont la partie de degré~$0$, $A^0 = \bigoplus A_x$, est commutative.
+Soit $\Theta \in A^1$ l'élément dont les composantes sont les
+$1_{[x_0, x_1]}$ ; alors
+\[
+\Theta^2 = \sum_{[x_0, x_1, x_2] \text{ saturées}} 1_{[x_0, x_1, x_2]},
+\]
+et l'on passe au quotient par l'idéal bilatère engendré par $\Theta^2$. La page
+s'arrête là, sur des croquis.
+
+\pagerange{61}{68}
+\subsection*{L'algèbre graduée des endomorphismes du complexe résiduel (pages 61 à 68)}
+
+Les pages 61 à 64 reprennent les anneaux $A_{[\mathfrak{p}, \mathfrak{q},
+\mathfrak{r}]}$ (treillis de la page 61) et notent qu'un $A_{[\mathfrak{p}_1,
+\ldots, \mathfrak{p}_r]}$ est un anneau muni de $r$ topologies, métrisables,
+complètes, en général non adiques et non comparables. L'anneau d'une chaîne
+$\mathfrak{p} \supset \mathfrak{q}$ est complet, de corps résiduel l'anneau total
+des fractions de $\hat A_{\mathfrak{p}}/\mathfrak{q}\hat A_{\mathfrak{p}}$, complété
+d'un anneau local intègre de dimension~$1$.
+
+La page 65 dégage la structure : une $A$-algèbre topologique (séparée, complète)
+graduée $\mathcal{A}^{*}$, de degrés $\geq 0$, avec
+\[
+\mathcal{A}^0 = \prod_{x \in X} \hat{\mathcal{O}}_x,\ \text{d'où des projecteurs }
+\pi_x ;
+\]
+\[
+\Theta \in \mathcal{A}^1,\quad \Theta^2 = 0,\quad
+\pi_{x'}\Theta\pi_x = 0 \ \text{si } x' \text{ ne précède pas } x,
+\]
+« $\mathcal{A}$ libre pour ces propriétés ». La page 66 en donne le modèle :
+$\mathrm{Hom}(K_*, K_*)$, gradué par la composition, avec
+$\mathrm{Hom}^0 = \prod_x \hat{\mathcal{O}}_x$ (Matlis) et $\Theta \in \mathrm{Hom}^1
+= \prod_x \mathrm{Hom}(K(x), \bigoplus_{x' \text{ précède } x} K(x'))$, de
+composantes dans les $\hat{\mathcal{O}}_{x,x'}$ : $\Theta$ est la différentielle du
+complexe résiduel, et $\Theta^2 = 0$ est $d^2 = 0$\footnote{Cette identification
+est le sens de la comparaison des pages 65 et 66 ; la page ne l'énonce pas en ces
+termes. Dans le modèle $\mathrm{Hom}(K_*, K_*)$, la nullité de la somme, sur les
+points intermédiaires $x'$, des composés $K(x) \to K(x') \to K(x'')$ est la forme
+que prend la loi de réciprocité des résidus (page 67 : « nul »).}. Le commutateur
+gradué est
+\[
+[\Theta, u] = \Theta u - (-1)^{\deg u}\, u\Theta,
+\]
+qui vaut $\Theta u - u\Theta$ pour $\deg u = 0$\footnote{La page écrit $\{\Theta,
+u\} = \Theta u + (-1)^{\deg\Theta\deg u} u\Theta$, puis entre crochets
+« $\Theta u - u\Theta$ » pour $\deg u = 0$ : les deux ne s'accordent pas. Le signe
+du commutateur gradué est celui donné ici, qui s'accorde avec le crochet.}. Les
+pages 67 et 68 décomposent $\mathrm{Hom}(K, K) = \prod_x \prod'_y H(x,y)$, $H(x,y)
+= \mathrm{Hom}(K(x), K(y))$, avec $H(x,y) \to H(x',y')$ pour des chaînes saturées
+joignant $x$ à $x'$ et $y'$ à $y$, et introduisent, pour un ensemble ordonné $I$,
+la catégorie $\tilde I$ des flèches composées et un foncteur $K : \tilde I \to
+\mathcal{C}$. La liasse s'arrête sur ces définitions.
+
+\pagerange{69}{80}
+\section*{Jacobiennes locales (pages 69 à 80)}
+
+\pagerange{70}{73}
+\subsection*{Cohomologie locale à coefficients dans $G$ (pages 70 à 73)}
+
+Soit $A$ un anneau local régulier, $X = \mathrm{Spec}\,A$, $a$ son point fermé,
+$K$ son corps des fractions, et $G$ un groupe algébrique commutatif sur un corps
+$k \subset A$ algébriquement clos\footnote{L'hypothèse « $k$ algébriquement clos »
+est ajoutée : la réduction ci-dessous au groupe additif suppose les tores
+déployés et les groupes unipotents dévissables par des $\mathbb{G}_a$ ; la page
+parle simplement de « partie linéaire ».}. On travaille dans la « théorie
+čechiste » pour la topologie de Zariski, où $H^1$ classe les fibrés principaux
+localement triviaux. La cohomologie locale $H^i_A(G) = H^i(X, X - a; G)$
+s'insère dans
+\[
+0 \to H^0_A(G) \to G(X) \to G(X - a) \to H^1_A(G) \to 0,
+\qquad
+H^i_A(G) \simeq H^{i-1}(X - a, G)\ \ (i \geq 2),
+\]
+puisque $H^i(X, G) = 0$ pour $i > 0$, $X$ étant local. On trouve :
+\begin{enumerate}
+\item[a)] $H^0_A(G) = G(K)$ si $\dim A = 0$, et $0$ sinon ;
+\item[b)] $H^1_A(G) = G(K)/G(A)$ si $\dim A = 1$, et $0$ sinon ;
+\item[c)] pour $\dim A \geq 2$, $H^i(X - a, G) \simeq H^i(X - a, U)$ pour $i \geq 1$,
+où $U$ est la partie unipotente de $G$, et ce groupe est nul pour $i \neq
+\dim A - 1$.
+\end{enumerate}
+L'argument de c) : si $L$ est la partie linéaire de $G$, le quotient $G/L$ est
+une variété abélienne, dont les morphismes depuis un ouvert d'un schéma régulier
+se prolongent, si bien que le faisceau correspondant est constant sur $X - a$,
+donc flasque ; $H^i(X - a, G) = H^i(X - a, L)$ pour $i \geq 1$. Comme $A$ est
+factoriel, $H^1(X - a, \mathbb{G}_m) = \mathrm{Pic}(X - a) = 0$, et plus
+généralement les $H^i(X - a, \mathbb{G}_m)$ s'annulent pour $i \geq 1$ ; reste la
+partie unipotente, dévissée par des $\mathbb{G}_a$, et $H^i(X - a, \mathbb{G}_a) =
+H^{i+1}_{\mathfrak{m}}(A)$ ($i \geq 1$), nul pour $i + 1 \neq \dim A$, $A$ étant de
+Cohen–Macaulay. Ainsi :
+\[
+H^i_A(G) = 0 \quad (i \neq \dim A),
+\qquad
+H^{\dim A}_A(G) =
+\begin{cases}
+G(K) & \dim A = 0, \\
+G(K)/G(A) & \dim A = 1, \\
+H^{\dim A - 1}(X - a, U) & \dim A \geq 2.
+\end{cases}
+\]
+Le foncteur $G \mapsto H^{\dim A}_A(G)$ est exact pour les suites exactes
+localement triviales. La page note enfin que rien ne change si l'on remplace $A$
+par son complété\footnote{La page 71, tête-bêche et presque blanche, porte une
+première rédaction de a)--c), qui précise : « il faut choisir sa théorie :
+fibrés loc.\ triviaux, strictement isotriviaux, isotriviaux … ». La page 72
+distingue la théorie de Zariski ($H$) de celle des fibrés principaux quelconques
+($\mathcal{H}$), avec $H^1 \subset \mathcal{H}^1$.}.
+
+\pagerange{74}{75}
+\subsection*{La jacobienne locale et trois conjectures (pages 74 et 75)}
+
+La \emph{jacobienne locale} $J_{A/k}$ d'une localité régulière $A$ sur $k$ est
+le pro-groupe algébrique commutatif qui représente ce foncteur :
+\[
+\mathrm{Hom}_{k\text{-gr}}(J_{A/k}, G) \simeq H^{\dim A}_A(G).
+\]
+La représentabilité découle, dit la marge, de l'exactitude du foncteur. La page
+écrit alors « Je soupçonne » :
+\begin{enumerate}
+\item[a)] $J_{K/k}$ (dimension~$0$) est extension de $\mathbb{Z}$ par un groupe
+connexe, qui a une partie abélienne (l'Albanese de $K/k$), une partie
+multiplicative et une partie unipotente ;
+\item[b)] pour $\dim A = 1$, $J_{A/k}$ est connexe et linéaire, de partie
+multiplicative $\mathbb{G}_m$, et projectif relativement aux extensions par des
+groupes linéaires connexes ;
+\item[c)] pour $\dim A \geq 2$, $J_{A/k}$ est connexe, unipotent et projectif.
+\end{enumerate}
+Ces énoncés sont des conjectures, et le dossier ne les prouve pas\footnote{Ils
+s'accordent avec ce qui précède : $G(K)/G(A) = 0$ pour $G$ propre (critère
+valuatif) ou discret, d'où l'absence de partie abélienne et la connexité en
+dimension~$1$ ; $K^{*}/A^{*} = \mathbb{Z}$, d'où la partie multiplicative
+$\mathbb{G}_m$ ; la nullité des $H^{\dim}_A$ de $\mathbb{G}_m$ et des variétés
+abéliennes en dimension $\geq 2$, d'où l'unipotence. Pour $\dim A = 0$,
+$\mathrm{Hom}(J_{K/k}, G) = G(K)$ est le foncteur des applications rationnelles,
+représenté par la limite des variétés d'Albanese généralisées de Serre (1958).}.
+
+\pagerange{76}{78}
+\subsection*{Cohomologie de Weil (pages 76 à 78)}
+
+La section II passe à une cohomologie plate, « de Weil », qui « semble marcher
+moins bien ». Pour $A$ local hensélien, de corps résiduel $L$, et $G$ lisse,
+$H^i(A, G) = H^i(L, G)$ pour $i > 0$\footnote{La page commence par « Je crois que
+vrai en tout cas [pour $A$ local hensélien] que $H^i(A, G) = 0$ si $i > 0$ », puis
+corrige aussitôt en $H^i(A, G) = H^i(L, G)$ pour $G$ lisse (« $k$-simple »). La
+nullité demande $L$ séparablement clos.}, et la page écrit $H^i(L, G) = H^i(L,
+G/L_0)$ pour $i \geq 1$, $L_0$ le plus grand sous-groupe linéaire connexe de
+$G$\footnote{C'est vrai pour $L$ fini (Lang, et $\mathrm{cd}\,\hat{\mathbb{Z}} = 1$
+pour les modules de torsion), faux en général : $H^2(L, \mathbb{G}_m) =
+\mathrm{Br}(L)$ et le $H^1$ d'un tore non déployé n'ont pas de raison d'être nuls.
+La page 77 répète l'égalité pour $A$ et $K$, et en conclut qu'on peut supposer
+$L_0 = 0$.}. En dimension~$1$, la cohomologie relative $H^i(A \bmod K, G) =
+H^i_A(G)$ s'insère dans la suite longue
+\[
+\cdots \to H^1(A, G) \to H^1(K, G) \xrightarrow{\ \partial\ } H^2(A \bmod K, G) \to
+H^2(A, G) \to H^2(K, G) \to \cdots,
+\]
+et doit donc s'obtenir comme extension d'un noyau par un conoyau de $H^i(L, G) =
+H^i(A, G) \to H^i(K, G)$ ; la page dessine en regard la suite des groupes
+fondamentaux $1 \to \pi_1(A \bmod K) \to \pi_1(K) \to \pi_1(A) = \pi_1(L) \to 1$,
+c'est-à-dire l'inertie. En dimension $\geq 2$, $H^2_A(G)$ est extension de
+$\mathrm{Coker}(H^1(X, G) \to H^1(X - a, G))$ par $\mathrm{Ker}(H^2(X) \to H^2(X - a,
+G))$, et, pour $G$ extension d'un groupe discret par un groupe propre, le
+théorème de pureté rend $H^1(X, G) \to H^1(X - a, G)$ surjectif\footnote{Pour $G$
+fini étale c'est la pureté de Zariski–Nagata, en dimension $\geq 2$ et $A$
+régulier. La page ajoute « [et est simple sur $k$] » et laisse la suite en
+« ? … » ; elle s'arrête sur $H^2(X) \to H^2(X - a, G)$.}.
+
+\pagerange{79}{80}
+\subsection*{Adèles et jacobiennes généralisées des courbes (pages 79 et 80)}
+
+La page 79 revient au programme des pages 16 et 17, avec un titre encadré en
+marge. Pour le complexe $J_*$ de jacobiennes locales, deux suites spectrales
+\[
+\mathcal{E}xt^{*}(J_*, G) \Longleftarrow H^p\bigl(\mathrm{Ext}^q(J_*, G)\bigr),
+\qquad
+\mathcal{E}xt^{*}(J_*, G) \Longleftarrow \mathrm{Ext}^p\bigl(H_q(J_*), G\bigr)
+\]
+relient, dit la marge, la cohomologie de Weil et la cohomologie čechiste. Pour
+$X$ une courbe non singulière, $H_0(J_*) = J^{\bullet}_{X/k}$ est la jacobienne
+de Rosenlicht, et $H_1(J_*) = \mathbb{G}_m$ si $X$ est complète, $0$ sinon. D'où,
+pour $X$ non complète,
+\[
+H^{*}(X, G) = \mathrm{Ext}^{*}(J^{\bullet}_{X/k}, G),
+\]
+et pour $X$ complète la suite exacte
+\[
+\cdots \to \mathrm{Ext}^p(J^{\bullet}_{X/k}, G) \to H^p(X, G) \to
+\mathrm{Ext}^{p-1}(\mathbb{G}_m, G) \to \mathrm{Ext}^{p+1}(J^{\bullet}_{X/k}, G) \to
+\cdots,
+\]
+la dernière flèche étant le produit par une classe de
+$\mathrm{Ext}^2(J^{\bullet}_{X/k}, \mathbb{G}_m)$ — la classe $\zeta$ de la
+page 32. Ici $J^{\bullet}_{X/k}$ doit être la jacobienne généralisée comme
+pro-objet, limite des jacobiennes de module $nS$ où $S$ est l'ensemble des
+points à l'infini\footnote{La page décrit $J^{\bullet}_{X/k}$ comme extension de
+$\mathbb{Z}$ par l'Albanese birationnel, par le produit des $\mathbb{G}_m$ des
+points qui manquent à $X$ divisé par $\mathbb{G}_m$ diagonal : c'est la jacobienne
+de module réduit, qui ne représente que les morphismes vers des groupes
+semi-abéliens. Avec elle la formule serait fausse pour $G = \mathbb{G}_a$ : sur
+$X$ affine $H^1(X, \mathbb{G}_a) = 0$, alors que l'$\mathrm{Ext}^1$ de cette
+jacobienne par $\mathbb{G}_a$ contient $H^1(\bar X, \mathcal{O})$. Le pro-objet
+$\varprojlim_n J_{nS}$, qui est le $\mathrm{Pic}_{S}$ des pages 26 à 33, a une
+partie unipotente infinie et rend la formule correcte en degré~$1$
+(Rosenlicht--Serre).}. En passant à la limite sur les ouverts denses, la page
+encadre, pour $K = k(X)$,
+\[
+\mathrm{Ext}^{*}(J^{\bullet}_{K/k}, G) \simeq H^{*}(K, G),
+\]
+sans démonstration.
+
+La page 80 calcule $J^{\bullet}_{A/k}$ pour un anneau de valuation discrète $A$
+dont le corps résiduel $L$ est de degré de transcendance~$1$ sur $k$, à partir de
+la décomposition du groupe multiplicatif d'un anneau de séries $L[[t]]$ en
+$L^{*} \times (1 + tL[[t]])$, ce dernier facteur étant le groupe additif des
+grands vecteurs de Witt $\mathbb{S}'_L$ des pages 35 à 37 :
+\[
+\coprod_{L/k} \mathbb{S}^{*}_L = \coprod_{L/k} \mathbb{Z}_L \times \coprod_{L/k}
+\mathbb{G}_{m,L} \times \coprod_{L/k} \mathbb{S}'_L,
+\]
+où $\coprod_{L/k}$ est la restriction des scalaires ; $\mathcal{U} = \coprod_{L/k}
+\mathbb{S}'_L$ est unipotent connexe, et, par le théorème de Rosenlicht appliqué
+aux modèles $C'$ de $L$, $\mathrm{Hom}_{k\text{-gr}}(\mathcal{U}, G)$ s'identifie
+aux homomorphismes « restreints » de $J^{\bullet}_{L/k} \times E^1$ vers
+$G$\footnote{La lecture de cette page est en grande partie incertaine
+(« restreint », « multiplicatif en les facteurs », les sections marquées) ; on n'en
+donne que la structure. La page s'arrête sur « $0 \to \mathcal{U}_0 \to \mathcal{U}
+\to \mathbb{S}'_k \to 0$ (suite splittante), donc », et la page 81 commence par
+$\mathrm{Hom}_{k\text{-gr}}(\mathcal{U}_0, G) = \mathrm{Hom}(J^0_{L/k} \otimes E^1,
+G)$, le signe $\otimes$ lu sous réserve.}.
+
+\pagerange{81}{89}
+\section*{Catégories de groupes et dualité locale (pages 81 à 89)}
+
+La page 83 dessine les catégories en jeu et leurs inclusions : $k$-schémas en
+groupes, $k$-groupes quasi-compacts, $k$-préschémas localement algébriques,
+groupes algébriques, groupes pro-algébriques, faisceaux fppf et fpqc (« ne sont
+pas abéliennes » pour les premières). Elle demande si les faisceaux fppf sont les
+faisceaux fpqc qui commutent aux limites inductives filtrantes d'anneaux, et
+compare, pour un système $(G_i)$, $F(S) = \varinjlim G_i(S)$ et $F'(S) =
+(\varprojlim G_i)(S)$, qui coïncident sur le petit site fppf : $F' = u^{*}u_{*}F$
+pour le morphisme de sites $u$. Puis un programme : « Calculer les
+$\mathrm{Ext}^i$ des groupes élémentaires » $\alpha_p$, $\mu_p$,
+$\mathbb{Z}/p\mathbb{Z}$, $\mathbb{Z}/\ell\mathbb{Z}$, $\mathbb{G}_a$,
+$\mathbb{G}_m$, $\mathbb{Z}$, $A$ (variété abélienne) sur un corps
+algébriquement clos, en vérifiant que le résultat ne dépend pas de la
+catégorie\footnote{Ce programme a été mené depuis : Oort (\emph{Commutative group
+schemes}, 1966) pour les $\mathrm{Ext}^1$, Breen (1969 et suivantes) pour les
+$\mathrm{Ext}^i$ fppf de $\mathbb{G}_a$. La question de la dépendance en la
+catégorie y joue un rôle réel.}.
+
+La page 85 rend inversibles les morphismes entiers, radiciels et surjectifs —
+les homéomorphismes universels —, d'où une catégorie $(\mathrm{QSch})$, des
+faisceaux qfpqc et qfppf, et un treillis de catégories de groupes « modulo
+radiciels », où « $k$-gr.\ alg.\ / radiciels $\simeq$ groupes
+quasi-algébriques ». Ce sont les groupes quasi-algébriques de Serre
+(\emph{Groupes proalgébriques}, 1960), qu'on décrit aujourd'hui comme les schémas
+en groupes parfaits.
+
+La page 88 donne quatre formulations de la dualité locale pour un complexe
+constructible $F^{\bullet}$ sur un schéma local $X$ de point fermé $a$, chacune
+avec l'hypothèse qu'elle demande :
+\begin{enumerate}
+\item[(i)] $F^{\bullet} \to DDF^{\bullet}$ est un isomorphisme ($X$ « bon ») ;
+\item[(ii)] $H^i_a(X, F^{\bullet})$ est dual de $H^{-i}(X, \hat F^{\bullet})$ ($X$
+strictement local et « bon ») ;
+\item[(iii)] $H^i(X - a, F^{\bullet})$ est dual de $H^{-i-1}(X - a, \hat F^{\bullet})$ ;
+\item[(iv)] $\mathrm{Ext}^i(X; F, \lambda(G)) \simeq \mathrm{Ext}^i(k;
+\mathrm{R}i^{!}F, G)$ ($X$ local hensélien « bon », de corps résiduel $k$),
+\end{enumerate}
+avec (i) $\Rightarrow$ (ii) $\Leftrightarrow$ (iii) $\Leftrightarrow$ (iv), où $\hat
+F$ désigne le dual\footnote{Ce sont des énoncés, sans démonstration. Pour la
+cohomologie étale, la bidualité (i) sur un schéma régulier excellent est le
+théorème de Gabber ; (ii) en est la conséquence par adjonction. La page ne
+précise pas ce que « bon » recouvre.}. La page 89 en déduit, pour $U \subset X$
+ouvert et $a \in Z \subset Y \subset X$, les accouplements de deux suites exactes
+longues de cohomologie locale, mises face à face, la seconde lue à rebours :
+\[
+\begin{array}{ccc}
+H^i_Z(F) & \times & H^{-i}_a(\hat F|Z) \\
+H^i_Y(F) & \times & H^{-i}_a(\hat F|Y) \\
+H^i_{Y-Z}(F) & \times & H^{-i-1}\bigl(Y - a, \mathrm{R}k_{!}(\hat F|Y - Z)\bigr)
+\end{array}
+\]
+
+\pagerange{90}{120}
+\section*{Corps de classes local géométrique et dualité (pages 90 à 120)}
+
+\pagerange{91}{97}
+\subsection*{Topologie de Weil sur un trait et foncteur de Néron (pages 91 à 97)}
+
+Soit $\mathbb{V}$ un anneau de valuation discrète complet, de corps résiduel
+parfait $k$, de corps des fractions $K$, d'uniformisante $\pi$. On regarde
+$\mathbb{V}$ comme schéma en anneaux sur $k$, et $K$ comme ind-schéma en anneaux,
+$A \mapsto \mathbb{W}(A)_\pi$\footnote{La formule $\mathbb{K}(A) = \mathbb{W}(A)_\pi$
+est celle du cas $\mathbb{V} = W(k)$ ; en général on passe par le foncteur de
+Greenberg (1961), dont c'est le contexte. Les lettres $\mathbb{V}$, $\mathbb{K}$,
+$\mathbb{W}$ sont à double trait sur la page.}. Sur $S = \mathrm{Spec}\,\mathbb{V}$
+on met la « topologie de Weil » : la catégorie des $S'$ plats de type fini sur
+$S$, avec la descente fidèlement plate. Soit $\mathcal{C}(S)$ la catégorie des
+faisceaux de Weil abéliens ; un tel faisceau se prolonge canoniquement aux
+préschémas plats sur $S$ par les conditions (i) de nature locale, (ii) commutation
+aux limites inductives d'anneaux, d'où (iii) compatibilité à la descente par
+morphismes fidèlement plats de présentation finie. Tout préschéma en groupes
+commutatif $G$ sur $S$ définit un faisceau, et si $G$ est localement de type fini
+son prolongement est encore représenté par $G$ : $\overline{G}(S') =
+\mathrm{Hom}_S(S', G)$. Dans $\mathcal{C}(S)$ on a $H^i(S, F) = \mathrm{Ext}^i(S;
+\mathbb{Z}_S, F)$ et la suite spectrale $\mathrm{Ext}^{*}(S; F, G) \Leftarrow
+H^p(S, \mathcal{E}xt^q(F, G))$ ; pour l'ouvert générique $i : U \to S$, « quels sont
+les foncteurs dérivés » de $i_*$ ?
+
+Sur $k$, on prend la topologie $\mathcal{T}'_k$ dont les recouvrements sont les
+morphismes \emph{finis} surjectifs, et la catégorie $\mathcal{C}'(k)$ de ses
+faisceaux ; pour $k$ algébriquement clos, $H^i(k, F) = 0$ pour $i > 0$. Il
+faudrait prouver que, pour $G$ lisse, ses $H^i(k, G)$ sont ceux du faisceau de
+Weil associé, de même pour les $\mathrm{Ext}$, et étudier si $H^i(k, G)$ se calcule
+comme une cohomologie galoisienne.
+
+Le foncteur fondamental, « dit de Néron », est
+\[
+\mathcal{N} : \mathcal{C}(S) \to \mathcal{C}'(k),
+\qquad
+\mathcal{N}(F)(A) = \varinjlim_{\mathcal{P}} \prod_{i \in I_{\mathcal{P}}}
+F\bigl(\mathbb{V}(A^{\mathcal{P}}_i)\bigr),
+\]
+où $A$ est une $k$-algèbre réduite et $\mathcal{P}$ parcourt ses partitions
+constructibles finies : on regarde un $k$-schéma réduit comme un pro-schéma
+affine, on le transforme par $\mathbb{V}$ en un pro-schéma sur $S$, et l'on applique
+$F$. Le foncteur $\mathcal{N}$ est exact à gauche ; on pose $\mathcal{N} =
+\mathcal{H}^0_{S/k}$ et $\mathrm{R}^i\mathcal{N} = \mathcal{H}^i_{S/k}$, avec
+$H^0_S = H^0_k \circ \mathcal{H}^0_{S/k}$. Si $\mathcal{N}$ transforme injectifs en
+injectifs (« à vérifier »), on a la suite spectrale de Leray
+\[
+H^{*}(S, F) \Longleftarrow H^p\bigl(k, \mathcal{H}^q_{S/k}(F)\bigr),
+\]
+et, avec $\mathcal{H}om_{S/k}(F, G) = \mathcal{H}^0_{S/k}(\mathcal{H}om_S(F, G))$ et
+ses dérivés $\mathcal{E}xt^i_{S/k}$, deux autres suites spectrales
+\[
+\mathcal{E}xt^{*}_{S/k}(F, G) \Longleftarrow \mathcal{H}^p_{S/k}\bigl(\mathcal{E}xt^q_S(F,
+G)\bigr),
+\qquad
+\mathrm{Ext}^{*}(S; F, G) \Longleftarrow H^p\bigl(k, \mathcal{E}xt^q_{S/k}(F, G)\bigr),
+\]
+chacune sous une hypothèse d'acyclicité marquée « vérifier »\footnote{Une
+démonstration de l'adjonction qui rendrait l'exactitude évidente est écrite puis
+barrée en page 96. Le cadre que ces pages cherchent est celui où Bégueri (1980)
+puis Suzuki (à partir de 2013) ont établi la dualité des corps locaux à corps
+résiduel parfait, avec un foncteur de la même nature que $\mathcal{N}$ ; la page
+ne pouvait les connaître, et ne prouve rien de ce qu'ils prouvent.}.
+
+\pagerange{99}{105}
+\subsection*{Le plan de travail et le carré des dualités (pages 99 à 105)}
+
+La page 99, au crayon, ouvre par une formule de dualité
+\[
+\mathcal{E}xt^i_{K\text{-gr}}(G, S\gamma) \simeq
+\mathcal{E}xt^{i+n}_{k\text{-gr}}(T^{*}G, \gamma),
+\qquad S\gamma = (D\Delta\gamma_K)(1),
+\]
+« isomorphisme si $G$ est affine sans composante $\mathbb{G}_a$ », où $T$ est le
+foncteur des $K$-groupes vers les $k$-quasi-groupes, $D$ la dualité de Cartier et
+$\Delta$ celle de Serre\footnote{L'exposant $i + n$, celui de la ligne suivante
+($2i$), et la lettre $D$ de $S\gamma$ sont des lectures douteuses ; $n$ n'est pas
+défini sur la page.}. Suit un plan, continué page 101 :
+\begin{enumerate}
+\item[1)] $K$-groupes algébriques : $\mathrm{Ext}$, $\mathcal{E}xt$, $H^p$
+(nature arithmétique, géométrique) ;
+\item[2)] dualité de Cartier ;
+\item[3)] cohomologies algébriques ;
+\item[4)] dualité de Serre–Rosenlicht ;
+\item[5)] le foncteur $\Gamma_{K/k}$ (« le Néron-… ») ;
+\item[6)] les foncteurs $\mathcal{E}xt^{*}_{K/k}(F, G)$, $\mathcal{H}^{*}_{K/k}(G)$ ;
+\item[7)] l'homomorphisme fondamental ;
+\item[8)] le théorème de dualité ;
+\item[9)] application 1 : l'isomorphisme $H^i(K, \gamma_K) \simeq
+\mathrm{Ext}^i_{k\text{-gr}}(J_{K/k}, \gamma)$ pour $i > 0$, « idem aux corps de
+classes de Serre » ;
+\item[10)] application 2 : autodualité (des vecteurs de Witt ?) ;
+\item[11)] application 3 : cohomologie des variétés abéliennes ;
+\item[12)] l'isomorphisme de Lang (corps $k$ fini) ;
+\item[13)] application 4 : dualité de Tate ;
+\item[14)] compléments aux égales caractéristiques ; théorèmes de Rosenlicht
+locaux.
+\end{enumerate}
+Les points 3), 5) et 8) sont cochés. La généalogie est notée en marge de la
+page 101 : Lang, géométrisation du corps de classes global (avec Rosenlicht) ;
+Serre, géométrisation du corps de classes local ; Tate, dualité de la
+cohomologie des variétés abéliennes sur les corps $p$-adiques\footnote{Le point
+9) est, pour $i = 1$ et $\gamma$ fini, le théorème de Serre (« Sur les corps
+locaux à corps résiduel algébriquement clos », 1961) :
+$\mathrm{Gal}(K^{\mathrm{ab}}/K) \simeq \pi_1(U_K)$. L'énoncé en tout degré est le
+programme.}.
+
+La page 103 pose $T : K\mathrm{Gr}_K \to K\mathrm{QuGr}_k$, des complexes finis
+de $K$-groupes vers les complexes finis de $k$-quasi-groupes, avec
+$\Gamma^{*}_K \simeq \Gamma^{*}_k \circ T$ — « la cohomologie de $K$ ne se
+calcule pas galoisiennement, celle de $k$ si » —, et trois questions : $T^{\circ}$
+transforme-t-il injectifs en $\Gamma^{\circ}_k$-acycliques ? est-il de dimension
+cohomologique $\leq 2$ (et $\leq 1$ hors des composantes de type $\mathbb{Z}$) ?
+commute-t-il à l'extension du corps résiduel ? La page 105, pour $k$ fini, dessine
+le carré des dualités :
+
+\begin{tikzcd}[column sep=large, row sep=normal]
+K^{-}_{\mathrm{fini}}(K)^{\circ} \arrow[r, "D"] \arrow[d, "T"'] & K^{+}_{\mathrm{fini}}(K) \arrow[d, "T(-1)"] \\
+K^{-}(k)'^{\circ} \arrow[r, "\Delta"] \arrow[d, "S"'] & K^{+}(k)' \arrow[d, "S(-1)"] \\
+K^{-}\mathcal{C}^{\circ} \arrow[r, "\Theta"] & K^{+}\mathcal{C}
+\end{tikzcd}
+
+où $D$ est la dualité de Cartier, $\Delta$ celle de Serre, $\Theta$ celle de
+Pontrjagin sur les groupes abéliens localement compacts $\mathcal{C}$, $T$ les
+foncteurs de Greenberg et $S$ les points rationnels $\Gamma_k$ ; le carré du haut
+est la « théorie de dualité géométrique », celui du bas « Frobenius–Lang ».
+« Comment obtient-on le carré du bas ? » La page le vérifie sur
+$\mathbb{Z}/n\mathbb{Z}$ : $\mathrm{Ext}^i_{k\text{-gr}}(G, \mathbb{Z}/n\mathbb{Z})
+\simeq \mathrm{Ext}^{i-1}_{\mathrm{gr.top}}(SG, \mathbb{Z}/n\mathbb{Z})$, avec au
+bout $\mathbb{Z}/n\mathbb{Z}$ « ! ».
+
+\pagerange{106}{108}
+\subsection*{Groupes finis, $\mu_p$, $\alpha_p$, $\mathbb{G}_m$ (pages 106 à 108)}
+
+La page 106 encadre l'accouplement de Tate $H^i(A) \times H^{2-i}(B) \to H^2(K,
+\mathbb{G}_m)$ et écrit, pour un $K$-groupe $G$ fini,
+\[
+\mathrm{Ext}^i_{k\text{-gr}}(G, \mathbb{Q}/\mathbb{Z}) \simeq
+\mathrm{Hom}\bigl(H^{1-i}(K, G), \mathbb{Q}/\mathbb{Z}\bigr),
+\]
+$G$ désignant à gauche son image par $T$\footnote{La page n'écrit pas $T$ ;
+l'exposant $1 - i$ est surchargé, et dans l'accouplement qui suit pour
+$\mathbb{Z}/n\mathbb{Z}$ il pourrait être $2 - i$. Ces formules sont données
+comme la page les donne, sans vérification des degrés.}. La page 108 calcule :
+pour $G = \mu_p$, les $\mathcal{E}xt^i_{k\text{-gr}}(\mu_p,
+\mathbb{Q}/\mathbb{Z})$ sont nuls et $H^1(K, \mu_p) = K^{*}/K^{*p}$ (Kummer
+plat) ; pour $G = \mathbb{G}_m$, $\mathcal{E}xt^i(\mathbb{G}_m,
+\mathbb{Q}/\mathbb{Z}) = 0$ sauf pour $i = 1$, où l'on trouve le dual des racines
+de l'unité, et $\mathrm{Ext}^1(\mathbb{G}_m, \mathbb{Z}/n\mathbb{Z}) \simeq
+{}_n\check\mu$ ($n$ premier à $p$) ; $H^i(k, \mathbb{G}_m) = k^{*}, 0, 0, \ldots$ sur
+$k$ algébriquement clos ; et, pour $k$ fini,
+\[
+\mathrm{Ext}^1_{k\text{-gr}}(\mathbb{G}_m, \mathbb{Q}/\mathbb{Z}) \simeq
+\mathrm{Hom}\bigl(\mathbb{G}_m(k), \mathbb{Q}/\mathbb{Z}\bigr),
+\]
+par l'isogénie de Lang\footnote{La page numérote « 3°) » deux cas de suite,
+$\alpha_p$ puis $\mathbb{G}_m$ ; le cas $\alpha_p$ ne porte que « $\times p$ ». La
+dernière formule est celle de Serre (\emph{Groupes algébriques et corps de
+classes}, VI) : pour $G$ connexe sur un corps fini, les extensions de $G$ par un
+groupe fini $\Gamma$ correspondent aux $\mathrm{Hom}(G(k), \Gamma)$.}.
+
+La page 107, tête-bêche, est le brouillon d'un corollaire des \emph{Éléments}
+(numéroté « .9.10 », le premier chiffre illisible) : pour $f : X \to Y$ propre de
+type fini, $Y$ localement noethérien, $f$ universellement ouvert aux points de
+$X_y$ et $X_y$ séparable, le nombre $\pi(z)$ de composantes connexes géométriques
+de $X_z$ est continu au voisinage de $y$ — par réduction au cas d'un trait. La
+page 109 est un feuillet dactylographié d'une rédaction du chapitre IV des
+\emph{Éléments} (« IV 7 Oubli au n° 7.6 »), annoté de sa main : la semi-continuité
+supérieure de la somme des multiplicités géométriques totales (Proposition 6.7)
+et, sur un trait, l'inégalité des longueurs $\sum_i \mathrm{long}\,F_{0,x_i}
+\geq \sum_j \mathrm{long}\,F_{1,x'_j}$ entre fibre spéciale et fibre générique
+(Lemme 6.8), avec un N.B. où il doute que les conditions suffisent à la platitude
+aux points maximaux\footnote{Le feuillet est barré de trois traits ; s'il a été
+publié sous cette forme n'a pas été établi.}.
+
+\pagerange{111}{113}
+\subsection*{Présentations par Greenberg et dualité (pages 111 à 113)}
+
+La page 111 range en six cases les groupes finis $\mu_n$ et
+$\mathbb{Z}/n\mathbb{Z}$ ($n$ premier à $p$), $\mu_p$, $\mathbb{Z}/p\mathbb{Z}$,
+$\alpha_p$, puis $\mathbb{G}_m$ et $\mathbb{Z}$, chacun présenté comme noyau d'une
+isogénie de groupes lisses dont on prend la transformée de
+Greenberg\footnote{L'abréviation est transcrite « $\mathrm{Grbg}$ » et lue par le
+transcripteur comme « gerbe(s) ». Le contexte — la page 105 nomme « Greenberg »
+les foncteurs $T$ — la fait lire ici comme Greenberg ; la transcription reste
+l'autorité.} : $\mu_n = \mathrm{Ker}(n : \mathbb{G}_m \to \mathbb{G}_m)$,
+$\mathbb{Z}/p\mathbb{Z} = \mathrm{Ker}(\wp : \mathbb{G}_a \to \mathbb{G}_a)$,
+$\alpha_p = \mathrm{Ker}(F : \mathbb{G}_a \to \mathbb{G}_a)$, et leurs $H^0$, $H^1$
+sur $K$ :
+\[
+\begin{array}{lll}
+\mu_n : & \mu_n(K), & \mathbb{Z}/n\mathbb{Z} \\
+\mathbb{Z}/n\mathbb{Z} : & \mathbb{Z}/n\mathbb{Z}, & \check\mu_n \\
+\mu_p : & 0, & K^{*}/K^{*p} \\
+\mathbb{Z}/p\mathbb{Z} : & \mathbb{Z}/p\mathbb{Z}, & K/\wp K \\
+\alpha_p : & 0, & K/K^{p} \\
+\mathbb{G}_m : & K^{*}, & 0
+\end{array}
+\]
+(Artin–Schreier, « cf.\ corps de classes local », pour $\mathbb{Z}/p\mathbb{Z}$, et
+Hilbert~90 pour $\mathbb{G}_m$)\footnote{Pour $\alpha_p$, la page écrit
+$K^{+}/\wp K^{+p}$, le $\wp$ incertain ; le conoyau du Frobenius est $K/K^p$. La
+case $\alpha_p$ est écrite deux fois. Les valeurs pour $\mu_n$ et
+$\mathbb{Z}/n\mathbb{Z}$ supposent $K$ à corps résiduel algébriquement clos, de
+groupe d'inertie modérée $\hat{\mathbb{Z}}'(1)$.}. La page 112, barrée,
+définit pour un revêtement des homomorphismes de réciprocité
+$\mathrm{Gal}(\bar K_x/K_x) \to \mathrm{Gal}(K'/K^{D}_x)$ et les plus grandes
+sous-extensions complètement décomposées ou non ramifiées. La page 113 encadre
+\[
+H^i\bigl(K, D(G)\bigr) \simeq \mathrm{Ext}^{1-i}\bigl(f_*G, \mathbb{Q}/\mathbb{Z}\bigr),
+\qquad f_* D(G) \simeq (T f_*G)(1),
+\]
+\[
+H^{*}(K, DG) \Longleftarrow \mathrm{Ext}^p\bigl(H^{-q}(K, G), \mathbb{Q}/\mathbb{Z}\bigr),
+\]
+d'où une suite courte $0 \to \mathrm{Ext}^1(H^{\cdot}(K, G), \mathbb{Q}/\mathbb{Z})
+\to H^{\cdot}(K, DG) \to \mathrm{Hom}(H^{\cdot}(K, G), \mathbb{Q}/\mathbb{Z})$,
+qui est la forme d'une dualité « à la Breen–Serre », avec une partie $\mathrm{Hom}$
+et une partie $\mathrm{Ext}^1$\footnote{La page écrit les exposants $1 - i$,
+$i - 1$ et $-i$ sans les accorder entre eux ; on ne les fixe pas.}. La page 114,
+au verso, est un feuillet dactylographié du chapitre III des \emph{Éléments}
+(« III-49 »), corrigé à la main.
+
+\pagerange{115}{119}
+\subsection*{Variétés abéliennes sur un corps local (pages 115 à 119)}
+
+Soient $A$ et $B$ des variétés abéliennes duales sur $K$. La page 115 écrit la
+suite spectrale de bidualité $H^{*}(\Delta^2 T(A)) \Leftarrow (H^p\Delta^2)(H^q(K,
+A))$ et note que $H^1(K, A)$ est de torsion\footnote{Au bas de la page 115, tête-bêche et barrées, deux lignes d'un autre texte : « Remarque 2.7. J'ignore si les conditions d'équidimensionnalité de 1.1 (iii) sont essentielles » et « Prop.~2.8. Constructibilité des Cohen-Macaulay ».}. La page 116 encadre
+\[
+H^1(K, A) \simeq \mathcal{E}xt^1_{k\text{-gr}}(B, \mathbb{Q}/\mathbb{Z}),
+\qquad
+H^1(K, B) \simeq \mathcal{E}xt^1_{k\text{-gr}}(A, \mathbb{Q}/\mathbb{Z}),
+\]
+\[
+\pi_0(A),\ \pi_0(B)\ \text{duaux dans } \mathbb{Q}/\mathbb{Z},
+\]
+$A$ et $B$ étant lus, à droite, sur les fibres spéciales de leurs modèles, avec
+$0 \to U \to A \to A' \to 0$ ($U$ unipotent connexe, $A'$ semi-abélien connexe) et
+$\mathrm{Ext}^1(A, \mathbb{Q}/\mathbb{Z})$ extension de $\mathcal{E}xt^1(U,
+\mathbb{Q}/\mathbb{Z})$ par $\mathrm{Ext}^1(A'^{\circ}, \mathbb{Q}/\mathbb{Z})
+\simeq (\mathbb{Q}/\mathbb{Z})^{\mu(A)}$, où $\mu(A) = 2\alpha(A^{\circ}) +
+\mu(A^{\circ})$ — deux fois la dimension de la partie abélienne plus celle de la
+partie torique\footnote{La dualité des groupes de composantes $\pi_0$ des
+modèles de Néron de $A$ et de son dual est ce qu'on appelle aujourd'hui
+l'accouplement de Grothendieck, énoncé comme conjecture dans SGA~7, exposé IX
+(1972) ; il est parfait lorsque le corps résiduel est parfait (McCallum pour un
+corps fini, puis Bégueri, Bertapelle, Suzuki), et peut ne pas l'être sinon
+(Bertapelle–Bosch). La page l'écrit comme un fait, encadré, parmi les
+« (1) (2) (3) ».}. Les pages 118 et 119 calculent $\mathcal{E}xt^i(A,
+\mu_\infty)$ et $\mathcal{E}xt^i(A, {}_n\mu)$, nuls sauf en degré~$1$ où ils valent
+${}_\infty B$, ${}_n B$ ; d'où $H^{i-1}(K, {}_nB) \simeq \mathrm{Ext}^{i-1}(T(A),
+\mathbb{Z}/n\mathbb{Z})$, et deux suites exactes reliant $DH^1(K, A)$,
+$H^0(K, {}_\infty B)$, $H^0(K, B) \otimes \mathbb{Q}/\mathbb{Z}$ et
+$H^1(K, {}_\infty B) \to H^1(K, B) \to 0$ ; la question finale est la
+divisibilité de la partie divisible de $H^1(K, A)$, laissée ouverte.
+
+La page 117 est un plan des \emph{Éléments}, chapitre IV, en quinze points
+(changement de base ; limites projectives et propriétés constructibles ;
+morphismes réguliers ; critères de platitude ; immersions régulières ; dimension ;
+morphismes universellement ouverts ; morphismes lisses et étales ; fibres d'un
+morphisme plat ; sections hyperplanes ; prolongements infinitésimaux ;
+préschémas en groupes ; formes différentielles et dualité). Au bas, tête-bêche et
+barrée, une liste de choses à faire en anglais porte « September 1963 ». La page
+120 est un autre feuillet du chapitre III (« III-42 », caractéristique
+d'Euler–Poincaré).
+
+\pagerange{121}{139}
+\section*{Corps de classes et dualité des courbes algébriques (pages 121 à 139)}
+
+\pagerange{122}{124}
+\subsection*{$\mathrm{Ext}$ à supports et complétés formels (pages 122 et 124)}
+
+Les pages 122 et 124 alignent, pour un fermé $Y$ d'un schéma $X$ et un ouvert $U
+= X - Y$, les suites de cohomologie locale $H^i_Y(X, M) \to H^i(X, M) \to H^i(U, M)$
+et leurs analogues $\mathrm{Ext}^i_Y(X; M, A) \to \mathrm{Ext}^i(X; M, A) \to
+\mathrm{Ext}^i(U; M, A)$, demandent si $\mathrm{Ext}^i_{\mathfrak{m}}(M, A) = D(M)$,
+et mettent en regard, par un accouplement, $\mathrm{Ext}^i_Y(X; M, N)$ et
+$\mathrm{Ext}^{n-i}(X; N, M)$ le long des deux suites. Pour $F$ cohérent,
+$\mathrm{Ext}^i_Y(X, F, G) = \varinjlim_n \mathrm{Ext}^i(F/J^nF, G)$, dual de
+$\varprojlim_n \mathrm{Ext}^{r-i}_a(X; G, F/J^nF)$ (la page écrit « dual » en marge),
+et l'on passe au complété formel $\hat X$, puis à un schéma formel $\mathfrak{X}$
+et un fermé $T \subset Z \subset \mathfrak{X}$, avec $H^i_T(\mathfrak{X}, F) \to
+H^i_T(\mathfrak{X}, F_{/Z})$ ; la ligne s'arrête au bord.
+
+\pagerange{127}{131}
+\subsection*{L'homomorphisme de dualité pour une courbe (pages 127 à 131)}
+
+Soit $C$ une courbe complète non singulière sur $k$, $f : C \to \mathrm{Spec}\,k$.
+Les $C$-groupes (faisceaux de Weil sur les préschémas de type fini sur $C$, pour la
+descente fidèlement plate) forment une catégorie abélienne avec assez
+d'injectifs, d'où des $\mathrm{Ext}$ globaux et locaux et $H^i(C, G) \simeq
+\mathrm{Ext}^i(C; \mathbb{Z}_C, G)$. L'image directe $f_* : \mathrm{Gr}_C \to
+\mathrm{Gr}_k \to \mathrm{QuGr}_k$ transforme injectifs en injectifs ; on note
+$\mathcal{H}^i_f(G) = H^i(\mathrm{R}f_*G)$ et $\mathcal{E}xt^i_f(F, G) = H^i(\mathrm{R}
+\mathcal{H}om_f(F, G))$, avec les suites spectrales
+\[
+\mathrm{Ext}^{*}(C; F, G) \Longleftarrow H^p\bigl(k; \mathcal{E}xt^q_f(F, G)\bigr),
+\qquad
+H^{*}(C, G) \Longleftarrow H^p\bigl(k; \mathcal{H}^q_f(G)\bigr).
+\]
+Pour $\gamma$ un $k$-groupe fini, soit $S\gamma = (D\Delta\gamma)(1)$, groupe de
+type multiplicatif, isomorphe à $\gamma \otimes \mu_n$ si $n\gamma = 0$\footnote{La
+torsion finale est lue $(1)$, comme page 99 ; le chiffre pourrait être un $2$.}.
+Un élément de $\mathrm{Ext}^i(C; G, S\gamma)$ donne $\mathrm{R}f_*G \to
+\mathrm{R}f_*S\gamma$, et une trace $\mathrm{R}f_*S\gamma =
+\mathrm{R}f_*(\gamma \otimes \mu_n)(1) \to \gamma$ de degré $-2$ — celle de
+$H^2(C, \mu_n) \simeq \mathbb{Z}/n\mathbb{Z}$ — fournit, par composition,
+l'homomorphisme de dualité
+\[
+E_f(G, S\gamma) \longrightarrow E_k(\mathrm{R}f_*G, \gamma).
+\]
+\emph{Théorème} (annoncé, page 129) : (i) si $G$ est fini, ou plus généralement
+affine sans composante abélienne, c'est un isomorphisme ; (ii) si $G$ est de type
+fini sans composante abélienne, c'en est un « mod $\Theta$ », les $E$ étant pris
+dans $\mathbb{Q}/\mathbb{Z}$\footnote{Le haut de la page 129 est barré, et la fin
+de (ii) illisible ; le dossier ne démontre pas le théorème.}. La page 131 part de
+la suite de Kummer $0 \to \mu_n \to \mathbb{G}_m \xrightarrow{n} \mathbb{G}_m \to
+0$ ; comme $\mathcal{H}^0_f(\mathbb{G}_m) = \mathbb{G}_m$ et
+$\mathcal{H}^i_f(\mathbb{G}_m) = 0$ pour $i \geq 2$, la suite de Leray donne
+\[
+0 \to H^1(k, \mathbb{G}_m) = 0 \to H^1(C, \mathbb{G}_m) \to
+\mathrm{Pic}_{C/k}(k) \to \mathrm{Br}(k),
+\]
+d'où $\mathrm{Pic}(C) = H^1(C, \mathbb{G}_m) \subset \mathrm{Pic}_{C/k}(k)$. Les
+pages 130 et 133 portent deux en-têtes de chapitre annulés, « V Schémas de Hilbert,
+de Picard » et « V Fidèle platitude, Descente fid.\ plate, Applications ». La page
+128, barrée, contient un calcul d'algèbre commutative sur la dimension des anneaux
+de polynômes localisés : $\dim B_{\mathfrak{m}} = \dim A + n - \deg\mathrm{tr}\,
+k(\mathfrak{m})/k(\mathfrak{m}')$ pour $B = A[t_1, \ldots, t_n]$.
+
+\pagerange{132}{132}
+\subsection*{La table de dualité d'une courbe (page 132)}
+
+Sur $k$ algébriquement clos, avec $J$ la jacobienne de $C$ et $F$ le Frobenius sur
+$H^1(C, \mathcal{O}_C)$, la page dresse pour chaque groupe élémentaire $G$ la suite
+$H^0, H^1, H^2$ de $C$ à valeurs dans $G$ :
+\[
+\begin{array}{ll}
+\mu_n\ ((n,p)=1) : & \mu_n,\ {}_nJ,\ \mathbb{Z}/n\mathbb{Z} \\
+\mathbb{Z}/n\mathbb{Z} : & \mathbb{Z}/n\mathbb{Z},\ {}_nJ \otimes \check\mu_n,\ \check\mu_n \\
+\mu_p : & \mu_p,\ {}_pJ,\ \mathbb{Z}/p\mathbb{Z} \\
+\mathbb{Z}/p\mathbb{Z} : & \mathbb{Z}/p\mathbb{Z},\ H^1(C, \mathcal{O}_C)^{F},\
+H^1(C, \mathcal{O}_C)/(1-F) = 0 \\
+\alpha_p : & \alpha_p,\ \mathrm{Ker}\,F \mid H^1(C, \mathcal{O}_C),\
+\mathrm{Coker}\,F \mid H^1(C, \mathcal{O}_C) \\
+\mathbb{G}_m : & \mathbb{G}_m,\ \mathrm{Pic}^{\bullet}_{C/k},\ 0
+\end{array}
+\]
+et, en colonne, la dualité qui échange $\mu_n$ et $\mathbb{Z}/n\mathbb{Z}$,
+$\mu_p$ et $\mathbb{Z}/p\mathbb{Z}$, $\alpha_p$ et lui-même, $\mathbb{G}_m$ et
+$\mathbb{Z}$, chaque fois par l'autodualité de la jacobienne (« $\Delta({}_pJ)
+\simeq H^1(C, \mathcal{O}_C)^F$ »). Pour $\mathbb{Z}$, les groupes
+$H^i(C, \mathbb{Z})$ sont $\mathbb{Z}$, $0$, $H^1(C, \mathbb{Q}/\mathbb{Z}) =
+\mathrm{Hom}(T(J), \mathbb{Q}/\mathbb{Z})$, $H^2(C, \mathbb{Q}/\mathbb{Z}) \simeq
+\varinjlim_{(n,p)=1} \check\mu_n$, $0$\footnote{La page écrit ces deux termes
+« $H^2(C, \mathbb{Q}/\mathbb{Z})$ » et « $H^3(C, \mathbb{Q}/\mathbb{Z})$ » : ce sont
+$H^2(C, \mathbb{Z}) \simeq H^1(C, \mathbb{Q}/\mathbb{Z})$ et $H^3(C, \mathbb{Z})
+\simeq H^2(C, \mathbb{Q}/\mathbb{Z})$, par la suite $0 \to \mathbb{Z} \to
+\mathbb{Q} \to \mathbb{Q}/\mathbb{Z} \to 0$ ; la courbe étant de dimension
+cohomologique $2$, $H^3(C, \mathbb{Q}/\mathbb{Z}) = 0$. Les lignes qui suivent sur la
+page donnent bien $H^1(C, \mathbb{Q}/\mathbb{Z}) \simeq \mathrm{Ext}^1(J,
+\mathbb{Q}/\mathbb{Z})$ et $H^2(C, \mathbb{Q}/\mathbb{Z}) \simeq \check\mu$.}. Pour
+$G = \mathbb{G}_m$, le théorème de dualité s'écrit
+\[
+H^{*}(C, \gamma) \simeq \mathrm{Ext}^{*}\bigl(\mathrm{R}f_*(\mathbb{G}_m)(1), \gamma\bigr)
+\Longleftarrow \mathrm{Ext}^{p+q}\bigl(\mathrm{R}^{-q}f_*\mathbb{G}_m, \gamma\bigr),
+\]
+et, pour $\gamma = \mathbb{Q}/\mathbb{Z}$ : $H^0(C, \mathbb{Q}/\mathbb{Z}) \simeq
+\mathbb{Q}/\mathbb{Z}$, $H^1(C, \mathbb{Q}/\mathbb{Z}) \simeq \mathrm{Ext}^1(J,
+\mathbb{Q}/\mathbb{Z})$ (autodualité de la jacobienne), $H^2(C,
+\mathbb{Q}/\mathbb{Z}) \simeq \check\mu$\footnote{La torsion est écrite $(-1)$ dans
+la première formule de la page, $(1)$ dans la seconde ; on garde $(1)$, et l'on ne
+fixe pas l'indexation de la suite spectrale, lue $p+q$ puis $p-q$.}.
+
+\pagerange{134}{139}
+\subsection*{Réduction à un point, et le cas d'un trait (pages 134 à 139)}
+
+Pour $F$ concentré en un point $x$, $T(F) \simeq F_x$ « considéré comme groupe
+algébrique sur $k$ », et il faut prouver $\mathrm{Ext}^i(C; F, \gamma \otimes
+\mu_n) \simeq \mathrm{Ext}^{i-2}(k; F_x, \gamma)$ — la pureté en un point d'une
+courbe. Pour le cas général, avec $U = C - Y$ ($Y$ fini) et $i : U \to C$, on est
+ramené à
+\[
+H^i(U; \hat F) \simeq \mathrm{Ext}^{i-2}\bigl(\mathrm{R}f_*(i_!F_U), \mathbb{Q}/\mathbb{Z}\bigr),
+\]
+la dualité de Poincaré pour une courbe ouverte, où $\mathrm{R}f_* i_! =
+\mathrm{R}f_!$ ; la page le vérifie « par un calcul facile » pour $F = \mu_n$,
+$\hat F = \mathbb{Z}/n\mathbb{Z}$, $n$ premier à $p$.
+
+La page 135 passe à un trait : $S$ le spectre d'un anneau de valuation discrète
+complet à corps résiduel algébriquement clos, $x$ son point fermé, $i : U \to S$ le
+point générique, $F = i_*(G)$. Alors $H^0_x(F) = H^1_x(F) = 0$ et $H^2_x(F) = H^1(K,
+F)$\footnote{Il faut $S$ strictement hensélien pour que $H^i(S, i_*G) = 0$ en
+degré $\geq 1$ et $H^0(S, i_*G) = G(K)$ ; c'est le cas d'un corps résiduel
+algébriquement clos, que la suite suppose. La page ne le dit pas.}. Le triangle
+$\mathcal{H}_x(F) \to \mathcal{H}_X(F) \to \mathcal{H}_U(F)$ de complexes de
+$k$-groupes, dualisé dans $\mathbb{Q}/\mathbb{Z}$, devrait donner trois isomorphismes
+encadrés, avec un grand « ? » :
+\[
+E(U; F, \mu_\infty)^n \simeq E\bigl(k, \mathcal{H}_U(F), \mathbb{Q}/\mathbb{Z}\bigr)^{n-1},
+\]
+\[
+E_{\ast}(X; F, \mu_\infty)^n \simeq E\bigl(k, \mathcal{H}_{\ast}(F), \mathbb{Q}/\mathbb{Z}\bigr)^{n-2}
+\ \ (\ast = X, x).
+\]
+La page 137 met face à face les deux suites longues des $\mathcal{H}_{Y/k}$,
+$\mathcal{H}_{S/k}$, $\mathcal{H}_{U/k}$ pour $G$ et son dual $\hat G$, et la page
+139, avec le foncteur de Néron des pages 95 à 97, écrit
+$\mathcal{E}xt^i_{U/k}(G, \tilde\gamma) \simeq \mathcal{E}xt^i_k(\mathcal{N}(G),
+\gamma)$, puis encadre la question « $\mathcal{H}^{*}_{Y/k}(i_!G) \simeq
+\mathcal{H}^{*}_{U/k}(G)$ ??? », laissée ouverte. La page 136 est un feuillet
+dactylographié sur la fidèle platitude, où il a noté en marge
+« $\mathrm{Spec}(B) \to \mathrm{Spec}(A)$ surjectif ».
+
+\pagerange{141}{145}
+\section*{Dualité de Tate–Cassels (pages 141 à 145)}
+
+Sous la chemise « Dualité de Tate-Cassels » viennent trois feuillets d'une autre
+main, en anglais, dont le texte coïncide, pour ce qui en a été lu, avec l'exposé
+de Tate « Duality theorems in Galois cohomology over number fields » : notations,
+théorèmes locaux (finitude, dualité, caractéristique d'Euler--Poincaré), une
+remarque citant la thèse de Shatz (juin 1962), et les théorèmes globaux, dont la
+suite exacte à neuf termes\footnote{On ne recompose pas ce texte, qui n'est pas de
+lui et ne porte aucune intervention de sa main.}. Sa page 145, au crayon, la
+récrit pour $O$ l'anneau des $S$-entiers d'un corps global $k$ et $M$ un module
+galoisien fini d'ordre inversible sur $O$, de dual de Cartier $\tilde M$ :
+\[
+\begin{array}{l}
+0 \to H^0(O, M) \to \prod_{\mathfrak{p} \in S} \hat H^0(k_{\mathfrak{p}}, M) \to
+H^2(O, \tilde M)^{\vee} \to H^1(O, M) \to \prod'_{\mathfrak{p} \in S} H^1(k_{\mathfrak{p}}, M) \\
+\qquad \to H^1(O, \tilde M)^{\vee} \to H^2(O, M) \to \bigoplus_{\mathfrak{p} \in S}
+H^2(k_{\mathfrak{p}}, M) \to H^0(O, \tilde M)^{\vee} \to 0,
+\end{array}
+\]
+et $H^r(O, M) \simeq \prod_{\mathfrak{p} \in S} H^r(k_{\mathfrak{p}}, M)$ pour $r \geq 3$
+(les places réelles seules contribuant)\footnote{La page commence par
+$0 \to (\bigoplus H^2(k_{\mathfrak{p}}, \tilde M))^{\vee} \to \cdots$, ce qui, par la
+dualité locale, est $\prod \hat H^0(k_{\mathfrak{p}}, M)$, avec $H^0(O, M)$ inséré
+par un renvoi ; et elle écrit au sixième terme un exposant lu $2$ là où la suite
+de Tate, et la suite correcte, ont $H^1(O, \tilde M)^{\vee}$. On donne la suite de
+Poitou--Tate sous sa forme habituelle.}. Puis, en anglais : « If
+$\mathrm{III}(O, M) = \mathrm{Ker}(H^1(O, M) \to \prod H^1(k_{\mathfrak{p}}, M))$ is
+finite » — le groupe de Tate–Šafarevič —, et la page s'arrête sur une ligne
+illisible où se lit « dualité sur un corps de nombres ».
+
+\pagerange{146}{157}
+\section*{Groupes de Galois comme groupes analytiques $\ell$-adiques, d'après Serre (pages 146 à 157)}
+
+Soit $S$ un préschéma, $\ell$ un nombre premier, et $\mathcal{G}(S)$ la catégorie
+des schémas en groupes finis étales sur $S$. Un objet de
+$\mathrm{Ind}\,\mathcal{G}(S)$ est « de type $\mathbb{Q}_\ell/\mathbb{Z}_\ell$ »
+s'il est strict et si ses fibres géométriques sont isomorphes à
+$(\mathbb{Q}_\ell/\mathbb{Z}_\ell)^{\nu}$ ; par dualité de Pontrjagin on obtient les
+objets de $\mathrm{Pro}\,\mathcal{G}(S)$ « de type $\mathbb{Z}_\ell$ », et un objet
+de $\mathrm{Ind}\,\mathrm{Pro}\,\mathcal{G}(S)$ est « de type $\mathbb{Q}_\ell$ »
+s'il est isomorphe à un système $(G_n = G_0)$ de transitions la multiplication
+par $\ell^{m-n}$. Notons $\mathcal{I}_\ell(S)$, $\mathcal{M}_\ell(S)$,
+$\mathcal{V}_\ell(S)$ ces trois catégories. Si $S$ est connexe, de point
+géométrique $\xi$, elles s'identifient aux $\pi_1(S, \xi)$-modules discrets
+isomorphes à $(\mathbb{Q}_\ell/\mathbb{Z}_\ell)^{\nu}$, aux $\mathbb{Z}_\ell$-modules
+libres de type fini, et aux $\mathbb{Q}_\ell$-espaces vectoriels de dimension finie
+munis d'une action continue de $\pi_1(S, \xi)$ — les systèmes locaux
+$\ell$-adiques. Le foncteur
+\[
+\mathcal{M}_\ell(S) \longrightarrow \mathcal{V}_\ell(S),
+\qquad M \mapsto M \otimes_{\mathbb{Z}_\ell} \mathbb{Q}_\ell,
+\]
+est essentiellement surjectif ($\pi_1$ étant compact, il y a un réseau invariant)
+et fidèle, non pleinement fidèle\footnote{La page trace la flèche de
+$\mathcal{V}_\ell(S)$ vers $\mathcal{M}_\ell(S)$, à l'inverse de $M
+\rightsquigarrow M \otimes \mathbb{Q}_\ell$ qu'elle vient d'écrire ; on rétablit le
+sens.}. Un morphisme $S' \to S$ donne des foncteurs de changement de base, qui
+s'interprètent comme restriction des scalaires le long de $\pi_1(S', \xi') \to
+\pi_1(S, \xi)$.
+
+Pour un système projectif $(S_i)$ à transitions affines et $S = \varprojlim S_i$,
+on a $\mathcal{V}_\ell(S) = \text{pseudo-}\varinjlim \mathcal{V}_\ell(S_i)$, et de
+même pour $\mathcal{M}_\ell$, $\mathcal{I}_\ell$ — exemples : le module de Tate
+$T_\ell(A)$ d'un schéma abélien, et les $\mathrm{R}^if_*\mathbb{Z}_\ell$ d'un
+morphisme propre et lisse. Avec $\pi = \pi_1(S, \xi) \simeq \varprojlim \pi_i$,
+supposons que les $\pi_j \to \pi_i$ aient des images d'indice fini, ce qui a lieu si
+les $S_i$ sont normaux intègres et les transitions dominantes de type fini. Alors
+les images $G_j$ des $\pi_j$ dans $\mathrm{Aut}(V_\xi)$ sont des sous-groupes fermés,
+d'indice fini les uns dans les autres ; ce sont des groupes de Lie $\ell$-adiques,
+et ils ont donc tous la même algèbre de Lie
+\[
+\mathfrak{g} \subset \mathfrak{gl}(V_\xi) = \mathrm{End}_{\mathbb{Q}_\ell}(V_\xi),
+\]
+indépendante de $i$ : « l'algèbre de Lie de Serre »\footnote{La page invoque
+« Kossul », nom non identifié ; le fait utilisé — tout sous-groupe fermé de
+$\mathrm{GL}_n(\mathbb{Q}_\ell)$ est un groupe de Lie $\ell$-adique — est le
+théorème de Cartan $\ell$-adique (Serre, \emph{Lie algebras and Lie groups},
+1964--1965). Le mot « Lie » de « l'Algèbre de Lie de Serre » n'est pas sûr.}.
+Pour $S = \mathrm{Spec}\,A$, $A$ normal, limite de sous-anneaux de type fini
+$A_i$, on obtient une algèbre de Lie $\mathfrak{g}_\xi$, invariante par extension
+dominante de la base, contrairement à l'algèbre de Lie $\mathfrak{g}'_\xi \subset
+\mathfrak{g}_\xi$ de l'image de $\pi_1(S, \xi)$, qui diminue ; si $S$ est de type
+fini, elles coïncident. Un chemin de $\xi$ à $\xi'$ transporte $\mathfrak{g}_\xi$
+sur $\mathfrak{g}_{\xi'}$, d'où un foncteur des « vectoriels de type
+$\mathbb{Q}_\ell$ attachés à $(S_i)$ » vers les algèbres de Lie de même type, à
+réaliser comme Ind-Pro-schéma en algèbres de Lie sur $S$ opérant sur $V$.
+
+La page 157 en porte les figures et un lemme : si $H \subset G$ et que tout élément
+de $G$ a une puissance dans $H$, alors $H$ est d'indice fini dans $G$\footnote{Il
+faut $G$ compact, groupe de Lie $\ell$-adique, et $H$ fermé : on a alors
+$\mathrm{Lie}(H) = \mathrm{Lie}(G)$, donc $H$ ouvert, donc d'indice fini. La page ne
+précise pas les hypothèses.}.
+
+\pagerange{159}{169}
+\section*{$\mathrm{Ext}$ à supports ; tables des $\mathrm{Hom}$ et des $\mathrm{Ext}^1$ (pages 159 à 169)}
+
+La chemise de la page 159 annonce un « Tableau des Hom, $\mathcal{H}om$,
+$\mathrm{Ext}^1$, $\mathcal{E}xt^1$ pour des types simples de groupes alg.\
+commut. » ; la page 160, qui s'intercale, traite des $\mathrm{Ext}$ à supports.
+
+\pagerange{160}{160}
+\subsection*{$\mathrm{Ext}$ à supports dans le cas localement noethérien (page 160)}
+
+Soit $X$ localement noethérien, $Y$ fermé d'idéal $\mathcal{J}$. On a des
+homomorphismes canoniques
+\[
+\mathrm{Ext}^i_Y(X; F, G) \longleftarrow \varinjlim_n \mathrm{Ext}^i(X;
+F/\mathcal{J}^{n+1}F, G),
+\qquad
+\mathcal{E}xt^i_Y(F, G) \longleftarrow \varinjlim_n \mathcal{E}xt^i(F/\mathcal{J}^{n+1}F,
+G).
+\]
+\emph{Théorème.} Si $F$ est cohérent, le second est un isomorphisme, et le premier
+aussi si $X$ est noethérien. Le global se déduit du local par la suite spectrale
+$H^p(X, \mathcal{E}xt^q_Y(F, G)) \Rightarrow \mathrm{Ext}^{*}_Y(X; F, G)$ ;
+l'énoncé local étant local, on suppose $X$ affine, et il suffit de voir que
+$\mathcal{E}xt^i_Y(F, G) = 0$ pour $i > 0$ si $G$ provient d'un module injectif, en
+regardant $\mathrm{Ext}^p_A(M, H^q_J(N))$. La démonstration s'interrompt au bas de
+la page\footnote{C'est l'énoncé de SGA~2, exposé VI ; la page ajoute que, pour $F$
+cohérent, les $\mathcal{E}xt^i_Z(F, G)$ sont quasi-cohérents.}.
+
+\pagerange{161}{164}
+\subsection*{Les tables (pages 161 à 164)}
+
+Sur une base $S$ de caractéristique $p$, la page 161 dresse le tableau des
+$\mathcal{H}om(F, G)$ pour $F, G$ parmi $\mathbb{Z}/\ell\mathbb{Z}$,
+$\mathbb{Z}/p\mathbb{Z}$, $\alpha_p$, $\mu_p$, $\mathbb{G}_m$, $\mathbb{G}_a$,
+$\mathbb{Z}$, $\mathbb{V}$ et un schéma abélien $A$, avec des « gros », des
+« ? », et la matrice
+\[
+\begin{pmatrix}
+\mathbb{Z}/p\mathbb{Z} & 0 & 0 \\
+\alpha_p & \mathbb{G}_a & 0 \\
+\mu_p & \alpha_p & \mathbb{Z}/p\mathbb{Z}
+\end{pmatrix}
+\]
+des $\mathcal{H}om$ entre $\mu_p$, $\alpha_p$, $\mathbb{Z}/p\mathbb{Z}$. Ici
+$\mathbb{V} = D(\mathbb{G}_a)$ est le dual de Cartier de $\mathbb{G}_a$, groupe
+formel unipotent, dont les points sur une algèbre sont les homomorphismes de
+$\mathbb{G}_a$ vers $\mathbb{G}_m$ — des exponentielles à coefficients nilpotents,
+ce que la page 164 calcule : $P(t + t') = P(t)P(t')$, $P(t) = 1 + a_1 t + \cdots$,
+$a_i^p = 0$\footnote{L'identification de la lettre $\mathbb{V}$ des tables avec
+$D(\mathbb{G}_a)$ est celle de la page 192 ; la page 182 décrit $D(\mathbb{W}_\infty)$
+comme le groupe des vecteurs de Witt à composantes nilpotentes. Les cases des
+tables sont données sur les pages telles quelles, sans revérification une à une.}.
+La page 162 donne les règles qui produisent les lignes :
+\[
+\mathcal{H}om(\mathbb{Z}/n\mathbb{Z}, G) = {}_nG,\qquad \mathcal{H}om(\mathbb{Z}, G) =
+G,
+\]
+\[
+\mathcal{H}om(\alpha_p, G) = \mathrm{Ker}\bigl(\mathrm{Lie}(G) \xrightarrow{x
+\mapsto x^{[p]}} \mathrm{Lie}(G)\bigr),
+\qquad
+\mathcal{H}om(\mu_p, G) = \mathrm{Ker}\bigl(\mathrm{Lie}(G) \xrightarrow{x \mapsto x -
+x^{[p]}} \mathrm{Lie}(G)\bigr),
+\]
+où $\mathrm{Lie}(G) = \mathbb{V}(\omega_G)$ est le fibré vectoriel de Lie et
+$x^{[p]}$ la puissance $p$-ième restreinte ; $\mathcal{H}om(\mathbb{G}_m, G)$ et
+$\mathcal{H}om(A, G)$ sont des foncteurs non ramifiés ; $\mathcal{H}om(G, H) = 0$ si
+$G$ est à fibres géométriquement connexes et $H$ non ramifié. Les cas difficiles
+sont $\mathcal{H}om(\mathbb{G}_a, G)$ et $\mathcal{H}om(G, \mathbb{V})$ pour $G =
+\alpha_p, \mathbb{G}_a, \mathbb{V}$ (« quatre types délicats »). La page 163 dresse le
+tableau des $\mathrm{Ext}^1$, avec des cases $\mathrm{Ext}^1(\mathbb{G}_m, {}_pA)$,
+$\varinjlim \mathrm{Ext}^1(\mathbb{G}_m, {}_nA)$, $\mathrm{Hom}(T(A), G)$, $H^1(Ab,
+\mathcal{O})$, et « Consulter travaux Serre » ; la page 164 le reprend par types
+(groupe fini ordinaire $\Gamma$, groupe infinitésimal $U$, $\mathbb{G}_m$,
+$\mathbb{G}_a$, variété abélienne simple, $\mathbb{Z}$), avec trois règles :
+$\mathrm{Hom}$(connexe, discret ordinaire) $= 0$ ; $\mathrm{Hom}(\mathbb{G}_m,
+\cdot) = 0$ vers les groupes unipotents ; $\mathrm{Hom}(Ab, \text{linéaire}) = 0$.
+
+\pagerange{165}{169}
+\subsection*{$\mathrm{Ext}^1$ et classes primitives (pages 165 à 169)}
+
+\emph{Lemme.} Soient $G$, $\Gamma$ deux $S$-schémas en groupes commutatifs, $\Gamma$
+fidèlement plat, tels que tout morphisme $G \times_S G \to \Gamma$ nul sur $e \times
+G$ et sur $G \times e$ soit nul — par exemple $G$ à fibres géométriquement
+connexes et $\Gamma$ non ramifié. Alors
+\[
+\mathrm{Ext}^1_{S\text{-gr}}(G, \Gamma) \longrightarrow H^1(G, \Gamma_G)
+\]
+est injectif, et son image est l'ensemble des classes primitives $\xi$, nulles le
+long de la section unité, avec $\mu^{*}\xi = \mathrm{pr}_1^{*}\xi + \mathrm{pr}_2^{*}\xi$
+; pour la surjectivité, il faut de plus que les morphismes $G^n \to \Gamma$
+($n = 1, 2, 3$) soient constants\footnote{La page énonce d'abord l'hypothèse
+$\mathcal{H}om_S(G, \Gamma) = 0$, puis la barre ; la condition dont la
+démonstration se sert est celle de la marge, « 1° », donnée ici, et « 2° » pour la
+surjectivité.}.
+
+\emph{Démonstration.} Si l'extension $0 \to \Gamma \to E \to G \to 0$ est triviale
+comme fibré, soit $\varphi : G \to E$ une section ; quitte à la corriger par
+$u \in \Gamma(S)$, elle respecte les sections unité. La différence $\pi' \circ
+(\varphi \times \varphi) - \varphi \circ \pi$ est un morphisme $G \times G \to
+\Gamma$ nul sur les axes, donc nul : $\varphi$ est multiplicative, et l'extension
+est scindée. Inversement, si $E$ est un fibré de classe primitive, il a une
+section unité au-dessus de celle de $G$, et une loi $E \times E \to E$ relevant
+celle de $G$ et compatible à celle de $\Gamma$, unique si l'on impose
+$(e_E, e_E) \mapsto e_E$ ; l'associativité, l'unité et l'existence d'un symétrique
+résultent de ce que deux tels morphismes $E^3 \to E$ diffèrent d'un élément de
+$\mathcal{H}om(G^3, \Gamma) \simeq \Gamma(S)$ — « voir l'exposé du livre de Serre,
+p.~183 ».
+
+\emph{Application.} Pour $\Gamma$ étale et $G$ à fibres géométriquement connexes,
+$\mathrm{Ext}^1_{S\text{-gr}}(G, \Gamma) \simeq \mathrm{Ext}^1_{S_0\text{-gr}}(G_0,
+\Gamma_0)$ pour $S_0 = S_{\text{réd}}$, et plus généralement pour tout
+homéomorphisme universel $S_0 \to S$ (invariance topologique du site étale). Par
+exemple
+\[
+\mathrm{Ext}^1_{S\text{-gr}}(\mathbb{G}_a, \mathbb{Z}/p\mathbb{Z}) \simeq \Gamma(S,
+\mathcal{O}^{p^{-\infty}}),
+\qquad
+\mathcal{O}^{p^{-\infty}} = \varinjlim\bigl(\mathcal{O} \xrightarrow{x \mapsto x^p}
+\mathcal{O} \xrightarrow{x \mapsto x^p} \cdots\bigr),
+\]
+la perfection de $\mathcal{O}_S$ : le foncteur $\mathcal{E}xt^1(\mathbb{G}_a,
+\mathbb{Z}/p\mathbb{Z})$ est représentable dans la catégorie des pro-schémas
+parfaits sur $S$.
+
+\pagerange{170}{201}
+\section*{Dualité de Cartier des groupes affines et des groupes formels (pages 170 à 201)}
+
+\pagerange{171}{180}
+\subsection*{Frobenius, Verschiebung, et les huit types (pages 171 à 180)}
+
+Sur un corps parfait de caractéristique $p$, les groupes commutatifs élémentaires
+se classent selon le comportement du Frobenius $F$ et du Verschiebung $V$
+(isomorphisme, épimorphisme, nilpotent) :
+\[
+\begin{array}{lll}
+\mathbb{G}_m : F \text{ épi},\ V \text{ iso} &
+\mathbb{Z}/\ell\mathbb{Z} : F, V \text{ iso} &
+\mu_p : F = 0,\ V \text{ iso} \\
+\mathbb{G}_a : F \text{ épi},\ V = 0 &
+\mathbb{Z}/p\mathbb{Z} : F \text{ iso},\ V = 0 &
+\alpha_p : F = 0,\ V = 0 \\
+\mathbb{Z} : F \text{ iso},\ V = p &
+\mathbb{V} : F = 0 &
+\text{var.\ ab.} : F, V \text{ isogénies}
+\end{array}
+\]
+avec la traduction : $F$ iso pour un groupe discret séparable, $F$ nilpotent pour
+un groupe infinitésimal, $V$ iso pour un groupe multiplicatif, $V$ nilpotent pour
+un groupe unipotent\footnote{Pour $\mathbb{Z}$, la page écrit « $V$ isom », lu sous
+réserve : comme $FV = p$ et $F = \mathrm{id}$, $V$ est la multiplication par $p$,
+injective sans être un isomorphisme. Pour une variété abélienne, la page écrit
+« $V$ n'importe quoi » ; $F$ et $V$ y sont des isogénies, ce qui varie est leur
+comportement sur la $p$-torsion (rang $p$). Pour $\mathbb{V}$ la page porte « $V$
+épim » sous réserve.}. Il y a « 8 types fondamentaux de groupes affines » :
+$\mathbb{G}_m$, $\mathbb{Z}/\ell\mathbb{Z}$, $\mu_p$, $\mathbb{G}_a$,
+$\mathbb{Z}/p\mathbb{Z}$, $\alpha_p$, $\mathbb{V}$, $\mathbb{Z}$, échangés deux à deux
+par la dualité de Cartier (page 175) :
+\begin{itemize}
+\item multiplicatif $\leftrightarrow$ discret ordinaire ; unipotent
+$\leftrightarrow$ purement infinitésimal ;
+\item connexe séparable $\leftrightarrow$ sans torsion ; fini séparable
+$\leftrightarrow$ fini multiplicatif ; fini radiciel $\leftrightarrow$ fini
+unipotent ;
+\item $\mathbb{G}_m \leftrightarrow \mathbb{Z}$, $\mathbb{Z}/\ell\mathbb{Z}
+\leftrightarrow \mathbb{Z}/\ell\mathbb{Z}$, $\mu_p \leftrightarrow
+\mathbb{Z}/p\mathbb{Z}$, $\alpha_p \leftrightarrow \alpha_p$, $\mathbb{G}_a
+\leftrightarrow \mathbb{V}$.
+\end{itemize}
+Les pages 176 à 179 dessinent ces classes en ovales qui se chevauchent, et posent
+la question de la définition sur $k$ de la partie réduite et de la partie
+séparable : $G_{\text{réd}}$ est un sous-groupe si $G$ est multiplicatif, pas
+s'il est unipotent. La remarque de la page 172 — « $\mathbb{V}$ n'est pas unipotent ?
+bien qu'il soit une extension d'unipotents » — reste une question.
+
+La page 180 introduit l'anneau de Dieudonné
+\[
+A = \varprojlim_n \mathbb{W}_n[F, V]/(V^n, FV - p),
+\]
+la catégorie $C_1$ des $A$-modules discrets de type fini, $C_2 = C_1^{\circ}$, et
+leurs sous-catégories pleines $C'_1$ (modules localement annulés par une
+puissance de $F$) et $C'_2$, que la dualité de Cartier des groupes finis identifie
+: $C'_1 \simeq C'_2$. Une catégorie recollée $C$ aurait pour objets les triples
+$(X, Y, u)$, $X \in C_2$, $Y \in C_1$, $u$ un isomorphisme de leurs images dans une
+catégorie commune $C_0$\footnote{Le diagramme met $\alpha$ sur $C_1$ et $\beta$ sur
+$C_2$, alors que la phrase écrit $\alpha(X)$ pour $X \in C_2$ et $\beta(Y)$ pour
+$Y \in C_1$ ; on n'en fixe pas l'affectation.}. La page 181 précise : un objet est
+un couple de $A$-modules $(X, Y)$ avec $H^0_{\mathfrak{m}}(X) \simeq
+D\,H^0_{\mathfrak{m}}(Y)$, $\mathfrak{m} = (F, V)$, et pour inclure $\mathbb{G}_m$ et
+$\mathbb{Z}$ on prend l'anneau topologique $\mathbb{Z} \times A$.
+
+\pagerange{182}{192}
+\subsection*{Anneaux de Cartier, coalgèbres, pro-objets (pages 182 à 192)}
+
+Sur les ind-objets de $C_1$ et les pro-objets de $C_2$, ni $F$ ni $V$ ne
+caractérisent plus rien : « Comment définir la nullité intrinsèquement ?? ». La page
+182 propose de voir les modules de type fini sur $\mathbb{W}_{\infty,\sigma}[F,
+V]/(FV - p)$ comme les endomorphismes de $\mathbb{W}_\infty$ qui laissent stable le
+sous-groupe $D(\mathbb{W}_\infty)$ des vecteurs de Witt à composantes nilpotentes.
+La page 183, en partie barrée, met face à face l'« anneau de Cartier »
+$\mathbb{W}_\sigma\{F, V\}/(FV - p)$ et son complété pour l'idéal maximal, l'« anneau
+de Gabriel–Dieudonné » $\mathbb{W}_\sigma[[F, V]]/(FV - p)$, avec en marge :
+« Unifier les pro-groupes algébriques unipotents et les groupes ind-finis ».
+
+Les pages 184 à 188 passent par les coalgèbres. Un groupe algébrique affine est
+une algèbre de type fini munie d'une comultiplication ; un objet ind-(algébrique
+fini) est une coalgèbre commutative unitaire engendrée par ses sous-coalgèbres de
+rang fini, et un groupe de ce type est une telle coalgèbre munie d'une loi
+d'algèbre compatible. D'où, d'après Cartier, une dualité
+\[
+\text{pro(groupes algébriques linéaires)} \sim \text{gr(ind.\ alg.\ finis)}.
+\]
+Pour $A$ l'algèbre affine d'un groupe $G$, un homomorphisme $G \to \mathbb{G}_m$ est un
+$f \in A$ avec $\Delta f = f \otimes f$ et $\varepsilon(f) = 1$ ; si $A$ est libre,
+c'est un homomorphisme d'algèbres topologiques $\check A \to k$, où $\check A =
+\mathrm{Hom}(A, k)$. Si $A$ est réunion de sous-coalgèbres de type fini — ce que
+rien ne garantit en général, et qui vaut sur un corps —, $\check A$ est l'algèbre
+d'un ind-schéma affine, le \emph{groupe dual} $D(G)$, qui représente
+$\mathcal{H}om_{k\text{-gr}}(G, \mathbb{G}_m)$. Sur un corps de caractéristique
+$p > 0$ :
+\[
+D(\mathbb{G}_m) = \mathbb{Z},\quad D(\mathbb{Z}/\ell\mathbb{Z}) = \mu_\ell \simeq
+\mathbb{Z}/\ell\mathbb{Z},\quad D(\mathbb{Z}/p^n\mathbb{Z}) = \mu_{p^n},\quad
+D(\mu_{p^n}) = \mathbb{Z}/p^n\mathbb{Z},
+\]
+et $D(\mathbb{G}_a)$ a pour algèbre l'enveloppe de la $p$-algèbre de Lie libre sur
+un générateur\footnote{L'isomorphisme $\mu_\ell \simeq \mathbb{Z}/\ell\mathbb{Z}$
+demande que $k$ contienne les racines $\ell$-ièmes de l'unité, condition que la
+page indique en marge (« si $\ell$ premier à la car., et si … »).}. Le mécanisme de
+la dualité de Cartier est l'accouplement dans $\mathbb{G}_m$, et $F$, $V$ s'en
+déduisent : sur $\mathbb{G}_m$, $F(x) = x^p$ et $V = \mathrm{id}$ ; sur $\mu_p$,
+$F = 0$, $V = \mathrm{id}$.
+
+Les pages 189 et 190 traitent des pro-objets. Pour une catégorie $C$,
+$\mathrm{Pro}(C)$ se plonge dans les foncteurs sur $C$, mais le foncteur naturel
+$\mathrm{Pro}(C) \to \mathrm{Hom}(C^{\circ}, \mathrm{Ens})$, $\mathfrak{X} \mapsto
+(Y \mapsto \mathrm{Hom}(Y, \mathfrak{X}))$, n'est pas pleinement fidèle : pour $C =
+\mathrm{Ens}$, un système $(X_i)$ et sa limite définissent le même foncteur sans
+être isomorphes dans $\mathrm{Pro}(C)$. Si les limites projectives existent dans
+$C$, cela revient à ce que $C \to \mathrm{Pro}(C)$ ait un adjoint, la
+« projection » $\mathfrak{X} \mapsto \varprojlim \mathfrak{X}$. Exemple : sur $S$
+localement noethérien, les pro-schémas affines de type fini s'identifient aux
+schémas affines sur $S$. « Question : un schéma en groupes affine sur $S$ est-il
+un pro(groupe affine de type fini) ? »\footnote{Sur un corps, la réponse est oui :
+tout schéma en groupes affine est limite projective filtrante de groupes
+algébriques affines, ce que la page 191 retrouve (« pro(groupe alg.\ affine) $=$
+groupe alg.\ affine ») pour les hyperalgèbres sur un corps. Sur une base
+quelconque, la page laisse la question ouverte.}. La page 191 en fait une question
+sur les hyperalgèbres, facile sur un corps, et définit le dual $\hat D(G)$ d'un
+groupe affine commutatif comme le groupe ind-fini dont l'hyperalgèbre est
+l'algèbre affine de $G$. La page 192 récapitule les types élémentaires, duaux
+l'un de l'autre, $\mathbb{V} = D(\mathbb{G}_a)$, et une petite table :
+multiplicatif (tores, groupes profinis), unipotent, groupes discrets.
+
+\pagerange{194}{195}
+\subsection*{Catégories abéliennes localement de longueur finie (pages 194 et 195)}
+
+Soit $\mathsf{C}$ une catégorie abélienne dont tous les objets sont de longueur
+finie. Alors $\mathrm{Ind}\,\mathsf{C}$ — la catégorie des foncteurs
+contravariants exacts à gauche de $\mathsf{C}$ dans $(\mathrm{Ab})$ — est une
+catégorie abélienne à limites inductives exactes, à générateurs de longueur finie
+(« localement de longueur finie »), dont $\mathsf{C}$ est la sous-catégorie des
+objets de longueur finie ; d'où une correspondance biunivoque entre les deux sortes
+de catégories. Dans une catégorie abélienne à limites inductives exactes, le
+\emph{socle} $F_0(X)$ de $X$ est la somme de ses sous-objets simples ; $F_1(X)$
+l'image inverse du socle de $X/F_0(X)$, et ainsi de suite : filtration croissante
+et fonctorielle, et la catégorie est localement de longueur finie si et seulement
+si tout $X$ est réunion des $F_i(X)$. En général $\Phi_0(X) = \sup F_i(X)$ est le
+plus grand sous-objet de dimension de Krull~$0$, noyau de $X \to X_{\mathsf{C}_0}$
+(localisé par la sous-catégorie $\mathsf{C}_0$ des objets de dimension~$0$) ;
+$\Phi_1(X)$ est l'image inverse de $\Phi_0(X_{\mathsf{C}_0})$, etc., et
+$\mathsf{C}$ est de dimension de Krull $\leq n$ si $\Phi_n(X) = X$ pour tout
+$X$\footnote{C'est la théorie de Gabriel (\emph{Des catégories abéliennes}, 1962) :
+filtration de Loewy et dimension de Krull--Gabriel. Les pages 194 et 195 sont une
+mise au net, d'une écriture posée.}.
+
+\pagerange{196}{201}
+\subsection*{Modules de Dieudonné (pages 196 à 201)}
+
+La page 199 fixe l'anneau de Dieudonné
+\[
+A = W_\infty[[F, V]],\qquad FV = VF = p,\qquad Fw = \sigma(w)F,\qquad wV = V\sigma(w),
+\]
+$\sigma$ le Frobenius de $W_\infty = W(k)$ ; elle calcule les produits à gauche et à
+droite par $F$ et $V$ d'un élément $w + \sum w'_i F^i + \sum w''_j V^j$, et dresse le
+dictionnaire :
+\begin{itemize}
+\item groupes algébriques commutatifs finis $\leftrightarrow$ $A$-modules de longueur
+finie ;
+\item pro-(groupes algébriques finis) $\leftrightarrow$ $A$-modules localement de
+longueur finie ;
+\item « groupes formels » $\leftrightarrow$ $A$-modules de type fini.
+\end{itemize}
+La page 196 en donne le triangle — groupes formels raisonnables, pro-(groupes
+algébriques finis) raisonnables, modules sur $A$ —, les flèches marquées
+« contrav. » et « cov. », et passe à $W_\sigma[F][F^{-1}]$, avec $F^{-1}w =
+\sigma^{-1}(w)F^{-1}$, $wF = F\sigma^{-1}(w)$ et $V = pF^{-1}$. La page 200 encadre la
+version « sans isogénie » : les modules de type fini $M$ sur $W$ munis d'un $F$
+additif bijectif et d'un $V$ additif avec
+\[
+F(wx) = \sigma(w)F(x),\qquad V(wx) = \sigma^{-1}(w)V(x)
+\]
+— des modules sur $A_F = A[F^{-1}]$\footnote{La page écrit $F(wx) = F(w)F(x)$ et
+$V(wx) = F^{-1}(w)V(x)$, notant $F$ le Frobenius de $W$ ; on écrit $\sigma$. Les
+mots « sans isogénie », « contrav. » et « cov. » sont des lectures incertaines.}.
+La page 198 construit, à partir de $W_{n,k} = \mathrm{Ker}(F^k : W_n \to W_n)$, de
+$\overline{W}_n = \bigcup_k W_{n,k}$ et de $\mathcal{U} = \varinjlim_n \overline{W}_n$
+(transitions $V$), un objet muni de $F$ et $V$ avec $FV = VF = p$, et note en marge
+« est-ce une solution de $A$ ?? »\footnote{La page encadre aussi $F^n\mathcal{U} = 0$
+et $p^n\mathcal{U} = 0$ : ces relations valent sur le $n$-ième étage
+$W_{n,n}$, non sur la limite $\mathcal{U}$, où ni $F$ ni $p$ ne sont nilpotents.}.
+La page 201, rapide et en grande partie illisible, décompose une catégorie de
+modules $C_1$ en $C_1/C_0 \simeq C_F/C_0 \times C'_F/C_0$ — partie où $F$ est
+bijectif, partie où il est nilpotent — engendrées par $A/FA$ et $A/VA$, et finit
+sur « limite projective / inductive d'objets artiniens ».
+
+\pagerange{202}{207}
+\section*{Accouplements de Tate et de Lang (pages 202 à 207)}
+
+\pagerange{203}{204}
+\subsection*{L'accouplement de Tate par le groupe de Brauer (pages 203 et 204)}
+
+Soit $A$ un schéma abélien sur $S$, $A' = \mathrm{Pic}^0_{A/S}$ son dual, et $P$ un
+fibré principal homogène sous $A$. Le groupe $A$ opère sur lui-même par
+translations, donc sur $\mathrm{Pic}^{*}_{A/S}$, et trivialement sur $A'$ et sur
+$\mathrm{NS}_{A/S} = \mathrm{Pic}^{*}_{A/S}/\mathrm{Pic}^0_{A/S}$, d'où
+$A \times \mathrm{NS}_{A/S} \to A'$, $(\lambda, \bar x) \mapsto x + \lambda\cdot\bar x
+- x$. Par suite la composante neutre de $\mathrm{Pic}^{*}_{P/S}$ est canoniquement
+$A'$, et $\mathrm{Pic}^{*}_{P/S}$ est extension de $\mathrm{NS}_{A/S}$ par $A'$, d'où
+une classe de $\mathcal{E}xt^1_S(\mathrm{NS}_{A/S}, A')$ et un homomorphisme de
+$\mathrm{NS}_{A/S}$ vers $H^1(S, A')$. Une section de $A' = \mathrm{Pic}^0_{P/S}$ ne
+provient pas forcément d'un faisceau inversible sur $P$ : l'obstruction est dans le
+groupe de Brauer $H^2(S, \mathbb{G}_m)$, par la suite spectrale de Leray de
+$P \to S$. D'où l'accouplement de Tate
+\[
+H^1(S, A) \times H^0(S, A') \longrightarrow H^2(S, \mathbb{G}_m),
+\]
+qui se précise, pour $S' \to S$ fidèlement plat, en $H^1(S'/S, A) \times H^0(S, A')
+\to H^2(S'/S, \mathbb{G}_m)$, et, pour $S'$ fini sur $S$, devrait s'étendre aux
+groupes de Tate $\hat H^i(S'/S, A) \times \hat H^{1-i}(S'/S, A') \to H^2(S'/S,
+\mathbb{G}_m)$, « qu'il faudrait comprendre »\footnote{Cette description de
+l'accouplement de Tate par l'obstruction de Brauer est celle que Lichtenbaum
+publie en 1969 (« Duality theorems for curves over $p$-adic fields ») ; le
+signe entre « de » et « Tate » sur la chemise ressemble à un F barré, non lu.}.
+
+\pagerange{205}{205}
+\subsection*{Le symbole modéré (page 205)}
+
+Soit $X$ une courbe projective non singulière connexe sur $k$ algébriquement
+clos, $K = k(X)$. Pour $f, g \in K^{*}$ et $x \in X$,
+\[
+(f, g)_x = (-1)^{v_x(f)v_x(g)}\,\frac{f^{v_x(g)}}{g^{v_x(f)}}(x) \in k^{*}.
+\]
+Ce symbole est bimultiplicatif $K^{*} \times K^{*} \to k^{*}$\footnote{La page écrit
+le but $K^{*}$, la lettre lue majuscule ; le symbole est une constante.} ; il vaut
+$f(x)^{v_x(g)}$ si $f$ est défini et inversible en $x$, $1$ si $g(x) = 1$ ; il
+satisfait $(f, g)_x (g, f)_x = 1$ et la loi de réciprocité de Weil $\prod_x (f,g)_x
+= 1$. Sur les idèles, $(\vec f, \vec g) = \prod_x (f_x, g_x)_x$ est trivial si
+$\vec f$ et $\vec g$ sont principaux, ou si l'un est une unité stricte ; d'où les
+accouplements
+\[
+K^{*} \times \mathcal{C}(X) \to k^{*},
+\qquad
+K^{*}/k^{*} \times C_0(X) \to k^{*},
+\]
+où $\mathcal{C}(X) = \mathrm{I}(X)/UK^{*}$ est le groupe des classes d'idèles modulo
+les unités strictes, et $C_0(X)$ celui des classes de degré~$0$.
+
+\pagerange{206}{207}
+\subsection*{L'accouplement de Lang sur le noyau d'Albanese (pages 206 et 207)}
+
+« Voici la généralisation » : soit $X$ une variété non singulière sur $k$
+algébriquement clos, $\varphi : X \to A$ son application d'Albanese, $\hat A$ la
+variété de Picard, $N = \mathrm{Ker}(\mathfrak{Z}_0(X) \to A)$ le noyau d'Albanese
+dans les $0$-cycles de degré~$0$. Soit $\mathrm{I}$ le groupe des répartitions
+$\vec f = (f_x)$ localement égales à des équations d'un diviseur $D$, $C =
+\mathrm{I}/K^{*} \to \mathrm{Pic}(X)$, et $C_0$ l'image inverse de $\hat A$, d'où
+$C_0 \to \hat A$ surjectif. On veut un accouplement $N \times C_0 \to k^{*}$, et pour
+cela un accouplement $N \times \mathrm{I}_0 \to k^{*}$ nul sur $N \times K^{*}$.
+Soient $\mathfrak{z} = \sum a_i x_i \in N$ et $\vec f \in \mathrm{I}_0$ représentant
+$\bar{\mathfrak{z}} \in C_0$, de diviseur $D$ ne rencontrant pas $\mathfrak{z}$, de
+classe $\dot D \in \hat A$ ; soit $\mathfrak{z}' \in \mathfrak{Z}_0(\hat A)$ de
+degré~$0$ et de somme $\dot D$, et $\Theta$ un diviseur de Poincaré sur
+$A \times \hat A$ ne rencontrant pas $\varphi(\mathfrak{z}) \times
+\mathfrak{z}'$\footnote{La page écrit « sur $X \times \hat A$ », le $X$ barré sans
+rien au-dessus, et de même page 207 ; la condition sur $\varphi(\mathfrak{z})$
+montre qu'il s'agit de $A \times \hat A$. Ici $\Theta$ n'a rien à voir avec
+l'élément $\Theta$ des pages 59 à 66.}. Le diviseur $\Theta\langle
+\varphi(\mathfrak{z}) \rangle$ sur $\hat A$ est linéairement équivalent à $0$, sa
+classe étant donnée par la somme de $\varphi(\mathfrak{z})$, nulle puisque
+$\mathfrak{z} \in N$ ; c'est donc $(g)$ pour une fonction $g$, et
+\[
+\lambda = g\langle \mathfrak{z}' \rangle
+\]
+ne dépend pas du choix de $g$ puisque $\deg \mathfrak{z}' = 0$. Avec $\mu = \prod_i
+f_{x_i}(x_i)^{a_i}$, on pose
+\[
+\langle \mathfrak{z}, \bar{\mathfrak{z}} \rangle = \lambda/\mu.
+\]
+La page 207 commence à montrer que $\lambda$ ne dépend que de $\dot D$ et de
+$\mathfrak{z}$ — en remplaçant $\Theta$ par $\Theta + (h)$ — et s'arrête au premier
+tiers, sur « on obtient »\footnote{La chemise porte « Accouplements de … Tate --
+Lang », la page 206 « la généralisation de Tate », le nom lu sous réserve. Pour
+une courbe, $N$ est nul et l'on retrouve l'accouplement du symbole modéré de la
+page 205 ; c'est l'accouplement de réciprocité de Lang (« Reciprocity and
+correspondences », 1958) que la construction rappelle.}.
+
+\end{document}
