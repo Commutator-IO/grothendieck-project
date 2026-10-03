@@ -3,6 +3,7 @@ import { Footer, Header } from './components/Frame.tsx';
 import { COTES } from './content/catalogue.ts';
 import datedRaw from './content/dated-leaves.json';
 import handRaw from './content/hand.json';
+import proposedRaw from './content/proposed-datings.json';
 import { openEnd, parseDating, type Dating } from './lib/dating.ts';
 
 /**
@@ -35,6 +36,22 @@ const LEAVES = ((datedRaw as unknown as { records: Leaf[] }).records ?? []).filt
  * may be years younger. Drawn hollow, and kept off the calendar of his days.
  */
 const isStamp = (l: Leaf) => l.kind === 'stamp' || l.hand === 'machine';
+/**
+ * The project's own proposed datings, from the evidence of the leaves. They
+ * are drawn beside the inventory's bars and never in their place: the
+ * inventory's dating stays what the archivists wrote.
+ */
+interface Proposal {
+  folder: string;
+  inventory: string;
+  from: string | null;
+  to: string | null;
+  confidence: 'high' | 'medium' | 'low';
+  summary: string;
+  evidence: { kind: 'tpq' | 'taq' | 'date'; text: string; where: string }[];
+}
+const PROPOSALS = (proposedRaw as unknown as { records: Proposal[] }).records ?? [];
+const PROPOSED = new Map(PROPOSALS.map((p) => [p.folder, p]));
 const BEGUN = new Set((handRaw as unknown as { folders: { id: string }[] }).folders.map((f) => f.id));
 
 const Y0 = 1949;
@@ -42,6 +59,8 @@ const Y1 = 1992;
 const DARK = '#38539d';
 const LIGHT = '#97afe1';
 const DOT = '#c9900c';
+const PROP = '#1f8a70';
+const OPEN_YEARS = 4; // how far an unbounded end of a proposal fades
 
 /** A date as a fractional year: « 1983-12-31 » → 1983.997. */
 function frac(iso: string): number {
@@ -50,6 +69,27 @@ function frac(iso: string): number {
   if (!d) return y + (m - 0.5) / 12;
   return y + (m - 1) / 12 + (d - 0.5) / 365;
 }
+/** The first and the last instant an ISO date or year names: « 1966-12 » → 1966.917 and 1967. */
+function startOf(iso: string): number {
+  const [y, m, d] = iso.split('-').map(Number);
+  if (!m) return y;
+  if (!d) return y + (m - 1) / 12;
+  return y + (m - 1) / 12 + (d - 1) / 365;
+}
+function endOf(iso: string): number {
+  const [y, m, d] = iso.split('-').map(Number);
+  if (!m) return y + 1;
+  if (!d) return y + m / 12;
+  return y + (m - 1) / 12 + d / 365;
+}
+/** A proposal's span in fractional years, an open end faded over a few years. */
+function span(p: Proposal): { from: number; to: number } {
+  const from = p.from ? startOf(p.from) : endOf(p.to as string) - OPEN_YEARS;
+  const to = p.to ? endOf(p.to) : startOf(p.from as string) + OPEN_YEARS;
+  return { from, to };
+}
+const interval = (p: Proposal) =>
+  p.from && p.to ? `${p.from} – ${p.to}` : p.from ? `from ${p.from}, no end proposed` : `until ${p.to}, no start proposed`;
 const shortTitle = (t: string) => t.replace(/\s*:\s*notes manuscrites.*$/i, '').replace(/\s*:.*$/, '');
 const byShelfmark = (a: string, b: string) => {
   const [a0, a1 = '0'] = a.split('-');
@@ -67,6 +107,7 @@ interface Row {
   openStart: boolean;
   read: boolean;
   leaves: Leaf[];
+  proposal: Proposal | undefined;
 }
 
 const ROWS: Row[] = COTES.flatMap((c) => {
@@ -85,6 +126,7 @@ const ROWS: Row[] = COTES.flatMap((c) => {
       openStart: d.start === null,
       read: !(d.start?.inferred ?? true) && !(d.end?.inferred ?? true),
       leaves: LEAVES.filter((l) => l.folder === c.id),
+      proposal: PROPOSED.get(c.id),
     },
   ];
 }).sort((a, b) => a.from - b.from || a.to - b.to || byShelfmark(a.id, b.id));
@@ -103,9 +145,11 @@ const LANE: number[] = [];
   for (const r of ROWS) {
     // A leaf dated outside its folder's range widens the folder's claim on the
     // lane, so its dot never lands on a neighbour's bar.
+    // So does a proposed dating, drawn under the bar.
     const ls = r.leaves.map((l) => frac(l.iso as string));
-    const start = Math.min(r.from, ...ls);
-    const end = Math.max(r.open ? r.to + 5 : r.to, ...ls.map((v) => v + 0.3));
+    const ps = r.proposal ? [span(r.proposal)] : [];
+    const start = Math.min(r.from, ...ls, ...ps.map((p) => p.from));
+    const end = Math.max(r.open ? r.to + 5 : r.to, ...ls.map((v) => v + 0.3), ...ps.map((p) => p.to));
     let k = ends.findIndex((e) => e + GAP <= start);
     if (k < 0) k = ends.push(-Infinity) - 1;
     ends[k] = end;
@@ -324,13 +368,46 @@ function Works() {
 
 /* ---------- figure 1: the ranges and the dots ---------- */
 
+/**
+ * A proposed dating, as a thin bar under the folder's own: solid for high
+ * confidence, faded for medium, outlined for low; an end with no bound fades
+ * out over a few years. A distinct colour, so it never reads as the inventory's.
+ */
+function ProposalMark({ p, x, y }: { p: Proposal; x: (year: number) => number; y: number }) {
+  const h = 3;
+  const s = span(p);
+  const from = p.from ? startOf(p.from) : null;
+  const to = p.to ? endOf(p.to) : null;
+  // The bounded part: the whole interval, or a short stub at the one end given.
+  const b0 = from ?? (to as number);
+  const b1 = to ?? b0;
+  const bx = from === null ? x(b1) - 3 : x(b0);
+  const bw = from !== null && to !== null ? Math.max(3, x(b1) - x(b0)) : 3;
+  const style =
+    p.confidence === 'high'
+      ? { fill: PROP }
+      : p.confidence === 'medium'
+        ? { fill: PROP, fillOpacity: 0.5 }
+        : { fill: '#fff', stroke: PROP, strokeWidth: 0.9 };
+  const fade = p.confidence === 'high' ? 1 : p.confidence === 'medium' ? 0.5 : 0.35;
+  return (
+    <g>
+      {to === null && <rect x={x(b1)} y={y} width={x(s.to) - x(b1)} height={h} fill="url(#prop-fade)" opacity={fade} />}
+      {from === null && <rect x={x(s.from)} y={y} width={x(b0) - x(s.from)} height={h} fill="url(#prop-fade-in)" opacity={fade} />}
+      <rect x={bx} y={y} width={bw} height={h} rx={1} {...style} />
+    </g>
+  );
+}
+
 function Ranges() {
   const [sel, setSel] = useState<Row | null>(null);
   const W = 900;
   const L = 16;
   const R = 16;
   const TOP = 26;
-  const ROW = 9;
+  // A lane holds the folder's bar and, under it, room for a proposed dating.
+  const BAR = 7;
+  const ROW = 13;
   const H = TOP + LANES * ROW + 24;
   const x = (y: number) => L + ((y - Y0) / (Y1 - Y0)) * (W - L - R);
   const decades = [1950, 1955, 1960, 1965, 1970, 1975, 1980, 1985, 1990];
@@ -346,7 +423,9 @@ function Ranges() {
         given. The dots are dates written on the leaves themselves, found by the transcriptions.
         A hollow dot is a stamp printed on the paper — most often the banner of a computer
         listing whose back he wrote on — which dates the paper, not the writing. Folders not yet
-        begun are drawn fainter: they can have no dots.
+        begun are drawn fainter: they can have no dots. The thin green bar under some folders is
+        the project's own proposed dating, argued from those leaves; it stands beside the
+        inventory's dating and never replaces it.
       </p>
       <ul className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-1 text-[12px] text-ink-500">
         <li className="flex items-center gap-1.5">
@@ -364,6 +443,14 @@ function Ranges() {
         <li className="flex items-center gap-1.5">
           <span className="inline-block h-2.5 w-2.5 rounded-full border-[1.5px] bg-white" style={{ borderColor: DOT }} /> a machine stamp on the paper — the leaf is no older
         </li>
+        <li className="flex items-center gap-1.5">
+          <span className="inline-flex gap-0.5">
+            <span className="inline-block h-[3px] w-3 rounded-sm" style={{ background: PROP }} />
+            <span className="inline-block h-[3px] w-3 rounded-sm" style={{ background: PROP, opacity: 0.5 }} />
+            <span className="inline-block h-[3px] w-3 rounded-sm border-[0.9px] bg-white" style={{ borderColor: PROP }} />
+          </span>{' '}
+          proposed dating (project) — high, medium, low confidence
+        </li>
       </ul>
       <div className="mt-3 overflow-x-auto" onMouseLeave={() => setSel(null)}>
         <svg
@@ -380,6 +467,14 @@ function Ranges() {
             <linearGradient id="fade-in" x1="0" x2="1">
               <stop offset="0" stopColor={LIGHT} stopOpacity="0" />
               <stop offset="1" stopColor={LIGHT} />
+            </linearGradient>
+            <linearGradient id="prop-fade" x1="0" x2="1">
+              <stop offset="0" stopColor={PROP} />
+              <stop offset="1" stopColor={PROP} stopOpacity="0" />
+            </linearGradient>
+            <linearGradient id="prop-fade-in" x1="0" x2="1">
+              <stop offset="0" stopColor={PROP} stopOpacity="0" />
+              <stop offset="1" stopColor={PROP} />
             </linearGradient>
           </defs>
           {decades.map((d) => (
@@ -407,21 +502,22 @@ function Ranges() {
                 style={{ cursor: 'pointer' }}
               >
                 <rect x={x(r.from)} y={y} width={x(r.open ? r.to + 5 : r.to) - x(r.from)} height={ROW} fill="#fff" fillOpacity={0} />
-                {r.openStart && <rect x={x(r.from)} y={y + 1} width={x(r.from + 4) - x(r.from)} height={ROW - 2} fill="url(#fade-in)" />}
+                {r.openStart && <rect x={x(r.from)} y={y + 1} width={x(r.from + 4) - x(r.from)} height={BAR} fill="url(#fade-in)" />}
                 <rect
                   x={x(r.openStart ? r.from + 4 : r.from)}
                   y={y + 1}
                   width={Math.max(3, x(r.to) - x(r.openStart ? r.from + 4 : r.from))}
-                  height={ROW - 2}
+                  height={BAR}
                   rx={1.5}
                   fill={fill}
                 />
-                {r.open && <rect x={x(r.to)} y={y + 1} width={x(r.to + 5) - x(r.to)} height={ROW - 2} fill="url(#fade)" />}
+                {r.open && <rect x={x(r.to)} y={y + 1} width={x(r.to + 5) - x(r.to)} height={BAR} fill="url(#fade)" />}
+                {r.proposal && <ProposalMark p={r.proposal} x={x} y={y + BAR + 2} />}
                 {r.leaves.map((l, j) =>
                   isStamp(l) ? (
-                    <circle key={j} cx={x(frac(l.iso as string))} cy={y + ROW / 2} r={3} fill="#fff" stroke={DOT} strokeWidth="1.6" />
+                    <circle key={j} cx={x(frac(l.iso as string))} cy={y + 1 + BAR / 2} r={3} fill="#fff" stroke={DOT} strokeWidth="1.6" />
                   ) : (
-                    <circle key={j} cx={x(frac(l.iso as string))} cy={y + ROW / 2} r={3.4} fill={DOT} stroke="#fff" strokeWidth="1" />
+                    <circle key={j} cx={x(frac(l.iso as string))} cy={y + 1 + BAR / 2} r={3.4} fill={DOT} stroke="#fff" strokeWidth="1" />
                   ),
                 )}
               </g>
@@ -429,7 +525,7 @@ function Ranges() {
           })}
         </svg>
       </div>
-      <div className="mt-2 min-h-[4.5em] text-[12.5px] leading-relaxed text-ink-600">
+      <div className="mt-2 min-h-[6em] text-[12.5px] leading-relaxed text-ink-600">
         {sel ? (
           <>
             <p>
@@ -452,6 +548,15 @@ function Ranges() {
             ) : (
               <p className="text-ink-400">No date found written on its leaves{BEGUN.has(sel.id) ? ' so far' : ''}.</p>
             )}
+            {sel.proposal && (
+              <p className="text-ink-500">
+                <span className="font-semibold" style={{ color: PROP }}>
+                  Proposed dating (project):
+                </span>{' '}
+                <span className="tabular text-ink-900">{interval(sel.proposal)}</span> · {sel.proposal.confidence} confidence —{' '}
+                {sel.proposal.summary} <span className="text-ink-400">Shown beside the inventory's dating, not in its place.</span>
+              </p>
+            )}
           </>
         ) : (
           <p className="text-ink-400">
@@ -461,7 +566,44 @@ function Ranges() {
           </p>
         )}
       </div>
+      <Proposals />
     </section>
+  );
+}
+
+/** Every proposed dating beside the inventory's, each piece of evidence with the line it rests on. */
+function Proposals() {
+  const drawn = new Set(ROWS.map((r) => r.id));
+  const list = [...PROPOSALS].sort((a, b) => byShelfmark(a.folder, b.folder));
+  return (
+    <details className="mt-3 text-[12.5px] text-ink-600">
+      <summary className="cursor-pointer text-ink-500">
+        All {list.length} proposed datings, each beside the inventory's, with its evidence
+      </summary>
+      <ul className="mt-2 space-y-2">
+        {list.map((p) => (
+          <li key={p.folder}>
+            <a href={`/#${p.folder}/1`} className="tabular font-semibold text-ink-900 hover:text-brand-700">
+              n° {p.folder}
+            </a>{' '}
+            <span className="text-ink-500">inventory « {p.inventory} »</span> →{' '}
+            <span className="tabular" style={{ color: PROP }}>
+              {interval(p)}
+            </span>{' '}
+            <span className="text-ink-400">· {p.confidence} confidence{drawn.has(p.folder) ? '' : ' · not drawn: the inventory gives no dating'}</span>
+            <p>{p.summary}</p>
+            <ul className="pl-4 text-ink-500">
+              {p.evidence.map((e, i) => (
+                <li key={i}>
+                  <span className="font-semibold uppercase tracking-wide text-[10.5px] text-ink-400">{e.kind}</span> {e.text}{' '}
+                  <span className="text-ink-400">· {e.where}</span>
+                </li>
+              ))}
+            </ul>
+          </li>
+        ))}
+      </ul>
+    </details>
   );
 }
 
@@ -710,7 +852,9 @@ export function TimelinePage() {
         <p className="mt-12 max-w-[44em] text-[12px] leading-relaxed text-ink-400">
           The ranges are read from the inventory's datings as src/content/catalogue.ts carries them,
           brackets included. The dates on the leaves are src/content/dated-leaves.json, each with
-          the file and line of the transcription that records it.
+          the file and line of the transcription that records it. The proposed datings are
+          src/content/proposed-datings.json: the project's reading of that evidence, kept beside
+          the inventory's datings and never substituted for them.
         </p>
       </main>
 
