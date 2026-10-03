@@ -1,0 +1,1716 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 8, pages 1-80.
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried — a doubtful
+% reading, a notation he used differently, a missing passage — moves into a
+% footnote.
+%
+% It is held to being mathematically correct as it stands, not merely faithful
+% to the page. Where the manuscript is loose or mistaken, the true statement is
+% what appears here, and the footnote says what the page has. In any dispute of
+% substance the transcription governs: whoever cites Grothendieck must cite the
+% batch-NN.fr.tex files.
+%
+% Scope: the folder was read WHOLE before any of this was written — all four
+% batches, pages 1-80, in one pass — and it is written as ONE file for the
+% whole shelfmark. The folder is « gribouillis et calculs divers »: six
+% stretches of handwritten work, separated by typescript leaves and stencilled
+% versos that have nothing to do with them. The spine section names them.
+%
+% Notation fixed for the whole folder (see « Conventions »):
+%   - phi : S_cris -> S_zar is the Frobenius morphism of topoi, epsilon the
+%     canonical section, phi epsilon = F_S; phi is used for nothing else. The
+%     splittings of pp. 25-26 are therefore called s, and the components of
+%     Frobenius on pp. 35-41 are called F_nu (the page writes phi and phi_nu);
+%   - the Galois group Gal(Kbar/K) is Gamma_K (the page writes a bold or
+%     plain pi), so that pi is only ever a uniformiser;
+%   - the completed algebraic closure is C_p, the Tannakian category is
+%     \mathscr{C};
+%   - ell^G is Illusie's co-Lie complex throughout (pp. 1-21 and 77-80 are the
+%     same object, and the reading says so).
+%
+% Substantive departures, each footnoted where it occurs:
+%   - p. 5: the sign read « != » contradicts the definition of p. 3; p. 3 kept;
+%   - p. 12: « n = omega » is deduced from phi^*(n) = phi^*(omega); this needs
+%     more than epsilon^* phi^* = F_S^* when S is not reduced — flagged;
+%   - p. 16: H^1 of the adèles is a restricted product and includes the real
+%     place; the page writes a full product over p;
+%   - p. 28: the flatness condition is dA + A^A = 0, not dA + [A,A] = 0 under
+%     the usual convention for [A,A];
+%   - p. 30: the classifying complex's first map has the wrong sign;
+%   - p. 35: the « sum of ranks = h » holds for ranks over W, not over A;
+%   - p. 41: the sign hidden by an ink stain is <=, as the computation shows;
+%   - p. 49: dualising t_G = pi^{-alpha} Omega^v gives omega_G = pi^alpha Omega,
+%     so Omega = pi^{-alpha} omega_G, not pi^{alpha} omega_G;
+%   - p. 53: the Galois action on C_sigma is semilinear;
+%   - p. 62: G(Q_l) for G(Q_p), and « G = algebraic envelope » needs the
+%     essential image to be closed under subobjects, not only full faithfulness;
+%   - p. 80: « sans doute pas nulle si rang >= 2 » has exceptions (p = 2, d = 2).
+%
+% Announced and never established in the folder: the triangle (III) and its
+% compatibility with F, V (p. 5, « à prouver »); the answers to the questions
+% of pp. 11, 17 and 24; the « foncteur fondamental » T_p of p. 60, which the
+% page uses as given.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-03 — first pass, unchecked against
+% the pages by a human.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{8}
+\pages{1}{80}
+\dating{[vers 1967- vers 1971]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Cristaux (1970). Gribouillis et calculs divers : notes manuscrites (s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+La chemise dit elle-même ce qu'elle contient : des gribouillis et des calculs
+divers, autour de 1970, sous le mot « Cristaux ». Ce n'est pas un texte suivi.
+Ce sont six chantiers successifs, griffonnés au dos ou entre des feuillets
+d'autres textes, et qui pourtant tournent tous autour d'une même question :
+comment décrire un objet arithmétique — un groupe fini en caractéristique $p$,
+un groupe $p$-divisible, une variété — par de l'\emph{algèbre linéaire munie
+d'un Frobenius}.
+
+Le problème vient de loin. En caractéristique zéro, une variété complexe a sa
+cohomologie, un espace vectoriel que l'on peut écrire, décomposer, comparer.
+En caractéristique $p$ les outils habituels se dérobent : la cohomologie à
+coefficients entiers modulo $p$ est trop pauvre, et c'est précisément le
+nombre premier $p$ qui intéresse. La réponse de Grothendieck, dans ces années,
+s'appelle les \emph{cristaux}. Une image aide. Un cristal est un objet qui
+« pousse » de la même façon partout où on le place : connu sur l'espace
+lui-même, il est connu, sans arbitraire, sur tous ses épaississements
+infinitésimaux. Et sur ces cristaux agit une opération propre à la
+caractéristique $p$, le Frobenius, qui élève tout à la puissance $p$. Toute
+l'arithmétique se reflète alors dans la façon dont le Frobenius agit sur un
+module : le même groupe fini, qui en lui-même est un objet très rigide et
+difficile à saisir, devient un module libre muni de deux flèches $F$ et $V$,
+dont le composé est la multiplication par $p$.
+
+Le dossier s'ouvre sur la question la plus fine : un groupe fini tué par $p$,
+dont le « cristal de Dieudonné » vit sur un site compliqué (le site
+cristallin), peut-il être décrit par des données vivant sur l'espace ordinaire,
+le site de Zariski ? L'outil est une remarque simple — en caractéristique $p$,
+le Frobenius d'un épaississement à puissances divisées se factorise par
+l'espace lui-même — qui fournit un pont dans un seul sens, et la question est
+de savoir ce que l'on perd en le traversant. Viennent ensuite des calculs
+explicites, en coordonnées, de modules de Dieudonné : pour les groupes
+« ordinaires », les plus simples qui soient, puis pour les groupes sur
+lesquels opère l'anneau des entiers d'un corps $p$-adique. Ces derniers
+mènent aux groupes de Lubin et Tate, qui fabriquent la théorie du corps de
+classes local, et à un théorème de Tate qui décompose leur module de Tate
+comme on décompose la cohomologie d'une variété complexe en types de Hodge.
+
+À partir de là le regard change d'échelle. Les dernières pages regardent
+toutes ces structures d'un coup — le Frobenius cristallin, la filtration de
+Hodge, l'action du groupe de Galois, la comparaison avec la cohomologie
+complexe — comme les \emph{réalisations} d'un même objet, et cherchent le
+groupe dont elles sont les représentations : le langage est celui des
+catégories tannakiennes, et l'objet est le motif. Une page dresse la liste des
+conjectures en jeu, Hodge et Tate en tête. Le dossier se ferme sur un calcul
+modeste, qui rejoint la première page : le complexe qui mesure la géométrie
+infinitésimale d'un groupe de type multiplicatif, et l'obstruction, cachée
+dedans, à relever une représentation modulo $p$ en une représentation modulo
+$p^{2}$.
+
+On y voit une manière de travailler. Grothendieck pose ses données par
+lettres, a), b), c), en se demandant chaque fois ce qu'elles déterminent et ce
+qu'elles laissent libre ; il écrit « à prouver ! » à côté d'un énoncé dont il a
+besoin, « Question » devant une équivalence qu'il espère, et un point
+d'interrogation devant une conjecture qu'il se propose de « revoir ».
+Plusieurs des questions posées ici ont reçu depuis des réponses, sous d'autres
+noms : la théorie de Dieudonné cristalline, les représentations cristallines,
+les périodes $p$-adiques. Les pages ne le savent pas, et la lecture qui suit
+s'efforce de ne pas le leur faire dire.
+
+\keywords{Dieudonné crystal, crystalline site, Frobenius descent, co-Lie complex, finite flat group scheme killed by p, truncated Barsotti-Tate group, ordinary Barsotti-Tate group, F-crystal with connection, Frobenius lift, formal A-module, Lubin-Tate group, Grothendieck-Messing deformation theory, Hodge-Tate decomposition, Lubin-Tate character, Tannakian category, filtered F-isocrystal, mysterious functor, motivic Galois group, period torsor, Hodge conjecture, Tate conjecture, group of multiplicative type, lifting obstruction}
+\end{resume}
+
+\pagerange{1}{1}
+\section*{Le fil du dossier, et les conventions}
+
+\subsection*{Les stations}
+
+Le dossier compte quatre-vingts pages, dont un peu plus de la moitié sont de
+la main de Grothendieck. Le reste se partage entre des feuillets de
+tapuscrits portant des corrections à la main, qui n'ont pas de rapport avec
+les notes voisines et sont décrits là où ils tombent, et des versos
+dactylographiés ou ronéotypés sans aucune intervention (un texte anglais sur
+les points doubles pseudo-rationnels, une « Tribu » de Bourbaki, deux cours
+polycopiés sur les variétés $C^{r}$ et sur l'intégration), que la lecture
+ignore. Les pages de sa main forment six chantiers :
+
+\begin{enumerate}
+\item \emph{Pages 1 à 21.} Descente du cristal de Dieudonné d'un groupe fini
+tué par $p$ au site de Zariski, au moyen des complexes co-Lie de $G$ et de son
+dual. Le programme est posé trois fois (pages 3--4, 9, 15--17), calculé dans
+le cas des groupes de Barsotti--Tate tronqués d'échelon 1 (pages 12--13), et
+ramené pour finir à un problème de descente dont l'indétermination est
+mesurée par des $\operatorname{Ext}$ relatifs (page 19). Une page barrée, la
+page 16, traite d'autre chose.
+\item \emph{Pages 24 à 30.} Le module de Dieudonné d'un groupe de
+Barsotti--Tate ordinaire sur une base lisse, et plus généralement d'un
+$F$-cristal à connexion, calculé en coordonnées après choix d'un relèvement
+du Frobenius.
+\item \emph{Pages 33 à 55.} Les groupes de Barsotti--Tate sur
+$\mathbb{F}_{q}$ sur lesquels opère l'anneau des entiers $A$ d'un corps
+$p$-adique : classification par le module de Dieudonné, caractérisation de
+la dimension 1, relèvement en groupe de Lubin--Tate, et lecture du théorème de
+Tate sur ce relèvement.
+\item \emph{Pages 57 à 59.} Trois feuilles de papier quadrillé : des lignes
+polygonales et des comparaisons de fractions.
+\item \emph{Pages 60 à 74.} Le groupe de Galois tannakien des $F$-cristaux
+filtrés à isogénie près, puis la même liste de structures pour les motifs sur
+un ouvert de $\operatorname{Spec}\mathbb{Z}$, et une liste de conjectures.
+\item \emph{Pages 77 à 80.} Le complexe co-Lie d'un groupe de type
+multiplicatif, et la classe d'obstruction qu'il contient.
+\end{enumerate}
+
+Le premier et le dernier chantier parlent du même objet, le complexe co-Lie
+$\ell^{G}$ ; le deuxième et le troisième calculent des modules de Dieudonné ;
+le troisième et le cinquième parlent tous deux de comparaison entre le module
+de Tate et la filtration de Hodge. Rien dans le dossier ne dit dans quel
+ordre ces pages ont été écrites, et l'on ne prétend pas qu'elles forment un
+argument : ce sont des stations, et la lecture les prend dans l'ordre des
+pages.
+
+\subsection*{Conventions, valables pour tout le dossier}
+
+$p$ est un nombre premier. Pour un schéma $S$ de caractéristique $p$, $F_{S}$
+est son Frobenius absolu et, pour un $\mathcal{O}_{S}$-module $E$,
+$E^{(p)} = F_{S}^{*}E$. On écrit $S_{\mathrm{zar}}$ pour le topos de Zariski de
+$S$ et $S_{\mathrm{cris}}$ pour le topos cristallin de $S$ sur
+$\mathbb{F}_{p}$ (sur $\mathbb{Z}_{p}$ quand on le précise).
+
+\emph{Le morphisme $\varphi$.} La lettre $\varphi$ désigne dans tout le
+document le morphisme de topos
+\[
+\varphi\colon S_{\mathrm{cris}} \longrightarrow S_{\mathrm{zar}},
+\qquad \varphi\,\varepsilon = F_{S},
+\]
+où $\varepsilon\colon S_{\mathrm{zar}} \to S_{\mathrm{cris}}$ est le
+morphisme canonique. Il existe pour la raison que la page 19 dessine : si
+$(U, T, \delta)$ est un épaississement à puissances divisées en
+caractéristique $p$, d'idéal $J$, alors $x^{p} = p!\,\gamma_{p}(x) = 0$ pour
+$x \in J$, donc le Frobenius de $T$ se factorise par $U$, et l'on pose
+$\varphi^{*}(E)_{T} = (T \to U \to S)^{*}E$. Pour un cristal $\mathcal{M}$
+sur $S_{\mathrm{cris}}$, $\varphi^{*}\varepsilon^{*}\mathcal{M} =
+\mathcal{M}^{(p)}$ est sa tordue par Frobenius, et pour un module $E$ sur
+$S_{\mathrm{zar}}$, $\varepsilon^{*}\varphi^{*}E = E^{(p)}$.\footnote{La page
+1 pose seulement $\varphi\varepsilon = F_{S}$ (« frobenius absolu ») et la
+page 12 utilise $\varphi^{*}(M) = \mathcal{M}^{(p)}$ ; la justification par
+la factorisation du Frobenius est ce que le diagramme $J \hookrightarrow B
+\to A$, $\lambda \mapsto \lambda^{p}$, de la page 19 esquisse. Le diagramme
+est très retouché, et la lecture qu'on en donne ici est la nôtre. La lettre
+$\varphi$ sert aussi, sur la page, aux scindages des pages 25--26 et aux
+composantes du Frobenius des pages 35--41 : on les renomme $s$ et $F_{\nu}$
+pour lui garder un seul sens.}
+
+\emph{Le cristal et sa valeur.} $\mathcal{M}$ (lettre ronde) est un cristal,
+$M = \varepsilon^{*}\mathcal{M}$ (lettre droite) sa valeur sur
+$S_{\mathrm{zar}}$. Pour un groupe fini localement libre $G$,
+$\mathbb{D}^{*}(G)$ est son cristal de Dieudonné (contravariant), muni de
+$F\colon \mathbb{D}^{*}(G)^{(p)} \to \mathbb{D}^{*}(G)$ et
+$V\colon \mathbb{D}^{*}(G) \to \mathbb{D}^{*}(G)^{(p)}$, et $G^{*}$ est le
+dual de Cartier de $G$.\footnote{Le cristal de Dieudonné d'un groupe fini
+localement libre arbitraire n'a été construit en toute généralité que par
+Berthelot, Breen et Messing (\emph{Théorie de Dieudonné cristalline II},
+1982) ; pour les groupes de Barsotti--Tate, Grothendieck l'avait annoncé au
+congrès de Nice (1970), et Mazur et Messing l'ont rédigé (1974). Les pages 3
+et 4 le posent comme donné « conjecturalement ».}
+
+\emph{Le complexe co-Lie.} $\ell^{G}$ est le complexe co-Lie de $G$ au sens
+d'Illusie, de tor-amplitude $[-1, 0]$ pour $G$ fini localement libre, avec
+\[
+\omega_{G} = H^{0}(\ell^{G}), \qquad n_{G} = H^{-1}(\ell^{G}), \qquad
+t_{G} = \omega_{G}^{\vee} = \operatorname{Lie}(G).
+\]
+La page écrit tantôt $\ell^{G}_{\bullet}$, tantôt $\ell_{\bullet}$ pour
+$\ell^{G}$ et $\ell'_{\bullet}$ pour $\ell^{G^{*}}$ ; le « $\check{\ ~}$ »
+désigne le dual $R\mathcal{H}om(-, \mathcal{O})$.\footnote{L'identification
+des « complexes parfaits $\ell_{\bullet}$, $\ell'_{\bullet}$ d'amplitude
+$[-1,0]$ » des pages 3--4 avec les complexes co-Lie de $G$ et $G^{*}$ est
+appuyée par trois choses : la notation $\ell^{G}_{\bullet}$, $\ell^{G^{*}}_{\bullet}$
+de la page 4 ; le calcul de la page 12, où $H^{0}(\ell) = \omega$ et
+$H^{-1}(\ell) = n$ ; et les pages 77--80, où $\ell^{G}_{\bullet}$ est
+explicitement le complexe co-Lie, calculé par le triangle de transitivité. Le
+nom de « complexe co-Lie » est celui d'Illusie (\emph{Complexe cotangent et
+déformations II}, 1972) ; la page 77 attribue le triangle à Mazur et Roberts.}
+
+\emph{Les corps locaux} (pages 33 à 74). $K$ est une extension finie de
+$\mathbb{Q}_{p}$, d'anneau d'entiers $A$, d'uniformisante $\pi$, d'indice de
+ramification $e$, de corps résiduel $k = \mathbb{F}_{q}$, $q = p^{f}$, et
+$h = ef = [K : \mathbb{Q}_{p}]$ ; $W = W(k)$, $K_{0} = W[1/p]$, $\sigma$ est le
+Frobenius de $W$. $\Gamma_{K} = \operatorname{Gal}(\bar K/K)$, et
+$\mathbb{C}_{p}$ est le complété de $\bar K$.\footnote{La page écrit $C$ pour
+$\mathbb{C}_{p}$ et $\pi$ (en gras pages 51--55, maigre pages 60--70) pour le
+groupe de Galois. On réserve $\pi$ à l'uniformisante.}
+
+\pagerange{1}{5}
+\section*{Le cristal d'un groupe tué par $p$ et sa descente (pages 1 à 5)}
+
+\subsection*{Les données (pages 3 et 4)}
+
+Soit $G$ un schéma en groupes commutatif fini localement libre, tué par $p$,
+sur une base $S$ de caractéristique $p$. Le programme, posé page 4 comme une
+liste de structures qu'on « associe (conjecturalement) » à $G$ et repris page 3
+pour un cristal abstrait, est le suivant.
+
+a) Un cristal $\mathcal{M} = \mathbb{D}^{*}(G)$ sur $S_{\mathrm{cris}}$,
+localement libre de type fini, fonctoriel en $G$, avec
+\[
+\mathcal{M}^{(p)} \xrightarrow{\ F\ } \mathcal{M} \xrightarrow{\ V\ }
+\mathcal{M}^{(p)}, \qquad FV = 0, \quad VF = 0.
+\]
+
+b) Un complexe parfait $\Delta = \Delta(\mathcal{M})$ sur $S_{\mathrm{cris}}$,
+de tor-amplitude dans un intervalle de longueur 1, dont les deux faisceaux
+de cohomologie sont isomorphes à $\mathcal{M}$, muni de $F_{\Delta}$,
+$V_{\Delta}$ avec $F_{\Delta}V_{\Delta} = V_{\Delta}F_{\Delta} = 0$, et deux
+triangles distingués
+\[
+(\mathrm{I}) \quad [\mathcal{M}^{(p)} \xrightarrow{F} \mathcal{M}]
+\xrightarrow{\ i_{\mathrm{I}}\ } \Delta^{(p)}
+\xrightarrow{\ \pi_{\mathrm{I}}\ } [\mathcal{M} \xrightarrow{V} \mathcal{M}^{(p)}]
+\xrightarrow{\ \partial_{\mathrm{I}}\ } ,
+\]
+\[
+(\mathrm{II}) \quad [\mathcal{M} \xrightarrow{V} \mathcal{M}^{(p)}]
+\xrightarrow{\ i_{\mathrm{II}}\ } \Delta
+\xrightarrow{\ \pi_{\mathrm{II}}\ } [\mathcal{M}^{(p)} \xrightarrow{F} \mathcal{M}]
+\xrightarrow{\ \partial_{\mathrm{II}}\ } ,
+\]
+avec $\Delta^{(p)} \simeq \varphi^{*}(\varepsilon^{*}\Delta)$.\footnote{La
+page 3 écrit l'amplitude « $\subset [0,1]$ », la page 9 « $\subset [-1,0]$ » ;
+c'est une affaire de décalage, et la page 9 est la bonne pour la construction
+qu'on donne plus bas, où $\Delta = \mathcal{D} \otimes^{L} \mathbb{Z}/p$. La
+flèche horizontale de (I) est notée sur la page tantôt $\partial_{\mathrm{I}}$,
+tantôt $i_{\mathrm{I}}$ ; on garde $i_{\mathrm{I}}$.}
+
+c) Sur $S_{\mathrm{zar}}$, les complexes co-Lie $\ell = \ell^{G}$ et
+$\ell' = \ell^{G^{*}}$, de tor-amplitude $[-1,0]$, et un accouplement
+$(\ell^{G^{*}})^{\vee} \to \ell^{G}$, c'est-à-dire une flèche
+$\mathcal{O}_{S} \to \ell^{G^{*}} \otimes^{L} \ell^{G}$.\footnote{Page 4, la
+rubrique « b) homomorphismes » reste sans suite, et la rubrique « e) Un
+triangle exact » s'arrête au bas de la page. La flèche $\pi$ de la page porte
+le nom de la projection d'un triangle ; on l'appelle ici accouplement.}
+
+d) Un triangle distingué sur $S_{\mathrm{zar}}$, posant
+$\Delta_{\mathrm{zar}} = \varepsilon^{*}\Delta$,
+\[
+(\mathrm{III}) \quad \ell[-1] \xrightarrow{\ i_{0}\ } \Delta_{\mathrm{zar}}
+\xrightarrow{\ \pi_{0}\ } \check\ell' \xrightarrow{\ \partial_{0}\ } ,
+\]
+et des isomorphismes $\varphi^{*}(\ell[-1]) \simeq [\mathcal{M}^{(p)}
+\xrightarrow{F} \mathcal{M}]$, $\varphi^{*}(\check\ell') \simeq
+[\mathcal{M} \xrightarrow{V} \mathcal{M}^{(p)}]$ qui identifient
+$\varphi^{*}(\mathrm{III})$ au triangle (I).
+
+C'est là tout le sens du programme. Le triangle (I) est une « filtration »
+du complexe $\varphi^{*}\Delta_{\mathrm{zar}} = \Delta^{(p)}$ sur le site
+cristallin ; (III) en est une \emph{descente} au site de Zariski, et ce qui
+descend, ce sont les complexes co-Lie de $G$ et de $G^{*}$. Si $M =
+\varepsilon^{*}\mathcal{M}$ (un module localement libre muni d'une connexion
+intégrable), on en tire en appliquant $\varepsilon^{*}$
+\[
+\ell[-1]^{(p)} \simeq [M^{(p)} \xrightarrow{F_{M}} M], \qquad
+\check\ell'^{(p)} \simeq [M \xrightarrow{V_{M}} M^{(p)}],
+\]
+ce que la page encadre d'un point d'exclamation, avec en marge « comp. avec
+connexion ».
+
+\subsection*{Le cas où $F$ est nul (page 1)}
+
+La page 1, écrite avant ou à côté de ce programme, en calcule un cas. Si $G$
+est de hauteur $\le 1$ — le noyau du Frobenius d'un groupe lisse $H$ —, son
+cristal est $\varphi^{*}(\omega)$ avec $\omega = \omega_{G}$, le Frobenius
+du cristal est nul, et $V$ est $\varphi^{*}$ de la flèche
+\[
+C\colon \omega \longrightarrow \omega^{(p)},
+\]
+transposée de l'application puissance $p$-ième de l'algèbre de Lie.\footnote{L'encadré
+de la page porte aussi « $\Pi\colon \nu^{(p)} \to \nu$ », de lecture
+douteuse, sans emploi dans la suite.} Le complexe co-Lie se calcule alors à
+la main : $G = \operatorname{Ker}(F_{H})$ donne
+$\ell^{G} \simeq [\omega^{(p)} \xrightarrow{0} \omega]$, la différentielle du
+Frobenius étant nulle, et le triangle (III) devient
+\[
+[\omega^{(p)} \xrightarrow{0} \omega]
+\xrightarrow{(\mathrm{id},\,C)}
+[\omega^{(p)} \xrightarrow{0} \omega^{(p)}]
+\xrightarrow{(0,\,\mathrm{id})}
+[\omega \xrightarrow{C} \omega^{(p)}]
+\xrightarrow{(\mathrm{id},\,0)} ,
+\]
+où le terme du milieu est $\Delta_{\mathrm{zar}}$, à cohomologie $\omega^{(p)}
+= M$ en chaque degré.\footnote{On a vérifié que ce triangle est distingué :
+le cône de $(\mathrm{id}, C)$ est quasi-isomorphe à
+$[\omega \xrightarrow{C} \omega^{(p)}]$, le noyau de la comparaison étant le
+complexe acyclique $[\omega^{(p)} \xrightarrow{\mathrm{id}} \omega^{(p)}]$.
+La page dessine un second triangle, tordu par $p$, où les décalages des
+sommets ne s'accordent pas entre eux (un $[1]$ là où l'amplitude demande un
+$[-1]$) ; on ne le reproduit pas. Le sommet du second triangle de gauche est
+surchargé.} Le haut de la page note aussi la suite exacte
+$0 \to {}_{F}\mathcal{M}^{(p)} \to \mathcal{M} \to {}_{V}\mathcal{M}^{(p)}
+\to$, inachevée.
+
+\subsection*{Compatibilités avec $F$ et $V$ (pages 3 et 5)}
+
+Sur $\ell$ et $\ell'$, les structures sont $V_{\ell}\colon \ell \to
+\ell^{(p)}$, $F_{\ell} = 0$, et de même pour $\ell'$. La page 3 les
+\emph{définit} à partir des triangles :
+\[
+F_{\check\ell'} := \pi_{0}\,\varepsilon^{*}(i_{\mathrm{II}}) = {}^{t}V_{\ell'},
+\qquad
+V_{\ell}[-1] := \varepsilon^{*}(\pi_{\mathrm{II}})\, i_{0}.
+\]
+La page 5 annonce deux énoncés : 1) le triangle (III) est compatible aux
+structures $(F, V)$ — « \emph{à prouver} ! » ; 2) l'isomorphisme
+$\varphi^{*}(\mathrm{III}) \simeq (\mathrm{I})$ l'est aussi. Elle vérifie
+que $i_{0}$ est compatible à $V$ et $\pi_{0}$ à $F$ (le reste « de même »),
+que $\partial_{0}$ est compatible à $F$ parce que
+$\partial_{0}\,\pi_{0}\,\varepsilon^{*}(i_{\mathrm{II}}) = 0$ (deux flèches
+consécutives d'un triangle), et pour 2) le calcul
+\[
+\varphi^{*}(V_{\ell}[-1]) = \varphi^{*}\varepsilon^{*}(\pi_{\mathrm{II}})\,
+\varphi^{*}(i_{0}) = \pi_{\mathrm{II}}^{(p)}\, i_{\mathrm{I}}
+= V_{[\mathcal{M}^{(p)} \to \mathcal{M}]},
+\]
+« et l'autre relation se prouve de même !! ».\footnote{Au milieu de la page,
+une ligne se lit « $\varepsilon^{*}(\pi_{\mathrm{II}})\,i_{0} \ne
+V_{\ell}[-1]$ » — le signe est une égalité barrée, de lecture douteuse. Elle
+contredit la définition de la page 3, qu'on suit ; il s'agit vraisemblablement
+d'un signe de définition et non d'une négation.} Le point 1), en tant
+qu'existence de (III), n'est établi nulle part dans le dossier.
+
+\pagerange{6}{14}
+\subsection*{Un tapuscrit intercalé (pages 6, 8, 10 et 14)}
+
+Quatre feuillets d'un tapuscrit français, numérotés 32, 33, 35 et 37.1,
+s'intercalent entre ces notes. Ils portent la fin de la démonstration d'un
+théorème de changement de base propre pour les faisceaux de torsion (un
+théorème (5.1) à trois volets (i), (ii), (iii) pour des triples
+$(g, f, F)$), le Lemme (8.3) — si $\pi\colon \bar X \to X$ est propre et
+surjectif au-dessus de $S$, les énoncés (5.1) pour $\bar f$ et pour $\pi$
+entraînent ceux pour $f$ — et le Lemme (8.4), qui ramène (5.1) au cas $f$
+projectif. Les corrections à la main sont de rédaction : « s'ensuit »
+remplacé par « résulte », « applicable » par « pertinent », l'énoncé (i) du
+Lemme (8.3) biffé et remplacé par « Assertion vide », un « un peu bref, faire
+l'argument » en marge, des renvois complétés.\footnote{La numérotation
+(5.1), (8.3), (8.4) et les renvois « IX 1.2 » évoquent la rédaction des
+exposés de SGA 4 sur le changement de base propre ; on ne l'a pas vérifié, et
+la main des corrections n'est pas identifiée.} Ils n'ont pas de rapport avec
+les cristaux.
+
+\pagerange{7}{9}
+\section*{D'où viennent les deux triangles (pages 7 et 9)}
+
+\subsection*{$F$ et $V$ se lisent sur les triangles (page 7)}
+
+La page 7 récrit les deux triangles avec des lettres abstraites :
+$A \to \mathfrak{X}^{(p)} \to B \to$ pour (I) et $B \to \mathfrak{X} \to A
+\to$ pour (II). Elle observe que le Verschiebung de $\mathfrak{X}$ est le
+composé
+\[
+V_{\mathfrak{X}} = i_{\mathrm{I}}\,\pi_{\mathrm{II}}\colon
+\mathfrak{X} \to A \to \mathfrak{X}^{(p)},
+\]
+et, de même, $F_{\mathfrak{X}} = i_{\mathrm{II}}\,\pi_{\mathrm{I}}\colon
+\mathfrak{X}^{(p)} \to B \to \mathfrak{X}$.\footnote{La page n'écrit
+explicitement que $V_{\mathfrak{X}}$ (le premier membre de l'encadré est
+surchargé, lu $\pi_{\mathrm{I}}$ ou $\pi^{(p)}_{\mathrm{II}}\,i_{\mathrm{I}}$) ;
+l'expression de $F_{\mathfrak{X}}$ est notre complément, par symétrie.} Les
+relations $F_{\mathfrak{X}}V_{\mathfrak{X}} = 0$ et
+$V_{\mathfrak{X}}F_{\mathfrak{X}} = 0$ sont alors automatiques, puisque
+$\pi_{\mathrm{I}}\,i_{\mathrm{I}} = 0$ et $\pi_{\mathrm{II}}\,i_{\mathrm{II}} = 0$.
+Il se demande encore si les composés des cobords
+$\partial_{\mathrm{I}}\partial_{\mathrm{II}}$ et
+$\partial_{\mathrm{II}}\partial_{\mathrm{I}}$ sont nuls (« nul ? », entouré
+deux fois), et note que $\varepsilon^{*}$ envoie (I) sur la tordue
+$(\mathrm{II})^{(p)}$.
+
+\subsection*{Le cristal sur $\mathbb{Z}_{p}$ (page 9)}
+
+La page 9 reprend tout avec une donnée plus naturelle, et c'est elle qui
+explique les triangles. On part d'un cristal $\mathcal{D}$ sur
+$S_{\mathrm{cris}}/\mathbb{Z}_{p}$, de présentation finie et de tor-amplitude
+$[-1, 0]$, avec $F$ et $V$ — par exemple le cristal de Dieudonné de $G$, qui
+est tué par $p$ si $G$ l'est. On pose
+\[
+\Delta = \mathcal{D} \otimes^{L} \mathbb{Z}/p
+\]
+sur $S_{\mathrm{cris}}/\mathbb{F}_{p}$. Si $\mathcal{D}$ est tué par $p$,
+les deux faisceaux de cohomologie de $\Delta$ sont $\mathcal{D}[p] = \mathcal{D}$
+et $\mathcal{D}/p = \mathcal{D}$ : c'est exactement la propriété demandée
+page 3. Et les triangles sont ceux de l'axiome de l'octaèdre appliqué aux
+deux factorisations de $p$ :
+\[
+p = V F \ \text{ sur } \mathcal{D}^{(p)} \ \Longrightarrow\
+\mathcal{D}\overset{L}{\otimes}/F \to \mathcal{D}^{(p)}\overset{L}{\otimes}/p
+\to \mathcal{D}\overset{L}{\otimes}/V \to ,
+\]
+\[
+p = F V \ \text{ sur } \mathcal{D} \ \Longrightarrow\
+\mathcal{D}\overset{L}{\otimes}/V \to \mathcal{D}\overset{L}{\otimes}/p
+\to \mathcal{D}\overset{L}{\otimes}/F \to ,
+\]
+où « $\otimes^{L}/u$ » désigne le cône de $u$. Ce sont (I) et (II), avec
+$\mathcal{D}^{(p)}\otimes^{L}/p \simeq \varphi^{*}(\Delta_{\mathrm{zar}})$.\footnote{La
+page écrit les triangles et l'identification
+$\mathcal{M}^{(p)}\otimes^{L}/p \simeq \varphi^{*}(\Delta^{*})$, sans nommer
+l'octaèdre ; l'explication est la nôtre. Sous le second triangle, une
+inscription se lit « $\simeq^{\mathrm{dbs}}$ $\otimes^{L}\Delta^{*}(\mathcal{M})$ »,
+de lecture douteuse.}
+
+Le point b) devient alors, sans conjecture : \emph{descendre} à
+$S_{\mathrm{zar}}$, via $\varphi$, la filtration (I) de
+$\varphi^{*}(\Delta_{\mathrm{zar}})$, c'est-à-dire trouver le triangle (III).
+Et la page va un cran plus loin : sur un épaississement à puissances divisées
+$S'$ de $S$, on dispose de $\Delta(S') = \mathcal{D} \otimes^{L}
+\mathcal{O}_{S'}$, qui prolonge $\Delta$, et il faut se donner un prolongement
+$\bar\ell[-1] \to \Delta(S') \to \check{\bar\ell}'$ du triangle
+(III).\footnote{« Épaississement à puissances divisées » et la parenthèse qui
+suit sont des lectures incertaines ; la parenthèse paraît fixer l'idéal de
+l'épaississement en fonction de $p$ et de l'idéal de $S$.} C'est l'esquisse
+d'une théorie des déformations par les cristaux : déformer $G$, c'est
+prolonger la filtration.
+
+\pagerange{11}{13}
+\section*{Questions, et le cas des groupes tronqués d'échelon 1 (pages 11 à 13)}
+
+\subsection*{Quatre questions (page 11)}
+
+a) Les catégories de structures a), b) définissent-elles des \emph{champs}
+sur $S_{\mathrm{zar}}$ ?
+
+b) Le foncteur qui oublie la descente et ne garde que le cristal
+$\mathcal{M}$ sur $S_{\mathrm{cris}}/\mathbb{F}_{p}$ est-il \emph{fidèle} ?\footnote{« Restriction
+partiel » est une lecture incertaine. Une note de marge, en partie biffée et
+encadrée, lit par fragments une suite exacte d'homologie se terminant par
+« $0 \to t^{*} \to \omega$ nul, et $\omega^{*}$ et $t^{*}$ loc. libres ».}
+
+c) Le foncteur naturel qui va des modules localement libres $\omega$ sur
+$S_{\mathrm{zar}}$, munis de $F_{\omega}$, $V_{\omega}$, vers les structures
+a), b) est fidèle ; est-il pleinement fidèle ? L'est-il du moins sur la
+sous-catégorie $F_{\omega} = 0$, ou sur celle où
+$\operatorname{Ker} F = \operatorname{Im} V$ ?
+
+d) Peut-on à $(\omega, F_{\omega}, V_{\omega})$ associer un schéma en groupes
+fini localement libre sur $S$ ?\footnote{Pour $F_{\omega} = 0$ et $G$
+commutatif, la question d) a une réponse classique : les groupes de hauteur
+$\le 1$ correspondent aux $p$-algèbres de Lie localement libres (SGA 3,
+exposé VII$_{\mathrm{A}}$), et pour un groupe commutatif la donnée est celle
+de $\omega$ et de la transposée $V_{\omega}$ de l'application puissance
+$p$-ième. La page ne le dit pas.}
+
+\subsection*{Les groupes de Barsotti--Tate tronqués d'échelon 1 (pages 12 et 13)}
+
+Supposons $G$ de Barsotti--Tate tronqué d'échelon 1, c'est-à-dire que
+\[
+\mathcal{M}^{(p)} \xrightarrow{F} \mathcal{M} \xrightarrow{V}
+\mathcal{M}^{(p)} \xrightarrow{F} \mathcal{M}
+\]
+est exacte, ce qui équivaut à l'exactitude de la suite correspondante pour
+$M$. Prenons la cohomologie du triangle (III). En degré 1 on obtient, avec
+$\omega = H^{1}(\ell[-1]) = H^{0}(\ell)$ et $\nu' = H^{1}(\check\ell')$,
+tous deux localement libres, une filtration
+\[
+0 \to \omega \to M \to \nu' \to 0
+\]
+telle que, dans $\varphi^{*}(M) = \mathcal{M}^{(p)}$, le sous-cristal
+$\varphi^{*}(\omega)$ soit $\operatorname{Im}(V\colon \mathcal{M} \to
+\mathcal{M}^{(p)})$. En degré 0, avec $n = H^{-1}(\ell)$ et $t' =
+H^{0}(\check\ell')$,
+\[
+0 \to n \to M \to t' \to 0, \qquad
+\varphi^{*}(n) = \operatorname{Ker}(F\colon \mathcal{M}^{(p)} \to \mathcal{M}).
+\]
+Comme $\operatorname{Ker} F = \operatorname{Im} V$, on a
+$\varphi^{*}(n) = \varphi^{*}(\omega)$, et la page conclut
+\[
+n = \omega, \qquad t' = \nu' .
+\]
+On retrouve deux faits connus : la tordue par Frobenius de la filtration de
+Hodge $0 \to \omega_{G} \to M \to t_{G^{*}} \to 0$ est
+$\operatorname{Ker} F = \operatorname{Im} V$, et $n_{G} \simeq \omega_{G}$ —
+ce qu'on voit aussi en écrivant localement $G = X[p]$ pour un groupe de
+Barsotti--Tate $X$, d'où $\ell^{G} \simeq [\omega_{X} \xrightarrow{p}
+\omega_{X}]$, de différentielle nulle en caractéristique
+$p$.\footnote{La page écrit
+en marge « Cela détermine $\omega$ de façon \emph{unique} ! ». La déduction
+de $n = \omega$ à partir de $\varphi^{*}(n) = \varphi^{*}(\omega)$ demande que
+$\varphi^{*}$ distingue les sous-modules localement facteurs directs de $M$.
+Ce n'est pas une conséquence de $\varepsilon^{*}\varphi^{*} = F_{S}^{*}$
+seule : sur une base non réduite, $F_{S}^{*}$ ne distingue pas deux tels
+sous-modules qui coïncident modulo le nilradical. Il faut utiliser
+$\varphi^{*}$ sur tous les épaississements, et la page ne le justifie pas.
+Sur $S$ réduit, l'argument est complet tel quel.}
+
+Reste à savoir si $\mathcal{M}$, $F$, $V$ suffisent à reconstituer toute la
+donnée b). On peut déjà construire
+\[
+V_{\omega}\colon \omega \to \omega^{(p)}, \qquad
+F_{t'}\colon t'^{(p)} \to t',
+\]
+le premier parce que $\omega^{(p)} = \operatorname{Im}(V_{M})$, en restreignant
+$V_{M}$ à $\omega$ ; le second parce que $t'^{(p)} =
+\operatorname{Coker}(V_{M})$ et que $F_{M}$, nul sur l'image de $V_{M}$, se
+factorise en une injection $t'^{(p)} \hookrightarrow M$, qu'on compose avec
+$M \to t'$. Le dual $\omega' = \check t'$ reçoit ainsi $V_{\omega'} =
+{}^{t}F_{t'}$. La page 13 dessine les carrés correspondants, et une esquisse
+inachevée où les deux constructions se rejoignent sur la suite
+$0 \to \omega \to M \to t' \to 0$.\footnote{L'esquisse de la page 13 n'a pas
+de pointes de flèches sur sa ligne horizontale, et la place de $\omega$ n'y
+est qu'approchée.}
+
+\pagerange{15}{17}
+\section*{Le programme en quatre points (pages 15 et 17)}
+
+La page 15 reformule la donnée pour un cristal $\mathcal{M}$ de présentation
+finie sur $S_{\mathrm{cris}}/\mathbb{F}_{p}$ avec $F$, $V$ :
+
+1° les triangles $\mathrm{I}(\mathcal{M})\colon L(\mathcal{M}) \to
+\Delta(\mathcal{M})^{(p)} \to L'(\mathcal{M}) \to$ et
+$\mathrm{II}(\mathcal{M})$, avec $\varepsilon^{*}\mathcal{M} = M$ ;
+
+2° un triangle $\mathcal{T}\colon \mathcal{T}_{0} \to \mathcal{T}_{1} \to
+\mathcal{T}_{2} \to$ de complexes parfaits de tor-amplitude dans $[-1,0]$ sur
+$S_{\mathrm{zar}}$, peut-être muni de $F$ et $V$ (« F-V-triangles ? ») ;
+
+3° un isomorphisme de triangles $\alpha\colon \varphi^{*}(\mathcal{T}) \simeq
+\mathrm{I}(\mathcal{M})$ ;
+
+4° un isomorphisme $\beta\colon \mathcal{T}_{1} \simeq
+\varepsilon^{*}\Delta(\mathcal{M})$ tel que $\varphi^{*}(\beta)$ et
+$\alpha_{1}$ coïncident, modulo l'identification
+$\varphi^{*}\varepsilon^{*}\Delta(\mathcal{M}) = \Delta(\mathcal{M})^{(p)}$.\footnote{La
+page note le sommet du triangle $\mathcal{T}_{1}$, comme le coin de droite ;
+l'un des deux porte vraisemblablement un autre indice. On les nomme
+$\mathcal{T}_{0}$, $\mathcal{T}_{1}$, $\mathcal{T}_{2}$ en suivant le coin
+qui doit être $\Delta$. En tête de page, isolés, une suite
+$0 \to G \to G' \to G'' \to 0$ et une inclusion de sites cristallins
+$X_{\mathrm{cris}/0} \hookrightarrow X_{\mathrm{cris}/n}$.}
+
+La condition 4° est le point délicat : $\mathcal{T}_{1}$, sur le site de
+Zariski, doit \emph{être} la valeur de $\Delta$, et pas seulement en devenir
+une après $\varphi^{*}$.
+
+La page 17 en donne l'exemple qui guide tout. À $\omega$ sur
+$S_{\mathrm{zar}}$ muni de $F_{\omega}$, $V_{\omega}$, on associe :
+$\mathcal{M} = \varphi^{*}(\omega)$, $F_{\mathcal{M}} = \varphi^{*}(F_{\omega})$,
+$V_{\mathcal{M}} = \varphi^{*}(V_{\omega})$, donc $M = \omega^{(p)}$ ; le
+triangle
+\[
+\mathcal{T}(\omega)\colon\quad
+[\omega^{(p)} \xrightarrow{F_{\omega}} \omega] \longrightarrow
+[\omega^{(p)} \xrightarrow{0} \omega^{(p)}] \longrightarrow
+[\omega \xrightarrow{V_{\omega}} \omega^{(p)}] \longrightarrow ,
+\]
+dont le terme du milieu est $\Delta(\omega) = \varepsilon^{*}\Delta(\mathcal{M})$ ;
+des isomorphismes canoniques $\alpha_{\omega}\colon \varphi^{*}\mathcal{T}(\omega)
+\simeq \mathcal{T}(\varphi^{*}\omega)$ et $\beta_{\omega}$ ; et pour 4°,
+l'identité.\footnote{Le coin gauche du triangle est lu « $\omega^{V}$ »,
+peut-être $\omega^{(p)}$ ; c'est cette dernière lecture que demande la
+flèche $F_{\omega}$, et qu'on suit.}
+
+\emph{Question.} Le foncteur
+\[
+(\omega, F_{\omega}, V_{\omega}) \longmapsto
+\bigl(\varphi^{*}\omega,\ \varphi^{*}F_{\omega},\ \varphi^{*}V_{\omega},\
+\mathcal{T}(\omega),\ \alpha_{\omega},\ \beta_{\omega}\bigr)
+\]
+est-il pleinement fidèle ? L'est-il du moins sur la sous-catégorie
+$F_{\omega} = 0$ ? Un morphisme de but est une paire $(u, v)$, $u\colon
+\varphi^{*}\omega \to \varphi^{*}\omega'$ compatible à $F$ et $V$,
+$v\colon \mathcal{T}(\omega) \to \mathcal{T}(\omega')$ un morphisme de
+triangles, rendant commutatifs les carrés formés avec $\alpha$ et $\beta$ ;
+la page note que $v_{1}$ est alors déterminé comme $\varepsilon^{*}(u)$, et
+$\varphi^{*}(v)$ comme $\mathcal{T}(u)$. La question reste ouverte dans le
+dossier.
+
+\pagerange{16}{16}
+\subsection*{Une page barrée : rigidité d'une donnée adélique (page 16)}
+
+La page 16, barrée de deux traits de crayon, traite d'autre chose, dont le
+dossier ne donne pas le contexte : une donnée $(\mathcal{M}, T)$ — la page
+ajoute « i.e. $G$ » — munie de structures adéliques
+$(T_{\mathcal{A}'}, u_{\mathcal{A}'}, t_{\infty}, t_{p})$, où $\mathcal{A}$
+désigne les adèles de $\mathbb{Q}$.\footnote{Peut-être des réalisations d'un
+motif sur $\mathbb{Q}$, comme aux pages 70--72 ; c'est une conjecture de
+lecture, que la page ne confirme pas.} Deux énoncés :
+
+(3) \emph{Indétermination.} La catégorie de ces données, pour
+$(\mathcal{M}, T)$ fixé, est un torseur sous la catégorie des
+$\mu_{2}$-torseurs sur $\mathcal{A}$ ; ses classes d'isomorphisme forment un
+torseur sous $H^{1}(\mathcal{A}, \mu_{2}) = \mathcal{A}^{*}/\mathcal{A}^{*2}$,
+et les automorphismes d'un objet forment $H^{0}(\mathcal{A}, \mu_{2}) =
+\prod_{v} \{\pm 1\}$.\footnote{La page écrit $H^{1}(\mathcal{A}, \mu_{2})
+\simeq \prod_{p} \mathbb{Q}_{p}^{*}/\mathbb{Q}_{p}^{*2}$ et
+$H^{0} = \prod_{p} \mathbb{Z}/2\mathbb{Z}$. Le groupe exact est le produit
+restreint des $\mathbb{Q}_{v}^{*}/\mathbb{Q}_{v}^{*2}$ relativement aux
+$\mathbb{Z}_{v}^{*}/\mathbb{Z}_{v}^{*2}$, et les produits portent sur toutes
+les places $v$, y compris la place réelle.}
+
+(4) \emph{Rigidité.} Les équivalences entre deux telles données forment une
+catégorie vide ou un torseur sous la catégorie des $\mu_{2}$-torseurs sur
+$\mathbb{Q}$ trivialisés sur $\mathcal{A}$. Les invariants de cette dernière
+sont les groupes de cohomologie relative
+\[
+H^{1}(\mathbb{Q} \bmod \mathcal{A}, \mu_{2}) \simeq
+\Bigl(\prod_{v} \mathbb{Z}/2\mathbb{Z}\Bigr)\big/(\pm 1), \qquad
+H^{0}(\mathbb{Q} \bmod \mathcal{A}, \mu_{2}) = 0 .
+\]
+Les deux valeurs sont justes : elles découlent de la suite exacte
+$\mu_{2}(\mathbb{Q}) \to \mu_{2}(\mathcal{A}) \to H^{1}(\mathbb{Q} \bmod
+\mathcal{A}) \to \mathbb{Q}^{*}/\mathbb{Q}^{*2} \to
+\mathcal{A}^{*}/\mathcal{A}^{*2}$, dont la dernière flèche est injective — un
+rationnel partout localement carré est un carré. C'est aussi ce qui donne la
+conclusion de la page : l'image de $H^{1}(\mathbb{Q} \bmod \mathcal{A})$ dans
+$H^{1}(\mathbb{Q}, \mu_{2})$ est nulle, donc l'équivalence rationnelle entre
+deux données est déterminée à isomorphisme unique près, et l'on peut les
+identifier sans ambiguïté.\footnote{La lecture « $\mathbb{Q} \bmod
+\mathcal{A}$ » (cohomologie de $\mathbb{Q}$ relative aux adèles) est douteuse
+sur la page ; elle est confortée par la notation
+« $S_{\mathrm{zar}} \bmod S_{\mathrm{cris}}$ » de la page 19, qui est du même
+type. Le terme médian de la formule, illisible, est omis.}
+
+\pagerange{19}{21}
+\section*{La descente comme problème de déformation (pages 19 et 21)}
+
+\subsection*{Où est l'arbitraire (page 19)}
+
+La page 19 prend le problème du point de vue de la descente. On part des deux
+triangles $L \to \Delta(\mathcal{M}) \to L'$ et
+$\mathcal{M}_{/F} \to \varphi^{*}\Delta(\mathcal{M}) \to \mathcal{M}_{/V}$,
+et de la suite exacte longue de cohomologie, de la forme
+\[
+0 \to n \to D_{1} \to t^{*} \to \omega \to D_{0} \to \nu^{*} \to 0,
+\]
+où $D_{1}$, $D_{0}$ sont les cohomologies de $\Delta$. On la coupe en
+\[
+0 \to n \to D_{1} \to \tilde D_{1} \to 0, \qquad
+0 \to \tilde D_{0} \to D_{0} \to \nu^{*} \to 0, \qquad
+0 \to \tilde D_{1} \to t^{*} \to \omega \to \tilde D_{0} \to 0,
+\]
+les deux premières « déterminées de façon unique par $\mathrm{I}(\mathcal{M})$ ».
+Ce qu'il faut descendre se réduit alors à un isomorphisme entre le complexe
+$[t^{*} \to \omega]$ et un complexe $\tilde\Delta(\mathcal{M})$ d'amplitude 1
+de cohomologies $\tilde D_{1}$, $\tilde D_{0}$, isomorphisme dont on connaît
+l'image par $\varphi^{*}$.\footnote{La seconde suite exacte de la page,
+$0 \to {}_{F}\tilde{\mathcal{M}} \to \cdots \to \tilde{\mathcal{M}}_{V} \to 0$,
+est lue par morceaux, et ses indices sont incertains ; on ne la reproduit
+pas. Deux tentatives, « (a) descendre $\mathcal{M}_{/F}$ et
+$\mathcal{M}_{/p}$ » et « (b) descendre le triangle tout entier », sont
+biffées.} Et la page situe l'arbitraire :
+\[
+\text{automorphismes} \in \operatorname{Ext}^{0}(S_{\mathrm{zar}} \bmod
+S_{\mathrm{cris}};\ \tilde D_{0}, \tilde D_{1}) = 0,
+\]
+\[
+\text{choix} \in \operatorname{Ext}^{1}(\ldots), \quad
+\text{obstruction} \in \operatorname{Ext}^{2}(\ldots),
+\]
+où « $S_{\mathrm{zar}} \bmod S_{\mathrm{cris}}$ » désigne des $\operatorname{Ext}$
+relatifs au foncteur $\varphi^{*}$ — ceux qui mesurent la différence entre
+$\operatorname{Ext}_{S_{\mathrm{zar}}}(\tilde D_{0}, \tilde D_{1})$ et
+$\operatorname{Ext}_{S_{\mathrm{cris}}}(\varphi^{*}\tilde D_{0},
+\varphi^{*}\tilde D_{1})$. C'est le schéma habituel d'une théorie des
+déformations, en degrés 0, 1 et 2, et le « $= 0$ ! » de la page dit que la
+descente, quand elle existe, est rigide.\footnote{La page n'en donne pas de
+définition, et l'indexation de ces $\operatorname{Ext}$ relatifs est notre
+lecture de l'usage qu'elle en fait. Une grande partie de la prose de cette
+moitié de page est illisible ; la phrase « l'arbitraire est dans \ldots{}
+principalement, sans doute, i.e. dans $\operatorname{Ext}^{1}(\tilde D_{0},
+\tilde D_{1})$ ou plus \ldots{} dans $\operatorname{Ext}^{1}(S_{\mathrm{zar}}
+\bmod S_{\mathrm{cris}}; \ldots)$ » est ce qui en reste.}
+
+En haut à droite de la moitié inférieure, un diagramme de schémas : $S$
+plongé dans un $X$, les produits $X \times_{S} X$, $X \times_{S} X \times_{S}
+X$ avec leurs enveloppes $\tilde X$, $\widetilde{X \times X}$,
+$\widetilde{X \times X \times X}$, plates sur $S$, et une flèche « $F_{S}$ »
+descendant de $\tilde X$ à $S$. C'est le calcul habituel d'un cristal par les
+enveloppes à puissances divisées d'un plongement et de ses puissances
+fibrées, auquel la factorisation du Frobenius ajoute la flèche vers
+$S$.\footnote{La lecture du diagramme est approchée sur la page ; que les
+$\tilde{\ }$ soient des enveloppes à puissances divisées est notre
+interprétation.}
+
+\subsection*{Une comparaison qui n'est pas injective (page 21)}
+
+La page 21, au crayon, sans une phrase suivie, fait le calcul que la question
+de fidélité de la page 11 appelle. Elle munit $\Delta$ de la filtration
+$\operatorname{Fil}^{0} = \Delta$, $\operatorname{Fil}^{1} = \ell$,
+$\operatorname{Fil}^{2} = 0$, et compare, pour $\Theta =
+\mathcal{O}_{X}[1]$,
+\[
+\operatorname{Hom}_{D(X)}(\check\ell'[1], \Theta) \to
+\operatorname{Hom}(\Delta, \Theta)
+\quad\text{et}\quad
+\operatorname{Hom}_{D(X_{\mathrm{cris}})}(\varphi^{*}\check\ell'[1],
+\varphi^{*}\Theta).
+\]
+Elle écrit la suite exacte à six termes
+\[
+0 \to n_{G^{*}} \to \mathbb{D}^{*}(G)^{\vee} \to t_{G} \to \omega_{G^{*}}
+\to \mathbb{D}^{*}(G^{*}) \to \nu_{G} \to 0,
+\]
+qui est la cohomologie du triangle (III) écrit pour $G^{*}$, et la suite
+d'hypercohomologie correspondante. Elle conclut par deux constats :
+$H^{1}(\mathbb{D}^{*}(G)^{\vee}) = 0$, et
+\[
+\operatorname{Ker}\bigl(H^{1}(n_{G^{*}}) \to H^{1}_{\mathrm{cris}}(n_{G^{*}})\bigr)
+\ne 0 .
+\]
+Autrement dit : la cohomologie de Zariski ne s'injecte pas dans la cohomologie
+cristalline de l'image par $\varphi^{*}$, et c'est un obstacle à la fidélité
+espérée page 11.\footnote{La dernière lettre de la suite à six termes,
+« $\nu_{G}$ », est une lecture incertaine, de même que les accents et
+exposants de la ligne $0 \to \ell_{\bullet} \to \check\Delta^{*} \to
+\check\ell_{\bullet}[1] \to 0$. La page ne dit pas sous quelles hypothèses le
+noyau est non nul ; le rapport avec la question de la page 11 est notre
+lecture.}
+
+\pagerange{24}{30}
+\section*{Groupes de Barsotti--Tate ordinaires et $F$-cristaux à connexion (pages 24 à 30)}
+
+\subsection*{La catégorie $\mathbf{C}$ (page 24)}
+
+Soit $S_{0}$ un schéma lisse sur un corps parfait $k$, $S$ un schéma formel
+formellement lisse sur $W$ qui le relève, et $F_{S}$ un endomorphisme de $S$
+relevant le Frobenius absolu de $S_{0}$ et compatible à $\sigma$ sur $W$.
+Soit $\mathrm{BTO}(S_{0})$ la catégorie des groupes de Barsotti--Tate
+ordinaires sur $S_{0}$, et $\mathbf{C} = \mathbf{C}_{S, F_{S}}$ la catégorie
+des sextuples $(P', Q', M, \nabla, F_{M}, \operatorname{Fil}_{0})$ :
+
+\begin{itemize}
+\item $P'$, $Q'$ des faisceaux $p$-adiques localement constants (tordus),
+libres de type fini ;
+\item $M$ une extension $0 \to Q' \otimes_{\mathbb{Z}_{p}} \mathcal{O}_{S}
+\to M \to P' \otimes_{\mathbb{Z}_{p}} \mathcal{O}_{S} \to 0$ ;
+\item $\nabla$ une connexion intégrable sur $M$, compatible à la structure
+d'extension, les termes extrêmes ayant leur connexion canonique ;
+\item $F_{M}\colon F_{S}^{*}M \to M$ un morphisme d'extensions horizontal,
+induisant l'isomorphisme canonique sur $Q'$ et $p$ fois l'isomorphisme
+canonique sur $P'$ ;
+\item $\operatorname{Fil}_{0}$ un scindage de l'extension réduite $M_{0}$,
+compatible à $F_{M_{0}}$.
+\end{itemize}
+
+Sur $Q'$ le Frobenius est un isomorphisme (pente 0), sur $P'$ il est $p$ fois
+un isomorphisme (pente 1) : c'est ce qu'« ordinaire » veut dire. On a un
+foncteur canonique, le module de Dieudonné,
+$\mathbb{D}\colon \mathrm{BTO}(S_{0})^{\circ} \to \mathbf{C}$, et la page
+pose la \emph{Question} : est-ce une équivalence de catégories ?\footnote{La
+question n'est pas résolue dans le dossier. La pleine fidélité du foncteur de
+Dieudonné cristallin sur une base lisse sur un corps parfait a été établie
+par de Jong (1995) ; on ne prétend pas qu'elle réponde à la question telle
+qu'elle est posée ici, avec cette catégorie $\mathbf{C}$.}
+
+\subsection*{En coordonnées (pages 25 et 26)}
+
+Choisissons un scindage de l'extension,
+$s\colon M \xrightarrow{\sim} P'\otimes\mathcal{O}_{S} \oplus
+Q'\otimes\mathcal{O}_{S}$, et notons $T = P'^{\vee} \otimes_{\mathbb{Z}_{p}} Q'
+= \mathcal{H}om(P', Q')$. Un autre scindage s'écrit $s' = u\,s$ avec
+\[
+u(x, y) = (x,\ y + Lx), \qquad L \in \Gamma(T \otimes_{\mathbb{Z}_{p}}
+\mathcal{O}_{S}).
+\]
+Le Frobenius, lu dans le scindage $s$, est
+\[
+F_{M,s}(x, y) = (px,\ y + \Phi x), \qquad \Phi = \Phi_{M,s} \in
+\Gamma(T \otimes_{\mathbb{Z}_{p}} \mathcal{O}_{S}),
+\]
+et la connexion est $\nabla_{M,s}(x, y) = (dx,\ dy + \omega x)$, avec
+$\omega = \omega_{M,s} \in \Gamma(\hat\Omega^{1}_{S/W} \otimes T)$.\footnote{La
+page écrit la matrice de $F_{M,s}$ avec $\mathrm{id}$ en haut et
+$p\,\mathrm{id}$ en bas, et la formule $(x,y) \mapsto (px, y + \Phi x)$ ; les
+deux ne s'accordent pas. On suit la formule, qui est celle qu'exige la
+définition de $\mathbf{C}$ ($p$ sur $P'$, l'identité sur $Q'$). Le $T$ est
+écrit sur un $\check P$.} De $F_{M,s'} F_{S}^{*}(u) = u F_{M,s}$ et de
+$\nabla_{M,s'} = u\nabla_{M,s}u^{-1}$ on tire les lois de changement de
+scindage
+\[
+\Phi' = \Phi + \bigl(pL - F_{S}^{*}(L)\bigr), \qquad \omega' = \omega - dL .
+\]
+Et le triple de conditions qui exprime qu'on a bien un objet de $\mathbf{C}$ :
+\[
+d\omega = 0, \qquad F_{S}^{*}(\omega) - p\,\omega = d\Phi, \qquad
+\Phi_{0} = 0,
+\]
+la première exprimant que $\nabla$ est intégrable (le terme
+$\omega \wedge \omega$ est nul, $\omega$ étant strictement triangulaire), la
+deuxième que $F_{M}$ est horizontal, la troisième que $F_{M_{0}}$ respecte
+$\operatorname{Fil}_{0}$.\footnote{On a refait les trois calculs ; ils sont
+justes. La troisième condition suppose le scindage $s$ choisi de façon à
+relever $\operatorname{Fil}_{0}$ sur $S_{0}$, ce que dit une note de marge de
+la page 25 : on peut prendre un tel scindage, « ce qui conduira à des $L$
+\ldots{} \emph{nuls} sur $S_{0}$ et des $\Phi$ itou ».} La classification de
+$\mathbf{C}$ est donc celle des paires $(\Phi, \omega)$ soumises à ces
+conditions, modulo l'action des $L$ nuls sur $S_{0}$.
+
+\subsection*{Le cas d'un module libre quelconque (pages 28 et 30)}
+
+La page 28 refait le calcul pour un $F$-cristal $M = E \otimes
+\mathcal{O}_{S}$, $E$ libre de type fini, de matrice de connexion
+$A \in \Gamma(\hat\Omega^{1}_{S/W} \otimes \operatorname{End} E)$ et de
+Frobenius $\Phi\colon F_{S}^{*}(E_{S}) \simeq E_{S} \to E_{S}$, qui devient
+un isomorphisme après $\otimes \mathbb{Q}_{p}$. Avec $A^{\sigma} =
+F_{S}^{*}(A)$ :
+\[
+d\Phi = \Phi A^{\sigma} - A\,\Phi, \qquad dA + A \wedge A = 0, \qquad
+\exists\,\Psi,\ i : \ \Psi\Phi = p^{i}\,\mathrm{id},
+\]
+pour l'horizontalité de $F$, l'intégrabilité, et le fait que $\Phi$ est une
+isogénie.\footnote{La page écrit la condition d'intégrabilité
+$dA + [A, A] = 0$. Avec la convention usuelle $[A, A] = A\wedge A + A \wedge
+A$ pour les formes à valeurs matricielles, la condition juste est
+$dA + A \wedge A = 0$, soit $dA + \tfrac12[A, A] = 0$. En tête de page, au
+crayon, un calcul sans rapport apparent, $(i+p)(p+1) - (i+p-1)p = 2p + i$,
+qui est juste, et un encadré « $v \circ \omega = du + \omega' \circ u$ » où
+l'on attend $u$ au lieu de $v$ : c'est la condition de la page 30.} La page
+30 donne les morphismes : $u\colon E_{S} \to E'_{S}$ est un morphisme si
+\[
+du = u A - A' u, \qquad F_{M'}\, u^{\sigma} = u\, F_{M} .
+\]
+
+\emph{Exemple : les modules inversibles.} Pour $M$ de rang 1, $\Phi =
+a \in \Gamma(\mathcal{O}_{S})$ et $A = \omega \in
+\Gamma(\hat\Omega^{1}_{S/W})$ ; les conditions deviennent
+\[
+da = a(\omega^{\sigma} - \omega), \qquad d\omega = 0,
+\qquad ab = p^{i},
+\]
+et deux tels objets $(a, \omega)$, $(a', \omega')$ sont
+isomorphes s'il existe $u \in \Gamma(\mathcal{O}_{S}^{*})$ avec
+\[
+\omega' - \omega = -\frac{du}{u}, \qquad \frac{a'}{a} =
+\frac{u}{u^{\sigma}} .
+\]
+D'où la classification des données de rang 1 sur un module trivial par la
+cohomologie du complexe
+\[
+\Gamma(\mathcal{O}_{S}^{*}) \longrightarrow \Gamma(\hat\Omega^{1}_{S/W})
+\times \Gamma(\mathcal{O}_{S}[1/p])^{*} \longrightarrow
+\Gamma(\hat\Omega^{2}_{S/W}) \times \Gamma(\hat\Omega^{1}_{S/W})[1/p],
+\]
+\[
+u \longmapsto \Bigl(-\frac{du}{u},\ \frac{u}{u^{\sigma}}\Bigr), \qquad
+(\omega, a) \longmapsto \Bigl(d\omega,\
+\frac{da}{a} - (\omega^{\sigma} - \omega)\Bigr),
+\]
+le $H^{0}$ donnant les automorphismes et le $H^{1}$ les classes
+d'isomorphisme.\footnote{On renomme $a$ et $b$ ce que la page appelle
+$\varphi$ et $\psi$, la première lettre étant réservée. La page écrit la première flèche
+$u \mapsto (du/u,\ u/u^{\sigma})$ ; avec ce signe le composé des deux
+flèches n'est pas nul (il vaut $2(du/u - F_{S}^{*}(du/u))$ dans la seconde
+composante). Le signe $-du/u$, qui est celui de sa propre loi de changement
+$\omega' - \omega = -du/u$, rend le composé nul. Le « ! » après
+$\Gamma(\mathcal{O}_{S})$ et la glose « éléments inversibles dans
+$A[1/p]$ » sont sur la page ; l'exposant de $p$ dans $\varphi\psi = p^{i}$
+est une lecture douteuse.}
+
+\pagerange{29}{29}
+\subsection*{Une page de topologie différentielle (page 29)}
+
+La page 29, au stylo à bille, est d'un autre sujet : des familles d'ouverts
+$(\sigma_{i}, (U_{i}, V_{i}))$ de classe $C^{r}$ adaptées à une
+sous-variété, $\sigma(V) = \sigma(U) \cap \mathbb{R}^{n}$, avec une
+hiérarchie de familles « canoniques », « régulières », « naturelles »,
+« normales », et les conditions de compatibilité de deux cartes. Elle est
+sans rapport avec les cristaux et proche, par le sujet, du cours polycopié
+sur les variétés $C^{r}$ dont des feuillets servent de versos dans ce dossier.
+
+\pagerange{31}{31}
+\subsection*{Un feuillet de tapuscrit (page 31)}
+
+Un feuillet de tapuscrit (numéroté 34) porte la démonstration d'un énoncé à
+trois volets sur la réduction semi-stable des variétés abéliennes —
+critère galoisien 3.5, réduction au cas strictement local, trivialité de la
+représentation de Galois sur les trois quotients de la filtration de
+monodromie, calculée par sa trace — puis la Remarque 5.13.1 sur les groupes de
+Barsotti--Tate à bonne réduction virtuelle. Les interventions à la main sont
+des lettres tracées dans les blancs, « (pro-$\ell$-) » ajouté devant
+« groupe de Barsotti--Tate », et à la fin la parenthèse « (C'est vrai pour
+$\ell \ne p$.) ».\footnote{Le « critère galoisien de réduction semi-stable
+3.5 » évoque l'exposé IX de SGA 7 ; non vérifié. Ce feuillet n'appartient pas
+au tapuscrit des pages 6 à 14.}
+
+\pagerange{33}{41}
+\section*{Les groupes de Barsotti--Tate à multiplication par $A$ (pages 33 à 41)}
+
+\subsection*{Le module de Dieudonné (pages 33 et 35)}
+
+On veut déterminer les groupes de Barsotti--Tate $G_{0}$ sur $k =
+\mathbb{F}_{q}$, de hauteur $h$, sur lesquels $A$ opère. Par la théorie de
+Dieudonné, ce sont les $W$-modules libres $M$ de rang $h$ munis d'un
+endomorphisme $\sigma$-linéaire $F_{M}$ et d'une action de $A$ par
+endomorphismes commutant à $F_{M}$, avec
+\[
+(*') \qquad \exists\, V_{M} : \ F_{M}V_{M} = V_{M}F_{M} = p .
+\]
+Le cas particulier qui intéresse la page est celui où l'action de $\pi$ est
+le Frobenius relatif à $\mathbb{F}_{q}$ :
+\[
+(*) \qquad F_{M}^{f} = \pi_{M} .
+\]
+Les deux actions font de $M$ un module sur $A_{W} = A \otimes_{\mathbb{Z}_{p}}
+W$, et $F_{M}$ est $\sigma_{A}$-linéaire pour $\sigma_{A} = \mathrm{id}
+\otimes \sigma$. Comme $k$ est le corps résiduel de $K$, $A$ contient $W$
+et
+\[
+A \otimes_{\mathbb{Z}_{p}} W \xrightarrow{\ \sim\ } A^{\Sigma}, \qquad
+\Sigma = \operatorname{Gal}(k/\mathbb{F}_{p}) \simeq \mathbb{Z}/f\mathbb{Z},
+\]
+$\sigma_{A}$ permutant circulairement les facteurs. Un $A_{W}$-module $M$ est
+donc une famille $(M_{\nu})_{\nu \in \mathbb{Z}/f}$ de $A$-modules, et
+$F_{M}$ une famille d'applications $A$-linéaires
+\[
+M_{0} \xrightarrow{F_{0}} M_{1} \xrightarrow{F_{1}} \cdots \to M_{f-1}
+\xrightarrow{F_{f-1}} M_{0} .
+\]
+Par $(*')$, $F_{M}$ est injectif, donc chaque $F_{\nu}$ l'est, et les
+$M_{\nu}$ ont tous le même rang. Comme les rangs des $M_{\nu}$ \emph{sur
+$W$} ont pour somme $h = ef$, chacun est de rang $e$ sur $W$, c'est-à-dire de
+rang 1 sur $A$ : les $M_{\nu}$ sont inversibles.\footnote{La page invoque la
+condition $(*)$ pour l'injectivité, et la marge note que $(*')$ seule
+suffirait ; c'est le cas. Elle dit « la somme des rangs des $M_{\nu}$ est
+$h$ » : c'est vrai des rangs sur $W$ ; la somme des rangs sur $A$ est $f$.
+Les composantes du Frobenius sont notées $\varphi_{\nu}$ sur la page.}
+
+On identifie alors tous les $M_{\nu}$ à $\Omega = M_{0}$ par les
+isomorphismes $\pi^{-m_{\nu}} F_{\nu-1}\cdots F_{0}\colon M_{0} \to M_{\nu}$,
+où $0 = m_{0} \le m_{1} \le \cdots \le m_{f-1}$ sont les entiers uniquement
+déterminés qui rendent ces flèches surjectives. On obtient un isomorphisme
+canonique
+\[
+M \simeq \Omega \otimes_{\mathbb{Z}_{p}} W = \Omega \otimes_{A}
+(A \otimes_{\mathbb{Z}_{p}} W).
+\]
+
+\subsection*{La dimension (page 37)}
+
+Dans ces identifications, $F_{\nu} = \pi^{r_{\nu}}\,\mathrm{id}_{\Omega}$
+pour $0 \le \nu \le f-2$, avec $r_{\nu} = m_{\nu+1} - m_{\nu} \ge 0$, et
+$F_{f-1} = \pi^{r_{f-1}}u$ avec $u \in A^{*}$. Donc
+\[
+F_{M}^{f} = \varpi_{M}, \qquad \varpi = \pi^{r_{0} + \cdots + r_{f-1}}\,u \in A,
+\]
+la condition $(*')$ s'écrit $r_{\nu} \le e$ pour tout $\nu$ (chaque
+$F_{\nu}$ divise $p$, de valuation $e$), et
+\[
+M/F_{M}M \simeq \bigoplus_{\nu} A/\pi^{r_{\nu}}A, \qquad
+\dim G_{0} = r_{0} + \cdots + r_{f-1} = v_{\pi}(\varpi) \ \le\ fe = h .
+\]
+C'est la formule encadrée de la page.\footnote{Que $\dim G_{0}$ soit la longueur de $M/F_{M}M$ (et non de
+$M/V_{M}M$) dépend de la convention de Dieudonné, ici contravariante ; avec
+l'autre convention on obtient la dimension du dual. Le module est un
+$W$-module de longueur $\sum r_{\nu}$ parce que $A$ et $W$ ont même corps
+résiduel. La page a la même formule, avec un premier membre biffé
+illisible.}
+
+\subsection*{La proposition (page 39)}
+
+\emph{Proposition.} Soit $G_{0}$ un groupe de Barsotti--Tate de hauteur $h$
+sur $k$ sur lequel $A$ opère, et $M$ son module de Dieudonné. Alors
+$F_{G_{0}}^{f}$ est de la forme $\varpi_{G_{0}}$ pour un $\varpi \in A$, et
+$\dim G_{0} = \operatorname{long}_{A} A/\varpi A = v(\varpi)$. Les conditions
+suivantes sont équivalentes :
+\begin{enumerate}
+\item[(i)] $\dim G_{0} = 1$ ;
+\item[(ii)] $F_{G_{0}}^{f} = \varpi_{G_{0}}$ avec $\varpi$ une uniformisante
+de $A$ — uniquement déterminée ;
+\item[(iii)] $M$ est donné par un triple $(\Omega, \nu, \varpi)$, $\Omega$
+un $A$-module inversible, $0 \le \nu \le f-1$, $\varpi$ une uniformisante :
+\[
+M = \Omega \otimes_{\mathbb{Z}_{p}} W, \qquad
+F_{M} = \mathrm{id}_{\Omega} \otimes \sigma + \mathrm{pr}_{\nu}\bigl[(\varpi - 1)
+\otimes \sigma\bigr],
+\]
+où $\mathrm{pr}_{\nu}$ est le projecteur sur le $\nu$-ième facteur de
+$A \otimes_{\mathbb{Z}_{p}} W \simeq A^{\Sigma}$.
+\end{enumerate}
+
+La démonstration est le calcul précédent : $v(\varpi) = 1$ force un seul
+$r_{\nu_{0}}$ égal à 1 et les autres nuls, et en modifiant les
+identifications $M_{0} \simeq M_{\nu}$ par l'unité $u$ pour $\nu > \nu_{0}$
+on fait passer $u$ de $F_{f-1}$ à $F_{\nu_{0}}$, qui devient $\varpi =
+\pi u$.\footnote{La page note, en petit, « ($u = 1$ \ldots{} $\varpi = \pi$) »
+et « quitte à changer $\pi$ ! ». Le passage de $u$ d'une composante à
+l'autre est notre explicitation. Une note de marge, en grande partie
+illisible, affirme que tous ces groupes sont isomorphes par des
+transformations faisant intervenir $f$ et $\mathbb{F}_{q} = \mathbb{F}_{p^{f}}$ ;
+on ne peut pas la reconstituer. Le paramètre $\nu$ mesure, d'après la page
+43, le décalage entre deux structures de $k$-espace sur $\omega_{G_{0}}$, et
+n'est donc pas un invariant de $G_{0}$ comme groupe à opérations de $A$
+qu'on puisse faire disparaître sans tordre l'action.}
+
+\subsection*{Les homomorphismes (pages 39 et 41)}
+
+Soient $G_{0}$, $G'_{0}$ comme plus haut, donnés par $(\Omega, (r_{\nu}), u)$
+et $(\Omega', (r'_{\nu}), u')$. Un homomorphisme $A$-linéaire $G_{0} \to
+G'_{0}$ est un morphisme $M' \to M$ de $A_{W}$-modules commutant au
+Frobenius. On en trouve un non nul — c'est alors une isogénie — si et
+seulement si $\varpi = \varpi'$, c'est-à-dire $F_{G_{0}}^{f} =
+F_{G'_{0}}^{f}$ dans $A$. Dans ce cas, le $A$-module de ces homomorphismes
+est isomorphe au sous-module $H \subset \operatorname{Hom}(\Omega', \Omega)$
+des $v_{0}$ tels que
+\[
+\operatorname{val}(v_{0}) + \sum_{i=0}^{\nu} r_{i} - \sum_{i=0}^{\nu} r'_{i}
+\ \ge\ 0 \qquad (0 \le \nu \le f-2) :
+\]
+la commutation au Frobenius impose $v_{\nu+1} = \pi^{\sum_{0}^{\nu}(r_{i} -
+r'_{i})}v_{0}$ sur la composante $\nu+1$, et la condition de la composante
+0, où le cycle se referme, est automatique dès que $\varpi = \varpi'$.
+
+En dimension 1, avec $r_{i} = \delta_{i\nu}$ et $r'_{i} = \delta_{i\nu'}$,
+cela donne :
+\[
+\operatorname{Hom}_{A}(G_{0}, G'_{0}) \simeq
+\begin{cases}
+\operatorname{Hom}(\Omega', \Omega) & \text{si } \nu \le \nu', \\
+\pi\operatorname{Hom}(\Omega', \Omega) & \text{si } \nu > \nu',
+\end{cases}
+\]
+et $G_{0}$, $G'_{0}$ sont isogènes si et seulement si leurs uniformisantes
+coïncident.\footnote{Le signe entre $\nu$ et $\nu'$ dans la première ligne
+est couvert d'une tache d'encre ; le calcul ci-dessus donne $\le$. Les primes
+sur les $r_{i}$ des deux sommes de la page 39 ne se distinguent pas
+nettement ; leur place est fixée ici par le calcul.}
+
+\subsection*{À isogénie près (page 41)}
+
+Sans supposer $\dim G_{0} = 1$, à isogénie près les $M_{\nu}$ deviennent des
+$K$-espaces de dimension 1, tous identifiés par les $F_{\nu}$, et
+\[
+M \otimes \mathbb{Q} \simeq \Omega \otimes_{\mathbb{Q}_{p}} K_{0} =
+\Omega \otimes_{K} (K \otimes_{\mathbb{Q}_{p}} K_{0}), \qquad
+F_{M}^{f} = \varpi \otimes \mathrm{id}_{K_{0}},
+\]
+avec $\Omega$ un $K$-espace de dimension 1 et $\varpi \in K^{*}$. La
+condition d'« effectivité » — l'existence d'un réseau stable par $F$ et par
+$V = pF^{-1}$ — entraîne que $\varpi$ et $V^{f} = p^{f}\varpi^{-1}$
+préservent un réseau, c'est-à-dire $0 \le v_{\pi}(\varpi) \le fe$ ; et
+réciproquement cette condition suffit, puisqu'on peut alors répartir
+$v_{\pi}(\varpi)$ en $f$ entiers $r_{\nu} \in [0, e]$.\footnote{La page écrit
+la condition comme l'existence de réseaux invariants par $\varpi$ et par
+$p^{f}\varpi^{-1}$ ; l'exposant $f$ est une lecture douteuse, confirmée par
+$V^{f} = p^{f}F^{-f}$. La suffisance, qui demande un réseau stable par $F$ et
+$V$ eux-mêmes et non par leurs puissances $f$-ièmes, est notre complément.}
+
+\pagerange{43}{49}
+\section*{Le relèvement de Lubin--Tate (pages 43 à 49)}
+
+\subsection*{L'espace cotangent et le groupe $G_{0}(A, \pi)$ (page 43)}
+
+Sous les conditions de la proposition, $\omega_{G_{0}}$ est la seule
+composante non nulle de $M/F_{M}M$, isomorphe à $\Omega/\pi\Omega$. Il porte
+deux structures de $k$-espace : celle qui vient de $A/\pi A = k$ par
+l'action de $A$, et celle qui vient de $W/pW = k$. Elles diffèrent d'une
+puissance de $\sigma$ déterminée par $\nu$, et le cas le plus simple, $\nu =
+0$, est celui où elles coïncident.\footnote{Trois lignes surchargées de la
+page, en partie biffées, décrivent la filtration canonique de
+$M \otimes_{W} k = \sum M_{\nu} \otimes_{A} k$ ; seuls des fragments se
+lisent. L'exposant de $\pi$ dans « $M_{\nu}/\pi^{r}M_{\nu}$ » et la lettre
+devant le dernier $\Omega$ sont douteux. Quelle composante porte l'indice 0,
+et donc quelle valeur de $\nu$ fait coïncider les deux structures, dépend de
+conventions d'indexation que la page ne fixe pas ; on suit son énoncé.} Avec
+de plus $\Omega = A$, on obtient le groupe
+\[
+G_{0} = G_{0}(A, \pi), \qquad M = A \otimes_{\mathbb{Z}_{p}} W, \qquad
+F_{M} = \mathrm{id}_{A} \otimes \sigma + \mathrm{pr}_{0}\bigl((\pi - 1)
+\otimes \sigma\bigr),
+\]
+où $\mathrm{pr}_{0}$ est le projecteur sur le facteur correspondant au
+$A$-homomorphisme $A \otimes_{\mathbb{Z}_{p}} W \to A$ qui est l'inclusion
+sur $W$ ; le cas d'un $\Omega$ quelconque s'en déduit par le produit
+tensoriel $\Omega \otimes_{A} G_{0}(A)$.
+
+\subsection*{Le relèvement par la théorie des déformations (pages 43 à 47)}
+
+On veut relever $G_{0}$ en un groupe de Barsotti--Tate $G$ sur $A$, muni
+d'une action de $A$, de sorte que l'action induite de $A$ sur le $A$-module
+inversible $t_{G}$ soit l'action évidente. D'après Lubin--Tate, un tel
+relèvement existe et est unique à isomorphisme unique près.\footnote{Lubin
+et Tate, « Formal complex multiplication in local fields » (1965). Le groupe
+cherché est un $A$-module formel au sens strict.} La page en redonne une
+preuve, sous une hypothèse : que l'idéal $\pi A$ admette des puissances
+divisées, ce qui a lieu si et seulement si $e \le p-1$.\footnote{La page dit
+« $\pi A$ stable par puissances divisées » ; la condition $e \le p - 1$ est la
+traduction usuelle. La théorie des déformations des groupes de
+Barsotti--Tate par le cristal de Dieudonné et la filtration de Hodge est
+celle que Grothendieck annonce à Nice en 1970 et que Messing rédige (1972) ;
+on la cite sous son nom d'aujourd'hui, Grothendieck--Messing.}
+
+Sous cette hypothèse, relever $G_{0}$ à isomorphisme près revient à relever
+la filtration de Hodge de $M \otimes_{W} k$ en une filtration de
+$M_{A} = \Omega \otimes_{\mathbb{Z}_{p}} A$. La compatibilité à l'action de
+$A$ veut dire que cette filtration est faite de
+$A \otimes_{\mathbb{Z}_{p}} A$-modules : on cherche
+\[
+0 \to \omega_{G} \to \Omega \otimes_{\mathbb{Z}_{p}} A \to t_{G^{*}} \to 0,
+\]
+ou, par transposition,
+\[
+(**) \quad 0 \to \omega_{G^{*}} \to \check\Omega \otimes_{\mathbb{Z}_{p}} A
+\to t_{G} \to 0 .
+\]
+Que $A$ opère sur $t_{G}$ par sa structure évidente veut dire que les deux
+actions de $A$ sur $t_{G}$, par les deux facteurs de $A \otimes A$,
+coïncident, c'est-à-dire que $A \otimes A$ opère sur $t_{G}$ à travers la
+multiplication $p_{0}\colon A \otimes_{\mathbb{Z}_{p}} A \to A$. Comme $t_{G}$
+est de rang 1 sur $A$, et $\check\Omega \otimes_{\mathbb{Z}_{p}} A$ de rang 1
+sur $A \otimes A$, et que $p_{0}$ est surjectif, $t_{G}$ est le changement de
+base de $\check\Omega \otimes_{\mathbb{Z}_{p}} A$ par $p_{0}$ ; et comme
+$\check\Omega \otimes_{\mathbb{Z}_{p}} A$ se déduit de $\check\Omega$ par
+$\lambda \mapsto \lambda \otimes 1$, dont le composé avec $p_{0}$ est
+l'identité,
+\[
+t_{G} \simeq \check\Omega, \qquad \omega_{G} \simeq \Omega .
+\]
+Les suites $(**)$ et sa duale sont ainsi canoniques et prolongent la
+filtration de $M_{A} \otimes_{A} k$ : c'est l'existence et l'unicité de
+Lubin--Tate, sous une forme plus faible quant à l'unicité, et sous
+l'hypothèse supplémentaire des puissances divisées.\footnote{La flèche
+$p_{0}$ de $(**)$ est écrite sur une lettre surchargée.}
+
+\subsection*{Sans puissances divisées : à isogénie près (pages 47 et 49)}
+
+Si l'on abandonne l'hypothèse et qu'on utilise la classification des
+déformations à isogénie près, on trouve de même des suites exactes
+canoniques sur $K$,
+\[
+0 \to \omega_{G} \otimes_{A} K \to M_{K} \to t_{G^{*}} \otimes_{A} K \to 0,
+\qquad
+0 \to \omega_{G^{*}} \otimes_{A} K \to \check M_{K} \to t_{G} \otimes_{A} K
+\to 0,
+\]
+avec $M_{K} = \Omega \otimes_{\mathbb{Z}_{p}} K$, et $t_{G} \otimes_{A} K
+\simeq \check\Omega \otimes_{A} K$ : l'unicité à isogénie près, mais ni
+l'existence ni l'unicité à isomorphisme près, pour lesquelles il faut
+revenir à Lubin--Tate.\footnote{L'indice du produit tensoriel médian de la
+formule de la page 47 est une lecture douteuse.}
+
+Les deux réseaux $t_{G}$ et $\check\Omega$ d'une même droite sur $K$
+diffèrent alors d'une puissance de $\pi$ :
+\[
+t_{G} = \pi^{-\alpha}\check\Omega, \qquad \text{donc} \qquad
+\omega_{G} = \pi^{\alpha}\Omega, \qquad \alpha \in \mathbb{Z},
+\]
+$\alpha$ ne dépendant que de $A$ et de $\pi$.\footnote{La page écrit
+« $\Omega = \pi^{\alpha}\omega_{G}$ ». Le dual de $\pi^{-\alpha}\check\Omega$
+est $\pi^{\alpha}\Omega$, de sorte que $\Omega = \pi^{-\alpha}\omega_{G}$ ;
+c'est le signe qu'on corrige. La parenthèse qui devait dire de quoi dépend
+$\alpha$ est illisible.} De même, le module de Dieudonné de $G$ et $M$ sont
+deux réseaux du même $K$-espace $\Omega \otimes_{\mathbb{Z}_{p}} K$, et la
+page pose la question de savoir s'ils coïncident, comme c'est le cas en
+présence de puissances divisées — ce qui forcerait $\alpha = 0$. « Cela ne
+dépend pas du choix de $\pi$, mais seulement de $A$ \ldots{} » ; la question
+reste ouverte.
+
+\pagerange{51}{55}
+\section*{Le théorème de Tate pour le groupe de Lubin--Tate (pages 51 à 55)}
+
+Soit $G$ le groupe de Lubin--Tate, et $K_{\pi}$ l'extension abélienne de $K$
+engendrée par ses points de torsion, de groupe $A^{*}$ via le caractère de
+Lubin--Tate $\chi_{\pi}\colon \Gamma_{K} \to A^{*}$. Le module de Tate
+$T_{p} = T_{p}(G)(K_{\pi})$ est un $A$-module inversible dont les bases sont
+permutées de façon simplement transitive par $\operatorname{Gal}(K_{\pi}/K)$
+: il y a donc un choix privilégié, à isomorphisme unique près, de $K_{\pi}$
+muni d'un générateur $e$ de $T_{p}$, et $\operatorname{Spec} K_{\pi}$
+représente le faisceau des générateurs de $T_{p}(G)$. Ce choix fait,
+$T_{p} \simeq A$, $\lambda \mapsto \lambda e$, et l'on prend pour $\bar K$
+une extension de $K_{\pi}$.\footnote{La phrase « Nous supposons fixé
+$K_{\pi}$ \ldots{} » est de lecture difficile. L'énoncé sur le faisceau des
+générateurs est à entendre pour le pro-objet $\varprojlim G[\pi^{n}]^{*}$.}
+
+On regarde sur $T_{p} \otimes_{\mathbb{Z}_{p}} \mathbb{C}_{p}$ trois actions
+qui commutent : celle de $A$ par les opérations sur $G$, celle de $A$ par la
+structure de $\mathbb{C}_{p}$-espace (via $K \subset \mathbb{C}_{p}$), et
+celle de $\Gamma_{K}$. On suppose $K/\mathbb{Q}_{p}$ galoisienne. Comme
+$A \otimes_{\mathbb{Z}_{p}} A$-module, on a canoniquement
+\[
+(*) \qquad T_{p} \otimes_{\mathbb{Z}_{p}} \mathbb{C}_{p} \simeq
+A \otimes_{\mathbb{Z}_{p}} \mathbb{C}_{p} \simeq
+\prod_{\sigma} \mathbb{C}_{p,\sigma},
+\qquad \sigma \in \operatorname{Hom}_{\mathbb{Q}_{p}}(K, \mathbb{C}_{p})
+\simeq \operatorname{Gal}(K/\mathbb{Q}_{p}),
+\]
+où $\mathbb{C}_{p,\sigma} = \mathbb{C}_{p}$ sur lequel $A$ opère via
+$\sigma$. Sur le facteur $\mathbb{C}_{p,\sigma}$, $g \in \Gamma_{K}$ opère
+par
+\[
+x \longmapsto \sigma(\chi_{\pi}(g))\, g(x) .
+\]
+Cette action est semi-linéaire.\footnote{La page écrit $\rho_{\sigma}(g)x = \sigma(\chi_{\pi}(g))x$, sans le
+$g(x)$ : l'action est semi-linéaire, et c'est bien sous cette forme que la
+page 55 l'utilise. L'identification
+$\operatorname{Hom}_{\mathbb{Q}_{p}}(K, \mathbb{C}_{p}) \simeq
+\operatorname{Gal}(K/\mathbb{Q}_{p})$ dépend du plongement fixé, qui devient
+$\sigma = 1$.}
+
+Le théorème de Tate donne de son côté une décomposition
+\[
+(**) \qquad T_{p} \otimes \mathbb{C}_{p} \simeq
+\bigl(t_{G} \otimes_{A} \mathbb{C}_{p}(1)\bigr) \oplus
+\bigl(\omega_{G^{*}} \otimes_{A} \mathbb{C}_{p}\bigr),
+\]
+fonctorielle, donc compatible aux deux actions de $A$.\footnote{Tate,
+« $p$-divisible groups » (1967). La page note les deux termes
+$\mathfrak{t} \otimes C(1)$ et $\check{\mathfrak{t}}^{*} \otimes C$ ; la lettre
+lue $\mathfrak{t}$ est une majuscule cursive de lecture douteuse, que l'on
+identifie à l'espace tangent $t_{G}$, et $\check{\mathfrak{t}}^{*}$ à
+$\omega_{G^{*}} = t_{G^{*}}^{\vee}$, ce que vérifie le cas de
+$\mu_{p^{\infty}}$ et de $\mathbb{Q}_{p}/\mathbb{Z}_{p}$.} Sur $t_{G}$, $A$
+opère par l'action régulière : $t_{G} \otimes_{A} \mathbb{C}_{p}$ est donc le
+facteur $\sigma = 1$, et l'autre terme est le produit des
+$\mathbb{C}_{p,\sigma}$ pour $\sigma \ne 1$. Se donner les isomorphismes du
+théorème de Tate, c'est alors se donner, pour chaque $\sigma$, un
+isomorphisme $\lambda \mapsto \lambda x_{\sigma}$ ($x_{\sigma} \in
+\mathbb{C}_{p}^{*}$) qui entrelace les actions de Galois, la source étant
+tordue par $\sigma(\chi_{\pi})$, le but par le caractère cyclotomique
+$\chi_{\mathrm{cyc}}$ si $\sigma = 1$ et non tordu sinon. Cela revient aux
+conditions
+\[
+g(x_{\sigma}) = \sigma(\chi_{\pi}(g))\, x_{\sigma} \quad (\sigma \ne 1), \qquad
+g(x_{1}) = \chi_{\mathrm{cyc}}(g)^{-1}\chi_{\pi}(g)\, x_{1}, \qquad
+g \in \Gamma_{K} ,
+\]
+qui sont celles que la page encadre.\footnote{La page appelle $\tau$ le caractère cyclotomique (« caractère de
+Tate »). On a refait le calcul de l'entrelacement ; les deux conditions sont
+celles de la page.}
+
+\emph{N.B.} A priori les $x_{\sigma}$ ne sont déterminés qu'à multiplication
+près par des éléments de $K^{*}$, mais le théorème de Tate détermine tous les
+autres dès qu'on a choisi l'un d'eux. Et il n'existe pas de $x'_{1} \in
+\mathbb{C}_{p}^{*}$ tel que $g(x'_{1}) = \chi_{\pi}(g)\,x'_{1}$, même pour
+$g$ dans l'inertie : le produit de $x'_{1}$ et des $x_{\sigma}$, $\sigma \ne
+1$, serait un $x \in \mathbb{C}_{p}^{*}$ avec
+\[
+g(x) = N_{K/\mathbb{Q}_{p}}(\chi_{\pi}(g))\, x = \chi_{\mathrm{cyc}}(g)\,x
+\qquad (g \text{ dans l'inertie}),
+\]
+ce qui est impossible par le théorème de Tate ($\mathbb{C}_{p}(1)$ n'a pas
+d'invariant non nul sous l'inertie). En langage d'aujourd'hui : $\chi_{\pi}$
+est un caractère de Hodge--Tate, de poids 1 au plongement $\sigma = 1$ et 0
+aux autres, et non de poids 0.\footnote{L'égalité
+$N_{K/\mathbb{Q}_{p}} \circ \chi_{\pi} = \chi_{\mathrm{cyc}}$ sur l'inertie
+est la théorie du corps de classes local de Lubin--Tate ; la page l'écrit
+sous l'accolade comme $N_{A^{*}/\mathbb{Z}_{p}^{*}}(\chi_{\pi}(g)) = \tau(g)$
+« si $g \in$ Inertie ». La phrase « Mais la \ldots{} $\bar K$) le choix de »
+est très cursive ; seuls quelques mots se lisent. Le vocabulaire des poids de
+Hodge--Tate est postérieur.}
+
+\pagerange{57}{59}
+\section*{Trois feuilles de graphes (pages 57 à 59)}
+
+Trois feuilles de papier quadrillé, au crayon, portent des lignes
+polygonales issues de l'origine, des faisceaux de droites, et des
+comparaisons de fractions. La première a pour en-tête « $n/17$ » et aligne
+des petites lignes polygonales pour $n = 1, \ldots, 16$, en regard d'une
+colonne marquée $\nu$ ; les inscriptions comparent des fractions de
+dénominateurs 17, 23, 24 à des fractions de petits dénominateurs :
+\[
+\tfrac{5}{12} > \tfrac{7}{17}, \quad \tfrac{2}{7} < \tfrac{5}{17}, \quad
+\tfrac{4}{17} < \tfrac{1}{4}, \quad \tfrac{4}{13} > \tfrac{7}{23}, \quad
+\tfrac{2}{7} < \tfrac{7}{24}, \quad \tfrac{13}{17} < \tfrac{10}{13},
+\quad \ldots
+\]
+Toutes celles qu'on lit en entier sont exactes. Les deux autres feuilles
+reprennent la même chose avec des dénominateurs 15 et 16. Rien dans le
+dossier ne dit à quoi servent ces graphes.\footnote{On peut penser à des
+polygones de Newton, et à la question de savoir quels polygones à sommets
+entiers approchent une droite de pente $n/17$ — question naturelle pour la
+spécialisation des pentes d'un $F$-cristal, que Grothendieck étudie à cette
+époque. C'est une conjecture de lecture, que les pages ne confirment pas. La
+transcription donne toutes les inscriptions.}
+
+\pagerange{60}{69}
+\section*{Le groupe de Galois des $F$-cristaux filtrés (pages 60 à 68)}
+
+\subsection*{Les données (pages 60 et 62)}
+
+Soit $V$ un anneau de valuation discrète complet d'inégales
+caractéristiques, de corps résiduel parfait $k$, de corps des fractions $L$ ;
+$W = W(k) \subset V$, $K = W[1/p] \subset L$.\footnote{Dans cette section et
+les suivantes, $K$ désigne, comme sur la page, le corps des fractions de
+$W(k)$, et non plus le corps $p$-adique des pages 33 à 55.} Soit
+$\mathscr{C}$ la catégorie des $F$-cristaux filtrés à isogénie près sur $V$ :
+des couples $(E, F)$, $E$ un $K$-espace de dimension finie, $F$ un
+endomorphisme $\sigma$-linéaire bijectif préservant un réseau, munis d'une
+filtration de $E \otimes_{K} L$. C'est une catégorie tannakienne
+$\mathbb{Q}_{p}$-linéaire, munie du foncteur fibre $\Delta$ « oubli » sur
+$K$.\footnote{La page qualifie $\mathscr{C}$ de « ($\mathbb{Q}_{p}$-linéaire,
+½ simple) », le « ½ simple » valant « semi-simple », et ajoute entre les
+lignes « gr. déri. », de lecture incertaine. La catégorie des $F$-isocristaux
+filtrés n'est pas semi-simple ; c'est une hypothèse de la page, ou une
+restriction à une sous-catégorie, qu'on ne sait pas lire.}
+
+La page dispose alors d'un « foncteur fondamental »
+\[
+T_{p}\colon \mathscr{C} \longrightarrow \operatorname{Mod}_{f}(\Gamma_{L},
+\mathbb{Q}_{p}), \qquad \Gamma_{L} = \operatorname{Gal}(\bar L/L),
+\]
+vers les représentations $p$-adiques de dimension finie. C'est un foncteur
+fibre sur $\mathbb{Q}_{p}$, et il identifie $\mathscr{C}$ à
+$\operatorname{Rep}_{\mathbb{Q}_{p}}(G)$, $G$ un groupe proalgébrique sur
+$\mathbb{Q}_{p}$.\footnote{L'existence d'un tel foncteur est précisément le
+problème que Grothendieck pose à Nice en 1970 sous le nom de « foncteur
+mystérieux ». La page l'utilise comme donné. Il a été construit par
+Fontaine (anneau $B_{\mathrm{cris}}$, à partir de 1979), sur la
+sous-catégorie des objets « faiblement admissibles », dont Colmez et Fontaine
+ont montré (2000) qu'ils sont exactement ceux qui proviennent de
+représentations. Le langage des groupes de Galois tannakiens est celui de la
+thèse de Saavedra (1972). Le mot après « pro- » est biffé et récrit,
+illisible les deux fois.}
+
+Page 62 : on suppose $\mathscr{C}$ de type fini sur $\mathbb{Q}_{p}$. On a
+un homomorphisme $\alpha\colon \Gamma_{L} \to G(\mathbb{Q}_{p})$, et $G$ est
+l'enveloppe algébrique de $\alpha$ — l'adhérence de Zariski de son image —
+si et seulement si $T_{p}$ est pleinement fidèle et son image essentielle
+stable par sous-objets.\footnote{La page écrit $G(\mathbb{Q}_{\ell})$ ; il
+s'agit de $G(\mathbb{Q}_{p})$. Elle énonce l'équivalence avec la seule pleine
+fidélité (« dans ce cas seulement », lecture incertaine) ; il faut en plus la
+stabilité par sous-objets. Elle ajoute « ou, ce qui revient au même, le
+foncteur $\Delta$ » : on ne voit pas en quel sens, $\Delta$ étant un foncteur
+fibre, et l'on ne reprend pas cette équivalence.}
+
+\subsection*{Les cocaractères de Hodge--Tate et de Hodge (pages 62 et 64)}
+
+Le composé
+\[
+\mathscr{C} \to \operatorname{Mod}_{f}(\Gamma_{L}, \mathbb{Q}_{p})
+\xrightarrow{\ \otimes \mathbb{C}_{p}\ } \operatorname{Mod}_{f}(\Gamma_{L},
+\mathbb{C}_{p}) \to \operatorname{Mod}_{f}(\mathbb{C}_{p})
+\]
+est bigradué — par le degré total et par la décomposition de Hodge(--Tate) —,
+d'où deux cocaractères
+\[
+i_{1}, i_{2}\colon \mathbb{G}_{m,\mathbb{C}_{p}} \rightrightarrows
+G_{\mathbb{C}_{p}}, \qquad i = i_{1}i_{2},
+\]
+$i$ étant le cocaractère central qui définit la graduation de
+$\mathscr{C}$.\footnote{La graduation par le « degré total » suppose que
+$\mathscr{C}$ est graduée (comme le sont les motifs, par le poids). Ce n'est
+pas une conséquence de la définition de $\mathscr{C}$ donnée page 60 ; c'est
+une hypothèse implicite de la page, qu'on rend explicite. La lecture de
+l'égalité $i = i_{1}i_{2}$ est douteuse.} De même, le foncteur fibre
+bigradué de Hodge $T_{\mathrm{Hdg}}$ (le gradué de la filtration) est défini
+sur $L$ et correspond à un torseur $\mathcal{P}$ sous $G_{L}$, avec
+$T_{\mathrm{Hdg}} = \mathcal{P} \wedge^{G} (T_{p} \otimes L)$, et à deux
+cocaractères $j_{1}, j_{2}\colon \mathbb{G}_{m,L} \rightrightarrows G'_{L} =
+\operatorname{ad}(\mathcal{P})$, de produit $i$.\footnote{La page dit
+« $T_{\mathrm{Hdg}}$ sur $K$ » puis écrit un torseur sous $G_{L}$ ; la
+filtration ne vivant que sur $E \otimes_{K} L$, c'est $L$ qui convient.}
+
+La décomposition de Hodge--Tate s'écrit
+\[
+T_{p}(M) \otimes_{\mathbb{Q}_{p}} \mathbb{C}_{p} \simeq \bigoplus_{i,j}
+T_{\mathrm{Hdg}}(M)^{i,j} \otimes \mathbb{C}_{p}(-i) .
+\]
+Tout isomorphisme $\rho\colon \mathbb{C}_{p}(1) \simeq \mathbb{C}_{p}$ en
+déduit un isomorphisme bigradué $\tilde\rho\colon T_{p} \otimes \mathbb{C}_{p}
+\simeq T_{\mathrm{Hdg}} \otimes \mathbb{C}_{p}$, c'est-à-dire un point
+$\tilde\rho \in \mathcal{P}(\mathbb{C}_{p})$ ; si $\rho' = u\rho$, $u \in
+\mathbb{C}_{p}^{*}$, alors $\tilde\rho'$ se déduit de $\tilde\rho$ par
+$i_{1}(u^{-1})$. On obtient ainsi un morphisme d'espaces à opérations de
+$\mathbb{C}_{p}^{*}$ et de $\Gamma_{L}$,
+\[
+\mathbb{C}_{p}(1)^{*} \longrightarrow \mathcal{P}(\mathbb{C}_{p}),
+\]
+où $\mathbb{C}_{p}^{*}$ opère sur $\mathcal{P}(\mathbb{C}_{p})$ via
+$i_{1}^{-1}$ ; autrement dit un morphisme de
+$\mathbb{G}_{m,\mathbb{C}_{p}}$-schémas de la droite épointée
+$\check{\mathbb{V}}(\mathbb{C}_{p}(-1))^{*}$ dans $\mathcal{P}_{\mathbb{C}_{p}}$.
+Il est compatible à $(i_{1}, i_{2})$ et $(j_{1}, j_{2})$ : $(j_{1}, j_{2})$ se
+déduit par descente de $(i_{1}, i_{2})$ par l'isomorphisme
+$G_{L}^{\mathcal{P}} \otimes_{L} \mathbb{C}_{p} \simeq G_{\mathbb{C}_{p}}$
+associé à $\tilde\rho$.\footnote{La page écrit $\widetilde{u\rho} =
+i_{1}(u^{-1})$, abréviation de ce qu'on a dit. Ce qu'elle construit est, en
+termes d'aujourd'hui, un torseur de périodes de Hodge--Tate ; on n'en tire
+aucune filiation.}
+
+\subsection*{Le foncteur cristallin et son Frobenius (pages 66 et 68)}
+
+Il y a aussi un foncteur fibre $T_{\mathrm{cr}}$ sur $K$ — l'isocristal
+sous-jacent —, d'où un torseur $Q$ sous $G_{K}$ avec $T_{\mathrm{cr}} \simeq
+Q \wedge^{G_{K}} (T_{p})_{K}$. Le foncteur $T_{\mathrm{cr}} \otimes_{K} L$ est
+filtré, de gradué $T_{\mathrm{Hdg}}$ ; d'où un torseur $R$ sous un sous-groupe
+unipotent $U' \subset G' = G_{L}^{\mathcal{P}}$,
+\[
+R \hookrightarrow \operatorname{Isom}(Q_{L}, \mathcal{P}) .
+\]
+Enfin le Frobenius $F\colon T_{\mathrm{cr}}^{\sigma} \xrightarrow{\sim}
+T_{\mathrm{cr}}$ correspond à un isomorphisme
+\[
+Q^{\sigma} \simeq Q ,
+\]
+ce que la page 68 encadre, et ce que le griffonnage de la page 72 reprend.\footnote{La page appelle ici $T_{\mathrm{DR}}$ le foncteur qu'elle appelait
+$T_{\mathrm{cr}}$ quelques lignes plus haut ; l'indice est surchargé. Un bloc
+encadré et hachuré introduisait un cocaractère $k_{2}\colon
+\mathbb{G}_{m,K} \to G'' = \operatorname{ad}(Q)$ et un unipotent $U''$ ; il
+est barré, et seul $G'' \supset U''$ en survit dans l'encadré suivant. Un
+passage barré de croisillons se lit « il faudra expliquer \ldots{} cela
+correspond \ldots{} $i_{2}$ \ldots{} structures bigraduées ».}
+
+\subsection*{Un second tapuscrit (pages 61 à 73)}
+
+Six feuillets d'un autre tapuscrit (numérotés 28, 29, 31, 33, 34 et 35)
+s'intercalent dans ces pages : $S$-couples lisses $(Y, X)$ de codimension
+$c$, suite de Kummer et morphisme $\varepsilon_{t}$ de (3.9), Théorème
+(3.10) qui donne, pour chaque couple lisse, un isomorphisme canonique
+$\varphi(Z, Y)$, son diagramme de transitivité (3.10.1) et sa démonstration
+par récurrence sur la codimension, puis un énoncé de changement de base pour
+$(R^{q}j_{*})g^{*}F$ démontré par la suite spectrale de Hochschild--Serre.
+Les interventions à la main sont des lettres grecques et des renvois
+— « (IX 3.2) », « (VIII 5.5) », « (cf. XII 6.5) » — et, en marge d'une
+démonstration, « démonstration peu naturelle ».\footnote{La lettre $\varphi$
+de ces feuillets est celle du tapuscrit, sans rapport avec le $\varphi$ du
+dossier. Leur numérotation entre en collision avec celle du tapuscrit des
+pages 6 à 14 : c'est au moins une autre partie, sans doute un autre texte.
+On ne l'identifie pas.}
+
+\pagerange{70}{74}
+\section*{Les structures d'un motif (pages 70 à 74)}
+
+\subsection*{Sur un ouvert de $\operatorname{Spec}\mathbb{Z}$ (page 70)}
+
+La page 70 dresse la même liste pour la catégorie $\mathscr{C}$ des
+(iso)motifs sur un ouvert $S \subset \operatorname{Spec}\mathbb{Z}$ :
+
+\begin{itemize}
+\item le foncteur de Betti $T_{B}$, sur $\mathbb{Q}$, relatif à $\mathbb{C}$,
+et son groupe $G$ sur $\mathbb{Q}$ ;
+\item les réalisations $\ell$-adiques $T_{\ell} \simeq T_{B} \otimes
+\mathbb{Q}_{\ell}$, d'où $\Gamma_{\mathbb{Q}} \to G(\mathbb{Q}_{p})$, non
+ramifié aux nombres premiers de $S$ autres que $p$ ;
+\item pour chaque place $p \in S$, finie ou infinie, le groupe de
+décomposition $\Gamma_{\mathbb{Q}_{p}}$ (et $\mathbb{Z}/2\mathbb{Z}$ pour
+$p = \infty$), et des paires de cocaractères $i_{1}(\infty), i_{2}(\infty)$
+de $G_{\mathbb{C}}$, $i_{1}(p), i_{2}(p)$ de $G_{\mathbb{C}_{p}}$ ;
+\item le foncteur de De Rham $T_{\mathrm{DR}}$ sur $\mathbb{Q}$, de groupe
+$G' = \operatorname{ad}(\mathcal{P})$ pour un torseur $\mathcal{P}$ sous
+$G$, filtré, c'est-à-dire muni d'une classe de cocaractères
+$j_{2}\colon \mathbb{G}_{m,\mathbb{Q}} \to G'$ définie à conjugaison près par
+le radical unipotent $U' \subset G'$ (soit un torseur $R$ sous $U'$) ;
+\item des Frobenius $F_{p} \in G'(\mathbb{Q}_{p})$ pour $p \in S$ fini, et
+$F_{\infty} \in G'(\mathbb{R})$ d'ordre 2 ;
+\item un élément $\rho^{(\infty)} \in \mathcal{P}(\mathbb{C})$ qui transforme
+la classe des $j_{2}$ en celle des $i_{2}^{(\infty)}$ — l'isomorphisme de
+comparaison de Betti à De Rham ;
+\item pour chaque $p$, une application
+$\mathbb{C}_{p}(1)^{*} \times U'(\mathbb{C}_{p}) \to
+\mathcal{P}(\mathbb{C}_{p})$, $(\lambda, j_{2}) \mapsto \rho^{(p)}(j_{2},
+\lambda)$, qui transforme $j_{2}$ en $i_{2}^{(p)}$, compatible aux
+opérations de $\mathbb{C}_{p}^{*} \times U'(\mathbb{C}_{p})$ et de
+$\Gamma_{\mathbb{Q}_{p}}$ — la comparaison $p$-adique.
+\end{itemize}
+
+Aucune de ces structures n'est construite sur la page : c'est une liste de
+ce qu'un motif doit porter.\footnote{La page note « (iso) » au-dessus de « motifs », « ½ simples », et
+dans la marge « relations de $T_{B}$ et $T_{\mathrm{DR}}$ ». Elle écrit
+$C^{p}$ ou $C^{(p)}$ pour $\mathbb{C}_{p}$. La comparaison $p$-adique pour les
+variétés à bonne réduction, qui donne ici $\rho^{(p)}$, a été démontrée par
+Fontaine--Messing et Faltings dans les années 1980 ; sur la page elle est une
+structure postulée.}
+
+\subsection*{Au-dessus d'une base (page 72)}
+
+Le haut de la page 72, écrit en travers, est un griffonnage où se lisent
+$H^{*}_{B}$, $H_{\mathrm{Hdg}}$, $H_{\mathrm{DR}}$, $H_{\mathrm{cris}}$,
+« $Q^{\sigma} \simeq Q$ » et un petit tableau « $T_{B}$ : $G_{B}$ ;
+$T_{\mathrm{DR}}$ : $G_{\mathrm{DR}}$ ; $T_{\mathrm{Hdg}}$ ». Le bas énumère
+les structures d'un motif au-dessus d'une base $S$ :
+
+\begin{enumerate}
+\item[a)] un module $M$ à connexion intégrable sur $S$, avec filtration ;
+\item[b)] un Frobenius $F_{p}\colon M(p)^{\sigma} \to M(p)$ (théorie des
+cristaux) ;
+\item[c)] $M(\mathbb{R})$ analytique filtré sur $S(\mathbb{R})$, avec un
+automorphisme $F_{\infty}$ d'ordre 2 ;
+\item[d)] un système local de Betti $T$ sur $S(\mathbb{C})^{\mathrm{an}}$,
+soit une représentation de $\pi_{1}(S(\mathbb{C})^{\mathrm{an}}, s)$ ;
+\item[e)] un système local $p$-adique $T_{p}$ sur $S[1/p]$, avec
+$T_{p} \simeq T \otimes \mathbb{Z}_{p}$ sur $S_{\mathbb{C}}$ ;
+\item[f$_{\infty}$)] la comparaison $M^{\mathrm{an}}_{\mathbb{C}} \simeq T
+\otimes_{\mathbb{Z}} \mathcal{O}^{\mathrm{an}}$, compatible aux connexions ;
+\item[f$_{p}$)] laissée en blanc.
+\end{enumerate}
+
+La comparaison $p$-adique est la seule rubrique sans contenu.\footnote{La page écrit f$_{\infty}$) « $M^{\mathrm{an}}_{\mathbb{C}} \simeq T
+\otimes_{\mathbb{Z}} \mathbb{C}$ » : au sens propre, c'est l'isomorphisme
+entre les sections horizontales de $M^{\mathrm{an}}$ et $T \otimes
+\mathbb{C}$, ou, de façon équivalente, $M^{\mathrm{an}} \simeq T \otimes
+\mathcal{O}^{\mathrm{an}}$ avec la connexion triviale sur le second membre.
+La place de la comparaison $p$-adique, f$_{p}$), est marquée par quatre
+tirets.}
+
+\subsection*{Les conjectures (page 74)}
+
+Une liste, avec en regard la structure que chacune concerne :
+
+\begin{itemize}
+\item conjecture de Hodge (généralisée) — la décomposition de Hodge sur
+$\mathbb{C}$ ;
+\item conjecture de Tate (généralisée) — l'action de Galois, les Frobenius ;
+\item conjecture des Frobenius en cohomologie de De Rham (à connexion) — le
+Frobenius cristallin ;
+\item conjecture du double réseau, précédée d'un « ? » et suivie de
+« (revoir) » ;
+\item « Tate groups » (généralisés), sur les schémas de type fini sur
+$\mathbb{Z}$ ou sur un corps, et sur les anneaux locaux d'inégales
+caractéristiques.
+\end{itemize}
+
+Aucune n'est discutée plus avant dans le dossier.\footnote{Un mot illisible précède chaque « généralisée ». Ce que la page
+entend par « double réseau » n'est pas dit ; la question des deux réseaux de
+la page 49 en est un candidat, que rien ne confirme. Les « Tate groups » sont
+peut-être l'analogue, pour l'image de Galois, du groupe de Mumford--Tate ;
+c'est aussi une conjecture de lecture.}
+
+\pagerange{77}{80}
+\section*{Le complexe co-Lie des groupes de type multiplicatif (pages 77 à 80)}
+
+\subsection*{Le calcul (pages 77 et 78)}
+
+Soit $G = D(M)$ le groupe de type multiplicatif dual d'un groupe constant
+tordu $M$ sur $S$, de type fini. On résout $M$ par la résolution plate
+canonique à deux crans
+\[
+(1.1) \qquad 0 \to R \xrightarrow{\ v\ } \mathbb{Z}[M] \xrightarrow{\ u\ } M
+\to 0, \qquad u([m]) = m,
+\]
+d'où, par dualité, une résolution de $G$ par des tores
+\[
+(1.2) \qquad 0 \to G \to T \to T' \to 0, \qquad T = D(\mathbb{Z}[M]) \simeq
+\mathbb{G}_{m}^{M}, \quad T' = D(R),
+\]
+de dimension relative infinie si $M$ est infini. Le triangle de
+transitivité appliqué à $G = \operatorname{Ker}(T \to T')$, $T$ et $T'$ lisses,
+donne
+\[
+\ell^{G} \simeq [\omega_{T'} \to \omega_{T}] \simeq [R \otimes_{\mathbb{Z}}
+\mathcal{O}_{S} \to \mathbb{Z}[M] \otimes_{\mathbb{Z}} \mathcal{O}_{S}],
+\qquad\text{soit}\qquad
+(1.3) \quad \ell^{G} \simeq M \otimes^{L}_{\mathbb{Z}} \mathcal{O}_{S} .
+\]
+Si $\mathcal{O}_{S}$ est une $\Lambda$-algèbre (par exemple $\Lambda =
+\mathbb{Q}$ ou $\mathbb{Z}/n\mathbb{Z}$),
+\[
+(1.4) \qquad \ell^{G} \simeq (M \otimes^{L}_{\mathbb{Z}} \Lambda)
+\otimes^{L}_{\Lambda} \mathcal{O}_{S},
+\]
+et si $\Lambda$ est un corps, par exemple $\mathbb{F}_{p}$, le second produit
+tensoriel n'a pas besoin d'être dérivé :
+\[
+(1.4') \qquad \ell^{G} \simeq (M \otimes^{L}_{\mathbb{Z}} \mathbb{F}_{p})
+\otimes_{\mathbb{F}_{p}} \mathcal{O}_{S} .
+\]
+
+\emph{1.5. Le cas d'une descente.} Supposons que $M$ provienne, par un
+revêtement principal $S'$ de $S$ de groupe $\Pi$ discret ou profini, d'une
+représentation (continue) de $\Pi$ dans un groupe abélien $M_{0}$ — par
+exemple $M$ isotrivial, à fibres de type fini, $S$ normal et connexe, $S'$
+le revêtement universel. On a un morphisme de topos
+\[
+(1.6) \quad f\colon S \longrightarrow B_{\Pi}, \qquad (1.7) \quad M =
+f^{-1}(M_{0}),
+\]
+pour la topologie étale, fppf ou fpqc, et, en annelant $S$ et $B_{\Pi}$ par
+$\Lambda$, $M \otimes^{L}_{\mathbb{Z}} \Lambda = f^{*}(M_{0}
+\otimes^{L}_{\mathbb{Z}} \Lambda)$, d'où
+\[
+(1.8) \qquad \ell^{G} \simeq f^{*}(M_{0} \otimes^{L}_{\mathbb{Z}} \Lambda)
+\otimes^{L}_{\Lambda} \mathcal{O}_{S} ,
+\]
+le $L$ du second produit tensoriel étant inutile si $\Lambda$ est un
+corps.\footnote{On note $\Pi$ le groupe du revêtement, que la page appelle $\pi$.
+Le « 1.5 » est écrit sur un « 2. ». Un numéro de formule entre (1.7) et
+(1.8) est surchargé et illisible. La page attribue le triangle de
+transitivité à Mazur et Roberts ; voir la note sur le complexe co-Lie dans
+les conventions.}
+
+\subsection*{La classe $\xi$ (pages 79 et 80)}
+
+De (1.3) on tire
+\[
+(2.1) \qquad \omega_{G} = M \otimes_{\mathbb{Z}} \mathcal{O}_{S}, \qquad
+n_{G} = \operatorname{Tor}_{1}^{\mathbb{Z}}(M, \mathcal{O}_{S}),
+\]
+et si $S$ est de caractéristique $p$,
+\[
+(2.2) \qquad \omega_{G} = (M/pM) \otimes_{\mathbb{F}_{p}} \mathcal{O}_{S},
+\qquad n_{G} \simeq {}_{p}M \otimes_{\mathbb{F}_{p}} \mathcal{O}_{S} ;
+\]
+si $M$ est tué par $p$, c'est-à-dire $G$ tué par $p$,
+\[
+(2.2') \qquad \omega_{G} \simeq n_{G} \simeq M \otimes_{\mathbb{F}_{p}}
+\mathcal{O}_{S} .
+\]
+C'est le phénomène $n = \omega$ de la page 12, rencontré cette fois pour un
+groupe de type multiplicatif, et calculé directement.
+
+Le complexe $\ell^{G}$, à deux faisceaux de cohomologie, porte une classe
+canonique — son invariant de Postnikov —
+\[
+\xi \in \operatorname{Ext}^{2}_{\mathcal{O}_{S}}\bigl(M \otimes_{\mathbb{Z}}
+\mathcal{O}_{S},\ \operatorname{Tor}_{1}^{\mathbb{Z}}(M, \mathcal{O}_{S})\bigr),
+\]
+qui provient, en présence de $\Lambda$, d'une classe
+$\xi_{\Lambda} \in \operatorname{Ext}^{2}_{\Lambda}(M \otimes \Lambda,
+\operatorname{Tor}_{1}^{\mathbb{Z}}(M, \Lambda))$. Si $\Lambda =
+\mathbb{Z}/n\mathbb{Z}$ et $M$ est un $\Lambda$-module localement libre de
+type fini, $M \otimes \Lambda \simeq M$ et
+$\operatorname{Tor}_{1}^{\mathbb{Z}}(M, \Lambda) = {}_{n}M \simeq M$, donc
+\[
+\xi_{\Lambda} \in H^{2}(S, \mathcal{E}nd(M)), \qquad
+\xi \in H^{2}(S, \mathcal{E}nd(E)) \quad (E = M \otimes_{\Lambda}
+\mathcal{O}_{S}),
+\]
+$\xi$ étant l'image de $\xi_{\Lambda}$ par la flèche canonique
+$H^{2}(S, \mathcal{E}nd(M)) \to H^{2}(S, \mathcal{E}nd(M) \otimes_{\Lambda}
+\mathcal{O}_{S})$.\footnote{Trois mots illisibles suivent « Alors » dans la
+phrase qui donne ces identifications ; on les a rétablies par le calcul.
+Une hypothèse de platitude de $\mathcal{O}_{S}$ sur $\Lambda$ est écrite
+puis biffée.} Sous les conditions de 1.5, $M_{0}$ étant plat sur $\Lambda$,
+$\xi_{\Lambda}$ est l'image d'une classe
+\[
+\xi_{0} \in H^{2}(B_{\Pi}, \mathcal{E}nd(M_{0})) = H^{2}(\Pi,
+\operatorname{End}(M_{0})) .
+\]
+Pour la calculer, on se ramène par fonctorialité au cas universel
+$M_{0} = (\mathbb{Z}/n\mathbb{Z})^{d}$, $\Pi = \mathrm{GL}(d,
+\mathbb{Z}/n\mathbb{Z})$. D'après Illusie, c'est l'obstruction à relever la
+représentation de $\Pi$ dans $M_{0}$ en une représentation dans un module
+libre sur $\mathbb{Z}/p^{2}\mathbb{Z}$ — pour $n = p$, la classe de
+l'extension $1 \to M_{d}(\mathbb{F}_{p}) \to \mathrm{GL}(d,
+\mathbb{Z}/p^{2}) \to \mathrm{GL}(d, \mathbb{F}_{p}) \to 1$. Elle est nulle
+pour $d \le 1$, puisque $\mathbb{F}_{p}^{*}$ se relève par les
+représentants de Teichmüller. La page ajoute qu'elle n'est « sans doute pas
+nulle » pour $d \ge 2$ ; c'est vrai en général, mais pas sans
+exception.\footnote{Pour $p = 2$ et $d = 2$, $\mathrm{GL}(2, \mathbb{F}_{2})
+\simeq \mathfrak{S}_{3}$ se relève à $\mathrm{GL}(2, \mathbb{Z})$ par sa
+représentation de permutation réduite, donc à $\mathrm{GL}(2,
+\mathbb{Z}/4)$ : l'extension est scindée et $\xi_{0} = 0$. Il y a d'autres
+petits cas scindés ; on ne les énumère pas.}
+
+Enfin, si $S'$ est le revêtement universel de $S$, l'application
+$H^{2}(B_{\Pi}, -) \to H^{2}(S, -)$ est injective — dans la suite spectrale de
+Hochschild--Serre du revêtement, le terme $H^{0}(\Pi, H^{1}(S', -))$ qui
+pourrait tuer $H^{2}(\Pi, -)$ est nul, $S'$ étant simplement connexe —, de
+sorte que la classe $\xi_{\Lambda} \in H^{2}(S, \mathcal{E}nd(M))$ est non
+nulle dès que $\xi_{0}$ l'est. Le dossier s'arrête là, sur un énoncé qui
+rejoint sa première page : le complexe co-Lie d'un groupe tué par $p$ ne se
+réduit pas à ses deux faisceaux de cohomologie, et ce qui l'en empêche est
+une obstruction de relèvement modulo $p^{2}$.\footnote{L'injectivité est
+affirmée par la page ; la justification par Hochschild--Serre est la
+nôtre, et vaut pour les coefficients localement constants provenant de
+$B_{\Pi}$.}
+
+\end{document}

@@ -1,0 +1,1762 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 6, pages 1-66.
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried — a doubtful
+% reading, a notation he used differently, a missing passage — moves into a
+% footnote.
+%
+% It is held to being mathematically correct as it stands, not merely faithful
+% to the page. Where the manuscript is loose or mistaken, the true statement is
+% what appears here, and the footnote says what the page has. In any dispute of
+% substance the transcription governs: whoever cites Grothendieck must cite the
+% batch-NN.fr.tex files.
+%
+% Scope: ONE document for the whole shelfmark, its four batches (pages 1-66)
+% read in one pass before any of it was written. The folder is two things: his
+% own corrected typed copy of the letter to Tate of May 1966 (pages 1, 3-31),
+% and later manuscript notes (pages 32-65; one of them cites Demazure-Gabriel,
+% 1970, which agrees with the catalogue's « à partir de 1970 »). What ties them
+% is one question, which the letter asks at page 31 (3.2) and the notes come
+% back to at pages 40-44: how much of a p-divisible group, or of the
+% cohomology of a variety, is captured by a linear object with a Frobenius.
+%
+% NOTATION fixed once for the folder.
+%   - The letter's machine-underlined letters (Z, O, M, Omega...) are written
+%     in today's way: \mathbf{Z}, \mathcal{O}, \mathcal{M}, \Omega.
+%   - « cristal » in the letter is a crystal on the INFINITESIMAL site — nilpotent
+%     thickenings, no divided powers. It is called « cristal (infinitésimal) »
+%     here whenever the difference matters, and « cristal cristallin » or
+%     « cristal à puissances divisées » is reserved for Berthelot's notion. This
+%     is the single most important convention of the reading: the letter's
+%     negative results (2.7, 2.8, 3.1) are true of the first and false of the
+%     second.
+%   - « p-cristal » = F-cristal, « p^{-1}-cristal » = V-cristal, « bicristal de
+%     poids i » kept, « cristal de Dieudonné » = bicristal de poids 1,
+%     « bi-isocristal » = F-isocristal. The Tate bicrystal T^i: unit crystal
+%     with F = V = p^i, weight 2i.
+%   - The p-divisible group the typescript writes with the typed sign « Ø » is
+%     written Phi; the universal vector extension is E(A), E(Phi) (the letter's
+%     G(A), G(Ø)).
+%   - In the Tate-Hodge pages the page's [i] (a Tate twist) is written (i); the
+%     page's Q_ell, where context forces ell = p, is written Q_p; C there is the
+%     completion of an algebraic closure of the local field K.
+%
+% Substantive departures from the pages, each footnoted where it occurs:
+%   - p. 8: VF = p.id (the p is missing on the page); the Tate bicrystal of
+%     weight 2i is the i-th power of the one of weight 2 (page: « poids 1 »);
+%   - p. 4: « voisinage de R dans S » read « de S dans R »; p. 5: F_R read F_S;
+%     p. 12: « stratifiés relativement à X_K » read « à K », and local freeness
+%     asserted only on smooth X_K in char. 0, the case used;
+%   - p. 11: the category of crystals is abelian only under hypotheses (S smooth
+%     over a perfect field, coherent crystals) — said where the page says it
+%     without them;
+%   - p. 19: spectral sequence with C_{X^an} for C_{S^an};
+%   - p. 20: the duality pairing lands in T^d[-2d] (cohomological convention);
+%   - p. 21: the relative Frobenius is X_p -> X_p^{(p/S)}, not « X_p^{(p/S)} -> X »;
+%     transposition of F by Poincaré duality gives FV = VF = p^d, not p^{2d};
+%   - pp. 21-26: the three « affirmations » cannot hold on all nilpotent
+%     thickenings (the letter itself shows it in 2.7); they hold on thickenings
+%     with locally nilpotent divided powers — Mazur-Messing, Grothendieck-
+%     Messing — and that is what is said; 2.6 b) is false in char. p, as the
+%     pencil « faux » says;
+%   - p. 31: 3.2 is stated under divided powers on the maximal ideal (e < p-1);
+%   - pp. 33-36: the leaves are read in the order 33, 34, 36, 35 (p. 36 ends on
+%     « Je conjecture », p. 35 opens on « que cet élément… »);
+%   - p. 47: « dim 2 au plus » read « dim 1 au plus »; « hypersingulière » (no
+%     points of order p) equals supersingular only in dimension <= 2;
+%   - p. 59 is struck through on the page; its statements are reported as
+%     withdrawn drafts;
+%   - p. 65: the Lemma needs k separably closed (his own ink correction of
+%     « alg. clos »).
+%
+% Announced and never established in the folder: the cohomology theory DR(f)
+% of Chapter 2 (with Künneth and duality); the conjecture of 2.8 on ordinary
+% abelian varieties; the conjecture of p. 36 (left as « Je conjecture » and
+% resumed on p. 35 only by its conclusion); b) of p. 62 (homomorphisms étale ->
+% multiplicative type, a heading only); the Witt-vector version of p. 65, which
+% breaks off. Page 38 is Tate's, not his, and is only described.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-03 — first pass, unchecked against the pages by a human.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{6}
+\pages{1}{66}
+\dating{1966-[à partir de 1970]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Lettre Tate (mai 66) (Cristaux) : lettre (1966), tapuscrit (s.d.), notes manuscrites (s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Ce dossier s'ouvre sur une lettre. En mai 1966, de Pise, Grothendieck écrit à
+John Tate qu'il a « réfléchi aux groupes formels et à la cohomologie de De
+Rham » et qu'il est arrivé à « un début de théorie » qu'il a envie d'exposer
+« pour se clarifier les idées ». La lettre fait trente pages dactylographiées ;
+le dossier en garde une copie qu'il a reprise à l'encre et au crayon. Elle est
+suivie de notes manuscrites plus tardives, écrites au fil de plusieurs années,
+qui reprennent les mêmes questions avec d'autres outils.
+
+Le problème est le suivant. Pour une variété définie sur les nombres
+complexes, la cohomologie — les « trous » de la variété, mesurés par des
+nombres et des espaces vectoriels — se calcule de plusieurs façons, et ces
+façons s'accordent. En caractéristique $p$, là où l'on compte modulo un nombre
+premier, l'outil analytique le plus naturel, la cohomologie de De Rham (celle
+des formes différentielles), se comporte mal : elle donne des espaces
+vectoriels sur un corps de caractéristique $p$, qui perdent l'information
+fine, et elle varie mal en famille. On voudrait une cohomologie à valeurs dans
+un anneau de caractéristique nulle — les vecteurs de Witt, qui sont à $\mathbf{F}_p$
+ce que les entiers $p$-adiques sont aux entiers modulo $p$ — et qui ne dépende
+que de la variété en caractéristique $p$, pas d'un relèvement choisi.
+
+L'idée de la lettre est dans son premier paragraphe, et elle est donnée par
+une image. Un cristal, dit-il, a deux propriétés : la \emph{rigidité}, et la
+faculté de \emph{croître} dans un milieu approprié. Un objet « cristallin » sur
+un espace $S$ est un objet qui, chaque fois qu'on épaissit $S$
+infinitésimalement — qu'on lui ajoute des directions nilpotentes, comme on
+passe de $\mathbf{F}_p$ à $\mathbf{Z}/p^n$ —, s'étend à l'épaississement, et
+de façon unique : il croît sans se déformer. Si la cohomologie d'une variété
+en caractéristique $p$ est un tel objet, alors sa valeur sur les
+épaississements $p$-adiques est une cohomologie à coefficients entiers
+$p$-adiques, indépendante de tout choix. C'est la naissance de ce qu'on
+appelle aujourd'hui la cohomologie cristalline. La lettre ajoute une structure
+qui fait toute la richesse de la théorie : l'action du Frobenius, l'élévation
+à la puissance $p$, qui transforme ces objets linéaires en « modules de
+Dieudonné » — les invariants linéaires, connus depuis Dieudonné, des groupes
+formels en caractéristique $p$.
+
+La lettre est aussi le récit d'un échec partiel, et c'est une des raisons de la
+lire. Au milieu du chapitre 2, Grothendieck écrit : « je m'aperçois avec
+consternation » que ses « brillantes conjectures » sont fausses telles
+quelles ; il donne le contre-exemple — les courbes elliptiques dites
+supersingulières — et conclut que sa notion de cristal est « irrémédiablement
+trop fine ». Le diagnostic est juste, et une note au crayon dans la marge en
+donne déjà le remède : « faut introduire des puissances divisées ». C'est ce
+que fera Pierre Berthelot dans sa thèse : en n'épaississant que d'une façon
+qui permette de diviser $x^n$ par $n!$, on obtient une théorie où les
+affirmations de la lettre deviennent des théorèmes. On voit ici, à découvert,
+comment une théorie naît : une idée juste, une première définition un peu trop
+rigide, un contre-exemple honnêtement constaté, une correction. « Il est
+probable qu'il y aura bien d'autres canulars de détail dans ces notes, mais,
+je pense, sans conséquence ! » — la phrase est de la lettre.
+
+Les notes qui suivent changent d'angle. Elles regardent, pour une courbe
+elliptique sur un corps $p$-adique, comment le groupe de Galois agit sur ses
+points de torsion d'ordre une puissance de $p$, et posent les questions qui
+fondent ce qu'on appelle aujourd'hui la théorie de Hodge $p$-adique ; elles
+reprennent une question de Barsotti sur les variétés abéliennes que
+distinguent ou non leurs groupes formels ; elles calculent l'espace des
+déformations d'une variété abélienne « ordinaire », qui se trouve être un
+tore ; elles construisent enfin, pour les groupes finis en caractéristique
+$p$, la théorie de Dieudonné dans ses deux cas extrêmes, étale et
+multiplicatif. Une question les relie à la lettre, posée à sa dernière page :
+comment lire, sur l'objet linéaire muni de son Frobenius et de sa filtration,
+l'action de Galois sur les points de torsion ? C'est le problème que
+Grothendieck appellera plus tard celui de la « fonction mystérieuse ».
+
+Pour aller plus loin, on cherchera : cohomologie cristalline, site
+infinitésimal, $F$-cristaux et $F$-isocristaux, cristal de Dieudonné d'un
+groupe $p$-divisible, théorème de Grothendieck--Messing, coordonnées de
+Serre--Tate, décomposition de Hodge--Tate, théorie de Hodge $p$-adique.
+
+\keywords{crystal, infinitesimal site, crystalline cohomology, divided powers, stratification, Cartier descent, F-crystal, Dieudonné crystal, F-isocrystal, Tate twist, rigid analytic space, Gauss-Manin connection, Monsky-Washnitzer cohomology, universal vector extension, Grothendieck-Messing theory, Serre-Tate theorem, Manin map, supersingular elliptic curve, canonical lift, p-divisible group, Tate module, Tate curve, Hodge-Tate decomposition, p-adic Hodge theory, Sen theory, Barsotti isogeny question, Serre-Tate coordinates, Witt vectors, Dieudonné module, truncated Barsotti-Tate group, co-Lie complex, unit-root F-crystal, Artin-Schreier sequence, Lang's theorem}
+\end{resume}
+
+\pagerange{1}{1}
+\section*{Le fil du dossier, et les conventions}
+
+\textbf{Le fil.} Le dossier a deux parties, de dates différentes.
+
+\begin{itemize}
+\item \emph{La lettre à Tate, Pise, mai 1966} (pages 1 et 3 à 31). Trois
+chapitres. Le chapitre 1 (pages 1 à 18) définit les cristaux, leurs variantes
+munies d'un Frobenius, les isocristaux, et les décrit dans les cas
+calculables ; il propose un site dont les cristaux sont les faisceaux
+quasi-cohérents, et formule le « test-clef » : la cohomologie de ce site
+doit donner la cohomologie de De Rham. Le chapitre 2 (pages 18 à 29) postule
+une cohomologie de De Rham à valeurs dans les cristaux, l'explicite pour les
+schémas abéliens (trois « affirmations »), puis la réfute sous la forme
+proposée (2.7) et en tire les conséquences (2.8). Le chapitre 3 (pages 30 et
+31) transpose la construction aux groupes $p$-divisibles et s'arrête sur une
+question.
+\item \emph{Les notes manuscrites} (pages 32 à 65), sous des chemises
+titrées de sa main : la réduction des courbes elliptiques et leur module de
+Tate $p$-adique (pages 32 à 36) ; une feuille de Tate (pages 37 et 38) ; des
+questions de « théorie de Tate--Hodge » (pages 39 à 44) ; la question
+d'isogénie de Barsotti (pages 46 à 50) ; les déformations d'extensions de
+groupes de Barsotti--Tate et la structure locale des schémas modulaires
+(pages 51 à 56) ; des compléments sur les groupes de Witt (pages 58 et 59) ;
+les groupes finis en caractéristique $p$ et leurs cristaux de Dieudonné
+(pages 60 à 65).
+\end{itemize}
+
+La question de la page 31 — déterminer le module de Tate de la fibre générique
+d'un groupe $p$-divisible à partir de son module de Dieudonné filtré — est
+celle que les pages 40 à 44 reprennent du côté galoisien. Les pages 51 à 65
+reprennent, du côté des groupes, le cristal de Dieudonné que la lettre
+cherchait à atteindre par la cohomologie de De Rham.
+
+\textbf{Deux notions de cristal.} Le mot « cristal » a aujourd'hui deux sens,
+et la lettre n'en connaît qu'un. Ses cristaux sont définis sur les
+épaississements \emph{nilpotents} quelconques ; on les appelle aujourd'hui
+cristaux sur le \emph{site infinitésimal}. Ceux de la théorie cristalline,
+due à Berthelot, ne sont définis que sur les épaississements munis de
+\emph{puissances divisées}. Les deux théories coïncident en caractéristique
+nulle et divergent en caractéristique $p$. On dit ici « cristal » au sens de
+la lettre, et « cristal à puissances divisées » pour l'autre ; là où la
+différence décide de la vérité d'un énoncé — c'est le cas aux pages 13, 17,
+21 à 31 —, on le dit.\footnote{Le crayon de la page 17 l'indique déjà,
+« (faut d'introduire des puiss.\ div.) », de lecture en partie conjecturale.
+Le site cristallin, avec puissances divisées, est celui de P.~Berthelot,
+\emph{Cohomologie cristalline des schémas de caractéristique $p>0$}, Lecture
+Notes in Math.\ 407 (1974), issu de sa thèse de 1972 ; Grothendieck avait
+exposé le site infinitésimal et esquissé le site cristallin à l'IHÉS en
+décembre 1966 (\emph{Crystals and the de Rham cohomology of schemes}, notes de
+J.~Coates et O.~Jussila, dans \emph{Dix exposés sur la cohomologie des
+schémas}, 1968).}
+
+\textbf{Noms.} La lettre parle de $p$-cristal, de $p^{-1}$-cristal, de
+bicristal de poids $i$ et de bi-isocristal. On dit aujourd'hui
+$F$-cristal, $V$-cristal, et $F$-isocristal pour le dernier ; on garde
+« bicristal de poids $i$ », qui n'a pas d'équivalent courant, et « cristal de
+Dieudonné » pour le poids 1, nom que la lettre propose elle-même. On note
+$\Phi$ le groupe $p$-divisible que le tapuscrit écrit avec le signe
+« Ø »,\footnote{Le signe tapé « Ø » sert, page 23, à désigner une filtration,
+et, pages 30 et 31, un groupe $p$-divisible ; on écrit $\Phi$ pour le second et
+on ne donne pas de lettre à la première.} et $E(A)$, $E(\Phi)$ l'extension
+vectorielle universelle que la lettre note $G(A)$, $G(\Phi)$.
+
+\textbf{L'ordre des feuillets.} Il est celui du fac-similé, sauf en un point :
+les pages 33 à 36 se lisent dans l'ordre 33, 34, 36, 35 (la page 36 s'arrête
+sur « Je conjecture », la page 35 commence par « que cet élément a une image
+non nulle »). Le crayon des archivistes numérote les pages 39 à 66 du
+fac-similé de 50 à 77 ; on suit le fac-similé.
+
+\pagerange{1}{3}
+\section*{La lettre, chapitre 1 : la notion de cristal (pages 1 à 18)}
+
+\subsection*{Les épaississements de $S$ et la définition (pages 1 à 3)}
+
+La lettre est une copie dactylographiée, corrigée de sa main à l'encre et au
+crayon, datée en tête « Pise, Mai 1966 ».\footnote{Le papier est à en-tête de
+l'Istituto Matematico « Leonida Tonelli » de Pise ; la page 2 en est le verso
+blanc. La lettre a sa propre pagination, en retard d'une unité sur celle des
+archivistes à partir de la page 3. Les corrections à l'encre sont de sa main
+(vérification par sondage sur la page 21, Michel Hua, 27 septembre 2026), à une
+exception près, vérifiée sur la page 1 : le numéro « 1.0. » de la marge n'est
+pas de lui. On ne signale ci-dessous les corrections manuscrites que lorsque le
+sens en dépend.} Elle commence par un commentaire terminologique : un cristal
+possède deux propriétés caractéristiques, la \emph{rigidité} et la faculté de
+\emph{croître} dans un voisinage approprié, et il y a des cristaux de toute
+espèce de substance — « de soude, de soufre, de modules, d'anneaux, de schémas
+relatifs ».
+
+\textbf{1.0.} Soit $S$ un schéma au-dessus d'un schéma $R$ (le cas principal
+est $R = \operatorname{Spec}\mathbf{Z}$). On considère la catégorie $C$ des
+\emph{épaississements nilpotents} de $S$ au-dessus de $R$ : les $R$-schémas
+$T$ munis d'un $R$-morphisme $S \to T$ qui est une immersion fermée définie par
+un idéal localement nilpotent ; les morphismes sont les $R$-morphismes sous
+$S$.\footnote{C'est la première version de la définition ; la lettre la
+corrige en 1.16 (page 16) en remplaçant $S$ par ses ouverts. On donne ici la
+version corrigée dès le paragraphe consacré au site (pages 16 et 17), comme la
+lettre le demande.} La catégorie fibrée des modules quasi-cohérents sur des
+schémas variables induit sur $C$ une catégorie fibrée, qui associe à $T$ la
+catégorie des $\mathcal{O}_T$-modules quasi-cohérents.
+
+\textbf{Définition 1.1.} Un \emph{cristal de modules} (quasi-cohérents) sur
+$S$ relativement à $R$ est une section cartésienne de cette catégorie fibrée
+au-dessus de $C$ : la donnée, pour tout épaississement $T$, d'un module
+quasi-cohérent $\mathcal{M}_T$, et pour toute flèche $u : T \to T'$ de $C$ d'un
+\emph{isomorphisme} $u^*\mathcal{M}_{T'} \simeq \mathcal{M}_T$, ces isomorphismes
+étant compatibles à la composition. Plus généralement, pour toute catégorie
+fibrée $\mathcal{F}$ sur $(\mathrm{Sch})_{/R}$, on définit de même les
+$\mathcal{F}$-cristaux : cristaux d'algèbres, d'algèbres commutatives, de
+schémas relatifs. Pour $R = \operatorname{Spec}\mathbf{Z}$ on parle de
+cristaux \emph{absolus}.
+
+Le mot dit l'idée : un cristal est un objet sur $S$ qui « croît » le long de
+tout épaississement, de façon unique à isomorphisme unique près, et de façon
+« rigide », puisque toutes les flèches de transition sont des isomorphismes.
+Ce sont, en termes d'aujourd'hui, les cristaux quasi-cohérents sur le
+\emph{site infinitésimal} de $S$ relativement à $R$.
+
+\textbf{1.2 et 1.3.} Les $\mathcal{F}$-cristaux forment une catégorie qui
+dépend fonctoriellement de $\mathcal{F}$, ce qui munit les cristaux de modules
+des opérations tensorielles habituelles. Si $S \to R' \to R$, un cristal
+relatif à $R$ en définit un relatif à $R'$ par restriction ; en particulier un
+cristal absolu définit un cristal relatif pour toute base. Pour $S' \to S$, on
+définit l'image inverse en construisant un foncteur $C' \to C$ : à un
+épaississement $S' \to T'$ on associe la somme amalgamée
+$T = S \amalg_{S'} T'$, qui est un épaississement de $S$. Les cristaux de type
+$\mathcal{F}$ forment ainsi une catégorie fibrée sur $(\mathrm{Sch})_{/R}$,
+et les deux variances, en $R$ et en $S$, se combinent en une variance en
+$(R,S)$.\footnote{La lettre reconnaît en 1.16 que cette construction n'est
+raisonnable que pour $S$ et $S'$ affines : la somme amalgamée de schémas
+peut ne pas exister en général, et il faut se localiser. Pour les modules
+quasi-cohérents, qui forment un champ pour la topologie de Zariski, la
+localisation ne pose pas de problème.}
+
+\pagerange{3}{5}
+\subsection*{La valeur en $S$ et trois exemples (pages 3 à 5)}
+
+\textbf{1.4.} On a le foncteur « valeur en $S$ », $\mathcal{M} \mapsto
+\mathcal{M}_S$, des cristaux de modules vers les $\mathcal{O}_S$-modules
+quasi-cohérents. Il n'est en général \emph{pas fidèle} (exemple 1 ci-dessous) :
+il est donc dangereux de voir un cristal comme un module sur $S$ muni d'une
+structure supplémentaire. Ce point de vue devient raisonnable lorsque le
+foncteur est fidèle, ce qui arrive dans les cas de 1.8.
+
+\textbf{Exemple 1 (1.5) : vecteurs de Witt.} Soit $S = \operatorname{Spec}k$,
+$k$ un corps parfait, et $R = \operatorname{Spec}\mathbf{Z}$. Soit $W$ l'anneau
+de Cohen de $k$ : si $\operatorname{car}k = p > 0$, c'est l'anneau $W(k)$ des
+vecteurs de Witt ; si $\operatorname{car}k = 0$, c'est $k$ lui-même, et on
+suppose alors $k$ \emph{algébrique} sur $\mathbf{Q}$.\footnote{Cette hypothèse
+est ajoutée à l'encre, de sa main, et elle est nécessaire : pour un corps
+$k$ de caractéristique nulle transcendant sur $\mathbf{Q}$, un épaississement
+local artinien de $k$ admet plusieurs corps de représentants, et $k$ n'est
+plus objet final de $C$.} La catégorie $C$ est alors équivalente à celle des
+$W$-algèbres locales, annulées par une puissance de l'idéal maximal de $W$, à
+corps résiduel $k$.\footnote{Pour $k$ parfait de caractéristique $p$, une telle
+algèbre $A$ reçoit un unique homomorphisme $W(k) \to A$ relevant
+l'identité de $k$ ; c'est la propriété universelle des vecteurs de Witt sur un
+corps parfait, et $p$ est nilpotent dans $A$ puisqu'il est dans l'idéal
+maximal, qui est nil.} Écrivant $W = \varprojlim W_n$, on trouve, pour
+$p > 0$, qu'un cristal de modules absolu sur $k$ équivaut à un système
+projectif $(M_n)$ de $W_n$-modules avec $M_{n+1} \otimes W_n \simeq M_n$, et
+que les cristaux de présentation finie forment une catégorie équivalente à
+celle des \emph{$W$-modules de type fini}. Pour $p = 0$ on trouve les
+$k$-espaces vectoriels. La valeur en $S$ s'identifie alors au foncteur
+$M \mapsto M \otimes_W k$, qui, pour $p > 0$, n'est pas fidèle : la
+multiplication par $p$ sur $W$ devient nulle.
+
+C'est le premier exemple de ce que la notion veut capter : un objet sur le
+corps $k$ de caractéristique $p$ dont la vraie nature est un module sur
+l'anneau $p$-adique $W(k)$.
+
+\textbf{Exemple 2 (1.6) : $S$ étale sur $R$.} Si $S = R$, ou plus généralement
+si $S$ est étale sur $R$, alors $S$ est objet final de $C$, et la valeur en
+$S$ est une équivalence : un cristal est simplement un objet sur $S$. En
+particulier, un cristal de modules sur $\operatorname{Spec}\mathbf{Z}$ est un
+$\mathbf{Z}$-module.
+
+\textbf{Exemple 3 (1.7) : $S$ sous-schéma de $R$.} On peut supposer $S$ fermé
+dans $R$, défini par un idéal quasi-cohérent $J$. Soit $S_n = V(J^{n+1})$ le
+$n$-ième voisinage infinitésimal de $S$ dans $R$.\footnote{La page écrit
+« voisinage infinitésimal de $R$ dans $S$ » : coquille.} La famille des $S_n$
+est finale dans $C$, localement sur $S$,\footnote{Précision ajoutée : un
+épaississement $T$ ne se factorise par un $S_n$ que localement, là où l'idéal
+de $S$ dans $T$ est nilpotent d'un ordre fixé et $J$ de type fini ; c'est le
+cas si $R$ est localement noethérien.} de sorte qu'un cristal équivaut à une
+suite compatible d'objets sur les $S_n$. Si $R$ est localement noethérien, un
+cristal de modules de présentation finie s'identifie à un module cohérent sur
+le complété formel de $R$ le long de $S$. Grâce à Cohen, un cristal absolu
+sur $k$ parfait est la même chose qu'un cristal relatif à $W$ : cet exemple
+contient donc l'exemple 1 en caractéristique $p$. Les exemples 2 et 3 ont une
+généralisation commune, pour $S \to R$ non ramifié, qui permet encore de
+construire des voisinages infinitésimaux.
+
+\pagerange{5}{6}
+\subsection*{Cristaux et stratifications (pages 5 et 6)}
+
+\textbf{1.8.} Pour $n \geq 0$, soit $\Delta_n$ le $n$-ième voisinage
+infinitésimal de la diagonale de $S \times_R S$, avec ses deux projections
+$\mathrm{pr}_1, \mathrm{pr}_2$ vers $S$. Pour un objet $E$ de
+$\mathcal{F}_S$ :
+\begin{itemize}
+\item une \emph{$n$-connexion} sur $E$ est un isomorphisme
+$\mathrm{pr}_1^*E \simeq \mathrm{pr}_2^*E$ sur $\Delta_n$ induisant l'identité
+sur la diagonale ;
+\item une \emph{pseudo-stratification} (ou $\infty$-connexion) est une famille
+compatible de $n$-connexions pour tout $n$ ;
+\item une \emph{stratification} est une pseudo-stratification qui vérifie la
+condition de cocycle d'une donnée de descente sur les voisinages
+infinitésimaux de la diagonale de $S \times_R S \times_R S$.
+\end{itemize}
+Si $S$ est formellement non ramifié sur $R$, c'est-à-dire si
+$\Omega^1_{S/R} = 0$, ces notions sont triviales : tout objet porte une unique
+stratification, et les objets stratifiés s'identifient, par la valeur en $S$, à
+$\mathcal{F}_S$ lui-même.\footnote{La page écrit « à la catégorie
+$\mathcal{F}_R$ elle-même » ; il faut lire $\mathcal{F}_S$.} Le foncteur
+d'oubli des objets stratifiés vers $\mathcal{F}_S$ est toujours fidèle.
+
+Tout cristal $\mathcal{M}$ définit sur sa valeur $\mathcal{M}_S$ une
+\emph{stratification canonique} — les deux images inverses de $\mathcal{M}$ sur
+$\Delta_n$ sont toutes deux la valeur de $\mathcal{M}$ sur l'épaississement
+$\Delta_n$ de $S$ —, d'où un foncteur des cristaux vers les objets stratifiés,
+qui d'après 1.4 n'est pas toujours fidèle. C'est une \emph{équivalence} lorsque
+$S \to R$ est formellement lisse, par exemple lisse, ou lorsque $S$ et $R$ sont
+les spectres de corps $k \supset k_0$ avec $k$ séparable sur $k_0$ ; si $S \to R$
+est formellement étale, les deux catégories sont équivalentes à
+$\mathcal{F}_S$, ce qui redonne l'exemple 1 en caractéristique nulle.
+
+La lettre avance, « sauf erreur » et sans démonstration, que l'équivalence vaut
+encore pour $S \to R$ plat et localement de présentation finie, du moins pour
+$R$ localement noethérien et les modules cohérents. On ne reprend pas cet
+énoncé comme établi.\footnote{La réserve est de la lettre (« je n'ai pas écrit
+de démonstration ») et l'ajout à l'encre la renforce. En général, les
+cristaux sur le site infinitésimal de $S$ s'identifient aux modules munis
+d'une stratification sur le complété d'un $R$-schéma \emph{lisse} dans lequel
+$S$ se plonge, non sur $S$ lui-même ; c'est ce qui rend l'énoncé délicat.}
+
+\pagerange{6}{7}
+\subsection*{Digression : la caractéristique nulle et le théorème de Cartier (page 6)}
+
+\textbf{1.9.} Si $S$ est lisse sur $R$ et $R$ de caractéristique nulle, une
+stratification sur un module $M$ est déterminée par la $1$-connexion qu'elle
+définit, c'est-à-dire par une connexion $\nabla$, et une connexion provient
+d'une stratification si et seulement si sa \emph{courbure}, section de
+$\Omega^2_{S/R} \otimes \underline{\mathrm{End}}(M)$, est nulle ; autrement
+dit, stratifications et connexions intégrables coïncident.\footnote{La lettre
+ajoute qu'il suffit que $S$ soit « différentiellement lisse », la diagonale
+étant une immersion régulière, et se demande si la lissité est nécessaire et si
+l'énoncé s'étend à toute catégorie fibrée.} L'hypothèse de caractéristique
+nulle est essentielle. En caractéristique $p > 0$, l'énoncé qui la remplace est
+le théorème de Cartier : la donnée d'une connexion intégrable \emph{de
+$p$-courbure nulle} sur $M$ équivaut à une donnée de descente de $M$ le long
+du Frobenius relatif $S \to S^{(p/R)}$.\footnote{La lettre dit « connexion sans
+torsion », c'est-à-dire de courbure nulle, puis ajoute à l'encre « compatible
+avec puissances $p$-ièmes » : c'est la nullité de la $p$-courbure, au sens
+qu'on donne aujourd'hui à ce mot (le terme est postérieur ; la notion est dans
+Cartier).} « Il y a loin de là à une stratification ! » : en caractéristique
+$p$, une stratification demande l'action de tous les opérateurs
+$\partial^n/n!$, et non des seules dérivations.
+
+\pagerange{6}{9}
+\subsection*{$F$-cristaux, $V$-cristaux, cristaux de Dieudonné (pages 6 à 9)}
+
+\textbf{1.10.} On suppose maintenant $S$ de caractéristique $p > 0$ et
+$R = \operatorname{Spec}\mathbf{Z}$ (ou $\operatorname{Spec}\mathbf{Z}_p$, ce
+qui revient au même). Si $\mathcal{M}$ est un cristal de modules de
+présentation finie, sa valeur en un point parfait $s'$ au-dessus d'un point
+$s$ de $S$ est, par 1.5, un module de type fini sur $W(k(s'))$ : un cristal est
+une « famille algébrique » de modules sur les anneaux de Witt des points
+parfaits de $S$ — et quelque chose de plus fin lorsque $S$ n'est pas parfait,
+par exemple le spectre d'un corps de fonctions.
+
+Le Frobenius absolu $\mathrm{frob}_S : S \to S$ (puissance $p$-ième) permet
+d'associer à tout cristal $\mathcal{M}$ son image inverse
+$\mathcal{M}^{(p)} = \mathrm{frob}_S^*\mathcal{M}$. On appelle
+\begin{itemize}
+\item \emph{$F$-cristal} (la lettre : $p$-cristal) un cristal muni d'un
+morphisme $F : \mathcal{M}^{(p)} \to \mathcal{M}$ ;
+\item \emph{$V$-cristal} (la lettre : $p^{-1}$-cristal) un cristal muni d'un
+morphisme $V : \mathcal{M} \to \mathcal{M}^{(p)}$ ;
+\item \emph{bicristal de poids $i$}, lorsque $\mathcal{F}$ est fibrée en
+catégories additives, un cristal muni de $F$ et de $V$ avec
+\[
+  FV = p^i\,\mathrm{id}_{\mathcal{M}}, \qquad VF = p^i\,\mathrm{id}_{\mathcal{M}^{(p)}} .
+\]
+\end{itemize}
+Pour $i = 1$, c'est un \emph{cristal de Dieudonné}.\footnote{La page donne, pour
+le poids 1, les relations $FV = p\,\mathrm{id}_M$ et $VF = \mathrm{id}_{M^{(p)}}$ ;
+le facteur $p$ manque dans la seconde, et la formule générale qui suit, comme
+1.12, exige $VF = p$. La précision « de poids 1 » est ajoutée dans
+l'interligne.} Les $F$-cristaux de modules ont les opérations tensorielles
+covariantes ; un foncteur contravariant (le dual) échange $F$-cristaux et
+$V$-cristaux, et les bicristaux de poids $i$ sont stables par dualité (pour des
+objets localement libres de type fini) : c'est pour avoir une notion
+« autoduale » que la lettre introduit le bicristal. Le poids 1 lui semble
+adapté aux groupes formels, ou, « ce qui revient moralement au même », à la
+cohomologie de De Rham en degré 1 ; le poids $i$ au degré $i$.
+
+Le \emph{bicristal de Tate} $T^i$ est le cristal unité $T \mapsto \mathcal{O}_T$
+muni de $F = V = p^i$ ; il est de poids $2i$, et $T^i$ est la puissance
+tensorielle $i$-ième de $T^1$, qui est de poids 2.\footnote{La page dit « la
+puissance tensorielle $i$-ème du bicristal de Tate de poids 1 » ; c'est le
+poids 2 qu'il faut lire, celui de $T^1$ (les poids s'ajoutent par produit
+tensoriel, comme la lettre le note aussitôt). Le « $2i$ » est repris à l'encre
+dans la marge.} Les bicristaux de poids quelconques se multiplient
+tensoriellement, les poids s'additionnant. En termes modernes, $T^1$ est le
+$F$-cristal de Tate, celui de la cohomologie $H^2$ de la droite projective.
+
+\pagerange{8}{11}
+\subsection*{Isocristaux et $F$-isocristaux (pages 8 à 11)}
+
+\textbf{1.11.} Pour rendre $T^1$ inversible, il faut passer à une catégorie de
+fractions. La catégorie des cristaux de modules sur $S$ est
+$\mathbf{Z}_p$-linéaire (les $\mathrm{Hom}$ sont des limites projectives de
+modules annulés par des puissances de $p$) ; rendre ses $\mathrm{Hom}$
+$\mathbf{Q}$-linéaires ou $\mathbf{Q}_p$-linéaires revient au même. Pour les
+cristaux de type fini, c'est garder les mêmes objets et remplacer
+$\mathrm{Hom}$ par $\mathrm{Hom} \otimes_{\mathbf{Z}} \mathbf{Q}$ ; dans les
+cas où la catégorie des cristaux est abélienne, cela revient à quotienter par
+la sous-catégorie épaisse des objets de torsion.\footnote{La page dit
+« notre catégorie abélienne » sans hypothèse. Faute de platitude des
+changements de base, la catégorie des cristaux quasi-cohérents n'a pas de
+noyaux en général ; elle est abélienne pour les cristaux cohérents lorsque $S$
+est lisse sur un corps parfait, par la description de 1.13, qui est le cas où
+l'énoncé sert. La description par $\mathrm{Hom} \otimes \mathbf{Q}$ est
+l'ajout à l'encre au pied de la page 8.} On obtient les \emph{isocristaux}
+(« cristaux de modules à isogénie près »)\footnote{La page écrit
+« isogristaux » : coquille.}, puis les $F$-isocristaux, munis de
+$F : \mathcal{M}^{(p)} \to \mathcal{M}$.
+
+Il n'y a plus lieu de parler de bi-isocristal de poids $i$, puisque $V$ serait
+déterminé par $F$ comme $p^iF^{-1}$. La lettre appelle donc
+\emph{bi-isocristal} un $F$-isocristal dont le $F$ est un \emph{isomorphisme},
+sans choisir de poids : c'est ce qu'on appelle aujourd'hui un
+\emph{$F$-isocristal}. La notion est autoduale sur les objets de type fini :
+le dual de $(\mathcal{M}, F)$ est $(\mathcal{M}^\vee, {}^tF^{-1})$.\footnote{La
+page écrit $(\underline{M}, {}^tF^{-1})$ sans marquer le dual, puis « où
+$\underline{M}$ est l'isocristal dual » : le signe du dual manque. Une ligne
+biffée commençait par « si $\phi$ est un foncteur contravariant ».}
+
+En localisant les bicristaux de poids $i$, on obtient une catégorie
+$\mathrm{IsBicr}(S,i)$ et un foncteur exact « oubli de $V$ »
+\[
+  \mathrm{IsBicr}(S,i) \longrightarrow \mathrm{IsBicr}(S)
+\]
+vers les $F$-isocristaux. Il est \emph{pleinement fidèle}, puisque $V$ y est
+déterminé par $F$. Les foncteurs
+$\mathrm{Bicr}(S,i) \to \mathrm{Bicr}(S,i+1)$,
+$(\mathcal{M}, F, V) \mapsto (\mathcal{M}, F, pV)$, deviennent après
+localisation des foncteurs pleinement fidèles
+$\mathrm{IsBicr}(S,i) \to \mathrm{IsBicr}(S,i+1)$ : les bicristaux de poids
+croissant forment une généralisation de plus en plus large des cristaux de
+Dieudonné, et les $F$-isocristaux les englobent tous, avec « la louable vertu »
+d'être stables par produit tensoriel et par dualité. C'est la catégorie que la
+lettre propose comme catégorie de valeurs d'une cohomologie de De Rham « à
+isogénie près ».
+
+\textbf{Exemple 1 (1.12) : $S$ spectre d'un corps parfait $k$.} Un cristal de
+type fini est un $W$-module de type fini $M$ ; le Frobenius $\sigma = f_W$ de
+$W$ donne $M^{(p)} = M \otimes_{W,\sigma} W$. Une structure de $F$-cristal
+est un endomorphisme $\sigma$-semi-linéaire $F : M \to M$ ; une structure de
+$V$-cristal, un endomorphisme $\sigma^{-1}$-semi-linéaire $V$ ; et $(F,V)$
+définit un bicristal de poids $i$ si et seulement si $FV = VF = p^i$. Pour
+$i = 1$ on retrouve les \emph{modules de Dieudonné} : les cristaux de
+Dieudonné sur $k$ sont les modules de Dieudonné. Les isocristaux de type fini
+sont les espaces vectoriels de dimension finie sur $K = \operatorname{Frac}W$,
+et un $F$-isocristal est un tel espace muni d'une bijection
+$\sigma$-semi-linéaire $F$.
+
+L'image essentielle de $\mathrm{IsBicr}(k,i)$ est formée des $(E, F)$ tels
+que, posant $V = p^iF^{-1}$, l'orbite de tout vecteur sous les monômes non
+commutatifs en $F$ et $V$ soit bornée — « pure tautologie », car un réseau
+stable existe alors. Il existe un $i$ convenable si et seulement si les
+$F^nx$ sont bornés pour tout $x$.\footnote{Justification, qui n'est pas sur la
+page : un monôme en $F$ et $V$ s'écrit $p^{ib}F^{a-b}$ ; si les $F^nx$ sont
+bornés, il reste à borner les $(p^iF^{-1})^n x$, ce qui a lieu pour $i$ assez
+grand en dimension finie. Dans le langage des pentes de Dieudonné--Manin
+(Manin, 1963), la condition dit que les pentes de $F$ sont positives, et $i$
+doit majorer la plus grande.} Cette propriété est stable par $F \mapsto pF$
+(produit par le bi-isocristal de Tate) mais non par $F \mapsto p^{-1}F$ ; comme
+on tient à inverser Tate, il n'est pas naturel d'imposer une condition de
+croissance. Appelant \emph{effectifs} les $F$-isocristaux qui proviennent d'un
+$\mathrm{IsBicr}(S,i)$, on a : tout $F$-isocristal est de la forme
+$T^{-i} \otimes \mathcal{N}$ avec $\mathcal{N}$ effectif. « On n'a pas ajouté
+plus de nouveaux objets qu'il n'était absolument nécessaire ! »
+
+\pagerange{11}{15}
+\subsection*{Exemple 2 : $S$ lisse sur un corps parfait (pages 11 à 15)}
+
+\textbf{1.13.} Soit $S$ lisse sur un corps parfait $k$ de caractéristique $p$.
+La catégorie $C$ ne change pas quand on remplace
+$R = \operatorname{Spec}\mathbf{Z}$ par $\operatorname{Spec}W$, et un
+cristal relatif à $W$ équivaut à un système compatible de cristaux relatifs aux
+$W_n = W/p^{n+1}W$.\footnote{La lettre note ici que l'exemple 3 de 1.7 n'avait
+pas été formulé avec la généralité voulue, celle d'une base formelle.} On peut
+se localiser sur $S$ et le supposer affine ; il se relève alors en des $S_n$
+lisses sur $W_n$, compatibles entre eux. Comme $S \to S_n$ est une immersion
+fermée nilpotente, les cristaux sur $S$ relatifs à $W_n$ sont les cristaux sur
+$S_n$ relatifs à $W_n$, et par 1.8 les objets de $S_n$ munis d'une
+stratification relative à $W_n$. En résumé : \emph{un cristal sur $S$
+s'identifie à un système compatible $(M_n)$ d'objets stratifiés sur les $S_n$
+relativement aux $W_n$.}
+
+Si $S$ se relève même en un schéma $X$ \emph{propre} et lisse sur $W$ —
+hypothèse « évidemment bien restrictive » —, les théorèmes de comparaison
+d'EGA~III, 4 et 5 donnent : \emph{les cristaux de modules cohérents sur $S$
+forment une catégorie équivalente à celle des modules cohérents sur $X$ munis
+d'une stratification relative à $W$}, catégorie qui se trouve donc
+indépendante du relèvement. Sur la fibre générique $X_K$, schéma propre et
+lisse sur le corps $K$ de caractéristique nulle, on obtient un foncteur de
+restriction des cristaux cohérents sur $S$ vers les modules cohérents munis
+d'une stratification relative à $K$,\footnote{La page dit « stratifiés
+relativement à $X_K$ » ; il faut lire « à $K$ ».} c'est-à-dire, $X_K$ étant
+lisse en caractéristique nulle, d'une connexion intégrable ; de tels modules
+sont localement libres.\footnote{La lettre affirme plus généralement qu'un
+module cohérent stratifié sur un schéma localement de type fini sur un corps
+est localement libre ; on ne retient que le cas utilisé, $X_K$ lisse en
+caractéristique nulle, qui est classique.}
+
+Si de plus $X_K$ est géométriquement connexe et $K$ se plonge dans
+$\mathbf{C}$, ces modules à connexion intégrable s'interprètent par les
+représentations complexes du groupe fondamental de $X_{\mathbf{C}}^{\mathrm{an}}$.
+Si ce groupe est trivial, tout module stratifié sur $X_K$ est trivial, et tout
+cristal cohérent sur $S$ est \emph{isogène} à un cristal constant, image
+inverse d'un cristal sur $k$ ; par rigidité, tout $F$-cristal cohérent, tout
+bicristal de poids $i$, est isogène à un objet constant de même espèce. « On
+voit donc là un principe d'approche transcendante pour l'étude des familles de
+groupes formels en caractéristique $p$. » Le foncteur induit sur les
+isocristaux cohérents est \emph{pleinement fidèle} ; est-ce une équivalence ?
+La lettre trouve cela « un peu trop optimiste », et une note de sa main en
+marge répond : « Effectivement, ça ne marche pas ! ».\footnote{Lecture de « ne
+marche » incertaine. La condition cherchée sur un module stratifié, dit la
+lettre, doit être « de nature locale en les points de $X$ qui sont maximaux
+dans $S$ ». C'est ce qu'a confirmé la théorie ultérieure, pour les
+isocristaux à puissances divisées : la condition est la convergence de la
+connexion sur les disques résiduels des points fermés (isocristaux
+convergents, A.~Ogus, 1984 ; cohomologie rigide de P.~Berthelot).}
+
+Si $S$ n'est relevé que formellement, en un schéma formel $X$ sur
+$\operatorname{Spf}W$, il reste vrai, de façon essentiellement triviale, que
+\emph{les cristaux cohérents sur $S$ sont les modules cohérents sur $X$ munis
+d'une stratification relative à $\operatorname{Spf}W$}. L'analogue de $X_K$ est
+alors l'\emph{espace rigide-analytique} défini par $X$, avec ses modules
+cohérents munis de stratifications au sens rigide-analytique (encore
+localement libres), et l'on a encore un foncteur pleinement fidèle des
+isocristaux cohérents sur $S$ vers ces modules. Il faut en déterminer l'image
+essentielle, « car c'est vraiment ici la situation naturelle », et se demander
+si ces modules ne se décrivent pas par un groupe « plus ou moins discret »
+jouant le rôle du groupe fondamental. Conséquence immédiate de la
+description : pour $S$ de type fini sur $k$, la catégorie des cristaux
+cohérents est noethérienne, tout objet a un plus grand sous-objet de torsion,
+et les objets sans torsion correspondent à des modules stratifiés sans
+torsion, donc localement libres, sur $X$.
+
+\textbf{1.14.} Il reste à décrire $\mathcal{M} \mapsto \mathcal{M}^{(p)}$. Un
+carré commutatif $S' \to S$ au-dessus de $k' \to k$, relevé en $X' \to X$
+au-dessus de $W' \to W$, explicite l'image inverse des cristaux par celle des
+modules stratifiés. Pour le Frobenius, il s'agit de relever $S \to S^{(p/k)}$
+en un morphisme de schémas formels
+$f_X : X \to X$ compatible au Frobenius de $W$, ce qui est possible pour $S$
+affine. Alors $\mathcal{M} \mapsto \mathcal{M}^{(p)}$ est l'image inverse
+ordinaire par $f_X$ des modules stratifiés sur $X$ — resp., pour les
+isocristaux, par le morphisme d'espaces rigides $X_K \to X_K$ qu'il induit,
+semi-linéaire au-dessus du Frobenius de $K$. Le relèvement $f_X$ n'est pas
+unique, mais le foncteur qu'il définit n'en dépend pas, à isomorphisme
+canonique près.
+
+\pagerange{15}{16}
+\subsection*{Base quelconque (pages 15 et 16)}
+
+\textbf{1.15.} Pour $S$ sans caractéristique fixée, soit $S_p = V(p)$ la fibre
+de $S$ en $p$. Un bicristal de poids $i$ sur $S$ est un cristal de modules
+$\mathcal{M}$ muni, pour chaque $p$, d'une structure $(F_p, V_p)$ de bicristal
+de poids $i$ sur la restriction $\mathcal{M}_p$ à $S_p$. De même pour les
+$F$-isocristaux, les isocristaux étant maintenant obtenus en tensorisant les
+$\mathrm{Hom}$ par $\mathbf{Q}$. En caractéristique nulle la structure
+supplémentaire est vide ; pour $S$ de type fini et dominant sur
+$\operatorname{Spec}\mathbf{Z}$, elle est de nature arithmétique, les $F_p$
+jouant le rôle des Frobenius, et en poids 1 le cristal « relie entre eux les
+groupes formels en les diverses caractéristiques ».
+
+\pagerange{16}{18}
+\subsection*{Le site infinitésimal, et le test de De Rham (pages 16 à 18)}
+
+\textbf{1.16. « Un retour en arrière. »} La définition 1.1 et la construction
+de 1.3 sont « un petit peu canulées ». Il faut prendre pour $C$ la catégorie
+des $R$-flèches $U \to T$, où $U$ parcourt les ouverts de $S$ et $U \to T$ est
+une immersion fermée définie par un idéal nilpotent, et se borner aux
+catégories fibrées $\mathcal{F}$ qui sont des \emph{champs} pour la topologie
+de Zariski. On munit $C$ de la topologie de Zariski : une famille couvrante de
+$(U \to T)$ est donnée par un recouvrement ouvert $(T_i)$ de $T$, avec
+$U_i = U \cap T_i$. C'est le « \emph{site cristallogène} de $S$ sur $R$ », que
+Grothendieck appellera ensuite \emph{site infinitésimal}.
+
+Un faisceau $\mathcal{G}$ sur ce site est un système de faisceaux
+$\mathcal{G}_{(U,T)}$ sur les $T$, avec, pour toute flèche
+$(U \to T) \to (U' \to T')$, un morphisme de l'image inverse de
+$\mathcal{G}_{(U',T')}$ sur $T$ vers $\mathcal{G}_{(U,T)}$, qui n'est pas
+nécessairement un isomorphisme, mais l'est lorsque $T \to T'$ est une immersion
+ouverte.\footnote{La parenthèse finale est un ajout de sa main au pied de la
+page 16 ; « ouverte » y est de lecture incertaine, mais c'est ce que demande
+la topologie de Zariski.} Les $\mathcal{O}_T$ forment un faisceau d'anneaux
+$\mathcal{O}_C$, et \emph{les cristaux de modules quasi-cohérents sont
+exactement les $\mathcal{O}_C$-modules quasi-cohérents} (localement conoyaux
+de modules libres) ; les cristaux de présentation finie, les
+$\mathcal{O}_C$-modules de présentation finie. Pour $S' \to S$, il n'y a pas de
+morphisme naturel de sites, mais il y a un morphisme des \emph{topos}
+cristallogènes $\mathrm{Topcr}_{S'/R} \to \mathrm{Topcr}_{S/R}$, construit
+comme en 1.3, « qui, j'avoue, devrait être défini avec le plus grand soin ».
+
+\textbf{1.17. Le test-clef.} On peut alors faire marcher la machine
+cohomologique. Le test : \emph{si $R$ est le spectre d'un corps et $S$ lisse
+sur $R$ (et propre en caractéristique $p > 0$), la cohomologie du site à
+coefficients dans $\mathcal{O}_C$ doit être la cohomologie de De Rham de $S$
+sur $R$} ; et pour $f : S' \to S$ propre et lisse, la valeur en $S$ de
+$R^if_{\mathrm{cris}*}(\mathcal{O}_{C'})$ doit être $R^if_*(\Omega^\bullet_{S'/S})$,
+la connexion de Gauss--Manin étant celle de la stratification canonique. Les
+indices : l'existence de la connexion de Gauss--Manin, et « le tapis de
+Washnitzer--Monsky ». À défaut, on dériverait dans la seule catégorie des
+cristaux.
+
+Une note au crayon dans la marge tranche : « marche en car.~0, et \emph{pas}
+en car $p > 0$ ». C'est exact. En caractéristique nulle, la cohomologie du
+site infinitésimal calcule la cohomologie de De Rham — c'est le théorème que
+Grothendieck démontrera à l'IHÉS en décembre 1966. En caractéristique $p$,
+elle ne la calcule pas : sur le site infinitésimal, $\mathcal{O}_C$ ne voit que
+les fonctions annulées par \emph{tous} les opérateurs différentiels, y compris
+les $\partial^n/n!$, alors que la cohomologie de De Rham ne voit que la
+différentielle $d$. Le remède est celui qu'indique l'autre note au crayon : se
+borner aux épaississements munis de puissances divisées. Le site qu'on obtient
+est le site cristallin de Berthelot, et pour lui le test-clef est un
+théorème.\footnote{Les deux notes au crayon de la page 17 sont postérieures à
+la frappe ; la seconde, « (faut d'introduire des puiss.\ div.) », est lue en
+grande partie par conjecture. La comparaison entre cohomologie cristalline et
+cohomologie de De Rham, pour $S$ lisse et propre sur un corps parfait, est
+dans Berthelot, \emph{op.\ cit.}, chapitre~V.}
+
+\pagerange{18}{19}
+\section*{La lettre, chapitre 2 : « La cohomologie de De Rham est un cristal » (pages 18 à 29)}
+
+\subsection*{Trois indications (pages 18 et 19)}
+
+\textbf{2.1.} Le titre est « un vœu pieux », mais la lettre le croit
+« essentiellement correct ». Trois indications le soutiennent.
+
+a) \emph{Le travail de Washnitzer et Monsky.} Il a deux défauts : il ne donne
+que des invariants locaux sur une variété lisse en caractéristique $p$, ce qui
+limite à la dimension 1 pour un invariant global ; et ses invariants sont des
+espaces vectoriels sur $\operatorname{Frac}W$, c'est-à-dire « modulo
+isogénie », les démonstrations d'invariance faisant intervenir des
+dénominateurs. Il n'est donc pas exclu qu'il faille remplacer, dans le titre,
+« cristal » par « isocristal » « (et "est" par "définit") ».\footnote{La
+parenthèse est ajoutée à l'encre. La cohomologie de Monsky--Washnitzer est
+publiée en 1968 (\emph{Formal cohomology I}, Annals of Math.\ 88) ; la lettre en
+connaît les annonces.} Le test décisif reste 1.17 : marche-t-il seulement en
+caractéristique nulle, ou en toute caractéristique ?
+
+b) \emph{La connexion de Gauss--Manin.} Pour tout morphisme lisse
+$f : X \to S$, il y a une connexion canonique (absolue) sur les
+$R^if_*\Omega^\bullet_{X/S}$, et même sur le complexe
+$Rf_*\Omega^\bullet_{X/S}$ dans la catégorie dérivée $D(\mathcal{O}_S)$. Sa
+courbure est nulle, vérifiée par voie transcendante pour $S$ lisse sur une base
+réduite de caractéristique nulle.\footnote{N.~Katz et T.~Oda en ont donné
+en 1968 une construction algébrique, avec l'intégrabilité, par la
+filtration de Leray du complexe de De Rham (\emph{J.~Math.\ Kyoto Univ.}~8).} En
+caractéristique $p$, il n'y a pas d'espoir que cette connexion provienne
+toujours d'une stratification : la cohomologie de De Rham d'une variété
+affine y est « beaucoup trop grosse ». Il faut donc au moins supposer $f$
+propre — condition nécessaire, dont 2.7 montrera qu'elle n'est pas
+suffisante.
+
+c) \emph{Le « papier bleu ».} Pour $S$ lisse sur $\mathbf{C}$ et $f : X \to S$
+lisse et propre, la suite spectrale de Leray
+\[
+  E_2^{pq} = H^p\bigl(S^{\mathrm{an}}, R^qf^{\mathrm{an}}_*\mathbf{C}_{X^{\mathrm{an}}}\bigr)
+  \Longrightarrow H^{p+q}(X^{\mathrm{an}}, \mathbf{C})
+\]
+a un terme initial et un aboutissement qui se décrivent algébriquement — par la
+cohomologie de De Rham de $X$, et celle de $S$ à coefficients dans les
+$R^qf_*\Omega^\bullet_{X/S}$ munis de leur connexion intégrable. On voudrait
+une interprétation algébrique de la suite spectrale tout entière.\footnote{La
+page écrit $\mathbf{C}_{S^{\mathrm{an}}}$ sous $f^{\mathrm{an}}_*$ ; il faut
+lire $\mathbf{C}_{X^{\mathrm{an}}}$. Le « papier bleu sur De Rham » est
+vraisemblablement l'article \emph{On the de Rham cohomology of algebraic
+varieties} (Publ.\ Math.\ IHÉS 29, 1966) ; l'identification est nôtre. Une
+interprétation algébrique de cette suite spectrale est précisément ce que
+fournit la construction de Katz et Oda, par la filtration de Leray.}
+
+\pagerange{19}{20}
+\subsection*{Le formalisme souhaité (pages 19 et 20)}
+
+\textbf{2.2.} « Dans l'éventualité optimiste où on n'aurait pas besoin de
+s'isogéniser », les cristaux de modules forment une catégorie abélienne dont
+on prend la catégorie dérivée : ses objets sont les \emph{complexes de
+cristaux}, qui induisent sur chaque épaississement $T$ un complexe de
+$\mathcal{O}_T$-modules ; un complexe de cristaux est parfait,
+pseudo-cohérent\ldots\ s'il l'est sur chaque $T$. La théorie voulue associe à
+tout morphisme lisse et propre $f : X \to S$ un complexe parfait de cristaux
+absolus $\mathrm{DR}(f)$ sur $S$, la \emph{cohomologie de De Rham
+cristalline} de $f$, avec :
+\begin{itemize}
+\item compatibilité à tout changement de base (au sens dérivé), et
+fonctorialité contravariante en $X$ ;
+\item une formule de Künneth
+$\mathrm{DR}(f \times_S g) \simeq \mathrm{DR}(f) \overset{\mathbb{L}}{\otimes} \mathrm{DR}(g)$ ;
+\item pour $f$ de dimension relative $d$, une dualité parfaite
+\[
+  \mathrm{DR}(f) \overset{\mathbb{L}}{\otimes} \mathrm{DR}(f) \longrightarrow T^d[-2d] ,
+\]
+où $T^d$ est le cristal de Tate de poids $2d$ ;\footnote{La page écrit
+$\mathrm{DR}(f) \times \mathrm{DR}(f) \to T^d[2d]$, « où $[2d]$ indique qu'on
+translate les degrés de $2d$ (attention au facteur 2 !) ». En notation
+cohomologique, qui est celle d'aujourd'hui, l'accouplement $H^i \times H^{2d-i}
+\to H^{2d}$ s'écrit avec $[-2d]$.}
+\item un isomorphisme $\mathrm{DR}(f)(S) \simeq Rf_*(\Omega^\bullet_{X/S})$,
+fonctoriel, compatible aux changements de base, à Künneth et à la dualité.
+\end{itemize}
+« Par prudence », la lettre ne dit rien du cas non propre, dont il faudrait
+pourtant parler pour faire le lien avec Washnitzer--Monsky.\footnote{Rien de
+ce formalisme n'est établi dans le dossier. Sa forme exacte, pour le site
+cristallin à puissances divisées, est due à Berthelot (1974), avec Künneth et
+la dualité de Poincaré.}
+
+\pagerange{20}{21}
+\subsection*{Le Frobenius sur la cohomologie (pages 20 et 21)}
+
+\textbf{2.3.} Admettons la théorie de 2.2. Pour chaque premier $p$, notons
+$\mathrm{DR}(f)_p$ la restriction à $S_p = V(p)$, qui par changement de base
+est $\mathrm{DR}(f_p)$, avec $f_p : X_p \to S_p$. Par changement de base encore,
+$\mathrm{DR}(f_p)^{(p)} = \mathrm{DR}(f_p^{(p)})$, où
+$f_p^{(p)} : X_p^{(p/S)} \to S_p$ est le frobeniusé relatif. Le Frobenius
+relatif $F_{X_p/S_p} : X_p \to X_p^{(p/S)}$ est un $S_p$-morphisme,\footnote{La
+page écrit le morphisme de Frobenius « $X_p^{(p/S)} \to X$ ». La
+contravariance de $\mathrm{DR}$ exige le sens $X_p \to X_p^{(p/S)}$, qui est
+celui du Frobenius relatif.} et la fonctorialité contravariante de
+$\mathrm{DR}$ donne
+\[
+  F_p : \mathrm{DR}(f)_p^{(p)} \longrightarrow \mathrm{DR}(f)_p .
+\]
+Il faut voir que c'est une isogénie, de sorte que
+l'isocristal de $\mathrm{DR}(f)$ soit un $F$-isocristal. C'est ce que donne la
+dualité de 2.2 : le cristal unité $T^d$ y est muni de sa structure de
+bicristal, $F$ est compatible à l'accouplement, et en transposant $F$ on
+obtient $V$ avec\footnote{La page écrit $FV = VF = p^{2d}$. Avec un accouplement à valeurs dans
+$T^d$, sur lequel $F = p^d$, on a $\langle Fx, Fy\rangle = p^d \sigma\langle
+x,y\rangle$, d'où $FV = VF = p^d$ pour $V$ transposé de $F$ ; pour une courbe
+($d = 1$), on retrouve sur $H^1$ la relation $FV = p$ des modules de Dieudonné.
+La conclusion de la lettre — $F$ est une isogénie — n'en dépend pas.}
+\[
+  FV = VF = p^d .
+\]
+
+Comme en caractéristique nulle, la formation des $\mathrm{DR}^i(f)$, une fois
+passé aux isocristaux, devrait commuter aux changements de base, de sorte que
+chaque $\mathrm{DR}^i(f)$ soit lui-même un $F$-isocristal. En rédigeant 1.10,
+la lettre avait cru que $\mathrm{DR}^i(f)$ serait, sans passer aux isocristaux,
+un bicristal de poids $i$ : « je m'étais canulé ». Pour définir $V$ sur
+$\mathrm{DR}^i$ avec $FV = p^i$ en transposant le $F$ de $\mathrm{DR}^{2d-i}$,
+il faudrait un \emph{isomorphisme} — pas seulement une isogénie —
+$\mathrm{DR}^i(f) \simeq \mathrm{DR}^{2d-i}(f) \otimes T^{-(d-i)}$, comme en
+donnerait une polarisation dans des cas « très exceptionnels ».
+
+\pagerange{21}{24}
+\subsection*{Schémas abéliens : les trois affirmations (pages 21 à 24)}
+
+\textbf{2.4.} Pour un schéma abélien $A$ sur $S$, il semble raisonnable de
+parler de bicristaux, et pas seulement de $F$-isocristaux : $\mathrm{DR}^1(A/S)$
+porte les $F_p$ de 2.3, et des $V_p$ définis par fonctorialité à partir du
+Verschiebung $A_p^{(p/S_p)} \to A_p$ ;\footnote{Construit en général dans les
+exposés de Gabriel de SGA~3, que la lettre appelle « SGAD ».} comme
+$\mathrm{DR}^1$ est multiplicatif en $A$ (Künneth) et que $FV = VF = p$ sur les
+schémas abéliens en caractéristique $p$, $\mathrm{DR}^1(A)$ serait un
+\emph{cristal de Dieudonné}, et sur un corps parfait un module de Dieudonné
+sur $W(k)$ — qui doit être celui du groupe $p$-divisible de $A$.
+
+Débarrassée de l'« hyperstructure axiomatico-conjecturale » de 2.2, la
+construction se formule en trois affirmations.
+
+\textbf{Première affirmation.} Soit $A$ un schéma abélien sur $S$ affine, et
+$S \to T$ un épaississement nilpotent ; $A$ se prolonge en un schéma abélien
+$B$ sur $T$, et $H^1_{\mathrm{DR}}(B/T)$ est localement libre de rang $2g$.
+\emph{Ce module ne dépend, à isomorphisme canonique près, que de $A$ sur $S$
+et de $S \to T$, et non du prolongement $B$.} On obtient ainsi un cristal
+localement libre de rang $2g$, $\mathrm{DR}^1(A/S)$, additif en $A$, compatible
+au changement de base, et défini sans hypothèse affine par recollement.
+
+\textbf{Deuxième affirmation.} Sur $k$ parfait de caractéristique $p$, ce
+cristal est un $W(k)$-module libre de rang $2g$, et, muni de $F$ et $V$, c'est
+\emph{le module de Dieudonné $M$ de $A$} : pour tout anneau local artinien
+$\Lambda$ de corps résiduel $k$ et tout prolongement $B$ de $A$ sur $\Lambda$,
+$H^1_{\mathrm{DR}}(B/\Lambda) \simeq M \otimes_W \Lambda$, canoniquement et
+fonctoriellement — la fonctorialité garantissant la compatibilité à $F$ et
+$V$.
+
+\textbf{2.5.} La lettre n'a pas vérifié ces deux affirmations, mais n'a « pas
+le moindre doute » qu'elles soient correctes. Elles expliqueraient les
+déformations de $A$ par son module de Dieudonné : les prolongements de $A$ sur
+$\Lambda$ correspondraient aux quotients libres de rang $g$ de
+$M \otimes_W \Lambda$ relevant le quotient canonique de
+$M \otimes_W k = H^1_{\mathrm{DR}}(A)$.
+
+\textbf{Troisième affirmation.} Pour un schéma abélien $f : A \to S$, la
+cohomologie de De Rham porte la filtration de Hodge
+\[
+  0 \longrightarrow f_*\Omega^1_{A/S} \longrightarrow H^1_{\mathrm{DR}}(A/S)
+  \longrightarrow R^1f_*\mathcal{O}_A \longrightarrow 0 .
+\]
+Pour tout prolongement $B$ de $A$ sur $T$, on a ainsi sur
+$\mathcal{M}(T) = \mathrm{DR}^1(A/S)(T) = H^1_{\mathrm{DR}}(B/T)$ une filtration
+qui prolonge celle de $\mathcal{M}(S) = H^1_{\mathrm{DR}}(A/S)$. \emph{Le
+foncteur $B \mapsto (A, \text{filtration de } \mathcal{M}(T))$ est une
+équivalence entre schémas abéliens sur $T$ et schémas abéliens sur $S$ munis
+d'un relèvement de leur filtration de Hodge à $\mathcal{M}(T)$} (à quotients
+localement libres).\footnote{La page écrit « prolongeant celle de
+$\mathrm{DR}^1(A/A)(S)$ » : lire $\mathrm{DR}^1(A/S)(S)$. Elle note la
+filtration par le signe tapé « Ø ».}
+
+La filtration de Hodge n'est donc \emph{pas} de nature cristalline : elle
+varie avec le relèvement, et c'est sa variation qui reflète les variations de
+structure du motif. La comparaison avec le théorème de Serre--Tate — étendre
+$A$ à $T$ en caractéristique $p$, c'est étendre son groupe $p$-divisible —
+suggère une généralisation aux groupes formels, qui sera le chapitre 3.
+
+\emph{Ce que valent ces trois affirmations.} Telles qu'elles sont énoncées, pour
+\emph{tous} les épaississements nilpotents, elles sont fausses en
+caractéristique $p$ : c'est exactement ce que la lettre elle-même démontre en
+2.7, puisqu'elles fourniraient sur la cohomologie de De Rham des familles de
+courbes elliptiques une stratification compatible au Frobenius. Elles sont
+vraies, et ce sont des théorèmes, lorsqu'on se borne aux épaississements dont
+l'idéal est muni de \emph{puissances divisées localement nilpotentes} : c'est
+la théorie de Grothendieck--Messing. La première et la troisième sont le
+théorème de Grothendieck--Messing (W.~Messing, \emph{The crystals associated to
+Barsotti--Tate groups}, 1972 ; B.~Mazur et W.~Messing, \emph{Universal extensions
+and one dimensional crystalline cohomology}, 1974) ; la deuxième, pour $\Lambda$
+muni de telles puissances divisées (par exemple $\Lambda = W_n(k)$, $p \geq 3$),
+est la comparaison entre $H^1$ cristallin et module de Dieudonné
+contravariant (Mazur--Messing ; Berthelot, Breen et Messing, 1982).\footnote{Cette
+mise au point est de la présente lecture, non de la page. Elle s'appuie sur
+2.7 et 2.8, où la lettre établit elle-même l'impossibilité de la version sans
+puissances divisées, et sur la note au crayon de la page 17.}
+
+\pagerange{24}{25}
+\subsection*{L'extension vectorielle universelle (pages 24 et 25)}
+
+\textbf{2.6.} Paraphrasant sur une base quelconque une construction de Serre
+« (c'est de lui que je l'ai apprise, du moins) », on trouve, pour tout schéma
+abélien $A$ sur $S$, une \emph{extension vectorielle universelle}
+\[
+  0 \longrightarrow \omega_{A^\vee} \longrightarrow E(A) \longrightarrow A
+  \longrightarrow 0 ,
+\]
+où $A^\vee$ est le schéma abélien dual et $\omega_{A^\vee}$, vu comme groupe
+vectoriel, est le fibré vectoriel $\mathbb{V}(R^1f_*\mathcal{O}_A)$ dont les
+sections sont les homomorphismes
+$R^1f_*\mathcal{O}_A \to \mathcal{O}_S$.\footnote{La page écrit
+$V(R^1f_*(\mathcal{O}_A)) = V(\underline{t}_{A\ })$, « où $A$ est le schéma
+abélien dual de $A$ », avec un blanc laissé pour le signe du dual, qui n'a pas
+été ajouté. Elle insiste sur la convention d'EGA : $\mathbb{V}(\mathcal{E})$ est
+contravariant en $\mathcal{E}$.} Elle est universelle parmi les extensions de
+$A$ par des groupes vectoriels, fonctorielle en $A$ et compatible au changement
+de base. Son algèbre de Lie est une extension
+\[
+  0 \longrightarrow (R^1f_*\mathcal{O}_A)^\vee = \omega_{A^\vee}
+  \longrightarrow \operatorname{Lie}E(A) \longrightarrow
+  (f_*\Omega^1_{A/S})^\vee = \operatorname{Lie}A \longrightarrow 0 ,
+\]
+\emph{duale} de la filtration de Hodge : $\operatorname{Lie}E(A)$ s'identifie
+au dual de $H^1_{\mathrm{DR}}(A/S)$. On a donc une construction de la suite de
+Hodge par des extensions de groupes.
+
+Les affirmations se précisent alors. La première : pour un prolongement $B$ de
+$A$ à $T$, le groupe $E(B)$ ne dépend, à isomorphisme canonique — et même
+unique — près, que de $A$ et de $S \to T$ ; on aurait un cristal en schémas en
+groupes lisses $\mathcal{E}(A/S)$ avec $\mathcal{E}(A/S)(T) \simeq E(B)$.\footnote{La
+page écrit $G(B/S)$ ; il faut lire $E(B/T)$, dans la notation de la page
+$G(B/T)$, comme à la ligne suivante.} La troisième : relever la filtration de
+Hodge à $\mathcal{M}(T)$, c'est relever le sous-groupe vectoriel canonique de
+$\mathcal{E}(A/S)(S)$ en un sous-groupe vectoriel de $\mathcal{E}(A/S)(T)$, et
+l'on retrouve $B$ comme quotient. C'est exactement la forme sous laquelle
+Mazur et Messing démontreront ces énoncés, sur les épaississements à
+puissances divisées nilpotentes.
+
+\emph{Remarque sur Manin.} La connexion canonique de $E(A)$ est apparue en
+cherchant à simplifier la construction par Manin de l'application
+$A(S) \to \Gamma(S, \mathcal{O}_S)$ associée à une équation de
+Picard--Fuchs.\footnote{L'« application de Manin », dans sa démonstration de la
+conjecture de Mordell sur les corps de fonctions (1963). La page écrit
+« Picart-Fuchs ».} Localement, toute section de $A$ se relève en une section
+de $E(A)$ ; sa dérivée par la connexion est une section de
+$\operatorname{Lie}E(A) \otimes \Omega^1_S$, définie modulo l'image de
+$\omega_{A^\vee}$ — l'ambiguïté du relèvement —, et c'est un cocycle pour la
+connexion de $\operatorname{Lie}E(A)$. Les équations de Picard--Fuchs servent
+à en tirer une section de $\mathcal{O}_S$ ; du moins en caractéristique nulle,
+où se place Manin.
+
+\pagerange{26}{26}
+\subsection*{Ce qui est vérifié (page 26)}
+
+Les résultats positifs que la lettre dit avoir vérifiés :
+
+a) \emph{En caractéristique nulle}, les affirmations 1 et 3, sous la forme
+précisée par $E(A)$, sont vraies.
+
+b) \emph{Sur une base quelconque}, $E(A)$ n'aurait pas d'automorphismes
+infinitésimaux ; deux $E(B)$, $E(B')$ isomorphes le seraient donc de façon
+unique, et l'hypothèse de 1 suffirait à produire un cristal en groupes, un
+cristal de modules, et des stratifications canoniques. Cet énoncé est vrai en
+caractéristique nulle et faux en caractéristique $p$, comme le dit une note au
+crayon dans la marge, « faux ».\footnote{Lecture de « faux » douteuse.
+Justification, qui n'est pas sur la page : les automorphismes infinitésimaux de
+$E(A)$ correspondent aux homomorphismes $E(A) \to \mathbf{G}_a$, et la
+suite exacte $0 \to \mathrm{Hom}(E(A), \mathbf{G}_a) \to \mathrm{Hom}(\omega_{A^\vee},
+\mathbf{G}_a) \to \mathrm{Ext}^1(A, \mathbf{G}_a)$ montre que ce groupe est nul
+lorsque les homomorphismes $\omega_{A^\vee} \to \mathbf{G}_a$ sont linéaires,
+c'est-à-dire en caractéristique nulle ; en caractéristique $p$, les
+homomorphismes $p$-polynomiaux forment un espace de dimension infinie, qui ne
+peut s'injecter dans $\mathrm{Ext}^1(A, \mathbf{G}_a)$, de dimension finie.}
+
+c) Les affirmations 1 à 3 sont vraies pour les relèvements \emph{d'ordre 1},
+du moins lorsque $T$ est un schéma de nombres duaux
+$D(\mathcal{J})$.\footnote{Une note au crayon, en biais, dit « à éclaircir,
+\ldots\ peut être faux » (mot central illisible, dernier mot douteux). L'énoncé
+au premier ordre est vrai : un idéal de carré nul porte les puissances
+divisées triviales, nilpotentes, et l'on est dans le cadre de
+Grothendieck--Messing.}
+
+\pagerange{26}{27}
+\subsection*{Le contre-exemple (pages 26 et 27)}
+
+\textbf{2.7.} « Arrivé à ce point de mes brillantes conjectures, je m'aperçois
+avec consternation qu'elles sont fausses telles quelles. » Soit $k$ un corps de
+caractéristique $p > 0$. \emph{Il n'est pas possible de munir, pour tout
+$k$-schéma $S$ de type fini de dimension $\leq 1$ et tout schéma elliptique $A$
+sur $S$, le module $H^1_{\mathrm{DR}}(A/S)$ d'une stratification relative à
+$k$, fonctorielle en $A$ et compatible aux changements de base.}\footnote{La
+page ajoute « avec $S_{\text{rég}}$ régulier ». Une note à l'encre dans la
+marge, entourée, porte « $\leq 0$ ! », le « 1 » étant barré d'un trait : la
+correction resserre l'énoncé aux schémas de dimension nulle, et l'argument
+suivant le permet, puisqu'il n'utilise que les voisinages infinitésimaux d'un
+point. Le premier mot de la note n'est pas lu.}
+
+L'ennui vient des courbes elliptiques de Hasse nul — les \emph{supersingulières}.
+Les deux fonctorialités postulées rendent le Frobenius
+$M^{(p)} \to M$, $M = H^1_{\mathrm{DR}}(A/S)$, compatible à la stratification.
+En un point $s$ où $A_s$ est supersingulière, le Frobenius de
+$H^1_{\mathrm{DR}}(A_s)$ est de carré nul ; un morphisme compatible à des
+stratifications ayant un rang localement constant, on en déduit, en grimpant
+sur les voisinages infinitésimaux de $s$, que la même propriété vaut aux points
+voisins — ce qui est faux, par exemple pour la famille modulaire, où les points
+supersinguliers sont isolés.
+
+\emph{Conséquence.} Dans le titre du chapitre et dans 2.2, il faut prendre
+partout des isocristaux pour garder une chance ; peut-être même la notion
+d'isocristal est-elle encore trop restrictive, et faudra-t-il, dans la
+description de 1.13, des stratifications en caractéristique nulle qui ne se
+prolongent pas à tout le schéma formel sur $W$ — question qu'« une analyse
+soigneuse du calcul-clef de Washnitzer--Monsky » devrait trancher.
+
+L'argument est juste, et il porte exactement sur ce qu'il vise : les cristaux
+\emph{sans} puissances divisées. Avec des puissances divisées, un cristal
+n'impose plus une stratification mais seulement une connexion (à
+$p$-courbure nilpotente), et un morphisme horizontal pour une connexion peut
+changer de rang en caractéristique $p$ ; l'argument tombe, et le $H^1$
+cristallin d'un schéma elliptique est bien un cristal, muni de son
+Frobenius.\footnote{Ce paragraphe est de la présente lecture. Le $H^1$
+cristallin d'un schéma abélien est un cristal à puissances divisées : c'est
+le cas de dimension 1 de la théorie de Mazur et Messing (1974), et le
+cristal de Dieudonné de son groupe $p$-divisible.}
+
+\pagerange{27}{29}
+\subsection*{Variétés abéliennes ordinaires (pages 27 à 29)}
+
+\textbf{2.8.} Pour quels schémas abéliens les énoncés 1 et 3 valent-ils,
+hors de la caractéristique nulle ? La lettre conjecture, pour $A$ variété
+abélienne sur un corps $k$ de caractéristique $p$, que l'indépendance de $E(B)$
+par rapport au relèvement $B$ sur tout anneau artinien de corps résiduel $k$
+vaut \emph{si et seulement si $A$ est ordinaire}, c'est-à-dire a le nombre
+maximum de points d'ordre $p$ sur une clôture algébrique de $k$. Le corps $k$
+n'a pas à être parfait, et le groupe $p$-divisible de $A$ ne se décompose donc
+pas nécessairement en étale et infinitésimal. On aurait alors, pour ces
+variétés, la description des relèvements par relèvement d'une filtration d'un
+module de Dieudonné, en accord avec la théorie de Serre des relèvements
+canoniques (et des modules) des variétés abéliennes ordinaires.\footnote{Une note
+au crayon, en biais et reliée à « si $A$ est une VA », dit : « faux, c'est
+jamais vrai en car $p>0$ ! » (« c'est jamais » douteux), et un long trait
+oblique au crayon traverse la fin de la page et la page suivante, comme pour
+annuler. Ni la lettre ni le crayon ne démontrent rien ici ; nous ne tranchons
+pas.}
+
+Sur une base quelconque à fibres ordinaires, l'énoncé analogue est faux, même
+pour les schémas elliptiques. Sur le schéma modulaire $S$, lisse sur
+$\mathbf{Z}_p$, des courbes elliptiques à structure de niveau, une
+stratification de $H^1_{\mathrm{DR}}$ relative à $\mathbf{Z}_p$ hors des
+points supersinguliers — en nombre fini dans la fibre spéciale — s'étendrait à
+tout $S$ « pour des raisons de pureté évidentes », serait compatible au
+Frobenius, et contredirait 2.7. Il n'est pas exclu qu'en restant en
+caractéristique $p$ l'énoncé vaille sur le lieu ordinaire, mais la
+stratification obtenue ne s'étendrait pas à la courbe modulaire entière, et
+il y aurait sur le lieu ordinaire une stratification naturelle en
+caractéristique $p$ et une autre en caractéristique nulle « sans qu'elles
+veuillent se recoller », ce qui « semble assez canularesque ».
+
+Ces considérations font ressortir « la nature "infinie" de la notion de
+stratification, par contraste avec celle de connexion, malgré les trompeuses
+apparences de la caractéristique nulle ». Sur le $H^1_{\mathrm{DR}}$ de la
+famille modulaire sur $\mathbf{Z}$, la stratification naturelle de la fibre
+générique ne s'étend à aucun $S_U$, $U$ ouvert non vide de
+$\operatorname{Spec}\mathbf{Z}$ — à la compatibilité au Frobenius près, qu'il
+faudrait vérifier. Et c'est « assez moral » : le module stratifié joue le rôle
+d'un faisceau $\ell$-adique, dont il partage la rigidité.
+
+Même sur le lieu ordinaire, une stratification canonique du $H^1_{\mathrm{DR}}$
+ne proviendrait pas d'un \emph{cristal} : elle se recollerait avec celle de la
+caractéristique nulle et s'étendrait au schéma modulaire entier, points
+supersinguliers compris, ce qui est absurde. Conclusion de la lettre : les
+isocristaux, et les modules stratifiés, peuvent servir à l'étude des familles
+de variétés abéliennes ; la notion de cristal elle-même « semble
+irrémédiablement trop fine », sauf sur une base réduite à un point, ou au prix
+de restrictions sérieuses qui figent la variation infinitésimale de $E(A)$ —
+point de vue proche de celui de Serre, qui impose l'espace tangent et l'action
+de la multiplication complexe. Cette conclusion vaut pour les cristaux de la
+lettre ; pour les cristaux à puissances divisées, c'est la théorie de
+Grothendieck--Messing qui la dément.
+
+\pagerange{30}{31}
+\section*{La lettre, chapitre 3 : remarques sur les groupes $p$-divisibles (pages 30 et 31)}
+
+\textbf{3.1.} La construction de 2.6 se paraphrase pour un groupe
+$p$-divisible $\Phi$ sur un schéma $S$ où $p$ est localement nilpotent. Les
+homomorphismes de $\Phi$ dans le groupe formel additif sont nuls (en
+particulier $\Phi$ n'a pas d'automorphismes infinitésimaux)\footnote{$\Phi$
+est $p$-divisible et le groupe additif est tué par une puissance de $p$ sur
+une telle base.} ; et le faisceau des $\mathrm{Ext}^1$ de $\Phi$ par le groupe
+additif est localement libre de rang $g^* = \dim\Phi^*$, canoniquement
+isomorphe à $\operatorname{Lie}(\Phi^*)$, où $\Phi^*$ est le groupe dual.\footnote{La
+lettre l'énonce « sauf erreur », comme suggéré par les résultats de Lubin et
+Tate sur les modules de groupes formels, et avoue ne pas avoir tiré au clair
+ce qu'il faut entendre par « le groupe formel associé à $\mathbf{G}_a$ ».
+L'énoncé est vrai, avec $\mathbf{G}_a$ lui-même (Messing, 1972).} D'où une
+extension vectorielle universelle $E(\Phi)$ de $\Phi$ par le groupe vectoriel
+$\omega_{\Phi^*}$, d'algèbre de Lie
+\[
+  (*) \qquad 0 \longrightarrow \omega_{\Phi^*} \longrightarrow
+  \operatorname{Lie}E(\Phi) \longrightarrow \operatorname{Lie}\Phi
+  \longrightarrow 0 ,
+\]
+fonctorielle en $\Phi$ et compatible au changement de base.
+
+La lettre estime que $E(\Phi)$ varie « moins que $\Phi$ » mais n'est pas
+indépendant des variations infinitésimales de $\Phi$ (sauf, probablement, au
+premier ordre), et ne provient d'un cristal que si $\Phi$ est extension d'un
+groupe ind-étale par un groupe torique, et $S$ réduit à un point. Cette
+réserve vaut pour les cristaux de la lettre. Sur les épaississements à
+puissances divisées nilpotentes, $E(\Phi)$ \emph{est} cristallin, pour tout
+$\Phi$ : c'est le théorème de Messing, et $\operatorname{Lie}E(\Phi)$ est la
+valeur du cristal de Dieudonné de $\Phi$. Dans le cas général, la lettre
+propose d'étudier les variations de $\Phi$ à $E(\Phi)$ fixé par un cristal en
+groupes.
+
+\textbf{3.2.} L'extension $(*)$ subsiste par passage à la limite sur le
+spectre d'un anneau noethérien $J$-adique séparé complet, par exemple un anneau
+de valuation discrète complet $A$ d'inégales caractéristiques, de corps
+résiduel $k$ parfait de caractéristique $p$. Soit $M$ le module de Dieudonné
+(sur $W = W(k)$, de rang $h = g + g^*$) du groupe $p$-divisible réduit
+$\Phi_k$.\footnote{La page écrit le rang « $g+g'$ » puis le type « $(g,g^*)$ » :
+c'est le même nombre. Elle subordonne l'énoncé au cas où « le groupe formel
+réduit a la structure triviale mentionnée plus haut dans 3.1 » ; cette
+condition est obscure et l'énoncé qu'on donne n'en a pas besoin.} Alors la
+donnée d'un relèvement de $\Phi_k$ en un groupe $p$-divisible sur $A$ équivaut
+à celle d'un relèvement, en une filtration de $M \otimes_W A$ de type
+$(g, g^*)$, de la filtration de $M \otimes_W k$ donnée par $(*)$ — \emph{lorsque
+l'idéal maximal de $A$ porte des puissances divisées topologiquement
+nilpotentes}, c'est-à-dire lorsque l'indice de ramification $e$ de $A$ est
+$< p - 1$ (par exemple $A = W(k)$, $p \geq 3$).\footnote{Hypothèse ajoutée.
+Sans elle, la valeur du cristal de Dieudonné sur $A$ n'est pas définie et
+l'énoncé tombe ; la classification des groupes $p$-divisibles sur un anneau
+très ramifié demande d'autres objets (modules de Breuil, de Kisin). Sous
+l'hypothèse, c'est le théorème de Grothendieck--Messing, et pour
+$A = W(k)$ la classification de J.-M.~Fontaine (\emph{Groupes $p$-divisibles
+sur les corps locaux}, 1977).}
+
+La lettre finit sur une question : \emph{« Il serait bien intéressant
+d'essayer de déterminer, en termes d'une telle donnée, quel est le module de
+Tate correspondant à la fibre générique de $\Phi$ ! »} — et sur une autre :
+quelle quantité d'information l'extension $(*)$, qui remplace ici le $H^1$ de
+De Rham, porte-t-elle pour des groupes plus généraux ? C'est la question que
+Grothendieck posera au congrès de Nice en 1970 sous le nom de problème de la
+« fonction mystérieuse », et à laquelle répond la théorie de Hodge $p$-adique
+de Fontaine (représentations cristallines).\footnote{La lettre s'arrête là, au
+milieu de la page 30 de sa pagination, sans formule finale ni signature.}
+
+\pagerange{32}{36}
+\section*{Réduction des courbes elliptiques et module de Tate $p$-adique (pages 32 à 36)}
+
+Sous une chemise titrée de sa main « Réduction des courbes elliptiques et
+$T_p(E)$ (cf.\ aussi livre de Serre "Abelian $l$-adic representations") »,
+quatre pages de notes rapides, dont une grande part de la prose de liaison est
+illisible ; on ne donne que ce que les formules et les mots lus
+permettent d'établir.\footnote{Le livre de Serre est de 1968 : ces notes sont
+au plus tôt de cette année-là. On les lit dans l'ordre 33, 34, 36, 35 : la page
+36 s'arrête sur « Je conjecture », et la page 35 commence par « que cet élément
+a une image non nulle dans $\mathbf{Z}_p$, donc que l'extension ne provient
+pas d'une extension de groupes $p$-divisibles sur $A$ », qui ne peut suivre que
+la discussion de la réduction multiplicative de la page 36 ; le cas c) de la
+page 36, qui utilise $T_p(\mathbf{G}_m) = \mathbf{Z}_p(1)$ et la théorie de
+Kummer, appartient d'ailleurs au cas 1º, de caractéristique nulle.}
+
+Soit $A$ un anneau de valuation discrète complet, de corps des fractions $K$
+et de corps résiduel $k$ de caractéristique $p > 0$, et $E_K$ une courbe
+elliptique sur $K$. On veut décrire $T_p(E_{\bar K})$ comme module galoisien.
+
+\textbf{1º) $K$ de caractéristique nulle} ; $T_p(E_{\bar K})$ est alors un
+$\mathbf{Z}_p$-module libre de rang 2.
+
+a) \emph{Bonne réduction ordinaire.} $E_K$ provient d'une courbe elliptique
+$E$ sur $A$ et $E_k$ est ordinaire. Alors $T_p(E_K)$ est canoniquement une
+extension
+\[
+  0 \longrightarrow L^\vee(1) \longrightarrow T_p(E_K) \longrightarrow L
+  \longrightarrow 0 ,
+\]
+où $L$ est de rang 1 (le module de Tate de la partie étale) et
+$L^\vee(1) = L^\vee \otimes T_p(\mathbf{G}_m)$ (celui de la partie
+multiplicative, par l'accouplement de Weil). La classe de l'extension est dans
+$H^1(K, L^{-2} \otimes T_p(\mathbf{G}_m))$, où $L^{-2} = (L^\vee)^{\otimes 2}$.
+Si le corps résiduel est séparablement clos et $L$ trivial, de valeur $L_0$ en
+$k$, la théorie de Kummer donne
+\[
+  H^1(K, \mathbf{Z}_p(1)) \otimes L_0^{-2} \simeq
+  \Bigl(\varprojlim_n K^*/K^{*p^n}\Bigr) \otimes L_0^{-2}
+  \simeq \mathrm{Hom}\bigl(L_0^{\otimes 2}, \widehat{K^*}\bigr) ,
+\]
+$\widehat{K^*}$ désignant le complété $p$-adique de $K^*$. La classe tombe
+dans le sous-groupe $\mathrm{Hom}(L_0^{\otimes 2}, U^1)$, où $U^1 = 1 + \mathfrak{m}_A$
+est le groupe des unités principales (« Einseinheiten ») : c'est que
+l'extension provient d'une extension de groupes $p$-divisibles sur $A$.\footnote{C'est
+le paramètre de Serre--Tate de la courbe ordinaire. La phrase qui suit, entre
+crochets, et deux notes en marge, dont l'une semble dire que l'extension peut
+être triviale, ne sont lues qu'en fragments.}
+
+b) \emph{Bonne réduction supersingulière.} Il conjecture que la représentation
+de $\pi_1(K)$ dans $T_p(E_{\bar K})$ est semi-simple, voire davantage sur la
+taille de son image.\footnote{Il écrit « $\tfrac12$-simple » pour semi-simple ;
+la fin de la phrase est illisible. La semi-simplicité est vraie : en réduction
+supersingulière, l'inertie agit irréductiblement sur les points de
+$p$-torsion (J.-P.~Serre, \emph{Propriétés galoisiennes des points d'ordre fini
+des courbes elliptiques}, 1972), donc $T_p \otimes \mathbf{Q}_p$ est
+irréductible.}
+
+a$'$+b$'$) \emph{Bonne réduction potentielle} : l'invariant $j$ est entier, et
+$E$ acquiert bonne réduction après extension finie de $K$. Les deux sous-cas,
+ordinaire et supersingulier après extension, se ramènent aux précédents ; si la
+conjecture de b) vaut, sa conclusion vaut aussi en b$'$). Il conjecture en
+outre, pour $j$ entier, que \emph{$E_K$ a bonne réduction si et seulement si
+son groupe $p$-divisible a bonne réduction}, c'est-à-dire s'étend en un groupe
+$p$-divisible sur $A$.\footnote{L'énoncé est vrai, et sans hypothèse sur $j$,
+pour les variétés abéliennes sur $K$ de caractéristique nulle : bonne réduction
+équivaut au caractère cristallin de $T_p \otimes \mathbf{Q}_p$ (R.~Coleman et
+A.~Iovita, 1999 ; C.~Breuil, 2000), qui équivaut à l'extension du groupe
+$p$-divisible (Breuil, Kisin).}
+
+c) \emph{L'invariant $j$ n'est pas entier.} Le modèle de Néron $E$ a alors
+une composante neutre $E^0_k$ forme de $\mathbf{G}_m$ ; quitte à faire une
+extension finie, $E[p^\nu]$ contient un sous-groupe canonique forme de
+$\mu_{p^\nu}$, et $T_p(E_K)$ un sous-module forme tordue de
+$T_p(\mathbf{G}_m)$. Si $k$ est séparablement clos, on a une extension
+\[
+  0 \longrightarrow \mathbf{Z}_p(1) \longrightarrow T_p(E_K) \longrightarrow
+  \mathbf{Z}_p \longrightarrow 0
+\]
+(le quotient étant $\mathbf{Z}_p$ car $\det T_p(E_K) \simeq \mathbf{Z}_p(1)$),
+déterminée par un élément canonique de $\widehat{K^*}$, lui-même extension de
+$\mathbf{Z}_p$ (venant de $K^*/A^*$) par $U^1$. Il conjecture que cet élément
+a une image \emph{non nulle} dans $\mathbf{Z}_p$, de sorte que l'extension ne
+provient pas d'une extension de groupes $p$-divisibles sur $A$, et demande :
+\emph{quel est cet élément de $\mathbf{Z}_p$ ? est-ce toujours un entier, un
+élément $> 0$ ?}\footnote{Les deux réponses sont oui. Par l'uniformisation de
+Tate, $E_K$ devient, après extension finie, $\mathbf{G}_m/q^{\mathbf{Z}}$ avec
+$v(q) = -v(j) > 0$, et l'élément de $\mathbf{Z}_p$ est l'entier $v(q)$. Les
+crochets de la page (« de façon canonique au signe près ») sont gardés dans le
+sens : l'identification est canonique au signe près.}
+
+\textbf{2º) $K$ de caractéristique $p$.} Il faut alors étudier $T_p(E_{K_s})$,
+qui n'a plus que le rang 0 ou 1, et que les seuls modules galoisiens ne
+décrivent plus. En bonne réduction ordinaire, $T_p(E_K)$ est encore une
+extension de $L_K$ par $L_K^\vee \otimes T_p(\mathbf{G}_m)$, donnée par un
+élément de $L^{-2} \otimes U^1$\ldots\ La note s'arrête là.\footnote{En
+caractéristique $p$, $T_p(\mathbf{G}_m)(K_s) = 0$, et la formule doit
+s'entendre pour les groupes $p$-divisibles plutôt que pour les points ; la
+page s'interrompt sur un « $\otimes$ ».}
+
+\pagerange{37}{38}
+\section*{Une feuille de Tate (pages 37 et 38)}
+
+Sous une chemise de sa main, « Gribouillis de Tate sur sa théorie », une feuille
+d'une autre main, en anglais, à l'encre très pâlie : vraisemblablement des notes
+de Tate. On y lit l'hypothèse « $L/K$ Galois », l'anneau des entiers $R_L$, le
+groupe $\mathcal{G} = \mathrm{Gal}(L/K)$, un théorème reliant
+$\widehat{L}^{\mathcal{G}} = \widehat{K}$ à la nullité de
+$H^1(\mathcal{G}, R_L)$, et des suites exactes. Ce n'est pas de Grothendieck,
+et le dossier n'y porte aucune intervention de sa main ; on ne la reprend
+pas.\footnote{Le sujet — invariants galoisiens du complété d'une extension et
+cohomologie galoisienne des entiers — est celui de la théorie de Tate des
+pages suivantes (J.~Tate, \emph{$p$-divisible groups}, conférence de Driebergen,
+1966, publiée en 1967).}
+
+\pagerange{39}{44}
+\section*{Questions de théorie de Tate--Hodge (pages 39 à 44)}
+
+Sous la chemise « Questions diverses en théorie de Tate--Hodge », trois pages
+écrites au dos d'un tapuscrit étranger au dossier. Le cadre : $K$ corps local
+de caractéristique nulle, de corps résiduel de caractéristique $p$,
+$\pi = \mathrm{Gal}(\bar K/K)$, et $\mathbf{C}$ le complété de $\bar K$, sur
+lequel $\pi$ agit ; $\mathbf{C}(i)$ est le tordu de Tate.\footnote{Les pages
+écrivent $\mathbf{C}[i]$ pour le tordu de Tate, et
+$\mathbf{Q}_\ell$, $T_\ell$ là où le contexte impose $\ell = p$ ; on écrit
+$\mathbf{C}(i)$ et $\mathbf{Q}_p$. Le crayon des archivistes numérote la
+chemise et la première page 50 et 51.}
+
+\textbf{Les questions (page 40).}
+\begin{itemize}
+\item[a)] Y a-t-il un isomorphisme entre cohomologie de De Rham et cohomologie
+de Hodge après extension des scalaires à $\mathbf{C}$, fonctoriel, multiplicatif
+et compatible aux filtrations, une fois choisi un générateur
+$\varepsilon$ de $T_p(\mathbf{C}^*) = \mathbf{Z}_p(1)$ ?\footnote{Lecture
+douteuse des premiers mots (« Théorème ») et de deux mots au-dessus de
+« filtrations ». La réponse moderne passe par l'anneau $B_{\mathrm{dR}}$ de
+Fontaine, où le choix de $\varepsilon$ fixe l'uniformisante $t$, et par le
+théorème de comparaison de G.~Faltings (1988--89).}
+\item[b)] Tout $\mathbf{Q}_p[\pi]$-module simple de dimension finie est-il
+contenu dans un $\mathbf{C}(i)$ ?\footnote{Lecture douteuse de toute la phrase
+et de la suivante. Telle quelle, la réponse est non : pour un caractère
+$\chi = \chi_{\mathrm{cycl}}^a$ avec $a \in \mathbf{Z}_p \setminus \mathbf{Z}$,
+le théorème de Tate ($H^0(\pi, \mathbf{C}(\psi)) = 0$ dès que $\psi$ est d'image
+infinie sur l'inertie) montre que $\mathbf{Q}_p(\chi)$ ne se plonge dans aucun
+$\mathbf{C}(i)$ ; la théorie de Sen (1980) dit quels modules se plongent.}
+\item[c)] Les $M = H^i(X_{\mathbf{C}}, \mathbf{Z}_p) \otimes \mathbf{Q}_p$
+satisfont-ils d'autres conditions que celles qui résultent de la conjecture de
+Tate ?
+\item[d)] \emph{Construire} les isomorphismes de Tate
+$H^{p,q}(X)_K \simeq H^q(X, \Omega^p_X)$.
+\item[e)] Quel lien avec les connexions canoniques ? f) Avec
+Washnitzer--Monsky ?
+\end{itemize}
+
+\textbf{Trois structures sur un module de Hodge--Tate (page 42).} Pour un
+groupe $p$-divisible sur $K$, on a sur $V = M \otimes_{\mathbf{Z}_p} \mathbf{C}$ :
+\begin{enumerate}
+\item une décomposition $V = V^{10} \oplus V^{01}$ en $\mathbf{C}$-espaces ;
+\item une action semi-linéaire de $\pi$ ;
+\item un réseau $M$ libre de type fini sur $\mathbf{Z}_p$.
+\end{enumerate}
+Relations : 1 se déduit de 2, par
+\[
+  V^{10} = V^\pi \otimes_K \mathbf{C}, \qquad
+  V^{01} = \bigl(V \otimes \mathbf{C}(1)\bigr)^\pi \otimes_K \mathbf{C}(-1)
+\]
+(« $2 \Rightarrow 1$ ») ;\footnote{C'est le théorème de Tate (1967) : l'action
+semi-linéaire de Galois détermine la décomposition de Hodge--Tate. Les indices
+et les tordus sont de lecture en partie douteuse ; une ligne biffée proposait
+une autre écriture.} 2 et 3 ensemble, c'est un réseau stable par $\pi$,
+c'est-à-dire le groupe $p$-divisible sur $K$ ; entre 3 et 1 : « ??? ». Le corps
+$K$ n'intervient que dans 2 ; 1 et 3 sont intrinsèques au groupe $p$-divisible
+sur $\mathbf{C}$. Il propose enfin de regarder \emph{le plus petit groupe
+algébrique $G$ d'automorphismes de $M \otimes \mathbf{Q}_p$ tel que
+$G_{\mathbf{C}}$ contienne les opérations $\operatorname{diag}(\lambda, \xi)$
+sur la décomposition $V^{10} \oplus V^{01}$}.\footnote{La matrice est de lecture
+douteuse. C'est l'analogue $p$-adique du groupe de Mumford--Tate ; que l'algèbre
+de Lie de l'image de l'inertie soit la plus petite $\mathbf{Q}_p$-algèbre de Lie
+algébrique dont l'extension à $\mathbf{C}$ contienne l'opérateur de
+Hodge--Tate est le théorème de S.~Sen (Annals of Math., 1973), conjecturé par
+Serre.}
+
+\textbf{La conjecture de Hodge--Tate (page 44).} Pour $X$ propre et lisse sur
+$K$, notant $H^i_B(X_{\mathbf{C}}, \mathbf{C}) =
+H^i_{\text{ét}}(X_{\bar K}, \mathbf{Q}_p) \otimes \mathbf{C}$ et, pour $p + q = i$,
+$H^{p,q}_B(X)_K = \bigl(H^i_B(X_{\mathbf{C}}, \mathbf{C})(p)\bigr)^\pi$ :
+
+\emph{Conjecture.} 1) On a une décomposition
+\[
+  \boxed{\;H^i_B(X_{\mathbf{C}}, \mathbf{C}) \simeq \bigoplus_{p+q=i}
+  H^{p,q}_B(X)_K \otimes_K \mathbf{C}(-p)\;}
+\]
+2) On a un isomorphisme canonique
+\[
+  \boxed{\;\rho^{pq} : H^{p,q}_B(X)_K \simeq H^q(X, \Omega^p_X)\;}
+\]
+3) Pour la classe $P_B(2i) \in H^{2i}(X_{\mathbf{C}}, \mathbf{Z}_p(i))^\pi
+\subset H^{i,i}_B(X)_K$ et la classe $P_{\mathrm{DR}}(2i) \in H^{i,i}(X)$, on
+veut $\rho^{ii}(P_B(2i)) = P_{\mathrm{DR}}(2i)$.\footnote{La page ne dit pas
+d'où viennent les classes $P(2i)$ : classes d'un cycle de codimension $i$, ou
+puissance $i$-ième d'une classe de polarisation. La décomposition 1)--2) est le
+théorème de Faltings (1988), conjecturé par Tate en 1967 ; la compatibilité aux
+classes de cycles est établie avec la comparaison cristalline et de De Rham
+(Faltings, Tsuji).}
+
+\pagerange{46}{48}
+\section*{La question d'isogénie de Barsotti (pages 46 à 50)}
+
+La chemise : « Question d'isogénéité de Barsotti ; impossibilité de plonger un
+groupe formel $p$-divisible dans une v.A.\ sur un $k$ donné (non alg.\ clos) ».
+
+\textbf{1) La question de Barsotti.} Soient $A$, $B$ deux variétés abéliennes
+sur $k$ algébriquement clos de caractéristique $p$, « hypersingulières »,
+c'est-à-dire sans point d'ordre $p$. Si leurs groupes formels sont isogènes,
+$A$ et $B$ sont-elles isogènes ? En dimension 1, c'est dans Deuring. Manin ignore
+la réponse en dimension 2, où les groupes formels sont isogènes à
+$G_{1,1} + G_{1,1}$ : la question est alors de savoir si une surface abélienne
+hypersingulière est isogène au carré d'une courbe elliptique
+supersingulière.\footnote{« Hypersingulière » est la lecture de la page ;
+« sans points d'ordre $p$ » (rang $p$ nul) équivaut à supersingulière en
+dimension $\leq 2$, non au-delà. Pour les variétés supersingulières, la
+réponse est oui : toute variété abélienne supersingulière est isogène à une
+puissance d'une courbe elliptique supersingulière (F.~Oort, \emph{Subvarieties
+of moduli spaces}, 1974, à partir du théorème de Tate sur les corps finis).
+La page note que Manin l'affirme en caractéristique 2.}
+
+Sans l'hypothèse hypersingulière, la réponse est négative en dimension 2, et la
+page le démontre. D'après Manin, les surfaces abéliennes polarisées de groupe
+formel $\widehat{\mathbf{G}}_m + G_{1,1}$ forment une sous-famille $N$ de
+dimension 2 de la famille modulaire $M_2$. Parmi elles, celles qui ne sont pas
+simples sont isogènes à un produit $E \times F$, $E$ ordinaire et $F$
+supersingulière ; sur un corps algébriquement clos elles sont même
+isomorphes à de tels produits, et ces produits forment une famille de dimension
+1 au plus, image de l'ouvert ordinaire de la droite modulaire par
+$E \mapsto E \times F$, $F$ parcourant un nombre fini de classes.\footnote{La
+page écrit « de dim 2 au plus » ; c'est 1 qu'il faut lire, ce que confirme
+l'argument lui-même (une courbe modulaire, un nombre fini de $F$). Elle dit
+aussi « les courbes isogènes à $E\times F$ » pour « les variétés ». Un
+passage barré de croix suit, lu en fragments.} D'où un ouvert non vide
+$U \subset N$ formé de variétés simples. Or les variétés isogènes à une
+variété simple $A$ de ce type forment une famille \emph{discrète} : si $A$ est
+définie sur $k_0$, toute $A'$ isogène l'est sur une extension finie de
+$k_0$.\footnote{Justification, qui n'est pas sur la page : les sous-groupes
+finis de $A[p^\infty] = \widehat{\mathbf{G}}_m \times G_{1,1} \times
+\mathbf{Q}_p/\mathbf{Z}_p$ d'un ordre donné sont en nombre fini, car la partie
+locale-locale $G_{1,1}$ n'a qu'un sous-groupe de chaque ordre, et il n'y a pas
+d'homomorphismes non nuls entre les trois parties.} Deux points de $U$ de degrés
+de transcendance différents sur $\mathbf{F}_p$ (0, 1 ou 2) donnent donc des
+variétés simples \emph{non isogènes} de même groupe formel
+$\widehat{\mathbf{G}}_m \times G_{1,1}$.
+
+\pagerange{49}{50}
+\subsection*{Un groupe formel qui ne se plonge dans aucune variété abélienne (pages 49 et 50)}
+
+\textbf{2)} Sur un corps $k$, même fini, un groupe formel — même une forme de
+$G_{1,1}$ — ne se réalise pas en général comme sous-groupe formel du groupe
+formel d'une variété abélienne définie sur $k$, même après extension finie de
+$k$. Soit $k$ fini à $q$ éléments et $E$ une courbe elliptique supersingulière
+sur $k$ dont tous les endomorphismes sont définis sur $k$, de groupe formel
+$G_0 = \widehat{E}$. Alors $\pi_1(k)$ agit trivialement sur $\mathrm{End}(E)$,
+ordre maximal d'une algèbre de quaternions sur $\mathbf{Q}$, et sur
+$\mathrm{End}(G_0) \simeq \mathrm{End}(E) \otimes \mathbf{Z}_p = \mathcal{A}$,
+ordre maximal d'une algèbre de quaternions sur $\mathbf{Q}_p$. Tordons $G_0$
+par une unité $\theta$ de $\mathcal{A}$ : le nouveau Frobenius est
+$\varphi' = \theta\varphi$. Si le tordu se plongeait dans le groupe formel
+d'une variété abélienne $A$ sur $k$, les valeurs propres de $\varphi'$ seraient,
+par Weil, des entiers algébriques de valeurs absolues $q^{1/2}$, et
+$\det\varphi' = \det\varphi \cdot \det\theta$ serait algébrique, donc
+$\det\theta$ aussi. Or il est facile de trouver une unité $\theta$ de
+$\mathcal{A}$ dont la norme réduite $\det\theta$ n'est pas algébrique.\footnote{La
+norme réduite $\mathcal{A}^* \to \mathbf{Z}_p^*$ est surjective, et
+$\mathbf{Z}_p^*$ contient des éléments transcendants ; une extension finie de
+$k$ remplace $\varphi'$ par une puissance, ce qui ne change rien. Un bloc de
+quatre lignes biffé, page 49, est lu en fragments. « $\det$ » est la norme
+réduite.}
+
+\pagerange{51}{53}
+\section*{Déformations d'extensions de groupes de Barsotti--Tate, et schémas modulaires (pages 51 à 56)}
+
+La chemise : « [Prolongements infinitésimaux d'extension de groupes de B.T.\ :]
+Conséquences pour structure infinitésimale des schémas modulaires ». La première
+page commence au milieu d'une phrase ; la feuille qui la précédait n'est pas
+dans le dossier à cette place.\footnote{Les pages 52 à 56 sont d'une écriture
+rapide et pâle ; une grande part de la prose de liaison est illisible. On
+restitue l'argument par ses formules, et on le dit là où la restitution est
+nôtre.}
+
+\textbf{Le point de départ (page 52).} Pour une extension $E$ d'un groupe de
+Barsotti--Tate $M$ par un autre $N$, sur les voisinages infinitésimaux
+$S^{(n)}$ de $S$ dans une base $R$, les morphismes classifiants
+$S^{(n)} \to G$ vers un groupe formel $G$, nuls sur $S^{(0)}$, se recollent en
+un morphisme $S^{(\infty)} \to G$ dont la donnée équivaut à celle de
+l'extension sur le voisinage infinitésimal de $S$ ; sa formation commute au
+changement de base. D'où l'idée de la lire dans une situation
+« \emph{modulaire} ».
+
+\textbf{Modules formels d'extensions (pages 52 et 53).} Soit
+$R = \operatorname{Spec}\Lambda$, $\Lambda$ local complet de caractéristique
+résiduelle $p$ (par exemple un anneau de Cohen), de corps résiduel $k$, et
+$M_0$, $N_0$ des groupes de Barsotti--Tate sur $k$, $M_0$ étale et $N_0$ de type
+multiplicatif.\footnote{« $M_0$ étale » est une hypothèse que la page ne
+formule pas mais qu'elle utilise, puisqu'elle écrit $T_p(M_0)$.} On considère
+la variété formelle modulaire $\mathcal{M}_\xi$ sur $\operatorname{Spf}\Lambda$
+des déformations d'une extension $\xi$ de $M_0$ par $N_0$. Alors :
+\begin{enumerate}
+\item pour l'extension triviale $\xi_0$, $\mathcal{M}_{\xi_0}$ est un groupe
+formel lisse, et même un \emph{tore formel} — donc déterminé par sa réduction —,
+de réduction $T_p(M_0)^\vee \otimes N_0$ ;
+\item $\mathcal{M}_\xi$ est un \emph{torseur} sous $\mathcal{M}_{\xi_0}$.
+\end{enumerate}
+Si l'on suppose seulement $N_0$ connexe, une extension $E_0$ détermine $M_0$,
+$N_0$ et la structure d'extension, et le morphisme naturel
+$X = \mathcal{M}_{E_0} \to \mathcal{M}_{N_0} = Y$ fait de $X$ un torseur sous
+$\mathcal{N}_Y \otimes T_p(E_0)^\vee_Y$ ; la structure de
+$\mathcal{M}_{E_0}$ est connue dès que l'est celle de
+$\mathcal{M}_{N_0}$.\footnote{Comme $N_0$ est connexe, les points de $E_0$ sur
+une clôture algébrique de $k$ sont ceux de $M_0$, et $T_p(E_0) = T_p(M_0)$. Pour
+$N_0$ de type multiplicatif, $Y$ est réduit à un point.}
+
+Pour $M = \mathbf{Q}_p/\mathbf{Z}_p$ et $N = \mu_{p^\infty}$, le tore de 1 est
+$\widehat{\mathbf{G}}_m$ : c'est la coordonnée $q$ de Serre--Tate.
+
+\pagerange{54}{56}
+\subsection*{Couples compatibles et variétés abéliennes polarisées (pages 54 à 56)}
+
+Soient des homomorphismes $u : M \to M'$ et $v : N \to N'$, et des extensions
+$\xi$ de $M$ par $N$ et $\xi'$ de $M'$ par $N'$, triviales sur $S_0$. Il existe
+un morphisme d'extensions compatible à $u$ et $v$ si et seulement si
+$v_*(\xi) = u^*(\xi')$ dans $\mathrm{Ext}^1(M, N')$. Or $v_*$ est
+« représenté » par l'homomorphisme de tores
+$\alpha : T_p(M)^\vee \otimes N \to T_p(M)^\vee \otimes N'$ défini par $v$, et
+$u^*$ par $\beta : T_p(M')^\vee \otimes N' \to T_p(M)^\vee \otimes N'$ défini par
+$u$. Les couples $(\xi, \xi')$ compatibles sont donc représentés,
+infinitésimalement, par le \emph{noyau} de
+\[
+  \alpha - \beta : G \times G' \longrightarrow H .
+\]
+Pour $N$, $N'$ de type multiplicatif, la variété formelle des modules est
+ainsi un groupe formel de type multiplicatif sur $\Lambda$, noyau d'un
+homomorphisme de tores formels.
+
+\emph{Application aux variétés abéliennes polarisées ordinaires.} Pour une
+variété abélienne ordinaire, le groupe $p$-divisible est extension d'un groupe
+étale par un groupe de type multiplicatif, et une polarisation fournit les
+homomorphismes $u$, $v$. Si $\Lambda$ est un corps de caractéristique $p$,
+l'anneau local du schéma modulaire des variétés abéliennes polarisées
+ordinaires (polarisation donnée, rigidification de Jacobi d'échelon donné) en
+un point est donc une \emph{intersection complète} — en particulier de
+Cohen--Macaulay et de Gorenstein —, \emph{localement irréductible}, de
+réduit lisse sur $k$. Comme la dimension de ces schémas modulaires est
+$\tfrac{g(g+1)}{2}$ en chaque point, on conclut : \emph{si la polarisation est
+de degré premier à $p$, le schéma modulaire des variétés abéliennes ordinaires
+est lisse en caractéristique $p$.}\footnote{Une note en marge, en travers, dit à
+peu près : « dimensionnalité ridicule, on le voit bien directement en
+car.~$p$ ! » (lecture douteuse). Plusieurs mots de l'argument sont illisibles ;
+la restitution est nôtre, et elle est conforme au résultat connu : pour $p$ ne
+divisant pas le degré, l'espace des déformations polarisées d'une variété
+ordinaire est le sous-tore des paramètres de Serre--Tate symétriques, de
+dimension $g(g+1)/2$ (N.~Katz, \emph{Serre--Tate local moduli}, 1981). La
+page insiste : il ne s'agit que de variétés ordinaires.}
+
+\pagerange{57}{59}
+\section*{Compléments sur les groupes de Witt (pages 58 et 59)}
+
+Sous ce titre, souligné de sa main, des énoncés en vue d'une théorie de
+Dieudonné des groupes unipotents par les vecteurs de Witt. Toute la page 59 est
+barrée de deux longs traits obliques : ses énoncés sont des brouillons retirés,
+qu'on rapporte comme tels.\footnote{Ces pages citent Demazure--Gabriel,
+\emph{Groupes algébriques} (1970), « II~§3 4.6 » et « V~§1 2.2 » : elles sont au
+plus tôt de 1970, ce qui s'accorde avec la datation du catalogue. La page 57
+est blanche.}
+
+\textbf{Lemme 1.} Soit $S = \operatorname{Spec}A$ de caractéristique $p$. Le
+faisceau $\underline{\mathrm{Ext}}^1(\mathbf{G}_a, \mathbf{G}_a)$ est le
+$A$-module (à gauche) libre de base les $\mathbf{F}^i e$, c'est-à-dire le
+$A[\mathbf{F}]$-module libre de base $e$, où $e$ est la classe de $W_2$ comme
+extension de $\mathbf{G}_a$ par $\mathbf{G}_a$. \emph{Démonstration} : on se
+ramène à $A = \mathbf{F}_p$, et c'est dans Demazure--Gabriel.
+
+\textbf{Lemme 2.} Soit $H$ un sous-groupe de $\mathbf{G}_a$ tel que
+$\mathbf{G}_a/H$ soit localement isomorphe à $\mathbf{G}_a$.\footnote{L'énoncé
+de l'hypothèse est en partie biffé et illisible ; on garde la condition lisible.
+Exemples : $H = \alpha_{p^n}$, ou $H = \mathbf{Z}/p$, noyau de $x \mapsto x^p -
+x$.} Alors :
+\begin{itemize}
+\item[a)] $\underline{\mathrm{Ext}}^1(H, W_n) \to \underline{\mathrm{Ext}}^1(H, W_1)$
+est bijectif ; a$_1$) $\mathrm{Ext}^1(H, W_{n-1}) \to \mathrm{Ext}^1(H, W_n)$
+est nul, i.e.\ $\mathrm{Hom}(H, \mathbf{G}_a) \to \mathrm{Ext}^1(H, W_{n-1})$ est
+surjectif ; a$_2$) $\mathrm{Ext}^1(H, W_1) \to \mathrm{Ext}^1(H, W_{n-1})$ est
+nul ;
+\item[b)] $\mathrm{Ext}^1(\mathbf{G}_a, W_n) \to \mathrm{Ext}^1(H, W_n)$ est
+surjectif ;
+\item[c)] $\underline{\mathrm{Ext}}^1(\mathbf{G}_a, W_n)$ est un
+$A[\mathbf{F}]$-module à droite engendré par la classe de $W_{n+1}$.
+\end{itemize}
+\emph{Démonstration} : pour $n = 1$, a) est trivial, b) résulte de
+$\mathrm{Ext}^2(\mathbf{G}_a/H, W_1) = 0$, conséquence par dévissage de
+$\mathrm{Ext}^2(\mathbf{G}_a, \mathbf{G}_a) = 0$, et c) est le lemme 1 ; en
+général, par récurrence sur $n$, comme dans Demazure--Gabriel.\footnote{La
+flèche de a) porte « $R^{n-1}$ » (restriction) ; une ligne biffée et un petit
+schéma entre a) et a$_1$) sont de lecture douteuse.}
+
+\textbf{Corollaire 3} (page barrée). Pour $H$ comme ci-dessus,
+$\underline{\mathrm{Ext}}^1(H, \underline{W}) = 0$, où
+$\underline{W} = \varinjlim W_n$. La question en marge — a-t-on
+$\mathrm{Ext}^1(H, \underline{W}) = 0$ globalement, i.e.\
+$H^1(S, \underline{\mathrm{Hom}}(H, \underline{W})) = 0$ ? — reçoit la réponse :
+\emph{non}, déjà pour $H = \alpha_p$ si $S$ n'est pas parfait.
+
+\textbf{Proposition 4} (page barrée). Soit $G$ un groupe algébrique fini (par
+exemple sur un corps parfait) annulé par $V^n$. Alors
+$\underline{\mathrm{Hom}}_{\mathrm{gr}}(G, W_n)$ est un schéma en
+groupes,\footnote{La suite de a) — une description de ce schéma en groupes en
+fonction du rang $p^r$ de $G$ — est en partie biffée et de lecture douteuse.} et
+$\underline{\mathrm{Ext}}^1_{\mathrm{gr}}(G, \underline{W}) = 0$. Le b) vient du
+corollaire 3 par dévissage en $\alpha_p$ ; le a) par récurrence sur la longueur
+d'une suite de composition $0 \to G' \to G \to \alpha_p \to 0$, qui donne
+\[
+  0 \to \underline{\mathrm{Hom}}(\alpha_p, \underline{W}) \to
+  \underline{\mathrm{Hom}}(G, \underline{W}) \to
+  \underline{\mathrm{Hom}}(G', \underline{W}) \to 0 ,
+\]
+avec $\underline{\mathrm{Hom}}(\alpha_p, W_n) \simeq \mathbf{G}_a$. « On gagne ! »
+
+\textbf{5} (page barrée). Posons $\mathbb{D}(G) = \underline{\mathrm{Hom}}(G,
+\underline{W})$. C'est un module sur les vecteurs de Witt, muni de $\mathbf{F}$
+et $V$ vérifiant les relations habituelles
+\[
+  \mathbf{F}\lambda = \lambda^{\sigma}\mathbf{F}, \qquad
+  \lambda V = V\lambda^{\sigma}, \qquad
+  \mathbf{F}V = V\mathbf{F} = p ,
+\]
+où $\lambda^\sigma$ est le Frobenius de $\lambda$ (la page écrit
+$\lambda^{(p)}$ et $\lambda^p$). C'est le module de Dieudonné contravariant à
+la Demazure--Gabriel.
+
+\pagerange{60}{60}
+\section*{Groupes finis sur une base de caractéristique $p$ (pages 60 à 65)}
+
+\subsection*{Groupes finis étales (page 60)}
+
+Soit $G$ un groupe fini étale annulé par $p^n$ sur $S$ de caractéristique $p$.
+Pour tout épaississement $S'$ de $S$, $G$ s'étend de façon unique en un groupe
+fini étale $G'$ sur $S'$, encore tué par $p^n$. Les
+$G' \otimes_{\mathbf{Z}/p^n} \mathcal{O}_{S'}$ forment un cristal
+$\mathbb{D}_*(G)$, et le Frobenius relatif $G \to G^{(p)}$, ici un
+isomorphisme, donne un isomorphisme $F_* : \mathbb{D}_*(G) \to
+\mathbb{D}_*(G)^{(p)}$. Par dualité, avec le dual étale
+$\check G = \underline{\mathrm{Hom}}_{\mathrm{gr}}(G, (\mathbf{Q}_p/\mathbf{Z}_p)_S)$,
+on pose $\mathbb{D}^*(G) = \mathbb{D}_*(\check G)$ : c'est un foncteur
+contravariant, muni d'un isomorphisme $F^* : \mathbb{D}^*(G)^{(p)} \to
+\mathbb{D}^*(G)$, et $V^*$ est déterminé par $F^*V^* = p$.
+
+\emph{Cas où $G$ est plat sur $\Lambda_n = \mathbf{Z}/p^n$} (groupe de
+Barsotti--Tate tronqué d'échelon $n$, étale). $\mathbb{D}^*(G)$ est un cristal
+de $\Lambda_n$-modules localement libres de type fini, à $F$ isomorphisme (d'où
+$V$), et l'on a une \emph{anti-équivalence} entre ces $G$ et ces
+$F$-cristaux.\footnote{Une note en marge : « vérifier » (lecture douteuse). La
+page écrit « équivalence » ; le foncteur étant contravariant, c'est une
+anti-équivalence. Ce sont les $F$-cristaux « à racine unité » ; l'énoncé, pour
+les systèmes locaux étales de $\mathbf{Z}/p^n$-modules, est la proposition 4.1.1
+de N.~Katz, \emph{$p$-adic properties of modular schemes and modular forms}
+(1973).} \emph{Cas général} : anti-équivalence entre groupes finis étales
+$p$-primaires et $F$-$V$-cristaux localement (pour la topologie étale) sommes
+de cristaux du type précédent. Il en résulte
+$G(S) \simeq \mathrm{Hom}_{\mathrm{gr}}(\Lambda_{n,S}, G) \simeq
+\mathrm{Hom}_{F\text{-}V\text{-cris}}(\mathcal{M}, \mathcal{O}_{S_n,\mathrm{cris}})$,
+la formule s'interrompant au bord de la feuille.
+
+\pagerange{61}{62}
+\subsection*{Le triangle de dualité, cas étale et cas multiplicatif (pages 61 et 62)}
+
+Les pages 61 et 62 poursuivent un argument commencé ailleurs : elles utilisent,
+pour un groupe de Barsotti--Tate tronqué $G$, un « triangle exact de dualité »
+qui relie le complexe co-Lie $\ell_G$ de $G$, la valeur $\Delta(G)$ du cristal
+de Dieudonné sur $S$ (modulo $p$), et le dual décalé $\check\ell_{G^*}[1]$ du
+complexe co-Lie du dual de Cartier $G^*$ :
+\[
+  \ell_G \longrightarrow \Delta(G) \longrightarrow \check\ell_{G^*}[1]
+  \xrightarrow{\;+1\;} .
+\]
+C'est la forme dérivée de la filtration de Hodge
+$0 \to \omega_G \to \mathbb{D}(G)_S \to \operatorname{Lie}(G^*) \to 0$.\footnote{Le
+triangle n'est pas défini dans le dossier ; on le reconstitue d'après ses deux
+cas particuliers. La théorie en est dans A.~Grothendieck, \emph{Groupes de
+Barsotti--Tate et cristaux de Dieudonné} (Montréal, 1974), et L.~Illusie,
+\emph{Déformations de groupes de Barsotti--Tate, d'après A.~Grothendieck},
+Astérisque 127 (1985). La page le dessine en triangle, avec un signe
+d'isomorphisme sur la flèche montante.}
+
+\emph{$G$ étale.} Alors $\ell_G = 0$ et le triangle se réduit à un
+isomorphisme $\Delta(G) \simeq \check\ell_{G^*}[1]$ : il ne donne aucune
+structure en sus du cristal. On a
+\[
+  \check\ell_{G^*}[1] \simeq \Delta(G) \simeq \varepsilon^*(\mathcal{M}/p)
+  = \mathbb{R}\underline{\mathrm{Hom}}_{\mathbf{Z}}(G, \mathcal{O}_S)
+  \simeq \check G \overset{\mathbb{L}}{\otimes}_{\mathbf{Z}} \mathcal{O}_S
+  \simeq (\check G \overset{\mathbb{L}}{\otimes}_{\mathbf{Z}} \mathbf{F}_p)
+  \otimes_{\mathbf{F}_p} \mathcal{O}_S .
+\]
+
+\emph{$G$ de type multiplicatif} (annulé par une puissance de $p$). Il est
+défini par son dual de Cartier $G^*$, étale, auquel s'applique ce qui
+précède : $\mathbb{D}^*(G) = \Theta_*(G^*)$, c'est-à-dire
+$\mathbb{D}^*(G)_{S'} = G^*_{S'} \otimes_{\mathbf{Z}_p} \mathcal{O}_{S'}$, où
+$G^*_{S'}$ est le groupe étale sur $S'$ prolongeant $G^*$. Ici
+$V : \mathbb{D}^*(G) \to \mathbb{D}^*(G^{(p)}) = \mathbb{D}^*(G)^{(p)}$ est un
+isomorphisme, image par $\Theta_*$ du Frobenius de $G^*$, et $F$ est déterminé
+par $V$. D'où des équivalences
+\begin{quote}
+groupes de Barsotti--Tate tronqués d'échelon $n$ de type multiplicatif
+$\;\approx\;$ cristaux localement libres de type fini sur $S/\Lambda_n$ à $V$
+isomorphisme (et $F$ nilpotent),
+\end{quote}
+et des équivalences analogues pour les groupes de type multiplicatif annulés
+par une puissance de $p$.\footnote{« $\Lambda_n$ » et « nilpotent » sont de
+lecture douteuse ; $F = pV^{-1}$ est bien nilpotent sur des cristaux de
+$\Lambda_n$-modules.} Le triangle se réduit cette fois, puisque
+$\check\ell_{G^*}[1] = 0$, à un isomorphisme $\ell_G \simeq \Delta(G)$, avec
+$\ell_G \simeq G^* \overset{\mathbb{L}}{\otimes}_{\mathbf{Z}} \mathcal{O}_S
+\simeq (G^* \overset{\mathbb{L}}{\otimes}_{\mathbf{Z}} \mathbf{F}_p)
+\otimes_{\mathbf{F}_p} \mathcal{O}_S$.
+
+\emph{Homomorphismes entre $p$-groupes étales et groupes de type
+multiplicatif.} a) Un homomorphisme d'un groupe $G$ de type multiplicatif dans
+un groupe étale $G'$ est nul ; et tout homomorphisme de $F$-$V$-cristaux (ou de
+$F$-cristaux, ou de $V$-cristaux) de $\mathcal{M}' = \mathbb{D}^*(G')$ dans
+$\mathcal{M} = \mathbb{D}^*(G)$ est nul : en écrivant la commutation à $F^n$,
+où $F^n_{\mathcal{M}'}$ est un isomorphisme et $F^n_{\mathcal{M}}$ est nul pour
+$n$ grand, on obtient le résultat pour les $F$-homomorphismes, et de même
+pour les $V$-homomorphismes, les rôles étant échangés. b) Les homomorphismes
+d'un groupe étale dans un groupe de type multiplicatif : le titre est posé, la
+suite n'est pas écrite.\footnote{La page 63 ne porte que le transparent de la
+page 64.}
+
+\pagerange{64}{65}
+\subsection*{Groupes étales et $F$-modules à racine unité (pages 64 et 65)}
+
+Soit $S$ de caractéristique $p$, $\mathcal{C}$ la catégorie des schémas en
+groupes finis étales $E$ sur $S$ annulés par $p$ — c'est-à-dire des faisceaux
+étales de $\mathbf{F}_p$-espaces vectoriels localement libres de type fini —,
+et $\mathcal{C}'$ celle des $\mathcal{O}_S$-modules localement libres $M$ munis
+d'un isomorphisme $F_M : M^{(p)} \xrightarrow{\sim} M$. On a le foncteur
+\[
+  \varphi : \mathcal{C} \longrightarrow \mathcal{C}', \qquad
+  E \longmapsto \bigl(E \otimes_{\mathbf{F}_p} \mathcal{O}_S,\;
+  F_E \otimes_{\mathbf{F}_p} \mathcal{O}_S\bigr),
+\]
+le Frobenius relatif $F_{E/S}$ étant un isomorphisme de
+$E \otimes \mathcal{O}_S$ sur $E^{(p)} \otimes \mathcal{O}_S \simeq
+(E \otimes \mathcal{O}_S)^{(p)}$.
+
+\textbf{Proposition.} \emph{Le foncteur $\varphi$ est une équivalence de
+catégories.}
+
+a) \emph{Pleine fidélité.} Par passage aux $\underline{\mathrm{Hom}}$, il
+s'agit de voir que
+$\Gamma(S, E) \xrightarrow{\sim} \{x \in \Gamma(S, E \otimes \mathcal{O}_S) \mid
+F(x^{(p)}) = x\}$. Par descente on se ramène à $E$ constant, puis à
+$E = \mathbf{F}_{p,S}$, et l'énoncé est l'exactitude de la suite
+d'Artin--Schreier
+\[
+  0 \longrightarrow (\mathbf{Z}/p)_S \longrightarrow \mathbf{G}_{a,S}
+  \xrightarrow{\;x \mapsto x^p - x\;} \mathbf{G}_{a,S} ,
+\]
+qu'il suffit de vérifier sur $\mathbf{F}_p$.
+
+b) \emph{Essentielle surjectivité.} Soit $(M, F)$ ; il suffit de voir qu'il est
+localement de la forme voulue. L'application
+$\psi : M \to M$, $\psi(x) = F_M(x^{(p)}) - x$, est un épimorphisme étale de
+schémas en groupes — sa différentielle est $-\mathrm{id}$ —, donc son noyau est
+un schéma en groupes étale $E$ sur $S$. Pour qu'il soit fini, il suffit que son
+$\mathbf{F}_p$-rang soit localement constant, égal au rang de $M$ ; et pour que
+$E \otimes \mathcal{O}_S \to M$ soit un isomorphisme, il suffit de le voir fibre
+par fibre géométrique. On est ramené au
+
+\textbf{Lemme.} \emph{Soit $M$ un espace vectoriel de dimension finie sur un
+corps $k$ séparablement clos de caractéristique $p$, muni d'un isomorphisme
+$F_M : M^{(p)} \xrightarrow{\sim} M$, et
+$E = \{x \in M \mid F(x^{(p)}) = x\}$. Alors
+$E \otimes_{\mathbf{F}_p} k \xrightarrow{\sim} M$.}\footnote{La page écrit
+d'abord « alg.\ clos », corrigé de sa main en « sép.\ clos », qui suffit : les
+équations de $E$ sont séparables. Le lemme n'est pas démontré dans le
+dossier ; c'est un cas du théorème de Lang (1956), et l'ensemble de la
+proposition est la proposition 4.1.1 de Katz (1973) déjà citée, au niveau
+$n = 1$.}
+
+\emph{La version de Witt.} Les notes amorcent ensuite la même équivalence au
+niveau $p^n$, avec les vecteurs de Witt : $\mathcal{C}$, les schémas en
+$p$-groupes finis étales sur $S$ (faisceaux localement constants de $p$-groupes
+finis) ; $\mathcal{C}'$, les faisceaux de $W_S$-modules (pour la topologie de
+Zariski — « Zar ou fppf, c'est kif-kif », dit la marge) localement isomorphes à
+une somme de $W_{n,S}$, munis d'un isomorphisme $F_M : M^{(p)} \xrightarrow{\sim}
+M$ ; $\mathcal{C}''$, les schémas en $W_S$-modules lisses. Les foncteurs sont
+$\varphi(E) = E \otimes_{\mathbf{Z}_p} W_S$ avec le $F$ évident, vers
+$\mathcal{C}'$ ; $\psi(E) = E \otimes_{\mathbf{Z}_p} W_S$, vers $\mathcal{C}''$ ;
+et une équivalence $i : \mathcal{C}' \to \mathcal{C}''$, qui associe à $M$ le
+schéma représentant le faisceau\ldots\ La note s'arrête là, le reste de la page
+est vide ; le triangle $\psi = i \circ \varphi$ qu'elle dessine est
+annoncé, non démontré.\footnote{L'exposant de $W_S$ dans la définition de
+$\mathcal{C}''$, lu « fl » (topologie plate), est douteux. La page 66 est une
+feuille blanche à en-tête.}
+
+\end{document}
