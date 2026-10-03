@@ -1,0 +1,890 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 63, pages 1-100.
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried moves into a
+% footnote. It is held to being mathematically correct as it stands: where the
+% page is loose or mistaken, the true statement is what appears here and the
+% footnote says what the page has. In any dispute of substance the
+% transcription governs: whoever cites Grothendieck must cite batch-01.fr.tex
+% to batch-05.fr.tex.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-03 — first pass, unchecked against
+% the pages by a human. Not measured against the Opus 5 reference reading of
+% folder 115. The folder was read whole — five batches, pages 1-100 — before
+% any of this was written, and it is written as ONE file for the shelfmark.
+%
+% What the folder is. A « formulaire »: most of its hundred pages are other
+% people's texts, which the transcriptions do not re-set and neither does this
+% reading — J. Tate's letter to Cassels (pp. 2-13), P. Deligne's typescript
+% « Courbes elliptiques : formulaire d'après J. Tate » (pp. 15-33), five older
+% leaves of Tate (pp. 35-39), two typescripts of A. O. L. Atkin (pp. 40-63), a
+% typed list of the CM curves with rational j (pp. 79-80), an anonymous
+% bibliography and a « traduction libre d'un manuscrit inédit de Tate »
+% (pp. 82-93). They are described, not restated. His own mathematics is in
+% three places: the pencilled questions on Deligne's typescript (pp. 16-33,
+% attribution uncertain, as the transcriptions say), seven leaves on the
+% periods and the two splittings of H^1_dR (pp. 65-76), and five pages on the
+% modular stack near j = 0, 12^3 and on level 3 (pp. 95-99, two of them a
+% heavily struck palimpsest).
+%
+% NOTATION fixed for the whole folder (stated in the spine section):
+%   E an elliptic curve, L = \underline{\omega} its line of invariant
+%     differentials (his underlined omega), omega a basis of L;
+%   V = H^1_dR(E/C), with 0 -> L -> V -> L^{-1} -> 0;
+%   eta = x dx/2y (his eta), alpha, beta the scalars of p. 66
+%     (eta + alpha omega = beta omega-bar);
+%   A in L-bar^{-1} (x) L and B in (L-bar L)^{-1}: the maps of pp. 72-76,
+%     which he ALSO calls alpha and beta — renamed here, footnoted;
+%   varpi = alpha omega^{(x)2} the canonical section of p. 66 (his pi, renamed
+%     because pi is Deligne's invariant differential and the number pi);
+%   Lambda = Z omega_1 + Z omega_2, tau = omega_2/omega_1, Im tau > 0;
+%   G_2(tau) = sum_n sum'_m (m + n tau)^{-2}, G_2^*(tau) = G_2(tau) - pi/Im tau;
+%   M the « site modulaire » of pp. 31 and 95-99, read as the stack of
+%     Weierstrass curves without additive fibres (compactified M_{1,1}), so
+%     that M^infty = div(Delta) makes sense; M' = V(c_4), M'' = V(c_6);
+%   M_3 the level-3 moduli (full level 3 structure), G = GL(2, F_3),
+%     G' = SL(2, F_3), B, B' the Borel subgroups;
+%   j is the USUAL invariant c_4^3/Delta throughout (j = 12^3 for the curve
+%     with four automorphisms) — not the j = 1 - J of folder 62, pp. 18-53.
+%
+% Substantive departures from the pages, each footnoted where it occurs:
+%   - p. 65: the series for y runs over a != 0 (the page's sum has no prime);
+%   - p. 68: the sum in eta_2 excludes a = omega_2 (page: a != omega_1);
+%   - p. 70: the factor 3 of -3(|omega_1|^2 - |omega_2|^2)/(omega_1 omega_2)
+%     is lost from the third line on; the closed form alpha =
+%     omega_1^{-2} G_2^*(tau), obtained here from Legendre's relation, is ours
+%     and replaces the unfinished series;
+%   - p. 74/76: « 4 rho sigma = 1 - alpha alpha-bar » has the wrong sign: the
+%     identity is 4 rho sigma = A A-bar - 1 (with eta normalised by
+%     int omega ^ eta = 1); sigma has no sign, and « 0 <= alpha alpha-bar <= 1 »
+%     is false (A = 0 at tau = i, |A| -> infinity as Im tau -> infinity);
+%   - p. 99: the 2-Sylow of SL(2, F_3) is of ORDER 8 (index 3), not « d'indice
+%     8 »;
+%   - p. 79 (pencil): « les d sont premiers » holds for d > 1, not for d = 1.
+%
+% Announced and never established: the expression of (arg A)^6 « en fonction
+% de j » (p. 76) — answered here in a footnote, not by the page; the answers to
+% the questions of p. 66 and p. 33; the end of the sentence « Donc les
+% quatre ... » (p. 97), which p. 99 resumes; the structure of the complete
+% local ring at the supersingular points and the equations of c_4, c_6 there
+% (p. 98, « Question »); which of the two surjections G' -> F_4^* occurs
+% (p. 99, « Il faudrait encore déterminer lequel c'est »).
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{63}
+\pages{1}{100}
+\dating{[à partir de 1964-vers 1970]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Formulaire courbes elliptiques : notes et copies de notes manuscrites (s.d.), tapuscrit (s.d.), copies d'articles (s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Ce dossier est un classeur de travail sur les courbes elliptiques --- les
+courbes d'équation $y^2 = x^3 + ax + b$, qui sont aussi des groupes. Il
+s'appelle « formulaire », et c'en est un : la plus grande partie des cent pages
+n'est pas de Grothendieck. On y trouve, copiés ou dactylographiés, les tables
+de John Tate (comment écrire l'équation, comment la changer de coordonnées,
+comment reconnaître la « mauvaise réduction » d'une courbe modulo un nombre
+premier), leur reprise par Pierre Deligne au-dessus d'une base quelconque,
+deux articles d'Oliver Atkin sur des congruences entre coefficients de formes
+modulaires découvertes à l'ordinateur, une liste des courbes à multiplication
+complexe et une bibliographie. C'est la bibliothèque de quelqu'un qui se met
+à un sujet.
+
+Ce qui est de sa main tient en trois endroits, et c'est ce que cette lecture
+restitue en entier.
+
+D'abord, des questions au crayon dans les marges du texte de Deligne :
+« pourquoi ? », « structure ? », et au bas de la dernière page cinq lignes qui
+sont un programme --- l'invariant de Hasse, les formes modulaires sur un corps
+quelconque, le relèvement canonique de Serre, la loi de groupe formel. C'est
+une manière de lire : on lit un formulaire en lui posant des questions.
+
+Ensuite, sept feuillets sur les \emph{périodes}. Une courbe elliptique
+complexe est un tore $\mathbf{C}/\Lambda$, et sur un tore il y a deux façons de
+compléter la différentielle $dz$ en une base des « formes à intégrer ». L'une
+est algébrique : elle vient de l'équation, c'est $x\,dx/2y$. L'autre est
+géométrique : c'est la conjuguée $d\bar z$. Une image : sur une feuille de
+papier quadrillé, on peut choisir pour second axe celui que dessine la règle de
+l'atelier, ou celui qui est perpendiculaire au premier ; ils diffèrent d'un
+cisaillement, et ce cisaillement est un nombre. Les feuillets calculent ce
+nombre $\alpha$, constatent qu'il ne dépend de rien d'arbitraire une fois
+qu'on l'habille comme il faut, et demandent ce qu'il est. On sait aujourd'hui
+le dire : c'est la série d'Eisenstein de poids deux \emph{corrigée} pour
+devenir invariante, $G_2^*(\tau) = G_2(\tau) - \pi/\mathrm{Im}\,\tau$, qui n'est
+plus holomorphe. Le calcul de la page est exact là où il s'arrête ; la
+conclusion qu'il en tire ensuite sur la taille de $\alpha$ ne l'est pas, et
+cette lecture dit pourquoi.
+
+Enfin, cinq pages sur l'« espace » de toutes les courbes elliptiques à la fois
+--- le \emph{site modulaire}, qu'on appelle aujourd'hui champ des modules. Deux
+points y sont singuliers parce que leurs courbes ont plus de symétries que les
+autres : $j=0$ et $j=12^3$. Au-dessus des nombres premiers $2$ et $3$, ces deux
+points se confondent et les symétries deviennent $24$ ou $12$. Les pages
+décrivent les deux lieux spéciaux, comptent les courbes qui y vivent sur
+$\mathbf{Z}[\tfrac16]$ ($72$ et $32$), disent où ils cessent d'être lisses, puis
+regardent ce qu'ils deviennent quand on marque les points d'ordre $3$ : quatre
+branches qui se rejoignent toutes en un seul point au-dessus de $2$, et dont
+l'argument montre qu'elles y ont la même tangente.
+
+Les noms à chercher ensuite : algorithme de Tate, modèle de Néron, formes
+modulaires entières de Deligne, décomposition de Hodge et quasi-périodes,
+série d'Eisenstein non holomorphe, champ des modules $\mathcal{M}_{1,1}$,
+invariant de Hasse, anneau de déformation universel, structures de niveau.
+
+\keywords{Tate's algorithm, Kodaira symbols, minimal Weierstrass model, Néron model, integral modular forms, Atkin's congruences, p-adic Hecke operators, Hodge decomposition, de Rham cohomology of elliptic curves, quasi-periods, Legendre relation, non-holomorphic Eisenstein series, almost holomorphic modular forms, complex multiplication, class number one problem, moduli stack of elliptic curves, Hasse invariant, supersingular elliptic curves, universal deformation ring, level-3 structure, Picard group of the moduli stack}
+\end{resume}
+
+\pagerange{1}{100}
+\section*{Le fil du dossier, et ses conventions}
+
+Aucune page n'est numérotée par lui ; l'ordre est celui des feuillets, et il
+n'est pas celui d'une argumentation. Le dossier se lit comme une pile.
+
+\begin{enumerate}
+\item \emph{Pages 2 à 13} --- copie de la lettre de J.~Tate à Cassels
+(l'« algorithme de Tate »). Texte d'un autre, décrit.
+\item \emph{Pages 15 à 33} --- le tapuscrit de P.~Deligne, « Courbes
+elliptiques : formulaire, d'après J.~Tate », avec des marques au crayon dont
+quelques-unes sont des questions rédigées. Décrit ; les questions sont lues.
+\item \emph{Pages 35 à 39} --- cinq feuillets manuscrits de Tate, dans une
+notation plus ancienne. Décrits.
+\item \emph{Pages 40 à 63} --- deux tapuscrits d'A.~O.~L.~Atkin. Décrits.
+\item \emph{Pages 65 à 76} --- \textbf{ses notes} : périodes, quasi-périodes,
+et comparaison des deux décompositions de $H^1_{\mathrm{dR}}$. Sur le verso de
+la page 74, un feuillet de l'avant-propos de SGA~4 corrigé de sa main (page
+75).
+\item \emph{Pages 79 et 80} --- liste dactylographiée des courbes à
+multiplication complexe d'invariant rationnel, annotée au crayon.
+\item \emph{Pages 82 à 93} --- bibliographie et « traduction libre d'un
+manuscrit inédit de Tate ». Décrites.
+\item \emph{Pages 95 à 99} --- \textbf{ses notes} : le site modulaire au
+voisinage de $j=0$ et $j=12^3$, puis en niveau $3$.
+\end{enumerate}
+
+Les pages 1, 14, 34, 55, 64, 78, 81, 85, 94 sont blanches ; 67, 69, 71, 73, 77
+et 100 sont des versos dactylographiés sans rapport (tirages Bourbaki, avant-propos
+de SGA~4 barré, une page sur la spécialisation des cycles) ; 96 est une lettre
+qui lui est adressée.
+
+Les deux ensembles de notes ne se citent pas l'un l'autre, et ce n'est pas
+cette lecture qui les reliera. Le premier est analytique (un seul tore
+complexe, ses périodes) ; le second est arithmétique (toutes les courbes à la
+fois, au-dessus de $\mathbf{Z}$). Leur point commun est le fibré $\omega$ des
+différentielles invariantes, dont les puissances portent les formes modulaires :
+$c_4$, $c_6$, $\Delta$ sont des sections de $\omega^{\otimes 4}$,
+$\omega^{\otimes 6}$, $\omega^{\otimes 12}$ à la page 95, et l'invariant de la
+page 66 est une section --- non holomorphe --- de $\omega^{\otimes 2}$.
+
+\emph{Conventions, valables pour tout le dossier.} $E$ est une courbe
+elliptique, $L = \underline{\omega}$ la droite de ses différentielles
+invariantes (son $\underline{\omega}$), $\omega$ une base de $L$. Les poids
+suivent la convention aujourd'hui usuelle (Katz) : une quantité de poids $k$
+attachée au couple $(E,\omega)$ est multipliée par $\lambda^{-k}$ quand on
+remplace $\omega$ par $\lambda\omega$, et devient ainsi une section
+$f\,\omega^{\otimes k}$ indépendante du choix. Sur $\mathbf{C}$, $E =
+\mathbf{C}/\Lambda$ avec $\Lambda = \mathbf{Z}\omega_1 + \mathbf{Z}\omega_2$,
+$\tau = \omega_2/\omega_1$, $\mathrm{Im}\,\tau > 0$, et $\omega = dz$ ;
+$V = H^1_{\mathrm{dR}}(E/\mathbf{C})$, extension de $L^{-1}$ par $L$. L'invariant
+$j$ est partout l'invariant usuel $c_4^3/\Delta$, qui vaut $12^3$ pour la courbe
+à quatre automorphismes --- non le $j = 1 - J$ du dossier 62, pages 18 à 53. Le
+« site modulaire » $M$ est lu comme le champ des courbes de Weierstrass sans
+fibre additive (le champ $\overline{\mathcal{M}}_{1,1}$ compactifié), puisque
+la page 95 lui donne un diviseur à l'infini $M^{\infty} = \operatorname{div}
+\Delta$.
+
+Deux homonymies sont levées ici une fois pour toutes. Aux pages 72 à 76 il
+réutilise les lettres $\alpha$, $\beta$ de la page 66 pour des objets voisins
+mais distincts ; on les note ici $A$ et $B$. À la page 66 il note $\pi$ une
+section canonique de $\underline{\omega}^{\otimes 2}$ ; on la note $\varpi$,
+$\pi$ étant à la fois la différentielle invariante de Deligne et le nombre.
+
+\pagerange{2}{63}
+\section*{I. Les textes de référence (pages 2 à 63)}
+
+\pagerange{2}{13}
+\subsection*{La lettre de Tate (pages 2 à 13)}
+
+Copie d'un manuscrit anglais de Tate --- table des matières et onze feuillets
+--- qui est la lettre à Cassels publiée, légèrement retouchée, sous le titre
+« Algorithm for determining the type of a singular fiber in an elliptic
+pencil » (\emph{Modular Functions of One Variable IV}, LNM~476, 1975). On y
+trouve l'équation de Weierstrass généralisée
+\[
+y^2 + a_1xy + a_3y = x^3 + a_2x^2 + a_4x + a_6,
+\]
+les quantités $b_2, b_4, b_6, b_8, c_4, c_6, \Delta$, $j = c_4^3/\Delta$ et les
+relations $4b_8 = b_2b_6 - b_4^2$, $1728\,\Delta = c_4^3 - c_6^2$ ; les
+changements de coordonnées $x = u^2x' + r$, $y = u^3y' + su^2x' + t$ et
+l'invariance $u^{12}\Delta' = \Delta$ ; les équations minimales sur un anneau
+de valuation discrète ; la filtration $E(K) \supset E_0(K) \supset E_1(K)
+\supset \cdots$ et le groupe formel ; le facteur local $L_v(s)$ et la formule
+$\int_{E(K)}|\omega| = (E(K):E_0(K))/L_v(1)$ ; le modèle de Néron et les dix
+types de Kodaira ; enfin l'algorithme qui, en dix étapes, lit le type de la
+fibre spéciale, le conducteur et l'indice $(E(K):E_0(K))$ sur les valuations des
+coefficients.\footnote{Les marques en marge (« subprocedure », « sauf
+erreur ») sont de la même main que le texte : rien sur ces feuillets n'est de
+la sienne.}
+
+\pagerange{15}{33}
+\subsection*{Le formulaire de Deligne, et les questions dans ses marges (pages 15 à 33)}
+
+Le tapuscrit, dix-neuf pages, est celui que Deligne a publié dans le même
+volume sous le titre « Courbes elliptiques : formulaire d'après J.~Tate ». Il
+reprend les formules de Tate au-dessus d'une base $S$ : la courbe $p\colon E
+\to S$ de section unité $e$, le faisceau $\omega = e^*\Omega^1_{E/S}$, les
+$p_*\mathcal{O}(ne)$ localement libres de rang $n$, l'équation obtenue par une
+base adaptée de $p_*\mathcal{O}(3e)$ ; les formes réduites quand $2$ et $3$,
+ou $2$ et $c_4$, sont inversibles, quand $2$ est nilpotent, en caractéristique
+$2$ et $3$, avec les schémas de modules des courbes munies d'une
+différentielle invariante, $\operatorname{Spec}\mathbf{Z}[\tfrac16][g_2,g_3]$
+quand $2$ et $3$ sont inversibles (Proposition 2.5) et son analogue quand
+seuls $2$ et $c_4$ le sont (3.5) ; puis les applications : la caractérisation des trois types de
+fibres (Proposition 6.1), le schéma $\mathrm{Isom}_S(E,E')$ (6.3, 6.4), les
+groupes d'automorphismes (6.9) ; enfin l'anneau des formes modulaires entières,
+engendré par $c_4$, $c_6$, $\Delta$ sous la seule relation $c_4^3 - c_6^2 =
+1728\,\Delta$ (7.1), et ses réductions $\mathbf{F}_2[a_1,\Delta]$ et
+$\mathbf{F}_3[b_2,\Delta]$ (7.2).
+
+Les marques au crayon sont pour la plupart des corrections d'épreuve et des
+factorisations ($2^3 3^3$ sur $216$, $12^3$ sous $1728$). Quelques-unes sont
+des phrases, d'une écriture rapide qui paraît être la sienne.\footnote{La
+transcription laisse l'attribution ouverte, et nous de même : rien ne permet de
+l'affirmer, et les factorisations, en particulier, pourraient être de
+n'importe quel lecteur.} Lues dans l'ordre, elles disent ceci.
+
+\emph{Le résumé des trois types} (page 20). Sur un corps, la fibre est
+elliptique si $\Delta \neq 0$, multiplicative si $\Delta = 0$ et $c_4 \neq 0$,
+additive si $\Delta = c_4 = 0$ ; et sous $\Delta = 0$, $c_4 = 0$ équivaut à
+$c_6 = 0$. Cette dernière équivalence est vraie en toute
+caractéristique,\footnote{En caractéristique $\neq 2,3$ elle découle de $c_4^3
+= c_6^2$ ; en caractéristique $2$ et $3$, où la relation $1728\,\Delta = c_4^3 -
+c_6^2$ est vide, elle découle des formules $c_4 = a_1^4$, $c_6 = a_1^6$
+(caractéristique 2) et $c_4 = b_2^2$, $c_6 = -b_2^3$ (caractéristique 3) que le
+tapuscrit donne en 7.2.} et le résumé est exact sur un corps quelconque, le
+type étant géométrique.
+
+\emph{Les valeurs spéciales de $j$} (page 26) : $j = 0 \Leftrightarrow c_4 = 0$
+et $j = 12^3 \Leftrightarrow c_6 = 0$, là où $\Delta$ est inversible, puisque
+$j = c_4^3/\Delta$ et $j - 12^3 = c_6^2/\Delta$. Au même endroit, « net » est
+écrit au-dessus de « non ramifié » : c'est le mot des EGA pour la même notion.
+
+\emph{Les automorphismes} (page 29). En face de l'énoncé selon lequel, $c_4$ et
+$c_6$ étant inversibles, $E$ n'a que l'identité et la symétrie pour
+automorphismes, la marge porte --- lecture incertaine --- « faux si $S$ non
+connexe ». C'est juste si l'énoncé porte sur le groupe des automorphismes
+au-dessus de $S$ : ce groupe est alors $(\mathbf{Z}/2)^{\pi_0(S)}$, et seul le
+schéma en groupes $\underline{\mathrm{Aut}}_S(E)$ est $\mathbf{Z}/2$. En face du
+groupe d'ordre $24$ de la caractéristique $2$, « structure ? » : ce groupe est
+$\mathrm{SL}(2,\mathbf{F}_3)$, produit semi-direct du groupe des quaternions
+$Q_8$ par $\mathbf{Z}/3$ ; celui d'ordre $12$ de la caractéristique $3$ est
+$\mathbf{Z}/3 \rtimes \mathbf{Z}/4$, le facteur $\mathbf{Z}/4$ agissant par
+inversion à travers son quotient d'ordre $2$.\footnote{Ces identifications sont
+nôtres ; la page pose la question sans y répondre. Le groupe d'ordre $24$
+reparaît, nommé $G'$, aux pages 97 à 99.}
+
+\emph{Pourquoi ?} (page 31). En face de « il reviendrait au même de se limiter
+aux courbes sans fibres additives ». La raison, que le tapuscrit ne donne pas
+à cet endroit, est de codimension : dans l'espace $\operatorname{Spec}
+\mathbf{Z}[a_1,\ldots,a_6]$ des équations, qui est normal, le lieu additif $c_4
+= c_6 = 0$ est de codimension $2$, et une fonction définie hors de lui s'étend
+(lemme de Hartogs algébrique).\footnote{Explication nôtre, proposée comme
+réponse à la question de la marge.}
+
+\emph{Le N.B. encadré} (page 31) : « sur le site modulaire, les diviseurs de
+$c_4$, $c_6$, $\Delta$ sont à multiplicité $1$ ; celui de $\Delta$ est lisse sur
+$\mathbf{Z}$, ceux de $c_4$, $c_6$ le sont sauf au-dessus des points $2$ et
+$3$. » C'est le programme exact des pages 95 à 99, où il est démontré ; voir
+la section~III. À la page 32, sous la Proposition 7.2 : le diviseur de $a_1$
+est lisse sur $\mathbf{F}_2$, celui de $b_2$ sur $\mathbf{F}_3$.\footnote{La
+page écrit $\mathbf{F}_2$ dans les deux lignes ; la seconde porte sur la
+caractéristique $3$.}
+
+\emph{Le programme} (page 33). Cinq lignes au bas de la dernière page :
+\begin{itemize}
+\item \emph{Interprétation de $a_1$, $b_2$ comme forme de Hasse-Witt ?} --- Oui :
+la réduction modulo $2$ de $a_1$ et la réduction modulo $3$ de $b_2$ sont
+l'invariant de Hasse, section de $\omega^{\otimes(p-1)}$ en caractéristique
+$p$. En caractéristique $3$ c'est un calcul direct (le coefficient de $x^2$
+dans le second membre de $y^2 = x^3 + \tfrac{b_2}{4}x^2 + \cdots$) ; en
+caractéristique $2$, $a_1$ s'annule exactement sur le lieu supersingulier
+$j=0$, à l'ordre $1$.
+\item \emph{Formes modulaires sur un corps quelconque ? sur un anneau de
+valuation discrète\ldots}, et \emph{Hasse-Witt sur un corps de caractéristique
+$p>0$ quelconque ?} --- c'est la théorie des formes modulaires de Katz
+(1973), où les formes modulaires sur un anneau $R$ quelconque sont définies
+comme des règles $(E/R,\omega) \mapsto f(E,\omega) \in R$.
+\item \emph{Relèvement canonique de Serre par formules universelles} --- le
+relèvement canonique d'une courbe ordinaire (Serre--Tate).
+\item \emph{Loi de groupe formel sur} (un symbole illisible)\emph{ : formules
+explicites\ldots} --- la loi que la lettre de Tate écrit au §4.\footnote{Les noms donnés après chaque question sont les nôtres. Katz,
+« $p$-adic properties of modular schemes and modular forms », LNM~350, est de
+1973 ; Serre et Tate ont exposé le relèvement canonique à Woods Hole en 1964.
+Rien sur la page ne dit qu'il connaissait l'un ou l'autre ; le symbole après
+« sur » est illisible, et nous ne le restituons pas.}
+\end{itemize}
+
+\pagerange{35}{39}
+\subsection*{Les feuillets de Tate en notation ancienne (pages 35 à 39)}
+
+Cinq feuillets en anglais, de la main de Tate, où les $b_i$, $c_i$ s'appellent
+encore $\beta_i$, $\gamma_i$ et le facteur d'échelle $\rho$ : l'équation
+générale et ses transformations, puis les « formes canoniques spéciales » pour
+$p \neq 2,3$, $p = 3$ et $p = 2$, avec les extensions qui rendent isomorphes
+deux courbes de même $j$ et les groupes d'automorphismes, sous-groupes d'un
+groupe d'ordre $24$. C'est le texte dont les pages 86 à 93 donnent une
+traduction (section~II).
+
+\pagerange{40}{63}
+\subsection*{Les deux textes d'Atkin (pages 40 à 63)}
+
+Deux tapuscrits d'A.~O.~L.~Atkin, en copie, avec les corrections d'un
+correcteur d'épreuves et les instructions à l'imprimeur, qui font partie de
+l'image photocopiée.\footnote{Aucune marque n'y est de sa main. La seule qui
+porte un jugement mathématique, « multiplicat.\ semi group! » (page 58), est de
+la main des instructions à l'imprimeur ; seul le « (1968) » à l'encre de la
+page 40 a été ajouté sur la copie.} Le premier, « Congruences for modular
+forms » (pages 40 à 54, daté 1968 à la main), raconte la recherche à
+l'ordinateur Atlas de congruences pour les coefficients $c(n)$ de $j$ et pour
+la fonction de partition $p(n)$ modulo les puissances d'un premier $q$ :
+congruences « de Ramanujan » et congruences « multiplicatives », qui font
+attendre une théorie de Hecke « $\mathfrak{p}$-adique ». Le second, « Congruence
+Hecke operators » (pages 56 à 63), formule cette attente en conjectures pour le
+groupe modulaire et pour $\Gamma_0(q)$, calquées sur les théorèmes de
+Hecke--Petersson (son Théorème 1, base de formes propres) et sur leur
+extension à $\Gamma_0(q)$ avec l'opérateur $U_q$ (Théorème 2), et espère, dans son dernier paragraphe,
+une preuve par la géométrie algébrique.\footnote{C'est ce qu'ont fourni
+ensuite les formes modulaires $p$-adiques de Serre et de Katz (1973), et l'on
+comprend que ces deux textes aient été classés ici ; mais le dossier ne dit pas
+ce qu'il en a tiré.}
+
+\pagerange{65}{76}
+\section*{II. Périodes et les deux décompositions de $H^1$ (pages 65 à 76)}
+
+Sept feuillets de sa main, à l'encre, écrits au dos de feuillets
+dactylographiés hors d'usage --- dont un projet barré de l'avant-propos de
+SGA~4.\footnote{C'est un terme \emph{post quem} grossier pour ces notes (le
+projet date au plus tôt de 1963--1964), non une date.}
+
+\pagerange{65}{65}
+\subsection*{Normalisation par une différentielle (page 65)}
+
+Soit $E$ d'équation $y^2 = x^3 + \gamma_4 x + \gamma_6$ sur $\mathbf{C}$ et
+$\omega = dx/2y$ sa différentielle invariante. Le couple $(E,\omega)$
+détermine $x$ et $y$ ; si l'on remplace $\omega$ par $\lambda\omega$, on
+remplace $x$, $y$, $\gamma_4$, $\gamma_6$ par $\lambda^{-2}x$, $\lambda^{-3}y$,
+$\lambda^{-4}\gamma_4$, $\lambda^{-6}\gamma_6$. Les quantités
+\[
+x_2 = x\,\omega^{\otimes 2},\quad y_3 = y\,\omega^{\otimes 3},\quad
+g_4 = \gamma_4\,\omega^{\otimes 4},\quad g_6 = \gamma_6\,\omega^{\otimes 6}
+\]
+ne dépendent donc pas de $\omega$, et vérifient $y_3^2 = x_2^3 + g_4x_2 +
+g_6$ : c'est l'équation écrite en sections des puissances de
+$L$.\footnote{La page écrit $x = \omega^{-2}x_2$, etc., en traitant $\omega$
+comme un scalaire, et $dx = 2y\,\omega$ en le traitant comme une forme ; la
+lecture par les poids est la nôtre, et c'est elle qui donne un sens aux deux
+écritures à la fois. Plusieurs coefficients numériques sont biffés ou noircis
+dans les deux cadres ; les formules se lisent comme données ici.} De $2y\,dy =
+(3x^2+\gamma_4)\,dx$ on tire $dy = (3x^2+\gamma_4)\,\omega$. On pose
+\[
+\omega = \frac{dx}{2y}, \qquad \eta = x\,\omega = \frac{x\,dx}{2y},
+\]
+une forme de seconde espèce ($\eta$ a un pôle double sans résidu en
+l'origine), de sorte que $(\omega,\eta)$ est une base de $V =
+H^1_{\mathrm{dR}}(E/\mathbf{C})$.
+
+Analytiquement, $E \simeq \mathbf{C}/\Lambda$ avec $\omega = dz$, $x =
+\wp(z)$, $y = \tfrac12\wp'(z)$ :\footnote{La page écrit $y = -1/z^3 - \sum_{a} 1/(z-a)^3$ sans exclure $a=0$
+de la somme, ce qui compterait deux fois le terme en $0$ ; le signe devant la
+somme est surchargé et lu $-$, ce qui est le bon signe.}
+\[
+x = \frac{1}{z^2} + \sum_{a\in\Lambda\smallsetminus\{0\}}
+\Bigl[\frac{1}{(z-a)^2} - \frac{1}{a^2}\Bigr], \qquad
+y = -\sum_{a\in\Lambda}\frac{1}{(z-a)^3},
+\]
+et les périodes et quasi-périodes sont
+\[
+\omega_i = \int_{\gamma_i}\omega, \qquad
+\eta_i = \int_{\gamma_i}\eta = \int_u^{u+\omega_i}\wp(z)\,dz
+= -\bigl(\zeta(u+\omega_i) - \zeta(u)\bigr),
+\]
+indépendantes de $u$. Les $\eta_i$ de la page sont donc les opposées des
+quasi-périodes de Weierstrass.\footnote{Avec cette convention, la relation de
+Legendre s'écrit $\omega_1\eta_2 - \omega_2\eta_1 = 2\pi i$ pour
+$\mathrm{Im}(\omega_2/\omega_1) > 0$. La page ne la cite pas ; elle sert
+plus bas. Les seconds membres de « $\gamma_4 = $ », « $\gamma_6 = $ » sont
+restés en blanc.}
+
+\pagerange{66}{66}
+\subsection*{Le passage du scindage algébrique au scindage de Hodge (page 66)}
+
+$V$ contient la droite $L = \mathbf{C}\omega$ (la filtration de Hodge) et
+possède deux supplémentaires naturels de $L$ : la droite $\mathbf{C}\eta$, qui
+vient de l'équation, et la droite $\mathbf{C}\bar\omega = H^{0,1}$, qui vient
+de la conjugaison complexe. On écrit donc
+\[
+\eta + \alpha\,\omega = \beta\,\bar\omega .
+\]
+En intégrant sur $\gamma_1$ et $\gamma_2$ et en éliminant $\beta$ :
+\[
+\alpha = -\frac{\bar\omega_1\eta_2 - \bar\omega_2\eta_1}
+{\bar\omega_1\omega_2 - \bar\omega_2\omega_1},
+\qquad
+\bar\omega_1\omega_2 - \bar\omega_2\omega_1 = 2i\,|\omega_1|^2\,\mathrm{Im}\,\tau
+\neq 0 .
+\]
+Remplacer $\omega$ par $\lambda\omega$ remplace $\eta$ par $\lambda^{-1}\eta$ et
+$\alpha$ par $\lambda^{-2}\alpha$ : la section
+\[
+\varpi = \alpha\,\omega^{\otimes 2} \in \Gamma(\underline{\omega}^{\otimes 2})
+= \Gamma\,\mathrm{Hom}(\underline{\omega}^{-1},\underline{\omega})
+\]
+est canonique.\footnote{La page la note $\pi$.} C'est la différence des deux
+supplémentaires : les supplémentaires de $L$ dans $V$ forment un espace affine
+sous $\mathrm{Hom}(V/L, L) = \mathrm{Hom}(L^{-1},L) = L^{\otimes 2}$, et
+$\varpi$ est le vecteur qui va du premier au second.\footnote{L'identification
+$V/L \simeq L^{-1}$ est celle de la dualité : $\eta$ y est la base duale de
+$\omega$ pour l'accouplement $\tfrac{1}{2\pi i}\int_E$, par la relation de
+Legendre. Cette lecture de $\varpi$ comme différence de scindages est la
+nôtre ; la page la dit à la page 74 (l'élément $\gamma$), dans le langage des
+pages 72 à 74.}
+
+Deux questions suivent : \emph{a) Quand $\alpha = 0$, i.e.\ $\bar\omega$
+proportionnel à $\eta$ ? b) Quand $\alpha$ est-il algébrique sur
+$\mathbf{Q}$ ?}
+
+\emph{Ce qu'est $\alpha$.} La relation de Legendre donne la forme close
+qu'aucune des pages n'atteint. Si $\eta'_i = \zeta(z+\omega_i) - \zeta(z)$,
+on a $\eta'_1 = \omega_1^{-1}G_2(\tau)$ avec $G_2(\tau) = \sum_n
+\sum_{m}{}' (m+n\tau)^{-2}$, et $\eta'_1\omega_2 - \eta'_2\omega_1 = 2\pi i$ ;
+en reportant dans la formule de $\alpha$,
+\[
+\alpha = \frac{1}{\omega_1^2}\Bigl(G_2(\tau) - \frac{\pi}{\mathrm{Im}\,\tau}\Bigr)
+= \frac{G_2^*(\tau)}{\omega_1^2},
+\qquad
+\beta = -\frac{\pi}{|\omega_1|^2\,\mathrm{Im}\,\tau}.
+\]
+La section canonique $\varpi$ est donc la série d'Eisenstein non holomorphe de
+poids $2$, $G_2^* = \tfrac{\pi^2}{3}E_2^*$ : la seule correction de $G_2$ qui
+soit modulaire, au prix de l'holomorphie.\footnote{Calcul nôtre ; la page
+s'en tient aux séries des pages 68 et 70. La correction $-\pi/\mathrm{Im}\,\tau$
+remonte à Hecke (1927). L'interprétation de $E_2^*$ par le scindage de Hodge,
+et de $E_2$ par le scindage de la racine unité dans le cas $p$-adique, est
+celle de Katz (1973, 1976) ; ces pages en ont la version complexe, sans le
+nom. Nous ne disons pas qu'il l'ait reçue de Katz, ni l'inverse.} Les deux
+questions reçoivent alors une réponse partielle. a) $\alpha$ s'annule aux
+points $\tau = i$ et $\tau = e^{2\pi i/3}$ et à leurs transformés par
+$\mathrm{SL}_2(\mathbf{Z})$, car $G_2^*$ est modulaire de poids $2$ et ces
+points sont fixes par des éléments d'ordre $4$ et $6$ ;\footnote{Par exemple
+$G_2^*(-1/\tau) = \tau^2G_2^*(\tau)$ donne en $\tau = i$ : $G_2^*(i) =
+-G_2^*(i)$. Nous ne disons pas s'il y a d'autres zéros.} en ces points
+$\bar\omega$ est bien proportionnel à $\eta$. b) Si $E$ est définie sur
+$\overline{\mathbf{Q}}$ et a multiplication complexe, et si $\omega$ est
+algébrique, $\alpha$ est algébrique : les endomorphismes décomposent $V$ en
+deux droites propres définies sur $\overline{\mathbf{Q}}$, dont l'une est $L$
+et l'autre est nécessairement $H^{0,1}$.\footnote{La réciproque n'est pas
+abordée ici.}
+
+\pagerange{68}{70}
+\subsection*{Les quasi-périodes en séries (pages 68 et 70)}
+
+La page 68 calcule $\eta_1$ en primitivant terme à terme, $\int x\,dz = -1/z
++ \sum'\bigl[-1/(z-a) - z/a^2\bigr]$, entre $u$ et $u+\omega_1$. Le terme
+général devient $\omega_1\bigl[\tfrac{1}{(u-a)(u+\omega_1-a)} -
+\tfrac{1}{a^2}\bigr]$, qui est $O(|a|^{-3})$ : la série converge absolument,
+et l'on peut faire $u \to 0$ après avoir isolé les termes $a = 0$ et $a =
+\omega_1$, qui donnent ensemble $-3/\omega_1$. On obtient
+\[
+\eta_1 = -\frac{3}{\omega_1} + \omega_1^2
+\sum_{a\neq 0,\ \omega_1}\frac{1}{a^2(a-\omega_1)}, \qquad
+\eta_2 = -\frac{3}{\omega_2} + \omega_2^2
+\sum_{a\neq 0,\ \omega_2}\frac{1}{a^2(a-\omega_2)},
+\]
+avec $a = m\omega_1 + n\omega_2$.\footnote{Pour $\eta_2$, l'indice de la
+somme se lit « $a \neq \omega_1$ », recopié de la ligne précédente ; c'est
+$a \neq \omega_2$ qu'il faut. Les deux formules sont exactes : nous les avons
+vérifiées.} Ces séries, contrairement à celle qui définit $G_2$, convergent
+absolument ; c'est l'avantage du chemin pris.
+
+La page 70 forme $\bar\omega_1\eta_2 - \bar\omega_2\eta_1$ sur l'ensemble
+d'indices commun $(m,n) \neq (0,0), (1,0), (0,1)$, en mettant à part les deux
+termes que les deux sommes ne partagent pas, puis passe en $\tau$. La partie
+constante est $-3(\bar\omega_1/\omega_2 - \bar\omega_2/\omega_1) =
+-3\,(|\omega_1|^2 - |\omega_2|^2)/\omega_1\omega_2$, et les termes isolés
+valent $(\bar\omega_1\omega_2^4 + \bar\omega_2\omega_1^4)/\omega_1^2\omega_2^2
+(\omega_1-\omega_2)$. La page conduit le calcul jusqu'à une expression de
+$\alpha$ sous la forme $-\bigl(2i\,\omega_1^2\,\mathrm{Im}\,\tau\bigr)^{-1}$
+fois une fonction de $\tau$ seule --- ce qui exhibe le poids $2$ ---, sans
+sommer la série.\footnote{À partir de la troisième ligne, le facteur $3$ de
+$-3(1-|\tau|^2)/\tau$ disparaît ; la forme close de la page 66 ne dépend pas
+de ce détail, et nous ne reprenons pas la série terme à terme, dont la page
+note elle-même plusieurs états surchargés (signes, exposants).}
+
+\pagerange{72}{74}
+\subsection*{L'algèbre linéaire des deux scindages (pages 72 à 74)}
+
+Les pages 72 et 74 reprennent la situation sans coordonnées. $V$ est un espace
+de dimension $2$ muni d'une forme alternée, extension $0 \to L \to V \to
+L^{-1} \to 0$, et la conjugaison complexe est une involution antilinéaire,
+c'est-à-dire un isomorphisme $\varphi\colon \bar V \to V$ avec $\varphi\bar\varphi
+= 1$. Une fois choisi un scindage algébrique $V = L \oplus L^{-1}$, la
+restriction de $\varphi$ à $\bar L$ a deux composantes,
+\[
+A\colon \bar L \to L, \quad A \in \bar L^{-1}\otimes L ; \qquad
+B\colon \bar L \to L^{-1}, \quad B \in (\bar L L)^{-1}.
+\]
+\footnote{La page les nomme $\alpha$ et $\beta$, comme à la page 66 ; elle
+indique sous $\bar L^{-1}\otimes L$ « défini par $T^{(2)}$ sur $\mathcal{U}$ »
+et sous $\bar L L$ « défini par $P^{(2)}$ sur $\mathbf{R}^{*+}$ », $L$ étant
+« défini par $T$ sur $\mathcal{U}$, $P$ sur $\mathbf{R}^{*+}$ ». Nous lisons
+la décomposition polaire $\mathbf{C}^* = \mathcal{U} \times \mathbf{R}^{*+}$ :
+une droite complexe est donnée par un torseur $T$ sous le cercle
+$\mathcal{U}$ et un torseur $P$ sous $\mathbf{R}^{*+}$ ; $\bar L^{-1} \otimes
+L$ ne dépend que de $T^{\otimes 2}$ (son module est canoniquement trivial) et
+$\bar L L$ que de $P^{\otimes 2}$ (son argument l'est). Cette lecture est la
+nôtre ; plusieurs mots de la ligne sont illisibles.}
+L'hypothèse $B \neq 0$ (le scindage algébrique n'est pas celui de Hodge, ce
+qui est toujours le cas puisque $\bar L \cap L = 0$) permet d'exprimer
+$\varphi$ sur $L^{-1}$ : si $y \in L^{-1}$, $y = -AB^{-1}(y) +
+\varphi\bigl(\overline{B^{-1}(y)}\bigr)$. La page demande alors quand la
+conjugaison respecte la forme alternée, $\langle \bar x, \bar y\rangle =
+\overline{\langle x, y\rangle}$, et trouve, en l'écrivant pour $x \in L$, $y
+\in L^{-1}$, la condition $B + \bar B = 0$ : \emph{$B$ est purement
+imaginaire}.\footnote{Avec la normalisation $\langle\omega,\eta\rangle = 1$ ;
+dans la page, les deux lignes qui précèdent cette conclusion sont très
+surchargées et nous ne reprenons que leur état final, qui suffit.}
+
+Dans le cas d'une courbe elliptique (page 74), $B$ est la forme
+$\omega \mapsto \int_E \omega\wedge\bar\omega$, et pour $\omega = dz =
+ds + i\,dt$ ($s$, $t$ réels),
+\[
+\int_E \omega\wedge\bar\omega = -2i\int_E ds\wedge dt
+= -2i\,|\omega_1|^2\,\mathrm{Im}\,\tau,
+\]
+donc
+\[
+B = -2i\rho,\qquad \rho = \int_E ds\wedge dt = \mathrm{Vol}(E) > 0 .
+\]
+\footnote{La page écrit $dx + i\,dy$, avec $x = \mathrm{Re}\,z$, $y =
+\mathrm{Im}\,z$ ; nous changeons de lettres pour ne pas confondre avec les
+coordonnées de l'équation.}
+Quant à $A$, c'est \emph{a priori} un élément quelconque de $\bar L^{-1}\otimes
+L$, défini indépendamment du choix de $\omega$ ; la page demande ce qu'il est.
+Elle note que $\gamma = -AB^{-1} \in L^{\otimes 2}$ est l'objet qui fait passer
+du scindage algébrique au scindage transcendant, et que la donnée de $(A,B)$
+équivaut à celle de $B$ et $\gamma$. C'est la section $\varpi$ de la page 66,
+au signe près.\footnote{Le supplémentaire de Hodge $\bar L$ est le graphe de
+$AB^{-1}\colon L^{-1} \to L$ ; le signe de $\gamma$ dépend du sens dans
+lequel on écrit le passage. En coordonnées, $A(\bar\omega) =
+(\alpha/\beta)\,\omega$ avec les $\alpha$, $\beta$ de la page 66 ; d'où
+$|A| = \mathrm{Im}\,\tau\,|G_2^*(\tau)|/\pi$, qui ne dépend que de $\tau$.}
+
+\pagerange{74}{76}
+\subsection*{Module et argument de $A$ (pages 74 et 76)}
+
+La page pose, pour $\omega$ et $\eta$ choisis,
+\[
+\rho = -\frac{1}{2i}\int_E \omega\wedge\bar\omega = \mathrm{Vol}(E), \qquad
+\sigma = -\frac{1}{2i}\int_E \eta_0\wedge\bar\eta_0,
+\]
+où $\eta_0$ est une forme fermée de la classe de $\eta$ ($\sigma$ ne dépend pas
+de ce choix). Lorsque $\eta$ est normalisée par $\int_E \omega\wedge\eta = 1$,
+les deux conditions $\varphi\bar\varphi = 1$ et $B + \bar B = 0$ donnent
+\[
+4\rho\sigma = A\bar A - 1 .
+\]
+\footnote{La page écrit $4\rho\sigma = 1 - \alpha\bar\alpha$, et en conclut
+(page 76) $0 \leq \alpha\bar\alpha \leq 1$. Le signe est faux, et la
+conclusion aussi : $\sigma$ n'a pas de signe. En $\tau = i$, $A = 0$ et $\sigma
+= -1/4\rho < 0$ ; quand $\mathrm{Im}\,\tau \to \infty$, $G_2^* \to \pi^2/3$ et
+$|A| \sim \pi\,\mathrm{Im}\,\tau/3 \to \infty$. Avec $\eta = x\,dx/2y$
+elle-même, pour laquelle $\int_E\omega\wedge\eta = 2\pi i$, la même relation
+devient $4\rho\sigma = 4\pi^2(A\bar A - 1)$ : le signe ne dépend pas de la
+normalisation.} Ainsi $B$ et $A\bar A$ sont donnés par des volumes ; il reste
+l'argument de $A$ (pour $A \neq 0$), qui dépend du choix de $\omega$.
+
+La page normalise alors $\omega$ par $\omega^{\otimes 12} = \Delta$, ce qui le
+détermine à une racine douzième de l'unité $\zeta$ près. Comme $A \in \bar
+L^{-1}\otimes L$, son écriture numérique dans la base $\omega\otimes\bar
+\omega^{-1}$ est multipliée par $\zeta/\bar\zeta = \zeta^2$ : elle est
+déterminée à une racine sixième de l'unité près, et
+\[
+\Bigl(\frac{A}{|A|}\Bigr)^{6} \in \mathcal{U} = \{z \in \mathbf{C},\ |z| = 1\}
+\]
+est un invariant canonique de la courbe. La normalisation fixe aussi $\rho$ et
+$\sigma$. La page demande comment l'exprimer en fonction de $j$, sans
+répondre. Avec la forme close de la page 66, la réponse est
+\[
+\Bigl(\frac{A}{|A|}\Bigr)^{6} = \frac{G_2^*(\tau)^6/\Delta(\tau)}
+{\bigl|G_2^*(\tau)^6/\Delta(\tau)\bigr|},
+\]
+fonction de $\tau$ invariante par $\mathrm{SL}_2(\mathbf{Z})$, donc fonction sur
+la droite des $j$ --- mais analytique réelle, non holomorphe : c'est une
+fonction de $j$ et de $\bar j$, non de $j$ seul.\footnote{Calcul nôtre :
+$A = -(\bar\omega_1/\omega_1)\,\mathrm{Im}\,\tau\;G_2^*(\tau)/\pi$, et
+$\omega^{\otimes 12} = \Delta$ revient à $\omega_1^{12} = \Delta(\tau)$. La
+fin de la phrase de la page, « (\ldots{} comment \ldots{} en fonction de $j$ !) »,
+est en partie illisible.}
+
+\pagerange{75}{75}
+\subsection*{Un feuillet de l'avant-propos de SGA 4 (page 75)}
+
+Au dos de la page 74, un feuillet dactylographié barré du projet
+d'avant-propos de SGA~4 (travaux d'Igusa, d'Ogg et Chafarevitch ; plan des
+exposés I à XIX), qui porte ses corrections à l'encre : ponctuation, numéros
+d'exposés repassés, « théorème des dualités globales » ramené à « théorème de
+dualité globale », et, après « Théorèmes de changement de base », l'ajout
+« qui techniquement constituent le résultat central de ce séminaire ». Rien de
+mathématique ne s'y rapporte aux courbes elliptiques ; la transcription donne
+le détail.
+
+\pagerange{79}{80}
+\section*{III. Les courbes à multiplication complexe d'invariant rationnel (pages 79 et 80)}
+
+Un tapuscrit anonyme de deux feuillets, paginés « X-1 » et « X-2 », dresse la
+liste des courbes à multiplication complexe dont $j$ est rationnel : elles
+correspondent aux ordres de nombre de classes $1$ des corps quadratiques
+imaginaires, $\mathbf{Q}(\sqrt{-d})$ pour $d = 1, 2, 3, 7, 11, 19, 43, 67,
+163$ et les conducteurs $f = 2$ ($d = 1, 3, 7$) et $f = 3$ ($d = 3$) --- treize
+ordres, et treize valeurs de $j$, de $j(i) = 12^3$ à $j\bigl(\tfrac{-1+\sqrt{-163}}{2}\bigr) =
+-(2^6\cdot 3\cdot 5\cdot 23\cdot 29)^3$, tirées du traité de Weber. Le texte
+réserve « peut-être une autre valeur $d_?$ ».\footnote{Heegner (1952), Baker
+(1966) et Stark (1967) ont montré qu'il n'y en a pas. La réserve date le texte
+d'avant ces résultats, ou d'un auteur qui ne les tenait pas pour acquis.}
+
+Au crayon, deux remarques. Sur $d = 1, 2, 3, 7, 11$, « euclidiens » : ce sont
+en effet exactement les corps quadratiques imaginaires euclidiens pour la
+norme. En marge : « NB les $d$ sont premiers ! » --- vrai pour $d > 1$ ; la
+raison est la théorie des genres, selon laquelle le $2$-rang du groupe des
+classes est le nombre de premiers divisant le discriminant, moins un, de sorte
+qu'un nombre de classes $1$ force un discriminant divisible par un seul
+premier.\footnote{Le cas $d = 1$ (discriminant $-4$) échappe à la lettre de la
+remarque, non à son sens. L'explication par les genres est nôtre.}
+
+\pagerange{82}{93}
+\section*{IV. Bibliographie et formulaire traduit (pages 82 à 93)}
+
+Un tapuscrit anonyme en deux suites. La première (pages 82 à 84) est une
+bibliographie en dix rubriques, des fonctions elliptiques classiques (Jordan,
+Hurwitz--Courant, Fricke) à la multiplication complexe « formelle » de Lubin
+et Tate (1965), en passant par les schémas modulaires d'Igusa et, parmi les
+variétés abéliennes, deux exposés de ses \emph{Fondements de la géométrie
+algébrique} (232 et 236) ; quelques traits au crayon en marge, sans mots. La
+seconde (pages 86 à 93) se donne pour « Courbes elliptiques -- Formulaire
+(traduction libre d'un manuscrit inédit de Tate) », et suit en effet, en
+français, les feuillets de Tate des pages 35 à 39 : formules générales,
+changements de coordonnées, formes canoniques pour $p \neq 2,3$, $p=3$, $p=2$,
+« courbes types », groupes d'automorphismes d'ordre $12$ et $24$, anneaux
+d'endomorphismes (un ordre maximal du corps de quaternions ramifié en $3$ et
+$\infty$ ; les quaternions entiers de Hurwitz en caractéristique $2$).\footnote{Le
+traducteur n'est pas nommé. La lettre de Tate renvoie (page 4) au « Courbes
+Elliptiques -- Formulaire » de Serre ; il est tentant d'y reconnaître ce
+tapuscrit, mais rien sur les feuillets ne l'établit. Les seules marques
+manuscrites sont des factorisations ($2^2.3$ sous $12$, $2^6 3^3$ sous $1728$)
+et, page 91, deux fins d'équation gribouillées qui font lire $r^3 + a_4r = 0$
+et $r^3 + a_4r + 2a_6 = 0$.}
+
+\pagerange{95}{99}
+\section*{V. Le site modulaire près de $j = 0$ et $j = 12^3$ (pages 95 à 99)}
+
+Cinq pages de sa main, de la même encre. Elles réalisent le N.B. de la page 31
+(section~I). La page 96 est une lettre datée du 9 mars 1968 ; si les pages
+97 et suivantes sont écrites au dos de cette feuille, elles lui sont
+postérieures.\footnote{Conditionnel de la transcription, que nous gardons.}
+
+$M$ désigne ici le champ des courbes de Weierstrass sans fibre additive au-dessus
+de $\mathbf{Z}$ --- le champ des modules compactifié
+$\overline{\mathcal{M}}_{1,1}$ ---, qu'il appelle « site modulaire ».\footnote{La
+notion de champ algébrique est celle de Deligne et Mumford (1969) ; « site
+modulaire » est son nom d'alors pour l'objet, vu par sa topologie. Le
+compactifié est imposé par la page elle-même, qui parle du diviseur
+$M^{\infty} = \operatorname{div}\Delta$ : sur le champ des seules courbes
+elliptiques, $\Delta$ est inversible.}
+
+\pagerange{95}{95}
+\subsection*{Les trois diviseurs et leurs classes (page 95)}
+
+Un dessin montre, au-dessus de $\operatorname{Spec}\mathbf{Z}$, le diviseur
+$\Delta = 0$ (la pointe), le diviseur $j = 0$, c'est-à-dire $c_4 = 0$, et le
+diviseur $j = 12^3$, c'est-à-dire $c_6 = 0$, qui se coupent au-dessus de $p =
+2$ et de $p = 3$ --- puisque $12^3 = 2^6 3^3$ ---, en des points où le groupe
+d'automorphismes est d'ordre $24$ et $12$. En caractéristique $\neq 2,3$, les
+points de $j = 0$ ont $6$ automorphismes et ceux de $j = 12^3$ en ont $4$. Les
+diviseurs se lisent :
+\[
+\operatorname{div}(j)^{+} = 3\operatorname{div}(c_4), \quad
+\operatorname{div}(j-12^3)^{+} = 2\operatorname{div}(c_6), \quad
+\operatorname{div}(j)^{-} = \operatorname{div}(j-12^3)^{-} = M^{\infty} =
+\operatorname{div}\Delta,
+\]
+puisque $j = c_4^3/\Delta$ et $j - 12^3 = c_6^2/\Delta$ ; et leurs classes dans
+le groupe de Picard du champ sont
+\[
+\mathrm{cl}\bigl(\operatorname{div} c_4\bigr) = \omega^{4}, \qquad
+\mathrm{cl}\bigl(\operatorname{div} c_6\bigr) = \omega^{6}, \qquad
+\mathrm{cl}\bigl(M^{\infty}\bigr) = \omega^{12},
+\]
+$c_4$, $c_6$, $\Delta$ étant des sections de $\omega^{\otimes 4}$,
+$\omega^{\otimes 6}$, $\omega^{\otimes 12}$.\footnote{Le groupe de Picard du
+champ non compactifié est $\mathbf{Z}/12$, engendré par $\omega$ (Mumford,
+1965, sur un corps ; Fulton et Olsson, 2010, sur $\mathbf{Z}$). Rien sur la
+page ne dit qu'il connaissait le résultat de Mumford.}
+
+\emph{Le lieu $M' = V(c_4)$}, sous-champ fermé défini par $c_4 = 0$.
+
+a) Au-dessus de $\mathbf{Z}[\tfrac16]$, $M'$ est isomorphe au champ classifiant
+$B\mu_6$ : une courbe elliptique $E$ sur une base $S$ où $6$ est inversible,
+avec $c_4(E) = 0$, est une forme tordue de $y^2 = x^3 + 1$, et lui correspond
+le $\mu_6$-torseur de ses isomorphismes avec cette courbe, dont le groupe
+d'automorphismes est $\mu_6$ agissant par $(x,y) \mapsto (\zeta^2x,\zeta^3y)$.
+Il y a donc, sur $\mathbf{Z}[\tfrac16]$, autant de telles courbes que
+d'éléments de
+\[
+H^1\bigl(\operatorname{Spec}\mathbf{Z}[\tfrac16], \mu_6\bigr)
+\simeq \mathbf{Z}[\tfrac16]^{*}/\mathbf{Z}[\tfrac16]^{*6}
+\simeq \mathbf{Z}/2 \times \mathbf{Z}/6 \times \mathbf{Z}/6,
+\]
+soit $72$ : les courbes $y^2 = x^3 + u$, $u$ parcourant les unités $\pm
+2^a3^b$ modulo les puissances sixièmes.\footnote{Le groupe de Picard de
+$\mathbf{Z}[\tfrac16]$ étant nul, la suite de Kummer donne le premier
+isomorphisme ; les unités sont $\{\pm 1\}\times 2^{\mathbf{Z}}\times
+3^{\mathbf{Z}}$. La page écrit $(\mathbf{Z}[\tfrac16])^*_6$ ; le crochet
+qu'elle ouvre n'est pas refermé.}
+
+b) La fibre de $M'$ en $p = 2$ est de multiplicité $4$ en un point unique,
+celle en $p = 3$ de multiplicité $2$ : $M'$ est ramifié sur $\mathbf{Z}$
+exactement en ces deux points. Il n'est pas régulier en $p = 2$, il l'est en $p
+= 3$.\footnote{Vérification : en caractéristique $2$, $c_4 = a_1^4 + 8a_1^2a_2
++ 16a_2^2 - 24a_1a_3 - 48a_4$ appartient au carré de l'idéal $(2, a_1)$,
+d'où la multiplicité $4$ et la non-régularité ; en caractéristique $3$, $c_4 =
+b_2^2 - 24b_4$ où $b_4 = 2a_4$ est une unité au point supersingulier
+($\Delta = -a_4^3 \neq 0$), de sorte que $c_4$ est un paramètre régulier.}
+
+\emph{Le lieu $M'' = V(c_6)$.} a) Au-dessus de $\mathbf{Z}[\tfrac16]$, $M''
+\simeq B\mu_4$, par la courbe $y^2 = x^3 - x$ ; il y a $32$ courbes elliptiques
+sur $\mathbf{Z}[\tfrac16]$ avec $c_6 = 0$, les $y^2 = x^3 + ux$, $u$ modulo
+les puissances quatrièmes ($|\mathbf{Z}/2\times\mathbf{Z}/4\times\mathbf{Z}/4|
+= 32$).\footnote{La fin de la phrase de la page, « \ldots{} choisir comme
+origine\ldots », est en partie illisible.} b) $M''$ est de multiplicité $6$ en
+$p = 2$ et $3$ en $p = 3$, ramifié exactement en ces deux points, et régulier
+en aucun des deux --- ce que donnent $c_6 \equiv a_1^6 \pmod 2$ et $c_6
+\equiv -b_2^3 \pmod 3$, tous les autres termes de $c_6 = -b_2^3 + 36b_2b_4 -
+216b_6$ étant dans le carré de l'idéal maximal.
+
+\pagerange{98}{98}
+\subsection*{Paramètres locaux (page 98)}
+
+Au-dessus de $\mathbf{Z}$, $M$ est de dimension relative $1$, et la page donne
+un paramètre local relatif en chaque région :
+\begin{itemize}
+\item hors de $M' \cup M'' \cup M^{\infty}$ : $j$ ;
+\item hors de $M' \cup M''$, au voisinage de la pointe : $1/j$ ou $1/(j - 12^3)$ ;
+\item au voisinage de $M'$ en caractéristique $\neq 2,3$ : $c_4$ ; de $M''$ : $c_6$ ;
+\item au point $p = 2$, $c_4 = c_6 = 0$ : $a_1$ ; au point $p = 3$ : $b_2$.
+\end{itemize}
+Il demande ensuite la structure de l'anneau local complété de $M$ en un point
+géométrique où $c_4 = c_6 = 0$, et propose $W[[t]]$, $W$ l'anneau des
+vecteurs de Witt du corps résiduel ($\overline{\mathbf{F}}_2$ ou
+$\overline{\mathbf{F}}_3$), avec $t = a_1$ ou $t = b_2$, en laissant à écrire
+les équations de $c_4 = 0$ et $c_6 = 0$. C'est l'anneau de déformation
+universel de la courbe supersingulière, et la réponse est exacte ; les
+équations sont, à des unités et à des termes de $(p,t)^2$ près, $c_4 \equiv t^4$,
+$c_6 \equiv t^6$ en caractéristique $2$ et $c_4 \equiv t^2$, $c_6 \equiv -t^3$
+en caractéristique $3$, ce qui redonne les multiplicités de la page 95.\footnote{Le
+nom et la référence sont nôtres (Lubin--Tate, 1966 ; Serre--Tate). Le
+paramètre $t$ relève l'invariant de Hasse, ce qui rejoint la première question
+de la page 33.}
+
+\pagerange{98}{99}
+\subsection*{Le niveau 3 au-dessus de $j = 0$ (pages 98, 97 et 99)}
+
+Soit $M_3$ le champ --- ici un schéma --- des courbes elliptiques munies d'une
+base $(e_1,e_2)$ de leurs points d'ordre $3$, au-dessus de $\mathbf{Z}[\tfrac13]$ ;
+l'accouplement de Weil $\langle e_1, e_2\rangle$ le fait vivre au-dessus du
+schéma $\mu_3^{*}$ des racines primitives cubiques de l'unité, et $G =
+\mathrm{GL}(2,\mathbf{F}_3)$ y opère.\footnote{La page ne définit pas $M_3$ ;
+c'est la lecture de la transcription, que tout le contexte confirme. Les
+ordres sont ceux de la colonne en marge de la page 98 : $|G| = 48$, le Borel
+$B$ d'ordre $12$, $G/B$ d'ordre $4$, $G' = \mathrm{SL}(2,\mathbf{F}_3)$ d'ordre
+$24$, $B' = G'\cap B$ d'ordre $6$.}
+
+\emph{La structure de $M_3 \cap V(c_4)$ hors de $6$} (page 98). Si $E$ est une
+courbe elliptique sur $S$, $6$ inversible, avec $c_4(E) = 0$, son groupe
+d'automorphismes $\mu_6 = \mu_2\times\mu_3$ agit sur ${}_3E$ par $\pm 1$ (le
+facteur $\mu_2$, central) et par un élément unipotent (le facteur $\mu_3$, qui
+est $B_u$) ; il y a donc dans ${}_3E$ un unique drapeau invariant, ce qui réduit
+le groupe structural de $G$ au Borel $B$. Sur $\mathbb{S} =
+\mu_3^{*}[\tfrac16]$ il existe une courbe $\mathbb{E}$ avec $c_4 = 0$ et une base
+adaptée au drapeau ; toute courbe avec $c_4 = 0$ et structure de niveau $3$
+s'en déduit localement, et
+\[
+M_3[\tfrac16] \cap V(c_4) \;\simeq\; \mu_3^{*}[\tfrac16] \overset{B}{\times} G,
+\]
+réunion disjointe de $|G/B| = 4$ copies de $\mu_3^{*}[\tfrac16]$.\footnote{Une
+bonne partie des phrases qui relient ces énoncés sont illisibles ; nous
+restituons l'enchaînement que les formules lisibles imposent. Le décompte se
+vérifie directement : à accouplement fixé, les structures de niveau forment
+un torseur sous $G'$, sur lequel $\mathrm{Aut}(E) = \mu_6$ agit librement
+par $B'$ ; il y a $24/6 = 4$ orbites.}
+
+\emph{En $p = 2$} (pages 97 et 99). La courbe $\mathbb{E}$ a bonne réduction en
+$2$ sur l'anneau des entiers de $\mathbf{Q}(\sqrt[3]{1})$ (par exemple $y^2 + y
+= x^3$, de discriminant $-27$).\footnote{La page ajoute « (ni 3 ?) » ; la
+question est hors de propos pour $M_3$, qui ne vit qu'au-dessus de
+$\mathbf{Z}[\tfrac13]$.} Les quatre composantes irréductibles de $M'_3 = M_3
+\cap V(c_4)$ ne se rencontrent qu'au-dessus de $2$, et s'y rencontrent toutes
+en un seul point $a$, au-dessus du point $b = \operatorname{Spec}\mathbf{F}_4$
+de $\mu_3^{*}$ : la courbe supersingulière de caractéristique $2$ a pour
+groupe d'automorphismes $G' = \mathrm{SL}(2,\mathbf{F}_3)$ tout entier, qui
+identifie entre elles toutes ses structures de niveau d'accouplement donné.
+$M'_3$ est connexe.
+
+Reste à savoir si les quatre branches ont en $a$ des tangentes distinctes.
+L'espace tangent de Zariski de $M_3$ en $a$ est de dimension $2$ sur
+$\mathbf{F}_4$ et se scinde en $V_1 \times V_2$, $V_1$ vertical (tangent à la
+fibre $(M_3)_b$) et $V_2$ horizontal. Une branche, qui est une section de
+$M_3 \to \mu_3^*$, a une tangente non verticale, c'est-à-dire le graphe d'une
+application linéaire $V_2 \to V_1$ : il y a exactement $4$ telles droites,
+$\operatorname{card}\mathbf{P}^1(\mathbf{F}_4) - 1 = 5 - 1$. Or $G'$ opère
+trivialement sur $V_2$ (il respecte l'accouplement, donc la base
+$\mu_3^{*}$) et sur $V_1$ par un caractère $G' \to \mathbf{F}_4^{*}$ ; le noyau
+en est le $2$-sous-groupe de Sylow $P' \simeq Q_8$, d'indice $3$, de sorte que
+$G' \to \mathbf{F}_4^{*} \simeq \mathbf{Z}/3$ est surjectif.\footnote{La page
+écrit « le $2$-Sylow $P'$ de $G'$, qui est d'indice 8 » puis
+« $\operatorname{card}[G':P'] = 3$ » : il est d'ordre $8$ et d'indice $3$. Que
+ce caractère soit celui par lequel $\mathrm{Aut}(E_a)$ agit sur l'espace des
+déformations est notre lecture de « les théorèmes de la rigidification en
+car.\ 2 », dont la suite est illisible ; c'est vrai : $\mathrm{Aut}(E_a)$ agit
+sur $\omega$ par $u \in \mu_3$, de noyau $Q_8$.} $G'$ agit donc sur les quatre
+tangentes possibles par homothéties de $\mathbf{F}_4$, avec deux orbites, $\{0\}$
+et $\mathbf{F}_4^{*}$. Comme $G'$ permute transitivement les quatre branches,
+l'ensemble de leurs tangentes est une seule orbite, de cardinal divisant $4$ ;
+ce ne peut être que $\{0\}$. \emph{Les quatre branches ont en $a$ la même
+tangente, la direction horizontale.}\footnote{La conclusion est celle par
+laquelle la page 99 s'ouvre (« \ldots{} aux composantes irréductibles sont
+égales »), la page 97 s'interrompant sur « Donc les quatre\ldots ». L'argument
+d'orbites est le nôtre, construit sur les éléments lisibles des deux pages :
+la décomposition $V_1 \times V_2$, l'action via $\mathbf{F}_4^{*}$, la
+transitivité. La page ajoute qu'il faudrait encore déterminer lequel des deux
+isomorphismes $G'/P' \simeq \mathbf{F}_4^{*}$ intervient ; elle ne le fait
+pas.} C'est cohérent avec la page 95 : quatre branches transverses à la fibre,
+chacune de multiplicité $1$, donnent la multiplicité $4$ de $M'$ en $p = 2$,
+et quatre branches par un même point sont la non-régularité qu'elle y
+constatait.
+
+Un dernier paragraphe de la page 99, très raturé, raisonne par l'absurde sur
+l'action de $\mu_3$ sur la courbe universelle au-dessus de $M'_3$ : elle
+forcerait $\mu_3$ à être central dans $G' \simeq \mathrm{Aut}(E_a)$, « or le
+$3$-sous-groupe de Sylow de $G'$ n'est pas central ». Le fait invoqué est
+exact (le centre de $\mathrm{SL}(2,\mathbf{F}_3)$ est $\{\pm 1\}$) ; l'hypothèse
+réfutée ne se lit pas, et nous ne la restituons pas.\footnote{Une dizaine de
+lignes de ce paragraphe, où figurent $\mu_6 = \mu_2\times\mu_3$ et
+« $\mathbf{Z}/6\mathbf{Z} \simeq B$ opère », sont biffées et illisibles.}
+
+\end{document}

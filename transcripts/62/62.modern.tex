@@ -1,0 +1,2099 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 62, pages 1-96.
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried moves into a
+% footnote. It is held to being mathematically correct as it stands: where the
+% page is loose or mistaken, the true statement is what appears here and the
+% footnote says what the page has. In any dispute of substance the
+% transcription governs: whoever cites Grothendieck must cite batch-01.fr.tex
+% to batch-05.fr.tex.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-03 — first pass, unchecked against
+% the pages by a human. Not measured against the Opus 5 reference reading of
+% folder 115. The folder was read whole — five batches, pages 1-96 — before any
+% of this was written, and it is written as ONE file for the shelfmark.
+%
+% Coverage. Every page that carries his mathematics in the transcriptions is
+% read here, with one exception: page 72. Batch 4's header announces « p. 72 a
+% third recapitulation of sn, formulas (1)-(6) » and says no page was skipped,
+% but its body has no \page{72} (it goes from 71 to 73). The reading cannot
+% cover what the transcription does not give; this is flagged in the spine
+% section and at its place. Pages 1, 2, 17, 19, 25, 26, 28, 30, 32, 34, 36,
+% 38, 40, 44, 48, 50, 52, 54, 55, 58 are covers, blanks or unrelated typed
+% versos, as the transcriptions record.
+%
+% Two moutures of one subject. Pages 1-57 are the algebraic theory over an
+% arbitrary base (equations, moduli, the anharmonic group, j); pages 58-96,
+% under their own cover « Théorie transcendante (Généralités classiques) »,
+% are the classical analytic theory over C, itself in three layers (59-60 an
+% older hand; 61-73 a first exposition; 74-96 a second, numbered 1)-5) then
+% Θ, J, Legendre). The layers are kept distinct; the spine says so.
+%
+% NOTATION fixed for the whole folder (stated in the spine section):
+%   pi : C -> S the curve (his f), e its unit section (his s), D = e(S) the
+%     divisor; Lie sheaf \mathcal{L} = Lie(C/S) (his \mathcal{L} / L_{C/S}),
+%     omega = \mathcal{L}^\vee; E_n = pi_* O_C(nD); gr_n E = E_n/E_{n-1}
+%     (his \mathcal{L}_n);
+%   x of pole order 2, y of pole order 3 (MODERN convention; pages 8-16 call
+%     them y and x, page 24 and 56 already use the modern one);
+%   the involution (t-2)/(2t-1) of page 27 is kappa here (his sigma, which is
+%     kept for Weierstrass's sigma function); elements of S_3 in general g, h;
+%     the transpositions keep his lambda, mu, nu; the middle coordinate of
+%     page 35 is w (his s); the quotient X -> P^1_S of pages 41-47 is q (his
+%     p and f); the S_3-torsor of page 49 is T (his S'), S' = S[sqrt(-3)] kept;
+%   j is HIS invariant throughout pages 18-53, j = 1 - J = 1 - j_cl/1728 with
+%     J Klein's g_2^3/Delta (page 91) and j_cl the usual invariant; so j = 0 is
+%     the curve with automorphisms of order 4, j = 1 the one of order 6;
+%   half-periods: omega_1 + omega_2 + omega_3 = 0 (pages 62, 90); page 78's
+%     omega_3 = omega_1 + omega_2 is the same point of C/P (different sign of
+%     eta_3), flagged there; P the period lattice (his gothic P).
+%
+% Substantive departures from the pages, each footnoted where it occurs:
+%   - p. 7: L_{n+1} = L^{n+1} holds for n >= 1 (boxed « n >= 2 »);
+%   - p. 6: « E_3 engendre Γ_* » read as: E_3 generates the algebra of
+%     functions with poles along D, and the Veronese ring ⊕ E_{3k};
+%   - p. 9: the y z^2 term missing from the homogenised cubic is restored;
+%     « P^3 » read P^2; margin « Δ ∈ L^{⊗12} » is ω^{⊗12} = L^{⊗-12};
+%   - p. 10: « δ ≠ 0 » read « δ invertible », as the page says just above;
+%   - p. 11: BXY^2 read BXY (as p. 9 has it); p. 12: S' -> S is smooth
+%     surjective of finite type, not finite;
+%   - p. 13: the second « x » is y;
+%   - p. 18: the cubic x^3 + 27 (j-1)/j (x+1) is not a normal form of
+%     invariant j; the correct one is page 24's 4x^3 - 27 (j-1)/j (x+1);
+%     p. 20's « Δ = b^3 - 27c^2 ? » holds for 4x^3 - bx - c, not x^3 + bx + c
+%     (whose discriminant is -4b^3 - 27c^2);
+%   - p. 22: the identity in the roots holds up to sign (irrelevant for j);
+%   - p. 27: « Normalisateur : S_6 » read as page 29's S_3 x Z/2 (S_6 is not
+%     a subgroup of PGL_2);
+%   - p. 27: the multiplication table is right for the convention gh = « g
+%     then h »; stated;
+%   - p. 43: q is the quotient map, of degree 6, not an isomorphism; fibres
+%     over infinity, 0, 1 are X', X'', the bisection — as pages 39, 43 (j in
+%     P^1 - infinity) and 47 force, against the partly illegible assignment
+%     on page 43;
+%   - p. 62/67: Legendre's relation is +iπ/2 for Im(ω_2/ω_1) > 0; the labels
+%     pages 65-69 force (ω_1 = iK', ω_2 = K) are the other orientation;
+%   - p. 63: σ is odd, not even;
+%   - p. 64: Jacobi's formula with exponent -2(n_1η_1+n_2η_2)z (sign);
+%   - p. 67-69: poles of sn, cn, dn are at ±ω_1 (not ω_2), zeros of sn at 0,
+%     2ω_2; cn(z+2ω_2) = -cn, cn(z+2ω_3) = cn; periods of cn 4ω_2, 2ω_3, of dn
+%     2ω_2, 4ω_1; residues of cn at ω_1 is -i/k, of dn -i (checked
+%     numerically); k = ± e^{η_1ω_1}/σ(ω_1)^2 (page reads σ'ω_2);
+%   - p. 69: cn solves the sn-equation for ρ^2 = -k^2/(1-k^2), not
+%     ρ = k/sqrt(1-k^2);
+%   - p. 74: a') is the residue theorem on a period parallelogram, not
+%     Liouville; p. 74 (2) defines a meromorphic, not holomorphic, function;
+%   - p. 75: « 2P » read P; « le polynôme est unitaire » is false (leading
+%     coefficient c_k);
+%   - p. 80: ζ = 1/u - (c_1/3)u^3 - ... (page c_2/3);
+%   - p. 82 (16): exponent ... + iπ (page 2iπ, which loses the sign);
+%   - p. 86 (8): a factor t is missing; (10), (11), (12) are right (checked);
+%     the constant of p. 87 is i sqrt(i), not sqrt(i);
+%   - p. 88: e^{-π} ≈ 1/23; the reduction Re T > 1 is for real T;
+%   - p. 88 (14): Θ_2 carries (-1)^n in its cosine form;
+%   - p. 89 (15): e_3 = (1/3)(π/2ω_1)^2 (Θ_1(0)^4 - Θ_2(0)^4);
+%   - p. 90: g_2 = -4(e_2e_3 + e_3e_1 + e_1e_2); g_3 = 28 c_2; e_i series
+%     needs its -1/w^2 terms; the sums for c_1, c_2 run over non-zero periods;
+%   - p. 91: g_2, g_3 are homogeneous of degree -4, -6;
+%   - p. 92: J(i) = 1 (g_3 = 0), J(ρ) = 0 (g_2 = 0) — the page's values 0, 1
+%     are those of 1 - J, i.e. of HIS j of pages 39-47;
+%   - p. 93: dn = 1/ch for k = 1;
+%   - p. 94: zeros of cn at K + 2mK + 2m'iK'; dn(u+K'') = -ik' sn/cn (checked
+%     numerically; page +); margin: sn has real zeros 2mK;
+%   - p. 95: 3e_2 = (k'^2 - 2)M^2.
+%
+% Announced and never established: the proof of Proposition 3 (p. 6-7, the
+% block is cancelled); the explicit discriminant (p. 10, « Ici le
+% discriminant s'explicite : ... »); the normalisation asked for at the foot
+% of p. 16; « Prouver : le normalisateur ... » (p. 29); the supplementary data
+% needed when j is not invertible (p. 45); the elimination « on peut aussi
+% éliminer ... » (p. 53); the quotients by κ « il serait facile de ... »
+% (p. 39); the value of sn ω_2 on p. 67 (denominator illegible); page 72.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{62}
+\pages{1}{96}
+\dating{[à partir de 1963]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Courbes elliptiques (généralités - vieille rédaction) : notes manuscrites (s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Ces quatre-vingt-seize pages parlent des courbes elliptiques : les courbes
+qu'on écrit $y^2 = x^3 + ax + b$, et qui sont en même temps des groupes --- on
+sait y additionner deux points. Elles demandent comment on les classe.
+
+Sur les nombres complexes, la réponse est ancienne et c'est la seconde moitié
+du dossier qui la rappelle. Une courbe elliptique complexe est un tore : le plan
+$\mathbf{C}$ divisé par un réseau de périodes. Les fonctions sur ce tore sont
+les fonctions « doublement périodiques » de Weierstrass et de Jacobi, $\wp$,
+$\zeta$, $\sigma$, $\mathrm{sn}$, $\mathrm{cn}$, $\mathrm{dn}$, les fonctions
+thêta ; et deux tores sont isomorphes exactement quand un seul nombre, la
+fonction modulaire $J$, prend la même valeur. Ces pages-là sont un formulaire
+classique, rédigé deux fois et plus soigneusement la seconde.
+
+Le problème des cinquante premières pages est de faire la même chose quand il
+n'y a plus de nombres complexes, plus de réseau, plus d'intégrales : pour des
+courbes elliptiques \emph{en famille}, au-dessus d'une base quelconque, où les
+coefficients de l'équation sont des fonctions sur un espace et où même $2$ et
+$3$ peuvent ne pas être inversibles. Il faut alors comprendre d'où vient
+l'équation, ce qui la rend unique, et ce qu'on perd en la choisissant.
+
+Deux idées y répondent. La première : l'équation n'est pas un choix arbitraire,
+on la \emph{lit} sur la courbe. Les fonctions qui ont au plus un pôle d'ordre
+$n$ en l'origine forment un espace de dimension $n$ ; une base adaptée de
+l'espace de dimension $3$ plonge la courbe dans le plan et fournit l'équation ;
+et toute la liberté dans ce choix est un groupe de matrices triangulaires. La
+« variété des modules » est donc l'espace des équations divisé par ce groupe.
+Une image : pour classer les triangles à déplacement près, on regarde les
+triplets de sommets et l'on divise par le groupe des déplacements --- mais un
+triangle isocèle a une symétrie, et le quotient n'est plus un espace ordinaire.
+La page qui le dit (« pro-représentable », relativement aux « morphismes simples
+surjectifs ») est l'endroit où l'on voit poindre ce qu'on appelle aujourd'hui
+un champ.
+
+La seconde idée est celle de Legendre. Une courbe elliptique est un revêtement
+double de la droite, ramifié en quatre points ; on envoie trois d'entre eux en
+$0$, $1$, $\infty$, et le quatrième devient un nombre $t$. Permuter les trois
+premiers change $t$ en $1-t$, $1/t$, \ldots\ : six valeurs, et la fonction de
+$t$ qui ne voit pas ces permutations est l'invariant $j$, dont les pages 27 à
+39 calculent la formule explicite. Au-dessus d'une base, les trois points
+peuvent s'échanger quand on se déplace : c'est un revêtement galoisien de
+groupe $\mathfrak{S}_3$, et les pages 41 à 53 le traitent comme tel. On y lit,
+en marge d'une même page, « fonctoriel » à côté d'une description valable sur
+toute base, et « non fonctoriel » à côté d'une description par coordonnées,
+valable seulement sur un anneau local --- le critère par lequel ces pages jugent
+leurs propres énoncés.
+
+Les noms à chercher ensuite : équations de Weierstrass sur une base, champ
+des modules $\mathcal{M}_{1,1}$, fibré de Hodge et formes modulaires de poids
+$4$, $6$, $12$, famille de Legendre et structures de niveau $2$, groupe
+anharmonique, invariant $J$ de Klein, fonctions thêta et leur transformation
+modulaire.
+
+\keywords{elliptic curve over a base, Riemann-Roch theorem, Weierstrass equation, Lie algebra of an elliptic curve, Hodge bundle, moduli stack of elliptic curves, quotient stack, discriminant, Brauer-Severi scheme, cross-ratio, Legendre family, anharmonic group, j-invariant, level-2 structure, Galois cover, torsor, Kummer theory, Weierstrass elliptic functions, Weierstrass zeta function, Weierstrass sigma function, Legendre relation, Hermite decomposition, Jacobi elliptic functions, Jacobi imaginary transformation, Jacobi theta functions, heat equation, Klein J-invariant, modular group, elliptic points}
+\end{resume}
+
+\pagerange{1}{96}
+\section*{Le fil du dossier, et ses conventions}
+
+Le dossier a deux moitiés, séparées par une chemise (page 58), et la seconde se
+subdivise en trois couches. Aucune page n'est numérotée par lui ; l'ordre est
+celui des feuillets.
+
+\begin{enumerate}
+\item \emph{Pages 1 à 16} (chemise : « Courbes elliptiques » ; titre :
+« Modules des courbes elliptiques ») --- les faisceaux $\mathcal{E}_n$ des
+fonctions à pôles bornés le long de la section unité, le plongement dans le
+plan, l'équation de Weierstrass sur une base, le schéma des équations et le
+groupe triangulaire, les normalisations successives ; hors de la
+caractéristique $2$, la courbe comme revêtement double d'une conique.
+\item \emph{Pages 18 à 24} --- des feuilles de calcul : l'invariant $j$ d'une
+cubique en fonction de ses coefficients et de ses racines, le discriminant, le
+birapport. Les pages 19, 21 et 23 sont des versos dactylographiés sans rapport
+(un tapuscrit numéroté « n° 276 », d'algèbre commutative), dont deux portent
+une note au crayon.
+\item \emph{Pages 27 à 39} --- la droite projective munie des trois points
+$0, 1, \infty$ : son groupe d'automorphismes $\mathfrak{S}_3$, une involution
+supplémentaire, les quotients successifs, et la formule explicite de $j$ en
+fonction du paramètre de Legendre $t$.
+\item \emph{Pages 41 à 53} --- la même chose « tordue » au-dessus d'une base :
+une conique munie d'une trisection étale, sa classification par
+$H^1(S, \mathfrak{S}_3)$, l'invariant $j$, la description par un
+$\mathfrak{S}_3$-torseur ; puis « Autre façon de procéder ».
+\item \emph{Pages 56 et 57} --- deux feuilles de brouillon : les poids des
+coefficients de Weierstrass, un argument de descente.
+\item \emph{Pages 58 à 96} (chemise : « Théorie transcendante (Généralités
+classiques) ») --- la théorie analytique sur $\mathbf{C}$, en trois couches qui
+se recouvrent et qu'on garde distinctes --- pages 59--60, d'une écriture posée
+et d'aspect plus ancien : définition des fonctions elliptiques et théorèmes de
+Liouville I à V ; pages 61--73, une première rédaction : $\wp$, $\zeta$,
+$\sigma$, décomposition d'Hermite, formule de Jacobi, formules d'addition, puis
+la fonction $\mathrm{sn}$ de Legendre et ses compagnes, reprises une seconde
+fois sous les noms $\mathrm{sn}_1$, $\mathrm{cn}_1$, $\mathrm{dn}_1$ ; pages
+74--96, une seconde rédaction, numérotée 1) à 5) : le corps des fonctions
+elliptiques, $\wp$ et ses relations, $\zeta$, $\sigma$, les formules
+d'addition, les fonctions $\sqrt{\wp - e_i}$, puis les fonctions thêta, la
+fonction modulaire, et les fonctions de Legendre.
+\end{enumerate}
+
+Les deux moitiés se répondent sans se citer. L'équation $y^2 = 4x^3 - g_2 x -
+g_3$ que la seconde moitié obtient pour $x = \wp$, $y = \wp'$ est celle que les
+pages 8 à 16 extraient, sur une base quelconque, des faisceaux $\mathcal{E}_2$
+et $\mathcal{E}_3$ : $\wp$ est la fonction à pôle double en l'origine, $\wp'$
+la fonction à pôle triple. Les trois valeurs $e_1, e_2, e_3$ de $\wp$ aux
+demi-périodes sont les trois points de ramification autres que l'origine du
+revêtement double des pages 15 et 51 --- les points de $2$-torsion ---, et la
+fonction $\mathrm{sn}^2 = 1/(\wp - e_1)$ de la page 66 est une coordonnée sur la
+droite quotient qui envoie l'origine et deux d'entre eux en $0, \infty, 1$, et le
+troisième en $1/k^2$ : à l'action de $\mathfrak{S}_3$ près, le module $k^2$ de
+Legendre est le paramètre $t$ des pages 24 à 49. Enfin la fonction modulaire $J$ de la page 91 et l'invariant $j$ des
+pages 39 à 47 sont liés par $j = 1 - J$.
+
+\emph{Conventions, valables pour tout le dossier.} $S$ est un schéma
+localement noethérien, $\pi\colon C \to S$ une courbe elliptique, $e$ sa section
+unité et $D = e(S)$ le diviseur qu'elle définit.\footnote{Il note $f$ le
+morphisme structural et $s$ la section unité ; on réserve $s$ à la section de
+la conique des pages 43 à 49, $f$ au premier quotient de la page 35, et $D$ au
+diviseur (il note aussi $D$ la tangente de la page 8 et la dérivation de la
+page 13 ; on les appelle $T$ et $\partial$).} $\mathcal{L} =
+\operatorname{Lie}(C/S) = e^*T_{C/S}$ est le faisceau de Lie (sa notation), et
+$\omega = \mathcal{L}^\vee = e^*\Omega^1_{C/S}$ le fibré de Hodge.
+$\mathcal{E}_n = \pi_*\mathcal{O}_C(nD)$, et $\operatorname{gr}_n\mathcal{E} =
+\mathcal{E}_n/\mathcal{E}_{n-1}$.\footnote{Il écrit $\underline{L}$ pour
+$\mathcal{O}_C(D)$ et $\mathcal{L}_n$ pour $\operatorname{gr}_n$ ; on évite la
+seconde notation, qui se confondrait avec les puissances $\mathcal{L}^{\otimes n}$
+--- auxquelles $\mathcal{L}_n$ est d'ailleurs isomorphe.} $x$ désigne une
+fonction à pôle d'ordre $2$ et $y$ une fonction à pôle d'ordre $3$, selon
+l'usage moderne.\footnote{Aux pages 8 à 16 il fait l'inverse : son $x$ est
+d'ordre $3$, son $y$ d'ordre $2$, et son équation s'écrit $x^2 + ay^3 +
+\cdots = 0$. Aux pages 24 et 56 il adopte déjà l'usage moderne. On l'adopte
+partout, pour que $x$ et $y$ aient un seul sens dans le document.} Pour un
+faisceau localement libre $\mathcal{F}$, $\mathbb{V}(\mathcal{F}) =
+\operatorname{Spec}\operatorname{Sym}\mathcal{F}$ et $\mathbf{P}(\mathcal{F}) =
+\operatorname{Proj}\operatorname{Sym}\mathcal{F}$, comme dans EGA --- c'est sa
+convention.
+
+L'invariant $j$ des pages 18 à 53 est le sien, et il n'est pas l'invariant
+usuel : avec $j_{\mathrm{cl}} = 1728\,\dfrac{4a^3}{4a^3 + 27b^2}$ pour $y^2 =
+x^3 + ax + b$, et $J = j_{\mathrm{cl}}/1728$ l'invariant de Klein de la page 91,
+on a
+\[
+j = 1 - J = 1 - \frac{j_{\mathrm{cl}}}{1728} = \frac{27b^2}{4a^3+27b^2}.
+\]
+Ainsi $j = 0$ est la courbe à automorphismes d'ordre $4$ ($j_{\mathrm{cl}} =
+1728$), $j = 1$ celle à automorphismes d'ordre $6$ ($j_{\mathrm{cl}} = 0$), et
+$j = \infty$ la dégénérescence.\footnote{Cette identification est la nôtre ;
+elle résulte de la formule (11) de la page 39 et de celles des pages 20 et 22,
+et on l'a vérifiée par le calcul. La page ne compare jamais son $j$ à
+l'invariant usuel.}
+
+Dans la seconde moitié, $\mathfrak{P}$ est le réseau des périodes (sa lettre
+gothique), engendré par $2\omega_1$ et $2\omega_2$ ; les demi-périodes sont
+normalisées par $\omega_1 + \omega_2 + \omega_3 = 0$ (pages 62 et 90), $e_i =
+\wp(\omega_i)$ et $\eta_i = \zeta(\omega_i)$. L'involution $t \mapsto
+(t-2)/(2t-1)$ de la page 27 est notée $\kappa$, pour laisser $\sigma$ à la
+fonction de Weierstrass.\footnote{Il la note $\sigma$.}
+
+\emph{Ce que le dossier annonce et n'établit pas} : la démonstration de la
+Proposition 3 (pages 6--7, bloc annulé) ; la forme explicite du discriminant
+(page 10) ; la normalisation que demande la dernière ligne de la page 16 ; le
+calcul du normalisateur de $\mathfrak{S}_3$ (page 29, « Prouver ») ; les données
+supplémentaires qu'il faut quand $j$ n'est pas inversible (page 45) ; la fin de
+la page 53 ; les quotients par $\kappa$ (page 39). On les retrouve à leur place.
+\emph{Ce que la transcription ne donne pas} : la page 72, qu'annonce l'en-tête
+de sa transcription (une troisième récapitulation de $\mathrm{sn}$, formules (1)
+à (6)) mais que son texte ne contient pas ; la présente lecture ne la couvre
+donc pas.
+
+\pagerange{1}{16}
+\section*{I. Modules des courbes elliptiques (pages 1 à 16)}
+
+Le feuillet de garde porte « Courbes elliptiques », et la première page écrite
+le titre « Modules des courbes elliptiques ».\footnote{Le titre de la chemise
+est inscrit de sa main en haut à droite de la page 1, qui ne porte rien
+d'autre ; la page 2 est blanche.}
+
+\pagerange{3}{7}
+\subsection*{Les faisceaux $\mathcal{E}_n$ (pages 3 à 7)}
+
+La section unité $e$ définit un diviseur de Cartier relatif $D$, transversal
+aux fibres, d'où le faisceau inversible $\mathcal{O}_C(D)$, dont les sections
+sont les fonctions sur $C$ à pôle au plus simple le long de $D$. Sa restriction
+à $D$ est le fibré normal, et celui-ci s'identifie à l'espace tangent le long
+de la section unité :
+\[
+e^*\mathcal{O}_C(D) \simeq e^*\mathcal{N}_{D/C} \simeq e^*T_{C/S} =
+\mathcal{L},
+\qquad
+e^*\mathcal{O}_C(nD) \simeq \mathcal{L}^{\otimes n}.
+\]
+Comme $C$ est un schéma en groupes, $T_{C/S} \simeq \pi^*\mathcal{L}$ : le
+fibré tangent est trivialisé par translation.\footnote{La page commence
+« $s^*(\underline{L}) \simeq$ » et le biffe pour poser d'abord $\underline{V}_{C/S}
+= f^*(s^*\underline{V}_{C/S})$ ; une « Proposition 1 » commencée sous ces lignes est
+barrée et reprise à la page 4. Le $S'$ de la seconde formule de la page est la
+section unité vue comme sous-schéma de $C$.} La section $1$ de
+$\mathcal{O}_C$ donne des injections $\mathcal{O}_C(nD) \hookrightarrow
+\mathcal{O}_C((n+1)D)$ --- toutes contenues dans le faisceau des fonctions
+méromorphes ---, d'où une suite croissante
+\[
+\cdots \subset \mathcal{E}_n \subset \mathcal{E}_{n+1} \subset \cdots,
+\qquad \mathcal{E}_n = \pi_*\mathcal{O}_C(nD).
+\]
+
+\emph{Proposition 1.} Les faisceaux $\mathcal{O}_C(nD)$ sont
+cohomologiquement plats sur $S$ en toute dimension, et
+$\mathcal{E}_n$ est localement libre de rang $0$ si $n < 0$, de rang $1$ si
+$n = 0$, de rang $n$ si $n \geqslant 1$. Le faisceau $\mathcal{O}_C(nD)$ est
+ample si et seulement si $n \geqslant 1$, très ample si et seulement si $n
+\geqslant 3$.
+
+C'est Riemann--Roch en genre $1$, où $2g - 2 = 0$ : sur chaque fibre, un
+faisceau inversible de degré $d \neq 0$ a $h^0 = d$, $h^1 = 0$ si $d > 0$, et
+$h^0 = 0$, $h^1 = -d$ si $d < 0$ ; ces dimensions ne sautent pas, d'où la
+platitude cohomologique, et pour $n = 0$ on a $\pi_*\mathcal{O}_C =
+\mathcal{O}_S$, $R^1\pi_*\mathcal{O}_C \simeq \omega^\vee$, localement libres.
+Le degré de $\mathcal{O}_C(nD)$ est $n$, d'où l'amplitude exactement pour $n
+\geqslant 1$. Pour $n = 1, 2$, $\mathbf{P}(\mathcal{E}_n)$ est de dimension
+relative $0$ ou $1$, et $C$ ne peut s'y plonger (il lui serait isomorphe) ;
+pour $n \geqslant 3 = 2g + 1$, le critère usuel issu de Riemann--Roch donne la
+très ample.\footnote{La démonstration de la page est en grande partie
+illisible ; seuls la référence à Riemann--Roch, l'argument par la dimension de
+$\mathbf{P}(\mathcal{E}_n)$ et l'inégalité « $3 > (2g-2)+2$ » se lisent. Une
+note marginale au crayon parle d'une « prop.\ préliminaire ». L'argument
+donné est le standard.}
+
+\emph{Proposition 2.} $\mathcal{E}_0 = \mathcal{E}_1 = \mathcal{O}_S$, et pour
+$i \leqslant j$ l'inclusion $\mathcal{E}_i \subset \mathcal{E}_j$ est
+universellement injective --- localement facteur direct. Les quotients
+$\operatorname{gr}_n\mathcal{E}$ sont nuls pour $n = 1$, égaux à
+$\mathcal{O}_S$ pour $n = 0$, et
+\[
+\operatorname{gr}_n\mathcal{E} \simeq \mathcal{L}^{\otimes n}
+\qquad (n \geqslant 2).
+\]
+En effet, la suite exacte $0 \to \mathcal{O}_C(nD) \to \mathcal{O}_C((n+1)D)
+\to e_*\mathcal{L}^{\otimes(n+1)} \to 0$ donne
+\[
+0 \to \mathcal{E}_n \to \mathcal{E}_{n+1} \to \mathcal{L}^{\otimes(n+1)} \to
+R^1\pi_*\mathcal{O}_C(nD),
+\]
+et le dernier terme est nul pour $n \geqslant 1$.\footnote{La page encadre
+« $\mathcal{L}_{n+1} \simeq \mathcal{L}^{\otimes(n+1)}$, $n \geqslant 2$ » ;
+l'argument vaut dès $n \geqslant 1$, c'est-à-dire pour $\operatorname{gr}_m$,
+$m \geqslant 2$, ce qu'on énonce. Une note marginale demande d'« intervertir
+avec la prop.\ 2 » : cette suite exacte, écrite à la page 7, est la bonne
+démonstration de l'énoncé que la page 5 laissait en fragments.} Par suite la
+multiplication induit des isomorphismes $\operatorname{gr}_n \otimes
+\operatorname{gr}_m \simeq \operatorname{gr}_{n+m}$ pour $n, m \geqslant 0$,
+$n, m \neq 1$, et l'algèbre graduée associée à la filtration est
+\[
+\operatorname{gr}\mathcal{E} = \mathcal{O}_S \oplus \bigoplus_{n \geqslant 2}
+\mathcal{L}^{\otimes n}.
+\]
+Elle est engendrée par ses composantes de degrés $2$ et $3$ : pour $n
+\geqslant 2$, $\operatorname{gr}_n$ est isomorphe à
+$\operatorname{gr}_2^{\otimes n'}$ ou à $\operatorname{gr}_2^{\otimes n'}
+\otimes \operatorname{gr}_3$ selon la parité de $n$ (Corollaire). Il en résulte
+que l'algèbre $\mathcal{E}_\infty = \varinjlim \mathcal{E}_n =
+\pi_*\mathcal{O}_C(*D)$ des fonctions à pôles le long de $D$ est engendrée par
+$\mathcal{E}_3$, et de même l'anneau gradué $\bigoplus_k \mathcal{E}_{3k}$ de
+$\mathcal{O}_C(3D)$.\footnote{La page dit « $\mathcal{E}_3$ engendre
+$\Gamma_*(f, \underline{L})$ », où $\Gamma_* = \coprod_n \mathcal{E}_n$ est
+l'anneau gradué de $\mathcal{O}_C(D)$ : pris à la lettre, c'est faux (les
+degrés $1$ et $2$ ne sont pas engendrés par le degré $3$). Ce qui est vrai est
+l'énoncé donné, filtré ou pour l'anneau de Veronese.}
+
+\emph{L'action de l'algèbre de Lie} (pages 6 et 7, en partie annulées). Un
+champ de vecteurs invariant $\partial$, section de $\mathcal{L}$, agit sur les
+fonctions ; il élève l'ordre du pôle le long de $D$ d'une unité, et sur les
+termes dominants, il multiplie par $-n$ une fonction à pôle d'ordre $n$
+(car $\partial(z^{-n}) = -nz^{-n-1}$ pour un paramètre local $z$ adapté). D'où
+des applications
+\[
+\mathcal{L} \otimes \operatorname{gr}_n\mathcal{E} \to
+\operatorname{gr}_{n+1}\mathcal{E}, \qquad n \geqslant 2,
+\]
+qui, au travers de $\operatorname{gr}_n \simeq \mathcal{L}^{\otimes n}$, sont la
+multiplication par $-n$.
+
+\emph{Proposition 3.} En un point de $S$ de caractéristique résiduelle
+d'exposant $p$, cette application est un isomorphisme si et seulement si $p$
+est premier à $n$ ; si $p\mathcal{O}_S = 0$ et $p \mid n$, elle est nulle
+(Corollaire).\footnote{L'énoncé et son corollaire sont lisibles ; la
+démonstration (« vérification locale » sur une dérivation et l'ordre d'un
+pôle) l'est par fragments, et l'argument donné ici est le nôtre. Deux
+corollaires intermédiaires --- en caractéristique nulle $\mathcal{L}_n \simeq
+\mathcal{L}^{\otimes(n-2)} \otimes \mathcal{L}_2$, en caractéristique $\neq 2$
+$\mathcal{L}_2 \simeq \mathcal{L}^{\otimes 2}$ --- sont encadrés ensemble et
+barrés : l'isomorphisme $\operatorname{gr}_n \simeq \mathcal{L}^{\otimes n}$
+de la page 7, qui vaut en toute caractéristique, les rend inutiles.}
+
+\pagerange{8}{10}
+\subsection*{Le plongement cubique et l'équation de Weierstrass (pages 8 à 10)}
+
+Par la Proposition 1, $\mathcal{O}_C(3D)$ définit une immersion fermée
+\[
+C \hookrightarrow \mathbf{P}(\mathcal{E}_3),
+\]
+dans un fibré en plans projectifs. L'image est un diviseur relatif de degré
+$3$, défini par une forme cubique déterminée à une unité près : c'est le noyau,
+localement libre de rang $1$, de $\operatorname{Sym}^3\mathcal{E}_3 \to
+\mathcal{E}_9$ (rangs $10$ et $9$) --- un point de
+$\mathbf{P}\bigl((\operatorname{Sym}^3\mathcal{E}_3)^\vee\bigr)$, que la page
+écrit $\mathbf{P}(\operatorname{Symm}_3(\check{\mathcal{E}}_3))$.\footnote{La
+description par le noyau est la nôtre ; la page dit seulement que $C$ est
+« défini par une section sur $S$ de l'espace projectif des $3$-formes ».} Le
+drapeau $\mathcal{E}_1 \subset \mathcal{E}_2 \subset \mathcal{E}_3$ a un sens
+géométrique : $\mathbf{P}(\mathcal{E}_3/\mathcal{E}_2)$ est la section unité,
+et $T = \mathbf{P}(\mathcal{E}_3/\mathcal{E}_1)$ est une droite relative, la
+tangente en l'origine, qui est une \emph{tangente d'inflexion} --- elle coupe
+$C$ en l'origine avec multiplicité $3$.\footnote{En marge, un croquis d'une
+courbe et de sa tangente d'inflexion.}
+
+Choisissons une base de $\mathcal{E}_3$ adaptée au drapeau et commençant par
+$1$ : $1, x, y$, avec $x \in \mathcal{E}_2$, $y \in \mathcal{E}_3$. Deux telles
+bases diffèrent par une matrice triangulaire
+\[
+\begin{pmatrix} 1 & \alpha & \gamma \\ 0 & \lambda & \beta \\ 0 & 0 & \mu
+\end{pmatrix},
+\qquad \lambda, \mu \in \mathcal{O}_S^*,
+\]
+qui dépend de cinq paramètres. Alors $1, x, y, x^2, xy, x^3$ est une base de
+$\mathcal{E}_6$ adaptée à sa filtration, et $y^2 \in \mathcal{E}_6$ s'y écrit :
+on obtient une équation
+\[
+\boxed{\;y^2 + a x^3 + b xy + c x^2 + d y + e x + f = 0\;}
+\qquad (a \in \Gamma(S, \mathcal{O}_S^*)),
+\]
+où $a$ est inversible parce que $y^2$ et $x^3$ ont tous deux un terme dominant
+non nul dans $\operatorname{gr}_6 \simeq \mathcal{L}^{\otimes 6}$.\footnote{Sur la
+page, avec ses lettres, $x^2 + ay^3 + bxy + cy^2 + dx + ey + f = 0$ ; le
+signe devant $ay^3$ est surchargé. Un premier essai, encadré et annulé, écrit
+la forme générale à sept coefficients et un exposant illisible.} Homogénéisée
+par une troisième coordonnée $z$, c'est la forme cubique
+\[
+\Phi(x, y, z) = y^2z + ax^3 + bxyz + cx^2z + dyz^2 + exz^2 + fz^3,
+\]
+et $\Phi$ \emph{est} l'équation de $C$ dans $\mathbf{P}(\mathcal{E}_3) \simeq
+\mathbf{P}^2_S$ : si $\Phi'$ définit $C$, $\Phi$ est un multiple de $\Phi'$, et
+le facteur est une unité puisque le coefficient de $y^2z$ vaut $1$ en tout
+point de $S$.\footnote{La forme homogène de la page omet le terme en $yz^2$
+(son $eyz^2$, notre $dyz^2$) ; on le rétablit. La page écrit
+« $\simeq \mathbf{P}^3_S$ », exposant douteux à la lecture : c'est un plan.}
+
+Réciproquement, des coefficients $a, \ldots, f \in \Gamma(S, \mathcal{O}_S)$
+définissent un diviseur relatif positif de $\mathbf{P}^2_S$, qui passe par $(0
+: 1 : 0)$ avec la tangente d'inflexion $z = 0$ ; il est lisse sur $S$ si et
+seulement si un certain polynôme à coefficients entiers $\delta(a, \ldots, f)$,
+le discriminant, est inversible en tout point.\footnote{La page écrit
+« $\delta(a, b, c, d, e, f) \neq 0$ » ; deux lignes plus haut elle exige que
+$\delta$ soit « une \emph{unité} partout », et c'est ce qu'on énonce. Elle
+annonce « Ici le discriminant s'explicite : \ldots » et s'arrête : le polynôme
+n'est pas écrit. Pour l'équation normalisée de la page 13 ($a = -1$), c'est le
+discriminant $\Delta$ des formules de Tate, publiées par Deligne
+(\emph{Courbes elliptiques : formulaire d'après J.~Tate}, 1975). Lisse
+entraîne $a$ inversible : si $a$ s'annule en un point, la droite $z = 0$ est
+contenue dans la fibre.} D'où :
+
+\emph{Proposition} (page 10). Se donner une courbe elliptique sur $S$ munie
+d'une « base spéciale » de $\mathcal{E}_3(C/S)$ --- adaptée au drapeau et
+commençant par $1$ --- équivaut à se donner des sections $a, \ldots, f$ de
+$\mathcal{O}_S$ avec $\delta(a, \ldots, f)$ inversible ; la correspondance est
+compatible au changement de base.\footnote{Il avait d'abord écrit « base
+adaptée », biffé pour « base spéciale ». Un couple (courbe, base spéciale) n'a
+pas d'automorphisme non trivial, puisque la courbe est plongée par la base :
+c'est pourquoi l'énoncé est une équivalence avec un \emph{ensemble} de
+coefficients.}
+
+\pagerange{10}{12}
+\subsection*{Le schéma des équations et le groupe triangulaire (pages 10 à 12)}
+
+Soit
+\[
+\mathfrak{M} = \operatorname{Spec}\bigl(\mathbf{Z}[A, B, C, D, E, F][\delta^{-1}]\bigr),
+\]
+ouvert affine de l'espace affine $\mathbf{E}^6_{\mathbf{Z}}$. Le groupe $G
+\subset \mathrm{GL}(3)_{\mathbf{Z}}$ des matrices triangulaires ci-dessus opère
+sur $\mathfrak{M}$ par substitution affine
+\[
+x' = \lambda x + \alpha, \qquad y' = \mu y + \beta x + \gamma
+\]
+dans la forme $y^2 + Ax^3 + Bxy + Cx^2 + Dy + Ex + F$.\footnote{Sur la page,
+avec ses lettres, $Y' = \lambda Y + \alpha$, $X' = \mu X + \beta Y + \gamma$, et
+la forme $X^2 + AY^3 + BXY^2 + \cdots$ ; l'exposant de $Y$ dans $BXY^2$ est une
+lecture douteuse, et la page 9 a $bxy$, qui est seul de degré $5$.} La
+Proposition de la page 10 dit que le foncteur « courbes elliptiques munies
+d'une base spéciale » est \emph{représentable} par $\mathfrak{M}$. Deux points
+de $\mathfrak{M}(S)$ définissent des courbes isomorphes si et seulement si ils
+se déduisent l'un de l'autre, localement sur $S$, par un élément de $G$ ; et
+toute courbe elliptique $C/S$ provient d'un point de $\mathfrak{M}(S')$ après
+le changement de base $S' \to S$ par le $G$-torseur des bases spéciales de
+$\mathcal{E}_3$. Ce torseur est lisse, surjectif, de type fini --- il n'est pas
+fini.\footnote{La page a d'abord écrit « fid.\ plate », l'a biffé, et ajouté au
+dessus « \ldots\ de type fini », précédé d'un mot lu « finie » sous réserve.
+Le torseur sous $G$ est affine et lisse de dimension relative $5$.}
+
+D'où la conclusion de la page 12 : le foncteur « classes d'isomorphisme de
+courbes elliptiques sur $S$ » est « représentable » par le quotient de
+$\mathfrak{M}$ par $G$, \emph{relativement à la catégorie des morphismes
+simples surjectifs} --- c'est-à-dire après localisation pour la topologie
+engendrée par les morphismes lisses surjectifs. En termes d'aujourd'hui : le
+champ des modules des courbes elliptiques est le champ quotient\footnote{« Simple » est le mot qu'il emploie au début des années 1960 pour
+« lisse ». Le mot de la page est lu « pro-représentable » sous réserve, et la
+lettre gothique $\mathfrak{D}$ qui désigne la catégorie est écrite sur un mot
+biffé ; la fin du paragraphe est presque entièrement illisible. La notion de
+champ algébrique est postérieure (Deligne--Mumford, 1969 ; Artin, 1974) ; on
+ne dit pas que la page la contient, seulement qu'elle décrit l'objet par une
+présentation et une localisation, comme on le fait aujourd'hui. La présentation
+usuelle, par les équations de Weierstrass $y^2 + a_1xy + a_3y = x^3 + a_2x^2 +
+a_4x + a_6$ et le groupe des $(u, r, s, t)$, est celle de la page 13.}
+\[
+\mathcal{M}_{1,1} \simeq [\mathfrak{M}/G].
+\]
+
+
+\pagerange{13}{14}
+\subsection*{Normalisation par une trivialisation de l'algèbre de Lie (pages 13 et 14)}
+
+Une normalisation plus précise : on se donne une trivialisation $\partial$ de
+$\mathcal{L}$ --- une dérivation invariante partout non nulle --- et l'on exige
+que les images de $x$ et $y$ dans $\operatorname{gr}_2 \simeq
+\mathcal{L}^{\otimes 2}$ et $\operatorname{gr}_3 \simeq \mathcal{L}^{\otimes 3}$
+soient $\partial^{\otimes 2}$ et $\partial^{\otimes 3}$.\footnote{La page écrit
+deux fois « $x$ » : « l'image de $x$ dans $\mathcal{L}_2$ soit $i_2(D)$, celle
+de $x$ dans $\mathcal{L}_3$ soit $i_3(D)$ » ; la seconde est l'autre fonction
+(notre $y$).} C'est-à-dire qu'on prend pour structure auxiliaire un faisceau
+inversible $\mathcal{L}$ trivialisé et une base de $\mathcal{E}_3$ dont les
+termes dominants sont $1, \partial^2, \partial^3$. Le groupe d'automorphismes
+de cette structure est formé des couples
+\[
+\left(u,\ \begin{pmatrix} 1 & r & t \\ 0 & u^2 & s \\ 0 & 0 & u^3 \end{pmatrix}\right),
+\qquad u \in \Gamma(S, \mathcal{O}_S^*),\ r, s, t \in \Gamma(S, \mathcal{O}_S),
+\]
+isomorphe au sous-groupe des matrices triangulaires de diagonale $(1, \lambda,
+\mu)$ avec $\mu^2 = \lambda^3$ --- on retrouve $u = \mu/\lambda$.\footnote{Ses
+lettres sont $(\lambda, \alpha, \beta, \gamma)$ ; on prend celles de Tate, $(u,
+r, s, t)$ à l'ordre des coefficients près. Le cadre de la page porte
+« $\mu^2 - \lambda^3 = 0$ », exposants surchargés.} Pour une telle base, $y^2 -
+x^3 \in \mathcal{E}_5$, et l'équation prend la forme de Weierstrass
+\[
+y^2 + a_1xy + a_3y = x^3 + a_2x^2 + a_4x + a_6,
+\]
+c'est-à-dire $a = -1$ dans la forme précédente.\footnote{Avec ses lettres :
+« $x^2 - y^3 + bxy + cy^2 + dx + ey + f = 0$ », « on peut prendre $a = -1$ ».}
+Changer $\partial$ en $u\partial$ multiplie $a_i$ par $u^i$ : les coefficients
+sont de poids $i$, et le discriminant $\Delta$, qui ne dépend pas de la base
+une fois $\partial$ fixé, est une section canonique de $\omega^{\otimes 12}$ ---
+une forme modulaire de poids $12$.\footnote{En marge de la page 9, entouré :
+« $\Delta(a, b, c, d, e, f) \in \mathcal{L}^{\otimes 12}$ ». Avec la convention
+suivie ici (un coefficient multiplié par $u^i$ quand $\partial$ l'est par $u$
+est une section de $\mathcal{L}^{\otimes -i} = \omega^{\otimes i}$), c'est
+$\omega^{\otimes 12} = \mathcal{L}^{\otimes -12}$ ; la page 56 a le signe que
+l'on suit (« $b \in \Delta^{-4}$, $c \in \Delta^{-6}$ », où son $\Delta$ y est
+le faisceau de Lie).}
+
+La page 14 observe qu'on ne peut, localement, normaliser davantage sans
+restreindre les courbes ; mais après une extension finie et plate on peut
+exiger $\Delta = 1$, en choisissant la trivialisation $\partial$ parmi les
+racines douzièmes de $\Delta^{-1}$, et pousser plus loin hors de la
+caractéristique $2$, puis hors de la caractéristique $3$.\footnote{Le passage
+est dense et lu par fragments ; « $12$-ième » est écrit sur un $11$, et une
+parenthèse ajoute « ($24$-ième) », sans que la raison se lise. Que
+$\omega^{\otimes 12}$ soit trivialisé par $\Delta$ est ce qui fait de
+$\mathbf{Z}/12$ le groupe de Picard du champ des modules (Mumford,
+\emph{Picard groups of moduli problems}, 1965) ; la page n'y renvoie pas, et
+rien ne dit lequel des deux textes précède l'autre.}
+
+\pagerange{15}{16}
+\subsection*{Hors de la caractéristique 2 : le revêtement double (pages 15 et 16)}
+
+L'inversion $-1$ de la courbe, qui est un schéma abélien sur $S$, est
+d'ordre $2$ ; elle opère sur les $\mathcal{E}_i$ de façon compatible à la
+multiplication, et induit sur $\mathcal{L}$ le changement de signe, donc $(-1)^n$
+sur $\operatorname{gr}_n \simeq \mathcal{L}^{\otimes n}$. Supposons les
+caractéristiques résiduelles de $S$ différentes de $2$. Alors $\mathcal{E}_3$
+se décompose en parties paire et impaire : la partie paire est
+$\mathcal{E}_2$, et la partie impaire est un supplémentaire canonique de
+$\mathcal{E}_2$ dans $\mathcal{E}_3$, isomorphe à
+$\operatorname{gr}_3$.\footnote{La page 16 est très raturée (deux lignes et
+demie barrées, un passage encadré avec « À compléter », une note marginale
+d'une dizaine de lignes lue par fragments) ; c'est la partie lisible, et elle
+suffit. Il n'y a pas de supplémentaire canonique de $\mathcal{E}_1$ dans
+$\mathcal{E}_2$ par la symétrie, puisque $\mathcal{E}_2$ est tout entier pair.}
+Les bases « admissibles » sont celles où $y$ est impaire ; deux d'entre elles
+diffèrent par une matrice
+\[
+\begin{pmatrix} 1 & r & 0 \\ 0 & u^2 & 0 \\ 0 & 0 & u^3 \end{pmatrix},
+\]
+et l'équation, comparée à sa transformée par $y \mapsto -y$, perd ses termes
+impairs en $y$ :
+\[
+\boxed{\;y^2 = x^3 + ax^2 + bx + c\;}
+\]
+avec pour condition que le polynôme $P(x) = x^3 + ax^2 + bx + c$ ait des racines
+distinctes en tout point de $S$.\footnote{La page fait le calcul sur
+l'équation $x^2 = y^3 + axy + by^2 + cx + dy + e$ (ses lettres) et la symétrie
+$x \mapsto -x$, dont l'introduction n'est pas sur la page. Elle finit par la
+question « Quelle est la normalisation correspondante de l'équation de $C$ ? »
+sans y répondre. Réponse : c'est l'équation encadrée, à $x \mapsto u^2 x + r$,
+$y \mapsto u^3 y$ près ; si de plus $3$ est inversible, la translation $x
+\mapsto x - a/3$ (calculée en marge de la page 20) tue $a$, et il reste $y^2 =
+x^3 + bx + c$, à $(b, c) \mapsto (u^4b, u^6c)$ près, ce qui est la page 56.}
+
+Géométriquement : le quotient $X = C/\{\pm 1\}$ est un schéma de
+Brauer--Severi de dimension relative $1$ sur $S$, muni d'une section (l'image de
+l'origine), donc une conique triviale ; privé de cette section, c'est un
+torseur sous le groupe vectoriel $\mathbb{V}(\mathcal{L}^{\otimes 2})$ --- la
+coordonnée $x$, définie à $x \mapsto x + r$ près et de terme dominant dans
+$\operatorname{gr}_2 = \mathcal{L}^{\otimes 2}$, en est une fonction affine.
+Et $C \to X$ est un revêtement double ramifié le long de la section à l'infini
+et d'un diviseur étale de degré $3$ de $X$, contenu dans la partie affine : le
+lieu $P(x) = 0$, image des points d'ordre $2$ non nuls.\footnote{La page écrit
+« $C/\mathbf{Z}_2$ » pour le quotient, et « il correspond à
+$\underline{L}^{\otimes 2}$ » pour le torseur. La dernière précision --- les
+points d'ordre $2$ --- est la nôtre ; c'est elle qui fait le lien avec les
+pages 24 à 53.}
+
+\pagerange{18}{24}
+\section*{II. Feuilles de calcul : l'invariant d'une cubique (pages 18 à 24)}
+
+Quatre feuilles de calcul, sans rédaction, et trois versos
+dactylographiés.\footnote{Les pages 19, 21 et 23 sont des feuillets d'un
+tapuscrit numéroté « n° 276 » (anneaux $\mathfrak{m}$-adiques, modules filtrés
+complets ; pages dactylographiées 20, 9 et 10), sans rapport avec les courbes
+elliptiques. La page 19 ne porte rien de sa main. Les pages 21 et 23 portent
+au crayon, dans la marge, une remarque chacune (« fait général \ldots\
+métrisables ! » ; « Dire \ldots\ topologie \ldots\ coefficients »), d'une main
+qui paraît être la sienne sans certitude. Il en va de même des pages 42, 44,
+46, 48, 50, 52 et 54 plus loin, et des pages 25 à 40 paires.}
+
+\pagerange{20}{20}
+\subsection*{Le discriminant (page 20)}
+
+Pour une cubique unitaire $P$ de racines
+$x_1, x_2, x_3$,
+\[
+\prod_{i \neq j}(x_i - x_j) = \prod_i P'(x_i),
+\]
+et le discriminant usuel $\operatorname{disc}(P) = \prod_{i<j}(x_i - x_j)^2$ en
+est l'opposé. Pour $P = x^3 + bx + c$ (la page suppose $a = 0$), le calcul de
+$\prod(3x_i^2 + b)$ par les fonctions symétriques donne
+\[
+\prod_i P'(x_i) = 4b^3 + 27c^2, \qquad \operatorname{disc}(P) = -4b^3 - 27c^2,
+\]
+et son invariant est $j = -27c^2/\operatorname{disc}(P)$.\footnote{La page
+encadre « $\Delta = b^3 - 27c^2$ » suivi de son propre point d'interrogation.
+C'est le discriminant de Weierstrass $g_2^3 - 27g_3^2$ de la forme $4x^3 - g_2x
+- g_3$ (pour $b = g_2$, $c = g_3$), pas celui de $x^3 + bx + c$ ; la formule $j
+= -27c^2/\Delta$ est juste dans les deux normalisations, chacune avec son
+$\Delta$. En marge, la translation $y \mapsto y - a/3$ qui tue le terme en
+$y^2$.}
+
+\pagerange{22}{22}
+\subsection*{L'invariant en fonction des racines (page 22)}
+
+Pour $P = x^3 + ax^2 + bx + c$, de
+racines $x_i$ et de discriminant $\Delta$, on a $3x_i + a = 2x_i - x_j - x_k$,
+et
+\[
+j = \frac{(27c + 2a^3 - 9ab)^2}{-27\,\Delta}
+= -\frac{1}{27\Delta}\bigl[(2x_1 - x_2 - x_3)(2x_2 - x_3 - x_1)(2x_3 - x_1 -
+x_2)\bigr]^2.
+\]
+En tête de page, l'identité qui relie ces expressions au paramètre $t$ des pages
+24 et suivantes, $t = (x_3 - x_1)/(x_3 - x_2)$ :\footnote{La page écrit l'identité sans le signe $-$ ; on l'a vérifiée par le
+calcul, elle vaut au signe près, ce qui est sans effet sur $j$, qui en est le
+carré.}
+\[
+\frac{(t+1)(2t-1)(t-2)}{t(t-1)}
+= -\,\frac{(2x_1 - x_2 - x_3)(2x_2 - x_3 - x_1)(2x_3 - x_1 - x_2)}{(x_1 -
+x_2)(x_2 - x_3)(x_3 - x_1)} .
+\]
+Elle donne directement la formule (11) de la page 39, $j =
+-\frac{1}{27}\bigl[(t+1)(2t-1)(t-2)/t(t-1)\bigr]^2$.
+
+\pagerange{24}{24}
+\subsection*{Forme normale et birapport (page 24)}
+
+En tête, la forme normale
+classique d'invariant donné,
+\[
+y^2 = 4x^3 - h(x+1), \qquad h = \frac{27\,j_{\mathrm{cl}}}{j_{\mathrm{cl}} - 2^6
+3^3} = 27\,\frac{j-1}{j},
+\]
+la seconde expression étant celle de son invariant $j$ ; puis le birapport :
+envoyant les racines $x_1, x_2, x_3$ et le point à l'infini sur $\infty, 0, 1,
+t$, on trouve
+\[
+t = \frac{x_3 - x_1}{x_3 - x_2}, \qquad t - 1 = \frac{x_2 - x_1}{x_3 - x_2},
+\qquad t + 1 = \frac{2x_3 - x_1 - x_2}{x_3 - x_2}, \ \ldots
+\]
+--- c'est le paramètre de Legendre, la quatrième valeur quand trois des quatre
+points de ramification du revêtement double de la page 15 sont envoyés en
+$\infty, 0, 1$.\footnote{La page porte encore des fractions en $a, b, c$
+griffonnées au bord, la dernière coupée, et un croquis des quatre points sur
+une droite.}
+
+\pagerange{18}{18}
+\subsection*{Quand $j$ ou $j - 1$ n'est pas inversible (page 18)}
+
+La feuille
+note, sur un anneau local $A$, ce qui se passe quand l'invariant réduit vaut $1$
+ou $0$. Pour $y^2 = 4x^3 - bx - c$ ($b, c$ de poids $2$ et $3$ en
+$\mathcal{L}$, selon le petit tableau de la page), on a
+\[
+\boxed{\;\frac{b^3}{c^2} = 27\,\frac{j-1}{j}\;}
+\]
+et si $j \equiv 1$, $b$ est nilpotent et $c$ inversible, la courbe n'étant
+déterminée qu'à $c \in A^*/A^{*3}$ près ; si $j \equiv 0$, c'est $c$ qui est
+nilpotent et $b$ inversible, à $b \in A^*/A^{*2}$ près. En marge : « Ext.\
+Kummer de gr $\mathbf{Z}/3$ », « Ext.\ Kummer de gr $\mathbf{Z}/2$ ». Ce sont les
+deux réductions du groupe structural de la page 47, et l'ambiguïté qui reste ---
+un élément de $H^1(\operatorname{Spec}A, \mathbf{Z}/3)$ ou de
+$H^1(\operatorname{Spec}A, \mathbf{Z}/2)$ --- est une extension de
+Kummer.\footnote{Ce rapprochement est le nôtre, et la page ne le fait pas ; il
+suppose qu'on oublie la torsion quadratique de la courbe, comme le fait la
+donnée $(X, X', s)$ des pages 41 à 49. La feuille porte encore des racines
+sixièmes $\sqrt[6]{t/(t-1)}$, une ligne « $(1 - j^{-1})^2 \in A^6A^*$ » et sa
+compagne, lues en partie seulement, et sous le reste des
+$\underline{\mathrm{Hom}}$ sans rapport apparent.} La page encadre aussi la
+cubique $x^3 + 27\frac{j-1}{j}(x+1) = 0$ ; elle n'a pas l'invariant $j$, et la
+forme normale juste est celle de la page 24, $4x^3 - 27\frac{j-1}{j}(x+1)$.\footnote{Pour
+$x^3 + h(x+1)$, l'invariant vaut $27/(4h + 27)$, qui n'est $j$ que pour $h =
+27(1-j)/4j$. Le calcul de la page repose sur le « $\Delta = b^3 - 27c^2$ » de la
+page 20, juste pour $4x^3 - bx - c$, appliqué à une cubique unitaire.}
+
+\pagerange{27}{39}
+\section*{III. Le groupe anharmonique et la fonction $j$ (pages 27 à 39)}
+
+\pagerange{27}{29}
+\subsection*{Le groupe des automorphismes de $(\mathbf{P}^1, \{0, 1, \infty\})$ (pages 27 et 29)}
+
+Sur $\mathbf{P}^1_S$, muni des trois sections $0, 1, \infty$, le groupe des
+automorphismes qui respectent l'ensemble $\{0, 1, \infty\}$ s'identifie au groupe
+$\mathfrak{S}_3$ de ses permutations --- un automorphisme de la droite
+projective est déterminé par l'image de trois points distincts. Ses six
+éléments sont
+\[
+1,\qquad \varphi(t) = 1 - \frac1t,\qquad \psi(t) = \frac{1}{1-t},\qquad
+\lambda(t) = \frac1t,\qquad \mu(t) = 1 - t,\qquad \nu(t) = \frac{t}{t-1}:
+\]
+$\varphi$ et $\psi$ sont les deux permutations circulaires, $\lambda$, $\mu$,
+$\nu$ les transpositions qui fixent respectivement $1$, $\infty$ et $0$. On note
+$gh$ la substitution obtenue en appliquant d'abord $g$, puis $h$ ; avec cette
+convention, la table de multiplication de la page est exacte\footnote{La convention n'est pas dite ; c'est celle qui rend la table exacte,
+et on l'a vérifiée cas par cas. Pour la composition usuelle $g \circ h$,
+chaque produit de deux éléments distincts serait remplacé par l'autre élément de
+la même classe ($\lambda\circ\mu = \psi$, par exemple). En marge, une
+proposition de renommer les transpositions, suivie de « ?? ».} :
+\[
+\varphi^2 = \psi,\quad \varphi\psi = 1,\quad \lambda^2 = \mu^2 = \nu^2 = 1,
+\quad \lambda\mu = \mu\nu = \nu\lambda = \varphi,\quad \mu\lambda = \nu\mu =
+\lambda\nu = \psi,
+\]
+\[
+\varphi\lambda = \mu\varphi = \nu,\quad \varphi\mu = \nu\varphi = \lambda,\quad
+\varphi\nu = \lambda\varphi = \mu,
+\]
+\[
+\psi\nu = \mu\psi = \lambda,\quad
+\psi\mu = \lambda\psi = \nu,\quad \psi\lambda = \nu\psi = \mu .
+\]
+Le sous-groupe
+$\{1, \varphi, \psi\}$ est cyclique d'ordre $3$, distingué, de quotient
+$\mathbf{Z}/2$ ; $\mathfrak{S}_3$ en est le produit semi-direct par l'un
+quelconque des trois sous-groupes d'ordre $2$, engendrés par $\lambda$, $\mu$,
+$\nu$. La conjugaison ${}^g h = g h g^{-1}$ (même convention) donne
+\[
+{}^\varphi\lambda = \mu,\ {}^\varphi\mu = \nu,\ {}^\varphi\nu = \lambda,\qquad
+{}^\psi\nu = \mu,\ {}^\psi\mu = \lambda,\ {}^\psi\lambda = \nu,\qquad
+{}^\tau\varphi = \psi\ \ (\tau = \lambda, \mu, \nu).
+\]
+
+De plus, l'involution
+\[
+\kappa(t) = \frac{t-2}{2t-1}, \qquad \kappa^2 = 1, \qquad \kappa(0) = 2,\
+\kappa(1) = -1,\ \kappa(\infty) = \tfrac12,
+\]
+commute à $\mathfrak{S}_3$, si bien que le normalisateur de $\mathfrak{S}_3$
+dans $\operatorname{Aut}(\mathbf{P}^1)$ contient $\mathfrak{S}_3 \times
+\mathbf{Z}/2$ --- un groupe diédral d'ordre $12$ ; en caractéristique
+résiduelle $\neq 2, 3$, sur un corps algébriquement clos, c'est tout le
+normalisateur.\footnote{La page écrit « Normalisateur : $\mathfrak{S}_6$ (c'est
+d'ailleurs le seul, \ldots » ; l'indice est peu net, et $\mathfrak{S}_6$ ne se
+plonge pas dans $\mathrm{PGL}_2$. La note marginale de la page 29, « Prouver :
+le normalisateur de $\mathfrak{S}_3$ dans $\operatorname{Aut}\mathbf{P}^1_S$ est
+$\mathfrak{S}_3 \times (\mathbf{Z}/2)$ », dit ce qu'on énonce ; la preuve n'est
+pas donnée. La commutation de $\kappa$ à $\mathfrak{S}_3$ est vérifiée ; la
+dernière assertion vient de la classification des sous-groupes finis de
+$\mathrm{PGL}_2$, que la page n'invoque pas. Un « 5 » appuyé en bout de ligne
+n'a pas de rôle clair.}
+
+\emph{Points fixes.} Les transpositions fixent chacune deux points :
+$\lambda$ fixe $\{1, -1\}$, $\mu$ fixe $\{\infty, \frac12\}$, $\nu$ fixe $\{0,
+2\}$ ; chaque paire est formée d'un point de $\{0, 1, \infty\}$ et d'un point
+de $\kappa\{0, 1, \infty\} = \{2, -1, \frac12\}$. Les permutations circulaires
+fixent les racines de
+\[
+t^2 - t + 1 = 0,
+\]
+c'est-à-dire de $\Phi_6$, les racines primitives sixièmes de l'unité $x' =
+\frac12(1 + \sqrt{-3})$ et $x'' = \frac12(1 - \sqrt{-3})$ ; ce sont aussi les
+points fixes de $\kappa$. Notons $\overline{S}$ ce sous-schéma de degré $2$ ;
+il est étale sur $S$ exactement là où $3$ est inversible, et le quotient $\mathbf{Z}/2 = \mathfrak{S}_3/(\mathbf{Z}/3)$ y
+échange les deux points.\footnote{La page écrit « $\mathbf{Z}_2$ » pour
+$\mathbf{Z}/2$. Elle appelle « la différente » le lieu de ramification ; la
+place de $\overline{S}$, écrit au-dessus de « l'un », n'est pas sûre dans la
+phrase.}
+
+\pagerange{29}{33}
+\subsection*{Les quotients (pages 29 à 33)}
+
+Le schéma $G$ des automorphismes de $\mathbf{P}^1$ qui laissent $\overline{S}$
+invariant est une extension de $\mathbf{Z}/2$ (les automorphismes de
+$\overline{S}$) par un $\mathbf{G}_m$ \emph{tordu} par le revêtement
+$\overline{S} \to S$, et $\mathfrak{S}_3$ s'y envoie :\footnote{La page dessine les deux lignes dans l'ordre inverse, une seule
+flèche verticale $\mathbf{Z}/3 \to \mathbf{G}_m$ et un signe $\|$ entre les
+deux $\mathbf{Z}/2$ ; la flèche $\mathfrak{S}_3 \to G$ n'est pas tracée, on
+l'ajoute parce que $\mathfrak{S}_3$ laisse $\overline{S}$ invariant. Une note
+marginale renvoie aux points de caractéristique $2$ ou $3$ de $S$.}
+
+\begin{tikzcd}
+1 \arrow[r] & \mathbf{Z}/3 \arrow[r] \arrow[d, hook] & \mathfrak{S}_3 \arrow[r] \arrow[d, hook] & \mathbf{Z}/2 \arrow[r] \arrow[d, no head, "\Vert" description] & 1 \\
+1 \arrow[r] & \mathbf{G}_m^{\mathrm{tordu}} \arrow[r] & G \arrow[r] & \mathbf{Z}/2 \arrow[r] & 1
+\end{tikzcd}
+
+
+On suppose désormais que $S$ n'a pas de point de caractéristique $2$ ou $3$.
+Alors $\mathfrak{S}_3 \times \mathbf{Z}/2$ opère modérément sur
+$\mathbf{P}^1_S$ (son ordre est inversible), le quotient est lisse sur $S$ de
+genre $0$ --- c'est une forme de $\mathbf{P}^1_S$ ---, et il est
+\emph{trivial} parce qu'il a des sections.\footnote{La page invoque Lüroth, qui
+dit que les fibres sont des droites ; c'est l'existence des sections qui donne
+l'isomorphisme global avec $\mathbf{P}^1_S$.} Les trois orbites
+$\{0, 1, \infty\}$, $\{2, -1, \frac12\}$ et $\overline{S} = \{x', x''\}$ sont
+disjointes, chacune stable sous $\mathfrak{S}_3$ qui y opère transitivement
+fibre à fibre ; elles donnent dans $\mathbf{P}^1_S/\mathfrak{S}_3$ trois
+sections distinctes, qu'on utilise pour identifier ce quotient à
+$\mathbf{P}^1_S$ muni de $\infty, 0, 1$, dans cet ordre.
+
+De même, $\mathbf{P}^1_S/(\mathbf{Z}/3)$ a deux sections, images de $\{0, 1,
+\infty\}$ et de $\{2, -1, \frac12\}$, qui sont ses deux sections de
+ramification, et qu'on envoie en $\infty$ et $0$ ; l'image de $\overline{S}$ est
+une bisection étale. Sur $S' = S[\sqrt{-3}]$ elle se scinde en deux sections,
+images de $x'$ et $x''$ ; en envoyant la première en $1$, la seconde va en
+$-1$, et l'on obtient un isomorphisme $(\mathbf{P}^1_S/(\mathbf{Z}/3))
+\times_S S' \simeq \mathbf{P}^1_{S'}$. Sur $S$ lui-même,
+$\mathbf{P}^1_S/(\mathbf{Z}/3)$ est donc le fibré projectif
+$\mathbf{P}(\mathcal{O}_S \oplus \mathcal{N})$ d'un faisceau inversible
+$\mathcal{N}$ --- privé de $0$ et $\infty$, un fibré principal de groupe
+$\mathbf{G}_{m,S}$ --- muni d'une bisection étale, ce qui revient à munir
+$\mathcal{N}$ d'une forme quadratique non dégénérée $\mathcal{N}^{\otimes 2}
+\simeq \mathcal{O}_S$ ; et la classe de cette donnée est celle du revêtement
+$S' \to S$.\footnote{La page note ce faisceau $\Lambda_S$ ; on réserve
+$\Lambda$ à la page 51. La dernière phrase de la page 33 se lit par
+fragments.}
+
+\pagerange{35}{39}
+\subsection*{Formules explicites (pages 35 à 39)}
+
+Notons $t$ la coordonnée de la première droite, $w$ celle de
+$\mathbf{P}^1/(\mathbf{Z}/3)$ et $r$ celle de $\mathbf{P}^1/\mathfrak{S}_3$ :\footnote{Il note $s$ la coordonnée intermédiaire. Le schéma de la page
+--- trois droites et les fibres marquées « ramifié » et « non ramifié » ---
+est reproduit dans la liste qui suit ; ses deux fibres du haut sont écrites
+sur des chiffres fortement surchargés.}
+\[
+\mathbf{P}^1_t \xrightarrow{\ f\ (\text{groupe } \mathbf{Z}/3)\ } \mathbf{P}^1_w
+\xrightarrow{\ g\ (\text{groupe } \mathbf{Z}/2)\ } \mathbf{P}^1_r .
+\]
+Les fibres remarquables sont :
+\begin{itemize}
+\item au-dessus de $w = \infty$ et $w = 0$, les orbites $\{0, 1, \infty\}$ et
+$\{2, -1, \frac12\}$, non ramifiées pour $f$ ; au-dessus de $w = 1$ et $w =
+-1$, les points $x'$ et $x''$, ramifiés (indice $3$) ;
+\item au-dessus de $r = \infty$ et $r = 0$, les points $w = \infty$ et $w =
+0$, ramifiés pour $g$ ; au-dessus de $r = 1$, la paire $w = \pm 1$, non
+ramifiée.
+\end{itemize}
+
+\emph{Calcul de $g$.} Sur $S = \operatorname{Spec}\mathbf{Z}[\frac12,
+\frac13]$, la restriction de $g$ à $\mathbf{P}^1 \smallsetminus \{0, \infty\} =
+\mathbf{G}_m$ est un endomorphisme de schémas $\mathbf{G}_m \to \mathbf{G}_m$
+envoyant $1$ sur $1$, donc de la forme $w \mapsto cw^n$ ; $g(\infty) = \infty$
+donne $n > 0$, le degré $2$ donne $n = 2$, et $g(1) = 1$ donne $c = 1$ :\footnote{Qu'un morphisme $\mathbf{G}_m \to \mathbf{G}_m$ soit $w \mapsto cw^n$
+demande que les unités de $\mathcal{O}(S)[w, w^{-1}]$ soient les $cw^n$, ce
+qui vaut sur une base réduite et connexe comme $\operatorname{Spec}\mathbf{Z}[\frac16]$.
+La page dit « endomorphisme de $\mathbf{G}_m$ dans lui-même » ; une ligne sur
+$\lambda$ de la forme $2^\alpha3^\beta$ est biffée. Elle ajoute que la formule
+vaut sur tout $\mathbf{P}^1$, « et justifier cette notation ».}
+\[
+r = g(w) = w^2 . \tag{9}
+\]
+
+
+\emph{Calcul de $f$} (page 37). Sur $S'$, soit $u(t) = (t - x')/(t -
+x'')$, qui envoie $x', x''$ sur $0, \infty$ ; dans cette coordonnée, $\mathbf{Z}/3$
+opère par multiplication par les racines cubiques de l'unité, et le quotient est
+$h(u) = -u^3$. Composant avec l'involution $v(w) = (1-w)/(1+w)$, qui
+envoie $0, \infty, -1$ sur $1, -1, \infty$, on a $f = v^{-1} \circ h \circ u$ :
+
+\begin{tikzcd}
+\mathbf{P}^1_t \arrow[r, "u"] \arrow[d, "f"'] & \mathbf{P}^1 \arrow[d, "h"] \\
+\mathbf{P}^1_w \arrow[r, "v"'] & \mathbf{P}^1
+\end{tikzcd}
+
+\[
+f(t) = \frac{1 + u(t)^3}{1 - u(t)^3}
+= \frac{(t - x'')^3 + (t - x')^3}{(t - x'')^3 - (t - x')^3}.
+\]
+Avec $x' + x'' = 1$, $x'x'' = 1$, $x'^3 = x''^3 = -1$, d'où $x'^2 + x''^2 = -1$,
+$x'^2 + x'x'' + x''^2 = 0$ et $x' - x'' = \sqrt{-3}$, le numérateur vaut $2t^3
+- 3t^2 - 3t + 2 = (t+1)(2t-1)(t-2)$ et le dénominateur $3\sqrt{-3}\,t(t-1)$ :\footnote{Le premier paragraphe de la page 37 est presque entièrement
+illisible ; le calcul, lui, est complet, et on l'a refait. La page note
+« $x''^3 - x'^3 = 0$ » pour la différence des cubes, ce qui est exact ; le
+calcul du dénominateur passe par $x'^2 + x'x'' + x''^2 = 0$, que la page
+n'écrit pas (une ligne en ce sens est biffée).}
+\[
+f(t) = \frac{1}{3\sqrt{-3}}\,\frac{(t+1)(2t-1)(t-2)}{t(t-1)} . \tag{10}
+\]
+On vérifie $f(0) = f(1) =
+f(\infty) = \infty$, $f(-1) = f(2) = f(\frac12) = 0$, $f(x') = 1$.
+Par suite
+\[
+\boxed{\;j = (g \circ f)(t) = -\frac{1}{27}\left(\frac{(t+1)(2t-1)(t-2)}{t(t-1)}\right)^2\;} \tag{11}
+\]
+est une fonction rationnelle de $t$, à coefficients dans $\mathbf{Z}[\frac16]$ :
+la racine $\sqrt{-3}$ disparaît au carré. Elle définit un revêtement galoisien
+de groupe $\mathfrak{S}_3$ de la droite des $j$, non ramifié au-dessus de
+$\mathbf{P}^1 \smallsetminus \{0, 1, \infty\}$, c'est-à-dire au-dessus de
+$\mathbf{G}_m \smallsetminus \{1\}$.\footnote{La page écrit « non ramifié
+au-dessus de $(\mathbf{G}_a)_S - (0) - (1) = (\mathbf{G}_m)_S - 1$ » ; l'indice
+$a$ est peu net. Le passage qui suit (11), « il doit définir \ldots\ sur $J$ !
+\ldots\ $S$ lui-même », est en grande partie illisible.} En termes de
+l'invariant usuel, $j_{\mathrm{cl}}(t) = 256\,(t^2 - t + 1)^3/t^2(t-1)^2$, et (11) dit
+exactement $j = 1 - j_{\mathrm{cl}}/1728$ : c'est l'identité classique
+$j_{\mathrm{cl}} - 1728 = 64\,(t+1)^2(2t-1)^2(t-2)^2/t^2(t-1)^2$.\footnote{Rapprochement
+et vérification sont les nôtres.}
+
+\emph{Les quotients de $\kappa$.} Comme $\kappa$ commute à $\mathfrak{S}_3$,
+elle passe aux quotients ; elle échange les orbites au-dessus de $\infty$ et
+de $0$, et fixe $x'$, d'où\footnote{La page écrit « $\sigma'(t) = \sigma''(t) = 1/t$ » ; l'identité
+$j(\kappa t)\, j(t) = 1$ est vérifiée. Elle conclut qu'« il serait facile de
+\ldots\ quotients \ldots », sans le faire.}
+\[
+\kappa'(w) = \frac1w, \qquad \kappa''(r) = \frac1r, \qquad\text{c'est-à-dire}\qquad
+j(\kappa t) = 1/j(t). \tag{12}
+\]
+
+
+\pagerange{41}{53}
+\section*{IV. Coniques munies d'une trisection étale (pages 41 à 53)}
+
+\pagerange{41}{43}
+\subsection*{Classification et invariant (pages 41 et 43)}
+
+Soit $X$ un schéma de Brauer--Severi de dimension relative $1$ sur $S$ --- une
+conique --- muni d'une \emph{trisection} étale $X'$ : un sous-schéma fermé de
+$X$, fini et étale de degré $3$ sur $S$.\footnote{La page écrit deux fois « sur
+$X$ » ; il faut $S$. Le mot en interligne, lu « fini », est
+douteux.} Localement pour la topologie étale, $(X, X')$ est isomorphe à
+$(\mathbf{P}^1_S, \{0, 1, \infty\})$, dont le groupe d'automorphismes est
+$\mathfrak{S}_3$ (pages 27 à 29) ; ces couples sont donc classés par
+$H^1(S, \mathfrak{S}_3)$, c'est-à-dire par les revêtements étales galoisiens
+de groupe $\mathfrak{S}_3$ de $S$ --- ou, ce qui revient au même, par les
+revêtements étales de degré $3$, dont $X'$ lui-même est un exemple.\footnote{La
+dernière équivalence est la nôtre ; la page parle de « rev.\ non ramifiés
+\ldots\ de groupe $\mathfrak{S}_3$ ».} Tout ce qui a été construit sur
+$\mathbf{P}^1$ de façon invariante par $\mathfrak{S}_3$ se transporte à $X$
+par descente : l'involution $\kappa$, qui envoie $X'$ sur une seconde
+trisection $X''$, dite \emph{associée} à $X'$ ; et la bisection $X_1$, image
+de $\overline{S}$, étale hors des caractéristiques $2$ et $3$.\footnote{La page
+41 se lit par fragments ; « associé » (souligné) et « involutive » (en
+interligne) sont lus sous réserve.}
+
+Supposons $6$ inversible sur $S$. Le quotient $X/\mathfrak{S}_3$ --- le
+groupe étant tordu comme $X$ --- est le quotient non tordu
+$\mathbf{P}^1_S/\mathfrak{S}_3 \simeq \mathbf{P}^1_S$ de la page 31, et l'on
+obtient un morphisme canonique de degré $6$\footnote{La page dit « isomorphisme unique $X \to \mathbf{P}^1_S$ caractérisé
+\ldots\ par les sections $0, \infty, 1$ » : c'est un morphisme de degré $6$,
+et c'est le quotient qui est isomorphe à $\mathbf{P}^1_S$. L'attribution des
+trois fibres est en partie illisible et, telle qu'on la lit (« celle de
+$\infty$ est $X''$ »), contredit la suite ; on suit ce qu'imposent la formule
+(11), la phrase suivante (l'image d'une section disjointe de $X'$ est dans
+$\mathbf{P}^1_S \smallsetminus \infty$) et la page 47 ($j = 0$ pour $X''$, $j =
+1$ pour $X_1$).}
+\[
+q\colon X \to \mathbf{P}^1_S,
+\qquad q^{-1}(\infty) = X',\quad q^{-1}(0) = X'',\quad q^{-1}(1) = X_1 .
+\]
+
+
+Donnons-nous de plus une section $s$ de $X$ disjointe de $X'$. Son image par $q$
+est une section de $\mathbf{P}^1_S \smallsetminus \infty$, c'est-à-dire de
+$\mathcal{O}_S$ : c'est l'\emph{invariant} $j$ du triple $(X, X', s)$. Si $j$
+et $j - 1$ sont inversibles, l'image réciproque par $q$ de la section $j\colon
+S \to \mathbf{P}^1_S$ est un revêtement étale galoisien de $S$ de groupe
+$\mathfrak{S}_3$ --- $q$ est étale galoisien au-dessus de $\mathbf{P}^1
+\smallsetminus \{0, 1, \infty\}$ --- et \emph{c'est celui qui définit $X$}.
+Dans ce cas l'invariant suffit à reconstituer $(X, X', s)$.
+
+Le lien avec les courbes elliptiques est celui de la page 15 : pour $C$ sur $S$
+avec $6$ inversible, $X = C/\{\pm 1\}$, $X'$ l'image des points d'ordre $2$
+non nuls et $s$ l'image de l'origine forment un tel triple, et dans une
+coordonnée qui envoie $X'$ sur $0, 1, \infty$, $s$ est le paramètre $t$ de
+Legendre (page 24). L'invariant $j$ du triple est alors $j(t)$, formule (11).
+Le triple ne détermine la courbe qu'à torsion quadratique près : le revêtement
+double ramifié le long de $s + X'$ demande le choix d'une racine carrée d'un
+faisceau inversible.\footnote{Ce paragraphe est le nôtre ; le dossier ne
+revient pas des triples aux courbes.}
+
+\pagerange{45}{47}
+\subsection*{Quand $j$ vaut $0$ ou $1$ (pages 45 à 47)}
+
+Si $j$ n'est pas inversible, ou $j - 1$, l'invariant ne suffit plus ; quand
+$j$ n'est pas identiquement $0$ ou $1$, on reconstitue $(X, X')$ sur l'ouvert
+où $j(j-1)$ est inversible, puis $s$ partout, mais en général il faut des données
+supplémentaires : la page demande d'exprimer qu'une certaine extension de
+degré $3$ du corps des fonctions de $X$ est non ramifiée, et s'arrête.\footnote{La
+page 45 est très lacunaire ; le passage « il faut des $H$ supplémentaires »
+et la question « quelle \ldots\ convenablement ?? » sont lus sous réserve. La
+page 46 est un verso du même tapuscrit « n° 276 » (sa page 15), où il a seulement
+jeté de biais, à l'encre, les orbites « $(0, 1, \infty)$ », « $(x', x'')$ » et
+« $(2, \frac12(2-1))$ ».} Dans les deux cas extrêmes, la situation se décrit
+par une réduction du groupe structural :
+\begin{itemize}
+\item si $j = 0$, $s$ est dans $X''$, dont chaque point a pour stabilisateur
+un sous-groupe d'ordre $2$ ; le groupe structural se réduit de $\mathfrak{S}_3$
+à $\mathbf{Z}/2$ et la donnée est un élément de $H^1(S, \mathbf{Z}/2)$ ;
+\item si $j = 1$, $s$ est dans la bisection $X_1$, de stabilisateur
+$\mathbf{Z}/3$ ; le groupe se réduit à $\mathbf{Z}/3$ et la donnée est un
+élément de $H^1(S, \mathbf{Z}/3)$.
+\end{itemize}
+Ce sont les extensions de Kummer de la page 18.
+
+Si seulement $j$ est inversible, faisant opérer $\mathfrak{S}_3$ sur le
+quotient intermédiaire $X/(\mathbf{Z}/3)$, les images de $X'$, $X''$ et $s$ y
+donnent trois sections distinctes, qu'on envoie sur $\infty, 0, 1$ ; et $q$ se
+factorise
+\[
+X \longrightarrow X/(\mathbf{Z}/3) \simeq \mathbf{P}^1_S
+\xrightarrow{\ w \,\mapsto\, j w^2\ } \mathbf{P}^1_S,
+\qquad (\infty, 0, 1) \mapsto (\infty, 0, j),
+\]
+la bisection naturelle s'identifiant aux points $w = \pm 1/\sqrt{j}$.\footnote{La
+page écrit « $t \mapsto jt^2$ », la lettre $j$ lue sous réserve, et « la
+bisection naturelle \ldots\ s'identifie donc \ldots\ : $\sqrt{j}$ » ; les
+racines de $jw^2 = 1$ sont $\pm 1/\sqrt{j}$. La formule (9) est le cas $j = 1$
+de cette normalisation.}
+
+\pagerange{49}{49}
+\subsection*{La description par un torseur (page 49)}
+
+Ceci donne une description très explicite des courbes de genre $0$ sur $S$
+munies d'une section et d'une trisection étale disjointes. Se donner $(X, X',
+s)$ revient à se donner un $\mathfrak{S}_3$-torseur $T \to S$ et une fonction
+\[
+t \in \Gamma(T, \mathcal{O}_T), \qquad t \text{ et } t - 1 \text{ inversibles},
+\qquad g\cdot t = g(t) \quad (g \in \mathfrak{S}_3),
+\]
+c'est-à-dire $\lambda\cdot t = 1/t$ et $\mu\cdot t = 1 - t$ : le torseur est
+celui des isomorphismes $(X, X') \simeq (\mathbf{P}^1, \{0, 1, \infty\})$, et $t$
+la coordonnée de $s$. Autrement dit, la catégorie de ces triples est celle des
+$S$-points du champ quotient $[(\mathbf{P}^1 \smallsetminus \{0, 1,
+\infty\})/\mathfrak{S}_3]$, et $X = T \times^{\mathfrak{S}_3}
+\mathbf{P}^1_S$ :\footnote{Il note $S'$ le torseur (on garde $S'$ pour $S[\sqrt{-3}]$), et $\sigma
+\in \mathfrak{S}_3$, $\varphi_\sigma(t)$ pour notre $g$, $g(t)$. Le champ
+quotient est le nôtre. En marge, le long de ce paragraphe : « fonctoriel ».}
+
+\begin{tikzcd}
+X & \mathbf{P}^1_T \arrow[l] \arrow[d] \\
+S & T \arrow[l, "\mathfrak{S}_3"]
+\end{tikzcd}
+
+
+\emph{Exemple.} Si $S = \operatorname{Spec}\mathcal{O}$, avec $\mathcal{O}$
+local complet de caractéristique résiduelle $\neq 2, 3$ à corps résiduel
+algébriquement clos, $\pi_1(S) = 0$ et tout torseur est trivial : la donnée
+équivaut à celle d'un $t \in \mathcal{O}^*$ avec $t - 1 \in \mathcal{O}^*$, deux
+tels $t$, $t'$ donnant des objets isomorphes si et seulement si $t' = g(t)$ pour
+un $g \in \mathfrak{S}_3$. En marge, souligné deux fois : « non fonctoriel ».
+Le contraste est le sien : la description par un torseur vaut sur toute base et
+commute au changement de base ; celle par une coordonnée n'existe que là où les
+torseurs sont triviaux, et l'identification dépend d'un choix.\footnote{La page
+écrit « $t(t-1) \in \mathcal{O}^*$ » ; c'est la même condition. Un ajout
+entouré, « Dém.\ \ldots », est illisible.}
+
+\pagerange{51}{53}
+\subsection*{Autre façon de procéder (pages 51 et 53)}
+
+Prenons la section privilégiée $s$ comme section à l'infini. Alors $\Lambda = X
+\smallsetminus s$ est un torseur sous le groupe vectoriel d'un faisceau
+inversible --- pour $X = C/\{\pm 1\}$, celui de la page 15, $\mathbb{V}(\mathcal{L}^{\otimes 2})$.
+La trisection $X'$ de $\Lambda$ a un \emph{barycentre} : dans un torseur sous un
+groupe vectoriel, la moyenne de trois points est bien définie dès que $3$ est
+inversible. Cette section de $\Lambda$ le trivialise, d'où un isomorphisme
+\emph{global} de $\Lambda$ avec le groupe vectoriel lui-même, qui identifie $X'$
+à une trisection de « somme » nulle. D'où l'énoncé de la page 53 :
+
+\emph{Se donner $(X, X', s)$ équivaut à se donner un faisceau inversible
+$\mathcal{M}$ sur $S$ et une trisection étale de $\mathbb{V}(\mathcal{M})$, de
+somme nulle} ---
+c'est-à-dire, dans une coordonnée locale, une cubique unitaire $x^3 + bx + c$ à
+discriminant inversible, définie à $(b, c) \mapsto (u^4 b, u^6 c)$
+près.\footnote{La dernière traduction est la nôtre ; elle rejoint la page 16
+et la page 56. La page écrit « faisceau inversible $\underline{L}$ \ldots\
+trisection $X'$ de $\mathcal{L} = V(\underline{L})$ », et « non ramifiée »,
+entouré sous « inversible $\underline{L}$ », est relié par un trait à $X'$ : c'est
+la trisection qui est non ramifiée. La phrase suivante, « Mais on peut aussi
+éliminer les \ldots, symétriques \ldots\ trisection », et une note marginale
+d'une dizaine de lignes, en partie biffée, ne se lisent pas.}
+
+\pagerange{56}{57}
+\section*{V. Deux feuilles de brouillon (pages 56 et 57)}
+
+\emph{Les poids} (page 56). Pour une trivialisation $\xi$ de l'algèbre de Lie,
+de dérivation invariante $D_\xi$, la fonction $u_\xi$ à pôle double vérifie
+une équation de Weierstrass
+\[
+(D_\xi u_\xi)^2 = 4u_\xi^3 + b_\xi u_\xi + c_\xi .
+\]
+Remplacer $\xi$ par $\lambda\xi$ remplace $D_\xi$ par $\lambda D_\xi$ ; en posant
+$u_{\lambda\xi} = \rho u_\xi$ et en identifiant, on trouve $\rho = \lambda^2$
+et
+\[
+u_{\lambda\xi} = \lambda^2 u_\xi, \qquad b_{\lambda\xi} = \lambda^4 b_\xi,
+\qquad c_{\lambda\xi} = \lambda^6 c_\xi :
+\]
+$b$ et $c$ sont des sections de $\omega^{\otimes 4}$ et $\omega^{\otimes 6}$
+--- des formes modulaires de poids $4$ et $6$ --- et $u$ a son terme dominant
+dans $\operatorname{gr}_2 \simeq \mathcal{L}^{\otimes 2}$.\footnote{La page note
+$\Delta$ le faisceau de Lie (« $u_\xi \in L_2 \simeq \Delta^2$ »,
+« $b \in \Delta^{-4}$, $c \in \Delta^{-6}$ »), après avoir écrit à tort
+$\Delta^0$ pour $b_\xi$ et $c_\xi$ --- ce sont des fonctions une fois $\xi$
+fixé, d'où sans doute ce $\Delta^0$. Deux relations plus petites, lues
+« $\Delta^? \simeq \mathcal{L}^{18}$, $\Delta^2 \simeq \mathcal{L}^3$ », restent
+obscures. La même feuille récrit la filtration $\mathcal{O} = E_1 \subset E_2
+\subset \cdots$ avec ses quotients en puissances de $\Delta$, et note $y^2 = 4x^3
++ bx + c$, $y/x = D$.}
+
+\emph{Un argument de descente} (page 57). Soit $A \to B$ un homomorphisme
+d'anneaux, $A$ local d'idéal maximal $\mathfrak{m}$, et $x_i \in B$ tels que
+les $x_i \otimes 1$ forment une base de $B \otimes_A B$ sur $B$ (agissant par le
+second facteur). Par Nakayama, les $x_i$ engendrent $B$ sur $A$ ; et si
+$\sum\lambda_i x_i = 0$ avec $\lambda_i \in A$, alors $\sum (x_i \otimes
+1)(1 \otimes \lambda_i) = 0$, donc $1 \otimes \lambda_i = 0$, et par
+$B \otimes_A B \to B$, $\lambda_i = 0$ dans $B$. Si $A \to B$ est injectif ---
+par exemple fidèlement plat ---, les $x_i$ forment donc une base de $B$ sur
+$A$.\footnote{La feuille est un brouillon sans phrase ; l'énoncé ainsi
+reconstitué est le nôtre, et l'hypothèse d'injectivité, nécessaire pour
+conclure de « $\lambda_i = 0$ dans $B$ » à « $\lambda_i = 0$ », n'est pas sur la
+page. En tête, un diagramme $X \times_Y X \to X \to Y$ et une relation $R
+\subset X \times_S X$ : le contexte est celui des quotients des pages 31 et 43.}
+
+\pagerange{58}{60}
+\section*{VI. Théorie transcendante : les théorèmes de Liouville (pages 58 à 60)}
+
+Le feuillet de garde de la page 58 porte « Théorie transcendante (Généralités
+classiques) ». Ce qui suit, jusqu'à la page 96, est la théorie des fonctions
+elliptiques sur $\mathbf{C}$, en trois couches (sections VI à VIII) ; la
+première tient en deux pages.\footnote{L'inscription est au crayon, de sa
+main, en haut à droite de la page 58, qui ne porte rien d'autre. Les pages 59 et
+60 sont sur papier brun, d'une encre brune et d'une écriture posée, plus
+ancienne d'aspect ; les pages 61 à 73 sont d'une main régulière, les pages 74 à
+96 d'une main plus rapide.}
+
+Une \emph{fonction elliptique} est une fonction méromorphe sur $\mathbf{C}$
+admettant deux périodes $\omega_1$, $\omega_2$ linéairement indépendantes sur
+$\mathbf{Z}$. Si elle n'est pas constante, $\omega_1/\omega_2$ n'est pas
+réel.\footnote{La page dit « deux périodes distinctes » ; il faut
+l'indépendance sur $\mathbf{Z}$ ($\sin z$ a les périodes $2\pi$ et $4\pi$), et
+c'est alors un théorème que le rapport n'est pas réel --- s'il était réel
+irrationnel, les périodes seraient denses. Deux lignes ajoutées en interligne,
+lues par fragments, demandent de « remplacer “$\omega_1$ et $\omega_2$” ».} Les
+parallélogrammes de sommets $a + n_1\omega_1 + n_2\omega_2$ pavent le plan :
+un point intérieur à l'un n'appartient qu'à lui, un point d'un côté (hors
+sommet) à deux, un sommet à quatre ; deux points intérieurs d'un même
+parallélogramme ne sont pas homologues. Quand aucun zéro ni pôle n'est sur
+le bord, la liste des zéros et des pôles avec multiplicité ne dépend pas du
+parallélogramme ; en général, on compte une seule fois chaque classe de points
+homologues.\footnote{La page compte un point des côtés pour moitié et un
+sommet pour un quart, ce qui revient au même. Les indices $n_1$, $n_2$ varient
+d'une formule à l'autre sur la page.}
+
+\begin{itemize}
+\item[I.] Une fonction elliptique sans pôle est constante.
+\item[II.] La somme des résidus d'une fonction elliptique dans un
+parallélogramme des périodes est nulle ; une fonction elliptique non constante y
+a donc au moins deux pôles, comptés avec multiplicité.
+\item[III.] Le nombre des zéros et celui des pôles dans un parallélogramme sont
+égaux, et égaux au nombre de fois que la fonction y prend une valeur donnée :
+c'est l'\emph{ordre} de la fonction.
+\item[--] Deux fonctions elliptiques de mêmes périodes qui ont mêmes zéros et
+mêmes pôles avec multiplicité sont égales à un facteur constant près ; si elles
+ont mêmes pôles avec mêmes parties principales, à une constante additive près.
+\item[IV.] La somme des zéros est égale à la somme des pôles, à une période près.
+\item[V.] Deux fonctions elliptiques de mêmes périodes sont liées par une
+relation algébrique.\footnote{Le théorème I n'est pas numéroté sur la page (une croix dans la
+marge) ; le chiffre romain du quatrième énoncé est sous une tache d'encre, et un
+trait le relie au théorème II. Entre deux, la remarque que la somme, le
+produit, le quotient et la dérivée de fonctions elliptiques de mêmes périodes
+sont de mêmes périodes, et que l'ensemble des valeurs prises dans un
+parallélogramme est celui des valeurs prises dans le plan.}
+\end{itemize}
+
+\pagerange{61}{73}
+\section*{VII. Première rédaction : $\wp$, $\zeta$, $\sigma$, $\mathrm{sn}$ (pages 61 à 73)}
+
+\pagerange{61}{64}
+\subsection*{Les fonctions $\wp$, $\zeta$, $\sigma$ (pages 61 à 64)}
+
+\emph{La fonction $\wp$} (page 61). C'est la fonction elliptique d'ordre $2$,
+de périodes $2\omega_1$, $2\omega_2$, ayant en l'origine un pôle double et
+telle que $\wp(z) - 1/z^2$ s'annule en $0$ ; ces conditions la déterminent. Elle
+est paire --- $\wp(z) - \wp(-z)$ est elliptique, sans pôle, nulle en $0$ ---,
+d'où
+\[
+\wp(z) = \frac{1}{z^2} + c_1z^2 + c_2z^4 + \cdots, \qquad
+\wp'^2 = 4\wp^3 - g_2\wp - g_3, \quad g_2 = 20c_1,\ g_3 = 28c_2 ;
+\]
+elle est la fonction réciproque de $z = \int_\infty^{Z} dZ/\sqrt{4Z^3 - g_2Z -
+g_3}$. Les valeurs $e_i = \wp(\omega_i)$ aux demi-périodes sont les racines de
+$4Z^3 - g_2Z - g_3$, et $\wp'(\omega_i) = 0$. On a $\wp'' = 6\wp^2 -
+\frac12 g_2$, $\wp''' = 12\wp\wp'$ ; $\wp^{(2n)}$ est un polynôme en $\wp$ de
+degré $n+1$, et $\wp^{(2n+1)}$ le produit de $\wp'$ par un polynôme de degré $n$.
+
+\emph{La fonction $\zeta$} (pages 61 et 62) :
+\[
+\zeta(z) = \frac1z - \int_0^z \Bigl(\wp(u) - \frac{1}{u^2}\Bigr)du,
+\qquad \zeta' = -\wp ,
+\]
+primitive de $-\wp$, impaire, à pôles simples de résidu $1$ aux
+périodes.\footnote{La page dit « une primitive de $\wp z$ » ; la formule qui
+suit donne, correctement, $\zeta' = -\wp$.} Elle n'est pas périodique :
+$\zeta(z + 2\omega_i) - \zeta(z) = 2\eta_i$ avec $\eta_i = \zeta(\omega_i)$, et
+une intégration de $\zeta$ le long du bord d'un parallélogramme donne la
+relation de Legendre\footnote{L'orientation n'est pas dite ici ; elle l'est à la page 80 (« si
+$\omega_1$, $\omega_2$ sont en disposition directe »). Pour l'autre orientation
+le second membre est $-i\pi/2$. La somme nulle des $\eta_i$ suppose $\omega_1 +
+\omega_2 + \omega_3 = 0$, notre convention.}
+\[
+\eta_1\omega_2 - \eta_2\omega_1 = \frac{i\pi}{2}
+\qquad \Bigl(\Im\frac{\omega_2}{\omega_1} > 0\Bigr),
+\qquad \eta_1 + \eta_2 + \eta_3 = 0 .
+\]
+Elle permet d'intégrer $Z\,dZ /
+\sqrt{4Z^3 - g_2Z - g_3}$ : avec $Z = \wp(z)$, $\int \wp(z)\,dz = -\zeta(z) +
+\text{c}^{\text{te}}$.
+
+\emph{Décomposition d'Hermite.} Si $f$ est elliptique, de pôles $a, b,
+\ldots$ deux à deux non homologues, de parties principales $\sum_k
+A_k/(z-a)^k$, $\sum_k B_k/(z-b)^k$, \ldots, alors
+\[
+f(z) = \text{c}^{\text{te}} + \sum_{\text{pôles } a}\Bigl( A_1\zeta(z-a) +
+A_2\wp(z-a) - \frac{A_3}{2!}\wp'(z-a) + \cdots + (-1)^\alpha
+\frac{A_\alpha}{(\alpha-1)!}\wp^{(\alpha-2)}(z-a)\Bigr),
+\]
+le second membre étant elliptique parce que $\sum A_1 = 0$ (théorème II).
+
+\emph{La fonction $\sigma$} (pages 62 et 63). Pour intégrer toute fonction
+elliptique, il reste à intégrer $\zeta$, ce qui amène $\log\sigma$. Comme
+\[
+\wp(z) = \frac{1}{z^2} + \sum_{w \in \mathfrak{P}\smallsetminus 0}
+\Bigl[\frac{1}{(z-w)^2} - \frac{1}{w^2}\Bigr],
+\qquad c_1 = 3\sum_{w \neq 0} \frac{1}{w^4},\quad c_2 = 5\sum_{w \neq 0}
+\frac{1}{w^6},
+\]
+\[
+\zeta(z) = \frac1z + \sum_{w \neq 0}\Bigl[\frac{1}{z-w} + \frac1w +
+\frac{z}{w^2}\Bigr],
+\qquad
+\sigma(z) = z\prod_{w \neq 0}\Bigl(1 - \frac{z}{w}\Bigr)e^{\frac{z}{w} +
+\frac{z^2}{2w^2}},
+\]
+le produit convergeant absolument et uniformément sur les compacts, $\sigma$
+est une fonction entière, nulle exactement aux périodes, avec $\sigma'/\sigma =
+\zeta$ ; c'est la fonction entière la plus simple qui s'annule en ces points. Elle
+est \emph{impaire}, et\footnote{La page écrit « $\sigma z$ est une fonction paire » ; elle est
+impaire, comme le dit d'ailleurs la page 81.}
+\[
+\sigma(z + 2\omega_i) = -e^{2\eta_i(z + \omega_i)}\sigma(z) .
+\]
+
+
+\emph{Formule de Jacobi} (page 64). Soit $f$ elliptique, de pôles $a, \ldots,
+l$ et de zéros $a_1, \ldots, l_1$ (avec multiplicité, deux à deux non
+homologues à une période près), et $a + \cdots + l = a_1 + \cdots + l_1 + \Omega$,
+$\Omega = 2n_1\omega_1 + 2n_2\omega_2$ (théorème IV). Alors\footnote{La page écrit l'exponentielle $e^{2(n_1\eta_1 + n_2\eta_2)z}$ ; le
+signe est $-$, comme le donne la quasi-périodicité de $\sigma$ appliquée à
+$\sigma(z - l_1 - \Omega)$, et comme on l'a vérifié numériquement. Les deux
+premières expressions de la page, dont la seconde déplace $\Omega$ au
+dénominateur ($\sigma(z - l + \Omega)$), sont justes.}
+\[
+f(z) = \text{c}^{\text{te}} \times \frac{\sigma(z - a_1)\cdots\sigma(z - l_1 -
+\Omega)}{\sigma(z-a)\cdots\sigma(z-l)}
+= \text{c}^{\text{te}} \times e^{-2(n_1\eta_1 + n_2\eta_2)z}
+\frac{\sigma(z-a_1)\cdots\sigma(z-l_1)}{\sigma(z-a)\cdots\sigma(z-l)} .
+\]
+
+
+\emph{Formules d'addition} :
+\[
+\wp u - \wp v = -\frac{\sigma(u+v)\sigma(u-v)}{\sigma^2u\,\sigma^2v},
+\qquad
+\zeta(u+v) = \zeta u + \zeta v + \frac12\,\frac{\wp'u - \wp'v}{\wp u - \wp v},
+\]
+\[
+\wp(u+v) + \wp u + \wp v = \frac14\Bigl(\frac{\wp'u - \wp'v}{\wp u - \wp v}\Bigr)^2
+= \bigl[\zeta(u+v) - \zeta u - \zeta v\bigr]^2 .
+\]
+
+\pagerange{65}{69}
+\subsection*{La fonction $\mathrm{sn}$ de Legendre et ses compagnes (pages 65 à 69)}
+
+L'intégrale
+$\int dZ/\sqrt{(1-Z^2)(1-k^2Z^2)}$ est tentante par sa symétrie, et redonne les
+fonctions trigonométriques et hyperboliques pour $k = 0$ et $k = 1$. On appelle
+$\mathrm{sn}\,z$ la solution de
+\[
+\Bigl(\frac{dZ}{dz}\Bigr)^2 = (1 - Z^2)(1 - k^2Z^2), \qquad Z(0) = 0,\ Z'(0) = 1 .
+\]
+On l'exprime par une fonction $\wp$ de trois façons :
+\begin{itemize}
+\item[1°] par une homographie, $Z = \dfrac{12\wp(z - z_0) - (5 - k^2)}{12\wp(z -
+z_0) - (5k^2 - 1)}$, pour le $\wp$ de racines $e = \frac16(1+k^2)$,
+$-\frac{1}{12}(k^2 \pm 6k + 1)$, avec $\wp(z_0) = (5 - k^2)/12$ ; trop lourd,
+dit la page, mais cela prouve l'existence ;\footnote{L'identité différentielle
+est vérifiée : elle donne $\wp'(z_0)^2 = (1-k^2)^2/4$, d'où la valeur
+$\wp'(z_0) = -(1-k^2)/2$ de la page, au signe près fixé par $Z'(0) = 1$.}
+\item[2°] et 3°, pour le $\wp$ de racines
+\[
+e_1 = -\frac{1 + k^2}{3}, \qquad e_2 = \frac{2 - k^2}{3}, \qquad e_3 =
+\frac{2k^2 - 1}{3},
+\]
+\[
+\mathrm{sn}^2 z = \frac{1}{k^2}\bigl[\wp(z - \omega_1) - e_1\bigr], \qquad
+\boxed{\;\mathrm{sn}^2 z = \frac{1}{\wp z - e_1}\;} .
+\]
+\end{itemize}
+L'uniformité de $\mathrm{sn}$ vient de ce que les racines de $\wp z - e_1$ sont
+doubles. Les deux expressions donnent l'identité $(\wp z - e_1)(\wp(z - \omega_1)
+- e_1) = (e_1 - e_2)(e_1 - e_3) = k^2$, valable pour toute fonction $\wp$ (avec
+$(e_1 - e_2)(e_1 - e_3)$ au second membre), et qui vaut aussi
+\[
+k^2 = \frac{e^{2\eta_1\omega_1}}{\sigma(\omega_1)^4} = 3e_1^2 - \frac{g_2}{4} .
+\]
+Ces normalisations imposent les demi-périodes : $\omega_1 = iK'$ (pôle de
+$\mathrm{sn}$), $\omega_2 = K$, $\omega_3 = -K - iK'$, où $K$, $K'$ sont les
+intégrales complètes de la page 93. On a alors
+\[
+\mathrm{sn}(z + \omega_1)\,\mathrm{sn}\,z = \frac1k,
+\qquad
+\mathrm{sn}\,z = \sigma(\omega_1)e^{\eta_1 z}\frac{\sigma z}{\sigma(z + \omega_1)}
+= -\sigma(\omega_1)e^{-\eta_1 z}\frac{\sigma z}{\sigma(z - \omega_1)} ,
+\]
+\[
+\mathrm{sn}(z + 2\omega_1) = \mathrm{sn}\,z, \quad \mathrm{sn}(z + 2\omega_2) =
+\mathrm{sn}(z + 2\omega_3) = -\mathrm{sn}\,z, \quad \mathrm{sn}(-z) =
+-\mathrm{sn}\,z :
+\]
+$\mathrm{sn}$ a les périodes $2\omega_1$ et $4\omega_2$, elle est d'ordre $2$,
+ses zéros sont homologues de $0$ et $2\omega_2$ (dérivée $1$ et $-1$), ses pôles
+homologues de $\omega_1$ et $\omega_1 + 2\omega_2$ (résidus $1/k$ et $-1/k$) ;
+enfin $\mathrm{sn}\,\omega_2 = 1$, $\mathrm{sn}'\omega_2 = 0$, $\mathrm{sn}(\omega_1 +
+\omega_2) = 1/k$, $\mathrm{sn}\,\omega_3 = -1/k$, $\mathrm{sn}'\omega_3 =
+0$.\footnote{Toutes ces formules ont été vérifiées numériquement. Avec ces
+étiquettes, $\Im(\omega_2/\omega_1) < 0$, et la relation de Legendre de la page
+62 prend le signe $-i\pi/2$. Sur la page, les pôles sont écrits $\omega_1 +
+2n_1\omega_1 + 4n_2\omega_2$ et les zéros $2n_1\omega_1 + 4n_2\omega_2$ --- ce qui
+n'en donne que la moitié --- ; les zéros sont dits homologues de « $0$ ou
+$2\omega_1$ » et les pôles de « $\omega_2$ et $\omega_2 + 2\omega_1$ » :
+$\omega_1$ et $\omega_2$ y sont échangés, contre (3), (5), (6) et (7) de la même
+page, qu'on suit. La normalisation du signe de $k$ est donnée sous la forme
+« $k = -e^{\eta_1\omega_2}/\sigma'\omega_2$ », indices lus sous réserve ; ce qui
+vaut est $k = \pm e^{\eta_1\omega_1}/\sigma(\omega_1)^2$, le carré de la formule
+précédente. La valeur « $\mathrm{sn}\,\omega_2 = 1/?$ » a un dénominateur
+illisible ; c'est $1$. Le raisonnement sur la parité, à la page 67, se lit mal ;
+la conclusion, $\mathrm{sn}$ impaire, est juste.}
+
+On pose (page 68)
+\[
+\mathrm{cn}^2 z = 1 - \mathrm{sn}^2 z = \frac{\wp z - e_2}{\wp z - e_1} =
+-\frac{1}{k^2}\bigl[\wp(z - \omega_1) - e_3\bigr], \qquad \mathrm{cn}\,0 = 1,
+\]
+\[
+\mathrm{dn}^2 z = 1 - k^2\mathrm{sn}^2 z = \frac{\wp z - e_3}{\wp z - e_1} =
+-\bigl[\wp(z - \omega_1) - e_2\bigr], \qquad \mathrm{dn}\,0 = 1,
+\]
+\[
+\mathrm{cn}\,z = \frac{\sigma\omega_1}{\sigma\omega_2}e^{(\eta_2 - \eta_1)z}
+\frac{\sigma(z - \omega_2)}{\sigma(z - \omega_1)},
+\qquad
+\mathrm{dn}\,z = \frac{\sigma\omega_1}{\sigma\omega_3}e^{(\eta_3 - \eta_1)z}
+\frac{\sigma(z - \omega_3)}{\sigma(z - \omega_1)},
+\]
+et les formes équivalentes en $z + \omega_i$. Les fonctions $\mathrm{cn}$ et
+$\mathrm{dn}$ sont paires, d'ordre $2$, et
+\[
+\mathrm{cn}(z + 2\omega_1) = \mathrm{cn}(z + 2\omega_2) = -\mathrm{cn}\,z,\quad
+\mathrm{cn}(z + 2\omega_3) = \mathrm{cn}\,z ;
+\]
+\[
+\mathrm{dn}(z + 2\omega_2) = \mathrm{dn}\,z,\quad \mathrm{dn}(z + 2\omega_1) =
+\mathrm{dn}(z + 2\omega_3) = -\mathrm{dn}\,z ,
+\]
+si bien que $\mathrm{cn}$ a les périodes $2\omega_3$, $4\omega_1$, $4\omega_2$, et
+$\mathrm{dn}$ les périodes $2\omega_2$, $4\omega_1$, $4\omega_3$. Les pôles de
+$\mathrm{cn}$ et de $\mathrm{dn}$ sont homologues de $\pm\omega_1$, de résidus
+$\mp i/k$ pour $\mathrm{cn}$ et $\mp i$ pour $\mathrm{dn}$ ; les zéros de
+$\mathrm{cn}$ sont homologues de $\pm\omega_2$, avec $\mathrm{cn}'\omega_2 = -k'$,
+ceux de $\mathrm{dn}$ de $\pm\omega_3$, avec $\mathrm{dn}'\omega_3 = -ik'$, où
+$k' = \sqrt{1 - k^2}$ ; enfin $\mathrm{cn}\,\omega_3 = -ik'/k$, $\mathrm{dn}\,\omega_2 =
+k'$, $\mathrm{cn}'\omega_3 = \mathrm{dn}'\omega_2 = 0$.\footnote{Vérifié
+numériquement. La page donne $\mathrm{cn}(z + 2\omega_2) = \mathrm{cn}\,z$ et
+$\mathrm{cn}(z + 2\omega_3) = -\mathrm{cn}\,z$, d'où les périodes « $2\omega_2$,
+$4\omega_1$, $4\omega_3$ » pour $\mathrm{cn}$ et « $2\omega_3$, $4\omega_1$,
+$4\omega_2$ » pour $\mathrm{dn}$ : $\omega_2$ et $\omega_3$ y sont échangés, et la
+transcription signale plusieurs indices mal lisibles dans ces lignes. La
+quasi-périodicité de $\sigma$ appliquée à la formule de $\mathrm{cn}$ par
+$\sigma$, qui est sur la page, donne ce qu'on écrit. Les pôles de $\mathrm{cn}$
+et de $\mathrm{dn}$ sont dits homologues de $\omega_2$ (et les zéros de
+$\mathrm{cn}$ aussi) ; il faut $\omega_1$. Les valeurs y sont données au signe
+près ($\pm\sqrt{1-k^2}$, $\pm\frac{i}{k}\sqrt{1-k^2}$), avec la remarque que
+l'ambiguïté se lève par les formules par $\sigma$ ; on donne les signes. La
+relation « $\mathrm{cn}'^2\omega_2 = -\mathrm{sn}'^2\omega_2$ » ne peut être
+juste telle quelle ($\mathrm{sn}'\omega_2 = 0$) et n'est pas reprise.}
+
+Les formules de dérivation et les relations quadratiques :
+\[
+\mathrm{sn}' = \mathrm{cn}\,\mathrm{dn},\quad \mathrm{cn}' =
+-\mathrm{sn}\,\mathrm{dn},\quad \mathrm{dn}' = -k^2\,\mathrm{sn}\,\mathrm{cn} ;
+\]
+\[
+\mathrm{cn}^2 + \mathrm{sn}^2 = 1,\quad \mathrm{dn}^2 + k^2\mathrm{sn}^2 = 1,\quad
+\mathrm{dn}^2 - k^2\mathrm{cn}^2 = 1 - k^2 ;
+\]
+\[
+\mathrm{cn}'^2 = (1 - \mathrm{cn}^2)(k'^2 + k^2\mathrm{cn}^2),
+\qquad
+\mathrm{dn}'^2 = (1 - \mathrm{dn}^2)(\mathrm{dn}^2 - k'^2) .
+\]
+À un changement affine de la variable près, $\mathrm{cn}$ et $\mathrm{dn}$ sont
+donc solutions de l'équation de $\mathrm{sn}$ pour les modules $\rho$ tels que
+$\rho^2 = -k^2/(1-k^2)$ et $\rho^2 = 1/(1-k^2)$ respectivement.\footnote{La page
+écrit $\rho = k/\sqrt{1-k^2}$ pour $\mathrm{cn}$ : il manque le facteur $i$, que
+le signe $+$ dans $k'^2 + k^2\mathrm{cn}^2$ impose. Pour $\mathrm{dn}$, $\rho =
+1/\sqrt{1-k^2}$ est juste. Le numéro « (12) » de la page se lit « (11) ».}
+
+\pagerange{70}{73}
+\subsection*{Seconde reprise : $\mathrm{sn}_1$, $\mathrm{cn}_1$, $\mathrm{dn}_1$ (pages 70 à 73)}
+
+La page 70 reprend le tout pour une fonction $\wp$ quelconque, sans
+normaliser $k$ :
+\[
+\mathrm{sn}_1^2 z = \frac{1}{\wp z - e_1}, \qquad \mathrm{sn}_1'(0) = 1,
+\qquad
+\mathrm{sn}_1(z)\,\mathrm{sn}_1(z + \omega_1) = \frac{1}{k_1},\quad
+k_1^2 = (e_2 - e_1)(e_3 - e_1) = \frac{e^{2\eta_1\omega_1}}{\sigma(\omega_1)^4},
+\]
+avec la même formule par $\sigma$ ; $\mathrm{sn}_1$ a les périodes $2\omega_1$,
+$4\omega_2$, $4\omega_3$, change de signe par $z \mapsto z + 2\omega_2$ ou $z
++ 2\omega_3$, est impaire et invariante par $z \mapsto 2\omega_2 - z$ et $z
+\mapsto 2\omega_3 - z$ ; ses pôles sont homologues de $\omega_1$ (résidu
+$1/k_1$) et de $\omega_1 + 2\omega_2$ (résidu $-1/k_1$), ses zéros de $0$
+(dérivée $1$) et de $2\omega_2$ (dérivée $-1$) ; $\mathrm{sn}_1\omega_2 =
+\pm 1/\sqrt{e_2 - e_1}$, $\mathrm{sn}_1\omega_3 = \pm 1/\sqrt{e_3 - e_1}$, et
+$\mathrm{sn}_1'$ s'annule en ces deux points.\footnote{Le second facteur de
+$k_1^2$ se lit « $(e_3 - e_1)$ » une seconde fois, un indice étant peu net ; la
+normalisation est donnée par « $k_1 = -e^{\eta_1\omega_1}/\sigma'\omega_1$ », où
+il faut lire $\sigma(\omega_1)^2$, comme plus haut. Dans la formule par
+$\sigma$ de $\mathrm{sn}_1\omega_3$, coupée par le bas de la feuille, le
+dénominateur se lit $\sigma(\omega_1 + \omega_2)$ ; c'est $\sigma(\omega_1 +
+\omega_3)$. Ici les pôles sont bien homologues de $\omega_1$.} Puis
+\[
+\mathrm{cn}_1^2 = 1 - (e_2 - e_1)\,\mathrm{sn}_1^2 = \frac{\wp - e_2}{\wp - e_1},
+\qquad
+\mathrm{dn}_1^2 = 1 - (e_3 - e_1)\,\mathrm{sn}_1^2 = \frac{\wp - e_3}{\wp - e_1},
+\]
+\[
+\mathrm{sn}_1' = \mathrm{cn}_1\mathrm{dn}_1,\quad \mathrm{cn}_1' = -(e_2 -
+e_1)\,\mathrm{sn}_1\mathrm{dn}_1,\quad \mathrm{dn}_1' = -(e_3 -
+e_1)\,\mathrm{sn}_1\mathrm{cn}_1,
+\]
+\[
+\mathrm{sn}_1'^2 = \bigl(1 - (e_2 - e_1)\mathrm{sn}_1^2\bigr)\bigl(1 - (e_3 -
+e_1)\mathrm{sn}_1^2\bigr).
+\]
+Pour les racines $e_i$ de la page 66 on a $e_2 - e_1 = 1$ et $e_3 - e_1 = k^2$, et
+l'on retrouve $\mathrm{sn}$, $\mathrm{cn}$, $\mathrm{dn}$.\footnote{La page 71
+rappelle sous un trait les valeurs « $\mathrm{sn}\,\omega_2 = 1$,
+$\mathrm{sn}\,\omega_3 = -1/k$ », qui sont celles de la fonction normalisée.
+Les formules de la page 73 sont numérotées (8) et (9), sans (7) ; la page 72,
+qui portait selon l'en-tête de la transcription une récapitulation de
+$\mathrm{sn}$ numérotée (1) à (6), n'est pas transcrite, et n'est donc pas lue
+ici.}
+
+\pagerange{74}{96}
+\section*{VIII. Seconde rédaction : « Fonctions elliptiques » (pages 74 à 96)}
+
+\pagerange{74}{78}
+\subsection*{1) Généralités (pages 74 à 78)}
+
+Une fonction elliptique est une fonction
+méromorphe $f$ sur $\mathbf{C}$ admettant deux périodes linéairement
+indépendantes sur $\mathbf{R}$ ; si $f$ n'est pas constante, son groupe des
+périodes, sous-groupe fermé de $\mathbf{C} = \mathbf{R}^2$, est discret, donc un
+réseau $\mathfrak{P}$. Fixons-le, avec une base $\{2\omega_1, 2\omega_2\}$
+(définie à une substitution entière de déterminant $\pm 1$ près) : les fonctions
+méromorphes vérifiant $f(z + 2\omega_1) = f(z + 2\omega_2) = f(z)$ forment un
+corps $E$, celui des fonctions méromorphes sur la courbe analytique
+$\mathbf{C}/\mathfrak{P}$, topologiquement un tore. La théorie de Riemann dit
+que $E$ est de degré fini sur $\mathbf{C}(f)$ pour tout $f$ non constant ; on
+va obtenir directement plus précis.\footnote{Le titre « Fonctions elliptiques
+» est encadré, avec en sous-titre « Expression des fonctions elliptiques par
+$\wp u$, $\wp' u$ ». Une phrase « Une fonction elliptique sans pôle est une
+constante » et un début de « a) Existence \ldots » sont rayés.}
+
+\begin{itemize}
+\item[a$'$)] La somme des résidus est nulle, et le nombre des zéros est égal au
+nombre des pôles, comptés avec multiplicité --- par le théorème des résidus sur
+le bord d'un parallélogramme des périodes.\footnote{La page dit « immédiat par
+Liouville », souligné. Liouville donne qu'une fonction elliptique sans pôle est
+constante ; les deux énoncés de a$'$) viennent de l'intégration de $f$ et de
+$f'/f$ sur le bord.}
+\item[b)] La série
+\[
+\wp(z) = \frac{1}{z^2} + \sum_{(m,n) \neq (0,0)}\Bigl(\frac{1}{(z - 2m\omega_1 -
+2n\omega_2)^2} - \frac{1}{(2m\omega_1 + 2n\omega_2)^2}\Bigr)
+\]
+définit une fonction méromorphe sur $\mathbf{C}$, à pôles doubles aux points
+de $\mathfrak{P}$, et $\wp' = -2\sum_{m,n}(z - 2m\omega_1 - 2n\omega_2)^{-3}$ est
+visiblement elliptique. De $\wp'(z) = \wp'(z + 2\omega_i)$ on tire $\wp(z + 2\omega_i)
+- \wp(z) = \text{c}^{\text{te}}$, nulle comme on le voit en $z = -\omega_i$
+puisque $\wp$ est paire. C'est l'unique fonction elliptique n'ayant de pôles
+qu'aux points de $\mathfrak{P}$ et telle que $\wp(z) - 1/z^2$ soit holomorphe
+et nulle en $0$ ; elle est paire, $\wp(z) = 1/z^2 + c_1z^2 + c_2z^4 +
+\cdots$.\footnote{La page dit « holomorphe dans le plan » pour la série, et
+« pôles \ldots\ $2\mathfrak{P}$ » semble-t-il : $\mathfrak{P}$, qui est déjà
+l'ensemble des $2m\omega_1 + 2n\omega_2$.}
+\item[c)] Toute fonction elliptique paire n'ayant de pôles qu'aux points de
+$\mathfrak{P}$ est un polynôme en $\wp$, et d'une seule façon (car $\wp$ est
+transcendante sur $\mathbf{C}$) ; si le pôle en $0$ est d'ordre $2k$, de terme
+dominant $c_k z^{-2k}$, le polynôme est de degré $k$ et de coefficient dominant
+$c_k$ : $f - c_k\wp^k$ est paire, à pôle d'ordre $\leqslant 2(k-1)$, et l'on
+conclut par récurrence.\footnote{La page ajoute « Le polynôme est unitaire »,
+qui est faux ($2\wp$) ; la démonstration qu'elle donne produit le coefficient
+dominant $c_k$.}
+\item[d)] Toute fonction elliptique paire est une fonction rationnelle de
+$\wp$, et réciproquement. Si $a_1, \ldots, a_n$ sont ses pôles hors de
+$\mathfrak{P}$, un par paire $\{a, -a\}$ modulo $\mathfrak{P}$, d'ordres $l_i$,
+la fonction $f\prod_i(\wp - \wp(a_i))^{l_i}$ est paire et n'a de pôles que dans
+$\mathfrak{P}$ ; on applique c).\footnote{Cette démonstration est celle de la
+page 77. La page 76 est entièrement barrée de longs traits obliques : elle
+tentait une autre voie (le dénominateur de $R_2$ dans $\wp'R_2(\wp)$, et un
+lemme : « une fonction elliptique a au moins deux pôles non congruents mod
+$\mathfrak{P}$, ou un pôle double »), et établissait que $\wp'$, impaire, a
+pour zéros simples les trois demi-périodes --- ce que la page 78 reprend.}
+\item[e)] $[E : \mathbf{C}(\wp)] = 2$ : $\mathbf{C}(\wp)$ est, par d), le corps
+des invariants de l'automorphisme $f \mapsto \check f$, $\check f(z) = f(-z)$,
+qui est d'ordre $2$ --- et $E \neq \mathbf{C}(\wp)$ puisque $\wp'$ est impaire.
+\item[f)] Toute fonction elliptique s'écrit d'une seule façon
+\[
+f = R_1(\wp) + \wp' R_2(\wp), \qquad R_1, R_2 \text{ rationnelles} ;
+\]
+\item[g)] ses pôles sont dans $\mathfrak{P}$ si et seulement si $R_1$ et $R_2$
+sont des polynômes ; une telle fonction, non constante, a en $0$ un pôle au
+moins double. Une fonction impaire est de la forme $\wp' R(\wp)$, avec $R$
+polynôme si et seulement si ses pôles sont dans $\mathfrak{P}$.\footnote{Une
+preuve de g) par $f = \frac12(f + \check f) + \frac12(f - \check f)$ est
+encadrée et barrée à la page 77 ; la page 78 donne la réduction au cas impair,
+écrite vite.}
+\end{itemize}
+
+\pagerange{78}{81}
+\subsection*{2) Les relations entre $\wp$ et $\wp'$ ; 3) la fonction $\zeta$ (pages 78 à 81)}
+
+En dérivant la
+série, les coefficients sont
+\[
+c_k = (2k+1)\sum_{w \in \mathfrak{P}\smallsetminus 0}\frac{1}{w^{2k+2}} .
+\]
+Les zéros de $\wp'$ dans $\mathbf{C}/\mathfrak{P}$ sont les trois demi-périodes
+$\omega_1, \omega_2, \omega_3$ ; posant $e_i = \wp(\omega_i)$, ce sont des
+racines doubles de $\wp z - e_i = 0$, et comme $\wp - e_i$ n'a que deux zéros
+dans $\mathbf{C}/\mathfrak{P}$, \emph{les $e_i$ sont distincts}.\footnote{La page
+écrit « dans $\mathfrak{P}$ » pour $\mathbf{C}/\mathfrak{P}$, et ici $\omega_3 =
+\omega_1 + \omega_2$ : c'est le même point de $\mathbf{C}/\mathfrak{P}$ que
+notre $-\omega_1 - \omega_2$, et $e_3$ ne change pas ; seul $\eta_3$ change de
+signe.} Une fonction elliptique et sa dérivée étant liées par une relation
+algébrique, toute fonction elliptique vérifie une équation différentielle
+algébrique du premier ordre. Pour $\wp$ : $\wp'^2$ est paire, à pôle d'ordre $6$,
+donc un polynôme de degré $3$ en $\wp$, et l'identification des développements
+en $0$ donne
+\[
+\boxed{\;\wp'^2 = 4\wp^3 - g_2\wp - g_3\;}, \qquad g_2 = 20c_1,\ g_3 = 28c_2 ;
+\]
+ou encore : $\wp'^2/\prod(\wp - e_i)$ est elliptique sans pôle, donc constante,
+égale à $4$, et\footnote{Les numéros des deux formules encadrées se lisent mal (un $4$ ou un
+$7$, un $5$ ou un $8$) ; la page 80 continue par (6). Une ligne finale écrit le
+polynôme « $4(\wp^3 - e_1)(\wp - e_2)(\wp - e_3)$ » ; c'est $\wp - e_1$.}
+\[
+\boxed{\;\wp'^2 = 4(\wp - e_1)(\wp - e_2)(\wp - e_3)\;} .
+\]
+En
+dérivant, $\wp'' = 6\wp^2 - \frac12 g_2$ et $\wp''' = 12\wp\wp'$, et en poussant
+l'identification,
+\[
+c_3 = \frac{c_1^2}{3}, \qquad c_4 = \frac{3}{11}c_1c_2 .
+\]
+
+\emph{3) La fonction $\zeta$} (pages 80 et 81). $\zeta(u) - \frac1u = -\int_0^u
+(\wp z - \frac{1}{z^2})dz$, $\zeta' = -\wp$,
+\[
+\zeta(u) = \frac1u - \frac{c_1}{3}u^3 - \cdots - \frac{c_n}{2n+1}u^{2n+1} -
+\cdots,
+\qquad
+\zeta(z) = \frac1z + \sum_{w \neq 0}\Bigl(\frac{1}{z - w} + \frac1w +
+\frac{z}{w^2}\Bigr) ;
+\]
+$\zeta$ est impaire, à pôles simples de résidu $1$ aux points de $\mathfrak{P}$.
+Comme $\zeta'$ est elliptique, $\zeta(z + 2\omega) - \zeta(z) = 2\eta$ est
+constant pour toute demi-période $\omega$, et en $z = -\omega$ on trouve $\eta
+= \zeta(\omega)$. Les $\eta_i$ et les $\omega_i$ sont liés par la relation de
+Legendre, $\eta_1\omega_2 - \eta_2\omega_1 = i\pi/2$ quand $\omega_1, \omega_2$
+sont en disposition directe ; la page 81 en indique la preuve par une
+intégrale le long d'un parallélogramme des périodes.\footnote{Le premier
+coefficient se lit $\frac{c_2}{3}$, indice surchargé ; c'est $\frac{c_1}{3}$, le
+terme général de la même ligne le dit.}
+
+\emph{Formule d'Hermite} (page 81). Comme à la page 62, pour $f$ de pôles $a_i$
+et de parties principales $\sum_{m=1}^{k_i} A_{i,m}/(z - a_i)^m$,
+\[
+f(z) = \text{c}^{\text{te}} + \sum_i\Bigl(A_{i,1}\zeta(z - a_i) + A_{i,2}\wp(z -
+a_i) + \cdots + \frac{(-1)^{k_i}}{(k_i - 1)!}A_{i,k_i}\wp^{(k_i - 2)}(z -
+a_i)\Bigr), \tag{12}
+\]
+elliptique grâce à $\sum_i A_{i,1} = 0$.\footnote{L'ordre de dérivation de
+$\wp$ se lit mal sur la page ; c'est $k_i - 2$.}
+
+\pagerange{81}{84}
+\subsection*{4) La fonction $\sigma$ ; 5) formules d'addition ; les fonctions $\wp - e_i$ (pages 81 à 84)}
+
+\emph{4) La fonction $\sigma$} (pages 81 et 82).
+\[
+\sigma(z) = z\prod_{w \in \mathfrak{P}\smallsetminus 0}\Bigl(1 -
+\frac{z}{w}\Bigr)e^{\frac{z}{w} + \frac{z^2}{2w^2}}, \qquad
+\frac{\sigma'}{\sigma} = \zeta, \qquad \sigma(z) = z\,e^{\int_0^z(\zeta u -
+\frac1u)du}, \tag{13--14}
+\]
+fonction entière impaire, à zéros simples exactement aux points de
+$\mathfrak{P}$, et\footnote{La page écrit (16) $\sigma(u + 2\omega_i) = \sigma u\,e^{2\eta_i(u +
+\omega_i) + 2i\pi}$ ; le facteur $e^{2i\pi} = 1$ perd le signe. Il faut $+i\pi$,
+comme la page l'écrit elle-même en (26) et à la page 84.}
+\[
+\sigma(u) = u - \frac{c_1}{12}u^5 - \frac{c_2}{30}u^7 - \cdots, \qquad
+\sigma(u + 2\omega_i) = -\sigma(u)\,e^{2\eta_i(u + \omega_i)} . \tag{15--16}
+\]
+\emph{Formule de
+Jacobi} : si $(a_i)$ et $(b_i)$ sont des systèmes de représentants des zéros
+et des pôles avec $\sum a_i = \sum b_i$ (ce que permet le théorème IV),
+\[
+f(u) = \text{c}^{\text{te}} \times \frac{\prod\sigma(u - a_i)}{\prod\sigma(u -
+b_i)} , \tag{17}
+\]
+le second membre étant elliptique par (16).
+
+\emph{5) Formules d'addition} (pages 82 et 83). La formule de Jacobi appliquée
+à $u \mapsto \wp u - \wp v$ donne
+\[
+\wp u - \wp v = -\frac{\sigma(u+v)\sigma(u-v)}{\sigma^2u\,\sigma^2v} ; \tag{18}
+\]
+ses dérivées logarithmiques en $u$ et en $v$,
+\[
+\frac{\wp'u}{\wp u - \wp v} = \zeta(u+v) + \zeta(u-v) - 2\zeta u, \qquad
+-\frac{\wp'v}{\wp u - \wp v} = \zeta(u+v) - \zeta(u-v) - 2\zeta v, \tag{19}
+\]
+\[
+\zeta(u+v) - \zeta u - \zeta v = \frac12\,\frac{\wp'u - \wp'v}{\wp u - \wp v},
+\qquad \zeta(2u) - 2\zeta u = \frac12\,\frac{\wp''u}{\wp'u}, \tag{20}
+\]
+\[
+\wp(u+v) + \wp u + \wp v = \frac14\Bigl(\frac{\wp'u - \wp'v}{\wp u -
+\wp v}\Bigr)^2, \qquad \wp(2u) + 2\wp u = \frac14\Bigl(\frac{\wp''u}{\wp'u}\Bigr)^2 ;
+\tag{21}
+\]
+et la formule d'Hermite appliquée à $\wp(2u)$ :
+\[
+4\wp(2u) = \wp u + \wp(u + \omega_1) + \wp(u + \omega_2) + \wp(u + \omega_3) .
+\tag{22}
+\]
+
+\emph{5 bis) Les fonctions $\wp - e_i$} (pages 83 et 84).\footnote{La page
+numérote cette section « 5) » une seconde fois.} Hermite appliqué à $1/(\wp u -
+e_i)$, avec $e_1 + e_2 + e_3 = 0$, donne
+\[
+\frac{1}{\wp u - e_i} = \frac{\wp(u + \omega_i) - e_i}{(e_j - e_i)(e_k - e_i)}
+\qquad (\{i, j, k\} = \{1, 2, 3\}), \tag{23}
+\]
+et (18) avec $v = \omega_i$ :
+\[
+\wp u - e_i = -\frac{\sigma(u + \omega_i)\sigma(u - \omega_i)}{\sigma^2u\,
+\sigma^2\omega_i} = \Bigl(\frac{\sigma_i u}{\sigma u}\Bigr)^2, \qquad
+\sigma_i u = \frac{e^{-\eta_i u}\sigma(u + \omega_i)}{\sigma\omega_i} .
+\tag{24--25}
+\]
+La racine carrée $\sqrt{\wp u - e_i} = \sigma_i u/\sigma u$ est donc méromorphe ;
+$\sigma_i$ est paire, $\sigma_i(0) = 1$, et
+\[
+\sigma_i(u + 2\omega_i) = -\sigma_i(u)\,e^{2\eta_i(u + \omega_i)}, \qquad
+\sigma_i(u + 2\omega_j) = \sigma_i(u)\,e^{2\eta_j(u + \omega_j)} \quad (j \neq i),
+\tag{26}
+\]
+si bien que $\sigma_i/\sigma$ a la période $2\omega_i$ et change de signe par $u
+\mapsto u + 2\omega_j$ : ses périodes sont engendrées par $2\omega_i$ et
+$4\omega_j$ --- pour $\sqrt{\wp - e_1}$, $2\omega_1$ et $4\omega_2$ ; pour
+$\sqrt{\wp - e_2}$, $2\omega_2$ et $4\omega_3$ ; pour $\sqrt{\wp - e_3}$,
+$2\omega_3$ et $4\omega_1$.
+
+\pagerange{84}{89}
+\subsection*{Les fonctions $\Theta$ (pages 84 à 89)}
+
+Elles servent au calcul numérique
+et rompent la symétrie entre $\omega_1$ et $\omega_2$. Par $u \mapsto u +
+2\omega_1$, $\sigma(u)$ et $e^{\eta_1u^2/2\omega_1 - i\pi u/2\omega_1}$ sont
+multipliés par le même facteur $e^{2\eta_1(u + \omega_1) - i\pi}$ ; leur quotient
+a la période $2\omega_1$ et se développe en série de Fourier :
+\[
+\sigma(u) = e^{\eta_1u^2/2\omega_1}\sum_{n \in \mathbf{Z}} A_n\,e^{(2n-1)i\pi
+u/2\omega_1},
+\]
+et la quasi-périodicité en $2\omega_2$ donne, avec la relation de Legendre, la
+récurrence $A_{n+1} = -h^{2n}A_n$, $h = e^{i\pi\omega_2/\omega_1}$,
+$\Im(\omega_2/\omega_1) > 0$.\footnote{L'exposant $2n$ est lu sous réserve ; le
+calcul le confirme.} D'où la fonction
+\[
+\Theta(v \mid t) = -\frac1i\sum_{n \in \mathbf{Z}}(-1)^n e^{(n - \frac12)^2
+i\pi t + (2n-1)i\pi v} = 2\sum_{n \geqslant 1}(-1)^{n-1}h^{(n - \frac12)^2}\sin(2n-1)\pi v,
+\qquad h = e^{i\pi t}, \tag{1--2, 6}
+\]
+holomorphe pour $\Im t > 0$ --- c'est la fonction $\vartheta_1(v \mid t)$ de
+Jacobi --- et
+\[
+\sigma(u \mid \omega_1, \omega_2) = \frac{2\omega_1}{\Theta_v'(0 \mid
+\omega_2/\omega_1)}\,e^{\eta_1u^2/2\omega_1}\,\Theta\Bigl(\frac{u}{2\omega_1}
+\Bigm| \frac{\omega_2}{\omega_1}\Bigr) . \tag{3}
+\]
+$\Theta$ est impaire en $v$, ses zéros sont les $v = m_1 + m_2t$, et
+\[
+\Theta(v + 1 \mid t) = -\Theta(v \mid t), \qquad \Theta(v + t \mid t) =
+\Theta(v \mid t)\,e^{-2i\pi v - i\pi t - i\pi}, \qquad \Theta(v \mid t + 4) =
+-\Theta(v \mid t) ; \tag{4--5}
+\]
+les deux premières relations caractérisent $\Theta$ à un facteur près. Pour $t
+= iT$, $\Re T > 0$, la série devient $2\sum(-1)^{n-1}e^{-(n - \frac12)^2\pi
+T}\sin(2n-1)\pi v$, et pour $\Re a > 0$
+\[
+\sum_{n \in \mathbf{Z}} e^{-an^2 + bn + c} = -e^{c + \frac b2 - \frac
+a4}\,\Theta\Bigl(\frac{b - a - i\pi}{2i\pi} \Bigm| \frac{ia}{\pi}\Bigr) . \tag{7}
+\]
+
+\emph{Transformation $t \mapsto -1/t$.} Écrire que $\sigma(u \mid \omega_1,
+\omega_2) = \sigma(u \mid \omega_2, -\omega_1)$ --- c'est le même réseau --- et
+utiliser la relation de Legendre donne
+\[
+\Theta(v \mid t) = e^{-i\pi v^2/t}\,\Theta\Bigl(\frac vt \Bigm| -\frac1t\Bigr)\,
+\cdot t\,H(t), \qquad H(t) = \frac{\Theta_v'(0 \mid t)}{\Theta_v'(0 \mid -1/t)} .
+\tag{8}
+\]
+Pour expliciter le facteur, on note que $\Theta$ est solution de l'équation de
+la chaleur
+\[
+\frac{\partial^2\Theta}{\partial v^2} = 4i\pi\,\frac{\partial\Theta}{\partial
+t} ; \tag{9}
+\]
+l'appliquer aux deux membres de (8) montre que $tH(t)$ est proportionnel à
+$1/\sqrt t$, et le cas $t = i$ fixe la constante :
+\[
+\boxed{\;\Theta(v \mid t) = e^{-i\pi v^2/t}\,\Theta\Bigl(\frac vt \Bigm|
+-\frac1t\Bigr)\, i\sqrt{\frac it}\;}, \qquad
+\Theta_v'(0 \mid t) = \frac it\sqrt{\frac it}\;\Theta_v'\Bigl(0 \Bigm|
+-\frac1t\Bigr), \tag{10--11}
+\]
+la racine carrée étant la détermination principale ($\Re\sqrt{i/t} >
+0$).\footnote{La page écrit (8) sans le facteur $t$ : la dérivée en $v = 0$ du
+second membre fait apparaître $\frac1t\Theta_v'(0 \mid -1/t)$, et le facteur
+est nécessaire --- on l'a vérifié numériquement. Elle trouve ensuite
+« $H'/H = -1/2t$, d'où $H$ proportionnel à $1/\sqrt t$ », ce qui est vrai de
+$tH$ ; et (11), qui donne $H = \frac it\sqrt{\frac it}$, proportionnel à
+$t^{-3/2}$, est juste, comme (10) et (12). La constante du cas $t = i$ est
+écrite « $a = \sqrt i$ » : pour que (10) en résulte, elle vaut $i\sqrt i$. Les
+bornes de l'argument se lisent mal. Le signe de la page entre $\Theta(v/t \mid
+-1/t)$ et le quotient ressemble à un $+$ ; c'est un produit.} Pour $t = iT$,
+$\Re T > 0$, (11) s'écrit, avec $\Theta_v'(v \mid t) = 2\pi\sum(-1)^{n-1}(2n-1)
+e^{(n - \frac12)^2 i\pi t}\cos(2n-1)\pi v$,
+\[
+\sum_{n \geqslant 1}(-1)^{n-1}(2n-1)e^{-(n-\frac12)^2\pi T} =
+\frac{1}{T^{3/2}}\sum_{n \geqslant 1}(-1)^{n-1}(2n-1)e^{-(n-\frac12)^2\pi/T}. \tag{12}
+\]
+
+La formule (10) ramène le calcul de $\Theta(v \mid iT)$ à celui de $\Theta(v \mid
+i/T)$ ; pour $T$ réel on peut donc supposer $T \geqslant 1$, d'où $|h| \leqslant
+e^{-\pi} \approx 0{,}043$, et la série, dont l'exposant de $h$ croît comme $n^2$,
+converge très vite.\footnote{La page écrit « $e^{-\pi} \mathbin{\#} \frac{1}{10}$
+» (son signe d'approximation) ; $e^{-\pi}$ vaut environ $1/23$, ce qui ne fait
+que renforcer l'argument. Pour $T$ complexe, l'alternative « $\Re T > 1$ ou
+$\Re\frac1T > 1$ » n'est pas toujours vraie ; il faut alors tout le groupe
+modulaire pour ramener $t$ dans le domaine fondamental.}
+
+\emph{Les autres fonctions thêta.} On définit $\Theta_1, \Theta_2, \Theta_3$ par
+\[
+\sigma_i(u) = e^{\eta_1u^2/2\omega_1}\,\frac{\Theta_i(u/2\omega_1 \mid
+\omega_2/\omega_1)}{\Theta_i(0 \mid \omega_2/\omega_1)}, \tag{13}
+\]
+et l'on trouve
+\[
+\Theta_1(v \mid t) = 2\sum_{n \geqslant 1}h^{(n-\frac12)^2}\cos(2n-1)\pi v =
+\vartheta_2(v),
+\]
+\[
+\Theta_2(v \mid t) = 1 + 2\sum_{n \geqslant 1}(-1)^nh^{n^2}\cos 2n\pi v =
+\vartheta_0(v),
+\]
+\[
+\Theta_3(v \mid t) = 1 + 2\sum_{n \geqslant 1}h^{n^2}\cos 2n\pi v =
+\vartheta_3(v), \qquad \Theta = \vartheta_1 , \tag{14}
+\]
+dans les notations de Jacobi ($\vartheta_0$ est le $\vartheta_4$
+d'aujourd'hui).\footnote{Vérifié numériquement, avec $\omega_3 = -\omega_1 -
+\omega_2$. La page écrit la forme en cosinus de $\Theta_2$ sans le
+$(-1)^n$, que sa forme exponentielle, juste, comporte. Elle appelle les
+$\vartheta_i$ « fonctions de Weierstrass » ; la notation est de Jacobi.} Une
+fois fixés $\omega_1$ et $t = \omega_2/\omega_1$, toutes les quantités de la
+théorie se calculent par les thêta :
+\[
+e_i = \Bigl(\frac{1}{2\omega_1}\Bigr)^2\Bigl(\frac13\frac{\Theta'''(0)}{\Theta'(0)} -
+\frac{\Theta_i''(0)}{\Theta_i(0)}\Bigr),
+\]
+\[
+e_1 = \frac13\Bigl(\frac{\pi}{2\omega_1}\Bigr)^2\bigl[\Theta_2(0)^4 +
+\Theta_3(0)^4\bigr],
+\]
+\[
+e_2 = -\frac13\Bigl(\frac{\pi}{2\omega_1}\Bigr)^2\bigl[\Theta_1(0)^4 +
+\Theta_3(0)^4\bigr],
+\]
+\[
+e_3 = \frac13\Bigl(\frac{\pi}{2\omega_1}\Bigr)^2\bigl[\Theta_1(0)^4 -
+\Theta_2(0)^4\bigr], \tag{15}
+\]
+\[
+2\eta_1\omega_1 = -\frac{\Theta'''(0)}{6\,\Theta'(0)}, \qquad \Theta'(0) =
+\pi\,\Theta_1(0)\Theta_2(0)\Theta_3(0),
+\]
+les dérivées étant prises en $v$.\footnote{La page écrit $\frac12$ devant $e_3$ ;
+c'est $\frac13$, et le second indice, illisible, est $2$ --- vérifié, comme les
+deux autres et les deux relations suivantes.}
+
+\pagerange{90}{90}
+\subsection*{Récapitulation (page 90)}
+
+Les données $\omega_1, \omega_2$ (avec
+$\omega_1/\omega_2 \notin \mathbf{R}$), $g_2, g_3$ (avec $g_2^3 - 27g_3^2 \neq
+0$), $c_1, c_2$, ou $e_1, e_2, e_3$ distincts, se déterminent les unes les
+autres :
+\[
+c_1 = 3\sum_{w \in \mathfrak{P}\smallsetminus 0}\frac{1}{w^4}, \quad c_2 =
+5\sum_{w \in \mathfrak{P}\smallsetminus 0}\frac{1}{w^6}, \quad g_2 = 20c_1,
+\quad g_3 = 28c_2,
+\]
+\[
+e_i = \wp(\omega_i) = \frac{1}{\omega_i^2} + \sum_{w
+\neq 0}\Bigl[\frac{1}{(\omega_i - w)^2} - \frac{1}{w^2}\Bigr] ;
+\]
+$e_1, e_2, e_3$ sont les racines de $4z^3 - g_2z - g_3 = 4(z - e_1)(z - e_2)(z -
+e_3)$, d'où
+\[
+g_2 = -4(e_2e_3 + e_3e_1 + e_1e_2) = 2(e_1^2 + e_2^2 + e_3^2), \qquad g_3 =
+4e_1e_2e_3 ;
+\]
+et $\omega_i = \int_\infty^{e_i} dz/\sqrt{4z^3 - g_2z - g_3}$, ou $\omega_i =
+\int_{e_j}^{e_k}dz/\sqrt{4z^3 - g_2z - g_3}$, pour des déterminations convenables
+avec $\omega_1 + \omega_2 + \omega_3 = 0$.\footnote{La page écrit $g_2 = 4(e_2e_3
++ e_3e_1 + e_1e_2)$, sans le signe $-$ ; « $g_? = 20c_?$ » dans la dernière
+ligne, pour $g_3 = 28c_2$ ; les sommes des $c_i$ portent sur les $(1/2\omega)$
+pour $\omega$ dans un « $\mathfrak{P}^*$ » qui est ici, semble-t-il, l'ensemble
+des demi-périodes non nulles, et la série de $e_i$ s'écrit sans les termes
+$-1/w^2$ qui la font converger.}
+
+\pagerange{91}{92}
+\subsection*{La fonction modulaire (pages 91 et 92)}
+
+Comme fonctions de $(\omega_1,
+\omega_2)$, avec $\Im(\omega_2/\omega_1) > 0$, $g_2$ et $g_3$ sont homogènes de
+degrés $-4$ et $-6$ ; le quotient
+\[
+J(\tau) = \frac{g_2^3}{\Delta} = \frac{g_2^3}{g_2^3 - 27g_3^2} =
+\frac{1}{1 - 27g_3^2/g_2^3}, \qquad \tau = \frac{\omega_2}{\omega_1},
+\]
+est homogène de degré $0$, donc une fonction de $\tau$ seul, holomorphe sur le
+demi-plan $\Im\tau > 0$ : c'est la fonction modulaire.\footnote{La page dit
+« homogènes de degré $2$ et $3$ » : ce sont les degrés en $(g_2, g_3)$ comme
+poids, et les degrés d'homogénéité en $(\omega_1, \omega_2)$ sont $-4$ et
+$-6$ ; le quotient est de degré $0$ dans les deux cas.} Comme $g_2, g_3$ peuvent
+être pris arbitraires sous la condition $\Delta \neq 0$, $J$ prend toutes les
+valeurs complexes ; comme $g_2, g_3$ ne dépendent que du réseau, $J$ est
+invariante par le groupe modulaire des $\tau \mapsto (a\tau + b)/(c\tau + d)$,
+$a, b, c, d \in \mathbf{Z}$, $ad - bc = 1$ ; et $J(\tau) = a$ détermine le réseau
+à homothétie près, donc $\tau$ à une transformation modulaire près. Il en
+résulte que $J$ est biunivoque au voisinage de tout point qui n'est point fixe
+d'aucune transformation modulaire non triviale, et en ces points seulement ; il
+y a exactement deux classes de tels points, $i$ et $\rho = \frac12 +
+i\frac{\sqrt3}{2}$, et
+\[
+J(i) = 1 \quad (g_3 = 0), \qquad J(\rho) = 0 \quad (g_2 = 0) .
+\]
+Ce sont les seuls points singuliers de la fonction inverse $\tau(J)$, et ces
+propriétés sont à la base de la démonstration des théorèmes de Picard sur les
+fonctions entières.\footnote{La page apparie $J(i)$ à $0$ et à $g_2 = 0$, et
+$J(\rho)$ à $1$ et à $g_3 = 0$ ; c'est l'inverse, et on l'a vérifié (pour le réseau
+carré, $\wp$ est « lemniscatique », $g_3 = 0$). Les valeurs $0$ en $i$ et $1$ en
+$\rho$ sont celles de $1 - J$, c'est-à-dire de l'invariant $j$ des pages 39 à
+47 : pour celui-là, $j = 0$ est le cas de $\mathbf{Z}/2$ (page 47) et $j = 1$ celui de
+$\mathbf{Z}/3$. L'écart vient peut-être de là ; la page ne le dit pas.}
+
+\pagerange{93}{96}
+\subsection*{Les fonctions elliptiques de Legendre (pages 93 à 96)}
+
+$\mathrm{sn}\,u$
+est la fonction réciproque de $\int_0^u dx/\sqrt{(1-x^2)(1-k^2x^2)}$, impaire ;
+on pose, avec $k'^2 = 1 - k^2$,
+\[
+\mathrm{cn}^2 + \mathrm{sn}^2 = 1, \quad \mathrm{dn}^2 + k^2\mathrm{sn}^2 = 1,
+\quad \mathrm{dn}^2 - k^2\mathrm{cn}^2 = k'^2, \qquad \mathrm{sn}\,0 = 0,\
+\mathrm{cn}\,0 = \mathrm{dn}\,0 = 1, \tag{1}
+\]
+$\mathrm{cn}$ et $\mathrm{dn}$ étant uniformes et paires ; les équations
+différentielles (2) sont celles de la page 69, et les développements de Taylor
+en $0$ sont, avec $\alpha = \frac12(k + \frac1k)$\footnote{Coefficients vérifiés. En termes de $k$, $2\alpha k = 1 + k^2$,
+$4k^2(\alpha^2 + 3) = 1 + 14k^2 + k^4$, $8k^3(\alpha^3 + 33\alpha) = 1 + 135k^2 +
+135k^4 + k^6$.},
+\[
+\mathrm{sn}\,u = u - \frac{2\alpha k}{3!}u^3 + \frac{4k^2(\alpha^2 +
+3)}{5!}u^5 - \frac{8k^3(\alpha^3 + 33\alpha)}{7!}u^7 + \cdots,
+\]
+\[
+\mathrm{cn}\,u = 1 - \frac{u^2}{2!} + \frac{1 + 4k^2}{4!}u^4 - \frac{1 + 44k^2 +
+16k^4}{6!}u^6 + \cdots,
+\]
+\[
+\mathrm{dn}\,u = 1 - \frac{k^2u^2}{2!} + \frac{k^2(4 + k^2)}{4!}u^4 -
+\frac{k^2(16 + 44k^2 + k^4)}{6!}u^6 + \cdots . \tag{3}
+\]
+Pour $k = 0$, $\mathrm{sn} = \sin$, $\mathrm{cn} = \cos$,
+$\mathrm{dn} = 1$ ; pour $k = 1$, $\mathrm{sn} = \mathrm{th}$, $\mathrm{cn} =
+\mathrm{dn} = 1/\mathrm{ch}$.\footnote{La page écrit $\mathrm{dn} =
+1/\mathrm{th}$ pour $k = 1$ ; c'est $1/\mathrm{ch}$, puisque $\mathrm{dn}^2 =
+1 - \mathrm{sn}^2 = \mathrm{cn}^2$ quand $k = 1$.}
+
+\emph{Périodes et valeurs remarquables.} Soient
+\[
+K = \int_0^1\frac{dx}{\sqrt{(1-x^2)(1-k^2x^2)}}, \qquad K' =
+\int_0^1\frac{dx}{\sqrt{(1-x^2)(1-k'^2x^2)}}, \qquad K'' = -K - iK' .
+\]
+\begin{itemize}
+\item $\mathrm{sn}$ : périodes $4K$, $2iK'$ ; zéros $2mK + 2m'iK'$ ; pôles $iK' +
+2mK + 2m'iK'$ ;
+\item $\mathrm{cn}$ : périodes $4K$, $-2K'' = 2K + 2iK'$ ; zéros $K + 2mK +
+2m'iK'$ ; pôles $iK' + 2mK + 2m'iK'$ ;
+\item $\mathrm{dn}$ : périodes $2K$, $4iK'$ ; zéros $K'' + 2mK + 2m'iK'$ ; pôles
+$iK' + 2mK + 2m'iK'$.
+\end{itemize}
+Les trois fonctions sont d'ordre $2$ pour leurs propres périodes et d'ordre $4$
+pour les périodes communes $4K$, $4iK'$. Pour $0 < k < 1$ et $u$ réel,
+$\mathrm{sn}$ n'a pas de pôle et s'annule en $2mK$, de période réelle $4K$ ;
+$\mathrm{cn}$ n'a pas de pôle, s'annule en $K + 2mK$, de période $4K$ ;
+$\mathrm{dn}$ n'a ni pôle ni zéro, de période $2K$.\footnote{Dans le tableau de
+la page, les zéros de $\mathrm{cn}$ et de $\mathrm{dn}$ se terminent par
+« $2m'iK$ » : c'est $2m'iK'$ ; le mot « pôles » manque devant la dernière ligne
+de $\mathrm{dn}$. La note marginale dit de $\mathrm{sn}$ qu'elle « n'a pas de
+zéros ni de pôles pour $u$ réel » ; elle a les zéros réels $2mK$.} Les
+translations par les demi-périodes\footnote{Toutes vérifiées numériquement. La page donne $\mathrm{dn}(u+K'') =
+ik'\,\mathrm{sn}\,u/\mathrm{cn}\,u$ ; le signe est $-$. Son numérateur est
+d'ailleurs surchargé.} :
+\[
+\begin{array}{lll}
+\mathrm{sn}(u+2K) = -\mathrm{sn}\,u & \mathrm{cn}(u+2K) = -\mathrm{cn}\,u &
+\mathrm{dn}(u+2K) = \mathrm{dn}\,u \\
+\mathrm{sn}(u+2iK') = \mathrm{sn}\,u & \mathrm{cn}(u+2iK') = -\mathrm{cn}\,u &
+\mathrm{dn}(u+2iK') = -\mathrm{dn}\,u \\
+\mathrm{sn}(u+2K'') = -\mathrm{sn}\,u & \mathrm{cn}(u+2K'') = \mathrm{cn}\,u &
+\mathrm{dn}(u+2K'') = -\mathrm{dn}\,u \\[1ex]
+\mathrm{sn}(u+K) = \dfrac{\mathrm{cn}\,u}{\mathrm{dn}\,u} & \mathrm{cn}(u+K) =
+-k'\dfrac{\mathrm{sn}\,u}{\mathrm{dn}\,u} & \mathrm{dn}(u+K) =
+\dfrac{k'}{\mathrm{dn}\,u} \\[2ex]
+\mathrm{sn}(u+iK') = \dfrac{1}{k\,\mathrm{sn}\,u} & \mathrm{cn}(u+iK') =
+-\dfrac ik\dfrac{\mathrm{dn}\,u}{\mathrm{sn}\,u} & \mathrm{dn}(u+iK') =
+-i\dfrac{\mathrm{cn}\,u}{\mathrm{sn}\,u} \\[2ex]
+\mathrm{sn}(u+K'') = -\dfrac1k\dfrac{\mathrm{dn}\,u}{\mathrm{cn}\,u} &
+\mathrm{cn}(u+K'') = -\dfrac{ik'}{k\,\mathrm{cn}\,u} & \mathrm{dn}(u+K'') =
+-ik'\dfrac{\mathrm{sn}\,u}{\mathrm{cn}\,u}
+\end{array}
+\]
+La transformation imaginaire de Jacobi :
+\[
+\mathrm{sn}(iu \mid k) = i\,\frac{\mathrm{sn}(u \mid k')}{\mathrm{cn}(u \mid
+k')}, \qquad \mathrm{cn}(iu \mid k) = \frac{1}{\mathrm{cn}(u \mid k')}, \qquad
+\mathrm{dn}(iu \mid k) = \frac{\mathrm{dn}(u \mid k')}{\mathrm{cn}(u \mid k')} ;
+\]
+et la table des valeurs :\footnote{Table vérifiée, case par case, telle qu'elle est sur la page.}
+\[
+\begin{array}{c|cccccccccc}
+ & 0 & K & 2K & 3K & iK' & 2iK' & 3iK' & K'' & 2K'' & 3K''\\
+\hline
+\mathrm{sn} & 0 & 1 & 0 & -1 & \infty & 0 & \infty & -\frac1k & 0 & \frac1k\\
+\mathrm{cn} & 1 & 0 & -1 & 0 & \infty & -1 & \infty & -i\frac{k'}{k} & 1 & -i\frac{k'}{k}\\
+\mathrm{dn} & 1 & k' & 1 & k' & \infty & -1 & \infty & 0 & -1 & 0
+\end{array}
+\]
+
+
+\emph{Relations avec les fonctions de Weierstrass} (page 95). Supposons
+$\omega_1$ réel et $\omega_2$ purement imaginaire, $\Im\omega_2 > 0$ ; les $e_i$
+sont réels, et $e_2 < e_3 < e_1$. Posons $k = \sqrt{(e_3 - e_2)/(e_1 - e_2)}$ et
+$M = \sqrt{e_1 - e_2}$. Alors
+\[
+\mathrm{sn}(u \mid k) = M\,\frac{\sigma(u/M)}{\sigma_2(u/M)}, \qquad
+\mathrm{cn}(u \mid k) = \frac{\sigma_1(u/M)}{\sigma_2(u/M)}, \qquad
+\mathrm{dn}(u \mid k) = \frac{\sigma_3(u/M)}{\sigma_2(u/M)},
+\]
+\[
+\wp(u) = e_2 + \frac{M^2}{\mathrm{sn}^2(Mu \mid k)}, \qquad K = M\omega_1,\quad iK'
+= M\omega_2,\quad K'' = M\omega_3 .
+\]
+Inversement, partant de $\mathrm{sn}(u \mid k)$, on prend $M$ arbitraire, on
+définit les $\omega_i$ par ces relations, et
+\[
+3e_1 = (1 + k'^2)M^2, \qquad 3e_2 = (k'^2 - 2)M^2, \qquad 3e_3 = (1 -
+2k'^2)M^2 .
+\]
+On prend souvent $M = \frac12$, d'où $2\omega_1 = 4K$, $2\omega_2 = 4iK'$, pour
+lesquelles $\mathrm{sn}$, $\mathrm{cn}$, $\mathrm{dn}$ sont d'ordre
+$4$.\footnote{Vérifié numériquement. L'indice du dénominateur de $\mathrm{dn}$
+se lit mal sur la page ; c'est $2$. Le premier terme de $3e_2$ est surchargé (un
+$2$ sur un autre signe) : c'est $-2$, puisque $e_1 + e_2 + e_3 = 0$.}
+
+\emph{Fonctions de Legendre et fonctions $\Theta$} (page 96). Avec $v = u/2K$ et
+$\tau = iK'/K$\footnote{Les trois expressions par les thêta sont vérifiées numériquement.
+Ici la variable de $\Theta$ est $u/2K$, si bien que $u \mapsto u + K$ est $v
+\mapsto v + \frac12$.},
+\[
+\mathrm{sn}(u \mid k) = \frac{1}{\sqrt k}\,\frac{\Theta(v \mid
+\tau)}{\Theta_2(v \mid \tau)}, \qquad \mathrm{cn}(u \mid k) =
+\sqrt{\frac{k'}{k}}\,\frac{\Theta_1(v \mid \tau)}{\Theta_2(v \mid \tau)},
+\qquad \mathrm{dn}(u \mid k) = \sqrt{k'}\,\frac{\Theta_3(v \mid
+\tau)}{\Theta_2(v \mid \tau)} ;
+\]
+et les formules d'addition, sur lesquelles le dossier s'achève :
+\[
+\mathrm{sn}(u+v) = \frac{\mathrm{sn}\,u\,\mathrm{cn}\,v\,\mathrm{dn}\,v +
+\mathrm{sn}\,v\,\mathrm{cn}\,u\,\mathrm{dn}\,u}{1 -
+k^2\mathrm{sn}^2u\,\mathrm{sn}^2v}, \qquad
+\mathrm{cn}(u+v) = \frac{\mathrm{cn}\,u\,\mathrm{cn}\,v -
+\mathrm{sn}\,u\,\mathrm{sn}\,v\,\mathrm{dn}\,u\,\mathrm{dn}\,v}{1 -
+k^2\mathrm{sn}^2u\,\mathrm{sn}^2v},
+\]
+\[
+\mathrm{dn}(u+v) = \frac{\mathrm{dn}\,u\,\mathrm{dn}\,v -
+k^2\mathrm{sn}\,u\,\mathrm{sn}\,v\,\mathrm{cn}\,u\,\mathrm{cn}\,v}{1 -
+k^2\mathrm{sn}^2u\,\mathrm{sn}^2v} .
+\]
+
+
+\end{document}
