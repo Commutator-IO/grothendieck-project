@@ -1,0 +1,1036 @@
+% Folder 136, batch 16 (archivists' pages 301-320).
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-03 — first pass, unchecked against the pages by a human.
+%
+% Page 318 is a blue cover in his hand (« Gribouillis vrac », « Au Fil des Jours… »):
+% no \page, its words become the section heading before pages 319-320.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{136}
+\batch{16}
+\pages{301}{320}
+\foldertitle{Complexe de De Rham à puissance divisée [conférence de 1976 à l’IHÉS] : notes manuscrites (s.d.).}
+\dating{[à partir de 1975-1976]}
+\watermark{Édition de démonstration}
+
+\begin{document}
+
+\note{Les pages 301 à 317 forment une suite paginée par l'auteur de 1 à 17, qui commence avec ce lot ; elle ne semble pas reprendre un argument du lot précédent. La p. 317 s'achève sur la fin d'un paragraphe ; on ne sait pas si la suite continue au-delà}
+
+\page{301}
+\note{folio de l'auteur (1) ; numéro au crayon des archivistes : 303. Une nouvelle suite paginée par l'auteur commence ici}
+$\Delta$ = cat. des simplexes $\Delta^{n}$ ($n \geqslant 0$) \qquad
+$\Delta^{n} = [0, n] \subset \mathbb{N}$ avec rel. d'ordre totale
+
+$\widehat{\Delta} = \mathcal{S}s = \underline{\mathrm{Hom}}(\Delta^{\circ}, (\mathrm{Ens})) = \mathrm{Ens}_{*}$
+
+Plus généralement, si $\mathcal{A}$ est une catégorie, on pose
+\[
+  \mathcal{A}_{*} = \underline{\mathrm{Hom}}(\Delta^{\circ}, \mathrm{Ens}), \qquad
+  \mathcal{A}^{*} = \underline{\mathrm{Hom}}(\Delta, \mathrm{Ens})
+\]
+\note{« $\mathrm{Ens}$ » tel quel dans ces deux formules, là où l'on attend $\mathcal{A}$}
+donc
+\[
+  (\mathcal{A}^{\circ})^{*} = (\mathcal{A}_{*})^{\circ}, \qquad
+  \mathcal{A}^{*} \simeq ((\mathcal{A}^{\circ})_{*})^{\circ}
+\]
+où l'exposant $\circ$ désigne la \add{\ill{}} cat. opposée.
+
+\marginal{La notation $\widehat{\Delta}$ peut être utilisée de préf. quand on veut garder à l'esprit la nature \emph{algébrique} très particulière de ce topos, la notation $\mathcal{S}s$ quand \struck{on} veut l'oublier au profit de sa signification topologique.}
+
+Les objets de $\mathcal{A}_{*}$ (resp. $\mathcal{A}^{*}$) sont considérés comme des
+structures \emph{algébriques} de type simple (sur une infinité d'objets de base) dans
+$\mathcal{A}$, les « objets semi-simpliciaux » resp. « semi-cosimpliciaux ». On écrit
+$\mathrm{Ens}_{*}$ quand on a en vue cet aspect, et $\widehat{\Delta}$ \add{ou
+$\mathcal{S}s$} (quand on a plutôt le p\supplied{oin}t de vue « objet d'un topos »
+ou « faisceau sur un topos »). Tous les développements qui suivent ont pour objet
+d'étudier ces objets, (l'équivalent combinatoire des espaces topologiques) et leurs
+« types d'homotopie », via des invariants qui leur sont associés, qui en dépendent
+de façon covariante ou contravariante. Nous avons ici en vue une étude
+systématique, dans l'esprit de l'algèbre universelle, de ces invariants, (qui sont
+donc des foncteurs sur $\widehat{\Delta} = \mathrm{Ens}_{*}$) \add{de leurs
+structures et des} \struck{et des} opérations qui peuvent être définies sur elles,
+permettant d'en déduire certaines \uncertain{complexes} à partir d'autres plus
+simples
+\note{« semi-simpliciaux », « semi-cosimpliciaux » : il écrit ½simpliciaux, ½cosimpliciaux, au sens ancien de « simpliciaux »}
+
+\page{302}
+\note{folio de l'auteur (2) ; numéro au crayon : 304}
+Un objet de $\mathcal{A}_{*}$ sera généralement noté par un symbole de la forme
+$K_{*}$, où $K_{*}$ désigne la famille des
+\[
+  K_{*}(\Delta^{n}) = K_{[n]} \qquad K_{*} = (K_{[n]})_{n \geqslant 0}
+\]
+\add{\uncertain{par abus de notation}} \add{ou mieux $\Delta^{n} \longmapsto K_{[n]}$}
+avec les opérations semi-simpliciales entre elles. On fera attention qu'on écrit
+$K_{[n]}$ et non $K_{n}$, pour des raisons qui vont apparaître \uncertain{limpidement}
+lorsque $\mathcal{A}$ est additive …).
+De même un objet de $\mathcal{A}^{*}$ sera noté
+\[
+  K^{*} = (n \longmapsto K^{[n]}) \overset{\text{abus.}}{=} (K^{[n]})_{n}
+\]
+
+Nous aurons à travailler avec la situation, où on a deux catégories $\mathcal{A}$ et
+$\mathcal{B}$, et une équivalence (notée \struck{\ill{}} $M \mapsto \check{M}$)
+\[
+  v : \mathcal{A}^{\circ} \xrightarrow{\ \approx\ } \mathcal{B} \quad \text{d'où} \quad
+  \mathcal{B}^{\circ} \xrightarrow{\ \approx\ } \mathcal{A}
+\]
+[le plus souvent $\mathcal{A} = \mathcal{B}$ et $(\check{M}^{\vee})^{\vee} \simeq M$
+\add{isom. fonct.}, avec compatibilités habituelles d'une autodualité…] on notera
+alors \add{souvent} par la même lettre un objet de $\mathcal{A}_{*}$ (ou
+$\mathcal{A}^{*}$) et l'objet de $\mathcal{A}^{*}$ (resp. $\mathcal{A}_{*}$) qui lui
+correspond par application de $v$, mais en indiquant la variance par la position
+du signe $*$
+\[
+  K^{*} = (K_{*})^{\vee} \qquad K^{[n]} = K_{[n]}{}^{\vee}
+\]
+\[
+  K_{*} = (K^{*})^{\vee} \qquad K_{[n]} = K^{[n]\vee}
+\]
+On s'intéressera surtout au cas où ($k$ étant un anneau fixé) \struck{$\mathcal{A}$ \ill{}}
+\[
+  \text{\struck{cat. $\mathcal{A}$}} \quad
+  \begin{aligned}
+    \mathcal{A} &= k\text{-modules à g. proj. de t.f.} \\
+    \mathcal{B} &= k\text{-modules à droite proj. de t.f.}
+  \end{aligned}
+\]
+\note{après « $\mathcal{A} =$ », un mot biffé et illisible}
+(si $k$ est commutatif, on a $\mathcal{A} = \mathcal{B}$ et on a une autodualité
+sur $\mathcal{A}$).
+
+On a le foncteur canonique pl. fid.
+\[
+  (*) \qquad \Delta \hookrightarrow \widehat{\Delta} = \mathcal{S}s
+\]
+l'image par ce foncteur de $\Delta^{n}$ se note \add{ou mieux $\Delta^{[n]}{}_{*}$
+(puisqu'il est covariant en $n$)} $\Delta^{n}{}_{*}$. On a donc
+\[
+  \Delta^{n}{}_{*} \;(\text{ou } \Delta^{[n]}{}_{*}) = (m \longmapsto \Delta^{n}{}_{[m]}
+  = \mathrm{Hom}_{\mathrm{Ens}}(\Delta^{m}, \Delta^{n}))
+\]
+et pour $X_{*} \in \mathrm{Ob}\,\widehat{\Delta}$,
+\[
+  \mathrm{Hom}(\Delta^{n}{}_{*}, X_{*}) \simeq X_{*}(\Delta^{n}) \simeq X_{[n]}
+\]
+en particulier
+\[
+  \mathrm{Hom}(\Delta^{n}{}_{*}, \Delta^{m}{}_{*}) \simeq \Delta^{m}{}_{*}(\Delta^{n}{}_{*})
+  \simeq \mathrm{Hom}_{\Delta}(\Delta^{n}, \Delta^{m})
+  \quad (= \mathrm{Hom}_{\mathrm{ord}}(\Delta^{n}, \Delta^{m}))
+\]
+\note{l'indice de $\mathrm{Hom}_{\mathrm{Ens}}$ et celui de $\mathrm{Hom}_{\Delta}$ sont lus avec doute ; $\mathrm{Hom}_{\mathrm{ord}}$ est écrit sous la ligne}
+Pour $n$ variable, $\Delta^{n}{}_{*} \in \widehat{\Delta}$ dépend de façon
+\emph{covariante} de $n$, \struck{i.e.} donc le foncteur $n \mapsto \Delta^{n}{}_{*}$
+(qui n'est autre que $(*)$) est un objet canonique de $\widehat{\Delta}^{*}$, qu'on
+appelle \emph{objet cosimplicial universel} et note $\Delta^{*}$ (ou mieux
+$\Delta^{*}{}_{*}$)
+\[
+  \Delta^{*}{}_{*} \in \widehat{\Delta}^{*} = (\mathrm{Ens}_{*})^{*} \quad \text{donc } \forall n \geqslant 0
+\]
+\[
+  \Delta^{[n]}{}_{*} \in \widehat{\Delta} \qquad
+  \Delta^{[n]}{}_{*} = \Delta^{n}{}_{*} = m \longmapsto \Delta^{n}{}_{[m]}
+  = \mathrm{Hom}_{\Delta}(\Delta^{m}, \Delta^{n})
+\]
+\struck{\ill{}}
+[Une parenthèse de notations : considérons \uncertain{des} catégories de la forme
+$(\mathcal{A}_{*})^{*}$, un objet de ladite est donc noté
+$K^{*} = (K^{[n]})_{n}$, où les $K^{[n]}$ sont des $\in \mathcal{A}_{*}$, donc
+s'écrivent $K^{[n]}{}_{*}$,
+\[
+  K^{[n]}{}_{*} = (K^{[n]}{}_{[m]})_{m \geqslant 0}
+\]
+Ainsi, on est amené à noter $K^{*}{}_{*}$ les objets de
+$(\mathcal{A}_{*})^{*} \simeq \underline{\mathrm{Hom}}(\Delta \times \Delta^{\circ}, \mathcal{A})$
+\uncertain{on}
+
+\page{303}
+\note{folio de l'auteur (3) ; numéro au crayon : 305}
+\[
+  K^{[m]}{}_{[n]} = K(\Delta^{m}, \Delta^{n}) \in \mathcal{A}
+\]
+De même, on note
+\[
+  \begin{aligned}
+    &K_{*}{}^{*} \ \text{les objets de } (\mathcal{A}^{*})_{*} \simeq \underline{\mathrm{Hom}}(\Delta^{\circ} \times \Delta, \mathcal{A}) \\
+    &K^{**} \ \text{les objets de } (\mathcal{A}^{*})^{*} \simeq \underline{\mathrm{Hom}}(\Delta^{\circ} \times \Delta, \mathcal{A}) \\
+    &K_{**} \ \text{les objets de } \mathcal{A}_{**} \simeq \underline{\mathrm{Hom}}(\Delta^{\circ} \times \Delta^{\circ}, \mathcal{A})
+  \end{aligned}
+\]
+\note{pour $(\mathcal{A}^{*})^{*}$ il écrit $\Delta^{\circ} \times \Delta$, là où l'on attend $\Delta \times \Delta$}
+
+On fera attention que si on compare \add{\uncertain{via}} les foncteurs de symétrie
+\struck{$(m, n) \mapsto (n, m)$} \add{$(\Delta^{m}, \Delta^{n}) \mapsto (\Delta^{n}, \Delta^{m})$}
+dans $\Delta \times \Delta$ ou dans $\Delta^{\circ} \times \Delta^{\circ}$, ou entre
+$\Delta \times \Delta^{\circ}$ et $\Delta^{\circ} \times \Delta$), on n'utilisera pas
+la même lettre pour désigner un \struck{complexe} \add{objet} (tel que $K^{*}{}_{*}$
+ou $K^{**}$ disons) et son transformé (qui devrait donc s'écrire $K_{*}{}^{*}$, ou
+encore une fois $K^{**}$), car cela compliquerait avec la convention plus haut de la
+« montée et descente des indices »
+$K_{*}{}^{*} \simeq K^{*}{}_{*}{}^{\vee}$ dans le premier cas, et serait
+\struck{\ill{}} ambigu : écrire
+\[
+  K^{[m][n]} = K^{[n][m]}
+\]
+dans le deuxième ! On utilisera au besoin un symbole « de symétrie » tel que
+$\sigma$, pour désigner le symétrique de $K$ ($= K^{*}{}_{*}$, $K^{**}$) par
+\[
+  {}^{\sigma}K \;(= ({}^{\sigma}K)_{*}{}^{*},\ ({}^{\sigma}K)^{**}) \quad \text{\struck{dans}} \;\ldots
+\]
+D'ailleurs, \struck{Ces conditions et notations} \add{$\in \mathrm{Ob}\,(\mathcal{A}^{*})^{*}{}_{*}$}
+si on a un objet $K^{*}{}_{*}$ disons, alors pour $n \geqslant 0$, on peut considérer
+\[
+  \text{\struck{\ill{}}} \quad K^{*}{}_{[n]} \overset{\text{df}}{=} (m \longmapsto K^{[m]}{}_{[n]})
+\]
+comme un objet de $\mathcal{A}^{*}$ ; le foncteur $[n] \longmapsto K^{*}{}_{[n]}$
+de $\mathcal{A}^{*}{}_{*}$ n'est autre que ${}^{\sigma}K$.
+\note{l'insertion « $\in \mathrm{Ob}\,(\mathcal{A}^{*})^{*}{}_{*}$ » est écrite au-dessus de la ligne biffée, son rattachement est incertain}
+
+On étend ces conventions et notations au cas de symboles $K$ à plus de deux indices,
+pour désigner des objets de catégories de
+
+\page{304}
+\note{folio de l'auteur (4) ; numéro au crayon des archivistes : 306}
+la forme $\mathcal{A}^{*}{}_{*}{}^{**} = [((\mathcal{A}^{*})_{*})^{*}]^{*}$ \struck{\ill{}} p.ex.
+--- dans lesquels les objets sont notés \struck{par} des lettres étoilées
+$K^{**}{}_{**}{}^{*}$ --- ]
+\note{sous le crochet, d'une insertion difficile à placer : « $= \mathrm{Ob}\,\mathcal{S}s^{*}$ »}
+
+Le rôle de $\Delta^{*} \in \mathrm{Ob}\,\widehat{\Delta}^{*}$ comme « objet
+cosimplicial universel » est explicité par la
+
+\textbf{Proposition 1.} Soit $\mathcal{A}$ une catégorie où les $\varinjlim$
+existent (resp. $\mathcal{B}$ une catégorie où les $\varprojlim$ existent). Alors
+\begin{enumerate}
+  \item[a)] $\mathcal{A}^{*} \xleftarrow{\ \approx\ } \underline{\mathrm{Hom}}_{\text{comm. à } \varinjlim}(\mathcal{S}s, \mathcal{A})$
+  par $F \longmapsto F(\Delta^{*})$
+  \item[b)] $\mathcal{B}_{*} \xleftarrow{\ \approx\ } \underline{\mathrm{Hom}}_{\text{comm. à } \varprojlim}(\mathcal{S}s^{\circ}, \mathcal{B})$
+  par $F \longmapsto F((\Delta^{*})^{\circ})$
+\end{enumerate}
+(où $(\Delta^{*})^{\circ}$ désigne l'objet simplicial de $\widehat{\Delta}^{\circ}$
+défini par l'objet cosimplicial $\Delta^{*}$ de $\widehat{\Delta}$).
+
+Bien sûr, b) n'est autre que a) appliqué à $\mathcal{A} = \mathcal{B}^{\circ}$ ;
+et a) signifie que le foncteur « restriction à $\Delta$ »
+\[
+  \underline{\mathrm{Hom}}(\widehat{\Delta}, \mathcal{A}) \longrightarrow \underline{\mathrm{Hom}}(\Delta, \mathcal{A})
+\]
+induit une équivalence sur la s-cat. \struck{$\underline{\mathrm{Hom}}$}
+$\underline{\mathrm{Hom}}_{\text{comm. à } \varinjlim}$ du premier membre. (C'est
+vrai pour \struck{les} \add{\uncertain{toute}} (petite) catégorie $C$ --- pas
+seulement pour $\Delta$, et bien connu.) Le foncteur en sens inverse associe, à
+$K_{*} = \varphi : \Delta \to \mathcal{A}$, le foncteur
+\[
+  X_{*} \longmapsto \varinjlim_{\Delta^{n} \in \Delta/X_{*}} \varphi(\Delta^{n})
+  = \varinjlim_{\Delta^{n} \in \Delta/X_{*}} K_{[n]} .
+\]
+\note{il écrit ici $K_{*}$ et $K_{[n]}$ pour l'objet cosimplicial $\varphi : \Delta \to \mathcal{A}$, là où la notation des pages suivantes demanderait $K^{*}$, $K^{[n]}$ ; l'indice de $\Delta^{n}$ sous les $\varinjlim$ porte une marque illisible}
+
+Dans le cas b), i.e. dans
+\[
+  \underline{\mathrm{Hom}}(\widehat{\Delta}^{\circ}, \mathcal{B}) \longrightarrow \underline{\mathrm{Hom}}(\Delta^{\circ}, \mathcal{B})
+\]
+le foncteur en sens inverse associe à
+\[
+  K^{*} = \psi : \Delta^{\circ} \to \mathcal{B}
+\]
+le foncteur contravariant
+\[
+  X^{*} \longmapsto \varprojlim_{\Delta^{n} \in (\Delta/X_{*})^{\circ}} \varphi(\Delta^{n})
+  = \varprojlim_{\Delta^{n} \in (\Delta/X_{*})^{\circ}} K^{[n]} .
+\]
+\note{$\varphi$ et non $\psi$ sous la limite, et $X^{*}$ à gauche pour $X_{*}$, tels quels sur la page}
+
+\textit{Yoga} : nous nous intéressons surtout \struck{aux} (en première étape) aux
+invariants covariants attachés à $X_{*}$, à valeurs dans une cat. $\mathcal{A}$,
+qui \struck{commutent aux $X_{*}$} \add{commutent aux} $\varinjlim$ par rapport à
+$X_{*}$, --- ils sont donc exprimés (si $\mathcal{A}$ est « grande » pour contenir
+les $\varinjlim$ voulues) par des éléments de $\mathcal{A}^{*}$, i.e. des objets
+\emph{cosimpliciaux} de $\mathcal{A}$. Pour les invariants contravariants en
+$X_{*}$, à val. dans une $\mathcal{B}$, \struck{dans} nous abordons en premier lieu
+ceux qui \struck{\ill{}} transforment les $\varinjlim$ en $X_{*}$ en $\varprojlim$
+dans $\mathcal{B}$ stable par $\varprojlim$ ; ils correspondent \struck{donc} aux
+objets de $\mathcal{B}_{*}$, i.e. les objets semi-simpliciaux de $\mathcal{B}$. Si
+$\mathcal{B} = (\mathrm{Ens})$, ils correspondent donc à des ens. semi-simpliciaux,
+i.e. à des objets $K_{*}$ de $\mathcal{S}s$ \uncertain{lui-même}.
+\note{« semi-simpliciaux » : il écrit ½ simpliciaux ; au sens ancien, c'est-à-dire simpliciaux}
+
+\page{305}
+\note{numéro au crayon : 307 ; en tête de la colonne droite, « 5 »}
+Ce n'est autre que le foncteur représenté par $K_{*}$, et on \add{l'}écrira aussi
+\[
+  \text{\struck{$K_{*}(X_{*}) = $}} \quad X_{*} \longmapsto K_{*}(X_{*}) = \mathrm{Hom}(X_{*}, K_{*}) .
+\]
+Si $\mathcal{B} = (\mathcal{A}b)$, $K_{*}$ sera donc un objet de $\mathcal{S}s_{ab}$
+\struck{\ill{}}, et les \struck{\ill{}} foncteurs qu'il représente ont
+automatiquement \struck{\ill{}} \add{\uncertain{une structure}} \ill{}.
+\uncertain{Remarquons} \ill{} les structures algébriques (avec une ou plusieurs
+objets de base) qui « peuvent s'exprimer en termes de $\varprojlim$
+exclusivement » (groupes, \struck{modules}, anneaux, modules sur
+\struck{\ill{}} \add{\uncertain{tels}}, \struck{etc} etc).
+
+\struck{Pour les} \uncertain{Tous} les \struck{foncteurs} invariants ainsi obtenus
+à coups de foncteurs représentables --- plus généralement, d'objets simpliciaux ou
+cosimpliciaux de catégories $\mathcal{B}$ ou $\mathcal{A}$ --- sont de nature trop
+« grosse » et « fruste » pour être intéressants directement --- en particulier, ce
+ne sont pas des invariants du type d'homotopie de $X_{*}$. On devra en extraire des
+invariants plus subtils qui seront des invariants du type d'homotopie de $X_{*}$,
+--- ceux-ci ne seront pas de nature si simple --- i.e. « représentés » par un
+objet simplicial ou cosimplicial. Notre propos sera de mettre sur les invariants
+« gros » \uncertain{obtenus} \ill{} le \uncertain{dictionnaire}, une machinerie de
+structures supplémentaires raisonnables, et dans les catégories de structures de ce
+type (complexes de chaînes ou de cochaînes, algèbres cosimpliciales etc)
+d'inverser les flèches qui \uncertain{sont} obtenues à partir d'équiv.
+d'homotopie dans $\mathcal{S}s$, et de passer à des « catégories de fractions » en
+inversant ces flèches. L'invariant ainsi obtenu \struck{\ill{}} \add{plus
+« grossier »} bien sûr, mais plus subtil dans sa définition, et moins
+« redondant ») exprime donc de façon plus ou moins complète le type d'homotopie,
+ou en saisit de façon adéquate tel ou tel aspect.
+
+Dans le cas où $\mathcal{A}$ est une catégorie additive karoubienne (tout
+projecteur admet un objet image ou un noyau, ou ce qui revient au même, tt proj. a
+un conoyau) la théorie de Dold--Puppe donne des équivalences canoniques
+\[
+  \mathcal{A}_{*} \;\underset{DP_{*}}{\overset{ND.}{\rightleftarrows}}\; \mathcal{A}. ,
+\]
+\marginal{$ND$ = « non dégénéré » \quad $DP$ = « Dold--Puppe »}
+\note{les deux flèches portent chacune le signe $\approx$}
+où $\mathcal{A}.$ désigne la catégorie des \emph{complexes de chaînes} dans
+$\mathcal{A}$. On désigne par une \add{telle} \struck{=} lettre \add{$K$} deux
+objets qui se correspondent, mais en mettant un indice bas $*$ ou bas $\cdot$,
+suivant qu'il
+
+\page{306}
+s'agit de désigner l'avatar « objet simplicial » ou « complexe de chaînes » :
+\[
+  K. = ND.(K_{*}), \qquad K_{*} = DP_{*}(K.)
+\]
+\[
+  K_{*} = (n \mapsto K_{[n]}), \qquad K. = (K_{n}, d_{n})_{n \geqslant 0}
+\]
+On est ainsi amené à noter par une notation $K.$ tel complexe de chaînes, par $K_{n}$
+ses composantes (ce qui exclut l'utilisation de la notation $K_{n}$ pour la
+$n$-ième composante \add{de} $K_{*}$, et nous oblige à adopter une notation telle
+que $K_{[n]}$ !).
+
+De même, la théorie de DP \uncertain{appliquée} à $\mathcal{A}^{\circ}$ nous donne
+des équivalences
+\[
+  \mathcal{A}^{*} \;\underset{DP^{*}}{\overset{ND^{\cdot}}{\rightleftarrows}}\; \mathcal{A}^{\cdot}
+\]
+et des notations
+\[
+  K^{\cdot} = ND^{\cdot}(K^{*}), \qquad K^{*} = DP^{*}(K^{\cdot})
+\]
+\[
+  K^{*} = (n \mapsto K^{[n]}), \qquad K^{\cdot} = (K^{n}, d^{n})_{n \geqslant 0} .
+\]
+Les foncteurs $ND^{\cdot}$ et $DP^{*}$ commutent aux foncteurs additifs. En
+particulier, dans le cas d'une équivalence
+\[
+  \mathcal{A} \xleftrightarrow[\ v\ ]{\ \approx\ } \mathcal{B}^{\circ}
+\]
+dite \uncertain{dualité}, étendant aux complexes de chaînes ou de cochaînes la
+convention de la montée ou de la descente des indices, on trouve que les foncteurs
+$ND$ et $DP$ y commutent. Donc dans ce cas, la même lettre $K$ désignera
+
+\page{307}
+quatre avatars possibles
+\[
+  K^{*} \quad K_{*} \quad K^{\cdot} \quad K.
+\]
+liés par les relations ci-dessus
+\[
+  \begin{cases}
+    K^{*} = DP^{*}(K^{\cdot}) & K^{\cdot} = ND^{\cdot}(K^{*}) \\
+    K_{*} = DP_{*}(K.) & K. = ND.(K_{*})
+  \end{cases}
+\]
+plus les relations
+\[
+  \begin{cases}
+    K^{*} = (K_{*})^{\vee}, & K_{*} = (K^{*})^{\vee} \\
+    K^{\cdot} = (K.)^{\vee}, & K. = (K^{\cdot})^{\vee} .
+  \end{cases}
+\]
+\struck{(\ill{})} Ces \struck{$K$} notations \uncertain{est} vaguement (i.e. à
+équivalence de catégories) s'étendent aux objets \struck{\ill{}} \add{dépendant de}
+plusieurs indices, p.ex. \struck{$K^{*}$} une même lettre $K$ (désignant
+\add{\uncertain{p.ex. initialement}} un objet $K^{*}{}_{*}$ de
+$(\mathcal{A}_{*})^{*}$, \add{disons}) désigne également \struck{\ill{}} quatre
+avatars distincts
+\[
+  \begin{cases}
+    K^{*}{}_{*} \in (\mathcal{A}_{*})^{*}, & (K^{\cdot}{}_{*}) \in (\mathcal{A}_{*})^{\cdot} \\
+    K^{\cdot}{}_{\cdot} \in (\mathcal{A}.)^{\cdot}, & (K^{*}{}_{\cdot}) \in (\mathcal{A}.)^{*}
+  \end{cases}
+\]
+\note{dans $(\mathcal{A}_{*})^{\cdot}$ l'exposant est surchargé (point sur une étoile)}
+avec des notations
+\[
+  K^{[n]}{}_{[m]}, \quad K^{n}{}_{[m]}, \qquad K^{n}{}_{m}, \quad K^{[n]}{}_{m}
+\]
+pour les composantes. De même, on aura, si on part p.ex. de
+$K^{**} \in (\mathcal{A}^{*})^{*}$,
+\[
+  \begin{cases}
+    K^{**} \in (\mathcal{A}^{*})^{*}, & K^{\cdot *} \in (\mathcal{A}^{\cdot})^{*} \\
+    K^{\cdot\cdot} \in (\mathcal{A}^{\cdot})^{\cdot}, & K^{*\cdot} \in (\mathcal{A}^{*})^{\cdot}
+  \end{cases}
+\]
+\[
+  \begin{cases}
+    K^{[n][m]}, & K^{n[m]} \\
+    K^{nm}, & K^{[n]m}
+  \end{cases}
+\]
+On notera quand objets de $(\mathcal{A}_{*})^{\cdot}$ ou un complexe de
+cochaînes \add{$n \mapsto (K_{*}{}^{n}, d^{n})$} dans la catégorie $\mathcal{A}_{*}$
+des objets semi-simpliciaux de $\mathcal{A}$,
+\note{« quand » tel quel ; l'insertion $n \mapsto (K_{*}{}^{n}, d^{n})$ est en interligne, sa fin lue avec doute}
+
+\page{308}
+\ill{} au dessus (moyennant \uncertain{l'}équivalence de catégories canonique
+\[
+  \sigma : (\mathcal{A}_{*})^{\cdot} \cong (\mathcal{A}^{\cdot})_{*} \;)
+\]
+un objet semi-simplicial dans la catégorie $\mathcal{A}^{\cdot}$ des complexes de
+cochaînes, noté
+\[
+  n \longmapsto K_{[n]}{}^{\cdot} .
+\]
+On interprète de même les objets des autres catégories mixtes
+\struck{\ill{}} :
+\[
+  (*) \quad
+  \begin{cases}
+    \mathcal{A}_{*\cdot}, \ \mathcal{A}_{\cdot *}, \ \mathcal{A}^{**}{}_{\cdot}, \ \text{\struck{\ill{}}} \\
+    \mathcal{A}^{*}{}_{*}, \ \mathcal{A}^{\cdot}{}_{*}, \ \mathcal{A}^{\cdot}{}_{*}, \ \text{\struck{\ill{}}}
+  \end{cases}
+\]
+\note{les indices des catégories mixtes de la liste $(*)$ sont surchargés et lus avec doute ; la fin de chaque ligne est biffée en hachures}
+De façon analogue, les objets $K^{\cdot\cdot}$ de $(\mathcal{A}^{\cdot})^{\cdot}$
+sont les bicomplexes de cochaînes, les objets $K..$ de
+$(\mathcal{A}.). = \mathcal{A}..$ sont les bicomplexes de chaînes, enfin les objets
+$K^{\cdot}.$ de $(\mathcal{A}.)^{\cdot}$ ou $K.^{\cdot}$ de $(\mathcal{A}^{\cdot}).$
+sont les bicomplexes mixtes \add{chaînes--cochaînes} (de chaînes par un indice, de
+cochaînes par un autre). Dans le cas de $K^{\cdot\cdot}$ ou $K..$ le complexe simple
+associé est un complexe de cochaînes resp. de chaînes, tandis que dans le cas mixte
+$K^{\cdot}.$ ou $K.^{\cdot}$, on trouve des complexes simples avec des objets en
+degrés positifs et négatifs à priori (il y aurait lieu de fixer une convention de
+degré, si pour le degré total l'\uncertain{opérateur} différentiel est de degré
+$+1$ ou $-1$, suivant
+
+\page{309}
+qu'on donne la préférence \struck{\ill{}} cochaînes ou aux chaînes. (Je n'ai pas eu
+encore besoin \emph{vraiment} d'une telle convention de notations…)
+
+Dans le cas d'une dualité
+\[
+  v : \mathcal{A} \xrightarrow{\ \approx\ } \mathcal{B}^{\circ}
+\]
+on étend les conventions de montée et descente des indices aux objets à plusieurs
+indices, ainsi
+\[
+  (K_{*}{}^{\cdot})^{\vee} = K^{*}{}_{\cdot} .
+\]
+\note{la flèche de $v$ est doublée d'un trait vers la gauche ; à droite de la formule, une marque biffée}
+Dans la suite d'objets mixtes $(*)$ de la page précédente, on a écrit l'un au-dessous
+de l'autre des objets qui se correspondent par dualité.
+
+\textit{Remarque.} Il est essentiel pour notre système de conventions de définir
+(disons) des bicomplexes de cochaînes (objets de $\mathcal{A}^{\cdot\cdot}$) avec
+deux \uncertain{op. de diff.} \ill{}, qui \emph{commutent} --- on n'utilisera donc
+pas les conventions de Cartan--Eilenberg. Il faudra donc un signe dans la diff.
+totale.
+
+Du point de vue de la page 1 et du yoga \struck{\ill{}} \ill{} « construction
+d'invariants associés à des $X_{*} \in \mathrm{Ob}\,\mathcal{S}s$ », on peut dire que
+la théorie de Dold--Puppe
+
+\page{310}
+\note{folio de l'auteur 10 ; numéro au crayon : 312}
+fournit
+\struck{\ill{}}
+
+\textbf{Prop. 2.} Avec les notations \add{et hyp.} de prop. 1, avec $\mathcal{A}$
+et $\mathcal{B}$ additives \struck{\ill{}}
+\begin{enumerate}
+  \item[a)] $\underline{\mathrm{Hom}}_{\text{comm. aux } \varinjlim}(\mathcal{S}s, \mathcal{A}) \xrightarrow{\ \approx\ } \mathcal{A}^{\cdot}$
+  \item[b)] $\underline{\mathrm{Hom}}_{\text{comm. aux } \varinjlim}((\mathcal{S}s)^{\circ}, \mathcal{B}) \xrightarrow{\ \approx\ } \mathcal{B}.$
+\end{enumerate}
+\note{sous les deux $\underline{\mathrm{Hom}}$, l'indice abrégé lu comme « comm. aux $\varinjlim$ », avec doute ; en b) on attendrait $\varprojlim$, la flèche est ambiguë}
+
+Nous allons \struck{préciser} \add{expliciter} cette correspondance du point de vue
+de l'algèbre universelle. Prenons d'abord le cas de b), avec $\mathcal{B} = (\mathcal{A}b)$
+pour simplifier. \struck{\ill{}} \add{Dans \uncertain{cette} \uncertain{optique}}
+précisons la relation entre
+\[
+  F : (\mathcal{S}s)^{\circ} \xrightarrow[\text{aux } \varinjlim]{\text{commutant}} \mathcal{A}b
+  \quad \text{et} \quad K. = (K_{n}, d_{n}) \in \mathcal{A}b.
+\]
+qui se déterminent mutuellement. On désigne comme de juste par $K_{*}$ l'objet de
+$\mathcal{A}b_{*}$ défini par $K.$ On a donc
+\[
+  F(X_{*}) \simeq \mathrm{Hom}_{\widehat{\Delta}}(X_{*}, K_{*})
+  \simeq \mathrm{Hom}_{\widehat{\Delta}_{ab}}(\mathbb{Z}(X_{*}), K_{*})
+\]
+où $\mathbb{Z}(X_{*})$ désigne le « faisceau abélien libre engendré par $X_{*}$ »,
+ou si on veut
+\[
+  \mathbb{Z}(X_{*}) = (n \longmapsto \mathbb{Z}(X_{n}) = \mathbb{Z}^{(X_{n})})
+\]
+Ce groupe \add{ab.} semi-simplicial sera aussi noté $\mathbb{C}_{*}(X_{*})$, et
+$\mathbb{C}.(X_{*})$ le complexe de chaînes associé \add{par DP} :
+\struck{on aura donc}
+\[
+  \begin{cases}
+    \mathbb{C}_{*}(X_{*}) = \mathbb{Z}(X_{*}) = (n \longmapsto \mathbb{Z}(X_{n}) = \mathbb{Z}^{(X_{n})}) \\
+    \mathbb{C}.(X_{*}) = ND.(\mathbb{C}_{*}(X_{*}))
+  \end{cases}
+\]
+\note{« par DP » est en interligne, alors que la formule écrit $ND.$}
+Donc par Dold--Puppe on aura
+\[
+  F(X_{*}) \simeq \mathrm{Hom}_{\widehat{\Delta}_{ab} = \mathcal{A}b_{*}}(\mathbb{C}_{*}(X_{*}), K_{*})
+  \underset{\text{D.P.}}{\simeq} \mathrm{Hom}_{\mathcal{A}b.}(\mathbb{C}.(X_{*}), K.)
+\]
+Donc le foncteur $F_{K.} = F : \mathcal{S}s^{\circ} \longrightarrow \mathcal{A}b$
+\[
+  X_{*} \longmapsto F_{K.}(X_{*}) = F(X_{*})
+\]
+associé à $K. \in \mathcal{A}b.$ est donné par
+\[
+  \boxed{F_{K.}(X_{*}) = \mathrm{Hom}.(\mathbb{C}.(X_{*}), K.)}
+\]
+On en tire deux conclusions :
+
+1°) Les valeurs sur $X_{*}$ des foncteurs envisagés $F$ ($\mathcal{S}s^{\circ} \to \mathcal{A}b$,
+commutant aux $\varinjlim$) ne dépendent que de \add{(« abélianisé de $X_{*}$ »),}
+$\mathbb{C}_{*}(X_{*}) \in \mathcal{A}b_{*}$, ou ce qui revient au même, de
+$\mathbb{C}.(X_{*}) \in \mathcal{A}b.$ ; \struck{\ill{}} ce complexe de chaînes
+$\mathbb{C}.(X_{*})$, peut être considéré comme « l'invariant additif universel » de
+$X_{*}$. Quand on « oublie $X_{*}$ au profit de $\mathbb{C}.(X_{*}) = C. \in \mathcal{A}b.$ »
+les foncteurs envisagés (en tant que foncteurs en $C.$) sont exactement les
+foncteurs représentables sur $\mathcal{A}b.$.
+
+[\emph{NB}. Quand le foncteur $F$ a une structure plus riche, p.ex. une
+multiplication $F \otimes F \to F$ i.e. est à valeurs dans les $\mathbb{Z}$-algèbres,
+\struck{et \ill{}} cette structure sur $F(X_{*})$ n'est pas reconstruite par
+
+\page{311}
+\note{folio de l'auteur 11 ; numéro au crayon : 313}
+la seule connaissance de $C. \in \mathcal{A}b.$, au lieu de $X_{*}$ ; il faut, pour
+\struck{\ill{}} \add{\uncertain{les}} décrire en \emph{termes de} $C.$ \add{certaines
+des} structures \add{ainsi} qui peuvent \uncertain{exister} sur $F(X_{*})$, en termes
+de celle de $F$, de tenir compte de structures supplémentaires éventuelles de $C.$,
+qui peuvent s'expliciter en se rappelant que $C.$ provient d'un $X_{*}$.
+\struck{\ill{}} \add{\uncertain{Cela} \uncertain{peut} être considéré comme}
+\struck{\ill{}} d'étude systématique de ces structures \struck{\ill{}}
+\struck{\ill{}} (le contenu essentiel de nos réflexions).
+
+Mais bien sûr, \struck{si les structures \ill{}} \add{dans le} \uncertain{cas} où
+on a sur $F$ une structure de $k$-module, i.e. $F : \mathcal{S}s^{\circ} \to \mathcal{A}b_{k}$
+(où $\mathcal{A}b_{k}$ est la catégorie des $k$-modules), \struck{il suffit}
+\add{\uncertain{il est possible}} de se donner la structure \uncertain{simpl.} sur
+$C.$, ou \struck{\ill{}} qui en fait \struck{de complexe de \ill{} \ill{} \ill{}
+(i.e. se \ill{} $k \to \mathrm{End}_{\mathcal{A}b}(C.)$) \ill{} récupérer la
+structure complète de} par les $K.$ qui décrivent $F$ maintenant dans
+$\mathcal{A}b_{k}.$ i.e. par
+\[
+  k \longrightarrow \mathrm{End}_{\mathcal{A}b.}(K.)
+\]
+la \uncertain{qui} \uncertain{est} aussi sur $\mathrm{Hom}_{\mathcal{A}b.}(C., K.)$,
+dont on récupère ainsi la structure de $k$-module. En fait il suffit, au lieu de
+$C.$, de connaître \uncertain{seulement} $C_{k\cdot} = C. \otimes_{\mathbb{Z}} k$
+(noté $\mathbb{C}_{k*}(X_{*})$), car on aura
+\note{un passage encadré et barré de traits obliques, au milieu de la colonne gauche, est biffé ; on n'en donne que ce qui se lit}
+
+\[
+  \text{\struck{\ill{}}} \quad
+  \begin{cases}
+    F(X_{*}) \simeq \mathrm{Hom}_{(\mathcal{A}b_{k}).}(C_{k\cdot}, K.) \\
+    C_{k\cdot} = \mathbb{C}_{k*}(X_{*}) = \mathbb{C}.(X_{*}) \otimes_{\mathbb{Z}} k
+  \end{cases}
+\]
+Plus généralement, revenant au cas d'une $\mathcal{B}$ cat. additive générale
+stable par $\varinjlim$ et $F : (\mathcal{S}s)^{\circ} \to \mathcal{B}$ et
+$K. \in \mathcal{B}.$ se correspondant par la prop.~2, on peut encore écrire
+\[
+  F(X_{*}) \simeq \mathrm{Hom}^{\cdot}.(\mathbb{C}.(X_{*}), K.)
+\]
+en définissant la deuxième expression comme \emph{objet de $\mathcal{B}$}, en
+définissant d'abord le bicomplexe de $\mathcal{B}$
+\[
+  \mathcal{H}om^{\cdot}.(C., K.) = (\mathrm{Hom}_{\mathcal{B}}(C_{i}, K_{j}))_{i,j}
+\]
+(donc $\mathcal{H}om^{i}{}_{j}(C., K.) = \mathrm{Hom}_{\mathcal{B}}(C_{i}, K_{j})$)
+--- où l'objet $\mathrm{Hom}(A, M)$, pour $A \in \mathcal{A}b$ et $M \in \mathcal{B}$,
+se définissant par
+\[
+  \mathrm{Hom}_{\mathcal{B}}(N, \mathrm{Hom}(A, M)) \simeq \mathrm{Hom}_{\mathcal{A}b}(A, \mathrm{Hom}_{\mathcal{B}}(N, M))
+\]
+(le foncteur \struck{\ill{}} \add{du 2\supplied{e}} \struck{\ill{}} étant bien
+représentable en $N$, pour $A, M$ fixés, grâce à l'hyp. faite sur $\mathcal{B}$
+d'être stable par $\varprojlim$).
+On définit alors
+\[
+  \mathrm{Hom}.(\mathbb{C}.\text{\struck{\ill{}}}, K.) \overset{\text{df}}{=} Z^{0}(\mathcal{H}om^{\cdot}.(C., K.))
+\]
+\add{cycles de degré $0$ pour degré total (\uncertain{associé} au bicomplexe)}
+Si enfin $\mathcal{B}$ est une cat. $k$-linéaire ($k$ commutatif) i.e. munie d'un
+homom. d'anneaux $k \to \mathrm{End}(\mathrm{id}_{\mathcal{B}})$,
+\note{« stable par $\varinjlim$ » plus haut, « stable par $\varprojlim$ » ici, tels quels}
+
+\page{312}
+\note{folio de l'auteur 12 ; numéro au crayon : 314}
+alors la connaissance de $C_{k\cdot} = \mathbb{C}_{k\cdot}(X_{*}) = C. \otimes_{\mathbb{Z}} k$
+est encore suffisante pour la construction de $F(X_{*})$, car on aura maintenant
+\[
+  F(X_{*}) \simeq \mathrm{Hom}_{k.}(C._{k}, K.)
+  \simeq Z^{0}(\underbrace{\mathcal{H}om_{k}{}^{\cdot}.(C._{k}, K.)}_{\mathcal{H}om_{k}{}^{i}{}_{j}(C._{k}, K.) = \mathcal{H}om_{k}(C_{i,k}, K_{j})})
+\]
+($\mathcal{H}om_{k}(A, M)$, pour $A \in \mathcal{A}b_{k}$ et $M \in \mathcal{B}$, étant défini par
+\[
+  \mathrm{Hom}_{\mathcal{B}}(N, \mathcal{H}om_{k}(A, M)) \simeq \mathrm{Hom}_{k}(A, \mathrm{Hom}_{\mathcal{B}}(N, M))).
+\]
+
+2°) Si on regarde toutes les façons possibles \struck{d'\ill{}} \add{d'envoyer}
+\[
+  (\mathcal{S}s)^{\circ} \xrightarrow{\ F\ } \mathcal{B}
+\]
+dans $\mathcal{B}$ stable par $\varprojlim$, avec $F$ y commutant, il y en a
+\struck{\ill{}} une « universelle », dont toutes les autres sont « spécialisation »,
+obtenue en prenant $\mathcal{B}_{0} = (\mathcal{A}b.)^{\circ}$, et
+$F_{0} : (\mathcal{S}s)^{\circ} \to \mathcal{B}_{0} = (\mathcal{A}b.)^{\circ}$ défini par
+\[
+  F_{0}(X_{*}) = \mathbb{C}.(X_{*})
+\]
+(qui dépend de $X_{*}$ de façon contravariante quand $\mathbb{C}.(X_{*})$ s'envisage
+comme objet de $(\mathcal{A}b.)^{\circ}$). De façon précise ;
+
+\marginal{\uncertain{Nouvelle} forme de l'énoncé du théorème de Dold--Puppe}
+
+\textbf{Prop. 3.} Considérons
+\[
+  \mathcal{S}s^{\circ} \xrightarrow{\ F_{0}\ } \mathcal{B}_{0} = (\mathcal{A}b.)^{\circ} \simeq (\mathcal{A}b^{\circ})^{\cdot}
+\]
+défini par $F_{0}(X_{*}) = \mathbb{C}.(X_{*})$. Alors $\mathcal{B}_{0}$ est une
+catégorie \add{add.} avec $\varprojlim$, et pour toute autre telle catégorie
+$\mathcal{B}$, le foncteur
+\[
+  \underline{\mathrm{Hom}}_{\text{comm. aux } \varprojlim}(\text{\struck{\ill{}}}\,\mathcal{B}_{0}, \mathcal{B})
+  \longrightarrow \underline{\mathrm{Hom}}_{\text{comm. } \varprojlim}(\mathcal{S}s^{\circ}, \mathcal{B})
+  \quad (\simeq \mathcal{B}. \text{ par prop. 2})
+\]
+donné par $\varphi \longmapsto \varphi \circ F_{0}$ est une équivalence de catégories
+\struck{\ill{} \ill{} prop. 2, cela signifie \ill{} \ill{} grâce au théorème de
+Dold--Puppe, \ill{} \ill{} par $F_{0}$ \ill{} \ill{} grâce \ill{} : l'équivalence
+\ill{} \ill{} \ill{} indique la condition \ill{} aux $\varprojlim$)}
+\note{un passage de six lignes environ, encadré et barré de hachures, est biffé ; on n'en donne que les mots lisibles}
+$\underline{\mathrm{Hom}}_{!}(\mathcal{B}_{0}, \mathcal{B})$ remplaçons dans la déf. de
+$F_{0}$, $\mathcal{B}_{0}$, $(\mathcal{A}b.)^{\circ}$ par
+$(\mathcal{A}b_{*})^{\circ} = \widehat{\Delta}_{ab}{}^{\circ}$, $\mathbb{C}.(X_{*})$ par
+$\mathbb{C}_{*}(X_{*})$ \add{$= \mathbb{Z}(X_{*})$} et l'équivalence s'écrit
+\[
+  \underline{\mathrm{Hom}}_{!}(\widehat{\Delta}_{ab}{}^{\circ}, \mathcal{B})
+  \xrightarrow{\ \approx\ } \underline{\mathrm{Hom}}_{!}(\widehat{\Delta}^{\circ}, \mathcal{B})
+\]
+où l'exposant $!$ signifie qu'on se borne aux foncteurs qui commutent aux $\varprojlim$.
+\note{sous les deux $\underline{\mathrm{Hom}}$ de la formule, un indice surchargé, illisible}
+Or sous cette forme, l'assertion est valable quelle que soit la cat. (non pointée)
+$\Delta$, [\add{on a un foncteur « abélianisation »} \struck{\ill{} \ill{} se faisant
+\ill{}}
+\[
+  X \longmapsto \mathbb{Z}(X.) \qquad \widehat{\Delta} \longrightarrow \widehat{\Delta}_{ab}
+\]
+\struck{commutant aux $\varinjlim$ \ill{}} \struck{$\widehat{\Delta}^{\circ} \to \mathcal{B} = (\widehat{\Delta}_{ab})^{\circ}$}
+
+\page{313}
+\note{folio de l'auteur 13 ; numéro au crayon : 315}
+donc
+\[
+  \widehat{\Delta}^{\circ} \xrightarrow{\ F_{0}\ } \mathcal{B}_{0} = (\widehat{\Delta}_{ab})^{\circ}
+  \cong \underline{\mathrm{Hom}}(\Delta^{\circ}, \mathcal{A}b)^{\circ}
+  \approx \underline{\mathrm{Hom}}(\Delta, \mathcal{A}b^{\circ})
+\]
+\[
+  [\approx (\mathcal{A}b^{\circ})^{*} \approx (\mathcal{A}b_{*})^{\circ} \text{ dans le cas qui nous intéresse}]
+\]
+commutant aux $\varinjlim$ d'où le foncteur
+\[
+  \underline{\mathrm{Hom}}_{!}(\text{\struck{\ill{}}}\,\mathcal{B}_{0}, \mathcal{B}) \longrightarrow \underline{\mathrm{Hom}}_{!}(\widehat{\Delta}^{\circ}, \mathcal{B})
+\]
+\struck{et on définit un foncteur} dont on veut montrer que c'est une équiv. Posant
+$\mathcal{B} = \mathcal{A}^{\circ}$, $\mathcal{B}_{0} = (\mathcal{A}_{0})^{\circ}$, et
+$F_{0} = (G_{0})^{\circ}$, donc
+\[
+  G_{0} : \widehat{\Delta} \to \widehat{\Delta}_{ab}, \qquad G_{0}(X) = \mathbb{Z}(X),
+\]
+on doit prouver que
+\[
+  \underline{\mathrm{Hom}}_{!}(\widehat{\Delta}_{ab}, \mathcal{A}) \longrightarrow \underline{\mathrm{Hom}}_{!}(\widehat{\Delta}, \mathcal{A}),
+  \qquad \varphi \longmapsto \varphi \circ G_{0}
+\]
+est une équivalence, où $!$ désigne les foncteurs qui commutent aux $\varinjlim$. Or le
+deuxième membre est $\approx \underline{\mathrm{Hom}}(\Delta, \mathcal{A})$ (par
+restriction à $\Delta \hookrightarrow \widehat{\Delta}$), \struck{donc} le premier
+s'écrit ? \struck{on} Prenons $\varphi \in \underline{\mathrm{Hom}}_{!}(\widehat{\Delta}_{ab}, \mathcal{A})$
+et notons que pour tout $M \in \mathcal{A}$, \struck{l'\ill{}} le foncteur
+$X \mapsto \mathrm{Hom}(\varphi X, M)$ transforme $\varinjlim$ en $\varprojlim$, donc
+est représentable
+\[
+  \mathrm{Hom}(\varphi X, M) \simeq \mathrm{Hom}(X, \psi M)
+\]
+i.e. l'hyp. de commutation de $\varphi$ aux $\varinjlim$ s'exprime par le fait qu'il
+admet un adjoint $\psi$ --- la condition \uncertain{ici} \uncertain{mise} sur
+\struck{\ill{}} $\psi : \mathcal{A} \to \widehat{\Delta}_{ab}$ pour qu'il provienne
+d'un $\varphi$ étant que pour tout $X$ fixé dans $\widehat{\Delta}_{ab}$,
+$M \mapsto \mathrm{Hom}(X, \psi M)$ soit repr. Écrivant
+$\widehat{\Delta}_{ab} \simeq \underline{\mathrm{Hom}}(\Delta^{\circ}, (\mathcal{A}b))$
+en termes d'interprétation de $\psi$ \uncertain{comme} cat.
+$\underline{\mathrm{Hom}}_{!}(\widehat{\Delta}_{ab}, \mathcal{A})$ des $\varphi$ comme
+\uncertain{sous}-cat. pleine de $\underline{\mathrm{Hom}}(\mathcal{A} \times \Delta^{\circ}, \mathcal{A}b)$
+\add{$\simeq \underline{\mathrm{Hom}}(\Delta^{\circ}, \underline{\mathrm{Hom}}(\mathcal{A}, \mathcal{A}b))$
+\uncertain{sous-cat. des}} foncteurs $\lambda$ satisfaisant une condition de repr. \add{ci-dessus} en
+$\mathcal{A}$. Or si $x \in \Delta$, le foncteur \struck{\ill{}}
+\[
+  \lambda(x) : \mathcal{A} \to \mathcal{A}b \ (\in \mathcal{A}b \ldots)
+\]
+\note{après $\lambda$, deux arguments surchargés et biffés ; l'insertion « $\lambda(x) : \mathcal{A} \to$ » est lue avec doute}
+n'est autre que
+\[
+  M \longmapsto \mathrm{Hom}(\mathbb{Z}(x), \psi(M))
+\]
+(car
+\[
+  \lambda(x)(M) \overset{\text{df}}{=} \psi(M)(x) \simeq \mathrm{Hom}_{\widehat{\Delta}}(x, \psi(M))
+  = \mathrm{Hom}_{\widehat{\Delta}_{ab}}(\mathbb{Z}(x), \psi(M))
+\]
+donc il doit être représentable, \struck{\ill{}} \uncertain{grâce} \uncertain{à}
+$X = \mathbb{Z}(x)$) donc \uncertain{par} $\varphi(x) \in \mathcal{A}$, donc on est
+dans $\underline{\mathrm{Hom}}(\Delta^{\circ}, \text{\struck{\ill{}}}\,\mathcal{A}^{\circ}) \cong \underline{\mathrm{Hom}}(\Delta, \mathcal{A})$,
+on a pratiquement terminé…]
+
+Quel est \add{donc} le foncteur commutant aux $\varinjlim$ \uncertain{le plus}
+universel de $\widehat{\Delta}$ dans une cat. additive $\mathcal{A}$ avec $\varinjlim$ ?
+C'est
+\[
+  X \longmapsto \mathbb{Z}(X) = \mathbb{Z}^{(X)} \quad \text{de } \widehat{\Delta} \text{ dans } \widehat{\Delta}_{ab}
+\]
+(ou le foncteur « \emph{abélianisation} ») \uncertain{sans} doute se \uncertain{vérifie}
+pour un topos quelconque. \add{(i.e. $\Delta$ = cat. des $\Delta^{n}$)}
+Mais ici \add{cela signifie}
+
+\emph{Variante} équiv. \struck{\ill{}} \add{(a)} (Dold--Puppe) : l'objet cosimplicial
+\struck{\ill{}} $n \longmapsto \mathbb{C}_{*}(\Delta^{n}{}_{*}) = \mathbb{Z}(\Delta^{n}{}_{*}) = \mathbb{Z}^{\Delta^{n}{}_{*}}$
+de $\widehat{\Delta}_{ab} \simeq \mathcal{A}b_{*}$ est \emph{universel} pour les objets
+cosimpliciaux dans des cat. additives avec $\varinjlim$ quelc. (pour des foncteurs entre
+telles cat. qui commutent aux $\varinjlim$). Donc l'\struck{objet} \add{complexe de
+cochaînes correspondant}
+
+\page{314}
+\note{folio de l'auteur 14 ; numéro au crayon : 316}
+dans $\widehat{\Delta}_{ab} \simeq \mathcal{A}b_{*}$ est \emph{universel} pour les
+complexes de cochaînes dans des cat. additives $\mathcal{A}$ avec $\varinjlim$. \ill{}
+(\emph{NB} \uncertain{On} \uncertain{peut} aussi interpréter $\mathcal{A}b_{*}$ comme
+$\mathcal{A}b.$ dans cette description de la cat. contenant l'objet universel…).
+
+b) En dualisant et interprétant $n \longmapsto \mathbb{C}_{*}(\Delta^{n}{}_{*})$ comme
+objet \emph{simplicial} dans $(\mathcal{A}b_{*})^{\circ}$ \add{$= (\mathcal{A}b^{\circ})^{*}$},
+\struck{\ill{}} regardée comme cat. additive avec $\varprojlim$, il est universel pour
+les cat. $\mathcal{B}$ avec $\varprojlim$ et foncteurs entre icelles y commutant. De
+même pour le complexe de chaînes associé.
+
+Du point de vue de l'algèbre universelle, \struck{on \ill{} que les \ill{}}
+\add{on peut exprimer le contenu de ces} réflexions de la façon suivante :
+\begin{enumerate}
+  \item[1.] Les inv. contravariants « commutant aux $\varprojlim$ » en $X_{*} \in \mathcal{S}s$,
+  à valeurs dans une cat. \emph{additive} $\mathcal{A}$ avec $\varprojlim$, s'expriment
+  en termes d'objets simpliciaux ou en termes de complexes de chaînes de $\mathcal{A}$.
+  \item[2.] Les constructions qui se font sur de tels invariants \add{(\uncertain{pourvu} qu'elles
+  \uncertain{soient}} \struck{\ill{}} \uncertain{compatibles} aux foncteurs
+  $\mathcal{A} \to \mathcal{A}'$ commutant aux $\varprojlim$) s'expriment : à l'aide des
+  objets de $(\mathcal{A}b_{*})^{\circ}$ (où se trouve l'objet simplicial --- pour cat.
+  add. à $\varprojlim$ --- \emph{universel}), ou de $(\mathcal{A}b.)$
+\end{enumerate}
+et $1'$), $2'$) les énoncés duals (formels à partir de 1), 2)).
+
+Si $F$, $K_{*}$, $K.$ se correspondent dans 1, on a
+\[
+  \begin{cases}
+    F(X_{*}) \simeq \mathrm{Hom}_{*}(\mathbb{C}_{*}(X_{*}), K_{*}) \simeq \mathrm{Hom}.(\mathbb{C}.(X_{*}), K.) \\
+    K. = ND.(K_{*}), \quad K_{*} = DP_{*}(K.)
+  \end{cases}
+\]
+Si de même $\Omega$ est une « opération sur des invariants », et si $L_{*}$ \add{$\in \mathcal{A}b_{*}$}
+et $L. \in \mathcal{A}b.$ y sont associés, on aura
+\[
+  \begin{cases}
+    \Omega(F) \simeq \mathrm{Hom}_{*}(L_{*}, K_{*}) \simeq \mathrm{Hom}.(L., K.)
+    \qquad (= \Omega_{*}(K_{*}),\ = \Omega.(K.)) \\
+    L. = ND.(L_{*}), \quad L_{*} = DP_{*}(L.)
+  \end{cases}
+\]
+\marginal{$\Omega$ a deux expressions « opération sur des $K^{*}$ » ($\Omega^{*}$) et « op. sur des $K^{\cdot}$ » ($\Omega^{\cdot}$) --- opérations sur des objets de $\mathcal{B}$ \struck{\ill{}} : notion d'un complexe (semi-simpl. ou de chaînes) dans $\mathcal{B}$}
+(La signification des symboles $\mathrm{Hom}_{*}$ \add{des $\mathcal{A}b_{*}$} (resp.
+$\mathrm{Hom}.$ \add{des $\mathcal{A}b.$}) pour \struck{\ill{}} un $C_{*}$ ou $L_{*}$
+(resp. $C.$ ou $L.$) a été expliquée plus haut).
+
+Dualement, \add{pour} les \struck{\ill{}} \add{invariants} \add{d'objets $X_{*} \in \mathcal{S}s$}
+covariants commutant aux $\varinjlim$, à valeurs dans $\mathcal{A}$, si $G$, $K^{*}$,
+$K^{\cdot}$ se correspondent, on aura
+\[
+  \begin{cases}
+    G(X_{*}) \simeq \text{\struck{\ill{}}}\;\mathbb{C}_{*}(X_{*}) \overset{*}{\otimes} K^{*} \simeq \text{\struck{\ill{}}}\;\mathbb{C}.(X_{*}) \dot{\otimes} K^{\cdot} \\
+    K^{\cdot} = ND^{\cdot}(K^{*}), \quad K^{*} = ND^{*}(K^{\cdot})
+  \end{cases}
+\]
+\marginal{: préciser la signification de ces formules}
+\note{$K^{*} = ND^{*}(K^{\cdot})$ tel quel, là où l'on attend $DP^{*}$}
+et si l'opération $\Omega$, $L_{*}$ et $L.$ se correspondent, ($L_{*} \in \mathcal{A}b_{*}$,
+$L. \in \mathcal{A}b.$) on aura
+\[
+  \begin{cases}
+    \Omega(G) \simeq L_{*} \overset{*}{\otimes} K^{*} \simeq L. \dot{\otimes} K^{\cdot} \\
+    L. \simeq ND.(L_{*}), \quad L_{*} \simeq DP_{*}(L.)
+  \end{cases}
+\]
+
+\page{315}
+\note{folio de l'auteur 15 ; numéro au crayon : 317}
+\emph{Remarques.} a) On trouve en utilisant les \uncertain{deux} objets ($L_{*}$ ou
+$L.$) pour exprimer des \emph{opérations} sur invariants additifs contravariants, ou sur
+invariants \add{« additifs »} covariants (du type envisagé) --- c'était clair à priori
+à cause du passage de $\mathcal{A}$ à $\mathcal{B}$ par \add{passage à la} catégorie
+opposée --- mais l'op. définie par $L_{*}$ \struck{\ill{}} et $L.$ de façon
+contravariante dans le premier cas, covariante dans le deuxième.
+
+b) On a en principe résolu, et de façon quasi-tautologique, la question initiale
+des \struck{\ill{} \ill{}} \add{déterminations des constructions} possibles sur
+invariants contravariants ou covariants « additifs » du type envisagé : on trouve
+\struck{\ill{}} \emph{\uncertain{grosses}} catégories, $\mathcal{A}b_{*}$ ou
+$\mathcal{A}b.$ (ou \struck{\ill{}} passage qui de celles-ci à l'opposée). Cela
+tient au fait que l'on a admis des catégories de valeurs \add{$\mathcal{A}$}
+\add{$\mathcal{B}$ ou $\mathcal{A}$,} assez générales \struck{\ill{}} où on
+peut effectuer \struck{\ill{}} les $\varprojlim$, ou bien les $\varinjlim$ --- ce
+qui a pour effet que un \uncertain{tas} d'opérations peuvent s'effectuer sur les
+\struck{\ill{}} \struck{invariants} invariants, et op. sur les invariants.
+
+On trouvera par \uncertain{lors} qu'en est plus restrictif sur les opérations qu'on
+se permet, \struck{\ill{}} \add{\uncertain{ou} \uncertain{des}} \struck{\ill{}}
+\uncertain{plus} restrictif sur $\mathcal{A}$ et $\mathcal{B}$, on trouve des
+catégories correspondantes d'opérations (ou constructions) sur invariants plus petites
+--- \struck{\ill{}} en \uncertain{même} temps qu'on trouve des cat. « universelles » plus
+petites \struck{\ill{}} \add{\uncertain{types}} invariants additifs covariants ou
+contrav. possibles. \struck{\ill{}} De façon précise, il doit résulter des principes
+généraux (que je n'ai pas \uncertain{détaillés}) que si \struck{\ill{}}
+$F_{0} : \text{\struck{\ill{}}}\ \widehat{\Delta}^{\circ} \to \mathcal{B}_{0}$
+est l'objet de $((\mathcal{A}b_{*})^{\circ})_{*} \simeq (\mathcal{A}b^{*}{}_{*})^{\circ}$
+qui exprime l'objet \add{$\mathcal{B}_{0}$} semi-simplicial additif universel, alors la
+\struck{\ill{}} catégorie cherchée d'opérations [\uncertain{correspondant} à un
+\uncertain{type} $L$ de cat. d'indices par rapport auxquelles on se propose de
+\struck{\ill{}} \uncertain{prendre} des $\varprojlim$ --- dans des cat. $\mathcal{B}$
+où on regarde des inv. de nature contravariante --- resp. des $\varinjlim$ --- dans le
+cas de cat. $\mathcal{A}$ où on regarde les inv. de nature cov.] est la sous-catégorie
+pleine \add{$U_{L}$} de $\mathcal{B}_{0} = (\mathcal{A}b_{*})^{\circ}$ engendrée par
+$F_{0}(\Delta^{n})$ grâce aux $\varprojlim$ de type $L$, \struck{et} \add{\uncertain{correspondant}}
+donc à la sous-catégorie pleine de $\mathcal{A}b_{*}$ engendrée par les
+$\mathbb{C}_{0}(\Delta^{n})$ \add{grâce aux} $\varinjlim$ de type $L$.
+\note{« $U_{L}$ » est écrit dans la marge gauche, avec un renvoi vers « de $\mathcal{B}_{0}$ »}
+
+\page{316}
+\note{folio de l'auteur 16 ; numéro au crayon : 318}
+(c'est ce qu'on vérifie directement dans certains cas remarquables, p.ex. celui où
+$L = \emptyset$ et où on trouve la \add{\uncertain{sous}}-catégorie pleine de
+$\mathcal{A}b_{*}$ engendrée par \add{les} $\mathbb{C}_{0}(\Delta^{n})$ grâce aux seules
+sommes finies.
+
+c) On a oublié de noter que \struck{\ill{}} dans le cas particulier
+$\mathcal{B} = \mathcal{A}b$, on trouve les \uncertain{deux} types d'objets (savoir
+ceux de $\mathcal{A}b_{*}$ ou de $\mathcal{A}b.$ au choix) pour exprimer les objets
+\emph{inv.} contravariants \add{$F$} possibles à valeurs dans $\mathcal{A}b$ (commutant
+aux $\varprojlim$) et les \emph{op.} \add{$\Omega$} qu'on peut faire sur des inv.
+contrav. \struck{quelconques} \add{\uncertain{de}} \uncertain{ce} \uncertain{type},
+dans une cat. \struck{\ill{}} \add{additive} à $\varprojlim$, on a déjà dit comment
+\[
+  \begin{aligned}
+    &F \text{ correspondant à } K_{*} \in \mathcal{A}b_{*} \text{ ou } K. \in \mathcal{A}b. \\
+    &\Omega \text{ \struck{\ill{}} \quad\quad\quad\quad\quad } L_{*} \in \mathcal{A}b_{*} \text{ ou } L. \in \mathcal{A}b.
+  \end{aligned}
+\]
+comment donc s'exprime directement la correspondance entre $F$ et $\Omega$, si
+$K = L$ ? On trouve
+\note{dans la seconde ligne, un trait horizontal tient lieu de « correspondant à »}
+\marginal{On veut ici les \uncertain{applications} \uncertain{d'objets} \ill{} \ill{} \ill{} $\mathcal{A}b_{*}$ \ill{} $\mathcal{A}b$ --- attention, dans cette formule, \uncertain{renversant} la variance par rapport à la situation --- il s'agit bien des $F$ \emph{contravariants} \ill{} à val. dans $\mathcal{A}b$ \ill{} \ill{} et non dans $(\mathcal{A}b)^{\circ}$…)}
+\note{note marginale écrite en oblique entre les deux colonnes, reliée par un trait au « $(\mathcal{A}b)$ » et à la formule encadrée ; lecture très partielle}
+si $F_{0} \in ((\mathcal{A}b_{*})^{\circ})_{*} = \mathcal{B}_{0*}$ \add{$\simeq (\mathcal{A}b_{*}{}^{*})^{\circ}$}
+est le \struck{\ill{}} \add{\uncertain{invariant}} universel considéré, à valeurs dans
+$\mathcal{B}_{0} = (\mathcal{A}b_{*})^{\circ}$, alors pour tout
+$X_{*} \in \mathcal{S}s = \widehat{\Delta}$
+\[
+  \boxed{F(X_{*}) \simeq \Omega^{*}_{*}(\mathbb{C}_{*}(X_{*})^{\circ}) \simeq \Omega^{\cdot}.(\mathbb{C}.(X_{*})^{\circ})}
+\]
+où l'expression $\mathbb{C}_{*}(X_{*})$ ou $\mathbb{C}.(X_{*})$ signifie la \uncertain{même},
+mais considérée comme objet non de $\mathcal{A}b_{*}$ \add{resp. $\mathcal{A}b.$}, mais de
+\struck{$(\mathcal{A}b_{*})^{\circ}$}
+$\mathcal{B}'^{*}$ \add{resp. $\mathcal{B}'^{\cdot}$}, où $\mathcal{B}' = \mathcal{A}b^{\circ}$,
+de façon que $\Omega^{*}$ \struck{resp. $\Omega^{\cdot}$ se définisse sur $\mathcal{A}b_{*}$ resp.}
+\uncertain{se} définisse sur $\mathcal{B}'^{*}$ resp. $\mathcal{B}'^{\cdot}$
+($\Omega^{*}_{\mathcal{B}} : \mathcal{B}'^{*} \to \mathcal{B}'$,
+$\Omega^{\cdot}_{\mathcal{B}} : \mathcal{B}'^{\cdot} \to \mathcal{B}'$) a un sens
+sur $\mathbb{C}_{*}(X_{*})^{\circ}$ \add{resp. $\mathbb{C}.(X_{*})$}, et c'est
+\uncertain{alors} dans $\mathcal{B} = (\mathcal{A}b)^{\circ}$ qu'on a $F(X_{*})$
+(à isom. can. près).
+
+Tous ces développements sont encore valables pour une catégorie $\Delta$ (ess. petite)
+quelconque --- et aussi dans le contexte non additif --- \struck{dans \ill{}} \uncertain{avec}
+les $\varinjlim$ et non les $\varprojlim$, qui, eux, \uncertain{viendraient} des
+catégories de valeurs additives et la \uncertain{\ill{}} spécial de Dold--Puppe.
+
+En fait (revenant aux types $L$ de cat. d'indices envisagés dans b)) on s'intéressera
+surtout aux inv. contravariants en $X_{*}$ provenant d'objets $K_{*} \in \mathcal{A}b_{*}$
+qui sont des $U_{L}$ --- i.e. qui peuvent se déduire des \uncertain{composantes}
+$\mathbb{C}^{[n]}{}_{*} \in (\mathcal{A}b)_{*}$ (et des opérations semi-simpliciales
+entre \add{\uncertain{icelles}}) : à l'aide des \add{$L$} opérations $\Omega_{*}$
+\add{\uncertain{prenant} \uncertain{par} \uncertain{dessus}, sur des $\mathbb{C}^{n}{}_{*} \in (\mathcal{A}b_{*})^{\circ}$}
+\struck{\ill{}}
+\add{\uncertain{et} \uncertain{des} op. différentielles \ill{} \ill{} de telles opérations
+\ill{} \ill{}} dire que l'on s'intéresse aux foncteurs \struck{\ill{}}
+\note{fin de page très surchargée ; plusieurs insertions superposées, l'ordre de lecture est incertain}
+
+\page{317}
+\note{folio de l'auteur 17 ; numéro au crayon : 319}
+\[
+  F : X_{*} \longmapsto F(X_{*}) : \widehat{\Delta}^{\circ} \to \mathcal{A}b
+\]
+qui peuvent se déduire du foncteur universel
+$\widehat{\Delta}^{\circ} \xrightarrow{\ F_{0}\ } (\mathcal{A}b_{*})^{\circ}$
+(défini par $(F_{0})^{\circ}(X_{*}) \simeq \mathbb{C}_{*}(X_{*})$) en lui appliquant
+d'opération $\Omega$ \add{\uncertain{pour} $\Omega^{*} \in U^{L}$}, ou encore qui se
+déduisent du foncteur cov. universel
+\[
+  \widehat{\Delta} \xrightarrow{\ F_{0}{}^{\circ} = (X_{*} \mapsto \mathbb{C}_{*}(X_{*}))\ } (\mathcal{A}b_{*})
+\]
+\struck{qui} on \uncertain{dérivée} par $\mathbb{C}_{*}$, en lui appliquant \add{de
+telles} $\Omega_{*}$. Ce \struck{\ill{}} \add{qui} se formule très
+\marginal{? \quad Sous réserve que $L$ soit \uncertain{choisi} pour que les \uncertain{deux} \uncertain{formulations} \uncertain{soient} \uncertain{équivalentes} \uncertain{en} \uncertain{vertu} des \uncertain{projecteurs} !}
+équivalemment en termes de $\Omega^{\cdot}$, $\Omega.$ opérant sur $(\mathcal{A}b.)^{\cdot}$
+($\Omega^{\cdot} : \mathcal{A}b^{\cdot} \to \mathcal{A}b$, $\Omega. : \mathcal{A}b. \to \mathcal{A}b$),
+en remplaçant $\mathbb{C}_{*}(X_{*})$ par $\mathbb{C}.(X_{*})$.
+
+e) Quel est le rôle dans tout ceci de DP ? \struck{\ill{}} D'un côté on travaille que
+l'avantage de $\mathcal{A}.$ sur $\mathcal{A}_{*}$, c'est que la description d'un objet
+y est nettement plus simple --- on se perd facilement dans la description des op.
+semi-simpliciales ! --- et \uncertain{donc} \uncertain{dans} \uncertain{nos} $L.$, $L_{*}$,
+$L.$ est aussi nettement « moins gros » que $L_{*}$ ($\mathcal{A}b$ un \uncertain{type}
+\ill{} \ill{} \uncertain{comme} \uncertain{facteur} \uncertain{direct}), $L_{*}$
+\uncertain{apparaît} comme une sorte de version pléthorique de $L.$ !
+\note{d) ne figure pas sur ces pages : la liste passe de c), p. 316, à e)}
+
+Néanmoins, dès que (dans le cas de $\mathcal{A} = \mathcal{A}b_{k}$ disons)
+$\mathcal{A}b_{k*}$ et $\mathcal{A}b_{k}.$ ont chacun leur structure multiplicative ---
+qui ne se correspondent \emph{pas} par DP et ND --- celle de $\mathcal{A}b_{k*}$ est
+plus simple à beaucoup d'égards, et s'introduit d'ailleurs de bien des façons par la
+suite de façon \uncertain{absolument} impérieuse, alors que celle de $\mathcal{A}b_{k}.$
+ne s'introduit pratiquement pas.
+\note{le paragraphe « Néanmoins … pas » est marqué d'un trait vertical dans la marge}
+De plus, pour les opérations tensorielles du type $\overset{i}{\wedge}$,
+$\overset{i}{\otimes}$, $\mathrm{Sym}^{i}$, elles \uncertain{manquent} purement et simplement
+dans $\mathcal{A}b_{k}.$ (sauf de les définir par transposition de structure via DP !)
+\uncertain{alors} \uncertain{qu'elles} \uncertain{sont} \uncertain{évidentes} pour
+sur $\mathcal{A}b_{k*}$ ! Or ces structures également joueront un rôle essentiel par
+la suite.
+
+\section{Gribouillis vrac}
+\note{titre pris sur une chemise bleue (numéro au crayon 320) écrite de sa main au crayon : « \struck{Pré} Gribouillis vrac » et, plus bas, « Au Fil des Jours… » ; lecture de « Pré » douteuse. Les deux feuillets qui suivent sont des brouillons sur papier réglé, sans lien visible avec la suite paginée 1--17 qui précède}
+
+\page{319}
+\note{numéro au crayon : 321 ; feuillet de calculs en désordre, sur les puissances divisées $\Gamma^{p}$, $\Gamma^{q}$, $\Gamma^{pq}$ ; on n'en donne que les formules principales}
+\[
+  \text{\struck{$F_{A}(\Gamma^{pq}(X)) \longrightarrow$}} \qquad
+  \Gamma^{pq}(F_{A}(X)) \xrightarrow{\ \sigma^{X}_{pq}\ } F_{A}(\Gamma^{pq}(X)) ,
+  \qquad f \longmapsto \Gamma^{pq}(f) \circ u_{pq}
+\]
+\[
+  (f^{(q)})^{(p)} \quad \Gamma^{p}(\Gamma^{q}(F_{A}(X))) \xrightarrow{\ \Gamma^{p}(\sigma^{X}_{q})\ } \Gamma^{p}F_{A}(\Gamma^{q}(X))
+  \longrightarrow F_{A}(\Gamma^{p}(\Gamma^{q}(X)))
+\]
+\[
+  (\Gamma^{q}(f) \circ u_{q})^{(p)} \longmapsto \Gamma^{p}(\Gamma^{q}(f) \circ u_{q}) \circ u_{p}
+\]
+\note{à droite, dans une boucle reliée par des flèches : $(\gamma^{A}_{pq} \circ \Gamma^{pq}(f) \circ u_{pq})$ et $F_{A}(\gamma^{X}_{p,q})$ ; une ligne surchargée et biffée au milieu}
+
+\begin{tikzcd}
+  A \arrow[r, "u_{pq}"] \arrow[d, "u_{p}"'] & \Gamma^{pq}(A) \arrow[r, "\Gamma^{pq}(f)"] & \Gamma^{pq}(X) \arrow[d, "\gamma^{X}_{pq}"] \\
+  \Gamma^{p}(A) \arrow[r, "\Gamma^{p}(u_{q})"'] & \Gamma^{p}(\Gamma^{q}(A)) \arrow[r, "{\Gamma^{p}(\Gamma^{q}(f))}"'] & \Gamma^{p}(\Gamma^{q}(X))
+\end{tikzcd}
+
+\note{deux flèches obliques, partant de $\Gamma^{p}(A)$ et de $\Gamma^{p}(\Gamma^{q}(A))$ vers la ligne du haut, sont à demi biffées}
+\[
+  f : A \to X, \qquad \Gamma^{q}f : \Gamma^{q}A \to \Gamma^{q}X, \qquad \Gamma^{q}f \circ u_{q} \ (\text{de } A)
+\]
+$X = A$, $f = \mathrm{id}_{A}$ :
+
+\begin{tikzcd}
+  A \arrow[r, "u_{pq}"] \arrow[d, "u_{p}"'] & \Gamma^{pq}(A) \arrow[d, "\gamma^{A}_{pq}"] \\
+  \Gamma^{p}(A) \arrow[r, "\Gamma^{p}(u_{q})"'] & \Gamma^{p}(\Gamma^{q}(A))
+\end{tikzcd}
+
+\note{ce carré est entouré d'un trait}
+
+\begin{tikzcd}
+  A \otimes A \arrow[r, "u_{p} \otimes u_{q}"] & \Gamma^{p}(A) \otimes \Gamma^{q}(A) \arrow[d, "\mu^{A}_{p,q}"] \\
+  A \arrow[u, "\Delta"] \arrow[r, "c_{pq}\, u_{p+q}"'] & \Gamma^{p+q}(A)
+\end{tikzcd}
+
+\note{le nom de la flèche verticale de droite est surchargé ; $\mu$ est une lecture douteuse, de même que « $c_{pq}$ » sous la flèche du bas}
+\[
+  \boxed{u_{p} \cdot u_{q} = c_{pq}\, u_{p+q}} \quad \text{dans} \quad
+  \mathrm{Hom}_{1}(A, \Gamma^{\cdot} A) \simeq (\mathrm{Hom}_{1}(\mathrm{Sym}^{\cdot}\check{A}, \check{A}))
+  \qquad \boxed{\begin{array}{l} u_{0} = 1 \\ u_{1} = \mathrm{id} \end{array}}
+\]
+\uncertain{qui} \uncertain{est} une alg. \uncertain{grâce} \uncertain{à} la structure de cog. sur $A$ et la structure d'alg. de $\Gamma^{\cdot} A$
+\note{au-dessus de $\mathrm{Hom}_{1}$, une flèche venant de « $k\{T\}$ »}
+
+\page{320}
+\note{numéro au crayon : 322 ; la moitié supérieure de la page est barrée d'un long trait oblique}
+\[
+  X \xrightarrow{\ \text{dérivé}\ } Y, \qquad \Gamma^{n}(X) \nearrow, \qquad F(X) \overset{?}{\longrightarrow} F(Y)
+\]
+\[
+  F(\Gamma^{n}X) \longrightarrow F(Y), \qquad \Gamma^{n}(F(X)) \longrightarrow F(\Gamma^{n}X)
+\]
+\note{ce premier bloc est séparé du suivant par un trait horizontal}
+\[
+  F_{A}(X) = \mathrm{Hom}_{1}(A, X)
+\]
+\[
+  \Gamma^{n}F_{A}(X) \overset{?}{\longrightarrow} F_{A}(\Gamma^{n}X)
+\]
+\[
+  \Gamma^{n}\mathrm{Hom}_{1}(A, X) \xrightarrow{\ \beta\,?\ } \mathrm{Hom}_{1}(A, \Gamma^{n}X)
+\]
+\struck{$\beta(u^{(n)}) \to \ldots\ \Gamma^{n}(u)$} fonctorielle en \ill{}
+\[
+  X \longrightarrow X \otimes X
+\]
+\[
+  F_{C}(X \otimes Y) \xleftarrow{\ f\ } F_{A}(X) \times F_{B}(Y) \qquad \text{bilin., fonction en } X, Y
+\]
+si $X = Y = A$, c'est \ill{} $\mathrm{id}_{A}$, $\mathrm{id}_{A}$ donne une \uncertain{flèche}
+\[
+  A \longrightarrow A \otimes A
+\]
+\begin{enumerate}
+  \item[a)] \uncertain{associativité} \add{coassoc.} : \uncertain{morphisme} de la \uncertain{cohom.} \ill{}
+  \item[b)] \uncertain{commutative} \add{\uncertain{cocommutative}}
+  \item[c)] compatible avec $1$ \quad i.e. $k \to F_{A}(\mathbb{1}) = \mathrm{Hom}(A, \mathbb{1})$
+\end{enumerate}
+\uncertain{i.e.} \uncertain{counité} \quad $A \xrightarrow{\ n\ } \mathbb{1}$
+\note{l'étiquette de la flèche $X \to Y$ est lue « dérivé » avec doute ; celle de $A \to \mathbb{1}$ est lue « $n$ »}
+
+\end{document}
