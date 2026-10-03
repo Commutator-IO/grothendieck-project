@@ -1,0 +1,1070 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 111, pages 1-16
+% (the whole folder).
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the typescript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through; everything the apparatus carried moves into footnotes. It is
+% held to being mathematically correct as it stands: where the pages are loose
+% or mistaken, the true statement is what appears here and a footnote says what
+% the page has. In any dispute of substance the transcription governs: whoever
+% cites Grothendieck must cite batch-01.fr.tex (pp. 1-16, the whole folder).
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-03 — first pass, unchecked against the pages by a human.
+% The folder was read whole (one batch); this is one document for the
+% shelfmark. It was made on Opus 5.5 and has not been measured against the
+% reference reading of folder 115 (made on Opus 5).
+%
+% Witness. 111 is a photocopy of the sixteen-page typescript « Tapis de
+% Quillen » (notes du 10.9.68): typescript page N = page N of this folder. Two
+% more witnesses are in folder 162-5: copy B (162-5 pp. 32-41, 43-48, the
+% annotated top copy) and copy A (162-5 pp. 2-17, a photocopy of B after the
+% ink, with marks of its own). 111 reproduces B's ink and A's own marks (batch
+% header, « Relation to folder 162-5 »). This reading follows 111's
+% transcription throughout; copy B is invoked only where 111's transcription
+% itself cites it (pp. 7, 10, 13, 16) or where a footnote says so explicitly.
+% It is written to agree in substance with 162-5.modern.tex, whose departures
+% it carries over with 111's page numbers.
+%
+% Notation fixed for the whole document (as in 162-5.modern.tex). N(C) for the
+% nerve (the page's S(C)); Ho(Cat), Ho(sSet) for (Cat)', (Ssimpl)'; C^ for the
+% presheaf topos (the page's C~, once C^); « catégorie double » for the page's
+% « bi-catégorie »; V for the category of manifolds of part III (the page's C);
+% E for the target category of the universal problem (the page's B, kept bold
+% \mathbf B for Quillen's solution); B_d(X) graded by relative dimension;
+% H^k(X) = H^k(X; F_2), matched with B_{-k}; W for the page's T-bar' (p. 13);
+% Hom_{B^H} for the page's H(X,Y).
+%
+% Substantive departures, with pages.
+%  p. 1   coefficient systems = functors C° -> Ens inverting EVERY arrow (the
+%         page: « transformant isomorphismes en isomorphismes »); lim^(i)_C F
+%         read as lim^i over C° of u*F'.
+%  p. 3   the typed coproduct of cochains corrected to a product (the hand's
+%         « ∏ ! »).
+%  p. 3   the converse of the D^b_lc statement holds over Z, not over any
+%         non-zero ring (counterexample K(Z/p,2), ours).
+%  p. 4   C, C' read X, X'; « se borner aux systèmes locaux commutatifs »
+%         answered negatively (acyclic groups, ours).
+%  p. 5   unit functor supplied; Segal condition supplied for « objets qui … »;
+%         « un triple » for a five-term datum.
+%  p. 7   Hom_grab identified with the Picard category of tau^{<=0} RHom
+%         (truncation supplied); the struck commutative case explained.
+%  p. 8   « pl. fidèle (?) »: the loop functor is not even faithful (ours);
+%         the « tuage » analogy for Aut(1) footnoted as rather a looping.
+%  p. 11  compact (closed) manifolds supplied (the page's own « (compactes ?) »).
+%  p. 12  F^• : V° -> B (the page: C -> B); composition in B written out;
+%         « au dessus de X » read « au-dessus de X x Y ».
+%  p. 13  base change written alpha_{s•} alpha_s^• = Gamma^• i_{s•} (the page's
+%         order alpha_s^* alpha_{s*} does not compose).
+%  p. 13  H (x) Lambda = B holds as Lambda-modules for any homogeneous lift
+%         (Conner-Floyd freeness, graded Nakayama).
+%  p. 13-14 « quasi-abélienne » = pseudo-abelian (Karoubian additive), not
+%         Schneiders' quasi-abelian.
+%  p. 16  « Thom's theorem » (x in S(X) iff A^+ x = 0), read with the usual
+%         action on cohomology, fails: RP^1 in RP^2. Reported under reserve.
+%
+% Announced and never established on the pages: the generalisation to
+% « localement homotopiquement triviaux » topoi (pp. 3-4); n-categories as
+% n-simplicial sets (p. 6); the Hom_grab identification (p. 7) and the
+% 2-Grab-category of homomorphisms (p. 9); abelian groups in n-Cat <->
+% complexes of length n (p. 9); K_n via universal Gr-n-categories (p. 9);
+% the formalisation for general correspondences (p. 12); « le reste » of the
+% universal property, « sans doute l'AQT » (p. 13); the universality of S
+% (p. 15); the structure of G (p. 16).
+%
+% Dating inference (not a reading): A's own mark « cf exposé Karoubi à
+% Bourbaki », reproduced on 111 p. 16, most likely points to Karoubi's
+% Bourbaki talk of 1971-72; if so, the photocopy 111 was made after 1971.
+% \dating keeps the inventory's « 1968 », the date of the typed text.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{111}
+\pages{1}{16}
+\dating{1968}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Tapis de Quillen [notes du 10/09/1968] : copies de tapuscrit annoté (1968) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Ces seize pages dactylographiées sont des notes prises en septembre 1968 sur ce
+que Daniel Quillen, alors âgé de vingt-huit ans, exposait à Grothendieck. Le
+dossier n'en contient qu'une photocopie, qui reproduit les annotations
+manuscrites portées sur un autre exemplaire ; celui-ci et une seconde copie se
+trouvent au dossier 162-5. « Tapis », dans la
+langue de ces années, désigne un ensemble de résultats et la manière de s'en
+servir : le texte parle aussi du « tapis de Dold » et du « tapis de Roos ».
+
+Le tapuscrit a trois parties. La première part de ce qu'une catégorie est un
+espace : ses objets sont des points, ses flèches des segments, ses triangles
+commutatifs des faces. Selon Quillen, les catégories et les espaces
+combinatoires qu'on appelle ensembles simpliciaux ont la même théorie de
+l'homotopie, et toute catégorie a le même type d'homotopie que son opposée,
+celle où l'on a retourné toutes les flèches. Le texte y voit l'occasion de
+définir un type d'homotopie par ses « systèmes locaux », c'est-à-dire par la
+façon dont des coefficients peuvent tourner le long des lacets de l'espace.
+
+La deuxième partie traite des catégories munies d'une loi de groupe. Un groupe
+ordinaire exige que $(ab)c$ soit \emph{égal} à $a(bc)$ ; dans une catégorie, on
+peut se contenter d'un isomorphisme entre les deux, pourvu qu'il soit donné et
+cohérent. Une telle « catégorie de Picard » se décrit, à peu de chose près, par
+une flèche entre deux groupes abéliens, un complexe de longueur un. Il en va de
+même en longueur deux, et le texte espère qu'il en ira ainsi en toute longueur.
+Il espère aussi définir des invariants $K_n$ d'une catégorie munie d'un produit
+comme les groupes d'homotopie de sa « complétion en groupe », comme on fabrique
+les entiers relatifs à partir des entiers naturels. C'est ce que Quillen fera
+dans les années suivantes, par d'autres chemins.
+
+La troisième partie regarde le cobordisme d'un œil de géomètre algébriste. Deux
+variétés sont cobordantes quand, ensemble, elles bordent une troisième, comme
+deux cercles bordent un cylindre. En comptant les variétés au-dessus d'un espace
+à cobordisme près, on obtient une catégorie de « correspondances » qui ressemble
+à la catégorie des motifs, cette théorie universelle des cohomologies que
+Grothendieck développait alors pour les variétés algébriques. Le groupe des
+symétries des opérations de Steenrod y joue le rôle d'un « groupe de Galois
+motivique ». Contrairement au cas familier, ce groupe est unipotent, et il est
+défini sur le corps à deux éléments.
+
+Ces pages montrent aussi une manière de travailler. Le texte rapporte
+(« Quillen prouve ») et se pose des questions (« Demander à Quillen… »). Dans les
+marges, la main répond à certaines d'entre elles, par « oui », par « Si ! » ou
+par « non, … ». On y lit une conversation mathématique en train de se faire :
+les choses comprises, celles qu'on croit, celles qu'on ira demander. La
+photocopie porte en outre quelques notes plus tardives, dont un renvoi à un
+exposé de Karoubi qui laisse penser qu'elle a été tirée quelques années après
+1968. Le dossier est classé parmi les pièces rassemblées autour de « À la
+poursuite des champs », le texte de 1983 qui commence lui-même par une lettre à
+Quillen.
+
+Pour aller plus loin, les noms à chercher sont : la structure de modèles de
+Thomason sur les catégories ; la correspondance de Dold--Kan ; les 2-groupes et
+les champs de Picard ; la $K$-théorie supérieure de Quillen ; et surtout la note
+de Quillen de 1969 sur les lois de groupes formels du cobordisme, qui donnera à
+la troisième partie sa structure véritable, et que prolonge aujourd'hui le
+cobordisme algébrique de Levine et Morel.
+
+\keywords{nerve of a category, category of simplices, homotopy theory of categories, locally constant sheaf, double category, Segal condition, Dold–Kan correspondence, Picard category, 2-group, higher algebraic K-theory, group completion, unoriented cobordism, correspondence category, Karoubi envelope, Chow motive, Steenrod algebra, motivic Galois group, Pontryagin–Thom construction}
+\end{resume}
+
+\pagerange{1}{16}
+\section*{Le fil du dossier, et les conventions}
+
+\emph{La pièce.} Le dossier est la photocopie d'un tapuscrit de seize pages,
+numérotées 1 à 16 à la main en tête de chaque page. La page $N$ du tapuscrit
+est la page $N$ du dossier. Le texte est titré « Tapis de Quillen. » ; la main
+a daté la première page « notes du 10.9.68 », d'où le « [notes du 10/09/1968] »
+de l'inventaire. La machine n'avait ni lettres grecques ni flèches ; plusieurs
+ont été tracées ensuite à la main, avec des corrections de notation et des
+notes de fond.
+
+\emph{Les trois exemplaires.} Le dossier 162-5 contient deux autres témoins du
+même original dactylographié, avec les mêmes coupures de lignes et les mêmes
+biffures à la machine. L'un est l'original annoté à l'encre bleue (162-5, pages
+32 à 48), que nous appelons l'\emph{exemplaire annoté}. L'autre est une
+photocopie noire de celui-ci, tirée après l'encre et qui a reçu quelques notes
+propres (162-5, pages 2 à 17). La couche manuscrite de 111 est celle de
+l'exemplaire annoté, photocopiée, plus ces notes propres, reproduites des mêmes
+traits aux mêmes places. On ne trouve sur 111 aucune marque qui ne soit sur
+l'un des deux autres. 111 n'est pourtant pas simplement une copie de la
+photocopie de 162-5 telle qu'elle est aujourd'hui : il garde au bord droit de
+quelques pages (7 et 13) un texte que celle-ci a perdu. Les images ne disent
+pas s'il a été tiré sur elle avant cette perte, ou sur un intermédiaire
+commun.\footnote{Tout ceci est le constat de la transcription de 111, établie
+puis revue sur l'exemplaire annoté, et non une lecture nouvelle. Le texte suivi
+ici est partout celui de 111. L'exemplaire annoté n'est invoqué qu'aux endroits
+où la transcription de 111 le cite elle-même pour lire un passage pâli par la
+photocopie, ou quand une note le dit.}
+
+\emph{Qui écrit.} Le tapuscrit parle à la première personne : « ma lettre à
+Verdier », « “ma” construction chérie de la “catégorie de Picard” », « mon
+interprétation chérie », « le rôle universel que j'ai envisagé plus haut ». Il
+rapporte ce que « Quillen prouve » et note ce qu'il faudra « demander à
+Quillen ». Rien sur les pages ne le signe. Une vérification de l'encre sur le
+fac-similé, faite par sondage à la page 3, tient les ajouts manuscrits pour
+siens ; la transcription ne va pas plus loin, et nous non plus.
+
+\emph{Le fil.} Les trois parties du tapuscrit ne s'enchaînent pas par
+déduction ; elles sont trois sujets d'une même conversation.
+\begin{itemize}
+  \item \emph{I, pages 1 à 5} : catégories et ensembles simpliciaux. Le nerf,
+  la catégorie des simplexes, l'équivalence des théories homotopiques, $C$ et
+  $C^{\circ}$, puis une généralisation proposée aux topos « localement
+  homotopiquement triviaux » et l'idée de définir un type d'homotopie par la
+  catégorie dérivée de ses systèmes locaux.
+  \item \emph{II, pages 5 à 10} : catégories doubles, 2-catégories, groupes
+  dans $(\mathrm{Cat})$ et dans $(2\text{-Cat})$, la correspondance de
+  Dold--Kan, et le programme des $K_n$ d'une catégorie monoïdale.
+  \item \emph{III, pages 11 à 16} : le cobordisme comme théorie de
+  correspondances, la catégorie universelle $\mathbf{B}$, sa description par
+  des $\Lambda$-modules, l'analogie avec les motifs, une seconde catégorie
+  $\mathbf{S}$ et le groupe $G$ dual de l'algèbre de Steenrod, enfin la
+  généralisation orientée.
+\end{itemize}
+Une dernière section revient sur la couche manuscrite de la photocopie, et sur
+ce qu'elle laisse inférer de sa date.
+
+\emph{Notations}, valables pour tout le document ; elles sont celles de la
+lecture modernisée du dossier 162-5, et chaque écart avec la page est signalé
+en note. $N(C)$ désigne le nerf (la page : $S(C)$) et $C^{\circ}$ la catégorie
+opposée. $\mathrm{Ho}(\mathrm{Cat})$ et $\mathrm{Ho}(\mathrm{sSet})$ désignent
+les catégories homotopiques (la page : $(\mathrm{Cat})'$, $(\mathrm{Ssimpl})'$),
+et $\widehat{C}$ le topos des préfaisceaux sur $C$ (la page : $\widetilde{C}$).
+« Catégorie double » rend la « bi-catégorie » de la page. Dans la troisième
+partie, $\mathcal{V}$ est la catégorie des variétés (la page : $C$),
+$\mathcal{E}$ la catégorie but du problème universel (la page : $B$), et
+$H^{\bullet}(X) = H^{*}(X; \mathbb{F}_2)$.
+
+\emph{Annoncé, non établi.} Le tapuscrit laisse ouverte la généralisation aux
+topos localement homotopiquement triviaux (pages 3 et 4). Il pose sans les
+établir la description des $n$-catégories par des ensembles $n$-simpliciaux
+(page 6) et celle des homomorphismes entre catégories de Picard (pages 7 et 9).
+Il ne fait qu'espérer la correspondance entre groupes abéliens de
+$(n\text{-Cat})$ et complexes de longueur $n$, et la définition des $K_n$
+(page 9). Il renvoie « le reste » de la propriété universelle de $\mathbf{B}$ à
+une abréviation que nous ne savons pas lire (page 13), suppose sans la
+démontrer l'universalité de la catégorie $\mathbf{S}$ (page 15), et ne dit pas
+la structure du groupe $G$ (page 16).
+
+\pagerange{1}{5}
+\section*{I. Catégories et ensembles simpliciaux (pages 1 à 5)}
+
+\pagerange{1}{2}
+\subsection*{Le nerf, le topos, la catégorie des simplexes (pages 1 et 2)}
+
+\emph{Le nerf.} À toute catégorie $C$ on associe son nerf $N(C)$, l'ensemble
+simplicial des suites de flèches composables. Le foncteur $N : (\mathrm{Cat})
+\to (\mathrm{sSet})$ est pleinement fidèle.\footnote{La page note $S(C)$ le nerf
+et $(\mathrm{Ssimpl})$ la catégorie des ensembles semi-simpliciaux,
+c'est-à-dire, dans la terminologie de l'époque, simpliciaux. Nous réservons la
+lettre $S$ à la troisième partie.} Les systèmes locaux d'ensembles sur $N(C)$
+correspondent aux foncteurs sur $C$ qui envoient toute flèche sur un
+isomorphisme, c'est-à-dire qui se factorisent par le groupoïde enveloppant
+$C[C^{-1}]$. Leur cohomologie s'interprète de deux façons : par les foncteurs
+dérivés de $\varprojlim$, ou comme cohomologie du topos $\widehat{C}$ des
+préfaisceaux sur $C$. Il s'agit de $H^{0}$ pour les ensembles, de $H^{1}$ pour
+les groupes, de tous les $H^{i}$ pour les groupes abéliens. Pour un système
+local abélien $F$, vu comme foncteur $C^{\circ} \to \mathrm{Ab}$, on a
+$H^{i}(N(C), F) = H^{i}(\widehat{C}, F) = \varprojlim^{i}_{C^{\circ}} F$.
+
+Un foncteur $u : C \to C'$ est un \emph{homotopisme} si $N(u)$ est une
+équivalence faible ; c'est le terme de la page. Le critère cohomologique
+d'Artin et Mazur le caractérise : $u$ est un homotopisme si et seulement si,
+pour tout système de coefficients local $F'$ sur $C'$, les applications
+\[
+\varprojlim\nolimits^{i}_{C'^{\circ}} F' \longrightarrow
+\varprojlim\nolimits^{i}_{C^{\circ}} u^{*}F'
+\]
+sont bijectives, pour les $i$ où cela a un sens.\footnote{La page écrit au
+second membre $\varprojlim^{(i)}_{C} F$, au lieu de l'image inverse de $F'$, et
+indexe $\varprojlim$ par $C$ plutôt que par $C^{\circ}$. La parenthèse ouverte
+devant « du \emph{topos} » n'est pas refermée, et ce $\widehat{C}$ porte un
+chapeau pâle là où le reste de la page trace des tildes à la main.
+« Homotopisme » se dit aujourd'hui équivalence faible de catégories. Le
+théorème A de Quillen (1973) en donnera un critère suffisant par les catégories
+comma ; le livre d'Artin et Mazur, « Etale homotopy », paraîtra en 1969. Les
+deux sont postérieurs à ces notes.}
+
+\emph{Le topos.} À $C$ est associé le topos $\widehat{C}$, qui varie de façon
+\emph{covariante} avec $C$ : un foncteur $u$ induit un morphisme de topos
+$\widehat{u} : \widehat{C} \to \widehat{C'}$, dont l'image inverse est la
+restriction le long de $u$. La page ajoute que le foncteur $C \mapsto
+\widehat{C}$ n'a plus rien de pleinement fidèle, « semble-t-il ?? ».\footnote{C'est bien le cas : le topos des préfaisceaux ne voit $C$ qu'à
+complétion de Karoubi près, et deux catégories de même enveloppe karoubienne
+ont des topos de préfaisceaux équivalents. Les tildes de la page sur les $C$
+de ce paragraphe et du suivant sont tracés à la main.} Un système de
+coefficients ensembliste sur $C$ est un foncteur $C^{\circ} \to \mathrm{Ens}$
+qui envoie toute flèche sur une bijection.\footnote{La page les définit comme
+les foncteurs « transformant isomorphismes en isomorphismes », ce que fait tout
+foncteur. Le sens est celui du premier alinéa : toute flèche est envoyée sur un
+isomorphisme.} Ce sont exactement les objets localement constants de
+$\widehat{C}$, qui se définissent intrinsèquement à partir du topos. Il en
+résulte qu'être un homotopisme ne dépend que de $\widehat{u}$ : cela signifie
+que $H^{i}(\widehat{C'}, F') \to H^{i}(\widehat{C}, \widehat{u}^{*}F')$ est
+bijectif pour tout faisceau localement constant $F'$ sur $\widehat{C'}$.
+
+\emph{La catégorie des simplexes.} Dans l'autre sens, on associe à un ensemble
+simplicial $X$ la catégorie de ses simplexes $T(X) = \Delta/X$. Ses objets sont
+les simplexes de $X$ ; c'est une catégorie fibrée sur $\Delta$, à fibres les
+ensembles discrets $X_n$. Quillen prouve deux choses. D'abord, $N T(X)$ est
+canoniquement isomorphe à $X$ dans $\mathrm{Ho}(\mathrm{sSet})$. Ensuite,
+$T N(C)$ est canoniquement isomorphe à $C$ dans la localisée
+$\mathrm{Ho}(\mathrm{Cat})$ de $(\mathrm{Cat})$ par les homotopismes. Ces
+isomorphismes sont fonctoriels. Il en résulte formellement qu'un morphisme $f$
+d'ensembles simpliciaux est une équivalence faible si et seulement si $T(f)$
+est un homotopisme, et que $N$ et $T$ induisent des équivalences
+quasi-inverses
+\[
+\mathrm{Ho}(\mathrm{Cat}) \ \simeq\ \mathrm{Ho}(\mathrm{sSet}).
+\]
+C'est aujourd'hui un résultat classique.\footnote{On le cite d'ordinaire
+d'après Illusie (1972), qui l'attribue à Quillen ; Thomason (1980) en fera une
+équivalence de catégories de modèles. L'isomorphisme $N(\Delta/X) \to X$ est
+réalisé par l'application « dernier sommet ».}
+
+\pagerange{2}{3}
+\subsection*{Une catégorie et son opposée (pages 2 et 3)}
+
+Quillen construit de plus un isomorphisme canonique et fonctoriel entre $C$ et
+$C^{\circ}$ dans $\mathrm{Ho}(\mathrm{Cat})$, ou, ce qui revient au même,
+entre $N(C)$ et $N(C^{\circ})$ dans $\mathrm{Ho}(\mathrm{sSet})$. C'est un
+isomorphisme de la catégorie localisée, non un foncteur de $C$ dans
+$C^{\circ}$.\footnote{La page ne dit pas comment Quillen le construit, et nous
+n'en disons pas plus qu'elle.} Son effet sur les systèmes locaux est le
+suivant : un foncteur contravariant $F$ sur $C$, qui rend toute flèche
+inversible, devient le foncteur covariant qui a les mêmes valeurs sur les
+objets et $F(u)^{-1}$ sur une flèche $u$. Sur les groupoïdes fondamentaux,
+c'est l'isomorphisme évident $\pi_1(C) \to \pi_1(C^{\circ}) =
+\pi_1(C)^{\circ}$, $g \mapsto g^{-1}$.
+
+Il s'en déduit une interprétation faisceautique de la cohomologie d'un ensemble
+simplicial $X$ à coefficients dans un système local covariant $F$, définie
+classiquement par le complexe cosimplicial
+\[
+C^{n}(F) = \prod_{x \in X_n} F(x).
+\]
+On passe au système local contravariant défini par $F$, on le regarde comme un
+faisceau sur $T(X)$, c'est-à-dire comme un objet de $(\mathrm{sSet})_{/X}$, et
+on prend sa cohomologie.\footnote{La frappe porte $\coprod_{x \in X_n}$ ; la
+main écrit en regard un signe de produit suivi d'un point d'exclamation. Des
+cochaînes sont bien un produit, et nous écrivons $\prod$. « covariant » est une
+lecture incertaine : la frappe porte « con », trois lettres biffées à la
+machine, puis « variant », de sorte que « contravariant » n'est pas exclu. La
+suite, qui passe au système « contravariant défini par $F$ », appelle
+« covariant ».} La page ajoute que, pour un système de coefficients covariant
+non local, on n'a toujours pas d'interprétation faisceautique de la cohomologie
+classique ; ni, pour un système contravariant, de son homologie, ni
+inversement de sa cohomologie faisceautique en termes classiques. Un grand
+crochet manuscrit embrasse ce paragraphe, et la marge répond :
+« Si ! ».\footnote{La réponse ne dit pas laquelle des trois lacunes elle
+comble. Pour la première, il y a bien une réponse : un système de coefficients
+covariant quelconque sur $X$ est un faisceau sur la catégorie opposée
+$T(X)^{\circ}$, et sa cohomologie classique est celle des $\varprojlim^{i}$
+sur $T(X)$. Cette remarque est la nôtre.}
+
+\pagerange{3}{5}
+\subsection*{Catégories dérivées de systèmes locaux, et topos localement homotopiquement triviaux (pages 3 à 5)}
+
+Soit $u : C \to C'$ un homotopisme. Notons $D^{b}_{\mathrm{lc}}(C)$ la
+sous-catégorie triangulée de la catégorie dérivée bornée des faisceaux abéliens
+sur $\widehat{C}$ formée des complexes dont les faisceaux de cohomologie sont
+localement constants. Quillen montre que $u^{*} : D^{b}_{\mathrm{lc}}(C') \to
+D^{b}_{\mathrm{lc}}(C)$ est une équivalence, et réciproquement. La partie
+directe vaut avec un anneau de base quelconque, et aussi avec un anneau de
+coefficients constant tordu. La réciproque vaut à coefficients dans
+$\mathbb{Z}$, mais pas dans un anneau quelconque non nul.\footnote{La page dit
+« n'importe quel anneau de base (à condition de le supposer $\neq 0$ dans le
+cas de la réciproque) ». Pour la réciproque, c'est faux. Soit $C$ une catégorie
+dont le nerf est un $K(\mathbb{Z}/p, 2)$, et $u : C \to e$. À coefficients dans
+$\mathbb{Q}$, ou dans $\mathbb{F}_{\ell}$ avec $\ell \neq p$, les systèmes
+locaux sur $C$ sont constants, puisque $C$ est simplement connexe, et
+$H^{i}(C, M) = 0$ pour $i > 0$ ; $u^{*}$ est donc une équivalence, et $u$
+n'est pas un homotopisme. À coefficients dans $\mathbb{Z}$, l'équivalence des
+systèmes locaux donne l'isomorphisme des groupes fondamentaux, et celle des
+cohomologies à coefficients locaux donne l'homotopisme, par le théorème de
+Whitehead. Le contre-exemple est le nôtre ; c'est aussi celui de la lecture
+modernisée du dossier 162-5.}
+
+Le tapuscrit conjecture ensuite (« je pense que ce résultat (facile) doit
+pouvoir se généraliser ») un énoncé pour les topos. Soit $f : X \to X'$ un
+morphisme de topos qui induit des isomorphismes en cohomologie pour tout
+faisceau localement constant sur $X'$, le cas non commutatif inclus. Supposons
+$X$ et $X'$ \emph{localement homotopiquement triviaux} : pour tout entier $n
+\geq 1$, tout objet $U$ a un recouvrement $(U_i \to U)$ tel que
+\begin{itemize}
+  \item[a)] tout système local et toute section sur $U$ deviennent constants
+  sur les $U_i$ ;
+  \item[b)] pour tout groupe abélien $G$, les $H^{j}(U, G) \to H^{j}(U_i, G)$
+  sont nuls pour $1 \leq j \leq n$.
+\end{itemize}
+Alors $f^{*} : D^{b}_{\mathrm{lc}}(X') \to D^{b}_{\mathrm{lc}}(X)$ serait une
+équivalence. Il en irait de même avec un système local d'anneaux sur $X'$, et
+$f$ induirait une équivalence entre coefficients locaux sur $X$ et sur
+$X'$.\footnote{« $X$ et $X'$ » est écrit à la main au-dessus de « $X$ (resp.\
+$X'$) » biffé, de sorte que « soit » et « trivial » restent au singulier ;
+« $\geq 1$ » est ajouté à la main et « de $X'$ » biffé après « tout objet
+$U$ ». La flèche de « $f : X \to X'$ » manque à la frappe. En tête de la page
+4, la phrase a été reprise à la machine en plusieurs couches : « pleinement
+fidèle (resp.\ » y est biffé, et « foncteur pl.\ fid.\ (resp.\ une
+équivalence) » surcharge « isomorphisme » ; « une équivalence » est la lecture
+retenue. Une parenthèse biffée à la machine se demandait si cette propriété ne
+devait pas être mise dans les hypothèses sur $f$. Dans la phrase sur les
+coefficients locaux, la page écrit $C$, $C'$ là où le contexte demande $X$,
+$X'$.} Une note manuscrite au pied de la page 3, appelée en regard de la
+définition, en précise la portée : la condition « n'est typiquement \emph{pas}
+satisfaite par les schémas avec leur topologie étale (mais bien par […] loc.\
+noeth.\ avec top.\ Zariski) ».\footnote{Le mot après « bien par » est
+illisible sur 111, précédé d'un mot biffé ; la transcription de l'exemplaire
+annoté (dossier 162-5, page 34) y lit, sous doute, « variétés ».
+« typiquement », « avec » et « étale » sont aussi des lectures incertaines.
+Le constat se vérifie au moins sur un exemple, et l'argument est le nôtre :
+pour une courbe complexe $X$ de genre $\geq 1$ et un revêtement fini étale $U
+\to X$ de degré $d$, la trace montre que $H^{1}(X, \mathbb{Z}/m) \to H^{1}(U,
+\mathbb{Z}/m)$ est injectif pour $m$ premier à $d$. Aucun tel revêtement ne tue
+donc à la fois tous les $H^{1}$, comme le demande b). Nous ne développons pas
+le cas d'un recouvrement étale quelconque.}
+
+Le principe de démonstration proposé est le suivant. Un topos localement
+homotopiquement trivial est localement connexe et localement simplement
+connexe, d'où une bonne théorie des $\pi_0$ et $\pi_1$, qui sont ici discrets.
+On est ramené à un cas particulier du critère d'Artin et Mazur : un
+homomorphisme de groupes $G \to H$ est un isomorphisme s'il induit des
+bijections sur $H^{0}$ et $H^{1}$, cas non commutatif compris. La pleine
+fidélité se ramène, par la suite spectrale, aux $\mathrm{Ext}^{i}$ de
+coefficients locaux. Elle résulterait de deux faits : dans un topos localement
+homotopiquement trivial, les faisceaux abéliens localement constants sont
+stables par $\mathrm{Ext}^{i}$, et $M \mapsto M_X$ commute à ces
+$\mathrm{Ext}^{i}$. Pour $X$, $X'$ localement homotopiquement triviaux, trois
+conditions sur $f$ seraient alors équivalentes.
+\begin{itemize}
+  \item[a)] $f$ est un homotopisme : il induit un isomorphisme sur les $H^{i}$
+  pour tout système local sur $X'$, non nécessairement commutatif.
+  \item[b)] $f^{*} : D^{b}_{\mathrm{lc}}(X') \to D^{b}_{\mathrm{lc}}(X)$ est une
+  équivalence.
+  \item[a')] $f$ induit une équivalence entre systèmes locaux abéliens sur $X'$
+  et sur $X$, et des isomorphismes sur les $H^{i}$ correspondants.
+\end{itemize}
+La page ignore si l'on peut, dans a), se borner aux systèmes locaux
+commutatifs, et la main met en marge un point d'interrogation. La réponse est
+non.\footnote{Remarque nôtre. Il existe des groupes acycliques non triviaux,
+par exemple le groupe de Higman à quatre générateurs. Pour un tel groupe $G$,
+le morphisme du topos $BG$ vers le point, entre topos localement
+homotopiquement triviaux, induit des isomorphismes sur la cohomologie de tout
+système local abélien du point. Ce n'est pas un homotopisme : $H^{1}(-, G)$ le
+distingue, et a') échoue. Le phénomène est celui qu'exploite la construction
+« plus » de Quillen, postérieure à ces notes.}
+
+L'équivalence de a) et b) motive une définition des types d'homotopie par la
+catégorie $D^{b}_{\mathrm{lc}}(X)$.\footnote{L'exposant et l'indice de ce
+dernier $D$ sont ajoutés à la main.} On la munirait de la sous-catégorie pleine
+des systèmes locaux, du foncteur cohomologique à valeurs dans celle-ci et du
+produit tensoriel, ce qui fait sortir de $D^{b}$ vers $D^{-}$ : « redactor
+demerdetur ».\footnote{L'idée de décrire un type d'homotopie par des
+coefficients reviendra chez lui, sous une tout autre forme, dans « À la
+poursuite des champs » (1983), auprès duquel le dossier est classé. Nous
+n'allons pas plus loin.}
+
+\pagerange{5}{10}
+\section*{II. $n$-catégories, catégories $n$-uples, Gr-catégories (pages 5 à 10)}
+
+\pagerange{5}{6}
+\subsection*{Catégories doubles et 2-catégories (pages 5 et 6)}
+
+Le tapuscrit appelle « bi-catégorie » une catégorie dans $(\mathrm{Cat})$.
+C'est la donnée d'une catégorie $C_0$, de foncteurs source et but $p_1, p_2 :
+C_1 \rightrightarrows C_0$, d'un foncteur unité $C_0 \to C_1$ et d'une
+composition $\pi : C_1 \times_{C_0} C_1 \to C_1$, avec les axiomes habituels.
+On dit aujourd'hui \emph{catégorie double}.\footnote{Ce n'est pas une
+bicatégorie au sens de Bénabou (1967), c'est-à-dire une 2-catégorie faible :
+c'est la catégorie double d'Ehresmann (1963). Nous employons le nom moderne
+pour éviter le contresens. La page dit « un triple » pour une donnée à cinq
+termes et ne mentionne pas le foncteur unité, que nous ajoutons. Sur cette
+page et la suivante, la main barre les exposants tapés $0$, $1$, $00$, …
+et les récrit en indices ; nous suivons la correction.} On identifie
+$(\mathrm{Cat})$ à la sous-catégorie pleine de $(\mathrm{sSet})$ formée des
+ensembles simpliciaux qui satisfont la condition d'exactitude « familière » :
+transformer sommes amalgamées en produits fibrés, soit $X_n \simeq X_1
+\times_{X_0} \cdots \times_{X_0} X_1$, ce qu'on appelle aujourd'hui la
+condition de Segal.\footnote{La page laisse la phrase en suspens, « des objets
+qui … », et énonce la condition une ligne plus bas, pour les objets
+bisimpliciaux ; nous la complétons par celle-ci. Le nom de Segal est
+postérieur.} De même, les catégories doubles s'identifient aux ensembles
+bisimpliciaux $(X_{ij})$ qui satisfont cette condition ligne par ligne et
+colonne par colonne. Les catégories triples s'identifient à des objets
+trisimpliciaux, et ainsi de suite.
+
+\emph{Exemple.} Pour une catégorie $C$, posons $C_0 = C$ et $C_1 =
+\mathrm{Fl}(C)$, la catégorie des flèches, avec les structures évidentes. Les
+composantes simpliciales supérieures sont les catégories $\mathrm{Fl}^{n}(C)$
+des suites de $n$ flèches, et l'ensemble bisimplicial correspondant a pour
+composantes $\mathrm{Hom}([n] \times [m], C)$. Les objets de $X_{11}$ sont les
+carrés commutatifs de $C$, qu'on peut lire de deux manières comme morphismes de
+flèches. L'échange des lignes et des colonnes est une symétrie de la catégorie
+des catégories doubles ; de même, le groupe symétrique $\mathfrak{S}_n$ opère
+sur la catégorie des catégories $n$-uples.
+
+Une \emph{2-catégorie} (stricte) est une catégorie double dont la catégorie
+d'objets $C_0$ est discrète : en termes bisimpliciaux, un ensemble bisimplicial
+dont la première ligne est un ensemble simplicial constant. Il paraît qu'on a
+une interprétation analogue des $n$-catégories en termes d'ensembles
+$n$-simpliciaux. Le tapuscrit note de demander à Quillen le rapport entre les
+$m$-catégories dans $(n\text{-Cat})$ et les ensembles
+$(m+n)$-simpliciaux.\footnote{Un double trait vertical manuscrit, en marge,
+signale ces deux phrases. Suit, biffé à la machine : « En particulier entre
+cette dernière notion et celle de ». C'est la voie que prendront, pour les
+$n$-catégories faibles, Tamsamani et Simpson à la fin des années 1990.}
+
+\pagerange{7}{7}
+\subsection*{Groupes dans $(\mathrm{Cat})$ et catégories de Picard (page 7)}
+
+Les groupes dans $(\mathrm{Cat})$ sont les groupes simpliciaux qui satisfont
+la condition de Segal, et qui sont donc déterminés par $C_0$ et $C_1$. Par la
+correspondance de Dold--Kan (le « tapis de Dold »), les groupes
+\emph{abéliens} dans $(\mathrm{Cat})$ forment une catégorie équivalente à celle
+des complexes de chaînes de longueur 1 :
+\[
+0 \longleftarrow C_0 \xleftarrow{\ d\ } C_1 \longleftarrow 0 .
+\]
+Le groupe abélien dans $(\mathrm{Cat})$ associé à un tel complexe est la
+catégorie de Picard du complexe, « “ma” construction chérie » : ses objets sont
+les éléments de $C_0$, et ses flèches de $x$ vers $y$ les $z \in C_1$ tels que
+$dz = y - x$. On obtient ainsi, à isomorphisme près, tous les groupes abéliens
+de $(\mathrm{Cat})$.\footnote{La notion de catégorie de Picard est la sienne.
+Deligne en donnera l'exposé de référence en 1973 (SGA 4, exposé XVIII, §
+1.4), avec l'équivalence entre catégories de Picard strictement commutatives
+et complexes de longueur 1 à quasi-isomorphisme près.}
+
+Complément important : toute Gr-catégorie, c'est-à-dire toute catégorie
+monoïdale où objets et flèches sont inversibles, est équivalente à un vrai
+groupe dans $(\mathrm{Cat})$. Le tapuscrit avait étendu l'énoncé au cas
+commutatif, par deux parenthèses tapées en interligne ; la main les biffe, et
+avec elles le mot « commutative ».\footnote{La biffure est fondée. Une
+catégorie de Picard symétrique dont la symétrie $c_{x,x}$ n'est pas l'identité
+ne peut pas être équivalente à un groupe abélien strict dans
+$(\mathrm{Cat})$ : seules les catégories de Picard strictement commutatives le
+sont. En marge, en regard de ces lignes, une note manuscrite écrite de biais
+est barrée de traits obliques et ne se lit pas sur 111. Sur l'exemplaire
+annoté (dossier 162-5, page 38), la marge porte en outre une note conservée
+selon laquelle une « cat.\ de Picard commut. » ne se réalise que par un
+$(\mathrm{Cat})$-groupe non commutatif ; la transcription de 111 ne la
+rapporte pas. Le terme de Gr-catégorie, qu'on lit ici en 1968, est celui que
+reprendra la thèse de Hoàng Xuân Sính (1975), préparée sous sa direction ; on
+dit aujourd'hui aussi 2-groupes.} Une ligne manuscrite ajoute : quand on
+« simplifie » modulo l'équivalence de Grab-catégories, cela revient à
+travailler dans la catégorie \emph{dérivée} des complexes, dont les seuls
+invariants sont $H_0$ et $H_1$, autrement dit $\pi_0$ et $\pi_1$.\footnote{Les
+mots « simplifie », « Grab », « seuls invariants », $H_0$, $H_1$ sont pâlis
+sur la photocopie, et un mot y est illisible ; l'exemplaire annoté (dossier
+162-5, page 38) les lit clairement. Pour les objets, l'énoncé est exact parce
+que $\mathrm{Ext}^{2}_{\mathbb{Z}} = 0$ : un complexe de longueur 1 est
+quasi-isomorphe à $H_0 \oplus H_1[1]$. Les morphismes voient encore
+$\mathrm{Ext}^{1}(H_0, H_1)$.}
+
+Une note manuscrite encadrée, en tête de la page 7, avertit : « Attention à la
+catégorie $\mathrm{Hom}_{\mathrm{grab}}$, qui s'identifie à la catégorie
+définie par un $R\mathrm{Hom}_{\mathbb{Z}}(C_{\bullet}, C'_{\bullet})$, ce
+point devant être élucidé ! ». Les « Grab » sont les groupes abéliens, et il
+s'agit des homomorphismes entre les catégories de Picard $P(C_\bullet)$,
+$P(C'_\bullet)$ de deux complexes de longueur 1. L'énoncé correct demande une
+troncature : les foncteurs additifs de $P(C_\bullet)$ dans $P(C'_\bullet)$
+forment la catégorie de Picard associée à $\tau^{\leq 0}
+R\mathrm{Hom}(C_\bullet, C'_\bullet)$, en indexation
+cohomologique.\footnote{La troncature est notre précision : $R\mathrm{Hom}$
+entre complexes de longueur 1 a de la cohomologie en trois degrés, $-1$, $0$
+et $1$, et une catégorie de Picard n'en retient que deux. C'est sous cette
+forme que l'énoncé figure chez Deligne (SGA 4 XVIII).}
+
+On a ainsi une classification beaucoup plus restreinte que celle des H-espaces
+(resp.\ des H-espaces homotopiquement commutatifs) à homotopie près. La raison
+en est qu'on est plus exigeant, dans le cadre catégorique, sur l'associativité
+(resp.\ la commutativité). On ne demande pas seulement l'existence
+d'isomorphismes d'associativité, qui suffirait pour avoir un groupe dans
+$\mathrm{Ho}(\mathrm{Cat}) \simeq \mathrm{Ho}(\mathrm{sSet})$ ; on les suppose
+\emph{donnés}, avec des compatibilités, et c'est ce qui permet de se ramener à
+de vrais groupes dans $(\mathrm{Cat})$. La main biffe la suite, « resp.\ de
+vraie commutativité », pour la raison qu'on vient de dire.\footnote{« donnés »
+est souligné à la main ; une croix manuscrite de renvoi suit
+« d'associativité », et un crochet manuscrit entoure les deux dernières lignes.}
+
+\pagerange{8}{9}
+\subsection*{Le cran suivant : groupes dans $(2\text{-Cat})$ (pages 8 et 9)}
+
+On doit trouver une meilleure approximation, d'un cran, de la classification
+topologique, en passant aux groupes (resp.\ groupes abéliens) dans
+$(2\text{-Cat})$, ou plus généralement aux « Gr-2-catégories » (resp.\
+« Grab-2-catégories »). Deux opérations relient les crans. Une Grab-catégorie
+définit une Grab-2-catégorie, comme une catégorie définit une 2-catégorie :
+c'est l'analogue d'un « cosquelette tronqué ». Inversement, une
+Grab-2-catégorie définit une Grab-catégorie, celle des automorphismes de
+l'objet unité ; le tapuscrit y voit l'analogue du « tuage des groupes
+d'homotopie en dimension $> 1$ ».\footnote{Remarque nôtre : à calculer les
+invariants, la seconde opération ressemble plutôt au passage à l'espace des
+lacets. Les $\pi_0$, $\pi_1$ de la Gr-catégorie des automorphismes de l'unité
+sont les $\pi_1$, $\pi_2$ de la Gr-2-catégorie de départ ; c'est un décalage
+plus qu'une troncature. Deux mots de la parenthèse portent un signe manuscrit
+de renvoi.} Pour la notion « grossière », l'idée de sa lettre à Verdier était
+qu'on doit trouver la même chose que les tronqués au cran 2 dans la catégorie
+\emph{homotopique} des H-espaces, c'est-à-dire ce qu'on en déduit en tuant les
+groupes d'homotopie en dimension $> 2$.\footnote{Les signes $>$ de ce passage
+sont récrits à la main. La lettre à Verdier n'est pas dans le dossier.}
+
+Le tapuscrit note de demander à Quillen si les objets-groupes et les objets
+connexes de la catégorie homotopique pointée forment des catégories
+équivalentes par le foncteur espace des lacets. La main répond en marge :
+« non, on a un foncteur pl.\ fidèle (?) mais pas ess.\ surjectif ». La
+non-surjectivité est juste, et le point d'interrogation justifié : le foncteur
+des lacets n'est même pas fidèle.\footnote{Remarque nôtre. La classe $ab \in
+H^{4}(S^{2} \times S^{2}; \mathbb{Z})$, produit des deux générateurs, définit
+une application non homotope à zéro $S^{2} \times S^{2} \to K(\mathbb{Z}, 4)$ ;
+sa bouclée est pourtant homotope à zéro, parce que la suspension
+cohomologique annule les produits. La note de marge est écrite de biais ; la
+question est signalée par un double trait vertical, et « ponctuée », tapé en
+interligne, est mis à sa place par un trait.}
+
+\emph{Les vrais groupes abéliens dans $(2\text{-Cat})$.} L'approche de Quillen
+les identifie d'abord à des groupes abéliens dans la catégorie des catégories
+doubles, donc à des groupes abéliens bisimpliciaux particuliers, soumis à la
+condition de Segal sur chaque ligne et chaque colonne. Par la version
+bisimpliciale de Dold--Kan, ils équivalent aux bicomplexes de groupes abéliens
+nuls hors du carré $0 \leq i, j \leq 1$. La condition que la première ligne
+corresponde à un groupe simplicial constant signifie qu'elle se réduit à son
+terme de degré 0, et le bicomplexe devient\footnote{La frappe portait
+« colonne », que la main biffe et remplace par « cond. ». Les deux
+« $\leftarrow 0$ » de droite sont ajoutés à la main.}
+
+\begin{tikzcd}
+C_{00} & 0 \arrow[l] & 0 \arrow[l] \\
+C_{10} \arrow[u] & C_{11} \arrow[l] \arrow[u] & 0 \arrow[l]
+\end{tikzcd}
+
+Ces bicomplexes s'identifient aux complexes de chaînes de longueur 2,
+$C_{11} \to C_{10} \to C_{00}$, et la catégorie des groupes abéliens dans
+$(2\text{-Cat})$ est donc équivalente à celle des complexes de longueur 2. La
+2-catégorie associée à un tel complexe est « mon interprétation chérie ». Il
+resterait à décrire, par un complexe $R\mathrm{Hom}$, la 2-Grab-catégorie des
+homomorphismes entre deux telles 2-Grab-catégories strictes.
+
+L'idée qui se dégage, et que Quillen, « on espère », va expliciter, est que
+les groupes abéliens dans $(n\text{-Cat})$ correspondent aux complexes de
+longueur $n$. On raisonnerait soit à isomorphisme près des deux côtés, soit à
+$n$-équivalence près d'un côté et dans la catégorie dérivée de l'autre, au
+moyen de $\mathrm{Hom}^{\bullet}$ (resp.\
+$R\mathrm{Hom}^{\bullet}$).\footnote{Pour des groupes abéliens
+\emph{stricts}, la catégorie dérivée est bien la bonne cible. Pour les
+versions faibles et symétriques, elle ne l'est plus : ce sont des spectres
+tronqués qui les classent, et non des complexes. La biffure « resp.\ de vraie
+commutativité » de la page 7 enregistre déjà ce phénomène au cran 1.}
+
+\pagerange{9}{10}
+\subsection*{Les $K_n$ d'une catégorie monoïdale (pages 9 et 10)}
+
+Soit $C$ une catégorie munie d'un produit tensoriel associatif, et
+éventuellement unitaire : un bifoncteur avec des isomorphismes
+d'associativité, mais sans inverses. On doit pouvoir lui associer une
+Gr-catégorie universelle, comme on associe à un monoïde son groupe symétrisé,
+d'où des invariants $K_0(C)$ et $K_1(C)$. On suppose qu'on trouvera de même,
+pour tout $n$, une Gr-$n$-catégorie universelle où envoyer $C$ de façon
+compatible à $\otimes$ ; ses invariants $\pi_n$ seraient par définition les
+$K_n(C)$. Un cas intéressant est celui d'une catégorie à produits finis,
+additive par exemple, où $\otimes$ est le produit. Mais pour une catégorie
+abélienne il y a une notion plus adéquate du $K_0$, qui devrait correspondre à
+une meilleure notion des $K_i$, « inspirée du tapis de Roos ». C'est sans doute
+en termes de « vraies » catégories triangulées qu'il faudra poser les
+définitions.\footnote{Un crochet ouvrant manuscrit précède « Mais on
+notera ». Nous n'identifions pas le « tapis de Roos ». Quillen définira les
+$K_n$ supérieurs en 1970--1972, par la construction « plus » puis par la
+construction $Q$ (publiée en 1973) ; pour une catégorie monoïdale symétrique,
+ce sera par complétion en groupe (Grayson, 1976, d'après Quillen).
+Schlichting (2002) montrera que la $K$-théorie n'est pas un invariant de la
+catégorie triangulée seule, ce qui donne du poids aux guillemets de
+« vraies ».}
+
+Peut-être Quillen a-t-il une définition simpliciale plus directe du H-espace
+qui devrait correspondre à $C$, sans passer par les $n$-catégories. La marge
+répond : « oui ».\footnote{Avec un double trait vertical. C'est en effet par un
+espace que Quillen définira les $K_n$. La marge n'est pas datée.} Ce n'est
+certainement pas en général le nerf $N(C)$ : une catégorie additive est
+contractile, puisque le foncteur identique est homotope au foncteur nul, une
+transformation naturelle de l'un à l'autre suffisant. Pourtant, lorsque $C$
+est une Gr-catégorie, le nerf naïf est le bon : on trouve des $\pi_0$ et
+$\pi_1$ qui sont aussi ceux de $C$ au sens des catégories sans Gr-structure.
+
+Une note manuscrite sous la frappe ajoute : « A expliquer : pour des
+Gr-$n$-catégories, les $\pi_i$ au sens semi-simplicial sont aussi les $\pi_i$
+au sens Gr-$n$-catégories, savoir les objets à isom.\ près dans divers
+$\mathrm{Hom}(1, 1)$ … ».\footnote{La seconde moitié de la note est barrée de
+traits obliques, sous lesquels elle reste lisible par endroits. Elle parlait
+d'une interprétation de l'opération des lacets, $\Omega$, en termes du
+« shift géométrique » sur les $n$-catégories ; plusieurs mots en sont
+incertains, et un est illisible. L'exemplaire annoté (dossier 162-5, page 41)
+porte la même phrase.}
+
+\pagerange{11}{16}
+\section*{III. Point de vue « motivique » en théorie du cobordisme (pages 11 à 16)}
+
+\pagerange{11}{13}
+\subsection*{Le problème universel et la catégorie $\mathbf{B}$ (pages 11 à 13)}
+
+\emph{Le problème.} Soit $\mathcal{V}$ la catégorie des variétés
+différentiables compactes sans bord, non nécessairement orientables, dont les
+morphismes sont les classes d'homotopie d'applications continues.\footnote{La
+frappe ne dit pas « compactes ». Nous l'ajoutons : les images directes, la
+composition des correspondances et la surjectivité de Thom invoquée plus bas
+l'exigent. La main écrit justement « (compactes ?) » à cet endroit ; c'est
+l'une des notes propres à la photocopie, absente de l'exemplaire annoté. La
+généralisation de la page 16 lève ensuite l'hypothèse.} Soit $\mathcal{E}$ une
+catégorie. On s'intéresse aux couples $(F_\bullet, F^\bullet)$ formés d'un
+foncteur covariant $F_\bullet : \mathcal{V} \to \mathcal{E}$ et d'un foncteur
+contravariant $F^\bullet : \mathcal{V}^{\circ} \to \mathcal{E}$, qui ont les
+mêmes valeurs sur les objets, et qui satisfont le changement de base pour tout
+carré cartésien d'applications différentiables où $f$ et $g$ sont transverses :
+
+\begin{tikzcd}
+X' \arrow[r, "g'"] \arrow[d, "f'"'] & X \arrow[d, "f"] \\
+Y' \arrow[r, "g"'] & Y
+\end{tikzcd}
+
+\[
+g^{\bullet} f_{\bullet} = f'_{\bullet}\, g'^{\bullet}
+\qquad (f_\bullet = F_\bullet(f),\ f^\bullet = F^\bullet(f)).
+\]
+La question est de trouver un couple universel, et Quillen prouve que la
+construction suivante en donne un.\footnote{Ce cadre, deux fonctorialités liées
+par le changement de base transverse, est celui que Quillen rendra célèbre en
+1971 pour le cobordisme complexe (« Elementary proofs of some results of
+cobordism theory using Steenrod operations ») ; on le retrouve dans les
+théories bivariantes de Fulton et MacPherson (1981) et dans le cobordisme
+algébrique de Levine et Morel (2007). Tout cela est postérieur à ces notes. La
+page note $B$ la catégorie but ; nous écrivons $\mathcal{E}$, pour garder
+$\mathbf{B}$ à la solution.}
+
+\emph{L'anneau $B(X)$.} Pour $X$ dans $\mathcal{V}$, soit $B(X)$ l'ensemble des
+classes de variétés $Z \to X$ au-dessus de $X$ pour la relation de cobordisme :
+$Z' \to X$ et $Z'' \to X$ sont cobordantes s'il existe une variété à bord $W$ et
+$W \to X$ tels que $\partial W = Z' \sqcup Z''$, les deux applications étant
+induites. La somme est la réunion disjointe ; c'est une loi de groupe où tout
+élément est d'ordre 2. Le produit est le produit fibré, après qu'on a rendu les
+deux applications transverses par le théorème de Thom. L'anneau est gradué par
+la dimension relative : $B_d(X)$ est formé des $Z \to X$ avec $\dim Z - \dim X
+= d$. Pour $f : X \to Y$, l'image directe $f_\bullet : B(X) \to B(Y)$ est la
+composition avec $f$, et l'image inverse $f^\bullet : B(Y) \to B(X)$ le produit
+fibré transverse. $B$ est ainsi un foncteur en anneaux gradués contravariant,
+et un foncteur en groupes covariant, et la formule de changement de base
+entraîne la formule de projection habituelle.\footnote{La graduation (« NB
+L'anneau est de plus gradué par la dimension relative … », en interligne, et
+« (gradué) ») et la parenthèse qui rattache la formule de projection au
+changement de base sont des ajouts manuscrits ; « gradué » est une lecture
+incertaine. En termes d'aujourd'hui, $B_d(X)$ est le groupe de cobordisme non
+orienté $MO^{-d}(X)$ d'Atiyah (1961) ; par la dualité de Poincaré--Atiyah,
+c'est aussi le bordisme $\mathfrak{N}_{n+d}(X)$ de Thom, si $X$ est de
+dimension $n$. La page dit « anneau de bordisme ».}
+
+\emph{La catégorie $\mathbf{B}$.} Les constructions usuelles de la théorie des
+correspondances donnent une catégorie $\mathbf{B}$, dont les objets sont ceux
+de $\mathcal{V}$ et dont les morphismes sont donnés par
+\[
+\mathrm{Hom}_{\mathbf{B}}(X, Y) = B(X \times Y),
+\qquad
+\beta \circ \alpha = p_{13\bullet}\big(p_{12}^{\bullet}\alpha \cdot
+p_{23}^{\bullet}\beta\big),
+\]
+où les $p_{ij}$ sont les projections de $X \times Y \times Z$.\footnote{La page
+renvoie aux « constructions bien connues » ; la formule de composition est la
+nôtre, et c'est elle qui demande $Y$ compact.} La symétrie $B(X \times Y)
+\simeq B(Y \times X)$ donne un isomorphisme canonique $\mathbf{B} \simeq
+\mathbf{B}^{\circ}$, qui est l'identité sur les objets. Le foncteur $F_\bullet
+: \mathcal{V} \to \mathbf{B}$ est l'identité sur les objets et envoie une
+flèche sur son graphe ; composé avec la symétrie, il donne $F^\bullet :
+\mathcal{V}^{\circ} \to \mathbf{B}$.\footnote{La frappe écrit « $F^{\bullet} :
+C \to \mathbf{B}$ », sans l'opposée qu'appelle un foncteur contravariant.} Le
+couple satisfait aux conditions voulues ; la page note que cela devrait être
+formalisé pour des correspondances générales.
+
+\emph{La propriété universelle.} Soit $(F'_\bullet, F'^\bullet)$ un couple à
+valeurs dans une catégorie $\mathcal{E}'$, et notons $X' = F'(X)$. Il faut
+définir des applications $B(X \times Y) \to \mathrm{Hom}_{\mathcal{E}'}(X',
+Y')$. On envoie $Z \to X \times Y$, de composantes $p$ et $q$, sur le composé
+\[
+X' \xrightarrow{\ F'^{\bullet}(p)\ } Z' \xrightarrow{\ F'_{\bullet}(q)\ } Y' .
+\]
+Il faut voir que le résultat ne dépend que de la classe de cobordisme de $Z$
+au-dessus de $X \times Y$.\footnote{La page écrit « un $Z_1$ cobordant au
+dessus de $X$ » ; il s'agit d'un cobordisme au-dessus de $X \times Y$, comme
+le dit la phrase suivante. « est le même » est ajouté à la main.} Soit $T \to
+X \times Y$ un cobordisme, avec $\partial T = Z_0 \sqcup Z_1$. En « doublant »
+$T$, on obtient une variété $W$ au-dessus de $S^{1}$, par $p : W \to S^{1}$,
+transverse au-dessus de deux points $s_0$, $s_1$ dont les fibres sont $Z_0$ et
+$Z_1$, et l'application vers $X \times Y$ se prolonge à $W$. Notant $\alpha_i :
+Z_i \hookrightarrow W$ l'inclusion, on est ramené à montrer que le composé
+\[
+W' \xrightarrow{\ \alpha_i^{\bullet}\ } Z'_i \xrightarrow{\ \alpha_{i\bullet}\ } W'
+\]
+ne dépend pas de $i$. Considérons le carré cartésien d'inclusions, transverse
+pour $s$ valeur régulière de $p$ :
+
+\begin{tikzcd}
+W_{s} \arrow[r, "\alpha_{s}"] \arrow[d, "\alpha_{s}"'] & W \arrow[d, "{\Gamma = (p, \mathrm{id}_{W})}"] \\
+W \arrow[r, "i_{s}"'] & S^{1} \times W
+\end{tikzcd}
+
+Le changement de base donne
+\[
+\alpha_{s\bullet}\,\alpha_s^{\bullet} = \Gamma^{\bullet}\, i_{s\bullet},
+\]
+et le second membre ne dépend pas de $s$, puisque la classe d'homotopie de
+$i_s$ n'en dépend pas. La page conclut : « Le reste est sans doute
+l'AQT ».\footnote{La page écrit $X$ pour notre $W$, qui est son
+$\overline{T}'$, et note $\overline{g}$ le prolongement. Elle écrit
+$\alpha_s^{*}\alpha_{s*} = \Gamma^{*} i_{s*}$ : lu comme une composition, le
+premier membre ne se compose pas, et nous écrivons l'ordre qui convient. Le
+changement de base pris dans l'autre sens donne aussi $i_s^{\bullet}
+\Gamma_{\bullet}$, qui convient de même. Les $\alpha$, les astérisques et les
+étiquettes du carré sont portés à la main dans des blancs de la frappe ; la
+première étiquette du composé se lit $\alpha_i$ sans astérisque, ici comme sur
+l'exemplaire annoté, et l'étiquette $\Gamma = (p, \mathrm{id})$, pâle sur la
+photocopie, a son signe $=$ souligné. Nous ne savons pas résoudre
+l'abréviation « AQT ».}
+
+\pagerange{13}{14}
+\subsection*{Structure des $B_\bullet(X)$, enveloppe de Karoubi, l'objet $\Lambda(-1)$ (pages 13 et 14)}
+
+\emph{L'anneau des coefficients.} Les $B_\bullet(X)$ sont des algèbres graduées
+sur $\Lambda = B_\bullet(\mathrm{pt})$. $\Lambda$ est à degrés positifs et
+réduit à $\mathbb{F}_2$ en degré 0 : c'est l'anneau de bordisme non orienté
+$\mathfrak{N}_*$ de Thom. C'est une algèbre de polynômes $\mathbb{F}_2[x_i]$,
+avec un générateur $x_i$ de degré $i$ pour chaque entier $i \geq 1$ qui n'est
+pas de la forme $2^{\nu} - 1$.\footnote{La description des générateurs est une
+insertion manuscrite, pâle et rognée au bord droit sur 111, lue avec
+l'exemplaire annoté (dossier 162-5, page 45) ; « entier $\geq 1$ » et « $\neq$
+de la forme $2^{\nu} - 1$ » restent des lectures incertaines. Elle est
+exacte.}
+
+On a un homomorphisme évident d'anneaux gradués $B_\bullet(X) \to
+H^{\bullet}(X)$. Il envoie $Z \to X$ sur l'image de $1 \in H^{0}(Z)$ par
+l'homomorphisme de Gysin, envoie $B_{-k}$ dans $H^{k}$, et il est donc nul en
+degrés $> 0$. Il est surjectif par Thom : toute classe provient d'une variété
+compacte.\footnote{$H^{\bullet}(X)$ est la cohomologie à coefficients dans
+$\mathbb{F}_2$, comme le précise en marge une note propre à la photocopie :
+« NB $H^{*}(X)$ $(= H^{*}(X, \mathbb{F}_2))$ ». La surjectivité combine le
+théorème de représentabilité de Thom pour l'homologie modulo 2 et la dualité
+de Poincaré, d'où, encore, l'hypothèse de compacité.} Une note manuscrite
+ajoute : « en fait $H^{\bullet}(X) \simeq B_\bullet(X)/\Lambda^{+}B_\bullet(X)$
+», et c'est exact.\footnote{« en fait » est une lecture incertaine.}
+
+On prouve même qu'il existe un relèvement fonctoriel $s : H^{\bullet}(X) \to
+B_\bullet(X)$ tel que l'homomorphisme induit
+\[
+H^{\bullet}(X) \otimes_{\mathbb{F}_2} \Lambda \xrightarrow{\ \sim\ }
+B_\bullet(X)
+\]
+soit un isomorphisme de $\Lambda$-modules. Le tapuscrit ajoute que ce sera vrai
+pour tout relèvement pris individuellement ; c'est exact pour tout relèvement
+homogène.\footnote{Justification (nôtre). $B_\bullet(X)$ est un
+$\Lambda$-module libre (Conner et Floyd, 1964), de quotient $H^{\bullet}(X)$
+modulo $\Lambda^{+}$. Par le lemme de Nakayama gradué, les images d'une base
+homogène engendrent, et un épimorphisme entre modules libres de même rang
+gradué, de dimension finie en chaque degré, est un isomorphisme.} Le tapuscrit
+disait le relèvement « compatible avec multiplication » ; la main met ces mots
+entre parenthèses et écrit au-dessus « il est douteux qu'il soit ». Elle fait
+aussi de la seconde condition une question : « Quillen ignore si » le
+relèvement est compatible avec les homomorphismes de Gysin.\footnote{« a) »
+est raturé à la main ; devant b), un crochet manuscrit ouvre la clause, et
+« Quillen ignore si » est écrit au-dessus de « Le » biffé. Un point
+d'interrogation et un grand trait en arc sont en marge. Ces deux questions,
+multiplicativité et compatibilité aux images directes, sont exactement celles
+que tranchera la note de Quillen de 1969, « On the formal group laws of
+unoriented and complex cobordism theory ». La loi de groupe formel du
+cobordisme non orienté y est universelle parmi les lois $F$ sur les
+$\mathbb{F}_2$-algèbres telles que $F(x,x) = 0$ ; toute telle loi est
+isomorphe à la loi additive sans lui être égale, et c'est cet écart qui
+gouverne la compatibilité d'un relèvement multiplicatif aux images de Gysin.
+Ces notes de septembre 1968 ne pouvaient pas le savoir, et nous ne leur
+prêtons rien de ce qui précède.}
+
+\emph{Modules et enveloppe de Karoubi.} Le foncteur $X \mapsto B_\bullet(X)$
+est pleinement fidèle, de $\mathbf{B}$ dans la catégorie des $\Lambda$-modules
+gradués libres de type fini. Les modules obtenus ont leurs générateurs en
+degrés $\leq 0$ ; pour $X$ connexe, il y a un seul générateur de degré 0, et ils
+satisfont la dualité de Poincaré.\footnote{La pleine fidélité résulte de
+l'isomorphisme précédent, de la formule de Künneth et de la dualité de
+Poincaré ; la page ne la détaille pas.} Passons à l'enveloppe pseudo-abélienne
+$\widetilde{\mathbf{B}}$ de $\mathbf{B}$, c'est-à-dire à son enveloppe de
+Karoubi, puisque $\mathbf{B}$ est déjà additive. On obtient tous les
+$\Lambda$-modules gradués libres de type fini à générateurs en degrés $\leq 0$.
+C'est une catégorie additive et karoubienne, munie d'un $\otimes$ induit par le
+produit des variétés, qui a toutes les vertus, sauf d'être abélienne et d'avoir
+des $\mathrm{Hom}$ internes.\footnote{La page dit « catégorie
+quasi-abélienne », au sens de pseudo-abélienne. Ce n'est pas la catégorie
+quasi-abélienne au sens moderne (Schneiders, 1999), notion toute différente.
+Deux notes manuscrites propres à la photocopie le disent en toutes lettres :
+« i.e.\ l'enveloppe “Karoubienne” », de biais en regard du mot, que la main
+souligne d'un trait ondulé (page 13), et « $=$ karoubienne $+$ additive »,
+en tête de la page 14. Le tilde de $\widetilde{\mathbf{B}}$ est ajouté à la
+main.}
+
+\emph{L'objet $\Lambda(-1)$.} Pour obtenir les $\mathrm{Hom}$ internes, on peut
+paraphraser la construction des motifs. Soit $p : S^{1} \to e$ l'application
+du cercle sur un point. Le morphisme $p^{\bullet} : e \to S^{1}$ de
+$\mathbf{B}$ est scindé par le choix d'un point de $S^{1}$, et l'on pose
+\[
+\Lambda(-1) = \mathrm{coker}\big(p^{\bullet} : e \to S^{1}\big)
+\ \in\ \widetilde{\mathbf{B}},
+\qquad
+B_\bullet(S^{1}) = \Lambda \oplus \Lambda(-1).
+\]
+C'est un module libre sur un générateur de degré $-1$, donc un objet de poids
+1, le poids étant le degré des générateurs changé de signe.\footnote{La frappe
+écrit $S$ pour le cercle, et « $\Lambda(-1)$ » est ajouté à la main, comme
+« en » devant « considérant ». Le scindage, qui fait exister le conoyau dans
+l'enveloppe karoubienne, est notre précision. C'est l'analogue de la
+décomposition du motif de la droite projective en l'unité et le motif de
+Lefschetz.} Le foncteur $M \mapsto M(-1) = M \otimes \Lambda(-1)$ de
+$\widetilde{\mathbf{B}}$ dans elle-même est pleinement fidèle, et une
+construction formelle standard permet de rendre $\Lambda(-1)$ inversible. Dans
+la catégorie obtenue, les $\mathrm{Hom}$ internes existent et valent $\check{X}
+\otimes Y$ ; on y trouve \emph{tous} les $\Lambda$-modules gradués libres de
+type fini.\footnote{Le tilde et le signe de $\check{X}$ sont portés à la
+main.}
+
+Cette catégorie n'est pas abélienne, puisque $\Lambda$ n'est pas un corps. On
+s'attend à ce que la catégorie abélienne engendrée soit celle des
+$\Lambda$-modules gradués de présentation finie. Elle est bien abélienne,
+quoique $\Lambda$ ne soit pas noethérien : $\Lambda$ est limite inductive
+d'anneaux de polynômes en un nombre fini de variables, à morphismes de
+transition plats, et il est donc cohérent.\footnote{Le tapuscrit demandait si
+$\Lambda$ était noethérien, et si le nombre de générateurs était fini ; la
+main biffe la question et répond par la phrase que nous rendons. « de type »
+est corrigé en « de présentation » à la main. Le « lim » manuscrit ne porte pas
+de flèche visible. Le terme d'anneau cohérent est le nôtre.}
+
+\pagerange{14}{16}
+\subsection*{L'analogie avec les motifs, la catégorie $\mathbf{S}$ et le groupe de Steenrod (pages 14 à 16)}
+
+\emph{L'analogie.} Cette construction ressemble à une théorie des motifs où
+l'on n'aurait pas passé à l'équivalence homologique des cycles, mais gardé
+l'équivalence rationnelle, bien trop fine à beaucoup d'égards.\footnote{On
+parle aujourd'hui de motifs de Chow, dans le cadre exposé par Manin en 1968.
+« à beaucoup » et « convient », un peu plus loin, sont des lectures que la
+transcription a dû établir sur des frappes surchargées ; la seconde reste
+incertaine.} Pour un équivalent plus étroit, on pourrait poser le même
+problème universel en prenant l'équivalence homologique des morphismes, via le
+graphe, au lieu de l'équivalence homotopique. Un passage biffé à la main en
+tirait une conclusion décevante : la catégorie solution aurait pour flèches
+toutes les correspondances cohomologiques, et donnerait, après inversion de
+$\mathbb{F}_2(-1)$, tous les espaces vectoriels gradués de dimension finie sur
+$\mathbb{F}_2$, « un peu trop trivial comme structure ».\footnote{Le passage
+commence à la dernière ligne de la page 14 ; il est biffé d'un trait par ligne
+sur la page 14 et de grands traits en zigzag sur la page 15.}
+
+\emph{La catégorie $\mathbf{S}$.} Pour trouver une catégorie universelle, on
+associe à $X$ l'ensemble $S(X) \subset H^{\bullet}(X)$ des classes de
+sous-variétés de $X$, modulo équivalence homologique. On prouve, par un
+théorème de Thom dont il va être question, que c'est un sous-anneau ; par le
+même théorème, les $S(X \times Y)$ sont stables par composition des
+correspondances cohomologiques, ce qui ne semble pas trivial, puisque les
+$S(X)$ ne sont pas stables par Gysin. D'où une catégorie additive
+$\mathbf{S}$, dont les objets sont les variétés et les flèches les éléments des
+$S(X \times Y)$. « Il semble qu'elle doive jouer le rôle universel que j'ai
+envisagé plus haut. »\footnote{« él.\ des » est ajouté à la main.}
+
+\emph{Le groupe $G$.} Pour en donner une interprétation algébrique,
+considérons l'algèbre de Steenrod $\mathcal{A}$ des opérations cohomologiques
+stables modulo 2. Elle est graduée, et munie d'une diagonale associative et
+unitaire, anticommutative, c'est-à-dire commutative (on est en
+caractéristique 2). Son dual gradué $\mathcal{A}_*$ est une algèbre
+commutative, avec une diagonale associative et unitaire, et réduite à
+$\mathbb{F}_2$ en degré 0. C'est donc l'anneau d'un schéma en groupes affine
+$G$ sur $\mathbb{F}_2$. La page l'identifie au foncteur des
+$\otimes$-automorphismes additifs de $H^{\bullet}$ sur $\mathcal{V}$ qui
+opèrent trivialement sur $H^{1}(S^{1})$.\footnote{Après « stables », une
+définition tapée de l'anneau des opérations est biffée à la main ; un long
+trait vertical et un signe de renvoi sont en marge. La restriction « qui
+opèrent trivialement sur $H^{1}(S^{1})$ » est manuscrite ; elle biffe un mot
+avant $H^{1}(S^{1})$ et se termine sur un mot raturé. C'est elle qui écarte les
+automorphismes de graduation. Aujourd'hui, $\mathcal{A}_* = \mathbb{F}_2[\xi_1,
+\xi_2, \ldots]$ (Milnor, 1958), et $G(R)$ est le groupe, pour la composition,
+des séries $x + \sum a_i x^{2^{i}}$ : les automorphismes stricts du groupe
+formel additif.}
+
+Le tapuscrit énonce alors, comme « le théorème de Thom », qu'un $x \in
+H^{\bullet}(X)$ est dans $S(X)$ si et seulement s'il est fixe par $G$,
+c'est-à-dire si $\mathcal{A}^{+} x = 0$, et demande aussitôt : « Pourquoi
+cette condition est-elle déjà nécessaire ? ». Nous rapportons cet énoncé sous
+réserve : lu avec l'action usuelle des carrés de Steenrod sur la cohomologie,
+il est en défaut.\footnote{Remarque nôtre. Une droite $\mathbb{RP}^{1} \subset
+\mathbb{RP}^{2}$ est une sous-variété, de classe le générateur $a \in
+H^{1}(\mathbb{RP}^{2})$, et $\mathrm{Sq}^{1}a = a^{2} \neq 0$. La nécessité
+échoue donc, comme la page le soupçonne. L'énoncé doit viser une autre action,
+par exemple sur l'homologie, ou tordue par les classes de Wu, que la page ne
+permet pas de restituer. Ce qui en dépend ci-dessous est rapporté sous la
+même réserve.} Sous cette réserve, le foncteur $H^{\bullet}$, de $\mathbf{S}$
+vers les représentations de $G$ dans des espaces vectoriels sur $\mathbb{F}_2$,
+serait pleinement fidèle. Son enveloppe pseudo-abélienne serait une
+sous-catégorie pleine des représentations de $G$ ; il est douteux qu'elle soit
+abélienne, et plus encore qu'elle contienne toutes les représentations de
+dimension finie.
+
+$G$ est prolisse et, « d'après Quillen », pro-unipotent. Une note manuscrite
+en marge confirme : « oui, car son anneau affine est une algèbre de polynômes
+à une infinité d'indéterminées », réunion de sous-algèbres de type fini
+stables par la diagonale $\Delta$.\footnote{Note de sept lignes écrite de biais
+dans la marge gauche, rattachée par une flèche à la parenthèse sur $G$ ; le
+premier mot est rogné, plusieurs mots sont incertains et trois sont illisibles
+sur 111. L'exemplaire annoté (dossier 162-5, page 48) la porte plus lisible ;
+nous en donnons le sens. Le « car » justifie la prolissité, par les
+sous-algèbres $\mathbb{F}_2[\xi_1, \ldots, \xi_n]$ stables par la diagonale ;
+la pro-unipotence vient de ce que l'algèbre de Hopf est graduée connexe,
+réduite à $\mathbb{F}_2$ en degré 0.} Ici $G$ joue le rôle d'un \emph{groupe
+de Galois motivique}. Contrairement à la situation familière, il est fortement
+non réductif, et son corps de définition est $\mathbb{F}_2$, non
+$\mathbb{Q}$.\footnote{L'expression « groupe de Galois motivique » est sur la
+page, en 1968. Le formalisme tannakien qui lui donne son sens précis sera
+publié par Saavedra Rivano en 1972. Nous ne tirons de cette rencontre aucune
+conclusion de priorité.}
+
+\pagerange{16}{16}
+\subsection*{Orientations (page 16)}
+
+Quillen généralise la construction de $\mathbf{B}$ de deux façons. D'abord aux
+variétés non nécessairement compactes, $f_\bullet$ n'étant alors défini que
+pour $f$ propre. Ensuite à une condition d'orientation stable sur les
+\emph{morphismes}, donnée par un morphisme $H \to BO(\infty)$, où $H$ est un
+H-espace dont la page se demande s'il est commutatif, associatif et unitaire.
+Une orientation de $f : X \to Y$ est un relèvement homotopique à $H$ de
+l'application $X \to BO$ qui classe $T_X - f^{\bullet}T_Y$. Les morphismes
+$\mathrm{Hom}_{\mathbf{B}^{H}}(X, Y)$ sont les classes de diagrammes $X
+\leftarrow Z \to Y$ de morphismes orientés, le second propre, modulo les bords
+de tels diagrammes. Comme ensemble, cela se décrit par la variété $X \times Y$
+munie de la famille des fermés propres sur $Y$.\footnote{La page note $H(X,Y)$
+ces ensembles de morphismes, avec la même lettre que l'H-espace ; nous
+changeons la notation. « stable » est tapé en interligne et rattaché à sa place
+par un trait manuscrit ; le « t » de « Quillent » est barré à la main. Pour $H
+= BO$ on retrouve $\mathbf{B}$ ; pour $H = BU$, on obtient le cobordisme
+complexe $MU$, celui où Quillen trouvera en 1969 la loi de groupe formel
+universelle. Ce sont les $(B,f)$-structures de Lashof (1963).}
+
+Une note manuscrite au pied de la page ajoute : « Les $B^{H}_{m}(X)$ ($X$
+compact disons) peuvent se décrire homotopiquement à la Thom, comme les
+groupes d'homotopie stables d'espaces $\mathrm{Hom}(X, MH(N-m))$ … ». C'est la
+construction de Pontryagin--Thom, $MH$ désignant l'espace de Thom associé à
+$H$.\footnote{L'indexation est celle de la page, qui ne l'explique pas. La page
+écrit un $\mathrm{Hom}$ souligné, c'est-à-dire un espace d'applications.}
+
+\pagerange{1}{16}
+\section*{La couche manuscrite de la photocopie, et sa date}
+
+La couche manuscrite de 111 a deux strates, que la photocopie a fondues en un
+seul gris. La première est l'encre bleue de l'exemplaire annoté du dossier
+162-5 : la date, les corrections de notation, les réponses « oui » et « non,
+… », les insertions des pages 11 à 16. La seconde est faite des marques que
+porte aussi la photocopie de 162-5 et non l'exemplaire annoté. La
+transcription de 111 en relève six : « (compactes ?) » (page 11), « NB
+$H^{*}(X)$ » et « i.e.\ l'enveloppe “Karoubienne” » (page 13), « $=$
+karoubienne $+$ additive » et le $\Lambda$ porté dans un blanc de la frappe
+(page 14), et « cf exposé Karoubi à Bourbaki … » (page 16).\footnote{La lecture
+modernisée du dossier 162-5 range aussi parmi les marques propres à sa
+photocopie le « Si ! » de la page 3, « cond. » sur « colonne » (page 8), « en »
+(page 14), « él.\ des » (page 15) et le t biffé de « Quillent » (page 16). La
+transcription de 111 les porte sans les attribuer à l'une ou l'autre strate ;
+nous ne tranchons pas. Le « au crayon » d'une première lecture de 111 n'est
+pas confirmé : ces notes sont grises comme le reste.} Sur 111 comme sur la
+photocopie de 162-5, ces marques ont les mêmes traits aux mêmes places : ce
+sont des reproductions d'une seule écriture, non une écriture reprise.
+
+Les deux premières précisent des hypothèses que le texte laisse implicites,
+les deux suivantes traduisent son vocabulaire dans celui qui s'imposera, et le
+$\Lambda$ comble un blanc. La
+dernière, d'une encre plus pâle, pointe selon toute vraisemblance vers l'exposé
+de Karoubi au Séminaire Bourbaki de 1971-1972, « Cobordisme et groupes formels
+(d'après D. Quillen et T. tom Dieck) ». Cet exposé rend compte des résultats de
+Quillen sur le cobordisme et les lois de groupes formels, ceux-là mêmes qui
+répondent aux questions de la page 13. Si c'est bien lui, la note est
+postérieure à 1971, et 111, qui la reproduit, a été tiré plus tard encore.
+C'est une inférence, non une date lue. La datation du dossier reste celle de
+l'inventaire, « 1968 », qui est celle du texte dactylographié ; et le
+classement du dossier parmi les pièces rassemblées autour de « À la poursuite
+des champs » est celui des archivistes, qui ne date pas la copie.
+
+\end{document}
