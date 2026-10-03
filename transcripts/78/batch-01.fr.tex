@@ -1,0 +1,675 @@
+% Folder 78, batch 1 (archivists' pages 1-20).
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-02 — first pass, unchecked against the pages by a human.
+%
+% Page 1 is the folder's cover, inscribed in pencil "Polygones réguliers / Chap I".
+% Pages 2-20 are the opening of Chap. I: regular polygons in an affine plane over
+% a field k (combinatorial structure omega = {u, u^-1}, regularity, unimodularity),
+% the real examples P_zeta (§ I bis), pinnings and frames (§ II), and the
+% reduction to affine representations of the dihedral group D_n (§ III). Page 9
+% is a stray sheet of trace/determinant computations, transcribed as it stands.
+% Notation fixed for the batch: \mathfrak{S}_S for his script S (symmetric group),
+% \mathfrak{G} for his script G (normaliser on p. 2, commutant from p. 17 on),
+% \mathcal{T} for the group of roots of unity (p. 7), D_\sigma for the fixed line
+% of sigma, \Gamma^{0} for the rotation subgroup.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{78}
+\batch{1}
+\pages{1}{20}
+\foldertitle{[Polygones réguliers et polynômes cyclotomiques] : notes manuscrites (s.d.).}
+\dating{[à partir de 1977]}
+\watermark{Édition de démonstration}
+
+\begin{document}
+
+\page{1}
+\textit{Polygones réguliers} — \textit{Chap I}
+\note{inscription au crayon sur la couverture de la chemise.}
+
+\page{2}
+\section{Chap. I. Introduction au \uncertain{point de vue} affine}
+
+\struck{\uncertain{Polygones affines}}
+
+\textbf{1} \struck{\uncertain{Définition} \ill{}}
+\marginal{Déf}
+$E$ plan affine sur un corps (disons …) $k$. Un \struck{\ill{}} \emph{polygone}
+(déployé) dans $E$ est une partie finie $S$ de $E$ (ensemble des sommets)
+\struck{de cardinal $\geq 3$}, \emph{munie} d'une « structure polygonale
+combinatoire », i.e. d'une partie à deux éléments $\omega = \{u, u^{-1}\}$ de
+$\mathfrak{S}_S$ formée de permutations circulaires inverses l'une de l'autre
+(ce qui implique $n \geq 3$). Les droites rejoignant deux sommets contigus sont
+appelées \add{(en corr. 1-1 avec les côtés \ill{})} les \emph{côtés}; $\omega$
+est l'une des orientations de $P$. Si $n = \operatorname{card} S$, c'est aussi
+le cardinal de l'ensemble des côtés — on dit que $P$ est un
+\add{$n$-}polygone.
+
+\marginal{re-Déf}
+On dit que $P$ est \emph{régulier} si tout automorphisme combinatoire de
+$\mathfrak{P} = (S, \omega)$ — i.e. tout élément du normalisateur
+\add{$\mathfrak{G}$} de $\omega$ dans $\mathfrak{S}_S$ — se prolonge de façon
+unique en un automorphisme affine de $E$; il suffit bien sûr de l'exiger
+\add{pour un $u \in \omega$} \struck{\ill{}} pour un système de gén., p.ex.
+\add{$u$ et une symétrie} $\sigma_s$ p.r. à un sommet $s$, ou une symétrie
+$\sigma_a$ p.r. à un \struck{\ill{}} \add{côté}. [en fait, si $s$ et $a$ sont
+incidents, \add{deux} quelconques des trois él. $\sigma_s, \sigma_a,
+u = \sigma_a \sigma_s$ forment \struck{des} \add{un syst. de} générateurs].
+Pour des raisons techniques, on exige que les $u \in \omega$ \ill{} \ill{} ce
+qui revient au \ill{} les él. des groupes \add{cycliques} $\langle u \rangle$
+engendrés — \uncertain{appelés} \emph{groupes des rotations} des polygones
+comb. — se réalisent
+
+\page{3}
+par des automorphismes \emph{unimodulaires}, \struck{\ill{}} On comprendra
+mieux par la suite la nature exacte de cette restriction (en étudiant le pb
+dans un projectif); disons pour l'instant qu'\struck{on} \add{elle} revient au
+même que d'exiger $\sigma_a$ (\ill{} \ill{}, cela revient au même puisqu'ils
+sont conjugués) est une \emph{réflexion} — i.e. laisse invariante une droite.
+On verra aussi que cette restriction est automatiquement satisfaite dans le
+cas des polygones réguliers \ill{} : $2p$ côtés en car.\ $p$ ($p$
+\uncertain{nb premier} impair) — p.ex.\ l'hexagone en car.\ 3.
+
+\marginal{\uncertain{Devrait} \ill{}}
+NB On fera attention que dans la définition des polygones généraux, on
+aurait défini les côtés comme des \emph{droites} de $E$ \ill{} une
+application \struck{surjection} de l'ens.\ des côtés combinatoires
+\emph{sur} l'ens.\ des côtés géométriques. On dira que le polygone est
+\emph{propre} si pour un sommet $s \in S$ et un côté combinatoire
+$\{s', s''\}$, $s$
+
+\drawing{dans la marge et sous le texte, un polygone non convexe aux sommets
+notés $A_0, A_1, \dots, A_8$ (certains côtés repassés à l'encre plus
+épaisse), et à gauche un segment vertical portant $A_1$, $A_5$, $A_2$}
+
+\page{4}
+est incident au côté géométrique $D(s', s'')$ \emph{ssi} $s$ est incident au
+côté combinatoire, i.e.\ $s = s'$ ou $s = s''$; ceci implique bien entendu que
+les côtés géom.\ corr.\ 1-1 aux côtés combinatoires. On verra que les
+polygones réguliers (avec tous la condition unimodulaire) \add{sont} aussi
+propres.
+
+\marginal{$\triangle$}
+La condition d'unicité dans la définition du polygone régulier équivaut
+évidemment à dire que $S$ engendre aff\supplied{ine}men\supplied{t} $E$, ou
+encore que $S$ n'est pas \struck{\ill{}} \add{contenu dans} une droite. Il
+revient au même que de dire que trois sommets consécutifs $s_0, s_1, s_2$ ne
+sont \emph{pas} alignés (\uncertain{sinon}, par la régularité — en sorte que si
+$d_0 = D(s_0, s_1)$, on aurait aussi \struck{\ill{}} $d_0 = u(d_0)$
+[$u s_0 = s_1, \dots$], donc tous les $d_i$ égaux puisque $u$ transitif sur
+l'ens.\ des côtés, absurde …].
+
+\marginal{\uncertain{pt de vue} \ill{} : fixer $\Pi$ (le « schéma
+combinatoire ») \ill{} plutôt des polygones \uncertain{épinglés}.}
+\emph{Épinglage} d'un polygone géom.\ par un pl.\ comb.\ $\Pi$ — ou polygone
+géom.\ $\Pi$-épinglé : revient à la donnée d'un couple
+\struck{\ill{}}$(\Pi, \varphi)$, $\Pi = (S, \omega)$ poly comb.,
+$\varphi \colon S \to E$ application injective
+
+\page{5}
+À vrai dire, l'\struck{\ill{}} \add{injectivité} de l'application sur les
+sommets, ainsi que \uncertain{celle} de l'application des côtés comb.\ vers les
+côtés géom.\ \uncertain{peut} ne \uncertain{être} pas injectives, ou
+\uncertain{encore} que \struck{\ill{}} dans le cas non propre [où la donnée
+du polygone géom.\ \add{propre} équivaut à la donnée de l'ens.\ des sommets
+et de l'ens.\ des côtés, satisfaisant les conditions suivantes : \ill{}
+sommet incident à ex.\ deux côtés, \ill{} côté incident à ex.\ \ill{}
+\ill{}, \struck{\ill{}} plus condition de connexité combinatoire …]. La
+bonne notion est \add{(non-réalisation)} donc celle de \emph{repr.}\
+\add{\emph{géom.}} d'un poly.\ combinatoire, qui revient à la donnée de
+\emph{deux} applications — sur l'ens.\ des sommets \emph{et} sur l'ens.\ des
+droites — respectant les relations d'incidence ….
+\struck{(lorsque deux sommets incidents \ill{} \ill{} des pt des \ill{}
+sommets \ill{} \ill{} pour \ill{} un polygone} distinctes par l'application
+sommets, cette dernière \uncertain{suffit} : elle sert à déterminer la
+réalisation, et elle peut être choisie arbitrairement,
+\note{le passage barré vers le bas de la page est encadré et repris par des
+renvois en partie illisibles ; la phrase continue au-delà de la page.}
+
+\page{6}
+\section{I bis. Exemples sur $k = \mathbb{R}$}
+
+Prenons
+\[
+  (1) \qquad E = \mathbb{C}
+\]
+regardé comme plan sur les réels. Soit \struck{\ill{}} $\zeta$ une racine
+\emph{primitive} $n$-ième de 1, (racine de 1 d'ordre $n$) \struck{posons}
+\[
+  \text{\struck{\ill{}}}\,(2) \qquad \zeta^n = 1, \quad \zeta^d \neq 1
+  \ \text{si}\ d \mid n,\ \text{\struck{\ill{}}}\, 1 \leq d < n
+\]
+posons
+\[
+  (3) \qquad s_i = \zeta^i \qquad i \in \mathbb{Z}/n\mathbb{Z}
+\]
+avec la structure polygonale \add{combinatoire} standard. Les $s_i$
+distincts car $\zeta$ racine \emph{primitive}. \struck{Posons} $\sigma, u \in
+\text{\struck{\ill{}}}\,\mathrm{Gl}_{\mathbb{R}}(E) \subset \mathrm{Aff}(E)$
+définis par
+\[
+  (4) \qquad
+  \begin{cases}
+    \sigma z = \bar{z} \\
+    u z = \zeta z
+  \end{cases}
+  \qquad \text{\struck{\ill{}}}
+\]
+donc \ill{} \ill{}
+\[
+  (5) \qquad
+  \begin{cases}
+    \sigma s_i = s_{-i} \\
+    u s_i = s_{i+1}
+  \end{cases}
+\]
+donc \ill{} \ill{} un $n$-polygone régulier, $P_\zeta$.
+
+On vérifiera aisément (cf.\ \ill{} \ill{} dans un contexte plus général) que
+\begin{enumerate}
+  \item[a)] $P_\zeta$ isom.\ à $P_{\zeta'}$ ssi $\zeta' = \zeta$ ou
+  $\zeta' = \zeta^{-1}$ (ou encore, posant
+  $\alpha(\zeta) = \zeta + \zeta^{-1}$, ssi $\alpha(\zeta) = \alpha(\zeta')$)
+  \item[b)] Tout polygone régulier dans \struck{\ill{}} un plan affine sur
+  $\mathbb{R}$ est isom.\ à un $P_\zeta$.
+\end{enumerate}
+
+\page{7}
+Si $\mathcal{T}$ est le groupe des racines de l'unité dans $\mathbb{C}$,
+\struck{donc} i.e.\ le s-groupe de torsion de $\mathbb{C}^*$, qui est
+isomorphe à $\mathbb{Q}/\mathbb{Z}$, \struck{donc $\mathcal{T}$ \ill{} pour
+unique élément d'ordre 2, savoir $-1$, engendrant l'unique ss-groupe cyclique
+d'ordre 2, $\{\pm 1\} \subset \mathcal{T}$} donc $\pm 1$ opère sur
+$\mathcal{T}$ (\uncertain{écrit} additivement par les \ill{} \ill{}) et
+\struck{\ill{}} l'ens.\ des classes d'isom.\ de polygones réguliers sur
+$\mathbb{R}$ est en corr.\ \uncertain{biunivoque} canonique avec
+\[
+  \bigl(\mathcal{T}/\{\pm 1\} \smallsetminus \{\bar{1}\}\bigr)
+\]
+où $\bar{1}$ est l'image dans le quotient $\mathcal{T}/\{\pm 1\}$ de l'él.\
+unité.
+
+On a pour quatre pts consécutifs $s_i, s_{i+1}, s_{i+2}, s_{i+3}$
+\[
+  (s_{i+3} - s_i) = \text{\struck{\ill{}}}\, r\,(s_{i+2} - s_{i+1})
+\]
+où $r$ est un nb \emph{réel} qui ne dépend que de $\zeta$ (pas de $i$) en fait
+\[
+  r = 1 + \underbrace{(\zeta + \zeta^{-1})}_{2 \cos \arg \zeta}
+\]
+En effet,
+\[
+  \frac{\zeta^{i+3} - \zeta^{i}}{\zeta^{i+2} - \zeta^{i+1}}
+  = \frac{\zeta^3 - 1}{\zeta^2 - \zeta}
+  = \frac{\zeta^2 + \zeta + 1}{\zeta}
+  = 1 + (\zeta + \zeta^{-1})
+\]
+
+\drawing{à gauche, quatre sommets consécutifs $s_i, s_{i+1}, s_{i+2},
+s_{i+3}$ ; les côtés $s_i s_{i+1}$ et $s_{i+2} s_{i+3}$ prolongés en pointillé
+jusqu'à leur intersection sur l'axe de symétrie ; l'angle extérieur en
+$s_{i+2}$ est marqué $\theta = \arg \zeta$}
+
+\page{8}
+Si on étend les scalaires du plan \add{vect.} réel au plan vectoriel complexe,
+l'homom.\ de multiplication complexe par $\zeta$ (pour \ill{} \ill{}
+complexe) se diagonalise, suivant deux droites « isotropes » canoniques
+\ill{} la matrice \add{diagonale} $(\zeta, \zeta^{-1})$, le pt 1 de $E$
+devient le pt $s_0 = (1, 1)$ de $\mathbb{C}^2$, et $s_i$ devient le pt de
+coordonnées complexes $(\zeta^i, \zeta^{-i}) = u_\zeta^i(s_0)$. La symétrie
+p.r.\ au sommet $s_0$, i.e.\ $z \mapsto \bar{z}$, est transformée en
+l'\uncertain{automorphisme} $(x, y) \mapsto (y, x)$ symétrie des
+\ill{} \ill{}. On verra que cette structure des $n$-polygones réguliers est
+typique, sur les corps \add{alg.\ clos} de car.\ premier à $n$; et pour car.\
+\ill{} on a la même \add{($(n, p) = 1$)} classification des $n$-polygones
+réguliers que celle trouvée dans le cas des corps des réels. (NB Le fait que
+dans le cas particulier $k = \mathbb{R}$, bien que $k$ ne soit pas
+\emph{alg.\ clos}, on ait la même classification, est remarquable et demande
+de l'attention …
+
+\marginal{À gauche, en regard : $E \to \mathbb{C}$ par deux flèches
+$\varphi_1, \varphi_2$, avec $\mathbb{R} \to \mathbb{C}$ et
+$\varphi_1(z) = z$ \struck{\ill{}}, $\varphi_2(z) = \bar{z}$ ; puis
+$E \otimes_{\mathbb{R}} \mathbb{C} \simeq \mathbb{C}^2$
+\uncertain{(noté $E \simeq_{\mathbb{C}} \mathbb{C}^2$)}.}
+
+\page{9}
+\note{feuille de calculs épars sur les endomorphismes d'un plan, barrée de deux
+longues diagonales ; transcrite telle quelle, sans lien explicite avec les
+pages voisines.}
+\[
+  u\,(\operatorname{Tr} v\,\mathrm{id} - v) = (\operatorname{Tr} v)\,u - uv
+\]
+\[
+  \operatorname{Tr} u\check{v} = \operatorname{Tr} u \operatorname{Tr} v
+  - \operatorname{Tr}(uv) \qquad 2 \operatorname{Tr} \ill{}
+\]
+\struck{$\det u + \det v =$}
+\[
+  \det(u + v) = \det u + \det v
+  + \underbrace{(\operatorname{Tr} u \operatorname{Tr} v
+  - \operatorname{Tr} uv)}_{\varphi(u, v)}
+\]
+\struck{$\tilde{x}$} \ill{} $\tilde{y}$ \quad $u$ \quad $\mathcal{M}$ \quad
+$u x$ \quad $u$ \emph{unipotent}
+\[
+  \begin{pmatrix} \lambda & u \\ 0 & \lambda' \end{pmatrix}
+  \qquad
+  \begin{cases} u x = 0 \\ \operatorname{Tr} u = 0 \end{cases}
+\]
+$D$ \ill{} \ill{} \ill{} \ill{} \ill{} \quad
+$\mathcal{L} \subset \ill{}$ \ill{} \ill{} \ill{}
+
+$u D \subset D$, $\operatorname{Tr} u = 0$ \quad $u$
+$\begin{pmatrix} \lambda & u \\ & -\lambda \end{pmatrix}$ \quad $E/D$
+
+\struck{$u$} $0 \subset \mathcal{O}_\xi \subset \sqrt{\mathcal{J}} \subset
+\mathcal{L}$ \quad $\lambda$ \quad
+$\begin{pmatrix} ? & \\ 0 & \lambda \end{pmatrix}$ \quad
+$X \to \mathbb{R}(\sqrt{\mathcal{J}}/\mathcal{O}_\xi)$
+
+\struck{$\operatorname{Tr} u =$} $u D \subset D$ \qquad
+\struck{$u = \lambda + v$} $u = \lambda\,\mathrm{id} + v$ \quad $v$
+\uncertain{nilpotent}
+
+\struck{$u$} $x$ \quad $\operatorname{Tr} u = 0$ \struck{\ill{}}
+$\det u = 0$ \quad $u^2 = 0$ \quad $\lambda^2$
+
+\page{10}
+\section{II. Épinglages et repères}
+
+Un \emph{repère} d'un polygone combinatoire est un couple $(s_0, d_0)$ d'un
+sommet et d'un côté incidents; il revient au même de se donner un couple
+$(s_0, s_1)$ de deux sommets adjacents \struck{\ill{} \ill{}} (prendre
+$d_0 = \{s_0, s_1\}$) ou d'un $s_0 \in S$ et de $u \in \omega$ — i.e.\ d'un
+sommet et d'une orientation — (prendre $s_1 = u s_0$).
+
+\emph{Prop 1} $\Gamma = \operatorname{Aut}(S, \omega)$ est
+\add{simplement} \struck{transitif} sur l'ens.\ des repères — \add{i.e.} qu'\ill{}
+\ill{} \ill{} \ill{} \add{un} torseur sous $\Gamma$.
+
+C'est en.\ équivalent à ceci :
+
+\emph{Cor 1} Soient $\Pi = (S, \omega)$, $\Pi' = (S', \omega')$ \struck{deux}
+\add{isom.}\ pol.\ comb.\ \add{isomorphes} et soit $r_0 = (s_0, u)$ un repère
+de $\Pi$. Alors l'application
+\[
+  \begin{aligned}
+    \operatorname{Isom}(\Pi, \Pi') &\longrightarrow \operatorname{Rep}(\Pi') \\
+    \theta &\longmapsto \theta(r_0)
+  \end{aligned}
+\]
+est bijective.
+
+Un \emph{épinglage} d'un poly.\ comb.\ est la donnée d'un repère (dans
+\uncertain{ce cas} un repère) — \struck{celle d'un} \add{un épinglage (ou
+repère)} d'un polygone géom.\ est un ép.\ du pl.\ comb.\ sous-jacent. Il
+revient au même de dire de donner un $\Pi_0$-
+
+\page{11}
+\marginal{« le » (i.e.\ \struck{\ill{}} \struck{\ill{} épinglé} pol.\ comb.\
+épinglé — i.e.\ muni d'un repère)}
+épinglage, où $\Pi_0$ est le « $n$-poly.\ combinatoire type ».
+
+\emph{Cor.\ 2} Soient $P = (E, S, \omega)$, $P' = (E', S', \omega')$ deux
+polygones réguliers isomorphes, \struck{Alors} \add{Soit} $r$ un repère
+\add{pour un répère} de $P$ \uncertain{pouvant} être épinglé. Alors
+l'applic.
+\[
+  \theta \mapsto \theta(r) \colon \operatorname{Isom}(P, P') \to
+  \operatorname{Rep}(E', S', \omega')
+\]
+est bijective.
+
+\emph{Scholie} On peut donc énoncer : que les classes d'isomorphie de
+$n$-polygones réguliers, les $n$-polygones réguliers \emph{épinglés} sont
+déterminés : \emph{isom} \emph{uniques} près.
+[Il est bien sûr de le cas purement combinatoire]. Bien sûr, les classes
+d'iso des uns et des autres se correspondent 1-1 …
+
+\emph{NB} Il y aura dans la question « d'écrire » « \emph{le} » espace affine
+$E$ dans lequel se place $P$, en termes des types d'isomorphie (i.e.\ de $n$
+et d'un « module » $\alpha \in k$ convenable), \struck{est longue} \add{,} et
+ceci fait, « d'écrire » \struck{\ill{} \ill{}} également \emph{les}
+\struck{\ill{}} \add{sommets} $s_i$ (\ill{}).
+
+\page{12}
+\section{III. Polygones $n$-réguliers et repr.\ des groupes diédraux}
+
+\note{le haut de la page (jusqu'à « intrinsèque ») est barré de grandes croix ;
+on le transcrit sous \texttt{struck} pour autant qu'il se lit.}
+\struck{Revenons au cas des polygones réguliers. Soit $\Pi = (S, \omega =
+\{u, u^{-1}\})$ \ill{} \ill{} $\Pi$ épinglé, et \ill{} $\Gamma$ \ill{} $k$.
+$\Gamma = \operatorname{Aut}(\Pi)$, $\Gamma^{0}$ = \ill{} des automorphismes
+\add{conservant l'orient.} On obtient une représentation}
+\[
+  \text{\struck{$\Gamma \xrightarrow{\varphi} \operatorname{Aut}_{\mathrm{aff}}(E)$}}
+\]
+\struck{\ill{} des sommets \ill{} \ill{} \ill{} orbite sous $\Gamma$.}
+\struck{\ill{}} \add{Nous partirons du} pt de vue intrinsèque
+\struck{(non épinglé)}.
+
+\marginal{\struck{Question} Pb de l'épinglage \ill{} \ill{} \ill{}
+\ill{} combinatoire $(s_0, s_1)$, \ill{} $(s_0, d_0)$ \ill{} \ill{}
+$(s_0, \omega)$ \ill{} \ill{} Donnée de \ill{} \ill{} $\mathfrak{G}$ de
+$\Gamma$ \ill{} \ill{} \ill{} (\ill{})}
+\note{la marge gauche porte, d'une écriture oblique et encadrée, une note
+dont seuls ces fragments se lisent.}
+
+Le polygone $P = (S, \omega)$ détermine un s-groupe
+\[
+  \Gamma \subset \operatorname{Aut}_{\mathrm{aff}}(E)
+\]
+isomorphe à un groupe diédral $D_n$ \add{$n \in \mathbb{N}$ convenable}
+\[
+  (1) \qquad \Gamma \simeq D_n \qquad
+  \text{(isomorphisme non donné)}
+\]
+et $S$ est une orbite de $\Gamma$ op.\ sur $E$
+\[
+  (2) \qquad S \in \text{\struck{\ill{}}}\,\Gamma \backslash E
+\]
+dans le s-groupe $\Gamma$ étant donné, $S$ est déterminé quand on connaît
+\emph{un} de ses sommets, $s_0$
+\[
+  (4) \qquad s_0 \in E
+\]
+\note{le numéro se lit plutôt (4) que (3) ; la page suivante numérote à
+nouveau (4) la condition $\omega \subset \Gamma$.}
+\struck{À quelle} Le polygone $P$ est-il connu par la connaissance de
+$(\Gamma, \text{\struck{\ill{}}}, S)$, i.e.\ la structure combinatoire
+\add{$\omega$} de $S$ résulte-t-elle de la connaissance du s-groupe
+$\Gamma \subset{}$ \struck{$\operatorname{Aut}$} $\mathfrak{S}_S$ de ses
+automorphismes?
+
+\page{13}
+\emph{Non}, car ce groupe est le même pour \struck{la str} $\omega = \{u,
+u^{-1}\}$ et $\omega^{(r)} = \{u^r, u^{-r}\}$ où $r \in \mathbb{Z}$,
+$(r, n) = 1$. Il faut donc en plus se donner une partie
+\[
+  (4) \qquad \omega \subset \Gamma
+\]
+avec
+\[
+  (5) \qquad
+  \begin{cases}
+    \operatorname{card}(\omega) = 2, \quad \omega = \{u, u^{-1}\} \\
+    \text{\struck{\ill{}}}
+  \end{cases}
+\]
+\struck{\ill{}} telle que, si $\Gamma^{0}$ est le s-groupe de $\Gamma$
+\uncertain{engendré} par $\omega$ (i.e.\ par l'un \uncertain{quelconque} des
+deux éléments) … on ait
+\[
+  (6) \qquad
+  \begin{cases}
+    \text{\struck{\ill{}}}\,\operatorname{card} \Gamma/\Gamma^{0} = 2 \\
+    \Gamma/\Gamma^{0} \ \text{opère sur}\ \Gamma^{0}\ \text{par}\
+    \lambda \mapsto \lambda^{-1} \\
+    \text{l'ext.\ } \Gamma\ \text{de}\ \Gamma/\Gamma^{0}\ \text{par}\
+    \Gamma^{0}\ \text{est semi-directe,} \\
+    \quad \text{i.e.}\ \exists\, \sigma \in \Gamma,\ \sigma^2 = 1,\
+    \sigma \mapsto \text{él.}\ {-1}\ \text{de}\ \Gamma/\Gamma_0
+  \end{cases}
+\]
+[\emph{NB} Ces conditions, qui précisent (1) \add{(moyennant la condition que
+$\Gamma^{0}$ soit fini)}, devraient bien sûr remplacer (2).]
+
+En résumé, $P$ est déterminé par la donnée
+\begin{enumerate}
+  \item[a)] d'un sous-groupe $\Gamma \subset \operatorname{Aff}(E)$
+  \item[b)] de la partie $\omega \subset \Gamma$ satisfaisant (5), (6)
+  \item[c)] de $S \in \Gamma \backslash E$ (une des orbites)
+\end{enumerate}
+
+\page{14}
+Quelles conditions faut-il imposer à a), b), c) pour que ces données
+proviennent d'un polygone régulier? Signalons condition (6), \struck{et}
+\[
+  (9) \qquad \text{\struck{\ill{}}}\
+  \begin{cases}
+    S\ \text{n'est pas contenu dans une} \\
+    \text{droite de}\ E
+  \end{cases}
+\]
+et ensuite
+\[
+  (8) \qquad S\ \text{est un torseur sous}\ \Gamma^{0}
+\]
+\[
+  (7) \qquad \Gamma^{0}\ \text{fini}
+\]
+\note{des flèches dans la marge renvoient (8) et (7) au-dessus de (9) : l'ordre
+voulu est sans doute (7), (8), (9).}
+Ces \struck{\ill{}} conditions \add{(6) à (9)} suffisent, car la structure de
+torseur sur $S$ sous $\Gamma^{0}$ \add{\uncertain{cyclique}} induit sur $S$
+\add{(lorsque $\omega \subset \Gamma^{0}$)} une structure de polygone
+combinatoire — \add{la condition (9) \ill{} \ill{} $\Gamma \hookrightarrow \operatorname{Aut}$
+ \ill{} $\omega \to \omega' \subset \mathfrak{S}_S$}
+($n = \operatorname{card} \Gamma^{0}$) \struck{et si $\sigma \in \Gamma$ est
+comme dans (6), il} \add{\ill{}} \add{\ill{}} induit des automorphismes de
+$(S, \omega)$ qui renversent l'orientation, \struck{donc \ill{}}
+\struck{$\Gamma$ \ill{} exactement le groupe des automorphismes de}
+$\Gamma'$ est le groupe des autom., \ill{} \ill{} induit
+\[
+  \Gamma \hookrightarrow \Gamma', \qquad \Gamma^{0} \simeq \Gamma'^{0}
+\]
+qui induit un \struck{\ill{}} \add{isom.} OK.
+
+Si on se fixe $n$, (7) devient
+\[
+  (7') \qquad \operatorname{card} \Gamma^{0} \simeq \mathbb{Z}/n\mathbb{Z}.
+\]
+\note{sic : « $\operatorname{card}$ » devant un isomorphisme de groupes ; on
+attend $\Gamma^{0} \simeq \mathbb{Z}/n\mathbb{Z}$.}
+
+\page{15}
+On peut d'ailleurs remplacer la donnée c) par la donnée
+\[
+  \text{c}') \qquad S \in \Gamma^{0} \backslash E
+\]
+plus symétrique \add{car on prend une famille par une \uncertain{orbite}
+cyclique} et (9) \struck{et les conditions : mettre aussi dans (7)} \add{(7)
+pour}
+\note{tout ce passage, de « et les conditions » jusqu'à (8$''$), est barré de
+trois longues diagonales.}
+\[
+  \text{\struck{(8$'$)}} \quad \text{\struck{$\Gamma^{0}$ opère fid.\ sur $S$}}
+  \quad \text{\struck{$u \in \omega$ fixés, si $s_0 \in S$, $u s_0 \neq s_0$}}
+\]
+\[
+  \text{\struck{(8$''$)}} \quad \text{\struck{$\operatorname{card} S = \operatorname{card}(\Gamma^{0}) = n$}}
+\]
+\marginal{\uncertain{dans} (9$'$) et $\Gamma \subset \ill{}$ (8$'$) \ill{}
+\ill{} $\Gamma^{0}$ opère \ill{} \ill{} $\Gamma$ \ill{} \emph{fidèlement}
+\ill{} \ill{} \ill{} \ill{} \ill{} \ill{} $S^*$ \ill{} \ill{} $\Gamma^{0}$}
+
+Il faut exprimer que $S$ est \struck{\ill{}} \add{stable} sous $\Gamma$ i.e.\
+est une orbite sous $\Gamma$, \struck{ce qui équivaut à \ill{} \ill{} comme
+dans \ill{}} \struck{\ill{}} \ill{} \ill{} \ill{} \ill{} donnée
+d'un $s_0 \in S$, en disant
+\[
+  (10) \qquad \exists\, \sigma_{s_0} \in \Gamma,\ \sigma_{s_0} \neq 1,
+  \ \text{tel que}\ \sigma_{s_0} s_0 = s_0
+\]
+(NB. A posteriori, ce $\sigma$ sera unique, \struck{\ill{}} pour raisons
+combinatoires)
+
+Si on veut \struck{que} regarder les structures $P$ dans $E$ entièrement
+épinglées (choix d'un sommet $s_0$ et d'un côté \add{comb.}\ $\{s_0, s_1\}$
+issu de $s_0$, i.e.\ d'un sommet $s_1$, ce qui revient à la donnée de
+$u \in \omega$ (orientation)) ($s_1 \leftrightarrow u$ déterminé par
+$s_1 = u s_0$)
+
+\page{16}
+Les données deviennent (en plus de l'entier $n \geq 3$)
+\[
+  (11) \qquad
+  \begin{cases}
+    \text{a}')\ \text{Représentation \struck{fidèle}}\quad
+    D_n \xrightarrow{\ \varphi\ } \operatorname{Aff}(E) \\
+    \text{b}')\ s_0 \in E
+  \end{cases}
+\]
+\[
+  \begin{aligned}
+    D_n &= \{\pm 1\} \cdot \mathbb{Z}/n\mathbb{Z} \qquad
+    (\sigma \in \{\pm 1\},\ u \in \mathbb{Z}/n\mathbb{Z}) \\
+    &= \{\sigma, u \mid \sigma^2 = 1,\ u^n = 1,\
+    \sigma u \sigma^{-1} = u^{-1}\} \\
+    &= \{\sigma, \sigma' \mid \sigma^2 = \sigma'^2 = 1\}
+  \end{aligned}
+\]
+satisfaisant les conditions (pour un pol.\ rég.\ affine
+\emph{unimodulaire})
+\[
+  (13) \qquad
+  \begin{cases}
+    \text{\struck{$u s_0 \neq s_0$}} \\
+    (1^{o})\ \sigma s_0 = s_0 \\
+    (2^{o})\ s_0,\ s_1 = u s_0,\ s_2 = u^2 s_0\ (= u s_1)\
+    \text{non alignés}\ [\Rightarrow u s_0 \neq s_0] \\
+    \text{\struck{\ill{}}}\,(12)\ \varphi\ \text{fidèle}\
+    (\text{P.\ mémoire})\quad u\ \text{unimodulaire}]
+  \end{cases}
+\]
+\note{« P.\ mémoire » (pour mémoire) est une lecture incertaine.}
+\marginal{On dira que \ill{} satisfait \ill{} \ill{} (12) si \ill{}
+\ill{} $s_0$ \ill{} conditions (10), (2$^{o}$) \ill{} \ill{} \ill{}}
+
+\emph{Proposition 2} Pour un plan affine $E$ fixé et un entier $n \geq 3$
+fixé, la donnée dans $E$ d'un $n$-polygone régulier \struck{\ill{}} épinglé
+équivaut à la donnée d'un couple $(\varphi, s_0)$, où
+$\varphi \colon D_n \to \operatorname{Aff}(E)$ est un homom.\ de groupes
+\struck{injectif}, et où $s_0 \in E$ est tel que $\sigma s_0 = s_0$ (i.e.\
+$s_0 \in E^{\sigma}$) \emph{et} $s_0, u s_0, u^2 s_0$ non alignés
+\struck{\ill{} \ill{} \ill{}} \struck{par} les conditions (12) : $\varphi$
+\struck{injectif} \emph{fidèle} et $u$ \emph{unimodulaire}.
+\marginal{(13) \ill{} \ill{} \ill{} \ill{} \ill{}}
+
+Techniquement, la donnée essentielle est celle de $\varphi$. On verra que
+\struck{\ill{}} pour les $\varphi$ correspondant à des polygones réguliers,
+\struck{\ill{}} $\sigma$ est une \emph{réflexion} i.e.\
+$E^{\sigma}$ $(= \{x \in E \mid \sigma x = x\})$ est une \emph{droite}
+\marginal{NB \ill{} \ill{} \ill{}}
+
+\page{17}
+Donc le choix \add{\uncertain{supplémentaire}} de $s_0$ est le choix d'un pt
+sur une droite \add{$D_\sigma$}. Il faudra de plus, tout d'abord
+$s_0 \neq u s_0$, \struck{dire $s_0 \notin D_{\sigma'}$} ce qui revient au
+même (\uncertain{\ill{}} \ill{} \ill{}
+$\sigma' = u\sigma$ tel que $u = \sigma'\sigma$ — la symétrie \ill{} fixe
+$(s_0, s_1)$) que $s_0 \neq \sigma' s_0$ i.e.
+\[
+  s_0 \notin D_\sigma \cap D_{\sigma'}
+\]
+[NB \struck{\ill{} \ill{}} $D_{\sigma'}$ est l'ens.\ des pts fixes de
+$\sigma'$] — On trouvera que les conditions imposées à $\varphi$ pour qu'il y
+ait $s_0$ satisfaisant à les conditions impliquent que \struck{\ill{}}
+$\sigma'$ est également une réflexion et $D_\sigma \neq D_{\sigma'}$ — donc
+\struck{\ill{}} cela exclut \add{a priori} un plus un pt $c$ (le
+\emph{centre} \add{qui est un pt fixe \struck{sous} pour $\varphi(D_n)$} du
+polygone) parmi les pts \emph{éligibles} pour $s_0$. On trouvera de plus
+que (pour $\varphi$ fixé, \struck{les ens.\ des} \add{admissible}) l'ens.\
+des $s_0 \in \text{\struck{\ill{}}}\ D^{\sigma *} :=
+\text{\struck{distincte}}\ D^{\sigma} - \{D \cap D^{\sigma}\}$
+\struck{\ill{} \ill{}} — sur lequel le commutant $\mathfrak{G}$ de
+$\varphi(\Gamma)$ dans $\operatorname{Aff}(E)$ opère de façon évidente) est
+un \emph{torseur} sous $\mathfrak{G}$.
+
+\drawing{à gauche : un polygone aux sommets $s_{-1}, s_0, s_1, s_2$, la
+droite $D_{\sigma'}$ passant par un pt intérieur (le centre) et le milieu du
+côté $s_0 s_1$, et, plus bas, une droite $D_\sigma$ dirigée vers $s_0$}
+\note{la notation hésite entre $D_\sigma$ et $D^{\sigma}$ pour la droite des
+points fixes de $\sigma$ ; on garde celle de chaque endroit.}
+
+\page{18}
+\marginal{introduction}
+\emph{Proposition 3} (Sous réserve qu'on se soit \uncertain{assuré} — que
+$\sigma'$ est une réflexion \struck{\ill{}} \add{\uncertain{et}} \uncertain{mieux}
+$D_{\sigma'} \neq D_\sigma$ — ce qui ne fait \uncertain{rien} autre que la
+condition unimodulaire!) :
+
+\begin{enumerate}
+  \item[1$^{o}$)] Supposons $D_\sigma \cap D_{\sigma'} \neq \emptyset$, soit
+  $c$ l'unique pt de $D_\sigma \cap D_{\sigma'}$, \struck{\uncertain{Alors}}
+  \struck{\ill{} \ill{} \ill{}} Alors $c$ est l'unique pt fixe de $E$ sous
+  $\Gamma$. Si on prend $c$ comme origine — de sorte que $E$ devient un
+  vectoriel, $\Gamma$ opérant linéairement —. Le groupe $\mathfrak{G}$ des
+  automor\supplied{phismes} de $(E, \Gamma, \varphi)$ (i.e.\ le commutant de
+  $\Gamma$ dans $\operatorname{Aff}(E)$ ou $\mathrm{Gl}(E)$) est égal au groupe
+  des \struck{\ill{}} homothéties non nulles, i.e.
+  \[
+    k^* \simeq \mathfrak{G}
+  \]
+  \struck{— donc $\mathfrak{G}$ $D_\sigma^{*}$ est un $\mathfrak{G}$-torseur,
+  \ill{} \ill{}}
+  \item[2$^{o}$)] \struck{\ill{}} Supposons $D_\sigma \parallel D_{\sigma'}$.
+  Soit $T \subset V$ = espace des translations \add{1-dimensionnel}
+  \struck{\ill{}} \ill{} commune de $D_\sigma$ et $D_{\sigma'}$, et
+  identifions $T$ \add{($\simeq k^+$)} \struck{\ill{}} \add{à un}
+  \uncertain{sous}-groupe de $\operatorname{Aff}(E)$ (ss-groupe du groupe des
+  translations).
+\end{enumerate}
+
+\page{19}
+Alors $\mathfrak{G} = T$, donc ici encore $\mathfrak{G}$
+\[
+  D_\sigma^{*} = D_\sigma \ \text{est un}\ \mathfrak{G}\text{-torseur}
+\]
+
+\emph{Dém.} Il est évident dans l'un et l'autre cas que $\mathfrak{G} = k^*$
+resp.\ $T$ ($\simeq k^+$) commute à $\sigma$ et $\sigma'$, donc à $\Gamma$
+(engendré par $\sigma$ et $\sigma'$) donc
+\[
+  \text{\struck{\ill{}}}\ \mathfrak{G} \subset \mathfrak{G}\
+  \text{\struck{\ill{}}}.
+\]
+Or \struck{\ill{}} $\mathfrak{G}$ est transitif sur $D_\sigma^{*}$, dans l'un
+et l'autre cas \add{à commuter \struck{\ill{}} \ill{} \ill{}}, et \struck{\ill{}}
+$\mathfrak{G}$ opère librement sur $D_\sigma^{*}$ il en résulte
+« formellement » que $\mathfrak{G}$ opère transitivement sur $D_\sigma^{*}$
+— \ill{} un $\mathfrak{G}$ torseur — et que $\mathfrak{G}_0 = \mathfrak{G}$,
+cqfd
+\note{l'indice de « $\mathfrak{G}_0 = \mathfrak{G}$ » est incertain ; le
+contexte demande que le sous-groupe évident soit le commutant tout entier.}
+
+\page{20}
+[P.\ ex.\ dans le cas où \uncertain{il} existe \add{— qu'on prend pour
+origine —} $\mathfrak{G}$ est l'ens.\ des homothéties de centre $c$
+(isomorphe à $k^*$) qui est évidemment simplement transitif \struck{\ill{}
+\ill{}} sur l'ens.\ des pts sur la droite $D_\sigma$ \uncertain{privée} de
+\struck{\ill{} \ill{} \ill{} \ill{} \ill{}} \add{$c$} \struck{\ill{} quantité
+\ill{} \ill{} \ill{} transitivité …} \add{l'origine}.]
+\marginal{\uncertain{ici} \ill{} \ill{} $n \neq \operatorname{car} k$
+\struck{\ill{}} \ill{} $n \neq 2$ si $p = 2$ (\ill{})}
+\marginal{on trouve $k^* = \mathfrak{G}$ \ill{} $c$ \ill{} \ill{} \ill{}
+divisible par car.\ \ill{} \ill{} \ill{} \ill{} 1 \ill{} \ill{} \ill{}
+$D_\sigma \parallel D_{\sigma'}$ \ill{} \ill{} \ill{} \ill{} \ill{}
+\ill{} \ill{} \ill{} conclusion}
+
+\emph{Cor 1)} Deux $n$-polygones réguliers \struck{\ill{}} épinglés, tels que
+les représentations correspondantes de $\square$ soient isomorphes, sont
+isomorphes. (Ce \uncertain{résultat} qu'\ill{} \ill{} \ill{}). Donc la
+classification des représentations affines \uncertain{\ill{}}
+\add{admissibles} (des \uncertain{diédraux} $D_n$ \uncertain{pour} $n$
+fixé) équivaut à celle des $n$-polygones réguliers.
+\note{le symbole $\square$ est sur la page ; on attend $D_n$.}
+
+\emph{Cor 2)} Soient
+\[
+  \begin{aligned}
+    \varphi &\colon D_n \longrightarrow \operatorname{Aff}(E) \\
+    \varphi' &\colon D_n \longrightarrow \operatorname{Aff}(E')
+  \end{aligned}
+\]
+deux repr.\ admissibles, et soit $P$ un $n$-polygone régulier subordonné à
+$\varphi$ (donnée qui \uncertain{équivaut} à celle d'un
+$s_0 \in D_\sigma^{*}$ …). Alors si \ill{} isom.\ $\theta \colon (E, \varphi) \to
+(E', \varphi')$ (\uncertain{i.e.} isom.\ affine $\theta \colon E \to E'$ tel
+que $\theta \varphi(g) \theta^{-1} = \varphi'(g)$ $\forall g \in D_n$) on
+\uncertain{trouve} le polygone régulier $P' = \theta(P)$, subordonné à
+\uncertain{$P'$}, …
+\note{la phrase se poursuit au-delà de la page 20, donc hors de ce lot.}
+
+\end{document}
