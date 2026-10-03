@@ -1,0 +1,669 @@
+% Folder 136, batch 13 — archivists' pages 241–260.
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-03 — first pass, unchecked against the pages by a human.
+%
+% Skipped: 241 (typescript page « - 182 - », not in his hand and not the
+% mathematics in hand), 242 (blank), 244 (third-party letter, not circulated
+% under RIGHTS.md), 254 (typed seminar notice), 257 (thesis-defence notice),
+% 259 (typescript page « - 99 - IX », no hand of his on it).
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{136}
+\batch{13}
+\pages{241}{260}
+\foldertitle{Complexe de De Rham à puissance divisée [conférence de 1976 à l’IHÉS] : notes manuscrites (s.d.).}
+\dating{[à partir de 1975-1976]}
+\watermark{Édition de démonstration}
+
+\begin{document}
+
+\section{Modules gradués : les catégories $\mathcal{M}_N$ et leurs adjoints}
+
+\page{243}
+\note{la notation de la feuille est reprise telle quelle : $\mathcal{M}$ est la catégorie des $S$-modules gradués, $\mathcal{M}_N$ la sous-catégorie pleine des modules à degrés $\geq N$, $\mathcal{N}$ celle des $k$-modules ; les foncteurs $i$, $q$, $\tau$, $\rho$ portent les indices qu'il leur donne, qui ne sont pas toujours dans le même ordre d'une page à l'autre}
+
+$S$ anneau $\mathbb{Z}$-gradué \uncertain{commutatif} à degrés $\geq 0$
+\marginal{\uncertain{généralités sur modules gradués sur anneaux arbitraires gradués}}
+
+$S^0 = k$
+
+$\mathcal{M}$ catégorie des $S$-modules gradués
+
+$T$ foncteur translation : $T(M)_i = M_{i+1}$ \marginal{(\uncertain{automorphisme} de $\mathcal{M}$)}
+
+$T^n$ itéré ($n \in \mathbb{Z}$) \quad $T^n(M)_i = M_{i+n}$
+
+$\mathcal{M}^+ \subset \mathcal{M}$ : $S$-modules gradués à degrés $\geq 0$
+
+N.B. $T^{-1}(\mathcal{M}^+) \subset \mathcal{M}^+$
+
+$T^{-N}(\mathcal{M}^+) = \mathcal{M}_N$ : $S$-modules gradués à degrés $\geq N$ ($\mathcal{M}_0 = \mathcal{M}^+$)
+\note{l'exposant de $T$ est récrit sur une lettre biffée}
+
+$N \leq N' \Longrightarrow \mathcal{M}_N \supset \mathcal{M}_{N'}$
+
+$\mathcal{N}$ = catégorie des $k$-modules (pas gradués)
+
+$M_0 \longmapsto M_0 \otimes_k S$, \quad $\mathcal{N} \xrightarrow{\varphi} \mathcal{M}$ se factorise par $\mathcal{M}^+ = \mathcal{M}_0$
+
+(1) Étude de l'inclusion (pl. fid.)
+\[
+  \mathcal{M}_{N'} \overset{i_{N,N'}}{\hookrightarrow} \mathcal{M}_N \qquad N' \geq N
+\]
+Commute aux $\varinjlim$ et $\varprojlim$, donc on s'attend à trouver des adjoints à g. et à dr.
+
+\emph{Adjoint à droite} \add{$\tau_{N';N}$} de $i_{N,N'}$ :
+\[
+  \tau_{N';N} : \mathcal{M}_N \longrightarrow \mathcal{M}_{N'}
+\]
+\[
+  \tau_{N';N}(M)_i =
+  \begin{cases}
+    0 & \text{si } i < N' \\
+    M_i & \text{si } i \geq N'
+  \end{cases}
+\]
+c'est un sous-module de $M \in \mathrm{Ob}\,\mathcal{M}_N$ (car $S$ à degrés $\geq 0$)
+
+\page{245}
+$\tau_{N';N}(M) \hookrightarrow M$
+
+Soit $M \in \mathrm{Ob}\,\mathcal{M}_N$, $P \in \mathrm{Ob}\,\mathcal{M}_{N'}$,
+\[
+  \begin{array}{ccc}
+    \mathrm{Hom}_{\mathcal{M}_N}(i_{N,N'}(P), M) & \xleftarrow{\ \sim\ } & \mathrm{Hom}_{\mathcal{M}_{N'}}(P, \tau_{N';N}(M)) \\
+    \| & & \| \\
+    \mathrm{Hom}_{\mathcal{M}}(P, M) & \xleftarrow{\ \sim\ } & \mathrm{Hom}(P, \tau_{N';N}(M))
+  \end{array}
+\]
+
+\emph{Adjoint à gauche} $q_{N';N}$ de $i_{N,N'}$
+\[
+  \mathrm{Hom}_{\mathcal{M}_N}(M, i_{N,N'}(P)) = \mathrm{Hom}_{\mathcal{M}}(M, P)
+\]
+\[
+  = \mathrm{Hom}_{\mathcal{M}}\bigl(M/\text{ss-module engendré par les } M_i,\ i<N',\ P\bigr)
+\]
+\[
+  \begin{array}{ccccccccc}
+    0 & 0 & M_N & M_{N+1} & M_{N+2} & \cdots & M_{N'-1} & M_{N'} & M_{N'+1} \ \cdots \\
+    0 & 0 & 0 & 0 & 0 & \cdots & 0 & P_{N'} & P_{N'+1} \ \cdots
+  \end{array}
+\]
+\[
+  q_{N';N}(M) = M/\text{ss-module de } M \text{ engendré par les } M_i,\ i < N'
+\]
+
+$q_{N';N}$, $i_{N,N'}$, $\tau_{N';N}$
+
+\textbf{NB} $q_{N';N}$ et $\tau_{N';N}$ sont des « foncteurs de localisation » (càd adjoints d'un foncteur pl. fidèle), \struck{et} $q_{N';N}$ est exact à droite (en fait, commute aux $\varinjlim$ quelc.) mais en général pas à gauche sans doute --- on ne s'attend pas qu'il ait encore un adj. à g. Par contre $\tau_{N';N}$ commute aux $\varprojlim$ et aux $\varinjlim$ (a fortiori il est exact). Donc s'attend à en trouver un foncteur adjoint à droite.
+
+\section{Algèbres différentielles graduées à puissances divisées}
+
+\page{246}
+\[
+  A^* \qquad \bullet \qquad d \qquad J \qquad \gamma \ \text{puiss.}
+\]
+\note{chacun des cinq symboles est relié par un trait à la liste de ses axiomes, recopiée ici dans l'ordre de la page ; deux longs traits obliques traversent la feuille sans biffer le texte}
+
+$A^*$ :
+\begin{itemize}
+  \item[($*$)] groupe gradué à degrés $\geq 0$
+\end{itemize}
+$\bullet$ :
+\begin{itemize}
+  \item[($*$)] multiplication associative unitaire \struck{\ill{}} \uncertain{sur} $A^0$
+  \item[($*$)] alg. graduée : $x \in A^i,\ y \in A^j \Rightarrow xy \in A^{i+j}$
+  \item[] alg. alternée, i.e.
+    $\left\{\begin{array}{l} xy = (-1)^{ij}\, yx \\ x^2 = 0 \text{ si } x \in A^i,\ i \text{ impair} \end{array}\right.$
+\end{itemize}
+$d$ :
+\begin{itemize}
+  \item[($*$)] différentielle $d^2 = 0$
+  \item[($*$)] $d$ de degré $+1$
+  \item[($*$)] $d(xy) = (dx)\,y + (-1)^{\deg x}\, x\, dy$
+\end{itemize}
+$J$ : \uncertain{Sous-groupe}
+\begin{itemize}
+  \item[($*$)] contenant $A^+ = \sum_{i>0} A^i$, donc \struck{gradué} de la forme $J^0 + \sum_{i>0} A^i$
+  \item[($*$)] idéal (i.e. $J^0$ idéal)
+  \item[($*$)] stable par $d$ (automatique)
+\end{itemize}
+$\gamma$ :
+\begin{itemize}
+  \item[($*$)] puissances divisées sur $J$ \struck{$x^{(\alpha)} = 0$}
+  \item[($*$)] $x \in A^i \Longrightarrow x^{(\alpha)} \in A^{\alpha i}$
+  \item[($*$)] \struck{$d(x^{(\alpha)}) =$} $x \in \sum A^i$, \struck{$i$ impair}, $i$ impair, $\alpha \geq 2$ $\Longrightarrow x^{(\alpha)} = 0$
+    \note{une ligne interlinéaire, sous cette condition, se lit \uncertain{$x \in A^i$, $y \in A$}}
+  \item[($*$)] $d\,x^{(\alpha)} = x^{(\alpha-1)}\, dx$
+\end{itemize}
+
+\struck{$A^{\oplus}$}
+
+$A^{\mathrm{pair}} + A^{\mathrm{impair}} = A^0 + A^1$, \quad $J^0$ …
+\[
+  \Bigl(\sum_{i \text{ pair}} x_i + \sum_{j \text{ impair}} x_j\Bigr)^{\alpha}
+\]
+$A^0 + A^1$
+\struck{$(\sum x_i)^2 = \sum x_i x_j + \ldots$} \quad
+\struck{$(x+y)^2 = x^2 + y^2 + xy + yx$}
+
+$\Lambda^2 A^1 \longrightarrow J^0 \subset A^0$ \note{le $J^0$ est récrit sur un $A^0$ ; lecture incertaine}
+
+$A^0 \cdot A^1 \subset A^1$, \quad $A^1 A^1 \subset A^0$
+
+$J^0 + A^1 = J$
+\[
+  (x + y)^{(\alpha)} = x^{(\alpha)} + x^{(\alpha-1)} y + \text{\struck{$x^{(\alpha-2)} y^{(2)}$}}
+  \qquad (x \in J^0,\ y \in A^1)
+\]
+\note{les appartenances $x \in J^0$, $y \in A^1$ sont marquées par des signes $\in$ verticaux sous $J^0 + A^1$ ; un $\sum$ et un « $(x+y)^{\alpha}$ » sont biffés sur la même ligne}
+\[
+  z^{(\alpha)} = (x + y)^{(\alpha)} = x^{(\alpha)} + x^{(\alpha-1)} y
+\]
+\[
+  z'^{(\alpha)} = (x' + y')^{(\alpha)} = x'^{(\alpha)} + x'^{(\alpha-1)} y'
+\]
+\begin{align*}
+  (z + z')^{(\alpha)} &= \bigl((x + x') + (y + y')\bigr)^{(\alpha)}
+    = (x + x')^{(\alpha)} + (x + x')^{(\alpha-1)} (y + y') \\
+  &= \sum_{i+j=\alpha} x^{(i)} x'^{(j)} + \Bigl(\sum_{i+j=\alpha-1} x^{(i)} x'^{(j)}\Bigr)(y + y')
+\end{align*}
+\begin{align*}
+  \sum_{i+j=\alpha} z^{(i)} z'^{(j)}
+  &= \sum_{i+j=\alpha} (x^{(i)} + x^{(i-1)} y)(x'^{(j)} + x'^{(j-1)} y') \\
+  &= \sum_{i+j=\alpha} x^{(i)} x'^{(j)} + \Bigl(\sum_{i+j=\alpha-1} x^{(i)} x'^{(j)}\Bigr)(y + y') \\
+  &\quad + \Bigl(\sum_{i+j=\alpha-2} x^{(i)} x'^{(j)}\Bigr) y y'
+\end{align*}
+\[
+  \boxed{\text{OK si } yy' = 0}
+\]
+
+\section{Les catégories $\mathcal{M}_N$ (suite)}
+
+\page{247}
+D'ailleurs $\tau_{N';N}$, étant un foncteur localisation exact, commutant aux $\varinjlim$, est un foncteur de passage au quotient par une sous-catégorie abélienne épaisse stable par $\varinjlim$, savoir la sous-catégorie des $M$ \struck{\ill{}} tels que \struck{$M_i$} ($\tau_{N';N} M = 0$ i.e.) $M_i = 0$ pour $i \geq N'$
+
+\emph{Adjoint à droite} $\rho_{N,N'}$ de $\tau_{N';N}$
+\[
+  \mathrm{Hom}_{\mathcal{M}_{N'}}(\tau_{N';N}(M), P) \overset{?}{\xrightarrow{\ \sim\ }} \mathrm{Hom}_{\mathcal{M}_N}(M, \rho_{N,N'} P)
+\]
+\[
+  \begin{array}{c}
+    \| \\
+    \mathrm{Hom}_{\mathcal{M}}(\tau_{N';N}(M), P) \\
+    \cap \\
+    \prod_{i \geq N'} \mathrm{Hom}_k(M_i, P_i)
+  \end{array}
+\]
+\[
+  \begin{array}{cccccccccc}
+    0 & 0 & M_N & M_{N+1} & \cdots & M_{N'-1} & M_{N'} & M_{N'+1} & \cdots \\
+      &   &     &         &        &          & \downarrow & \downarrow & \\
+    0 & 0 & 0 & 0 &  & 0 & P_{N'} & P_{N'+1} & \cdots
+  \end{array}
+\]
+\struck{$\rho_{N,N'}(P)_i = \prod \mathrm{Hom}(\ldots)$, $\mathrm{Hom}(\ldots, \ldots)$, $\mathrm{Hom}^i(\tau_{N'-i,0}\,S, P)$}
+\note{plusieurs essais pour $\rho_{N,N'}(P)_i$ sont raturés, en partie illisibles ; on y lit encore $\prod\mathrm{Hom}$, $S$, $P$, $\tau_{N'-i,0}$ et un \uncertain{$\mathcal{M}_0$} en indice}
+\[
+  \rho_{N,N'}(P)_i =
+  \begin{cases}
+    0 & \text{si } i < N \\
+    \mathrm{Hom}^i_{\mathcal{M}}(\tau_{N'-i}\, S, P) \simeq \mathrm{Hom}_{\mathcal{M}_N}(T^{-i} \tau_{N'-i}\, S, P) & \text{si } i \geq N
+  \end{cases}
+\]
+
+\page{248}
+\note{feuille écrite tête-bêche ; un long trait oblique la traverse de haut en bas sans biffer les calculs, qui sont transcrits}
+\[
+  (\lambda\cdot z)^{(\alpha)} \overset{?}{=} \lambda^{\alpha} z^{(\alpha)}
+  \qquad \lambda \in \hat{A},\ z \in J
+\]
+\[
+  \textstyle\Bigl(\sum_{i \in I} x_i\Bigr)\Bigl(\sum_{j \in J} y_j\Bigr) = \sum_{i,j} x_i y_j
+\]
+\[
+  \lambda = \xi + \eta \quad (\xi \in A^0,\ \eta \in A') \qquad z = x + y
+\]
+\[
+  \lambda z = (\xi x + \eta y) + (\xi y + x\eta) \qquad (\xi x + \eta y \in A^0)
+\]
+\begin{align*}
+  (\lambda z)^{(\alpha)} &= (\xi x + \eta y)^{(\alpha)} + (\xi x + \eta y)^{(\alpha-1)}(\xi y + x\eta) \\
+  &= \sum_{i+j=\alpha} (\xi x)^{(i)} (\eta y)^{(j)}
+     + \Bigl(\sum_{i+j=\alpha-1} (\xi x)^{(i)} (\eta y)^{(j)}\Bigr)(\xi y + x\eta)
+\end{align*}
+\begin{align*}
+  \lambda^{\alpha} z^{(\alpha)} &= (\xi^{\alpha} + \alpha\,\xi^{\alpha-1}\eta)(x^{(\alpha)} + x^{(\alpha-1)} y) \\
+  &= (\xi^{\alpha} x^{(\alpha)} + \alpha\,\xi^{\alpha-1} x^{(\alpha-1)}\,\eta y)
+     + (\xi^{\alpha} x^{(\alpha-1)} y + \alpha\,\xi^{\alpha-1} x^{(\alpha)} \eta) \\
+  &= \bigl((\xi x)^{(\alpha)} + \alpha\,(\xi x)^{(\alpha-1)}(\eta y)\bigr)
+     + \bigl(\xi (\xi x)^{(\alpha-1)} y + x\,(x\xi)^{(\alpha-1)} \eta\bigr)
+\end{align*}
+\note{au-dessus de la deuxième ligne, une remarque sur le terme $\alpha\,\xi^{\alpha-1} x^{(\alpha)}$, lue \uncertain{$\alpha!\,\xi^{(\alpha-1)} x^{(\alpha)} = x^{\alpha}\,\xi^{(\alpha-1)}$} ; la dernière ligne est d'une lecture incertaine dans ses exposants}
+
+OK si $\eta y = 0$
+
+\[
+  (z^{(\alpha)})^{(\beta)} \overset{?}{=} z^{(\alpha\beta)}\, \frac{(\alpha\beta)!}{\beta!\,(\alpha!)^{\beta}}
+  \qquad \Bigl(\frac{(\alpha\beta)!}{\beta!\,(\alpha!)^{\beta}} = c_{\alpha,\beta}\Bigr)
+\]
+\[
+  \frac{1}{\beta!}\Bigl(\frac{z^{\alpha}}{\alpha!}\Bigr)^{\beta} = \frac{z^{\alpha\beta}}{\beta!\,(\alpha!)^{\beta}}
+\]
+\[
+  = x^{(\alpha\beta)} c_{\alpha\beta} + x^{(\alpha\beta-1)} y\, c_{\alpha\beta}
+\]
+\begin{align*}
+  (z^{(\alpha)})^{(\beta)} &= (x^{(\alpha)} + x^{(\alpha-1)} y)^{(\beta)} \\
+  &= (x^{(\alpha)})^{(\beta)} + (x^{(\alpha)})^{(\beta-1)} x^{(\alpha-1)} y \\
+  &= \frac{(\alpha\beta)!}{\beta!\,(\alpha!)^{\beta}}\, x^{(\alpha\beta)}
+     + \frac{(\alpha(\beta-1))!}{(\beta-1)!\,(\alpha!)^{\beta-1}}\, x^{(\alpha(\beta-1))} x^{(\alpha-1)} y
+\end{align*}
+\[
+  x^{(\alpha(\beta-1))} x^{(\alpha-1)} = x^{(\alpha\beta-1)}\, \frac{(\alpha\beta-1)!}{(\alpha(\beta-1))!\,(\alpha-1)!}
+\]
+\struck{$\frac{(\alpha\beta)!}{\beta!\,(\alpha!)^{\beta}}\bigl[x^{(\alpha\beta)} + \beta(\alpha!)(\alpha(\beta-1))!\ \ldots\bigr]$}
+\note{essai biffé, incomplet}
+\[
+  = \ldots + \frac{(\alpha\beta-1)!}{(\alpha-1)!\,(\beta-1)!\,(\alpha!)^{\beta-1}}\, x^{(\alpha\beta-1)} y
+\]
+\[
+  \frac{(\alpha\beta)!}{\alpha!\,\beta!\,(\alpha!)^{\beta-1}} = \frac{(\alpha\beta)!}{\beta!\,(\alpha!)^{\beta}}
+  \qquad \text{OK}
+\]
+
+\[
+  x^{(p)} x^{(q)} = \frac{(p+q)!}{p!\,q!}\, x^{(p+q)}
+\]
+\begin{align*}
+  z^{(p)} z^{(q)} &\overset{?}{=} \frac{(p+q)!}{p!\,q!}\, z^{(p+q)} \\
+  z^{(p)} z^{(q)} &= (x^{(p)} + x^{(p-1)} y)(x^{(q)} + x^{(q-1)} y) \\
+  &= x^{(p)} x^{(q)} + (x^{(p)} x^{(q-1)} + x^{(p-1)} x^{(q)})\, y \\
+  &= \frac{(p+q)!}{p!\,q!}\, x^{(p+q)}
+     + \Bigl(\frac{(p+q-1)!}{p!\,(q-1)!} + \frac{(p+q-1)!}{(p-1)!\,q!}\Bigr) x^{(p+q-1)} y
+\end{align*}
+\[
+  (p+q-1)!\,\frac{p+q}{p!\,q!} = \frac{(p+q)!}{p!\,q!} \qquad \text{OK}
+\]
+
+\page{249}
+\[
+  \mathcal{M}_{N'} \overset{i_{N'}}{\hookrightarrow} \mathcal{M}
+\]
+\[
+  q_{N'} \quad i_{N'} \quad \tau_{N'} \quad \rho_{N'}
+\]
+\note{une accolade réunit $i_{N'}$ et $\rho_{N'}$, marquée « pl. fid. » ; une autre, sous $q_{N'}$ et $i_{N'}$, marquée « loc. » ; sous $\tau_{N'}$, une colonne de mots lus \uncertain{loc. \ill{} sous-catégorie abélienne épaisse}}
+
+\[
+  \left\{
+  \begin{array}{l}
+    \tau_{N'}(M) \hookrightarrow M \\
+    \tau_{N'}(M)_i = \begin{cases} 0 & \text{si } i < N' \\ M_i & \text{si } i \geq N' \end{cases}
+  \end{array}
+  \right.
+\]
+\[
+  q_{N'}(M) = M/\text{ss-module engendré par les } M_i,\ i < N'
+\]
+\[
+  \rho_{N'}(M)_i = \mathrm{Hom}^i(\tau_{N'-i}S, M) = \mathrm{Hom}_{\mathcal{M}_{N'}}(T^{-i}\tau_{N'-i}S, M)
+\]
+
+\[
+  \mathcal{M}_{N'} \overset{i_{N,N'}}{\hookrightarrow} \mathcal{M}_N \hookrightarrow \mathcal{M}
+\]
+\[
+  q_{N';N},\ i_{N,N'},\ \tau_{N';N},\ \rho_{N,N'}
+\]
+\[
+  \left\{
+  \begin{array}{l}
+    q_{N';N} = q_{N'} | \mathcal{M}_N \\
+    \tau_{N';N} = \tau_{N'} | \mathcal{M}_N
+  \end{array}
+  \right.
+\]
+\begin{align*}
+  \mathrm{Hom}_{\mathcal{M}_{N'}}(\tau_{N';N} M, P) &\simeq \mathrm{Hom}_{\mathcal{M}_N}(M, \rho_{N,N'} P) \\
+  \| \qquad & \\
+  \mathrm{Hom}_{\mathcal{M}_{N'}}(\tau_{N'} M, P) & \\
+  \wr \qquad & \\
+  \mathrm{Hom}_{\mathcal{M}}(M, \rho_{N'} P) &\simeq \mathrm{Hom}_{\mathcal{M}}(i_N M, \rho_{N'} P) \\
+  &\simeq \mathrm{Hom}_{\mathcal{M}_N}(M, \tau_N \rho_{N'} P)
+\end{align*}
+donc \quad $\boxed{\rho_{N,N'} = \tau_N \rho_{N'}}$
+
+\section{Le complexe $C^*(X, (A, \pi, \gamma))$}
+
+\page{250}
+\note{feuille écrite tête-bêche, traversée de haut en bas par un trait qui ne biffe pas les formules}
+\[
+  \hat{\Gamma}^*\Bigl(\frac{\mathbb{Z} \times \mathbb{Z}^I}{\mathbb{Z}}\Bigr) \otimes_{\mathbb{Z}} \overset{*}{\Lambda}\, \mathbb{Z}^I/\mathbb{Z}
+\]
+\[
+  0 \longrightarrow \mathbb{Z} \xrightarrow{\ (-\mathrm{id},\, \mathrm{diag})\ } \mathbb{Z} \times \mathbb{Z}^I
+\]
+\[
+  \mathbb{Z}\{(X_i)_{i \in I}\}[(dX_i)_{i \in I}]\big/\Bigl(\textstyle\sum dX_i = 0\Bigr)
+\]
+\note{un mot biffé, illisible, suit $(dX_i)_{i \in I}$ dans les crochets}
+\[
+  \Gamma^*(\mathbb{Z}^I) \otimes_{\mathbb{Z}} \overset{*}{\Lambda}(\mathbb{Z}^I/\mathbb{Z})
+\]
+\[
+  \mathrm{Sym}^*(\mathbb{Z}^{(I)}) \otimes_{\mathbb{Z}} \overset{*}{\Lambda}\, \mathbb{Z}^{(I)},
+\]
+
+$C^*(X, (A, \pi, \gamma))$ \quad alg. \add{différentielle alternée} à idéal à puiss. div. sur $(A, \pi, \gamma)$
+
+dépend de façon contravariante de $X$, \quad --- covariante de $(A, \pi, \gamma)$
+\[
+  \begin{array}{ccc}
+    A & \xrightarrow{\ \varphi\ } & A' \\
+    \pi & & \pi'
+  \end{array}
+  \qquad
+  (\varphi, \lambda) \quad
+  \begin{array}{l}
+    \varphi(\pi) = \lambda \pi' \\
+    \varphi(\pi^{(\alpha)}) = \lambda^{\alpha} \pi'^{(\alpha)}
+  \end{array}
+\]
+\struck{$A\{(X_i)\}/\sum X_i$}
+\[
+  \begin{array}{rl}
+    X_i,\ dX_i & A\{(X_i, dX_i)\}\big/\bigl\{\textstyle\sum X_i - \pi,\ \sum dX_i\bigr\} \\
+    \downarrow \quad \downarrow & \\
+    \lambda X_i,\ \lambda dX_i & A'\{(X_i, dX_i)\}\big/\bigl(\textstyle\sum X_i - \pi',\ \sum dX_i\bigr)
+  \end{array}
+\]
+\[
+  \Bigl(\sum \lambda_{ijk}\, dX_i\, dX_j\, dX_k\Bigr)^2
+  = \sum_{\substack{i,j,k \\ i',j',k'}} \lambda_{ijk} \lambda_{i'j'k'}\, dX_i\, dX_j\, dX_k\, dX_{i'}\, dX_{j'}\, dX_{k'}
+\]
+\[
+  \Bigl(\sum \lambda_{\alpha} \xi_{\alpha}\Bigr)\Bigl(\sum \lambda_{\beta} \xi_{\beta}\Bigr) = \sum_{\alpha,\beta} \lambda_{\alpha} \lambda_{\beta}\, \xi_{\alpha} \xi_{\beta}
+\]
+\[
+  \frac{x^n}{n!}
+\]
+\struck{$(A, J,$}
+\[
+  (A^*, \bullet, d, J, \gamma)
+\]
+$(A^*, \bullet)$ : algèbre graduée associative unitaire à degrés positifs alternée ($x^2 = 0$ si $\deg x$ impair, \struck{$x^i x^j = (-1)^{ij} x^j x^i$}, $xy = (-1)^{\deg x \deg y}\, yx$)
+
+$d$ : différentielle (degré $+1$) ($d^2 = 0$, $d(xy) = (dx)\,y + (-1)^{\deg x}\, x\, dy$)
+
+\page{251}
+\[
+  \mathcal{N} = \mathrm{Mod}(k) \overset{i}{\longrightarrow} \mathcal{M}_0 = \mathcal{M}^+
+\]
+\struck{$\mathcal{N} \longrightarrow \mathcal{M}_N$ \ill{}} $(i, p, \rho)$
+\note{une flèche de retour $\mathcal{M}_0 \to \mathcal{N}$ est tracée sous la première ; la ligne suivante est biffée, sauf le triplet entouré $(i, p, \rho)$}
+
+$i(N) = N \otimes_k S$, \quad $k(M_\bullet) = M_0$
+\note{le foncteur « degré $0$ » est noté par une lettre $k$ surchargée, qu'on garde}
+
+$\tau_{N,0} \circ i : \mathcal{N} \longrightarrow \mathcal{M}_N$
+
+a comme adjoint à droite
+\[
+  k \circ \rho_{0N} = k \circ \tau_0 \circ \rho_N = k \circ \rho_N
+\]
+\marginal{\struck{\ill{} adjoint à gauche}}
+
+\emph{Conditions équivalentes}
+\begin{itemize}
+  \item[a)] $i_N = \tau_{N,0} \circ i$ est pl. fidèle
+  \item[b)] $\forall P \in \mathrm{Mod}\,k$, $P \xrightarrow{\sim} (\rho_N i_N(P))_0$
+    \[
+      \Bigl[\, = (\rho_N \tau_N(P \otimes_k S))_0 = (\rho_N(P \otimes_k \tau_N S))_0 \,\Bigr]
+    \]
+  \item[c)] $k \circ \rho_N$ est un foncteur localisation.
+\end{itemize}
+\note{une longue flèche, dans la marge de gauche, renvoie de la seconde liste à la première ; elle part d'une ligne biffée illisible}
+
+\emph{Conditions équivalentes}
+\begin{itemize}
+  \item[a')] \struck{\ill{}} $\mathrm{Im\,ess}\ i \subset \mathrm{Im\,ess}\ \rho_{0,N}$ \note{« Im ess » est une lecture incertaine}
+  \item[b')] $\forall P \in \mathrm{Mod}\,k$, $i(P) \xrightarrow{\sim} \rho_{0N} \tau_{N,0}\, i(P) = \rho_{0N}\, i_N(P)$
+  \item[b' bis)] $\forall P \in \mathrm{Mod}\,k$, $i(P) \longrightarrow \rho_{0N}\, i_N(P)$ \uncertain{est un iso en degrés} $0 \leq \alpha \leq N-1$
+  \item[c')] \add{$\forall P \in \mathrm{Mod}\,k$,} $\forall\, 0 \leq \alpha \leq N-1$, \struck{$\tau_{N-\alpha,0}S$ \ill{}} :
+    \[
+      P \otimes S_{\alpha} \xrightarrow{\ \sim\ } \mathrm{Hom}^{\alpha}(\tau_{N-\alpha} S, P \otimes_k S)
+    \]
+    \[
+      \Bigl[\ \mathrm{Hom}^{\alpha}(S, P \otimes_k S) \ \Bigr]
+    \]
+    \note{sous la flèche, un « $\uparrow\wr$ » relie $P \otimes S_\alpha$ à $\mathrm{Hom}^{\alpha}(S, P \otimes_k S)$, et une flèche marquée « restriction » va de celui-ci vers $\mathrm{Hom}^{\alpha}(\tau_{N-\alpha} S, P \otimes_k S)$}
+    \[
+      \mathrm{Hom}^{\alpha}(S/\tau_{N-\alpha} S, P \otimes_k S) = 0
+    \]
+\end{itemize}
+\marginal{\struck{\ill{}}}
+
+\page{252}
+\note{feuille écrite tête-bêche, traversée de haut en bas par un trait qui ne biffe pas les formules}
+
+$J \subset A$, \quad $H^*(X, J)^{*}$ : p.d.
+
+\drawing{petit croquis d'un triangle (ou tétraèdre) traversé de segments}
+
+\[
+  A\{(X_i)_{i \in I}, (Y_i)_{i \in I}\} \big/ \Bigl(\textstyle\sum X_i - \pi,\ \sum Y_i - \omega,\ \sum dX_i,\ \sum dY_i\Bigr)
+\]
+\[
+  A \longrightarrow A^{(I)}
+\]
+\[
+  \Gamma^*_{(A,\pi)}(A^I \otimes_A J)
+\]
+\[
+  X_1 \otimes \pi,\ X_2 \otimes \pi,\ \ldots,\ X_n \otimes \pi
+\]
+\[
+  \textstyle\sum X_i \otimes \pi - \pi
+\]
+\[
+  J^I/J
+\]
+\[
+  \Gamma^*_{(A,\pi)}(J^I)/\delta J
+\]
+\[
+  \delta\pi = -\pi + \pi \qquad dX_i
+\]
+\note{la ligne $\delta\pi = \ldots$ porte un mot biffé avant $-\pi + \pi$}
+\[
+  \Gamma^*_A \qquad A\{(X_i)_{i \in I}\} \big/ \Bigl(\textstyle\sum \pi X_i - \pi,\ \pi \sum dX_i\Bigr)
+\]
+\[
+  \Gamma^{*+}_A J \longrightarrow J
+\]
+\[
+  H^*(X, \Gamma^{*+} J) \longrightarrow H^*(X, J)
+\]
+\[
+  H^{2i}(X, M) \xrightarrow{\ \gamma^{\alpha}\ } H^{2i\alpha}(X, \Gamma^{\alpha} M) \longrightarrow H^{2i\alpha}(X, \mathrm{Sym}^{\alpha} M)
+\]
+\[
+  H^{2i}(X, J) \longrightarrow H^{2i\alpha}(X, \Gamma^{\alpha} J) \longrightarrow H^{2i\alpha}(X, J)
+\]
+\[
+  A \xrightarrow{\ 2i\ } M, \qquad A \xrightarrow{\ 2i\alpha\ } \Gamma^{\alpha} M
+\]
+\[
+  \Gamma^i M \rightleftarrows \mathrm{Sym}^i(M) \qquad x^{(i)} \mapsto x^i, \quad i!\,x^{(i)} = x^i
+\]
+
+\section{Modules négligeables et limites}
+
+\page{253}
+\[
+  \mathcal{M}/\mathrm{Nég}_{\infty} \simeq \varinjlim \mathcal{M}_N
+\]
+n'est pas une catégorie à $\varinjlim$ filtrantes exactes.
+\note{ces deux lignes sont seules en tête d'une feuille dont le reste n'est pas de sa main}
+
+\page{255}
+$S$-module $N$-\emph{négligeable} $M$ \quad ($N \in \mathbb{Z}$)
+\[
+  \overset{\text{déf}}{\Longleftrightarrow} \tau_N M = 0 \Longleftrightarrow M_i = 0 \text{ si } i \geq N
+\]
+module $\infty$-\emph{négligeable} $M$
+\[
+  \Longleftrightarrow \exists N \in \mathbb{Z} \text{ tel que } M\ N\text{-négligeable}
+  \Longleftrightarrow M_i = 0 \text{ si } i \text{ assez grand}
+\]
+\emph{Rem.} Si $M$ de type fini, $M$ est $\infty$-négligeable ssi $\exists N \geq 0$ tel que $\tau_N S$ annule $M$.
+
+$M$ \emph{négligeable} $\Longleftrightarrow$ $M$ limite inductive de modules $\infty$-négligeables
+$\Longleftrightarrow$ tt sous-module de t.f. de $M$ est $\infty$-négligeable
+$\Longleftrightarrow$ $\forall x \in M$, $\exists N \geq 0$ tel que $\tau_N S$ annule $x$
+\[
+  \mathrm{Nég}_N \subset \mathrm{Nég}_{N'} \subset \mathrm{Nég}_{\infty} \subset \mathrm{Nég} \qquad N \leq N'
+\]
+$\mathrm{Nég}_N$, $\mathrm{Nég}_{\infty}$ sous-catégories épaisses de $\mathcal{M}$,
+\[
+  \begin{array}{ccc}
+    \mathcal{M}/\mathrm{Nég}_N & \simeq & \mathcal{M}_N \\
+    \downarrow & & \downarrow{\scriptstyle \tau_{N';N}} \\
+    \mathcal{M}/\mathrm{Nég}_{N'} & \longrightarrow & \mathcal{M}_{N'}
+  \end{array}
+\]
+
+\page{256}
+\[
+  \varinjlim \varphi_N \tau_N P \longrightarrow \varphi_\omega \tau_\omega P
+\]
+\struck{Hom} bijectif ?
+\[
+  \Updownarrow
+\]
+$\forall M$ de prés. finie (il suffit $M = S[i]$)
+\[
+  \mathrm{Hom}_{\mathcal{M}}(M, \varinjlim \varphi_N \tau_N P) \longrightarrow \mathrm{Hom}_{\mathcal{M}}(M, \varphi_\omega \tau_\omega P) \quad \text{bij.}
+\]
+\begin{align*}
+  \mathrm{Hom}_{\mathcal{M}}(M, \varinjlim \varphi_N \tau_N P)
+  &\simeq \varinjlim \mathrm{Hom}_{\mathcal{M}}(M, \varphi_N \tau_N P) \\
+  &\simeq \varinjlim \mathrm{Hom}_{\mathcal{M}_N}(\tau_N M, \tau_N P) \\
+  &\simeq \varinjlim \mathrm{Hom}_{\mathcal{M}}(\tau_N M, P)
+\end{align*}
+\begin{align*}
+  \mathrm{Hom}_{\mathcal{M}}(M, \varphi_\omega \tau_\omega P)
+  &\simeq \mathrm{Hom}_{\mathcal{M}_\omega}(\tau_\omega M, \tau_\omega P) \\
+  &\simeq \varinjlim_{\substack{M' \subset M \\ M/M' \text{ négl.}}} \mathrm{Hom}(M', P)
+\end{align*}
+\note{les deux colonnes de la page sont séparées par un trait vertical ; une flèche va de la dernière ligne de gauche à la dernière ligne de droite}
+
+dire que \uncertain{ça} ($M$ fixé) c'est un isom pour tt $P$, signifie que les sous-prolongements de $M$ formés, soit des $\tau_N M$, soit des $M' \subset M$ tels que $M/M'$ est négligeable, \struck{soit} donnent pas l'\uncertain{iso cons.} --- ou encore que ces deux \uncertain{sous-objets} sont cofinaux, i.e. que tout $M'$ contient un $\tau_N M$, i.e. que $M/M'$ soit $\infty$-négligeable. Mais c'est le cas si $M$ de t.f. \struck{\ill{}}
+\note{la phrase suivante est biffée de plusieurs traits obliques : \struck{\uncertain{(l'idéal)} gradué $J$ de $S$, tel que $S/J$ est négligeable \ill{}}}
+Donc
+\[
+  \varinjlim \varphi_N \tau_N P \xrightarrow{\ \sim\ } \varphi_\omega \tau_\omega P
+\]
+
+\page{258}
+\note{au verso d'une feuille dactylographiée qui n'est pas de lui ; seuls ses calculs sont transcrits. L'indice $\omega$ est celui qu'il écrit pour la limite $N \to \infty$}
+\begin{align*}
+  (\varphi_\omega \tau_\omega P)_i
+  &\simeq \mathrm{Hom}^i(S, \varphi_\omega \tau_\omega P) \\
+  &\simeq \mathrm{Hom}(S[-i], \varphi_\omega \tau_\omega P) \\
+  &\simeq \mathrm{Hom}(\tau_\omega S[-i], \tau_\omega P) \\
+  &\simeq \varinjlim_{\substack{M' \subset S[-i] \\ \text{t.q. } S[-i]/M' \text{ négl.}}} \mathrm{Hom}(M', P) \\
+  &\simeq \varinjlim_{\substack{M' \subset S \\ \text{t.q. } S/M' \text{ négl.}}} \mathrm{Hom}^i(M', P) \\
+  &\simeq \varinjlim_N \mathrm{Hom}^i(\tau_N S, P) \\
+  &\simeq \varinjlim_N \mathrm{Hom}(\tau_N(S[-i]), \tau_N P)
+\end{align*}
+\note{sous $\mathrm{Hom}^i(\tau_N S, P)$, une accolade renvoie à « $\simeq \mathrm{Hom}^i(\tau_N S, \tau_{N+i} P)$ » ; dans la ligne $\simeq \varinjlim\, \mathrm{Hom}(M', P)$ un premier « Hom » est biffé ; l'indice « $S[i]$ » de la troisième ligne est écrit $S[i]$ dans le premier membre, sans le signe}
+
+\begin{tikzcd}
+  \tau_N S \arrow[r, "d^\circ 0"] \arrow[d, "T^{(\ell)}"'] & P \\
+  \tau_{N+\ell}(S) \arrow[ur, "d^\circ \ell"']
+\end{tikzcd}
+
+\note{l'étiquette de la flèche oblique est récrite sur une surcharge ; « $d^\circ$ » se lit « de degré »}
+\[
+  \textstyle\sum T^{(i)} \overset{T^{(\ell)}}{\longmapsto} \sum c_{i,\ell}\, T^{(i+\ell)}
+\]
+
+$P \in \mathrm{Im\,ess}\ \varphi_\omega$
+\[
+  \Updownarrow
+\]
+\[
+  P \xrightarrow{\ \sim\ } \varphi_\omega \tau_\omega P
+\]
+\[
+  \Updownarrow
+\]
+\[
+  \mathrm{Hom}^i(S, P) \xrightarrow{\ \sim\ } \varinjlim_N \mathrm{Hom}^i(\tau_N S, P)
+\]
+\begin{itemize}
+  \item[a)] \emph{injectivité} : $P$ n'a pas d'éléments négligeables non nuls
+  \item[b)] \emph{surjectivité} : tout homom. (\uncertain{choisi}) d'un \struck{\ill{}} $\tau_N S$ dans $P$ se prolonge à $S$, en d'autres termes : toute ext. de $[S/\tau_N S](-i)$ par $P$ est triviale …
+\end{itemize}
+\note{un long trait relie le bas du calcul de gauche à cette équivalence ; la page s'arrête sur des points de suspension}
+
+\page{260}
+\[
+  \mathrm{Hom}_{\mathcal{M}}(M, \varphi_N \text{\struck{\ill{}}} P) \simeq \mathrm{Hom}_{\mathcal{M}_N}(\tau_N M, \text{\struck{\ill{}}} P)
+  \qquad (P \in \mathcal{M}_N)
+\]
+\note{le symbole biffé devant $P$, ici et dans les lignes suivantes, est vraisemblablement un $\tau_N$}
+donc
+\begin{align*}
+  (\varphi_N \tau_N P)_i
+  &= \mathrm{Hom}^i_{\mathcal{M}}(S, \varphi_N \tau_N P) = \mathrm{Hom}_{\mathcal{M}}(S[-i], \varphi_N P) \\
+  &= \mathrm{Hom}_{\mathcal{M}_N}(\tau_N(S[-i]), P) \\
+  &\simeq \mathrm{Hom}_{\mathcal{M}_N}((\tau_{N-i}(S))(-i), P) \\
+  &\simeq \mathrm{Hom}^i_{\mathcal{M}}(\tau_{N-i}(S), P)
+\end{align*}
+
+$h_M = \mathrm{Hom}(M, -)$, donc $h_M \circ \varphi_N \simeq h_{\tau_N M} \circ{}$ \struck{$\tau_N$}
+
+\struck{donc $h_M \circ \varphi_N \circ \tau_N \simeq h_{\tau_N M} \circ \tau_N$}
+
+\struck{$R^*(h_M \circ \varphi_N \tau_N) \simeq R^* h_{\tau}$}
+
+Composons avec $\tau_N$, on a
+\begin{align*}
+  \mathrm{Hom}_{\mathcal{M}}(M, \varphi_N \tau_N P) &= \mathrm{Hom}_{\mathcal{M}_N}(\tau_N M, \tau_N P) \\
+  &\simeq \mathrm{Hom}_{\mathcal{M}}(i_N \tau_N M, P)
+\end{align*}
+\[
+  h_M \varphi_N \tau_N = h_{i_N \tau_N}
+\]
+D'où
+\[
+  R^*(h_M \varphi_N \tau_N) \simeq R^* h_{i_N \tau_N} = \mathbb{R}\mathrm{Hom}(i_N \tau_N M, -)
+\]
+\[
+  \| \qquad\qquad
+\]
+\[
+  \mathbb{R}^*(h_M \varphi_N)\, \tau_N
+  \qquad (R^* \tau_N = \tau_N \text{ car } \tau_N \text{ exact})
+\]
+Si $M$ \emph{projectif} donc $h_M$ exact, on a
+\[
+  h_M (R^* \varphi_N) \circ \tau_N \simeq \mathbb{R}\mathrm{Hom}(\tau_N M, -)
+\]
+i.e.
+\[
+  \boxed{\mathrm{Hom}(M, R^* \varphi_N(\tau_N P)) \simeq \mathbb{R}\mathrm{Hom}(\tau_N M, P)}
+\]
+en particulier :
+\[
+  \mathrm{Hom}(M, (R^n \varphi_N)(\tau_N P)) \simeq \mathrm{Ext}^n(\tau_N M, P)
+  \quad \text{si } M \text{ projectif} \in \mathcal{M}
+\]
+\note{un « Ext » est biffé dans la marge de gauche de cette dernière formule ; l'argument se poursuit vraisemblablement au-delà du lot}
+
+
+\end{document}
