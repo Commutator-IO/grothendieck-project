@@ -24,7 +24,7 @@
     "tei:validate": "node scripts/tei-validate.mjs",
     "bundle:tex": "node scripts/bundle-tex.mjs",
     "bundle:tei": "node scripts/bundle-tei.mjs",
-    "bundle": "npm run tei && node scripts/bundle-tex.mjs && node scripts/bundle-tei.mjs && cd exports && rm -f grothendieck-transcriptions.zip && zip -qr grothendieck-transcriptions.zip tex tei && ls -lh grothendieck-transcriptions.zip",
+    "bundle": "npm run tei && node scripts/bundle-tex.mjs && node scripts/bundle-tei.mjs && V=$(date +%Y-%m-%d)-$(git rev-parse --short HEAD) && cd exports && rm -f grothendieck-transcriptions.zip && zip -qr grothendieck-transcriptions-$V.zip tex tei && ls -lh grothendieck-transcriptions-$V.zip",
     "check-tei": "node scripts/check-tei.mjs",
     "lexicon": "node scripts/lexicon.mjs",
     "check-editions": "node scripts/check-editions.mjs",
