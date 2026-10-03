@@ -123,7 +123,7 @@ for (const folder of folders) {
     const rename = new Map();
     const title = between(d.xml, '<titleStmt>', '</titleStmt>', d.f);
     for (const m of title.matchAll(RESP)) {
-      const [, what, tag, pre, id, post, who] = m;
+      const [, what, tag, , id, , who] = m;
       const key = `${tag}|${what}|${who}`;
       let entry = resp.get(key);
       if (!entry) {
