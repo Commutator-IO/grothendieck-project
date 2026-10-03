@@ -1,0 +1,634 @@
+% Folder 136, batch 02 (archivists' pages 21-40).
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-03 — first pass, unchecked against the pages by a human.
+%
+% Pages 35, 37 and 39 are skipped: two typescript pages (numbered 13.4.10 and
+% "- 180 - IX") carrying no work of this batch, and an administrative typescript.
+% Notation fixed for the batch: c_{i,j} = (i+j)!/(i!j!), S = k{T} the divided-power
+% polynomial algebra, T^{(i)} its divided powers, \omega_N, \tau_N, \varphi_N,
+% \mathcal{M} for a graded S-module ("ombre"), M_{S_k} = M \otimes_k S_k.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{136}
+\batch{2}
+\pages{21}{40}
+\foldertitle{Complexe de De Rham à puissance divisée [conférence de 1976 à l’IHÉS] : notes manuscrites (s.d.).}
+\dating{[à partir de 1975-1976]}
+\watermark{Édition de démonstration}
+
+\begin{document}
+
+\section{Un lemme arithmétique sur les coefficients binomiaux}
+
+\page{21}
+\note{la page continue un énoncé commencé avant le lot : les hypothèses du lemme, et la définition de $e$, sont sur la page précédente.}
+
+\struck{\uncertain{Lemme 3}} Alors on a $x_N = x_{N+1}$.
+
+\textbf{Dém.} Posons
+\[
+  y_\varepsilon = x_{N+p^\varepsilon} - x_N \qquad 0 \leq \varepsilon \leq e ,
+\]
+d'où $y_\varepsilon - y_0 = x_{N+p^\varepsilon} - x_{N+1}$.
+L'hypothèse s'écrit donc, en distinguant le cas $i = N$, $i = N+1$ :
+\[
+  (S) = S\bigl(N, e, (y_\varepsilon)_{0 \leq \varepsilon \leq e}\bigr)
+  \quad
+  \begin{cases}
+    c_{N, p^\varepsilon}\, y_\varepsilon = 0 & 0 \leq \varepsilon \leq e \\
+    c_{N+1, p^\varepsilon - 1}\, (y_\varepsilon - y_0) = 0 & 0 \leq \varepsilon \leq e
+  \end{cases}
+\]
+(le cas $\varepsilon = 0$ étant trivial). La conclusion s'écrit $y_0 = 0$.
+En fait, nous allons déduire cette conclusion du système plus faible
+(équivalent si $E$ est annulé par $p$, i.e.\ est un $\mathbb{F}_p$-vectoriel)
+\[
+  (\bar S) = \bar S\bigl(N, e, (y_\varepsilon)_{0 \leq \varepsilon \leq e}\bigr)
+  \quad
+  \begin{cases}
+    y_\varepsilon = 0 \ \text{si}\ c_{N, p^\varepsilon} \not\equiv 0 \ (p) & 0 \leq \varepsilon \leq e \\
+    y_\varepsilon - y_0 = 0 \ \text{si}\ c_{N+1, p^\varepsilon - 1} \not\equiv 0 \ (p) & 1 \leq \varepsilon \leq e .
+  \end{cases}
+\]
+Pour prouver que ce système implique que $y_0 = 0$, \uncertain{on procède par} récurrence sur $N$.
+Comme la première égalité pour $\varepsilon = 0$ donne $y_0 = 0$ si $N+1 \not\equiv 0 \ (p)$,
+la conclusion est triviale pour $N = 0$. \struck{\ill{}} On suppose $N > 0$
+\add{et prouvé pour les $N' < N$}. \struck{La conclusion est triviale si $N+1 \not\equiv 0 \ (p)$.}
+Donc OPS $N + 1 \equiv 0 \ (p)$, soit $N+1 = (N'+1)p$, où $N' = \frac{N+1}{p} - 1 < N$
+(car $\frac{N+1}{p} < N+1$). Alors le cor.\ précédent montre que le syst.\
+$\bar S = \bar S(N, e, (y_\varepsilon)_{0 \leq \varepsilon \leq e})$ (compte tenu de
+$N+1 \equiv 0 \ (p)$, qui nous permet d'oublier la première équation pour $\varepsilon = 0$)
+équivaut au système (où $e' = e - 1$, $y'_\varepsilon = y_{\varepsilon+1}$ pour
+$0 \leq \varepsilon \leq e' = e - 1$) :
+\[
+  \text{\struck{$\bar S'$}}
+  \quad
+  \begin{cases}
+    y'_\varepsilon = 0 \ \text{si}\ c_{N', p^\varepsilon} \not\equiv 0 \ (p) & 0 \leq \varepsilon \leq e' \\
+    y'_\varepsilon - y_0 = 0 \ \text{si}\ c_{N'+1, p^\varepsilon - 1} \not\equiv 0 \ (p) & 0 \leq \varepsilon \leq e'
+  \end{cases}
+\]
+Pour $\varepsilon = 0$ cette dernière équation donne \struck{\ill{}} $y'_0 = y_0$, donc on peut
+se borner à $1 \leq \varepsilon \leq e'$ (et se rappeler $y'_0 = y_0$).
+
+\page{22}
+Mais donc ce système n'est autre que
+$\bar S' = \bar S'(N', e', (y'_\varepsilon)_{0 \leq \varepsilon \leq e'})$.
+Notons que $p^e \geq N+1 = (N'+1)p$ implique que $p^{e-1} \geq N'+1$, i.e.\
+$p^{e'} \geq N' + 1$. Donc on \uncertain{a} les mêmes conditions que précédemment,
+avec cette fois-ci $N' < N$. Par hyp.\ de récurrence on a donc $y'_0 = 0$, donc $y_0 = 0$,
+cqfd. Ouf !
+
+\textbf{Théorème 1.} Soient $E$ un groupe abélien, $N \in \mathbb{N}$, $(x_i)_{i \in \mathbb{N}}$
+une famille d'éléments de $E$, telle que l'on ait
+\[
+  \binom{j}{i} (x_j - x_i) = 0 \qquad \text{pour } j > i \geq N .
+\]
+Alors on a $x_i = x_N$ $\forall i \geq N$.
+
+\textbf{Dém.} Quitte à localiser en tous les nbs premiers $p$, on peut supposer $E$ un module
+sur $\mathbb{Z}_p$. Il suffit de prouver $x_{N+1} = x_N$ (car par récurrence on aura
+$x_{N+2} = x_{N+1}$ etc.). Choisissons $e$ \add{$\in \mathbb{N}$} tel que $p^e \geq N+1$ ;
+on vérifie que les $x_i$ pour $i$ de la forme $N$ ou $N + p^\varepsilon$,
+$0 \leq \varepsilon \leq e$, \ill{}. Le lemme 2 nous montre que $x_{N+1} = x_N$, cqfd.
+
+\section{Les foncteurs « ombres » $\omega_N$}
+
+\textbf{Cor.\ 1.} Soient $k$ un anneau commutatif, $S = k\{T\}$ l'alg.\ des polynômes à
+puiss.\ div., \struck{$M$ un $k$-module} $S^{+(N)}$ l'idéal à p.\ div.\
+\struck{engendré par les $T^{(i)}$, $i \geq N$} défini par
+$S^{+(N)} = \sum_{i \geq N} k\, T^{(i)}$, et considérons, pour un $k$-module $M$, le
+$S$-module gradué
+\[
+  \omega_N(M) = M \otimes_k S^{+(N)} = \sum_{i \geq N} M\, T^{(i)} .
+\]
+\note{il écrit $M \otimes_S S^{+(N)}$ ; le produit tensoriel est sur $k$.}
+Alors :
+
+\page{23}
+a) Le foncteur $\omega_N$ de la catégorie des $k$-modules vers celle des $S$-modules
+(gradués) est pleinement fidèle.
+
+b) $\forall M$, \struck{l'application} l'application
+\[
+  M \xrightarrow{\ \varphi\ } \prod_{i \geq N} \omega_N(M)_i = \prod_{i \geq N} M\, T^{(i)}
+\]
+donnée par $\varphi(x) = (x\, T^{(i)})_{i \geq N}$ induit une bijection de $M$ avec le
+sous-ens.\ de $\prod_{i \geq N} \omega_N(M)_i$ formé des systèmes $(x_i)_{i \geq N}$
+satisfaisant aux conditions
+\[
+  (*) \qquad T^{(j)} x_i = c_{ij}\, x_{i+j} \qquad \forall i \geq N,\ j \geq 1 .
+\]
+
+\textbf{Dém.} \struck{a)} \add{b)} Si $x_i = x\, T^{(i)}$, on a
+$T^{(j)} x_i = x\, T^{(i)} T^{(j)} = c_{ij}\, x\, T^{(i+j)} = c_{ij}\, x_{i+j}$, donc
+$\varphi(x)$ se trouve dans le sous-ens.\ indiqué. L'injectivité de $\varphi$ est claire.
+Bijectivité ? Posons $x_i = \xi_i\, T^{(i)}$, $\xi_i \in M$. La condition $(*)$ s'écrit
+\[
+  \xi_i\, T^{(i)} T^{(j)} = c_{ij}\, \xi_{i+j}\, T^{(i+j)} ,
+  \qquad \xi_i\, T^{(i)} T^{(j)} = c_{ij}\, \xi_i\, T^{(i+j)} ,
+\]
+i.e.\ $c_{ij} (\xi_{i+j} - \xi_i) = 0$ pour $i \geq N$, $j \geq 1$, et il résulte du th.\
+que les $\xi_i$ sont tous égaux à un même $\xi \in M$, cqfd.
+
+a) Soient $M$, $M'$ deux $k$-modules. Alors $\operatorname{Hom}(\omega_N(M), \omega_N(M'))$
+s'identifie à l'ens.\ des systèmes de $k$-hom.\ ($i \geq N$)
+\[
+  u_i : M \to M' \qquad
+  \bigl( M \simeq M\, T^{(i)} = \omega_N(M)_i ,\ \ M' \simeq M'\, T^{(i)} = \omega_N(M')_i \bigr)
+\]
+
+\page{24}
+tels que $\forall j \geq 1$, on ait commutativité dans
+
+\begin{tikzcd}
+M\, T^{(i)} \arrow[r, "{\cdot T^{(j)}}"] \arrow[d, "{u_i \otimes T^{(i)}}"'] & M\, T^{(i+j)} \arrow[d, "{u_{i+j} \otimes T^{(i+j)}}"] \\
+M'\, T^{(i)} \arrow[r, "{\cdot T^{(j)}}"'] & M'\, T^{(i+j)}
+\end{tikzcd}
+
+i.e.\ tels qu'on ait $c_{ij}(u_{i+j} - u_i) = 0$ si $i \geq N$, $j \geq 1$, et le th.\ nous
+permet de conclure que les $u_i$ sont égaux, d'où la conclusion
+\[
+  \operatorname{Hom}_k(M, M') \xrightarrow{\ \sim\ }
+  \operatorname{Hom}_{S\text{-mod.\ gr.}}\bigl(\omega_N(M), \omega_N(M')\bigr) .
+\]
+
+\textbf{Rmq.\ 1.} Le foncteur $\omega_N$ admet un adjoint à droite $\pi_N$
+\[
+  \operatorname{Hom}_{S\text{-mod.\ gr.}}\bigl(\omega_N(M), \mathcal{M}\bigr)
+  \simeq \operatorname{Hom}_k\bigl(M, \pi_N(\mathcal{M})\bigr)
+\]
+en posant
+\[
+  \pi_N(\mathcal{M}) \subset \prod_{i \geq N} \mathcal{M}_i ,\qquad
+  \pi_N(\mathcal{M}) = \bigl\{ (x_i)_{i \geq N} \bigm| x_i\, T^{(j)} = c_{ij}\, x_{i+j}
+  \ \ \forall i \geq N,\ j \geq 1 \bigr\} .
+\]
+En considération de ceci, \struck{il existe} les parties a) et b) du corollaire 1 sont
+équivalentes, b) signifiant que l'hom.\ can.\ d'adjonction
+$M \to \pi_N(\omega_N(M))$ est \struck{\ill{}} un isomorphisme.
+
+\textbf{Rmq.\ 2.} Considérons $\omega_0(M) = M \otimes_k S = M \otimes_k k\{T\}$ ; alors
+$\omega_N(M) = S^{+(N)} \cdot \omega_0(M)$. \struck{\ill{}} \uncertain{Si on veut} aussi écrire,
+si $N \geq N' \geq 0$,
+\[
+  \omega_N(M) \simeq \sum_{i \geq N} \omega_{N'}(M)_i
+  \overset{\text{déf}}{=} \tau_{\geq N}\bigl(\omega_{N'}(M)\bigr)
+  \qquad \text{(« troncation »)} .
+\]
+Donc on
+
+\page{25}
+voit donc que les foncteurs « ombres » $\omega_N$ sont d'autant plus grossiers que $N$ est
+plus grand. Néanmoins ils sont tous pleinement fidèles (NB les foncteurs $\tau_N$ ne sont pas
+pl.\ fidèles bien sûr, pas \uncertain{même} sur la sous-catégorie des « ombres virtuelles
+d'ordre $N-1$ », i.e.\ des modules gradués dont les composantes sont nulles en degrés
+$\leq N-1$.
+
+Soit $\mathrm{Omb}(k)$ la catégorie des « ombres virtuelles » de $k$-modules, i.e.\ des
+$S = k\{T\}$-modules gradués [à degrés $\geq 0$ ?]. Soit, $\forall N \geq 0$,
+$\mathrm{Omb}_{N\text{-tr}}(k)$ la sous-catégorie pleine des modules $N$-négligeables,
+i.e.\ tels que $\mathcal{M}_i = 0$ si $i \geq N$.
+\note{le signe entre $i$ et $N$ est surchargé ; la lecture $\geq$ est celle qui s'accorde avec la phrase suivante.}
+C'est une sous-catégorie épaisse \add{la s.-cat.\ pleine de $\mathrm{Omb}$ formée}, la
+catégorie quotient \struck{est} \add{(des « $N$-ombres virtuelles »)} est can.\ équivalente à
+celle des $S$-modules gradués tels que $\mathcal{M}_i = 0$ si $i < N$. Le foncteur quotient
+s'identifie donc au foncteur « troncature » $\tau_N$. On vérifie que
+\[
+  \tau_N(\mathcal{M}) \hookrightarrow \mathcal{M}
+\]
+(inclusion fonctorielle) \add{correspondant au fait que} \struck{le foncteur \ill{}} \uncertain{le
+quotient} admet un adjoint à droite (cf.\ \uncertain{fid.\ comme de part})
+\[
+  \operatorname{Hom}_{\mathrm{Omb}}\bigl(\mathcal{N}, \tau_N(\mathcal{M})\bigr) \simeq
+  \operatorname{Hom}_{N\text{-}\mathrm{Omb}\ \text{ou}\ \mathrm{Omb}}\bigl(\tau_N(\mathcal{N}), \tau_N(\mathcal{M})\bigr) .
+\]
+
+Appelons « négligeables » dans $\mathrm{Omb}$ les ombres $\mathcal{M}$ (qui sont
+$\varinjlim$ \add{filtrantes} d'ombres $N$-négligeables (pour $N$ variable)), i.e.\ telles que
+($\forall i \in \mathbb{Z}$) $\forall x \in \mathcal{M}_i$, $\exists N \in \mathbb{N}$ tel que
+$T^{(\alpha)} \cdot x = 0$ pour $\alpha \geq N$, i.e.\ $S^{+(N)} \cdot x = 0$. C'est encore une
+sous-catégorie épaisse, et la localisée est
+\note{la phrase s'arrête là ; la page suivante reprend sur une autre feuille.}
+
+\section{Le théorème sur $M \otimes_k S$}
+
+\page{26}
+$S = k\{T\}$ (polynômes à p.d.), anneau gradué à degrés $\geq 0$ ; $M$ un $k$-module,
+$N \geq 0$, d'où $M \otimes_k S$ et par suite
+\[
+  M \otimes_k S \to \varphi_N \tau_N (M \otimes_k S) .
+\]
+
+\textbf{Thm.} L'hom.\ précédent est un iso en degrés $\geq 0$, i.e.\ on a
+\[
+  (*) \qquad M \otimes_k S \xrightarrow{\ \sim\ } \varphi^{\circ}_N \tau_N (M \otimes_k S)
+  \qquad (\forall N \geq 0) .
+\]
+En somme \uncertain{équivalent} : $M \otimes_k S \in \operatorname{Im}$ de $\varphi^{\circ}_N$,
+$M \otimes_k S \in \operatorname{Im}$ de $\varphi^{\circ}_{\infty}$ ; on \uncertain{énonce}
+\ill{}.
+
+NB En degrés $\geq N$, c'est clair que c'est un isom., il suffit donc de regarder les degrés
+$0 \leq i < N$. Le cas $i = 0$ a été traité déjà par une démonstration explicite (on la
+retrouvera dans la dém.\ qui suivra).
+
+\emph{Reformulation du Thm} : si $0 \leq i \leq N$, on a
+\[
+  (M \otimes_k S)_i \xrightarrow{\ \sim\ }
+  \operatorname{Hom}^i\bigl(\tau_{N-i}(S), M \otimes_k S\bigr) ,
+  \qquad (M \otimes S)_i \simeq M ,\quad \xi\, T^{(i)} \leftarrow\!\shortmid\ \xi
+\]
+(seul le cas $0 \leq i < N$ étant à établir).
+
+\textbf{Cor.}
+$\operatorname{Ext}^n\bigl(\tau_{N-i}(S)[-i], M \otimes_k S\bigr) = 0$ si $n > 0$,
+$\forall i \geq 0$ (seul le cas $i < N$ est non trivial).
+\note{lecture du corollaire incertaine : l'indice et le décalage sont serrés.}
+
+Ce théorème équivaut à l'énoncé suivant, où $k$ ne figure plus :
+
+\textbf{Th.} Soient $0 \leq i \leq N$ deux entiers, $M$ un $\mathbb{Z}$-module,
+$(\xi_k)_{k \geq N}$ une famille d'éléments de $M$, telle que l'on ait
+\[
+  (1) \qquad c_{l,k}\, \xi_k = c_{l, k-i}\, \xi_{k+l} \qquad \text{pour } k \geq N,\ l \geq 0 .
+\]
+
+\page{27}
+Alors il existe un unique $\xi \in M$ tel que l'on ait
+\[
+  (2) \qquad \xi_k = c_{i, k-i}\, \xi \quad \Bigl(= \binom{k}{i} \xi\Bigr)
+  \qquad \text{pour tout } k \geq N .
+\]
+(NB $c_{h,l}$ désigne le coefficient binomial $\frac{(h+l)!}{h!\,l!}$.)
+
+\textbf{Dém.} (1) Réduction au cas où $\exists p$ nb premier, tel que $n \cdot \mathrm{id}_M$
+bijectif $\forall n \in \mathbb{Z}$ tel que $(n, p) = 1$, i.e.\ $M$ un $\mathbb{Z}_p$-module
+($\mathbb{Z}_p \overset{\text{déf}}{=} \mathbb{Z}_{(p\mathbb{Z})}$). Supposons qu'on sache
+prouver dans ce cas \ill{} (il existe alors $k = k(p)$ tel que
+$c_{k, k-i} \not\equiv 0 \ (p)$, i.e.\ $c_{k, k-i} \in \mathbb{Z}_p^*$). Prouvons le th.\ en
+général. Les $c_{k, k-i}$ ($k \geq N$) ne sont pas \uncertain{tous} divisibles par un même nb
+premier, donc ils sont premiers entre eux, donc $\exists\, k_1, \ldots, k_r \geq N$ et des
+entiers $m_1, \ldots, m_r \in \mathbb{Z}$ tels que
+\[
+  \sum_{\alpha=1}^{r} m_\alpha\, c_{k_\alpha, k_\alpha - i} = 1 .
+\]
+Donc la relation (2) implique, en multipliant par les $m_\alpha$ et sommant,
+\[
+  \xi = \sum_{1}^{r} m_\alpha\, \xi_{k_\alpha} ,
+\]
+d'où l'unicité de $\xi$. Prouvons qu'avec ce choix de $\xi$, on a bien (2), i.e.
+\[
+  \xi_k = c_{k, k-i} \sum_{1}^{r} m_\alpha\, \xi_{k_\alpha} .
+\]
+Pour prouver que cette relation est vraie, \struck{\ill{}} il suffit de prouver qu'elle est
+vraie dans chaque $M_p = M \otimes_{\mathbb{Z}} \mathbb{Z}_p$ ($p \in P$). Mais c'est une
+conséquence immédiate du fait que le th.\ est vrai pour $M_p$.
+\note{ici et à la page précédente il écrit tantôt $c_{k,k-i}$, tantôt $c_{i,k-i}$ ; ces deux coefficients sont égaux, transcrits tels qu'écrits.}
+
+\page{28}
+(2) \emph{Cas où $M$ est un $\mathbb{Z}_p$-module.} Notons d'abord qu'il existe des $k$
+arbitrairement grands tels que $c_{i, k-i} \in \mathbb{Z}_p^*$, i.e.\
+$c_{i, k-i} \not\equiv 0 \ (p)$. Posons $k - i = j$ ; il suffit de prendre $j = p^\varepsilon$,
+avec $\varepsilon$ tel que $p^\varepsilon > i$, donc $k = i + p^\varepsilon$. Cela montre
+l'unicité de $\xi$, car si $k_0$ est tel que $c_{i, k_0 - i} \in \mathbb{Z}_p^*$, on aura
+\struck{\ill{}} $\xi = c_{i, k_0 - i}^{-1}\, \xi_{k_0}$.
+
+Considérons donc le système des \struck{\ill{}} $\xi'_k = c_{i, k-i}\, \xi$ ; on voit de suite
+que \struck{\uncertain{analogue}} $(\xi'_k)_{k \geq N}$ satisfait les conditions (1) (où on
+substitue $\xi'_k$ à $\xi_k$), et $\xi'_{k_0} = \xi_{k_0}$ ; donc, posant
+$\eta_k = \xi'_k - \xi_k$, les $(\eta_k)_{k \geq N}$ satisfont encore (1), et de plus
+$\eta_{k_0} = 0$. Il suffit de prouver tous $\eta_k = 0$ \struck{donc} $\forall k \geq N$.
+Donc on est ramené au
+
+\textbf{Corollaire.} Si $(\xi_k)_{k \geq N}$ \struck{est} satisfait (1), et si de plus
+\struck{\ill{}} il existe un $k_0 \geq N$ tel que
+\[
+  (1') \quad \xi_{k_0} = 0 , \qquad (3) \quad c_{i, k_0 - i} \not\equiv 0 \ (p) ,
+\]
+alors $\xi_k = 0$ $\forall k \geq N$.
+
+\page{29}
+\textbf{Dém.} En deux étapes.
+\textbf{Lemme 1.} \add{Si $k \geq N$ tel que} $\xi_k = 0$ si $c_{i, k-i} \not\equiv 0 \ (p)$.
+\note{l'énoncé du lemme 1 est écrit en abrégé entre les lignes ; c'est la conclusion énoncée à la fin de la p.\ 31.}
+
+\textbf{Lemme 1.1.} Soient \struck{$k_1, k$} $k' \geq k \geq N$ tels que, posant $j = k - i$,
+$j' = k' - i$, on ait
+\[
+  (4) \qquad c_{i,j} \not\equiv 0 \ (p) \quad \text{et} \quad c_{i,j'} \not\equiv 0 \ (p) .
+\]
+Alors on a l'équivalence
+\[
+  (5) \qquad c_{j'-j, j} \not\equiv 0 \ (p) \iff c_{j'-j, j+i} \not\equiv 0 \ (p) ,
+\]
+et si les conditions équivalentes (5) sont satisfaites, on a l'équivalence
+\[
+  (6) \qquad \xi_k = 0 \iff \xi_{k'} = 0 .
+\]
+
+\textbf{Dém.\ de 1.1.} Calculons dans $\mathbb{Q}$
+\[
+  (a) \quad \frac{c_{j'-j, j+i}}{c_{j'-j, j}}
+  = \frac{(j'+i)!}{(j'-j)!\,(j+i)!} : \frac{j'!}{(j'-j)!\, j!} ,
+  \qquad
+  (b) \quad \frac{c_{i, j'}}{c_{i, j}} = \frac{(i+j')!}{i!\, j'!} : \frac{(i+j)!}{i!\, j!} .
+\]
+\note{suivent une ligne (b') biffée, un encadré biffé (« Or dans $\mathbb{Z}_p$ \ill{} »), et une ligne (c) encadrée, $\frac{j'!}{j!} : \frac{(j'+i-j)!}{i!}$, dont la fin est raturée et illisible.}
+Donc les deux quotients (a) et (b) sont égaux, et comme (b) est un quotient de deux unités
+\struck{de $\mathbb{Z}_p$} \add{de $\mathbb{Z}_p$}, on voit que $c_{j'-j, j+i}$ et
+$c_{j'-j, j}$ sont également divisibles, donc l'un est une unité ssi l'autre l'est. Quand il
+en est ainsi, les
+
+\page{30}
+relations (1) avec $l = k' - k = j' - j$ donnent
+\[
+  c_{j'-j, j+i}\, \xi_k = c_{j'-j, j}\, \xi_{k'} ,
+\]
+et comme les coeff.\ sont des unités de $\mathbb{Z}_p$, on en conclut que
+$\xi_k = 0 \iff \xi_{k'} = 0$, cqfd.
+
+\textbf{Dém.\ du lemme 1.} Considérons le développement $p$-adique de $i$ :
+\[
+  i = i_0 + i_1 p + \cdots + i_r p^r \qquad 0 \leq i_\alpha \leq p - 1 \quad (0 \leq \alpha \leq r) ,
+\]
+où on prendra $r$ arbitrairement grand (sans même supposer que $i_r \neq 0$ !). Considérons de
+même le développement de $j = k - i$ :
+\[
+  j = j_0 + j_1 p + \cdots + j_r p^r \qquad 0 \leq j_\alpha \leq p - 1 \quad (0 \leq \alpha \leq r) .
+\]
+L'hyp.\ $c_{i,j} \not\equiv 0 \ (p)$ signifie que $i_\alpha + j_\alpha \leq p - 1$
+$\forall\, 0 \leq \alpha \leq r$. Soit \struck{\ill{}}
+\[
+  \delta_\alpha = (p-1) - (i_\alpha + j_\alpha) , \quad 0 \leq \delta_\alpha \leq p-1 ;
+  \qquad
+  j'_\alpha \overset{\text{déf}}{=} j_\alpha + \delta_\alpha = (p-1) - i_\alpha
+\]
+($0 \leq j'_\alpha \leq p-1$) et considérons $j' = \sum_0^r j'_\alpha p^\alpha$, donc
+$j' \geq j$ ($\geq N$) et $j' - j = \delta \overset{\text{déf}}{=} \sum_0^r \delta_\alpha p^\alpha$.
+On a alors \struck{(en plus de $c_{i,j} \not\equiv 0$)}
+\[
+  c_{i, j'} \not\equiv 0 \ (p) \quad \text{car } i_\alpha + j'_\alpha \ (= p - 1) \leq p - 1 \ \ \forall \alpha ,
+\]
+\[
+  c_{j'-j, j} = c_{\delta, j} \not\equiv 0 \ (p) \quad \text{car } \delta_\alpha + j_\alpha = j'_\alpha \leq p - 1 ,
+\]
+
+\marginal{Présentation plus simple : soit $r \geq 0$ tel que $p^r > i + j$, soit
+$\delta = p^r - 1 - (i+j)$, d'où $i + j + \delta = p^r - 1$ $[= i + (j + \delta)]$. Alors on a
+$c_{i, j+\delta} \not\equiv 0 \ (p)$, $c_{i+j, \delta} \not\equiv 0 \ (p)$ (compte tenu de
+$c_{ij} \not\equiv 0 \ (p)$), donc $\xi_k = 0 \iff \xi_{k'} = 0$, où
+$k' = j' + i = j + \delta + i = p^r - 1$, i.e.\ \ill{}}
+\note{note marginale écrite le long du bord gauche, la feuille tournée ; deux mots biffés illisibles y sont omis.}
+
+\page{31}
+donc en vertu de (1.1), on a $\xi_k = 0 \iff \xi_{k'} = 0$, où
+\[
+  k' = i + j' = \sum_0^r (p-1) p^\alpha = p^{r+1} - 1 ;
+\]
+donc on trouve que
+\[
+  \xi_k = 0 \iff \xi_{p^{r+1} - 1} = 0 .
+\]
+Pour \uncertain{un} $\tilde k$ \uncertain{voisin}, on trouve, si $\tilde k$ satisfait la même
+condition que $k$, savoir $c_{i, \tilde k - i} \not\equiv 0$,
+$\xi_{\tilde k} = 0 \iff \xi_{p^{r+1}-1} = 0$, où on choisit $r$ tel que
+$p^{r+1} \geq$ \struck{\ill{}} $j, \tilde j$ ($\geq i$). En comparant, on trouve
+$\xi_k = 0 \iff \xi_{\tilde k} = 0$, i.e.\ si un $\xi_k$ avec $k \geq N$,
+$c_{k, k-i} \not\equiv 0 \ (p)$, est nul, tous le sont, cqfd.
+
+\emph{Fin de la démonstration.} Il \struck{suffit de} faut prouver $\xi_k = 0$
+$\forall k \geq N$. On a
+\[
+  c_{l,k}\, \xi_k = c_{l, k-i}\, \xi_{k+l} \qquad \forall l \geq 0 ,
+\]
+et il suffit de prouver qu'il existe $l \geq 0$ tel que $c_{l,k} \not\equiv 0 \ (p)$, et de plus
+$\xi_{k+l} = 0$, ce qui est le cas \struck{si} en vertu de 1.1.\ si
+$c_{i, (k+l) - i} \not\equiv 0 \ (p)$. Posons $k - i = j$, i.e.\ $k = i + j$ ; on veut
+
+\page{32}
+donc $c_{l, i+j}$ et $c_{l+j, i} \not\equiv 0 \ (p)$. C'est le contenu du
+
+\textbf{Lemme 2.} Soient $i, j \geq 0$. Alors il existe $l \geq 0$ tel que \struck{\ill{}}
+$c_{i+j, l}$ et $c_{i, j+l}$ soient $\not\equiv 0 \ (p)$.
+
+\note{la démonstration qui suit est barrée de longs traits obliques jusqu'au haut de la p.\ 33 ; elle est transcrite en entier.}
+\struck{Dém.} Considérons les développements $p$-adiques de $i$ et $j$ :
+\[
+  i = i_0 + i_1 p + \cdots + i_r p^r , \qquad j = j_0 + j_1 p + \cdots + j_r p^r ;
+\]
+alors le développement $p$-adique de \struck{\ill{}} \add{$\sigma = i + j$}
+\[
+  \sigma = \sigma_0 + \sigma_1 p + \cdots + \sigma_{r+1} p^{r+1}
+\]
+est donné par le procédé usuel bien connu, i.e.\ on détermine par récurrence les couples
+d'entiers \struck{\ill{}} $\sigma_\alpha$ ($0 \leq \alpha \leq r+1$) et $\rho_\alpha$
+($-1 \leq \alpha \leq r$) — les $\rho_\alpha$ sont les « retenues », égales soit à 0 ou 1 —
+en posant
+\[
+  (a) \quad \rho_{-1} = 0 ,
+\]
+puis par récurrence par ($0 \leq \alpha \leq r$)
+\[
+  (b) \quad i_\alpha + j_\alpha + \rho_{\alpha - 1} = \sigma_\alpha + p\, \rho_\alpha ,
+  \qquad 0 \leq \sigma_\alpha, \rho_\alpha \leq p - 1
+\]
+(cela détermine $\sigma_\alpha$ et $\rho_\alpha$), enfin
+\[
+  (c) \quad \sigma_{r+1} = \rho_r .
+\]
+Posons
+\[
+  l_\alpha = (p-1) - \sigma_\alpha \quad (0 \leq \alpha \leq r+1) ,
+  \qquad l = \sum_0^{r+1} l_\alpha p^\alpha ,
+\]
+d'où
+\[
+  \sigma + l = \sum_0^{r+1} (p-1) p^\alpha = p^{r+2} - 1 ,
+  \quad \text{i.e.} \quad l = p^{r+2} - 1 - \sigma .
+\]
+On a alors, grâce à (b),
+\[
+  (a') \quad \rho_{-1} = 0 ,
+\]
+\[
+  (b') \quad (i_\alpha + j_\alpha + l_\alpha) + \rho_{\alpha-1} = (p-1) + p\, \rho_\alpha
+  \quad \text{si } 0 \leq \alpha \leq r
+\]
+(où $\sigma_\alpha$ et $\rho_\alpha$ sont $\geq 0$, $\leq p-1$),
+\[
+  (b')^{\text{bis}} \quad i_{r+1} + j_{r+1} + l_{r+1} + \rho_r = (p-1) + p \cdot 0
+  \qquad (i_{r+1} = 0,\ j_{r+1} = 0) ;
+\]
+\struck{(c') \ill{}} ce qui montre que \struck{\ill{}} l'addition des
+
+\page{33}
+\note{le haut de la page, encore sous les traits obliques, achève la phrase (« entiers $i$, $j$, $l$, donnés par leurs développements $p$-adiques … ») ; le reste est illisible.}
+Soit $r \geq 0$ tel que $p^r > i + j$, soit \struck{\ill{}} $l = p^r - 1 - (i+j)$.
+\struck{\uncertain{Je dis que}} \ill{}
+\[
+  i + j + l = p^r - 1 = \sum_{\alpha=0}^{r-1} (p-1) p^\alpha
+  \qquad [\,(i+j) + l = i + (j+l)\,] .
+\]
+On sait alors, par le critère habituel, que l'on a $c_{i+j, l} \not\equiv 0 \ (p)$, et pour la
+même raison $c_{i, j+l} \not\equiv 0 \ (p)$, cqfd.
+
+NB Le lemme commun qui a servi dans les lemmes 1 et 2 est le suivant : si $\mu, \nu \geq 0$
+sont tels que $\mu + \nu = p^r - 1$ ($r \geq 0$ convenable), alors
+$c_{\mu, \nu} \not\equiv 0 \ (p)$. \struck{(plus précisément, $c_{\mu,\nu}$ \ill{})}
+
+\page{34}
+\note{calculs isolés sur un petit feuillet, sans texte.}
+\[
+  \boxed{\ v_p(n!) = \frac{n - \mathrm{chif}_p\, n}{p-1}\ }
+  \qquad n = \sum_{\alpha \geq 0} n_\alpha p^\alpha , \quad
+  \mathrm{chif}_p\, n = \sum n_\alpha
+\]
+\[
+  n - \mathrm{chif}_p\, n = \sum n_\alpha (p^\alpha - 1) , \qquad
+  \frac{n - \mathrm{chif}_p\, n}{p-1} = \sum_\alpha n_\alpha (1 + \cdots + p^{\alpha-1})
+\]
+\[
+  \text{\struck{$v_p(n!)$}}\ \
+  v_p\Bigl(\frac{p^n}{n!}\Bigr) = n - \frac{n - \mathrm{chif}_p\, n}{p-1}
+  = \frac{\mathrm{chif}_p(n) + n(p-2)}{p-1}
+\]
+\[
+  v_p\bigl((n+1)!\bigr) =
+\]
+\note{la ligne reste inachevée ; un trait la sépare de la suite.}
+\[
+  v_p\Bigl(\frac{p^{r+1}!}{(p^r!)^p\, p!}\Bigr)
+  = \underbrace{v_p(p^{r+1}!)}_{\frac{p^{r+1}-1}{p-1}}
+  - p\, \underbrace{v_p(p^r!)}_{\frac{p^r - 1}{p-1}}
+  - \underbrace{v_p(p!)}_{1}
+  = 0
+\]
+
+\section{Hom homogènes et troncatures}
+
+\page{36}
+\[
+  \begin{aligned}
+    \operatorname{Hom}^d(M^*, \varphi_N N^*)
+    &= \operatorname{Hom}(M^*[-d], \varphi_N N^*) \\
+    &\simeq \operatorname{Hom}\bigl(\tau_N(M^*[-d]), N^*\bigr) \\
+    &\simeq \operatorname{Hom}\bigl((\tau_{N-d} M^*)[-d], N^*\bigr) \\
+    &\simeq \operatorname{Hom}^d(\tau_{N-d} M^*, N^*)
+  \end{aligned}
+\]
+\[
+  N^* \in \operatorname{Ob} \mathcal{M}_N \qquad
+  \boxed{\ \operatorname{Hom}^d(M^*, \varphi_N N^*) \simeq \operatorname{Hom}^d(\tau_{N-d} M^*, N^*)\ }
+\]
+
+\emph{Supposons}
+\[
+  M^* \in \mathcal{M}^*\ [\text{i.e. } M^j = 0 \text{ si } j < -d] ,
+\]
+\[
+  N^* = \tau_N N \otimes_k S_k \simeq \tau_N N_{S_k} \quad (N \text{ un } k\text{-module}) ,
+  \qquad N \geq 0 .
+\]
+\note{il emploie la même lettre $N$ pour l'entier de troncature et pour le $k$-module.}
+Alors
+\[
+  \operatorname{Hom}^d(M^*, \varphi_N \tau_N N_{S_k})
+  = \operatorname{Hom}^d(M^*, \underbrace{\varphi_N \tau_N N_{S_k}}_{= \tau_N \varphi_N \tau_N N_{S_k}})
+  = \operatorname{Hom}^d(M^*, \tau_N \ldots
+\]
+\note{la ligne s'interrompt sur un début de fraction. La moitié inférieure de la feuille, écrite tête-bêche et barrée de deux longs traits obliques, porte un autre calcul sans rapport apparent :}
+\drawing{une boucle et quelques points, avec des flèches à double pointe partant d'un sommet, étiquetées $x$ et $xg$ ; au-dessous « Diagramme de Cayley » et un encadré « $g$, $g'$, $gh$ » ; une seconde boucle et deux flèches horizontales vers la gauche.}
+
+\page{38}
+d'où
+\[
+  \boxed{\ \operatorname{Hom}^d(M^*, N \otimes_k S_k)
+  \simeq \operatorname{Hom}^d\bigl(\tau_{N-d} M, \tau_N (N \otimes_k S_k)\bigr)\ }
+  \qquad \text{si }
+  \begin{cases} M^* \in \mathcal{M}_{-d} \\ N \geq 0 \end{cases}
+\]
+\note{dans le premier encadré, un symbole raturé illisible précède $N \otimes_k S_k$.}
+p.\ ex.
+\[
+  \boxed{
+  \begin{aligned}
+    \operatorname{Hom}^d(M \otimes_k S_k, N \otimes_k S_k)
+    &\xrightarrow{\ \sim\ } \operatorname{Hom}^d(\tau_{N-d} M_{S_k}, \tau_N N_{S_k}) \\
+    &\simeq \operatorname{Hom}_k(M, N)
+    \qquad \text{si } d \geq 0,\ N \geq 0
+  \end{aligned}}
+\]
+\note{sous $\operatorname{Hom}_k$, l'indice $k$ est écrit sur un symbole raturé.}
+
+Hom.\ homogènes de degré $d \in \mathbb{Z}$
+\[
+  \tau_\alpha M_{S_k} \to \tau_\beta N_{S_k} \qquad (\beta \geq \alpha) .
+\]
+
+a) \struck{$d \geq 0$}. Supposons d'abord $\boxed{d \geq \beta - \alpha}$, i.e.\
+$\alpha + d \geq \beta$. On a \struck{$\operatorname{Hom}^i(M$ \ill{}}
+\[
+  \begin{aligned}
+    \operatorname{Hom}^d(\tau_\alpha M_{S_k}, \tau_\beta N_{S_k})
+    &\xleftarrow{\ \sim\ } \operatorname{Hom}^d\bigl(\tau_\alpha M_{S_k},
+      \underbrace{\tau_{\alpha+d} \tau_\beta N_{S_k}}_{= \tau_{\alpha+d} N_{S_k}}\bigr) \\
+    &\xleftarrow{\ \sim\ } \operatorname{Hom}^d(M_{S_k}, N_{S_k}) \simeq \operatorname{Hom}_k(M, N)
+  \end{aligned}
+\]
+(si $u : M \to N$, il lui correspond l'hom.
+\[
+  m\, T^{(j)} \longmapsto u(m)\, T^{(d)} T^{(j)} = c_{d,j}\, u(m)\, T^{(d+j)} ,
+  \qquad j \geq \alpha \ ) .
+\]
+
+b) Supposons $0 \leq d < \beta - \alpha$ \add{i.e.\ $\beta \geq \beta - d > \alpha$} ; on a alors
+\[
+  \text{\struck{$\operatorname{Hom}^d(\tau_\alpha M_{S_k}, \tau_\beta N_{S_k})
+  \to \operatorname{Hom}^d(\tau_{\beta-d} M_{S_k}, \tau_\beta N_{S_k})
+  \simeq \operatorname{Hom}_k(M, N)$}}
+\]
+\note{la flèche biffée porte en dessous l'abréviation « inj. ».}
+
+\page{40}
+\[
+  \operatorname{Hom}^d\bigl(\tau_\alpha M_{S_k}, \underbrace{\tau_\beta N_{S_k}}_{\cap\ \tau_{\alpha+d} N_{S_k}}\bigr)
+  \hookrightarrow \operatorname{Hom}^d(\tau_\alpha M_{S_k}, \tau_{\alpha+d} N_{S_k})
+  \simeq \operatorname{Hom}_k(M, N)
+\]
+(sous-mod.\ des hom.\ de degré $d$ de $\tau_\alpha M_{S_k}$ dans
+$\tau_{\alpha+d} N_{S_k}$ qui \uncertain{envoient} $\tau_\alpha M_{S_k}$ dans
+$\tau_\beta N_{S_k} \subset \tau_{\alpha+d} N_{S_k}$).
+
+Il faut \uncertain{donc prendre} les $u : M \to N$ tels que l'hom.\ correspondant
+$\tau_\alpha M_{S_k} \to \tau_{\alpha+d} N_{S_k}$
+\[
+  \bigl( m\, T^{(j)} \longmapsto c_{d,j}\, u(m)\, T^{(d+j)} \bigr)
+\]
+\struck{vérifie que \ill{} $M_S$} \uncertain{envoie} \ill{} dans $\tau_\beta N_{S_k}$, i.e.\
+tels que
+\[
+  \begin{cases}
+    c_{d, \alpha}\, u = 0 \\
+    c_{d, \alpha+1}\, u = 0 \\
+    \cdots \\
+    c_{d, \beta-d}\, u = 0
+  \end{cases}
+\]
+(ce qui \uncertain{s'écrit} $c_{d,j}\, u = 0$ si $\alpha \leq j < \beta - d$
+\struck{\ill{}}).
+
+c) $d < 0$. Notons que
+\[
+  N \otimes S_k = \varphi_{0 \beta} \tau_\beta N_{S_k} = \tau_0 \varphi_{\beta} \tau_\beta N_{S_k}
+  \subset \varphi_\beta N_{S_k} ,
+\]
+donc \add{si $M^* \in \operatorname{Ob} \mathcal{M}^*$,}
+\[
+  \operatorname{Hom}^d(M^*, N_{S_k}) \subset \operatorname{Hom}^d(M^*, \varphi_\beta \tau_\beta N_{S_k})
+  = \operatorname{Hom}(M^*[-d], \varphi_\beta N_{S_k})
+  = \operatorname{Hom}(\tau_\beta M^*[-d], N_{S_k}
+\]
+\note{le calcul s'arrête là, au bas de la page ; la suite, si elle existe, est au-delà du lot. La dernière borne du système, $c_{d,\beta-d}$, et la condition $j < \beta - d$ sont transcrites telles qu'écrites, sans les accorder.}
+
+\end{document}
