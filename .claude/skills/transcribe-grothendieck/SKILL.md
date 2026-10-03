@@ -228,8 +228,14 @@ Make one complete pass producing nothing, and note:
   writes $\widetilde{X}$ for a topos of sheaves, he spells out "fppf" then
   reduces it to initials. Fix the choices **once for the batch** and hold to
   them.
-- **The internal cross-references** — "cf. p. 12", "voir plus haut" — which
-  become `\ref{page:12}`.
+- **The internal cross-references** — "cf. p. 12", "voir plus haut". They are
+  transcribed **as he wrote them**, in plain text: « cf. p.~12 ». Not
+  `\ref{page:12}`: his « p. 12 » is almost always *his own* pagination, while
+  `\label{page:N}` is set by `\page{}` on the archivists' numbering, so a
+  `\ref` would point at the wrong sheet and print a number he did not write;
+  and each batch compiles alone, so a page outside the batch prints « ?? ».
+  Where his number and the archivists' differ and the reader needs the link,
+  say so once: `cf. p.~12\note{p. 12 de l'auteur, page 14 du fonds}`.
 - **What the batch is actually about.** You will need this for the summary, and
   it is much easier to see now, with all twenty pages in view, than after
   three hours inside the notation.
@@ -308,15 +314,29 @@ archive, and the archive already has them.
 
 #### The permitted LaTeX subset
 
-`scripts/render.mjs` understands a subset, **deliberately**: a converter that
-accepted everything would silently mangle what it did not understand. Stepping
-outside makes rendering fail loudly, which is the wanted behaviour.
+`scripts/render.mjs` and `scripts/tei.mjs` understand a subset,
+**deliberately**: a converter that accepted everything would silently mangle
+what it did not understand. Stepping outside fails loudly — `npm run tei`
+refuses the file and names every control sequence it did not know — which is
+the wanted behaviour. (The reading view is less strict: it prints an unknown
+macro as raw text, so do not take a clean `npm run render` as proof.)
 
 Allowed: `\section` `\subsection` · paragraphs separated by a blank line ·
-`\emph` `\textbf` `\textit` `\texttt` · `itemize` `enumerate` `quote` ·
-`summary` · `tikzcd` (arrow syntax below) · `$…$` `\(…\)` `\[…\]` `equation`
-`align` `gather` `cases` `array` and the matrix environments · the eight macros
-above.
+`\emph` `\textbf` `\textit` `\texttt` `\textsuperscript` (« 1\textsuperscript{er} »)
+· `itemize` `enumerate` `quote` · `summary` · `tikzcd` (arrow syntax below) ·
+`$…$` `\(…\)` `\[…\]` `equation` `align` `gather` `cases` `array` and the
+matrix environments · the eight macros above.
+
+**Not in the subset**, and each has caught a pass out — write the right-hand
+column instead:
+
+| Tempting | Write |
+|---|---|
+| `\ref{page:12}`, `\label` | « cf. p.~12 », as on the page (see step 1) |
+| `\textcircled{3}` | the Unicode numeral ③ (① to ⑳); a circled word or a larger number is written plain, with `\note{« 23 » cerclé}` |
+| `\uline{…}` | his underlining of words is `\emph{…}`; under a symbol, `$\underline{I}$` inside the mathematics. `\uline` is what `\uncertain` is built on in the PDF, not a macro of the transcription |
+| `\hfill` | nothing: a date or a signature he set to the right is its own paragraph. Layout is the facsimile's job |
+| `\noindent` | nothing. Both converters drop it as layout, so it is harmless, but it carries nothing |
 
 Apparatus macros may contain mathematics — `\note{the $\varphi_{*}$ here is
 struck}` is the common case, not the exotic one, and the renderer matches
@@ -358,7 +378,8 @@ asserts a commutation nobody wrote:
   are what lets a wheel of functor categories close into the circle the
   manuscript draws instead of an octagon of chords.
 
-Extending the subset means extending `scripts/render.mjs` in the same commit.
+Extending the subset means extending `scripts/render.mjs` and `scripts/tei.mjs`
+in the same commit.
 
 Two layout rules, both learned on a real batch:
 
