@@ -1,0 +1,340 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 34, batch 9 (pages 161-180).
+% Established from the facsimile archives/batches/34/batch-09.pdf, per the skill
+% transcribe-grothendieck.
+% Content: the end of exposé V (his p. V.34: 6.6-6.7, cohomology of V, V_s,
+% V_etabar for an isolated non-smooth point of a complete intersection), then a new
+% exposé VI, « Groupe de monodromie et groupe fondamental », his pp. 1-16:
+% statements (1.1-1.4, tame action of local monodromy on pi_1^(p')),
+% reductions (2.1 Van Kampen, 2.2 affine curves, 2.3 to the standard situation,
+% 2.4 Bertini), §3 proof in relative dimension 1 from lemma 3.1 (Schlessinger),
+% Abhyankar, the action h = h_1^{n_1}...h_nu^{n_nu}.
+% Page 162 is blank and page 168 an unrelated typed verso; both are skipped.
+% Page 170 is an unpaginated scratch sheet crossed out in pencil.
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-03 — first pass, unchecked against the pages by a human.
+%
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{34}
+\batch{9}
+\pages{161}{180}
+\foldertitle{SGA 7 : notes manuscrites (s.d.).}
+\dating{[vers 1967-1973]}
+\watermark{Édition de démonstration}
+
+\begin{document}
+
+\page{161}\note{p.~V.34 de l'auteur. Le paragraphe 6 commence avant ce lot : le §5 et les objets $V$, $V_s$, $V_{\bar\eta}$, $W_\eta$, $V(m)$ sont introduits dans les pages qui précèdent.}
+6.6. Utilisant les résultats du §5, on trouve
+\[
+\text{(6.6.1)}\qquad
+H^i(V) \longrightarrow H^i(V_{\bar\eta}) \longrightarrow H^i(V_s)
+\]
+\[
+\Bigl(H^i(V_{\bar\eta}) \simeq \varinjlim H^i(V(m))\Bigr)
+\]
+des isom si $i \leqslant n-2$, des mon si $i = n-1$, si $X$ est une intersection complète en toute généralisation \struck{\ill{}} \add{si dim $n$ dans $V\cdot V_s$} \uncertain{(?)} et si $X$ est équidimensionnel (de dim $n+1$) en $x$.
+\[
+\text{(6.6.2)}\qquad
+\left\{
+\begin{array}{lll}
+H^i(V_s) = 0 & \text{si } 0 < i \leqslant n-2 & (H^0(V_s) \simeq \Lambda \text{ si } n \geqslant 2)\\
+H^i(V) = 0 & \text{si } 0 < i \leqslant n-1 & (H^0(V_s) \simeq \Lambda \text{ si } n \geqslant 1)\\
+H^i(V_{\bar\eta}) = 0 & \text{si } i \neq 0, n & \\
+H^i(W_\eta) = 0 & \text{si } i \neq 0, 1, n, n+1 &
+\end{array}
+\right.
+\]
+si $X$ est intersection complète en $x$.\note{La seconde parenthèse porte bien $H^0(V_s)$ sur le feuillet, et non $H^0(V)$.}
+
+\struck{Supposons}
+
+6.7. Supposons \struck{\ill{}} $x$ point \uncertain{isolé} de l'\uncertain{ens} des points de non-lissité de $f$ \emph{dans $X$}, donc a fortiori $X$ régulier en toute généralisation stricte de $x$. Alors $H^*(V_s)$ et $H^*(W)$ \ill{} \struck{\ill{}} \add{\ill{}} de Poincaré, \struck{\ill{}} \add{\uncertain{en degrés}} $2n-1$ et $2n+1$ resp.\ ; \struck{\ill{}} par suite si $X$ est \add{\uncertain{de plus}} int.\ compl.\ en $x$, on déduit de 6.6.2 ; \struck{\ill{}}
+\[
+\text{(6.7.1)}\qquad
+\left\{
+\begin{array}{ll}
+H^i(V_s) = 0 & \text{si } i \neq 0, n-1, n, 2n-1\\
+H^i(V) = 0 & \text{si } i \neq 0, n, n+1, 2n+1
+\end{array}
+\right.
+\]
+\[
+\Bigl[\text{et } H^0(V_s) \simeq \Lambda,\quad H^{2n-1}(V_s) \simeq \Lambda(-n) \quad \text{si } n \geqslant 2\Bigr]
+\]
+\[
+\Bigl[\text{et } H^0(V) \simeq \Lambda,\quad H^{2n+1}(V) \simeq \Lambda(-n-1) \quad \text{si } n \geqslant 1\Bigr]
+\]
+\note{Dans les deux crochets, un mot suivi d'un trait est biffé après $\Lambda$ ; la torsion de la première ligne, lue $(-n)$, est surchargée.}
+
+\section{VI. Groupe de monodromie et groupe fondamental}
+
+\page{163}\note{Début d'une nouvelle rédaction, paginée 1, 2, 3… par l'auteur ; le chiffre romain de l'exposé est surchargé (VI écrit sur un autre chiffre). Le titre est le sien.}
+\textbf{VI. Groupe de monodromie et groupe fondamental}\marginal{(*) Le présent exposé n'est pas nécessaire pour la compréhension des \uncertain{autres exposés} du séminaire.}
+
+\struck{1.} Dans les exposés précédents, nous avons étudié, pour un schéma de type fini $X$ sur $K$ (corps des fractions d'un anneau de val.\ discrète strict.\ local $V$), l'action du groupe d'inertie $I = \mathrm{Gal}(\bar K/K)$ sur les \uncertain{invariants} de nature \uncertain{cohomologique} de $X_{\bar K}$. Il y a lieu également d'étudier l'action de $I$ sur \struck{\ill{}} d'autres invariants topologiques \struck{\ill{}} de $X_{\bar K}$. Dans le présent exposé, nous nous intéressons à l'action de $I$ sur le groupe fondamental $\pi_1(X_{\bar K}, \xi)$ (relativement à un pt géom.\ $\xi$ de $\bar K$). \struck{Nous désignerons par $\pi_1^{(p)}(X_K, \xi)$ le}
+
+\subsection{1. Énoncé des résultats}
+
+1.1. Pour un groupe profini $\pi$, nous désignerons par $\pi^{(p')}$ le plus grand quotient \add{(où $p' = P - \{p\}$, et $P$ l'ens.\ des nombres premiers)} premier à $p$, si $p$ est l'exposant caract.\ du corps résiduel $k = k(V)$. Donc si $p = 1$, \uncertain{i.e.}\ \ill{}, $\pi^{(p')} = \pi$ ; sinon $\pi^{(p')}$ est le quotient de $\pi$ par le s-groupe \uncertain{engendré} par ses $p$-sous-groupes de Šilov, i.e.\ le quotient de $\pi$ par le s-groupe \uncertain{engendré} par les $p$-sous-groupes de Šilov de $\pi$. La formation de $\pi^{(p')}$ est évidemment fonctorielle en $\pi$, et transforme \uncertain{automorphismes intérieurs} de $\pi$
+
+\page{164}\note{p.~2 de l'auteur.}
+en automorphismes intérieurs de $\pi^{(p')}$, donc induit un homomorphisme de groupes profinis
+\[
+\text{(1.1.1)}\qquad \mathrm{Autext}(\pi) \longrightarrow \mathrm{Autext}(\pi^{(p')}) .
+\]
+\struck{En particulier, si $\pi = \pi_1(X_{\bar K}, \xi)$, \ill{}} Soient en particulier $X_K$\note{l'indice $K$ est ajouté à l'encre bleue.} un schéma de type fini sur $K$, muni d'un pt géom.\ $\xi$, et $\bar K$ la clôture sép.\ de $K$ dans $k(\xi)$ [de sorte que $\xi$ « est » un pt géométrique de $X_{\bar K}$]. Comme on sait, on a une suite exacte (SGA~1 IX 6.1)
+\[
+\text{(1.1.2)}\qquad 1 \to \pi_1(X_{\bar K}, \xi) \longrightarrow \pi_1(X, \xi) \longrightarrow \mathrm{Gal}(\bar K/K) \to 1 ,
+\qquad \mathrm{Gal}(\bar K/K) = I ,
+\]
+qui définit donc un homomorphisme
+\[
+\text{(1.1.3)}\qquad I \longrightarrow \mathrm{Autext}\, \pi_1(X_{\bar K}, \xi) .
+\]
+Soit $\pi_1(X,\xi)'$ le quotient de $\pi_1(X,\xi)$ par le s-groupe \struck{\ill{}} \uncertain{engendré} par les $p$-sous-groupes de Šilov de $\pi_1(X_{\bar K}, \xi)$, on trouve une suite exacte
+\[
+\text{(1.1.4)}\qquad 1 \to \pi_1(X_{\bar K}, \xi)^{(p')} \longrightarrow \pi_1(X, \xi)' \longrightarrow \mathrm{Gal}(\bar K/K) \to 1 ,
+\qquad \mathrm{Gal}(\bar K/K) = I ,
+\]
+qui définit un homomorphisme
+\[
+\text{(1.1.5)}\qquad I \longrightarrow \mathrm{Autext}\, \pi_1(X_{\bar K}, \xi)^{(p')} ,
+\]
+qui n'est autre que le composé de (1.1.1) et (1.1.3).
+
+\page{165}\note{p.~3 de l'auteur.}
+Dans la suite, on se propose de donner des renseignements sur (1.1.5) lorsque $X$ est de type fini sur $K$, $K$ étant un « corps local » comme à l'\uncertain{accoutumée}…
+
+1.2. Lorsque \struck{\ill{}} \uncertain{on se donne} un pt géom.\ $\xi$ de $X_K$ \uncertain{en fait} localisé en un point rationnel sur $X$, alors la suite exacte (1.1.2) splitte canoniquement, et par suite on peut écrire $\pi_1(X, \xi)$ comme un produit ½ direct moyennant un homom.
+\[
+\text{(1.2.1)}\qquad I \longrightarrow \mathrm{Aut}\bigl(\pi_1^{(p)}(X_{\bar K}, \xi)\bigr)
+\]
+\note{Le numéro est surchargé (4 sur 1, ou l'inverse) ; la p.~4 de l'auteur renvoie à « (1.2.4) ». L'exposant se lit $(p)$ ici, $(p')$ à la ligne suivante.}
+compatible à 1.1.\uncertain{1} et l'homom.\ de fonctorialité
+\[
+\mathrm{Aut}\, \pi_1 \longrightarrow \mathrm{Aut}\, \pi_1^{(p')} .
+\]
+\struck{Lemme} Explicitons ici la suite exacte, valable pour tout groupe profini $\pi$
+\[
+\text{(1.2.5)}\qquad 1 \to \pi/Z \longrightarrow \mathrm{Aut}(\pi) \longrightarrow \mathrm{Autext}\, \pi \to 1
+\qquad (Z = \text{centre de } \pi).
+\]
+Appliquée au cas de $\pi_1^{(p')}$, cette suite nous montre ceci :
+
+\page{166}\note{p.~4 de l'auteur.}
+\emph{Lemme} 1.2.6. Pour que l'opération (1.2.4) du gr.\ d'inertie $I$ sur $\pi_1^{(p')}(X_{\bar K}, \xi)$ soit « \emph{modérément} ramifiée » i.e.\ pour que l'image \add{de $I$ dans $\mathrm{Aut}\, \pi_1^{(p')}(X_{\bar K}, \xi)$} soit un groupe profini premier à $p$, il faut et il suffit que l'image de $I$ dans $\mathrm{Autext}(\pi_1^{(p')}(X_{\bar K}, \xi))$ le soit (via (1.1.5)). En particulier, cette condition ne dépend pas du choix du point \struck{\ill{}} $\xi$ \uncertain{choisi dans} $X_K(K)$.
+
+\struck{Si cette condition \ill{}} \struck{On dit alors, par \uncertain{abus de}} (Si cette dernière condition est satisfaite, on dit aussi que $I$ opère \emph{modérément} (sous-entendu : mod.\ aut.\ intérieurs) sur $\pi_1^{(p')}(X_{\bar K}, \xi)$.)
+
+Ceci posé, nous avons en vue les démonstrations des deux résultats principaux \add{(Théorème de l'action essentiellement modérée du gr.\ de monodromie \uncertain{locale})} :
+
+\emph{Théorème} 1.3. Soit $X$ de type fini sur \struck{le corps} $K$, $\xi$ un pt géom.\ de $X$, $\bar K$ la clôture sép.\ correspondante de $K$, d'où $I = \mathrm{Gal}(\bar K/K)$ opérant \add{(par automorphismes extérieurs)} sur $\pi_1^{(p')}(X_{\bar K}, \xi)$. Alors, \struck{il existe \ill{}} $\pi_1^{(p')}(X_{\bar K}, \xi)$ est topologiquement \add{de type} \struck{\ill{}} fini, et il existe un sous-groupe ouvert $I'$ de $I$ qui opère \emph{modérément} (1.2.6) sur $\pi_1^{(p')}(X_{\bar K}, \xi)$.\marginal{\struck{\ill{}}}\note{En marge gauche, à hauteur du théorème, une note de quatre lignes est raturée et illisible.}
+
+\emph{Remarque} 1.3.1. En fait, utilisant le résultat précédent \add{(on en déduit le résultat 1.4 dans le cas de la dim.\ \uncertain{relative 1})} \struck{J.P. Murre} et la résolution des singularités dans le cas non propre, \add{un argument dû à} J.P.~Murre permet de prouver ceci : Soit $X$ de t.f.\ sur $k$ sép.\ clos, \struck{\ill{}} \add{d'exp.\ car.\ $p$,} $\xi$ un pt géom.
+
+\page{167}\note{p.~5 de l'auteur.}
+de $X$. Alors $\pi_1^{(p')}(X, \xi)$ est (en tant que pro-$p'$-groupe) de présentation finie.
+
+\emph{Th.}\ 1.4 (Th.\ de l'action modérée du groupe de monodromie locale). Soient $S$ un schéma strictement local, $\bar X$ un \uncertain{schéma} sur $S$, $Y$ un sous-schéma fermé de $\bar X$, $X = \bar X - Y$, \add{$U$ un ouvert de $S$ (resp.\ $y$ un pt de $U$)}, $\xi$ un pt géom.\ de $X|U$ (resp.\ de $X_y$). \struck{On suppose} Dans le cas non vide, $y$ désigne le pt de $S$ sous $\xi$.
+
+a) $\bar X$, \add{$Y$} \struck{sont} projectifs, de présentation finie sur $S$ et de \ill{} \struck{\ill{}} \add{\uncertain{les composantes des}} $\bar X_s$. \struck{\ill{}}
+
+b) \struck{\ill{}} $Y_s$ est rare dans $\bar X_s$.
+
+c) $\bar X_{\bar s}$ est, dans le complémentaire d'une partie de codim $\geqslant 2$, un « \struck{diviseur} \add{schéma} à croisements normaux ». \struck{\ill{}}
+
+d) $\bar X|U$ est lisse et $Y|U$ diviseur à croisements normaux relatif (resp.\ $\bar X_y$ a un ens.\ de non-lissité de codim $\geqslant 2$). \struck{\ill{}} Enfin \struck{\ill{}} \add{\uncertain{l'irréductibilité}}.\note{Un long passage entre b) et d) est biffé de plusieurs traits et en partie surchargé ; seules les lectures ci-dessus se dégagent.}
+
+Soit $I = \pi_1(U, \xi)$ [resp.\ $I = \pi_1(y, \xi) = \mathrm{Gal}(\bar y/y)$], considérons l'homom.\ naturel
+\[
+I \longrightarrow \mathrm{Autext}\, \pi_1^{(p')}(X_{\bar y}, \xi)
+\]
+\struck{$\mathrm{Autext}\, \pi_1^{(p')}(X_{\bar y}, \xi)$}
+
+Lorsque \ill{} une section $g$ de $\bar X$ sur $S$ \ill{}, on \ill{}
+\[
+I \longrightarrow \mathrm{Aut}\, \bigl(\pi_1^{(p')}(X_{\bar y}, \xi)\bigr) .
+\]
+Ceci posé, l'image de l'un et l'autre homom.\ est un \emph{groupe abélien} \ill{} premier à $p$.
+
+Si $\bar X$ est de dim.\ relative 1 sur $S$, alors \struck{\ill{}} le \uncertain{rang} \add{des groupes images} est $\leqslant \nu$, où $\nu$ est le nb de pts singuliers de $X_{\bar s}$.
+
+\drawing{En marge gauche, un schéma vertical : $\bar X \supset \bar X|U$, au-dessus de $S \supset U$, avec $\xi$ et une flèche vers $\bar X|U$ ; à côté, une note entourée, en partie raturée, où se lisent « remplacer … point … », « dans $S$ », « hypothèse que $I = \pi_1(\ldots)$ opère … ».}
+
+\page{169}\note{p.~6 de l'auteur.}
+\subsection{2. Réduction à un cas standard de dim.\ relative 1}
+
+\struck{La réduction de 1.3 au cas où $X$ est lisse sur $K$, de dim.\ relative 1 se fait suivant les lignes de la réduction analogue faite dans II 3, du moins}
+
+2.1. \emph{Réduction de 1.3 au cas} $X$ \struck{\ill{}} \add{géométriquement normal et géom.\ \uncertain{intègre}}
+
+\struck{On recouvre $X$ par des ouverts affines $X_i$ …}
+\[
+\text{\struck{$X' = \coprod_i X_i$, \quad $X'' = X' \times_X X'$, \quad $X''' = X' \times_X X' \times_X X'$.}}
+\]
+
+\struck{2.1.1. Réduction au cas \ill{} \ill{}, on peut $X$ \ill{}}
+
+\struck{Soit $X$} Notons que l'on peut \struck{\ill{}} remplacer $K$ par une extension finie $K'$ de $K$, et $X_K$ par $X_{K'} = X_K \otimes_K K'$ (car cela revient à remplacer $I$ par un sous-groupe ouvert $I'$). On peut alors, quitte à passer à une extension radicielle $K'$ de $K$, supposer que le normalisé de $(X_K)_{\mathrm{red}}$ est géométriquement normal (EGA~IV 17.15.14.2). \struck{\ill{} supposer $X_K$ géom.\ normal. Enfin} Soit $X_0$ \add{le normalisé de $X_{\mathrm{red}}$}\marginal{argument \ill{} cas où \ill{} $X_K$ \ill{} $x \in X_K(K)$}, et soient $X_1$ et $X_2$ ses produits fibrés \uncertain{sur $X$}. Dans SGA~1 IX 5, nous avons donné une méthode de Van Kampen pour calculer le gr.\ fondamental de $X$ \add{en termes des comp.\ connexes} des $X_0, X_1, X_2$. Nous pouvons d'ailleurs supposer, quitte à faire une ext.\ finie sur $K$, que les comp.\ connexes sont géom.\ connexes (EGA~IV 4). \struck{Alors le groupe fondamental} \add{Nous pouvons de plus} supposer que les pts bases choisis dans ces comp.\ …
+
+\page{170}\note{Feuillet de brouillon, non paginé par l'auteur, barré de deux longs traits au crayon ; il s'intercale entre les p.~6 et 7 de la rédaction.}
+\drawing{À gauche, $X_1$, $X_2$ ; au centre, la colonne $X''' \;\; X'' \;\; X' \;\; X$ reliée par des traits verticaux, avec en regard $\pi_0(X''')$, $\pi_0(X'')$, $\pi_0(X')$ « un seul pt ».}
+
+$\pi_1(X', \bar x) \to \pi_1(X, \bar x)$ \qquad $P \subset I$ \qquad $P$ opère trivialement sur $\pi_1(X', \bar x)$ \uncertain{dans son ens.\ image}.
+
+$X_0 =$ \uncertain{courbe} \uncertain{elliptique} \drawing{une droite portant deux points : « origine $0$ » et $x$.}
+
+$X = $ \drawing{une courbe à un point double (une boucle).}
+
+\[
+H^0(K, A) \longrightarrow H^1(K, T_\ell(A))
+\]
+
+\drawing{Diagramme de schémas : en haut $X \leftarrow X_K \leftarrow X_{\tilde U}$, en bas $S \hookleftarrow U \leftarrow \bar U$, flèches verticales dans les deux sens (projections et sections) entre $X$ et $S$, $X_K$ et $U$ ; au milieu $X$ (en gras) $\Leftarrow \tilde X$, et $s \leftarrow \bar s$ sous $U$ et $\bar U$ ; à droite, $F_{\bar a}$.}
+
+\begin{tikzcd}
+B_\Gamma \arrow[d] & B_\pi \arrow[l] \arrow[d] & \\
+F & B_I \arrow[l] & P \arrow[l]
+\end{tikzcd}
+
+\page{171}\note{p.~7 de l'auteur.}
+connexes soient les pts géom.\ déduits (via le choix d'une clôture \uncertain{séparable} $\bar K$ de $K$) de pts $x_{i\alpha}$ ($i = 0, 1, 2$) \struck{des} \emph{rationnels} sur $K$. On utilise \uncertain{loc.\ cit.} pour déterminer $\pi_1(X^{\uncertain{c}}_{\bar K}, \xi)$ comme groupe engendré par \add{les} $\pi_1(X^c_{0\bar K}, \xi^c_0)$ et des générateurs $g_{c'}$ (indexés par l'ens.\ des composantes connexes de $X_1$), soumis à des relations \struck{\uncertain{explicitées} \ill{}} qui ne nous importent pas ici. \struck{Le choix (des pts base indiqué} \struck{ci-dessus} \struck{\ill{} que} Cette description est canonique au \uncertain{données} \uncertain{près} du choix des \struck{\ill{}} « chemins de \uncertain{descente} » reliant des pts géométriques \add{$\bar a, \bar b$} d'une \struck{\ill{}} composante connexe \add{$X^c_{0\bar K}$} de $X_{0\bar K}$, \struck{\ill{}} [savoir \uncertain{les} pt marqué de $X^c_{0\bar K}$ et l'image d'un pt marqué d'un $X^{c'}_{1\bar K}$ par l'une ou l'autre projection.] \struck{\ill{}} \struck{Alors} \struck{\ill{}} Plus précisément, \struck{\ill{}} on doit faire le choix d'un isom.\ entre les foncteurs fibres $F_{\bar a}, F_{\bar b}$ associés à $\bar a, \bar b$ sur la catégorie $\mathrm{Revét}(X^{c'}_{0\bar K})$ des rev.\ étales de $X^{c}_{0\bar K} = Y_{\bar K}$ \add{par construction, $\bar a, \bar b$ proviennent de pts} \struck{\ill{} $\in X_0(K)$}, \add{de $a, b \in Y_K(K)$,} \struck{\ill{} transport de structure $I = \mathrm{Gal}(\bar K/K)$ opère par \ill{} sur les foncteurs fibres $F_{\bar a}, F_{\bar b}$ [d…} \struck{\ill{} compatibles} \add{\uncertain{aux}} opérations de $I$ sur $\pi_1(X^{c'}_{1\bar K}, \bar a)$ et $\pi_1(X^{c'}_{1\bar K}, \bar b)$.
+
+Ceci dit, on peut choisir les isom.\ \struck{$F_{\bar a} \simeq F_{\bar b}$ de façon \ill{} \ill{} \ill{} l'action de $\mathcal{I}$} \add{$I$} sur l'ens.\ \struck{\ill{}} \struck{(\uncertain{compatibles}} $(\mathrm{Revét}(Y_{\bar K}), F_{\bar a})$, $(\mathrm{Revét}(Y_{\bar K}), F_{\bar b})$ \add{\uncertain{\ill{}}} des « chemins de \uncertain{descente} » de $\bar a$ à $\bar b$, \struck{Nous admettrons} \add{qui est} un \uncertain{torseur} sous $\pi_1(Y_{\bar K}, \bar a)$, à groupe d'opérateurs $I$ [compatible \struck{\ill{}} avec les opérations de $I$ sur le $\pi_1$].
+
+\struck{\emph{Lemme} 2.1.1. \struck{Il existe} $Y_K$ de type fini géom.\ connexe sur $K$, muni de $a, b \in Y_K(K)$, \ill{} $I$ opère \uncertain{sur} l'ens.\ des chemins de $\bar a$ à $\bar b$ sur $Y_{\bar K}$. Ceci \uncertain{posé}…}\note{Tout le bas de page, à partir de « Lemme 2.1.1 », est barré de deux grandes croix ; une note marginale gauche en face est raturée.}
+
+\page{172}\note{p.~8 de l'auteur. La page enchaîne sur la fin de la p.~7 (2.1), sans reprise de phrase visible.}
+Il n'est pas vrai en général que \struck{\ill{}} ce torseur à opérateurs $I$ soit trivial, i.e.\ admette un élément invariant par $I$ ; \add{l'obstruction est dans un $c \in H^1(I, \pi_1(Y_{\bar K}, \bar a))$} \struck{Mais si $P$ est le $p$-groupe de Sylow, on} (\uncertain{elle} est non commutatif). Mais considérons le \struck{\ill{}} torseur $(\ell^{(p')})$-modifié de \struck{\ill{}} \uncertain{l'}ancien (à opérateurs $I$) $\pi_1^{(p')}(Y_{\bar K}, \bar a)$, et les restrictions des $I$-opérations au s-groupe $P \subset I$ ($p$-sous-groupe de Sylow). Je dis qu'il existe un élément de $(Q^{(p')})$ fixe sous $P$, i.e.\ que la classe
+\[
+c^{(p')}|P \in H^1\bigl(P, \pi_1^{(p')}(Y_{\bar K}, \bar a)\bigr)
+\]
+est nulle : Ceci provient en effet du fait que $P$ est un $p$-groupe et $\pi_1^{(p')}(Y_{\bar K}, \bar a)$ est premier à $p$ : \struck{\ill{}} \add{\uncertain{il} prouve que} \struck{\ill{}} \uncertain{toute} \uncertain{multiplication} par un \uncertain{pr.}\ \ill{} divisant \ill{}… \uncertain{Ceci prouve} que la section standard \struck{\ill{}} \add{$G \cdot I \to I$} est conjuguée à une \add{\uncertain{autre}} par un élément de $G$. Or par la \ill{} \uncertain{conjugaison} des Sylow, il existe un élément $g \cdot i \in G \cdot I$ tel que \uncertain{int}$(g \cdot i)\, I = \varphi(I)$, i.e.\ $\mathrm{int}(g)\, I \subset \varphi(I)$, \uncertain{\ill{}} la conclusion.
+
+\page{173}\note{p.~9 de l'auteur.}
+\struck{il existe un élément \ill{} $\gamma \in P$ \ill{} dans le groupe de stabilité dans $I$ est \uncertain{ouvert}.}\note{Ces deux lignes, en tête de page, sont barrées de traits obliques.}
+
+Ceci posé, nous pouvons supposer choisis des \add{\uncertain{les}} « chemins de \uncertain{descente} » dans \add{\uncertain{la th.\ de}} « Van Kampen », \struck{\ill{}} de telle façon qu'ils soient invariants par $P$. \add{\uncertain{où les $\pi_1$ remplacés par $\pi_1^{(p')}$}} \struck{\ill{}} \struck{quitte à une extension finie de $K$.} Alors, on voit par « transport de structure » que l'homom.\ \add{\uncertain{(préfixé)}}
+\[
+\Pi^{(p')} = \text{groupe engendré par les } \pi_1^{(p')}(X^c_{0\bar K}, \bar x_{0\alpha}) \text{ et les } g_{c'}
+\]
+\[
+\Bigl\downarrow
+\]
+\[
+\pi_1^{(p')}(X_{\bar K}, \bar x)
+\]
+est compatible avec l'action de $I$, quand $I$ opère sur $\Pi$ via les opérations naturelles de $I$ sur les $\pi_1^{(p')}(X^c_{0\bar K}, \bar x_{0\alpha})$ (1.2), et l'opération triviale sur \add{les} $g_{c'}$.
+
+\struck{Du \uncertain{moins} pour \ill{} les \uncertain{correspondant} $\Pi^{(p')} \to \pi_1^{(p')}(X_{\bar K}, \bar x)$ est compatible avec \uncertain{les} opérations de $I$. Ceci dit, si $P$ est le $p$-s-groupe de Sylow de $I$,} Si l'on sait que $P$ opère trivialement sur les $\pi_1^{(p')}(X^c_{0\bar K}, \bar x_{0\alpha})$, il opère aussi trivialement sur $\Pi^{(p')}$ qui est engendré par \uncertain{des} éléments \uncertain{qui} \uncertain{sont} \uncertain{fixes} \struck{\ill{}} par $P$, donc $P$ opère trivialement sur \struck{le quotient $\pi_1^{(p')}$} $\pi_1^{(p')}(X_{\bar K}, \bar x)$, puisque ce \uncertain{dernier} est surjectif. Donc on est ramené \struck{\ill{}} à prouver 1.3 pour les $X^c_0$ au lieu de $X$, i.e.\ on peut supposer $X$ \struck{géom.\ \ill{}} géom.\ normal.
+
+\page{174}\note{p.~10 de l'auteur.}
+2.2. \emph{Réduction de 1.3 au cas où $X$ \struck{géom.}\ affine lisse de dim~1.}
+
+Soit $U_K$ un ouvert affine \uncertain{dense} de $X_K$, \struck{Alors} contenant un pt \struck{\ill{}} $x$. Alors $\pi_1(U_{\bar K}, \bar x) \to \pi_1(X_{\bar K}, \bar x)$ est surjectif et compatible avec les op.\ de $I$, donc \uncertain{de même} pour $\pi_1^{(p')}(U_{\bar K}, \bar x) \to \pi_1^{(p')}(X_{\bar K}, \bar x)$, donc on est ramené au cas de $X$ affine, a fortiori quasi-projectif. \add{au cas} de plus $\dim X = 1$ se fait alors \uncertain{par} la réduction (\uncertain{voir} des hyperplans génériques, comme en II~3. \struck{Comme}
+
+2.3. \emph{Réduction de 1.3 au cas de la situation 1.4, avec \uncertain{Ensemble} de $I$, on peut supposer \ill{} \ill{}.}\note{Le titre de 2.3 et la ligne interlinéaire qui le suit sont en partie raturés et entourés.}
+
+\struck{\ill{}} \emph{dim} $X_K = 1$. [Considérons le modèle complet $\bar X_K$ de $X_K$. Quitte : faire une extension radicielle de $K$, on peut supposer $\bar X_K$ géom.\ normal i.e.\ lisse. De plus, une \uncertain{théorie} non triviale, qui sera \uncertain{faite} dans un exposé ultérieur (\quad), \uncertain{nous apprend} que, quitte : \struck{\ill{}} faire une extension finie de $K$, il existe un \struck{\ill{}} schéma projectif $\bar X$ sur $S$, ayant $\bar X_{\bar K}$ comme fibre générique, et tel que $\bar X_s$ soit \struck{géométriquement réduit,} un diviseur à croisements normaux dans $\bar X$, $X_s$ étant de plus réduit et son normalisé étant \struck{géom.}\ \emph{lisse} sur $K$. Agrandissant encore $K$, on peut supposer que les pts de $\bar X_K - X_K$ sont rationnels sur $K$, donc \add{(\uncertain{les} $\bar X$ étant propre sur $S$)} sont définis par des sections $g_i$ de $\bar X$ sur $S$, $1 \leqslant i \leqslant r$. La réduction est
+
+\marginal{corps résiduel parfait ? Mais on s'y ramène pour prouver 1.3, \struck{par réduct.\ au \uncertain{parfait}} \uncertain{à un $p$-groupe} \struck{\ill{}} \ill{} $I$, cf.\ $I$…}
+
+\page{175}\note{p.~11 de l'auteur.}
+terminée si \add{les $g_i(S)$} \struck{nous prouvons que} sont mutuellement disjoints et contenus dans l'ouvert de lissité de $\bar X$ sur $S$. \struck{Il faut \ill{} de} \struck{\ill{}, il faut examiner les \uncertain{cas} qui peuvent se présenter : a) \ill{} $g_i(S)$ \ill{} tel que $g_i(S)$ soit un pt double de $X_s$.}\drawing{En marge gauche : la fibre $X_s$, verticale, coupée en un point par la section $g_i(S)$, horizontale.} \struck{Faisant éclater} Mais si $D$ est le diviseur $X_s + \sum g_i(S)$ sur le schéma régulier $\bar X$, on sait (\quad) que, quitte à faire éclater un nb fini de fois des pts fermés de $\bar X$ (qui sont nécessairement dans $\bar X_s$, donc le processus ne touche pas à $\bar X_K$, ni a fortiori à $X_K$), on peut supposer que $D$ est à \emph{croisements normaux}.
+
+Mais ceci implique que les $g_i(S)$ sont mutuellement disjoints\drawing{trois droites concourantes : la fibre $X_s$ et deux sections $g_i(S)$, $g_j(S)$ passant par un même point.} \struck{contenus} puisqu'on ne pourrait avoir trois \struck{\ill{}} \add{\uncertain{branches}} à croisements normaux). \struck{et que $g_i(S) \cap X_s = \{g_i(s)\}$ est un \ill{} \ill{} un pt de lissité de $X_s$} \add{D'autre part} \struck{\ill{}} (\uncertain{sinon} on aurait\drawing{la fibre $X_s$ à point double, avec une section $g_i(s)$ passant par ce point.}) \struck{\ill{}} \add{comme} $X$ est régulier, cela \uncertain{implique} que les sections $g_i$ de $X$ sur $S$ est dans l'ouvert de lissité de $X$ (EGA~IV~17…). La réduction de 1.3 au cas 1.4 est achevée.
+
+\struck{2.4. Réduction de 1.4 au cas de la dim.\ relative 1, \ill{} \add{et la th.\ prouvée en dim.\ relative $< n$} $X$ géom.\ connexe de dim $n \geqslant 2$ \ill{} \ill{} \ill{} \ill{} \ill{} \ill{} \ill{} \ill{} $\bar X \hookrightarrow \mathbb{P}^r_S$, d'où $\bar X_s \subset \mathbb{P}^r_s$. Soit $Z_s$ le normalisé de $\bar X_s$, de sorte que $Z_s \to \mathbb{P}^r_s$ \uncertain{de dim $n$} \struck{géom.\ connexe} \ill{} \ill{} un morphisme net (EGA~V), $Z_s$ étant lisse. On sait alors que pour un hyperplan « assez général » $H_s$ de $\mathbb{P}^r_s$, $Z_s \times_{\mathbb{P}^r_s} H = Z'_s$ est \ill{}}\note{Tout le paragraphe 2.4 est encadré et barré de grandes croix.}
+
+\page{176}\note{p.~12 de l'auteur.}
+2.4. \emph{Réduction de 1.4 au cas de la dim.\ relative~1.}
+
+Supposons la dim.\ relative $n \geqslant 2$, et la th.\ \emph{prouvée} en dim.\ relative $n-1$. Choisissons une immersion de $\bar X$ dans $\mathbb{P}^r_S$. \struck{Considérons} On peut supposer \struck{\ill{}} que la section $g$ est de coordonnées $(1, 0, \ldots, 0)$. On \uncertain{remplace} \struck{\ill{}} $S$ par le localisé strict de $S[t_1, \ldots, t_r]$ au pt maximal de la fibre spéciale, et l'ensemble \uncertain{des} \uncertain{données} \struck{\ill{}} $\bar X'$, $Y'$, $X'$, $U'$ sur $S'$. On peut relever $\xi$ en un \struck{\ill{}} \uncertain{pt} \uncertain{géom.}\ $\xi'$, dont l'image dans $S'$ \struck{\ill{}} pt géom.\ de $\bar X'$, \struck{\ill{}} \add{On \uncertain{note} $\bar y'$} \struck{\ill{}} au-dessus de $y'$ générique dans la fibre de $S'$ au-dessus de $y$. \struck{Dans le cas non vide, \ill{} \ill{} \ill{} \ill{} \ill{} \ill{} \ill{} \ill{} \ill{} \ill{} \ill{} \ill{} \ill{}} \struck{Dans le cas non respé, \ill{} \ill{} \ill{}} \struck{\ill{} \ill{} \ill{} \ill{} \ill{}}\note{Un passage de quatre lignes est encadré et barré ; on y lit « $U'$ », « $U$ », « $t'$ », « lisse et $Y$ », « (… à \uncertain{remplacer} $k(\xi)$…) », « considérons … hyperplan », « croisements », « par $g$ ».}
+
+… plan $H \subset \mathbb{P}^r_S$ \add{« générique » relativement à $S$, de} coordonnées $(0, t_1, \ldots, t_r)$. \struck{Dans le cas non respé,} \struck{\ill{}} \struck{Alors} \struck{Posons} Alors \struck{\ill{} disjoint \ill{} $U'$ \ill{} \ill{}} \struck{\ill{} le plus général \ill{} \ill{} \ill{} \ill{} \ill{} \ill{}} considérons $\bar X^{(1)} = \bar X' \cap H$ et $Y^{(1)} = Y' \cap H$ \add{\uncertain{sont}} \add{projectifs et plats sur $S$,} de présentation finie sur $S$, \struck{Soit $V'$ l'un des \ill{}} \add{donc} $(\bar X^{(1)}, Y^{(1)}, X^{(1)} = \bar X^{(1)} - Y^{(1)})$ \uncertain{satisfait} \struck{\ill{}} \uncertain{à} \uncertain{la} condition a). Ils satisfont \uncertain{aussi} \uncertain{aux} conditions b) et c) (\struck{\ill{}} \add{\uncertain{réf.}} : EGA~V).\marginal{On peut être obligé de remplacer l'immersion projective initiale par une immersion conjuguée (en considérant \uncertain{une} \uncertain{immersion} de Veronese…).}
+
+Dans le cas \struck{\ill{}} respé, on peut \uncertain{choisir} $\xi'$ de façon que $y'$ soit gén.\ dans la fibre de $S'$ sur $y$, donc \uncertain{\ill{}} par $\bar X^{(1)}_{y'}$. Dans le cas non respé, d) sera satisfait par \ill{} \struck{\ill{}} \uncertain{toutes}, je dis que si $U'$ est le plus grand ouvert de $S'|U$ \add{tel} \struck{lequel} que $\bar X^{(1)}|U'$ soit lisse sur $U'$ et $Y^{(1)}|U'$ y soit un diviseur à croisements normaux relatifs, alors $U' \to U$ est \emph{surjectif} ; \struck{\ill{}} c'est \uncertain{encore} facile via \uncertain{réf.}\ : EGA~V.\marginal{explicites un peu}
+
+\page{177}\note{p.~13 de l'auteur.}
+Posons $I' = \pi_1(U', \xi')$ resp.\ $I' = \pi_1(y', \xi')$. On a (SGA~1 XIII)
+\[
+\pi_1^{(p')}(X'_{\bar y'}, \xi') \simeq \pi_1^{(p')}(X_{\bar y}, \xi)
+\]
+\uncertain{dans} et d'autre part, $U' \to U$ (resp.\ $y' \to y$) étant \uncertain{à fibres} connexes, on a
+\[
+I' \longrightarrow I \quad \text{surjectif.}
+\]
+Donc il suffit de prouver que l'action \struck{\ill{}} de \add{\uncertain{\ill{}}} $I'$ sur $\pi_1^{(p')}(X'_{\bar y'}, \xi')$ (\struck{\ill{} \uncertain{construite}} \add{\uncertain{\ill{} construites ci-dessus}}, \struck{\ill{}} \struck{\ill{} donnée une section $g$ de $X/S$ dans l'ouvert de lissité, qui définit une section de $X'$, sur $S'$ dans l'ouvert de lissité, permet \ill{} \uncertain{faite} sur l'action de $I$ sur $\pi_1^{(p')}(X_{\bar y}, \xi)$ ; dans ce dernier cas, il \uncertain{est} \ill{} \ill{} de construction précédente \uncertain{est} \ill{} par la section \ill{} \ill{} \ill{} \ill{} \ill{} \ill{} H \ill{} \uncertain{autre} \ill{})} \struck{D'au} \add{D'autre part,} \struck{\ill{} « générique » pour \ill{}} \struck{\ill{} les composantes irréductibles de} \struck{D'autre part,}\note{Un long passage, à gauche, est encadré et barré d'un trait oblique ; seuls quelques mots se dégagent.} comme $X^{(1)}_{\bar y}$ est irréductible de dim $\geqslant 2$, et $X^{(1)}_{\bar y}$ en une section hyperplane générique, le th.\ de Bertini \add{et le th.\ d'invariance de $\pi_1^{(p')}$ par \uncertain{cat.}\ des \uncertain{corps de base}} \uncertain{implique} \uncertain{que}
+\[
+\pi_1^{(p')}(X^{(1)}_{\bar y}, \xi) \longrightarrow \pi_1^{(p')}(X_{\bar y}, \xi)
+\]
+est \emph{surjectif}. Donc on est ramené à prouver le \struck{\ill{}} énoncé 1.4 pour $\bar X^{(1)}$, $Y^{(1)}$, $U'$ resp.\ $y'$. Cela achève la réduction au cas de la dim.\ 1.
+
+\page{178}\note{p.~14 de l'auteur.}
+\subsection{3. Démonstration de 1.4 dans le cas de la dim.\ relative 1}
+
+\struck{Soit $W$ \ill{}} \struck{On peut} \add{Soit $W$ un anneau de Cohen de corps résiduel $k$, et choisissons un hom.\ $W \to A$ (où $S = \mathrm{Spec}\, A$) \struck{\ill{}} induisant l'identité sur $k$.} Nous allons d'abord \uncertain{prouver} 1.4 en admettant le lemme clef suivant, qui sera prouvé dans l'exposé~VII \struck{\ill{}} à l'aide de la théorie des \add{\uncertain{constructions formelles de}} Schlessinger.
+
+\emph{Lemme} 3.1. Sous les conditions a) b) c) de 1.4, avec \add{relative} $\dim X_s = 1$, on peut trouver une algèbre \struck{locale noethérienne} $A_0$ sur $W$, \struck{\ill{}} un anneau de séries formelles
+\[
+A_0 \simeq W[[t_1, \ldots, t_N]] ,
+\]
+\struck{\ill{}} un schéma $\bar X_0$ sur $A_0$, un sous-schéma $Y_0$ de $\bar X_0$, \struck{\ill{}} un morphisme $f : S = \mathrm{Spec}\, A \to S_0 = \mathrm{Spec}\, A_0$, de telle façon que les conditions suivantes soient vérifiées :
+
+(i) $(\bar X_0, Y)$ sur $A_0$ satisfont les conditions a) b) c) de 1.4, i.e.\ $\bar X_0$ est projectif et plat sur $S_0$, $(\bar X_0)_{\bar s_0}$ \add{($s_0$, le pt fermé de $S_0$)} est une courbe \struck{\ill{}} algébrique \struck{\ill{}} n'ayant \uncertain{que} \uncertain{des} points singuliers ordinaires, $Y$ est \add{un} diviseur relatif sur $\bar X_0/S_0$ \struck{\ill{} (étant entendu vide) \ill{} \ill{} \ill{} \ill{} une \uncertain{ensemble} fini de sections $(g_\alpha)_{1 \leqslant \alpha \leqslant r}$ de $\bar X_0$ sur $S_0$, telles que $g_\alpha(s_0)$ \ill{} \ill{} \ill{} pts \ill{} de $(\bar X_0)_s$ \ill{} \ill{} (i)).}
+
+(ii) Soit $(x_i)_{i \in I}$ la famille des pts singuliers de $X_s$ \add{(\uncertain{indexés} par (i))}, \struck{\ill{}} et $k = k(s)$ ($X_s$ \uncertain{les} \ill{} \ill{} \uncertain{loc.}\ \ill{} EGA~V --- \uncertain{dans} \ill{}). Il existe une famille de diviseurs\marginal{\uncertain{voir}} $(D_i)_{i \in I}$ \struck{\ill{}} sur $S$, telle \add{\uncertain{donc}} que \struck{la famille} $\mathrm{div}(p) + \sum D_i +$ soit à croisements normaux et \struck{\ill{}} \uncertain{les} $D_i$ \uncertain{des} \uncertain{composantes} nulles [de façon précise, on peut supposer $I = [1, \nu]$ et (\uncertain{que} les $D_i$ sont de la forme $\mathrm{div}(t_i)$], [de telle façon que pour $t \in S_0$, … on ait $t \in D_i$ ses \uncertain{\ill{}} carts \uncertain{une} généralisation $x'_i$ de $x_i$ au-dessus de $t$, telle que $\bar X_0$ soit lisse \add{\uncertain{non}} au-dessus de $S_0$ en $x'$.] En particulier, $U_0 = S_0 - \bigcup_i D_i$ est le plus grand ouvert \uncertain{au-dessus} duquel \struck{\ill{}} $\bar X_0$ soit lisse.
+
+(iii) Le couple $(\bar X, Y)$ sur $S$ est isomorphe au couple déduit de $(\bar X_0, Y_0)$ sur $S_0$ par $f : S \to S_0$.
+
+\drawing{En marge gauche : un petit schéma (une verticale et une boîte traversée d'un segment pointé).}
+
+\page{179}\note{p.~15 de l'auteur.}
+3.2. \emph{Démonstration de 1.4 à l'aide de 3.1.}
+
+Comme $U_0$ est l'ensemble des $t_0 \in S_0$ dont la fibre $\bar X_{0, t_0}$ est lisse, on voit que $f$ applique $U$ dans $U_0$ ; donc, \struck{l'action de} \uncertain{par} \uncertain{changement} de base par \uncertain{les} \ill{} \struck{\ill{}} on \uncertain{vérifie} \uncertain{les} \uncertain{théorèmes} de \ill{} $\pi_1^{(p')}$ (SGA~1 XIII…), on est ramené à prouver le th., \struck{\ill{}} dans la situation \add{(\uncertain{\ill{}})} avec indices~$0$. Or, en vertu des \add{variantes des} lemmes d'Abhyankar (SGA~1 XIII…), le groupe fondamental de $U_0$ est \struck{\ill{}} \struck{\ill{}} \uncertain{abélien} d'ordre premier à~$p$. \struck{\ill{} \ill{} \ill{} \ill{} la démonstration de 1.4 dans le cas \ill{} \ill{} isomorphe} \add{\uncertain{celles} de 1.4 et de 1.3}\struck{\ill{} admise dans la \ill{} de façon précise, il est} de la dim.\ relative~1, \uncertain{dans} \uncertain{tout} le cas général, grâce aux réductions \uncertain{du} \ill{}~2.
+
+\emph{Remarque} 3.2.1. De façon précise, le \uncertain{variante} indiquée du lemme d'Abhyankar affirme que \add{\uncertain{les} \uncertain{limites}} \add{des} revêtements \uncertain{universel} de $U$ en prenant les revêtements \uncertain{kummériens} \uncertain{\ill{}} \ill{} définis par les revêtements kummériens\note{lecture de la ligne incertaine ; le mot est répété.}
+\[
+S[T_1, \ldots, T_\nu]/(T_1^m - t_1, \ldots, T_\nu^m - t_\nu) ,
+\]
+\uncertain{avec} $m$ premier à $p$. D'\uncertain{où} un isom.\ canonique
+\[
+\pi_1(U_0, \xi) \simeq \mathbb{Z}'_\ell(1)^I ,
+\]
+$I$ étant l'ensemble d'indices pour \struck{tous} les pts \struck{singuliers} \add{\uncertain{de non-lissité}} de $X_0$, et $\mathbb{Z}'(1)$ étant le produit des $\mathbb{Z}_\ell(1)$ ($\ell$ nb premier, \add{avec} $\ell \neq p$), $\mathbb{Z}_\ell(1) = \varprojlim_m \mu_{\ell^m}(k)$.\note{Sur le feuillet, l'indice de $\mathbb{Z}'(1)$ est surchargé, tantôt $\ell$, tantôt absent.}
+
+On peut donc dire que l'action de $\pi_1(U_0)$ est \uncertain{déterminée} \uncertain{essentiellement} par \struck{\ill{}} \add{la donnée de} $\nu$ \struck{\ill{}} \add{automorphismes} \add{\uncertain{commutants}} de $\pi_1^{(p')}(X_{\bar K})$, \struck{définis \ill{}} (\uncertain{via} le choix d'\uncertain{un}
+
+\page{180}\note{p.~16 de l'auteur.}
+générateur topologique de $\mathbb{Z}'(1)$) \struck{par les} \add{aux} différents $x_i$. \struck{L'action \ill{} \ill{}} Comme on connaît la structure \add{\uncertain{\ill{} du genre de $X_{\bar K}$ et du nombre de pts \uncertain{intérieurs}}} de $\pi_1^{(p')}(X_{\bar K}, \xi)$ (SGA~1 XIII) \struck{\ill{}} on voit que le pb de déterminer la forme des $h_i$ devient assez concret. Cela \struck{\ill{}} sera fait par Deligne par voie \emph{transcendante} dans un exposé ultérieur.
+
+Lorsque $S$ est lui-même un trait, \uncertain{donc} \struck{\ill{}}
+\[
+I_t = \pi_1(y, \bar\xi)_t \simeq \mathbb{Z}'_\ell(1) ,
+\]
+\uncertain{dans} l'action extérieure de $I_t$ sur $\pi_1^{(p')}(X_{\bar K}, \xi)$ est connue quand on connaît l'homomorphisme induit
+\[
+\pi_1(y, \bar\xi)_{\mathrm{tam}} \longrightarrow \pi_1(U_0, \bar\xi)
+\]
+\note{Avant $\pi_1(y, \bar\xi)_{\mathrm{tam}}$, un « $\mathbb{Z}'(1) \to$ » est biffé.}
+i.e.\ un homomorphisme \struck{$\mathbb{Z}'(1)$}
+\[
+u : \mathbb{Z}'(1) \longrightarrow \mathbb{Z}'(1)^I
+\]
+\struck{dont la \ill{} \ill{} d'ailleurs, \ill{} \ill{}} qui est d'ailleurs donné par \struck{\ill{} \ill{}, et}
+\[
+u(\lambda) = (n_i \lambda)
+\]
+avec
+\[
+n_i = \mathrm{long}(V / \mathfrak{m}_i V) ,
+\]
+où $\mathfrak{m}_i$ est l'idéal définissant le \uncertain{diviseur} $D_i$ \add{\uncertain{dans $S$}}. (L'entier $n_i$ mesure, \struck{\ill{}} heuristiquement, la vitesse avec laquelle disparaît la singularité $x_i$ en passant de la fibre spéciale à la fibre générique.) Donc le générateur choisi de $\mathbb{Z}'(1)$ agit \add{\uncertain{extérieurement}} sur $\pi_1^{(p')}(X_{\bar K}, \xi)$ par
+\[
+h = h_1^{n_1} \cdots h_\nu^{n_\nu} .
+\]
+\note{La page s'arrête ici ; le texte peut se poursuivre au-delà de ce lot.}
+
+\end{document}
