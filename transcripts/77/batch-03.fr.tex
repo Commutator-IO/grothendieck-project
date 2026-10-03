@@ -1,0 +1,889 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 77, batch 3 (pages 41-60).
+% Established from the facsimile archives/batches/77/batch-03.pdf, per the skill
+% transcribe-grothendieck.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-03 — first pass, unchecked against the pages by a human.
+%
+% Twenty pages, all mathematics, all transcribed (41-60). The batch opens in
+% the middle of a sentence (the systems (C_n, g) of p. 41 run in from batch 02)
+% and stops at the end of p. 60 in the middle of the proof of part c) of the
+% theorem of § 10, which continues into batch 04.
+%
+% Content: quadratic algebras (rank-2 O_S-algebras B with unit e_B) over a
+% general base S, in terms of the invertible module L, the affine torsor F under
+% L, the trace form b = tr and the discriminant. Pp. 41-44: n-forms and norms
+% N_{C_n/O_S} (formulas (67)-(83)), the companion matrix, return to n = 2.
+% § 7 (pp. 45-47): the canonical involution sigma u = (tr u) e_B - u, pseudo-
+% reflections, Hamilton-Cayley u^2 - u tr u + N(u) = 0. § 8 (pp. 47-49): 2
+% invertible, B classified by (L, discriminant), Omega = (1/2) Omega(partial).
+% § 9 (pp. 50-51): characteristic 2, tr is a section of L, partial = b^2,
+% Artin-Schreier. § 10 "Cas mixte", twice: pp. 52-57 (2 regular, gluing over
+% S_0 = V(2) and S_1 = V(4), theorem with conditions a) b_0^2 = partial_0 and
+% b) a_1(partial) = 0, two corollaries) and pp. 58-60 (a fresh statement with
+% parts a) fully faithful, b), c) partial_1 = gamma(b_0), and proofs).
+%
+% Formula numbers (67)-(114) are his. Notation fixed for the batch:
+% \underline{O}_S, \check{\mathbb{V}}(L), \partial for his discriminant (a
+% round d), \underline{b} for the trace section.
+%
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{77}
+\batch{3}
+\pages{41}{60}
+\foldertitle{Quadriques affines, extensions quadratiques : notes manuscrites (s.d.).}
+\dating{[à partir de 1977]}
+\watermark{Édition de démonstration}
+
+\begin{document}
+
+\page{41}
+\note{la page s'ouvre au milieu d'une phrase commencée avant ce lot : on y cherche les systèmes $(C_n, g)$ tels que}
+
+tels que
+\[
+(67)\qquad
+\begin{cases}
+\text{a) } q(e_B) = 1_{C_n} \\
+\text{b) } g(B) \text{ engendre } C_n .
+\end{cases}
+\]
+
+Ceci dit, considérons \add{la norme, \ill{}} \struck{l'application \ill{}}
+\[
+(68)\qquad F_n : \check{\mathbb{V}}(C_n) \longrightarrow \check{\mathbb{V}}(\underline{O}_S)
+\]
+définie par
+\[
+(69)\qquad F_n(x) = N_{C_n/\underline{O}_S}(x) \quad \bigl(= N_{\Omega/S}(x, \;)\bigr),
+\]
+c'est une $n$-forme, et on peut considérer sa « restriction » $F_n \circ g$.
+Ceci dit, on a (sauf erreur)
+\[
+(70)\qquad f_n = \text{\struck{\ill{}}}\, F_n \circ g
+\quad \Bigl(\text{dans } \Gamma\, \mathrm{Sym}^n(\check{B} = V)\Bigr)
+\]
+\note{au-dessus de la ligne, une variante : $= \text{\struck{\ill{}}}\, N_{C_n/\underline{O}_S} \circ g$}
+
+[ce qui montre que la correspondance entre $n$-\uncertain{dimensions} sur $F$,
+i.e. syst. $(C_n, g)$, et $n$-formes définie par (70), est bijective].
+
+Pour vérifier (70), \uncertain{dès} que $B$ est muni d'une section $t$ telle
+que $(e_B, t)$ forme une base, alors $C_n$ sera engendrée sur
+$\underline{O}_S$ par \add{l'image de $t$} ($T$), donc aura la base
+$1, t, \ldots, t^{n-1}$, et sera défini par
+\[
+(71)\qquad C_n \simeq \underline{O}_S[T] / (f)\, \underline{O}_S[T]
+\]
+où $f$ est un polynôme unitaire \add{en $T$} de degré $n$,
+\[
+f(T) = \text{\struck{\ill{}}}\; T^n + a_1 T^{n-1} + a_2 T^{n-2} + \cdots + a_n
+\]
+\struck{\ill{} $f_n(t)$}
+
+\note{suivent trois lignes biffées, en partie illisibles : « \ill{} on vérifie que
+$M_n^d = \underline{O}_S\, q_n$ \ill{}, $q_n = e_B^n + a_1 e_B^{n-1} T + \cdots + a_n$,
+$\in \Gamma \,\mathrm{Sym}^n B$ » (un $N$ est écrit au-dessus) ; puis un numéro
+(72) biffé devant $f_n(u e_B + v T) = u^n + a_1 u^{n-1} v + a_2 u^{n-2} v^2 + \cdots + a_n v^n$,
+biffé lui aussi ; enfin, non biffé :}
+\[
+q_n = \text{\struck{\ill{}}}\; T^n + a_{n-1} e_B T^{n-1} + \cdots + a_n e_B^n
+\in \Gamma\, \mathrm{Sym}^n B
+\]
+\note{les indices des $a_i$ de cette dernière ligne sont lus tels quels ; ils ne
+suivent pas ceux de $f(T)$}
+
+\page{42}
+\uncertain{d'où on conclut} \ill{} \uncertain{la} formule : vérifions d'abord
+\[
+(74)\qquad N_{C_n/\underline{O}_S}(u 1_C + v t)
+= u^n - a_1 u^{n-1} v + \cdots + (-1)^n a_n v^n
+= (-v)^n f\Bigl(-\frac{u}{v}\Bigr)
+\]
+\note{le facteur $(-1)^n$ devant $a_n v^n$ et le $(-v)^n$ sont surchargés ; le
+premier terme a d'abord été écrit autrement}
+
+Or si $u = 0$, $v = 1$ cette formule se réduit à :
+\[
+(75)\qquad N_{C_n/\underline{O}_S}(t) = (-1)^n a_n
+\]
+Or la matrice de la multiplication par $t$ dans la base $1, t, \ldots, t^{n-1}$, est
+\[
+\begin{pmatrix}
+0 & 0 & \cdots & 0 & -a_n \\
+1 & 0 & \cdots & 0 & -a_{n-1} \\
+0 & 1 & \cdots & 0 & \vdots \\
+\vdots & \vdots & & \vdots & \vdots \\
+0 & 0 & \cdots & 1 & -a_1
+\end{pmatrix}
+\]
+dont le déterminant est
+\[
+(-1)^{n-1}(-a_n) = (-1)^n a_n
+\]
+\marginal{sous $(-1)^{n-1}$, souligné : signature de la permutation circulaire de l'ensemble à $n$ él.}
+
+(on se ramène au cas \ill{} \uncertain{(en local on peut)})
+\struck{\ill{}} par un argument universel. On peut aussi le prouver par des
+\uncertain{dévissages}, \ill{} \uncertain{déterminants}, en faisant une ext.\ fid.\ plat
+de $S$ \ill{}
+\[
+(76)\qquad f(T) = \prod_{i=1}^{n} (T - t_i)
+\qquad \text{donc } a_i = (-1)^i \sigma_i(t_1, \ldots, t_n)
+\]
+avec des sections $t_i$ de $\underline{O}_S$ ($1 \leqslant i \leqslant n$).
+\struck{\ill{}} Alors (75) devient
+\[
+N_{C_n/\underline{O}_S}(u 1_C + v t) = (-v)^n f\Bigl(1 - \frac{u}{v}\Bigr)
+= \prod_i (u + v t_i)
+= \prod_i \rho_i(u 1_C + v t)
+\]
+\note{le numéro de cette formule est noirci ; dans $f(1 - \frac{u}{v})$ le « 1 » est
+surchargé, sans doute biffé ; après $\prod_i (u + v t_i)$ une fin de ligne est biffée}
+
+\note{un trait horizontal sépare ce qui suit}
+
+utilisant $\check{V} \simeq V \otimes L \simeq V$, \quad $e_B \mapsto T'$,
+$T \mapsto e_B'$ (base duale des $e_B, T$)
+\[
+f_n = \varepsilon (-1)^n \bigl( e_B'^{\,n} - a_1 e_B'^{\,n-1} T' + \cdots
++ (-1)^i a_i e_B'^{\,n-i} T'^{\,i} + \cdots + (-1)^n a_n T'^{\,n} \bigr),
+\]
+i.e.
+\[
+(73)\qquad f_n(u e_B + v T) = \varepsilon \bigl( u^n - a_1 u^{n-1} v + \cdots
++ (-1)^i a_i u^{n-i} v^i + \cdots + (-1)^n a_n v^n \bigr)
+\]
+(avec $\varepsilon = (-1)^n$ pour avoir $f_n(e_B) = 1$)
+\marginal{formule à prouver}
+\note{la note marginale renvoie par une flèche au numéro, biffé, de la formule de
+$f_n$ ; le numéro (73) est écrit devant la ligne « i.e. ». Les numéros (73) à (76)
+ne sont pas écrits dans l'ordre de la page}
+
+\page{43}
+\[
+(77)\qquad \rho_i : C_n \longrightarrow \underline{O}_S
+\]
+est l'homom.\ de $\underline{O}_S$-Algèbres défini par
+\[
+(78)\qquad \rho_i(T) = t_i ,
+\]
+et alors la formule à prouver est un cas particulier de la suivante, bien connue
+\[
+(79)\qquad \Bigl[\Bigl[\; N_{C(t_1, \ldots, t_n)/\underline{O}_S}(w)
+= \prod_{1 \leqslant i \leqslant n} \rho_i(w) \;\Bigr]\Bigr]
+\]
+
+Revenons au cas $n = 2$, et à la correspondance entre structures d'Algèbre
+quadratique sur $B$, admettant $e_B$ comme unité, et
+\struck{structures quadr} \add{de} formes quadratiques $q$ sur $B$ satisfaisant
+$q(e_B) = 1$. Explicitons la structure sur $\Sigma^2(F)$ du fibré
+\struck{\uncertain{inversible}} sur $2F$, \struck{\ill{}} modèle des
+\uncertain{trivialisations} $(L^{\otimes 2})_{2F}$. Je fais d'abord explicitement
+\[
+(80)\qquad \underline{b}(q) \in \Gamma(2F) \subset \Gamma(\check{B} = V)
+\]
+pour $q$ comme dessus. \struck{On fixe}
+
+\textbf{Prop.} Soit $\varphi$ la forme bilinéaire associée à $q$, et considérons la forme
+\[
+(81)\qquad
+\begin{cases}
+\underline{b}(q) : B \longrightarrow \underline{O}_S \\
+\underline{b}(q)(x) = \varphi(e_B, x) \quad (= \mathrm{tr}_{B/\underline{O}_S}\, x)
+\end{cases}
+\]
+On a $\underline{b}(q)(e_B) = \varphi(e_B, e_B) = 2 q(e_B) = 2$, donc
+$\underline{b}(q)$ est une section de $2F \subset \check{\mathbb{V}}(\check{B})$, qui
+\ill{}
+
+\page{44}
+\uncertain{n'est autre} que $\underline{b}(\Omega)$ du § 5.
+
+Étudions nous $\underline{b}(q)$ \add{$= \mathrm{tr}$} (i.e.\ la forme
+\emph{trace} $B \to \underline{O}_S$), et étudions les $q$ correspondant à
+\uncertain{une} trace donnée. On trouve \add{les sections d'un \uncertain{faisceau}
+principal sous un} \struck{\uncertain{faisceau}} torseur lié \uncertain{à un} faisceau en
+Modules des formes quadratiques $q_0$ telles que
+\[
+(82)\qquad
+\begin{cases}
+q_0(e_B) = 0 \\
+\varphi_0(e_B, \;\cdot\;) = 0
+\end{cases}
+\qquad \text{(\struck{$\forall x$} où $\varphi_0$ est la forme bil.\ associée à $q_0$)}
+\]
+\struck{$V \mathrm{Hom}$ \ill{} $V \to \check{V}$}
+i.e.\ \struck{$\varphi_0(e_B)$ une forme $\varphi_0$} ce sont aussi les formes
+quadratiques qui se factorisent par $B \to L$, i.e.\ qui correspondent aux formes
+quadratiques sur $L$, ou encore aux \struck{for} scalaires de
+$L^{\otimes -2}$\note{l'exposant de $L$ se lit $\otimes{-2}$ ; il pourrait aussi être $\otimes 2$}
+Donc les formes $q$ en question \uncertain{sont} les sections d'un fibré affine sous
+$L^{\otimes -2}$, dont les scalaires $c_0$ correspondent aux $q_0$ par
+\[
+(83)\qquad q_0(x) = c_0\, \pi_1(x)^2 .
+\]
+
+\page{45}
+\section*{7.~\struck{\uncertain{Symétries}} Involutions canoniques.}
+
+\textbf{Prop.} Soit $B$ Algèbre quadratique sur $\underline{O}_S$. Alors l'homom.\
+$\underline{O}_S$-linéaire
+\[
+(84)\qquad \sigma : u \longmapsto \text{\struck{\ill{}}}\; (\mathrm{tr}\, u)\, e_B - u
+\]
+est un \emph{automorphisme} d'algèbres involutif, caractérisé par la condition
+\[
+(85)\qquad u + \sigma u = (\mathrm{tr}\, u)\, e_B
+\]
+
+On notera que la donnée (pour $B$ un $\underline{O}_S$-Module \uncertain{localement
+libre} de rang 2 muni d'une section $e_B$ \struck{\ill{}} \add{\uncertain{partout}}
+\struck{non nulle \ill{} au-dessus \ill{}}) de l'involution $\sigma$ équivaut à
+la donnée de la forme $\underline{b} = \mathrm{tr}$ (section de $2F$),
+\struck{\ill{}} moyennant cette correspondance les $\underline{b}$ correspondent
+exactement aux \add{\uncertain{pseudo}}-\emph{réflexions} $\sigma$ \uncertain{dans les}
+$\underline{O}_S$-Modules $B$ telles que $\sigma e_B = e_B$, i.e.\ admettant
+$\underline{O}_S \cdot e_B$ comme droite \uncertain{fixe}
+\struck{Cette réflexion \ill{}, \ill{} endomorphisme \ill{}}
+\note{deux traits de renvoi relient « comme droite fixe » et le passage biffé aux
+lignes qui suivent : « droite des pts fixes, \ill{} »}
+
+\marginal{\ill{} $y \longmapsto \underline{b}(y)\, e_B$ \ill{}}
+\uncertain{De la forme générale}
+\[
+\sigma u = u + a \otimes \pi_1(u) \qquad \text{i.e. } \sigma = \mathrm{id}_B + a \otimes \pi_1
+\]
+où
+\[
+a \in \Gamma(B \otimes L \simeq V = \check{B}) \text{ \struck{\ill{}}}
+\qquad \text{et} \qquad
+\pi_1 \in \Gamma\bigl(\check{B} \otimes L^{\vee} \simeq \underline{\mathrm{Hom}}(B, L^{\vee}) \simeq B\bigr)
+\]
+\uncertain{précisément} \ill{} ;
+\[
+\sigma^2 = \mathrm{id}_V + 2\, \pi_1 \otimes a + \langle a, \pi_1 \rangle\, \pi_1 \otimes a
+= \mathrm{id}_V + \pi_1 \otimes a\, \bigl(2 + \langle a, \pi_1 \rangle\bigr)
+\]
+\note{$\langle a, \pi_1 \rangle$ est écrit au-dessus d'un terme biffé}
+donc $\sigma$ \uncertain{involution} \struck{\ill{}} et \uncertain{partout} $\neq \mathrm{id}$
+sur \ill{} \uncertain{fibre}, \uncertain{ssi} $a \neq 0$ \struck{\ill{}} \ill{}
+\uncertain{fibre}, et $\langle a, \pi_1 \rangle = -2$. \uncertain{Identifions}
+
+\marginal{écrit le long du bord gauche, tourné : $B/B' \simeq L^{\vee}$ \ill{}
+$L \otimes V \subset \check{V} \otimes V$ \ill{} — puis : On \uncertain{veut} \ill{}
+\uncertain{réflexion} d'un module \ill{} $B$, \ill{} $B'$ \ill{}
+\ill{} l'ensemble $H$ des endomorphismes de la forme $\mathrm{id} + v$, où
+$v \in$ \ill{} tel que $\mathrm{tr}\, v = -2$.}
+\note{le coin inférieur gauche de la marge porte encore quelques lignes biffées
+illisibles}
+
+\page{46}
+$a$ à une forme linéaire sur $B$, et $\pi_1$ à la section $e_B$ de $B$
+(\uncertain{à signe près} \ill{}) cette relation s'écrit
+\[
+a(e_B) = -2 ,
+\]
+et \struck{cette \uncertain{égalité}} on \uncertain{vérifie}
+(\struck{\ill{}} \ill{}) qu'on trouve \uncertain{également} \ill{} que $a$
+correspond : $\underline{b} = \mathrm{tr}$ \ldots\ \ill{}
+
+\struck{\ill{} cas est \ill{}} Cette pseudo-réflexion est une
+réflexion i.e.\ est $\neq$ identité en chaque fibre, \uncertain{ssi} \ill{} en
+\uncertain{car.} résiduelle 2, \ill{} $\mathrm{tr}_s$ sur $B_s$ non
+(\uncertain{identiquement}) nulle. Ceci résulte de la
+
+\textbf{Proposition.} Pour qu'une pseudo-réflexion d'un module
+\struck{quadratique,} \add{\uncertain{partout de}} \struck{\ill{}} rang 2 $B$
+(\uncertain{prolongeant} : une \ill{} $B' \subset B$ \uncertain{telle} que
+$B/B' \simeq L^{\vee}$, \ill{} \uncertain{donné}) soit l'identité, il faut et il
+suffit que $S$ soit de car.\ 2 (i.e.\ $2 \cdot 1_S = 0$) et que la section de
+$L \otimes B$ qui la définit soit nulle\ldots\ donc dans le cas actuel $B$ de rg 2,
+$B' = \underline{O}_S\, e_B$, donc $L \otimes B \simeq \check{B}$, que la forme
+$\underline{b} = \mathrm{tr}$ sur $B$ qui la définit ($\underline{b}(e_B) = 2 \ldots$)
+soit nulle.
+
+\struck{Revenons} \add{\uncertain{Remarquons}} maintenant \ill{} que $\underline{b} = \mathrm{tr}$
+\struck{\uncertain{provient}} \add{\uncertain{est la}} \add{\uncertain{forme trace}}
+\struck{d'une} structure d'Algèbre sur $B$ ayant $e_B$ comme unité. On obtient
+alors la formule bien connue
+\[
+(86)\qquad u \cdot \sigma u = N(u)\, e_B = q(u)\, e_B
+\]
+i.e.
+\[
+u(\mathrm{tr}\, u - u) = N(u)
+\]
+\[
+(87)\qquad u^2 - u\, \mathrm{tr}\, u + N(u) = 0 \qquad \text{\uncertain{ie} \ill{}}
+\]
+
+\page{47}
+qui peut s'interpréter comme l'équation de Hamilton--Cayley pour
+\add{l'op.\ de} la \struck{translation} \struck{\ill{}} définie par $u$ dans $B$.
+
+\section{8 \quad Cas où 2 inversible sur $S$ (car.\ résiduelles $\neq 2$)}
+
+Dans ce cas la donnée d'une section $\underline{b} = \mathrm{tr}$ de $2F$ i.e.\
+d'une forme $\mathrm{tr}$ sur $B$ telle que $\mathrm{tr}(e_B) = 2$, équivaut,
+\struck{\ill{} par \ill{} \uncertain{prenant} $\frac{1}{2}\underline{b} = \frac{1}{2}\mathrm{tr}$}
+\ill{}
+\[
+(88)\qquad s_0 = \tfrac{1}{2}\, \text{\struck{$\underline{b}$}}\; = \tfrac{1}{2}\, \mathrm{tr}\ldots
+\]
+à la donnée d'une section \add{origine} $s_0$ de $F$, ou encore d'un \uncertain{splitting}
+de l'extension $B$ de $L^{\vee}$ par $\underline{O}_S$ en un iso
+\[
+(89)\qquad \alpha_{s_0} : \underline{O}_S + L^{\vee} \xrightarrow{\;\sim\;} B
+\]
+
+Le sous-module $\alpha_{s_0}(L^{\vee})$ de $B$, supplémentaire de $\underline{O}_S$,
+\uncertain{n'est autre} que le \uncertain{noyau} de la forme $\mathrm{tr}$
+(\uncertain{qui} est aussi celui de la forme \ill{}),
+\uncertain{ou encore} la \uncertain{sous-}\ill{} \uncertain{propre} de $\sigma$ pour
+val.\ propre $-1$. Ceci \uncertain{dit}, la donnée d'une structure d'Algèbre sur
+$B$ compatible avec $(e_B, \mathrm{tr})$ équivaut à : la donnée de
+\[
+\underline{b}(s_0) \in \Gamma L, \qquad \underline{c}(s_0) \in \Gamma L^{\otimes 2}
+\]
+correspondant au \uncertain{splitting} $s_0$. Or \struck{$\underline{b} = \underline{b}(s_0)$
+\ill{}} $\underline{b}(s_0)$ \ill{} \struck{$\underline{b}(s_0)$} est la forme trace
+\uncertain{restreinte} à $\alpha_{s_0}(L^{\vee})$, et dire que $s_0$ est le
+\uncertain{splitting} canonique \uncertain{signifie} que
+\[
+(90)\qquad \text{\struck{\ill{}}}\; \underline{b}(s_0) = 0
+\]
+\note{un renvoi « (14) » est écrit au-dessus de cette ligne, sans qu'on voie à quoi il se rattache}
+
+\marginal{écrit en biais dans la marge gauche : \ill{} en termes de \uncertain{l'Algèbre}
+\ill{} $q = N_{B/\underline{O}_S}$ \ill{} $\alpha_{s_0}(L^{\vee})$ \ill{} $e_B$,
+\ill{} $\underline{O}_S\, e_B$ \ill{}}
+
+\page{48}
+de sorte que l'extension quadratique est décrite entièrement par la section $c_0$
+de $L^{\otimes 2}$. On \uncertain{trouve}
+\[
+\text{\struck{$\underline{c}$}}\,(91)\qquad \text{\struck{\ill{}}}\;
+\partial_{\xi} = b_0^2 - 4 c_0 = -4 c_0
+\]
+\struck{\ill{} et aussi} la donnée de $c_0$ équivaut à celle de $\partial$. Donc
+ainsi
+
+\textbf{Th.} Si $2 \cdot 1_S$ est inv., la catégorie des Algèbres quadratiques
+sur $\underline{O}_S$ \struck{\uncertain{celle}} (ou celle des rev.\ quadratiques
+$\Omega$ \struck{\ill{}} de $S$) équivaut à celle des couples $(L, \partial)$
+où $L$ est un $\underline{O}_S$-Module inversible, et $\partial$
+\struck{\ill{}} une section de $L^{\otimes 2}$. Le fibré \uncertain{affine}
+\add{\uncertain{correspondant} à $\Omega$} \struck{\ill{}} $\xi$ est
+\uncertain{canoniquement} \uncertain{scindé}, et son Module des translations est
+$L$, de sorte que $\Omega \subset \check{\mathbb{V}}(L)$\struck{$\xi$}. Ceci dit,
+\add{$\Omega(\partial)$} \struck{\uncertain{l'Algèbre}} est le sous-schéma de
+$\check{\mathbb{V}}(L)$ des sections $x$ satisfaisant $x^2 = \partial$,
+\uncertain{ou} --- \struck{$\frac{\ill{}}{2}$}
+\[
+(92)\qquad \Omega = \tfrac{1}{2}\, \Omega(\partial)
+\]
+
+Je \uncertain{voulais} : vérifier cette dernière \uncertain{assertion}.
+Si \uncertain{prenons} un \uncertain{scindage} \uncertain{quelconque}, et $b$, $c$
+\uncertain{les} sections \uncertain{associées} de $L$, $L^{\otimes 2}$,
+\uncertain{\ill{}} \uncertain{on} a vu dans § 2 (\uncertain{remarque} \uncertain{marginale})
+que $\Omega$ s'identifie au sous-schéma de $\check{\mathbb{V}}(L)$ d'équation
+\[
+x^2 - b x + c = 0
+\]
+ce qui ici, \struck{\ill{}} \uncertain{comme} $b = b_0 = 0$, s'écrit
+\[
+x^2 = \tfrac{1}{4}\, \partial
+\]
+\uncertain{ou encore}
+\[
+(2x)^2 = \partial
+\]
+\note{le numéro de la dernière formule est biffé ; une ligne biffée, illisible,
+la précède dans la marge}
+
+\page{49}
+\struck{Donc $x \mapsto 2x$ \ill{} de $\check{\mathbb{V}}(L)$ \ill{} dans $\Omega$,
+\ill{} $x \in \Gamma\Omega$ \ill{} $2x \in \Gamma\Omega'$, i.e.\ $\Omega' = 2\,\Omega$}
+d'où le résultat.
+\note{le passage « Donc \ldots\ $\Omega' = 2\,\Omega$ » est encadré et barré de traits
+obliques ; seul « d'où le résultat » reste hors du cadre}
+
+\textbf{Corollaire.} \struck{\uncertain{Th}} Les revêtements quadratiques $\Omega$ sur $S$
+\ill{} \uncertain{sont} \ill{} munis d'une opération de $\mu_2\ (\simeq (\pm 1)_S)$,
+\ill{} : la formule \uncertain{précédente}. L'opération \struck{\ill{}}
+\uncertain{induite} sur $\Omega$ n'est autre que l'involution canonique de
+\ill{} \uncertain{déduite} de celle du § 7.
+
+Décrivons \struck{\uncertain{explicitement}} \add{encore, dans le cas général,} $B$
+comme quotient de
+\[
+\underline{\mathrm{Aff}}(F) \simeq \underline{\mathrm{Aff}}\, \check{\mathbb{V}}(L)
+\simeq \underline{\mathrm{Sym}}(L^{\vee}) \simeq \coprod_{n \geqslant 0} L^{\otimes(-n)}
+\]
+par l'idéal engendré par le sous-module inversible engendré par
+\[
+(93)\qquad (\hat{c} + b + 1) \otimes L^{-2} \subset \underline{O}_S + L^{-1} + L^{\otimes(-2)},
+\qquad (c + b + 1)^{\wedge} \in \Gamma(L^2 \oplus L \oplus \underline{O}_S)
+\]
+\note{le chapeau est posé sous « $c + b + 1$ », souligné ; le premier terme, noirci,
+se lit $c$ sans certitude}
+\struck{alors l'involution $\sigma$ correspondante} ce qui donne ici
+\[
+B \simeq \underline{\mathrm{Sym}}(L^{\vee}) / (1 - 4\partial)\, L^{\otimes -2} ,
+\]
+et notons que l'involution canonique est définie par la
+\uncertain{conjugaison} (\struck{\ill{}} \uncertain{parmi} les sections du
+$F \simeq \check{\mathbb{V}}(L)$ satisfaisant \uncertain{$\alpha$}), par l'égalité
+\[
+(94)\qquad \sigma x = b - x
+\]
+(\uncertain{remarque} : § 7) ce qui donne ici $x \longmapsto -x$, dans le cas
+$b = 0$, qui est celui du th.
+\marginal{\uncertain{remarque} en § 2}
+
+\page{50}
+\section{9. \quad Cas $S$ de car.\ 2 (i.e.\ $2 \cdot 1_S = 0$)}
+
+Dans ce cas \struck{$2F \simeq \check{\mathbb{V}}(L)$}, on a iso can.
+\[
+(95)\qquad 2F \simeq \check{\mathbb{V}}(L)
+\]
+ou ce qui revient au même, la condition $\mathrm{tr}(e_B) = 2$ sur une forme
+linéaire $\mathrm{tr}$ sur $B$ \struck{\ill{}} \uncertain{nulle} sur $e_B$
+\struck{signifie \ill{}} \add{signifie}
+\[
+(96)\qquad \mathrm{tr}(e_B) = 0
+\]
+de sorte que la forme trace \uncertain{de l'Algèbre} \ill{} \uncertain{est}
+la section $\underline{b}$) est une section de $L$
+\[
+(97)\qquad \underline{b} = \mathrm{tr} \in \Gamma(S, L)
+\]
+canoniquement associée à \struck{\uncertain{la}} structure d'alg.\ quadratique sur $B$.
+\struck{Ceci dit, on a \uncertain{ceci}} \add{D'ailleurs, le} discriminant est donné par
+\[
+(98)\qquad \partial = \underline{b}^2
+\]
+En \uncertain{effet}, en termes d'un scindage $s$ \add{\uncertain{quelconque}} \uncertain{avec}
+\struck{\ill{}}
+\[
+(99)\qquad \text{\struck{\ill{}}}\; b(s) = \underline{b}
+\qquad \text{(\uncertain{indépendant} de $s$ !)}
+\]
+et
+\[
+\partial = b^2 - 4c = b^2 = \underline{b}^2 \qquad (\text{car } 4 = 0)
+\]
+
+\emph{NB} Ici l'équation $x^2 = \partial$ s'écrit donc
+$(x - \underline{b})^2 = 0$, et définit un sous-schéma de
+$\check{\mathbb{V}}(\text{\struck{\ill{}}}\,L)$ \uncertain{isomorphe} à $\alpha_s(L)$,
+et \uncertain{sans} \uncertain{grand} \uncertain{relation} avec $\Omega$\ldots\
+\add{en plus de $\underline{b} \in \Gamma(S, L)$,}
+
+En outre, \add{le torseur $F$ sous $L$, et sa classe}
+\[
+(100)\qquad \gamma \in H^1(S, L)
+\]
+est un \uncertain{invariant} important de la situation. L'\uncertain{involution}
+\note{la phrase se poursuit à la page suivante}
+
+\page{51}
+\emph{canonique de $\Omega$} \add{$\subset F$} \emph{n'est autre que la
+translation par $\underline{b}$} (cf.\ \uncertain{précisions} de (94), en
+car.\ 2). \struck{Donc, pour $\underline{b}$ fixé, on peut \ill{}} Dire que
+$\sigma$ dans $B$ est une réflexion (pas seulement une pseudo-réflexion) signifie aussi
+que $\underline{b}$ est en \uncertain{tout} cas de \uncertain{chaque} fibre (§ 7), ou encore
+(\uncertain{par ex.}\ en vertu de (98)) que $\partial$ est \add{section}
+\struck{\uncertain{partout}} inversible, ou enfin que $\Omega$ est étale sur $S$.
+
+Dans ce cas, pour $\underline{b}$ fixé, les $\Omega$ correspondants (i.e.\ les
+$\xi$ correspondants\ldots) \uncertain{correspondent} biunivoquement aux sections du schéma
+\[
+F / \underline{b}
+\]
+On \struck{\ill{}} \uncertain{a} \uncertain{une} \uncertain{suite} exacte de schémas en groupes sur $S$
+\[
+(101)\qquad 0 \longrightarrow (\mathbb{Z}/2\mathbb{Z})_S \longrightarrow \check{\mathbb{V}}(L)
+\xrightarrow{\;\beta\;} \check{\mathbb{V}}(L^{\otimes 2}) \longrightarrow 0
+\]
+\[
+\varepsilon \longmapsto \varepsilon\, \underline{b}, \qquad x \longmapsto x^2 + \underline{b}\, x
+\]
+de sorte que
+\[
+(102)\qquad F / \underline{b} \simeq F \wedge^{(\check{\mathbb{V}}(L), \beta)} \check{\mathbb{V}}(L^{\otimes 2})
+\overset{\mathrm{dif}}{=} C
+\]
+s'identifie : un torseur sous $\check{\mathbb{V}}(L^{\otimes 2})$, et
+\add{\uncertain{nulle}} la donnée de $q$ (ou $\Omega$) compatible avec $\underline{b}$
+s'identifie : la donnée d'une section \add{$\sigma$} de ce torseur, dont $F$ est un
+rev.\ étale quadratique. \uncertain{Inversement} $\Omega$ se récupère alors comme
+l'image inverse par $\sigma$ de ce rev.\ étale quadratique.
+\marginal{suite exacte d'Artin--Schreier (en car.\ 2)}
+
+\page{52}
+\emph{NB} Pour bien faire, il faudrait \uncertain{préciser} que la structure de
+torseur sous $L^{\otimes 2}$ \uncertain{provient} d'\uncertain{abord} sur le faisceau
+des $q$ (ou $\Omega$) compatibles avec $\underline{b}$, est aussi celle des $\sigma$.
+
+\section{10 \quad Cas mixte}
+
+\struck{A) \ill{}} \uncertain{Cas} \uncertain{où} $S = S_2 \cup S_{\partial}$
+\note{sous $S_2$ et $S_{\partial}$, avec des flèches : « \uncertain{lieu où} 2 \uncertain{inv.} »,
+« \uncertain{lieu où} $\partial$ \uncertain{inv.} »}
+i.e.\ où $\Omega$ est étale \uncertain{pour} \uncertain{les} \uncertain{lieux} \uncertain{des}
+$S$ de car.\ 2.
+\note{la ligne précédente est encadrée ; une flèche la renvoie à la ligne « \uncertain{Cas} \ldots »}
+
+\struck{La donnée de $\Omega$ équivaut alors à celle \uncertain{d'un} \uncertain{rev.\ étale}
+\uncertain{quadratique} \ill{} de $S_{2\partial}$ et \ill{}}
+\note{deux lignes biffées, avec des arcs de renvoi ; seuls quelques mots se lisent}
+
+Nous \uncertain{avons} donc \uncertain{trouvé} \uncertain{précisément} \uncertain{une} $\Omega$
+compatible avec \uncertain{les} \uncertain{données} \uncertain{précédentes}, \uncertain{la} situation
+le couple $(L, \partial)$ du Module inv.\ $L$ et de
+\[
+(103)\qquad \partial \in \Gamma(S, L^{\otimes 2})
+\]
+\struck{et l'hypothèse \ill{} est \uncertain{partout} \ill{} \ill{}}
+
+Il faut définir une $\Omega$ compatible avec \uncertain{les} données \uncertain{précédentes} sur
+$S_{\partial}$ et $S_2$, et donc \uncertain{une} donnée de \uncertain{recollement} sur
+$S_2 \cap S_{\partial} = S_{2\partial}$.
+
+a) Sur $S_2$, on sait (§ 8) que $\Omega$ est \uncertain{déterminé},
+\uncertain{à} \uncertain{iso.}\ \uncertain{près} \uncertain{unique} par $(L, \partial)$, comme
+le schéma des solutions de l'équation
+\[
+(104)\qquad x^2 = \partial \qquad \bigl(x \in \Gamma(-, L)\bigr)
+\]
+
+\page{53}
+b) Sur $S_{\partial}$ \struck{\ill{}} \add{\uncertain{$S'$}}, on a un rev.\ [étale], qui
+doit prolonger le rev.\ étale qu'on a déjà sur $S_{2\partial}$
+\struck{\ill{}}.
+On est donc amené \struck{(\uncertain{utilisant} les \ill{} de $V(\partial) = S - S_{\partial}$)}
+à trouver en pt des prolongements, la donnée $(L, \partial)$, sur laquelle
+\struck{\ill{}} on \uncertain{veut} \uncertain{faire} \uncertain{les} prolongements, \uncertain{alors}
+il faut « \uncertain{recoller} » les \ill{} \ill{} en \uncertain{précisant} \ill{}
+\uncertain{importante} est le torseur
+\struck{\ill{}} $F_{S'}$ (\uncertain{restriction} \uncertain{à} $F$) sous $\check{\mathbb{V}}(L)$,
+trivialisé sur $S_2$. En fait, on a une \uncertain{section}, \uncertain{savoir} une
+section \add{$b_0 =$} $\tfrac{1}{2}\underline{b}$ de $F|S_2$
+\add{$\underline{b}$} de $2F$, \uncertain{dans} une \struck{\ill{}}
+\note{une flèche biffée renvoie ici depuis la marge}
+\uncertain{dont} \uncertain{les} \uncertain{prolongements} \uncertain{par} $f = 2$ \uncertain{en}
+prolongement, et \uncertain{on} \uncertain{veut} \uncertain{décrire} \uncertain{les}
+\uncertain{prolongements}. En termes de l'\uncertain{immersion}
+\[
+i : S_f \longrightarrow S' \qquad (f = 2 \cdot 1_{S'})
+\]
+on peut dire que l'on a
+\[
+\text{\struck{\ill{}}}\quad \underline{L} \subset \tfrac{1}{f}\, \underline{L} \subset i_*(L|S_f)
+\]
+\add{$f$} étant \uncertain{sans} \uncertain{diviseur} section \uncertain{régulière} de
+$\underline{O}_S$, et $F$ est un torseur sous $\underline{L}$ tel que le torseur
+\add{la donnée d'} \struck{\uncertain{déduit}}
+correspondant sous $\tfrac{1}{f}\,\underline{L}$ soit trivialisé.
+\struck{\uncertain{Alors}} \uncertain{Cela} \uncertain{revient} à la donnée d'un torseur
+\struck{\ill{}} équivalent : la donnée d'une section de
+\[
+\tfrac{1}{f}\,\underline{L} \,/\, \underline{L} \;\simeq\; \underline{L} / f\,\underline{L} ,
+\]
+\struck{\ill{}} obtenue ainsi : on donne \add{(loc.!)} \uncertain{une} trivialisation
+\struck{\ill{}} $s$ de $F$, on écrit $b_0$ comme section de
+\struck{$\underline{L}$} $\tfrac{1}{f}\,\underline{L}$, et plus précisément
+\[
+b_0 = s + \tfrac{1}{f}\, x \qquad \bigl(x \in \Gamma(S, L)\bigr)
+\]
+
+\page{54}
+et $x$ est défini modulo $f$ \uncertain{indépendamment} de $s$, et on trouve ainsi une
+section canonique $x_0$ de $L / f L$. En fait, \struck{$L/fL$} dans
+\[
+S'_0 = V(f) = V(f\,\underline{O}_S) = V(2\,\underline{O}_S),
+\]
+on trouve ici $x_0 = \underline{b}_0(\Omega|S'_0) \in \Gamma(S'_0, L|S'_0)$
+(d'après § 9). Ainsi le torseur $F$ est déterminé
+\add{(à \uncertain{iso près}, \uncertain{car} $2 \cdot 1_S$ est \uncertain{$\underline{O}_S$-régulier})}
+\uncertain{par} la seule connaissance de $L$ et de la section
+\[
+(105)\qquad b_0 \in \Gamma(S_0, L_0)
+\]
+De façon précise, la donnée d'un torseur $F$ sous $\underline{L}$, et d'une section
+$\underline{b}$ de $2F$, \uncertain{existant} (\uncertain{et} \uncertain{dans} une section
+$\underline{O}_S$-régulière $f$ de $\underline{O}_S$) : la donnée de \uncertain{l'une} section $b_0$ de $L_0$,
+on lui associe le (\uncertain{tout}) faisceau \uncertain{localement} \uncertain{trivial}
+des sections $x$ de $\tfrac{1}{f}\,L$ telles que
+\[
+f x \,|\, S_0 = b_0 .
+\]
+\marginal{écrit en biais dans la marge gauche : \uncertain{voulais} \uncertain{pour} le faisceau quasi-cohérent
+\ill{} tel que $f$ soit \ill{} $L$-régulier}
+
+\struck{$(F, \underline{b})$ \uncertain{est} ainsi \uncertain{déterminé} par le \uncertain{couple}
+\ill{} \uncertain{donc} $B$ aussi \ill{} \ill{} : \uncertain{déterminé} \ill{}
+de $(L, b_0)$}
+\note{deux lignes et demie biffées, croisées d'un trait ondulé}
+
+Dans le cas \uncertain{actuel} on \uncertain{doit} \uncertain{avoir}
+\[
+(106)\qquad b_0^2 = \partial_0 \quad (= \partial \,|\, S_0)
+\]
+ce qui, si $S_0$ est \uncertain{réduit}, détermine $b_0$ de façon unique
+[et l'existence de $b_0$ est une
+\note{la phrase se poursuit à la page suivante}
+
+\page{55}
+condition nécessaire évidente pour l'existence d'un rev.\ quadr.\ $\Omega$ de $S$
+correspondant à la donnée $(L, \partial)$], et on trouve \add{donc}, \add{\uncertain{donnée}}
+\add{de $(L, b_0)$, le couple} $\bigl(F, \underline{b} \in \Gamma(S, fF)\bigr)$, \add{$f = 2$},
+\struck{\uncertain{fonctions}} \add{\uncertain{formes}} donc $(B, e_B, \mathrm{tr})$. Les structures
+\struck{d'Algèbre} \add{$q$} \uncertain{cherchées} sur $B$ correspondent donc
+aux sections \struck{d'un torseur} \add{\uncertain{certaines}} $\subseteq$ d'un torseur $Q(\underline{b})$
+sous $\check{\mathbb{V}}(L^{\otimes 2})$. \struck{Mais \ill{}} La fonction \struck{\ill{}}
+\[
+\Theta : q \longmapsto \text{\struck{\ill{}}} = \partial(q) = -\operatorname{discr}(q)
+\]
+\add{de $Q(\underline{b})$ dans $\check{\mathbb{V}}(L^{\otimes 2})$} \struck{correspondant}
+est \add{donc une} \struck{donc \uncertain{aussi}} fonction linéaire affine, qui satisfait
+\[
+(107)\qquad \Theta(q + \varpi) = \Theta(q) - 4\varpi \qquad \bigl(\varpi \in \Gamma(L^{\otimes 2})\bigr)
+\]
+i.e.\ la fonction linéaire \uncertain{homogène} $\Theta_0$ de $\Theta$ est définie par
+\[
+(108)\qquad \Theta_0(\varpi) = -4\varpi \qquad \text{i.e. } \Theta_0 = -4\, \mathrm{id}
+\]
+\marginal{\uncertain{remarques} au § 6}
+
+La section $q$ cherchée est donc celle qui satisfait la condition
+\[
+(109)\qquad \Theta(q) = \partial
+\]
+ce qui, en termes d'une trivialisation (\uncertain{locale}) $q_0$ de $Q(\underline{b})$,
+permettant d'écrire $q$ sous la forme
+\[
+(110)\qquad q = q_0 + \varpi, \qquad \varpi \in \Gamma(S, L^{\otimes 2})
+\]
+s'écrit comme
+\[
+(111)\qquad \Theta(q_0) - 4\varpi = \partial \qquad \text{i.e. } 4\varpi = \Theta(q_0) - \partial
+\]
+\note{le signe devant $4\varpi$ dans (111) est mal formé ; la variante « i.e. » le fixe à $-$}
+
+\page{56}
+Comme on a supposé 2 régulier dans $S$, ceci \struck{implique} détermine $\varpi$ de
+façon unique (d'où \emph{unicité} \struck{de} $q$). Pour la condition d'existence,
+posons
+\[
+(112)\qquad S_1 = V(4\,\underline{O}_S) \subset S
+\]
+(première voisinage infinitésimal de $S_0$), et considérons
+$\Theta(q_0) - \partial \,|\, S_1 = a_1 \text{\struck{\ill{}}}$, il dépend du choix de $q_0$,
+\uncertain{chaque} section [définie modulo $\ldots$ l'existence --- et choix, le cas échéant
+--- de $b_0$ satisfaisant (106)]
+\[
+(113)\qquad a_1(\partial) = a_1 \in \Gamma(S_1, L^{\otimes 2}),
+\]
+et la condition \struck{est \uncertain{que}} d'existence de $q$ est
+\[
+(114)\qquad a_1(\partial) = 0
+\]
+
+On a prouvé :
+
+\textbf{Th} Soit $S$ schéma tel que $2 \cdot 1_S$ soit régulier,
+$S_0 = V(2 \cdot \underline{O}_S)$, $S_1 = V(4\,\underline{O}_S)$ son premier \uncertain{voisinage}
+infinitésimal. \struck{Alors la cat.\ des \ill{} \ill{} \uncertain{des} \ill{} \ill{}}
+\struck{\uncertain{une} section $\partial$ de $L$}
+\note{deux lignes biffées après « infinitésimal »}
+Alors la cat.\ des rev.\ quadratiques de $S$ (ou des ext.\ quadratiques de $\underline{O}_S$)
+équivaut : celle des triples $(L, \partial, b_0)$ d'un \uncertain{Module}
+inversible $L$, d'une section $\partial$ de $L^{\otimes 2}$, et de \struck{\uncertain{satisfaisant}}
+$b_0 \in \Gamma(S_0, L|S_0)$, satisfaisant les 2 conditions suivantes
+
+a) \struck{\ill{}} $b_0^2 = \partial_0 \overset{\mathrm{dif}}{=} \partial | S_0$
+
+b) La section $a_1(\partial) \in \Gamma(S_1, L^{\otimes 2}|S_1)$ (définie plus haut
+\struck{et \ill{}} \uncertain{en} termes de $\partial_1 = \partial|S_1$) est \emph{nulle}
+
+\page{57}
+(NB Lorsque $S_0$ est réduit, $b_0$ est défini de façon unique par $(L, \partial)$,
+et a) peut s'écrire comme une condition d'\emph{existence} d'une racine carrée
+de $\partial_0$\ldots)
+
+\textbf{Corollaire 1} Supposons que l'on ait $(L, \partial, b_0)$ satisfaisant a),
+et soit \struck{\ill{}} $i : U \hookrightarrow S$ \emph{une immersion ouverte}
+tel que \struck{\ill{}}
+\[
+\exists\, \Omega_U \text{ sur } U \text{ \struck{satisfaisant}} \text{ \add{correspondant} aux }
+\text{\struck{\ill{}}} \text{ \add{données}}
+\]
+$L|U, \partial|U, b_0|U$ [i.e.\ on a $a_1(\partial_1)|(S_1 \cap U) = 0$].
+Alors, si $U \cap S_0$ est schématiquement dense dans $S_0$
+[p.\ ex.\ $S_0$ réduit et $U \cap S_0$ dense dans $S_0$] [et
+$U \cap S_1$ schématiquement dense dans $S_1$] \struck{\ill{}}
+$\exists\, \Omega$ sur $S$ correspondant aux données $(L, \partial, b_0)$.
+
+\textbf{Cor 2} \struck{Sous données} Supposons $S_0$ réduit et
+normal en chaque pt, et soit $(L, \partial)$. \struck{tel que \ill{}}
+\struck{\uncertain{existe} $\Omega_U$ \uncertain{sur} \uncertain{un} \uncertain{ouvert} \ill{} dense de $S$ ;}
+Pour qu'il existe un \struck{$\Omega$ \ill{}} rev.\ quadratique
+\struck{$U \cap S_0$ dense dans $S_0$, et}
+de $S$ correspondant à $(L, \partial)$, il faut et il suffit
+que la condition suivante soit satisfaite :
+
+$\forall s$ pt maximal de $S_0$, existe une solution
+au pb sur le localisé $\operatorname{Spec}(\underline{O}_{S,s})$\ldots
+
+\note{l'énoncé s'arrête sur ces points de suspension ; le reste de la page est blanc}
+
+\page{58}
+\section*{10.\ Cas mixte.}
+\note{le numéro 10 est écrit en surcharge sur un autre chiffre ; c'est une seconde
+rédaction du « Cas mixte » commencé p. 52}
+
+\textbf{Th.} Soit $S$ un schéma tel que $2 \cdot 1_S$ soit $\underline{O}_S$-régulier,
+\struck{soit} $S_0 = V(2\,\underline{O}_S)$ ($S_1 = V(4\,\underline{O}_S)$).
+\struck{soit $S$.}
+Pour tout rev.\ quadratique $\Omega$ de $S$, considérons le triple $(L, \partial, b_0)$
+formé du module inversible
+$L \simeq \underline{\det}\bigl(\underline{\mathrm{Aff}}(\Omega/S)\bigr)^{-1}$, de
+$\partial = \partial(\Omega/S) \in \Gamma(S, L^{\otimes 2})$, et de la section
+$b_0 = b(\Omega_0/S_0) \in \Gamma(S_0, L_0)$
+[où $\Omega_0 = \Omega_{S_0}$, $L_0 = L_{S_0}$], de sorte que l'on a
+\[
+(\text{\uncertain{K.1}})\qquad b_0^2 = \partial_0
+\]
+\note{le numéro de la formule, lu « (K.1) », est incertain}
+
+a) Le foncteur \add{(entre \uncertain{groupoïdes})} \struck{des} \uncertain{groupoïdes}
+\[
+\Omega \longmapsto (L, \partial, b_0)
+\]
+est pleinement fidèle.
+
+b) \struck{Pour que \ill{}} Pour que $(L, \partial, b_0)$ appartienne à l'image
+essentielle du foncteur précédent, i.e.\ \struck{\ill{}} \add{faut-il},
+\struck{et il faut} \add{il suffit} si $H^1(S, L) \to H^1(S \setminus S_0, L)$ est injectif
+(p.\ ex.\ si $S$ \uncertain{affine}\ldots),
+\struck{que $\partial_1 = \partial|S_1$ soit de la forme $b_1^2$, où $b_1 \in \Gamma(S_1, L_1)$
+($L_1 = L_{S_1}$), avec $b_1|S_0 = b_0$, [\ill{}] ou encore}
+qu'on ait $\partial = b^2 - 4c$ avec $b \in \Gamma(S, L)$ \uncertain{et}
+$c \in \Gamma(S, L^{\otimes 2})$.
+
+c) En tous cas, pour que $(L, \partial, b_0)$ appartienne à l'image essentielle, il faut et il
+suffit que l'on ait
+\[
+\partial_1 = \gamma(b_0),
+\]
+où
+\[
+\gamma : \text{\struck{\ill{}}}\; \underline{O}_{S_0} \longrightarrow \underline{O}_{S_1}
+\]
+est le morphisme de faisceaux \add{multiplicatifs} \struck{\uncertain{déduit}} de l'anneau
+\[
+\underline{O}_{S_1} \longrightarrow \underline{O}_{S_1}, \qquad \beta_1 \longmapsto \beta_1^2 .
+\]
+[compte tenu que $\beta_1 \equiv \beta'_1 \ (2) \Rightarrow \beta_1^2 \equiv \beta_1'^{\,2} \ (4)$].
+
+\struck{\emph{Dém} a) DPS $S$ affine. On note que $F$, \add{le torseur sous $L$}, un
+\add{\uncertain{de petitesse}} faisceau (\uncertain{gaussien}), \ill{} est déterminé
+par $b_0$, comme le sous-faisceau \add{$F \subset \tfrac{1}{2}L$} de
+$\tfrac{1}{2}L \supset \underline{L}$ image}
+\note{ce début de démonstration est barré de deux longs traits obliques ; il se poursuit
+à la page suivante}
+
+\page{59}
+\struck{inverse de la section $b'_0$ de $(\tfrac{1}{2}L)/L$ déduite de l'image
+par l'isom.\ can.\ (déduit par $2\,\mathrm{id}$)
+$(\tfrac{1}{2}L)/L \to L/2L$ \add{de} $b_0$, Alors $2F$ est le sous-faisceau de
+\add{$\tfrac{1}{2}L$} $\underline{L}$ engendré par}
+\note{la fin de la démonstration commencée au bas de la page précédente, barrée elle aussi
+de traits obliques, avec quelques mots biffés au trait}
+
+Pour a), DPS $S$ affine, donc les $\Omega$ \add{rev.\ quadratiques} \struck{envisagés}
+de $S$ correspondent : des \struck{\ill{}} torseurs $F$ triviaux, i.e.\ sont : un schéma
+\add{de la forme}
+\[
+\Omega(b, c) \subset \underline{L}, \qquad \Omega(b, c) = \{\, x \mid x^2 - bx + c = 0 \,\}
+\]
+où $b \in \Gamma(S, \underline{L})$, $c \in \Gamma(S, \underline{L}^{\otimes 2})$. Considérons donc
+($\underline{L}, \partial, b_0$ fixés) la cat.\ des $\Omega$ correspondants,
+\struck{\ill{}} équivalente : celle des $\Omega(b, c)$, avec
+$b|S_0 = b_0$, $b^2 - 4c = \partial$, il faut montrer que cette
+catégorie, \add{\uncertain{quand}} elle est non vide, est équiv.\ : la cat.\
+ponctuelle, i.e.\ \struck{\ill{}} \add{entre} deux de ses objets il existe un
+\add{entre $\Omega(b, c)$ et $\Omega(b', c')$}
+isom.\ unique. Or les \struck{\ill{}} isom.\ correspondent
+aux $\tau \in \Gamma(S, \underline{L})$ tels que
+\[
+\begin{cases}
+b' = b + 2\tau \\
+c' = c + \tau b + \tau^2
+\end{cases}
+\]
+Mais \struck{$b' = b \ (2)$ \ill{}} \add{$b'_{S_0} = b_{S_0}\ (= b_0)$} signifie bien que
+$b' = b + 2\tau$ (les $\tau$ est, au reste, déterminé de façon
+unique, 2 étant $\underline{O}_S$-régulier). \struck{Donc, \uncertain{quitte} à}
+\struck{\ill{}}
+Considérons $c'_1 = c + \tau b + \tau^2$, on \struck{\ill{}} \add{donc}
+\[
+b^2 - 4c = b'^{\,2} - 4c'_1 = \partial
+\]
+et comme $b'^{\,2} - 4c' = \partial$, on trouve
+\[
+4(c'_1 - c') = 0
+\]
+donc $c'_1 - c' = 0$, i.e.\ $c' = c'_1$\ldots
+
+\page{60}
+puisque 2 \struck{\ill{}} (donc 4) est $\underline{O}_S$-régulier.
+Donc $\Omega(b, c) \simeq \Omega(b', c')$, et l'isom.\ est unique, cqfd.
+
+b) \struck{Les \uncertain{arguments} précédents montrent plus généralement, sans hyp.\ \ill{}
+affine, que la catégorie des $\Omega(b, c)$ correspondant : $(L, \partial, b_0)$
+donnés, est \add{$\simeq$ cat.\ ponctuelle}. Or si} \struck{la condition $\partial_1 =$}
+\struck{Considérons} $H^1(S, L) \to H^1(S, L_0)$
+\note{le début de b) est barré d'un trait horizontal et de traits obliques ; le texte
+reprend ensuite sans rature}
+injectif implique que les $\Omega$ correspondants
+: $(L, \partial, b_0)$ \uncertain{souvent} correspondant : un \uncertain{module}
+\uncertain{affine} qui est un $\underline{L}$-torseur trivial, i.e.\
+admet un scindage. Ces $\Omega$ sont donc isom.\
+: des $\Omega(b, c)$, \struck{\ill{}} $b \in \Gamma(S, L)$, $c \in \Gamma(S, L^{\otimes 2})$.
+Donc \struck{\ill{}} pour que $\Omega(b, c)$ \uncertain{donne} $b_0, \partial$, il f.\ et s.\
+que
+\[
+b_{S_0} = b_0, \qquad b^2 - 4c = \partial .
+\]
+Donc $(L, \partial, c_0)$ est \uncertain{dans} l'image essentielle ssi
+$\forall\, b, c$ satisfaisant les conditions précédentes.
+\note{« $c_0$ » est lu tel quel ; le contexte attendrait $b_0$. La phrase « ssi $\forall\, b, c$ » est elle aussi lue telle quelle}
+Ces conditions impliquent évidemment que
+$\partial_1 = b_1^2$, où $b_1 \in \Gamma(S_1, L_1)$ est tel que $b_1 | S_0 = b_0$.
+Inversement, s'il existe un tel $b_1$, à les
+\struck{$b$ qui le relèvent \ill{} d'une section de $L$, \ill{} torseur sous $L$ qui :
+la \ill{} condition : $S \setminus S_0$ \ill{} trivial, donc \ill{} \ill{} \ill{}
+(\uncertain{associé} : \ill{} $= L_1 \to 0$) \ill{} trivial par l'hypothèse
+\add{\uncertain{sur} $S, S_0$} sur un torseur \ill{}
+$H^0(S, L) \to H^0(S_1, L_1) \to H^1(S, L) \to H^1(S, L)$}
+une section $b$. Comme $b^2 - \partial \in 4\,\underline{L}^{\otimes 2}$ et que
+\struck{Or $H^1(S, L)_2 = H^1(S \setminus S_0, L)$}
+\note{les lignes biffées de ce passage sont croisées de traits obliques ; plusieurs mots
+restent illisibles}
+\uncertain{(4)} est $\underline{O}_S$-régulier \add{\uncertain{donc} $L^{\otimes 2}$-régulier}, on peut
+écrire $b^2 - \partial = 4c$, i.e.\ $b^2 - 4c = \partial$, cqfd
+
+c) La condition d'existence de $\Omega$, \add{\uncertain{correspondant} à $(L, \partial, b_0)$},
+\add{i.e.\ \uncertain{comme} en a)} \uncertain{devient} \uncertain{alors} locale,
+\struck{\ill{}} comme la condition $\partial_1 = \gamma(b_0)$.
+\note{la page s'arrête sur cette phrase ; la démonstration de c) se poursuit sans doute
+au-delà de ce lot}
+
+\end{document}
