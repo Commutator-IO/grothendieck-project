@@ -1,0 +1,1139 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 132
+% (pages 1-31, the whole folder).
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried moves into a
+% footnote. It is held to being mathematically correct as it stands; where the
+% manuscript is loose or mistaken, the true statement is what appears here and
+% the footnote says what the page has. In any dispute of substance the
+% transcription governs: whoever cites Grothendieck must cite batch-01.fr.tex
+% (pp. 1-20) or batch-02.fr.tex (pp. 21-31).
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-03 — first pass, unchecked against the pages by a human.
+% The folder was read whole, its two batches together; this is one document
+% for the shelfmark. It was made on Opus 5.5 and has not been measured against
+% the reference reading of folder 115 (made on Opus 5). The literature named
+% in the footnotes is cited from memory and was not checked against the
+% sources.
+%
+% Scope. Pages 4, 9, 12 and 24 are blank. Pages 25-31 are two printed Notes
+% aux Comptes rendus by Yves Ladegaillerie (1974); following RIGHTS.md and the
+% transcription, they are identified and not restated: the reading says only
+% what the transcription's notes say (title, volume, paragraphs).
+%
+% Spine. Three runs of manuscript, not one argument, plus the offprints.
+%   pp. 1-3    fibre product of spaces vs 2-fibre product of fundamental
+%              groupoids (complete as an argument)
+%   pp. 5-11   groupoid models of surfaces with holes, the « Teichmüller à
+%              trous » T and « spécial » TS, the sequence of page 8; the
+%              combinatorial data of page 10 (ribbon graphs), page 11 breaks off
+%   pp. 13-23  extensions of topological groups by a discrete N and base
+%              change, his sections (A) p. 16, (B) p. 19, (B') pp. 20-21,
+%              (C) pp. 22-23; page 18, interleaved, is a programme on
+%              embeddings of 1-complexes in surfaces naming « Yves »
+%   pp. 25-31  the offprints
+%
+% Notation fixed for the folder. Run 1 renames his G, H, f_1, g_1, phi to
+% Gamma, Delta, f_*, g_*, theta (G, H and phi are used later for other
+% things); his « Cat G » is written BG throughout. Run 2 keeps G, l_i, I, T,
+% TS, phi : D -> C. Run 3 keeps N, G, H, pi, H~, H~_0, gothic G, z(N), phi;
+% the boundary pi_1 H -> N of page 15 is the same phi as page 15's
+% pi -> z(N) and is written phi from page 14 on. The symmetric group is
+% \mathfrak{S} (page 18's letter, transcribed as gothic G, is read as S_n).
+%
+% Substantive departures, each footnoted where it occurs:
+%   - p. 1: « connexes » read as path-connected (otherwise « f surjectif »
+%     fails);
+%   - p. 3: the pi_1 criterion is stated at the component of z_0; at another
+%     component the condition is to be read there (images of pi_2 move by
+%     the action of pi_1(S));
+%   - pp. 5-8: « 2-spécial » is not defined; the reading takes (G, (l_i))
+%     to be the fundamental group of a compact orientable surface with its
+%     boundary loops, which is what « sphère à 1 trou » etc. presuppose;
+%   - p. 7: last term « v_1(l_i) » read l_i;
+%   - p. 13 onwards: standing hypotheses supplied (quotient maps are Serre
+%     fibrations; groups locally path-connected and semi-locally simply
+%     connected, e.g. Lie groups);
+%   - p. 14: the square written with H/N^0, H'/N^0 is read with G/N^0,
+%     G'/N^0, and the « isomorphism » is on pi_0, the « epi » on pi_1;
+%   - p. 16: « trivialisation stricte » is given a definition (equivariant
+%     splitting centralising N); the page's gloss is illegible;
+%   - p. 17: Ext(gothic G, N) x Hom(pi, z(N)) is a product only once the
+%     outer action of gothic G on N is fixed;
+%   - p. 20: « extension centrale » (uncertain reading) of H by z(N) is
+%     central only if gothic G acts trivially on z(N); « pi, N, H discrets »
+%     read with gothic G for H;
+%   - p. 21: the claim marked « faux » in the margin is replaced by what
+%     holds: an exact sequence with kernel phi(pi)/phi(pi ∩ H~^0).
+% Announced and not established: the classification of embeddings sketched
+% on page 18; the category of page 11; the conclusion of (C) on page 23
+% (struck); the boxed map of page 18.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{132}
+\pages{1}{31}
+\dating{1974}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Plongements dans surfaces (Ladegaillerie) : notes manuscrites (s.d.), tirés à part (1974) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Ces feuillets cherchent à décrire des surfaces — et les façons de dessiner un
+réseau de fils sur une surface — par des objets purement algébriques, assez
+fidèles pour qu'on puisse y lire leurs symétries.
+
+Le point de départ est une idée qui traverse toute l'œuvre de Grothendieck :
+un espace, vu « à homotopie près en dimension 1 », n'est rien d'autre qu'un
+\emph{groupoïde}, c'est-à-dire l'ensemble de ses points et de ses chemins à
+déformation près. Pour une surface à bord — une sphère percée de trous, un
+tore troué —, ce groupoïde est très simple : un groupe libre, et dans ce
+groupe, un lacet distingué pour chaque trou, qui fait le tour du bord. Le
+dossier montre que cette donnée algébrique (un groupe et ses lacets de bord)
+suffit à calculer un groupe qu'il appelle groupe de Teichmüller « à trous »,
+et qui est, on le sait aujourd'hui, le groupe des symétries de la surface à
+déformation près. Il trouve même deux
+versions de ce groupe, selon qu'on autorise ou non les bords à tourner sur
+eux-mêmes, et une suite exacte qui les relie : la différence, ce sont les
+« tours de vis » qu'on peut donner à chaque bord, un entier par trou. Les
+seules exceptions sont le disque et le cylindre, qui ont trop de symétries
+continues pour se laisser décrire ainsi, et le dossier les calcule à part.
+
+Pourquoi cela intéresse-t-il quelqu'un qui étudie des réseaux tracés sur une
+surface ? Parce qu'un graphe dessiné sur une surface en a un voisinage — un
+ruban épaissi, lui-même une surface à bord — et que la surface entière s'en
+déduit en recollant, le long des bords, ce qui reste. Classer les dessins
+revient alors à classer des recollements, et compter les symétries d'un
+dessin revient à combiner les symétries du ruban et celles des morceaux
+complémentaires. C'était le sujet des deux Notes aux Comptes rendus que Yves
+Ladegaillerie, à Montpellier, publiait en 1974 et dont les tirés à part
+ferment le dossier ; la page 18, la seule à le nommer, esquisse le programme
+qui en découle et dit que le calcul du genre et du nombre de trous des
+morceaux « est donné par Yves ».
+
+Autour de ce noyau, deux études plus générales. La première (pages 1 à 3)
+compare, pour un produit fibré d'espaces, le groupoïde du produit et le
+produit des groupoïdes, et mesure exactement l'écart : il est nul dès que les
+espaces n'ont pas de topologie au-delà de la dimension 1. La seconde (pages 13
+à 23) est une petite théorie des extensions d'un groupe topologique par un
+groupe discret : comment connaître les composantes connexes d'un groupe à
+partir de son quotient, de son revêtement universel et d'une donnée finie, et
+comment cette description se comporte quand on change de base. C'est la
+question qu'on rencontre dès qu'on veut calculer le groupe des composantes
+d'un groupe d'homéomorphismes, qui est précisément un groupe de Teichmüller ;
+les pages ne font pas ce lien explicitement, mais elles posent les outils
+qu'il demande.
+
+Le dossier n'est pas un texte achevé : trois chantiers, ouverts côte à côte,
+dont le premier seulement va au bout. On y voit une manière de travailler —
+remplacer un objet géométrique par la plus petite structure algébrique qui le
+retient, puis vérifier, cas par cas, ce que cette structure oublie ; ici, ce
+qu'elle oublie se réduit à deux surfaces, le disque et le cylindre.
+
+Les noms d'aujourd'hui : groupoïde fondamental, produit fibré homotopique,
+groupe des classes d'applications (groupe modulaire) d'une surface à bord,
+théorème de Dehn--Nielsen--Baer, twists de Dehn le long du bord, graphes
+rubanés, revêtement universel d'un groupe topologique non connexe,
+cohomologie non abélienne des extensions.
+
+\keywords{fundamental groupoid, homotopy pullback, groupoid pullback,
+Mayer-Vietoris sequence, surface with boundary, peripheral structure,
+mapping class group, Dehn-Nielsen-Baer theorem, boundary Dehn twist,
+ribbon graph, embeddings of graphs in surfaces,
+extension of topological groups, universal covering group, Taylor
+obstruction, non-abelian group extension, band (lien)}
+\end{resume}
+
+\pagerange{1}{31}
+\section*{Le fil du dossier, et les conventions}
+
+\subsection*{Les stations}
+
+Le dossier compte trente et une pages : vingt de sa main, quatre blanches (4,
+9, 12, 24), et sept pages imprimées (25 à 31), les tirés à part qui donnent au
+dossier son titre. Les pages manuscrites ne sont pas datées ; la date de
+l'inventaire, 1974, est celle des tirés à part.\footnote{Le dossier est rangé
+dans le groupe « Descentes » de l'inventaire, daté « [avant 1970] » : la date
+du groupe et celle du dossier ne s'accordent pas, et rien dans les pages ne
+tranche.} Il n'y a pas un argument suivi, mais trois chantiers et un dépôt :
+
+\begin{itemize}
+\item \textbf{Produits fibrés et groupoïdes} — pages 1 à 3. Il porte sa
+propre pagination, (1) à (3), et va au bout.
+\item \textbf{Les surfaces à trous comme groupoïdes} — pages 5 à 11. Une
+2-catégorie de « modèles » de surfaces à bord, le calcul de ses
+automorphismes, deux groupes de Teichmüller et une suite exacte (pages 5 à
+8) ; puis la donnée combinatoire d'un 1-complexe sur une surface et le
+foncteur qui en fait un tel modèle (pages 10 et 11), qui s'interrompt.
+\item \textbf{Extensions de groupes topologiques} — pages 13 à 23. Une
+question (page 13), une réduction (pages 14 et 15), puis ses paragraphes
+cerclés (A) page 16, (B) page 19, (B') pages 20 et 21, (C) pages 22 et
+23.\footnote{Page 22, le « (C) » est écrit sur un « (D) » biffé.} La page
+18, intercalée au milieu, appartient en réalité au deuxième chantier : c'est
+un programme de classification des plongements de 1-complexes dans les
+surfaces.
+\item \textbf{Les tirés à part} — pages 25 à 31 : deux Notes d'Yves
+Ladegaillerie, rangées dans l'ordre inverse de leur parution.
+\end{itemize}
+
+Ce que les trois chantiers ont en commun : chacun remplace un objet
+topologique par sa donnée homotopique en basse dimension (un groupoïde, un
+groupe et ses lacets, un groupe discret de composantes) et cherche ce que ce
+remplacement perd.
+
+\subsection*{Les conventions}
+
+Les trois chantiers emploient les mêmes lettres pour des choses différentes ;
+on les sépare ainsi.
+
+\emph{Pages 1 à 3.} $f : X \to S$, $g : Y \to S$, $Z = X \times_S Y$ ;
+$\Gamma = \pi_1(X, x_0)$, $\Delta = \pi_1(Y, y_0)$, $\Sigma = \pi_1(S, s_0)$,
+et $f_* : \Gamma \to \Sigma$, $g_* : \Delta \to \Sigma$ les morphismes
+induits.\footnote{Il écrit $G$, $H$, $\Sigma$ et $f_1$, $g_1$ ; les lettres
+$G$ et $H$ sont réservées ici au troisième chantier.} $\Pi_1(X)$ est le
+groupoïde fondamental, $\mathrm{B}\Gamma$ le groupoïde à un objet de groupe
+$\Gamma$.\footnote{Il écrit $\mathrm{Cat}\,G$ ; on garde la notation
+$\mathrm{B}G$ dans tout le document.}
+
+\emph{Pages 5 à 11 et 18.} $G$ est le groupe fondamental d'une surface à
+bord, $(\ell_i)_{i \in I}$ ses lacets de bord, $\varphi : \mathcal{D} \to
+\mathcal{C}$ le foncteur « bord » ; $T$ et $TS$ ses deux groupes de
+Teichmüller ; $\mathfrak{S}_I$ le groupe symétrique.
+
+\emph{Pages 13 à 23.} $1 \to N \to G \to H \to 1$ est une extension de
+groupes topologiques ; $\pi$, $\widetilde{H}$, $\widetilde{H}_0$,
+$\mathfrak{G}$ sont les données du paragraphe (A) ; $\mathfrak{z}(N)$ est le
+centre de $N$ ; $\varphi$ est l'homomorphisme $\pi \to \mathfrak{z}(N)$ qui
+classe l'extension. Pour $K$ un groupe topologique, $K^0$ est la composante
+neutre.
+
+\emph{Hypothèses générales du troisième chantier.} Les pages ne les disent
+pas ; elles sont nécessaires à presque chaque phrase. Les groupes
+topologiques sont supposés localement connexes par arcs et semi-localement
+simplement connexes — les groupes de Lie le sont —, et les projections
+$K \to K/L$ sur un quotient par un sous-groupe fermé distingué sont des
+fibrations de Serre ; $\pi_0$ désigne les composantes connexes par
+arcs.\footnote{Hypothèses ajoutées par la lecture. Sans elles, ni la suite
+exacte d'homotopie de la page 13, ni l'existence d'un revêtement universel à
+la page 15, ni l'identification de $\pi_0$ à un quotient discret à la page 19
+ne tiennent.}
+
+\subsection*{Ce que le dossier annonce et n'établit pas}
+
+\begin{itemize}
+\item la catégorie des 1-complexes topologiques de la page 11 et le foncteur
+de la page 10 sont posés, ni l'un ni l'autre n'est étudié ;
+\item le programme de la page 18 — classer les plongements d'un 1-complexe
+dans une surface et en calculer les groupes de symétries — s'arrête sur une
+flèche encadrée « à déterminer » ;
+\item l'affirmation de la page 21 sur $\pi_0(G)$ est marquée en marge d'un mot
+lu « faux », et elle l'est en général ;
+\item le paragraphe (C) des pages 22 et 23 établit le changement de base,
+mais la phrase qui devait en tirer $\pi_0$ du groupe obtenu est barrée ; le
+problème posé page 13 n'est donc pas résolu sur la page, bien que toutes les
+pièces y soient (on dit lesquelles à la fin).
+\end{itemize}
+
+\pagerange{1}{2}
+\section*{Produit fibré d'espaces et produit fibré de groupoïdes (pages 1 à 3)}
+
+\subsection*{L'énoncé}
+
+Soient $f : X \to S$ et $g : Y \to S$ deux applications continues, et
+$Z = X \times_S Y$. Les deux projections et la commutativité du carré donnent
+un foncteur
+\[
+  \theta : \Pi_1(Z) \longrightarrow
+  \Pi_1(X) \overset{2}{\times}_{\Pi_1(S)} \Pi_1(Y)
+\]
+vers le \emph{produit fibré 2-catégorique} des groupoïdes : ses objets sont
+les triplets $(x, y, \sigma)$ avec $\sigma$ une flèche de $f(x)$ vers $g(y)$
+dans $\Pi_1(S)$, ses flèches les couples de flèches compatibles avec les
+$\sigma$.\footnote{Il écrit le $2$ au-dessus du signe produit ; à sa seconde
+occurrence, page 1, le signe se lit « ? » ou un 2 mal formé.}
+
+\textbf{Proposition (page 1).} \emph{Si $f$ est une fibration de Serre,
+$\theta$ est essentiellement surjectif et plein : il induit une bijection sur
+les $\pi_0$ et, en chaque point, une surjection sur les groupes
+fondamentaux.}
+
+On peut supposer $X$, $Y$, $S$ connexes par arcs et non vides : chaque
+composante connexe par arcs de $X$ se projette par une fibration de Serre
+\emph{sur} une composante de $S$, puisqu'un chemin de $S$ se relève dès que
+son origine est atteinte.\footnote{La page dit « connexes », et en tire « donc
+$f$ surjectif ». C'est vrai pour la connexité par arcs, qui est d'ailleurs la
+seule pertinente pour $\pi_0$ et $\pi_1$ ; pour la connexité au sens
+topologique, une fibration de Serre au-dessus d'un espace connexe non connexe
+par arcs n'est pas nécessairement surjective.} Choisissons $y_0 \in Y$,
+$s_0 = g(y_0)$, $x_0 \in X$ au-dessus de $s_0$, et posons
+$\Gamma$, $\Delta$, $\Sigma$ comme dans les conventions.
+
+\subsection*{Le modèle algébrique}
+
+À équivalence près, le produit fibré des groupoïdes est
+$P = \mathrm{B}\Gamma \overset{2}{\times}_{\mathrm{B}\Sigma} \mathrm{B}\Delta$,
+qui se décrit explicitement : ses objets sont les éléments $\sigma \in
+\Sigma$, et une flèche $\sigma \to \sigma'$ est un couple $(a, b) \in \Gamma
+\times \Delta$ tel que
+\[
+  \sigma' = g_*(b)\, \sigma\, f_*(a)^{-1} .
+\]
+Autrement dit, $\Gamma \times \Delta$ opère sur l'ensemble $\Sigma$ par
+$(a, b) \cdot \sigma = g_*(b)\, \sigma\, f_*(a)^{-1}$, et $P$ est le
+groupoïde de cette action. Ses classes d'isomorphie sont donc les doubles
+classes $g_*(\Delta) \backslash \Sigma / f_*(\Gamma)$, et le groupe
+d'automorphismes de $\sigma$ est son stabilisateur dans $\Gamma \times
+\Delta$.\footnote{La page écrit les couples tantôt $(g, h)$, tantôt
+$(h, g)$ ; on a uniformisé. Un petit carré en bas de page explicite la
+condition de commutation.}
+
+\subsection*{Les composantes}
+
+La projection $Z \to Y$ est une fibration de Serre (image inverse de $f$), de
+fibre $F = f^{-1}(s_0)$. Sa suite exacte d'homotopie donne
+$\pi_0(Z) = \pi_0(F) / \pi_1(Y)$, l'ensemble des orbites de l'action de
+$\pi_1(Y)$ sur $\pi_0(F)$ (puisque $Y$ est connexe par arcs).\footnote{À la
+suite de la formule, une parenthèse se lit, avec doute, « coinvariants »,
+suivie d'un mot illisible. C'est bien d'un ensemble d'orbites qu'il s'agit.}
+De même, la fibration $F \subset X \to S$ donne $\pi_0(F) \simeq \Sigma /
+f_*(\Gamma)$. D'où
+\[
+  \pi_0(Z) \simeq \Delta \backslash \Sigma / \Gamma ,
+\]
+qui est l'ensemble des classes de $P$ : $\theta$ est bijectif sur les
+$\pi_0$.\footnote{La page commence ensuite (fin de la page 2) une preuve
+directe de la surjectivité sur les $\pi_1$, par relèvement d'arcs, qu'elle
+interrompt ; la page 3 la remplace par la comparaison des suites exactes
+qu'on suit ici.}
+
+\pagerange{3}{3}
+\subsection*{Les groupes fondamentaux : l'écart exact}
+
+Le groupoïde $\Phi$ des objets $\sigma \in \Sigma$, avec pour flèches
+$\sigma \to \sigma'$ les $a \in \Gamma$ tels que $\sigma = \sigma' f_*(a)$, est
+la fibre homotopique de $\mathrm{B}\Gamma \to \mathrm{B}\Sigma$ : son $\pi_0$
+est $\Sigma / \Gamma$ et tous ses groupes d'automorphismes sont isomorphes à
+$\operatorname{Ker} f_*$. Le foncteur $\Pi_1(F) \to \Phi$ est bijectif sur
+les $\pi_0$ et surjectif sur les $\pi_1$, de noyau l'image de $\pi_2(S)$
+dans $\pi_1(F)$, c'est-à-dire $\operatorname{Coker}(\pi_2(X) \to \pi_2(S))$ :
+c'est la suite exacte d'homotopie de $F \subset X \to S$.
+
+Au point $\sigma = 1$, le groupe d'automorphismes de $P$ est
+\[
+  \pi_1(P, 1) = \{ (a, b) \in \Gamma \times \Delta \mid f_*(a) = g_*(b) \} ,
+\]
+extension de $g_*^{-1}(f_*\Gamma)$ par $\operatorname{Ker} f_*$. Le groupe
+$\pi_1(Z, z_0)$, $z_0 = (x_0, y_0)$, est extension du même groupe
+$g_*^{-1}(f_*\Gamma)$ — l'image de $\pi_1(Z) \to \pi_1(Y)$ — par
+$\operatorname{Coker}(\pi_2(Y) \to \pi_1(F))$. En comparant les deux :
+
+\textbf{Proposition (page 3).} \emph{Le morphisme $\pi_1(Z, z_0) \to
+\pi_1(P, 1)$ est surjectif, de noyau
+\[
+  \operatorname{Coker}\bigl(\pi_2(X, x_0) \times \pi_2(Y, y_0)
+  \longrightarrow \pi_2(S, s_0)\bigr) ,
+\]
+le quotient de $\pi_2(S)$ par la somme des images de $\pi_2(X)$ et de
+$\pi_2(Y)$. C'est un isomorphisme si et seulement si $\pi_2(X) \times
+\pi_2(Y) \to \pi_2(S)$ est surjectif.}\footnote{La page fait le calcul au
+point $\sigma = 1$, c'est-à-dire sur la composante de $z_0$, et énonce le
+critère sans restriction. Sur une autre composante, celle de la double classe
+de $\sigma$, il faut prendre les points base au-dessus d'un même point de
+$S$, et les images de $\pi_2(X)$ et de $\pi_2(Y)$ s'y comparent à travers
+l'action de $\sigma$ sur $\pi_2(S)$ : la condition est à vérifier composante
+par composante.}
+
+C'est, en termes d'aujourd'hui, la suite exacte de Mayer--Vietoris d'un
+\emph{produit fibré homotopique} — $Z$ en est un, puisque $f$ est une
+fibration — comparée à celle du produit fibré des groupoïdes, qui s'arrête
+en degré 1.\footnote{Les fibrations de groupoïdes et le groupoïde fondamental
+d'un produit fibré ont été étudiés par R. Brown (« Fibrations of groupoids »,
+\emph{J. Algebra} 15, 1970, de mémoire) ; rien ne dit que ces pages le
+connaissent, et rien ne permet de dater l'une par rapport à l'autre.}
+
+Enfin, si $X$, $Y$, $S$ n'ont pas de $\pi_i$ pour $i \geqslant 2$, il en est
+de même de $F$ (par $\pi_{i+1}(S) \to \pi_i(F) \to \pi_i(X)$), donc de $Z$ ;
+la condition sur $\pi_2$ est alors vide, et $\theta$ est une équivalence :
+\emph{pour des espaces de type $K(\pi, 1)$, le groupoïde du produit fibré est
+le produit fibré des groupoïdes.}\footnote{La phrase finit sur un mot
+illisible : « $X, Y, S$ sont des \dots ». « Asphériques », ou « $K(\pi,1)$ »,
+conviendrait au sens ; la restitution est nôtre.}
+
+\pagerange{5}{5}
+\section*{Les surfaces à trous comme groupoïdes (pages 5 à 8)}
+
+\subsection*{La 2-catégorie des modèles}
+
+Un \emph{modèle} est un triplet $(\mathcal{C}, \mathcal{D}, \varphi)$ :
+$\mathcal{D}$ un groupoïde dont chaque composante a un groupe fondamental
+infini cyclique muni d'un générateur (une orientation),
+$\mathcal{C}$ un groupoïde, $\varphi : \mathcal{D} \to \mathcal{C}$ un
+foncteur. Le modèle à avoir en tête est
+$\mathcal{C} = \Pi_1(\Sigma)$, $\mathcal{D} = \Pi_1(\partial\Sigma)$ pour une
+surface compacte orientée $\Sigma$, les composantes du bord orientées comme
+bord, et $\varphi$ induit par l'inclusion.\footnote{Il appelle $\mathcal{D}$
+« groupoïde 1-spécial orienté », $\mathcal{C}$ « groupoïde 2-spécial »,
+$\varphi$ « foncteur spécial », sans définir ces termes dans le dossier.
+Tout ce qui suit — les exceptions « sphère à 1 trou », « sphère à 2 trous »,
+le fait que $G$ soit libre — montre qu'il s'agit des groupoïdes fondamentaux
+d'une surface compacte orientable à bord et de son bord ; c'est ainsi qu'on
+lit la définition manquante.}
+
+Une 1-flèche $(\mathcal{C}, \mathcal{D}, \varphi) \to (\mathcal{C}',
+\mathcal{D}', \varphi')$ est un triplet $(u, v, \alpha)$ : une équivalence
+$u : \mathcal{D} \to \mathcal{D}'$ compatible aux orientations, une
+équivalence $v : \mathcal{C} \to \mathcal{C}'$, et un isomorphisme naturel
+$\alpha : \varphi' u \Rightarrow v \varphi$. Une 2-flèche
+$(u_1, v_1, \alpha_1) \Rightarrow (u_2, v_2, \alpha_2)$ est un couple
+$(\lambda, \mu)$ d'isomorphismes naturels $\lambda : u_1 \Rightarrow u_2$,
+$\mu : v_1 \Rightarrow v_2$, tel que le carré
+\[
+  \begin{array}{ccc}
+    \varphi' u_1 & \xrightarrow{\ \varphi' \ast \lambda\ } & \varphi' u_2 \\
+    {\scriptstyle \alpha_1} \big\downarrow & & \big\downarrow {\scriptstyle \alpha_2} \\
+    v_1 \varphi & \xrightarrow{\ \mu \ast \varphi\ } & v_2 \varphi
+  \end{array}
+\]
+commute.
+
+\subsection*{La forme normale}
+
+Si $\mathcal{C}$ est connexe et $\mathcal{D}$ non vide, le modèle est
+équivalent à un modèle où $\mathcal{C} = \mathrm{B}G$ et
+$\mathcal{D} = \coprod_{i \in I} \mathrm{B}\mathbb{Z}$ ; $\varphi$ est alors
+donné par des éléments $\ell_i = \varphi_i(1) \in G$, les \emph{lacets de
+bord}. Pour une surface de genre $g$ à $n = \operatorname{card} I \geqslant 1$
+trous, $G$ est libre de rang $2g + n - 1$, présenté par
+$\langle a_1, b_1, \dots, a_g, b_g, \ell_1, \dots, \ell_n \mid
+[a_1, b_1] \cdots [a_g, b_g]\, \ell_1 \cdots \ell_n = 1 \rangle$.
+
+Dans cette forme, et pour un second modèle $(G', (\ell'_{i'})_{i' \in I'})$,
+une 1-flèche est la donnée
+\begin{itemize}
+\item d'une bijection $u : I \to I'$,
+\item d'un isomorphisme $v : G \to G'$,\footnote{La page écrit
+$v : G \xrightarrow{\sim} G$, sans accent au but.}
+\item d'éléments $\alpha(i) \in G'$ tels que $v(\ell_i) = \alpha(i)\,
+\ell'_{u(i)}\, \alpha(i)^{-1}$ ;
+\end{itemize}
+et une 2-flèche $(u, v_1, \alpha_1) \Rightarrow (u, v_2, \alpha_2)$ (il n'y
+en a pas si $u_1 \neq u_2$) est un couple $(\lambda, \mu) \in \mathbb{Z}^I
+\times G'$ tel que
+\[
+  v_2 = \operatorname{int}(\mu) \circ v_1 , \qquad
+  \alpha_2(i)^{-1}\, \mu\, \alpha_1(i) = {\ell'_{u(i)}}^{\lambda_i}
+  \quad (i \in I).
+\]
+
+\pagerange{6}{6}
+\subsection*{Les composantes du groupe des automorphismes}
+
+Prenons les deux modèles égaux. Les auto-équivalences forment un groupe
+monoïdal (une \emph{Gr-catégorie}) $\underline{\mathrm{End}}$, dont on
+calcule le $\pi_0$ et le $\pi_1$.
+
+Si $(u_1, v_1, \alpha_1)$ et $(u_2, v_2, \alpha_2)$ sont isomorphes, alors
+$u_1 = u_2 = u$ et $v_2 = \operatorname{int}(\mu) v_1$ pour un $\mu \in G$ ;
+en écrivant $v_2(\ell_i)$ de deux façons, on trouve que
+$\alpha_2(i)^{-1} \mu\, \alpha_1(i)$ centralise $\ell_{u(i)}$. Or, sauf pour
+le disque, chaque lacet de bord engendre un sous-groupe infini cyclique qui
+est son propre centralisateur.\footnote{Il dit « chaque $\ell_j$ est un
+élément libre, et en tous cas son centralisateur est le groupe engendré par
+$\ell_j$ ». Dans un groupe libre, le centralisateur d'un élément non trivial
+est le sous-groupe cyclique maximal qui le contient ; il faut donc que
+$\ell_j$ ne soit pas une puissance propre. C'est vrai : pour $n \geqslant 2$,
+$\ell_j$ fait partie d'une base ; pour $n = 1$, $\ell_1$ est un produit de
+commutateurs dont une puissance propre donnerait de la torsion dans le groupe
+de la surface fermée. La justification est nôtre ; la page l'affirme.}
+L'élément cherché est donc une puissance $\ell_{u(i)}^{\lambda_i}$, et
+l'isomorphisme existe. D'où :
+
+\textbf{Proposition (page 6).} \emph{$\pi_0(\underline{\mathrm{End}})$
+s'identifie au sous-groupe de $\operatorname{Out}(G)$ formé des classes
+$\overline{v}$ telles que, pour tout $i$, $\overline{v}(\ell_i)$ soit conjugué
+à l'un des $\ell_j$.}
+
+La permutation $u$ est en effet déterminée par $\overline{v}$, car deux lacets
+de bord distincts ne sont jamais conjugués : leurs images dans l'abélianisé
+$G_{\mathrm{ab}}$ sont déjà distinctes.\footnote{Il écrit
+$\operatorname{Autext} G$ pour $\operatorname{Out}(G)$. Le $u$ du NB est
+écrit comme un $\sigma$ sur la page.} Ce groupe est ce que la page appelle le
+\emph{groupe de Teichmüller à trous} $T(\mathcal{C}, \mathcal{D}, \varphi)$.
+On y reconnaît le groupe des classes d'isotopie d'homéomorphismes de la
+surface préservant l'orientation, les composantes du bord pouvant être
+permutées et l'isotopie n'étant pas astreinte à les fixer : c'est le
+théorème de Dehn--Nielsen--Baer pour les surfaces à bord.\footnote{L'énoncé
+topologique n'est pas sur la page, qui ne parle que de groupes. La condition
+« conjugué à $\ell_j$ » et non à $\ell_j^{-1}$ traduit la préservation de
+l'orientation. L'identification et le nom sont les nôtres (référence de
+mémoire : Zieschang, Vogt, Coldewey, \emph{Surfaces and planar
+discontinuous groups}, 1980) ; le nom « Teichmüller » est le sien.}
+
+\pagerange{7}{7}
+\subsection*{Le groupe fondamental}
+
+$\pi_1(\underline{\mathrm{End}})$ est le groupe des automorphismes de
+l'identité $(\mathrm{id}, \mathrm{id}, 1)$ : les $(\lambda, \mu)$ avec
+$\mu \in Z(G)$, le centre, et $\mu = \ell_i^{\lambda_i}$ pour tout $i$.
+
+\begin{itemize}
+\item Hors du disque et du cylindre, $G$ est libre de rang au moins 2, de
+centre trivial, et les $\ell_i$ sont d'ordre infini : $\mu = 1$,
+$\lambda = 0$, et $\pi_1(\underline{\mathrm{End}}) = 0$.
+\item Pour le cylindre (sphère à deux trous), $G \simeq \mathbb{Z}$,
+$\ell_1 = 1$, $\ell_2 = -1$ en notation additive, $G$ est son propre centre,
+et $\mu$ détermine $\lambda = (\mu, -\mu)$ : $\pi_1(\underline{\mathrm{End}})
+= G \simeq \mathbb{Z}$, l'isomorphisme dépendant du choix d'un
+générateur.\footnote{La page : « (pas canoniquement) ».}
+\item Pour le disque (sphère à un trou), $G = 1$ et $\lambda \in \mathbb{Z}$
+est libre : $\pi_1(\underline{\mathrm{End}}) \simeq \mathbb{Z}$,
+canoniquement.
+\end{itemize}
+
+Les deux exceptions sont les deux surfaces dont le groupe d'homéomorphismes
+a des composantes non simplement connexes : le disque et le cylindre tournent
+sur eux-mêmes.
+
+\subsection*{Le bord fixé : le groupe de Teichmüller spécial}
+
+Fixons maintenant $\mathcal{D}$ : on ne garde que les 1-flèches avec
+$u = \mathrm{id}$ et les 2-flèches avec $\lambda = 0$. On obtient une
+Gr-catégorie $\underline{\mathrm{End}}_{\mathcal{D}}$ dont les objets sont
+les couples $(v, \alpha)$, $v \in \operatorname{Aut} G$, $\alpha \in G^I$,
+avec $v(\ell_i) = \alpha(i)\, \ell_i\, \alpha(i)^{-1}$, et dont les flèches
+$(v_1, \alpha_1) \to (v_2, \alpha_2)$ sont les $\mu \in G$ tels que
+$v_2 = \operatorname{int}(\mu) \circ v_1$ et $\alpha_2(i) = \mu\,
+\alpha_1(i)$. Deux objets isomorphes ont même classe $\overline{v}$ dans
+$\operatorname{Out}(G)$, et si $v_2 = \operatorname{int}(\mu_0) v_1$, alors
+$\alpha_2(i)^{-1} \mu_0\, \alpha_1(i)$ centralise $\ell_i$.\footnote{Dans le
+calcul de la page 7, le dernier terme est écrit
+$\operatorname{int}(\mu_0)\, \operatorname{int} \alpha_1(i)\, v_1(\ell_i)$ ;
+il faut $\ell_i$ au lieu de $v_1(\ell_i)$.} On appelle $TS$, groupe de
+Teichmüller \emph{spécial}, le groupe $\pi_0(\underline{\mathrm{End}}_{
+\mathcal{D}})$. Son $\pi_1$ est trivial dans tous les cas : un automorphisme
+de $(\mathrm{id}, 1)$ est un $\mu$ avec $\mu \cdot 1 = 1$.
+
+\pagerange{8}{8}
+\subsection*{La suite exacte (page 8)}
+
+\textbf{Proposition (page 8).} \emph{Il y a une suite
+\[
+  0 \longrightarrow \mathbb{Z}^I \longrightarrow TS
+  \xrightarrow{\ \Psi\ } T \longrightarrow \mathfrak{S}_I \longrightarrow 1 ,
+\]
+où $\Psi(v, \alpha) = \overline{v}$, $T \to \mathfrak{S}_I$ envoie
+$\overline{v}$ sur la permutation $u$ qu'il induit sur les lacets de bord,
+et $\mathbb{Z}^I \to TS$ envoie $\lambda$ sur la classe de
+$(\mathrm{id}, (\ell_i^{\lambda_i})_i)$. Elle est exacte, sauf en
+$\mathbb{Z}^I$ pour le disque et le cylindre :
+\begin{itemize}
+\item pour le cylindre, $\operatorname{Ker} \Psi \simeq \mathbb{Z}$,
+quotient de $\mathbb{Z}^2$ par l'antidiagonale, via la somme ;
+\item pour le disque, $TS = 0$.
+\end{itemize}}
+
+L'exactitude en $T$ est immédiate : $\overline{v}$ fixe chaque classe de
+conjugaison $[\ell_i]$ si et seulement si on peut choisir les $\alpha(i)$. La
+surjectivité sur $\mathfrak{S}_I$ ne découle pas des calculs de la page ;
+elle est vraie parce que toute permutation des composantes du bord d'une
+surface connexe orientable se réalise par un homéomorphisme préservant
+l'orientation.\footnote{La page écrit la suite sans justifier ce point ; la
+justification topologique est nôtre.} Pour le noyau de $\Psi$ : un $(v,
+\alpha)$ avec $\overline{v} = 1$ est isomorphe à un $(\mathrm{id}, \alpha)$,
+et alors $\alpha(i)$ centralise $\ell_i$, donc $\alpha(i) =
+\ell_i^{\lambda_i}$ avec $\lambda_i$ bien déterminé (hors du disque). Deux
+tels objets $(\mathrm{id}, (\ell_i^{\lambda_i}))$ et $(\mathrm{id},
+(\ell_i^{\lambda'_i}))$ sont isomorphes si et seulement s'il existe $\mu \in
+Z(G)$ avec $\ell_i^{\lambda'_i} = \mu\, \ell_i^{\lambda_i}$ pour tout $i$.
+Hors du cylindre, $Z(G) = 1$ et $\operatorname{Ker} \Psi \simeq
+\mathbb{Z}^I$. Pour le cylindre, la condition s'écrit $\lambda'_1 =
+\lambda_1 + \mu$, $\lambda'_2 = \lambda_2 - \mu$ : on identifie $\lambda$ et
+$\lambda'$ quand leur différence est dans l'antidiagonale, et
+$\operatorname{Ker} \Psi \simeq \mathbb{Z}$ par la somme.\footnote{En marge
+de la suite : « exacte sauf pour la sphère à 1 ou 2 trous » (le premier mot
+est de lecture incertaine). La page écrit, pour le cylindre,
+$\operatorname{Ker}(\mathbb{Z}^I \to \operatorname{Ker} \Psi) \simeq
+\operatorname{Ker}(\mathbb{Z}^I \to \mathbb{Z})$, « opération somme ».}
+
+En termes d'aujourd'hui, $TS$ est le groupe des classes d'applications de la
+surface relatif au bord (les homéomorphismes et les isotopies fixent le bord
+point par point), $T$ celui où le bord est libre, et $\mathbb{Z}^I$ est
+engendré par les twists de Dehn le long des composantes du bord ; la suite
+est la suite bien connue qui relie le groupe relatif au bord à celui de la
+surface où chaque bord est remplacé par une pointe, avec ses deux exceptions
+classiques : sur le cylindre, les deux twists de bord coïncident ; sur le
+disque, le twist de bord est isotope à l'identité relativement au bord
+(lemme d'Alexander).\footnote{Ces identifications sont les nôtres ; la page
+ne parle que des groupes $T$ et $TS$, qu'elle appelle « Teichmüller à trous »
+et « Teichmüller spécial ». Que le $\pi_1$ de
+$\underline{\mathrm{End}}_{\mathcal{D}}$ soit trivial dans tous les cas est
+l'écho algébrique du fait que les composantes du groupe des homéomorphismes
+fixant le bord sont contractiles.}
+
+\pagerange{10}{10}
+\section*{Le modèle d'un 1-complexe sur une surface (pages 10 et 11)}
+
+La page 10 décrit les données combinatoires dont on fabrique un modèle. En
+marge, de bas en haut le long de toute la moitié supérieure : « catégorie
+\dots{} topologique des surfaces orientées ».\footnote{Un mot illisible après
+« catégorie », et « orientées » de lecture incertaine.} Les données sont :
+\begin{itemize}
+\item[(a)] un 1-complexe combinatoire $(\Sigma, \omega)$ muni d'une
+« circulation » ordinaire, c'est-à-dire d'un ordre cyclique des arêtes en
+chaque sommet — ce qu'on appelle aujourd'hui un \emph{graphe rubané} —, sans
+points isolés ni « bandes » isolées ;
+\item[(b)] un groupoïde $\Pi_b$ à nombre fini de composantes, de groupes
+fondamentaux infinis cycliques : les cercles isolés ;
+\item[(c)] un tel groupoïde $\Pi_d$, orienté.
+\end{itemize}
+À ces données il associe :
+\begin{itemize}
+\item[(a$'$)] le 1-complexe orienté $\partial_t(\Sigma, \omega)$ des
+« co-circuits » de $\Sigma$, et le foncteur $\varphi_0 :
+\Pi_1(\partial_t\Sigma) \to \Pi_1(\Sigma)$ ;
+\item[(b$'$)] pour chaque composante $\Pi_b(i)$, de groupe $\Lambda(i) \simeq
+\mathbb{Z}$, le groupoïde $\widetilde{\Pi}_b(i) =
+\coprod_{\mathrm{Isom}(\mathbb{Z}, \Lambda(i))} \Pi_b(i)$ à deux
+composantes orientées, et $\varphi_b : \widetilde{\Pi}_b \to \Pi_b$ ;
+\item[(c$'$)] $\varphi_d : \Pi_d \to \mathrm{B}\,\pi_0(\Pi_d)$, qui écrase
+chaque composante sur un point ;
+\end{itemize}
+et le modèle
+\[
+  T\bigl((\Sigma, \omega), \Pi_d, \Pi_b\bigr) =
+  \bigl(\Pi_1(\Sigma) \amalg \Pi_b \amalg \mathrm{B}\,\pi_0(\Pi_d),\
+  \Pi_1(\partial_t\Sigma) \amalg \widetilde{\Pi}_b \amalg \Pi_d,\
+  \varphi_0 \amalg \varphi_b \amalg \varphi_d\bigr) .
+\]
+Géométriquement, et c'est ainsi qu'on lit la page : le graphe rubané
+s'épaissit en une surface à bord dont les composantes du bord sont ses
+circuits de faces (les co-circuits) ; un cercle isolé s'épaissit en un
+cylindre, dont les deux bords sont le cercle parcouru dans ses deux
+orientations (d'où les deux composantes de $\widetilde{\Pi}_b(i)$, et le
+cylindre de la page 7 avec $\ell_1 = 1$, $\ell_2 = -1$) ; un point isolé
+s'épaissit en un disque, de groupoïde trivial, bordé par un cercle orienté.
+$T$ associe ainsi à un 1-complexe le modèle de son \emph{voisinage
+tubulaire}.\footnote{Cette lecture géométrique est la nôtre ; la page donne
+les seules formules. Elle explique l'ordre des lettres (a), (c), (b) réunies
+sur la page par une accolade, et le « NB $\varphi$ est foncteur bordant »
+(dernier mot de lecture incertaine) qui suit la formule. Le mot qualifiant
+$\widetilde{\Pi}_b(i)$ se lit, avec doute, « grossier ». Pour le genre et le
+nombre de bords d'un graphe rubané connexe, le calcul est celui de la
+caractéristique d'Euler : le nombre de bords est le nombre de circuits de
+faces, et $2 - 2g - n = \#\text{sommets} - \#\text{arêtes}$.}
+
+Sous un trait horizontal, la page commence la donnée d'un plongement : (d) un
+groupoïde $\mathcal{C}'$, (e) un foncteur « bordant » $\varphi' : \mathcal{D}
+\to \mathcal{C}'$, où $\mathcal{D}$ est celui de $T$. C'est, on le
+comprendra page 18, le modèle du complémentaire, recollé au voisinage
+tubulaire le long du bord.
+
+\pagerange{11}{11}
+La page 11 ouvre la catégorie, « non strictifiée », des 1-complexes
+topologiques compacts « divisés » : des couples $(K_1, \Pi_b)$, $K_1$ un
+1-complexe sans cercles isolés et $\Pi_b$ comme en (b), avec
+\[
+  \underline{\mathrm{Hom}}\bigl((K_1, \Pi_b), (K'_1, \Pi'_b)\bigr) \simeq
+  \mathrm{Cat}\bigl(\mathrm{Isom}(K_1, K'_1)\bigr) \times
+  \underline{\mathrm{Equ}}(\Pi_b, \Pi'_b) ,
+\]
+la catégorie discrète des isomorphismes combinatoires, fois le groupoïde des
+équivalences. La formule court au bord de la feuille et le reste de la page
+est blanc.\footnote{L'indice de $\underline{\mathrm{Equ}}$ est illisible ;
+« combinatoires » est écrit sous la première ligne, et rattaché à la suivante
+par une flèche.}
+
+\pagerange{13}{13}
+\section*{Extensions de groupes topologiques : la question (page 13)}
+
+Soit une extension de groupes topologiques
+\[
+  (E) \qquad 1 \to N \to G \to H \to 1
+\]
+et un morphisme $u : H' \to H$ ; soit $G' = G \times_H H'$ l'extension de
+$H'$ par $N$ obtenue par image inverse. La suite exacte d'homotopie de la
+fibration $G \to H$ se termine par
+\[
+  (S) \qquad \pi_1 H \longrightarrow \pi_0 N \longrightarrow \pi_0 G
+  \longrightarrow \pi_0 H \longrightarrow 1 ,
+\]
+de même $(S')$ pour $G'$, et $u$ induit un morphisme $(S') \to (S)$. Le carré
+de droite donne
+\[
+  c : \pi_0 G' \longrightarrow \pi_0 G \times_{\pi_0 H} \pi_0 H' ,
+\]
+toujours surjectif (on relève dans $G$ un chemin de $H$ joignant deux points
+de même composante), mais pas toujours injectif : la seule connaissance de
+$(S)$ et de $u$ en degrés $0$ et $1$ ne détermine pas $\pi_0 G'$.
+
+\emph{Le problème} : trouver des données algébriques simples attachées à
+$(E)$ qui, jointes à $\pi_0 u$ et $\pi_1 u$, déterminent $\pi_0 G'$ à
+isomorphisme près.\footnote{La page écrit « connaissant $\pi_0 H \to \pi_0 H'$
+et $\pi_1 H \to \pi_1 H'$ » : les flèches sont dans le sens inverse de $u$.
+Elle ajoute au-dessus de la ligne « (discrets) », de lecture et de point
+d'attache incertains. « Algébriques » est de lecture incertaine.}
+
+\pagerange{14}{14}
+\section*{Réduction, et le cas d'une base connexe (pages 14 et 15)}
+
+\subsection*{$\alpha$) Réduction au cas $N$ discret}
+
+La composante neutre $N^0$ est caractéristique dans $N$, donc distinguée dans
+$G$ et dans $G'$. Remplaçons $G$ par $G/N^0$, extension de $H$ par $N/N^0 =
+\pi_0 N$ ; l'image inverse de $G/N^0$ par $u$ est $G'/N^0$, et la base $H$,
+$H'$, $u$ ne change pas. Comme $N^0$ est connexe, $\pi_0 G \to \pi_0(G/N^0)$
+et $\pi_0 G' \to \pi_0(G'/N^0)$ sont bijectifs, et $\pi_1 G \to
+\pi_1(G/N^0)$ est surjectif.\footnote{La page dessine ce carré avec
+$H/N^0$ et $H'/N^0$, où l'on attend $G/N^0$ et $G'/N^0$ ; elle dit les
+flèches horizontales « isom. » sur les $\pi_i$ puis « épi. » sur les $\pi_1$.
+Ce qui est vrai, et suffit à la réduction, est l'énoncé donné ici : bijection
+sur $\pi_0$, surjection sur $\pi_1$. Elle écrit aussi « $\pi_0 G / N^0$ »
+pour $\pi_0(G/N^0)$, et « extension de $H$ » pour $G'/N^0$, qui est une
+extension de $H'$.} Le problème ne change pas : \emph{on peut supposer $N$
+discret.}
+
+Alors $G \to H$ est un revêtement, $(S)$ se lit
+\[
+  \pi_i G \simeq \pi_i H \ (i \geqslant 2), \qquad
+  \pi_1 G = \operatorname{Ker}(\varphi), \qquad
+  1 \to \operatorname{Coker}(\varphi) \to \pi_0 G \to \pi_0 H \to 1 ,
+\]
+où $\varphi : \pi_1 H \to N$ est le bord de la suite d'homotopie. Son image
+est contenue dans le centre $\mathfrak{z}(N)$ : si $(g_t)$ est un chemin de
+$G$ issu de $1$, la conjugaison par $g_t$ sur le groupe discret $N$ est
+constante, donc l'extrémité d'un relèvement de lacet commute à
+$N$.\footnote{Remarque nôtre ; elle explique pourquoi, page 15 et au-delà,
+$\varphi$ est à valeurs dans le centre, et pourquoi $\operatorname{Coker}
+\varphi$ est un groupe.} Pour $G'$, le bord est $\varphi' = \varphi \circ
+\pi_1 u$, connu dès que $\varphi$ et $\pi_1 u$ le sont. Il reste à
+déterminer l'extension $\pi_0 G'$ de $\pi_0 H'$ par $R' =
+\operatorname{Coker}(\varphi')$.
+
+\pagerange{15}{15}
+\subsection*{Le noyau de $c$}
+
+L'image inverse de l'extension $\pi_0 G$ par $\pi_0 H' \to \pi_0 H$ est
+$\pi_0 G \times_{\pi_0 H} \pi_0 H'$, extension de $\pi_0 H'$ par $R =
+\operatorname{Coker}(\varphi)$ — et non par $R'$. Or $R$ est le quotient de
+$R'$ par $\operatorname{Im} \varphi / \operatorname{Im} \varphi'$, d'où la
+suite exacte
+\[
+  1 \longrightarrow \frac{\pi_1 H}{\operatorname{Ker} \varphi +
+  \operatorname{Im} \pi_1(u)} \longrightarrow \pi_0 G' \xrightarrow{\ c\ }
+  \pi_0 G \times_{\pi_0 H} \pi_0 H' \longrightarrow 1 .
+\]
+Elle dit exactement comment le défaut d'injectivité de $c$ dépend de
+$\pi_1 H$ et de $\pi_1 u$ : c'est un quotient de $\operatorname{Coker}
+\pi_1(u)$.\footnote{La première phrase de la page 15 est de lecture
+incertaine (« Montrons que », « non pas $R'$ », « $R$ est un quotient de
+$R'$ ») ; le sens est fixé par la formule, qui est nette.}
+
+\subsection*{$\beta$) Cas $H$ connexe}
+
+Soit $\pi = \pi_1(H)$ et $\widetilde{H}$ le revêtement universel de $H$,
+extension de $H$ par $\pi$ ; $\pi$ est discret et distingué dans le groupe
+connexe $\widetilde{H}$, donc central. Alors :
+
+\textbf{Proposition (page 15).} \emph{Si $H$ est connexe et $N$ discret, les
+extensions de $H$ par $N$ sont classées par les morphismes $\varphi : \pi \to
+\mathfrak{z}(N)$, et chacune n'a que l'identité pour automorphisme
+d'extension. L'extension associée à $\varphi$ est l'image directe
+$\widetilde{H} \times^{\pi} N = (\widetilde{H} \times N) / \{ (\gamma,
+\varphi(\gamma)^{-1}) \}$.}
+
+En effet, l'application $\widetilde{H} \to H$ se relève en un morphisme
+$\widetilde{H} \to G$, dont l'image, connexe, centralise $N$ ; d'où
+$\widetilde{H} \times N \to G$, surjectif, de noyau le graphe de
+$\varphi^{-1}$ sur $\pi$. Un automorphisme d'extension est donné par une
+application continue de $H$ connexe dans $N$ discret, donc
+triviale.\footnote{La page dit l'extension « canonique » (lecture
+incertaine), « à isom. unique près » ; la démonstration esquissée ici est
+nôtre.} Pour $u : H' \to H$ quelconque — et c'est la remarque utile, car
+$H'$ n'a pas à être connexe —, $G'$ s'obtient en tirant d'abord
+$\widetilde{H}$ en $H' \times_H \widetilde{H}$, extension de $H'$ par $\pi$,
+puis en poussant par $\pi \to \mathfrak{z}(N) \subset N$.\footnote{La fin de
+la page est très incertaine (« Il n'y a pas de problème si $H'$ n'est pas
+connexe », « décrivons les ext. de $\pi_0 H'$ \dots ») et se termine par deux
+lignes biffées.}
+
+\pagerange{16}{16}
+\section*{(A) Le cadre général : base non connexe (pages 16 et 17)}
+
+Quand $H$ n'est pas connexe, il n'a pas de revêtement universel au sens
+habituel. On se donne donc à la place :
+\begin{itemize}
+\item[(a)] l'extension $1 \to N \to G \to H \to 1$, $N$ discret ;
+\item[(b)] une extension de groupes topologiques $1 \to \pi \to
+\widetilde{H} \to H \to 1$, $\pi$ discret ;
+\item[(c)] un sous-groupe distingué $\widetilde{H}_0$ de $\widetilde{H}$ de
+quotient discret $\mathfrak{G}$ : $1 \to \widetilde{H}_0 \to \widetilde{H}
+\to \mathfrak{G} \to 1$.
+\end{itemize}
+On étudie, (b) et (c) fixés, les extensions $G$ de $H$ par $N$ \emph{munies}
+d'une trivialisation stricte de leur image inverse sur $\widetilde{H}_0$,
+c'est-à-dire d'un morphisme $\widetilde{H}_0 \to G$ qui relève
+$\widetilde{H}_0 \to H$ et centralise $N$.\footnote{On appelle
+\emph{trivialisation stricte} d'une extension $E$ de $K$ par $N$ sur un
+sous-groupe distingué $L \subset K$ un morphisme $L \to E$ relevant
+l'inclusion, centralisant $N$, et dont l'image est distinguée dans $E$
+(équivariance pour la conjugaison). La page glose « stricte » par une
+parenthèse ajoutée en interligne, lue avec un fort doute « comm. avec prod.
+produits » ; on donne la définition dont la suite a besoin.} Si
+$\widetilde{H}_0$ est connexe et simplement connexe, une telle
+trivialisation existe et est unique : c'est la structure de revêtement.
+
+Soit $\widetilde{G} = G \times_H \widetilde{H}$, extension de $\widetilde{H}$
+par $N$ ; elle contient $\pi$ comme sous-groupe distingué centralisant $N$, et
+$G = \widetilde{G}/\pi$. Se donner $G$ revient donc à se donner
+$\widetilde{G}$ muni d'une trivialisation stricte sur $\pi$ ; la structure
+supplémentaire de $G$ revient à une trivialisation stricte de $\widetilde{G}$
+sur $\widetilde{H}_0$. Or une extension de $\widetilde{H}$ par $N$
+strictement trivialisée sur $\widetilde{H}_0$ est la même chose qu'une
+extension
+\[
+  1 \longrightarrow N \longrightarrow \widetilde{G}_0 \longrightarrow
+  \mathfrak{G} \longrightarrow 1
+\]
+(on retrouve $\widetilde{G} = \widetilde{H} \times_{\mathfrak{G}}
+\widetilde{G}_0$, et $\widetilde{G}_0 = \widetilde{G} / \widetilde{H}_0$).
+
+\pagerange{17}{17}
+Il reste la trivialisation sur $\pi$. Dans ces termes, c'est un morphisme
+$\varphi : \pi \to \widetilde{G}_0$ qui relève le composé $\pi \subset
+\widetilde{H} \to \mathfrak{G}$, centralise $N$, et est équivariant pour les
+actions de conjugaison.\footnote{Le début de la page 17 (« i.e. un
+relèvement, et compatible \dots ») est surchargé et se lit mal ; la flèche
+$\varphi$ y est pointillée.} \emph{Cas particulier} : si $\pi \subset
+\widetilde{H}_0$, le composé $\pi \to \mathfrak{G}$ est trivial, et
+$\varphi$ est un morphisme
+\[
+  \varphi : \pi \longrightarrow \mathfrak{z}(N) ,
+\]
+équivariant pour l'action de $\mathfrak{G}$ — sur $\pi$ par conjugaison dans
+$\widetilde{H}$, sur $\mathfrak{z}(N)$ par conjugaison dans
+$\widetilde{G}_0$. D'où, dans ce cas, la classification :
+\[
+  \bigl\{ G \text{ muni de sa trivialisation sur } \widetilde{H}_0 \bigr\}
+  \ \simeq\ \bigl\{ (\widetilde{G}_0, \varphi) \bigr\} ,
+\]
+les couples formés d'une extension $\widetilde{G}_0$ de $\mathfrak{G}$ par
+$N$ et d'un $\mathfrak{G}$-morphisme $\varphi : \pi \to
+\mathfrak{z}(N)$.\footnote{La page écrit
+$\operatorname{Ext}(\mathfrak{G}, N) \times
+\operatorname{Hom}_{\mathfrak{G}}(\pi, \mathfrak{z}(N)) \xrightarrow{\sim}
+\operatorname{Ext}(H \bmod \widetilde{H}_0, N) \to \operatorname{Ext}(H, N)$.
+Ce n'est un produit qu'une fois fixée l'action extérieure
+$\mathfrak{G} \to \operatorname{Out}(N)$, car c'est elle qui définit l'action
+de $\mathfrak{G}$ sur $\mathfrak{z}(N)$ ; sinon, c'est un ensemble de
+couples fibré au-dessus de $\operatorname{Ext}(\mathfrak{G}, N)$.}
+
+Suivent, sous un trait, des brouillons barrés de longues obliques (les suites
+de $\widetilde{H}$ et d'un $\widetilde{H}'$ au-dessus de $H'$, une grille de
+sous-groupes), puis trois lignes que la même oblique traverse sans qu'il soit
+sûr qu'elle les annule : l'ensemble des extensions est un « espace homogène
+sous $H^2(H, \mathfrak{z}(N))$ », avec le morphisme $H^2(\mathfrak{G},
+\mathfrak{z}N) \to H^2(H, \mathfrak{z}N)$ induit par $H \to \mathfrak{G}$.
+C'est la théorie des extensions non abéliennes : à action extérieure fixée,
+les extensions d'un groupe par $N$, s'il en existe, forment un espace
+principal homogène sous le $H^2$ à coefficients dans le centre, et
+l'obstruction à leur existence est dans le $H^3$.\footnote{La page écrit
+aussi « $1 \to N \to E \to \widetilde{H} \to 1$ équivaut à
+$H^2(\mathfrak{G}, N)$ », qui ne se comprend qu'à ce sens près : un
+torseur sous $H^2(\mathfrak{G}, \mathfrak{z}(N))$, et non $H^2(\mathfrak{G},
+N)$. Pour $H$ topologique, le $H^2$ s'entend en un sens convenable
+(cohomologie continue ou de Segal--Moore) ; la page ne précise pas.
+Références de mémoire : Eilenberg--MacLane (1947) pour les groupes
+discrets ; Giraud, \emph{Cohomologie non abélienne} (1971), pour la notion de
+lien.}
+
+\pagerange{18}{18}
+\section*{Un programme : plonger un 1-complexe dans une surface (page 18)}
+
+Intercalée entre (A) et (B), la page 18 revient aux surfaces. Elle est
+organisée autour d'un schéma de sigles :
+
+\begin{tikzcd}[column sep=small, row sep=small]
+& \mathrm{SO} & & & \\
+& & \mathrm{PLO} \arrow[ul] \arrow[dl] \arrow[drr] & & \\
+& \mathrm{TUBO} \arrow[dl] \arrow[r] & \mathrm{SOB} \arrow[dr, "\partial"] & & \mathrm{SOB} \arrow[dl, "-\partial"'] \\
+\mathrm{Kc} & & & \mathrm{CO} &
+\end{tikzcd}
+
+Les sigles ne sont pas développés.\footnote{Lecture nôtre, guidée par les
+tirés à part du dossier, dont la seconde Note porte sur les « catégories TUB
+et TUBO » de voisinages tubulaires et sur les « 1-complexes circularisés ».
+Sous PLO : « (avec $\pi_0(K) \to \pi_0(S)$ surjectif) » ; sous CO, un
+« $\simeq \mathrm{Equiv}(\mathbb{N}, \{\mathfrak{G}_n\})$ » dont le premier
+mot est incertain, et que l'on comprend comme le groupoïde des ensembles finis,
+somme des $\mathrm{B}\mathfrak{S}_n$ (la lettre transcrite $\mathfrak{G}_n$
+est lue ici comme le groupe symétrique, le $\mathfrak{S}_I$ de la page 8).
+La flèche de droite vers CO porte « $-\partial$ ($\simeq \partial$) ».} On
+les lit ainsi : PLO, les plongements d'un 1-complexe $K$ dans une surface
+orientée ; SO, les surfaces orientées ; TUBO, les voisinages tubulaires
+orientés ; Kc, les 1-complexes circularisés (graphes rubanés) ; SOB, les
+surfaces orientées à bord ; CO, les collections finies de cercles orientés.
+Le schéma dit alors qu'un plongement, c'est la surface ambiante, le voisinage
+tubulaire du complexe (qui détermine le graphe rubané, et réciproquement à
+équivalence près), et le complémentaire du voisinage, recollés le long du bord
+où les deux orientations s'opposent : le $\partial$ et le $-\partial$ du
+schéma. C'est le complément, en termes de modèles, de la page 10.
+
+Autour du schéma, les annotations décomposent le problème des symétries :
+\begin{itemize}
+\item les \emph{complexes hypercirculaires} : un complexe circularisé $K$ avec
+une partition de l'ensemble $\mathrm{Circ}(K)$ de ses circuits et un genre
+$g \in \mathbb{N}$ par bloc — chaque bloc de circuits borde une composante
+du complémentaire, de genre $g_i$ à $n_i$ trous ;
+\item le groupe des symétries d'un plongement est une extension du groupe des
+symétries du complexe hypercirculaire par les groupes de Teichmüller des
+composantes du complémentaire, et cette extension est connue dès qu'on
+connaît ces groupes séparément, les morphismes canoniques $\mathbb{Z}^{n_i}
+\to$ (centre), et les extensions $1 \to T_{g_i, n_i} \to L_{g_i, n_i} \to
+\mathfrak{S}_{n_i} \to 1$ ;\footnote{Les lettres de cette ligne ne
+s'accordent pas exactement avec celles de la page 8 : $L_{g,n}$, qui se
+projette sur le groupe symétrique et reçoit $\mathbb{Z}^{n}$ dans son centre,
+tient à la fois du $T$ et du $TS$ de la page 8, et un passage encadré,
+entièrement hachuré, où l'on devine « $L_{g_i, n_i} \to T_{g_i, n_i}$ de
+noyau $\operatorname{Im}(\mathbb{Z}^{n_i} \to L_{g_i, n_i})$ », a été
+abandonné. On ne tranche pas. Le premier groupe est noté $\Pi_{g_i, n_i}$,
+« spéciaux » étant de lecture incertaine.}
+\item tout se ramène aux groupes de Teichmüller « à trous » ordinaires
+$T_{g,n}$ et aux groupes de symétries des 1-complexes circularisés connexes.
+\end{itemize}
+« Le calcul des $g_i n_i$ est donné par Yves » : le genre et le nombre de
+trous des morceaux.\footnote{Le prénom se lit nettement ; c'est le seul lien
+explicite des pages manuscrites avec Ladegaillerie.} La page se termine sur
+ce qu'il reste à déterminer, encadré :
+\[
+  \operatorname{Aut}_{\mathrm{Circ}}(K) \longrightarrow
+  \operatorname{Aut}\bigl(T_{?}(K)\bigr) \simeq T_{g,n} ,
+\]
+l'action des symétries d'un complexe circularisé sur le groupe de Teichmüller
+de son épaississement.\footnote{L'indice de $T$ est illisible.} Le dossier
+ne le détermine pas.
+
+\pagerange{19}{19}
+\section*{(B) Le cas du revêtement universel (pages 19 et 20)}
+
+Supposons à la fois
+\begin{itemize}
+\item[$\alpha$)] $\widetilde{H}_0$ connexe et simplement connexe ;
+\item[$\beta$)] $\pi \subset \widetilde{H}_0$ ;
+\item[$\gamma$)] $\pi$, $N$, $\mathfrak{G}$ discrets.
+\end{itemize}
+Comme $\mathfrak{G}$ est discret, $\widetilde{H}_0$ est ouvert ; connexe, il
+est la composante neutre $\widetilde{H}^0$, et $\mathfrak{G} = \pi_0
+\widetilde{H}$. Comme $\pi \subset \widetilde{H}_0$, $H = \widetilde{H}/\pi$
+est extension de $\mathfrak{G} = \pi_0(H)$ par $H^0 = \widetilde{H}_0/\pi$ ;
+et comme $\pi$ est discret et $\widetilde{H}_0$ simplement connexe,
+$\widetilde{H}_0$ est le revêtement universel de $H^0$, avec $\pi =
+\pi_1(H^0) = \pi_1(H)$. La situation équivaut donc à la donnée de :
+
+\begin{itemize}
+\item[1°)] un groupe topologique $H$, extension du groupe discret
+$\mathfrak{G} = \pi_0(H)$ par le groupe connexe $H^0$, de revêtement
+universel $\widetilde{H^0}$, extension de $H^0$ par $\pi = \pi_1(H^0)$ ;
+\item[2°)] une extension $\widetilde{H}$ de $H$ par $\pi$ qui prolonge
+$\widetilde{H^0}$ — un « revêtement universel » du groupe non connexe $H$ ;
+\item[3°)] le groupe discret $N$.
+\end{itemize}
+
+Une telle extension $\widetilde{H}$ n'existe pas toujours et n'est pas unique.
+Si elle existe, les autres s'en déduisent par l'action de
+$H^2(\mathfrak{G}, \pi)$, et l'obstruction à son existence est dans
+$H^3(\mathfrak{G}, \pi)$ — « sauf erreur », dit la page. Elle existe si $H$
+est un produit semi-direct $\mathfrak{G} \ltimes H^0$ : on prend
+$\widetilde{H} = \mathfrak{G} \ltimes \widetilde{H^0}$, l'action de
+$\mathfrak{G}$ se relevant au revêtement universel.\footnote{Le résultat est
+connu : R. L. Taylor, « Covering groups of nonconnected topological groups »,
+\emph{Proc. AMS} 5 (1954), et R. Brown, O. Mucuk, \emph{Math. Proc.
+Cambridge Philos. Soc.} 115 (1994), qui situent l'obstruction dans
+$H^3(\pi_0 H, \pi_1 H^0)$ ; références de mémoire, et rien ne dit que la
+page connaît la première. La page dit l'extension « unique (i.e. mod. action
+de $H^2(\mathfrak{G}, \pi)$) comme extension de $\mathfrak{G}$ par $\pi$ » :
+on écrit ce qui tient, un espace homogène sous $H^2(\mathfrak{G}, \pi)$.}
+
+\textbf{Proposition (page 19).} \emph{Sous $\alpha$), $\beta$), $\gamma$), la
+catégorie des extensions de $H$ par $N$ est équivalente à celle des couples
+$(\widetilde{G}_0, \varphi)$, où $\widetilde{G}_0$ est une extension de
+$\mathfrak{G}$ par $N$ et $\varphi : \pi \to \mathfrak{z}(N)$ un
+$\mathfrak{G}$-morphisme.}
+
+C'est le cas particulier de (A), puisque sous $\alpha$) la trivialisation
+sur $\widetilde{H}_0$ existe et est unique. On a $\widetilde{G}_0 = \pi_0
+\widetilde{G}$, la composante neutre de $\widetilde{G}$ s'envoyant
+isomorphiquement sur $\widetilde{H}^0$.\footnote{NB écrit en biais dans
+l'angle inférieur gauche, de lecture partielle.} Pour $H$ connexe, on
+retrouve la proposition de la page 15.
+
+\pagerange{20}{20}
+\subsection*{La construction explicite, et $\pi_0(G)$}
+
+Réciproquement, $G$ se construit ainsi à partir de $(\widetilde{G}_0,
+\varphi)$. Soit $G_!$ l'image inverse de $\widetilde{G}_0$ par $H \to
+\mathfrak{G}$, extension de $H$ par $N$. Le $\mathfrak{G}$-morphisme
+$\varphi$ pousse l'extension $\widetilde{H}$ de $H$ par $\pi$ en une
+extension $\widetilde{H}^{\varphi}$ de $H$ par $\mathfrak{z}(N)$, où $H$ opère
+sur $\mathfrak{z}(N)$ à travers $\mathfrak{G}$ comme il le fait par
+l'intermédiaire de $G_!$.\footnote{La page dit l'extension « centrale »
+(lecture incertaine) ; elle ne l'est que si $\mathfrak{G}$ opère
+trivialement sur $\mathfrak{z}(N)$, et la page précise elle-même l'action.
+L'indice de $G_!$ est un point d'exclamation, surmonté peut-être d'un
+$\varphi$.} Le produit contracté de $G_!$ et de $\widetilde{H}^{\varphi}$
+— le quotient de $G_! \times_H \widetilde{H}^{\varphi}$ par l'antidiagonale de
+$\mathfrak{z}(N)$ — est le $G$ cherché : c'est l'action de
+$H^2(H, \mathfrak{z}(N))$ sur les extensions de lien fixé de la page 17.
+
+Comme $G$ est un revêtement de $H$, $\pi_i(G) \simeq \pi_i(H)$ pour $i
+\geqslant 2$ et $\pi_1(G) = \operatorname{Ker}(\pi_1 H \to N)$, où le bord
+$\pi_1(H) = \pi \to N$ est $\varphi$ suivi de $\mathfrak{z}(N) \subset N$.
+Donc $\pi_0 G$ est extension de $\mathfrak{G}$ par
+$\operatorname{Coker}(\varphi)$, et plus précisément
+\[
+  \pi_0(G) \simeq \operatorname{Coker}(\pi \to \widetilde{G}_0) =
+  \widetilde{G}_0 / \varphi(\pi) ,
+\]
+$\varphi(\pi)$ étant distingué dans $\widetilde{G}_0$ par
+équivariance.\footnote{La page écrit $G_0$ pour $\widetilde{G}_0$ dans cette
+formule et dans la définition de $G_!$.} C'est la réponse à la question de
+la page 13 pour un tel $G$.
+
+\pagerange{20}{21}
+\section*{(B$'$) Sans l'hypothèse $\alpha$) (pages 20 et 21)}
+
+Supposons seulement $\beta$) et $\gamma$) : $\pi$, $N$, $\mathfrak{G}$
+discrets, $\pi \subset \widetilde{H}_0$, mais $\widetilde{H}_0$ pas
+nécessairement connexe ni simplement connexe.\footnote{La page écrit
+« $\pi, N, H$ discrets », le $H$ appuyé ; la condition $\gamma$) de la page
+19 porte sur $\mathfrak{G}$, et c'est ce qu'on lit.} Ce cas compte, parce que
+c'est celui qu'on obtient par changement de base, au paragraphe (C). $N$ étant
+discret, on a encore $\pi_i(G) \simeq \pi_i(H)$ pour $i \geqslant 2$, et
+\[
+  \pi_1(G) = \operatorname{Ker}\bigl(\pi_1(H) \to N\bigr) ,
+\]
+où le bord se factorise par $\pi_1(H) \xrightarrow{\partial} \pi_0(\pi) = \pi
+\xrightarrow{\varphi} \mathfrak{z}(N) \subset N$, $\partial$ étant le bord de
+la suite d'homotopie de $1 \to \pi \to \widetilde{H} \to H \to 1$. La suite
+$\pi_1 H \to N \to \pi_0 G \to \pi_0 H \to 1$ fait de $\pi_0 G$ une extension
+de $\pi_0 H$ par $\operatorname{Coker}(\varphi \partial)$.
+
+L'image de $\partial$ est $\pi \cap \widetilde{H}^0$ (suite exacte
+$\pi_1(H) \to \pi \to \pi_0(\widetilde{H})$). L'extension
+$\widetilde{G}_0$ de $\mathfrak{G}$ par $N$ est encore définie, puisque
+$\pi \subset \widetilde{H}_0$ ; par $\pi_0 H \to \mathfrak{G}$ elle donne
+une extension $G_1 = \pi_0 H \times_{\mathfrak{G}} \widetilde{G}_0$ de
+$\pi_0 H$ par $N$. La page affirme ensuite $\pi_0 G \simeq
+\operatorname{Coker}(\pi_1 H \to G_1)$, et marque la phrase en marge d'un mot
+lu « faux », suivi d'une croix. Ce qui tient est ceci :
+
+\textbf{Proposition (lecture, page 21).} \emph{Le morphisme $G \to
+\widetilde{G}_0/\varphi(\pi)$ induit une suite exacte
+\[
+  1 \longrightarrow \varphi(\pi) / \varphi(\pi \cap \widetilde{H}^0)
+  \longrightarrow \pi_0 G \longrightarrow G_1 / \varphi(\pi)
+  \longrightarrow 1 .
+\]
+En particulier $\pi_0 G \simeq G_1 / \varphi(\pi)$ si et seulement si
+$\varphi(\pi) = \varphi(\pi \cap \widetilde{H}^0)$, ce qui a lieu sous
+$\alpha$).}
+
+En effet, $G = \widetilde{G}/\pi$ et $\widetilde{G} \to \widetilde{G}_0$
+envoie $\pi$ sur $\varphi(\pi)$ ; d'où $G \to \widetilde{G}_0/\varphi(\pi)$,
+compatible à $G \to H \to \mathfrak{G}$, qui se factorise par $\pi_0 G$ et
+donne $\pi_0 G \to \pi_0 H \times_{\mathfrak{G}}
+(\widetilde{G}_0/\varphi(\pi)) = G_1/\varphi(\pi)$, surjectif ; et les
+noyaux sur $\pi_0 H$ sont $N/\varphi(\pi \cap \widetilde{H}^0)$ et
+$N/\varphi(\pi)$.\footnote{Cette proposition est nôtre : elle remplace
+l'affirmation barrée en marge, qui n'est exacte que dans le cas où le noyau
+est trivial. Elle a la même forme que la suite exacte de la page 15, et pour
+la même raison : le quotient par l'image du $\pi_1$ de la base ne voit pas
+tout $\pi$.}
+
+\pagerange{22}{23}
+\section*{(C) Le changement de base (pages 22 et 23)}
+
+Plaçons-nous sous les données (A), et soit $u : H' \to H$ un morphisme de
+groupes topologiques. Par image inverse on obtient $\widetilde{H}' =
+\widetilde{H} \times_H H'$, extension $(b')$ de $H'$ par le même $\pi$ ; on
+note $\widetilde{H}'_0$ l'image inverse de $\widetilde{H}_0$ et
+$\mathfrak{G}' = \widetilde{H}'/\widetilde{H}'_0$, qui s'injecte dans
+$\mathfrak{G}$ ; c'est la suite $(a')$.\footnote{La page étiquette « (c) » la
+ligne du bas, là où l'appariement avec (a$'$) ferait attendre « (a) ».}
+L'extension $G' = G \times_H H'$ hérite d'une trivialisation stricte sur
+$\widetilde{H}'_0$, image inverse de celle de $G$ sur $\widetilde{H}_0$. Par
+(A), $G'$ est donc déterminée par
+\begin{itemize}
+\item[1°)] une extension $\widetilde{G}'_0$ de $\mathfrak{G}'$ par $N$ ;
+\item[2°)] un morphisme $\varphi' : \pi \to \widetilde{G}'_0$ centralisant
+$N$ et relevant $\pi \to \mathfrak{G}'$ — donc, si $\pi \subset
+\widetilde{H}'_0$, un morphisme $\pi \to \mathfrak{z}(N)$.\footnote{Dans la
+suite exacte de 1°), l'objet du milieu porte deux accents, là où le texte
+n'en porte qu'un.}
+\end{itemize}
+
+\textbf{Proposition (page 23).} \emph{$\widetilde{G}'_0$ est l'image inverse
+de $\widetilde{G}_0$ par $\mathfrak{G}' \hookrightarrow \mathfrak{G}$ (c'est
+donc un sous-groupe de $\widetilde{G}_0$), et $\varphi'$ est induit par
+$\varphi$ ; si $\pi \subset \widetilde{H}_0$, $\varphi' = \varphi$ comme
+morphisme $\pi \to \mathfrak{z}(N)$.}
+
+En effet $\widetilde{G}' = \widetilde{H}' \times_{\mathfrak{G}}
+\widetilde{G}_0$, et son quotient par $\widetilde{H}'_0$ est
+$\mathfrak{G}' \times_{\mathfrak{G}} \widetilde{G}_0$. Les conditions
+$\beta$) et $\gamma$) passent aux données $(a')$, $(b')$, $(c')$ — $\pi
+\subset \widetilde{H}'_0$ équivaut à $\pi \subset \widetilde{H}_0$ —, mais
+pas $\alpha$) : $\widetilde{H}'_0$ n'a aucune raison d'être connexe. D'où le
+paragraphe (B$'$). La phrase suivante, qui commençait à en tirer $\pi_0$, est
+barrée de quatre longs traits.\footnote{Elle se lit en partie : « Mais comme
+$\mathfrak{G}'$ est discret, il en est de même de $\mathfrak{G}'_0$, donc
+$G'_0 \dots$ comme un quotient de $\pi_0 \widetilde{G}'$ ».}
+
+\subsection*{Ce que les pièces donnent}
+
+Le dossier ne l'écrit pas, mais les pièces suffisent à répondre à la question
+de la page 13, sous $\alpha$), $\beta$), $\gamma$) pour $H$. Par (C),
+$G'$ correspond au couple $(\widetilde{G}_0 \times_{\mathfrak{G}}
+\mathfrak{G}', \varphi)$ ; par la proposition de la page 21 appliquée à
+$G'$, avec $G'_1 = \pi_0 H' \times_{\mathfrak{G}} \widetilde{G}_0$,
+\[
+  1 \longrightarrow \varphi(\pi) / \varphi(\pi \cap \widetilde{H}'^{\,0})
+  \longrightarrow \pi_0 G' \longrightarrow G'_1 / \varphi(\pi)
+  \longrightarrow 1 ,
+\]
+et $\pi \cap \widetilde{H}'^{\,0}$ est l'image de $\pi_1(H') \to \pi_1(H) =
+\pi$. Les données sont donc : l'extension $\widetilde{G}_0$ de $\mathfrak{G}$
+par $N$, le $\mathfrak{G}$-morphisme $\varphi$, et $u$ en degrés $0$ et $1$ —
+ce que la page 13 demandait. Le noyau de gauche est un quotient de
+$\operatorname{Coker} \pi_1(u)$, comme à la page 15.\footnote{Ce paragraphe
+est entièrement nôtre ; il assemble les propositions des pages 19, 21 et 23,
+et n'a pas d'équivalent sur les pages. Sur le sens qu'aurait cette théorie
+pour les groupes d'homéomorphismes des surfaces, dont le $\pi_0$ est un
+groupe de Teichmüller, les pages ne disent rien.}
+
+\pagerange{25}{31}
+\section*{Les tirés à part (pages 25 à 31)}
+
+Le dossier se termine par deux Notes imprimées d'Yves Ladegaillerie,
+« Classification topologique des plongements des 1-complexes compacts dans
+les surfaces », présentées par Henri Cartan aux \emph{Comptes rendus de
+l'Académie des sciences de Paris}, série A. Les pages 25 à 28 sont la seconde
+Note (t. 279, 22 juillet 1974, p. 129-132, §§ 7 à 13 : voisinages tubulaires
+et catégories TUB et TUBO, 1-complexes circularisés, cocircularisations,
+classification des plongements, plongements minimaux et genre de $K$) ; les
+pages 29 à 31 la première (t. 278, 27 mai 1974, p. 1401-1403, §§ 1 à 5 :
+catégorie des 1-complexes à isotopie près, préliminaires, voisinage tubulaire
+d'un 1-complexe circularisé et d'un plongement, théorème de classification).
+Elles sont rangées dans l'ordre inverse de leur parution. On n'y trouve rien
+de sa main.\footnote{Ce sont des textes d'un autre auteur ; on se borne à
+les identifier, comme la transcription. Un croquis au crayon au bas de la
+page 28, sans rapport avec les mathématiques, n'est pas attribuable.} Le
+vocabulaire des pages 10 et 18 — complexes circularisés, voisinages
+tubulaires orientés, circuits — est celui de ces Notes ; les pages
+manuscrites ne disent pas si elles les précèdent ou les suivent.
+
+\end{document}

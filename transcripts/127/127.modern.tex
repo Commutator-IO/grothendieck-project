@@ -1,0 +1,924 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 127
+% (pages 1-23, the whole folder).
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried moves into a
+% footnote. It is held to being mathematically correct as it stands; where the
+% manuscript is loose or mistaken, the true statement is what appears here and
+% the footnote says what the page has. In any dispute of substance the
+% transcription governs: whoever cites Grothendieck must cite batch-01.fr.tex
+% (pp. 1-20) or batch-02.fr.tex (pp. 21-23).
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-03 — first pass, unchecked against the pages by a human.
+% The folder was read whole, its two batches together; this is one document
+% for the shelfmark. It was made on Opus 5.5 and has not been measured against
+% the reference reading of folder 115 (made on Opus 5). The EGA references
+% are the page's own where the footnotes say so; those we add are cited from
+% memory and were not checked against the sources.
+%
+% Scope. Page 1 and page 21 are covers in his hand whose words head sections
+% here. Page 8 is a typed leaf of the EGA IV typescript (n° 21.10) carrying
+% his ink corrections: published text, identified and not restated. Page 16 is
+% in another hand: a fair copy of Th. 1.4 (« Lemme 1.4' »); it is used only
+% as far as the transcription's note describes it (RIGHTS.md). Much of the
+% connective prose of pp. 3-4, 7, 9 and 13 is illegible in the transcription;
+% the reading gives what carries and says where it reconstructs.
+%
+% Spine. Two runs under two covers, plus scratch.
+%   pp. 1-6, 14-16, 18-19  cover « Application de la descente non plate » ;
+%       § 1 « Platitude d'une adhérence schématique »: problem 1.1 (flat
+%       quotient G of F extending G_U, U universally G-dense rel. Y), 1.2
+%       (fpqc-local), 1.3 (non-flat descent over an artinian base along an
+%       epimorphism), Th. 1.4 (conditions (a) density, (b) solutions over a
+%       separating family Y_i -> Spec Ô_{Y,y}, (c) finiteness), proof outline
+%       (p. 4), Cor. 1.5 (struck), 1.6-1.7 (valuative criterion). Pencil
+%       drafts pp. 14-15, 18-19 (Remarques 1.4.2-1.4.3, « Vrai théorème »,
+%       Chevalley-type finite subfamily, p. 19).
+%   pp. 7, 9, 10, 12  Th. 1.8: Hironaka's lemma -> openness of the locus
+%       where X -> Y is flat with geometrically normal fibres; proof sketch
+%       reducing flatness to the valuative criterion of § 1.
+%   p. 8   typed EGA IV leaf.
+%   pp. 11, 13, 17, 20  the site of finite schemes; quasi-coherence and its
+%       failure for kernels; « faisceaux formels »; the Milnor lim^1 sequence.
+%   pp. 21-23  cover « Foncteurs sur morphismes non ramifiés, étales … »:
+%       Lemma (sheaf for effective epis + reduction-injective => exact for
+%       all epis), Corollary (surjective => injective), Proposition on
+%       abelian subschemes; struck Corollary breaks off.
+%
+% Notation fixed for the document: Y the base throughout (the page writes S
+% at pp. 2 and 15, and from p. 11 on S is a different base; kept apart);
+% i : U -> X; G := Im(F -> i_* G_U); « solution » = solution of Pb 1.1;
+% T = closure of a point x' of Ass; C the site of finite schemes (p. 11, 13,
+% 17) and C the category of finite S-schemes (p. 22) are both his round C
+% and are said apart where they meet.
+%
+% Substantive departures, each footnoted where it occurs:
+%  p. 2   « univ. injectif rel/Y » read as: injective after every base change
+%         Y' -> Y (EGA IV 11.10 vocabulary, ours); U retrocompact needed for
+%         i_* quasi-coherent (the page's pencil addition, uncertain reading).
+%  p. 3   (a) restated in the density form T_y cap U dense in T_y; the
+%         equivalence with the page's specialisation form is ours.
+%  p. 4   proof given as an outline; the link (b) + 1.3 => solutions over
+%         every Spec(Ô/m^n), via a finite subfamily (p. 19), is ours.
+%  p. 5   Cor. 1.5 struck on the page; reported, not asserted.
+%  p. 14  M -> N with M_alpha ≅ N_alpha: the page concludes only at primes
+%         not containing J; over a J-adically complete A, M -> N is an iso.
+%  p. 17  exponent of lim^1 is q-1 (the page reads q).
+%  p. 20  lim^(p) = 0 for p >= 2 needs a countable index (supplied).
+%  p. 22  the missing injectivity of F(X' x_Y X') -> F(X x_Y X) supplied
+%         from p. 23's corollary (ours); the factorisation into effective
+%         epimorphisms is assumed by the page, not proved.
+%  p. 23  S' finite over S supplied; « abélien » a doubtful reading.
+%
+% Announced and never established: Lemma 1.3 (no proof); the proof of 1.4
+% (p. 4 largely illegible); 1.5-1.7 (no proofs); the « Vrai théorème »
+% (p. 15); Th. 1.8 beyond the sketch; the « Lemme à dégager » (p. 9); the
+% comparison H^*(C_/delta, F) ≅ H^*(Ẑ, F) (p. 13, marked « à vérifier »);
+% « Dans le cas qui nous occupe » (p. 20, stops); the factorisation of
+% epimorphisms (p. 22); the struck Corollary of p. 23.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{127}
+\pages{1}{23}
+\dating{s.d. — le groupe « Descentes » (126 à 133) est daté [avant 1970]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Descente non plate : notes manuscrites (s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Ces vingt-trois feuillets cherchent à quelle condition une famille d'objets
+géométriques qui « varie bien » sur une partie de l'espace continue à varier
+bien quand on la prolonge à tout l'espace.
+
+Le cadre est celui d'une famille d'espaces $X$ paramétrée par une base $Y$,
+et d'un faisceau de modules $F$ sur $X$. Sur un ouvert $U$ de $X$, on s'est
+donné un quotient de $F$ qui est \emph{plat} sur $Y$ : en termes imagés, ses
+fibres au-dessus des points de la base forment une famille sans sauts, où rien
+n'apparaît ni ne disparaît brusquement quand le paramètre bouge. Le
+problème est de prolonger ce quotient à tout $X$ en gardant la platitude, et
+de façon que ce qui se passe hors de $U$ soit entièrement commandé par ce qui
+se passe sur $U$. Une analogie aide : une suite de courbes du plan qui
+converge ; la courbe limite est imposée, c'est l'« adhérence », et la seule
+question est de savoir si elle a le même degré que les autres, ou si elle a
+ramassé en route un morceau parasite. Il n'y a qu'un candidat ; tout est de
+savoir s'il convient.
+
+L'idée de Grothendieck est de juger le candidat sur des bases très petites.
+On ne peut pas tester la platitude point par point, mais on peut la tester
+après des changements de base vers des espaces minuscules : des épaisseurs
+infinitésimales d'un point (les schémas artiniens) et des germes de courbes
+lisses (les « traits »). Le titre du dossier dit l'outil : la \emph{descente
+non plate}. La descente ordinaire permet de redescendre une construction faite
+sur un revêtement fidèlement plat ; ici les morphismes le long desquels on
+redescend ne sont pas plats, seulement des épimorphismes, et le prix à payer
+est de ne redescendre que des quotients plats d'un faisceau déjà donné. Le
+théorème central (pages 3 et 4), sous la forme qu'un brouillon de la page 15
+appelle le « vrai théorème », dit en substance : sous des hypothèses de
+finitude et de régularité des complétions, le prolongement existe si et
+seulement s'il existe après tout changement de base vers une épaisseur de
+point ou vers un trait. Le dossier n'en écrit pas de preuve complète. C'est le modèle de ce qu'on appelle le critère
+valuatif de platitude.
+
+La deuxième partie applique ce critère à un résultat de géométrie classique,
+le lemme de Hironaka : si une famille de variétés normales dégénère en une
+fibre dont la partie réduite est encore normale, sans multiplicité aux points
+génériques, alors la fibre est elle-même normale et la famille est plate près
+d'elle. Le dossier en tire un énoncé d'ouverture (page 7, remise au net
+page 10), et en esquisse la preuve : on se ramène à un trait, et la platitude
+vient de la première partie.
+
+Viennent ensuite des pages plus détachées : un site formé des schémas finis
+sur un corps, où l'on voit qu'un noyau n'est pas quasi-cohérent faute de
+platitude ; des « faisceaux formels » et la suite exacte qui mesure ce qu'on
+perd en passant à la limite projective ; enfin, sous une seconde chemise, un
+lemme de descente pour des foncteurs sur les schémas finis, qui fait passer
+la condition de faisceau des épimorphismes effectifs à tous les
+épimorphismes, et son application aux sous-schémas abéliens. C'est, en
+germe, l'outil dont la première partie a besoin.
+
+Un feuillet dactylographié d'EGA IV, corrigé à la main, s'est glissé au
+milieu ; une page d'une autre main met au net le théorème central. Rien ne
+date ces feuilles ; l'inventaire range le groupe avant 1970. Pour aller plus
+loin : adhérence schématique, densité schématique universelle (EGA IV, §
+11.10), critère valuatif de platitude, lemme de Hironaka, fibres formelles,
+épimorphismes effectifs.
+
+\keywords{schematic closure, flatness, non-flat descent, universally schematically dense open, valuative criterion of flatness, artinian base change, formal fibres, henselization, Chevalley's lemma, Hironaka's lemma, normal morphism, universally open morphism, site of finite schemes, quasi-coherent sheaf, formal sheaf, Milnor exact sequence, derived inverse limit, effective epimorphism, rigidity of abelian schemes}
+\end{resume}
+
+\pagerange{1}{23}
+\section*{Le fil du dossier, et les conventions}
+
+\subsection*{Les stations}
+
+Le dossier a deux chemises de sa main, pages 1 et 21, et se lit en cinq
+suites.
+
+\begin{enumerate}
+  \item \emph{Pages 1 à 6, avec les brouillons des pages 14, 15, 18 et 19.}
+  La chemise « Application de la descente non plate : platitude d'une
+  adhérence schématique, et lemme de Hironaka », puis le § 1 : le problème
+  1.1, sa nature locale (1.2), la descente non plate sur une base artinienne
+  (1.3), le théorème 1.4 et l'esquisse de sa preuve, les corollaires 1.5 à
+  1.7. La page 16, d'une autre main, met au net l'énoncé 1.4.
+  \item \emph{Pages 7, 9, 10 et 12.} Le théorème 1.8, application du lemme de
+  Hironaka, sa démonstration esquissée, une remise au net de l'énoncé
+  (page 10) et la suite de la preuve (page 12).
+  \item \emph{Page 8.} Un feuillet du tapuscrit d'EGA IV, sans rapport avec
+  le reste.
+  \item \emph{Pages 11, 13, 17 et 20.} Le site des schémas finis,
+  quasi-cohérence, faisceaux formels, suite exacte de $\varprojlim^{1}$.
+  \item \emph{Pages 21 à 23.} La chemise « Foncteurs sur morphismes non
+  ramifiés, étales … », un lemme de descente pour les foncteurs sur les
+  schémas finis, son corollaire, et le cas des sous-schémas abéliens.
+\end{enumerate}
+
+Le lien entre la première et la dernière suite est de nous, mais il est
+étroit : le lemme 1.3 redescend un objet le long d'un épimorphisme non plat
+de schémas artiniens, et le lemme de la page 22 dit exactement quand un
+foncteur sur les schémas finis vérifie la condition de faisceau pour
+\emph{tous} les épimorphismes. Le dossier ne relie pas lui-même les deux.
+
+\subsection*{Les conventions}
+
+\begin{itemize}
+  \item La base s'appelle $Y$ dans toute la première partie ; les pages 2 et
+  15 écrivent aussi $S$ pour elle\footnote{À la page 2, « univ.\ injectif
+  rel/$S$ » et « de prés.\ finie sur $S$ » ; à la page 15, les changements de
+  base $S' \to S$. Rien ne distingue là $S$ de $Y$.}. À partir de la page
+  11, $S$ est une autre base (le spectre d'un corps, puis un préschéma
+  localement noethérien).
+  \item $f \colon X \to Y$, $U \subset X$ ouvert, $i \colon U \to X$
+  l'inclusion ; pour un point $y \in Y$, $X_y$, $U_y$ sont les fibres. Pour
+  un module $G$, $G_y$ est sa restriction à la fibre $X_y$ et
+  $\mathrm{Ass}\, G_y$ l'ensemble de ses points associés.
+  \item On note toujours $G := \mathrm{Im}\bigl(F \to i_*(G_U)\bigr)$ le
+  candidat du problème 1.1, et l'on appelle \emph{solution} une solution de
+  ce problème.
+  \item Un \emph{trait} est le spectre d'un anneau de valuation discrète.
+  \item Les deux catégories que la page note $\mathcal{C}$ sont distinctes :
+  à la page 11, un site de schémas finis sur un corps ; à la page 22, la
+  catégorie des préschémas finis sur une base $S$ localement noethérienne.
+\end{itemize}
+
+\subsection*{Ce que le dossier annonce et n'établit pas}
+
+Le lemme 1.3 n'a pas de démonstration ; celle du théorème 1.4 n'est lisible
+qu'en partie ; les corollaires 1.5 à 1.7 et le « Vrai théorème » de la page
+15 sont énoncés sans preuve ; le théorème 1.8 n'est démontré qu'en esquisse,
+avec un « Lemme à dégager » jamais dégagé ; la comparaison cohomologique de
+la page 13 est marquée « à vérifier » ; la page 20 s'arrête sur « Dans le cas
+qui nous occupe, il vient : » ; le corollaire biffé de la page 23 s'arrête
+sur son énoncé.
+
+\pagerange{1}{2}
+\section*{I. Platitude d'une adhérence schématique}
+
+La chemise porte, soulignés, les mots « Application de la descente non
+plate : platitude d'une adhérence schématique, et lemme de
+Hironaka »\footnote{Page 1, feuillet de garde ; le mot lu « lemme » est
+repassé ou surchargé.}. Ce que la page 2 ouvre est le § 1, que la page
+intitule « Platitude d'une adhérence schématique ».
+
+\subsection*{Le problème 1.1 (page 2)}
+
+Soient $f \colon X \to Y$ un morphisme de schémas, $U$ un ouvert
+rétrocompact de $X$\footnote{« rétrocompact » est ajouté au crayon, encerclé,
+et sa lecture est peu sûre. L'hypothèse est nécessaire : elle rend
+$i \colon U \to X$ quasi-compact, donc $i_*$ conserve la quasi-cohérence, et
+c'est ce qui fait de $G$ ci-dessous un module quasi-cohérent.}, $F$ un
+$\mathcal{O}_X$-module quasi-cohérent et $G_U$ un quotient quasi-cohérent de
+$F|_U$, \emph{plat} sur $Y$.
+
+\emph{Problème.} Trouver un quotient quasi-cohérent $G$ de $F$ qui prolonge
+$G_U$, qui soit plat sur $Y$, et tel que le morphisme $G \to i_*(G_U)$ soit
+\emph{universellement injectif relativement à $Y$} : pour tout changement de
+base $Y' \to Y$, de notations $X' = X \times_Y Y'$, $U' = U \times_Y Y'$,
+$i' \colon U' \to X'$, le morphisme $G_{Y'} \to i'_*(G_{U'})$ est
+injectif\footnote{La page écrit « univ.\ injectif rel/$S$ » et, au-dessus,
+« [$G \to i_*(G_U)$ » ; la formulation par changement de base est la nôtre.
+Dans le vocabulaire d'EGA IV, § 11.10, elle dit que $U$ est
+\emph{universellement $G$-schématiquement dense relativement à $Y$}.}.
+
+\emph{Unicité.} Si le problème a une solution, c'est
+\[
+  G = \mathrm{Im}\bigl(F \to i_*(G_U)\bigr) ,
+\]
+puisque $F \to G$ est surjectif et $G \to i_*(G_U)$ injectif. La question est
+donc seulement de savoir si ce candidat est plat sur $Y$ et universellement
+injectif dans $i_*(G_U)$ : c'est la platitude d'une \emph{adhérence
+schématique}, d'où le titre.
+
+Une remarque entre crochets donne le critère commode\footnote{La page écrit
+« Il faux et suffit » (deux mots au crayon, peu sûrs) : nous lisons « il faut
+et il suffit ». L'énoncé exact que nous donnons est celui d'EGA IV,
+11.10.9--11.10.10, cité de mémoire ; la page n'y renvoie pas.} : si $f$ est
+localement de présentation finie et $G$ de présentation finie et plat sur
+$Y$, la condition d'injectivité universelle équivaut à
+\[
+  \mathrm{Ass}\, G_y \subset U_y \qquad \text{pour tout } y \in Y .
+\]
+Une note de marge, barrée et en partie illisible, envisage de se ramener à
+$X$ plat sur $Y$ et à $F$ de type fini\footnote{Note écrite en long dans la
+marge gauche, barrée de traits obliques, au début illisible.}.
+
+\subsection*{Nature locale (lemme 1.2)}
+
+Le problème est local sur $Y$ pour la topologie fpqc : il a une solution
+s'il en a une après un changement de base fidèlement plat et
+quasi-compact. Il en va de même de la variante où l'on demande en outre $G$
+localement de présentation finie. Plus généralement, on peut redescendre le
+long d'un morphisme fidèlement plat quasi-compact $X' \to X$\footnote{La marge
+renvoie à SGA 1, VIII (descente fidèlement plate). Justification, de nous :
+la formation de $i_*$ et celle d'une image commutent au changement de base
+plat (c'est encore la rétrocompacité de $U$ qui sert) ; la platitude sur $Y$
+et l'injectivité descendent par fidèle platitude, et les changements de base
+$Y'' \to Y$ préservent la fidèle platitude de $X' \to X$.}.
+
+\pagerange{2}{3}
+\subsection*{La descente non plate sur une base artinienne (lemme 1.3, pages 2 et 3)}
+
+La phrase qui introduit le lemme dit ce qu'est la descente non plate : la
+descente « des quotients \emph{plats} d'un faisceau déjà donné ».
+
+\emph{Lemme 1.3.} Supposons $Y = \mathrm{Spec}\, A$ artinien, et soit
+$Y' \to Y$ un épimorphisme de schémas tel que le problème ait une solution
+$G'$ après le changement de base $Y' \to Y$. Supposons de plus, ou bien
+$Y' \to Y$ fini, ou bien $f$ localement de présentation finie et $G'$ de
+présentation finie. Alors le problème a une solution sur $Y$ ; dans le second
+cas, elle est de présentation finie\footnote{L'énoncé est coupé au bas de la
+page 2 (« Suppo\ldots ») et repris en haut de la page 3. L'alternative des
+hypothèses vient d'une note au crayon de la page 2 (« Il faut supposer ici
+$Y' \to Y$ fini \ldots\ ou alors de prés.\ finie ») et du début de la page
+3. Le lemme n'est pas démontré dans le dossier.}.
+
+Le mot « épimorphisme » a ici toute sa force, et c'est ce qui rend
+l'énoncé non trivial : quand $Y$ est local artinien, un morphisme
+$Y' \to Y$ est un épimorphisme dès qu'il est surjectif et que
+$A \to \Gamma(Y', \mathcal{O}_{Y'})$ est injectif\footnote{Vérification de
+nous : deux morphismes $Y \rightrightarrows Z$ qui coïncident sur $Y'$
+coïncident sur le point de $Y$, donc tombent dans un même ouvert affine de
+$Z$, et sont alors déterminés par des homomorphismes d'anneaux à valeurs dans
+$A$, que l'injectivité sépare.}. Ainsi la réunion disjointe de deux copies
+de $\mathrm{Spec}\, k[\varepsilon]$, envoyées sur les deux axes de
+$\mathrm{Spec}\, k[x,y]/(x,y)^2$, est un épimorphisme qui n'est pas plat.
+
+\pagerange{3}{4}
+\section*{II. Le théorème 1.4 (pages 3 et 4)}
+
+\subsection*{L'énoncé}
+
+\emph{Théorème 1.4.} Supposons $X$ et $Y$ localement noethériens, $F$ et
+$G$ cohérents, et les anneaux locaux de $X$ aux points de $X - U$ à fibres
+formelles géométriquement normales\footnote{Le mot qui suit « géom. » est
+illisible à la page 3 ; la page 4 (« à fibres formelles géom.\ normales ») et
+le corollaire 1.5 le donnent. « en tout pt de $X - U$ » est une note encadrée
+de la marge. « Lemme » est biffé sous « Théorème », et « Néc.\ Suff. » est
+ajouté au crayon.}. On fait les hypothèses suivantes.
+
+\begin{itemize}
+  \item[(a)] \emph{Densité.} Pour toute spécialisation $y$ d'un point $y'$ de
+  $Y$, et tout point $x' \in \mathrm{Ass}\,(G_U)_{y'}$, d'adhérence
+  $T = \overline{\{x'\}}$, l'ouvert $T_y \cap U$ est dense dans
+  $T_y$\footnote{La page énonce (a) en termes de points : pour tout
+  $x \in X_y - U_y$ qui spécialise $x'$, il existe un point $x_1 \in U_y$ qui
+  spécialise $x'$ et généralise $x$. Les deux formes sont équivalentes (de
+  nous) : dans un espace noethérien, un point est dans l'adhérence d'un ouvert
+  de $T_y$ si et seulement s'il spécialise un point de cet ouvert. La forme par
+  densité est celle des pages 11, 14 et 16. Les ajouts en interligne qui
+  précisent les quantificateurs sont serrés et en partie superposés.}.
+  \item[(b)] \emph{Solutions formelles.} Pour tout $y \in Y$, il existe une
+  famille de morphismes locaux $Y_i \to \mathrm{Spec}\,
+  \widehat{\mathcal{O}}_{Y,y}$, les $Y_i$ noethériens locaux, après chacun
+  desquels le problème a une solution, et telle que
+  \[
+    \bigcap_i \mathrm{Ker}\bigl(\widehat{\mathcal{O}}_{Y,y} \to
+    \mathcal{O}_{Y_i, y_i}\bigr) = 0 .
+  \]
+  On peut prendre pour $Y_i$ les $\mathrm{Spec}\bigl(
+  \widehat{\mathcal{O}}_{Y,y} / \widehat{\mathfrak{m}}_y^{\,i+1}\bigr)$,
+  $i \in \mathbb{N}$, par le théorème d'intersection de Krull.
+  \item[(c)] \emph{Finitude.} Ou bien $f$ est localement de présentation
+  finie, ou bien les $Y_i \to \mathrm{Spec}\, \widehat{\mathcal{O}}_{Y,y}$
+  sont finis\footnote{La fin de (b) et le début de (c) sont très surchargés à
+  la page 3, qui semble écrire « $f$ loc.\ de t.\ finie » et « les $Y_i \to
+  Y'$ finis ». L'alternative que nous donnons est celle de la mise au net de la
+  page 16 et du lemme 1.3, auquel (c) sert à se ramener.}.
+\end{itemize}
+
+\emph{Alors} le problème a une solution, qui est un module cohérent plat sur
+$Y$.
+
+\emph{Nécessité.} Si $f$ est localement de type fini, (a) et (b) sont
+nécessaires à l'existence d'une solution. Pour (b), c'est immédiat : une
+solution reste une solution après tout changement de base, c'est le sens du
+mot « universellement » dans 1.1. Pour (a), la page renvoie à EGA IV,
+12.1.1.5\footnote{Le renvoi « IV 12.1.1.5 » est net ; la phrase qui le suit
+est en grande partie illisible. Nous n'avons pas vérifié ce que dit ce numéro.
+Le raisonnement esquissé à la page 14 est le suivant : si $G$ est plat sur
+$Y$, un point maximal de $T_y$ est associé à $G_y$ (renvoi « EGA IV
+12.2 »), donc dans $U_y$ si $G$ est une solution.}.
+
+\subsection*{La démonstration (pages 3 et 4)}
+
+La page 4 est en grande partie illisible ; voici l'ossature qui
+porte\footnote{La reconstruction des liaisons est de nous ; les étapes et les
+formules sont celles des pages 3 et 4, et la page 19 reprend la réduction par
+la descente fpqc, l'hensélisé et le complété.}.
+
+\begin{enumerate}
+  \item \emph{Localisation.} On se localise en un point maximal $x$ de
+  l'ensemble des points de $X_y - U_y$ ($y = f(x)$) qui sont dans
+  $\mathrm{Ass}\, G_y$. On peut alors supposer $X$ local de point fermé $x$, et
+  $U = X - \{x\}$.
+  \item \emph{Hensélisation.} Par descente fidèlement plate (lemme 1.2), on
+  peut supposer $X$ local hensélien ; les hypothèses se conservent, notamment
+  celle sur les fibres formelles, qui est stable par hensélisation.
+  \item \emph{Complétion.} Soit $B = \mathcal{O}_{X,x}$. Le morphisme
+  $\mathrm{Spec}\, \widehat{B} \to \mathrm{Spec}\, B$ est fidèlement plat, et
+  ses fibres sont géométriquement intègres\footnote{C'est ici que sert
+  l'hypothèse sur les fibres formelles : pour un anneau local hensélien à fibres
+  formelles géométriquement normales, les fibres formelles sont
+  géométriquement intègres (EGA IV, § 18.9, cité de mémoire). La page dit
+  « fibres (géom.) intègres », « (géom.) » ajouté.}. Les cycles associés
+  $Z'_\alpha$ de $G' = G \otimes_B \widehat{B}$ sont donc exactement les
+  images réciproques des cycles $Z_\alpha$ de $G$, et la condition (a), qui
+  dit $Z_\alpha \cap U \neq \emptyset$ là où il faut, passe de $(X, G, U)$ à
+  $(X', G', U')$. La condition (b) se conserve aussi.
+  \item \emph{Passage à la limite.} Sur la base complète, les solutions sur
+  les $Y_n$ donnent, à la limite, un module quotient $H$ de $G$, plat sur $Y$,
+  et tel que $G \to H$ soit injectif sur $U$ ; comme $G \to i_*(G_U)$ est
+  injectif, $G \to H$ est un isomorphisme, donc $G$ est plat, et $x \notin
+  \mathrm{Ass}\, G_y$.
+\end{enumerate}
+
+Le rôle exact de (b) et (c) dans l'étape 4 n'est pas lisible à la page 4. Les
+pages 14 et 19 permettent de le reconstituer, et nous le faisons ci-dessous.
+
+\pagerange{14}{15}
+\section*{III. Les brouillons du théorème 1.4 (pages 14, 15, 16, 18 et 19)}
+
+\subsection*{Deux lemmes d'algèbre locale (page 14)}
+
+La page 14 est une page de notes au crayon. Deux énoncés s'y lisent.
+
+D'abord, pour $A$ noethérien complet pour la topologie $\mathfrak{J}$-adique,
+$A = \varprojlim A/\mathfrak{J}^{\alpha+1}$, et $M \to N$ un morphisme de
+$A$-modules de type fini qui induit des isomorphismes
+$M_\alpha = M/\mathfrak{J}^{\alpha+1} M \simeq N_\alpha$ pour tout $\alpha$ :
+alors $M_{\mathfrak{p}} \simeq N_{\mathfrak{p}}$ pour tout premier
+$\mathfrak{p}$ ne contenant pas $\mathfrak{J}$. C'est vrai, et même faible :
+$M$ et $N$ étant séparés et complets, $M \to N$ est un
+isomorphisme\footnote{La conclusion de la page est la version localisée ; la
+remarque qu'on a l'isomorphisme global est de nous. Une parenthèse peu lisible
+sous la conclusion mentionne $\widehat{M}_{\mathfrak{p}}$.}.
+
+Ensuite, la nécessité de (a) et un contre-exemple. La page raisonne ainsi : si $G$ est une solution, $x_\alpha \in
+\mathrm{Ass}\, G_U$ et $T_\alpha = \overline{\{x_\alpha\}}$, un point maximal
+$x'$ de $(T_\alpha)_{y'}$ est associé à $G_{y'}$ (« EGA IV 12.2 »), donc dans
+$U_{y'}$. Le contre-exemple montre ce qui arrive quand (a) manque : $X \to Y$
+birationnel dont une fibre se relève en une composante verticale, $G =
+\mathcal{O}_X$ ; la fibre de $T = X$ y est de dimension $1$ au lieu de
+$0$\footnote{Avec un croquis : une courbe $X$ au-dessus d'une droite $Y$.
+La première ligne du contre-exemple, « (l'ouvert i-fini est $\simeq$) », est
+une lecture peu sûre.}.
+
+\subsection*{Les remarques et le « Vrai théorème » (page 15)}
+
+\begin{itemize}
+  \item \emph{1.4.2, remarque 1.} Les conditions (b) et (c) de 1.4 équivalent
+  à : le problème a une solution après tout changement de base $Y' \to Y$ avec
+  $Y'$ artinien.
+  \item \emph{1.4.3, remarque 2.} La condition (a) résulte de l'existence
+  d'une solution après tout changement de base $Y' \to Y$ avec $Y'$ un trait.
+\end{itemize}
+
+D'où ce que la page appelle le \emph{Vrai théorème}, et, en marge, l'«
+Énoncé final » : sous les hypothèses préliminaires de 1.4, le problème a une
+solution si et seulement s'il en a une après tout changement de base
+$Y' \to Y$ avec $Y'$ artinien ou un trait.
+Le dossier ne le démontre pas\footnote{Une note encerclée, reliée à « trait »,
+porte « inutile si les $\mathcal{O}_{Y,y}$ réduits ». Il n'est pas clair
+qu'elle porte sur les traits plutôt que sur les bases artiniennes : le
+corollaire 1.6, qui suppose justement les $\mathcal{O}_{Y,y}$ réduits, ne garde
+que les traits. Nous ne tranchons pas.}.
+
+La seconde moitié de la page, barrée, commence la démonstration du
+corollaire 1.5 : par le vrai théorème, on se ramène au cas où la base est un
+trait ; si $x \in \mathrm{Ass}\, G_U$ est au-dessus du point générique $y'$ et
+$T = \overline{\{x\}}$ rencontre la fibre spéciale, les composantes de
+$T_y$ sont de dimension $\geqslant \dim T_{y'} = d$, donc sont des
+composantes de $X_y$.
+
+\pagerange{16}{16}
+\subsection*{La mise au net d'une autre main (page 16)}
+
+La page 16 n'est pas de la main de Grothendieck. Elle met au net l'énoncé
+1.4, sous le nom de « Lemme 1.4' », avec les notations de 1.1, $X$ et $Y$
+localement noethériens, $G$ cohérent, $Z$ l'espace sous-jacent à $X - U$ et
+$y \in f(Z)$. La condition sur les fibres formelles y devient une condition
+(d) aux points de $Z_y$ ; la condition (a) y est la forme par densité donnée
+plus haut, demandée aussi pour tout $X'$ étale sur $X$ ; (b) et (c) sont
+celles que nous avons écrites. Sa conclusion est locale en $y$ : $G$ est plat
+sur $Y$ en tout point de $X_y$, et $U_y$ contient $\mathrm{Ass}\, G_y$ ; si les
+conditions valent en tout point de $f(Z)$, le problème a une solution
+cohérente\footnote{Nous ne donnons de cette page que ce que la note de la
+transcription en dit. Aucune intervention de Grothendieck n'y est sûre.}.
+
+\pagerange{18}{19}
+\subsection*{L'ouvert universellement dense, et le rôle de (b) (pages 18 et 19)}
+
+La page 18 reprend la condition de 1.1 pour un sous-schéma fermé $Z$ de
+$X$, plat sur $Y$, et $Z_U = Z \cap U$ : $Z_U$ doit être universellement
+schématiquement dense dans $Z$ relativement à $Y$ ; si $Z$ est localement de
+présentation finie sur $Y$, ou si $Y$ et $Z$ sont noethériens, cela équivaut à
+$\mathrm{Ass}\, Z_y \subset U$ pour tout $y$, avec un renvoi à « EGA IV
+11.12\,? »\footnote{Le mot lu « univoque » devant « condition » est peu sûr. Le
+point d'interrogation après le renvoi est de la page. L'équivalence est celle
+que nous avons citée pour 1.1.}.
+
+La page 19 donne la clef de l'étape 4 de la démonstration de 1.4. Posons
+$A = \widehat{\mathcal{O}}_{Y,y}$. Pour tout $n$, il existe une partie
+\emph{finie} $J$ de l'ensemble d'indices telle que
+\[
+  \mathfrak{A}_n := \mathrm{Ker}\Bigl(A \to \prod_{\alpha \in J}
+  \mathcal{O}_{Y_\alpha, y_\alpha}\Bigr) \subset \widehat{\mathfrak{m}}_y^{\,n} ,
+\]
+et l'on peut supposer les $Y_i$ artiniens. La page n'en dit pas plus ; voici
+comment ces deux faits s'enchaînent\footnote{L'enchaînement est de nous. Il
+n'utilise que des énoncés du dossier : la page 19, le lemme 1.3, la condition
+(c).}.
+
+\begin{itemize}
+  \item L'existence de $J$ est le lemme de Chevalley : $A$ est local
+  noethérien complet, donc linéairement compact, et une famille filtrante
+  décroissante d'idéaux fermés d'intersection nulle finit par entrer dans
+  chaque $\widehat{\mathfrak{m}}_y^{\,n}$.
+  \item On peut supposer les $Y_i$ artiniens en les remplaçant par leurs
+  tronqués $\mathrm{Spec}\bigl(\mathcal{O}_{Y_i}/\mathfrak{m}_i^{\,k}\bigr)$ :
+  l'intersection des noyaux reste nulle (Krull dans chaque
+  $\mathcal{O}_{Y_i}$), et la finitude de (c) se conserve.
+  \item Alors $A/\mathfrak{A}_n$ est artinien, et
+  $\coprod_{\alpha \in J} Y_\alpha \to \mathrm{Spec}(A/\mathfrak{A}_n)$ est
+  surjectif et injectif sur les fonctions : c'est un épimorphisme, après
+  lequel le problème a une solution. Le lemme 1.3, dont (c) fournit les
+  hypothèses, donne une solution sur $\mathrm{Spec}(A/\mathfrak{A}_n)$, donc
+  sur $\mathrm{Spec}(A/\widehat{\mathfrak{m}}_y^{\,n})$ par changement de base.
+\end{itemize}
+
+C'est la remarque 1.4.2 dans un sens : (b) et (c) donnent des solutions sur
+tous les voisinages infinitésimaux du point $y$, et l'étape 4 passe à la
+limite sur ceux-là. La page porte aussi des croquis de la réduction (les
+schémas $X \leftarrow X' \leftarrow X''$ au-dessus de $Y \leftarrow Y'
+\leftarrow Y''$, le premier morphisme fpqc) et six croquis de surfaces et de
+courbes qui ne sont pas reproduits\footnote{Sur la page, une double flèche
+entre $Y'$ et $Y''$ et une triple entre $Y''$ et $Y'''$ : c'est le début du
+complexe de descente.}.
+
+\pagerange{5}{6}
+\section*{IV. Les corollaires 1.5 à 1.7 (pages 5 et 6)}
+
+\emph{Corollaire 1.5.} Supposons $f$ localement de type fini, $F$ et $G$
+cohérents, et (a') les fibres $(G_U)_y$ vérifiant $(S_1)$ et équidimensionnelles
+d'une même dimension $d$ ; supposons $U_y$ dense dans $X_y$ pour tout $y$, et
+les anneaux locaux $\mathcal{O}_{X,x}$, $x \in X - U$, à fibres formelles
+géométriquement normales. Alors la condition (b) de 1.4 est nécessaire et
+suffisante pour l'existence d'une solution.
+
+Toute cette moitié de page est barrée d'une grande croix au
+crayon\footnote{Nous rapportons donc l'énoncé sans l'asserter. La page ajoute
+qu'il suffit que $\mathcal{O}_{Y,f(x)}$ ait des fibres formelles
+géométriquement normales : c'est une instance de la permanence des propriétés
+des fibres formelles par passage aux algèbres de type fini (EGA IV, § 7.4,
+cité de mémoire, sans vérification des hypothèses exactes). Une note de marge,
+encerclée et barrée, lit « S-M $G = X$ ? ».}. Son idée est claire : sous (a')
+la condition (a) devient automatique (c'est la fin de la page 15), et il ne
+reste que (b).
+
+\emph{Critère valuatif.}
+
+\emph{Corollaire 1.6.} Plaçons-nous sous les hypothèses préliminaires de 1.4,
+y compris celle sur les fibres formelles. Supposons de plus que, pour tout
+$x \in X - U$ et $y = f(x)$, l'anneau $\mathcal{O}_{Y,y}$ soit réduit, et que
+pour tout trait $Y'$ fini sur $\mathrm{Spec}\, \mathcal{O}_{Y,y}$ le problème
+ait une solution après le changement de base $Y' \to Y$. Alors le problème a
+une solution\footnote{Deux notes au crayon dans la marge : « 1.5\,? \ldots,
+mais sans hypothèse du type de 1.4 a) », et « Fait double emploi avec 1.7,
+sauf qu'on a fait d'hyp.\ « de type fini » ».}.
+
+\emph{Corollaire 1.7.} Soient $Y$ localement noethérien, $F$ et $G_U$
+cohérents. On suppose :
+\begin{itemize}
+  \item[a)] pour tout $x \in X - U$ et $y = f(x)$, $\mathcal{O}_{Y,y}$ est
+  réduit, à fibres formelles géométriquement normales (c'est le cas, par
+  exemple, s'il est essentiellement de type fini sur $\mathbb{Z}$)\footnote{La
+  parenthèse est en partie illisible (« cf.\ \ldots\ de type fini sur
+  $\mathrm{Spec}\, \mathbb{Z}$ »). L'exemple est exact : un anneau
+  essentiellement de type fini sur $\mathbb{Z}$ est excellent, ses fibres
+  formelles sont géométriquement régulières, a fortiori normales.} ;
+  \item[b)] pour un tel $y$ et tout trait $Y'$ fini sur
+  $\mathrm{Spec}\, \mathcal{O}_{Y,y}$, le problème a une solution après
+  $Y' \to Y$.
+\end{itemize}
+Alors le problème posé a une solution (page 6). La page écrit « Explicitez »
+après b), et une troisième condition c) est barrée.
+
+Une note de marge dit pourquoi le critère est maniable : dans la condition b),
+la platitude est automatique, et seule compte la question des points
+associés\footnote{« NB Dans cette condition b) l'hypothèse de platitude devient
+triviale, seule la question des $\mathrm{Ass}\, G'_{y'}$ \ldots\ est
+sérieuse ». C'est exact (de nous) : sur un trait, plat veut dire sans torsion ;
+or $G \subset i_*(G_U)$, et $i_*(G_U)$ est sans torsion puisque $G_U$
+l'est.}. C'est l'analogue, pour le problème 1.1, du critère valuatif de
+platitude d'EGA IV, § 11.8, cité de mémoire.
+
+La page 6 se termine sur : « Nous allons maintenant utiliser le \emph{lemme
+de Hironaka}. »
+
+\pagerange{7}{7}
+\section*{V. Le théorème 1.8 et le lemme de Hironaka (pages 7, 9, 10 et 12)}
+
+\subsection*{L'énoncé de la page 7}
+
+\emph{Théorème 1.8.} Soient $f \colon X \to Y$ localement de présentation
+finie, $x \in X$ et $y = f(x)$. On suppose :
+\begin{itemize}
+  \item[a)] $Y$ réduit en $y$ ;
+  \item[b)] $f$ universellement ouvert aux générisations maximales de $x$ dans
+  $X_y$ ;
+  \item[c)] pour toute générisation $y'$ de $y$ et toute générisation $x'$ de
+  $x$ dans $X_{y'}$, $\dim_{x'} X_{y'} = \dim_x X_y$ ;
+  \item[d)] $X_y$ réduit aux générisations maximales de $x$ dans $X_y$ ;
+  \item[e)] $(X_y)_{\mathrm{red}}$ géométriquement normal au voisinage de $x$.
+\end{itemize}
+Les conditions d) et e) équivalent à l'existence d'un voisinage ouvert $V$ de
+$x$ dans $X_y$ tel que $V \otimes_{k(y)} \overline{k(y)}$ soit réduit aux
+points génériques et que sa partie réduite soit normale.
+
+\emph{Alors} il existe un voisinage ouvert $U$ de $x$ tel que
+$U_{\mathrm{red}} \to Y$ soit normal, c'est-à-dire plat à fibres
+géométriquement normales\footnote{La conclusion de la page 7 est barrée et lue
+en partie seulement ; « normal » y est d'abord biffé. Nous donnons la
+conclusion de la remise au net de la page 10, qui dit « normal », i.e.\
+« \emph{plat} à fibres géom.\ normales ». Une note de marge propose de
+remplacer b) par « $f$ universellement ouvert au voisinage de $x$ », une autre
+remarque que, si $X$ et $Y$ sont localement noethériens, on doit pouvoir se
+passer de la présentation finie moyennant des hypothèses d'excellence.}.
+
+Un « Cor (2) », entièrement encadré de traits obliques, cherche des conditions
+équivalentes en posant $Y_0 = Y_{\mathrm{red}}$, $X_0 = X \times_Y Y_0$ :
+(i bis) $f$ universellement ouvert et équidimensionnel, à fibres
+géométriquement réduites et géométriquement normales ; (ii) un ouvert $V$ de
+$X_0$, dense dans chaque fibre, sur lequel $V \to Y_0$ est séparable, les
+$(X_{0,y})_{\mathrm{red}}$ géométriquement normaux ; (iiii bis) un
+sous-schéma $Z_0$ de $X_0$, localement de présentation finie sur $Y_0$, normal,
+coïncidant avec $X_0$ sur un ouvert schématiquement dense\footnote{La
+numérotation (i), (i bis), (ii), (iii), (iiii bis) est celle de la page ;
+(iii) et une partie de (iiii bis) sont illisibles. Ce corollaire est rapporté,
+non asserté.}.
+
+\pagerange{9}{9}
+\subsection*{La démonstration esquissée (page 9)}
+
+La page 8 est le feuillet d'EGA IV dont il est question plus bas ; la
+démonstration est à la page 9\footnote{La page 9 porte « 7 » dans sa
+numérotation, surchargeant un « 8 » : le feuillet dactylographié a été
+glissé là.}.
+
+\emph{Reformulation.} La conclusion (ii) du Cor (2) dit aussi : il existe un
+sous-schéma $U_0$ de $U$, de présentation finie sur $Y_0$, tel que $U_0 \to U$
+soit surjectif et $U_0 \to Y$ normal --- ce qui force $U_0$ réduit, donc
+$U_0 = U_{\mathrm{red}}$ --- et un ouvert $V$ de $U_0$, schématiquement dense
+relativement à $Y$, tel que $V \to X$ soit une immersion ouverte. Sous cette
+forme, les techniques de passage à la limite d'EGA IV ramènent au cas où $Y$
+est le spectre d'un anneau local essentiellement de type fini sur
+$\mathbb{Z}$\footnote{La lettre notée $U$ est une capitale surchargée, entre
+$U$ et $V$.}.
+
+\emph{Réduction à la fibre.} Par constructibilité, passage à la limite et le
+lemme de Hironaka, on se ramène à des hypothèses sur la fibre (EGA IV 16.1
+est cité pour la dimension). La condition c) donne que $f$ est universellement
+ouvert et équidimensionnel au voisinage de $x$. On peut supposer $X$ réduit,
+et il s'agit de prouver que $X \to Y$ est normal.
+
+\emph{L'ouvert séparable.} Soit $V$ l'ensemble des points où $f$ est plat à
+fibres géométriquement réduites (« séparable »). Il est ouvert (EGA IV, § 12),
+il contient les points de $X_y$ où $X_y$ est géométriquement réduit (EGA IV
+15.2.3, qui sert ici parce que $Y$ est réduit et $f$ universellement ouvert),
+et il est donc dense dans chaque fibre par d) et e). Le reste, au bas de la
+page, est encadré et barré, sauf deux mots : « (par morceaux\,!) \ldots\ c'est
+le cas de Hironaka, OK »\footnote{Deux lignes y sont écrites tête-bêche et ne
+sont pas lues. En marge : « Lemme à dégager », souligné deux fois ; « On peut
+procéder par récurrence sur $\dim Y$ », barré ; et, au crayon, « Le critère
+valuatif nous ramène au cas où $Y$ est le spectre d'un anneau de val.\
+discrète ».}.
+
+\pagerange{10}{10}
+\subsection*{La remise au net (page 10)}
+
+La page 10 récrit l'énoncé pour $f$ de type fini et $Y$ noethérien :
+$\mathcal{O}_{Y,y}$ et $\mathcal{O}_{X,x}$ réduits, $f$ universellement ouvert
+(« EGA IV 14, 15 »), les composantes irréductibles des fibres de même
+dimension $d$ au voisinage de $x$, $X_y$ réduit aux générisations maximales de
+$x$, $(X_y)_{\mathrm{red}}$ géométriquement normal sur $k(y)$ ; alors $x$ a un
+voisinage ouvert $U$ tel que $U \to Y$ soit plat à fibres géométriquement
+normales\footnote{La page écrit « voisinage ouvert $U$ de $X$ » pour « de
+$x$ ».}.
+
+La démonstration est donnée lorsque $\mathcal{O}_{Y,y}$ est excellent --- il
+suffit, précise la page, qu'il soit à fibres formelles géométriquement
+normales, ce qui est l'hypothèse du § 1. a) Les hypothèses restent vraies au
+voisinage de $x$ (renvoi « EGA IV 9 », avec un croquis de changement de base
+$Y' \to Y$). Puis : l'ensemble $V$ des points où $X/Y$ est plat à fibres
+séparables est ouvert (EGA IV, § 12), contient les points de $X_y$ où $X_y$ est
+réduit (EGA IV 15.2.3), donc est dense dans $X_y$, et l'on conclut par
+équidimensionnalité qu'il est dense dans chaque fibre près de $x$.
+
+\pagerange{12}{12}
+\subsection*{La fin de la preuve (page 12)}
+
+b) On suppose les hypothèses satisfaites en tout point de $X$. Soit $U$
+l'ouvert où $f$ est séparable : il est dense dans chaque fibre, et il reste à
+prouver que $X = U$ et que $X$ est plat sur $Y$, autrement dit que $X$ est
+l'adhérence schématique de $U$ et qu'elle est plate.
+
+\emph{Normalité des fibres.} On se ramène à prouver $X_y$ séparable sur
+$k(y)$. Soit $y'$ une générisation maximale de $y$, et un trait $Y' \to Y$
+reliant $y'$ à $y$. Après ce changement de base, la fibre spéciale de
+l'adhérence schématique de la fibre générique est réduite ; le lemme de
+Hironaka s'applique, elle est normale, donc $X_y$ aussi\footnote{Les indices
+$y'_0$ de la page sont peu sûrs, et la phrase « donc $\overline{(\ )}$ (adh.\
+sch.)\ $= X'_{y'_0}$ » est écrite serrée. Le lemme de Hironaka n'est pas énoncé
+dans le dossier ; sous sa forme usuelle (EGA IV 5.12.8, cité de mémoire), il
+dit qu'un schéma plat sur un trait, à fibre générique normale, dont la fibre
+spéciale est réduite à ses points génériques et de partie réduite normale, a
+une fibre spéciale normale.}.
+
+\emph{Platitude.} c) Pour prouver la platitude de $X/Y$, on applique le
+« critère valuatif de platitude d'une adhérence schématique », c'est-à-dire
+les corollaires 1.6 et 1.7 avec $F = \mathcal{O}_X$ et $G_U = \mathcal{O}_U$ :
+c'est là que la première partie du dossier sert. Le reste du feuillet est
+blanc.
+
+\pagerange{8}{8}
+\section*{VI. Un feuillet d'EGA IV (page 8)}
+
+La page 8 est une page dactylographiée du tapuscrit d'EGA IV, § 21 : la fin
+d'une démonstration, puis le n° 21.10, « Factorialité des anneaux locaux
+réguliers », et le début de la preuve du théorème 21.10.1 (un anneau local
+régulier est factoriel). Le texte est publié et n'est pas restitué ici. Sa
+main y ajoute, en marge, « Créditer Kaplansky de la démonstration ici », et
+au-dessus du théorème « (Auslander-Buchsbaum) » ; il corrige un renvoi
+(« (5.11.6) » devient « I 9.4.5 »), biffe une proposition et numérote une
+résolution (21.10.1.1). Le feuillet n'est pas un brouillon de ce dossier ; sa
+présence est compatible avec la datation du groupe, mais ne date
+rien\footnote{Le numéro de page dactylographié, IV-1131, est complété à la
+main et lu avec doute.}.
+
+\pagerange{11}{11}
+\section*{VII. Le site des schémas finis et les faisceaux formels (pages 11, 13, 17 et 20)}
+
+\subsection*{Quasi-cohérence sur les schémas finis (page 11)}
+
+Soient $k$ un corps algébriquement clos, $S = X = \mathrm{Spec}\, k$. La page
+fixe trois classes : $S_0$, les schémas étales de type fini sur $X$ ;
+$\mathfrak{S}$, les schémas de type fini sur $S$ ; $\mathfrak{M}$, les
+immersions ouvertes\footnote{La glose de $S_0$, lue « revêtements locaux »,
+est peu sûre ; les lettres $\mathfrak{S}$, $\mathfrak{M}$ sont des capitales de
+forme gothique.}.
+
+La catégorie $\mathcal{C}$ est celle des schémas finis sur $k$, avec la
+topologie de Zariski. Un schéma fini est réunion disjointe de spectres
+d'anneaux locaux artiniens, et ses recouvrements de Zariski sont ses
+décompositions en parties ouvertes et fermées ; un faisceau sur $\mathcal{C}$
+est donc un foncteur $\Lambda \mapsto F(\Lambda)$ sur les $k$-algèbres finies
+qui transforme produits finis en produits\footnote{La justification est de
+nous. La page ajoute, peu lisiblement, « \& connexes » : si l'on se borne aux
+schémas finis connexes, la condition de faisceau disparaît.}. Les faisceaux
+quasi-cohérents sur $\mathrm{Spec}\, \Lambda$ sont les
+$\Lambda' \mapsto M \otimes_\Lambda \Lambda'$, pour $M$ un $\Lambda$-module ;
+ceux de présentation finie correspondent aux $M$ de type fini.
+
+Mais le noyau d'un morphisme de faisceaux quasi-cohérents n'est pas
+quasi-cohérent. Pour $u \colon \mathcal{O}_\Lambda^{\,n} \to
+\mathcal{O}_\Lambda$ défini par $u_1, \ldots, u_n \in \Lambda$, le faisceau
+$\Lambda' \mapsto \mathrm{Ker}\bigl(u_{\Lambda'} \colon \Lambda'^{\,n} \to
+\Lambda'\bigr)$ n'est pas en général $\Lambda' \mapsto (\mathrm{Ker}\, u)
+\otimes_\Lambda \Lambda'$ : « manque de platitude ». Exemple, de nous :
+$\Lambda = k[\varepsilon]$, $n = 1$, $u = \varepsilon$ ; $\mathrm{Ker}\, u =
+\varepsilon \Lambda$, mais pour $\Lambda' = k$ le noyau de $u_k = 0$ est $k$
+tout entier, alors que $(\varepsilon\Lambda) \otimes_\Lambda k \to k$ est nul.
+
+Le bas de la page porte des croquis au crayon qui reprennent les pages 3 et 4
+(« $U \cap T_y$ dense dans $T_y$ »), sans rapport avec ce qui précède.
+
+\pagerange{13}{13}
+\subsection*{Faisceaux formels (pages 13 et 17)}
+
+Soit $\mathcal{O}$ le faisceau d'anneaux standard sur $\mathcal{C}$ et $F$ un
+$\mathcal{O}$-module quasi-cohérent. Alors $F$ induit sur chaque
+$\mathcal{M}_{/T}$ un faisceau quasi-cohérent, de façon cartésienne en l'objet
+variable $T_0 \to T$\footnote{Note de marge : « à vérifier ». Les petits $X$
+surmontant les flèches sont peu sûrs, et une grande partie du second
+paragraphe de la page 13 est illisible.}. On obtient ainsi un « faisceau
+formel » sur le complété formel $\widehat{Z}$ d'un schéma $Z$ le long de
+$X$, pour $\delta \colon X \to Z$, et l'on annonce
+\[
+  H^*(\mathcal{C}_{/\delta}, F) \simeq H^*(\widehat{Z}, F|_{\widehat{Z}}) ,
+\]
+le second membre étant calculé dans la catégorie des systèmes projectifs
+adiques sur $\widehat{Z}$. La page marque la formule « à vérifier » ; le dossier
+ne la vérifie pas.
+
+\pagerange{17}{17}
+\subsection*{Les groupes explicités (page 17)}
+
+La page 17 explicite ces groupes. Si $\delta$ est dans $\mathcal{N}$,
+c'est-à-dire $Z \in \mathrm{Ob}\, \mathfrak{S}$, la catégorie
+$\mathcal{C}_{/\delta}$ des carrés cartésiens au-dessus de $X \to Z$ est
+équivalente à $\mathcal{M}_{/Z}$ munie de la topologie induite, et l'on trouve,
+pour les voisinages infinitésimaux $X^{(i)}_n$ supposés dans $\mathfrak{S}$, la
+suite exacte
+\[
+  0 \to {\varprojlim_n}^{1} H^{q-1}(X^{(i)}_n, F) \to H^q(X^{(i)}, F) \to
+  \varprojlim_n H^q(X^{(i)}_n, F) \to 0
+\]
+(les groupes de droite étant pris pour la topologie de $\mathcal{M}$ sur
+$\mathcal{C}$)\footnote{L'exposant du premier terme se lit $q$ sur la page,
+dans une formule encadrée et surchargée ; c'est $q - 1$ qui est juste, et c'est
+ce qu'écrit la page 20.}.
+
+\pagerange{20}{20}
+\subsection*{La suite de Milnor (page 20)}
+
+La page 20 démontre cette suite dans un cadre général. Soient $S_0 \subset
+S_1 \subset \cdots$ et $S_\infty$ leur limite, $F$ un faisceau, et
+$C^{\cdot}(F)$ une résolution injective de $F$ ; ses restrictions sont des
+résolutions injectives des $F_{S_i}$, et
+\[
+  \Gamma\bigl(S_\infty, C^{\cdot}(F)\bigr) = \varprojlim_i
+  \Gamma\bigl(S_i, C^{\cdot}(F)\bigr) ,
+\]
+le système projectif étant strict, c'est-à-dire à flèches de transition
+surjectives. Il en résulte que $H^n(S_\infty, F) \to \varprojlim H^n(S_i, F)$
+est surjectif, et bijectif si le système des $H^{n-1}(S_i, F)$ vérifie la
+condition de Mittag-Leffler. En général, on a une suite spectrale
+$E_2^{pq} = {\varprojlim_i}^{(p)} H^q(S_i, F) \Rightarrow H^{p+q}(S_\infty,
+F)$, et comme ${\varprojlim}^{(p)} = 0$ pour $p \geqslant 2$, des suites exactes
+\[
+  0 \to {\varprojlim_i}^{1} H^{n-1}(S_i, F) \to H^n(S_\infty, F) \to
+  \varprojlim_i H^n(S_i, F) \to 0 .
+\]
+C'est la suite exacte de Milnor\footnote{L'annulation de
+${\varprojlim}^{(p)}$ pour $p \geqslant 2$ suppose le système indexé par
+$\mathbb{N}$, ou par un ensemble dénombrable ; la page ne le dit pas, mais ses
+indices sont des entiers. La page écrit $C^{\cdot}(F)_{S_\infty}$ et
+$C^{\cdot}(F)_{S_i}$ pour les restrictions ; le nom de Milnor n'y figure
+pas.}. La page s'arrête sur « Dans le cas qui nous occupe, il vient : ».
+
+\pagerange{21}{22}
+\section*{VIII. Foncteurs sur les schémas finis (pages 21 à 23)}
+
+La chemise de la page 21 porte « Foncteurs sur morphismes non ramifiés, étales
+\ldots »\footnote{Encre brune, en haut à droite d'un feuillet par ailleurs
+blanc. Un mot est biffé après « Morphismes » ; la note de marge de la page
+22, « Avec morphismes non ramifiés », appuie les lectures « non » et
+« ramifiés ».}.
+
+\subsection*{Le lemme (page 22)}
+
+\emph{Lemme.} Soient $S$ un préschéma localement noethérien, $\mathcal{C}$ la
+catégorie des préschémas finis sur $S$, et $F$ un foncteur contravariant de
+$\mathcal{C}$ dans les ensembles. On suppose :
+\begin{itemize}
+  \item[(i)] pour tout $X \in \mathrm{Ob}\, \mathcal{C}$, l'application
+  $F(X) \to F(X_{\mathrm{red}})$ est injective ;
+  \item[(ii)] pour tout épimorphisme \emph{effectif} $X \to Y$ de
+  $\mathcal{C}$, la suite $F(Y) \to F(X) \rightrightarrows F(X \times_Y X)$
+  est exacte.
+\end{itemize}
+Alors la suite $F(Y) \to F(X) \rightrightarrows F(X \times_Y X)$ est exacte
+pour \emph{tout} épimorphisme $X \to Y$ de $\mathcal{C}$\footnote{La condition
+(i) primitive est biffée ; la condition actuelle est ajoutée en interligne,
+« injectif » à l'encre brune. « Exacte » s'entend au sens des ensembles :
+$F(Y)$ s'identifie à l'égalisateur des deux flèches.}.
+
+\emph{Démonstration.} Elle repose sur le fait, que la page utilise sans le
+démontrer, que tout épimorphisme de $\mathcal{C}$ est composé d'un nombre fini
+d'épimorphismes effectifs\footnote{Le dossier 128 du même groupe étudie, pages
+12 à 18, des extensions finies $A \subset A'$ d'anneaux locaux et l'exactitude
+de $A \to A' \rightrightarrows A' \otimes_A A'$ ; le rapprochement est de nous,
+et nous ne savons pas si ce fait est vrai en toute généralité.}. Par (ii),
+chaque facteur induit une injection, donc $F(Y) \to F(X)$ est injectif pour
+tout épimorphisme. On raisonne par récurrence sur le nombre $n$ de facteurs ;
+pour $n = 1$, c'est (ii). Si $n > 1$, on écrit
+\[
+  X \xrightarrow{\ u'\ } X' \xrightarrow{\ u''\ } Y ,
+\]
+$u'$ composé de $n - 1$ épimorphismes effectifs, $u''$ effectif. Soit
+$\xi \in F(X)$ dont les deux images dans $F(X \times_Y X)$ sont égales.
+\emph{A fortiori} ses deux images dans $F(X \times_{X'} X)$ le sont, et par
+récurrence $\xi$ provient d'un $\xi' \in F(X')$. Il reste à voir que les deux
+images de $\xi'$ dans $F(X' \times_Y X')$ coïncident ; comme elles s'envoient
+sur les deux images de $\xi$, il suffit que
+\[
+  F(X' \times_Y X') \to F(X \times_Y X)
+\]
+soit injectif. La page s'arrête là\footnote{La dernière ligne, serrée au bas du
+feuillet, s'arrête sur « lui-même conséquence \ldots\ ceci ». La page écrit
+d'abord $X'_1$, puis $X'$. Le diagramme de la marge, que nous ne reproduisons
+pas, montre $F(Y) \to F(X') \to F(X)$ au-dessus de
+$F(X' \times_Y X') \to F(X \times_Y X) \to F(X \times_{X'} X)$.}. C'est le
+corollaire de la page 23 qui fournit ce qui manque : $X \times_Y X \to X'
+\times_Y X'$ est surjectif, comme produit de deux morphismes surjectifs, et
+son argument n'utilise que l'injectivité déjà acquise, si bien qu'il n'y a pas
+de cercle\footnote{Cet enchaînement est de nous.}.
+
+\pagerange{23}{23}
+\subsection*{Le corollaire et les sous-schémas abéliens (page 23)}
+
+\emph{Corollaire.} Sous (i) et (ii), si $u \colon X \to Y$ est
+\emph{surjectif}, alors $F(Y) \to F(X)$ est \emph{injectif}. En effet, par (i)
+et le carré
+\[
+  \begin{array}{ccc}
+    F(Y) & \longrightarrow & F(X) \\
+    \downarrow & & \downarrow \\
+    F(Y_{\mathrm{red}}) & \longrightarrow & F(X_{\mathrm{red}})
+  \end{array}
+\]
+on se ramène à $X$ et $Y$ réduits ; alors $u$ est un épimorphisme de
+$\mathcal{C}$, et l'on a déjà vu que $F(Y) \to F(X)$ est
+injectif\footnote{Pourquoi $u$ est alors un épimorphisme (de nous) : $Y$ étant
+réduit et $u$ surjectif, $\mathcal{O}_Y \to u_*\mathcal{O}_X$ est injectif ;
+comme les objets de $\mathcal{C}$ sont affines sur $S$, deux morphismes de $Y$
+vers un objet de $\mathcal{C}$ qui coïncident sur $X$ coïncident. Le carré est
+en marge, à l'encre brune.}.
+
+\emph{Proposition (cas particulier).} Soient $S$ localement noethérien, $A$ un
+schéma abélien sur $S$, et pour $S'$ fini sur $S$, $F(S')$ l'ensemble des
+sous-schémas abéliens de $A' = A \times_S S'$. Si $S' \to S$ est un
+épimorphisme, la suite
+\[
+  F(S) \to F(S') \rightrightarrows F(S'') , \qquad S'' = S' \times_S S' ,
+\]
+est exacte\footnote{« abélien » et « abéliens » sont des lectures peu sûres.
+La page écrit « pour tout $S'$ sur $S$ » ; le lemme ne s'applique qu'à
+$S'$ fini sur $S$, et nous l'ajoutons. Elle écrit aussi
+« $0 \to F(S) \to \cdots$ », que nous lisons comme l'injectivité de
+$F(S) \to F(S')$.}. La condition (i) du lemme résulte de la rigidité : un
+sous-schéma abélien est déterminé par sa réduction ; la condition (ii) résulte
+de la théorie de la descente.
+
+La page commence un « Corollaire » (d'abord « Proposition »), dont la
+parenthèse porte un nom biffé et un autre, illisibles, et annonce un « Énoncé
+analogue pour les \ldots\ abéliens ». L'énoncé s'arrête là, et le dossier
+avec lui.
+
+\end{document}
