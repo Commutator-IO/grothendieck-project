@@ -1,0 +1,1663 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 45, pages 1-79
+% (the whole folder).
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried — a doubtful
+% reading, a notation he used differently, a missing passage — moves into a
+% footnote. It is held to being mathematically correct as it stands; where the
+% manuscript is loose or mistaken, the true statement is what appears here and
+% the footnote says what the page has. In any dispute of substance the
+% transcription governs: whoever cites Grothendieck must cite
+% batch-01.fr.tex ... batch-04.fr.tex.
+%
+% Scope: the folder was read whole — four batches, pages 1-79 — before any of
+% this was written, and it is ONE file for the shelfmark. The folder is a
+% binder of runs under his own covers (pp. 1, 2, 15, 27, 36, 43, 60); the runs
+% are kept apart here, in binding order. The stencilled versos (pp. 30, 32,
+% 38, 40, 42, 45-59 odd, 62-70 even, 79) carry nothing in his hand and are
+% not read.
+%
+% Notation fixed for the whole document.
+%  - « simple sur k / sur S » on the pages is his word for « lisse » (smooth);
+%    it is translated « lisse » throughout (footnote at first occurrence).
+%  - H^i(k, G) is flat (fppf) cohomology, Galois cohomology when G is smooth.
+%    Bands are « liens » (his « noyaux »); H^2(k, L) is Giraud's set of classes
+%    of gerbes bound by L, H^2(k, L)' its neutral classes (his prime).
+%  - Pi(K) and V(K) (pp. 11-12) keep the page's letters, both doubtful; V(K)
+%    is the sheaf of conjugacy classes of subgroups of the band K.
+%  - Functors of points are written in bold (\mathbf{Aut}, \mathbf{Isom},
+%    \mathbf{Pic}) where the page underlines them.
+%  - On pp. 44-58: G_0 split reductive over Z, Gamma_0 = Aut(G_0),
+%    Pi_0 = ad(G_0), E_0 = Ext(G_0) (outer automorphisms); rho in H^1(S, E_0)
+%    the outer type; G_1 = G_0^rho the quasi-split form (his « forme ... type »,
+%    middle word unread); T_1 ⊂ B_1 ⊂ G_1, N_1 = Norm(T_1), W_1 the Weyl group.
+%  - Dist(G) is the hyperalgebra U_A(G) of pp. 28-35; Aff_A(G) its coordinate
+%    ring. Q(A), E(A), F(A) are Grothendieck-Witt rings (pp. 69-78).
+%
+% Substantive departures from the pages (footnoted where they occur):
+% p. 3, conjugacy is in K°, and the hypotheses must hold for all twisted forms;
+% p. 6, the corollary of Lemme 2 needs G commutative and smooth; p. 8, the
+% existence and conjugacy of Cartan subalgebras used in Lemme 4 is not
+% justified (and fails in general in char p); p. 9, Lemme 5 needs Br(k') = 0
+% for finite SEPARABLE k' (page: « radicielle », doubtful), and H^1(k, alpha_p)
+% = k/k^p is not 0; p. 9, « cd(k) <= 1 » read as dimension <= 1 in Serre's
+% sense; p. 16, Z is defined over k but not smooth — what is not defined over
+% k is the reduced radical; p. 17, Lie of Norm_G(L), not of N_G(B); pp. 20 and
+% 24, the theorem is false without the infinitesimal hypothesis on t
+% (SL(2), char 2, H = B); p. 28, Delta exp X = exp X ⊗ exp X; p. 29, the
+% indices of delta X_n; p. 37, H^0(g_0, g_0) = 0 gives an unramified Ad with
+% étale kernel, not a monomorphism; p. 50, N_1 is not always a semi-direct
+% product (Tits); p. 52, Isom(T_1, T) is GL_r(Z)_S, not Z^{r^2}; p. 58,
+% « bijectif » cannot hold (surjectivity fails over a field), and the
+% conjugacy of Borels fails over a Dedekind base (GL(2)); the equivalences of
+% p. 58 hold with Pi_1 = ad(G_1) in place of G_1; p. 63, O(2m+1) = SO(2m+1) x
+% mu_2; p. 69, in char 2 the model forms are regular only for n <= 1; p. 72,
+% the structure of gr Q(A) is not « conclu » from the presentation (degree 2
+% is Merkurjev 1981, all degrees Orlov-Vishik-Voevodsky 2007); p. 77, the
+% sums over places are products, and e) is F(k), not F_1(k).
+% Announced and not established: Lemme 4's Cartan step; the theorem on bands
+% over a Tsen field (pp. 13-14, a sketch with steps unread); b) of the
+% Théorème of p. 25 (« ? »); the Pic^tau application (p. 26); the general case
+% of Proposition 2 (p. 35 breaks off); (3) and the H^3 statement of pp. 37-39;
+% the questions of pp. 39, 54 and 76; the exact sequences of p. 78.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-03 — first pass, unchecked against the pages by a human.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{45}
+\pages{1}{79}
+\dating{1961-[vers 1970]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Groupes semi-simples : notes manuscrites (s.d.), tapuscrit annoté (1961) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+La chemise porte « Groupes semi-simples ». Ce qu'elle contient est un classeur
+de travail : six liasses sous des feuillets titrés de sa main, qui tournent
+toutes autour des groupes algébriques — groupes de matrices définis par des
+équations polynomiales, comme $SL_n$ ou le groupe orthogonal d'une forme
+quadratique — et d'une même question : que devient la théorie quand le corps de
+base n'est pas algébriquement clos, ou quand on remplace le corps par un anneau
+ou un schéma ?
+
+Sur un corps algébriquement clos, un groupe semi-simple est déterminé par une
+donnée combinatoire, son système de racines. Sur un corps quelconque, plusieurs
+groupes non isomorphes deviennent isomorphes après extension des scalaires ;
+on les appelle des \emph{formes} les uns des autres, et l'outil qui les
+classe est la cohomologie galoisienne, $H^1$. La situation est celle des
+formes quadratiques réelles : sur $\mathbb{C}$ il n'y en a qu'une par
+dimension, sur $\mathbb{R}$ il y en a plusieurs, distinguées par la signature,
+et la signature est précisément ce que la cohomologie mesure. Les quatre
+premières liasses travaillent ce thème sous plusieurs angles.
+
+La première (pages 1 à 14) démontre, à une étape près, pour les corps « de dimension 1 » —
+les corps finis, les corps de fonctions de courbes sur un corps
+algébriquement clos —, que tout se relève : si $G \to G'$ est un épimorphisme de
+groupes algébriques, toute forme tordue de $G'$ provient d'une forme tordue de
+$G$. Puis elle pose la même question un étage plus haut, pour des objets qui
+ne sont des groupes que localement — les \emph{liens} — et esquisse une
+démonstration que, sur ces corps, ils proviennent toujours d'un groupe.
+L'instrument est le normalisateur d'un sous-groupe de Cartan, et l'idée est
+de réduire pas à pas le groupe à des morceaux commutatifs, où la cohomologie
+ordinaire suffit.
+
+La deuxième (pages 15 à 26) rencontre les surprises de la caractéristique
+positive : un groupe défini sur $k$ dont le radical ne l'est pas, une algèbre de
+Lie de sous-groupe de Borel qui n'est pas son propre normalisateur dans
+$SL_2$ en caractéristique 2. La troisième (pages 27 à 35) calcule les
+\emph{hyperalgèbres} : l'analogue, en caractéristique quelconque, de
+l'algèbre des opérateurs différentiels invariants d'un groupe de Lie ; pour le
+groupe multiplicatif on y trouve l'anneau des polynômes à valeurs entières,
+de base les $\binom{X}{n}$. La quatrième (pages 36 à 41) compare un groupe à son
+algèbre de Lie par la cohomologie de l'algèbre de Lie : $H^0$, $H^1$, $H^2$,
+$H^3$ mesurent successivement le centre, les dérivations extérieures, les
+déformations et leurs obstructions.
+
+La cinquième (pages 43 à 58) classe les formes d'un groupe réductif sur une
+base quelconque : chaque forme a un « type extérieur », et parmi les formes de
+type donné il en est une distinguée, la forme \emph{quasi-déployée}, qui
+possède un sous-groupe de Borel contenant un tore maximal ; les autres en sont
+des formes intérieures. Le dossier dresse une table de questions — deux
+sous-groupes de Borel sont-ils toujours conjugués ? deux tores maximaux ? —
+chacune traduite en injectivité d'une application entre ensembles de
+cohomologie, et chacune suivie de son verdict.
+
+La sixième (pages 60 à 78) passe aux formes quadratiques. Son centre est un
+texte dactylographié de quatre pages, daté du 22 juillet 1961 : une lettre de
+rapporteur à A.~Delzant sur un article consacré aux classes de
+Stiefel--Whitney des formes quadratiques. On y lit un programme : l'anneau des
+classes de formes quadratiques sur un corps est entièrement gouverné par
+$H^1$ et $H^2$ à coefficients dans $\mathbb{Z}/2\mathbb{Z}$ et leur cup-produit ;
+l'algèbre graduée de cet anneau devrait se lire sur la cohomologie. La
+liasse se termine sur des notes prises aux exposés de Kneser à l'IHÉS :
+invariants de rang, de discriminant et de Clifford, et le principe de Hasse
+pour les corps de nombres.
+
+Où chercher la suite ? Sous les noms de conjecture I de Serre et théorème de
+Steinberg, de cohomologie non abélienne de Giraud (gerbes, liens), de groupes
+pseudo-réductifs, d'algèbre de distributions d'un schéma en groupes, de
+déformations des algèbres de Lie (Gerstenhaber, Nijenhuis--Richardson), de
+formes quasi-déployées (SGA 3, exposé XXIV), et, pour les formes
+quadratiques, d'anneau de Grothendieck--Witt, de classes de Delzant, de
+théorème de Merkurjev et de conjecture de Milnor.
+
+\keywords{Galois cohomology, fields of dimension at most one, Serre's Conjecture I, Frobenius kernel, Frattini argument, Cartan subalgebra, restricted Lie algebra, nonabelian cohomology, band (lien), gerbe, neutral gerbe, Tsen's theorem, pseudo-reductive group, Borel subgroup, flag variety, Lie algebra normalizer, Picard scheme, Néron–Severi torsion, distribution algebra, divided powers, integer-valued polynomials, Lie algebra cohomology, deformation of Lie algebras, quasi-split form, inner form, outer automorphism group, Killing couple, conjugacy of maximal tori, Pin group, orthogonal group scheme, Dickson invariant, quadratic forms in characteristic two, Grothendieck–Witt ring, Witt's presentation, Stiefel–Whitney classes, Merkurjev's theorem, Milnor conjecture, Arf invariant, Clifford invariant, Hasse–Minkowski theorem}
+\end{resume}
+
+\section*{Le fil du dossier, et les conventions}
+
+Le dossier ne porte aucune pagination de sa main. Il se compose de liasses
+séparées par des feuillets titrés, dans l'ordre de reliure suivant, qu'on garde.
+
+\begin{itemize}
+\item Pages 1 à 14 : « Application des sous-algèbres de Cartan aux corps de
+dimension 1 » — surjectivité de $H^1(k,G) \to H^1(k,G')$, liens sur un site,
+neutralité du $H^2$ d'un lien sur un corps de Tsen.
+\item Pages 15 à 26 : « Cas non semi-simple. Question de rationalité du
+radical, définition de la variété des drapeaux, etc. » — l'exemple de la
+page 16, les sous-groupes de Borel et l'algèbre de Lie, les sous-groupes
+contenant un sous-groupe de Cartan, une remarque sur $\mathbf{Pic}^{\tau}$.
+\item Pages 27 à 35 : « Groupes radiciels et hyperalgèbres des groupes
+diagonalisables » — hyperalgèbres de $\mathbb{G}_a$, d'un fibré vectoriel, de
+$\mathbb{G}_m$, et la dualité avec l'algèbre affine.
+\item Pages 36 à 41 : « Cohomologie de l'algèbre de Lie et cohomologie des
+groupes » — $G \to \mathbf{Aut}(\mathfrak{g})$ sur une base artinienne, et les
+algèbres de Lie de rang 1 en caractéristique 2.
+\item Pages 43 à 58 : « $H^1$ » — formes d'un groupe réductif, forme
+quasi-déployée, tores de Killing, et la table des conjugaisons.
+\item Pages 60 à 78 : « Formes quadratiques, bilinéaires symétriques,
+etc. » — notes sur les catégories de formes et les groupes orthogonaux
+(pages 61 à 69), la lettre dactylographiée à Delzant (pages 71 à 74), les
+exposés de Kneser (pages 75 à 77), une ébauche locale-globale (page 78).
+\end{itemize}
+
+\emph{Le fil.} Le titre de la chemise ne dit pas tout : ce qui relie les
+liasses est la théorie des formes. Les pages 1 à 14 montrent que sur un corps
+de dimension 1 la cohomologie des groupes algébriques se laisse dévisser
+jusqu'au cas commutatif, où elle s'annule ; les pages 43 à 58 classent les
+formes d'un groupe réductif sur une base quelconque, là où cette annulation
+manque ; les pages 60 à 78 font la même chose pour le groupe orthogonal,
+c'est-à-dire pour les formes quadratiques, où les invariants cohomologiques
+sont explicites. Les liasses intermédiaires (pages 15 à 41) sont l'outillage
+infinitésimal : algèbres de Lie, normalisateurs, hyperalgèbres, déformations ;
+elles servent à la fois aux réductions des pages 1 à 14 (sous-algèbres de
+Cartan d'un noyau radiciel) et à la rigidité des sous-groupes de Borel.
+
+\emph{Conventions.} « Lisse » traduit ce que les pages appellent « simple » sur
+$k$ ou sur $S$\footnote{C'est le mot qu'il emploie pour « lisse » au tournant
+de 1960 ; les pages l'écrivent pour les groupes (« $K$, $G$, $G'$ simples sur
+$k$ », page 3), pour le schéma en groupes $H$ de la page 20 et pour $G$ sur un
+anneau aux pages 33, 34 et 37. Le sens est chaque fois celui de « lisse », ce
+que confirment les usages : isomorphisme entre cohomologie plate et galoisienne,
+commutation de l'hyperalgèbre au changement de base.}. Pour un schéma en groupes
+$G$ sur un corps $k$, $H^i(k,G)$ est la cohomologie plate (fppf) ; elle coïncide
+avec la cohomologie galoisienne $H^i(\pi, G(\bar k))$ lorsque $G$ est lisse, $\pi$
+désignant le groupe de Galois de la clôture séparable $\bar k$. Ce que les
+pages appellent un \emph{noyau} est un \emph{lien} au sens de Giraud ; pour un
+lien $L$, $H^2(k,L)$ est l'ensemble des classes de gerbes liées par $L$ et
+$H^2(k,L)'$ (le prime est le sien) le sous-ensemble des classes neutres. Les
+foncteurs de points que la page souligne sont écrits en gras :
+$\mathbf{Aut}$, $\mathbf{Isom}$, $\mathbf{Pic}$. Aux pages 44 à 58, $G_0$ est
+un groupe réductif déployé sur $\mathbb{Z}$ muni d'un couple $T_0 \subset B_0$,
+$\Gamma_0 = \mathbf{Aut}(G_0)$, $\Pi_0 = \mathrm{ad}(G_0)$ le groupe adjoint,
+$E_0 = \mathbf{Ext}(G_0)$ le groupe des automorphismes extérieurs, de sorte que
+$\Gamma_0 = E_0 \ltimes \Pi_0$ ; l'indice $1$ désigne le tordu par le type
+extérieur $\rho$. Deux objets portent des noms voisins qu'on distingue : le
+sous-groupe de Cartan $C$ d'un groupe (pages 20 et 24) et la sous-algèbre de
+Cartan $\mathfrak{h}$ d'une algèbre de Lie (pages 8 et 13).
+
+\emph{Ce qui est annoncé et non établi.} L'étape « conjugaison des
+sous-algèbres de Cartan » du lemme 4 (page 8) et de la page 13 n'est pas
+justifiée ; le théorème sur les liens d'un corps de Tsen (pages 13 et 14) est
+une esquisse dont plusieurs étapes sont illisibles ; b) du théorème de la page
+25 porte un point d'interrogation ; l'application à $\mathbf{Pic}^{\tau}$
+(page 26) est annoncée ; la proposition 2 (page 35) s'arrête sur un diagramme ;
+les énoncés (3) et l'interprétation de $H^3$ (pages 37 à 39) sont affirmés sans
+démonstration ; les questions des pages 39, 54 et 76 restent ouvertes sur la
+page ; les suites de la page 78 sont écrites sans justification.
+
+\emph{Pièces d'autres mains.} Une vingtaine de feuillets sont des pages
+ronéotypées réemployées comme papier brouillon, au verso de ses notes : un
+texte sur les plans ordonnés (pages 30, 32), un texte sur les préschémas
+intègres (38, 40), une bibliographie sur la ramification (42), un texte sur les
+faisceaux fins (45, 47), un texte sur les formes hermitiennes (49 à 59), un
+texte sur l'algèbre extérieure (62 à 70, 79). Ils ne portent rien de sa main et
+on ne les lit pas. Le « tapuscrit annoté (1961) » du titre est, lui, de lui :
+ce sont les pages 71 à 74, lues plus bas.
+
+\pagerange{1}{14}
+\section*{Cohomologie galoisienne sur les corps de dimension 1 (pages 1 à 14)}
+
+La chemise porte seulement « Groupes semi-simples » ; un premier feuillet de
+garde, « Application des sous-algèbres de Cartan aux corps de
+dimension 1 »\footnote{« s.-alg. » et « aux » sont des lectures probables ; le
+titre est en haut à droite d'un feuillet par ailleurs blanc (page 2).}, annonce
+la première liasse. Elle a deux parties : une suite de lemmes qui ramènent la
+surjectivité de $H^1(k,G) \to H^1(k,G')$ à l'annulation de $H^2$ pour des groupes
+commutatifs (pages 3 à 10), puis la même stratégie appliquée aux liens
+(pages 11 à 14).
+
+\pagerange{3}{4}
+\subsection*{Le lemme 1 : se ramener au cas commutatif (pages 3 et 4)}
+
+\emph{Lemme 1.} Soit $k$ un corps de caractéristique $p \geq 0$. Supposons que
+$H^2(k,K) = 0$ pour tout $k$-groupe commutatif $K$ de l'un des types suivants :
+\begin{itemize}
+\item[a)] un tore ;
+\item[b)] un groupe fini étale ;
+\item[c)] une variété abélienne ;
+\item[d)] un groupe unipotent commutatif connexe annulé par $p$.
+\end{itemize}
+Alors, pour toute suite exacte $e \to K \to G \to G' \to e$ de groupes
+algébriques lisses sur $k$, l'application $H^1(k,G) \to H^1(k,G')$ est
+surjective\footnote{La page porte en marge « ($K$ commutatif) » à côté des
+hypothèses, et une note en biais, très incomplète, qui commence « Inutile de
+supposer … algébrique ». La lecture « commutatif » au cas d) et « annulé par »
+sont probables. La connexité au cas d) est celle de la page 4 (« unipotent
+comm.\ connexe annulé par $p$ »).}.
+
+L'hypothèse porte sur \emph{tous} les groupes de ces types, et c'est ce qui la
+rend utilisable : quand on relève une classe $\xi' \in H^1(k,G')$ à travers
+une extension à noyau commutatif $A$ normal dans $G$, l'obstruction vit dans
+$H^2(k, {}_{\xi'}A)$, où ${}_{\xi'}A$ est le tordu de $A$ par $\xi'$ (Serre,
+\emph{Cohomologie galoisienne}, chap.~I, § 5) ; ce tordu est encore un tore,
+un groupe fini étale, une variété abélienne ou un groupe unipotent du même
+type, et l'hypothèse le tue\footnote{La page ne parle pas des formes tordues
+dans ce lemme ; elles apparaissent au lemme 3 (« compte tenu des formes
+tordues ») et sont nécessaires partout où l'on dévisse. On les explicite ici une
+fois pour toutes.}.
+
+\emph{Démonstration.} Soit $T$ un tore maximal de la composante neutre $K^0$,
+défini sur $k$ (il en existe toujours). Les tores maximaux de $K^0$ étant
+conjugués sous $K^0(\bar k)$, l'argument de Frattini donne $G = N_G(T) \cdot K^0$,
+donc une suite exacte
+\[
+e \to N_K(T) \to N_G(T) \to G' \to e
+\]
+de groupes lisses\footnote{La page dit « $T$ tore maximal de $K$ » et « th.\ de
+conjugaison » ; la conjugaison a lieu dans $K^0$, d'où la précision. Le
+normalisateur d'un tore dans un groupe lisse est lisse. Au-dessus de
+« épim. », un premier « injectif » est biffé.}. Une classe de $H^1(k,G')$ qui
+se relève à $N_G(T)$ se relève à $G$ ; on peut donc remplacer $G$ par $N_G(T)$ et
+supposer $T$ \emph{distingué} dans $G$. On dévisse alors $K$ :
+\begin{itemize}
+\item le tore $T$ lui-même, cas a) ;
+\item le quotient $K^0/T$, qui ne contient plus de tore non trivial, est
+extension d'une variété abélienne par un groupe unipotent connexe ; par la
+suite des commutateurs successifs on se ramène au cas commutatif, puis, en
+séparant les cas $pK = K$ et $pK = 0$, aux cas c) et d) ;
+\item le groupe fini étale $K/K^0$, pas nécessairement commutatif.
+\end{itemize}
+Ce dernier cas se traite directement sur les points : on a une suite exacte de
+$\pi$-groupes $e \to K(\bar k) \to G(\bar k) \to G'(\bar k) \to e$, et un
+argument de Schreier et Serre montre que $H^1(\pi,G(\bar k)) \to
+H^1(\pi,G'(\bar k))$ est surjectif dès que $H^2(\pi,A) = 0$ pour tout $\pi$-module
+fini $A$, c'est-à-dire dès que $\mathrm{cd}(\pi) \leq 1$\footnote{Le premier nom
+est illisible à la page 4 (« de l'argument de …-Serre ») ; la page 13 écrit
+« [Schreier, Serre] » pour un argument de même nature, d'où la lecture. Le
+résultat est dans Serre, \emph{Cohomologie galoisienne}, chap.~I : un groupe
+profini de dimension cohomologique au plus 1 vérifie cette propriété de
+relèvement pour les suites exactes de $\pi$-groupes à noyau fini.}. Cette
+condition est exactement b) pour tous les $K$ finis étales, et, $G$ étant lisse,
+$H^i(k,G) = H^i(\pi,G(\bar k))$.
+
+\pagerange{4}{6}
+\subsection*{Frobenius et extensions radicielles : le lemme 2 (pages 4 à 6)}
+
+\emph{Corollaire.} Supposons que $H^2(k,K) = 0$ pour tout $k$-groupe commutatif
+fini $K$, étale ou non. Alors les hypothèses du lemme 1 sont vérifiées, donc sa
+conclusion aussi.
+
+En effet, si $G$ est commutatif et lisse, $H^i(k,G) = H^i(\pi,G(\bar k))$ est
+de torsion pour $i > 0$, et la suite exacte de Kummer $0 \to {}_nG \to G
+\xrightarrow{n} G \to 0$ montre qu'une classe de $H^2(k,G)$ tuée par $n$ provient
+de $H^2(k,{}_nG)$. Pour un tore ou une variété abélienne, ${}_nG$ est fini sur
+$k$ ; d'où a), b), c). Pour d), on utilise qu'un groupe unipotent commutatif
+connexe $U$ annulé par $p$ devient isomorphe à une puissance de $\mathbb{G}_a$
+sur une extension de la forme $k^{p^{-n}}$, où $H^2$ s'annule ; il reste à voir
+que le noyau de $H^2(k,U) \to H^2(k^{p^{-n}},U)$ est nul. C'est l'objet du
+
+\emph{Lemme 2.} Pour tout schéma en groupes $G$ sur $k$ et tout $n \geq 0$, le
+noyau de $H^i(k,G) \to H^i(k^{p^{-n}},G)$ est celui de l'application
+$F^n : H^i(k,G) \to H^i(k,G^{(p^n)})$ induite par le Frobenius relatif itéré
+$F^n_G : G \to G^{(p^n)}$. Plus précisément, le triangle
+
+\begin{tikzcd}
+H^i(k,G) \arrow[r] \arrow[dr, "F^n"'] & H^i(k^{p^{-n}}, G) \arrow[d, "\wr"] \\
+ & H^i(k, G^{(p^n)})
+\end{tikzcd}
+
+est commutatif, la flèche verticale venant de l'isomorphisme de corps
+$k^{p^{-n}} \to k$, $\lambda \mapsto \lambda^{p^n}$, qui transporte
+$G \otimes_k k^{p^{-n}}$ sur $G^{(p^n)} = G \otimes_{k,\varphi^n} k$.
+
+La page en donne la raison en une ligne : on est ramené au cas des $H^0$, où
+c'est trivial, et l'on n'a pas besoin que $G$ soit représentable\footnote{Dans
+la marge, un diagramme précise l'identification : le carré cartésien qui
+définit $G^{(p^n)}$ au-dessus de $\varphi_S : S \to S$, $S = \mathrm{Spec}(k)$,
+$\lambda \mapsto \lambda^{p^n}$, et la factorisation $\varphi_G = $ (projection)
+$\circ F^n$. Sur la ligne de l'énoncé, un « $\simeq H^i(k,G^{(p^n)})$ » biffé est
+remplacé par la flèche verticale.}.
+
+\emph{Corollaire.} Si $G$ est commutatif et lisse, ce noyau est l'image de
+$H^i(k, \mathrm{Ker}\,F^n_G)$\footnote{La page énonce le corollaire sans
+hypothèse. Il faut $G$ commutatif pour disposer de la suite exacte longue en
+degré 2, et $F^n_G$ fidèlement plat — ce qui a lieu pour $G$ lisse — pour que
+$e \to \mathrm{Ker}\,F^n_G \to G \to G^{(p^n)} \to e$ soit exacte.}.
+
+Le noyau de $F^n_G$ est un groupe fini radiciel (infinitésimal) ; par
+hypothèse son $H^2$ est nul, ce qui achève la démonstration du corollaire du
+lemme 1.
+
+\pagerange{6}{8}
+\subsection*{Réduction au cas lisse et noyaux radiciels : lemmes 3 et 4 (pages 6 à 8)}
+
+\emph{Lemme 3.} Pour que $H^1(k,G) \to H^1(k,G')$ soit surjectif pour tout
+épimorphisme $G \to G'$ de schémas en groupes algébriques sur $k$, il suffit
+qu'il en soit ainsi dans les deux cas suivants :
+\begin{itemize}
+\item[a)] $G$, le noyau $K$ et $G'$ sont lisses ;
+\item[b)] le noyau $K$ est radiciel (infinitésimal).
+\end{itemize}
+
+\emph{Démonstration.} Il existe un sous-groupe infinitésimal $I$ de $G$ — le
+noyau d'un Frobenius itéré convenable — tel que $G/I$ et $K/(K \cap I)$ soient
+lisses. On compare les suites exactes $e \to K \to G \to G/K \to e$ et
+$e \to K/(K \cap I) \to G/I \to G/KI \to e$ par les flèches $u : G \to G/I$ et
+$v : G/K \to G/KI$. En cohomologie, $u_1 : H^1(k,G) \to H^1(k,G/I)$ est surjectif
+par b), et $d'_1 : H^1(k,G/I) \to H^1(k,G/KI)$ par a). Soit
+$\xi' \in H^1(k,G/K)$ ; il existe $\xi \in H^1(k,G)$ tel que $d_1(\xi)$ et
+$\xi'$ aient même image dans $H^1(k,G/KI)$. Après torsion par $\xi'$, la fibre
+de $v_1$ qui les contient est l'image du $H^1$ d'un tordu de
+$KI/K \simeq I/(I \cap K)$, groupe infinitésimal ; par b) appliqué au tordu de
+$I \to I/(I \cap K)$, cette classe se relève en une classe de $H^1$ du tordu de
+$I$, donc de $G$, qui relève $\xi'$\footnote{La page fait l'argument en
+supposant, « compte tenu des formes tordues », que $\xi' = 0$, avec un « [?] » ;
+la lecture « $\xi' = 0$ » elle-même est douteuse, et les lettres grecques du
+passage se distinguent mal. Le recours aux tordus est l'argument standard ; on
+l'écrit tel que la page le suggère.}.
+
+\emph{Lemme 4.} Supposons que $H^2(k,K) = 0$ pour tout $k$-groupe commutatif
+fini radiciel $K$. Alors, pour toute suite exacte $e \to K \to G \to G' \to e$
+de groupes algébriques avec $K$ radiciel — pas nécessairement commutatif —,
+$H^1(k,G) \to H^1(k,G')$ est surjectif.
+
+\emph{Esquisse.} Par dévissage, on peut supposer $K$ de hauteur 1, donc
+déterminé par sa $p$-algèbre de Lie $\mathfrak{k}$, sur laquelle $G$ opère.
+Soit $\mathfrak{h}$ une sous-algèbre de Cartan de $\mathfrak{k}$. Si l'on sait
+que les transformés de $\mathfrak{h}$ par $G$ sont conjugués sous $K$, l'argument
+de Frattini donne $N_G(\mathfrak{h}) \cdot K = G$, d'où une suite exacte
+$e \to N_K(\mathfrak{h}) \to N_G(\mathfrak{h}) \to G' \to e$, et l'on peut supposer
+que $G$, donc $K$, normalise $\mathfrak{h}$. Alors $\mathfrak{h}$ est un idéal de
+$\mathfrak{k}$ ; une sous-algèbre de Cartan étant son propre normalisateur,
+$\mathfrak{h} = \mathfrak{k}$, et $\mathfrak{k}$ est nilpotente. Sa suite centrale
+descendante, stable par $G$, fournit un dévissage de $K$ en groupes
+commutatifs, et le cas commutatif est l'hypothèse\footnote{Deux points de cette
+esquisse ne sont pas établis par la page. L'existence d'une sous-algèbre de
+Cartan (« existe toujours ») est le théorème classique sur un corps infini ;
+sur un corps fini elle n'est pas automatique pour une algèbre de Lie
+quelconque. Surtout, la conjugaison invoquée — « l'argument déjà utilisé »,
+avec une note en marge où se lisent « conjugaison » et « sous-algèbres de
+Cartan » — n'a rien d'automatique : en caractéristique $p$, les sous-algèbres
+de Cartan d'une algèbre de Lie ne sont pas conjuguées en général, et la page
+n'énonce pas la forme de conjugaison sous le groupe infinitésimal $K$ dont
+l'argument a besoin. Le « NB » de la page, sur $[\mathfrak{h},\mathfrak{h}]$,
+porte sur un autre point délicat : les termes de la suite centrale d'une
+$p$-algèbre de Lie ne sont pas toujours des sous-$p$-algèbres, et il faut
+prendre les sous-$p$-algèbres qu'ils engendrent.}.
+
+\pagerange{9}{10}
+\subsection*{Le lemme 5 et le théorème de surjectivité (pages 9 et 10)}
+
+\emph{Lemme 5.} Supposons que $\mathrm{Br}(k') = 0$ pour toute extension finie
+séparable $k'$ de $k$. Alors $H^i(k,K) = 0$ pour $i \geq 2$ et tout $k$-groupe
+commutatif fini $K$\footnote{La page écrit « pour toute extension
+\emph{radicielle} finie $k'$ » — les deux adjectifs ajoutés au-dessus de la
+ligne, lus sous réserve. Sous cette forme l'hypothèse ne suffit pas : le cas
+multiplicatif passe par le théorème de Tate--Nakayama, qui demande l'annulation
+du groupe de Brauer des extensions séparables qui déploient les tores en jeu.
+C'est l'hypothèse « $k$ de dimension $\leq 1$ » de Serre, qu'on adopte.}.
+
+\emph{Démonstration.} Par dévissage, on traite trois cas. Si $K$ est de type
+multiplicatif, on le plonge dans un tore : $e \to K \to G \to G' \to e$ avec $G$,
+$G'$ des tores ; l'hypothèse et le théorème de Tate--Nakayama donnent
+$H^i(k,G) = H^i(k,G') = 0$ pour $i > 0$, donc $H^i(k,K) = 0$ pour $i \geq 2$. Si $K$
+est étale, l'hypothèse entraîne $\mathrm{cd}(\pi) \leq 1$, d'où la même
+conclusion. Reste le cas unipotent infinitésimal, qui se dévisse en copies de
+$\alpha_p$, et la suite exacte $0 \to \alpha_p \to \mathbb{G}_a
+\xrightarrow{F} \mathbb{G}_a \to 0$ donne $H^i(k,\alpha_p) = 0$ pour
+$i \geq 2$\footnote{La page dit « il est bien connu que $H^i(k,\alpha_p) = 0$
+pour tout $i$ ». C'est faux en degré 1 : $H^1(k,\alpha_p) = k/k^p$, non nul si
+$k$ est imparfait. Seule l'annulation pour $i \geq 2$ sert, et elle est vraie
+($H^i(k,\mathbb{G}_a) = 0$ pour $i \geq 1$). La note en marge, où se lit
+« $H^i(k,\mathcal{U}) = 0$ pour $i \geq 2$ », va dans ce sens.}.
+
+\emph{Théorème.} Soit $k$ un corps de dimension $\leq 1$ au sens ci-dessus.
+Pour tout épimorphisme $G \to G'$ de groupes algébriques sur $k$,
+$H^1(k,G) \to H^1(k,G')$ est surjectif\footnote{La page écrit
+« $\mathrm{cd}(k) \leq 1$ ». Pour un corps parfait c'est la même chose ; pour un
+corps imparfait de caractéristique $p$, $\mathrm{cd}_p(k) \leq 1$ est toujours
+vrai, et c'est la condition sur les groupes de Brauer qui sert. L'énoncé est
+écrit au-dessus d'une ligne biffée qui portait une suite exacte.}.
+
+C'est l'assemblage des lemmes : le lemme 5 donne l'hypothèse du corollaire du
+lemme 1, donc le cas lisse a), et l'hypothèse du lemme 4, donc le cas
+radiciel b) ; le lemme 3 conclut. La démonstration hérite de la lacune du lemme
+4. Pour les groupes linéaires connexes, l'annulation de $H^1$ sur un corps
+parfait de dimension $\leq 1$ est la conjecture I de Serre, démontrée par
+Steinberg (1965), puis étendue aux corps imparfaits par Borel et Springer
+(1968) ; le dossier, qui n'est pas daté ici, ne cite ni l'un ni
+l'autre\footnote{Le titre de la liasse dit la méthode : les sous-algèbres de
+Cartan. La démonstration de Steinberg passe par les éléments réguliers ; celle
+du dossier par le dévissage et les normalisateurs. On ne cherche pas à dire ici
+laquelle était connue de lui au moment d'écrire.}.
+
+\emph{Théorème (page 10).} Soient $K$ un groupe algébrique sur $k$ et $K'$ une
+forme de $K$ sur $k$. Alors $H^2(k,\mathrm{lien}(K'))$ se réduit à la classe
+neutre, et cela reste vrai après toute extension algébrique de
+$k$\footnote{La page écrit $H^2(k,K') = H^2(k,K')' = \{\ldots\}$
+« universellement », l'élément de l'accolade surchargé et illisible ; la
+démonstration est en grande partie illisible. On en donne la structure, qui
+est celle de la page 13.}.
+
+En effet, les gerbes liées par le lien d'un groupe $K'$ en contiennent une
+neutre, la gerbe des $K'$-torseurs ; et, lorsqu'il est non vide, $H^2(k,L)$ est
+un espace principal homogène sous $H^2(k,\mathfrak{Z})$, où $\mathfrak{Z}$ est le
+centre du lien. Ce centre est un groupe algébrique commutatif, et le dévissage
+des pages 3 à 9 donne $H^2(k,\mathfrak{Z}) = 0$ ; donc $H^2(k,L)$ a un seul élément,
+la classe neutre. La page part de ce que $K'$ provient d'une classe de
+$H^1(k,\mathrm{Aut\,Ext}(K))$ qui se relève à $H^1(k,\mathrm{Aut}(K))$.
+
+\pagerange{11}{12}
+\subsection*{Liens sur un site : deux principes de réduction (pages 11 et 12)}
+
+Soit $K$ un lien sur un site $X$. Question : $K$ provient-il d'un faisceau en
+groupes ? Soit $\mathcal{G}(K)$ la gerbe des \emph{réalisations} de $K$, dont
+les objets au-dessus de $U$ sont les faisceaux en groupes $F$ sur $U$ munis d'un
+isomorphisme de liens $\mathrm{lien}(F) \simeq K|_U$. Le lien $K$ provient d'un
+faisceau en groupes si et seulement si $\mathcal{G}(K)$ a un objet au-dessus de
+$X$, c'est-à-dire si la classe $c(K)$ de cette gerbe est neutre. La page écrit
+$c(K) \in H^2(X,\Pi(K))$ et demande si elle est dans
+$H^2(X,\Pi(K))'$\footnote{La lettre $\Pi$, repassée, est d'une lecture douteuse ;
+on la garde. Les automorphismes d'une réalisation sont les automorphismes
+intérieurs de $F$, si bien que la gerbe $\mathcal{G}(K)$ est naturellement liée
+par le lien des automorphismes intérieurs ; on n'identifie pas $\Pi(K)$ à ce
+lien, parce que la suite exacte du second principe, telle que la page l'écrit,
+n'en découle pas directement.}.
+
+À un lien $K$ est associé le faisceau $\mathcal{V}(K)$ des \emph{classes de
+conjugaison de sous-groupes} de $K$. Un sous-lien de $K$ en définit une
+section ; mais une section de $\mathcal{V}(K)$ ne provient pas en général d'un
+sous-lien. Pour une section $\varphi$, le normalisateur $\mathrm{Nor}(\varphi)$
+provient toujours d'un sous-lien, noté $\mathbf{Nor}(\varphi)$ ; par exemple le
+centre $\mathfrak{Z}(K) = \mathbf{Nor}(e)$\footnote{La page parle de « sous-noyau »
+et d'« opération $\mathrm{Nor}$ » ; un passage de trois lignes qui précède, sur
+$\mathcal{V}(\varphi)$, est biffé.}.
+
+\emph{Premier principe (du normalisateur).} Soit $\varphi$ une section de
+$\mathcal{V}(K)$. La catégorie fibrée $\mathcal{G}(K,\varphi)$ des réalisations
+$F$ de $K$ munies d'un sous-faisceau en groupes dans la classe $\varphi$ est une
+gerbe, liée par un lien construit sur $\mathbf{Nor}(\varphi)$, et l'oubli du
+sous-groupe est un morphisme de gerbes $\mathcal{G}(K,\varphi) \to
+\mathcal{G}(K)$. Donc si la classe $c(K,\varphi) \in
+H^2(X,\mathbf{Nor}(\varphi))$ est neutre, $c(K)$ l'est aussi : un objet global de
+la première gerbe en donne un de la seconde.
+
+\emph{Second principe (du plongement).} Soit $K \to K'$ un homomorphisme
+« injectif » de liens, avec $K' = \mathrm{lien}(F')$ pour un faisceau en groupes
+$F'$. La catégorie des faisceaux en groupes $F$ munis d'un morphisme $F \to F'$
+et d'un isomorphisme $\mathrm{lien}(F) \simeq K$, compatibles avec $K \to K'$ et
+$K' \simeq \mathrm{lien}(F')$, est une gerbe, liée par un lien $K''$ que la page
+place dans une suite exacte $e \to K'' \to \Pi(K) \to \Pi(K') \to e$. Si sa
+classe $c' \in H^2(X,K'')$ est neutre, alors $c(K)$, qui en est l'image, est
+neutre.
+
+Dans les deux cas l'énoncé utile est le même : pour montrer qu'un lien provient
+d'un groupe, il suffit de le montrer pour un lien « plus petit » — le
+normalisateur d'une classe de sous-groupes canonique, ou un lien qui se plonge
+dans un lien déjà réalisé.
+
+\pagerange{13}{14}
+\subsection*{Les liens algébriques sur un corps de Tsen (pages 13 et 14)}
+
+\emph{Énoncé.} Soit $K$ un lien algébrique sur un corps $k$ de Tsen (corps
+$C_1$). Alors $H^2(k,K) = H^2(k,K)'$ a exactement un élément.
+
+Il suffit de prouver $H^2(k,K)' \neq \emptyset$, c'est-à-dire que $K$ provient
+d'un $k$-groupe ; le reste en résulte « formellement », comme à la page 10,
+puisque $H^2(k,\mathfrak{Z}(K)) = 0$. Une extension finie d'un corps $C_1$ est
+$C_1$, et le groupe de Brauer d'un corps $C_1$ est nul : les hypothèses des pages
+3 à 9 sont remplies. La page esquisse ensuite la preuve en deux cas.
+
+a) \emph{$\dim K = 0$.} Récurrence sur le degré de $K$ ; trivial en degré 1. En
+degré $> 1$, le dévissage — par le second principe — ramène à deux cas :
+\begin{itemize}
+\item[(i)] $K$ étale. Le lien est un homomorphisme continu
+$\pi \to \mathrm{Out}(A)$, $A$ un groupe fini convenable ; il se relève en un
+homomorphisme $\pi \to \mathrm{Aut}(A)$, c'est-à-dire en une $k$-forme de $A$, qui
+réalise le lien\footnote{La page renvoie à « [Schreier, Serre] ». La raison
+moderne est qu'un groupe profini de dimension cohomologique $\leq 1$ est
+projectif dans la catégorie des groupes profinis, et que
+$\mathrm{Aut}(A) \to \mathrm{Out}(A)$ est surjectif.} ;
+\item[(ii)] $K$ radiciel de hauteur 1 et indécomposable par dévissage, donc
+$[K,K] = K$ et $K$ sans centre\footnote{La ligne principale écrit
+« $[K,K] = 1$ », la note en marge « $[K,K] = K$, en particulier $K$ sans
+centre ». Seule la seconde est cohérente avec « en particulier sans centre ».}.
+On prend pour $\varphi$ la classe des « sous-groupes de Cartan infinitésimaux »,
+qui vérifie $\mathrm{Nor}(\varphi) = \varphi$ ; par le premier principe on se
+ramène au cas où $K$ correspond à une $p$-algèbre de Lie nilpotente, puis, par le
+second, au cas commutatif\footnote{Que cette classe soit une section de
+$\mathcal{V}(K)$ — c'est-à-dire que les sous-groupes de Cartan infinitésimaux
+forment une seule classe de conjugaison, définie sur $k$ — est la même
+propriété de conjugaison que celle du lemme 4, et elle n'est pas établie ici.}.
+\end{itemize}
+
+b) \emph{$\dim K > 0$.} Par le premier principe et les commutateurs, on se
+ramène au cas où $K$ est commutatif (alors c'est fini) ou bien $K = [K,K]$, ce
+qui force $K$ affine. En divisant par un noyau de Frobenius et en utilisant le
+cas a), on se ramène au cas où $K$ est lisse. On prend alors pour $\varphi$ la
+classe des tores maximaux : par le premier principe on se ramène au cas où le
+tore maximal est distingué, puis par le second à trois cas — $K$ fini, déjà
+traité ; $K$ unipotent connexe, qui se dévisse par commutateurs jusqu'au cas
+commutatif ; et un troisième que la page ne permet pas de lire\footnote{La page
+écrit « deux » puis le corrige en « trois cas » ; deux lignes biffées précèdent
+la conclusion, et le troisième cas annoncé n'est pas lu. Vraisemblablement le
+tore lui-même, commutatif ; on ne le restitue pas.}.
+
+C'est une esquisse, non une démonstration : elle repose sur la conjugaison des
+sous-groupes de Cartan infinitésimaux et sur des dévissages que la page ne
+détaille pas. Le cadre — gerbes, liens, classes neutres, action de
+$H^2(\mathfrak{Z})$ — est celui que Giraud publiera dans \emph{Cohomologie non
+abélienne} (1971) ; des énoncés de neutralité pour les corps de dimension
+$\leq 1$ ont été étudiés ensuite, notamment par Douai, et l'on ne vérifie pas
+ici s'ils couvrent exactement celui-ci, qui admet des liens non lisses.
+
+\pagerange{15}{26}
+\section*{Le cas non semi-simple : radical, sous-groupes de Borel, algèbres de Lie (pages 15 à 26)}
+
+Le feuillet de la page 15 porte « Cas non semi-simple » et, en dessous,
+« Question de rationalité du radical, définition de la “variété des drapeaux”
+etc. »\footnote{« semi- » est écrit avec le signe ½, son abréviation
+habituelle ; au-dessus, une ligne biffée commence « Égalité ».}. La liasse est
+faite de feuillets séparés, plusieurs barrés ; on les lit dans l'ordre.
+
+\pagerange{16}{16}
+\subsection*{Un radical qui n'est pas défini sur $k$ (page 16)}
+
+Soient $k$ un corps et $a \in k$. Soit $G$ le groupe des matrices diagonales par
+blocs $(A,B)$, où
+\[
+A = \begin{pmatrix} x & ay \\ y & x \end{pmatrix}, \qquad
+B = \begin{pmatrix} u & v \\ w & z \end{pmatrix}, \qquad
+\det A = \det B \neq 0 .
+\]
+L'application $(A,B) \mapsto B \bmod (\text{centre})$ est un homomorphisme sur
+$PGL_2$, de noyau
+\[
+Z = \{ (A, uI) \ :\ x^2 - ay^2 = u^2 \neq 0 \},
+\]
+qui est le centre de $G$, et dont le sous-schéma réduit sur $\bar k$ est le
+radical de $G_{\bar k}$\footnote{La page écrit « $GP(2)$ », lu tel quel ; c'est
+$PGL_2$. La page dit « $Z$ = centre de $G$ = radical de $G$ ». Le centre est le
+schéma $Z$ ; le radical, qui est lisse par définition, est $(Z_{\bar k})_{\mathrm{red}}$.
+La feuille est une petite fiche, d'une main plus ronde et plus posée que les
+pages voisines.}.
+
+Le groupe $G$ est défini sur $k$. Mais si $k$ est de caractéristique 2 et
+$a \notin k^2$, le radical de $G_{\bar k}$ ne l'est pas : l'équation de $Z$
+s'écrit $(x+u)^2 = ay^2$, irréductible sur $k$ mais non réduite sur
+$k(\sqrt a)$, où elle devient $((x+u) + \sqrt a\, y)^2 = 0$ ; le schéma $Z$ est
+défini sur $k$ et n'est pas lisse, et son sous-schéma réduit sur $\bar k$ ne
+descend pas à $k$\footnote{La page dit seulement « $Z$ ne l'est pas » : ce qui
+n'est pas défini sur $k$, c'est le radical, sous-groupe réduit. Le facteur $A$
+parcourt la restriction de Weil $R_{k(\sqrt a)/k}\mathbb{G}_m$ relative à une
+extension radicielle.}. Il existe des exemples analogues en toute
+caractéristique $p > 0$.
+
+C'est le phénomène qu'on étudie aujourd'hui sous le nom de groupes
+\emph{pseudo-réductifs} (Borel--Tits ; Conrad, Gabber et Prasad, 2010) : sur un
+corps imparfait, le radical d'un groupe lisse connexe n'est pas toujours défini
+sur le corps de base, et la restriction de Weil de $\mathbb{G}_m$ à travers une
+extension radicielle en est l'exemple premier.
+
+\pagerange{17}{19}
+\subsection*{Le sous-groupe de Borel et le normalisateur de son algèbre de Lie (pages 17 à 19)}
+
+Soient $G$ un groupe affine lisse connexe sur un corps, $B$ un sous-groupe de
+Borel, $\mathfrak{g}$ et $\mathfrak{L}$ leurs algèbres de Lie. On considère
+l'application $\mathrm{Drap}(G) = G/B \to \mathrm{Grass}(\mathfrak{g})$,
+$gB \mapsto \mathrm{Ad}(g)\mathfrak{L}$. Elle se factorise par
+$G/\mathrm{Nor}_G(\mathfrak{L})$, qui s'envoie par une immersion dans la
+grassmannienne. D'où l'équivalence des conditions
+\begin{itemize}
+\item[(i)] $B = \mathrm{Nor}_G(\mathfrak{L})$, normalisateur schématique ;
+\item[(ii)] $\mathfrak{L} = \mathrm{Nor}_{\mathfrak{g}}(\mathfrak{L})$ ;
+\item[(iii)] $\mathrm{Drap}(G) \to \mathrm{Grass}(\mathfrak{g})$ est un
+monomorphisme.
+\end{itemize}
+L'en-tête de la page dit la clef : un sous-groupe de Borel est son propre
+normalisateur.
+
+(i) $\Rightarrow$ (ii) : l'algèbre de Lie du stabilisateur schématique d'un
+sous-espace est le stabilisateur de ce sous-espace dans l'algèbre de Lie, donc
+$\mathrm{Lie}\,\mathrm{Nor}_G(\mathfrak{L}) =
+\mathrm{Nor}_{\mathfrak{g}}(\mathfrak{L})$\footnote{La page écrit
+« $\mathrm{Lie}\,N_G(B) = \mathrm{Nor}_{\mathfrak{g}}\mathfrak{L}$ » ; c'est le
+normalisateur de $\mathfrak{L}$, non celui de $B$, dont il faut l'algèbre de
+Lie.}.
+
+(ii) $\Rightarrow$ (i) : soit $B' = \mathrm{Nor}_G(\mathfrak{L}) \supset B$. Son
+algèbre de Lie est $\mathrm{Nor}_{\mathfrak{g}}(\mathfrak{L}) = \mathfrak{L}$, de
+dimension $\dim B \leq \dim B'$ ; donc $B'$ est lisse et $B'^0 = B$. Alors $B'$
+normalise $B$, et comme $B$ est son propre normalisateur, $B' = B$.
+
+(i) $\Leftrightarrow$ (iii) : l'application se factorise par
+$G/B \to G/\mathrm{Nor}_G(\mathfrak{L})$, qui est un isomorphisme si et seulement
+si $B = \mathrm{Nor}_G(\mathfrak{L})$. Sur l'espace tangent à l'origine, elle
+induit $\mathfrak{g}/\mathfrak{L} \to \mathrm{Hom}(\mathfrak{L},
+\mathfrak{g}/\mathfrak{L})$, $X \mapsto \mathrm{ad}(X) \bmod \mathfrak{L}$, de
+noyau $\mathrm{Nor}_{\mathfrak{g}}(\mathfrak{L})/\mathfrak{L}$ ; c'est le calcul
+que la page esquisse dans un passage encadré et barré\footnote{Ce passage se lit
+mal ; on y lit « $\mathfrak{g}/\mathfrak{L} \to \mathrm{Grass}(\mathfrak{g})$ »,
+« $D_X(\mathfrak{L})$ » et « est égal à
+$\mathrm{Nor}_{\mathfrak{g}}(\mathfrak{L})/\mathfrak{L}$ ».}.
+
+Ces conditions ne sont pas toujours vérifiées : $SL_2$ en caractéristique 2 les
+met en défaut. En effet, avec la base habituelle $X, H, Y$ de $\mathfrak{sl}_2$,
+les relations deviennent $[H,X] = [H,Y] = 0$ et $[X,Y] = H$ (on refait le calcul
+à la page 41) ; pour $\mathfrak{L} = kX + kH$, on a $[Y,X] = H \in \mathfrak{L}$ et
+$[Y,H] = 0$, donc $\mathrm{Nor}_{\mathfrak{g}}(\mathfrak{L}) = \mathfrak{g}$. En
+revanche $\mathrm{Drap}(G) \to \mathrm{Grass}(\mathfrak{g})$ reste injectif sur
+les points : $H$ est la matrice identité en caractéristique 2, et $kH +
+k\,\mathrm{Ad}(g)X$ détermine la droite nilpotente $k\,\mathrm{Ad}(g)X$, donc
+$gB$. La page 19 reprend la liste sous cette forme, (1) les trois conditions,
+(1') la seule injectivité, « moins intéressante », vraie pour $SL_2$, et pose la
+question :
+
+\emph{Question.} Soit $T \subset G$ un tore maximal et $\mathrm{Drap}_T(G)$ le
+schéma des sous-groupes de Borel contenant $T$. L'application
+$\mathrm{Drap}_T(G) \to \mathrm{Grass}(\mathfrak{g})$ est-elle un monomorphisme ?
+
+On se ramène au cas semi-simple ; un sous-groupe de Borel contenant $T$ s'écrit
+$T \cdot \prod_{\alpha} U_\alpha$ sur les racines positives d'un système, et les
+$\mathfrak{g}_\alpha \subset \mathfrak{L}$ le déterminent\footnote{La page écrit
+$P_\alpha$ pour ces sous-groupes radiciels ; la suite est en grande partie
+illisible. La première ligne de la page 19 dit l'énoncé « faux par ex.\ pour $G$
+semi-simple », avec une exception douteuse « $Gl(2,k)$, $k$ de car.\ 2 ».}.
+
+Au bas de la page 18, barrée, se trouvent deux énoncés indépendants. Un
+corollaire : si $K \subset G$ avec $G$ de type multiplicatif de type fini sur
+$S$ et $K$ quasi-fini de degré borné, il existe $n$ tel que $K \subset {}_nG$, et
+${}_nG$ étant fini sur $S$, $K$ l'est aussi\footnote{La page écrit « [$\exists$
+… tel que $K \subset {}_nG$] » ; la condition qui fournit $n$ est
+illisible. On lui donne la forme de la page 26, où le même argument est fait
+avec le degré constant. Une note en haut à droite, reliée à « $K \subset G$ »,
+se lit « pas … fermé ».}. Et le lemme de Chevalley : pour $H$ sous-groupe
+fermé d'un groupe affine $G$ de type fini, il existe une représentation linéaire
+$V$ de $G$ et une droite de $V$ dont $H$ est le stabilisateur.
+
+\pagerange{20}{24}
+\subsection*{Sous-groupes contenant un sous-groupe de Cartan (pages 20 à 24)}
+
+\emph{Énoncé.} Soient $S$ un schéma, $G$ un $S$-groupe réductif, $C$ un
+sous-groupe de Cartan de $G$ et $T$ son tore maximal, $\mathfrak{t} =
+\mathrm{Lie}(T)$. Soit $H$ un sous-groupe lisse de $G$, à fibres connexes,
+contenant $C$, d'algèbre de Lie $\mathfrak{h} \subset \mathfrak{g}$. Supposons que
+sur chaque fibre aucun poids de $\mathfrak{t}$ dans $\mathfrak{g}/\mathfrak{h}$ ne
+soit nul. Alors $H = \mathrm{Nor}_G(\mathfrak{h})^0$ ; en particulier $H$ est
+déterminé par $\mathfrak{h}$.
+
+\emph{Démonstration.} Si $X \in \mathfrak{g}$ normalise $\mathfrak{h}$, alors
+$[\mathfrak{t}, X] \subset \mathfrak{h}$, donc l'image de $X$ dans
+$\mathfrak{g}/\mathfrak{h}$ est tuée par $\mathfrak{t}$, donc nulle par
+l'hypothèse sur les poids : $\mathrm{Nor}_{\mathfrak{g}}(\mathfrak{h}) = \mathfrak{h}$
+sur chaque fibre. Un résultat de Demazure ramène l'égalité
+$H = \mathrm{Nor}_G(\mathfrak{h})^0$ à cette condition fibre à fibre\footnote{La
+page renvoie à « Exposé … Demazure », le numéro illisible ; il s'agit des
+exposés de Demazure du Séminaire de géométrie algébrique sur les schémas en
+groupes (SGA 3, 1962--1964). Les pages 20 et 24 sont barrées de longues
+diagonales et d'une grande croix.}.
+
+La page poursuit vers le cas général : le centre réductif $\mathfrak{Z}$ de $G$
+est contenu dans $T$, donc dans $H$ ; en divisant par $\mathfrak{Z}$ on se ramène
+à $\mathfrak{Z} = 0$, et alors $\mathfrak{t}$ opère fidèlement — la phrase s'arrête
+au bas de la page 20. La page 24 reprend l'énoncé sans l'hypothèse sur les
+poids (« $H$ de rang réductif égal à celui de $G$ »), en affirmant que, sur un
+corps algébriquement clos, $\mathrm{Nor}_{\mathfrak{g}}(\mathfrak{h}) = \mathfrak{h}$
+dès que $H$ contient un tore maximal. Sous cette forme c'est faux : pour
+$G = SL_2$ en caractéristique 2 et $H = B$, on a vu que
+$\mathrm{Nor}_{\mathfrak{g}}(\mathfrak{L}) = \mathfrak{g}$, et
+$\mathrm{Nor}_G(\mathfrak{L})^0$ n'est pas lisse\footnote{L'hypothèse
+« infinitésimale » de la page 20 — « $\mathfrak{t}$ opérant sur
+$\mathfrak{g}/\mathfrak{h}$ … $\neq 0$ sur chaque fibre », lue en partie — est
+exactement ce qui manque ici : dans l'exemple, le poids $-\alpha$ de $T$ sur
+$\mathfrak{g}/\mathfrak{L}$ est non nul, mais sa différentielle est nulle en
+caractéristique 2. La page 24 est barrée d'une grande croix, ce qui est peut-être
+le jugement de l'auteur.}.
+
+Entre ces deux versions, la page 21 pose trois questions sur les sous-groupes
+de Borel en famille. Pour $G$ réductif sur $S$ et $B$ un sous-groupe lisse dont
+les fibres sont des Borel, $B$ est-il un sous-groupe de Borel ? Oui, on se
+ramène au cas semi-simple adjoint\footnote{La page qualifie $B$
+d'« invariant », lecture douteuse : un sous-groupe distingué n'est pas un Borel.
+Dans le langage de SGA 3, un sous-groupe lisse fermé à fibres de Borel est un
+sous-groupe de Borel par définition ; la question porte alors sur la
+fermeture. Un premier argument, encadré et barré, passe par la décomposition
+$\mathfrak{L} = \mathfrak{t} + \sum_{\alpha > 0} \mathfrak{g}_\alpha$.}. Sans
+hypothèse de réductivité, la question se ramène aux fibres géométriques, et du
+point de vue infinitésimal à l'annulation
+\[
+H^1(B, \mathfrak{g}/\mathfrak{L}) = 0 \ ?
+\]
+qui gouverne les déformations de $B$ comme sous-groupe de $G$.
+
+La page 22, barrée, énonce un théorème avec un point d'interrogation : pour $G$
+lisse connexe sur $k$, de radical $\bar R$ sur $\bar k$ et
+d'algèbre de Lie $\bar{\mathfrak{r}}$, si les poids nuls d'un tore maximal
+$\bar T$ dans $\mathfrak{g}/\bar{\mathfrak{r}}$ sont contrôlés — par exemple si
+$\bar T$ opère trivialement sur $\bar{\mathfrak{r}}$ —, alors $\bar R$ est défini
+sur $k$\footnote{La condition exacte est en partie illisible, et l'énoncé est
+précédé de « (?) ». L'exemple de la page 16 montre qu'une hypothèse de ce genre
+est nécessaire.}. La page 23 est un feuillet de croquis où se lit la chaîne
+d'implications que ces pages explorent :
+\[
+\text{radical défini sur } k \ \Longleftarrow\
+\text{la variété infinitésimale des Borel est triviale},
+\]
+avec l'annulation $H^1(\mathfrak{R}, \mathfrak{g}/\mathfrak{L})^{B/R} = 0$, $R$
+le radical unipotent, et la remarque que tout cela diffère pour $SL_2$ en toute
+caractéristique\footnote{Le feuillet est écrit en tous sens et en partie barré ;
+on n'en retient que les fragments que la transcription lit.}.
+
+\pagerange{25}{26}
+\subsection*{Le théorème des Borel, et une remarque sur $\mathbf{Pic}^{\tau}$ (pages 25 et 26)}
+
+\emph{Théorème (page 25).} Soient $G$ un groupe affine connexe sur $k$, $B$ un
+sous-groupe de Borel, $\mathfrak{L} \subset \mathfrak{g}$ son algèbre de Lie.
+\begin{itemize}
+\item[a)] $B = \mathrm{Norm}_G(B)$ ;
+\item[b)] $B \to \mathrm{Norm}_G(\mathfrak{L})$ est surjectif sur les points à
+valeurs dans un corps algébriquement clos, donc
+$\mathrm{Drap}(G) \to \mathrm{Grass}(\mathfrak{g})$ est injectif sur ces points ;
+\item[c)] les conditions (i), (ii), (iii) des pages 17 à 19 sont équivalentes.
+\end{itemize}
+On se ramène au cas $k$ algébriquement clos, puis au cas semi-simple. a) est le
+théorème de Chevalley sur les points ; c) a été démontré plus haut. b) porte un
+point d'interrogation dans la marge et n'est pas démontré\footnote{Dans
+l'exemple de $SL_2$ en caractéristique 2, b) est vrai sur les points, alors que
+le normalisateur schématique de $\mathfrak{L}$ n'est pas réduit : c'est la
+différence entre b) et (i).}.
+
+\emph{Une remarque de finitude (page 26).} La page commence au milieu d'un
+argument, barrée de quatre traits. Soit $K$ un $S$-groupe commutatif
+quasi-fini dont le degré des fibres $K_s$, fonction constructible de $s$, est
+constant et fini, disons $n$ ; alors $u_n = n \cdot \mathrm{id}_K$ est nul sur
+les fibres, ${}_nK = \mathrm{Ker}\,u_n$ est un sous-schéma ouvert et fermé de $K$
+contenant toutes les fibres, donc égal à $K$\footnote{La lecture de ce passage
+est très incertaine ; l'ouverture de ${}_nK$ dans $K$ vient de ce que la section
+unité de $K$ est une immersion ouverte, comme le dit la phrase soulignée.}.
+
+Une application est annoncée, et encadrée : si $X/S$ est plat et propre, si
+$\mathbf{Pic}^{\tau}_{X/S}$ existe, et si en un point $s$ le schéma
+$\mathbf{Pic}^{0}_{X_s/k(s)}$ est lisse, alors $\mathbf{Pic}^0_{X/S}$ existe au
+voisinage de $s$, le quotient $\mathbf{Pic}^{\tau}_{X/S}/\mathbf{Pic}^0_{X/S}$
+existe et est fini sur $S$ ; si de plus $\mathbf{Pic}^{\tau}_{X/S}$ est propre,
+la torsion du groupe de Néron--Severi est constante\footnote{Les hypothèses
+exactes sont en partie illisibles et la page ne démontre rien ; on transmet
+l'énoncé comme annoncé. C'est le terrain de l'exposé XIII de SGA 6 (1966--1967),
+où ces questions de finitude de $\mathbf{Pic}^{\tau}/\mathbf{Pic}^0$ sont
+traitées.}.
+
+\pagerange{27}{35}
+\section*{Hyperalgèbres (pages 27 à 35)}
+
+Le feuillet de la page 27 porte « Groupes radiciels et Hyperalgèbres des
+groupes diagonalisables », « radiciels » écrit au-dessus de « diagonalisables »
+biffé. L'\emph{hyperalgèbre} $\mathrm{Dist}(G)$ d'un $A$-schéma en groupes $G$ —
+aujourd'hui son algèbre de distributions — est l'ensemble des formes
+$A$-linéaires sur l'algèbre affine qui s'annulent sur une puissance de l'idéal
+d'augmentation ; en caractéristique nulle, c'est l'algèbre enveloppante de
+l'algèbre de Lie, et en caractéristique $p$ elle contient en plus les
+« puissances divisées » des dérivations.
+
+\pagerange{28}{28}
+\subsection*{Le groupe additif et les fibrés vectoriels (page 28)}
+
+Pour $G = \mathbb{G}_a$, l'hyperalgèbre est l'algèbre à puissances divisées
+$A\{X\}$, de base les $\gamma^n X$, avec
+\[
+\gamma^p X \cdot \gamma^q X = \binom{p+q}{p} \gamma^{p+q} X, \qquad
+\Delta\, \gamma^n X = \sum_{p+q=n} \gamma^p X \otimes \gamma^q X .
+\]
+Autrement dit, dans le complété $\widehat{\mathcal{U}}$, l'élément
+$\exp X = \sum_n \gamma^n X$ est multiplicatif :
+$\Delta \exp X = \exp X \otimes \exp X$\footnote{La page écrit
+« $\exp X \otimes \exp Y$ », sans doute pour $Y = $ la copie de $X$ dans le
+second facteur ; avec une seule variable, c'est $\exp X \otimes \exp X$. Au-dessus
+de la formule de $\Delta$, une première version biffée en $X^{(n)}$.}, et
+$\lambda \mapsto \exp \lambda X$ est une représentation de $\mathbb{G}_a$ dans le
+groupe des éléments inversibles de $\widehat{\mathcal{U}}$. La formule de
+multiplication, que la page n'écrit pas, est celle qu'on attend des puissances
+divisées.
+
+Pour un fibré vectoriel $V(E) = \mathrm{Spec}\,\mathrm{S}_{\mathcal{O}_S}(E)$, $E$
+localement libre, l'hyperalgèbre est l'algèbre à puissances divisées
+$\mathcal{O}_S\{\check E\}$ sur le dual, avec le même coproduit, et
+$X \mapsto \exp X$ est un homomorphisme de faisceaux en groupes de $\check E$ dans
+les éléments multiplicatifs du complété\footnote{La page écrit « de $E$ dans … » :
+les points de $V(E)$ sont les formes linéaires sur $E$, donc les sections de
+$\check E$, et c'est $\check E$ qui convient. Le coproduit est écrit, ici aussi,
+avec un $\gamma^q Y$.}.
+
+\pagerange{29}{31}
+\subsection*{Le groupe multiplicatif (pages 29 et 31)}
+
+Soit $G = \mathbb{G}_m = \mathrm{Spec}\,A[t,t^{-1}]$, et $s = t - 1$, générateur
+de l'idéal d'augmentation. L'hyperalgèbre a pour base les $X_n$ définis par
+$\langle X_n, s^m \rangle = \delta_{nm}$. Comme $\Delta t = t \otimes t$,
+\[
+\Delta s = s \otimes 1 + 1 \otimes s + s \otimes s .
+\]
+Le coproduit de l'hyperalgèbre est dual du produit de l'algèbre affine, et
+$s^p s^q = s^{p+q}$ donne $\Delta X_n = \sum_{p+q=n} X_p \otimes X_q$. Le produit
+est dual du coproduit : $\langle X_p X_q, s^n \rangle = \langle X_p \otimes X_q,
+(\Delta s)^n \rangle$, et
+\[
+(\Delta s)^n = \sum_{\alpha+\beta+\gamma = n}
+\frac{n!}{\alpha!\,\beta!\,\gamma!}\, s^{\alpha+\gamma} \otimes s^{\beta+\gamma}.
+\]
+Le coefficient de $s^p \otimes s^q$ correspond à $\gamma = p+q-n$, $\alpha = n-q$,
+$\beta = n-p$, qui sont $\geq 0$ si et seulement si $\sup(p,q) \leq n \leq p+q$.
+D'où les formules que la page encadre :
+\[
+\Delta X_n = \sum_{p+q=n} X_p \otimes X_q, \qquad
+X_p X_q = \sum_{\sup(p,q) \leq n \leq p+q}
+\frac{n!}{(n-p)!\,(n-q)!\,(p+q-n)!}\, X_n .
+\]
+Par exemple $X_1^2 = 2X_2 + X_1$. Le coproduit réduit
+$\delta X_n = \sum_{p+q=n,\ p,q>0} X_p \otimes X_q = X_{n-1} \otimes X_1 + \cdots
++ X_1 \otimes X_{n-1}$\footnote{La page développe la somme en
+$X_n \otimes X_1 + X_{n-1} \otimes X_2 + \cdots + X_1 \otimes X_n$, indices décalés
+d'une unité ; les termes doivent vérifier $p + q = n$.} donne
+$\delta X_2 = X_1 \otimes X_1$, et la page vérifie la cohérence :
+$\delta(X_1^2 - X_1) = 2\,X_1 \otimes X_1 = 2\,\delta X_2$.
+
+La page 31 identifie ces éléments. Vus comme opérateurs différentiels invariants,
+$X_n = \binom{\theta}{n}$ avec $\theta = t\,\frac{d}{dt}$, soit
+$X_n = \frac{t^n}{n!}\frac{d^n}{dt^n}$ :
+\[
+X_n(t^m) = \binom{m}{n}\, t^m, \qquad \langle X_n, t^m \rangle = \binom{m}{n},
+\]
+et l'on retrouve $\langle X_n, (t-1)^m \rangle = \sum_k (-1)^k \binom{m}{k}
+\binom{m-k}{n} = \delta_{nm}$, que la page calcule pour $n = 1, 2$\footnote{La
+page écrit aussi les valeurs de l'opérateur $X_n$ sur $(t-1)^m$ — nul pour
+$m < n$, $t^n$ pour $m = n$ — et laisse le cas $m > n$ en blanc : l'opérateur y vaut
+$\binom{m}{n} t^n (t-1)^{m-n}$, qui s'annule en $t = 1$.}. Ainsi
+$X_n = \binom{X}{n}$ avec $X = X_1$ : l'hyperalgèbre de $\mathbb{G}_m$ est l'anneau
+des polynômes à valeurs entières en $X$, et la formule encadrée est l'identité
+$\binom{X}{p}\binom{X}{q} = \sum_n \frac{n!}{(n-p)!(n-q)!(p+q-n)!}\binom{X}{n}$.
+
+\pagerange{33}{35}
+\subsection*{Algèbre affine et hyperalgèbre en dualité (pages 33 à 35)}
+
+Soit $G$ un schéma en groupes affine et lisse sur un anneau $A$, d'algèbre
+affine $\mathrm{Aff}_A(G)$ et d'hyperalgèbre $\mathcal{U}_A(G)$.
+$\mathrm{Aff}_A(G)$ est une $A$-algèbre commutative augmentée, munie d'un
+coproduit multiplicatif coassociatif compatible aux augmentations ;
+$\mathcal{U}_A(G)$ est une $A$-algèbre en général non commutative, munie d'un
+coproduit multiplicatif, coassociatif et cocommutatif\footnote{La page dit
+« associatif, commutatif avec les augmentations » ; on lit coassociatif et
+cocommutatif (l'hyperalgèbre est toujours cocommutative), compatible aux
+augmentations.}. Il y a un accouplement $\langle f, X \rangle$ entre les deux, qui
+identifie $\mathcal{U}_A(G)$ aux formes $A$-linéaires sur $\mathrm{Aff}_A(G)$
+nulles sur une puissance de l'idéal d'augmentation.
+
+$\mathcal{U}_A(G)$ opère à gauche et à droite sur $\mathrm{Aff}_A(G)$, qui en
+devient un bimodule, par $\langle Y, X * f \rangle = \langle Y * X, f \rangle$ et
+$\langle f * Y, X \rangle = \langle f, Y * X \rangle$, avec $\langle \varepsilon,
+X * f \rangle = \langle X, f \rangle$. Inversement $\mathrm{Aff}_A(G)$ opère sur
+$\mathcal{U}_A(G)$ par $\langle g, f \lrcorner X \rangle = \langle gf, X \rangle$ ;
+en particulier $\langle f, X \rangle = \varepsilon(f \lrcorner X)$.
+
+Soit $A \subset B$. Comme $\mathrm{Aff}_A(G)$ est plat sur $A$,
+$\mathrm{Aff}_B(G) = \mathrm{Aff}_A(G) \otimes_A B$ contient $\mathrm{Aff}_A(G)$ ;
+de même $\mathcal{U}_B(G) = \mathcal{U}_A(G) \otimes_A B \supset \mathcal{U}_A(G)$,
+l'égalité venant de ce que $G$ est lisse.
+
+\emph{Proposition 1.} Soit $X \in \mathcal{U}_B(G)$. Conditions équivalentes :
+i) $X \in \mathcal{U}_A(G)$ ; ii) $X * \mathrm{Aff}_A(G) \subset \mathrm{Aff}_A(G)$ ;
+ii bis) $\mathrm{Aff}_A(G) * X \subset \mathrm{Aff}_A(G)$ ; iii)
+$\langle X, \mathrm{Aff}_A(G) \rangle \subset A$.
+
+Les implications i) $\Rightarrow$ ii) $\Rightarrow$ iii) et i) $\Rightarrow$
+ii bis) $\Rightarrow$ iii) sont triviales. Si iii), la restriction de $X$ à
+$\mathrm{Aff}_A(G)$ est une forme $A$-linéaire nulle sur une puissance de
+l'idéal d'augmentation, donc un élément $X_0 \in \mathcal{U}_A(G)$, et $X_0
+\otimes 1 = X$ puisque $\mathrm{Aff}_A(G)$ engendre $\mathrm{Aff}_B(G)$.
+
+\emph{Proposition 2.} Supposons $G$ à fibres connexes. Soit $f \in
+\mathrm{Aff}_B(G)$. Conditions équivalentes : i) $f \in \mathrm{Aff}_A(G)$ ;
+ii) $f \lrcorner\, \mathcal{U}_A(G) \subset \mathcal{U}_A(G)$ ; iii)
+$\langle f, \mathcal{U}_A(G) \rangle \subset A$.
+
+i) $\Rightarrow$ ii) $\Rightarrow$ iii) est évident, et iii) $\Rightarrow$ ii) se
+déduit de la proposition 1 : pour $X \in \mathcal{U}_A(G)$ et $g \in
+\mathrm{Aff}_A(G)$,
+\[
+\langle g, f \lrcorner X \rangle = \langle gf, X \rangle = \langle f, g \lrcorner X
+\rangle \in \langle f, \mathcal{U}_A(G) \rangle \subset A .
+\]
+Pour iii) $\Rightarrow$ i), on utilise la connexité. Soit $C = \mathrm{Aff}_A(G)$
+et $\widehat{C} = \mathrm{Hom}_A(\mathcal{U}, A)$ son complété séparé pour
+l'idéal d'augmentation ; la page compare $C \to C_B$ et $\widehat{C} \to
+\widehat{C}_B$, et s'arrête là. Quand $A$ est un corps, l'argument se termine
+ainsi : décomposons $f = \sum_i f_i b_i$ sur une base $(b_i)$ de $B$ sur $A$ avec
+$b_0 = 1$ ; iii) donne $\langle f_i, X \rangle = 0$ pour $i \neq 0$ et tout $X$, et
+une fonction régulière sur un groupe lisse connexe qui s'annule à tout ordre en
+l'origine est nulle, donc $f = f_0 \in C$\footnote{Cette fin est la nôtre ; la
+page s'arrête sur le diagramme. Pour $A$ quelconque il faut, outre l'injectivité
+de $C \to \widehat{C}$, une hypothèse sur $B/A$ — par exemple $B$ libre sur $A$
+avec une base contenant $1$ —, que la page ne formule pas.}.
+
+\pagerange{36}{41}
+\section*{Cohomologie de l'algèbre de Lie et cohomologie des groupes (pages 36 à 41)}
+
+Le feuillet de la page 36 porte « Cohomologie de l'algèbre de Lie et cohom.\ des
+groupes … ».
+
+\pagerange{37}{39}
+\subsection*{Un groupe et son algèbre de Lie sur une base artinienne (pages 37 à 39)}
+
+Soit $G$ un schéma en groupes lisse sur $S = \mathrm{Spec}\,A$, $A$ artinien
+local de corps résiduel $k$, et $\mathfrak{g} = \mathrm{Lie}_S(G)$ ; l'indice $0$
+désigne la fibre fermée. La représentation adjointe est un morphisme
+$\mathrm{Ad} : G \to \mathbf{Aut}_S(\mathfrak{g})$. L'algèbre de Lie de
+$\mathbf{Aut}(\mathfrak{g}_0)$ est l'algèbre $\mathrm{Der}(\mathfrak{g}_0)$ des
+dérivations, et l'application tangente est $\mathrm{ad} : \mathfrak{g}_0 \to
+\mathrm{Der}(\mathfrak{g}_0)$, de noyau le centre $H^0(\mathfrak{g}_0,
+\mathfrak{g}_0)$ et de conoyau les dérivations extérieures
+$H^1(\mathfrak{g}_0,\mathfrak{g}_0)$.
+
+(1) Si $H^0(\mathfrak{g}_0,\mathfrak{g}_0) = 0$, le noyau de $\mathrm{Ad}$ a une
+algèbre de Lie nulle : il est étale, et $\mathrm{Ad}$ est non ramifié. Si de
+plus $G_0$ n'a pas de sous-groupe distingué fini étale non trivial, ce noyau
+est trivial, $\mathrm{Ad}$ est un monomorphisme, donc une immersion
+fermée\footnote{La page conclut directement de $H^0 = 0$ à « monomorphisme ».
+C'est trop : pour $SL_n$ avec $p \nmid n$, le centre de $\mathfrak{sl}_n$ est nul
+mais le noyau de $\mathrm{Ad}$ est $\mu_n$. La condition entre crochets de la
+page (« si $G_0$ n'a pas de sous-groupe … non trivial ») est ce qui rétablit
+l'énoncé. Le numéro (1) n'est pas écrit ; la suite renvoie à « (1) et (2) ».}.
+
+(2) (1) et $H^1(\mathfrak{g}_0,\mathfrak{g}_0) = 0$ équivalent à ce que
+$\mathrm{Ad}$ soit étale. Sous l'hypothèse supplémentaire de (1), c'est alors une
+immersion ouverte, et
+\[
+G \simeq \mathbf{Aut}^0_S(\mathfrak{g})
+\]
+si $G$ est à fibres connexes\footnote{Sur la fibre fermée : si $\mathrm{ad}$ est
+bijectif, $\dim \mathbf{Aut}(\mathfrak{g}_0) \leq \dim \mathrm{Der}(\mathfrak{g}_0)
+= \dim G_0$, et l'image de $G_0$ est de dimension $\dim G_0$, si bien que
+$\mathbf{Aut}(\mathfrak{g}_0)$ est lisse et $\mathrm{Ad}_0$ étale. Une note en
+marge, incomplète, ajoute que (1) donnerait
+$\mathbf{Aut}_S(\mathfrak{g}) \simeq \mathbf{Aut}_S(G)$ pour $G$ connexe, avec deux
+renvois à « Tohoku » et un « contre-ex. ».}.
+
+Partons maintenant d'une algèbre de Lie $\mathfrak{g}$ seule, localement libre
+sur $S$, et posons $H = \mathbf{Aut}_S(\mathfrak{g})$. C'est un schéma en groupes,
+et $\mathrm{Lie}(H_0) = \mathrm{Der}(\mathfrak{g}_0)$ ; $\mathfrak{g}_0 \to
+\mathfrak{h}_0$ est un isomorphisme sous (1) et (2). On ne peut pas en déduire que
+$H$ est lisse sur $S$. Mais la condition
+\[
+(3) \qquad H^2(\mathfrak{g}_0, \mathfrak{g}_0) = 0,
+\]
+qui signifie que $\mathfrak{g}_0$ n'a pas de déformation infinitésimale non
+triviale de sa structure, entraîne, dit la page, que
+$\mathbf{Aut}_S(\mathfrak{g})$ est lisse sur $S$\footnote{Affirmé sans
+démonstration. Sur un corps, l'argument est un calcul de dimensions : si
+$H^2 = 0$, l'orbite de la structure dans le schéma des lois d'algèbre de Lie est
+ouverte, d'où $\dim \mathbf{Aut}(\mathfrak{g}_0) \geq \dim
+\mathrm{Der}(\mathfrak{g}_0)$, donc l'égalité et la lissité.}. Alors (1), (2) et
+(3) entraînent que $\mathfrak{g}$ provient d'un groupe, à savoir
+$\mathbf{Aut}^0_S(\mathfrak{g})$, et inversement, pour $G$ connexe donnant
+$\mathfrak{g}$, les variations infinitésimales non triviales de $G$ et de
+$\mathfrak{g}$ se correspondent ; la page nomme Gerstenhaber\footnote{La page 39
+est d'une lecture très incertaine, presque mot à mot.}. La question du
+relèvement de la structure de groupe est équivalente à celle de la structure
+d'algèbre de Lie, et l'on y trouve une interprétation de $H^3(\mathfrak{g},
+\mathfrak{g})$ : si $H^3(\mathfrak{g},\mathfrak{g}) = 0$, on peut relever, de
+façon unique à équivalence près\footnote{L'exposant 3 est lu sur un signe qui
+ressemble à « HB » ; c'est la place qu'occupent les obstructions dans la théorie
+des déformations des algèbres de Lie (Gerstenhaber, 1964 ; Nijenhuis et
+Richardson, 1966--1967).}.
+
+\emph{Question.} Définir $H^*(G, \mathfrak{g}) \to H^*(\mathfrak{g}, \mathfrak{g})$,
+plus généralement pour toute représentation linéaire de $G$, et une suite
+spectrale reliant $H^*(G, -)$ et $H^*(\mathfrak{g}, -)$, qui exprimerait la
+différence entre le global et l'infinitésimal. Pour $G$ semi-simple adjoint,
+a-t-on $H^*(G,\mathfrak{g}) = H^*(\mathfrak{g},\mathfrak{g}) = 0$ ?
+
+En caractéristique nulle, oui : les représentations de $G$ sont complètement
+réductibles, et $H^*(\mathfrak{g}, M) = 0$ pour un $\mathfrak{g}$-module $M$ de
+dimension finie sans invariants. En caractéristique $p$, la cohomologie
+ordinaire de l'algèbre de Lie ne s'annule pas en général : pour
+$\mathfrak{pgl}_2$ en caractéristique 2, la dérivation $X \mapsto X$, $Y \mapsto 0$,
+$H' \mapsto 0$ (notations de la page 41) n'est pas intérieure, et
+$H^1(\mathfrak{g},\mathfrak{g}) \neq 0$\footnote{La vérification est immédiate sur
+les relations de la page 41 ; une dérivation intérieure $\mathrm{ad}(aX + bY +
+cH')$ envoie $X$ sur $\pm cX$ et $Y$ sur $\mp cY$, et ne peut envoyer $X$ sur $X$ et
+$Y$ sur $0$. Le cadre moderne de la question est celui des noyaux de Frobenius
+$G_1$, dont la cohomologie se compare à celle de la $p$-algèbre de Lie
+(Friedlander et Parshall, années 1980).}.
+
+\pagerange{41}{41}
+\subsection*{Les algèbres de Lie de rang 1 en caractéristique 2 (page 41)}
+
+Avec une base $X, H, Y$ et les relations générales $[X,H] = \lambda(H) X$,
+$[Y,H] = -\lambda(H) Y$, $[X,Y] = H$, la page traite deux algèbres de Lie en
+caractéristique 2.
+
+Pour $\mathfrak{sl}_2$ : $[H,X] = [H,Y] = 0$, $[X,Y] = H$. Le normalisateur de
+$kY$ est $kY + kH = \mathfrak{L}$, algèbre de Lie d'un sous-groupe de Borel ; le
+normalisateur de $\mathfrak{h} = kH$ est $\mathfrak{g}$ tout entier, $H$ étant
+central. C'est l'exemple des pages 17 à 24.
+
+Pour la seconde, que la page appelle « $Spl(2,k)$ » : $[H',X] = X$,
+$[H',Y] = -Y$, $[X,Y] = 0$ ; ce sont les relations de $\mathfrak{pgl}_2$ en
+caractéristique 2\footnote{L'identification à $\mathfrak{pgl}_2$ est la nôtre ;
+la lecture « $Spl$ », qui surcharge un autre mot, est douteuse, de même que le
+« $Sl(2)$ » souligné deux fois en tête de page. Dans $\mathfrak{pgl}_2$ en
+caractéristique 2, l'image de $\mathrm{diag}(1,-1)$ est nulle et celle de
+$\mathrm{diag}(1,0)$ joue le rôle de $H'$.}. Le normalisateur de $kY$ y est
+$\mathfrak{g}$ : la droite des éléments nilpotents d'un Borel y est un idéal. La
+page s'arrête sur un second normalisateur, inachevé.
+
+\pagerange{43}{58}
+\section*{Les formes d'un groupe réductif (pages 43 à 58)}
+
+Le feuillet de la page 43 porte seulement « $H^1$ ». La liasse qu'il ouvre est
+d'un seul tenant, et son titre intérieur, « Forme … type », a un mot central
+illisible qui revient trois fois ; l'usage qu'en fait la page — une forme qui
+possède un sous-groupe de Borel contenant un tore maximal — est celui de
+\emph{forme quasi-déployée}, qu'on adopte\footnote{Le mot n'est pas lu ; la
+restitution est fondée sur l'usage de la page 46 (« quand $G$ est une forme
+… type, i.e.\ possède un sous-groupe de Borel $\supset$ tore maximal ») et
+du théorème de la page 52. La théorie est celle de l'exposé XXIV de SGA 3
+(Demazure, 1964).}.
+
+\pagerange{44}{46}
+\subsection*{Type extérieur et forme quasi-déployée (pages 44 et 46)}
+
+Soient $G_0$ un groupe réductif déployé sur $\mathbb{Z}$, muni d'un couple
+$T_0 \subset B_0$ et d'un épinglage, $\Gamma_0 = \mathbf{Aut}(G_0)$, $\Pi_0 =
+\mathrm{ad}(G_0)$, $E_0 = \mathbf{Ext}(G_0)$ ; l'épinglage fournit une section
+$E_0 \to \Gamma_0$ et $\Gamma_0 = E_0 \ltimes \Pi_0$. Soit $S$ un schéma de base.
+
+Une forme $G$ de $G_0$ sur $S$ correspond à un torseur sous $\Gamma_{0,S}$, et son
+image $\rho_G \in H^1(S, E_0)$ est le \emph{type extérieur} de $G$. Pour
+$\rho \in H^1(S,E_0)$, le tordu $G_1 = G_0^{\rho}$ de $G_0$ par $\rho$, à travers la
+section $E_0 \to \Gamma_0$, est la \emph{forme quasi-déployée} de type $\rho$ ; il
+contient le couple tordu $T_1 \subset B_1$. On note $\Pi_1$, $\Gamma_1$, $E_1$ les
+tordus correspondants.
+
+Partant de $\rho$ seul, la donnée d'une forme $G$ munie d'un isomorphisme
+$\varphi : \rho \xrightarrow{\sim} \rho_G$ équivaut à celle d'un torseur sous
+$\Pi_1$. Les classes d'isomorphisme de couples $(G,\varphi)$ — les isomorphismes
+étant ceux qui respectent $\varphi$, dits \emph{intérieurs} — sont données par
+$H^1(S,\Pi_1)$, et l'application
+\[
+H^1(S, \Pi_1) \longrightarrow H^1(S, \Gamma_1) \simeq H^1(S, \Gamma_0)
+\]
+a pour image les classes de formes de type extérieur $\rho$ : ce sont les
+\emph{formes intérieures relatives à $\rho$}\footnote{La fin de la phrase,
+écrite sous la formule, est d'une lecture très incertaine. Deux notes en marge,
+très incomplètes, distinguent « $G_0$ et $\Pi_0$, $G$ et $\Pi_1$ » et la notion
+d'isomorphisme intérieur.}.
+
+La suite exacte $e \to \Pi_1 \to \Gamma_1 \to E_1 \to e$ donne
+\[
+H^0(S, E_1) \to H^1(S, \Pi_1) \to H^1(S, \Gamma_1) \to H^1(S, E_1).
+\]
+L'application $H^1(S,\Pi_1) \to H^1(S,\Gamma_1)$ n'est pas injective a priori. Sa
+fibre au-dessus de la classe neutre est $H^0(S,E_1)/\mathrm{Im}\,H^0(S,\Gamma_1)$,
+qui est triviale puisque $\Gamma_1$ est un produit semi-direct. Au-dessus d'une
+autre classe $\xi$, on tord par $\xi$ et l'on trouve la suite
+$e \to \mathrm{Ad}(G) \to \mathbf{Aut}(G) \to \mathbf{Ext}(G) \to e$ : la fibre est
+triviale si et seulement si tout automorphisme extérieur de $G$ provient d'un
+automorphisme. C'est vrai, évidemment, quand $G$ est quasi-déployée, l'épinglage
+de $G_1$ fournissant la section.
+
+En général c'est faux\footnote{La note en marge le dit faux sur $\mathbb{R}$,
+avec « deux formes hermitiennes » non isomorphes, sans plus de précision lisible.
+L'exemple standard est arithmétique : pour $D$ une algèbre à division de degré
+$n \geq 3$ et d'exposant $> 2$ sur un corps de nombres, $G = SL_1(D)$ est une forme
+intérieure de $SL_n$, $\mathbf{Ext}(G)(k) = \mathbb{Z}/2\mathbb{Z}$, mais
+l'automorphisme extérieur non trivial ne provient d'aucun automorphisme
+défini sur $k$, faute d'anti-automorphisme de $D$.}.
+
+\pagerange{48}{50}
+\subsection*{Tores maximaux, sous-groupes de Borel, couples de Killing (pages 48 et 50)}
+
+Soit $G$ une forme intérieure de $G_1$, obtenue en tordant $G_1$ par un torseur $P$
+de classe $\xi$. Les schémas des tores maximaux, des sous-groupes de Borel et
+des \emph{couples de Killing} $(T \subset B)$ de $G$ sont
+\[
+\mathcal{C}(G) = P/N_1, \qquad \mathcal{D}(G) = P/B_1, \qquad \mathcal{C}'(G) =
+P/T_1,
+\]
+le stabilisateur d'un couple de Killing $(T_1 \subset B_1)$ étant
+$N_1 \cap B_1 = T_1$\footnote{La page dispose ces identifications en tableau, avec
+une seconde présentation $Q/N'_1$, $Q/B'_1$, $Q/T'_1$ qu'on ne développe pas ; la
+flèche $\mathcal{C}'(G) \to \mathcal{C}(G)$ est un fibré principal sous $W_1$,
+et $\mathcal{C}'(G) \to \mathcal{D}(G)$ un fibré en $B_1/T_1 = \mathcal{C}(B_1)$,
+dit une note en marge.}. Les couples de Killing s'identifient aussi aux
+immersions intérieures $T_1 \to G$.
+
+\emph{N.B.} Soit $T$ un tore maximal de $G$. Il y a une bijection, fonctorielle en
+$S'/S$, entre les sous-groupes de Borel contenant $T$ et les isomorphismes
+intérieurs $T_1 \to T$. Les conditions suivantes sont équivalentes : $\alpha$)
+$T$ est contenu dans un Borel ; $\beta$) il existe un isomorphisme intérieur
+$T_1 \to T$. On dit alors que $T$ est un \emph{tore de Killing} ; il en existe si
+et seulement si $G$ est isomorphe à une forme quasi-déployée\footnote{La page
+ajoute une condition $\gamma$) avec un adjectif illisible, et un sous-ensemble
+b') d'isomorphismes « génériquement … » qui se projette sur b). On ne les
+restitue pas.}.
+
+Par la théorie de la torsion, la fibre de $H^1(S,B_1) \to H^1(S,G_1)$ au-dessus de
+$\xi$ est en bijection avec l'ensemble des sous-groupes de Borel de $G$ modulo
+conjugaison par $G(S)$ ; elle est non vide si et seulement si $G$ possède un
+sous-groupe de Borel, et dans ce cas elle est réduite à un point si et
+seulement si deux sous-groupes de Borel de $G$ sont toujours conjugués. De même,
+la fibre de $H^1(S,N_1)$ correspond aux tores maximaux de $G$ modulo
+conjugaison — qu'ils soient tous conjugués est exceptionnel, et faux pour des
+raisons arithmétiques —, et la fibre de $H^1(S,T_1)$ aux couples de Killing modulo
+conjugaison\footnote{La page écrit $H^1(S,\bar N_1)$ pour les couples de Killing,
+modulo automorphismes « extérieurs » (lecture douteuse), et y voit l'existence
+d'un « tore de Chevalley » ou d'un « Borel de Chevalley ». Le stabilisateur d'un
+couple étant $T_1$, c'est $H^1(S,T_1)$ qui classe les couples modulo $G(S)$. Pour
+que ces fibres décrivent les classes modulo $G(S)$, on prend $\xi$ dans
+$H^1(S,\Pi_1)$, la torsion se faisant par automorphismes intérieurs ; voir la
+page 58.}.
+
+Pour $S$ local, la page affirme que $N_1$ est produit semi-direct de $W_1 = W_0$
+par $T_1$ et que $H^1(S,N_1) \to H^1(S,W_0)$ est surjectif, d'où des tores
+maximaux de tout type\footnote{Passage ajouté dans l'interligne, très raturé. Le
+normalisateur d'un tore n'est pas toujours un produit semi-direct : pour $SL_2$,
+tout relèvement de l'élément non trivial de $W$ est d'ordre 4 (Tits, 1966,
+« Normalisateurs de tores »). Sur un corps, la surjectivité de
+$H^1(k,N) \to H^1(k,W)$ pour un groupe quasi-déployé a été établie plus tard
+(Raghunathan ; Gille, 2004), par d'autres moyens.}.
+
+\pagerange{52}{52}
+\subsection*{Le théorème des couples de Killing (page 52)}
+
+\emph{Théorème.} Soit $G = G_1^{\xi}$. Conditions équivalentes :
+\begin{itemize}
+\item[(i)] $\xi$ est dans l'image de $H^1(S,T_1)$ ;
+\item[(ii)] $G$ possède un couple de Killing, c'est-à-dire un sous-groupe de
+Borel contenant un tore maximal ;
+\item[(iii')] il existe une immersion intérieure $T_1 \to G$.
+\end{itemize}
+La page y ajoute des variantes (i'), (i'') portant sur l'image de $\xi$ dans
+$H^1(S,\Gamma_1)$, et (iii), l'existence d'une immersion \emph{extensible}
+$T_1 \to G$, avec le schéma $(\mathrm{iii'}) \Leftrightarrow (\mathrm{i})
+\Rightarrow (\mathrm{i'}) \Leftrightarrow (\mathrm{ii})$ et $(\mathrm{iii})
+\Leftrightarrow (\mathrm{i''})$, plusieurs flèches barrées\footnote{Entre les deux
+rangées, des flèches obliques dont plusieurs barrées en zigzag, deux marquées
+« triviale », une « inutile ». Une note en marge propose, pour un tore maximal
+$T$ : a) il existe un Borel contenant $T$ ; b) il existe un isomorphisme
+extensible $T_1 \to T$ ; et a) $\Rightarrow$ c) il existe un isomorphisme
+intérieur $T_1 \to T$.}. Le cœur est l'équivalence (i) $\Leftrightarrow$ (ii)
+$\Leftrightarrow$ (iii'), qui résulte des descriptions de fibres ci-dessus.
+
+\emph{N.B.} Si $T_1 \simeq \mathbb{G}_m^r$ est déployé, tout tore $T \subset G$
+contenu dans un Borel admet un isomorphisme intérieur $T_1 \to T$. Le schéma
+$\mathbf{Isom}_S(T_1,T)$ est un torseur sous $GL_r(\mathbb{Z})_S$, et celui des
+isomorphismes intérieurs un torseur sous le groupe de Weyl $W$, fini
+étale\footnote{La page écrit $\mathbf{Isom}_S(T_1,T) \simeq (\mathbb{Z}^{r^2})_S$ ;
+le groupe des automorphismes de $\mathbb{G}_m^r$ est $GL_r(\mathbb{Z})$, qui est
+dans $M_r(\mathbb{Z}) = \mathbb{Z}^{r^2}$ sans lui être égal. La dernière ligne de
+la page est serrée et d'une lecture incertaine.}. \emph{Corollaire} : si de plus
+$T$ est déployé et $\mathrm{Pic}(S) = 0$, il existe un isomorphisme $G_0 \to G$
+transformant $T_0$ en $T$ — les espaces radiciels, inversibles, sont alors
+libres, $G$ est déployé, et le théorème d'isomorphisme s'applique.
+
+\pagerange{54}{56}
+\subsection*{Trois questions, et la conjugaison des couples de Killing (pages 54 et 56)}
+
+\emph{Question 1.} Si $T \simeq T_1$ est un tore maximal de $G$ contenu dans un
+Borel, existe-t-il un isomorphisme intérieur $T_1 \to T$ ? « J'en doute. »
+
+\emph{Question 2.} Si tout tore maximal de $G$ est contenu dans un Borel, a-t-on
+$G \simeq G_1$ ? C'est le cas si $\mathrm{Pic}(S) = 0$ et $\rho$ trivial ; la page
+demande ce qu'il en est sur un corps avec $\rho$ non trivial, note que c'est
+évident sur un corps où $H^1(k,T) = 0$ pour tout tore, et hésite pour les
+groupes unitaires réels. Sur un corps, la réponse est oui : l'hypothèse fournit
+un sous-groupe de Borel défini sur $k$, donc $G$ est quasi-déployé, et la forme
+quasi-déployée d'un type extérieur donné est unique à isomorphisme
+près\footnote{Unicité classique (Borel--Tits ; SGA 3, exposé XXIV) ;
+l'isomorphisme n'est pas nécessairement intérieur. La page appelle « corps de
+Tate » les corps où $H^1(k,T) = 0$ pour tout tore.}.
+
+\emph{Question 3.} Si $G$ possède un sous-groupe de Borel — si l'on peut
+restreindre le groupe structural de $G_1$ à $B_1$ —, peut-on le restreindre à
+$T_1$ ? La page s'arrête. Pour $S$ affine, oui : $B_1 = T_1 \ltimes U_1$, et le
+radical unipotent $U_1$ admet une filtration dont les quotients sont des fibrés
+vectoriels, de $H^1$ nul sur une base affine ; donc $H^1(S,B_1) = H^1(S,T_1)$, et
+tout sous-groupe de Borel contient un tore maximal\footnote{SGA 3, exposé XXVI.}.
+
+La page 56 classe les formes intérieures munies d'un couple de Killing : deux
+couples de Killing de $G$ définissant le même élément de $H^1(S,T_1)$ sont
+conjugués par un automorphisme intérieur, et la question de savoir si deux
+couples de Killing d'un même $G$ sont toujours conjugués équivaut à
+l'injectivité de $H^1(S,T_1) \to H^1(S,G_1)$. La page soupçonne un contre-exemple,
+propose d'étudier les éléments de $H^1(S,N_1)$ conjugués par $H^0(S,W_1)$, et
+prend pour cas d'essai $G_0 = GL_2$, où $E = W_0 = \mathbb{Z}/2\mathbb{Z}$, $E$
+opérant trivialement sur $W_0$ et $W_0 = W_1$ par symétrie sur $T_1$. Sur un corps,
+la réponse est positive (les sous-groupes de Borel sont conjugués, et les tores
+maximaux d'un Borel le sont sous son radical unipotent) ; sur une base générale
+elle est négative, par l'exemple donné plus bas.
+
+\pagerange{58}{58}
+\subsection*{La table des conjugaisons (page 58)}
+
+La page 58 est une colonne d'énoncés reliés par des doubles flèches, groupés
+en trois blocs, chacun suivi d'un verdict. On l'écrit avec $\Pi_1 = \mathrm{ad}(G_1)$
+partout où la page écrit $G_1$ dans le premier bloc : ce sont les torseurs sous
+le groupe adjoint qui classent les formes intérieures, et les équivalences
+reposent sur la description des fibres par torsion\footnote{Pour les blocs 2 et
+3, la torsion par une classe de $H^1(S,G_1)$ convient aussi, $G(S)$ opérant par
+conjugaison.}.
+
+\emph{Premier bloc.} $H^1(S,\Pi_1) \to H^1(S,\Gamma_1)$ est injectif $\Leftrightarrow$
+$\mathbf{Aut}(G) \to \mathbf{Ext}(G)$ a toujours une section $\Leftrightarrow$
+$\mathrm{Aut}(G) \to \mathrm{Ext}(G)$ est toujours surjectif, pour toute forme $G$
+de type extérieur $\rho$. Verdict : faux en général sur un corps, vrai pour les
+formes quasi-déployées et, avec un point d'interrogation, pour les formes
+extérieures « de Tits »\footnote{Le commentaire est d'une lecture très
+incertaine ; « $\xi = e$ » y désigne la forme quasi-déployée elle-même. Le contre-exemple
+sur un corps est celui de $SL_1(D)$ donné à la page 46.}.
+
+\emph{Deuxième bloc.} $H^1(S,B_1) \to H^1(S,G_1)$ est injectif $\Leftrightarrow$ deux
+sous-groupes de Borel d'un même $G$ sont toujours conjugués $\Leftrightarrow$ pour
+tout $G$ et tout Borel $B$, $H^1(S,B) \to H^1(S,G)$ est injectif\footnote{La
+dernière ligne de la page ajoute « $\Leftrightarrow$ … est bijectif ». La
+surjectivité est fausse déjà sur un corps : pour $G = PGL_n$, $H^1(k,B) =
+H^1(k,T)$ est trivial, tandis que $H^1(k,PGL_n)$ classe les algèbres simples
+centrales de degré $n$. On garde « injectif ».}. Verdict de la page : vrai pour
+les formes intérieures et pour celles « de Tits ». C'est vrai sur un corps
+(Borel--Tits) et sur une base semi-locale, mais faux sur une base générale, même
+pour $G = GL_2$ : sur un anneau de Dedekind $A$ de groupe des classes non nul, un
+sous-groupe de Borel de $GL_2$ est le stabilisateur d'un facteur direct
+inversible $L \subset A^2$, tout $L$ s'y prête puisque $L \oplus L^{-1} \simeq A^2$,
+et deux tels Borel ne sont conjugués que si les $L$ sont isomorphes.
+
+\emph{Troisième bloc.} $H^1(S,N_1) \to H^1(S,G_1)$ est injectif $\Leftrightarrow$ deux
+sous-groupes de Cartan (tores maximaux) d'un même $G$ sont toujours conjugués
+$\Leftrightarrow$ pour tout $G$ et tout tore maximal $T$, $H^1(S,N(T)) \to H^1(S,G)$
+est injectif. Verdict : semble faux même sur un corps non algébriquement clos,
+même pour les formes intérieures. C'est faux, en effet : sur $\mathbb{R}$, les
+tores déployé et anisotrope de $SL_2$ ne sont pas conjugués.
+
+\pagerange{60}{78}
+\section*{Formes quadratiques (pages 60 à 78)}
+
+Le feuillet de la page 60 porte, sur trois lignes, « Formes quadratiques,
+bilinéaires symétriques, etc »\footnote{Les deux premiers mots sont des lectures
+probables.}. Sur un anneau commutatif $A$, une forme bilinéaire symétrique, une
+forme alternée et une forme quadratique sont trois structures distinctes, que
+la caractéristique 2 sépare : une forme quadratique y détermine une forme
+bilinéaire alternée, sa polaire, sans être déterminée par elle.
+
+\pagerange{61}{63}
+\subsection*{Catégories de formes et groupes orthogonaux (pages 61 et 63)}
+
+La page 61 dessine deux fois un schéma de foncteurs entre les catégories de
+formes bilinéaires (« Bil »), quadratiques (« Quad ») et alternées (« Alt »),
+avec leurs variantes unimodulaires, « typiques » et « spéciales », toutes
+aboutissant aux modules (« Mod ») par oubli ; entre Bil et Quad, deux foncteurs
+en sens inverses, $Q \mapsto$ polaire et $b \mapsto (x \mapsto b(x,x))$. En haut,
+barré, le calcul du groupe orthogonal de $x^2 + y^2$ : $(ax - by)^2 + (cx + dy)^2
+= x^2 + y^2$ équivaut à $a^2 + c^2 = 1$, $b^2 + d^2 = 1$,
+$2(cd - ab) = 0$\footnote{Plusieurs traits du schéma n'ont pas de pointe ; la
+transcription les oriente vers le bas. La lecture du second membre et du signe
+de la dernière équation est douteuse ; le développement donne celle qu'on
+écrit.}.
+
+La page 63 décrit les groupes orthogonaux sur $\mathbb{Z}$ : en rang pair,
+$e \to SO(2m) \to O(2m) \to \mathbb{Z}/2\mathbb{Z} \to e$, produit semi-direct, le
+centre de $SO(2m)$ étant $\mu_2$ ; en rang impair, $O(2m+1) = SO(2m+1) \times \mu_2$,
+la projection sur $\mu_2$ étant le déterminant\footnote{La page écrit pour le rang
+impair une suite exacte $e \to SO(2m+1) \to O(2m+1) \to \mu_2 \to e$, « produit
+semi-direct », avec « centre $\mu_2$ ». Le produit est direct : $\mu_2$ est central
+dans $O(2m+1)$, qui a pour centre $\mu_2$, tandis que $SO(2m+1)$ est sans centre.}.
+Pour tout $m$, les groupes $\mathrm{Pin}(m)$ et $\mathrm{Spin}(m)$ sont des
+extensions centrales par $\mu_2$ :
+
+\begin{tikzcd}
+e \arrow[r] & \mu_2 \arrow[r] & \mathrm{Pin}(m) \arrow[r] & O(m) \arrow[r] & e \\
+e \arrow[r] & \mu_2 \arrow[r] \arrow[u, no head, "\Vert" description] & \mathrm{Spin}(m) \arrow[r] \arrow[u] & SO(m) \arrow[r] \arrow[u, hook] & e
+\end{tikzcd}
+
+Puis un calcul en caractéristique 2 et en rang impair. Pour la forme
+$x^2 + Q_0(y)$, les transformations $(x,y) \mapsto (\lambda x + u(y), y)$, $u$
+linéaire, qui la préservent vérifient $(\lambda x + u(y))^2 + Q_0(y) = \lambda^2 x^2
++ u(y)^2 + Q_0(y)$, le terme croisé disparaissant ; d'où $\lambda^2 = 1$ et
+$u(y)^2 = 0$, c'est-à-dire $\lambda \in \mu_2$ et les coefficients de $u$ dans
+$\alpha_2$. La loi de composition est
+\[
+(\lambda', u')(\lambda, u) = (\lambda'\lambda,\ \lambda' u + u'),
+\]
+et ce sous-groupe est le schéma en groupes infinitésimal $\mu_2 \ltimes \alpha_2^n$,
+$n$ le nombre des variables $y$\footnote{La page écrit la liste
+« $(\mu_2\ \alpha_2\ \alpha_2 \ldots \alpha_2)$ » entre grandes parenthèses. Le
+« $Q_0$ » est lu sur un signe peu formé.}.
+
+\pagerange{65}{69}
+\subsection*{Anneaux de formes, caractéristique 2 et produits tensoriels (pages 65 à 69)}
+
+Les formes bilinéaires symétriques forment un anneau pour le produit tensoriel,
+et même un $\lambda$-anneau ; les formes alternées et les formes quadratiques sont
+des modules sur cet anneau. La somme Bil $\oplus$ Alt est un $\lambda$-module gradué
+par $\mathbb{Z}/2\mathbb{Z}$\footnote{La page 65 est faite de lignes isolées : une
+accolade réunit Alt et Quad sous « $\pi$ », reliée à Bil ; deux lignes parlent
+d'un « élément privilégié d'augm.\ 2 » et « d'augm.\ 1 », sans qu'on puisse dire
+desquels. « $H^1(S,\mu_2)$ » est écrit seul au milieu de la page.}. Pour une
+forme bilinéaire $f$, la forme induite sur $\Lambda^2$ est donnée par le
+déterminant de Gram :
+\[
+f(x \wedge y, x \wedge y) = f(x,x)\, f(y,y) - f(x,y)^2 .
+\]
+Le tiers droit de la page, écrit en travers, calcule la forme $\sum x_i x'_i$ dans
+la base $e_1, e_1 - e_2, \ldots, e_1 - e_n$ : en caractéristique 2 les vecteurs
+$e_1 - e_i$ y sont deux à deux de produit $1$ et de carré nul, d'où une
+décomposition de la forme standard en une partie diagonale de rang 1 et une
+partie alternée\footnote{Ce qui précède est notre lecture du but de ces calculs,
+plusieurs lignes étant barrées ; la page n'énonce pas de conclusion.}.
+
+La page 67 écrit, en caractéristique 2, les suites exactes qui relient les
+quatre foncteurs d'un module libre $E$ : le carré symétrique
+$\mathrm{Symm}^2(\check E)$ (les formes quadratiques), les tenseurs symétriques
+$\Sigma^2(\check E)$ (les formes bilinéaires symétriques), les tenseurs
+alternés $\mathrm{Alt}^2(\check E)$ (les formes alternées) et le tordu de
+Frobenius $\check E^{(2)}$ (les formes « diagonales » $x \mapsto \sum a_i x_i^2$).
+La polarisation $\mathrm{Symm}^2 \to \Sigma^2$, $Q \mapsto b_Q$, a pour noyau
+$\check E^{(2)}$ et pour image $\mathrm{Alt}^2$ ; la restriction à la diagonale
+$\Sigma^2 \to \mathrm{Symm}^2$, $b \mapsto (x \mapsto b(x,x))$, a pour noyau
+$\mathrm{Alt}^2$ et pour image $\check E^{(2)}$. D'où les deux suites exactes
+\[
+0 \to \mathrm{Alt}^2(\check E) \to \Sigma^2(\check E) \to
+\mathrm{Symm}^2(\check E) \to \mathrm{Alt}^2(\check E) \to 0,
+\]
+\[
+0 \to \check E^{(2)} \to \mathrm{Symm}^2(\check E) \to \Sigma^2(\check E)
+\to \check E^{(2)} \to 0,
+\]
+et le résumé encadré : image $=$ noyau $= \mathrm{Alt}^2(\check E)$ d'un côté,
+$= \check E^{(2)}$ de l'autre\footnote{Une première ligne, plus haut, écrit une
+suite qui répète $\Sigma^2$ et $\mathrm{Symm}^2$ avec les rangs
+$\frac{n(n+1)}{2}$ ; elle est corrigée par les deux suivantes. En haut à droite,
+une colonne $\mathbb{R}$, $\mathbb{C}$, et les quaternions $\mathbb{R}[i,j,k]$.}.
+
+Suit la table des produits tensoriels : alternée $\otimes$ alternée $\to$
+bilinéaire symétrique ; bilinéaire symétrique $\otimes$ alternée $\to$ alternée ;
+bilinéaire $\otimes$ bilinéaire $\to$ bilinéaire ; quadratique $\otimes$ bilinéaire
+$\to$ quadratique ; quadratique $\otimes$ alternée $\to$ alternée ; et quadratique
+$\otimes$ quadratique « ?! » — il n'y a pas, en caractéristique 2, de forme
+quadratique canonique sur le produit tensoriel de deux formes
+quadratiques\footnote{La deuxième ligne de la page se lit « forme [mot biffé]
+$\otimes$ forme bil.\ $\to$ forme altern. » : le mot biffé n'est pas sûr, et seule
+la lecture « bilinéaire $\otimes$ alternée » donne un énoncé vrai. La dernière
+ligne est d'une lecture douteuse.}.
+
+La page 69 introduit, sur une base $S$, l'ensemble $E^{n,m}(S)$ des classes
+d'isomorphisme de formes quadratiques régulières de type $(n,m)$, c'est-à-dire
+localement isomorphes à
+\[
+x_1^2 + \cdots + x_n^2 + y_1 y_2 + y_3 y_4 + \cdots + y_{2m-1} y_{2m},
+\]
+et le monoïde bigradué $\bar E(S) = \coprod_{n,m \geq 0} E^{n,m}(S)$. Si $2$ est
+inversible, $E^{n,m} \simeq E^{n+2m,0}$ : le plan hyperbolique est localement
+diagonalisable. Si $2 = 0$, la page écrit $E^{n,m} \simeq E^{1,m}$\footnote{En
+caractéristique 2, $x_1^2 + x_2^2 = (x_1 + x_2)^2$, et le modèle n'est régulier
+(au sens de la non-dégénérescence) que pour $n \leq 1$ ; l'énoncé de la page doit
+se comprendre avec une notion plus faible de régularité, qu'elle ne précise pas.
+L'exposant $n + 2m$ est d'une lecture douteuse.}. Le groupe $E(S)$ associé au
+monoïde s'envoie sur $\mathbb{Z} \times \mathbb{Z}$ par les deux rangs.
+
+\pagerange{71}{74}
+\subsection*{La lettre à Delzant (pages 71 à 74)}
+
+Les pages 71 à 74 sont dactylographiées, avec des corrections de sa main, et
+datées à l'encre du 22 juillet 1961\footnote{La date « 22.7.61 », le 6 surchargeant
+un autre chiffre, a été vérifiée sur le fac-similé le 27 septembre 2026. Les
+lettres grecques et le $\wp$ de la page 74 sont ajoutés à l'encre dans les blancs
+laissés par la machine.}. Elles portent le titre « Commentaires sur l'article
+de A.~Delzant sur les formes quadratiques ». C'est une lettre de rapporteur, à
+la deuxième personne, et c'est le « tapuscrit annoté » du titre du dossier. Le
+texte est de lui : il parle de « mon séminaire » pour le groupe fondamental de
+$\mathrm{Spec}(A)$, ce qui renvoie à SGA 1 (1960--1961), et ses corrections sont
+de sa main. L'article dont il est question est vraisemblablement la note de
+Delzant aux \emph{Comptes rendus} de 1962 qui définit les classes de
+Stiefel--Whitney d'un module quadratique sur un corps de caractéristique
+différente de 2\footnote{L'identification avec la note de 1962 est la nôtre ; la
+lettre ne cite pas de titre.}.
+
+\emph{Sur la rédaction.} Deux remarques. Il est très confusant de traiter en même
+temps la caractéristique 2 et les autres : les structures en jeu y sont
+d'espèce différente ; à défaut de théorie commune, laisser tomber la
+caractéristique 2 ou lui réserver un numéro à part. Et le rôle des
+$\lambda$-structures est pratiquement nul, parce que la filtration naturelle de
+l'anneau des classes de formes est celle des puissances de l'idéal
+d'augmentation ; on récupère la $\lambda$-structure à la fin.
+
+\emph{Programme minimum, 1) : la structure de $Q(A)$.} Soit $A$ un corps de
+caractéristique $\neq 2$ et $Q(A)$ l'anneau des classes de formes quadratiques
+non dégénérées — aujourd'hui l'anneau de Grothendieck--Witt. Pour
+$a \in A^{*}$, soit $\varphi_a$ la classe de $a\xi^2$ ; elle ne dépend que de $a$
+modulo les carrés, d'où un homomorphisme de $D = A^{*}/A^{*2} = H^1(A,
+\mathbb{Z}/2\mathbb{Z})$ dans le groupe des unités de $Q(A)$, et un homomorphisme
+d'anneaux
+\[
+\varphi : \mathbb{Z}[D] \longrightarrow Q(A)
+\]
+depuis l'algèbre du groupe $D$, de base les $e_a$.
+
+\emph{Théorème.} $\varphi$ est surjectif, et son noyau est engendré par les
+$e_a + e_b - e_{a'} - e_{b'}$ pour $\varphi_a + \varphi_b = \varphi_{a'} + \varphi_{b'}$.
+D'après un théorème de Witt, cette relation équivaut à l'égalité des invariants
+des deux formes binaires, soit, $D$ étant écrit additivement,
+\[
+a + b = a' + b', \qquad a \cdot b = a' \cdot b',
+\]
+où $a \cdot b$ est le cup-produit à valeurs dans $B = H^2(A, \mathbb{Z}/2\mathbb{Z})$,
+le sous-groupe du groupe de Brauer annulé par 2\footnote{C'est la présentation de
+Witt de l'anneau de Grothendieck--Witt (1937), sous une forme cohomologique : deux
+formes binaires sont isométriques si et seulement si elles ont même déterminant
+et même invariant de Hasse--Witt. Un trait au crayon dans la marge, avec un point
+d'interrogation, accompagne ce passage.}. La structure de $Q(A)$ est donc connue
+dès qu'on connaît $D$, $B$ et le cup-produit $D \times D \to B$. Le noyau est aussi
+engendré par les
+\[
+e_{a+u+v} - e_{a+u} - e_{a+v} + e_a, \qquad u \cdot v = 0,
+\]
+ce qu'on vérifie en posant $a' = a + u$, $b' = a + v$ : alors $b = a + u + v$, et la
+condition sur les cup-produits se réduit à $u \cdot v = 0$.
+
+La lettre en tire que l'algèbre graduée associée à $Q(A)$ pour la filtration
+par les puissances de l'idéal d'augmentation est le quotient de l'algèbre
+symétrique de $D$ par l'idéal engendré par les $uv \in \mathrm{Symm}^2(D)$ tels que
+$u \cdot v = 0$ dans $B$, et demande d'éclaircir si
+$\mathrm{grad}^2 Q(A) \to B$ est toujours injectif. Ce n'est pas une conséquence
+immédiate de la présentation. En degré 2, l'injectivité demandée est le théorème
+de Merkurjev (1981) ; en tout degré, l'énoncé équivaut, compte tenu de ce théorème,
+à la conjecture de Milnor sur l'anneau de Witt, démontrée par Orlov, Vishik et
+Voevodsky (2007)\footnote{La lettre écrit « On en conclut ». L'algèbre
+quotient qu'elle décrit est, d'après Merkurjev, l'algèbre $K^M_*(A)/2$ de
+Milnor (1970), et l'isomorphisme avec le gradué de l'anneau de Witt est
+exactement ce que Milnor a conjecturé. On ne prétend pas que la lettre anticipe
+ces énoncés au-delà de ce qu'elle écrit : elle pose la question en degré 2 et
+affirme la forme générale.}.
+
+De la présentation, la lettre déduit que, pour un anneau gradué $H^{\cdot}$ à
+degrés positifs, se donner une « classe totale » sur $Q(A)$ à valeurs dans
+$1 + \hat H^{+}$ — additive au départ, multiplicative à l'arrivée, envoyant
+$\varphi_a$ sur $1 + W^1(a)$ — équivaut à se donner un homomorphisme
+$W^1 : D \to H^1$ tel que $W^1(u) W^1(v) = 0$ dès que $u \cdot v = 0$ dans $B$ ; et
+que $\mathrm{grad}\,Q(A)$ joue un rôle universel pour ces propriétés\footnote{La
+lettre parle d'un « homomorphisme d'anneaux augmentés de $Q(A)$ dans
+$\mathbb{Z} \times (1 + \hat H^{+})$ », « d'anneaux augmentés » écrit à l'encre
+au-dessus d'« additif » biffé ; il faut alors munir $\mathbb{Z} \times
+(1 + \hat H^{+})$ d'une structure d'anneau à la manière de ses $\lambda$-anneaux, ce
+qu'elle ne précise pas. On retient le contenu additif, qui suffit à définir les
+classes.}. Le choix le plus naturel est $H^{\cdot} = H^{\cdot}(A,
+\mathbb{Z}/2\mathbb{Z})$ avec le cup-produit et $W^1$ l'identité, d'où les classes de
+\emph{Stiefel--Whitney}
+\[
+W^i : Q(A) \to H^i(A, \mathbb{Z}/2\mathbb{Z}).
+\]
+Serre suggère une définition plus fine, en remplaçant la clôture séparable par
+la réunion des sous-extensions finies de degré une puissance de 2, ce qui donne
+un $H^2$ « plus fin », s'envoyant dans le $H^2$ habituel\footnote{En degré 2, les
+deux groupes coïncident, ce qu'on sait depuis le théorème de Merkurjev, qui
+montre que $B$ est engendré par des classes d'algèbres de quaternions, déployées
+par des extensions quadratiques.}.
+
+Enfin $Q(A)$ est un $\lambda$-anneau, et sa $\lambda$-structure se lit sur la
+structure d'anneau, puisque $\lambda_t(\varphi_a) = 1 + \varphi_a t$ ; un
+homomorphisme d'anneaux augmentés $Q(A) \to \mathbb{Z} \times (1 + \hat H^{+})$ est
+automatiquement un $\lambda$-homomorphisme, et il n'y a pas lieu d'en dire plus.
+
+\emph{2) Le cas d'un anneau local.} Si $A$ est local de corps résiduel de
+caractéristique $\neq 2$, tout ce qui précède semble marcher, $H^{\cdot}(A)$
+désignant la cohomologie du groupe fondamental de $\mathrm{Spec}(A)$ ; une forme
+y est non dégénérée si sa réduction l'est. Au-delà du programme minimum : des
+classes de Stiefel--Whitney pour les modules quadratiques sur un préschéma
+quelconque $S$, les caractéristiques résiduelles étant au besoin supposées
+$\neq 2$, avec pour test l'invariance de la définition triviale pour un module
+qui se décompose en modules de rang 1. Et, « comme prime au lecteur », la
+comparaison avec la topologie : si $A$ est l'anneau local d'un point d'un
+schéma $S$ de type fini sur $\mathbb{C}$, un module quadratique sur $A$ s'étend à un
+voisinage, définit un torseur sous le groupe orthogonal, donc par GAGA un fibré
+analytique puis topologique, et ses classes de Stiefel--Whitney topologiques,
+envoyées par l'homomorphisme canonique $H^{\cdot}(S_{\mathrm{top}},
+\mathbb{Z}/2\mathbb{Z}) \to H^{\cdot}(A, \mathbb{Z}/2\mathbb{Z})$, sont les classes
+algébriques — il suffit de le vérifier en rang 1.
+
+\emph{3) La caractéristique 2.} Une théorie satisfaisante devrait valoir sur tout
+préschéma. Deux remarques, qu'il dit vagues. a) Sur un corps de caractéristique
+quelconque, il faut sans doute tenir compte des formes dégénérées et poser
+$Q'(k)$ ; en caractéristique $\neq 2$ ce serait $Q(k) \oplus \mathbb{Z}$, le facteur
+$\mathbb{Z}$ comptant les formes nulles, avec
+$(f,m)(g,n) = (fg,\ \deg(f)\,n + \deg(g)\,m + mn)$. b) Il faut distinguer
+$(\mathbb{Z}/2\mathbb{Z})_S$ et $(\mu_2)_S$ : pour $S$ local d'anneau $A$,
+\[
+H^1(S, \mu_2) = A^{*}/A^{*2}, \qquad H^2(S, \mu_2) = {}_2\mathrm{Br}(A), \qquad
+H^1(S, \mathbb{Z}/2\mathbb{Z}) = A/\wp A \ \ (2A = 0),
+\]
+$\wp(x) = x^2 - x$. On doit donc s'attendre à des classes de Stiefel--Whitney de
+type mixte, faisant intervenir les deux groupes de coefficients. Le groupe
+orthogonal sur $\mathbb{Z}$ le confirme : en dimension paire, extension de
+$\mathbb{Z}/2\mathbb{Z}$ par le groupe spécial orthogonal, à fibres connexes (en
+dimension 2, $\mathbb{Z}/2\mathbb{Z} \ltimes \mathbb{G}_m$) ; en dimension impaire,
+extension de $\mu_2$ (en dimension 1, $\mu_2$). Le premier invariant discret d'un
+torseur orthogonal est donc une classe de $H^1$ à coefficients dans
+$\mathbb{Z}/2\mathbb{Z}$ ou dans $\mu_2$, selon la parité — l'invariant d'Arf, ou de
+Dickson, et le discriminant.
+
+Ce programme a été réalisé par d'autres : en caractéristique 2, la théorie de
+Kato (1982) relie les formes quadratiques et bilinéaires à la $K$-théorie de
+Milnor et aux groupes $H^n_2$ de cohomologie à coefficients mixtes, et la
+remarque b) est au point de départ de l'étude des invariants cohomologiques des
+torseurs (Serre ; Garibaldi, Merkurjev et Serre, 2003).
+
+\pagerange{75}{77}
+\subsection*{Les exposés de Kneser à l'IHÉS (pages 75 à 77)}
+
+Les pages 75 à 77 sont titrées « Formes quadratiques (Exposés de Kneser à
+l'IHES) », et numérotées (1), (2), (3) de sa main.
+
+\emph{(1) Généralités.} Soit $A$ un anneau commutatif ; $E(A)$ est l'anneau des
+formes quadratiques non dégénérées (discriminant non diviseur de zéro) sur des
+modules projectifs de type fini, $F(A)$ celui des formes unimodulaires
+(discriminant inversible) ; si $A$ est un corps, $E(A) = F(A)$. Invariants sur
+$F(A)$ : le rang $\varepsilon : F(A) \to \mathbb{Z}$, homomorphisme d'anneaux ; le
+discriminant $d : F(A) \to A^{*}/A^{*2}$, homomorphisme de groupes ; la classe de
+Clifford $c : F(A) \to {}_2\mathrm{Br}(A)$, simple application. Kneser définit $c$
+d'abord pour les modules quadratiques — par l'algèbre de Clifford en rang pair,
+la sous-algèbre paire en rang impair — et note que $c(E \oplus E') = c(E) + c(E')$
+quand les discriminants sont convenables ; $c$ est donc additive sur le noyau
+$F_2(A)$ de $(\varepsilon, d)$\footnote{Les mots de liaison de ce paragraphe sont
+d'une écriture rapide ; « via », « d'abord », « distinguant », « impair » sont des
+lectures probables.}. Pour $A$ local de caractéristique résiduelle $\neq 2$, les
+classes de Stiefel--Whitney redonnent $d$ et $c$.
+
+Les trois invariants définissent une filtration
+$F \supset F_1 \supset F_2 \supset F_3$, et, pour un corps de caractéristique
+$\neq 2$,
+\[
+F/F_1 \simeq \mathbb{Z}, \qquad F_1/F_2 \simeq A^{*}/A^{*2}, \qquad
+F_2/F_3 \subset {}_2\mathrm{Br}(A),
+\]
+l'image étant le sous-groupe engendré par les classes décomposables (les
+algèbres de quaternions). La page demande si l'on a, en toute
+caractéristique, $F_1/F_2 \simeq H^1(A, \mathbb{Z}/2\mathbb{Z})$ et $F_2/F_3 \simeq
+H^2(A, \mathbb{Z}/2\mathbb{Z})$\footnote{En caractéristique $\neq 2$, l'image de
+$F_2/F_3$ est tout ${}_2\mathrm{Br}(A)$ : c'est encore le théorème de Merkurjev. En
+caractéristique 2, $H^2(A, \mathbb{Z}/2\mathbb{Z})$ (cohomologie galoisienne) est nul,
+et c'est $H^2(A,\mu_2) = {}_2\mathrm{Br}(A)$ qui convient pour l'invariant de
+Clifford, tandis que l'invariant d'Arf vit dans $H^1(A, \mathbb{Z}/2\mathbb{Z}) =
+A/\wp A$ : c'est la mixité des coefficients que la lettre à Delzant annonçait.}.
+
+\emph{(2) Exemples (corps de caractéristique $\neq 2$).}
+\begin{itemize}
+\item[a)] $k$ algébriquement clos : $F(k) \simeq \mathbb{Z}$, $F_1(k) = 0$.
+\item[b)] $k$ fini : $F(k) \simeq \mathbb{Z} \oplus \mathbb{Z}/2\mathbb{Z}$, $F_2(k) = 0$.
+\item[c)] $k$ $p$-adique : $F(k) \simeq \mathbb{Z} \oplus$ un 2-groupe fini annulé par
+4, $F_3(k) = 0$\footnote{Le groupe de torsion est l'idéal d'augmentation
+$F_1(k)$ ; comme $2F_1 \subset F_2$ et $F_3 = 0$, il est annulé par 4, y compris
+pour $p = 2$.}.
+\item[d)] $k = \mathbb{R}$ : $F_1(k) \simeq \mathbb{Z}$, et, dans cette
+identification, $F_2(k) = 2\mathbb{Z}$, $F_3(k) = 4\mathbb{Z}$.
+\item[e)] $k$ complet pour une valuation discrète à corps résiduel
+algébriquement clos de caractéristique $\neq 2$ : $F(k) \simeq \mathbb{Z} \oplus
+k^{*}/k^{*2} = \mathbb{Z} \oplus \mathbb{Z}/2\mathbb{Z}$, $F_2(k) = 0$\footnote{La page
+écrit « $F_1(k) \simeq \mathbb{Z} + k^{*}/k^{*2}$ », l'indice peu formé ; avec le
+facteur $\mathbb{Z}$ du rang, c'est $F(k)$.}.
+\end{itemize}
+
+\emph{(3) Corps de nombres.} Soit $K$ un corps de nombres. Le théorème de
+Hasse(--Minkowski) dit que $F(K) \to \prod_v F(K_v)$ est injectif, le produit
+portant sur toutes les places\footnote{La page écrit $\sum_p$ ; l'image d'une
+forme n'est pas nulle en presque toute place, et il faut le produit.}. Sur les
+gradués : $F_1(K)/F_2(K) \to \prod_v K_v^{*}/K_v^{*2}$ est injectif ;
+$F_2(K)/F_3(K) \to \bigoplus_v \mathbb{Z}/2\mathbb{Z}$ est injectif, parce que
+$\mathrm{Br}(K) \to \bigoplus_v \mathrm{Br}(K_v)$ l'est, d'image contenue dans les
+familles de somme nulle ; et $F_3(K) \subset \prod_v F_3(K_v) \subset
+\mathbb{Z}^r$, $r$ le nombre de places réelles, les $F_3$ locaux étant nuls aux
+autres places. Le sous-groupe de torsion de $F(K)$ est le noyau de
+$F_1(K) \to \mathbb{Z}^r$ (les signatures), et il est annulé par 4.
+
+\pagerange{78}{78}
+\subsection*{Une ébauche locale-globale (page 78)}
+
+La dernière page écrite esquisse la même étude sur un anneau de Dedekind $A$ de
+corps des fractions $K$ : deux diagrammes comparent $E(A)$ et $F(A)$ avec $E(K)$,
+$F(K)$ et leurs analogues sur les complétés $\hat A_p$ et $K_p$, en lignes que la
+page présente comme exactes, avec un sous-groupe $E'(A)$, resp.\ $F'(A)$, au
+noyau ; au-dessus, l'inclusion $\mathrm{Pic}(A)/2\,\mathrm{Pic}(A) \subset H^2(A,
+\mu_2)$, qui vient de la suite de Kummer\footnote{Aucune de ces suites n'est
+justifiée sur la page ; le « 2 » de la première flèche verticale est d'une
+lecture douteuse.}. Suivent $H^1(K, \mathbb{Z}/2\mathbb{Z}) \to \prod_p H^1(K_p,
+\mathbb{Z}/2\mathbb{Z})$, un bloc barré de suites d'idèles ($0 \to L^{*} \to J_L \to
+C_L \to 0$ et ses produits tensoriels) qui prépare un calcul de cohomologie
+galoisienne, et, pour un anneau de valuation discrète complet $V$, une
+description de $E'(V)$ par les formes sur le corps résiduel, illisible pour
+l'essentiel.
+
+\end{document}
