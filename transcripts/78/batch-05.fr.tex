@@ -1,0 +1,720 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 78, batch 5 (pages 81-100).
+% Established from the facsimile archives/batches/78/batch-05.pdf (a mirror of
+% https://grothendieck.umontpellier.fr/78.pdf), per the skill
+% transcribe-grothendieck.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-02 — first pass, unchecked against the pages by a human.
+%
+% Nineteen of the twenty pages are transcribed. Page 93 is an unrelated typed
+% letter (CEREMADE, Paris, 10 November 1977) and is absent; its date is
+% recorded in a note at page 94 because it bears on the folder's dating.
+%
+% The batch is one continuous run, in blue ink (pp. 81-91), then in a darker
+% ink (pp. 92-95) and in black (pp. 96-100):
+%   pp. 81-85 — affine coordinates on E attached to the base (s_0, s_1, s_{-1});
+%     the matrices of sigma_0, sigma_1; the condition sigma_0^2 = id gives
+%     alpha beta = (beta+2) beta = 0; Proposition (i)-(v) on beta = 0; the
+%     "improper" case alpha = 0, beta = -2; Scholie: proper regular
+%     realisations of Pi_infty are described by alpha in k.
+%   pp. 86-89 — §3 fixed points of sigma_0, sigma_1, the centre; §4 eigenvalues
+%     of u_V, alpha = zeta + zeta^{-1}, the cases alpha = ±2.
+%   pp. 90-95 — §5 study by cases: I) alpha ≠ ±2, II) alpha = -2,
+%     III) alpha = 2 (no centre); p. 92 is a page of scratch computations.
+%   pp. 96-100 — §6 invariant quadratic forms f_alpha, circumscribed conic;
+%     §7 discriminant of f_0; §8 discriminant of f; §9 alpha = 2: the conic is
+%     a parabola on which u acts as v -> v+1.
+% Equation numbers run (15)-(36); the numbering starts before the batch.
+%
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{78}
+\batch{5}
+\pages{81}{100}
+\dating{[à partir de 1977]}
+\watermark{Édition de démonstration}
+\foldertitle{[Polygones réguliers et polynômes cyclotomiques] : notes manuscrites (s.d.).}
+
+\begin{document}
+
+\page{81}
+\note{la page s'ouvre au milieu d'un argument commencé avant ce lot : $E$, $k$, les sommets $s_i$, les automorphismes $\sigma_0$, $\sigma_1$ et les paramètres $\alpha$, $\beta$ sont introduits plus haut, et la numérotation des formules commence ici à (15).}
+
+Nous utiliserons désormais la base affine $(s_0, s_1, s_{-1})$ pour identifier $E$ à $k^2$, donc
+
+a) On choisit $s_0$ comme \emph{origine}
+
+b) On choisit
+
+(15)
+\[
+\begin{cases}
+e_1 = s_1 - s_0 \\
+e_2 = s_{-1} - s_0
+\end{cases}
+\]
+comme vecteurs de base de l'espace des translations $V$ de $E$, et
+
+c) on identifie $(x,y) \in k^2$ au point $s_0 + x e_1 + y e_2$, i.e. on écrit
+\[
+(x,y) = s_0 + x e_1 + y e_2 .
+\]
+
+Il y a lieu d'expliciter en termes de ces coordonnées toutes les données précédentes.
+\[
+\begin{cases}
+s_0 = (0,0), \quad s_1 = (1,0), \quad s_2 = (0,1) \\
+e_1 = (1,0) \quad e_2 = (0,1)
+\end{cases}
+\]
+\note{la page porte bien « $s_2 = (0,1)$ » ; par (15) c'est $s_{-1}$ qui a ces coordonnées.}
+
+Les \uncertain{automorphismes} affines $\sigma_0$, $\sigma_1$ sont donnés par leurs valeurs sur $s_0, s_1, s_{-1}$. On a
+
+(\uncertain{16})
+\[
+\begin{cases}
+\sigma_0 s_0 = s_1 \\
+\sigma_0 s_1 = s_0 \\
+\sigma_0 s_{-1} = s_2 = s_0 + (1+\alpha) e_1 + (1+\beta) e_2 \\
+\sigma_0 e_1 = -e_1 \\
+\sigma_0 e_2 = \alpha e_1 + (1+\beta) e_2
+\end{cases}
+\]
+\note{dans la troisième ligne l'indice de $s$ est surchargé ; la lecture $s_{-1}$ est celle qu'impose $\sigma_0 s_{-1} = s_2$. Dans la dernière ligne, une première valeur de $\sigma_0 e_2$ est biffée et illisible, \struck{\ill{}}, et remplacée en dessous par $\alpha e_1 + (1+\beta) e_2$.}
+
+\drawing{à droite, un croquis : la ligne brisée $s_{-1}, s_0, s_1, s_2$, avec les vecteurs $e_2$ de $s_0$ vers $s_{-1}$ et $e_1$ de $s_0$ vers $s_1$.}
+
+[\emph{NB} on \uncertain{rappelle} :
+\[
+\begin{cases}
+\beta = 0 \text{ ssi } s_2 - s_{-1} \parallel e_1 \\
+\alpha = \zeta + \zeta^{-1} = 2\cos\theta
+\end{cases}
+\]
+]
+
+\page{82}
+\emph{Ex.} Repr. régulière définie par $\zeta \in k$ ($\zeta \neq \pm 1$) : $s_i = (\zeta^i, \zeta^{-i})$, on trouve donc
+\[
+s_2 - s_{-1} = (\zeta^2, \zeta^{-2}) - (\zeta^{-1}, \zeta) = (\zeta^2 - \zeta^{-1}, \zeta^{-2} - \zeta)
+\]
+parallèle à
+\[
+s_1 - s_0 = (\zeta - 1, \zeta^{-1} - 1)
+\]
+de façon précise on a
+
+(\ill{})
+\[
+\begin{cases}
+(s_2 - s_{-1}) = (1 + \zeta + \zeta^{-1})(s_1 - s_0) = (1+\alpha)(s_1 - s_0) \\
+\text{où} \quad \alpha = \zeta + \zeta^{-1}
+\end{cases}
+\]
+\note{sous cette accolade, un départ biffé, \struck{\ill{} $\beta$}, griffonné.}
+
+On a donc envie d'imposer la condition
+\[
+\beta = 0 .
+\]
+
+\emph{Proposition} Conditions équivalentes
+\begin{enumerate}
+  \item[(i)] $\beta = 0$
+  \item[(ii)] $s_2 - s_{-1} = (1+\alpha)(s_1 - s_0)$
+  \item[(ii')] $s_2 - s_{-1} \parallel s_1 - s_0$
+  \item[(iii)] $\forall n \in \mathbb{Z}$ \quad $s_{n+3} - s_n = (1+\alpha)(s_{n+2} - s_{n+1})$
+  \item[(iii')] $\forall n \in \mathbb{Z}$ \quad $s_{n+3} - s_n = (1+\alpha)(s_{n+2} - s_{n+1})$
+  \item[(iv)] $\Leftrightarrow$ $\det \sigma_{0V} = -1$
+  \item[(iv')] $\det u_V = 1$
+  \item[(iv'')] $\operatorname{Tr} \sigma_{0V} = 0$
+\end{enumerate}
+\note{en (ii) et en (iii) un signe est biffé avant le « $=$ » (sans doute un $\parallel$ remplacé). Telle que la page l'écrit, (iii') répète (iii) mot pour mot ; d'après (ii') on attendrait $s_{n+3} - s_n \parallel s_{n+2} - s_{n+1}$.}
+
+\struck{(\ill{} $\sigma_{0V}$ est une \emph{réflexion} i.e. est $\neq$ \ill{})}
+
+\page{83}
+i.e. on a
+
+(17)
+\[
+\sigma_0 = \begin{pmatrix} -1 & \alpha & 1 \\ 0 & 1+\beta & 0 \\ 0 & 0 & 1 \end{pmatrix}
+\]
+\note{les deux coefficients de la deuxième colonne sont récrits sur des premières valeurs biffées, illisibles.}
+
+(18)
+\[
+\sigma_0(x,y) = (1 - x + \alpha y, (1+\beta) y)
+\]
+
+(19)
+\[
+\begin{cases}
+\sigma_1 s_0 = s_0 \\
+\sigma_1 s_1 = s_{-1} \\
+\sigma_1 s_{-1} = s_1 \\
+\sigma_1 e_1 = e_2 \\
+\sigma_1 e_2 = e_1
+\end{cases}
+\qquad \text{i.e.}
+\]
+
+(20)
+\[
+\sigma_1 = \begin{pmatrix} 0 & 1 & 0 \\ 1 & 0 & 0 \\ 0 & 0 & 1 \end{pmatrix}
+\]
+
+(21)
+\[
+\sigma_1(x,y) = (y,x)
+\]
+
+Il reste : écrire la condition $\sigma_0^2 = \mathrm{id}$. On trouve
+
+(\ill{})
+\[
+\begin{cases}
+\boxed{\alpha\beta = 0} \\
+(1+\beta)^2 = 1 \quad \text{i.e.} \quad \boxed{\beta^2 + 2\beta = 0} \quad \text{i.e.} \quad \boxed{\beta(\beta+2) = 0}
+\end{cases}
+\]
+\note{à droite de la première ligne, \struck{$(1+\beta)^2 = 1$} est biffé, puis récrit à la ligne suivante. Le numéro de la formule est surchargé.}
+
+\uncertain{Donc} :
+
+\emph{Proposition} Les représentations géom. affines \add{sur $k$} régulières de $\Pi_\infty$ sont \struck{définies} en corr. 1-1 corr. avec les couples $(\alpha,\beta)$ d'éléments de $k$ satisfaisant les conditions
+
+(22)
+\[
+\alpha\beta = (\beta+2)\beta = 0
+\]
+
+\page{84}
+(v) On n'est pas dans le « cas \struck{\ill{}} \add{impropre} » suivant \add{($\alpha = 0$, $\beta = -2$)}
+
+(23)
+\[
+\begin{cases}
+\text{car}\, k = p \neq 2, \quad \sigma_0 = \begin{pmatrix} -1 & 0 & 1 \\ 0 & -1 & 0 \\ 0 & 0 & 1 \end{pmatrix} \\
+\sigma_0(x,y) = (1-x, -y)
+\end{cases}
+\]
+\note{au début de la première ligne un mot est biffé, et après la matrice « i.e. » est suivi d'un \struck{$\sigma_0$} biffé ; au début de la seconde, \struck{\ill{}} est biffé.}
+i.e. $\sigma_0$ = symétrie p.r. au milieu du segment $(s_0, s_1)$.
+
+\emph{Dém.} L'équivalence de (i), (ii), (ii') résulte trivialt. de
+\[
+s_2 - s_{-1} = (1+\alpha) e_1 + \beta e_2
+\]
+et du fait que $e_1 = s_1 - s_0$ et $e_2$ forment une base de $V$. L'équivalence de (ii) et (iii), ou (ii') et (iii'), s'obtient en \struck{faisant} \ill{} que pour $n = -1$ on obtient les conditions de (ii) (ii'), et \uncertain{qu'inversement} (iii), (iii') s'obtiennent de (ii) (ii') en \uncertain{utilisant} $u^n$. Comme
+
+(24)
+\[
+\begin{cases}
+\det u_V = -\det \sigma_{0V} = 1 + \beta \\
+\operatorname{Tr} \sigma_{0V} = \beta
+\end{cases}
+\]
+\note{avant l'accolade, un début de formule est biffé, \struck{$\det \sigma_{0V}$ \ill{}}.}
+ce qui prouve l'équivalence de (iv) (iv') (iv'') avec les autres conditions. Enfin, l'équivalence avec (v) est évidente par la \struck{propos} formule (22).
+
+\emph{Remarques sur le cas impropre} À isomorphisme près, il y a un et un seul pour \ill{} $k$
+
+\page{85}
+donné. On a dans ce cas
+
+(25)
+\[
+\begin{cases}
+u(x,y) = (1-y, -x) \\
+u^2(x,y) = (x+1, y-1)
+\end{cases}
+\]
+i.e. $u^2$ est la translation par le vecteur $(1,-1)$. Donc en car. 0 $u^2$ est d'ordre infini, donc a fortiori $u$ l'est, donc la réalisation obtenue de $\Pi_\infty$ est d'ordre infini (on trouve qu'elle est fidèle…) Si car. $p > 0$, $u^2$ est d'ordre $p$, donc $u$ d'ordre $2p$, on trouve \struck{\ill{} $2p$} \add{donc} que la réalisation géom. impropre se factorise par $\Pi_{2p}$. On vérifie aisément que la réalisation géom. de $\Pi_{2p}$ est bel et bien fidèle, donc donne un $2p$-polygone régulier.
+
+Avec la théorie projective des polygones réguliers, l'anomalie \ill{} des « polygones réguliers impropres » s'explique complètement, et on voit que du \uncertain{point de vue} projectif on n'a rien perdu en excluant le cas impropre, ce que nous ferons désormais.
+
+\emph{Scholie} Le cas d'une réalisation géom. régulière \uncertain{propre} de $\Pi_\infty$ est décrit par $\alpha \in k$, qui peut être choisi arbitrairement…
+
+\marginal{terminologie « invariant numérique »}
+
+\page{86}
+\section*{3. Points fixes de $\sigma_0$, $\sigma_1$, centre de la réal. géom.}
+
+(26)
+\[
+\begin{cases}
+\sigma_0(x,y) = (1 - x + \alpha y, y) \\
+\sigma_1(x,y) = (y,x) \\
+u(x,y) = \sigma_0 \sigma_1(x,y) = (1 - y + \alpha x, x)
+\end{cases}
+\]
+
+\drawing{à droite, un croquis : la ligne brisée $s_{-1}, s_0, s_1, s_2$ et, en tirets, les axes de $\sigma_1$ (par $s_0$) et de $\sigma_0$ (entre $s_0$ et $s_1$).}
+
+Points fixes de $\sigma_0$ :
+
+(27)
+\[
+H_0 : \quad 2x - \alpha y - 1 = 0
+\]
+c'est une droite, sauf pour $p = 2$, $\alpha = 2$ (cas du carré en car. 2) où on trouve $H_0 = \emptyset$. Mais \add{passant} en coordonnées hom., on trouve encore une droite $z = 0$ : la droite à l'infini (Dans ce cas, $\sigma_0$ est la translation par \ill{} $e_1$)
+
+Points fixes de $\sigma_1$
+
+(28)
+\[
+H_1 : \quad x - y = 0
+\]
+c'est une droite
+
+\emph{NB} Un automorphisme affine \add{d'un plan affine} \uncertain{tel que} l'ens. des points fixes \struck{est} une droite est appelé une \emph{réflexion affine}. On voit donc que les cas « propres » de la proposition précédente est caractérisé aussi par la condition
+
+(iv''') $\sigma_0$ est une réflexion affine, ou \struck{\ill{}} une translation \struck{(dans le} \add{(ce dernier cas} dans le seul cas $p = 2$, $\alpha = 0$ i.e. carré en car. 2, et alors $\sigma_0$ est encore une réflexion projective…)
+
+\page{87}
+(iv$^{\text{iv}}$) $\sigma_{0V}$ est une réflexion, $\neq$ l'identité (\ill{})
+
+\emph{NB} Dans le cas impropre, $\sigma_{0E}$ est la sym. p.r. à un pt (car. $\neq 2$), $\sigma_{0V}$ est la symétrie $v \mapsto -v$.
+
+\emph{Points fixes sous $G$} = \emph{pts fixes sous $G^+$} = \emph{pts fixes sous $u$} :
+
+(29)
+\[
+x_0 = y_0 = \frac{1}{2-\alpha}
+\]
+(qui existe ssi $\alpha \neq 2$, et est \ill{} unique)
+
+\marginal{terminologie : le centre de la réalisation de $\Pi_\infty$ …}
+
+\section*{4. Valeurs propres de $u_V$. Comparaison avec les \ill{}…}
+
+(30)
+\[
+u_V = \begin{pmatrix} \alpha & -1 \\ 1 & 0 \end{pmatrix}
+\]
+
+(31)
+\[
+\begin{cases}
+\det u_V = 1 \\
+\operatorname{Tr} u_V = \alpha
+\end{cases}
+\]
+\note{avant l'accolade, un \struck{$\det$} biffé.}
+
+équation aux valeurs propres ($\zeta \in \bar{k}$)
+
+(32)
+\[
+\zeta^2 - \alpha\zeta + 1 = 0
+\]
+discriminant
+
+(33)
+\[
+\Delta(\alpha) = \alpha^2 - 4 = (\alpha - 2)(\alpha + 2)
+\]
+\ill{} d'un tel $\zeta$, on \ill{} trouve
+
+(33)
+\[
+\alpha = \zeta + \zeta^{-1}
+\]
+\note{le numéro (33) est écrit deux fois.}
+
+(\emph{NB} \ill{} $\zeta$, $\zeta'$ de cette équation satisfont
+
+(34)
+\[
+\begin{cases}
+\zeta + \zeta' = \alpha \\
+\zeta\zeta' = 1
+\end{cases}
+\quad \text{i.e.} \quad \zeta' = \zeta^{-1} .
+\]
+
+\page{88}
+On retrouve encore une fois que \struck{\ill{}} \ill{} ici coïncide avec ce que nous avions appelé (dans le cas des $n$-polygones \emph{réguliers} avec $n$ premier à la car. $p$) « l'invariant numérique » dudit. Cependant ici le cas d'une racine double
+
+(35)
+\[
+\zeta = \zeta' \quad \text{i.e.} \quad \zeta^2 = 1 \quad \text{i.e.} \quad \zeta = \pm 1
+\]
+n'est pas exclu, il correspond au cas
+
+(36)
+\[
+\alpha = \pm 2 \quad \text{ou encore} \quad \Delta(\alpha) = 0
+\]
+($\alpha = 2$ correspond à $\zeta = 1$, $\alpha = -2$ à $\zeta = -1$, les deux cas venant à se confondre ssi $p = 2$).
+
+Cela tient compte précisément des 2 seules valeurs de $\zeta$ que nous avions été \emph{obligés} d'exclure, pour définir une repr. géom. \ill{} $\varphi^{\zeta} = (\varphi^{\zeta}_0, \varphi^{\zeta}_1)$ de $\Pi_\infty$ ! [Le cas $\zeta = 1$, $\alpha = 2$ est également \emph{distingué} comme le seul cas où il n'y ait pas de centre à distance finie….]
+\note{les indices et exposants de $\varphi^{\zeta}$ sont mal formés ; la forme donnée est une lecture.}
+
+\page{89}
+\struck{5. Étude des cas \ill{}}
+
+\emph{NB} On retrouve, pour $\alpha \neq \pm 2$ i.e. $\zeta \neq \pm 1$, \add{du moins si $\zeta \in k$}, la représentation $\varphi^{\zeta}$ de $\Pi_\infty$. (Donc les \emph{seuls} \emph{cas nouveaux} (sur $k$ alg. clos) sont précisément les cas $\alpha = \pm 2$ (i.e. $\zeta = \pm 1$) qu'on avait été amené précédemment à exclure. Nous allons les étudier séparément au § suivant. Notons dès à présent que, même si on décidait (à tort !) \ill{} \ill{} \ill{} ces deux cas, les considérant comme trop « exotiques », les \uncertain{dédaignant} en conséquence, ils y reviendraient indirectement, car a) ils sont valables pour tt corps, et \ill{} \add{\uncertain{même} sur les} anneaux, de base $k$, et \struck{b) ils} \uncertain{pas seulement} pour $k$ alg. clos, et b) ils permettent de suivre la variation de \struck{\ill{}} $\varphi(\alpha)$ en termes des paramètres $\alpha$, intrinsèques.
+
+\page{90}
+\section*{5) Étude par cas}
+
+I) $\Delta(\alpha) \neq 0$ i.e. $\alpha \neq \pm 2$ (« cas ordinaire »)
+
+Étendant au besoin le corps de base $k$ en $k(\zeta) = k(\zeta')$, et rapportant maintenant $E$ au système de coordonnées de centre $0$, ayant comme axes les droites propres de $u$ $D_\zeta$ et $D_{\zeta'}$, et pour lesquelles $s_0$ est de coordonnées $(1,1)$, on trouve par un argument déjà fait le cas-type $\Pi_\zeta$ (où $\zeta$ n'est pas nécessairement une racine de 1). Il y a une forme quadratique (\uncertain{non} \ill{}) invariante, canonique à un scalaire multiplicatif près, qu'on \uncertain{normalise} en exigeant que sa valeur en les sommets \add{de la représentation $\Pi_\zeta$} soit égale à 1… L'image \struck{$\Pi_\zeta$} \add{est un polygone} géométrique, dont le nombre de côtés, égal à l'ordre de $\zeta$, est (\struck{éventuellement} \add{quand il est} fini) premier à la caractéristique.
+
+\struck{II) $\alpha = -2$}
+\[
+\begin{array}{l}
+\text{\struck{$\sigma_0(x,y) = (1 - x - 2y, y)$}} \\
+\text{\struck{$u_0(x,y) = (1 - y - 2x, x)$}} \\
+\text{\struck{$u_0^2(x,y) = (1 - x - 2(1 - y - 2x),$}} \\
+\text{\struck{$1 - y - 2x) = (-1 + 3x \ldots$}}
+\end{array}
+\]
+\struck{On \ill{} ici $\alpha \neq 2$ (i.e. $p \neq 2$), de sorte que l'on a encore existence d'un centre $O$.}
+\note{tout ce cas II est encadré et barré de traits obliques ; il est repris p.~94.}
+
+\page{91}
+II Considérons le cas $\alpha = \pm 2$, donc $\zeta = \pm 1$. On aura pour la partie homogène \add{$u_0$} de $u$
+\[
+u_0 = \varepsilon(\mathrm{id} + v_0), \qquad \varepsilon = \pm 1, \quad v_0^2 = 0
+\]
+\add{i.e.}
+\[
+v_0 = \varepsilon u_0 - \mathrm{id}
+\]
+De façon explicite
+\[
+\begin{array}{l}
+u(x,y) = (1 - y + 2\varepsilon x, x) \\
+u_0(x,y) = (-y + 2\varepsilon x, x) \\
+v_0(x,y) = (x - \varepsilon y, \varepsilon(x - \varepsilon y)) = (x - \varepsilon y)(1, \varepsilon) \\
+\phantom{v_0(x,y)} = a'(z)\, a
+\end{array}
+\]
+\note{devant $a'(z)$ une lettre surchargée, illisible.}
+i.e. \struck{\ill{}} $a' \in \check{V}$, $a \in V$,
+\[
+\begin{cases}
+a'(x,y) = x - \varepsilon y \\
+a = (1, \varepsilon)
+\end{cases}
+\]
+
+\page{92}
+\note{page de calculs de brouillon, d'une encre plus sombre ; on en donne les formules dans l'ordre de la page.}
+\[
+\begin{array}{l}
+u^2 = (1 - x + \alpha(1 - y + \alpha x), 1 - y + \alpha x) \\
+\phantom{u^2} = ((1+\alpha) + (\alpha^2 - 1)x - \alpha y, 1 + \alpha x - y)
+\end{array}
+\]
+\struck{$= (1 + 3x + 2y, 1 \ldots$}
+\[
+3 + 3x - 3y, \; 1 + 2x - y
+\]
+\[
+x = y \qquad 2x = \alpha y \qquad \alpha \neq 2 \qquad
+\begin{cases}
+\sigma_1(X,Y) = (Y,X) \\
+\sigma_0(X,Y) = (-X + \alpha Y, Y) \\
+u(X,Y) = (-Y + \alpha X, X)
+\end{cases}
+\]
+$\alpha = -2$ \quad \struck{$u(X,Y) =$}
+\[
+u = -(1 + v), \qquad v = -1 - u
+\]
+\[
+\begin{array}{l}
+u(X,Y) = (-Y - 2X, X) \\
+v(X,Y) = (X + Y, -(X + Y))
+\end{array}
+\qquad v^2 = 0
+\]
+\note{la ligne de $v$ est corrigée sur la page (des signes surchargés, une parenthèse biffée).}
+\[
+\begin{cases}
+u^2 = 1 + 2v = \begin{pmatrix} 1 & \\ 0 & 1 \end{pmatrix} \ldots
+\end{cases}
+\]
+\drawing{à gauche, deux axes et une droite oblique par l'origine.}
+\[
+\begin{cases}
+\sigma_1(x,y) = (y,x) \\
+\sigma_0(x,y)
+\end{cases}
+\qquad u_V = \varepsilon(1 + v), \quad \varepsilon = \pm 1
+\]
+\[
+\begin{array}{l}
+u(X,Y) = (-Y + 2\varepsilon X, X) = \varepsilon( \ldots \\
+u_V = \varepsilon(\mathrm{id} + v) \qquad v = \varepsilon u_V - \mathrm{id}
+\end{array}
+\]
+\[
+v(X,Y) = (X - \varepsilon Y, \varepsilon(X - \varepsilon Y)) = (X - \varepsilon Y) \cdot (1, \varepsilon)
+\qquad X = \varepsilon Y
+\]
+\note{$X - \varepsilon Y$ et $\varepsilon(X - \varepsilon Y)$ sont surmontés de $X'$ et $Y'$ ; suivent plusieurs essais biffés, dont \struck{$X' = \varepsilon Y'$} et \struck{$X' - \varepsilon Y' = 0$}.}
+\[
+\begin{array}{l}
+(X + Y, -(X + Y)) \\
+(X - Y, -X - Y)
+\end{array}
+\]
+
+\page{94}
+\note{le feuillet 93, non transcrit, est une lettre dactylographiée datée de Paris, 10 novembre 1977, adressée à A.~Grothendieck ; c'est un terme a quo pour ces pages, compatible avec la datation de l'inventaire.}
+
+I) $\alpha \neq \pm 2$ (valeurs propres distinctes de $u_V$, existe centre)
+
+\struck{Sur l'extension finie extension $k'$ de $k$} Si $k$ contient les racines $\zeta$, $\zeta' = \zeta^{-1}$ de l'équation aux valeurs propres, alors on est isom. à \struck{$\Pi_\zeta$} $\varphi_\zeta$ … Ordre de $u_V$ est égal à celui de $u$, ou \uncertain{encore} : celui de $\zeta$
+
+\struck{III) $\alpha = -2$, $\alpha \neq 2$}
+
+\struck{II) Cas $\alpha = \pm 2$ i.e. valeurs propres confondues}
+
+\struck{II) $\alpha =$}
+
+\struck{II) Cas $\alpha = -2$, $\alpha \neq 2$ il y a}
+\struck{$u =$}
+\note{ces quatre départs sont biffés, ainsi que la matrice qui suit $u =$, de lignes $(-2, -1, 1)$, $(1, 0, 0)$, $(0, 0, 1)$ ; son premier coefficient est surchargé.}
+
+II) $\alpha = -2$ \qquad $\zeta = \zeta' = -1$ \qquad \struck{$u_V^2 = \mathrm{id}$} $u_V^2$ = transvection d'ordre $p$, $u_V$ d'ordre $2p$, $u_E$ d'ordre $2p$ si $p \neq 2$ (car $\exists$ centre)
+
+\uncertain{Mais} contradiction si $p = 2$. En effet, on a alors $\alpha = -2 = 0$, or le cas $\alpha = 0$ est celui du \emph{carré} ($\zeta^2 = -1$ …)
+\[
+\begin{array}{l}
+u(x,y) = (1 - y, x) \\
+u^2(x,y) = (1 - x, 1 - y) \\
+u^4(x,y) = (x, y) \quad \text{---}
+\end{array}
+\]
+\note{devant $u(x,y)$, un \struck{$\sigma_0(x,y)$} biffé.}
+
+Si $p \neq 2$, \add{i.e. $\alpha \neq 2$,} on trouve, en prenant
+\[
+\begin{cases}
+X = x - \frac{1}{2-\alpha} \\
+Y = y - \frac{1}{2-\alpha}
+\end{cases}
+\]
+\note{le signe devant $\frac{1}{2-\alpha}$ est un pâté ; le moins est celui qu'impose le centre (29).}
+\[
+\begin{cases}
+\sigma_0(X,Y) = (-X + \alpha Y, Y) \\
+\sigma_1(X,Y) = (Y, X) \\
+u(X,Y) = (-Y + \alpha X, X) = -(\mathrm{id} + a' \otimes a)(X,Y)
+\end{cases}
+\]
+\[
+a'(X,Y) = X + Y \qquad a = (1, -1)
+\]
+
+\page{95}
+\drawing{à gauche, un croquis : les axes, la droite $D$ de direction $a$ portant $s_0$ et $-s_0$, une flèche $a$, et le point $-s_0' = -(s_0 + \frac{1}{2}a)$.}
+\[
+s_0 = \left(\frac{1}{2-\alpha}, \frac{1}{2-\alpha}\right) = \left(\frac{1}{4}, \frac{1}{4}\right)
+\]
+\note{devant la parenthèse, un \struck{$X$} biffé.}
+\[
+\begin{array}{l}
+u = -(\mathrm{id} + v_0) \\
+u^2 = \mathrm{id} + 2 v_0
+\end{array}
+\]
+\[
+\begin{cases}
+u^{2n} = \mathrm{id} + 2n v_0 \\
+u^{2n+1} = -(\mathrm{id} + (2n+1) v_0)
+\end{cases}
+\]
+\[
+s_{2n} = s_0 + 2n\, \underbrace{v_0(s_0)}_{(\frac12, -\frac12)} = s_0 + n \underbrace{(1,-1)}_{a} = s_0 + na
+\]
+\[
+s_{2n+1} = -(s_0 + (2n+1) v_0(s_0)) = -s_0 - \left(n + \tfrac12\right) a
+\]
+\[
+\phantom{s_{2n+1}} = \left(-s_0 - \tfrac12 a\right) - na
+\]
+\note{les deux signes moins de la dernière ligne sont des pâtés ; ils sont lus d'après le calcul.}
+
+III) $\alpha = +2$ (Pas de centre) \qquad $\zeta = \zeta' = +1$
+
+\struck{\ill{}} $u_V = \mathrm{id} + v_0$ \qquad $v_0 = a' \otimes a \neq 0$, $v_0^2 = 0$
+
+$u_V$ d'ordre $p$
+
+Je dis que $u_E$ d'ordre $p$, sauf si $p = 2$ (déjà traité, où on trouve $2p = 4$)
+
+\struck{$u_{\hat E}$} Du \uncertain{point de vue} de l'enveloppe vectorielle
+\[
+\begin{array}{l}
+u_E = \mathrm{id} + w \qquad w^3 = 0 \\
+u_E^p = \mathrm{id} + w^p \qquad p \geq 3 \text{ --- } \ldots
+\end{array}
+\]
+\note{dans la seconde ligne, un coefficient \struck{$p$} biffé devant $w^p$, puis quelques signes biffés illisibles ; après le tiret, un mot \ill{}. Au-dessus de la ligne suivante, \struck{$p = 2$ on trouve} est biffé.}
+
+[Pour $p = 2$, on trouve $u_E^2 = \mathrm{id} + w^2 \neq \mathrm{id}$ car $w^2 \neq 0$]
+
+\page{96}
+\section*{6) formes quadratiques invariantes.}
+
+On s'intéresse aux expressions
+\[
+f(x,y) = ax^2 + bxy + cy^2 + ux + vy + d
+\]
+polynomiales de degré $\leq 2$ sur $E$, qui correspondent aux formes quadratiques sur l'enveloppe vectorielle $\hat{E}$ de $E$. On cherche celles qui sont invariantes par $G = \operatorname{Aut} \Pi$, i.e. par $\sigma_0$, $\sigma_1$. Il y a les constantes, donc on est ramené à voir les conditions pour que \struck{$f$ soit inv.} \add{l'expression sans} terme constant
+\[
+f(x,y) = ax^2 + bxy + cy^2 + ux + vy
+\]
+soit invariante. L'invariance par $\sigma_1$ signifie que $f(x,y)$ est symétrique en $x$, $y$
+\[
+a = c, \quad u = v \quad \text{i.e.}
+\]
+\[
+f(x,y) = a(x^2 + y^2) + bxy + u(x + y)
+\]
+et prenant en explicit l'invariance par $\sigma_0$, on trouve
+\[
+f = a f_\alpha
+\]
+\[
+\boxed{f_\alpha(x,y) = (x^2 - x) + (y^2 - y) - \alpha xy}
+\]
+\note{la lettre $f$ de cette page est tracée surchargée, comme une capitale ; l'indice de $f_\alpha$ est lu $\alpha$.}
+
+\emph{NB} Les fonctions $f$ \add{(p.l. de degré $\leq 2$)} nulles sur $S$ invariantes par $G$ sont les multiples de $f_\alpha$ ci-dessus.
+
+\page{97}
+Les fonctions $1$, $f_\alpha$ forment une base \add{sur $k$} de l'ens. des fonctions pl. de degré $\leq 2$ inv. par $G$. Parmi ces fonctions, $f_\alpha$ est caractérisée par les \struck{fonctions} conditions
+
+a) $f_\alpha$ nulle sur $S$
+
+b) La « partie homogène » $f_0$ de $f$ satisfait
+\[
+f_0(s_i - s_{i-1}) = 1 \qquad \forall i
+\]
+[\emph{NB}
+\[
+f_0(X,Y) = X^2 + Y^2 - \alpha XY
+\]
+donc
+\[
+f_0(1,0) = 1 \; ]
+\]
+
+\marginal{[\ill{} conique circonscrite (canonique) $C(f_\alpha)$ définie par $f = 0$ (indépendante de la normalisation). On vérifie que si $\alpha \neq 0, 1$ (i.e. cas des polyg. réguliers à $n \geq 5$ côtés) c'est la \emph{seule} conique circonscrite]}
+\note{cette note marginale est écrite en remontant le long du bord gauche ; l'ordre des lignes est restitué.}
+
+7) \struck{Le discri} \emph{Discriminant de $f_0$}
+
+Le discriminant de $f_0$ est
+\[
+\delta(f_0) = 4 - \alpha^2 = (2 - \alpha)(2 + \alpha)
+\]
+\note{avant $4 - \alpha^2$, une première valeur biffée, illisible.}
+qui est nul ssi $\alpha = \pm 2$ : la quadrique définie par $f_0$ est non dég. ssi on a $\alpha \neq \pm 2$, i.e. ssi on est dans le cas « ordinaire ». On aura
+\[
+f_0(X,Y) = (Y - \zeta X)(Y - \zeta' X)
+\]
+où $\zeta$, $\zeta'$ sont les solutions de l'équation aux valeurs propres. Les « \struck{droites} \add{directions} isotropes »
+
+\page{98}
+(sur une extension $k'$ de $k$ contenant $\zeta$, $\zeta'$) sont les droites homogènes \struck{\ill{}}
+\[
+Y - \zeta X = 0 \qquad Y - \zeta' X = 0
+\]
+qui sont aussi les droites propres sous $u_0$
+\[
+(\quad u_0(X,Y) = (-Y + \alpha X, X) \quad )
+\]
+[ce qui correspond au fait que $u_0$ est une \struck{(\ill{})} \emph{rotation} pour $f_0$, si $f_0$ est non dég. i.e. $\alpha \neq \pm 2$]
+
+Dans le cas $\alpha = \pm 2$, ces deux directions sont confondues ; \struck{\ill{}} pour $\alpha = -2$, $\zeta = \zeta' = -1$, on trouve la direction
+\[
+X + Y = 0
+\]
+qui intervenait déjà comme privilégiée dans l'étude du « cas II \struck{\ill{}} ». Pour $\alpha = 2$, $\zeta = \zeta' = 1$, c'est la direction $X = Y$, \struck{\ill{}} on va l'examiner plus en détail plus bas.
+
+8) Discriminant \add{direct} de $f$. La matrice de $f$ est
+\[
+\begin{pmatrix} 2 & -\alpha & -1 \\ -\alpha & 2 & -1 \\ -1 & -1 & 0 \end{pmatrix}
+\]
+\note{le dernier coefficient est surchargé ; la lecture $0$ est celle du terme constant nul de $f_\alpha$, et elle donne le discriminant qui suit.}
+son discriminant est égal à
+\[
+\delta = 2\delta' \qquad \delta' = -(\alpha + 2)
+\]
+
+\page{99}
+donc $f$ est régulière ssi on a $\alpha \neq -2$. Dans ce cas, la \emph{conique circonscrite} $C(f_\alpha)$ est non sing.
+
+On notera que c'est le cas en particulier pour $\alpha = +2$, sauf si $k$ est de car. 2. Mais comme $f_0$ est dégénérée, la conique $C(f)$ est une \emph{parabole}.
+
+Dans le cas $\alpha = -2$, on aura
+\[
+f(x,y) = (x^2 - x) + (y^2 - y) + 2xy = (x+y)^2 - (x+y)
+\]
+\[
+= (x+y)(x+y-1) = \lambda(x,y)\,[\lambda(x,y) - 1]
+\]
+i.e. $f$ est le produit de deux fonctions linéaires affines ayant \uncertain{même} partie homogène $x + y$. Ainsi $C(f)$ est la réunion des deux droites parallèles \add{(distinctes)}, d'équations
+\[
+x + y = 0, \quad x + y = 1,
+\]
+qui étaient déjà en évidence dans l'étude du cas II (où on avait été amené à utiliser les coordonnées
+\[
+X = x - \tfrac14, \quad Y = y - \tfrac14, \quad x + y = X + Y + \tfrac12,
+\]
+donc les droites précédentes ont comme équations resp.
+\[
+X + Y = -\tfrac12, \quad X + Y = +\tfrac12 \; ).
+\]
+
+\page{100}
+9) \emph{Retour sur le cas} $\alpha = 2$, $\alpha \neq -2$ (i.e. $\alpha = 2$ en car. $\neq 2$).
+
+On a
+\[
+f(x,y) = (x - y)^2 - (x + y) = v^2 - w
+\]
+où
+\[
+\begin{cases}
+v = x - y \\
+w = x + y
+\end{cases}
+\quad \text{i.e.} \quad
+\begin{cases}
+x = \frac12(v + w) \\
+y = \frac12(-v + w)
+\end{cases}
+\]
+\note{dans la première formule, un exposant sur le premier $x$ est biffé.}
+
+\drawing{à gauche, un croquis : les axes $x$, $y$ et les axes obliques $v$, $w$ par l'origine.}
+
+Le calcul donne pour $u$, défini en coordonnées \uncertain{anciennes} par
+\[
+u(x,y) = (1 - y + 2x, x)
+\]
+en coordonnées $(v,w)$
+\[
+u(v,w) = (v + 1, 1 + 2v + w)
+\]
+en particulier, pour des points sur la parabole $C(f)$ d'équation $v^2 - w = 0$ i.e. $w = v^2$
+\[
+u(v, v^2) = (v + 1, (v+1)^2) .
+\]
+\note{après la parenthèse ouvrante, un début biffé, illisible.}
+Donc si on paramètre $C(f)$ par la coordonnée $v$, alors $u|C(f)$ est décrit par la translation $v \mapsto v+1$ !
+\note{la page s'arrête ici ; la suite du § 9, s'il y en a une, est au-delà de ce lot.}
+
+\end{document}
