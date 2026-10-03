@@ -1,0 +1,556 @@
+% Transcription — fonds Alexandre Grothendieck, shelfmark 78, batch 6 (pages 101-120).
+% Established from the facsimile archives/batches/78/batch-06.pdf, per the skill
+% transcribe-grothendieck.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-02 — first pass, unchecked against the pages by a human.
+%
+% Nineteen of the twenty pages are transcribed. Page 108 is a pink folder
+% cover inscribed « Polynômes cyclotomiques »; its words head the second
+% section and it has no \page{}. Page 110 is a typescript (a political text,
+% unrelated) whose foot carries two upside-down lines of his calculation:
+% only those are transcribed.
+%
+%   Pages 101-107 — "Fidélité": a regular geometric realisation of a
+%     combinatorial polygon Π = (S, A, R) in an affine plane; a) each edge
+%     meets exactly two vertices (via the circumscribed conic C), b) each
+%     vertex lies on two edges, d) transitivity on frames, e) Π → Π_0 a
+%     morphism. Page 104 (marked "(ancienne version)") and 105 restate it
+%     as a proposition: faithful ⟺ injective on S ⟺ on A ⟺ Aut(Π) → Aff(E)
+%     injective, with the corollary on the order n of the image dividing N.
+%   Pages 109-120 — the polynomials F_n(U), U = T + T^{-1}, the identity
+%     X_n - U X_{n-1} + X_{n-2} = 1 with X_n = F_n F_{n+1}, the affine map
+%     u_α(x,y) = (1 - y + αx, x) and the theorem u_α^n = id ⟺ F_n(α) = 0;
+%     cyclotomic Φ_n, semi-cyclotomic Ψ_n(T + T^{-1}) = T^{-φ(n)/2} Φ_n(T),
+%     the "modular rings" k'_n, k'_p, k'_{2p}, k'_4 = Z; Φ_{p^r n'} ≡
+%     Φ_{n'}^{φ(p^r)} mod p and its corollary on the order in char. p; a
+%     closing table of α for φ(n) ≤ 6.
+%
+% The underlined letters of the combinatorial polygon are set \underline
+% inside mathematics; his underlined words are \emph.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{78}
+\batch{6}
+\pages{101}{120}
+\dating{[à partir de 1977]}
+\watermark{Édition de démonstration}
+\foldertitle{[Polygones réguliers et polynômes cyclotomiques] : notes manuscrites (s.d.).}
+
+\begin{document}
+
+\section{Fidélité d'une réalisation géom.\ régulière d'un polygone combinatoire}
+
+\page{101}
+\note{le titre est de sa main, souligné en partie (« Fidélité ») ; il ouvre la page. Les lettres soulignées ($\underline{S}$, $\underline{A}$, $\underline{s}$, $\underline{a}$…) désignent ici les objets du polygone combinatoire, les lettres nues leurs images géométriques ; on garde cette convention dans toute la transcription.}
+
+\emph{Proposition.} Soit $\rho = (\rho_S, \rho_A)$ une réalisation géométrique régulière d'un polygone comb.\ $\underline{\Pi} = (\underline{S}, \underline{A}, \underline{R})$ \add{dans un plan affine $E$, sur $k$}, sur un corps $k$. (Alors l'image $\{\rho_S(\underline{S}) \subset E,\ \rho_A(\underline{A}) \subset \mathrm{Dr}(E)\}$ est un polygone géométrique \add{$\Pi_0$} régulier dans $E$. Son groupe d'aut.\ $G_0$ est l'image dans $\mathrm{Aff}(E)$ de $\underline{G} = \mathrm{Aut}(\underline{\Pi})$, et $\underline{\Pi} \to \Pi_0$ est \marginal{un hom.\ de polygones combinatoires}.)
+
+\note{la note marginale, accolée par une accolade, complète « $\underline{\Pi} \to \Pi_0$ est »  ; la parenthèse ouverte avant « Alors » se ferme après elle.}
+
+a) Toute arête $\rho_A(\underline{a})$ ($\underline{a} \in \underline{A}$) contient exactement deux sommets. On sait que si $\underline{s}, \underline{s}' \in \underline{S}$ sont les 2 sommets incidents à $\underline{a}$, et $s = \rho_S(\underline{s})$, $s' = \rho_S(\underline{s}')$, on a $s \neq s'$. \struck{Montrons que} \add{Soit} \struck{$\forall$} $\underline{s}'' \in \underline{S}$, \struck{tel que} $\rho_S(\underline{s}'') = s''$, \struck{$\mathrm{Dr}(s,s')$} $a = \rho_A(\underline{a}) = \mathrm{Dr}(s, s')$, il faut prouver que si $s'' \in a$, on a $s'' = s$ ou $s'' = s'$. On utilise \uncertain{le fait} que $a \cap C$ ne peut contenir que 2 points ($C$ conique circonscrite canonique…).
+
+\page{102}
+b) Tout sommet $s = \rho_S(\underline{s})$ est incident à exactement deux arêtes. Soient en effet $\underline{a}, \underline{a}' \in \underline{A}$ les arêtes incidentes à $\underline{s}$, $a, a'$ leurs images dans $A$, on sait que $a \neq a'$, $s \in a$, $s \in a'$. Montrons que si $a''_0 \in \rho_A(\underline{a}''_0)$ est incidente à $s$, alors $a''_0 = a$ ou $a''_0 = a'$. \struck{\ill{}} Soient $\underline{s}_0, \underline{s}_1$ les sommets incidents à $\underline{a}''_0$, donc $s_0, s_1 \in S$ leurs images, donc \struck{$s_0 \neq s_1$, et \ill{}} $a''_0 = \mathrm{Dr}(s_0, s_1) \ni s$, et par a) on doit avoir \struck{\ill{}} $s = s_0$ ou $s = s_1$, \struck{disons} \uncertain{disons} $s = s_0$. Soit $\underline{r} = (\underline{s}_0, \underline{a}_0)$, on a $\underline{s} = u^n \underline{s}_0$ pour $n$ convenable, donc $u^n s_0 = s = s_0$ d'où $u^n = \mathrm{id}$, donc \struck{\ill{}} $u^n(a_0) = a_0$ \struck{\ill{}}. Or $\underline{s}_0$ est incident à $\underline{a}_0$, $\underline{s} = \underline{u}^n(\underline{s}_0)$ l'est à $\underline{u}^n(\underline{a}_0)$, donc $\underline{u}^n(\underline{a}_0)$ \struck{\ill{}} est égal à $\underline{a}$ ou $\underline{a}'$, donc $u^n(a_0)$ \add{$= a_0$} est égal à $a$ ou $a'$, cqfd.
+
+\note{dans ce paragraphe, les soulignements des lettres sont irréguliers sur la page ; on les a suivis là où ils sont visibles, sans les compléter.}
+
+c) $S$ engendre $E$ : connu.
+
+d) $G = \mathrm{Aut}(E, S, A)$ est transitif sur l'ens.\ \add{$R$} des repères de $(S, A)$ \add{(\uncertain{car comme} \ill{} \uncertain{incidents} \ill{} a))}. Dans la dém.\ de a) \ill{} \uncertain{on a vu} que $R$ est
+
+\page{103}
+l'image canonique de $\underline{R}$. D'ailleurs $\underline{G}$ opérant sur $\underline{R}$ transitivement, il opère transitivement sur $R$, donc son image $G$ dans $\mathrm{Aff}(E, S, A)$ opère transitivement sur $R$. On trouve en même temps que (comme $\mathrm{Aut}(E, S, A)$ opère de façon simplement transitive) que
+\[
+  G \overset{\text{déf}}{=} \operatorname{Im} \underline{G} = \mathrm{Aut}(E, S, A).
+\]
+
+e) Pour prouver que $\underline{\Pi} \to \Pi_0$ est un hom., il faut voir que $\underline{R} \to R$ est compatible avec $\sigma_0, \sigma_1$ — on l'a vu dans la dém.\ de a) et b).
+
+\section{Fidélité}
+
+\page{104}
+\note{titre de sa main, souligné, en tête de page ; à gauche, dans la marge et d'une autre encre bleue, « (ancienne version) » — de sa main, semble-t-il.}
+\marginal{(ancienne version)}
+
+\add{Proposition} \struck{\uncertain{Corollaire}} Soit une réalisation géométrique \add{(non dégénérée (et propre))} régulière $\varphi$ d'un polygone combinatoire $\underline{\Pi} = (\underline{S}, \underline{A}, \underline{R})$ \struck{dans un plan affine $E$} \add{sur un corps $k$}. Conditions équiv.\ :
+
+a) $\varphi$ est fidèle
+
+b) $\varphi_S : \underline{S} \to E$ injection
+
+b$'$) $\varphi_A : \underline{A} \to \mathrm{Dr}(E)$ injection
+
+c) $\mathrm{Aut}(\underline{\Pi}) = \underline{G} \to \mathrm{Aff}(E)$ injection
+
+d) \struck{[$\underline{G}$ $\underline{\Pi}$ \ill{}, dire $\underline{u} \in \mathrm{Aut}(\underline{\Pi})$ et $u \in \mathrm{Aff}(E)$]} \add{$\mathrm{Aut}^+(\underline{\Pi}) = \underline{G}^+ \to \mathrm{Aff}(E)$ injection}
+
+\emph{Dém.} a) $\Rightarrow$ b) \& b$'$) trivial (compte tenu que $\forall\, \underline{s}, \underline{s}' \in \underline{S}$, $\underline{s} \neq \underline{s}'$, $\exists\, \underline{a} \in \underline{A}$ qui est incidente à $\underline{s}$ \add{et distincte} \uncertain{non} à $\underline{s}'$ — car $\operatorname{card} S = \operatorname{card} A \geq 3$ ici ! —).
+b) $\Rightarrow$ c), \add{b$'$) $\Rightarrow$ c)} triviaux puisque $\underline{G} \to \mathfrak{S}_S$, \add{$\underline{G} \to \mathfrak{S}_A$} injectives.
+\struck{Prouvons} c) $\Rightarrow$ d) trivial. Prouvons d) $\Rightarrow$ b), i.e.\ non b $\Rightarrow$ non d). Choisissons un \struck{\uncertain{géom.}} repère $\underline{r}$ de $\underline{\Pi}$, d'où une \uncertain{géom.} \struck{\ill{}} $\underline{u} = \underline{\sigma}_0 \underline{\sigma}_1$ de $\underline{G} = \mathrm{Aut}(\underline{\Pi})$, d'où $u \in \mathrm{Aff}(E)$. Soit $n = \operatorname{Card} \underline{S}$ (\add{$3 \leq n \leq +\infty$}) \struck{\uncertain{de sorte que} \ill{}}. \add{Alors} \struck{Dire que} non b signifie $\exists\, d < n$ \struck{tel que} $s_0$ et $i \in \mathbb{Z}$ tels que $s_i = s_{i+d}$ i.e.\ $u^i s_0 = u^{i+d} s_0$ i.e.\ $u^d s_0 = s_0$ ce qui implique, en multipliant par $u^j$ et notant $u^j u^d s_0 = u^d u^j s_0 = u^d s_j$, que $u^d s_j = s_j$ $\forall\, j \in \mathbb{Z}$, et comme les $s_j$ engendrent $E$, \uncertain{ceci prouve} que $u^d = \mathrm{id}$, \struck{donc} or $\underline{u}^d \neq 1$, donc non d). \uncertain{On a ainsi prouvé}
+
+\page{105}
+\emph{Corollaire.} Avec les notations précédentes, si $\underline{v} \in \underline{G}^+$, $s \in S = \operatorname{Im}(\underline{S} \to E)$, alors
+\[
+  \underline{v}.s = s \iff v = \mathrm{id} \qquad (v = \varphi_G(\underline{v}) \in \mathrm{Aff}(E)).
+\]
+
+\struck{[\ill{} b) \ill{} que $\underline{v} s_0 = s_0$ implique} \struck{$\underline{v} s_0 = s_0$]} \note{un petit encadré, à gauche, est biffé de hachures ; les flèches qui partent de « b) » le renvoient vers la ligne suivante.}
+\add{a)} \add{b$'$)} Ainsi, b) $\iff$ c) $\iff$ d), \struck{d'ailleurs \uncertain{signifie} \ill{}.}
+
+\struck{et b) $\Rightarrow$ b$'$), d'ailleurs \ill{} b) \ill{} $d < n$ dit que \add{$u^d = \mathrm{id}$} \struck{$u^d s_0 = s_0$} implique que \ill{} non c), donc $u^d a_0 = a_0$ i.e.\ $a_d = a_0$ donc}
+\note{tout ce bloc est encadré et barré de longues obliques.}
+
+Il reste à prouver b), c), d) implique a). Soit donc $\underline{s} \in \underline{S}$, $\underline{a} \in \underline{A}$, supposons $s \in a$, \struck{prouvons} \uncertain{prouvons} $\underline{s}$ incident à $\underline{a}$. Soient $\underline{s}_0, \underline{s}_1$ \add{(distincts)} les sommets incidents à $\underline{a}$, donc $s_0, s_1 \in a$, \add{et $s_0 \neq s_1$}, il faut prouver que \struck{\ill{}} $s = s_0$ ou $s = s_1$ (ce qui implique $\underline{s} = \underline{s}_0$ ou $\underline{s} = \underline{s}_1$, donc $\underline{s}$ incident à $\underline{a}$). \struck{Faux} Mais si on avait $s \neq s_0, s_1$, alors $\operatorname{card} a \cap S > 2$ (où $S = \operatorname{Im}(\underline{S} \to E)$) — \uncertain{a fortiori} $\operatorname{card} a \cap C > 2$, où $C$ est la conique circonscrite canonique, donc $a \subset C$, donc $C$ est \struck{dégénérée} \add{singulière}, donc $\alpha = -2$. Mais le cas $\alpha = -2$ a été examiné : $C = d \cup d'$, $d$ et $d'$ deux droites parallèles \emph{distinctes}, avec $s_i \in d$ pour $i$ pair, $s_i \in d'$ pour $i$ impair, donc $\mathrm{dr}(s_0, s_1) \cap C = \{s_0, s_1\}$, \uncertain{absurde} \ill{}.
+
+\page{106}
+\emph{Corollaire.} Soit $\varphi$ réal.\ quelconque de $\underline{\Pi}$ polygone combinatoire de degré $N$ ($3 \leq N \leq +\infty$). \add{Soit $\underline{u}$ un gén.\ de $\mathrm{Aut}^+(\underline{\Pi})$, $u$ son image dans $\mathrm{Aff}(E)$.} \struck{Alors} les entiers suivants sont tous égaux :
+\begin{enumerate}
+  \item[1)] $\operatorname{Card}(S = \operatorname{Im}(\underline{S} \to E))$
+  \item[2)] $\operatorname{Card}(A = \operatorname{Im}(\underline{A} \to \mathrm{Dr}(E)))$
+  \item[3)] $\operatorname{Card}(G^+ = \operatorname{Im}(\mathrm{Aut}^+(\underline{\Pi}) \to \mathrm{Aff}(E)))$
+  \item[4)] Ordre de \struck{\ill{}} $u \in \mathrm{Aff}(E)$
+\end{enumerate}
+\struck{\ill{}} Cet entier \add{$n$} est \struck{$\geq 3$ et \uncertain{donc}} un diviseur de $N$ (condition vide si $N = +\infty$) et est $\geq 3$, et c'est aussi le plus \struck{grand} \add{petit des} diviseurs \add{$n$} de $N$ tels que $\varphi$ se factorise par le \add{polygone} quotient \add{$\underline{\Pi}_{(n)}$} de $\underline{\Pi}$ d'ordre $n$, et enfin l'unique diviseur $n$ de $N$ tel que $\varphi$ se factorise par le polygone quotient $\underline{\Pi}_{(n)}$ de $\underline{\Pi}$ d'ordre $n$ \emph{de façon} que la réalisation obtenue de $\underline{\Pi}_{(n)}$ soit \emph{fidèle}.
+
+\note{un court trait horizontal sépare ce qui suit.} Mais il manque une \ill{} \add{\uncertain{comb.}} sur les morphismes \add{(étales)} de polygones \add{\uncertain{comb.}} (\uncertain{ou plus généralement} \uncertain{de} \ill{} (…)), nous permettant
+
+\page{107}
+de parler des quotients $\underline{\Pi}_{(n)}$ de $\underline{\Pi}$, pour tout diviseur $n$ de \struck{l'ordre} $N$ de $\underline{\Pi}$.
+
+\note{le reste de la page est blanc.}
+
+\section{Polynômes cyclotomiques}
+\note{titre pris sur une chemise de papier rose (p.~108), qui porte seulement « Polynômes cyclotomiques » en haut à droite, précédé d'une cote au crayon peu lisible ; la main du titre n'est pas assurée d'être la sienne.}
+
+\page{109}
+\[
+  \begin{array}{l}
+    \mathbb{Z}[T, T^{-1}] \\
+    \quad \cup \\
+    \mathbb{Z}(U) \qquad U = T + T^{-1}
+  \end{array}
+\]
+\note{il écrit $\mathbb{Z}(U)$ avec des parenthèses ; l'inclusion est un $\cup$ tourné, sous $\mathbb{Z}[T,T^{-1}]$.}
+\[
+  \Sigma_i(U) = T^i + T^{-i} = U^i + \cdots \qquad (i \geq 0)
+\]
+\[
+  \begin{aligned}
+    F_{2m}(U) &= (1 + T^2 + \cdots + T^{2(m-1)})\, T^{-(m-1)}\\
+    &= \Sigma_{m-1}(U) + \Sigma_{m-3}(U) + \cdots = U^{m-1} + \cdots \qquad (m \geq 1)\\
+    F_{2m+1}(U) &= (1 + T + T^2 + \cdots + T^{2m})\, T^{-m}\\
+    &= \Sigma_m(U) + \Sigma_{m-1}(U) + \cdots = U^m + \cdots \qquad (m \geq 0)
+  \end{aligned}
+\]
+\[
+  \left\{
+  \begin{aligned}
+    d^\circ(\Sigma_i) &= i\\
+    d^\circ F_n &= \Bigl[\frac{n-1}{2}\Bigr] = \begin{cases} m-1 & \text{si } n = 2m\\ m & \text{si } n = 2m+1 \end{cases} \qquad n \geq 1
+  \end{aligned}
+  \right.
+\]
+\emph{NB} On pose $F_0 = 0$, $F_n = -F_{-n}$ si $n < 0$. \note{le signe devant $F_{-n}$ est peu net ; on lit « $= -F_{-n}$ », peut-être « $= F_{-n}$ ».}
+\[
+  \left\{
+  \begin{aligned}
+    F_{2m}(2) &= m, & F_{2m}(-2) &= (-1)^{m-1} m\\
+    F_{2m+1}(2) &= 2m+1, & F_{2m+1}(-2) &= (-1)^m
+  \end{aligned}
+  \right.
+\]
+\[
+  \left\{
+  \begin{aligned}
+    F_{2m}(U)(T^2 - 1) &= (T^{2m} - 1)\, T^{-(m-1)}\\
+    F_{2m+1}(U)(T - 1) &= (T^{2m+1} - 1)\, T^{-m}
+  \end{aligned}
+  \right.
+\]
+\[
+  F_n(U) F_{n+1}(U) (T-1)(T^2-1) = (T^n - 1)(T^{n+1} - 1)\, T^{-(n-1)}
+\]
+\[
+  (F_n, F_{n+2}) = (1) \qquad n \geq 1 \quad (\text{et \uncertain{donc} pour } n \in \mathbb{Z})
+\]
+\[
+  \left.
+  \begin{aligned}
+    X'_n &= F_n F_{n+1} = U^{n-1} + \cdots\\
+    Y'_n &= F_n F_{n-1} = U^{n-2} + \cdots
+  \end{aligned}
+  \right| \ (\text{déf})
+\]
+\marginal{$F_0(U) = 0$, $F_1(U) = 1$, $F_2(U) = 1$ ; $F_3(U) =$ \struck{\ill{}} $U + 1$, $F_4(U) = U$ ; $F_5(U) = U^2 + U - 1$, $F_6(U) = U^2 - 1$ ; $X'_{-1} = 0$, $X'_0 = 0$, $X'_1 = 1$, $X'_2 = U + 1$}
+\note{la table des premiers $F_n$ et $X'_n$ est dans une colonne à droite, séparée par un trait oblique, à côté de la proposition qui suit. Le signe de $X'_{-1}$ est mal formé.}
+
+\emph{Prop.} $\forall\, n \in \mathbb{Z}$, on a
+\[
+  X'_n - U X'_{n-1} + X_{n-2} = 1.
+\]
+\note{les primes manquent sur le dernier $X$, comme écrit.}
+\struck{\ill{}} \uncertain{DPS} $n \geq 1$. Si $n = 1$, cela s'écrit $1 - U.0 + 0 = 1$ ok ; si $n = 2$, \uncertain{cas} $U + 1 - U(1) + 0 = 1$ ok. Si $n \geq 3$, on écrit
+\[
+  F_n F_{n+1} - U F_{n-1} F_n + F_{n-2} F_{n-1} = 1
+\]
+soit, en multipliant par $(T-1)(T^2-1)\, T^{n-1}$
+\[
+  \begin{gathered}
+    (T^n - 1)(T^{n+1} - 1) - T(T + T^{-1})(T^{n-1} - 1)(T^n - 1)\\
+    + T^2 (T^{n-2} - 1)(T^{n-1} - 1) = \text{\struck{\ill{}}}\ (T-1)(T^2-1)\, T^{n-1}
+  \end{gathered}
+\]
+\[
+  \begin{gathered}
+    T^{2n+1} - T^n - T^{n+1} + 1 - (T^2 + 1)(T^{2n-1} - T^n - T^{n-1} + 1)\\
+    + T^{2n-1} - T^n - T^{n+1} + T^2 = \text{\uncertain{id}}
+  \end{gathered}
+\]
+\[
+  -T^{2n+1} + T^{n+2} + T^{n+1} - T^2 - T^{2n-1} + T^n + T^{n-1} - 1
+\]
+\note{sous chaque terme il a marqué une croix (termes qui s'annulent) ou un point (termes qui restent).}
+i.e.
+\[
+  T^{n+2} - T^{n+1} - T^n + T^{n-1} = (T-1)(T^2-1)\, T^{n-1} \quad \text{ok.}
+\]
+
+On en conclut par récurrence sur $n \geq 0$
+\[
+  X'_n = X_n \quad \text{i.e.} \quad X_n = F_n F_{n+1}
+\]
+puis, comme $X_{-n} = Y_n =$ \struck{$X_{n-1}$} \struck{\ill{}} $= F_{n-1} F_n = F_{-n} F_{-n+1}$ ($n \geq 1$)
+
+\page{110}
+\note{la page est un tapuscrit sans rapport avec les mathématiques ; seules deux lignes de calcul, de sa main, tête-bêche au pied de la feuille, sont transcrites.}
+\[
+  1 + T^2 + T^4 = (T^{-2} + T^2) + 1 = U^2 - 1
+\]
+\note{il manque ici le facteur $T^{-2}$ au premier membre : c'est $F_6(U) = U^2 - 1$ de la p. 109.}
+\[
+  F_{2m+2}(U)(T^2 - 1) = (T^{2(m+1)} - 1)\, T^{-m}
+\]
+\note{les indices « $2m+2$ » et « $2(m+1)$ » sont des lectures douteuses : l'encre est écrasée à cet endroit.}
+
+\page{111}
+on trouve
+\[
+  \left\{
+  \begin{aligned}
+    X_n &= F_n F_{n+1}\\
+    Y_n &= X_{n-1} = F_{n-1} F_n
+  \end{aligned}
+  \right. \qquad \Big|\ \forall\, n \in \mathbb{Z}
+\]
+
+Autre démonstration : on voit par induction sur $n \geq 1$ que $X_n(U)$ est \add{unitaire} de degré $n-1$ en $U$ (grâce à la relation $X'_n - U X_{n-1} + X_{n-2} = 1$ i.e.\ $X_n = U X_{n-1} - X_{n-2} + 1$) \struck{\ill{}} \uncertain{tout} comme $X'_n(U)$. \struck{D'ailleurs ils ont les mêmes racines dans $\overline{\mathbb{Q}}$ — d'ailleurs celles des $X'_n$ sont les} \add{Considérons les}
+\[
+  \begin{aligned}
+    T^{n-1} X_n(U) &= A_n(T)\\
+    T^{n-1} X'_n(U) &= A'_n(T)
+  \end{aligned}
+\]
+\note{une grosse tache d'encre couvre la fin de la seconde formule et le mot suivant.}
+ce sont des polynômes \ill{} \uncertain{unitaires} en $T$ \uncertain{à coeff.} \add{dans $\overline{\mathbb{Q}}$}, de degré $2(n-1)$. Les racines du deuxième \add{\uncertain{sont}} \struck{\uncertain{les racines de}} les $\xi \in \overline{\mathbb{Q}}$ telles que $\xi^n = 1$ ou $\xi^{n+1} = 1$, $\xi \neq 1$ \struck{\ill{}}, on voit \uncertain{qu'il y en a} $2n + 1 - 3 = 2n - 2$ — elles sont distinctes. On a vu que ce sont les racines de $A_n(T)$, d'où l'égalité des deux polynômes ($n \geq 1$).
+
+\add{Matrices} \struck{Description} des $u^n$. Comme $u^n$ transforme $s_0, s_1, s_{-1}$ en $s_n, s_{n+1}, s_{n-1}$ de coordonnées
+\[
+  \text{\struck{\ill{}}}\quad
+  \left\{\begin{array}{l} F_n(\alpha) F_{n+1}(\alpha)\\ F_{n-1}(\alpha) F_n(\alpha) \end{array}\right.,\quad
+  \left\{\begin{array}{l} F_{n+1}(\alpha) F_{n+2}(\alpha)\\ F_n(\alpha) F_{n+1}(\alpha) \end{array}\right.,\quad
+  \left\{\begin{array}{l} F_{n-1}(\alpha) F_n(\alpha)\\ F_{n-2}(\alpha) F_{n-1}(\alpha) \end{array}\right.,
+\]
+\note{les indices de la troisième accolade sont surchargés ; on lit $F_{n-1}F_n$ et $F_{n-2}F_{n-1}$, sous réserve.}
+sa matrice est
+\[
+  u^n = \begin{pmatrix} F_{n+1}(\alpha)(F_{n+2}(\alpha) - F_n(\alpha)) & & F_n(\alpha) F_{n+1}(\alpha)\\ F_n(\alpha)(F_{n+1}(\alpha) - F_{n-1}(\alpha)) & & F_{n-1}(\alpha) F_n(\alpha)\\ 0 & 0 & 1 \end{pmatrix}
+\]
+\note{toute cette première matrice est biffée de grandes boucles (on la donne ici sans la marque de biffure, qu'une matrice ne peut porter) ; la colonne du milieu y est illisible.}
+\[
+  u^n = \begin{pmatrix}
+    F_{n+1}(\alpha)(F_{n+2}(\alpha) - F_n(\alpha)) & F_n(\alpha)(F_{n-1}(\alpha) - F_{n+1}(\alpha)) & F_{n+1}(\alpha) F_{n+1}(\alpha)\\
+    F_n(\alpha)(F_{n+1}(\alpha) - F_{n-1}(\alpha)) & F_{n-1}(\alpha)(F_{n-2}(\alpha) - F_n(\alpha)) & F_{n-1}(\alpha) F_{n+1}(\alpha)\\
+    0 & 0 & 1
+  \end{pmatrix}
+\]
+\note{les indices de la troisième colonne sont surchargés et douteux (on lit $F_{n+1}F_{n+1}$ et $F_{n-1}F_{n+1}$) ; au deuxième coefficient de la deuxième ligne, une barre verticale traverse la parenthèse.}
+
+\page{112}
+\emph{Théorème.} Soient $k$ un anneau, $\alpha \in k$, d'où $u_\alpha : k^2 \to k^2$ \add{automorphisme} \struck{transformation} affine
+\[
+  u_\alpha(x, y) = (1 - y + \alpha x,\ x)
+\]
+satisfaisant, \struck{\ill{}} posant $s_n = u_\alpha^n(s_0)$ (où $s_0 = (0,0)$)
+\[
+  \begin{aligned}
+    &\text{\struck{$u_\alpha(s_0)$}}\\
+    s_1 &= u_\alpha(s_0) = (1, 0)\\
+    s_{-1} &= u_\alpha^{-1}(s_0) = (0, 1) \quad \text{i.e.}\ u_\alpha(0,1) = (0,0).
+  \end{aligned}
+\]
+Soit $n \in \mathbb{Z}$. Conditions équivalentes
+\begin{enumerate}
+  \item[a)] $u_\alpha^n = \mathrm{id}$
+  \item[b)] $s_n = s_0$ i.e.\ $u_\alpha^n s_0 = s_0$
+  \item[b$_i$)] (\uncertain{où} $i \in \mathbb{Z}$ fixé) $u_\alpha^n s_i = s_i$
+  \item[d)] $F_n(\alpha) = 0$
+\end{enumerate}
+\note{une grande accolade, à gauche, réunit l'énoncé ; les conditions sont lettrées a), b), b$_i$), d) — il n'y a pas de c), mais la conclusion « a $\iff$ b $\iff$ c » ci-dessous désigne visiblement b$_i$).}
+
+a $\Rightarrow$ b trivial
+
+b $\Rightarrow$ a car b) implique $u_\alpha^n s_i = s_i$ $\forall\, i$, \add{(en multipliant par $u_\alpha^i$)} en particulier si $i = \pm 1$ on trouve
+\[
+  \left\{
+  \begin{aligned}
+    u_\alpha^n(s_{-1}) &= s_{-1}\\
+    u_\alpha^n(s_1) &= s_1
+  \end{aligned}
+  \right.
+\]
+d'où $u_\alpha^n = \mathrm{id}$
+
+b) $\Rightarrow$ b$_i$) en multipliant par $u_\alpha^i$
+
+b$_i$) $\Rightarrow$ b) \uncertain{idem, par} $u_\alpha^{-i}$
+
+donc a $\iff$ b $\iff$ c
+
+Comme $s_n = (F_n(\alpha) F_{n+1}(\alpha),\ F_{n-1}(\alpha) F_n(\alpha))$, on voit que d) $\Rightarrow$ b) i.e.\ $F_n(\alpha) = 0 \Rightarrow s_n = s_0$ $(= (0,0))$. Inversement, si $F_n(\alpha) F_{n+1}(\alpha) = 0$, $F_n(\alpha) F_{n-1}(\alpha) = 0$, il s'ensuit $F_n(\alpha)(a F_{n-1}(\alpha) + b F_{n+1}(\alpha)) = 0$ $\forall\, a, b \in k$. Or $\exists\, A_n(U), B_n(U) \in \mathbb{Z}[U]$ tels que
+\[
+  A_n(U) F_{n-1}(U) + B_n(U) F_{n+1}(U) = 1,
+\]
+d'où, faisant $a = A_n(\alpha)$, $b = B_n(\alpha)$, la relation $F_n(\alpha) = 1$, cqfd…
+\note{lire sans doute « $F_n(\alpha) = 0$ » : c'est ce que donne le calcul et ce qu'il faut pour d). Le premier coefficient de Bézout est écrit $A(U)$, avec un indice $n$ ajouté ensuite.}
+
+\page{113}
+\emph{NB} On peut prendre
+\[
+  \left\{
+  \begin{aligned}
+    B_n(U) &= F_n(U),\\
+    A_n(U) &= F_{n-2}(U) - U F_{n-1}(U)
+  \end{aligned}
+  \right.
+\]
+\note{les lettres $B$ et $A$ sont écrites en surcharge (sur $A$ et $B$ respectivement, semble-t-il) ; l'indice du premier $F$ de la seconde ligne est peu net. Le reste de la page est blanc.}
+
+\page{114}
+\struck{$T^n - 1$}
+\[
+  \Phi_n(T) = \prod_{\substack{\xi \text{ d'ordre } n\\ \text{dans } \overline{\mathbb{Q}}}} (T - \xi)
+\]
+polynôme \add{$\in \mathbb{Z}[T]$} unitaire de degré $\varphi(n) = \operatorname{card}(\mathbb{Z}/n\mathbb{Z})^*$
+\[
+  \varphi(\underbrace{p_1^{\alpha_1} \cdots p_r^{\alpha_r}}_{n}) = \prod_i \varphi(p_i^{\alpha_i}) = \prod_i \bigl(p_i^{\alpha_i} - p_i^{\alpha_i - 1}\bigr) = n \prod_i \Bigl(1 - \frac{1}{p_i}\Bigr)
+\]
+\[
+  T^n - 1 = \prod_{\substack{d \in \mathbb{N}^*\\ d \mid n}} \Phi_d
+\]
+donc
+\[
+  \Phi_n = (T^n - 1) \Big/ \prod_{\substack{d \in \mathbb{N}^*\\ d \mid n,\ d \neq n}} \Phi_d
+\]
+
+Si $k$ est un corps de car.\ $p \nmid n$ (donc les racines de $T^n - 1 = 0$ y sont distinctes…) alors les racines de $\Phi_n(T) = 0$ dans $k$ sont les racines \emph{primitives} $n$-ièmes de 1 dans $k$.
+
+Ainsi si \struck{\ill{}} \add{\uncertain{on a}} une réalisation géom.\ \add{rég.} de $\underline{\Pi}_\infty$ sur $k$ donnée par $\alpha$ tel que $\alpha = \xi + \xi^{-1}$, pour qu'elle se factorise en une réalisation géom.\ \emph{fidèle} de $\underline{\Pi}_n$, sur $k$, \add{lorsque $n \geq 3$,} il faut et il suffit qu'on ait $\Phi_n(\xi) = 0$ i.e.\ $\Psi_n(\alpha) = 0$, où $\Psi_n \in \mathbb{Z}(U)$ est défini par
+\[
+  \Psi_n(T + T^{-1}) = T^{-\varphi'(n)}\, \Phi_n(T) \qquad \varphi'(n) = \tfrac{1}{2}\varphi(n) \ \text{si } n \geq 3
+\]
+
+Donc si $n$ \add{$\geq 3$} n'est ni premier, ni double d'un \struck{\ill{}} \uncertain{nb} premier (donc $n = 8, 9, 12, 15, 16, \ldots$) alors l'anneau modulaire pour les réalisations géom.\ \emph{fidèles}
+\note{la phrase est interrompue ; sous elle, isolé, « $\frac{\varphi(n)}{2}$ ». La moitié inférieure de la feuille porte, tête-bêche et barré, un début de lettre sans rapport avec les mathématiques, qu'on ne transcrit pas.}
+
+\page{115}
+de $\underline{\Pi}_n$ (pol.\ comb.\ à $n$ côtés), est
+\[
+  k'_n = \mathbb{Z}[\tfrac{1}{n}][U] / \Psi_n(U)
+\]
+$\alpha'_n \in k'_n$ étant l'image canonique de $U$.
+
+Si $n = p$ ($p$ premier \add{impair} \struck{\ill{}}), \struck{et $k$ corps de car.\ $\neq p$, \uncertain{des} \ill{} du polygone régulier à $p$ côtés dont \ill{} est $\neq 2$, le polygone cyclotomique}
+\struck{$\Phi_{2p}(T) = \Phi_p(-T) = \ldots T^{p-1} - T^{p-2} \ldots + 1$}
+\struck{En car.\ $p$, ses \uncertain{solutions} sont \ill{} confondues, et égales à $1$ (celles de $\Phi_p$ étant égales à $1$) donc les \uncertain{solutions} de $\Psi_p$ \ill{} égales à $1$ ; les racines de $\Phi_p(T) = T^{p-1} + \cdots + 1$ \ill{} \ill{} égales à $1$ donc les racines de $\Psi_p(T)$ sont \ill{} égales à $2$. Donc si $\alpha =$ \ill{}, la \uncertain{représentation} de $\Psi_p(U)$ ($= F_p(U)$ ici !) égale à $2$.}
+\note{tout ce passage est encadré, rayé de longues obliques et d'une ligne en zigzag ; la lecture en est très incertaine. Au-dessus de la troisième ligne, également biffé : « D'ailleurs \ill{} impair ».}
+\add{dont celle de} toute réalisation géom.\ régulière de $\underline{\Pi}_p$ sur un corps est fidèle — d'\struck{\uncertain{ailleurs}} ailleurs on trouve
+\[
+  \Phi_p(T) = \frac{T^p - 1}{T - 1} = T^{p-1} + \cdots + 1
+\]
+\[
+  \Psi_p(U) = F_p(U)
+\]
+et on trouve l'anneau modulaire
+\[
+  k'_p = \mathbb{Z}[U] / \Psi_p(U) = \mathbb{Z}[U] / F_p(U)
+\]
+
+Supposons enfin que $n = 2p$ ($p$ premier). Si $p$ impair, \struck{\uncertain{on a} \ill{} les $\xi \in \overline{\mathbb{Q}}$ à la fois $\xi^2 \neq 1$, $\xi^p = 1$} \add{\uncertain{donc}} les racines de $\Phi_{2p}(T) = 0$ \struck{\ill{} les $\xi$ tels que $\xi^{2p} = 1$} \uncertain{dans} $\xi \in \overline{\mathbb{Q}}$ tels que
+\[
+  \xi^2 \neq 1,\ \xi^p \neq 1 \quad \text{sont \uncertain{aussi}} \quad (\xi^2)^p = 1,\ \xi^2 \neq 1
+\]
+\note{le bas de la page est rayé de grandes boucles et surchargé : on y lit encore, biffés, « $(T^{2p} - 1)$ », « $(T - 1)(T^{p} - 1)$ », « $\xi^{2p} = 1$ », « $\xi^p \neq 1$ », « $\xi^p$, $\xi^{p} = 1$ ». La suite manque.}
+
+\page{116}
+on trouve
+\[
+  \Phi_{2p}(T) = \Phi_p(-T) = T^{p-1} - T^{p-2} + \cdots + 1
+\]
+\[
+  \text{\struck{\ill{}}}\quad \Psi_{2p}(U) = \Psi_p(-U)\,(-1)^{\frac{p-1}{2}}
+\]
+en car.\ $p$, les \struck{solutions} \add{racines de} \struck{\ill{}} $\Phi_{2p}(T)$ sont égales à $-1$, donc celles de $\Psi_{2p}$ sont égales à $-2$, qui est bien l'invariant du pol.\ régulier à $2$ côtés. Donc en \emph{toute car.} $\neq 2$, la condition nécessaire et suffisante pour que \struck{\ill{}} l'inv.\ $\alpha$ définisse un pol.\ régulier à $2p$ côtés est $\Psi_{2p}(\alpha) = 0$. L'anneau modulaire est donc
+\[
+  k'_{2p} = \mathbb{Z}[\tfrac{1}{2}][U] / \Psi_{2p}(U).
+\]
+\note{« \uncertain{nécessaire et suffisante} » : le mot est abrégé (« n. et s. »), lecture douteuse.}
+
+Reste enfin le cas $n = 4$ ($= 2.p$ avec $p$ pair). Ici $\Phi_4(T) = T^2 + 1$, $\Psi_4(U) = U$ \add{$= F_4(U)$}, \uncertain{en} car.\ 2, les \add{seuls} zéros de $\Psi_4$ est $0 = -2$, \uncertain{donc} qui définit bien le carré en car.\ 2. Donc ici
+\[
+  k'_4 = \mathbb{Z}[U] / U \simeq \mathbb{Z}
+\]
+i.e.\ il existe (à un isom.\ unique près) une réalisation géom.\ régulière de $\underline{\Pi}_4$ et une seule sur un anneau \uncertain{\ill{}} donné, et celle-ci est \struck{\ill{}} fidèle quand l'anneau est un corps…
+
+\page{117}
+\emph{Proposition.} Soient $p$ nb premier, $r \geq 0$ un entier, $n' \geq 1$ avec $(p, n') = 1$, $n = p^r n'$. Alors \ill{}
+\[
+  \Phi_n(T) \equiv \Phi_{n'}(T)^{\varphi(p^r)} \mod p
+\]
+
+Récurrence sur $r + n' \geq 1$. Si $r + n' = 1$ i.e.\ $r = 0$, $n' = 1$, c'est trivial (NB $\varphi(1) = 1$). Si $r + n' \geq 2$, on aura pour tout diviseur $\delta \geq 1$ de $n = p^r n'$, donc $\delta = p^s d$ ($0 \leq s \leq r$, $1 \leq d \mid n'$) si $\delta \neq n$ i.e.\ $(s, d) \neq (r, n')$ i.e.\ $s + d < r + n'$, par hyp.\ de récurrence
+\[
+  (1) \qquad \Phi_\delta(T) = \Phi_{p^s d}(T) \equiv \Phi_d(T)^{\varphi(p^s)}
+\]
+tandis que pour $\delta = n$ on \struck{\uncertain{écrira}}
+\[
+  (2) \qquad \text{\struck{$\Phi_{n'}(T)^{\varphi(p^r)}$}}\ \Phi_n(T) = \Phi_{p^r n'}(T) \equiv \text{\struck{$\Phi_{n'}(T)^{\varphi(p^r)}\, \lambda(T)$}}\ \text{\add{$[\Phi_n(T)]$}}
+\]
+\note{la formule (2) a été corrigée en place : la partie de droite d'abord écrite est entourée et barrée, « $[\Phi_n(T)]$ » est écrit au-dessus ; le facteur de gauche est encadré et barré. Telle qu'elle reste, (2) se réduit à $\Phi_n(T) \equiv \Phi_n(T)$.}
+\[
+  \text{\struck{où $\lambda(T) = \dfrac{\Phi_n(T)}{\Phi_{n'}(T)^{\varphi(p^r)}}$}}
+\]
+
+Multipliant les relations (1) entre elles et avec (2), on trouve
+\[
+  \Phi_{n'}(T)^{\varphi(p^r)} \underbrace{\prod_{\delta \mid n} \Phi_\delta(T)}_{(T^n - 1)}
+  \equiv
+  \underbrace{\Bigl(\prod_{\substack{0 \leq s \leq r\\ 1 \leq d \mid n'}} \Phi_d(T)^{\varphi(p^s)}\Bigr)}_{\prod_{0 \leq s \leq r} \bigl(\prod_{1 \leq d \mid n'} \Phi_d(T)\bigr)^{\varphi(p^s)}} \Phi_n(T)
+\]
+\[
+  \Bigl(\prod_{1 \leq d \mid n'} \Phi_d(T)\Bigr)^{\varphi(p^s)} = (T^{n'} - 1)^{\varphi(p^s)}
+\]
+\note{il souligne le $s$ des bornes « $0 \leq s \leq r$ » ; la dernière égalité est écrite comme accolade sous le produit intérieur.}
+
+\page{118}
+d'où
+\[
+  \Phi_{n'}(T)^{\varphi(p^r)} (T^n - 1) \equiv \text{\struck{\ill{}}}\ (T^{n'} - 1)^{\sum_{s=0}^{r} \varphi(p^s)}\, \Phi_n(T)
+\]
+et comme
+\[
+  \sum_{s=0}^{r} \varphi(p^s) = 1 + (p - 1) + (p^2 - p) + \cdots + (p^r - p^{r-1}) = p^r,
+\]
+on trouve
+\[
+  \Phi_{n'}(T)^{\varphi(p^r)} (T^n - 1) \equiv (T^{n'} - 1)^{p^r}\, \Phi_n(T)
+\]
+Or
+\[
+  T^n - 1 = (T^{n'})^{p^r} - (1)^{p^r} \equiv (T^{n'} - 1)^{p^r}
+\]
+\struck{\ill{}} Donc divisant par $(T^{n'} - 1)^{p^r}$, on trouve
+\[
+  \Phi_{n'}(T)^{\varphi(p^r)} = \Phi_n(T)
+\]
+cqfd.
+\note{les deux $\Phi$ de la dernière formule portent des indices mal formés ; on lit $\Phi_{n'}$ à gauche, $\Phi_n$ à droite, comme l'exige l'énoncé de la p.~117.}
+
+\emph{Corollaire.} Soient $k$ un corps de car.\ $p > 0$, $n$ un entier \struck{$\geq 3$}, $\geq 1$, $\alpha \in k$ une racine du polynôme semi-cyclotomique $\Psi_n$, i.e.
+\[
+  \Psi_n(\alpha) = 0
+\]
+Soit \add{$p^r$ ($r \geq 0$)} \struck{$r \geq 0$ tel que} \uncertain{la} plus grande puissance de $p$ qui divise $n$, donc
+\[
+  n = p^r n', \qquad (p, n') = 1.
+\]
+Alors le polygone régulier d'invariant $\alpha$ est d'ordre égal à $n'$ si $n' \geq 3$, i.e.
+
+\page{119}
+$n' \neq 1, 2$, d'ordre $2p$ si $n' = 2$ (donc $p \neq 2$ !), d'ordre $p$ si $n' = 1$.
+
+\emph{Dém.} Posons en effet $\alpha = \xi + \xi^{-1}$, où $\xi$ appartient à un surcorps de $k$. La relation $\Psi_n(\alpha) = 0$ signifie $\Phi_n(\xi) = 0$, et équivaut aussi, grâce à la proposition, à $\Phi_{n'}(\xi) = 0$, \struck{si i.e.\ $n' \geq 3$,} i.e.\ \add{$\xi$ est} une racine de 1 d'ordre $n'$. Si \struck{cela signifie que $\Psi_{n'}(\alpha) = 0$ donc que} $n' \geq 3$, cela signifie que l'ordre du polygone géométrique régulier d'invariant $\alpha$ est égal à $n'$ ; si $n' = 2$, que son ordre est $2p$, si $n' = 1$ que son ordre est $p$, cqfd.
+
+\note{le reste de la page est blanc.}
+
+\page{120}
+\struck{$\varphi$} Si $n = \prod p_i^{r_i}$, $\varphi(n) = \prod (p_i^{r_i} - p_i^{r_i - 1})$
+
+$\varphi(p^r) \geq 6$ sauf si
+\[
+  \begin{array}{r|c|c|c||c||c}
+    p^r = & 2 & 4 & 8 & 3 & 5\\ \hline
+    \varphi(p^r) = & 1 & 2 & 4 & 2 & 4
+  \end{array}
+\]
+
+\[
+  \left.
+  \begin{array}{ll}
+    \text{Cas } \varphi(n) = 1 & n = 1, 2\\
+    \bigl[\text{si } n \geq 3,\ \varphi(n) \text{ est \textit{pair}}\bigr] & \\
+    \text{Cas } \varphi(n) = 2 & n = 4, 3, 6
+  \end{array}
+  \right\} \ \text{Cas } \alpha \text{ entier}
+\]
+\[
+  \left.
+  \text{Cas } \varphi(n) = 4 \quad
+  \left\{
+  \begin{array}{ll}
+    n = p^r & n = 8,\ n = 5\\
+    n = p^r q^s & 2.5 = 10 \qquad 4.3 = 12
+  \end{array}
+  \right.
+  \right\} \ \text{Cas } \alpha \text{ quadratiques}
+\]
+\[
+  \begin{array}{c|c|c|c||c|c||}
+    n & 1 & 2 & 4 & 3 & 6\\ \hline
+    \alpha & 2 & -2 & 0 & -1 & +1
+  \end{array}
+\]
+\[
+  \begin{array}{c|c||c||c|c||}
+    n & 8 & 12 & 5 & 10\\ \hline
+    \alpha & \pm\sqrt{2} & \pm\sqrt{3} & \dfrac{-1 \pm \sqrt{5}}{2} & \dfrac{1 \pm \sqrt{5}}{2}\\
+    & \alpha^2 - 2 = 0 & \alpha^2 - 3 = 0 & \alpha^2 + \alpha - 1 = 0 & \alpha^2 - \alpha - 1 = 0
+  \end{array}
+\]
+
+Cas $\alpha$ \uncertain{cubiques} \quad $\varphi(n) = 6$
+\[
+  \begin{aligned}
+    n &= p^r & \varphi(n) &= p^r - p^{r-1} = 6\\
+    n &= p^r q^s & &\{p^r = 2,\ q^s = 9, 7\}
+  \end{aligned}
+\]
+\marginal{On doit avoir $p \neq 2$ (car $2^r - 2^{r-1} = 2^{r-1}$) ; \struck{\ill{}} si $r = 1 \Rightarrow p = 7$ ; si $r \geq 2$, $p \mid 6$ donc $p = 3$, on trouve $r = 2$.}
+\[
+  \begin{array}{c|c|c|}
+    n & 9 & 7\\ \hline
+    \alpha & \alpha^3 - 3\alpha + 1 = 0 & \alpha^3 + \alpha^2 - 2\alpha - 1 = 0
+  \end{array}
+\]
+\note{dans la case de $7$ il écrit d'abord « $\alpha^3 - 2\alpha \ldots - 1 = 0$ », puis insère « $+ \alpha^2$ », qu'une boucle remonte après $\alpha^3$.}
+(exemples d'équations \uncertain{du} \ill{} \uncertain{par} \uncertain{radicaux} \uncertain{connus})… \uncertain{3e degré non résolubles}
+\note{une flèche, au crayon, mène de ce tableau au suivant, ajouté au crayon en bas à droite.}
+\[
+  \begin{array}{c|c|c|}
+    n & 18 & 14\\ \hline
+    \alpha & \alpha^3 - 3\alpha - 1 = 0 & \alpha^3 - \alpha^2 - 2\alpha + 1 = 0
+  \end{array}
+\]
+\note{au bas de la page, un signe isolé suivi d'une flèche, \ill{} ; l'argument se poursuit peut-être au-delà du lot.}
+
+\end{document}
