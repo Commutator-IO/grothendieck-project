@@ -406,6 +406,7 @@ const CITATIONS = [
   { id: 'colmez2001', forms: ['Colmez and Serre 2001'] },
   { id: 'crosilla2025', forms: ['Crosilla, Klic and Colavizza (2025)'] },
   { id: 'cummings2013', forms: ['Cummings and Willcox (2013)'] },
+  { id: 'gille2008', forms: ['Gille and Polo 2008–2011'] },
   { id: 'grothendieck1995', forms: ['Grothendieck 1995'] },
   { id: 'grothendieck1997', forms: ['Grothendieck 1997'] },
   { id: 'ega', forms: ['Grothendieck and Dieudonné 1960–1967'] },
