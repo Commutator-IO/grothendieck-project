@@ -13,7 +13,7 @@ type FolderState = 'here' | 'community' | 'untouched';
  * state: a pass in flight shows as untouched until its batch lands.
  */
 const folderState = (transcribedHere: boolean, hasEdition: boolean): FolderState =>
-  transcribedHere ? 'here' : hasEdition ? 'community' : 'untouched';
+  hasEdition ? 'community' : transcribedHere ? 'here' : 'untouched';
 
 /**
  * The fonds by area, as a wall of blocks.
@@ -40,6 +40,13 @@ interface Cell {
   state: FolderState;
   /** A modernised reading exists: drawn as hatching over the folder's blue. */
   modern: boolean;
+  /**
+   * An edited folder of which some leaves are transcribed here all the same —
+   * the letters of 134-2 that the edition does not print (#44): the
+   * community's green stays dominant, and a hatching of our blue covers the
+   * share of the folder's batches transcribed here, from the left.
+   */
+  partial: number;
   batches: number;
   x: number;
   y: number;
@@ -89,6 +96,9 @@ const INK: Record<FolderState, string> = {
  * already edited.
  */
 const HATCH = 'repeating-linear-gradient(135deg, var(--color-relu-500) 0 1.6px, transparent 1.6px 5px)';
+
+/** Thin stripes of our blue over the community's green: partly transcribed here. */
+const PARTIAL = 'repeating-linear-gradient(135deg, var(--color-brand-500) 0 1.4px, transparent 1.4px 6px)';
 
 const LABEL: Record<FolderState, string> = {
   here: 'transcribed here',
@@ -169,11 +179,14 @@ export function FondsMosaic({
   transcribedHere,
   hasEdition,
   modernised,
+  share = () => 0,
   onOpen,
 }: {
   transcribedHere: (id: string) => boolean;
   hasEdition: (id: string) => boolean;
   modernised: (id: string) => boolean;
+  /** Share of the folder's batches transcribed here, 0 to 1. */
+  share?: (id: string) => number;
   onOpen: (id: string) => void;
 }) {
   const [hover, setHover] = useState<Cell | null>(null);
@@ -229,7 +242,8 @@ export function FondsMosaic({
         return {
           cote: c,
           state: folderState(transcribedHere(c.id), hasEdition(c.id)),
-          modern: transcribedHere(c.id) && modernised(c.id),
+          modern: transcribedHere(c.id) && !hasEdition(c.id) && modernised(c.id),
+          partial: transcribedHere(c.id) && hasEdition(c.id) ? Math.min(1, Math.max(0.04, share(c.id))) : 0,
           batches: batchCount(c.pages),
           x: inner.x + boxes[k].x,
           y: inner.y + boxes[k].y,
@@ -239,7 +253,7 @@ export function FondsMosaic({
       });
       return { ...x, box, strip, cells };
     });
-  }, [transcribedHere, hasEdition, modernised]);
+  }, [transcribedHere, hasEdition, modernised, share]);
 
   const cells = groups.flatMap((g) => g.cells);
   const allPages = COTES.reduce((s, c) => s + c.pages, 0);
@@ -277,6 +291,16 @@ export function FondsMosaic({
               style={{ background: `${HATCH}, ${FILL.here}` }}
             />
             modernised as well
+          </li>
+        )}
+        {cells.some((c) => c.partial) && (
+          <li className="flex items-center gap-1.5">
+            <span
+              aria-hidden="true"
+              className="inline-block h-3.5 w-6 border border-ink-900"
+              style={{ background: `linear-gradient(to right, transparent 40%, ${FILL.community} 40%), ${PARTIAL}, ${FILL.community}` }}
+            />
+            edited, partly transcribed here (hatched share)
           </li>
         )}
         <li className="flex items-center gap-1.5">
@@ -355,7 +379,13 @@ export function FondsMosaic({
             >
               <span
                 className="relative block h-full w-full"
-                style={{ background: c.modern ? `${HATCH}, ${FILL[c.state]}` : FILL[c.state] }}
+                style={{
+                  background: c.partial
+                    ? `linear-gradient(to right, transparent ${c.partial * 100}%, ${FILL.community} ${c.partial * 100}%), ${PARTIAL}, ${FILL.community}`
+                    : c.modern
+                      ? `${HATCH}, ${FILL[c.state]}`
+                      : FILL[c.state],
+                }}
               >
                 {(THEOREM_LINKS[c.cote.id] || OPEN.has(c.cote.id)) && (
                   <span className="absolute right-[3px] top-[3px] flex gap-[2px]">
@@ -389,6 +419,7 @@ export function FondsMosaic({
             <span className="tabular">
               {hover.cote.pages} pages · {hover.batches} {hover.batches === 1 ? 'batch' : 'batches'}
               {hover.modern && ' · modernised'}
+              {hover.partial > 0 && ` · edited elsewhere, ${Math.round(hover.partial * 100)}% of its batches transcribed here`}
               {THEOREM_LINKS[hover.cote.id] &&
                 ` · bears on theorem ${THEOREM_LINKS[hover.cote.id].map((n) => CIRCLED[n]).join(' ')} of the Timeline`}
               {OPEN.has(hover.cote.id) &&

@@ -197,6 +197,7 @@ export function ArchivePage() {
                   transcribedHere={(id) => (workOn.get(id)?.transcribed ?? 0) > 0}
                   hasEdition={(id) => EDITION_BY_COTE.has(id)}
                   modernised={(id) => (workOn.get(id)?.modernised ?? 0) > 0}
+                  share={(id) => { const w = workOn.get(id); return w && w.batches ? w.transcribed / w.batches : 0; }}
                   onOpen={(id) => goTo(id, 1)}
                 />
               )}
