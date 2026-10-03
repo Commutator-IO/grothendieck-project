@@ -1,0 +1,1218 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 118, pages 1-40
+% (the whole folder).
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried moves into
+% a footnote. It is held to being mathematically correct as it stands; where
+% the manuscript is loose or mistaken, the true statement is what appears here
+% and the footnote says what the page has. In any dispute of substance the
+% transcription governs: whoever cites Grothendieck must cite
+% batch-01.fr.tex and batch-02.fr.tex.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-03 — first pass, unchecked against the pages by a human.
+%
+% Scope: the folder was read whole — two batches, pages 1-40 — before any of
+% this was written, and it is ONE file for the shelfmark. Pages 3, 5, 6, 9,
+% 12 and 17 carry nothing of his mathematics (accounts, administrative
+% tables, an envelope, a sheet marked « Poèmes », a typed notice dated
+% 29 April 1985) and page 37 is blank; they are not transcribed and are
+% mentioned only in the spine section.
+%
+% Notation fixed for the whole document.
+%  - \mathcal W is the localisateur fondamental of (Cat) — his underlined W
+%    on pp. 14-40, his plain W on pp. 2-8 and in places after; read as one
+%    class throughout. \mathcal W_A its trace on the presheaves \widehat A,
+%    \mathcal W_0 the usual weak equivalences (p. 35).
+%  - Class letters kept as his, in roman: F, C (Grothendieck fibrations and
+%    cofibrations = opfibrations, NOT model-category ones), Sm, Pr, S, B, T,
+%    WSF, WSC, WSB, As, As°, Tot As.
+%  - X_{/b} and {}_{b\backslash}X the comma categories of f over and under b,
+%    X_b the fibre; « ouvert » = crible (sieve), « fermé » = cocrible.
+%  - \int(f_0, f_1) the Grothendieck construction of a span (his ∫ of a
+%    matrix); C(f) the cylinder of p. 10, C(Y) the cone with final vertex,
+%    C'(Y) with initial vertex.
+%  - Hot = Hot(\mathcal W) = \mathcal W^{-1}(Cat), Hot_A, \gamma the
+%    localisation functor; \overline{Cat}, \overline{\widehat A} the
+%    categories of homotopy classes (his barred objects).
+%
+% Substantive departures from the pages (footnoted where they occur):
+%  p. 2/4 As = W ∩ WSC and S ∩ W = S ∩ T kept as containments where only the
+%  containment is evident (the converse is a Theorem-B statement); p. 8 the
+%  box « WSC ∩ Pr = S » read ⊂ S; p. 8 class letter read C, not E; p. 13
+%  f^♯ identified with the open immersion f^♮; p. 14 the « cart » square of
+%  (4) read as cocartesian; p. 14 the first Y' of « 4 Thm » read Y; p. 16
+%  h^{-1}(Y') read h^{-1}(Y); p. 20 the square supposed cartesian (the
+%  fibre formula Y_{x'} = Y'_{x'} × X_{x'} needs it), and the Corollary's
+%  derivation supplied; p. 22 « π_1 ≠ 1 » is not enough for the example —
+%  take a group with non-zero abelianisation (an acyclic group gives a
+%  contractible suspension), and the example disproves only g ∈ W ⇒ f ∈ W;
+%  p. 22 the two cones read with initial vertex; p. 26 « fractions à
+%  droite » (against p. 23's « à gauche ») and « lim finies » read as the
+%  cospan calculus and finite colimits; p. 28 « copies de X_n » read as
+%  copies of the elementary interval; p. 30 the relation s_j i_j = id
+%  footnoted; pp. 32-34 the Lemma's « conditions équivalentes » is false as
+%  stated and is restated as what pp. 33-35 prove; p. 38 L 3 needed in a
+%  form with a natural transformation (f(X_i) ⊂ Y_i gives only ψf ≤ φ), and
+%  the reduction by duality needs W = W°.
+%
+% Announced and not established: duality W = W° (p. 14, item 1); the
+% questions of p. 4 (*) and p. 8 (« ⟸ ? »); whether the base-change square
+% of p. 19 is cartesian (« À vérifier ! »); the unfinished Lemme of p. 20;
+% the 1-equivalence surmise of p. 22; the class 𝔐 and the calculus of
+% fractions in (Cat) (p. 23, « itou dans Cat »), which the proof of p. 40
+% uses; Corollary 1 for infinite sums (p. 26) — surjectivity argued on
+% pp. 29-30, injectivity reduced to a Kan-type condition and left open; the
+% Lemma of p. 30, sketched only; infinite products (pp. 33, 35-36); the
+% correspondence functors X → I / filtrations (« Il faudra expliciter »,
+% p. 39); the « Cor ? » of p. 39; the Cor « W_A est saturé » (p. 39),
+% stated without proof (one line, supplied here).
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{118}
+\pages{1}{40}
+\dating{[à partir de 1983]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Cohomology properties of maps in (Cat) : notes manuscrites (s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Une petite catégorie peut se regarder comme un espace : on la remplace par son
+nerf, un objet combinatoire qui se réalise en espace topologique, et deux
+catégories sont « faiblement équivalentes » quand ces espaces ont le même type
+d'homotopie. Ces quarante pages, en anglais puis en français, prennent ce point
+de vue au sérieux et cherchent, parmi les foncteurs entre petites catégories,
+les analogues des applications qu'un topologue sait manier : fibrations,
+applications propres et lisses, revêtements, immersions ouvertes et fermées,
+cylindres et cônes.
+
+Le problème vient de ce que les opérations naturelles sur les catégories
+respectent mal l'homotopie. Recoller deux catégories le long d'une troisième
+--- une somme amalgamée --- ne donne pas en général la catégorie dont le nerf
+serait le recollement des nerfs ; inverser les équivalences faibles produit une
+catégorie « des types d'homotopie » dont on ne sait pas d'emblée si elle a des
+sommes ou des produits, ni si une flèche qui y devient inversible était déjà
+une équivalence faible. Le dossier s'attaque à ces trois questions, et il le
+fait pour une notion d'équivalence faible donnée par axiomes, ce que
+Grothendieck nomme un localisateur fondamental : une classe $\mathcal{W}$ de
+foncteurs stable par composition, contenant les catégories à objet final
+parmi les « asphériques », et qui se teste fibre à fibre.
+
+L'idée directrice est empruntée à la géométrie algébrique. Là, un morphisme
+propre ou lisse est celui pour lequel la cohomologie se comporte bien par
+changement de base, et une fibration de Serre est celle dont les fibres
+déterminent la topologie. Ici, une catégorie au-dessus d'une autre se lit par
+ses catégories « au-dessus » et « au-dessous » de chaque objet de la base ; on
+classe les foncteurs selon la façon dont ces catégories varient, et le
+classement se dispose en treillis, que les premières pages dessinent. Puis
+vient l'outil qui rend les recollements maniables : une immersion ouverte ou
+fermée, c'est-à-dire l'inclusion d'un morceau qu'aucune flèche ne quitte, ou
+dans lequel aucune n'entre, permet de décrire une catégorie par ses deux
+morceaux et la manière dont les flèches vont de l'un à l'autre. Avec lui, une
+somme amalgamée le long d'une immersion transporte les équivalences faibles,
+sous des hypothèses de fibration --- et le dossier montre par un exemple qu'on
+ne peut pas les lever.
+
+Le reste en tire les conséquences. Dans une catégorie de préfaisceaux, toute
+inclusion se prête au recollement, et cela donne un calcul de fractions : toute
+flèche de la catégorie homotopique s'écrit comme une flèche suivie de
+l'inverse d'une équivalence faible. On en déduit les sommes finies, puis les
+produits finis sous une hypothèse sur la catégorie de base que le dossier
+dégage et analyse, une stabilité par réunions filtrées, et enfin que
+$\mathcal{W}$ est saturé : une flèche est une équivalence faible dès qu'elle
+devient inversible. Plusieurs questions restent ouvertes, que les feuillets
+posent avec franchise : les sommes infinies (« C'est gênant = bien
+gênant ! »), les produits infinis, l'invariance de $\mathcal{W}$ par passage
+à la catégorie opposée.
+
+Les noms modernes à chercher sont ceux de la théorie des localisateurs
+fondamentaux, développée ensuite par Cisinski et Maltsiniotis, de la structure
+de modèles de Thomason sur les petites catégories, des théorèmes A et B de
+Quillen, et des catégories test de \emph{Pursuing Stacks}, qu'il écrit à la
+même époque.
+
+\keywords{basic localizer, Grothendieck fibration, opfibration, smooth functor, proper functor, Quillen's Theorem A, Quillen's Theorem B, sharp map, comma category, mapping cylinder, sieve, cosieve, collage of a profunctor, Grothendieck construction, homotopy pushout, Thomason model structure, Dwyer map, local test category, totally aspherical category, calculus of fractions, category of cofibrant objects, strong saturation}
+\end{resume}
+
+\section*{Le fil du dossier, et les conventions}
+
+Montpellier date le dossier « à partir de 1983 » et le range parmi les papiers
+qui entourent \emph{Pursuing Stacks}. Seul un feuillet est daté, la page 17,
+un avis de soutenance de thèse du 29 avril 1985 sans rapport avec les notes ;
+les autres feuillets sans mathématiques (pages 3, 5, 6, 9 et 12 : des comptes,
+des tableaux administratifs, une enveloppe, une feuille portant « 1976 » et
+« Poèmes ») et la page blanche 37 sont laissés de côté. Une chemise rose
+(page 1) porte le titre, « Cohomology properties of maps in (Cat) », et la
+première rubrique, « 1) Fibration-like properties »\footnote{« like » est lu
+sans certitude. La page 10 ouvre une rubrique « 2) », dont le titre, encadré
+et en partie rayé, se lit avec doute « Immersions fermées et ouvertes,
+propriétés cohomologiques ».}. Les pages 18 à 25 forment une suite numérotée
+par lui de 1 à 7 (« 1 », « 2 », « 2 bis », puis 3 à 7) ; au-delà, aucun
+numéro de sa main ne se voit.
+
+\begin{enumerate}
+\item[1.] \emph{Classes de foncteurs} (pages 2 à 8) : treillis de classes ---
+fibrations, cofibrations, lisses, propres, Serre, leurs variantes faibles et
+leurs intersections avec $\mathcal{W}$ --- et leurs caractérisations par les
+catégories comma.
+\item[2.] \emph{Factorisations, immersions, cylindres} (pages 10 à 13).
+\item[3.] \emph{Le programme} (pages 14 et 15), qui annonce les stations
+suivantes, numérotées de (0) à (6).
+\item[4.] \emph{Recollements} (page 16) : une catégorie décrite par un ouvert,
+son fermé complémentaire et un profoncteur.
+\item[5.] \emph{Sommes amalgamées le long d'une immersion} (pages 18 à 22) :
+le théorème dans (Cat), sa version dans les préfaisceaux, et le
+contre-exemple.
+\item[6.] \emph{La catégorie homotopique comme catégorie de fractions} (pages
+23 à 25).
+\item[7.] \emph{Sommes} (pages 26 à 30) et \emph{produits finis} (pages 31 à
+36) dans $\mathrm{Hot}$.
+\item[8.] \emph{Filtrations} (pages 38 et 39) et \emph{saturation} (pages 39
+et 40).
+\end{enumerate}
+
+Le programme de la page 14 est réalisé presque point par point : ses rubriques
+(3) et (4) aux pages 18 à 22, sa rubrique (5) aux pages 23 à 36, sa rubrique
+(6) aux pages 39 et 40. Sa rubrique (1), la dualité, n'est pas traitée, et la
+page 38 s'en sert.
+
+\emph{Conventions.} Pour un foncteur $f : X \to Y$ et un objet $b$ de $Y$, on
+note $X_{b}$ la fibre, $X_{/b}$ la catégorie des couples $(x, f(x) \to b)$ et
+${}_{b\backslash}X$ celle des couples $(x, b \to f(x))$\footnote{Ce sont ses
+graphies, celles de la page 8. Aujourd'hui on écrit souvent $f/b$ et $b\backslash
+f$, ou $f \downarrow b$ et $b \downarrow f$.}. $X^{\circ}$ est la catégorie
+opposée, $e$ la catégorie ponctuelle (il écrit aussi $\Delta_{0}$), $\Delta^{1}$
+la catégorie $\{0 \to 1\}$. Une \emph{fibration} est une catégorie fibrée au
+sens de Grothendieck (relèvements cartésiens), une \emph{cofibration} une
+catégorie cofibrée (relèvements cocartésiens) ; ce ne sont pas les fibrations
+et cofibrations d'une structure de modèles. Une sous-catégorie pleine
+$U \subset X$ est \emph{ouverte} si toute flèche $x \to u$ de but dans $U$ a sa
+source dans $U$ (un crible), \emph{fermée} si toute flèche de source dans $U$ a
+son but dans $U$ (un cocrible) ; le complémentaire d'un ouvert est fermé.
+
+$\mathcal{W}$ désigne la classe des équivalences faibles de (Cat), qu'il
+soumet aux axiomes « Loc »\footnote{Il souligne la lettre $W$ à partir de la
+page 14, et non aux pages 2 à 8 ; on lit partout la même classe. Aux pages 21
+à 40 il omet parfois le soulignement au milieu d'une formule où le contexte
+désigne la même classe.} ; une catégorie $X$ est \emph{asphérique} si
+$X \to e$ est dans $\mathcal{W}$, et un foncteur $f$ est asphérique si toutes
+les $X_{/b}$ le sont. Pour une petite catégorie $A$, $\widehat{A}$ est la
+catégorie des préfaisceaux d'ensembles sur $A$\footnote{Il écrit tantôt
+$A^{\wedge}$, tantôt $\widehat{A}$.}, $i_{A} : \widehat{A} \to (\mathrm{Cat})$
+le foncteur $X \mapsto A_{/X}$, et $\mathcal{W}_{A} = i_{A}^{-1}(\mathcal{W})$.
+On pose $\mathrm{Hot} = \mathrm{Hot}(\mathcal{W}) = \mathcal{W}^{-1}(\mathrm{Cat})$,
+$\mathrm{Hot}_{A} = \mathcal{W}_{A}^{-1}\widehat{A}$, et $\gamma$ désigne le
+foncteur de localisation.
+
+\emph{Deux homonymies à ne pas confondre.} La lettre $\mathrm{C}$ désigne la
+classe des cofibrations, et $C(f)$, $C(Y)$, en italique, le cylindre d'un
+foncteur et le cône d'une catégorie (page 10). La lettre $\mathrm{S}$ désigne
+la classe des foncteurs « de Serre », sans rapport avec un ensemble $S$.
+
+\pagerange{2}{8}
+\section*{Les classes de foncteurs (pages 2 à 8)}
+
+\pagerange{2}{4}
+\subsection*{Les treillis (pages 2 et 4)}
+
+La page 2 dessine sans un mot trois treillis de classes de foncteurs ; la page
+4 en reprend les deux premiers sous leur forme la plus complète, entourés de
+remarques. Les classes de base sont
+$\mathrm{F}$ (fibrations), $\mathrm{C}$ (cofibrations), $\mathrm{Sm}$ (foncteurs
+lisses), $\mathrm{Pr}$ (foncteurs propres), $\mathrm{S}$ (« Serre map, i.e.
+Hot-fibration ») et $\mathrm{B} = \mathrm{F} \cap \mathrm{C}$ (bifibrations) ;
+leurs définitions sont à la page 8, ci-dessous. Viennent ensuite trois classes
+plus faibles, $\mathrm{WSF}$, $\mathrm{WSC}$, $\mathrm{WSB}$, que la page 2
+appelait $\mathrm{Spr}F$, $\mathrm{Spr}C$, $\mathrm{Spr}B$\footnote{Les sigles
+ne sont développés nulle part. La page 4 glose $\mathrm{WSF}$ par « Serre
+\emph{fibrations} » et $\mathrm{WSC}$ par « Serre precofibrations » (lecture
+incertaine), chacun précédé d'un mot biffé ; « weakly Serre » est une
+conjecture de lecture, non un mot de la page.}. Rangées par inclusion, la
+flèche allant de la plus petite à la plus grande :
+
+\begin{tikzcd}[column sep=tiny, row sep=small, nodes={font=\scriptsize}]
+ & & & & \mathrm{B} \arrow[dl] \arrow[dr] & & & & \\
+ & & & \mathrm{F}\cap\mathrm{Pr} \arrow[dl] \arrow[dr] & & \mathrm{Sm}\cap\mathrm{C} \arrow[dl] \arrow[dr] & & & \\
+ & & \mathrm{F}\cap\mathrm{S} \arrow[dl] \arrow[dr] & & \mathrm{Sm}\cap\mathrm{Pr} \arrow[dl] \arrow[dr] & & \mathrm{S}\cap\mathrm{C} \arrow[dl] \arrow[dr] & & \\
+ & \mathrm{F} \arrow[dr] & & \mathrm{Sm}\cap\mathrm{S} \arrow[dl] \arrow[dr] \arrow[dddd, dashed] & & \mathrm{S}\cap\mathrm{Pr} \arrow[dl] \arrow[dr] \arrow[dddd, dashed] & & \mathrm{C} \arrow[dl] & \\
+ & & \mathrm{Sm} & & \mathrm{S} \arrow[d] & & \mathrm{Pr} & & \\
+ & & & & \mathrm{WSB} \arrow[d] & & & & \\
+ & & & & \mathrm{WSF}\cap\mathrm{WSC} \arrow[dl] \arrow[dr] & & & & \\
+ & & & \mathrm{WSF} \arrow[dr] & & \mathrm{WSC} \arrow[dl] & & & \\
+ & & & & \mathrm{Fl}(\mathrm{Cat}) & & & &
+\end{tikzcd}
+
+Les deux longues flèches, de $\mathrm{Sm} \cap \mathrm{S}$ vers $\mathrm{WSF}$
+et de $\mathrm{S} \cap \mathrm{Pr}$ vers $\mathrm{WSC}$, sont hachurées sur la
+page et tracées ici en tirets\footnote{La page porte aussi, au crayon, des
+étiquettes sur quatre flèches : $\mathrm{F} \cap \mathrm{WSC}$,
+$\mathrm{Sm} \cap \mathrm{WSC}$, $\mathrm{WSF} \cap \mathrm{C}$,
+$\mathrm{WSF} \cap \mathrm{Pr}$, et le mot « str » sur
+$\mathrm{F} \cap \mathrm{S} \to \mathrm{F}$. Les cercles dont il entoure
+$\mathrm{F}$, $\mathrm{C}$, $\mathrm{Sm}$, $\mathrm{S}$, $\mathrm{Pr}$ ne
+sont pas reproduits. À la page 2, la version antérieure place, au centre du
+premier losange, un $F' \cap C'$ qui n'étiquette aucune flèche.}. Les
+inclusions qu'il encadre sont
+\[
+\mathrm{F} \subsetneq \mathrm{Sm}, \quad \mathrm{C} \subsetneq \mathrm{Pr},
+\quad \mathrm{Sm} \cap \mathrm{Pr} \subsetneq \mathrm{S}, \quad
+\mathrm{WSC} \cap \mathrm{Pr} \subset \mathrm{S}, \quad
+\mathrm{WSF} \cap \mathrm{Sm} \subset \mathrm{S},
+\]
+d'où $\mathrm{WSC} \cap \mathrm{Pr} = \mathrm{S} \cap \mathrm{Pr}$ et
+$\mathrm{WSF} \cap \mathrm{Sm} = \mathrm{S} \cap \mathrm{Sm}$, puisque
+$\mathrm{S} \subset \mathrm{WSC} \cap \mathrm{WSF}$. L'inclusion
+$\mathrm{Sm} \cap \mathrm{Pr} \subset \mathrm{S}$ est l'analogue du théorème
+d'Ehresmann : un morphisme lisse et propre est localement trivial. Il note
+aussi, avec un point d'exclamation, $\mathrm{WSB} \neq \mathrm{WSF} \cap
+\mathrm{WSC}$, et que $\mathrm{B}$ n'est contenue ni dans $\mathrm{WSF}$ ni
+dans $\mathrm{WSC}$ (ni a fortiori $\mathrm{C}$ dans $\mathrm{WSF}$,
+$\mathrm{F}$ dans $\mathrm{WSC}$).
+
+Pour la stabilité par changement de base, les classes du premier étage
+(jusqu'à $\mathrm{S}$) le sont par changement de base quelconque, les carrés
+du treillis étant cartésiens\footnote{« stable under any base change ; squares
+cartesian », dans une accolade à droite du treillis. Une seconde note marginale,
+« stable by intersection except $WSF\cap C$ and $WSC\cap Pr$, and dually
+$F\cap WSC$, $Sm\cap WSC$ and $WSF\cap WSC$ », dit quels sommets ne sont pas
+l'intersection de leurs deux majorants ; on la rapporte sans la développer.} ;
+$\mathrm{WSF}$ l'est par changement de base propre, $\mathrm{WSC}$ par
+changement de base lisse.
+
+Le second treillis est l'intersection du premier avec $\mathcal{W}$. On y lit
+$\mathcal{W} \cap \mathrm{F} \cap \mathrm{S} = \mathrm{T} \cap \mathrm{F}$,
+$\mathcal{W} \cap \mathrm{S} \cap \mathrm{C} = \mathrm{T} \cap \mathrm{C}$, et
+ainsi de suite, où $\mathrm{T}$ est la classe des foncteurs
+\emph{universellement} dans $\mathcal{W}$ (tout changement de base est dans
+$\mathcal{W}$) ; puis, sous $\mathcal{W} \cap \mathrm{S} = \mathrm{T} \cap
+\mathrm{S}$\footnote{La page prolonge l'égalité par un troisième membre, lu
+avec doute $UW$ ou $\mathcal{U}W$, qui n'est défini nulle part.},
+\[
+\mathrm{Tot\,As} = \mathcal{W} \cap \mathrm{WSB}, \qquad
+\mathrm{As}^{\circ} = \mathcal{W} \cap \mathrm{WSF}, \qquad
+\mathrm{As} = \mathcal{W} \cap \mathrm{WSC},
+\]
+au-dessus de $\mathcal{W}$ lui-même, qui est stable par changement de base le
+long d'un foncteur de Serre --- c'est la définition de $\mathrm{S}$ --- tandis
+que $\mathrm{As}$ l'est par changement de base lisse et $\mathrm{As}^{\circ}$
+par changement de base propre.
+
+Ces égalités sont à lire avec précaution. $\mathrm{As}$ est la classe des
+foncteurs asphériques, ceux dont toutes les $X_{/b}$ sont asphériques, et
+$\mathrm{As}^{\circ}$ celle des foncteurs coasphériques. Un foncteur asphérique
+est dans $\mathcal{W}$ (c'est le théorème A de Quillen, que l'axiome Loc 3
+généralise) et dans $\mathrm{WSC}$, ses $X_{/b}$ étant toutes asphériques ;
+on a donc $\mathrm{As} \subset \mathcal{W} \cap \mathrm{WSC}$. L'inclusion
+inverse dit que les $X_{/b}$ d'un foncteur de $\mathcal{W} \cap \mathrm{WSC}$
+sont asphériques : c'est un énoncé de type théorème B de
+Quillen\footnote{L'égalité est celle de la page. Pour l'équivalence faible
+usuelle elle est vraie : sous l'hypothèse de $\mathrm{WSC}$, le théorème B
+identifie $X_{/b}$ à la fibre homotopique de $f$, contractile si $f$ est une
+équivalence faible. Pour un localisateur fondamental quelconque, le dossier
+n'établit pas de théorème B, et l'on ne retient que l'inclusion.}. De même,
+la page affirme qu'un foncteur de Serre est dans $\mathcal{W}$ si et seulement
+si ses fibres sont asphériques, si et seulement s'il est universellement dans
+$\mathcal{W}$ ; le sens « fibres asphériques $\Rightarrow$ $\mathcal{W}$ » est
+une conséquence du théorème A une fois les $X_{/b}$ comparées aux fibres, le
+sens réciproque est encore du type théorème B.
+
+Restent des questions, qu'il cerne d'un trait : $\mathrm{WSC}$ et
+$\mathrm{WSB}$ sont-elles stables par changement de base le long d'une
+cofibration de Serre, même « triviale » ? Il précise ce qu'il cherche : un
+$f \in \mathcal{W} \cap \mathrm{WSB}$ (« totalement asphérique ») et un
+$g \in \mathrm{T} \cap \mathrm{C}$ (cofibration à fibres triviales) dont le
+changement de base $f'$ ne soit pas dans $\mathrm{WSB}$. Et encore : même à
+fibres asphériques, la condition de Serre ne peut-elle se tester sur les seuls
+changements de base $\Delta_{1} \to X$ ? Aucune n'est tranchée dans le
+dossier.
+
+Le troisième treillis de la page 2, au crayon, est le même que le premier
+intersecté avec une classe $\mathrm{strh}$, que la page 7 glose « strict
+homotopism »\footnote{À la page 7, au milieu d'une page blanche : « $TF$ »
+biffé, une flèche verticale $X \to Y$ et les mots « strict homotopism »
+soulignés d'un trait ondulé. Dans ce troisième treillis, $\mathrm{Sm}$ et
+$\mathrm{Pr}$ deviennent $\mathrm{str}Sm$, $\mathrm{str}Pr$ ; aucune de ces
+variantes strictes n'est définie.}.
+
+\pagerange{7}{8}
+\subsection*{Les caractérisations (page 8)}
+
+Sur une feuille de papier kraft, en français, chaque rubrique met une classe à
+gauche et sa duale à droite. Soit $f : X \to Y$.
+
+\emph{Cofibrations.} Pour une flèche $b \to b'$ de $Y$ et un objet $a$ de la
+fibre $X_{b}$, considérons la catégorie des relèvements de $b \to b'$ de source
+$a$ : ses objets sont les flèches $a \to x$ de $X$ au-dessus de $b \to b'$.
+Elle a un objet initial pour tout $(b \to b', a)$ exactement quand $f$ est
+précofibré --- toute flèche de la base a un relèvement cocartésien de source
+donnée ---, et $f$ est une cofibration si de plus ces relèvements se
+composent\footnote{La page donne trois formes équivalentes : $X_{/b} \to
+X_{/b'}$ « cofinal à gauche », ${}_{b'\backslash}X \to {}_{b\backslash}X$ à
+fibres non vides ayant un objet initial, et l'énoncé sur les relèvements. Ni
+la stabilité des relèvements par composition ni le passage de l'une à l'autre
+ne sont écrits ; on retient la forme sur les relèvements, la plus directe, en
+y ajoutant la condition de composition. La lettre de la rubrique, repassée, se
+lit aussi bien $E$ que $C$ ; on lit $C$ parce que la colonne de droite porte
+$F$.}. Dualement pour les fibrations, la colonne de droite restant vide.
+
+\emph{Foncteurs propres et lisses.} La définition est obtenue en affaiblissant
+« objet initial » en « asphérique » : $f$ est \emph{propre} si, pour toute flèche
+$b \to b'$ de $Y$ et tout $a \in X_{b}$, la catégorie des relèvements de
+$b \to b'$ de source $a$ est asphérique. La page en donne des formes
+équivalentes : le foncteur d'inclusion $X_{b} \to X_{/b}$ est coasphérique
+(dans $\mathrm{As}^{\circ}$) ; les foncteurs ${}_{a\backslash}X \to
+{}_{b\backslash}Y$, pour $b = f(a)$, sont à fibres asphériques, ou sont de
+Serre ; et enfin les images directes supérieures $R^{i}f_{*}$ commutent à tout
+changement de base\footnote{Les abréviations serrées « Rif », « Rig » sont lues
+avec doute $R^{i}f_{*}$, $R^{i}g_{*}$ ; la lettre de la rubrique, surchargée,
+est lue $Pr$ parce que la colonne de droite porte $Sm$, et le mot qui précède
+« coasph. », « strongly », est lui aussi incertain. Une note cernée en marge
+ajoute que ${}_{a\backslash}X \to {}_{b\backslash}Y$ est propre, peut-être « à
+fibres discrètes ».}. L'inclusion $\mathrm{C} \subset \mathrm{Pr}$ se voit
+sur la première forme : pour une cofibration, $X_{b} \to X_{/b}$ a un adjoint à
+gauche, et un adjoint à droite est coasphérique. Dualement, $f$ est
+\emph{lisse} si $f^{\circ}$ est propre, et le changement de base par un
+foncteur lisse commute aux $R^{i}g_{*}$. Les noms viennent de l'analogie avec
+les théorèmes de changement de base propre et lisse en cohomologie
+étale\footnote{En dessous, en anglais : « [$\Longleftarrow$ ? base changes by
+$f$ preserves cocartesian squares] », une implication qu'il se demande et ne
+tranche pas.}.
+
+\emph{Foncteurs de Serre.} $f \in \mathrm{S}$ si, pour tout foncteur
+$g : Y'' \to Y'$ au-dessus de $Y$ qui est dans $\mathcal{W}$, le changement de
+base $g \times_{Y} X : X'' \to X'$ est encore dans $\mathcal{W}$ : changer de
+base le long de $f$ préserve les équivalences faibles au-dessus de
+$Y$\footnote{C'est, presque mot pour mot, la définition que la théorie des
+modèles donne aujourd'hui d'un morphisme « sharp » (Rezk, 1998) ; le nom est
+nôtre et postérieur. Dans une catégorie de modèles propre à droite, les
+fibrations sont sharp, comme ici les fibrations « universellement » bien
+comportées.}. On a $\mathrm{S} = \mathrm{S}^{\circ}$, $\mathrm{C} =
+\mathrm{F}^{\circ}$, $\mathrm{Sm} = \mathrm{Pr}^{\circ}$, et
+$\mathrm{T} \cap \mathrm{Pr} \subset \mathrm{S}$,
+$\mathrm{T} \cap \mathrm{Sm} \subset \mathrm{S}$.
+
+\emph{Les classes faibles.} $f \in \mathrm{WSC}$ si, pour toute flèche
+$b \to b'$ de $Y$, le foncteur $X_{/b} \to X_{/b'}$ est dans
+$\mathcal{W}$ : c'est l'hypothèse du théorème B de Quillen, sous l'une de ses
+deux formes duales. La page en donne deux autres formes : la condition de
+Serre restreinte à une classe de bases $Y'' \to Y'$ qu'elle dit « fibrés »
+au-dessus de $Y$\footnote{« fibrés » est écrit au-dessus d'un mot biffé et lu
+sans certitude.}, et la condition que la cofibration associée
+$\mathrm{Cofib}(X/Y) \to Y$ (page 10) soit de Serre. $\mathrm{WSF}$ est la
+notion duale, avec ${}_{b'\backslash}X \to {}_{b\backslash}X$ et
+$\mathrm{Fib}(X/Y)$. Ces classes sont l'analogue des quasi-fibrations de Dold
+et Thom : un foncteur qui, remplacé par une (co)fibration, devient de
+Serre\footnote{L'analogie est la nôtre. Une note marginale, à hauteur de la
+dernière forme, se lit avec doute « $R^{i}f_{*}$ (c$^{\mathrm{t}}$)
+loc. const. ». La rubrique ajoute que $\mathrm{WSC}$ est stable par changement
+de base « propres lisses » (lecture incertaine, sur « fibrations » biffé),
+« mais non par $g \in S$ ? ». Enfin la page encadre « $WSC \cap Pr = S$ » ; on
+lit l'inclusion $\mathrm{WSC} \cap \mathrm{Pr} \subset \mathrm{S}$, comme à la
+page 4 : l'égalité avec $\mathrm{S}$ tout entière est fausse, $\mathrm{S}$
+n'étant pas contenue dans $\mathrm{Pr}$.}.
+
+$\mathrm{WSB}$ est la variante à deux côtés : pour une flèche $u : b_{0} \to
+b_{1}$ de $Y$, soit $X[u] = {}_{b_{0}\backslash}X_{/b_{1}}$ la catégorie des
+factorisations de $u$ à travers $f$ ; $f \in \mathrm{WSB}$ si, pour tout
+composé $u' : b'_{0} \to b_{0} \xrightarrow{u} b_{1} \to b'_{1}$, le foncteur
+$X[u] \to X[u']$ est dans $\mathcal{W}$ --- en d'autres termes, si les
+équivalences faibles ${}_{b_{0}\backslash}Y_{/b_{1}} \to
+{}_{b'_{0}\backslash}Y_{/b'_{1}}$ le restent après produit fibré avec
+$X$\footnote{La page continue par deux équivalences, coupées par la
+déchirure du bas de la feuille : la condition sur les ${}_{b'\backslash}X \to
+{}_{b\backslash}X$ « sur $Y$ », et sur les $X_{/b} \to X_{/b'}$, « coloc. sur
+$Y$ » (lecture incertaine).}.
+
+\pagerange{10}{13}
+\section*{Factorisations, immersions, cylindres (pages 10 à 13)}
+
+\subsection*{Les deux factorisations par les catégories comma}
+
+Soit $f : X \to Y$. Notons $\mathrm{Fib}(f)$ la catégorie des triplets
+$(b, x, u : b \to f(x))$, avec les flèches évidentes. Elle porte trois
+foncteurs :
+\[
+\begin{array}{lll}
+f^{\flat} : \mathrm{Fib}(f) \to Y, & (b, x, u) \mapsto b, & \text{une fibration,} \\
+\mu_{f} : X \to \mathrm{Fib}(f), & x \mapsto (f(x), x, \mathrm{id}), & \text{pleinement fidèle,} \\
+\rho_{f} : \mathrm{Fib}(f) \to X, & (b, x, u) \mapsto x, & \text{une rétraction,}
+\end{array}
+\]
+avec $f = f^{\flat}\mu_{f}$ et $\rho_{f}\mu_{f} = \mathrm{id}_{X}$. Le premier
+est une fibration, dont la fibre en $b$ est ${}_{b\backslash}X$ --- « but not
+yet Serre » ; $\mu_{f}$ est pleinement fidèle ; et $\rho_{f}$ est adjoint à
+gauche de $\mu_{f}$, puisque les flèches $(b, x', u) \to \mu_{f}(x)$
+correspondent aux flèches $x' \to x$. C'est la factorisation d'une application
+par son espace des chemins : $f$ s'écrit comme une équivalence d'homotopie
+suivie d'une fibration\footnote{$f^{\flat}$ est ce qu'on appelle aujourd'hui
+la fibration libre engendrée par $f$ (Street, 1974) ; le nom est le nôtre. La
+page dit « $(\mu_{f}, \rho_{f})$ adjoint » sans préciser de quel côté ; le
+calcul donne $\rho_{f} \dashv \mu_{f}$. L'exposant de $f$, lu $\flat$, est
+l'un des signes incertains du dossier.}. Elle ajoute que $\rho_{f}$ est une
+cofibration de Serre « triviale », à fibres les $Y_{/f(x)}$, qui ont un objet
+final, et un homotopisme ; la factorisation duale passe par
+$\mathrm{Cofib}(f)$, catégorie des $(b, x, f(x) \to b)$, avec une cofibration
+$\mathrm{Cofib}(f) \to Y$ à fibres les $X_{/b}$.
+
+\subsection*{Immersions et classes discrètes}
+
+Les pages 10, 11 et 13 disposent les classes en croix --- fibrations et
+cofibrations sur les bras, bifibrations et Serre en haut, monomorphismes et
+classes discrètes en bas, lisses et propres aux extrémités --- et identifient
+les immersions\footnote{La page 11 est une mise au propre de la page 10, que
+la page 13 reprend en tableau. À la page 10, « monoe » (sic) pour
+« monos ».} :
+\begin{itemize}
+\item une immersion ouverte $Y \hookrightarrow X$ est la même chose qu'un
+foncteur $\varphi : X \to \Delta^{1}$, avec $Y = \varphi^{-1}(0)$, ou encore
+qu'un crible de $X$ ; c'est une fibration discrète qui est un monomorphisme ;
+\item une immersion fermée est la même chose qu'un foncteur
+$\varphi : X \to \Delta^{1}$ avec $Y = \varphi^{-1}(1)$, un cocrible ; c'est
+une cofibration discrète monomorphe\footnote{Pour l'immersion ouverte la page
+écrit $\varphi : X^{\circ} \to \Delta^{1}$ et $Y = \varphi^{-1}(\{1\})$, ce
+qui revient au même par $\Delta_{1}^{\circ} \simeq \Delta_{1}$ ; elle note
+aussi $\Delta^{1} = [\emptyset \to \{\emptyset\}]$, l'ensemble ordonné des
+parties de l'ensemble vide.} ;
+\item une fibration discrète au-dessus de $X$ est un préfaisceau
+$X^{\circ} \to (\mathrm{Ens})$, une cofibration discrète un foncteur
+$X \to (\mathrm{Ens})$.
+\end{itemize}
+Au bas de la page 11, il note que « discret » et Serre donnent les revêtements
+étales, que les immersions à la fois ouvertes et fermées sont les inclusions de
+sommandes directes (de réunions de composantes connexes), et qu'un revêtement
+de Serre trivial est un isomorphisme\footnote{La première ligne se lit
+« discrete $\cap$ Serre ($=$ étale covering) $=$ smooth $\cap$ proper
+$\cap$ Serre », un mot biffé au milieu ; les premiers mots des deux lignes
+suivantes sont surchargés, et la dernière se lit peut-être « discrete $\cap$
+trivial Serre $=$ iso ».} ; puis qu'un foncteur propre et discret est une
+cofibration, un foncteur lisse et discret une fibration, mais qu'un foncteur
+propre de Serre n'est pas nécessairement une cofibration, ni lisse de Serre
+une fibration.
+
+\subsection*{Cylindres et cônes}
+
+Le \emph{cylindre} $C(f)$ de $f : Y \to X$ est la catégorie dont les objets
+sont ceux de $Y$ et ceux de $X$, avec les flèches de $Y$, celles de $X$, et
+$\mathrm{Hom}(y, x) = \mathrm{Hom}_{X}(f(y), x)$, aucune flèche n'allant de $X$
+vers $Y$\footnote{La construction n'est pas décrite sur la page, qui n'en donne
+que les propriétés ; on la reconstitue d'après elles. C'est ce qu'on appelle
+aussi le \emph{collage} de $f$.}. On a une factorisation
+\[
+Y \xrightarrow{\ f^{\natural}\ } C(f) \xrightarrow{\ \lambda_{f}\ } X ,
+\qquad \sigma_{f} : X \to C(f), \quad \lambda_{f}\sigma_{f} = \mathrm{id}_{X},
+\]
+où $f^{\natural}$ est une immersion ouverte, $\sigma_{f}$ une section qui est
+une immersion fermée, et $\lambda_{f}$ un épimorphisme adjoint à gauche de
+$\sigma_{f}$ ; ses fibres ont un objet final, et $\sigma_{f}$ est un
+homotopisme. La page 13 demande si $(\lambda_{f}, \sigma_{f})$ est une
+adjonction : c'est le cas\footnote{$\mathrm{Hom}_{X}(\lambda_{f}(c), x) =
+\mathrm{Hom}_{C(f)}(c, \sigma_{f}(x))$ pour $c$ objet de $Y$ ou de $X$ ; la
+vérification est la nôtre. Le tableau de la page 13 classe aussi
+« $f^{\sharp} \in$ fibration $\cap$ mono » et « $\sigma_{f} \in$
+cofibration $\cap$ mono » ; l'exposant lu $\sharp$ pourrait être un
+$\natural$, et la case décrit l'immersion ouverte $f^{\natural}$, qui est bien
+une fibration monomorphe : on lit $f^{\natural}$. L'exposant $\natural$ est
+lui-même incertain.}. Toute flèche se factorise ainsi en une immersion ouverte
+suivie d'une flèche de $\mathcal{W}$ ; dualement, $C'(f)$ donne une immersion
+fermée suivie d'une flèche à section ouverte, avec
+$C'(f)^{\circ} = C(f^{\circ})$.
+
+Le \emph{cône} $C(Y)$ est $C(Y \to e)$ : on adjoint à $Y$ un objet final strict,
+et $Y$ y est ouverte ; $C'(Y)$ adjoint un objet initial strict, et $Y$ y est
+fermée.
+
+\pagerange{14}{15}
+\section*{Le programme (pages 14 et 15)}
+
+« Après l'histoire d'asphéricité », c'est-à-dire une fois acquis les axiomes
+Loc 1 à Loc 3, Loc 1 étant pris sous forme faible --- les isomorphismes sont
+dans $\mathcal{W}$ ; si deux des trois flèches $f$, $g$, $gf$ sont dans
+$\mathcal{W}$, la troisième aussi ; si $gf = \mathrm{id}$ et $fg \in
+\mathcal{W}$, alors $f, g \in \mathcal{W}$ ---, la page dresse un programme en
+six rubriques\footnote{Les axiomes Loc 2 et Loc 3 ne sont pas rappelés ici ;
+la page 25 nomme Loc 3 « condition de localisation » et s'en sert comme d'un
+théorème A relatif : un foncteur $X \to Y$ au-dessus de $J$ est dans
+$\mathcal{W}$ dès que les $X_{/j} \to Y_{/j}$ le sont. Ce sont, dans le
+vocabulaire actuel, les axiomes d'un \emph{localisateur fondamental}, notion
+qui apparaît dans \emph{Pursuing Stacks} et que Cisinski a étudiée ensuite.} :
+\begin{itemize}
+\item[(0)] mettre en œuvre les axiomes Loc, jusqu'aux fibrations et
+cofibrations\footnote{Lecture incertaine ; la ligne est reliée par une flèche
+à « … transitions fib et cofib. », dont le premier mot ne se lit pas.} ;
+\item[(1)] la dualité, y compris $\mathcal{W} = \mathcal{W}^{\circ}$ ;
+\item[(2)] la commutation aux fibrations, cofibrations, immersions ouvertes et
+fermées, cylindres, cônes ;
+\item[(3)] le « sorite des $\int$ » d'un diagramme $X_{1} \xleftarrow{f_{1}} Y
+\xrightarrow{f_{0}} X_{0}$ ;
+\item[(4)] le théorème « de la somme amalgamée », dans (Cat) et dans les
+$\widehat{A}$ ;
+\item[(5)] l'application à $\mathrm{Hot}(\mathcal{W})$ et aux
+$\mathrm{Hot}_{A}$, pour $A$ catégorie test locale : sommes et produits ;
+\item[(6)] la saturation forte de $\mathcal{W}$ et des
+$\mathcal{W}_{A}$\footnote{« forte » est ajouté au-dessus de la ligne. Les
+numéros sont cerclés et plusieurs sont repassés ($3$ sur $4$, $4$ sur $3$,
+$5$ sur un autre chiffre) ; la moitié inférieure de la page 14 est très
+raturée.}.
+\end{itemize}
+
+Le « sorite des $\int$ » porte sur la construction de Grothendieck d'un
+diagramme $X_{1} \xleftarrow{f_{1}} Y \xrightarrow{f_{0}} X_{0}$, vu comme un
+foncteur de la catégorie $\cdot \leftarrow \cdot \rightarrow \cdot$ vers
+(Cat) : la catégorie $\int(f_{0}, f_{1})$ dont les objets sont ceux de $Y$, de
+$X_{0}$ et de $X_{1}$, avec les flèches de chacune et
+$\mathrm{Hom}(y, x_{k}) = \mathrm{Hom}_{X_{k}}(f_{k}(y), x_{k})$. Elle s'envoie
+sur la somme amalgamée $X_{0} \amalg_{Y} X_{1}$, et c'est un modèle du
+recollement homotopique\footnote{Que la construction de Grothendieck calcule
+la colimite homotopique est le théorème de Thomason (1979) ; la rubrique ne le
+cite pas, et nous ne disons pas qu'il le connaissait.}. La rubrique en énonce
+la fonctorialité --- si les trois composantes d'un morphisme de diagrammes sont
+dans $\mathcal{W}$, le foncteur induit entre les $\int$ l'est ---, le cas où
+$f_{0}$ est un isomorphisme, où les flèches canoniques sont des homotopismes,
+et le cas où $f_{0} \in \mathcal{W}$, où elles sont dans $\mathcal{W}$. Elle
+esquisse ensuite l'énoncé central : si $f_{0}$, $f_{1}$ sont des cofibrations
+(resp. des fibrations) et les fibres convenablement asphériques, le foncteur
+$\int(f_{0}, f_{1}) \to X_{0} \amalg_{Y} X_{1}$ est une cofibration (resp. une
+fibration) à fibres asphériques, donc est dans $\mathcal{W}$ ; d'où, si
+$f_{0} \in \mathcal{W}$, la flèche opposée du carré cocartésien est dans
+$\mathcal{W}$\footnote{La page marque le carré de la rubrique (4) « cart » ;
+l'énoncé porte sur la somme amalgamée, et dans la situation des pages 18 à 21
+le carré est à la fois cartésien et cocartésien. On le lit cocartésien. Le
+passage de la page 14 qui précède la rubrique (4) est en grande partie
+illisible, et l'énoncé n'en est qu'esquissé ; les pages 18 à 20 le reprennent
+et le démontrent.}.
+
+Une \emph{question} suit, pour un carré cocartésien
+$X' = X \amalg_{Y} Y'$ le long d'une immersion ouverte ou fermée
+$i : Y \hookrightarrow X$ : si $f : Y \to Y'$ est une cofibration, la flèche
+$g : X \to X'$ l'est-elle, et si $f \in \mathcal{W}$, a-t-on $g \in
+\mathcal{W}$ ? « Il est possible qu'on n'ait pas $g \in \mathcal{W}$ [mais
+j'ignore si $i \in \mathcal{W}$ implique que $i' \in \mathcal{W}$] ». La page
+22 répond par la négative. Dans un $\widehat{A}$, au contraire, la rubrique
+annonce le théorème pour un carré cocartésien le long d'un monomorphisme $i$ :
+$i \in \mathcal{W}_{A} \Rightarrow i' \in \mathcal{W}_{A}$ et
+$f \in \mathcal{W}_{A}$ pour le côté opposé à un $g \in
+\mathcal{W}_{A}$\footnote{La source de la première ligne du carré est écrite
+$Y'$, pour $Y$ sans doute.}. La page 15 ajoute l'application aux sommes et
+produits dans $\mathrm{Hot}(\mathcal{W})$ et dans les $\mathrm{Hot}_{A}$, et
+la saturation forte.
+
+\pagerange{16}{16}
+\section*{Le sorite des recollements (page 16)}
+
+Soient $X$ une catégorie, $U$ un ouvert et $Y$ le fermé complémentaire.
+Aucune flèche ne va de $Y$ vers $U$, et $X$ est déterminée par $U$, $Y$ et le
+profoncteur
+\[
+H_{X} : U^{\circ} \times Y \to (\mathrm{Ens}), \qquad H_{X}(u, y) =
+\mathrm{Hom}_{X}(u, y),
+\]
+contravariant en $u$ et covariant en $y$ : $X$ est le collage de
+$H_{X}$\footnote{« Collage » et « profoncteur » (ou « distributeur », chez
+Bénabou) sont des noms modernes ; la page n'en emploie aucun. Le cylindre
+$C(f)$ de la page 10 est le collage du profoncteur $\mathrm{Hom}_{X}(f(-),
+-)$.}. Le sorite décrit tout en ces termes :
+\begin{itemize}
+\item[a)] un foncteur $X \to Z$ est la donnée de $f_{U} : U \to Z$, de
+$f_{Y} : Y \to Z$ et d'une transformation $H_{X}(u, y) \to
+\mathrm{Hom}_{Z}(f_{U}(u), f_{Y}(y))$, naturelle en $u$ et $y$ ;
+\item[b)] un foncteur $f : X' \to X$ compatible aux décompositions
+($X' = U' \cup Y'$, de profoncteur $H_{X'}$) est la donnée de
+$f_{U'} : U' \to U$, de $f_{Y'} : Y' \to Y$ et d'une transformation naturelle
+$H_{X'}(u', y') \to H_{X}(f_{U'}(u'), f_{Y'}(y'))$ ;
+\item[c)] pour une catégorie $T$, $T \times X$ se décompose en
+$T \times U$ et $T \times Y$, avec $H_{T \times X}((t, u), (t', y)) \simeq
+\mathrm{Hom}_{T}(t, t') \times H_{X}(u, y)$ ;
+\item[d)] une homotopie $h : \Delta^{1} \times X' \to X$ est compatible aux
+décompositions si $h^{-1}(U) = \Delta^{1} \times U'$ et $h^{-1}(Y) =
+\Delta^{1} \times Y'$, avec $U' = h_{i}^{-1}(U)$, $Y' = h_{i}^{-1}(Y)$ pour
+$i = 0, 1$ ; elle est alors donnée par $h_{U'} : \Delta^{1} \times U' \to U$,
+$h_{Y'} : \Delta^{1} \times Y' \to Y$ et une application
+$\mathrm{Hom}(s, t) \times H_{X'}(u', y') \to H_{X}(h_{U'}(s, u'), h_{Y'}(t,
+y'))$, naturelle en $(s, u')$ et $(t, y')$\footnote{La page écrit
+$h^{-1}(Y')$ pour $h^{-1}(Y)$ et, deux fois, $\Delta$ pour $\Delta^{1}$ ; les
+égalités $U' = h_{i}^{-1}(U)$, $Y' = h_{i}^{-1}(Y)$ rendent deux guillemets de
+répétition.}.
+\end{itemize}
+
+\pagerange{18}{20}
+\section*{Sommes amalgamées le long d'une immersion (pages 18 à 20)}
+
+\subsection*{Quand le carré est-il cocartésien ?}
+
+Soient $X'$ une catégorie, $Y'$ un fermé, $U'$ l'ouvert complémentaire,
+$f : X \to X'$ un foncteur, $Y = f^{-1}(Y')$ et $U = f^{-1}(U')$, et supposons
+que $f$ induise un isomorphisme $U \simeq U'$. Le carré
+\[
+\begin{array}{ccc}
+Y & \xrightarrow{\ i\ } & X \\
+{\scriptstyle g}\downarrow & & \downarrow{\scriptstyle f} \\
+Y' & \xrightarrow{\ i'\ } & X'
+\end{array}
+\]
+n'est pas cocartésien en général : il suffit de prendre $X = U'$ et $f$
+l'inclusion, d'où $Y = \emptyset$. Il l'est si $f$ est une cofibration. Les
+deux membres ont en effet les mêmes objets et les mêmes flèches à l'intérieur
+de $U'$ et de $Y'$, et il s'agit de voir que, pour $u' \in U'$ (relevé en
+$u \in U$) et $y' \in Y'$,
+\[
+\varinjlim_{(y,\, g(y) \to y') \in Y_{/y'}} \mathrm{Hom}_{X}(u, y)
+\longrightarrow \mathrm{Hom}_{X'}(u', y')
+\]
+est bijectif. Comme $g$, changement de base de $f$, est une cofibration, la
+fibre $Y_{y'}$ est cofinale dans $Y_{/y'}$ et la colimite se calcule sur
+elle ; or, à $u$ et à une flèche $u' \to y'$ fixés, la catégorie des
+relèvements a un objet initial, et elle est donc connexe et non vide. La page
+dit : « Oui, car (i) surjectif et (ii) pour $u \to y'$ fixé
+… »\footnote{La phrase s'interrompt là ; l'argument est complété ici.
+Dans la formule, la page indexe la colimite par $Y_{/y'}$ et, par une
+accolade, par la fibre $Y_{y'}$.}.
+
+Se donner une telle cofibration $f$, dont les fibres au-dessus de $U'$ sont
+ponctuelles, revient à se donner un foncteur $X' \to (\mathrm{Cat})$ de
+restriction constante de valeur $e$ sur $U'$, c'est-à-dire un foncteur
+$\Phi : Y' \to (\mathrm{Cat})$, qui définit $g : Y \to Y'$, et des
+applications $\mathrm{Hom}(u', y') \to \mathrm{Ob}\,\Phi(y')$, naturelles en
+$u'$ et $y'$.
+
+\subsection*{Le théorème}
+
+Il voudrait alors que $\int(i, g) \to X' = X \amalg_{Y} Y'$ soit dans
+$\mathcal{W}$, et même asphérique\footnote{« même » est rendu sur la page par
+le signe $=$ ; le passage est marqué d'un double trait en marge.}. Ces
+conditions sont stables par tout changement de base sur $X'$, et il se demande
+si le changement de base commute à $\int$ --- « Ce diagramme est-il
+cartésien ? À vérifier ! » ---, ce qui ferait de $\int(i, g) \to X'$ un
+foncteur universellement dans $\mathcal{W}$. La question reste ouverte, mais
+on peut s'en passer : on vérifie directement que $\int(i, g) \to X'$ est une
+cofibration, de fibre $e$ au-dessus de $u' \in U'$ et, au-dessus de
+$y' \in Y'$, isomorphe au cône $C(Y_{y'})$, qui a un objet final. D'où
+l'énoncé de la page 20.
+
+\textbf{Théorème.} Soit, dans (Cat), un carré cocartésien et cartésien
+\[
+\begin{array}{ccc}
+Y & \xrightarrow{\ i\ } & X \\
+{\scriptstyle g}\downarrow & & \downarrow{\scriptstyle f} \\
+Y' & \xrightarrow{\ i'\ } & X'
+\end{array}
+\]
+où $i'$ et $f$ sont des cofibrations, et supposons que pour tout objet $x'$ de
+$X'$, l'une des deux fibres $f^{-1}(x')$, $i'^{-1}(x')$ soit équivalente à la
+catégorie ponctuelle. Alors le foncteur canonique $\int(i, g) \to X'$ est une
+cofibration à fibres asphériques ; il est donc dans $\mathcal{W}$.
+
+Les fibres sont les $\int$ des diagrammes $Y'_{x'} \leftarrow Y'_{x'} \times
+X_{x'} \rightarrow X_{x'}$ formés des deux projections\footnote{L'égalité
+$Y_{x'} = Y'_{x'} \times X_{x'}$, que la page écrit (surchargée) dans
+l'intégrale, demande que le carré soit cartésien ; l'énoncé de la page ne le
+dit pas. L'hypothèse est satisfaite dans la situation des pages 18 et 19, où
+$Y = f^{-1}(Y')$, et dans celle de la page 21, que la page déclare cartésienne.
+On l'ajoute à l'énoncé.}. Si l'un des deux facteurs est ponctuel, à
+équivalence près, une telle fibre est de la forme $\int(A = A, A \to e)$, ou
+de la forme symétrique. Cette catégorie est $C(A) \amalg_{A} (A \times
+\Delta^{1})$ : un cône sur $A$ prolongé par un cylindre, dont le cône est un
+rétracte par déformation ; elle est donc asphérique, « on gagne ! »\footnote{Une
+note marginale ajoute qu'au lieu de « ponctuelle » il suffit
+qu'une fibre soit asphérique ; elle n'est pas démontrée. Un passage
+suivant, enclos d'un trait et barré, voulait voir directement que
+$\int(A \to A)$ et $\int(A \to e)$ sont asphériques « par propriété des
+recollements » ; il est trop fragmentaire pour être lu. Un « Lemme », écrit
+en oblique au pied de la page, est inachevé après ses premiers mots.}
+
+\textbf{Corollaire.} \emph{Sous les mêmes hypothèses, $i \in \mathcal{W}
+\Rightarrow i' \in \mathcal{W}$, et $g \in \mathcal{W} \Rightarrow f \in
+\mathcal{W}$.}
+
+La page énonce le corollaire sans démonstration. Il découle du théorème et de
+la fonctorialité des $\int$ (page 14) : si $i \in \mathcal{W}$, le morphisme
+de diagrammes de $(Y = Y \xrightarrow{g} Y')$ vers $(Y \xrightarrow{i} X,\ Y \xrightarrow{g} Y')$
+ induit une flèche de $\mathcal{W}$ entre leurs $\int$,
+et $Y' \to \int(\mathrm{id}_{Y}, g)$ est un homotopisme ; la composée
+$Y' \to \int(i, g) \to X'$ est $i'$, et les deux facteurs sont dans
+$\mathcal{W}$. De même pour $f$\footnote{La déduction est la nôtre.}.
+
+\pagerange{21}{22}
+\section*{Dans les préfaisceaux, et une mise en garde (pages 21 et 22)}
+
+\subsection*{Le théorème dans un $\widehat{A}$}
+
+Soit, dans $\widehat{A}$, un carré cocartésien
+\[
+\begin{array}{ccc}
+Y & \hookrightarrow & X \\
+\downarrow & & \downarrow \\
+Y' & \hookrightarrow & X'
+\end{array}
+\]
+où $Y \to X$ est un monomorphisme ; il est alors aussi cartésien, et
+$Y' \to X'$ est un monomorphisme\footnote{La page ajoute dans l'interligne,
+soulignés, « et aussi cartésien » ; dans un topos de préfaisceaux, une somme
+amalgamée le long d'un monomorphisme est toujours un carré cartésien, et le
+monomorphisme se transporte. La remarque est nôtre.}. Le foncteur $i_{A}$
+transforme ce carré en un carré de (Cat) qui est encore cocartésien, puisque
+$i_{A}$ commute aux limites inductives --- il a un adjoint à droite --- et
+cartésien, puisqu'il commute aux produits fibrés. Les flèches
+$A_{/X} \to A_{/X'}$, $A_{/Y} \to A_{/Y'}$ sont des fibrations discrètes, et
+$A_{/Y} \to A_{/X}$, $A_{/Y'} \to A_{/X'}$, fibrations discrètes monomorphes,
+sont des immersions ouvertes. On est dans la situation du théorème de la page
+20, sous sa forme duale, celle où $i'$ et $f$ sont des fibrations : au-dessus
+d'un objet de $A_{/X'}$ hors de $A_{/Y'}$, la fibre de $f$ est un point, et
+au-dessus d'un objet de $A_{/Y'}$, la fibre de $i'$ en est un\footnote{La
+vérification des hypothèses sur les fibres est la nôtre ; elle tient à ce
+que $X'(a) = X(a) \amalg_{Y(a)} Y'(a)$ pour tout objet $a$ de $A$. La page dit
+seulement « On est donc dans la situation déjà énoncée », et la fin de sa
+phrase, un $\int$ suivi de $A_{/X'}$, est d'une lecture incertaine.}. D'où :
+
+\textbf{Corollaire} (en marge : « Thm »). \emph{Pour un tel carré, si
+$Y \to X$ est dans $\mathcal{W}_{A}$, $Y' \to X'$ l'est ; si $Y \to Y'$ est
+dans $\mathcal{W}_{A}$, $X \to X'$ l'est.}
+
+\subsection*{Mais attention}
+
+Dans (Cat), il est faux qu'une somme amalgamée le long d'une immersion fermée
+$i$ transporte les équivalences faibles --- ni $i \in \mathcal{W} \Rightarrow
+i' \in \mathcal{W}$, ni $g \in \mathcal{W} \Rightarrow f \in \mathcal{W}$ ---,
+et cela même pour l'équivalence faible usuelle, même si $g$ est une
+cofibration et $Y'$ ponctuelle. L'exemple, pour une catégorie $Z$, empile deux
+carrés cocartésiens :
+\[
+\begin{array}{ccc}
+Z & \hookrightarrow & C'_{2}(Z) \\
+\downarrow & & \downarrow \\
+C'_{1}(Z) & \hookrightarrow & \Sigma(Z) \\
+{\scriptstyle g}\downarrow & & \downarrow{\scriptstyle f} \\
+e & \hookrightarrow & \Theta
+\end{array}
+\]
+où $C'_{1}(Z)$ et $C'_{2}(Z)$ sont deux exemplaires du cône à sommet initial,
+dans lesquels $Z$ est fermée, $\Sigma(Z)$ leur recollement le long de $Z$ ---
+une suspension ---, et $\Theta$ la catégorie obtenue en écrasant $C'_{1}(Z)$
+en un point\footnote{La page écrit $C(Z)$, $\check{C}(Z)$ et $\Theta(Y)$, et
+marque les flèches de $Z$ dans $C(Z)$ et de $C(Z)$ dans $\Sigma(Z)$
+« immersion fermée » ; pour qu'elles le soient, les deux cônes doivent avoir
+leur sommet initial, le $C'$ de la page 10, et on le lit ainsi. Les indices
+des sommets, lus $u'_{0}$, $w_{0}$, $y'_{0}$, sont incertains.}. Le
+foncteur $g : C'_{1}(Z) \to e$ est dans $\mathcal{W}$, le cône étant
+asphérique. La catégorie $\Theta$ a deux objets, le sommet du second cône et
+le point, et l'ensemble des flèches du premier vers le second est $\pi_{0}(Z)$ ;
+elle est donc équivalente à $\Delta^{1}$, et asphérique, quand $Z$ est
+connexe. Dans ce cas $f \in \mathcal{W}$ si et seulement si $\Sigma(Z)$ est
+asphérique, ce qui n'a pas toujours lieu : pour $Z$ un groupe $G$, vu comme
+groupoïde à un objet, le nerf de $\Sigma(Z)$ a le type de la suspension de
+$BG$, qui n'est pas contractile dès que l'abélianisé de $G$ n'est pas nul ---
+par exemple pour $G = \mathbf{Z}$, où l'on obtient la sphère
+$S^{2}$\footnote{La page dit : « prendre p.ex. $Z$ un groupoïde réduit à un
+objet, avec $\pi_{1} \neq 1$ ». La condition $\pi_{1} \neq 1$ ne suffit pas :
+pour un groupe acyclique non trivial, comme celui de Higman, $BG$ a l'homologie
+d'un point et sa suspension, simplement connexe et acyclique, est
+contractile. Il faut une suspension non contractile, ce qu'assure par exemple
+$H_{1}(G) \neq 0$. L'exemple réfute $g \in \mathcal{W} \Rightarrow f \in
+\mathcal{W}$ ; la page annonce aussi l'échec de $i \in \mathcal{W} \Rightarrow
+i' \in \mathcal{W}$ sans en donner d'exemple.}.
+
+Une note marginale avance qu'« il semble vrai » que si $g$ est une
+1-équivalence --- une équivalence sur les groupoïdes fondamentaux ---, alors
+$f$ l'est aussi\footnote{Note écrite en diagonale, lue en partie avec doute ;
+elle n'est pas reprise. Dans l'exemple ci-dessus, $f$ est bien une
+1-équivalence, $\Sigma(Z)$ étant simplement connexe pour $Z$ connexe. La
+littérature ultérieure contourne l'obstacle en restreignant les inclusions le
+long desquelles on recolle : ce sont les « Dwyer maps » de la structure de
+modèles de Thomason (1980), dont les sommes amalgamées sont homotopiques ; la
+page n'en parle pas.}.
+
+\pagerange{23}{25}
+\section*{La catégorie homotopique comme catégorie de fractions (pages 23 à 25)}
+
+Soit $A$ une catégorie test locale\footnote{L'hypothèse est en marge,
+séparée d'une seconde note : « itou dans Cat ». La page 25 dit pourquoi elle
+est nécessaire.}. Notons $\overline{\widehat{A}}$ la catégorie localisée de
+$\widehat{A}$ par les homotopismes relatifs à $\mathcal{W}_{A}$, et
+$\overline{\mathcal{W}_{A}}$ l'image de $\mathcal{W}_{A}$ ; alors
+$\mathrm{Hot}_{A} \simeq \overline{\mathcal{W}_{A}}^{\,-1}\,
+\overline{\widehat{A}}$.
+
+\textbf{Corollaire.} \emph{$\overline{\mathcal{W}_{A}}$ admet un calcul de
+fractions dans lequel toute flèche de $\mathrm{Hot}_{A}$ s'écrit
+$\gamma(t)^{-1}\gamma(u)$, pour un diagramme $X \xrightarrow{u} Y'
+\xleftarrow{t} Y$ de $\overline{\widehat{A}}$ avec $t \in
+\overline{\mathcal{W}_{A}}$.}\footnote{La page dit « calcul des fractions à
+gauche » ; la page 26, pour la même situation, dit « à droite ». Les deux
+noms s'échangent d'un auteur à l'autre ; on désigne le calcul par sa forme,
+celle que les deux arguments utilisent.}
+
+Il y a deux conditions à vérifier. La première : un diagramme
+$Y' \xleftarrow{g} Y \xrightarrow{i} X$ avec $g \in
+\overline{\mathcal{W}_{A}}$ se complète en un carré commutatif
+$f \circ i = i' \circ g$, avec $f \in \overline{\mathcal{W}_{A}}$. On factorise
+$i$ en $Y \xrightarrow{i_{1}} X_{1} \xrightarrow{h} X$, avec $i_{1}$
+monomorphe et $h$ homotopisme, ce qui ramène au cas où $i$ est un
+monomorphisme, et l'on prend pour $X'$ la somme amalgamée ; le corollaire de la
+page 21 donne $f \in \mathcal{W}_{A}$.
+
+La seconde est la simplification : si $f, g : X \rightrightarrows Y$ et
+$s : X' \to X$ dans $\overline{\mathcal{W}_{A}}$ vérifient $fs = gs$ dans
+$\overline{\widehat{A}}$, il existe $t : Y \to Y'$ dans
+$\overline{\mathcal{W}_{A}}$ avec $tf = tg$. On peut supposer $s$ monomorphe.
+L'égalité $fs = gs$ est donnée par une homotopie $I \times X' \to Y$. Soit
+$M$ la somme amalgamée de $I \times X'$ et de $X \sqcup X$ au-dessus de
+$X' \sqcup X'$. La flèche $X \sqcup X \to M$ est dans $\mathcal{W}_{A}$, comme
+somme amalgamée de $X' \sqcup X' \to X \sqcup X$ le long du monomorphisme
+$X' \sqcup X' \to I \times X'$ ; donc $M \to I \times X$, monomorphe, est dans
+$\mathcal{W}_{A}$ ; et l'on pousse $M \to Y$ le long de $M \to I \times X$ pour
+obtenir $t : Y \to Y'$, dans $\mathcal{W}_{A}$, et une homotopie
+$I \times X \to Y'$ entre $tf$ et $tg$\footnote{La page donne le diagramme, en
+tirets pour les flèches à construire, et non le texte ; le récit est le
+nôtre. La lettre de $Y \to Y'$ est lue $t$, et pourrait être un $r$.}.
+
+L'argument n'utilise que quatre propriétés d'une classe $\mathfrak{M}$ de
+flèches d'une catégorie $M$ munie de $\mathcal{W}$ (ici
+$M = \widehat{A}$ et $\mathfrak{M}$ les monomorphismes) :
+\begin{itemize}
+\item[(i)] toute flèche se factorise en une flèche de $\mathfrak{M}$ suivie
+d'un homotopisme ;
+\item[(ii)] dans un carré cocartésien le long d'une flèche de $\mathfrak{M}$,
+le côté opposé à une flèche de $\mathcal{W}$ est dans $\mathcal{W}$ ;
+\item[(iii)] il existe une famille génératrice d'intervalles $I_{\alpha}$ avec
+$X \sqcup X \to X \times I_{\alpha}$ dans $\mathfrak{M}$ pour tout $X$ --- des
+intervalles « séparants » ;
+\item[(iv)] les sommes finies existent, et $f, g \in \mathcal{W} \Rightarrow
+f \sqcup g \in \mathcal{W}$.
+\end{itemize}
+Une note marginale l'énonce en général : pour $(M, \mathcal{W})$ muni d'un tel
+$\mathfrak{M}$, les homotopismes étant dans $\mathcal{W}$, on a
+$\mathcal{W}^{-1}M = \overline{\mathcal{W}}^{\,-1}\overline{M}$ et
+$\overline{\mathcal{W}}$ admet ce calcul de fractions\footnote{C'est, à la
+dualité près, le schéma des catégories d'objets fibrants de K. Brown (1973),
+où la catégorie homotopique s'obtient par fractions à partir de la catégorie
+des classes d'homotopie ; le rapprochement est le nôtre. Une autre note
+marginale dit les conditions « inspirées par le cas de (Cat) et non celui de
+$A^{\wedge}$, où (iii) est inutile » ; la note se termine sur des mots
+illisibles.}. Il se demande d'ailleurs si l'argument vaut dans (Cat) ; la
+page 22 interdit d'y prendre pour $\mathfrak{M}$ les immersions fermées, et le
+dossier ne dit pas quelle classe conviendrait.
+
+La page 25 dit ce qu'a coûté l'argument. Il a fallu un intervalle séparant $I$
+de $\widehat{A}$ définissant une structure homotopique compatible avec
+$\mathcal{W}_{A}$, et pour cela que $I \to e$ soit dans
+$\mathcal{W}_{A}$, ou du moins que les deux sections $\delta_{0}$,
+$\delta_{1} : e \to I$ aient même image dans $\mathrm{Hot}_{A}$ --- « donc,
+pratiquement, que $A$ soit une catégorie-test \emph{locale} »\footnote{Les
+deux notes marginales de la page 25, l'une écrite presque verticalement, sont
+en grande partie illisibles ; un mot biffé en haut à droite ne se lit pas
+avec certitude.}. Il a fallu aussi la stabilité de $\mathcal{W}_{A}$ par
+sommes finies, propriété (iv) : elle se ramène à (Cat), puisque $i_{A}$
+commute aux sommes, et là elle résulte de Loc 3 appliqué à un foncteur
+$X \to Y$ au-dessus de l'ensemble d'indices $J$, vu comme catégorie
+discrète.
+
+\pagerange{26}{30}
+\section*{Les sommes dans $\mathrm{Hot}$ (pages 26 à 30)}
+
+\textbf{Corollaire 1.} \emph{Les sommes existent dans $\mathrm{Hot}
+= \mathrm{Hot}(\mathcal{W})$, et les foncteurs canoniques $(\mathrm{Cat}) \to
+\mathrm{Hot}$ et $\widehat{A} \to \mathrm{Hot}_{A} \to \mathrm{Hot}$ y
+commutent.}
+
+L'énoncé est démontré pour les sommes \emph{finies} ; pour les sommes
+quelconques, que la page semble viser, il reste ouvert dans le
+dossier\footnote{Le mot qui qualifie les sommes est lu avec doute
+« arbitraires », et une note marginale en oblique, à moitié illisible, porte
+« \emph{finies} inutile » et « quelconque ». Les pages 28 à 30 montrent que
+le cas infini n'est pas acquis.}.
+
+\emph{Le principe.} Pour une catégorie $M$ et une classe $\mathcal{W}$
+admettant le calcul de fractions de la page 23, on a
+$\mathrm{Hom}_{\mathcal{W}^{-1}M}(X, Y) = \varinjlim \mathrm{Hom}_{M}(X, Y')$,
+la colimite, filtrante, portant sur les flèches $Y \to Y'$ de $\mathcal{W}$ ;
+le foncteur $M \to \mathcal{W}^{-1}M$ commute donc aux limites inductives
+finies qui existent dans $M$, et en particulier aux sommes finies\footnote{La
+page dit « commute aux \emph{lim} finies » ; pour ce calcul de fractions, ce
+sont les limites inductives finies, et c'est à elles, les sommes, qu'elle
+l'applique.}. On l'applique à $(\overline{\mathrm{Cat}},
+\overline{\mathcal{W}})$, où $\overline{\mathrm{Cat}}$ est la catégorie des
+classes d'homotopie de foncteurs ; il faut que les sommes finies y existent et
+que $(\mathrm{Cat}) \to \overline{\mathrm{Cat}}$ y commute. C'est le
+
+\textbf{Lemme} (page 27). \emph{Soit $(M, h)$ une structure homotopique par
+intervalles, avec $M$ stable par sommes finies et les sommes finies
+universelles. Alors $M \to \overline{M}$ commute aux sommes finies.}
+
+Il s'agit de voir que deux flèches $f = (f_{j})$, $g = (g_{j}) :
+\coprod_{J} X_{j} \rightrightarrows Y$, $J$ fini, sont homotopes dès que
+chaque $f_{j}$ l'est à $g_{j}$. Les homotopies élémentaires entre $f_{j}$ et
+$g_{j}$ se mettent bout à bout en une homotopie paramétrée par un même
+intervalle composé $I_{N}$, $N$ assez grand pour tous les $j$ --- c'est là que
+sert la finitude de $J$ ---, et comme $I_{N} \times \coprod X_{j} \simeq
+\coprod I_{N} \times X_{j}$, elles se recollent en une homotopie entre $f$ et
+$g$.
+
+\emph{Le cas infini.} Le même énoncé est faux pour les sommes infinies :
+$(\mathrm{Cat}) \to \overline{\mathrm{Cat}}$ n'y commute pas. Soit
+$Y = I_{\infty}$ le zigzag infini $\bullet \to \bullet \leftarrow \bullet \to
+\bullet \leftarrow \cdots$, réunion d'une infinité d'intervalles
+élémentaires\footnote{La page dit « somme amalgamée d'une infinité de copies
+de $X_{n}$ », où $X_{n} = \Delta_{0}$ ; ce sont des copies de l'intervalle
+élémentaire qu'on recolle. La parenthèse ouverte avant l'exemple n'est pas
+refermée.}, $X_{n} = e$ pour $n \in \mathbf{N}$, et $f_{n}$, $g_{n} : e \to
+Y$ les points $0$ et $2n$. Chaque $f_{n}$ est homotope à $g_{n}$, mais au
+moyen d'une chaîne de longueur croissante avec $n$ ; une homotopie de
+$\coprod X_{n}$ à valeurs dans $Y$ n'a qu'une longueur finie, et $f$, $g$
+ne sont donc pas homotopes. Ainsi $\coprod X_{n}$ n'est pas une somme dans
+$\overline{\mathrm{Cat}}$. « Je suppose pourtant que dans
+$\mathrm{Hot}(\mathcal{W})$, les sommes quelconques existent et que
+$\mathrm{Cat} \to \mathrm{Hot}(\mathcal{W})$ y commute ?? »
+
+Cela reviendrait à la bijectivité de
+\[
+\mathrm{Hom}_{\mathrm{Hot}}\Bigl(\coprod_{J} X_{j}, Y\Bigr) \longrightarrow
+\prod_{J} \mathrm{Hom}_{\mathrm{Hot}}(X_{j}, Y),
+\]
+et, « avec le calcul des fractions, ni l'injectivité ni la surjectivité n'est
+claire ». Pour la surjectivité, la difficulté est de trouver une même flèche
+$Y \to Y'$ de $\mathcal{W}$ qui représente à la fois toutes les classes
+$\varphi_{j}$ ; chacune en fournit une, $Y \to Y'_{j}$, et il propose de les
+réunir par sommes amalgamées au-dessus de $Y$ sur les parties finies
+$J_{0} \subset J$, puis par passage à la limite, ce qui donne encore une flèche
+de $\mathcal{W}$ --- « Donc il y a quand même surjectivité ! » L'argument
+repose sur un
+
+\textbf{Lemme} (page 30). \emph{Soit $(\alpha_{j} : Y \to Y'_{j})_{j \in J}$
+une famille d'équivalences faibles. Il existe une équivalence faible
+$\alpha : Y \to Y'$, immersion ouverte ou fermée si les $\alpha_{j}$ le sont,
+et des $\beta_{j} : Y'_{j} \to Y'$ avec $\beta_{j}\alpha_{j} = \alpha$ ; si les
+$\alpha_{j}$ sont des immersions ouvertes ou fermées, on peut prendre pour $Y'$
+la somme amalgamée des $Y'_{j}$ au-dessus de $Y$.}
+
+Il n'est qu'esquissé\footnote{Un schéma en marge factorise $\alpha_{j}$ par une
+immersion $Y \hookrightarrow \overline{Y}'_{j}$ suivie de
+$i_{j} : \overline{Y}'_{j} \to Y'_{j}$, avec une flèche $s_{j}$ en sens
+inverse et la relation $s_{j}i_{j} = \mathrm{id}_{\overline{Y}'_{j}}$, sans
+dire d'où vient la factorisation. Avec le cylindre des pages 10 et 11, elle
+existe, mais la relation est $i_{j}s_{j} = \mathrm{id}_{Y'_{j}}$, et l'égalité
+$\beta_{j}\alpha_{j} = \alpha$ ne vaut qu'à homotopie près. Que la somme
+amalgamée, finie puis infinie, de ces immersions soit encore dans
+$\mathcal{W}$ demanderait dans (Cat) les hypothèses de fibration de la page
+20, que la page 22 montre nécessaires, puis le passage à la réunion des pages
+38 et 39 ; ni l'un ni l'autre n'est invoqué ici.}. L'injectivité, enfin, se
+ramène à ceci : si $f, g : \coprod X_{j} \rightrightarrows Y$ ont des
+composantes $f_{j}$, $g_{j}$ homotopes, a-t-on $\gamma(f) = \gamma(g)$ ? « Mais
+attention on n'a pas en général $f \sim g$ ! » Il faudrait une condition « de
+type Kan » sur $Y$, ou sur un $Y'$ avec $Y \to Y'$ dans $\mathcal{W}$ ; le
+dossier s'arrête là.
+
+\pagerange{31}{36}
+\section*{Les produits finis (pages 31 à 36)}
+
+\textbf{Corollaire 2.} \emph{Les produits finis existent dans $\mathrm{Hot}$,
+et les foncteurs canoniques $(\mathrm{Cat}) \to \mathrm{Hot}$ et
+$\widehat{A} \to \mathrm{Hot}$ y commutent, ce dernier pour $A$ catégorie test
+stricte, ou plus généralement totalement asphérique.}\footnote{« il suffit
+même que $A$ soit tot. $\mathcal{W}$-asph. », en marge. L'abréviation lue
+« tot. », ici et jusqu'à la page 35, ressemble à « LA » ou « tA » ; elle est
+lue « totalement » d'après la condition de la page 33. Une catégorie $A$ est
+\emph{totalement asphérique} si elle est asphérique et si les produits
+$a \times b$ de deux représentables sont asphériques dans $\widehat{A}$.}
+
+Pour $(\mathrm{Cat})$ le point est « clair si on traite directement », un
+produit fini de flèches de $\mathcal{W}$ étant dans $\mathcal{W}$ (page 35).
+Pour $\widehat{A}$, on est ramené à voir que $\widehat{A} \to \mathrm{Hot}_{A}$
+commute aux produits finis : que
+\[
+\mathrm{Hom}_{\mathrm{Hot}_{A}}\Bigl(X, \prod Y_{j}\Bigr) \longrightarrow
+\prod \mathrm{Hom}_{\mathrm{Hot}_{A}}(X, Y_{j})
+\]
+est bijectif pour toute famille finie $(Y_{j})$. \emph{Surjectivité} : un
+élément du second membre est donné par des $f_{j} : X \to Y'_{j}$, avec
+$Y_{j} \to Y'_{j}$ dans $\mathcal{W}_{A}$ ; $f = (f_{j}) : X \to \prod Y'_{j}$
+définit un antécédent, \emph{si l'on sait} que $\prod Y_{j} \to \prod Y'_{j}$
+est dans $\mathcal{W}_{A}$. \emph{Injectivité} : soient
+$f, g : X \rightrightarrows Y'$, $\alpha : Y = \prod Y_{j} \to Y'$ dans
+$\mathcal{W}_{A}$, et pour chaque $j$ des $\beta_{j} : Y_{j} \to Y'_{j}$ dans
+$\mathcal{W}_{A}$ et $\varphi_{j} : Y' \to Y'_{j}$ avec
+$\beta_{j}\,\mathrm{pr}_{j} = \varphi_{j}\alpha$ et $\varphi_{j}f$ homotope à
+$\varphi_{j}g$. Avec $\varphi = (\varphi_{j})$ et $\beta = \prod \beta_{j}$,
+on a $\varphi\alpha = \beta$ et $\varphi f$ homotope à $\varphi g$ ; si
+$\beta$ est dans $\mathcal{W}_{A}$, $\gamma(\varphi)$ est inversible et
+$\gamma(f) = \gamma(g)$. Dans les deux sens, tout repose donc sur la
+stabilité de $\mathcal{W}_{A}$ par produits finis ; et cela marcherait pour
+les produits infinis si l'on savait qu'un produit infini de flèches de
+$\mathcal{W}_{A}$ est dans $\mathcal{W}_{A}$.
+
+\subsection*{Le lemme des pages 32 à 35}
+
+La page 32 énonce, avec un point d'interrogation, un lemme de « conditions
+équivalentes » pour une petite catégorie $A$ :
+\begin{itemize}
+\item[(i)] $A$ est totalement asphérique ;
+\item[(ii)] $\mathcal{W}_{A}$ est stable par produits finis ;
+\item[(ii bis)] pour $f : X \to Y$ dans $\mathcal{W}_{A}$ et $Z$ dans
+$\widehat{A}$, $f \times \mathrm{id}_{Z}$ est dans $\mathcal{W}_{A}$ ;
+\item[(iii)] $\widehat{A} \to \mathrm{Hot}_{A}$ commute aux produits finis ;
+\item[(iv)] $\widehat{A} \to \mathrm{Hot}$ commute aux produits binaires ;
+\item[(iv bis)] $\widehat{A} \to \mathrm{Hot}$ commute aux produits finis.
+\end{itemize}
+Elles ne sont pas toutes équivalentes, et les pages 33 à 35 le montrent
+elles-mêmes. Ce qu'elles établissent est ceci\footnote{À la page 32 le lemme
+s'intitule « Conditions équiv. ($\Rightarrow$) », et le schéma de la page 34
+groupe (i), (iv), (iv bis) d'un côté, (ii), (ii bis), (iii) de l'autre, avec
+des doubles flèches. Sa propre démonstration n'obtient que les énoncés
+ci-dessous, et la page 35 montre que (iv) n'implique pas (i). La page 32 écrit
+(iv) avec $\mathrm{Hot}_{A}(\mathcal{W})$, la page 34 avec
+$\mathrm{Hot}(\mathcal{W})$ ; la démonstration porte sur
+$\mathrm{Hot}$.} :
+\begin{itemize}
+\item (ii) $\Leftrightarrow$ (ii bis), et il suffit de prendre pour $Z$ les
+représentables $a$ : la condition se teste localement sur $Z$ ;
+\item (ii) $\Rightarrow$ (iii), par l'argument ci-dessus ; la réciproque vaut
+quand $\mathcal{W}_{A}$ est fortement saturé, une flèche inversible dans
+$\mathrm{Hot}_{A}$ étant alors dans $\mathcal{W}_{A}$ ;
+\item (i) $\Rightarrow$ (ii bis) : dans le carré formé de
+$X \times a \to Y \times a$ et de $X \to Y$, les projections
+$X \times a \to X$, $Y \times a \to Y$ sont dans $\mathcal{W}_{A}$ quand $A$
+est totalement asphérique ; inversement, si $A$ est asphérique, (ii bis)
+appliqué à $a \to e$ donne (i). Donc (i) $\Leftrightarrow$ (ii) $+$ « $A$
+asphérique » ;
+\item (iv) équivaut à l'asphéricité des $a \times b$ : comme
+$(\mathrm{Cat}) \to \mathrm{Hot}$ commute déjà aux produits finis, (iv)
+signifie que $A_{/X \times Y} \to A_{/X} \times A_{/Y}$ est dans $\mathcal{W}$
+pour tous $X$, $Y$ ; pour $X = a$, $Y = b$ c'est l'asphéricité de $a \times b$ ;
+et inversement, pour un objet $\alpha = (a \to X, b \to Y)$ du second membre,
+$(A_{/X \times Y})_{/\alpha} \simeq A_{/a \times b}$, si bien que le foncteur
+est asphérique, donc dans $\mathcal{W}$ ;
+\item (iv bis) $\Leftrightarrow$ (i), le produit vide demandant que
+$A = A_{/e}$ soit asphérique ; et (i) $\Leftrightarrow$ (iv) $+$ « $A$
+asphérique ».
+\end{itemize}
+La page 35 précise que l'implication (i) $\Rightarrow$ (iv) est stricte :
+(iv) est stable par sommes de catégories, (i) ne l'est pas, une somme n'étant
+pas connexe. Une catégorie connexe qui satisfait (ii) est-elle asphérique ?
+\emph{Non} : pour $A$ un groupoïde connexe dont les automorphismes forment un
+groupe $G \neq 1$, et $\mathcal{W} = \mathcal{W}_{0}$ l'équivalence faible
+usuelle, $\mathcal{W}_{A}$ est formé des seuls isomorphismes --- un morphisme
+de $G$-ensembles qui induit une bijection sur les orbites et des isomorphismes
+sur les stabilisateurs est un isomorphisme --- et elle est stable par produits
+finis, alors que $A$, de nerf $BG$, n'est pas asphérique\footnote{La raison
+donnée pour « $\mathcal{W}_{A}$ formé des seuls iso » est la nôtre ; la page
+renvoie à l'équivalence faible « habituelle ».}.
+
+Les produits infinis restent en suspens. Il faudrait savoir qu'un produit de
+flèches de $\mathcal{W}$ est dans $\mathcal{W}$, ou le même énoncé dans un
+$\widehat{A}$, le second impliquant le premier ; « déjà pour l'équiv. faible
+habituelle $\mathcal{W}_{0}$, ce n'est pas évident ». Il suggère de passer
+par l'asphéricité d'un produit infini de catégories asphériques, et juge la
+question « moins importante de toutes façons que la question des sommes
+infinies ».
+
+\pagerange{38}{39}
+\section*{Filtrations (pages 38 et 39)}
+
+\textbf{Théorème.} \emph{Soient $I$ un ensemble ordonné dans lequel toute
+partie non vide a une borne inférieure, et $X$, $Y$ deux catégories munies de
+familles croissantes $(X_{i})_{i \in I}$, $(Y_{i})_{i \in I}$ de
+sous-catégories ouvertes (resp. fermées), avec $X = \bigcup X_{i}$,
+$Y = \bigcup Y_{i}$, et $X_{\inf j_{\alpha}} = \bigcap X_{j_{\alpha}}$, de même
+pour $Y$. Soit $f : X \to Y$ un foncteur tel que $f(X_{i}) \subset Y_{i}$, et
+notons $f_{i} : X_{i} \to Y_{i}$ ses restrictions. Si les $f_{i}$ sont dans
+$\mathcal{W}$, $f$ est dans $\mathcal{W}$.}\footnote{L'énoncé de la page
+suppose seulement $I$ ordonné (« filtrant » est biffé) ; la note marginale
+dit qu'« il suffit » que les bornes inférieures existent et que la
+filtration les respecte, et la démonstration se place d'emblée sous cette
+hypothèse. On l'a mise dans l'énoncé. « ouvertes » est lu avec doute.}
+
+Le cas fermé se ramène au cas ouvert par passage aux catégories
+opposées\footnote{Cela suppose $\mathcal{W} = \mathcal{W}^{\circ}$, la
+rubrique (1) du programme de la page 14, qui n'est pas établie dans le
+dossier. Pour l'équivalence faible usuelle, le nerf de $X^{\circ}$ a la même
+réalisation que celui de $X$, et le point est acquis.}. Dans le cas ouvert, la
+filtration de $X$ est la même chose qu'un foncteur $\varphi : X \to I$ :
+\[
+\varphi(x) = \inf I(x), \qquad I(x) = \{\, i \in I \mid x \in X_{i} \,\},
+\]
+et $\varphi(x)$ est le plus petit élément de $I(x)$, qui est l'ensemble des
+$j \geq \varphi(x)$. Pour une flèche $x \to y$, on a $I(y) \subset I(x)$,
+puisque les $X_{i}$ sont des cribles, donc $\varphi(x) \leq \varphi(y)$ ; et
+$X_{i} = \varphi^{-1}(I_{\leq i})$, c'est-à-dire $x \in X_{i}$ si et seulement
+si $\varphi(x) \leq i$. Il note qu'il faudra expliciter la correspondance
+réciproque : pour un $I$ où les bornes inférieures des parties non vides
+existent, les foncteurs $X \to I$ correspondent aux filtrations croissantes
+$i \mapsto X_{i}$ par des ouverts qui commutent à ces bornes et dont $X$ est
+la réunion --- ce qui équivaut à $\varinjlim X_{i} \simeq X$.
+
+Comme $I$ est un ensemble ordonné, la catégorie $X_{/i}$ relative à $\varphi$
+est exactement $X_{i}$, et de même $Y_{/i} = Y_{i}$ pour le foncteur
+$\psi : Y \to I$ de la filtration de $Y$ ; les $f_{i}$ sont donc les foncteurs
+$f_{/i} : X_{/i} \to Y_{/i}$, et Loc 3 conclut\footnote{La page dit « par
+L 3 ». L'hypothèse $f(X_{i}) \subset Y_{i}$ ne donne que $\psi \circ f \leq
+\varphi$ : le triangle formé de $f$, $\varphi$ et $\psi$ ne commute qu'à une
+transformation naturelle $\psi f \Rightarrow \varphi$ près, et c'est bien
+cette transformation qui définit les $f_{/i}$. Loc 3 sert donc sous une forme
+admettant un tel triangle, que la page ne distingue pas de la forme stricte.
+Si $f^{-1}(Y_{i}) = X_{i}$ pour tout $i$, le triangle commute et la forme
+stricte suffit.}.
+
+\textbf{Corollaire.} \emph{De même dans un $\widehat{A}$, pour
+$\mathcal{W}_{A}$}, puisque $i_{A}$ commute aux limites inductives
+quelconques et aux produits fibrés.
+
+\emph{« Cor ? »} Si les $X_{i}$ sont asphériques et $I$ connexe, $X$ est
+asphérique : on prend $Y_{i} = e$ pour tout $i$\footnote{Le point
+d'interrogation est le sien. Sous l'hypothèse du théorème, $I$, partie non
+vide de lui-même, a un plus petit élément, ce qui le rend connexe, et
+l'énoncé découle alors du théorème. La remarque est nôtre.}.
+
+\pagerange{39}{40}
+\section*{La saturation (pages 39 et 40)}
+
+\textbf{Théorème.} \emph{$\mathcal{W}$ est saturé : un foncteur $f$ tel que
+$\gamma(f)$ soit inversible dans $\mathrm{Hot}$ est dans $\mathcal{W}$.}
+
+\textbf{Corollaire.} \emph{Pour toute $A$, $\mathcal{W}_{A}$ est saturé.}
+
+C'est la rubrique (6) du programme, la saturation « forte »\footnote{Il dit
+seulement « saturé » à la page 39 et « saturation forte » à la page 15 ; le
+sens est celui de la seconde. Le corollaire est énoncé sans démonstration ; il
+découle du théorème en une ligne : si $\gamma_{A}(f)$ est inversible dans
+$\mathrm{Hot}_{A}$, son image par le foncteur $\mathrm{Hot}_{A} \to
+\mathrm{Hot}$ induit par $i_{A}$ l'est, donc $i_{A}(f) \in \mathcal{W}$,
+c'est-à-dire $f \in \mathcal{W}_{A}$. La démonstration est la nôtre.}. Une
+première démonstration, sur la page 39, est barrée de deux longs traits : elle
+partait de $f : X \to Y$ et de $g : Y \to X'$, $f' : X' \to Y'$, avec
+$\gamma(gf) = \gamma(\alpha)$ et $\gamma(f'g) = \gamma(\beta)$ pour
+$\alpha$, $\beta$ dans $\mathcal{W}$, et cherchait à se ramener à
+$gf = \alpha$, $f'g = \beta$ et à des immersions ouvertes.
+
+La page 40 donne la démonstration qui aboutit. Soit $f_{0} : X_{0} \to X_{1}$
+avec $\gamma(f_{0})$ inversible. Par le cylindre de la page 10, on peut
+supposer $f_{0}$ immersion ouverte. Par le calcul des fractions, il existe
+$f_{1} : X_{1} \to X_{2}$ avec $f_{1}f_{0} \in \mathcal{W}$ ; alors
+$\gamma(f_{1})$ est inversible, et l'on peut supposer $f_{1}$ immersion
+ouverte\footnote{Le calcul de fractions invoqué est celui de
+$(\overline{\mathrm{Cat}}, \overline{\mathcal{W}})$, que la marge de la page
+23 étend à (Cat) d'un « itou » et que le dossier n'établit que dans les
+$\widehat{A}$.}. De proche en proche, on obtient une suite d'immersions
+ouvertes
+\[
+X_{0} \xrightarrow{\ f_{0}\ } X_{1} \xrightarrow{\ f_{1}\ } X_{2}
+\xrightarrow{\ f_{2}\ } \cdots
+\]
+dont les composés de deux flèches consécutives sont dans $\mathcal{W}$. Soit
+$X_{\infty} = \varinjlim_{n} X_{n}$, et $i_{n} : X_{n} \to X_{\infty}$ ; on a
+$i_{1}f_{0} = i_{0}$, et il suffit de prouver que $i_{0}$ et $i_{1}$ sont dans
+$\mathcal{W}$. Or $X_{\infty}$ est aussi la limite de la sous-suite
+$X_{0} \to X_{2} \to X_{4} \to \cdots$, dont les flèches sont dans
+$\mathcal{W}$, et $i_{0}$ est la limite des $X_{0} \to X_{2n}$, qui sont dans
+$\mathcal{W}$ : « donc on gagne !! » ; de même pour $i_{1}$, en partant de
+$f_{1}$. Le passage à la limite est le théorème des filtrations des pages 38
+et 39, appliqué à $I = \mathbf{N}$, à la filtration constante de $X_{0}$ et à
+la filtration de $X_{\infty}$ par les ouverts $X_{2n}$\footnote{La page ne
+dit pas ce qui justifie le passage à la limite ; le renvoi au théorème des
+pages 38 et 39 est le nôtre. Ici le triangle est strict, $X_{0}$ étant
+envoyé dans chaque $X_{2n}$, et la forme stricte de Loc 3 suffit. Une phrase
+entre crochets, « [Il suffit] bien sûr … », est en partie illisible.}.
+
+\end{document}
