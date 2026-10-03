@@ -70,8 +70,13 @@ export function useReader(cotes: Cote[]) {
     const readHash = () => {
       // An optional /p<N> names a page to land on (the galleries link so);
       // TranscriptPane reads it, and the batch is what opens.
-      const h = /^#([\w-]+)\/(\d+)(?:\/(fr|modern|community|tei))?(?:\/p[\w-]+)?$/.exec(location.hash);
+      const h = /^#([\w-]+)\/(\d+)(?:\/(fr|modern|community|tei))?(?:\/p([\w-]+))?$/.exec(location.hash);
       setOpen(h ? { cote: h[1], batch: Number(h[2]) } : null);
+      // The page is also the facsimile's: a cited link (#19/1/p8) must open the
+      // facsimile at that page even when no transcript is published to scroll
+      // there and report it, as when the transcriptions are switched off (#31).
+      const p = h?.[4] ? Number.parseInt(h[4], 10) : Number.NaN;
+      setPage(Number.isFinite(p) ? p : undefined);
       // Only when the fragment says so: leaving it alone otherwise is what
       // keeps the toggle where the reader put it as they move between batches.
       if (h?.[3]) setEdition(h[3] as PaneView);
