@@ -1,0 +1,957 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 60, pages 1-69.
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried — a doubtful
+% reading, a notation he used differently, a missing passage — moves into a
+% footnote.
+%
+% It is held to being mathematically correct as it stands, not merely faithful
+% to the page. Where the manuscript is loose or mistaken, the true statement is
+% what appears here, and the footnote says what the page has. In any dispute of
+% substance the transcription governs: whoever cites Grothendieck must cite the
+% batch-NN.fr.tex files.
+%
+% Scope: the folder was read WHOLE before any of this was written — all four
+% batches, pages 1-69 (thirty-four rectos in his hand, the versos being typed
+% Bourbaki material skipped by the transcription) — and it is written as ONE
+% file for the whole shelfmark.
+%
+% Notation fixed for the whole folder (spine section): F for Frobenius (his f,
+% which he also uses for the structural morphism f : X -> Spec F_p — f is kept
+% for the morphism only); r for the rank of a sheaf on a point (his n on p. 8,
+% where n later is dim X); q = p^{n+rho} (q = p^{1+rho} for a curve);
+% eps(E) := delta(E) q^{-chi(E)/2} throughout, and sgn(E) for the product of
+% virtual signs of p. 22, which he also calls eps(E); m_+ , m_- for the
+% multiplicities he writes eps_1, eps_{-1} (p. 16); on a curve, X° for the
+% open set and u : X° -> X (his U and i), I_1 subset I_2 for his subgroups
+% V subset U (pp. 38-46); L^natural_{E_eta} := L_{E_eta^natural}; delta_x,
+% chi_x are taken after pushing forward to Spec F_p.
+%
+% Substantive departures from the pages, each footnoted where it occurs:
+%   - p. 12: in (2) the exponent of (-p^{(n+rho)/2}/t) is +chi(E), not
+%     -chi(E); (3), which he derives from it, is right; also the page's
+%     « 2n Σ_{i<n} » is correct (the transcription's line has n);
+%   - p. 24: D R_infty f(E) = R_infty f(DE)[-1] (his « 1 ou -1 ! »), and
+%     [2n-1] rather than [1] once DE = E(n+rho)[2n] is substituted; the
+%     parity, which is all the L-function sees, is unchanged;
+%   - p. 26: eps(E) = delta'(E)^{-1} q^{chi/2}, not delta'(E) q^{-chi/2};
+%   - p. 30: q = p^{n+rho}, not p^{n rho};
+%   - p. 32 and p. 48: the shifts [2] are dropped on the page (even, harmless);
+%   - p. 52: the local factors enter as lambda_x(qt) (lambda_x(pt) before the
+%     weight substitution), the page writes lambda_x(E) with no argument;
+%   - pp. 48-58: mu_x(E) is in fact zero for every E (proof given in the
+%     body, ours); so D(E^natural) = (E-check)^natural(1) in the Grothendieck
+%     group, lambda_x = 1, and the « ?? » of p. 52 is answered: yes;
+%   - p. 22: « eps_i = +1 for i odd » and « i beta_i / 2 integer » need an
+%     alternating Frobenius-compatible pairing on the odd-weight pieces (a
+%     polarisation), not merely Weil's conjectures; stated under it;
+%   - p. 8 and throughout: eps(E) = ±1 needs rational (or real)
+%     characteristic polynomials; stated as a hypothesis.
+%
+% Announced and never established: the term of « type <= tau + (n-1) » of
+% p. 20 (« type » is never defined); problems a), b), c) of p. 54 (only c) is
+% reduced to b), p. 58); the identification of p. 60, left on a dash; the
+% general case of pp. 62-68, abandoned at n = 1.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-04 — first pass, unchecked
+% against the pages by a human.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{60}
+\pages{1}{69}
+\dating{[à partir de 1962- à partir de 1971]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Fonctions L / Équation fonctionnelle des fonctions L (cas géométrique) : notes manuscrites (s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+La chemise porte, de sa main, « Notes sur l'équation fonctionnelle ». Ce sont
+trente-quatre feuillets de brouillon, écrits au dos de tirages dactylographiés
+de Bourbaki, qui cherchent à comprendre d'où vient la symétrie d'une
+\emph{fonction~$L$} et ce qu'elle coûte quand les choses ne sont pas parfaites.
+
+Une fonction $L$ est une série qui compte. On se donne une variété $X$ définie
+sur un corps fini $\mathbb{F}_p$ --- un système d'équations polynomiales à
+coefficients modulo $p$ --- et, en chacun de ses points, un peu d'algèbre
+linéaire (un « faisceau » $E$) ; on fabrique une série $L_E(t)$ qui enregistre
+cette algèbre linéaire point par point. Depuis Weil, on sait que ces séries
+sont des fractions rationnelles et l'on s'attend à ce qu'elles soient
+\emph{symétriques} : changer $t$ en $1/(qt)$, pour un certain nombre $q$,
+redonne la même fonction, à un facteur simple près. C'est l'\emph{équation
+fonctionnelle}, et le facteur, un signe et une puissance, est ce qu'on veut
+connaître.
+
+D'où vient la symétrie ? L'image est celle d'un miroir. La série $L_E$ se lit
+sur la cohomologie de $X$ à coefficients dans $E$, et la dualité de Poincaré
+dit que la cohomologie en degré $i$ est le reflet, retourné, de celle en
+degré $2n-i$. Retourner un espace vectoriel, c'est inverser les valeurs propres
+de ce qui agit dessus ; inverser les valeurs propres, c'est changer $t$ en
+$1/t$ dans un polynôme caractéristique. Le premier tiers du dossier met cette
+image en équations, avec soin : ce que devient le polynôme caractéristique
+d'un dual (pages 2 à 6), ce que donne le miroir quand $X$ est propre et lisse
+(pages 8 à 16), et le signe qui reste, qu'on sait déterminer quand
+$n + \rho$ est impair et seulement en partie sinon.
+
+Puis le miroir se fêle. Si $X$ n'est pas complète, il lui manque un bord, et
+la symétrie ne tient plus qu'à un facteur près, porté par ce bord --- la
+« cohomologie à l'infini » ; les pages 18 à 30 calculent ce facteur et
+montrent qu'il vérifie à son tour sa propre équation fonctionnelle. Si $X$ est
+une courbe et que $E$ n'est donné qu'au point générique, ce sont les points de
+\emph{ramification} qui gâtent tout, et pire : la fonction $L$ naïve n'est même
+pas additive. Les pages 32 à 58 inventent, pour réparer cela, une opération de
+\emph{moyenne} sur le groupe d'inertie, notée $E \mapsto E^{\natural}$, qui
+rend la fonction $L$ additive et locale, et calculent sa dualité. Cette lecture
+montre en note que les termes correctifs qu'il y trouve sont en fait nuls, ce
+qui répond par l'affirmative à la question qu'il laisse avec deux points
+d'interrogation page 52. Enfin, pages 62 à 68, une réflexion abstraite :
+étant donnée une équation $L(1/qt) = A(t)L(t)$, peut-on corriger $L$ par un
+facteur « de niveau inférieur » pour que $A$ devienne une constante ?
+
+Le ton est celui du travail en train de se faire : « $1$ ou $-1$ ! » en marge
+d'un décalage, « Ceci n'est pas encore satisfaisant », « il vaut sans doute
+mieux ne pas faire ce changement », un « ?? » encadré d'une flèche, et, page 28,
+une vérification de cohérence faite pour elle-même --- substituer deux fois, et
+retrouver l'équation du bord. Les conjectures de Weil y sont des hypothèses,
+« en admettant la résolution des singularités … et les conjectures de Weil ».
+
+Les noms à chercher ensuite : formule des traces de Grothendieck--Lefschetz,
+dualité de Verdier, conjectures de Weil et leur démonstration par Deligne,
+signe de l'équation fonctionnelle, formule de Grothendieck--Ogg--Chafarevitch,
+théorème de monodromie $\ell$-adique, représentations de Weil--Deligne,
+constantes locales.
+
+\keywords{L-function of an l-adic sheaf, functional equation, Grothendieck--Lefschetz trace formula, Verdier duality, Poincaré duality, Weil conjectures, root number, big Witt vectors, lambda-ring, boundary cohomology, cohomology at infinity, Grothendieck--Ogg--Shafarevich formula, l-adic monodromy theorem, quasi-unipotent inertia, Weil--Deligne representation, local duality, Hilbert's Theorem 90}
+\end{resume}
+
+\section*{Le fil du dossier, et les conventions}
+
+\pagerange{1}{1}
+\subsection*{Les stations}
+
+\begin{itemize}
+  \item \textbf{Page 1} --- la chemise, « Notes sur l'équation fonctionnelle ».
+  \item \textbf{Pages 2 à 6} --- algèbre linéaire : $P_F(t) = \det(1 - Ft)$,
+    son comportement sous $\otimes$, $\lambda^i$, $\mathrm{Sym}^i$ et sous la
+    contragrédiente.
+  \item \textbf{Pages 8 à 10} --- un faisceau sur un point : poids,
+    autodualité $\check E \simeq E(\rho)$, équation fonctionnelle de $L_E$.
+  \item \textbf{Pages 10 à 16} --- $X$ propre : dualité globale, l'équation
+    (1) en général, puis (2), (3) et le signe $\varepsilon'(E)$ quand $X$ est
+    propre et lisse et $E$ autodual.
+  \item \textbf{Pages 18 à 30} --- $X$ lisse non nécessairement complète : le
+    facteur $A(t)$ venu de l'infini, la décomposition par poids (page 22),
+    l'équation fonctionnelle du terme à l'infini (pages 24 et 26), une liste
+    d'invariants arithmétiques (page 26), une vérification (pages 28 et 30).
+  \item \textbf{Pages 32 à 36} --- une courbe, un faisceau au point
+    générique ; la fonction $L^{*}$ et son défaut d'additivité.
+  \item \textbf{Pages 38 à 46} --- « Suite de la remarque » : la moyenne
+    $E \mapsto E^{\natural}$ sur l'inertie, sa formule de trace, et le
+    faisceau virtuel $E_\eta^{\natural}$.
+  \item \textbf{Pages 48 à 58} --- la dualité de $E_\eta^{\natural}$, les
+    termes locaux $\alpha_x$, $\mu_x$, l'équation fonctionnelle qui en résulte,
+    trois problèmes, et la réduction du troisième au deuxième.
+  \item \textbf{Page 60} --- « Cohomologie à l'infini » : la suite exacte longue
+    et deux triangles.
+  \item \textbf{Pages 62 à 68} --- simplifier une équation fonctionnelle par un
+    facteur de « niveau » inférieur ; le cas $n = 1$, commencé.
+\end{itemize}
+
+Le dossier est un seul mouvement, du plus simple au plus abîmé : un point,
+puis $X$ propre et lisse, puis $X$ ouverte, puis une courbe ramifiée. La
+page 60 revient en arrière sur la cohomologie à l'infini des pages 18 à 26, et
+les pages 62 à 68 reprennent l'équation des pages 52 à 54 sous forme abstraite.
+Aucune page ne porte de numérotation de sa main ; l'ordre est celui des
+archivistes.\footnote{Les versos (pages impaires 3 à 69) sont des tirages de
+rédactions de Bourbaki, sans rien de sa main ; la transcription les saute
+sans les décrire et cette lecture fait de même. Ils donnent une borne
+inférieure à la date d'écriture, que l'inventaire de Montpellier fixe à
+« [à partir de 1962 -- à partir de 1971] ».}
+
+\subsection*{Les conventions, valables pour tout le dossier}
+
+$p$ est premier, $\ell \neq p$, et les faisceaux sont des
+$\mathbb{Q}_\ell$-faisceaux constructibles (ou des complexes de tels
+faisceaux). On note $F$ le Frobenius \emph{géométrique}, qui agit par $p^{-1}$
+sur $\mathbb{Q}_\ell(1)$ : c'est la convention de la page 8, où
+$L_{\mathbb{Q}_\ell(\rho)}(t) = (1 - p^{-\rho}t)^{-1}$.\footnote{La page note
+le Frobenius $f$, et note aussi $f$ le morphisme structural
+$X \to \operatorname{Spec}\mathbb{F}_p$ ; on réserve $f$ au morphisme
+($Rf_{*}$, $Rf_{!}$) et l'on écrit $F$ pour le Frobenius.} Pour un
+endomorphisme $F$ d'un espace de dimension finie,
+$P_F(t) = \det(1 - Ft)$ ; pour un complexe $K$ sur
+$\operatorname{Spec}\mathbb{F}_p$,
+\[
+  \begin{gathered}
+  L_K(t) = \prod_i \det\bigl(1 - Ft \mid H^i(K)\bigr)^{(-1)^{i+1}},\\
+  \chi(K) = \sum_i (-1)^i \dim H^i(K),\qquad
+  \delta(K) = \prod_i \bigl(\det F \mid H^i(K)\bigr)^{(-1)^i}.
+  \end{gathered}
+\]
+Pour $f : X \to \operatorname{Spec}\mathbb{F}_p$ et $E$ sur $X$, on pose
+$L_E = L_{Rf_{!}E}$, $\chi(E) = \chi(Rf_{!}E)$, $\delta(E) = \delta(Rf_{!}E)$
+: par la formule des traces de Grothendieck, $L_E$ est le produit eulérien
+$\prod_x \det(1 - F_x t^{\deg x} \mid E_{\bar x})^{-1}$.\footnote{Le dossier
+emploie $L_E$ sans le définir, et passe librement du produit eulérien à
+l'expression cohomologique : c'est la formule des traces de Grothendieck
+(exposé Bourbaki n° 279, 1964 ; SGA~5 et SGA~4½). Le nom de « formule des
+traces de Grothendieck--Lefschetz » est postérieur.} La dualité $D$ est celle
+de Verdier, $DK = R\mathcal{H}om(K, Rf^{!}\mathbb{Q}_\ell)$ ; sur un point,
+c'est le dual linéaire. $\check E$ est la contragrédiente (il écrit $E$ surmonté
+d'un háček).
+
+$n = \dim X$ ; le rang d'un faisceau sur un point s'écrit $r$.\footnote{Page 8,
+la page écrit $n$ pour le rang ; dès la page 10, $n$ est la dimension de $X$.
+On sépare les deux.} Quand $E$ est de poids $\rho$, on pose
+\[
+  \begin{gathered}
+  q = p^{\,n+\rho} \quad (\text{donc } q = p^{1+\rho} \text{ pour une courbe}),\\
+  \varepsilon(E) = \delta(E)\, q^{-\chi(E)/2},
+  \qquad \varepsilon'(E) = (-1)^{\chi(E)}\varepsilon(E),
+  \end{gathered}
+\]
+et l'on garde la racine carrée positive de $q$.\footnote{La lettre
+$\varepsilon$ sert dans le dossier à trois choses : la dimension
+$\varepsilon(f)$ (page 6), la caractéristique d'Euler d'un complexe (pages 20
+et 26), et un « signe » qui n'a pas toujours la même définition --- le signe
+de $\det F$ sur $H^n$ (pages 8 à 16), le produit des signes de déterminants
+virtuels (page 22), le quotient $\delta(E)q^{-\chi(E)/2}$ (pages 26 à 30). Les
+trois dernières coïncident quand $X$ est propre et lisse et $E$ autodual ; en
+général non (voir la note de la page 22). On écrit $r$ et $\chi$ pour les deux
+premières, $\varepsilon(E)$ pour la dernière seulement, et
+$\operatorname{sgn}(E)$ pour celle de la page 22.}
+
+Une hypothèse court sous tout le dossier sans être écrite : pour que
+$\varepsilon(E)$ soit un \emph{signe}, il faut que les polynômes
+caractéristiques en jeu soient à coefficients rationnels (ou au moins réels) ---
+ce que la page 8 appelle un \emph{motif}. Pour un $\mathbb{Q}_\ell$-faisceau
+quelconque, pur de poids $\rho$, $\varepsilon(E)$ est seulement un nombre
+algébrique dont tous les conjugués complexes sont de module~$1$. On le dit
+une fois ici ; partout où l'on écrit $\varepsilon = \pm 1$, c'est sous cette
+hypothèse.
+
+\pagerange{2}{6}
+\section*{1. Le polynôme caractéristique (pages 2 à 6)}
+
+Soit $F$ un endomorphisme d'un espace $V$ de dimension $r$ sur un corps $k$,
+de valeurs propres $\lambda_1, \dots, \lambda_r$ dans une clôture algébrique.
+Alors
+\[
+  P_F(t) = \det(1 - Ft) = \prod_i (1 - \lambda_i t)
+         = \sum_i (-1)^i \operatorname{Tr}\bigl(\Lambda^i F\bigr)\, t^i,
+  \qquad
+  \frac{1}{P_F(t)} = \sum_{\nu \ge 0} \operatorname{Tr}\bigl(\mathrm{Sym}^\nu F\bigr)\, t^\nu ,
+\]
+et les racines de $P_F$ sont les inverses des valeurs propres non nulles. $P_F$
+est multiplicatif dans les suites exactes : c'est un invariant « additif » de
+$V$, à valeurs dans le groupe multiplicatif $1 + t\,k[[t]]$.\footnote{En bas de
+la page 2, un petit schéma de trois rangées d'indices ($\rho - 1, \rho,
+\rho + 1$ ; $-2, -1, 0$ ; …) reliées par des ovales ; la page ne dit pas à
+quoi il sert, et cette lecture ne l'interprète pas.}
+
+Ce groupe porte une seconde loi, $*$, déterminée par
+$(1 - at) * (1 - bt) = 1 - abt$ et la distributivité par rapport au produit
+ordinaire : c'est l'anneau des \emph{grands vecteurs de Witt}, dans lequel
+l'« addition » est le produit des séries.\footnote{Le nom n'est pas sur la
+page ; la structure, oui, avec « la » $\lambda$-structure qui suit.} Alors,
+avec $L_F = 1/P_F$,
+\[
+  P_{F \otimes F'} = P_F * P_{F'}, \qquad
+  L_{F \otimes F'} = \bigl(L_F * L_{F'}\bigr)^{-1}, \qquad
+  L_{F_1 \otimes \cdots \otimes F_\nu} = \bigl(L_{F_1} * \cdots * L_{F_\nu}\bigr)^{(-1)^{\nu+1}},
+\]
+la dernière formule résultant de ce que $L_F$ est l'opposé de $P_F$ pour
+l'addition de Witt.\footnote{Le produit de la dernière formule est tracé
+comme un $\prod$ ; c'est le produit $*$, seul à donner une formule juste.}
+Pour la $\lambda$-structure, où $\lambda^j$ envoie $\prod(1 - \lambda_i t)$ sur
+$\prod_{i_1 < \cdots < i_j}(1 - \lambda_{i_1}\cdots\lambda_{i_j}t)$, on a
+$P_{\Lambda^j F} = \lambda^j(P_F)$, et la relation $\lambda^j(-x) =
+(-1)^j\sigma^j(x)$, valable dans tout $\lambda$-anneau, donne
+\[
+  L_{\Lambda^j F}(t) = \bigl(\sigma^j L_F(t)\bigr)^{(-1)^{j+1}}, \qquad
+  L_{\mathrm{Sym}^j F}(t) = \bigl(\lambda^j L_F(t)\bigr)^{(-1)^{j+1}} .
+\]
+\footnote{La page passe par une identité de séries génératrices en $s$ dont
+une ligne est biffée et un facteur $(-1)^i$ surchargé ; on donne le résultat
+encadré, qu'on a vérifié directement.}
+
+Si $F$ est un automorphisme,
+$P_{\check F}(t) = \prod(1 - \lambda_i^{-1}t) = (-t)^r(\det F)^{-1}P_F(t^{-1})$,
+c'est-à-dire
+\[
+  P_{\check F}(t) = (-t)^{r}\,(\det F)^{-1}\,P_F(t^{-1}), \qquad
+  L_{\check F}(t) = (-t)^{-r}\,\det F\; L_F(t^{-1}) .
+\]
+\footnote{Le signe $-$ de l'exposant de la seconde formule est douteux sur la
+page ; il est juste. L'exposant y est noté $\varepsilon(f)$, la dimension.}
+Il insiste : $t \mapsto t^{-1}$ n'a de sens que sur les séries qui viennent de
+polynômes (de terme constant $1$, et de terme dominant inversible si $k$ est
+un anneau) --- sur les fractions rationnelles, pas sur $1 + t\,k[[t]]$.
+
+\pagerange{8}{10}
+\section*{2. Un faisceau sur un point (pages 8 et 10)}
+
+Soit $E$ un $\mathbb{Q}_\ell$-faisceau sur $\operatorname{Spec}\mathbb{F}_p$,
+c'est-à-dire un espace de dimension $r$ muni de $F$. La section précédente donne
+$L_{\check E}(t) = (-t)^{-r}\det F_E\,L_E(t^{-1})$. Supposons $E$ \emph{pur de
+poids $\rho$} --- toutes les valeurs propres de $F$ de module $p^{\rho/2}$ dans
+tout plongement complexe --- et à polynôme caractéristique rationnel. Alors
+$\det F_E$ est un rationnel de module $p^{r\rho/2}$, donc
+\[
+  \det F_E = \varepsilon(E)\, p^{r\rho/2}, \qquad \varepsilon(E) = \pm 1,
+\]
+et $r\rho$ est pair : si $\rho$ est impair, $r$ est pair.\footnote{La
+page dit « s'il s'agit d'un \emph{motif} satisfaisant aux conj.\ de Weil » ;
+c'est la rationalité du polynôme caractéristique qui donne $\varepsilon = \pm 1$
+et la parité, le poids seul ne suffit pas. Les mots qui suivent « dépendant du
+motif $\Lambda^r E$ » ne se lisent pas.}
+
+D'autre part $\check E$ et $E(\rho)$ ont les mêmes valeurs propres : celles de
+$\check E$ sont les $\lambda_i^{-1} = \bar\lambda_i\,p^{-\rho}$, celles de
+$E(\rho)$ les $\lambda_i p^{-\rho}$, et le multiensemble des $\lambda_i$ est
+stable par conjugaison dès que $P_E$ est réel. On écrit
+$\check E \simeq E(\rho)$ ; au niveau des fonctions $L$, c'est
+exactement ce qui sert.\footnote{La page écrit $\check E \simeq E(\rho)$ « par
+dualité ». Comme isomorphisme de faisceaux, cela demande un accouplement
+$E \otimes E \to \mathbb{Q}_\ell(-\rho)$ parfait et compatible à $F$ ; pour les
+fonctions $L$, l'égalité des polynômes caractéristiques suffit, et c'est elle
+qu'on vient d'établir.} Ainsi
+$L_{\check E}(t) = L_E(p^{-\rho}t)$,\footnote{La page le calcule par la loi $*$ :
+$L_{E(\rho)} = (L_E * L_{\mathbb{Q}_\ell(\rho)})^{-1} = L_E * (1 - p^{-\rho}t)$.}
+et en comparant,
+\[
+  L_E\Bigl(\frac{1}{p^{\rho}t}\Bigr) = \det F_E\,(-t)^{r}\,L_E(t)
+  = \varepsilon(E)\bigl(-p^{\rho/2}t\bigr)^{r} L_E(t) .
+\]
+C'est le modèle de tout le dossier : la dualité donne $L_{\check E}$ en fonction
+de $L_E(1/t)$, le poids donne $L_{\check E}$ en fonction de $L_E(t/p^\rho)$, et
+l'équation fonctionnelle est leur rencontre.
+
+\pagerange{10}{16}
+\section*{3. Variété propre : l'équation fonctionnelle (pages 10 à 16)}
+
+\subsection*{L'équation générale}
+
+Soit $X$ propre sur $\mathbb{F}_p$ et $E$ constructible sur $X$. Le théorème de
+dualité globale donne $H^i(\bar X, DE) \simeq H^{-i}(\bar X, E)^{\vee}$,
+c'est-à-dire $Rf_{*}(DE) = D(Rf_{*}E)$. Appliquant la formule du dual de la
+section~1 à chaque $H^i$ :
+\[
+  \text{(1)}\qquad
+  L_{DE}(t) = (-t)^{-\chi(E)}\,\delta(E)\,L_E(t^{-1}),
+\]
+avec $\chi(E) = \sum (-1)^i b_i$, $b_i = \dim H^i(\bar X, E)$, \emph{invariant
+géométrique}, et $\delta(E) = \prod_i (\det F \mid H^i(\bar X, E))^{(-1)^i}$,
+\emph{invariant arithmétique} --- les deux mots sont dans la marge. Si de plus
+$X$ est propre et lisse et $E$ lisse et pur de poids $\rho$, chaque
+$H^i(\bar X, E)$ est pur de poids $i + \rho$, d'où
+\[
+  \delta(E) = \varepsilon(E)\, p^{\sum_i (-1)^i \frac{i+\rho}{2} b_i} .
+\]
+\footnote{Le numérateur $i + \rho$ est surchargé sur la page ; c'est bien le
+poids de $H^i$. La pureté de $H^i(\bar X, E)$ est ce que la marge attribue
+aux « conjectures standard » ; elle est démontrée depuis Deligne, \emph{La
+conjecture de Weil}~I (1974) pour $E = \mathbb{Q}_\ell$ et II (1980) en
+général. Le dossier la suppose, sans la tenir pour acquise. La page écrit tantôt
+$E$, tantôt $F$, pour le même faisceau.}
+
+\subsection*{Le cas favorable}
+
+Supposons maintenant $X$ propre, lisse, purement de dimension $n$, $E$ lisse,
+pur de poids $\rho$, et $\check E \simeq E(\rho)$ \emph{globalement sur $X$}.
+La dualité de Poincaré donne $b_i = b_{2n-i}$, et
+\[
+  \sum_{i=0}^{2n} (-1)^i i\,b_i
+  = 2n\sum_{i=0}^{n-1}(-1)^i b_i + (-1)^n n\,b_n = n\,\chi(E),
+  \qquad\text{d'où}\qquad
+  \delta(E) = \varepsilon(E)\,q^{\chi(E)/2} .
+\]
+\footnote{La page écrit bien $2n\sum_{i=0}^{n-1}$, et c'est juste (les termes
+$i$ et $2n - i$ donnent ensemble $(-1)^i\,2n\,b_i$) ; la ligne de la
+transcription, avec $n$, est à corriger.} Ici $\varepsilon(E) = \pm 1$, et
+c'est le $\varepsilon(E) = \delta(E)q^{-\chi(E)/2}$ des conventions. L'équation (1)
+devient
+\[
+  \text{(2)}\qquad
+  L_{DE}(t) = \varepsilon(E)\Bigl(-\frac{q^{1/2}}{t}\Bigr)^{\chi(E)} L_E(t^{-1}) .
+\]
+\footnote{La page écrit l'exposant $-\chi(E)$. C'est un lapsus : de (1),
+$(-t)^{-\chi}\varepsilon\,q^{\chi/2} = \varepsilon(-q^{1/2}/t)^{\chi}$, et
+c'est avec $+\chi(E)$ que (2) donne (3), que la page écrit correctement.}
+Or $DE \simeq \check E(n)[2n] \simeq E(n + \rho)[2n]$, d'où
+$Rf_{*}(DE) \simeq Rf_{*}(E)(n + \rho)[2n]$ et, le décalage étant pair,
+$L_{DE}(t) = L_E(t/q)$.\footnote{La page note en marge qu'il suffit que
+$\check E \simeq E(\rho)$ hors d'un fermé de $X$ ; la fin de la phrase ne se
+lit pas, et l'on n'en fait pas usage.} Portant dans (2) et changeant $t$ en
+$t^{-1}$ :
+\[
+  \begin{gathered}
+  \text{(3)}\qquad
+  L_E\Bigl(\frac{1}{qt}\Bigr) = \varepsilon(E)\bigl(-q^{1/2}t\bigr)^{\chi(E)}L_E(t),\\
+  \xi_E(t) = t^{\chi(E)/2}L_E(t), \qquad
+  \xi_E\Bigl(\frac{1}{qt}\Bigr) = \varepsilon'(E)\,\xi_E(t),
+  \end{gathered}
+\]
+avec $\varepsilon'(E) = (-1)^{\chi(E)}\varepsilon(E) = \pm 1$.
+
+\subsection*{Le signe}
+
+La dualité de Poincaré met $H^i(\bar X, E)$ et $H^{2n-i}(\bar X, E)(\rho)$ en
+dualité à valeurs dans $\mathbb{Q}_\ell(-n)$ ; les déterminants de $F$ sur
+$H^i$ et $H^{2n-i}$ ont donc même signe, les facteurs se compensent deux à
+deux dans $\delta(E)$, et
+\[
+  \begin{gathered}
+  \varepsilon(E) = \operatorname{sgn}\det\bigl(F \mid H^n(\bar X, E)\bigr),
+  \qquad (-1)^{\chi(E)} = (-1)^{b_n},\\
+  \varepsilon'(E) = (-1)^{b_n}\operatorname{sgn}\det\bigl(F \mid H^n(\bar X, E)\bigr).
+  \end{gathered}
+\]
+
+\emph{Si $n + \rho$ est impair.} Supposons l'autodualité de $E$ donnée par un
+accouplement $(-1)^\rho$-symétrique, comme pour la cohomologie de degré $\rho$
+d'une variété.\footnote{Hypothèse implicite : la page invoque une « forme
+alternée non dégénérée invariante » sans dire d'où vient son alternance.}
+L'accouplement de Poincaré sur $H^n(\bar X, E)$ est alors alterné et non
+dégénéré, et $F$ le multiplie par $q$ : $b_n$ est pair, et le déterminant d'une
+similitude symplectique de multiplicateur $q$ vaut $q^{b_n/2} > 0$. Donc
+$\varepsilon'(E) = 1$.\footnote{Il attribue l'argument, semble-t-il, à
+Serre ; le nom est d'une lecture incertaine et l'on ne s'appuie pas dessus.}
+
+\emph{Si $n + \rho$ est pair}, le signe n'est pas déterminé en général. Les
+valeurs propres de $F$ sur $H^n$ non réelles vont par paires conjuguées de
+produit $q > 0$ ; les réelles sont $\pm q^{1/2}$. Soit $m_{+}$, $m_{-}$ leurs
+multiplicités. Alors $(-1)^{b_n} = (-1)^{m_{+} + m_{-}}$,
+$\varepsilon(E) = (-1)^{m_{-}}$, et
+\[
+  \varepsilon'(E) = (-1)^{m_{+}} .
+\]
+\footnote{La page note $\varepsilon_1$, $\varepsilon_{-1}$ « la multiplicité de
+la valeur propre $1$ ($-1$) de $f$ » : il faut l'entendre du Frobenius
+normalisé $q^{-1/2}F$, entier ici puisque $n + \rho$ est pair. On renomme
+$m_{\pm}$ pour ne pas confondre avec les signes $\varepsilon_i$ de la page 22.}
+
+Hors du cas favorable, $DE$ ne s'exprime plus simplement en fonction de $E$ et
+(1) relie deux fonctions, $L_{DE}$ et $L_E$, plutôt qu'une seule à elle-même.
+
+\pagerange{18}{30}
+\section*{4. Variété non complète : le terme à l'infini (pages 18 à 30)}
+
+\subsection*{Le facteur $A(t)$}
+
+Soit $X$ lisse, purement de dimension $n$, $E$ lisse sur $X$, pur de poids
+$\rho$, avec $\check E \simeq E(\rho)$, et
+$f : X \to \operatorname{Spec}\mathbb{F}_p$ compactifiable. La dualité
+s'écrit maintenant $D\,Rf_{!}(E) = Rf_{*}(DE) \simeq Rf_{*}(E)(n + \rho)[2n]$.
+Notons $Rf_{\infty}(E)$ le troisième sommet du triangle
+$Rf_{!}E \to Rf_{*}E \to Rf_{\infty}E \to$, la « cohomologie à l'infini » que la
+page 60 construira, et $L^{\infty}_E = L_{Rf_{\infty}E}$ ; dans le groupe de
+Grothendieck, $[Rf_{*}E] = [Rf_{!}E] + [Rf_{\infty}E]$.\footnote{La lecture de
+l'indice $\infty$ est celle de la page ; la page 24 écrit
+$R_\infty f$ et $R^{*}_\infty f$ pour le même objet.} Les fonctions $L$ des deux
+membres de la dualité donnent
+$(-t)^{-\chi(E)}\delta(E)L_E(1/t) = L_E(t/q)\,L^{\infty}_E(t/q)$, c'est-à-dire
+\[
+  L_E\Bigl(\frac{1}{qt}\Bigr) = A(t)\,\delta(E)\,(-t)^{\chi(E)}\,L_E(t),
+  \qquad A(t) = L^{\infty}_E\Bigl(\frac{1}{qt}\Bigr)^{-1},
+\]
+où $\chi$ et $\delta$ sont ceux de $Rf_{!}E$ ; si $X$ est complète,
+$A = 1$.\footnote{Un encadré précise : « en admettant la résolution des
+singularités … et les conjectures de Weil ».} Il ajoute que $L^{\infty}_E$ est
+de poids $\le \rho + 2n$ et de « type » $\le \tau + (n - 1)$, $\tau$ étant le
+type de $E$.\footnote{Le « type » n'est défini nulle part dans le dossier, et
+l'on ne sait pas ce que cette borne affirme. La borne de poids est cohérente
+avec ce qu'on sait aujourd'hui (les poids de $H^i$ d'une variété lisse de
+dimension $n$ sont $\le 2n$) ; le dossier ne la démontre pas.}
+
+Les deux membres de la dualité donnent aussi
+$\chi(Rf_{*}E) = \chi(Rf_{!}E)$ --- le décalage $[2n]$ est pair --- et
+$\delta(Rf_{!}E) = \delta(D\,Rf_{!}E)^{-1}$, d'où
+\[
+  \delta(E) = q^{\chi(E)}\,\delta(Rf_{*}E)^{-1},
+  \qquad\text{et, si $X$ est complète,}\qquad \delta(E)^2 = q^{\chi(E)},
+\]
+« ce qui est bien compatible avec les conjectures de Weil sur les valeurs
+absolues des valeurs propres ».\footnote{La page écrit
+« $\chi(E) = \varepsilon(Rf_{!}E) = \varepsilon(D\,Rf_{!}E)$ » : son
+$\varepsilon$ est ici la caractéristique d'Euler. L'égalité
+$\chi(Rf_{*}E) = \chi(Rf_{!}E)$, qu'on tire ici de l'autodualité, est vraie
+pour tout faisceau constructible : c'est le théorème de Laumon (1981).}
+
+\pagerange{22}{22}
+\subsection*{Décomposition par poids}
+
+Page 22, pour un « motif » $E$ : décomposons la classe de $Rf_{!}E$ selon les
+poids, $[Rf_{!}E] = \sum_i (-1)^i [h^i_{!}(E)]$ où $h^i_{!}(E)$ est la partie
+virtuelle de poids $i$ et $\beta_i(E)$ son rang (« nombres de Betti
+virtuels »). Alors $\chi(E) = \sum (-1)^i\beta_i(E)$ et
+$\delta(h^i_{!}) = \varepsilon_i\,p^{i\beta_i/2}$, d'où
+\[
+  \delta(E) = \operatorname{sgn}(E)\,p^{\frac12\sum_i (-1)^i i\,\beta_i(E)},
+  \qquad \operatorname{sgn}(E) = \prod_i \varepsilon_i(E) = \pm 1 .
+\]
+La page affirme que $i\beta_i/2$ est entier et $\varepsilon_i = +1$ pour $i$
+impair. C'est vrai si chaque morceau de poids impair porte un accouplement
+alterné non dégénéré que $F$ multiplie par $p^i$ --- ce que donne une
+polarisation, et l'argument de la section~3 ; ce n'est pas une conséquence
+des seules conjectures de Weil, ni de la rationalité.\footnote{Hypothèse
+implicite, ajoutée. La page écrit « $\varepsilon(E)$ » pour ce produit de
+signes ; on le note $\operatorname{sgn}(E)$, parce que la page 26 appelle
+$\varepsilon(E)$ autre chose. La comparaison des deux est immédiate et n'est
+pas sur la page :
+$\varepsilon(E) = \delta(E)q^{-\chi(E)/2} = \operatorname{sgn}(E)\,
+p^{\frac12(\sum_i (-1)^i i\beta_i - (n+\rho)\chi(E))}$ ; ils coïncident
+exactement quand $\sum (-1)^i i\,\beta_i = (n + \rho)\chi(E)$, ce qui est le
+calcul du cas favorable.}
+
+\pagerange{24}{26}
+\subsection*{L'équation fonctionnelle du terme à l'infini}
+
+Soit $\bar f : \bar X \to \operatorname{Spec}\mathbb{F}_p$ une compactification,
+$i : X \to \bar X$ l'ouverture, $j : Y \to \bar X$ le bord fermé. Alors
+$R_\infty f(E) = R\bar f_{*}\,j^{*}Ri_{*}(E)$ et, $\bar f$ étant propre, la
+dualité locale donne
+\[
+  D\,R_\infty f(E) = R\bar f_{*}\,Rj^{!}\bigl(Ri_{!}(DE)\bigr)
+  = R_\infty f(DE)[-1],
+\]
+puisque $Rj^{!}Ri_{!}K \simeq j^{*}Ri_{*}K[-1]$ (triangle
+$j_{*}Rj^{!} \to \mathrm{id} \to Ri_{*}i^{*}$ appliqué à $Ri_{!}K$). Avec
+$DE \simeq E(n+\rho)[2n]$,
+\[
+  D\,R_\infty f(E) \simeq R_\infty f(E)(n + \rho)[2n - 1] .
+\]
+\footnote{La page écrit $[1]$ dans les deux formules encadrées, avec en marge
+« $1$ ou $-1$ ! ». C'est $[-1]$, puis $[2n-1]$ après substitution. Seule la
+parité du décalage compte pour la fonction $L$ --- un décalage impair
+l'inverse --- et elle est la même : la suite du calcul est juste.} Le décalage
+étant impair, la fonction $L$ s'inverse, et l'on obtient l'équation du bord :
+\[
+  L^{\infty}_E\Bigl(\frac{1}{qt}\Bigr)\,L^{\infty}_E(t)\,(-t)^{\chi_\infty(E)}\,\delta_\infty(E) = 1,
+\]
+avec $\chi_\infty$, $\delta_\infty$ ceux de $R_\infty f(E)$. Or
+$\chi_\infty(E) = \chi(Rf_{*}E) - \chi(Rf_{!}E) = 0$ et
+$\delta_\infty(E) = \delta(Rf_{*}E)\,\delta(Rf_{!}E)^{-1} = q^{\chi(E)}\delta(E)^{-2}$,
+d'où
+\[
+  L^{\infty}_E\Bigl(\frac{1}{qt}\Bigr)L^{\infty}_E(t)\,\delta_\infty(E) = 1,
+  \qquad \delta_\infty(E) = \varepsilon(E)^{-2},
+\]
+« qui est bien $1$ lorsque $X$ est complet ! ». Il dresse la liste des
+« invariants arithmétiques intéressants » une fois connus $\chi(E)$ et $q$ :
+$\delta(E) = \delta(Rf_{!}E)$, $\delta'(E) = \delta(Rf_{*}E)$,
+$\varepsilon(E)$, $\delta_\infty(E)$, liés par
+\[
+  \begin{gathered}
+  \delta(E)\,\delta'(E) = q^{\chi(E)}, \qquad
+  \varepsilon(E) = \delta(E)\,q^{-\chi(E)/2} = \delta'(E)^{-1}q^{\chi(E)/2},\\
+  \delta_\infty(E) = q^{\chi(E)}\delta(E)^{-2} = q^{-\chi(E)}\delta'(E)^{2} = \varepsilon(E)^{-2},
+  \end{gathered}
+\]
+et $\varepsilon(E) = \pm 1$ si $X$ est complète.\footnote{La deuxième formule
+encadrée porte $\varepsilon(E) = \delta'(E)\,q^{-\chi(E)/2}$, ce qui
+contredit la première ; c'est $\varepsilon(E)^{-1}$ qui vaut
+$\delta'(E)q^{-\chi(E)/2}$. Une flèche en marge, partant de ce signe $=$, dit
+« variance avec $E$, $X$ !! ».}
+
+\pagerange{28}{30}
+\subsection*{Une vérification}
+
+Posons $B(t) = A(t)\,\delta(E)(-t)^{\chi(E)}$, de sorte que
+$L_E(1/qt) = B(t)L_E(t)$. Substituer $t \mapsto 1/qt$ et réinjecter donne
+$B(t)B(1/qt) = 1$, et, en remplaçant $B$ par sa valeur,
+$L^{\infty}_E(t)L^{\infty}_E(1/qt) = \delta(E)^2q^{-\chi(E)}$ : « c'est
+précisément l'équation fonctionnelle explicitée plus haut ».\footnote{Dans la
+ligne intermédiaire, le facteur $(1/qt)^{\chi(E)}$ doit porter le signe
+$(-1)^{\chi(E)}$ ; il se compense avec celui de $(-t)^{\chi(E)}$, et le
+résultat est juste.} Avec $\xi_E(t) = t^{\chi(E)/2}L_E(t)$,
+\[
+  \xi_E\Bigl(\frac{1}{qt}\Bigr) = A(t)\,\varepsilon'(E)\,\xi_E(t),
+  \qquad A(t) = L^{\infty}_E\Bigl(\frac{1}{qt}\Bigr)^{-1},
+  \qquad \varepsilon'(E) = (-1)^{\chi(E)}\varepsilon(E),
+\]
+et si $X$ est complète, $A = 1$ et $\varepsilon'(E) = \pm 1$.\footnote{La page 30
+écrit $q = p^{n\rho}$ ; c'est $q = p^{n+\rho}$, comme aux pages 26 et 28. Un
+petit exposant sur $A$ ne se lit pas.}
+
+\pagerange{32}{36}
+\section*{5. Une courbe, un faisceau au point générique (pages 32 à 36)}
+
+Soit $X$ une courbe projective, lisse, géométriquement irréductible sur
+$\mathbb{F}_p$, de corps de fonctions $K$, $\eta = \operatorname{Spec}K$, et
+$E_\eta$ un $\mathbb{Q}_\ell$-faisceau sur $\eta$ --- une représentation
+$\ell$-adique de $\operatorname{Gal}(K^{s}/K)$. On veut lui associer une
+fonction $L$, ce qui « est raisonnable, car $K$ détermine $X$ ». Avec
+$i : \eta \to X$, posons $L^{*}_{E_\eta} = L_{i_{*}E_\eta}$, la fonction $L$
+usuelle, dont le facteur en $x$ est pris sur les invariants de l'inertie.
+On a $D(i_{*}E_\eta) = i_{*}(\check E_\eta)(1)[2]$,\footnote{La page omet le
+décalage $[2]$ ; il est pair et sans effet sur les fonctions $L$.} et (1)
+donne
+\[
+  L^{*}_{\check E_\eta}\Bigl(\frac{1}{pt}\Bigr)
+  = (-t)^{\chi^{*}(E_\eta)}\,\delta^{*}(E_\eta)\,L^{*}_{E_\eta}(t),
+  \qquad \chi^{*} = \chi(i_{*}E_\eta),\ \delta^{*} = \delta(i_{*}E_\eta).
+\]
+\footnote{La page écrit l'exposant $\chi^{*}(\check E_\eta)$ ; il est égal à
+$\chi^{*}(E_\eta)$, puisque $D$ conserve la caractéristique d'Euler.} Si
+$\check E_\eta \simeq E_\eta(\rho)$, alors, avec $q = p^{1+\rho}$,
+\[
+  L^{*}_{E_\eta}\Bigl(\frac{1}{qt}\Bigr)
+  = (-t)^{\chi^{*}}\delta^{*}\,L^{*}_{E_\eta}(t), \qquad
+  \xi^{*}\Bigl(\frac{1}{qt}\Bigr) = \varepsilon'^{*}\,\xi^{*}(t), \qquad
+  \varepsilon'^{*} = \delta^{*}q^{-\chi^{*}/2}(-1)^{\chi^{*}} .
+\]
+
+\emph{Une remarque} : $L^{*}$ n'est pas additive. D'une suite exacte
+$0 \to E'_\eta \to E_\eta \to E''_\eta \to 0$ on tire
+\[
+  0 \to i_{*}E'_\eta \to i_{*}E_\eta \to i_{*}E''_\eta \to Q \to 0,
+  \qquad Q \simeq \bigoplus_x j_{x*}Q_x, \qquad
+  Q_x = \operatorname{Coker}\bigl(E_\eta^{I_x} \to E_\eta''^{I_x}\bigr),
+\]
+somme sur les points de ramification, d'où
+\[
+  L^{*}_{E_\eta}(t) = L^{*}_{E'_\eta}(t)\,L^{*}_{E''_\eta}(t)\prod_x P_{Q_x}(t),
+  \qquad P_{Q_x}(t) = \det\bigl(1 - F_x t^{\deg x} \mid Q_x\bigr).
+\]
+\footnote{La page écrit $P_{Q_x}(t)$ sans préciser le degré du point ; le
+facteur est en $t^{\deg x}$. Une marge, en partie illisible, rappelle la dualité
+entre $H^2(\bar X, E)$ et $H^0$ du dual tordu.}
+
+On peut songer à la rendre additive en passant aux facteurs de composition
+--- définir $L$ sur les $E_\eta$ simples et prolonger par linéarité, ou prendre
+pour facteur local en $x$ la somme des invariants des facteurs d'une suite de
+composition. « Ceci n'est pas encore satisfaisant » : ces facteurs ne sont pas
+de nature locale en $(E, x)$, car la suite de composition de $E_\eta$ comme
+représentation globale n'a rien à voir avec celle de sa restriction au groupe
+de décomposition en $x$, et ne commute pas à l'extension étale.\footnote{La
+fin de la phrase précise « (i.e.\ ext.\ résiduellement … triviale) », avec un
+mot ajouté illisible.}
+
+\pagerange{38}{46}
+\section*{6. La moyenne sur l'inertie (pages 38 à 46)}
+
+La page 38 s'intitule « Suite de la remarque ». Soit $D$ un groupe, $I$ un
+sous-groupe distingué, $E$ une représentation de dimension finie de $D$ sur un
+corps $k$, et $I_1 \subset I$ un sous-groupe d'indice fini, distingué dans
+$D$, qui opère sur $E$ de façon \emph{unipotente}.\footnote{La page note $U$
+ce sous-groupe et $V \subset U$ le suivant ; on écrit $I_1$, $I_2$, parce que
+$U$ servira pour un ouvert de la courbe. « Invariant par $D$ » est ajouté
+au-dessus de la ligne. La marge observe que, dans le cas galoisien, un $I_1$
+ouvert contient un sous-groupe ouvert invariant par $D$. C'est vrai, mais
+c'est le théorème de monodromie qui le donne et non la théorie des groupes
+profinis : l'ensemble des éléments de $I$ qui opèrent de façon unipotente est
+le noyau de la partie d'image finie de la représentation, ouvert et stable par
+$D$.} La suite $E^{I_1} \subset \cdots$, de quotients successifs
+$E^{I_1}, (E/E^{I_1})^{I_1}, \dots$, est une suite de composition stable par
+$D$, sur les quotients de laquelle $I_1$ opère trivialement. Dans le groupe de
+Grothendieck, $E$ s'identifie donc à une représentation de $D/I_1$.
+
+Sur $\mathrm{Mod}(D/I_1, k)$, la moyenne
+\[
+  E \longmapsto E^{I} = \operatorname{Im}\pi, \qquad
+  \pi = \frac{1}{N}\sum_{g \in I/I_1} g, \qquad N = [I : I_1],
+\]
+est un foncteur exact vers $\mathrm{Mod}(D/I, k)$ dès que $N$ est inversible
+dans $k$, en particulier en caractéristique $0$.\footnote{La page dit « c'est
+le \emph{seul} foncteur exact », lecture incertaine ; on ne retient que
+l'exactitude.} Il induit
+$\natural_{I_1} : R(D/I_1, k) \to R(D/I, k)$, compatible, pour $I_2 \subset
+I_1$, à l'inflation $R(D/I_1, k) \to R(D/I_2, k)$. On obtient ainsi une
+opération additive $\operatorname{cl}(E) \mapsto \operatorname{cl}(E)^{\natural}$,
+définie dès qu'un sous-groupe d'indice fini de $I$ opère de façon unipotente,
+compatible aux représentations continues et à l'extension du corps de
+base.\footnote{Le symbole de l'opération a la forme d'un éclair ; la
+transcription le rend par $\natural$ et l'on garde ce signe. Un paragraphe
+biffé de la page 42 commençait le cas $D/I \simeq \mathbb{Z}$.} Sa trace se
+calcule sans quotienter : pour $\varphi \in D/I$,
+\[
+  \operatorname{Tr}\bigl(\varphi \mid E^{\natural}\bigr)
+  = \frac{1}{N}\sum_{\substack{\psi \in D/I_1 \\ \psi \mapsto \varphi}}
+    \operatorname{Tr}(\psi \mid E),
+\]
+où $\operatorname{Tr}(\psi \mid E)$, pour $\psi \in D/I_1$, est la trace d'un
+relèvement quelconque de $\psi$ dans $D$ --- elle n'en dépend pas, puisque
+$I_1$ opère de façon unipotente. La formule, vraie quand $I_1$ opère
+trivialement, s'étend parce que ses deux membres sont additifs.
+
+Revenons au cas géométrique : $D = D_x$ est le groupe de décomposition en un
+point fermé $x$, $I = I_x$ l'inertie, $D_x/I_x \simeq \hat{\mathbb{Z}}$,
+engendré par le Frobenius $F_x$. L'hypothèse --- un sous-groupe ouvert de
+$I_x$ opère de façon unipotente --- est toujours satisfaite : c'est le théorème
+de monodromie $\ell$-adique de Grothendieck.\footnote{Le dossier ne le cite pas
+et le suppose implicitement en posant l'opération sur tout $E_\eta$. Le
+théorème figure dans l'appendice de Serre--Tate, \emph{Good reduction of abelian
+varieties} (1968) ; on ne sait pas, faute de date, s'il est antérieur ou
+postérieur à ces pages.} En termes d'aujourd'hui : si $E$ correspond à la
+représentation de Weil--Deligne $(r, N)$, $E^{\natural(x)}$ est $(E, r)^{I_x}$,
+les invariants de l'inertie quand on oublie l'opérateur de monodromie $N$, alors
+que la fibre de $i_{*}E_\eta$ en $x$ est $E^{I_x} = (\ker N)^{I_x}$.\footnote{Ce
+langage est de Deligne (1973), et n'est pas sur la page ; la traduction est
+nôtre.} On prend $E_\eta^{\natural(x)}$ comme fibre modifiée en $x$, et l'on
+définit le faisceau virtuel sur $X$
+\[
+  E_\eta^{\natural} = u_{!}(E^{\circ}) + \sum_{x \in Y} j_{x*}\bigl(E_\eta^{\natural(x)}\bigr),
+\]
+où $X^{\circ} \subset X$ est un ouvert dense sur lequel $E_\eta$ est non ramifié,
+$E^{\circ}$ le faisceau lisse qu'il y définit, $u : X^{\circ} \to X$,
+$Y = X - X^{\circ}$ et $j_x : \operatorname{Spec}k(x) \to X$.\footnote{La page
+note $U$, $E_U$, $i : U \to X$ ; et elle écrit
+« $E_\eta(x) = E_\eta^{\natural(x)}$ », alors que la page 50 réserve
+$E_\eta(x)$ à la fibre ordinaire $E^{I_x}$. On suit la page 50.} On note
+$L^{\natural}_{E_\eta} = L_{E_\eta^{\natural}}$,
+$\chi^{\natural}(E_\eta) = \chi(E_\eta^{\natural})$,
+$\delta^{\natural}(E_\eta) = \delta(E_\eta^{\natural})$. Par construction,
+$E_\eta \mapsto E_\eta^{\natural}$ est additif et local en $(E, x)$ : c'est ce
+qui manquait à la page 36.
+
+\pagerange{48}{58}
+\section*{7. La dualité de $E_\eta^{\natural}$ (pages 48 à 58)}
+
+\subsection*{Le calcul de la page}
+
+Comme la moyenne locale commute au dual ($(\check E)^{\natural(x)} =
+(E^{\natural(x)})^{\vee}$, l'inertie opérant par un groupe fini) et que
+$D(E^{\circ}) = \check E^{\circ}(1)[2]$, on a dans le groupe de
+Grothendieck\footnote{La page omet les décalages $[2]$, pairs ; et la lecture
+« $\mathbb{Q}_\ell$ » dans $\mu_x$ est douteuse, mais c'est la seule qui rende
+la formule juste.}
+\[
+  D(E_\eta^{\natural}) = Ru_{*}(\check E^{\circ})(1) + \sum_x j_{x*}\bigl(\check E_\eta^{\natural(x)}\bigr)
+  = \check E_\eta^{\natural}(1) + \sum_{x \in X^{(0)}} j_{x*}\bigl(\mu_x(E)\bigr),
+\]
+\[
+  \mu_x(E) = \check E_\eta^{\natural(x)} \otimes \bigl(\mathbb{Q}_\ell - \mathbb{Q}_\ell(1)\bigr)
+           + j_x^{*}Ru_{*}(\check E^{\circ})(1).
+\]
+Par dualité locale, $j_x^{*}Ru_{*}(\check E^{\circ}) = \check E_\eta(x) -
+E_\eta(x)^{\vee}(-1)$, où $E_\eta(x) = E^{I_x}$. Posant
+\[
+  \alpha_x(E_\eta) = E_\eta^{\natural(x)} - E_\eta(x),
+  \qquad\text{il vient}\qquad
+  \mu_x(E) = \alpha_x(E_\eta)^{\vee} - \alpha_x(\check E_\eta)(1),
+\]
+et $\mu_x(\check E) = -\mu_x(E)^{\vee}(1)$. « NB. $\alpha_x$ n'est \emph{pas}
+additif en $E_\eta$, \emph{mais} $\mu_x$ \emph{l'est}. » Si
+$\check E_\eta \simeq E_\eta(\rho)$,
+$\mu_x(E) = \alpha_x(E_\eta)^{\vee} - \alpha_x(E_\eta)(\rho + 1)$.\footnote{Ici
+et aux pages 52 à 56, la lettre ressemble à un $\varphi$ ; c'est le $\rho$
+des pages précédentes.}
+
+\subsection*{Ce que la page ne dit pas : $\mu_x$ est nul}
+
+En fait $\mu_x(E) = 0$ pour tout $E_\eta$ --- c'est notre observation, la page
+ne la fait pas. Pour une représentation $G$ de $D_x$ sur laquelle un
+sous-groupe ouvert $I_1$ de $I_x$ opère de façon unipotente, on a dans le groupe
+de Grothendieck des $F_x$-modules
+\[
+  \bigl[H^0(I_x, G)\bigr] - \bigl[H^1(I_x, G)\bigr] = \bigl[G^{\natural}\bigr] - \bigl[G^{\natural}(-1)\bigr] .
+\]
+Les deux membres sont additifs en $G$ (à gauche parce que
+$\operatorname{cd}_\ell(I_x) = 1$) ; il suffit donc de le voir quand $I_1$ opère
+trivialement. Alors $H^0 = G^{I_x} = G^{\natural}$ et
+$H^1(I_x, G) = \operatorname{Hom}(I_1, G)^{I_x/I_1} = G(-1)^{I_x/I_1} =
+G^{\natural}(-1)$, puisque le plus grand quotient pro-$\ell$ abélien de $I_1$ est
+$\mathbb{Z}_\ell(1)$. Comme $j_x^{*}Ru_{*}(\check E^{\circ})$ est exactement
+$[H^0(I_x, \check E)] - [H^1(I_x, \check E)]$, on obtient
+$j_x^{*}Ru_{*}(\check E^{\circ}) = \check E^{\natural(x)} - \check E^{\natural(x)}(-1)$,
+et
+\[
+  \mu_x(E) = \check E^{\natural(x)} - \check E^{\natural(x)}(1)
+           + \check E^{\natural(x)}(1) - \check E^{\natural(x)} = 0 .
+\]
+Autrement dit $\alpha_x(\check E_\eta) = \alpha_x(E_\eta)^{\vee}(-1)$, et
+\[
+  D(E_\eta^{\natural}) = \check E_\eta^{\natural}(1)[2]
+\]
+dans le groupe de Grothendieck : la fonction $L^{\natural}$ a la même dualité
+que $L^{*}$, sans terme correctif, et elle est de plus additive et
+locale.\footnote{Ce qui rend la chose plausible : la dualité de Poincaré pour
+$i_{*}E_\eta$ est exacte, $D(i_{*}E_\eta) = i_{*}\check E_\eta(1)[2]$, et
+$E_\eta^{\natural} - i_{*}E_\eta = \sum_x j_{x*}\alpha_x(E_\eta)$, dont le dual
+est $\sum_x j_{x*}\alpha_x(E_\eta)^{\vee} = \sum_x j_{x*}\alpha_x(\check E_\eta)(1)$.
+En termes de Weil--Deligne, $\alpha_x(E)$ est la classe de
+$(E/\ker N)^{I_x}$, que $N$ identifie à $(\operatorname{Im}N)^{I_x}(-1)$ ;
+c'est l'orthogonalité de $\ker N$ et de $\operatorname{Im}N^{\vee}$ qui fait
+le reste.}
+
+\pagerange{52}{58}
+\subsection*{L'équation fonctionnelle, et la question de la page 52}
+
+Avec les $\mu_x$ de la page, l'équation (1) appliquée à $E_\eta^{\natural}$
+s'écrit, en posant $\lambda_x(t) = L_{j_{x*}\mu_x(E)}(t)$,
+\[
+  L^{\natural}_{E_\eta}\Bigl(\frac{1}{pt}\Bigr)
+  = \prod_x \lambda_x(pt)\,\bigl(-pt\bigr)^{\chi^{\natural}(E_\eta)}
+    \delta^{\natural}(E_\eta)^{-1}\,L^{\natural}_{\check E_\eta}(t),
+\]
+puis, si $\check E_\eta \simeq E_\eta(\rho)$ et $q = p^{1+\rho}$,
+\[
+  L^{\natural}_{E_\eta}\Bigl(\frac{1}{qt}\Bigr)
+  = \Bigl(\prod_x \lambda_x(qt)\Bigr)\,\delta^{\natural}(E_\eta)^{-1}
+    \bigl(-qt\bigr)^{\chi^{\natural}(E_\eta)}\,L^{\natural}_{E_\eta}(t) .
+\]
+\footnote{La page écrit $\prod_x \lambda_x(E)$, puis $\prod_x \lambda_x(E)(t)$,
+sans l'argument $pt$ puis $qt$ que les substitutions $t \mapsto pt$ et
+$t \mapsto p^{\rho}t$ imposent.} Elle développe chaque $\lambda_x$ en un
+monôme $(-t)^{-\chi_x}\delta_x$ fois un quotient de fonctions $L$ de
+$\alpha_x$, où $\chi_x$ et $\delta_x$ sont la caractéristique d'Euler et le
+déterminant de $j_{x*}\alpha_x(E_\eta)$ vu sur
+$\operatorname{Spec}\mathbb{F}_p$ ; la page 54 regroupe le tout sous la forme
+$L(1/qt) = A(t)L(t)$, et ajoute : « Ayant écrit $\lambda_x$ comme un monôme, on
+en perd le \emph{caractère additif}, il vaut sans doute mieux ne pas faire ce
+changement ».\footnote{La lettre notée $\chi_x$ est surchargée aux pages 52 et
+56 et pourrait être un $\beta_x$. On prend $\chi_x$ et $\delta_x$ après
+image directe sur $\operatorname{Spec}\mathbb{F}_p$, ce qui absorbe le signe
+$(-1)^{(\deg x - 1)\operatorname{rg}}$ que le déterminant d'une induite
+introduit ; la page ne le dit pas.} Puis, entre crochets, une question :
+\[
+  \delta^{\natural}(E_\eta)^2 \overset{?}{=} q^{\chi^{\natural}(E_\eta)} \quad ??
+\]
+
+La page 56 la ramène à des termes locaux. Lisant les déterminants sur la
+formule de dualité, avec $\delta(\mu_x) = \delta_x^{-2}q^{\chi_x}$, il trouve
+\[
+  \varepsilon^{\natural}(E_\eta)^2 = \frac{\delta^{\natural}(E_\eta)^2}{q^{\chi^{\natural}(E_\eta)}}
+  = \prod_x \frac{\delta_x(E_\eta)^2}{q^{\chi_x(E_\eta)}},
+  \qquad
+  \varepsilon^{\natural}(E_\eta) = \pm \prod_x \delta_x(E_\eta)\,q^{-\chi_x(E_\eta)/2} .
+\]
+\footnote{La page ajoute une variante,
+$\varepsilon^{\natural} = \pm\bigl(\prod_x \delta_x p^{-\rho\chi_x/2}\bigr)p^{-\chi/2}$
+avec $\chi = \sum_x \chi_x$, qui est la même chose.} Comme $\mu_x = 0$, chaque
+facteur vaut $1$, $\lambda_x = 1$, et la réponse à la question est
+\emph{oui} : pour $E_\eta$ autodual de poids $\rho$,
+$\delta^{\natural}(E_\eta)^2 = q^{\chi^{\natural}(E_\eta)}$, et
+\[
+  L^{\natural}_{E_\eta}\Bigl(\frac{1}{qt}\Bigr)
+  = \varepsilon^{\natural}(E_\eta)^{-1}\bigl(-q^{1/2}t\bigr)^{\chi^{\natural}(E_\eta)}
+    L^{\natural}_{E_\eta}(t), \qquad \varepsilon^{\natural}(E_\eta) = \pm 1 .
+\]
+
+Restent les problèmes de la page 54 :
+\begin{itemize}
+  \item[a)] dans les cas géométriques classiques, construire les
+    $\alpha_x(E_\eta)$, et en déterminer $\chi_x$, $\delta_x$ et les valeurs
+    absolues des valeurs propres du Frobenius ;
+  \item[b)] une formule générale « (Chafarevitch--)Ogg » pour
+    $\chi^{\natural}(E_\eta)$ ;
+  \item[c)] une formule pour $\delta^{\natural}(E_\eta)$.
+\end{itemize}
+Les flèches de la marge rangent $\chi_x$ et $\chi^{\natural}$ parmi les
+invariants géométriques, $\delta_x$ et $\delta^{\natural}$ parmi les
+arithmétiques. Page 58 : « c) est ramené (\emph{moyennant un signe}) au cas de
+b), donc à déterminer $\chi^{\natural}(E_\eta)$. Or cette détermination est
+faite, en utilisant les représentations d'Artin … » --- et la page s'arrête.
+C'est exactement ce que donne $\delta^{\natural\,2} = q^{\chi^{\natural}}$.
+La formule visée en b) est celle de Grothendieck--Ogg--Chafarevitch :
+$\chi(\bar X, i_{*}E_\eta) = (2 - 2g)\operatorname{rg}E_\eta - \sum_x \deg x
+\bigl(\operatorname{rg}E_\eta - \operatorname{rg}E_\eta^{I_x} +
+\operatorname{Sw}_x(E_\eta)\bigr)$, d'où
+$\chi^{\natural} = \chi(\bar X, i_{*}E_\eta) + \sum_x \deg x\,\operatorname{rg}\alpha_x$.
+\footnote{La lecture « Chafarevitch » est incertaine. Ogg (1962) et
+Chafarevitch (1961) l'ont pour les courbes elliptiques et les espaces
+principaux homogènes ; Grothendieck l'établit pour les faisceaux $\ell$-adiques
+sur une courbe (exposé Bourbaki de Raynaud n° 286, 1965 ; SGA~5, exposé~X), au
+moyen des représentations de Swan et d'Artin --- ce que la page 58 appelle
+« les représentations d'Artin ». Le signe qui reste, lui, est le signe de
+l'équation fonctionnelle, que la théorie des constantes locales de Langlands et
+Deligne (1972--1973) et la formule du produit de Laumon (1987) écrivent comme
+produit de facteurs locaux ; le dossier ne l'aborde pas.}
+
+\pagerange{60}{60}
+\section*{8. Cohomologie à l'infini (page 60)}
+
+Retour aux pages 18 à 26. Soit $f$ compactifiable en
+$\bar f : \bar X \to \operatorname{Spec}\mathbb{F}_p$, $i : X \to \bar X$,
+$j : Y = \bar X - X \to \bar X$. Le triangle
+$Ri_{!}F \to Ri_{*}F \to j_{*}\bigl((Ri_{*}F)|_Y\bigr) \xrightarrow{+1}$ donne,
+par $R\bar f_{*}$, la suite exacte longue
+\[
+  \cdots \to R^i f_{!}(F) \to R^i f_{*}(F) \to R^i_\infty f(F) \to R^{i+1}f_{!}(F) \to \cdots,
+  \qquad R^i_\infty f(F) = R^i\bar f_{*}\bigl((Ri_{*}F)|_Y\bigr).
+\]
+Il considère aussi le triangle
+$j_{*}Rj^{!}(Ri_{!}F) \to Ri_{!}F \to Ri_{*}F \xrightarrow{+1}$, et veut
+identifier $(Ri_{*}F)|_Y$, « à décalage près », à $Rj^{!}Ri_{!}F$. Les deux
+triangles le donnent : $Rj^{!}Ri_{!}F \simeq (Ri_{*}F)|_Y[-1]$, l'isomorphisme
+dont on s'est servi pour la dualité de la page 24.\footnote{La page s'arrête sur
+un tiret, et ses derniers verbes sont d'une lecture incertaine ; on donne
+l'identification qu'elle annonce, avec le décalage qu'elle ne précise pas.}
+
+\pagerange{62}{68}
+\section*{9. Simplifier une équation fonctionnelle (pages 62 à 68)}
+
+Soit $L(t)$ une fonction rationnelle vérifiant $L(1/qt) = A(t)L(t)$, avec $A$
+« de niveau inférieur ».\footnote{L'exposant de $p$ dans $q$ est noyé sous une
+tache d'encre ; la page 66 substitue $1/(p^{n+\rho}t)$ là où la page 68 écrit
+$1/qt$, donc $q = p^{n+\rho}$. « Niveau » est son mot, entre guillemets, et
+n'est pas défini ; on en donne plus bas le sens que ces pages lui font jouer.}
+On cherche $\lambda$ tel que $L' = \lambda L$ vérifie $L'(1/qt) = c\,L'(t)$,
+c'est-à-dire
+\[
+  \frac{\lambda(1/qt)}{\lambda(t)} = c\,A(t)^{-1} .
+\]
+Deux solutions diffèrent par un $\alpha$ tel que $\alpha(1/qt) = a\,\alpha(t)$, et
+$a = \pm 1$ nécessairement, puisque $t \mapsto 1/qt$ est une involution.
+Faisant opérer $\mathbb{Z}/2\mathbb{Z}$ sur les fractions rationnelles non nulles
+par cette involution, la question devient celle d'écrire un $1$-cocycle comme
+un cobord, $\lambda^{g}\lambda^{-1} = c\,A^{-1}$. Il le peut toujours :
+$A(t)A(1/qt) = 1$ (substituer deux fois), donc $c A^{-1}$ est un cocycle pour
+$c = \pm 1$, et le théorème 90 de Hilbert pour l'extension quadratique
+$\mathbb{Q}(t)/\mathbb{Q}(t)^{\mathbb{Z}/2}$ dit qu'il est un cobord. La page
+donne d'ailleurs la solution triviale, $\lambda = 1/L$, $L' = 1$.\footnote{Le
+nom du théorème 90 n'est pas sur la page ; l'action de $\mathbb{Z}/2\mathbb{Z}$
+l'est, et un encadré « $\lambda^{g}\lambda^{-1} = $ » laissé sans second
+membre.} Toute la question est donc d'imposer à $\lambda$ d'être de « niveau »
+strictement inférieur à celui de $L$.
+
+Pour préciser, dans un passage ensuite barré de trois traits, il suppose
+$L(0) = 1$ et les zéros et pôles de module $p^{-i/2}$, $\rho \le i \le \rho + 2n$,
+et décompose
+\[
+  L(t) = L_\rho(t)\cdots L_{\rho+n}(t)\;
+         L'_{\rho+n-1}(pt)\,L'_{\rho+n-2}(p^2t)\cdots L'_\rho(p^nt),
+\]
+où les valeurs propres inverses de $L_i$ et de $L'_i$ sont des entiers
+algébriques de module $p^{i/2}$ ; celles de $L'_{\rho+n-k}(p^kt)$ sont donc de
+module $p^{(\rho+n+k)/2}$. Le « niveau » d'un facteur est ainsi le poids qu'il
+a avant torsion de Tate : $L$ est de niveau $\le \rho + n$ et de poids entre
+$\rho$ et $\rho + 2n$.\footnote{Interprétation nôtre, qui rend compte de
+toutes les occurrences du mot. Le passage barré écrivait « de niveau
+$\le \rho + n + 1$ » pour $\lambda$ ; la page 66, non barrée, dit
+$\le \rho + n - 1$, et c'est elle qu'on suit. Les arguments $p^2t$, $p^nt$ se
+lisent mal.} Page 66, il s'autorise à corriger par des $\lambda$ de même forme
+mais de niveau $\le \rho + n - 1$, suppose que $A$ est lui aussi de ce type et
+que chaque $L_i$, $L'_i$ vérifie l'équation fonctionnelle de son poids,
+$L_i(1/p^it) = \delta_i t^{\chi_i}L_i(t)$ et de même pour $L'_i$. Alors
+\[
+  \frac{L(1/qt)}{L(t)} = \delta\,t^{\chi}
+  \prod_{i<\rho+n}\frac{L_i(p^{\rho+n-i}t)}{L_i(t)}
+  \prod_{i}\frac{L'_i(t)}{L'_i(p^{\rho+n-i}t)} = A(t),
+\]
+et le facteur de niveau maximal, $L_{\rho+n}$, a disparu de $A$ : c'est le sens
+précis de « $A$ de niveau inférieur ».\footnote{La page 66 omet les facteurs
+$p^{(\rho+n-i)\chi_i}$ que la substitution produit ; ils sont absorbés dans la
+constante $\delta$. Elle écrit aussi $t^{\chi_\rho}$ devant $L_{\rho+n}$, où
+l'on attend $\chi_{\rho+n}$, et une suite d'indices pour $\lambda$ qu'on ne
+reproduit pas, la page l'ayant écrite de façon incohérente.}
+
+Le cas $n = 1$ est commencé page 68 : $L = L_\rho(t)\,L_{\rho+1}(t)\,L'_\rho(pt)$,
+avec les facteurs $L_\rho(t)$ et $L'_\rho(pt)$ soulignés d'une accolade,
+puis réécrits seuls --- et la page s'arrête. La conclusion vers laquelle elle
+va est immédiate : $\lambda = \bigl(L_\rho(t)L'_\rho(pt)\bigr)^{-1}$ est de
+niveau $\rho = \rho + n - 1$, et $L' = \lambda L = L_{\rho+1}$ vérifie une
+équation fonctionnelle sans facteur, de même $q$ ; en général,
+$\lambda = \bigl(\prod_{i<\rho+n}L_i(t)\prod_i L'_i(p^{\rho+n-i}t)\bigr)^{-1}$
+laisse $L' = L_{\rho+n}$.\footnote{Cette conclusion est nôtre ; la page ne
+l'écrit pas.} Ce que le dossier cherchait, à travers tout cela, c'est une
+fonction $L$ qui n'ait gardé que sa partie de plus haut niveau --- celle qui
+porte, à elle seule, une équation fonctionnelle exacte.
+
+\end{document}

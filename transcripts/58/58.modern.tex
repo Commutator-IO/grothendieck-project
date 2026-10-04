@@ -1,0 +1,1328 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 58, pages 1-66
+% (the whole folder, four batches of transcription: 1-20, 21-40, 41-60, 61-66).
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried — a doubtful
+% reading, a notation he used differently, a missing passage — moves into a
+% footnote. It is held to being mathematically correct as it stands; where the
+% pages are loose or mistaken, the true statement is what appears here and the
+% footnote says what the page has. In any dispute of substance the
+% transcription governs: whoever cites Grothendieck must cite batch-NN.fr.tex.
+%
+% Scope: all four batches transcribed, read whole before any of this was
+% written; ONE file for the shelfmark. The fast pages (1-20, 22-26, 29-30, 45,
+% 49) are largely illegible in their prose: the reading restates what their
+% formulas and statements carry and says, section by section, where it
+% reconstructs and where it does not.
+%
+% What the folder is. Four stretches separated by three covers (pp. 1, 27,
+% 53): (I) pp. 2-26, Grothendieck's connectedness theorem — local form on the
+% punctured spectrum (Lemmes 2-3, Théorème, Corollaires, pi_1), local-to-global
+% (Lemme 4), special fibres of a proper morphism (Th. 2, Lemme 5, Cor. 1-3);
+% (II) pp. 29-51, « couples de Lefschetz-Grauert »: introduction and nine-item
+% plan, the conditions (LG)_n, LG, LG stricte (today Lef, Leff of SGA 2 X),
+% consequences for pi_0, pi_1, étale covers, Pic, a permanence theorem under
+% projective flat morphisms, a local form over (A, t); (III) pp. 55-61, P^r,
+% a hyperplane section Y, a neighbourhood U, Z = X - U finite: chains of
+% equivalent conditions (local cohomology, Serre and local duality, depth);
+% (IV) pp. 64-66, scratch on Pic of cones, ending mid-sentence.
+%
+% Notation fixed for the whole document. A local noetherian, m its maximal
+% ideal (his « rA »), X = Spec A, X' = X - {m} the punctured spectrum (ONLY
+% this: the scheme projective over X of pp. 41-43 is renamed W, the blown-up
+% cone of p. 66 is renamed P, the base of Th. 2 is renamed B — the page calls
+% them X', X', Y). Dimensions in X' are those of X' as a space. « Connexe en
+% dimension >= k » as in Hartshorne 1962 (defined in the conventions; the
+% pages never define it, nor the conditions a_j, b_j, c_j). The ground field
+% is \Bbbk, k being the integer of connectedness. X_{/Y} = \hat X the formal
+% completion. Part III: S = \Bbbk[T_0..T_r], E^j = Ext^j(F, omega_X), g : U -> X.
+%
+% Substantive departures from the pages, each footnoted where it occurs:
+% — p. 8: the connectedness hypothesis is put on the completion (or A taken
+%   complete), as in SGA 2 XIII; the page puts it on X'.
+% — p. 2: Lemme 2 needs X' connected in dimension >= 1 (counterexample: two
+%   3-planes meeting at a point); supplied, as the case k = 1 of p. 10.
+% — p. 18: the pi_1 corollary is stated for A complete normal; the page's
+%   adjective is illegible and the proof uses irreducibility of covers.
+% — p. 20: Lemme 4 needs X connected; supplied. The local hypothesis needed
+%   is weaker than the page's; both stated.
+% — p. 22: Th. 2 needs X_1 GEOMETRICALLY connected (a number-field example for
+%   k = 0); the dimension bound read k+1 (the page's « k » is doubtful). The
+%   reading does not claim to have checked the proof beyond a sketch.
+% — p. 33: Remarque 1's « Oui » (injectivity in degree n+1 is automatic) is
+%   proved here for X projective over an affine noetherian base (ours).
+% — p. 36: the fourth member of the « conclusion pratique » is an equivalence
+%   (ours; his curved arrows say as much).
+% — p. 40: « pleinement fidèle » / « équivalence » for invertible sheaves on
+%   \hat X -> Y overstate: only the statements on Pic hold as written.
+% — p. 41: « plat sur Y » read « plat sur X ».
+% — p. 45: A must be t-adically complete (supplied, the page's second line is
+%   overwritten); without a depth hypothesis rho is NOT full (example given).
+% — p. 55: the depth bound left blank is supplied (prof F_x > n at closed points).
+% — p. 57: the third member of the alpha_i-bijective group corrected; in B_n
+%   the last equivalence holds only as an implication (example: a skyscraper);
+%   the « (*) » before the comparison theorem read as B_n.
+% — p. 64: « Spec » read « Proj ».
+%
+% Announced and not established: Lemme 1 and Corollaire 2 (cited pp. 4, 6, 24,
+% not in the folder); conditions a_j, b_j, c_j (p. 8); the converse Corollaire I
+% (pp. 12-16, largely cancelled); Cor. 1-2 to Th. 2 (one line each); the
+% chapter whose § 4-5 and N° 1-2 the introduction cites; items 1-4 and 8-9 of
+% the plan; (iii) and Cor. 2 of the permanence theorem (no proof); the « cor.
+% 3 au th. de comparaison affine », conditions a), b), c'), set T_1 (p. 49);
+% the end of the local theorem's proof (the « ? » of p. 47); the questions
+% b) and c) of p. 55 beyond the sufficient conditions; Pic(C_X) = Pic(X) (p. 66,
+% breaks off). Typed leaves (pp. 3-19 odd, 21-25 odd, 46-52 even, 56, 60, 62)
+% are other texts with nothing in his hand but pp. 56 and 60.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-04 — first pass, unchecked against the pages by a human.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{58}
+\pages{1}{66}
+\dating{[à partir de 1964]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Théorie de " Lefschetz-Grauert ". Applications en π₁, à Pic etc… : notes manuscrites (s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Ces soixante-six pages tournent autour d'une seule question : que garde une
+partie d'un espace de la forme de l'espace tout entier ? Le modèle est le
+théorème de Lefschetz, vieux de quarante ans quand ces notes sont écrites :
+une section hyperplane d'une variété projective lisse de dimension $n$ a,
+jusqu'en dimension $n-2$, la même topologie que la variété. Une surface
+coupée par un plan général donne une courbe connexe ; une variété de
+dimension $3$ a le même groupe fondamental que ses sections par des plans
+généraux. Grothendieck veut des énoncés de ce genre en géométrie algébrique
+pure, sur n'importe quel corps et même sur des anneaux locaux, là où il n'y a
+plus de topologie classique pour les démontrer.
+
+La première partie traite de la connexité. Une feuille de papier ne se coupe
+pas en deux en lui retirant un point ; deux feuilles collées par un seul point
+le peuvent. On dit, depuis Hartshorne, qu'un espace est \emph{connexe en
+dimension $\geq k$} quand on ne le déconnecte pas en lui retirant une partie de
+dimension $< k$. Le théorème démontré ici dit qu'en coupant un espace connexe
+en dimension $\geq k$ par $l$ équations on perd au plus $l$ crans : ce qui
+reste est connexe en dimension $\geq k-l$. Il est d'abord établi au voisinage
+d'un point, puis transporté à des familles : si les fibres générales d'une
+famille propre sont bien connexes, la fibre spéciale l'est aussi. On en tire
+la surjectivité de l'application entre groupes fondamentaux.
+
+La deuxième partie change d'instrument. Plutôt que de couper, on regarde la
+variété $X$ dans un voisinage infiniment petit d'une sous-variété $Y$ --- son
+\emph{complété formel} le long de $Y$, qui retient de $X$ tous les
+développements de Taylor dans les directions transverses à $Y$ et rien
+d'autre. La question devient : que perd-on en ne connaissant $X$ que par ce
+voisinage ? Grothendieck appelle « de Lefschetz-Grauert » les couples
+$(X, Y)$ pour lesquels on ne perd rien de certaines données --- les sections
+des fibrés vectoriels, puis les fibrés eux-mêmes. Il en déduit
+mécaniquement des énoncés de Lefschetz pour les composantes connexes, pour le
+groupe fondamental, pour le groupe de Picard des fibrés en droites, et il
+montre que la propriété se transporte par les morphismes projectifs et plats.
+Une troisième partie traduit tout cela, pour l'espace projectif, en conditions
+de \emph{profondeur} : une mesure algébrique de la place qu'un faisceau
+laisse autour de chaque point, que la dualité de Serre permet de lire sur la
+cohomologie. Le dossier s'achève sur des brouillons à propos du groupe de
+Picard d'un cône.
+
+Ces pages sont le laboratoire de ce qui deviendra le séminaire SGA 2 :
+les conditions qu'il nomme ici « de Lefschetz-Grauert » y portent les noms
+$\mathrm{Lef}$ et $\mathrm{Leff}$. On y voit l'écriture d'un travail en cours
+plus qu'un texte : un énoncé encadré puis rayé, une condition jugée «
+inutile » dans la marge, « je m'aperçois que », deux points d'interrogation
+devant $\operatorname{Pic}(C) = 0$, et, au bout d'une démonstration difficile,
+« on a gagné ». Les questions restent écrites comme des questions, et la
+dernière page s'arrête au milieu d'une phrase.
+
+\keywords{Grothendieck connectedness theorem, connectedness in dimension k, punctured spectrum, Hartshorne connectedness theorem, Zariski connectedness theorem, Lefschetz hyperplane theorem, formal completion, Lefschetz condition, effective Lefschetz condition, étale fundamental group, Picard group, local cohomology, local duality, Serre duality, depth, finiteness theorem, parafactorial ring, projecting cone, homotopy invariance of Pic}
+\end{resume}
+
+\section*{Le fil du dossier, et les conventions}
+
+\begin{enumerate}
+\item[I.] \emph{La connexité} (pages 1 à 26, sous la couverture « Applicat.\
+à $\pi$ »\footnote{Titre de sa main sur la couverture (page 1) ; le dernier
+signe, lu $\pi$, est douteux et pourrait être $\pi_1$.}) : la connexité en
+dimension $\geq k$ du spectre épointé d'un anneau local et de ses sections
+(pages 2 à 16) ; le groupe fondamental (page 18) ; le passage du local au
+global (page 20) ; les fibres spéciales d'un morphisme propre et les sections
+hyperplanes projectives (pages 22 à 26).
+\item[II.] \emph{Les couples de Lefschetz-Grauert} (pages 27 à 51, sous la
+couverture « Couple de Lefschetz-Grauert $(X, Y)$ ») : introduction et plan
+(pages 29 à 31) ; définitions et premières remarques (pages 32 à 36) ;
+$\pi_0$, $\pi_1$, revêtements étales, $\operatorname{Pic}$ (pages 37 à 40) ;
+permanence par morphisme projectif et plat (pages 40 à 43) ; une forme locale
+(pages 45 à 51).
+\item[III.] \emph{Morphismes projectifs et propres} (pages 53 à 61, sous la
+couverture « Applications aux morphismes projectifs et aux morphismes propres
+») : sur $\mathbf{P}^r$, un voisinage $U$ d'une section hyperplane et son
+complémentaire fini $Z$ ; chaînes de conditions équivalentes.
+\item[IV.] \emph{Le groupe de Picard des cônes} (pages 64 à 66) : brouillons.
+\end{enumerate}
+
+Les feuillets dactylographiés que le dossier intercale --- au dos des pages 2 à
+20, les pages 21 à 25, 46 à 52 et 62 --- appartiennent à d'autres textes et ne
+portent rien de sa main ; les pages 28, 44 et 54 sont blanches, la page 63 ne
+porte que le décalque de la page 60. Seuls les feuillets tapés des pages 56
+et 60 portent des calculs de lui.
+
+\emph{Le fil.} Les quatre parties ne forment pas une démonstration continue
+mais un programme : le plan de la page 31 l'énonce en neuf points, dont la
+partie I réalise le point 8 pour la connexité (« théorèmes de Lefschetz »
+sans complété formel), la partie II les points 5 à 7, la partie III un
+morceau du point 4 (« cas particulier : schémas projectifs »), et la partie IV
+amorce le point 9. Ce plan suit de près l'ordre des exposés VIII à XIII de
+SGA~2.\footnote{A.~Grothendieck, \emph{Cohomologie locale des faisceaux
+cohérents et théorèmes de Lefschetz locaux et globaux} (SGA~2), séminaire de
+1962, publié en 1968 : VIII, théorème de finitude ; IX, géométrie algébrique
+et géométrie formelle ; X, groupe fondamental ; XI, groupe de Picard ; XII,
+schémas projectifs ; XIII, problèmes et conjectures, dont le théorème de
+connexité. Le rapprochement est le nôtre ; rien sur les pages ne dit si elles
+précèdent ou suivent le séminaire, et la datation de Montpellier, « à partir
+de 1964 », ne tranche pas.}
+
+\emph{Conventions.} Pour un anneau local noethérien $A$ d'idéal maximal
+$\mathfrak{m}$, on note $X = \operatorname{Spec} A$ et
+$X' = X \smallsetminus \lbrace \mathfrak{m} \rbrace$ son \emph{spectre
+épointé}.\footnote{Il écrit $\mathfrak{r}A$ (le radical) pour $\mathfrak{m}$.}
+La lettre $X'$ ne désigne que cela dans tout le document : le schéma
+projectif sur $X$ des pages 41 à 43 est ici noté $W$, l'éclaté du cône de la
+page 66 est noté $P$, et la base du théorème 2 de la page 22 est notée $B$ ;
+les pages les appellent $X'$, $X'$ et $Y$.
+
+La dimension d'une partie fermée de $X'$ est sa dimension comme espace
+topologique. Pour $\mathfrak{p} \in X'$, l'adhérence de $\mathfrak{p}$ dans
+$X'$ est de dimension $\dim A/\mathfrak{p} - 1$ : le spectre épointé décale
+les dimensions d'un cran.
+
+Un espace topologique noethérien $T$ est \emph{connexe en dimension $\geq k$}
+si, pour toute partie fermée $Z \subset T$ de dimension $< k$, l'espace
+$T \smallsetminus Z$ est connexe et non vide. Pour $k \leq 0$ cela veut dire
+seulement que $T$ est connexe et non vide.\footnote{La notion est de
+R.~Hartshorne, « Complete intersections and connectedness », \emph{Amer.\ J.\
+Math.}\ 84 (1962) ; c'est sans doute lui que la page 6 cite. Les pages
+emploient l'expression sans la définir, et les conditions $a_j$, $b_j$, $c_j$
+de la page 8 ne sont définies nulle part dans le dossier. Nous fixons cette
+convention, qui est celle qu'exigent les énoncés pour être vrais tels que nous
+les donnons.}
+
+Le corps de base est noté $\Bbbk$, la lettre $k$ restant l'entier de la
+connexité.\footnote{Les pages 26 et 55 écrivent $k$ pour les deux.} Pour une
+partie fermée $Y$ d'un schéma localement noethérien $X$ et un Module cohérent
+$F$, $X_{/Y}$ ou $\widehat{X}$ est le complété formel de $X$ le long de $Y$, et
+$F_{/Y}$ ou $\widehat{F}$ le complété de $F$. Le faisceau structural est
+$\mathcal{O}_X$.\footnote{Il souligne souvent le $\mathcal{O}$ ; on ne garde
+pas ce soulignement.}
+
+\section*{I. La connexité en dimension $\geq k$}
+
+\pagerange{2}{6}
+\subsection*{Deux lemmes sur le spectre épointé (pages 2 à 6)}
+
+Soient $A$ un anneau local noethérien et $f \in \mathfrak{m}$. On pose
+$Y' = X' \cap V(f)$. Le premier énoncé est le cas le plus simple du
+théorème à venir.
+
+\emph{Lemme 2.} Supposons $A$ complet, les composantes irréductibles de $X'$
+de dimension $\geq 2$, et $X'$ connexe en dimension $\geq 1$. Alors les
+composantes de $Y'$ sont de dimension $\geq 1$, et $Y'$ est
+connexe.\footnote{L'énoncé est un palimpseste de quatre lignes biffées et
+récrites ; seule l'hypothèse de dimension se lit avec quelque assurance, et «
+complet », encerclé, est ajouté en marge. L'hypothèse de connexité en
+dimension $\geq 1$ est fournie par nous : la page 10 dit que le lemme est le
+cas $k = 1$ du théorème de la page 8, qui la contient. Elle est nécessaire :
+si $X$ est la réunion de deux $3$-plans de $\Bbbk^6$ qui se coupent en
+l'origine, $X'$ a deux composantes disjointes de dimension $2$, et une section
+générale $Y'$ les coupe en deux morceaux disjoints.}
+
+La démonstration est presque entièrement illisible ; on y voit l'argument de
+dimension sur lequel elle repose : pour une composante $Z'$ de $X'$, chaque
+composante non vide de $Z' \cap V(f)$ est de dimension $\geq \dim Z' - 1$, et
+$Z' \cap V(f)$ n'est pas vide dès que $\dim Z' > 0$ --- c'est le théorème de
+l'idéal principal de Krull, appliqué dans $\overline{Z'}$ qui contient
+$\mathfrak{m}$.\footnote{La seconde note marginale de la page 2 dit « si $Z'
+\cap Y' \neq \emptyset$ si $\dim Z' > 0$ ». Un mot encerclé, lu «
+fermée-ouverte », suggère que la suite raisonne sur une partie ouverte et
+fermée de $Y'$.}
+
+Un \emph{Corollaire 1}, aux pages 2 et 4, passe à la clôture normale
+$\tilde{A}$ d'un $A$ intègre de dimension $\geq 2$ et compare les sections de
+$\mathcal{O}$ sur $X'$ et sur un complété ; son état ne permet pas de le
+restituer.\footnote{On lit seulement « $\tilde{A}$ clôture normale … fini … »,
+« de dim $\geq 3$ » et la formule $H^0(\widehat{X}', \mathcal{O}) \simeq
+H^0(X', \mathcal{O})$, dont les indices et l'accent sont lus d'après le
+tracé.}
+
+Le second lemme fournit, pour $f$ assez général, ce que le théorème donnera
+pour tout $f$.
+
+\emph{Lemme 3.} Soit $k \geq 1$. Supposons $A$ complet, les composantes de $X'$ de
+dimension $\geq k+1$ et $X'$ connexe en dimension $\geq k$. Il existe une
+partie finie $\Phi \subset X'$ telle que, pour tout $f \in \mathfrak{m}$
+vérifiant $V(f) \cap \Phi = \emptyset$, le fermé $Y' = X' \cap V(f)$ soit
+connexe en dimension $\geq k-1$.\footnote{La forme de l'énoncé vient de la
+marge, qui relie « il existe $\Phi$ fini en $X'$ … $V(f) \cap \Phi =
+\emptyset$ » au « Alors » ; le corps de l'énoncé est biffé et récrit.}
+
+La démonstration (pages 4 et 6) se ramène, par un Lemme 1 et un Corollaire 2
+qui ne sont pas dans le dossier, au cas où $X$ est irréductible et normal ;
+elle choisit $\Phi$ fini dans $X'$, évité par $V(f)$, et conclut par la
+condition $(S_2)$ de Serre et le théorème de Hartshorne --- un anneau local
+noethérien qui vérifie $(S_2)$ a un spectre connexe en codimension
+$1$.\footnote{Seuls se lisent les formules, « $(S_2)$ » et le renvoi, incertain,
+à « Hartshorne ». Nous ne reconstituons pas l'argument. La page ne suppose
+pas $A$ complet ; nous n'affirmons l'énoncé que dans ce cas, où il est de
+toute façon contenu dans le théorème qui suit, qui vaut pour tout $f$ : le
+lemme en est l'étape de récurrence.}
+
+\pagerange{8}{12}
+\subsection*{Le théorème de connexité local (pages 8 à 12)}
+
+\emph{Théorème.} Soient $A$ un anneau local noethérien, $\widehat{A}$ son
+complété, $\widehat{X}'$ le spectre épointé de $\widehat{A}$, et $k \geq 1$.
+Supposons que
+\begin{itemize}
+\item[(i)] les composantes irréductibles de $\widehat{X}'$ soient de dimension
+$\geq k+1$ ;
+\item[(ii)] $\widehat{X}'$ soit connexe en dimension $\geq k$.
+\end{itemize}
+Alors, pour $0 \leq l \leq k$ et $f_1, \ldots, f_l \in \mathfrak{m}$, le fermé
+\[
+  Y' = X' \cap V(f_1) \cap \cdots \cap V(f_l)
+\]
+a ses composantes de dimension $\geq k+1-l$ et il est connexe en dimension
+$\geq k-l$. En particulier, pour $l = k$, il est connexe et non vide.
+
+C'est, sous sa forme locale, le \emph{théorème de connexité de Grothendieck},
+tel qu'il figure à l'exposé XIII de SGA~2.\footnote{Le Théorème est encadré.
+La page met l'hypothèse de dimension sur $\widehat{A}$ --- en notant entre
+crochets qu'il suffit pour cela que les composantes de $X$ soient de dimension
+$\geq k+2$, sous une condition sur $A \to \widehat{A}$ illisible --- mais
+l'hypothèse de connexité sur $X'$. Nous mettons les deux sur le complété, ce
+qui revient à supposer $A$ complet ; c'est la forme où l'énoncé est démontré,
+et nous n'affirmons pas la variante de la page. Les conclusions, elles,
+redescendent de $\widehat{A}$ à $A$ : $\operatorname{Spec}\widehat{A} \to
+\operatorname{Spec} A$ est surjectif et conserve la dimension des fermés, et
+les composantes de $\operatorname{Spec}(\widehat{A}/\mathfrak{p}\widehat{A})$,
+pour $\mathfrak{p}$ premier minimal de $A$, sont des composantes de
+$\operatorname{Spec}\widehat{A}$ (par platitude). Les conditions
+« $a_{k-l}$, $b_{k-l}$, $c_{k-l}$ » de la page ne sont pas définies ; nous
+lisons les deux premières comme les deux conclusions ci-dessus et ne savons
+pas ce qu'est la troisième.} Les hypothèses et la borne sur $l$
+sont nécessaires : la réunion de deux $3$-plans de $\Bbbk^6$ qui se coupent en
+l'origine vérifie (i) pour $k = 1$ mais non (ii), et l'on a vu que sa section
+par un hyperplan général n'est pas connexe ; un cône sur une conique vérifie (i) et (ii) pour
+$k = 0$, et sa section par un hyperplan général passant par le sommet a deux
+composantes.
+
+\emph{Réduction au cas $l = k$} (pages 8 et 10). On peut supposer $A$ complet.
+L'assertion sur les dimensions est le théorème de l'idéal principal dans
+l'anneau caténaire $\widehat{A}$. Si $Y'$ était déconnecté par un fermé $Z'$
+de dimension $< k-l$, on choisirait $f_{l+1}, \ldots, f_k \in \mathfrak{m}$
+tels que $Z' \cap V(f_{l+1}) \cap \cdots \cap V(f_k) = \emptyset$ ; chacun des
+deux morceaux de $Y' \smallsetminus Z'$ contient une partie de dimension
+$\geq k+1-l$ et rencontre donc $V(f_{l+1}, \ldots, f_k)$, de sorte que
+$X' \cap V(f_1, \ldots, f_k)$ serait non connexe. Il suffit donc de montrer :
+
+\emph{Corollaire 1} (page 10). Sous les hypothèses du théorème, pour
+$f_1, \ldots, f_k \in \mathfrak{m}$, le fermé
+$X' \cap V(f_1) \cap \cdots \cap V(f_k)$ est connexe et non
+vide.\footnote{L'énoncé, souligné, n'est lisible que dans ses formules ; la
+conclusion « connexe » est celle qu'appelle la démonstration qui suit, dont le
+mot clé, deux fois, est « discontinu ».}
+
+\emph{Démonstration} (pages 10 et 12), par récurrence sur $k$. Pour $k = 1$,
+c'est le Lemme 2. Soit $k \geq 2$, l'énoncé connu jusqu'à $k-1$. Montrons
+d'abord que $X' \cap V(f_1)$ est connexe en dimension $\geq k-1$. Sinon, soit
+$Z'$ un fermé de dimension $< k-1$ qui le déconnecte. Soit $\Phi$ la partie
+finie que donne le Lemme 3. Par évitement des idéaux premiers, on choisit
+$f_2, \ldots, f_k \in \mathfrak{m}$ tels que $Z' \cap V(f_1, \ldots, f_k) =
+\emptyset$ et $V(f_2) \cap \Phi = \emptyset$. Le Lemme 3 dit que
+$X' \cap V(f_2)$ vérifie les hypothèses au rang $k-1$ ; l'hypothèse de
+récurrence, appliquée aux $k-1$ éléments $f_1, f_3, \ldots, f_k$, dit que
+$X' \cap V(f_1, \ldots, f_k)$ est connexe --- alors que le choix de $f_2,
+\ldots, f_k$ le rend non connexe, comme dans la réduction. Ainsi
+$X' \cap V(f_1)$ vérifie les hypothèses au rang $k-1$, et la récurrence,
+appliquée à $f_2, \ldots, f_k$, achève.\footnote{La page 12 porte « Or »
+souligné trois fois devant l'appel au Lemme 3. Le texte de liaison est presque
+entièrement illisible ; la démonstration est restituée d'après ses formules,
+et son ordre est celui que celles-ci imposent.}
+
+\pagerange{12}{16}
+\subsection*{Une réciproque (pages 12 à 16)}
+
+Un \emph{Corollaire I} énonce une réciproque : si, pour tous
+$f_1, \ldots, f_k \in \mathfrak{m}$, l'ensemble
+$\pi_0\bigl(X' \cap V(f_1) \cap \cdots \cap V(f_k)\bigr)$ des composantes
+connexes est réduit à un point, alors les composantes de $X'$ sont de
+dimension $\geq k+1$ et $X'$ est connexe en dimension $\geq k$. Les pages 14 et
+16, qui le démontrent, sont en grande partie annulées par de longs traits et
+des cadres barrés ; on y voit le principe --- si une composante de $X'$ est de
+dimension $l \leq k$, des équations $f_1, \ldots, f_l$ convenables la font
+disparaître ou la séparent du reste --- et un « !! » final. Nous ne
+reconstituons pas l'énoncé exact et ne l'affirmons pas.\footnote{L'hypothèse
+du Corollaire I est presque illisible ; « $(k \geq 1)$ » est ajouté au-dessus
+du titre, et une note en marge, en partie biffée, demande d'« exclure » le cas
+de $X$ irréductible de dimension $1$ --- celui où $X' \cap V(f)$ est vide pour
+tout $f$ non diviseur de zéro, et où la question de savoir si le vide est
+connexe se pose. Un exemple montre comment la réciproque opère : pour $X$
+réunion d'un $3$-plan et d'un plan qui se coupent selon une droite, et $k = 1$,
+la composante issue du plan est de dimension $1$ dans $X'$, et pour $f$ général
+$X' \cap V(f)$ est la réunion disjointe d'une surface et d'une droite
+épointées, qui ne se rencontrent qu'en $\mathfrak{m}$.}
+
+\pagerange{18}{18}
+\subsection*{Le groupe fondamental (page 18)}
+
+\emph{Corollaire.} Soit $A$ un anneau local noethérien complet, normal, de
+dimension $\geq n+1$ (donc $\dim X' \geq n$), et soient
+$f_1, \ldots, f_k \in \mathfrak{m}$ avec $k \leq n-1$. Alors
+$Y' = X' \cap V(f_1) \cap \cdots \cap V(f_k)$ est connexe et non vide, et
+l'homomorphisme $\pi_1(Y') \to \pi_1(X')$ des groupes fondamentaux étales
+(pour un point de base dans $Y'$) est surjectif.\footnote{L'hypothèse sur
+$X'$, devant « de dim $\geq n$ », est illisible ; « surjectif » est la
+lecture de la conclusion. Nous fournissons « complet et normal » : la
+démonstration utilise que les revêtements connexes de $X'$ sont irréductibles
+(« Or $X'_1$ est irréductible »), ce que donne la normalité, et le théorème
+précédent demande la complétude. Les « $H_i$ » de la page sont les $V(f_i)$.}
+
+En effet, $\pi_1(Y') \to \pi_1(X')$ est surjectif si et seulement si tout
+revêtement étale connexe $X'_1 \to X'$ reste connexe au-dessus de $Y'$. Un tel
+$X'_1$ est normal et connexe, donc intègre ; la normalisation $B$ de $A$ dans
+son corps des fonctions est finie sur $A$ (qui est complet), locale (car $A$
+est hensélien et $B$ intègre), normale, de même dimension, et $X'_1$ est son
+spectre épointé. Le théorème, appliqué à $B$ avec $k$ remplacé par $n-1$,
+donne la connexité de $X'_1 \cap V(f_1, \ldots, f_k)$ ; appliqué à $A$, celle
+de $Y'$. C'est une forme du \emph{théorème de Lefschetz local pour le
+$\pi_1$}.\footnote{Suit un paragraphe « Conséquences », sur le $\pi_1$ du
+spectre épointé d'un anneau local et le cas de la dimension $2$, presque
+entièrement illisible et terminé par un point d'exclamation.}
+
+\pagerange{20}{20}
+\subsection*{Du local au global (page 20)}
+
+\emph{Lemme 4.} Soient $X$ un schéma localement noethérien, connexe, dont les
+composantes irréductibles sont de dimension $\geq k$, et supposons que pour
+tout point $z \in X$ tel que $\dim \overline{\lbrace z \rbrace} < k$, le
+spectre épointé de $\mathcal{O}_{X,z}$ soit connexe en dimension
+$\geq k - 1 - \dim \overline{\lbrace z \rbrace}$. Alors $X$ est connexe en
+dimension $\geq k$.\footnote{La page demande que chaque
+$(\operatorname{Spec} \mathcal{O}_{X,x})'$ soit connexe en dimension $\geq k$ :
+c'est plus fort que l'hypothèse ci-dessus, et le lemme vaut donc aussi sous la
+forme de la page. Nous fournissons la connexité de $X$, sans laquelle
+l'énoncé est faux (une réunion disjointe) : l'adjectif qui suit « préschéma »
+est illisible. La note marginale, presque illisible, renvoie à EGA~IV.}
+
+\emph{Démonstration.} Soit $Z$ un fermé de dimension $< k$ tel que
+$X \smallsetminus Z = U' \sqcup U''$, avec $U'$, $U''$ ouverts, fermés et non
+vides. Aucune composante de $X$ n'est contenue dans $Z$, donc
+$X = \overline{U'} \cup \overline{U''}$ ; comme $X$ est connexe, il existe
+$z \in \overline{U'} \cap \overline{U''}$, et nécessairement $z \in Z$. Dans
+$X_z = \operatorname{Spec} \mathcal{O}_{X,z}$, le spectre épointé privé de
+$Z_z$ est la réunion disjointe des traces de $U'$ et de $U''$, toutes deux non
+vides puisque $z$ est adhérent à chacun. Or les points de $Z_z$ autres que $z$
+ont dans $X_z$ des adhérences de dimension
+$\leq \dim \mathcal{O}_{Z,z} - 1 \leq \dim Z - \dim \overline{\lbrace z
+\rbrace} - 1 < k - 1 - \dim \overline{\lbrace z \rbrace}$, ce qui contredit
+l'hypothèse.\footnote{La page localise de même en un point $z$ de
+$\overline{U'} \cap \overline{U''}$ et conclut « absurde ». Dans « $X^{z} =
+X' \cup X''$ », l'exposant est douteux ; nous lisons $X = \overline{U'} \cup
+\overline{U''}$.}
+
+\pagerange{22}{26}
+\subsection*{Les fibres spéciales d'un morphisme propre (pages 22 à 26)}
+
+\emph{Théorème 2.} Soient $f\colon X \to B$ un morphisme propre de schémas
+localement noethériens, avec $B$ intègre et excellent, $b_0 \in B$, $\eta$
+le point générique de $B$, $X_0$ et $X_1$ les fibres en $b_0$ et en $\eta$.
+Supposons :
+\begin{itemize}
+\item[(a)] $B$ géométriquement unibranche en $b_0$, et les composantes
+irréductibles de $X$ dominantes sur $B$ ;
+\item[(b)] les composantes irréductibles de $X_1$ de dimension $\geq k+1$, et
+$X_1$ \emph{géométriquement} connexe en dimension $\geq k$.
+\end{itemize}
+Alors les composantes irréductibles de $X_0$ sont de dimension $\geq k+1$, et
+$X_0$ est connexe en dimension $\geq k$.\footnote{Trois écarts. (1) La page
+écrit « de dim $\geq k$ » dans (b), lecture serrée en bout de ligne ; la
+conclusion, la page 24 (« $X_1$ irréductible de dim $\geq k+1$ ») et la formule
+de la page 26 demandent $k+1$. (2) Le « géométriquement » de (b) est de nous.
+Il est nécessaire déjà pour $k = 0$ : si $B$ est le spectre d'un anneau de
+valuation discrète et $X$ celui du normalisé de $B$ dans un corps de nombres où
+l'idéal premier se décompose, $X_1$ est un point, connexe, et $X_0$ en a deux.
+Celui de (a), entre crochets sur la page, est d'une lecture incertaine. (3)
+L'excellence de $B$ est de nous : elle sert à passer, dans la démonstration,
+à des anneaux locaux dont le complété reste intègre.}
+
+L'assertion sur les dimensions est la semi-continuité de la dimension des
+fibres ; elle n'utilise pas l'hypothèse unibranche. Celle-ci sert, comme le
+dit la page, au \emph{théorème de connexion} de Zariski, qui assure que $X_0$
+est connexe.\footnote{Pour $k = 0$ l'énoncé est exactement ce théorème (EGA~III,
+§~4.3, et sa variante à base unibranche dans EGA~IV).} Pour la connexité en
+dimension $\geq k$, le Lemme 4 ramène à l'énoncé local :
+
+\emph{Lemme 5.} Sous les hypothèses du théorème 2, pour $x \in X_0$, le spectre
+épointé de $\mathcal{O}_{X_0,x}$ est connexe en dimension
+$\geq k - 1 - \dim \overline{\lbrace x \rbrace}$ (adhérence prise dans
+$X_0$).\footnote{La page énonce la connexité « en dim $\geq k$ », avec une note
+marginale où paraît « $\dim \overline{x}$ » ; nous donnons la borne que le
+Lemme 4, tel que nous l'énonçons, consomme.}
+
+L'esquisse des pages 24 et 26 est la suivante. Par le Lemme 1 (absent du
+dossier), on se ramène à $X_1$ irréductible, puis $X$ intègre. Pour $x$ fermé
+dans $X_0$, la formule des dimensions donne
+\[
+  \dim \mathcal{O}_{X,x} = \dim \mathcal{O}_{B,b_0} + \dim X_1 \geq n + k + 1,
+  \qquad n = \dim \mathcal{O}_{B,b_0} ;
+\]
+la fibre $X_0$ est, au voisinage de $x$ et ensemblistement, définie par les $n$
+éléments d'un système de paramètres de $\mathcal{O}_{B,b_0}$, et le théorème
+local, appliqué avec $K = n + k - 1$ à $\mathcal{O}_{X,x}$ et à ces $n$
+équations, donne la connexité en dimension $\geq K - n = k - 1$, ce que le
+Lemme 5 demande en un point fermé. Nous ne donnons ce raisonnement que comme une esquisse : il demande que
+le spectre épointé du complété de $\mathcal{O}_{X,x}$ soit connexe en
+dimension $\geq \dim \mathcal{O}_{X,x} - 2$, ce qui vaut par exemple si ce
+complété est intègre --- d'où le passage au normalisé de $X$, permis par
+l'excellence --- et ce que la page tient pour « facile ».\footnote{La page
+écrit $\dim \mathcal{O}_{X,x} = \dim \mathcal{O}_{Y,y_0} + \dim X_1$ et
+« $\geq K+1 = (n+k)+1$ » puis « connexe en dim $\geq K - n = k$ », $K$
+étant une capitale nette : elle compte les dimensions dans
+$\operatorname{Spec} \mathcal{O}_{X,x}$, nous dans son spectre épointé, d'où
+le décalage d'un cran. Nous n'avons pas
+vérifié l'esquisse dans tous ses détails ; l'énoncé du théorème~2 est donné
+sous les hypothèses où elle nous paraît aller jusqu'au bout.}
+
+Trois corollaires suivent. Les deux premiers tiennent en une ligne : une
+variante pour les fibres géométriques, et une variante pour $f$ propre et
+ouvert. Le troisième est le théorème de connexité sous sa forme projective :
+
+\emph{Corollaire 3.} Soit $X \subset \mathbf{P}^N_{\Bbbk}$ un fermé dont les
+composantes sont de dimension $\geq k+1$ et qui est connexe en dimension
+$\geq k$. Pour des hyperplans $H_1, \ldots, H_\ell$ avec $\ell \leq k$, le
+fermé $X \cap H_1 \cap \cdots \cap H_\ell$ est connexe en dimension
+$\geq k - \ell$.
+
+On le déduit du théorème local appliqué au cône affine de $X$ en son sommet :
+l'anneau local est gradué, son complété a pour composantes les complétés des
+cônes sur les composantes de $X$, et le spectre épointé décale les dimensions
+exactement comme le passage de $X$ à son cône les relève. C'est l'énoncé que
+la littérature attribue à Grothendieck sous ce nom.\footnote{Voir W.~Fulton et
+R.~Lazarsfeld, « Connectivity and its applications in algebraic geometry »,
+Lecture Notes in Math.\ 862 (1981), qui le citent d'après SGA~2, XIII. Une
+note marginale de la page 26 annonce une « généralisation au cas … d'un
+morphisme $X \to \mathbf{P}^r_{\Bbbk}$ » ; c'est la forme que W.~Fulton et
+J.~Hansen (1979) et P.~Deligne ont donnée au théorème de connexité. La marge
+est trop illisible pour dire ce qu'il visait, et rien n'indique qu'il ait eu
+leur énoncé.}
+
+\section*{II. Les couples de Lefschetz-Grauert}
+
+\pagerange{29}{31}
+\subsection*{Introduction et plan (pages 29 à 31)}
+
+La page 29 porte « III » et « Introduction » : c'est le début d'un chapitre
+dont le dossier ne contient pas ce qui précède. Elle rappelle qu'au
+paragraphe précédent, pour $X$ propre sur un schéma localement noethérien $Y$
+et $Y'$ fermé dans $Y$, on a comparé les foncteurs $R^i f$ et $R^i \hat{f}$
+--- c'est le théorème des fonctions formelles --- et que, sur la base d'un
+anneau complet, un théorème d'existence donne l'équivalence entre Modules
+cohérents sur $X$ et Modules cohérents sur le complété formel : c'est le
+contenu des paragraphes 4 et 5 d'EGA~III. Le chapitre annonce des
+généralisations à des morphismes non propres --- une immersion ouverte, par
+exemple --- au moyen d'un théorème de finitude et de la notion de
+\emph{profondeur}, et en fait l'outil d'une étude systématique des propriétés
+« du type de Lefschetz » : relier les propriétés de $X$ à celles d'un
+sous-schéma $Y$ \emph{via} le complété formel $X_{/Y}$. Il cite H.~Grauert
+(« 1958 ») et des théorèmes de Serre.\footnote{Les pages 29 et 30 sont un
+palimpseste rapide ; on n'en restitue que l'articulation. Les références sont
+des crochets vides, et celle à Grauert ne s'identifie pas d'après la page ;
+nous n'en proposons pas. Le nom « Lefschetz-Grauert » n'est pas celui que
+SGA~2 retiendra.}
+
+Parmi les résultats annoncés : pour $X$ projectif, $Y$ section hyperplane et
+$F$ cohérent dont la profondeur aux points fermés de $X \smallsetminus Y$ est
+$\geq p$, l'homomorphisme
+\[
+  H^i(X, F) \longrightarrow H^i(X_{/Y}, F_{/Y})
+\]
+est bijectif pour $i \leq p - 2$ (et injectif pour $i = p-1$).\footnote{La page
+a « bijectif [… $i \leq \operatorname{prof} F - 2$] » pour $F$ localement
+libre ; le cadre --- section hyperplane projective --- est lu dans la phrase
+précédente. Nous donnons l'énoncé sous la forme de SGA~2, XII. Un second
+point (ii), où paraît « $\operatorname{prof}(\mathcal{O}_{\widehat{X}}) \geq
+2$ », est illisible.}
+
+Le plan de la page 31, en neuf points : 1.~généralisation des théorèmes de
+finitude formelle et de comparaison, application à un théorème d'existence ;
+2.~le théorème de finitude locale ; 3.~cas particulier des anneaux locaux ;
+4.~cas particulier des schémas projectifs ; 5.~fermés de Lefschetz-Grauert ;
+6.~propriétés liées à $\pi_0$, $\pi_1$, $\operatorname{Pic}$ ;
+7.~permanence ; 8.~théorèmes de pureté et théorèmes de Lefschetz pour le
+$\pi_1$ ; 9.~anneaux quasi-factoriels et théorème de Lefschetz pour
+$\operatorname{Pic}$.\footnote{Deux anciens points 3 et 4 sont barrés et
+renumérotés. Une note encadrée relie les points 6 et 8 : « utiliser IV, § …
+sur les morphismes étales », sans doute EGA~IV.} Le dossier développe les
+points 5 à 7 (pages 32 à 51), un morceau du point 4 (pages 55 à 61) et
+quelques calculs pour le point 9 (pages 64 à 66).
+
+\pagerange{32}{36}
+\subsection*{Définitions et premières remarques (pages 32 à 36)}
+
+Soient $X$ un schéma localement noethérien, $Y$ une partie fermée, $n$ un
+entier. Tous les Modules localement libres sont de type fini.
+
+\emph{Définition.} On dit que $(X, Y)$ vérifie $(\mathrm{LG})_n$ si, pour
+tout Module localement libre $F$ sur $X$,
+\[
+  (*) \qquad H^i(X, F) \longrightarrow H^i(X_{/Y}, F_{/Y})
+\]
+est bijectif pour $i \leq n$ et injectif pour $i = n+1$. On dit que $(X, Y)$
+vérifie \emph{LG faible} si $(*)$ est bijectif pour $i = 0$ et tout $F$
+localement libre, c'est-à-dire si $F \mapsto F_{/Y}$ est pleinement fidèle des
+Modules localement libres sur $X$ dans ceux sur $X_{/Y}$. On dit que $(X, Y)$
+vérifie \emph{LG} si $(U, Y)$ vérifie LG faible pour tout voisinage ouvert $U$
+de $Y$, et \emph{LG stricte} si de plus tout Module localement libre sur
+$X_{/Y}$ est le complété d'un Module localement libre sur un voisinage de $Y$.
+Notant $\mathcal{L}(U)$ la catégorie des Modules localement libres sur $U$,
+LG stricte signifie que les foncteurs de restriction $\mathcal{L}(U) \to
+\mathcal{L}(V)$, pour $U \supset V \supset Y$, sont pleinement fidèles et que
+\[
+  \varinjlim_{U \supset Y} \mathcal{L}(U) \longrightarrow \mathcal{L}(X_{/Y})
+\]
+est une équivalence de catégories.\footnote{Il écrit sous la limite
+« "Pseudolimite" de catégories » : c'est la $2$-colimite. Les mots « faible »
+et « stricte » sont d'une lecture incertaine ; la page 35 dit aussi «
+effective ». La définition de LG est restituée d'après la Remarque 3 et la
+conclusion de la page 36, la page 32 étant illisible à cet endroit.} Ce sont,
+sous les noms de condition de Lefschetz $\mathrm{Lef}(X, Y)$ et de condition
+de Lefschetz effective $\mathrm{Leff}(X, Y)$, les notions de l'exposé X de
+SGA~2.\footnote{« et injectif pour $i = n+1$ » est encerclé dans la
+définition, et la marge porte « inutile » : il s'est demandé si cette clause
+était superflue ; c'est la Question de la Remarque 1. Deux notes encadrées
+de la marge posent l'une une conséquence (« si $\overline{\mathfrak{z}} \cap
+Y = \emptyset$, alors $\mathfrak{z} \notin \operatorname{Ass}
+\mathcal{O}_X$ », que démontre le Lemme de la page 36), l'autre une question
+restée ouverte sur la page : LG implique-t-il $\operatorname{prof}
+\mathcal{O}_{X,x} \geq 2$ pour $\overline{\lbrace x \rbrace} \cap Y =
+\emptyset$ ?}
+
+\emph{Remarque 1} (page 33). LG faible équivaut à $(\mathrm{LG})_0$ : la
+bijectivité en degré $0$ entraîne l'injectivité en degré $1$. En effet, une
+classe de $H^1(X, F) = \operatorname{Ext}^1(\mathcal{O}_X, F)$ est celle d'une
+extension $0 \to F \to E \to \mathcal{O}_X \to 0$, avec $E$ localement libre ;
+si elle s'annule sur $X_{/Y}$, la section formelle de $\widehat{E}$ qui scinde
+l'extension complétée provient d'une section $s$ de $E$, dont l'image dans
+$H^0(X, \mathcal{O}_X)$ a pour complété $1$, donc vaut $1$ : l'extension est
+scindée.
+
+La page pose ensuite la question générale --- si $(*)$ est bijectif pour
+$i \leq n$ et tout $F$, est-il injectif pour $i = n+1$ ? --- et répond « Oui
+», en plongeant $F$ dans un autre Module. Nous savons le démontrer lorsque $X$
+est projectif sur un anneau noethérien, et $n \geq 0$ : on plonge $F$ dans
+$L = \mathcal{O}_X(m)^{\oplus N}$, à conoyau $G$ localement libre, avec
+$m$ assez grand pour que $H^{n+1}(X, L) = 0$. Une classe $c \in H^{n+1}(X, F)$
+de complété nul a une image nulle dans $H^{n+1}(X, L)$, provient donc de
+$g \in H^n(X, G)$ ; le complété de $g$ provient de $H^n(\widehat{L}) =
+H^n(L)^{\wedge}$, et l'injectivité en degré $n$ pour $G$ montre que $g$ provient
+de $H^n(X, L)$, d'où $c = 0$.\footnote{Après « Oui, prendre une injection
+$0 \to F \to I \to G \to 0$ », la page est en interligne serré et illisible.
+La démonstration ci-dessus est la nôtre, et l'hypothèse projective aussi ;
+nous ne savons pas si la réponse est « oui » en général.}
+
+\emph{Remarque 2} (pages 33 et 34). Soit $(L_\alpha)$ une famille de Modules
+localement libres telle que tout Module localement libre $F$ se plonge dans
+une somme directe finie $L$ de $L_\alpha$, avec un conoyau localement libre
+--- ce qui revient à dire que $F^\vee$ est quotient d'une somme de
+$L_\alpha^\vee$. Exemples : $X$ quasi-affine et la famille réduite à
+$\mathcal{O}_X$ ; $X$ quasi-projectif sur un anneau noethérien et les
+$\mathcal{O}_X(m)$, $m \geq m_0$. Alors $(\mathrm{LG})_n$ équivaut à : $(*)$
+est bijectif pour $i \leq n$ et injectif pour $i = n+1$ lorsque $F$ est l'un
+des $L_\alpha$.
+
+Par récurrence sur $n$, le cas $n = -1$ étant clair. Supposons
+$(\mathrm{LG})_{n-1}$ et soit $0 \to F \to L \to G \to 0$ comme ci-dessus. On
+compare les suites de cohomologie :
+
+\begin{tikzcd}[column sep=small, row sep=small, nodes={font=\scriptsize}]
+H^i(L) \arrow[r] \arrow[d, "\alpha"'] & H^i(G) \arrow[r] \arrow[d, "\beta"] & H^{i+1}(F) \arrow[r] \arrow[d, "\varphi"] & H^{i+1}(L) \arrow[r] \arrow[d, "\alpha'"] & H^{i+1}(G) \arrow[d, "\beta'"] \\
+H^i(\widehat{L}) \arrow[r] & H^i(\widehat{G}) \arrow[r] & H^{i+1}(\widehat{F}) \arrow[r] & H^{i+1}(\widehat{L}) \arrow[r] & H^{i+1}(\widehat{G})
+\end{tikzcd}
+
+Pour $i = n-1$ : $\beta$ est bijectif et $\beta'$ injectif (récurrence),
+$\alpha$ et $\alpha'$ bijectifs (hypothèse) ; le lemme des cinq donne $\varphi$
+bijectif, c'est-à-dire $(*)$ bijectif en degré $n$ pour tout $F$. Pour $i = n$ :
+$\alpha$ est surjectif, $\beta$ injectif (ce qu'on vient de voir, appliqué à
+$G$), $\alpha'$ injectif ; donc $\varphi$ est injectif.\footnote{La page
+conclut « $\varphi$ est surjection (bijection) » au cas $\alpha$) et esquisse
+le cas $\beta$) ; ses primes ne se distinguent pas, et son dernier symbole est
+lu $\varphi'$ avec doute. Le crochet « [N.B. … !] » est biffé.}
+
+\emph{Remarque 3} (pages 35 et 36). La condition LG passe d'elle-même à tout
+voisinage ouvert de $Y$ ; il n'en va pas de même en général de
+$(\mathrm{LG})_0$, car un Module localement libre sur un voisinage $U$ de $Y$
+ne s'étend pas toujours à $X$. Mais si tout Module localement libre sur $U$
+est sous-module, à conoyau localement libre, de la restriction d'un Module
+localement libre sur $X$ --- c'est le cas si $X$ est quasi-projectif ---,
+alors $(\mathrm{LG})_0$ pour $(X, Y)$ entraîne $(\mathrm{LG})_0$ pour $(U, Y)$,
+c'est-à-dire LG. La surjectivité de $H^0(U, F) \to H^0(X_{/Y}, F_{/Y})$ se
+déduit de celle sur $X$ par le même plongement ; l'injectivité tient à ce
+qu'une section de complété nul est nulle au voisinage de $Y$ (théorème
+d'intersection de Krull), donc à support dans un fermé de $U$ disjoint de
+$Y$, et au lemme suivant.
+
+\emph{Lemme} (page 36). Si $X$ est quasi-projectif sur un anneau noethérien
+et si $(X, Y)$ vérifie $(\mathrm{LG})_0$, alors tout point $x \in X$ tel que
+$\overline{\lbrace x \rbrace} \cap Y = \emptyset$ n'est pas associé à
+$\mathcal{O}_X$.
+
+Sinon, $\mathcal{O}_X$ contiendrait un sous-faisceau cohérent non nul $F$ à
+support dans $\overline{\lbrace x \rbrace}$ ; pour $m$ assez grand, $F(m)
+\subset \mathcal{O}_X(m)$ aurait une section non nulle, dont le complété le
+long de $Y$ est nul : cela contredit l'injectivité de $(*)$ pour
+$\mathcal{O}_X(m)$.
+
+\emph{Conclusion pratique.} Si $X$ est quasi-projectif sur un anneau
+noethérien,
+\[
+  (\mathrm{LG})_0 \iff \text{LG faible} \iff \text{LG} \iff
+  H^0(X, \mathcal{O}_X(m)) \xrightarrow{\ \sim\ } H^0(X_{/Y}, \mathcal{O}_X(m)_{/Y})
+  \ \text{pour } m \gg 0 .
+\]
+La dernière condition entraîne LG faible par l'argument de la Remarque 2 en
+degré $0$, qui n'utilise que la bijectivité de $H^0$ sur les
+$\mathcal{O}_X(m)$.\footnote{La conclusion est encadrée. La page écrit une
+implication vers le quatrième membre, et trois flèches courbes au crayon,
+marquées « $n$ », remontent vers les précédents ; l'équivalence est vérifiée
+ici. Le troisième membre se lit « $(\mathrm{LG})_X$ », indice incertain ; nous
+lisons LG, ce que la Remarque 3 établit.}
+
+\pagerange{37}{40}
+\subsection*{Composantes connexes, groupe fondamental, groupe de Picard (pages 37 à 40)}
+
+Le complété $X_{/Y}$ a le même espace sous-jacent que $Y$ ; ses idempotents
+sont ceux de $\mathcal{O}_Y$, et ses revêtements étales sont ceux de $Y$
+(SGA~1). Tout ce qui suit consiste à faire passer ces informations de
+$X_{/Y}$ à $X$ par les conditions précédentes. On suppose $X$ noethérien.
+
+\emph{Proposition} (page 37). Si $H^0(X, \mathcal{O}_X) \to H^0(X_{/Y},
+\mathcal{O}_{X/Y})$ est injectif (resp.\ bijectif), alors $\pi_0(Y) \to
+\pi_0(X)$ est surjectif (resp.\ bijectif). En particulier
+$(\mathrm{LG})_{-1}$ (resp.\ $(\mathrm{LG})_0$) l'entraîne.
+
+Une composante connexe de $X$ qui ne rencontre pas $Y$ a un idempotent non nul
+de complété nul ; et si $H^0$ est bijectif, toute partition de $Y$ en ouverts
+fermés, qui est un idempotent de $H^0(X_{/Y}, \mathcal{O})$, provient d'un
+idempotent de $H^0(X, \mathcal{O}_X)$.
+
+\emph{Lemme} (page 37). Supposons LG, et soit $F$ un Module localement libre
+sur $X$. Toute structure d'algèbre sur $\widehat{F}$ provient d'une unique
+structure d'algèbre sur $F$, et les décompositions de $\widehat{F}$ en
+produit correspondent à celles de $F$ ; si $X' = \operatorname{Spec}(F)$,
+$X'$ est connexe si et seulement si son complété l'est.\footnote{Le paragraphe
+est barré de quatre longs traits, et « Lemme » remplace « Corollaire » biffé ;
+il reste lisible dans ses formules, et la suite s'en sert. Une multiplication
+est une section du Module localement libre
+$\underline{\mathrm{Hom}}(F \otimes F, F)$, et les axiomes se vérifient après
+complétion par injectivité de $(*)$.}
+
+\emph{Proposition} (page 37). Supposons $X$ connexe, et prenons le point
+de base des groupes fondamentaux dans $Y$. Si $(X, Y)$ vérifie LG,
+$\pi_1(Y) \to \pi_1(X)$ est surjectif. Si $(X, Y)$ vérifie LG stricte,
+l'homomorphisme
+\[
+  \pi_1(Y) \longrightarrow \varprojlim_{U} \pi_1(U),
+\]
+la limite étant prise sur les voisinages ouverts connexes $U$ de $Y$, est
+bijectif.
+
+\emph{Corollaire} (page 38). Si LG, le foncteur $X' \mapsto X' \times_X Y$
+des revêtements étales de $X$ dans ceux de $Y$ est pleinement fidèle, et il
+en va de même en remplaçant $X$ par un voisinage ouvert de $Y$. Si LG stricte,
+pour tout revêtement étale $Y'$ de $Y$, il existe un voisinage ouvert $U$ de
+$Y$ et un revêtement étale $U'$ de $U$ tels que $U' \times_U Y \simeq Y'$.
+
+C'est le lemme appliqué aux algèbres localement libres qui définissent les
+revêtements étales, et l'équivalence entre revêtements étales de $X_{/Y}$ et
+de $Y$. La propriété sur les $\pi_1$ en est la traduction galoisienne. La page
+annonce enfin des conditions « liées aux théorèmes de pureté » qui donnent
+$\pi_1(Y) \simeq \pi_1(X)$, « Kif-Kif pour Pic » : c'est le point 8 du plan,
+que le dossier ne développe pas.
+
+\emph{Proposition} (page 39). (i) Si LG, $\operatorname{Pic}(X) \to
+\operatorname{Pic}(X_{/Y})$ est injectif, et plus généralement les
+$\operatorname{Pic}(U) \to \operatorname{Pic}(X_{/Y})$ le sont pour les
+voisinages ouverts $U$ de $Y$, de sorte que les applications de transition
+sont injectives et que
+\[
+  \varinjlim_{U \supset Y} \operatorname{Pic}(U) \longrightarrow \operatorname{Pic}(X_{/Y})
+\]
+est injectif. (ii) Si LG stricte, ce dernier homomorphisme est bijectif.
+
+Si $\widehat{L}$ est trivial, une section formelle partout génératrice de
+$\widehat{L}$ et son inverse proviennent de sections de $L$ et de
+$L^{-1}$ dont le produit, de complété $1$, vaut $1$.
+
+Supposons maintenant que $Y$ soit un diviseur de Cartier, d'Idéal
+$\mathcal{J}$, et notons $\Lambda = \mathcal{O}_X(Y)$, de sorte que
+$i^*(\Lambda)^{-1} \simeq \mathcal{J}/\mathcal{J}^2$, où $i\colon Y \to X$ est
+l'injection. On écrit $\Lambda^{-n}$ pour $i^*(\Lambda)^{-n} \simeq
+\mathcal{J}^n/\mathcal{J}^{n+1}$.
+
+\emph{Lemme} (page 40). (i) Si $H^1(Y, \Lambda^{-n}) = 0$ pour $n \geq 1$,
+l'homomorphisme $\operatorname{Pic}(X_{/Y}) \to \operatorname{Pic}(Y)$ est
+injectif. (ii) Si de plus $H^2(Y, \Lambda^{-n}) = 0$ pour $n \geq 1$, il est
+bijectif.
+
+Pour $X_n$ le sous-schéma défini par $\mathcal{J}^{n+1}$, la suite exacte
+$0 \to \mathcal{J}^n/\mathcal{J}^{n+1} \to \mathcal{O}_{X_n}^* \to
+\mathcal{O}_{X_{n-1}}^* \to 1$ ($n \geq 1$) place dans
+$H^1(Y, \Lambda^{-n})$ le noyau de $\operatorname{Pic}(X_n) \to
+\operatorname{Pic}(X_{n-1})$ et l'obstruction à relever les sections
+inversibles, et dans $H^2(Y, \Lambda^{-n})$ l'obstruction à relever un Module
+inversible.\footnote{La page dit que, sous (i), le foncteur $\mathcal{F}
+\mapsto \mathcal{F}_0$ des Modules inversibles sur $X_{/Y}$ dans ceux sur $Y$
+est « pleinement fidèle », et une « équivalence » sous (ii). C'est trop :
+deux automorphismes d'un Module inversible sur $X_{/Y}$ qui coïncident sur $Y$
+diffèrent d'une unité $\equiv 1 \bmod \mathcal{J}$, et la fidélité demanderait
+en outre $H^0(Y, \Lambda^{-n}) = 0$. Ce qui vaut tel quel est l'énoncé sur
+$\operatorname{Pic}$, que la page en tire.}
+
+\emph{Corollaire} (page 39). (i) Si $H^1(Y, \Lambda^{-n}) = 0$ pour $n \geq 1$
+et si LG, alors $\operatorname{Pic}(X) \to \operatorname{Pic}(Y)$ est injectif,
+ainsi que les $\operatorname{Pic}(U) \to \operatorname{Pic}(Y)$. (ii) Si
+$H^1(Y, \Lambda^{-n}) = H^2(Y, \Lambda^{-n}) = 0$ pour $n \geq 1$ et si LG
+stricte, alors $\varinjlim_{U \supset Y} \operatorname{Pic}(U)
+\xrightarrow{\ \sim\ } \operatorname{Pic}(Y)$.\footnote{Au (ii), un trait
+traverse « $H^1(Y, \Lambda^{-n}) = 0$ » ; ce n'est sans doute pas une biffure,
+la conclusion demandant les deux annulations. Le corollaire est écrit avant le
+lemme dont il découle.}
+
+C'est le mécanisme du théorème de Lefschetz de Grothendieck pour le groupe de
+Picard : sur une variété projective lisse de dimension $\geq 4$, la
+restriction à une section hyperplane est un isomorphisme sur
+$\operatorname{Pic}$.
+
+\pagerange{40}{43}
+\subsection*{Permanence (pages 40 à 43)}
+
+Un \emph{Théorème 1} de la page 40, annulé, énonce la permanence de
+$(\mathrm{LG})_n$ par un morphisme projectif et plat, puis un \emph{Th.~2}
+s'interrompt au bas de la page ; la page 41 récrit le tout.
+
+\emph{Théorème.} Soient $X$ un schéma noethérien quasi-projectif sur un anneau
+noethérien, $Y$ une partie fermée, $f\colon W \to X$ un morphisme projectif,
+$Y_W = f^{-1}(Y)$. Soit $F$ un Module cohérent sur $W$, à support propre sur
+$X$ et \emph{plat} sur $X$, et considérons les homomorphismes
+\[
+  H^i(W, F) \longrightarrow H^i(W_{/Y_W}, F_{/Y_W}) .
+\]
+(i) Si $(X, Y)$ vérifie $(\mathrm{LG})_n$, ils sont bijectifs pour $i \leq n$
+et injectifs pour $i = n+1$.
+
+(ii) Si $(X, Y)$ vérifie LG, alors pour tout voisinage ouvert $U$ de $Y$, le
+foncteur $F \mapsto F_{/Y_W}$, des Modules cohérents sur $f^{-1}(U)$ plats sur
+$U$ à support propre dans les Modules cohérents sur $W_{/Y_W}$, est pleinement
+fidèle ; plus précisément
+$\operatorname{Hom}(F, G) \simeq \operatorname{Hom}(\widehat{F}, \widehat{G})$
+dès que $G$ est plat sur $X$.
+
+(iii) Si $(X, Y)$ vérifie LG stricte, tout Module cohérent sur $W_{/Y_W}$
+plat sur $X_{/Y}$ est, sur un voisinage $f^{-1}(U)$ de $Y_W$, le complété
+d'un Module cohérent plat sur $U$.\footnote{« plat sur $Y$ », dit la page à
+l'hypothèse ; la lettre se lit nettement, mais (i) n'a de sens qu'avec « plat
+sur $X$ », qui est ce que demandent (ii) et (iii). « quasi-projectif »,
+doublement souligné, et « à support propre sur $X$ » sont des ajouts.
+La précision de (ii) sur $\operatorname{Hom}(F, G)$ est en marge.}
+
+Le manuscrit ne donne pas de démonstration. Pour (i), elle va ainsi : $F$
+étant plat et à support propre, $Rf_*F$ est un complexe parfait, que la
+quasi-projectivité de $X$ permet de représenter globalement par un complexe
+borné $E^\bullet$ de Modules localement libres, en degrés $\geq 0$ ; le
+théorème de comparaison (EGA~III, §~4.1) identifie $H^i(W_{/Y_W},
+F_{/Y_W})$ à l'hypercohomologie de $\widehat{E}^\bullet$ ; et une récurrence
+sur la longueur de $E^\bullet$, avec le lemme des cinq, fait passer
+$(\mathrm{LG})_n$ des $E^p$ au complexe. Pour (ii), on représente
+$U \mapsto f_* \underline{\mathrm{Hom}}(F, G \otimes f^* M)$ par un Module
+cohérent (EGA~III, §~7.7), auquel on applique la bijectivité en degré $0$ et
+l'injectivité en degré $1$ ; c'est pourquoi seule la platitude de $G$ compte.
+Nous ne vérifions pas (iii).\footnote{Ces esquisses sont les nôtres. L'énoncé
+(iii), et le Corollaire 2 qui en dépend, restent des énoncés du manuscrit.}
+
+\emph{Corollaire 2} (page 42). Si $(X, Y)$ vérifie LG, le foncteur
+$W \mapsto W \times_X X_{/Y}$, des schémas projectifs et plats sur $X$ dans
+les schémas formels projectifs et plats sur $X_{/Y}$, est pleinement fidèle,
+et de même en remplaçant $X$ par un voisinage ouvert de $Y$. Si $(X, Y)$
+vérifie LG stricte, tout schéma formel projectif et plat sur $X_{/Y}$ est, sur
+un voisinage ouvert $U$ de $Y$, le complété d'un schéma projectif et plat sur
+$U$.
+
+\emph{Corollaire 1} (page 42). Si $X$ est quasi-projectif et si $(X, Y)$
+vérifie $(\mathrm{LG})_n$ (resp.\ LG, resp.\ LG stricte), alors pour tout
+$W$ projectif et plat sur $X$, le couple $(W, f^{-1}(Y))$ vérifie
+$(\mathrm{LG})_n$ (resp.\ LG, resp.\ LG stricte).\footnote{Le Corollaire 1 est
+écrit après le Corollaire 2 sur la page ; « ($X$ quasi-projectif) » est
+encadré. Pour $(\mathrm{LG})_n$, c'est (i) appliqué aux Modules localement
+libres sur $W$ ; pour LG, on passe par $(\mathrm{LG})_0$ et la conclusion
+pratique, $W$ étant quasi-projectif ; pour LG stricte, il faut (iii), et un
+Module dont le complété le long de $f^{-1}(Y)$ est localement libre l'est au
+voisinage de $f^{-1}(Y)$.}
+
+\emph{Remarques} (page 43). Des exemples montrent que les conditions de
+platitude et de propreté sont essentielles. Il est possible en revanche que
+l'hypothèse de quasi-projectivité sur $X$ et $W$ puisse être omise --- ainsi
+que, en partie, dans le Corollaire 2 (ii), l'« existence d'un schéma
+algébrique donnant un schéma formel ».
+
+\pagerange{45}{51}
+\subsection*{Une forme locale (pages 45 à 51)}
+
+\emph{Théorème.} Soient $A$ un anneau local noethérien, quotient d'un anneau
+régulier, $t \in \mathfrak{m}$, et supposons $A$ séparé et complet pour la
+topologie $t$-adique. Posons $Y = V(t)$, $Y' = Y \cap X'$,
+$\widehat{X} = X_{/Y}$, $\widehat{X}' = X'_{/Y'}$. Les parties fermées de $X'$
+disjointes de $Y'$ sont les parties finies formées de points fermés de $X'$ ;
+notons $\Phi$ leur ensemble, $\mathcal{C}(X')$ la catégorie des Modules
+cohérents sur $X'$ et $\mathcal{C}_\Phi(X')$ la sous-catégorie épaisse de ceux
+dont le support est dans $\Phi$. Le foncteur
+\[
+  F \longmapsto \widehat{F} : \mathcal{C}(X') \longrightarrow \mathcal{C}(\widehat{X}')
+\]
+est exact, de noyau $\mathcal{C}_\Phi(X')$ ; il définit un foncteur exact et
+fidèle
+\[
+  \rho : \mathcal{C}(X') / \mathcal{C}_\Phi(X') \longrightarrow \mathcal{C}(\widehat{X}') .
+\]
+Si $F$ et $G$ sont cohérents sur $X'$ et si $G$ est de profondeur $\geq 2$ aux
+points fermés de $X' \smallsetminus Y'$, alors
+\[
+  \operatorname{Hom}(F, G) \xrightarrow{\ \sim\ } \operatorname{Hom}(\widehat{F}, \widehat{G}) .
+\]
+En particulier $\rho$ est pleinement fidèle sur la sous-catégorie pleine des
+objets représentés par de tels Modules.\footnote{La page dit « $\rho$ est
+pleinement fidèle », suivi d'une barre oblique, et parle d'une équivalence de
+« $[\mathcal{C}(X')/\mathcal{C}_\Phi(X')]'$ » --- le prime marquant sans doute
+une sous-catégorie --- avec les Modules cohérents sur $\widehat{X}'$ « qui sont
+restriction de Modules cohérents sur $\widehat{X}$ ». Sans restriction, $\rho$
+n'est pas plein : pour $A = \Bbbk[[x, y, z]]$, $t = x$ et $F = G =
+\mathcal{O}_C$, $C = V(y)$, les endomorphismes de $F$ dans le quotient forment
+l'anneau de valuation discrète $\Bbbk[[x, z]]_{(x)}$, ceux de $\widehat{F}$ son
+complété $\Bbbk((z))[[x]]$. La complétude $t$-adique est fournie par nous : la
+deuxième ligne de la page est surchargée, et on n'y lit que « la top.\
+$t$-adique ». Elle est nécessaire, puisque $\widehat{X}'$ ne change pas quand
+on remplace $A$ par son séparé complété $t$-adique, et que
+$\Gamma(X', \mathcal{O})$ change.}
+
+Par $H = \underline{\mathrm{Hom}}(F, G)$, qui est de profondeur
+$\geq \min(2, \operatorname{prof} G)$ en chaque point, on se ramène à
+$\Gamma(X', H) \simeq \Gamma(\widehat{X}', \widehat{H})$ pour $H$ de profondeur
+$\geq 2$ aux points fermés de $X' \smallsetminus Y'$. La page 47 l'aborde par
+un dévissage « facile » et « purement local » : une suite exacte
+\[
+  0 \to P \to H \to \bar{H} \to Q \to 0,
+\]
+où $P$ et $Q$ ont leur support dans $Y'$, de dimensions $\leq 0$ et
+$\leq 1$, et $\bar{H}$ a la profondeur voulue ; puis, $K$ étant le noyau de la
+multiplication par une puissance $t^n$ et $0 \to K \to H \to G_1 \to 0$ avec
+$G_1$ sans $t$-torsion, la comparaison
+\[
+\begin{array}{ccccccc}
+  0 \to \Gamma K & \longrightarrow & \Gamma H & \longrightarrow & \Gamma G_1 & \longrightarrow & H^1 K \\
+  \downarrow \wr & & \downarrow & & \downarrow & & \downarrow \wr \\
+  0 \to \Gamma \widehat{K} & \longrightarrow & \Gamma \widehat{H} & \longrightarrow & \Gamma \widehat{G}_1 & \longrightarrow & H^1 \widehat{K}
+\end{array}
+\]
+où les flèches extrêmes sont des isomorphismes, $K$ étant tué par $t^n$. Le
+cas $t$-régulier reste à faire : la page marque d'un « ? » la flèche de
+$\Gamma G_1$, et s'arrête là.\footnote{La lettre lue $G'$ (ici $G_1$) pourrait
+être $C'$ ; « $t^n$ » est incertain ; les bornes $\leq 0$, $\leq 1$ et la
+barre de $\bar{F}'$ sont lues d'après le tracé, et la borne de profondeur de
+$\bar{F}'$ est illisible. Le « ? » est de lui.}
+
+Les pages 49 et 51 traitent l'autre moitié --- l'image essentielle. Avec un «
+cor.~3 au th.\ de comparaison affine » et des conditions a), b), c') qui ne
+sont pas dans le dossier --- c') disant que le Module formel $\mathcal{F}$ sur
+$\widehat{X}'$ s'étend en un Module cohérent sur $\widehat{X}$ ---, on sait
+que $\mathcal{F}$ provient d'un Module cohérent $F$ sans $t$-torsion, et l'on
+veut un $F$ de profondeur $\geq 2$ aux points d'un ensemble $T_1$, qui est
+sans doute celui des points fermés de $X' \smallsetminus Y'$. L'argument :
+soit $U$ l'ouvert de $X'$ où cette profondeur est atteinte ; c'est un
+voisinage de $Y'$, et ses points complémentaires sont fermés dans $X'$, donc
+en nombre fini. Un point associé $x_1$ de $F$ dans $U$ dont l'adhérence
+contiendrait un point $x$ de $X' \smallsetminus U$ serait d'adhérence de
+dimension $1$, et $F$ serait de profondeur $\leq 1$ aux points fermés de cette
+adhérence dans $U$, ce qui est absurde. Le critère de finitude des images
+directes montre alors que, pour $i\colon U \to X'$ l'inclusion,
+$F_1 = i_*(F|_U)$ est cohérent ; il est de profondeur $\geq 2$ aux points de
+$X' \smallsetminus U$ par construction, et aux points fermés de $U$ par
+définition de $U$ : « on a gagné ».\footnote{Le milieu de la page 49 est
+encadré et annulé d'un long zigzag ; il définissait l'ensemble des points où
+$\operatorname{prof} F_{x} \leq 1$. Une note marginale, « Je suppose $X$
+localisé autour de $T$, et $X - T = X'$ », suggère un cadre plus général que
+celui de la page 45, avec $T$ fermé. Nous suivons le texte non biffé.}
+
+\section*{III. Morphismes projectifs : profondeur et dualité}
+
+\pagerange{55}{58}
+\subsection*{Les questions, et la dualité (pages 55 à 58)}
+
+Soient $X = \mathbf{P}^r_{\Bbbk}$, $S = \Bbbk[T_0, \ldots, T_r]$, $Y$ une
+section hyperplane, $U$ un voisinage ouvert de $Y$, $g\colon U \to X$
+l'inclusion, $Z = X \smallsetminus U$, et $F$ un Module cohérent sur $X$. Le
+fermé $Z$ est contenu dans l'espace affine $X \smallsetminus Y$ et fermé dans
+$\mathbf{P}^r$ : c'est un ensemble \emph{fini} de points
+fermés.\footnote{La page ne le dit pas ; c'est ce qui permet d'écrire, comme
+elle le fait, la cohomologie à supports dans $Z$ comme un produit sur les
+points $z \in Z$, et de parler de « $z$ isolé ».} Les questions :
+
+a) À quelle condition $H^i(U, F(-m)) = 0$ pour $m$ grand ?
+
+a') À quelle condition $\bigoplus_{m \geq 0} H^i(U, F(m))$ est-il de type fini
+sur $S$ ?
+
+b) À quelle condition $H^i(U, F(m)) = 0$ pour $m$ grand ($i > 0$ donné) ?
+
+c) À quelle condition $H^i(U, F) \to H^i(\widehat{X}, \widehat{F})$ est-il
+bijectif, injectif ?
+
+(1°) On part de la suite exacte de cohomologie locale
+\[
+  \begin{array}{l}
+  H^i_Z(X, F(-m)) \xrightarrow{\alpha_i} H^i(X, F(-m)) \to H^i(U, F(-m)) \\
+  \qquad \to H^{i+1}_Z(X, F(-m)) \xrightarrow{\alpha_{i+1}} H^{i+1}(X, F(-m))
+  \end{array}
+\]
+et l'on pose $E^j = \underline{\mathrm{Ext}}^j_{\mathcal{O}_X}(F, \omega_X)$.
+Pour $m$ grand, la dualité de Serre identifie le dual de $H^i(X, F(-m))$ à
+$\Gamma(X, E^{r-i}(m))$, et la dualité locale identifie le dual (de Matlis) de
+$H^i_Z(X, F(-m)) = \bigoplus_{z \in Z} H^i_z(F_z)$ à
+$\prod_{z \in Z} \widehat{E^{r-i}_z}$ ; l'application duale de $\alpha_i$ est
+la restriction
+\[
+  \Gamma(X, E^{r-i}(m)) \longrightarrow \prod_{z \in Z} \widehat{E^{r-i}_z} .
+\]
+Comme la source est de dimension finie et que $\widehat{E^{r-i}_z}$ ne l'est
+que si $E^{r-i}_z$ est de longueur finie, on obtient, pour $i$ donné :
+\[
+\begin{array}{l}
+  \alpha_i \text{ injectif pour } m \text{ grand} \\
+  \Updownarrow \\
+  \text{tout } z \in Z \text{ est isolé dans } \operatorname{Supp} E^{r-i} \cup \lbrace z \rbrace \\
+  \Updownarrow \\
+  H^{i-1}(X, F(-m)) \to H^{i-1}(U, F(-m)) \text{ surjectif pour } m \text{ grand.}
+\end{array}
+\]
+\footnote{« injectif » est écrit sur un premier mot, peut-être « surjectif » ;
+la lecture « injectif » est celle que la dualité confirme. Les flèches duales
+sont écrites sous $\alpha_i$ et $\alpha_{i+1}$. On utilise que $F(-m)$ et $F$
+ont même cohomologie locale en un point, $\mathcal{O}(-m)$ y étant trivial.}
+
+En prenant ces conditions pour tous les $i \leq n$, la dualité locale en un
+point fermé $x$ ($E^{r-i}_x = 0$ si et seulement si $H^i_x(F_x) = 0$) les
+traduit en profondeur :
+\[
+(*) \quad
+\begin{array}{l}
+  \alpha_i \text{ injectif pour } m \text{ grand},\ i \leq n \\
+  \Updownarrow \\
+  \exists\, V \text{ voisinage ouvert de } Z \text{ tel que } \operatorname{prof} F_x > n \text{ en tout point fermé } x \text{ de } U \cap V \\
+  \Updownarrow \\
+  H^i(X, F(-m)) \to H^i(U, F(-m)) \text{ surjectif pour } m \text{ grand},\ i < n .
+\end{array}
+\]
+\footnote{La borne de profondeur n'est pas écrite sur la page ; nous la
+fournissons. Elle entraîne, aux points non fermés $x$ de $U \cap V$,
+$\operatorname{prof} F_x > n - \dim \overline{\lbrace x \rbrace}$, qui est la
+condition $E^{r-i}_x = 0$ pour $i \leq n$.}
+
+À la page 57, la même analyse pour la bijectivité. L'application duale est
+bijective pour $m$ grand si et seulement si $E^{r-i}$ est à support dans
+$Z$ : la finitude force les $E^{r-i}_z$ à être de longueur finie, puis
+l'injectivité force la partie de $E^{r-i}$ à support hors de $Z$ à être nulle.
+D'où, pour $i$ donné, puis pour tous les $i \leq n$ :
+\[
+\begin{array}{l}
+  \alpha_i \text{ bijectif pour } m \text{ grand} \iff \operatorname{Supp} E^{r-i} \subset Z \\
+  \qquad \iff H^i_x(F_x) = 0 \text{ pour tout } x \text{ fermé dans } U ; \\[1ex]
+  \alpha_i \text{ bijectif pour } m \text{ grand},\ i \leq n
+  \iff \operatorname{prof} F_x > n \text{ pour tout } x \text{ fermé dans } U \\
+  \qquad \iff H^i(U, F(-m)) = 0 \text{ pour } i < n, \text{ et} \\
+  \qquad\qquad H^n(U, F(-m)) \to H^{n+1}_Z(X, F(-m)) \text{ injectif}, \text{ pour } m \text{ grand.}
+\end{array}
+\]
+\footnote{La dernière équivalence se lit sur la suite exacte : $\alpha_{i+1}$
+injectif et $\alpha_i$ surjectif disent que $H^i(X) \to H^i(U)$ est à la fois
+surjectif et nul. La page écrit à cet endroit une flèche
+« $H^i(U, F(-m)) \Leftarrow H^i(X, F(-m))$ pour $m$ grand, $i < n$ », surchargée,
+après avoir biffé « injectif pour $i \leq n$ » ; nous écrivons ce que donne la
+suite exacte. Pour le passage d'un $x$ non fermé à un point fermé, voir la
+note précédente.}
+
+La condition qui répond à la question a) est la suivante, encerclée
+$\mathrm{B}_n$ :
+\[
+(\mathrm{B}_n) \quad
+\begin{array}{l}
+  \alpha_i \text{ bijectif pour } m \text{ grand},\ i \leq n,
+  \text{ et } \alpha_{n+1} \text{ injectif pour } m \text{ grand} \\
+  \Updownarrow \\
+  \operatorname{Supp} E^{r-i} \subset Z \text{ pour } i \leq n, \text{ et tout } z \in Z \text{ est isolé dans } \operatorname{Supp} E^{r-n-1} \cup \lbrace z \rbrace \\
+  \Updownarrow \\
+  \operatorname{prof} F_x > n \text{ pour } x \text{ fermé dans } U, \text{ et } \operatorname{prof} F_x > n+1 \text{ pour } x \text{ fermé dans } U \cap V, \\
+  \quad V \text{ voisinage ouvert convenable de } Z \\
+  \Updownarrow \\
+  H^i(U, F(-m)) = 0 \text{ pour } m \text{ grand},\ i \leq n \\
+  \Downarrow \\
+  \bigoplus_{m \geq 0} H^i(U, F(m)) \text{ de type fini sur } S \text{ pour } i \leq n .
+\end{array}
+\]
+Elle entraîne en particulier que les $H^i(U, F)$, $i \leq n$, sont de
+dimension finie sur $\Bbbk$.\footnote{Deux écarts avec la page. (1) Elle
+n'écrit qu'une implication $\Downarrow$ entre la deuxième et la troisième
+ligne ; la réciproque vaut, par le calcul de la note sur $(*)$. (2) Elle écrit
+une équivalence à la dernière ligne ; seule l'implication vaut. Si $F$ est le
+faisceau gratte-ciel $\Bbbk$ en un point fermé de $U$, $\bigoplus_m H^0(U,
+F(m)) \simeq \Bbbk[T]$ est de type fini sur $S$ mais $H^0(U, F(-m)) \neq 0$
+pour tout $m$. Ce que la dernière ligne mesure est la condition
+$\mathrm{A}^f_n$ ci-dessous, plus faible. La fin de la deuxième ligne est
+illisible ; nous la complétons d'après (*). La conséquence de finitude est
+écrite en marge, avec « cf 1° ».}
+
+\emph{Le théorème de comparaison qui en découle.} Si $\mathrm{B}_n$ est
+satisfaite et si l'équation $t$ de $Y$ est $F$-régulière, alors
+\[
+  H^i(U, F) \longrightarrow H^i(\widehat{X}, \widehat{F}) \simeq \varprojlim_m H^i(X_m, F_m)
+\]
+est bijectif pour $i < n$ et injectif pour $i = n$, $X_m$ désignant le
+sous-schéma défini par $t^{m}$. On le voit sur les suites
+$H^i(U, F(-m)) \to H^i(U, F) \to H^i(X_m, F_m) \to H^{i+1}(U, F(-m))$ déduites
+de $0 \to F(-m) \xrightarrow{t^m} F \to F_m \to 0$.\footnote{La page écrit «
+sous les conditions de $(*)$ » ; ce sont les annulations de $\mathrm{B}_n$, que
+la page vient d'établir (« Cela résout la question (a) »), qui servent, et les
+conditions $(*)$ ne les donnent pas. L'isomorphisme
+$H^i(\widehat{X}, \widehat{F}) \simeq \varprojlim H^i(X_m, F_m)$ vaut ici
+pour tout $i$, les $H^i(X_m, F_m)$ étant de dimension finie.}
+
+Ces conditions suffisent pour c), mais ne sont pas nécessaires : pour $n = 1$,
+il suffit que $\operatorname{prof} F_x \geq 2$ aux points fermés de $U$ pour
+que $H^0(U, F) \to H^0(\widehat{X}, \widehat{F})$ soit
+bijectif.\footnote{L'énoncé est de la page 58. On peut le voir ainsi :
+$g_*(F|_U)$ est alors cohérent, de profondeur $\geq 2$ en tout point fermé de
+$X \smallsetminus Y$, et le théorème de comparaison de SGA~2, XII, pour $X$
+projectif s'applique ; la justification est la nôtre.}
+
+\emph{Deux brouillons} (pages 56 et 60). Au dos de deux exemplaires d'une
+même page dactylographiée, qui s'achève sur l'annonce d'un « Corollaire 3.2 »,
+Grothendieck calcule à l'encre puis au crayon : des sommes
+$\coprod_{p, q \geq 0} F_0(q - p)$ et
+$\sum_{p \geq 0} R^i f_{0*} F_0(q - p)$ pour $q - p \geq n$, un module gradué
+$\coprod_q S_q$, un double indice $S_{pq}$ nul pour $p > 0$ et égal à $S_q$
+pour $p = 0$, et des quadrants hachurés en $(p, q)$ légendés
+« $\mathcal{F}(n)$ » et « filtre ». On y reconnaît le calcul d'une
+filtration indexée par deux degrés, sans pouvoir le rattacher sûrement à une
+question du dossier.\footnote{Le texte dactylographié porte sur l'existence
+d'un Module cohérent de complété formel donné, sous des hypothèses de
+régularité, de platitude et de profondeur $\geq 2$ ; on n'en dit pas plus que
+la transcription. L'indice $pq$ de $S$ est d'une lecture incertaine.}
+
+\pagerange{58}{61}
+\subsection*{Finitude, et torsions positives (pages 58 à 61)}
+
+(2°) La suite exacte montre que $H^i(U, F) \to H^{i+1}_Z(X, F)$ est un
+isomorphisme modulo des espaces vectoriels de dimension finie. D'où :
+\[
+(\mathrm{A}'_i) \quad
+\begin{array}{l}
+  H^i(U, F) \text{ de dimension finie sur } \Bbbk \\
+  \Updownarrow \\
+  H^{i+1}_z(F_z) \text{ de longueur finie pour tout } z \in Z \\
+  \Updownarrow \\
+  \text{tout } z \in Z \text{ est isolé dans } \operatorname{Supp} E^{r-i-1} \cup \lbrace z \rbrace \\
+  \Updownarrow \\
+  \alpha_{i+1} \text{ injectif pour } m \text{ grand} \\
+  \Updownarrow \\
+  H^i(X, F(-m)) \to H^i(U, F(-m)) \text{ surjectif pour } m \text{ grand.}
+\end{array}
+\]
+
+(3°) Pour $i \geq 1$, $R^i g_*(F|_U) = \underline{H}^{i+1}_Z(F)$, et
+$g_*(F|_U)$ est cohérent si et seulement si $\underline{H}^1_Z(F)$ l'est ; un
+faisceau à support dans l'ensemble fini $Z$ est cohérent si et seulement si
+ses fibres sont de longueur finie. Pour $m$ grand, $H^i(U, F(m))$ s'identifie à
+$H^{i+1}_Z(X, F)$ ($i \geq 1$), et la multiplication par l'équation de $Y$,
+inversible au voisinage de $Z$, y est bijective. On en tire :
+\[
+(\mathrm{A}^f_n) \quad
+\begin{array}{l}
+  H^i(U, F) \text{ de dimension finie pour } i \leq n \\
+  \Updownarrow \\
+  \operatorname{prof} F_x > n+1 \text{ aux points fermés } x \text{ de } U \text{ voisins de } Z \\
+  \Updownarrow \\
+  \text{tout } z \in Z \text{ est isolé dans } \operatorname{Supp} E^{r-i-1} \cup \lbrace z \rbrace,\ i \leq n \\
+  \Updownarrow \\
+  \alpha_i \text{ injectif pour } m \text{ grand},\ i \leq n+1 \\
+  \Updownarrow \\
+  H^i(X, F(-m)) \to H^i(U, F(-m)) \text{ surjectif pour } m \text{ grand},\ i \leq n \\
+  \Updownarrow \\
+  R^i g_*(F|_U) \text{ cohérent pour } i \leq n
+  \iff H^i_z(F_z) \text{ de longueur finie pour } z \in Z,\ i \leq n+1 \\
+  \Updownarrow \\
+  \bigoplus_{m \geq 0} H^i(U, F(m)) \text{ de type fini sur } S \text{ pour } i \leq n .
+\end{array}
+\]
+\footnote{Les labels $\mathrm{A}'_i$ et $\mathrm{A}^f_n$ sont encerclés en
+marge ; l'exposant $f$ est incertain. Une double flèche de la page n'a qu'une
+pointe. La deuxième ligne est, par le théorème de finitude de SGA~2, VIII, la
+condition que les $H^j_z(F_z)$, $j \leq n+1$, soient de longueur finie. Le haut
+de la page 59, annulé, portait $R^p f_* [R^q j_* (F(m))]$ : la suite
+spectrale de Leray par laquelle on passe de $R^i g_*$ aux modules gradués.}
+
+Les questions a) et b) portent ainsi sur des points différents : a) sur la
+profondeur aux points fermés de $U$, b) --- les torsions positives --- sur les
+points de $Z$. La page 61 le dit :
+\[
+(\mathrm{C}'_i) \quad
+\begin{array}{l}
+  H^i(U, F(m)) = 0 \text{ pour } m \text{ grand } (i > 0 \text{ donné}) \\
+  \Updownarrow \\
+  \underline{H}^{i+1}_Z(F) = 0, \text{ i.e. } H^{i+1}_z(F_z) = 0 \text{ pour } z \in Z \\
+  \Updownarrow \\
+  R^i g_*(F|_U) = 0 ;
+\end{array}
+\]
+\[
+(\mathrm{C}_n) \quad
+\begin{array}{l}
+  H^i(U, F(m)) = 0 \text{ pour } m \text{ grand},\ 0 < i \leq n \\
+  \Updownarrow \quad (\text{si } F = g_*(F|_U)) \\
+  \operatorname{prof}_z F > n+1 \text{ pour } z \in Z .
+\end{array}
+\]
+« Les conditions $C$ sont les seules qui exigent quelque chose sur la
+profondeur en les $z \in Z = X - U$\ldots\ et non seulement aux points de $U$
+! »\footnote{La page écrit $\Downarrow$ puis une double flèche surchargée entre
+les deux dernières lignes de $\mathrm{C}'_i$ ; l'équivalence vaut, puisque
+$R^i g_*(F|_U) = \underline{H}^{i+1}_Z(F)$ pour $i \geq 1$. La lecture
+« supposant que » devant $F = g_*(F|_U)$ est incertaine ; cette hypothèse
+annule $H^0_z$ et $H^1_z$, et c'est elle qui rend la seconde équivalence
+exacte. Le texte s'arrête sur un trait ondulé.}
+
+\section*{IV. Le groupe de Picard des cônes}
+
+\pagerange{64}{66}
+\subsection*{Brouillons (pages 64 à 66)}
+
+Les pages 64 et 65 sont deux feuilles de brouillon, faites de diagrammes, de
+formules et de petites figures, et la page 66 un départ au propre qui
+s'interrompt. Le sujet est le point 9 du plan : comparer le groupe de Picard
+d'une variété projective à celui de son cône, ce que demande un théorème de
+Lefschetz pour $\operatorname{Pic}$ dans le cas local --- le cône affine en
+son sommet étant l'exemple type d'anneau local.
+
+\emph{La situation de la page 66.} Soient $X$ un schéma projectif sur
+$\Bbbk$ avec $\Gamma(X, \mathcal{O}_X) = \Bbbk$, $L = \mathcal{O}_X(1)$ ample,
+$R = \bigoplus_{m \geq 0} \Gamma(X, L^{\otimes m})$, $C = \operatorname{Spec}
+R$ le cône projetant affine, de sommet $a$, et $\widehat{C} =
+\operatorname{Proj} R[z]$ le cône projetant projectif.\footnote{La page 64
+écrit « $\widehat{C} = \operatorname{Spec} S[z]$ », le mot « Spec » d'une
+lecture incertaine ; pour le cône projectif, c'est $\operatorname{Proj}$. Le
+renvoi de la page 66 à « II 8.7.5 » et « II 8.8.6 » est, sans doute, à EGA~II,
+§~8, sur les cônes projetants ; il n'a pas été vérifié. Prendre pour $R$
+l'anneau des sections, plutôt qu'un anneau de coordonnées quelconque, est ce
+qui donne $f_* \mathcal{O}_P = \mathcal{O}_{\widehat{C}}$.} Soit $P$ l'éclaté de
+$\widehat{C}$ en son sommet : c'est le fibré en droites projectif
+$\pi\colon P \to X$, muni de la section $i\colon X \to P$ (le diviseur
+exceptionnel) et de la contraction $f\colon P \to \widehat{C}$ qui envoie
+$i(X)$ sur $a$.\footnote{La page note $X'$ ce que nous notons $P$.}
+
+\begin{tikzcd}[column sep=small, row sep=small, nodes={font=\scriptsize}]
+X \arrow[r, "i"] \arrow[d] & P \arrow[r, "\pi"] \arrow[d, "f"] & X \\
+a \arrow[r] & \widehat{C} &
+\end{tikzcd}
+
+Alors :
+\begin{itemize}
+\item $\operatorname{Pic}(P) \simeq \operatorname{Pic}(X) \times \mathbf{Z}$
+(fibré projectif), et le noyau de
+$i^*\colon \operatorname{Pic}(P) \to \operatorname{Pic}(X)$ est isomorphe à
+$\mathbf{Z}$, engendré par $\mathcal{O}_P(1) = f^* \mathcal{O}_{\widehat{C}}(1)$ ;
+\item $\operatorname{Pic}(\widehat{C}) \to \operatorname{Pic}(P)$ est injectif,
+car $f_* \mathcal{O}_P = \mathcal{O}_{\widehat{C}}$ ;
+\item d'où, comme il le note encadré (« je m'aperçois que »),
+\[
+  \operatorname{Pic}(\widehat{C}) \simeq \mathbf{Z} \xrightarrow{\ \sim\ }
+  \operatorname{Ker}\bigl[\operatorname{Pic}(P) \xrightarrow{i^*} \operatorname{Pic}(X)\bigr] .
+\]
+\end{itemize}
+
+Soit enfin $C_X = P \smallsetminus f^{-1}(\widehat{C} \smallsetminus C)$ la
+partie de $P$ au-dessus de $C$ : c'est l'espace total d'un fibré en droites sur
+$X$, l'éclaté de $C$ en son sommet. La page affirme, avec un point
+d'interrogation, que $\pi^*\colon \operatorname{Pic}(X) \to
+\operatorname{Pic}(C_X)$ est un isomorphisme, et demande en marge s'il faut
+supposer $X$ localement factoriel. L'injectivité est démontrée : le composé
+avec la restriction à la section nulle est l'identité. La démonstration de la
+surjectivité commence --- « au-dessus d'un ouvert convenable de $X$, » --- et
+s'arrête là, au milieu de la phrase : c'est la dernière ligne du
+dossier.\footnote{Réponse à la question de la marge, qui est la nôtre : la
+factorialité locale n'est pas nécessaire, mais une hypothèse l'est. Si $X$ est
+réduit et seminormal --- normal par exemple ---, $\operatorname{Pic}$ est
+invariant par la droite affine sur les anneaux locaux de $X$ (théorème de
+Traverso et Swan, 1970-1980), et $\operatorname{Pic}(C_X) = \operatorname{Pic}(X)$.
+Pour une cubique cuspidale, il est faux : $\operatorname{Pic}(A[T]) \neq
+\operatorname{Pic}(A)$ pour $A = \Bbbk[t^2, t^3]$.}
+
+Les brouillons des pages 64 et 65 entourent cette question. On y lit :
+\begin{itemize}
+\item une suite $\operatorname{Pic}(X) \to \operatorname{Pic}(\widehat{C}') \to
+\operatorname{Pic}(C') \to \operatorname{Pic}(\widetilde{C'})$, annotée
+« injectif », « bijectif dans le cas $X$ loc.\ factoriel », un noyau
+« engendré par l'image de $\mathcal{O}_X(1)$ », et les quotients
+$\operatorname{Pic}(X)/\mathbf{Z}\xi \subset
+\operatorname{Pic}(\widehat{C}')/\mathbf{Z}\xi$ ;\footnote{Les objets
+primés et tildés ne sont définis nulle part ; les étiquettes « injectif »,
+« surjectif » sont mal rattachées à leurs flèches. Nous ne les identifions
+pas.}
+\item deux fois, encadrée, la question $\operatorname{Pic}(C) = 0$ ?? ---
+qui a une réponse : oui si $R$ est seminormal (normal par exemple), car alors
+$\operatorname{Pic}(R) = \operatorname{Pic}(R[T])$, et l'homomorphisme
+$R \to R[T]$, $r \mapsto T^{\deg r} r$, relie l'identité ($T = 1$) à la
+projection sur $R_0 = \Bbbk$ ($T = 0$) ; la réponse peut être non pour un $R$ qui
+ne l'est pas, $\Bbbk[t^2, t^3]$ en étant l'exemple type ;\footnote{La réponse est la nôtre.}
+\item la suite de cohomologie locale de $\mathcal{O}_X^*$ pour
+$U = X \smallsetminus \lbrace a \rbrace$,
+\[
+  \begin{array}{l}
+  0 \to H^0_a(\mathcal{O}^*) \to H^0(X, \mathcal{O}^*) \to H^0(U, \mathcal{O}^*)
+  \to H^1_a(\mathcal{O}^*) \to H^1(X, \mathcal{O}^*) \\
+  \qquad \to H^1(U, \mathcal{O}^*) \to H^2_a(\mathcal{O}^*) \to H^2(X, \mathcal{O}^*),
+  \end{array}
+\]
+avec $H^1(X, \mathcal{O}^*) = 0$ pour $X$ local --- de sorte que
+$\operatorname{Pic}(U)$ et le défaut de prolongement des unités se lisent dans
+$H^1_a$ et $H^2_a$ : c'est la notion d'anneau \emph{parafactoriel}
+(EGA~IV$_4$, §~21.13), pour lequel $\operatorname{Pic}(U) = 0$ et
+$\Gamma(U, \mathcal{O}) = \Gamma(X, \mathcal{O})$ ;
+\item la hiérarchie « loc.\ factoriel $\Rightarrow$ loc.\ quasi-factoriel
+$\Rightarrow$ parafactoriel » et « factoriel $\Rightarrow$ $1$-factoriel
+$\Rightarrow$ $0$-factoriel » ;\footnote{Les notions intermédiaires ne sont
+pas définies sur ces pages. Un anneau local factoriel n'est parafactoriel
+qu'en dimension $\geq 2$.}
+\item des formules de genre pour une courbe à points doubles : si $C$ a $\nu$
+composantes de genres $g_i$ et des points singuliers $s$ de contributions
+$n_s$, $1 - g = \sum (1 - g_i) - \sum n_s$, soit
+$g = 1 + \sum g_i + \sum n_s - \nu$ ; avec les deux cas $g = g' + \sum n_s$
+(une composante) et $g = g' + g'' + \sum n_s - 1$ (deux), et l'exemple
+$\Bbbk[x, y, z]/(xy)$.\footnote{Ces formules sont celles du genre
+arithmétique, $n_s$ étant l'invariant $\delta$ du point $s$ (le nombre de
+points doubles ordinaires). La formule « $1 - h' = 2 - h' - h''$ », dont le
+premier terme est incertain, et les relations $g^m = u f^n$, $g = u f^k$ de la
+page 64 ne sont pas rattachées.}
+\end{itemize}
+
+\end{document}

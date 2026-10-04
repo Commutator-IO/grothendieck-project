@@ -1,0 +1,921 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 59, pages 1-27.
+%
+% This is an INTERPRETATION, not a transcription. Everything the critical
+% apparatus carried moves into footnotes. In any dispute of substance the
+% transcription governs: whoever cites Grothendieck must cite batch-01.fr.tex
+% and batch-02.fr.tex.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-04 — first pass, unchecked against
+% the pages by a human. The folder was read whole: two batches, pages 1-20 and
+% 21-27; page 21 is blank. Two runs: pp. 1-20 (paragraphs a) to f), with e)
+% and f) each used twice) and pp. 22-27 (his own pagination 1-6).
+%
+% Notation fixed for the whole document. Pic, Alb, NS without his underlines
+% (they are representable functors throughout). B = Pic^0_{X/S}, A =
+% Pic^0_{B/S} = Alb^0_{X/S}. For a class lambda in NS, lambda~ is the
+% homomorphism with Mumford's convention lambda~(x) = t_x^*M (x) M^{-1}. For a
+% B-torsor T and u : B -> A, u_*T = T x^B A; T^{(m)} = [m]_*T, T^{(-1)} the
+% inverse torsor. The Weil sheaf of the pages is called the Poincaré sheaf.
+% The Theta-isomorphism of p. 8 (his c) is written phi_Theta, to keep c for
+% the Abel-Jacobi isomorphism of p. 23. delta' = -phi(delta) throughout
+% (p. 10 once writes delta' = phi(delta)).
+%
+% Substantive departures from the pages, each footnoted:
+% — p. 3, the twisted Picard torsor is written with the INVERSE of the
+%   pushed torsor (the page has none); with Mumford's convention, which is the
+%   one of (**) p. 18, this is what holds. It makes (*) p. 11 come out exactly
+%   as the page boxes it, and agrees with Mukai's transform.
+% — p. 4, the arrow from Alb^{-chi} and the box in Alb^{chi} are not in
+%   conflict (the transcription flags them): a torsor map from Alb^{-chi} is a
+%   section of Alb^{chi} x T.
+% — p. 8, phi(delta) for a curve is MINUS the canonical polarisation (Mattuck;
+%   checked on an elliptic curve); the page writes plus. The product torsor
+%   P^{2g-2} of p. 8 is not confirmed: our count gives exponent 0; flagged as
+%   a doubt, not asserted.
+% — p. 10, chi(delta') = chi(delta)^{n-1} from degrees is only up to sign;
+%   supplied by density of the ample cone. phi(phi(delta)) carries (-1)^n.
+%   The converse « phi(delta) non dégénérée => chi(delta) != 0 » needs n >= 2.
+% — p. 10 N.B.: the expected indivisibility of delta' fails for types such as
+%   (2,2); footnoted.
+% — p. 15, Todd(curve) = 1 - K/2 (the page writes K/2, degree 1-g); general
+%   rank rho restored, the page has rho = 1.
+% — p. 16, ell' is not additive in Pic (the page's parenthesis); what holds is
+%   (**). p. 19's phi(delta)~(-beta) contradicts (**) unless the convention
+%   for lambda~ flips; (**) kept.
+% — p. 26 c): Theta' for the page's Theta.
+%
+% What the folder announces and never establishes: the expected value K of
+% p. 8 (« à prouver ! ») and the N.B. on the moduli of curves (strong
+% Franchetta); the N.B. of p. 10 on moduli of polarised abelian schemes; the
+% compatibilities of trivialisations asked for in the margins of pp. 11-12
+% and 27, on which the conclusions of pp. 12-13 depend; the universal
+% property of Alb^1 (« on prouve », p. 22); the question of p. 23, left
+% open after p. 24's two lines; the study of « la petite topologie de
+% Albanese » (p. 20, reading doubtful).
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{59}
+\pages{1}{27}
+\dating{[années 1960-1970]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Construction des faisceaux inversibles sur schémas de Picard : notes manuscrites (s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Une courbe, ou plus généralement une variété, et l'espace qui paramètre ses
+fibrés en droites : comment fabriquer, sans rien choisir, des fibrés en droites
+sur cet espace-là ?
+
+Sur une variété $X$ vivent des fibrés en droites, et ceux-ci forment à leur
+tour un espace géométrique, le \emph{schéma de Picard}. Sa composante neutre,
+quand tout va bien, est une \emph{variété abélienne} — un objet dont les points
+s'additionnent, l'analogue algébrique d'un tore — et cette variété abélienne
+possède une \emph{duale}, qui paramètre à son tour ses propres fibrés en
+droites. On a donc une tour : $X$, puis son Picard, puis le Picard de son
+Picard. Le dossier cherche à descendre cette tour d'un étage de façon
+canonique, c'est-à-dire sans choisir de point base, de diviseur ni de
+coordonnées. Le problème vient de ce que presque toutes les constructions
+naturelles demandent un choix — un point de $X$ pour normaliser, un fibré de
+référence — et que le résultat change avec le choix.
+
+L'idée est la plus simple qui soit : à chaque fibré $L$ sur $X$ on associe sa
+cohomologie, et de la cohomologie on ne garde qu'un nombre — en fait une
+droite, son \emph{déterminant}. Quand $L$ varie, ces droites forment un fibré
+en droites sur le schéma de Picard. Il dépend encore du point base choisi, mais
+d'une façon que l'on contrôle exactement : le changement est une puissance,
+d'exposant la caractéristique d'Euler, d'un fibré que l'on sait décrire. Toute
+la suite du dossier exploite cette dépendance maîtrisée. On en tire une
+application entre les « classes » de fibrés de $X$ et celles de la variété
+duale — pas un homomorphisme, un polynôme — et, au bout d'une comptabilité de
+torseurs (des espaces qui ressemblent à un groupe, mais sans origine
+privilégiée), une \emph{section canonique} d'un certain torseur : un objet que
+l'on n'avait pas le droit d'espérer sans choix, et qui est là.
+
+Deux exemples éclairent la construction. Pour une courbe, l'application
+retrouve, au signe près, la polarisation classique de la jacobienne — le
+diviseur thêta — et la section canonique attendue est le fibré canonique de la
+courbe ; le dossier le conjecture, et ses dernières pages l'obtiennent par un
+autre chemin, à partir de la symétrie du diviseur thêta. Pour une variété
+abélienne, le calcul passe par ce qu'on appelle aujourd'hui la
+\emph{transformation de Fourier} des cycles, et produit une « inversion » des
+polarisations : chaque polarisation de la variété en donne une sur la duale,
+et la composée des deux est la multiplication par la caractéristique d'Euler.
+Il en sort des énoncés de trivialité canonique pour certaines puissances de
+torseurs. Une dernière construction recommence avec un complexe de faisceaux
+quelconque à la place d'un fibré, et relit tout comme le déterminant d'une
+transformation de type Fourier.
+
+Les feuillets sont rapides, et presque chaque page dit son inquiétude sur les
+signes : « vérifier si le signe est correct ! », « attention aux signes ?? »,
+« question de signe ! ». L'inquiétude était fondée — plusieurs signes sont à
+retourner, et l'un des résultats intermédiaires ne se confirme pas en l'état ;
+les notes de bas de page disent lesquels. Ce qui reste juste, et c'est
+l'essentiel, est la forme de la construction : une seule idée, le déterminant
+de la cohomologie, suivie jusqu'au bout et vérifiée sur les deux exemples où
+l'on sait calculer.
+
+\keywords{determinant of cohomology, Picard scheme, Néron-Severi group scheme, Poincaré bundle, torsor under an abelian scheme, contracted product, Albanese torsor, Grothendieck-Riemann-Roch, Picard bundle, Fourier-Mukai transform, Fourier transform on Chow groups, dual polarisation, principally polarised abelian scheme, theta divisor, Riemann singularity theorem, autoduality of the Jacobian, canonical bundle, Franchetta conjecture}
+\end{resume}
+
+\pagerange{1}{27}
+\section*{Le dossier, sa charpente et ses notations}
+
+Vingt-sept pages, dont une blanche (la page 21). Elles forment deux suites
+distinctes. Les pages 1 à 20 sont une rédaction continue, en paragraphes
+lettrés a) à f) — avec deux e) (pages 5 et 14) et deux f) (pages 9 et 16) ;
+on les distingue ici par leur contenu et leurs pages. Les pages 22 à 27,
+numérotées de 1 à 6 de sa main, sont une reprise qui commence par fixer une
+convention de signe dont la première suite avait besoin, puis passe aux
+schémas abéliens principalement polarisés.
+
+L'argument se lit en huit stations :
+
+\begin{itemize}
+\item le fibré déterminant $M_g$ sur le schéma de Picard, et sa dépendance en
+  la section $g$ (pages 1 et 2) ;
+\item l'application $\varphi : \mathrm{NS}_{X/S} \to \mathrm{NS}_{B/S}$, la
+  torsion de $\mathrm{Pic}_{B/S}$ par $P^{\delta}$ et la section canonique
+  $L(\delta)$ (pages 2 à 5) ;
+\item le calcul de $\varphi(\delta)$ par Riemann--Roch (pages 5 à 7) ;
+\item premier exemple, les courbes (pages 7 à 9) ;
+\item second exemple, les schémas abéliens : transformation de Fourier,
+  inversion des polarisations, l'isomorphisme $(*)$ et les trivialisations de
+  puissances de torseurs (pages 9 à 13) ;
+\item la généralisation par un complexe parfait $\mathcal{F}$ (pages 14 à 16) ;
+\item une seconde interprétation, par le déterminant d'une transformation de
+  Fourier (pages 16 à 20) ;
+\item la reprise : le torseur d'Albanese et sa convention de signe (pages 22 à
+  24), puis le torseur thêta d'un schéma abélien principalement polarisé et sa
+  section $K$ (pages 25 à 27).
+\end{itemize}
+
+\emph{Notations, valables pour tout le dossier.} $f : X \to S$ est propre,
+plat, de présentation finie, avec $f_{*}\mathcal{O}_X = \mathcal{O}_S$
+universellement ; $P = \mathrm{Pic}_{X/S}$, et l'on suppose que
+$B = P^{0} = \mathrm{Pic}^{0}_{X/S}$ est un schéma abélien. On note
+$A = \mathrm{Pic}^{0}_{B/S}$ son dual, que la page 3 identifie à
+$\mathrm{Alb}^{0}_{X/S}$. Pour une section $\delta$ de
+$\mathrm{NS}_{X/S}$, $P^{\delta}$ est la composante correspondante de $P$,
+torseur sous $B$. Les foncteurs $\mathrm{Pic}$, $\mathrm{Alb}$, $\mathrm{NS}$
+sont soulignés sur les pages, comme partout dans le fonds ; on ne les souligne
+pas ici. Le « faisceau de Weil » des pages est le \emph{faisceau de Poincaré}
+normalisé le long d'une section.
+
+Pour une classe $\lambda$ de $\mathrm{NS}$ d'un schéma abélien, on note
+$\tilde{\lambda}$ l'homomorphisme vers le dual avec la convention de Mumford :
+$\tilde{\lambda}(x) = [\,t_x^{*}M \otimes M^{-1}\,]$ pour $M$ de classe
+$\lambda$.\footnote{Les pages ne fixent jamais cette convention, et c'est
+d'elle que dépend la moitié des signes qu'elles signalent comme douteux. On
+prend celle de Mumford parce que c'est celle sous laquelle la formule $(**)$ de
+la page 18 est juste telle que la page l'écrit.} Pour un $B$-torseur $T$ et un
+homomorphisme $u : B \to A$, on écrit $u_{*}T = T \times^{B} A$ le
+$A$-torseur poussé — les pages écrivent $T \overset{B}{\times} (A, u)$ ;
+$T \times^{A} T'$ est le produit contracté de deux $A$-torseurs ;
+$T^{(m)} = [m]_{*}T$, et $T^{(-1)}$ est le torseur inverse. Enfin
+$\mathrm{Alb}^{k}_{X/S} = (\mathrm{Alb}^{1}_{X/S})^{(k)}$.
+
+Deux homonymies sont à défaire dès maintenant. La page 8 appelle $c$
+l'isomorphisme $B \to A$ défini par le diviseur $\Theta$ d'une jacobienne ; la
+page 23 appelle $c$ l'isomorphisme d'Abel--Jacobi. Ce ne sont pas les mêmes —
+la page 23 pense qu'ils diffèrent d'un signe, et c'est exact — et l'on écrit
+$\phi_{\Theta}$ pour le premier, $c$ pour le second. D'autre part la lettre
+$\delta$ désigne dans les pages 1 à 20 une classe de Néron--Severi, et à la
+page 22 l'application $X \times_S X \to A$, $(x, y) \mapsto \psi(y) -
+\psi(x)$ ; on écrit $\Delta_{\psi}$ pour celle-ci.
+
+\pagerange{1}{2}
+\section*{Le fibré déterminant et le changement de section (pages 1 et 2)}
+
+Supposons d'abord que $X/S$ ait une section $g$. Sur $X \times_S P$ vit alors
+le faisceau de Poincaré $\mathcal{L}_g$, normalisé, c'est-à-dire trivialisé le
+long de $g(S) \times_S P$. Son image directe dérivée par
+$f_P : X \times_S P \to P$ est un complexe parfait, et l'on pose
+\[
+M_g = \det\, R f_{P*}(\mathcal{L}_g),
+\]
+module inversible sur $P$ : c'est le \emph{fibré déterminant de la
+cohomologie}.\footnote{La page écrit ${\det}^{*}$, et ajoute après
+« module inversible » un mot lu « gradué » sans certitude, suivi d'un mot
+illisible. Le dossier se sert du déterminant d'un complexe parfait sans le
+construire ; la construction publiée en est celle de Knudsen et Mumford (1976).
+La datation du dossier, « années 1960-1970 », ne permet pas de dire laquelle
+des deux est antérieure, et rien ici ne le décide.}
+
+Changeons de section. Le faisceau normalisé le long de $g'$ est
+\[
+\mathcal{L}_{g'} \simeq \mathcal{L}_g \otimes f_P^{*}\bigl(g'^{*}_P \mathcal{L}_g\bigr)^{-1},
+\]
+d'où, par la formule de projection et la multiplicativité du déterminant, un
+isomorphisme canonique
+\[
+(*_{b}) \qquad M_{g'} \simeq M_g \otimes \bigl(g'^{*}_P \mathcal{L}_g\bigr)^{-\chi}
+= M_g \otimes \bigl(N_g N_{g'}^{-1}\bigr)^{\chi},
+\]
+où $\chi : P \to \mathbb{Z}$ est la fonction localement constante qui donne la
+caractéristique d'Euler--Poincaré des faisceaux inversibles paramétrés, et où
+$N$ est un faisceau inversible quelconque sur $X \times_S P$ représentant le
+point universel, $N_g = g_P^{*}N$, $N_{g'} = g'^{*}_P N$ ; le produit
+$N_g N_{g'}^{-1}$ ne dépend pas du choix de $N$.\footnote{La notation $(*)$ de
+la page est renommée $(*_{b})$ pour ne pas la confondre avec l'isomorphisme
+$(*)$ de la page 11. Une note encadrée de la marge, rattachée par une flèche au
+paragraphe suivant, dit l'essentiel : $N_g N_{g'}^{-1}$ est algébriquement
+équivalent à zéro sur $P$ relativement à $S$, donc $M_g$ et $M_{g'}$ sont
+algébriquement équivalents.}
+
+Comme $P^{\delta}$ est un $B$-torseur, ses fibres sont connexes et $\chi$ y est
+constante : on note $\chi(\delta)$ sa valeur. Sur $P^{\delta}$, le faisceau
+$N_g N_{g'}^{-1}$ appartient à $\mathrm{Pic}^{0}$ ; c'est le point
+$\psi(g') - \psi(g)$ de $A$, au sens du torseur d'Albanese des pages 22 et 23
+(voir plus bas). Ainsi $M_g$ et $M_{g'}$ ont la même classe dans
+$\mathrm{NS}_{P^{\delta}/S}(S)$.
+
+\pagerange{2}{5}
+\section*{L'application $\varphi$ et la section canonique $L(\delta)$ (pages 2 à 5)}
+
+\subsection*{L'application $\varphi$}
+
+Les translations de $B$ agissent trivialement sur $\mathrm{Pic}^{0}_{B/S}$ et
+sur $\mathrm{NS}_{B/S}$ ; d'où des isomorphismes canoniques
+$\mathrm{Pic}^{0}_{P^{\delta}/S} \simeq \mathrm{Pic}^{0}_{B/S}$ et
+$\mathrm{NS}_{P^{\delta}/S} \simeq \mathrm{NS}_{B/S}$, qui ne dépendent pas du
+point de $P^{\delta}$ choisi pour identifier $P^{\delta}$ à $B$. La classe de
+$M_g|_{P^{\delta}}$ définit donc une section
+\[
+\varphi(\delta) \in \mathrm{NS}_{B/S}(S),
+\]
+indépendante de $g$ d'après $(*_{b})$. Elle se définit donc par descente sans
+supposer l'existence d'une section — $X/S$ en acquiert une après le changement
+de base fidèlement plat $X \to S$ —, et comme sa formation commute au
+changement de base, on obtient un morphisme de faisceaux
+\[
+\varphi : \mathrm{NS}_{X/S} \longrightarrow \mathrm{NS}_{B/S}.
+\]
+Ce n'est pas un homomorphisme, et la page le souligne ; le calcul des pages 6
+et 7 montre que c'est une application polynomiale, de degré $n - 1$ si $n$ est
+la dimension relative de $X$.\footnote{La marge porte « détailler » en face de
+l'argument de descente.}
+
+\subsection*{Tordre $\mathrm{Pic}_{B/S}$ par le torseur $P^{\delta}$}
+
+Soit $\lambda$ une section de $\mathrm{NS}_{B/S}$, et $\tilde{\lambda} : B \to
+A$ l'homomorphisme qu'elle définit. Si $N$ est un faisceau inversible de classe
+$\lambda$ sur $P^{\delta}$, chaque point $p$ de $P^{\delta}$ donne un
+isomorphisme $B \to P^{\delta}$, $x \mapsto p + x$, et donc un faisceau $N_p$
+sur $B$ ; on a $N_{p+b} = t_b^{*}N_p = N_p \otimes \tilde{\lambda}(b)$. Ainsi
+$p \mapsto N_p$ est un morphisme $P^{\delta} \to \mathrm{Pic}^{\lambda}_{B/S}$
+équivariant le long de $\tilde{\lambda}$, c'est-à-dire un morphisme de
+$A$-torseurs $\tilde{\lambda}_{*}P^{\delta} \to \mathrm{Pic}^{\lambda}_{B/S}$,
+et l'on obtient
+\[
+\mathrm{Pic}^{\lambda}_{P^{\delta}/S} \simeq
+\mathrm{Pic}^{\lambda}_{B/S} \times^{A} \bigl(\tilde{\lambda}_{*}P^{\delta}\bigr)^{(-1)} .
+\]
+\footnote{La page écrit le second facteur sans l'inverse :
+$\mathrm{Pic}^{\lambda}_{B/S} \overset{A}{\times} (P^{\delta}
+\overset{B}{\times} A)$. Avec la convention de Mumford pour $\tilde{\lambda}$,
+c'est l'inverse qui convient ; avec la convention opposée, la forme de la page.
+L'inverse est retenu partout dans ce qui suit, parce que c'est lui qui donne à
+la page 11 l'isomorphisme $(*)$ exactement tel que la page l'encadre, et parce
+qu'il s'accorde avec $(**)$ de la page 18. On ne le signale plus à chaque
+occurrence.}
+
+Appliquons cela à $\lambda = \varphi(\delta)$ et au fibré $M_g|_{P^{\delta}}$ :
+chaque section $g$ de $X$ donne un point $\ell(g)$ du $A$-torseur
+\[
+T_{\delta} = \mathrm{Pic}^{\varphi(\delta)}_{B/S} \times^{A}
+\bigl(\widetilde{\varphi(\delta)}_{*}P^{\delta}\bigr)^{(-1)} .
+\]
+\footnote{La page 3 écrit ici « $L_g \mid P^{\delta}$ » ; c'est
+$M_g|_{P^{\delta}}$ qui a la classe $\varphi(\delta)$, $\mathcal{L}_g$ vivant
+sur $X \times_S P$.} La formation de $\ell(g)$ commutant au changement de base,
+on l'applique au point universel — la base $X$, la section diagonale — et l'on
+obtient un morphisme de schémas
+\[
+\ell_{\delta} : X \longrightarrow T_{\delta}.
+\]
+
+\subsection*{La section canonique}
+
+Un morphisme de $X$ dans un torseur sous un schéma abélien se factorise de
+façon unique par $\psi : X \to \mathrm{Alb}^{1}_{X/S}$ (c'est la propriété
+universelle énoncée page 22), à travers un morphisme de torseurs compatible
+avec un homomorphisme $u_{\delta} : A \to A$ des groupes structuraux. Or
+$(*_{b})$ dit exactement comment $\ell(g)$ varie avec $g$ :
+$\ell(g') = \ell(g) - \chi(\delta)\,\bigl(\psi(g') - \psi(g)\bigr)$. Donc
+\[
+u_{\delta} = -\chi(\delta)\,\mathrm{id}_A ,
+\]
+et la factorisation est un isomorphisme de $A$-torseurs
+$\mathrm{Alb}^{-\chi(\delta)}_{X/S} \xrightarrow{\ \sim\ } T_{\delta}$,
+c'est-à-dire une section canonique
+\[
+\boxed{\;L(\delta) \in \Gamma\bigl(S,\ \mathrm{Alb}^{\chi(\delta)}_{X/S}
+\times^{A} \mathrm{Pic}^{\varphi(\delta)}_{B/S} \times^{A}
+\bigl(\widetilde{\varphi(\delta)}_{*}P^{\delta}\bigr)^{(-1)}\bigr).\;}
+\]
+En particulier ce $A$-torseur est trivial, avec une trivialisation
+canonique.\footnote{La transcription relève que l'exposant de $\mathrm{Alb}$
+est $-\chi(\delta)$ dans la flèche et $\chi(\delta)$ dans le cadre. Les deux
+sont justes ensemble : un morphisme de torseurs de source
+$\mathrm{Alb}^{-\chi}$ est une section de $T \times^{A} \mathrm{Alb}^{\chi}$.
+Le signe de $u_{\delta}$, sur lequel la marge écrit « vérifier si le signe est
+correct ! », est bien $-\chi(\delta)$ avec la convention de signe de la
+page 22 ; la page 11 le retrouve par un autre chemin.}
+
+\pagerange{5}{7}
+\section*{Le calcul de $\varphi(\delta)$ par Riemann--Roch (pages 5 à 7)}
+
+Pour calculer $\chi(\delta)$ et $\varphi(\delta)$ on se ramène à
+$S = \operatorname{Spec} k$, $k$ algébriquement clos. Un point $p$ de
+$P^{\delta}(k)$, c'est-à-dire un faisceau inversible $L$ de classe $\delta$,
+identifie $P^{\delta}$ à $B$, et $\mathcal{L}_g$ restreint à $X \times
+P^{\delta}$ devient $\mathcal{L}^{0} \otimes \mathrm{pr}_1^{*}L$, où
+$\mathcal{L}^{0}$ est le faisceau de Poincaré sur $X \times B$, normalisé en
+$g$. Il s'agit donc de calculer la classe de $\det R\mathrm{pr}_{2*}
+(\mathcal{L}^{0} \otimes \mathrm{pr}_1^{*}L)$ modulo équivalence algébrique.
+Comme $\mathrm{NS}(B)$ est sans torsion, il suffit de le faire dans
+$\mathrm{NS}(B) \otimes \mathbb{Q}$, c'est-à-dire de calculer la partie de
+degré $1$ du caractère de Chern.\footnote{Cette justification est celle d'une
+phrase biffée de la page 6 ; la phrase gardée dit seulement « mod équivalence
+algébrique \ldots\ dans $\mathrm{NS}(B/S) \otimes \mathbb{Q}$ ».}
+
+Si $X$ est lisse de dimension $n$ — la page dit aussi « intersection
+complète » —, Grothendieck--Riemann--Roch donne
+\[
+\varphi(\delta) = \Bigl[\mathrm{pr}_{2*}\bigl(e^{D}\cdot
+\mathrm{pr}_1^{*}(\mathrm{Td}_X\, e^{\delta})\bigr)\Bigr]_{1},
+\qquad D = c_1(\mathcal{L}^{0}),
+\]
+où $[\ ]_1$ désigne la composante de degré $1$.\footnote{La page note
+« $\Delta = \mathrm{cl}\,\Delta$ », là où l'on attend la classe de $L$ ; on
+écrit $\delta$. Elle écrit aussi le résultat sous la forme $[\exp D](T_{X/k}
+\exp \Delta)$, avec un « $\exp D$ » ajouté au crayon : c'est l'opération par
+correspondance de la classe $e^{D}$.} On travaille en cohomologie
+$\ell$-adique, $\ell$ inversible dans $k$, en choisissant un isomorphisme
+$\mathbb{Z}_\ell(1) \simeq \mathbb{Z}_\ell$. La normalisation de
+$\mathcal{L}^{0}$ le long de $g \times B$ et de $X \times 0$ fait que $D$
+appartient à la composante de Künneth $H^{1}(X) \otimes H^{1}(B)$, où il
+réalise la dualité entre $H^{1}(B)$ et $H^{1}(X)$. Écrivons
+$\mathrm{Td}_X\, e^{\delta} = \sum_{i} a_i$, avec $a_i \in H^{2i}(X)$. Le terme
+$\mathrm{pr}_1^{*}(a_i)\,D^{j}/j!$ a le degré partiel $2i + j$ en $X$ ; son
+image par $\mathrm{pr}_{2*}$ est nulle sauf si $2i + j = 2n$, et elle est alors
+de degré $j$ sur $B$. La composante de degré $2$ (la classe $c_1$) demande
+$j = 2$, $i = n - 1$ :
+\[
+\boxed{\;\varphi(\delta) = \tfrac{1}{2}\,\mathrm{pr}_{2*}\bigl(\mathrm{pr}_1^{*}(a_{n-1})\, D^{2}\bigr),
+\qquad a_{n-1} = \Bigl[\mathrm{Td}_X\, e^{\delta}\Bigr]_{n-1}.\;}
+\]
+Comme $a_{n-1} = \sum_{k} \mathrm{Td}_{n-1-k}(X)\,\delta^{k}/k!$,
+$\varphi$ est un polynôme de degré $n - 1$ en $\delta$.
+
+\pagerange{7}{9}
+\section*{Premier exemple : les courbes (pages 7 à 9)}
+
+Pour $n = 1$, $\delta$ est le degré $d$, $a_0 = 1$ et
+$\varphi(\delta) = \tfrac{1}{2}\mathrm{pr}_{2*}(D^{2})$, indépendant de $d$. Dans
+une base symplectique $(e_1, f_1, \ldots, e_g, f_g)$ de $H^{1}(X)$, la page
+calcule $\tfrac{1}{2}D^{2} = \eta \otimes \sum e_i f_i$, d'où
+$\varphi(\delta) = \pm \sum e_i \wedge f_i$ : au signe près, la classe de la
+polarisation canonique $\theta$ de la jacobienne $B$. Le signe est
+\[
+\varphi(\delta) = -\theta .
+\]
+\footnote{La page écrit $+\sum e_i \wedge f_i$, et conclut : « c'est la classe
+de polarisation canonique de la jacobienne ». Le signe dépend de
+l'identification de $H^{1}(X)$ au dual de $H^{1}(B)$, que la page ne fixe pas.
+Il est intrinsèque une fois $\varphi(\delta)$ défini comme classe d'un fibré
+sur $B$, et c'est $-\theta$ : pour $d$ grand, $R\mathrm{pr}_{2*}$ est le
+\emph{fibré de Picard}, dont la classe de Chern totale est $e^{-\theta}$
+(Mattuck, 1961) ; et sur une courbe elliptique, avec $d = 1$, on trouve
+directement $\mathrm{pr}_{2*}\mathcal{L}_g \simeq \mathcal{O}(-g)$, de degré
+$-1$. Ce signe est d'ailleurs celui qu'exige la page 10 elle-même, où c'est
+$-\varphi(\delta)$ qui est une polarisation.} Riemann--Roch donne
+$\chi(\delta) = 1 - g + d$.\footnote{La marge porte ici « vérifier que le
+signe est correct ». Une ligne biffée de la page 7 écrit
+$\mathrm{Td}_X = 1 - K/2$, ce qui est juste.}
+
+La page traduit ensuite les trois facteurs du torseur de $L(\delta)$ en
+$B$-torseurs, par l'isomorphisme $\phi_{\Theta} : B \to A$ de la polarisation
+thêta. Sous $\phi_{\Theta}$, $\mathrm{Alb}^{1}_{X/S}$ devient
+$P^{-1} = \mathrm{Pic}^{-1}_{X/S}$ (« attention au signe ! » — c'est ce que
+confirme la page 23), donc $\mathrm{Alb}^{\chi(\delta)}$ devient
+$P^{g-1-d}$ ; le facteur poussé par $\widetilde{\varphi(\delta)}$ redevient
+$P^{\delta} = P^{d}$ ; et $\mathrm{Pic}^{\varphi(\delta)}_{B/S}$ s'identifie,
+par le diviseur $\Theta$, à une puissance de $P^{g-1}$. La page trouve pour le
+produit
+\[
+P^{2g-2} = \mathrm{Pic}^{2g-2}_{X/S},
+\]
+et observe que ce n'est « pas très excitant » : on s'attend à ce que la section
+canonique soit la classe $K$ du fibré canonique, ce qui reste « à
+prouver ! ».\footnote{Ce décompte est le point le moins sûr du dossier. Les
+exposants sont $\varepsilon_1(g - 1 - d) + \varepsilon_2(g-1) +
+\varepsilon_3 d$, avec trois signes qui dépendent de conventions que la page
+signale elle-même comme douteuses. Que les termes en $d$ se compensent est
+nécessaire — la section existe pour tout $d$, et sur la courbe universelle
+$\mathrm{Pic}^{m}$ n'a de section que si $2g - 2$ divise $m$ (voir la note
+suivante) — et ils se compensent bien. Mais avec les conventions fixées ici
+($\varphi(\delta) = -\theta$, le torseur inverse de la page 3, et
+$\mathrm{Pic}^{\theta}_{B/S} \simeq P^{g-1}$ par $\xi \mapsto
+t_{\xi}^{*}W_{g-1}$), notre décompte donne $\varepsilon_2 = -1$ et un
+exposant total nul, non $2g - 2$. Nous ne l'avons pas vérifié autrement ; le
+résultat de la page n'est donc pas confirmé, et le nôtre pas davantage. La
+section de $\mathrm{Pic}^{2g-2}$ égale à $K$ que la page attend ici est, elle,
+bien obtenue page 27, par un autre chemin.}
+
+\emph{N.B.} (page 9). Pour bien faire, dit la page, il faudrait montrer que
+sur l'espace de modules $S$ des courbes de genre $g \geq 1$ (avec un point
+marqué si $g = 1$), le groupe des sections de $\mathrm{Pic}_{X/S}$ de la
+courbe universelle est engendré par $K$ — en particulier que $\mathrm{Pic}^{0}$
+n'a que la section nulle — et qu'il suffirait de le faire en caractéristique
+nulle.\footnote{C'est la \emph{conjecture de Franchetta} (1954), sous sa forme
+forte. Elle est démontrée : en caractéristique nulle par Arbarello et Cornalba
+(1987) et d'autres, en toute caractéristique par Schröer (2003). La page ne
+cite personne ; une insertion d'une ligne au-dessus de « courbes » est
+illisible.}
+
+\pagerange{9}{13}
+\section*{Second exemple : les schémas abéliens (pages 9 à 13)}
+
+\subsection*{La transformation de Fourier et l'inversion des polarisations}
+
+Soit maintenant $X = A$ un schéma abélien de dimension relative $n$, de sorte
+que $B$ est son dual et que $\mathrm{Pic}^{0}_{B/S}$ redevient $A$. Ici
+$\mathrm{Td}_A = 1$, donc $a_{n-1} = \delta^{n-1}/(n-1)!$. La correspondance
+$e^{D}$ est la \emph{transformation de Fourier}
+\[
+\Phi : \mathrm{CH}(A)_{\mathbb{Q}} \xrightarrow{\ \sim\ } \mathrm{CH}(B)_{\mathbb{Q}},
+\]
+qui échange produit d'intersection et produit de Pontryagin et, en
+cohomologie, envoie le degré $2i$ sur le degré $2(n - i)$. On obtient
+\[
+\varphi(\delta) = \frac{1}{(n-1)!}\,\Phi\bigl(\delta^{n-1}\bigr)
+= \pm \frac{1}{(n-1)!}\,\Phi(\delta)^{*(n-1)},
+\]
+où $\Phi(\delta)$ est une classe de courbe. Ainsi $\varphi$ est une
+application polynomiale de degré $n - 1$
+de $\mathrm{NS}_{A/S}$ dans $\mathrm{NS}_{B/S}$.\footnote{La page écrit la
+seconde forme, avec le signe $+$. Avec la normalisation de Beauville,
+$\Phi(xy) = (-1)^{n}\Phi(x) * \Phi(y)$, d'où le signe $(-1)^{n}$ entre les
+deux expressions ; la première, qui n'en a pas, est celle qui résulte
+directement de la page 7. La transformation de Fourier des cycles porte
+aujourd'hui les noms de Mukai (1981, pour les catégories dérivées) et de
+Beauville (1983, pour les groupes de Chow) ; sa version cohomologique est plus
+ancienne. La page dit « on sait », sans référence.}
+
+Le fait central est la relation encadrée de la page 9 :
+\[
+\boxed{\;\widetilde{\varphi(\delta)} \circ \tilde{\delta} = -\chi(\delta)\,\mathrm{id}_A,
+\qquad
+\tilde{\delta} \circ \widetilde{\varphi(\delta)} = -\chi(\delta)\,\mathrm{id}_B .\;}
+\]
+La page la démontre au paragraphe « Remarque » de la page 11 : la section
+$L(\delta)$ est canonique, donc invariante par les automorphismes de
+$(X/S, \delta)$, en particulier par les translations de $X = A$. Une
+translation $t_a$ agit sur le torseur de $L(\delta)$ par
+$\chi(\delta)\,a + \widetilde{\varphi(\delta)}\,\tilde{\delta}(a)$ — le premier
+terme vient de $\mathrm{Alb}^{\chi(\delta)}$, le second du facteur
+$P^{\delta}$, le facteur $\mathrm{Pic}_{B/S}$ étant fixe —, et cette
+translation doit être nulle pour tout $a$.\footnote{La marge : « Attention aux
+signes ?? », et page 9, « Faire calcul direct, en faisant attention aux
+signes ! ». Le signe est juste. En langage d'aujourd'hui, c'est la
+proposition de Mukai (1981) : pour $L$ ample, $\varphi_L^{*}\widehat{L} \simeq
+H^{0}(L) \otimes L^{-1}$, dont le déterminant donne
+$\varphi_L^{*}\varphi(\delta) = -\chi(\delta)\,\delta$, d'où la première
+égalité pour $\delta$ ample, puis pour tout $\delta$ par densité du cône
+ample, les deux membres étant polynomiaux en $\delta$.}
+
+Conséquences (page 10). Si $\chi(\delta) \neq 0$, $\varphi(\delta)$ est non
+dégénérée ; si $\delta$ est une polarisation, $\delta' := -\varphi(\delta)$ en
+est une sur $B$. Pour $\delta$ ample, $\deg \tilde{\delta} = \chi(\delta)^{2}$,
+$\deg \tilde{\delta}' = \chi(\delta')^{2}$ et $\deg
+\tilde{\delta}'\tilde{\delta} = \chi(\delta)^{2n}$ donnent
+\[
+\chi(\delta') = \chi(\delta)^{n-1},
+\]
+et l'égalité vaut pour tout $\delta$, les deux membres étant des polynômes en
+$\delta$.\footnote{L'argument des degrés ne donne $\chi(\delta')$ qu'au signe
+près ; c'est la positivité dans le cas ample, puis la densité du cône ample,
+qui le fixe. La réciproque que la page énonce ensuite — $\varphi(\delta)$ non
+dégénérée entraîne $\chi(\delta) \neq 0$ — suppose $n \geq 2$ : pour une
+courbe elliptique, $\varphi(\delta)$ est toujours non dégénérée, même en degré
+nul. La marge oblique, en partie illisible, porte « $\delta' =
+-\varphi(\delta)$ ; je pense ».} L'inversion $\delta \mapsto \delta'$ est une
+involution au scalaire près :
+\[
+\delta'' = -\varphi(\delta') = \chi(\delta)^{n-2}\,\delta,
+\qquad\text{donc}\qquad
+\varphi(\varphi(\delta)) = (-1)^{n}\,\chi(\delta)^{n-2}\,\delta .
+\]
+\footnote{La page écrit « si $\delta' = \varphi(\delta)$ », puis conclut
+$\varphi(\varphi(\delta)) = \delta\,\chi(\delta)^{n-2}$ sans signe, ce qui
+n'est juste que pour $n$ pair ; la note de la transcription dit que les
+signes y sont ceux de la page. La relation sur $\delta''$, qui est celle dont
+la page 12 se sert, est juste telle quelle.} Pour $n = 1$, une courbe
+elliptique, on trouve que $\varphi(\delta)$ est la même pour tout $\delta$ :
+c'est, d'après les pages 7 et 8, l'opposée $-\theta$ de la polarisation
+canonique.\footnote{La page écrit « on trouve $\delta\,\chi(\delta)$ », là où
+la formule donne $\delta\,\chi(\delta)^{-1}$, puis « mieux, pour tout
+$\delta$, $\varphi(\delta)$ est la polarisation canonique » ; le signe est
+celui de la note de la page 8. Pour $n \geq 2$, conclut-elle, la formule
+« inspire confiance ».}
+
+\emph{N.B.} (page 10). La page s'attend à ce que, sur le site modulaire des
+schémas abéliens polarisés de degré $\chi(\delta)$ donné, $\delta'$ ne soit pas
+divisible, et même engendre les sections de $\mathrm{NS}_{B/S}$ : $\delta'$
+serait l'« inversion » la meilleure possible d'une polarisation.\footnote{Telle
+quelle, l'attente est fausse dès qu'un facteur élémentaire autre que le dernier
+dépasse $1$. Pour une polarisation de type $(d_1, \ldots, d_n)$,
+$\tilde{\delta}'\tilde{\delta} = \chi(\delta) = d_1 \cdots d_n$, tandis que la
+\emph{polarisation duale} $\delta^{\vee}$ (Birkenhake--Lange, § 14.4) vérifie
+$\tilde{\delta}^{\vee}\tilde{\delta} = d_n$ ; donc $\delta' = d_1 \cdots
+d_{n-1}\,\delta^{\vee}$, divisible par exemple par $2$ pour le type $(2,2)$.
+C'est $\delta^{\vee}$, non $\delta'$, qui est « ce qu'on peut faire de mieux »,
+et les deux coïncident exactement pour les types $(1, \ldots, 1, d)$. Le reste
+de la note est en partie illisible.}
+
+\subsection*{L'isomorphisme canonique $(*)$ (page 11)}
+
+Pour $X = A$, le torseur $\mathrm{Alb}^{1}_{A/S}$ est trivialisé par la section
+unité, et la section $L(\delta)$ devient un isomorphisme canonique de
+$A$-torseurs
+\[
+(*) \qquad
+\boxed{\;\mathrm{Pic}^{\delta'}_{B/S} \simeq \tilde{\delta}'_{*}\,\mathrm{Pic}^{\delta}_{A/S}\;}
+\]
+— le $B$-torseur $\mathrm{Pic}^{\delta}_{A/S}$ poussé en un $A$-torseur par
+$\tilde{\delta}' : B \to A$. Il a une description directe : c'est
+$L \mapsto (\det \widehat{L})^{-1}$, où $\widehat{L} = R\mathrm{pr}_{2*}
+(\mathcal{P} \otimes \mathrm{pr}_1^{*}L)$ est la transformée de Fourier--Mukai
+de $L$ ; l'équivariance le long de $\tilde{\delta}'$ résulte de
+$\widehat{L \otimes \mathcal{P}_{\beta}} = t_{\beta}^{*}\widehat{L}$ et du
+théorème du carré.\footnote{Dans le cadre, l'exposant $\delta$ de
+$\mathrm{Pic}_{A/S}$ est écrit par-dessus un premier exposant, peut-être
+$-\delta$, et la longue note oblique de la marge, en grande partie illisible,
+remarque que $\mathrm{Pic}^{-\delta}_{A/S}$ et $\mathrm{Pic}^{\delta}_{A/S}$
+s'identifient canoniquement et demande « à vérifier ». Avec la convention de
+la page 3 fixée ici, c'est l'exposant $\delta$ qui est juste. La description
+par Fourier--Mukai est nôtre ; c'est elle que la page 19 retrouve en
+substance.}
+
+\emph{Exemple} (page 11). Si $\delta$ est principale, $\tilde{\delta}'$ est
+l'inverse de $\tilde{\delta}$ et $\delta'$ est la polarisation transportée. La
+page lit alors $(*)$ comme un isomorphisme $\mathrm{Pic}^{\delta}_{A/S} \simeq
+\mathrm{Pic}^{-\delta}_{A/S}$ et commence de le comparer à l'isomorphisme
+défini par la symétrie $-1$ ; le passage est biffé.\footnote{Un bloc de quatre
+lignes encadré et biffé de grandes boucles, dont on ne lit que des bribes. Avec
+les conventions fixées ici, transporté par $\tilde{\delta}$, $(*)$ est
+l'identité de $\mathrm{Pic}^{\delta}_{A/S}$, puisque $\varphi_L^{*}\widehat{L}
+\simeq H^{0}(L) \otimes L^{-1}$ avec $H^{0}(L)$ de rang $1$.}
+
+\subsection*{Puissances de torseurs canoniquement triviales (pages 12 et 13)}
+
+\emph{Remarque} (page 12). Remplaçons $\delta$ par $\lambda\delta$, $\lambda \in \mathbb{Z}$. Comme
+$\varphi$ est homogène de degré $n - 1$, $(\lambda\delta)' =
+\lambda^{n-1}\delta'$, et $(*)$ pour $\lambda\delta$ s'écrit
+\[
+\bigl(\mathrm{Pic}^{\delta'}_{B/S}\bigr)^{(\lambda^{n-1})} \simeq
+\bigl(\tilde{\delta}'_{*}\mathrm{Pic}^{\delta}_{A/S}\bigr)^{(\lambda^{n})}
+\simeq \bigl(\mathrm{Pic}^{\delta'}_{B/S}\bigr)^{(\lambda^{n})},
+\]
+d'où une trivialisation de $(\mathrm{Pic}^{\delta'}_{B/S})^{(\lambda^{n} -
+\lambda^{n-1})}$ ; pour $\lambda = -1$ et $n \geq 2$, une trivialisation de
+$(\mathrm{Pic}^{\delta'}_{B/S})^{(2)}$, et $2$ est le p.g.c.d. des
+$\lambda^{n} - \lambda^{n-1}$.\footnote{Les exposants en $\lambda$ sont tracés
+très vite et lus sans certitude ; la page écrit $\mathrm{Pic}^{-\lambda\delta}$
+au second membre, ce qui suit la forme biffée de $(*)$. Ces trivialisations
+sont canoniques à condition que les isomorphismes $(*)$ pour $\delta$ et pour
+$\lambda\delta$ soient compatibles aux puissances : c'est ce que la marge
+demande de vérifier, et le dossier ne le fait pas. Pour $n = 1$ le p.g.c.d. est
+$1$.} En échangeant les rôles de $A$ et $B$ grâce à $\delta'' =
+\chi(\delta)^{n-2}\delta$, on obtient, pour $n \geq 2$, une trivialisation de
+$(\mathrm{Pic}^{\delta}_{A/S})^{(2\chi(\delta)^{n-2})}$.
+
+La page 13 refait le compte plus finement. En composant $(*)$ pour $\delta$ et
+pour $\delta'$, et comme $\tilde{\delta}''\tilde{\delta}' = \chi(\delta')
+= \chi(\delta)^{n-1}$,
+\[
+\bigl(\mathrm{Pic}^{\delta}_{A/S}\bigr)^{(\chi(\delta)^{n-2})} \simeq
+\mathrm{Pic}^{\delta''}_{A/S} \simeq
+\bigl(\mathrm{Pic}^{\delta}_{A/S}\bigr)^{(\chi(\delta)^{n-1})},
+\]
+d'où la trivialité de $(\mathrm{Pic}^{\delta}_{A/S})^{(\chi^{n-2}(\chi - 1))}$,
+et, en remplaçant $\delta$ par $\lambda\delta$, de la puissance
+$\chi^{n-2}(\lambda^{n}\chi - \lambda^{n-1})$. Avec $\lambda = \pm 1$ on
+retrouve l'exposant $2\chi(\delta)^{n-2}$ ; et si $\chi(\delta)$ est pair,
+$\chi - 1$ est impair, ce qui donne la trivialité de
+$(\mathrm{Pic}^{\delta}_{A/S})^{(\chi(\delta)^{n-2})}$. \emph{Exemple} (page 13), $n = 2$ :
+$(\mathrm{Pic}^{\delta}_{A/S})^{(2)}$ est trivial, et
+$\mathrm{Pic}^{\delta}_{A/S}$ lui-même l'est si $\chi(\delta)$ est
+pair.\footnote{La page indice ici $\mathrm{Pic}^{\delta}$ par $B/S$, là où les
+lignes précédentes ont $A/S$ ; c'est $A/S$. Une ligne cernée et en partie
+barrée parle d'un « p.p.c.m. » (lecture douteuse) : c'est du p.g.c.d. des
+exposants qu'il s'agit, comme le dit la ligne biffée qui précède. Deux remarques
+pour situer ces énoncés. D'abord, la trivialité de
+$(\mathrm{Pic}^{\delta}_{A/S})^{(2)}$ est élémentaire pour tout $\delta$ :
+$L \mapsto L \otimes [-1]^{*}L$ est une section de
+$\mathrm{Pic}^{2\delta}_{A/S}$ qui ne dépend pas de $L$. Ce que le dossier
+apporterait, c'est l'énoncé de parité, et l'identification de ses
+trivialisations aux trivialisations canoniques que les marges demandent de
+vérifier. Ensuite, l'énoncé pour $n = 2$ et $\chi(\delta)$ pair dépend de ces
+compatibilités, que le dossier n'établit pas ; cette lecture n'a pas pu le
+confirmer.} Une ligne biffée en tête de la page 13 annonçait « g)
+Généralisation des constructions précédentes » ; c'est le paragraphe qui
+suit.
+
+\pagerange{14}{16}
+\section*{Généralisation : un complexe parfait (pages 14 à 16)}
+
+On revient au cadre général, et l'on se donne un complexe parfait
+$\mathcal{F}$ sur $X$ (ou seulement parfait relativement à $S$). On pose
+$M_g^{\mathcal{F}} = \det R\mathrm{pr}_{2*}(\mathrm{pr}_1^{*}\mathcal{F} \otimes
+\mathcal{L}_g)$. Tout ce qui précède se refait mot pour mot, $\chi$ étant
+remplacé par $\chi_{\mathcal{F}}$, le rang de $R\mathrm{pr}_{2*}
+(\mathrm{pr}_1^{*}\mathcal{F} \otimes \mathcal{L}_g)$ : on obtient
+$\varphi_{\mathcal{F}} : \mathrm{NS}_{X/S} \to \mathrm{NS}_{B/S}$, additive en
+$\mathcal{F}$ — elle ne dépend que de la classe de $\mathcal{F}$ dans le groupe
+de Grothendieck de $D_{\mathrm{parf}}(X)$, le déterminant étant multiplicatif
+sur les triangles —, un morphisme $\ell^{\mathcal{F}}_{\delta}$ et une section
+canonique
+\[
+L_{\mathcal{F}}(\delta) \in \Gamma\Bigl(S,\ \mathrm{Alb}^{\chi_{\mathcal{F}}(\delta)}_{X/S}
+\times^{A} \mathrm{Pic}^{\varphi_{\mathcal{F}}(\delta)}_{B/S} \times^{A}
+\bigl(\widetilde{\varphi_{\mathcal{F}}(\delta)}_{*}P^{\delta}\bigr)^{(-1)}\Bigr).
+\]
+\footnote{La page écrit le troisième facteur avec
+$\mathrm{Pic}^{\delta}_{X/S}$, qui est $P^{\delta}$, et un des produits sans
+l'indice $A$ ; l'exposant de $\mathrm{Alb}$ change de signe d'une ligne à
+l'autre, comme page 4 et pour la même raison.} Le calcul se ramène encore au
+cas d'un corps, et $\delta$ y disparaît, à condition de remplacer
+$\mathcal{F}$ par $L_{\delta} \otimes \mathcal{F}$. Par Riemann--Roch,
+\[
+\chi_{\mathcal{F}}(\delta) = \int_X \mathrm{ch}(L_{\delta} \otimes \mathcal{F})\,\mathrm{Td}_X,
+\qquad
+\varphi_{\mathcal{F}}(\delta) = \Bigl[\mathrm{pr}_{2*}\bigl(e^{D}\cdot
+\mathrm{pr}_1^{*}(\mathrm{ch}(L_{\delta} \otimes \mathcal{F})\,\mathrm{Td}_X)\bigr)\Bigr]_{1}.
+\]
+
+\emph{Ex. 1} (page 15), $X$ une courbe. Si $\mathcal{F}$ est de rang $\rho$ et
+de déterminant de degré $c$, on a $\mathrm{ch}(L_{\delta} \otimes \mathcal{F})
+= \rho + (\rho\delta + \det\mathcal{F})$ et $\mathrm{Td}_X = 1 - K/2$, d'où
+\[
+\chi_{\mathcal{F}}(\delta) = \rho\,(1 - g + d) + c,
+\qquad
+\varphi_{\mathcal{F}}(\delta) = \rho\,\varphi(\delta) = -\rho\,\theta .
+\]
+\footnote{La page fait le calcul avec $\rho = 1$, et trouve
+$\chi_{\mathcal{F}}(\delta) = 1 - g + d + c$ et $\varphi_{\mathcal{F}}(\delta)
+= \varphi(\delta)$ ; elle écrit aussi $\mathrm{Todd}(X) = 1 + \tfrac{1}{2}K$,
+tout en notant sous ce terme « degré $1 - g$ », qui est le degré de $-K/2$. Le
+signe de $\varphi(\delta)$ est celui de la page 8. Les lettres $\rho$ et
+$\gamma$ (pour $\det \mathcal{F}$) sont lues sans certitude.} En comparant
+$L_{\mathcal{F}}(\delta)$ à la puissance $\rho$-ième de $L(\delta)$, on obtient
+une section canonique de $\mathrm{Alb}^{c}_{X/S} \simeq \mathrm{Pic}^{c}_{X/S}$,
+et la page conclut : « Il n'y a pas de miracle ici », car c'est simplement la
+classe de $\det\mathcal{F}$.
+
+\emph{Ex. 2} (page 16), $X = A$ un schéma abélien. Avec $\mathrm{ch}(L_{\delta}
+\otimes \mathcal{F}) = \sum_{i=0}^{n} a_i$, on a $\chi_{\mathcal{F}}(\delta) =
+\deg a_n$ et $\varphi_{\mathcal{F}}(\delta) = \tfrac{1}{2}\mathrm{pr}_{2*}
+(\mathrm{pr}_1^{*}(a_{n-1})\,D^{2})$, la composante de degré $1$ de
+$\Phi(a_{n-1})$.\footnote{La page fait commencer la somme à $i = 1$.}
+
+\pagerange{16}{20}
+\section*{Seconde interprétation : le déterminant d'une transformation de Fourier (pages 16 à 20)}
+
+Le second paragraphe f) reconstruit $\ell_{\delta}$ « en intégrant
+exclusivement sur $X \times_S B$ ». Soit $g$ une section de $X$ et $\lambda$
+une section de $\mathrm{Pic}_{X/S}$, représentée grâce à $g$ par un faisceau
+inversible $L = L(\lambda, g)$ trivialisé le long de $g$ ; soit $W(g)$ le
+faisceau de Poincaré sur $X \times_S B$ normalisé le long de $g$. On pose
+\[
+\ell_g(\lambda) = \bigl[\det R\mathrm{pr}_{2*}\bigl(\mathrm{pr}_1^{*}L \otimes W(g)\bigr)\bigr]
+\in \mathrm{Pic}_{B/S}(S),
+\]
+ce qui définit, par changement de base, un morphisme
+\[
+\ell' : X \times_S \mathrm{Pic}_{X/S} \longrightarrow \mathrm{Pic}_{B/S}.
+\]
+\footnote{La page écrit $\mathrm{pr}_{2*}$ sans $R$, et dit $\ell'$
+« homomorphisme (additif en $\mathrm{Pic}_{X/S}$) ». Il n'est pas additif :
+$\ell_g$ envoie $\mathrm{Pic}^{\delta}_{X/S}$ dans
+$\mathrm{Pic}^{\varphi(\delta)}_{B/S}$ et $\varphi$ n'est pas additive. Ce
+qui est vrai, c'est la formule $(**)$ ci-dessous, qui fait de $\ell_g$ une
+application affine sur chaque $\mathrm{Pic}^{\delta}_{X/S}$. Dans le cadre,
+l'indice de $\mathrm{Pic}$ se lit $X/S$ ou $X/B$.}
+
+Le changement de section se calcule comme à la page 1 :
+$L(\lambda, g') = L(\lambda, g) \otimes g'^{*}L(\lambda, g)^{-1}$ et
+$W(g') = W(g) \otimes \mathrm{pr}_2^{*}\, g'^{*}_B W(g)^{-1}$, d'où
+\[
+\ell_{g'}(\lambda) = \ell_g(\lambda) - \chi(\lambda)\,\bigl(\psi_X(g') - \psi_X(g)\bigr),
+\]
+où $\psi_X : X \to \mathrm{Alb}^{1}_{X/S}$ est le morphisme canonique —
+la même dépendance en $-\chi$ qu'à la page 4. On en déduit, pour chaque
+section $\delta$ de $\mathrm{NS}_{X/S}$, un morphisme
+$\ell_{\delta} : X \times_S \mathrm{Pic}^{\delta}_{X/S} \to
+\mathrm{Pic}^{\varphi(\delta)}_{B/S}$.
+
+La page 18 énonce alors, pour $\beta \in B(S)$ et $\lambda$ de classe $\delta$,
+\[
+(**) \qquad \ell_g(\lambda + \beta) = \ell_g(\lambda) + \widetilde{\varphi(\delta)}(\beta).
+\]
+\footnote{Le signe entre les deux termes est noyé sous une tache d'encre ; la
+transcription lit $+$. Un paragraphe encadré et biffé de quatre diagonales
+annonçait un autre argument, où il s'agissait de prouver que l'homomorphisme
+associé était $-\widetilde{\varphi(\delta)}$.} La preuve est une propriété de
+la transformation de Fourier--Mukai $\mathfrak{F}_{\mathcal{L}}$ : tordre par
+$L_{\beta} \in \mathrm{Pic}^{0}$ revient à translater la transformée,
+$\mathfrak{F}_{\mathcal{L}}(L \otimes L_{\beta}) =
+t_{\beta}^{*}\,\mathfrak{F}_{\mathcal{L}}(L)$ — la page écrit le second membre
+comme convolution avec la masse de Dirac $\varepsilon_{-\beta}$, ce qui est la
+même chose —, et le déterminant d'un translaté se calcule par le théorème du
+carré : $\det t_{\beta}^{*}E = \det E \otimes \widetilde{[\det E]}(\beta)$. Avec
+$[\det E] = \varphi(\delta)$, c'est $(**)$.\footnote{La lettre gothique
+$\mathfrak{F}_{\mathcal{L}}$ est lue sans certitude ; la page renvoie à des
+« notations développées ailleurs ». La page 19 conclut avec
+$\widetilde{\varphi(\delta)}(-\beta)$, ce qui contredit $(**)$ à moins de
+changer de convention pour $\tilde{\lambda}$ ; avec celle de Mumford, fixée
+ici, c'est $+\beta$, comme $(**)$. La marge : « vérif., avec \ldots\ signes
+\ldots ».}
+
+Par $(**)$, $\ell_g$ est un isomorphisme de $A$-torseurs
+$\widetilde{\varphi(\delta)}_{*}\mathrm{Pic}^{\delta}_{X/S} \to
+\mathrm{Pic}^{\varphi(\delta)}_{B/S}$, c'est-à-dire un point du torseur
+$T_{\delta}$ de la page 3 ; la variation en $g$ en fait un morphisme
+$X \to T_{\delta}$, qui est le $\ell_{\delta}$ du paragraphe d), « comme on
+vérifie facilement ». C'est cette lecture qui justifie, après coup, la
+description de $(*)$ par Fourier--Mukai donnée plus haut.
+
+\emph{Remarque} (pages 19 et 20). Cette interprétation ne fait intervenir que
+des faisceaux sur $B$, non sur $\mathrm{Pic}^{\delta}_{X/S}$. Elle admet une
+variante sans section : on se donne un homomorphisme de groupes
+$i : B \to \mathrm{Pic}_{X/S}$, ce qui définit un torseur $Q$ sous $A$ et un
+morphisme canonique $\tau : X \to Q$ ; la construction donne alors, pour un
+$B$-torseur $P$ muni d'un morphisme compatible
+$P \to \mathrm{Pic}^{\delta}_{X/S}$, un morphisme $X \to
+\mathrm{Pic}^{\varphi(\delta)}_{B/S} \times^{A}
+(\widetilde{\varphi(\delta)}_{*}P)^{(-1)}$ qui se factorise par
+$Q^{(-\chi(\delta))}$, donc une section canonique de
+$Q^{(\chi(\delta))} \times^{A} \mathrm{Pic}^{\varphi(\delta)}_{B/S}
+\times^{A} (\widetilde{\varphi(\delta)}_{*}P)^{(-1)}$. Une parenthèse y voit le
+commencement d'une étude de la « petite topologie de Albanese ».\footnote{Le
+début de la remarque est très incertain : on lit « si
+$\mathrm{Pic}^{0}_{X/S}$ admet pas une section », et l'objet donné, au bas de
+la page 19, est coupé par un mot illisible. L'étiquette $\tau$ de la flèche
+est lue sans certitude, comme toute la parenthèse sur la « petite topologie
+de Albanese ». Dans les trois dernières formules, $P$ est écrit par-dessus un
+$\mathrm{Pic}^{\delta}_{X/S}$ couvert de hachures. Un paragraphe b) de la
+remarque, au bas de la page 20, est biffé de boucles croisées et presque
+illisible ; la page 21 est blanche.}
+
+\pagerange{22}{24}
+\section*{La reprise : le torseur d'Albanese et sa convention de signe (pages 22 à 24)}
+
+La seconde suite reprend les hypothèses du début : $X/S$ propre, plat, de
+présentation finie, $f_{*}\mathcal{O}_X = \mathcal{O}_S$ universellement,
+$B = \mathrm{Pic}^{0}_{X/S}$ schéma abélien, $A = \mathrm{Pic}^{0}_{B/S}$. Elle
+construit le $A$-torseur $\mathrm{Alb}^{1}_{X/S}$ et le morphisme
+$\psi : X \to \mathrm{Alb}^{1}_{X/S}$ dont la première suite s'est servie.
+Il revient au même de se donner le morphisme
+\[
+\Delta_{\psi} : X \times_S X \longrightarrow A,
+\qquad \Delta_{\psi}(x, y) = \psi(y) - \psi(x),
+\qquad \Delta_{\psi}(x, x) = 0,
+\]
+défini sur les sections par $\Delta_{\psi}(x, y) = N_y N_x^{-1}$ dans
+$\mathrm{Pic}^{0}_{B/S}(S)$, où $N$ est un faisceau de Poincaré sur
+$X \times_S B$.\footnote{La page note $\delta$ cette application et l'appelle
+« homomorphisme » ; c'est un morphisme de schémas. Le faisceau $N$ existe dès
+que $X/S$ a une section, et le cas général s'obtient par descente.} La page
+annonce la propriété universelle de $(\mathrm{Alb}^{1}_{X/S}, \psi)$ pour les
+morphismes de $X$ dans les torseurs sous des schémas abéliens, et demande si
+elle vaut pour des schémas en groupes commutatifs quelconques.\footnote{La page
+dit « on prouve », sans preuve. Sur un corps algébriquement clos la réponse à
+la question est oui : le sous-groupe engendré par l'image d'une variété
+complète et connexe est complet, donc une variété abélienne. Au-dessus d'une
+base quelconque, le dossier laisse la question ouverte, et nous aussi.}
+
+Le couple $(\mathrm{Alb}^{1}, \psi)$ n'est déterminé qu'au signe près :
+$(Q^{(-1)}, -\psi)$ est une autre solution du même problème universel,
+canoniquement isomorphe à la première, de sorte que l'identification du groupe
+des translations de $\mathrm{Alb}^{1}$ à $\mathrm{Pic}^{0}_{B/S}$ demande une
+\emph{convention de signe}. La page adopte la première, celle de la formule
+ci-dessus ; c'est celle qu'on a suivie partout.
+
+Pour $X$ lisse de dimension relative $1$, $\mathrm{Pic}^{1}_{X/S}$ et le
+morphisme $x \mapsto \mathcal{O}(x)$, défini par la diagonale de
+$X \times_S X$, forment une solution du problème d'Albanese ; d'où un
+isomorphisme
+\[
+c : B \xrightarrow{\ \sim\ } A = \mathrm{Pic}^{0}_{B/S},
+\qquad c\bigl(\mathrm{cl}(y) - \mathrm{cl}(x)\bigr) = N_y N_x^{-1},
+\]
+l'\emph{autodualité} de la jacobienne. La page se demande si $c$ est
+l'isomorphisme $\phi_{\Theta}$ de la polarisation thêta, et répond, après deux
+ratures : « Non, c'est sans doute la \emph{symétrique} de la
+$\Theta$-polarisation. » C'est exact : $c = -\phi_{\Theta}$.\footnote{C'est
+un résultat classique, que l'on trouve par exemple chez Milne (« Jacobian
+varieties », 1986) ; il dépend de la normalisation du faisceau de Poincaré, et
+c'est celle des pages. La page ramène la question au cas d'un corps
+algébriquement clos, écrit $u(t) = $ classe de $t.\Theta - \Theta$, et
+commence le calcul pour $t = \mathrm{cl}((y) - (x))$ ; la page 24 ne porte que
+ces deux lignes, suivies d'une formule biffée, et le reste du feuillet est
+blanc. La réponse n'est donc pas démontrée dans le dossier.} C'est ce signe que
+la page 8 annonçait par son « attention au signe ! ».
+
+\pagerange{25}{27}
+\section*{Schémas abéliens principalement polarisés (pages 25 à 27)}
+
+Soit $A/S$ un schéma abélien, $\delta$ une section de $\mathrm{NS}_{A/S}$,
+$P^{\delta} = \mathrm{Pic}^{\delta}_{A/S}$, torseur sous le dual
+$B = \mathrm{Pic}^{0}_{A/S}$, et $\mathcal{L}$ le faisceau universel sur
+$A \times_S P^{\delta}$ ; $A$ agit sur $P^{\delta}$ à travers $\tilde{\delta}$,
+et c'est l'action par transport de structure des translations de $A$. Si
+$\delta$ est une polarisation, les $H^{i}(\mathcal{L}_x)$ s'annulent pour
+$i > 0$, et $\mathrm{pr}_{2*}\mathcal{L}$ est localement libre de rang
+$\chi(\delta)$. Si $\chi(\delta) = 1$, c'est un module inversible, et la
+section tautologique définit un diviseur canonique $D_{\delta}$ sur
+$A \times_S P^{\delta}$, relatif sur $P^{\delta}$. Alors $\tilde{\delta}$ est
+un isomorphisme, $P^{\delta}$ devient un $A$-torseur, $D_{\delta}$ est stable
+par l'action diagonale de $A$ et descend au quotient
+$(A \times_S P^{\delta})/A \simeq P^{\delta}$ en un diviseur $\Theta$, avec
+$\chi(\Theta) = 1$.\footnote{« donc d'un » et « a la vertu » sont lus sans
+certitude ; la page note $\tilde{\delta}$ puis $\bar{\delta}$ le même
+homomorphisme.}
+
+\textbf{Proposition} (pages 25 et 26). \emph{Soit $A/S$ un schéma abélien de
+dimension relative $g$, et $\delta$ une polarisation de degré $1$.}
+\begin{itemize}
+\item \emph{a)} \emph{Il existe un $A$-torseur $P$ et un diviseur relatif positif
+  $\Theta$ sur $P$, avec $\deg \Theta^{g}/g! = 1$, tels que $\delta$ soit la
+  polarisation définie par $\Theta$. Le couple $(P, \Theta)$ est unique à
+  isomorphisme unique près : une section de $A$ dont la translation préserve
+  $\Theta$ est la section unité.}
+\item \emph{b)} \emph{Si $P$ est un $A$-torseur et $\Theta$ un diviseur relatif
+  positif avec $\deg \Theta^{g}/g! = 1$, alors $\Theta$ est ample relativement
+  à $S$, et la polarisation qu'il définit sur $A$ est de degré $1$.}
+\item \emph{c)} \emph{Sous b), soit $m : A \times_S P \to P$ l'action et
+  $\Theta' = m^{-1}(\Theta)$. Alors $\Theta'$ est un diviseur relatif sur
+  $A \times_S P$ au-dessus de $P$, et le morphisme $P \to \mathrm{Pic}_{A/S}$
+  qu'il définit est un isomorphisme de $P$ sur $\mathrm{Pic}^{\delta}_{A/S}$,
+  $\delta$ étant la polarisation définie par $\Theta$.}
+\item \emph{d)} \emph{Si $A = \mathrm{Alb}^{0}_{X/S}$ pour une courbe $X/S$ propre et
+  lisse de genre $g$, et $\delta$ la polarisation canonique, définie par le
+  diviseur diagonal de $X \times_S X$, alors $\delta$ est de degré $1$ et
+  $P^{\delta}$ est canoniquement isomorphe, comme $A$-torseur, à
+  $\mathrm{Pic}^{g-1}_{X/S} = \mathrm{Alb}^{g-1}_{X/S}$, par l'unique
+  isomorphisme qui envoie $\Theta$ sur $W_{g-1}$.}
+\end{itemize}
+\footnote{La première partie de la proposition ne porte pas de lettre sur la
+page ; on la note a). Les énoncés sont ceux de la page ; la page ne donne pas
+de preuve. Ils sont justes : en b), un diviseur effectif sur une variété
+abélienne définit un fibré ample dès que $\chi \neq 0$, et
+$\deg\Theta^{g}/g! = \chi$ par Riemann--Roch ; l'unicité de a) vient de ce que
+le noyau de $\phi_{\Theta}$ est nul. En c), la page écrit « Alors $\Theta$ »,
+là où il s'agit de $\Theta'$. En d), $W_{g-1}$ est l'image de
+$X^{(g-1)}$, diviseur thêta de $\mathrm{Pic}^{g-1}$ par le théorème de Riemann ;
+« comme $A$-torseur » et « ce qui le caractérise » sont lus sans certitude, et
+une note encadrée de la marge dit « question de signe ! ».}
+
+Un passage encadré et barré reprend ensuite le cadre général, avec une
+correspondance divisorielle symétrique $C$ sur $X \times_S X$ définissant une
+polarisation $\gamma$ de $A$ ; il est abandonné.
+
+\emph{(c bis).} Soit $(P, \Theta)$ comme en b), et $P^{(-1)}$ le torseur
+inverse ; l'identité des schémas sous-jacents est un isomorphisme
+$\sigma_P : P \to P^{(-1)}$ compatible avec la symétrie de $A$. Posons
+$\Theta^{-} = \sigma_P(\Theta)$. Comme $[-1]^{*}$ agit trivialement sur
+$\mathrm{NS}$, $\Theta^{-}$ définit sur $A$ la même polarisation que $\Theta$,
+donc, d'après a), il existe un unique isomorphisme de $A$-torseurs
+\[
+K : P^{(-1)} \xrightarrow{\ \sim\ } P, \qquad K(\Theta^{-}) = \Theta,
+\]
+qu'on peut voir comme une section $K \in \Gamma(S, P^{(2)})$.\footnote{La page
+écrit $\Theta^{-*}$, exposant lu douteusement, et la flèche
+$K : P \leftarrow P^{-1}$ avec $K(\Theta) = \Theta^{-*}$ ; on oriente $K$ et
+la condition dans le même sens. La lettre de « (c bis) » peut aussi se lire
+e.} Dans le cas de d), $P = \mathrm{Pic}^{g-1}_{X/S}$ et
+$P^{(2)} = \mathrm{Pic}^{2g-2}_{X/S}$, et $K$ est la classe du fibré canonique
+$\Omega^{1}_{X/S}$ : l'involution $L \mapsto \Omega^{1} \otimes L^{-1}$ de
+$\mathrm{Pic}^{g-1}$ préserve $W_{g-1}$, par Riemann--Roch et la dualité de
+Serre, et elle est équivariante de $P^{(-1)}$ vers $P$.\footnote{La
+justification est nôtre ; la page affirme le résultat. Ses points fixes sont
+les thêta-caractéristiques, dont le dossier ne parle pas.}
+
+C'est la section de $\mathrm{Pic}^{2g-2}$ que la page 8 attendait (« la
+section canonique $K$, à prouver ! »), obtenue cette fois sans le déterminant
+de la cohomologie, par la seule symétrie du diviseur thêta. Une note de la
+marge demande enfin de vérifier que c'est « la section canonique » de
+$(\mathrm{Pic}^{\delta}_{A/S})^{(2)}$ pour toute section $\delta$ de
+$\mathrm{NS}_{A/S}$ — c'est-à-dire de la comparer aux trivialisations de
+carrés des pages 12 et 13, dont c'est le cas $\chi(\delta) = 1$. Le dossier
+s'arrête sur cette demande.\footnote{L'exposant de $\mathrm{Pic}$ dans la note
+de marge est illisible ; la lecture « $(\mathrm{Pic}^{\delta}_{A/S})^{(2)}$ »
+est nôtre, d'après les pages 12 et 13.}
+
+\end{document}
