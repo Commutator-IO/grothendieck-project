@@ -289,6 +289,22 @@ export function transcript(m: Manifest | null, cote: string, k: number) {
   return m?.transcripts?.[batchId(cote, k)] ?? { html: [], tex: [], pdf: [], xml: [] };
 }
 
+/**
+ * The batches of a folder that carry our transcription, in order.
+ *
+ * A folder edited elsewhere is transcribed here only where the edition stops
+ * (119: batches 8, 13, 14, 16), and its batch 1 is usually empty: the reader
+ * opens on the first of these and the batch bar lists them.
+ */
+export function transcribedBatches(m: Manifest | null, cote: string): number[] {
+  const prefix = `${cote}#`;
+  return Object.entries(m?.transcripts ?? {})
+    .filter(([k, v]) => k.startsWith(prefix) && v.html.includes('fr'))
+    .map(([k]) => Number(k.slice(prefix.length)))
+    .filter((n) => Number.isInteger(n))
+    .sort((a, b) => a - b);
+}
+
 /** What exists for a batch, as the state model consumes it. */
 export function evidence(m: Manifest | null, cote: string, k: number) {
   // The folder-wide reading counts for every batch it covers. Reading only the

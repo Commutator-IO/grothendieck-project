@@ -62,6 +62,8 @@ export interface OpenBatch {
   wholeFolder?: boolean;
   /** Whether the relay is up yet — the frame waits rather than racing it. */
   relay: RelayState;
+  /** The batches of this folder we transcribed, for the batch bar to list. */
+  transcribed?: number[];
   /**
    * A file that is not Montpellier's — one of Quillen's notebooks at the Clay.
    *
@@ -361,6 +363,7 @@ export function FacsimilePane({
         last={last}
         pages={open.pages}
         page={open.page}
+        transcribed={open.transcribed}
         onBatch={onBatch}
       />
       )}
@@ -410,6 +413,7 @@ function BatchBar({
   last,
   pages,
   page,
+  transcribed = [],
   onBatch,
 }: {
   batch: number;
@@ -418,10 +422,15 @@ function BatchBar({
   last: number;
   pages: number;
   page?: number;
+  transcribed?: number[];
   onBatch: (b: number) => void;
 }) {
+  // Listed only for a folder transcribed in part: for one transcribed whole
+  // the list is every batch and says nothing, for one not transcribed it is empty.
+  const partial = transcribed.length > 0 && transcribed.length < count;
   return (
-    <div className="flex shrink-0 items-center gap-2 border-b border-ink-100 bg-ink-50 px-4 py-1.5 pl-5">
+    <div className="shrink-0 border-b border-ink-100 bg-ink-50">
+    <div className="flex items-center gap-2 px-4 py-1.5 pl-5">
       <button
         type="button"
         disabled={batch <= 1}
@@ -472,6 +481,27 @@ function BatchBar({
           </>
         )}
       </p>
+    </div>
+    {partial && (
+      <div className="flex flex-wrap items-center gap-1.5 px-5 pb-1.5 text-[11.5px] text-ink-500">
+        <span>Transcribed here:</span>
+        {transcribed.map((b) => (
+          <button
+            key={b}
+            type="button"
+            onClick={() => onBatch(b)}
+            aria-current={b === batch ? 'true' : undefined}
+            className={`tabular rounded-md border px-1.5 py-px transition ${
+              b === batch
+                ? 'border-brand-500 bg-brand-100 font-semibold text-brand-800'
+                : 'border-ink-200 bg-white text-ink-700 hover:border-brand-500 hover:text-brand-700'
+            }`}
+          >
+            {b}
+          </button>
+        ))}
+      </div>
+    )}
     </div>
   );
 }

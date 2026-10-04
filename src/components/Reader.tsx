@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Downloads } from './Downloads.tsx';
 import type { OpenBatch } from './FacsimilePane.tsx';
 import { TranscriptPane } from './TranscriptPane.tsx';
@@ -6,6 +6,8 @@ import {
   availableFor,
   batchCount,
   servedByFolder,
+  transcribedBatches,
+  transcript,
   useFacsimileProxy,
   useManifest,
 } from '../lib/batches.ts';
@@ -121,6 +123,29 @@ export function useReader(cotes: Cote[]) {
     else setEdition('fr');
   }, [open, manifest]);
 
+  /**
+   * A folder opened on a batch we did not transcribe, when we transcribed
+   * others, opens on the first we did. Every folder link in the site is
+   * `#<cote>/1`, and for a folder edited elsewhere batch 1 is usually empty:
+   * 119 opened on « no transcription yet » with four transcribed batches
+   * further on and nothing saying so. Only on arriving at a folder, and only
+   * for the bare `#<cote>/1`: a batch chosen in the bar, a named edition or a
+   * cited page is left where it is.
+   */
+  const arrived = useRef<string | null>(null);
+  useEffect(() => {
+    if (!open) {
+      arrived.current = null;
+      return;
+    }
+    if (!manifest || arrived.current === open.cote) return;
+    arrived.current = open.cote;
+    if (open.batch !== 1 || !/^#[\w-]+\/1$/.test(location.hash)) return;
+    if (transcript(manifest, open.cote, 1).html.length) return;
+    const first = transcribedBatches(manifest, open.cote)[0];
+    if (first) goTo(open.cote, first);
+  }, [open, manifest, goTo]);
+
   const openCote = open ? cotes.find((c) => c.id === open.cote) : undefined;
   const openBatch: OpenBatch | null =
     open && openCote
@@ -141,6 +166,7 @@ export function useReader(cotes: Cote[]) {
               ? false
               : servedByFolder(manifest, openCote.id, edition === 'tei' ? 'fr' : edition, 'html'),
           relay: proxy,
+          transcribed: transcribedBatches(manifest, openCote.id),
         }
       : null;
 
